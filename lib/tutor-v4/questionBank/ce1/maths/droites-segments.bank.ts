@@ -484,7 +484,7 @@ function segmentOuDroite(ctx: boolean) {
   const couleur = un(["rouge", "bleu"]);
   const estSegment = (couleur === "rouge") === segRouge;
   const juste = estSegment ? "un segment" : "une droite";
-  const debut = ctx ? un([`${prenom()} a tracé deux traits à la règle.`, `Au tableau, la maîtresse a tracé deux traits.`, `Sur la carte au trésor, Pic voit deux traits.`, `${prenom()} trace deux chemins pour son train.`]) : un(VOIR);
+  const debut = ctx ? un([`${prenom()} a tracé deux traits.`, `La maîtresse a tracé deux traits.`, `Pic voit deux traits sur sa carte.`, `${prenom()} trace deux chemins pour son train.`]) : un(VOIR);
   return {
     text: `${debut} ${un([`Le trait ${couleur} est-il un segment ou une droite ?`, `Comment s'appelle le trait ${couleur} ?`, `Le trait ${couleur}, c'est quoi ?`])}`.trim(),
     ...qcm(juste, ["un segment", "une droite", "un point", "un cercle"].filter((x) => x !== juste)),
@@ -514,7 +514,7 @@ function compterSegments() {
     droites.push({ a: `d${k}a`, b: `d${k}b`, couleur: "#0f172a" });
   }
   return {
-    text: tournure(VOIR, ["Combien de segments vois-tu ?", "Compte les segments.", "Il y a combien de segments ?", `${prenom()} compte les segments. Combien en trouve-t-il ?`]).trim(),
+    text: tournure(VOIR, ["Combien de segments vois-tu ?", "Compte les segments.", "Il y a combien de segments ?", "Combien de segments vois-tu en tout ?"]).trim(),
     ...qcmN(nSeg, [nSeg + nDr, nSeg + 1, nSeg - 1, nDr]),
     canvas: fig(pts, { segments, droites }, "Des segments et des droites."),
     explanation: etapes("un segment a deux bouts ; une droite traverse tout le dessin.", `Les traits avec deux bouts : ${nSeg}. Les traits qui traversent sont des droites.`, `Il y a ${nSeg} segment${nSeg > 1 ? "s" : ""}.`),
@@ -524,13 +524,13 @@ function compterSegments() {
 /* ─────────────── ce1_droite_alignement_regle ─────────────── */
 const DA = "ce1_droite_alignement_regle";
 const SITU_ALIGN = [
-  (p: string) => `${p} plante trois piquets dans le jardin.`,
+  (p: string) => `${p} plante trois piquets.`,
   (p: string) => `${p} pose trois plots dans la cour.`,
   (_: string) => `Le jardinier plante trois arbres.`,
-  (p: string) => `À la piscine, ${p} regarde trois bouées.`,
-  (_: string) => `Pic se pose sur trois poteaux, l'un après l'autre.`,
-  (p: string) => `${p} colle trois gommettes sur sa feuille.`,
-  (p: string) => `Sur la carte au trésor de ${p}, il y a trois croix.`,
+  (p: string) => `${p} regarde trois bouées.`,
+  (_: string) => `Pic se pose sur trois poteaux.`,
+  (p: string) => `${p} colle trois gommettes.`,
+  (_: string) => `La carte au trésor a trois croix.`,
 ];
 
 /** Trois points : alignés, ou pas (l'écart se voit). */
@@ -544,7 +544,7 @@ function alignesOuPas(ctx: boolean, serre: boolean) {
   const juste = alignes ? "oui, ils sont alignés" : "non, ils ne sont pas alignés";
   const debut = ctx ? un(SITU_ALIGN)(prenom()) : un(["Pose ta règle.", "Regarde les points.", ""]);
   return {
-    text: `${debut} ${un([`Les points ${A}, ${B} et ${C} sont-ils alignés ?`, `${A}, ${B} et ${C} sont-ils sur une même ligne droite ?`, `Peut-on tracer un seul trait droit par ${A}, ${B} et ${C} ?`])}`.trim(),
+    text: `${debut} ${un([`Les points ${A}, ${B} et ${C} sont-ils alignés ?`, `${A}, ${B} et ${C} sont-ils alignés ?`, `${A}, ${B} et ${C} sont-ils sur une ligne droite ?`])}`.trim(),
     ...qcm(juste, [alignes ? "non, ils ne sont pas alignés" : "oui, ils sont alignés", "on ne peut pas savoir"]),
     canvas: fig([...cadre(7.5, 4.5).map((q) => ({ ...q, y: q.y - 0.4 })), ...pts], {}, "Trois points nommés."),
     explanation: etapes(`on pose le bord de la règle sur ${A} et ${C}, puis on regarde ${B}.`, alignes ? `${B} touche le bord de la règle.` : `${B} reste à côté de la règle.`, cap(juste) + "."),
@@ -594,7 +594,7 @@ function longueurSurRegle(zero: boolean) {
   const b = a + entre(zero ? 2 : 3, 12 - a - (zero ? 0 : 1));
   const L = b - a;
   return {
-    text: `${zero ? un(["", ...SITU_LONG.map((f) => f(prenom()))]) : un(SITU_LONG)(prenom())} ${un([`Combien de centimètres de ${A} à ${B} ?`, `Le segment de ${A} à ${B} mesure combien ?`, `Quelle est la longueur du segment de ${A} à ${B} ?`])}`.trim(),
+    text: `${zero ? un(["", ...SITU_LONG.map((f) => f(prenom()))]) : un(SITU_LONG)(prenom())} ${un([`Combien de centimètres de ${A} à ${B} ?`, `Le segment de ${A} à ${B} mesure combien ?`, `Combien mesure le segment de ${A} à ${B} ?`])}`.trim(),
     ...qcmN(L, zero ? [L + 1, L - 1, L + 2] : [b, L + 1, L - 1, a], "cm"),
     canvas: regle([{ value: a, label: A }, { value: b, label: B }]),
     explanation: etapes(zero ? "le segment part du 0 : on lit le nombre au bout." : `le segment ne part pas du 0 : on compte les centimètres de ${a} à ${b}.`, zero ? `${B} est sur ${b}.` : `${b} − ${a} = ${L}.`, `Le segment mesure ${L} cm.`),
@@ -607,7 +607,7 @@ function ouMarquer() {
   const L = entre(3, 9);
   const p = prenom();
   return {
-    text: `${p} veut tracer un segment de ${L} cm. ${a === 0 ? `Le point ${A} est sur le 0.` : `Le point ${A} est sur le ${a}.`} ${un([`Où marquer le point ${B} ?`, `Sur quelle graduation mettre ${B} ?`])}`,
+    text: `${p} trace un segment de ${L} cm depuis ${A}. ${un([`Où marquer le point ${B} ?`, `Sur quelle graduation mettre ${B} ?`])}`,
     ...qcm(`sur le ${a + L}`, [`sur le ${L}`, `sur le ${a + L + 1}`, `sur le ${a + L - 1}`, `sur le ${L + 2}`].filter((x) => x !== `sur le ${a + L}`)),
     canvas: regle([{ value: a, label: A }]),
     explanation: etapes(`on part de ${A} et on avance de ${L} centimètres.`, `${a} + ${L} = ${a + L}.`, `On marque ${B} sur le ${a + L}.`),
@@ -623,7 +623,7 @@ function milieuCode(cherche: "moitie" | "tout") {
   const pts: P[] = [{ id: "a", x: 0, y: 0, nom: A }, { id: "m", x: 3, y: un([0, 0.6, -0.6]) / 2, nom: M }, { id: "b", x: 6, y: 0, nom: B }];
   pts[2].y = 2 * pts[1].y;
   const canvas = fig([...pts, { id: "h", x: 0, y: 1.4, cache: true }, { id: "h2", x: 6, y: -1.4, cache: true }], { segments: [{ a: "a", b: "m", code: 1, texte: `${d} cm` }, { a: "m", b: "b", code: 1 }] }, "Un segment et son milieu, codés.");
-  const debut = un([`${M} est le milieu du segment de ${A} à ${B}.`, `${prenom()} a marqué le milieu ${M} du segment de ${A} à ${B}.`, `Pic s'est posé en ${M}, au milieu de la branche de ${A} à ${B}.`]);
+  const debut = un([`${M} est le milieu du segment.`, `${prenom()} a marqué le milieu ${M}.`, `Pic se pose au milieu, en ${M}.`]);
   if (cherche === "moitie") {
     return {
       text: `${debut} ${un([`Combien mesure le segment de ${M} à ${B} ?`, `Combien de centimètres de ${M} à ${B} ?`])}`,
@@ -633,7 +633,7 @@ function milieuCode(cherche: "moitie" | "tout") {
     };
   }
   return {
-    text: `${debut} ${un([`Combien mesure le segment de ${A} à ${B} ?`, `Quelle est la longueur totale, de ${A} à ${B} ?`])}`,
+    text: `${debut} ${un([`Combien mesure le segment de ${A} à ${B} ?`, `Quelle est la longueur de ${A} à ${B} ?`])}`,
     ...qcmN(2 * d, [d, 2 * d + 1, d + 2], "cm"),
     canvas,
     explanation: etapes("le milieu coupe le segment en deux morceaux égaux.", `${d} cm + ${d} cm = ${2 * d} cm.`, `Le segment mesure ${2 * d} cm.`),
@@ -666,8 +666,8 @@ function segmentsEntrePoints() {
   const segments = cas.startsWith("alignes") ? pts.slice(0, -1).map((p, k) => ({ a: p.id, b: pts[k + 1].id })) : [];
   return {
     text: cas.startsWith("alignes")
-      ? `${un(["Défi !", `${prenom()} lance un défi.`, "Pic a un défi pour toi."])} ${un(["Combien de segments vois-tu en tout, petits et grands ?", "Compte tous les segments, même les grands."])}`
-      : `${un(["Défi !", `${prenom()} lance un défi.`, "Pic a un défi pour toi."])} ${un(["On relie chaque point à tous les autres. Combien de segments faut-il ?", "Combien de segments pour relier chaque point à chaque autre ?"])}`,
+      ? `${un(["Défi !", `${prenom()} lance un défi.`, "Pic a un défi."])} ${un(["Combien de segments vois-tu en tout, petits et grands ?", "Compte tous les segments, même les grands."])}`
+      : `${un(["Défi !", `${prenom()} lance un défi.`, "Pic a un défi."])} ${un(["On relie chaque point à tous les autres. Combien de segments ?", "Combien de segments pour relier chaque point à chaque autre ?"])}`,
     ...qcmN(juste, [juste - 1, juste + 1, pts.length]),
     canvas: fig([...pts, { id: "h", x: 0, y: cas.startsWith("alignes") ? 1 : 0, cache: true }, { id: "h2", x: 0, y: cas.startsWith("alignes") ? -1 : 0, cache: true }], { segments }, "Des points nommés."),
     explanation: etapes("on part de chaque point et on compte les segments, sans en oublier ni en compter deux fois.", juste === 3 ? `${noms[0]}${noms[1]}, ${noms[1]}${noms[2]}, ${noms[0]}${noms[2]}.` : cas === "alignes4" ? `${noms[0]}${noms[1]}, ${noms[1]}${noms[2]}, ${noms[2]}${noms[3]}, ${noms[0]}${noms[2]}, ${noms[1]}${noms[3]}, ${noms[0]}${noms[3]}.` : "4 côtés et 2 diagonales.", `Il y a ${juste} segments.`),

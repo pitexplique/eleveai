@@ -154,7 +154,7 @@ export function compterParmi(min: number, max: number): Q {
   const n = entre(min, max);
   const m = entre(2, 5);
   const text = unParmi([
-    `Dans le dessin, il y a des ${cible.mots} et des ${autre.mots}. Combien y a-t-il ${de(cible.mots)} ?`,
+    `Il y a des ${cible.mots} et des ${autre.mots}. Combien ${de(cible.mots)} ?`,
     `Compte seulement les ${cible.mots}. Combien y en a-t-il ?`,
     `Attention : ne compte que les ${cible.mots} ! Combien en vois-tu ?`,
   ]);
@@ -191,7 +191,7 @@ export function comparerCollections(max: number): Q {
   const text = unParmi([
     `Y a-t-il plus ${de(a.mots)} ou plus ${de(b.mots)} ?`,
     `Compare les ${a.mots} et les ${b.mots}. Que remarques-tu ?`,
-    `À la ferme de ${unParmi(PRENOMS)}, qui sont les plus nombreux : les ${a.mots} ou les ${b.mots} ?`,
+    `Qui sont les plus nombreux : les ${a.mots} ou les ${b.mots} ?`,
   ]);
   return enQcm(
     text,
@@ -314,7 +314,7 @@ export function arriventPuisPartent(): Q {
   const partir = VOLANTS.has(s.animal) ? "s'envolent" : "s'en vont";
   const r = a + b - c;
   return auPave(
-    `Il y a ${a} ${s.mots} ${s.lieu}. ${b} autres arrivent. Puis ${c} ${partir}. Combien ${de(s.mots)} reste-t-il ${s.lieu} ?`,
+    `${a} ${s.mots} ${s.lieu}. ${b} arrivent, puis ${c} ${partir}. Combien en reste-t-il ?`,
     r,
     exp(
       "Quand il en arrive, le nombre augmente ; quand il en part, il diminue.",
@@ -410,7 +410,7 @@ export function rangeesMultiplication(rMax: number, cMax: number): Q {
 export function rangeesCommutativite(rMax: number, cMax: number): Q {
   const { s, r, c, canvas } = rangees(rMax, cMax);
   return enQcm(
-    `Il y a ${r} lignes de ${c} ${s.mots} : on fait ${r} × ${c}. Si on compte par COLONNES, quelle multiplication trouve-t-on ?`,
+    `Par lignes, on fait ${r} × ${c}. Et par COLONNES, quelle multiplication ?`,
     `${c} × ${r}`,
     [`${c} + ${r}`, `${c} × ${c}`, `${r} × ${r}`, `${c} × ${r + 1}`],
     exp(
@@ -474,8 +474,8 @@ export function partager(): Q {
   const fem = sg === "mare";
   return auPave(
     unParmi([
-      `Le soigneur répartit ces ${n} ${mots} dans ${p} ${pl}, autant dans chacun${fem ? "e" : ""}. Combien ${de(mots)} dans chaque ${sg} ?`,
-      `On partage les ${n} ${mots} en ${p} groupes égaux. Combien ${de(mots)} dans chaque groupe ?`,
+      `${n} ${mots}, ${p} ${pl}, autant dans chacun${fem ? "e" : ""}. Combien dans chaque ${sg} ?`,
+      `On partage ${n} ${mots} en ${p} groupes égaux. Combien par groupe ?`,
     ]),
     q,
     exp(

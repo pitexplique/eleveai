@@ -99,9 +99,11 @@ const DENOMINATEURS = [
    « est-ce partagé en tiers ? » (et le disque, lui, ne sait pas
    dessiner de parts inégales). Le cas des parts inégales se dit
    en mots.
-   ⛔ Pas de dessin sur « qui en a le plus ? » ni sur « que
-   reste-t-il ? » : deux barres coloriées montreraient la
-   réponse avant le raisonnement.
+   ⭐ 14/11/2026 : « il adore les dessins ». Comparer, ajouter,
+   compléter ont maintenant leur dessin, toujours SANS fraction
+   écrite : deux bandes (`deuxBandes`) pour comparer, la part de
+   départ seule pour ajouter, enlever ou compléter : l'élève
+   compte lui-même les parts qui manquent.
    Mesure : scripts/mesurer-squelettes-coach.ts ce1 fraction.
 ========================================================= */
 
@@ -158,20 +160,20 @@ type Tout = { le: string; un: string; f: boolean; rond: boolean; miam: boolean }
 const TOUTS: readonly Tout[] = [
   { le: "la pizza", un: "une pizza", f: true, rond: true, miam: true },
   { le: "le gâteau", un: "un gâteau", f: false, rond: true, miam: true },
-  { le: "la tarte aux pommes", un: "une tarte aux pommes", f: true, rond: true, miam: true },
+  { le: "la tarte", un: "une tarte", f: true, rond: true, miam: true },
   { le: "la galette", un: "une galette", f: true, rond: true, miam: true },
   { le: "la crêpe", un: "une crêpe", f: true, rond: true, miam: true },
   { le: "le flan", un: "un flan", f: false, rond: true, miam: true },
-  { le: "le gâteau d'anniversaire", un: "un gâteau d'anniversaire", f: false, rond: true, miam: true },
-  { le: "la tablette de chocolat", un: "une tablette de chocolat", f: true, rond: false, miam: true },
-  { le: "la bande de papier", un: "une bande de papier", f: true, rond: false, miam: false },
+  { le: "la quiche", un: "une quiche", f: true, rond: true, miam: true },
+  { le: "la tablette", un: "une tablette", f: true, rond: false, miam: true },
+  { le: "la bande", un: "une bande", f: true, rond: false, miam: false },
   { le: "la baguette", un: "une baguette", f: true, rond: false, miam: true },
   { le: "le ruban", un: "un ruban", f: false, rond: false, miam: false },
-  { le: "le gâteau roulé", un: "un gâteau roulé", f: false, rond: false, miam: true },
-  { le: "la barre de céréales", un: "une barre de céréales", f: true, rond: false, miam: true },
+  { le: "la bûche", un: "une bûche", f: true, rond: false, miam: true },
+  { le: "la gaufre", un: "une gaufre", f: true, rond: false, miam: true },
   { le: "le potager", un: "un potager", f: false, rond: false, miam: false },
-  { le: "le drapeau de la classe", un: "un drapeau", f: false, rond: false, miam: false },
-  { le: "la planche du radeau des pirates", un: "une planche", f: true, rond: false, miam: false },
+  { le: "le drapeau", un: "un drapeau", f: false, rond: false, miam: false },
+  { le: "la planche", un: "une planche", f: true, rond: false, miam: false },
 ];
 const tout = () => randomChoice(TOUTS);
 /** Ce qui se mange : on ne « mange » pas un drapeau. */
@@ -191,23 +193,28 @@ function quiCoupe(t: Tout, n: number): string {
   if (!t.miam) return randomChoice([
     `${p.nom} partage ${t.le} en ${n} parts égales.`,
     `La maîtresse partage ${t.le} en ${n} parts égales.`,
-    `Ti Margo trace des traits : ${t.le} est partagé${t.f ? "e" : ""} en ${n} parts égales.`,
-    `À l'atelier, on partage ${t.le} en ${n} parts égales.`,
-    `Avec une règle, ${p.nom} partage ${t.le} en ${n} parts égales.`,
+    `Ti Margo coupe ${t.le} en ${n} parts égales.`,
+    `On partage ${t.le} en ${n} parts égales.`,
+    `${p.nom} trace ${n} parts égales sur ${t.le}.`,
   ]);
   return randomChoice([
     `${p.nom} coupe ${t.le} en ${n} parts égales.`,
     `La boulangère coupe ${t.le} en ${n} parts égales.`,
-    `Le chef cuisinier partage ${t.le} en ${n} parts égales.`,
-    `Pour le goûter, ${p.nom} partage ${t.le} en ${n} parts égales.`,
-    `À la fête de l'école, on coupe ${t.le} en ${n} parts égales.`,
-    `Les pirates partagent ${t.le} en ${n} parts égales.`,
+    `Le chef partage ${t.le} en ${n} parts égales.`,
+    `Mamie coupe ${t.le} en ${n} parts égales.`,
+    `On coupe ${t.le} en ${n} parts égales.`,
+    `Les pirates coupent ${t.le} en ${n} parts égales.`,
   ]);
 }
 
 /** Le dessin, sans la fraction écrite dessous. */
 const dessin = (t: Tout, num: number, den: number): Q["canvas"] =>
   fractionCanvas({ model: t.rond ? "circle" : "bar", fraction: { numerator: num, denominator: den }, display: { showFraction: false, showParts: true } });
+
+/** Deux bandes l'une sous l'autre, SANS les fractions écrites : la première
+ *  nommée en haut. Elles montrent la taille des parts ; l'élève compare. */
+const deuxBandes = (n1: number, d1: number, n2: number, d2: number): Q["canvas"] =>
+  fractionCanvas({ model: "compare", fractions: [{ numerator: n1, denominator: d1 }, { numerator: n2, denominator: d2 }], display: { showFraction: false, showParts: true } });
 
 const NOMBRE_MOT = ["zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix"];
 const DEN = (d: number) => DENOMINATEURS.find((x) => x.d === d)!;
@@ -258,17 +265,19 @@ function questionAjout(a: number, b: number, d: number): Q {
   const text = randomChoice([
     `${p.nom} ${v} ${fr(a, d)} ${de(t)}, puis encore ${fr(b, d)}. Quelle fraction a-t-${p.il} ${pp}e en tout ?`,
     `${p.nom} ${v} ${fr(a, d)} ${de(t)} le matin et ${fr(b, d)} l'après-midi. Combien en a-t-${p.il} ${pp} ?`,
-    `${p.nom} ${v} ${fr(a, d)} ${de(t)}. ${q.nom} en ${v} ${fr(b, d)}. Quelle fraction ont-${p.il === "elle" && q.il === "elle" ? "elles" : "ils"} ${pp}e à deux ?`,
+    `${p.nom} ${v} ${fr(a, d)} ${de(t)}, ${q.nom} ${fr(b, d)}. Quelle fraction ont-${p.il === "elle" && q.il === "elle" ? "elles" : "ils"} ${pp}e à deux ?`,
     t.miam
       ? `${p.nom} ${v} ${fr(a, d)} ${de(t)} au goûter et ${fr(b, d)} au dîner. Quelle fraction a-t-${p.il} ${pp}e ?`
       : `${p.nom} colorie ${fr(a, d)} ${de(t)} en bleu et ${fr(b, d)} en vert. Quelle fraction est coloriée ?`,
-    `Pic prend ${fr(a, d)} ${de(t)}, puis Ti Margo en prend ${fr(b, d)}. Combien en ont-ils pris ensemble ?`,
+    `Pic prend ${fr(a, d)} ${de(t)}, puis Ti Margo ${fr(b, d)}. Combien en ont-ils pris ?`,
   ]);
   return qcm(
     text,
     fr(a + b, d),
     piegesAjout(a, b, d),
     exp("Des parts de la même taille s'ajoutent : on compte les parts.", "On ajoute les numérateurs ; le dénominateur reste le même.", `${a} + ${b} = ${a + b} : ${fr(a, d)} + ${fr(b, d)} = ${fr(a + b, d)}.`, `Cela fait ${fr(a + b, d)}.`),
+    // Le dessin montre la PREMIÈRE part seulement (a/d) : l'élève ajoute les b parts lui-même.
+    dessin(t, a, d),
   );
 }
 
@@ -297,7 +306,7 @@ const GABARITS: TutorBankItemV4[] = [
         const n = randomChoice([2, 3, 4, 5, 6, 8, 10]);
         const p = enfant();
         return qcm(
-          `${p.nom} partage ${t.le} entre ${n} enfants. Chacun doit avoir autant. ${randomChoice(["En combien de parts égales faut-il couper ?", `Combien de parts égales doit-${p.il} faire ?`])}`,
+          `${p.nom} partage ${t.le} entre ${n} enfants, autant chacun. ${randomChoice(["Combien de parts égales faut-il ?", `Combien de parts égales fait-${p.il} ?`])}`,
           `${n} parts`,
           garder(`${n} parts`, [nParts(n + 1), nParts(n - 1), nParts(n * 2), "1 part"]),
           exp("Pour un partage juste, toutes les parts doivent être égales.", "On fait autant de parts égales qu'il y a d'enfants.", `${n} enfants : ${n} parts égales.`, `Il faut ${n} parts égales.`),
@@ -311,12 +320,12 @@ const GABARITS: TutorBankItemV4[] = [
         const d = randomChoice([2, 3, 4, 5, 6, 8]);
         const p = enfant();
         const inegal = randomChoice([
-          `une grande part et ${NOMBRE_MOT[d - 1]} toute${d - 1 > 1 ? "s" : ""} petite${d - 1 > 1 ? "s" : ""}`,
-          `des parts de tailles différentes`,
-          `une part énorme et les autres minuscules`,
+          `: une grande et ${NOMBRE_MOT[d - 1]} petite${d - 1 > 1 ? "s" : ""}`,
+          `de tailles différentes`,
+          `pas pareilles`,
         ]);
         return qcm(
-          `${p.nom} coupe ${t.le} en ${d} parts : ${inegal}. ${randomChoice([`Chaque part est-elle ${DEN(d).part} ?`, `Peut-on dire qu'une part vaut ${DEN(d).part} ?`])}`,
+          `${p.nom} coupe ${t.le} en ${d} parts ${inegal}. ${randomChoice([`Chaque part est-elle ${DEN(d).part} ?`, `Une part vaut-elle ${DEN(d).part} ?`])}`,
           "non, les parts ne sont pas égales",
           ["non, les parts ne sont pas égales", `oui, il y a bien ${d} parts`, `non, il faudrait ${d + 1} parts`],
           exp("Une fraction partage un tout en parts ÉGALES.", "On compte les parts, puis on vérifie qu'elles ont la même taille.", `Il y a bien ${d} parts, mais elles ne sont pas pareilles.`, "Non : les parts ne sont pas égales."),
@@ -419,7 +428,7 @@ const GABARITS: TutorBankItemV4[] = [
       () => {
         const t = tout();
         return qcm(
-          `${quiCoupe(t, 4)} ${randomChoice(["Comment s'appelle une part ?", "Que vaut la part coloriée ?", "Quel est le nom de la part coloriée ?"])}`,
+          `${quiCoupe(t, 4)} ${randomChoice(["Comment s'appelle une part ?", "Que vaut la part coloriée ?", "Comment s'appelle cette part ?"])}`,
           "un quart",
           ["un demi", "un tiers", "quatre"],
           exp("Couper en 4 parts égales, c'est partager en quarts.", "On compte les parts égales : il y en a 4.", "Chaque part est un quart.", "C'est un quart."),
@@ -444,14 +453,14 @@ const GABARITS: TutorBankItemV4[] = [
     const prend = randomChoice(t.miam ? [`${p.nom} en prend ${k}.`, `Pic en picore ${k}.`, `On en mange ${k}.`] : [`${p.nom} en prend ${k}.`, `${p.nom} en colorie ${k}.`, `On en peint ${k}.`]);
     return tirer([
       () => qcm(
-        `${quiCoupe(t, 4)} ${prend} ${randomChoice(["Quelle fraction est coloriée ?", "Écris la part coloriée en fraction."])}`,
+        `${quiCoupe(t, 4)} ${prend} ${randomChoice(["Quelle fraction est coloriée ?", "Quelle fraction est-ce ?"])}`,
         fr(k, 4),
         [fr(4, k), fr(k, 3), fr(4 - k, 4), fr(k, 5)].filter((x) => x !== fr(k, 4)),
         exp("Un quart s'écrit 1/4.", "En bas, 4 parts égales ; en haut, les parts coloriées.", `${k} part${k > 1 ? "s" : ""} sur 4 : ${fr(k, 4)}.`, `C'est ${fr(k, 4)}.`),
         dessin(t, k, 4),
       ),
       () => qcm(
-        `${quiCoupe(t, 4)} ${prend} ${randomChoice(["Comment lit-on la part coloriée ?", "Comment dit-on cette fraction ?"])}`,
+        `${quiCoupe(t, 4)} ${prend} ${randomChoice(["Comment lit-on la part ?", "Comment dit-on la part ?"])}`,
         lire(k, 4),
         ["un quart", "deux quarts", "trois quarts", "un tiers", "quatre quarts"].filter((x) => x !== lire(k, 4)),
         exp("Une part sur 4 parts égales est un quart.", "On compte les parts coloriées.", `${k} part${k > 1 ? "s" : ""} sur 4.`, `C'est ${lire(k, 4)}.`),
@@ -466,7 +475,7 @@ const GABARITS: TutorBankItemV4[] = [
       () => {
         const t = tout();
         return qcm(
-          `${quiCoupe(t, 3)} ${randomChoice(["Comment s'appelle une part ?", "Que vaut la part coloriée ?", "Quel est le nom de la part coloriée ?"])}`,
+          `${quiCoupe(t, 3)} ${randomChoice(["Comment s'appelle une part ?", "Que vaut la part coloriée ?", "Comment s'appelle cette part ?"])}`,
           "un tiers",
           ["un demi", "un quart", "trois"],
           exp("Couper en 3 parts égales, c'est partager en tiers.", "On compte les parts égales : il y en a 3.", "Chaque part est un tiers.", "C'est un tiers."),
@@ -490,7 +499,7 @@ const GABARITS: TutorBankItemV4[] = [
     const p = enfant();
     return tirer([
       () => qcm(
-        `${quiCoupe(t, 3)} ${randomChoice([t.miam ? `${p.nom} en mange ${k}.` : `${p.nom} en peint ${k}.`, `${p.nom} en colorie ${k}.`, `On en garde ${k}.`])} ${randomChoice(["Quelle fraction est coloriée ?", "Écris la part coloriée en fraction."])}`,
+        `${quiCoupe(t, 3)} ${randomChoice([t.miam ? `${p.nom} en mange ${k}.` : `${p.nom} en peint ${k}.`, `${p.nom} en colorie ${k}.`, `On en garde ${k}.`])} ${randomChoice(["Quelle fraction est coloriée ?", "Quelle fraction est-ce ?"])}`,
         fr(k, 3),
         [fr(3, k), fr(k, 4), fr(3 - k, 3), fr(k, 2)].filter((x) => x !== fr(k, 3)),
         exp("Un tiers s'écrit 1/3.", "En bas, 3 parts égales ; en haut, les parts coloriées.", `${k} part${k > 1 ? "s" : ""} sur 3 : ${fr(k, 3)}.`, `C'est ${fr(k, 3)}.`),
@@ -515,7 +524,7 @@ const GABARITS: TutorBankItemV4[] = [
         const autre = randomChoice([4, 6, 2]);
         const tiersGagne = 3 < autre;
         return qcm(
-          `${p.nom} a un tiers ${de(t)}. ${q.nom} a ${DEN(autre).part} ${memeTout(t)}. ${randomChoice(["Qui a la plus grosse part ?", "Qui a le plus ?"])}`,
+          `${p.nom} a un tiers ${de(t)}, ${q.nom} ${DEN(autre).part}. ${randomChoice(["Qui a la plus grosse part ?", "Qui a le plus ?"])}`,
           tiersGagne ? p.nom : q.nom,
           [p.nom, q.nom, "les deux pareil"],
           exp("Plus on partage en parts nombreuses, plus chaque part est petite.", "On compare le nombre de parts du partage.", `Un tiers : 3 parts. ${maj(DEN(autre).part)} : ${autre} parts. ${tiersGagne ? `3 parts sont plus grosses que ${autre}` : `${autre} parts sont plus grosses que 3`}.`, `C'est ${tiersGagne ? p.nom : q.nom}.`),
@@ -622,7 +631,7 @@ const GABARITS: TutorBankItemV4[] = [
         const n = randomInt(2, d - 1);
         const num = randomChoice([true, false]);
         return qcm(
-          `${quiCoupe(t, d)} On en colorie ${n}. ${randomChoice([`Quel est le ${num ? "numérateur" : "dénominateur"} de la fraction coloriée ?`])}`,
+          `${quiCoupe(t, d)} On en colorie ${n}. Quel est le ${num ? "numérateur" : "dénominateur"} ?`,
           String(num ? n : d),
           [String(num ? d : n), String(d - n === (num ? n : d) ? d + 1 : d - n), String(n + d)].filter((x) => x !== String(num ? n : d)),
           exp("Le dénominateur dit en combien de parts égales on a partagé ; le numérateur, combien on en prend.", "On compte les parts du partage, puis les parts coloriées.", `${d} parts, ${n} coloriées : ${fr(n, d)}.`, `Le ${num ? "numérateur" : "dénominateur"} est ${num ? n : d}.`),
@@ -665,7 +674,7 @@ const GABARITS: TutorBankItemV4[] = [
     const n = randomInt(2, d - 1);
     return tirer([
       () => qcm(
-        `${randomChoice([`Regarde ${t.le}.`, `${quiCoupe(t, d)} On en colorie quelques-unes.`])} ${randomChoice(["Quelle fraction est coloriée ?", "Quelle part est coloriée ?", "Écris la part coloriée en fraction."])}`,
+        `${randomChoice([`Regarde ${t.le}.`, quiCoupe(t, d)])} ${randomChoice(["Quelle fraction est coloriée ?", "Quelle part est coloriée ?"])}`,
         fr(n, d),
         piegesFraction(n, d),
         exp("Une fraction dit combien de parts égales on prend.", "En bas, toutes les parts ; en haut, les parts coloriées.", `${d} parts, ${n} coloriées : ${fr(n, d)}.`, `C'est ${fr(n, d)}.`),
@@ -759,6 +768,7 @@ const GABARITS: TutorBankItemV4[] = [
       bon,
       [fr(a, d), fr(b, d), "elles sont égales"],
       exp("Quand deux fractions ont le même dénominateur, les parts ont la même taille.", "On compare le nombre de parts prises : les numérateurs.", `${Math.max(a, b)} parts > ${Math.min(a, b)} parts.`, `La plus ${plusGrand ? "grande" : "petite"} est ${bon}.`),
+      deuxBandes(a, d, b, d),
     );
   }, ["comparer"]),
   gab("ce1_fraction_comparer_meme_tpl_2", "ce1_fraction_comparer_meme_denominateur", 3, "Même partage : celui qui a le plus de parts a le plus.", () => {
@@ -772,10 +782,11 @@ const GABARITS: TutorBankItemV4[] = [
     const gagnant = (a > b) === plus ? p : q;
     const verbe = verbePour(t);
     return qcm(
-      `${p.nom} ${verbe} ${fr(a, d)} ${de(t)}. ${q.nom} en ${verbe} ${fr(b, d)}. ${randomChoice([`Qui en ${verbe} le ${plus ? "plus" : "moins"} ?`, `Qui a la ${plus ? "plus grande" : "plus petite"} part ?`])}`,
+      `${p.nom} ${verbe} ${fr(a, d)} ${de(t)}, ${q.nom} ${fr(b, d)}. ${randomChoice([`Qui en ${verbe} le ${plus ? "plus" : "moins"} ?`, `Qui a la ${plus ? "plus grande" : "plus petite"} part ?`])}`,
       gagnant.nom,
       [p.nom, q.nom, "les deux pareil"],
       exp("Même dénominateur : les parts ont la même taille.", "On compare le nombre de parts : les numérateurs.", `${Math.max(a, b)} parts > ${Math.min(a, b)} parts de la même taille.`, `C'est ${gagnant.nom}.`),
+      deuxBandes(a, d, b, d),
     );
   }, ["comparer"]),
 
@@ -795,12 +806,14 @@ const GABARITS: TutorBankItemV4[] = [
         bon,
         [fr(1, x), fr(1, y), "elles sont égales"],
         exp("Plus on partage en parts nombreuses, plus chaque part est petite.", "On compare les dénominateurs, à l'envers.", `${fr(1, Math.min(x, y))} : ${Math.min(x, y)} parts ; ${fr(1, Math.max(x, y))} : ${Math.max(x, y)} parts, donc plus petites.`, `La plus ${plusGrand ? "grande" : "petite"} est ${bon}.`),
+        deuxBandes(1, x, 1, y),
       ),
       () => qcm(
-        `${p.nom} a ${DEN(x).part} ${de(t)}. ${q.nom} a ${DEN(y).part} ${memeTout(t)}. ${randomChoice(["Qui a la plus grosse part ?", "Qui a le plus ?"])}`,
+        `${p.nom} a ${DEN(x).part} ${de(t)}, ${q.nom} ${DEN(y).part}. ${randomChoice(["Qui a la plus grosse part ?", "Qui a le plus ?"])}`,
         x < y ? p.nom : q.nom,
         [p.nom, q.nom, "les deux pareil"],
         exp("Plus on partage en parts nombreuses, plus chaque part est petite.", "On compare le nombre de parts des deux partages.", `${DEN(Math.min(x, y)).part} : ${Math.min(x, y)} parts ; ${DEN(Math.max(x, y)).part} : ${Math.max(x, y)} parts, plus petites.`, `C'est ${x < y ? p.nom : q.nom}.`),
+        deuxBandes(1, x, 1, y),
       ),
     ]);
   }, ["comparer", "piege"]),
@@ -810,10 +823,11 @@ const GABARITS: TutorBankItemV4[] = [
         const [x, y] = shuffle([3, 4, 5, 6, 8, 10]).slice(0, 2).sort((a, b) => a - b);
         const p = enfant();
         return qcm(
-          `${p.nom} dit : « ${fr(1, y)} est plus grand que ${fr(1, x)}, car ${y} est plus grand que ${x}. » ${randomChoice([`A-t-${p.il} raison ?`, "Est-ce juste ?"])}`,
+          `${p.nom} dit : « ${fr(1, y)} est plus grand que ${fr(1, x)}, car ${y} est plus grand. » ${randomChoice([`A-t-${p.il} raison ?`, "Est-ce juste ?"])}`,
           "non, plus il y a de parts, plus elles sont petites",
           ["oui", "non, plus il y a de parts, plus elles sont petites", "non, elles sont égales"],
           exp("Plus on partage en parts nombreuses, plus chaque part est petite.", "On imagine le même gâteau coupé deux fois.", `${fr(1, x)} > ${fr(1, y)}.`, `${p.nom} se trompe.`),
+          deuxBandes(1, y, 1, x),
         );
       },
       () => {
@@ -821,10 +835,11 @@ const GABARITS: TutorBankItemV4[] = [
         const p = enfant();
         const [x, y] = shuffle([2, 3, 4, 6, 8, 10]).slice(0, 2);
         return qcm(
-          `${p.nom} veut la plus grosse part ${de(t)}. ${randomChoice([`Vaut-il mieux couper en ${x} ou en ${y} parts égales ?`, `Faut-il couper en ${x} ou en ${y} parts égales ?`])}`,
+          `${p.nom} veut une grosse part. ${randomChoice([`Couper ${t.le} en ${x} ou en ${y} parts égales ?`, `Faut-il couper en ${x} ou en ${y} parts égales ?`])}`,
           `en ${Math.min(x, y)} parts`,
           [`en ${x} parts`, `en ${y} parts`, "c'est pareil"],
           exp("Moins il y a de parts, plus elles sont grosses.", "On compare le nombre de parts.", `${Math.min(x, y)} parts < ${Math.max(x, y)} parts : les parts sont plus grosses.`, `En ${Math.min(x, y)} parts.`),
+          deuxBandes(0, x, 0, y),
         );
       },
     ]), ["comparer", "piege"]),
@@ -855,6 +870,7 @@ const GABARITS: TutorBankItemV4[] = [
         fr(a + b, d),
         piegesAjout(a, b, d),
         exp("Même dénominateur : on ajoute les numérateurs.", "Le dénominateur ne change pas.", `${a} + ${b} = ${a + b}.`, `${fr(a, d)} + ${fr(b, d)} = ${fr(a + b, d)}.`),
+        fractionCanvas({ model: "bar", fraction: { numerator: a, denominator: d }, display: { showFraction: false, showParts: true } }),
       ),
     ]);
   }, ["additionner"]),
@@ -872,17 +888,18 @@ const GABARITS: TutorBankItemV4[] = [
         `${randomChoice(["Combien font", "Que vaut"])} ${fr(a, d)} − ${fr(b, d)} ?`,
         `${p.nom} écrit ${fr(a, d)} − ${fr(b, d)} au tableau. Quel est le résultat ?`,
         `Pic enlève ${fr(b, d)} à ${fr(a, d)}. Que reste-t-il ?`,
-      ]), fr(a - b, d), pieges, explication),
+      ]), fr(a - b, d), pieges, explication, fractionCanvas({ model: "bar", fraction: { numerator: a, denominator: d }, display: { showFraction: false, showParts: true } })),
       () => qcm(
         randomChoice([
           `Il reste ${fr(a, d)} ${de(t)}. ${p.nom} en ${v} ${fr(b, d)}. ${randomChoice(["Combien en reste-t-il ?", "Quelle fraction reste-t-il ?"])}`,
           `Sur la table, il y a ${fr(a, d)} ${de(t)}. ${p.nom} en ${v} ${fr(b, d)}. Que reste-t-il ?`,
           `${p.nom} avait ${fr(a, d)} ${de(t)}. ${maj(p.il)} en donne ${fr(b, d)} à Pic. Combien lui en reste-t-il ?`,
-          `Ti Margo a ${fr(a, d)} ${de(t)}. ${maj(p.nom)} lui en prend ${fr(b, d)}. Quelle fraction reste à Ti Margo ?`,
+          `Ti Margo a ${fr(a, d)} ${de(t)}. ${maj(p.nom)} lui en prend ${fr(b, d)}. Que lui reste-t-il ?`,
         ]),
         fr(a - b, d),
         pieges,
         explication,
+        dessin(t, a, d),
       ),
     ]);
   }, ["additionner"]),
@@ -903,8 +920,9 @@ const GABARITS: TutorBankItemV4[] = [
       fr(d - a, d),
       piegesComplement(a, d),
       explicationComplement(a, d),
+      dessin(t, a, d),
     );
-  }, ["complement"]),
+  }, ["complement", "canvas"]),
   gab("ce1_fraction_complement_tpl_2", "ce1_fraction_complement_1", 4, "Combien de parts faut-il ajouter pour avoir le tout ?", () => {
     const d = randomChoice([3, 4, 5, 6, 8, 10]);
     const a = randomInt(1, d - 1);
@@ -915,16 +933,17 @@ const GABARITS: TutorBankItemV4[] = [
       randomChoice([
         `${randomChoice(["Complète", "Trouve la fraction qui manque", "Pic cherche la fraction qui manque"])} : ${fr(a, d)} + … = 1.`,
         `${p.nom} a déjà ${v} ${fr(a, d)} ${de(t)}. Quelle fraction reste-t-il à faire ?`,
-        `${p.nom} colorie ${fr(a, d)} ${de(t)} en bleu et tout le reste en rouge. Quelle fraction est rouge ?`,
+        `${p.nom} colorie ${fr(a, d)} ${de(t)} en bleu, le reste en rouge. Quelle fraction est rouge ?`,
         t.le === "le potager"
           ? `${p.nom} a déjà arrosé ${fr(a, d)} du potager. Quelle part reste à arroser ?`
-          : `${p.nom} peint ${t.le}. ${maj(p.il)} en a déjà peint ${fr(a, d)}. Quelle fraction reste à peindre ?`,
+          : `${p.nom} a peint ${fr(a, d)} ${de(t)}. Quelle fraction reste à peindre ?`,
       ]),
       fr(d - a, d),
       piegesComplement(a, d),
       explicationComplement(a, d),
+      dessin(t, a, d),
     );
-  }, ["complement"]),
+  }, ["complement", "canvas"]),
 
   /* ---------- DÉFIS ---------- */
   gab("ce1_fraction_defi_tpl_1", "ce1_fraction_defi", 5, "La moitié des parts, c'est la moitié du tout.", () => {
@@ -933,7 +952,7 @@ const GABARITS: TutorBankItemV4[] = [
     const p = enfant();
     return qcm(
       randomChoice([
-        `${quiCoupe(t, d)} Combien de parts faut-il prendre pour avoir la moitié ?`,
+        `${quiCoupe(t, d)} Combien de parts pour avoir la moitié ?`,
         `Combien de ${DEN(d).parts} font un demi ?`,
         `${p.nom} veut la moitié ${de(t)}, coupé${t.f ? "e" : ""} en ${d} parts égales. Combien de parts prend-${p.il} ?`,
       ]),
@@ -950,7 +969,7 @@ const GABARITS: TutorBankItemV4[] = [
         const cas = randomChoice([[2, 6, 1, 3], [2, 4, 1, 2], [3, 6, 1, 2], [4, 8, 1, 2], [5, 10, 1, 2], [2, 8, 1, 4]]);
         const t = tout();
         return qcm(
-          `${p.nom} prend ${fr(cas[0], cas[1])} ${de(t)}. ${q.nom} prend ${fr(cas[2], cas[3])} ${memeTout(t)}. ${randomChoice(["Qui a le plus ?", "Qui a la plus grosse part ?"])}`,
+          `${p.nom} prend ${fr(cas[0], cas[1])} ${de(t)}, ${q.nom} ${fr(cas[2], cas[3])}. ${randomChoice(["Qui a le plus ?", "Qui a la plus grosse part ?"])}`,
           "les deux pareil",
           [p.nom, q.nom, "les deux pareil"],
           exp("Deux fractions différentes peuvent dire la même part.", "On imagine le même tout coupé de deux façons.", `${fr(cas[0], cas[1])} = ${fr(cas[2], cas[3])}.`, "Ils ont autant."),
@@ -962,7 +981,7 @@ const GABARITS: TutorBankItemV4[] = [
         const p = enfant();
         const t = tout();
         return qcm(
-          `${maj(t.le)} est partagé${t.f ? "e" : ""} en ${d} parts égales. ${p.nom} en a ${t.miam ? "décoré" : "colorié"} ${a}. ${randomChoice([`Combien de parts faut-il encore ${t.miam ? "décorer" : "colorier"} pour tout finir ?`, `Combien en reste-t-il à ${t.miam ? "décorer" : "colorier"} ?`])}`,
+          `${maj(t.le)} a ${d} parts égales. ${p.nom} en a ${t.miam ? "décoré" : "colorié"} ${a}. ${randomChoice([`Combien de parts reste-t-il à ${t.miam ? "décorer" : "colorier"} ?`, `Combien en reste-t-il à ${t.miam ? "décorer" : "colorier"} ?`])}`,
           String(d - a),
           [String(d), String(a), String(d - a + 1), String(d + a)].filter((x, i, arr) => arr.indexOf(x) === i && x !== String(d - a)),
           exp("Le tout, c'est toutes les parts.", `On cherche ce qui manque à ${a} pour arriver à ${d}.`, `${a} + ${d - a} = ${d}.`, `Il en reste ${d - a}.`),
@@ -1434,7 +1453,8 @@ export const fractionBank: TutorBankItemV4[] = [
     microId: "ce1_fraction_comparer_unitaires",
     difficulty: 5,
     theme: "neutral",
-    text: "Un élève dit : « 1/8 est plus grand que 1/6, parce que 8 est plus grand que 6. » A-t-il raison ?",
+    text: "Tom dit : « 1/8 est plus grand que 1/6, car 8 est plus grand. » A-t-il raison ?",
+    canvas: { kind: "fraction", model: "compare", fractions: [{ numerator: 1, denominator: 8 }, { numerator: 1, denominator: 6 }], display: { showFraction: false, showParts: true } },
     format: "qcm",
     choices: [
       "non, plus il y a de parts, plus elles sont petites",
@@ -1498,7 +1518,8 @@ export const fractionBank: TutorBankItemV4[] = [
     microId: "ce1_fraction_complement_1",
     difficulty: 4,
     theme: "neutral",
-    text: "Lucie colorie 3/10 d'une figure en bleu et tout le reste en rouge. Quelle fraction de la figure est rouge ?",
+    text: "Lucie colorie 3/10 d'une figure en bleu, le reste en rouge. Quelle fraction est rouge ?",
+    canvas: { kind: "fraction", model: "bar", fraction: { numerator: 3, denominator: 10 }, display: { showFraction: false, showParts: true } },
     format: "qcm",
     choices: ["7/10", "3/10", "10/3", "7/7"],
     expected: ["7/10"],
@@ -1551,7 +1572,7 @@ export const fractionBank: TutorBankItemV4[] = [
     microId: "ce1_fraction_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Deux enfants partagent la même tablette. Léa prend 2/6, Kevin prend 1/3. Qui a le plus de chocolat ?",
+    text: "Léa prend 2/6 d'une tablette, Kevin 1/3 de la même. Qui a le plus de chocolat ?",
     format: "qcm",
     choices: [
       "ils ont exactement la même chose",

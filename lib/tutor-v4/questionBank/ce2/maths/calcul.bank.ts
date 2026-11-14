@@ -139,14 +139,14 @@ function questionComplement(n: number, cible: number, situation: boolean): strin
     `${p.nom} a déjà collé ${N1} images. Son album en contient ${C}. Combien d'images lui manque-t-il ?`,
     `Pic le paille-en-queue a ramassé ${N1} graines. Il en veut ${C}. Combien doit-il encore en trouver ?`,
     `La boulangère a déjà fait ${N1} croissants. Elle en veut ${C}. Combien doit-elle encore en faire ?`,
-    `Au grand jeu de l'oie, ${p.nom} est sur la case ${N1}. L'arrivée est la case ${C}. Combien de cases reste-t-il ?`,
-    `${p.nom} lit un livre de ${C} pages. ${maj(p.il)} est à la page ${N1}. Combien de pages lui reste-t-il ?`,
-    `Le puzzle ${de(p.nom)} a ${C} pièces. ${maj(p.il)} en a posé ${N1}. Combien de pièces reste-t-il à poser ?`,
-    `La fusée de la classe doit monter à ${C} mètres. Elle est déjà à ${N1} mètres. Combien de mètres lui manque-t-il ?`,
+    `Au jeu de l'oie, ${p.nom} est sur la case ${N1}, l'arrivée en ${C}. Combien de cases reste-t-il ?`,
+    `${p.nom} lit un livre de ${C} pages. ${maj(p.il)} est à la page ${N1}. Combien de pages restent ?`,
+    `Le puzzle ${de(p.nom)} a ${C} pièces. ${maj(p.il)} en a posé ${N1}. Combien reste-t-il à poser ?`,
+    `La fusée doit monter à ${C} mètres. Elle est à ${N1} mètres. Combien de mètres manque-t-il ?`,
     `Le fermier veut ${C} œufs. Ses poules en ont pondu ${N1}. Combien d'œufs manque-t-il ?`,
     `Les pirates veulent ${C} pièces d'or dans leur coffre. Il y en a ${N1}. Combien en manque-t-il ?`,
-    `${p.nom} fait la course de vélo. Le tour fait ${C} mètres et ${p.il} a roulé ${N1} mètres. Combien de mètres reste-t-il ?`,
-    `À la kermesse, il faut ${C} tickets pour gagner le gros lot. ${p.nom} en a ${N1}. Combien lui en manque-t-il ?`,
+    `${p.nom} fait un tour de vélo de ${C} mètres. ${maj(p.il)} a roulé ${N1} mètres. Combien reste-t-il ?`,
+    `À la kermesse, le gros lot coûte ${C} tickets. ${p.nom} en a ${N1}. Combien lui en manque-t-il ?`,
     `Le jardinier veut planter ${C} fleurs. Il en a planté ${N1}. Combien lui en reste-t-il à planter ?`,
   ]);
   return Math.random() < 0.6 ? s : pick(nues);
@@ -198,7 +198,7 @@ function double(n: number, situation: boolean): Q {
     `${p.nom} a ${nObj(n, m)}. ${q.nom} en a le double. Combien ${q.nom} en a-t-${q.il} ?`,
     `${maj(m.ou)}, il y a ${nObj(n, m)}. On en apporte autant. Combien y en a-t-il maintenant ?`,
     `${p.nom} a marqué ${fmt(n)} points au jeu. ${q.nom} en marque deux fois plus. Combien de points pour ${q.nom} ?`,
-    `Une recette de gâteau demande ${fmt(n)} grammes de sucre. Le chef cuisinier fait deux gâteaux. Combien de grammes de sucre lui faut-il ?`,
+    `Un gâteau demande ${fmt(n)} grammes de sucre. Le chef en fait deux. Combien de grammes lui faut-il ?`,
   ];
   const text = situation && Math.random() < 0.6 ? pick(histoires) : pick(nues);
   const sansRetenue = d * 20 + ((2 * u) % 10);
@@ -232,7 +232,7 @@ function moitie(n: number, situation: boolean): Q {
   ];
   const histoires = [
     `${p.nom} et ${q.nom} se partagent ${nObj(n, m)} à égalité. Combien en a chaque enfant ?`,
-    `${maj(m.ou)}, il y a ${nObj(n, m)}. On en range la moitié dans une boîte. Combien en range-t-on ?`,
+    `${maj(m.ou)}, il y a ${nObj(n, m)}. On en range la moitié. Combien en range-t-on ?`,
     `Le maître-nageur a ${fmt(n)} bouées. Il en range la moitié. Combien en range-t-il ?`,
     `${p.nom} a lu la moitié d'un livre de ${fmt(n)} pages. Combien de pages a-t-${p.il} lues ?`,
   ];
@@ -331,7 +331,7 @@ function histoireRetrait(n: number, s: number): string {
   return pick([
     `${p.nom} a ${nObj(n, m)}. ${maj(p.il)} en donne ${s} à ${q.nom}. Combien lui en reste-t-il ?`,
     `${maj(m.ou)}, il y a ${nObj(n, m)}. On en prend ${s}. Combien en reste-t-il ?`,
-    `Le livre ${de(p.nom)} a ${n} pages. ${maj(p.il)} en a lu ${s}. Combien de pages lui reste-t-il à lire ?`,
+    `Le livre ${de(p.nom)} a ${n} pages. ${maj(p.il)} en a lu ${s}. Combien lui en reste-t-il ?`,
     `La fusée doit voler ${n} jours. Elle a déjà volé ${s} jours. Combien de jours reste-t-il ?`,
     `Le marchand de glaces avait ${n} cornets. Il en vend ${s}. Combien en a-t-il encore ?`,
     `Pic le paille-en-queue avait ${n} graines. Il en mange ${s}. Combien lui en reste-t-il ?`,
@@ -345,7 +345,7 @@ function ajouter(n: number, a: number, situation: boolean): Q {
   const f = rint(1, situation ? 5 : 4);
   let text: string;
   if (f <= 2) text = poserCalcul(`${fmt(n)} + ${a}`, p);
-  else if (f === 3) text = `Pour calculer ${fmt(n)} + ${a}, ${p.nom} fait d'abord ${fmt(n)} + ${rond} = ${fmt(n + rond)}. Quel est le résultat de ${fmt(n)} + ${a} ?`;
+  else if (f === 3) text = `Pour calculer ${fmt(n)} + ${a}, ${p.nom} fait d'abord ${fmt(n)} + ${rond} = ${fmt(n + rond)}. Et ${fmt(n)} + ${a} ?`;
   else if (f === 4) text = pick([`${fmt(n)} + ${a} = ?`, `Ajoute ${a} à ${fmt(n)}.`, `Quel nombre obtient-on en ajoutant ${a} à ${fmt(n)} ?`]);
   else text = histoireAjout(n, a);
   return qN(
@@ -369,7 +369,7 @@ function soustraire(n: number, s: number, situation: boolean): Q {
   const f = rint(1, situation ? 5 : 4);
   let text: string;
   if (f <= 2) text = poserCalcul(`${fmt(n)} − ${s}`, p);
-  else if (f === 3) text = `Pour calculer ${fmt(n)} − ${s}, ${p.nom} fait d'abord ${fmt(n)} − ${rond} = ${fmt(n - rond)}. Quel est le résultat de ${fmt(n)} − ${s} ?`;
+  else if (f === 3) text = `Pour calculer ${fmt(n)} − ${s}, ${p.nom} fait d'abord ${fmt(n)} − ${rond} = ${fmt(n - rond)}. Et ${fmt(n)} − ${s} ?`;
   else if (f === 4) text = pick([`${fmt(n)} − ${s} = ?`, `Enlève ${s} à ${fmt(n)}.`, `Quel nombre obtient-on en retirant ${s} de ${fmt(n)} ?`]);
   else text = histoireRetrait(n, s);
   return qN(
@@ -480,9 +480,9 @@ function x8Etapes(): Q {
   if (f === 1)
     return qN(
       pick([
-        `Pour calculer ${n} × 8, on double trois fois. On a déjà ${n} × 2 = ${2 * n} et ${2 * n} × 2 = ${4 * n}. Quel est le résultat final ?`,
+        `${n} × 8, c'est doubler trois fois : ${n} × 2 = ${2 * n}, ${2 * n} × 2 = ${4 * n}. Quel est le résultat ?`,
         `${p.nom} calcule ${n} × 8 en doublant : ${n}, puis ${2 * n}, puis ${4 * n}… Quel nombre trouve-${tIl(p)} à la fin ?`,
-        `${p.nom} a déjà doublé deux fois ${n} : ${4 * n}. Il reste un double pour avoir ${n} × 8. Quel est le résultat ?`,
+        `${p.nom} a doublé deux fois ${n} : ${4 * n}. Encore un double pour ${n} × 8. Quel résultat ?`,
         `Pic le paille-en-queue double ${n} trois fois : ${2 * n}, ${4 * n}, puis… Quel nombre trouve-t-il ?`,
       ]),
       8 * n,
@@ -693,9 +693,9 @@ function parDizaineRonde(): Q {
       `${p.nom} calcule ${n} + ${plus} en passant par ${d + 10}. Après ${n} + ${versRond} = ${d + 10}, combien doit-${p.il} encore ajouter ?`,
       `${n} + ${plus} : on va d'abord jusqu'à ${d + 10}. Il reste combien à ajouter ?`,
       `Pic le paille-en-queue saute de ${n} à ${d + 10}, puis il doit encore avancer pour faire ${n} + ${plus}. De combien ?`,
-      `${p.nom} coupe ${plus} en deux morceaux pour calculer ${n} + ${plus} : d'abord ${versRond}, pour aller à ${d + 10}. Quel est l'autre morceau ?`,
+      `${p.nom} coupe ${plus} en deux pour calculer ${n} + ${plus} : d'abord ${versRond}, pour aller à ${d + 10}. Et l'autre morceau ?`,
       `Pour faire ${n} + ${plus}, ${p.nom} ajoute d'abord ${versRond}. Combien lui reste-t-il à ajouter ?`,
-      `${p.nom} a ${n} billes et en gagne ${plus}. ${maj(p.il)} compte d'abord jusqu'à ${d + 10}. Combien de billes lui reste-t-il à compter ?`,
+      `${p.nom} a ${n} billes et en gagne ${plus}. ${maj(p.il)} compte d'abord jusqu'à ${d + 10}. Combien en reste-t-il à compter ?`,
     ]),
     plus - versRond,
     [versRond, plus, plus - versRond + 1, 10 - plus, plus + versRond],
@@ -740,7 +740,7 @@ function distribEtape(): Q {
   if (Math.random() < 0.5)
     return qN(
       pick([
-        `Pour calculer ${nn} × ${k}, on coupe ${nn} en ${d} + ${u}. On a déjà ${d} × ${k} = ${d * k}. Quel est le résultat final ?`,
+        `Pour ${nn} × ${k}, on coupe ${nn} en ${d} + ${u}. Déjà : ${d} × ${k} = ${d * k}. Quel est le résultat ?`,
         `${p.nom} calcule ${nn} × ${k}. ${maj(p.il)} a trouvé ${d} × ${k} = ${d * k}. Que trouve-${tIl(p)} à la fin ?`,
       ]),
       nn * k,
@@ -842,7 +842,7 @@ function nombreMystere(): Q {
     pick([
       `Calcule astucieusement : 4 × ${n} × 25.`,
       `${p.nom} doit calculer 25 × ${n} × 4. Quel est le résultat ?`,
-      `Pic le paille-en-queue range ${n} sachets de 25 graines dans chacun de ses 4 nids. Combien de graines en tout ?`,
+      `Pic met ${n} sachets de 25 graines dans chacun de ses 4 nids. Combien de graines en tout ?`,
     ]),
     r,
     [r / 10, r + 100, r - 100, 25 * n, r * 2],

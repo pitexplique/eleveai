@@ -269,29 +269,29 @@ const LIEUX_FILE = [
 
 const GESTES = [
   { quoi: "lève sa main", fin: "" },
-  { quoi: "tient un ballon dans sa main", fin: "" },
+  { quoi: "tient un ballon à la main", fin: "" },
   { quoi: "a une montre au poignet", fin: "" },
-  { quoi: "montre la porte avec sa main", fin: "" },
+  { quoi: "montre la porte de la main", fin: "" },
   { quoi: "a un bracelet au bras", fin: "" },
-  { quoi: "tient une glace dans sa main", fin: "" },
+  { quoi: "tient une glace à la main", fin: "" },
   { quoi: "a un pansement au genou", fin: "" },
 ] as const;
 const FACE = [
-  "est en face de toi, à la cantine",
-  "est face à toi, dans la cour",
-  "est en face de toi, pour le jeu du miroir",
-  "est en face de toi, au goûter",
+  "est en face de toi",
+  "est face à toi",
+  "est face à toi, au miroir",
+  "te regarde",
 ] as const;
 const MEME_SENS = [
-  "est devant toi dans la file, dos à toi",
-  "est à côté de toi et regarde dans le même sens",
-  "marche devant toi, dans le même sens",
-  "est à côté de toi, face au tableau",
+  "est devant toi, dos à toi",
+  "est devant toi dans la file",
+  "marche devant toi",
+  "regarde le tableau, comme toi",
 ] as const;
 const QUESTIONS_COTE = [
-  "Pour toi, c'est de quel côté ?",
-  "De ton côté à toi, c'est où ?",
-  "Tu vois ça de quel côté ?",
+  "Pour toi, c'est où ?",
+  "De quel côté pour toi ?",
+  "C'est où, pour toi ?",
 ] as const;
 
 /* ---------- Assemblages de cubes ---------- */
@@ -399,7 +399,7 @@ export const reperageBank: TutorBankItemV4[] = [
     microId: "cp_reperage_vocabulaire",
     difficulty: 1,
     theme: "neutral",
-    text: "La trousse est posée SUR la table. Où est la table par rapport à la trousse ?",
+    text: "La trousse est SUR la table. Où est la table par rapport à la trousse ?",
     format: "qcm",
     choices: ["sous la trousse", "sur la trousse", "à côté de la trousse", "devant la trousse"],
     expected: ["sous la trousse"],
@@ -497,7 +497,7 @@ export const reperageBank: TutorBankItemV4[] = [
         { t: `Qui est juste devant ${c} ?`, r: b },
       ]);
       return {
-        text: `${lieu}, ${a} est devant ${b}, et ${b} est devant ${c}. ${q.t}`,
+        text: `${a} est devant ${b}, et ${b} devant ${c}. ${q.t}`,
         format: "qcm",
         choices: makeChoices(q.r, [a, b, c]),
         expected: [q.r],
@@ -534,7 +534,7 @@ export const reperageBank: TutorBankItemV4[] = [
         { t: `qu'y a-t-il au-dessus ${du(objs[2].nom)} et en dessous ${du(objs[0].nom)} ?`, r: objs[1].nom },
       ]);
       return {
-        text: `${lieu}, ${q.t}`,
+        text: `${lieu === "Sur l'étagère de la classe" ? lieu : "Sur l'étagère"}, ${q.t}`,
         format: "qcm",
         choices: makeChoices(q.r, objs.map((o) => o.nom)),
         expected: [q.r],
@@ -562,7 +562,7 @@ export const reperageBank: TutorBankItemV4[] = [
     microId: "cp_reperage_gauche_droite",
     difficulty: 4,
     theme: "neutral",
-    text: "Tu es assis en face de Naïla. Elle lève sa main droite. De quel côté la vois-tu, toi ?",
+    text: "Tu es face à Naïla. Elle lève sa main droite. De quel côté la vois-tu ?",
     format: "qcm",
     choices: ["à ta gauche", "à ta droite", "devant toi", "derrière toi"],
     expected: ["à ta gauche"],
@@ -585,7 +585,7 @@ export const reperageBank: TutorBankItemV4[] = [
     microId: "cp_reperage_gauche_droite",
     difficulty: 2,
     theme: "neutral",
-    text: "Tu marches dans le couloir, et un camarade marche juste devant toi, dans le même sens. Il tourne à droite. De quel côté dois-tu tourner pour le suivre ?",
+    text: "Ton camarade marche devant toi. Il tourne à droite. Où tournes-tu pour le suivre ?",
     format: "qcm",
     choices: ["à droite aussi", "à gauche", "tout droit", "en arrière"],
     expected: ["à droite aussi"],
@@ -610,7 +610,7 @@ export const reperageBank: TutorBankItemV4[] = [
       const n = randomChoice(PRENOMS);
       const intro = randomChoice([
         "Regarde la rangée.",
-        `${n} a posé ces objets sur la table.`,
+        `${n} a posé ces objets.`,
         `Voici l'étagère ${deNom(n)}.`,
         "Pic regarde ces objets.",
       ]);
@@ -694,7 +694,7 @@ export const reperageBank: TutorBankItemV4[] = [
         { t: `Pour ${n}, quel objet est juste à droite ${du(objs[2].nom)} ?`, r: objs[1].nom, piege: objs[3].nom },
       ]);
       return {
-        text: `${n} est en face de toi, ${ou}. ${q.t}`,
+        text: `${n} est en face de toi. ${q.t}`,
         format: "qcm",
         choices: makeChoices(q.r, [q.piege, ...objs.map((o) => o.nom)]),
         expected: [q.r],
@@ -751,7 +751,7 @@ export const reperageBank: TutorBankItemV4[] = [
     microId: "cp_reperage_quadrillage",
     difficulty: 4,
     theme: "neutral",
-    text: "Sur le plan de la classe, le trésor est caché sous la table qui est juste à côté de la porte, du côté du tableau. Combien de tables faut-il regarder ?",
+    text: "Le trésor est sous la table près de la porte, côté tableau. Combien de tables regarder ?",
     format: "qcm",
     choices: ["une seule", "toutes les tables", "deux tables", "aucune"],
     expected: ["une seule"],
@@ -844,8 +844,8 @@ export const reperageBank: TutorBankItemV4[] = [
       const text = randomChoice([
         `${cap(m.nom)} ${m.e} fait ${etapes}. Où arrive-t-${m.il} ?`,
         `${cap(m.nom)} ${m.e} avance : ${etapes}. Que trouve-t-${m.il} ?`,
-        `${n} guide ${m.nom} ${m.e} : « ${cap(etapes)}. » Où va-t-${m.il} ?`,
-        `Suis ${m.nom} ${m.e} : ${etapes}. Sur quoi s'arrête-t-${m.il} ?`,
+        `${n} dit : « ${cap(etapes)}. » Où va ${m.nom} ${m.e} ?`,
+        `Suis ${m.nom} ${m.e} : ${etapes}. Où s'arrête-t-${m.il} ?`,
       ]);
       const bonne = choixCible(cibles[0]);
       return {
@@ -902,7 +902,7 @@ export const reperageBank: TutorBankItemV4[] = [
         const n = randomChoice(PRENOMS);
         const text = randomChoice([
           `Qu'y a-t-il ${ou} ${r.e} ?`,
-          `${n} cherche ce qui est ${ou} ${r.e}. Qu'est-ce que c'est ?`,
+          `Qu'est-ce qui est ${ou} ${r.e} ?`,
           `Pic s'est posé ${ou} ${r.e}. Sur quoi est-il ?`,
           `Regarde le plan. Que vois-tu ${ou} ${r.e} ?`,
         ]);
@@ -945,7 +945,7 @@ export const reperageBank: TutorBankItemV4[] = [
         const c = randomChoice(CIBLES);
         const text = randomChoice([
           `${cap(m.nom)} ${m.e} va ${au(c.nom)} ${c.e}, sans aller en biais. Combien de cases au moins ?`,
-          `Pour attraper ${c.nom} ${c.e}, ${m.nom} ${m.e} ne va jamais en biais. Combien de cases fait-${m.il} au moins ?`,
+          `${cap(m.nom)} ${m.e} attrape ${c.nom} ${c.e}, sans biais. Combien de cases au moins ?`,
           `${cap(m.nom)} ${m.e} rejoint ${c.nom} ${c.e} par le plus court chemin, sans biais. Combien de cases ?`,
         ]);
         return {
@@ -1095,7 +1095,7 @@ export const reperageBank: TutorBankItemV4[] = [
         if (leurres.length < 3) continue;
         const m = randomChoice(MOBILES);
         const cibles = shuffle(CIBLES).slice(0, 4);
-        const mouv = `avance de ${pl(a, "case")} vers la droite, puis recule de ${pl(r, "case")}`;
+        const mouv = `avance de ${pl(a, "case")}, puis recule de ${r}`;
         const canvas = quadrillage(
           [
             { p: { x: 0, y: 0 }, label: m.e, color: "#ef4444" },
@@ -1107,7 +1107,7 @@ export const reperageBank: TutorBankItemV4[] = [
         if (randomChoice([true, false])) {
           const text = randomChoice([
             `${cap(m.nom)} ${m.e} ${mouv}. Où s'arrête-t-${m.il} ?`,
-            `Sur la piste, ${m.nom} ${m.e} ${mouv}. Que trouve-t-${m.il} ?`,
+            `${cap(m.nom)} ${m.e} ${mouv}. Que trouve-t-${m.il} ?`,
             `Suis ${m.nom} ${m.e} : ${m.il} ${mouv}. Où est-${m.il} ?`,
           ]);
           return {
@@ -1126,8 +1126,8 @@ export const reperageBank: TutorBankItemV4[] = [
           };
         }
         const text = randomChoice([
-          `${cap(m.nom)} ${m.e} ${mouv}. À combien de cases de son départ est-${m.il} ?`,
-          `Sur la piste, ${m.nom} ${m.e} ${mouv}. Combien de cases le séparent du départ ?`,
+          `${cap(m.nom)} ${m.e} ${mouv}. À combien de cases du départ est-${m.il} ?`,
+          `${cap(m.nom)} ${m.e} ${mouv}. Combien de cases le séparent du départ ?`,
           `${cap(m.nom)} ${m.e} ${mouv}. De combien de cases s'est-${m.il} éloigné${m.il === "elle" ? "e" : ""} ?`,
         ]);
         return {
@@ -1159,7 +1159,7 @@ export const reperageBank: TutorBankItemV4[] = [
     microId: "cp_reperage_assemblage",
     difficulty: 4,
     theme: "neutral",
-    text: "Sur une photo, on voit une tour de cubes. Certains cubes sont cachés derrière les autres. Que faut-il faire pour reproduire la tour exactement ?",
+    text: "Sur une photo de tour, des cubes sont cachés. Que faire pour la reproduire exactement ?",
     format: "qcm",
     choices: [
       "regarder la tour sous plusieurs côtés",
@@ -1223,7 +1223,7 @@ export const reperageBank: TutorBankItemV4[] = [
       const text = randomChoice([
         `${n} a déjà posé ${pl(k, "cube")}. Combien en manque-t-il pour finir ${nom} ?`,
         `Pour copier ${nom}, ${n} a ${pl(k, "cube")}. Combien de cubes manque-t-il ?`,
-        `${n} construit ${nom} du dessin. ${cap(poses)}. Combien en reste-t-il à poser ?`,
+        `${n} copie ${nom}. ${cap(poses)}. Combien en reste-t-il à poser ?`,
       ]);
       return {
         text,
@@ -1253,9 +1253,9 @@ export const reperageBank: TutorBankItemV4[] = [
       const n = randomChoice(PRENOMS);
       const quoi = randomChoice(["une tour", "un château", "un mur", "un pont", "une maison", "une fusée"]);
       const text = randomChoice([
-        `Sur la photo d'${quoi}, on voit ${visibles} cubes. ${caches === 1 ? "1 cube est caché" : `${caches} cubes sont cachés`} derrière. Combien de cubes en tout ?`,
-        `${n} construit ${quoi}. On voit ${visibles} cubes, et ${caches === 1 ? "1 cube est caché" : `${caches} cubes sont cachés`}. Combien de cubes en tout ?`,
-        `En tournant autour de ${quoi}, ${n} trouve ${caches === 1 ? "1 cube caché" : `${caches} cubes cachés`}. De face, on en voit ${visibles}. Combien en tout ?`,
+        `On voit ${visibles} cubes. Derrière, ${caches === 1 ? "1 est caché" : `${caches} sont cachés`}. Combien de cubes en tout ?`,
+        `${n} construit ${quoi}. On voit ${visibles} cubes, ${caches === 1 ? "1 est caché" : `${caches} sont cachés`}. Combien en tout ?`,
+        `De face, ${n} voit ${visibles} cubes. Derrière, ${caches === 1 ? "1 cube est caché" : `${caches} cubes sont cachés`}. Combien en tout ?`,
       ]);
       return {
         text,
@@ -1284,7 +1284,7 @@ export const reperageBank: TutorBankItemV4[] = [
     microId: "cp_reperage_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Tu es allé à la cantine en tournant à droite au bout du couloir. Pour revenir en classe, de quel côté dois-tu tourner ?",
+    text: "Pour aller à la cantine, tu tournes à droite. Au retour, où tournes-tu ?",
     format: "qcm",
     choices: ["à gauche", "à droite", "tout droit", "on ne peut pas savoir"],
     expected: ["à gauche"],
@@ -1307,7 +1307,7 @@ export const reperageBank: TutorBankItemV4[] = [
     microId: "cp_reperage_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Un robot pivote d'un quart de tour à droite, puis encore d'un quart de tour à droite. Où regarde-t-il maintenant ?",
+    text: "Un robot fait deux fois un quart de tour à droite. Où regarde-t-il ?",
     format: "qcm",
     choices: [
       "exactement derrière lui",
@@ -1343,9 +1343,9 @@ export const reperageBank: TutorBankItemV4[] = [
       const n = randomChoice(PRENOMS);
       const v = virages === 0 ? "aucun virage" : virages === 1 ? "1 virage" : `${virages} virages`;
       const text = randomChoice([
-        `${n} programme ${m.nom} ${m.e} : ${avancees} « avancer » et ${v}. Règle : 10 instructions au plus, 2 virages au plus. Permis ?`,
-        `Le programme ${du(m.nom)} ${m.e} a ${avancees} « avancer » et ${v}. Règle : 10 instructions au plus, 2 virages au plus. Est-il permis ?`,
-        `Règle du jeu : 10 instructions au plus, dont 2 virages. ${n} écrit ${avancees} « avancer » et ${v} pour ${m.nom} ${m.e}. C'est bon ?`,
+        `${n} écrit ${avancees} « avancer » et ${v}. Au plus : 10 instructions, 2 virages. Permis ?`,
+        `Programme ${du(m.nom)} ${m.e} : ${avancees} « avancer » et ${v}. Au plus : 10 instructions, 2 virages. Permis ?`,
+        `Au plus : 10 instructions, 2 virages. ${n} écrit ${avancees} « avancer » et ${v}. C'est bon ?`,
       ]);
       return {
         text,
@@ -1383,9 +1383,9 @@ export const reperageBank: TutorBankItemV4[] = [
       const dernier = pas[1];
       const bonne = dirTexte({ dir: CONTRAIRE[dernier.dir], n: dernier.n });
       const text = randomChoice([
-        `${n} va de la maison 🏠 ${au(c.nom)} ${c.e} par ce chemin. Pour rentrer, que faut-il faire d'abord ?`,
+        `${n} va de la maison 🏠 ${au(c.nom)} ${c.e}. Pour rentrer, que fait-on d'abord ?`,
         `Pic a volé de la maison 🏠 ${au(c.nom)} ${c.e}. Pour revenir, quel est son premier déplacement ?`,
-        `Le chemin va de la maison 🏠 ${au(c.nom)} ${c.e}. Pour le refaire à l'envers, par quoi commence-t-on ?`,
+        `Le chemin va de la maison 🏠 ${au(c.nom)} ${c.e}. À l'envers, par quoi commence-t-on ?`,
       ]);
       return {
         text,
@@ -1426,9 +1426,9 @@ export const reperageBank: TutorBankItemV4[] = [
       ]);
       const ou = randomChoice(["au bout du couloir", "au coin de la rue", "après le portail", "au grand arbre"]);
       const text = randomChoice([
-        `Pour aller ${lieu}, ${n} tourne à ${cote} ${ou}. Au retour, de quel côté tourne-t-on ?`,
+        `Pour aller ${lieu}, ${n} tourne à ${cote}. Au retour, où tourne-t-on ?`,
         `${n} va ${lieu} : ${ou}, on tourne à ${cote}. Et pour revenir ?`,
-        `À l'aller ${lieu}, on tourne à ${cote} ${ou}. ${n} rentre. Où tourne-t-on ?`,
+        `À l'aller ${lieu}, on tourne à ${cote}. ${n} rentre. Où tourne-t-on ?`,
       ]);
       return {
         text,

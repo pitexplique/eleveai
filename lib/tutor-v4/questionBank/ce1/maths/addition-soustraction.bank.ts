@@ -86,9 +86,9 @@ function direPose(calc: string): string {
     `Sur son cahier, ${p.nom} a posé ${calc}. Termine son calcul.`,
     `Aide ${p.nom} à finir l'opération posée : ${calc}.`,
     `${p.nom} te demande de poser ${calc}. Quel est le résultat ?`,
-    `La maîtresse de ${p.nom} écrit ${calc} au tableau. Pose l'opération et trouve le résultat.`,
-    `Pic le paille-en-queue a posé ${calc} pour ${p.nom}. Quel est le résultat ?`,
-    `Défi de ${p.nom} : pose ${calc} sans te tromper de colonne. Combien trouves-tu ?`,
+    `La maîtresse de ${p.nom} écrit ${calc}. Pose et calcule.`,
+    `Pic a posé ${calc} pour ${p.nom}. Quel est le résultat ?`,
+    `Défi de ${p.nom} : pose ${calc} sans te tromper de colonne.`,
   ]);
 }
 
@@ -113,12 +113,12 @@ function histoireAddition(a: number, b: number) {
   const c = chose();
   return rc([
     `Au zoo, ${p.nom} compte ${a} visiteurs le matin et ${b} l'après-midi. Combien de visiteurs en tout ?`,
-    `La bibliothèque a ${a} livres de contes et ${b} livres de sciences. ${p.nom} veut savoir combien de livres il y a en tout.`,
+    `${p.nom} range ${a} contes et ${b} livres de sciences. Combien de livres en tout ?`,
     `${p.nom} a ${a} ${c.pl}. ${maj(p.il)} en reçoit ${b} pour son anniversaire. Combien en a-t-${p.il} maintenant ?`,
-    `À la kermesse, ${p.nom} vend ${a} tickets le samedi et ${b} le dimanche. Combien de tickets en tout ?`,
-    `La fusée de ${p.nom} monte de ${a} mètres, puis encore de ${b} mètres. De combien de mètres est-elle montée ?`,
+    `À la kermesse, ${p.nom} vend ${a} tickets samedi et ${b} dimanche. Combien en tout ?`,
+    `La fusée de ${p.nom} monte de ${a} mètres, puis de ${b} mètres. De combien monte-t-elle en tout ?`,
     `${p.il === "elle" ? "La" : "Le"} pirate ${p.nom} a ${a} pièces d'or. ${maj(p.il)} en trouve ${b} sur l'île. Combien en a-t-${p.il} ?`,
-    `Le jardinier plante ${a} tulipes et ${b} roses. ${p.nom} compte toutes les fleurs. Combien en trouve-t-${p.il} ?`,
+    `${p.nom} plante ${a} tulipes et ${b} roses. Combien de fleurs en tout ?`,
   ]);
 }
 
@@ -128,10 +128,10 @@ function histoireSoustraction(a: number, b: number) {
   const c = chose();
   return rc([
     `${p.nom} a ${a} ${c.pl}. ${maj(p.il)} en donne ${b}. Combien lui en reste-t-il ?`,
-    `Le train de ${p.nom} part avec ${a} voyageurs. ${b} descendent à la gare. Combien restent dans le train ?`,
-    `La boulangère a fait ${a} croissants. Elle en vend ${b} à ${p.nom} et à ses amis. Combien en reste-t-il ?`,
-    `Le livre de ${p.nom} a ${a} pages. ${maj(p.il)} en a lu ${b}. Combien de pages lui reste-t-il à lire ?`,
-    `Le château de ${p.nom} a ${a} briques. Le dragon en fait tomber ${b}. Combien de briques restent debout ?`,
+    `Le train de ${p.nom} part avec ${a} voyageurs. ${b} descendent. Combien restent dans le train ?`,
+    `La boulangère a fait ${a} croissants. Elle en vend ${b} à ${p.nom}. Combien en reste-t-il ?`,
+    `Le livre de ${p.nom} a ${a} pages. ${maj(p.il)} en a lu ${b}. Combien en reste-t-il à lire ?`,
+    `Le château de ${p.nom} a ${a} briques. Le dragon en fait tomber ${b}. Combien restent debout ?`,
     `Au cirque, il y a ${a} places. ${p.nom} compte ${b} places prises. Combien de places sont libres ?`,
   ]);
 }
@@ -224,7 +224,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
         return qcmTexte(
           rc([
             `${p.nom} pose ${a} + ${b}. Où écrit-${p.il} le chiffre ${b % 10} de ${b} ?`,
-            `Pour poser ${a} + ${b}, sous quel chiffre de ${a} faut-il écrire le ${b % 10} ? Aide ${p.nom} !`,
+            `${p.nom} pose ${a} + ${b}. Sous quel chiffre de ${a} va le ${b % 10} ?`,
           ]),
           `sous le ${a % 10}`,
           [`sous le ${Math.floor(a / 10)}`, "tout à gauche", "à côté du nombre"],
@@ -268,7 +268,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
         return nombreOuQcm(
           rc([
             `${p.nom} pose ${a} + ${b}. Quel chiffre écrit-${p.il} dans la colonne des unités du résultat ?`,
-            `Dans l'addition posée ${a} + ${b}, quel chiffre va aux unités du résultat ? Aide ${p.nom}.`,
+            `${p.nom} pose ${a} + ${b}. Quel chiffre va aux unités du résultat ?`,
           ]),
           u,
           [(a % 10) + (b % 10), (u + 1) % 10, (u + 9) % 10].filter((x) => x !== u),
@@ -309,8 +309,8 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
         const faux = a + b * 10;
         return nombreOuQcm(
           rc([
-            `${p.nom} a posé ${a} + ${b} en mettant le ${b} sous le ${Math.floor(a / 10)}. ${maj(p.il)} a trouvé ${faux}. Quel est le bon résultat ?`,
-            `Pic le paille-en-queue a aligné ${a} + ${b} à gauche et trouvé ${faux}. Aide ${p.nom} à trouver le bon résultat.`,
+            `${a} + ${b} = ${faux} ? ${p.nom} a mis le ${b} sous le ${Math.floor(a / 10)}. Quel est le bon résultat ?`,
+            `Pic a aligné ${a} + ${b} à gauche et trouvé ${faux}. Aide ${p.nom} à corriger.`,
             `${p.nom} trouve ${a} + ${b} = ${faux}. ${maj(p.il)} s'est trompé${p.il === "elle" ? "e" : ""} de colonne. Quel est le bon résultat ?`,
           ]),
           a + b,
@@ -339,8 +339,8 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
         : rc([
             `Pour la fête, ${p.nom} compte ${a} ballons rouges, ${b} bleus et ${c} verts. Combien de ballons en tout ?`,
             `Le fermier ramasse ${a} œufs lundi, ${b} mardi et ${c} mercredi. ${p.nom} additionne. Combien d'œufs en tout ?`,
-            `${p.nom} marche ${a} pas jusqu'au parc, ${b} jusqu'à la cabane et ${c} jusqu'au banc. Combien de pas en tout ?`,
-            `Dans la bibliothèque de ${p.nom}, il y a ${a} livres, ${b} BD et ${c} dictionnaires. Combien de livres en tout ?`,
+            `${p.nom} fait ${a} pas, puis ${b}, puis ${c}. Combien de pas en tout ?`,
+            `${p.nom} a ${a} livres, ${b} BD et ${c} dictionnaires. Combien de livres en tout ?`,
           ]);
       return nombreOuQcm(text, s, [s + 10, s - 10, a + b + c * 10, s + 1], explication, pile(0.75) ? dessinPose("addition", [String(a), String(b), String(c)]) : undefined);
     },
@@ -389,7 +389,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
     microId: "ce1_soustraction_posee",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève calcule 52 - 27 et trouve 35. Il a fait 7 - 2 dans la colonne des unités. Quelle est la bonne réponse ?",
+    text: "Tom trouve 52 - 27 = 35 : il a fait 7 - 2 aux unités. Quelle est la bonne réponse ?",
     format: "short",
     expected: ["25"],
     comparator: "number_equal",
@@ -397,7 +397,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
     explanation: exp(
       "Dans une soustraction, on enlève toujours le chiffre du bas à celui du haut, même quand il est plus grand.",
       "Quand le chiffre du haut est trop petit, on casse une dizaine du nombre de départ.",
-      "52, c'est 4 dizaines et 12 unités. 12 - 7 = 5 aux unités, puis 4 - 2 = 2 aux dizaines : 52 - 27 = 25. En faisant 7 - 2, l'élève a inversé la colonne.",
+      "52, c'est 4 dizaines et 12 unités. 12 - 7 = 5 aux unités, puis 4 - 2 = 2 aux dizaines : 52 - 27 = 25. En faisant 7 - 2, Tom a inversé la colonne.",
       "La bonne réponse est 25.",
     ),
     tags: ["ce1", "addition_soustraction", "soustraire", "piege"],
@@ -428,7 +428,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
         return qcmTexte(
           rc([
             `${p.nom} veut poser une soustraction avec ${b} et ${a}. Quel nombre écrit-${p.il} en haut ?`,
-            `Pour calculer ${a} - ${b}, quel nombre va en haut de l'opération posée ? Aide ${p.nom}.`,
+            `${p.nom} pose ${a} - ${b}. Quel nombre va en haut ?`,
           ]),
           String(a),
           [String(b), "peu importe", "les deux sur la même ligne"],
@@ -510,8 +510,8 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       if (famille === "inverse") {
         return nombreOuQcm(
           rc([
-            `${p.nom} calcule ${a} - ${b}. Aux unités, ${p.il} fait ${uBas} - ${uHaut} et trouve ${inverse}. Quel est le bon résultat ?`,
-            `Pic le paille-en-queue a trouvé ${a} - ${b} = ${inverse} : il a fait ${uBas} - ${uHaut} aux unités. Aide ${p.nom} à corriger.`,
+            `${p.nom} trouve ${a} - ${b} = ${inverse} : ${p.il} a fait ${uBas} - ${uHaut} aux unités. Quel est le bon résultat ?`,
+            `Pic trouve ${a} - ${b} = ${inverse} : il a fait ${uBas} - ${uHaut} aux unités. Aide ${p.nom} à corriger.`,
           ]),
           r,
           [inverse, r + 10, r - 10],
@@ -522,7 +522,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       return court(
         rc([
           `${p.nom} pose ${a} - ${b}. ${maj(p.il)} casse une dizaine de ${a}. Combien d'unités a-t-${p.il} maintenant en haut ?`,
-          `Dans ${a} - ${b}, on ne peut pas faire ${uHaut} - ${uBas}. ${p.nom} casse une dizaine : combien d'unités en haut ?`,
+          `Dans ${a} - ${b}, ${uHaut} - ${uBas} est impossible. ${p.nom} casse une dizaine : combien d'unités en haut ?`,
         ]),
         uHaut + 10,
         explication,
@@ -617,8 +617,8 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
         rc([
           `${p.nom} veut ${total} ${c.pl}. ${maj(p.il)} en a déjà ${connu}. Combien lui en manque-t-il ?`,
           `L'album de ${p.nom} a ${total} places. ${connu} images sont collées. Combien de places sont vides ?`,
-          `Le château de sable de ${p.nom} demande ${total} seaux. ${maj(p.il)} en a versé ${connu}. Combien en reste-t-il à verser ?`,
-          `Le jardinier veut planter ${total} fleurs. ${p.nom} l'a aidé à en planter ${connu}. Combien de fleurs reste-t-il à planter ?`,
+          `Pour son château, ${p.nom} veut ${total} seaux. ${maj(p.il)} en a versé ${connu}. Combien en manque-t-il ?`,
+          `Le jardinier veut planter ${total} fleurs. ${p.nom} en a planté ${connu}. Combien en reste-t-il ?`,
         ]),
         manque,
         [total + connu, manque + 10, manque - 10],
@@ -673,9 +673,9 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       return nombreOuQcm(
         rc([
           `${p.nom} a donné ${enleve} ${c.pl}. Il lui en reste ${reste}. Combien en avait-${p.il} au début ?`,
-          `Le train de ${p.nom} s'arrête : ${enleve} voyageurs descendent. Il en reste ${reste}. Combien étaient dans le train ?`,
+          `${enleve} voyageurs descendent du train de ${p.nom}. Il en reste ${reste}. Combien étaient dans le train ?`,
           `${p.nom} a dépensé ${enleve} points au jeu. Il lui en reste ${reste}. Combien de points avait-${p.il} ?`,
-          `La boulangère a vendu ${enleve} pains à ${p.nom} et aux autres clients. Il en reste ${reste}. Combien en avait-elle cuit ?`,
+          `La boulangère a vendu ${enleve} pains, dont un à ${p.nom}. Il en reste ${reste}. Combien en avait-elle ?`,
         ]),
         depart,
         [reste - enleve > 0 ? reste - enleve : depart + 100, depart + 10, depart - 10],
@@ -722,7 +722,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
     microId: "ce1_add_sous_estimer",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève calcule 305 - 98 et trouve 407. Sans refaire le calcul, comment sait-on que c'est faux ?",
+    text: "Tom trouve 305 - 98 = 407. Sans refaire le calcul, comment sait-on que c'est faux ?",
     format: "qcm",
     choices: [
       "parce qu'en enlevant, on doit trouver moins que 305",
@@ -765,14 +765,14 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       );
       const text = plus
         ? rc([
-            `Sans calculer exactement, de quel nombre ${a} + ${b} est-il le plus proche ? Aide ${p.nom} !`,
+            `Sans calculer, de quel nombre ${a} + ${b} est-il proche ? Aide ${p.nom} !`,
             `${p.nom} doit deviner vite le résultat de ${a} + ${b}. De quel nombre est-il proche ?`,
-            `Au zoo, ${p.nom} compte ${a} visiteurs le matin et ${b} l'après-midi. Environ combien de visiteurs en tout ?`,
+            `Au zoo, ${p.nom} compte ${a} visiteurs le matin et ${b} l'après-midi. Environ combien en tout ?`,
             `${x.nom} a ${a} images, ${y.nom} en a ${b}. Environ combien d'images ont-ils à eux deux ?`,
-            `Le chef cuisinier fait ${a} crêpes, puis ${b}. ${p.nom} veut savoir environ combien. Quelle est la bonne estimation ?`,
+            `${p.nom} fait ${a} crêpes, puis ${b}. Environ combien de crêpes en tout ?`,
           ])
         : rc([
-            `Sans calculer exactement, de quel nombre ${a} - ${b} est-il le plus proche ? Aide ${p.nom} !`,
+            `Sans calculer, de quel nombre ${a} - ${b} est-il proche ? Aide ${p.nom} !`,
             `${p.nom} a ${a} perles. ${maj(p.il)} en utilise ${b} pour un collier. Il en reste environ combien ?`,
             `Le train de ${p.nom} part avec ${a} voyageurs, ${b} descendent. Il en reste environ combien ?`,
           ]);
@@ -802,7 +802,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       if (pile(0.5)) {
         return qcmNombre(
           rc([
-            `Un seul de ces résultats est possible pour ${a} ${op} ${b}. Lequel ? ${p.nom} ne pose pas le calcul.`,
+            `Un seul résultat est possible pour ${a} ${op} ${b}. Lequel ? Aide ${p.nom}.`,
             `${p.nom} hésite. Sans poser ${a} ${op} ${b}, quel résultat est possible ?`,
           ]),
           r,
@@ -816,7 +816,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       return qcmTexte(
         rc([
           `${p.nom} a calculé ${a} ${op} ${b} et trouvé ${faux}. Est-ce possible ?`,
-          `Pic le paille-en-queue annonce : « ${a} ${op} ${b} = ${faux} ». ${p.nom} vérifie l'ordre de grandeur. Qu'en penses-tu ?`,
+          `Pic annonce à ${p.nom} : « ${a} ${op} ${b} = ${faux} ». Est-ce possible ?`,
         ]),
         `non, cela doit faire environ ${ordre}`,
         [`oui, c'est juste`, `non, cela doit faire environ ${ordre + 300}`, `on ne peut pas savoir sans poser`],
@@ -876,10 +876,10 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
         `Cela vaut ${cherche}.`,
       );
       const text = rc([
-        `On sait que ${a} + ${b} = ${s}. Que vaut ${s} - ${autre}, sans poser l'opération ? Aide ${p.nom}.`,
+        `On sait que ${a} + ${b} = ${s}. Sans poser, que vaut ${s} - ${autre} ? Aide ${p.nom}.`,
         `${p.nom} a trouvé ${a} + ${b} = ${s}. Sans recalculer, que vaut ${s} - ${autre} ?`,
-        `Sur l'ardoise de ${p.nom} : ${a} + ${b} = ${s}. Pic demande combien font ${s} - ${autre}. Que réponds-tu ?`,
-        `${p.nom} et ses amis ont ${s} cartes : ${a} à ${p.nom}, ${b} aux autres. Si on enlève les ${autre} cartes ${autre === a ? `de ${p.nom}` : "des autres"}, combien en reste-t-il ?`,
+        `Sur l'ardoise de ${p.nom} : ${a} + ${b} = ${s}. Combien font ${s} - ${autre} ?`,
+        `${s} cartes : ${a} à ${p.nom}, ${b} à Pic. On enlève celles ${autre === a ? `de ${p.nom}` : "de Pic"}. Combien en reste-t-il ?`,
         `Défi de ${p.nom} : ${a} + ${b} = ${s}. Trouve vite ${s} - ${autre}.`,
       ]);
       return nombreOuQcm(text, cherche, [cherche + 10, cherche - 10, s + autre, autre], explication, pile(0.5) ? dessinBarre({ total: String(s), parts: [{ label: "enlevé", value: String(autre) }, { label: "reste", unknown: true }] }) : undefined);
@@ -904,13 +904,14 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
         `Il en reste ${fin}.`,
       );
       const contexte = rc([
-        { lieu: "la bibliothèque de l'école", objet: "livres", arrive: "On en apporte", part: "puis on en prête" },
-        { lieu: "le jardin de la classe", objet: "graines", arrive: `${p.nom} en ajoute`, part: "puis les oiseaux en mangent" },
-        { lieu: "la réserve de la cantine", objet: "yaourts", arrive: "Le camion en livre", part: "puis les élèves en mangent" },
-        { lieu: "le coffre des pirates", objet: "pièces d'or", arrive: `${p.nom} en trouve`, part: "puis le capitaine en dépense" },
-        { lieu: "l'aquarium géant", objet: "poissons", arrive: "Le soigneur en ajoute", part: "puis il en déplace" },
-        { lieu: "la boîte à jouets de " + p.nom, objet: "petites voitures", arrive: "Mamie en offre", part: `puis ${p.nom} en donne` },
-        { lieu: "la ferme", objet: "œufs", arrive: "Les poules en pondent", part: `puis ${p.nom} en vend au marché` },
+        // ⭐ 14/11/2026 : lieu en deux mots au plus, l'énoncé tient en 16 mots.
+        { lieu: " à l'école", objet: "livres", arrive: "On en apporte", part: "puis on en prête" },
+        { lieu: " au jardin", objet: "graines", arrive: `${p.nom} en ajoute`, part: "puis Pic en mange" },
+        { lieu: " au frigo", objet: "yaourts", arrive: "On en livre", part: "puis on en mange" },
+        { lieu: "", objet: "pièces d'or", arrive: `${p.nom} en trouve`, part: "puis le capitaine en dépense" },
+        { lieu: " à l'aquarium", objet: "poissons", arrive: "Le soigneur en ajoute", part: "puis en retire" },
+        { lieu: "", objet: "billes", arrive: "Mamie en offre", part: `puis ${p.nom} en donne` },
+        { lieu: "", objet: "œufs", arrive: "Les poules en pondent", part: `puis ${p.nom} en vend` },
       ]);
       if (pile(0.3)) {
         const x = ri(100, 400);
@@ -932,7 +933,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
         );
       }
       return nombreOuQcm(
-        `Dans ${contexte.lieu}, il y a ${debut} ${contexte.objet}. ${contexte.arrive} ${ajout}, ${contexte.part} ${retire}. Combien en reste-t-il ?`,
+        `${debut} ${contexte.objet}${contexte.lieu}. ${contexte.arrive} ${ajout}, ${contexte.part} ${retire}. Combien reste-t-il ?`,
         fin,
         [debut + ajout + retire, fin + 10, fin - 10, debut - retire],
         explication,

@@ -112,8 +112,8 @@ const PENDULES = [
   "l'horloge de la cuisine",
   "la pendule du salon",
   "l'horloge de la gare",
-  "le réveil de la chambre",
-  "l'horloge de la bibliothèque",
+  "le réveil",
+  "l'horloge de l'école",
   "l'horloge de la mairie",
   "l'horloge du château",
   "la pendule de mamie",
@@ -125,22 +125,22 @@ const PENDULES = [
 ] as const;
 
 const EVENEMENTS = [
-  "Le spectacle du cirque commence.",
+  "Le cirque commence.",
   "Le gâteau sort du four.",
   "Le train part de la gare.",
-  "La piscine ouvre ses portes.",
-  "Le match de football commence.",
+  "La piscine ouvre.",
+  "Le match commence.",
   "Le goûter est prêt.",
   "La fusée décolle.",
   "Le marché ouvre.",
   "La bibliothèque ouvre.",
-  "Les poules sortent du poulailler.",
-  "Le dragon du conte se réveille.",
-  "Le bateau des pirates quitte le port.",
+  "Les poules sortent.",
+  "Le dragon se réveille.",
+  "Le bateau part.",
   "La fête de l'école commence.",
-  "Le zoo donne à manger aux lions.",
-  "La boulangère sort le pain du four.",
-  "La vétérinaire ouvre son cabinet.",
+  "Les lions mangent.",
+  "Le pain sort du four.",
+  "La vétérinaire ouvre.",
 ] as const;
 
 /* Les moments d'une journée d'enfant. `moment` sert aux questions « à quel
@@ -184,7 +184,7 @@ export const dureeBank: TutorBankItemV4[] = [
     microId: "cp_duree_lire_heure",
     difficulty: 3,
     theme: "neutral",
-    text: "Sur une horloge, la petite aiguille est sur le 3 et la grande aiguille est sur le 12. Quelle heure est-il ?",
+    text: "La petite aiguille est sur le 3, la grande sur le 12. Quelle heure est-il ?",
     format: "qcm",
     choices: ["3 heures", "12 heures", "15 heures", "3 heures et 12 minutes"],
     expected: ["3 heures"],
@@ -207,7 +207,7 @@ export const dureeBank: TutorBankItemV4[] = [
     microId: "cp_duree_lire_heure",
     difficulty: 2,
     theme: "neutral",
-    text: "Sur une horloge à aiguilles, laquelle des deux aiguilles indique les heures ?",
+    text: "Sur une horloge, quelle aiguille montre les heures ?",
     format: "qcm",
     choices: [
       "la petite aiguille",
@@ -286,7 +286,7 @@ export const dureeBank: TutorBankItemV4[] = [
       const text = randomChoice([
         `${nom} regarde ${pendule}. Quelle heure est-il ?`,
         `${nom} lève les yeux vers ${pendule}. Quelle heure est-il ?`,
-        `Pic le paille-en-queue se pose sur ${pendule}. Quelle heure est-il ?`,
+        `Pic se pose sur ${pendule}. Quelle heure est-il ?`,
         `Voici ${pendule}. Quelle heure lit ${nom} ?`,
       ]);
       return {
@@ -405,7 +405,7 @@ export const dureeBank: TutorBankItemV4[] = [
     microId: "cp_duree_placer_aiguilles",
     difficulty: 2,
     theme: "neutral",
-    text: "Tu veux montrer 8 heures pile sur une horloge. Où faut-il mettre la GRANDE aiguille ?",
+    text: "Pour montrer 8 heures pile, où mets-tu la GRANDE aiguille ?",
     format: "qcm",
     choices: ["sur le 12", "sur le 8", "sur le 6", "n'importe où"],
     expected: ["sur le 12"],
@@ -438,8 +438,8 @@ export const dureeBank: TutorBankItemV4[] = [
       const laquelle = petite ? "la PETITE aiguille" : "la GRANDE aiguille";
       const bonne = petite ? heure : 12;
       const text = randomChoice([
-        `${nom} règle l'horloge en carton sur ${heures(heure)} pile. Où met-on ${laquelle} ?`,
-        `${evenement} à ${heures(heure)}. ${nom} le montre sur l'horloge. Où va ${laquelle} ?`,
+        `${nom} règle l'horloge sur ${heures(heure)} pile. Où met-on ${laquelle} ?`,
+        `${evenement} à ${heures(heure)}. Où va ${laquelle} ?`,
         `Il est ${heures(heure)} pile. Sur quel nombre faut-il mettre ${laquelle} ?`,
         `${nom} veut montrer ${heures(heure)} à Pic. Sur quel nombre met-on ${laquelle} ?`,
       ]);
@@ -478,7 +478,7 @@ export const dureeBank: TutorBankItemV4[] = [
       const non = `non, l'horloge montre ${heures(heure)}`;
       const bonne = bon ? oui : non;
       const text = randomChoice([
-        `${nom} voulait régler ${pendule} sur ${heures(voulue)}. Voici l'horloge. Est-ce bon ?`,
+        `${nom} a réglé ${pendule} sur ${heures(voulue)}. Est-ce bon ?`,
         `${nom} a placé les aiguilles pour ${heures(voulue)}. Regarde. Est-ce bon ?`,
         `Pic demande ${heures(voulue)}. ${nom} règle ${pendule} comme ça. Est-ce bon ?`,
       ]);
@@ -618,7 +618,7 @@ export const dureeBank: TutorBankItemV4[] = [
         `Que fait ${nom} d'habitude ?`,
       ]);
       return {
-        text: `Regarde l'horloge. ${ilEst(m.heure, m.moment)}. ${question}`,
+        text: `${ilEst(m.heure, m.moment)}. ${question}`,
         format: "qcm",
         choices: makeChoices(m.action, autres),
         expected: [m.action],
@@ -677,8 +677,8 @@ export const dureeBank: TutorBankItemV4[] = [
       const nom = randomChoice(PRENOMS);
       const tous: Moment[] = ["le matin", "à midi", "l'après-midi", "le soir"];
       const text = randomChoice([
-        `L'horloge sonne. Pour ${nom}, c'est l'heure ${de(m.action)}. À quel moment de la journée ?`,
-        `${nom} va ${m.action} à l'heure de l'horloge. C'est à quel moment de la journée ?`,
+        `Pour ${nom}, c'est l'heure ${de(m.action)}. À quel moment de la journée ?`,
+        `${nom} va ${m.action}. C'est à quel moment de la journée ?`,
         `Pic regarde ${nom} ${m.action}. C'est à quel moment de la journée ?`,
       ]);
       return {
@@ -732,9 +732,9 @@ export const dureeBank: TutorBankItemV4[] = [
       const echangeDebut = [range[1], range[0], range[2]];
       const echangeFin = [range[0], range[2], range[1]];
       const text = randomChoice([
-        `Range ces trois moments dans l'ordre de la journée : ${noms(tirage)}.`,
-        `Aide ${nom} à ranger sa journée : ${noms(tirage)}. Quel est le bon ordre ?`,
-        `Pic a mélangé la journée ${de(nom)} : ${noms(tirage)}. Remets-la dans l'ordre.`,
+        `Range ces moments dans l'ordre : ${noms(tirage)}.`,
+        `Range la journée ${de(nom)} : ${noms(tirage)}.`,
+        `Pic a mélangé sa journée : ${noms(tirage)}. Remets-la dans l'ordre.`,
       ]);
       return {
         text,
@@ -781,7 +781,7 @@ export const dureeBank: TutorBankItemV4[] = [
         ? randomChoice(["Qui arrive le premier ?", "Qui arrive le plus tôt ?"])
         : randomChoice(["Qui arrive le dernier ?", "Qui arrive le plus tard ?"]);
       return {
-        text: `${moment}, ${a} et ${b} vont ${lieu}. Les horloges montrent leur heure d'arrivée. ${question}`,
+        text: `${moment}, ${a} et ${b} vont ${lieu}. Regarde les horloges. ${question}`,
         format: "qcm",
         choices: shuffle([a, b, "les deux en même temps"]),
         expected: [bonne],
@@ -880,7 +880,7 @@ export const dureeBank: TutorBankItemV4[] = [
     microId: "cp_duree_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Une horloge n'a que douze nombres écrits sur son cadran. Pourtant une journée dure vingt-quatre heures. Comment est-ce possible ?",
+    text: "Une horloge n'a que douze nombres. Une journée dure vingt-quatre heures. Comment est-ce possible ?",
     format: "qcm",
     choices: [
       "la petite aiguille fait deux fois le tour dans une journée",
@@ -916,9 +916,9 @@ export const dureeBank: TutorBankItemV4[] = [
       const pendule = randomChoice(PENDULES);
       const bonne = `il est ${heures(heure)}`;
       const text = randomChoice([
-        `Sur ${pendule}, la GRANDE aiguille est sur le 12, la PETITE sur le ${heure}. Que peut-on dire ?`,
-        `${nom} ne voit pas ${pendule}. Pic lui dit : « La grande est sur le 12, la petite sur le ${heure}. » Quelle heure est-il ?`,
-        `Devinette ${de(nom)} : la petite aiguille est sur le ${heure}, la grande sur le 12. Quelle heure est-il ?`,
+        `La GRANDE aiguille est sur le 12, la PETITE sur le ${heure}. Que peut-on dire ?`,
+        `Pic dit : « La grande est sur le 12, la petite sur le ${heure}. » Quelle heure est-il ?`,
+        `Devinette : la petite aiguille est sur le ${heure}, la grande sur le 12. Quelle heure ?`,
       ]);
       return {
         text,
@@ -968,8 +968,8 @@ export const dureeBank: TutorBankItemV4[] = [
         { nom: "L'horloge de la ferme", il: "elle" },
       ]);
       const text = avance
-        ? `${objet.nom} avance d'une heure. Voici ce qu'${objet.il} montre. Quelle est la vraie heure ?`
-        : `${objet.nom} retarde d'une heure. Voici ce qu'${objet.il} montre. Quelle est la vraie heure ?`;
+        ? `${objet.nom} avance d'une heure. Quelle est la vraie heure ?`
+        : `${objet.nom} retarde d'une heure. Quelle est la vraie heure ?`;
       return {
         text,
         format: "short",

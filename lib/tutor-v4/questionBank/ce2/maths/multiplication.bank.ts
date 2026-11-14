@@ -28,7 +28,8 @@
 // ⚠️ PAS DE QUESTION À RÉDIGER. `applyMathsKeyboardFree` retire les items
 // `format: "open"` (cf. ce2/maths/index.ts) : un CE2 clique, il ne tape pas.
 
-import type { CalculPoseCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { CalculPoseCanvasData, NumberLineCanvasData, ObjetId, ObjetsCanvasData, TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { barre, barreEgale, baseDix } from "./outils-calcul-ce2";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomInt(min: number, max: number) {
@@ -120,24 +121,30 @@ type Groupes = {
   prep: string;
   objet: readonly [string, string];
   verbe: string;
+  /** Le dessin de la bibliothèque `objets`, s'il existe. */
+  img?: ObjetId;
 };
 const GROUPES: readonly Groupes[] = [
   { lieu: "à la boulangerie", contenant: ["plateau", "plateaux"], prep: "sur", objet: ["croissant", "croissants"], verbe: "pose" },
-  { lieu: "au marché", contenant: ["cagette", "cagettes"], prep: "dans", objet: ["mangue", "mangues"], verbe: "met" },
+  { lieu: "au marché", contenant: ["cagette", "cagettes"], prep: "dans", objet: ["pomme", "pommes"], verbe: "met", img: "pomme" },
+  { lieu: "au marché", contenant: ["panier", "paniers"], prep: "dans", objet: ["banane", "bananes"], verbe: "met", img: "banane" },
+  { lieu: "au port", contenant: ["ponton", "pontons"], prep: "à", objet: ["bateau", "bateaux"], verbe: "amarre", img: "bateau" },
+  { lieu: "à l'aquarium", contenant: ["bassin", "bassins"], prep: "dans", objet: ["poisson", "poissons"], verbe: "met", img: "poisson" },
+  { lieu: "à la cantine", contenant: ["plateau", "plateaux"], prep: "sur", objet: ["verre", "verres"], verbe: "pose", img: "verre" },
   { lieu: "à la cantine", contenant: ["table", "tables"], prep: "à", objet: ["élève", "élèves"], verbe: "installe" },
   { lieu: "dans la classe", contenant: ["trousse", "trousses"], prep: "dans", objet: ["crayon", "crayons"], verbe: "range" },
   { lieu: "au gymnase", contenant: ["équipe", "équipes"], prep: "dans", objet: ["joueur", "joueurs"], verbe: "met" },
-  { lieu: "dans le potager", contenant: ["rangée", "rangées"], prep: "dans", objet: ["salade", "salades"], verbe: "plante" },
-  { lieu: "à la bibliothèque", contenant: ["étagère", "étagères"], prep: "sur", objet: ["livre", "livres"], verbe: "range" },
+  { lieu: "dans le potager", contenant: ["rangée", "rangées"], prep: "dans", objet: ["fleur", "fleurs"], verbe: "plante", img: "fleur" },
+  { lieu: "à la bibliothèque", contenant: ["étagère", "étagères"], prep: "sur", objet: ["livre", "livres"], verbe: "range", img: "livre" },
   { lieu: "à la ferme", contenant: ["boîte", "boîtes"], prep: "dans", objet: ["œuf", "œufs"], verbe: "range" },
   { lieu: "à la fête de l'école", contenant: ["sachet", "sachets"], prep: "dans", objet: ["bonbon", "bonbons"], verbe: "glisse" },
-  { lieu: "au magasin de jouets", contenant: ["coffret", "coffrets"], prep: "dans", objet: ["petite voiture", "petites voitures"], verbe: "range" },
+  { lieu: "au magasin de jouets", contenant: ["coffret", "coffrets"], prep: "dans", objet: ["petite voiture", "petites voitures"], verbe: "range", img: "voiture" },
   { lieu: "à la piscine", contenant: ["ligne d'eau", "lignes d'eau"], prep: "dans", objet: ["nageur", "nageurs"], verbe: "place" },
   { lieu: "dans la cuisine", contenant: ["assiette", "assiettes"], prep: "sur", objet: ["crêpe", "crêpes"], verbe: "pose" },
   { lieu: "au stade", contenant: ["banc", "bancs"], prep: "sur", objet: ["supporter", "supporters"], verbe: "installe" },
   { lieu: "à la poste", contenant: ["carnet", "carnets"], prep: "dans", objet: ["timbre", "timbres"], verbe: "met" },
   { lieu: "à la pâtisserie", contenant: ["boîte", "boîtes"], prep: "dans", objet: ["macaron", "macarons"], verbe: "range" },
-  { lieu: "au club de foot", contenant: ["filet", "filets"], prep: "dans", objet: ["ballon", "ballons"], verbe: "met" },
+  { lieu: "au club de foot", contenant: ["filet", "filets"], prep: "dans", objet: ["ballon", "ballons"], verbe: "met", img: "ballon" },
   { lieu: "au marché de Saint-Paul", contenant: ["barquette", "barquettes"], prep: "dans", objet: ["letchi", "letchis"], verbe: "met" },
   { lieu: "à l'atelier de peinture", contenant: ["pot", "pots"], prep: "dans", objet: ["pinceau", "pinceaux"], verbe: "range" },
 ];
@@ -148,15 +155,15 @@ function enonceGroupes(s: Groupes, a: number, b: number) {
   const cont = pl(a, s.contenant);
   const obj = pl(b, s.objet);
   const constat = randomChoice([
-    `${cap(s.lieu)}, ${P.nom} ${s.verbe} ${b} ${obj} ${s.prep} chaque ${s.contenant[0]}. Il y a ${a} ${cont}.`,
+    `${P.nom} ${s.verbe} ${b} ${obj} ${s.prep} chaque ${s.contenant[0]}. Il y a ${a} ${cont}.`,
     `${cap(s.lieu)}, on compte ${a} ${cont} de ${b} ${obj}.`,
-    `${cap(s.lieu)}, voici ${a} ${cont}. ${cap(s.prep)} chaque ${s.contenant[0]}, il y a ${b} ${obj}.`,
-    `${P.nom} compte ${a} ${cont} ${s.lieu}, avec ${b} ${obj} ${s.prep} chaque ${s.contenant[0]}.`,
+    `Voici ${a} ${cont}. ${cap(s.prep)} chaque ${s.contenant[0]}, il y a ${b} ${obj}.`,
+    `${P.nom} compte ${a} ${cont} de ${b} ${obj}.`,
   ]);
   const question = randomChoice([
     `Combien ${de(s.objet[1])} en tout ?`,
-    `Combien y a-t-il ${de(s.objet[1])} au total ?`,
-    `Quel est le nombre total ${de(s.objet[1])} ?`,
+    `Combien ${de(s.objet[1])} au total ?`,
+    `Combien y en a-t-il ?`,
   ]);
   return { constat, question };
 }
@@ -167,19 +174,21 @@ type Rangees = {
   ligne: readonly [string, string];
   prep: string;
   objet: readonly [string, string];
+  img?: ObjetId;
 };
 const RANGEES: readonly Rangees[] = [
   { ou: "Dans la salle de spectacle", ligne: ["rangée", "rangées"], prep: "dans", objet: ["fauteuil", "fauteuils"] },
-  { ou: "Dans le verger", ligne: ["rangée", "rangées"], prep: "dans", objet: ["pommier", "pommiers"] },
+  { ou: "Dans le verger", ligne: ["rangée", "rangées"], prep: "dans", objet: ["pommier", "pommiers"], img: "arbre" },
   { ou: "Sur la tablette de chocolat", ligne: ["rangée", "rangées"], prep: "dans", objet: ["carré", "carrés"] },
-  { ou: "Sur le parking de l'école", ligne: ["file", "files"], prep: "dans", objet: ["place", "places"] },
-  { ou: "Sur le mur de la salle de bains", ligne: ["rangée", "rangées"], prep: "dans", objet: ["carreau", "carreaux"] },
+  { ou: "Sur le parking", ligne: ["file", "files"], prep: "dans", objet: ["voiture", "voitures"], img: "voiture" },
+  { ou: "Sur le carrelage", ligne: ["rangée", "rangées"], prep: "dans", objet: ["carreau", "carreaux"] },
   { ou: "Sur la planche de timbres", ligne: ["ligne", "lignes"], prep: "sur", objet: ["timbre", "timbres"] },
   { ou: "Dans la boîte de chocolats", ligne: ["rangée", "rangées"], prep: "dans", objet: ["chocolat", "chocolats"] },
   { ou: "Pour la photo de classe", ligne: ["rang", "rangs"], prep: "dans", objet: ["élève", "élèves"] },
   { ou: "Dans le champ de maïs", ligne: ["rangée", "rangées"], prep: "dans", objet: ["pied", "pieds"] },
-  { ou: "Dans la serre", ligne: ["rangée", "rangées"], prep: "dans", objet: ["pot de fleurs", "pots de fleurs"] },
-  { ou: "Sur la façade de l'immeuble", ligne: ["étage", "étages"], prep: "à", objet: ["fenêtre", "fenêtres"] },
+  { ou: "Dans la serre", ligne: ["rangée", "rangées"], prep: "dans", objet: ["fleur", "fleurs"], img: "fleur" },
+  { ou: "Sur la feuille d'autocollants", ligne: ["ligne", "lignes"], prep: "sur", objet: ["étoile", "étoiles"], img: "etoile" },
+  { ou: "Sur l'immeuble", ligne: ["étage", "étages"], prep: "à", objet: ["fenêtre", "fenêtres"] },
   { ou: "Dans le casier à bouteilles", ligne: ["rangée", "rangées"], prep: "dans", objet: ["bouteille", "bouteilles"] },
   { ou: "Dans la classe", ligne: ["rangée", "rangées"], prep: "dans", objet: ["table", "tables"] },
   { ou: "Sur la mosaïque", ligne: ["ligne", "lignes"], prep: "sur", objet: ["pastille", "pastilles"] },
@@ -217,9 +226,9 @@ function enonceLots(s: Lots, a: number, b: number) {
   const P = tirePrenom();
   const obj = s.objet[1];
   return randomChoice([
-    `${cap(s.lieu)}, on ${s.verbe} ${a} ${pl(a, s.objet)} ${s.prep} chaque ${s.contenant[0]}. Combien ${de(obj)} dans ${b} ${pl(b, s.contenant)} ?`,
-    `${cap(s.lieu)}, il y a ${b} ${pl(b, s.contenant)} de ${a} ${pl(a, s.objet)}. Combien ${de(obj)} cela fait-il ?`,
-    `${cap(s.lieu)}, ${P.nom} reçoit ${b} ${pl(b, s.contenant)}. Chaque ${s.contenant[0]} contient ${a} ${pl(a, s.objet)}. Quel est le nombre total ${de(obj)} ?`,
+    `On ${s.verbe} ${a} ${pl(a, s.objet)} ${s.prep} chaque ${s.contenant[0]}. Combien ${de(obj)} dans ${b} ${pl(b, s.contenant)} ?`,
+    `${cap(s.lieu)}, il y a ${b} ${pl(b, s.contenant)} de ${a} ${pl(a, s.objet)}. Combien en tout ?`,
+    `${P.nom} reçoit ${b} ${pl(b, s.contenant)} de ${a} ${pl(a, s.objet)}. Combien ${de(obj)} en tout ?`,
   ]);
 }
 
@@ -271,18 +280,18 @@ function enonceProduit(a: number, b: number, pose = false) {
 // plausibles (pas de cageot de 933 pommes).
 const GROS_LOTS: readonly { fait: (a: number) => string; demande: (b: number) => string; objet: string }[] = [
   { fait: (a) => `Chaque jour, une boulangerie fait ${a} baguettes.`, demande: (b) => `Combien de baguettes fait-elle en ${b} jours ?`, objet: "baguettes" },
-  { fait: (a) => `Un avion transporte ${a} passagers à chaque vol.`, demande: (b) => `Combien de passagers transporte-t-il en ${b} vols ?`, objet: "passagers" },
-  { fait: (a) => `Un livre compte ${a} pages.`, demande: (b) => `Combien de pages dans ${b} exemplaires de ce livre ?`, objet: "pages" },
+  { fait: (a) => `Un avion transporte ${a} passagers à chaque vol.`, demande: (b) => `Combien de passagers en ${b} vols ?`, objet: "passagers" },
+  { fait: (a) => `Un livre compte ${a} pages.`, demande: (b) => `Combien de pages dans ${b} de ces livres ?`, objet: "pages" },
   { fait: (a) => `Une salle de spectacle a ${a} places.`, demande: (b) => `Combien de spectateurs pour ${b} soirées complètes ?`, objet: "spectateurs" },
-  { fait: (a) => `Un camion livre ${a} briques à chaque voyage.`, demande: (b) => `Combien de briques livre-t-il en ${b} voyages ?`, objet: "briques" },
-  { fait: (a) => `Un club vend ${a} billets à chaque match.`, demande: (b) => `Combien de billets vend-il en ${b} matchs ?`, objet: "billets" },
-  { fait: (a) => `Un car parcourt ${a} km par jour.`, demande: (b) => `Combien de kilomètres parcourt-il en ${b} jours ?`, objet: "kilomètres" },
-  { fait: (a) => `Une machine remplit ${a} bouteilles en une heure.`, demande: (b) => `Combien de bouteilles remplit-elle en ${b} heures ?`, objet: "bouteilles" },
+  { fait: (a) => `Un camion livre ${a} briques à chaque voyage.`, demande: (b) => `Combien de briques en ${b} voyages ?`, objet: "briques" },
+  { fait: (a) => `Un club vend ${a} billets à chaque match.`, demande: (b) => `Combien de billets en ${b} matchs ?`, objet: "billets" },
+  { fait: (a) => `Un car parcourt ${a} km par jour.`, demande: (b) => `Combien de kilomètres en ${b} jours ?`, objet: "kilomètres" },
+  { fait: (a) => `Une machine remplit ${a} bouteilles en une heure.`, demande: (b) => `Combien de bouteilles en ${b} heures ?`, objet: "bouteilles" },
   { fait: (a) => `Un cinéma accueille ${a} spectateurs à chaque séance.`, demande: (b) => `Combien de spectateurs pour ${b} séances ?`, objet: "spectateurs" },
-  { fait: (a) => `Un maraîcher récolte ${a} kg de tomates chaque semaine.`, demande: (b) => `Combien de kilos récolte-t-il en ${b} semaines ?`, objet: "kilos" },
+  { fait: (a) => `Un maraîcher récolte ${a} kg de tomates par semaine.`, demande: (b) => `Combien de kilos en ${b} semaines ?`, objet: "kilos" },
   { fait: (a) => `Il faut ${a} perles pour un collier.`, demande: (b) => `Combien de perles faut-il pour ${b} colliers ?`, objet: "perles" },
   { fait: (a) => `Un train compte ${a} places assises.`, demande: (b) => `Combien de places dans ${b} trains identiques ?`, objet: "places" },
-  { fait: (a) => `Une imprimante imprime ${a} pages par jour.`, demande: (b) => `Combien de pages imprime-t-elle en ${b} jours ?`, objet: "pages" },
+  { fait: (a) => `Une imprimante imprime ${a} pages par jour.`, demande: (b) => `Combien de pages en ${b} jours ?`, objet: "pages" },
   { fait: (a) => `Un rouleau contient ${a} timbres.`, demande: (b) => `Combien de timbres dans ${b} rouleaux ?`, objet: "timbres" },
 ];
 
@@ -306,8 +315,8 @@ function enonceFacteur(t: number, p: number) {
 function enonceFacteurGroupes(s: Groupes, t: number, total: number) {
   const P = tirePrenom();
   return randomChoice([
-    `${cap(s.lieu)}, on ${s.verbe} ${total} ${s.objet[1]}, ${t} ${s.prep} chaque ${s.contenant[0]}. Combien ${de(s.contenant[1])} faut-il ?`,
-    `${cap(s.lieu)}, ${P.nom} ${s.verbe} ${t} ${pl(t, s.objet)} ${s.prep} chaque ${s.contenant[0]}. ${P.Il} a ${total} ${s.objet[1]}. Combien ${de(s.contenant[1])} lui faut-il ?`,
+    `On ${s.verbe} ${total} ${s.objet[1]}, ${t} ${s.prep} chaque ${s.contenant[0]}. Combien ${de(s.contenant[1])} faut-il ?`,
+    `${P.nom} ${s.verbe} ${t} ${pl(t, s.objet)} ${s.prep} chaque ${s.contenant[0]}. ${P.Il} a ${total} ${s.objet[1]}. Combien ${de(s.contenant[1])} lui faut-il ?`,
   ]);
 }
 
@@ -432,6 +441,75 @@ function repete(n: number, k: number) {
   return Array(k).fill(n).join(" + ");
 }
 
+/* =========================================================
+   LES DESSINS (14/11/2026 : la multiplication n'en avait aucun)
+   Les mêmes que la multiplication du CE1 : des paquets ou des
+   rangées d'objets (le schéma de billes), la barre de parts
+   égales, la droite de la table. ⛔ Aucun n'écrit le résultat.
+========================================================= */
+
+type Canvas = TutorGeneratedQuestionV4["canvas"];
+const pile = (p: number) => Math.random() < p;
+/** Des jetons à compter quand le calcul ne raconte rien. */
+const JETONS: readonly ObjetId[] = ["pomme", "etoile", "ballon", "fleur", "poisson", "papillon"];
+
+/** n groupes de k objets dessinés (k ≤ 5) : on voit les paquets pareils. */
+function dessinGroupes(img: ObjetId, n: number, k: number): ObjetsCanvasData {
+  return {
+    kind: "objets",
+    mode: "couleur",
+    elements: Array.from({ length: n }, () => ({ quoi: img, nombre: k })),
+    colonnes: n <= 3 ? n : Math.ceil(n / 2),
+    size: { width: k >= 4 ? 450 : 380 },
+  };
+}
+
+/** r rangées de c objets (c ≤ 10) : une rangée par ligne, coupée en 5 + reste. */
+function dessinRangees(img: ObjetId, r: number, c: number): ObjetsCanvasData {
+  const parLigne = c > 5 ? [5, c - 5] : [c];
+  return {
+    kind: "objets",
+    mode: "couleur",
+    elements: Array.from({ length: r }, () => parLigne.map((nombre) => ({ quoi: img, nombre }))).flat(),
+    colonnes: parLigne.length,
+    size: { width: c > 5 ? 450 : 260 },
+  };
+}
+
+/** a paquets (ou rangées) de b objets ; sans dessin d'objet, la barre de a parts de b. */
+function dessinSituation(img: ObjetId | undefined, a: number, b: number): Canvas | undefined {
+  if (img && a <= 6 && b <= 5) return dessinGroupes(img, a, b);
+  if (img && a <= 6 && b <= 10) return dessinRangees(img, a, b);
+  return barreEgale(a, String(b), null);
+}
+
+/** Un calcul nu a × b : des jetons, dans un sens ou dans l'autre (l'ordre ne change rien). */
+function dessinLibre(a: number, b: number): Canvas | undefined {
+  const img = randomChoice(JETONS);
+  if (a > 6 || b > 10) [a, b] = [b, a];
+  if (a > 6 || b > 10) return undefined;
+  return b <= 5 ? dessinGroupes(img, a, b) : dessinRangees(img, a, b);
+}
+
+/** La droite de la table de k : graduée de k en k, seuls 0 et k sont écrits. */
+function droiteTable(k: number, bonds = 10): NumberLineCanvasData {
+  return {
+    kind: "number_line",
+    min: 0,
+    max: k * bonds,
+    step: k,
+    valeursEcrites: [0, k],
+    display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true, showZero: true },
+    size: { width: 340 },
+  };
+}
+
+/** `{ canvas }` une fois sur `p`, si le dessin existe. */
+function parfois(p: number, f: () => Canvas | undefined): { canvas?: Canvas } {
+  const c = pile(p) ? f() : undefined;
+  return c ? { canvas: c } : {};
+}
+
 export const multiplicationBank: TutorBankItemV4[] = [
   /* =========================================================
      CE2_TABLES_2_3_4_5_10 — les tables faciles
@@ -543,6 +621,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${appui(table, n)}${tourne && n !== table ? ` Et ${n} × ${table}, c'est le même résultat : l'ordre ne change rien.` : ""}`,
           `${a} × ${b} = ${produit}.`,
         ),
+        ...parfois(0.5, () => dessinLibre(a, b)),
       };
     },
   },
@@ -576,6 +655,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${a} × ${b} = ${total}. ${appui(table, n)}`,
           `Il y a ${total} ${s.objet[1]}.`,
         ),
+        ...parfois(0.7, () => dessinSituation(s.img, a, b)),
       };
     },
   },
@@ -609,9 +689,9 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const produit = table * n;
       const suite = Array.from({ length: n }, (_, i) => table * (i + 1)).join(", ");
       const text = randomChoice([
-        `${S} avance de ${table} cases à chaque saut, en partant de la case 0. Sur quelle case arrive-t-${il} après ${n} sauts ?`,
-        `Sur une piste graduée, ${S.charAt(0).toLowerCase() + S.slice(1)} part de 0 et fait ${n} bonds de ${table}. Où arrive-t-${il} ?`,
-        `${S} fait ${n} sauts de ${table} cases, depuis la case 0. Sur quel nombre se pose-t-${il} ?`,
+        `${S} part de la case 0 et fait ${n} sauts de ${table} cases. Où arrive-t-${il} ?`,
+        `Sur la piste, ${S.charAt(0).toLowerCase() + S.slice(1)} part de 0 et fait ${n} bonds de ${table}. Où arrive-t-${il} ?`,
+        `${S} fait ${n} sauts de ${table} cases, depuis 0. Sur quel nombre se pose-t-${il} ?`,
       ]);
       return {
         text,
@@ -624,6 +704,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${suite} : ${n} bonds de ${table} mènent à ${produit}, car ${n} × ${table} = ${produit}.`,
           `${il === "elle" ? "Elle" : "Il"} arrive sur la case ${produit}.`,
         ),
+        ...parfois(0.7, () => droiteTable(table)),
       };
     },
   },
@@ -656,6 +737,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `Dans la table de ${table}, on cherche ${produit} : ${table} × ${n} = ${produit}. Le nombre qui manque est ${n}.`,
           raconte ? `Il faut ${n} ${s.contenant[1]}.` : `Il manque ${n}.`,
         ),
+        ...parfois(0.5, () => droiteTable(table)),
       };
     },
   },
@@ -688,6 +770,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${appui(table, n)} ${q.juste ? `Le résultat annoncé, ${q.w}, est le bon.` : `Le résultat annoncé, ${q.w}, est faux.`}`,
           q.juste ? `C'est juste : ${a} × ${b} = ${p}.` : `C'est faux : ${a} × ${b} = ${p}.`,
         ),
+        ...parfois(0.4, () => dessinLibre(a, b)),
       };
     },
   },
@@ -718,8 +801,8 @@ export const multiplicationBank: TutorBankItemV4[] = [
         `En comptant de ${table} en ${table} à partir de 0, quel nombre va-t-on dire ?`,
         `Quel nombre est un résultat de la table de ${table} ?`,
         `${P.nom} récite la table de ${table}. Quel nombre va-t-${P.il} dire ?`,
-        `${cap(s.lieu)}, on fait des ${s.contenant[1]} de ${table} ${s.objet[1]}, sans qu'il en reste. Lequel de ces nombres ${de(s.objet[1])} convient ?`,
-        `${cap(s.lieu)}, on ${s.verbe} ${table} ${s.objet[1]} ${s.prep} chaque ${s.contenant[0]}, et tout est rempli. Combien ${de(s.objet[1])} peut-il y avoir ?`,
+        `On fait des ${s.contenant[1]} de ${table} ${s.objet[1]}, sans reste. Lequel de ces nombres convient ?`,
+        `On ${s.verbe} ${table} ${s.objet[1]} ${s.prep} chaque ${s.contenant[0]}, sans reste. Combien peut-il y en avoir ?`,
       ]);
       return {
         text,
@@ -849,6 +932,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${appui(table, n)}${tourne && n !== table ? ` Et ${n} × ${table}, c'est le même résultat : l'ordre ne change rien.` : ""}`,
           `${a} × ${b} = ${produit}.`,
         ),
+        ...parfois(0.5, () => dessinLibre(a, b)),
       };
     },
   },
@@ -881,6 +965,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${a} × ${b} = ${total}. ${appui(table, n)}`,
           `Il y a ${total} ${s.objet[1]}.`,
         ),
+        ...parfois(0.7, () => dessinSituation(s.img, a, b)),
       };
     },
   },
@@ -957,7 +1042,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const q = moitie * n;
       const p = table * n;
       const text = randomChoice([
-        `${table} × ${n}, c'est le double de ${moitie} × ${n}. Sachant que ${moitie} × ${n} = ${q}, combien font ${table} × ${n} ?`,
+        `Sachant que ${moitie} × ${n} = ${q}, combien font ${table} × ${n} ? Pense au double.`,
         `${P.nom} sait que ${moitie} × ${n} = ${q}. Pour ${table} × ${n}, ${P.il} double. Que trouve-t-${P.il} ?`,
         `Double ${moitie} × ${n} = ${q} : combien font ${table} × ${n} ?`,
       ]);
@@ -1003,6 +1088,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `Dans la table de ${table}, on cherche ${produit} : ${n} × ${table} = ${produit}. Le nombre qui manque est ${n}.`,
           raconte ? `Il faut ${n} ${s.contenant[1]}.` : `Il manque ${n}.`,
         ),
+        ...parfois(0.5, () => droiteTable(table)),
       };
     },
   },
@@ -1041,6 +1127,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${appui(table, n)} ${q.juste ? `Le résultat annoncé, ${q.w}, est le bon.` : `Le résultat annoncé, ${q.w}, est faux.`}`,
           q.juste ? `C'est juste : ${a} × ${b} = ${p}.` : `C'est faux : ${a} × ${b} = ${p}.`,
         ),
+        ...parfois(0.4, () => dessinLibre(a, b)),
       };
     },
   },
@@ -1128,7 +1215,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
     microId: "ce2_multiplication_sens",
     difficulty: 3,
     theme: "reunion",
-    text: "Dans un champ, la canne est plantée en 8 rangées de 7 pieds. Un élève dit qu'il y a autant de pieds que dans 7 rangées de 8. A-t-il raison ?",
+    text: "La canne est plantée en 8 rangées de 7 pieds. Est-ce autant que 7 rangées de 8 ?",
     format: "qcm",
     choices: [
       "oui, il y a 56 pieds dans les deux cas",
@@ -1203,6 +1290,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${paquets} × ${parPaquet} = ${total}. C'est plus court que d'écrire ${repete(parPaquet, paquets)}.`,
           `Il y a ${total} ${s.objet[1]}.`,
         ),
+        ...parfois(0.7, () => dessinSituation(s.img, paquets, parPaquet)),
       };
     },
   },
@@ -1225,8 +1313,8 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const { constat } = enonceGroupes(s, a, b);
       const question = randomChoice([
         `Quel calcul donne le nombre total ${de(s.objet[1])} ?`,
-        `Quel calcul faut-il faire pour savoir combien il y a ${de(s.objet[1])} ?`,
-        `Quelle opération permet de trouver le nombre ${de(s.objet[1])} ?`,
+        `Quel calcul faut-il faire ?`,
+        `Quelle opération donne le total ?`,
       ]);
       const correct = `${a} × ${b}`;
       return {
@@ -1248,6 +1336,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${a} paquets de ${b} : ${correct} = ${a * b}. Le calcul ${a} + ${b} ne donnerait que ${a + b} : il ajoute le nombre de paquets au contenu d'un seul paquet.`,
           `Le bon calcul est ${correct}.`,
         ),
+        ...parfois(0.7, () => dessinSituation(s.img, a, b)),
       };
     },
   },
@@ -1296,6 +1385,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `Le ${n} est écrit ${fois} fois : cela s'écrit ${fois} × ${n}, et vaut ${fois * n}.`,
           `C'est ${fois} × ${n}.`,
         ),
+        ...parfois(0.5, () => dessinSituation(randomChoice(JETONS), fois, n)),
       };
     },
   },
@@ -1318,8 +1408,8 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const lignes = pl(r, s.ligne);
       const objets = pl(c, s.objet);
       const text = randomChoice([
-        `${s.ou}, il y a ${r} ${lignes} de ${c} ${objets}. Combien ${de(s.objet[1])} en tout ?`,
-        `${s.ou}, on voit ${r} ${lignes}, avec ${c} ${objets} ${s.prep} chaque ${s.ligne[0]}. Combien ${de(s.objet[1])} y a-t-il ?`,
+        `${s.ou}, il y a ${r} ${lignes} de ${c} ${objets}. Combien en tout ?`,
+        `${s.ou}, on voit ${r} ${lignes} de ${c} ${objets}. Combien ${de(s.objet[1])} y a-t-il ?`,
         `${s.ou}, les ${s.objet[1]} forment ${r} ${lignes} de ${c}. Combien y en a-t-il ?`,
       ]);
       return {
@@ -1333,6 +1423,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${r} × ${c} = ${total}. On pourrait aussi compter par colonnes : ${c} × ${r} = ${total}, c'est le même quadrillage.`,
           `Il y a ${total} ${s.objet[1]}.`,
         ),
+        ...parfois(0.7, () => (s.img && r <= 6 ? dessinRangees(s.img, r, c) : barreEgale(r, String(c), null))),
       };
     },
   },
@@ -1374,6 +1465,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${correct} = ${a * b}, et ${a} × ${b} = ${a * b}. L'addition ${a} + ${b} ne donne que ${a + b}.`,
           `C'est ${correct}.`,
         ),
+        ...parfois(0.5, () => dessinSituation(randomChoice(JETONS), a, b)),
       };
     },
   },
@@ -1423,7 +1515,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
     microId: "ce2_multiplication_posee",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève pose 27 × 4. Il calcule 4 × 7 = 28, écrit 8, puis fait 4 × 2 = 8 et écrit 88. Où s'est-il trompé ?",
+    text: "Un élève trouve 27 × 4 = 88 : 4 × 7 = 28, il écrit 8, puis 4 × 2 = 8. Où est l'erreur ?",
     format: "qcm",
     choices: [
       "il a oublié d'ajouter la retenue 2",
@@ -1538,6 +1630,12 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${parBoite} × ${boites}. ${etapesPosee(parBoite, boites)}`,
           `Il y a ${total} ${s.objet[1]}.`,
         ),
+        canvas: calculPose({
+          operation: "multiplication",
+          numbers: [String(parBoite), String(boites)],
+          result: String(total),
+          display: { showResult: false, showRetenues: false },
+        }),
       };
     },
   },
@@ -1639,6 +1737,12 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${parBoite} × ${boites}. ${etapesPosee(parBoite, boites)}`,
           `Il y a ${total} ${s.objet[1]}.`,
         ),
+        canvas: calculPose({
+          operation: "multiplication",
+          numbers: [String(parBoite), String(boites)],
+          result: String(total),
+          display: { showResult: false, showRetenues: false },
+        }),
       };
     },
   },
@@ -1669,13 +1773,13 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const P = tirePrenom();
       const moment = randomChoice(MOMENTS);
       const text = randomChoice([
-        `${moment}, ${P.nom} pose ${a} × ${b} et trouve ${oubli}. ${P.Il} a oublié la retenue. Quel est le bon résultat ?`,
-        `${moment}, ${P.nom} calcule ${a} × ${b} en posant l'opération. ${P.Il} écrit ${oubli}, sans ajouter la retenue. Que fallait-il trouver ?`,
+        `${P.nom} pose ${a} × ${b} et trouve ${oubli}. ${P.Il} a oublié la retenue. Quel est le bon résultat ?`,
+        `${P.nom} pose ${a} × ${b} et écrit ${oubli}, sans la retenue. Que fallait-il trouver ?`,
         `${moment}, ${P.nom} annonce ${a} × ${b} = ${oubli}. Quel est le résultat juste ?`,
-        `${P.nom} a posé ${a} × ${b} et trouvé ${oubli}. La maîtresse entoure la colonne des dizaines. Quel résultat fallait-il écrire ?`,
-        `Sur la feuille de ${P.nom}, on lit ${a} × ${b} = ${oubli} : la petite retenue n'est pas écrite. Corrige le résultat.`,
-        `Le robot de la classe a posé ${a} × ${b} et affiche ${oubli}. Il a oublié une retenue. Quel est le vrai résultat ?`,
-        `${P.nom} trouve ${oubli} pour ${a} × ${b}. ${P.Il} a bien écrit le chiffre des unités, mais a perdu la retenue. Que vaut ${a} × ${b} ?`,
+        `${P.nom} a trouvé ${a} × ${b} = ${oubli}. La maîtresse entoure les dizaines. Quel résultat fallait-il ?`,
+        `Sur la feuille de ${P.nom} : ${a} × ${b} = ${oubli}, sans la petite retenue. Corrige le résultat.`,
+        `Le robot affiche ${a} × ${b} = ${oubli} : il a oublié une retenue. Quel est le vrai résultat ?`,
+        `${P.nom} trouve ${oubli} pour ${a} × ${b} : la retenue est perdue. Que vaut ${a} × ${b} ?`,
         `Dans la correction, ${a} × ${b} = ${oubli} est barré en rouge. Quel est le bon produit ?`,
       ]);
       return {
@@ -1722,7 +1826,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
         text: raconte
           ? randomChoice([
               `${s.fait(a)} ${s.demande(b)}`,
-              `Pour son exposé, ${P.nom} a relevé ceci : ${s.fait(a).charAt(0).toLowerCase() + s.fait(a).slice(1)} ${s.demande(b)}`,
+              `${P.nom} lit : « ${s.fait(a)} » ${s.demande(b)}`,
             ])
           : randomChoice([enonceProduit(a, b, true), `Pose et calcule ${a} × ${b}.`, `Pose l'opération ${a} × ${b}. Quel résultat trouves-tu ?`]),
         format: "short",
@@ -1755,7 +1859,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
     microId: "ce2_multiplication_posee",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève pose 24 × 13. Il calcule 3 × 24 = 72, puis 1 × 24 = 24, il additionne les deux lignes l'une sous l'autre et annonce 96. Où s'est-il trompé ?",
+    text: "Pour 24 × 13, un élève écrit 72, puis 24 juste en dessous, et trouve 96. Où est l'erreur ?",
     format: "qcm",
     choices: [
       "le 1 de 13 compte des dizaines : sa ligne se décale d'un rang",
@@ -1859,10 +1963,10 @@ export const multiplicationBank: TutorBankItemV4[] = [
           enonceProduit(a, b, true),
           `Pose et calcule ${a} × ${b}.`,
           `Pose l'opération ${a} × ${b}, en deux lignes. Quel résultat trouves-tu ?`,
-          `Calcule ${a} × ${b} en posant l'opération : n'oublie pas de décaler la deuxième ligne.`,
+          `Pose ${a} × ${b} : n'oublie pas de décaler la deuxième ligne.`,
           `Pose ${a} × ${b} : une ligne pour les unités, une pour les dizaines. Quel est le total ?`,
           `Calcule ${a} × ${b} en posant l'opération en colonnes.`,
-          `${tirePrenom().nom} pose ${a} × ${b} sur son cahier. Quel résultat doit-on trouver après l'addition des deux lignes ?`,
+          `${tirePrenom().nom} pose ${a} × ${b} en deux lignes. Quel résultat doit-on trouver ?`,
         ]),
         format: "short",
         expected: [String(produit)],
@@ -1904,17 +2008,17 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const moment = randomChoice(MOMENTS);
       return {
         text: randomChoice([
-          `${moment}, ${P.nom} pose ${a} × ${b}. ${P.Il} écrit ses deux lignes l'une sous l'autre, sans décaler la seconde, et trouve ${sansDecalage}. Quel est le bon résultat ?`,
-          `${moment}, ${P.nom} calcule ${a} × ${b} et annonce ${sansDecalage}. ${P.Il} a oublié de décaler la deuxième ligne. Que fallait-il trouver ?`,
-          `${moment}, ${P.nom} trouve ${a} × ${b} = ${sansDecalage}, car sa ligne des dizaines n'est pas décalée. Quel est le résultat juste ?`,
-          `${P.nom} a posé ${a} × ${b} en deux lignes, mais la seconde commence sous les unités. ${P.Il} trouve ${sansDecalage}. Que fallait-il trouver ?`,
-          `Le robot de la classe pose ${a} × ${b} sans décaler sa deuxième ligne et affiche ${sansDecalage}. Quel est le bon résultat ?`,
-          `Sur la feuille de ${P.nom}, ${a} × ${b} = ${sansDecalage} : la deuxième ligne n'a pas été décalée d'une colonne. Corrige le résultat.`,
-          `Dans la correction, ${a} × ${b} = ${sansDecalage} est barré en rouge : la ligne des dizaines n'était pas décalée. Quel est le bon produit ?`,
-          `${P.nom} additionne ${a * u} et ${a * d} pour calculer ${a} × ${b}, et trouve ${sansDecalage}. Quel résultat aurait-${P.il} dû trouver ?`,
-          `« ${a} × ${b} = ${sansDecalage} », dit ${P.nom}. Mais sa deuxième ligne n'est pas décalée. Quel est le produit exact ?`,
-          `En posant ${a} × ${b}, ${P.nom} a aligné ses deux lignes à droite et trouve ${sansDecalage}. Quel est le bon résultat ?`,
-          `Un calcul posé donne ${a} × ${b} = ${sansDecalage}, sans décalage de la deuxième ligne. Retrouve le résultat juste.`,
+          `${P.nom} pose ${a} × ${b} sans décaler la seconde ligne et trouve ${sansDecalage}. Quel est le bon résultat ?`,
+          `${moment}, ${P.nom} annonce ${a} × ${b} = ${sansDecalage}, sans décaler. Que fallait-il trouver ?`,
+          `${P.nom} trouve ${a} × ${b} = ${sansDecalage} : sa ligne des dizaines n'est pas décalée. Quel est le résultat juste ?`,
+          `${P.nom} commence sa seconde ligne sous les unités et trouve ${a} × ${b} = ${sansDecalage}. Que fallait-il trouver ?`,
+          `Le robot pose ${a} × ${b} sans décaler sa deuxième ligne et affiche ${sansDecalage}. Quel est le bon résultat ?`,
+          `Sur la feuille de ${P.nom}, ${a} × ${b} = ${sansDecalage} : la deuxième ligne n'est pas décalée. Corrige le résultat.`,
+          `${a} × ${b} = ${sansDecalage} est barré : la ligne des dizaines n'était pas décalée. Quel est le bon produit ?`,
+          `${P.nom} additionne ${a * u} et ${a * d} pour calculer ${a} × ${b}. Quel résultat aurait-${P.il} dû trouver ?`,
+          `« ${a} × ${b} = ${sansDecalage} », dit ${P.nom}, sans décaler sa deuxième ligne. Quel est le produit exact ?`,
+          `${P.nom} aligne à droite les deux lignes de ${a} × ${b} et trouve ${sansDecalage}. Quel est le bon résultat ?`,
+          `Posé sans décalage, ${a} × ${b} donne ${sansDecalage}. Retrouve le résultat juste.`,
         ]),
         format: "qcm",
         choices: makeChoices(String(produit), [
@@ -1931,6 +2035,12 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${u} × ${a} = ${a * u}, c'est juste. Mais le ${d} de ${b} vaut ${d * 10}, pas ${d} : sa ligne est ${d * 10} × ${a} = ${a * d * 10}, et non ${a * d}. Le total est ${a * u} + ${a * d * 10} = ${produit}.`,
           `${a} × ${b} = ${produit}.`,
         ),
+        canvas: calculPose({
+          operation: "multiplication",
+          numbers: [String(a), String(b)],
+          result: String(produit),
+          display: { showResult: false, showRetenues: false },
+        }),
       };
     },
   },
@@ -2109,6 +2219,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${a} × ${b} = ${produit}. La somme, elle, ferait ${a + b} : ce n'est pas ce qu'on demande. Et « ${a} × ${b} » est le calcul, pas la réponse.`,
           `Le produit de ${a} et de ${b} est ${produit}.`,
         ),
+        ...parfois(0.5, () => dessinLibre(a, b)),
       };
     },
   },
@@ -2135,8 +2246,8 @@ export const multiplicationBank: TutorBankItemV4[] = [
         text:
           Math.random() < 0.5
             ? randomChoice([
-                `${cap(s.lieu)}, on veut faire des ${s.contenant[1]} de ${n} ${s.objet[1]}, sans qu'il en reste. Lequel de ces nombres ${de(s.objet[1])} convient ?`,
-                `${cap(s.lieu)}, on ${s.verbe} ${n} ${s.objet[1]} ${s.prep} chaque ${s.contenant[0]}, et il ne reste rien à ranger. Combien ${de(s.objet[1])} peut-il y avoir en tout ?`,
+                `On fait des ${s.contenant[1]} de ${n} ${s.objet[1]}, sans reste. Lequel de ces nombres convient ?`,
+                `On ${s.verbe} ${n} ${s.objet[1]} ${s.prep} chaque ${s.contenant[0]}, sans reste. Quel total est possible ?`,
               ])
             : randomChoice([
                 `Lequel de ces nombres est un multiple de ${n} ?`,
@@ -2163,6 +2274,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${n} × ${k} = ${multiple} : ${multiple} est bien un multiple de ${n}. Les trois autres tombent à côté de la table — juste à côté, mais à côté.`,
           `C'est ${multiple}.`,
         ),
+        ...parfois(0.4, () => droiteTable(n)),
       };
     },
   },
@@ -2231,6 +2343,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `Dans ${a} × ${b} = ${p}, ${a} et ${b} sont les facteurs et ${p} est le produit. « Terme » et « somme » sont des mots de l'addition.`,
           q.conclusion,
         ),
+        ...parfois(0.5, () => dessinLibre(a, b)),
       };
     },
   },
@@ -2270,6 +2383,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${a} × ${k} = ${p} : l'autre facteur est ${k}.`,
           `L'autre facteur est ${k}.`,
         ),
+        ...parfois(0.5, () => droiteTable(a)),
       };
     },
   },
@@ -2295,14 +2409,14 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const text =
         Math.random() < 0.5
           ? randomChoice([
-              `${cap(s.lieu)}, on fait des ${s.contenant[1]} de ${n} ${s.objet[1]}. Avec lequel de ces nombres ${de(s.objet[1])} en restera-t-il ?`,
-              `${cap(s.lieu)}, ${P.nom} veut mettre ${n} ${s.objet[1]} ${s.prep} chaque ${s.contenant[0]}, sans qu'il en reste. Lequel de ces nombres ${de(s.objet[1])} ne convient pas ?`,
+              `On fait des ${s.contenant[1]} de ${n} ${s.objet[1]}. Avec quel nombre en restera-t-il ?`,
+              `${P.nom} veut mettre ${n} ${s.objet[1]} ${s.prep} chaque ${s.contenant[0]}, sans reste. Quel nombre ne convient pas ?`,
             ])
           : randomChoice([
               `Lequel de ces nombres n'est PAS un multiple de ${n} ?`,
               `Parmi ces nombres, lequel n'est pas dans la table de ${n} ?`,
               `Trouve l'intrus : trois de ces nombres sont des multiples de ${n}, pas le quatrième. Lequel ?`,
-              `${P.nom} a écrit des multiples de ${n}, mais s'est trompé${P.il === "elle" ? "e" : ""} une fois. Quel nombre n'est pas un multiple de ${n} ?`,
+              `${P.nom} a écrit des multiples de ${n}, avec une erreur. Quel nombre n'est pas un multiple de ${n} ?`,
               `Quel nombre ne tombe pas juste dans la table de ${n} ?`,
               `En comptant de ${n} en ${n} depuis 0, quel nombre ne dira-t-on jamais ?`,
               `Un seul de ces nombres n'est pas un résultat de la table de ${n}. Lequel ?`,
@@ -2319,6 +2433,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${ks.slice(0, 3).map((k) => `${n} × ${k} = ${n * k}`).join(", ")} : ces trois-là sont des multiples de ${n}. ${intrus} tombe entre deux résultats de la table.`,
           `L'intrus est ${intrus}.`,
         ),
+        ...parfois(0.4, () => droiteTable(n)),
       };
     },
   },
@@ -2345,8 +2460,8 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const text =
         Math.random() < 0.5
           ? randomChoice([
-              `${cap(s.lieu)}, on répartit ${p} ${s.objet[1]} en ${s.contenant[1]} identiques, sans qu'il en reste. Combien peut-il y en avoir ${s.prep} chaque ${s.contenant[0]} ?`,
-              `${cap(s.lieu)}, ${P.nom} veut répartir ${p} ${s.objet[1]} sans reste, le même nombre ${s.prep} chaque ${s.contenant[0]}. Lequel de ces nombres peut-${P.il} mettre ${s.prep} chaque ${s.contenant[0]} ?`,
+              `On répartit ${p} ${s.objet[1]} en ${s.contenant[1]} identiques, sans reste. Combien ${s.prep} chaque ${s.contenant[0]} ?`,
+              `${P.nom} veut répartir ${p} ${s.objet[1]} sans reste, autant ${s.prep} chaque ${s.contenant[0]}. Combien peut-${P.il} en mettre ?`,
             ])
           : randomChoice([
               `${p} est un multiple de quel nombre ?`,
@@ -2483,6 +2598,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           calcul10(n, facteur),
           `${n} × ${facteur} = ${produit}.`,
         ),
+        ...parfois(0.5, () => baseDix(n)),
       };
     },
   },
@@ -2513,7 +2629,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `On a multiplié ${n} par 10 ou par 100, et on a trouvé ${produit}. Par lequel ?`,
           `Les chiffres de ${n} sont devenus ${produit}. Par combien a-t-on multiplié ?`,
           `La machine à multiplier transforme ${n} en ${produit}. Multiplie-t-elle par 10 ou par 100 ?`,
-          `${P.nom} écrit ${n}, puis ${produit}. De combien de colonnes les chiffres ont-ils monté ? Donne le nombre par lequel on a multiplié.`,
+          `${P.nom} écrit ${n}, puis ${produit}. Par quel nombre a-t-${P.il} multiplié ?`,
           `Quel est le facteur manquant : ${n} × … = ${produit} ?`,
           `${n} × 10 ou ${n} × 100 : lequel donne ${produit} ? Par quel nombre faut-il multiplier ?`,
         ]),
@@ -2526,6 +2642,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${calcul10(n, facteur)} Chaque chiffre a monté de ${facteur === 10 ? "une colonne" : "deux colonnes"} : on a multiplié par ${facteur}.`,
           `Il faut multiplier par ${facteur}.`,
         ),
+        ...parfois(0.4, () => baseDix(n)),
       };
     },
   },
@@ -2640,6 +2757,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${calcul10(n, facteur)} ${q.juste ? `Le résultat annoncé, ${q.w}, est le bon.` : `Le résultat annoncé, ${q.w}, est faux.`}`,
           q.juste ? `C'est juste : ${n} × ${facteur} = ${p}.` : `C'est faux : ${n} × ${facteur} = ${p}.`,
         ),
+        ...parfois(0.4, () => baseDix(n)),
       };
     },
   },
@@ -2679,7 +2797,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
     microId: "ce2_multiplication_defi",
     difficulty: 5,
     theme: "reunion",
-    text: "Une classe de 24 élèves part en sortie. Chaque élève emporte 2 bouteilles de 50 cL. Combien de litres d'eau la classe emporte-t-elle ?",
+    text: "Chacun des 24 élèves emporte 2 bouteilles de 50 cL. Combien de litres d'eau en tout ?",
     format: "short",
     expected: ["24"],
     comparator: "number_equal",
@@ -2709,7 +2827,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
         { grand: ["boîte", "boîtes"], v1: "a", ligne: ["rangée", "rangées"], v2: "a", objet: ["œuf", "œufs"] },
         { grand: ["immeuble", "immeubles"], v1: "a", ligne: ["étage", "étages"], v2: "a", objet: ["fenêtre", "fenêtres"] },
         { grand: ["tablette", "tablettes"], v1: "a", ligne: ["rangée", "rangées"], v2: "a", objet: ["carré", "carrés"] },
-        { grand: ["salle de cinéma", "salles de cinéma"], v1: "compte", ligne: ["rangée", "rangées"], v2: "compte", objet: ["fauteuil", "fauteuils"] },
+        { grand: ["salle", "salles"], v1: "compte", ligne: ["rangée", "rangées"], v2: "compte", objet: ["fauteuil", "fauteuils"] },
         { grand: ["train", "trains"], v1: "tire", ligne: ["wagon", "wagons"], v2: "a", objet: ["fenêtre", "fenêtres"] },
         { grand: ["armoire", "armoires"], v1: "a", ligne: ["étagère", "étagères"], v2: "porte", objet: ["classeur", "classeurs"] },
         { grand: ["jardin", "jardins"], v1: "a", ligne: ["allée", "allées"], v2: "est bordée de", objet: ["rosier", "rosiers"] },
@@ -2727,12 +2845,12 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const P = tirePrenom();
       const lignes = s.ligne[1];
       const objets = s.objet[1];
-      const fem = ["boîte", "tablette", "salle de cinéma", "armoire", "étagère"].includes(s.grand[0]);
+      const fem = ["boîte", "tablette", "salle", "armoire", "étagère"].includes(s.grand[0]);
       const unSeul = fem ? `une seule ${s.grand[0]}` : `un seul ${s.grand[0]}`;
       const text = randomChoice([
-        `Chaque ${s.grand[0]} ${s.v1} ${r} ${lignes}, et chaque ${s.ligne[0]} ${s.v2} ${c} ${objets}. Combien ${de(objets)} dans ${k} ${s.grand[1]} ?`,
-        `${P.nom} regarde ${k} ${s.grand[1]} : ${r} ${lignes} par ${s.grand[0]}, ${c} ${objets} par ${s.ligne[0]}. Combien ${de(objets)} en tout ?`,
-        `Il y a ${k} ${s.grand[1]}. Chaque ${s.grand[0]} ${s.v1} ${r} ${lignes} de ${c} ${objets}. Quel est le nombre total ${de(objets)} ?`,
+        `Chaque ${s.grand[0]} ${s.v1} ${r} ${lignes} de ${c} ${objets}. Combien ${de(objets)} dans ${k} ${s.grand[1]} ?`,
+        `${P.nom} voit ${k} ${s.grand[1]} : ${r} ${lignes} par ${s.grand[0]}, ${c} ${objets} par ${s.ligne[0]}. Combien en tout ?`,
+        `Il y a ${k} ${s.grand[1]}. Chaque ${s.grand[0]} ${s.v1} ${r} ${lignes} de ${c} ${objets}. Combien en tout ?`,
       ]);
       return {
         text,
@@ -2745,6 +2863,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `Pour ${unSeul} : ${r} × ${c} = ${parGrand} ${objets}. Pour ${k} ${s.grand[1]} : ${parGrand} × ${k} = ${total}.`,
           `Il y a ${total} ${objets}.`,
         ),
+        ...parfois(0.6, () => barreEgale(k, `${r} × ${c}`, null)),
       };
     },
   },
@@ -2787,6 +2906,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${rond} × ${b} = ${rond * b}, et ${u} × ${b} = ${u * b}. On additionne : ${rond * b} + ${u * b} = ${produit}.`,
           `${n} × ${b} = ${produit}.`,
         ),
+        ...parfois(0.5, () => baseDix(n)),
       };
     },
   },
@@ -2851,13 +2971,13 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const s = randomChoice([
         { lieu: "à la librairie", o1: "livres", o2: "magazines" },
         { lieu: "au marché", o1: "melons", o2: "ananas" },
-        { lieu: "au magasin de sport", o1: "paires de chaussettes", o2: "ballons" },
+        { lieu: "au magasin de sport", o1: "maillots", o2: "ballons" },
         { lieu: "à la papeterie", o1: "classeurs", o2: "trousses" },
         { lieu: "au cinéma", o1: "places", o2: "boissons" },
-        { lieu: "à la fête foraine", o1: "tours de manège", o2: "barbes à papa" },
-        { lieu: "au musée", o1: "billets d'entrée", o2: "cartes postales" },
+        { lieu: "à la fête foraine", o1: "tours de manège", o2: "pommes d'amour" },
+        { lieu: "au musée", o1: "entrées", o2: "cartes postales" },
         { lieu: "chez le fleuriste", o1: "bouquets", o2: "plantes" },
-        { lieu: "à la piscine", o1: "entrées", o2: "bonnets de bain" },
+        { lieu: "à la piscine", o1: "entrées", o2: "bonnets" },
         { lieu: "au zoo", o1: "billets", o2: "glaces" },
         { lieu: "au magasin de jouets", o1: "puzzles", o2: "balles" },
         { lieu: "à la boulangerie", o1: "tartes", o2: "gâteaux" },
@@ -2869,8 +2989,8 @@ export const multiplicationBank: TutorBankItemV4[] = [
       const total = a * x + b * y;
       const P = tirePrenom();
       const text = randomChoice([
-        `${cap(s.lieu)}, ${P.nom} achète ${a} ${s.o1} à ${x} € pièce et ${b} ${s.o2} à ${y} € pièce. Combien paie-t-${P.il} en tout ?`,
-        `${cap(s.lieu)}, on paie ${a} ${s.o1} à ${x} € pièce et ${b} ${s.o2} à ${y} € pièce. Quel est le prix total, en euros ?`,
+        `${P.nom} achète ${a} ${s.o1} à ${x} € pièce et ${b} ${s.o2} à ${y} € pièce. Combien paie-t-${P.il} ?`,
+        `${cap(s.lieu)} : ${a} ${s.o1} à ${x} € pièce et ${b} ${s.o2} à ${y} € pièce. Combien paie-t-on ?`,
       ]);
       return {
         text,
@@ -2883,6 +3003,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           `${a} × ${x} = ${a * x} € et ${b} × ${y} = ${b * y} €. On additionne : ${a * x} + ${b * y} = ${total} €.`,
           `Le total est ${total} €.`,
         ),
+        ...parfois(0.5, () => barre([[s.o1, `${a} × ${x} €`], [s.o2, `${b} × ${y} €`]], null)),
       };
     },
   },

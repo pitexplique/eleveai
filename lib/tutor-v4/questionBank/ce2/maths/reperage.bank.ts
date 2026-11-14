@@ -85,27 +85,27 @@ const PERSOS: Perso[] = [
 
 type Monde = { intro: string; titre: string; choses: string[] };
 const MONDES: Monde[] = [
-  { intro: "Sur la carte au trésor des pirates", titre: "La carte des pirates", choses: ["le coffre", "le perroquet", "le bateau", "la grotte", "le palmier"] },
-  { intro: "Dans le potager de la jardinière", titre: "Le potager", choses: ["la carotte", "le puits", "la brouette", "le rosier", "la citrouille"] },
-  { intro: "Sur le plan du zoo de la vétérinaire", titre: "Le zoo", choses: ["la girafe", "le lion", "le pingouin", "le zèbre", "l'éléphant"] },
-  { intro: "Sur le plan de la ferme", titre: "La ferme", choses: ["la vache", "le poulailler", "le tracteur", "la mare", "le cochon"] },
-  { intro: "Sur la carte de l'astronaute", titre: "La carte du ciel", choses: ["la fusée", "la Lune", "la comète", "le satellite", "l'étoile"] },
-  { intro: "Sur le plan du château", titre: "Le château", choses: ["le dragon", "la tour", "le pont-levis", "le trône", "le chevalier"] },
-  { intro: "Sur le plan de la kermesse", titre: "La kermesse", choses: ["la buvette", "le manège", "le maquillage", "la tombola", "la chorale"] },
-  { intro: "Dans le grand aquarium", titre: "L'aquarium", choses: ["le poisson", "la tortue", "le crabe", "l'hippocampe", "la pieuvre"] },
+  { intro: "Chez les pirates", titre: "La carte des pirates", choses: ["le coffre", "le perroquet", "le bateau", "la grotte", "le palmier"] },
+  { intro: "Au potager", titre: "Le potager", choses: ["la carotte", "le puits", "la brouette", "le rosier", "la citrouille"] },
+  { intro: "Au zoo", titre: "Le zoo", choses: ["la girafe", "le lion", "le pingouin", "le zèbre", "l'éléphant"] },
+  { intro: "À la ferme", titre: "La ferme", choses: ["la vache", "le poulailler", "le tracteur", "la mare", "le cochon"] },
+  { intro: "Dans le ciel", titre: "La carte du ciel", choses: ["la fusée", "la Lune", "la comète", "le satellite", "l'étoile"] },
+  { intro: "Au château", titre: "Le château", choses: ["le dragon", "la tour", "le pont-levis", "le trône", "le chevalier"] },
+  { intro: "À la kermesse", titre: "La kermesse", choses: ["la buvette", "le manège", "le maquillage", "la tombola", "la chorale"] },
+  { intro: "Dans l'aquarium", titre: "L'aquarium", choses: ["le poisson", "la tortue", "le crabe", "l'hippocampe", "la pieuvre"] },
   { intro: "Dans la forêt", titre: "La forêt", choses: ["le hibou", "la cabane", "le champignon", "le renard", "l'écureuil"] },
-  { intro: "Sur le plan de la cour de récré", titre: "La cour", choses: ["le toboggan", "la marelle", "le banc", "le préau", "la cabane"] },
-  { intro: "Sur le plan du cirque", titre: "Le cirque", choses: ["le clown", "l'éléphant", "le trapèze", "la piste", "le jongleur"] },
-  { intro: "Sur le plan du marché", titre: "Le marché", choses: ["la boulangère", "le fromager", "le fleuriste", "le primeur", "le boucher"] },
-  { intro: "Dans la cuisine du chef", titre: "La cuisine", choses: ["le four", "le frigo", "l'évier", "la table", "le gâteau"] },
-  { intro: "Sur la carte du parc des dinosaures", titre: "Le parc", choses: ["le T-rex", "le tricératops", "le diplodocus", "l'œuf géant", "le volcan"] },
-  { intro: "Sur le plan de la caserne des pompiers", titre: "La caserne", choses: ["le camion", "l'échelle", "le tuyau", "la sirène", "le casque"] },
-  { intro: "Sur le plan de la bibliothèque", titre: "La bibliothèque", choses: ["le coin BD", "le tapis", "l'ordinateur", "le bureau", "le fauteuil"] },
-  { intro: "Sur le plan de la piscine", titre: "La piscine", choses: ["le plongeoir", "le toboggan", "le bassin", "la douche", "le vestiaire"] },
-  { intro: "Sur le plan de la gare", titre: "La gare", choses: ["le train", "le guichet", "l'horloge", "le quai", "le kiosque"] },
+  { intro: "Dans la cour", titre: "La cour", choses: ["le toboggan", "la marelle", "le banc", "le préau", "la cabane"] },
+  { intro: "Au cirque", titre: "Le cirque", choses: ["le clown", "l'éléphant", "le trapèze", "la piste", "le jongleur"] },
+  { intro: "Au marché", titre: "Le marché", choses: ["la boulangère", "le fromager", "le fleuriste", "le primeur", "le boucher"] },
+  { intro: "Dans la cuisine", titre: "La cuisine", choses: ["le four", "le frigo", "l'évier", "la table", "le gâteau"] },
+  { intro: "Au parc des dinosaures", titre: "Le parc", choses: ["le T-rex", "le tricératops", "le diplodocus", "l'œuf géant", "le volcan"] },
+  { intro: "À la caserne", titre: "La caserne", choses: ["le camion", "l'échelle", "le tuyau", "la sirène", "le casque"] },
+  { intro: "À la bibliothèque", titre: "La bibliothèque", choses: ["le coin BD", "le tapis", "l'ordinateur", "le bureau", "le fauteuil"] },
+  { intro: "À la piscine", titre: "La piscine", choses: ["le plongeoir", "le toboggan", "le bassin", "la douche", "le vestiaire"] },
+  { intro: "À la gare", titre: "La gare", choses: ["le train", "le guichet", "l'horloge", "le quai", "le kiosque"] },
 ];
 // ⛔ La Réunion : un contexte sur vingt-cinq environ, pas plus.
-const REUNION: Monde = { intro: "Sur la carte du Piton de la Fournaise", titre: "Le volcan", choses: ["le cratère", "le gîte", "le sentier", "le parking", "la cascade"] };
+const REUNION: Monde = { intro: "Au Piton de la Fournaise", titre: "Le volcan", choses: ["le cratère", "le gîte", "le sentier", "le parking", "la cascade"] };
 
 const monde = (): Monde => (Math.random() < 0.04 ? REUNION : un(MONDES));
 const perso = () => un(PERSOS);
@@ -276,7 +276,6 @@ const GAB_COORDONNEES_3_4: TutorBankItemV4[] = [
         `Quel est le repérage ${de(c)} ?`,
         `Aide ${P.n} : quel est le repérage ${de(c)} ?`,
         `Quels sont les deux nombres ${de(c)} ?`,
-        `Où ${P.n} doit-${P.p} aller ? Choisis le bon repérage.`,
       ])}`,
       ...qcmPt(x, y, [[y, x], [x + 1, y], [x, y + 1], [x - 1, y], [x, y - 1]]),
       explanation: etapes(
@@ -304,8 +303,8 @@ const GAB_COORDONNEES_3_4: TutorBankItemV4[] = [
     return {
       text: `${m.intro}, ${P.n} place ${c} en ${pt(x, y)}. ${un(
         droite
-          ? [`De combien de cases avance-t-${P.p} vers la droite ?`, `Combien de cases compte-t-${P.p} vers la droite ?`, `Combien de cases vers la droite, depuis le coin ?`]
-          : [`De combien de cases monte-t-${P.p} ?`, `Combien de cases compte-t-${P.p} vers le haut ?`, `Combien de cases vers le haut, depuis le coin ?`],
+          ? [`De combien de cases avance-t-${P.p} vers la droite ?`, `Combien de cases compte-t-${P.p} vers la droite ?`, `Combien de cases vers la droite ?`]
+          : [`De combien de cases monte-t-${P.p} ?`, `Combien de cases compte-t-${P.p} vers le haut ?`, `Combien de cases vers le haut ?`],
       )}`,
       ...qcmCases(n, [autre, n + 1, n - 1, x + y]),
       explanation: etapes(
@@ -329,7 +328,7 @@ const GAB_COORDONNEES_3_4: TutorBankItemV4[] = [
     const o = OPPOSE[d];
     return {
       text: `${cap(c1)} est en ${pt(x, y)}. ${P.n} pose ${c2} ${cases(k)} ${ou}. ${un([
-        `Quel est le repérage ${de(c2)} ?`,
+        "Quel est son repérage ?",
         `Où est ${c2} ?`,
         `Quel repérage doit-${P.p} écrire ?`,
       ])}`,
@@ -385,6 +384,9 @@ const BOUGER: Record<Dir, string[]> = {
   bas: ["descend de #", "va de # vers le bas"],
 };
 const bouge = (d: Dir, k: number) => un(BOUGER[d]).replace("#", cases(k));
+/** Un déplacement en liste courte : « 4 cases à gauche », puis « 1 en bas ». */
+const OU: Record<Dir, string> = { droite: "à droite", gauche: "à gauche", haut: "en haut", bas: "en bas" };
+const mv = (d: Dir, k: number, premier = false) => `${premier ? cases(k) : k} ${OU[d]}`;
 
 const GAB_DEPLACEMENT: TutorBankItemV4[] = [
   // ★2 — un seul déplacement.
@@ -396,7 +398,7 @@ const GAB_DEPLACEMENT: TutorBankItemV4[] = [
     const L = un(LETTRES);
     const o = OPPOSE[d];
     return {
-      text: `${un(["On part du point", "Le pion part du point", "Le jeton part du point"])} ${L} ${pt(x, y)}. Il ${bouge(d, k)}. ${un(["Où arrive-t-il ?", "Quel est le repérage d'arrivée ?", "Sur quel repérage s'arrête-t-il ?"])}`,
+      text: `${un(["Le robot", "Le pion", "Le jeton"])} part du point ${L} ${pt(x, y)}. Il ${bouge(d, k)}. ${un(["Où arrive-t-il ?", "Où s'arrête-t-il ?"])}`,
       ...qcmPt(x2, y2, [
         [x + DX[o] * k, y + DY[o] * k],
         [x + DY[d] * k, y + DX[d] * k],
@@ -457,7 +459,7 @@ const GAB_DEPLACEMENT: TutorBankItemV4[] = [
     const { x, y } = depart(dx, dy);
     const x2 = x + dx, y2 = y + dy;
     return {
-      text: `${P.n} part ${de(c)}, en ${pt(x, y)}. ${cap(P.p)} ${bouge(h, kx)}, puis ${bouge(v, ky)}. ${un([`Où arrive-t-${P.p} ?`, `Quel est son repérage d'arrivée ?`, `Sur quel point s'arrête-t-${P.p} ?`])}`,
+      text: `${P.n} part ${de(c)} ${pt(x, y)} : ${mv(h, kx, true)}, puis ${mv(v, ky)}. ${un([`Où arrive-t-${P.p} ?`, `Où s'arrête-t-${P.p} ?`])}`,
       ...qcmPt(x2, y2, [
         [x - dx, y2],
         [x2, y - dy],
@@ -520,8 +522,8 @@ const GAB_DEPLACEMENT: TutorBankItemV4[] = [
     const n = surX ? kx : ky;
     const d = surX ? h : v;
     return {
-      text: `${P.n} part ${de(c1)}, en ${pt(x, y)}, et va ${a(c2)}, en ${pt(x2, y2)}. ${un([
-        `De combien de cases va-t-${P.p} ${VERS[d]} ?`,
+      text: `${P.n} va ${de(c1)} ${pt(x, y)} ${a(c2)} ${pt(x2, y2)}. ${un([
+        `Combien de cases ${VERS[d]} ?`,
         `Combien de cases fait-${P.p} ${VERS[d]} ?`,
       ])}`,
       ...qcmCases(n, [n + 1, n - 1, surX ? x2 : y2, surX ? ky : kx]),
@@ -550,7 +552,7 @@ const GAB_DEPLACEMENT: TutorBankItemV4[] = [
     const { x, y } = depart(DX[h] * k1, fy);
     const x2 = x + fx, y2 = y + fy;
     return {
-      text: `${P.n} part ${de(c)}, en ${pt(x, y)}. ${cap(P.p)} ${bouge(h, k1)}, ${bouge(v, k2)}, puis ${bouge(OPPOSE[h], k3)}. ${un([`Où arrive-t-${P.p} ?`, "Quel est le repérage d'arrivée ?"])}`,
+      text: `${P.n} part ${de(c)} : ${mv(h, k1, true)}, ${mv(v, k2)}, puis ${mv(OPPOSE[h], k3)}. ${un([`Où arrive-t-${P.p} ?`, `Où s'arrête-t-${P.p} ?`])}`,
       ...qcmPt(x2, y2, [
         [x + DX[h] * (k1 + k3), y2],
         [x + DX[h] * k1, y2],
@@ -686,7 +688,7 @@ const GAB_PLAN: TutorBankItemV4[] = [
       aucune: "ni la même ligne, ni la même colonne",
     };
     return {
-      text: `${m.intro}, ${c1} est en case ${k1} et ${c2} en case ${k2}. ${un(["Que peut-on dire de ces deux cases ?", "Comment sont placées ces deux cases ?", "Que remarques-tu ?"])}`,
+      text: `${m.intro}, ${c1} est en ${k1} et ${c2} en ${k2}. ${un(["Que remarques-tu ?", "Comment sont-elles placées ?"])}`,
       ...qcm(R[cas], [...Object.values(R), "elles sont dans la même case"]),
       explanation: etapes(
         "Même nombre : même ligne. Même lettre : même colonne.",
@@ -710,7 +712,7 @@ const GAB_PLAN: TutorBankItemV4[] = [
     const autre = casesDuPlan(10, 4, 4).find((c) => c !== case1 && c !== case2)!;
     const vers = enLigne ? (i2 > i1 ? "vers la droite" : "vers la gauche") : i2 > i1 ? "vers le bas" : "vers le haut";
     return {
-      text: `${m.intro}, ${P.n} va ${de(c1)} ${a(c2)}, tout droit ${vers}. ${un([`De combien de cases avance-t-${P.p} ?`, `Combien de cases traverse-t-${P.p} ?`])}`,
+      text: `${m.intro}, ${P.n} va ${de(c1)} ${a(c2)}, ${vers}. ${un([`De combien de cases avance-t-${P.p} ?`, `Combien de cases traverse-t-${P.p} ?`])}`,
       ...qcmCases(k, [k + 1, k - 1, i2 + 1, k + 2]),
       explanation: etapes(
         `On part de la case ${case1} et on compte les cases jusqu'à ${case2}.`,
@@ -738,7 +740,7 @@ const GAB_DEFI: TutorBankItemV4[] = [
     const x2 = x + DX[h] * kx, y2 = y + DY[v] * ky;
     const chemin = (a1: number, d1: Dir, a2: number, d2: Dir) => `${cases(a1)} ${VERS[d1]}, puis ${cases(a2)} ${VERS[d2]}`;
     return {
-      text: `${P.n} part ${de(c1)}, en ${pt(x, y)}. ${cap(P.p)} veut aller ${a(c2)}, en ${pt(x2, y2)}. Quel déplacement choisir ?`,
+      text: `${P.n} part ${de(c1)} ${pt(x, y)} et veut aller ${a(c2)} ${pt(x2, y2)}. Quel déplacement choisir ?`,
       ...qcm(chemin(kx, h, ky, v), [
         chemin(x2 || 1, h, y2 || 1, v),
         chemin(ky, h, kx, v),
@@ -770,7 +772,7 @@ const GAB_DEFI: TutorBankItemV4[] = [
     const { x, y } = depart(DX[h] * kx, DY[v] * kv);
     const x2 = x + DX[h] * kx;
     return {
-      text: `${P.n} part ${de(c)}, en ${pt(x, y)}. ${cap(P.p)} ${bouge(h, kx)}, ${bouge(v, kv)}, puis ${bouge(OPPOSE[v], kv)}. ${un([`Où arrive-t-${P.p} ?`, "Quel est le repérage d'arrivée ?"])}`,
+      text: `${P.n} part ${de(c)} : ${mv(h, kx, true)}, ${mv(v, kv)}, puis ${mv(OPPOSE[v], kv)}. ${un([`Où arrive-t-${P.p} ?`, `Où s'arrête-t-${P.p} ?`])}`,
       ...qcmPt(x2, y, [
         [x2, y + DY[v] * kv],
         [x2, y + DY[v] * 2 * kv],
@@ -868,7 +870,7 @@ const FIGES: TutorBankItemV4[] = [
     microId: "ce2_reperage_coordonnees",
     difficulty: 4,
     theme: "neutral",
-    text: "Le point A est repéré par (4 ; 2). Un élève le place en avançant de 2 vers la droite puis en montant de 4. A-t-il raison ?",
+    text: "Pour placer A (4 ; 2), un élève va 2 à droite, puis monte de 4. A-t-il raison ?",
     format: "qcm",
     choices: [
       "non, il a inversé les deux nombres",
@@ -958,7 +960,7 @@ const FIGES: TutorBankItemV4[] = [
     microId: "ce2_reperage_deplacement",
     difficulty: 3,
     theme: "neutral",
-    text: "On part du point (1 ; 1). On avance de 3 cases vers la droite, puis de 2 cases vers le haut. Où arrive-t-on ?",
+    text: "On part de (1 ; 1) : 3 cases à droite, puis 2 en haut. Où arrive-t-on ?",
     format: "qcm",
     choices: ["(4 ; 3)", "(3 ; 2)", "(3 ; 3)", "(4 ; 2)"],
     expected: ["(4 ; 3)"],
@@ -1034,7 +1036,7 @@ const FIGES: TutorBankItemV4[] = [
     microId: "ce2_reperage_plan",
     difficulty: 4,
     theme: "reunion",
-    text: "Sur le plan de Saint-Pierre, la mairie est en case C2 et le marché en case B2. Que peut-on dire de leur position ?",
+    text: "Sur un plan, la mairie est en C2 et le marché en B2. Que dire de leur position ?",
     format: "qcm",
     choices: [
       "elles sont sur la même ligne, dans deux colonnes voisines",
@@ -1122,7 +1124,7 @@ const FIGES: TutorBankItemV4[] = [
     microId: "ce2_reperage_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "On part de (2 ; 3), on avance de 2 vers la droite, on monte de 1, puis on redescend de 1. Où arrive-t-on ?",
+    text: "On part de (2 ; 3) : 2 cases à droite, 1 en haut, puis 1 en bas. Où arrive-t-on ?",
     format: "qcm",
     choices: ["(4 ; 3)", "(4 ; 4)", "(4 ; 2)", "(2 ; 3)"],
     expected: ["(4 ; 3)"],

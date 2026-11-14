@@ -37,6 +37,7 @@
 // `format: "open"`. Un CE1 clique, il ne tape pas.
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { PersonnageCanvasData, PersonnageId } from "@/lib/tutor-v4/types_canvas";
 import {
   baseDix,
   court,
@@ -60,6 +61,7 @@ import {
   randomChoice,
   randomInt,
   shuffle,
+  suite,
   tirerDessin,
   troisChiffres,
   type Personne,
@@ -104,37 +106,36 @@ const acteur = (g: Groupe) => (g.metier && Math.random() < 0.4 ? g.metier : quel
 /** Les phrases qui présentent un dessin de cubes. */
 const introCubes = (p: Personne) =>
   randomChoice([
-    `${p.nom} a rangé ses cubes en plaques, en barres et en cubes seuls.`,
     `Voici les cubes ${de(p.nom)}.`,
-    `Pic le paille-en-queue a empilé ces cubes.`,
-    `La maîtresse a posé ce matériel sur la table.`,
-    `${p.nom} construit un château avec ces cubes.`,
-    `Dans la boîte ${de(p.nom)}, il y a ces cubes.`,
-    `${p.nom} a gagné ces cubes à la kermesse.`,
-    `Regarde le matériel ${de(p.nom)}.`,
+    `Pic a empilé ces cubes.`,
+    `${p.nom} a ces cubes.`,
+    `Le château de cubes ${de(p.nom)}.`,
+    `La boîte ${de(p.nom)}.`,
+    `${p.nom} a gagné ces cubes.`,
+    `Le matériel ${de(p.nom)}.`,
   ]);
 const Q_TOTAL_CUBES = [
-  "Combien de cubes y a-t-il en tout ?",
-  "Combien de petits cubes cela fait-il ?",
-  "Quel nombre de cubes est dessiné ?",
-  "Compte les cubes : combien en tout ?",
+  "Combien de cubes en tout ?",
+  "Combien de petits cubes ?",
+  "Quel nombre est dessiné ?",
+  "Compte les cubes : combien ?",
 ];
 
 /** Un nombre qu'on lit dans la vie : dossard, pages, numéro de maison… */
 const numeroDans = (p: Personne, n: number) =>
   randomChoice([
-    `Le dossard ${de(p.nom)} porte le numéro ${n}.`,
+    `Le dossard ${de(p.nom)} : ${n}.`,
     `Le livre ${de(p.nom)} a ${n} pages.`,
-    `${p.nom} habite au numéro ${n} de sa rue.`,
-    `Le ticket ${de(p.nom)} porte le numéro ${n}.`,
-    `Pic le paille-en-queue a caché ${n} graines.`,
-    `Le train ${de(p.nom)} porte le numéro ${n}.`,
-    `Le car de la sortie au zoo porte le numéro ${n}.`,
-    `${p.nom} a marqué ${n} points au jeu.`,
-    `Le robot ${de(p.nom)} porte le numéro ${n}.`,
-    `Le code du cadenas ${de(p.nom)} est ${n}.`,
-    `La bibliothécaire range le livre numéro ${n}.`,
-    `Au cirque, ${n} enfants regardent le clown.`,
+    `${p.nom} habite au ${n}.`,
+    `Le ticket ${de(p.nom)} : ${n}.`,
+    `Pic a caché ${n} graines.`,
+    `Le train porte le numéro ${n}.`,
+    `Le car du zoo : numéro ${n}.`,
+    `${p.nom} a marqué ${n} points.`,
+    `Le robot ${de(p.nom)} : ${n}.`,
+    `Le code du cadenas : ${n}.`,
+    `Le livre numéro ${n}.`,
+    `Au cirque, ${n} enfants.`,
   ]);
 
 const RANGS = [
@@ -160,20 +161,24 @@ function decomposition(c: number, d: number, u: number) {
 }
 
 /** Les quantités qu'on compare entre enfants. */
-const QUANTITES: readonly { dire: (n: number) => string; plus: string; moins: string }[] = [
-  { dire: (n) => `a ${n} billes`, plus: "Qui a le plus de billes ?", moins: "Qui a le moins de billes ?" },
-  { dire: (n) => `a marqué ${n} points`, plus: "Qui a marqué le plus de points ?", moins: "Qui a marqué le moins de points ?" },
-  { dire: (n) => `a lu ${n} pages`, plus: "Qui a lu le plus de pages ?", moins: "Qui a lu le moins de pages ?" },
-  { dire: (n) => `a collé ${n} gommettes`, plus: "Qui a collé le plus de gommettes ?", moins: "Qui a collé le moins de gommettes ?" },
-  { dire: (n) => `a ramassé ${n} coquillages`, plus: "Qui a ramassé le plus de coquillages ?", moins: "Qui a ramassé le moins de coquillages ?" },
-  { dire: (n) => `a planté ${n} graines`, plus: "Qui a planté le plus de graines ?", moins: "Qui a planté le moins de graines ?" },
-  { dire: (n) => `a fait ${n} sauts à la corde`, plus: "Qui a fait le plus de sauts ?", moins: "Qui a fait le moins de sauts ?" },
-  { dire: (n) => `a compté ${n} étoiles`, plus: "Qui a compté le plus d'étoiles ?", moins: "Qui a compté le moins d'étoiles ?" },
-  { dire: (n) => `a ${n} cartes de dinosaures`, plus: "Qui a le plus de cartes ?", moins: "Qui a le moins de cartes ?" },
-  { dire: (n) => `a vendu ${n} tickets de tombola`, plus: "Qui a vendu le plus de tickets ?", moins: "Qui a vendu le moins de tickets ?" },
-  { dire: (n) => `a nagé ${n} mètres`, plus: "Qui a nagé le plus loin ?", moins: "Qui a nagé le moins loin ?" },
-  { dire: (n) => `a ${n} perles`, plus: "Qui a le plus de perles ?", moins: "Qui a le moins de perles ?" },
+const QUANTITES: readonly { titre: string; dire: (n: number) => string; plus: string; moins: string }[] = [
+  { titre: "Billes", dire: (n) => `a ${n} billes`, plus: "Qui a le plus de billes ?", moins: "Qui a le moins de billes ?" },
+  { titre: "Points", dire: (n) => `a marqué ${n} points`, plus: "Qui a marqué le plus de points ?", moins: "Qui a marqué le moins de points ?" },
+  { titre: "Pages lues", dire: (n) => `a lu ${n} pages`, plus: "Qui a lu le plus de pages ?", moins: "Qui a lu le moins de pages ?" },
+  { titre: "Gommettes", dire: (n) => `a collé ${n} gommettes`, plus: "Qui a collé le plus de gommettes ?", moins: "Qui a collé le moins de gommettes ?" },
+  { titre: "Coquillages", dire: (n) => `a ramassé ${n} coquillages`, plus: "Qui a ramassé le plus de coquillages ?", moins: "Qui a ramassé le moins de coquillages ?" },
+  { titre: "Graines plantées", dire: (n) => `a planté ${n} graines`, plus: "Qui a planté le plus de graines ?", moins: "Qui a planté le moins de graines ?" },
+  { titre: "Sauts à la corde", dire: (n) => `a fait ${n} sauts à la corde`, plus: "Qui en a fait le plus ?", moins: "Qui en a fait le moins ?" },
+  { titre: "Étoiles comptées", dire: (n) => `a compté ${n} étoiles`, plus: "Qui a compté le plus d'étoiles ?", moins: "Qui a compté le moins d'étoiles ?" },
+  { titre: "Cartes de dinosaures", dire: (n) => `a ${n} cartes de dinosaures`, plus: "Qui a le plus de cartes ?", moins: "Qui a le moins de cartes ?" },
+  { titre: "Tickets de tombola vendus", dire: (n) => `a vendu ${n} tickets de tombola`, plus: "Qui en a vendu le plus ?", moins: "Qui en a vendu le moins ?" },
+  { titre: "Mètres nagés", dire: (n) => `a nagé ${n} mètres`, plus: "Qui a nagé le plus loin ?", moins: "Qui a nagé le moins loin ?" },
+  { titre: "Perles", dire: (n) => `a ${n} perles`, plus: "Qui a le plus de perles ?", moins: "Qui a le moins de perles ?" },
 ];
+
+/** « Billes : Nina 524, Téo 529. » — le nom de l'objet une seule fois. */
+const tableau = (ctx: { titre: string }, gens: readonly [Personne, number][]) =>
+  `${ctx.titre} : ${gens.map(([e, n]) => `${e.nom} ${n}`).join(", ")}.`;
 
 /** Deux nombres à trois chiffres PROCHES : c'est là qu'on se trompe. */
 function deuxProches(): [number, number] {
@@ -210,20 +215,32 @@ function deuxProches(): [number, number] {
 const FILES: readonly { qui: string; lieu: string }[] = [
   { qui: "enfants", lieu: "au toboggan" },
   { qui: "enfants", lieu: "à la cantine" },
-  { qui: "enfants", lieu: "devant le manège" },
-  { qui: "enfants", lieu: "pour monter dans le bus" },
-  { qui: "personnes", lieu: "à la caisse du marché" },
-  { qui: "enfants", lieu: "devant la piscine" },
-  { qui: "enfants", lieu: "pour voir le dragon du carnaval" },
+  { qui: "enfants", lieu: "au manège" },
+  { qui: "enfants", lieu: "pour le bus" },
+  { qui: "personnes", lieu: "à la caisse" },
+  { qui: "enfants", lieu: "à la piscine" },
+  { qui: "enfants", lieu: "au carnaval" },
   { qui: "personnes", lieu: "à la boulangerie" },
-  { qui: "enfants", lieu: "pour entrer au cirque" },
-  { qui: "enfants", lieu: "pour la photo de classe" },
-  { qui: "enfants", lieu: "devant l'enclos des girafes" },
-  { qui: "enfants", lieu: "pour monter dans la fusée du parc" },
+  { qui: "enfants", lieu: "au cirque" },
+  { qui: "enfants", lieu: "pour la photo" },
+  { qui: "enfants", lieu: "chez les girafes" },
+  { qui: "enfants", lieu: "au parc" },
   { qui: "personnes", lieu: "chez la vétérinaire" },
   { qui: "enfants", lieu: "à la bibliothèque" },
 ];
 const leLaP = (p: Personne) => (p.il === "elle" ? "la" : "le");
+
+/** La troupe dessinée, qui montre ses cartes ou pense à un nombre. */
+const PARLEURS: readonly { id: PersonnageId; nom: string }[] = [
+  { id: "nina", nom: "Nina" },
+  { id: "teo", nom: "Téo" },
+  { id: "zoe", nom: "Zoé" },
+  { id: "ravi", nom: "Ravi" },
+  { id: "pic", nom: "Pic" },
+];
+function parle(id: PersonnageId, texte: string, forme: "parole" | "pensee" = "parole"): PersonnageCanvasData {
+  return { kind: "personnage", personnage: id, pose: "montre", expression: randomChoice(["sourire", "pense"] as const), bulle: { texte, forme }, mode: "couleur" };
+}
 const luiElle = (p: Personne) => (p.il === "elle" ? "elle" : "lui");
 
 /** Une file d'objets tous différents, dessinée de gauche à droite. */
@@ -304,21 +321,12 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
         // Une collection de la vie, rangée par cent et par dix.
         () => {
           const g = randomChoice(GROUPES);
-          const qui = acteur(g);
           const c = randomInt(1, 9);
           const d = randomInt(1, 9);
           const u = randomInt(1, 9);
           const n = c * 100 + d * 10 + u;
-          const phrase = randomChoice([
-            `${qui} a ${gros(g, c)}, ${moyen(g, d)} et ${seul(g, u)}.`,
-            `${qui} compte ${sesObj(g)} : ${gros(g, c)}, ${moyen(g, d)} et ${seul(g, u)}.`,
-            `Sur la table, il y a ${gros(g, c)} ${g.obj}, ${moyen(g, d)} et ${seul(g, u)}.`,
-          ]);
-          const question = randomChoice([
-            `Combien ${de(g.obj)} en tout ?`,
-            `Combien ${de(g.obj)} cela fait-il ?`,
-            `Quel est le nombre ${de(g.obj)} ?`,
-          ]);
+          const phrase = `${maj(g.obj)} : ${gros(g, c)}, ${moyen(g, d)} et ${u} ${pl(u, g.f ? "seule" : "seul", g.f ? "seules" : "seuls")}.`;
+          const question = "Combien en tout ?";
           return court(
             `${phrase} ${question}`,
             n,
@@ -353,9 +361,9 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const u = randomInt(11, 19);
           const n = c * 100 + d * 10 + u;
           const alerte = randomChoice([
-            "Attention : il y a beaucoup de cubes seuls !",
-            "Il y a plus de dix cubes seuls.",
-            "Les cubes seuls ne sont pas encore rangés.",
+            "Attention aux cubes seuls !",
+            "Plus de dix cubes seuls !",
+            "",
             "",
           ]);
           return court(
@@ -378,7 +386,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const u = randomInt(0, 9);
           const n = c * 100 + d * 10 + u;
           return court(
-            `${introCubes(p)} ${randomChoice(["Il y a plus de dix barres.", "Regarde bien les barres.", ""])} ${randomChoice(Q_TOTAL_CUBES)}`.replace(/\s+/g, " "),
+            `${introCubes(p)} ${randomChoice(["Plus de dix barres !", "Attention aux barres !", ""])} ${randomChoice(Q_TOTAL_CUBES)}`.replace(/\s+/g, " "),
             n,
             exp(
               "Dix barres de dix font une plaque de cent.",
@@ -397,7 +405,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const u = randomInt(11, 19);
           const n = d * 10 + u;
           return court(
-            `${qui} a ${moyen(g, d)} et ${seul(g, u)}. ${randomChoice([`Combien ${de(g.obj)} en tout ?`, `Combien ${de(g.obj)} cela fait-il ?`])}`,
+            `${qui} a ${moyen(g, d)} et ${seul(g, u)}. ${randomChoice(["Combien en tout ?", "Combien cela fait-il ?"])}`,
             n,
             exp(
               "Quand il reste plus de dix objets seuls, on peut encore faire un paquet de dix.",
@@ -424,7 +432,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
     microId: "ce1_entier_construire_collection",
     difficulty: 3,
     theme: "neutral",
-    text: "J'ai besoin de 235 timbres. Ils sont vendus par plaques de cent, par carnets de dix, ou à l'unité. Quelle commande fait exactement 235 ?",
+    text: "Timbres : en plaques de cent, en carnets de dix ou seuls. Que prendre pour 235 timbres ?",
     format: "qcm",
     choices: [
       "2 plaques, 3 carnets et 5 timbres",
@@ -452,7 +460,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
     microId: "ce1_entier_construire_collection",
     difficulty: 4,
     theme: "neutral",
-    text: "Il n'y a plus de plaques de cent timbres. Combien de carnets de dix faut-il pour faire 200 timbres ?",
+    text: "Plus de plaques de cent ! Combien de carnets de dix pour 200 timbres ?",
     format: "short",
     expected: ["20"],
     comparator: "number_equal",
@@ -488,13 +496,13 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const quoi = { u: "de cubes seuls", d: "de barres de dix", c: "de plaques de cent" }[manque];
           const rep = { u, d, c }[manque];
           const debut = randomChoice([
-            `${p.nom} veut montrer le nombre ${n} avec du matériel.`,
-            `${p.nom} doit fabriquer ${n} avec des cubes.`,
-            `Pic le paille-en-queue veut construire le nombre ${n}.`,
-            `La maîtresse demande à ${p.nom} de montrer ${n}.`,
+            `${p.nom} veut faire ${n}.`,
+            `${p.nom} doit fabriquer ${n}.`,
+            `Pic veut construire ${n}.`,
+            `On veut montrer ${n}.`,
           ]);
           return court(
-            `${debut} Il y a déjà ${deja}. Combien ${quoi} faut-il ajouter ?`,
+            `${debut} Voici ${deja}. Combien ${quoi} ajouter ?`,
             rep,
             exp(
               "Chaque chiffre d'un nombre dit combien il faut de groupes de sa taille.",
@@ -508,13 +516,12 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
         // En mots : il manque un rang à la commande.
         () => {
           const g = randomChoice(GROUPES);
-          const qui = acteur(g);
           const [c, d, u] = [randomInt(1, 9), randomInt(1, 9), randomInt(1, 9)];
           const n = c * 100 + d * 10 + u;
           const manque = randomChoice(["u", "d"] as const);
           if (manque === "u") {
             return court(
-              `${qui} doit réunir ${n} ${g.obj}. ${randomChoice(["On prend", "Il y a déjà"])} ${gros(g, c)} et ${moyen(g, d)}. Combien ${de(seuls(g))} faut-il encore ?`,
+              `Pour ${n} ${g.obj} : ${gros(g, c)}, ${moyen(g, d)} et combien ${g.obj.includes(" ") ? (g.f ? "de seules" : "de seuls") : de(seuls(g))} ?`,
               u,
               exp(
                 "Chaque chiffre d'un nombre dit combien il faut de groupes de sa taille.",
@@ -525,7 +532,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
             );
           }
           return court(
-            `${qui} doit réunir ${n} ${g.obj}. ${randomChoice(["On prend", "Il y a déjà"])} ${gros(g, c)} et ${seul(g, u)}. Combien de ${g.moyen[1]} de dix faut-il ?`,
+            `Pour ${n} ${g.obj} : ${gros(g, c)}, ${seul(g, u)} et combien de ${g.moyen[1]} de dix ?`,
             d,
             exp(
               "Le chiffre des dizaines dit combien il faut de paquets de dix.",
@@ -538,12 +545,11 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
         // La bonne commande, parmi quatre.
         () => {
           const g = randomChoice(GROUPES);
-          const qui = acteur(g);
           const [c, d, u] = troisChiffres();
           const n = c * 100 + d * 10 + u;
           const cmd = (x: number, y: number, z: number) => `${gros(g, x).replace(" de cent", "")}, ${y} ${pl(y, g.moyen[0], g.moyen[1])} et ${z} ${pl(z, g.obj1, g.obj)}`;
           return qcm(
-            `${qui} veut exactement ${n} ${g.obj}. Il y a des ${g.gros[1]} de cent, des ${g.moyen[1]} de dix et des ${seuls(g)}. Que faut-il prendre ?`,
+            `${maj(g.obj)} : ${g.gros[1]} de cent, ${g.moyen[1]} de dix ou ${g.f ? "seules" : "seuls"}. Que prendre pour ${n} ?`,
             cmd(c, d, u),
             [cmd(c, u, d), cmd(d, c, u), cmd(u, d, c), cmd(c + 1, d, u)],
             exp(
@@ -576,7 +582,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const k = randomInt(11, 60);
           const n = k * 10;
           return court(
-            `Il n'y a plus ${de(g.gros[1])} de cent. ${qui} veut ${n} ${g.obj} en ${g.moyen[1]} de dix. Combien de ${g.moyen[1]} faut-il ?`,
+            `${qui} veut ${n} ${g.obj}, en ${g.moyen[1]} de dix seulement. Combien de ${g.moyen[1]} ?`,
             k,
             exp(
               "Une centaine, c'est dix dizaines.",
@@ -591,7 +597,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const p = quelquun();
           const c = randomInt(1, 3);
           return court(
-            `${randomChoice([`${p.nom} veut échanger ces plaques de cent contre des barres de dix.`, `Pic le paille-en-queue casse ces plaques en barres de dix.`, `${p.nom} n'a que des barres de dix pour refaire ces plaques.`])} Combien de barres ${randomChoice(["lui faut-il", "obtient-on", "faut-il"])} ?`,
+            `${randomChoice([`${p.nom} échange ces plaques contre des barres de dix.`, `Pic casse ces plaques en barres de dix.`, `${p.nom} refait ces plaques en barres de dix.`])} Combien de barres ?`,
             c * 10,
             exp(
               "Une plaque de cent, c'est dix barres de dix.",
@@ -610,7 +616,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const k = c * 10 + d;
           const dire = (x: number, y: number) => `${x} ${pl(x, "barre", "barres")} et ${y} ${pl(y, "cube", "cubes")}`;
           return qcm(
-            `${p.nom} n'a plus de plaques de cent. ${maj(p.il)} veut faire ${n} avec des barres de dix et des cubes. Que prend-${p.il} ?`,
+            `${p.nom} fait ${n} sans plaque, avec des barres et des cubes. Que prend-${p.il} ?`,
             dire(k, u),
             [dire(d, u), dire(c, d * 10 + u), dire(k, u * 10), dire(k + 1, u)],
             exp(
@@ -692,7 +698,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
         const u = randomInt(1, 9);
         const n = c * 100 + u;
         return qcm(
-          `${introCubes(p)} Il n'y a aucune barre. ${randomChoice(["Comment se lit ce nombre ?", "Comment s'écrit ce nombre en lettres ?"])}`,
+          `${introCubes(p)} Aucune barre. ${randomChoice(["Comment se lit ce nombre ?", "Ce nombre en lettres ?"])}`,
           enLettres(n),
           [enLettres(c * 10 + u), enLettres(c * 100 + u * 10), enLettres(u * 100 + c), enLettres(n + 100 > 999 ? n - 100 : n + 100)],
           exp(
@@ -767,7 +773,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const p = quelquun();
           const k = randomInt(1, 9);
           return court(
-            `${randomChoice([`${p.nom} a posé ces plaques de cent.`, `Voici les plaques de cent ${de(p.nom)}.`, `Pic le paille-en-queue s'est posé sur ces plaques de cent.`, `${p.nom} range ces plaques dans sa boîte.`])} ${randomChoice(["Combien de cubes en tout ?", "Quel nombre montrent-elles ?", "Combien de petits cubes cela fait-il ?"])}`,
+            `${randomChoice([`${p.nom} a posé ces plaques de cent.`, `Voici les plaques ${de(p.nom)}.`, `Pic s'est posé sur ces plaques.`, `${p.nom} range ces plaques.`])} ${randomChoice(["Combien de cubes en tout ?", "Quel nombre montrent-elles ?", "Combien de petits cubes ?"])}`,
             k * 100,
             exp(
               "Une plaque de cent vaut 100.",
@@ -803,7 +809,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const p = quelquun();
           return court(
             randomChoice([
-              `${p.nom} veut fabriquer une plaque de cent avec des barres de dix. Combien de barres lui faut-il ?`,
+              `${p.nom} fait une plaque de cent avec des barres de dix. Combien de barres ?`,
               `${p.nom} demande : combien de barres de dix faut-il pour faire 100 ?`,
               `${p.nom} range 100 cubes par barres de dix. Combien de barres remplit-${p.il} ?`,
               `${p.nom} range 100 billes par sachets de dix. Combien de sachets ?`,
@@ -827,7 +833,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
               `${p.nom} a ${k * 100} cubes. Combien de plaques de cent peut-${p.il} faire ?`,
               `${p.nom} se demande combien de centaines il y a dans ${k * 100}.`,
               `${p.nom} range ${k * 100} graines par sacs de cent. Combien de sacs ?`,
-              `${p.nom} a ${k * 100} images. ${maj(p.il)} les colle par pages de cent. Combien de pages ?`,
+              `${p.nom} colle ${k * 100} images, cent par page. Combien de pages ?`,
             ]),
             k,
             exp(
@@ -880,7 +886,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const p = quelquun();
           const c = randomInt(2, 5);
           return court(
-            `${randomChoice([`${p.nom} a ces plaques de cent.`, `Voici les plaques de cent ${de(p.nom)}.`, `La maîtresse montre ces plaques de cent.`])} ${randomChoice(["Combien de barres de dix faut-il pour les fabriquer ?", "Combien de dizaines y a-t-il en tout ?", `Combien de barres de dix lui faut-il pour faire pareil ?`])}`,
+            `${randomChoice([`${p.nom} a ces plaques de cent.`, `Voici les plaques ${de(p.nom)}.`, `La maîtresse montre ces plaques.`])} ${randomChoice(["Combien de barres de dix pour les faire ?", "Combien de dizaines en tout ?", "Combien de barres de dix pour faire pareil ?"])}`,
             c * 10,
             exp(
               "Une plaque de cent, c'est dix barres de dix.",
@@ -900,7 +906,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
               `Combien de dizaines y a-t-il dans ${c} centaines ?`,
               `${p.nom} se demande : ${c} centaines, c'est combien de dizaines ?`,
               `${p.nom} range ${c * 100} crayons par boîtes de dix. Combien de boîtes ?`,
-              `${p.nom} change ${c} plaques de cent contre des barres de dix. Combien de barres reçoit-${p.il} ?`,
+              `${p.nom} change ${c} plaques de cent en barres de dix. Combien de barres ?`,
               `La boulangère range ${c * 100} biscuits par paquets de dix. Combien de paquets ?`,
               `Le jardinier plante ${c * 100} graines, dix par rangée. Combien de rangées ?`,
             ]),
@@ -921,7 +927,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           return court(
             randomChoice([
               `Combien y a-t-il de dizaines en tout dans ${n} ?`,
-              `${p.nom} veut faire ${n} avec des barres de dix seulement. Combien de barres ?`,
+              `${p.nom} fait ${n} avec des barres de dix. Combien de barres ?`,
               `${p.nom} a ${n} cubes. Combien de barres de dix peut-${p.il} faire ?`,
               `${p.nom} range ${n} perles par colliers de dix. Combien de colliers ?`,
             ]),
@@ -939,7 +945,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const p = quelquun();
           const d = randomChoice([10, 20, 30, 12, 15, 18, 21, 24, 27]);
           return court(
-            `${randomChoice([`${p.nom} a aligné ces barres de dix.`, `Voici les barres de dix ${de(p.nom)}.`, `Pic le paille-en-queue a trouvé ces barres de dix.`])} Combien de plaques de cent ${randomChoice([`peut-${p.il} fabriquer`, "peut-on remplir", "peut-on faire"])} ?`,
+            `${randomChoice([`${p.nom} a aligné ces barres de dix.`, `Voici les barres ${de(p.nom)}.`, `Pic a trouvé ces barres de dix.`])} Combien de plaques de cent ${randomChoice([`peut-${p.il} faire`, "peut-on remplir", "peut-on faire"])} ?`,
             Math.floor(d / 10),
             exp(
               "Dix barres de dix font une plaque de cent.",
@@ -957,7 +963,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           return court(
             randomChoice([
               `Combien d'unités y a-t-il dans ${c} centaines ?`,
-              `${p.nom} a ${c} plaques de cent. Combien de petits cubes cela fait-il ?`,
+              `${p.nom} a ${c} plaques de cent. Combien de petits cubes ?`,
               `${p.nom} a ${c} sacs de cent billes. Combien de billes ?`,
               `${p.nom} achète ${c} rouleaux de cent tickets. Combien de tickets ?`,
             ]),
@@ -987,7 +993,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
     microId: "ce1_entier_valeur_position",
     difficulty: 4,
     theme: "neutral",
-    text: "Pourquoi 23 n'est-il pas le même nombre que 32, alors qu'on écrit les deux avec un 2 et un 3 ?",
+    text: "23 et 32 ont les mêmes chiffres. Pourquoi ne sont-ils pas le même nombre ?",
     format: "qcm",
     choices: [
       "parce que les chiffres ne sont pas à la même place",
@@ -1026,7 +1032,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const n = ch[0] * 100 + ch[1] * 10 + ch[2];
           const r = randomChoice(RANGS);
           return court(
-            `${numeroDans(p, n)} ${randomChoice([`Quel est le chiffre des ${r.nom} ?`, `Quel chiffre est aux ${r.nom} ?`, `Dans ce nombre, quel est le chiffre des ${r.nom} ?`])}`,
+            `${numeroDans(p, n)} ${randomChoice([`Quel est le chiffre des ${r.nom} ?`, `Quel chiffre est aux ${r.nom} ?`, `Le chiffre des ${r.nom} ?`])}`,
             ch[r.idx],
             exp(
               "Chaque chiffre d'un nombre occupe un rang : unités, dizaines, centaines.",
@@ -1043,7 +1049,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const r = randomChoice(RANGS);
           const rep = [c, d, u][r.idx];
           return court(
-            `${introCubes(p)} Quel est le chiffre des ${r.nom} du nombre ${randomChoice(["dessiné", "montré", "de cubes"])} ?`,
+            `${introCubes(p)} ${randomChoice([`Quel est le chiffre des ${r.nom} ?`, `Le chiffre des ${r.nom} ?`])}`,
             rep,
             exp(
               "Le chiffre des centaines compte les plaques, celui des dizaines les barres, celui des unités les cubes seuls.",
@@ -1124,7 +1130,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           return qcm(
             randomChoice([
               `Quel nombre a ${x} pour chiffre des ${r.nom} ?`,
-              `${p.nom} cherche le nombre dont le chiffre des ${r.nom} est ${x}. Lequel ?`,
+              `Chiffre des ${r.nom} : ${x}. Quel nombre ?`,
               `Dans quel nombre le chiffre ${x} est-il aux ${r.nom} ?`,
             ]),
             bonne,
@@ -1142,7 +1148,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const p = quelquun();
           const [c, d, u] = [randomInt(1, 5), randomInt(1, 9), randomInt(1, 9)];
           return qcm(
-            `${introCubes(p)} Que vaut le chiffre des centaines de ce nombre ?`,
+            `${introCubes(p)} Que vaut le chiffre des centaines ?`,
             String(c * 100),
             [String(c), String(c * 10), String((c + 1) * 100), String(c * 100 + d * 10)],
             exp(
@@ -1164,7 +1170,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const plus = Math.random() < 0.5;
           const bon = (plus ? n1 > n2 : n1 < n2) ? p.nom : q.nom;
           return qcm(
-            `${p.nom} ${ctx.dire(n1)}. ${q.nom} ${ctx.dire(n2)}. ${plus ? ctx.plus : ctx.moins}`,
+            `${tableau(ctx, [[p, n1], [q, n2]])} ${plus ? ctx.plus : ctx.moins}`,
             bon,
             [p.nom, q.nom, "les deux pareil"],
             exp(
@@ -1252,7 +1258,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
               `Quel nombre s'écrit « ${ecrit} » ?`,
               `${p.nom} a noté : ${ecrit}. Quel est ce nombre ?`,
               `Écris en chiffres : ${ecrit}.`,
-              `Pic le paille-en-queue pense à ${ecrit}. Quel nombre est-ce ?`,
+              `Pic pense à ${ecrit}. Quel nombre est-ce ?`,
             ]),
             n,
             exp(
@@ -1270,7 +1276,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const n = c * 100 + d * 10 + u;
           const autres = [c * 100 + u * 10 + d, d * 100 + c * 10 + u, (c + 1) * 100 + d * 10 + u, c * 10 + d].filter((x) => x !== n);
           return qcm(
-            `${introCubes(p)} Comment s'écrit ce nombre en lettres ?`,
+            `${introCubes(p)} ${randomChoice(["Ce nombre en lettres ?", "Comment s'écrit ce nombre en lettres ?"])}`,
             enLettres(n),
             autres.map(enLettres),
             exp(
@@ -1341,7 +1347,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const [c, d, u] = [randomInt(1, 3), randomInt(11, 17), randomInt(1, 9)];
           const n = c * 100 + d * 10 + u;
           return court(
-            `${introCubes(p)} Il y a plus de dix barres. ${randomChoice(["Quel nombre montre ce dessin ?", "Quel nombre est représenté ?"])}`,
+            `${introCubes(p)} Plus de dix barres ! ${randomChoice(["Quel nombre montre ce dessin ?", "Quel nombre est représenté ?"])}`,
             n,
             exp(
               "Dix barres de dix font une plaque de cent.",
@@ -1359,7 +1365,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const n = c * 100 + d * 10 + u;
           if (c <= 4 && Math.random() < 0.6) {
             return court(
-              `${introCubes(p)} Combien de barres de dix pourrait-on faire avec tous ces cubes ?`,
+              `${introCubes(p)} Combien de barres de dix peut-on faire en tout ?`,
               c * 10 + d,
               exp(
                 "Une plaque de cent, c'est dix barres de dix.",
@@ -1373,7 +1379,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           return court(
             randomChoice([
               `Combien y a-t-il de dizaines en tout dans ${n} ?`,
-              `${p.nom} range ${n} perles par colliers de dix. Combien de colliers complets ?`,
+              `${p.nom} fait des colliers de dix avec ${n} perles. Combien de colliers complets ?`,
               `${n} cubes : combien de barres de dix peut-on faire ?`,
             ]),
             c * 10 + d,
@@ -1448,7 +1454,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
       );
       if (avecDessin) {
         return qcm(
-          `${introCubes(p)} ${randomChoice(["Quelle addition va avec ce dessin ?", "Quelle décomposition montre ce dessin ?", "Quel calcul donne le nombre de cubes ?"])}`,
+          `${introCubes(p)} ${randomChoice(["Quelle addition va avec ce dessin ?", "Quelle décomposition montre ce dessin ?", "Quel calcul donne ce nombre ?"])}`,
           bonne,
           leurres,
           ex,
@@ -1488,7 +1494,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
               `Quel nombre vaut ${calc} ?`,
               `Calcule : ${calc}.`,
               `${p.nom} a écrit ${calc}. Quel nombre a-t-${p.il} décomposé ?`,
-              `Pic le paille-en-queue a ${calc} graines. Combien en tout ?`,
+              `Pic a ${calc} graines. Combien en tout ?`,
             ]),
             n,
             exp(
@@ -1541,7 +1547,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
     microId: "ce1_entier_comparer",
     difficulty: 4,
     theme: "neutral",
-    text: "Aaron a 49 trombones dans sa trousse et Mia en a 53. Qui a le plus de trombones ?",
+    text: "Trombones : Aaron en a 49, Mia 53. Qui en a le plus ?",
     format: "qcm",
     choices: ["Mia", "Aaron", "ils en ont autant", "on ne peut pas savoir"],
     expected: ["Mia"],
@@ -1582,7 +1588,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           return qcm(
             randomChoice([
               `Quel est le plus ${plus ? "grand" : "petit"} nombre : ${a} ou ${b} ?`,
-              `${p.nom} doit entourer le plus ${plus ? "grand" : "petit"} nombre : ${a} ou ${b}. Lequel ?`,
+              `${p.nom} entoure le plus ${plus ? "grand" : "petit"} : ${a} ou ${b}. Lequel ?`,
             ]),
             String(plus ? Math.max(a, b) : Math.min(a, b)),
             [String(a), String(b), "ils sont égaux"],
@@ -1607,7 +1613,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           let y = randomChoice([x + randomInt(1, 9), x - randomInt(1, 9), c * 100 + u * 10 + d, x + 10, x - 10]);
           if (y === x || y < 100) y = x + 1;
           return qcm(
-            `${introCubes(p)} Le nombre dessiné est-il plus grand ou plus petit que ${y} ?`,
+            `${introCubes(p)} Ce nombre est-il plus grand ou plus petit que ${y} ?`,
             x > y ? "plus grand" : "plus petit",
             ["plus grand", "plus petit", "égal"],
             exp(
@@ -1643,7 +1649,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const plus = Math.random() < 0.5;
           const bon = (plus ? a > b : a < b) ? p.nom : q.nom;
           return qcm(
-            `${p.nom} ${ctx.dire(a)}. ${q.nom} ${ctx.dire(b)}. ${plus ? ctx.plus : ctx.moins}`,
+            `${tableau(ctx, [[p, a], [q, b]])} ${plus ? ctx.plus : ctx.moins}`,
             bon,
             [p.nom, q.nom, "les deux pareil"],
             exp(
@@ -1663,7 +1669,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           if (b === a || b < 10) b = a + 11;
           const bon = a > b ? p.nom : q.nom;
           return qcm(
-            `Le dessin montre les cubes ${de(p.nom)}. ${q.nom} a ${b} cubes. Qui a le plus de cubes ?`,
+            `Dessin : les cubes ${de(p.nom)}. ${q.nom} en a ${b}. Qui en a le plus ?`,
             bon,
             [p.nom, q.nom, "les deux pareil"],
             exp(
@@ -1744,6 +1750,8 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
               `${p.nom} lit à voix haute « ${ecrit} ». Que dit-${p.il} ?`,
               `Au tableau, ${p.nom} a écrit « ${ecrit} ». Comment le lire ?`,
               `${p.nom} montre l'étiquette « ${ecrit} ». Que veut-elle dire ?`,
+              `Pic lit « ${ecrit} ». Que dit-il ?`,
+              `Que veut dire « ${ecrit} » ?`,
             ]),
             `${g} est ${mot} à ${dr}`,
             [`${g} est ${mot === "inférieur" ? "supérieur" : "inférieur"} à ${dr}`, `${g} est égal à ${dr}`],
@@ -1757,7 +1765,9 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
             randomChoice([
               `Écris avec un signe : « ${g} est ${mot} à ${dr} ».`,
               `${p.nom} dit : « ${g} est ${mot} à ${dr} ». Comment l'écrire ?`,
-              `${p.nom} veut écrire « ${g} est ${mot} à ${dr} » avec un signe. Que doit-${p.il} écrire ?`,
+              `Avec un signe, comment écrire « ${g} est ${mot} à ${dr} » ?`,
+              `${p.nom} écrit « ${g} est ${mot} à ${dr} » avec un signe. Lequel ?`,
+              `Pic veut écrire « ${g} est ${mot} à ${dr} ». Quel signe ?`,
             ]),
             `${g} ${mot === "inférieur" ? "<" : ">"} ${dr}`,
             [`${g} ${mot === "inférieur" ? ">" : "<"} ${dr}`, `${g} = ${dr}`],
@@ -1788,7 +1798,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           let y = randomChoice([x + randomInt(1, 9), x - randomInt(1, 9), x + 10 * randomInt(1, 4), x - 10 * randomInt(1, 4)]);
           if (y < 100) y = x + 5;
           return qcm(
-            `${introCubes(p)} ${randomChoice([`Complète : le nombre dessiné est … ${y}.`, `Le nombre dessiné est-il inférieur ou supérieur à ${y} ?`])}`,
+            `${introCubes(p)} ${randomChoice([`Complète : ce nombre est … ${y}.`, `Ce nombre est-il inférieur ou supérieur à ${y} ?`])}`,
             x < y ? `inférieur à ${y}` : `supérieur à ${y}`,
             [`inférieur à ${y}`, `supérieur à ${y}`, `égal à ${y}`],
             exp(
@@ -1850,7 +1860,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           return qcm(
             randomChoice([
               `${p.nom} pense à un nombre ${sup ? "supérieur" : "inférieur"} à ${n}. Lequel peut-${p.il} choisir ?`,
-              `Pic le paille-en-queue cherche un nombre ${sup ? "supérieur" : "inférieur"} à ${n}. Lequel ?`,
+              `Pic cherche un nombre ${sup ? "supérieur" : "inférieur"} à ${n}. Lequel ?`,
               `Quel nombre est ${sup ? "supérieur" : "inférieur"} à ${n} ?`,
             ]),
             String(bonne),
@@ -1885,15 +1895,15 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
       const dehors = [bas - randomInt(1, 9), haut + randomInt(1, 9), haut + randomInt(10, 50), bas - randomInt(10, 50)];
       const contexte = randomChoice([
         `${p.nom} pense à un nombre compris entre ${bas} et ${haut}.`,
-        `Le trésor de Pic est caché sous une pierre numérotée entre ${bas} et ${haut}.`,
-        `Le livre préféré ${de(p.nom)} a entre ${bas} et ${haut} pages.`,
-        `Le dragon du château a entre ${bas} et ${haut} écailles.`,
-        `Au zoo, le ticket gagnant porte un numéro compris entre ${bas} et ${haut}.`,
-        `La fusée ${de(p.nom)} vole entre ${bas} et ${haut} mètres de haut.`,
-        `Dans la forêt, ${p.nom} a compté entre ${bas} et ${haut} arbres.`,
-        `Le gâteau du chef cuisinier pèse entre ${bas} et ${haut} grammes.`,
-        `À la kermesse, ${p.nom} a gagné un nombre de points compris entre ${bas} et ${haut}.`,
-        `La maîtresse cache un nombre compris entre ${bas} et ${haut}.`,
+        `Le trésor de Pic est sous une pierre entre ${bas} et ${haut}.`,
+        `Le livre ${de(p.nom)} a entre ${bas} et ${haut} pages.`,
+        `Le dragon a entre ${bas} et ${haut} écailles.`,
+        `Le ticket gagnant est entre ${bas} et ${haut}.`,
+        `La fusée ${de(p.nom)} vole entre ${bas} et ${haut} mètres.`,
+        `${p.nom} a compté entre ${bas} et ${haut} arbres.`,
+        `Le gâteau pèse entre ${bas} et ${haut} grammes.`,
+        `${p.nom} a gagné entre ${bas} et ${haut} points.`,
+        `La maîtresse cache un nombre entre ${bas} et ${haut}.`,
       ]);
       const ex = exp(
         "« Compris entre … et … » veut dire plus grand que le premier nombre et plus petit que le second.",
@@ -1908,7 +1918,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
         return qcm(
           randomChoice([
             `Quel nombre n'est PAS compris entre ${bas} et ${haut} ?`,
-            `${p.nom} cherche un nombre compris entre ${bas} et ${haut}. Lequel ne va PAS ?`,
+            `Un nombre entre ${bas} et ${haut} ? Lequel ne va PAS ?`,
             `Pic doit se poser entre ${bas} et ${haut}. Quel nombre est en dehors ?`,
             `Le ticket gagnant est entre ${bas} et ${haut}. Quel ticket a PERDU ?`,
           ]),
@@ -1924,7 +1934,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
         );
       }
       return qcm(
-        `${contexte} ${randomChoice(["Quel nombre cela peut-il être ?", "Lequel de ces nombres convient ?", "Quel nombre peut convenir ?"])}`,
+        `${contexte} ${randomChoice(["Quel nombre convient ?", "Lequel convient ?", "Lequel de ces nombres convient ?"])}`,
         String(dedans),
         dehors.map(String),
         ex,
@@ -1980,7 +1990,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
       if (Math.random() < 0.75) {
         // La droite graduée de dix en dix : seules les centaines sont écrites.
         return qcm(
-          `${randomChoice([`Sur la droite, le point montre ${n}.`, `${p.nom} a placé ${n} sur la droite.`, `Pic le paille-en-queue s'est posé sur ${n}.`, `Le robot ${de(p.nom)} s'arrête sur ${n}.`, `${p.nom} a lancé sa balle jusqu'à ${n}.`, `La grenouille ${de(p.nom)} a sauté jusqu'à ${n}.`])} ${randomChoice(["Entre quelles dizaines est-il ?", "Entre quelles dizaines se trouve ce nombre ?", `Encadre ${n} entre deux dizaines.`])}`,
+          `${randomChoice([`Sur la droite, le point montre ${n}.`, `${p.nom} a placé ${n} sur la droite.`, `Pic s'est posé sur ${n}.`, `Le robot ${de(p.nom)} s'arrête sur ${n}.`, `${p.nom} a lancé sa balle jusqu'à ${n}.`, `La grenouille ${de(p.nom)} a sauté jusqu'à ${n}.`])} ${randomChoice(["Entre quelles dizaines est-il ?", "Entre quelles dizaines ?", `Encadre ${n} entre deux dizaines.`])}`,
           entre(bas, bas + 10),
           choix,
           ex,
@@ -2020,7 +2030,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const debut = randomInt(100, 990);
           const k = randomInt(2, 6);
           return court(
-            `${randomChoice([`La droite avance de un en un.`, `${p.nom} compte de un en un sur la droite.`, `Pic le paille-en-queue saute de un en un.`])} Quel nombre est au point « ? » ?`,
+            `${randomChoice([`La droite avance de un en un.`, `${p.nom} compte de un en un.`, `Pic saute de un en un.`])} Quel nombre est au point « ? » ?`,
             debut + k,
             exp(
               "Sur cette droite, chaque graduation ajoute 1.",
@@ -2141,7 +2151,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const autres = nombres.filter((_, i) => i !== k);
           const nomDe = (v: number) => (v === x ? moi.nom : v === autres[0] ? q.nom : r.nom);
           return qcm(
-            `Le dessin montre les cubes ${de(moi.nom)}. ${q.nom} a ${autres[0]} cubes et ${r.nom} en a ${autres[1]}. Qui a le ${plus ? "plus" : "moins"} de cubes ?`,
+            `Dessin : les cubes ${de(moi.nom)}. ${q.nom} en a ${autres[0]}, ${r.nom} ${autres[1]}. Qui en a le ${plus ? "plus" : "moins"} ?`,
             nomDe(bonne),
             [moi.nom, q.nom, r.nom],
             exp(
@@ -2160,10 +2170,10 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           `${p.nom} range ses cartes : ${nombres.join(", ")}. Quelle est la plus ${plus ? "grande" : "petite"} ?`,
           `${p.nom} a trois tickets : ${nombres.join(", ")}. Lequel porte le plus ${plus ? "grand" : "petit"} numéro ?`,
           `${p.nom} compare ${nombres.join(", ")}. Lequel est le plus ${plus ? "grand" : "petit"} ?`,
-          `${p.nom} a lu trois livres de ${nombres.join(", ")} pages. Quel livre a le plus ${plus ? "de" : "petit nombre de"} pages ?`,
+          `Trois livres : ${nombres.join(", ")} pages. Lequel a le ${plus ? "plus" : "moins"} de pages ?`,
           `Trois dinosaures pèsent ${nombres.join(", ")} kilos. Quel est le plus ${plus ? "lourd" : "léger"} ?`,
-          `${p.nom} doit entourer le plus ${plus ? "grand" : "petit"} : ${nombres.join(", ")}. Lequel ?`,
-          `Pic le paille-en-queue cherche le plus ${plus ? "grand" : "petit"} nombre : ${nombres.join(", ")}.`,
+          `${p.nom} entoure le plus ${plus ? "grand" : "petit"} : ${nombres.join(", ")}. Lequel ?`,
+          `Pic cherche le plus ${plus ? "grand" : "petit"} nombre : ${nombres.join(", ")}.`,
           `Dans l'ordre ${plus ? "décroissant" : "croissant"}, quel nombre vient en premier : ${nombres.join(", ")} ?`,
         ]),
         String(bonne),
@@ -2200,7 +2210,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const prendMax = croissant !== premier;
           const bonne = prendMax ? Math.max(...nombres) : Math.min(...nombres);
           return qcm(
-            `${randomChoice([`${quelquun().nom} range ces nombres`, `${quelquun().nom} doit ranger ces nombres`, "On range ces nombres"])} dans l'ordre ${croissant ? "croissant" : "décroissant"} : ${nombres.join(", ")}. Lequel ${randomChoice(["vient", "écrit-on"])} en ${premier ? "PREMIER" : "DERNIER"} ?`,
+            `${randomChoice(["Ordre", "Range dans l'ordre", "On range dans l'ordre"])} ${croissant ? "croissant" : "décroissant"} : ${nombres.join(", ")}. Lequel ${randomChoice(["vient", "écrit-on"])} en ${premier ? "PREMIER" : "DERNIER"} ?`,
             String(bonne),
             nombres.map(String),
             exp(
@@ -2220,7 +2230,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const plus = Math.random() < 0.5;
           const idx = valeurs.indexOf(plus ? Math.max(...valeurs) : Math.min(...valeurs));
           return qcm(
-            `${enfants.map((e, i) => `${e.nom} ${ctx.dire(valeurs[i])}`).join(". ")}. ${plus ? ctx.plus : ctx.moins}`,
+            `${tableau(ctx, enfants.map((e, i) => [e, valeurs[i]] as [Personne, number]))} ${plus ? ctx.plus : ctx.moins}`,
             enfants[idx].nom,
             enfants.map((e) => e.nom),
             exp(
@@ -2242,7 +2252,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const noms = [moi.nom, q.nom, r.nom];
           const x = vals[0];
           return qcm(
-            `Le dessin montre les cubes ${de(moi.nom)}. ${q.nom} a ${vals[1]} cubes, ${r.nom} en a ${vals[2]}. Qui a le ${plus ? "plus" : "moins"} de cubes ?`,
+            `Dessin : les cubes ${de(moi.nom)}. ${q.nom} en a ${vals[1]}, ${r.nom} ${vals[2]}. Qui en a le ${plus ? "plus" : "moins"} ?`,
             noms[vals.indexOf(cible)],
             noms,
             exp(
@@ -2308,8 +2318,8 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
       const intro = randomChoice([
         `Cette droite est graduée de ${pas} en ${pas}.`,
         `Sur la droite, on avance de ${pas} en ${pas}.`,
-        `${p.nom} a dessiné une droite graduée de ${pas} en ${pas}.`,
-        `Pic le paille-en-queue saute de ${pas} en ${pas} sur la droite.`,
+        `${p.nom} a gradué sa droite de ${pas} en ${pas}.`,
+        `Pic saute de ${pas} en ${pas} sur la droite.`,
         `Sur le chemin du trésor, chaque trait ajoute ${pas}.`,
       ]);
       const ex = (x: number) =>
@@ -2482,7 +2492,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const k = randomInt(2, n);
           const { objs, canvas } = fileObjets(n, k - 1);
           return qcm(
-            `${randomChoice(["Les objets sont rangés en file.", "Zoé a aligné ses jouets.", "Voici une file d'objets."])} En partant de la gauche, quelle est la place ${duDeLa(objs[k - 1])} entouré${objs[k - 1].f ? "e" : ""} ?`,
+            `${randomChoice(["En partant de la gauche, quelle", "Depuis la gauche, quelle"])} est la place ${duDeLa(objs[k - 1])} entouré${objs[k - 1].f ? "e" : ""} ?`,
             ordinal(k, true),
             [ordinal(k - 1 || 3, true), ordinal(k + 1, true), ordinal(k === 2 ? 4 : 2, true)].filter((s) => s !== ordinal(k, true)),
             exp(
@@ -2513,7 +2523,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
     microId: "ce1_ordinal_rang_precedents",
     difficulty: 3,
     theme: "neutral",
-    text: "Six personnes font la queue à la caisse. Je suis la troisième. Combien y a-t-il de personnes devant moi ?",
+    text: "Six personnes font la queue. Je suis la troisième. Combien de personnes devant moi ?",
     format: "short",
     expected: ["2"],
     comparator: "number_equal",
@@ -2569,7 +2579,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const rang = randomInt(2, 12);
           const total = rang + randomInt(1, 5);
           return court(
-            `${total} ${f.qui} font la queue ${f.lieu}. ${p.nom} est ${leLaP(p)} ${ordinal(rang, p.il === "elle")}. Combien ${de(f.qui)} y a-t-il devant ${luiElle(p)} ?`,
+            `${total} ${f.qui} font la queue ${f.lieu}. ${p.nom} est ${leLaP(p)} ${ordinal(rang, p.il === "elle")}. Combien devant ${luiElle(p)} ?`,
             rang - 1,
             exp(
               "Le rang dit la place qu'on occupe, en se comptant soi-même.",
@@ -2586,7 +2596,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const { objs, canvas } = fileObjets(n, k - 1);
           const o = objs[k - 1];
           return court(
-            `${randomChoice(["Voici une file d'objets.", "Téo a rangé ses jouets en file.", "Pic le paille-en-queue regarde cette file."])} ${maj(leLa(o))} entouré${o.f ? "e" : ""} est ${o.f ? "la" : "le"} ${ordinal(k, o.f)} en partant de la gauche. Combien d'objets sont avant ${o.f ? "elle" : "lui"} ?`,
+            `${maj(leLa(o))} entouré${o.f ? "e" : ""} est ${o.f ? "la" : "le"} ${ordinal(k, o.f)} depuis la gauche. Combien d'objets avant ${o.f ? "elle" : "lui"} ?`,
             k - 1,
             exp(
               "Le rang compte aussi l'objet lui-même.",
@@ -2604,7 +2614,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const rang = randomInt(2, 9);
           const total = rang + randomInt(2, 6);
           return court(
-            `${total} ${f.qui} font la queue ${f.lieu}. ${p.nom} est ${leLaP(p)} ${ordinal(rang, p.il === "elle")}. Combien ${de(f.qui)} y a-t-il derrière ${luiElle(p)} ?`,
+            `${total} ${f.qui} font la queue ${f.lieu}. ${p.nom} est ${leLaP(p)} ${ordinal(rang, p.il === "elle")}. Combien derrière ${luiElle(p)} ?`,
             total - rang,
             exp(
               "Le rang compte les personnes devant, plus soi-même.",
@@ -2636,7 +2646,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const { objs, canvas } = fileObjets(n, k - 1);
           const o = objs[k - 1];
           return court(
-            `${randomChoice(["Voici une file d'objets.", "Malo a aligné ses jouets.", "Pic le paille-en-queue regarde cette file."])} ${maj(leLa(o))} entouré${o.f ? "e" : ""} est ${o.f ? "la" : "le"} ${ordinal(k, o.f)} en partant de la gauche. Combien d'objets sont après ${o.f ? "elle" : "lui"} ?`,
+            `${maj(leLa(o))} entouré${o.f ? "e" : ""} est ${o.f ? "la" : "le"} ${ordinal(k, o.f)} depuis la gauche. Combien d'objets après ${o.f ? "elle" : "lui"} ?`,
             n - k,
             exp(
               "Le rang compte les objets d'avant, plus l'objet lui-même.",
@@ -2675,7 +2685,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const r = total - derriere;
           const fem = p.il === "elle";
           return qcm(
-            `${total} ${f.qui} font la queue ${f.lieu}. Il y a ${derriere} ${pl(derriere, f.qui.slice(0, -1), f.qui)} derrière ${p.nom}. Quelle est sa place ?`,
+            `${total} ${f.qui} font la queue ${f.lieu}. ${derriere} ${pl(derriere, "est", "sont")} derrière ${p.nom}. Quelle est sa place ?`,
             ordinal(r, fem),
             [ordinal(r + 1, fem), ordinal(r - 1, fem), ordinal(derriere + 1, fem) === ordinal(r, fem) ? ordinal(r + 2, fem) : ordinal(derriere + 1, fem)],
             exp(
@@ -2713,14 +2723,14 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const liste = shuffle([0, 1, 2, 3, 4, 5].map((i) => depart + i * pas));
           const k = randomInt(2, 6);
           const intro = randomChoice([
-            "Voici une liste de nombres :",
-            `${p.nom} a noté ces nombres :`,
-            "Les dossards de la course sont :",
-            "Les wagons du train portent les numéros :",
-            "Pic le paille-en-queue a picoré ces nombres :",
+            "Voici des nombres :",
+            `${p.nom} a noté :`,
+            "Les dossards :",
+            "Les wagons du train :",
+            "Pic a picoré :",
           ]);
           return court(
-            `${intro} ${liste.join(", ")}. Quel est le ${ordinal(k)} nombre en partant du début ?`,
+            `${intro} ${liste.join(", ")}. Quel est le ${ordinal(k)} nombre ?`,
             liste[k - 1],
             exp(
               "Le rang d'un nombre dit sa place dans la liste, pas sa valeur.",
@@ -2728,6 +2738,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
               `1er : ${liste[0]}, 2e : ${liste[1]}, … ${k}e : ${liste[k - 1]}.`,
               `C'est ${liste[k - 1]}.`,
             ),
+            suite({ terms: liste, display: { showArrows: false, showRule: false, showLabels: false } }),
           );
         },
         // La file dessinée : quel est le kième objet ?
@@ -2738,7 +2749,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const depuisDroite = Math.random() < 0.3;
           const idx = depuisDroite ? n - k : k - 1;
           return qcm(
-            `${randomChoice(["Voici une file d'objets.", "Lina a aligné ses jouets.", "Sur l'étagère, les objets sont en file."])} En partant de la ${depuisDroite ? "droite" : "gauche"}, quel est le ${ordinal(k)} objet ?`,
+            `En partant de la ${depuisDroite ? "DROITE" : "gauche"}, quel est le ${ordinal(k)} objet ?`,
             leLa(objs[idx]),
             objs.filter((_, i) => i !== idx).map(leLa),
             exp(
@@ -2781,17 +2792,18 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
     microId: "ce1_ordinal_utiliser",
     difficulty: 2,
     theme: "neutral",
-    text: "Le jeton est caché sous le sixième gobelet en partant de la gauche. Sous combien de gobelets faut-il regarder avant de le trouver, si on commence par la gauche ?",
+    text: "Le jeton est sous la sixième tasse depuis la gauche. Combien de tasses soulever avant elle ?",
     format: "short",
     expected: ["5"],
     comparator: "number_equal",
-    hint: "On soulève les gobelets avant le bon.",
+    hint: "On soulève les tasses avant la bonne.",
     explanation: exp(
       "Le rang dit la place, en comptant depuis le point de départ choisi.",
-      "On compte les gobelets qui précèdent celui du jeton.",
-      "Le jeton est sous le sixième : il y a cinq gobelets avant lui. 6 - 1 = 5.",
-      "Il faut regarder sous 5 gobelets.",
+      "On compte les tasses qui précèdent celle du jeton.",
+      "Le jeton est sous la sixième : il y a cinq tasses avant elle. 6 - 1 = 5.",
+      "Il faut soulever 5 tasses.",
     ),
+    canvas: objets(Array.from({ length: 7 }, (_, i) => ({ quoi: "tasse" as const, ...(i === 5 ? { marque: true } : {}) }))),
     tags: ["ce1", "nombre_entier", "ordinaux", "piege"],
   },
   {
@@ -2836,7 +2848,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const k = randomInt(3, n);
           const canvas = objets(Array.from({ length: n }, (_, i) => ({ quoi: "tasse" as const, ...(i === k - 1 ? { marque: true } : {}) })));
           return court(
-            `${randomChoice([`${p.nom} a caché une bille sous la tasse entourée.`, `Pic le paille-en-queue a caché une graine sous la tasse entourée.`, `Le magicien du cirque a caché une pièce sous la tasse entourée.`, `${p.nom} a glissé un bonbon sous la tasse entourée.`, `Ti Margo a caché une perle sous la tasse entourée.`, `Le pirate a caché une pièce d'or sous la tasse entourée.`])} ${randomChoice(["En partant de la gauche, combien de tasses faut-il soulever avant de la trouver ?", "On soulève les tasses depuis la gauche. Combien de tasses avant la bonne ?", `Combien de tasses ${p.nom} soulève-t-${p.il} avant la bonne, en partant de la gauche ?`])}`,
+            `Sous la tasse entourée : ${randomChoice([`la bille ${de(p.nom)}`, "la graine de Pic", "une pièce", "un bonbon", "une perle", "l'or du pirate"])}. ${randomChoice(["Depuis la gauche, combien de tasses avant elle ?", "Combien de tasses avant elle, depuis la gauche ?"])}`,
             k - 1,
             exp(
               "Le rang compte aussi la tasse elle-même.",
@@ -2852,11 +2864,11 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const p = quelquun();
           const k = randomInt(3, 12);
           const ctx = randomChoice([
-            { t: `${p.nom} habite au ${ordinal(k)} étage. Combien d'étages y a-t-il sous le sien, sans compter le rez-de-chaussée ?` },
-            { t: `Pic le paille-en-queue s'est posé sur le ${ordinal(k)} arbre du chemin. Combien d'arbres a-t-il dépassés ?` },
-            { t: `${p.nom} lit la ${ordinal(k, true)} page de son livre. Combien de pages a-t-${p.il} déjà lues ?` },
-            { t: `Le trésor est dans le ${ordinal(k)} coffre de la grotte. Combien de coffres faut-il ouvrir avant ?` },
-            { t: `${p.nom} monte dans le ${ordinal(k)} wagon du train. Combien de wagons y a-t-il devant ?` },
+            { t: `${p.nom} habite au ${ordinal(k)} étage. Combien d'étages sous le sien, sans le rez-de-chaussée ?` },
+            { t: `Pic se pose sur le ${ordinal(k)} arbre du chemin. Combien d'arbres a-t-il dépassés ?` },
+            { t: `${p.nom} lit la ${ordinal(k, true)} page. Combien de pages a-t-${p.il} déjà lues ?` },
+            { t: `Le trésor est dans le ${ordinal(k)} coffre. Combien de coffres ouvrir avant ?` },
+            { t: `${p.nom} monte dans le ${ordinal(k)} wagon. Combien de wagons devant ?` },
           ]);
           return court(
             ctx.t,
@@ -2880,7 +2892,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
     microId: "ce1_ordinal_utiliser",
     difficulty: 4,
     theme: "reunion",
-    text: "À la course de la Diagonale, 167 coureurs sont partis. Combien de coureurs sont arrivés avant le quarante-huitième ?",
+    text: "À la Diagonale, 167 coureurs partent. Combien arrivent avant le quarante-huitième ?",
     format: "short",
     expected: ["47"],
     comparator: "number_equal",
@@ -2914,7 +2926,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const o = objs[k - 1];
           const rd = n - k + 1;
           return qcm(
-            `${maj(leLa(o))} entouré${o.f ? "e" : ""} est ${o.f ? "la" : "le"} ${ordinal(k, o.f)} en partant de la gauche. Quelle est sa place en partant de la DROITE ?`,
+            `${maj(leLa(o))} entouré${o.f ? "e" : ""} est ${o.f ? "la" : "le"} ${ordinal(k, o.f)} depuis la gauche. Sa place depuis la DROITE ?`,
             `${o.f ? "la" : "le"} ${ordinal(rd, o.f)}`,
             [rd - 1, rd + 1, k].filter((x) => x >= 1 && x !== rd).map((x) => `${o.f ? "la" : "le"} ${ordinal(x, o.f)}`),
             exp(
@@ -2935,7 +2947,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const rd = total - rg + 1;
           const fem = p.il === "elle";
           return qcm(
-            `${total} ${f.qui} font la queue ${f.lieu}. ${p.nom} est ${leLaP(p)} ${ordinal(rg, fem)} en partant du début. Quel est son rang en partant de la FIN ?`,
+            `${total} ${f.qui} font la queue. ${p.nom} est ${leLaP(p)} ${ordinal(rg, fem)} depuis le début. Et depuis la FIN ?`,
             `${leLaP(p)} ${ordinal(rd, fem)}`,
             [rd - 1, rd + 1, rg, total - rg].filter((x) => x >= 1 && x !== rd).map((x) => `${leLaP(p)} ${ordinal(x, fem)}`),
             exp(
@@ -2953,7 +2965,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const [a, b] = deuxDifferents(1, 15).sort((x, y) => x - y);
           const bb = b - a < 2 ? b + 2 : b;
           return court(
-            `${maj(f.lieu)}, ${p.nom} est ${leLaP(p)} ${ordinal(a, p.il === "elle")} et ${q.nom} ${leLaP(q)} ${ordinal(bb, q.il === "elle")}. Combien ${de(f.qui)} y a-t-il entre les deux ?`,
+            `${maj(f.lieu)}, ${p.nom} est ${leLaP(p)} ${ordinal(a, p.il === "elle")} et ${q.nom} ${leLaP(q)} ${ordinal(bb, q.il === "elle")}. Combien ${de(f.qui)} entre eux ?`,
             bb - a - 1,
             exp(
               "Entre deux rangs, on ne compte ni l'un ni l'autre.",
@@ -2970,9 +2982,9 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const partis = k + randomInt(10, 80);
           return court(
             randomChoice([
-              `Au cross de l'école, ${partis} enfants courent. ${p.nom} arrive ${ordinal(k, p.il === "elle")}. Combien d'enfants sont arrivés avant ${luiElle(p)} ?`,
-              `À la course de vélo, ${p.nom} est ${ordinal(k, p.il === "elle")} sur ${partis}. Combien de cyclistes sont devant ${luiElle(p)} ?`,
-              `${partis} canards en plastique font la course sur la rivière. Le canard ${de(p.nom)} est ${ordinal(k)}. Combien de canards sont arrivés avant ?`,
+              `Au cross, ${partis} enfants courent. ${p.nom} arrive ${ordinal(k, p.il === "elle")}. Combien arrivent avant ${luiElle(p)} ?`,
+              `Course de vélo : ${p.nom} est ${ordinal(k, p.il === "elle")} sur ${partis}. Combien de cyclistes devant ${luiElle(p)} ?`,
+              `Course de ${partis} canards : celui ${de(p.nom)} est ${ordinal(k)}. Combien arrivent avant ?`,
             ]),
             k - 1,
             exp(
@@ -3041,7 +3053,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
             `${p.nom} range ses jouets en suivant un motif.`,
             "Sur la frise de la classe, les dessins se répètent.",
             `${p.nom} colle des images en suivant un motif.`,
-            "Pic le paille-en-queue a aligné des objets qui se répètent.",
+            "Pic aligne des objets qui se répètent.",
             `La maîtresse dessine une frise qui se répète.`,
           ]);
           return qcm(
@@ -3067,7 +3079,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const p = quelquun();
           return qcm(
             randomChoice([
-              `Dans la suite ${debut} …, quel est le symbole numéro ${rang} ?`,
+              `Suite : ${debut} … Quel est le symbole numéro ${rang} ?`,
               `${p.nom} écrit ${debut} … Quel sera le ${ordinal(rang)} symbole ?`,
             ]),
             bonne,
@@ -3095,7 +3107,8 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
     microId: "ce1_entier_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Avec les chiffres 4, 7 et 2, quel est le plus GRAND nombre à trois chiffres qu'on peut écrire ?",
+    text: "Avec 4, 7 et 2, quel est le plus GRAND nombre à trois chiffres ?",
+    canvas: { kind: "personnage", personnage: "zoe", pose: "montre", expression: "pense", bulle: { texte: "4   7   2" }, mode: "couleur" },
     format: "short",
     expected: ["742"],
     comparator: "number_equal",
@@ -3129,17 +3142,14 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
       if (plusGrand) bonne = Number([...tries].reverse().join(""));
       else if (avecZero) bonne = Number(`${tries[1]}0${tries[2]}`);
       else bonne = Number(tries.join(""));
-      const p = quelquun();
+      const qui = randomChoice(PARLEURS);
+      const liste = `${affiches[0]}, ${affiches[1]} et ${affiches[2]}`;
       const intro = randomChoice([
-        `Avec les chiffres ${affiches.join(", ")},`,
-        `Le code du coffre des pirates utilise les chiffres ${affiches.join(", ")}.`,
-        `${p.nom} a trois cartes : ${affiches.join(", ")}.`,
-        `Le cadenas ${de(p.nom)} a les chiffres ${affiches.join(", ")}.`,
-        `Pic le paille-en-queue a picoré les chiffres ${affiches.join(", ")}.`,
+        `${qui.nom} a les cartes ${liste}.`,
+        `Le cadenas ${de(qui.nom)} : ${liste}.`,
+        `${qui.nom} a tiré ${liste}.`,
       ]);
-      const question = intro.endsWith(",")
-        ? `quel est le plus ${plusGrand ? "GRAND" : "PETIT"} nombre à trois chiffres qu'on peut écrire ?`
-        : `Quel est le plus ${plusGrand ? "GRAND" : "PETIT"} nombre à trois chiffres qu'on peut faire, chaque chiffre une fois ?`;
+      const question = `Fais le plus ${plusGrand ? "GRAND" : "PETIT"} nombre à trois chiffres.`;
       return court(
         `${intro} ${question}`,
         bonne,
@@ -3149,6 +3159,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           `Avec ${affiches.join(", ")} : ${bonne}.`,
           `C'est ${bonne}.`,
         ),
+        parle(qui.id, affiches.join("   ")),
       );
     },
   },
@@ -3175,9 +3186,9 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const p = quelquun();
           return court(
             randomChoice([
-              `On écrit ${a}, puis on échange ses deux chiffres pour obtenir ${b}. Quel est l'écart entre les deux nombres ?`,
-              `${p.nom} a écrit ${a}, mais ${p.il} voulait écrire ${b}. De combien s'est-${p.il} trompé${p.e} ?`,
-              `Pic le paille-en-queue lit ${b} au lieu de ${a}. Quel est l'écart entre les deux ?`,
+              `On échange les chiffres de ${a} : ${b}. Quel est l'écart entre les deux ?`,
+              `${p.nom} a écrit ${a} au lieu de ${b}. De combien s'est-${p.il} trompé${p.e} ?`,
+              `Pic lit ${b} au lieu de ${a}. Quel est l'écart ?`,
             ]),
             Math.abs(a - b),
             exp(
@@ -3195,13 +3206,14 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const u = randomInt(0, 9);
           const n = c * 100 + d * 10 + u;
           const indices = [
-            `j'ai ${c} ${pl(c, "centaine", "centaines")}`,
-            d === 0 ? "je n'ai aucune dizaine" : d === c ? "j'ai autant de dizaines que de centaines" : `mon chiffre des dizaines est ${d}`,
-            u === 0 ? "je n'ai aucune unité" : u === d && d !== 0 ? "j'ai autant d'unités que de dizaines" : `mon chiffre des unités est ${u}`,
+            `${c} ${pl(c, "centaine", "centaines")}`,
+            d === 0 ? "0 dizaine" : d === c ? "autant de dizaines que de centaines" : `${d} ${pl(d, "dizaine", "dizaines")}`,
+            u === 0 ? "0 unité" : u === d && d !== 0 && d !== c ? "autant d'unités que de dizaines" : `${u} ${pl(u, "unité", "unités")}`,
           ];
-          const qui = randomChoice(["Je suis un nombre à trois chiffres", "Le dragon a un nombre secret", "Ti Margo pense à un nombre"]);
+          const qui = randomChoice(PARLEURS);
+          const melange = shuffle(indices);
           return court(
-            `${qui} : ${shuffle(indices).join(", ")}. ${qui.startsWith("Je") ? "Qui suis-je ?" : "Quel est ce nombre ?"}`,
+            `${randomChoice(["Nombre secret", "Mon nombre secret", "Le nombre du dragon"])} : ${melange[0]}, ${melange[1]} et ${melange[2]}. Quel est-il ?`,
             n,
             exp(
               "Chaque indice donne le chiffre d'un rang.",
@@ -3209,6 +3221,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
               `${c} centaines, ${d} dizaines, ${u} unités : ${n}.`,
               `C'est ${n}.`,
             ),
+            parle(qui.id, "Devine mon nombre !", "pensee"),
           );
         },
         // Il manque une sorte de matériel : le nombre qu'on vise.
@@ -3218,7 +3231,7 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
           const a = c * 100 + d * 10 + u;
           const ajout = randomChoice([{ t: "une plaque de cent", v: 100 }, { t: "une barre de dix", v: 10 }, { t: "deux barres de dix", v: 20 }, { t: "trois cubes", v: 3 }]);
           return court(
-            `${introCubes(p)} On ajoute ${ajout.t}. ${randomChoice(["Combien de cubes y a-t-il maintenant ?", "Quel nombre obtient-on ?", "Combien de cubes en tout, maintenant ?"])}`,
+            `${introCubes(p)} On ajoute ${ajout.t}. ${randomChoice(["Combien de cubes maintenant ?", "Quel nombre obtient-on ?"])}`,
             a + ajout.v,
             exp(
               "Ajouter une plaque, c'est ajouter 100 ; une barre, 10 ; un cube, 1.",
@@ -3233,7 +3246,3 @@ export const nombresEntiersBank: TutorBankItemV4[] = [
   },
 ];
 
-/** « ses billes », « ses images ». */
-function sesObj(g: Groupe) {
-  return `ses ${g.obj}`;
-}

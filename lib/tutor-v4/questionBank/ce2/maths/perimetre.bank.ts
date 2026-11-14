@@ -89,29 +89,29 @@ const PETITS = [
   { objet: "un drapeau de pirate", geste: "coudre un fil rouge", fil: "fil rouge" },
   { objet: "une carte au trésor", geste: "coller un liseré", fil: "liseré" },
   { objet: "un set de table", geste: "coudre un biais", fil: "biais" },
-  { objet: "une affiche de la kermesse", geste: "coller du scotch de couleur", fil: "scotch" },
-  { objet: "un badge de la fusée", geste: "tracer une bordure", fil: "bordure" },
+  { objet: "une affiche", geste: "coller du scotch", fil: "scotch" },
+  { objet: "un badge", geste: "tracer une bordure", fil: "bordure" },
   { objet: "un mouchoir", geste: "broder un fil bleu", fil: "fil bleu" },
   { objet: "un écusson de foot", geste: "coudre un galon", fil: "galon" },
-  { objet: "une étiquette de cahier", geste: "coller un fil de laine", fil: "laine" },
+  { objet: "une étiquette", geste: "coller de la laine", fil: "laine" },
   { objet: "un tapis de poupée", geste: "coudre une frange", fil: "frange" },
   { objet: "un cerf-volant", geste: "coller un ruban", fil: "ruban" },
-  { objet: "un tableau de peinture", geste: "poser une baguette", fil: "baguette" },
-  { objet: "une page de l'album", geste: "dessiner une frise", fil: "frise" },
+  { objet: "un tableau", geste: "poser une baguette", fil: "baguette" },
+  { objet: "une page d'album", geste: "dessiner une frise", fil: "frise" },
 ] as const;
 
 /** Ce qu'on CLÔTURE, en mètres. */
 const GRANDS = [
   { objet: "un potager", geste: "poser une clôture", fil: "clôture" },
-  { objet: "un enclos pour les poules", geste: "poser du grillage", fil: "grillage" },
-  { objet: "un bac à sable", geste: "poser une bordure en bois", fil: "bordure" },
-  { objet: "un parc pour les poneys", geste: "monter une barrière", fil: "barrière" },
+  { objet: "un poulailler", geste: "poser du grillage", fil: "grillage" },
+  { objet: "un bac à sable", geste: "poser une bordure", fil: "bordure" },
+  { objet: "un parc à poneys", geste: "monter une barrière", fil: "barrière" },
   { objet: "une piste de cirque", geste: "accrocher une guirlande", fil: "guirlande" },
-  { objet: "un stand de la kermesse", geste: "accrocher une guirlande", fil: "guirlande" },
+  { objet: "un stand", geste: "accrocher une guirlande", fil: "guirlande" },
   { objet: "un champ de fraises", geste: "poser une clôture", fil: "clôture" },
   { objet: "un terrain de jeu", geste: "monter une barrière", fil: "barrière" },
-  { objet: "un enclos de girafes au zoo", geste: "poser une clôture", fil: "clôture" },
-  { objet: "une mare de la ferme", geste: "monter une barrière", fil: "barrière" },
+  { objet: "un enclos de girafes", geste: "poser une clôture", fil: "clôture" },
+  { objet: "une mare", geste: "monter une barrière", fil: "barrière" },
   { objet: "un massif de fleurs", geste: "poser une bordure", fil: "bordure" },
   { objet: "un parking à vélos", geste: "peindre une ligne blanche", fil: "ligne blanche" },
   { objet: "un enclos de cabris", geste: "poser une clôture", fil: "clôture" },
@@ -129,8 +129,7 @@ const monde = (u?: "cm" | "m"): Monde => {
 const autour = (m: Monde) => `${m.geste} autour d'${m.objet}`;
 const QUESTION_FIL = (m: Monde) => [
   `Quelle longueur de ${m.fil} faut-il ?`,
-  `Combien ${m.u === "cm" ? "de centimètres" : "de mètres"} de ${m.fil} faut-il ?`,
-  `Quelle longueur de ${m.fil} faut-il pour faire tout le tour ?`,
+  `Combien de ${m.fil} faut-il ?`,
   `Quelle longueur de ${m.fil} prévoir ?`,
   `Il faut combien de ${m.fil} ?`,
 ];
@@ -263,9 +262,6 @@ function ptsRegulier(n: number, cote: number): Pt[] {
 
 const NOM_POLY: Record<number, string> = { 3: "triangle", 4: "quadrilatère", 5: "pentagone", 6: "hexagone", 7: "polygone à 7 côtés", 8: "polygone à 8 côtés" };
 
-/** « de triangle », « d'hexagone ». */
-const deForme = (n: number) => (/^[aeiouéh]/.test(NOM_POLY[n]) ? `d'${NOM_POLY[n]}` : `de ${NOM_POLY[n]}`);
-
 /** Le dessin d'un polygone tiré au hasard, côtés écrits avec leur unité (`cache` : le côté « ? »). */
 function polyCote(n: number, moyenne: number, u: string, cache?: number) {
   const { pts, cotes } = polygoneAuHasard(n, moyenne);
@@ -336,8 +332,8 @@ function quadrillage(groupes: Case[][]): FigureLibreCanvasData {
 
 const UN_CARREAU = (u: "cm" | "m") =>
   u === "cm"
-    ? ["Un carreau mesure 1 cm de côté.", "Le côté d'un carreau mesure 1 cm.", "Chaque côté de carreau fait 1 cm.", "Chaque petit carreau a des côtés de 1 cm."]
-    : ["Ici, un côté de carreau compte pour 1 m.", "Sur ce plan, chaque côté de carreau vaut 1 m.", "Un côté de carreau, c'est 1 m en vrai."];
+    ? ["Un carreau a 1 cm de côté.", "Un carreau mesure 1 cm de côté.", "Le côté d'un carreau fait 1 cm."]
+    : ["Un côté de carreau vaut 1 m.", "Ici, un côté de carreau fait 1 m."];
 
 /* ───────────────────────── Les fabricants ───────────────────────── */
 
@@ -525,10 +521,10 @@ const comprendreItems: TutorBankItemV4[] = [
     const n = entre(3, 6);
     const m = monde();
     const S = qui();
-    const text = `${S} veut ${autour(m)} en forme ${deForme(n)}. ${un([
-      `Combien de longueurs faut-il additionner pour connaître la longueur de ${m.fil} ?`,
+    const text = `${S} veut ${autour(m)}. ${un([
+      "Combien de longueurs faut-il additionner ?",
       "Combien de côtés faut-il additionner ?",
-      `Pour savoir combien de ${m.fil} il faut, combien de côtés faut-il additionner ?`,
+      "Combien de côtés additionner ?",
     ])}`;
     return {
       text,
@@ -631,10 +627,10 @@ const comprendreItems: TutorBankItemV4[] = [
     const forme = un(["un carré", "un rectangle", "un rond", "un triangle"].filter((f) => f !== `un ${NOM_POLY[n]}`));
     const S = qui();
     return {
-      text: `${S} forme ce ${NOM_POLY[n]} avec ${fil}. Puis ${un(["on défait", "on reprend"])} ${fil.replace(/^une? /, (x) => (x === "une " ? "la " : "le "))} pour former ${forme}. ${un([
-        `Quel est le périmètre de ${forme.replace("un ", "ce ")} ?`,
-        `Combien mesure le tour de ${forme.replace("un ", "ce ")} ?`,
-        `Quelle est la longueur du tour, maintenant ?`,
+      text: `${S} forme ce ${NOM_POLY[n]} avec ${fil}. On en fait ${forme}. ${un([
+        `Quel est le périmètre ${forme.replace("un ", "du ")} ?`,
+        `Combien mesure le tour ${forme.replace("un ", "du ")} ?`,
+        "Combien mesure le tour, maintenant ?",
       ])}`,
       ...qcmN(P, [P - cotes[0], P + 4, P - 2, P + 10, cotes[0] * 4], "cm"),
       explanation: exp(
@@ -655,9 +651,9 @@ const comprendreItems: TutorBankItemV4[] = [
     const plein = rect(h, w, 1, 0);
     const creux = sans(plein, [1, k]);
     const cas = un([
-      { avant: plein, apres: sans(plein, [1, w - 1]), dit: "On enlève le carreau du coin, en haut à droite." },
-      { avant: plein, apres: creux, dit: "On enlève un carreau au milieu du bord du haut." },
-      { avant: plein, apres: [...plein, [0, k] as Case], dit: "On colle un carreau de plus sur le bord du haut." },
+      { avant: plein, apres: sans(plein, [1, w - 1]), dit: "On enlève le carreau en haut à droite." },
+      { avant: plein, apres: creux, dit: "On enlève un carreau au milieu du haut." },
+      { avant: plein, apres: [...plein, [0, k] as Case], dit: "On colle un carreau de plus en haut." },
       { avant: creux, apres: plein, dit: "On bouche le creux avec un carreau." },
     ]);
     const a = contour(cas.avant);
@@ -666,8 +662,8 @@ const comprendreItems: TutorBankItemV4[] = [
     const juste = b > a ? "il augmente" : b < a ? "il diminue" : "il ne change pas";
     return {
       text: chiffre
-        ? `${un(UN_CARREAU("cm"))} Le périmètre de cette figure est de ${a} cm. ${cas.dit} ${un(["Quel est le nouveau périmètre ?", "Combien mesure le tour maintenant ?"])}`
-        : `${un(UN_CARREAU("cm"))} ${cas.dit} ${un(["Que devient le périmètre ?", "Le tour de la figure change-t-il ?", "Que se passe-t-il pour le périmètre ?"])}`,
+        ? `Son périmètre : ${a} cm. ${cas.dit} ${un(["Quel est le nouveau périmètre ?", "Combien mesure le tour maintenant ?"])}`
+        : `${cas.dit} ${un(["Que devient le périmètre ?", "Le tour de la figure change-t-il ?", "Que se passe-t-il pour le périmètre ?"])}`,
       ...(chiffre ? qcmN(b, [a, a + 1, a - 1, b + 2, b - 2, a + 4], "cm") : qcm(juste, ["il augmente", "il diminue", "il ne change pas"])),
       explanation: exp(
         "Le périmètre se compte sur le BORD, côté de carreau par côté de carreau.",
@@ -717,7 +713,7 @@ const polygoneItems: TutorBankItemV4[] = [
     microId: "ce2_perimetre_polygone",
     difficulty: 4,
     theme: "neutral",
-    text: "Un pentagone a pour côtés 4 cm, 6 cm, 3 cm, 5 cm et 7 cm. Un élève annonce 18 cm. Où s'est-il trompé ?",
+    text: "Côtés d'un pentagone : 4, 6, 3, 5 et 7 cm. Un élève trouve 18 cm. Où s'est-il trompé ?",
     format: "qcm",
     choices: ["il a compté un côté deux fois", "il a multiplié au lieu d'additionner", "il a oublié un côté", "il n'y a pas d'erreur"],
     expected: ["il a oublié un côté"],
@@ -736,7 +732,7 @@ const polygoneItems: TutorBankItemV4[] = [
     microId: "ce2_perimetre_polygone",
     difficulty: 3,
     theme: "reunion",
-    text: "Un carré de tissu pour un tour de cou mesure 35 cm de côté. Quelle longueur de biais faut-il pour border les quatre côtés ?",
+    text: "Un foulard carré a 35 cm de côté. Quelle longueur de biais faut-il pour le border ?",
     format: "qcm",
     choices: ["105 cm", "70 cm", "150 cm", "140 cm"],
     expected: ["140 cm"],
@@ -758,7 +754,7 @@ const polygoneItems: TutorBankItemV4[] = [
     const { cotes, canvas } = polyCote(n, m.u === "cm" ? entre(5, 15) : entre(4, 20), m.u);
     const P = somme(cotes);
     return {
-      text: `${qui()} veut ${autour(m)} en forme ${deForme(n)}. Les côtés mesurent ${cotes.map((c) => `${c} ${m.u}`).join(", ")}. ${un(QUESTION_FIL(m))}`,
+      text: `${qui()} veut ${autour(m)}. ${un(QUESTION_FIL(m))}`,
       ...qcmN(P, leurresSomme(cotes), m.u),
       explanation: exp(
         "Le périmètre d'un polygone est la somme de tous ses côtés.",
@@ -775,10 +771,9 @@ const polygoneItems: TutorBankItemV4[] = [
     const cases = polyomino();
     const P = contour(cases);
     const u = un(["cm", "m"] as const);
-    const S = qui();
     const quoi = u === "cm" ? un(["ce badge", "ce tapis de poupée", "cette étiquette", "ce motif", "ce morceau de tissu", "ce gâteau vu de haut"]) : un(["ce jardin", "ce potager", "ce bassin", "ce parc", "ce champ", "cette cour", "cet enclos"]);
     return {
-      text: `${S} a dessiné ${quoi} sur un quadrillage. ${un(UN_CARREAU(u))} ${un(["Quel est son périmètre ?", "Combien mesure son tour ?", "Quelle est la longueur de son contour ?", "Calcule son périmètre."])}`,
+      text: `${un(UN_CARREAU(u))} ${un([`Quel est le périmètre de ${quoi} ?`, `Combien mesure le tour de ${quoi} ?`, `Calcule le périmètre de ${quoi}.`])}`,
       ...qcmN(P, [cases.length, P - 2, P + 2, P - 1, P + 1], u),
       explanation: exp(
         "Le périmètre est la longueur du contour : on compte les côtés de carreaux qui bordent la figure.",
@@ -815,9 +810,9 @@ const polygoneItems: TutorBankItemV4[] = [
     const h = entre(2, 4);
     const cases = rect(h, w);
     const P = contour(cases);
-    const quoi = un(["Cette figure", "Ce dessin", "Ce tapis", "Ce drapeau", "Cette étiquette", "Ce morceau de tissu", "Ce badge", "Ce napperon"]);
+    const quoi = un(["cette figure", "ce dessin", "ce tapis", "ce drapeau", "cette étiquette", "ce morceau de tissu", "ce badge", "ce napperon"]);
     return {
-      text: `${quoi} est sur un quadrillage. ${un(UN_CARREAU("cm"))} ${un(QUEL_PERIMETRE)}`,
+      text: `${un(UN_CARREAU("cm"))} ${un([`Quel est le périmètre de ${quoi} ?`, `Combien mesure le tour de ${quoi} ?`, `Calcule le périmètre de ${quoi}.`])}`,
       ...qcmN(P, [w * h, w + h, P + 2, P - 2, P + 1], "cm"),
       explanation: exp(
         "Le périmètre est la longueur du contour.",
@@ -846,7 +841,7 @@ const polygoneItems: TutorBankItemV4[] = [
     if (f.nom === "losange") pts = [{ x: 0, y: 0 }, { x: c, y: 0 }, { x: c * 1.6, y: c * 0.8 }, { x: c * 0.6, y: c * 0.8 }];
     const textes = pts.map((_, i) => (i === 0 ? `${c} ${m.u}` : null));
     return {
-      text: `${qui()} veut ${autour(m)}. C'est un ${f.nom}, de ${c} ${m.u} de côté. ${un(QUESTION_FIL(m))}`,
+      text: `${qui()} veut ${autour(m)}. Ses côtés sont égaux. ${un(QUESTION_FIL(m))}`,
       ...qcmN(P, [(f.n - 1) * c, (f.n + 1) * c, c + f.n, 4 * c, P + 10], m.u),
       explanation: exp(
         "Le périmètre est la somme de tous les côtés.",
@@ -899,9 +894,9 @@ const GAUCHE_DROITE = ["la figure de gauche", "la figure de droite", "elles ont 
 const verdict = (a: number, b: number) => (a === b ? GAUCHE_DROITE[2] : a > b ? GAUCHE_DROITE[0] : GAUCHE_DROITE[1]);
 const QUI_GAGNE = [
   "Quelle figure a le plus grand périmètre ?",
-  "Laquelle a le plus long tour ?",
+  "Quelle figure a le plus long tour ?",
   "Quelle figure a le contour le plus long ?",
-  "Pour laquelle faut-il le plus de ruban pour faire le tour ?",
+  "Quelle figure demande le plus de ruban ?",
 ];
 
 /** Une petite figure cotée pour comparer : triangle, rectangle ou carré. */
@@ -927,7 +922,7 @@ const comparerItems: TutorBankItemV4[] = [
     microId: "ce2_perimetre_comparer",
     difficulty: 3,
     theme: "neutral",
-    text: "Un triangle a pour côtés 5 cm, 5 cm et 5 cm. Un carré a un côté de 4 cm. Lequel a le plus grand périmètre ?",
+    text: "Triangle : 3 côtés de 5 cm. Carré : 4 côtés de 4 cm. Lequel a le plus grand périmètre ?",
     format: "qcm",
     choices: ["le triangle", "ils ont le même périmètre", "le carré", "on ne peut pas savoir"],
     expected: ["le carré"],
@@ -946,7 +941,7 @@ const comparerItems: TutorBankItemV4[] = [
     microId: "ce2_perimetre_comparer",
     difficulty: 5,
     theme: "neutral",
-    text: "Un carré a un côté de 5 cm. Un rectangle mesure 9 cm sur 1 cm. Que peut-on dire de leurs périmètres ?",
+    text: "Carré de 5 cm de côté, rectangle de 9 cm sur 1 cm : que dire de leurs périmètres ?",
     format: "qcm",
     choices: ["le carré a le plus grand", "ils sont égaux : 20 cm tous les deux", "le rectangle a le plus grand", "on ne peut pas comparer des formes différentes"],
     expected: ["ils sont égaux : 20 cm tous les deux"],
@@ -975,7 +970,7 @@ const comparerItems: TutorBankItemV4[] = [
     const fc: Fig = { pts: ptsRectangle(c, c), textes: [`${c} ${u}`, null, null, null], droits: true, codes: [1, 1, 1, 1] };
     const fr: Fig = { pts: ptsRectangle(L, l), textes: texteRect(`${L} ${u}`, `${l} ${u}`), droits: true };
     return {
-      text: `${un(["", "On compare deux figures.", `${qui()} compare deux ${u === "cm" ? "cartes" : "jardins"}.`, `${qui()} hésite entre deux ${u === "cm" ? "napperons" : "enclos"}.`])} Un carré a un côté de ${c} ${u}. Un rectangle mesure ${L} ${u} sur ${l} ${u}. ${un(["Lequel a le plus grand périmètre ?", "Lequel a le plus long tour ?", "Lequel a le contour le plus long ?"])}`.trim(),
+      text: `${un(["", `${qui()} compare deux ${u === "cm" ? "cartes" : "jardins"}.`, `${qui()} hésite entre deux ${u === "cm" ? "napperons" : "enclos"}.`])} ${un(["Lequel a le plus grand périmètre : le carré ou le rectangle ?", "Lequel a le plus long tour : le carré ou le rectangle ?"])}`.trim(),
       ...qcm(juste, ["le carré", "le rectangle", "ils ont le même périmètre", "on ne peut pas savoir"]),
       explanation: exp(
         "Pour comparer deux périmètres, on les calcule d'abord tous les deux.",
@@ -990,7 +985,7 @@ const comparerItems: TutorBankItemV4[] = [
   // ★4 — figure A, figure B : le nombre de côtés ne décide pas
   COMPA(2, 4, "Additionne les côtés de chaque figure avant de choisir.", () => {
     // Les longueurs sont MESURÉES sur le dessin : le triangle et le quadrilatère
-    // tirés au hasard donnent leurs côtés, l'énoncé les recopie.
+    // tirés au hasard donnent leurs côtés, le dessin les écrit.
     const pa = polygoneAuHasard(3, entre(4, 8));
     const pb = polygoneAuHasard(4, entre(3, 6));
     const a = pa.cotes;
@@ -1000,7 +995,7 @@ const comparerItems: TutorBankItemV4[] = [
     const juste = sa === sb ? "les deux ont le même périmètre" : sa > sb ? "la figure A" : "la figure B";
     const S = qui();
     return {
-      text: `${un(["", `${S} compare deux étiquettes.`, `${S} a découpé deux badges.`])} La figure A, à gauche, a pour côtés ${a.map((c) => `${c} cm`).join(", ")}. La figure B, à droite, a pour côtés ${b.map((c) => `${c} cm`).join(", ")}. ${un(["Laquelle a le plus grand périmètre ?", "Laquelle a le plus long tour ?"])}`.trim(),
+      text: `${un(["", `${S} compare deux étiquettes.`, `${S} a découpé deux badges.`])} ${un(["Quelle figure a le plus grand périmètre", "Quelle figure a le plus long tour"])} : A, à gauche, ou B, à droite ?`.trim(),
       ...qcm(juste, ["la figure A", "la figure B", "les deux ont le même périmètre", "on ne peut pas comparer un triangle et un quadrilatère"]),
       explanation: exp(
         "Le périmètre est la somme des côtés : le nombre de côtés ne décide de rien tout seul.",
@@ -1008,7 +1003,7 @@ const comparerItems: TutorBankItemV4[] = [
         `Figure A : ${a.join(" + ")} = ${sa} cm. Figure B : ${b.join(" + ")} = ${sb} cm.`,
         `${cap(juste)}.`,
       ),
-      // Le dessin montre l'allure des deux figures ; les mesures sont dans l'énoncé.
+      // Le dessin porte les deux figures et leurs mesures (l'énoncé ne les recopie plus).
       canvas: deuxFigures({ pts: pa.pts, textes: a.map((c) => `${c} cm`) }, { pts: pb.pts, textes: b.map((c) => `${c} cm`) }, "La figure A et la figure B"),
     };
   }),
@@ -1018,11 +1013,10 @@ const comparerItems: TutorBankItemV4[] = [
     const n = entre(3, 8);
     const S = qui();
     return {
-      text: `${un(["", `${S} n'a pas de règle, seulement un compas.`, `${S} veut comparer des périmètres au compas.`, "Sans règle graduée, on prend un compas."])} ${un([
-        "On veut un segment égal au périmètre de cette figure. Combien de fois faut-il reporter le compas ?",
-        "Pour déplier le tour de cette figure sur une demi-droite, combien de reports faut-il ?",
-        "Combien de fois faut-il reporter le compas pour avoir le périmètre de cette figure ?",
-        "On reporte les côtés de cette figure bout à bout. Combien de reports en tout ?",
+      text: `${un(["", `${S} n'a qu'un compas.`, "Pas de règle, juste un compas."])} ${un([
+        "Combien de reports pour le périmètre de cette figure ?",
+        "Pour déplier le tour de cette figure, combien de reports ?",
+        "On reporte bout à bout les côtés de cette figure. Combien de reports ?",
       ])}`.trim(),
       ...qcm(`${n} fois`, [`${n - 1} fois`, `${n + 1} fois`, "une seule fois", `${n * 2} fois`]),
       explanation: exp(
@@ -1049,7 +1043,7 @@ const comparerItems: TutorBankItemV4[] = [
     const juste = avecNoms ? (pa === pb ? "les deux ont le même périmètre" : pa > pb ? `celui de ${A}` : `celui de ${B}`) : verdict(pa, pb);
     return {
       text: avecNoms
-        ? `${A} et ${B} ont chacun un ${objet}. Celui de ${A} est à gauche, celui de ${B} à droite. ${un(["Lequel a le plus grand périmètre ?", "Lequel a le plus long tour ?", "Lequel a le contour le plus long ?"])}`
+        ? `À gauche, le ${objet} de ${A} ; à droite, celui de ${B}. ${un(["Lequel a le plus grand périmètre ?", "Lequel a le plus long tour ?", "Lequel a le contour le plus long ?"])}`
         : `${un(["Regarde ces deux figures.", "Voici deux figures, mesurées en " + u + ".", "Compare ces deux figures."])} ${un(QUI_GAGNE)}`,
       ...qcm(juste, avecNoms ? [`celui de ${A}`, `celui de ${B}`, "les deux ont le même périmètre"] : GAUCHE_DROITE),
       explanation: exp(
@@ -1070,7 +1064,7 @@ const comparerItems: TutorBankItemV4[] = [
     const pb = contour(b);
     const quoi = un(["deux figures", "deux tapis", "deux jardins", "deux dessins", "deux étiquettes", "deux enclos"]);
     return {
-      text: `${un(["Voici " + quoi + " sur un quadrillage.", qui() + " a dessiné " + quoi + " sur un quadrillage."])} ${un(UN_CARREAU("cm"))} ${un(QUI_GAGNE)}`,
+      text: `${un(["Voici " + quoi + ".", qui() + " a dessiné " + quoi + "."])} ${un(UN_CARREAU("cm"))} ${un(QUI_GAGNE)}`,
       ...qcm(verdict(pa, pb), GAUCHE_DROITE),
       explanation: exp(
         "Le périmètre est la longueur du bord : on compte les côtés de carreaux tout autour.",
@@ -1095,7 +1089,7 @@ const comparerItems: TutorBankItemV4[] = [
     const Pr = 2 * demi;
     const juste = Pc === Pr ? "ils ont le même périmètre" : Pc > Pr ? "le carré a le plus grand périmètre" : "le rectangle a le plus grand périmètre";
     return {
-      text: `${un(["", "Deux figures, deux allures.", `${qui()} compare deux ${u === "cm" ? "tapis" : "potagers"}.`, `${qui()} hésite entre deux ${u === "cm" ? "cadres" : "parcs"}.`])} Un carré a ${c} ${u} de côté. Un rectangle tout en longueur mesure ${L} ${u} sur ${l} ${u}. ${un(["Que dire de leurs périmètres ?", "Compare leurs périmètres.", "Lequel a le plus long tour ?"])}`.trim(),
+      text: `${un(["", "Deux figures, deux allures.", `${qui()} compare deux ${u === "cm" ? "tapis" : "potagers"}.`, `${qui()} hésite entre deux ${u === "cm" ? "cadres" : "parcs"}.`])} ${un(["Que dire des périmètres du carré et du rectangle ?", "Compare les périmètres du carré et du rectangle.", "Lequel a le plus long tour : le carré ou le rectangle ?"])}`.trim(),
       ...qcm(juste, ["ils ont le même périmètre", "le carré a le plus grand périmètre", "le rectangle a le plus grand périmètre", "on ne peut pas comparer des formes différentes"]),
       explanation: exp(
         "Deux figures de formes très différentes peuvent avoir le même périmètre — ou pas : il faut calculer.",
@@ -1128,7 +1122,7 @@ const comparerItems: TutorBankItemV4[] = [
     const pg = contour(g);
     const pd = contour(d);
     return {
-      text: `${un(UN_CARREAU("cm"))} ${un(["Une figure a plus de carreaux que l'autre.", "Une des figures paraît plus grosse.", "Regarde bien le bord."])} ${un(QUI_GAGNE)}`,
+      text: `${un(["Une figure a plus de carreaux que l'autre.", "Une des figures paraît plus grosse.", "Regarde bien le bord."])} ${un(QUI_GAGNE)}`,
       ...qcm(verdict(pg, pd), GAUCHE_DROITE),
       explanation: exp(
         "Le périmètre est la longueur du bord. Le nombre de carreaux de l'intérieur ne le dit pas.",
@@ -1148,7 +1142,7 @@ const comparerItems: TutorBankItemV4[] = [
     microId: "ce2_perimetre_comparer",
     difficulty: 4,
     theme: "neutral",
-    text: "On veut comparer les périmètres de deux polygones dessinés sur une feuille. On n'a pas de règle graduée, seulement un compas. Comment fait-on ?",
+    text: "Sans règle graduée, avec un seul compas : comment comparer les périmètres de deux polygones ?",
     format: "qcm",
     choices: [
       "on lit la longueur de chaque côté sur le compas",
@@ -1172,7 +1166,7 @@ const comparerItems: TutorBankItemV4[] = [
     microId: "ce2_perimetre_comparer",
     difficulty: 4,
     theme: "neutral",
-    text: "On reporte au compas, bout à bout sur une demi-droite, les cinq côtés d'un pentagone. Que représente le segment obtenu ?",
+    text: "On reporte au compas les cinq côtés d'un pentagone, bout à bout. Que représente le segment obtenu ?",
     format: "qcm",
     choices: ["le plus grand côté du pentagone", "la moitié du périmètre", "le périmètre du pentagone", "le nombre de côtés du pentagone"],
     expected: ["le périmètre du pentagone"],
@@ -1191,7 +1185,7 @@ const comparerItems: TutorBankItemV4[] = [
     microId: "ce2_perimetre_comparer",
     difficulty: 5,
     theme: "neutral",
-    text: "Deux figures A et B sont dessinées. En reportant leurs côtés au compas, on obtient un segment plus long pour A que pour B. Que peut-on conclure ?",
+    text: "En reportant ses côtés au compas, la figure A donne un segment plus long que B. Que conclure ?",
     format: "qcm",
     choices: [
       "on ne peut rien conclure tant qu'on n'a pas mesuré en centimètres",
@@ -1250,7 +1244,7 @@ const rectangleItems: TutorBankItemV4[] = [
     microId: "ce2_perimetre_rectangle",
     difficulty: 4,
     theme: "neutral",
-    text: "Pour un rectangle de 8 cm sur 3 cm, un élève calcule 8 × 3 = 24 et annonce un périmètre de 24 cm. Où s'est-il trompé ?",
+    text: "Rectangle de 8 cm sur 3 cm : un élève calcule 8 × 3 = 24 cm de périmètre. Où s'est-il trompé ?",
     format: "qcm",
     choices: ["il a oublié de doubler", "le périmètre s'additionne, il ne se multiplie pas", "il fallait faire 8 + 3", "il n'y a pas d'erreur"],
     expected: ["le périmètre s'additionne, il ne se multiplie pas"],
@@ -1291,7 +1285,7 @@ const rectangleItems: TutorBankItemV4[] = [
     const l = entre(2, L - 1);
     const P = 2 * (L + l);
     return {
-      text: `${qui()} veut ${autour(m)}. ${m.objet.startsWith("une") ? "Elle" : "Il"} est rectangulaire : ${L} ${m.u} de long et ${l} ${m.u} de large. ${un(QUESTION_FIL(m))}`,
+      text: `${qui()} veut ${autour(m)} rectangulaire. ${un(QUESTION_FIL(m))}`,
       ...qcmN(P, leurresRect(L, l), m.u),
       explanation: exp(
         "Le périmètre d'un rectangle est la somme de ses quatre côtés : deux longueurs et deux largeurs.",
@@ -1311,7 +1305,7 @@ const rectangleItems: TutorBankItemV4[] = [
     const versPerimetre = Math.random() < 0.55;
     return versPerimetre
       ? {
-          text: `${S} veut ${autour(m)}. C'est un carré de ${c} ${m.u} de côté. ${un(QUESTION_FIL(m))}`,
+          text: `${S} veut ${autour(m)} carré${m.objet.startsWith("une") ? "e" : ""}. ${un(QUESTION_FIL(m))}`,
           ...qcmN(4 * c, [2 * c, 3 * c, c * c, c + 4, 4 * c + 4], m.u),
           explanation: exp(
             "Le périmètre d'un carré est la somme de ses quatre côtés, tous égaux.",
@@ -1322,7 +1316,7 @@ const rectangleItems: TutorBankItemV4[] = [
           canvas: dessinCarre(c, `${c} ${m.u}`),
         }
       : {
-          text: `${S} a juste assez de ${m.fil} : ${4 * c} ${m.u}, pour faire le tour d'un carré. ${un(["Combien mesure un côté du carré ?", "Quelle est la longueur d'un côté ?", "Trouve le côté du carré."])}`,
+          text: `${S} fait tout le tour d'un carré avec ${4 * c} ${m.u} de ${m.fil}. ${un(["Combien mesure un côté ?", "Quelle est la longueur d'un côté ?", "Trouve le côté du carré."])}`,
           ...qcmN(c, [2 * c, c + 4, 4 * c - 4, c - 1, c + 1], m.u),
           explanation: exp(
             "Le périmètre d'un carré vaut quatre fois son côté.",
@@ -1341,7 +1335,7 @@ const rectangleItems: TutorBankItemV4[] = [
     const l = entre(2, L - 1);
     const P = 2 * (L + l);
     return {
-      text: `${un([`Ce rectangle mesure ${L} ${u} sur ${l} ${u}.`, `Ce rectangle a une longueur de ${L} ${u} et une largeur de ${l} ${u}.`, `Voici un rectangle de ${L} ${u} sur ${l} ${u}.`, `Ce rectangle fait ${L} ${u} de long et ${l} ${u} de large.`])} ${un(QUEL_PERIMETRE)}`,
+      text: `${un([`Ce rectangle mesure ${L} ${u} sur ${l} ${u}.`,  `Voici un rectangle de ${L} ${u} sur ${l} ${u}.`, `Ce rectangle fait ${L} ${u} de long et ${l} ${u} de large.`])} ${un(QUEL_PERIMETRE)}`,
       ...qcmN(P, leurresRect(L, l), u),
       explanation: exp(
         "Le périmètre d'un rectangle est la somme de ses quatre côtés.",
@@ -1388,7 +1382,7 @@ const rectangleItems: TutorBankItemV4[] = [
     ]);
     const S = un(NOMS_CONSONNE.filter((x) => ["Téo", "Ravi", "Malo", "Sacha", "Tom", "Yanis", "Noé"].includes(x)));
     return {
-      text: `${S} cherche le périmètre d'un rectangle de ${L} cm sur ${l} cm. ${un(["Il trouve", "Il annonce", "Il écrit"])} ${e.v} cm. ${un(["Qu'a-t-il fait ?", "Que s'est-il passé ?", "A-t-il raison ?"])}`,
+      text: `Rectangle de ${L} cm sur ${l} cm : ${S} ${un(["trouve", "annonce", "écrit"])} un périmètre de ${e.v} cm. ${un(["Qu'a-t-il fait ?", "Que s'est-il passé ?", "A-t-il raison ?"])}`,
       ...qcm(e.dit, ["il a multiplié au lieu d'additionner", "il n'a compté qu'une longueur et une largeur", "il a oublié un côté", "il ne s'est pas trompé"]),
       explanation: exp(
         "Le périmètre d'un rectangle : deux longueurs et deux largeurs, additionnées.",
@@ -1408,7 +1402,7 @@ const rectangleItems: TutorBankItemV4[] = [
     const P = 2 * (L + l);
     const N = P + entre(3, 40);
     return {
-      text: `${qui()} a ${N} cm de ${m.fil}. Il faut faire le tour d'un rectangle de ${L} cm sur ${l} cm. ${un([`Combien de ${m.fil} reste-t-il ?`, `Quelle longueur de ${m.fil} reste-t-il ensuite ?`, "Combien de centimètres restent ?"])}`,
+      text: `${qui()} a ${N} cm de ${m.fil} pour faire le tour de ce rectangle. ${un([`Combien de ${m.fil} reste-t-il ?`, "Combien en reste-t-il ?", "Combien de centimètres restent ?"])}`,
       ...qcmN(N - P, [N - (L + l), P, N - P + 2, N - P - 2, N - L * l > 0 ? N - L * l : N - P + 10], "cm"),
       explanation: exp(
         "Le tour du rectangle, c'est son périmètre : deux longueurs et deux largeurs.",
@@ -1451,7 +1445,7 @@ const defiItems: TutorBankItemV4[] = [
     microId: "ce2_perimetre_defi",
     difficulty: 5,
     theme: "reunion",
-    text: "Le potager de l'école est un rectangle de 12 m sur 5 m. On veut le clôturer, mais on laisse une ouverture de 2 m pour le portail. Combien de mètres de grillage faut-il ?",
+    text: "Potager de 12 m sur 5 m : on le clôture, sauf 2 m pour le portail. Combien de grillage ?",
     format: "qcm",
     choices: ["34 m", "36 m", "32 m", "15 m"],
     expected: ["32 m"],
@@ -1476,7 +1470,7 @@ const defiItems: TutorBankItemV4[] = [
     const histoire = Math.random() < 0.6;
     return {
       text: histoire
-        ? `${qui()} a utilisé ${P} ${u} de ${m.fil} pour faire le tour d'un rectangle. La longueur mesure ${L} ${u}. ${un(["Combien mesure la largeur ?", "Quelle est la largeur du rectangle ?", "Trouve la largeur."])}`
+        ? `${qui()} fait le tour de ce rectangle avec ${P} ${u} de ${m.fil}. ${un(["Combien mesure la largeur ?", "Quelle est sa largeur ?", "Trouve la largeur."])}`
         : `${un(["Un rectangle a un périmètre de", "Le tour de ce rectangle mesure", "Ce rectangle a un contour de"])} ${P} ${u}. Sa longueur mesure ${L} ${u}. ${un(["Combien mesure sa largeur ?", "Quelle est sa largeur ?", "Trouve le côté « ? »."])}`,
       ...qcmN(l, [2 * l, P - L, P - 2 * L, l + 1, l - 1], u),
       explanation: exp(
@@ -1523,7 +1517,7 @@ const defiItems: TutorBankItemV4[] = [
       description: "Un rectangle avec une ouverture",
     };
     return {
-      text: `${qui()} veut ${autour(m)}. C'est un rectangle de ${L} m sur ${l} m. On laisse ${o} m pour ${passage}. ${un(QUESTION_FIL(m))}`,
+      text: `${qui()} veut ${autour(m)}, sauf ${passage}. ${un(QUESTION_FIL(m))}`,
       ...qcmN(P - o, [P, P + o, L + l - o, P - 2 * o], "m"),
       explanation: exp(
         "La clôture suit le contour, sauf là où on laisse une ouverture.",
@@ -1564,7 +1558,7 @@ const defiItems: TutorBankItemV4[] = [
       description: `${k} carrés collés`,
     };
     return {
-      text: `${qui()} pose ${k === 2 ? "deux" : "trois"} ${quoi} de ${c} ${u} de côté, ${colles} côte à côte. ${un(["Quel est le périmètre de la grande figure ?", "Combien mesure le tour de la grande figure ?", "Quelle est la longueur du contour de l'ensemble ?"])}`,
+      text: `${qui()} pose ${k === 2 ? "deux" : "trois"} ${quoi} ${colles} côte à côte. ${un(["Quel est le périmètre de l'ensemble ?", "Combien mesure le tour de l'ensemble ?", "Quel est le tour de l'ensemble ?"])}`,
       ...qcmN(P, [4 * k * c, 4 * c, P + c, P - c, 2 * k * c], u),
       explanation: exp(
         "Le périmètre est le tour de la grande figure : les côtés collés sont à l'intérieur, ils ne comptent plus.",

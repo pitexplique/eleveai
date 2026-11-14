@@ -143,7 +143,7 @@ const SOLIDES = [
     faces: 5,
     aretes: 8,
     sommets: 5,
-    natureFaces: "un carré pour la base et quatre triangles",
+    natureFaces: "une base carrée et quatre triangles",
     objet: "un toit de kiosque à quatre pans",
   },
   {
@@ -152,7 +152,7 @@ const SOLIDES = [
     faces: 2,
     aretes: 0,
     sommets: 0,
-    natureFaces: "deux disques, reliés par une surface courbe",
+    natureFaces: "deux disques et une surface courbe",
     objet: "une boîte de conserve",
   },
   {
@@ -161,7 +161,7 @@ const SOLIDES = [
     faces: 1,
     aretes: 0,
     sommets: 1,
-    natureFaces: "un disque, et une surface courbe qui monte jusqu'à la pointe",
+    natureFaces: "un disque et une pointe",
     objet: "un cornet de glace",
   },
   {
@@ -321,7 +321,7 @@ const solidesBase: TutorBankItemV4[] = [
     microId: "ce2_solide_reconnaitre",
     difficulty: 4,
     theme: "neutral",
-    text: "Sur un dessin en perspective, les faces carrées d'un cube ont l'air penchées, comme des losanges. Est-ce toujours un cube ?",
+    text: "Dessinées en perspective, les faces carrées d'un cube ont l'air de losanges. Est-ce toujours un cube ?",
     format: "qcm",
     choices: [
       "oui : c'est le dessin qui déforme, pas le solide",
@@ -416,7 +416,7 @@ const solidesBase: TutorBankItemV4[] = [
     microId: "ce2_solide_decrire",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève dit qu'un cube a 8 arêtes, parce qu'il a compté ses 8 coins. Combien un cube a-t-il d'arêtes ?",
+    text: "Un élève compte les 8 coins et dit : « 8 arêtes ». Combien un cube a-t-il d'arêtes ?",
     format: "short",
     expected: ["12"],
     comparator: "number_equal",
@@ -536,7 +536,7 @@ const solidesBase: TutorBankItemV4[] = [
     microId: "ce2_solide_decrire",
     difficulty: 4,
     theme: "neutral",
-    text: "Un cube est dessiné en perspective. Un élève compte les arêtes sur le dessin : il en voit 9. Combien le cube a-t-il d'arêtes ?",
+    text: "Sur le dessin d'un cube, un élève voit 9 arêtes. Combien le cube a-t-il d'arêtes ?",
     format: "qcm",
     choices: ["12", "9", "8", "6"],
     expected: ["12"],
@@ -675,7 +675,7 @@ const solidesBase: TutorBankItemV4[] = [
     microId: "ce2_solide_faces_pyramide",
     difficulty: 5,
     theme: "neutral",
-    text: "Un élève dit : « toutes les faces d'une pyramide sont des triangles ». A-t-il raison pour une pyramide à base carrée ?",
+    text: "« Toutes les faces d'une pyramide à base carrée sont des triangles. » Est-ce vrai ?",
     format: "qcm",
     choices: [
       "non, la base est un carré",
@@ -877,7 +877,7 @@ const solidesBase: TutorBankItemV4[] = [
     microId: "ce2_solide_patron",
     difficulty: 5,
     theme: "neutral",
-    text: "Voici six carrés collés en un bloc de 2 lignes sur 3 colonnes. En les pliant, obtient-on un cube ?",
+    text: "Six carrés forment un bloc de 2 lignes sur 3 colonnes. En les pliant, obtient-on un cube ?",
     format: "qcm",
     choices: [
       "non, deux faces se superposent et il reste un trou",
@@ -986,7 +986,7 @@ const solidesBase: TutorBankItemV4[] = [
     microId: "ce2_solide_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Un solide a 6 faces, 12 arêtes et 8 sommets, et toutes ses faces sont des rectangles qui ne sont pas des carrés. Lequel est-ce ?",
+    text: "Un solide a 6 faces, 12 arêtes, 8 sommets. Ses faces sont des rectangles, pas des carrés. Lequel ?",
     format: "qcm",
     choices: ["un pavé droit", "un cube", "une pyramide", "un cylindre"],
     expected: ["un pavé droit"],
@@ -1009,7 +1009,7 @@ const solidesBase: TutorBankItemV4[] = [
     microId: "ce2_solide_defi",
     difficulty: 5,
     theme: "reunion",
-    text: "On fabrique un cube en carton de 8 cm d'arête. Quelle longueur totale de ruban adhésif faut-il pour recouvrir toutes ses arêtes, en cm ?",
+    text: "Un cube a 8 cm d'arête. Combien de cm de ruban pour couvrir toutes ses arêtes ?",
     format: "short",
     expected: ["96"],
     comparator: "number_equal",
@@ -1039,7 +1039,7 @@ const solidesBase: TutorBankItemV4[] = [
       // « aucune face plate : tout est courbe » se recolle mal derrière deux
       // points : on l'introduit par « On y voit », qui va aux six solides.
       return {
-        text: `Un solide a ${s.faces} face${s.faces > 1 ? "s" : ""} plate${s.faces > 1 ? "s" : ""}, ${s.aretes} arête${s.aretes > 1 ? "s" : ""} et ${s.sommets} sommet${s.sommets > 1 ? "s" : ""}. On y voit ${s.natureFaces}. Lequel est-ce ?`,
+        text: `Un solide : ${s.faces} face${s.faces > 1 ? "s" : ""} plate${s.faces > 1 ? "s" : ""}, ${s.aretes} arête${s.aretes > 1 ? "s" : ""}, ${s.sommets} sommet${s.sommets > 1 ? "s" : ""}. On y voit ${s.natureFaces}. Lequel ?`,
         format: "qcm",
         choices: makeChoices(s.nom, SOLIDES.map((x) => x.nom)),
         expected: [s.nom],
@@ -1067,7 +1067,7 @@ const solidesBase: TutorBankItemV4[] = [
     generate: () => {
       const arete = randomInt(3, 12);
       return {
-        text: `Un cube a une arête de ${arete} cm. Quelle est la longueur totale de ses 12 arêtes, en cm ?`,
+        text: `Un cube a des arêtes de ${arete} cm. Combien mesurent ses 12 arêtes en tout, en cm ?`,
         format: "short",
         expected: [String(12 * arete)],
         comparator: "number_equal",
@@ -1110,7 +1110,7 @@ const qui = () => un(TROUPE);
 const TOUS = [
   {
     nom: "le cube", de: "d'un cube", canvas: () => solide("cube"),
-    objets: ["un dé à jouer", "un glaçon tout carré", "un bloc de construction tout carré", "une boîte cadeau aux faces toutes carrées"],
+    objets: ["un dé à jouer", "un glaçon tout carré", "un bloc de construction tout carré", "une boîte cadeau toute carrée"],
     props: ["six faces carrées, toutes pareilles", "six faces qui sont toutes des carrés"],
   },
   {
@@ -1307,8 +1307,8 @@ const GESTES: Record<Quoi, Array<{ geste: string; quoi: string }>> = {
   ],
   aretes: [
     { geste: "colle un ruban sur chaque arête", quoi: "rubans" },
-    { geste: "repasse chaque arête au feutre, un trait par arête", quoi: "traits" },
-    { geste: "pose un fil de laine sur chaque arête", quoi: "fils de laine" },
+    { geste: "repasse chaque arête au feutre", quoi: "traits" },
+    { geste: "pose une ficelle sur chaque arête", quoi: "ficelles" },
   ],
   sommets: [
     { geste: "pique une perle sur chaque sommet", quoi: "perles" },
@@ -1359,7 +1359,7 @@ function decrire(d: number): Gen {
   if (d === 3 || r < 0.2) {
     const g = un(GESTES[q]);
     return {
-      text: `${P} ${g.geste} ${deObjet(o)} en forme ${s.deS}. Combien ${/^[aeiouéèh]/i.test(g.quoi) ? "d'" : "de "}${g.quoi} lui faut-il ?`,
+      text: `${P} ${g.geste} ${deObjet(o)} comme ${o.startsWith("une ") ? "celle-ci" : "celui-ci"}. Combien ${/^[aeiouéèh]/i.test(g.quoi) ? "d'" : "de "}${g.quoi} ?`,
       ...choixCompte(s, q),
       explanation: explCompte(s, q, `Il faut autant de ${g.quoi} que ${MOTS[q].de} : ${v}.`),
       canvas: s.canvas(),
@@ -1373,8 +1373,8 @@ function decrire(d: number): Gen {
     const juste = enTout ? s.aretes + s.sommets : s[qq];
     const mot = qq === "aretes" ? m1 : m2;
     return {
-      text: `${P} fabrique ${s.un} avec des ${m1} et des ${m2}. ${cap(u1)} par arête, ${u2} par sommet. ${
-        enTout ? `Combien d'objets en tout ?` : `Combien ${/^[aeiouéèh]/i.test(mot) ? "d'" : "de "}${mot} lui faut-il ?`
+      text: `${P} construit ${s.ce} : ${u1} par arête, ${u2} par sommet. ${
+        enTout ? `Combien d'objets en tout ?` : `Combien ${/^[aeiouéèh]/i.test(mot) ? "d'" : "de "}${mot} ?`
       }`,
       ...(enTout ? qcmN(juste, [s.aretes, s.sommets, s.faces + s.sommets, juste + 1]) : choixCompte(s, qq)),
       explanation: explCompte(
@@ -1390,9 +1390,9 @@ function decrire(d: number): Gen {
   if (r < 0.85) {
     return {
       text: un([
-        `Sur ce dessin, on ne voit pas toutes ${MOTS[q].les} de ${s.ce}. Combien en a-t-${s.il} en tout ?`,
-        `${P} compte ${MOTS[q].les} de ${s.ce} sur le dessin. Attention aux cachées ! Combien y en a-t-il ?`,
-        `Certaines ${MOTS[q].mot} de ${s.ce} sont cachées derrière. Combien en a-t-${s.il} vraiment ?`,
+        `On ne voit pas tout sur le dessin. Combien ${MOTS[q].de} a ${s.ce} ?`,
+        `${P} compte ${MOTS[q].les} de ${s.ce}, même derrière. Combien y en a-t-il ?`,
+        `Attention à l'arrière ! Combien ${MOTS[q].de} a ${s.ce} en tout ?`,
       ]),
       ...choixCompte(s, q),
       explanation: explCompte(s, q, `Le dessin cache l'arrière du solide. ${cap(s.nom)} a en tout ${v} ${MOTS[q].mot}.`),
@@ -1404,7 +1404,6 @@ function decrire(d: number): Gen {
   const ecart = a[q] - b[q];
   return {
     text: un([
-      `${P} compare ${a.nom} et ${b.nom}. Combien ${MOTS[q].de} de plus a ${a.nom} ?`,
       `${cap(a.nom)} a combien ${MOTS[q].de} de plus que ${b.nom} ?`,
     ]),
     ...qcmN(ecart, [a[q], b[q], ecart + 1, ecart - 1]),
@@ -1436,7 +1435,7 @@ function facesPyramide(d: number): Gen {
         `${P} construit cette pyramide en pâte à modeler.`,
         `La maîtresse pose cette pyramide sur la table.`,
         `${P} peint cette pyramide pour la kermesse.`,
-        `L'architecte montre la maquette d'un toit comme cette pyramide.`,
+        `L'architecte montre un toit comme cette pyramide.`,
       ])
     : un([
         `${P} imagine une pyramide à base ${p.base}.`,
@@ -1485,7 +1484,7 @@ function facesPyramide(d: number): Gen {
   }
   if (r < 0.85) {
     return {
-      text: `${debut} ${un(["De quoi sont faites ses faces ?", "Quelles sont toutes ses faces ?", "Quelles faces faut-il découper pour la fabriquer ?"])}`,
+      text: `${debut} ${un(["De quoi sont faites ses faces ?", "Quelles sont toutes ses faces ?", "Quelles faces faut-il découper ?"])}`,
       ...qcm(
         juste,
         p.n === 3
@@ -1504,7 +1503,7 @@ function facesPyramide(d: number): Gen {
   const q: "sommets" | "aretes" = Math.random() < 0.5 || d < 4 ? "sommets" : "aretes";
   const n = q === "sommets" ? p.n + 1 : 2 * p.n;
   return {
-    text: `${debut} ${q === "sommets" ? un(["Combien a-t-elle de sommets ?", "Combien a-t-elle de coins pointus, pointe comprise ?"]) : "Combien a-t-elle d'arêtes ?"}`,
+    text: `${debut} ${q === "sommets" ? un(["Combien a-t-elle de sommets ?", "Combien de coins pointus, pointe comprise ?"]) : "Combien a-t-elle d'arêtes ?"}`,
     ...qcmN(n, q === "sommets" ? [p.n, p.n + 2, 2 * p.n] : [p.n, p.n + 1, 2 * p.n + 1]),
     explanation: expl(
       q === "sommets"
@@ -1606,7 +1605,7 @@ function patronUn(d: number): Gen {
         : un([
             `${P} découpe ce patron et le plie.`,
             `${P} a dessiné ces six carrés sur du carton.`,
-            `Pour la kermesse, ${P} veut fabriquer une boîte en forme de cube.`,
+            `Pour la kermesse, ${P} veut plier une boîte en cube.`,
             `La maîtresse donne ce patron à ${P}.`,
             `Le chef pâtissier découpe ce carton pour une boîte à gâteau.`,
           ]),
@@ -1664,8 +1663,8 @@ function patronDe(): Gen {
   const faux = nombres.filter((_, j) => j !== i && j !== opp);
   return {
     text: [
-      un([`${P} fabrique un dé avec ce patron.`, "On plie ce patron pour faire un dé.", `${P} découpe ce patron de dé.`, `Pour le jeu de l'oie, ${P} fabrique un dé tout neuf.`]),
-      un([`Quel nombre sera en face du ${nombres[i]} ?`, `Quand le dé est fermé, quel nombre est opposé au ${nombres[i]} ?`, `Si le ${nombres[i]} est dessous, quel nombre est dessus ?`]),
+      un([`${P} fabrique un dé avec ce patron.`, "On plie ce patron pour faire un dé.", `${P} découpe ce patron de dé.`, `Pour le jeu de l'oie, ${P} plie ce dé.`]),
+      un([`Quel nombre sera en face du ${nombres[i]} ?`, `Dé fermé, quel nombre est opposé au ${nombres[i]} ?`, `Si le ${nombres[i]} est dessous, quel nombre est dessus ?`]),
     ].join(" "),
     ...qcm(String(juste), faux.map(String)),
     explanation: explPatron(
@@ -1713,7 +1712,7 @@ function patronManque(): Gen {
     return {
       text: [
         un([`${P} a perdu un carré de son patron de cube.`, "Il manque un carré à ce patron de cube.", `${P} doit coller un sixième carré.`]),
-        un(["Où faut-il l'ajouter ?", "À quelle place faut-il le coller pour fermer le cube ?", "Quelle place permet d'obtenir un cube ?"]),
+        un(["Où faut-il l'ajouter ?", "Où le coller pour fermer le cube ?", "Quelle place permet d'obtenir un cube ?"]),
       ].join(" "),
       ...qcm(juste, noms.map((n) => `à la place ${n}`)),
       explanation: explPatron(
@@ -1742,12 +1741,11 @@ function defi(): Gen {
   if (r < 0.6) return patronManque();
   if (r < 0.75) return facesPyramide(5);
   // Le squelette est donné : quel solide ?
-  const P = qui();
   const s: Poly = un(POLYS);
   const [m1, m2] = un(MATERIAUX);
   const noms = POLYS.filter((p) => p !== s && !(p.aretes === s.aretes && p.sommets === s.sommets)).map((p) => p.un as string);
   return {
-    text: `${P} a utilisé ${s.aretes} ${m1} pour les arêtes et ${s.sommets} ${m2} pour les sommets. Quel solide a-t-${P === "Pic le paille-en-queue" ? "il" : "on"} construit ?`,
+    text: `Avec ${s.aretes} ${m1} pour les arêtes et ${s.sommets} ${m2} pour les sommets, quel solide construit-on ?`,
     ...qcm(s.un, [...noms, "un cylindre"]),
     explanation: explCompte(s, "aretes", `${s.aretes} arêtes et ${s.sommets} sommets : c'est ${s.un}.`),
   };

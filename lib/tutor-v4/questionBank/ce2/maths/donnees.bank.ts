@@ -137,7 +137,7 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "ce2_donnees_lire_tableau",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève cherche une donnée dans un tableau et lit la case juste au-dessus de la bonne. Que doit-il faire pour ne plus se tromper ?",
+    text: "Un élève lit la case juste au-dessus de la bonne. Comment ne plus se tromper ?",
     format: "qcm",
     choices: [
       "poser son doigt sur la ligne cherchée et le faire glisser jusqu'à la colonne",
@@ -228,7 +228,7 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "ce2_donnees_double_entree",
     difficulty: 5,
     theme: "neutral",
-    text: "Un élève cherche le nombre d'élèves de CE2 le mardi, mais il lit la case de la ligne CE1. Quelle erreur a-t-il faite ?",
+    text: "Un élève cherche « CE2, mardi », mais lit sur la ligne CE1. Quelle erreur a-t-il faite ?",
     format: "qcm",
     choices: [
       "il a croisé la bonne colonne avec la mauvaise ligne",
@@ -260,7 +260,7 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "ce2_donnees_completer_tableau",
     difficulty: 3,
     theme: "neutral",
-    text: "Un tableau donne 12, 15 et une case vide, avec un total de 40. Que vaut la case vide ?",
+    text: "Un tableau : 12, 15, une case vide, et un total de 40. Que vaut la case vide ?",
     format: "short",
     expected: ["13"],
     comparator: "number_equal",
@@ -376,7 +376,7 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "ce2_donnees_lire_graphique",
     difficulty: 5,
     theme: "neutral",
-    text: "Sur un diagramme, chaque carreau de hauteur vaut 2 élèves. Une barre monte de 3 carreaux. Combien d'élèves représente-t-elle ?",
+    text: "Chaque carreau vaut 2 élèves. Une barre monte de 3 carreaux. Combien d'élèves représente-t-elle ?",
     format: "short",
     expected: ["6"],
     comparator: "number_equal",
@@ -545,7 +545,7 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "ce2_donnees_interpreter",
     difficulty: 5,
     theme: "neutral",
-    text: "Un diagramme montre que le CE2 a emprunté plus de livres que le CE1. Peut-on en conclure que les élèves de CE2 lisent plus vite ?",
+    text: "Le CE2 a emprunté plus de livres que le CE1. Peut-on en conclure qu'il lit plus vite ?",
     format: "qcm",
     choices: [
       "non, le diagramme ne dit rien de la vitesse de lecture",
@@ -637,7 +637,7 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "ce2_donnees_probleme",
     difficulty: 5,
     theme: "neutral",
-    text: "Un tableau donne 16 élèves lundi, 18 mardi et 21 jeudi à la cantine. Chaque repas coûte 3 €. Combien coûtent les repas des trois jours ?",
+    text: "À la cantine : 16 repas lundi, 18 mardi, 21 jeudi, à 3 € chacun. Combien coûtent-ils en tout ?",
     format: "short",
     expected: ["165"],
     comparator: "number_equal",
@@ -663,7 +663,7 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "ce2_donnees_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Sur un diagramme où chaque carreau vaut 5 élèves, une barre monte de 4 carreaux et une autre de 7. De combien d'élèves la seconde dépasse-t-elle la première ?",
+    text: "1 carreau = 5 élèves. Deux barres : 4 et 7 carreaux. De combien d'élèves la seconde dépasse-t-elle la première ?",
     format: "short",
     expected: ["15"],
     comparator: "number_equal",
@@ -685,7 +685,7 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "ce2_donnees_defi",
     difficulty: 5,
     theme: "reunion",
-    text: "Au marché, 215 fruits ont été vendus en tout : 78 letchis, 45 mangues, 32 ananas et le reste en bananes. Combien de bananes ?",
+    text: "Au marché, 215 fruits vendus : 78 letchis, 45 mangues, 32 ananas, le reste en bananes. Combien de bananes ?",
     format: "short",
     expected: ["60"],
     comparator: "number_equal",
@@ -971,7 +971,7 @@ function lireValeur(e: Etoile, J: Jeu = jeu(e), canvas?: CanvasFigure, ou = "le 
     `${qu} ?`,
     `Lis ${ou}. ${qu} ?`,
     `Regarde la ligne « ${J.lignes[i].l} ». ${qu} ?`,
-    ...(e >= 3 ? [`${p.nom} lit ${ou} « ${T.titre} ». ${qu} ?`, `D'après ${ou}, ${min1(qu)} ?`] : []),
+    ...(e >= 3 ? [`${p.nom} lit ${ou}. ${qu} ?`, `D'après ${ou}, ${min1(qu)} ?`] : []),
   ];
   return {
     text: pick(tournures),
@@ -1021,7 +1021,7 @@ function lirePlusMoins(e: Etoile, J: Jeu = jeu(e), canvas?: CanvasFigure, ou = "
   const tournures = [
     `${plus ? T.plus : T.moins} ?`,
     `Regarde ${ou}. ${plus ? T.plus : T.moins} ?`,
-    ...(e >= 3 ? [`${quelquun().nom} lit ${ou} « ${T.titre} ». ${plus ? T.plus : T.moins} ?`] : []),
+    ...(e >= 3 ? [`${quelquun().nom} lit ${ou}. ${plus ? T.plus : T.moins} ?`] : []),
   ];
   return {
     text: pick(tournures),
@@ -1258,7 +1258,7 @@ function caseDouble(e: Etoile, G: Grille = grille(e, e <= 2 ? 2 : 3, e <= 2 ? pi
   const tournures = [
     `${qu} ?`,
     `Lis le tableau. ${qu} ?`,
-    `Pose un doigt sur la ligne « ${G.R[i].l} », un autre sur la colonne « ${G.C[j].l} ». ${qu} ?`,
+    `Un doigt sur la ligne « ${G.R[i].l} », un sur la colonne « ${G.C[j].l} ». Que lis-tu au croisement ?`,
     ...(e >= 3 ? [`${quelquun().nom} cherche dans le tableau : ${min1(qu)} ?`] : []),
   ];
   const voisins = [...G.g[i].filter((_, k) => k !== j), ...G.g.map((l) => l[j]).filter((_, k) => k !== i)];
@@ -1493,7 +1493,7 @@ function caseDecrite(e: Etoile, J: Jeu = jeu(e, e <= 3 ? 3 : 4)): Q {
   const n = J.v[t];
   return {
     text: pick([
-      `Pour « ${J.lignes[t].l} », il y a ${dit} que pour « ${J.lignes[r].l} ». Quel nombre écrire à la place du « ? » ?`,
+      `« ${J.lignes[t].l} » a ${dit} que « ${J.lignes[r].l} ». Que vaut le « ? » ?`,
       `${quelquun().nom} se souvient : « ${J.lignes[t].l} » a ${dit} que « ${J.lignes[r].l} ». Que vaut la case « ? » ?`,
       `Complète le tableau : « ${J.lignes[t].l} » a ${dit} que « ${J.lignes[r].l} ».`,
     ]),
@@ -1518,7 +1518,7 @@ function caseDoubleManquante(e: Etoile, G: Grille = grille(e)): Q {
   const connus = G.g[i].filter((_, k) => k !== j);
   return {
     text: pick([
-      `Sur la ligne « ${G.R[i].l} », une case est effacée. Quel nombre écrire à la place du « ? » ?`,
+      `Ligne « ${G.R[i].l} » : quel nombre cache le « ? » ?`,
       `Retrouve le nombre caché : la colonne « Total » donne ${s} pour « ${G.R[i].l} ».`,
       `${quelquun().nom} a fait une tache sur le tableau. Que vaut la case « ? » ?`,
     ]),
@@ -1576,7 +1576,7 @@ function lireBarre(e: Etoile): Q {
     `${qu} ? Lis la hauteur de la barre sur l'axe.`,
     `Regarde la barre « ${J.lignes[i].l} ». ${qu} ?`,
     `D'après le diagramme, ${min1(qu)} ?`,
-    ...(e >= 3 ? [`${quelquun().nom} lit le diagramme « ${T.titre} ». ${qu} ?`] : []),
+    ...(e >= 3 ? [`${quelquun().nom} lit le diagramme. ${qu} ?`] : []),
   ];
   const carreaux = n / pas;
   return {
@@ -1642,9 +1642,9 @@ function combienDeCarreaux(e: Etoile): Q {
   const qui = quelquun().nom;
   return {
     text: pick([
-      `On dessine le diagramme de ce tableau. Un carreau vaut ${U(T, pas)}. Combien de carreaux de haut pour la barre « ${J.lignes[i].l} » ?`,
+      `Pour le diagramme, un carreau vaut ${U(T, pas)}. Combien de carreaux pour la barre « ${J.lignes[i].l} » ?`,
       `${qui} trace les barres : 1 carreau = ${U(T, pas)}. Quelle hauteur pour « ${J.lignes[i].l} » ?`,
-      `Chaque carreau compte pour ${U(T, pas)}. Combien de carreaux faut-il pour la barre « ${J.lignes[i].l} » ?`,
+      `Un carreau compte pour ${U(T, pas)}. Combien de carreaux pour « ${J.lignes[i].l} » ?`,
     ]),
     format: "qcm",
     choices: choix(pl(h, "carreau", "carreaux"), [J.v[i], h + 1, h - 1, h * 2, J.v[i] + pas].filter((x) => x > 0).map((x) => pl(x, "carreau", "carreaux"))),
@@ -1693,7 +1693,7 @@ function barreFausse(e: Etoile): Q {
   const liste = J.lignes.map((l, k) => `${l.l} ${J.v[k]}`).join(", ");
   return {
     text: pick([
-      `Le tableau dit : ${liste}. ${quelquun().nom} a dessiné ce diagramme. Quelle barre est fausse ?`,
+      `Tableau : ${liste}. ${quelquun().nom} a tracé ce diagramme. Quelle barre est fausse ?`,
       `Voici les vrais nombres : ${liste}. Une barre du diagramme est fausse. Laquelle ?`,
       `Compare le diagramme aux nombres ${liste}. Quelle barre faut-il corriger ?`,
     ]),
@@ -2067,7 +2067,7 @@ function deuxInconnues(): Q {
   const d = J.v[a] - J.v[b];
   return {
     text: pick([
-      `« ${J.lignes[a].l} » et « ${J.lignes[b].l} » font ${U(T, s)} en tout, et « ${J.lignes[a].l} » a ${U(T, d)} de plus. Combien pour « ${J.lignes[b].l} » ?`,
+      `Ensemble, « ${J.lignes[a].l} » et « ${J.lignes[b].l} » font ${U(T, s)}, et « ${J.lignes[a].l} » a ${U(T, d)} de plus. Combien pour « ${J.lignes[b].l} » ?`,
       `${quelquun().nom} sait que les deux cases « ? » font ${s} ensemble, avec ${d} de plus pour « ${J.lignes[a].l} ». Que vaut « ${J.lignes[b].l} » ?`,
       `Deux cases sont cachées. Ensemble : ${s}. Écart : ${d}, en faveur de « ${J.lignes[a].l} ». Combien pour « ${J.lignes[b].l} » ?`,
     ]),

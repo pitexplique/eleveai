@@ -158,26 +158,26 @@ type Moment = { txt: (p: Enfant) => string; h: readonly number[] };
 const MOMENTS: readonly Moment[] = [
   { txt: (p) => `${p.nom} prend son petit-déjeuner.`, h: [7, 8] },
   { txt: (p) => `${p.nom} part à l'école.`, h: [7, 8] },
-  { txt: () => "La maîtresse ouvre la porte de la classe.", h: [8, 9] },
+  { txt: () => "La classe commence.", h: [8, 9] },
   { txt: () => "La récré commence.", h: [10] },
-  { txt: () => "Le chef cuisinier sert le repas de la cantine.", h: [11, 12] },
+  { txt: () => "La cantine sert le repas.", h: [11, 12] },
   { txt: (p) => `${p.nom} arrive au cirque.`, h: [14, 15, 16] },
   { txt: () => "Le spectacle de marionnettes commence.", h: [14, 15, 16, 17] },
   { txt: (p) => `${p.nom} prend son goûter.`, h: [16] },
   { txt: (p) => `${p.nom} saute dans la piscine.`, h: [14, 15, 16, 17] },
-  { txt: () => "La boulangère sort les croissants du four.", h: [6, 7] },
+  { txt: () => "Les croissants sortent du four.", h: [6, 7] },
   { txt: () => "La vétérinaire soigne un petit chat.", h: [9, 10, 11, 14, 15] },
-  { txt: () => "Au zoo, les girafes reçoivent leur repas.", h: [9, 10, 11] },
-  { txt: () => "Pic le paille-en-queue se réveille dans son arbre.", h: [6, 7, 8] },
+  { txt: () => "Les girafes du zoo mangent.", h: [9, 10, 11] },
+  { txt: () => "Pic se réveille.", h: [6, 7, 8] },
   { txt: (p) => `${p.nom} plante des radis au jardin.`, h: [9, 10, 15, 16, 17] },
-  { txt: () => "Le petit train de la fête foraine démarre.", h: [14, 15, 16, 17] },
+  { txt: () => "Le petit train démarre.", h: [14, 15, 16, 17] },
   { txt: (p) => `Le match de foot ${deNom(p.nom)} commence.`, h: [10, 11, 14, 15] },
   { txt: () => "La bibliothèque ouvre ses portes.", h: [9, 10] },
   { txt: (p) => `${p.nom} prend son bain.`, h: [18, 19] },
-  { txt: (p) => `${p.nom} lit une histoire de dragon avant de dormir.`, h: [20] },
+  { txt: (p) => `${p.nom} lit une histoire au lit.`, h: [20] },
   { txt: () => "Le gâteau d'anniversaire sort du four.", h: [15, 16, 17] },
-  { txt: () => "Les pompiers font un exercice dans la cour.", h: [9, 10, 11] },
-  { txt: () => "Le bateau de la chasse au trésor quitte le port.", h: [14, 15, 16] },
+  { txt: () => "Les pompiers visitent l'école.", h: [9, 10, 11] },
+  { txt: () => "Le bateau pirate quitte le port.", h: [14, 15, 16] },
 ];
 const moment = () => {
   const m = randomChoice(MOMENTS);
@@ -267,6 +267,14 @@ const OCCUPATIONS = [
   "joue du tambour", "prépare un gâteau", "nage à la piscine", "fait ses devoirs",
   "promène le chien", "joue aux pirates", "fabrique une fusée en carton",
 ];
+/** Une activité en un verbe : la phrase reste courte quand la durée est en mots. */
+const VERBES = ["joue", "lit", "dessine", "nage", "chante", "danse", "peint", "jardine", "cuisine", "bricole"];
+function deuxVerbes(): [string, string] {
+  const a = randomChoice(VERBES);
+  let b = randomChoice(VERBES);
+  while (b === a) b = randomChoice(VERBES);
+  return [a, b];
+}
 function deuxOccupations(): [string, string] {
   const a = randomChoice(OCCUPATIONS);
   let b = randomChoice(OCCUPATIONS);
@@ -350,7 +358,7 @@ const GABARITS: TutorBankItemV4[] = [
         const m = randomChoice([15, 30, 45]);
         return qcm(
           `${mo.txt} ${randomChoice([
-            "Regarde la grande aiguille. Combien de minutes ont passé depuis l'heure pile ?",
+            "Combien de minutes depuis l'heure pile ?",
             "Combien de minutes la grande aiguille montre-t-elle ?",
             "La grande aiguille compte les minutes. Combien en montre-t-elle ?",
           ])}`,
@@ -376,10 +384,16 @@ const GABARITS: TutorBankItemV4[] = [
         const H = randomInt(1, 11);
         const m = randomChoice([15, 30, 45]);
         const petite =
-          m === 15 ? `juste après le ${H}` : m === 30 ? `au milieu, entre le ${H} et le ${H + 1}` : `presque sur le ${H + 1}`;
+          m === 15 ? `juste après le ${H}` : m === 30 ? `entre le ${H} et le ${H + 1}` : `presque sur le ${H + 1}`;
         const bonne = heure(H, m);
         return qcm(
-          `${p.nom} regarde la pendule. La grande aiguille est sur le ${PLACE_GRANDE[m]}. La petite est ${petite}. Quelle heure est-il ?`,
+          `${randomChoice([`Grande aiguille sur le ${PLACE_GRANDE[m]}, petite ${petite}.`, `Petite aiguille ${petite}, grande sur le ${PLACE_GRANDE[m]}.`])} ${randomChoice([
+            "Quelle heure est-il ?",
+            "Quelle heure lit-on ?",
+            `Quelle heure lit ${p.nom} ?`,
+            "Il est quelle heure ?",
+            `Quelle heure voit ${p.nom} ?`,
+          ])}`,
           bonne,
           [heure(H + 1, m), heure(H, PLACE_GRANDE[m]), heure(PLACE_GRANDE[m], H), heure(H, m === 45 ? 15 : 45)],
           exp(
@@ -420,7 +434,7 @@ const GABARITS: TutorBankItemV4[] = [
         const H = randomInt(1, 11);
         const m = randomChoice([15, 30, 45]);
         return qcm(
-          `L'horloge montre ${H} h. ${p.nom} veut la régler sur ${heure(H, m)}. Sur quel nombre doit-${p.il} mettre la grande aiguille ?`,
+          `L'horloge montre ${H} h. ${randomChoice([`${p.nom} la règle sur ${heure(H, m)}.`, `Règle-la sur ${heure(H, m)}.`])} Où va la grande aiguille ?`,
           `sur le ${PLACE_GRANDE[m]}`,
           ["sur le 12", "sur le 3", "sur le 6", "sur le 9", `sur le ${H + 1}`],
           exp(
@@ -444,7 +458,7 @@ const GABARITS: TutorBankItemV4[] = [
           `${mo.txt.replace(/\.$/, "")} à ${heure(H, m)}. ${randomChoice([
             "Où est la petite aiguille ?",
             "Où faut-il mettre la petite aiguille ?",
-            "Sur l'horloge, où se trouve la petite aiguille ?",
+            "Où se trouve la petite aiguille ?",
           ])}`,
           bonne,
           PLACES_PETITE(H),
@@ -462,7 +476,7 @@ const GABARITS: TutorBankItemV4[] = [
         const m = randomChoice([15, 30, 45]);
         const bonne = placePetite(H, m);
         return qcm(
-          `Il est ${H} h. ${p.nom} fait avancer les aiguilles jusqu'à ${heure(H, m)}. Où sera la petite aiguille ?`,
+          `Il est ${H} h. ${p.nom} avance jusqu'à ${heure(H, m)}. Où sera la petite aiguille ?`,
           bonne,
           PLACES_PETITE(H),
           exp(
@@ -665,6 +679,7 @@ const GABARITS: TutorBankItemV4[] = [
             "1 h = 60 min.",
             "1 heure, c'est 60 minutes.",
           ),
+          (() => { const H = randomInt(1, 10); return deuxHorloges(H, 0, H + 1, 0); })(),
         );
       },
       () => {
@@ -708,6 +723,7 @@ const GABARITS: TutorBankItemV4[] = [
             d === 30 ? "La moitié de 60, c'est 30 (30 + 30 = 60)." : "15 + 15 + 15 + 15 = 60.",
             `${maj(MOTS_DUREE[d])}, c'est ${d} minutes.`,
           ),
+          (() => { const H = randomInt(1, 11); return deuxHorloges(H, 0, H, d); })(),
         );
       },
       () => {
@@ -724,6 +740,7 @@ const GABARITS: TutorBankItemV4[] = [
             d === 60 ? "60 minutes font un tour complet du cadran." : d === 30 ? "30, c'est la moitié de 60." : "15, c'est le quart de 60.",
             `${d} minutes, c'est ${MOTS_DUREE[d]}.`,
           ),
+          (() => { const H = randomInt(1, 10); return deuxHorloges(H, 0, d === 60 ? H + 1 : H, d % 60); })(),
         );
       },
     ]), ["unites"]),
@@ -731,7 +748,7 @@ const GABARITS: TutorBankItemV4[] = [
     tirer([
       () => {
         const [p, q] = (() => { const a = enfant(); let b = enfant(); while (b.nom === a.nom) b = enfant(); return [a, b]; })();
-        const verbe = randomChoice(["joue au foot", "lit", "dessine", "nage", "fait du vélo", "joue aux cartes", "fait de la musique"]);
+        const verbe = randomChoice(["joue au foot", "lit", "dessine", "nage", "fait du vélo", "chante", "danse"]);
         const cas = randomChoice([
           { a: "1 heure", va: 60, b: `${randomChoice([40, 45, 50, 55])} minutes` },
           { a: "1 heure", va: 60, b: `${randomChoice([70, 75, 80, 90])} minutes` },
@@ -741,7 +758,7 @@ const GABARITS: TutorBankItemV4[] = [
         const vb = Number(cas.b.split(" ")[0]);
         const bonne = cas.va > vb ? p.nom : q.nom;
         return qcm(
-          `${p.nom} ${verbe} pendant ${cas.a}. ${q.nom} ${verbe} pendant ${cas.b}. Qui ${verbe} le plus longtemps ?`,
+          `${p.nom} ${verbe} ${cas.a}, ${q.nom} ${cas.b}. Qui ${verbe} le plus longtemps ?`,
           bonne,
           [p.nom, q.nom, "les deux pareil"],
           exp(
@@ -784,6 +801,7 @@ const GABARITS: TutorBankItemV4[] = [
             "15 + 15 + 15 = 45.",
             "Trois quarts d'heure, c'est 45 minutes.",
           ),
+          (() => { const H = randomInt(1, 11); return deuxHorloges(H, 0, H, 45); })(),
         );
       },
     ]), ["unites"]),
@@ -798,10 +816,9 @@ const GABARITS: TutorBankItemV4[] = [
         const bonne = d === 60 ? "1 heure" : minutes(d);
         const fin = d === 60 ? [H + 1, 0] : [H, d];
         return qcm(
-          `Les horloges montrent le début et la fin ${deAct(a.nom)}. ${randomChoice([
+          `Voici le début et la fin ${deAct(a.nom)}. ${randomChoice([
             `Combien de temps dure-t-${a.il} ?`,
             "Quelle est sa durée ?",
-            `Combien de temps a duré ${a.nom} ?`,
           ])}`,
           bonne,
           ["15 minutes", "30 minutes", "45 minutes", "1 heure", minutes(PLACE_GRANDE[d === 60 ? 0 : d])],
@@ -819,7 +836,7 @@ const GABARITS: TutorBankItemV4[] = [
         const H = randomInt(8, 17);
         const d = randomChoice([15, 30, 45]);
         return qcm(
-          `${maj(a.nom)} commence à ${H} h et finit à ${heure(H, d)}. ${randomChoice([
+          `${maj(a.nom)} : de ${H} h à ${heure(H, d)}. ${randomChoice([
             `Combien de minutes dure-t-${a.il} ?`,
             "Quelle est sa durée ?",
             `Combien de temps dure-t-${a.il} ?`,
@@ -832,6 +849,7 @@ const GABARITS: TutorBankItemV4[] = [
             `De ${H} h à ${heure(H, d)}, il passe ${d} minutes.`,
             `${maj(a.nom)} dure ${d} minutes.`,
           ),
+          deuxHorloges(H, 0, H, d),
         );
       },
     ]), ["calculer", "canvas"]),
@@ -842,7 +860,7 @@ const GABARITS: TutorBankItemV4[] = [
         const H = randomInt(8, 14);
         const n = randomInt(1, 4);
         return qcm(
-          `${maj(a.nom)} commence à ${H} h et se termine à ${H + n} h. ${randomChoice([
+          `${maj(a.nom)} : de ${H} h à ${H + n} h. ${randomChoice([
             `Combien de temps dure-t-${a.il} ?`,
             "Quelle est sa durée ?",
             `Combien d'heures dure-t-${a.il} ?`,
@@ -855,6 +873,7 @@ const GABARITS: TutorBankItemV4[] = [
             `${Array.from({ length: n + 1 }, (_, i) => `${H + i} h`).join(" → ")} : ${n} saut${n > 1 ? "s" : ""} d'une heure.`,
             `${maj(a.nom)} dure ${heures(n)}.`,
           ),
+          deuxHorloges(H, 0, H + n, 0),
         );
       },
       () => {
@@ -862,7 +881,7 @@ const GABARITS: TutorBankItemV4[] = [
         const H = randomInt(1, 9);
         const n = randomInt(1, 3);
         return qcm(
-          `Les horloges montrent le début et la fin ${deAct(a.nom)}. ${randomChoice([
+          `Voici le début et la fin ${deAct(a.nom)}. ${randomChoice([
             `Combien d'heures dure-t-${a.il} ?`,
             "Quelle est sa durée ?",
           ])}`,
@@ -881,7 +900,7 @@ const GABARITS: TutorBankItemV4[] = [
         const a = activite();
         const H = randomInt(8, 16);
         return qcm(
-          `${maj(a.nom)} commence à ${heure(H, 30)} et finit à ${H + 1} h. ${randomChoice([`Combien de temps dure-t-${a.il} ?`, "Quelle est sa durée ?"])}`,
+          `${maj(a.nom)} : de ${heure(H, 30)} à ${H + 1} h. ${randomChoice([`Combien de temps dure-t-${a.il} ?`, "Quelle est sa durée ?"])}`,
           "30 minutes",
           ["1 heure", "70 minutes", "15 minutes", "1 heure 30 minutes"],
           exp(
@@ -890,6 +909,7 @@ const GABARITS: TutorBankItemV4[] = [
             `De ${heure(H, 30)} à ${H + 1} h : une demi-heure.`,
             "Cela dure 30 minutes.",
           ),
+          deuxHorloges(H, 30, H + 1, 0),
         );
       },
     ]), ["calculer", "canvas"]),
@@ -902,10 +922,9 @@ const GABARITS: TutorBankItemV4[] = [
         const m = randomChoice([15, 30, 45]);
         const reste = 60 - m;
         return qcm(
-          `Il est ${heure(H, m)}. ${maj(a.nom)} commence à ${H + 1} h. ${randomChoice([
-            `Combien de minutes ${p.nom} doit-${p.il} attendre ?`,
-            "Combien de minutes reste-t-il avant le début ?",
-            "Dans combien de minutes cela commence-t-il ?",
+          `Il est ${heure(H, m)}. ${maj(a.nom)} : ${H + 1} h. ${randomChoice([
+            "Dans combien de minutes ?",
+            "Combien de minutes d'attente ?",
           ])}`,
           minutes(reste),
           [minutes(m), minutes(100 - m), minutes(reste === 30 ? 15 : 30), "1 heure"].filter((x) => x !== minutes(reste)),
@@ -915,6 +934,7 @@ const GABARITS: TutorBankItemV4[] = [
             `${m} + ${reste} = 60.`,
             `Il reste ${reste} minutes.`,
           ),
+          horloge(H, m),
         );
       },
       () => {
@@ -930,8 +950,8 @@ const GABARITS: TutorBankItemV4[] = [
         const avecDessin = randomChoice([true, false]);
         return qcm(
           avecDessin
-            ? `Les horloges montrent le début et la fin ${deAct(a.nom)}. ${randomChoice([`Combien de temps dure-t-${a.il} ?`, "Quelle est sa durée ?"])}`
-            : `${maj(a.nom)} commence à ${heure(H + 12, cas.m1)} et finit à ${heure(cas.h2 + 12, cas.m2)}. ${randomChoice([`Combien de temps dure-t-${a.il} ?`, "Quelle est sa durée ?"])}`,
+            ? `Voici le début et la fin ${deAct(a.nom)}. ${randomChoice([`Combien de temps dure-t-${a.il} ?`, "Quelle est sa durée ?"])}`
+            : `${maj(a.nom)} : de ${heure(H + 12, cas.m1)} à ${heure(cas.h2 + 12, cas.m2)}. ${randomChoice([`Combien de temps dure-t-${a.il} ?`, "Quelle est sa durée ?"])}`,
           cas.rep,
           cas.pieges,
           exp(
@@ -948,16 +968,16 @@ const GABARITS: TutorBankItemV4[] = [
   /* ---------- AJOUTER DES DURÉES ---------- */
   gab("ce1_duree_ajouter_tpl_3", "ce1_duree_ajouter", 3, "Écris chaque durée en minutes, puis ajoute.", () => {
     const p = enfant();
-    const [o1, o2] = deuxOccupations();
+    const [o1, o2] = deuxVerbes();
     const [d1, d2] = randomChoice([[15, 30], [30, 15], [15, 15], [10, 20], [20, 10], [5, 15], [10, 30], [30, 30], [15, 45], [20, 20]] as const);
     const dit = (d: number) => (MOTS_DUREE[d] && randomChoice([true, false]) ? MOTS_DUREE[d] : minutes(d));
     const total = d1 + d2;
     const bonne = total === 60 ? "60 minutes" : minutes(total);
     const avecFrise = true;
     return qcm(
-      `${p.nom} ${o1} pendant ${dit(d1)}, puis ${o2} pendant ${dit(d2)}. ${randomChoice([
+      `${p.nom} ${o1} pendant ${dit(d1)}, puis ${o2} ${dit(d2)}. ${randomChoice([
         "Combien de minutes en tout ?",
-        "Combien de temps cela dure-t-il en tout ?",
+        "Combien de temps en tout ?",
         "Quelle est la durée totale ?",
       ])}`,
       bonne,
@@ -978,15 +998,14 @@ const GABARITS: TutorBankItemV4[] = [
   }, ["ajouter", "canvas"]),
   gab("ce1_duree_ajouter_tpl_1", "ce1_duree_ajouter", 4, "Écris tout en minutes. Au-delà de 60 minutes, il y a une heure.", () => {
     const p = enfant();
-    const [o1, o2] = deuxOccupations();
+    const [o1, o2] = deuxVerbes();
     const [d1, d2] = randomChoice([[45, 15], [30, 30], [45, 30], [30, 45], [45, 45], [60, 15], [60, 30], [15, 45]] as const);
     const total = d1 + d2;
     const bonne = total === 60 ? "1 heure" : `1 heure ${total - 60} minutes`;
     return qcm(
-      `${p.nom} ${o1} pendant ${MOTS_DUREE[d1]}, puis ${o2} pendant ${MOTS_DUREE[d2]}. ${randomChoice([
-        "Combien de temps cela fait-il en tout ?",
+      `${p.nom} ${o1} pendant ${MOTS_DUREE[d1]}, puis ${o2} ${MOTS_DUREE[d2]}. ${randomChoice([
+        "Combien de temps en tout ?",
         "Quelle est la durée totale ?",
-        "Combien de temps cela dure-t-il en tout ?",
       ])}`,
       bonne,
       total === 60
@@ -998,12 +1017,10 @@ const GABARITS: TutorBankItemV4[] = [
         `${d1} + ${d2} = ${total} minutes${total > 60 ? ` = 60 + ${total - 60}` : ""}.`,
         `En tout : ${bonne}.`,
       ),
-      randomChoice([true, false])
-        ? dureeCanvas({
-            variant: "frise",
-            frise: { startLabel: "début", endLabel: "fin", steps: [{ label: `${d1} min`, minutes: d1 }, { label: `${d2} min`, minutes: d2 }] },
-          })
-        : undefined,
+      dureeCanvas({
+        variant: "frise",
+        frise: { startLabel: "début", endLabel: "fin", steps: [{ label: `${d1} min`, minutes: d1 }, { label: `${d2} min`, minutes: d2 }] },
+      }),
     );
   }, ["ajouter", "canvas"]),
   gab("ce1_duree_ajouter_tpl_2", "ce1_duree_ajouter", 4, "Ce qui reste, c'est la durée totale moins ce qui est déjà passé.", () => {
@@ -1013,9 +1030,8 @@ const GABARITS: TutorBankItemV4[] = [
     const reste = tot - passe;
     const avecFrise = true;
     return qcm(
-      `${maj(a.nom)} dure ${tot === 60 ? "1 heure" : minutes(tot)}. ${minutes(passe)} sont déjà passées. ${randomChoice([
+      `${maj(a.nom)} dure ${tot === 60 ? "1 heure" : minutes(tot)}. ${minutes(passe)} sont passées. ${randomChoice([
         "Combien de minutes reste-t-il ?",
-        `Combien de temps ${p.nom} doit-${p.il} encore attendre la fin ?`,
         "Combien de temps reste-t-il ?",
       ])}`,
       minutes(reste),
@@ -1145,8 +1161,8 @@ const GABARITS: TutorBankItemV4[] = [
     const avecDessin = randomInt(1, 3) > 1;
     return qcm(
       avecDessin
-        ? `L'horloge montre le début ${deAct(a.nom)}. ${maj(a.il)} dure ${dureeMots}. À quelle heure finit-${a.il} ?`
-        : `${maj(a.nom)} commence à ${heure(H, m)} et dure ${dureeMots}. À quelle heure finit-${a.il} ?`,
+        ? `${maj(a.nom)} commence ici et dure ${dureeMots}. À quelle heure finit-${a.il} ?`
+        : `${maj(a.nom)} commence à ${heure(H, m)} et dure ${dureeMots}. Quand finit-${a.il} ?`,
       bonne,
       [heure(H, fm), heure(fh + 1, fm), heure(fh, fm === 0 ? 30 : fm === 45 ? 15 : 45), heure(H + 1, m)].filter((x) => x !== bonne),
       exp(
@@ -1166,7 +1182,7 @@ const GABARITS: TutorBankItemV4[] = [
         const p = enfant();
         let q = enfant();
         while (q.nom === p.nom) q = enfant();
-        const verbe = randomChoice(["lit", "nage", "dessine", "joue du piano", "fait du vélo", "joue aux échecs"]);
+        const verbe = randomChoice(["lit", "nage", "dessine", "joue du piano", "fait du vélo", "chante"]);
         const cas = randomChoice([
           { a: "trois quarts d'heure", va: 45, vb: randomChoice([40, 50, 55]) },
           { a: "une demi-heure", va: 30, vb: randomChoice([25, 35, 40]) },
@@ -1175,7 +1191,7 @@ const GABARITS: TutorBankItemV4[] = [
         ]);
         const bonne = cas.va > cas.vb ? p.nom : q.nom;
         return qcm(
-          `${p.nom} ${verbe} pendant ${cas.a}. ${q.nom} ${verbe} pendant ${cas.vb} minutes. Qui ${verbe} le plus longtemps ?`,
+          `${p.nom} ${verbe} ${cas.a}, ${q.nom} ${cas.vb} minutes. Qui ${verbe} le plus longtemps ?`,
           bonne,
           [p.nom, q.nom, "les deux pareil"],
           exp(
@@ -1194,7 +1210,7 @@ const GABARITS: TutorBankItemV4[] = [
         const dit = `${heures(n)} et ${demie ? "demie" : "quart"} de l'après-midi`;
         return qcm(
           randomChoice([
-            `${maj(a.nom)} est à ${dit}. Quelle heure est-ce, de 0 h à 24 h ?`,
+            `${maj(a.nom)} : ${dit}. Quelle heure est-ce, sur 24 h ?`,
             `Quelle heure veut dire « ${dit} » ?`,
           ]),
           bonne,
@@ -1225,7 +1241,7 @@ export const dureeBank: TutorBankItemV4[] = [
     microId: "ce1_duree_lire_heure_demi",
     difficulty: 4,
     theme: "neutral",
-    text: "La grande aiguille est sur le 9, la petite est presque sur le 4. Quelle heure est-il ?",
+    text: "La grande aiguille est sur le 9, la petite presque sur le 4. Quelle heure est-il ?",
     format: "qcm",
     choices: ["3 h 45", "4 h 45", "3 h 09", "9 h 04"],
     expected: ["3 h 45"],
@@ -1349,7 +1365,7 @@ export const dureeBank: TutorBankItemV4[] = [
     microId: "ce1_duree_matin_apres_midi",
     difficulty: 3,
     theme: "neutral",
-    text: "L'école commence à 8 h et la sieste est à 13 h. Laquelle de ces deux heures est le matin ?",
+    text: "L'école à 8 h, la sieste à 13 h. Laquelle de ces heures est le matin ?",
     format: "qcm",
     choices: ["8 h", "13 h", "les deux", "aucune des deux"],
     expected: ["8 h"],
@@ -1456,7 +1472,8 @@ export const dureeBank: TutorBankItemV4[] = [
     microId: "ce1_duree_calculer_simple",
     difficulty: 2,
     theme: "neutral",
-    text: "La récréation commence à 10 h et se termine à 10 h 15. Combien de minutes dure-t-elle ?",
+    text: "La récréation : de 10 h à 10 h 15. Combien de minutes dure-t-elle ?",
+    canvas: deuxHorloges(10, 0, 10, 15),
     format: "short",
     expected: ["15"],
     comparator: "number_equal",
@@ -1522,7 +1539,8 @@ export const dureeBank: TutorBankItemV4[] = [
     microId: "ce1_duree_ajouter",
     difficulty: 3,
     theme: "neutral",
-    text: "Mamie taille ses rosiers pendant un quart d'heure, puis bêche son potager pendant une demi-heure. Combien de minutes est-elle restée dans le jardin ?",
+    text: "Mamie taille ses rosiers un quart d'heure, puis bêche une demi-heure. Combien de minutes en tout ?",
+    canvas: dureeCanvas({ variant: "frise", frise: { startLabel: "début", endLabel: "fin", steps: [{ label: "un quart d'heure", minutes: 15 }, { label: "une demi-heure", minutes: 30 }] } }),
     format: "short",
     expected: ["45"],
     comparator: "number_equal",
@@ -1622,7 +1640,7 @@ export const dureeBank: TutorBankItemV4[] = [
     microId: "ce1_duree_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Deux enfants disent la même heure. Léa dit « 4 heures et demie de l'après-midi », Kevin dit « 16 h 30 ». Qui a raison ?",
+    text: "Léa dit « 4 heures et demie de l'après-midi », Kevin dit « 16 h 30 ». Qui a raison ?",
     format: "qcm",
     choices: [
       "les deux : c'est la même heure",
@@ -1650,7 +1668,8 @@ export const dureeBank: TutorBankItemV4[] = [
     microId: "ce1_duree_defi",
     difficulty: 5,
     theme: "reunion",
-    text: "Le car scolaire part à 6 h 45 et le trajet dure 30 minutes. À quelle heure arrive-t-il ?",
+    text: "Le car part à 6 h 45. Le trajet dure 30 minutes. À quelle heure arrive-t-il ?",
+    canvas: horloge(6, 45),
     format: "qcm",
     choices: ["7 h 15", "6 h 75", "7 h 45", "6 h 15"],
     expected: ["7 h 15"],

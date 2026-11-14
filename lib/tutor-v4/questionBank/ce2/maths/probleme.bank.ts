@@ -161,6 +161,11 @@ const RESERVES: readonly Reserve[] = [
 ];
 
 const reserve = () => pick(RESERVES);
+/** Énoncés courts (CE2) : un sujet de plus de deux mots (« Le magasin de jouets »)
+ *  cède la place à un enfant de la troupe. */
+const court = (r: Reserve): Reserve => (r.sujet && r.sujet.split(" ").length > 2 ? { ...r, sujet: undefined, fem: undefined } : r);
+/** Une réserve dont l'objet tient en deux mots au plus (pas « mètres de tuyau »). */
+const reserveCourte = () => court(pick(RESERVES.filter((x) => x.des.split(" ").length <= 2)));
 /** Ce qu'un ENFANT possède (pas des vaccins ni des yaourts). */
 const aEnfant = () => pick(RESERVES.filter((x) => !x.sujet || ["livres", "pièces d'or", "graines", "fleurs", "cookies"].includes(x.des)));
 /** Ce qui se range dans des boîtes ou des cartons (pas des points, pas des mètres). */
@@ -188,7 +193,7 @@ const combienDe = (r: Reserve) => `Combien ${de(r.des)}`;
 const OPS = ["une addition", "une soustraction", "une multiplication", "une division"];
 
 function choisirOperation(etoile: Etoile): Q {
-  const r = reserve();
+  const r = reserveCourte();
   const re = aEnfant();
   const p = quelquun();
   const { S, il } = qui(r, p);
@@ -203,8 +208,8 @@ function choisirOperation(etoile: Etoile): Q {
     const a = grand ? rint(120, 2400) : rint(12, 60);
     const b = grand ? rint(45, 900) : rint(5, 30);
     text = pick([
-      `${S} a ${fmt(a)} ${r.des}. ${maj(il)} en ${r.plus} ${fmt(b)}. ${combienDe(r)} a-t-${il} maintenant ?`,
-      `${S} a ${fmt(a)} ${r.des} lundi et en ${r.plus} ${fmt(b)} mardi. ${combienDe(r)} en tout ?`,
+      `${S} a ${fmt(a)} ${r.des}. ${maj(il)} en ${r.plus} ${fmt(b)}. Combien en a-t-${il} ?`,
+      `${S} a ${fmt(a)} ${r.des} lundi et en ${r.plus} ${fmt(b)} mardi. Combien en tout ?`,
     ]);
     bon = "une addition";
     pourquoi = "la quantité augmente : on rassemble deux parts.";
@@ -213,8 +218,8 @@ function choisirOperation(etoile: Etoile): Q {
     const a = grand ? rint(500, 4800) : rint(30, 90);
     const b = grand ? rint(45, 400) : rint(5, 25);
     text = pick([
-      `${S} a ${fmt(a)} ${r.des}. ${maj(il)} en ${r.moins} ${fmt(b)}. ${combienDe(r)} lui reste-t-il ?`,
-      `${S} avait ${fmt(a)} ${r.des}. ${fmt(b)} sont ${r.moinsPp}. ${combienDe(r)} reste-t-il ?`,
+      `${S} a ${fmt(a)} ${r.des}. ${maj(il)} en ${r.moins} ${fmt(b)}. Combien lui en reste-t-il ?`,
+      `${S} avait ${fmt(a)} ${r.des}. ${fmt(b)} sont ${r.moinsPp}. Combien en reste-t-il ?`,
     ]);
     bon = "une soustraction";
     pourquoi = "la quantité diminue : on enlève une part.";
@@ -245,23 +250,23 @@ function choisirOperation(etoile: Etoile): Q {
     const a = rint(120, 900);
     const b = rint(15, 90);
     const [x, y] = deuxPersonnes();
-    text = pick([
-      `${x.nom} a ${a} ${re.des}. ${y.nom} en a ${b} de plus. ${combienDe(re)} ${y.nom} a-t-${y.il} ?`,
-      `${x.nom} a ${a} ${re.des} et ${y.nom} en a ${b}. ${combienDe(re)} ${x.nom} a-t-${x.il} de plus ${que(y.nom)} ?`,
-    ]);
-    bon = text.includes("de plus que") || text.includes("de plus qu'") ? "une soustraction" : "une addition";
+    const ecart = Math.random() < 0.5;
+    text = ecart
+      ? `${x.nom} a ${a} ${re.des} et ${y.nom} ${b}. Combien ${x.nom} en a-t-${x.il} de plus ?`
+      : `${x.nom} a ${a} ${re.des}. ${y.nom} en a ${b} de plus. Combien ${y.nom} en a-t-${y.il} ?`;
+    bon = ecart ? "une soustraction" : "une addition";
     pourquoi = bon === "une addition" ? "on connaît la petite quantité et l'écart : on ajoute l'écart." : "on cherche un écart entre deux quantités.";
   } else {
     const k = rint(2, 5);
     const n = rint(12, 90);
     const [x, y] = deuxPersonnes();
-    text = `${x.nom} a ${n} ${re.des}. ${y.nom} en a ${k} fois plus. ${combienDe(re)} ${y.nom} a-t-${y.il} ?`;
+    text = `${x.nom} a ${n} ${re.des}. ${y.nom} en a ${k} fois plus. Combien ${y.nom} en a-t-${y.il} ?`;
     bon = "une multiplication";
     pourquoi = `« ${k} fois plus », c'est ${k} fois la même quantité.`;
     canvas = parfois(0.5, () => barreEgale(k, String(n), null));
   }
   return qM(
-    `${text}\n\nQuelle opération faut-il choisir ?`,
+    `${text}\n\nQuelle opération choisir ?`,
     bon,
     OPS,
     exp(
@@ -279,7 +284,7 @@ function choisirOperation(etoile: Etoile): Q {
 --------------------------------------------------------- */
 
 function leTout(): Q {
-  const r = reserve();
+  const r = reserveCourte();
   const p = quelquun();
   const { S, il } = qui(r, p);
   const a = rint(120, 3800);
@@ -287,14 +292,14 @@ function leTout(): Q {
   const t = a + b;
   const couleurs = ["billes", "perles", "images", "cartes"].includes(r.des);
   const text = pick([
-    `${S} a ${fmt(a)} ${r.des}. ${maj(il)} en ${r.plus} ${fmt(b)}. ${combienDe(r)} a-t-${il} maintenant ?`,
-    `Le matin, ${sujetMilieu(r, p)} compte ${fmt(a)} ${r.des}. L'après-midi, ${il} en ${r.plus} ${fmt(b)}. ${combienDe(r)} en tout ?`,
-    `${S} range ${fmt(a)} ${r.des} dans une boîte et ${fmt(b)} dans une autre. Quel est le nombre total ${de(r.des)} ?`,
-    `Samedi, le zoo accueille ${fmt(a)} visiteurs. Dimanche, il en accueille ${fmt(b)}. Combien de visiteurs en tout ?`,
-    `Le cirque vend ${fmt(a)} billets pour le premier spectacle et ${fmt(b)} pour le second. Combien de billets en tout ?`,
+    `${S} a ${fmt(a)} ${r.des}. ${maj(il)} en ${r.plus} ${fmt(b)}. Combien en a-t-${il} ?`,
+    `${S} compte ${fmt(a)} ${r.des} le matin et ${fmt(b)} le soir. Combien en tout ?`,
+    `${S} range ${fmt(a)} ${r.des} dans une boîte et ${fmt(b)} dans une autre. Combien en tout ?`,
+    `Le zoo accueille ${fmt(a)} visiteurs samedi et ${fmt(b)} dimanche. Combien en tout ?`,
+    `Le cirque vend ${fmt(a)} billets au premier spectacle et ${fmt(b)} au second. Combien en tout ?`,
     couleurs
-      ? `${p.nom} a ${fmt(a)} ${r.des} rouges et ${fmt(b)} ${r.des} bleues. ${combienDe(r)} a-t-${p.il} ?`
-      : `${S} a ${fmt(a)} ${r.des} et ${p.nom} lui en apporte ${fmt(b)}. ${combienDe(r)} y a-t-il maintenant ?`,
+      ? `${p.nom} a ${fmt(a)} ${r.des} rouges et ${fmt(b)} bleues. Combien en a-t-${p.il} ?`
+      : `${S} a ${fmt(a)} ${r.des}. ${p.nom} lui en apporte ${fmt(b)}. Combien en tout ?`,
   ]);
   return qN(
     text,
@@ -306,19 +311,19 @@ function leTout(): Q {
 }
 
 function unePart(): Q {
-  const r = reserve();
+  const r = reserveCourte();
   const p = quelquun();
   const { S, il } = qui(r, p);
   const t = rint(800, 4800);
   const a = rint(150, t - 120);
   const b = t - a;
   const text = pick([
-    `${S} a ${fmt(t)} ${r.des} en tout. ${fmt(a)} sont déjà ${/es$/.test(r.moinsPp) ? "rangées" : "rangés"}. Combien reste-t-il à ranger ?`,
-    `${S} avait ${fmt(t)} ${r.des}. ${maj(il)} en ${r.moins} ${fmt(a)}. ${combienDe(r)} lui reste-t-il ?`,
-    `${S} veut ${fmt(t)} ${r.des}. ${maj(il)} en a déjà ${fmt(a)}. ${combienDe(r)} lui manque-t-il ?`,
-    `Sur ${fmt(t)} ${r.des}, ${fmt(a)} sont ${r.moinsPp}. ${combienDe(r)} ne le sont pas ?`,
-    `Le train transporte ${fmt(t)} voyageurs. À la gare, ${fmt(a)} descendent. Combien en reste-t-il dans le train ?`,
-    `${p.nom} lit un gros livre de ${fmt(t)} pages. ${maj(p.il)} en a lu ${fmt(a)}. Combien de pages lui reste-t-il ?`,
+    `${S} a ${fmt(t)} ${r.des}. ${fmt(a)} sont ${/es$/.test(r.moinsPp) ? "rangées" : "rangés"}. Combien reste-t-il à ranger ?`,
+    `${S} avait ${fmt(t)} ${r.des}. ${maj(il)} en ${r.moins} ${fmt(a)}. Combien lui en reste-t-il ?`,
+    `${S} veut ${fmt(t)} ${r.des}. ${maj(il)} en a ${fmt(a)}. Combien lui en manque-t-il ?`,
+    `Sur ${fmt(t)} ${r.des}, ${fmt(a)} sont ${r.moinsPp}. Combien ne le sont pas ?`,
+    `Le train transporte ${fmt(t)} voyageurs. ${fmt(a)} descendent. Combien en reste-t-il ?`,
+    `${p.nom} lit un livre de ${fmt(t)} pages. ${maj(p.il)} en a lu ${fmt(a)}. Combien en reste-t-il ?`,
   ]);
   return qN(
     text,
@@ -330,7 +335,7 @@ function unePart(): Q {
 }
 
 function leDepart(): Q {
-  const r = reserve();
+  const r = reserveCourte();
   const p = quelquun();
   const { S, il } = qui(r, p);
   const x = rint(1200, 5800);
@@ -340,13 +345,13 @@ function leDepart(): Q {
   if (fin <= 0) return leDepart();
   const text = moins
     ? pick([
-        `${S} ${r.moins} ${fmt(d)} ${r.des}. Il lui en reste ${fmt(fin)}. ${combienDe(r)} avait-${il} au départ ?`,
-        `${S} a déjà ${ppMasc(r)} ${fmt(d)} ${r.des}. Il lui en reste ${fmt(fin)}. ${combienDe(r)} y avait-il avant ?`,
-        `Après en avoir ${ppMasc(r)} ${fmt(d)}, ${sujetMilieu(r, p)} a encore ${fmt(fin)} ${r.des}. ${combienDe(r)} y avait-il au début ?`,
+        `${S} ${r.moins} ${fmt(d)} ${r.des}. Il lui en reste ${fmt(fin)}. Combien en avait-${il} ?`,
+        `${S} a ${ppMasc(r)} ${fmt(d)} ${r.des}. Il en reste ${fmt(fin)}. Combien y en avait-il avant ?`,
+        `Après en avoir ${ppMasc(r)} ${fmt(d)}, ${sujetMilieu(r, p)} a ${fmt(fin)} ${r.des}. Combien au début ?`,
       ])
     : pick([
-        `${S} ${r.plus} ${fmt(d)} ${r.des}. ${maj(il)} en a maintenant ${fmt(fin)}. ${combienDe(r)} avait-${il} avant ?`,
-        `Après en avoir reçu ${fmt(d)}, ${sujetMilieu(r, p)} a ${fmt(fin)} ${r.des}. ${combienDe(r)} avait-${il} au départ ?`,
+        `${S} ${r.plus} ${fmt(d)} ${r.des}. ${maj(il)} en a maintenant ${fmt(fin)}. Combien en avait-${il} ?`,
+        `Après en avoir reçu ${fmt(d)}, ${sujetMilieu(r, p)} a ${fmt(fin)} ${r.des}. Combien avant ?`,
       ]);
   return qN(
     text,
@@ -372,12 +377,11 @@ function comparaison(): Q {
   const a = rint(120, 980);
   const e = rint(15, Math.min(400, a - 20));
   const f = rint(1, 5);
-  const Q_ = combienDe(r);
   if (f === 1)
     return qN(
       pick([
-        `${x.nom} a ${a} ${r.des}. ${y.nom} en a ${e} de plus. ${Q_} ${y.nom} a-t-${y.il} ?`,
-        `${x.nom} a ${a} ${r.des}. ${y.nom} en a ${e} de plus ${que(x.nom)}. ${Q_} pour ${y.nom} ?`,
+        `${x.nom} a ${a} ${r.des}. ${y.nom} en a ${e} de plus. Combien ${y.nom} en a-t-${y.il} ?`,
+        `${y.nom} a ${e} ${r.des} de plus ${que(x.nom)}, qui en a ${a}. Combien pour ${y.nom} ?`,
       ]),
       a + e,
       [a - e, e, a + e + 10, a + e - 10, a],
@@ -387,8 +391,8 @@ function comparaison(): Q {
   if (f === 2)
     return qN(
       pick([
-        `${x.nom} a ${a} ${r.des}. ${maj(x.il)} en a ${e} de plus ${que(y.nom)}. ${Q_} ${y.nom} a-t-${y.il} ?`,
-        `${x.nom} a ${a} ${r.des}, c'est ${e} de plus ${que(y.nom)}. ${Q_} ${y.nom} a-t-${y.il} ?`,
+        `${x.nom} a ${a} ${r.des}, ${e} de plus ${que(y.nom)}. Combien ${y.nom} en a-t-${y.il} ?`,
+        `${x.nom} a ${a} ${r.des} : c'est ${e} de plus ${que(y.nom)}. Combien pour ${y.nom} ?`,
       ]),
       a - e,
       [a + e, e, a - e + 10, a - e - 10, a],
@@ -398,8 +402,8 @@ function comparaison(): Q {
   if (f === 3)
     return qN(
       pick([
-        `${x.nom} a ${a} ${r.des}. ${y.nom} en a ${e} de moins. ${Q_} ${y.nom} a-t-${y.il} ?`,
-        `${x.nom} a ${a} ${r.des}. ${y.nom} en a ${e} de moins ${que(x.nom)}. ${Q_} pour ${y.nom} ?`,
+        `${x.nom} a ${a} ${r.des}. ${y.nom} en a ${e} de moins. Combien ${y.nom} en a-t-${y.il} ?`,
+        `${y.nom} a ${e} ${r.des} de moins ${que(x.nom)}, qui en a ${a}. Combien pour ${y.nom} ?`,
       ]),
       a - e,
       [a + e, e, a - e + 10, a - e - 10],
@@ -409,10 +413,10 @@ function comparaison(): Q {
   const b = a - e;
   return qN(
     pick([
-      `${x.nom} a ${a} ${r.des} et ${y.nom} en a ${b}. ${Q_} ${x.nom} a-t-${x.il} de plus ${que(y.nom)} ?`,
-      `${x.nom} a ${a} ${r.des}, ${y.nom} en a ${b}. ${Q_} manque-t-il à ${y.nom} pour en avoir autant ${que(x.nom)} ?`,
+      `${x.nom} a ${a} ${r.des} et ${y.nom} en a ${b}. Combien ${x.nom} en a-t-${x.il} de plus ?`,
+      `${x.nom} a ${a} ${r.des}, ${y.nom} en a ${b}. Combien en manque-t-il à ${y.nom} ?`,
       `${x.nom} a ${a} ${r.des} et ${y.nom} ${b}. Quel est l'écart entre les deux ?`,
-      `${y.nom} a ${b} ${r.des}. ${x.nom} en a ${a}. ${Q_} ${y.nom} a-t-${y.il} de moins ?`,
+      `${y.nom} a ${b} ${r.des}. ${x.nom} en a ${a}. Combien ${y.nom} en a-t-${y.il} de moins ?`,
     ]),
     e,
     [a + b, e + 10, e - 10, e + 1, a],
@@ -426,7 +430,7 @@ function comparaison(): Q {
 --------------------------------------------------------- */
 
 function deuxEtapesRecoitVend(): Q {
-  const r = reserve();
+  const r = reserveCourte();
   const p = quelquun();
   const { S, il } = qui(r, p);
   const a = rint(300, 2500);
@@ -435,9 +439,9 @@ function deuxEtapesRecoitVend(): Q {
   const res = a + b - c;
   return qN(
     pick([
-      `${S} a ${fmt(a)} ${r.des}. ${maj(il)} en ${r.plus} ${fmt(b)}, puis en ${r.moins} ${fmt(c)}. ${combienDe(r)} lui reste-t-il ?`,
-      `Au début, ${sujetMilieu(r, p)} a ${fmt(a)} ${r.des}. Ensuite, ${il} en ${r.plus} ${fmt(b)}. Enfin, ${il} en ${r.moins} ${fmt(c)}. ${combienDe(r)} a-t-${il} à la fin ?`,
-      `${S} a ${fmt(a)} ${r.des}. Lundi, ${il} en ${r.plus} ${fmt(b)}. Mardi, ${il} en ${r.moins} ${fmt(c)}. ${combienDe(r)} lui reste-t-il ?`,
+      `${S} a ${fmt(a)} ${r.des}. ${maj(il)} en ${r.plus} ${fmt(b)}, puis en ${r.moins} ${fmt(c)}. Combien en reste-t-il ?`,
+      `${S} a ${fmt(a)} ${r.des}, en ${r.plus} ${fmt(b)}, puis en ${r.moins} ${fmt(c)}. Combien à la fin ?`,
+      `${S} a ${fmt(a)} ${r.des}. Lundi, ${il} en ${r.plus} ${fmt(b)} ; mardi, ${il} en ${r.moins} ${fmt(c)}. Combien à la fin ?`,
     ]),
     res,
     [a + b + c, a - c, a + b, res + 100, res - 10],
@@ -447,7 +451,7 @@ function deuxEtapesRecoitVend(): Q {
 }
 
 function deuxEtapesLeReste(): Q {
-  const r = pick(RESERVES.filter((x) => !["points", "photos", "vaccins", "mètres de tuyau", "billets"].includes(x.des)));
+  const r = court(pick(RESERVES.filter((x) => !["points", "photos", "vaccins", "mètres de tuyau", "billets"].includes(x.des))));
   const p = quelquun();
   const { S } = qui(r, p);
   const t = rint(900, 4800);
@@ -464,9 +468,9 @@ function deuxEtapesLeReste(): Q {
   const accord = (x: string) => x;
   return qN(
     pick([
-      `${S} a ${fmt(t)} ${r.des} : ${fmt(a)} sont ${accord(adjA)}, ${fmt(b)} sont ${accord(adjB)}, et les autres sont ${accord(adjC)}. ${combienDe(r)} sont ${accord(adjC)} ?`,
-      `Sur ${fmt(t)} ${r.des}, il y en a ${fmt(a)} ${accord(adjA)} et ${fmt(b)} ${accord(adjB)}. Les autres sont ${accord(adjC)}. Combien ?`,
-      `${p.nom} compte ${fmt(t)} ${r.des} : ${fmt(a)} ${accord(adjA)}, ${fmt(b)} ${accord(adjB)}, le reste ${accord(adjC)}. ${combienDe(r)} ${accord(adjC)} ?`,
+      `${S} a ${fmt(t)} ${r.des} : ${fmt(a)} ${accord(adjA)}, ${fmt(b)} ${accord(adjB)}, les autres ${accord(adjC)}. Combien sont ${accord(adjC)} ?`,
+      `Sur ${fmt(t)} ${r.des}, ${fmt(a)} sont ${accord(adjA)} et ${fmt(b)} ${accord(adjB)}. Les autres sont ${accord(adjC)}. Combien ?`,
+      `${p.nom} compte ${fmt(t)} ${r.des} : ${fmt(a)} ${accord(adjA)}, ${fmt(b)} ${accord(adjB)}, le reste ${accord(adjC)}. Combien ${accord(adjC)} ?`,
     ]),
     c,
     [t - a, t - b, a + b, c + 10, c - 10, t + a + b],
@@ -484,9 +488,9 @@ function deuxEtapesComparaisonTotal(): Q {
   const t = a + b;
   return qN(
     pick([
-      `${x.nom} a ${a} ${r.des}. ${y.nom} en a ${e} de plus. ${combienDe(r)} les deux enfants ont-ils en tout ?`,
-      `${x.nom} a ${a} ${r.des} et ${y.nom} en a ${e} de plus ${que(x.nom)}. Combien en ont-ils ensemble ?`,
-      `${y.nom} a ${e} ${r.des} de plus ${que(x.nom)}, qui en a ${a}. ${combienDe(r)} en tout ?`,
+      `${x.nom} a ${a} ${r.des}. ${y.nom} en a ${e} de plus. Combien en ont-ils à eux deux ?`,
+      `${x.nom} a ${a} ${r.des} et ${y.nom} ${e} de plus. Combien en ont-ils ensemble ?`,
+      `${y.nom} a ${e} ${r.des} de plus ${que(x.nom)}, qui en a ${a}. Combien en tout ?`,
     ]),
     t,
     [a + e, a + a, t + e, t - 10, t + 100],
@@ -496,7 +500,7 @@ function deuxEtapesComparaisonTotal(): Q {
 }
 
 function troisEtapesMixte(): Q {
-  const r = rangeable();
+  const r = court(rangeable());
   const p = quelquun();
   const { S, il } = qui(r, p);
   const k = rint(3, 8);
@@ -506,9 +510,9 @@ function troisEtapesMixte(): Q {
   const res = k * n + v - d;
   return qN(
     pick([
-      `${S} range ${k} cartons de ${n} ${r.des}, et ${v} ${r.des} en plus. ${maj(il)} en ${r.moins} ensuite ${d}. ${combienDe(r)} lui reste-t-il ?`,
-      `${S} a ${k} boîtes de ${n} ${r.des} et ${v} ${r.des} à part. ${maj(il)} en ${r.moins} ${d}. ${combienDe(r)} a-t-${il} à la fin ?`,
-      `Dans le grenier ${de(p.nom)}, il y a ${k} caisses de ${n} ${r.des} et ${v} ${r.des} en vrac. ${maj(p.il)} en donne ${d}. Combien en reste-t-il ?`,
+      `${S} range ${k} cartons de ${n} ${r.des}, plus ${v}. ${maj(il)} en ${r.moins} ${d}. Combien en reste-t-il ?`,
+      `${S} a ${k} boîtes de ${n} ${r.des} et ${v} en vrac. ${maj(il)} en ${r.moins} ${d}. Combien en reste-t-il ?`,
+      `${p.nom} a ${k} caisses de ${n} ${r.des} et ${v} en vrac. ${maj(p.il)} en donne ${d}. Combien en reste-t-il ?`,
     ]),
     res,
     [k * n + v, k * n - d, k + n + v - d, res + 10, res - 10, k * n + v + d],
@@ -524,17 +528,17 @@ function troisEtapesTables(): Q {
   const c = rint(2, 6);
   const d = rint(2, 8);
   const lieu = pick([
-    { lieu: "Dans le restaurant", g1: "tables de", g2: "personnes", q: "Combien de clients ce restaurant peut-il recevoir ?" },
-    { lieu: `Pour l'anniversaire ${de(p.nom)}`, g1: "tables de", g2: "invités", q: "Combien d'invités peut-on asseoir ?" },
-    { lieu: "Au cinéma de l'école", g1: "rangées de", g2: "fauteuils", q: "Combien de fauteuils y a-t-il ?" },
-    { lieu: "Dans le train de la fête foraine", g1: "wagons de", g2: "places", q: "Combien de places y a-t-il ?" },
-    { lieu: "Au potager", g1: "rangs de", g2: "salades", q: "Combien de salades le jardinier a-t-il plantées ?" },
-    { lieu: "Dans le vaisseau spatial", g1: "cabines de", g2: "astronautes", q: "Combien d'astronautes peuvent voyager ?" },
-    { lieu: "À la piscine", g1: "lignes de", g2: "nageurs", q: "Combien de nageurs peuvent s'entraîner ?" },
+    { lieu: "Le restaurant a", g1: "tables de", g2: "places", q: "Combien de clients au plus ?" },
+    { lieu: `Pour sa fête, ${p.nom} installe`, g1: "tables de", g2: "chaises", q: "Combien d'invités ?" },
+    { lieu: "Le cinéma de l'école a", g1: "rangées de", g2: "fauteuils", q: "Combien de fauteuils ?" },
+    { lieu: "Le train du manège a", g1: "wagons de", g2: "places", q: "Combien de places ?" },
+    { lieu: "Le jardinier plante", g1: "rangs de", g2: "salades", q: "Combien de salades ?" },
+    { lieu: "Le vaisseau spatial a", g1: "cabines de", g2: "places", q: "Combien d'astronautes peuvent voyager ?" },
+    { lieu: "La piscine a", g1: "lignes de", g2: "nageurs", q: "Combien de nageurs ?" },
   ]);
   const t = a * b + c * d;
   return qN(
-    `${lieu.lieu}, il y a ${a} ${lieu.g1} ${b} ${lieu.g2} et ${c} ${lieu.g1} ${d} ${lieu.g2}. ${lieu.q}`,
+    `${lieu.lieu} ${a} ${lieu.g1} ${b} ${lieu.g2} et ${c} ${lieu.g1} ${d}. ${lieu.q}`,
     t,
     [a * b, c * d, a + b + c + d, (a + c) * (b + d), t + 10, t - 1],
     exp("Trois étapes : deux multiplications, puis une addition.", "On compte chaque groupe, puis on rassemble.", `${a} × ${b} = ${a * b} ; ${c} × ${d} = ${c * d} ; ${a * b} + ${c * d} = ${t}.`, `En tout : ${t}.`),
@@ -546,13 +550,13 @@ const ARTICLES: readonly { un: string; des: string }[] = [
   { un: "cahier", des: "cahiers" },
   { un: "ballon", des: "ballons" },
   { un: "livre", des: "livres" },
-  { un: "paquet de graines", des: "paquets de graines" },
+  { un: "toupie", des: "toupies" },
   { un: "puzzle", des: "puzzles" },
-  { un: "jeu de cartes", des: "jeux de cartes" },
-  { un: "pot de peinture", des: "pots de peinture" },
-  { un: "masque de pirate", des: "masques de pirate" },
+  { un: "feutre", des: "feutres" },
+  { un: "pinceau", des: "pinceaux" },
+  { un: "masque", des: "masques" },
   { un: "cerf-volant", des: "cerfs-volants" },
-  { un: "kit de dinosaure", des: "kits de dinosaure" },
+  { un: "dinosaure", des: "dinosaures" },
 ];
 
 function troisEtapesAchats(): Q {
@@ -566,11 +570,10 @@ function troisEtapesAchats(): Q {
   const billet = [20, 50, 100].find((x) => x > cout + 1);
   if (!billet) return troisEtapesAchats();
   const rendu = billet - cout;
-  const lieu = pick(["Au magasin de jouets", "À la papeterie", "À la kermesse", "Au marché", "À la librairie"]);
   return qN(
     pick([
-      `${lieu}, ${p.nom} achète ${na} ${A.des} à ${pa} € et ${nb} ${B.des} à ${pb} €. ${maj(p.il)} paie avec un billet de ${billet} €. Combien lui rend-on ?`,
-      `${p.nom} achète ${na} ${A.des} à ${pa} € l'un et ${nb} ${B.des} à ${pb} € l'un. ${maj(p.il)} donne ${billet} €. Quelle somme le vendeur lui rend-il ?`,
+      `${p.nom} achète ${na} ${A.des} à ${pa} € et ${nb} ${B.des} à ${pb} €. Combien lui rend-on sur ce billet ?`,
+      `${p.nom} paie ${na} ${A.des} à ${pa} € et ${nb} ${B.des} à ${pb} € avec ce billet. Combien lui rend-on ?`,
     ]),
     rendu,
     [cout, billet - na * pa, billet - nb * pb, rendu + 1, rendu + 10],
@@ -593,7 +596,7 @@ function foisPlusMoins(): Q {
     return qN(
       pick([
         `${x.nom} a ${n} ${r.des}. ${y.nom} en a ${k} fois plus. ${combienDe(r)} ${y.nom} a-t-${y.il} ?`,
-        `${y.nom} a ${k} fois plus ${de(r.des)} ${que(x.nom)}, qui en a ${n}. ${combienDe(r)} pour ${y.nom} ?`,
+        `${y.nom} a ${k} fois plus ${de(r.des)} ${que(x.nom)}, qui en a ${n}. Combien en a ${y.nom} ?`,
         `${x.nom} a ${n} ${r.des}. ${y.nom} en a ${k} fois autant. Combien en a ${y.nom} ?`,
       ]),
       n * k,
@@ -620,10 +623,10 @@ function foisPlusPrix(): Q {
     { petit: "un casque", grand: "une trottinette", G: "La trottinette", P: "Le casque" },
     { petit: "un ballon", grand: "un vélo", G: "Le vélo", P: "Le ballon" },
     { petit: "un livre", grand: "une tente", G: "La tente", P: "Le livre" },
-    { petit: "une boîte de crayons", grand: "un cartable", G: "Le cartable", P: "La boîte de crayons" },
-    { petit: "un yo-yo", grand: "un jeu de société", G: "Le jeu de société", P: "Le yo-yo" },
-    { petit: "un masque de plongée", grand: "une paire de palmes", G: "La paire de palmes", P: "Le masque" },
-    { petit: "une fusée en carton", grand: "une fusée télécommandée", G: "La fusée télécommandée", P: "La fusée en carton" },
+    { petit: "une trousse", grand: "un cartable", G: "Le cartable", P: "La trousse" },
+    { petit: "un yo-yo", grand: "un robot", G: "Le robot", P: "Le yo-yo" },
+    { petit: "une balle", grand: "une raquette", G: "La raquette", P: "La balle" },
+    { petit: "une toupie", grand: "une fusée", G: "La fusée", P: "La toupie" },
   ]);
   const k = rint(2, 8);
   const prix = rint(4, 40);
@@ -631,7 +634,7 @@ function foisPlusPrix(): Q {
     return qN(
       pick([
         `${paire.G} coûte ${k} fois plus cher ${que(paire.petit)}. ${paire.P} coûte ${prix} €. Combien coûte ${paire.grand.replace(/^un |^une /, (a) => (a === "un " ? "le " : "la "))} ?`,
-        `${p.nom} regarde ${paire.petit} à ${prix} € et ${paire.grand}, ${k} fois plus cher. Quel est le prix ${paire.grand.startsWith("une") ? "de la" : "du"} ${paire.grand.replace(/^un |^une /, "")} ?`,
+        `${p.nom} voit ${paire.petit} à ${prix} € et ${paire.grand}, ${k} fois plus cher. Combien coûte ${paire.grand.startsWith("une") ? "la" : "le"} ${paire.grand.replace(/^un |^une /, "")} ?`,
       ]),
       prix * k,
       [prix + k, prix * k + prix, prix * (k - 1), prix * k * 2],
@@ -655,17 +658,21 @@ function foisPlusPrix(): Q {
 
 type Combo = { A: string; B: string; C?: string; quoi: string; verbe: string; la: string[]; lb: string[] };
 const COMBOS: readonly Combo[] = [
-  { A: "parfums de glace", B: "sortes de cornets", C: "nappages", quoi: "glaces différentes", verbe: "peut-on former", la: ["vanille", "fraise", "chocolat", "citron", "coco", "menthe"], lb: ["cornet", "pot", "gaufre", "biscuit"] },
+  { A: "parfums", B: "cornets", C: "nappages", quoi: "glaces différentes", verbe: "peut-on former", la: ["vanille", "fraise", "chocolat", "citron", "coco", "menthe"], lb: ["cornet", "pot", "gaufre", "biscuit"] },
   { A: "tee-shirts", B: "shorts", C: "casquettes", quoi: "tenues différentes", verbe: "peut-on composer", la: ["rouge", "bleu", "jaune", "vert", "blanc", "noir"], lb: ["jean", "gris", "marine", "beige"] },
-  { A: "sortes de pain", B: "garnitures", C: "sauces", quoi: "sandwichs différents", verbe: "peut-on préparer", la: ["baguette", "pain de mie", "pain rond", "pain aux noix"], lb: ["jambon", "fromage", "poulet", "thon"] },
+  { A: "pains", B: "garnitures", C: "sauces", quoi: "sandwichs différents", verbe: "peut-on préparer", la: ["baguette", "pain de mie", "pain rond", "pain aux noix"], lb: ["jambon", "fromage", "poulet", "thon"] },
   { A: "entrées", B: "desserts", C: "boissons", quoi: "menus différents", verbe: "peut-on choisir", la: ["salade", "soupe", "melon", "carottes"], lb: ["glace", "fruit", "yaourt", "gâteau"] },
-  { A: "têtes de robot", B: "corps de robot", C: "paires de bras", quoi: "robots différents", verbe: "peut-on assembler", la: ["ronde", "carrée", "pointue", "ovale"], lb: ["bleu", "rouge", "argent", "vert"] },
+  { A: "têtes", B: "corps", C: "paires de bras", quoi: "robots différents", verbe: "peut-on assembler", la: ["ronde", "carrée", "pointue", "ovale"], lb: ["bleu", "rouge", "argent", "vert"] },
   { A: "chapeaux", B: "capes", C: "baguettes magiques", quoi: "déguisements de magicien", verbe: "peut-on faire", la: ["haut", "pointu", "rond", "étoilé"], lb: ["violette", "noire", "dorée", "verte"] },
-  { A: "pâtes à pizza", B: "garnitures", C: "fromages", quoi: "pizzas différentes", verbe: "peut-on cuisiner", la: ["fine", "épaisse", "complète"], lb: ["tomate", "champignons", "olives", "ananas"] },
-  { A: "couleurs de coque", B: "couleurs de voile", C: "drapeaux", quoi: "bateaux pirates différents", verbe: "peut-on dessiner", la: ["noire", "rouge", "brune", "verte"], lb: ["blanche", "noire", "rayée", "jaune"] },
+  { A: "pâtes", B: "garnitures", C: "fromages", quoi: "pizzas différentes", verbe: "peut-on cuisiner", la: ["fine", "épaisse", "complète"], lb: ["tomate", "champignons", "olives", "ananas"] },
+  { A: "coques", B: "voiles", C: "drapeaux", quoi: "bateaux pirates", verbe: "peut-on dessiner", la: ["noire", "rouge", "brune", "verte"], lb: ["blanche", "noire", "rayée", "jaune"] },
   { A: "dragons", B: "châteaux", C: "chevaliers", quoi: "histoires différentes", verbe: "peut-on inventer", la: ["vert", "rouge", "bleu", "doré"], lb: ["de pierre", "de glace", "de nuages", "de sable"] },
   { A: "lettres", B: "chiffres", C: "symboles", quoi: "codes secrets", verbe: "peut-on écrire", la: ["A", "B", "C", "D", "E"], lb: ["1", "2", "3", "4", "5"] },
 ];
+
+/** Le tableau des associations, cases vides (« … ») : on voit les paires sans le total. */
+const tableauAssociations = (c: Combo, a: number, b: number): Q["canvas"] =>
+  ({ kind: "tableau_donnees", headers: c.lb.slice(0, b), coin: "", rows: c.la.slice(0, a).map((l) => ({ label: l, values: Array.from({ length: b }, () => "…") })) }) as Q["canvas"];
 
 function cartesien(etoile: Etoile): Q {
   const c = pick(COMBOS);
@@ -673,16 +680,13 @@ function cartesien(etoile: Etoile): Q {
   const a = rint(2, Math.min(5, c.la.length));
   const b = rint(2, Math.min(4, c.lb.length));
   if (etoile === 4) {
-    const tableau: Q["canvas"] | undefined =
-      Math.random() < 0.55
-        ? { kind: "tableau_donnees", headers: c.lb.slice(0, b), coin: "", rows: c.la.slice(0, a).map((l) => ({ label: l, values: Array.from({ length: b }, () => "…") })) } as Q["canvas"]
-        : undefined;
+    const tableau = parfois(0.7, () => tableauAssociations(c, a, b));
     return qN(
       pick([
         `Il y a ${a} ${c.A} et ${b} ${c.B}. Combien ${de(c.quoi)} ${c.verbe} ?`,
         `${p.nom} a ${a} ${c.A} et ${b} ${c.B}. Combien ${de(c.quoi)} ${c.verbe} ?`,
         `Avec ${a} ${c.A} et ${b} ${c.B}, combien de ${c.quoi} ${c.verbe} ?`,
-        `Pic le paille-en-queue essaie toutes les associations : ${a} ${c.A} avec ${b} ${c.B}. Combien ${de(c.quoi)} ${c.verbe} ?`,
+        `Pic le paille-en-queue associe ${a} ${c.A} et ${b} ${c.B}. Combien ${de(c.quoi)} ${c.verbe} ?`,
       ]),
       a * b,
       [a + b, a * b * 2, a * b + 1, a * b - 1, a * a],
@@ -700,13 +704,14 @@ function cartesien(etoile: Etoile): Q {
       a * b * k,
       [a + b + k, a * b, a * b + k, a * b * k + 1, (a + b) * k],
       exp("Avec trois groupes, on associe chaque élément de chacun.", "On multiplie les trois nombres.", `${a} × ${b} = ${a * b}, puis ${a * b} × ${k} = ${a * b * k}.`, `On peut faire ${a * b * k} ${c.quoi}.`),
+      avec(parfois(0.6, () => tableauAssociations(c, a, b))),
     );
   }
   const t = a * b;
   return qN(
     pick([
-      `Avec ses ${c.A} et ${b} ${c.B}, ${p.nom} peut faire ${t} ${c.quoi}. Combien a-t-${p.il} ${de(c.A)} ?`,
-      `On peut faire ${t} ${c.quoi} avec ${b} ${c.B} et des ${c.A}. Combien y a-t-il ${de(c.A)} ?`,
+      `Avec ses ${c.A} et ${b} ${c.B}, ${p.nom} fait ${t} ${c.quoi}. Combien a-t-${p.il} ${de(c.A)} ?`,
+      `On fait ${t} ${c.quoi} avec ${b} ${c.B} et des ${c.A}. Combien ${de(c.A)} ?`,
     ]),
     a,
     [t - b, t, a + 1, b, a * 2],
@@ -773,10 +778,10 @@ function lireSchema(etoile: Etoile): Q {
     ]);
     return qN(
       pick([
-        `${objet.qui} ${objet.verbe} ${k} ${objet.quoi} au même prix pour ${k * q} €. Le schéma montre le partage. ${objet.fin}`,
-        `${k} ${objet.quoi} coûtent ${k * q} € en tout, tous au même prix. ${objet.fin}`,
-        `${p.nom} regarde le schéma : ${k} ${objet.quoi} pour ${k * q} €, tous au même prix. ${objet.fin}`,
-        `${objet.qui} ${objet.verbe} ${k} ${objet.quoi} identiques. ${p.nom} sait que le total est de ${k * q} €. ${objet.fin}`,
+        `${objet.qui} ${objet.verbe} ${k} ${objet.quoi} au même prix pour ${k * q} €. ${objet.fin}`,
+        `${k} ${objet.quoi} coûtent ${k * q} €, tous au même prix. ${objet.fin}`,
+        `${p.nom} lit le schéma : ${k} ${objet.quoi} pour ${k * q} €. ${objet.fin}`,
+        `${objet.qui} ${objet.verbe} ${k} ${objet.quoi} identiques pour ${k * q} €. ${objet.fin}`,
       ]),
       q,
       [k * q - k, q + 1, k, k * q, q * 2],
@@ -790,11 +795,11 @@ function lireSchema(etoile: Etoile): Q {
     const q = rint(12, 80);
     return qN(
       pick([
-        `${S} remplit ${k} boîtes de ${q} ${r.des}. Le schéma le montre. ${combienDe(r)} en tout ?`,
+        `${S} remplit ${k} boîtes de ${q} ${r.des}. Combien en tout ?`,
         `Le schéma montre ${k} parts égales de ${q}. Que vaut la barre entière ?`,
         `${p.nom} dessine ${k} parts de ${q} ${r.des}. Combien vaut le total ?`,
         `Pic le paille-en-queue a rempli ${k} paniers de ${q} ${r.des}. Combien en tout ?`,
-        `${p.nom} met ${q} ${r.des} dans chacune de ses ${k} boîtes. Le schéma le montre. Combien ${de(r.des)} a-t-${p.il} ?`,
+        `${p.nom} met ${q} ${r.des} dans chacune de ses ${k} boîtes. Combien en a-t-${p.il} ?`,
       ]),
       k * q,
       [k + q, k * q + q, k * q - q, k * q + 10],
@@ -808,10 +813,10 @@ function lireSchema(etoile: Etoile): Q {
   const e = rint(25, 300);
   return qN(
     pick([
-      `${x.nom} a ${a} ${re.des}. ${y.nom} en a ${e} de plus ${que(x.nom)}. Combien les deux enfants ont-ils ${de(re.des)} en tout ?`,
-      `Le schéma montre les ${re.des} ${de(x.nom)} et ${de(y.nom)}, qui en a ${e} de plus. ${x.nom} en a ${a}. Combien en ont-ils ensemble ?`,
-      `${y.nom} a ${e} ${re.des} de plus ${que(x.nom)}, qui en a ${a}. Le schéma les montre. Combien ${de(re.des)} en tout ?`,
-      `${x.nom} a ${a} ${re.des} ; ${y.nom} en a ${e} de plus. Quel est le total des deux enfants ?`,
+      `${x.nom} a ${a} ${re.des}. ${y.nom} en a ${e} de plus. Combien en ont-ils à eux deux ?`,
+      `${x.nom} a ${a} ${re.des}, et ${y.nom} ${e} de plus. Combien en ont-ils ensemble ?`,
+      `${y.nom} a ${e} ${re.des} de plus ${que(x.nom)}, qui en a ${a}. Combien en tout ?`,
+      `${x.nom} a ${a} ${re.des} ; ${y.nom} en a ${e} de plus. Quel est leur total ?`,
     ]),
     a + a + e,
     [a + e, a + e + e, a + a, a + a + e + 10],
@@ -825,9 +830,11 @@ function lireSchema(etoile: Etoile): Q {
 --------------------------------------------------------- */
 
 function verifier(etoile: Etoile): Q {
-  const r = reserve();
-  const p = quelquun();
+  const r = reserveCourte();
+  let p = quelquun();
+  while (r.sujet?.includes(p.nom)) p = quelquun();
   const { S } = qui(r, p);
+  const re = aEnfant();
   const f = etoile === 4 ? rint(1, 2) : rint(1, 3);
   if (f === 1) {
     const a = rint(800, 4800);
@@ -836,12 +843,14 @@ function verifier(etoile: Etoile): Q {
     const annonce = juste ? a - b : pick([a, a + b, a + b * 2]);
     return qM(
       pick([
-        `${S} avait ${fmt(a)} ${r.des} et en a ${ppMasc(r)} ${fmt(b)}. ${p.nom} répond qu'il en reste ${fmt(annonce)}. Cette réponse est-elle possible ?`,
-        `Il y avait ${fmt(a)} ${r.des} ; ${fmt(b)} sont partis. Un élève trouve qu'il en reste ${fmt(annonce)}. Est-ce possible ?`.replace("partis", /es$/.test(r.moinsPp) ? "parties" : "partis"),
+        `${S} avait ${fmt(a)} ${r.des} et en a ${ppMasc(r)} ${fmt(b)}. ${p.nom} dit qu'il en reste ${fmt(annonce)}. Sa réponse est-elle possible ?`,
+        `${p.nom} : « J'avais ${fmt(a)} ${re.des}, j'en ai ${ppMasc(re)} ${fmt(b)}, il m'en reste ${fmt(annonce)}. » Sa réponse est-elle possible ?`,
+        `Il y avait ${fmt(a)} ${r.des} ; ${fmt(b)} sont partis. ${p.nom} en compte ${fmt(annonce)}. Sa réponse est-elle possible ?`.replace("partis", /es$/.test(r.moinsPp) ? "parties" : "partis"),
       ]),
       juste ? "Oui, elle est correcte" : "Non, elle est impossible",
       [juste ? "Non, elle est impossible" : "Oui, elle est correcte", "On ne peut pas le savoir"],
       exp("Quand on enlève, il doit rester MOINS qu'au départ.", `On compare la réponse au départ, ${fmt(a)}.`, juste ? `${fmt(a)} − ${fmt(b)} = ${fmt(a - b)} : la réponse est juste.` : `${fmt(annonce)} n'est pas plus petit que ${fmt(a)} : c'est impossible. La bonne réponse est ${fmt(a - b)}.`, juste ? "La réponse est possible." : "La réponse est impossible."),
+      avec(parfois(0.5, () => barre([["parti", fmt(b)], ["reste", null]], fmt(a)))),
     );
   }
   if (f === 2) {
@@ -850,13 +859,13 @@ function verifier(etoile: Etoile): Q {
     const ok = part < t;
     return qM(
       pick([
-        `${S} a ${fmt(t)} ${r.des} en tout, dont une partie est ${ppFem(r)}. ${p.nom} trouve ${fmt(part)} ${r.des} ${r.moinsPp}. Cette réponse est-elle possible ?`,
-        `Sur ${fmt(t)} ${r.des}, certains sont ${r.moinsPp}. Un élève annonce que ${fmt(part)} sont ${r.moinsPp}. Est-ce possible ?`.replace("certains sont", /es$/.test(r.moinsPp) ? "certaines sont" : "certains sont"),
+        `${S} a ${fmt(t)} ${r.des}. ${p.nom} dit que ${fmt(part)} sont ${r.moinsPp}. Est-ce possible ?`,
+        `Sur ${fmt(t)} ${r.des}, ${p.nom} en compte ${fmt(part)} ${r.moinsPp}. Est-ce possible ?`,
       ]),
       ok ? "oui" : "non",
       [ok ? "non" : "oui", "on ne peut pas le savoir"],
       exp("Une partie ne peut pas être plus grande que le tout.", `On compare ${fmt(part)} et ${fmt(t)}.`, ok ? `${fmt(part)} est plus petit que ${fmt(t)} : c'est possible.` : `${fmt(part)} est plus grand que ${fmt(t)} : c'est impossible.`, ok ? "Oui, c'est possible." : "Non, c'est impossible."),
-      avec(parfois(0.5, () => barre([["partie", fmt(part)], ["reste", null]], fmt(t)))),
+      avec(parfois(0.6, () => barre([["partie", fmt(part)], ["reste", null]], fmt(t)))),
     );
   }
   const a = rint(600, 4800);
@@ -865,12 +874,13 @@ function verifier(etoile: Etoile): Q {
   const annonce = juste ? a + b : pick([Math.abs(a - b), a, b + 1]);
   return qM(
     pick([
-      `On réunit ${fmt(a)} et ${fmt(b)}. ${p.nom} annonce ${fmt(annonce)}. Cette réponse est-elle possible ?`,
-      `${S} a ${fmt(a)} ${r.des} et en ${r.plus} ${fmt(b)}. Un élève dit qu'${r.sujet ? (r.fem ? "elle" : "il") : p.il} en a ${fmt(annonce)}. Est-ce possible ?`,
+      `On réunit ${fmt(a)} et ${fmt(b)}. ${p.nom} trouve ${fmt(annonce)}. Cette réponse est-elle possible ?`,
+      `${S} a ${fmt(a)} ${r.des} et en ${r.plus} ${fmt(b)}. Total trouvé : ${fmt(annonce)}. Est-ce possible ?`,
     ]),
     juste ? "oui" : "non",
     [juste ? "non" : "oui", "on ne peut pas le savoir"],
     exp("Quand on réunit deux quantités, le total est plus grand que chacune.", "On estime : on arrondit à la centaine.", juste ? `${fmt(a)} + ${fmt(b)} = ${fmt(a + b)} : c'est juste.` : `${fmt(annonce)} n'est pas plus grand que ${fmt(Math.max(a, b))} : c'est impossible.`, juste ? "Oui." : "Non."),
+    avec(parfois(0.5, () => barre([["", fmt(a)], ["", fmt(b)]], null))),
   );
 }
 
@@ -896,16 +906,15 @@ function defiReste(type: 1 | 2 | 3): Q {
     { quoi: "poissons", boite: "aquariums", fem: false, qui: "La soigneuse", v: "met" },
   ]);
   const complets = sit.fem ? "complètes" : "complets";
-  const quiMin = sit.qui.charAt(0).toLowerCase() + sit.qui.slice(1);
   const debut = pick([
     `${sit.qui} ${sit.v} ${t} ${sit.quoi} dans des ${sit.boite} de ${k}.`,
     `${sit.qui} ${sit.v} ${t} ${sit.quoi} par ${sit.boite} de ${k}.`,
-    `Il y a ${t} ${sit.quoi}. ${sit.qui} les ${sit.v} dans des ${sit.boite} de ${k}.`,
-    `${p.nom} aide ${quiMin} à répartir ${t} ${sit.quoi} dans des ${sit.boite} de ${k}.`,
+    `${p.nom} range ${t} ${sit.quoi} dans des ${sit.boite} de ${k}.`,
+    `${p.nom} met ${t} ${sit.quoi} dans des ${sit.boite} de ${k}.`,
   ]);
   if (type === 1)
     return qN(
-      `${debut} ${pick([`Combien ${de(sit.boite)} seront ${complets} ?`, `Combien ${de(sit.boite)} ${complets} y aura-t-il ?`, `Combien ${de(sit.boite)} pourra-t-on remplir entièrement ?`])}`,
+      `${debut} ${pick([`Combien ${de(sit.boite)} seront ${complets} ?`, `Combien ${de(sit.boite)} ${complets} y aura-t-il ?`, `Combien ${de(sit.boite)} seront pleines ?`.replace("pleines", sit.fem ? "pleines" : "pleins")])}`,
       q,
       [q + 1, reste, q - 1, k],
       exp("On cherche combien de fois le paquet tient dans le total.", `${t} = ${k} × ${q} + ${reste}.`, `${q} ${sit.boite} ${complets}, et ${reste} ${sit.quoi} restent.`, `${q} ${sit.boite} sont ${complets}.`),
@@ -913,7 +922,7 @@ function defiReste(type: 1 | 2 | 3): Q {
     );
   if (type === 2)
     return qN(
-      `${debut} ${pick([`Combien ${de(sit.quoi)} resteront en dehors des ${sit.boite} ${complets} ?`, `Combien ${de(sit.quoi)} ne trouveront pas de place ?`, `Une fois les ${sit.boite} ${complets} remplis, combien ${de(sit.quoi)} reste-t-il ?`.replace("remplis", sit.fem ? "remplies" : "remplis")])}`,
+      `${debut} ${pick([`Combien ${de(sit.quoi)} restent à part ?`, `Combien n'auront pas de place ?`, `Une fois les ${sit.boite} remplis, combien en reste-t-il ?`.replace("remplis", sit.fem ? "remplies" : "remplis")])}`,
       reste,
       [k - reste, q, reste + 1, k],
       exp("Le reste, c'est ce qui ne suffit pas à remplir un paquet de plus.", `${k} × ${q} = ${k * q}.`, `${t} − ${k * q} = ${reste}.`, `Il en reste ${reste}.`),
@@ -921,12 +930,12 @@ function defiReste(type: 1 | 2 | 3): Q {
     );
   const v = pick([
     { qui: "élèves partent en sortie", v: "voiture transporte", vs: "voitures", fin: "pour que TOUS partent" },
-    { qui: "enfants vont à la piscine", v: "minibus emmène", vs: "minibus", fin: "pour emmener tout le monde" },
-    { qui: "supporters vont au match", v: "car transporte", vs: "cars", fin: "pour que tous voyagent" },
+    { qui: "enfants vont à la piscine", v: "minibus emmène", vs: "minibus", fin: "pour tous" },
+    { qui: "supporters vont au match", v: "car transporte", vs: "cars", fin: "pour tous" },
     { qui: "astronautes partent vers Mars", v: "fusée emmène", vs: "fusées", fin: "pour que tous décollent" },
   ]);
   return qN(
-    `${pick(["", "", `${p.nom} organise le voyage. `, `${p.nom} fait le calcul. `, "Pic le paille-en-queue compte. "])}${t} ${v.qui}. Chaque ${v.v} ${k} personnes. ${pick([`Combien ${de(v.vs)} faut-il ${v.fin} ?`, `Combien ${de(v.vs)} doit-on prévoir ?`, `Quel est le plus petit nombre ${de(v.vs)} qu'il faut ?`])}`,
+    `${t} ${v.qui}. Chaque ${v.v} ${k} personnes. ${pick([`Combien ${de(v.vs)} faut-il ${v.fin} ?`, `Combien ${de(v.vs)} doit-on prévoir ?`, `Combien ${de(v.vs)} faut-il au minimum ?`])}`,
     q + 1,
     [q, reste, q + 2, k],
     exp("Le reste ne se jette pas : des personnes ne restent pas sur le trottoir.", `${t} = ${k} × ${q} + ${reste}.`, `${q} ${v.vs} ne suffisent pas : il reste ${reste} personnes, il en faut une de plus.`.replace("il en faut une", v.vs === "fusées" || v.vs === "voitures" ? "il en faut une" : "il en faut un"), `Il faut ${q + 1} ${v.vs}.`),

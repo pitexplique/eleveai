@@ -76,16 +76,18 @@ function gab(
 }
 
 /** Qui se partage : « 3 enfants », « Nina et ses 2 amis »… */
+// ⛔ 14/11/2026 — ÉNONCÉS COURTS (16 mots au plus, ou presque) : le prof les
+// trouvait trop longs pour des enfants de 7 ans. Plus de « Regarde le dessin. »
+// (le dessin est là), plus de « de la classe de Nina », « de la forêt »…
 function partageurs(n: number) {
-  const p = enfant();
   return rc([
     { qui: `${n} enfants`, chacun: "chaque enfant" },
     { qui: `${n} amis`, chacun: "chaque ami" },
-    { qui: `les ${n} pirates du bateau`, chacun: "chaque pirate" },
-    { qui: `${n} copains de la classe de ${p.nom}`, chacun: "chaque copain" },
-    { qui: `les ${n} lutins de la forêt`, chacun: "chaque lutin" },
-    { qui: `${n} astronautes de la fusée`, chacun: "chaque astronaute" },
-    { qui: `les ${n} joueurs de l'équipe`, chacun: "chaque joueur" },
+    { qui: `${n} pirates`, chacun: "chaque pirate" },
+    { qui: `${n} copains`, chacun: "chaque copain" },
+    { qui: `${n} lutins`, chacun: "chaque lutin" },
+    { qui: `${n} astronautes`, chacun: "chaque astronaute" },
+    { qui: `${n} joueurs`, chacun: "chaque joueur" },
     { qui: `${n} petits dragons`, chacun: "chaque petit dragon" },
   ]);
 }
@@ -93,18 +95,21 @@ function partageurs(n: number) {
 /** Les paquets qu'on remplit (groupements). */
 const CONTENANTS = [
   { un: "sachet", des: "sachets", quoi: "billes" },
-  { un: "boîte", des: "boîtes", quoi: "œufs" },
+  { un: "boîte", des: "boîtes", quoi: "œufs", f: true },
   { un: "panier", des: "paniers", quoi: "pommes", objet: "pomme" as const },
   { un: "vase", des: "vases", quoi: "fleurs", objet: "fleur" as const },
   { un: "bocal", des: "bocaux", quoi: "poissons", objet: "poisson" as const },
   { un: "filet", des: "filets", quoi: "ballons", objet: "ballon" as const },
-  { un: "pochette", des: "pochettes", quoi: "images" },
-  { un: "assiette", des: "assiettes", quoi: "crêpes" },
+  { un: "pochette", des: "pochettes", quoi: "images", f: true },
+  { un: "assiette", des: "assiettes", quoi: "crêpes", f: true },
   { un: "coffre", des: "coffres", quoi: "pièces d'or" },
   { un: "pot", des: "pots", quoi: "crayons" },
-  { un: "étagère", des: "étagères", quoi: "livres", objet: "livre" as const },
+  { un: "étagère", des: "étagères", quoi: "livres", objet: "livre" as const, f: true },
   { un: "bouquet", des: "bouquets", quoi: "tulipes" },
 ];
+
+/** « pleins » ou « pleines », selon le contenant. */
+const pleins = (k: (typeof CONTENANTS)[number]) => ("f" in k && k.f ? "pleines" : "pleins");
 
 /** Le total à partager, dessiné : objets si on sait, sinon jetons. */
 function dessinTotal(quoi: string, objet: Parameters<typeof dessinUnPaquet>[0] | undefined, n: number) {
@@ -126,7 +131,7 @@ export const divisionPartageBank: TutorBankItemV4[] = [
     microId: "ce1_division_partage",
     difficulty: 3,
     theme: "neutral",
-    text: "Trois enfants se partagent 18 images. Tous doivent avoir le même nombre d'images. Combien chaque enfant en aura-t-il ?",
+    text: "Trois enfants se partagent 18 images à parts égales. Combien chacun en aura-t-il ?",
     format: "short",
     expected: ["6"],
     comparator: "number_equal",
@@ -175,7 +180,6 @@ export const divisionPartageBank: TutorBankItemV4[] = [
       const p = enfant();
       const s = partageurs(n);
       const dessin = pile(0.75) ? dessinQuantite(c, total) : undefined;
-      const voici = dessin ? "Regarde le dessin. " : "";
       const explication = exp(
         "Partager équitablement, c'est donner autant à chacun.",
         "On distribue les objets un par un, à tour de rôle, jusqu'à ce qu'il n'en reste plus. Ou on cherche le nombre qui, répété autant de fois qu'il y a de parts, redonne le total.",
@@ -186,7 +190,7 @@ export const divisionPartageBank: TutorBankItemV4[] = [
         const juste = pile();
         const dit = juste ? chacun : chacun + rc([1, -1]);
         return qcmTexte(
-          `${voici}${p.nom} partage ${total} ${c.pl} entre ${s.qui}. ${maj(p.il)} dit : « ${maj(s.chacun)} en aura ${dit}. » A-t-${p.il} raison ?`,
+          `${total} ${c.pl} à partager entre ${s.qui}. ${p.nom} dit : « ${dit} chacun. » A-t-${p.il} raison ?`,
           juste ? "oui" : "non",
           [juste ? "non" : "oui"],
           exp(
@@ -199,12 +203,12 @@ export const divisionPartageBank: TutorBankItemV4[] = [
         );
       }
       return nombreOuQcm(
-        `${voici}${rc([
-          `${maj(s.qui)} se partagent ${total} ${c.pl}, à parts égales. Combien de ${c.pl} pour ${s.chacun} ?`,
-          `${p.nom} partage ${total} ${c.pl} entre ${s.qui}. Tous doivent en avoir autant. Combien ${s.chacun} en reçoit-il ?`,
-          `${p.nom} distribue ${total} ${c.pl} à ${s.qui}, un par un, à tour de rôle. Combien ${s.chacun} en a-t-il à la fin ?`,
-          `On partage ${total} ${c.pl} en ${n} parts égales pour ${s.qui}. Combien dans chaque part ? Aide ${p.nom} !`,
-        ])}`,
+        rc([
+          `${maj(s.qui)} se partagent ${total} ${c.pl} à parts égales. Combien chacun en a-t-il ?`,
+          `${p.nom} partage ${total} ${c.pl} entre ${s.qui}, à parts égales. Combien pour ${s.chacun} ?`,
+          `${p.nom} distribue ${total} ${c.pl} à ${s.qui}, un par un. Combien chacun en a-t-il ?`,
+          `On partage ${total} ${c.pl} en ${n} parts égales. Combien dans chaque part ?`,
+        ]),
         chacun,
         [chacun + 1, chacun - 1, total - n, n],
         explication,
@@ -229,9 +233,9 @@ export const divisionPartageBank: TutorBankItemV4[] = [
         const c = chose();
         return nombreOuQcm(
           rc([
-            `${p.nom} partage ${total} ${c.pl} entre ${p.il === "il" ? "lui" : "elle"} et ${pl(amis, "ami", "amis")}, à parts égales. Combien de ${c.pl} chacun aura-t-il ?`,
-            `${p.nom} et ${pl(amis, "copain", "copains")} se partagent ${total} ${c.pl}. Tous en ont autant. Combien chacun en a-t-il ?`,
-            `Pour le goûter, ${p.nom} partage ${total} ${c.pl} avec ${pl(amis, "ami", "amis")}. ${maj(p.il)} en garde autant que les autres. Combien chacun en a-t-il ?`,
+            `${p.nom} et ${pl(amis, "ami", "amis")} se partagent ${total} ${c.pl} à parts égales. Combien chacun en a-t-il ?`,
+            `${p.nom} et ${pl(amis, "copain", "copains")} se partagent ${total} ${c.pl}, autant chacun. Combien pour chacun ?`,
+            `${p.nom} partage ${total} ${c.pl} avec ${pl(amis, "ami", "amis")}. ${maj(p.il)} en garde autant. Combien chacun ?`,
           ]),
           chacun,
           [Math.floor(total / amis) === total / amis ? total / amis : chacun + 1, chacun + 1, chacun - 1, n],
@@ -250,12 +254,12 @@ export const divisionPartageBank: TutorBankItemV4[] = [
         const parPersonne = piece * ri(1, piece === 5 ? 2 : 3);
         const total = n * parPersonne;
         const nbPieces = total / piece;
-        const [x, y] = deuxEnfants();
+        const x = enfant();
         return nombreOuQcm(
           rc([
-            `${x.nom} et ${pl(n - 1, "ami", "amis")} ont gagné ces pièces à la kermesse. Ils se les partagent à parts égales. Combien d'euros pour chacun ?`,
-            `Mamie donne ces pièces à ${n} petits-enfants, dont ${x.nom} et ${y.nom}. Chacun doit avoir autant. Combien d'euros chacun reçoit-il ?`,
-            `Voici ${total} €. ${x.nom} les partage entre ${n} enfants, à parts égales. Combien d'euros pour chacun ?`,
+            `${x.nom} et ${pl(n - 1, "ami", "amis")} se partagent ces pièces à parts égales. Combien d'euros chacun ?`,
+            `Mamie donne ces pièces à ${n} petits-enfants, autant à chacun. Combien d'euros chacun ?`,
+            `${x.nom} partage ${total} € entre ${n} enfants, à parts égales. Combien d'euros pour chacun ?`,
           ]),
           parPersonne,
           [parPersonne + 1, parPersonne - 1, nbPieces, total].filter((v) => v !== parPersonne && v > 0),
@@ -275,9 +279,9 @@ export const divisionPartageBank: TutorBankItemV4[] = [
       const k = rc(CONTENANTS);
       return nombreOuQcm(
         rc([
-          `${p.nom} doit ranger ${total} ${k.quoi} dans ${n} ${k.des}, autant dans chacun. Combien de ${k.quoi} par ${k.un} ?`,
-          `La maîtresse de ${p.nom} partage ${total} ${k.quoi} entre ${n} groupes, à parts égales. Combien pour chaque groupe ?`,
-          `Le jardinier plante ${total} ${k.quoi === "tulipes" || k.quoi === "fleurs" ? k.quoi : "graines"} en ${n} rangs égaux. ${p.nom} veut savoir combien par rang. Combien ?`,
+          `${p.nom} range ${total} ${k.quoi} dans ${n} ${k.des}, autant dans chacun. Combien par ${k.un} ?`,
+          `La maîtresse partage ${total} ${k.quoi} entre ${n} groupes, à parts égales. Combien par groupe ?`,
+          `Le jardinier plante ${total} ${k.quoi === "tulipes" || k.quoi === "fleurs" ? k.quoi : "graines"} en ${n} rangs égaux. Combien par rang ?`,
         ]),
         chacun,
         [chacun + 1, chacun - 1, total - n, n],
@@ -304,7 +308,7 @@ export const divisionPartageBank: TutorBankItemV4[] = [
     microId: "ce1_division_groupement",
     difficulty: 4,
     theme: "neutral",
-    text: "Je veux ranger 180 photos dans un album. Je peux ranger 10 photos par page. Combien de pages me faut-il ?",
+    text: "Je range 180 photos dans un album, 10 par page. Combien de pages me faut-il ?",
     format: "short",
     expected: ["18"],
     comparator: "number_equal",
@@ -331,12 +335,12 @@ export const divisionPartageBank: TutorBankItemV4[] = [
       const p = enfant();
       const dessin = pile(0.75) ? dessinTotal(k.quoi, k.objet, total) ?? ("objet" in k && k.objet && taille <= 5 ? dessinUnPaquet(k.objet, taille, `1 ${k.un}`) : undefined) : undefined;
       return nombreOuQcm(
-        `${dessin ? "Regarde le dessin. " : ""}${rc([
-          `${p.nom} a ${total} ${k.quoi}. ${maj(p.il)} les range par ${k.des} de ${taille}. Combien de ${k.des} remplit-${p.il} ?`,
-          `On met ${taille} ${k.quoi} dans chaque ${k.un}. Il y a ${total} ${k.quoi}. Combien de ${k.des} faut-il ? Aide ${p.nom} !`,
-          `Avec ${total} ${k.quoi}, ${p.nom} fait des ${k.des} de ${taille}. Combien de ${k.des} pleins fait-${p.il} ?`,
-          `Un marchand range ${total} ${k.quoi} par ${k.des} de ${taille}. ${p.nom} compte les ${k.des}. Combien en trouve-t-${p.il} ?`,
-        ])}`,
+        rc([
+          `${p.nom} range ${total} ${k.quoi} par ${k.des} de ${taille}. Combien de ${k.des} remplit-${p.il} ?`,
+          `On met ${taille} ${k.quoi} par ${k.un}. Il y en a ${total}. Combien de ${k.des} faut-il ?`,
+          `Avec ${total} ${k.quoi}, ${p.nom} fait des ${k.des} de ${taille}. Combien en fait-${p.il} ?`,
+          `Un marchand range ${total} ${k.quoi} par ${k.des} de ${taille}. Combien de ${k.des} a-t-il ?`,
+        ]),
         paquets,
         [paquets + 1, paquets - 1, total - taille, taille],
         exp(
@@ -361,14 +365,14 @@ export const divisionPartageBank: TutorBankItemV4[] = [
       const groupes = ri(2, 9);
       const total = taille * groupes;
       const histoires = [
-        { t: `${total} enfants font des équipes de ${taille} pour le match. ${p.nom} compte les équipes.`, q: "Combien y a-t-il d'équipes ?", u: "équipes" },
-        { t: `Au cirque, ${total} spectateurs s'assoient sur des bancs de ${taille} places, tous pleins. ${p.nom} les compte.`, q: "Combien de bancs sont occupés ?", u: "bancs" },
-        { t: `La cantine a ${total} élèves. Chaque table accueille ${taille} élèves. ${p.nom} aide à placer tout le monde.`, q: "Combien de tables faut-il ?", u: "tables" },
+        { t: `${total} enfants font des équipes de ${taille} pour le match.`, q: "Combien y a-t-il d'équipes ?", u: "équipes" },
+        { t: `Au cirque, ${total} spectateurs remplissent des bancs de ${taille} places.`, q: "Combien de bancs sont occupés ?", u: "bancs" },
+        { t: `À la cantine, ${total} élèves s'assoient à des tables de ${taille}.`, q: "Combien de tables faut-il ?", u: "tables" },
         { t: `${p.nom} colle ${total} autocollants, ${taille} par page.`, q: `Combien de pages remplit-${p.il} ?`, u: "pages" },
-        { t: `Le petit train emmène ${total} enfants, ${taille} par wagon. ${p.nom} est dans le dernier.`, q: "Combien de wagons y a-t-il ?", u: "wagons" },
+        { t: `Le petit train emmène ${total} enfants, ${taille} par wagon.`, q: "Combien de wagons y a-t-il ?", u: "wagons" },
         { t: `${p.nom} a ${total} € en ${taille === 10 ? "billets" : "pièces"} de ${taille} €.`, q: `Combien de ${taille === 10 ? "billets" : "pièces"} a-t-${p.il} ?`, u: taille === 10 ? "billets" : "pièces" },
-        { t: `La poule pond ${taille} œufs par semaine. ${p.nom} a ramassé ${total} œufs.`, q: "Pendant combien de semaines a-t-elle pondu ?", u: "semaines" },
-        { t: `Pic le paille-en-queue mange ${taille} graines à chaque repas. ${p.nom} lui a donné ${total} graines.`, q: "Combien de repas cela fait-il ?", u: "repas" },
+        { t: `La poule pond ${taille} œufs par semaine. ${p.nom} en a ramassé ${total}.`, q: "Combien de semaines ?", u: "semaines" },
+        { t: `Pic, l'oiseau, mange ${taille} graines par repas. ${p.nom} lui en donne ${total}.`, q: "Combien de repas ?", u: "repas" },
       ];
       // La pièce de 3 € ou de 4 € n'existe pas : l'histoire d'argent ne sert
       // qu'avec 2, 5 et 10 €.
@@ -409,7 +413,7 @@ export const divisionPartageBank: TutorBankItemV4[] = [
     microId: "ce1_division_reste",
     difficulty: 4,
     theme: "neutral",
-    text: "Un fermier a 75 œufs. Il les vend par boites de 6. Combien de boites PLEINES peut-il vendre ?",
+    text: "Un fermier vend 75 œufs par boites de 6. Combien de boites PLEINES peut-il vendre ?",
     format: "short",
     expected: ["12"],
     comparator: "number_equal",
@@ -431,7 +435,7 @@ export const divisionPartageBank: TutorBankItemV4[] = [
     microId: "ce1_division_reste",
     difficulty: 5,
     theme: "reunion",
-    text: "26 élèves partent en sortie. Chaque voiture transporte 5 élèves. Combien faut-il de voitures pour que TOUS partent ?",
+    text: "26 élèves partent en sortie, 5 par voiture. Combien faut-il de voitures pour que TOUS partent ?",
     format: "short",
     expected: ["6"],
     comparator: "number_equal",
@@ -458,20 +462,19 @@ export const divisionPartageBank: TutorBankItemV4[] = [
       const k = rc(CONTENANTS);
       const p = enfant();
       const dessin = pile(0.75) ? dessinTotal(k.quoi, k.objet, total) : undefined;
-      const voici = dessin ? "Regarde le dessin. " : "";
       const explication = exp(
         "Quand on groupe, il reste parfois des objets qui ne suffisent pas à remplir un paquet de plus.",
         "On compte les paquets pleins, puis on enlève ce qu'ils contiennent au total.",
         `${taille} × ${paquets} = ${taille * paquets}. Il reste ${total} - ${taille * paquets} = ${reste} ${k.quoi}, pas assez pour un paquet de plus.`,
-        `${paquets} ${k.des} pleins, et il reste ${reste} ${k.quoi}.`,
+        `${paquets} ${k.des} ${pleins(k)}, et il reste ${reste} ${k.quoi}.`,
       );
       if (pile()) {
         return nombreOuQcm(
-          `${voici}${rc([
-            `${p.nom} range ${total} ${k.quoi} par ${k.des} de ${taille}. Combien de ${k.quoi} restent en dehors des ${k.des} pleins ?`,
-            `On fait des ${k.des} de ${taille} avec ${total} ${k.quoi}. Combien de ${k.quoi} reste-t-il à la fin ? Aide ${p.nom}.`,
-            `${p.nom} a ${total} ${k.quoi}. ${maj(p.il)} remplit des ${k.des} de ${taille}. Combien lui en reste-t-il de côté ?`,
-          ])}`,
+          rc([
+            `${p.nom} range ${total} ${k.quoi} par ${k.des} de ${taille}. Combien en reste-t-il à côté ?`,
+            `On fait des ${k.des} de ${taille} avec ${total} ${k.quoi}. Combien en reste-t-il à la fin ?`,
+            `${p.nom} a ${total} ${k.quoi}. ${maj(p.il)} remplit des ${k.des} de ${taille}. Combien lui en reste-t-il ?`,
+          ]),
           reste,
           [reste + 1, taille, 0, paquets].filter((v) => v !== reste),
           explication,
@@ -479,11 +482,11 @@ export const divisionPartageBank: TutorBankItemV4[] = [
         );
       }
       return nombreOuQcm(
-        `${voici}${rc([
-          `${p.nom} range ${total} ${k.quoi} par ${k.des} de ${taille}. Combien de ${k.des} PLEINS remplit-${p.il} ?`,
-          `Avec ${total} ${k.quoi}, ${p.nom} fait des ${k.des} de ${taille}. Combien de ${k.des} bien pleins obtient-${p.il} ?`,
-          `Le marchand vend ses ${k.quoi} par ${k.des} de ${taille}. Il en a ${total}. Combien de ${k.des} pleins peut-il vendre à ${p.nom} et aux autres ?`,
-        ])}`,
+        rc([
+          `${p.nom} range ${total} ${k.quoi} par ${k.des} de ${taille}. Combien de ${k.des} ${pleins(k).toUpperCase()} remplit-${p.il} ?`,
+          `Avec ${total} ${k.quoi}, ${p.nom} fait des ${k.des} de ${taille}. Combien de ${k.des} ${pleins(k)} obtient-${p.il} ?`,
+          `Un marchand a ${total} ${k.quoi}. Il les vend par ${k.des} de ${taille}. Combien de ${k.des} ${pleins(k)} ?`,
+        ]),
         paquets,
         [paquets + 1, paquets - 1, reste, total - taille].filter((v) => v !== paquets),
         explication,
@@ -508,7 +511,7 @@ export const divisionPartageBank: TutorBankItemV4[] = [
         { qui: "enfants", vehicule: "barque", un: "Une", vehicules: "barques", verbe: "emmène" },
         { qui: "joueurs", vehicule: "minibus", un: "Un", vehicules: "minibus", verbe: "transporte" },
         { qui: "astronautes", vehicule: "fusée", un: "Une", vehicules: "fusées", verbe: "emporte" },
-        { qui: "enfants", vehicule: "nacelle de la grande roue", un: "Une", vehicules: "nacelles", verbe: "accueille" },
+        { qui: "enfants", vehicule: "nacelle", un: "Une", vehicules: "nacelles", verbe: "accueille" },
         { qui: "lutins", vehicule: "traîneau", un: "Un", vehicules: "traîneaux", verbe: "emmène" },
         { qui: "pirates", vehicule: "chaloupe", un: "Une", vehicules: "chaloupes", verbe: "emporte" },
       ]);
@@ -521,7 +524,7 @@ export const divisionPartageBank: TutorBankItemV4[] = [
       );
       if (pile(0.25)) {
         return qcmTexte(
-          `${total} ${h.qui} partent. Chaque ${h.vehicule} ${h.verbe} ${parVehicule} ${h.qui}. ${p.nom} dit : « Il faut ${pleins} ${h.vehicules}. » A-t-${p.il} raison ?`,
+          `${total} ${h.qui} partent, ${parVehicule} par ${h.vehicule}. ${p.nom} dit : « Il faut ${pleins} ${h.vehicules}. » A-t-${p.il} raison ?`,
           `non, il en faut ${pleins + 1} pour que tous partent`,
           ["oui, c'est juste", `non, il en faut ${pleins - 1}`, `non, il en faut ${total}`],
           explication,
@@ -530,9 +533,9 @@ export const divisionPartageBank: TutorBankItemV4[] = [
       }
       return nombreOuQcm(
         rc([
-          `${total} ${h.qui} partent avec ${p.nom}. Chaque ${h.vehicule} ${h.verbe} ${parVehicule} ${h.qui}. Combien faut-il de ${h.vehicules} pour que tous partent ?`,
-          `${p.nom} organise le départ de ${total} ${h.qui}. ${h.un} ${h.vehicule} ${h.verbe} ${parVehicule} ${h.qui}. Combien de ${h.vehicules} faut-il, au moins ?`,
-          `Il y a ${total} ${h.qui}. On en met ${parVehicule} par ${h.vehicule}. ${p.nom} veut que personne ne reste. Combien de ${h.vehicules} faut-il ?`,
+          `${total} ${h.qui} partent, ${parVehicule} par ${h.vehicule}. Combien faut-il de ${h.vehicules} pour que tous partent ?`,
+          `${h.un} ${h.vehicule} ${h.verbe} ${parVehicule} ${h.qui}. Combien en faut-il, au moins, pour ${total} ${h.qui} ?`,
+          `Il y a ${total} ${h.qui}, ${parVehicule} par ${h.vehicule}. Personne ne doit rester. Combien de ${h.vehicules} faut-il ?`,
         ]),
         pleins + 1,
         [pleins, pleins + 2, reste, total - parVehicule].filter((v) => v !== pleins + 1),
@@ -554,7 +557,7 @@ export const divisionPartageBank: TutorBankItemV4[] = [
     microId: "ce1_division_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Dans l'école, il y a 200 élèves. On veut faire 40 équipes qui ont toutes le même nombre d'élèves. Combien y aura-t-il d'élèves par équipe ?",
+    text: "Dans l'école, 200 élèves forment 40 équipes de même taille. Combien d'élèves par équipe ?",
     format: "short",
     expected: ["5"],
     comparator: "number_equal",
@@ -585,11 +588,11 @@ export const divisionPartageBank: TutorBankItemV4[] = [
       const k = plus ? enPlus : Math.min(enPlus, chacun - 1);
       const dessin = pile(0.7) ? dessinQuantite(c, total) : undefined;
       return nombreOuQcm(
-        `${dessin ? "Regarde le dessin. " : ""}${rc([
-          `${p.nom} partage ${total} ${c.pl} entre ${n} enfants, à parts égales. Puis chaque enfant en ${plus ? `reçoit ${k} de plus` : `perd ${k}`}. Combien chacun en a-t-il à la fin ?`,
-          `${p.nom} partage ${total} ${c.pl} entre ${n} amis, autant à chacun. Puis ${p.il} ${plus ? `donne encore ${k} ${c.pl} à chacun` : `reprend ${k} ${c.pl} à chacun`}. Combien chaque ami en a-t-il ?`,
-          `Les ${n} pirates de ${p.nom} se partagent ${total} ${c.pl}. Ensuite, chacun en ${plus ? `trouve ${k} autres` : `perd ${k}`}. Combien chaque pirate en a-t-il maintenant ?`,
-        ])}`,
+        rc([
+          `${n} enfants se partagent ${total} ${c.pl}. Puis chacun en ${plus ? `gagne ${k}` : `perd ${k}`}. Combien en a chacun ?`,
+          `${p.nom} partage ${total} ${c.pl} entre ${n} amis, puis ${plus ? "donne" : "reprend"} ${k} à chacun. Combien chacun ?`,
+          `${n} pirates se partagent ${total} ${c.pl}. Puis chacun en ${plus ? `trouve ${k}` : `perd ${k}`}. Combien en a chacun ?`,
+        ]),
         fin,
         [chacun, total + k, fin + 1, fin - 1].filter((v) => v !== fin && v >= 0),
         exp(
@@ -621,10 +624,10 @@ export const divisionPartageBank: TutorBankItemV4[] = [
       if (famille === "combien_ajouter" && !juste) {
         const ajout = n - r;
         return nombreOuQcm(
-          `${dessin ? "Regarde le dessin. " : ""}${rc([
-            `${p.nom} veut partager ${total} ${c.pl} entre ${n} amis, sans reste. Combien de ${c.pl} doit-${p.il} ajouter, au moins ?`,
-            `${n} enfants se partagent ${total} ${c.pl}, mais ça ne tombe pas juste. ${p.nom} en apporte quelques-uns. Combien, au moins, pour que tout tombe juste ?`,
-          ])}`,
+          rc([
+            `${p.nom} veut partager ${total} ${c.pl} entre ${n} amis, sans reste. Combien en ajouter, au moins ?`,
+            `Il faut partager ${total} ${c.pl} entre ${n} enfants, sans reste. Combien en ajouter, au moins ?`,
+          ]),
           ajout,
           [r, ajout + 1, n, ajout + n].filter((v) => v !== ajout),
           exp(
@@ -638,11 +641,11 @@ export const divisionPartageBank: TutorBankItemV4[] = [
       }
       const bonne = juste ? `oui, chacun en aura ${chacun}` : `non, il en restera ${r}`;
       return qcmTexte(
-        `${dessin ? "Regarde le dessin. " : ""}${rc([
-          `${n} enfants veulent se partager ${total} ${c.pl} de façon équitable. Le partage tombe-t-il juste ?`,
-          `${p.nom} veut donner autant de ${c.pl} à chacun de ses ${n} amis. ${maj(p.il)} en a ${total}. Ça tombe juste ?`,
-          `Les ${n} lutins de ${p.nom} se partagent ${total} ${c.pl}, à parts égales. Le partage tombe-t-il juste ?`,
-        ])}`,
+        rc([
+          `${n} enfants se partagent ${total} ${c.pl} à parts égales. Le partage tombe-t-il juste ?`,
+          `${p.nom} a ${total} ${c.pl} pour ${n} amis, autant chacun. Ça tombe juste ?`,
+          `${n} lutins se partagent ${total} ${c.pl}, à parts égales. Le partage tombe-t-il juste ?`,
+        ]),
         bonne,
         juste
           ? [`non, il en restera 1`, `oui, chacun en aura ${chacun + 1}`, "on ne peut pas savoir"]

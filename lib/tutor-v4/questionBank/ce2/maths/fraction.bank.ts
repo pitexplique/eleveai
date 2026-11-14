@@ -180,9 +180,13 @@ function entree(): string {
     "",
   ]);
 }
+/** Les mots d'un énoncé (même compte que l'audit des longueurs). */
+const nbMots = (t: string) => t.replace(/\s+/g, " ").trim().split(" ").filter((w) => /[\p{L}\d]/u.test(w)).length;
+
+/** ⛔ 14/11 : énoncés CE2 trop longs. L'entrée n'est ajoutée que si l'énoncé reste court (≤ 18 mots). */
 const avec = (s: string) => {
   const e = entree();
-  if (!e) return s;
+  if (!e || nbMots(`${e} ${s}`) > 18) return s;
   return `${e} ${s}`;
 };
 
@@ -247,7 +251,7 @@ function partsEgales(): Q {
   const { qui } = quiPartage();
   const correct = "toutes de la même taille";
   const text = pick([
-    `${qui} partage ${un(t)} en ${d} parts. Pour parler ${d === 3 ? "de tiers" : `de ${DEN_NOM[d][1]}`}, comment doivent être les parts ?`,
+    `${qui} partage ${un(t)} en ${d} parts. Pour avoir ${des(d)}, comment doivent-elles être ?`,
     `Pour que chaque part soit ${nom(1, d).replace("un ", "un ")} ${du(t)}, comment faut-il couper ?`,
     `On veut des ${DEN_NOM[d][1]} ${du(t)}. Comment doivent être les ${d} parts ?`,
   ]);
@@ -299,7 +303,7 @@ function combienDeParts(): Q {
   const { qui, il } = quiPartage();
   const correct = String(d);
   const text = pick([
-    `${qui} veut couper ${un(t)} en ${DEN_NOM[d][1]}. En combien de parts égales doit-${il} ${t.f ? "la" : "le"} partager ?`,
+    `${qui} veut couper ${un(t)} en ${DEN_NOM[d][1]}. Combien de parts égales doit-${il} faire ?`,
     `On partage ${un(t)} en parts égales pour obtenir ${des(d)}. Combien de parts faut-il faire ?`,
     `Pour avoir des parts d'${nom(1, d).replace(/^un /, "")} ${du(t)}, en combien de parts égales faut-il couper ?`.replace("d'un", "d'un").replace("d'demi", "d'un demi").replace(/d'(tiers|quart|cinquième|sixième|huitième|dixième|douzième)/, "d'un $1"),
   ]);
@@ -325,10 +329,10 @@ function combienPourLeTout(d3: boolean): Q {
   const correct = String(d);
   const text = d3
     ? pick([
-        `${qui} a coupé ${un(t)} en ${d} parts égales. Combien de parts faut-il pour avoir ${le(t)} ${t.f ? "entière" : "entier"} ?`,
+        `${qui} a coupé ${un(t)} en ${d} parts égales. Combien de parts pour l'avoir ${t.f ? "entière" : "entier"} ?`,
         `Combien de ${DEN_NOM[d][1]} faut-il pour faire ${un(t)} ${t.f ? "entière" : "entier"} ?`,
-        `Le dessin montre une part ${du(t)}. Combien de parts comme celle-ci forment ${le(t)} ${t.f ? "entière" : "entier"} ?`,
-        `${qui} a ${nom(1, d)} ${du(t)}. Combien de parts pareilles lui faut-il pour avoir tout${t.f ? "e" : ""} ${le(t)} ?`.replace(`${il} `, ""),
+        `Le dessin montre une part ${du(t)}. Combien de parts comme celle-ci font le tout ?`,
+        `${qui} a ${nom(1, d)} ${du(t)}. Combien de parts pareilles font le tout ?`,
       ])
     : `Combien de ${DEN_NOM[d][1]} y a-t-il dans un tout ?`;
   return {
@@ -476,9 +480,10 @@ function leTout(): Q {
   const d = pick(DENS);
   const t = tout();
   const p = quelquun();
+  const { verbe, part } = action(t);
   const correct = fr(d, d);
   const text = pick([
-    `${p.nom} a mangé toutes les parts ${du(t)}, coupé${t.f ? "e" : ""} en ${d}. Quelle fraction ${du(t)} a-t-${p.il} mangée ?`,
+    `${p.nom} a ${verbe} toutes les parts ${du(t)}, coupé${t.f ? "e" : ""} en ${d}. Quelle fraction a-t-${p.il} ${part} ?`,
     `Quelle fraction est égale ${t.f ? "à toute la" : "à tout le"} ${t.nom}, partagé${t.f ? "e" : ""} en ${d} ?`,
     `Toutes les parts ${du(t)} sont coloriées. Quelle fraction est coloriée ?`,
   ]);
@@ -552,8 +557,8 @@ function partsAColorier(): Q {
         `Combien de parts faut-il colorier sur le dessin pour montrer ${fr(n, d)} ?`,
       ])
     : pick([
-        `${p.nom} veut colorier ${fr(n, d)} ${du(t)}. ${maj(p.il)} a déjà colorié les parts du dessin. Combien de parts doit-${p.il} encore colorier ?`,
-        `Il faut ${fr(n, d)} ${du(t)} en couleur. Le dessin montre ce qui est déjà fait. Combien de parts reste-t-il à colorier ?`,
+        `${p.nom} a commencé à colorier ${fr(n, d)} ${du(t)}. Combien de parts reste-t-il à colorier ?`,
+        `Il faut colorier ${fr(n, d)} ${du(t)}. Sur le dessin, combien de parts manque-t-il ?`,
       ]);
   return {
     text,
@@ -578,8 +583,8 @@ function partsInegales(): Q {
   const p = quelquun();
   const correct = "non, les parts ne sont pas égales";
   const text = pick([
-    `${p.nom} veut colorier ${fr(n, d)} ${du(t)}. ${maj(p.il)} coupe en ${d} parts de tailles différentes et en colorie ${n}. A-t-${p.il} représenté ${fr(n, d)} ?`,
-    `${p.nom} a coupé ${un(t)} en ${d} morceaux, un gros et des petits. Chaque morceau est-il ${nom(1, d)} ?`,
+    `${p.nom} coupe ${un(t)} en ${d} parts de tailles différentes et en colorie ${n}. Est-ce ${fr(n, d)} ?`,
+    `${p.nom} coupe ${un(t)} en ${d} morceaux pas pareils. Chaque morceau est-il ${nom(1, d)} ?`,
   ]);
   return {
     text,
@@ -618,9 +623,12 @@ function memeSurface(): Q {
   const correct = fr(c, e);
   const p = quelquun();
   const text = avec(pick([
-    `Les bandes A et B sont pareilles, et leurs parties coloriées aussi. La bande A montre ${fr(a, b)}. Quelle fraction montre la bande B ?`,
-    `${p.nom} colorie ${fr(a, b)} de la bande A. Sur la bande B, ${p.il} colorie autant. Quelle fraction de la bande B est coloriée ?`,
+    `Les bandes A et B ont la même partie coloriée. A montre ${fr(a, b)}. Quelle fraction montre B ?`,
+    `${p.nom} colorie ${fr(a, b)} de la bande A, et autant de B. Quelle fraction de B est coloriée ?`,
     `Regarde les deux bandes : elles ont la même partie coloriée. A = ${fr(a, b)}. Et B ?`,
+    `La bande A montre ${fr(a, b)}. B est autant coloriée. Quelle fraction montre B ?`,
+    `${p.nom} lit ${fr(a, b)} sur la bande A. Que lit-${p.il} sur B, coloriée pareil ?`,
+    `A et B ont autant de couleur. A, c'est ${nom(a, b)}. Et B ?`,
   ]));
   return {
     text,
@@ -786,9 +794,9 @@ function additionHistoire(d: Etoile): Q {
   const r = a + b;
   const correct = r === den ? `${fr(r, den)}, c'est-à-dire tout${t.f ? "e" : ""} ${le(t)}` : fr(r, den);
   const text = pick([
-    `${maj(un(t))} est partagé${t.f ? "e" : ""} en ${den} parts égales. ${p.nom} en a ${verbe} ${fr(a, den)} et ${q.nom} ${fr(b, den)}. Quelle part ${du(t)} ont-ils ${part} à eux deux ?`,
-    `${p.nom} a ${verbe} ${fr(a, den)} ${du(t)}, puis encore ${fr(b, den)}. Quelle part ${du(t)} a-t-${p.il} ${part} en tout ?`,
-    `Le dessin montre ce que ${p.nom} a ${verbe}. ${q.nom} en ${verbe === "colorié" ? "colorie" : "prend"} encore ${fr(b, den)}. Quelle part ${du(t)} est ${verbe}${t.f ? "e" : ""} maintenant ?`,
+    `${p.nom} a ${verbe} ${fr(a, den)} ${du(t)} et ${q.nom} ${fr(b, den)}. Quelle part ont-ils ${part} en tout ?`,
+    `${p.nom} a ${verbe} ${fr(a, den)} ${du(t)}, puis encore ${fr(b, den)}. Quelle part a-t-${p.il} ${part} en tout ?`,
+    `Le dessin montre la part ${part} par ${p.nom}. ${q.nom} en ${verbe === "colorié" ? "colorie" : "prend"} encore ${fr(b, den)}. Quelle part est ${part} maintenant ?`,
   ]).replace(/ont-ils/, p.il === "elle" && q.il === "elle" ? "ont-elles" : "ont-ils");
   return {
     text,
@@ -809,7 +817,7 @@ function additionHistoire(d: Etoile): Q {
 function ceQuiReste(d: Etoile): Q {
   const t = tout();
   const den = pick(d <= 3 ? [4, 5, 6, 8, 10] : DENS);
-  const deuxParts = d >= 4 && Math.random() < 0.5;
+  const deuxParts = d >= 4 && den >= 4 && Math.random() < 0.5;
   const a = rint(1, den - (deuxParts ? 3 : 2));
   const b = deuxParts ? rint(1, den - a - 1) : 0;
   const reste = den - a - b;
@@ -817,7 +825,7 @@ function ceQuiReste(d: Etoile): Q {
   const { verbe, part } = action(t);
   const correct = fr(reste, den);
   const text = deuxParts
-    ? `${maj(un(t))} est partagé${t.f ? "e" : ""} en ${den} parts égales. ${p.nom} en a ${verbe} ${fr(a, den)} et ${q.nom} ${fr(b, den)}. Quelle part ${du(t)} reste-t-il ?`
+    ? `${p.nom} a ${verbe} ${fr(a, den)} ${du(t)} et ${q.nom} ${fr(b, den)}. Quelle part reste-t-il ?`
     : pick([
         `${maj(un(t))} est coupé${t.f ? "e" : ""} en ${den} parts égales. On en a ${verbe} ${fr(a, den)}. Quelle part reste-t-il ?`,
         `${p.nom} a ${verbe} ${fr(a, den)} ${du(t)}. Quelle fraction ${du(t)} reste-t-il ?`,
@@ -847,7 +855,7 @@ function quePourLeTout(): Q {
   const t = tout();
   const text = avec(pick([
     `Quelle fraction faut-il ajouter à ${fr(a, den)} pour obtenir le tout ?`,
-    `${p.nom} a déjà ${fr(a, den)} ${du(t)}. Quelle fraction lui manque-t-il pour l'avoir en entier ?`,
+    `${p.nom} a ${fr(a, den)} ${du(t)}. Que lui manque-t-il pour l'avoir en entier ?`,
     `Complète : ${fr(a, den)} + … = ${fr(den, den)}`,
   ]));
   return {
@@ -949,9 +957,9 @@ function longueurSegment(d: Etoile): Q {
   const p = quelquun();
   const correct = `${fr(n, den)} d'unité`;
   const text = pick([
-    `La bande unité est partagée en ${den} parts égales. ${maj(s)} couvre la partie coloriée. Quelle est sa longueur ?`,
-    `${p.nom} pose ${s} contre la bande unité dessinée. ${maj(s)} va jusqu'au bout de la partie coloriée. Combien mesure-t-${s.startsWith("une ") ? "elle" : "il"} ?`,
-    `Avec la bande unité, ${p.nom} trouve que ${s.replace(/^un/, "qu'un").replace(/^qu'un /, "qu'un ").replace(/^qu'une/, "qu'une")} mesure autant que la partie coloriée. Quelle est cette longueur ?`.replace("trouve que qu'", "trouve qu'"),
+    `${maj(s)} couvre la partie coloriée de la bande unité. Quelle est sa longueur ?`,
+    `${p.nom} pose ${s} contre la bande unité : ${s.startsWith("une ") ? "elle" : "il"} couvre la partie coloriée. Combien mesure-t-${s.startsWith("une ") ? "elle" : "il"} ?`,
+    `${maj(s)} mesure autant que la partie coloriée de la bande unité. Quelle est sa longueur ?`,
   ]);
   return {
     text,
@@ -977,7 +985,7 @@ function enCombienPartagee(): Q {
   const p = quelquun();
   const text = pick([
     `${maj(s)} mesure ${fr(n, den)} d'unité. En combien de parts égales la bande unité a-t-elle été partagée ?`,
-    `${p.nom} dit : « ${s} mesure ${nom(n, den)} de la bande unité ». En combien de parts la bande est-elle coupée ?`,
+    `${p.nom} : « ${maj(s)} mesure ${nom(n, den)} d'unité. » En combien de parts est coupée la bande unité ?`,
   ]);
   return {
     text,
@@ -1000,7 +1008,7 @@ function deuxBandesMemeLongueur(): Q {
   const s = pick(SEGMENTS);
   const correct = "les deux : c'est la même longueur";
   return {
-    text: `${p.nom} mesure ${s} avec une bande partagée en ${b} : ${fr(a, b)}. ${q.nom} mesure le même avec une bande partagée en ${e} : ${fr(c, e)}. Qui a raison ?`.replace("le même", /^une /.test(s) ? "la même" : "le même"),
+    text: `Selon ${p.nom}, ${s} mesure ${fr(a, b)} d'unité ; selon ${q.nom}, ${fr(c, e)}. Qui a raison ?`,
     format: "qcm",
     choices: choix(correct, [`${p.nom} seulement`, `${q.nom} seulement`, "aucun des deux"]),
     expected: [correct],
@@ -1139,8 +1147,8 @@ function enCombienPourPlacer(): Q {
   const p = quelquun();
   return {
     text: pick([
-      `Pour placer ${des(den)} sur une droite graduée, en combien de parts égales faut-il partager le segment de 0 à 1 ?`,
-      `${p.nom} veut placer ${fr(rint(1, den - 1), den)} sur la droite. En combien de parts égales doit-${p.il} couper le segment de 0 à 1 ?`,
+      `Pour placer ${des(den)}, en combien de parts égales faut-il couper le segment de 0 à 1 ?`,
+      `${p.nom} veut placer ${fr(rint(1, den - 1), den)}. En combien de parts égales coupe-t-${p.il} le segment de 0 à 1 ?`,
     ]),
     format: "qcm",
     choices: choix(correct, [String(den * 2), String(den + 1), String(den - 1), String(Math.max(2, den / 2))]),
@@ -1173,9 +1181,10 @@ function comparerQuestion(a: [number, number], b: [number, number], avecDessin: 
   const p = quelquun();
   const t = tout();
   const [q] = deuxPersonnes().filter((x) => x.nom !== p.nom);
+  const present = action(t).verbe.replace(/é$/, "e");
   const text = avec(pick([
     `Laquelle est la plus ${plus ? "grande" : "petite"} : ${fr(...a)} ou ${fr(...b)} ?`,
-    `${p.nom} mange ${fr(...a)} ${du(t)}, ${q.nom} ${fr(...b)} ${t.f ? "d'une autre, pareille" : "d'un autre, pareil"}. Quelle part est la plus ${plus ? "grosse" : "petite"} ?`,
+    `${p.nom} ${present} ${fr(...a)} ${du(t)}, ${q.nom} ${fr(...b)} ${t.f ? "d'une autre, pareille" : "d'un autre, pareil"}. Laquelle est la plus ${plus ? "grosse" : "petite"} ?`,
     `Quelle fraction est la plus ${plus ? "grande" : "petite"}, ${fr(...a)} ou ${fr(...b)} ?`,
     `Pic hésite entre ${fr(...a)} et ${fr(...b)} ${du(t)}. Laquelle est la plus ${plus ? "grosse" : "petite"} part ?`,
   ]));
@@ -1208,7 +1217,7 @@ function memeDenominateur(dessiner: boolean): Q {
 function memeNumerateur(): Q {
   const [d1, d2] = shuffle([3, 4, 5, 6, 8, 10, 12]).slice(0, 2);
   const n = rint(1, Math.min(d1, d2) - 1);
-  return comparerQuestion([n, d1], [n, d2], Math.random() < 0.3);
+  return comparerQuestion([n, d1], [n, d2], Math.random() < 0.6);
 }
 
 function pourquoiPlusPetit(): Q {
@@ -1224,6 +1233,7 @@ function pourquoiPlusPetit(): Q {
     choices: choix(correct, [`ce n'est pas vrai : ${fr(1, y)} est plus grand que ${fr(1, x)}`, `parce que ${y} est un nombre ${y % 2 ? "impair" : "pair"}`, "parce qu'on prend une seule part des deux côtés"]),
     expected: [correct],
     comparator: "mcq_exact",
+    canvas: deuxBandes([1, x], [1, y]),
     explanation: exp(
       "Plus on partage un tout en beaucoup de parts, plus chaque part est petite.",
       "On compare la TAILLE des parts.",
@@ -1244,7 +1254,7 @@ function partagesDifferents(): Q {
 
 function genComparer(d: Etoile): Q {
   if (d <= 2) return tirer([() => memeDenominateur(true), () => memeDenominateur(false)]);
-  if (d <= 4) return tirer([memeNumerateur, pourquoiPlusPetit, memeNumerateur, () => memeDenominateur(false)]);
+  if (d <= 4) return tirer([memeNumerateur, pourquoiPlusPetit, memeNumerateur, () => memeDenominateur(Math.random() < 0.5)]);
   return tirer([partagesDifferents, partagesDifferents, memeNumerateur]);
 }
 
@@ -1261,7 +1271,7 @@ function egaleAuTout(): Q {
   const text = avec(pick([
     `La fraction ${fr(n, den)} est-elle égale au tout, ou plus petite que le tout ?`,
     `${p.nom} a ${fr(n, den)} ${du(t)}. A-t-${p.il} ${le(t)} ${t.f ? "entière" : "entier"} ?`,
-    `Regarde le dessin : ${fr(n, den)} ${du(t)} est colorié. Est-ce ${t.f ? "toute" : "tout"} ${le(t)} ?`,
+    `${fr(n, den)} ${du(t)} est colorié. Est-ce ${t.f ? "toute" : "tout"} ${le(t)} ?`,
   ]));
   const ouiNon = text.includes("A-t-") || text.includes("Est-ce to");
   const c = ouiNon ? (n === den ? "oui" : "non") : correct;
@@ -1310,8 +1320,8 @@ function combienPourCompleter(): Q {
   const correct = String(den - n);
   const p = quelquun();
   const text = pick([
-    `On a colorié ${fr(n, den)} ${du(t)}. Combien de parts reste-t-il à colorier pour l'avoir en entier ?`,
-    `${p.nom} a colorié la partie dessinée ${du(t)}. Combien de parts lui manque-t-il pour tout colorier ?`,
+    `On a colorié ${fr(n, den)} ${du(t)}. Combien de parts reste-t-il pour tout colorier ?`,
+    `${p.nom} a colorié la partie dessinée. Combien de parts lui manque-t-il pour tout colorier ?`,
     `Pour arriver au tout, combien de ${DEN_NOM[den][1]} faut-il ajouter à ${fr(n, den)} ?`,
   ]);
   return {
@@ -1374,8 +1384,8 @@ function plusGrossePart(): Q {
   const correct = x < y ? `chez ${p.nom}` : `chez ${q.nom}`;
   return {
     text: pick([
-      `Deux familles ont ${un(t)} pareil${t.f ? "le" : ""}. Chez ${p.nom}, on ${t.f ? "la" : "le"} partage entre ${x} personnes ; chez ${q.nom}, entre ${y}. Où les parts sont-elles les plus grosses ?`,
-      `${p.nom} partage ${un(t)} avec ${x - 1} ami${x - 1 > 1 ? "s" : ""}, ${q.nom} partage ${un(t)} pareil${t.f ? "le" : ""} avec ${y - 1} ami${y - 1 > 1 ? "s" : ""}. Où la part de chacun est-elle la plus grosse ?`,
+      `${p.nom} coupe ${un(t)} en ${x}, ${q.nom} ${t.f ? "une pareille" : "un pareil"} en ${y}. Où sont les plus grosses parts ?`,
+      `${p.nom} partage ${un(t)} à ${x}, ${q.nom} ${t.f ? "une pareille" : "un pareil"} à ${y}. Où sont les plus grosses parts ?`,
     ]),
     format: "qcm",
     choices: shuffle([`chez ${p.nom}`, `chez ${q.nom}`, "les parts sont pareilles"]),
@@ -1420,7 +1430,7 @@ function egaliteDefi(): Q {
   const p = quelquun();
   const correct = `non, ${fr(c, e)} et ${fr(a, b)} c'est pareil`;
   return {
-    text: `${p.nom} colorie ${c} cases sur une bande de ${e} cases et dit : « j'ai colorié ${fr(c, e)}, donc plus que ${fr(a, b)} ». A-t-${p.il} raison ?`,
+    text: `${p.nom} colorie ${c} cases sur ${e} : « j'ai ${fr(c, e)}, c'est plus que ${fr(a, b)} ». A-t-${p.il} raison ?`,
     format: "qcm",
     choices: choix(correct, [`oui, ${c} est plus grand que ${a}`, `oui, ${e} est plus grand que ${b}`, `non, ${fr(c, e)} est plus petit`]),
     expected: [correct],
@@ -1444,7 +1454,7 @@ function resteApresManger(): Q {
   const correct = fr(den - n, den);
   return {
     text: pick([
-      `${maj(un(t))} est partagé${t.f ? "e" : ""} en ${den} parts égales. On en a ${verbe} ${n}. Quelle fraction ${du(t)} reste-t-il ?`,
+      `${maj(un(t))} est coupé${t.f ? "e" : ""} en ${den} parts égales. On en a ${verbe} ${n}. Quelle fraction reste-t-il ?`,
       `${p.nom} a ${verbe} ${n} parts ${du(t)}, coupé${t.f ? "e" : ""} en ${den}. Quelle fraction reste-t-il ?`,
     ]),
     format: "qcm",

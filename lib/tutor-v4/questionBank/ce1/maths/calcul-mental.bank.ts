@@ -271,10 +271,10 @@ export const calculMentalBank: TutorBankItemV4[] = [
       );
       if (!situation) return court(direTrou(`${a} × … = ${prod}`), b, explication, prod <= 40 && pile(0.5) ? dessinJetons(prod) : undefined);
       const text = rc([
-        `Dans chaque ${pq.un}, il y a ${a} ${pq.quoi}. ${p.nom} veut ${prod} ${pq.quoi}. Combien de ${pq.des} lui faut-il ?`,
+        `${a} ${pq.quoi} par ${pq.un}. ${p.nom} en veut ${prod}. Combien de ${pq.des} ?`,
         `${p.nom} range ${prod} ${pq.quoi} par ${pq.des} de ${a}. Combien de ${pq.des} remplit-${p.il} ?`,
         `Un ${pq.un} contient ${a} ${pq.quoi}. Combien de ${pq.des} pour avoir ${prod} ${pq.quoi} ?`,
-        `Pic le paille-en-queue compte ${prod} ${pq.quoi}, rangés par ${pq.des} de ${a}. Combien de ${pq.des} voit-il ?`,
+        `Pic compte ${prod} ${pq.quoi}, ${a} par ${pq.un}. Combien de ${pq.des} ?`,
       ]);
       return nombreOuQcm(text, b, erreurs(b, prod - a, a), explication, unPaquet(pq, a));
     },
@@ -339,13 +339,13 @@ export const calculMentalBank: TutorBankItemV4[] = [
         );
       }
       const s = rc([
-        { avant: `La boulangère range ses croissants par plateaux de 25. ${p.nom} l'aide à remplir ${pl(n, "plateau", "plateaux")}.`, q: "Combien de croissants cela fait-il ?" },
+        { avant: `${p.nom} remplit ${pl(n, "plateau", "plateaux")} de 25 croissants.`, q: "Combien de croissants ?" },
         { avant: `${p.nom} achète ${pl(n, "sachet", "sachets")} de 25 billes.`, q: "Combien de billes a-t-" + p.il + " ?" },
-        { avant: `Au cirque, chaque rangée a 25 places. ${p.nom} et ses amis remplissent ${pl(n, "rangée", "rangées")}.`, q: "Combien de places sont prises ?" },
-        { avant: `Le jardinier plante 25 fleurs dans chaque bac. ${p.nom} compte ${pl(n, "bac", "bacs")} pleins.`, q: "Combien de fleurs y a-t-il ?" },
-        { avant: `Dans la fusée de ${p.nom}, chaque étage a 25 hublots. La fusée a ${pl(n, "étage", "étages")}.`, q: "Combien de hublots en tout ?" },
-        { avant: `${p.nom} donne 25 graines par jour à Pic le paille-en-queue, pendant ${pl(n, "jour", "jours")}.`, q: "Combien de graines cela fait-il ?" },
-        { avant: `${p.nom} colle 25 images sur chaque page de son album. ${maj(p.il)} remplit ${pl(n, "page", "pages")}.`, q: "Combien d'images a-t-" + p.il + " collées ?" },
+        { avant: `Au cirque, ${pl(n, "rangée", "rangées")} de 25 places sont pleines.`, q: "Combien de places prises ?" },
+        { avant: `Le jardinier remplit ${pl(n, "bac", "bacs")} de 25 fleurs.`, q: "Combien de fleurs ?" },
+        { avant: `La fusée a ${pl(n, "étage", "étages")} de 25 hublots.`, q: "Combien de hublots en tout ?" },
+        { avant: `Pic mange 25 graines par jour, pendant ${pl(n, "jour", "jours")}.`, q: "Combien de graines en tout ?" },
+        { avant: `${p.nom} colle 25 images par page, sur ${pl(n, "page", "pages")}.`, q: "Combien d'images en tout ?" },
       ]);
       const dessin = pile(0.6);
       return nombreOuQcm(
@@ -405,7 +405,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         if (n <= 10 && pile(0.7)) {
           return nombreOuQcm(
             rc([
-              `Voici les ${c.pl} de ${a.nom}. ${b.nom} en a autant. Combien de ${c.pl} ont-ils à eux deux ?`,
+              `Voici les ${c.pl} de ${a.nom}. ${b.nom} en a autant. Combien à eux deux ?`,
               `${a.nom} a ces ${c.pl}. Pic en apporte encore autant. Combien de ${c.pl} en tout ?`,
               `${a.nom} veut le double de ces ${c.pl}. Combien de ${c.pl} cela fait-il ?`,
             ]),
@@ -437,8 +437,8 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (n <= 30 && pile(0.7)) {
         return nombreOuQcm(
           rc([
-            `${a.nom} et ${b.nom} se partagent ces ${c.pl} en deux parts égales. Combien de ${c.pl} chacun ?`,
-            `${a.nom} partage ces ${c.pl} en deux tas pareils. Combien de ${c.pl} dans chaque tas ?`,
+            `${a.nom} et ${b.nom} se partagent ces ${c.pl} en deux parts égales. Combien chacun ?`,
+            `${a.nom} partage ces ${c.pl} en deux tas pareils. Combien dans chaque tas ?`,
             `${a.nom} donne la moitié de ses ${c.pl} à ${b.nom}. Combien en donne-t-${a.il} ?`,
           ]),
           m,
@@ -452,8 +452,8 @@ export const calculMentalBank: TutorBankItemV4[] = [
           pile() ? `Quelle est la moitié de ${n} ?` : `La moitié de ${n}, c'est combien ?`,
           `${p.nom} cherche la moitié de ${n}. Que trouve-t-${p.il} ?`,
           `${p.nom} partage ${n} en deux parts égales. Combien dans chaque part ?`,
-          `${a.nom} et ${b.nom} se partagent ${n} ${c.pl} à parts égales. Combien chacun en reçoit-il ?`,
-          `${p.nom} donne ${n} graines à Pic le paille-en-queue. Il en mange la moitié. Combien en mange-t-il ?`,
+          `${a.nom} et ${b.nom} se partagent ${n} ${c.pl} à parts égales. Combien chacun ?`,
+          `Pic a ${n} graines. Il en mange la moitié. Combien en mange-t-il ?`,
         ]),
         m,
         [m + 10, m - 1, n, m + 5],
@@ -491,8 +491,8 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (famille === "dessin") {
         return nombreOuQcm(
           rc([
-            `Voici ${n} en barres et en cubes. Combien de cubes faut-il ajouter pour faire une barre de plus ?`,
-            `${p.nom} a construit ${n} avec ses cubes. Combien de cubes lui manque-t-il pour arriver à ${cible} ?`,
+            `Voici ${n}. Combien de cubes ajouter pour faire une barre de plus ?`,
+            `${p.nom} a construit ${n}. Combien de cubes pour arriver à ${cible} ?`,
             `Il y a ${n} cubes. Combien en faut-il encore pour avoir ${cible} cubes ?`,
           ]),
           manque,
@@ -518,8 +518,8 @@ export const calculMentalBank: TutorBankItemV4[] = [
       return nombreOuQcm(
         rc([
           `${p.nom} a ${n} ${c.pl}. ${maj(p.il)} en veut ${cible}. Combien lui en manque-t-il ?`,
-          `Au jeu de l'oie, ${p.nom} est sur la case ${n}. Combien de cases pour arriver à la case ${cible} ?`,
-          `La boîte de ${p.nom} se ferme quand il y a ${cible} ${c.pl}. Il y en a ${n}. Combien faut-il en ajouter ?`,
+          `Au jeu de l'oie, ${p.nom} est sur la case ${n}. Combien de cases jusqu'à ${cible} ?`,
+          `La boîte est pleine avec ${cible} ${c.pl}. Il y en a ${n}. Combien en ajouter ?`,
         ]),
         manque,
         [u, manque + 1, manque - 1],
@@ -551,8 +551,8 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (famille === "dessin") {
         return nombreOuQcm(
           rc([
-            `Voici ${n} en plaques et en barres. Combien faut-il ajouter pour faire une plaque de plus ?`,
-            `${p.nom} a posé ${n} avec son matériel. Combien lui manque-t-il pour arriver à ${cible} ?`,
+            `Voici ${n}. Combien ajouter pour faire une plaque de plus ?`,
+            `${p.nom} a posé ${n}. Combien lui manque-t-il pour arriver à ${cible} ?`,
           ]),
           manque,
           [reste, manque + 10, manque - 10, manque / 10],
@@ -564,7 +564,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (famille === "phrase") {
         return nombreOuQcm(
           rc([
-            `${p.nom} cherche combien ajouter à ${n} pour atteindre la centaine supérieure. Que trouve-t-${p.il} ?`,
+            `Combien ajouter à ${n} pour atteindre la centaine suivante ?`,
             `${p.nom} compte de ${n} à ${cible}. Combien a-t-${p.il} ajouté ?`,
           ]),
           manque,
@@ -575,9 +575,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
       }
       return nombreOuQcm(
         rc([
-          `La boulangère a cuit ${n} pains. ${p.nom} lui dit qu'il en faut ${cible}. Combien doit-elle encore en cuire ?`,
-          `La fusée de ${p.nom} est à ${n} mètres. Elle doit monter à ${cible} mètres. Combien de mètres lui reste-t-il ?`,
-          `Au marché, ${p.nom} compte ${n} mangues. Le marchand en veut ${cible}. Combien doit-il en apporter ?`,
+          `La boulangère a cuit ${n} pains. Il en faut ${cible}. Combien doit-elle encore en cuire ?`,
+          `La fusée est à ${n} mètres. Elle doit monter à ${cible}. Combien de mètres reste-t-il ?`,
+          `Le marchand a ${n} mangues. Il en veut ${cible}. Combien doit-il en apporter ?`,
           `${p.nom} a ${n} points au jeu. On gagne à ${cible} points. Combien de points lui manque-t-il ?`,
           `Le château de ${p.nom} a ${n} briques. Il en faut ${cible}. Combien de briques manque-t-il ?`,
         ]),
@@ -632,10 +632,10 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (famille === "nu") return nombreOuQcm(direCalcul(`${n} + ${ajout}`), total, [n + k, total + rang, total - rang], explication, pile(0.4) ? dessinNombre(n) : undefined);
       return nombreOuQcm(
         rc([
-          `${p.nom} a ${n} perles. ${maj(p.il)} reçoit ${k} ${rang === 10 ? "boîtes de 10" : "sacs de 100"} perles. Combien de perles a-t-${p.il} ?`,
+          `${p.nom} a ${n} perles. ${maj(p.il)} reçoit ${k} ${rang === 10 ? "boîtes de 10" : "sacs de 100"}. Combien de perles ?`,
           `La bibliothèque a ${n} livres. On en apporte ${ajout}. Combien de livres y a-t-il ?`,
           `Le train transporte ${n} voyageurs. ${ajout} voyageurs montent. Combien sont dans le train ?`,
-          `Pic le paille-en-queue a ${n} graines. Il en trouve ${ajout} de plus. Combien en a-t-il ?`,
+          `Pic a ${n} graines. Il en trouve ${ajout} de plus. Combien en a-t-il ?`,
         ]),
         total,
         [n + k, total + rang, total - rang],
@@ -675,7 +675,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (famille === "dessin") {
         return nombreOuQcm(
           rc([
-            `Voici le nombre ${n}. ${p.nom} le multiplie par 10 : chaque cube devient une barre, chaque barre une plaque. Quel nombre obtient-${p.il} ?`,
+            `Voici ${n}. Chaque cube devient une barre, chaque barre une plaque. Quel nombre obtient-on ?`,
             `${p.nom} a construit ${n}. ${maj(p.il)} fait la même chose 10 fois. Combien cela fait-il ?`,
             `Le matériel de ${p.nom} montre ${n}. Combien font 10 fois ce nombre ?`,
           ]),
@@ -696,10 +696,10 @@ export const calculMentalBank: TutorBankItemV4[] = [
       return nombreOuQcm(
         rc([
           `${p.nom} a ${n} paquets de 10 images. Combien d'images a-t-${p.il} ?`,
-          `${p.nom} aide le fermier : ${p.il} remplit ${n} boîtes de 10 œufs. Combien d'œufs cela fait-il ?`,
-          `Au cirque, ${p.nom} voit ${n} clowns. Chacun a 10 ballons. Combien de ballons en tout ?`,
-          `La maîtresse de ${p.nom} distribue 10 craies à chacune des ${n} tables. Combien de craies distribue-t-elle ?`,
-          `${p.nom} donne 10 graines par jour à Pic le paille-en-queue, pendant ${n} jours. Combien de graines cela fait-il ?`,
+          `${p.nom} remplit ${n} boîtes de 10 œufs. Combien d'œufs ?`,
+          `Au cirque, ${n} clowns ont chacun 10 ballons. Combien de ballons en tout ?`,
+          `La maîtresse donne 10 craies à chacune des ${n} tables. Combien de craies ?`,
+          `Pic mange 10 graines par jour, pendant ${n} jours. Combien de graines en tout ?`,
         ]),
         r,
         faux,
@@ -767,7 +767,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
           rc([
             `Voici le nombre ${n}. ${p.nom} lui ajoute ${ajout}. Quel nombre obtient-${p.il} ?`,
             `${p.nom} a construit ${n} avec ses cubes. ${maj(p.il)} en ajoute ${ajout}. Combien de cubes a-t-${p.il} ?`,
-            `${p.nom} ajoute ${ajout} cubes à ce matériel. Combien de cubes y a-t-il maintenant ?`,
+            `${p.nom} ajoute ${ajout} cubes à ce matériel. Combien de cubes maintenant ?`,
           ]),
           total,
           faux,
@@ -780,9 +780,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
           direCalcul(`${n} + ${ajout}`),
           direCalcul(`${n} + ${ajout}`),
           `${p.nom} a ${n} ${c.pl}. ${maj(p.il)} en gagne ${ajout}. Combien en a-t-${p.il} maintenant ?`,
-          `Dans le train de ${p.nom}, il y a ${n} voyageurs. ${ajout} voyageurs montent. Combien sont-ils ?`,
-          `${p.il === "elle" ? "La" : "Le"} pirate ${p.nom} avait ${n} pièces d'or. ${maj(p.il)} en trouve ${ajout} dans un coffre. Combien en a-t-${p.il} ?`,
-          `${p.nom} est sur la case ${n} du grand jeu. ${maj(p.il)} avance de ${ajout} cases. Sur quelle case arrive-t-${p.il} ?`,
+          `Dans le train, il y a ${n} voyageurs. ${ajout} autres montent. Combien sont-ils ?`,
+          `${p.il === "elle" ? "La" : "Le"} pirate ${p.nom} a ${n} pièces d'or. ${maj(p.il)} en trouve ${ajout}. Combien en a-t-${p.il} ?`,
+          `${p.nom} est sur la case ${n}. ${maj(p.il)} avance de ${ajout} cases. Où arrive-t-${p.il} ?`,
         ]),
         total,
         faux,
@@ -859,9 +859,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
           direCalcul(`${n} - 9`),
           direCalcul(`${n} - 9`),
           `${p.nom} a ${n} ${c.pl}. ${maj(p.il)} en donne 9. Combien lui en reste-t-il ?`,
-          `À la piscine, ${p.nom} compte ${n} enfants. 9 enfants sortent de l'eau. Combien restent dans l'eau ?`,
-          `Le dragon garde ${n} pierres précieuses. Le chevalier ${p.nom} en prend 9. Combien en reste-t-il ?`,
-          `${p.nom} est sur la case ${n} du grand jeu. ${maj(p.il)} recule de 9 cases. Sur quelle case arrive-t-${p.il} ?`,
+          `À la piscine, ${n} enfants nagent. 9 sortent de l'eau. Combien restent dans l'eau ?`,
+          `Le dragon garde ${n} pierres précieuses. ${p.nom} en prend 9. Combien en reste-t-il ?`,
+          `${p.nom} est sur la case ${n}. ${maj(p.il)} recule de 9 cases. Où arrive-t-${p.il} ?`,
         ]),
         r,
         faux,
@@ -930,7 +930,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (dessin || famille === "dessin") {
         return nombreOuQcm(
           rc([
-            `Voici le nombre ${n}. ${p.nom} enlève ${retire} cubes : il faut casser une barre. Combien reste-t-il de cubes ?`,
+            `Voici ${n}. ${p.nom} enlève ${retire} cubes : il faut casser une barre. Combien en reste-t-il ?`,
             `${p.nom} a ${n} cubes. ${maj(p.il)} en donne ${retire}. Combien lui en reste-t-il ?`,
             `${p.nom} retire ${retire} à ce nombre. Quel nombre obtient-${p.il} ?`,
           ]),
@@ -943,7 +943,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (famille === "etape") {
         return court(
           rc([
-            `Pour calculer ${n} - ${retire}, ${p.nom} descend d'abord à ${n - u}. Combien lui reste-t-il à enlever ?`,
+            `Pour ${n} - ${retire}, ${p.nom} descend d'abord à ${n - u}. Combien reste-t-il à enlever ?`,
             `${p.nom} calcule ${n} - ${retire}. ${maj(p.il)} enlève d'abord ${u}. Combien doit-${p.il} encore enlever ?`,
           ]),
           retire - u,
@@ -955,7 +955,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         rc([
           `${p.nom} a ${n} ${c.pl}. ${maj(p.il)} en perd ${retire}. Combien lui en reste-t-il ?`,
           `La boulangère a ${n} baguettes. Elle en vend ${retire} à ${p.nom}. Combien en reste-t-il ?`,
-          `Le livre a ${n} pages. ${p.nom} est à ${retire} pages de la fin. À quelle page est-${p.il} ?`,
+          `Le livre a ${n} pages. ${p.nom} est à ${retire} pages de la fin. Quelle page ?`,
         ]),
         reste,
         faux,
@@ -1025,7 +1025,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (n <= 30 && pile(0.7)) {
         return nombreOuQcm(
           rc([
-            `${a.nom} et ${b.nom} se partagent ces ${c.pl} en deux parts égales. Combien de ${c.pl} chacun ?`,
+            `${a.nom} et ${b.nom} se partagent ces ${c.pl} en deux parts égales. Combien chacun ?`,
             `${a.nom} fait deux tas pareils avec ces ${c.pl}. Combien de ${c.pl} dans chaque tas ?`,
           ]),
           m,
@@ -1039,7 +1039,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
           rc([
             `Voici le nombre ${n}. ${p.nom} le partage en deux parts égales. Combien dans chaque part ?`,
             `${p.nom} partage ces cubes en deux tas égaux. Combien de cubes dans chaque tas ?`,
-            `${p.nom} cherche la moitié du nombre montré par ce matériel. Que trouve-t-${p.il} ?`,
+            `Quelle est la moitié du nombre montré ?`,
           ]),
           m,
           faux,
@@ -1051,9 +1051,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
         rc([
           pile() ? `Quelle est la moitié de ${n} ?` : `La moitié de ${n}, c'est combien ?`,
           `${p.nom} cherche la moitié de ${n}. Que trouve-t-${p.il} ?`,
-          `${a.nom} et ${b.nom} se partagent ${n} ${c.pl} à parts égales. Combien chacun en reçoit-il ?`,
-          `La vétérinaire soigne ${n} animaux. ${p.nom} l'aide pour la moitié. Combien d'animaux ${p.nom} aide-t-${p.il} à soigner ?`,
-          `La cabane de ${p.nom} a ${n} planches, la moitié sont peintes. Combien de planches sont peintes ?`,
+          `${a.nom} et ${b.nom} se partagent ${n} ${c.pl} à parts égales. Combien chacun ?`,
+          `La vétérinaire soigne ${n} animaux. ${p.nom} l'aide pour la moitié. Combien d'animaux ?`,
+          `La cabane a ${n} planches, la moitié sont peintes. Combien de planches peintes ?`,
         ]),
         m,
         faux,
@@ -1114,17 +1114,23 @@ export const calculMentalBank: TutorBankItemV4[] = [
         `${grand} × ${petit} = ${produit}.`,
       );
       const faux = [10 * petit + reste, produit + petit, produit - petit, grand + petit];
-      const dessin = pile(0.5) ? dessinBarre({ total: `${grand} × ${petit}`, parts: [{ label: `10 × ${petit}` }, { label: `${reste} × ${petit}` }] }) : undefined;
+      const dessin = pile(0.8) ? dessinBarre({ total: `${grand} × ${petit}`, parts: [{ label: `10 × ${petit}` }, { label: `${reste} × ${petit}` }] }) : undefined;
       const text = rc([
         direCalcul(`${grand} × ${petit}`),
         `${p.nom} a ${petit} boîtes de ${grand} crayons. Combien de crayons a-t-${p.il} ?`,
-        `Dans le petit train de ${p.nom}, il y a ${petit} wagons de ${grand} enfants. Combien d'enfants en tout ?`,
-        `Le chef cuisinier fait ${petit} plateaux de ${grand} crêpes pour la fête de ${p.nom}. Combien de crêpes prépare-t-il ?`,
-        `${p.nom} range ${petit} étagères de ${grand} livres. Combien de livres range-t-${p.il} ?`,
-        `Un album a ${grand} pages. ${p.nom} en a ${petit} pareils. Combien de pages en tout ?`,
-        `${p.nom} fait ${petit} tours de ${grand} mètres sur la piste. Combien de mètres court-${p.il} ?`,
+        `Le petit train a ${petit} wagons de ${grand} enfants. Combien d'enfants en tout ?`,
+        `Le chef fait ${petit} plateaux de ${grand} crêpes. Combien de crêpes ?`,
+        `${p.nom} range ${petit} étagères de ${grand} livres. Combien de livres ?`,
+        `${p.nom} a ${petit} albums de ${grand} pages. Combien de pages en tout ?`,
+        `${p.nom} fait ${petit} tours de ${grand} mètres. Combien de mètres court-${p.il} ?`,
+        `${p.nom} achète ${petit} paquets de ${grand} billes. Combien de billes ?`,
+        `${petit} équipes de ${grand} enfants. Combien d'enfants en tout ?`,
+        `${p.nom} colle ${grand} images sur chacune de ses ${petit} pages. Combien d'images ?`,
+        `Pic picore ${grand} graines par jour, pendant ${petit} jours. Combien en tout ?`,
+        `${p.nom} lit ${grand} pages par jour, pendant ${petit} jours. Combien de pages ?`,
+        `Calcule de tête : ${grand} × ${petit}.`,
       ]);
-      return nombreOuQcm(dessin ? `${text} Le schéma t'aide à couper le calcul.` : text, produit, faux, explication, dessin);
+      return nombreOuQcm(text, produit, faux, explication, dessin);
     },
   ),
 
@@ -1183,7 +1189,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
           rc([
             direCalcul(`${n} + ${diz} + ${a9}`),
             `${p.nom} a ${n} images. ${maj(p.il)} en gagne ${diz}, puis encore ${a9}. Combien en a-t-${p.il} ?`,
-            `Le train de ${p.nom} part avec ${n} voyageurs. ${diz} montent à la première gare, ${a9} à la deuxième. Combien sont-ils ?`,
+            `Le train part avec ${n} voyageurs. ${diz} montent, puis ${a9}. Combien sont-ils ?`,
             `${p.nom} a ${n} points. ${maj(p.il)} gagne ${diz} points, puis ${a9}. Combien de points a-t-${p.il} ?`,
           ]),
           total,
@@ -1207,8 +1213,8 @@ export const calculMentalBank: TutorBankItemV4[] = [
         return nombreOuQcm(
           rc([
             `${p.nom} pense à un nombre. « Si ${op}, je trouve ${r}. » Quel est son nombre ?`,
-            `Devinette de ${p.nom} : « Je pense à un nombre, ${op} et je trouve ${r}. » Quel est ce nombre ?`,
-            `${p.nom} et Ti Margo jouent. Ti Margo pense à un nombre : « ${maj(op)}, je trouve ${r}. » Quel nombre a-t-il en tête ?`,
+            `Devinette : « ${maj(op)} et je trouve ${r}. » Quel est mon nombre ?`,
+            `Ti Margo pense à un nombre : « ${maj(op)}, je trouve ${r}. » Lequel ?`,
           ]),
           x,
           plus ? [r + k, x + 1, x - 1, x + 10] : [r - 9, x + 1, x - 1, x - 10],
@@ -1232,7 +1238,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       return nombreOuQcm(
         rc([
           `${p.nom} part de ${depart}. ${maj(p.il)} ajoute ${pas}, encore ${pas}, puis enlève 1. Où arrive-t-${p.il} ?`,
-          `Le robot de ${p.nom} est à ${depart}. Il avance de ${pas}, encore de ${pas}, puis recule de 1. Où est-il ?`,
+          `Le robot, à ${depart}, avance de ${pas}, encore ${pas}, puis recule de 1. Où est-il ?`,
         ]),
         fin,
         [fin + 2, fin + 10, depart + 2 * pas, fin - 10],
@@ -1256,9 +1262,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
         return nombreOuQcm(
           rc([
             `${p.nom} cherche le double du double de ${n}. Que trouve-t-${p.il} ?`,
-            `${p.nom} double ${n}, puis double encore le résultat. Que trouve-t-${p.il} ?`,
-            `La plante de ${p.nom} mesure ${n} cm. Elle double, puis double encore. Combien mesure-t-elle ?`,
-            `Pour ${p.nom}, le magicien double les ${n} lapins de son chapeau, puis double encore. Combien de lapins ?`,
+            `${p.nom} double ${n}, puis double encore. Que trouve-t-${p.il} ?`,
+            `La plante mesure ${n} cm. Elle double, puis double encore. Combien mesure-t-elle ?`,
+            `Le magicien double ses ${n} lapins, puis double encore. Combien de lapins ?`,
           ]),
           q,
           [n * 2, q + 2, q - 10, n * 3],
@@ -1277,8 +1283,8 @@ export const calculMentalBank: TutorBankItemV4[] = [
         return nombreOuQcm(
           rc([
             `${p.nom} cherche la moitié de la moitié de ${n}. Que trouve-t-${p.il} ?`,
-            `${p.nom} partage ${n} billes en deux, puis encore en deux. Combien de billes dans chaque petit tas ?`,
-            `Le gâteau de ${p.nom} a ${n} framboises. ${maj(p.il)} en garde la moitié, puis la moitié de ce qui reste. Combien de framboises ?`,
+            `${p.nom} partage ${n} billes en deux, puis encore en deux. Combien par petit tas ?`,
+            `Le gâteau a ${n} framboises. ${p.nom} en garde la moitié, puis la moitié du reste. Combien ?`,
           ]),
           q,
           [n / 2, q + 1, q * 3, q - 1],
@@ -1298,7 +1304,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         rc([
           `${p.nom} double ${n}, puis ajoute ${k}. Quel nombre trouve-t-${p.il} ?`,
           `Défi de ${p.nom} : double ${n}, puis ajoute ${k}. Quel est le résultat ?`,
-          `${p.nom} donne ${n} graines à Pic. Le lendemain, Pic en a deux fois plus, puis il en trouve ${k}. Combien en a-t-il ?`,
+          `Pic double ses ${n} graines, puis en trouve ${k}. Combien en a-t-il ?`,
         ]),
         r,
         [n + k, r + 1, r - 1, r + 10],
@@ -1339,10 +1345,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (famille === "gagner") {
         return nombreOuQcm(
           rc([
-            `${p.nom} a ${a} ${c.pl}. ${maj(p.il)} en gagne à la récré. Maintenant ${p.il} en a ${t}. Combien en a-t-${p.il} gagné ?`,
-            `${p.nom} compte ${a} enfants dans le bus. D'autres montent. Maintenant ils sont ${t}. Combien sont montés ?`,
-            `L'aquarium de ${p.nom} a ${a} poissons. ${maj(p.il)} en ajoute. Maintenant il y en a ${t}. Combien en a-t-${p.il} ajouté ?`,
-            `${p.nom} avait ${t} ${c.pl}. ${maj(p.il)} en a donné. Il lui en reste ${a}. Combien en a-t-${p.il} donné ?`,
+            `${p.nom} a ${a} ${c.pl}. Après la récré, ${p.il} en a ${t}. Combien en a-t-${p.il} gagné ?`,
+            `${a} enfants sont dans le bus. D'autres montent : ils sont ${t}. Combien sont montés ?`,
+            `L'aquarium a ${a} poissons. On en ajoute : il y en a ${t}. Combien en a-t-on ajouté ?`,
+            `${p.nom} avait ${t} ${c.pl}. Il lui en reste ${a}. Combien en a-t-${p.il} donné ?`,
+            `${p.nom} avait ${a} points. ${maj(p.il)} en a ${t} maintenant. Combien en a-t-${p.il} gagné ?`,
           ]),
           b,
           [t, b + 1, b - 1, t + a],
@@ -1354,8 +1361,8 @@ export const calculMentalBank: TutorBankItemV4[] = [
         return nombreOuQcm(
           rc([
             `${p.nom} a posé ces jetons. ${maj(p.il)} en veut ${t}. Combien doit-${p.il} encore en poser ?`,
-            `Pour son jeu, ${p.nom} doit avoir ${t} jetons. Voici ses jetons. Combien lui en manque-t-il ?`,
-            `Pic le paille-en-queue a posé ces jetons. Il en faut ${t}. Combien en manque-t-il ?`,
+            `${p.nom} doit avoir ${t} jetons. Voici les siens. Combien lui en manque-t-il ?`,
+            `Pic a posé ces jetons. Il en faut ${t}. Combien en manque-t-il ?`,
           ]),
           b,
           [t, b + 1, b - 1, a],
@@ -1365,9 +1372,12 @@ export const calculMentalBank: TutorBankItemV4[] = [
       }
       return nombreOuQcm(
         rc([
-          `Pic a caché ${t} graines dans deux cachettes. ${p.nom} en trouve ${a} dans la première. Combien dans la deuxième ?`,
-          `${p.nom} a ${t} ${c.pl} dans ses deux poches. ${a} sont dans la poche de gauche. Combien dans celle de droite ?`,
-          `${p.il === "elle" ? "La" : "Le"} pirate ${p.nom} a ${t} pièces d'or dans deux coffres. Le premier en a ${a}. Combien en a le second ?`,
+          `Pic cache ${t} graines à deux endroits. ${a} dans le premier. Combien dans l'autre ?`,
+          `${p.nom} a ${t} ${c.pl} dans ses poches, ${a} à gauche. Combien à droite ?`,
+          `Deux coffres : ${t} pièces d'or en tout, ${a} dans le premier. Combien dans l'autre ?`,
+          `${p.nom} range ${t} ${c.pl} dans deux boîtes, ${a} dans la première. Et dans l'autre ?`,
+          `${p.nom} et Pic ont ${t} ${c.pl} à eux deux. Pic en a ${a}. Et ${p.nom} ?`,
+          `${t} enfants jouent, ${a} dans le sable. Combien sur le toboggan ?`,
         ]),
         b,
         [t, b + 1, b - 1, t + a],
@@ -1415,11 +1425,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
       const dessin = unPaquet(pq, t);
       const text = rc([
         `${p.nom} a ${k} ${pq.des} de ${t} ${pq.quoi}. Combien de ${pq.quoi} en tout ?`,
-        `Il y a ${k} ${pq.des}. Dans chaque ${pq.un}, il y a ${t} ${pq.quoi}. Combien de ${pq.quoi} ?`,
-        `${p.nom} prépare ${k} ${pq.des} de ${t} ${pq.quoi}. Combien de ${pq.quoi} cela fait-il ?`,
+        `Il y a ${k} ${pq.des}, avec ${t} ${pq.quoi} dans chacun. Combien de ${pq.quoi} ?`,
+        `${p.nom} prépare ${k} ${pq.des} de ${t} ${pq.quoi}. Combien en tout ?`,
         `${k} fois ${t} ${pq.quoi}, combien cela fait-il ?`,
       ]);
-      return nombreOuQcm(dessin ? `Voici un ${pq.un}. ${text}` : text, r, faux, explication, dessin);
+      return nombreOuQcm(text, r, faux, explication, dessin);
     },
   ),
   gab(
@@ -1445,7 +1455,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (famille === "rangs") {
         return nombreOuQcm(
           rc([
-            `Dans la salle, ${r} chaises sont rangées en ${k} rangées pareilles. Combien de chaises par rangée ?`,
+            `${r} chaises sont rangées en ${k} rangées pareilles. Combien par rangée ?`,
             `Le jardinier plante ${r} salades en ${k} rangs égaux. Combien de salades dans chaque rang ?`,
             `${r} enfants font ${k} équipes pareilles. Combien d'enfants par équipe ?`,
           ]),
@@ -1458,8 +1468,8 @@ export const calculMentalBank: TutorBankItemV4[] = [
       const dessin = pile(0.7) && r <= 40;
       return nombreOuQcm(
         rc([
-          `${p.nom} range ${r} ${pq.quoi} dans ${k} ${pq.des}, autant dans chacun. Combien de ${pq.quoi} par ${pq.un} ?`,
-          `On met ${r} ${pq.quoi} dans ${k} ${pq.des} pareils. Combien de ${pq.quoi} dans chaque ${pq.un} ?`,
+          `${p.nom} range ${r} ${pq.quoi} dans ${k} ${pq.des}, autant dans chacun. Combien par ${pq.un} ?`,
+          `On répartit ${r} ${pq.quoi} dans ${k} ${pq.des}. Combien dans chacun ?`,
           `${k} amis se partagent ${r} ${pq.quoi}, autant chacun. Combien en a chacun ?`,
         ]),
         t,
@@ -1518,8 +1528,8 @@ export const calculMentalBank: TutorBankItemV4[] = [
         return nombreOuQcm(
           rc([
             `Voici l'argent de ${p.nom}. Combien d'euros a-t-${p.il} ?`,
-            `${p.nom} casse sa tirelire. Voici ce qu'il y a dedans. Combien d'euros en tout ?`,
-            `Pour la kermesse, ${p.nom} a ces billets et ces pièces. Combien d'euros cela fait-il ?`,
+            `Voici la tirelire ${de(p.nom)}. Combien d'euros en tout ?`,
+            `${p.nom} a ces billets et ces pièces. Combien d'euros ?`,
           ]),
           s,
           [s + f.v, s - f.v, f.k, s + 10].filter((x) => x > 0),
@@ -1574,9 +1584,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
         return nombreOuQcm(
           rc([
             `Le double d'un nombre est ${d}. Quel est ce nombre ?`,
-            `${p.nom} a doublé sa collection : ${p.il} a maintenant ${d} ${c.pl}. Combien en avait-${p.il} avant ?`,
-            `${a.nom} a deux fois plus de ${c.pl} que ${b.nom}. ${a.nom} en a ${d}. Combien ${b.nom} en a-t-${b.il} ?`,
-            `Pic le paille-en-queue pense à un nombre. Son double est ${d}. Quel est ce nombre ?`,
+            `${p.nom} a doublé sa collection : ${d} ${c.pl}. Combien en avait-${p.il} ?`,
+            `${a.nom} en a ${d}, deux fois plus que ${b.nom}. Combien ${b.nom} en a-t-${b.il} ?`,
+            `Pic pense à un nombre. Son double est ${d}. Quel est ce nombre ?`,
           ]),
           n,
           [d, n + 1, n - 1, n + 2],
@@ -1590,7 +1600,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         rc([
           `La moitié d'un nombre est ${m}. Quel est ce nombre ?`,
           `${p.nom} a mangé la moitié de ses fraises : ${m}. Combien en avait-${p.il} ?`,
-          `${a.nom} et ${b.nom} ont partagé des billes en deux parts égales. Chacun en a ${m}. Combien y en avait-il ?`,
+          `${a.nom} et ${b.nom} partagent des billes : ${m} chacun. Combien y en avait-il ?`,
         ]),
         n,
         [m, n + 1, n - 2, m + 10],
@@ -1628,7 +1638,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (famille === "dessin") {
         return nombreOuQcm(
           rc([
-            `Voici ${n} en barres et en cubes. Combien faut-il ajouter pour faire une plaque de 100 ?`,
+            `Voici ${n}. Combien ajouter pour faire une plaque de 100 ?`,
             `${p.nom} a construit ${n}. Combien lui manque-t-il pour arriver à 100 ?`,
             `${p.nom} veut savoir combien il manque à ce nombre pour faire 100. Aide-${le(p)} !`,
           ]),
@@ -1642,10 +1652,10 @@ export const calculMentalBank: TutorBankItemV4[] = [
       return nombreOuQcm(
         rc([
           `Le jeu se gagne à 100 points. ${p.nom} a ${n} points. Combien de points lui manque-t-il ?`,
-          `Le livre a 100 pages. ${p.nom} en a lu ${n}. Combien de pages lui reste-t-il à lire ?`,
-          `Le vélo coûte 100 €. ${p.nom} a ${n} € dans sa tirelire. Combien lui manque-t-il ?`,
-          `L'aquarium de ${p.nom} peut avoir 100 poissons. Il y en a ${n}. Combien peut-on encore en mettre ?`,
-          `La course fait 100 mètres. ${p.nom} a couru ${n} mètres. Combien de mètres lui reste-t-il ?`,
+          `Le livre a 100 pages. ${p.nom} en a lu ${n}. Combien en reste-t-il ?`,
+          `Le vélo coûte 100 €. ${p.nom} a ${n} €. Combien lui manque-t-il ?`,
+          `L'aquarium tient 100 poissons. Il y en a ${n}. Combien en ajouter ?`,
+          `La course fait 100 mètres. ${p.nom} a couru ${n} mètres. Combien reste-t-il ?`,
         ]),
         manque,
         faux,
@@ -1706,13 +1716,14 @@ export const calculMentalBank: TutorBankItemV4[] = [
       }
       return nombreOuQcm(
         rc([
-          `Le château de cartes de ${p.nom} a ${n} cartes. ${maj(p.il)} ${ajoute ? "en ajoute" : "en retire"} ${pas}. Combien de cartes a-t-il ?`,
-          `${p.nom} a ${n} points au jeu. ${maj(p.il)} ${ajoute ? "gagne" : "perd"} ${pas} points. Combien de points a-t-${p.il} ?`,
-          `À la bibliothèque de ${p.nom}, il y a ${n} livres. On ${ajoute ? "en achète" : "en donne"} ${pas}. Combien de livres y a-t-il ?`,
+          `Le château de cartes a ${n} cartes. ${p.nom} ${ajoute ? "en ajoute" : "en retire"} ${pas}. Combien de cartes ?`,
+          `${p.nom} a ${n} points. ${maj(p.il)} ${ajoute ? "gagne" : "perd"} ${pas} points. Combien de points a-t-${p.il} ?`,
+          `La bibliothèque a ${n} livres. On ${ajoute ? "en achète" : "en donne"} ${pas}. Combien de livres ?`,
         ]),
         r,
         faux,
         explication,
+        pile(0.5) ? dessinNombre(n) : undefined,
       );
     },
   ),
@@ -1744,7 +1755,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         return nombreOuQcm(
           rc([
             `Voici ${n} en barres et en cubes. On enlève ${pl(k, "barre", "barres")}. Quel nombre reste-t-il ?`,
-            `${p.nom} a construit ${n}. ${maj(p.il)} retire ${pl(k, "barre", "barres")} de dix. Quel nombre a-t-${p.il} maintenant ?`,
+            `${p.nom} a construit ${n}. ${maj(p.il)} retire ${pl(k, "barre", "barres")}. Quel nombre maintenant ?`,
           ]),
           r,
           faux,
@@ -1755,7 +1766,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       return nombreOuQcm(
         rc([
           `${p.nom} a ${n} ${c.pl}. ${maj(p.il)} en donne ${k} ${k > 1 ? "paquets" : "paquet"} de 10. Combien lui en reste-t-il ?`,
-          `Le marchand a ${n} œufs. Il vend ${k} ${k > 1 ? "boîtes" : "boîte"} de 10 œufs à ${p.nom}. Combien d'œufs lui reste-t-il ?`,
+          `Le marchand a ${n} œufs. Il vend ${k} ${k > 1 ? "boîtes" : "boîte"} de 10. Combien d'œufs lui reste-t-il ?`,
           `${p.nom} compte ${n} enfants dans la cour. ${pas} rentrent en classe. Combien restent dans la cour ?`,
         ]),
         r,
@@ -1792,7 +1803,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
           rc([
             `${voici}${p.nom} multiplie ${n} par 10. Que deviennent les ${chiffre} ${famille === "unites" ? "unités" : "dizaines"} ?`,
             `${voici}Quand on multiplie ${n} par 10, les ${chiffre} ${famille === "unites" ? "unités" : "dizaines"} deviennent…`,
-            `${voici}Pic le paille-en-queue fait ${n} × 10. Que deviennent les ${chiffre} ${famille === "unites" ? "unités" : "dizaines"} de ${n} ?`,
+            `${voici}Pic fait ${n} × 10. Que deviennent les ${chiffre} ${famille === "unites" ? "unités" : "dizaines"} ?`,
           ]),
           bonne,
           famille === "unites"
@@ -1844,10 +1855,10 @@ export const calculMentalBank: TutorBankItemV4[] = [
       const faux = [n + 1, n * 10 > 100 ? Math.floor(n / 10) : n + 10, r, n - 1];
       const famille = rc(["trou", "paquets", "dizaines", "dessin", "dessin"] as const);
       if (famille === "trou") return court(direTrou(rc([`… × 10 = ${r}`, `10 × … = ${r}`, `${r} = … × 10`])), n, explication);
-      if (famille === "dizaines") return nombreOuQcm(rc([`Combien de dizaines y a-t-il en tout dans ${r} ? Aide ${p.nom} à trouver.`, `${p.nom} demande : « ${r}, c'est combien de dizaines ? »`, `${p.nom} veut faire ${r} avec des barres de dix. Combien de barres lui faut-il ?`]), n, faux, explication);
+      if (famille === "dizaines") return nombreOuQcm(rc([`Combien de dizaines en tout dans ${r} ?`, `${p.nom} demande : « ${r}, c'est combien de dizaines ? »`, `${p.nom} fait ${r} avec des barres de dix. Combien de barres ?`]), n, faux, explication, pile(0.5) ? dessinNombre(r) : undefined);
       if (famille === "dessin") {
         return nombreOuQcm(
-          rc([`${p.nom} a posé ce nombre. Combien de barres de dix faut-il pour le faire ? (Une plaque, c'est 10 barres.)`, `Voici les ${r} cubes de ${p.nom}. Combien de paquets de 10 peut-${p.il} faire ?`]),
+          rc([`Une plaque vaut 10 barres. Combien de barres de dix pour faire ce nombre ?`, `Voici les ${r} cubes de ${p.nom}. Combien de paquets de 10 ?`]),
           n,
           faux,
           explication,
@@ -1857,9 +1868,9 @@ export const calculMentalBank: TutorBankItemV4[] = [
       return nombreOuQcm(
         rc([
           `${p.nom} range ${r} images par paquets de 10. Combien de paquets fait-${p.il} ?`,
-          `${p.nom} aide le fermier à ranger ${r} œufs dans des boîtes de 10. Combien de boîtes remplissent-ils ?`,
-          `Pour la sortie de ${p.nom}, ${r} enfants montent dans des minibus de 10 places, tous pleins. Combien de minibus ?`,
-          `Pic le paille-en-queue mange 10 graines par jour. ${p.nom} lui a gardé ${r} graines. Pour combien de jours en a-t-il ?`,
+          `${p.nom} range ${r} œufs par boîtes de 10. Combien de boîtes ?`,
+          `${r} enfants remplissent des minibus de 10 places. Combien de minibus ?`,
+          `Pic mange 10 graines par jour. Il en a ${r}. Pour combien de jours ?`,
         ]),
         n,
         faux,
@@ -1910,8 +1921,8 @@ export const calculMentalBank: TutorBankItemV4[] = [
         const faux = n + rond + 1;
         return court(
           rc([
-            `${p.nom} calcule ${n} + ${a} : ${p.il} ajoute ${rond}, puis ajoute encore 1, et trouve ${faux}. Quel est le bon résultat ?`,
-            `Pic le paille-en-queue a trouvé ${n} + ${a} = ${faux}. Il a ajouté 1 au lieu de l'enlever. Quel est le bon résultat ?`,
+            `${p.nom} fait ${n} + ${a} : + ${rond}, puis + 1. ${maj(p.il)} trouve ${faux}. Le bon résultat ?`,
+            `Pic : ${n} + ${a} = ${faux}. Il a ajouté 1 au lieu de l'enlever. Le bon résultat ?`,
           ]),
           n + a,
           explication,
@@ -1921,7 +1932,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       return nombreOuQcm(
         rc([
           direCalcul(`${n} + ${a}`),
-          `Le compteur du train de ${p.nom} affiche ${n} km. Le train roule encore ${a} km. Que va afficher le compteur ?`,
+          `Le compteur du train affiche ${n} km. Le train roule encore ${a} km. Et maintenant ?`,
           `${p.nom} a ${n} points au jeu. ${maj(p.il)} gagne ${a} points. Combien de points a-t-${p.il} ?`,
           `La collection de ${p.nom} a ${n} timbres. ${maj(p.il)} en reçoit ${a}. Combien en a-t-${p.il} ?`,
         ]),
@@ -1965,8 +1976,8 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (famille === "erreur") {
         return court(
           rc([
-            `${p.nom} calcule ${n} - 9 : ${p.il} enlève 10, puis enlève encore 1, et trouve ${n - 11}. Quel est le bon résultat ?`,
-            `Pic le paille-en-queue a trouvé ${n} - 9 = ${n - 11}. Il a enlevé 1 au lieu de le rendre. Quel est le bon résultat ?`,
+            `${p.nom} fait ${n} - 9 : - 10, puis - 1. ${maj(p.il)} trouve ${n - 11}. Le bon résultat ?`,
+            `Pic : ${n} - 9 = ${n - 11}. Il a enlevé 1 au lieu de le rendre. Le bon résultat ?`,
           ]),
           r,
           explication,
@@ -1976,7 +1987,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       return nombreOuQcm(
         rc([
           direCalcul(`${n} - 9`),
-          `La bibliothèque a ${n} livres. ${p.nom} et ses amis en empruntent 9. Combien en reste-t-il sur les étagères ?`,
+          `La bibliothèque a ${n} livres. On en emprunte 9. Combien en reste-t-il ?`,
           `Le dragon de ${p.nom} a ${n} écailles dorées. Il en perd 9. Combien lui en reste-t-il ?`,
           `${p.nom} a ${n} points au jeu. ${maj(p.il)} perd 9 points. Combien de points lui reste-t-il ?`,
           `${p.nom} est à la page ${n}. ${maj(p.il)} revient 9 pages en arrière. À quelle page est-${p.il} ?`,
@@ -2012,7 +2023,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       const barre = () => dessinBarre({ total: String(n), parts: [{ label: "", unknown: true }, { label: "", value: String(b) }] });
       if (famille === "dessin" && n < 400) {
         return nombreOuQcm(
-          rc([`Voici ${n} en matériel. ${p.nom} enlève ${b} cubes : il faut casser une barre. Quel nombre reste-t-il ?`, `${p.nom} a construit ${n}. ${maj(p.il)} doit retirer ${b} cubes. Quel nombre reste-t-il ?`]),
+          rc([`Voici ${n}. ${p.nom} enlève ${b} cubes : il faut casser une barre. Que reste-t-il ?`, `${p.nom} a construit ${n}. ${maj(p.il)} retire ${b} cubes. Quel nombre reste-t-il ?`]),
           r,
           faux,
           explication,
@@ -2025,7 +2036,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
             `La boulangère a ${n} croissants. Elle en vend ${b} à ${p.nom}. Combien lui en reste-t-il ?`,
             `${p.nom} a ${n} € dans sa tirelire. ${maj(p.il)} dépense ${b} €. Combien lui reste-t-il ?`,
             `${p.nom} compte ${n} spectateurs au cirque. ${b} partent avant la fin. Combien restent ?`,
-            `Le livre de ${p.nom} a ${n} pages. ${maj(p.il)} est à ${b} pages de la fin. À quelle page est-${p.il} ?`,
+            `Le livre a ${n} pages. ${p.nom} est à ${b} pages de la fin. Quelle page ?`,
           ]),
           r,
           faux,
@@ -2060,10 +2071,10 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (petit && pile(0.7)) {
         return qcmTexte(
           rc([
-            `${a.nom} et ${b.nom} veulent se partager ces billes sans qu'il en reste. Est-ce possible ?`,
+            `${a.nom} et ${b.nom} partagent ces billes sans reste. Est-ce possible ?`,
             `${a.nom} peut-${a.il} partager ces jetons en deux tas pareils ?`,
-            `Pic le paille-en-queue veut faire deux tas pareils avec ces graines. Peut-il y arriver ?`,
-            `${a.nom} range ces jetons deux par deux. Est-ce que chaque jeton aura un copain ?`,
+            `Pic veut faire deux tas pareils avec ces graines. Peut-il ?`,
+            `${a.nom} range ces jetons deux par deux. Chacun aura-t-il un copain ?`,
           ]),
           bonne,
           [pair ? "non" : "oui"],
@@ -2073,10 +2084,10 @@ export const calculMentalBank: TutorBankItemV4[] = [
       }
       return qcmTexte(
         rc([
-          `${a.nom} et ${b.nom} veulent se partager ${n} ${c.pl} sans qu'il en reste. Est-ce possible ?`,
+          `${a.nom} et ${b.nom} partagent ${n} ${c.pl} sans reste. Est-ce possible ?`,
           `${a.nom} peut-${a.il} partager ${n} ${c.pl} en deux parts égales ?`,
           `${a.nom} demande : « ${n} est-il un nombre pair ? » Que réponds-tu ?`,
-          `${a.nom} donne ${n} graines à Pic le paille-en-queue. Pic peut-il faire deux tas pareils ?`,
+          `Pic a ${n} graines. Peut-il faire deux tas pareils ?`,
         ]),
         bonne,
         [pair ? "non" : "oui"],
@@ -2108,8 +2119,11 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (famille === "final") {
         return nombreOuQcm(
           rc([
-            `Pour calculer ${n} × ${k}, on coupe ${n} en 10 + ${unites}. On a déjà 10 × ${k} = ${dix}. Quel est le résultat ?`,
-            `${p.nom} calcule ${n} × ${k}. ${maj(p.il)} a trouvé 10 × ${k} = ${dix}. Quel est le résultat final ?`,
+            `${n} × ${k} : on coupe ${n} en 10 + ${unites}. 10 × ${k} = ${dix}. Le résultat ?`,
+            `${p.nom} calcule ${n} × ${k}. ${maj(p.il)} a déjà 10 × ${k} = ${dix}. Le résultat ?`,
+            `Aide : 10 × ${k} = ${dix}. Combien fait ${n} × ${k} ?`,
+            `Pic sait que 10 × ${k} = ${dix}. Combien fait ${n} × ${k} ?`,
+            `${p.nom} coupe ${n} en 10 + ${unites}. Combien fait ${n} × ${k} ?`,
           ]),
           dix + morceau,
           [dix + unites, dix + morceau + k, dix + morceau - k, morceau],
@@ -2120,8 +2134,10 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (famille === "morceau") {
         return court(
           rc([
-            `${p.nom} calcule ${n} × ${k} en deux morceaux : 10 × ${k}, puis ${unites} × ${k}. Combien vaut le deuxième morceau ?`,
+            `${n} × ${k} en deux morceaux : 10 × ${k}, puis ${unites} × ${k}. Combien vaut le deuxième ?`,
             `${p.nom} écrit ${n} × ${k} = 10 × ${k} + ${unites} × ${k}. Combien vaut ${unites} × ${k} ?`,
+            `Dans ${n} × ${k}, combien vaut le morceau ${unites} × ${k} ?`,
+            `Pic coupe ${n} × ${k} en 10 × ${k} et ${unites} × ${k}. Combien vaut ${unites} × ${k} ?`,
           ]),
           morceau,
           explication,
@@ -2129,7 +2145,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         );
       }
       return qcmTexte(
-        rc([`${p.nom} se demande quel découpage est juste pour calculer ${n} × ${k}. Lequel ?`, `${p.nom} veut calculer ${n} × ${k} de tête. Quel découpage doit-${p.il} faire ?`]),
+        rc([`Quel découpage est juste pour calculer ${n} × ${k} ?`, `${p.nom} calcule ${n} × ${k} de tête. Quel découpage faire ?`, `Pic veut calculer ${n} × ${k}. Quel découpage est juste ?`, `Comment couper ${n} × ${k} pour le calculer de tête ?`]),
         `10 × ${k} + ${unites} × ${k}`,
         [`10 × ${k} + ${unites}`, `10 + ${unites} × ${k}`, `${n} + ${k}`],
         explication,

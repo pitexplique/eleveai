@@ -23,7 +23,7 @@
 // `format: "open"` (cf. ce2/maths/index.ts) : un CE2 clique, il ne tape pas.
 
 import type { MasseCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
-import { choix, gabarit, pick, pl, quelquun, rint, type Etoile, type Q } from "./outils-mesures-ce2";
+import { choix, gabarit, maj, pick, pl, quelquun, rint, type Etoile, type Q } from "./outils-mesures-ce2";
 import { choisirUnite, comparer, ecrire, estimer, relations, unites, type Grandeur } from "./grandeurs-ce2";
 
 function masseCanvas(data: Omit<MasseCanvasData, "kind">): MasseCanvasData {
@@ -232,7 +232,7 @@ export const masseBank: TutorBankItemV4[] = [
     microId: "ce2_masse_comparer",
     difficulty: 3,
     theme: "neutral",
-    text: "Sur une balance à deux plateaux, un paquet de 1 kg et un paquet de 1000 g. Que se passe-t-il ?",
+    text: "Balance à deux plateaux : un paquet de 1 kg d'un côté, 1000 g de l'autre. Que se passe-t-il ?",
     format: "qcm",
     choices: [
       "la balance reste en équilibre",
@@ -414,7 +414,7 @@ export const masseBank: TutorBankItemV4[] = [
     microId: "ce2_masse_estimer",
     difficulty: 3,
     theme: "reunion",
-    text: "Au marché forain, un vendeur remplit un sac de mangues. Le sac contient 5 mangues et pèse environ 2 kg. Environ combien pèse une mangue ?",
+    text: "Au marché forain, un sac de 5 mangues pèse environ 2 kg. Combien pèse une mangue ?",
     format: "qcm",
     choices: ["400 g", "4 g", "4 kg", "40 kg"],
     expected: ["400 g"],
@@ -443,7 +443,7 @@ export const masseBank: TutorBankItemV4[] = [
     microId: "ce2_masse_probleme",
     difficulty: 2,
     theme: "reunion",
-    text: "Au marché, maman achète 2 kg de letchis et 750 g de mangues. Combien pèse son panier, en grammes ?",
+    text: "Maman achète 2 kg de letchis et 750 g de mangues. Combien pèse son panier, en grammes ?",
     format: "short",
     expected: ["2750"],
     comparator: "number_equal",
@@ -465,7 +465,7 @@ export const masseBank: TutorBankItemV4[] = [
     microId: "ce2_masse_probleme",
     difficulty: 4,
     theme: "neutral",
-    text: "Une boîte vide pèse 300 g. Remplie de billes, elle pèse 1 kg 200 g. Combien pèsent les billes, en grammes ?",
+    text: "Boîte vide : 300 g. Pleine de billes : 1 kg 200 g. Combien de grammes pèsent les billes ?",
     format: "short",
     expected: ["900"],
     comparator: "number_equal",
@@ -491,7 +491,16 @@ export const masseBank: TutorBankItemV4[] = [
     microId: "ce2_masse_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Trois élèves pèsent le même paquet. Léa écrit 1 kg 500 g, Kevin écrit 1500 g, Malia écrit un kilo et demi. Qui a raison ?",
+    text: "Léa, Kevin et Malia pèsent le même paquet. Voici ce qu'ils écrivent. Qui a raison ?",
+    canvas: masseCanvas({
+      variant: "objets",
+      objets: [
+        { label: "Léa", icon: "📦", masse: "1 kg 500 g" },
+        { label: "Kevin", icon: "📦", masse: "1500 g" },
+        { label: "Malia", icon: "📦", masse: "un kilo et demi" },
+      ],
+      display: { showMasses: true, showLabels: true },
+    }),
     format: "qcm",
     choices: [
       "les trois : c'est la même masse",
@@ -519,7 +528,7 @@ export const masseBank: TutorBankItemV4[] = [
     microId: "ce2_masse_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Sur une balance à deux plateaux, un paquet est en équilibre avec une masse de 500 g et deux masses de 200 g. Combien pèse le paquet, en grammes ?",
+    text: "Un paquet est en équilibre avec 500 g et deux masses de 200 g. Combien pèse-t-il, en grammes ?",
     format: "short",
     expected: ["900"],
     comparator: "number_equal",
@@ -616,9 +625,9 @@ const ACHATS: readonly { lieu: string; gros: string; petit: string; icon: string
   { lieu: "À la ferme", gros: "carottes", petit: "cerises", icon: "🥕", icon2: "🍒" },
   { lieu: "Au marché", gros: "pommes", petit: "champignons", icon: "🍎", icon2: "🍄" },
   { lieu: "Au jardin", gros: "tomates", petit: "radis", icon: "🍅", icon2: "🌱" },
-  { lieu: "À la fête foraine", gros: "pommes d'amour", petit: "barbe à papa", icon: "🍎", icon2: "🍭" },
+  { lieu: "À la fête", gros: "pommes d'amour", petit: "pop-corn", icon: "🍎", icon2: "🍿" },
   { lieu: "Chez le fromager", gros: "fromage", petit: "beurre", icon: "🧀", icon2: "🧈" },
-  { lieu: "À l'animalerie", gros: "croquettes", petit: "graines pour oiseaux", icon: "🦴", icon2: "🌻" },
+  { lieu: "À l'animalerie", gros: "croquettes", petit: "graines", icon: "🦴", icon2: "🌻" },
   { lieu: "Au verger", gros: "poires", petit: "prunes", icon: "🍐", icon2: "🍑" },
 ];
 
@@ -630,16 +639,11 @@ function masseTotale(e: Etoile): Q {
   const total = kg * 1000 + g;
   const bonne = `${total} g`;
   return {
-    text: `${pick([
-      `${a.lieu}, ${p.nom} achète ${kg} kg de ${a.gros} et ${g} g de ${a.petit}.`,
-      `${a.lieu}, ${p.nom} met dans son panier ${kg} kg de ${a.gros}, puis ${g} g de ${a.petit}.`,
-      `${a.lieu}, on pèse ${kg} kg de ${a.gros} et ${g} g de ${a.petit} pour ${p.nom}.`,
-    ])} ${pick([
-      "Combien pèsent ses achats, en grammes ?",
-      "Quelle est la masse de son panier, en grammes ?",
-      `Combien de grammes porte-t-${p.il} en tout ?`,
-      "Écris la masse totale en grammes.",
-    ])}`,
+    text: pick([
+      `${p.nom} achète ${kg} kg de ${a.gros} et ${g} g de ${a.petit}. Combien de grammes en tout ?`,
+      `${a.lieu} : ${kg} kg de ${a.gros} et ${g} g de ${a.petit}. Combien de grammes en tout ?`,
+      `Le panier de ${p.nom} : ${kg} kg de ${a.gros} et ${g} g de ${a.petit}. Combien pèse-t-il, en grammes ?`,
+    ]),
     format: "qcm",
     choices: choix(bonne, [`${kg + g} g`, `${Number(`${kg}${g}`)} g`, `${total + 1000} g`, `${kg * 100 + g} g`, `${total + 100} g`]),
     expected: [bonne],
@@ -658,16 +662,16 @@ function masseTotale(e: Etoile): Q {
 }
 
 const RECIPIENTS_VIDES: readonly { vide: string; plein: string; contenu: string; icon: string }[] = [
-  { vide: "Une boîte vide", plein: "Remplie de billes", contenu: "les billes", icon: "📦" },
-  { vide: "Un seau vide", plein: "Rempli de sable", contenu: "le sable", icon: "🪣" },
-  { vide: "Un panier vide", plein: "Rempli de champignons", contenu: "les champignons", icon: "🧺" },
-  { vide: "Un coffre de pirate vide", plein: "Rempli de pièces d'or", contenu: "les pièces d'or", icon: "🪙" },
-  { vide: "Un aquarium vide", plein: "Rempli de cailloux", contenu: "les cailloux", icon: "🐠" },
-  { vide: "Un cartable vide", plein: "Rempli de livres", contenu: "les livres", icon: "🎒" },
-  { vide: "Une brouette vide", plein: "Remplie de terre", contenu: "la terre", icon: "🌱" },
-  { vide: "Un bocal vide", plein: "Rempli de bonbons", contenu: "les bonbons", icon: "🍬" },
-  { vide: "Une caisse vide", plein: "Remplie de mangues", contenu: "les mangues", icon: "🥭" },
-  { vide: "Un sac à dos vide", plein: "Rempli pour le pique-nique", contenu: "le pique-nique", icon: "🎒" },
+  { vide: "Une boîte vide", plein: "Pleine de billes", contenu: "les billes", icon: "📦" },
+  { vide: "Un seau vide", plein: "Plein de sable", contenu: "le sable", icon: "🪣" },
+  { vide: "Un panier vide", plein: "Plein de champignons", contenu: "les champignons", icon: "🧺" },
+  { vide: "Un coffre vide", plein: "Plein de pièces d'or", contenu: "les pièces d'or", icon: "🪙" },
+  { vide: "Un aquarium vide", plein: "Plein de cailloux", contenu: "les cailloux", icon: "🐠" },
+  { vide: "Un cartable vide", plein: "Plein de livres", contenu: "les livres", icon: "🎒" },
+  { vide: "Une brouette vide", plein: "Pleine de terre", contenu: "la terre", icon: "🌱" },
+  { vide: "Un bocal vide", plein: "Plein de bonbons", contenu: "les bonbons", icon: "🍬" },
+  { vide: "Une caisse vide", plein: "Pleine de mangues", contenu: "les mangues", icon: "🥭" },
+  { vide: "Un sac vide", plein: "Plein de goûter", contenu: "le goûter", icon: "🎒" },
 ];
 
 function masseDuContenu(): Q {
@@ -680,10 +684,10 @@ function masseDuContenu(): Q {
   const contenu = plein - vide;
   const bonne = `${contenu} g`;
   return {
-    text: `${r.vide} pèse ${vide} g. ${r.plein}, ${r.vide.startsWith("Une") ? "elle" : "il"} pèse ${ecrire(kg, "kg", g, "g")}. ${pick([
-      `Combien ${r.contenu.startsWith("les") ? "pèsent" : "pèse"} ${r.contenu}, en grammes ?`,
-      `Quelle est la masse ${`de ${r.contenu}`.replace("de les", "des").replace("de le ", "du ")}, en grammes ?`,
-    ])}`,
+    text: pick([
+      `${r.vide} : ${vide} g. ${r.plein} : ${ecrire(kg, "kg", g, "g")}. Combien ${r.contenu.startsWith("les") ? "pèsent" : "pèse"} ${r.contenu}, en grammes ?`,
+      `${r.vide} pèse ${vide} g. ${r.plein} : ${ecrire(kg, "kg", g, "g")}. Que ${r.contenu.startsWith("les") ? "pèsent" : "pèse"} ${r.contenu} ?`,
+    ]),
     format: "qcm",
     choices: choix(bonne, [`${plein + vide} g`, `${kg * 1000 + g - vide / 10} g`, `${contenu + 100} g`, `${contenu - 100} g`, `${Math.abs(kg * 1000 - vide)} g`].filter((x) => x !== bonne)),
     expected: [bonne],
@@ -703,13 +707,13 @@ function masseDuContenu(): Q {
 
 const RECETTES: readonly { quoi: string; ingr: string }[] = [
   { quoi: "des crêpes", ingr: "farine" },
-  { quoi: "un gâteau au chocolat", ingr: "sucre" },
+  { quoi: "un gâteau", ingr: "sucre" },
   { quoi: "des cookies", ingr: "farine" },
-  { quoi: "une tarte aux pommes", ingr: "farine" },
-  { quoi: "de la confiture", ingr: "sucre" },
+  { quoi: "une tarte", ingr: "farine" },
+  { quoi: "des confitures", ingr: "sucre" },
   { quoi: "des gaufres", ingr: "farine" },
-  { quoi: "un gâteau pour le dragon", ingr: "sucre" },
-  { quoi: "des petits pains", ingr: "farine" },
+  { quoi: "des beignets", ingr: "sucre" },
+  { quoi: "des pains", ingr: "farine" },
 ];
 
 function resteDuPaquet(): Q {
@@ -718,13 +722,10 @@ function resteDuPaquet(): Q {
   const u1 = pick([150, 200, 250, 300, 350]);
   const u2 = pick([100, 125, 150, 200, 250]);
   const reste = kg * 1000 - u1 - u2;
-  const chef = pick(["Le chef cuisinier", "La boulangère", "Mamie", "Nina", "Téo", "Le pâtissier"]);
+  const chef = pick(["Mamie", "Papi", "Nina", "Téo", "Lina", "Malo"]);
   const bonne = `${reste} g`;
   return {
-    text: `${chef} a un paquet de ${kg} kg de ${r.ingr}. ${pick(["Il en faut", "On prend"])} ${u1} g pour ${r.quoi}, puis ${u2} g pour la pâte du lendemain. ${pick([
-      "Combien de grammes reste-t-il dans le paquet ?",
-      "Quelle masse reste-t-il, en grammes ?",
-    ])}`,
+    text: `${chef} a ${kg} kg de ${r.ingr}. ${pick(["On prend", "On utilise"])} ${u1} g, puis ${u2} g pour ${r.quoi}. Combien en reste-t-il ?`,
     format: "qcm",
     choices: choix(bonne, [`${kg * 1000 - u1} g`, `${kg * 100 - u1 - u2 > 0 ? kg * 100 - u1 - u2 : reste + 50} g`, `${reste + 100} g`, `${u1 + u2} g`, `${reste - 10} g`]),
     expected: [bonne],
@@ -741,27 +742,26 @@ function resteDuPaquet(): Q {
 
 function balanceEquilibre(): Q {
   const choses = pick([
-    { label: "un paquet", le: "le paquet", icon: "📦" },
-    { label: "une citrouille", le: "la citrouille", icon: "🎃" },
-    { label: "un melon", le: "le melon", icon: "🍈" },
-    { label: "un chou", le: "le chou", icon: "🥬" },
-    { label: "un ananas", le: "l'ananas", icon: "🍍" },
-    { label: "un ours en peluche", le: "l'ours en peluche", icon: "🧸" },
-    { label: "un coffre au trésor", le: "le coffre au trésor", icon: "🪙" },
-    { label: "un œuf de dinosaure", le: "l'œuf de dinosaure", icon: "🥚" },
+    { label: "un paquet", le: "le paquet", icon: "📦", il: "il" },
+    { label: "une citrouille", le: "la citrouille", icon: "🎃", il: "elle" },
+    { label: "un melon", le: "le melon", icon: "🍈", il: "il" },
+    { label: "un chou", le: "le chou", icon: "🥬", il: "il" },
+    { label: "un ananas", le: "l'ananas", icon: "🍍", il: "il" },
+    { label: "un ours en peluche", le: "l'ours en peluche", icon: "🧸", il: "il" },
+    { label: "un coffre", le: "le coffre", icon: "🪙", il: "il" },
+    { label: "un œuf de dinosaure", le: "l'œuf de dinosaure", icon: "🥚", il: "il" },
   ]);
   const gros = pick([500, 1000, 1000, 2000]);
   const petite = pick([100, 200, 50]);
   const nb = rint(2, 4);
   const total = gros + petite * nb;
   const p = quelquun();
-  const desc = `une masse de ${gros >= 1000 ? `${gros / 1000} kg` : `${gros} g`} et ${nb} masses de ${petite} g`;
+  const desc = `${gros >= 1000 ? `${gros / 1000} kg` : `${gros} g`} et ${nb} masses de ${petite} g`;
   return {
-    text: `${p.nom} pose ${choses.label} sur un plateau de la balance. Sur l'autre plateau : ${desc}. La balance est en équilibre. ${pick([
-      `Combien pèse ${choses.le}, en grammes ?`,
-      `Quelle est la masse de ${choses.le}, en grammes ?`.replace("de le ", "du "),
-      "Combien de grammes faut-il écrire sur l'étiquette ?",
-    ])}`,
+    text: pick([
+      `En équilibre : ${choses.le} contre ${desc}. Combien pèse-t-${choses.il}, en grammes ?`,
+      `${p.nom} équilibre ${choses.le} avec ${desc}. Combien pèse-t-${choses.il}, en grammes ?`,
+    ]),
     format: "qcm",
     choices: choix(`${total} g`, [`${gros + petite} g`, `${gros + nb} g`, `${total + petite} g`, `${2 * total} g`, `${gros * nb + petite} g`]),
     expected: [`${total} g`],
@@ -799,10 +799,7 @@ function objetsIdentiques(): Q {
   const p = quelquun();
   if (Math.random() < 0.5) {
     return {
-      text: `${nb} ${c.objet} identiques pèsent ${total} kg en tout. ${p.nom} en emporte ${emporte}. ${pick([
-        `Combien de kilogrammes emporte-t-${p.il} ?`,
-        `Quelle masse emporte-t-${p.il}, en kilogrammes ?`,
-      ])}`,
+      text: `${nb} ${c.objet} identiques pèsent ${total} kg en tout. ${p.nom} en emporte ${emporte}. Combien de kilogrammes emporte-t-${p.il} ?`,
       format: "qcm",
       choices: choix(`${un * emporte} kg`, [`${total - emporte} kg`, `${un * emporte + un} kg`, `${un} kg`, `${total - un * emporte} kg`]),
       expected: [`${un * emporte} kg`],
@@ -819,7 +816,7 @@ function objetsIdentiques(): Q {
   const n = rint(2, 4);
   const total2 = n * (un * 1000 + g);
   return {
-    text: `${p.nom} porte ${n} ${c.objet} de ${un} kg ${g} g chacun. ${pick(["Combien de grammes porte-t-" + p.il + " en tout ?", "Quelle est la masse totale, en grammes ?"])}`,
+    text: `${p.nom} porte ${n} ${c.objet} de ${un} kg ${g} g chacun. ${pick(["Combien de grammes en tout ?", `Combien de grammes porte-t-${p.il} ?`])}`,
     format: "qcm",
     choices: choix(`${total2} g`, [`${n * un * 1000 + g} g`, `${n * (un + g)} g`, `${total2 + 1000} g`, `${un * 1000 + g} g`]),
     expected: [`${total2} g`],
@@ -887,23 +884,23 @@ masseBank.push(
 
 function combienDePaquets(): Q {
   const c = pick([
-    { quoi: "Un paquet de sucre", pese: 500, pour: "la kermesse", u: ["paquet", "paquets"], de: "de sucre" },
-    { quoi: "Une boîte de conserve", pese: 250, pour: "la cantine", u: ["boîte", "boîtes"], de: "de conserves" },
-    { quoi: "Un sachet de graines", pese: 100, pour: "le jardin de l'école", u: ["sachet", "sachets"], de: "de graines" },
-    { quoi: "Un pot de confiture", pese: 500, pour: "le goûter géant", u: ["pot", "pots"], de: "de confiture" },
-    { quoi: "Une plaquette de beurre", pese: 250, pour: "la boulangerie", u: ["plaquette", "plaquettes"], de: "de beurre" },
-    { quoi: "Un sac de billes", pese: 200, pour: "le concours de billes", u: ["sac", "sacs"], de: "de billes" },
-    { quoi: "Un paquet de pâtes", pese: 500, pour: "le repas des pirates", u: ["paquet", "paquets"], de: "de pâtes" },
-    { quoi: "Une boîte de croquettes", pese: 250, pour: "les chats du refuge", u: ["boîte", "boîtes"], de: "de croquettes" },
+    { quoi: "Un paquet de sucre", pese: 500, pour: "la kermesse", u: ["paquet", "paquets"], icon: "🍬" },
+    { quoi: "Une boîte de conserve", pese: 250, pour: "la cantine", u: ["boîte", "boîtes"], icon: "🥫" },
+    { quoi: "Un sachet de graines", pese: 100, pour: "le jardin", u: ["sachet", "sachets"], icon: "🌻" },
+    { quoi: "Un pot de confiture", pese: 500, pour: "le goûter géant", u: ["pot", "pots"], icon: "🍯" },
+    { quoi: "Une plaquette de beurre", pese: 250, pour: "la boulangerie", u: ["plaquette", "plaquettes"], icon: "🧈" },
+    { quoi: "Un sac de billes", pese: 200, pour: "le concours", u: ["sac", "sacs"], icon: "🔮" },
+    { quoi: "Un paquet de pâtes", pese: 500, pour: "les pirates", u: ["paquet", "paquets"], icon: "🍝" },
+    { quoi: "Une boîte de croquettes", pese: 250, pour: "le refuge", u: ["boîte", "boîtes"], icon: "🦴" },
   ] as const);
   const kg = rint(1, 5);
   const nb = (kg * 1000) / c.pese;
   const p = quelquun();
   return {
     text: `${c.quoi} pèse ${c.pese} g. ${pick([
-      `Pour ${c.pour}, il faut ${kg} kg ${c.de}. Combien de ${c.u[1]} faut-il ?`,
-      `${p.nom} veut en rassembler ${kg} kg pour ${c.pour}. Combien de ${c.u[1]} lui faut-il ?`,
-      `Combien de ${c.u[1]} faut-il pour atteindre ${kg} kg ?`,
+      `Pour ${c.pour}, il faut ${kg} kg. Combien de ${c.u[1]} ?`,
+      `${p.nom} en veut ${kg} kg. Combien de ${c.u[1]} lui faut-il ?`,
+      `Combien de ${c.u[1]} pour faire ${kg} kg ?`,
     ])}`,
     format: "qcm",
     choices: choix(pl(nb, c.u[0], c.u[1]), [nb * 10, nb + 1, kg * 10, nb / 2 >= 1 && Number.isInteger(nb / 2) ? nb / 2 : nb + 2, kg].map((x) => pl(x, c.u[0], c.u[1]))),
@@ -915,5 +912,6 @@ function combienDePaquets(): Q {
       `${kg} kg = ${kg * 1000} g ; ${c.pese} × ${nb} = ${kg * 1000}.`,
       `Il en faut ${nb}.`,
     ),
+    canvas: MASSE.cartes!([{ label: maj(c.u[0]), icon: c.icon, valeur: `${c.pese} g` }]),
   };
 }

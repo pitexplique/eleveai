@@ -31,7 +31,17 @@
 // Les décors restent ceux de tous les jours, pas enfantins : cuisine, magasin,
 // sport, bibliothèque, potager… La Réunion n'en est qu'un parmi d'autres.
 
-import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import type {
+  BaseDixCanvasData,
+  MonnaieCanvasData,
+  MonnaieValeur,
+  NumberLineCanvasData,
+  ObjetId,
+  ObjetsCanvasData,
+  SchemaBarreCanvasData,
+  TutorBankItemV4,
+  TutorGeneratedQuestionV4,
+} from "@/lib/tutor-v4/types";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomInt(min: number, max: number) {
@@ -134,26 +144,31 @@ const LETTRES: Record<number, string> = {
    « À chaque table ». `objet` : on peut en retirer sans
    que la phrase sonne faux (pas des moutons ni des élèves).
 --------------------------------------------------------- */
-type Lot = { un: string; des: string; obj: string; obj1: string; prep: string; objet: boolean };
+type Lot = { un: string; des: string; obj: string; obj1: string; prep: string; objet: boolean; img?: ObjetId };
 const LOTS: readonly Lot[] = [
   { un: "boîte", des: "boîtes", obj: "œufs", obj1: "œuf", prep: "Dans", objet: true },
   { un: "paquet", des: "paquets", obj: "feutres", obj1: "feutre", prep: "Dans", objet: true },
-  { un: "étagère", des: "étagères", obj: "livres", obj1: "livre", prep: "Sur", objet: true },
+  { un: "étagère", des: "étagères", obj: "livres", obj1: "livre", prep: "Sur", objet: true, img: "livre" },
   { un: "rangée", des: "rangées", obj: "sièges", obj1: "siège", prep: "Dans", objet: false },
-  { un: "pack", des: "packs", obj: "bouteilles d'eau", obj1: "bouteille d'eau", prep: "Dans", objet: true },
+  { un: "pack", des: "packs", obj: "bouteilles", obj1: "bouteille", prep: "Dans", objet: true },
   { un: "barquette", des: "barquettes", obj: "fraises", obj1: "fraise", prep: "Dans", objet: true },
   { un: "enclos", des: "enclos", obj: "moutons", obj1: "mouton", prep: "Dans", objet: false },
   { un: "table", des: "tables", obj: "invités", obj1: "invité", prep: "À", objet: false },
   { un: "plaque", des: "plaques", obj: "cookies", obj1: "cookie", prep: "Sur", objet: true },
-  { un: "pochette", des: "pochettes", obj: "cartes à collectionner", obj1: "carte à collectionner", prep: "Dans", objet: true },
+  { un: "pochette", des: "pochettes", obj: "cartes", obj1: "carte", prep: "Dans", objet: true },
   { un: "minibus", des: "minibus", obj: "élèves", obj1: "élève", prep: "Dans", objet: false },
-  { un: "filet", des: "filets", obj: "ballons", obj1: "ballon", prep: "Dans", objet: true },
+  { un: "filet", des: "filets", obj: "ballons", obj1: "ballon", prep: "Dans", objet: true, img: "ballon" },
   { un: "sachet", des: "sachets", obj: "vis", obj1: "vis", prep: "Dans", objet: true },
   { un: "caisse", des: "caisses", obj: "mangues", obj1: "mangue", prep: "Dans", objet: true },
   { un: "lot", des: "lots", obj: "cahiers", obj1: "cahier", prep: "Dans", objet: true },
   { un: "équipe", des: "équipes", obj: "joueurs", obj1: "joueur", prep: "Dans", objet: false },
-  { un: "bouquet", des: "bouquets", obj: "tulipes", obj1: "tulipe", prep: "Dans", objet: true },
-  { un: "carnet", des: "carnets", obj: "tickets de bus", obj1: "ticket de bus", prep: "Dans", objet: true },
+  { un: "bouquet", des: "bouquets", obj: "tulipes", obj1: "tulipe", prep: "Dans", objet: true, img: "fleur" },
+  { un: "carnet", des: "carnets", obj: "tickets", obj1: "ticket", prep: "Dans", objet: true },
+  // ⭐ 14/11/2026 : des lots qu'on sait DESSINER (bibliothèque `objets`).
+  { un: "panier", des: "paniers", obj: "pommes", obj1: "pomme", prep: "Dans", objet: true, img: "pomme" },
+  { un: "plateau", des: "plateaux", obj: "tasses", obj1: "tasse", prep: "Sur", objet: true, img: "tasse" },
+  { un: "aquarium", des: "aquariums", obj: "poissons", obj1: "poisson", prep: "Dans", objet: false, img: "poisson" },
+  { un: "régime", des: "régimes", obj: "bananes", obj1: "banane", prep: "Sur", objet: true, img: "banane" },
 ];
 
 /** « 3 boîtes de 6 œufs », dite de quatre façons. `qui` : la phrase a-t-elle une personne ? */
@@ -163,41 +178,44 @@ function situationLots(lot: Lot, n: number, k: number, p: Prenom) {
   return randomChoice([
     `Il y a ${n} ${des} de ${k} ${obj}.`,
     `${p.nom} compte ${n} ${des} de ${k} ${obj}.`,
-    `${p.nom} observe ${n} ${des}. ${lot.prep} chaque ${lot.un}, il y a ${k} ${obj}.`,
-    `${lot.prep} chaque ${lot.un}, il y a ${k} ${obj}, et il y a ${n} ${des}.`,
-    `On a préparé ${n} ${des} identiques de ${k} ${obj}.`,
+    `${p.nom} voit ${n} ${des}, avec ${k} ${obj} dans chaque.`,
+    `${lot.prep} chaque ${lot.un}, ${k} ${obj}. Il y a ${n} ${des}.`,
+    `On prépare ${n} ${des} de ${k} ${obj}.`,
   ]);
 }
 
 function questionTotal(lot: Lot) {
   return randomChoice([
-    `Combien ${de(lot.obj)} y a-t-il en tout ?`,
-    `Quel est le nombre total ${de(lot.obj)} ?`,
-    `Combien cela fait-il ${de(lot.obj)} ?`,
-    `Trouve le nombre ${de(lot.obj)} au total.`,
+    `Combien ${de(lot.obj)} en tout ?`,
+    "Combien en tout ?",
+    `Combien ${de(lot.obj)} au total ?`,
+    "Quel est le total ?",
   ]);
 }
 
 /* ---------------------------------------------------------
    LES QUADRILLAGES : rangées × colonnes (commutativité, défis).
 --------------------------------------------------------- */
-const GRILLES: readonly { obj: string; lieu: string }[] = [
-  { obj: "chaises", lieu: "Dans la salle des fêtes" },
-  { obj: "salades", lieu: "Dans le potager" },
-  { obj: "pots de fleurs", lieu: "Sur la terrasse" },
-  { obj: "casiers", lieu: "Dans le vestiaire" },
-  { obj: "carreaux de chocolat", lieu: "Sur la tablette" },
-  { obj: "fenêtres", lieu: "Sur la façade de l'immeuble" },
-  { obj: "places de parking", lieu: "Sur le parking" },
-  { obj: "tables", lieu: "Dans la salle d'examen" },
-  { obj: "œufs", lieu: "Dans le grand plateau" },
-  { obj: "panneaux solaires", lieu: "Sur le toit du gymnase" },
-  { obj: "cases", lieu: "Sur le plateau de jeu" },
-  { obj: "arbres", lieu: "Dans le verger" },
-  { obj: "croissants", lieu: "Sur la plaque du boulanger" },
-  { obj: "bacs de rangement", lieu: "Dans la bibliothèque" },
-  { obj: "pieds de canne à sucre", lieu: "Dans le champ" },
-  { obj: "boîtes de conserve", lieu: "En rayon, au supermarché" },
+const GRILLES: readonly { obj: string; lieu: string; img?: ObjetId }[] = [
+  // ⛔ 14/11/2026 — lieux et objets COURTS (énoncés ≤ 16 mots pour les CE1).
+  { obj: "chaises", lieu: "Dans la salle" },
+  { obj: "salades", lieu: "Au potager", img: "feuille" },
+  { obj: "pots", lieu: "Sur la terrasse", img: "fleur" },
+  { obj: "casiers", lieu: "Au vestiaire" },
+  { obj: "carreaux", lieu: "Sur la tablette de chocolat" },
+  { obj: "fenêtres", lieu: "Sur l'immeuble" },
+  { obj: "voitures", lieu: "Au parking", img: "voiture" },
+  { obj: "tables", lieu: "En classe" },
+  { obj: "œufs", lieu: "Sur le plateau" },
+  { obj: "panneaux solaires", lieu: "Sur le toit" },
+  { obj: "cases", lieu: "Sur le jeu" },
+  { obj: "arbres", lieu: "Au verger", img: "arbre" },
+  { obj: "croissants", lieu: "Sur la plaque" },
+  { obj: "bacs", lieu: "À la bibliothèque" },
+  { obj: "cannes à sucre", lieu: "Au champ" },
+  { obj: "boîtes", lieu: "Au rayon" },
+  { obj: "bateaux", lieu: "Au port", img: "bateau" },
+  { obj: "verres", lieu: "Au café", img: "verre" },
 ];
 
 /* ---------------------------------------------------------
@@ -211,7 +229,7 @@ const PAR_2: readonly Groupe[] = [
   { quoi: (n) => `${n} binômes d'élèves`, obj: "élèves", rappel: "un binôme, c'est 2 élèves" },
   { quoi: (n) => `${n} paires de baskets`, obj: "baskets", rappel: "une paire compte 2 baskets" },
   { quoi: (n) => `${n} pigeons`, obj: "ailes", rappel: "un pigeon a 2 ailes" },
-  { quoi: (n) => `${n} pains au chocolat`, obj: "barres de chocolat", rappel: "un pain au chocolat contient 2 barres de chocolat" },
+  { quoi: (n) => `${n} pains au chocolat`, obj: "barres de chocolat", rappel: "un pain au chocolat a 2 barres" },
   { quoi: (n) => `${n} kayaks biplaces`, obj: "places", rappel: "un kayak biplace a 2 places" },
   { quoi: (n) => `${n} paires de lunettes`, obj: "verres", rappel: "une paire de lunettes a 2 verres" },
   { quoi: (n) => `${n} boîtes de 2 piles`, obj: "piles", rappel: "une boîte contient 2 piles" },
@@ -262,6 +280,142 @@ const OBJETS_PARTAGE: readonly string[] = [
 ];
 
 /* =========================================================
+   LES DESSINS (14/11/2026)
+   ⭐ On dessine ce qu'on SAIT — les groupes, une rangée, les
+   pièces posées, les bonds de la table — jamais le résultat
+   déjà écrit. L'élève compte, regroupe ou lit : c'est lui qui
+   fait la multiplication.
+========================================================= */
+
+/** Tire au sort : vrai avec la probabilité `p`. */
+const pile = (p = 0.5) => Math.random() < p;
+
+/** n groupes de k objets dessinés (k ≤ 5, n ≤ 6) : on voit les paquets pareils. */
+function dessinGroupes(img: ObjetId, n: number, k: number, consigne?: string): ObjetsCanvasData {
+  return {
+    kind: "objets",
+    mode: "couleur",
+    elements: Array.from({ length: n }, () => ({ quoi: img, nombre: k })),
+    colonnes: n <= 3 ? n : Math.ceil(n / 2),
+    size: { width: k >= 4 ? 450 : 380 },
+    ...(consigne ? { consigne } : {}),
+  };
+}
+
+/** r rangées de c objets (c ≤ 10) : une rangée par ligne, coupée en 5 + reste. */
+function dessinRangees(img: ObjetId, r: number, c: number, consigne?: string): ObjetsCanvasData {
+  const parLigne = c > 5 ? [5, c - 5] : [c];
+  return {
+    kind: "objets",
+    mode: "couleur",
+    elements: Array.from({ length: r }, () => parLigne.map((nombre) => ({ quoi: img, nombre }))).flat(),
+    colonnes: parLigne.length,
+    size: { width: c > 5 ? 450 : 260 },
+    ...(consigne ? { consigne } : {}),
+  };
+}
+
+/** Le schéma en barre : n cases égales qui valent k, le tout est cherché.
+ *  ⛔ 8 CASES AU PLUS (mesuré au rendu le 14/11/2026) : SchemaBarreCanvas donne
+ *  à chaque case au moins 12 % de la barre ; à 9 cases et plus, la barre sort
+ *  de son crochet. */
+const CASES_MAX = 8;
+function barreGroupes(n: number, k: number, une?: string): SchemaBarreCanvasData {
+  return {
+    kind: "schema_barre",
+    total: "?",
+    parts: Array.from({ length: n }, () => ({ label: "", value: String(k) })),
+    ...(une ? { questionLabel: `Une case = ${une}` } : {}),
+    display: { showTotal: true, showPartLabels: false, showValues: true, showQuestion: Boolean(une) },
+  };
+}
+
+/** Le dessin d'une histoire de lots : les objets si on sait les dessiner, sinon la barre. */
+function dessinLots(lot: Lot, n: number, k: number): Q["canvas"] | undefined {
+  if (lot.img && k <= 5 && n <= 6) return dessinGroupes(lot.img, n, k, `${n} ${pl(n, lot.un, lot.des)} de ${k} ${pl(k, lot.obj1, lot.obj)}`);
+  if (n <= CASES_MAX) return barreGroupes(n, k, `1 ${lot.un}`);
+  return undefined;
+}
+
+/** La droite de la table de k : graduée de k en k, seuls 0 et k sont écrits.
+ *  On compte les bonds au lieu de lire le résultat. */
+function droiteTable(k: number, bonds = 10, ecrits: number[] = [0, k]): NumberLineCanvasData {
+  return {
+    kind: "number_line",
+    min: 0,
+    max: k * bonds,
+    step: k,
+    valeursEcrites: ecrits,
+    display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true, showZero: true },
+    size: { width: 340 },
+  };
+}
+
+/** n pièces ou billets de k € (k = 2, 5, 10 ; n ≤ 10) : un par article acheté. */
+function dessinPieces(k: number, n: number, consigne?: string): MonnaieCanvasData | undefined {
+  if (![2, 5, 10].includes(k) || n < 1 || n > 10) return undefined;
+  return { kind: "monnaie", elements: [{ valeur: `${k}e` as MonnaieValeur, nombre: n }], ...(consigne ? { consigne } : {}) };
+}
+
+/** Le matériel d'un nombre (plaques, barres, cubes), sans le nombre écrit. */
+function dessinMateriel(n: number, consigne?: string): BaseDixCanvasData {
+  const c = Math.floor(n / 100);
+  const d = Math.floor((n % 100) / 10);
+  const u = n % 10;
+  return {
+    kind: "base_dix",
+    ...(c ? { centaines: c } : {}),
+    ...(d ? { dizaines: d } : {}),
+    ...(u ? { unites: u } : {}),
+    etiquettes: true,
+    ...(consigne ? { consigne } : {}),
+  };
+}
+
+/** La parité se VOIT : chaque barre de dix (et chaque plaque de cent) se coupe
+ *  en deux, il ne reste à regarder que les cubes seuls. */
+function dessinParite(n: number): BaseDixCanvasData {
+  return dessinMateriel(
+    n,
+    n >= 100
+      ? "Chaque plaque et chaque barre se partagent en deux. Regarde les cubes seuls."
+      : "Chaque barre de dix se partage en deux. Regarde les cubes seuls.",
+  );
+}
+
+/** Une droite graduée de 1 en 1, de `min` à `max` : seuls `ecrits` portent leur nombre. */
+function droiteVoisins(min: number, max: number, ecrits: number[], points: { value: number; label: string }[] = []): NumberLineCanvasData {
+  return {
+    kind: "number_line",
+    min,
+    max,
+    step: 1,
+    valeursEcrites: ecrits,
+    ...(points.length ? { points } : {}),
+    display: { showTicks: true, showValues: true, showPoints: true, showPointLabels: true, showZero: false },
+    size: { width: 340 },
+  };
+}
+
+/** Le schéma des défis : n cases de k, puis une case « à part » (ou une 2e sorte de lots). */
+function barreDefi(groupes: { n: number; k: number }[], aPart?: { label: string; value: number }, sous?: string): SchemaBarreCanvasData {
+  const couleurs = ["#bfdbfe", "#fde68a"];
+  return {
+    kind: "schema_barre",
+    total: "?",
+    parts: [
+      ...groupes.flatMap((g, i) => Array.from({ length: g.n }, () => ({ label: "", value: String(g.k), color: couleurs[i % 2] }))),
+      ...(aPart ? [{ label: aPart.label, value: String(aPart.value), color: "#bbf7d0" }] : []),
+    ],
+    ...(sous ? { questionLabel: sous } : {}),
+    display: { showTotal: true, showPartLabels: Boolean(aPart), showValues: true, showQuestion: Boolean(sous) },
+  };
+}
+
+/** Ajoute un dessin à une question déjà écrite. */
+const avec = (q: Q, canvas: Q["canvas"] | undefined): Q => (canvas ? { ...q, canvas } : q);
+
+/* =========================================================
    FAMILLES COMMUNES AUX TABLES (2, 5, 10)
 ========================================================= */
 
@@ -294,6 +448,8 @@ function tableNue(k: number, n: number): Q {
       `${repete(k, n)} = ${p}.`,
       `${a} × ${b} = ${p}.`,
     ),
+    // La droite de la table : on avance de k en k, bond après bond.
+    ...(n <= 10 && pile(0.5) ? { canvas: droiteTable(k) } : {}),
   };
 }
 
@@ -305,7 +461,7 @@ function tableEnSituation(k: number, groupes: readonly Groupe[], n: number): Q {
   const text = randomChoice([
     `Il y a ${g.quoi(n)}. Combien ${de(g.obj)} en tout ?`,
     `${qui.nom} compte ${g.quoi(n)}. Combien ${de(g.obj)} cela fait-il ?`,
-    `Sachant qu'${g.rappel}, combien ${de(g.obj)} y a-t-il pour ${g.quoi(n)} ?`,
+    `${maj(g.rappel)}. Combien ${de(g.obj)} pour ${g.quoi(n)} ?`,
     `On regroupe ${g.quoi(n)}. Quel est le nombre total ${de(g.obj)} ?`,
   ]);
   return {
@@ -315,10 +471,11 @@ function tableEnSituation(k: number, groupes: readonly Groupe[], n: number): Q {
     comparator: "number_equal",
     explanation: exp(
       "Quand une même quantité se répète, on multiplie.",
-      `On sait qu'${g.rappel} : on prend ${k} autant de fois qu'il y a de groupes, ici ${n} fois.`,
+      `On sait ${/^[aeiouyéh]/i.test(g.rappel) ? "qu'" : "que "}${g.rappel} : on prend ${k} autant de fois qu'il y a de groupes, ici ${n} fois.`,
       `${n} × ${k} = ${p}.`,
       `Il y a ${p} ${g.obj}.`,
     ),
+    ...(n <= CASES_MAX && pile(0.6) ? { canvas: barreGroupes(n, k) } : {}),
   };
 }
 
@@ -331,7 +488,7 @@ function tablePrix(k: number, n: number): Q {
     `Un ${art} coûte ${k} €. Combien coûtent ${n} ${arts} ?`,
     `${qui.nom} achète ${n} ${arts} à ${k} € pièce. Combien paie-t-${qui.il} ?`,
     `Combien d'euros faut-il pour acheter ${n} ${arts} à ${k} € pièce ?`,
-    `Au magasin, le ${art} est à ${k} €. ${qui.nom} en prend ${n}. Quel est le prix à payer ?`,
+    `Le ${art} est à ${k} €. ${qui.nom} en prend ${n}. Combien paie-t-${qui.il} ?`,
   ]);
   return {
     text,
@@ -344,6 +501,7 @@ function tablePrix(k: number, n: number): Q {
       `${n} × ${k} = ${p}.`,
       `Cela coûte ${p} €.`,
     ),
+    ...(pile(0.7) ? { canvas: dessinPieces(k, n, `${k === 2 ? "Une pièce" : "Un billet"} de ${k} € pour chaque ${art}.`) } : {}),
   };
 }
 
@@ -355,7 +513,7 @@ function tableTrou(k: number, n: number): Q {
     `Quel nombre manque : ${k} × … = ${p} ?`,
     `Complète : … × ${k} = ${p}.`,
     `Par combien faut-il multiplier ${k} pour obtenir ${p} ?`,
-    `${qui.nom} pense à un nombre. ${maj(qui.il)} le multiplie par ${k} et trouve ${p}. Quel est ce nombre ?`,
+    `${qui.nom} multiplie un nombre par ${k} et trouve ${p}. Quel est ce nombre ?`,
     `Combien de fois ${k} faut-il pour faire ${p} ?`,
   ]);
   return {
@@ -369,6 +527,7 @@ function tableTrou(k: number, n: number): Q {
       `${k} × ${n} = ${p} : il faut ${n} fois ${k} pour arriver à ${p}.`,
       `Le nombre cherché est ${n}.`,
     ),
+    ...(n <= 10 && pile(0.5) ? { canvas: droiteTable(k, n, [0, p]) } : {}),
   };
 }
 
@@ -405,6 +564,7 @@ function tableReconnaitre(k: number): Q {
       `${n} × ${k} = ${p}. Les autres nombres ne tombent pas dans la table.`,
       `C'est ${p}.`,
     ),
+    ...(pile(0.4) ? { canvas: droiteTable(k) } : {}),
   };
 }
 
@@ -429,6 +589,16 @@ function tableSuite(k: number): Q {
       `${termes[3]} + ${k} = ${suivant}, et c'est bien ${debut + 4} × ${k}.`,
       `Le nombre suivant est ${suivant}.`,
     ),
+    // Les termes connus sont écrits, la graduation suivante porte un « ? ».
+    ...(pile(0.6)
+      ? {
+          canvas: {
+            ...droiteTable(k, debut + 4, termes),
+            min: (debut - 1) * k,
+            points: [{ value: suivant, label: "?" }],
+          },
+        }
+      : {}),
   };
 }
 
@@ -445,7 +615,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
     microId: "ce1_multiplication_sens",
     difficulty: 2,
     theme: "neutral",
-    text: "Jan a 3 paquets de biscuits. Chaque paquet contient 20 biscuits. Quelle addition permet de trouver le total ?",
+    text: "Jan a 3 paquets de 20 biscuits. Quelle addition donne le total ?",
     format: "qcm",
     choices: [
       "20 + 20 + 20",
@@ -484,10 +654,10 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const [n, k] = deuxDifferents(2, 5);
           const bonne = repete(k, n);
           const question = randomChoice([
-            `Quelle addition donne le nombre total ${de(lot.obj)} ?`,
-            `Quel calcul permet de compter les ${lot.obj} en tout ?`,
-            `Pour trouver combien il y a ${de(lot.obj)}, quelle addition faut-il faire ?`,
-            "Laquelle de ces additions donne le total ?",
+            "Quelle addition donne le total ?",
+            `Quel calcul compte les ${lot.obj} ?`,
+            "Quelle addition faut-il faire ?",
+            "Laquelle de ces additions convient ?",
           ]);
           return {
             text: `${situationLots(lot, n, k, quelquun())} ${question}`,
@@ -508,6 +678,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${n} ${lot.des} de ${k} : on ajoute ${k} ${LETTRES[n]} fois, soit ${bonne} = ${n * k}.`,
               `C'est ${bonne}.`,
             ),
+            ...(pile(0.6) ? { canvas: dessinLots(lot, n, k) } : {}),
           };
         },
         // L'addition → l'histoire qu'elle raconte.
@@ -558,6 +729,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${repete(k, n)} = ${total}. On dit « ${LETTRES[n]} fois ${LETTRES[k]} ».`,
               `Il y a ${total} ${lot.obj}.`,
             ),
+            ...(pile(0.7) ? { canvas: dessinLots(lot, n, k) } : {}),
           };
         },
         // Combien de fois ?
@@ -570,7 +742,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
             `Dans ${somme}, combien de fois le nombre ${k} est-il écrit ?`,
             `${somme} : combien de fois ajoute-t-on ${k} ?`,
             `${qui.nom} calcule ${somme}. Combien de fois ajoute-t-${qui.il} ${k} ?`,
-            `Pour dire ${somme} avec le mot « fois », il faut savoir combien de fois ${k} est répété. Combien ?`,
+            `Dans ${somme}, ${k} est répété combien de fois ?`,
           ]);
           return {
             text,
@@ -617,6 +789,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${repete(dans, combien)} = ${total}. On écrit plus vite ${combien} × ${dans} = ${total}.`,
               `Il y a ${total} ${lot.obj}.`,
             ),
+            ...(pile(0.7) ? { canvas: dessinLots(lot, combien, dans) } : {}),
           };
         },
         // L'histoire → le bon calcul (addition ou ×).
@@ -646,6 +819,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${n} × ${k} = ${repete(k, n)} = ${n * k}.`,
               `C'est ${bonne}.`,
             ),
+            ...(pile(0.5) ? { canvas: dessinLots(lot, n, k) } : {}),
           };
         },
         // Le nombre de lots, connaissant le total (addition répétée à rebours).
@@ -671,6 +845,8 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${repete(k, n)} = ${total} : il y a ${n} fois ${k}, donc ${n} × ${k} = ${total}.`,
               `On obtient ${n} ${lot.des}.`,
             ),
+            // UN seul lot : on sait ce qu'il contient, pas combien il y en a.
+            ...(lot.img && k <= 5 ? { canvas: dessinGroupes(lot.img, 1, k, `1 ${lot.un} = ${k} ${lot.obj}`) } : {}),
           };
         },
         // L'addition répétée → le total.
@@ -681,7 +857,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const qui = quelquun();
           const text = randomChoice([
             `Combien font ${somme} ?`,
-            `Calcule ${somme}, puis dis combien de fois tu as ajouté ${k}. Quel est le résultat ?`,
+            `Calcule ${somme}. Quel est le résultat ?`,
             `${qui.nom} ajoute ${k}, ${LETTRES[n]} fois de suite. Combien trouve-t-${qui.il} ?`,
             `${maj(LETTRES[n])} fois ${LETTRES[k]}, c'est ${somme}. Combien cela fait-il ?`,
           ]);
@@ -696,6 +872,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${Array.from({ length: n }, (_, i) => (i + 1) * k).join(", ")} : ${somme} = ${n * k}.`,
               `Cela fait ${n * k}, c'est-à-dire ${n} × ${k}.`,
             ),
+            ...(pile(0.4) ? { canvas: barreGroupes(n, k) } : {}),
           };
         },
       ]),
@@ -832,7 +1009,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const [a, b] = deuxDifferents(2, 5);
           const bonne = `${a} × ${b}`;
           return {
-            text: `${situationLots(lot, a, b, quelquun())} Quelle multiplication donne le nombre ${de(lot.obj)} ?`,
+            text: `${situationLots(lot, a, b, quelquun())} Quelle multiplication donne le total ?`,
             format: "qcm",
             choices: makeChoices(bonne, [`${a} + ${b}`, `${a} × ${a}`, `${b} + ${b}`, `${a + 1} × ${b}`]),
             expected: [bonne],
@@ -843,6 +1020,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${a} ${lot.des} de ${b} : ${bonne} = ${repete(b, a)} = ${a * b}.`,
               `C'est ${bonne}.`,
             ),
+            ...(pile(0.6) ? { canvas: dessinLots(lot, a, b) } : {}),
           };
         },
       ]),
@@ -904,9 +1082,9 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const bonne = `${n} × ${k}`;
           const qui = quelquun();
           const question = randomChoice([
-            `Quelle multiplication donne le nombre ${de(lot.obj)} ?`,
-            `${qui.nom} veut écrire le calcul avec le signe ×. Lequel ?`,
-            "Quel calcul avec × correspond à la situation ?",
+            "Quelle multiplication donne le total ?",
+            "Quel calcul avec le signe × ?",
+            "Quel calcul avec × convient ?",
           ]);
           return {
             text: `${situationLots(lot, n, k, qui)} ${question}`,
@@ -920,6 +1098,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${n} ${lot.des} de ${k} ${lot.obj} : ${bonne} = ${n * k} ${lot.obj}.`,
               `C'est ${bonne}.`,
             ),
+            ...(pile(0.6) ? { canvas: dessinLots(lot, n, k) } : {}),
           };
         },
         // Le × → le résultat, en passant par l'addition.
@@ -945,6 +1124,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${somme} = ${fois * nombre}.`,
               `${fois} × ${nombre} = ${fois * nombre}.`,
             ),
+            ...(pile(0.5) ? { canvas: barreGroupes(fois, nombre) } : {}),
           };
         },
         // Le trou : combien de fois ?
@@ -987,7 +1167,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
     microId: "ce1_multiplication_commutativite",
     difficulty: 3,
     theme: "neutral",
-    text: "Un potager a 8 colonnes de 4 salades. On peut aussi le voir comme 4 rangées de 8 salades. Que peut-on en conclure ?",
+    text: "Un potager a 8 colonnes de 4 salades, ou 4 rangées de 8 salades. Que conclure ?",
     format: "qcm",
     choices: [
       "8 × 4 et 4 × 8 donnent le même résultat",
@@ -1004,6 +1184,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
       "Les salades ne bougent pas, seul le regard change : 8 × 4 = 32 et 4 × 8 = 32. Cela s'appelle la commutativité.",
       "8 × 4 et 4 × 8 donnent le même résultat.",
     ),
+    canvas: dessinRangees("feuille", 4, 8, "Le potager : compte les rangées, puis les colonnes."),
     tags: ["ce1", "multiplication", "commutativite", "qcm"],
   },
   {
@@ -1071,6 +1252,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${a} rangées de ${b} ou ${b} rangées de ${a}, cela fait le même nombre d'objets : ${produit}.`,
               `${b} × ${a} = ${produit}.`,
             ),
+            ...(a <= 6 && pile(0.5) ? { canvas: dessinRangees("etoile", a, b, `${a} rangées de ${b}, ou ${b} colonnes de ${a} ?`) } : {}),
           };
         },
         // Le même quadrillage, vu dans l'autre sens.
@@ -1079,9 +1261,9 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const [r, c] = deuxDifferents(2, 9);
           const qui = quelquun();
           const text = randomChoice([
-            `${g.lieu}, on a ${r} rangées de ${c} ${g.obj}. ${qui.nom} les voit plutôt en ${c} colonnes. Combien ${de(g.obj)} dans chaque colonne ?`,
-            `${g.lieu}, il y a ${r} rangées de ${c} ${g.obj}. Si ${qui.nom} compte par colonnes, ${qui.il} trouve ${c} colonnes de combien ${de(g.obj)} ?`,
-            `${g.lieu} : ${r} rangées de ${c} ${g.obj}, c'est aussi ${c} colonnes de … ${g.obj}. ${qui.nom} doit compléter : quel nombre écrit-${qui.il} ?`,
+            `${g.lieu}, ${r} rangées de ${c} ${g.obj}. En ${c} colonnes, combien par colonne ?`,
+            `${qui.nom} voit ${r} rangées de ${c} ${g.obj}. Et en ${c} colonnes, combien par colonne ?`,
+            `${r} rangées de ${c} ${g.obj}, c'est ${c} colonnes de … Quel nombre ?`,
           ]);
           return {
             text,
@@ -1094,6 +1276,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${r} rangées de ${c} donnent ${c} colonnes de ${r} : ${r} × ${c} = ${c} × ${r} = ${r * c}.`,
               `Chaque colonne compte ${r} ${g.obj}.`,
             ),
+            ...(g.img && r <= 6 && pile(0.7) ? { canvas: dessinRangees(g.img, r, c, "Une rangée se lit de gauche à droite, une colonne de haut en bas.") } : {}),
           };
         },
         // Quelle multiplication donne le même résultat ?
@@ -1103,9 +1286,9 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const qui = quelquun();
           const text = randomChoice([
             `Quelle multiplication donne le même résultat que ${a} × ${b} ?`,
-            `${qui.nom} a oublié combien fait ${a} × ${b}. Quel calcul donne sûrement le même résultat ?`,
+            `${qui.nom} a oublié ${a} × ${b}. Quel calcul donne le même résultat ?`,
             `Laquelle de ces multiplications est égale à ${a} × ${b} ?`,
-            `${qui.nom} veut vérifier son calcul de ${a} × ${b} par un autre calcul qui donne forcément le même résultat. Lequel ?`,
+            `${qui.nom} vérifie ${a} × ${b} par un autre calcul. Lequel donne le même résultat ?`,
           ]);
           return {
             text,
@@ -1169,7 +1352,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const bonne = `en calculant ${k} × ${n} avec la table de ${k}`;
           const text = randomChoice([
             `${qui.nom} ne connaît pas encore la table de ${n}. Comment peut-${qui.il} calculer ${n} × ${k} ?`,
-            `Pour calculer ${n} × ${k} quand on ne connaît que les tables de 2, 5 et 10, que faire ?`,
+            `On ne connaît que les tables de 2, 5 et 10. Comment calculer ${n} × ${k} ?`,
             `${n} × ${k} : quelle est la façon la plus simple de le calculer ?`,
             `${qui.nom} bloque sur ${n} × ${k}. Quel conseil lui donner ?`,
             `${qui.nom} connaît par cœur la table de ${k}, pas celle de ${n}. Comment trouver ${n} × ${k} ?`,
@@ -1232,9 +1415,9 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const [p, q] = deuxPersonnes();
           const bonne = "ils trouvent le même nombre";
           const text = randomChoice([
-            `${g.lieu}, ${p.nom} compte ${r} rangées de ${c} ${g.obj}. ${q.nom} compte ${c} colonnes de ${r} ${g.obj}. Qui en trouve le plus ?`,
-            `${p.nom} calcule ${r} × ${c} et ${q.nom} calcule ${c} × ${r} pour compter les ${g.obj}. Qui trouve le plus grand nombre ?`,
-            `${g.lieu}, il y a ${r} rangées de ${c} ${g.obj}. ${p.nom} les compte par rangées, ${q.nom} par colonnes. Que se passe-t-il ?`,
+            `${p.nom} compte ${r} rangées de ${c} ${g.obj}, ${q.nom} ${c} colonnes de ${r}. Qui en trouve plus ?`,
+            `Pour les ${g.obj}, ${p.nom} calcule ${r} × ${c}, ${q.nom} ${c} × ${r}. Qui trouve le plus ?`,
+            `${r} rangées de ${c} ${g.obj} : ${p.nom} compte par rangées, ${q.nom} par colonnes. Et alors ?`,
           ]);
           return {
             text,
@@ -1252,6 +1435,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${r} × ${c} = ${r * c} et ${c} × ${r} = ${r * c}.`,
               "Ils trouvent le même nombre.",
             ),
+            ...(g.img && r <= 6 && pile(0.7) ? { canvas: dessinRangees(g.img, r, c, "Par rangées ou par colonnes : ce sont les mêmes objets.") } : {}),
           };
         },
         // Le résultat, en retournant le produit.
@@ -1278,6 +1462,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${k} × ${n} = ${repete(k, n)} = ${n * k}.`,
               `${n} × ${k} = ${n * k}.`,
             ),
+            ...(pile(0.5) ? { canvas: droiteTable(k) } : {}),
           };
         },
       ]),
@@ -1351,6 +1536,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
       "Le chiffre des unités est 7, qui n'est pas dans la liste 0, 2, 4, 6, 8. Le nombre 347 est donc impair, même si le 4 du milieu est pair.",
       "347 est impair.",
     ),
+    canvas: dessinParite(347),
     tags: ["ce1", "multiplication", "parite", "piege", "qcm"],
   },
   {
@@ -1379,7 +1565,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const qui = quelquun();
           const text = randomChoice([
             `Le nombre ${debut}… doit être ${mot}. Quel chiffre des unités peut-on écrire ?`,
-            `${qui.nom} écrit un nombre qui commence par ${debut} et qui est ${mot}. Quel peut être son dernier chiffre ?`,
+            `${qui.nom} écrit un nombre ${mot} qui commence par ${debut}. Quel dernier chiffre ?`,
             `Quel chiffre faut-il ajouter à droite de ${debut} pour obtenir un nombre ${mot} ?`,
           ]);
           return {
@@ -1423,6 +1609,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${r} se termine par ${r % 10}, il est ${mot}.`,
               `C'est ${r}.`,
             ),
+            ...(pile(0.5) ? { canvas: droiteVoisins(n - 4, n + 4, [n]) } : {}),
           };
         },
       ]),
@@ -1454,7 +1641,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
             `Combien y a-t-il de nombres ${mot} compris entre ${debut} et ${fin} ?`,
             `${qui.nom} écrit tous les nombres ${mot} situés entre ${debut} et ${fin}. Combien en écrit-${qui.il} ?`,
             `Entre ${debut} et ${fin} (sans compter ces deux nombres), combien trouve-t-on de nombres ${mot} ?`,
-            `Les casiers du collège vont du n° ${debut} au n° ${fin}. ${qui.nom} compte les numéros ${mot} situés strictement entre les deux. Combien en trouve-t-${qui.il} ?`,
+            `Les casiers vont du n° ${debut} au n° ${fin}. Combien de numéros ${mot} entre les deux ?`,
           ]);
           return {
             text,
@@ -1467,6 +1654,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `Ce sont ${liste.join(", ")}.`,
               `Il y en a ${liste.length}.`,
             ),
+            ...(pile(0.6) ? { canvas: droiteVoisins(debut, fin, [debut, fin]) } : {}),
           };
         },
         // Avancer de 2 en 2.
@@ -1479,7 +1667,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
             `Quel nombre vient ensuite : ${termes.join(", ")}, … ?`,
             `${qui.nom} compte de 2 en 2 : ${termes.join(", ")}. Quel nombre dit-${qui.il} ensuite ?`,
             `Continue la suite : ${termes.join(", ")}, …`,
-            `Dans une rue, ${qui.nom} passe devant les numéros ${termes.join(", ")}. Quel est le numéro suivant ?`,
+            `Dans la rue, ${qui.nom} passe les numéros ${termes.join(", ")}. Et le suivant ?`,
           ]);
           return {
             text,
@@ -1492,6 +1680,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${termes[3]} + 2 = ${suivant}. Tous ces nombres sont ${depart % 2 === 0 ? "pairs" : "impairs"}.`,
               `Le nombre suivant est ${suivant}.`,
             ),
+            ...(pile(0.5) ? { canvas: droiteVoisins(depart, depart + 10, termes, [{ value: suivant, label: "?" }]) } : {}),
           };
         },
         // Le plus grand (ou plus petit) pair d'un intervalle.
@@ -1506,8 +1695,8 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const text = randomChoice([
             `Quel est le ${lequel} nombre pair compris entre ${debut} et ${fin} ?`,
             `Entre ${debut} et ${fin}, on cherche le nombre pair le ${lequel}. Lequel est-ce ?`,
-            `${qui.nom} doit écrire le ${lequel} nombre pair situé entre ${debut} et ${fin}. Lequel écrit-${qui.il} ?`,
-            `Les places d'un concert sont numérotées de ${debut} à ${fin}. ${qui.nom} veut le ${lequel} numéro pair, sans prendre ces deux bornes. Lequel ?`,
+            `${qui.nom} écrit le ${lequel} nombre pair entre ${debut} et ${fin}. Lequel ?`,
+            `Places ${debut} à ${fin} : quel est le ${lequel} numéro pair entre les deux ?`,
           ]);
           return {
             text,
@@ -1522,6 +1711,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${r} se termine par ${r % 10} : il est pair.`,
               `C'est ${r}.`,
             ),
+            ...(pile(0.5) ? { canvas: droiteVoisins(debut, fin, [debut, fin]) } : {}),
           };
         },
         // Le rang : le 3e nombre pair après n.
@@ -1536,7 +1726,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const text = randomChoice([
             `Quel est le ${rangMot} nombre pair après ${n} ?`,
             `En comptant les nombres pairs à partir de ${n}, quel est le ${rangMot} ?`,
-            `${qui.nom} habite au numéro ${n}. En marchant du côté des numéros pairs, quel est le ${rangMot} numéro pair qu'${qui.il} rencontre après le sien ?`,
+            `${qui.nom} habite au n° ${n}. Quel est le ${rangMot} numéro pair après le sien ?`,
             `${qui.nom} récite les nombres pairs qui suivent ${n}. Quel est le ${rangMot} qu'${qui.il} dit ?`,
           ]);
           return {
@@ -1550,6 +1740,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${Array.from({ length: rang }, (_, i) => premier + 2 * i).join(", ")}.`,
               `Le ${rangMot} est ${r}.`,
             ),
+            ...(pile(0.5) ? { canvas: droiteVoisins(n, n + 10, [n]) } : {}),
           };
         },
       ]),
@@ -1635,6 +1826,20 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${n} + ${n} = ${n} × 2 = ${2 * n}.`,
               sens === "double" ? `Le double de ${n} est ${2 * n}.` : `C'est ${n}, car ${n} × 2 = ${2 * n}.`,
             ),
+            ...(pile(0.6)
+              ? {
+                  canvas:
+                    sens === "double"
+                      ? barreGroupes(2, n)
+                      : ({
+                          kind: "schema_barre",
+                          total: String(2 * n),
+                          parts: [{ label: "", unknown: true }, { label: "", unknown: true }],
+                          questionLabel: "Deux parts égales",
+                          display: { showTotal: true, showPartLabels: false, showValues: true, showQuestion: true },
+                        } satisfies SchemaBarreCanvasData),
+                }
+              : {}),
           };
         },
       ]),
@@ -1664,6 +1869,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
       "5, 10, 15, 20, 25, 30… Les résultats se terminent tour à tour par 5 et par 0. Cela permet de repérer une erreur tout de suite : 5 × 7 ne peut pas faire 34.",
       "Ils se terminent par 0 ou par 5.",
     ),
+    canvas: droiteTable(5, 10, Array.from({ length: 11 }, (_, i) => 5 * i)),
     tags: ["ce1", "multiplication", "table_5", "remarquable", "qcm"],
   },
   {
@@ -1691,8 +1897,8 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const qui = quelquun();
           const text = randomChoice([
             `${n} × 10 = ${n * 10}. Combien font alors ${n} × 5 ?`,
-            `${qui.nom} sait que ${n} × 10 = ${n * 10}. Comment trouve-t-${qui.il} vite ${n} × 5 ? Donne le résultat.`,
-            `Sachant que ${n} billets de 10 € font ${n * 10} €, combien font ${n} billets de 5 € ?`,
+            `${qui.nom} sait que ${n} × 10 = ${n * 10}. Combien font ${n} × 5 ?`,
+            `${n} billets de 10 € font ${n * 10} €. Combien font ${n} billets de 5 € ?`,
           ]);
           return {
             text,
@@ -1705,6 +1911,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${n} × 10 = ${n * 10}, et la moitié de ${n * 10} est ${n * 5}.`,
               `${n} × 5 = ${n * 5}.`,
             ),
+            ...(pile(0.5) ? { canvas: dessinPieces(5, n, `${n} billets de 5 €`) } : {}),
           };
         },
       ]),
@@ -1741,6 +1948,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
       "7 × 10, c'est 7 paquets de dix, donc 7 dizaines : cela s'écrit 70. Le zéro n'est pas ajouté au hasard, il marque qu'il n'y a plus d'unités isolées.",
       "Parce que les 7 unités deviennent 7 dizaines.",
     ),
+    canvas: { kind: "base_dix", dizaines: 7, etiquettes: true, consigne: "7 × 10 : sept barres de dix cubes." },
     tags: ["ce1", "multiplication", "table_10", "qcm"],
   },
   {
@@ -1791,6 +1999,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${n} × 10, c'est ${n} dizaines : ${p}.`,
               `Cela fait ${p}.`,
             ),
+            canvas: n <= 20 && pile(0.6) ? ({ kind: "base_dix", dizaines: n, etiquettes: true, echange: "dizaines" } satisfies BaseDixCanvasData) : undefined,
           };
         },
         // n dizaines → le nombre.
@@ -1803,7 +2012,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
             `${qui.nom} a ${n} paquets de 10 cartes. Combien de cartes a-t-${qui.il} ?`,
             `Quel nombre s'écrit avec ${n} dizaines et 0 unité ?`,
             `${qui.nom} empile ${n} barres de 10 cubes. Combien de cubes cela fait-il ?`,
-            `Une bibliothèque range ses livres par 10 sur des étagères. ${qui.nom} compte ${n} étagères pleines. Combien de livres ?`,
+            `${qui.nom} compte ${n} étagères de 10 livres. Combien de livres ?`,
           ]);
           return {
             text,
@@ -1816,6 +2025,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${n} × 10 = ${n * 10}.`,
               `C'est ${n * 10}.`,
             ),
+            ...(n <= 20 && pile(0.6) ? { canvas: { kind: "base_dix", dizaines: n, etiquettes: true, echange: "dizaines" } satisfies BaseDixCanvasData } : {}),
           };
         },
         // Payer avec des billets de 10 €, trouver le facteur.
@@ -1868,6 +2078,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${n} dizaines = ${p}. Attention : ${n} + 10 = ${n + 10}, ce n'est pas la même chose.`,
               `${n} × 10 = ${p}.`,
             ),
+            ...(n <= 20 && pile(0.5) ? { canvas: { kind: "base_dix", dizaines: n, etiquettes: true, echange: "dizaines" } satisfies BaseDixCanvasData } : {}),
           };
         },
       ]),
@@ -1920,6 +2131,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${facile} répété ${n} fois donne ${p}. Attention : ${a} + ${b} = ${a + b}, c'est une addition.`,
               `Cela fait ${p}.`,
             ),
+            ...(pile(0.4) ? { canvas: droiteTable(facile) } : {}),
           };
         },
       ]),
@@ -2008,7 +2220,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const total = n * k;
           const qui = quelquun();
           const text = randomChoice([
-            `${lot.prep} chaque ${lot.un}, il y a ${k} ${lot.obj}. Il y a ${total} ${lot.obj} en tout. Combien y a-t-il ${de(lot.des)} ?`,
+            `${total} ${lot.obj} en tout, ${k} par ${lot.un}. Combien ${de(lot.des)} ?`,
             `${qui.nom} répartit ${total} ${lot.obj} par ${k}. Combien ${de(lot.des)} remplit-${qui.il} ?`,
             `Avec ${total} ${lot.obj}, on fait des ${lot.des} de ${k}. Combien ${de(lot.des)} ?`,
           ]);
@@ -2023,6 +2235,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${n} × ${k} = ${total}.`,
               `Il y a ${n} ${lot.des}.`,
             ),
+            ...(lot.img && k <= 5 ? { canvas: dessinGroupes(lot.img, 1, k, `1 ${lot.un} = ${k} ${lot.obj}`) } : {}),
           };
         },
       ]),
@@ -2040,7 +2253,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
     microId: "ce1_multiplication_defi",
     difficulty: 5,
     theme: "reunion",
-    text: "Un marchand vend ses letchis par sachets de 10. Il en a préparé 7 sachets et il lui reste 4 letchis isolés. Combien a-t-il de letchis ?",
+    text: "Un marchand a 7 sachets de 10 letchis et 4 letchis à part. Combien de letchis ?",
     format: "short",
     expected: ["74"],
     comparator: "number_equal",
@@ -2051,6 +2264,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
       "7 × 10 = 70, puis 70 + 4 = 74. Le nombre 74 se lit d'ailleurs directement : 7 dizaines et 4 unités.",
       "Il a 74 letchis.",
     ),
+    canvas: barreDefi([{ n: 7, k: 10 }], { label: "isolés", value: 4 }, "Une case bleue = 1 sachet"),
     tags: ["ce1", "multiplication", "defi", "reunion"],
   },
   {
@@ -2076,9 +2290,9 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const qui = quelquun();
           const en = `${isoles} ${pl(isoles, lot.obj1, lot.obj)}`;
           const text = randomChoice([
-            `Il y a ${paquets} ${lot.des} de ${parPaquet} ${lot.obj}, et ${en} en plus. Combien ${de(lot.obj)} en tout ?`,
-            `${qui.nom} a ${paquets} ${lot.des} de ${parPaquet} ${lot.obj}. À côté, il reste ${en}. Combien ${de(lot.obj)} cela fait-il ?`,
-            `${lot.prep} chaque ${lot.un}, il y a ${parPaquet} ${lot.obj}. On a ${paquets} ${lot.des}, plus ${en} à part. Quel est le total ?`,
+            `Il y a ${paquets} ${lot.des} de ${parPaquet} ${lot.obj}, et ${isoles} en plus. Combien en tout ?`,
+            `${qui.nom} a ${paquets} ${lot.des} de ${parPaquet} ${lot.obj}, plus ${isoles} à côté. Combien en tout ?`,
+            `${paquets} ${lot.des} de ${parPaquet} ${lot.obj}, plus ${en} à part. Quel est le total ?`,
           ]);
           return {
             text,
@@ -2091,6 +2305,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${paquets} × ${parPaquet} = ${paquets * parPaquet}, puis ${paquets * parPaquet} + ${isoles} = ${total}.`,
               `Il y a ${total} ${lot.obj}.`,
             ),
+            ...(paquets + 1 <= CASES_MAX && pile(0.7) ? { canvas: barreDefi([{ n: paquets, k: parPaquet }], { label: "à part", value: isoles }, `Une case bleue = 1 ${lot.un}`) } : {}),
           };
         },
         // Des lots pleins, et on en retire.
@@ -2103,9 +2318,9 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const reste = plein - retires;
           const qui = quelquun();
           const text = randomChoice([
-            `${qui.nom} a ${paquets} ${lot.des} de ${parPaquet} ${lot.obj}. ${maj(qui.il)} donne ${retires} ${lot.obj}. Combien lui en reste-t-il ?`,
-            `On achète ${paquets} ${lot.des} de ${parPaquet} ${lot.obj}, puis on utilise ${retires} ${lot.obj}. Combien en reste-t-il ?`,
-            `Il y avait ${paquets} ${lot.des} de ${parPaquet} ${lot.obj}. On a pris ${retires} ${lot.obj}. Combien ${de(lot.obj)} reste-t-il ?`,
+            `${qui.nom} a ${paquets} ${lot.des} de ${parPaquet} ${lot.obj} et en donne ${retires}. Combien en reste-t-il ?`,
+            `On achète ${paquets} ${lot.des} de ${parPaquet} ${lot.obj}, puis on en utilise ${retires}. Combien en reste-t-il ?`,
+            `Il y avait ${paquets} ${lot.des} de ${parPaquet} ${lot.obj}. On en prend ${retires}. Combien en reste-t-il ?`,
           ]);
           return {
             text,
@@ -2118,6 +2333,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${paquets} × ${parPaquet} = ${plein}, puis ${plein} - ${retires} = ${reste}.`,
               `Il en reste ${reste}.`,
             ),
+            ...(paquets <= CASES_MAX && pile(0.6) ? { canvas: barreDefi([{ n: paquets, k: parPaquet }], undefined, `Puis on en enlève ${retires}.`) } : {}),
           };
         },
         // Deux tailles de lots.
@@ -2129,9 +2345,9 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const total = n1 * k1 + n2 * k2;
           const qui = quelquun();
           const text = randomChoice([
-            `${qui.nom} a ${n1} ${lot.des} de ${k1} ${lot.obj} et ${n2} ${lot.des} de ${k2} ${lot.obj}. Combien ${de(lot.obj)} en tout ?`,
-            `Il y a ${n1} ${lot.des} de ${k1} ${lot.obj}, puis ${n2} ${lot.des} de ${k2} ${lot.obj}. Quel est le nombre total ${de(lot.obj)} ?`,
-            `On réunit ${n1} ${lot.des} de ${k1} ${lot.obj} avec ${n2} ${lot.des} de ${k2} ${lot.obj}. Combien cela fait-il ${de(lot.obj)} ?`,
+            `${qui.nom} a ${n1} ${lot.des} de ${k1} ${lot.obj} et ${n2} ${lot.des} de ${k2}. Combien en tout ?`,
+            `Il y a ${n1} ${lot.des} de ${k1} ${lot.obj}, puis ${n2} de ${k2}. Quel est le total ?`,
+            `On réunit ${n1} ${lot.des} de ${k1} ${lot.obj} et ${n2} ${lot.des} de ${k2}. Combien en tout ?`,
           ]);
           return {
             text,
@@ -2144,6 +2360,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${n1} × ${k1} = ${n1 * k1} ; ${n2} × ${k2} = ${n2 * k2} ; ${n1 * k1} + ${n2 * k2} = ${total}.`,
               `Il y a ${total} ${lot.obj}.`,
             ),
+            ...(n1 + n2 <= CASES_MAX && pile(0.6) ? { canvas: barreDefi([{ n: n1, k: k1 }, { n: n2, k: k2 }], undefined, `Une case = 1 ${lot.un}`) } : {}),
           };
         },
       ]),
@@ -2169,9 +2386,9 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const total = lignes * colonnes;
           const qui = quelquun();
           const text = randomChoice([
-            `${g.lieu}, on a ${lignes} rangées de ${colonnes} ${g.obj}. Combien ${de(g.obj)} en tout ?`,
-            `${g.lieu}, ${qui.nom} compte ${colonnes} ${g.obj} par rangée, sur ${lignes} rangées. Combien en compte-t-${qui.il} ?`,
-            `${g.lieu}, les ${g.obj} forment ${lignes} rangées de ${colonnes}. Quel est leur nombre total ?`,
+            `${g.lieu}, ${lignes} rangées de ${colonnes} ${g.obj}. Combien ${de(g.obj)} en tout ?`,
+            `${qui.nom} compte ${lignes} rangées de ${colonnes} ${g.obj}. Combien en tout ?`,
+            `${g.lieu}, les ${g.obj} forment ${lignes} rangées de ${colonnes}. Combien y en a-t-il ?`,
           ]);
           return {
             text,
@@ -2184,6 +2401,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${lignes} × ${colonnes} = ${total}, et ${colonnes} × ${lignes} = ${total} aussi.`,
               `Il y a ${total} ${g.obj}.`,
             ),
+            ...(lignes <= CASES_MAX && pile(0.6) ? { canvas: barreGroupes(lignes, colonnes, "1 rangée") } : {}),
           };
         },
         // Le quadrillage dont il manque une dimension.
@@ -2193,9 +2411,9 @@ export const multiplicationBank: TutorBankItemV4[] = [
           const colonnes = randomChoice([2, 5, 10] as const);
           const total = lignes * colonnes;
           const text = randomChoice([
-            `${g.lieu}, ${total} ${g.obj} forment des rangées de ${colonnes}. Combien y a-t-il de rangées ?`,
-            `${g.lieu}, on compte ${total} ${g.obj} en rangées de ${colonnes}, sans trou. Combien y a-t-il de rangées ?`,
-            `${g.lieu}, il y a ${total} ${g.obj} en rangées de ${colonnes}. Combien de rangées faut-il ?`,
+            `${g.lieu}, ${total} ${g.obj} forment des rangées de ${colonnes}. Combien de rangées ?`,
+            `${total} ${g.obj} sont en rangées de ${colonnes}, sans trou. Combien de rangées ?`,
+            `${g.lieu}, ${total} ${g.obj} en rangées de ${colonnes}. Combien de rangées ?`,
           ]);
           return {
             text,
@@ -2208,6 +2426,7 @@ export const multiplicationBank: TutorBankItemV4[] = [
               `${lignes} × ${colonnes} = ${total}.`,
               `Il y a ${lignes} rangées.`,
             ),
+            ...(g.img && pile(0.7) ? { canvas: dessinRangees(g.img, 1, colonnes, `1 rangée = ${colonnes} ${g.obj}`) } : {}),
           };
         },
         // Qui en a le plus, et de combien ?
@@ -2222,9 +2441,9 @@ export const multiplicationBank: TutorBankItemV4[] = [
           if (a * k1 > b * k2) [a, k1, b, k2] = [b, k2, a, k1];
           const ecart = b * k2 - a * k1;
           const text = randomChoice([
-            `${p.nom} a ${a} ${lot.des} de ${k1} ${lot.obj}. ${q.nom} a ${b} ${lot.des} de ${k2} ${lot.obj}. Combien ${de(lot.obj)} ${q.nom} a-t-${q.il} de plus ?`,
-            `${p.nom} : ${a} ${lot.des} de ${k1} ${lot.obj}. ${q.nom} : ${b} ${lot.des} de ${k2} ${lot.obj}. Quelle est la différence entre les deux ?`,
-            `${q.nom} a ${b} ${lot.des} de ${k2} ${lot.obj} et ${p.nom} ${a} ${lot.des} de ${k1}. Combien ${de(lot.obj)} manque-t-il à ${p.nom} pour en avoir autant ?`,
+            `${p.nom} a ${a} ${lot.des} de ${k1} ${lot.obj}, ${q.nom} ${b} de ${k2}. Combien de plus pour ${q.nom} ?`,
+            `${p.nom} : ${a} ${lot.des} de ${k1} ${lot.obj}. ${q.nom} : ${b} de ${k2}. Quel est l'écart ?`,
+            `${q.nom} a ${b} ${lot.des} de ${k2} ${lot.obj}, ${p.nom} ${a} de ${k1}. Combien en manque-t-il à ${p.nom} ?`,
           ]);
           return {
             text,
@@ -2261,7 +2480,7 @@ function familleParite(min: number, max: number): Q {
         `Range ${n} dans la bonne colonne : pair ou impair ?`,
         `${qui.nom} a le dossard n° ${n}. Ce numéro est-il pair ou impair ?`,
         `${qui.nom} tire le numéro ${n} à la loterie de la kermesse. Pair ou impair ?`,
-        `La salle ${n} est au fond du couloir. ${qui.nom} se demande : ce numéro est-il pair ou impair ?`,
+        `La salle n° ${n} est au fond du couloir. Ce numéro est-il pair ou impair ?`,
       ]);
       const pourQui = text.includes(" dit que ");
       const bonneTxt = pourQui
@@ -2293,6 +2512,7 @@ function familleParite(min: number, max: number): Q {
           `Le chiffre des unités de ${n} est ${n % 10}. ${n % 2 === 0 ? "Il est dans la liste 0, 2, 4, 6, 8" : "Il n'est pas dans la liste 0, 2, 4, 6, 8"} : le nombre est donc ${bonne}.`,
           `${n} est ${bonne}.`,
         ),
+        ...(pile(0.5) ? { canvas: dessinParite(n) } : {}),
       };
     },
     // Partager en deux parts égales.
@@ -2327,6 +2547,7 @@ function familleParite(min: number, max: number): Q {
             : `${n} se termine par ${n % 10} : il est impair, il en restera toujours 1.`,
           pair ? "Oui, le partage tombe juste." : "Non, il reste 1 objet.",
         ),
+        ...(pile(0.6) ? { canvas: dessinParite(n) } : {}),
       };
     },
     // Le seul pair (ou le seul impair) d'une liste.

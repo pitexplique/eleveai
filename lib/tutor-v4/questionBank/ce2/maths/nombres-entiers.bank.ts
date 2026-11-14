@@ -133,6 +133,11 @@ function materiel(n: number, etiquettes = true): BaseDixCanvasData {
   };
 }
 
+/** Le matériel quand il reste lisible (6 gros cubes au plus), sinon rien. */
+function materielLisible(n: number, proba: number): { canvas?: BaseDixCanvasData } {
+  return Math.floor(n / 1000) <= 6 && Math.random() < proba ? { canvas: materiel(n) } : {};
+}
+
 /** Un nombre que le matériel dessine lisiblement (pas plus de 6 cubes de mille). */
 function nombrePourMateriel(avecZero = false): number {
   const m = rint(1, 6);
@@ -164,13 +169,16 @@ function droite(
 
 const ROUGE = "#ef4444";
 
+/** Les mots d'un énoncé (même compte que l'audit des longueurs : « 1 500 » fait deux mots). */
+const nbMots = (t: string) => t.replace(/\s+/g, " ").trim().split(" ").filter((w) => /[\p{L}\d]/u.test(w)).length;
+
 /** « Lou a fabriqué un nombre avec ce matériel. » — dit de beaucoup de façons. */
 function introMateriel(): string {
   const p = quelquun();
   return pick([
     `${p.nom} a fabriqué un nombre avec ce matériel.`,
     `${p.nom} a posé ce matériel sur sa table.`,
-    `${p.nom} a construit un nombre avec des cubes, des plaques et des barres.`,
+    `${p.nom} a construit ce nombre.`,
     `Voici le matériel ${de(p.nom)}.`,
     "Le matériel montre un nombre.",
     "Pic le paille-en-queue a rangé ce matériel.",
@@ -187,7 +195,7 @@ const DECORS: readonly ((n: string) => string)[] = [
   (n) => `Le puzzle géant de Zoé a ${n} pièces.`,
   (n) => `Ce soir, le cirque a vendu ${n} billets.`,
   (n) => `La ruche du jardinier abrite ${n} abeilles.`,
-  (n) => `Pic le paille-en-queue a compté ${n} graines dans le grand sac.`,
+  (n) => `Pic le paille-en-queue a compté ${n} graines.`,
   (n) => `La boulangère a fait ${n} croissants ce mois-ci.`,
   (n) => `La vétérinaire a soigné ${n} animaux depuis l'ouverture.`,
   (n) => `Le zoo a reçu ${n} visiteurs pendant les vacances.`,
@@ -289,7 +297,7 @@ function ecrireEnChiffres(n: number): Q {
     `${p.nom} dicte « ${lettres} ». Quel nombre faut-il écrire ?`,
     `La maîtresse dit « ${lettres} ». Quel nombre écrit-on au tableau ?`,
     `Pic le paille-en-queue chante « ${lettres} ». Quel nombre chante-t-il ?`,
-    `Sur la carte au trésor, on lit « ${lettres} pas ». Combien de pas, écrit en chiffres ?`,
+    `Sur la carte au trésor : « ${lettres} pas ». Combien de pas, en chiffres ?`,
     `${p.nom} entend « ${lettres} » à la radio. Comment l'écrire en chiffres ?`,
   ]);
   const [m, , , ] = chiffresDe(n);
@@ -321,7 +329,7 @@ function materielEnLettres(n: number): Q {
   const text = `${introMateriel()} ${pick([
     "Comment lit-on ce nombre ?",
     "Comment se dit ce nombre ?",
-    "Quel nombre est représenté ? Choisis son écriture en lettres.",
+    "Quelle est son écriture en lettres ?",
   ])}`;
   return {
     text,
@@ -350,7 +358,7 @@ function materielEnChiffres(n: number): Q {
     fmt(n + 10),
   ];
   const text = `${introMateriel()} ${pick([
-    "Quel nombre est dessiné ? Écris-le en chiffres.",
+    "Quel nombre est dessiné ?",
     "Quel nombre est-ce ?",
     "Compte le matériel : quel nombre trouves-tu ?",
     "Quel nombre se cache dans ce dessin ?",
@@ -429,7 +437,7 @@ function chiffreDuRang(): Q {
     `Dans ${fmt(n)}, quel est le chiffre des ${r.rang} ?`,
     `${p.nom} écrit ${fmt(n)}. Quel est le chiffre des ${r.rang} ?`,
     `Quel chiffre est à la place des ${r.rang} dans ${fmt(n)} ?`,
-    `${decor(n)} Quel est le chiffre des ${r.rang} de ce nombre ?`,
+    `${decor(n)} Quel est son chiffre des ${r.rang} ?`,
     `Le code du coffre est ${fmt(n)}. Quel est son chiffre des ${r.rang} ?`,
   ]);
   return {
@@ -514,12 +522,12 @@ function nombreDeRang(d: Etoile): Q {
   const pieges = [String(ch[r.index]), fmt(combien + 1), fmt(n % (r.puissance * 10)), fmt(combien * 10), fmt(Math.floor(n / (r.puissance * 10)))];
   const p = quelquun();
   const SACHETS: readonly ((n: string, k: string) => string)[] = [
-    (n, k) => `Le jardinier a ${n} graines. Il remplit des sachets de ${k} graines. Combien de sachets pleins peut-il faire ?`,
+    (n, k) => `Le jardinier a ${n} graines. Il fait des sachets de ${k}. Combien de sachets pleins ?`,
     (n, k) => `La boulangère a ${n} bonbons. Elle les met en paquets de ${k}. Combien de paquets pleins ?`,
-    (n, k) => `Pour la kermesse, il y a ${n} tickets. On fait des carnets de ${k} tickets. Combien de carnets pleins ?`,
+    (n, k) => `Il y a ${n} tickets. On fait des carnets de ${k}. Combien de carnets pleins ?`,
     (n, k) => `${p.nom} a ${n} perles. ${maj(p.il)} les range par boîtes de ${k}. Combien de boîtes pleines ?`,
-    (n, k) => `Le pirate a ${n} pièces d'or. Il fait des sacs de ${k} pièces. Combien de sacs pleins ?`,
-    (n, k) => `À la ferme, on a ramassé ${n} œufs. On les met dans des cartons de ${k}. Combien de cartons pleins ?`,
+    (n, k) => `Le pirate a ${n} pièces d'or. Il fait des sacs de ${k}. Combien de sacs pleins ?`,
+    (n, k) => `On a ramassé ${n} œufs. On remplit des cartons de ${k}. Combien de cartons pleins ?`,
   ];
   const text = pick([
     `Dans ${fmt(n)}, quel est le NOMBRE de ${r.rang} ?`,
@@ -551,9 +559,9 @@ function nombreDeCentainesMateriel(): Q {
   const correct = String(m * 10 + c);
   const text = `${introMateriel()} ${pick([
     "Combien de centaines y a-t-il EN TOUT dans ce nombre ?",
-    "Un gros cube, c'est 10 plaques. Combien de centaines en tout, sans compter les barres ni les petits cubes ?",
-    "Si on change chaque gros cube en 10 plaques, combien de plaques de cent aura-t-on ?",
-    "Combien de centaines compte ce nombre, celles des gros cubes comprises ?",
+    "Un gros cube = 10 plaques. Combien de centaines en tout ?",
+    "En changeant les gros cubes en plaques, combien de plaques ?",
+    "Combien de centaines en tout, gros cubes compris ?",
   ])}`;
   return {
     text,
@@ -611,6 +619,7 @@ function recomposer(d: Etoile): Q {
     choices: choix(correct, piegesChiffres(n).concat(fmt(n + 100), fmt(n + 1000))),
     expected: [correct],
     comparator: "mcq_exact",
+    ...materielLisible(n, 0.3),
     explanation: exp(
       "Chaque morceau remplit un rang : milliers, centaines, dizaines, unités.",
       "On range les morceaux du plus grand au plus petit et on écrit un zéro pour un rang vide.",
@@ -642,6 +651,7 @@ function choisirDecomposition(d: Etoile): Q {
     choices: choix(correct, [ecrire(m, dz, c, u), ecrire(m, c, u, dz), ecrire(c, m, dz, u), ecrire(m, c, dz + 1, u), ecrire(u, dz, c, m)]),
     expected: [correct],
     comparator: "mcq_exact",
+    ...materielLisible(n, 0.6),
     explanation: exp(
       "Décomposer, c'est écrire ce que vaut chaque chiffre.",
       "On lit les chiffres de gauche à droite : milliers, centaines, dizaines, unités.",
@@ -672,6 +682,7 @@ function morceauManquant(d: Etoile): Q {
     choices: choix(correct, [String(ch[i]), fmt(ch[i] * 10), fmt(ch[i] * 100), fmt(ch[i] * 1000), fmt(valeurs[i] + [1000, 100, 10][i])]),
     expected: [correct],
     comparator: "mcq_exact",
+    ...materielLisible(n, 0.5),
     explanation: exp(
       "Dans une décomposition, chaque morceau est la valeur d'un chiffre.",
       "On regarde quel rang manque, et le chiffre de ce rang dans le nombre.",
@@ -697,10 +708,10 @@ function ecritureEnUnites(): Q {
       return {
         text: pick([
           `${fmt(n)}, c'est ${fmt(dz)} dizaines et combien d'unités ?`,
-          `Le fermier met ${fmt(n)} œufs dans des boîtes de 10. Il remplit ${fmt(dz)} boîtes. Combien d'œufs restent ?`,
+          `Le fermier remplit ${fmt(dz)} boîtes de 10 avec ${fmt(n)} œufs. Combien d'œufs restent ?`,
           `${decor(n)} Cela fait ${fmt(dz)} dizaines et combien d'unités ?`,
-          `${quelquun().nom} range ${fmt(n)} cartes par paquets de 10 : ${fmt(dz)} paquets. Combien de cartes restent seules ?`,
-          `${p.nom} range ${fmt(n)} billes par sacs de 10. ${maj(p.il)} remplit ${fmt(dz)} sacs. Combien de billes restent hors des sacs ?`,
+          `${quelquun().nom} range ${fmt(n)} cartes par paquets de 10 : ${fmt(dz)} paquets. Combien restent seules ?`,
+          `${p.nom} range ${fmt(n)} billes en ${fmt(dz)} sacs de 10. Combien de billes restent hors des sacs ?`,
           `Complète : ${fmt(n)} = ${fmt(dz)} dizaines + … unités.`,
         ]),
         format: "qcm",
@@ -725,11 +736,11 @@ function ecritureEnUnites(): Q {
           `Quel nombre fait ${c} centaines et ${u} unités ?`,
           `${p.nom} a ${c} plaques de cent et ${u} petits cubes. Quel nombre a-t-${p.il} ?`,
           `Le pirate a ${c} sacs de 100 pièces et ${u} pièces en plus. Combien de pièces en tout ?`,
-          `La bibliothécaire range ${c} étagères de 100 livres et ${u} livres sur la table. Combien de livres ?`,
+          `La bibliothécaire a ${c} étagères de 100 livres et ${u} livres en plus. Combien de livres ?`,
           `Complète : ${c} centaines et ${u} unités = …`,
           `${quelquun().nom} écrit le nombre qui a ${c} centaines et ${u} unités. Lequel ?`,
           `Pic a ${c} sachets de 100 graines et ${u} graines toutes seules. Combien de graines ?`,
-          `Au cirque, ${c} rangées de 100 places sont pleines, et ${u} personnes sont debout. Combien de spectateurs ?`,
+          `Au cirque, ${c} rangées de 100 places sont pleines et ${u} personnes debout. Combien de spectateurs ?`,
         ]),
         format: "qcm",
         choices: choix(correct, [fmt(c * 10 + u), fmt(c * 100 + u * 10), String(c) + String(u), fmt(c * 1000 + u)]),
@@ -811,7 +822,7 @@ function rangsQuiDebordent(): Q {
     `Quel nombre fait ${m} milliers et ${k} ${rang} ?`,
     `${p.nom} a ${m} gros cubes de mille et ${k} ${deCentaines ? "plaques de cent" : "barres de dix"}. Quel nombre a-t-${p.il} ?`,
     `Complète : ${m} milliers + ${k} ${rang} = …`,
-    `Le pirate a ${m} coffres de 1 000 pièces et ${k} sacs de ${deCentaines ? "100" : "10"} pièces. Combien de pièces en tout ?`,
+    `Le pirate a ${m} coffres de 1 000 pièces et ${k} sacs de ${deCentaines ? "100" : "10"}. Combien de pièces ?`,
     `Pic compte ${m} milliers et ${k} ${rang}. Quel nombre trouve-t-il ?`,
   ]);
   const v = deCentaines ? 100 : 10;
@@ -879,9 +890,9 @@ function quiAPlus(): Q {
   const [p, q] = deuxPersonnes();
   const [a, b] = deuxProches();
   const SCORES: readonly [string, string][] = [
-    ["a marqué", "points au jeu vidéo"],
-    ["a compté", "étoiles dans le ciel"],
-    ["a récolté", "grains de riz pour la poule"],
+    ["a marqué", "points au jeu"],
+    ["a compté", "étoiles"],
+    ["a récolté", "grains de riz"],
     ["a lu", "pages cette année"],
     ["a fait", "pas aujourd'hui"],
     ["a gagné", "points à la kermesse"],
@@ -890,7 +901,7 @@ function quiAPlus(): Q {
   const plusGrand = Math.random() < 0.6;
   const gagnant = (plusGrand ? a > b : a < b) ? p.nom : q.nom;
   const text = pick([
-    `${p.nom} ${v} ${fmt(a)} ${quoi}. ${q.nom} en ${v} ${fmt(b)}. Qui en a le ${plusGrand ? "plus" : "moins"} ?`,
+    `${p.nom} ${v} ${fmt(a)} ${quoi}, ${q.nom} ${fmt(b)}. Qui en a le ${plusGrand ? "plus" : "moins"} ?`,
     `${p.nom} : ${fmt(a)} ${quoi}. ${q.nom} : ${fmt(b)}. Qui en a le ${plusGrand ? "plus" : "moins"} ?`,
   ]);
   return {
@@ -921,8 +932,8 @@ function ranger(): Q {
   const liste = shuffle(nombres).map(fmt).join(" ; ");
   const text = pick([
     `Range ces nombres du plus ${croissant ? "petit au plus grand" : "grand au plus petit"} : ${liste}`,
-    `${p.nom} doit ranger ${liste} dans l'ordre ${croissant ? "croissant" : "décroissant"}. Quel rangement est juste ?`,
-    `Quatre équipes ont ces scores : ${liste}. Range-les du plus ${croissant ? "petit au plus grand" : "grand au plus petit"}.`,
+    `${p.nom} range ${liste} dans l'ordre ${croissant ? "croissant" : "décroissant"}. Quel rangement est juste ?`,
+    `Range ces scores du plus ${croissant ? "petit au plus grand" : "grand au plus petit"} : ${liste}`,
   ]);
   const faux1 = [...tri];
   [faux1[1], faux1[2]] = [faux1[2], faux1[1]];
@@ -982,8 +993,8 @@ function compareMateriel(): Q {
   const gagnant = (plus ? n > autre : n < autre) ? p.nom : q.nom;
   const text = pick([
     `Le dessin montre le nombre ${de(p.nom)}. ${q.nom} a écrit ${fmt(autre)}. Qui a le plus ${plus ? "grand" : "petit"} nombre ?`,
-    `${p.nom} a construit ce nombre avec le matériel. ${q.nom}, lui, a le nombre ${fmt(autre)}. Lequel des deux a le plus ${plus ? "grand" : "petit"} nombre ?`,
-    `Le matériel montre les points ${de(p.nom)} au jeu. ${q.nom} a ${fmt(autre)} points. Qui a le ${plus ? "plus" : "moins"} de points ?`,
+    `${p.nom} a construit ce nombre. ${q.nom} a ${fmt(autre)}. Qui a le plus ${plus ? "grand" : "petit"} nombre ?`,
+    `Le matériel montre les points ${de(p.nom)}. ${q.nom} a ${fmt(autre)} points. Qui a le ${plus ? "plus" : "moins"} de points ?`,
   ]);
   return {
     text,
@@ -1012,7 +1023,7 @@ function comprisEntre(): Q {
   const text = pick([
     `${fmt(x)} est-il compris entre ${fmt(a)} et ${fmt(b)} ?`,
     `${p.nom} dit que ${fmt(x)} est entre ${fmt(a)} et ${fmt(b)}. A-t-${p.il} raison ?`,
-    `Le trésor est caché entre la case ${fmt(a)} et la case ${fmt(b)}. Peut-il être à la case ${fmt(x)} ?`,
+    `Le trésor est entre la case ${fmt(a)} et la case ${fmt(b)}. Peut-il être en ${fmt(x)} ?`,
   ]);
   return {
     text,
@@ -1020,6 +1031,8 @@ function comprisEntre(): Q {
     choices: ["oui", "non"],
     expected: [correct],
     comparator: "mcq_exact",
+    // La droite montre les deux bornes, jamais le nombre testé.
+    canvas: droite(a, b, (b - a) / 10, [], [a, b]),
     explanation: exp(
       "Être compris entre deux nombres, c'est être plus grand que le premier et plus petit que le second.",
       "On compare le nombre aux deux bornes.",
@@ -1038,7 +1051,7 @@ function lequelEntre(): Q {
   const p = quelquun();
   const text = pick([
     `Quel nombre est compris entre ${fmt(a)} et ${fmt(b)} ?`,
-    `${p.nom} pense à un nombre entre ${fmt(a)} et ${fmt(b)}. Lequel peut-ce être ?`,
+    `${p.nom} pense à un nombre entre ${fmt(a)} et ${fmt(b)}. Lequel est possible ?`,
     `Le livre a plus de ${fmt(a)} pages et moins de ${fmt(b)}. Combien de pages peut-il avoir ?`,
   ]);
   return {
@@ -1047,6 +1060,7 @@ function lequelEntre(): Q {
     choices: choix(correct, pieges.map(fmt)),
     expected: [correct],
     comparator: "mcq_exact",
+    canvas: droite(a, b, 100, [], [a, b]),
     explanation: exp(
       "Un nombre compris entre deux autres est plus grand que le premier et plus petit que le second.",
       "On compare chaque proposition aux deux bornes.",
@@ -1087,11 +1101,15 @@ function encadrement(d: Etoile): Q {
     `Encadre ${fmt(n)} entre deux ${r.nom} qui se suivent.`,
     `Entre quelles ${r.nom === "milliers" ? "milliers" : r.nom} qui se suivent se trouve ${fmt(n)} ?`,
     `${p.nom} veut encadrer ${fmt(n)} ${r.pres}. Quel encadrement est juste ?`,
-    `${decor(n)} Encadre ce nombre entre deux ${r.nom} qui se suivent.`,
+    `${decor(n)} Encadre-le entre deux ${r.nom} qui se suivent.`,
+    `${fmt(n)} est entre deux ${r.nom} qui se suivent. Lesquel${r.nom === "milliers" ? "s" : "les"} ?`,
+    `Quel encadrement de ${fmt(n)} ${r.pres} est juste ?`,
   ]).replace("Entre quelles milliers", "Entre quels milliers");
   const avecDessin = r.pas >= 100 && Math.random() < 0.6;
+  // Le dessin, quand il y a la place, est annoncé (et l'énoncé change de squelette).
+  const aide = pick(["Aide-toi de la droite.", "Regarde le point rouge.", "La droite peut t'aider."]);
   return {
-    text: avecDessin ? `${text} Le point rouge le montre sur la droite.` : text,
+    text: avecDessin && nbMots(`${text} ${aide}`) <= 18 ? `${text} ${aide}` : text,
     format: "qcm",
     choices: choix(correct, [ecrire(bas - r.pas, haut), ecrire(bas - r.pas, bas), ecrire(haut, haut + r.pas), ecrire(bas, haut + r.pas)].filter(dansLeProgramme)),
     expected: [correct],
@@ -1150,7 +1168,7 @@ function plusProche(): Q {
     `${fmt(n)} est entre ${fmt(bas)} et ${fmt(haut)}. Duquel est-il le plus proche ?`,
     `${p.nom} arrondit ${fmt(n)} ${r.pas === 1000 ? "au millier le plus proche" : `à la ${r.sing} la plus proche`}. Que trouve-t-${p.il} ?`,
     `Quel${r.pas === 1000 ? " millier" : "le " + r.sing} est le plus proche de ${fmt(n)} ?`,
-    `La fusée est au kilomètre ${fmt(n)}. De quelle borne est-elle la plus proche : ${fmt(bas)} ou ${fmt(haut)} ?`,
+    `La fusée est au kilomètre ${fmt(n)}. Est-elle plus près de ${fmt(bas)} ou de ${fmt(haut)} ?`,
   ]);
   const avecDessin = Math.random() < 0.5;
   return {
@@ -1215,10 +1233,10 @@ function textePoint(): string {
   ]);
   return `${arrive} ${pick([
     "Sur quel nombre ?",
-    "Quel nombre est caché sous le point rouge ?",
+    "Quel nombre est sous le point rouge ?",
     "Quel nombre montre le point rouge ?",
     "Quel est ce nombre ?",
-    "Quel nombre faut-il écrire à la place du « ? » ?",
+    "Quel nombre remplace le « ? » ?",
   ])}`;
 }
 
@@ -1254,7 +1272,7 @@ function trouverPas(): Q {
   const text = pick([
     "De combien en combien cette droite est-elle graduée ?",
     "D'un trait au suivant, de combien avance-t-on ?",
-    `${p.nom} veut savoir ce que vaut un petit saut d'un trait au suivant. Combien vaut-il ?`,
+    `${p.nom} saute d'un trait au suivant. Combien vaut ce saut ?`,
     "Pic saute d'un trait au trait suivant. De combien avance-t-il ?",
     `${quiSurLaDroite().sujet} fait un saut d'un trait. Combien ce saut vaut-il ?`,
     "Quel est le pas de cette droite graduée ?",
@@ -1315,7 +1333,7 @@ function avancerTraits(): Q {
   const text = pick([
     `${p.nom} part de ${fmt(depart)} et avance de ${k} traits. Sur quel nombre arrive-t-${p.il} ?`,
     `${sujet} part de ${fmt(depart)} et fait ${k} sauts d'un trait. Où est-${e ? "elle" : "il"} arrivé${e} ?`,
-    `${sujet} part du point bleu et avance de ${k} traits vers la droite. Sur quel nombre s'arrête-t-${e ? "elle" : "il"} ?`,
+    `${sujet} part du point bleu et avance de ${k} traits. Où s'arrête-t-${e ? "elle" : "il"} ?`,
     `${sujet} est au départ. ${maj(e ? "elle" : "il")} avance de ${k} traits. Quel nombre atteint-${e ? "elle" : "il"} ?`,
   ]);
   return {
@@ -1357,10 +1375,10 @@ function chiffresImposes(d: Etoile): Q {
   const p = quelquun();
   const liste = shuffle(chiffres).join(", ");
   const text = pick([
-    `Avec les chiffres ${liste}, utilisés une fois chacun, quel est le plus ${cherche ? "grand" : "petit"} nombre de quatre chiffres ?`,
-    `Le cadenas du coffre s'ouvre avec le plus ${cherche ? "grand" : "petit"} nombre fait avec ${liste} (une fois chacun). Quel est le code ?`,
-    `${p.nom} a quatre cartes : ${liste}. ${maj(p.il)} les aligne pour faire le plus ${cherche ? "grand" : "petit"} nombre possible. Lequel ?`,
-    `Le dragon ne laisse passer que le plus ${cherche ? "grand" : "petit"} nombre écrit avec ${liste}. Lequel faut-il dire ?`,
+    `Avec ${liste} (une fois chacun), quel est le plus ${cherche ? "grand" : "petit"} nombre possible ?`,
+    `Le code est le plus ${cherche ? "grand" : "petit"} nombre fait avec ${liste} (une fois chacun). Lequel ?`,
+    `${p.nom} a quatre cartes : ${liste}. Quel est le plus ${cherche ? "grand" : "petit"} nombre qu'${p.il} peut former ?`,
+    `Le dragon veut le plus ${cherche ? "grand" : "petit"} nombre écrit avec ${liste} (une fois chacun). Lequel ?`,
   ]);
   const faux = [fmt(cherche ? petit : grand), fmt(Number(chiffres.join("")) || grand - 9), fmt(Number([...asc].reverse().join("")) === grand ? grand - 90 : Number([...asc].reverse().join(""))), fmt(Number([0, ...asc.filter((x) => x !== 0)].join("")) || petit + 9), fmt(cherche ? grand - 9 : petit + 9)];
   return {
@@ -1384,15 +1402,14 @@ function nombreMystere(d: Etoile): Q {
   const [m, c, dz, u] = d >= 5 ? [rint(1, 9), rint(0, 9), rint(0, 9), rint(0, 9)] : [rint(1, 9), rint(0, 9), rint(1, 9), rint(0, 9)];
   const n = m * 1000 + c * 100 + dz * 10 + u;
   const correct = fmt(n);
-  const indices = shuffle([
-    `mon chiffre des milliers est ${m}`,
-    `mon chiffre des centaines est ${c}`,
-    `mon chiffre des dizaines est ${dz}`,
-    `mon chiffre des unités est ${u}`,
+  // ⛔ 14/11 : « mon chiffre des milliers est 6 » × 4 faisait 37 mots ; « milliers : 6 » suffit.
+  const indices = shuffle([`milliers : ${m}`, `centaines : ${c}`, `dizaines : ${dz}`, `unités : ${u}`]);
+  const [debut, question] = pick([
+    ["Je suis un nombre de quatre chiffres.", "Qui suis-je ?"],
+    ["Pic a caché un nombre.", "Quel est ce nombre ?"],
+    ["Le code du château :", "Quel est ce code ?"],
   ]);
-  const qui = pick(["Je suis un nombre de quatre chiffres", "Pic a caché un nombre de quatre chiffres", "Le nombre secret du château a quatre chiffres"]);
-  const debut = qui.startsWith("Je") ? `${qui} : ` : `${qui}. Indices : `;
-  const text = `${debut}${indices.join(", ")}. ${qui.startsWith("Je") ? "Qui suis-je ?" : "Quel est ce nombre ?"}`;
+  const text = `${debut} ${debut.endsWith(":") ? indices.join(" ; ") : maj(indices.join(" ; "))}. ${question}`;
   return {
     text,
     format: "qcm",
@@ -1426,12 +1443,12 @@ function ajouterAuMateriel(): Q {
   const text = ajoute
     ? pick([
         `${p.nom} ajoute ${a.quoi} au matériel dessiné. Quel nombre obtient-${p.il} ?`,
-        `Pic le paille-en-queue pose ${a.quoi} de plus sur le dessin. Quel est le nouveau nombre ?`,
+        `Pic le paille-en-queue ajoute ${a.quoi}. Quel est le nouveau nombre ?`,
         `On ajoute ${a.quoi} à ce matériel. Quel nombre a-t-on maintenant ?`,
       ])
     : pick([
         `${p.nom} enlève ${a.quoi} au matériel dessiné. Quel nombre reste-t-il ?`,
-        `Le chat a fait tomber ${a.quoi} de la table. Quel nombre reste-t-il sur le dessin ?`,
+        `Le chat fait tomber ${a.quoi} du dessin. Quel nombre reste-t-il ?`,
       ]);
   return {
     text,
@@ -1457,8 +1474,8 @@ function ecartGrandPetit(): Q {
   const correct = fmt(ecart);
   const p = quelquun();
   const text = pick([
-    `Avec les chiffres ${chiffres.join(", ")} (une fois chacun), on écrit le plus grand nombre puis le plus petit. Quel est l'écart entre les deux ?`,
-    `${p.nom} fabrique le plus grand et le plus petit nombre avec ${chiffres.join(", ")}. Combien de plus a le grand ?`,
+    `Avec ${chiffres.join(", ")} (une fois chacun), écris le plus grand et le plus petit nombre. Quel écart ?`,
+    `${p.nom} fait le plus grand et le plus petit nombre avec ${chiffres.join(", ")}. Quel écart ?`,
   ]);
   return {
     text,

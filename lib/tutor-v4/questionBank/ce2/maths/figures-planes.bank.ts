@@ -385,34 +385,34 @@ const AMORCE = [
   "Voici un dessin.",
   "Regarde attentivement.",
   "La maîtresse a tracé cette figure.",
-  "Pic le paille-en-queue montre cette figure.",
+  "Pic montre cette figure.",
 ];
 const amorce = () => un(AMORCE);
 const phrase = (...morceaux: string[]) => morceaux.filter(Boolean).join(" ");
 
 /** ★3+ : une petite histoire autour d'une forme DESSINÉE. */
 const HISTOIRE_FORME = [
-  "Nina a découpé cette forme dans du carton pour la kermesse.",
-  "Téo a tracé cette forme sur le sable avec un bâton.",
-  "Pic le paille-en-queue a trouvé cette forme dans un livre.",
-  "Zoé a dessiné cette forme sur son cahier.",
-  "Ravi a posé cette forme sur la table du goûter.",
-  "La maîtresse affiche cette forme au tableau.",
-  "Le jardinier a dessiné ce massif de fleurs, vu d'en haut.",
+  "Nina a découpé cette forme en carton.",
+  "Téo a tracé cette forme dans le sable.",
+  "Pic a trouvé cette forme dans un livre.",
+  "Zoé a dessiné cette forme.",
+  "Ravi a posé cette forme sur la table.",
+  "La maîtresse affiche cette forme.",
+  "Le jardinier a dessiné ce massif de fleurs.",
   "La boulangère a découpé ce biscuit.",
-  "Lou a peint cette forme sur la porte de sa cabane.",
-  "Malo a trouvé cette forme sur la carte au trésor des pirates.",
-  "Sacha a vu cette forme sur la fusée de son livre.",
-  "Amir a tracé cette forme à la craie dans la cour.",
-  "Jade a collé cette gommette sur sa feuille.",
-  "Naïa a dessiné cette forme sur la voile de son bateau.",
-  "Tom a repéré cette forme sur le mur du zoo.",
-  "Lina a dessiné cette forme pour décorer un gâteau d'anniversaire.",
-  "Yanis a vu cette forme sur le chapiteau du cirque.",
-  "L'architecte a dessiné cette forme sur son plan.",
-  "Le chef cuisinier a découpé cette pâte à tarte.",
+  "Lou a peint cette forme sur sa cabane.",
+  "Malo a trouvé cette forme chez les pirates.",
+  "Sacha a vu cette forme sur une fusée.",
+  "Amir a tracé cette forme à la craie.",
+  "Jade a collé cette gommette.",
+  "Naïa a peint cette forme sur une voile.",
+  "Tom a vu cette forme au zoo.",
+  "Lina a décoré un gâteau avec cette forme.",
+  "Yanis a vu cette forme au cirque.",
+  "L'architecte a dessiné cette forme.",
+  "Le chef a découpé cette pâte à tarte.",
   "Ti Margo a tracé cette forme dans la forêt.",
-  "Inès a dessiné cette forme sur le dos d'un dragon en papier.",
+  "Inès a dessiné cette forme sur un dragon.",
   "La pompière a peint cette forme sur son camion.",
 ];
 const histoire = () => un(HISTOIRE_FORME);
@@ -425,7 +425,7 @@ const ENFANTS: Enfant[] = [
   { nom: "Lina", il: "elle" }, { nom: "Yanis", il: "il" }, { nom: "Léo", il: "il" }, { nom: "Maya", il: "elle" },
 ];
 const enfant = () => un(ENFANTS);
-const aRaison = (e: Enfant) => un([`A-t-${e.il} raison ?`, `${cap(e.il)} a raison ?`, `Qu'en penses-tu ? A-t-${e.il} raison ?`]);
+const aRaison = (e: Enfant) => un([`A-t-${e.il} raison ?`, `${cap(e.il)} a raison ?`]);
 
 const OUI_VRAI = "oui, c'est vrai";
 const NON_FAUX = "non, c'est faux";
@@ -461,11 +461,11 @@ const DESCRIPTIONS: Array<{ nom: string; d: string }> = [
   { nom: "un rectangle", d: "quatre angles droits, et ses côtés opposés de même longueur" },
   { nom: "un rectangle", d: "quatre angles droits, deux grands côtés et deux petits côtés" },
   { nom: "un losange", d: "quatre côtés de la même longueur, mais aucun angle droit" },
-  { nom: "un losange", d: "quatre côtés égaux et des angles pointus ou larges, jamais droits" },
+  { nom: "un losange", d: "quatre côtés égaux, des angles pointus ou larges" },
   { nom: "un triangle", d: "trois côtés et trois sommets" },
   { nom: "un triangle", d: "seulement trois côtés droits" },
   { nom: "un cercle", d: "une seule ligne courbe et aucun côté" },
-  { nom: "un cercle", d: "un centre, et tous ses points à la même distance du centre" },
+  { nom: "un cercle", d: "tous ses points à la même distance de son centre" },
 ];
 
 function dessinNomme(nom: string, inclinaison: number, codage = true): CanvasFigure {
@@ -489,9 +489,7 @@ const reconnaitreItems: TutorBankItemV4[] = [
     const f = un(DESCRIPTIONS);
     const t = un([
       `Quelle figure a ${f.d} ?`,
-      `Je suis une figure. J'ai ${f.d}. Qui suis-je ?`,
       `Une figure a ${f.d}. Comment s'appelle-t-elle ?`,
-      `Quel est le nom d'une figure qui a ${f.d} ?`,
       `Trouve la figure qui a ${f.d}.`,
       `Pic cherche une figure qui a ${f.d}. Laquelle ?`,
     ]);
@@ -549,7 +547,7 @@ const reconnaitreItems: TutorBankItemV4[] = [
       { forme: "losange" as const, dit: "C'est un losange : quatre côtés égaux, pas d'angle droit.", juste: "oui : c'est bien un losange", faux: ["non : c'est un carré tourné", "non : c'est un rectangle", "non : un losange a quatre angles droits"] },
     ]);
     return {
-      text: phrase(histoire(), `${e.nom} dit : « ${cas.dit} »`, aRaison(e)),
+      text: phrase(`${e.nom} dit : « ${cas.dit} »`, aRaison(e)),
       ...qcm(cas.juste, cas.faux),
       canvas: dessinQuad(cas.forme, { inclinaison: un([30, 35, 40, 45, -30, -40]), lettres: un(JEUX_DE_LETTRES) }),
       explanation: exp(
@@ -644,13 +642,13 @@ const triangleRectangleItems: TutorBankItemV4[] = [
     const l = un(LETTRES_TRI);
     const s = un(SOMMETS);
     const cas = un([
-      { dit: "Ce triangle n'est pas rectangle, car l'angle droit n'est pas en bas.", juste: "non : il a un angle droit, c'est un triangle rectangle", faux: ["oui : l'angle droit doit être en bas", "oui : un triangle penché n'a pas d'angle droit", "oui : il faudrait deux angles droits"] },
+      { dit: "Il n'est pas rectangle : l'angle droit n'est pas en bas.", juste: "non : il a un angle droit, c'est un triangle rectangle", faux: ["oui : l'angle droit doit être en bas", "oui : un triangle penché n'a pas d'angle droit", "oui : il faudrait deux angles droits"] },
       { dit: "Ce triangle est rectangle, même penché.", juste: "oui : le petit carré marque un angle droit", faux: ["non : l'angle droit doit être en bas", "non : un triangle penché n'a pas d'angle droit", "non : il faudrait deux angles droits"] },
       { dit: "Si on le tourne, il ne sera plus rectangle.", juste: "non : en le tournant, l'angle droit reste droit", faux: ["oui : tourner change les angles", "oui : il deviendra un carré", "oui : il perdra un côté"] },
       { dit: `Ce triangle a un angle droit en ${nomDe(l, s)}.`, juste: "oui : le petit carré est sur ce sommet", faux: ["non : il n'a pas d'angle droit", "non : l'angle droit est toujours en bas", "non : il a trois angles droits"] },
     ]);
     return {
-      text: phrase(histoire(), `${e.nom} dit : « ${cas.dit} »`, aRaison(e)),
+      text: phrase(`${e.nom} dit : « ${cas.dit} »`, aRaison(e)),
       ...qcm(cas.juste, cas.faux),
       canvas: dessinTriangle({ droitEn: s, marquer: true, inclinaison: un([35, 60, 135, 160, -50, 200]), lettres: l }),
       explanation: exp(
@@ -669,7 +667,7 @@ const LOS = G("ce2_figure_losange");
 const OBJETS_LOSANGE: Array<{ o: string; u: "cm" | "m"; min: number; max: number }> = [
   { o: "Le cerf-volant de Téo", u: "cm", min: 30, max: 60 },
   { o: "Le panneau du chantier", u: "cm", min: 40, max: 80 },
-  { o: "Un carreau du vitrail du château", u: "cm", min: 8, max: 20 },
+  { o: "Un carreau du vitrail", u: "cm", min: 8, max: 20 },
   { o: "Le biscuit de Lina", u: "cm", min: 4, max: 9 },
   { o: "Un motif du pull de Ravi", u: "cm", min: 3, max: 8 },
   { o: "La gommette de Jade", u: "cm", min: 2, max: 6 },
@@ -678,7 +676,7 @@ const OBJETS_LOSANGE: Array<{ o: string; u: "cm" | "m"; min: number; max: number
   { o: "Le tapis du chat", u: "cm", min: 40, max: 90 },
   { o: "Le drapeau de la kermesse", u: "cm", min: 20, max: 50 },
   { o: "La tuile du toit du château", u: "cm", min: 15, max: 30 },
-  { o: "Le massif de fleurs du jardinier", u: "m", min: 2, max: 9 },
+  { o: "Le massif du jardinier", u: "m", min: 2, max: 9 },
   { o: "La voile du bateau pirate", u: "m", min: 2, max: 6 },
   { o: "Le coussin de Zoé", u: "cm", min: 25, max: 45 },
   { o: "La carte de la boulangère", u: "cm", min: 6, max: 15 },
@@ -723,13 +721,13 @@ const losangeItems: TutorBankItemV4[] = [
     const c = entre(ob.min, ob.max);
     const l = un(JEUX_DE_LETTRES);
     const q = un([
-      ["Combien mesure chacun des trois autres côtés ?", 0],
+      ["Combien mesure chaque autre côté ?", 0],
       [`Combien mesure le côté [${l[2]}${l[3]}] ?`, 0],
       [`Combien mesure le côté [${l[1]}${l[2]}] ?`, 0],
       ["Quelle est la longueur des autres côtés ?", 0],
     ] as const)[0];
     return {
-      text: phrase(`${ob.o} est un losange.`, `Le côté [${l[0]}${l[1]}] mesure ${c} ${ob.u}.`, q),
+      text: phrase(`${ob.o} est un losange.`, `[${l[0]}${l[1]}] mesure ${c} ${ob.u}.`, q),
       ...qcmN(c, [2 * c, 4 * c, c + 1, c - 1, c + 2], ob.u),
       canvas: dessinQuad("losange", { inclinaison: un([0, 15, -20, 30]), lettres: l, cotes: { AB: `${c} ${ob.u}` } }),
       explanation: exp(
@@ -794,8 +792,8 @@ const OBJETS_RECTANGLE: Array<{ o: string; u: "cm" | "m"; L: [number, number]; l
   { o: "La porte de la cabane", u: "cm", L: [150, 200], l: [60, 90] },
   { o: "Le tapis de la chambre", u: "cm", L: [120, 200], l: [60, 100] },
   { o: "La carte au trésor", u: "cm", L: [30, 50], l: [15, 25] },
-  { o: "Le terrain de foot de l'école", u: "m", L: [40, 90], l: [20, 35] },
-  { o: "L'étiquette du pot de confiture", u: "cm", L: [8, 12], l: [3, 6] },
+  { o: "Le terrain de foot", u: "m", L: [40, 90], l: [20, 35] },
+  { o: "L'étiquette du pot", u: "cm", L: [8, 12], l: [3, 6] },
   { o: "La fenêtre du château", u: "cm", L: [80, 120], l: [40, 60] },
   { o: "La nappe du goûter", u: "cm", L: [150, 250], l: [80, 120] },
   { o: "Le livre de la bibliothèque", u: "cm", L: [25, 32], l: [15, 21] },
@@ -804,7 +802,7 @@ const OBJETS_RECTANGLE: Array<{ o: string; u: "cm" | "m"; L: [number, number]; l
   { o: "Le bac à sable", u: "m", L: [4, 8], l: [2, 3] },
   { o: "La piscine de Malo", u: "m", L: [6, 12], l: [3, 5] },
   { o: "Le potager du jardinier", u: "m", L: [8, 15], l: [3, 6] },
-  { o: "L'aquarium de Ravi, vu de face", u: "cm", L: [50, 90], l: [25, 40] },
+  { o: "L'aquarium de Ravi", u: "cm", L: [50, 90], l: [25, 40] },
   { o: "Le tableau de la classe", u: "cm", L: [200, 300], l: [100, 120] },
   { o: "La boîte de crayons", u: "cm", L: [15, 22], l: [8, 12] },
 ];
@@ -822,8 +820,8 @@ const proprietesItems: TutorBankItemV4[] = [
     return {
       text: phrase(
         `${ob.o} est un rectangle.`,
-        `[${l[0]}${l[1]}] mesure ${L} ${ob.u} et [${l[1]}${l[2]}] mesure ${la} ${ob.u}.`,
-        un([`Combien mesure [${nomCherche}] ?`, `Quelle est la longueur de [${nomCherche}] ?`, `Trouve la longueur du côté [${nomCherche}].`]),
+        `[${l[0]}${l[1]}] : ${L} ${ob.u}, [${l[1]}${l[2]}] : ${la} ${ob.u}.`,
+        un([`Combien mesure [${nomCherche}] ?`, `Et [${nomCherche}] ?`, `Trouve [${nomCherche}].`]),
       ),
       ...qcmN(rep, [cherche === "CD" ? la : L, L + la, rep + 1, rep * 2], ob.u),
       canvas: dessinQuad("rectangle", { inclinaison: un([0, 0, 10, -10]), lettres: l, cotes: { AB: `${L} ${ob.u}`, BC: `${la} ${ob.u}` } }),
@@ -881,7 +879,7 @@ const proprietesItems: TutorBankItemV4[] = [
       const juste = `[${l[paire[2]]}${l[paire[3]]}]`;
       const autres = [`[${l[paire[1]]}${l[paire[2]]}]`, `[${l[paire[3]]}${l[paire[0]]}]`, `[${l[paire[0]]}${l[paire[2]]}]`];
       return {
-        text: phrase(amorce(), "Ce rectangle a quatre angles droits.", un([`Quel côté a la même longueur que ${cote} ?`, `Quel côté est aussi long que ${cote} ?`, `${cote} a la même longueur qu'un autre côté. Lequel ?`])),
+        text: phrase(amorce(), un([`Quel côté a la même longueur que ${cote} ?`, `Quel côté est aussi long que ${cote} ?`, `${cote} a la même longueur qu'un autre côté. Lequel ?`])),
         ...qcm(juste, autres),
         canvas,
         explanation: exp(
@@ -1002,7 +1000,7 @@ const construireItems: TutorBankItemV4[] = [
         amorce(),
         un([
           "Pour reproduire cette figure, quel instrument faut-il en plus de la règle ?",
-          "Tu veux tracer la même figure. Que prends-tu en plus de la règle ?",
+          "Pour la tracer, que prends-tu en plus de la règle ?",
           "En plus de la règle, quel instrument sert à tracer cette figure ?",
           "Quel instrument t'aide à tracer cette figure, avec la règle ?",
         ]),
@@ -1041,7 +1039,7 @@ const construireItems: TutorBankItemV4[] = [
         [`un carré de ${entre(3, 9)} cm de côté`, "la règle graduée et l'équerre"],
         [`un rectangle de ${entre(6, 10)} cm sur ${entre(2, 5)} cm`, "la règle graduée et l'équerre"],
         [`un cercle de rayon ${entre(2, 8)} cm`, "le compas et la règle graduée"],
-        [`un triangle rectangle de côtés ${entre(3, 6)} cm et ${entre(4, 8)} cm autour de l'angle droit`, "la règle graduée et l'équerre"],
+        ["un triangle rectangle", "la règle graduée et l'équerre"],
       ] as const);
       return {
         text: phrase(`${e.nom} veut construire ${fig}.`, un(["Quels instruments lui faut-il ?", "De quels instruments a-t-" + e.il + " besoin ?", "Que doit-" + e.il + " sortir de sa trousse ?"])),
@@ -1065,8 +1063,8 @@ const construireItems: TutorBankItemV4[] = [
     return {
       text: phrase(
         `${e.nom} construit ${fam === "carre" ? `un carré de ${L} cm de côté` : `un rectangle de ${L} cm sur ${la} cm`}.`,
-        `${cap(e.il)} a déjà tracé [${l[0]}${l[1]}] de ${L} cm.`,
-        un(["Que trace-t-" + e.il + " ensuite ?", "Que doit-" + e.il + " tracer maintenant ?"]),
+        `${cap(e.il)} a tracé [${l[0]}${l[1]}] de ${L} cm.`,
+        un(["Que trace-t-" + e.il + " ensuite ?", "Et ensuite ?"]),
       ),
       ...qcm(juste, faux),
       explanation: exp(
@@ -1117,25 +1115,25 @@ const CER = G("ce2_figure_cercle");
 const NOMS_POINTS: Array<[string, string]> = [["A", "B"], ["M", "N"], ["E", "F"], ["R", "S"], ["P", "Q"], ["K", "L"]];
 
 const OBJETS_RONDS: Array<{ o: string; u: "cm" | "m"; r: [number, number] }> = [
-  { o: "La roue du vélo de Téo", u: "cm", r: [20, 35] },
-  { o: "La pizza du chef cuisinier", u: "cm", r: [12, 20] },
-  { o: "Le tapis rond de la classe", u: "cm", r: [60, 90] },
+  { o: "La roue de Téo", u: "cm", r: [20, 35] },
+  { o: "La pizza du chef", u: "cm", r: [12, 20] },
+  { o: "Le tapis rond", u: "cm", r: [60, 90] },
   { o: "La piste du cirque", u: "m", r: [5, 9] },
   { o: "Le bassin du jardin", u: "m", r: [2, 6] },
   { o: "Le trampoline de Lou", u: "m", r: [1, 3] },
   { o: "L'horloge de l'école", u: "cm", r: [15, 25] },
-  { o: "Le gâteau d'anniversaire de Lina", u: "cm", r: [10, 15] },
+  { o: "Le gâteau de Lina", u: "cm", r: [10, 15] },
   { o: "La bouée de Malo", u: "cm", r: [25, 40] },
   { o: "Le hublot de la fusée", u: "cm", r: [20, 30] },
   { o: "Le tambour de Ravi", u: "cm", r: [15, 25] },
   { o: "L'assiette du goûter", u: "cm", r: [9, 13] },
-  { o: "Le manège de la kermesse", u: "m", r: [3, 7] },
-  { o: "La table ronde de la bibliothèque", u: "cm", r: [50, 70] },
-  { o: "Le nid de Pic, vu d'en haut", u: "cm", r: [8, 14] },
+  { o: "Le manège", u: "m", r: [3, 7] },
+  { o: "La table ronde", u: "cm", r: [50, 70] },
+  { o: "Le nid de Pic", u: "cm", r: [8, 14] },
   { o: "La galette des rois", u: "cm", r: [11, 16] },
 ];
 
-const OBJETS_A_TRACER = ["le soleil", "une roue", "une pizza", "un ballon", "une pièce de monnaie", "la lune", "une planète", "un hublot", "une bulle", "une assiette", "un gâteau", "un tambour"];
+const OBJETS_A_TRACER = ["le soleil", "une roue", "une pizza", "un ballon", "une pièce", "la lune", "une planète", "un hublot", "une bulle", "une assiette", "un gâteau", "un tambour"];
 
 const cercleItems: TutorBankItemV4[] = [
   // ★3 — rayon et diamètre d'un objet rond.
@@ -1146,7 +1144,7 @@ const cercleItems: TutorBankItemV4[] = [
     const [n1, n2] = un(NOMS_POINTS);
     if (sens === "r2d") {
       return {
-        text: phrase(`${ob.o} est un cercle.`, `Son rayon mesure ${r} ${ob.u}.`, un(["Combien mesure son diamètre ?", "Quelle est la longueur du diamètre ?", "Trouve son diamètre."])),
+        text: phrase(`${ob.o} est un cercle.`, `Son rayon mesure ${r} ${ob.u}.`, un(["Combien mesure son diamètre ?", "Trouve son diamètre."])),
         ...qcmN(2 * r, [r, r + 2, 4 * r, r + 1], ob.u),
         canvas: dessinCercle({ segment: "rayon", noms: [n1, n2], etiquette: `${r} ${ob.u}` }),
         explanation: exp(
@@ -1158,7 +1156,7 @@ const cercleItems: TutorBankItemV4[] = [
       };
     }
     return {
-      text: phrase(`${ob.o} est un cercle.`, `Son diamètre mesure ${2 * r} ${ob.u}.`, un(["Combien mesure son rayon ?", "Quelle est la longueur du rayon ?", "Trouve son rayon."])),
+      text: phrase(`${ob.o} est un cercle.`, `Son diamètre mesure ${2 * r} ${ob.u}.`, un(["Combien mesure son rayon ?", "Trouve son rayon."])),
       ...qcmN(r, [2 * r, 4 * r, r + 1, r - 1], ob.u),
       canvas: dessinCercle({ segment: "diametre", noms: [n1, n2], etiquette: `${2 * r} ${ob.u}` }),
       explanation: exp(
@@ -1176,8 +1174,8 @@ const cercleItems: TutorBankItemV4[] = [
     const quoi = un(OBJETS_A_TRACER);
     return {
       text: phrase(
-        `${e.nom} veut tracer ${quoi} de ${d} cm de diamètre sur sa feuille.`,
-        un([`De combien écarte-t-${e.il} son compas ?`, "De combien faut-il ouvrir le compas ?", "Quel écart faut-il entre la pointe et la mine ?"]),
+        `${e.nom} veut tracer ${quoi} de ${d} cm de diamètre.`,
+        un([`De combien écarte-t-${e.il} son compas ?`, "De combien faut-il ouvrir le compas ?", "Quel écart entre la pointe et la mine ?"]),
       ),
       ...qcmN(d / 2, [d, 2 * d, d / 2 + 1, d - 1], "cm"),
       canvas: dessinCercle({ segment: "diametre", noms: un(NOMS_POINTS), etiquette: `${d} cm` }),
@@ -1238,10 +1236,10 @@ const cercleItems: TutorBankItemV4[] = [
       const [n1, n2] = un(NOMS_POINTS);
       return {
         text: phrase(
-          un(["", "Zoé trace un cercle au compas.", "Pic regarde ce cercle.", "Téo a tracé ce cercle sur son cahier.", "La maîtresse dessine un cercle au tableau.", "Le jardinier trace un massif rond.", "Lina dessine une roue de vélo.", "Ravi dessine une horloge ronde.", "Le chef cuisinier découpe une pizza."]),
-          `Les points ${n1} et ${n2} sont sur le cercle de centre O.`,
+          un(["", "Zoé trace un cercle.", "Pic regarde ce cercle.", "Téo a tracé ce cercle.", "Lina dessine une roue.", "Ravi dessine une horloge."]),
+          `${n1} et ${n2} sont sur le cercle.`,
           `[O${n1}] mesure ${r} cm.`,
-          un([`Combien mesure [O${n2}] ?`, `Quelle est la longueur de [O${n2}] ?`, `Et [O${n2}], combien mesure-t-il ?`]),
+          un([`Combien mesure [O${n2}] ?`, `Et [O${n2}], combien mesure-t-il ?`]),
         ),
         ...qcmN(r, [2 * r, r + 1, r - 1, r + 2], "cm"),
         canvas: dessinCercle({ segment: "deux_rayons", noms: [n1, n2], etiquette: `${r} cm` }),
@@ -1254,18 +1252,18 @@ const cercleItems: TutorBankItemV4[] = [
       };
     }
     const cas = un([
-      { ctx: (r: number, m: number) => `Le bassin rond du jardin a un rayon de ${r} m. Pic se pose à ${m} m du centre.`, u: "m", qui: "Pic" },
-      { ctx: (r: number, m: number) => `La piste du cirque a un rayon de ${r} m. Le clown est à ${m} m du centre.`, u: "m", qui: "le clown" },
-      { ctx: (r: number, m: number) => `Zoé trace un cercle de rayon ${r} cm. Elle pose un point M à ${m} cm du centre.`, u: "cm", qui: "M" },
-      { ctx: (r: number, m: number) => `Le manège a un rayon de ${r} m. Téo attend à ${m} m du centre.`, u: "m", qui: "Téo" },
-      { ctx: (r: number, m: number) => `Le tapis rond a un rayon de ${r} m. Le chat dort à ${m} m du centre.`, u: "m", qui: "le chat" },
-      { ctx: (r: number, m: number) => `Ravi trace un cercle de rayon ${r} cm. Il pique un point N à ${m} cm du centre.`, u: "cm", qui: "N" },
+      { ctx: (r: number, m: number) => `Rayon du bassin rond : ${r} m. Pic se pose à ${m} m du centre.`, u: "m", qui: "Pic" },
+      { ctx: (r: number, m: number) => `Rayon de la piste : ${r} m. Le clown est à ${m} m du centre.`, u: "m", qui: "le clown" },
+      { ctx: (r: number, m: number) => `Zoé trace un cercle de rayon ${r} cm, puis M à ${m} cm du centre.`, u: "cm", qui: "M" },
+      { ctx: (r: number, m: number) => `Rayon du manège : ${r} m. Téo attend à ${m} m du centre.`, u: "m", qui: "Téo" },
+      { ctx: (r: number, m: number) => `Rayon du tapis rond : ${r} m. Le chat dort à ${m} m du centre.`, u: "m", qui: "le chat" },
+      { ctx: (r: number, m: number) => `Ravi trace un cercle de rayon ${r} cm, puis N à ${m} cm du centre.`, u: "cm", qui: "N" },
     ]);
     const r = entre(3, 9);
     const m = un([r, r, r - entre(1, 2), r + entre(1, 3)]);
     const juste = m === r ? "sur le cercle" : m < r ? "à l'intérieur du cercle" : "à l'extérieur du cercle";
     return {
-      text: phrase(cas.ctx(r, m), un([`Où est ${cas.qui} ?`, `Où se trouve ${cas.qui} ?`, `${cap(cas.qui)} est-il sur le cercle, dedans ou dehors ?`, "Sur le cercle, dedans ou dehors ?"])),
+      text: phrase(cas.ctx(r, m), un([`Où est ${cas.qui} ?`, `Où se trouve ${cas.qui} ?`, "Sur le cercle, dedans ou dehors ?"])),
       ...qcm(juste, ["sur le cercle", "à l'intérieur du cercle", "à l'extérieur du cercle", "au centre"]),
       explanation: exp(
         "Les points du cercle sont exactement à un rayon du centre. Plus près, on est dedans ; plus loin, dehors.",
@@ -1282,39 +1280,39 @@ const DEF = G("ce2_figure_defi");
 
 const DEVINETTES: Array<{ nom: string; indices: string }> = [
   { nom: "un carré", indices: "J'ai quatre angles droits. Tous mes côtés ont la même longueur." },
-  { nom: "un carré", indices: "J'ai quatre côtés égaux. Le coin de l'équerre colle à chacun de mes sommets." },
-  { nom: "un carré", indices: "Posé sur la pointe, je garde mes quatre angles droits et mes quatre côtés égaux." },
+  { nom: "un carré", indices: "J'ai quatre côtés égaux. L'équerre colle à tous mes sommets." },
+  { nom: "un carré", indices: "Même sur la pointe, j'ai quatre angles droits et quatre côtés égaux." },
   { nom: "un rectangle", indices: "J'ai quatre angles droits. Deux de mes côtés sont longs, deux sont courts." },
-  { nom: "un rectangle", indices: "Mes côtés face à face sont égaux. Mes quatre coins sont droits, mais je ne suis pas un carré." },
+  { nom: "un rectangle", indices: "J'ai quatre coins droits, mais je ne suis pas un carré." },
   { nom: "un rectangle", indices: "Je suis la forme d'une porte ou d'un livre. J'ai quatre angles droits." },
   { nom: "un losange", indices: "J'ai quatre côtés égaux. Aucun de mes angles n'est droit." },
-  { nom: "un losange", indices: "Je ressemble à un carré écrasé : quatre côtés égaux, des angles pointus et larges." },
-  { nom: "un losange", indices: "Je suis la forme du carreau, au jeu de cartes. Mes quatre côtés sont égaux." },
+  { nom: "un losange", indices: "Carré écrasé : quatre côtés égaux, des angles pointus et larges." },
+  { nom: "un losange", indices: "J'ai la forme du carreau des cartes. Mes quatre côtés sont égaux." },
   { nom: "un triangle rectangle", indices: "J'ai trois côtés. Un de mes angles est droit." },
   { nom: "un triangle rectangle", indices: "On m'obtient en coupant un rectangle par une diagonale." },
   { nom: "un triangle rectangle", indices: "J'ai trois sommets, et le coin de l'équerre colle à l'un d'eux." },
-  { nom: "un cercle", indices: "Je n'ai aucun côté. Tous mes points sont à la même distance de mon centre." },
+  { nom: "un cercle", indices: "Tous mes points sont à la même distance de mon centre." },
   { nom: "un cercle", indices: "On me trace au compas. Je n'ai ni sommet ni angle." },
   { nom: "un cercle", indices: "Mon diamètre vaut deux fois mon rayon." },
 ];
-const QUI_DEVINE = ["Pic le paille-en-queue", "Nina", "Téo", "Zoé", "Ravi", "Ti Margo", "La maîtresse", "Le magicien du cirque", "Le pirate Barbe-Rousse", "Le dragon du château"];
+const QUI_DEVINE = ["Pic", "Nina", "Téo", "Zoé", "Ravi", "Ti Margo", "La maîtresse", "Le magicien", "Le pirate", "Le dragon"];
 
 const OBJETS_TOUR: Array<{ o: string; forme: "carre" | "losange" | "rectangle" | "triangle"; c: [number, number]; l?: [number, number] }> = [
   { o: "Le napperon de Zoé est un carré.", forme: "carre", c: [10, 25] },
   { o: "La boîte à bijoux de Lina est un carré.", forme: "carre", c: [6, 15] },
   { o: "Le coussin du chat est un carré.", forme: "carre", c: [18, 25] },
-  { o: "Le cadre de la photo de classe est un carré.", forme: "carre", c: [12, 24] },
+  { o: "Le cadre photo est un carré.", forme: "carre", c: [12, 24] },
   { o: "Le cerf-volant de Téo est un losange.", forme: "losange", c: [15, 25] },
   { o: "Le panneau du chantier est un losange.", forme: "losange", c: [15, 25] },
   { o: "Le biscuit de la boulangère est un losange.", forme: "losange", c: [3, 8] },
   { o: "La gommette de Jade est un losange.", forme: "losange", c: [2, 6] },
   { o: "La carte au trésor est un rectangle.", forme: "rectangle", c: [15, 30], l: [8, 14] },
-  { o: "La couverture du cahier de Ravi est un rectangle.", forme: "rectangle", c: [22, 30], l: [15, 20] },
-  { o: "L'étiquette du pot de confiture est un rectangle.", forme: "rectangle", c: [8, 12], l: [3, 6] },
+  { o: "Le cahier de Ravi est un rectangle.", forme: "rectangle", c: [22, 30], l: [15, 20] },
+  { o: "L'étiquette du pot est un rectangle.", forme: "rectangle", c: [8, 12], l: [3, 6] },
   { o: "La boîte du gâteau est un rectangle.", forme: "rectangle", c: [20, 30], l: [10, 18] },
-  { o: "Le fanion de la kermesse est un triangle aux trois côtés égaux.", forme: "triangle", c: [10, 25] },
-  { o: "La part de tarte du chef a trois côtés égaux.", forme: "triangle", c: [8, 15] },
-  { o: "La voile du petit bateau de Naïa a trois côtés égaux.", forme: "triangle", c: [6, 20] },
+  { o: "Le fanion a trois côtés égaux.", forme: "triangle", c: [10, 25] },
+  { o: "La part de tarte a trois côtés égaux.", forme: "triangle", c: [8, 15] },
+  { o: "La voile de Naïa a trois côtés égaux.", forme: "triangle", c: [6, 20] },
 ];
 
 const defiItems: TutorBankItemV4[] = [
@@ -1323,7 +1321,7 @@ const defiItems: TutorBankItemV4[] = [
     const d = un(DEVINETTES);
     const qui = un(QUI_DEVINE);
     return {
-      text: phrase(`${qui} pose une devinette :`, `« ${d.indices} Qui suis-je ? »`),
+      text: phrase(`${qui} demande :`, `« ${d.indices} Qui suis-je ? »`),
       ...qcm(d.nom, ["un carré", "un rectangle", "un losange", "un triangle rectangle", "un cercle"]),
       explanation: exp(
         "Une figure se reconnaît à ses côtés, à ses angles droits, ou à son centre.",
@@ -1349,7 +1347,7 @@ const defiItems: TutorBankItemV4[] = [
       faux = [L + la, 2 * L + la, total - 2, total + 2];
       canvas = dessinQuad("rectangle", { lettres: l, inclinaison: un([0, 10, -10]), cotes: { AB: `${L} cm`, BC: `${la} cm` } });
       calcul = `${L} + ${la} + ${L} + ${la} = ${total}.`;
-      donnee = `[${l[0]}${l[1]}] mesure ${L} cm et [${l[1]}${l[2]}] mesure ${la} cm.`;
+      donnee = `[${l[0]}${l[1]}] : ${L} cm, [${l[1]}${l[2]}] : ${la} cm.`;
     } else if (ob.forme === "triangle") {
       const c = entre(...ob.c);
       total = 3 * c;
@@ -1360,13 +1358,13 @@ const defiItems: TutorBankItemV4[] = [
     } else {
       const c = entre(...ob.c);
       total = 4 * c;
-      donnee = `Le côté [${l[0]}${l[1]}] mesure ${c} cm.`;
+      donnee = `[${l[0]}${l[1]}] mesure ${c} cm.`;
       faux = [c, 2 * c, 3 * c, 4 * c + 4];
       canvas = dessinQuad(ob.forme, { lettres: l, inclinaison: un([0, 15, -20]), cotes: { AB: `${c} cm` } });
       calcul = `${c} + ${c} + ${c} + ${c} = ${total}.`;
     }
     return {
-      text: phrase(ob.o, donnee, un(["Quelle longueur de ruban faut-il pour en faire tout le tour ?", "Combien mesure son tour complet ?", "On colle un galon tout autour. Combien mesure ce galon ?", "Quelle est la longueur de son contour ?"])),
+      text: phrase(ob.o, donnee, un(["Combien de ruban pour le tour ?", "Combien mesure son tour complet ?", "Quelle est la longueur de son contour ?"])),
       ...qcmN(total, faux, "cm"),
       canvas,
       explanation: exp(
@@ -1423,7 +1421,7 @@ const FIGES: TutorBankItemV4[] = [
     microId: "ce2_figure_reconnaitre",
     difficulty: 4,
     theme: "neutral",
-    text: "Cette figure est posée de travers. Ses quatre angles sont droits et ses côtés opposés sont de même longueur. Est-ce un rectangle ?",
+    text: "Posée de travers, cette figure a quatre angles droits et ses côtés opposés égaux. Est-ce un rectangle ?",
     format: "qcm",
     choices: [
       "oui, c'est un rectangle",
@@ -1773,7 +1771,7 @@ const FIGES: TutorBankItemV4[] = [
     microId: "ce2_figure_construire",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève trace un quadrilatère avec quatre côtés de 5 cm, mais sans utiliser l'équerre. Qu'obtient-il à coup sûr ?",
+    text: "Un élève trace un quadrilatère aux quatre côtés de 5 cm, sans équerre. Qu'obtient-il à coup sûr ?",
     format: "qcm",
     choices: [
       "un quadrilatère à quatre côtés égaux, mais peut-être pas un carré",
@@ -1869,7 +1867,7 @@ const FIGES: TutorBankItemV4[] = [
     microId: "ce2_figure_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Trois élèves regardent la même figure, posée sur la pointe. Elle a quatre côtés égaux et quatre angles droits. Léa dit « c'est un carré », Kevin dit « c'est un losange », Malia dit « c'est un rectangle ». Qui décrit le mieux cette figure au CE2 ?",
+    text: "Quatre côtés égaux, quatre angles droits. Léa dit « carré », Kevin « losange », Malia « rectangle ». Qui décrit le mieux ?",
     format: "qcm",
     choices: [
       "Léa : quatre côtés égaux ET quatre angles droits, c'est un carré",

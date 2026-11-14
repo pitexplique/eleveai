@@ -28,8 +28,9 @@
 // ⚠️ PAS DE QUESTION À RÉDIGER : `applyMathsKeyboardFree` retire les items
 // `format: "open"`. Un CE1 clique, il ne tape pas.
 
-import type { CanvasFigure, DifficultyLevel, ReperageCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
-import { cap, entre, etapes, gab, melange, prenom, qcm, qcmN, un } from "./geo-outils-ce1";
+import type { CanvasFigure, DifficultyLevel, ObjetId, ReperageCanvasData, TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { ReperageStep } from "@/lib/tutor-v4/types_canvas";
+import { entre, etapes, gab, melange, prenom, qcm, qcmN, un } from "./geo-outils-ce1";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function randomInt(min: number, max: number) {
@@ -68,6 +69,68 @@ Conclusion : ${conclusion}`;
 /** « de le bureau » → « du bureau », « à le bureau » → « au bureau ». */
 const du = (l: string) => (l.startsWith("le ") ? "du " + l.slice(3) : "de " + l);
 const au = (l: string) => (l.startsWith("le ") ? "au " + l.slice(3) : "à " + l);
+/** « à gauche de » + « le livre » → « à gauche du livre » ; « sous » + « le livre » → « sous le livre ». */
+const rel = (prep: string, nom: string) => (prep.endsWith(" de") ? `${prep.slice(0, -3)} ${du(nom)}` : `${prep} ${nom}`);
+const maj = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+/** « de Léa », mais « d'Inès ». */
+const deP = (p: string) => (/^[AEÉIOU]/.test(p) ? `d'${p}` : `de ${p}`);
+
+/* ---------- Les dessins des trois micros d'espace (14/11/2026) ----------
+   Frédéric : énoncés trop longs pour des CE1, et « il adore les dessins ».
+   Les objets dessinés (canvas `objets`), le banc et le plan de l'école (canvas
+   `reperage` à cases, des emoji posés au centre des cases, comme au CP). */
+
+type ObjPos = { quoi: ObjetId; nom: string; mot: string };
+const OBJ_POS: readonly ObjPos[] = [
+  { quoi: "ballon", nom: "le ballon", mot: "ballon" },
+  { quoi: "pomme", nom: "la pomme", mot: "pomme" },
+  { quoi: "livre", nom: "le livre", mot: "livre" },
+  { quoi: "chat", nom: "le chat", mot: "chat" },
+  { quoi: "fleur", nom: "la fleur", mot: "fleur" },
+  { quoi: "voiture", nom: "la voiture", mot: "voiture" },
+  { quoi: "bateau", nom: "le bateau", mot: "bateau" },
+  { quoi: "tasse", nom: "la tasse", mot: "tasse" },
+  { quoi: "chapeau", nom: "le chapeau", mot: "chapeau" },
+  { quoi: "cartable", nom: "le cartable", mot: "cartable" },
+  { quoi: "oiseau", nom: "l'oiseau", mot: "oiseau" },
+];
+/** Deux objets côte à côte (rangée) ou l'un au-dessus de l'autre (colonne). */
+const deuxObjets = (objs: ObjPos[], colonne: boolean): CanvasFigure =>
+  ({ kind: "objets", elements: objs.map((o) => ({ quoi: o.quoi, label: o.mot })), colonnes: colonne ? 1 : objs.length, mode: "couleur", size: { width: colonne ? 170 : 300 } }) as CanvasFigure;
+
+type Emo = { e: string; nom: string };
+const choixEmo = (c: Emo) => `${c.nom} ${c.e}`;
+const COULEURS_E = ["#f97316", "#22c55e", "#3b82f6", "#a855f7", "#eab308"];
+const BANC: readonly Emo[] = [
+  { e: "🐰", nom: "le lapin" },
+  { e: "🐱", nom: "le chat" },
+  { e: "🐶", nom: "le chien" },
+  { e: "🐸", nom: "la grenouille" },
+  { e: "🐢", nom: "la tortue" },
+  { e: "🐭", nom: "la souris" },
+  { e: "🐦", nom: "Pic" },
+];
+const LIEUX_PLAN: readonly Emo[] = [
+  { e: "🍽️", nom: "la cantine" },
+  { e: "📚", nom: "la bibliothèque" },
+  { e: "⚽", nom: "la cour" },
+  { e: "🏀", nom: "la salle de sport" },
+  { e: "🌳", nom: "le jardin" },
+  { e: "✏️", nom: "la classe" },
+];
+type Case = { x: number; y: number };
+/** Un quadrillage nu (ni nombres ni axes), des emoji au centre des cases, et un chemin fléché. */
+function plan(cols: number, rows: number, marques: { c: Case; label: string }[], chemin?: { depart: Case; steps: ReperageStep[] }): CanvasFigure {
+  const centre = (c: Case) => ({ x: c.x + 0.5, y: c.y + 0.5 });
+  return {
+    kind: "reperage",
+    grid: { rows, cols },
+    points: marques.map((m, i) => ({ ...centre(m.c), label: m.label, color: COULEURS_E[i % COULEURS_E.length] })),
+    path: chemin ? { start: { ...centre(chemin.depart), color: "#ef4444" }, steps: chemin.steps, showArrows: true } : undefined,
+    display: { showGrid: true, showAxes: false, showCoordinates: false, showPointLabels: true, showTarget: false },
+    size: rows === 1 ? { width: 300, height: 100 } : { width: 60 + cols * 50, height: 64 + rows * 44 },
+  } as CanvasFigure;
+}
 
 const anciens: TutorBankItemV4[] = [
   /* =========================================================
@@ -82,7 +145,7 @@ const anciens: TutorBankItemV4[] = [
     microId: "ce1_espace_positions",
     difficulty: 2,
     theme: "neutral",
-    text: "Le cahier est posé sur la table, et la trousse est posée sur le cahier. Où est le cahier par rapport à la trousse ?",
+    text: "La trousse est posée sur le cahier. Où est le cahier ?",
     format: "qcm",
     choices: ["sous la trousse", "sur la trousse", "à côté de la trousse", "devant la trousse"],
     expected: ["sous la trousse"],
@@ -105,32 +168,49 @@ const anciens: TutorBankItemV4[] = [
     microId: "ce1_espace_positions",
     difficulty: 3,
     theme: "neutral",
-    hint: "Retourne la phrase : le mot change de sens.",
-    tags: ["ce1", "reperage", "positions", "template"],
+    hint: "Regarde où est l'objet par rapport à l'autre.",
+    tags: ["ce1", "reperage", "positions", "template", "canvas"],
     generate: () => {
+      const [a, b] = shuffle(OBJ_POS).slice(0, 2);
+      // Trois fois sur quatre, le dessin porte la question : a à gauche de b (rangée), ou a au-dessus de b (colonne).
+      if (Math.random() < 0.75) {
+        const colonne = Math.random() < 0.5;
+        const [cible, ref] = shuffle([a, b]);
+        const prep = colonne ? (cible === a ? "au-dessus de" : "en dessous de") : cible === a ? "à gauche de" : "à droite de";
+        const bonne = rel(prep, ref.nom);
+        return {
+          text: `Où est ${cible.nom} par rapport ${au(ref.nom)} ?`,
+          format: "qcm",
+          choices: makeChoices(bonne, ["à gauche de", "à droite de", "au-dessus de", "en dessous de"].map((p) => rel(p, ref.nom))),
+          expected: [bonne],
+          comparator: "mcq_exact",
+          canvas: deuxObjets([a, b], colonne),
+          explanation: exp(
+            "Une position se dit toujours par rapport à un objet de référence.",
+            `On part ${du(ref.nom)}, puis on regarde où se trouve ${cible.nom}.`,
+            `Sur le dessin, ${cible.nom} est ${bonne}.`,
+            `${maj(cible.nom)} est ${bonne}.`,
+          ),
+        };
+      }
       const cas = randomChoice([
-        { dit: "au-dessus de", inverse: "en dessous de" },
         { dit: "devant", inverse: "derrière" },
-        { dit: "à gauche de", inverse: "à droite de" },
+        { dit: "derrière", inverse: "devant" },
         { dit: "sur", inverse: "sous" },
+        { dit: "sous", inverse: "sur" },
       ]);
-      const [a, b] = shuffle(["le ballon", "la boite", "le sac", "le livre"]).slice(0, 2);
+      const bonne = rel(cas.inverse, a.nom);
       return {
-        text: `${a.charAt(0).toUpperCase()}${a.slice(1)} est ${cas.dit} ${b}. Où est ${b} par rapport à ${a} ?`,
+        text: `${maj(a.nom)} est ${rel(cas.dit, b.nom)}. Où est ${b.nom} par rapport ${au(a.nom)} ?`,
         format: "qcm",
-        choices: makeChoices(`${cas.inverse} ${a}`, [
-          `${cas.dit} ${a}`,
-          `à côté de ${a}`,
-          `loin de ${a}`,
-          `entre ${a} et le mur`,
-        ]),
-        expected: [`${cas.inverse} ${a}`],
+        choices: makeChoices(bonne, [rel(cas.dit, a.nom), rel("à côté de", a.nom), rel("loin de", a.nom)]),
+        expected: [bonne],
         comparator: "mcq_exact",
         explanation: exp(
           "Une position se dit toujours par rapport à un objet de référence : si on change de référence, le mot change.",
           "On repart de la phrase donnée et on la retourne.",
-          `${a.charAt(0).toUpperCase()}${a.slice(1)} est ${cas.dit} ${b} : vu depuis ${b}, c'est donc l'inverse, ${cas.inverse} ${a}.`,
-          `${b.charAt(0).toUpperCase()}${b.slice(1)} est ${cas.inverse} ${a}.`,
+          `${maj(a.nom)} est ${rel(cas.dit, b.nom)} : vu depuis ${b.nom}, c'est donc l'inverse, ${bonne}.`,
+          `${maj(b.nom)} est ${bonne}.`,
         ),
       };
     },
@@ -149,7 +229,7 @@ const anciens: TutorBankItemV4[] = [
     microId: "ce1_espace_situer",
     difficulty: 4,
     theme: "neutral",
-    text: "Tu es assis en face de Malia. Elle lève sa main droite. De ton côté, tu la vois de quel côté ?",
+    text: "Malia est face à toi. Elle lève la main droite. Tu la vois de quel côté ?",
     format: "qcm",
     choices: [
       "à ta gauche",
@@ -177,24 +257,25 @@ const anciens: TutorBankItemV4[] = [
     microId: "ce1_espace_situer",
     difficulty: 3,
     theme: "neutral",
-    hint: "Compte les places une à une.",
-    tags: ["ce1", "reperage", "situer", "template"],
+    hint: "Trouve-le sur le banc, puis regarde son voisin.",
+    tags: ["ce1", "reperage", "situer", "template", "canvas"],
     generate: () => {
-      const eleves = shuffle(["Malia", "Kevin", "Naïla", "Ryan", "Élia"]).slice(0, 5);
+      const banc = shuffle(BANC).slice(0, 5);
       const i = randomInt(1, 3);
       const cible = randomChoice(["à gauche", "à droite"] as const);
-      const bonne = cible === "à gauche" ? eleves[i - 1] : eleves[i + 1];
+      const bonne = cible === "à gauche" ? banc[i - 1] : banc[i + 1];
       return {
-        text: `Sur un banc, de gauche à droite, sont assis : ${eleves.join(", ")}. Qui est juste ${cible} de ${eleves[i]} ?`,
+        text: `Sur le banc, qui est juste ${cible} ${du(banc[i].nom)} ${banc[i].e} ?`,
         format: "qcm",
-        choices: makeChoices(bonne, eleves.filter((e) => e !== bonne)),
-        expected: [bonne],
+        choices: makeChoices(choixEmo(bonne), banc.filter((e) => e !== bonne).map(choixEmo)),
+        expected: [choixEmo(bonne)],
         comparator: "mcq_exact",
+        canvas: plan(5, 1, banc.map((b, k) => ({ c: { x: k, y: 0 }, label: b.e }))),
         explanation: exp(
-          "Sur une file, chacun a un voisin de gauche et un voisin de droite.",
-          "On lit la liste dans l'ordre donné, de gauche à droite.",
-          `${eleves[i]} est à la place ${i + 1}. Juste ${cible} de ${eleves[i]}, on trouve ${bonne}.`,
-          `C'est ${bonne}.`,
+          "Sur un banc, chacun a un voisin de gauche et un voisin de droite.",
+          "On trouve l'animal sur le dessin, puis on regarde la place juste à côté.",
+          `${maj(banc[i].nom)} est à la place ${i + 1}. Juste ${cible}, on trouve ${bonne.nom}.`,
+          `C'est ${bonne.nom}.`,
         ),
       };
     },
@@ -239,33 +320,90 @@ const anciens: TutorBankItemV4[] = [
     notionId: "reperage",
     microId: "ce1_espace_representation",
     difficulty: 4,
-    theme: "reunion",
-    hint: "Suis le trajet sur le plan, étape par étape.",
-    tags: ["ce1", "reperage", "plan", "reunion", "template"],
+    theme: "neutral",
+    hint: "Suis les flèches sur le plan, jusqu'au bout.",
+    tags: ["ce1", "reperage", "plan", "template", "canvas"],
     generate: () => {
-      const lieux = shuffle([
-        "la cantine",
-        "la bibliothèque",
-        "le bureau de la directrice",
-        "la cour",
-        "la salle de sport",
-      ]);
-      const depart = lieux[0];
-      const etape = lieux[1];
-      const arrivee = lieux[2];
-      return {
-        text: `Sur le plan de l'école, Kevin part ${du(depart)}. Il passe devant ${etape}, puis s'arrête ${au(arrivee)}. Où finit-il son trajet ?`,
-        format: "qcm",
-        choices: makeChoices(arrivee, [depart, etape, lieux[3], lieux[4]]),
-        expected: [arrivee],
-        comparator: "mcq_exact",
-        explanation: exp(
-          "Un plan sert à décrire un trajet : on suit les étapes dans l'ordre.",
-          "On repère le point de départ, puis on avance d'étape en étape.",
-          `Kevin part ${du(depart)}, passe devant ${etape} sans s'arrêter, et termine ${au(arrivee)}.`,
-          `Il finit ${au(arrivee)}.`,
-        ),
-      };
+      const COLS_P = 5;
+      const ROWS_P = 4;
+      const entreDeux = (v: number, a: number, b: number) => v >= Math.min(a, b) && v <= Math.max(a, b);
+      for (;;) {
+        const d = { x: randomInt(0, COLS_P - 1), y: randomInt(0, ROWS_P - 1) };
+        const a = { x: randomInt(0, COLS_P - 1), y: randomInt(0, ROWS_P - 1) };
+        if (a.x === d.x || a.y === d.y) continue;
+        // Le chemin : d'abord de côté, puis en hauteur. Aucun autre lieu posé dessus.
+        const surChemin = (c: Case) => (c.y === d.y && entreDeux(c.x, d.x, a.x)) || (c.x === a.x && entreDeux(c.y, d.y, a.y));
+        const libres = Array.from({ length: COLS_P * ROWS_P }, (_, k) => ({ x: k % COLS_P, y: Math.floor(k / COLS_P) })).filter((c) => !surChemin(c));
+        if (libres.length < 3) continue;
+        const autres = shuffle(libres).slice(0, 3);
+        const lieux = shuffle(LIEUX_PLAN).slice(0, 5);
+        const [depart, arrivee] = lieux;
+        const steps: ReperageStep[] = [
+          { direction: a.x > d.x ? "droite" : "gauche", count: Math.abs(a.x - d.x) },
+          { direction: a.y > d.y ? "haut" : "bas", count: Math.abs(a.y - d.y) },
+        ];
+        const h = randomChoice(HEROS);
+        return {
+          text: `${h} part ${du(depart.nom)} ${depart.e} et suit les flèches. Où arrive-t-${il(h)} ?`,
+          format: "qcm",
+          choices: makeChoices(choixEmo(arrivee), lieux.filter((l) => l !== arrivee).map(choixEmo)),
+          expected: [choixEmo(arrivee)],
+          comparator: "mcq_exact",
+          canvas: plan(COLS_P, ROWS_P, [{ c: d, label: depart.e }, { c: a, label: arrivee.e }, ...autres.map((c, k) => ({ c, label: lieux[k + 2].e }))], { depart: d, steps }),
+          explanation: exp(
+            "Un plan montre l'école vue d'en haut : on y suit un trajet.",
+            "On part du point de départ et on suit les flèches jusqu'au bout.",
+            `${h} part ${du(depart.nom)}, va ${steps[0].count} case${steps[0].count > 1 ? "s" : ""} ${steps[0].direction === "droite" ? "à droite" : "à gauche"}, puis ${steps[1].count} ${steps[1].direction === "haut" ? "vers le haut" : "vers le bas"}.`,
+            `${maj(il(h))} arrive ${au(arrivee.nom)}.`,
+          ),
+        };
+      }
+    },
+  },
+  {
+    kind: "template",
+    id: "ce1_espace_representation_tpl_2",
+    niveau: "ce1",
+    matiere: "maths",
+    notionId: "reperage",
+    microId: "ce1_espace_representation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Trouve le lieu sur le plan, puis regarde la case d'à côté.",
+    tags: ["ce1", "reperage", "plan", "template", "canvas"],
+    generate: () => {
+      const COLS_P = 4;
+      const ROWS_P = 3;
+      const DIRS = [
+        { dx: 1, dy: 0, mot: "juste à droite" },
+        { dx: -1, dy: 0, mot: "juste à gauche" },
+        { dx: 0, dy: 1, mot: "juste au-dessus" },
+        { dx: 0, dy: -1, mot: "juste en dessous" },
+      ];
+      for (;;) {
+        const cases = shuffle(Array.from({ length: COLS_P * ROWS_P }, (_, k) => ({ x: k % COLS_P, y: Math.floor(k / COLS_P) }))).slice(0, 5);
+        const lieux = shuffle(LIEUX_PLAN).slice(0, 5);
+        const ici = (x: number, y: number) => cases.findIndex((c) => c.x === x && c.y === y);
+        const paires = cases.flatMap((c, i) => DIRS.map((dir) => ({ i, j: ici(c.x + dir.dx, c.y + dir.dy), dir }))).filter((p) => p.j >= 0);
+        if (paires.length === 0) continue;
+        const { i, j, dir } = randomChoice(paires);
+        const ref = lieux[i];
+        const bonne = lieux[j];
+        return {
+          text: `Sur le plan, qu'y a-t-il ${dir.mot} ${du(ref.nom)} ${ref.e} ?`,
+          format: "qcm",
+          choices: makeChoices(choixEmo(bonne), lieux.filter((l) => l !== bonne && l !== ref).map(choixEmo)),
+          expected: [choixEmo(bonne)],
+          comparator: "mcq_exact",
+          canvas: plan(COLS_P, ROWS_P, cases.map((c, k) => ({ c, label: lieux[k].e }))),
+          explanation: exp(
+            "Sur un plan, chaque lieu a des voisins : à droite, à gauche, au-dessus, en dessous.",
+            `On trouve ${ref.nom}, puis on regarde la case ${dir.mot.replace("juste ", "")}.`,
+            `${maj(dir.mot)} ${du(ref.nom)}, il y a ${bonne.nom}.`,
+            `C'est ${bonne.nom}.`,
+          ),
+        };
+      }
     },
   },
 
@@ -474,7 +612,7 @@ const anciens: TutorBankItemV4[] = [
     microId: "ce1_reperage_deplacement",
     difficulty: 3,
     theme: "neutral",
-    text: "Un pion avance de 3 cases vers la droite, puis de 2 cases vers la gauche. De combien de cases a-t-il avancé vers la droite en tout ?",
+    text: "Le pion va 3 cases à droite, puis 2 à gauche. De combien a-t-il avancé ?",
     format: "short",
     expected: ["1"],
     comparator: "number_equal",
@@ -530,7 +668,7 @@ const anciens: TutorBankItemV4[] = [
     microId: "ce1_reperage_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Un pion fait le tour d'un carré de cases : 3 cases à droite, 3 en haut, 3 à gauche, 3 en bas. Où se retrouve-t-il ?",
+    text: "Un pion : 3 à droite, 3 en haut, 3 à gauche, 3 en bas. Où arrive-t-il ?",
     format: "qcm",
     choices: [
       "à son point de départ",
@@ -597,7 +735,6 @@ const HEROS = ["Pic", "Nina", "Téo", "Zoé", "Ravi"];
 const il = (h: string) => (h === "Nina" || h === "Zoé" ? "elle" : "il");
 /** « aller au trésor », « aller à la clé ». */
 const TRESORS = ["au trésor", "à la clé", "au gâteau", "à la pomme", "au ballon", "à l'étoile", "au panier de letchis", "à la cabane"];
-const AMBIANCE = ["", "C'est le jeu du robot.", "C'est la course au trésor.", "Direction le goûter !", "On joue sur le tapis de la classe.", "Pic cherche des graines."];
 
 /* ─────────────── ce1_espace_assemblages ─────────────── */
 const RA = "ce1_espace_assemblages";
@@ -616,7 +753,7 @@ function compterCubes() {
   const h = Array.from({ length: n }, () => entre(1, 4));
   const total = h.reduce((a, b) => a + b, 0);
   const p = prenom();
-  const debut = un([`${p} a construit cet escalier de cubes.`, `${p} empile des cubes pour faire un château.`, `Voici la tour de cubes de ${p}.`, `Pic a posé ces cubes en bois.`, `${p} construit un mur avec des cubes.`, `Au jardin d'enfants, ${p} a fait cette construction.`]);
+  const debut = un([`${p} a construit cet escalier de cubes.`, `${p} empile des cubes pour faire un château.`, `Voici la tour de cubes ${deP(p)}.`, `Pic a posé ces cubes en bois.`, `${p} construit un mur avec des cubes.`, `Au jardin d'enfants, ${p} a fait cette construction.`]);
   return {
     text: `${debut} ${un(["Combien de cubes a-t-il fallu ?", "Combien de cubes en tout ?", "Compte les cubes.", "Il y a combien de cubes ?"])}`,
     ...qcmN(total, [total - 1, total + 1, n, Math.max(...h) * n]),
@@ -666,7 +803,7 @@ function compterCases() {
   const p = prenom();
   return {
     text: cas === "toutes"
-      ? `${un([`${p} dessine un quadrillage.`, `Voici le tapis de jeu de ${p}.`, `La maîtresse a tracé ce quadrillage.`])} ${un(["Combien de cases y a-t-il ?", "Compte toutes les cases.", "Combien de petits carrés en tout ?"])}`
+      ? `${un([`${p} dessine un quadrillage.`, `Voici le tapis de jeu ${deP(p)}.`, `La maîtresse a tracé ce quadrillage.`])} ${un(["Combien de cases y a-t-il ?", "Compte toutes les cases.", "Combien de petits carrés en tout ?"])}`
       : `${un([`${p} a colorié des cases.`, `Pic a peint des cases en bleu.`, `${p} joue à la bataille navale.`])} ${un(["Combien de cases sont coloriées ?", "Compte les cases coloriées."])}`,
     ...qcmN(juste, cas === "toutes" ? [(rows + 1) * (cols + 1), rows + cols, juste + 1, juste - 1] : [k + 1, k - 1, rows * cols - k]),
     canvas: { kind: "figure_libre", size: { cellSize: 30, padding: 10 }, grid: { rows, cols, filledCells: cas === "toutes" ? [] : cells }, display: { showGrid: true, showFilled: true } } as CanvasFigure,
@@ -743,8 +880,8 @@ const RM = "ce1_reperage_deplacement";
 type Pas = { direction: "haut" | "bas" | "gauche" | "droite"; count: number };
 const FLECHE: Record<Pas["direction"], string> = { haut: "en haut", bas: "en bas", gauche: "à gauche", droite: "à droite" };
 const phrase = (p: Pas) => `${p.count} case${p.count > 1 ? "s" : ""} ${FLECHE[p.direction]}`;
-/** « 1 case en bas, 2 cases à gauche, puis 1 case en haut » : un seul « puis », la phrase reste courte. */
-const suite = (pas: Pas[]) => (pas.length < 2 ? pas.map(phrase).join("") : `${pas.slice(0, -1).map(phrase).join(", ")}, puis ${phrase(pas[pas.length - 1])}`);
+/** « 2 en haut, 2 à droite, 1 à gauche » : le dessin montre les cases, l'énoncé reste court (14/11). */
+const suite = (pas: Pas[]) => pas.map((p) => `${p.count} ${FLECHE[p.direction]}`).join(", ");
 
 /** Un chemin qui reste dans le quadrillage 6 × 5. */
 function chemin(nb: number) {
@@ -774,7 +911,7 @@ function ouArrive(nb: number, dessine: boolean) {
   const h = un(HEROS);
   const faux = [place(arrivee.y, arrivee.x), place(arrivee.x + 1, arrivee.y), place(arrivee.x, arrivee.y + 1), place(arrivee.x - 1, arrivee.y), place(arrivee.x, Math.max(0, arrivee.y - 1))].filter((v) => v !== place(arrivee.x, arrivee.y));
   return {
-    text: `${un(AMBIANCE)} ${h} est en ${place(depart.x, depart.y)}. ${dessine ? un(["Suis les flèches.", "Suis le chemin fléché.", "Les flèches montrent son chemin."]) : `${cap(il(h))} va : ${suite(pas)}.`} ${un([`Où arrive ${h} ?`, "Quelle est la place d'arrivée ?", "Où finit le chemin ?"])}`.trim(),
+    text: `${dessine ? `${h} suit les flèches.` : `${h} va : ${suite(pas)}.`} ${nb >= 4 ? `Où arrive-t-${il(h)} ?` : un([`Où arrive-t-${il(h)} ?`, "Quelle est la place d'arrivée ?", "Où finit le chemin ?"])}`,
     ...qcm(place(arrivee.x, arrivee.y), faux),
     canvas: { kind: "reperage", grid: { rows: 5, cols: 6 }, path: dessine ? { start: { ...depart, label: h }, steps: pas, showArrows: true } : undefined, points: dessine ? [] : [{ ...depart, label: h, color: "#ef4444" }], target: dessine ? { ...arrivee, label: "?", hidden: false } : undefined, display: { showAxes: false } } as CanvasFigure,
     explanation: etapes("on fait les déplacements un par un, dans l'ordre.", pas.map(phrase).join(", puis ") + ".", `On arrive en ${place(arrivee.x, arrivee.y)}.`),
@@ -793,7 +930,7 @@ function quelChemin() {
     [phrase({ direction: pas[0].direction, count: pas[1].count }), phrase({ direction: pas[1].direction, count: pas[0].count })].join(", puis "),
   ];
   return {
-    text: `${un(AMBIANCE)} ${h} veut aller ${t} (★). ${un([`Quel chemin doit-${il(h)} suivre ?`, "Quel est le bon chemin ?", "Comment y aller ?"])}`.trim(),
+    text: `${h} veut aller ${t} (★). ${un([`Quel chemin doit-${il(h)} suivre ?`, "Quel est le bon chemin ?", "Comment y aller ?"])}`,
     ...qcm(juste, faux),
     canvas: { kind: "reperage", grid: { rows: 5, cols: 6 }, points: [{ ...depart, label: h, color: "#ef4444" }, { ...arrivee, label: "★", color: "#f59e0b" }], display: { showAxes: false } } as CanvasFigure,
     explanation: etapes("on compte les cases d'abord dans un sens, puis dans l'autre.", `Il faut : ${juste}.`, `Le bon chemin : ${juste}.`),
@@ -814,7 +951,7 @@ function plusCourt() {
   const h = un(HEROS);
   const t = un(TRESORS);
   return {
-    text: `${un(["Défi !", "Pic lance un défi.", `${prenom()} lance un défi.`])} ${h} veut aller ${t} (★), sans passer en biais. ${un(["Combien de cases au minimum ?", "Quel est le plus petit nombre de cases ?"])}`,
+    text: `Défi ! ${h} va ${t} (★) sans passer en biais. ${un(["Combien de cases au minimum ?", "Combien de cases, au moins ?"])}`,
     ...qcmN(n, [n + 1, n + 2, Math.abs(a.x - b.x), Math.abs(a.y - b.y), n - 1]),
     canvas: { kind: "reperage", grid: { rows: 5, cols: 6 }, points: [{ ...a, label: h, color: "#ef4444" }, { ...b, label: "★", color: "#f59e0b" }], display: { showAxes: false } } as CanvasFigure,
     explanation: etapes("on compte les cases à faire de côté, puis celles en haut ou en bas.", `${Math.abs(a.x - b.x)} de côté + ${Math.abs(a.y - b.y)} en hauteur = ${n}.`, `${n} cases au minimum.`),

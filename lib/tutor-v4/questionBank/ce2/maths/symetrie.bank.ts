@@ -322,7 +322,7 @@ const symetrieBase: TutorBankItemV4[] = [
     microId: "ce2_symetrie_completer",
     difficulty: 3,
     theme: "neutral",
-    text: "Une figure est à 4 carreaux à gauche de l'axe. À combien de carreaux de l'axe se trouve son image ?",
+    text: "Une figure est à 4 carreaux à gauche de l'axe. Son image est à combien de carreaux ?",
     format: "short",
     expected: ["4"],
     comparator: "number_equal",
@@ -384,20 +384,20 @@ const symetrieBase: TutorBankItemV4[] = [
     generate: () => {
       const cas = randomChoice([
         {
-          erreur: "recopié la figure plus loin, du même côté de l'axe",
+          erreur: "recopié la figure plus loin, du même côté",
           bonne: "il fallait la reporter de l'AUTRE côté de l'axe",
         },
         {
-          erreur: "dessiné l'image de l'autre côté, mais deux carreaux plus loin que la figure",
+          erreur: "mis l'image de l'autre côté, deux carreaux trop loin",
           bonne: "il fallait la mettre à la MÊME distance de l'axe",
         },
         {
-          erreur: "dessiné l'image de l'autre côté, mais une ligne plus haut",
+          erreur: "mis l'image de l'autre côté, une ligne trop haut",
           bonne: "il fallait rester sur la MÊME ligne",
         },
       ] as const);
       return {
-        text: `Pour compléter une figure par symétrie, un élève a ${cas.erreur}. Qu'aurait-il fallu faire ?`,
+        text: `Pour compléter par symétrie, un élève a ${cas.erreur}. Que fallait-il faire ?`,
         format: "qcm",
         choices: makeChoices(cas.bonne, [
           "il fallait la reporter de l'AUTRE côté de l'axe",
@@ -479,7 +479,7 @@ const symetrieBase: TutorBankItemV4[] = [
     microId: "ce2_symetrie_construire",
     difficulty: 3,
     theme: "neutral",
-    text: "Quand on construit le symétrique d'un point par rapport à un axe vertical, que devient sa hauteur sur le quadrillage ?",
+    text: "On construit le symétrique d'un point par rapport à un axe vertical. Que devient sa hauteur ?",
     format: "qcm",
     choices: [
       "elle ne change pas",
@@ -564,7 +564,7 @@ const symetrieBase: TutorBankItemV4[] = [
             ),
           }
         : {
-            text: `Un point et son symétrique sont séparés de ${2 * distance} carreaux. À quelle distance de l'axe se trouve chacun d'eux ?`,
+            text: `Entre un point et son symétrique : ${2 * distance} carreaux. À quelle distance de l'axe est chacun ?`,
             format: "short",
             expected: [String(distance)],
             comparator: "number_equal",
@@ -590,7 +590,7 @@ const symetrieBase: TutorBankItemV4[] = [
     microId: "ce2_symetrie_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Léa dit qu'un carré et un rectangle ont le même nombre d'axes de symétrie, puisque tous deux ont quatre angles droits. A-t-elle raison ?",
+    text: "Léa : « Carré et rectangle ont autant d'axes de symétrie : ils ont quatre angles droits. » A-t-elle raison ?",
     format: "qcm",
     choices: [
       "non : 4 pour le carré, 2 pour le rectangle",
@@ -618,7 +618,7 @@ const symetrieBase: TutorBankItemV4[] = [
     microId: "ce2_symetrie_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Une lettre majuscule est symétrique par rapport à un axe vertical : en la pliant verticalement en deux, les moitiés se superposent. Laquelle est-ce ?",
+    text: "Quelle lettre a un axe de symétrie vertical : pliée de haut en bas, ses moitiés se superposent ?",
     format: "qcm",
     choices: ["A", "F", "L", "P"],
     expected: ["A"],
@@ -650,7 +650,7 @@ const symetrieBase: TutorBankItemV4[] = [
       const egaux = a.nb === b.nb;
       const bonne = egaux ? "les deux en ont autant" : gagnant.figure;
       return {
-        text: `Laquelle de ces deux figures a le PLUS d'axes de symétrie : ${a.figure} ou ${b.figure} ?`,
+        text: `Lequel a le PLUS d'axes de symétrie : ${a.figure} ou ${b.figure} ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
           a.figure,
@@ -693,7 +693,7 @@ const symetrieBase: TutorBankItemV4[] = [
       ];
       const image = source.map((p) => miroir(p, axeX));
       return {
-        text: `Deux points sont à ${d1} et ${d2} carreaux à gauche de l'axe. Après symétrie, à combien de carreaux de l'axe se trouvent leurs images ?`,
+        text: `Deux points sont à ${d1} et ${d2} carreaux à gauche de l'axe. Où sont leurs images ?`,
         format: "qcm",
         choices: makeChoices(`à ${d1} et ${d2} carreaux, à droite`, [
           `à ${d2} et ${d1} carreaux, mais à gauche`,
@@ -733,7 +733,7 @@ type Gen = TutorGeneratedQuestionV4;
 type Pt = { x: number; y: number };
 
 const TROUPE = [
-  "Nina", "Téo", "Zoé", "Ravi", "Pic le paille-en-queue",
+  "Nina", "Téo", "Zoé", "Ravi", "Pic",
   "Lou", "Malo", "Inès", "Sacha", "Amir", "Jade", "Naïa", "Tom", "Lina", "Yanis",
 ] as const;
 const qui = () => un(TROUPE);
@@ -790,11 +790,11 @@ function lettreDessinee(ctx: boolean): Gen {
   return {
     text: [
       ctx
-        ? un([`${P} a découpé la lettre ${L.l} dans du carton.`, `${P} plie la lettre ${L.l} le long du trait vert.`, `Pour une affiche, ${P} dessine la lettre ${L.l}.`])
+        ? un([`${P} a découpé la lettre ${L.l} en carton.`, `${P} plie la lettre ${L.l}.`, `Pour une affiche, ${P} dessine la lettre ${L.l}.`])
         : un([`Voici la lettre ${L.l}.`, `Regarde la lettre ${L.l}.`, `La lettre ${L.l} est dessinée.`]),
       un([
         `Le trait vert ${sens} est-il un axe de symétrie ?`,
-        "Si on plie le long du trait vert, les deux moitiés se superposent-elles ?",
+        "En pliant le long du trait vert, les moitiés se superposent-elles ?",
         "Ce trait vert est-il un axe de symétrie de la lettre ?",
       ]),
     ].join(" "),
@@ -904,7 +904,7 @@ function combienAxes(ctx: boolean): Gen {
   return {
     text: ctx
       ? un([
-          `${P} plie ${f.nom} en papier de toutes les façons. Combien d'axes de symétrie trouve-t-${P === "Pic le paille-en-queue" ? "il" : "on"} ?`,
+          `${P} plie ${f.nom} en papier de toutes les façons. Combien d'axes de symétrie trouve-t-${P === "Pic" ? "il" : "on"} ?`,
           `${P} cherche tous les plis qui marchent pour ${f.nom}. Combien d'axes de symétrie a-t-il ?`,
         ])
       : un([`Combien d'axes de symétrie a ${f.nom} ?`, `${f.Nom} : combien a-t-il d'axes de symétrie ?`, `Regarde ${f.nom}. Combien a-t-il d'axes de symétrie ?`]),
@@ -1013,7 +1013,7 @@ function pliQuadrilatere(ctx: boolean, piege = false): Gen {
   return {
     text: ctx
       ? `${P} plie ${o} le long du trait vert. ${un(["Les deux moitiés se superposent-elles ?", "Ce pli est-il un axe de symétrie ?", "Les bords tombent-ils pile l'un sur l'autre ?"])}`
-      : `Voici un ${q.nom}. ${un(["Le trait vert est-il un axe de symétrie ?", "Si on plie le long du trait vert, les deux moitiés se superposent-elles ?"])}`,
+      : `Voici un ${q.nom}. ${un(["Le trait vert est-il un axe de symétrie ?", "En pliant le long du trait vert, les moitiés se superposent-elles ?"])}`,
     ...ouiNon(pli.oui),
     explanation: exp(
       "Un axe de symétrie est un pli qui superpose les deux moitiés, sans dépasser.",
@@ -1045,7 +1045,7 @@ const MOITIES = [
   { le: "le sapin", du: "du sapin", un: "un sapin", f: false, prof: [[0, 0], [2, 2], [1, 2], [3, 4], [1, 4], [1, 6], [0, 6]] },
   { le: "la maison", du: "de la maison", un: "une maison", f: true, prof: [[0, 0], [3, 2], [2, 2], [2, 6], [0, 6]] },
   { le: "la fusée", du: "de la fusée", un: "une fusée", f: true, prof: [[0, 0], [1, 1], [1, 4], [2, 5], [2, 6], [0, 6]] },
-  { le: "la tour du château", du: "de la tour du château", un: "une tour de château", f: true, prof: [[0, 0], [1, 0], [1, 1], [2, 1], [2, 0], [3, 0], [3, 6], [0, 6]] },
+  { le: "la tour", du: "de la tour", un: "une tour", f: true, prof: [[0, 0], [1, 0], [1, 1], [2, 1], [2, 0], [3, 0], [3, 6], [0, 6]] },
   { le: "le vase", du: "du vase", un: "un vase", f: false, prof: [[0, 0], [2, 0], [1, 1], [1, 2], [3, 4], [2, 6], [0, 6]] },
   { le: "la flèche", du: "de la flèche", un: "une flèche", f: true, prof: [[0, 0], [3, 3], [1, 3], [1, 6], [0, 6]] },
   { le: "la couronne", du: "de la couronne", un: "une couronne", f: true, prof: [[0, 1], [1, 3], [3, 0], [3, 6], [0, 6]] },
@@ -1070,12 +1070,11 @@ function completerDistance(ctx: boolean): Gen {
   return {
     text: [
       ctx
-        ? un([`${P} a dessiné la moitié ${m.du} contre l'axe.`, `${P} veut compléter ${m.le} par symétrie.`, `Pour la fête, ${P} dessine ${m.un} en deux moitiés.`])
-        : un([`Voici la moitié ${m.du}.`, `On a dessiné la moitié ${m.du}.`]),
+        ? un([`${P} complète ${m.le}.`, `${P} finit ${m.le}.`])
+        : un([`Voici la moitié ${m.du}.`, `Voici une moitié ${m.du}.`]),
       un([
-        `À combien de carreaux de l'axe faut-il placer l'image de son point le plus à ${ext} ?`,
         `L'image du point le plus à ${ext} sera à combien de carreaux de l'axe ?`,
-        `Pour finir le dessin, à combien de carreaux de l'axe va l'image du point le plus à ${ext} ?`,
+        `À combien de carreaux de l'axe va l'image du point le plus à ${ext} ?`,
       ]),
     ].join(" "),
     ...qcmN(w, [w - 1, w + 1, 2 * w]),
@@ -1096,10 +1095,10 @@ function completerLargeur(): Gen {
   const P = qui();
   return {
     text: [
-      un([`${P} va compléter ${m.le} par symétrie.`, `Voici la moitié ${m.du}, posée contre l'axe.`, `${P} a peint la moitié ${m.du}.`]),
+      un([`${P} va compléter ${m.le} par symétrie.`, `Voici la moitié ${m.du}.`, `${P} a peint la moitié ${m.du}.`]),
       un([
-        `Une fois ${m.f ? "complète" : "complet"}, combien de carreaux de large mesurera ${m.le} ?`,
-        `Quelle sera la largeur ${m.du} entier, en carreaux ?`,
+        `${cap(m.le)} ${m.f ? "complète" : "complet"} fera combien de carreaux de large ?`,
+        `Combien de carreaux de large aura ${m.le} ${m.f ? "entière" : "entier"} ?`,
       ]),
     ].join(" "),
     ...qcmN(2 * w, [w, 2 * w + 1, 2 * w - 1, w + 1]),
@@ -1137,7 +1136,7 @@ function completerJuger(d: number): Gen {
   };
   return {
     text: [
-      un([`${P} complète la moitié ${m.du}.`, `${P} a fini son dessin ${m.du}.`, `Pour la fête, ${P} dessine ${m.un} symétrique.`, `${P} a colorié l'autre moitié ${m.du} en rouge.`]),
+      un([`${P} complète la moitié ${m.du}.`, `${P} a fini son dessin ${m.du}.`, `${P} dessine ${m.un} symétrique.`, `${P} a colorié l'autre moitié en rouge.`]),
       un(["La partie rouge est-elle bien le symétrique de la bleue ?", "Le dessin est-il juste ?", "La partie rouge est-elle bien placée ?"]),
     ].join(" "),
     ...qcm(cas, d >= 4 ? [BIEN, GLISSE, LOIN, HAUTEUR] : [BIEN, GLISSE, LOIN]),
@@ -1231,13 +1230,13 @@ function symetriquePoint(ctx: boolean, d: number): Gen {
         ctx
           ? un([
               `${P} a posé un jeton sur le point A.`,
-              "Pic le paille-en-queue est perché sur le point A.",
-              `Sur le quadrillage, ${P} a marqué le point A.`,
+              "Pic est perché sur le point A.",
+              `${P} a marqué le point A.`,
               `${P} a caché un trésor au point A.`,
               `Le jardinier plante une fleur au point A.`,
             ])
           : un(["Voici le point A et un axe vert.", "Regarde le point A et l'axe vert."]),
-        un(["Quel point est le symétrique de A ?", "Lequel de ces points est l'image de A ?", "Si on plie le long de l'axe vert, sur quel point tombe A ?"]),
+        un(["Quel point est le symétrique de A ?", "Lequel de ces points est l'image de A ?", "En pliant le long de l'axe vert, où tombe A ?"]),
       ].join(" "),
     ...qcm(juste, cands.map((_, i) => `le point ${NOMS[i]}`)),
     explanation: exp(
@@ -1258,7 +1257,7 @@ function distancePoint(): Gen {
   const inverse = Math.random() < 0.3;
   if (inverse) {
     return {
-      text: `${un([`${P} a placé le point A et son symétrique.`, "Un point et son symétrique sont de chaque côté de l'axe vert."])} Ils sont séparés de ${2 * dist} carreaux. À combien de carreaux de l'axe est chacun d'eux ?`,
+      text: `Entre A et son symétrique : ${2 * dist} carreaux. À combien de carreaux de l'axe est A ?`,
       ...qcmN(dist, [2 * dist, dist + 1, 4 * dist]),
       explanation: exp(
         "Un point et son symétrique sont à la même distance de l'axe, chacun d'un côté.",
@@ -1270,7 +1269,7 @@ function distancePoint(): Gen {
     };
   }
   return {
-    text: `${un([`${P} a marqué le point A.`, "Pic le paille-en-queue est sur le point A.", "Regarde le point A et l'axe vert."])} ${un([
+    text: `${un([`${P} a marqué le point A.`, "Pic est sur le point A.", "Regarde le point A et l'axe vert."])} ${un([
       "Combien de carreaux séparent A de son symétrique ?",
       "Quelle distance, en carreaux, y a-t-il entre A et son image ?",
     ])}`,

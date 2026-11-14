@@ -173,28 +173,28 @@ type Monde = {
   part: (n: number) => string;
 };
 const MONDES: readonly Monde[] = [
-  { pl: "oiseaux", sg: "oiseau", lieu: "sur la branche", dessin: "oiseau", arrive: (n) => `${n} autres oiseaux se posent.`, part: (n) => `${n} oiseaux s'envolent.` },
-  { pl: "poissons", sg: "poisson", lieu: "dans l'aquarium", dessin: "poisson", arrive: (n) => `On ajoute ${n} poissons.`, part: (n) => `${n} poissons vont dans l'autre bassin.` },
-  { pl: "pommes", sg: "pomme", lieu: "dans le panier", dessin: "pomme", arrive: (n) => `On ajoute ${n} pommes.`, part: (n) => `On prend ${n} pommes pour la tarte.` },
-  { pl: "bananes", sg: "banane", lieu: "sur la table du goûter", dessin: "banane", arrive: (n) => `On pose ${n} autres bananes.`, part: (n) => `Les enfants mangent ${n} bananes.` },
-  { pl: "ballons", sg: "ballon", lieu: "à la fête d'anniversaire", arrive: (n) => `On gonfle ${n} autres ballons.`, part: (n) => `${n} ballons s'envolent dans le ciel.` },
-  { pl: "papillons", sg: "papillon", lieu: "dans le jardin", dessin: "papillon", arrive: (n) => `${n} autres papillons arrivent.`, part: (n) => `${n} papillons s'envolent.` },
-  { pl: "fleurs", sg: "fleur", lieu: "dans le vase", dessin: "fleur", arrive: (n) => `Le jardinier ajoute ${n} fleurs.`, part: (n) => `On enlève ${n} fleurs fanées.` },
-  { pl: "livres", sg: "livre", lieu: "sur l'étagère de la classe", dessin: "livre", arrive: (n) => `La maîtresse pose ${n} autres livres.`, part: (n) => `Les élèves empruntent ${n} livres.` },
-  { pl: "petites voitures", sg: "petite voiture", lieu: "sur le tapis de jeu", dessin: "voiture", arrive: (n) => `Malo apporte ${n} autres petites voitures.`, part: (n) => `${n} petites voitures roulent sous le lit.` },
-  { pl: "bateaux", sg: "bateau", lieu: "dans le port", dessin: "bateau", arrive: (n) => `${n} autres bateaux arrivent.`, part: (n) => `${n} bateaux partent en mer.` },
-  { pl: "étoiles", sg: "étoile", lieu: "dans le ciel", dessin: "etoile", arrive: (n) => `${n} autres étoiles s'allument.`, part: (n) => `Un nuage cache ${n} étoiles.` },
-  { pl: "chats", sg: "chat", lieu: "dans la cour de la ferme", dessin: "chat", arrive: (n) => `${n} autres chats arrivent.`, part: (n) => `${n} chats vont dormir dans la grange.` },
-  { pl: "chapeaux", sg: "chapeau", lieu: "dans le coffre à déguisements", dessin: "chapeau", arrive: (n) => `On ajoute ${n} chapeaux.`, part: (n) => `Les clowns prennent ${n} chapeaux.` },
-  { pl: "graines", sg: "graine", lieu: "dans la mangeoire de Pic", arrive: (n) => `On ajoute ${n} graines.`, part: (n) => `Pic le paille-en-queue picore ${n} graines.` },
-  { pl: "dinosaures", sg: "dinosaure", lieu: "dans la boîte à jouets", arrive: (n) => `Ravi range ${n} autres dinosaures.`, part: (n) => `Ravi prend ${n} dinosaures pour jouer.` },
-  { pl: "croissants", sg: "croissant", lieu: "sur le plateau de la boulangère", arrive: (n) => `La boulangère sort ${n} croissants du four.`, part: (n) => `La boulangère vend ${n} croissants.` },
-  { pl: "enfants", sg: "enfant", lieu: "dans la piscine", arrive: (n) => `${n} autres enfants sautent dans l'eau.`, part: (n) => `${n} enfants sortent de l'eau.` },
-  { pl: "voyageurs", sg: "voyageur", lieu: "dans le petit train", arrive: (n) => `${n} voyageurs montent.`, part: (n) => `${n} voyageurs descendent.` },
-  { pl: "moutons", sg: "mouton", lieu: "dans le pré", arrive: (n) => `Le berger fait entrer ${n} moutons.`, part: (n) => `${n} moutons rentrent à la bergerie.` },
-  { pl: "coquillages", sg: "coquillage", lieu: "dans le seau", arrive: (n) => `On ramasse ${n} autres coquillages.`, part: (n) => `On rend ${n} coquillages à la mer.` },
-  { pl: "bougies", sg: "bougie", lieu: "sur le gâteau", arrive: (n) => `On plante ${n} autres bougies.`, part: (n) => `On enlève ${n} bougies.` },
-  { pl: "singes", sg: "singe", lieu: "dans l'arbre du zoo", arrive: (n) => `${n} autres singes grimpent.`, part: (n) => `${n} singes descendent manger.` },
+  { pl: "oiseaux", sg: "oiseau", lieu: "sur la branche", dessin: "oiseau", arrive: (n) => `${n} autres se posent.`, part: (n) => `${n} oiseaux s'envolent.` },
+  { pl: "poissons", sg: "poisson", lieu: "dans l'aquarium", dessin: "poisson", arrive: (n) => `On en ajoute ${n}.`, part: (n) => `${n} poissons vont dans l'autre bassin.` },
+  { pl: "pommes", sg: "pomme", lieu: "dans le panier", dessin: "pomme", arrive: (n) => `On en ajoute ${n}.`, part: (n) => `On prend ${n} pommes pour la tarte.` },
+  { pl: "bananes", sg: "banane", lieu: "sur la table", dessin: "banane", arrive: (n) => `On en pose ${n} autres.`, part: (n) => `Les enfants mangent ${n} bananes.` },
+  { pl: "ballons", sg: "ballon", lieu: "à la fête", arrive: (n) => `On en gonfle ${n} autres.`, part: (n) => `${n} ballons s'envolent dans le ciel.` },
+  { pl: "papillons", sg: "papillon", lieu: "dans le jardin", dessin: "papillon", arrive: (n) => `${n} autres arrivent.`, part: (n) => `${n} papillons s'envolent.` },
+  { pl: "fleurs", sg: "fleur", lieu: "dans le vase", dessin: "fleur", arrive: (n) => `On en ajoute ${n}.`, part: (n) => `On enlève ${n} fleurs fanées.` },
+  { pl: "livres", sg: "livre", lieu: "sur l'étagère", dessin: "livre", arrive: (n) => `On en pose ${n} autres.`, part: (n) => `Les élèves empruntent ${n} livres.` },
+  { pl: "voitures", sg: "voiture", lieu: "sur le tapis", dessin: "voiture", arrive: (n) => `Malo en apporte ${n}.`, part: (n) => `${n} petites voitures roulent sous le lit.` },
+  { pl: "bateaux", sg: "bateau", lieu: "dans le port", dessin: "bateau", arrive: (n) => `${n} autres arrivent.`, part: (n) => `${n} bateaux partent en mer.` },
+  { pl: "étoiles", sg: "étoile", lieu: "dans le ciel", dessin: "etoile", arrive: (n) => `${n} autres s'allument.`, part: (n) => `Un nuage cache ${n} étoiles.` },
+  { pl: "chats", sg: "chat", lieu: "dans la cour", dessin: "chat", arrive: (n) => `${n} autres arrivent.`, part: (n) => `${n} chats vont dormir dans la grange.` },
+  { pl: "chapeaux", sg: "chapeau", lieu: "dans le coffre", dessin: "chapeau", arrive: (n) => `On en ajoute ${n}.`, part: (n) => `Les clowns prennent ${n} chapeaux.` },
+  { pl: "graines", sg: "graine", lieu: "dans la mangeoire", arrive: (n) => `On en ajoute ${n}.`, part: (n) => `Pic le paille-en-queue picore ${n} graines.` },
+  { pl: "dinosaures", sg: "dinosaure", lieu: "dans la boîte", arrive: (n) => `Ravi en range ${n} autres.`, part: (n) => `Ravi prend ${n} dinosaures pour jouer.` },
+  { pl: "croissants", sg: "croissant", lieu: "sur le plateau", arrive: (n) => `On en sort ${n} du four.`, part: (n) => `La boulangère vend ${n} croissants.` },
+  { pl: "enfants", sg: "enfant", lieu: "dans la piscine", arrive: (n) => `${n} autres sautent dans l'eau.`, part: (n) => `${n} enfants sortent de l'eau.` },
+  { pl: "voyageurs", sg: "voyageur", lieu: "dans le train", arrive: (n) => `${n} voyageurs montent.`, part: (n) => `${n} voyageurs descendent.` },
+  { pl: "moutons", sg: "mouton", lieu: "dans le pré", arrive: (n) => `Le berger en fait entrer ${n}.`, part: (n) => `${n} moutons rentrent à la bergerie.` },
+  { pl: "coquillages", sg: "coquillage", lieu: "dans le seau", arrive: (n) => `On en ramasse ${n} autres.`, part: (n) => `On rend ${n} coquillages à la mer.` },
+  { pl: "bougies", sg: "bougie", lieu: "sur le gâteau", arrive: (n) => `On en plante ${n} autres.`, part: (n) => `On enlève ${n} bougies.` },
+  { pl: "singes", sg: "singe", lieu: "dans l'arbre", arrive: (n) => `${n} autres grimpent.`, part: (n) => `${n} singes descendent manger.` },
 ];
 const monde = (dessinable = false) => randomChoice(dessinable ? MONDES.filter((m) => m.dessin) : MONDES);
 
@@ -204,11 +204,11 @@ const CHOSES: readonly Chose[] = [
   { pl: "billes", sg: "bille" },
   { pl: "images", sg: "image" },
   { pl: "autocollants", sg: "autocollant" },
-  { pl: "cartes de dragons", sg: "carte de dragon" },
+  { pl: "cartes", sg: "carte" },
   { pl: "perles", sg: "perle" },
   { pl: "crayons", sg: "crayon" },
   { pl: "coquillages", sg: "coquillage" },
-  { pl: "petites voitures", sg: "petite voiture", dessin: "voiture" },
+  { pl: "voitures", sg: "voiture", dessin: "voiture" },
   { pl: "livres", sg: "livre", dessin: "livre" },
   { pl: "ballons", sg: "ballon", dessin: "ballon" },
   { pl: "fleurs", sg: "fleur", dessin: "fleur" },
@@ -277,9 +277,9 @@ function porteMonnaie(euros: number): MonnaieCanvasData {
 function histoireAjout(a: number, b: number, dessin = true) {
   const m = monde(dessin && a <= 10 && b <= 10);
   const question = randomChoice([
-    `Combien y a-t-il ${de(m.pl)} maintenant ?`,
-    `Combien ${de(m.pl)} y a-t-il à la fin ?`,
-    `Trouve le nombre ${de(m.pl)} à la fin.`,
+    "Combien maintenant ?",
+    `Combien ${de(m.pl)} à la fin ?`,
+    "Combien en tout ?",
     `Combien ${de(m.pl)} en tout ?`,
   ]);
   return {
@@ -294,8 +294,8 @@ function histoireReunion(a: number, b: number, dessin = true) {
   const c = chose(dessin && a <= 5 && b <= 5);
   const question = randomChoice([
     `Combien ${de(c.pl)} ont-${ils(p, q)} ensemble ?`,
-    `Combien cela fait-il ${de(c.pl)} en tout ?`,
-    `${p.nom} et ${q.nom} mettent tout ensemble. Combien ${de(c.pl)} ?`,
+    `Combien ${de(c.pl)} en tout ?`,
+    `Ensemble, combien ${de(c.pl)} ont-${ils(p, q)} ?`,
   ]);
   return {
     text: `${p.nom} a ${a} ${c.pl}. ${q.nom} en a ${b}. ${question}`,
@@ -359,7 +359,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         const c = chose(n + 1 <= 5);
         const question = randomChoice([
           `Combien ${de(c.pl)} ont-${ils(p, q)} ensemble ?`,
-          `Combien cela fait-il ${de(c.pl)} en tout ?`,
+          `Combien ${de(c.pl)} en tout ?`,
           `Ils réunissent tout. Combien ${de(c.pl)} ?`,
         ]);
         return court(
@@ -436,8 +436,8 @@ export const calculMentalBank: TutorBankItemV4[] = [
       }
       const m = monde();
       const t = randomChoice([
-        `${maj(m.lieu)}, il y avait ${a} ${m.pl}. Maintenant, il y en a ${total}. Combien y en a-t-il de plus ?`,
-        `${maj(m.lieu)}, il y a ${a} ${m.pl}. On veut en avoir ${total}. Combien en faut-il encore ?`,
+        `Il y avait ${a} ${m.pl}. Maintenant, il y en a ${total}. Combien de plus ?`,
+        `Il y a ${a} ${m.pl}. On en veut ${total}. Combien en faut-il encore ?`,
       ]);
       return court(t, b, explication, cadres(a, 0, 2));
     },
@@ -462,21 +462,21 @@ export const calculMentalBank: TutorBankItemV4[] = [
         `Le petit train a 10 places. ${deja} enfants sont montés.`,
         `La trousse a 10 places. Il y a ${deja} crayons dedans.`,
         `Le gâteau doit avoir 10 bougies. On en a planté ${deja}.`,
-        `La barque des pirates a 10 places. ${deja} pirates sont assis.`,
-        `Le carton a 10 places. Il y a ${deja} bouteilles de jus.`,
-        `Autour de la table, il y a 10 chaises. ${deja} enfants sont assis.`,
+        `La barque a 10 places. ${deja} pirates sont assis.`,
+        `Le carton a 10 places. Il y a ${deja} bouteilles.`,
+        `Il y a 10 chaises. ${deja} enfants sont assis.`,
         `La fusée a 10 hublots. Zoé en a peint ${deja}.`,
-        `Le garage à jouets a 10 places. Il y a ${deja} petites voitures.`,
-        `Le nid du dragon peut tenir 10 œufs. Il y en a ${deja}.`,
+        `Le garage a 10 places. Il y a ${deja} voitures.`,
+        `Le nid tient 10 œufs. Il y en a ${deja}.`,
         `L'étagère a 10 places. On y a rangé ${deja} livres.`,
-        `Le bus de la sortie au zoo a 10 places. ${deja} enfants sont assis.`,
+        `Le bus a 10 places. ${deja} enfants sont assis.`,
         `La boîte de 10 cases contient ${deja} jetons.`,
       ]);
       const question = randomChoice([
-        "Combien en manque-t-il pour arriver à 10 ?",
-        "Combien en faut-il encore pour avoir 10 ?",
-        "Il en manque combien pour faire 10 ?",
-        "Combien en manque-t-il pour que ce soit plein ?",
+        "Combien en manque-t-il ?",
+        "Combien en faut-il encore ?",
+        "Il en manque combien ?",
+        "Combien pour que ce soit plein ?",
       ]);
       return court(
         `${debut} ${question}`,
@@ -522,22 +522,22 @@ export const calculMentalBank: TutorBankItemV4[] = [
       const s = randomChoice([
         { tout: "Il y a 10 enfants dans l'équipe.", p1: "filles", p2: "garçons" },
         { tout: "Le collier a 10 perles.", p1: "perles rouges", p2: "perles bleues" },
-        { tout: "Il y a 10 poules à la ferme.", p1: "poules dans le poulailler", p2: "poules dehors" },
-        { tout: "Il y a 10 pirates sur le bateau.", p1: "pirates sur le pont", p2: "pirates dans la cale" },
+        { tout: "Il y a 10 poules.", p1: "poules dedans", p2: "poules dehors" },
+        { tout: "Il y a 10 pirates.", p1: "pirates sur le pont", p2: "pirates dans la cale" },
         { tout: "Nina a 10 doigts.", p1: "doigts levés", p2: "doigts baissés" },
-        { tout: "Il y a 10 dinosaures dans la boîte.", p1: "dinosaures verts", p2: "dinosaures orange" },
+        { tout: "Il y a 10 dinosaures.", p1: "dinosaures verts", p2: "dinosaures orange" },
         { tout: "Le zoo a 10 singes.", p1: "singes dans l'arbre", p2: "singes au sol" },
         { tout: "Le vétérinaire soigne 10 animaux.", p1: "chiens", p2: "chats" },
         { tout: "La fusée emporte 10 caisses.", p1: "caisses de nourriture", p2: "caisses d'outils" },
-        { tout: "Le cirque a 10 clowns.", p1: "clowns sur la piste", p2: "clowns derrière le rideau" },
-        { tout: "Il y a 10 billes dans le sac.", p1: "billes rouges", p2: "billes vertes" },
+        { tout: "Le cirque a 10 clowns.", p1: "clowns sur la piste", p2: "clowns cachés" },
+        { tout: "Il y a 10 billes.", p1: "billes rouges", p2: "billes vertes" },
         { tout: "La maîtresse a 10 cahiers.", p1: "cahiers rouges", p2: "cahiers bleus" },
       ]);
       // 2 à 8 : jamais « 1 perles rouges ».
       const k = randomInt(2, 8);
       const question = randomChoice([
         `Il y a ${k} ${s.p1}. Combien de ${s.p2} ?`,
-        `${k} sont des ${s.p1}. Les autres sont des ${s.p2}. Combien de ${s.p2} ?`,
+        `${k} ${s.p1}. Combien de ${s.p2} ?`,
         `On compte ${k} ${s.p1}. Et combien de ${s.p2} ?`,
       ]);
       return court(
@@ -590,7 +590,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       const [p, q] = deuxEnfants();
       const t = randomChoice([
         `${p.nom} et ${q.nom} lancent 10 anneaux. ${p.nom} en lance ${n}. Combien ${q.nom} en lance-t-${q.il} ?`,
-        `Il y a 10 parts de gâteau. ${p.nom} en sert ${n}. ${q.nom} sert les autres. Combien ${q.nom} en sert-${q.il} ?`,
+        `Il y a 10 parts de gâteau. ${p.nom} en sert ${n}, ${q.nom} le reste. Combien pour ${q.nom} ?`,
         `${p.nom} et ${q.nom} ont 10 bonbons à eux deux. ${p.nom} en a ${n}. Combien en a ${q.nom} ?`,
       ]);
       return qcm(t, choixNombres(c, [10 + n, n, c + 1, c - 1]), String(c), explication, cadres(n, 0, 1));
@@ -707,15 +707,15 @@ export const calculMentalBank: TutorBankItemV4[] = [
         `${p.nom} range ${d} livres sur deux étagères, autant sur chacune.`,
         `Il y a ${d} enfants. Ils forment deux équipes pareilles.`,
         `La coccinelle a ${d} points. Elle en a autant sur chaque aile.`,
-        `Deux nids ont le même nombre d'œufs. Il y a ${d} œufs en tout.`,
+        `Deux nids ont ${d} œufs en tout, autant chacun.`,
         `${p.nom} a ${d} cerises. ${maj(p.il)} en tient autant dans chaque main.`,
         `Le dragon a deux têtes et ${d} dents, autant sur chaque tête.`,
         `Le jardinier plante ${d} salades en deux rangs pareils.`,
       ]);
       const question = randomChoice([
-        "Combien dans chacune des deux parts ?",
-        "Combien y en a-t-il dans une seule part ?",
-        "Trouve le nombre pour une des deux parts.",
+        "Combien dans chaque part ?",
+        "Combien dans une seule part ?",
+        "Combien pour une part ?",
       ]);
       return court(`${s} ${question}`, n, explication, cadres(d, 0, 2), [d, n + 1, n - 1, n + 2]);
     },
@@ -883,16 +883,16 @@ export const calculMentalBank: TutorBankItemV4[] = [
       const p = enfant();
       const s1 = pas === 1;
       const s = randomChoice([
-        { t: `${p.nom} lit la page ${n} de son livre de dinosaures. ${maj(p.il)} ${ajoute ? "avance" : "revient en arrière"} de ${pas} ${s1 ? "page" : "pages"}.`, q: `À quelle page arrive-t-${p.il} ?` },
-        { t: `Le pion ${deN(p)} est sur la case ${n}. Il ${ajoute ? "avance" : "recule"} de ${pas} ${s1 ? "case" : "cases"}.`, q: "Sur quelle case arrive-t-il ?" },
+        { t: `${p.nom} est à la page ${n}. ${maj(p.il)} ${ajoute ? "avance" : "recule"} de ${pas} ${s1 ? "page" : "pages"}.`, q: `À quelle page arrive-t-${p.il} ?` },
+        { t: `Le pion ${deN(p)} est sur la case ${n}. Il ${ajoute ? "avance" : "recule"} de ${pas} ${s1 ? "case" : "cases"}.`, q: "Où arrive-t-il ?" },
         { t: `${p.nom} a ${n} autocollants. ${maj(p.il)} en ${ajoute ? "gagne" : "colle"} ${pas}.`, q: ajoute ? `Combien en a-t-${p.il} maintenant ?` : "Combien lui en reste-t-il ?" },
-        { t: `Il y a ${n} enfants dans la cour. ${s1 ? `1 enfant ${ajoute ? "arrive" : "rentre en classe"}` : `${pas} enfants ${ajoute ? "arrivent" : "rentrent en classe"}`}.`, q: "Combien d'enfants dans la cour maintenant ?" },
-        { t: `La boulangère a ${n} croissants. Elle en ${ajoute ? "cuit encore" : "vend"} ${pas}.`, q: "Combien de croissants a-t-elle maintenant ?" },
-        { t: `La fusée est à ${n} mètres du sol. Elle ${ajoute ? "monte" : "descend"} de ${pas} ${s1 ? "mètre" : "mètres"}.`, q: "À combien de mètres est-elle maintenant ?" },
-        { t: `Le petit train porte ${n} voyageurs. ${s1 ? `1 voyageur ${ajoute ? "monte" : "descend"}` : `${pas} voyageurs ${ajoute ? "montent" : "descendent"}`}.`, q: "Combien de voyageurs maintenant ?" },
-        { t: `Pic le paille-en-queue a ${n} graines. On lui en ${ajoute ? "donne" : "prend"} ${pas}.`, q: "Combien de graines a-t-il maintenant ?" },
+        { t: `Il y a ${n} enfants dans la cour. ${s1 ? `1 enfant ${ajoute ? "arrive" : "rentre en classe"}` : `${pas} enfants ${ajoute ? "arrivent" : "rentrent en classe"}`}.`, q: "Combien maintenant ?" },
+        { t: `La boulangère a ${n} croissants. Elle en ${ajoute ? "cuit encore" : "vend"} ${pas}.`, q: "Combien en a-t-elle maintenant ?" },
+        { t: `La fusée est à ${n} mètres. Elle ${ajoute ? "monte" : "descend"} de ${pas}.`, q: "À combien de mètres est-elle ?" },
+        { t: `Le train porte ${n} voyageurs. ${s1 ? `1 voyageur ${ajoute ? "monte" : "descend"}` : `${pas} voyageurs ${ajoute ? "montent" : "descendent"}`}.`, q: "Combien de voyageurs maintenant ?" },
+        { t: `Pic a ${n} graines. On lui en ${ajoute ? "donne" : "prend"} ${pas}.`, q: "Combien en a-t-il maintenant ?" },
       ]);
-      return court(`${s.t} ${s.q}`, r, explication, famille === 1 ? materiel(n) : undefined);
+      return court(`${s.t} ${s.q}`, r, explication, materiel(n));
     },
   ),
   gabarit(
@@ -922,7 +922,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         `Le pion ${deN(p)} est sur la case ${n}. Il ${ajoute ? "avance" : "recule"} de 10 cases. Où arrive-t-il ?`,
         `Il y a ${n} œufs. On ${ajoute ? "ajoute" : "vend"} une boîte de 10 œufs. Combien d'œufs maintenant ?`,
         `${p.nom} compte de 10 en 10 ${ajoute ? "en avançant" : "en reculant"}. ${maj(p.il)} dit ${n}. Quel nombre dit-${p.il} ensuite ?`,
-        `Le robot ${deN(p)} est sur la case ${n}. Il fait 10 pas ${ajoute ? "en avant" : "en arrière"}. Sur quelle case arrive-t-il ?`,
+        `Le robot ${deN(p)} est sur la case ${n}. Il fait 10 pas ${ajoute ? "en avant" : "en arrière"}. Où arrive-t-il ?`,
       ]);
       const argent = t.includes("€");
       return qcm(
@@ -973,16 +973,16 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (famille === 1) {
         const t = randomChoice([
           `${p.nom} a ${depart} €. ${maj(p.il)} veut ${arrivee} € pour un vélo. Combien d'euros lui manque-t-il ?`,
-          `${p.nom} avait ${depart} €. Mamie lui donne des billets de 10 €. Maintenant, ${p.il} a ${arrivee} €. Combien Mamie a-t-elle donné ?`,
+          `${p.nom} avait ${depart} €. Avec les billets de Mamie, ${p.il} a ${arrivee} €. Combien Mamie a-t-elle donné ?`,
         ]);
         return qcm(t, choixNombres(pas, [d2 - d1, pas + 10, pas - 10, arrivee], "€"), `${pas} €`, explication, porteMonnaie(depart));
       }
       const t = randomChoice([
-        `Le livre ${deN(p)} a ${arrivee} pages. ${maj(p.il)} est à la page ${depart}. Combien de pages reste-t-il à lire ?`,
-        `Le pion ${deN(p)} est sur la case ${depart}. Il doit aller sur la case ${arrivee}. De combien de cases doit-il avancer ?`,
-        `Il y a ${depart} poussins à la ferme. Après la naissance d'autres poussins, il y en a ${arrivee}. Combien sont nés ?`,
-        `La fusée est à ${depart} mètres. Elle doit monter à ${arrivee} mètres. De combien de mètres doit-elle encore monter ?`,
-        `La boulangère a fait ${depart} pains. Il en faut ${arrivee} pour la fête. Combien doit-elle encore en faire ?`,
+        `Le livre ${deN(p)} a ${arrivee} pages. ${maj(p.il)} est à la page ${depart}. Combien en reste-t-il ?`,
+        `Le pion ${deN(p)} est sur la case ${depart}. Il va à la case ${arrivee}. De combien avance-t-il ?`,
+        `Il y avait ${depart} poussins. Il y en a maintenant ${arrivee}. Combien sont nés ?`,
+        `La fusée est à ${depart} mètres. Elle doit aller à ${arrivee} mètres. De combien monte-t-elle ?`,
+        `La boulangère a fait ${depart} pains. Il en faut ${arrivee}. Combien en manque-t-il ?`,
       ]);
       return court(t, pas, explication, materiel(depart));
     },
@@ -1027,13 +1027,13 @@ export const calculMentalBank: TutorBankItemV4[] = [
       }
       const s = ajoute
         ? randomChoice([
-            `Il y a ${n} œufs au marché. Le fermier apporte ${k} boîtes de 10 œufs. Combien d'œufs maintenant ?`,
+            `Il y a ${n} œufs. Le fermier apporte ${k} boîtes de 10. Combien d'œufs maintenant ?`,
             `${p.nom} a ${n} cartes de dragons. ${maj(p.il)} reçoit ${k} paquets de 10 cartes. Combien de cartes a-t-${p.il} ?`,
-            `Dans la bibliothèque, il y a ${n} livres. On ajoute ${k} cartons de 10 livres. Combien de livres maintenant ?`,
+            `Il y a ${n} livres. On ajoute ${k} cartons de 10. Combien de livres maintenant ?`,
             `${p.nom} a ${n} perles. ${maj(p.il)} ouvre ${k} sachets de 10 perles. Combien de perles a-t-${p.il} ?`,
           ])
         : randomChoice([
-            `Il y a ${n} œufs au marché. Le fermier vend ${k} boîtes de 10 œufs. Combien d'œufs reste-t-il ?`,
+            `Il y a ${n} œufs. Le fermier vend ${k} boîtes de 10. Combien en reste-t-il ?`,
             `${p.nom} a ${n} cartes de dragons. ${maj(p.il)} donne ${k} paquets de 10 cartes. Combien lui en reste-t-il ?`,
             `Dans la bibliothèque, il y a ${n} livres. On en prête ${pas}. Combien de livres reste-t-il ?`,
             `La boulangère a ${n} croissants. Elle vend ${k} plateaux de 10 croissants. Combien en reste-t-il ?`,
@@ -1193,7 +1193,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         `${p.nom} a ${n} billes. ${maj(p.il)} veut finir la dizaine. Combien de billes aura-t-${p.il} alors ?`,
         `On range ${n} œufs dans des boîtes de 10. Avec combien d'œufs toutes les boîtes seront-elles pleines ?`,
         `Le pion est sur la case ${n}. Quelle est la prochaine case qui finit par 0 ?`,
-        `Sur la frise des nombres, Pic est sur ${n}. Il vole jusqu'à la dizaine suivante. Où arrive-t-il ?`,
+        `Pic est sur ${n}. Il vole jusqu'à la dizaine suivante. Où arrive-t-il ?`,
         `Sur la frise, ${n} est entre deux dizaines. Laquelle vient juste après ?`,
       ]);
       return qcm(
@@ -1272,7 +1272,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         `Le compteur du jeu affiche ${n} points. On gagne encore 9 points.`,
         `${p.nom} a ${n} points au jeu. ${maj(p.il)} gagne encore 9 points.`,
         `Il y a ${n} enfants au cirque. 9 autres entrent.`,
-        `Le vétérinaire a soigné ${n} animaux. Aujourd'hui, il en soigne 9 de plus.`,
+        `Le vétérinaire a soigné ${n} animaux. Il en soigne 9 de plus.`,
         `Pic le paille-en-queue a ${n} graines. Il en trouve encore 9.`,
       ]);
       const question = randomChoice(["Combien maintenant ?", "Combien cela fait-il en tout ?", "Calcule le nouveau nombre."]);
@@ -1405,7 +1405,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
       if (famille === 1) {
         const t = randomChoice([
           `${p.nom} a ${a} €. ${q.nom} a ${b} €. Combien d'euros ont-${ils(p, q)} ensemble ?`,
-          `${p.nom} et ${q.nom} mettent leur argent ensemble pour un cadeau : ${a} € et ${b} €. Combien cela fait-il ?`,
+          `Pour un cadeau, ${p.nom} donne ${a} €, ${q.nom} ${b} €. Combien en tout ?`,
         ]);
         // Billets de 10 € et pièces de 1 € : 24 dessins au plus en tout.
         const dessin: MonnaieCanvasData | undefined =
@@ -1420,7 +1420,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
         `Le matin, la boulangère vend ${a} croissants. L'après-midi, elle en vend ${b}. Combien en tout ?`,
         `Au zoo, il y a ${a} flamants roses et ${b} canards. Combien d'oiseaux en tout ?`,
         `${p.nom} marque ${a} points, puis ${b} points. Combien de points en tout ?`,
-        `Dans le train, ${a} voyageurs sont dans le premier wagon et ${b} dans le second. Combien de voyageurs ?`,
+        `Un wagon a ${a} voyageurs, l'autre ${b}. Combien en tout ?`,
         `La bibliothèque a ${a} albums et ${b} bandes dessinées. Combien de livres en tout ?`,
         `Le jardinier plante ${a} tulipes et ${b} roses. Combien de fleurs ?`,
         `À la kermesse, ${a} enfants jouent au chamboule-tout et ${b} pêchent des canards. Combien d'enfants ?`,
@@ -1728,7 +1728,7 @@ export const calculMentalBank: TutorBankItemV4[] = [
           `${p.nom} passe par ${dizaine} pour calculer ${n} + ${b}. Quel résultat trouve-t-${p.il} ?`,
           `Défi ${deN(p)} : calcule ${n} + ${b} en passant par ${dizaine}.`,
           `${p.nom} a ${n} billes et en gagne ${b}. ${maj(p.il)} passe par ${dizaine}. Combien de billes a-t-${p.il} ?`,
-          `Le pion ${deN(p)} est sur la case ${n}. Il avance de ${b} cases. Sur quelle case arrive-t-il ?`,
+          `Le pion ${deN(p)} est sur la case ${n}. Il avance de ${b} cases. Où arrive-t-il ?`,
           `Dans le bus, il y a ${n} enfants. ${b} montent. Combien sont-ils ? Passe par ${dizaine} !`,
         ]),
         total,

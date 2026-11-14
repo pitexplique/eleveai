@@ -113,19 +113,30 @@ function monde(descend: boolean, plusGrand: number): Monde {
 
 const liste = (termes: Array<number | string>) => termes.map((t) => (typeof t === "number" ? fmt(t) : t)).join(", ");
 
-/** Une phrase d'introduction : la suite nue, une personne qui la récite, ou un monde. */
-function introSuite(termes: Array<number | string>, descend: boolean): string {
+/** Les mots d'un énoncé (même compte que l'audit des longueurs : « 1 500 » fait deux mots). */
+const nbMots = (t: string) => t.replace(/\s+/g, " ").trim().split(" ").filter((w) => /[\p{L}\d]/u.test(w)).length;
+
+/**
+ * L'énoncé complet : une introduction (la suite nue, une personne qui la
+ * récite, ou un monde) suivie de la question.
+ * ⛔ 14/11 : énoncés CE2 trop longs. On ne garde que les introductions qui
+ * laissent l'énoncé à 18 mots au plus ; sinon, la plus courte.
+ */
+function introSuite(termes: Array<number | string>, descend: boolean, question: string): string {
   const p = quelquun();
   const l = liste(termes);
   const plusGrand = Math.max(...termes.filter((t): t is number => typeof t === "number"));
-  return pick([
+  const intros = [
     `Voici une suite : ${l}…`,
-    `${p.nom} récite une suite : ${l}…`,
+    `${p.nom} récite : ${l}…`,
     `${p.nom} a écrit sur son ardoise : ${l}…`,
+    `Sur le tableau : ${l}…`,
     monde(descend, plusGrand).intro(l),
     monde(descend, plusGrand).intro(l),
     monde(descend, plusGrand).intro(l),
-  ]);
+  ].map((i) => `${i} ${question}`);
+  const courts = intros.filter((t) => nbMots(t) <= 18);
+  return courts.length ? pick(courts) : intros.reduce((a, b) => (nbMots(b) < nbMots(a) ? b : a));
 }
 
 const sensMot = (descend: boolean) => (descend ? "on enlève" : "on ajoute");
@@ -142,12 +153,12 @@ function suivant(d: Etoile): Q {
   const montres = t.slice(0, n);
   const reponse = t[n];
   const correct = fmt(reponse);
-  const text = `${introSuite(montres, descend)} ${pick([
+  const text = introSuite(montres, descend, pick([
     "Quel nombre vient ensuite ?",
     "Quel est le nombre suivant ?",
-    "Continue : quel nombre faut-il écrire après ?",
+    "Quel nombre vient après ?",
     "Quel nombre viendra juste après ?",
-  ])}`;
+  ]));
   return {
     text,
     format: "qcm",
@@ -172,12 +183,12 @@ function trou(d: Etoile): Q {
   const k = rint(1, n - 2);
   const affiches: Array<number | string> = t.map((x, i) => (i === k ? "?" : x));
   const correct = fmt(t[k]);
-  const text = `${introSuite(affiches, descend)} ${pick([
+  const text = introSuite(affiches, descend, pick([
     "Quel nombre a été effacé ?",
     "Quel nombre manque ?",
-    "Par quel nombre faut-il remplacer le « ? » ?",
+    "Que cache le « ? » ?",
     "Pic a caché un nombre. Lequel ?",
-  ])}`.replace("…", ".");
+  ])).replace("…", ".");
   return {
     text,
     format: "qcm",
@@ -200,11 +211,11 @@ function deuxSuivants(): Q {
   const t = suite(pas, 6, descend);
   const montres = t.slice(0, 4);
   const correct = `${fmt(t[4])} ; ${fmt(t[5])}`;
-  const text = `${introSuite(montres, descend)} ${pick([
+  const text = introSuite(montres, descend, pick([
     "Quels sont les deux nombres suivants ?",
-    "Quels nombres faut-il écrire dans les deux cases vides ?",
+    "Quels nombres vont dans les deux cases vides ?",
     "Continue la suite avec deux nombres.",
-  ])}`;
+  ]));
   const pieges = [
     `${fmt(t[4])} ; ${fmt(t[4] + (descend ? -1 : 1))}`,
     `${fmt(t[4])} ; ${fmt(t[5] + (descend ? -pas : pas))}`,
@@ -235,7 +246,7 @@ function regleMalVerifiee(): Q {
   const p = quelquun();
   const correct = "non, l'écart n'est pas toujours le même";
   const text = pick([
-    `${p.nom} voit la suite ${liste(t)} et dit : « c'est + ${pas}, donc le suivant est ${fmt(t[3] + pas)} ». La suite est-elle vraiment régulière ?`,
+    `${p.nom} voit ${liste(t)} et dit : « c'est + ${pas} à chaque fois ». A-t-${p.il} raison ?`,
     `Est-ce que la suite ${liste(t)} avance toujours de ${pas} en ${pas} ?`,
     `${p.nom} pense que la suite ${liste(t)} avance de ${pas} en ${pas}. A-t-${p.il} raison ?`,
   ]);
@@ -277,12 +288,12 @@ function regle(d: Etoile): Q {
     `${sensMot(descend)} ${fmt(pas === 10 ? 1 : pas * 10 <= 1000 ? pas * 10 : pas / 10)}`,
     "on double à chaque fois",
   ];
-  const text = `${introSuite(t, descend)} ${pick([
+  const text = introSuite(t, descend, pick([
     "Quelle est la règle de cette suite ?",
     "Comment passe-t-on d'un nombre au suivant ?",
     "Quelle règle suit cette suite ?",
-    "Que fait-on pour passer d'un nombre au suivant ?",
-  ])}`;
+    "Que fait-on d'un nombre au suivant ?",
+  ]));
   return {
     text,
     format: "qcm",
@@ -304,12 +315,12 @@ function ecart(d: Etoile): Q {
   const pas = pick(d >= 4 ? PAS_CE2 : [2, 5, 10, 20, 25, 50, 100]);
   const t = suite(pas, 4, descend);
   const correct = fmt(pas);
-  const text = `${introSuite(t, descend)} ${pick([
+  const text = introSuite(t, descend, pick([
     `De combien ${descend ? "diminue" : "augmente"}-t-on à chaque étape ?`,
     `Combien ${descend ? "enlève" : "ajoute"}-t-on à chaque fois ?`,
-    "Quel est l'écart entre deux nombres qui se suivent ?",
-    `De combien en combien ${descend ? "descend" : "monte"} cette suite ?`,
-  ])}`;
+    "Quel est l'écart entre deux voisins ?",
+    `De combien en combien ${descend ? "descend" : "monte"}-elle ?`,
+  ]));
   return {
     text,
     format: "qcm",
@@ -361,7 +372,7 @@ function doubleOuAjoute(): Q {
   const double = Math.random() < 0.5;
   const t = double ? [a, a * 2, a * 4, a * 8] : [a, a + a, a + 2 * a, a + 3 * a];
   const correct = double ? "on double à chaque fois" : `on ajoute ${a}`;
-  const text = `${introSuite(t, false)} ${pick(["Quelle est la règle ?", "Comment passe-t-on d'un nombre au suivant ?", "Quelle règle suit cette suite ?"])}`;
+  const text = introSuite(t, false, pick(["Quelle est la règle ?", "Comment passe-t-on d'un nombre au suivant ?", "Quelle règle suit cette suite ?"]));
   return {
     text,
     format: "qcm",
@@ -393,11 +404,11 @@ function croissanteOuNon(d: Etoile): Q {
   const pas = d <= 1 ? pick([2, 5, 10]) : pick(PAS_CE2);
   const t = suite(pas, 4, descend);
   const correct = descend ? "décroissante" : "croissante";
-  const text = `${introSuite(t, descend)} ${pick([
+  const text = introSuite(t, descend, pick([
     "Cette suite est-elle croissante ou décroissante ?",
-    "Les nombres montent-ils ou descendent-ils ? La suite est…",
+    "Ça monte ou ça descend ? La suite est…",
     "Est-ce une suite croissante ou décroissante ?",
-  ])}`;
+  ]));
   return {
     text,
     format: "qcm",
@@ -474,7 +485,7 @@ function monteEtDescend(): Q {
   const reguliere = Math.random() < 0.4;
   const t = reguliere ? [a, a + pas, a + 2 * pas, a + 3 * pas] : [a, a + pas, a + pas - Math.round(pas / 2), a + 2 * pas];
   const correct = reguliere ? "oui, elle monte à chaque étape" : "non, elle descend à un moment";
-  const text = `${introSuite(t, false)} ${pick(["Cette suite est-elle croissante ?", "Est-ce que cette suite monte à chaque étape ?", "Peut-on dire que cette suite est croissante ?"])}`;
+  const text = introSuite(t, false, pick(["Cette suite est-elle croissante ?", "Monte-t-elle à chaque étape ?", "Peut-on dire qu'elle est croissante ?"]));
   return {
     text,
     format: "qcm",
@@ -505,8 +516,8 @@ function nombreQuiGardeLOrdre(): Q {
   const p = quelquun();
   const affiches = t.map((x, i) => (i === k ? "?" : x));
   const text = pick([
-    `On veut garder la suite croissante : ${liste(affiches)}. Quel nombre peut remplacer le « ? » ?`,
-    `${p.nom} a effacé un nombre de sa suite croissante : ${liste(affiches)}. Quel nombre peut-il y avoir ?`,
+    `Suite croissante : ${liste(affiches)}. Quel nombre peut remplacer le « ? » ?`,
+    `Suite croissante de ${p.nom} : ${liste(affiches)}. Que peut cacher le « ? » ?`,
   ]);
   return {
     text,
@@ -540,7 +551,7 @@ function doublement(): Q {
   const t = moitie ? [a * 16, a * 8, a * 4, a * 2] : [a, a * 2, a * 4, a * 8];
   const rep = moitie ? a : a * 16;
   const correct = fmt(rep);
-  const text = `${introSuite(t, moitie)} ${pick(["Quel nombre vient ensuite ?", "Les écarts changent ! Quel est le nombre suivant ?", "Quel nombre faut-il écrire après ?"])}`;
+  const text = introSuite(t, moitie, pick(["Quel nombre vient ensuite ?", "Les écarts changent ! Quel est le suivant ?", "Quel nombre vient après ?"]));
   const dernier = t[3];
   const ecartFin = Math.abs(t[3] - t[2]);
   return {
@@ -565,17 +576,18 @@ function plusLoin(): Q {
   const k = rint(3, 6);
   const rep = t[2] + k * pas;
   const correct = fmt(rep);
-  const text = `${introSuite(t, false)} ${pick([
+  const text = introSuite(t, false, pick([
     `Quel nombre viendra ${k} étapes après ${fmt(t[2])} ?`,
-    `Si on continue, quel sera le nombre ${k} cases plus loin que ${fmt(t[2])} ?`,
-    `On fait encore ${k} sauts. Sur quel nombre arrive-t-on ?`,
-  ])}`;
+    `Quel nombre sera ${k} cases plus loin ?`,
+    `Encore ${k} sauts : où arrive-t-on ?`,
+  ]));
   return {
     text,
     format: "qcm",
     choices: choix(correct, [fmt(rep - pas), fmt(rep + pas), fmt(t[2] + k), fmt(t[2] + k * 10 === rep ? rep + 2 * pas : t[2] + k * 10)]),
     expected: [correct],
     comparator: "mcq_exact",
+    canvas: frise([...t, "…"]),
     explanation: exp(
       "Avancer d'une étape, c'est ajouter l'écart de la suite.",
       `L'écart est ${fmt(pas)} ; on l'ajoute ${k} fois.`,
@@ -606,8 +618,8 @@ function croissance(): Q {
   const rep = fond ? depart - k * pas : depart + k * pas;
   const correct = `${fmt(rep)} ${c.unite}`;
   const text = pick([
-    `${c.quoi} ${c.verbe} ${pas} ${c.unite} ${c.parQuand}. Aujourd'hui, on en est à ${fmt(depart)} ${c.unite}. Combien dans ${k} ${c.quand} ?`,
-    `Aujourd'hui : ${fmt(depart)} ${c.unite}. ${c.quoi} ${c.verbe} ${pas} ${c.unite} ${c.parQuand}. Où en sera-t-on dans ${k} ${c.quand} ?`,
+    `${c.quoi} ${c.verbe} ${pas} ${c.unite} ${c.parQuand}. Aujourd'hui : ${fmt(depart)} ${c.unite}. Combien dans ${k} ${c.quand} ?`,
+    `Aujourd'hui : ${fmt(depart)} ${c.unite}. ${c.quoi} ${c.verbe} ${pas} ${c.unite} ${c.parQuand}. Et dans ${k} ${c.quand} ?`,
   ]);
   return {
     text,
@@ -631,9 +643,9 @@ function premierTerme(): Q {
   const correct = fmt(t[0]);
   const p = quelquun();
   const text = pick([
-    `${p.nom} a effacé le PREMIER nombre de sa suite : ${liste(affiches)}. Quel était-il ?`,
-    `Le premier nombre de la suite a disparu : ${liste(affiches)}. Lequel était-ce ?`,
-    `Pic a caché le début de la suite : ${liste(affiches)}. Quel nombre a-t-il caché ?`,
+    `${p.nom} a effacé le PREMIER nombre : ${liste(affiches)}. Quel était-il ?`,
+    `Le premier nombre a disparu : ${liste(affiches)}. Lequel était-ce ?`,
+    `Pic a caché le premier nombre : ${liste(affiches)}. Lequel ?`,
   ]);
   return {
     text,

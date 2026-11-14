@@ -108,7 +108,7 @@ const anciens: TutorBankItemV4[] = [
     microId: "ce1_figure_reconnaitre",
     difficulty: 3,
     theme: "neutral",
-    text: "Cette figure a quatre côtés de la même longueur et quatre angles droits, mais elle est posée sur la pointe. Comment s'appelle-t-elle ?",
+    text: "4 côtés égaux, 4 angles droits, posée sur la pointe : comment s'appelle cette figure ?",
     format: "qcm",
     choices: ["un carré", "un triangle", "un cercle", "ce n'est pas une figure connue"],
     expected: ["un carré"],
@@ -374,7 +374,7 @@ const anciens: TutorBankItemV4[] = [
     microId: "ce1_angle_droit",
     difficulty: 4,
     theme: "neutral",
-    text: "Une figure a quatre côtés. Trois de ses angles sont droits, mais le quatrième ne l'est pas. Est-ce un rectangle ?",
+    text: "Une figure a 4 côtés, mais seulement 3 angles droits. Est-ce un rectangle ?",
     format: "qcm",
     choices: [
       "non, un rectangle a ses quatre angles droits",
@@ -720,7 +720,7 @@ const anciens: TutorBankItemV4[] = [
     microId: "ce1_figure_construire",
     difficulty: 3,
     theme: "neutral",
-    text: "Sur du papier quadrillé, on a tracé deux côtés consécutifs d'un rectangle. Que faut-il faire pour le terminer ?",
+    text: "Sur le quadrillage, on a tracé 2 côtés d'un rectangle. Que faire pour le finir ?",
     format: "qcm",
     choices: [
       "tracer les deux côtés qui manquent, de la même longueur que ceux d'en face",
@@ -978,20 +978,22 @@ const figs = (n: number) => Array.from({ length: n }, (_, k) => fig(k + 1));
 const ang = (k: number) => `l'angle ${k}`;
 const angs = (n: number) => Array.from({ length: n }, (_, k) => ang(k + 1));
 
+/** « de Léa », mais « d'Inès ». */
+const deP = (p: string) => (/^[AEÉIOU]/.test(p) ? `d'${p}` : `de ${p}`);
 /** Des situations d'enfant autour d'une forme dessinée. */
 const SITU_FORME = [
-  (p: string) => `${p} a découpé cette forme dans du papier.`,
-  (p: string) => `${p} a dessiné cette forme à la craie, dans la cour.`,
-  (p: string) => `Sur le cerf-volant de ${p}, il y a cette forme.`,
-  (p: string) => `${p} a collé cette gommette sur son cahier.`,
-  (p: string) => `Sur le drapeau du château de ${p}, on voit cette forme.`,
-  (p: string) => `${p} a trouvé cette forme dans la boîte de jeux.`,
-  (p: string) => `La boulangère a fait un biscuit de cette forme pour ${p}.`,
-  (p: string) => `Sur la porte de la cabane de ${p}, il y a cette forme.`,
-  (_: string) => `Pic le paille-en-queue a vu cette forme sur un panneau.`,
-  (p: string) => `${p} a peint cette forme sur la fusée en carton.`,
-  (p: string) => `Au marché, ${p} voit un tapis avec cette forme.`,
-  (p: string) => `Sur la carte au trésor de ${p}, il y a cette forme.`,
+  (p: string) => `${p} a découpé cette forme.`,
+  (p: string) => `${p} dessine cette forme à la craie.`,
+  (p: string) => `Le cerf-volant ${deP(p)} a cette forme.`,
+  (p: string) => `${p} a collé cette gommette.`,
+  (p: string) => `Le drapeau ${deP(p)} a cette forme.`,
+  (p: string) => `${p} trouve cette forme dans ses jeux.`,
+  (p: string) => `Le biscuit ${deP(p)} a cette forme.`,
+  (_: string) => `La porte de la cabane a cette forme.`,
+  (_: string) => `Pic a vu cette forme sur un panneau.`,
+  (p: string) => `${p} peint cette forme sur sa fusée.`,
+  (p: string) => `Au marché, ${p} voit cette forme.`,
+  (_: string) => `La carte au trésor montre cette forme.`,
 ];
 const situ = () => un(SITU_FORME)(prenom());
 
@@ -1204,7 +1206,7 @@ function compterAnglesDroits(ctx: boolean) {
   const n = ANGLES_DROITS[f];
   const canvas = dessin([piece(f, { penche: Math.random() < 0.4 })], "Une figure, sans code d'angle droit.");
   const debut = ctx
-    ? un([`Le menuisier a scié cette planche.`, `${prenom()} a découpé ce morceau de carton.`, `Voici le plan du jardin de ${prenom()}.`, `La couturière a coupé ce tissu.`, `${prenom()} a construit ce cadre pour une photo.`, `Voici une dalle de la piscine.`])
+    ? un([`Le menuisier a scié cette planche.`, `${prenom()} a découpé ce morceau de carton.`, `Voici le plan du jardin ${deP(prenom())}.`, `La couturière a coupé ce tissu.`, `${prenom()} a construit ce cadre pour une photo.`, `Voici une dalle de la piscine.`])
     : un(REGARDE);
   return {
     text: `${debut} ${un(["Combien la figure a-t-elle d'angles droits ?", "Combien d'angles droits vois-tu ?", "Compte les angles droits de la figure.", "Il y a combien d'angles droits ?"])}`.trim(),
@@ -1221,11 +1223,11 @@ const SITU_ANGLE = [
   (p: string) => `${p} ouvre ses ciseaux comme ça.`,
   (_: string) => `Pic le paille-en-queue ouvre son bec comme ça.`,
   (p: string) => `${p} ouvre un livre comme ça.`,
-  (p: string) => `Les aiguilles de la pendule de ${p} font cet angle.`,
+  (p: string) => `Les aiguilles de la pendule ${deP(p)} font cet angle.`,
   (p: string) => `${p} ouvre l'éventail comme ça.`,
   (p: string) => `Au zoo, le crocodile ouvre la gueule comme ça. ${p} regarde.`,
   (p: string) => `${p} écarte les branches du compas comme ça.`,
-  (p: string) => `Le toit de la cabane de ${p} fait cet angle.`,
+  (p: string) => `Le toit de la cabane ${deP(p)} fait cet angle.`,
   (p: string) => `${p} plie son bras comme ça.`,
   (_: string) => `Le pont-levis du château s'ouvre comme ça.`,
 ];
@@ -1388,11 +1390,11 @@ function coteQuiManque(niveau: 3 | 4) {
   const juste = demande === "gauche" ? l : L;
   const nom = carre ? "un carré" : "un rectangle";
   const debut = niveau === 4
-    ? un([`${prenom()} commence ${nom} pour le plan de sa cabane.`, `Le jardinier trace ${nom} pour un potager.`, `${prenom()} dessine ${nom} : le tapis de sa chambre.`, `Pour la kermesse, ${prenom()} trace ${nom}.`, `${prenom()} dessine ${nom} : l'aquarium des poissons rouges.`])
+    ? un([`${prenom()} trace ${nom} pour sa cabane.`, `Le jardinier trace ${nom} : le potager.`, `${prenom()} dessine son tapis : ${nom}.`, `Pour la kermesse, ${prenom()} trace ${nom}.`, `${prenom()} dessine un aquarium : ${nom}.`])
     : un([`${prenom()} trace ${nom} sur le quadrillage.`, `Voici ${nom} commencé.`, `${prenom()} a presque fini ${nom}.`]);
   const ou = demande === "gauche" ? "de gauche" : "du haut";
   return {
-    text: `${debut} ${un([`Combien de carreaux doit mesurer le côté ${ou} ?`, `Le côté ${ou} fera combien de carreaux ?`, `Pour finir, combien de carreaux faut-il au côté ${ou} ?`])}`,
+    text: `${debut} ${un([`Combien de carreaux doit mesurer le côté ${ou} ?`, `Le côté ${ou} fera combien de carreaux ?`, `Combien de carreaux faut-il au côté ${ou} ?`])}`,
     ...qcmN(juste, [juste + 1, juste - 1, carre ? juste + 2 : demande === "gauche" ? L : l], "carreaux"),
     canvas,
     explanation: etapes(carre ? "dans un carré, les 4 côtés ont la même longueur." : "dans un rectangle, les côtés d'en face ont la même longueur.", `Le côté ${demande === "gauche" ? "de droite" : "du bas"} mesure ${juste} carreaux.`, `Il faut tracer ${juste} carreaux.`),
@@ -1448,13 +1450,13 @@ function rayonDiametre() {
 /* ─────────────── ce1_figure_defi ─────────────── */
 const MF = "ce1_figure_defi";
 const DEVINETTES: { f: Forme; t: string }[] = [
-  { f: "carre", t: "J'ai 4 côtés de la même longueur et 4 angles droits." },
-  { f: "carre", t: "Mes 4 côtés sont égaux. Mes 4 coins sont droits." },
-  { f: "rectangle", t: "J'ai 4 angles droits, mais mes côtés ne sont pas tous égaux." },
-  { f: "rectangle", t: "J'ai 4 angles droits. Deux de mes côtés sont plus longs." },
+  { f: "carre", t: "J'ai 4 côtés égaux et 4 angles droits." },
+  { f: "carre", t: "Mes 4 côtés sont égaux, mes 4 coins droits." },
+  { f: "rectangle", t: "J'ai 4 angles droits, mais pas 4 côtés égaux." },
+  { f: "rectangle", t: "J'ai 4 angles droits et 2 côtés plus longs." },
   { f: "triangle_rectangle", t: "J'ai 3 côtés et un angle droit." },
   { f: "triangle", t: "J'ai 3 côtés et aucun angle droit." },
-  { f: "cercle", t: "Je n'ai ni côté ni sommet. On me trace au compas." },
+  { f: "cercle", t: "Ni côté ni sommet. On me trace au compas." },
   { f: "losange", t: "J'ai 4 côtés égaux, mais aucun angle droit." },
   { f: "hexagone", t: "J'ai 6 côtés et 6 sommets." },
 ];
@@ -1465,7 +1467,7 @@ function devinette() {
   const pool = (["carre", "rectangle", "triangle_rectangle", "triangle", "cercle", "losange", "hexagone"] as Forme[]).filter((x) => x !== d.f && !(d.f === "triangle" && x === "triangle_rectangle"));
   const formes = melange([d.f, ...melange(pool).slice(0, 3)]);
   const k = formes.indexOf(d.f) + 1;
-  const debut = un(["Devinette !", `${prenom()} pose une devinette.`, "Pic pose une devinette.", "Qui suis-je ?"]);
+  const debut = un(["Devinette !", `Devinette ${deP(prenom())} !`, "Devinette de Pic !", "Qui suis-je ?"]);
   return {
     text: `${debut} « ${d.t} » ${un(debut === "Qui suis-je ?" ? ["Quelle figure est-ce ?", "Laquelle est-ce ?"] : ["Quelle figure est-ce ?", "Qui suis-je ?", "Laquelle est-ce ?"])}`,
     ...qcm(fig(k), figs(4).filter((c) => c !== fig(k))),

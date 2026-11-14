@@ -70,7 +70,8 @@ const anciens: TutorBankItemV4[] = [
     microId: "ce1_algo_instruction",
     difficulty: 4,
     theme: "neutral",
-    text: "Un robot reçoit ce programme : avancer de 2 cases, pivoter d'un quart de tour à droite, avancer de 1 case. De combien de cases s'est-il déplacé en tout ?",
+    text: "Le robot suit ce programme. De combien de cases avance-t-il en tout ?",
+    canvas: { kind: "scratch", title: "Le programme", blocks: [{ type: "event", text: "▶ départ" }, { type: "move", value: "2 cases" }, { type: "turn", text: "tourner d'un quart de tour à droite" }, { type: "move", value: "1 case" }], display: { compact: true } } as CanvasFigure,
     format: "short",
     expected: ["3"],
     comparator: "number_equal",
@@ -221,7 +222,8 @@ const anciens: TutorBankItemV4[] = [
     microId: "ce1_algo_repetition",
     difficulty: 4,
     theme: "neutral",
-    text: "Un robot répète 3 fois l'instruction « avancer de 2 cases ». De combien de cases avance-t-il en tout ?",
+    text: "Le robot répète 3 fois « avancer de 2 cases ». De combien de cases avance-t-il ?",
+    canvas: { kind: "scratch", title: "Le programme", blocks: [{ type: "event", text: "▶ départ" }, { type: "repeat", times: 3, children: [{ type: "move", value: "2 cases" }] }], display: { compact: true } } as CanvasFigure,
     format: "short",
     expected: ["6"],
     comparator: "number_equal",
@@ -382,7 +384,8 @@ const anciens: TutorBankItemV4[] = [
 
 const NA = "algorithmique";
 const g = (micro: string, id: string, d: DifficultyLevel, hint: string, gen: Parameters<typeof gab>[5]) => gab(NA, micro, id, d, hint, gen);
-const ROBOTS: [string, boolean][] = [["le robot de la classe", false], ["la coccinelle robot", true], ["le petit train", false], ["la tortue", true], ["Pic le paille-en-queue", false], ["la fourmi", true], ["le robot-chien", false], ["la voiture télécommandée", true], ["le robot Bip", false], ["la souris robot", true]];
+// ⭐ 14/11/2026 : des noms COURTS (« la voiture télécommandée » allongeait chaque énoncé).
+const ROBOTS: [string, boolean][] = [["le robot Zip", false], ["la coccinelle", true], ["le petit train", false], ["la tortue", true], ["Pic", false], ["la fourmi", true], ["le robot-chien", false], ["la petite voiture", true], ["le robot Bip", false], ["la souris", true]];
 /** Un robot, avec ses pronoms : r = son nom, il = « il »/« elle ». */
 function robot() {
   const [r, f] = un(ROBOTS);
@@ -412,9 +415,9 @@ function surLaPiste(ctx: boolean) {
   const c = avecTroisieme ? entre(1, 4) : 0;
   const arrivee = depart + a - b + c;
   const blocs = [avance(a), recule(b), ...(avecTroisieme ? [avance(c)] : [])];
-  const debut = ctx ? un([`Sur la piste numérotée, ${r} est sur la case ${depart}.`, `${cap(r)} part de la case ${depart} de la piste.`, `C'est la course ! ${cap(r)} est sur la case ${depart}.`]) : `${cap(r)} est sur la case ${depart}.`;
+  const debut = ctx ? un([`${cap(r)} est sur la case ${depart} de la piste.`, `${cap(r)} part de la case ${depart}.`, `C'est la course ! ${cap(r)} est sur la case ${depart}.`]) : `${cap(r)} est sur la case ${depart}.`;
   return {
-    text: `${debut} ${un([`${Il} suit ce programme.`, "Voici son programme.", "On lance ce programme."])} ${un([`Sur quelle case arrive-t-${il} ?`, `Où s'arrête-t-${il} ?`, "Quelle est sa case d'arrivée ?"])}`,
+    text: `${debut} ${un([`Sur quelle case arrive-t-${il} ?`, `Où s'arrête-t-${il} ?`, "Quelle est sa case d'arrivée ?"])}`,
     ...qcmN(arrivee, [depart + a + b + c, arrivee + 1, arrivee - 1, a - b + c]),
     canvas: programme(blocs),
     explanation: etapes("on fait les instructions dans l'ordre, une par une.", `${depart} + ${a} = ${depart + a}, puis ${depart + a} − ${b} = ${depart + a - b}${avecTroisieme ? `, puis + ${c} = ${arrivee}` : ""}.`, `${Il} arrive sur la case ${arrivee}.`),
@@ -582,7 +585,7 @@ function nombreManquant() {
   const cible = depart + a + x;
   const { r } = robot();
   return {
-    text: `${un(["Défi !", "Pic lance un défi.", `${prenom()} lance un défi.`])} ${cap(r)} part de la case ${depart} et doit arriver sur la case ${cible}. ${un(["Quel nombre manque dans le programme ?", "Que faut-il écrire à la place de « ? » ?"])}`,
+    text: `Défi ! ${cap(r)} va de la case ${depart} à ${cible}. ${un(["Quel nombre manque dans le programme ?", "Que mettre à la place de « ? » ?"])}`,
     ...qcmN(x, [cible - depart, cible, x + 1, x - 1]),
     canvas: programme([avance(a), { type: "move", value: "? cases" }]),
     explanation: etapes("on calcule sa case après le premier bloc.", `${depart} + ${a} = ${depart + a}. De ${depart + a} à ${cible}, il manque ${x}.`, `Il faut écrire ${x}.`),
@@ -597,7 +600,7 @@ function ouRegarde() {
   const juste = reponses[net];
   const { r, il, Il } = robot();
   return {
-    text: `${un(["Défi !", "Attention, défi !"])} ${cap(r)} regarde vers le haut de la feuille. ${un([`Vers où regarde-t-${il} à la fin ?`, `Vers où est-${il} tourné${il === "elle" ? "e" : ""} à la fin ?`])}`,
+    text: `Défi ! ${cap(r)} regarde vers le haut. ${un([`Vers où regarde-t-${il} à la fin ?`, `Vers où est-${il} tourné${il === "elle" ? "e" : ""} à la fin ?`])}`,
     ...qcm(juste, reponses.filter((x) => x !== juste)),
     canvas: programme(n > 1 ? [{ type: "repeat", times: n, children: [tourne(sens)] }] : [tourne(sens)]),
     explanation: etapes("un quart de tour à droite : haut → droite → bas → gauche → haut.", `${n} quart${n > 1 ? "s" : ""} de tour à ${sens}.`, `${Il} regarde ${juste}.`),

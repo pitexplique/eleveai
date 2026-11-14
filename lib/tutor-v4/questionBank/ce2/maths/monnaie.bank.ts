@@ -145,31 +145,31 @@ type Article = { nom: string; min: number; max: number; lieu?: string };
 const ARTICLES: readonly Article[] = [
   { nom: "un pain au chocolat", lieu: "À la boulangerie", min: 90, max: 150 },
   { nom: "une sucette", min: 20, max: 80 },
-  { nom: "un livre de contes", lieu: "À la librairie", min: 450, max: 990 },
-  { nom: "une petite voiture", lieu: "Au magasin de jouets", min: 250, max: 700 },
+  { nom: "un livre", lieu: "À la librairie", min: 450, max: 990 },
+  { nom: "une petite voiture", lieu: "Au magasin", min: 250, max: 700 },
   { nom: "un ballon", min: 500, max: 1500 },
   { nom: "un cahier", lieu: "À la papeterie", min: 150, max: 350 },
-  { nom: "une glace à la fraise", min: 150, max: 350 },
-  { nom: "un paquet de graines", lieu: "Au stand du jardinier", min: 120, max: 300 },
+  { nom: "une glace", min: 150, max: 350 },
+  { nom: "un paquet de graines", lieu: "Chez le jardinier", min: 120, max: 300 },
   { nom: "une boîte de crayons", lieu: "À la papeterie", min: 300, max: 650 },
   { nom: "un jus de pomme", min: 80, max: 200 },
   { nom: "un ticket de manège", lieu: "À la fête foraine", min: 150, max: 300 },
-  { nom: "un masque de pirate", min: 200, max: 500 },
-  { nom: "une figurine de dinosaure", lieu: "Au musée des dinosaures", min: 300, max: 900 },
+  { nom: "un masque", min: 200, max: 500 },
+  { nom: "une figurine", lieu: "Au musée", min: 300, max: 900 },
   { nom: "un sachet de billes", min: 150, max: 400 },
   { nom: "une baguette", lieu: "À la boulangerie", min: 90, max: 130 },
   { nom: "une gomme", lieu: "À la papeterie", min: 50, max: 150 },
   { nom: "une bande dessinée", lieu: "À la librairie", min: 600, max: 1200 },
-  { nom: "une fusée en carton à monter", min: 400, max: 900 },
+  { nom: "une fusée", min: 400, max: 900 },
   { nom: "une pomme d'amour", lieu: "À la fête foraine", min: 150, max: 300 },
-  { nom: "un yo-yo", lieu: "Au magasin de jouets", min: 200, max: 500 },
+  { nom: "un yo-yo", lieu: "Au magasin", min: 200, max: 500 },
   { nom: "une barbe à papa", lieu: "À la fête foraine", min: 200, max: 400 },
   { nom: "un croissant", lieu: "À la boulangerie", min: 80, max: 130 },
 ];
 
 const LIEUX = [
-  "À la kermesse de l'école", "Au marché", "Au vide-grenier", "À la fête de l'école", "Au grand magasin",
-  "À la brocante du quartier", "Au magasin du village",
+  "À la kermesse", "Au marché", "Au vide-grenier", "À la fête", "Au grand magasin",
+  "À la brocante", "Au magasin",
 ] as const;
 
 /** Où l'on achète cet article : sa boutique, ou un lieu où l'on trouve de tout. */
@@ -387,7 +387,7 @@ function compterCentimes(): Q {
     `${p.nom} a trouvé ces pièces sous le canapé.`,
     `Voici les pièces de la tirelire ${de(p.nom)}.`,
     "Pic le paille-en-queue a ramassé ces pièces.",
-    `${p.nom} a gagné ces pièces au jeu de la pêche à la ligne.`,
+    `${p.nom} a gagné ces pièces à la pêche à la ligne.`,
     `Au fond du cartable ${de(p.nom)}, il y a ces pièces.`,
   ])} ${pick(["Combien de centimes y a-t-il ?", "Combien cela fait-il de centimes ?", "Quelle somme en centimes est dessinée ?"])}`;
   return {
@@ -429,7 +429,7 @@ function combienDePieces(): Q {
   const text = pick([
     `Combien de ${nomPiece(cas.piece, 2).replace(/^2 /, "")} faut-il pour faire ${total} ?`,
     `${p.nom} veut faire ${total} avec seulement des ${nomPiece(cas.piece, 2).replace(/^2 /, "")}. Combien lui en faut-il ?`,
-    `À la banque de la classe, on échange ${total} contre des ${nomPiece(cas.piece, 2).replace(/^2 /, "")}. Combien en reçoit-on ?`,
+    `À la banque, on échange ${total} contre des ${nomPiece(cas.piece, 2).replace(/^2 /, "")}. Combien en reçoit-on ?`,
     `Pic a des ${nomPiece(cas.piece, 2).replace(/^2 /, "")}. Combien doit-il en poser pour avoir ${total} ?`,
   ]);
   return {
@@ -635,6 +635,8 @@ function additionNue(d: Etoile): Q {
   const sansRetenue = Math.floor(a / 100) + Math.floor(b / 100);
   return {
     text,
+    // Les deux prix en pièces et billets : on peut compter, rien n'écrit la somme.
+    canvas: { kind: "monnaie", groupes: [{ elements: elements(decomposer(a, false, 6), false) }, { elements: elements(decomposer(b, false, 6), false) }] },
     format: "qcm",
     choices: choix(correct, piegesMontant(s, [sansRetenue * 100 + ((a + b) % 100), s - 100]).concat(d >= 3 ? [`${sansRetenue},${(a % 100) + (b % 100)} €`] : [])),
     expected: [correct],
@@ -656,12 +658,20 @@ function achats(nb: number, d: Etoile): Q {
   const correct = euro(s);
   const liste = arts.map((x, i) => `${x.nom} à ${euro(prix[i])}`);
   const enLigne = liste.length === 2 ? `${liste[0]} et ${liste[1]}` : `${liste.slice(0, -1).join(", ")} et ${liste[liste.length - 1]}`;
-  const text = pick([
-    `${pick(LIEUX)}, ${p.nom} achète ${enLigne}. Combien paie-t-${p.il} ?`,
-    `${p.nom} prend ${enLigne}. Combien cela coûte-t-il en tout ?`,
-    `Pour l'anniversaire de Zoé, ${p.nom} achète ${enLigne}. Quel est le prix total ?`,
-    `${pick(LIEUX)}, la caissière tape ${prix.map(euro).join(" + ")}. Combien ${p.nom} doit-${p.il} payer ?`,
-  ]);
+  // À trois articles, la liste « un ticket de manège à 2,60 €, … » dépasse vingt mots : on garde les prix.
+  const text =
+    nb <= 2
+      ? pick([
+          `${pick(LIEUX)}, ${p.nom} achète ${enLigne}. Combien paie-t-${p.il} ?`,
+          `${p.nom} prend ${enLigne}. Quel est le prix total ?`,
+          `${p.nom} achète ${enLigne}. Combien cela coûte-t-il ?`,
+          `La caissière tape ${prix.map(euro).join(" + ")}. Combien ${p.nom} doit-${p.il} payer ?`,
+        ])
+      : pick([
+          `${p.nom} achète trois articles : ${prix.map(euro).join(", ")}. Combien paie-t-${p.il} ?`,
+          `La caissière tape ${prix.map(euro).join(" + ")}. Combien ${p.nom} doit-${p.il} payer ?`,
+          `Trois achats : ${prix.map(euro).join(", ")}. Quel est le prix total ?`,
+        ]);
   return {
     text,
     format: "qcm",
@@ -752,9 +762,9 @@ function rendre(d: Etoile): Q {
   const p = quelquun();
   const correct = euro(rendu);
   const text = pick([
-    `${lieuDe(a)}, ${p.nom} achète ${a.nom} à ${euro(prix)}. ${maj(p.il)} donne ${nomPiece(billet)}. Combien lui rend-on ?`,
+    `${p.nom} achète ${a.nom} à ${euro(prix)}. ${maj(p.il)} donne ${nomPiece(billet)}. Combien lui rend-on ?`,
     `On paie ${euro(prix)} avec ${nomPiece(billet)}. Combien rend-on ?`,
-    `${maj(a.nom)} coûte ${euro(prix)}. ${p.nom} paie avec ${nomPiece(billet)}. Quelle monnaie doit-on lui rendre ?`,
+    `${maj(a.nom)} coûte ${euro(prix)}. ${p.nom} paie avec ${nomPiece(billet)}. Combien lui rend-on ?`,
     `Le vendeur doit rendre la monnaie : ${p.nom} a donné ${euro(billet)} pour ${euro(prix)}. Combien rend-il ?`,
   ]);
   const ct = prix % 100;
@@ -787,8 +797,8 @@ function renduJuste(): Q {
   const correct = erreur === 0 ? "oui, c'est juste" : erreur > 0 ? `non, on a rendu ${euro(erreur)} de trop` : `non, il manque ${euro(-erreur)}`;
   return {
     text: pick([
-      `${p.nom} achète ${a.nom} à ${euro(prix)} et donne ${nomPiece(billet)}. Le vendeur rend l'argent dessiné. Est-ce juste ?`,
-      `${lieuDe(a)}, ${a.nom} coûte ${euro(prix)}. ${p.nom} paie avec ${nomPiece(billet)} et reçoit cette monnaie. Le compte est-il bon ?`,
+      `${p.nom} paie ${a.nom} à ${euro(prix)} avec ${nomPiece(billet)}. On lui rend ceci. Est-ce juste ?`,
+      `${maj(a.nom)} coûte ${euro(prix)} ; ${p.nom} donne ${nomPiece(billet)}. Voici la monnaie rendue. Est-ce juste ?`,
     ]),
     format: "qcm",
     choices: choix(correct, ["oui, c'est juste", `non, on a rendu ${euro(Math.abs(erreur) || 10)} de trop`, `non, il manque ${euro(Math.abs(erreur) || 10)}`, `non, il manque ${euro(100)}`]),
@@ -818,8 +828,8 @@ function encoreARendre(): Q {
   const correct = euro(reste);
   return {
     text: pick([
-      `${p.nom} paie ${euro(prix)} avec ${nomPiece(billet)}. La caissière a déjà rendu l'argent dessiné. Combien doit-elle encore rendre ?`,
-      `Pour ${a.nom} à ${euro(prix)}, ${p.nom} donne ${euro(billet)}. Le vendeur a commencé à rendre la monnaie (dessin). Que manque-t-il ?`,
+      `${p.nom} donne ${nomPiece(billet)} pour payer ${euro(prix)}. On lui a déjà rendu ceci. Combien manque-t-il ?`,
+      `Pour ${a.nom} à ${euro(prix)}, ${p.nom} donne ${euro(billet)}. Le vendeur a commencé à rendre. Que manque-t-il ?`,
     ]),
     format: "qcm",
     choices: choix(correct, piegesMontant(reste, [rendu, somme(deja)])),
@@ -845,7 +855,7 @@ function erreurDeRendu(): Q {
   return {
     text: pick([
       `On paie ${euro(prix)} avec ${nomPiece(billet)}. ${p.nom} répond « ${euro(faux)} ». Quelle est la bonne réponse ?`,
-      `${p.nom} doit rendre la monnaie sur ${euro(billet)} pour ${euro(prix)}. ${maj(p.il)} hésite et pense à ${euro(faux)}. Que faut-il rendre ?`,
+      `${p.nom} doit rendre la monnaie sur ${euro(billet)} pour ${euro(prix)}. ${maj(p.il)} pense à ${euro(faux)}. Que faut-il rendre ?`,
     ]),
     format: "qcm",
     choices: choix(correct, [euro(faux), euro(rendu + 100), euro(faux - 100), euro(rendu + 10)]),
@@ -870,8 +880,8 @@ function deuxArticlesEtBillet(): Q {
   const correct = euro(rendu);
   return {
     text: pick([
-      `${p.nom} achète ${arts[0].nom} à ${euro(prix[0])} et ${arts[1].nom} à ${euro(prix[1])}. ${maj(p.il)} paie avec ${nomPiece(billet)}. Combien lui rend-on ?`,
-      `${pick(LIEUX)}, on achète deux articles à ${euro(prix[0])} et ${euro(prix[1])}, et on paie avec ${nomPiece(billet)}. Combien rend-on ?`,
+      `${p.nom} achète ${arts[0].nom} à ${euro(prix[0])} et ${arts[1].nom} à ${euro(prix[1])}. ${maj(p.il)} donne ${billet / 100} €. Combien lui rend-on ?`,
+      `${pick(LIEUX)}, deux articles : ${euro(prix[0])} et ${euro(prix[1])}. On paie avec ${nomPiece(billet)}. Combien rend-on ?`,
     ]),
     format: "qcm",
     choices: choix(correct, piegesMontant(rendu, [s, billet - prix[0]])),
@@ -909,7 +919,7 @@ function cequIlReste(): Q {
     text: avecDessin
       ? `Voici l'argent ${de(p.nom)}. ${maj(p.il)} achète ${arts[0].nom} à ${euro(prix[0])} et ${arts[1].nom} à ${euro(prix[1])}. Combien lui reste-t-il ?`
       : pick([
-          `${p.nom} a ${euro(poche)} dans sa poche. ${maj(p.il)} achète ${arts[0].nom} à ${euro(prix[0])} et ${arts[1].nom} à ${euro(prix[1])}. Combien lui reste-t-il ?`,
+          `${p.nom} a ${euro(poche)}. ${maj(p.il)} achète ${arts[0].nom} à ${euro(prix[0])} et ${arts[1].nom} à ${euro(prix[1])}. Combien lui reste-t-il ?`,
           `${pick(LIEUX)}, ${p.nom} dépense ${euro(prix[0])} puis ${euro(prix[1])}. ${maj(p.il)} avait ${euro(poche)}. Que lui reste-t-il ?`,
         ]),
     format: "qcm",
@@ -964,7 +974,7 @@ function plusieursFois(): Q {
     text: pick([
       `${maj(a.nom)} coûte ${euro(prix)}. ${p.nom} en prend ${k}. Combien paie-t-${p.il} ?`,
       `${p.nom} achète ${k} fois ${a.nom} à ${euro(prix)}. Combien paie-t-${p.il} ?`,
-      `Pour la classe, la maîtresse prend ${k} fois ${a.nom} à ${euro(prix)}. Quel est le prix total ?`,
+      `La maîtresse prend ${k} fois ${a.nom} à ${euro(prix)}. Quel est le prix total ?`,
     ]),
     format: "qcm",
     choices: choix(correct, piegesMontant(total, [prix * (k + 1), prix + k * 100, total - 100])),
@@ -988,12 +998,12 @@ function lequelMoinsCher(): Q {
   if (y <= 0) y = x + 20;
   const moins = Math.random() < 0.5;
   const gagnant = (moins ? x < y : x > y) ? p.nom : q.nom;
-  const fin = `Qui a vu le prix le plus ${moins ? "bas" : "élevé"} ?`;
+  const fin = `Qui a le prix le plus ${moins ? "bas" : "élevé"} ?`;
   return {
     text: pick([
-      `${p.nom} a vu ${a.nom} à ${euro(x)} dans un magasin. ${q.nom} a vu ${fem ? "la même" : "le même"} à ${euro(y)} au marché. ${fin}`,
-      `${maj(a.nom)} : ${euro(x)} chez le marchand ${de(p.nom)}, ${euro(y)} chez celui ${de(q.nom)}. ${fin}`,
-      `${p.nom} et ${q.nom} cherchent ${a.nom}. ${p.nom} ${fem ? "la" : "le"} trouve à ${euro(x)}, ${q.nom} à ${euro(y)}. ${fin}`,
+      `${p.nom} voit ${a.nom} à ${euro(x)}, ${q.nom} ${fem ? "la même" : "le même"} à ${euro(y)}. ${fin}`,
+      `${maj(a.nom)} : ${euro(x)} pour ${p.nom}, ${euro(y)} pour ${q.nom}. ${fin}`,
+      `${p.nom} trouve ${a.nom} à ${euro(x)}, ${q.nom} à ${euro(y)}. ${fin}`,
     ]),
     format: "qcm",
     choices: shuffle([p.nom, q.nom]),
@@ -1022,13 +1032,14 @@ function combienPeutIlEnAcheter(): Q {
   const prix = pick([40, 50, 60, 70, 80, 90, 120, 150, 180, 250]);
   const budget = pick([300, 500, 1000].filter((b) => b / prix >= 2 && b / prix <= 15)) ?? 500;
   const n = Math.floor(budget / prix);
-  const objet = pick(["sucettes", "tickets de manège", "gommes", "cartes de dinosaures", "billes géantes", "autocollants de fusée"]);
+  const objet = pick(["sucettes", "tickets de manège", "gommes", "cartes de dinosaures", "billes géantes", "autocollants"]);
   const correct = String(n);
   return {
     text: pick([
-      `${p.nom} a exactement ${euro(budget)}. Une de ces ${objet} coûte ${euro(prix)}. Combien de ${objet} peut-${p.il} acheter au plus ?`,
-      `À la kermesse, les ${objet} sont à ${euro(prix)} pièce. Avec ${euro(budget)}, combien ${p.nom} peut-${p.il} en acheter, au maximum ?`,
+      `Les ${objet} sont à ${euro(prix)} pièce. ${p.nom} a ${euro(budget)}. Combien peut-${p.il} en acheter au plus ?`,
+      `À la kermesse, les ${objet} sont à ${euro(prix)} pièce. Avec ${euro(budget)}, combien peut-on en acheter ?`,
     ]),
+    canvas: argent(decomposer(budget, true, 6), false),
     format: "qcm",
     choices: choix(correct, [String(n + 1), String(Math.max(1, n - 1)), String(budget / 100), String(n * 2)]),
     expected: [correct],
@@ -1058,7 +1069,7 @@ function ecrituresEquivalentes(): Q {
   const correct = `${justes[0]} et ${justes[1]}`;
   const faux = ecritures.find((x) => !x.juste)!.qui;
   return {
-    text: `Trois enfants écrivent ${e} euros et ${ct} centimes. ${ecritures.map((x) => `${x.qui} écrit ${x.ecrit}`).join(", ")}. Qui a raison ?`,
+    text: `Pour ${e} euros et ${ct} centimes, ${ecritures.map((x, i) => (i === 0 ? `${x.qui} écrit ${x.ecrit}` : `${x.qui} ${x.ecrit}`)).join(", ")}. Qui a raison ?`,
     format: "qcm",
     choices: choix(correct, ["les trois", `${faux} seulement`, `${justes[0]} seulement`, `${faux} et ${justes[1]}`]),
     expected: [correct],
@@ -1074,15 +1085,15 @@ function ecrituresEquivalentes(): Q {
 
 const PETIT_GRAND: readonly { nom: string; f: boolean; min: number; max: number }[] = [
   { nom: "ballon", f: false, min: 300, max: 900 },
-  { nom: "livre de contes", f: false, min: 300, max: 900 },
+  { nom: "livre", f: false, min: 300, max: 900 },
   { nom: "boîte de crayons", f: true, min: 200, max: 600 },
-  { nom: "glace à la fraise", f: true, min: 120, max: 300 },
+  { nom: "glace", f: true, min: 120, max: 300 },
   { nom: "sachet de billes", f: false, min: 120, max: 400 },
-  { nom: "figurine de dinosaure", f: true, min: 250, max: 800 },
+  { nom: "figurine", f: true, min: 250, max: 800 },
   { nom: "barbe à papa", f: true, min: 150, max: 350 },
   { nom: "pot de peinture", f: false, min: 200, max: 600 },
   { nom: "aquarium", f: false, min: 900, max: 2500 },
-  { nom: "fusée en carton", f: true, min: 300, max: 900 },
+  { nom: "fusée", f: true, min: 300, max: 900 },
   { nom: "cerf-volant", f: false, min: 400, max: 1200 },
   { nom: "boîte de gâteaux", f: true, min: 200, max: 600 },
 ];
@@ -1099,8 +1110,8 @@ function prixDePlus(): Q {
   return {
     text: pick([
       `${le} ${petit} ${o.nom} coûte ${euro(a)}. ${le} ${grand} coûte ${euro(diff)} de plus. Combien coûtent les deux ensemble ?`,
-      `${pick(LIEUX)}, ${le.toLowerCase()} ${petit} ${o.nom} est à ${euro(a)}, ${le.toLowerCase()} ${grand} à ${euro(diff)} de plus. ${p.nom} prend les deux. Combien paie-t-${p.il} ?`,
-      `${p.nom} achète ${un} ${petit} ${o.nom} à ${euro(a)} et ${un} ${grand}, qui coûte ${euro(diff)} de plus. Quel est le prix total ?`,
+      `${le} ${petit} ${o.nom} coûte ${euro(a)}, ${le.toLowerCase()} ${grand} ${euro(diff)} de plus. ${p.nom} prend les deux. Combien paie-t-${p.il} ?`,
+      `${p.nom} achète ${un} ${petit} ${o.nom} à ${euro(a)} et ${un} ${grand} à ${euro(diff)} de plus. Combien paie-t-${p.il} ?`,
     ]),
     format: "qcm",
     choices: choix(correct, piegesMontant(total, [a + diff, b, 2 * a + 100])),

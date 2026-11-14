@@ -331,7 +331,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "cp_algo_instruction",
     difficulty: 4,
     theme: "neutral",
-    text: "Un robot reçoit « avance de 2 cases, puis tourne à droite ». Un autre reçoit « tourne à droite, puis avance de 2 cases ». Arrivent-ils au même endroit ?",
+    text: "Robot A : « avance de 2 cases, tourne à droite ». Robot B : « tourne à droite, avance de 2 cases ». Même endroit ?",
     format: "qcm",
     choices: [
       "non, l'ordre des instructions change le trajet",
@@ -411,7 +411,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
         };
       }
       const text = randomChoice([
-        `Quelle carte faut-il pour que ${m.nom} ${m.e} fasse ceci : ${ins.sens.replace("il ", "")} ?`,
+        `Pour ${m.nom} ${m.e} : « ${ins.sens.replace("il ", "")} ». Quelle carte ?`,
         `${n} veut que ${m.nom} ${m.e} ${ins.sens.replace("il va", "aille").replace("il tourne", "tourne")}. Quelle carte choisir ?`,
       ]);
       return {
@@ -453,7 +453,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const text = randomChoice([
         `Voici le programme ${du(m.nom)} ${m.e}. À combien de cases du départ s'arrête-t-${m.il} ?`,
         `${n} a écrit ce programme pour ${m.nom} ${m.e}. À combien de cases du départ finit-${m.il} ?`,
-        `${cap(m.nom)} ${m.e} suit les cartes dans l'ordre. Combien de cases le séparent du départ, à la fin ?`,
+        `${cap(m.nom)} ${m.e} suit les cartes dans l'ordre. À combien de cases du départ finit-${m.il} ?`,
         `Lis les cartes ${du(m.nom)} ${m.e}, de haut en bas. À combien de cases du départ finit-${m.il} ?`,
       ]);
       return {
@@ -651,7 +651,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const text = randomChoice([
         `Le programme ${du(m.nom)} ${m.e} : avancer de ${cases} cases, et ${v}. Combien d'instructions en tout ?`,
         `${n} fait avancer ${m.nom} ${m.e} de ${cases} cases, avec ${v}. Combien d'instructions faut-il ?`,
-        `Une carte par case, une carte par virage. ${cap(m.nom)} ${m.e} fait ${cases} cases et ${v}. Combien de cartes ?`,
+        `Une carte par case et par virage. ${cap(m.nom)} ${m.e} fait ${cases} cases et ${v}. Combien de cartes ?`,
       ]);
       return {
         text,
@@ -681,7 +681,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const n = randomChoice(PRENOMS);
       const text = randomChoice([
         `À l'aller, ${m.nom} ${m.e} avance de ${cases} cases puis tourne à ${cote}. Au retour, où tourne-t-${m.il} ?`,
-        `${n} guide ${m.nom} ${m.e} : ${cases} cases, puis un virage à ${cote}. Pour revenir, de quel côté tourner ?`,
+        `${n} guide ${m.nom} ${m.e} : ${cases} cases, puis un virage à ${cote}. Au retour, où tourner ?`,
         `${cap(m.nom)} ${m.e} est allé${m.il === "elle" ? "e" : ""} au but en tournant à ${cote}. Pour rentrer, où tourne-t-${m.il} ?`,
       ]);
       return {
@@ -771,7 +771,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "cp_algo_suite_logique",
     difficulty: 5,
     theme: "neutral",
-    text: "On voit le début d'une suite : « A B A B A C A B A C… ». Peut-on dire que le motif est « AB » ?",
+    text: "Une suite commence par « A B A B A C A B A C… ». Le motif est-il « AB » ?",
     format: "qcm",
     choices: [
       "non, il faut regarder toute la suite avant de décider",
@@ -926,7 +926,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
     microId: "cp_algo_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Un robot exécute : « répéter 3 fois : avancer de 2 cases ». De combien de cases avance-t-il en tout ?",
+    text: "Un robot fait « répéter 3 fois : avancer de 2 cases ». De combien avance-t-il en tout ?",
     format: "short",
     expected: ["6"],
     comparator: "number_equal",
@@ -987,9 +987,10 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const m = randomChoice(MOBILES.filter((x) => x.nom !== "Pic"));
       const n = randomChoice(PRENOMS);
       const text = randomChoice([
-        `${cap(m.nom)} ${m.e} a ${ecrites} cartes « avancer d'une case ». ${n} écrit « répéter ${fois} fois : avancer d'une case ». Même trajet ?`,
-        `${n} raccourcit le programme ${du(m.nom)} ${m.e} : ${ecrites} cartes « avancer d'une case » deviennent « répéter ${fois} fois : avancer d'une case ». C'est pareil ?`,
-        `${ecrites} cartes « avancer d'une case », ou « répéter ${fois} fois : avancer d'une case » : ${m.nom} ${m.e} fait-${m.il} la même chose ?`,
+        // ⭐ 14/11 : le raccourci est DESSINÉ (carte « répéter »), l'énoncé ne le recopie pas.
+        `${cap(m.nom)} ${m.e} a ${ecrites} cartes « avancer d'une case ». ${n} écrit ce raccourci. Même trajet ?`,
+        `${n} remplace ${ecrites} cartes « avancer d'une case » par ce raccourci. C'est pareil ?`,
+        `${ecrites} cartes « avancer d'une case », ou ce raccourci : ${m.nom} ${m.e} fait-${m.il} pareil ?`,
       ]);
       return {
         text,
@@ -1005,6 +1006,7 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
             : `« Répéter ${fois} fois », déplié, donne ${fois} instructions, alors que le programme de départ en comptait ${ecrites}.`,
           fidele ? "Oui, c'est le même trajet." : "Non : le raccourci ne répète pas le bon nombre de fois.",
         ),
+        canvas: cartes([{ type: "repeat", times: fois, children: [carte("avancer d'une case")] }], "Le raccourci"),
       };
     },
   ),
@@ -1021,9 +1023,9 @@ export const algorithmiqueBank: TutorBankItemV4[] = [
       const m = randomChoice(MOBILES.filter((x) => x.nom !== "Pic"));
       const c = randomChoice(CIBLES);
       const text = randomChoice([
-        `${cap(c.nom)} ${c.e} est à ${total} cases ${du(m.nom)} ${m.e}. Avec « répéter … fois : avancer de ${cases} cases », combien de fois répéter ?`,
+        `${cap(c.nom)} ${c.e} est à ${total} cases ${du(m.nom)} ${m.e}. Un tour de boucle = ${cases} cases. Combien de tours ?`,
         `${cap(m.nom)} ${m.e} doit avancer de ${total} cases. Chaque tour de boucle fait ${cases} cases. Combien de tours ?`,
-        `Pour aller ${au(c.nom)} ${c.e}, il faut ${total} cases. La boucle fait avancer de ${cases} cases. Combien de fois la répéter ?`,
+        `Pour aller ${au(c.nom)} ${c.e}, il faut ${total} cases. La boucle avance de ${cases}. Combien de tours ?`,
       ]);
       return {
         text,

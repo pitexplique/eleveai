@@ -98,7 +98,7 @@ const anciens: TutorBankItemV4[] = [
       const valeurs = enquete.items.map(() => randomInt(2, 15));
       const i = randomInt(0, enquete.items.length - 1);
       return {
-        text: `Ce tableau donne ${enquete.sujet}. Combien d'élèves ont choisi « ${enquete.items[i]} » ?`,
+        text: `${un(["Lis le tableau.", "Regarde le tableau."])} Combien d'élèves ont choisi « ${enquete.items[i]} » ?`,
         format: "short",
         expected: [String(valeurs[i])],
         comparator: "number_equal",
@@ -109,6 +109,7 @@ const anciens: TutorBankItemV4[] = [
           `${valeurs[i]} élèves ont choisi « ${enquete.items[i]} ».`,
         ),
         canvas: tableau({
+          title: cap(enquete.sujet),
           headers: ["Choix", "Nombre d'élèves"],
           rows: enquete.items.map((it, k) => ({ values: [it, valeurs[k]] })),
         }),
@@ -135,7 +136,7 @@ const anciens: TutorBankItemV4[] = [
       const cible = cherchePlus ? Math.max(...valeurs) : Math.min(...valeurs);
       const bonne = enquete.items[valeurs.indexOf(cible)];
       return {
-        text: `Ce tableau donne ${enquete.sujet}. Quel choix a été fait par le ${cherchePlus ? "PLUS" : "MOINS"} d'élèves ?`,
+        text: `${un(["Lis le tableau.", "Regarde le tableau."])} Quel choix a le ${cherchePlus ? "PLUS" : "MOINS"} d'élèves ?`,
         format: "qcm",
         choices: makeChoices(bonne, enquete.items.filter((it) => it !== bonne)),
         expected: [bonne],
@@ -147,6 +148,7 @@ const anciens: TutorBankItemV4[] = [
           `C'est « ${bonne} ».`,
         ),
         canvas: tableau({
+          title: cap(enquete.sujet),
           headers: ["Choix", "Nombre d'élèves"],
           rows: enquete.items.map((it, k) => ({ values: [it, valeurs[k]] })),
         }),
@@ -240,7 +242,7 @@ const anciens: TutorBankItemV4[] = [
     microId: "ce1_donnees_lire_graphique",
     difficulty: 5,
     theme: "neutral",
-    text: "Sur un diagramme en barres, l'axe est gradué de 5 en 5. Une barre monte jusqu'au troisième trait. Combien vaut-elle ?",
+    text: "L'axe d'un diagramme va de 5 en 5. Une barre monte au troisième trait. Combien vaut-elle ?",
     format: "short",
     expected: ["15"],
     comparator: "number_equal",
@@ -626,8 +628,9 @@ const barres = (e: { items: string[]; unite: string }, v: number[], pas: number,
   ({ kind: "stat_graph", graphType: "barres", title: titre, data: e.items.map((label, k) => ({ label, value: v[k] })), display: { showValues: false, showLabels: true, showAxis: true, step: pas, axeY: e.unite } }) as CanvasFigure;
 const table = (e: { items: string[]; unite: string }, v: (number | string)[], titre?: string, cell?: number): CanvasFigure =>
   ({ kind: "tableau_donnees", title: titre, headers: ["", `Nombre de ${e.unite}`], rows: e.items.map((it, k) => ({ values: [it, v[k]] })), ...(cell !== undefined ? { highlight: { cell: { row: cell, col: 1 } } } : {}) }) as CanvasFigure;
-const intro = (e: Enquete, quoi: string) =>
-  un(e.enquete ? [`Voici ${quoi} sur ${e.sujet}.`, `${cap(e.qui)} a fait une enquête : ${e.sujet}.`, `${prenom()} a noté ${e.sujet} dans ${quoi}.`] : [`Voici ${quoi} : ${e.sujet}.`, `${cap(quoi)} montre ${e.sujet}.`, `${prenom()} a noté ${e.sujet} dans ${quoi}.`]);
+/** ⭐ 14/11/2026 : énoncés trop longs pour un CE1. Le SUJET de l'enquête est
+ *  maintenant le titre du dessin (`cap(e.sujet)`) : l'énoncé ne le redit pas. */
+const intro = (_e: Enquete, quoi: string) => un([`Regarde ${quoi}.`, `Lis ${quoi}.`, `Voici ${quoi}.`]);
 /** « de élèves » → « d'élèves ». */
 const deU = (u: string) => (/^[aeéiou]/.test(u) ? `d'${u}` : `de ${u}`);
 /** Un QCM chiffré avec l'unité, accordée : « 1 élève », « 3 élèves ». */
@@ -679,7 +682,7 @@ function doubleEntree(mode: "case" | "ligne" | "plus") {
   const plus = Math.random() < 0.6;
   const k = col.indexOf(plus ? Math.max(...col) : Math.min(...col));
   return {
-    text: `${un(["Regarde ce tableau.", `Voici ${d.sujet}.`])} ${un([`Dans la colonne ${q(d.cols[co])}, quelle ligne a le ${plus ? "plus grand" : "plus petit"} nombre ?`, `Colonne ${q(d.cols[co])} : qui a le ${plus ? "plus" : "moins"} ?`])}`,
+    text: un([`Dans la colonne ${q(d.cols[co])}, quelle ligne a le ${plus ? "plus grand" : "plus petit"} nombre ?`, `${un(["Regarde ce tableau.", `Voici ${d.sujet}.`])} Colonne ${q(d.cols[co])} : qui a le ${plus ? "plus" : "moins"} ?`]),
     ...qcm(d.lignes[k], d.lignes.filter((_, j) => j !== k)),
     canvas,
     explanation: etapes(`on lit seulement la colonne ${d.cols[co]}.`, `${d.lignes.map((l, j) => `${l} : ${col[j]}`).join(", ")}.`, `C'est ${q(d.lignes[k])}.`),
@@ -696,7 +699,7 @@ function lireBarre(pas: number) {
   return {
     text: `${intro(e, "ce diagramme")} ${un([`Combien pour ${q(e.items[i])} ?`, `Quelle est la valeur de la barre ${q(e.items[i])} ?`, `Jusqu'à quel nombre monte la barre ${q(e.items[i])} ?`])}`,
     ...qcmU(v[i], [pas > 1 ? traits : v[i] + 1, v[i] + pas, v[i] - pas, v[(i + 1) % v.length]], e.unite),
-    canvas: barres(e, v, pas),
+    canvas: barres(e, v, pas, cap(e.sujet)),
     explanation: etapes(pas > 1 ? `l'axe avance de ${pas} en ${pas} : on lit le nombre, on ne compte pas les traits.` : "on suit le haut de la barre jusqu'à l'axe.", `La barre ${e.items[i]} arrive à ${v[i]}.`, `${v[i]} ${e.unite}.`),
   };
 }
@@ -708,7 +711,7 @@ function quelleBarre() {
   return {
     text: `${intro(e, "ce diagramme")} ${un([`Quelle barre vaut ${v[i]} ?`, `Pour quelle réponse compte-t-on ${v[i]} ${e.unite} ?`])}`,
     ...qcm(e.items[i], e.items.filter((_, j) => j !== i)),
-    canvas: barres(e, v, pas),
+    canvas: barres(e, v, pas, cap(e.sujet)),
     explanation: etapes("on cherche sur l'axe le nombre, puis la barre qui arrive à cette hauteur.", `${v[i]} : c'est la barre ${e.items[i]}.`, `C'est ${q(e.items[i])}.`),
   };
 }
@@ -720,7 +723,7 @@ function interpreter(sorte: "barres" | "tableau") {
   const pas = sorte === "barres" ? un([1, 2]) : 1;
   const v = valeurs(4, pas, sorte === "barres" ? pas * 9 : 20);
   const [i, j] = melange([0, 1, 2, 3]);
-  const canvas = sorte === "barres" ? barres(e, v, pas) : table(e, v);
+  const canvas = sorte === "barres" ? barres(e, v, pas, cap(e.sujet)) : table(e, v, cap(e.sujet));
   const quoi = sorte === "barres" ? "ce diagramme" : "ce tableau";
   const cas = un(["ecart", "somme", "plus", "moins"] as const);
   if (cas === "ecart") {
@@ -762,7 +765,7 @@ function caseEffacee() {
   const total = v.reduce((a, b) => a + b, 0);
   const lignes = e.items.map((it, k) => ({ values: [it, k === i ? "?" : v[k]] }));
   return {
-    text: `${un([`${cap(e.sujet)} : ${total} ${e.unite} en tout.`, `Pour ${e.sujet}, on compte ${total} ${e.unite} en tout.`])} ${un(["Quel nombre manque dans le tableau ?", "Que faut-il écrire à la place de « ? » ?"])}`,
+    text: `${un([`${total} ${e.unite} en tout.`, `On compte ${total} ${e.unite} en tout.`])} ${un(["Quel nombre manque dans le tableau ?", "Que faut-il écrire à la place de « ? » ?"])}`,
     ...qcmN(v[i], [total, total - v[i] + 1, v[i] + 1, v[i] - 1]),
     canvas: { kind: "tableau_donnees", title: cap(e.sujet), headers: ["", `Nombre de ${e.unite}`], rows: [...lignes, { values: ["Total", total] }], highlight: { cell: { row: i, col: 1 } } } as CanvasFigure,
     explanation: etapes("on ajoute les nombres connus, puis on cherche ce qui manque pour aller au total.", `${v.filter((_, k) => k !== i).join(" + ")} = ${total - v[i]} ; de ${total - v[i]} à ${total}, il manque ${v[i]}.`, `On écrit ${v[i]}.`),
@@ -783,7 +786,8 @@ function compterBatons() {
 /* ─────────────── ce1_donnees_produire ─────────────── */
 const PR = "ce1_donnees_produire";
 function barreFausse() {
-  const e = enquete(4);
+  // Des réponses d'un seul mot : la liste comptée tient dans une phrase courte.
+  const e = { ...un(ENQ.filter((x) => x.items.every((it) => !it.includes(" ")))) };
   const pas = un([1, 2]);
   const v = valeurs(4, pas, pas * 8);
   const i = entre(0, 3);
@@ -791,7 +795,7 @@ function barreFausse() {
   if (dessin[i] <= 0 || v.includes(dessin[i])) return barreFausse();
   const h = prenom();
   return {
-    text: `${h} a compté : ${e.items.map((it, k) => `${it} ${v[k]}`).join(", ")}. ${un(["Voici le diagramme tracé.", "Voici son diagramme."])} ${un(["Quelle barre est fausse ?", "Une barre est fausse. Laquelle ?"])}`,
+    text: `${h} a compté : ${e.items.map((it, k) => `${it} ${v[k]}`).join(", ")}. ${un(["Quelle barre est fausse ?", "Une barre est fausse. Laquelle ?"])}`,
     ...qcm(e.items[i], e.items.filter((_, k) => k !== i)),
     canvas: barres(e, dessin, pas, cap(e.sujet)),
     explanation: etapes("on compare chaque barre au nombre compté.", `La barre ${e.items[i]} monte à ${dessin[i]} au lieu de ${v[i]}.`, `C'est la barre ${q(e.items[i])}.`),
@@ -805,7 +809,7 @@ function hauteurBarre() {
   const dessin = v.map((x, k) => (k === i ? 0 : x));
   const fin = { ...e, items: e.items.map((it, k) => (k === i ? `${it} ?` : it)) };
   return {
-    text: `${prenom()} finit le diagramme. Il reste la barre ${q(e.items[i])} : ${v[i]} ${e.unite}. Chaque trait de l'axe vaut ${pas}. ${un(["La barre doit monter de combien de traits ?", "Combien de traits doit-elle monter ?"])}`,
+    text: `Barre ${q(e.items[i])} : ${v[i]} ${e.unite}. Un trait vaut ${pas}. ${un(["Jusqu'à quel trait monte-t-elle ?", "Combien de traits doit-elle monter ?"])}`,
     ...qcmU(v[i] / pas, [v[i], v[i] / pas + 1, v[i] / pas - 1], "traits"),
     canvas: barres(fin, dessin, pas, `Axe de ${pas} en ${pas}`),
     explanation: etapes(`chaque trait vaut ${pas}.`, `${v[i]} = ${v[i] / pas} × ${pas}.`, `La barre monte jusqu'au trait ${v[i] / pas}.`),
@@ -819,9 +823,9 @@ function defiTotal() {
   const v = valeurs(e.items.length, pas, pas * 6);
   const n = v.reduce((a, b) => a + b, 0);
   return {
-    text: `${un(["Défi !", "Pic lance un défi.", `${prenom()} lance un défi.`])} ${intro(e, "ce diagramme")} ${un([`Combien ${deU(e.unite)} en tout ?`, `Combien ${deU(e.unite)} au total ?`])}`,
+    text: `${un(["Défi !", "Pic lance un défi."])} ${intro(e, "ce diagramme")} ${un([`Combien ${deU(e.unite)} en tout ?`, `Combien ${deU(e.unite)} au total ?`])}`,
     ...qcmU(n, [v.reduce((a, b) => a + b / pas, 0), n + pas, n - pas, Math.max(...v)], e.unite),
-    canvas: barres(e, v, pas),
+    canvas: barres(e, v, pas, cap(e.sujet)),
     explanation: etapes(`on lit chaque barre (l'axe va de ${pas} en ${pas}), puis on ajoute tout.`, `${v.join(" + ")} = ${n}.`, `${n} ${e.unite} en tout.`),
   };
 }
@@ -832,7 +836,7 @@ function defiAutant() {
   const [a, b] = v[i] > v[j] ? [i, j] : [j, i];
   const d = v[a] - v[b];
   return {
-    text: `${un(["Défi !", "Attention, défi !"])} ${intro(e, "ce tableau")} ${un([`Combien ${deU(e.unite)} faut-il ajouter à ${q(e.items[b])} pour en avoir autant que ${q(e.items[a])} ?`, `Combien ${deU(e.unite)} manque-t-il à ${q(e.items[b])} pour égaler ${q(e.items[a])} ?`])}`,
+    text: `Défi ! ${un([`Combien ${deU(e.unite)} faut-il ajouter à ${q(e.items[b])} pour égaler ${q(e.items[a])} ?`, `Combien manque-t-il à ${q(e.items[b])} pour égaler ${q(e.items[a])} ?`])}`,
     ...qcmU(d, [v[a] + v[b], v[a], d + 1, d - 1], e.unite),
     canvas: table(e, v, cap(e.sujet)),
     explanation: etapes("on cherche ce qui manque au plus petit pour égaler le plus grand.", `${v[b]} + ${d} = ${v[a]}.`, `Il en manque ${d}.`),

@@ -169,30 +169,34 @@ type Monde = {
   part: (n: number) => string;
 };
 const MONDES: readonly Monde[] = [
-  { pl: "oiseaux", sg: "oiseau", lieu: "sur la branche", dessin: "oiseau", arrive: (n) => `${n} autres oiseaux se posent.`, part: (n) => `${n} oiseaux s'envolent.` },
-  { pl: "poissons", sg: "poisson", lieu: "dans l'aquarium", dessin: "poisson", arrive: (n) => `On ajoute ${n} poissons.`, part: (n) => `${n} poissons vont dans l'autre bassin.` },
-  { pl: "pommes", sg: "pomme", lieu: "dans le panier", dessin: "pomme", arrive: (n) => `On ajoute ${n} pommes.`, part: (n) => `On prend ${n} pommes pour la tarte.` },
-  { pl: "bananes", sg: "banane", lieu: "sur la table du goûter", dessin: "banane", arrive: (n) => `On pose ${n} autres bananes.`, part: (n) => `Les enfants mangent ${n} bananes.` },
-  { pl: "ballons", sg: "ballon", lieu: "à la fête d'anniversaire", arrive: (n) => `On gonfle ${n} autres ballons.`, part: (n) => `${n} ballons s'envolent dans le ciel.` },
-  { pl: "papillons", sg: "papillon", lieu: "dans le jardin", dessin: "papillon", arrive: (n) => `${n} autres papillons arrivent.`, part: (n) => `${n} papillons s'envolent.` },
-  { pl: "fleurs", sg: "fleur", lieu: "dans le vase", dessin: "fleur", arrive: (n) => `Le jardinier ajoute ${n} fleurs.`, part: (n) => `On enlève ${n} fleurs fanées.` },
-  { pl: "livres", sg: "livre", lieu: "sur l'étagère de la classe", dessin: "livre", arrive: (n) => `La maîtresse pose ${n} autres livres.`, part: (n) => `Les élèves empruntent ${n} livres.` },
-  { pl: "petites voitures", sg: "petite voiture", lieu: "sur le tapis de jeu", dessin: "voiture", arrive: (n) => `Malo apporte ${n} autres petites voitures.`, part: (n) => `${n} petites voitures roulent sous le lit.` },
-  { pl: "bateaux", sg: "bateau", lieu: "dans le port", dessin: "bateau", arrive: (n) => `${n} autres bateaux arrivent.`, part: (n) => `${n} bateaux partent en mer.` },
-  { pl: "étoiles", sg: "étoile", lieu: "dans le ciel", dessin: "etoile", arrive: (n) => `${n} autres étoiles s'allument.`, part: (n) => `Un nuage cache ${n} étoiles.` },
-  { pl: "chats", sg: "chat", lieu: "dans la cour de la ferme", dessin: "chat", arrive: (n) => `${n} autres chats arrivent.`, part: (n) => `${n} chats vont dormir dans la grange.` },
-  { pl: "chapeaux", sg: "chapeau", lieu: "dans le coffre à déguisements", dessin: "chapeau", arrive: (n) => `On ajoute ${n} chapeaux.`, part: (n) => `Les clowns prennent ${n} chapeaux.` },
-  { pl: "graines", sg: "graine", lieu: "dans la mangeoire de Pic", arrive: (n) => `On ajoute ${n} graines.`, part: (n) => `Pic le paille-en-queue picore ${n} graines.` },
-  { pl: "dinosaures", sg: "dinosaure", lieu: "dans la boîte à jouets", arrive: (n) => `Ravi range ${n} autres dinosaures.`, part: (n) => `Ravi prend ${n} dinosaures pour jouer.` },
-  { pl: "croissants", sg: "croissant", lieu: "sur le plateau de la boulangère", arrive: (n) => `La boulangère sort ${n} croissants du four.`, part: (n) => `La boulangère vend ${n} croissants.` },
-  { pl: "enfants", sg: "enfant", lieu: "dans la piscine", arrive: (n) => `${n} autres enfants sautent dans l'eau.`, part: (n) => `${n} enfants sortent de l'eau.` },
-  { pl: "voyageurs", sg: "voyageur", lieu: "dans le petit train", arrive: (n) => `${n} voyageurs montent.`, part: (n) => `${n} voyageurs descendent.` },
-  { pl: "moutons", sg: "mouton", lieu: "dans le pré", arrive: (n) => `Le berger fait entrer ${n} moutons.`, part: (n) => `${n} moutons rentrent à la bergerie.` },
-  { pl: "coquillages", sg: "coquillage", lieu: "dans le seau", arrive: (n) => `On ramasse ${n} autres coquillages.`, part: (n) => `On rend ${n} coquillages à la mer.` },
-  { pl: "bougies", sg: "bougie", lieu: "sur le gâteau", arrive: (n) => `On plante ${n} autres bougies.`, part: (n) => `On enlève ${n} bougies.` },
-  { pl: "singes", sg: "singe", lieu: "dans l'arbre du zoo", arrive: (n) => `${n} autres singes grimpent.`, part: (n) => `${n} singes descendent manger.` },
+  // ⭐ 14/11 : énoncés RACCOURCIS pour des enfants de 6 ans — lieu court, et
+  // `arrive` / `part` ne répètent pas le nom (« 3 autres arrivent. »).
+  { pl: "oiseaux", sg: "oiseau", lieu: "sur la branche", dessin: "oiseau", arrive: (n) => `${n} autres se posent.`, part: (n) => `${n} s'envolent.` },
+  { pl: "poissons", sg: "poisson", lieu: "dans l'aquarium", dessin: "poisson", arrive: (n) => `On en ajoute ${n}.`, part: (n) => `On en sort ${n}.` },
+  { pl: "pommes", sg: "pomme", lieu: "dans le panier", dessin: "pomme", arrive: (n) => `On en ajoute ${n}.`, part: (n) => `On en prend ${n}.` },
+  { pl: "bananes", sg: "banane", lieu: "sur la table", dessin: "banane", arrive: (n) => `On en pose ${n} autres.`, part: (n) => `On en mange ${n}.` },
+  { pl: "ballons", sg: "ballon", lieu: "à la fête", arrive: (n) => `On en gonfle ${n} autres.`, part: (n) => `${n} s'envolent.` },
+  { pl: "papillons", sg: "papillon", lieu: "au jardin", dessin: "papillon", arrive: (n) => `${n} autres arrivent.`, part: (n) => `${n} s'envolent.` },
+  { pl: "fleurs", sg: "fleur", lieu: "dans le vase", dessin: "fleur", arrive: (n) => `On en ajoute ${n}.`, part: (n) => `On en enlève ${n}.` },
+  { pl: "livres", sg: "livre", lieu: "sur l'étagère", dessin: "livre", arrive: (n) => `La maîtresse en pose ${n} autres.`, part: (n) => `On en emprunte ${n}.` },
+  { pl: "voitures", sg: "voiture", lieu: "sur le tapis", dessin: "voiture", arrive: (n) => `Malo en apporte ${n}.`, part: (n) => `${n} roulent sous le lit.` },
+  { pl: "bateaux", sg: "bateau", lieu: "au port", dessin: "bateau", arrive: (n) => `${n} autres arrivent.`, part: (n) => `${n} partent en mer.` },
+  { pl: "étoiles", sg: "étoile", lieu: "dans le ciel", dessin: "etoile", arrive: (n) => `${n} autres s'allument.`, part: (n) => `Un nuage en cache ${n}.` },
+  { pl: "chats", sg: "chat", lieu: "à la ferme", dessin: "chat", arrive: (n) => `${n} autres arrivent.`, part: (n) => `${n} vont dormir.` },
+  { pl: "chapeaux", sg: "chapeau", lieu: "dans le coffre", dessin: "chapeau", arrive: (n) => `On en ajoute ${n}.`, part: (n) => `Les clowns en prennent ${n}.` },
+  { pl: "graines", sg: "graine", lieu: "dans la mangeoire", arrive: (n) => `On en ajoute ${n}.`, part: (n) => `Pic en picore ${n}.` },
+  { pl: "dinosaures", sg: "dinosaure", lieu: "dans la boîte", arrive: (n) => `Ravi en range ${n} autres.`, part: (n) => `Ravi en prend ${n}.` },
+  { pl: "croissants", sg: "croissant", lieu: "sur le plateau", arrive: (n) => `On en sort ${n} du four.`, part: (n) => `On en vend ${n}.` },
+  { pl: "enfants", sg: "enfant", lieu: "dans la piscine", arrive: (n) => `${n} autres sautent dans l'eau.`, part: (n) => `${n} sortent de l'eau.` },
+  { pl: "voyageurs", sg: "voyageur", lieu: "dans le train", arrive: (n) => `${n} autres montent.`, part: (n) => `${n} descendent.` },
+  { pl: "moutons", sg: "mouton", lieu: "dans le pré", arrive: (n) => `${n} autres entrent.`, part: (n) => `${n} rentrent à la bergerie.` },
+  { pl: "coquillages", sg: "coquillage", lieu: "dans le seau", arrive: (n) => `On en ramasse ${n} autres.`, part: (n) => `On en rend ${n} à la mer.` },
+  { pl: "bougies", sg: "bougie", lieu: "sur le gâteau", arrive: (n) => `On en plante ${n} autres.`, part: (n) => `On en enlève ${n}.` },
+  { pl: "singes", sg: "singe", lieu: "dans l'arbre", arrive: (n) => `${n} autres grimpent.`, part: (n) => `${n} descendent manger.` },
 ];
 const monde = (dessinable = false) => randomChoice(dessinable ? MONDES.filter((m) => m.dessin) : MONDES);
+/** Le début d'une histoire, avec ou sans le lieu (énoncés courts). */
+const intro = (m: Monde, a: number) => randomChoice([`${maj(m.lieu)}, il y a ${a} ${m.pl}.`, `Il y a ${a} ${m.pl}.`]);
 
 /** Les choses qu'un enfant possède ou collectionne. */
 type Chose = { pl: string; sg: string; dessin?: ObjetId };
@@ -200,16 +204,16 @@ const CHOSES: readonly Chose[] = [
   { pl: "billes", sg: "bille" },
   { pl: "images", sg: "image" },
   { pl: "autocollants", sg: "autocollant" },
-  { pl: "cartes de dragons", sg: "carte de dragon" },
+  { pl: "cartes", sg: "carte" },
   { pl: "perles", sg: "perle" },
   { pl: "crayons", sg: "crayon" },
   { pl: "coquillages", sg: "coquillage" },
-  { pl: "petites voitures", sg: "petite voiture", dessin: "voiture" },
+  { pl: "voitures", sg: "voiture", dessin: "voiture" },
   { pl: "livres", sg: "livre", dessin: "livre" },
   { pl: "ballons", sg: "ballon", dessin: "ballon" },
   { pl: "fleurs", sg: "fleur", dessin: "fleur" },
   { pl: "pommes", sg: "pomme", dessin: "pomme" },
-  { pl: "étoiles dorées", sg: "étoile dorée", dessin: "etoile" },
+  { pl: "étoiles", sg: "étoile", dessin: "etoile" },
   { pl: "bonbons", sg: "bonbon" },
   { pl: "dinosaures", sg: "dinosaure" },
   { pl: "gâteaux", sg: "gâteau" },
@@ -273,13 +277,13 @@ function porteMonnaie(euros: number): MonnaieCanvasData {
 function histoireAjout(a: number, b: number, dessin = true) {
   const m = monde(dessin && a <= 10 && b <= 10);
   const question = randomChoice([
-    `Combien y a-t-il ${de(m.pl)} maintenant ?`,
-    `Combien ${de(m.pl)} y a-t-il à la fin ?`,
-    `Trouve le nombre ${de(m.pl)} à la fin.`,
+    `Combien maintenant ?`,
+    `Combien en tout ?`,
+    `Combien ${de(m.pl)} à la fin ?`,
     `Combien ${de(m.pl)} en tout ?`,
   ]);
   return {
-    text: `${maj(m.lieu)}, il y a ${a} ${m.pl}. ${m.arrive(b)} ${question}`,
+    text: `${intro(m, a)} ${m.arrive(b)} ${question}`,
     canvas: dessin && a <= 10 && b <= 10 ? deuxCollections(m.dessin, a, b) : undefined,
     m,
   };
@@ -289,9 +293,9 @@ function histoireReunion(a: number, b: number, dessin = true) {
   const [p, q] = deuxEnfants();
   const c = chose(dessin && a <= 5 && b <= 5);
   const question = randomChoice([
-    `Combien ${de(c.pl)} ont-${ils(p, q)} ensemble ?`,
-    `Combien cela fait-il ${de(c.pl)} en tout ?`,
-    `${p.nom} et ${q.nom} mettent tout ensemble. Combien ${de(c.pl)} ?`,
+    `Combien en ont-${ils(p, q)} ensemble ?`,
+    `Combien ${de(c.pl)} en tout ?`,
+    `Combien en tout ?`,
   ]);
   return {
     text: `${p.nom} a ${a} ${c.pl}. ${q.nom} en a ${b}. ${question}`,
@@ -347,7 +351,7 @@ function histoireChange(a: number, b: number, ajoute: boolean) {
   if (famille === 0) {
     const m = monde(a <= 10);
     return {
-      texte: `${maj(m.lieu)}, il y a ${a} ${m.pl}. ${ajoute ? m.arrive(b) : m.part(b)}`,
+      texte: `${intro(m, a)} ${ajoute ? m.arrive(b) : m.part(b)}`,
       canvas: a <= 10 ? collection(m.dessin, a) : undefined,
     };
   }
@@ -355,16 +359,16 @@ function histoireChange(a: number, b: number, ajoute: boolean) {
   const c = chose(a <= 10);
   const verbe = ajoute
     ? randomChoice([`${maj(p.il)} en gagne ${b}.`, `On lui en donne ${b}.`, `${maj(p.il)} en trouve encore ${b}.`])
-    : randomChoice([`${maj(p.il)} en perd ${b}.`, `${maj(p.il)} en donne ${b} à un ami.`, `${maj(p.il)} en range ${b} dans sa boîte.`]);
+    : randomChoice([`${maj(p.il)} en perd ${b}.`, `${maj(p.il)} en donne ${b}.`, `${maj(p.il)} en range ${b}.`]);
   return { texte: `${p.nom} a ${a} ${c.pl}. ${verbe}`, canvas: a <= 10 ? collection(c.dessin, a) : undefined };
 }
 
 /** La fin d'un énoncé d'addition posée. */
 const FIN_POSE = [
-  "Pose l'addition et calcule.",
-  "Calcule l'addition posée.",
-  "Trouve le total avec l'addition posée.",
-  "Combien en tout ? Calcule l'addition posée.",
+  "Combien en tout ?",
+  "Calcule le total.",
+  "Combien en tout ?",
+  "Trouve le total.",
 ];
 /** Une histoire à deux ou trois nombres, pour l'addition posée. */
 function histoirePose(n: readonly number[]) {
@@ -374,12 +378,12 @@ function histoirePose(n: readonly number[]) {
     const [p, q] = deuxEnfants();
     const c = chose();
     if (n.length === 2) return `${p.nom} a ${n[0]} ${c.pl}. ${q.nom} en a ${n[1]}. ${fin}`;
-    return `${p.nom} a ${n[0]} ${c.pl}, ${q.nom} en a ${n[1]}, et la maîtresse en a ${n[2]}. ${fin}`;
+    return `${p.nom} a ${n[0]} ${c.pl}, ${q.nom} ${n[1]}, la maîtresse ${n[2]}. ${fin}`;
   }
   if (famille === 1) {
     const m = monde();
     if (n.length === 2) return `${maj(m.lieu)}, il y a ${n[0]} ${m.pl}. ${m.arrive(n[1])} ${fin}`;
-    return `${maj(m.lieu)}, il y a ${n[0]} ${m.pl}. ${m.arrive(n[1])} Puis ${m.arrive(n[2]).charAt(0).toLowerCase()}${m.arrive(n[2]).slice(1)} ${fin}`;
+    return `Il y a ${n[0]} ${m.pl} ${m.lieu}. On en ajoute ${n[1]}, puis ${n[2]}. ${fin}`;
   }
   const jours = n.length === 2 ? ["lundi", "mardi"] : ["lundi", "mardi", "mercredi"];
   const s = randomChoice([
@@ -389,8 +393,8 @@ function histoirePose(n: readonly number[]) {
     { qui: "Le vétérinaire soigne", pl: "animaux" },
     { qui: "La bibliothèque prête", pl: "livres" },
     { qui: "Le cirque accueille", pl: "enfants" },
-    { qui: "Le chef cuisinier prépare", pl: "crêpes" },
-    { qui: "Pic le paille-en-queue mange", pl: "graines" },
+    { qui: "Le chef prépare", pl: "crêpes" },
+    { qui: "Pic mange", pl: "graines" },
   ]);
   return `${s.qui} ${n.map((x, i) => `${x} ${s.pl} ${jours[i]}`).join(n.length === 2 ? " et " : ", ").replace(/, ([^,]*)$/, " et $1")}. ${fin}`;
 }
@@ -424,27 +428,27 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
         const [p, q] = deuxEnfants();
         const c = chose(a <= 5 && b <= 5);
         const t = randomChoice([
-          `${p.nom} a ${a} ${c.pl} et ${q.nom} en a ${b}. Quel calcul donne le nombre ${de(c.pl)} qu'${ils(p, q)} ont ENSEMBLE ?`,
-          `${p.nom} a ${a} ${c.pl}. ${q.nom} en a ${b}. ${maj(ils(p, q))} les mettent dans la même boîte. Quel calcul faut-il faire ?`,
+          `${p.nom} a ${a} ${c.pl}, ${q.nom} en a ${b}. Quel calcul pour tout compter ?`,
+          `${p.nom} a ${a} ${c.pl}. ${q.nom} en a ${b}. ${maj(ils(p, q))} les réunissent. Quel calcul ?`,
           `${p.nom} et ${q.nom} réunissent leurs ${c.pl} : ${a} et ${b}. Choisis le bon calcul.`,
         ]);
         return qcm(t, choixCalcul(a, b, bonne), bonne, explication, deuxCollections(c.dessin, a, b));
       }
       const s = randomChoice([
         { t: `Dans le panier, il y a ${a} pommes rouges et ${b} pommes vertes.`, q: "Quel calcul donne le nombre de pommes ?", d: "pomme" as ObjetId },
-        { t: `Sur la branche, il y a ${a} oiseaux. Sur le toit, il y en a ${b}.`, q: "Quel calcul donne le nombre d'oiseaux en tout ?", d: "oiseau" as ObjetId },
-        { t: `Dans l'aquarium, il y a ${a} poissons rouges et ${b} poissons jaunes.`, q: "Quel calcul donne le nombre de poissons ?", d: "poisson" as ObjetId },
-        { t: `Au port, ${a} bateaux sont à gauche du quai et ${b} à droite.`, q: "Quel calcul donne le nombre de bateaux ?", d: "bateau" as ObjetId },
-        { t: `Dans le jardin, il y a ${a} papillons sur les fleurs et ${b} sur l'herbe.`, q: "Quel calcul donne le nombre de papillons ?", d: "papillon" as ObjetId },
+        { t: `${a} oiseaux sur la branche, ${b} sur le toit.`, q: "Quel calcul donne le nombre d'oiseaux en tout ?", d: "oiseau" as ObjetId },
+        { t: `Il y a ${a} poissons rouges et ${b} jaunes.`, q: "Quel calcul donne le nombre de poissons ?", d: "poisson" as ObjetId },
+        { t: `${a} bateaux sont à gauche, ${b} à droite.`, q: "Quel calcul donne le nombre de bateaux ?", d: "bateau" as ObjetId },
+        { t: `Au jardin, ${a} papillons sont sur les fleurs, ${b} sur l'herbe.`, q: "Quel calcul donne le nombre de papillons ?", d: "papillon" as ObjetId },
         { t: `Le vase bleu a ${a} fleurs. Le vase jaune en a ${b}.`, q: "Quel calcul donne le nombre de fleurs ?", d: "fleur" as ObjetId },
         { t: `À la ferme, ${a} chats dorment et ${b} chats jouent.`, q: "Quel calcul donne le nombre de chats ?", d: "chat" as ObjetId },
-        { t: `Sur l'étagère du haut, il y a ${a} livres. Sur celle du bas, ${b}.`, q: "Quel calcul donne le nombre de livres ?", d: "livre" as ObjetId },
+        { t: `${a} livres en haut, ${b} en bas.`, q: "Quel calcul donne le nombre de livres ?", d: "livre" as ObjetId },
         { t: `Dans le ciel, ${a} étoiles brillent à gauche et ${b} à droite.`, q: "Quel calcul donne le nombre d'étoiles ?", d: "etoile" as ObjetId },
         { t: `Au cirque, ${a} clowns ont un chapeau rouge et ${b} un chapeau bleu.`, q: "Quel calcul donne le nombre de clowns ?", d: "chapeau" as ObjetId },
-        { t: `Sur le tapis, ${a} petites voitures sont rouges et ${b} sont bleues.`, q: "Quel calcul donne le nombre de petites voitures ?", d: "voiture" as ObjetId },
-        { t: `Au goûter, il y a ${a} bananes sur la table et ${b} dans le sac.`, q: "Quel calcul donne le nombre de bananes ?", d: "banane" as ObjetId },
+        { t: `${a} voitures sont rouges, ${b} sont bleues.`, q: "Quel calcul donne le nombre de voitures ?", d: "voiture" as ObjetId },
+        { t: `Il y a ${a} bananes sur la table, ${b} dans le sac.`, q: "Quel calcul donne le nombre de bananes ?", d: "banane" as ObjetId },
       ]);
-      const q = famille === 1 ? s.q : randomChoice(["Choisis le bon calcul pour trouver le total.", "Quel calcul faut-il faire pour tout compter ?"]);
+      const q = famille === 1 ? "Quel calcul donne le total ?" : randomChoice(["Quel calcul faut-il ?", "Quel calcul pour le total ?"]);
       return qcm(`${s.t} ${q}`, choixCalcul(a, b, bonne), bonne, explication, deuxCollections(s.d, a, b));
     },
   ),
@@ -490,8 +494,8 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       const q = randomChoice([
         "Quel calcul faut-il faire ?",
         "Choisis le bon calcul.",
-        "Quel calcul donne le nombre à la fin ?",
-        "Pour savoir combien il y en a à la fin, quel calcul fais-tu ?",
+        "Quel est le bon calcul ?",
+        "Quel calcul choisis-tu ?",
       ]);
       return qcm(
         `${h.texte} ${q}`,
@@ -618,7 +622,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
           h.canvas,
         );
       }
-      const q = randomChoice(["Combien en reste-t-il ?", "Combien y en a-t-il maintenant ?", "Trouve ce qui reste."]);
+      const q = randomChoice(["Combien en reste-t-il ?", "Combien maintenant ?", "Trouve ce qui reste."]);
       return court(
         `${h.texte} ${q}`,
         a - b,
@@ -668,7 +672,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
     ...COMMUN,
     microId: "cp_signe_egal",
     difficulty: 5,
-    text: "Un élève calcule 47 + 8 et écrit : « 47 + 3 = 50 + 5 = 55 ». Son résultat est bon, mais son écriture est-elle correcte ?",
+    text: "Un élève écrit : « 47 + 3 = 50 + 5 = 55 ». Est-ce bien écrit ?",
     format: "qcm",
     choices: [
       "non, car 47 + 3 ne vaut pas 50 + 5",
@@ -705,9 +709,9 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
         const [r, s] = deuxEnfants();
         const c = chose();
         const t = randomChoice([
-          `${r.nom} a ${a} ${c.pl} dans une main et ${b} dans l'autre. ${s.nom} en a ${x}. Ont-${ils(r, s)} autant ${de(c.pl)} ?`,
-          `${r.nom} a ${a} ${c.pl} dans une boîte et ${b} sur la table. ${s.nom} en a ${x}. Ont-${ils(r, s)} le même nombre ?`,
-          `${r.nom} dit : « Mes ${c.pl}, c'est ${a} + ${b}. » ${s.nom} dit : « Les miens, c'est ${x}. » En ont-${ils(r, s)} autant ?`,
+          `${r.nom} a ${a} ${c.pl}, puis ${b} autres. ${s.nom} en a ${x}. Autant ?`,
+          `${r.nom} a ${a} + ${b} ${c.pl}. ${s.nom} en a ${x}. Le même nombre ?`,
+          `${r.nom} : « J'ai ${a} + ${b}. » ${s.nom} : « J'ai ${x}. » Autant ?`,
           `Lis : ${a} + ${b} = ${x}. Les deux côtés ont-ils la même valeur ?`,
         ]);
         return qcm(
@@ -867,8 +871,8 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       }
       const m = monde();
       const t = randomChoice([
-        `${maj(m.lieu)}, il y a ${a} ${m.pl}. ${m.arrive(b)} Combien y en a-t-il maintenant ?`,
-        `${maj(m.lieu)}, il y a ${a} ${m.pl}. ${m.arrive(b)} Combien ${de(m.pl)} en tout ?`,
+        `${intro(m, a)} ${m.arrive(b)} Combien maintenant ?`,
+        `${intro(m, a)} ${m.arrive(b)} Combien ${de(m.pl)} en tout ?`,
       ]);
       return court(t, total, explication, materiel(a), [a + b * 10]);
     },
@@ -908,7 +912,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       if (famille === 1) {
         const t = randomChoice([
           `${p.nom} a ${a} €. ${q.nom} a ${b} €. Combien d'euros ont-${ils(p, q)} ensemble ?`,
-          `${p.nom} met ${a} € et ${q.nom} met ${b} € dans la tirelire de la classe. Combien d'euros en tout ?`,
+          `${p.nom} met ${a} € et ${q.nom} ${b} € dans la tirelire. Combien en tout ?`,
           `Un livre coûte ${a} €. Un jeu coûte ${b} €. Combien coûtent-ils ensemble ?`,
         ]);
         return qcm(
@@ -928,8 +932,8 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
         `À la piscine, ${a} enfants nagent et ${b} jouent au bord. Combien d'enfants ?`,
         `${p.nom} a ${a} images. ${q.nom} en a ${b}. Combien d'images ont-${ils(p, q)} ensemble ?`,
         `Le chef cuisinier fait ${a} crêpes, puis ${b} autres. Combien de crêpes ?`,
-        `La fusée emporte ${a} caisses d'eau et ${b} caisses de nourriture. Combien de caisses ?`,
-        `Le vétérinaire a soigné ${a} chiens et ${b} chats ce mois-ci. Combien d'animaux ?`,
+        `La fusée emporte ${a} caisses, puis ${b} autres. Combien de caisses ?`,
+        `Le vétérinaire soigne ${a} chiens et ${b} chats. Combien d'animaux ?`,
       ]);
       return court(s, total, explication, undefined, [total + 10, total - 10, a + dB * 10]);
     },
@@ -958,20 +962,20 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       if (famille === 3) {
         const m = monde();
         const t = randomChoice([
-          `${maj(m.lieu)}, il y a ${a} ${m.pl}. ${m.arrive(b)} Combien y en a-t-il maintenant ?`,
-          `${maj(m.lieu)}, il y a ${a} ${m.pl}. ${m.arrive(b)} Combien ${de(m.pl)} en tout ?`,
-          `${maj(m.lieu)}, il y a ${a} ${m.pl}. ${m.arrive(b)} Trouve le nombre ${de(m.pl)}.`,
+          `${intro(m, a)} ${m.arrive(b)} Combien maintenant ?`,
+          `${intro(m, a)} ${m.arrive(b)} Combien ${de(m.pl)} en tout ?`,
+          `${intro(m, a)} ${m.arrive(b)} Trouve le nombre ${de(m.pl)}.`,
         ]);
         return court(t, total, explication, materiel(a), [a + b * 10, d * 10 + b]);
       }
       const s = randomChoice([
-        `Le pion ${deN(p)} est sur la case ${a}. Il avance de ${b} cases. Sur quelle case arrive-t-il ?`,
+        `Le pion ${deN(p)} est sur la case ${a}. Il avance de ${b}. Où arrive-t-il ?`,
         `${p.nom} a ${a} autocollants. ${maj(p.il)} en reçoit ${b}. Combien en a-t-${p.il} ?`,
-        `Il y a ${a} moutons dans le pré. Le berger en fait entrer ${b}. Combien de moutons maintenant ?`,
+        `Il y a ${a} moutons. ${b} autres entrent. Combien maintenant ?`,
         `La maîtresse a ${a} cahiers. Elle en achète ${b}. Combien de cahiers a-t-elle ?`,
         `Il y a ${a} enfants au cirque. ${b} autres arrivent. Combien d'enfants maintenant ?`,
-        `Pic le paille-en-queue a ${a} graines. Il en trouve ${b}. Combien en a-t-il ?`,
-        `${p.nom} a ${a} €. ${maj(p.il)} gagne ${b} € à la kermesse. Combien d'euros a-t-${p.il} ?`,
+        `Pic a ${a} graines. Il en trouve ${b}. Combien en a-t-il ?`,
+        `${p.nom} a ${a} €. ${maj(p.il)} gagne ${b} €. Combien a-t-${p.il} ?`,
         `Le petit train porte ${a} voyageurs. ${b} montent. Combien de voyageurs maintenant ?`,
         `Dans la bibliothèque, il y a ${a} albums. On en ajoute ${b}. Combien d'albums ?`,
       ]);
@@ -1009,9 +1013,9 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       if (famille === 1) {
         const m = monde();
         const t = randomChoice([
-          `${maj(m.lieu)}, il y a ${a} ${m.pl}. ${m.part(b)} Combien en reste-t-il ?`,
-          `${maj(m.lieu)}, il y a ${a} ${m.pl}. ${m.part(b)} Combien ${de(m.pl)} reste-t-il ?`,
-          `${maj(m.lieu)}, il y a ${a} ${m.pl}. ${m.part(b)} Combien y en a-t-il maintenant ?`,
+          `${intro(m, a)} ${m.part(b)} Combien en reste-t-il ?`,
+          `${intro(m, a)} ${m.part(b)} Combien ${de(m.pl)} reste-t-il ?`,
+          `${intro(m, a)} ${m.part(b)} Combien maintenant ?`,
         ]);
         return court(t, r, explication, materiel(a), [a + b]);
       }
@@ -1020,14 +1024,14 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
         const c = chose();
         const t = randomChoice([
           `${p.nom} a ${a} ${c.pl}. ${maj(p.il)} en perd ${b}. Combien lui en reste-t-il ?`,
-          `${p.nom} a ${a} ${c.pl}. ${maj(p.il)} en donne ${b} à ${randomChoice(TROUPE.filter((e) => e.nom !== p.nom)).nom}. Combien lui en reste-t-il ?`,
-          `${p.nom} a ${a} ${c.pl}. ${maj(p.il)} en range ${b} dans un tiroir. Combien en garde-t-${p.il} sur la table ?`,
+          `${p.nom} a ${a} ${c.pl}. ${maj(p.il)} en donne ${b}. Combien lui en reste-t-il ?`,
+          `${p.nom} a ${a} ${c.pl}. ${maj(p.il)} en range ${b}. Combien en reste-t-il ?`,
         ]);
         return court(t, r, explication, undefined, [a + b]);
       }
       const t = randomChoice([
-        `${p.nom} a ${a} €. ${maj(p.il)} achète une glace à ${b} €. Combien d'euros lui reste-t-il ?`,
-        `${p.nom} a ${a} €. ${maj(p.il)} paie un ticket de manège à ${b} €. Combien lui reste-t-il ?`,
+        `${p.nom} a ${a} €. Une glace coûte ${b} €. Combien lui reste-t-il ?`,
+        `${p.nom} a ${a} €. ${maj(p.il)} paie ${b} € le manège. Combien reste-t-il ?`,
       ]);
       return qcm(t, choixNombres(r, [a + b, r - 10, r + 1, r - 1], "€"), `${r} €`, explication, porteMonnaie(a));
     },
@@ -1055,23 +1059,23 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       const p = enfant();
       if (famille === 1) {
         const t = randomChoice([
-          `${p.nom} a ${d} billets de 10 €. ${maj(p.il)} achète un ballon à ${b} €. Combien d'euros lui reste-t-il ?`,
+          `${p.nom} a ${d} billets de 10 €. Un ballon coûte ${b} €. Combien reste-t-il ?`,
           `${p.nom} a ${depart} €. ${maj(p.il)} paie un livre à ${b} €. Combien lui reste-t-il ?`,
-          `Avec ${depart} €, ${p.nom} achète un cerf-volant à ${b} €. Combien d'euros lui reste-t-il ?`,
+          `${p.nom} a ${depart} €. ${maj(p.il)} paie ${b} €. Combien lui reste-t-il ?`,
         ]);
         return qcm(t, choixNombres(r, [depart - 10 + b, depart + b, r - 10, r + 1], "€"), `${r} €`, explication, { kind: "monnaie", elements: [{ valeur: "10e", nombre: d }] });
       }
       const s = randomChoice([
-        `La fermière a ${d} boîtes de 10 œufs. Elle prend ${b} œufs pour une omelette.`,
-        `Il y a ${depart} chaises dans la salle. On en sort ${b}.`,
+        `La fermière a ${d} boîtes de 10 œufs. Elle en prend ${b}.`,
+        `Il y a ${depart} chaises. On en sort ${b}.`,
         `${p.nom} a ${depart} perles. ${maj(p.il)} en met ${b} sur un collier.`,
         `Le jardinier a ${depart} graines. Il en sème ${b}.`,
         `La boulangère a fait ${depart} croissants. Elle en vend ${b}.`,
         `Le bateau pirate porte ${depart} tonneaux. ${b} roulent dans l'eau.`,
-        `Il y a ${depart} poissons dans le bassin. ${b} partent dans la rivière.`,
-        `${p.nom} a ${depart} cartes de dragons. ${maj(p.il)} en échange ${b}.`,
+        `Il y a ${depart} poissons. ${b} partent.`,
+        `${p.nom} a ${depart} cartes. ${maj(p.il)} en donne ${b}.`,
       ]);
-      const q = randomChoice(["Combien en reste-t-il ?", "Combien en reste-t-il maintenant ?", "Trouve ce qui reste."]);
+      const q = randomChoice(["Combien en reste-t-il ?", "Combien reste-t-il ?", "Trouve ce qui reste."]);
       return court(`${s} ${q}`, r, explication, materiel(depart, "unites"), [depart - 10 + b, depart + b, r - 10]);
     },
   ),
@@ -1100,18 +1104,18 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       const p = enfant();
       if (famille === 1) {
         const t = randomChoice([
-          `${p.nom} a ${a} €. ${maj(p.il)} achète un jeu à ${b} €. Combien d'euros lui reste-t-il ?`,
-          `${p.nom} a ${a} € dans sa tirelire. ${maj(p.il)} en sort ${b} € pour un cadeau. Combien reste-t-il ?`,
+          `${p.nom} a ${a} €. Un jeu coûte ${b} €. Combien lui reste-t-il ?`,
+          `${p.nom} a ${a} € dans sa tirelire. ${maj(p.il)} en sort ${b}. Combien reste-t-il ?`,
         ]);
         return qcm(t, choixNombres(r, [r + 10, r - 10, r + 1], "€"), `${r} €`, explication, porteMonnaie(a));
       }
       const s = randomChoice([
         `Le livre ${deN(p)} a ${a} pages. ${maj(p.il)} en a lu ${b}. Combien de pages reste-t-il ?`,
-        `Il y a ${a} enfants dans la cour. ${b} rentrent en classe. Combien restent dans la cour ?`,
+        `Il y a ${a} enfants dans la cour. ${b} rentrent. Combien restent ?`,
         `La boulangère a ${a} croissants. Elle en vend ${b}. Combien lui en reste-t-il ?`,
-        `Il y a ${a} moutons dans le pré. ${b} rentrent à la bergerie. Combien restent dans le pré ?`,
+        `Il y a ${a} moutons dans le pré. ${b} rentrent. Combien restent ?`,
         `Le train porte ${a} voyageurs. ${b} descendent. Combien de voyageurs restent ?`,
-        `${p.nom} a ${a} images. ${maj(p.il)} en colle ${b}. Combien lui en reste-t-il à coller ?`,
+        `${p.nom} a ${a} images. ${maj(p.il)} en colle ${b}. Combien en reste-t-il ?`,
         `Au zoo, il y a ${a} flamants roses. ${b} s'envolent. Combien en reste-t-il ?`,
         `La bibliothèque a ${a} albums. On en prête ${b}. Combien en reste-t-il ?`,
       ]);
@@ -1177,15 +1181,15 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
         const c = chose();
         const t = randomChoice([
           `${p.nom} a ${a} ${c.pl}. ${maj(p.il)} en veut ${total}. Combien lui en manque-t-il ?`,
-          `Il faut ${total} ${c.pl} pour le jeu. ${p.nom} en a ${a}. Combien doit-${p.il} en trouver ?`,
-          `${p.nom} avait ${a} ${c.pl}. Maintenant, ${p.il} en a ${total}. Combien en a-t-${p.il} gagné ?`,
+          `Il faut ${total} ${c.pl}. ${p.nom} en a ${a}. Combien en manque-t-il ?`,
+          `${p.nom} avait ${a} ${c.pl}. ${maj(p.il)} en a ${total}. Combien en a-t-${p.il} gagné ?`,
         ]);
         return court(t, manque, explication, cadres(a, 0, 2), [a + total, total, manque + 1]);
       }
       const m = monde();
       const t = randomChoice([
-        `${maj(m.lieu)}, il y avait ${a} ${m.pl}. Maintenant, il y en a ${total}. Combien y en a-t-il de plus ?`,
-        `${maj(m.lieu)}, il y a ${a} ${m.pl}. Il en faut ${total}. Combien en manque-t-il ?`,
+        `Il y avait ${a} ${m.pl}. Il y en a ${total}. Combien de plus ?`,
+        `${intro(m, a)} Il en faut ${total}. Combien en manque-t-il ?`,
       ]);
       return court(t, manque, explication, cadres(a, 0, 2), [a + total, total, manque + 1]);
     },
@@ -1229,8 +1233,8 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
           `Complète : ${a} - … = ${r}`,
           `Complète : ${r} = ${a} - …`,
           `${a} - ? = ${r}. Quel nombre manque ?`,
-          `${maj(m.lieu)}, il y avait ${a} ${m.pl}. Il en reste ${r}. Combien y en a-t-il en moins ?`,
-          `${p.nom} avait ${a} images. ${maj(p.il)} en a collé. Il en reste ${r}. Combien en a-t-${p.il} collé ?`,
+          `Il y avait ${a} ${m.pl}. Il en reste ${r}. Combien de moins ?`,
+          `${p.nom} avait ${a} images. Il en reste ${r}. Combien en a-t-${p.il} collé ?`,
         ]);
         return court(
           t,
@@ -1248,13 +1252,13 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       const m = monde();
       const c = chose();
       const t = randomChoice([
-        `${p.nom} avait des billes. ${maj(p.il)} en a perdu ${b}. Il lui en reste ${r}. Complète : … - ${b} = ${r}`,
+        `${p.nom} perd ${b} billes. Il lui en reste ${r}. Complète : … - ${b} = ${r}`,
         `Complète : … - ${b} = ${r}`,
         `Quel nombre manque ? … = ${r} + ${b}`,
-        `${maj(m.lieu)}, il y avait des ${m.pl}. ${m.part(b)} Il en reste ${r}. Combien y en avait-il au début ?`,
-        `${maj(m.lieu)}, il y avait des ${m.pl}. ${m.part(b)} Il en reste ${r}. Complète : … - ${b} = ${r}`,
-        `${p.nom} avait des ${c.pl}. ${maj(p.il)} en a donné ${b}. Il lui en reste ${r}. Combien en avait-${p.il} ?`,
-        `${p.nom} a rangé ${b} ${c.pl}. Il en reste ${r} sur la table. Combien y en avait-il au début ?`,
+        `Il y avait des ${m.pl}. ${m.part(b)} Il en reste ${r}. Combien au début ?`,
+        `Il y avait des ${m.pl}. ${m.part(b)} Il en reste ${r}. Complète : … - ${b} = ${r}`,
+        `${p.nom} donne ${b} ${c.pl}. Il lui en reste ${r}. Combien en avait-${p.il} ?`,
+        `${p.nom} range ${b} ${c.pl}. Il en reste ${r}. Combien au début ?`,
       ]);
       return court(
         t,
@@ -1375,7 +1379,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
     ...COMMUN,
     microId: "cp_mult_sens",
     difficulty: 3,
-    text: "Jan a 3 paquets de biscuits. Chaque paquet contient 20 biscuits. Quel calcul donne le nombre de biscuits ?",
+    text: "Jan a 3 paquets de 20 biscuits. Quel calcul donne le nombre de biscuits ?",
     format: "qcm",
     choices: ["20 + 20 + 20", "20 + 3", "20 - 3", "3 + 3 + 3"],
     expected: ["20 + 20 + 20"],
@@ -1427,7 +1431,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
         { un: "branche", des: "branches", pl: "oiseaux", d: "oiseau" as ObjetId, prep: "Sur chaque" },
         { un: "étagère", des: "étagères", pl: "livres", d: "livre" as ObjetId, prep: "Sur chaque" },
         { un: "filet", des: "filets", pl: "ballons", d: "ballon" as ObjetId, prep: "Dans chaque" },
-        { un: "boîte", des: "boîtes", pl: "petites voitures", d: "voiture" as ObjetId, prep: "Dans chaque" },
+        { un: "boîte", des: "boîtes", pl: "voitures", d: "voiture" as ObjetId, prep: "Dans chaque" },
         { un: "panier", des: "paniers", pl: "bananes", d: "banane" as ObjetId, prep: "Dans chaque" },
         { un: "carte", des: "cartes", pl: "étoiles", d: "etoile" as ObjetId, prep: "Sur chaque" },
         { un: "port", des: "ports", pl: "bateaux", d: "bateau" as ObjetId, prep: "Dans chaque" },
@@ -1443,7 +1447,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
         `Il y a ${total} ${G.pl}.`,
       );
       const canvas = rangees(G.d, Array.from({ length: groupes }, () => k), k <= 3 ? 2 : 1);
-      const debut = `Il y a ${groupes} ${G.des}. ${G.prep} ${G.un}, il y a ${k} ${G.pl}.`;
+      const debut = `Il y a ${groupes} ${G.des}, avec ${k} ${G.pl} ${G.prep.toLowerCase()}.`;
       // Leurres d'enfant : additionner les deux nombres, inverser les rôles, un groupe de trop ou de moins.
       const repete = (n: number, fois: number) => Array.from({ length: fois }, () => n).join(" + ");
       const candidats = [
@@ -1457,11 +1461,11 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       const leurres = [...new Set(candidats)].filter((x) => x !== somme && x !== String(k)).slice(0, 3);
       const famille = randomInt(0, 2);
       if (famille === 0) {
-        const t = randomChoice([`Combien ${de(G.pl)} en tout ?`, `Combien y a-t-il ${de(G.pl)} ?`, `Compte les ${G.pl}. Combien en tout ?`]);
+        const t = randomChoice([`Combien ${de(G.pl)} en tout ?`, `Combien y a-t-il ${de(G.pl)} ?`, `Combien en tout ?`]);
         return court(`${debut} ${t}`, total, explication, canvas, [groupes + k, total + k, total - k]);
       }
       if (famille === 1) {
-        const t = randomChoice(["Quel calcul donne le nombre total ?", "Choisis le bon calcul.", "Quel calcul permet de tout compter ?"]);
+        const t = randomChoice(["Quel calcul donne le total ?", "Choisis le bon calcul.", "Quel calcul pour tout compter ?"]);
         return qcm(
           `${debut} ${t}`,
           makeChoices(somme, leurres),
@@ -1490,7 +1494,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
     ...COMMUN,
     microId: "cp_add_sous_defi",
     difficulty: 5,
-    text: "Dans la boîte, j'ai mangé 6 bonbons et il en reste encore 21. Combien y avait-il de bonbons dans la boîte au départ ?",
+    text: "J'ai mangé 6 bonbons. Il en reste 21. Combien y en avait-il au départ ?",
     format: "qcm",
     choices: ["15", "27", "26", "37"],
     expected: ["27"],
@@ -1517,23 +1521,23 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       const p = enfant();
       const h = randomChoice([
         { pl: "bonbons", v: `${maj(p.il)} en a mangé ${pris}` },
-        { pl: "billes", v: `${maj(p.il)} en a perdu ${pris} à la récré` },
+        { pl: "billes", v: `${maj(p.il)} en a perdu ${pris}` },
         { pl: "images", v: `${maj(p.il)} en a donné ${pris}` },
         { pl: "autocollants", v: `${maj(p.il)} en a collé ${pris}` },
-        { pl: "perles", v: `${maj(p.il)} en a mis ${pris} sur un collier` },
-        { pl: "cartes de dragons", v: `${maj(p.il)} en a échangé ${pris}` },
+        { pl: "perles", v: `${maj(p.il)} en a perdu ${pris}` },
+        { pl: "cartes", v: `${maj(p.il)} en a échangé ${pris}` },
         { pl: "graines", v: `${maj(p.il)} en a donné ${pris} à Pic` },
         { pl: "crayons", v: `${maj(p.il)} en a prêté ${pris}` },
-        { pl: "coquillages", v: `${maj(p.il)} en a rendu ${pris} à la mer` },
+        { pl: "coquillages", v: `${maj(p.il)} en a rendu ${pris}` },
       ]);
       const q = randomChoice([
-        `Combien ${de(h.pl)} avait-${p.il} au départ ?`,
-        `Combien ${de(h.pl)} avait-${p.il} avant ?`,
-        `Retrouve le nombre ${de(h.pl)} du début.`,
+        `Combien au départ ?`,
+        `Combien en avait-${p.il} ?`,
+        `Combien au début ?`,
       ]);
       const texte = randomChoice([
-        `${p.nom} avait des ${h.pl}. ${h.v}. Il lui en reste ${reste}. ${q}`,
-        `Au début, ${p.nom} avait un tas de ${h.pl}. ${h.v}. Maintenant, il lui en reste ${reste}. ${q}`,
+        `${p.nom} avait des ${h.pl}. ${h.v}. Il en reste ${reste}. ${q}`,
+        `${p.nom} a des ${h.pl}. ${h.v}. Il en reste ${reste}. ${q}`,
       ]);
       return court(
         texte,
@@ -1569,18 +1573,18 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
       const plus = randomInt(2, 8);
       const total = depart - moins + plus;
       const s = randomChoice([
-        { t: `Il y avait ${depart} enfants dans le bus. Au premier arrêt, ${moins} descendent. Au deuxième arrêt, ${plus} montent.`, q: "Combien d'enfants dans le bus maintenant ?" },
-        { t: `Il y a ${depart} poissons dans le bassin. ${moins} partent dans la rivière. Puis ${plus} reviennent.`, q: "Combien de poissons dans le bassin ?" },
+        { t: `Il y a ${depart} enfants dans le bus. ${moins} descendent. Puis ${plus} montent.`, q: "Combien d'enfants maintenant ?" },
+        { t: `Il y a ${depart} poissons. ${moins} partent. Puis ${plus} reviennent.`, q: "Combien de poissons ?" },
         { t: `Sur la branche, ${depart} oiseaux. ${moins} s'envolent. Puis ${plus} se posent.`, q: "Combien d'oiseaux sur la branche ?" },
         { t: `La boulangère a ${depart} croissants. Elle en vend ${moins}. Puis elle en cuit ${plus}.`, q: "Combien de croissants a-t-elle ?" },
-        { t: `Dans la piscine, il y a ${depart} enfants. ${moins} sortent. Puis ${plus} sautent dans l'eau.`, q: "Combien d'enfants dans la piscine ?" },
-        { t: `Le bateau pirate porte ${depart} pirates. ${moins} descendent sur l'île. Puis ${plus} remontent.`, q: "Combien de pirates sur le bateau ?" },
-        { t: `Au zoo, ${depart} singes sont dans l'arbre. ${moins} descendent manger. Puis ${plus} remontent.`, q: "Combien de singes dans l'arbre ?" },
+        { t: `Il y a ${depart} enfants dans la piscine. ${moins} sortent. Puis ${plus} sautent.`, q: "Combien maintenant ?" },
+        { t: `Le bateau porte ${depart} pirates. ${moins} descendent. Puis ${plus} remontent.`, q: "Combien de pirates ?" },
+        { t: `${depart} singes sont dans l'arbre. ${moins} descendent. Puis ${plus} remontent.`, q: "Combien de singes ?" },
         { t: `Nina a ${depart} billes. Elle en perd ${moins}. Puis elle en gagne ${plus}.`, q: "Combien de billes a-t-elle ?" },
-        { t: `Dans la bibliothèque, ${depart} livres sont sur la table. On en range ${moins}. Puis on en pose ${plus}.`, q: "Combien de livres sur la table ?" },
-        { t: `Dans la fusée, il y a ${depart} caisses. On en sort ${moins}. Puis on en charge ${plus}.`, q: "Combien de caisses dans la fusée ?" },
+        { t: `${depart} livres sont sur la table. On en range ${moins}. Puis on en pose ${plus}.`, q: "Combien de livres ?" },
+        { t: `La fusée a ${depart} caisses. On en sort ${moins}. Puis on en charge ${plus}.`, q: "Combien de caisses ?" },
       ]);
-      const q = randomChoice([s.q, "Combien maintenant ?", "Trouve le nombre à la fin."]);
+      const q = randomChoice([s.q, "Combien maintenant ?", "Combien à la fin ?"]);
       return court(
         `${s.t} ${q}`,
         total,
@@ -1590,7 +1594,7 @@ export const additionSoustractionBank: TutorBankItemV4[] = [
           `D'abord : ${depart} - ${moins} = ${depart - moins}. Ensuite : ${depart - moins} + ${plus} = ${total}.`,
           `À la fin : ${total}.`,
         ),
-        s.t.startsWith("Nina") ? parle("nina", `J'avais ${depart} billes !`, "sourire") : undefined,
+        s.t.startsWith("Nina") ? parle("nina", `J'avais ${depart} billes !`, "sourire") : cadres(depart),
         [depart + moins + plus, depart - moins - plus, depart - moins, total + 10],
       );
     },

@@ -117,7 +117,7 @@ const FIXES: TutorBankItemV4[] = [
     microId: "ce2_division_sens",
     difficulty: 4,
     theme: "reunion",
-    text: "Au marché, on met 30 letchis dans des barquettes de 6. Que cherche-t-on : combien de letchis par barquette, ou combien de barquettes ?",
+    text: "Au marché, on met 30 letchis dans des barquettes de 6. Que cherche-t-on ?",
     format: "qcm",
     choices: [
       "combien de barquettes",
@@ -386,7 +386,7 @@ const FIXES: TutorBankItemV4[] = [
     microId: "ce2_division_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "On a 30 gâteaux et des boîtes de 4. On veut ne remplir que des boîtes COMPLÈTES. Combien de boîtes, et combien de gâteaux restent dehors ?",
+    text: "On range 30 gâteaux dans des boîtes de 4, toutes COMPLÈTES. Combien de boîtes, et combien de gâteaux restent ?",
     format: "qcm",
     choices: [
       "7 boîtes, 2 gâteaux restent",
@@ -414,7 +414,7 @@ const FIXES: TutorBankItemV4[] = [
     microId: "ce2_division_defi",
     difficulty: 5,
     theme: "reunion",
-    text: "Une classe de 24 élèves se met en rangs de 4. Puis la maîtresse demande des rangs de 6. Y a-t-il plus de rangs, ou moins ?",
+    text: "24 élèves se mettent en rangs de 4, puis de 6. Que devient le nombre de rangs ?",
     format: "qcm",
     choices: [
       "moins de rangs, car ils sont plus grands",
@@ -514,11 +514,11 @@ const enGroupes = (c: Chose, groupes: number, k: number) =>
 
 function textePartage(total: number, parts: number, c: Chose, p: Prenom): string {
   return pick([
-    `On partage ${total} ${c.des} entre ${parts} enfants, à parts égales. Combien ${de(c.des)} pour chacun ?`,
-    `${p.nom} partage ${total} ${c.des} entre ${parts} amis. Chacun en reçoit autant. Combien chacun en a-t-il ?`,
-    `${p.nom} et ses amis sont ${parts}. Ils se partagent ${total} ${c.des} à égalité. Combien en a chaque enfant ?`,
+    `On partage ${total} ${c.des} entre ${parts} enfants, à parts égales. Combien pour chacun ?`,
+    `${p.nom} partage ${total} ${c.des} entre ${parts} amis, autant à chacun. Combien chacun en a-t-il ?`,
+    `${p.nom} et ses amis sont ${parts}. Ils se partagent ${total} ${c.des} à égalité. Combien chacun en a-t-il ?`,
     `La maîtresse distribue ${total} ${c.des} à ${parts} groupes, autant à chaque groupe. Combien par groupe ?`,
-    `Pic le paille-en-queue partage ${total} ${c.des} entre ses ${parts} petits. Combien chaque petit en reçoit-il ?`,
+    `Pic le paille-en-queue partage ${total} ${c.des} entre ses ${parts} petits. Combien chacun en reçoit-il ?`,
     `À l'anniversaire ${de(p.nom)}, ${parts} enfants se partagent ${total} ${c.des}. Combien chacun en a-t-il ?`,
     `Les ${parts} pirates se partagent ${total} ${c.des} du coffre. Combien chaque pirate en a-t-il ?`,
     `Partage ${total} ${c.des} en ${parts} tas égaux. Combien ${de(c.des)} dans chaque tas ?`,
@@ -532,8 +532,8 @@ function texteGroupement(total: number, k: number, c: Chose, b: Boite, p: Prenom
     `${p.nom} a ${total} ${c.des}. ${maj(p.il)} en met ${k} dans chaque ${b.un}. Combien ${de(b.des)} remplit-${p.il} ?`,
     `Il y a ${total} ${c.des}. Dans ${b.fem ? "une" : "un"} ${b.un}, on en met ${k}. Combien ${de(b.des)} faut-il ?`,
     `Pic le paille-en-queue range ${total} ${c.des} par ${b.des} de ${k}. Combien ${de(b.des)} remplit-il ?`,
-    `Le marchand vend ses ${c.des} par lots de ${k}. Il en a ${total}. Combien de lots peut-il faire ?`,
-    `Combien ${de(b.des)} de ${k} ${c.des} peut-on faire avec ${total} ${c.des} ?`,
+    `Le marchand a ${total} ${c.des} et les vend par lots de ${k}. Combien de lots fait-il ?`,
+    `Avec ${total} ${c.des}, combien ${de(b.des)} de ${k} peut-on faire ?`,
   ]);
 }
 
@@ -679,10 +679,10 @@ function combienDeFois(b: number, q: number): Q {
     `${p.nom} compte de ${b} en ${b} jusqu'à ${a}. Combien de bonds fait-${p.il} ?`,
     `${p.nom} sait que ${b} × ? = ${a}. Quel est le nombre caché ?`,
     `Dans la table de ${b}, ${p.nom} cherche ${a}. ${b} fois combien ?`,
-    `La grenouille ${de(p.nom)} fait des bonds de ${b} cases. Combien de bonds pour aller jusqu'à la case ${a} ?`,
+    `La grenouille ${de(p.nom)} fait des bonds de ${b} cases. Combien de bonds jusqu'à la case ${a} ?`,
   ];
   const avecObjet = [
-    `Combien de paquets de ${b} ${c.des} peut-on faire avec ${a} ${c.des} ?`,
+    `Avec ${a} ${c.des}, combien de paquets de ${b} peut-on faire ?`,
     `${p.nom} range ${a} ${c.des} par ${b}. Combien de tas fait-${p.il} ?`,
   ];
   const objet = Math.random() < 0.3;
@@ -748,12 +748,12 @@ function partageAvecReste(): Q {
   const debut = pick([
     `On partage ${total} ${c.des} entre ${parts} enfants, à parts égales.`,
     `${p.nom} partage ${total} ${c.des} entre ${parts} amis, autant pour chacun.`,
-    `Pic le paille-en-queue distribue ${total} ${c.des} à ses ${parts} petits, autant à chacun.`,
+    `Pic le paille-en-queue partage ${total} ${c.des} entre ses ${parts} petits.`,
     `${parts} enfants se partagent ${total} ${c.des} à égalité.`,
   ]);
   const text = chacun
-    ? `${debut} ${pick([`Combien ${de(c.des)} chacun reçoit-il ?`, `Combien en a chaque enfant ?`])}`
-    : `${debut} ${pick([`Combien ${de(c.des)} restera-t-il ?`, `Combien en reste-t-il à la fin ?`])}`;
+    ? `${debut} ${pick([`Combien chacun en reçoit-il ?`, `Combien en a chaque enfant ?`])}`
+    : `${debut} ${pick([`Combien en restera-t-il ?`, `Combien en reste-t-il à la fin ?`])}`;
   return qN(
     text,
     chacun ? q : r,
@@ -776,29 +776,27 @@ function interpreterReste(): Q {
   const q = rint(2, 8);
   const r = rint(1, k - 1);
   const total = k * q + r;
-  const p = quelquun();
   const sit = pick([
-    { qui: "élèves", un: "voiture", des: "voitures", fem: true, verbe: `Chaque voiture emmène ${k} élèves.`, depart: `${total} élèves partent en sortie.`, tous: "pour que tous les élèves partent" },
-    { qui: "enfants", un: "barque", des: "barques", fem: true, verbe: `Une barque transporte ${k} enfants.`, depart: `${total} enfants veulent traverser le lac.`, tous: "pour que tous les enfants traversent" },
-    { qui: "joueurs", un: "minibus", des: "minibus", fem: false, verbe: `Un minibus emmène ${k} joueurs.`, depart: `${total} joueurs vont au match de football.`, tous: "pour emmener tous les joueurs" },
-    { qui: "gâteaux", un: "boîte", des: "boîtes", fem: true, verbe: `Chaque boîte contient ${k} gâteaux.`, depart: `Le chef pâtissier doit transporter ${total} gâteaux.`, tous: "pour transporter tous les gâteaux" },
-    { qui: "livres", un: "carton", des: "cartons", fem: false, verbe: `Un carton contient ${k} livres.`, depart: `La bibliothécaire range ${total} livres.`, tous: "pour ranger tous les livres" },
-    { qui: "œufs", un: "boîte", des: "boîtes", fem: true, verbe: `Une boîte contient ${k} œufs.`, depart: `La fermière a ramassé ${total} œufs.`, tous: "pour ranger tous les œufs" },
-    { qui: "astronautes", un: "fusée", des: "fusées", fem: true, verbe: `Une fusée emmène ${k} astronautes.`, depart: `${total} astronautes partent sur la Lune.`, tous: "pour que tous les astronautes partent" },
-    { qui: "invités", un: "table", des: "tables", fem: true, verbe: `À chaque table, il y a ${k} places.`, depart: `${total} invités viennent à l'anniversaire.`, tous: "pour asseoir tous les invités" },
+    { qui: "élèves", un: "voiture", des: "voitures", fem: true, verbe: `Une voiture emmène ${k} élèves.`, depart: `${total} élèves partent en sortie.`, tous: "pour tous les élèves" },
+    { qui: "enfants", un: "barque", des: "barques", fem: true, verbe: `Une barque prend ${k} enfants.`, depart: `${total} enfants traversent le lac.`, tous: "pour tous les enfants" },
+    { qui: "joueurs", un: "minibus", des: "minibus", fem: false, verbe: `Un minibus emmène ${k} joueurs.`, depart: `${total} joueurs vont au match.`, tous: "pour tous les joueurs" },
+    { qui: "gâteaux", un: "boîte", des: "boîtes", fem: true, verbe: `Une boîte contient ${k} gâteaux.`, depart: `Le pâtissier transporte ${total} gâteaux.`, tous: "pour tous les gâteaux" },
+    { qui: "livres", un: "carton", des: "cartons", fem: false, verbe: `Un carton contient ${k} livres.`, depart: `La bibliothécaire range ${total} livres.`, tous: "pour tous les livres" },
+    { qui: "œufs", un: "boîte", des: "boîtes", fem: true, verbe: `Une boîte contient ${k} œufs.`, depart: `La fermière a ${total} œufs.`, tous: "pour tous les œufs" },
+    { qui: "astronautes", un: "fusée", des: "fusées", fem: true, verbe: `Une fusée emmène ${k} astronautes.`, depart: `${total} astronautes partent sur la Lune.`, tous: "pour tous les astronautes" },
+    { qui: "invités", un: "table", des: "tables", fem: true, verbe: `Chaque table a ${k} places.`, depart: `${total} invités viennent à la fête.`, tous: "pour tous les invités" },
   ]);
   const type = rint(1, 3);
   const complets = sit.fem ? "complètes" : "complets";
-  const intro = pick(["", "", `${p.nom} aide à tout organiser. `, `${p.nom} fait le calcul. `, `Pic le paille-en-queue se pose une question. `]);
   const question =
     type === 1
       ? `Combien ${de(sit.des)} faut-il ${sit.tous} ?`
       : type === 2
         ? `Combien ${de(sit.des)} seront ${complets} ?`
-        : `On ne remplit que des ${sit.des} ${complets}. Combien ${de(sit.qui)} restent à part ?`;
+        : `Combien ${de(sit.qui)} restent hors des ${sit.des} ${complets} ?`;
   const bon = type === 1 ? q + 1 : type === 2 ? q : r;
   return qN(
-    `${intro}${sit.depart} ${sit.verbe} ${question}`,
+    `${sit.depart} ${sit.verbe} ${question}`,
     bon,
     [q, q + 1, r, k, q + 2, k - r].filter((v) => v !== bon),
     exp(
@@ -883,9 +881,9 @@ function defiDeuxEtapes(): Q {
     if (!enfants) return defiDeuxEtapes();
     return qN(
       pick([
-        `${boites} boîtes contiennent chacune ${par} ${c.des}. On partage toutes les ${c.des} entre ${enfants} enfants. Combien chacun en reçoit-il ?`,
-        `${p.nom} a ${boites} sachets de ${par} ${c.des}. ${maj(p.il)} les partage entre ${enfants} amis, à égalité. Combien chaque ami en a-t-il ?`,
-        `Pic le paille-en-queue rapporte ${boites} fois ${par} ${c.des}. Il les partage entre ses ${enfants} petits. Combien en a chaque petit ?`,
+        `On partage ${boites} boîtes de ${par} ${c.des} entre ${enfants} enfants. Combien chacun en reçoit-il ?`,
+        `${p.nom} partage ${boites} sachets de ${par} ${c.des} entre ${enfants} amis. Combien chacun en a-t-il ?`,
+        `Pic le paille-en-queue partage ${boites} fois ${par} ${c.des} entre ses ${enfants} petits. Combien chacun ?`,
       ]),
       total / enfants,
       [total, par, boites, total / enfants + 1, total - enfants],
@@ -900,8 +898,8 @@ function defiDeuxEtapes(): Q {
     const total = amis * part + mange;
     return qN(
       pick([
-        `${p.nom} a ${total} ${c.des}. ${maj(p.il)} en garde ${mange}, puis partage le reste entre ${amis} amis. Combien chaque ami en reçoit-il ?`,
-        `Il y a ${total} ${c.des}. On en met ${mange} de côté, et on partage les autres entre ${amis} enfants. Combien pour chacun ?`,
+        `${p.nom} a ${total} ${c.des}. ${maj(p.il)} en garde ${mange} et partage le reste entre ${amis} amis. Combien chacun ?`,
+        `Sur ${total} ${c.des}, on en garde ${mange} et on partage les autres entre ${amis} enfants. Combien pour chacun ?`,
       ]),
       part,
       [Math.floor(total / amis), part + 1, total - mange, amis, part - 1],
@@ -914,8 +912,8 @@ function defiDeuxEtapes(): Q {
   const total = a * b * pick([1, 2]);
   return qM(
     pick([
-      `Une classe de ${total} élèves se met en rangs de ${a}. Puis la maîtresse demande des rangs de ${b}. Y a-t-il plus de rangs, ou moins ?`,
-      `${p.nom} range ${total} ${c.des} par paquets de ${a}, puis par paquets de ${b}. Fait-${p.il} plus de paquets, ou moins ?`,
+      `${total} élèves se mettent en rangs de ${a}, puis de ${b}. Que devient le nombre de rangs ?`,
+      `${p.nom} range ${total} ${c.des} par paquets de ${a}, puis de ${b}. Fait-${p.il} plus de paquets, ou moins ?`,
     ]),
     "moins, car les paquets sont plus grands",
     ["plus, car " + b + " est plus grand que " + a, "le même nombre", "on ne peut pas savoir"],
@@ -935,12 +933,12 @@ function boitesCompletes(): Q {
   const reste = Math.random() < 0.4;
   const complets = b.fem ? "complètes" : "complets";
   const debut = pick([
-    `On a ${total} ${c.des} et des ${b.des} de ${k}. On ne veut que des ${b.des} ${b.fem ? "pleines" : "pleins"}.`,
-    `${p.nom} range ${total} ${c.des} dans des ${b.des} de ${k}. ${b.fem ? "Seules les" : "Seuls les"} ${b.des} ${complets} partent au marché.`,
+    `On a ${total} ${c.des} à ranger dans des ${b.des} de ${k}.`,
+    `${p.nom} range ${total} ${c.des} dans des ${b.des} de ${k}, bien ${b.fem ? "pleines" : "pleins"}.`,
     `Pic le paille-en-queue met ${total} ${c.des} par ${b.des} de ${k}.`,
     `${p.nom} prépare des ${b.des} de ${k} ${c.des}. ${maj(p.il)} en a ${total}.`,
   ]);
-  const question = reste ? `Combien ${de(c.des)} restent dehors ?` : `Combien ${de(b.des)} ${complets} remplit-on ?`;
+  const question = reste ? `Combien en reste-t-il dehors ?` : `Combien ${de(b.des)} ${complets} remplit-on ?`;
   return qN(
     `${debut} ${question}`,
     reste ? r : q,

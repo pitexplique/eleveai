@@ -244,7 +244,7 @@ export const contenanceBank: TutorBankItemV4[] = [
     microId: "ce2_contenance_comparer",
     difficulty: 4,
     theme: "neutral",
-    text: "On verse toute l'eau d'une bouteille haute et fine dans un saladier large et bas. Le saladier est presque vide. Y a-t-il moins d'eau qu'avant ?",
+    text: "On verse l'eau d'une bouteille fine dans un saladier large. Elle paraît basse. Y en a-t-il moins ?",
     format: "qcm",
     choices: [
       "non, c'est la même quantité d'eau",
@@ -272,7 +272,7 @@ export const contenanceBank: TutorBankItemV4[] = [
     microId: "ce2_contenance_comparer",
     difficulty: 3,
     theme: "reunion",
-    text: "Kevin a une gourde de 5 dL, Malia une bouteille de 75 cL. Qui peut emporter le plus d'eau ?",
+    text: "Kevin a une gourde de 5 dL, Malia une bouteille de 75 cL. Qui emporte le plus d'eau ?",
     format: "qcm",
     choices: ["Malia", "Kevin", "ils ont la même quantité", "on ne peut pas savoir"],
     expected: ["Malia"],
@@ -299,7 +299,7 @@ export const contenanceBank: TutorBankItemV4[] = [
     microId: "ce2_contenance_probleme",
     difficulty: 2,
     theme: "reunion",
-    text: "Pour la kermesse de l'école, on prépare du jus de goyavier. On verse 2 L de jus et 50 cL d'eau. Combien de centilitres de boisson en tout ?",
+    text: "On verse 2 L de jus de goyavier et 50 cL d'eau. Combien de centilitres en tout ?",
     format: "short",
     expected: ["250"],
     comparator: "number_equal",
@@ -321,7 +321,7 @@ export const contenanceBank: TutorBankItemV4[] = [
     microId: "ce2_contenance_probleme",
     difficulty: 4,
     theme: "neutral",
-    text: "Un arrosoir contient 5 L. On arrose deux plants avec 80 cL chacun. Combien de centilitres reste-t-il dans l'arrosoir ?",
+    text: "Un arrosoir contient 5 L. On arrose deux plants avec 80 cL chacun. Combien de centilitres reste-t-il ?",
     format: "short",
     expected: ["340"],
     comparator: "number_equal",
@@ -347,7 +347,16 @@ export const contenanceBank: TutorBankItemV4[] = [
     microId: "ce2_contenance_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Trois élèves mesurent la même bouteille. Léa écrit 50 cL, Kevin écrit 5 dL, Malia écrit un demi-litre. Qui a raison ?",
+    text: "Léa, Kevin et Malia mesurent la même bouteille. Voici ce qu'ils écrivent. Qui a raison ?",
+    canvas: contenanceCanvas({
+      variant: "objets",
+      objets: [
+        { label: "Léa", icon: "🍶", contenance: "50 cL" },
+        { label: "Kevin", icon: "🍶", contenance: "5 dL" },
+        { label: "Malia", icon: "🍶", contenance: "un demi-litre" },
+      ],
+      display: { showContenances: true, showLabels: true },
+    }),
     format: "qcm",
     choices: [
       "les trois : c'est la même contenance",
@@ -375,7 +384,7 @@ export const contenanceBank: TutorBankItemV4[] = [
     microId: "ce2_contenance_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Tu as une bouteille de 1 L. Tu remplis trois verres de 25 cL. Peux-tu encore remplir un quatrième verre de 25 cL ?",
+    text: "Une bouteille de 1 L. Tu remplis trois verres de 25 cL. Peux-tu en remplir un quatrième ?",
     format: "qcm",
     choices: [
       "oui, tout juste",
@@ -485,15 +494,11 @@ function contenanceTotale(e: Etoile): Q {
   const total = L * 100 + cl;
   const bonne = `${total} cL`;
   return {
-    text: `${pick([
-      `${p.nom} verse ${L} L ${de(b.a)} et ${cl} cL ${de(b.b)} ${b.ou}.`,
-      `On mélange ${L} L ${de(b.a)} avec ${cl} cL ${de(b.b)} ${b.ou}.`,
-      `${b.ou.charAt(0).toUpperCase() + b.ou.slice(1)}, ${p.nom} prépare ${L} L ${de(b.a)} et ${cl} cL ${de(b.b)}.`,
-    ])} ${pick([
-      "Combien de centilitres cela fait-il en tout ?",
-      "Quelle quantité en tout, en centilitres ?",
-      "Écris la quantité totale en centilitres.",
-    ])}`,
+    text: pick([
+      `${p.nom} verse ${L} L ${de(b.a)} et ${cl} cL ${de(b.b)}. Combien de centilitres en tout ?`,
+      `On mélange ${L} L ${de(b.a)} et ${cl} cL ${de(b.b)}. Combien de centilitres en tout ?`,
+      `${p.nom} prépare ${L} L ${de(b.a)} et ${cl} cL ${de(b.b)}. Combien de centilitres cela fait-il ?`,
+    ]),
     format: "qcm",
     choices: choix(bonne, [`${L + cl} cL`, `${Number(`${L}${cl}`)} cL`, `${L * 10 + cl} cL`, `${total + 100} cL`, `${L * 1000 + cl} cL`]),
     expected: [bonne],
@@ -513,14 +518,14 @@ function contenanceTotale(e: Etoile): Q {
 
 /** Un groupe et l'adulte qui le fait boire. */
 const GROUPES: readonly { qui: string; chef: string }[] = [
-  { qui: "joueurs de l'équipe de football", chef: "L'entraîneur" },
-  { qui: "élèves de la classe", chef: "La maîtresse" },
-  { qui: "artistes du cirque", chef: "Le clown Pipo" },
-  { qui: "enfants de la colonie", chef: "L'animatrice" },
-  { qui: "pirates du bateau", chef: "La capitaine" },
-  { qui: "danseuses du spectacle", chef: "Le professeur de danse" },
-  { qui: "pompiers de la caserne", chef: "Le chef des pompiers" },
-  { qui: "invités de l'anniversaire", chef: "Le papa de Zoé" },
+  { qui: "footballeurs", chef: "L'entraîneur" },
+  { qui: "élèves", chef: "La maîtresse" },
+  { qui: "acrobates", chef: "Le clown" },
+  { qui: "enfants", chef: "L'animatrice" },
+  { qui: "pirates", chef: "La capitaine" },
+  { qui: "danseuses", chef: "Le professeur" },
+  { qui: "pompiers", chef: "Le chef" },
+  { qui: "invités", chef: "Papa" },
 ];
 const QUI_BOIT = GROUPES.map((g) => g.qui);
 
@@ -534,16 +539,14 @@ function resteDansLeRecipient(): Q {
   const p = quelquun();
   const bonne = `${reste} cL`;
   return {
-    text: `${maj(s.le)} contient ${L} L. ${pick([
+    text: `${maj(s.le.split(" ").slice(0, s.le.startsWith("l'") ? 1 : 2).join(" "))} contient ${L} L. ${pick([
       `${p.nom} remplit ${nb} verres de ${v1} cL.`,
-      `${p.nom} verse ${nb} gobelets de ${v1} cL pour ses amis.`,
-      `Au goûter, on sert ${nb} tasses de ${v1} cL.`,
-      `${p.nom} et ses copains boivent ${nb} verres de ${v1} cL.`,
-      `Pour le pique-nique, ${p.nom} remplit ${nb} petites gourdes de ${v1} cL.`,
+      `${p.nom} verse ${nb} gobelets de ${v1} cL.`,
+      `On sert ${nb} tasses de ${v1} cL.`,
+      `${p.nom} remplit ${nb} gourdes de ${v1} cL.`,
     ])} ${pick([
       "Combien de centilitres reste-t-il ?",
-      "Quelle quantité reste-t-il, en centilitres ?",
-      `Combien de centilitres reste-t-il dans ${s.le} ?`,
+      "Que reste-t-il, en centilitres ?",
     ])}`,
     format: "qcm",
     choices: choix(bonne, [`${L * 100 - v1} cL`, `${L * 10 - nb * v1 > 0 ? L * 10 - nb * v1 : reste + 20} cL`, `${reste + v1} cL`, `${nb * v1} cL`, `${reste - 10} cL`]),
@@ -568,19 +571,19 @@ function combienDeVerres(): Q {
   const nb = (L * 100) / v;
   const qui = pick(QUI_BOIT);
   const [s, quoi, verres, verre] = pick([
-    ["Un bidon", "de jus de pomme", "verres", "verre"],
-    ["Une grande carafe", "de limonade", "verres", "verre"],
-    ["Une fontaine", "d'eau fraîche", "gobelets", "gobelet"],
+    ["Un bidon", "de jus", "verres", "verre"],
+    ["Une carafe", "de limonade", "verres", "verre"],
+    ["Une fontaine", "d'eau", "gobelets", "gobelet"],
     ["Un chaudron", "de soupe", "bols", "bol"],
-    ["Une grosse bouteille", "de lait", "verres", "verre"],
-    ["Une marmite", "de chocolat chaud", "tasses", "tasse"],
+    ["Une bouteille", "de lait", "verres", "verre"],
+    ["Une marmite", "de chocolat", "tasses", "tasse"],
   ] as const);
   const u = (x: number) => pl(x, verre, verres);
   return {
     text: `${s} ${quoi} contient ${L} L. ${pick([
       `Combien de ${verres} de ${v} cL peut-on remplir ?`,
-      `On sert les ${qui} dans des ${verres} de ${v} cL. Combien de ${verres} peut-on remplir ?`,
-      `Pour les ${qui}, on remplit des ${verres} de ${v} cL. Combien de ${verres} remplira-t-on ?`,
+      `On sert les ${qui} dans des ${verres} de ${v} cL. Combien de ${verres} ?`,
+      `Pour les ${qui} : des ${verres} de ${v} cL. Combien peut-on en remplir ?`,
     ])}`,
     format: "qcm",
     choices: choix(u(nb), [(L * 10) / v >= 1 && Number.isInteger((L * 10) / v) ? (L * 10) / v : nb + 2, nb + 1, nb * 2, L * v, nb - 1].map(u)),
@@ -606,10 +609,10 @@ function boissonDuGroupe(): Q {
   const reste = L * 100 - nb * v;
   const { qui, chef: p } = pick(GROUPES);
   return {
-    text: `${p} remplit un bidon de ${L} L. ${nb} ${qui} boivent chacun ${v} cL. ${pick([
-      "Combien de centilitres reste-t-il dans le bidon ?",
-      "Quelle quantité reste-t-il, en centilitres ?",
-    ])}`,
+    text: pick([
+      `Un bidon contient ${L} L. ${nb} ${qui} boivent chacun ${v} cL. Combien de centilitres reste-t-il ?`,
+      `${p} remplit un bidon de ${L} L. ${nb} ${qui} boivent ${v} cL chacun. Que reste-t-il, en centilitres ?`,
+    ]),
     format: "qcm",
     choices: choix(`${reste} cL`, [`${nb * v} cL`, `${L * 10 - nb * v > 0 ? L * 10 - nb * v : reste + 50} cL`, `${reste + v} cL`, `${reste + 100} cL`]),
     expected: [`${reste} cL`],

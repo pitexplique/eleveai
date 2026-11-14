@@ -168,44 +168,49 @@ function deuxTas(a: { nom: string; tas: Tas }, b: { nom: string; tas: Tas }): Ca
 }
 const decrire = (t: Tas) => t.filter(([, n]) => n > 0).sort((a, b) => b[0] - a[0]).map(([v, n]) => nomArgents(v, n)).join(" et ");
 
+const maj = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+/** « coûte » ou « coûtent » (des graines, des rollers). */
+const coute = (quoi: string) => (quoi.startsWith("des ") ? "coûtent" : "coûte");
+
 /** Où est l'argent. */
 const OU: readonly ((p: Prenom) => string)[] = [
+  // ⭐ 14/11 : courts — le dessin montre l'argent.
   (p) => `Voici le porte-monnaie ${deN(p.nom)}.`,
-  (p) => `${p.nom} vide sa tirelire sur la table.`,
-  (p) => `Voici l'argent ${deN(p.nom)} pour la kermesse.`,
-  (p) => `${p.nom} a reçu cet argent pour son anniversaire.`,
-  (p) => `Pic a trouvé cet argent dans le coffre au trésor ${deN(p.nom)}.`,
-  (p) => `Voici ce que ${p.nom} emporte au marché.`,
-  (p) => `${p.nom} joue à la marchande avec cet argent.`,
-  (p) => `Dans la caisse du stand de gâteaux, ${p.nom} trouve cet argent.`,
-  (p) => `Voici les économies ${deN(p.nom)} pour acheter un jeu.`,
-  (p) => `${p.nom} range cet argent dans sa boîte à trésor.`,
+  (p) => `${p.nom} vide sa tirelire.`,
+  (p) => `Voici l'argent ${deN(p.nom)}.`,
+  (p) => `${p.nom} a reçu cet argent.`,
+  (p) => `Pic a trouvé ce trésor.`,
+  (p) => `${p.nom} va au marché avec cet argent.`,
+  (p) => `${p.nom} joue à la marchande.`,
+  (p) => `${p.nom} trouve cet argent.`,
+  (p) => `Voici les économies ${deN(p.nom)}.`,
+  (p) => `${p.nom} range cet argent.`,
 ];
 
 /** Ce qu'on achète, et où. */
 const ACHATS: readonly { quoi: string; ou: string; min: number; max: number }[] = [
-  { quoi: "un livre de dinosaures", ou: "à la librairie", min: 4, max: 15 },
+  { quoi: "un livre", ou: "à la librairie", min: 4, max: 15 },
   { quoi: "un ballon", ou: "au magasin de sport", min: 3, max: 15 },
-  { quoi: "un gâteau au chocolat", ou: "à la boulangerie", min: 3, max: 15 },
-  { quoi: "une petite voiture", ou: "au magasin de jouets", min: 2, max: 9 },
-  { quoi: "un pot de fleurs", ou: "chez la fleuriste", min: 2, max: 12 },
+  { quoi: "un gâteau", ou: "à la boulangerie", min: 3, max: 15 },
+  { quoi: "une voiture", ou: "au magasin de jouets", min: 2, max: 9 },
+  { quoi: "un bouquet", ou: "chez la fleuriste", min: 2, max: 12 },
   { quoi: "un cerf-volant", ou: "au marché", min: 5, max: 20 },
-  { quoi: "une boîte de feutres", ou: "à la papeterie", min: 2, max: 9 },
+  { quoi: "une trousse", ou: "à la papeterie", min: 2, max: 9 },
   { quoi: "un poisson rouge", ou: "à l'animalerie", min: 2, max: 8 },
   { quoi: "une corde à sauter", ou: "à la kermesse", min: 2, max: 8 },
-  { quoi: "un puzzle de pirates", ou: "au magasin de jouets", min: 5, max: 20 },
+  { quoi: "un puzzle", ou: "au magasin de jouets", min: 5, max: 20 },
   { quoi: "un melon", ou: "au marché", min: 1, max: 4 },
-  { quoi: "une tarte aux pommes", ou: "chez le pâtissier", min: 3, max: 12 },
-  { quoi: "un petit dragon en peluche", ou: "à la fête foraine", min: 5, max: 25 },
-  { quoi: "un paquet de graines", ou: "chez le jardinier", min: 1, max: 4 },
-  { quoi: "un ananas", ou: "au marché du dimanche", min: 1, max: 5 },
-  { quoi: "un jeu de société", ou: "au magasin de jouets", min: 10, max: 35 },
-  { quoi: "une paire de rollers", ou: "au magasin de sport", min: 20, max: 50 },
+  { quoi: "une tarte", ou: "chez le pâtissier", min: 3, max: 12 },
+  { quoi: "une peluche", ou: "à la fête foraine", min: 5, max: 25 },
+  { quoi: "des graines", ou: "chez le jardinier", min: 1, max: 4 },
+  { quoi: "un ananas", ou: "au marché", min: 1, max: 5 },
+  { quoi: "un jeu", ou: "au magasin de jouets", min: 10, max: 35 },
+  { quoi: "des rollers", ou: "au magasin de sport", min: 20, max: 50 },
   { quoi: "une trottinette", ou: "au magasin de sport", min: 25, max: 60 },
   { quoi: "un aquarium", ou: "à l'animalerie", min: 20, max: 60 },
-  { quoi: "un château fort en bois", ou: "au magasin de jouets", min: 25, max: 70 },
-  { quoi: "une tente de camping", ou: "au magasin de sport", min: 30, max: 90 },
-  { quoi: "un vélo", ou: "chez le vendeur de vélos", min: 50, max: 99 },
+  { quoi: "un château fort", ou: "au magasin de jouets", min: 25, max: 70 },
+  { quoi: "une tente", ou: "au magasin de sport", min: 30, max: 90 },
+  { quoi: "un vélo", ou: "au magasin de vélos", min: 50, max: 99 },
 ];
 
 /** Un achat dont le prix est plausible (une trottinette ne coûte pas 3 €). */
@@ -251,7 +256,7 @@ export const monnaieBank: TutorBankItemV4[] = [
       const cible = randomChoice(vals);
       const p = quelquun();
       const bon = estPiece(cible) ? "une pièce" : "un billet";
-      const t = `${randomChoice(OU)(p)} ${randomChoice(["L'argent entouré, est-ce une pièce ou un billet ?", "Ce qui est entouré, c'est une pièce ou un billet ?"])}`;
+      const t = `${randomChoice(OU)(p)} ${randomChoice(["L'argent entouré : pièce ou billet ?", "Ce qui est entouré, c'est une pièce ou un billet ?"])}`;
       return qcm(t, ["une pièce", "un billet"], bon,
         exp("Les pièces sont rondes, les billets sont des rectangles.", "On regarde la forme de ce qui est entouré.",
           `${cible} € : c'est ${nomArgent(cible)}.`, `C'est ${bon}.`),
@@ -412,8 +417,8 @@ export const monnaieBank: TutorBankItemV4[] = [
       const bon = (plus ? pa > pb : pa < pb) ? a.quoi : b.quoi;
       const p = quelquun();
       const t = randomChoice([
-        `${a.quoi.charAt(0).toUpperCase()}${a.quoi.slice(1)} coûte ${eu(pa)}. ${b.quoi.charAt(0).toUpperCase()}${b.quoi.slice(1)} coûte ${eu(pb)}. Qu'est-ce qui est le ${plus ? "PLUS" : "MOINS"} cher ?`,
-        `${p.nom} hésite entre ${a.quoi} à ${eu(pa)} et ${b.quoi} à ${eu(pb)}. Qu'est-ce qui est le ${plus ? "plus" : "moins"} cher ?`,
+        `${maj(a.quoi)} ${coute(a.quoi)} ${eu(pa)}, ${b.quoi} ${eu(pb)}. Lequel est le ${plus ? "PLUS" : "MOINS"} cher ?`,
+        `Quel est le ${plus ? "plus" : "moins"} cher : ${a.quoi} à ${eu(pa)} ou ${b.quoi} à ${eu(pb)} ?`,
       ]);
       return qcm(t, makeChoices(bon, [a.quoi, b.quoi, "les deux coûtent pareil"]), bon,
         exp("Plus cher veut dire qu'il faut payer plus d'euros.", "On compare les deux prix.",
@@ -429,7 +434,7 @@ export const monnaieBank: TutorBankItemV4[] = [
       const bon = (plus ? total(ta) > total(tb) : total(ta) < total(tb)) ? x.nom : y.nom;
       const t = randomChoice([
         `${x.nom} et ${y.nom} vident leur tirelire. Qui a le ${plus ? "plus" : "moins"} d'argent ?`,
-        `Voici l'argent ${deN(x.nom)} et ${deN(y.nom)} pour la kermesse. Qui a le ${plus ? "plus" : "moins"} d'argent ?`,
+        `Voici l'argent ${deN(x.nom)} et ${deN(y.nom)}. Qui a le ${plus ? "plus" : "moins"} d'argent ?`,
       ]);
       return qcm(t, makeChoices(bon, [x.nom, y.nom, "ils ont autant"]), bon,
         exp("Pour comparer, on calcule ce que vaut chaque tas.", "On compte la somme de chacun.",
@@ -469,7 +474,7 @@ export const monnaieBank: TutorBankItemV4[] = [
       const p = quelquun();
       const t = randomChoice([
         `${p.nom} veut acheter ${achat.quoi} à ${eu(prix)}. Voici son argent. Combien lui manque-t-il ?`,
-        `${achat.ou.charAt(0).toUpperCase()}${achat.ou.slice(1)}, ${achat.quoi} coûte ${eu(prix)}. ${p.nom} a cet argent. Combien lui manque-t-il ?`,
+        `${maj(achat.quoi)} ${coute(achat.quoi)} ${eu(prix)}. ${p.nom} a cet argent. Combien lui manque-t-il ?`,
       ]);
       return qcm(t, choixNombres(prix - a, [prix, a, prix - a + 1, prix - a - 1]), eu(prix - a),
         exp("Il manque ce qu'il faut ajouter pour arriver au prix.", "On compte l'argent, puis on avance jusqu'au prix.",
@@ -514,7 +519,7 @@ export const monnaieBank: TutorBankItemV4[] = [
       const somme = total(t0) + manque;
       const p = quelquun();
       const bon = nomArgent(manque);
-      const t = `${p.nom} veut avoir ${eu(somme)}. ${randomChoice(["Voici son argent.", "Voilà ce qu'il y a déjà dans sa main."])} Que lui faut-il encore ?`;
+      const t = `${p.nom} veut avoir ${eu(somme)}. Voici son argent. Que lui faut-il encore ?`;
       return qcm(t, makeChoices(bon, [1, 2, 5, 10, 20].filter((x) => x !== manque).map(nomArgent)), bon,
         exp("Il manque ce qu'il faut ajouter pour arriver à la somme.", "On compte l'argent, puis on avance jusqu'à la somme.",
           `${total(t0)} + ${manque} = ${somme}.`, `Il lui faut encore ${bon}.`),
@@ -531,18 +536,20 @@ export const monnaieBank: TutorBankItemV4[] = [
       const p = quelquun();
       const achat = achatPour(n);
       const billets = Math.random() < 0.5;
-      const t = `${p.nom} doit payer ${eu(n)} ${achat.ou} avec des billets de 10 € et des pièces de 1 €. ${elleIl(p)} prend le moins d'argent possible. Combien de ${billets ? "billets de 10 €" : "pièces de 1 €"} prend-${p.il} ?`;
+      // Le dessin montre les deux sortes d'argent : billets de 10 € et pièces de 1 €.
+      const t = `${p.nom} paie ${eu(n)} avec le moins d'argent possible. Combien de ${billets ? "billets de 10 €" : "pièces de 1 €"} ?`;
       const bon = billets ? d : u;
       return qcm(t, choixNombres(bon, billets ? [u, n, d + 1] : [d, n, u + 10], false), String(bon),
         exp("Un billet de 10 € vaut une dizaine d'euros.", "Les dizaines du prix disent les billets, les unités disent les pièces.",
-          `${n} = ${d * 10} + ${u} : ${d} billets et ${u} pièces.`, `${p.nom} prend ${bon} ${billets ? "billets" : "pièces"}.`));
+          `${n} = ${d * 10} + ${u} : ${d} billets et ${u} pièces.`, `${p.nom} prend ${bon} ${billets ? "billets" : "pièces"}.`),
+        dessin([[10, 1], [1, 1]]));
     },
     () => {
       const n = randomInt(2, 4) * 20 + randomInt(1, 9);
       const v = Math.floor(n / 20);
       const p = quelquun();
       const achat = achatPour(n);
-      const t = `${achat.quoi.charAt(0).toUpperCase()}${achat.quoi.slice(1)} coûte ${eu(n)}. ${p.nom} paie avec des billets de 20 € d'abord, puis le reste en pièces. Combien de billets de 20 € donne-t-${p.il} ?`;
+      const t = `${maj(achat.quoi)} ${coute(achat.quoi)} ${eu(n)}. ${p.nom} paie d'abord avec des billets de 20 €. Combien en donne-t-${p.il} ?`;
       return qcm(t, choixNombres(v, [v + 1, Math.floor(n / 10), n % 20], false), String(v),
         exp("Un billet de 20 € vaut deux billets de 10 €.", "On compte de 20 en 20 sans dépasser le prix.",
           `${Array.from({ length: v }, (_, i) => (i + 1) * 20).join(", ")} : ${v} billets, il reste ${n - 20 * v} €.`, `${p.il === "il" ? "Il" : "Elle"} donne ${v} billets de 20 €.`));
@@ -600,7 +607,7 @@ export const monnaieBank: TutorBankItemV4[] = [
       const n2 = randomInt(3, Math.min(6, n1 - 1));
       const bon = n2 * 2 > n1 ? "le tas de pièces de 2 €" : n2 * 2 < n1 ? "le tas de pièces de 1 €" : "les deux tas valent pareil";
       const [x, y] = deuxEnfants();
-      const t = `${x.nom} a ${n1} pièces de 1 €. ${y.nom} a ${n2} pièces de 2 €. Quel tas vaut le plus ?`;
+      const t = `Voici les pièces ${deN(x.nom)} et ${deN(y.nom)}. Quel tas vaut le plus ?`;
       return qcm(t, makeChoices(bon, ["le tas de pièces de 1 €", "le tas de pièces de 2 €", "les deux tas valent pareil", "celui qui a le plus de pièces"]), bon,
         exp("Un tas vaut la somme de ses pièces.", "On compte la valeur de chaque tas.",
           `${n1} pièces de 1 € : ${eu(n1)}. ${n2} pièces de 2 € : ${eu(n2 * 2)}.`, `${bon.charAt(0).toUpperCase()}${bon.slice(1)}.`),
@@ -623,10 +630,12 @@ export const monnaieBank: TutorBankItemV4[] = [
         { mot: "billets de 20 €", bon: v20 },
         { mot: "pièces de 2 €", bon: v2 },
       ]);
-      const t = `${p.nom} doit payer ${eu(n)} avec le moins de billets et de pièces possible. ${elleIl(p)} a des billets de 20 € et de 10 €, des pièces de 2 € et de 1 €. Combien de ${quoi.mot} prend-${p.il} ?`;
+      // Le dessin montre les quatre sortes d'argent qu'on a : 20 €, 10 €, 2 €, 1 €.
+      const t = `${p.nom} paie ${eu(n)} avec le moins d'argent possible. Combien de ${quoi.mot} ?`;
       return qcm(t, choixNombres(quoi.bon, [quoi.bon + 1, quoi.bon - 1, Math.floor(n / 10), r2], false), String(quoi.bon),
         exp("Avec le moins d'argent possible, on prend d'abord les plus gros billets.", "On prend des billets de 20 €, puis de 10 €, puis des pièces de 2 € et de 1 €.",
-          `${n} = ${[...Array(v20).fill(20), ...Array(v10).fill(10), ...Array(v2).fill(2), ...Array(v1).fill(1)].join(" + ")}.`, `${elleIl(p)} prend ${quoi.bon} ${quoi.mot}.`));
+          `${n} = ${[...Array(v20).fill(20), ...Array(v10).fill(10), ...Array(v2).fill(2), ...Array(v1).fill(1)].join(" + ")}.`, `${elleIl(p)} prend ${quoi.bon} ${quoi.mot}.`),
+        dessin([[20, 1], [10, 1], [2, 1], [1, 1]]));
     },
   ]),
   gab("cp_monnaie_defi_tpl_1", "cp_monnaie_defi", 5,
@@ -640,7 +649,7 @@ export const monnaieBank: TutorBankItemV4[] = [
       const achat = achatPour(somme);
       const t = randomChoice([
         `${p.nom} doit faire ${eu(somme)} avec des ${estPiece(v) ? "pièces" : "billets"} de ${v} € seulement. Combien lui en faut-il ?`,
-        `${achat.quoi.charAt(0).toUpperCase()}${achat.quoi.slice(1)} coûte ${eu(somme)}. ${p.nom} n'a que des ${estPiece(v) ? "pièces" : "billets"} de ${v} €. Combien en donne-t-${p.il} ?`,
+        `${maj(achat.quoi)} ${coute(achat.quoi)} ${eu(somme)}. ${p.nom} n'a que des ${estPiece(v) ? "pièces" : "billets"} de ${v} €. Combien en donne-t-${p.il} ?`,
       ]);
       return qcm(t, choixNombres(k, [somme, k + 1, k - 1, somme - v], false), String(k),
         exp(`${nomArgent(v)} vaut ${v} €.`, `On compte de ${v} en ${v} jusqu'à ${somme}.`,
@@ -654,7 +663,7 @@ export const monnaieBank: TutorBankItemV4[] = [
       const b = achatPour(pb, a.quoi);
       const donne = 20;
       const p = quelquun();
-      const t = `${p.nom} achète ${a.quoi} à ${eu(pa)} et ${b.quoi} à ${eu(pb)}. ${elleIl(p)} paie avec un billet de 20 €. Combien lui rend-on ?`;
+      const t = `${p.nom} achète ${a.quoi} à ${eu(pa)} et ${b.quoi} à ${eu(pb)}. ${elleIl(p)} donne 20 €. Combien lui rend-on ?`;
       const bon = donne - pa - pb;
       return qcm(t, choixNombres(bon, [pa + pb, bon + 1, bon - 1, donne - pa]), eu(bon),
         exp("On rend ce qui reste quand on a payé.", "On calcule le prix total, puis on avance jusqu'à 20.",
@@ -686,9 +695,9 @@ function piegeNombreDePieces(gros: number, petit: number): Q {
   const tasY: Tas = [[gros, nbGros]];
   const bon = valPetit > valGros ? x.nom : valPetit < valGros ? y.nom : "ils ont autant";
   const t = randomChoice([
-    `${x.nom} a ${nomArgents(petit, nbPetit)}. ${y.nom} a ${nomArgents(gros, nbGros)}. Qui a le plus d'argent ?`,
+    `${x.nom} a ${nomArgents(petit, nbPetit)}, ${y.nom} ${nomArgents(gros, nbGros)}. Qui a le plus ?`,
     `Voici l'argent ${deN(x.nom)} et ${deN(y.nom)}. Qui a le plus d'argent ?`,
-    `${x.nom} dit : « J'ai plus de ${estPiece(petit) ? "pièces" : "billets"}, donc plus d'argent ! » Qui a le plus d'argent ?`,
+    `${x.nom} : « J'ai plus de ${estPiece(petit) ? "pièces" : "billets"}, donc plus d'argent ! » Qui a le plus d'argent ?`,
   ]);
   return qcm(t, makeChoices(bon, [x.nom, y.nom, "ils ont autant", "on ne peut pas savoir"]), bon,
     exp("On compare la VALEUR de l'argent, pas le nombre de pièces.", "On calcule combien d'euros a chacun.",
@@ -701,11 +710,12 @@ function rendre(donne: number, prix: number): Q {
   const achat = achatPour(prix);
   const p = quelquun();
   const bon = donne - prix;
-  const billet = estPiece(donne) ? `une pièce de ${donne} €` : `un billet de ${donne} €`;
+  // Le dessin montre ce qu'on donne : « ce billet » suffit.
+  const ce = estPiece(donne) ? "cette pièce" : "ce billet";
   const t = randomChoice([
-    `${achat.quoi.charAt(0).toUpperCase()}${achat.quoi.slice(1)} coûte ${eu(prix)}. ${p.nom} paie avec ${billet}. Combien doit-on lui rendre ?`,
-    `${achat.ou.charAt(0).toUpperCase()}${achat.ou.slice(1)}, ${p.nom} achète ${achat.quoi} à ${eu(prix)}. ${elleIl(p)} donne ce billet. Combien lui rend-on ?`.replace("ce billet", estPiece(donne) ? "cette pièce" : "ce billet"),
-    `${p.nom} joue à la marchande. ${achat.quoi.charAt(0).toUpperCase()}${achat.quoi.slice(1)} coûte ${eu(prix)}, le client donne ${billet}. Combien ${p.nom} rend-${p.il} ?`,
+    `${maj(achat.quoi)} ${coute(achat.quoi)} ${eu(prix)}. ${p.nom} paie avec ${ce}. Combien lui rend-on ?`,
+    `${p.nom} achète ${achat.quoi} à ${eu(prix)}. ${elleIl(p)} donne ce billet. Combien lui rend-on ?`.replace("ce billet", estPiece(donne) ? "cette pièce" : "ce billet"),
+    `${p.nom} vend ${achat.quoi} à ${eu(prix)}. On lui donne ${ce}. Combien rend-${p.il} ?`,
   ]);
   if (bon === 0) {
     return qcm(t, makeChoices("rien", [eu(donne), "1 €", eu(donne * 2)]), "rien",

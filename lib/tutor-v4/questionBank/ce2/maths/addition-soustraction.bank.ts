@@ -153,7 +153,7 @@ const FIXES: TutorBankItemV4[] = [
     microId: "ce2_soustraction_posee",
     difficulty: 4,
     theme: "neutral",
-    text: "Pour calculer 52 - 27, un élève fait 7 - 2 = 5 dans la colonne des unités et trouve 35. Où est l'erreur ?",
+    text: "Pour 52 - 27, un élève fait 7 - 2 = 5 aux unités et trouve 35. Où est l'erreur ?",
     format: "qcm",
     choices: [
       "on ne retourne pas la colonne : il faut casser une dizaine",
@@ -283,7 +283,7 @@ const FIXES: TutorBankItemV4[] = [
     microId: "ce2_add_sous_vocabulaire",
     difficulty: 4,
     theme: "neutral",
-    text: "On demande à un élève : « Calcule la somme de 26 et de 14. » Il écrit « 26 + 14 » et s'arrête. A-t-il répondu ?",
+    text: "« Calcule la somme de 26 et de 14. » Un élève écrit « 26 + 14 » et s'arrête. A-t-il répondu ?",
     format: "qcm",
     choices: [
       "non : la somme est le résultat, il fallait écrire 40",
@@ -457,7 +457,7 @@ const FIXES: TutorBankItemV4[] = [
     microId: "ce2_add_sous_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Dans l'opération posée 3?4 + 128 = 482, quel chiffre se cache derrière le point d'interrogation ?",
+    text: "Dans l'opération posée 3?4 + 128 = 482, quel chiffre se cache sous le « ? » ?",
     format: "short",
     expected: ["5"],
     comparator: "number_equal",
@@ -479,7 +479,7 @@ const FIXES: TutorBankItemV4[] = [
     microId: "ce2_add_sous_defi",
     difficulty: 5,
     theme: "reunion",
-    text: "Une école a 253 élèves. 128 partent en sortie le matin et 74 autres l'après-midi. Combien d'élèves ne sont pas partis ?",
+    text: "Sur 253 élèves, 128 partent en sortie le matin et 74 autres l'après-midi. Combien ne sont pas partis ?",
     format: "short",
     expected: ["51"],
     comparator: "number_equal",
@@ -541,38 +541,38 @@ function deuxNombres(etoile: Etoile): [number, number] {
 type Sit = (p: Prenom, a: string, b: string) => string;
 
 const REUNIONS: readonly Sit[] = [
-  (p, a, b) => `Au zoo, ${a} visiteurs sont venus samedi et ${b} dimanche. Combien de visiteurs en tout ?`,
-  (p, a, b) => `La bibliothécaire a ${a} livres de contes et ${b} livres de sciences. Combien de livres a-t-elle en tout ?`,
-  (p, a, b) => `${p.nom} a ${a} points au jeu, puis gagne encore ${b} points. Combien de points a-t-${p.il} maintenant ?`,
-  (p, a, b) => `Le cirque a vendu ${a} billets le matin et ${b} billets le soir. Combien de billets en tout ?`,
-  (p, a, b) => `Dans la fusée, il y a ${a} litres d'eau, et on en ajoute ${b}. Combien de litres d'eau y a-t-il ?`,
-  (p, a, b) => `Les pirates ont trouvé ${a} pièces d'or dans un coffre et ${b} dans un autre. Combien de pièces d'or en tout ?`,
-  (p, a, b) => `La boulangère a fait ${a} croissants et ${b} pains au chocolat. Combien de viennoiseries en tout ?`,
-  (p, a, b) => `${p.nom} roule ${a} mètres à vélo le matin et ${b} mètres l'après-midi. Combien de mètres en tout ?`,
-  (p, a, b) => `À la kermesse, on a vendu ${a} tickets de tombola et ${b} tickets de pêche à la ligne. Combien de tickets en tout ?`,
+  (p, a, b) => `Au zoo, ${a} visiteurs sont venus samedi et ${b} dimanche. Combien en tout ?`,
+  (p, a, b) => `La bibliothécaire a ${a} contes et ${b} livres de sciences. Combien de livres en tout ?`,
+  (p, a, b) => `${p.nom} a ${a} points au jeu, puis en gagne ${b}. Combien en a-t-${p.il} ?`,
+  (p, a, b) => `Le cirque a vendu ${a} billets le matin et ${b} le soir. Combien en tout ?`,
+  (p, a, b) => `La fusée a ${a} litres d'eau ; on en ajoute ${b}. Combien de litres en tout ?`,
+  (p, a, b) => `Les pirates trouvent ${a} pièces d'or, puis ${b}. Combien en tout ?`,
+  (p, a, b) => `La boulangère a fait ${a} croissants et ${b} brioches. Combien en tout ?`,
+  (p, a, b) => `${p.nom} roule ${a} mètres le matin et ${b} le soir. Combien de mètres en tout ?`,
+  (p, a, b) => `À la kermesse, on a vendu ${a} tickets, puis ${b}. Combien de tickets en tout ?`,
   (p, a, b) => `Le jardinier plante ${a} tulipes et ${b} roses. Combien de fleurs plante-t-il ?`,
-  (p, a, b) => `Au musée des dinosaures, il y a ${a} fossiles dans une salle et ${b} dans l'autre. Combien de fossiles en tout ?`,
-  (p, a, b) => `Le train transporte ${a} voyageurs. À la gare, ${b} voyageurs montent. Combien sont-ils dans le train ?`,
-  (p, a, b) => `L'astronaute compte ${a} étoiles sur une photo et ${b} sur une autre. Combien d'étoiles en tout ?`,
-  (p, a, b) => `À la piscine, ${a} enfants sont venus en juin et ${b} en juillet. Combien d'enfants en tout ?`,
-  (p, a, b) => `La fermière a ramassé ${a} œufs cette semaine et ${b} la semaine dernière. Combien d'œufs en tout ?`,
+  (p, a, b) => `Le musée range ${a} fossiles dans une salle et ${b} dans l'autre. Combien en tout ?`,
+  (p, a, b) => `Le train transporte ${a} voyageurs. ${b} montent à la gare. Combien sont-ils ?`,
+  (p, a, b) => `L'astronaute compte ${a} étoiles, puis ${b} autres. Combien d'étoiles en tout ?`,
+  (p, a, b) => `À la piscine, ${a} enfants sont venus en juin et ${b} en juillet. Combien en tout ?`,
+  (p, a, b) => `La fermière a ramassé ${a} œufs, puis ${b}. Combien d'œufs en tout ?`,
 ];
 
 const RETRAITS: readonly Sit[] = [
-  (p, a, b) => `La bibliothèque avait ${a} livres. Elle en prête ${b}. Combien de livres reste-t-il sur les étagères ?`,
-  (p, a, b) => `${p.nom} a ${a} points au jeu. ${maj(p.il)} en perd ${b}. Combien de points lui reste-t-il ?`,
-  (p, a, b) => `Le cirque a ${a} places. ${b} places sont déjà vendues. Combien de places restent libres ?`,
-  (p, a, b) => `Les pirates avaient ${a} pièces d'or. Ils en dépensent ${b}. Combien de pièces d'or leur reste-t-il ?`,
-  (p, a, b) => `La boulangère a fait ${a} croissants. Elle en a vendu ${b}. Combien de croissants lui reste-t-il ?`,
-  (p, a, b) => `Le chemin de randonnée fait ${a} mètres. ${p.nom} a déjà marché ${b} mètres. Combien de mètres lui reste-t-il ?`,
-  (p, a, b) => `À la kermesse, il y avait ${a} ballons. ${b} ballons sont partis dans le ciel. Combien en reste-t-il ?`,
-  (p, a, b) => `Le jardinier avait ${a} graines. Il en sème ${b}. Combien de graines lui reste-t-il ?`,
-  (p, a, b) => `Le train transporte ${a} voyageurs. À la gare, ${b} voyageurs descendent. Combien en reste-t-il dans le train ?`,
-  (p, a, b) => `La fusée a ${a} litres de carburant. Elle en brûle ${b} au décollage. Combien de litres lui reste-t-il ?`,
-  (p, a, b) => `${p.nom} lit un livre de ${a} pages. ${maj(p.il)} en a lu ${b}. Combien de pages lui reste-t-il ?`,
-  (p, a, b) => `Le zoo a reçu ${a} kilos de fruits. Les singes en ont mangé ${b}. Combien de kilos reste-t-il ?`,
-  (p, a, b) => `La cantine avait ${a} yaourts. ${b} ont été mangés à midi. Combien de yaourts reste-t-il ?`,
-  (p, a, b) => `Au marché de Saint-Pierre, le marchand avait ${a} letchis. Il en vend ${b}. Combien lui en reste-t-il ?`,
+  (p, a, b) => `La bibliothèque avait ${a} livres. Elle en prête ${b}. Combien en reste-t-il ?`,
+  (p, a, b) => `${p.nom} a ${a} points au jeu. ${maj(p.il)} en perd ${b}. Combien lui en reste-t-il ?`,
+  (p, a, b) => `Le cirque a ${a} places. ${b} sont déjà vendues. Combien restent libres ?`,
+  (p, a, b) => `Les pirates avaient ${a} pièces d'or. Ils en dépensent ${b}. Combien en reste-t-il ?`,
+  (p, a, b) => `La boulangère a fait ${a} croissants. Elle en a vendu ${b}. Combien en reste-t-il ?`,
+  (p, a, b) => `Le chemin fait ${a} mètres. ${p.nom} en a marché ${b}. Combien lui en reste-t-il ?`,
+  (p, a, b) => `À la kermesse, il y avait ${a} ballons. ${b} s'envolent. Combien en reste-t-il ?`,
+  (p, a, b) => `Le jardinier avait ${a} graines. Il en sème ${b}. Combien en reste-t-il ?`,
+  (p, a, b) => `Le train transporte ${a} voyageurs. ${b} descendent. Combien en reste-t-il ?`,
+  (p, a, b) => `La fusée a ${a} litres de carburant. Elle en brûle ${b}. Combien en reste-t-il ?`,
+  (p, a, b) => `${p.nom} lit un livre de ${a} pages. ${maj(p.il)} en a lu ${b}. Combien en reste-t-il ?`,
+  (p, a, b) => `Le zoo a reçu ${a} kilos de fruits. Les singes en mangent ${b}. Combien en reste-t-il ?`,
+  (p, a, b) => `La cantine avait ${a} yaourts. ${b} ont été mangés. Combien en reste-t-il ?`,
+  (p, a, b) => `Le marchand de Saint-Pierre avait ${a} letchis. Il en vend ${b}. Combien en reste-t-il ?`,
 ];
 
 /* ---------------------------------------------------------
@@ -614,7 +614,7 @@ function additionPosee(a: number, b: number): Q {
   const ret = (a % 10) + (b % 10) >= 10;
   return qM(
     pick([
-      `Dans l'addition ${fmt(a)} + ${fmt(b)}, faut-il une retenue en passant des unités aux dizaines ?`,
+      `Dans ${fmt(a)} + ${fmt(b)}, faut-il une retenue des unités aux dizaines ?`,
       `${p.nom} pose ${fmt(a)} + ${fmt(b)}. Doit-${p.il} écrire une retenue au-dessus des dizaines ?`,
     ]),
     ret ? `oui, car ${a % 10} + ${b % 10} = ${(a % 10) + (b % 10)}` : `non, car ${a % 10} + ${b % 10} = ${(a % 10) + (b % 10)}`,
@@ -673,7 +673,7 @@ function soustractionPosee(a: number, b: number): Q {
   return qN(
     pick([
       `Pour vérifier ${fmt(a)} − ${fmt(b)} = ${fmt(r)}, ${p.nom} fait une addition. Que doit-${p.il} retrouver ?`,
-      `${p.nom} trouve ${fmt(a)} − ${fmt(b)} = ${fmt(r)}. ${maj(p.il)} calcule ${fmt(r)} + ${fmt(b)} pour vérifier. Quel nombre doit-${p.il} trouver ?`,
+      `${p.nom} vérifie ${fmt(a)} − ${fmt(b)} = ${fmt(r)} en calculant ${fmt(r)} + ${fmt(b)}. Que doit-${p.il} trouver ?`,
       `On vérifie une soustraction avec une addition : combien font ${fmt(r)} + ${fmt(b)} ?`,
     ]),
     a,
@@ -703,7 +703,7 @@ function erreurSoustraction(): Q {
       pick([
         `${p.nom} calcule ${fmt(a)} − ${fmt(b)} et trouve ${fmt(faux)}. ${maj(p.il)} a retourné une colonne. Quelle est la bonne réponse ?`,
         `Voici la soustraction posée par ${p.nom}. ${maj(p.il)} trouve ${fmt(faux)}, mais c'est faux. Quel est le bon résultat ?`,
-        `${p.nom} a fait « le grand moins le petit » dans chaque colonne de ${fmt(a)} − ${fmt(b)}. Quel résultat aurait-${p.il} dû trouver ?`,
+        `${p.nom} fait partout « le grand moins le petit » pour ${fmt(a)} − ${fmt(b)}. Quel est le bon résultat ?`,
       ]),
       r,
       [faux, r + 10, r - 10, r + 100, r - 100],
@@ -793,6 +793,7 @@ function vocabulaire(): Q {
       bon,
       [plus ? "la différence" : "la somme", "un terme", "le produit"],
       exp("La somme est le résultat d'une addition, la différence celui d'une soustraction. Les nombres qu'on ajoute ou qu'on soustrait sont les termes.", "On regarde le signe de l'opération.", `Le signe est « ${plus ? "+" : "−"} » : ${c} est ${bon}.`, `${c} est ${bon}.`),
+      avec(parfois(0.5, () => pose(plus ? "addition" : "soustraction", [a, b]))),
     );
   }
   if (f === 4) {
@@ -806,6 +807,7 @@ function vocabulaire(): Q {
       "les termes",
       [plus ? "les sommes" : "les différences", "les facteurs", "les résultats"],
       exp("Les nombres qu'on ajoute ou qu'on soustrait s'appellent les termes.", "Le résultat a son propre nom : somme ou différence.", `${a} et ${b} sont les termes ; ${c} est ${plus ? "la somme" : "la différence"}.`, "Ce sont les termes."),
+      avec(parfois(0.5, () => pose(plus ? "addition" : "soustraction", [a, b]))),
     );
   }
   if (f === 5) {
@@ -819,6 +821,7 @@ function vocabulaire(): Q {
       juste ? "oui, c'est le résultat de l'addition" : `non, ${dit} est leur différence`,
       [juste ? `non, ${dit} est leur différence` : "oui, c'est le résultat de l'addition", "non, la somme est un des termes", "on ne peut pas savoir"],
       exp("La somme est le résultat de l'addition.", `On calcule ${a} + ${b}.`, `${a} + ${b} = ${a + b}${juste ? "" : ` ; ${a} − ${b} = ${a - b}, c'est la différence`}.`, juste ? "Oui, c'est bien la somme." : "Non : c'est la différence."),
+      avec(parfois(0.5, () => barre([["", String(a)], ["", String(b)]], null))),
     );
   }
   const [x, y] = deuxPersonnes();
@@ -857,11 +860,11 @@ function completerPlus(a: number, c: number): Q {
     `Pic le paille-en-queue a ${fmt(a)} graines. Combien doit-il en trouver pour en avoir ${fmt(c)} ?`,
     `Le cirque a ${fmt(c)} places. ${fmt(a)} sont occupées. Combien sont libres ?`,
     `${p.nom} a déjà ${fmt(a)} points. Il en faut ${fmt(c)} pour gagner. Combien de points lui manque-t-il ?`,
-    `${p.nom} lit un livre de ${fmt(c)} pages. ${maj(p.il)} est à la page ${fmt(a)}. Combien de pages lui reste-t-il ?`,
+    `${p.nom} lit un livre de ${fmt(c)} pages. ${maj(p.il)} est à la page ${fmt(a)}. Combien lui en reste-t-il ?`,
     `Le jardinier veut planter ${fmt(c)} fleurs. Il en a planté ${fmt(a)}. Combien lui en reste-t-il à planter ?`,
     `Les pirates veulent ${fmt(c)} pièces d'or. Ils en ont ${fmt(a)}. Combien leur en manque-t-il ?`,
-    `La fusée doit monter à ${fmt(c)} mètres. Elle est à ${fmt(a)} mètres. Combien de mètres lui manque-t-il ?`,
-    `${p.nom} écrit ${fmt(a)} + … = ${fmt(c)} sur son ardoise. Quel nombre doit-${p.il} écrire à la place des points ?`,
+    `La fusée doit monter à ${fmt(c)} mètres. Elle est à ${fmt(a)} mètres. Combien lui en manque-t-il ?`,
+    `${p.nom} écrit ${fmt(a)} + … = ${fmt(c)} sur son ardoise. Quel nombre remplace les points ?`,
     `Le puzzle ${de(p.nom)} a ${fmt(c)} pièces. ${maj(p.il)} en a posé ${fmt(a)}. Combien de pièces reste-t-il ?`,
   ]);
   return qN(
@@ -1015,9 +1018,9 @@ function chiffreCache(): Q {
     const op = plus ? "+" : "−";
     return qM(
           pick([
-            `Dans l'opération ${masque} ${op} ${b} = ${fmt(r)}, quel chiffre se cache derrière le point d'interrogation ?`,
+            `Dans ${masque} ${op} ${b} = ${fmt(r)}, quel chiffre se cache sous le « ? » ?`,
             `${p.nom} a fait une tache d'encre sur son opération : ${masque} ${op} ${b} = ${fmt(r)}. Quel chiffre est caché ?`,
-            `Pic le paille-en-queue a posé son aile sur un chiffre de l'opération posée. Quel chiffre se cache sous le « ? » ?`,
+            `Pic le paille-en-queue a caché un chiffre sous son aile. Lequel est sous le « ? » ?`,
             `Retrouve le chiffre caché : ${masque} ${op} ${b} = ${fmt(r)}.`,
           ]),
           String(cache),
@@ -1040,14 +1043,14 @@ function deuxEtapes(): Q {
   const y = rint(30, total - x - 20);
   const r = total - x - y;
   const sit = pick([
-    `Dans la bibliothèque de l'école, il y a ${total} livres. ${x} sont empruntés le matin et ${y} l'après-midi. Combien de livres reste-t-il ?`,
-    `Une école a ${total} élèves. ${x} partent au zoo le matin et ${y} au musée l'après-midi. Combien d'élèves ne sont pas partis ?`,
-    `Les pirates ont ${total} pièces d'or. Ils en dépensent ${x} au port, puis ${y} au marché. Combien leur en reste-t-il ?`,
-    `${p.nom} a ${total} points au jeu. ${maj(p.il)} en perd ${x}, puis encore ${y}. Combien de points lui reste-t-il ?`,
-    `La fusée emporte ${total} litres d'eau. Les astronautes en boivent ${x} la première semaine et ${y} la deuxième. Combien de litres reste-t-il ?`,
-    `Le jardinier a ${total} graines. Il en sème ${x} lundi et ${y} mardi. Combien de graines lui reste-t-il ?`,
-    `Le cirque a ${total} places. ${x} sont vendues samedi et ${y} dimanche. Combien de places restent libres ?`,
-    `La boulangère a fait ${total} croissants. Elle en vend ${x} le matin et ${y} l'après-midi. Combien lui en reste-t-il ?`,
+    `La bibliothèque a ${total} livres. ${x} sont empruntés le matin, ${y} le soir. Combien en reste-t-il ?`,
+    `L'école a ${total} élèves. ${x} vont au zoo, ${y} au musée. Combien restent à l'école ?`,
+    `Les pirates ont ${total} pièces d'or. Ils en dépensent ${x}, puis ${y}. Combien en reste-t-il ?`,
+    `${p.nom} a ${total} points au jeu. ${maj(p.il)} en perd ${x}, puis ${y}. Combien lui en reste-t-il ?`,
+    `La fusée emporte ${total} litres d'eau. On en boit ${x}, puis ${y}. Combien en reste-t-il ?`,
+    `Le jardinier a ${total} graines. Il en sème ${x} lundi et ${y} mardi. Combien en reste-t-il ?`,
+    `Le cirque a ${total} places. ${x} sont vendues samedi, ${y} dimanche. Combien restent libres ?`,
+    `La boulangère a fait ${total} croissants. Elle en vend ${x}, puis ${y}. Combien en reste-t-il ?`,
   ]);
   return qN(
     sit,

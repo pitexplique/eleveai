@@ -174,15 +174,15 @@ const LIEUX_BALANCE = [
 
 // Le piège : gros mais léger, petit mais lourd.
 const GROS_LEGERS = [
-  { un: "un gros ballon de baudruche", le: "le gros ballon", label: "gros ballon", icon: "🎈" },
-  { un: "une grande plume de paon", le: "la plume de paon", label: "plume de paon", icon: "🪶" },
+  { un: "un gros ballon", le: "le gros ballon", label: "gros ballon", icon: "🎈" },
+  { un: "une plume de paon", le: "la plume de paon", label: "plume de paon", icon: "🪶" },
   { un: "un grand papillon en papier", le: "le papillon en papier", label: "papillon", icon: "🦋" },
-  { un: "un grand sac en plastique vide", le: "le sac vide", label: "sac vide", icon: "🛍️" },
+  { un: "un grand sac vide", le: "le sac vide", label: "sac vide", icon: "🛍️" },
 ] as const;
 const PETITS_LOURDS = [
   { un: "un petit caillou", le: "le petit caillou", label: "caillou", icon: "🪨" },
-  { un: "une petite bille en fer", le: "la bille en fer", label: "bille en fer", icon: "⚙️" },
-  { un: "un petit pot de miel plein", le: "le pot de miel", label: "pot de miel", icon: "🍯" },
+  { un: "une bille en fer", le: "la bille en fer", label: "bille en fer", icon: "⚙️" },
+  { un: "un pot de miel plein", le: "le pot de miel", label: "pot de miel", icon: "🍯" },
   { un: "un petit boulon en fer", le: "le boulon", label: "boulon", icon: "🔩" },
 ] as const;
 
@@ -380,9 +380,9 @@ export const masseBank: TutorBankItemV4[] = [
       const chercheLourd = randomChoice([true, false]);
       const mot = chercheLourd ? "le plus LOURD" : "le plus LÉGER";
       const text = randomChoice([
-        `${p} pèse ${g.un} et ${d.un} ${lieu}. Regarde la balance. Lequel est ${mot} ?`,
+        `${p} pèse ${g.un} et ${d.un}. Lequel est ${mot} ?`,
         `Regarde la balance. Lequel est ${mot} ?`,
-        `${lieu === "en classe" ? "En classe" : maj(lieu)}, on pose ${g.un} et ${d.un} sur la balance. Lequel est ${mot} ?`,
+        `On pèse ${g.un} et ${d.un}. Lequel est ${mot} ?`,
         `${p} regarde la balance. Lequel est ${mot} : ${g.le} ou ${d.le} ?`,
       ]);
       const bonne = chercheLourd ? lourd.le : leger.le;
@@ -430,10 +430,10 @@ export const masseBank: TutorBankItemV4[] = [
       const quel = c.f ? `Laquelle est la plus ${adj}` : `Lequel est le plus ${adj}`;
       const pareils = c.f ? "pareilles" : "pareils";
       const text = randomChoice([
-        `${p} a ${deux} ${pareils}, mais pas de la même couleur. Regarde la balance. ${quel} ?`,
+        `${p} a ${deux} ${pareils}. Regarde la balance. ${quel} ?`,
         `Regarde la balance. ${quel} ?`,
-        `${p} pose ${n1} à gauche et ${n2} à droite. ${quel} ?`,
-        `Pic a caché des graines dans ${deux}. Regarde la balance. ${quel} ?`,
+        `${p} pose ${n1} à gauche, ${n2} à droite. ${quel} ?`,
+        `Pic a rempli ${deux} de graines. ${quel} ?`,
         `${maj(randomChoice(LIEUX_BALANCE))}, ${p} pèse ${deux}. ${quel} ?`,
       ]);
       const lourd = gaucheLourd ? n1 : n2;
@@ -471,7 +471,7 @@ export const masseBank: TutorBankItemV4[] = [
     microId: "cp_masse_comparer",
     difficulty: 4,
     theme: "neutral",
-    text: "Deux boites fermées sont exactement de la même taille et de la même couleur. Comment savoir laquelle est la plus lourde ?",
+    text: "Deux boites fermées sont pareilles. Comment savoir laquelle est la plus lourde ?",
     format: "qcm",
     choices: [
       "en les soupesant, une dans chaque main",
@@ -539,9 +539,9 @@ export const masseBank: TutorBankItemV4[] = [
       const text = randomChoice([
         `${p} compare ${a.un} et ${b.un}. Lequel est ${mot} ?`,
         `Qu'est-ce qui est ${mot} : ${a.un} ou ${b.un} ?`,
-        `${p} dit : « Le plus gros est le plus lourd. » Lequel est ${mot} : ${a.un} ou ${b.un} ?`,
-        `Au cirque, le clown tient ${a.un} et ${b.un}. Lequel est ${mot} ?`,
-        `${p} met ${a.un} et ${b.un} dans son sac. Lequel est ${mot} ?`,
+        `${p} : « Gros = lourd ! » Lequel est ${mot} : ${a.un} ou ${b.un} ?`,
+        `Le clown tient ${a.un} et ${b.un}. Lequel est ${mot} ?`,
+        `${p} a ${a.un} et ${b.un}. Lequel est ${mot} ?`,
       ]);
       const bonne = chercheLourd ? l.le : g.le;
       return {
@@ -586,7 +586,7 @@ export const masseBank: TutorBankItemV4[] = [
       const mot = chercheLeger ? "le plus LÉGER" : "le plus LOURD";
       const text = randomChoice([
         `Parmi ces trois objets, lequel est ${mot} ?`,
-        `${p} a trois objets : ${tirage.map((o) => o.un).join(", ")}. Lequel est ${mot} ?`,
+        `${p} a ${tirage.map((o) => o.un).join(", ")}. Lequel est ${mot} ?`,
         `${p} range sa chambre. Quel objet est ${mot} ?`,
         `Regarde bien. Quel objet est ${mot} ?`,
       ]);
@@ -635,7 +635,7 @@ export const masseBank: TutorBankItemV4[] = [
       const sens = duLegerAuLourd ? "du plus LÉGER au plus LOURD" : "du plus LOURD au plus LÉGER";
       const text = randomChoice([
         `Range ${sens}.`,
-        `${p} veut ranger ces objets ${sens}. Quel est le bon ordre ?`,
+        `${maj(sens)} : quel est le bon ordre ?`,
         `Aide ${p} à ranger ${sens}.`,
         `Pic range ses trésors ${sens}. Quel est le bon ordre ?`,
       ]);
@@ -664,7 +664,7 @@ export const masseBank: TutorBankItemV4[] = [
     microId: "cp_masse_contenance_estimer",
     difficulty: 4,
     theme: "neutral",
-    text: "Avec une balance à deux plateaux, comment ranger trois objets du plus léger au plus lourd ?",
+    text: "Avec une balance, comment ranger trois objets du plus léger au plus lourd ?",
     format: "qcm",
     choices: [
       "en les comparant deux par deux",
@@ -696,7 +696,7 @@ export const masseBank: TutorBankItemV4[] = [
     microId: "cp_masse_contenance_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "La boite A est plus lourde que la boite B. La boite B est plus lourde que la boite C. Quelle est la plus lourde des trois ?",
+    text: "La boite A pèse plus que la B. La B pèse plus que la C. Laquelle est la plus lourde ?",
     format: "qcm",
     choices: ["la boite A", "la boite B", "la boite C", "on ne peut pas savoir"],
     expected: ["la boite A"],
@@ -719,7 +719,7 @@ export const masseBank: TutorBankItemV4[] = [
     microId: "cp_masse_contenance_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Un sac de plumes et un sac de billes ont exactement la même taille. Pèsent-ils pareil ?",
+    text: "Un sac de plumes et un sac de billes ont la même taille. Pèsent-ils pareil ?",
     format: "qcm",
     choices: [
       "non, la taille ne dit rien sur la masse",
@@ -764,11 +764,11 @@ export const masseBank: TutorBankItemV4[] = [
       const xAGauche = randomChoice([true, false]);
       const debut = randomChoice([
         `Regarde la balance.`,
-        `${p} pèse deux ${c.nom}s. Regarde la balance.`,
-        `${maj(randomChoice(LIEUX_BALANCE))}, ${p} pèse deux ${c.nom}s. Regarde la balance.`,
-        `Pic a rempli des ${c.nom}s. Regarde la balance.`,
+        `${p} pèse deux ${c.nom}s.`,
+        `Regarde la balance.`,
+        `Pic pèse ses ${c.nom}s.`,
       ]);
-      const text = `${debut} Et ${nom(cy)} est ${plusLourd} que ${nom(cz)}. ${c.f ? "Laquelle" : "Lequel"} est ${c.f ? "la" : "le"} plus ${adj} des trois ?`;
+      const text = `${debut} ${maj(nom(cy))} est ${plusLourd} que ${art} ${c.f ? cz.f : cz.m}. ${c.f ? "La" : "Le"} plus ${adj} des trois ?`;
       const bonne = chercheLourd ? nom(cx) : nom(cz);
       return {
         text,

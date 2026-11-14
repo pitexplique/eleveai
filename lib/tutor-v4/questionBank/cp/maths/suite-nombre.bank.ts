@@ -168,30 +168,31 @@ function bande(termes: number[], caches: number[], pasImpose?: number): CanvasFi
 
 /** Les situations où l'on compte. `qui` est la personne qui compte. */
 const COMPTEURS: readonly ((p: Prenom) => string)[] = [
-  (p) => `${p.nom} compte les marches de l'escalier du phare.`,
-  (p) => `${p.nom} joue à la marelle géante et compte les cases.`,
-  (p) => `${p.nom} compte les wagons du train de marchandises.`,
-  (p) => `${p.nom} compte les pages de son livre de dinosaures.`,
-  (p) => `À cache-cache, ${p.nom} compte les yeux fermés.`,
-  (p) => `${p.nom} compte les sauts à la corde pendant la récré.`,
-  (p) => `${p.nom} lit les numéros des maisons de la rue.`,
-  (p) => `${p.nom} compte les coquillages ramassés sur la plage.`,
-  (p) => `Sur la piste du trésor, ${p.nom} compte ses pas.`,
-  (p) => `Au cirque, ${p.nom} compte les tours de piste du poney.`,
-  (p) => `${p.nom} compte les longueurs de bassin à la piscine.`,
-  (p) => `${p.nom} compte les graines que Pic a cachées.`,
+  // ⭐ 14/11 : contextes courts (une demi-phrase).
+  (p) => `${p.nom} compte les marches du phare.`,
+  (p) => `${p.nom} compte les cases de la marelle.`,
+  (p) => `${p.nom} compte les wagons du train.`,
+  (p) => `${p.nom} compte les pages de son livre.`,
+  (p) => `À cache-cache, ${p.nom} compte.`,
+  (p) => `${p.nom} compte ses sauts à la corde.`,
+  (p) => `${p.nom} lit les numéros des maisons.`,
+  (p) => `${p.nom} compte ses coquillages.`,
+  (p) => `${p.nom} compte ses pas.`,
+  (p) => `${p.nom} compte les tours du poney.`,
+  (p) => `${p.nom} compte ses longueurs à la piscine.`,
+  (p) => `${p.nom} compte les graines de Pic.`,
 ];
 const REBOURS: readonly ((p: Prenom) => string)[] = [
-  (p) => `${p.nom} fait le compte à rebours avant le départ de la fusée.`,
-  (p) => `${p.nom} descend l'escalier du château et compte les marches à l'envers.`,
-  (p) => `${p.nom} recule sur la piste du jeu de l'oie.`,
-  (p) => `${p.nom} compte à l'envers avant de chercher ses copains à cache-cache.`,
-  (p) => `${p.nom} mange ses bonbons un par un et compte ceux qui restent.`,
-  (p) => `${p.nom} descend la rue et lit les numéros des maisons.`,
-  (p) => `${p.nom} compte les jours avant les vacances, en reculant.`,
-  (p) => `Le pirate a des pièces d'or. ${p.nom} les enlève une à une et compte.`,
-  (p) => `${p.nom} tourne les pages de son livre en revenant en arrière.`,
-  (p) => `${p.nom} compte à l'envers avant le grand plongeon.`,
+  (p) => `${p.nom} fait le compte à rebours de la fusée.`,
+  (p) => `${p.nom} descend l'escalier en comptant à l'envers.`,
+  (p) => `${p.nom} recule au jeu de l'oie.`,
+  (p) => `À cache-cache, ${p.nom} compte à l'envers.`,
+  (p) => `${p.nom} compte les bonbons qui restent.`,
+  (p) => `${p.nom} descend la rue et lit les numéros.`,
+  (p) => `${p.nom} compte les jours avant les vacances.`,
+  (p) => `${p.nom} enlève les pièces d'or une à une.`,
+  (p) => `${p.nom} tourne les pages en arrière.`,
+  (p) => `${p.nom} compte à l'envers avant de plonger.`,
 ];
 
 /** Une fois sur deux, la question arrive dans une petite histoire. */
@@ -239,7 +240,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
     () => {
       const a = randomInt(10, 95);
       const p = quelquun();
-      const t = `${randomChoice(COMPTEURS)(p)} ${randomChoice(["Quel nombre va sous le point d'interrogation ?", "Quel nombre vient ensuite ?", `Continue la suite ${deN(p.nom)}.`])}`;
+      const t = `${randomChoice(COMPTEURS)(p)} ${randomChoice(["Quel nombre remplace le « ? » ?", "Quel nombre vient ensuite ?", `Continue la suite ${deN(p.nom)}.`])}`;
       return qcm(t, choixNombres(a + 3, [a + 2, a + 4, a + 13]), String(a + 3),
         exp("Compter de un en un, c'est ajouter 1 à chaque fois.", "On prend le dernier nombre et on ajoute 1.",
           `${a + 2} + 1 = ${a + 3}.`, `Le nombre suivant est ${a + 3}.`),
@@ -265,15 +266,15 @@ export const suiteNombreBank: TutorBankItemV4[] = [
       const k = randomInt(2, 4);
       const p = quelquun();
       const t = `${randomChoice(COMPTEURS)(p)} ${randomChoice([
-        `${elleIl(p)} en est à ${n}. ${elleIl(p)} compte encore ${k}. Où arrive-t-${p.il} ?`,
+        `${elleIl(p)} en est à ${n} et compte encore ${k}. Où arrive-t-${p.il} ?`,
         `Quel nombre vient ${k} crans après ${n} ?`,
-        `${elleIl(p)} part de ${n} et avance de ${k}. Quel nombre dit-${p.il} à la fin ?`,
+        `${elleIl(p)} part de ${n} et avance de ${k}. Où arrive-t-${p.il} ?`,
       ])}`;
       const bon = n + k;
       return qcm(t, choixNombres(bon, [d * 10 + ((n + k) % 10), bon + 10, bon - 1, n + k + 1]), String(bon),
         exp("En avançant, on passe à la dizaine suivante après 9.", "On avance de un en un, sans oublier le changement de dizaine.",
           `${suite(n, 1, k + 1).join(", ")}.`, `On arrive à ${bon}.`),
-        Math.random() < 0.5 ? bande([n, n + k], [1], 1) : undefined);
+        bande([n, n + k], [1], 1));
     },
     // Juste après un nombre rond ou 99.
     () => {
@@ -300,7 +301,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
     () => {
       const a = randomInt(14, 99);
       const p = quelquun();
-      const t = `${randomChoice(REBOURS)(p)} ${randomChoice(["Quel nombre vient ensuite ?", "Continue en reculant.", "Quel nombre va sous le point d'interrogation ?"])}`;
+      const t = `${randomChoice(REBOURS)(p)} ${randomChoice(["Quel nombre vient ensuite ?", "Continue en reculant.", "Quel nombre remplace le « ? » ?"])}`;
       return qcm(t, choixNombres(a - 3, [a - 2, a - 4, a + 1, a - 13]), String(a - 3),
         exp("Compter à rebours, c'est enlever 1 à chaque fois.", "On prend le dernier nombre et on enlève 1.",
           `${a - 2} − 1 = ${a - 3}.`, `Ensuite vient ${a - 3}.`),
@@ -352,14 +353,14 @@ export const suiteNombreBank: TutorBankItemV4[] = [
       const p = quelquun();
       const bon = n - k;
       const t = `${randomChoice(REBOURS)(p)} ${randomChoice([
-        `${elleIl(p)} en est à ${n}. ${elleIl(p)} recule encore de ${k}. Où arrive-t-${p.il} ?`,
+        `${elleIl(p)} en est à ${n} et recule de ${k}. Où arrive-t-${p.il} ?`,
         `Quel nombre se trouve ${k} crans avant ${n} ?`,
-        `${elleIl(p)} part de ${n} et recule de ${k}. Quel nombre dit-${p.il} à la fin ?`,
+        `${elleIl(p)} part de ${n}, recule de ${k}. Quel nombre dit-${p.il} ?`,
       ])}`;
       return qcm(t, choixNombres(bon, [d * 10 + (bon % 10), bon - 1, bon + 1, n + k]), String(bon),
         exp("En reculant, on passe à la dizaine d'avant après 0.", "On recule de un en un.",
           `${suite(n, -1, k + 1).join(", ")}.`, `On arrive à ${bon}.`),
-        Math.random() < 0.5 ? bande([n, n - k], [1], 1) : undefined);
+        bande([n, n - k], [1], 1));
     },
     () => {
       const n = randomChoice([20, 30, 40, 50, 60, 70, 80, 90, 100]);
@@ -390,7 +391,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
       return qcm(t, choixNombres(bon, [a + 21, a + 31, a + 40, bon - 2]), String(bon),
         exp("Compter de 10 en 10, c'est ajouter une dizaine à chaque fois.", "Le chiffre des unités ne bouge pas, les dizaines avancent de 1.",
           `${a + 20} + 10 = ${bon}.`, `Ensuite vient ${bon}.`),
-        Math.random() < 0.5 ? bande([...s, bon], [3]) : undefined);
+        bande([...s, bon], [3]));
     },
     () => {
       const a = randomInt(1, 6) * 10 + randomInt(1, 9);
@@ -413,7 +414,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
       const bon = depart + 4 * pas;
       const p = quelquun();
       const ctx = randomChoice(PAS_CONTEXTES[pas])(p);
-      const t = `${ctx} ${randomChoice(["Quel nombre vient ensuite ?", `Continue de ${pas} en ${pas}.`, "Quel nombre va sous le point d'interrogation ?"])}`;
+      const t = `${ctx} ${randomChoice(["Quel nombre vient ensuite ?", `Continue de ${pas} en ${pas}.`, "Quel nombre remplace le « ? » ?"])}`;
       return qcm(t, choixNombres(bon, [bon - pas + 1, bon + pas, bon - 1, bon + 1]), String(bon),
         exp(`Compter de ${pas} en ${pas}, c'est ajouter ${pas} à chaque fois.`, `On prend le dernier nombre et on ajoute ${pas}.`,
           `${bon - pas} + ${pas} = ${bon}.`, `Ensuite vient ${bon}.`),
@@ -460,7 +461,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
       const p = quelquun();
       const t = randomChoice([
         `Sur la bande ${deN(p.nom)}, quel nombre manque ?`,
-        "Quel nombre va sous le point d'interrogation ?",
+        "Quel nombre remplace le « ? » ?",
         `${p.nom} a effacé un nombre. Lequel ?`,
       ]);
       const i = randomInt(2, 4);
@@ -486,7 +487,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
         "Quel nombre manque sur la bande ?",
         `${p.nom} a fait tomber de l'eau sur sa bande. Quel nombre est effacé ?`,
         "Pic a picoré un nombre ! Lequel manque ?",
-        `Quel nombre doit écrire ${p.nom} sous le point d'interrogation ?`,
+        `Quel nombre ${p.nom} écrit-${p.il} sous le « ? » ?`,
       ]);
       return qcm(avecSituation(t, p), choixNombres(s[i], [s[i] + 1, s[i] - 1, s[i] + 10]), String(s[i]),
         exp("Sur une bande de un en un, chaque nombre a un de plus que celui d'avant.", "On ajoute 1 au nombre d'avant.",
@@ -502,7 +503,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
       const t = randomChoice([
         `Complète : ${ecrit}`,
         `${p.nom} recopie la bande de la classe : ${ecrit}. Quel nombre manque ?`,
-        `Sur la carte du loto ${deN(p.nom)}, une ligne dit : ${ecrit}. Quel numéro manque ?`,
+        `Sur le loto ${deN(p.nom)} : ${ecrit}. Quel numéro manque ?`,
       ]);
       return qcm(avecSituation(t, p), choixNombres(s[i], [s[i] + 1, s[i] - 1, s[i] + 10]), String(s[i]),
         exp("Sur une bande de un en un, chaque nombre a un de plus que celui d'avant.", "On ajoute 1 au nombre d'avant.",
@@ -520,7 +521,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
       const p = quelquun();
       const t = randomChoice([
         "Quel nombre manque sur la bande ?",
-        `${p.nom} a caché un nombre sous le point d'interrogation. Lequel ?`,
+        `${p.nom} a caché un nombre sous le « ? ». Lequel ?`,
         `Pic avance toujours du même saut. Quel nombre manque ?`,
       ]);
       return qcm(avecSituation(t, p), choixNombres(s[i], [s[i - 1] + 1, s[i] + 1, s[i] - 1, s[i] + pas]), String(s[i]),
@@ -552,7 +553,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
       const i = premier ? 1 : 2;
       const p = quelquun();
       const t = randomChoice([
-        `Il y a deux trous sur la bande. Quel nombre va dans le ${premier ? "PREMIER" : "DEUXIÈME"} trou ?`,
+        `Quel nombre va dans le ${premier ? "PREMIER" : "DEUXIÈME"} trou ?`,
         `${p.nom} doit remplir deux trous. Quel nombre écrit-${p.il} dans le ${premier ? "premier" : "deuxième"} ?`,
       ]);
       return qcm(avecSituation(t, p), choixNombres(s[i], [s[premier ? 2 : 1], s[i] - 10, s[i] + 10, s[i] - 1]), String(s[i]),
@@ -569,7 +570,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
       const ecrit = s.map((v, j) => (j === 1 || j === 2 ? "…" : String(v))).join(" ; ");
       const p = quelquun();
       const t = randomChoice([
-        `Dans cette bande, quel nombre va dans le ${premier ? "PREMIER" : "DEUXIÈME"} trou : ${ecrit} ?`,
+        `Quel nombre va dans le ${premier ? "PREMIER" : "DEUXIÈME"} trou : ${ecrit} ?`,
         `${p.nom} recopie ${ecrit}. Quel nombre manque dans le ${premier ? "premier" : "deuxième"} trou ?`,
       ]);
       return qcm(avecSituation(t, p), choixNombres(s[i], [s[premier ? 2 : 1], s[i] - 10, s[i] + 10]), String(s[i]),
@@ -591,11 +592,11 @@ export const suiteNombreBank: TutorBankItemV4[] = [
       const bon = depart - 3 * pas;
       const p = quelquun();
       const ctx = randomChoice(REBOURS)(p);
-      const t = `${ctx} ${randomChoice([`${elleIl(p)} recule de ${pas} en ${pas} : ${s.join(" ; ")} ; … Quel nombre vient ensuite ?`, `Continue : ${s.join(" ; ")} ; …`])}`;
+      const t = `${ctx} ${randomChoice([`De ${pas} en ${pas} : ${s.join(" ; ")} ; … Et ensuite ?`, `Continue : ${s.join(" ; ")} ; …`])}`;
       return qcm(t, choixNombres(bon, [bon + 2 * pas, bon - pas, s[2] + pas, bon + 1]), String(bon),
         exp("Une suite qui descend enlève toujours la même chose.", `On enlève ${pas} au dernier nombre.`,
           `${s[2]} − ${pas} = ${bon}.`, `Ensuite vient ${bon}.`),
-        Math.random() < 0.5 ? bande([...s, bon], [3]) : undefined);
+        bande([...s, bon], [3]));
     },
   ]),
   gab("cp_suite_defi_tpl_1", "cp_suite_defi", 5,
@@ -611,7 +612,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
       faux[i] = s[i] + randomChoice([1, -1]);
       const k = randomChoice(TROUPE);
       const t = randomChoice([
-        `${k.nom} compte de ${pas} en ${pas}, mais ${k.il} se trompe une fois. Quel nombre est faux ?`,
+        `${k.nom} compte de ${pas} en ${pas}. Un nombre est faux : lequel ?`,
         `Un nombre est faux dans la suite de ${k.nom}. Lequel ?`,
         `${k.nom} saute de ${pas} en ${pas}. Quel nombre n'est pas à sa place ?`,
       ]);
@@ -677,27 +678,27 @@ export const suiteNombreBank: TutorBankItemV4[] = [
 
 /* Les mondes où l'on compte de 2 en 2, de 5 en 5, de 10 en 10. */
 const DIX_EN_DIX: readonly ((p: Prenom) => string)[] = [
-  (p) => `${p.nom} range ses images par paquets de dix et compte.`,
-  (p) => `Pic saute de 10 en 10 sur la grande bande de la classe.`,
-  (p) => `${p.nom} compte les pièces d'or du pirate par sacs de dix.`,
+  (p) => `${p.nom} range ses images par paquets de dix.`,
+  (p) => `Pic saute de 10 en 10 sur la bande.`,
+  (p) => `${p.nom} compte l'or par sacs de dix.`,
   (p) => `La fusée ${deN(p.nom)} monte de 10 étages à chaque bond.`,
-  (p) => `${p.nom} gagne 10 points à chaque partie de chamboule-tout.`,
-  (p) => `Le kangourou du zoo fait des bonds de 10 cases. ${p.nom} les compte.`,
+  (p) => `${p.nom} gagne 10 points à chaque partie.`,
+  (p) => `Le kangourou fait des bonds de 10 cases.`,
 ];
 const PAS_CONTEXTES: Record<number, readonly ((p: Prenom) => string)[]> = {
   2: [
-    (p) => `${p.nom} compte les chaussettes de la corde à linge, par paires.`,
-    (p) => `${p.nom} compte les roues des vélos garés.`,
-    (p) => `${p.nom} compte les yeux des chats de la ferme.`,
+    (p) => `${p.nom} compte les chaussettes par paires.`,
+    (p) => `${p.nom} compte les roues des vélos.`,
+    (p) => `${p.nom} compte les yeux des chats.`,
     (p) => `Pic saute de 2 en 2 sur la marelle.`,
-    (p) => `${p.nom} compte les oreilles des lapins du clapier.`,
+    (p) => `${p.nom} compte les oreilles des lapins.`,
   ],
   5: [
-    (p) => `${p.nom} compte les doigts des mains de ses copains.`,
+    (p) => `${p.nom} compte les doigts de ses copains.`,
     (p) => `${p.nom} range ses billes par sachets de cinq.`,
-    (p) => `Les étoiles de mer ont cinq bras. ${p.nom} compte les bras.`,
-    (p) => `Pic saute de 5 en 5 sur la piste du jeu.`,
-    (p) => `${p.nom} gagne 5 points à chaque panier de basket.`,
+    (p) => `${p.nom} compte les bras des étoiles de mer.`,
+    (p) => `Pic saute de 5 en 5 sur la piste.`,
+    (p) => `${p.nom} gagne 5 points par panier.`,
   ],
   10: DIX_EN_DIX,
 };

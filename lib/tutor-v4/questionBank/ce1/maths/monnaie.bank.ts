@@ -99,7 +99,7 @@ const GROS_ACHATS: readonly Achat[] = [
   { quoi: "un sac à dos", lieu: "au supermarché", min: 15, max: 30 },
   { quoi: "des rollers", lieu: "au magasin de sport", min: 25, max: 48 },
   { quoi: "un maillot de foot", lieu: "au magasin de sport", min: 18, max: 40 },
-  { quoi: "une boîte de briques à construire", lieu: "au magasin de jouets", min: 20, max: 48 },
+  { quoi: "une boîte de briques", lieu: "au magasin de jouets", min: 20, max: 48 },
   { quoi: "un costume de pirate", lieu: "à la boutique de déguisements", min: 15, max: 30 },
   { quoi: "un aquarium", lieu: "à l'animalerie", min: 25, max: 45 },
 ];
@@ -110,19 +110,19 @@ const objetA = (prix: number): Achat => {
 };
 const coute = (prix: number) => {
   const o = objetA(prix);
-  return `${maj(o.quoi)} coûte ${prix} € ${o.lieu}.`;
+  return `${maj(o.quoi)} coûte ${prix} €.`;
 };
 
 /** Les phrases qui présentent un porte-monnaie dessiné. */
 const introTas = (p: Personne, sienne = false) =>
   randomChoice([
-    ...(sienne ? [] : ["Pic le paille-en-queue a trouvé ce trésor dans son nid.", "Le capitaine pirate a caché cet argent dans son coffre."]),
+    ...(sienne ? [] : ["Voici le trésor de Pic.", "Voici le coffre du pirate."]),
     `Voici le porte-monnaie ${de(p.nom)}.`,
     `${p.nom} vide sa tirelire.`,
-    `${p.nom} a gagné cet argent à la kermesse.`,
-    `Mamie a donné cet argent à ${p.nom}.`,
-    `Dans la poche ${de(p.nom)}, il y a cet argent.`,
-    `${p.nom} a cassé sa tirelire en forme de cochon.`,
+    `${p.nom} a gagné cet argent.`,
+    `${p.nom} a reçu cet argent.`,
+    `${p.nom} a cet argent.`,
+    `${p.nom} casse sa tirelire.`,
   ]);
 
 const Q_TOTAL = [
@@ -134,6 +134,13 @@ const Q_TOTAL = [
 
 /** Le dessin d'un tas : billets puis pièces, ou mélangés (plus dur). */
 const dessin = (valeurs: readonly (number | Valeur)[], trier = true) => monnaie(tas(valeurs, trier));
+/** Moins de 10 centimes en pièces (5, 2, 1), la plus grosse d'abord. */
+const petitsCentimes = (c: number): Valeur[] => {
+  const out: Valeur[] = [];
+  let r = c;
+  for (const x of [5, 2, 1]) while (r >= x) { out.push(`${x}c` as Valeur); r -= x; }
+  return out;
+};
 
 export const monnaieBank: TutorBankItemV4[] = [
   /* =========================================================
@@ -280,7 +287,7 @@ export const monnaieBank: TutorBankItemV4[] = [
           const piece = randomChoice([10, 20, 50] as const);
           const nb = 100 / piece;
           return court(
-            `${randomChoice([`${p.nom} veut échanger sa pièce de 1 € contre des pièces de ${piece} centimes.`, `Le marchand n'a que des pièces de ${piece} centimes pour remplacer cette pièce de 1 €.`, `Pic le paille-en-queue veut changer cette pièce de 1 € en pièces de ${piece} centimes.`])} Combien de pièces ${randomChoice(["faut-il", "obtient-on", "reçoit-on"])} ?`,
+            `${randomChoice([p.nom, "Pic"])} change cette pièce de 1 € en pièces de ${piece} centimes. Combien de pièces ${randomChoice(["faut-il", "obtient-on", "reçoit-on"])} ?`,
             nb,
             exp(
               "1 euro vaut 100 centimes.",
@@ -297,7 +304,7 @@ export const monnaieBank: TutorBankItemV4[] = [
           const pieces = randomChoice([[50, 20], [50, 20, 20], [20, 20, 10], [50, 10, 10, 10], [20, 20, 20, 10], [50, 20, 10], [10, 10, 10, 10, 10]]);
           const total = somme(pieces);
           return court(
-            `${randomChoice([`${p.nom} a ces pièces.`, `Voici les centimes ${de(p.nom)}.`, `${p.nom} compte ses centimes.`])} Combien de centimes lui manque-t-il pour avoir 1 euro ?`,
+            `${randomChoice([`${p.nom} a ces pièces.`, `Voici les centimes ${de(p.nom)}.`, `${p.nom} compte ses centimes.`])} Combien lui manque-t-il pour avoir 1 euro ?`,
             100 - total,
             exp(
               "1 euro vaut 100 centimes.",
@@ -400,6 +407,7 @@ export const monnaieBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     text: "Comment écrit-on « 4 euros et 5 centimes » avec une virgule ?",
+    canvas: dessin(["2e", "2e", "5c"]),
     format: "qcm",
     choices: ["4,05 €", "4,5 €", "5,04 €", "45 €"],
     expected: ["4,05 €"],
@@ -422,7 +430,7 @@ export const monnaieBank: TutorBankItemV4[] = [
     microId: "ce1_monnaie_virgule",
     difficulty: 2,
     theme: "neutral",
-    text: "Sur l'étiquette d'un pain, il est écrit 1,20 €. Combien cela fait-il de centimes en plus de l'euro ?",
+    text: "Un pain coûte 1,20 €. Combien de centimes en plus de l'euro ?",
     format: "short",
     expected: ["20"],
     comparator: "number_equal",
@@ -515,6 +523,7 @@ export const monnaieBank: TutorBankItemV4[] = [
               `${c} centimes s'écrivent 0${c}. Écrire ${e},${c} € voudrait dire ${c}0 centimes, dix fois plus.`,
               `On écrit ${bonne}.`,
             ),
+            dessin([...rendreMinimal(e), ...petitsCentimes(c)]),
           );
         },
         // Lequel coûte le plus cher ?
@@ -561,14 +570,13 @@ export const monnaieBank: TutorBankItemV4[] = [
       ]);
       const ctx = randomChoice([
         `L'étiquette ${objet} affiche ${prix}.`,
-        `Au marché, le prix ${objet} est ${prix}.`,
+        `Prix ${objet} : ${prix}.`,
         `${p.nom} lit le prix ${objet} : ${prix}.`,
-        `Sur le ticket de caisse, le prix ${objet} est ${prix}.`,
       ]);
       return tirer([
         () =>
           court(
-            `${ctx} ${randomChoice([`Combien de centimes y a-t-il en plus des ${e} ${pl(e, "euro", "euros")} ?`, "Combien de centimes sont écrits après la virgule ?"])}`,
+            `${ctx} ${randomChoice([`Combien de centimes en plus ${e === 1 ? "de l'euro" : `des ${e} euros`} ?`, "Combien de centimes après la virgule ?"])}`,
             c,
             exp(
               "Dans une somme d'argent, ce qui est écrit après la virgule compte les centimes.",
@@ -579,7 +587,7 @@ export const monnaieBank: TutorBankItemV4[] = [
           ),
         () =>
           court(
-            `${ctx} ${randomChoice(["Combien d'euros entiers coûte-t-il ?", "Combien d'euros sont écrits devant la virgule ?"])}`,
+            `${ctx} ${randomChoice(["Combien d'euros entiers ?", "Combien d'euros devant la virgule ?"])}`,
             e,
             exp(
               "Dans une somme d'argent, ce qui est devant la virgule compte les euros.",
@@ -618,7 +626,8 @@ export const monnaieBank: TutorBankItemV4[] = [
     microId: "ce1_monnaie_valeur_ensemble",
     difficulty: 4,
     theme: "neutral",
-    text: "Léa a 4 pièces de 50 centimes. Kevin a 5 pièces de 20 centimes. Qui a le plus d'argent ?",
+    text: "Léa : 4 pièces de 50 centimes. Kevin : 5 pièces de 20 centimes. Qui a le plus d'argent ?",
+    canvas: porteMonnaies([{ nom: "Léa", valeurs: ["50c", "50c", "50c", "50c"] }, { nom: "Kevin", valeurs: ["20c", "20c", "20c", "20c", "20c"] }]),
     format: "qcm",
     choices: [
       "Léa, qui a 2 €",
@@ -672,8 +681,11 @@ export const monnaieBank: TutorBankItemV4[] = [
           const p = quelquun();
           const t = tasAuHasard(randomInt(2, 3), true, 50);
           const total = somme(t);
+          const enMots = tas(t).length <= 2;
           return court(
-            `${randomChoice([`Dans le porte-monnaie ${de(p.nom)}, il y a`, `${p.nom} a`, `Dans la tirelire ${de(p.nom)}, il y a`])} ${direTas(t)}. ${randomChoice(Q_TOTAL)}`,
+            enMots
+              ? `${p.nom} a ${direTas(t)}. ${randomChoice(["Combien d'euros en tout ?", "Combien cela fait-il ?"])}`
+              : `${p.nom} a cet argent. ${randomChoice(Q_TOTAL)}`,
             total,
             exp(
               "La valeur d'un tas, c'est la somme des valeurs de chaque billet et de chaque pièce.",
@@ -681,6 +693,7 @@ export const monnaieBank: TutorBankItemV4[] = [
               `${[...t].sort((a, b) => b - a).join(" + ")} = ${total}.`,
               `Il y a ${total} € en tout.`,
             ),
+            enMots ? undefined : dessin(t),
           );
         },
       ]),
@@ -704,7 +717,7 @@ export const monnaieBank: TutorBankItemV4[] = [
           const t = shuffle([...tasAuHasard(randomInt(5, 7), true, 50)]);
           const total = somme(t);
           return court(
-            `${introTas(p)} Les pièces et les billets sont mélangés. ${randomChoice(Q_TOTAL)}`,
+            `${introTas(p)} Tout est mélangé. ${randomChoice(Q_TOTAL)}`,
             total,
             exp(
               "La valeur d'un tas, c'est la somme des valeurs, pas le nombre d'objets.",
@@ -727,7 +740,7 @@ export const monnaieBank: TutorBankItemV4[] = [
           reste.splice(k, 1);
           const els = [...tas(reste), { valeur: `${cachee}e` as Valeur, cache: true }];
           return court(
-            `${randomChoice([`${p.nom} a ${total} € en tout.`, `Le porte-monnaie ${de(p.nom)} contient ${total} €.`, `Pic le paille-en-queue a ${total} € dans son nid.`])} ${randomChoice(["Que vaut la pièce ou le billet caché ?", "Combien d'euros vaut l'objet marqué « ? » ?"])}`,
+            `${randomChoice([`${p.nom} a ${total} € en tout.`, `Le porte-monnaie ${de(p.nom)} contient ${total} €.`, `Pic a ${total} € dans son nid.`])} ${randomChoice(["Que vaut la pièce ou le billet caché ?", "Combien d'euros vaut l'objet marqué « ? » ?"])}`,
             cachee,
             exp(
               "La valeur d'un tas, c'est la somme de toutes les valeurs.",
@@ -771,7 +784,8 @@ export const monnaieBank: TutorBankItemV4[] = [
     microId: "ce1_monnaie_comparer_ensembles",
     difficulty: 3,
     theme: "neutral",
-    text: "Kevin a deux pièces de 2 €. Naïla a un billet de 5 €. Qui a le plus d'argent ?",
+    text: "Kevin : deux pièces de 2 €. Naïla : un billet de 5 €. Qui a le plus d'argent ?",
+    canvas: porteMonnaies([{ nom: "Kevin", valeurs: [2, 2] }, { nom: "Naïla", valeurs: [5] }]),
     format: "qcm",
     choices: [
       "Naïla",
@@ -799,7 +813,8 @@ export const monnaieBank: TutorBankItemV4[] = [
     microId: "ce1_monnaie_comparer_ensembles",
     difficulty: 4,
     theme: "neutral",
-    text: "Un billet de 5 € et une pièce de 50 centimes, ou cinq pièces de 1 € et deux pièces de 20 centimes. Quel tas vaut le plus ?",
+    text: "Regarde les deux tas. Lequel vaut le plus ?",
+    canvas: porteMonnaies([{ nom: "premier tas", valeurs: [5, "50c"] }, { nom: "second tas", valeurs: [1, 1, 1, 1, 1, "20c", "20c"] }]),
     format: "qcm",
     choices: [
       "le premier tas",
@@ -839,7 +854,7 @@ export const monnaieBank: TutorBankItemV4[] = [
       const plus = Math.random() < 0.7;
       const gagnant = (plus ? somme(a) > somme(b) : somme(a) < somme(b)) ? p.nom : q.nom;
       // En mots, seulement quand les deux tas sont courts (sinon la phrase est trop longue).
-      const enMots = tas(a).length + tas(b).length <= 4;
+      const enMots = tas(a).length + tas(b).length <= 2;
       const ex = exp(
         "Pour comparer deux tas d'argent, on calcule d'abord la valeur de chacun.",
         "On additionne chaque porte-monnaie à part, puis on compare. Le nombre de pièces ne compte pas.",
@@ -879,7 +894,7 @@ export const monnaieBank: TutorBankItemV4[] = [
       return tirer([
         () =>
           court(
-            `${randomChoice(["Voici deux porte-monnaie.", "Les deux enfants comptent leur argent.", "Deux tirelires sont ouvertes."])} ${randomChoice([`Combien d'euros ${riche.nom} a-t-${riche.il} de plus ${que(pauvre.nom)} ?`, `Combien d'euros manque-t-il à ${pauvre.nom} pour avoir autant ${que(riche.nom)} ?`])}`,
+            `${randomChoice(["Voici deux porte-monnaie.", "Deux tirelires sont ouvertes."])} ${randomChoice([`Combien d'euros ${riche.nom} a-t-${riche.il} de plus ${que(pauvre.nom)} ?`, `Combien d'euros manque-t-il à ${pauvre.nom} pour avoir autant ${que(riche.nom)} ?`])}`,
             tr - tp,
             exp(
               "Pour comparer deux sommes, on calcule chacune, puis l'écart.",
@@ -892,7 +907,7 @@ export const monnaieBank: TutorBankItemV4[] = [
         () => {
           const ecart = tr - tp;
           return qcm(
-            `${p.nom} a ${somme(a)} €. Le porte-monnaie dessiné est celui ${de(q.nom)}. ${randomChoice(["Qui a le plus d'argent ?", "Qui peut acheter le jouet le plus cher ?"])}`,
+            `${p.nom} a ${somme(a)} €. Voici le porte-monnaie ${de(q.nom)}. ${randomChoice(["Qui a le plus d'argent ?", "Qui peut acheter le jouet le plus cher ?"])}`,
             riche.nom,
             [p.nom, q.nom, "ils ont pareil"],
             exp(
@@ -988,7 +1003,7 @@ export const monnaieBank: TutorBankItemV4[] = [
           const prix = somme(deja) + manque;
           const nom = (x: number) => (x >= 5 ? `un billet de ${x} €` : `une pièce de ${x} €`);
           return qcm(
-            `${coute(prix)} ${p.nom} a déjà posé cet argent. ${randomChoice(["Que doit-" + p.il + " ajouter ?", "Quelle pièce ou quel billet manque ?"])}`,
+            `${coute(prix)} ${p.nom} a posé cet argent. ${randomChoice(["Que doit-" + p.il + " ajouter ?", "Que manque-t-il ?"])}`,
             nom(manque),
             [1, 2, 5, 10, 20].filter((x) => x !== manque).map(nom),
             exp(
@@ -1046,12 +1061,12 @@ export const monnaieBank: TutorBankItemV4[] = [
       const nb = randomInt(1, piece === 1 ? 5 : 4);
       const total = billet + piece * nb;
       const intro = randomChoice([
-        `${p.nom} doit faire ${total} € avec ce billet et des pièces de ${piece} €.`,
-        `${coute(total)} ${p.nom} pose ce billet, puis des pièces de ${piece} €.`,
-        `${p.nom} veut mettre ${total} € dans sa tirelire. ${maj(p.il)} a déjà ce billet, et des pièces de ${piece} €.`,
+        `${p.nom} doit faire ${total} €.`,
+        `${coute(total)}`,
+        `${p.nom} met ${total} € dans sa tirelire.`,
       ]);
       return court(
-        `${intro} ${randomChoice([`Combien de pièces de ${piece} € faut-il ?`, `Combien de pièces de ${piece} € ajoute-t-${p.il} ?`])}`,
+        `${intro} ${p.nom === intro.split(" ")[0] ? maj(p.il) : p.nom} a ce billet. ${randomChoice([`Combien de pièces de ${piece} € ajouter ?`, `Combien de pièces de ${piece} € faut-il ?`])}`,
         nb,
         exp(
           "Constituer une somme, c'est compléter jusqu'à la somme demandée.",
@@ -1078,7 +1093,8 @@ export const monnaieBank: TutorBankItemV4[] = [
     microId: "ce1_monnaie_rendre",
     difficulty: 2,
     theme: "reunion",
-    text: "Au camion-bar, un bonbon piment coûte 3 €. Tu donnes un billet de 5 €. Combien te rend-on, en euros ?",
+    text: "Au camion-bar, un bonbon piment coûte 3 €. Tu donnes ce billet. Combien te rend-on ?",
+    canvas: dessin([5]),
     format: "short",
     expected: ["2"],
     comparator: "number_equal",
@@ -1101,6 +1117,7 @@ export const monnaieBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     text: "Un cahier coûte 2,50 €. Tu donnes 3 €. Combien te rend-on, en centimes ?",
+    canvas: dessin(["2e", "1e"]),
     format: "short",
     expected: ["50"],
     comparator: "number_equal",
@@ -1139,16 +1156,17 @@ export const monnaieBank: TutorBankItemV4[] = [
       return tirer([
         () =>
           court(
-            `${coute(prix)} ${p.nom} paie avec ce billet. ${randomChoice([`Combien d'euros lui rend-on ?`, "Combien le vendeur rend-il, en euros ?", `Combien d'euros ${p.nom} récupère-t-${p.il} ?`])}`,
+            `${coute(prix)} ${p.nom} paie avec ce billet. ${randomChoice([`Combien d'euros lui rend-on ?`, `Combien d'euros récupère-t-${p.il} ?`])}`,
             rendu,
             ex,
             dessin([billet]),
           ),
         () =>
           court(
-            `${maj(a.lieu)}, ${p.nom} achète ${a.quoi} à ${prix} €. ${maj(p.il)} donne un billet de ${billet} €. ${randomChoice(["Combien lui rend-on, en euros ?", "Quelle monnaie lui rend-on, en euros ?"])}`,
+            `${p.nom} achète ${a.quoi} à ${prix} € avec un billet de ${billet} €. Combien lui rend-on ?`,
             rendu,
             ex,
+            dessin([billet]),
           ),
       ]);
     },
@@ -1191,7 +1209,7 @@ export const monnaieBank: TutorBankItemV4[] = [
           const rendu = randomInt(2, billet - 2);
           const prix = billet - rendu;
           return court(
-            `${p.nom} paie ${objetA(prix).quoi} avec un billet de ${billet} €. Le vendeur lui rend cette monnaie. ${randomChoice(["Combien coûtait l'achat, en euros ?", "Quel était le prix, en euros ?"])}`,
+            `${p.nom} donne ${billet} € pour ${objetA(prix).quoi}. Voici la monnaie rendue. ${randomChoice(["Combien coûtait l'achat ?", "Quel était le prix ?"])}`,
             prix,
             exp(
               "Le prix plus la monnaie rendue font la somme donnée.",
@@ -1218,7 +1236,8 @@ export const monnaieBank: TutorBankItemV4[] = [
     microId: "ce1_monnaie_probleme",
     difficulty: 3,
     theme: "reunion",
-    text: "Malia achète un cahier à 3 € et un stylo à 2 €. Elle donne un billet de 10 €. Combien lui rend-on, en euros ?",
+    text: "Un cahier à 3 €, un stylo à 2 €. Malia paie avec ce billet. Combien lui rend-on ?",
+    canvas: dessin([10]),
     format: "short",
     expected: ["5"],
     comparator: "number_equal",
@@ -1266,7 +1285,8 @@ export const monnaieBank: TutorBankItemV4[] = [
     tags: ["ce1", "monnaie", "probleme", "deux_etapes", "template", "canvas"],
     generate: () => {
       const p = quelquun();
-      const [a1, a2] = shuffle(ACHATS.filter((a) => a.min <= 8)).slice(0, 2);
+      // Des noms d'achat courts (« un ballon », « une glace ») : deux achats tiennent dans la phrase.
+      const [a1, a2] = shuffle(ACHATS.filter((a) => a.min <= 8 && a.quoi.split(" ").length <= 2)).slice(0, 2);
       const prix1 = prixDe(a1, 9);
       const prix2 = prixDe(a2, 9);
       const total = prix1 + prix2;
@@ -1276,7 +1296,7 @@ export const monnaieBank: TutorBankItemV4[] = [
           const billet = total < 10 ? 10 : 20;
           const rendu = billet - total;
           return court(
-            `${p.nom} achète ${a1.quoi} à ${prix1} € et ${a2.quoi} à ${prix2} €. ${maj(p.il)} donne un billet de ${billet} €. ${randomChoice(["Combien lui rend-on, en euros ?", "Quelle monnaie reçoit-" + p.il + ", en euros ?"])}`,
+            `${p.nom} paie avec ce billet ${a1.quoi} à ${prix1} € et ${a2.quoi} à ${prix2} €. Combien rend-on ?`,
             rendu,
             exp(
               "Un problème en deux étapes se résout dans l'ordre.",
@@ -1284,6 +1304,7 @@ export const monnaieBank: TutorBankItemV4[] = [
               `${prix1} + ${prix2} = ${total}. ${billet} - ${total} = ${rendu}.`,
               `On lui rend ${rendu} €.`,
             ),
+            dessin([billet]),
           );
         },
         // Le porte-monnaie dessiné : que reste-t-il après deux achats ?
@@ -1291,7 +1312,7 @@ export const monnaieBank: TutorBankItemV4[] = [
           const avoir = rendreMinimal(total + randomInt(1, 9));
           const reste = somme(avoir) - total;
           return court(
-            `${introTas(p, true)} ${maj(p.il)} achète ${a1.quoi} à ${prix1} € et ${a2.quoi} à ${prix2} €. Combien d'euros lui reste-t-il ?`,
+            `${p.nom} achète ${a1.quoi} à ${prix1} € et ${a2.quoi} à ${prix2} € avec cet argent. Combien reste-t-il ?`,
             reste,
             exp(
               "Un problème en deux étapes se résout dans l'ordre.",
@@ -1325,7 +1346,7 @@ export const monnaieBank: TutorBankItemV4[] = [
           const manque = randomInt(1, 9);
           const prix = somme(avoir) + manque;
           return court(
-            `${introTas(p, true)} ${maj(p.il)} veut ${objetA(prix).quoi} à ${prix} €. Combien d'euros lui manque-t-il ?`,
+            `${introTas(p, true)} ${maj(p.il)} veut ${objetA(prix).quoi} à ${prix} €. Combien lui manque-t-il ?`,
             manque,
             exp(
               "Chercher ce qui manque, c'est chercher l'écart entre deux sommes.",
@@ -1357,7 +1378,7 @@ export const monnaieBank: TutorBankItemV4[] = [
           const avoir = tasAuHasard(randomInt(2, 4), true, 20);
           const prix = randomInt(1, somme(avoir) - 1);
           return court(
-            `${introTas(p, true)} ${maj(p.il)} achète ${objetA(prix).quoi} à ${prix} €. Combien d'euros lui reste-t-il ?`,
+            `${introTas(p, true)} ${maj(p.il)} achète ${objetA(prix).quoi} à ${prix} €. Combien lui reste-t-il ?`,
             somme(avoir) - prix,
             exp(
               "Ce qui reste, c'est ce qu'on avait moins ce qu'on dépense.",
@@ -1384,7 +1405,7 @@ export const monnaieBank: TutorBankItemV4[] = [
     microId: "ce1_monnaie_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Deux enfants écrivent la même somme. Léa écrit 2,50 €, Kevin écrit « 250 centimes ». Qui a raison ?",
+    text: "Pour la même somme, Léa écrit 2,50 €, Kevin « 250 centimes ». Qui a raison ?",
     format: "qcm",
     choices: [
       "les deux : c'est la même somme",
@@ -1449,22 +1470,22 @@ export const monnaieBank: TutorBankItemV4[] = [
       const reste = Math.random() < 0.4 ? randomInt(1, prix - 1) : 0;
       const total = prix * nb + reste;
       const objet = randomChoice([
-        { un: "ticket de manège", des: "tickets de manège" },
-        { un: "sachet de billes", des: "sachets de billes" },
-        { un: "paquet de gommettes", des: "paquets de gommettes" },
-        { un: "petit dinosaure en plastique", des: "petits dinosaures en plastique" },
-        { un: "cornet de glace", des: "cornets de glace" },
-        { un: "ballon de baudruche", des: "ballons de baudruche" },
-        { un: "sachet de graines de tournesol", des: "sachets de graines de tournesol" },
-        { un: "livre d'occasion", des: "livres d'occasion" },
+        { un: "ticket de manège", des: "tickets" },
+        { un: "sachet de billes", des: "sachets" },
+        { un: "paquet de gommettes", des: "paquets" },
+        { un: "dinosaure en plastique", des: "dinosaures" },
+        { un: "cornet de glace", des: "cornets" },
+        { un: "ballon de baudruche", des: "ballons" },
+        { un: "sachet de graines", des: "sachets" },
+        { un: "livre d'occasion", des: "livres" },
       ]);
       const avecDessin = Math.random() < 0.5;
-      const intro = avecDessin ? introTas(p, true) : `${p.nom} a ${total} €.`;
+      const intro = avecDessin ? `${p.nom} a cet argent.` : `${p.nom} a ${total} €.`;
       const q = reste && Math.random() < 0.5
-        ? { t: `Combien d'euros lui restera-t-il ${p.il === "il" ? "s'il" : "si elle"} en achète le plus possible ?`, r: reste, c: `${prix} × ${nb} = ${prix * nb}, il reste ${total} - ${prix * nb} = ${reste}.` }
+        ? { t: `${maj(p.il)} en achète le plus possible. Combien reste-t-il ?`, r: reste, c: `${prix} × ${nb} = ${prix * nb}, il reste ${total} - ${prix * nb} = ${reste}.` }
         : { t: `Combien de ${objet.des} peut-${p.il} acheter, au plus ?`, r: nb, c: `${prix} × ${nb} = ${prix * nb}${reste ? `, et il reste ${reste} €, pas assez pour un de plus` : ""}.` };
       return court(
-        `${intro} Un ${objet.un} coûte ${prix} €. ${q.t}`,
+        `${intro} Un ${objet.un} : ${prix} €. ${q.t}`,
         q.r,
         exp(
           "Chercher combien de fois on peut payer, c'est faire des groupes de la taille du prix.",
@@ -1496,9 +1517,9 @@ export const monnaieBank: TutorBankItemV4[] = [
           const t = rendreMinimal(n);
           return court(
             randomChoice([
-              `${p.nom} doit payer ${n} € avec le moins de pièces et de billets possible. Combien de pièces et billets lui faut-il ?`,
+              `Faire ${n} € avec le moins de pièces et billets possible : combien en faut-il ?`,
               `Défi : faire ${n} € avec le moins de pièces et de billets. Combien en faut-il ?`,
-              `Le banquier du jeu doit donner ${n} € à ${p.nom}, avec le moins de billets et de pièces. Combien en donne-t-il ?`,
+              `Le banquier donne ${n} € à ${p.nom}, avec le moins de billets et pièces. Combien en donne-t-il ?`,
             ]),
             t.length,
             exp(

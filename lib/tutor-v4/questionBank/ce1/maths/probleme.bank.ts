@@ -92,7 +92,11 @@ import {
   dessinQuantite,
   dessinBarre,
   dessinArgent,
+  de,
 } from "./calcul-outils-ce1";
+
+/** « que Noa », « qu'Élia ». */
+const que = (nom: string) => (/^[aeiouyàâéèêëîïôœh]/i.test(nom) ? `qu'${nom}` : `que ${nom}`);
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
 function gab(
@@ -138,96 +142,98 @@ type Tout = {
 function histoiresTout(): Tout[] {
   const p = enfant();
   const [x, y] = deuxEnfants();
+  // ⛔ 14/11/2026 — ÉNONCÉS COURTS : une demi-phrase de contexte, pas plus. Le
+  // prof les trouvait trop longs pour des enfants de 7 ans (cible : 16 mots).
   return [
     {
-      avant: (a, b) => `Au goûter, ${p.nom} mange ${a} raisins verts et ${b} raisins noirs.`,
-      total: (t) => `Au goûter, ${p.nom} mange ${t} raisins, des verts et des noirs.`,
+      avant: (a, b) => `${p.nom} mange ${a} raisins verts et ${b} noirs.`,
+      total: (t) => `${p.nom} mange ${t} raisins, verts ou noirs.`,
       partie: (n, k) => `${n} sont ${k === 1 ? "verts" : "noirs"}.`,
-      question: (k) => `Combien de raisins ${k === 1 ? "verts" : "noirs"} mange-t-${p.il} ?`,
+      question: (k) => `Combien sont ${k === 1 ? "verts" : "noirs"} ?`,
       quoi: "raisins", p1: "verts", p2: "noirs",
     },
     {
-      avant: (a, b) => `Dans la ferme, il y a ${a} poules et ${b} canards. ${p.nom} les compte.`,
-      total: (t) => `Dans la ferme, ${p.nom} compte ${t} animaux : des poules et des canards.`,
+      avant: (a, b) => `À la ferme, il y a ${a} poules et ${b} canards.`,
+      total: (t) => `À la ferme, il y a ${t} poules et canards.`,
       partie: (n, k) => `Il y a ${n} ${k === 1 ? "poules" : "canards"}.`,
-      question: (k) => `Combien y a-t-il de ${k === 1 ? "poules" : "canards"} ?`,
+      question: (k) => `Combien de ${k === 1 ? "poules" : "canards"} ?`,
       quoi: "animaux", p1: "poules", p2: "canards",
     },
     {
-      avant: (a, b) => `${x.nom} a ${a} cartes de dinosaures et ${y.nom} en a ${b}.`,
-      total: (t) => `${x.nom} et ${y.nom} ont ${t} cartes de dinosaures à eux deux.`,
+      avant: (a, b) => `${x.nom} a ${a} cartes et ${y.nom} en a ${b}.`,
+      total: (t) => `${x.nom} et ${y.nom} ont ${t} cartes à eux deux.`,
       partie: (n, k) => `${k === 1 ? x.nom : y.nom} en a ${n}.`,
-      question: (k) => `Combien de cartes ${k === 1 ? x.nom : y.nom} a-t-${k === 1 ? x.il : y.il} ?`,
+      question: (k) => `Combien en a ${k === 1 ? x.nom : y.nom} ?`,
       quoi: "cartes", p1: x.nom, p2: y.nom,
     },
     {
-      avant: (a, b) => `${p.il === "elle" ? "La" : "Le"} pirate ${p.nom} cache ${a} pièces d'or dans un coffre et ${b} dans une grotte.`,
-      total: (t) => `${p.il === "elle" ? "La" : "Le"} pirate ${p.nom} a caché ${t} pièces d'or, dans un coffre et dans une grotte.`,
-      partie: (n, k) => `Il y en a ${n} dans ${k === 1 ? "le coffre" : "la grotte"}.`,
-      question: (k) => `Combien de pièces d'or y a-t-il dans ${k === 1 ? "le coffre" : "la grotte"} ?`,
-      quoi: "pièces d'or", p1: "coffre", p2: "grotte",
+      avant: (a, b) => `Un pirate cache ${a} pièces au coffre et ${b} dans la grotte.`,
+      total: (t) => `Un pirate cache ${t} pièces en deux endroits.`,
+      partie: (n, k) => `${n} sont ${k === 1 ? "au coffre" : "dans la grotte"}.`,
+      question: (k) => `Combien sont ${k === 1 ? "au coffre" : "dans la grotte"} ?`,
+      quoi: "pièces", p1: "coffre", p2: "grotte",
     },
     {
-      avant: (a, b) => `À la kermesse, ${p.nom} vend ${a} crêpes le matin et ${b} l'après-midi.`,
-      total: (t) => `À la kermesse, ${p.nom} vend ${t} crêpes dans la journée.`,
+      avant: (a, b) => `${p.nom} vend ${a} crêpes le matin et ${b} l'après-midi.`,
+      total: (t) => `${p.nom} vend ${t} crêpes dans la journée.`,
       partie: (n, k) => `${maj(p.il)} en vend ${n} ${k === 1 ? "le matin" : "l'après-midi"}.`,
-      question: (k) => `Combien de crêpes vend-${p.il} ${k === 1 ? "le matin" : "l'après-midi"} ?`,
+      question: (k) => `Combien en vend-${p.il} ${k === 1 ? "le matin" : "l'après-midi"} ?`,
       quoi: "crêpes", p1: "matin", p2: "après-midi",
     },
     {
-      avant: (a, b) => `Dans la bibliothèque de ${p.nom}, il y a ${a} albums et ${b} BD.`,
-      total: (t) => `La bibliothèque de ${p.nom} a ${t} livres : des albums et des BD.`,
+      avant: (a, b) => `La bibliothèque a ${a} albums et ${b} BD.`,
+      total: (t) => `La bibliothèque a ${t} livres : albums et BD.`,
       partie: (n, k) => `Il y a ${n} ${k === 1 ? "albums" : "BD"}.`,
-      question: (k) => `Combien y a-t-il ${k === 1 ? "d'albums" : "de BD"} ?`,
+      question: (k) => `Combien ${k === 1 ? "d'albums" : "de BD"} ?`,
       quoi: "livres", p1: "albums", p2: "BD",
     },
     {
-      avant: (a, b) => `Le jardinier plante ${a} tulipes et ${b} roses. ${p.nom} l'aide.`,
-      total: (t) => `Le jardinier et ${p.nom} plantent ${t} fleurs : des tulipes et des roses.`,
-      partie: (n, k) => `Ils plantent ${n} ${k === 1 ? "tulipes" : "roses"}.`,
-      question: (k) => `Combien de ${k === 1 ? "tulipes" : "roses"} plantent-ils ?`,
+      avant: (a, b) => `Le jardinier plante ${a} tulipes et ${b} roses.`,
+      total: (t) => `Le jardinier plante ${t} fleurs : tulipes et roses.`,
+      partie: (n, k) => `Il plante ${n} ${k === 1 ? "tulipes" : "roses"}.`,
+      question: (k) => `Combien de ${k === 1 ? "tulipes" : "roses"} plante-t-il ?`,
       quoi: "fleurs", p1: "tulipes", p2: "roses",
     },
     {
-      avant: (a, b) => `Au zoo, ${p.nom} voit ${a} singes dans le premier enclos et ${b} dans le second.`,
-      total: (t) => `Au zoo, ${p.nom} voit ${t} singes dans deux enclos.`,
-      partie: (n, k) => `Il y en a ${n} dans le ${k === 1 ? "premier" : "second"}.`,
-      question: (k) => `Combien de singes y a-t-il dans le ${k === 1 ? "premier" : "second"} enclos ?`,
+      avant: (a, b) => `Au zoo, l'enclos 1 a ${a} singes, l'enclos 2 en a ${b}.`,
+      total: (t) => `Au zoo, deux enclos ont ${t} singes.`,
+      partie: (n, k) => `L'enclos ${k} en a ${n}.`,
+      question: (k) => `Combien en a l'enclos ${k} ?`,
       quoi: "singes", p1: "enclos 1", p2: "enclos 2",
     },
     {
-      avant: (a, b) => `Dans la fusée de ${p.nom}, il y a ${a} étoiles collées à gauche et ${b} à droite.`,
-      total: (t) => `Dans la fusée de ${p.nom}, ${t} étoiles sont collées, à gauche et à droite.`,
+      avant: (a, b) => `La fusée a ${a} étoiles à gauche et ${b} à droite.`,
+      total: (t) => `La fusée a ${t} étoiles, à gauche et à droite.`,
       partie: (n, k) => `${n} sont ${k === 1 ? "à gauche" : "à droite"}.`,
-      question: (k) => `Combien d'étoiles sont ${k === 1 ? "à gauche" : "à droite"} ?`,
+      question: (k) => `Combien sont ${k === 1 ? "à gauche" : "à droite"} ?`,
       quoi: "étoiles", p1: "gauche", p2: "droite",
     },
     {
-      avant: (a, b) => `Pic le paille-en-queue ramasse ${a} graines le matin et ${b} le soir. ${p.nom} le regarde.`,
-      total: (t) => `Pic le paille-en-queue ramasse ${t} graines dans la journée. ${p.nom} le regarde.`,
+      avant: (a, b) => `Pic l'oiseau ramasse ${a} graines le matin et ${b} le soir.`,
+      total: (t) => `Pic l'oiseau ramasse ${t} graines par jour.`,
       partie: (n, k) => `Il en ramasse ${n} ${k === 1 ? "le matin" : "le soir"}.`,
-      question: (k) => `Combien de graines ramasse-t-il ${k === 1 ? "le matin" : "le soir"} ?`,
+      question: (k) => `Et ${k === 1 ? "le matin" : "le soir"}, combien ?`,
       quoi: "graines", p1: "matin", p2: "soir",
     },
     {
-      avant: (a, b) => `À la piscine, ${p.nom} compte ${a} filles et ${b} garçons.`,
-      total: (t) => `À la piscine, ${p.nom} compte ${t} enfants, des filles et des garçons.`,
+      avant: (a, b) => `À la piscine, il y a ${a} filles et ${b} garçons.`,
+      total: (t) => `À la piscine, ${t} enfants nagent.`,
       partie: (n, k) => `Il y a ${n} ${k === 1 ? "filles" : "garçons"}.`,
-      question: (k) => `Combien y a-t-il de ${k === 1 ? "filles" : "garçons"} ?`,
+      question: (k) => `Combien de ${k === 1 ? "filles" : "garçons"} ?`,
       quoi: "enfants", p1: "filles", p2: "garçons",
     },
     {
-      avant: (a, b) => `La boulangère a fait ${a} croissants et ${b} pains au chocolat. ${p.nom} les regarde.`,
-      total: (t) => `La boulangère a fait ${t} viennoiseries : des croissants et des pains au chocolat. ${p.nom} les regarde.`,
-      partie: (n, k) => `Il y a ${n} ${k === 1 ? "croissants" : "pains au chocolat"}.`,
-      question: (k) => `Combien y a-t-il de ${k === 1 ? "croissants" : "pains au chocolat"} ?`,
+      avant: (a, b) => `La boulangère a fait ${a} croissants et ${b} pains au chocolat.`,
+      total: (t) => `La boulangère a ${t} croissants et pains au chocolat.`,
+      partie: (n, k) => `${n} sont des ${k === 1 ? "croissants" : "pains au chocolat"}.`,
+      question: (k) => `Combien de ${k === 1 ? "croissants" : "pains au chocolat"} ?`,
       quoi: "viennoiseries", p1: "croissants", p2: "pains au choc.",
     },
     {
-      avant: (a, b) => `Dans l'aquarium de ${p.nom}, il y a ${a} poissons rouges et ${b} poissons bleus.`,
-      total: (t) => `L'aquarium de ${p.nom} a ${t} poissons, des rouges et des bleus.`,
+      avant: (a, b) => `L'aquarium a ${a} poissons rouges et ${b} bleus.`,
+      total: (t) => `L'aquarium a ${t} poissons, rouges ou bleus.`,
       partie: (n, k) => `${n} sont ${k === 1 ? "rouges" : "bleus"}.`,
-      question: (k) => `Combien de poissons sont ${k === 1 ? "rouges" : "bleus"} ?`,
+      question: (k) => `Combien sont ${k === 1 ? "rouges" : "bleus"} ?`,
       quoi: "poissons", p1: "rouges", p2: "bleus",
     },
   ];
@@ -248,7 +254,7 @@ export const problemeBank: TutorBankItemV4[] = [
     microId: "ce1_probleme_operation",
     difficulty: 3,
     theme: "neutral",
-    text: "« Léo a 188 billes. Lucie en a 75 de PLUS que Léo. Combien Lucie a-t-elle de billes ? » Quelle opération faut-il faire ?",
+    text: "Léo a 188 billes, Lucie 75 de PLUS que lui. Quelle opération pour les billes de Lucie ?",
     format: "qcm",
     choices: ["une addition", "une soustraction", "une multiplication", "aucune"],
     expected: ["une addition"],
@@ -260,7 +266,12 @@ export const problemeBank: TutorBankItemV4[] = [
       "Lucie a plus de billes que Léo : on cherche donc un nombre plus grand que 188. On ajoute : 188 + 75 = 263.",
       "Il faut faire une addition.",
     ),
-    tags: ["ce1", "probleme", "operation", "qcm"],
+    canvas: dessinBarre({
+      total: "?",
+      parts: [{ label: "comme Léo", value: "188" }, { label: "de plus", value: "75" }],
+      questionLabel: "Les billes de Lucie",
+    }),
+    tags: ["ce1", "probleme", "operation", "canvas", "qcm"],
   },
   {
     kind: "fixed",
@@ -271,7 +282,7 @@ export const problemeBank: TutorBankItemV4[] = [
     microId: "ce1_probleme_operation",
     difficulty: 5,
     theme: "neutral",
-    text: "« Léo a 188 billes. Il en a 75 de PLUS que Lucie. Combien Lucie a-t-elle de billes ? » Quelle opération faut-il faire ?",
+    text: "Léo a 188 billes, 75 de PLUS que Lucie. Quelle opération pour les billes de Lucie ?",
     format: "qcm",
     choices: ["une soustraction", "une addition", "une multiplication", "aucune"],
     expected: ["une soustraction"],
@@ -304,8 +315,8 @@ export const problemeBank: TutorBankItemV4[] = [
       const bonne = versLeHaut ? "une addition" : "une soustraction";
       return {
         text: versLeHaut
-          ? `« ${a} a ${grand} images. ${b} en a ${ecart} de plus que ${a}. Combien d'images a ${b} ? » Quelle opération faut-il faire ?`
-          : `« ${a} a ${grand} images. ${a} en a ${ecart} de plus que ${b}. Combien d'images a ${b} ? » Quelle opération faut-il faire ?`,
+          ? `${a} a ${grand} images, ${b} ${ecart} de plus ${que(a)}. Quelle opération pour les images ${de(b)} ?`
+          : `${a} a ${grand} images, ${ecart} de plus ${que(b)}. Quelle opération pour les images ${de(b)} ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
           versLeHaut ? "une soustraction" : "une addition",
@@ -323,6 +334,15 @@ export const problemeBank: TutorBankItemV4[] = [
             : `C'est ${a} qui en a le plus. ${b} en a donc moins que ${grand} : on enlève.`,
           `Il faut faire ${bonne}.`,
         ),
+        // ⭐ Le schéma de la comparaison : le plus grand des deux est le TOUT,
+        // l'écart en est un morceau. Où tombe le « ? » décide de l'opération.
+        ...(pile(0.5)
+          ? {
+              canvas: versLeHaut
+                ? dessinBarre({ total: "?", parts: [{ label: `comme ${a}`, value: String(grand) }, { label: "de plus", value: String(ecart) }], questionLabel: `Les images de ${b}` })
+                : dessinBarre({ total: String(grand), parts: [{ label: `comme ${b}`, unknown: true }, { label: "de plus", value: String(ecart) }], questionLabel: `Les images de ${a}` }),
+            }
+          : {}),
       };
     },
   },
@@ -339,7 +359,7 @@ export const problemeBank: TutorBankItemV4[] = [
     microId: "ce1_probleme_add_sous",
     difficulty: 3,
     theme: "neutral",
-    text: "Dans mes deux coffres, j'ai 227 billes. J'en ai 113 dans mon coffre vert. Combien y en a-t-il dans le coffre rouge ?",
+    text: "J'ai 227 billes dans deux coffres, dont 113 dans le vert. Combien dans le coffre rouge ?",
     format: "short",
     expected: ["114"],
     comparator: "number_equal",
@@ -377,7 +397,7 @@ export const problemeBank: TutorBankItemV4[] = [
         `${a} + ${b} = ${t}.`,
         `Il y a ${t} ${h.quoi} en tout.`,
       );
-      const q = rc([`Combien de ${h.quoi} en tout ?`, `Combien y a-t-il de ${h.quoi} en tout ?`, `Quel est le nombre total de ${h.quoi} ?`]);
+      const q = rc([`Combien ${de(h.quoi)} en tout ?`, "Combien en tout ?", "Quel est le total ?"]);
       if (pile(0.15)) {
         const [x, y] = deuxEnfants();
         const m1 = ri(3, 30);
@@ -386,7 +406,7 @@ export const problemeBank: TutorBankItemV4[] = [
         const d2 = dessinArgent(m2);
         if (d1 && d2) {
           return nombreOuQcm(
-            rc([`Voici l'argent de ${x.nom} et celui de ${y.nom}. Combien d'euros ont-ils à eux deux ?`, `${x.nom} et ${y.nom} vident leurs tirelires pour un cadeau. Combien d'euros ont-ils ensemble ?`]),
+            rc([`Voici l'argent de ${x.nom} et de ${y.nom}. Combien d'euros ont-ils à eux deux ?`, `${x.nom} et ${y.nom} vident leurs tirelires. Combien d'euros ont-ils ensemble ?`]),
             m1 + m2,
             [m1 + m2 + 1, m1 + m2 - 1, m1 + m2 + 10, Math.abs(m1 - m2)],
             exp("Réunir deux sommes, c'est les additionner.", "On compte l'argent de chacun, puis on additionne.", `${x.nom} a ${m1} €, ${y.nom} a ${m2} €. ${m1} + ${m2} = ${m1 + m2}.`, `Ils ont ${m1 + m2} €.`),
@@ -420,10 +440,10 @@ export const problemeBank: TutorBankItemV4[] = [
         const c = chose();
         return nombreOuQcm(
           rc([
-            `${p.nom} gagne ${gagne} ${c.pl} à la récré. Maintenant, ${p.il} en a ${fin}. Combien en avait-${p.il} avant ?`,
-            `Après avoir reçu ${gagne} ${c.pl} de plus, ${p.nom} en a ${fin}. Combien en avait-${p.il} au début ?`,
-            `On a ajouté ${gagne} livres dans la bibliothèque de ${p.nom}. Il y en a maintenant ${fin}. Combien y en avait-il avant ?`,
-            `Le train de ${p.nom} a pris ${gagne} voyageurs de plus à la gare. Il en a maintenant ${fin}. Combien en avait-il avant ?`,
+            `${p.nom} gagne ${gagne} ${c.pl}. Maintenant, ${p.il} en a ${fin}. Combien en avait-${p.il} avant ?`,
+            `${p.nom} reçoit ${gagne} ${c.pl} de plus et en a ${fin}. Combien en avait-${p.il} ?`,
+            `On ajoute ${gagne} livres à la bibliothèque. Il y en a ${fin}. Combien y en avait-il avant ?`,
+            `Le train prend ${gagne} voyageurs de plus. Il en a ${fin}. Combien en avait-il avant ?`,
           ]),
           avant,
           [fin + gagne, avant + 10, avant - 10, gagne],
@@ -471,7 +491,7 @@ export const problemeBank: TutorBankItemV4[] = [
     microId: "ce1_probleme_comparaison",
     difficulty: 3,
     theme: "neutral",
-    text: "Dans l'école, il y a 111 garçons et 257 filles. Combien y a-t-il de filles de plus que de garçons ?",
+    text: "L'école a 111 garçons et 257 filles. Combien de filles de plus que de garçons ?",
     format: "short",
     expected: ["146"],
     comparator: "number_equal",
@@ -502,7 +522,7 @@ export const problemeBank: TutorBankItemV4[] = [
       const grand = petit + ecart;
       const objet = randomChoice(["billes", "images", "cartes", "autocollants"]);
       return {
-        text: `${a} a ${grand} ${objet} et ${b} en a ${petit}. Combien en a ${a} de plus que ${b} ?`,
+        text: `${a} a ${grand} ${objet} et ${b} ${petit}. Combien en a ${a} de plus ${que(b)} ?`,
         format: "short",
         expected: [String(ecart)],
         comparator: "number_equal",
@@ -532,7 +552,7 @@ export const problemeBank: TutorBankItemV4[] = [
       const ecart = randomInt(20, 90);
       const petit = grand - ecart;
       return {
-        text: `${a} a ${grand} € dans sa tirelire. ${a} a ${ecart} € de plus que ${b}. Combien d'euros a ${b} dans sa tirelire ?`,
+        text: `${a} a ${grand} € dans sa tirelire, ${ecart} € de plus ${que(b)}. Combien d'euros a ${b} ?`,
         format: "short",
         expected: [String(petit)],
         comparator: "number_equal",
@@ -558,7 +578,7 @@ export const problemeBank: TutorBankItemV4[] = [
     microId: "ce1_probleme_deux_etapes",
     difficulty: 4,
     theme: "neutral",
-    text: "Dans la bibliothèque de classe, il y a 83 livres. Le professeur en apporte 18 de plus. Les élèves en empruntent 27. Combien reste-t-il de livres ?",
+    text: "La classe a 83 livres. On en apporte 18, on en emprunte 27. Combien en reste-t-il ?",
     format: "short",
     expected: ["74"],
     comparator: "number_equal",
@@ -580,13 +600,13 @@ export const problemeBank: TutorBankItemV4[] = [
     () => {
       const p = enfant();
       const lieu = rc([
-        { ou: "à la boulangerie", a: "une tarte", b: "un gâteau", vend: "la boulangère", il: "elle", pa: [8, 18], pb: [10, 25] },
-        { ou: "à la librairie", a: "un livre", b: "une BD", vend: "le libraire", il: "il", pa: [5, 20], pb: [8, 15] },
-        { ou: "au marché", a: "un panier de fraises", b: "un melon", vend: "la marchande", il: "elle", pa: [3, 8], pb: [2, 5] },
-        { ou: "à la kermesse", a: "un ticket de manège", b: "une barbe à papa", vend: "le vendeur", il: "il", pa: [2, 5], pb: [2, 4] },
-        { ou: "au magasin de jouets", a: "un ballon", b: "une petite voiture", vend: "le vendeur", il: "il", pa: [3, 15], pb: [3, 12] },
-        { ou: "au zoo", a: "un ticket d'entrée", b: "une peluche de lion", vend: "la caissière", il: "elle", pa: [8, 20], pb: [6, 25] },
-        { ou: "à la papeterie", a: "un cahier", b: "une trousse", vend: "la vendeuse", il: "elle", pa: [2, 6], pb: [4, 15] },
+        { a: "une tarte", b: "un gâteau", pa: [8, 18], pb: [10, 25] },
+        { a: "un livre", b: "une BD", pa: [5, 20], pb: [8, 15] },
+        { a: "des fraises", b: "un melon", pa: [3, 8], pb: [2, 5] },
+        { a: "une crêpe", b: "un jus", pa: [2, 5], pb: [2, 4] },
+        { a: "un ballon", b: "une toupie", pa: [3, 15], pb: [3, 12] },
+        { a: "un ticket", b: "une peluche", pa: [8, 20], pb: [6, 25] },
+        { a: "un cahier", b: "une trousse", pa: [2, 6], pb: [4, 15] },
       ]);
       const prix1 = ri(lieu.pa[0], lieu.pa[1]);
       const prix2 = ri(lieu.pb[0], lieu.pb[1]);
@@ -599,9 +619,9 @@ export const problemeBank: TutorBankItemV4[] = [
         `On rend ${rendu} € à ${p.nom}.`,
       );
       const text = rc([
-        `${maj(lieu.ou)}, ${p.nom} achète ${lieu.a} à ${prix1} € et ${lieu.b} à ${prix2} €. ${maj(p.il)} donne un billet de ${donne} €. Combien ${lieu.vend} doit-${lieu.il} lui rendre ?`,
-        `${maj(lieu.ou)}, ${p.nom} paie ${lieu.a} (${prix1} €) et ${lieu.b} (${prix2} €). ${maj(p.il)} donne un billet de ${donne} €. Combien d'euros lui rend-on ?`,
-        `${maj(lieu.ou)}, ${lieu.a} coûte ${prix1} € et ${lieu.b} ${prix2} €. ${p.nom} prend les deux et paie avec ${donne} €. Combien lui rend-on ?`,
+        `${maj(lieu.a)} : ${prix1} €. ${maj(lieu.b)} : ${prix2} €. ${p.nom} paie les deux avec ${donne} €. Combien lui rend-on ?`,
+        `${p.nom} paie ${lieu.a} (${prix1} €) et ${lieu.b} (${prix2} €) avec ${donne} €. Combien lui rend-on ?`,
+        `${maj(lieu.a)} coûte ${prix1} €, ${lieu.b} ${prix2} €. ${p.nom} achète les deux avec ${donne} €. Combien lui rend-on ?`,
       ]);
       const dessin = rc(["billet", "barre", "barre"] as const);
       return nombreOuQcm(
@@ -631,18 +651,18 @@ export const problemeBank: TutorBankItemV4[] = [
       const plus = ri(3, 25);
       const fin = depart - moins + plus;
       const h = rc([
-        { debut: `Il y avait ${depart} enfants dans le bus de ${p.nom}.`, e1: `Au premier arrêt, ${moins} enfants descendent.`, e2: `Au deuxième arrêt, ${plus} enfants montent.`, q: "Combien d'enfants y a-t-il dans le bus maintenant ?" },
-        { debut: `${p.nom} a ${depart} billes.`, e1: `${maj(p.il)} en perd ${moins} à la récré.`, e2: `Puis ${p.il} en gagne ${plus}.`, q: `Combien de billes a-t-${p.il} maintenant ?` },
-        { debut: `Dans l'aquarium de ${p.nom}, il y a ${depart} poissons.`, e1: `${moins} poissons partent dans un autre bac.`, e2: `Puis on en ajoute ${plus}.`, q: "Combien de poissons y a-t-il maintenant ?" },
-        { debut: `${p.il === "elle" ? "La" : "Le"} pirate ${p.nom} a ${depart} pièces d'or.`, e1: `${maj(p.il)} en dépense ${moins}.`, e2: `Puis ${p.il} en trouve ${plus} dans un coffre.`, q: `Combien de pièces d'or a-t-${p.il} maintenant ?` },
-        { debut: `Sur la branche, il y a ${depart} oiseaux.`, e1: `${moins} oiseaux s'envolent.`, e2: `Puis ${plus} oiseaux arrivent. ${p.nom} les compte.`, q: "Combien d'oiseaux y a-t-il sur la branche ?" },
-        { debut: `${p.nom} a ${depart} images dans son album.`, e1: `${maj(p.il)} en donne ${moins} à son frère.`, e2: `Puis ${p.il} en achète ${plus}.`, q: `Combien d'images a-t-${p.il} maintenant ?` },
-        { debut: `Le dragon garde ${depart} pierres précieuses.`, e1: `${p.nom} le chevalier en prend ${moins}.`, e2: `Puis le dragon en trouve ${plus} autres.`, q: "Combien de pierres le dragon garde-t-il maintenant ?" },
-        { debut: `La fermière a ${depart} œufs.`, e1: `Elle en vend ${moins} à ${p.nom}.`, e2: `Puis ses poules en pondent ${plus}.`, q: "Combien d'œufs a-t-elle maintenant ?" },
-        { debut: `À la piscine, ${depart} enfants nagent.`, e1: `${moins} enfants sortent de l'eau.`, e2: `Puis ${plus} enfants plongent. ${p.nom} recompte.`, q: "Combien d'enfants nagent maintenant ?" },
+        `Le bus transporte ${depart} enfants. ${moins} descendent, puis ${plus} montent. Combien sont dans le bus ?`,
+        `${p.nom} a ${depart} billes. ${maj(p.il)} en perd ${moins}, puis en gagne ${plus}. Combien en a-t-${p.il} ?`,
+        `L'aquarium a ${depart} poissons. On en retire ${moins}, puis en ajoute ${plus}. Combien de poissons maintenant ?`,
+        `Un pirate a ${depart} pièces. Il en dépense ${moins}, puis en trouve ${plus}. Combien en a-t-il ?`,
+        `${depart} oiseaux sont sur une branche. ${moins} s'envolent, puis ${plus} arrivent. Combien sont là maintenant ?`,
+        `${p.nom} a ${depart} images. ${maj(p.il)} en donne ${moins}, puis en achète ${plus}. Combien en a-t-${p.il} ?`,
+        `Un dragon a ${depart} pierres. Il en perd ${moins}, puis en trouve ${plus}. Combien en a-t-il ?`,
+        `La fermière a ${depart} œufs. Elle en vend ${moins}, puis en ramasse ${plus}. Combien en a-t-elle ?`,
+        `À la piscine, ${depart} enfants nagent. ${moins} sortent, puis ${plus} plongent. Combien nagent maintenant ?`,
       ]);
       return nombreOuQcm(
-        `${h.debut} ${h.e1} ${h.e2} ${h.q}`,
+        h,
         fin,
         [depart + moins + plus, depart - moins - plus > 0 ? depart - moins - plus : fin + 10, fin + 10, fin - 1],
         exp(
@@ -670,7 +690,7 @@ export const problemeBank: TutorBankItemV4[] = [
     microId: "ce1_probleme_multiplicatif",
     difficulty: 3,
     theme: "neutral",
-    text: "Paul apporte 8 paquets de biscuits. Il y a 7 biscuits dans chaque paquet. Combien y a-t-il de biscuits en tout ?",
+    text: "Paul apporte 8 paquets de 7 biscuits. Combien y a-t-il de biscuits en tout ?",
     format: "short",
     expected: ["56"],
     comparator: "number_equal",
@@ -692,7 +712,7 @@ export const problemeBank: TutorBankItemV4[] = [
     microId: "ce1_probleme_multiplicatif",
     difficulty: 4,
     theme: "neutral",
-    text: "Il y a 60 élèves de CE1 dans l'école. La directrice constitue des équipes de 5 élèves. Combien y aura-t-il d'équipes ?",
+    text: "60 élèves de CE1 forment des équipes de 5. Combien y aura-t-il d'équipes ?",
     format: "short",
     expected: ["12"],
     comparator: "number_equal",
@@ -733,12 +753,12 @@ export const problemeBank: TutorBankItemV4[] = [
       const dessin = "objet" in pq && pq.objet && parPart <= 5 ? dessinUnPaquet(pq.objet, parPart, `1 ${pq.un}`) : pq.quoi === "billes" ? dessinJetons(parPart) : undefined;
       if (pile()) {
         const text = rc([
-          `${p.nom} a ${nbParts} ${pq.des} de ${parPart} ${pq.quoi}. Combien de ${pq.quoi} en tout ?`,
-          `Il y a ${nbParts} ${pq.des}. Dans chaque ${pq.un}, ${p.nom} compte ${parPart} ${pq.quoi}. Combien de ${pq.quoi} en tout ?`,
-          `${p.nom} prépare ${nbParts} ${pq.des} de ${parPart} ${pq.quoi}. Combien de ${pq.quoi} cela fait-il ?`,
+          `${p.nom} a ${nbParts} ${pq.des} de ${parPart} ${pq.quoi}. Combien ${de(pq.quoi)} en tout ?`,
+          `${nbParts} ${pq.des}, avec ${parPart} ${pq.quoi} dans chaque ${pq.un}. Combien ${de(pq.quoi)} en tout ?`,
+          `${p.nom} prépare ${nbParts} ${pq.des} de ${parPart} ${pq.quoi}. Combien ${de(pq.quoi)} cela fait-il ?`,
         ]);
         return nombreOuQcm(
-          dessin ? `Le dessin montre ce qu'il y a dans 1 ${pq.un}. ${text}` : text,
+          text,
           total,
           [total + parPart, total - parPart, nbParts + parPart, total + 10],
           exp(
@@ -752,9 +772,9 @@ export const problemeBank: TutorBankItemV4[] = [
       }
       return nombreOuQcm(
         rc([
-          `${p.nom} range ${total} ${pq.quoi} par ${pq.des} de ${parPart}. Combien de ${pq.des} remplit-${p.il} ?`,
-          `On met ${parPart} ${pq.quoi} dans chaque ${pq.un}. ${p.nom} a ${total} ${pq.quoi}. Combien de ${pq.des} faut-il ?`,
-          `Avec ${total} ${pq.quoi}, ${p.nom} fait des ${pq.des} de ${parPart}. Combien de ${pq.des} fait-${p.il} ?`,
+          `${p.nom} range ${total} ${pq.quoi} par ${pq.des} de ${parPart}. Combien ${de(pq.des)} remplit-${p.il} ?`,
+          `On met ${parPart} ${pq.quoi} par ${pq.un}. ${p.nom} en a ${total}. Combien ${de(pq.des)} faut-il ?`,
+          `Avec ${total} ${pq.quoi}, ${p.nom} fait des ${pq.des} de ${parPart}. Combien en fait-${p.il} ?`,
         ]),
         nbParts,
         [nbParts + 1, nbParts - 1, total - parPart, parPart],
@@ -782,11 +802,11 @@ export const problemeBank: TutorBankItemV4[] = [
       const c = chose();
       return nombreOuQcm(
         rc([
-          `${enfants} enfants se partagent ${total} ${c.pl}. Chacun doit en avoir autant. Combien chaque enfant en reçoit-il ?`,
+          `${enfants} enfants se partagent ${total} ${c.pl} à parts égales. Combien chacun en reçoit-il ?`,
           `${p.nom} partage ${total} ${c.pl} entre ${enfants} amis, à parts égales. Combien chacun en a-t-il ?`,
-          `Pour la kermesse, ${p.nom} range ${total} ${c.pl} dans ${enfants} boîtes, autant dans chacune. Combien par boîte ?`,
-          `${p.il === "elle" ? "La" : "Le"} pirate ${p.nom} partage ${total} ${c.pl} entre ses ${enfants} matelots, à parts égales. Combien chacun en reçoit-il ?`,
-          `La maîtresse de ${p.nom} distribue ${total} ${c.pl} à ${enfants} tables, autant à chaque table. Combien par table ?`,
+          `${p.nom} range ${total} ${c.pl} dans ${enfants} boîtes, autant dans chacune. Combien par boîte ?`,
+          `Un pirate partage ${total} ${c.pl} entre ${enfants} matelots, à parts égales. Combien pour chacun ?`,
+          `La maîtresse distribue ${total} ${c.pl} à ${enfants} tables, autant à chacune. Combien par table ?`,
         ]),
         parEnfant,
         [parEnfant + 1, parEnfant - 1, total - enfants, enfants],
@@ -815,7 +835,7 @@ export const problemeBank: TutorBankItemV4[] = [
     microId: "ce1_probleme_mixte",
     difficulty: 5,
     theme: "neutral",
-    text: "Abi achète 7 litres d'huile à 2 € le litre. Elle donne 20 € au vendeur. Combien le vendeur doit-il lui rendre ?",
+    text: "Abi achète 7 litres d'huile à 2 € le litre. Elle paie avec 20 €. Combien lui rend-on ?",
     format: "short",
     expected: ["6"],
     comparator: "number_equal",
@@ -839,16 +859,16 @@ export const problemeBank: TutorBankItemV4[] = [
       const combien = ri(2, 9);
       const prix = rc([2, 3, 4, 5] as const);
       const total = combien * prix;
-      const quoi = rc(["crêpes", "cahiers", "bouteilles d'eau", "sachets de bonbons", "ballons", "petites voitures", "tickets de manège", "pots de peinture", "livres de coloriage"]);
-      const lieu = rc(["à la kermesse", "au marché", "à la papeterie", "au magasin", "à la fête de l'école", "à la boutique du zoo"]);
+      const quoi = rc(["crêpes", "cahiers", "stylos", "ballons", "gâteaux", "livres", "peluches", "glaces", "bouquets"]);
+      const lieu = rc(["à la kermesse", "au marché", "à la papeterie", "au magasin", "à la fête", "au zoo"]);
       if (pile(0.5)) {
         const donne = total <= 20 ? 20 : 50;
         const rendu = donne - total;
         return nombreOuQcm(
           rc([
-            `${maj(lieu)}, ${p.nom} achète ${combien} ${quoi} à ${prix} € pièce. ${maj(p.il)} donne un billet de ${donne} €. Combien lui rend-on ?`,
+            `${p.nom} achète ${combien} ${quoi} à ${prix} € pièce. ${maj(p.il)} paie avec ${donne} €. Combien lui rend-on ?`,
             `${p.nom} paie ${combien} ${quoi} à ${prix} € pièce avec ${donne} €. Combien d'euros lui rend-on ?`,
-            `${maj(lieu)}, un objet coûte ${prix} €. ${p.nom} en prend ${combien} et paie avec un billet de ${donne} €. Combien lui rend-on ?`,
+            `${maj(lieu)}, ${combien} ${quoi} à ${prix} € pièce. ${p.nom} paie avec ${donne} €. Combien lui rend-on ?`,
           ]),
           rendu,
           [donne - prix, total, rendu + prix, rendu + 1].filter((x) => x !== rendu),
@@ -867,8 +887,8 @@ export const problemeBank: TutorBankItemV4[] = [
       const dessin = dessinArgent(a);
       return nombreOuQcm(
         rc([
-          `Voici le porte-monnaie de ${p.nom}. ${maj(p.il)} achète ${combien} ${quoi} à ${prix} € pièce. Combien d'euros lui reste-t-il ?`,
-          `${p.nom} a ${a} €. ${maj(lieu)}, ${p.il} achète ${combien} ${quoi} à ${prix} € pièce. Combien lui reste-t-il ?`,
+          `Voici le porte-monnaie de ${p.nom}. ${maj(p.il)} achète ${combien} ${quoi} à ${prix} € pièce. Combien lui reste-t-il ?`,
+          `${p.nom} a ${a} €. ${maj(p.il)} achète ${combien} ${quoi} à ${prix} € pièce. Combien lui reste-t-il ?`,
         ]),
         a - total,
         [a - prix, total, a - total + prix, a - total + 1],
@@ -898,14 +918,14 @@ export const problemeBank: TutorBankItemV4[] = [
         const prixB = rc([1, 2, 5] as const);
         const total = nb * prixA + nb * prixB;
         const objets = rc([
-          ["cahiers", "protège-cahiers", "À la papeterie"],
-          ["crêpes", "jus de fruits", "À la kermesse"],
-          ["tickets de cirque", "sachets de pop-corn", "Au cirque"],
-          ["pots de fleurs", "sachets de graines", "Au marché"],
-          ["ballons", "sifflets", "Au magasin de jouets"],
+          ["cahiers", "stylos", "À la papeterie"],
+          ["crêpes", "jus", "À la kermesse"],
+          ["tickets", "glaces", "Au cirque"],
+          ["plantes", "graines", "Au marché"],
+          ["ballons", "sifflets", "Au magasin"],
         ]);
         return nombreOuQcm(
-          `${objets[2]}, les ${objets[0]} coûtent ${prixA} € pièce et les ${objets[1]} ${prixB} €. ${p.nom} achète ${nb} ${objets[0]} et autant de ${objets[1]}. Combien paie-t-${p.il} en tout ?`,
+          `${objets[2]}, ${p.nom} achète ${nb} ${objets[0]} à ${prixA} € et ${nb} ${objets[1]} à ${prixB} €. Combien paie-t-${p.il} ?`,
           total,
           [nb * prixA + prixB, nb * (prixA + prixB) + nb, total + prixA, prixA + prixB],
           exp(
@@ -926,16 +946,16 @@ export const problemeBank: TutorBankItemV4[] = [
       const extra = ri(2, plus ? 9 : Math.min(9, k * t - 2));
       const r = plus ? k * t + extra : k * t - extra;
       const h = rc([
-        { a: `${p.nom} a ${k} sachets de ${t} billes`, plus: `et ${extra} billes dans sa poche`, moins: `et ${p.il} perd ${extra} billes`, quoi: "billes" },
-        { a: `Pour la fête, ${p.nom} prépare ${k} assiettes de ${t} crêpes`, plus: `et ${extra} crêpes en plus pour la maîtresse`, moins: `mais le chien en mange ${extra}`, quoi: "crêpes" },
-        { a: `Dans la ferme, il y a ${k} enclos de ${t} moutons`, plus: `et ${extra} moutons dans le pré`, moins: `mais ${extra} moutons se sauvent`, quoi: "moutons" },
-        { a: `Pour le jeu de ${p.nom}, il y a ${k} équipes de ${t} enfants`, plus: `et ${extra} arbitres`, moins: `mais ${extra} enfants sont absents`, quoi: "personnes" },
-        { a: `${p.il === "elle" ? "La" : "Le"} pirate ${p.nom} a ${k} coffres de ${t} pièces d'or`, plus: `et ${extra} pièces dans son chapeau`, moins: `mais ${p.il} en perd ${extra} dans la mer`, quoi: "pièces d'or" },
-        { a: `La fusée de ${p.nom} a ${k} étages de ${t} hublots`, plus: `et ${extra} hublots sur le nez`, moins: `mais ${extra} hublots sont cassés`, quoi: plus ? "hublots" : "hublots en bon état" },
+        { a: `${p.nom} a ${k} sachets de ${t} billes`, plus: `et ${extra} en poche`, moins: `mais en perd ${extra}`, quoi: "billes" },
+        { a: `${p.nom} fait ${k} assiettes de ${t} crêpes`, plus: `et ${extra} de plus`, moins: `mais le chien en mange ${extra}`, quoi: "crêpes" },
+        { a: `La ferme a ${k} enclos de ${t} moutons`, plus: `et ${extra} au pré`, moins: `mais ${extra} se sauvent`, quoi: "moutons" },
+        { a: `Il y a ${k} équipes de ${t} enfants`, plus: `et ${extra} arbitres`, moins: `mais ${extra} enfants sont absents`, quoi: plus ? "personnes" : "enfants" },
+        { a: `Un pirate a ${k} coffres de ${t} pièces`, plus: `et ${extra} autres`, moins: `mais en perd ${extra}`, quoi: "pièces" },
+        { a: `La fusée a ${k} étages de ${t} hublots`, plus: `et ${extra} sur le nez`, moins: `mais ${extra} sont cassés`, quoi: plus ? "hublots" : "hublots en bon état" },
       ]);
       const dessin = t <= 5 && pile(0.6) ? dessinJetons(t, undefined, "Dans un seul paquet") : undefined;
       return nombreOuQcm(
-        `${h.a}, ${plus ? h.plus : h.moins}. Combien de ${h.quoi} ${plus ? "en tout" : "reste-t-il"} ?`,
+        `${h.a}, ${plus ? h.plus : h.moins}. ${plus ? `Combien ${de(h.quoi)} en tout ?` : "Combien en reste-t-il ?"}`,
         r,
         [k * t, plus ? k + t + extra : k * t + extra, r + t, r + 1].filter((x) => x !== r && x > 0),
         exp(
@@ -996,7 +1016,7 @@ export const problemeBank: TutorBankItemV4[] = [
       const barre = dessinBarre({ total: "?", parts: [{ label: h.p1, value: String(a) }, { label: h.p2, value: String(b) }] });
       if (famille === "que_represente") {
         return qcmTexte(
-          `${h.avant(a, b)} Sur ce schéma, que représente le point d'interrogation au-dessus de la barre ?`,
+          `${h.avant(a, b)} Que montre le « ? » en haut ?`,
           `le nombre total de ${h.quoi}`,
           [`les ${h.quoi} « ${h.p1} » seulement`, `les ${h.quoi} « ${h.p2} » seulement`, `la différence entre les deux`],
           exp(
@@ -1010,7 +1030,7 @@ export const problemeBank: TutorBankItemV4[] = [
       }
       if (famille === "quel_calcul") {
         return qcmTexte(
-          `${h.avant(a, b)} Avec ce schéma, quel calcul donne le nombre total de ${h.quoi} ?`,
+          `${h.avant(a, b)} Quel calcul donne le total ?`,
           `${a} + ${b}`,
           [a > b ? `${a} - ${b}` : `${b} - ${a}`, `${a} × ${b}`, `${a} + ${a}`],
           exp(
@@ -1023,7 +1043,7 @@ export const problemeBank: TutorBankItemV4[] = [
         );
       }
       return nombreOuQcm(
-        `${h.avant(a, b)} Le schéma montre l'histoire. Quelle valeur remplace le point d'interrogation ?`,
+        `${h.avant(a, b)} Quel nombre remplace le « ? » ?`,
         t,
         [t + 10, t - 10, Math.abs(a - b)],
         exp(
@@ -1057,7 +1077,7 @@ export const problemeBank: TutorBankItemV4[] = [
       );
       if (famille === "valeur") {
         return nombreOuQcm(
-          `${h.total(t)} ${rc([`Sur le schéma, la case « ${h.p1} » vaut ${a}.`, `La partie « ${h.p1} » compte ${a}.`])} ${rc(["Quelle valeur remplace le point d'interrogation ?", `Que vaut la case « ${h.p2} » ? Aide-toi du schéma.`])}`,
+          `${h.total(t)} ${rc(["Quel nombre remplace le « ? » ?", `Que vaut la case « ${h.p2} » ?`, `« ${h.p1} » : ${a}. Que vaut le « ? » ?`])}`,
           b,
           [t + a, b + 10, b - 10],
           explication,
@@ -1066,7 +1086,7 @@ export const problemeBank: TutorBankItemV4[] = [
       }
       if (famille === "quel_calcul") {
         return qcmTexte(
-          `${h.total(t)} Sur le schéma, la case « ${h.p1} » vaut ${a}. Quel calcul permet de trouver le point d'interrogation ?`,
+          `${h.total(t)} Quel calcul trouve le « ? » ?`,
           `${t} - ${a}`,
           [`${t} + ${a}`, `${a} - ${t}`, `${t} × ${a}`],
           explication,
@@ -1074,14 +1094,14 @@ export const problemeBank: TutorBankItemV4[] = [
         );
       }
       return qcmTexte(
-        `Ce schéma raconte une histoire de ${h.quoi}. Quelle question cherche-t-on ?`,
-        `combien de ${h.quoi} sont « ${h.p2} »`,
-        [`combien de ${h.quoi} il y a en tout`, `combien de ${h.quoi} sont « ${h.p1} »`, `combien de ${h.quoi} en plus`],
+        `Ce schéma raconte une histoire ${de(h.quoi)}. Que cherche-t-on ?`,
+        `combien ${de(h.quoi)} sont « ${h.p2} »`,
+        [`combien ${de(h.quoi)} il y a en tout`, `combien ${de(h.quoi)} sont « ${h.p1} »`, `combien ${de(h.quoi)} en plus`],
         exp(
           "Sur un schéma en barre, le « ? » marque ce qu'on cherche.",
           "On regarde où est placé le point d'interrogation.",
           `Le tout (${t}) et la partie « ${h.p1} » (${a}) sont connus. Le « ? » est sur la partie « ${h.p2} ».`,
-          `On cherche combien de ${h.quoi} sont « ${h.p2} ».`,
+          `On cherche combien ${de(h.quoi)} sont « ${h.p2} ».`,
         ),
         barre,
       );
@@ -1102,7 +1122,7 @@ export const problemeBank: TutorBankItemV4[] = [
     microId: "ce1_probleme_reponse",
     difficulty: 3,
     theme: "neutral",
-    text: "Un problème demande combien il reste de billes. Un élève écrit seulement « 46 ». Que manque-t-il à sa réponse ?",
+    text: "On demande combien il reste de billes. Un élève répond seulement « 46 ». Que manque-t-il ?",
     format: "qcm",
     choices: [
       "l'unité : il reste 46 billes",
@@ -1141,8 +1161,8 @@ export const problemeBank: TutorBankItemV4[] = [
       if (famille === "unite") {
         return qcmTexte(
           rc([
-            `${p.nom} compte ses ${c.pl} : la question est « Combien de ${c.pl} a-t-${p.il} ? ». Le calcul donne ${n}. Que doit-${p.il} écrire ?`,
-            `Problème : « Combien de ${c.pl} ${p.nom} a-t-${p.il} ? ». Le calcul donne ${n}. Quelle réponse est la bonne ?`,
+            `« Combien ${de(c.pl)} a ${p.nom} ? » Le calcul donne ${n}. Que faut-il écrire ?`,
+            `Problème : « Combien ${de(c.pl)} ${p.nom} a-t-${p.il} ? » Le calcul donne ${n}. Quelle réponse choisir ?`,
           ]),
           `${n} ${c.pl}`,
           [String(n), `${n} €`, `${n} enfants`, `${n} cm`],
@@ -1152,8 +1172,8 @@ export const problemeBank: TutorBankItemV4[] = [
       }
       return qcmTexte(
         rc([
-          `${p.nom} a trouvé ${n}. La question était : « Combien de ${c.pl} reste-t-il ? ». Quelle phrase répond à la question ?`,
-          `La question : « Combien de ${c.pl} reste-t-il ? ». ${p.nom} a calculé ${n}. Quelle est la bonne phrase-réponse ?`,
+          `${p.nom} trouve ${n}. La question : « Combien ${de(c.pl)} reste-t-il ? » Quelle phrase répond ?`,
+          `« Combien ${de(c.pl)} reste-t-il ? » ${p.nom} a calculé ${n}. Quelle phrase-réponse choisir ?`,
         ]),
         `Il reste ${n} ${c.pl}.`,
         [`Il reste ${n}.`, `Il y a ${n} ${c.pl} en plus.`, `Il reste ${n} €.`, `${maj(p.il)} a ${n + 1} ${c.pl}.`],
@@ -1171,20 +1191,20 @@ export const problemeBank: TutorBankItemV4[] = [
     () => {
       const p = enfant();
       const cas = rc([
-        { histoire: `${p.nom} a 50 €. ${maj(p.il)} dépense une partie à la kermesse.`, question: "Combien d'euros lui reste-t-il ?", bonne: (n: number) => `Il lui reste ${n} €.`, faux: (n: number) => [`Il lui reste ${n} billes.`, `${maj(p.il)} a dépensé ${n} €.`, `Il lui reste ${n}.`] },
-        { histoire: `Dans la classe de ${p.nom}, il y a des filles et des garçons.`, question: "Combien y a-t-il de garçons ?", bonne: (n: number) => `Il y a ${n} garçons.`, faux: (n: number) => [`Il y a ${n} enfants.`, `Il y a ${n} filles.`, `${n}.`] },
-        { histoire: `La ficelle de ${p.nom} mesure 90 cm. ${maj(p.il)} en coupe un morceau.`, question: "Quelle longueur de ficelle reste-t-il ?", bonne: (n: number) => `Il reste ${n} cm de ficelle.`, faux: (n: number) => [`Il reste ${n} ficelles.`, `${maj(p.il)} a coupé ${n} cm.`, `Il reste ${n} €.`] },
-        { histoire: `Le livre de ${p.nom} a des pages. ${maj(p.il)} en a lu une partie.`, question: "Combien de pages lui reste-t-il à lire ?", bonne: (n: number) => `Il lui reste ${n} pages à lire.`, faux: (n: number) => [`${maj(p.il)} a lu ${n} pages.`, `Il lui reste ${n} livres.`, `${n} minutes.`] },
-        { histoire: `${p.il === "elle" ? "La" : "Le"} pirate ${p.nom} partage son trésor avec ses matelots.`, question: "Combien de pièces d'or reçoit chaque matelot ?", bonne: (n: number) => `Chaque matelot reçoit ${n} pièces d'or.`, faux: (n: number) => [`Il y a ${n} matelots.`, `Chaque matelot reçoit ${n} €.`, `${p.nom} garde ${n} pièces.`] },
-        { histoire: `Au zoo, ${p.nom} compte les animaux de deux enclos.`, question: "Combien de singes y a-t-il en tout ?", bonne: (n: number) => `Il y a ${n} singes en tout.`, faux: (n: number) => [`Il y a ${n} enclos.`, `Il y a ${n} singes de plus.`, `${n}.`] },
-        { histoire: `Le jardinier range des pots de fleurs sur des étagères.`, question: "Combien d'étagères faut-il ?", bonne: (n: number) => `Il faut ${n} étagères.`, faux: (n: number) => [`Il faut ${n} pots.`, `Il y a ${n} fleurs.`, `${n}.`] },
-        { histoire: `Pic le paille-en-queue mange des graines toute la journée. ${p.nom} les compte.`, question: "Combien de graines Pic a-t-il mangées ?", bonne: (n: number) => `Pic a mangé ${n} graines.`, faux: (n: number) => [`Il reste ${n} graines.`, `Pic a mangé ${n} fois.`, `${n}.`] },
+        { histoire: `${p.nom} a 50 € et en dépense une partie.`, question: "Combien d'euros lui reste-t-il ?", bonne: (n: number) => `Il lui reste ${n} €.`, faux: (n: number) => [`Il lui reste ${n} billes.`, `${maj(p.il)} a dépensé ${n} €.`, `Il lui reste ${n}.`] },
+        { histoire: "La classe a des filles et des garçons.", question: "Combien de garçons ?", bonne: (n: number) => `Il y a ${n} garçons.`, faux: (n: number) => [`Il y a ${n} enfants.`, `Il y a ${n} filles.`, `${n}.`] },
+        { histoire: "On coupe une ficelle de 90 cm.", question: "Quelle longueur reste-t-il ?", bonne: (n: number) => `Il reste ${n} cm de ficelle.`, faux: (n: number) => [`Il reste ${n} ficelles.`, `${maj(p.il)} a coupé ${n} cm.`, `Il reste ${n} €.`] },
+        { histoire: `${p.nom} lit un livre.`, question: "Combien de pages lui reste-t-il à lire ?", bonne: (n: number) => `Il lui reste ${n} pages à lire.`, faux: (n: number) => [`${maj(p.il)} a lu ${n} pages.`, `Il lui reste ${n} livres.`, `${n} minutes.`] },
+        { histoire: "Un pirate partage son or.", question: "Combien de pièces d'or reçoit chaque matelot ?", bonne: (n: number) => `Chaque matelot reçoit ${n} pièces d'or.`, faux: (n: number) => [`Il y a ${n} matelots.`, `Chaque matelot reçoit ${n} €.`, `${p.nom} garde ${n} pièces.`] },
+        { histoire: "Au zoo, deux enclos.", question: "Combien de singes en tout ?", bonne: (n: number) => `Il y a ${n} singes en tout.`, faux: (n: number) => [`Il y a ${n} enclos.`, `Il y a ${n} singes de plus.`, `${n}.`] },
+        { histoire: "Le jardinier range des pots sur des étagères.", question: "Combien d'étagères faut-il ?", bonne: (n: number) => `Il faut ${n} étagères.`, faux: (n: number) => [`Il faut ${n} pots.`, `Il y a ${n} fleurs.`, `${n}.`] },
+        { histoire: "Pic l'oiseau mange des graines.", question: "Combien de graines Pic a-t-il mangées ?", bonne: (n: number) => `Pic a mangé ${n} graines.`, faux: (n: number) => [`Il reste ${n} graines.`, `Pic a mangé ${n} fois.`, `${n}.`] },
       ]);
       const n = ri(4, 45);
       return qcmTexte(
         rc([
-          `${cas.histoire} ${cas.question} Le calcul donne ${n}. Quelle phrase répond à la question ?`,
-          `${cas.histoire} On demande : « ${cas.question} » ${p.nom} trouve ${n}. Quelle est la bonne réponse ?`,
+          `« ${cas.question} » Le calcul donne ${n}. Quelle phrase répond ?`,
+          `${cas.histoire} « ${cas.question} » ${p.nom} trouve ${n}. Quelle réponse ?`,
         ]),
         cas.bonne(n),
         cas.faux(n),
@@ -1213,15 +1233,15 @@ export const problemeBank: TutorBankItemV4[] = [
     microId: "ce1_probleme_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Un album peut contenir 350 photos. Lucie a 287 photos et Léo en a 72. L'album peut-il contenir toutes leurs photos ?",
+    text: "Un album a 350 places. Lucie a 287 photos, Léo 72. Tout rentre-t-il dans l'album ?",
     format: "qcm",
     choices: [
-      "non, il en manque de la place pour 9 photos",
+      "non, il manque de la place pour 9 photos",
       "oui, il reste même de la place",
       "oui, tout juste",
       "on ne peut pas savoir",
     ],
-    expected: ["non, il en manque de la place pour 9 photos"],
+    expected: ["non, il manque de la place pour 9 photos"],
     comparator: "mcq_exact",
     hint: "Additionne les deux tas, puis compare à 350.",
     explanation: exp(
@@ -1230,7 +1250,12 @@ export const problemeBank: TutorBankItemV4[] = [
       "287 + 72 = 359. Or l'album ne contient que 350 photos : il en manque de la place pour 359 - 350 = 9.",
       "Non : il manque de la place pour 9 photos.",
     ),
-    tags: ["ce1", "probleme", "defi", "qcm"],
+    canvas: dessinBarre({
+      total: "?",
+      parts: [{ label: "Lucie", value: "287" }, { label: "Léo", value: "72" }],
+      questionLabel: "L'album : 350 places",
+    }),
+    tags: ["ce1", "probleme", "defi", "canvas", "qcm"],
   },
   {
     kind: "fixed",
@@ -1241,7 +1266,7 @@ export const problemeBank: TutorBankItemV4[] = [
     microId: "ce1_probleme_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Un élève cherche combien de jetons rouges il y a dans une boite de 40 jetons. Il trouve 52. Que doit-il en penser ?",
+    text: "Dans une boite de 40 jetons, un élève compte 52 jetons rouges. Qu'en penser ?",
     format: "qcm",
     choices: [
       "c'est impossible : une partie ne peut pas dépasser le tout",
@@ -1258,7 +1283,8 @@ export const problemeBank: TutorBankItemV4[] = [
       "La boite contient 40 jetons en tout. Les rouges en font partie : ils ne peuvent pas être 52. Le calcul est donc à refaire.",
       "C'est impossible : une partie ne peut pas dépasser le tout.",
     ),
-    tags: ["ce1", "probleme", "defi", "piege", "qcm"],
+    canvas: dessinJetons(40, undefined, "La boite : 40 jetons en tout."),
+    tags: ["ce1", "probleme", "defi", "piege", "canvas", "qcm"],
   },
   {
     kind: "template",
@@ -1279,11 +1305,12 @@ export const problemeBank: TutorBankItemV4[] = [
         ? place - a + randomInt(5, 40)
         : Math.max(5, place - a - randomInt(5, 40));
       const total = a + b;
+      const [x, y] = shuffle(PRENOMS).slice(0, 2);
       const bonne = depasse
         ? `non, il manque de la place pour ${total - place}`
         : `oui, il reste de la place pour ${place - total}`;
       return {
-        text: `Une boite peut contenir ${place} images. ${randomChoice(PRENOMS)} en a ${a} et ${randomChoice(PRENOMS)} en a ${b}. Peut-on tout ranger dans la boite ?`,
+        text: `Une boite a ${place} places. ${x} a ${a} images, ${y} ${b}. Tout rentre-t-il dans la boite ?`,
         format: "qcm",
         choices: makeChoices(bonne, [
           depasse
@@ -1301,6 +1328,9 @@ export const problemeBank: TutorBankItemV4[] = [
           `${a} + ${b} = ${total}. La boite contient ${place} images : ${depasse ? `il manque de la place pour ${total - place}` : `il reste de la place pour ${place - total}`}.`,
           bonne.charAt(0).toUpperCase() + bonne.slice(1) + ".",
         ),
+        ...(pile(0.6)
+          ? { canvas: dessinBarre({ total: "?", parts: [{ label: x, value: String(a) }, { label: y, value: String(b) }], questionLabel: `La boite : ${place} places` }) }
+          : {}),
       };
     },
   },

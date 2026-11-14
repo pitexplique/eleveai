@@ -217,19 +217,19 @@ const grandAngle = () => randomChoice([25, 35, 45, -25, -35, -45]);
 const SCENES_FIG: ((e: Enfant) => string)[] = [
   (e) => `${e.n} a découpé cette forme dans du carton.`,
   (e) => `${e.n} a dessiné cette forme au tableau.`,
-  () => "La maîtresse montre cette forme à la classe.",
+  () => "La maîtresse montre cette forme.",
   (e) => `${e.n} a trouvé cette forme dans sa trousse.`,
-  () => "Pic le paille-en-queue a posé cette forme dans la cour.",
+  () => "Pic a posé cette forme dans la cour.",
   (e) => `${e.n} colle cette forme sur son cahier.`,
-  () => "La boulangère a fait un biscuit de cette forme.",
+  () => "La boulangère a fait ce biscuit.",
   (e) => `${e.n} a peint cette forme sur une feuille.`,
   (e) => `${e.n} a fait cette forme en pâte à modeler.`,
-  () => "Ti Margo a dessiné cette forme dans le sable.",
+  () => "Ti Margo a dessiné cette forme.",
   (e) => `${e.n} a tracé cette forme à la craie.`,
-  () => "Le pâtissier a coupé un gâteau de cette forme.",
-  (e) => `${e.n} a trouvé cette forme dans la boîte de jeux.`,
-  (e) => `${e.n} a vu cette forme sur la porte du château.`,
-  () => "Le pirate a dessiné cette forme sur sa carte.",
+  () => "Le pâtissier a coupé ce gâteau.",
+  (e) => `${e.n} a trouvé cette forme dans ses jeux.`,
+  (e) => `${e.n} a vu cette forme sur une porte.`,
+  () => "Le pirate a dessiné cette forme.",
   (e) => `${e.n} a cousu cette forme sur son sac.`,
 ];
 const scene = () => randomChoice(SCENES_FIG)(enfant());
@@ -237,7 +237,7 @@ const scene = () => randomChoice(SCENES_FIG)(enfant());
 const TOURNURES_NOM = [
   "Quelle est cette figure ?",
   "Comment s'appelle cette figure ?",
-  "Quel est le nom de cette figure ?",
+  "Quel est son nom ?",
   "Quelle figure est-ce ?",
 ];
 
@@ -789,7 +789,7 @@ export const figuresSolidesBank: TutorBankItemV4[] = [
         `${e.n} trace ${NOM_FIG[f]} à la règle.`,
         `La maîtresse montre ${NOM_FIG[f]}.`,
         `${e.n} colle ${NOM_FIG[f]} sur son cahier.`,
-        `Le pâtissier coupe un biscuit en forme de ${mot}.`,
+        `Le pâtissier coupe ${NOM_FIG[f]} dans la pâte.`,
       ]);
       const question = randomChoice([
         `Combien de ${cherche} a ce ${mot} ?`,
@@ -1671,15 +1671,15 @@ export const figuresSolidesBank: TutorBankItemV4[] = [
         `${e.n} trace un carré sur son cahier.`,
         `${e.n} dessine un carré sur le quadrillage.`,
         `Pic veut un nid carré sur le quadrillage.`,
-        `${e.n} fait une fenêtre carrée pour son château.`,
-        `La maîtresse trace un carré au tableau quadrillé.`,
-        `${e.n} dessine un tapis carré pour sa poupée.`,
+        `${e.n} fait une fenêtre carrée.`,
+        `La maîtresse trace un carré au tableau.`,
+        `${e.n} dessine un tapis carré.`,
       ]);
       return {
         text: `${debut} Un côté fait ${cote} carreaux. ${randomChoice([
           "Et les autres côtés ?",
           "Combien pour chaque autre côté ?",
-          "Combien de carreaux pour le côté d'en face ?",
+          "Combien pour le côté d'en face ?",
         ])}`,
         format: "short",
         expected: [String(cote)],
@@ -1819,7 +1819,7 @@ export const figuresSolidesBank: TutorBankItemV4[] = [
       const e = enfant();
       return {
         text: `${randomChoice([
-          `${e.n} veut refaire ce dessin sur son cahier.`,
+          `${e.n} veut refaire ce dessin.`,
           "La maîtresse a colorié ces carreaux.",
           "Pic a colorié des carreaux avec son bec.",
           `${e.n} recopie ce dessin pour sa mamie.`,
@@ -1914,7 +1914,7 @@ export const figuresSolidesBank: TutorBankItemV4[] = [
         text: `${e.n} fait ${objet} avec ${T} et ${C}. ${randomChoice([
           "Combien de côtés en tout ?",
           "Combien de côtés compte-t-on ?",
-          "Compte tous les côtés. Combien y en a-t-il ?",
+          "Compte tous les côtés.",
         ])}`,
         format: "short",
         expected: [String(total)],

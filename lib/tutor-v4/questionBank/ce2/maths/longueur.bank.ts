@@ -242,7 +242,7 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "ce2_longueur_mesurer",
     difficulty: 3,
     theme: "neutral",
-    text: "Léa a mal posé sa règle : le début du segment tombe sur la graduation 2 et la fin sur la graduation 9. Combien mesure le segment, en cm ?",
+    text: "Léa a mal posé sa règle : le segment va du 2 au 9. Combien mesure-t-il, en cm ?",
     format: "short",
     expected: ["7"],
     comparator: "number_equal",
@@ -264,7 +264,7 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "ce2_longueur_mesurer",
     difficulty: 2,
     theme: "neutral",
-    text: "Tu veux tracer un segment de 8 cm. Tu as marqué un point sur la graduation 0 de ta règle. Que fais-tu ensuite ?",
+    text: "Pour tracer 8 cm, tu as marqué un point sur le 0 de ta règle. Que fais-tu ensuite ?",
     format: "qcm",
     choices: [
       "je marque un point sur la graduation 8 et je relie les deux points",
@@ -321,7 +321,7 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "ce2_longueur_comparer",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève dit : « 950 m, c'est plus long que 1 km, parce que 950 est plus grand que 1. » A-t-il raison ?",
+    text: "Léo dit : « 950 m, c'est plus long que 1 km, car 950 est plus grand que 1. » A-t-il raison ?",
     format: "qcm",
     choices: [
       "non, 1 km vaut 1000 m",
@@ -349,7 +349,7 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "ce2_longueur_comparer",
     difficulty: 3,
     theme: "reunion",
-    text: "Le Piton des Neiges culmine à environ 3071 m, le Piton de la Fournaise à environ 2632 m. Lequel est le plus haut ?",
+    text: "Piton des Neiges : environ 3071 m. Piton de la Fournaise : environ 2632 m. Lequel est le plus haut ?",
     format: "qcm",
     choices: [
       "le Piton des Neiges",
@@ -531,7 +531,7 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "ce2_longueur_probleme",
     difficulty: 2,
     theme: "reunion",
-    text: "Pour la fête de l'école, on décore la cour avec un ruban. On a un rouleau de 3 m et un autre de 250 cm. Combien de centimètres de ruban en tout ?",
+    text: "Pour la fête, deux rubans : 3 m et 250 cm. Combien de centimètres en tout ?",
     format: "short",
     expected: ["550"],
     comparator: "number_equal",
@@ -553,7 +553,7 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "ce2_longueur_probleme",
     difficulty: 4,
     theme: "neutral",
-    text: "Une corde mesure 2 m. On coupe un morceau de 65 cm, puis un autre de 45 cm. Combien de centimètres reste-t-il ?",
+    text: "Une corde mesure 2 m. On coupe 65 cm, puis 45 cm. Combien de centimètres reste-t-il ?",
     format: "short",
     expected: ["90"],
     comparator: "number_equal",
@@ -582,7 +582,7 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "ce2_longueur_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Trois élèves mesurent le même segment. Léa écrit 12 cm, Kevin écrit 120 mm, Malia écrit 1 dm 2 cm. Qui a raison ?",
+    text: "Pour le même segment, Léa écrit 12 cm, Kevin 120 mm, Malia 1 dm 2 cm. Qui a raison ?",
     format: "qcm",
     choices: [
       "les trois : c'est la même longueur",
@@ -610,7 +610,7 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "ce2_longueur_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Tu as un ruban de 1 m. Tu coupes trois morceaux de 25 cm. Peux-tu encore couper un quatrième morceau de 25 cm ?",
+    text: "Un ruban de 1 m. Tu coupes trois morceaux de 25 cm. Peux-tu en couper un quatrième ?",
     format: "qcm",
     choices: [
       "oui, tout juste",
@@ -725,19 +725,19 @@ const LONGUEUR: Grandeur = {
 
 const A_MESURER: readonly string[] = [
   "le crayon de Zoé",
-  "la chenille du jardin",
-  "la plume de Pic le paille-en-queue",
-  "la clé du coffre au trésor",
+  "la chenille",
+  "la plume de Pic",
+  "la clé du trésor",
   "la gomme de Téo",
   "le ver de terre",
-  "la petite voiture de Ravi",
-  "la fourchette de la dînette",
+  "la voiture de Ravi",
+  "la fourchette",
   "le pinceau de Nina",
   "la feuille du marronnier",
   "la sauterelle",
   "le bâton de colle",
-  "le coquillage de la plage",
-  "la carte au trésor pliée",
+  "le coquillage",
+  "la carte au trésor",
 ];
 
 const regle = (min: number, max: number, debut: number, fin: number | null) =>
@@ -768,10 +768,9 @@ function lireRegle(debutA0: boolean): Q {
           "Combien de centimètres mesure-t-il ?",
         ])}`.replace(/-t-il/, /^la /.test(quoi) ? "-t-elle" : "-t-il")
       : `${pick([
-          `${p.nom} a mal posé sa règle : ${quoi} commence à la graduation ${debut} et finit à la graduation ${fin}.`,
-          `Sur la règle, ${quoi} va de la graduation ${debut} à la graduation ${fin}.`,
-          `${p.nom} mesure ${quoi}. Le début n'est pas sur le 0 : il est sur le ${debut}, et la fin sur le ${fin}.`,
-        ])} ${pick(["Combien mesure-t-il vraiment, en cm ?", "Quelle est sa vraie longueur ?", "Combien de centimètres mesure-t-il ?"])}`.replace(
+          `Règle mal posée : ${quoi} va de ${debut} à ${fin}.`,
+          `Sur la règle, ${quoi} va du ${debut} au ${fin}.`,
+        ])} ${pick(["Combien mesure-t-il vraiment ?", "Quelle est sa vraie longueur ?", "Combien de centimètres mesure-t-il ?"])}`.replace(
           /-t-il/,
           /^la /.test(quoi) ? "-t-elle" : "-t-il",
         ),
@@ -794,14 +793,14 @@ function tracer(depart: number): Q {
   const fin = depart + n;
   const p = quelquun();
   const dessin = depart > 0 || Math.random() < 0.5;
-  const objet = pick(["un segment", "le mât du bateau pirate", "la tige d'une fleur", "le bord d'une carte au trésor", "la queue d'un dragon", "une ligne de départ"]);
+  const objet = pick(["un segment", "le mât du bateau", "une tige de fleur", "le bord d'une carte", "la queue d'un dragon", "une ligne"]);
   return {
     text:
       depart === 0
-        ? `${p.nom} veut tracer ${objet} de ${n} cm. ${maj(p.il)} part de la graduation 0. ${pick(["Où doit-" + p.il + " s'arrêter ?", "Sur quelle graduation doit-" + p.il + " s'arrêter ?"])}`
-        : `La règle de ${p.nom} est cassée : elle commence à la graduation ${depart}. ${maj(p.il)} veut tracer ${objet} de ${n} cm en partant de ${depart}. ${pick([
-            "Sur quelle graduation doit-" + p.il + " s'arrêter ?",
-            "Où se trouve la fin du tracé ?",
+        ? `${p.nom} trace ${objet} de ${n} cm à partir du 0. ${pick([`Où doit-${p.il} s'arrêter ?`, `Sur quelle graduation s'arrête-t-${p.il} ?`])}`
+        : `Règle cassée : ${p.nom} trace ${objet} de ${n} cm à partir du ${depart}. ${pick([
+            `Où s'arrête-t-${p.il} ?`,
+            "Où finit le tracé ?",
           ])}`,
     format: "qcm",
     choices: choix(`sur le ${fin}`, [`sur le ${n}`, `sur le ${fin + 1}`, `sur le ${fin - 1}`, `sur le ${fin + 2}`, `sur le ${n - depart > 0 ? n - depart : fin + 3}`]),
@@ -824,7 +823,7 @@ function lireMillimetres(): Q {
   const enMm = Math.random() < 0.5;
   const bonne = enMm ? `${cm * 10 + mm} mm` : `${cm} cm ${mm} mm`;
   return {
-    text: `On mesure ${quoi}. La fin tombe ${mm} petits traits après la graduation ${cm}. Les petits traits sont des millimètres. ${
+    text: `On mesure ${quoi}. La fin est ${mm} petits traits après le ${cm}. ${
       enMm ? "Combien mesure-t-il en millimètres ?" : "Quelle est sa longueur ?"
     }`.replace("-t-il", /^la /.test(quoi) ? "-t-elle" : "-t-il"),
     format: "qcm",
@@ -851,16 +850,16 @@ function lireMillimetres(): Q {
 --------------------------------------------------------- */
 
 const BOUT_A_BOUT: readonly { qui: (p: string) => string; a: string; b: string }[] = [
-  { qui: (p) => `Pour décorer la classe, ${p} accroche deux guirlandes bout à bout.`, a: "La guirlande dorée", b: "la rouge" },
-  { qui: (p) => `${p} attache deux cordes pour faire une grande corde à sauter.`, a: "La corde bleue", b: "la verte" },
-  { qui: () => "Le jardinier relie deux tuyaux d'arrosage.", a: "Le premier tuyau", b: "le second" },
-  { qui: (p) => `${p} colle deux bandes de papier pour la frise de la classe.`, a: "La bande jaune", b: "l'orange" },
-  { qui: () => "Les pirates nouent deux cordes pour descendre le coffre dans la cale.", a: "La corde du capitaine", b: "celle du mousse" },
-  { qui: (p) => `Pour la queue de son cerf-volant, ${p} met bout à bout deux rubans.`, a: "Le ruban rose", b: "le violet" },
-  { qui: () => "Au cirque, on attache deux fils pour le funambule.", a: "Le fil rouge", b: "le blanc" },
-  { qui: (p) => `${p} fabrique un grand collier avec deux morceaux de fil.`, a: "Le fil doré", b: "le fil argenté" },
-  { qui: () => "Pour la course en sac, la maîtresse trace une piste en deux morceaux.", a: "Le premier morceau", b: "le second" },
-  { qui: () => "Le dragon du carnaval a une queue faite de deux morceaux de tissu.", a: "Le morceau vert", b: "le jaune" },
+  { qui: (p) => `${p} accroche deux guirlandes.`, a: "La dorée", b: "la rouge" },
+  { qui: (p) => `${p} attache deux cordes.`, a: "La bleue", b: "la verte" },
+  { qui: () => "Le jardinier relie deux tuyaux.", a: "Le premier", b: "le second" },
+  { qui: (p) => `${p} colle deux bandes de papier.`, a: "La jaune", b: "l'orange" },
+  { qui: () => "Les pirates nouent deux cordes.", a: "La rouge", b: "la noire" },
+  { qui: (p) => `${p} noue deux rubans.`, a: "Le rose", b: "le violet" },
+  { qui: () => "Au cirque, on attache deux fils.", a: "Le rouge", b: "le blanc" },
+  { qui: (p) => `${p} relie deux fils.`, a: "Le doré", b: "l'argenté" },
+  { qui: () => "La piste a deux morceaux.", a: "Le premier", b: "le second" },
+  { qui: () => "La queue du dragon : deux morceaux.", a: "Le vert", b: "le jaune" },
 ];
 
 function longueurTotale(e: Etoile): Q {
@@ -871,11 +870,9 @@ function longueurTotale(e: Etoile): Q {
   const total = m * 100 + cm;
   const bonne = `${total} cm`;
   return {
-    text: `${h.qui(p.nom)} ${pick([`${h.a} mesure ${m} m, ${h.b} ${cm} cm.`, `${h.a} fait ${m} m et ${h.b} ${cm} cm.`])} ${pick([
-      "Quelle longueur en tout, en centimètres ?",
-      "Combien de centimètres cela fait-il bout à bout ?",
-      "Quelle est la longueur totale, en cm ?",
-      "Écris la longueur totale en centimètres.",
+    text: `${h.qui(p.nom)} ${pick([`${h.a} mesure ${m} m, ${h.b} ${cm} cm.`, `${h.a} fait ${m} m, ${h.b} ${cm} cm.`])} ${pick([
+      "Combien de centimètres en tout ?",
+      "Quelle longueur totale, en cm ?",
     ])}`,
     format: "qcm",
     choices: choix(bonne, [`${m + cm} cm`, `${Number(`${m}${cm}`)} cm`, `${m * 10 + cm} cm`, `${total + 100} cm`, `${total + 10} cm`]),
@@ -899,10 +896,10 @@ function combienDePlus(): Q {
   const ecart = m * 100 - autre;
   const bonne = `${ecart} cm`;
   return {
-    text: `${maj(s.le)} de ${p.nom} mesure ${m} m. ${s.f ? "Celle" : "Celui"} de ${q.nom} mesure ${autre} cm. ${pick([
-      `Combien de centimètres ${s.f ? "celle" : "celui"} de ${p.nom} a-t-${s.f ? "elle" : "il"} de plus ?`,
-      `Quelle est la différence de longueur, en centimètres ?`,
-      `Combien de centimètres manque-t-il à ${s.f ? "celle" : "celui"} de ${q.nom} ?`,
+    text: `${maj(s.le)} de ${p.nom} mesure ${m} m, ${s.f ? "celle" : "celui"} de ${q.nom} ${autre} cm. ${pick([
+      "Combien de centimètres d'écart ?",
+      "Quel est l'écart, en cm ?",
+      `Combien manque-t-il à ${q.nom} ?`,
     ])}`,
     format: "qcm",
     choices: choix(bonne, [`${Math.abs(autre - m)} cm`, `${ecart + 10} cm`, `${m * 100 + autre} cm`, `${ecart - 5} cm`, `${100 - (autre % 100)} cm`].filter((x) => x !== bonne)),
@@ -921,7 +918,7 @@ function combienDePlus(): Q {
 const COUPES: readonly { tout: string; quoi: string }[] = [
   { tout: "une planche", quoi: "pour la cabane" },
   { tout: "une corde", quoi: "pour la balançoire" },
-  { tout: "un rouleau de ruban", quoi: "pour les paquets cadeaux" },
+  { tout: "un ruban", quoi: "pour les paquets cadeaux" },
   { tout: "une bande de tissu", quoi: "pour les costumes du spectacle" },
   { tout: "un fil de laine", quoi: "pour les bracelets" },
   { tout: "une guirlande", quoi: "pour le sapin et la porte" },
@@ -938,9 +935,9 @@ function resteApresCoupes(): Q {
   const p = quelquun();
   const bonne = `${reste} cm`;
   return {
-    text: `${p.nom} a ${c.tout} de ${m} m. ${maj(p.il)} coupe un morceau de ${c1} cm, puis un autre de ${c2} cm ${c.quoi}. ${pick([
+    text: `${p.nom} a ${c.tout} de ${m} m. ${maj(p.il)} coupe ${c1} cm, puis ${c2} cm. ${pick([
+      "Combien en reste-t-il ?",
       "Combien de centimètres reste-t-il ?",
-      "Quelle longueur reste-t-il, en centimètres ?",
     ])}`,
     format: "qcm",
     choices: choix(bonne, [`${m * 100 - c1} cm`, `${m * 10 - c1 - c2 > 0 ? m * 10 - c1 - c2 : reste + 20} cm`, `${reste + 10} cm`, `${c1 + c2} cm`, `${reste - 1} cm`]),
@@ -962,13 +959,12 @@ function morceauxDans(): Q {
   const nb = (m * 100) / piece;
   if (!Number.isInteger(nb)) return morceauxDans();
   const quoi = pick(["un ruban", "un fil de fer", "une ficelle", "une corde", "une bande de papier", "une guirlande"]);
-  const pour = pick(["pour faire des bracelets", "pour emballer des cadeaux", "pour les déguisements de pirates", "pour la décoration du cirque", "pour les cerfs-volants"]);
   return {
     text: `${pick([
-      `Dans ${quoi} de ${m} m, on coupe des morceaux de ${piece} cm ${pour}.`,
-      `${quelquun().nom} a ${quoi} de ${m} m. Il faut des morceaux de ${piece} cm ${pour}.`,
-      `On partage ${quoi} de ${m} m en morceaux de ${piece} cm ${pour}.`,
-    ])} ${pick(["Combien de morceaux peut-on couper ?", "Combien de morceaux aura-t-on ?", "Combien de morceaux de cette taille obtient-on ?"])}`,
+      `Dans ${quoi} de ${m} m, on coupe des morceaux de ${piece} cm.`,
+      `${quelquun().nom} coupe ${quoi} de ${m} m en morceaux de ${piece} cm.`,
+      `On partage ${quoi} de ${m} m en morceaux de ${piece} cm.`,
+    ])} ${"Combien de morceaux ?"}`,
     format: "qcm",
     choices: choix(pl(nb, "morceau", "morceaux"), [nb * 2, nb + 1, Math.max(1, nb - 2), (m * 10) / piece >= 1 ? (m * 10) / piece : m, m * piece].map((x) => pl(x, "morceau", "morceaux"))),
     expected: [pl(nb, "morceau", "morceaux")],
@@ -979,6 +975,7 @@ function morceauxDans(): Q {
       `${m} m = ${m * 100} cm ; ${piece} × ${nb} = ${m * 100}.`,
       `On peut couper ${nb} morceaux.`,
     ),
+    canvas: barre([{ label: `${piece} cm` }, { label: `${piece} cm` }, { label: "…", unknown: true }], `${m} m`),
   };
 }
 
@@ -990,22 +987,21 @@ function deuxMorceauxPlus(): Q {
   const b = deMoins ? a - ecart : a + ecart;
   const total = a + b;
   const quoi = pick([
-    ["coupe deux bambous pour un cerf-volant", "Le premier", "Le second", "mis"],
-    ["dessine deux serpents sur une grande affiche", "Le premier", "Le second", "mis"],
-    ["plante deux tiges de tournesol", "La première", "La seconde", "mises"],
-    ["fabrique deux épées en carton pour le spectacle", "La première", "La seconde", "mises"],
-    ["construit deux rails pour son petit train", "Le premier", "Le second", "mis"],
-    ["découpe deux dinosaures dans du carton", "Le premier", "Le second", "mis"],
-    ["tresse deux bracelets pour la fête des mères", "Le premier", "Le second", "mis"],
-    ["peint deux bandes sur le mur de la cabane", "La première", "La seconde", "mises"],
-    ["fabrique deux fusées en papier", "La première", "La seconde", "mises"],
-    ["coud deux écharpes pour ses poupées", "La première", "La seconde", "mises"],
+    ["coupe deux bambous", "Le premier", "le second", "mis"],
+    ["dessine deux serpents", "Le premier", "le second", "mis"],
+    ["plante deux tournesols", "Le premier", "le second", "mis"],
+    ["fait deux épées", "La première", "la seconde", "mises"],
+    ["pose deux rails", "Le premier", "le second", "mis"],
+    ["découpe deux dinosaures", "Le premier", "le second", "mis"],
+    ["tresse deux bracelets", "Le premier", "le second", "mis"],
+    ["peint deux bandes", "La première", "la seconde", "mises"],
+    ["plie deux fusées", "La première", "la seconde", "mises"],
+    ["coud deux écharpes", "La première", "la seconde", "mises"],
   ] as const);
   return {
-    text: `${p.nom} ${quoi[0]}. ${quoi[1]} mesure ${a} cm. ${quoi[2]} mesure ${ecart} cm de ${deMoins ? "moins" : "plus"}. ${pick([
-      `Quelle longueur font les deux ${quoi[3]} bout à bout, en cm ?`,
-      "Combien de centimètres en tout ?",
-      `Si on les met bout à bout, combien de centimètres cela fait-il ?`,
+    text: `${p.nom} ${quoi[0]}. ${quoi[1]} mesure ${a} cm, ${quoi[2]} ${ecart} cm de ${deMoins ? "moins" : "plus"}. ${pick([
+      "Combien en tout ?",
+      "Et bout à bout ?",
     ])}`,
     format: "qcm",
     choices: choix(`${total} cm`, [`${b} cm`, `${deMoins ? a + ecart : a - ecart} cm`, `${a + (deMoins ? a + ecart : a - ecart)} cm`, `${total + 10} cm`, `${2 * a} cm`, `${total - 1} cm`]),
@@ -1031,7 +1027,7 @@ function memeLongueur(): Q {
   if (faux) ecr[k] = k === 1 ? `${cm} mm` : `${Math.floor(cm / 10)} dm ${(cm % 10) + 1} cm`;
   const bonne = faux ? (k === 1 ? `${p.nom} et ${r.nom}` : `${p.nom} et ${q.nom}`) : "les trois";
   return {
-    text: `${p.nom}, ${q.nom} et ${r.nom} mesurent le même segment. ${p.nom} écrit ${ecr[0]}, ${q.nom} écrit ${ecr[1]}, ${r.nom} écrit ${ecr[2]}. ${pick(["Qui a raison ?", "Qui a écrit une mesure juste ?"])}`,
+    text: `Pour le même segment, ${p.nom} écrit ${ecr[0]}, ${q.nom} ${ecr[1]}, ${r.nom} ${ecr[2]}. Qui a raison ?`,
     format: "qcm",
     choices: choix(bonne, ["les trois", `${p.nom} seulement`, `${p.nom} et ${q.nom}`, `${p.nom} et ${r.nom}`]),
     expected: [bonne],
@@ -1049,9 +1045,9 @@ function combienDePas(): Q {
   const u = pick([
     { quoi: "Un pas de Ravi", cm: 50, sg: "pas", mot: "pas", total: "parcourir" },
     { quoi: "Une dalle du couloir", cm: 50, sg: "dalle", mot: "dalles", total: "couvrir" },
-    { quoi: "Une marche de l'escalier du phare", cm: 20, sg: "marche", mot: "marches", total: "monter" },
+    { quoi: "Une marche du phare", cm: 20, sg: "marche", mot: "marches", total: "monter" },
     { quoi: "Un saut de grenouille", cm: 25, sg: "saut", mot: "sauts", total: "parcourir" },
-    { quoi: "Un wagon du petit train", cm: 200, sg: "wagon", mot: "wagons", total: "faire un train de" },
+    { quoi: "Un wagon", cm: 200, sg: "wagon", mot: "wagons", total: "faire un train de" },
     { quoi: "Une enjambée du géant", cm: 500, sg: "enjambée", mot: "enjambées", total: "parcourir" },
   ]);
   const m = u.cm >= 200 ? rint(2, 6) * (u.cm / 100) : rint(2, 9);
@@ -1059,8 +1055,8 @@ function combienDePas(): Q {
   if (!Number.isInteger(nb)) return combienDePas();
   return {
     text: `${u.quoi} mesure environ ${u.cm >= 100 ? `${u.cm / 100} m` : `${u.cm} cm`}. ${pick([
-      `Combien de ${u.mot} faut-il pour ${u.total} ${m} m ?`,
-      `Pour ${u.total} ${m} m, combien de ${u.mot} faut-il environ ?`,
+      `Combien de ${u.mot} pour ${u.total} ${m} m ?`,
+      `Pour ${u.total} ${m} m, combien de ${u.mot} faut-il ?`,
     ])}`,
     format: "qcm",
     choices: choix(pl(nb, u.sg, u.mot), [nb * 2, nb + 1, m, Math.max(1, Math.round(nb / 2)), nb * 10].map((x) => pl(x, u.sg, u.mot))),
@@ -1072,6 +1068,7 @@ function combienDePas(): Q {
       `${m} m = ${m * 100} cm ; ${u.cm} × ${nb} = ${m * 100}.`,
       `Il en faut environ ${nb}.`,
     ),
+    canvas: barre([{ label: u.cm >= 100 ? `${u.cm / 100} m` : `${u.cm} cm` }, { label: u.cm >= 100 ? `${u.cm / 100} m` : `${u.cm} cm` }, { label: "…", unknown: true }], `${m} m`),
   };
 }
 

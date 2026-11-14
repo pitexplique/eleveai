@@ -147,12 +147,16 @@ function abreviation(G: Grandeur): Q {
   const u = unite(G, pick([s.grand, s.petit]));
   const n = u.sym === s.grand ? rint(1, s.max) : rint(2, 9) * 10;
   const sens = Math.random() < 0.65;
-  const dessin = G.cartes ? G.cartes([{ label: maj(sansArticle(s.le)), icon: s.icon, valeur: `${n} ${u.sym}` }]) : undefined;
+  const dessin = G.cartes
+    ? G.cartes([{ label: maj(sansArticle(s.le)), icon: s.icon, valeur: `${n} ${u.sym}` }])
+    : G.barre
+      ? G.barre([{ label: `${n} ${u.sym}` }])
+      : undefined;
   if (sens) {
     return {
       text: pick([
         `Sur ${s.le}, on lit « ${n} ${u.sym} ». Que veut dire « ${u.sym} » ?`,
-        `${maj(s.le)} porte une étiquette : « ${n} ${u.sym} ». Quelle unité se cache derrière « ${u.sym} » ?`,
+        `${maj(s.le)} porte l'étiquette « ${n} ${u.sym} ». Que veut dire « ${u.sym} » ?`,
         `Que veut dire l'abréviation « ${u.sym} » dans « ${n} ${u.sym} » ?`,
       ]),
       format: "qcm",
@@ -239,11 +243,10 @@ function rangerUnites(G: Grandeur): Q {
   const txt = (l: Unite[]) => l.map((u) => u.sym).join(", ");
   const bonne = txt(ordre);
   const melanges = [txt([U[1], U[0], U[2]]), txt([U[0], U[2], U[1]]), txt([U[2], U[0], U[1]]), txt([U[1], U[2], U[0]]), txt(croissant ? [...U].reverse() : U)];
-  const p = quelquun();
   return {
     text: pick([
       `Range ces unités de la plus ${croissant ? "petite" : "grande"} à la plus ${croissant ? "grande" : "petite"} : ${txt([U[2], U[0], U[1]])}.`,
-      `${p.nom} range ${U.length} unités de ${G.mot}, de la plus ${croissant ? "petite" : "grande"} à la plus ${croissant ? "grande" : "petite"}. Quel est le bon ordre ?`,
+      `Quel est le bon ordre des unités de ${G.mot}, de la plus ${croissant ? "petite" : "grande"} à la plus ${croissant ? "grande" : "petite"} ?`,
       `Dans quel ordre vont ces unités, de la plus ${croissant ? "petite" : "grande"} à la plus ${croissant ? "grande" : "petite"} : ${txt([U[1], U[2], U[0]])} ?`,
     ]),
     format: "qcm",
@@ -300,7 +303,7 @@ function relationDeBase(G: Grandeur): Q {
       text: pick([
         `Combien y a-t-il de ${pluriel(petit)} dans 1 ${grand.nom} ?`,
         `1 ${grand.sym} = … ${petit.sym}. Quel nombre manque ?`,
-        `Un ${grand.nom}, c'est combien de ${pluriel(petit)} ?`,
+        `${grand.le.startsWith("la ") ? "Une" : "Un"} ${grand.nom}, c'est combien de ${pluriel(petit)} ?`,
         `${p.nom} se demande combien de ${pluriel(petit)} font 1 ${grand.nom}. Que lui réponds-tu ?`,
       ]),
       format: "qcm",
@@ -333,6 +336,9 @@ function relationDeBase(G: Grandeur): Q {
     ),
   };
 }
+
+/** « le sac de pommes » → « le sac », « l'éléphant du zoo » → « l'éléphant » : pour la question, quand le dessin montre déjà l'objet. */
+const court = (s: Support) => s.le.split(" ").slice(0, s.le.startsWith("l'") ? 1 : 2).join(" ");
 
 const dessinSupport = (G: Grandeur, s: Support, valeur: string) =>
   G.cartes ? G.cartes([{ label: maj(sansArticle(s.le)), icon: s.icon, valeur }]) : undefined;
@@ -440,7 +446,7 @@ function compose(G: Grandeur): Q {
   return {
     text: pick([
       `${maj(s.le)} ${G.verbe} ${total} ${p.sym}. Comment l'écrire en ${pluriel(g)} et ${pluriel(p)} ?`,
-      `${qui.nom} trouve ${total} ${p.sym} pour ${s.le}. Cela fait combien de ${pluriel(g)} et de ${pluriel(p)} ?`,
+      `${qui.nom} trouve ${total} ${p.sym} pour ${s.le}. Combien de ${pluriel(g)} et de ${pluriel(p)} ?`,
       `${total} ${p.sym} = … ${g.sym} … ${p.sym}. Quelle est la bonne écriture ?`,
     ]),
     format: "qcm",
@@ -544,11 +550,8 @@ function comparerDeux(G: Grandeur, serre: boolean): Q {
     const bonne = egal ? "c'est pareil" : A.v > B.v ? p.nom : q.nom;
     return {
       text: pick([
-        `${maj(s.le)} de ${p.nom} ${G.verbe} ${A.txt}. ${maj(celui)} de ${q.nom} ${G.verbe} ${B.txt}. Qui a ${s.le} ${sup} ?`,
-        `${p.nom} a ${s.un} de ${A.txt}, ${q.nom} ${s.un} de ${B.txt}. Qui a ${s.le} ${sup} ?`,
-        `${p.nom} et ${q.nom} comparent leur ${sansArticle(s.le)} : ${A.txt} pour ${p.nom}, ${B.txt} pour ${q.nom}. Qui a ${s.le} ${sup} ?`,
-        `${maj(s.le)} de ${p.nom} : ${A.txt}. ${maj(celui)} de ${q.nom} : ${B.txt}. Qui a ${s.le} ${sup} ?`,
-        `Pour la kermesse, ${p.nom} apporte ${s.un} de ${A.txt} et ${q.nom} ${s.un} de ${B.txt}. Qui a apporté ${s.le} ${sup} ?`,
+        `${p.nom} : ${A.txt}. ${q.nom} : ${B.txt}. Qui a ${s.le} ${sup} ?`,
+        `${maj(court(s))} de ${p.nom} ${G.verbe} ${A.txt}, ${celui} de ${q.nom} ${B.txt}. Qui a ${court(s)} ${sup} ?`,
       ]),
       format: "qcm",
       choices: choix(bonne, [p.nom, q.nom, "c'est pareil", "on ne peut pas savoir"]),
@@ -604,9 +607,8 @@ function comparerTrois(G: Grandeur): Q {
   const liste = ordre.map((k, i) => `${noms[i]} : ${mesures[k].txt}`).join(" ; ");
   return {
     text: pick([
-      `${noms[0]}, ${noms[1]} et ${noms[2]} comparent leur ${sansArticle(s.le)}. ${liste}. Qui a ${s.le} ${sup} ?`,
-      `Trois enfants ont chacun ${s.un}. ${liste}. Qui a ${s.le} ${sup} ?`,
-      `${liste}. Parmi ces trois enfants, qui a ${s.le} ${sup} ?`,
+      `${liste}. Qui a ${court(s)} ${sup} ?`,
+      `Qui a ${court(s)} ${sup} ? ${liste}.`,
     ]),
     format: "qcm",
     choices: choix(bonne, [...noms, "ils sont tous pareils"]),
@@ -631,12 +633,11 @@ function erreurDeNombre(G: Grandeur): Q {
   const petitV = n * r - pick([5, 10, 20, 50].filter((x) => x < r));
   const enfant = pick(TROUPE);
   const il = enfant.id === "nina" || enfant.id === "zoe" ? "elle" : "il";
-  const phrase = `${petitV} ${p.sym}, c'est plus que ${n} ${g.sym}, parce que ${petitV} est plus grand que ${n} !`;
+  const phrase = `${petitV} ${p.sym}, c'est plus que ${n} ${g.sym}, car ${petitV} est plus grand que ${n} !`;
   const bonne = `non, ${n} ${g.sym} = ${n * r} ${p.sym}`;
   return {
     text: pick([
       `${enfant.nom} dit : « ${phrase} » A-t-${il} raison ?`,
-      `${enfant.nom} compare ${s.un} de ${petitV} ${p.sym} et ${s.un} de ${n} ${g.sym}. ${maj(il)} dit : « ${phrase} » A-t-${il} raison ?`,
       `Dans la bulle, ${enfant.nom} compare deux ${G.mot}s. Que penses-tu de ce qu'${il} dit ?`,
     ]),
     format: "qcm",

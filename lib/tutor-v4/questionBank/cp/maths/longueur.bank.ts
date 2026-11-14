@@ -92,16 +92,16 @@ const deuxPrenoms = () => shuffle(PRENOMS).slice(0, 2) as [string, string];
    « le plus long » / « la plus longue »). */
 const CHOSES = [
   { le: "le ruban", pl: "rubans", f: false },
-  { le: "le serpent en papier", pl: "serpents en papier", f: false },
-  { le: "le train de wagons", pl: "trains de wagons", f: false },
+  { le: "le serpent", pl: "serpents", f: false },
+  { le: "le train", pl: "trains", f: false },
   { le: "la guirlande", pl: "guirlandes", f: true },
-  { le: "la corde à sauter", pl: "cordes à sauter", f: true },
+  { le: "la corde", pl: "cordes", f: true },
   { le: "la chenille", pl: "chenilles", f: true },
   { le: "la frise", pl: "frises", f: true },
   { le: "l'écharpe", pl: "écharpes", f: true },
-  { le: "la bande de papier", pl: "bandes de papier", f: true },
-  { le: "le mur de briques", pl: "murs de briques", f: false },
-  { le: "le collier de perles", pl: "colliers de perles", f: false },
+  { le: "la bande", pl: "bandes", f: true },
+  { le: "le mur", pl: "murs", f: false },
+  { le: "le collier", pl: "colliers", f: false },
   { le: "la file de fourmis", pl: "files de fourmis", f: true },
 ] as const;
 type Chose = (typeof CHOSES)[number];
@@ -109,6 +109,8 @@ const plus = (c: Chose, long: boolean) =>
   c.f ? (long ? "la plus longue" : "la plus courte") : long ? "le plus long" : "le plus court";
 /** « le ruban le plus long », « l'écharpe la plus courte ». */
 const leChosePlus = (c: Chose, long: boolean) => `${c.le} ${plus(c, long)}`;
+/** « le plus long », « la plus courte » : le nom est déjà dans l'énoncé (énoncés courts, 14/11). */
+const lePlus = (c: Chose, long: boolean) => plus(c, long);
 
 /** Deux rubans sur un quadrillage : en haut le premier, en bas le second.
  *  `decal` = la colonne où chacun commence (0 = aligné à gauche). */
@@ -162,9 +164,9 @@ function objet(quoi: ObjetId, label: string): ObjetsCanvasData {
 
 /* Les objets qu'on pose sur la règle. */
 const OBJETS_REGLE = [
-  "le crayon", "la gomme", "la paille", "la plume de Pic", "la chenille", "le clou",
+  "le crayon", "la gomme", "la paille", "la plume", "la chenille", "le clou",
   "la craie", "le ruban", "la brindille", "le pinceau", "la carotte", "la cuillère",
-  "le ver de terre", "la fourchette", "le bâton de colle", "la sucette",
+  "le ver de terre", "la fourchette", "le bâton", "la sucette",
 ] as const;
 
 export const longueurBank: TutorBankItemV4[] = [
@@ -208,7 +210,7 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "cp_longueur_lexique",
     difficulty: 2,
     theme: "reunion",
-    text: "Ton école est à 200 pas de chez toi, et la boulangerie à 20 pas. Laquelle est le plus PRÈS ?",
+    text: "L'école est à 200 pas, la boulangerie à 20 pas. Laquelle est le plus PRÈS ?",
     format: "qcm",
     choices: ["la boulangerie", "l'école", "les deux pareil", "on ne peut pas savoir"],
     expected: ["la boulangerie"],
@@ -287,9 +289,9 @@ export const longueurBank: TutorBankItemV4[] = [
       const long = randomChoice([true, false]);
       const bonne = (la > lb) === long ? a : b;
       const text = randomChoice([
-        `En haut, ${c.le} ${de(a)}. En bas, ${c.le} ${de(b)}. Qui a ${leChosePlus(c, long)} ?`,
-        `${a} et ${b} ont chacun ${c.f ? "une" : "un"} ${c.le.replace(/^(le|la|l') ?/, "")}. ${a} est en haut. Qui a ${leChosePlus(c, long)} ?`,
-        `Voici les ${c.pl} ${de(a)} (en haut) et ${de(b)} (en bas). Qui a ${leChosePlus(c, long)} ?`,
+        `En haut, ${c.le} ${de(a)}. En bas, ${c.f ? "celle" : "celui"} ${de(b)}. Qui a ${lePlus(c, long)} ?`,
+        `${a} et ${b} ont chacun ${c.f ? "une" : "un"} ${c.le.replace(/^(le|la|l') ?/, "")}. ${a} est en haut. Qui a ${lePlus(c, long)} ?`,
+        `Voici les ${c.pl} ${de(a)} (en haut) et ${de(b)} (en bas). Qui a ${lePlus(c, long)} ?`,
       ]);
       return {
         text,
@@ -348,7 +350,7 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "cp_longueur_comparer",
     difficulty: 4,
     theme: "neutral",
-    text: "Deux bandes de papier sont posées l'une sous l'autre. La bande du haut commence plus à gauche et finit plus à droite. Que peut-on dire ?",
+    text: "La bande du haut commence plus à gauche et finit plus à droite. Que dire ?",
     format: "qcm",
     choices: [
       "la bande du haut est la plus longue",
@@ -387,9 +389,9 @@ export const longueurBank: TutorBankItemV4[] = [
       const long = randomChoice([true, false]);
       const bonne = (la > lb) === long ? a : b;
       const text = randomChoice([
-        `${majuscule(c.le)} ${de(a)} mesure ${la} cm. ${c.f ? "Celle" : "Celui"} ${de(b)} mesure ${lb} cm. Qui a ${leChosePlus(c, long)} ?`,
-        `${a} : ${la} cm. ${b} : ${lb} cm. Ce sont leurs ${c.pl}. Qui a ${leChosePlus(c, long)} ?`,
-        `Pic compare les ${c.pl} ${de(a)} (${la} cm) et ${de(b)} (${lb} cm). Qui a ${leChosePlus(c, long)} ?`,
+        `${majuscule(c.le)} ${de(a)} mesure ${la} cm. ${c.f ? "Celle" : "Celui"} ${de(b)}, ${lb} cm. Qui a ${lePlus(c, long)} ?`,
+        `Les ${c.pl} : ${a} ${la} cm, ${b} ${lb} cm. Qui a ${lePlus(c, long)} ?`,
+        `Les ${c.pl} ${de(a)} et ${de(b)} : ${la} cm et ${lb} cm. Qui a ${lePlus(c, long)} ?`,
       ]);
       return {
         text,
@@ -432,9 +434,9 @@ export const longueurBank: TutorBankItemV4[] = [
       const meme = "les deux ont la même longueur";
       const bonne = egal ? meme : (la > lb) === long ? a : b;
       const text = randomChoice([
-        `Attention : les ${c.pl} ne partent pas du même bord. ${a} est en haut, ${b} en bas. Qui a ${leChosePlus(c, long)} ?`,
-        `En haut, ${c.le} ${de(a)}. En bas, ${c.le} ${de(b)}. Compte les carreaux. Qui a ${leChosePlus(c, long)} ?`,
-        `${a} (en haut) et ${b} (en bas) comparent leurs ${c.pl}. Pas du même bord ! Qui a ${leChosePlus(c, long)} ?`,
+        `Les ${c.pl} ne partent pas du même bord ! ${a} est en haut. Qui a ${lePlus(c, long)} ?`,
+        `En haut : ${a}. En bas : ${b}. Compte les carreaux. Qui a ${leChosePlus(c, long)} ?`,
+        `${a} est en haut, ${b} en bas. Pas du même bord ! Qui a ${lePlus(c, long)} ?`,
       ]);
       return {
         text,
@@ -476,11 +478,11 @@ export const longueurBank: TutorBankItemV4[] = [
       const meme = "les deux ont la même longueur";
       const bonne = cas === "pile" ? meme : cas === "depasse" ? x.le : y.le;
       const suite =
-        cas === "depasse" ? "la ficelle dépasse" : cas === "manque" ? "la ficelle est trop courte" : "la ficelle tombe pile au bout";
+        cas === "depasse" ? "elle dépasse" : cas === "manque" ? "elle est trop courte" : "elle tombe pile";
       const text = randomChoice([
-        `${nom} coupe une ficelle de la longueur de ${x.le}. Sur ${y.le}, ${suite}. Qu'est-ce qui est le plus long ?`,
-        `On ne peut pas déplacer ${x.le} ni ${y.le}. ${nom} prend une ficelle aussi longue que ${x.le}. Sur ${y.le}, ${suite}. Qu'est-ce qui est le plus long ?`,
-        `Pic et ${nom} mesurent ${x.le} avec une ficelle. Puis ils la posent sur ${y.le} : ${suite}. Qu'est-ce qui est le plus long ?`,
+        `Une ficelle est longue comme ${x.le}. Sur ${y.le}, ${suite}. Lequel est le plus long ?`,
+        `Une ficelle a la longueur de ${x.le}. Sur ${y.le}, ${suite}. Lequel est le plus long ?`,
+        `${nom} mesure ${x.le} avec une ficelle. Sur ${y.le}, ${suite}. Lequel est le plus long ?`,
       ]).replace(/de le /g, "du ").replace(/à le /g, "au ");
       return {
         text,
@@ -514,7 +516,7 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "cp_longueur_mesurer_unite",
     difficulty: 3,
     theme: "neutral",
-    text: "Comment comparer la largeur de la porte et celle de la fenêtre, qu'on ne peut pas déplacer ?",
+    text: "La porte et la fenêtre ne bougent pas. Comment comparer leurs largeurs ?",
     format: "qcm",
     choices: [
       "en reportant la largeur de la porte avec une ficelle",
@@ -549,7 +551,7 @@ export const longueurBank: TutorBankItemV4[] = [
         { pl: "cubes", un: "un cube" }, { pl: "trombones", un: "un trombone" },
         { pl: "gommes", un: "une gomme" }, { pl: "dominos", un: "un domino" },
         { pl: "briques", un: "une brique" }, { pl: "craies", un: "une craie" },
-        { pl: "cartes", un: "une carte" }, { pl: "bâtons de colle", un: "un bâton de colle" },
+        { pl: "cartes", un: "une carte" }, { pl: "bâtons", un: "un bâton" },
       ] as const;
       const OBJETS = [
         "le banc", "le tapis", "la table", "le cahier", "l'étagère", "le cartable", "le livre",
@@ -560,9 +562,9 @@ export const longueurBank: TutorBankItemV4[] = [
       const nom = randomChoice(PRENOMS);
       const nb = randomInt(4, 13);
       const text = randomChoice([
-        `${nom} mesure ${o} en posant des ${u.pl} bout à bout. Chaque carreau est ${u.un}. Combien de ${u.pl} ?`,
+        `${nom} mesure ${o} avec des ${u.pl}. Un carreau = ${u.un}. Combien de ${u.pl} ?`,
         `Chaque carreau est ${u.un}. Combien de ${u.pl} mesure ${o} ${de(nom)} ?`,
-        `Pic aligne des ${u.pl} le long ${de(o).replace("de le ", "du ")}. Chaque carreau est ${u.un}. Combien en faut-il ?`,
+        `Pic aligne des ${u.pl} le long ${de(o).replace("de le ", "du ")}. Un carreau = ${u.un}. Combien en faut-il ?`,
       ]);
       return {
         text,
@@ -609,7 +611,7 @@ export const longueurBank: TutorBankItemV4[] = [
       const [avant, apres] = versPetit ? [p.grand, p.petit] : [p.petit, p.grand];
       const bonne = versPetit ? `plus de ${n}` : `moins de ${n}`;
       const text = randomChoice([
-        `${o} mesure ${n} ${avant}. ${nom} ${o.startsWith("La") ? "la" : "le"} mesure avec des ${apres}. En faut-il plus ou moins que ${n} ?`,
+        `${o} mesure ${n} ${avant}. Avec des ${apres}, en faut-il plus ou moins ?`,
         `${nom} trouve que ${o.toLowerCase()} mesure ${n} ${avant}. Avec des ${apres}, combien en faut-il ?`,
         `Pic mesure ${o.toLowerCase()} : ${n} ${avant}. Et avec des ${apres} ?`,
       ]);
@@ -643,7 +645,7 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "cp_longueur_regle",
     difficulty: 4,
     theme: "neutral",
-    text: "Pour mesurer un segment avec une règle graduée, sur quelle graduation faut-il placer le début du segment ?",
+    text: "Avec une règle, où places-tu le début du segment ?",
     format: "qcm",
     choices: ["sur le 0", "sur le 1", "sur le bord de la règle", "n'importe où"],
     expected: ["sur le 0"],
@@ -666,7 +668,7 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "cp_longueur_regle",
     difficulty: 5,
     theme: "neutral",
-    text: "Un segment commence à la graduation 2 et finit à la graduation 9 de la règle. Combien mesure-t-il ?",
+    text: "Un segment va du 2 au 9 sur la règle. Combien mesure-t-il ?",
     format: "short",
     expected: ["7"],
     comparator: "number_equal",
@@ -697,9 +699,9 @@ export const longueurBank: TutorBankItemV4[] = [
       const nom = randomChoice(PRENOMS);
       const obj = randomChoice(OBJETS_REGLE);
       const text = randomChoice([
-        `${nom} a posé ${obj} sur la règle, mais pas au 0. Combien mesure ${obj} ?`,
+        `${nom} a posé ${obj} sur la règle, pas au 0. Combien mesure ${obj} ?`,
         `Regarde bien où commence ${obj} ${de(nom)}. Combien mesure-t-${obj.startsWith("la") || obj.startsWith("l'écharpe") ? "elle" : "il"}, en cm ?`,
-        `Pic a décalé ${obj} sur la règle. Combien de centimètres mesure ${obj} ?`,
+        `Pic a décalé ${obj} sur la règle. Combien mesure ${obj} ?`,
       ]);
       return {
         text,
@@ -734,7 +736,7 @@ export const longueurBank: TutorBankItemV4[] = [
       const text = randomChoice([
         `${nom} mesure ${obj} avec sa règle. Combien mesure ${obj} ?`,
         `Combien de centimètres mesure ${obj} ${de(nom)} ?`,
-        `Pic pose ${obj} sur la règle, au 0. Combien mesure ${obj}, en cm ?`,
+        `Pic pose ${obj} sur la règle, au 0. Combien de cm ?`,
         `${nom} lit la règle au bout ${de(obj).replace("de le ", "du ")}. Combien de cm ?`,
       ]);
       return {
@@ -775,7 +777,7 @@ export const longueurBank: TutorBankItemV4[] = [
       const text = randomChoice([
         `${nom} dit : « ${majuscule(obj)} mesure ${fin} cm. » Regarde la règle. Est-ce juste ?`,
         `Pic lit ${fin} au bout ${de(obj).replace("de le ", "du ")}. Il dit : « ${fin} cm ! » Est-ce juste ?`,
-        `${nom} a mesuré ${obj} : ${fin} cm. Regarde où ${obj} commence. Est-ce juste ?`,
+        `${nom} a mesuré ${obj} : ${fin} cm. Regarde le début. Est-ce juste ?`,
       ]);
       return {
         text,
@@ -816,8 +818,8 @@ export const longueurBank: TutorBankItemV4[] = [
         "une queue de cerf-volant", "une ficelle", "un serpent", "une échelle",
       ]);
       const text = randomChoice([
-        `${nom} trace ${trait} de ${longueur} cm. ${nom} part du point bleu. Sur quel nombre s'arrêter ?`,
-        `Pic veut ${trait} de ${longueur} cm, à partir du point bleu. Sur quel nombre s'arrête-t-il ?`,
+        `${nom} trace ${trait} de ${longueur} cm depuis le point bleu. Où s'arrêter ?`,
+        `Pic veut ${trait} de ${longueur} cm, depuis le point bleu. Où s'arrête-t-il ?`,
         `${nom} dessine ${trait} de ${longueur} cm depuis le point bleu. Sur quel nombre finir ?`,
       ]);
       return {
@@ -1014,7 +1016,7 @@ export const longueurBank: TutorBankItemV4[] = [
       const text = randomChoice([
         `${nom} montre ${o.un} à Pic. Combien mesure-t-${o.un.startsWith("une") ? "elle" : "il"}, à peu près ?`,
         `Combien mesure ${o.un}, à peu près ?`,
-        `${nom} devine la longueur ${de(o.un)}. Quel nombre est le bon, à peu près ?`,
+        `Quelle longueur a ${o.un}, à peu près ?`,
       ]);
       return {
         text,
@@ -1046,7 +1048,7 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "cp_longueur_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Une règle d'écolier mesure 20 cm. Combien de règles faut-il poser bout à bout pour faire 1 mètre ?",
+    text: "Une règle mesure 20 cm. Combien de règles bout à bout pour faire 1 mètre ?",
     format: "short",
     expected: ["5"],
     comparator: "number_equal",
@@ -1078,9 +1080,11 @@ export const longueurBank: TutorBankItemV4[] = [
       const echangeDebut = [range[1], range[0], range[2], range[3]];
       const echangeFin = [range[0], range[1], range[3], range[2]];
       const cm = (l: number[]) => l.map((x) => `${x} cm`).join(" ; ");
+      // Dans l'énoncé : « 18 ; 24 ; 12 ; 21 (en cm) », plus court à lire.
+      const liste = `${longueurs.join(" ; ")} (en cm)`;
       const T = [
         { pl: "baguettes", f: true }, { pl: "crayons", f: false }, { pl: "rubans", f: false },
-        { pl: "serpents en pâte à modeler", f: false }, { pl: "ficelles", f: true }, { pl: "pailles", f: true },
+        { pl: "serpents", f: false }, { pl: "ficelles", f: true }, { pl: "pailles", f: true },
         { pl: "brindilles", f: true }, { pl: "pinceaux", f: false }, { pl: "trains en bois", f: false },
         { pl: "guirlandes", f: true },
       ] as const;
@@ -1090,9 +1094,9 @@ export const longueurBank: TutorBankItemV4[] = [
       const long = t.f ? "la plus LONGUE" : "le plus LONG";
       const ordre = croissant ? `${court.replace(/^(le|la)/, "de $1")} ${long.replace(/^(le|la)/, "à $1")}` : `${long.replace(/^(le|la)/, "de $1")} ${court.replace(/^(le|la)/, "à $1")}`;
       const text = randomChoice([
-        `Range ces ${t.pl} ${ordre} : ${cm(longueurs)}.`,
-        `${nom} a quatre ${t.pl} : ${cm(longueurs)}. Range-les ${ordre}.`,
-        `Pic a mélangé les ${t.pl} ${de(nom)} : ${cm(longueurs)}. Range-les ${ordre}.`,
+        `Range ces ${t.pl} ${ordre} : ${liste}.`,
+        `${nom} a quatre ${t.pl} : ${liste}. Range-les ${ordre}.`,
+        `Range les ${t.pl} ${de(nom)} ${ordre} : ${liste}.`,
       ]).replace(/à le /g, "au ").replace(/de le /g, "du ");
       return {
         text,
@@ -1127,14 +1131,14 @@ export const longueurBank: TutorBankItemV4[] = [
       const nom = randomChoice(PRENOMS);
       const O = [
         "une guirlande", "une frise", "une corde à sauter", "une queue de cerf-volant",
-        "un collier de perles", "un ruban", "un chemin de petit train",
-        "une écharpe", "un serpent en papier", "une échelle",
+        "un collier", "un ruban", "un chemin de train",
+        "une écharpe", "un serpent", "une échelle",
       ] as const;
       const o = randomChoice(O);
       const text = randomChoice([
-        `${nom} fabrique ${o} de ${total} cm. Il y a déjà ${premier} cm. Combien de cm manque-t-il ?`,
-        `Il faut ${o} de ${total} cm. ${nom} en a fait ${premier} cm. Combien de cm reste-t-il à faire ?`,
-        `Pic aide ${nom} : ${o} de ${total} cm. Déjà ${premier} cm sont faits. Combien de cm manque-t-il ?`,
+        `${nom} fabrique ${o} de ${total} cm. Il y a déjà ${premier} cm. Combien en manque-t-il ?`,
+        `Il faut ${o} de ${total} cm. ${nom} en a fait ${premier}. Combien en manque-t-il ?`,
+        `${majuscule(o)} doit faire ${total} cm. ${premier} cm sont faits. Combien en manque-t-il ?`,
       ]);
       const canvas: SchemaBarreCanvasData = {
         kind: "schema_barre",

@@ -209,7 +209,7 @@ const GABARITS: TutorBankItemV4[] = [
     const bonne = (g.g > d.g) === lourd ? g : d;
     const p = enfant();
     return qcm(
-      `${randomChoice([`${p.nom} pose ${g.le} et ${d.le} sur la balance.`, "Regarde la balance.", `La vétérinaire prête sa balance à ${p.nom}.`, `Pic regarde la balance du marché.`])} ${randomChoice([
+      `${randomChoice([`${p.nom} utilise la balance.`, "Regarde la balance.", `La vétérinaire prête sa balance à ${p.nom}.`, `Pic regarde la balance du marché.`])} ${randomChoice([
         `Lequel est le plus ${lourd ? "lourd" : "léger"} ?`,
         `Qu'est-ce qui est le plus ${lourd ? "lourd" : "léger"} ?`,
       ])}`,
@@ -233,7 +233,7 @@ const GABARITS: TutorBankItemV4[] = [
         return qcm(
           randomChoice([
             `Lequel est le plus ${leger ? "LÉGER" : "LOURD"} : ${a.le} ou ${b.le} ?`,
-            `${enfant().nom} soupèse ${a.le} et ${b.le}. Qu'est-ce qui est le plus ${leger ? "léger" : "lourd"} ?`,
+            `${enfant().nom} soupèse ${a.le} et ${b.le}. Lequel est le plus ${leger ? "léger" : "lourd"} ?`,
           ]),
           bonne.le,
           [a.le, b.le, "les deux pèsent pareil"],
@@ -243,6 +243,7 @@ const GABARITS: TutorBankItemV4[] = [
             `${maj(a.le)} pèse environ ${masseDe(a)}, ${b.le} environ ${masseDe(b)}.`,
             `Le plus ${leger ? "léger" : "lourd"} est ${bonne.le}.`,
           ),
+          cartes([{ label: sansArticle(a.le), icon: a.icon }, { label: sansArticle(b.le), icon: b.icon }], false),
         );
       },
       () => {
@@ -259,9 +260,9 @@ const GABARITS: TutorBankItemV4[] = [
         const icon = randomChoice(["🎒", "🧳", "📦", "🧺"]);
         const adj = (lourd ? "lourd" : "léger").replace("léger", sac.f ? "légère" : "léger") + (lourd && sac.f ? "e" : "");
         return qcm(
-          `${maj(sac.q)} ${deNom(p.nom)} pèse ${a} ${u}. ${sac.f ? "Celle" : "Celui"} ${deNom(q.nom)} pèse ${b} ${u}. ${randomChoice([
-            `Qui a ${sac.q} ${sac.f ? "la" : "le"} plus ${adj} ?`,
-            `Quel enfant a ${sac.q} ${sac.f ? "la" : "le"} plus ${adj} ?`,
+          `${maj(sac.q.replace(/^(le|la) /, ""))} : ${p.nom} ${a} ${u}, ${q.nom} ${b} ${u}. ${randomChoice([
+            `Qui a ${sac.f ? "la" : "le"} plus ${adj} ?`,
+            `Quel enfant a ${sac.f ? "la" : "le"} plus ${adj} ?`,
           ])}`,
           gagnant.nom,
           [p.nom, q.nom, "les deux pareil"],
@@ -296,7 +297,7 @@ const GABARITS: TutorBankItemV4[] = [
         cartes([{ label: "1 kg", icon: "⚖️" }, { label: ecritG, icon: "⚖️" }], false),
       ),
       () => qcm(
-        `${maj(x)} pèse 1 kg. ${maj(y)} pèse ${ecritG}. ${randomChoice(["Lequel est le plus lourd ?", `${p.nom} doit porter le plus lourd. Lequel ?`])}`,
+        `${maj(x)} : 1 kg. ${maj(y)} : ${ecritG}. ${randomChoice(["Lequel est le plus lourd ?", "Lequel pèse le plus ?"])}`,
         egal ? "ils pèsent pareil" : x,
         [x, y, "ils pèsent pareil"],
         exp(
@@ -316,7 +317,7 @@ const GABARITS: TutorBankItemV4[] = [
         const p = enfant();
         const m = randomChoice(["1 kg", "500 g", "2 kg", "200 g"]);
         return qcm(
-          `${randomChoice([`${p.nom} demande :`, "Pic pose une colle :", "Devinette :"])} qu'est-ce qui est le plus lourd, ${m} ${a} ou ${m} ${b} ?`,
+          `${randomChoice([`${p.nom} demande :`, "Colle de Pic :", "Devinette :"])} ${m} ${a} ou ${m} ${b}, qu'est-ce qui pèse le plus ?`,
           "les deux pèsent pareil",
           [`${m} ${a}`, `${m} ${b}`, "les deux pèsent pareil"],
           exp(
@@ -411,28 +412,31 @@ const GABARITS: TutorBankItemV4[] = [
   gab("ce1_masse_soupeser_tpl_1", "ce1_masse_soupeser", 2, "Ce qui tire le plus sur la main, ou le plateau qui descend, c'est le plus lourd.", () =>
     tirer([
       () => {
-        const [a, b] = deuxChoses();
+        let [a, b] = deuxChoses();
+        while (a.g > 5000 || b.g > 5000) [a, b] = deuxChoses();
         const p = enfant();
         const lourd = randomChoice([true, false]);
         const bonne = (a.g > b.g) === lourd ? a : b;
         return qcm(
-          `${p.nom} tient ${a.le} dans une main et ${b.le} dans l'autre. ${randomChoice([
+          `${p.nom} tient ${a.le} et ${b.le}. ${randomChoice([
             `Quelle main sent le plus ${lourd ? "lourd" : "léger"} ?`,
-            `Qu'est-ce qui est le plus ${lourd ? "lourd" : "léger"} ?`,
+            `Lequel est le plus ${lourd ? "lourd" : "léger"} ?`,
           ])}`,
           `celle avec ${bonne.le}`,
           [`celle avec ${a.le}`, `celle avec ${b.le}`, "les deux pareil"],
           exp("Soupeser, c'est porter pour sentir lequel pèse le plus.", "La main qui porte le plus lourd est tirée vers le bas.", `${maj(a.le)} pèse environ ${masseDe(a)}, ${b.le} environ ${masseDe(b)}.`, `C'est la main avec ${bonne.le}.`),
+          cartes([{ label: sansArticle(a.le), icon: a.icon }, { label: sansArticle(b.le), icon: b.icon }], false),
         );
       },
       () => {
         const [a, b] = deuxChoses();
         const [g, d] = randomChoice([true, false]) ? [a, b] : [b, a];
         return qcm(
-          `${randomChoice(["Sur la balance, on pose", "Le chef cuisinier pose", "La boulangère pose", "Au marché, on pose"])} ${g.le} à gauche et ${d.le} à droite. ${randomChoice(["Quel plateau descend ?", "De quel côté la balance penche-t-elle ?"])}`,
+          `${randomChoice(["Balance", "Au marché"])} : à gauche ${g.le}, à droite ${d.le}. Quel plateau descend ?`,
           g.g > d.g ? "celui de gauche" : "celui de droite",
           ["celui de gauche", "celui de droite", "aucun, ils restent au même niveau"],
           exp("Sur une balance à deux plateaux, le plateau le plus lourd descend.", "On cherche l'objet le plus lourd.", `${maj((g.g > d.g ? g : d).le)} est le plus lourd.`, `C'est le plateau de ${g.g > d.g ? "gauche" : "droite"} qui descend.`),
+          cartes([{ label: `à gauche : ${sansArticle(g.le)}`, icon: g.icon }, { label: `à droite : ${sansArticle(d.le)}`, icon: d.icon }], false),
         );
       },
       () => {
@@ -465,7 +469,7 @@ const GABARITS: TutorBankItemV4[] = [
     const p = enfant();
     const quoi = randomChoice(PAQUETS);
     return qcm(
-      `${randomChoice([`${p.nom} veut 1 kg ${quoi}.`, `La recette demande 1 kg ${quoi}.`, `Pic veut 1 kg ${quoi}.`])} Les paquets font ${paquet} g. ${randomChoice(["Combien de paquets faut-il ?", "Combien de paquets prendre ?"])}`,
+      `${randomChoice([`${p.nom} veut 1 kg ${quoi}.`, `La recette demande 1 kg ${quoi}.`, `Pic veut 1 kg ${quoi}.`])} Paquets de ${paquet} g. ${randomChoice(["Combien de paquets ?", "Combien en faut-il ?"])}`,
       String(n),
       [String(n + 1), String(n - 1), String(n * 2), String(paquet / 10)].filter((x, i, t) => x !== "0" && t.indexOf(x) === i),
       exp("1 kg = 1 000 g.", `On ajoute ${paquet} g jusqu'à arriver à 1 000 g.`, `${Array(n).fill(paquet).join(" + ")} = 1 000.`, `Il faut ${n} paquets.`),
@@ -490,7 +494,7 @@ const GABARITS: TutorBankItemV4[] = [
         const deja = randomChoice([100, 200, 300, 400, 500, 600, 700, 800, 900, 250, 750]);
         const p = enfant();
         return qcm(
-          `${randomChoice([`Sur la balance ${deNom(p.nom)}, il y a ${deja} g ${randomChoice(MARCHE)}.`, `Le panier pèse ${deja} g.`])} ${randomChoice(["Combien faut-il ajouter pour arriver à 1 kg ?", "Combien de grammes manque-t-il pour faire 1 kg ?"])}`,
+          `${randomChoice([`Sur la balance : ${deja} g ${randomChoice(MARCHE)}.`, `Le panier ${deNom(p.nom)} pèse ${deja} g.`])} ${randomChoice(["Combien ajouter pour faire 1 kg ?", "Il manque combien pour 1 kg ?"])}`,
           `${1000 - deja} g`,
           [`${1000 - deja + 100} g`, `${100 - (deja % 100) || 10} g`, `${deja} g`, `${1000 - deja - 100} g`].filter((x, i, t) => t.indexOf(x) === i && x !== `${1000 - deja} g` && !x.startsWith("0") && !x.startsWith("-")),
           exp("1 kg = 1 000 g.", `On cherche ce qu'il faut ajouter à ${deja} pour arriver à 1 000.`, `${deja} + ${1000 - deja} = 1 000.`, `Il manque ${1000 - deja} g.`),
@@ -556,7 +560,7 @@ const GABARITS: TutorBankItemV4[] = [
     const n = 1000 / cas.g;
     const p = enfant();
     return qcm(
-      `Un ${cas.quoi} pèse ${cas.g} g. ${randomChoice([`${p.nom} veut en avoir 1 kg. Combien en faut-il ?`, "Combien en faut-il pour faire 1 kg ?", "Combien en faut-il pour équilibrer 1 kg sur la balance ?"])}`.replace("Un tablette", "Une tablette"),
+      `Un ${cas.quoi} pèse ${cas.g} g. ${randomChoice([`${p.nom} en veut 1 kg. Combien en faut-il ?`, "Combien en faut-il pour faire 1 kg ?", "Combien en faut-il pour équilibrer 1 kg ?"])}`.replace("Un tablette", "Une tablette"),
       String(n),
       [String(n + 1), String(n - 1), String(n * 2), String(n + 2)].filter((x) => x !== "0"),
       exp("1 kg = 1 000 g.", `On ajoute ${cas.g} g jusqu'à 1 000 g.`, `${Array(n).fill(cas.g).join(" + ")} = 1 000.`, `Il en faut ${n}.`),
@@ -573,7 +577,7 @@ const GABARITS: TutorBankItemV4[] = [
     const ou = randomChoice(OU);
     return tirer([
       () => qcm(
-        `${p.nom} achète ${a} kg ${x} et ${b} kg ${y} ${ou}. ${randomChoice([`Combien de kilogrammes porte-t-${p.il} en tout ?`, "Quelle masse cela fait-il en tout ?", "Combien pèsent ses courses ?"])}`,
+        `${p.nom} achète ${a} kg ${x} et ${b} kg ${y}. ${randomChoice(["Quelle masse en tout ?", "Combien pèsent ses courses ?"])}`,
         `${a + b} kg`,
         [`${a + b + 1} kg`, `${Math.abs(a - b) || 1} kg`, `${a + b} g`, `${a * b === a + b ? a + b + 2 : a * b} kg`],
         exp("Pour trouver la masse totale, on ajoute les masses.", "Les deux masses sont en kilogrammes : on ajoute les nombres.", `${a} + ${b} = ${a + b}.`, `Cela fait ${a + b} kg.`),
@@ -584,7 +588,7 @@ const GABARITS: TutorBankItemV4[] = [
         const m1 = randomInt(2, 8);
         const plus = randomInt(1, 4);
         return qcm(
-          `La vétérinaire pèse ${animal.n} : ${m1} kg. Un mois plus tard, il a pris ${plus} kg. ${randomChoice(["Combien pèse-t-il maintenant ?", "Quelle est sa nouvelle masse ?"])}`,
+          `${maj(animal.n)} pesait ${m1} kg. Il a pris ${plus} kg. ${randomChoice(["Combien pèse-t-il maintenant ?", "Quelle est sa nouvelle masse ?"])}`,
           `${m1 + plus} kg`,
           [`${m1 + plus + 1} kg`, `${m1 - plus > 0 ? m1 - plus : m1 + plus + 2} kg`, `${m1} kg`, `${m1 + plus} g`],
           exp("Prendre du poids, c'est ajouter de la masse.", "On ajoute ce qu'il a pris à sa masse de départ.", `${m1} + ${plus} = ${m1 + plus}.`, `Il pèse ${m1 + plus} kg.`),
@@ -601,7 +605,7 @@ const GABARITS: TutorBankItemV4[] = [
         const a = randomInt(2, 6) * 50;
         const b = randomInt(2, 7) * 50;
         return qcm(
-          `${p.nom} pèse ${a} g ${x} et ${b} g ${y}. ${randomChoice(["Combien de grammes en tout ?", "Quelle masse cela fait-il ensemble ?"])}`,
+          `${p.nom} pèse ${a} g ${x} et ${b} g ${y}. ${randomChoice(["Combien en tout ?", "Quelle masse en tout ?"])}`,
           `${a + b} g`,
           [`${a + b + 50} g`, `${a + b - 50} g`, `${Math.abs(a - b) || 50} g`, `${a + b} kg`],
           exp("Pour trouver la masse totale, on ajoute les masses.", "Les deux masses sont en grammes : on ajoute.", `${a} + ${b} = ${a + b}.`, `Cela fait ${a + b} g.`),
@@ -613,10 +617,11 @@ const GABARITS: TutorBankItemV4[] = [
         const utilise = randomChoice([100, 200, 250, 300, 400, 450, 500, 600, 750]);
         const pour = randomChoice(["un gâteau", "des crêpes", "un pique-nique", "la fête de l'école", "le repas de la cantine", "des cookies"]);
         return qcm(
-          `Un paquet ${quoi} pèse 1 kg. ${p.nom} en utilise ${utilise} g pour ${pour}. ${randomChoice(["Combien reste-t-il de grammes ?", "Quelle masse reste-t-il dans le paquet ?"])}`,
+          `Un paquet ${quoi} pèse 1 kg. ${p.nom} en prend ${utilise} g. Combien reste-t-il ?`,
           `${1000 - utilise} g`,
           [`${utilise} g`, `${1000 - utilise + 100} g`, `${Math.abs(100 - utilise) || 900} g`, `${1000 - utilise - 50} g`].filter((x) => x !== `${1000 - utilise} g` && !x.startsWith("0") && !x.startsWith("-")),
           exp("1 kg = 1 000 g.", "On enlève ce qui a été utilisé : on cherche ce qui manque pour faire 1 000.", `${utilise} + ${1000 - utilise} = 1 000.`, `Il reste ${1000 - utilise} g.`),
+          { kind: "schema_barre", total: "1 kg", parts: [{ label: "pris", value: `${utilise} g` }, { label: "reste", unknown: true }] },
         );
       },
       () => {
@@ -624,7 +629,7 @@ const GABARITS: TutorBankItemV4[] = [
         const p2 = randomChoice([50, 100, 150, 200]);
         const quoi = randomChoice([{ n: "le melon", i: "🍈" }, { n: "le chou", i: "🥬" }, { n: "l'ananas", i: "🍍" }, { n: "la citrouille", i: "🎃" }, { n: "le pain", i: "🍞" }]);
         return qcm(
-          `La balance est en équilibre. D'un côté, ${quoi.n}. De l'autre, deux poids : ${p1} g et ${p2} g. ${randomChoice([`Combien pèse ${quoi.n} ?`, "Quelle est sa masse ?"])}`,
+          `${maj(quoi.n)} équilibre ${p1} g et ${p2} g. ${randomChoice([`Combien pèse ${quoi.n} ?`, "Quelle est sa masse ?"])}`,
           `${p1 + p2} g`,
           [`${p1} g`, `${p1 + p2 + 100} g`, `${p1 - p2} g`, `${p1 + p2} kg`],
           exp("Quand la balance est en équilibre, les deux côtés pèsent pareil.", "On ajoute les poids.", `${p1} + ${p2} = ${p1 + p2}.`, `${maj(quoi.n)} pèse ${p1 + p2} g.`),
@@ -646,10 +651,11 @@ const GABARITS: TutorBankItemV4[] = [
         const cont = randomChoice([{ q: "le panier", f: false }, { q: "le seau", f: false }, { q: "le sac", f: false }, { q: "la boîte", f: true }, { q: "la caisse", f: true }]);
         const fruit = randomChoice(MARCHE);
         return qcm(
-          `${maj(cont.q)} vide pèse ${vide} g. ${p.nom} y met ${dedans} g ${fruit}. ${randomChoice([`Combien pèse ${cont.q} ${cont.f ? "pleine" : "plein"} ?`, "Quelle est la masse totale ?"])}`,
+          `${maj(cont.q)} vide : ${vide} g. On ajoute ${dedans} g ${fruit}. Combien pèse-t-${cont.f ? "elle" : "il"} ?`,
           `${vide + dedans} g`,
           [`${dedans} g`, `${vide + dedans + 100} g`, `${Math.abs(dedans - vide) || vide + dedans + 50} g`, `${vide + dedans - 50} g`],
           exp("La masse du contenant plein, c'est sa masse vide plus ce qu'on met dedans.", "On ajoute les deux masses.", `${vide} + ${dedans} = ${vide + dedans}.`, `Cela fait ${vide + dedans} g.`),
+          { kind: "schema_barre", total: "?", parts: [{ label: "vide", value: `${vide} g` }, { label: fruit.replace(/^de |^d'/, ""), value: `${dedans} g` }] },
         );
       },
       () => {
@@ -659,7 +665,7 @@ const GABARITS: TutorBankItemV4[] = [
         const quoi = randomChoice(["de graines pour Pic", "de bonbons", "de billes", "de perles", "de noisettes"]);
         const total = n * sachet;
         return qcm(
-          `${p.nom} a ${n} sachets ${quoi}. Chaque sachet pèse ${sachet} g. ${randomChoice(["Combien pèsent-ils en tout ?", "Quelle est la masse totale ?"])}`,
+          `${p.nom} a ${n} sachets ${quoi} de ${sachet} g chacun. ${randomChoice(["Combien en tout ?", "Quelle masse en tout ?"])}`,
           `${total} g`,
           [`${sachet + n} g`, `${total + sachet} g`, `${total - sachet} g`, `${sachet} g`],
           exp("Plusieurs sachets de même masse : on ajoute la même masse plusieurs fois.", `On ajoute ${sachet} g ${n} fois.`, `${Array(n).fill(sachet).join(" + ")} = ${total}.`, `Cela fait ${total} g.`),
@@ -674,7 +680,7 @@ const GABARITS: TutorBankItemV4[] = [
     const p = enfant();
     const quoi = randomChoice(MARCHE);
     return qcm(
-      `${randomChoice([`${p.nom} a déjà ${deja} g ${quoi} dans son sac.`, `Le chef cuisinier a ${deja} g ${quoi}.`, `Sur le plateau, il y a ${deja} g ${quoi}.`])} ${randomChoice(["Combien de grammes faut-il ajouter pour avoir 1 kg ?", "Combien manque-t-il pour arriver à 1 kg ?"])}`,
+      `${randomChoice([`${p.nom} a ${deja} g ${quoi}.`, `Le chef a ${deja} g ${quoi}.`, `Sur le plateau : ${deja} g ${quoi}.`])} ${randomChoice(["Combien ajouter pour avoir 1 kg ?", "Combien manque-t-il pour 1 kg ?"])}`,
       `${1000 - deja} g`,
       [`${1000 - deja + 100} g`, `${1000 - deja - 100} g`, `${deja} g`, `${(100 - (deja % 100)) % 100 || 100} g`].filter((x, i, t) => t.indexOf(x) === i && x !== `${1000 - deja} g` && !x.startsWith("0") && !x.startsWith("-")),
       exp("1 kg = 1 000 g.", "On avance de centaine en centaine jusqu'à 1 000.", `${deja} + ${1000 - deja} = 1 000.`, `Il faut ajouter ${1000 - deja} g.`),
@@ -689,7 +695,7 @@ const GABARITS: TutorBankItemV4[] = [
         const quoi = randomChoice(PAQUETS);
         const p = enfant();
         return qcm(
-          `${p.nom} a ${n} paquets ${quoi} de ${paquet} g. ${randomChoice(["Est-ce que cela fait 1 kg ?", `A-t-${p.il} 1 kg en tout ?`])}`,
+          `${p.nom} a ${n} paquets ${quoi} de ${paquet} g. ${randomChoice(["Cela fait-il 1 kg ?", `A-t-${p.il} 1 kg ?`])}`,
           "oui, tout juste",
           ["oui, tout juste", "non, il manque des grammes", "non, c'est plus que 1 kg"],
           exp("1 kg = 1 000 g.", "On ajoute la masse des paquets.", `${Array(n).fill(paquet).join(" + ")} = 1 000.`, "Oui : cela fait tout juste 1 kg."),
@@ -699,7 +705,7 @@ const GABARITS: TutorBankItemV4[] = [
         const [p, q] = deuxEnfants();
         const quoi = randomChoice(["le même sac", "la même citrouille", "le même paquet", "le même cartable", "la même valise"]);
         return qcm(
-          `${p.nom} et ${q.nom} pèsent ${quoi}. ${p.nom} écrit 1 kg, ${q.nom} écrit 1 000 g. ${randomChoice(["Qui a raison ?", "Qui a écrit juste ?"])}`,
+          `${maj(quoi)} : ${p.nom} écrit 1 kg, ${q.nom} écrit 1 000 g. ${randomChoice(["Qui a raison ?", "Qui a écrit juste ?"])}`,
           "les deux : c'est la même masse",
           [`${p.nom} seulement`, `${q.nom} seulement`, "les deux : c'est la même masse", "aucun des deux"],
           exp("1 kg = 1 000 g : ce sont deux façons d'écrire la même masse.", "On écrit les deux masses dans la même unité.", "1 kg = 1 000 g.", "Les deux ont raison."),
@@ -712,7 +718,7 @@ const GABARITS: TutorBankItemV4[] = [
         const p = enfant();
         const ok = total >= 1000;
         return qcm(
-          `${p.nom} veut 1 kg de fruits. ${maj(p.il)} a ${a} g de pommes et ${b} g de poires. ${randomChoice([`A-t-${p.il} assez ?`, "Cela fait-il 1 kg ?"])}`,
+          `${p.nom} a ${a} g de pommes et ${b} g de poires. ${randomChoice([`A-t-${p.il} 1 kg de fruits ?`, "Cela fait-il 1 kg ?"])}`,
           total === 1000 ? "oui, tout juste" : ok ? "oui, et même un peu plus" : `non, il manque ${1000 - total} g`,
           ["oui, tout juste", "oui, et même un peu plus", `non, il manque ${Math.abs(1000 - total) || 100} g`, `non, il manque ${Math.abs(1000 - total) + 100} g`],
           exp("1 kg = 1 000 g.", "On ajoute les deux masses et on compare à 1 000 g.", `${a} + ${b} = ${total}${total === 1000 ? " = 1 000" : total > 1000 ? " > 1 000" : ` < 1 000 ; 1 000 − ${total} = ${1000 - total}`}.`, total >= 1000 ? "Oui, il en a assez." : `Non, il manque ${1000 - total} g.`),
@@ -791,6 +797,7 @@ export const masseBank: TutorBankItemV4[] = [
     difficulty: 1,
     theme: "neutral",
     text: "Sur une balance à deux plateaux, le plateau de gauche descend. Que peut-on dire ?",
+    canvas: masseCanvas({ variant: "balance", gauche: { label: "gauche", icon: "📦", grammes: 800 }, droite: { label: "droite", icon: "📦", grammes: 200 }, display: { showMasses: false, showLabels: true, showComparison: false } }),
     format: "qcm",
     choices: [
       "ce qui est à gauche est plus lourd",
@@ -879,7 +886,8 @@ export const masseBank: TutorBankItemV4[] = [
     microId: "ce1_masse_soupeser",
     difficulty: 1,
     theme: "neutral",
-    text: "Tu tiens une gomme dans une main et un dictionnaire dans l'autre. Comment sais-tu lequel est le plus lourd ?",
+    text: "Une gomme, un dictionnaire. Sans balance, comment savoir lequel est le plus lourd ?",
+    canvas: cartes([{ label: "gomme", icon: "🧽" }, { label: "dictionnaire", icon: "📕" }], false),
     format: "qcm",
     choices: [
       "je soupèse les deux et je sens lequel tire le plus sur ma main",
@@ -908,6 +916,7 @@ export const masseBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     text: "Un gros ballon de plage et une petite bille en fer. Lequel est le plus lourd ?",
+    canvas: cartes([{ label: "ballon de plage", icon: "🏐" }, { label: "bille en fer", icon: "⚪" }], false),
     format: "qcm",
     choices: [
       "la bille en fer",
@@ -936,6 +945,7 @@ export const masseBank: TutorBankItemV4[] = [
     difficulty: 2,
     theme: "neutral",
     text: "Sur une balance à deux plateaux, les deux plateaux restent au même niveau. Que peut-on dire ?",
+    canvas: masseCanvas({ variant: "balance", gauche: { label: "gauche", icon: "📦", grammes: 500 }, droite: { label: "droite", icon: "🎁", grammes: 500 }, display: { showMasses: false, showLabels: true, showComparison: false } }),
     format: "qcm",
     choices: [
       "les deux objets ont la même masse",
@@ -1076,7 +1086,8 @@ export const masseBank: TutorBankItemV4[] = [
     microId: "ce1_masse_probleme",
     difficulty: 2,
     theme: "reunion",
-    text: "Au marché de Saint-Paul, maman achète 3 kg de letchis et 2 kg de mangues. Combien de kilogrammes porte-t-elle ?",
+    text: "Maman achète 3 kg de letchis et 2 kg de mangues. Combien de kilogrammes en tout ?",
+    canvas: cartes([{ label: "letchis", icon: "🧺", masse: "3 kg" }, { label: "mangues", icon: "🥭", masse: "2 kg" }]),
     format: "short",
     expected: ["5"],
     comparator: "number_equal",
@@ -1099,7 +1110,8 @@ export const masseBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     // 10/11/2026 : « 300 g + 1 kg = 1 300 g » sortait du millier du CE1.
-    text: "Un panier plein de pommes pèse 1 kg. Le panier vide pèse 300 g. Combien pèsent les pommes, en grammes ?",
+    text: "Panier plein de pommes : 1 kg. Panier vide : 300 g. Combien pèsent les pommes, en grammes ?",
+    canvas: { kind: "schema_barre", total: "1 kg", parts: [{ label: "panier", value: "300 g" }, { label: "pommes", unknown: true }] },
     format: "short",
     expected: ["700"],
     comparator: "number_equal",
@@ -1121,7 +1133,8 @@ export const masseBank: TutorBankItemV4[] = [
     microId: "ce1_masse_probleme",
     difficulty: 3,
     theme: "neutral",
-    text: "Un sac de farine pèse 1 kg. On en utilise 400 g pour un gâteau. Combien reste-t-il de grammes de farine ?",
+    text: "Un sac de 1 kg de farine. On en prend 400 g. Combien de grammes reste-t-il ?",
+    canvas: { kind: "schema_barre", total: "1 kg", parts: [{ label: "pris", value: "400 g" }, { label: "reste", unknown: true }] },
     format: "short",
     expected: ["600"],
     comparator: "number_equal",
@@ -1149,7 +1162,8 @@ export const masseBank: TutorBankItemV4[] = [
     microId: "ce1_masse_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Sur un plateau, il y a 750 g de fruits. Combien de grammes faut-il ajouter pour atteindre 1 kg ?",
+    text: "Sur le plateau : 750 g de fruits. Combien de grammes ajouter pour faire 1 kg ?",
+    canvas: { kind: "schema_barre", total: "1 kg", parts: [{ label: "déjà", value: "750 g" }, { label: "manque", unknown: true }] },
     format: "short",
     expected: ["250"],
     comparator: "number_equal",
@@ -1171,7 +1185,7 @@ export const masseBank: TutorBankItemV4[] = [
     microId: "ce1_masse_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Deux enfants pèsent le même sac. Léa écrit 1 kg, Kevin écrit 1 000 g. Qui a raison ?",
+    text: "Le même sac : Léa écrit 1 kg, Kevin écrit 1 000 g. Qui a raison ?",
     format: "qcm",
     choices: [
       "les deux : c'est la même masse",

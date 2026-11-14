@@ -4,7 +4,7 @@
 // Les réponses se CALCULENT depuis les propriétés de ../../tri-donnees.ts.
 
 import type { CanvasFigure, TutorBankItemV4 } from "@/lib/tutor-v4/types";
-import { atelier, etapes, melange, qcm, qcmN, tournure, un, cap } from "../../cm1/maths/trous-outils";
+import { atelier, etapes, melange, qcm, qcmN, un, cap } from "../../cm1/maths/trous-outils";
 import {
   type Critere,
   type Domaine,
@@ -29,6 +29,17 @@ const HINT_C = "Regarde chaque objet. Pose-toi la question : oui ou non ?";
 
 const preuve = (x: Objet, k: Critere, oui: boolean) => `${cap(x.le)} ${oui ? k.label : k.neg}.`;
 
+/* ⭐ 14/11/2026 : « trop long pour des enfants de 7 ans ». Un énoncé tient en
+   16 mots : le contexte (le métier) ne s'ajoute que s'il tient, et parmi les
+   tournures on tire celles qui tiennent (sinon la plus courte). */
+const MAX_MOTS = 16;
+const mots = (t: string) => t.split(/\s+/).filter((w) => /[\p{L}\d]/u.test(w)).length;
+const bref = (variantes: string[]) => {
+  const ok = variantes.filter((v) => mots(v) <= MAX_MOTS);
+  return ok.length ? un(ok) : variantes.reduce((a, b) => (mots(a) <= mots(b) ? a : b));
+};
+const avecCtx = (debut: string, q: string) => (debut && mots(`${debut} ${q}`) <= MAX_MOTS ? `${debut} ${q}` : q);
+
 function celuiQui(ctx: boolean, negatif: boolean) {
   const { d, k, p } = essayer(() => {
     const d = domaine();
@@ -41,7 +52,7 @@ function celuiQui(ctx: boolean, negatif: boolean) {
   const ph = negatif ? k.neg : k.label;
   const demande = [`${d.quel} ${ph} ?`, `Trouve ${d.le} qui ${ph}.`, `Clique sur ${d.le} qui ${ph}.`, `Lequel ${ph} ?`, `Qui ${ph} ?`, `Cherche ${d.le} qui ${ph}.`];
   return {
-    text: ctx ? `${contexte(d)} ${un(demande)}` : un(demande),
+    text: ctx ? avecCtx(contexte(d), bref(demande)) : bref(demande),
     ...qcm(juste.nom, faux.map((x) => x.nom)),
     explanation: etapes(`on regarde chaque réponse.`, `${preuve(juste, k, !negatif)} ${preuve(faux[0], k, negatif)}`, `La réponse est : ${juste.nom}.`),
   };
@@ -56,7 +67,7 @@ function saufUn() {
   });
   const intrus = p.non[0];
   return {
-    text: un([`${cap(d.ces)} ${k.pl}, sauf un. Lequel ?`, `Tous ${k.pl}, sauf un. Lequel ?`, `Trouve l'intrus : ${d.les} qui ${k.pl}.`, `Un seul n'est pas à sa place. Le groupe : ${d.les} qui ${k.pl}.`, `Groupe : ${d.les} qui ${k.pl}. Qui est l'intrus ?`]),
+    text: bref([`${cap(d.ces)} ${k.pl}, sauf un. Lequel ?`, `Tous ${k.pl}, sauf un. Lequel ?`, `Trouve l'intrus : ${d.les} qui ${k.pl}.`, `Groupe : ${d.les} qui ${k.pl}. Qui est l'intrus ?`]),
     ...qcm(intrus.nom, p.oui.map((x) => x.nom)),
     explanation: etapes(`on cherche celui qui ne va pas.`, preuve(intrus, k, false), `L'intrus est : ${intrus.nom}.`),
   };
@@ -64,7 +75,7 @@ function saufUn() {
 
 /** Ce groupe a un point commun ; un seul des autres objets le partage. */
 function vaAvec() {
-  const { g, juste, faux, k } = essayer(() => {
+  const { g, juste, faux, k, fig } = essayer(() => {
     const d = domaine();
     const k = un(d.criteres);
     const p = paquet(d, k, 4, 12);
@@ -73,11 +84,20 @@ function vaAvec() {
     const juste = p.oui[3];
     const partages = communs(g, d.criteres);
     const faux = p.non.filter((x) => !partages.some((m) => sat(x, m))).slice(0, 3);
-    return faux.length === 3 && partages.some((m) => sat(juste, m)) && { g, juste, faux, k };
+    // ⭐ 14/11/2026 : le dessin. À gauche le groupe, à droite les quatre
+    // candidats mélangés : il montre le choix, pas la réponse.
+    const fig: CanvasFigure = {
+      kind: "ensembles",
+      disjoints: true,
+      ensembles: ["Le groupe", "Qui va avec ?"],
+      elements: [...g.map((x) => ({ nom: x.nom, dans: [0] })), ...melange([juste, ...faux]).map((x) => ({ nom: x.nom, dans: [1] }))],
+    };
+    return faux.length === 3 && partages.some((m) => sat(juste, m)) && tientSurLaFigure(fig) && { g, juste, faux, k, fig };
   });
   return {
-    text: tournure([`Voici un groupe : ${liste(g)}.`, `Ce groupe : ${liste(g)}.`, `Le groupe : ${liste(g)}.`, `Regarde ce groupe : ${liste(g)}.`], ["Qui va avec ?", "Lequel va dans ce groupe ?", "Qui peut entrer ?", "Qui va avec eux ?"]),
+    text: bref([`Voici un groupe : ${liste(g)}. Qui va avec ?`, `Le groupe : ${liste(g)}. Qui peut entrer ?`, "Regarde le groupe. Qui va avec ?", "Qui peut entrer dans le groupe ?", "Lequel va dans ce groupe ?"]),
     ...qcm(juste.nom, faux.map((x) => x.nom)),
+    canvas: fig,
     explanation: etapes(`on cherche le point commun du groupe.`, `Dans ce groupe, tous ${k.pl}. ${preuve(juste, k, true)}`, `${cap(juste.le)} va avec eux.`),
   };
 }
@@ -118,7 +138,7 @@ function critereQuiASerVi(ctx: boolean) {
   };
   const demande = ["Comment le groupe 1 est-il choisi ?", "Quel critère a servi pour le groupe 1 ?", "Chaque élément du groupe 1…", "Regarde le groupe 1. Chacun…", "Quel est le point commun du groupe 1 ?", "Que vérifie le groupe 1 ?"];
   return {
-    text: ctx ? `${contexte(d)} ${un(["Il y a deux groupes.", "Voici deux groupes.", "On les trie en deux groupes."])} ${un(demande)}` : un(demande),
+    text: ctx ? avecCtx(contexte(d), un(demande)) : un(demande),
     ...qcm(k.label, faux.map((m) => m.label)),
     canvas: figure,
     explanation: etapes(`on cherche ce qui est vrai pour tout le groupe 1, et faux pour le groupe 2.`, `${preuve(g1[0], k, true)} ${preuve(g2[0], k, false)}`, `Le critère : ${k.label}.`),
@@ -134,7 +154,7 @@ function combienDansListe() {
     return p && { d, k, l: melange([...p.oui, ...p.non]), n: nOui };
   });
   return {
-    text: `${contexte(d)} ${tournure([`Liste : ${liste(l)}.`, `Il y a : ${liste(l)}.`, `Voici : ${liste(l)}.`], [`Combien ${k.pl} ?`, `Dans cette liste, combien ${k.pl} ?`, `Il y en a combien qui ${k.pl} ?`])}`,
+    text: avecCtx(contexte(d), bref([`Voici : ${liste(l)}. Combien ${k.pl} ?`, `Il y a : ${liste(l)}. Combien ${k.pl} ?`, `Liste : ${liste(l)}. Il y en a combien qui ${k.pl} ?`])),
     ...qcmN(n, [n + 1, n + 2, n - 1, 5]),
     explanation: etapes(`on compte ceux qui ${k.pl}.`, `Ceux qui ${k.pl} : ${liste(l.filter((x) => sat(x, k)))}.`, `Il y en a ${n}.`),
   };
@@ -186,7 +206,7 @@ function quiDansA() {
   const juste = un(dans);
   const faux = z.l.filter((x) => !sat(x, k));
   return {
-    text: tournure(lis, [`Qui est dans « ${k.label} » ?`, `Qui va dans « ${k.label} » ?`, `Trouve un élément de « ${k.label} ».`, `Clique sur un élément de « ${k.label} ».`]),
+    text: avecCtx(un(lis), bref([`Qui est dans « ${k.label} » ?`, `Qui va dans « ${k.label} » ?`, `Trouve un élément de « ${k.label} ».`, `Clique sur un élément de « ${k.label} ».`])),
     ...qcm(juste.nom, faux.map((x) => x.nom)),
     canvas: z.fig,
     explanation: etapes(`on regarde dans le cercle « ${k.label} ».`, `${cap(juste.le)} est dans ce cercle.`, `La réponse est : ${juste.nom}.`),
@@ -196,7 +216,7 @@ function quiDansA() {
 function quiDansLesDeux() {
   const z = deuxEnsembles((y) => y.ab.length === 1);
   return {
-    text: tournure(lis, [`Qui est dans « ${z.a.label} » et dans « ${z.b.label} » ?`, `Qui est dans les deux ensembles ?`, `Qui est au milieu du dessin ?`, `Qui ${z.a.label} et ${z.b.label} ?`]),
+    text: avecCtx(un(lis), bref([`Qui est dans « ${z.a.label} » et dans « ${z.b.label} » ?`, `Qui est dans les deux ensembles ?`, `Qui est au milieu du dessin ?`, `Qui ${z.a.label} et ${z.b.label} ?`])),
     ...qcm(z.ab[0].nom, z.l.filter((x) => x !== z.ab[0]).map((x) => x.nom)),
     canvas: z.fig,
     explanation: etapes(`on regarde là où les deux cercles se croisent.`, `${cap(z.ab[0].le)} ${z.a.label}, et ${z.b.label}.`, `La réponse est : ${z.ab[0].nom}.`),
@@ -208,7 +228,7 @@ function quiSeulement() {
   const juste = un(z.seulA);
   const faux = z.l.filter((x) => !z.seulA.includes(x));
   return {
-    text: tournure(lis, [`Qui est dans « ${z.a.label} » seulement ?`, `Qui est dans « ${z.a.label} », mais pas dans « ${z.b.label} » ?`, `Qui ${z.a.label} et ${z.b.neg} ?`]),
+    text: avecCtx(un(lis), bref([`Qui est dans « ${z.a.label} » seulement ?`, `Qui est dans « ${z.a.label} », mais pas dans « ${z.b.label} » ?`, `Qui ${z.a.label} et ${z.b.neg} ?`])),
     ...qcm(juste.nom, faux.map((x) => x.nom)),
     canvas: z.fig,
     explanation: etapes(`on regarde le cercle « ${z.a.label} », sans le milieu.`, `${cap(juste.le)} n'est que dans ce cercle.`, `La réponse est : ${juste.nom}.`),
@@ -220,7 +240,7 @@ function combienLesDeux(ctx: boolean) {
   const n = z.ab.length;
   const debut = ctx ? `${contexte(z.d)} ` : "";
   return {
-    text: debut + un([`Combien sont dans « ${z.a.label} » et dans « ${z.b.label} » ?`, `Combien sont dans les deux ensembles : « ${z.a.label} », « ${z.b.label} » ?`, `Au milieu de « ${z.a.label} » et « ${z.b.label} », il y en a combien ?`]),
+    text: avecCtx(debut.trim(), bref([`Combien sont dans « ${z.a.label} » et dans « ${z.b.label} » ?`, `Au milieu de « ${z.a.label} » et « ${z.b.label} », il y en a combien ?`, "Combien sont dans les deux ensembles ?", "Combien sont au milieu du dessin ?"])),
     ...qcmN(n, [n + 1, z.l.length, z.seulA.length + n, z.seulB.length + n]),
     canvas: z.fig,
     explanation: etapes(`on compte dans la partie du milieu.`, `Au milieu : ${liste(z.ab)}.`, `Il y en a ${n}.`),
@@ -231,7 +251,7 @@ function combienSeulement() {
   const z = deuxEnsembles();
   const n = z.seulA.length;
   return {
-    text: un([`Combien sont dans « ${z.a.label} » seulement ?`, `Combien sont dans « ${z.a.label} », mais pas dans « ${z.b.label} » ?`, `« ${z.a.label} » seulement : il y en a combien ?`]),
+    text: bref([`Combien sont dans « ${z.a.label} » seulement ?`, `Combien sont dans « ${z.a.label} », mais pas dans « ${z.b.label} » ?`, `« ${z.a.label} » seulement : il y en a combien ?`]),
     ...qcmN(n, [n + z.ab.length, n + 1, z.seulB.length, z.ab.length]),
     canvas: z.fig,
     explanation: etapes(`on compte dans « ${z.a.label} », sans le milieu.`, `Dans « ${z.a.label} » seulement : ${liste(z.seulA)}.`, `Il y en a ${n}.`),
@@ -248,7 +268,7 @@ function ouVa(ctx: boolean) {
   const juste = sat(x, z.a) ? (sat(x, z.b) ? les2 : A) : sat(x, z.b) ? B : hors;
   const debut = ctx ? `${contexte(z.d)} ` : "";
   return {
-    text: debut + un([`Où va ${x.le} ?`, `Où placer ${x.le} ?`, `Où ranger ${x.le} ?`, `On ajoute ${x.le}. Dans quelle zone ?`]),
+    text: avecCtx(debut.trim(), un([`Où va ${x.le} ?`, `Où placer ${x.le} ?`, `Où ranger ${x.le} ?`, `On ajoute ${x.le}. Dans quelle zone ?`])),
     ...qcm(juste, [A, B, les2, hors]),
     canvas: z.fig,
     explanation: etapes(`on pose les deux questions.`, `${cap(x.le)} ${sat(x, z.a) ? z.a.label : z.a.neg}. ${cap(x.le)} ${sat(x, z.b) ? z.b.label : z.b.neg}.`, `La réponse : ${juste}.`),
@@ -259,7 +279,7 @@ function combienEnTout() {
   const z = deuxEnsembles();
   const n = z.seulA.length + z.ab.length;
   return {
-    text: `${contexte(z.d)} ${un([`Combien ${z.a.pl} ?`, `En tout, combien ${z.a.pl} ?`, `Dans « ${z.a.label} », il y en a combien en tout ?`])}`,
+    text: avecCtx(contexte(z.d), bref([`Combien ${z.a.pl} ?`, `En tout, combien ${z.a.pl} ?`, `Dans « ${z.a.label} », il y en a combien en tout ?`])),
     ...qcmN(n, [z.seulA.length, n + 1, z.l.length, z.seulB.length + z.ab.length]),
     canvas: z.fig,
     explanation: etapes(`on compte tout le cercle, avec le milieu.`, `${z.seulA.length} + ${z.ab.length} = ${n}.`, `${n} ${z.a.pl}.`),

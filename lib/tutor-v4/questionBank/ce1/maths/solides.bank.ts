@@ -347,7 +347,7 @@ const anciens: TutorBankItemV4[] = [
     microId: "ce1_solide_sommets_aretes",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève dit qu'un cube a 8 arêtes, parce qu'il a compté ses coins. Combien en a-t-il vraiment ?",
+    text: "Léo dit : « Un cube a 8 arêtes. » Il a compté les coins. Combien d'arêtes en vrai ?",
     format: "short",
     expected: ["12"],
     comparator: "number_equal",
@@ -428,7 +428,7 @@ const anciens: TutorBankItemV4[] = [
     microId: "ce1_solide_construire",
     difficulty: 4,
     theme: "neutral",
-    text: "Pour construire un cube avec des tiges et des boules de pâte à modeler, combien de tiges faut-il ?",
+    text: "Un cube en tiges et boules de pâte : combien de tiges faut-il ?",
     format: "short",
     expected: ["12"],
     comparator: "number_equal",
@@ -485,7 +485,7 @@ const anciens: TutorBankItemV4[] = [
     microId: "ce1_solide_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Sur le dessin d'un cube en perspective, on ne voit que trois faces. Combien y en a-t-il de cachées ?",
+    text: "Sur le dessin d'un cube, on voit 3 faces. Combien de faces sont cachées ?",
     format: "short",
     expected: ["3"],
     comparator: "number_equal",
@@ -592,6 +592,8 @@ const ARETES: Record<string, number> = { cube: 12, pave_droit: 12, pyramide: 8 }
 const PLATES: Record<string, number> = { cylindre: 2, cone: 1, boule: 0 };
 const POLY: Solide[] = ["cube", "pave_droit", "pyramide"];
 /** « de faces », « d'arêtes ». */
+/** « de Léa », mais « d'Inès ». */
+const deP = (p: string) => (/^[AEÉIOU]/.test(p) ? `d'${p}` : `de ${p}`);
 const de = (mot: string) => (/^[aeéèiouy]/.test(mot) ? `d'${mot}` : `de ${mot}`);
 const LE_S: Record<string, string> = { cube: "ce cube", pave_droit: "ce pavé", pyramide: "cette pyramide", boule: "cette boule", cylindre: "ce cylindre", cone: "ce cône" };
 
@@ -603,7 +605,7 @@ function objetVersSolide() {
   const s = un(LES6);
   const o = un(OBJETS[s]);
   const p = prenom();
-  const debut = un([`${p} range ${o} dans le placard.`, `Au marché, ${p} trouve ${o}.`, `Dans la chambre de ${p}, il y a ${o}.`, `Pour la kermesse, ${p} apporte ${o}.`, `Pic le paille-en-queue regarde ${o}.`, `${p} met ${o} dans son sac.`]);
+  const debut = un([`${p} range ${o}.`, `Au marché, ${p} trouve ${o}.`, `Voici ${o}.`, `${p} apporte ${o}.`, `Pic regarde ${o}.`, `${p} met ${o} dans son sac.`]);
   return {
     text: `${debut} ${un([`Quel solide a cette forme ?`, `C'est quel solide ?`, `Sa forme, c'est quel solide ?`])}`,
     ...qcm(NOM[s], LES6.filter((x) => x !== s).map((x) => NOM[x])),
@@ -734,9 +736,9 @@ function pailles(ctx: boolean) {
   const n = quoi === "pailles" ? ARETES[s] : SOMMETS[s];
   const p = prenom();
   const debut = ctx
-    ? un([`${p} construit ${LE_S[s].replace(/^ce |^cette /, (m) => (m === "ce " ? "un " : "une "))} avec des pailles et de la pâte à modeler.`, `À l'atelier, ${p} fabrique ce solide avec des pailles et des boules de pâte.`, `Pour la fête, ${p} construit ce solide en pailles.`])
-    : `On construit ce solide avec des pailles et des boules de pâte à modeler.`;
-  const q = quoi === "pailles" ? ["Combien faut-il de pailles ?", "Combien de pailles en tout ?"] : ["Combien faut-il de boules de pâte ?", "Combien de boules de pâte en tout ?"];
+    ? un([`${p} fait ${LE_S[s].replace(/^ce |^cette /, (m) => (m === "ce " ? "un " : "une "))} en pailles et boules de pâte.`, `${p} fait ce solide en pailles et boules de pâte.`])
+    : `On fait ce solide en pailles et boules de pâte.`;
+  const q = quoi === "pailles" ? ["Combien faut-il de pailles ?", "Combien de pailles en tout ?"] : ["Combien faut-il de boules ?", "Combien de boules en tout ?"];
   return {
     text: `${debut} ${un(q)}`,
     ...qcmN(n, [quoi === "pailles" ? SOMMETS[s] : ARETES[s], FACES[s], n + 1, n - 1]),
@@ -768,7 +770,7 @@ function plusieursSolides() {
   const n = k * u;
   const objet = s === "cube" ? un(["dés", "glaçons", "cubes en bois"]) : un(["boîtes à chaussures", "briques de lait", "boîtes de céréales"]);
   return {
-    text: `${un([`${prenom()} a ${k} ${objet} de cette forme.`, `Sur la table, il y a ${k} ${objet} de cette forme.`, `Pic a trouvé ${k} ${objet} identiques.`])} ${un([`Combien ${de(quoi)} en tout ?`, `Combien ${de(quoi)} cela fait-il en tout ?`])}`,
+    text: `${un([`${prenom()} a ${k} ${objet} de cette forme.`, `Il y a ${k} ${objet} de cette forme.`, `Pic a trouvé ${k} ${objet} identiques.`])} ${un([`Combien ${de(quoi)} en tout ?`, `Combien ${de(quoi)} cela fait-il ?`])}`,
     ...qcmN(n, [u, n + u, n - u, k + u]),
     canvas: dessinSolide(s),
     explanation: etapes(`on compte les ${quoi} d'un seul solide, puis on ajoute ${k} fois.`, `Un solide : ${u}. ${Array.from({ length: k }, () => u).join(" + ")} = ${n}.`, `${n} ${quoi} en tout.`),
@@ -777,20 +779,20 @@ function plusieursSolides() {
 
 const DEVINETTES_S: { s: string; t: string }[] = [
   { s: "boule", t: "Je roule partout. Je n'ai aucune face plate." },
-  { s: "cylindre", t: "Je roule tout droit. J'ai deux faces plates en forme de disque." },
-  { s: "cone", t: "J'ai une pointe et une seule face plate, un disque." },
+  { s: "cylindre", t: "Je roule tout droit. J'ai 2 faces plates rondes." },
+  { s: "cone", t: "J'ai une pointe et une face plate : un disque." },
   { s: "cube", t: "J'ai 6 faces, toutes des carrés pareils." },
   { s: "pave_droit", t: "J'ai 6 faces rectangles. Je ne roule pas." },
-  { s: "pyramide", t: "J'ai une pointe, des faces triangles et un carré dessous." },
+  { s: "pyramide", t: "J'ai une pointe, des triangles et un carré dessous." },
   { s: "pyramide", t: "J'ai 5 sommets et 8 arêtes." },
-  { s: "cube", t: "J'ai 8 sommets, 12 arêtes et mes faces sont des carrés." },
+  { s: "cube", t: "J'ai 8 sommets, 12 arêtes et des faces carrées." },
   { s: "cone", t: "Je roule en tournant en rond. J'ai une pointe." },
   { s: "cylindre", t: "Je ressemble à une boîte de conserve." },
 ];
 function devinetteSolide() {
   const d = un(DEVINETTES_S);
   return {
-    text: `${un(["Devinette !", `${prenom()} pose une devinette.`, "Pic pose une devinette.", "Écoute bien."])} « ${d.t} » ${un(["Qui suis-je ?", "Quel solide suis-je ?"])}`,
+    text: `${un(["Devinette !", `Devinette ${deP(prenom())} !`, "Devinette de Pic !", "Écoute bien."])} « ${d.t} » ${un(["Qui suis-je ?", "Quel solide suis-je ?"])}`,
     ...qcm(NOM[d.s], LES6.filter((x) => x !== d.s).map((x) => NOM[x])),
     explanation: etapes("on vérifie chaque indice, l'un après l'autre.", `Seul ${NOM[d.s].replace(/^un |^une /, "le ")} répond à tous les indices.`.replace("le boule", "la boule").replace("le pyramide", "la pyramide"), `C'est ${NOM[d.s]}.`),
   };

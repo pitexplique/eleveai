@@ -89,7 +89,7 @@ export const dureeBank: TutorBankItemV4[] = [
     microId: "ce2_duree_lire_heure",
     difficulty: 4,
     theme: "neutral",
-    text: "Sur cette horloge, la petite aiguille est presque sur le 4 et la grande est sur le 9. Un élève lit « 4 h 45 ». A-t-il raison ?",
+    text: "Sur cette horloge, un élève lit « 4 h 45 ». A-t-il raison ?",
     format: "qcm",
     choices: [
       "non, il est 3 h 45",
@@ -306,7 +306,7 @@ export const dureeBank: TutorBankItemV4[] = [
     microId: "ce2_duree_calculer",
     difficulty: 2,
     theme: "neutral",
-    text: "La récréation commence à 10 h 15 et se termine à 10 h 45. Combien de temps dure-t-elle, en minutes ?",
+    text: "La récréation va de 10 h 15 à 10 h 45. Combien de minutes dure-t-elle ?",
     format: "short",
     expected: ["30"],
     comparator: "number_equal",
@@ -328,7 +328,7 @@ export const dureeBank: TutorBankItemV4[] = [
     microId: "ce2_duree_calculer",
     difficulty: 4,
     theme: "neutral",
-    text: "Un film commence à 14 h 40 et se termine à 16 h 10. Un élève calcule 16 - 14 = 2 et 40 - 10 = 30, et répond « 2 h 30 ». A-t-il raison ?",
+    text: "Le film va de 14 h 40 à 16 h 10. Tom répond « 2 h 30 ». A-t-il raison ?",
     format: "qcm",
     choices: [
       "non, le film dure 1 h 30",
@@ -364,7 +364,7 @@ export const dureeBank: TutorBankItemV4[] = [
     microId: "ce2_duree_calculer",
     difficulty: 3,
     theme: "reunion",
-    text: "Le car scolaire part de Saint-Joseph à 6 h 30 et arrive à l'école à 7 h 15. Combien de temps dure le trajet, en minutes ?",
+    text: "Car de Saint-Joseph : départ 6 h 30, arrivée 7 h 15. Combien de minutes de trajet ?",
     format: "short",
     expected: ["45"],
     comparator: "number_equal",
@@ -390,7 +390,7 @@ export const dureeBank: TutorBankItemV4[] = [
     microId: "ce2_duree_probleme",
     difficulty: 3,
     theme: "reunion",
-    text: "L'école commence à 7 h 30 et la récréation à 9 h 30. Combien de temps les élèves travaillent-ils avant la récréation, en minutes ?",
+    text: "L'école commence à 7 h 30, la récré à 9 h 30. Combien de minutes de travail avant ?",
     format: "short",
     expected: ["120"],
     comparator: "number_equal",
@@ -439,7 +439,7 @@ export const dureeBank: TutorBankItemV4[] = [
     microId: "ce2_duree_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Trois élèves écrivent la même heure. Léa écrit 15 h 30, Kevin écrit 3 h et demie de l'après-midi, Malia écrit 15 h 50. Qui a raison ?",
+    text: "Même heure, trois écritures : Léa 15 h 30, Kevin 3 h et demie de l'après-midi, Malia 15 h 50. Qui a raison ?",
     format: "qcm",
     choices: [
       "Léa et Kevin",
@@ -467,7 +467,11 @@ export const dureeBank: TutorBankItemV4[] = [
     microId: "ce2_duree_defi",
     difficulty: 5,
     theme: "reunion",
-    text: "Une classe part en sortie à 8 h 15. Le trajet en car dure 40 minutes, puis la visite dure 1 h 30. À quelle heure la visite se termine-t-elle ?",
+    text: "Départ à 8 h 15 : 40 min de car, puis 1 h 30 de visite. Quand finit la visite ?",
+    canvas: dureeCanvas({
+      variant: "frise",
+      frise: { startLabel: "8 h 15", endLabel: "?", steps: [{ label: "car 40 min", minutes: 40 }, { label: "visite 1 h 30", minutes: 90 }] },
+    }),
     format: "qcm",
     choices: ["10 h 25", "9 h 85", "10 h 45", "9 h 25"],
     expected: ["10 h 25"],
@@ -545,10 +549,10 @@ const MOMENTS: readonly string[] = [
   "Le cirque ouvre ses portes.",
   "La fusée de Ravi décolle.",
   "Le train de Zoé part.",
-  "Pic le paille-en-queue se met à chanter.",
-  "La boulangère sort les croissants du four.",
+  "Pic se met à chanter.",
+  "Les croissants sortent du four.",
   "Le match de football commence.",
-  "La maîtresse sonne la fin de la récré.",
+  "La récré se termine.",
   "Le spectacle de marionnettes commence.",
   "Le manège du dragon se met à tourner.",
   "La vétérinaire ouvre son cabinet.",
@@ -556,7 +560,7 @@ const MOMENTS: readonly string[] = [
   "Lou arrive à la bibliothèque.",
   "Le jardinier arrose les tomates.",
   "La fête d'anniversaire commence.",
-  "Le chef cuisinier met le gâteau au four.",
+  "Le gâteau entre au four.",
 ];
 
 const QUESTIONS_LECTURE: readonly string[] = [
@@ -570,20 +574,20 @@ const QUESTIONS_LECTURE: readonly string[] = [
 const RENDEZ_VOUS: readonly ((t: string) => string)[] = [
   (t) => `Le goûter est à ${t}.`,
   (t) => `Nina part à la piscine à ${t}.`,
-  (t) => `Le spectacle de cirque commence à ${t}.`,
+  (t) => `Le cirque commence à ${t}.`,
   (t) => `La fusée de Ravi décolle à ${t}.`,
   (t) => `Le train de Zoé part à ${t}.`,
-  (t) => `Téo a rendez-vous chez le dentiste à ${t}.`,
+  (t) => `Téo va chez le dentiste à ${t}.`,
   (t) => `La chasse au trésor commence à ${t}.`,
   (t) => `Le match de football commence à ${t}.`,
   (t) => `La bibliothèque ouvre à ${t}.`,
-  (t) => `La fête d'anniversaire de Lou commence à ${t}.`,
+  (t) => `L'anniversaire de Lou commence à ${t}.`,
   (t) => `Le gâteau sort du four à ${t}.`,
-  (t) => `La visite de la ferme commence à ${t}.`,
+  (t) => `La ferme ouvre à ${t}.`,
   (t) => `Le cours de musique commence à ${t}.`,
-  (t) => `Pic le paille-en-queue mange ses graines à ${t}.`,
-  (t) => `La séance de cinéma commence à ${t}.`,
-  (t) => `Le bus de l'école part à ${t}.`,
+  (t) => `Pic mange ses graines à ${t}.`,
+  (t) => `Le film commence à ${t}.`,
+  (t) => `Le bus part à ${t}.`,
 ];
 
 /* --- Des activités qui DURENT, pour les calculs --- */
@@ -597,13 +601,13 @@ const ACTIVITES: readonly Activite[] = [
   { le: "La cuisson du gâteau", pr: "elle", min: 25, max: 50 },
   { le: "La balade à vélo", pr: "elle", min: 30, max: 90 },
   { le: "L'atelier de peinture", pr: "il", min: 30, max: 60 },
-  { le: "La chasse au trésor des pirates", pr: "elle", min: 30, max: 75 },
+  { le: "La chasse au trésor", pr: "elle", min: 30, max: 75 },
   { le: "Le voyage en train", pr: "il", min: 40, max: 120 },
   { le: "Le cours de musique", pr: "il", min: 30, max: 60 },
-  { le: "La séance à la bibliothèque", pr: "elle", min: 20, max: 50 },
-  { le: "Le spectacle de la kermesse", pr: "il", min: 30, max: 80 },
+  { le: "La lecture", pr: "elle", min: 20, max: 50 },
+  { le: "Le spectacle", pr: "il", min: 30, max: 80 },
   { le: "La visite de la ferme", pr: "elle", min: 45, max: 120 },
-  { le: "L'atelier « fusées et planètes »", pr: "il", min: 30, max: 75 },
+  { le: "L'atelier fusées", pr: "il", min: 30, max: 75 },
   { le: "Le goûter d'anniversaire", pr: "il", min: 30, max: 90 },
   { le: "La visite du château", pr: "elle", min: 45, max: 120 },
   { le: "La visite de l'aquarium", pr: "elle", min: 40, max: 100 },
@@ -657,12 +661,12 @@ function aiguillesDecrites(h: number, m: number): Q {
   const grande = m === 0 ? "sur le 12" : `sur le ${cinq}`;
   const qui = quelquun();
   const debut = pick([
-    `Sur la pendule de ${qui.nom}, la petite aiguille est ${petite} et la grande ${grande}.`,
-    `La petite aiguille du réveil est ${petite}. La grande aiguille est ${grande}.`,
-    `Sur l'horloge de la classe, la grande aiguille est ${grande} et la petite ${petite}.`,
+    `La petite aiguille est ${petite}, la grande ${grande}.`,
+    `Réveil de ${qui.nom} : petite aiguille ${petite}, grande ${grande}.`,
+    `La grande aiguille est ${grande}, la petite ${petite}.`,
   ]);
   return {
-    text: `${debut} ${pick(["Quelle heure est-il ?", "Quelle heure cela fait-il ?", "Quelle heure est-il à ce moment-là ?"])}`,
+    text: `${debut} Quelle heure est-il ?`,
     format: "qcm",
     choices: choix(bonne, [
       heure(h, cinq),
@@ -702,7 +706,7 @@ function heureEnMots(): Q {
     `${qui.nom} dit : « Il est ${f.mots(H)}. »`,
     `À la radio, on entend : « Il est ${f.mots(H)}. »`,
     `La maîtresse annonce : « Il est ${f.mots(H)}. »`,
-    `Pic le paille-en-queue chante : « Il est ${f.mots(H)} ! »`,
+    `Pic chante : « Il est ${f.mots(H)} ! »`,
   ]);
   return {
     text: `${debut} ${pick(["Comment l'écrit-on en chiffres ?", "Quelle est la bonne écriture ?", "Choisis l'heure écrite en chiffres."])}`,
@@ -742,7 +746,7 @@ function apresMidi(): Q {
   return {
     text: `${debut} ${pick([
       "Comment l'écrit-on sur un panneau de gare ?",
-      "Quelle heure est-ce, en comptant de 0 à 24 heures ?",
+      "Comment l'écrire de 0 à 24 h ?",
       "Comment l'écrit-on avec les heures de l'après-midi ?",
     ])}`,
     format: "qcm",
@@ -766,7 +770,7 @@ function lirePiege(): Q {
   const qui = quelquun();
   const faux = heure(h + 1, m);
   return {
-    text: `${pick(MOMENTS)} ${qui.nom} regarde l'horloge et dit : « Il est ${faux}. » A-t-${qui.il} raison ?`,
+    text: `${pick(MOMENTS)} ${qui.nom} dit : « Il est ${faux}. » A-t-${qui.il} raison ?`,
     format: "qcm",
     choices: choix(`non, il est ${bonne}`, ["oui", `non, il est ${heure(h + 1, m - 30)}`, `non, il est ${heure(h, m / 5)}`]),
     expected: [`non, il est ${bonne}`],
@@ -787,15 +791,14 @@ function lirePiege(): Q {
 
 const Q_GRANDE: readonly string[] = [
   "Où places-tu la grande aiguille ?",
-  "Sur quel nombre doit pointer la grande aiguille ?",
-  "Pour l'afficher sur l'horloge, où va la grande aiguille ?",
-  "Quel nombre doit montrer la grande aiguille ?",
+  "Où va la grande aiguille ?",
+  "Quel nombre montre la grande aiguille ?",
 ];
 
 function placerGrande(h: number, m: number): Q {
   const cinq = m === 0 ? 12 : m / 5;
   const bonne = `sur le ${cinq}`;
-  const avecDessin = m !== 0 && Math.random() < 0.6;
+  const avecDessin = m !== 0;
   const debut = pick(RENDEZ_VOUS)(heure(h, m));
   const pieges = [
     `sur le ${h}`,
@@ -807,7 +810,7 @@ function placerGrande(h: number, m: number): Q {
   ];
   return {
     text: avecDessin
-      ? `${debut} L'horloge montre ${h} h pile. ${pick(Q_GRANDE)}`
+      ? `${debut} L'horloge montre ${h} h. ${pick(Q_GRANDE)}`
       : `${debut} ${pick(Q_GRANDE)}`,
     format: "qcm",
     choices: choix(bonne, pieges),
@@ -842,13 +845,12 @@ function placerPetite(h: number, m: number): Q {
     `entre le ${h} et le ${s}, tout près du ${h}`,
     `entre le ${h} et le ${s}, tout près du ${s}`,
   ];
-  const avecDessin = m !== 0 && Math.random() < 0.5;
+  const avecDessin = m !== 0 && Math.random() < 0.7;
   const debut = pick(RENDEZ_VOUS)(heure(h, m));
   return {
-    text: `${debut} ${avecDessin ? `Voici l'horloge à ${h} h pile. ` : ""}${pick([
-      "Où se trouve la petite aiguille à ce moment-là ?",
+    text: `${debut} ${avecDessin ? `L'horloge montre ${h} h. ` : ""}${pick([
+      "Où sera alors la petite aiguille ?",
       "Où faut-il placer la petite aiguille ?",
-      "Où est la petite aiguille à cette heure-là ?",
     ])}`,
     format: "qcm",
     choices: choix(bonne, toutes),
@@ -869,7 +871,7 @@ function placerPetite(h: number, m: number): Q {
 --------------------------------------------------------- */
 
 const CHOSES_QUI_DURENT: readonly string[] = [
-  "La sieste de Pic le paille-en-queue dure",
+  "La sieste de Pic dure",
   "Le trajet en bus dure",
   "La séance de piscine dure",
   "Le gâteau cuit pendant",
@@ -880,10 +882,10 @@ const CHOSES_QUI_DURENT: readonly string[] = [
   "Le spectacle de cirque dure",
   "La visite de l'aquarium dure",
   "L'atelier de peinture dure",
-  "Le voyage en fusée de Ravi dure",
+  "Le voyage en fusée dure",
   "Le match de football dure",
   "La pêche avec papi dure",
-  "La répétition de la chorale dure",
+  "La chorale dure",
 ];
 
 function convertirSimple(): Q {
@@ -900,6 +902,7 @@ function convertirSimple(): Q {
       "Cela fait combien de minutes ?",
       "Combien de minutes en tout ?",
     ])}`,
+    canvas: Math.random() < 0.6 ? frise("début", "fin", [{ label: f.mots, minutes: f.min }]) : undefined,
     format: "qcm",
     choices: choix(`${f.min} min`, f.pieges.map((p) => `${p} min`)),
     expected: [`${f.min} min`],
@@ -945,15 +948,14 @@ function heuresVersMinutes(hMin: number, hMax: number, demiesSeulement: boolean)
   const h = rint(hMin, hMax);
   const m = pick(demiesSeulement ? [0, 30] : [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]);
   const total = h * 60 + m;
-  const avecFrise = Math.random() < 0.5;
   const etapes = [
     ...Array.from({ length: h }, () => ({ label: "1 h", minutes: 60 })),
     ...(m ? [{ label: `${m} min`, minutes: m }] : []),
   ];
   return {
-    text: `${pick(CHOSES_QUI_DURENT)} ${dureeTxt(total)}. ${avecFrise ? "La frise montre chaque heure. " : ""}${pick([
+    text: `${pick(CHOSES_QUI_DURENT)} ${dureeTxt(total)}. ${pick([
       "Combien de minutes cela fait-il ?",
-      "Cela fait combien de minutes en tout ?",
+      "Cela fait combien de minutes ?",
       "Écris cette durée en minutes.",
     ])}`,
     format: "qcm",
@@ -966,7 +968,7 @@ function heuresVersMinutes(hMin: number, hMax: number, demiesSeulement: boolean)
       `${h} × 60 = ${h * 60}${m ? ` ; ${h * 60} + ${m} = ${total}` : ""}.`,
       `${dureeTxt(total)} = ${total} min.`,
     ),
-    canvas: avecFrise ? frise("début", "fin", etapes) : undefined,
+    canvas: frise("début", "fin", etapes),
   };
 }
 
@@ -977,10 +979,10 @@ function minutesVersHeures(lo: number, hi: number): Q {
   const bonne = dureeTxt(total);
   return {
     text: `${pick(CHOSES_QUI_DURENT)} ${total} minutes. ${pick([
-      "Combien d'heures et de minutes cela fait-il ?",
-      "Écris cette durée en heures et minutes.",
-      "Cela fait combien d'heures et de minutes ?",
+      "Combien d'heures et de minutes ?",
+      "Écris-la en heures et minutes.",
     ])}`,
+    canvas: frise("début", "fin", [{ label: `${total} min`, minutes: total }]),
     format: "qcm",
     choices: choix(bonne, [
       dureeTxt(total + 60),
@@ -1006,12 +1008,12 @@ function completerHeure(): Q {
     `${qui.nom} lit depuis ${m} minutes.`,
     `Le gâteau cuit depuis ${m} minutes.`,
     `${qui.nom} joue au parc depuis ${m} minutes.`,
-    `La séance de piscine a commencé il y a ${m} minutes.`,
+    `La piscine a commencé il y a ${m} minutes.`,
   ]);
   return {
     text: `${debut} ${pick([
-      "Combien de minutes manque-t-il pour faire une heure ?",
-      "Combien de minutes reste-t-il pour arriver à 1 heure ?",
+      "Combien de minutes pour faire une heure ?",
+      "Combien de minutes avant 1 heure ?",
     ])}`,
     format: "qcm",
     choices: choix(`${60 - m} min`, [`${100 - m} min`, `${70 - m} min`, `${m} min`, `${55 - m} min`]),
@@ -1045,8 +1047,8 @@ function dureeEntre(a: Activite, h1: number, m1: number, d: number): Q {
   ];
   return {
     text: regarde
-      ? `${a.le} commence et finit aux heures montrées par les deux horloges. ${pick(Q_DUREE)(a.pr)}`
-      : `${a.le} commence à ${heure(h1, m1)} et se termine à ${heure(h2, m2)}. ${pick(Q_DUREE)(a.pr)}`,
+      ? `${a.le} : regarde les deux horloges. ${pick(Q_DUREE)(a.pr)}`
+      : `${a.le} va de ${heure(h1, m1)} à ${heure(h2, m2)}. ${pick(Q_DUREE)(a.pr)}`,
     format: "qcm",
     choices: choix(bonne, pieges),
     expected: [bonne],
@@ -1076,10 +1078,9 @@ function heureDeFin(a: Activite, h1: number, m1: number, d: number, sensInverse:
       heure(h1 + dh, m2),
     ];
     return {
-      text: `${a.le} commence à ${heure(h1, m1)}. ${majuscule(a.pr)} dure ${dureeTxt(d)}. ${pick([
-        `À quelle heure se termine-t-${a.pr} ?`,
+      text: `${a.le} commence à ${heure(h1, m1)} et dure ${dureeTxt(d)}. ${pick([
         `À quelle heure finit-${a.pr} ?`,
-        "Quelle heure sera-t-il à la fin ?",
+        `Quand finit-${a.pr} ?`,
       ])}`,
       format: "qcm",
       choices: choix(bonne, pieges),
@@ -1097,10 +1098,9 @@ function heureDeFin(a: Activite, h1: number, m1: number, d: number, sensInverse:
   const bonne = heure(h1, m1);
   const pieges = [heure(h1 + 1, m1), heure(h1 - 1, m1), heure(h1, (m1 + 10) % 60), heure(h2 - dh, (m2 + dm) % 60)];
   return {
-    text: `${a.le} se termine à ${heure(h2, m2)}. ${majuscule(a.pr)} a duré ${dureeTxt(d)}. ${pick([
+    text: `${a.le} finit à ${heure(h2, m2)}, après ${dureeTxt(d)}. ${pick([
       `À quelle heure a-t-${a.pr} commencé ?`,
       "À quelle heure était le début ?",
-      "Quelle heure était-il au début ?",
     ])}`,
     format: "qcm",
     choices: choix(bonne, pieges),
@@ -1122,22 +1122,22 @@ function heureDeFin(a: Activite, h1: number, m1: number, d: number, sensInverse:
 
 type Histoire = { debut: (t: string, d: string) => string; fin: string; min: number; max: number };
 const HISTOIRES: readonly Histoire[] = [
-  { debut: (t, d) => `Le chef cuisinier met un gâteau au four à ${t}. Il doit cuire ${d}.`, fin: "À quelle heure faut-il le sortir ?", min: 25, max: 50 },
-  { debut: (t, d) => `Nina monte dans le train à ${t}. Le voyage dure ${d}.`, fin: "À quelle heure arrive-t-elle ?", min: 25, max: 55 },
-  { debut: (t, d) => `Le spectacle de cirque commence à ${t}. Il dure ${d}.`, fin: "À quelle heure se termine-t-il ?", min: 30, max: 55 },
-  { debut: (t, d) => `Téo plante des radis à ${t}. Il travaille ${d} dans le jardin.`, fin: "À quelle heure a-t-il fini ?", min: 20, max: 50 },
-  { debut: (t, d) => `La fusée de Ravi décolle à ${t}. Elle vole ${d} avant de se poser sur la Lune.`, fin: "À quelle heure se pose-t-elle ?", min: 30, max: 55 },
-  { debut: (t, d) => `Les pirates commencent à creuser à ${t}. Ils trouvent le trésor ${d} plus tard.`, fin: "À quelle heure trouvent-ils le trésor ?", min: 20, max: 55 },
-  { debut: (t, d) => `Zoé entre dans la piscine à ${t}. Elle nage pendant ${d}.`, fin: "À quelle heure sort-elle de l'eau ?", min: 25, max: 50 },
-  { debut: (t, d) => `La vétérinaire commence à soigner un chiot à ${t}. Les soins durent ${d}.`, fin: "À quelle heure a-t-elle fini ?", min: 15, max: 45 },
-  { debut: (t, d) => `Le bateau quitte le port à ${t}. La traversée dure ${d}.`, fin: "À quelle heure arrive-t-il sur l'île ?", min: 30, max: 55 },
-  { debut: (t, d) => `Lou commence son puzzle de dinosaures à ${t}. Elle le finit ${d} plus tard.`, fin: "À quelle heure a-t-elle fini ?", min: 20, max: 55 },
-  { debut: (t, d) => `La boulangère met le pain au four à ${t}. Il cuit ${d}.`, fin: "À quelle heure le pain est-il cuit ?", min: 25, max: 45 },
-  { debut: (t, d) => `Le match de football de Malo commence à ${t}. La première mi-temps dure ${d}.`, fin: "À quelle heure se termine la première mi-temps ?", min: 20, max: 45 },
-  { debut: (t, d) => `Pic le paille-en-queue s'endort sur une branche à ${t}. Il fait une sieste de ${d}.`, fin: "À quelle heure se réveille-t-il ?", min: 20, max: 55 },
-  { debut: (t, d) => `Le jardinier commence à tondre la pelouse à ${t}. Il lui faut ${d}.`, fin: "À quelle heure aura-t-il fini ?", min: 25, max: 55 },
-  { debut: (t, d) => `Les pompiers partent de la caserne à ${t}. Ils arrivent ${d} plus tard.`, fin: "À quelle heure arrivent-ils ?", min: 10, max: 25 },
-  { debut: (t, d) => `La visite du château commence à ${t}. Elle dure ${d}.`, fin: "À quelle heure se termine-t-elle ?", min: 30, max: 55 },
+  { debut: (t, d) => `Le chef met un gâteau au four à ${t}. Il cuit ${d}.`, fin: "À quelle heure le sortir ?", min: 25, max: 50 },
+  { debut: (t, d) => `Nina prend le train à ${t}. Le voyage dure ${d}.`, fin: "À quelle heure arrive-t-elle ?", min: 25, max: 55 },
+  { debut: (t, d) => `Le cirque commence à ${t} et dure ${d}.`, fin: "À quelle heure finit-il ?", min: 30, max: 55 },
+  { debut: (t, d) => `Téo jardine à partir de ${t}, pendant ${d}.`, fin: "À quelle heure a-t-il fini ?", min: 20, max: 50 },
+  { debut: (t, d) => `La fusée de Ravi décolle à ${t} et vole ${d}.`, fin: "À quelle heure se pose-t-elle ?", min: 30, max: 55 },
+  { debut: (t, d) => `Les pirates creusent dès ${t}. Ils trouvent le trésor ${d} plus tard.`, fin: "À quelle heure le trouvent-ils ?", min: 20, max: 55 },
+  { debut: (t, d) => `Zoé entre dans la piscine à ${t} et nage ${d}.`, fin: "À quelle heure sort-elle ?", min: 25, max: 50 },
+  { debut: (t, d) => `La vétérinaire soigne un chiot à ${t}, pendant ${d}.`, fin: "À quelle heure a-t-elle fini ?", min: 15, max: 45 },
+  { debut: (t, d) => `Le bateau part à ${t}. La traversée dure ${d}.`, fin: "À quelle heure arrive-t-il ?", min: 30, max: 55 },
+  { debut: (t, d) => `Lou commence un puzzle à ${t} et le finit ${d} plus tard.`, fin: "À quelle heure a-t-elle fini ?", min: 20, max: 55 },
+  { debut: (t, d) => `La boulangère met le pain au four à ${t}. Il cuit ${d}.`, fin: "À quelle heure est-il cuit ?", min: 25, max: 45 },
+  { debut: (t, d) => `Le match de Malo commence à ${t}. Mi-temps : ${d} plus tard.`, fin: "À quelle heure ?", min: 20, max: 45 },
+  { debut: (t, d) => `Pic s'endort à ${t} pour une sieste de ${d}.`, fin: "À quelle heure se réveille-t-il ?", min: 20, max: 55 },
+  { debut: (t, d) => `Le jardinier tond la pelouse à ${t}, pendant ${d}.`, fin: "À quelle heure a-t-il fini ?", min: 25, max: 55 },
+  { debut: (t, d) => `Les pompiers partent à ${t} et arrivent ${d} plus tard.`, fin: "À quelle heure arrivent-ils ?", min: 10, max: 25 },
+  { debut: (t, d) => `La visite du château commence à ${t} et dure ${d}.`, fin: "À quelle heure finit-elle ?", min: 30, max: 55 },
 ];
 
 function problemeFin(h1: number, m1: number, d: number, histoire: Histoire): Q {
@@ -1151,7 +1151,7 @@ function problemeFin(h1: number, m1: number, d: number, histoire: Histoire): Q {
     heure(h2 - 1, m2),
   ];
   return {
-    text: `${histoire.debut(heure(h1, m1), `${d} minutes`)} ${pick([histoire.fin, histoire.fin, "Quelle heure sera-t-il à ce moment-là ?", "Quelle heure sera-t-il quand ce sera fini ?"])}`,
+    text: `${histoire.debut(heure(h1, m1), `${d} minutes`)} ${pick([histoire.fin, histoire.fin, "Quelle heure sera-t-il alors ?"])}`,
     format: "qcm",
     choices: choix(bonne, pieges),
     expected: [bonne],
@@ -1199,18 +1199,18 @@ function dansCombienDeTemps(): Q {
 
 type Journee = { etapes: [string, string, string]; fin: string };
 const JOURNEES: readonly Journee[] = [
-  { etapes: ["le trajet en car", "la visite du zoo", "le pique-nique"], fin: "À quelle heure tout est-il fini ?" },
-  { etapes: ["la préparation de la pâte", "la cuisson du gâteau", "la décoration"], fin: "À quelle heure le gâteau est-il prêt ?" },
-  { etapes: ["l'échauffement", "le match", "le goûter des joueurs"], fin: "À quelle heure les joueurs ont-ils fini ?" },
-  { etapes: ["la marche jusqu'à la plage", "la chasse au trésor", "le retour"], fin: "À quelle heure les pirates sont-ils rentrés ?" },
-  { etapes: ["la montée dans la fusée", "le voyage jusqu'à la Lune", "la promenade sur la Lune"], fin: "À quelle heure la promenade se termine-t-elle ?" },
-  { etapes: ["le trajet à vélo", "la visite de la ferme", "le goûter avec les chèvres"], fin: "À quelle heure la sortie se termine-t-elle ?" },
-  { etapes: ["la répétition", "le spectacle de danse", "les applaudissements"], fin: "À quelle heure tout est-il terminé ?" },
-  { etapes: ["le voyage en train", "la visite du château", "le goûter"], fin: "À quelle heure la journée se termine-t-elle ?" },
-  { etapes: ["la lecture d'une histoire", "l'atelier de dessin", "le rangement"], fin: "À quelle heure l'atelier est-il fini ?" },
-  { etapes: ["le trajet jusqu'à la piscine", "la leçon de natation", "la douche"], fin: "À quelle heure ressort-on de la piscine ?" },
-  { etapes: ["la balade en forêt", "la cueillette des mûres", "le retour à la cabane"], fin: "À quelle heure est-on de retour ?" },
-  { etapes: ["le montage du chapiteau", "le spectacle de cirque", "le rangement"], fin: "À quelle heure le cirque a-t-il tout rangé ?" },
+  { etapes: ["car", "zoo", "pique-nique"], fin: "Quand tout finit-il ?" },
+  { etapes: ["pâte", "cuisson", "décoration"], fin: "Quand le gâteau est-il prêt ?" },
+  { etapes: ["échauffement", "match", "goûter"], fin: "Quand les joueurs ont-ils fini ?" },
+  { etapes: ["marche", "chasse au trésor", "retour"], fin: "Quand les pirates rentrent-ils ?" },
+  { etapes: ["fusée", "voyage", "promenade"], fin: "Quand la promenade finit-elle ?" },
+  { etapes: ["vélo", "ferme", "goûter"], fin: "Quand la sortie finit-elle ?" },
+  { etapes: ["répétition", "spectacle", "saluts"], fin: "Quand tout est-il terminé ?" },
+  { etapes: ["train", "château", "goûter"], fin: "Quand la journée finit-elle ?" },
+  { etapes: ["histoire", "dessin", "rangement"], fin: "Quand l'atelier finit-il ?" },
+  { etapes: ["trajet", "natation", "douche"], fin: "Quand sort-on de la piscine ?" },
+  { etapes: ["balade", "cueillette", "retour"], fin: "Quand est-on de retour ?" },
+  { etapes: ["montage", "spectacle", "rangement"], fin: "Quand tout est-il rangé ?" },
 ];
 
 function journeeEnEtapes(nbEtapes: 2 | 3, maxD: number): Q {
@@ -1224,12 +1224,10 @@ function journeeEnEtapes(nbEtapes: 2 | 3, maxD: number): Q {
   const total = ds.reduce((s, d) => s + d, 0);
   const [h2, m2] = plusTard(h1, m1, total);
   const bonne = heure(h2, m2);
-  const liste = noms
-    .map((n, k) => `${k === 0 ? "d'abord" : k === 2 ? "enfin" : "puis"} ${n} (${dureeTxt(ds[k])})`)
-    .join(", ");
+  const liste = noms.map((n, k) => `${k === 0 ? majuscule(n) : n} : ${dureeTxt(ds[k])}`).join(", ");
   const [hs, ms] = plusTard(h1, m1, total - ds[ds.length - 1]);
   return {
-    text: `On commence à ${heure(h1, m1)} : ${liste}. ${j.fin}`,
+    text: `Début à ${heure(h1, m1)}. ${liste}. ${j.fin}`,
     format: "qcm",
     choices: choix(bonne, [heure(hs, ms), heure(h2 + 1, m2), heure(h2, (m2 + 10) % 60), heure(h2 - 1, m2)]),
     expected: [bonne],
@@ -1246,23 +1244,21 @@ function journeeEnEtapes(nbEtapes: 2 | 3, maxD: number): Q {
 
 function quiLePlusLongtemps(): Q {
   const [p, q] = deuxPersonnes();
-  const act = pick(["lit", "dessine", "joue au ballon", "fait du vélo", "nage", "joue du piano", "construit une cabane", "fait un puzzle"]);
+  const act = pick(["lit", "dessine", "joue", "pédale", "nage", "peint", "danse", "chante"]);
   const valeurs = [35, 40, 45, 50, 55, 65, 70, 75, 80];
   const d1 = pick(valeurs);
   let d2 = pick(valeurs);
   while (d2 === d1) d2 = pick(valeurs);
   const h1 = rint(9, 15);
-  const m1 = pick([0, 10, 20, 30, 40, 50]);
+  // Débuts à l'heure pile ou à la demie : quatre horaires, c'est déjà long à lire.
+  const m1 = 0;
   const h3 = rint(9, 15);
-  const m3 = pick([5, 15, 25, 35, 45]);
+  const m3 = pick([0, 30]);
   const [h2, m2] = plusTard(h1, m1, d1);
   const [h4, m4] = plusTard(h3, m3, d2);
   const bonne = d1 > d2 ? p.nom : q.nom;
   return {
-    text: `${p.nom} ${act} de ${heure(h1, m1)} à ${heure(h2, m2)}. ${q.nom} ${act} de ${heure(h3, m3)} à ${heure(h4, m4)}. ${pick([
-      "Qui y a passé le plus de temps ?",
-      "Qui l'a fait le plus longtemps ?",
-    ])}`,
+    text: `${p.nom} ${act} de ${heure(h1, m1)} à ${heure(h2, m2)}, ${q.nom} de ${heure(h3, m3)} à ${heure(h4, m4)}. Qui ${act} plus longtemps ?`,
     format: "qcm",
     choices: choix(bonne, [d1 > d2 ? q.nom : p.nom, "les deux, autant de temps", "on ne peut pas savoir"]),
     expected: [bonne],
@@ -1283,16 +1279,16 @@ function comparerDurees(): Q {
   const autre = pick([enMin - 10, enMin + 10, enMin, enMin - 25, enMin + 15]);
   const [p, q] = deuxPersonnes();
   const quoi = pick([
-    { mot: "le film", celui: "celui", lequel: "Lequel" },
-    { mot: "la balade", celui: "celle", lequel: "Laquelle" },
-    { mot: "la partie de jeu", celui: "celle", lequel: "Laquelle" },
-    { mot: "le voyage", celui: "celui", lequel: "Lequel" },
-    { mot: "la visite au musée des dinosaures", celui: "celle", lequel: "Laquelle" },
+    { mot: "le film", celui: "celui", lequel: "Lequel", long: "le plus long" },
+    { mot: "la balade", celui: "celle", lequel: "Laquelle", long: "la plus longue" },
+    { mot: "la partie de jeu", celui: "celle", lequel: "Laquelle", long: "la plus longue" },
+    { mot: "le voyage", celui: "celui", lequel: "Lequel", long: "le plus long" },
+    { mot: "la visite du musée", celui: "celle", lequel: "Laquelle", long: "la plus longue" },
   ]);
   const egal = autre === enMin;
   const bonne = egal ? "les deux durent autant" : enMin > autre ? `${quoi.celui} de ${p.nom}` : `${quoi.celui} de ${q.nom}`;
   return {
-    text: `${p.nom} et ${q.nom} racontent ${quoi.mot} de leur week-end. ${majuscule(quoi.celui)} de ${p.nom} a duré ${dureeTxt(enMin)}, ${quoi.celui} de ${q.nom} ${autre} minutes. ${quoi.lequel} a duré le plus longtemps ?`,
+    text: `${majuscule(quoi.mot)} : ${dureeTxt(enMin)} pour ${p.nom}, ${autre} minutes pour ${q.nom}. ${quoi.lequel} est ${quoi.long} ?`,
     format: "qcm",
     choices: choix(bonne, [`${quoi.celui} de ${p.nom}`, `${quoi.celui} de ${q.nom}`, "les deux durent autant", "on ne peut pas comparer des heures et des minutes"]),
     expected: [bonne],

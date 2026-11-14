@@ -397,7 +397,22 @@ export default function TutorSimpleView({
 
                 {currentQuestion.format === "qcm" && currentQuestion.choices?.length ? (
                   <div
-                    className="grid gap-3"
+                    /* ⭐ 14/11/2026 — Frédéric : « les rangées verticales prennent
+                       beaucoup de place, remplace-les par des lignes ». Des choix
+                       courts (un nombre, « 12 € », « un cube ») se posent côte à
+                       côte : 2 par ligne au téléphone, tous sur une ligne dès
+                       qu'il y a la place. Une phrase longue garde sa ligne. */
+                    className={
+                      currentQuestion.choices.every((c) => c.length <= 14)
+                        ? `grid grid-cols-2 gap-3 ${
+                            currentQuestion.choices.length === 3
+                              ? "sm:grid-cols-3"
+                              : currentQuestion.choices.length >= 4
+                                ? "sm:grid-cols-4"
+                                : ""
+                          }`
+                        : "grid gap-3"
+                    }
                     role="group"
                     aria-label="Réponses possibles : utilise Tab pour les parcourir, Entrée pour choisir"
                   >

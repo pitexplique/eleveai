@@ -157,11 +157,10 @@ function tableauEnquete(t: Tirage, enfants = "Enfants"): TableauDonneesCanvasDat
 /** Une phrase qui pose l'enquête, différente à chaque fois. */
 function intro(t: Tirage, support: "tableau" | "diagramme") {
   return randomChoice([
-    `${t.p} a demandé : « ${t.e.question} »`,
-    `${t.lieu}, ${t.p} a fait une enquête.`,
+    // ⭐ 14/11 : courts — le tableau ou le diagramme montre l'enquête.
+    `${t.p} a fait une enquête.`,
     `Regarde le ${support} ${de(t.p)}.`,
-    `${t.lieu}, on a demandé : « ${t.e.question} »`,
-    `Pic le paille-en-queue a fait une enquête.`,
+    `Pic a fait une enquête.`,
     `Lis le ${support}.`,
   ]);
 }
@@ -314,7 +313,7 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "cp_donnees_lire_tableau",
     difficulty: 3,
     theme: "neutral",
-    text: "Pour compter les réponses d'une enquête, on fait des bâtons, par paquets de cinq. On voit ||||| ||||| ||. Combien cela fait-il ?",
+    text: "On compte les réponses en paquets de cinq bâtons. On voit ||||| ||||| ||. Combien cela fait-il ?",
     format: "short",
     expected: ["12"],
     comparator: "number_equal",
@@ -382,7 +381,7 @@ export const donneesBank: TutorBankItemV4[] = [
       ]);
       const debut = randomChoice([
         `${t.p} a compté les réponses avec des bâtons.`,
-        `${t.lieu}, ${t.p} a noté les réponses avec des bâtons.`,
+        `${t.p} a noté les réponses en bâtons.`,
         `Pic a fait un bâton pour chaque réponse.`,
         `Ti Margo a compté avec des bâtons.`,
       ]);
@@ -605,9 +604,9 @@ export const donneesBank: TutorBankItemV4[] = [
       const liste = enListe(lignes.map((l) => l.nom));
       const couleurs = enListe(cols.map((c) => c.m));
       const text = randomChoice([
-        `${p} fait un tableau à double entrée : ${liste} en lignes ; ${couleurs} en colonnes. Combien de cases à remplir ?`,
-        `Un tableau range des ${famille} : ${liste}. Les couleurs sont ${couleurs}. Combien de cases faut-il ?`,
-        `Pic veut un tableau pour ses ${famille} (${liste}) et les couleurs ${couleurs}. Combien de cases ?`,
+        `${p} fait un tableau : ${liste} en lignes ; ${couleurs} en colonnes. Combien de cases ?`,
+        `Un tableau croise des ${famille} (${liste}) et des couleurs (${couleurs}). Combien de cases ?`,
+        `Pic range ses ${famille} (${liste}) par couleur : ${couleurs}. Combien de cases ?`,
       ]);
       return {
         text,
@@ -646,7 +645,7 @@ export const donneesBank: TutorBankItemV4[] = [
       const text = randomChoice([
         `${p} a ${totalLigne} ${lignes[i].nom} en tout. Une case est cachée. Combien ${de(quoi)} ?`,
         `Il y a ${totalLigne} ${lignes[i].nom} en tout. Combien ${de(quoi)} ?`,
-        `Pic a renversé de l'eau sur une case ! Il y a ${totalLigne} ${lignes[i].nom}. Combien ${de(quoi)} ?`,
+        `Une case est mouillée ! Il y a ${totalLigne} ${lignes[i].nom}. Combien ${de(quoi)} ?`,
         `${p} range ses ${famille} : ${totalLigne} ${lignes[i].nom} en tout. Combien ${de(quoi)} ?`,
       ]);
       const connus = grille[i].filter((_, k) => k !== j);
@@ -692,9 +691,9 @@ export const donneesBank: TutorBankItemV4[] = [
       const bonne = a.value > b.value ? "plus" : a.value < b.value ? "moins" : "autant";
       const enBarres = randomChoice([true, false]);
       const q = randomChoice([
-        `Pour « ${a.label} », y a-t-il plus, moins ou autant de voix que pour « ${b.label} » ?`,
-        `Y a-t-il plus, moins ou autant d'enfants pour « ${a.label} » que pour « ${b.label} » ?`,
-        `Compare « ${a.label} » et « ${b.label} ». Pour « ${a.label} », il y a plus, moins ou autant de voix ?`,
+        `Pour « ${a.label} » : plus, moins ou autant de voix que « ${b.label} » ?`,
+        `Plus, moins ou autant d'enfants pour « ${a.label} » que pour « ${b.label} » ?`,
+        `Compare « ${a.label} » à « ${b.label} » : plus, moins ou autant ?`,
       ]);
       return {
         text: `${intro(t, enBarres ? "diagramme" : "tableau")} ${q}`,
@@ -791,7 +790,7 @@ export const donneesBank: TutorBankItemV4[] = [
     microId: "cp_donnees_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Les 24 élèves de la classe ont tous répondu. On compte 4 oranges, 12 fraises et 6 bananes. Combien d'élèves ont choisi un autre fruit ?",
+    text: "Les 24 élèves ont tous répondu : 4 oranges, 12 fraises, 6 bananes. Combien ont choisi un autre fruit ?",
     format: "short",
     expected: ["2"],
     comparator: "number_equal",
@@ -822,8 +821,8 @@ export const donneesBank: TutorBankItemV4[] = [
       const total = t.valeurs.reduce((s, v) => s + v.value, 0);
       const connus = t.valeurs.filter((_, i) => i !== k).map((v) => v.value);
       const debut = randomChoice([
-        `Les ${total} enfants de la classe ${de(t.p)} ont tous répondu.`,
-        `${t.lieu}, ${total} enfants ont tous répondu à l'enquête.`,
+        `Les ${total} enfants ont tous répondu.`,
+        `${total} enfants ont répondu à l'enquête.`,
         `Pic a interrogé ${total} enfants. Tous ont répondu.`,
         `${t.p} a posé sa question à ${total} enfants. Tous ont répondu.`,
       ]);
@@ -867,10 +866,10 @@ export const donneesBank: TutorBankItemV4[] = [
       const juste = randomChoice([true, false]);
       const enfants = juste ? somme : somme - randomInt(1, 4);
       const debut = randomChoice([
-        `Il y a ${enfants} enfants dans le groupe ${de(t.p)}.`,
-        `${t.lieu}, il y a ${enfants} enfants.`,
+        `Le groupe ${de(t.p)} a ${enfants} enfants.`,
+        `Il y a ${enfants} enfants.`,
         `${t.p} interroge ${enfants} enfants.`,
-        `Pic interroge les ${enfants} enfants du club.`,
+        `Pic interroge ${enfants} enfants.`,
       ]);
       const q = randomChoice([
         "Chacun donne une seule réponse. Ce tableau peut-il être juste ?",

@@ -206,18 +206,18 @@ const NOM_UNITE: Record<"cm" | "m" | "km", string> = { cm: "le centimètre", m: 
 const PLURIEL_UNITE: Record<"cm" | "m" | "km", string> = { cm: "centimètres", m: "mètres", km: "kilomètres" };
 
 /** Ce qui se mesure en mètres et se compare : rubans, cordes, trains… */
-type Long = { le: string; f: boolean; des: string };
+type Long = { le: string; nom: string; f: boolean; des: string };
 const LONGS: readonly Long[] = [
-  { le: "le ruban", f: false, des: "rubans" },
-  { le: "la corde à sauter", f: true, des: "cordes à sauter" },
-  { le: "l'écharpe", f: true, des: "écharpes" },
-  { le: "la guirlande", f: true, des: "guirlandes" },
-  { le: "la ficelle du cerf-volant", f: true, des: "ficelles de cerf-volant" },
-  { le: "le train en bois", f: false, des: "trains en bois" },
-  { le: "le tuyau d'arrosage", f: false, des: "tuyaux d'arrosage" },
-  { le: "le serpent en papier", f: false, des: "serpents en papier" },
-  { le: "le drapeau des pirates", f: false, des: "drapeaux de pirates" },
-  { le: "la laisse du chien", f: true, des: "laisses de chien" },
+  { le: "le ruban", nom: "Ruban", f: false, des: "rubans" },
+  { le: "la corde à sauter", nom: "Corde à sauter", f: true, des: "cordes à sauter" },
+  { le: "l'écharpe", nom: "Écharpe", f: true, des: "écharpes" },
+  { le: "la guirlande", nom: "Guirlande", f: true, des: "guirlandes" },
+  { le: "la ficelle du cerf-volant", nom: "Ficelle de cerf-volant", f: true, des: "ficelles de cerf-volant" },
+  { le: "le train en bois", nom: "Train en bois", f: false, des: "trains en bois" },
+  { le: "le tuyau d'arrosage", nom: "Tuyau d'arrosage", f: false, des: "tuyaux d'arrosage" },
+  { le: "le serpent en papier", nom: "Serpent en papier", f: false, des: "serpents en papier" },
+  { le: "le drapeau des pirates", nom: "Drapeau de pirate", f: false, des: "drapeaux de pirates" },
+  { le: "la laisse du chien", nom: "Laisse de chien", f: true, des: "laisses de chien" },
 ];
 const deQui = (L: Long, p: Enfant) => `${L.le} ${deNom(p.nom)}`;
 const long_ = (L: Long, plus: boolean) => (plus ? (L.f ? "longue" : "long") : L.f ? "courte" : "court");
@@ -229,10 +229,10 @@ const GABARITS: TutorBankItemV4[] = [
     const o = randomChoice(PETITS);
     const fin = randomInt(2, 10);
     return qcm(
-      `${maj(o.le)} commence au 0 de la règle. ${randomChoice([
+      `${maj(o.le)} commence au 0. ${randomChoice([
         `Combien mesure ${o.le} ?`,
         "Lis sa longueur sur la règle.",
-        `Quelle est la longueur ${deLe(o.le)} ?`,
+        "Quelle est sa longueur ?",
       ])}`,
       `${fin} cm`,
       [`${fin + 1} cm`, `${fin - 1} cm`, `${fin} m`, `${fin + 2} cm`],
@@ -252,8 +252,8 @@ const GABARITS: TutorBankItemV4[] = [
         const fin = randomInt(6, 15);
         const p = enfant();
         return qcm(
-          `${p.nom} pose ${o.le} sur sa règle, le début sur le 0. ${randomChoice([
-            `Combien mesure ${o.le} ?`,
+          `${p.nom} mesure ${o.le} depuis le 0. ${randomChoice([
+            "Combien de centimètres ?",
             `Quelle longueur lit-${p.il} ?`,
             "Lis la longueur.",
           ])}`,
@@ -298,8 +298,8 @@ const GABARITS: TutorBankItemV4[] = [
       `${randomChoice([
         `${p.nom} a mal posé la règle.`,
         `La règle ${deNom(p.nom)} a glissé.`,
-        `${p.nom} mesure ${o.le}, mais pas depuis le 0.`,
-      ])} ${randomChoice([`Combien mesure ${o.le} ?`, "Quelle est la vraie longueur ?", "Combien de centimètres mesure-t-il vraiment ?"])}`,
+        `${p.nom} ne part pas du 0.`,
+      ])} ${randomChoice([`Combien mesure ${o.le} ?`, "Quelle est la vraie longueur ?", "Combien de centimètres, vraiment ?"])}`,
       `${long} cm`,
       [`${fin} cm`, `${long + 1} cm`, `${debut} cm`, `${long - 1} cm`],
       exp(
@@ -323,10 +323,9 @@ const GABARITS: TutorBankItemV4[] = [
     const plus = randomChoice([true, false]);
     const gagnant = (a > b) === plus ? p : q;
     return qcm(
-      `${maj(deQui(L, p))} mesure ${a} ${u}. ${maj(deQui(L, q))} mesure ${b} ${u}. ${randomChoice([
-        `Qui a ${L.le} ${leLa(L)} plus ${long_(L, plus)} ?`,
-        `Quel enfant a ${L.le} ${leLa(L)} plus ${long_(L, plus)} ?`,
-        `Qui a ${L.le} ${leLa(L)} plus ${long_(L, plus)} : ${p.nom} ou ${q.nom} ?`,
+      `${L.nom} : ${p.nom} ${a} ${u}, ${q.nom} ${b} ${u}. ${randomChoice([
+        `Qui a ${leLa(L)} plus ${long_(L, plus)} ?`,
+        `Quel enfant a ${leLa(L)} plus ${long_(L, plus)} ?`,
       ])}`,
       gagnant.nom,
       [p.nom, q.nom, "les deux pareil"],
@@ -356,9 +355,10 @@ const GABARITS: TutorBankItemV4[] = [
           `${m} m = ${m * 100} cm, et ${m * 100} ${mGagne ? ">" : "<"} ${cm}.`,
           `C'est ${mGagne ? `${m} m` : `${cm} cm`}.`,
         ),
+        metresBoutABout(m, `${m} m = ? cm`),
       ),
       () => qcm(
-        `${maj(deQui(L, p))} mesure ${m} m. ${maj(deQui(L, q))} mesure ${cm} cm. ${randomChoice([`Qui a ${L.le} ${leLa(L)} plus ${long_(L, true)} ?`, `Quel enfant a ${L.le} ${leLa(L)} plus ${long_(L, true)} ?`])}`,
+        `${L.nom} : ${p.nom} ${m} m, ${q.nom} ${cm} cm. ${randomChoice([`Qui a ${leLa(L)} plus ${long_(L, true)} ?`, `Quel enfant a ${leLa(L)} plus ${long_(L, true)} ?`])}`,
         mGagne ? p.nom : q.nom,
         [p.nom, q.nom, "les deux pareil"],
         exp(
@@ -367,6 +367,7 @@ const GABARITS: TutorBankItemV4[] = [
           `${m} m = ${m * 100} cm, et ${m * 100} ${mGagne ? ">" : "<"} ${cm}.`,
           `C'est ${mGagne ? p.nom : q.nom}.`,
         ),
+        metresBoutABout(m, `${m} m = ? cm`),
       ),
     ]);
   }, ["comparer", "piege"]),
@@ -381,9 +382,10 @@ const GABARITS: TutorBankItemV4[] = [
         const bonne = plusLong ? tri[2] : tri[0];
         const L = randomChoice(LONGS);
         return qcm(
-          `${randomChoice([`Trois ${L.des} mesurent ${shuffle(vals).join(", ")}.`, `Voici trois longueurs : ${shuffle(vals).join(", ")}.`])} ${randomChoice([
+          `${randomChoice([`Trois ${L.des} : ${shuffle(vals).join(", ")}.`, `${shuffle(vals).join(", ")}.`, `${enfant().nom} a trois ${L.des} : ${shuffle(vals).join(", ")}.`])} ${randomChoice([
             `Laquelle est la plus ${plusLong ? "longue" : "courte"} ?`,
-            `Quelle est la longueur la plus ${plusLong ? "grande" : "petite"} ?`,
+            `Quelle est la plus ${plusLong ? "longue" : "courte"} ?`,
+            `${plusLong ? "La plus longue" : "La plus courte"}, c'est laquelle ?`,
           ])}`,
           bonne,
           vals,
@@ -393,6 +395,7 @@ const GABARITS: TutorBankItemV4[] = [
             `${vals.map((v) => `${v} = ${cm(v)} cm`).join(" ; ")}.`,
             `La plus ${plusLong ? "longue" : "courte"} est ${bonne}.`,
           ),
+          metresBoutABout(m, `${m} m = ? cm`),
         );
       },
       () => {
@@ -400,7 +403,11 @@ const GABARITS: TutorBankItemV4[] = [
         const m = randomInt(2, 6);
         const cm = m * 100 - randomChoice([10, 20, 30, 50, 80]);
         return qcm(
-          `${p.nom} dit : « ${cm} cm, c'est plus long que ${m} m, car ${cm} est plus grand que ${m}. » A-t-${p.il} raison ?`,
+          randomChoice([
+            `${p.nom} dit : « ${cm} cm, c'est plus long que ${m} m. » A-t-${p.il} raison ?`,
+            `Pour ${p.nom}, ${cm} cm est plus long que ${m} m. A-t-${p.il} raison ?`,
+            `« ${cm} cm, c'est plus que ${m} m », dit ${p.nom}. Vrai ?`,
+          ]),
           `non, ${m} m est plus long`,
           ["oui", `non, ${m} m est plus long`, "non, c'est la même longueur"],
           exp(
@@ -409,6 +416,7 @@ const GABARITS: TutorBankItemV4[] = [
             `${m} m = ${m * 100} cm, et ${m * 100} > ${cm}.`,
             `${p.nom} se trompe : ${m} m est plus long.`,
           ),
+          metresBoutABout(m, `${m} m = ? cm`),
         );
       },
     ]), ["comparer", "piege"]),
@@ -510,8 +518,7 @@ const GABARITS: TutorBankItemV4[] = [
     ]);
     return qcm(
       `${p.nom} mesure ${quoi} : ${n * 100} cm. ${randomChoice([
-        "Combien de règles d'un mètre faut-il mettre bout à bout ?",
-        "Avec combien de règles d'un mètre peut-on le mesurer ?",
+        "Combien de règles d'un mètre faut-il ?",
         "Combien de fois la règle d'un mètre ?",
       ])}`,
       `${n} règles`,
@@ -545,13 +552,13 @@ const GABARITS: TutorBankItemV4[] = [
     const p = enfant();
     const n = randomInt(3, 12);
     const quoi = randomChoice([
-      "le chemin du trésor sur sa carte de pirates", "la queue de son cerf-volant", "le bâton de son bonhomme",
+      "le chemin du trésor", "la queue de son cerf-volant", "le bâton de son bonhomme",
       "la route de son circuit", "le mât de son bateau", "la tige de sa fleur", "la piste de sa fusée", "le pont de son château",
     ]);
     return qcm(
-      `${p.nom} trace ${quoi} : un trait de ${n} cm. ${randomChoice([
-        `Sur quelle graduation de la règle part-${p.il} ?`,
-        `Où pose-t-${p.il} le crayon pour commencer ?`,
+      `${p.nom} trace ${quoi} : ${n} cm. ${randomChoice([
+        `Sur quelle graduation part-${p.il} ?`,
+        `Où pose-t-${p.il} le crayon au début ?`,
         "Où commence le trait sur la règle ?",
       ])}`,
       "sur la graduation 0",
@@ -562,16 +569,26 @@ const GABARITS: TutorBankItemV4[] = [
         `Du 0 jusqu'à ${n}, il y a bien ${n} cm.`,
         "On part de la graduation 0.",
       ),
+      regle([]),
     );
-  }, ["tracer"]),
+  }, ["tracer", "canvas"]),
   gab("ce1_longueur_tracer_tpl_4", "ce1_longueur_tracer", 2, "Départ sur le 0 : le point d'arrivée est sur la longueur voulue.", () => {
-    const p = enfant();
     const n = randomInt(3, 14);
+    const p = enfant();
+    const quoi = randomChoice(["la tige d'une fleur", "le mât d'un bateau", "une route", "la queue d'un cerf-volant", "un pont", "un serpent"]);
     return qcm(
-      `${p.nom} veut tracer un segment de ${n} cm. ${randomChoice(["Le premier point est sur le 0.", "Le départ est sur le 0."])} ${randomChoice([
-        `Où met-${p.il} le deuxième point ?`,
-        `Sur quelle graduation s'arrête-t-${p.il} ?`,
+      `${randomChoice([
+        `Segment de ${n} cm, départ sur le 0.`,
+        `${p.nom} trace ${n} cm depuis le 0.`,
+        `${p.nom} part du 0 pour tracer ${n} cm.`,
+        `${p.nom} dessine ${quoi} de ${n} cm, depuis le 0.`,
+        `Pic veut un trait de ${n} cm. Il part du 0.`,
+      ])} ${randomChoice([
+        "Où mettre le deuxième point ?",
+        "Sur quelle graduation s'arrêter ?",
         "Où finit le segment ?",
+        "Où va le point d'arrivée ?",
+        "Où s'arrête le trait ?",
       ])}`,
       `sur la graduation ${n}`,
       [`sur la graduation ${n + 1}`, `sur la graduation ${n - 1}`, `sur la graduation ${Math.min(15, n + 2)}`, "au bout de la règle"],
@@ -592,8 +609,8 @@ const GABARITS: TutorBankItemV4[] = [
         const fois = randomChoice([2, 2, 3]);
         return qcm(
           `${p.nom} a tracé un segment de ${n} cm. ${randomChoice([
-            `${maj(p.il)} veut un segment ${fois === 2 ? "deux" : "trois"} fois plus long. Combien doit-il mesurer ?`,
-            `Le deuxième segment doit être ${fois === 2 ? "deux" : "trois"} fois plus long. Quelle longueur tracer ?`,
+            `${maj(p.il)} le veut ${fois === 2 ? "deux" : "trois"} fois plus long. Quelle longueur ?`,
+            `Un segment ${fois === 2 ? "deux" : "trois"} fois plus long mesure… ?`,
           ])}`,
           `${n * fois} cm`,
           [`${n + fois} cm`, `${n * fois + 1} cm`, `${n} cm`, `${n * (fois + 1)} cm`],
@@ -611,7 +628,7 @@ const GABARITS: TutorBankItemV4[] = [
         const a = randomInt(3, 8);
         const b = randomInt(2, 6);
         return qcm(
-          `${p.nom} trace un trait de ${a} cm, puis le prolonge de ${b} cm. ${randomChoice(["Combien mesure le trait en tout ?", "Quelle est sa longueur maintenant ?"])}`,
+          `${p.nom} trace un trait de ${a} cm, puis le prolonge de ${b} cm. ${randomChoice(["Combien mesure-t-il en tout ?", "Quelle longueur maintenant ?"])}`,
           `${a + b} cm`,
           [`${a + b + 1} cm`, `${a - b > 0 ? a - b : a + b - 1} cm`, `${a * b} cm`, `${a + b - 1} cm`].filter((x, i, t) => t.indexOf(x) === i),
           exp("Prolonger un trait, c'est ajouter une longueur au bout.", "On ajoute les deux longueurs.", `${a} + ${b} = ${a + b}.`, `Le trait mesure ${a + b} cm.`),
@@ -624,9 +641,9 @@ const GABARITS: TutorBankItemV4[] = [
     const debut = randomInt(1, 5);
     const n = randomInt(3, 9);
     return qcm(
-      `${randomChoice([`La règle ${deNom(p.nom)} est cassée : elle commence à ${debut}.`, `${p.nom} part de la graduation ${debut}.`])} ${randomChoice([
-        `${maj(p.il)} veut un segment de ${n} cm. Où s'arrêter ?`,
-        `Pour un segment de ${n} cm, sur quelle graduation finir ?`,
+      `${randomChoice([`${p.nom} a une règle cassée qui commence à ${debut}.`, `${p.nom} part de la graduation ${debut}.`])} ${randomChoice([
+        `Pour ${n} cm, où s'arrêter ?`,
+        `Pour ${n} cm, sur quelle graduation finir ?`,
       ])}`,
       `sur la graduation ${debut + n}`,
       [`sur la graduation ${n}`, `sur la graduation ${debut + n - 1}`, `sur la graduation ${debut + n + 1}`, `sur la graduation ${n - debut > 0 ? n - debut : n + 2}`],
@@ -721,6 +738,7 @@ const GABARITS: TutorBankItemV4[] = [
           cas.r,
           cas.p,
           exp("1 m = 100 cm et 1 km = 1 000 m.", "On se souvient des deux relations.", "1 m = 100 cm ; 1 km = 1 000 m.", `La réponse est ${cas.r}.`),
+          cas.q.includes("dans 1 mètre") ? metresBoutABout(1, "? cm") : undefined,
         );
       },
     ]), ["unites"]),
@@ -820,7 +838,7 @@ const GABARITS: TutorBankItemV4[] = [
         const c = randomChoice(CHOSES);
         const p = enfant();
         return qcm(
-          `${randomChoice([`${p.nom} estime la longueur ${deLe(c.le)}.`, `${p.nom} et Pic regardent ${c.le}.`, `Au jeu des devinettes, il faut estimer ${c.le}.`])} ${maj(c.le)} mesure environ ${nb(c.v)} … Quelle unité ?`,
+          `${randomChoice(["Estime : ", "Devinette : ", `${p.nom} estime : `])}${c.le} mesure environ ${nb(c.v)} … Quelle unité ?`,
           c.u,
           ["cm", "m", "km"],
           exp("Estimer, c'est trouver une longueur à peu près, sans mesurer.", "On essaie chaque unité et on garde celle qui a du sens.", `${nb(c.v)} ${c.u} va bien avec ${c.le}.`, `C'est « ${c.u} ».`),
@@ -842,18 +860,17 @@ const GABARITS: TutorBankItemV4[] = [
     ]), ["estimer", "canvas"]),
   gab("ce1_longueur_estimer_tpl_1", "ce1_longueur_estimer", 4, "Ajoute la petite longueur jusqu'à atteindre la grande.", () => {
     const cas = randomChoice([
-      { quoi: "un pas d'enfant", v: 50, total: randomChoice([1, 2, 3, 4]) },
-      { quoi: "une règle", v: 20, total: 1 },
-      { quoi: "un crayon", v: 10, total: 1 },
-      { quoi: "un grand pas", v: 100, total: randomChoice([3, 5, 8]) },
-      { quoi: "une baguette de pain", v: 50, total: randomChoice([1, 2, 3]) },
-      { quoi: "un serpent en peluche", v: 25, total: 1 },
+      { quoi: "un pas d'enfant", pl: "pas d'enfant", v: 50, total: randomChoice([1, 2, 3, 4]) },
+      { quoi: "une règle", pl: "règles", v: 20, total: 1 },
+      { quoi: "un crayon", pl: "crayons", v: 10, total: 1 },
+      { quoi: "un grand pas", pl: "grands pas", v: 100, total: randomChoice([3, 5, 8]) },
+      { quoi: "une baguette de pain", pl: "baguettes", v: 50, total: randomChoice([1, 2, 3]) },
+      { quoi: "un serpent en peluche", pl: "serpents", v: 25, total: 1 },
     ]);
     const n = (cas.total * 100) / cas.v;
-    const p = enfant();
     const ou = randomChoice(["la cour", "le couloir", "la cabane", "le tapis", "le bateau pirate", "la piste du cirque"]);
     return qcm(
-      `${maj(cas.quoi)} mesure environ ${cas.v} cm. ${p.nom} mesure ${ou} : ${cas.total} m. ${randomChoice([`Combien de fois ${cas.quoi} ?`, "Environ combien de fois faut-il le reporter ?"])}`,
+      `${maj(cas.quoi)} : environ ${cas.v} cm. ${maj(ou)} : ${cas.total} m. Combien de ${cas.pl} ?`,
       String(n),
       [String(n + 1), String(n * 2), String(Math.max(1, n - 1)), String(cas.total)].filter((x, i, t) => t.indexOf(x) === i),
       exp(
@@ -862,18 +879,18 @@ const GABARITS: TutorBankItemV4[] = [
         `${Array(n).fill(cas.v).join(" + ")} = ${cas.total * 100}.`,
         `Environ ${n} fois.`,
       ),
+      metresBoutABout(cas.total, `${cas.total} m = ? cm`),
     );
-  }, ["estimer"]),
+  }, ["estimer", "canvas"]),
 
   /* ---------- DÉFIS ---------- */
   gab("ce1_longueur_defi_tpl_3", "ce1_longueur_defi", 4, "1 m = 100 cm : enlève ce que tu as déjà utilisé.", () => {
     const p = enfant();
     const utilise = randomChoice([20, 25, 30, 40, 45, 60, 65, 70, 75, 80]);
     const quoi = randomChoice(["de ruban", "de ficelle", "de laine", "de guirlande", "de corde", "de papier crépon"]);
-    const pour = randomChoice(["un bracelet", "une queue de cerf-volant", "un collier", "un nœud de cadeau", "une moustache de pirate", "la crinière d'un poney"]);
     const reste = 100 - utilise;
     return qcm(
-      `${p.nom} a 1 m ${quoi}. ${maj(p.il)} en coupe ${utilise} cm pour ${pour}. ${randomChoice(["Combien en reste-t-il ?", "Quelle longueur reste-t-il ?"])}`,
+      `${p.nom} a 1 m ${quoi}. ${maj(p.il)} en coupe ${utilise} cm. Combien en reste-t-il ?`,
       `${reste} cm`,
       [`${reste + 10} cm`, `${utilise} cm`, `${Math.abs(utilise - 1)} cm`, `${reste - 10} cm`].filter((x, i, t) => t.indexOf(x) === i && x !== `${reste} cm`),
       exp("1 m = 100 cm.", "On cherche ce qu'il faut ajouter à la partie coupée pour faire 100 cm.", `${utilise} + ${reste} = 100.`, `Il reste ${reste} cm.`),
@@ -885,23 +902,23 @@ const GABARITS: TutorBankItemV4[] = [
     const m = morceau === 10 ? 1 : randomChoice([1, 2]);
     const n = (m * 100) / morceau;
     const p = enfant();
-    const quoi = randomChoice(["un ruban", "une ficelle", "une bande de papier", "une corde", "un rouleau de laine"]);
-    const pour = randomChoice(["des bracelets", "des marque-pages", "des queues de cerf-volant", "des colliers pour la kermesse", "des drapeaux de pirates"]);
+    const quoi = randomChoice(["un ruban", "une ficelle", "une corde", "un fil de laine"]);
+    const pour = randomChoice(["bracelets", "marque-pages", "colliers", "drapeaux", "morceaux"]);
     return qcm(
-      `${p.nom} a ${quoi} de ${m} m. ${maj(p.il)} coupe des morceaux de ${morceau} cm pour ${pour}. ${randomChoice(["Combien de morceaux peut-" + p.il + " couper ?", "Combien de morceaux aura-t-" + p.il + " ?"])}`,
+      `${p.nom} coupe ${quoi} de ${m} m en morceaux de ${morceau} cm. Combien de ${pour} ?`,
       String(n),
       [String(n + 1), String(n - 1), String(morceau / 5), String(m * 10)].filter((x, i, t) => t.indexOf(x) === i && x !== String(n) && x !== "0"),
       exp("1 m = 100 cm.", `On compte combien de fois ${morceau} cm tiennent dans ${m * 100} cm.`, `${Array(n).fill(morceau).join(" + ")} = ${m * 100}.`, `${maj(p.il)} peut couper ${n} morceaux.`),
+      metresBoutABout(m, `${m} m = ? cm`),
     );
-  }, ["defi"]),
+  }, ["defi", "canvas"]),
   gab("ce1_longueur_defi_tpl_2", "ce1_longueur_defi", 5, "Trouve d'abord la longueur du deuxième morceau, puis ajoute.", () => {
-    const p = enfant();
     const a = randomInt(20, 45);
     const plus = randomInt(5, 25);
     const b = a + plus;
-    const quoi = randomChoice(["de bambou pour une cabane", "de bois pour un radeau", "de carton pour une fusée", "de tissu pour une cape", "de ficelle pour un trésor"]);
+    const quoi = randomChoice(["Planche", "Bâton", "Ruban", "Ficelle", "Carton"]);
     return qcm(
-      `${p.nom} coupe deux morceaux ${quoi}. Le premier mesure ${a} cm. Le second mesure ${plus} cm de plus. ${randomChoice(["Combien mesurent-ils ensemble ?", "Quelle est la longueur des deux morceaux mis bout à bout ?"])}`,
+      `${quoi} 1 : ${a} cm. ${quoi} 2 : ${plus} cm de plus. ${randomChoice(["Ensemble, combien ?", "Bout à bout, combien ?"])}`,
       `${a + b} cm`,
       [`${b} cm`, `${2 * a} cm`, `${a + b + 10} cm`, `${a + b - 10} cm`],
       exp("Mettre bout à bout, c'est ajouter les longueurs.", "On calcule d'abord le second morceau, puis on ajoute les deux.", `Second : ${a} + ${plus} = ${b}. Ensemble : ${a} + ${b} = ${a + b}.`, `Ensemble, ils mesurent ${a + b} cm.`),
@@ -952,7 +969,8 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "ce1_longueur_mesurer_cm_m",
     difficulty: 3,
     theme: "neutral",
-    text: "Léa a mal posé sa règle : le segment commence à la graduation 2 et finit à la graduation 9. Combien mesure-t-il, en cm ?",
+    text: "Le segment va de la graduation 2 à la graduation 9. Combien mesure-t-il, en cm ?",
+    canvas: regle([{ value: 2, label: "début", color: "#2563eb" }, { value: 9, label: "fin", color: "#ef4444" }]),
     format: "short",
     expected: ["7"],
     comparator: "number_equal",
@@ -1004,6 +1022,7 @@ export const longueurBank: TutorBankItemV4[] = [
     difficulty: 2,
     theme: "neutral",
     text: "Qu'est-ce qui est le plus long : 1 m ou 90 cm ?",
+    canvas: metresBoutABout(1, "1 m = ? cm"),
     format: "qcm",
     choices: ["1 m", "90 cm", "c'est pareil", "on ne peut pas savoir"],
     expected: ["1 m"],
@@ -1026,7 +1045,8 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "ce1_longueur_comparer",
     difficulty: 4,
     theme: "neutral",
-    text: "Un élève dit : « 300 cm, c'est plus long que 4 m, parce que 300 est plus grand que 4. » A-t-il raison ?",
+    text: "Un élève dit : « 300 cm, c'est plus long que 4 m. » A-t-il raison ?",
+    canvas: metresBoutABout(4, "4 m = ? cm"),
     format: "qcm",
     choices: [
       "non, 4 m font 400 cm",
@@ -1054,7 +1074,8 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "ce1_longueur_comparer",
     difficulty: 2,
     theme: "reunion",
-    text: "Dans la cour, le filao mesure 8 m et le manguier 6 m. Lequel est le plus haut ?",
+    text: "Le filao mesure 8 m, le manguier 6 m. Lequel est le plus haut ?",
+    canvas: { kind: "objets", elements: [{ quoi: "arbre", label: "filao" }, { quoi: "arbre", label: "manguier" }], mode: "couleur" },
     format: "qcm",
     choices: ["le filao", "le manguier", "ils sont pareils", "on ne peut pas savoir"],
     expected: ["le filao"],
@@ -1162,7 +1183,8 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "ce1_longueur_tracer",
     difficulty: 2,
     theme: "neutral",
-    text: "Tu veux tracer un segment de 8 cm. Tu as marqué un point sur la graduation 0 de ta règle. Que fais-tu ensuite ?",
+    text: "Segment de 8 cm : ton premier point est sur le 0. Que fais-tu ensuite ?",
+    canvas: regle([{ value: 0, label: "départ", color: "#2563eb" }]),
     format: "qcm",
     choices: [
       "je marque un point sur la graduation 8 et je relie les deux points",
@@ -1213,7 +1235,7 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "ce1_longueur_tracer",
     difficulty: 3,
     theme: "neutral",
-    text: "Kevin veut tracer un segment de 6 cm. Il pose le bord de sa règle sur son point de départ, pas la graduation 0. Que va-t-il se passer ?",
+    text: "Pour tracer 6 cm, Kevin part du bord de la règle, pas du 0. Que se passe-t-il ?",
     format: "qcm",
     choices: [
       "son segment ne fera pas exactement 6 cm",
@@ -1322,7 +1344,7 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "ce1_longueur_choisir_unite",
     difficulty: 3,
     theme: "neutral",
-    text: "Un élève écrit : « la porte de la classe mesure 2 cm de haut ». Quelle unité aurait-il dû écrire ?",
+    text: "« La porte de la classe mesure 2 cm de haut. » Quelle unité fallait-il écrire ?",
     format: "qcm",
     choices: ["le mètre", "le kilomètre", "le centimètre", "le gramme"],
     expected: ["le mètre"],
@@ -1456,7 +1478,8 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "ce1_longueur_defi",
     difficulty: 4,
     theme: "neutral",
-    text: "Tu as un ruban de 1 m. Tu coupes trois morceaux de 25 cm. Peux-tu encore couper un quatrième morceau de 25 cm ?",
+    text: "Ruban de 1 m : tu coupes trois morceaux de 25 cm. En reste-t-il assez pour un quatrième ?",
+    canvas: { kind: "schema_barre", total: "1 m", parts: [{ label: "1", value: "25 cm" }, { label: "2", value: "25 cm" }, { label: "3", value: "25 cm" }, { label: "reste", unknown: true }] },
     format: "qcm",
     choices: [
       "oui, tout juste",
@@ -1484,7 +1507,7 @@ export const longueurBank: TutorBankItemV4[] = [
     microId: "ce1_longueur_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Deux élèves mesurent le même banc. Léa écrit 2 m, Kevin écrit 200 cm. Qui a raison ?",
+    text: "Le même banc : Léa écrit 2 m, Kevin écrit 200 cm. Qui a raison ?",
     format: "qcm",
     choices: [
       "les deux : c'est la même longueur",

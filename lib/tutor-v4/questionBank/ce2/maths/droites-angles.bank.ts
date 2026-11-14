@@ -290,20 +290,20 @@ const VERDICTS_ANGLE = ["oui, c'est un angle droit", "non, il est plus fermé qu
 const C_ALIGN = [
   (p: string) => `${p} plante trois piquets pour une clôture.`,
   (p: string) => `Pour jouer aux quilles, ${p} pose trois quilles.`,
-  () => "La jardinière plante trois arbres le long d'une allée.",
+  () => "La jardinière plante trois arbres.",
   () => "Au cirque, trois clowns attendent leur tour.",
   (p: string) => `${p} colle trois gommettes sur son cahier.`,
   (p: string) => `La nuit, ${p} regarde trois étoiles.`,
-  () => "Un pirate a caché trois trésors sur son île.",
+  () => "Un pirate a caché trois trésors.",
   () => "L'entraîneuse pose trois plots dans la cour.",
   (p: string) => `${p} pose trois bougies sur un gâteau.`,
-  () => "Pic le paille-en-queue se pose sur trois poteaux.",
+  () => "Pic se pose sur trois poteaux.",
   () => "L'astronaute repère trois planètes.",
   (p: string) => `Au potager, ${p} sème trois graines.`,
   () => "Trois bateaux flottent sur le lac.",
   () => "Le maçon plante trois piquets pour un mur.",
-  (p: string) => `${p} pose trois dinosaures en jouet sur la table.`,
-  () => "Le facteur s'arrête à trois boîtes aux lettres.",
+  (p: string) => `${p} aligne trois dinosaures en jouet.`,
+  () => "Le facteur passe à trois boîtes aux lettres.",
 ];
 
 function alignement1(): Q {
@@ -475,9 +475,9 @@ function alignement3(): Q {
   const p = un(ENFANTS);
   const juste = ok ? "oui, la règle touche les trois points" : `non, ${noms[1]} est à côté de la règle`;
   return {
-    text: `${un(C_ALIGN)(p)} On pose la règle sur ${noms[0]} et ${noms[2]}. ${un([
+    text: `${un(C_ALIGN)(p)} La règle passe par ${noms[0]} et ${noms[2]}. ${un([
       "Les trois points sont-ils alignés ?",
-      `${noms[1]} est-il sur la même ligne que les deux autres ?`,
+      `${noms[1]} est-il aligné avec eux ?`,
       "Que montre la règle ?",
     ])}`,
     ...qcm(juste, ["oui, la règle touche les trois points", `non, ${noms[1]} est à côté de la règle`, "non, ils sont trop loin", "on ne peut pas le savoir"]),
@@ -492,14 +492,14 @@ function alignement3(): Q {
 }
 
 const C_ALIGN4 = [
-  (p: string) => `${p} veut planter un troisième arbre aligné avec les deux premiers.`,
-  (p: string) => `${p} veut poser un plot aligné avec les deux autres.`,
-  () => "Le jardinier veut un troisième piquet aligné avec les deux premiers.",
-  () => "Pic le paille-en-queue veut se poser dans l'alignement de deux poteaux.",
-  (p: string) => `${p} veut coller une gommette alignée avec les deux autres.`,
-  () => "L'architecte veut placer une colonne alignée avec les deux premières.",
-  (p: string) => `Pour sa chasse au trésor, ${p} cherche le point aligné avec deux cailloux.`,
-  () => "La pompière place un troisième cône aligné avec les deux premiers.",
+  (p: string) => `${p} plante un troisième arbre, bien aligné.`,
+  (p: string) => `${p} pose un plot aligné avec les autres.`,
+  () => "Le jardinier plante un troisième piquet aligné.",
+  () => "Pic veut se poser dans l'alignement des poteaux.",
+  (p: string) => `${p} colle une gommette alignée avec les autres.`,
+  () => "L'architecte place une colonne alignée.",
+  (p: string) => `Chasse au trésor : ${p} cherche le caillou aligné.`,
+  () => "La pompière place un cône aligné avec les autres.",
 ];
 
 function alignement4(): Q {
@@ -520,7 +520,7 @@ function alignement4(): Q {
   ];
   const p = un(ENFANTS);
   return {
-    text: `${un(C_ALIGN4)(p)} ${un([`Quel point est aligné avec ${a} et ${b} ?`, `Où est la bonne place : en ${cand[0]}, en ${cand[1]} ou en ${cand[2]} ?`, `Quel point est sur la droite qui passe par ${a} et ${b} ?`])}`,
+    text: `${un(C_ALIGN4)(p)} ${un([`Quel point est aligné avec ${a} et ${b} ?`, `Où le placer : en ${cand[0]}, en ${cand[1]} ou en ${cand[2]} ?`, `Quel point est sur la droite (${a}${b}) ?`])}`,
     ...qcm(`en ${cand[bon]}`, cand.map((n) => `en ${n}`)),
     explanation: exp(
       "Trois points sont alignés quand une même droite passe par les trois.",
@@ -647,10 +647,10 @@ const C_CROISE = [
   (p: string) => `Dans la cour, ${p} trace deux traits à la craie.`,
   "Deux branches se croisent dans la cabane.",
   (p: string) => `Sur son drapeau de pirate, ${p} dessine deux os croisés.`,
-  "Le chef cuisinier pose deux baguettes de pain en croix.",
+  "Le chef pose deux baguettes de pain en croix.",
   "Au château, deux épées de bois sont accrochées en croix.",
   (p: string) => `${p} construit un épouvantail avec deux bâtons.`,
-  "Sur le terrain de foot, deux lignes de craie se croisent.",
+  "Au foot, deux lignes de craie se croisent.",
   "La couturière coud deux rubans en croix.",
 ];
 const txt = (c: string | ((p: string) => string)) => (typeof c === "string" ? c : c(un(ENFANTS)));
@@ -685,7 +685,7 @@ function angle3(): Q {
     const deg = droit ? 90 : un(PAS_DROITS_PROCHES);
     const juste = droit ? "oui, c'est un angle droit" : "non, ce n'est pas un angle droit";
     return {
-      text: `${txt(un(C_CROISE))} ${un(["Les deux traits forment-ils un angle droit ?", "Y a-t-il un angle droit au croisement ?", "L'équerre irait-elle pile dans le coin du croisement ?"])}`,
+      text: `${txt(un(C_CROISE))} ${un(["Les deux traits forment-ils un angle droit ?", "Y a-t-il un angle droit au croisement ?", "L'équerre irait-elle pile dans le coin ?"])}`,
       ...qcm(juste, ["oui, c'est un angle droit", "non, ce n'est pas un angle droit", "oui, parce qu'ils se croisent", "non, parce qu'ils sont penchés"]),
       explanation: exp(
         "Un angle est droit quand il remplit exactement le coin de l'équerre, même s'il est penché.",
@@ -805,7 +805,7 @@ const C_PLAN = [
   (p: string) => `${p} a dessiné la carte au trésor du pirate.`,
   () => "Voici le plan du terrain de jeu.",
   () => "Le menuisier a codé le plan d'une table.",
-  () => "Voici le plan de l'enclos des chèvres de la ferme.",
+  () => "Voici le plan de l'enclos des chèvres.",
   (p: string) => `${p} recopie le plan d'une salle du musée.`,
   () => "Voici le plan de la base sur la Lune.",
 ];
@@ -934,7 +934,7 @@ const C_OBJET = [
   () => "Voici un drapeau du château.",
   (p: string) => `Voici une gommette géante ${de(p)}.`,
   () => "La maîtresse a codé une figure.",
-  () => "Pic le paille-en-queue a dessiné une figure codée.",
+  () => "Pic a dessiné une figure codée.",
   () => "Voici le plan d'un massif de fleurs.",
   () => "La couturière a codé une pièce de tissu.",
   () => "L'architecte a codé une figure.",
@@ -968,7 +968,7 @@ function segments4(): Q {
     const fig = figureCodee(noms, `${m} cm`);
     const n = fig.groupe.length;
     return {
-      text: `${un(C_OBJET)(un(ENFANTS))} ${fig.groupe[0]} mesure ${m} cm. ${un([`Combien de côtés mesurent ${m} cm ?`, `D'après le codage, combien de côtés font ${m} cm ?`, "Combien de côtés ont cette longueur ?"])}`,
+      text: `${un(C_OBJET)(un(ENFANTS))} ${fig.groupe[0]} mesure ${m} cm. ${un([`Combien de côtés mesurent ${m} cm ?`, `Combien de côtés font ${m} cm ?`, "Combien de côtés ont cette longueur ?"])}`,
       ...qcm(String(n), ["1", "2", "3", "4"]),
       explanation: exp(
         "Tous les côtés qui portent le même codage ont la même longueur.",
@@ -1184,16 +1184,16 @@ function defi1(): Q {
 }
 
 const C_TOUR = [
-  (p: string) => `${p} colle un ruban tout autour d'une carte.`,
-  () => "Le jardinier pose une clôture autour du potager.",
-  (p: string) => `${p} fait le tour du tapis en marchant au bord.`,
-  () => "La couturière coud une dentelle autour d'un coussin.",
-  () => "Pic le paille-en-queue vole tout autour du jardin.",
-  (p: string) => `${p} met une guirlande autour d'une fenêtre.`,
-  () => "Le pâtissier pose un ruban autour d'une boîte de gâteaux.",
-  () => "La gardienne du zoo fait le tour de l'enclos.",
+  (p: string) => `${p} entoure une carte d'un ruban.`,
+  () => "Le jardinier clôture le potager.",
+  (p: string) => `${p} fait le tour du tapis.`,
+  () => "La couturière borde un coussin de dentelle.",
+  () => "Pic vole autour du jardin.",
+  (p: string) => `${p} entoure une fenêtre d'une guirlande.`,
+  () => "Le pâtissier entoure une boîte d'un ruban.",
+  () => "La gardienne fait le tour de l'enclos.",
   (p: string) => `${p} entoure son dessin d'un cadre.`,
-  () => "Le peintre trace une bordure autour d'un tableau.",
+  () => "Le peintre borde un tableau.",
 ];
 
 function defi2(): Q {
@@ -1203,7 +1203,7 @@ function defi2(): Q {
   const noms = un(NOMS4);
   const f = forme4("rectangle");
   return {
-    text: `${un(C_TOUR)(un(ENFANTS))} ${noms[0]}${noms[1]} mesure ${L} cm et ${noms[1]}${noms[2]} mesure ${l} cm. ${un(["Combien mesure le tour de ce rectangle ?", "Quelle est la longueur du tour du rectangle ?", "Quel est le tour de ce rectangle ?"])}`,
+    text: `${un(C_TOUR)(un(ENFANTS))} ${noms[0]}${noms[1]} : ${L} cm, ${noms[1]}${noms[2]} : ${l} cm. ${un(["Combien mesure le tour ?", "Quel est son tour ?"])}`,
     ...qcmN(tour, [L + l, 2 * L + l, L + 2 * l, tour + 2, tour - 2], "cm"),
     explanation: exp(
       "Dans un rectangle, les côtés qui se font face ont la même longueur.",
@@ -1262,7 +1262,7 @@ export const droitesAnglesBank: TutorBankItemV4[] = [
     microId: "ce2_droite_alignement",
     difficulty: 4,
     theme: "neutral",
-    text: "Ces trois points ont l'air alignés. Léa pose sa règle sur A et C : elle voit un petit espace au niveau de B. Que faut-il conclure ?",
+    text: "Ces points ont l'air alignés, mais la règle sur A et C laisse un espace à B. Que conclure ?",
     format: "qcm",
     choices: [
       "les trois points ne sont pas alignés",
@@ -1347,7 +1347,7 @@ export const droitesAnglesBank: TutorBankItemV4[] = [
     microId: "ce2_angle_droit",
     difficulty: 4,
     theme: "neutral",
-    text: "Ces deux droites sont penchées, aucune n'est horizontale. L'équerre montre qu'elles forment un angle droit. Est-ce vraiment un angle droit ?",
+    text: "Ces deux droites sont penchées. L'équerre montre qu'elles forment un angle droit. Est-ce vraiment un angle droit ?",
     format: "qcm",
     choices: [
       "oui, un angle droit peut être penché",
@@ -1505,7 +1505,7 @@ export const droitesAnglesBank: TutorBankItemV4[] = [
     microId: "ce2_segments_codage",
     difficulty: 4,
     theme: "neutral",
-    text: "Sur un quadrilatère, deux côtés portent UN trait et les deux autres portent DEUX traits. Les quatre côtés sont-ils égaux ?",
+    text: "Deux côtés portent UN trait, les deux autres DEUX traits. Les quatre côtés sont-ils égaux ?",
     format: "qcm",
     choices: [
       "non, ils sont égaux deux par deux",
@@ -1534,7 +1534,7 @@ export const droitesAnglesBank: TutorBankItemV4[] = [
     microId: "ce2_segments_codage",
     difficulty: 3,
     theme: "neutral",
-    text: "Sur une figure, le côté AB mesure 6 cm. Le côté CD porte le même codage que AB. Combien mesure CD ?",
+    text: "AB mesure 6 cm. CD porte le même codage que AB. Combien mesure CD ?",
     format: "short",
     expected: ["6"],
     comparator: "number_equal",
@@ -1637,7 +1637,7 @@ export const droitesAnglesBank: TutorBankItemV4[] = [
     microId: "ce2_droite_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Un quadrilatère porte quatre petits carrés d'angle droit, et ses quatre côtés portent tous le MÊME trait. Quelle figure est-ce ?",
+    text: "Quatre petits carrés d'angle droit, et le MÊME trait sur les quatre côtés. Quelle figure est-ce ?",
     format: "qcm",
     choices: ["un carré", "un rectangle", "un losange", "un triangle rectangle"],
     expected: ["un carré"],
@@ -1660,7 +1660,7 @@ export const droitesAnglesBank: TutorBankItemV4[] = [
     microId: "ce2_droite_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Pour Léa, trois points ont l'air alignés. Kevin pose sa règle et voit un espace. Malia conclut : « pas alignés ». Qui a apporté la preuve ?",
+    text: "Léa : « Ils ont l'air alignés. » Kevin pose sa règle : un espace. Malia : « Pas alignés. » Qui a la preuve ?",
     format: "qcm",
     choices: [
       "Kevin, parce qu'il a utilisé un instrument",

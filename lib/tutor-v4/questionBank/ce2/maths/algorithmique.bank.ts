@@ -81,22 +81,22 @@ function acteur(): Acteur {
   const q = un(PRENOMS);
   return un<Acteur>([
     { n: `le robot ${deP(q)}`, p: "il" },
-    { n: `la coccinelle robot ${deP(q)}`, p: "elle" },
-    { n: `la petite fusée ${deP(q)}`, p: "elle" },
+    { n: `la coccinelle ${deP(q)}`, p: "elle" },
+    { n: `la fusée ${deP(q)}`, p: "elle" },
     { n: "le rover de l'astronaute", p: "il" },
-    { n: "le robot de la jardinière", p: "il" },
-    { n: `le dragon du jeu ${deP(q)}`, p: "il" },
-    { n: `la tortue du jeu ${deP(q)}`, p: "elle" },
-    { n: `le pirate du jeu ${deP(q)}`, p: "il" },
-    { n: `le chat du jeu ${deP(q)}`, p: "il" },
+    { n: "le robot jardinier", p: "il" },
+    { n: `le dragon ${deP(q)}`, p: "il" },
+    { n: `la tortue ${deP(q)}`, p: "elle" },
+    { n: `le pirate ${deP(q)}`, p: "il" },
+    { n: `le chat ${deP(q)}`, p: "il" },
     { n: "l'oiseau Pic", p: "il" },
     { n: "le robot pompier", p: "il" },
-    { n: `la voiture téléguidée ${deP(q)}`, p: "elle" },
-    { n: `le petit train ${deP(q)}`, p: "il" },
-    { n: "le robot du chef cuisinier", p: "il" },
-    { n: "l'abeille robot de la classe", p: "elle" },
-    { n: `le dinosaure du jeu ${deP(q)}`, p: "il" },
-    { n: "le robot de la vétérinaire", p: "il" },
+    { n: `la voiture ${deP(q)}`, p: "elle" },
+    { n: `le train ${deP(q)}`, p: "il" },
+    { n: "le robot du cuisinier", p: "il" },
+    { n: "l'abeille de la classe", p: "elle" },
+    { n: `le dinosaure ${deP(q)}`, p: "il" },
+    { n: "le robot vétérinaire", p: "il" },
   ]);
 }
 const nom = (A: Acteur) => A.n;
@@ -233,8 +233,7 @@ const GAB_INSTRUCTION: TutorBankItemV4[] = [
       text: `${cap(R.n)} avance de ${cases(a)}, puis de ${cases(b)}. ${un([
         "Combien de cases en tout ?",
         "De combien de cases a-t-il avancé ?",
-        "Combien de cases a-t-il fait en tout ?",
-        "Il est à combien de cases du départ ?",
+        "À combien de cases du départ ?",
       ])}`,
       ...reponse(a + b),
       explanation: etapes("On ajoute les deux avancées.", `${a} + ${b} = ${a + b}.`, `Il a avancé de ${cases(a + b)}.`),
@@ -249,10 +248,10 @@ const GAB_INSTRUCTION_3_4: TutorBankItemV4[] = [
     const a = entre(1, 6), b = entre(1, 6), c = entre(1, 5);
     const A = acteur();
     return {
-      text: `${cap(A.n)} avance de ${a}, puis de ${b}, puis de ${cases(c)}, tout droit. ${un([
-        `De combien de cases avance-t-${A.p} en tout ?`,
-        `À combien de cases du départ est-${A.p} ?`,
-        "Combien de cases parcourt-on en tout ?",
+      text: `${cap(A.n)} avance de ${a}, puis ${b}, puis ${c}. ${un([
+        "Combien de cases en tout ?",
+        "À combien de cases du départ ?",
+        `Combien de cases fait-${A.p} en tout ?`,
       ])}`,
       ...reponse(a + b + c),
       explanation: etapes(
@@ -290,10 +289,9 @@ const GAB_INSTRUCTION_3_4: TutorBankItemV4[] = [
     const re = entre(1, av - 1);
     const A = acteur();
     return {
-      text: `${cap(A.n)} avance de ${cases(av)}, puis recule de ${cases(re)}. ${un([
-        `À combien de cases de son départ est-${A.p} ?`,
-        `Combien de cases ${A.p === "il" ? "le" : "la"} séparent du départ ?`,
-        "À combien de cases du départ s'arrête-t-on ?",
+      text: `${cap(A.n)} avance de ${av}, puis recule de ${cases(re)}. ${un([
+        `À combien de cases du départ est-${A.p} ?`,
+        "À combien de cases du départ ?",
       ])}`,
       ...reponse(av - re),
       explanation: etapes(
@@ -309,9 +307,9 @@ const GAB_INSTRUCTION_3_4: TutorBankItemV4[] = [
     const a = entre(3, 7), r = entre(1, a - 1), b = entre(1, 5);
     const A = acteur();
     return {
-      text: `${cap(A.n)} avance de ${a}, recule de ${r}, puis avance de ${cases(b)}. ${un([
-        `À combien de cases du départ est-${A.p} ?`,
-        "À combien de cases du départ s'arrête-t-on ?",
+      text: `${cap(A.n)} avance de ${a}, recule de ${r}, avance de ${b}. ${un([
+        "À combien de cases du départ ?",
+        `Où en est-${A.p}, en cases ?`,
       ])}`,
       ...reponse(a - r + b),
       explanation: etapes(
@@ -400,9 +398,8 @@ const GAB_DEPLACEMENT: TutorBankItemV4[] = [
     const long = dirs.flatMap((d, i) => Array(nb[i]).fill(bloc(`${ALLER[d]} de 1`)));
     return {
       text: `${cap(A.n)} a ce long programme. ${un([
-        "Combien d'instructions faut-il au minimum pour faire le même chemin ?",
+        "Combien d'instructions au minimum pour le même chemin ?",
         "En regroupant les cases, combien d'instructions suffisent ?",
-        `Combien d'instructions au plus court pour ${A.p === "il" ? "le" : "la"} faire aller au même endroit ?`,
       ])}`,
       ...reponse(k),
       explanation: etapes(
@@ -417,11 +414,11 @@ const GAB_DEPLACEMENT: TutorBankItemV4[] = [
   G(5, DE, 3, "Une flèche par case, dans l'ordre du trajet.", () => {
     const { h, v, kh, kv, l } = deuxTraits();
     const A = acteur();
-    const dit = l.map(([d, k]) => `${cases(k)} ${d === "droite" ? "à droite" : d === "gauche" ? "à gauche" : d === "haut" ? "vers le haut" : "vers le bas"}`).join(", puis ");
+    const dit = l.map(([d, k]) => `${cases(k)} ${d === "droite" ? "à droite" : d === "gauche" ? "à gauche" : d === "haut" ? "en haut" : "en bas"}`).join(", puis ");
     const juste = code(l);
     const { x, y } = depart(DX[h] * kh, DY[v] * kv);
     return {
-      text: `${cap(A.n)} doit aller ${dit}. ${un(["Quel code de flèches faut-il écrire ?", "Quel est le bon code ?", "Quel code choisir ?"])}`,
+      text: `${cap(A.n)} doit aller ${dit}. ${un(["Quel code écrire ?", "Quel code choisir ?"])}`,
       ...qcm(juste, [
         code([...l].reverse()),
         code(l.map(([d, k]) => [d === h ? OPPOSE[h] : d, k] as [Dir, number])),
@@ -445,7 +442,7 @@ const GAB_DEPLACEMENT: TutorBankItemV4[] = [
     const reste = a - r;
     const sens = h === "droite" ? "à droite" : "à gauche";
     return {
-      text: `${cap(A.n)} fait : ${ALLER[h]} de ${a}, ${ALLER[v]} de ${kv}, puis ${ALLER[OPPOSE[h]]} de ${r}. ${un([
+      text: `Voici le programme ${du(A)}. ${un([
         `De combien de cases est-${A.p} ${sens} du départ ?`,
         `Combien de cases ${sens} du départ ?`,
       ])}`,
@@ -547,7 +544,7 @@ const GAB_REPETITION: TutorBankItemV4[] = [
     const A = acteur();
     const P = un(PRENOMS);
     return {
-      text: `${P} veut que ${A.n} fasse « ${geste} » ${n} fois de suite. ${un(["Quel programme est le plus court ?", "Quel programme choisir pour écrire le moins ?"])}`,
+      text: `${cap(A.n)} doit faire « ${geste} » ${n} fois. ${un(["Quel programme est le plus court ?", "Quel programme écrit le moins ?"])}`,
       ...qcm(`répéter ${n} fois : ${geste}`, [
         `écrire ${n} fois le bloc « ${geste} »`,
         `répéter ${n + 1} fois : ${geste}`,
@@ -586,7 +583,7 @@ const GAB_REPETITION: TutorBankItemV4[] = [
     const fois = entre(2, 8), pas = entre(2, 9);
     const A = acteur();
     return {
-      text: `${cap(A.n)} a ce programme : « répéter ${fois} fois : avancer de ${pas} ». ${un([
+      text: `Voici le programme ${du(A)}. ${un([
         `De combien de cases avance-t-${A.p} en tout ?`,
         "Combien de cases fait-on en tout ?",
         `À combien de cases du départ arrive-t-${A.p} ?`,
@@ -605,8 +602,8 @@ const GAB_REPETITION: TutorBankItemV4[] = [
     const fois = entre(2, 9), pas = entre(2, 9);
     const A = acteur();
     return {
-      text: `${cap(A.n)} doit avancer de ${fois * pas} cases avec « répéter ? fois : avancer de ${pas} ». ${un([
-        "Quel nombre faut-il écrire à la place du « ? » ?",
+      text: `${cap(A.n)} doit avancer de ${fois * pas} cases. ${un([
+        "Quel nombre remplace le « ? » ?",
         "Combien de tours faut-il ?",
         "Combien de fois faut-il répéter ?",
       ])}`,
@@ -630,7 +627,7 @@ const GAB_CORRIGER: TutorBankItemV4[] = [
     const e = un([v - entre(1, 3), v + entre(1, 3)].filter((x) => x > 0 && x * 2 !== v)) ?? v + 1;
     const A = acteur();
     return {
-      text: `${cap(A.n)} devait avancer de ${v} cases. Le programme dit « avancer de ${e} ». ${un(["Que faut-il corriger ?", "Comment réparer le programme ?", "Que faut-il changer ?"])}`,
+      text: `${cap(A.n)} devait avancer de ${v} cases. Son programme dit « avancer de ${e} ». ${un(["Que faut-il corriger ?", "Que faut-il changer ?"])}`,
       ...qcm(`remplacer le ${e} par ${v}`, [
         `remplacer le ${e} par ${Math.abs(v - e)}`,
         `remplacer le ${e} par ${v + e}`,
@@ -676,7 +673,7 @@ const GAB_CORRIGER: TutorBankItemV4[] = [
     const A = acteur();
     const trop = ecrit > voulu;
     return {
-      text: `${cap(A.n)} devait avancer de ${voulu} cases, mais ${A.p} s'arrête ${cases(Math.abs(ecrit - voulu))} trop ${trop ? "loin" : "tôt"}. Le programme dit « avancer de ${ecrit} ». Quel nombre écrire ?`,
+      text: `${cap(A.n)} devait avancer de ${voulu} cases. Son programme dit « avancer de ${ecrit} ». Quel nombre écrire ?`,
       ...reponse(voulu),
       explanation: etapes(
         "On remplace le nombre faux par le bon.",
@@ -704,7 +701,7 @@ const GAB_CORRIGER: TutorBankItemV4[] = [
     const juste = `« ${ALLER[d]} de ${k} » devient « ${ALLER[d]} de ${bon} »`;
     const od = surH ? v : h, ok = surH ? b : a;
     return {
-      text: `${cap(nom(A))} devait arriver ${c.startsWith("le ") ? "au " + c.slice(3) : "à " + c}. ${cap(A.p)} s'arrête ${ecart}. ${un(["Comment corriger ?", "Quel bloc changer, et comment ?"])}`,
+      text: `${cap(nom(A))} devait arriver ${c.startsWith("le ") ? "au " + c.slice(3) : "à " + c}. ${cap(A.p)} s'arrête ${ecart}. ${un(["Comment corriger ?", "Que faut-il changer ?"])}`,
       ...qcm(juste, [
         `« ${ALLER[d]} de ${k} » devient « ${ALLER[d]} de ${trop ? k + n : k - n} »`,
         `« ${ALLER[od]} de ${ok} » devient « ${ALLER[od]} de ${trop ? ok - n : ok + n} »`,
@@ -730,7 +727,7 @@ const GAB_CORRIGER: TutorBankItemV4[] = [
     const A = acteur();
     const L = entre(2, 6);
     return {
-      text: `${cap(A.n)} devait tracer ${f.nom}, mais le programme dit « répéter ${ecrit} fois ». ${un(["Par quel nombre faut-il remplacer le " + ecrit + " ?", "Combien de tours faut-il ?"])}`,
+      text: `${cap(A.n)} devait tracer ${f.nom}. ${un(["Par quel nombre remplacer le " + ecrit + " ?", "Combien de tours faut-il ?"])}`,
       ...reponse(f.cotes),
       explanation: etapes(
         "Chaque tour trace un côté : il faut autant de tours que la figure a de côtés.",
@@ -746,7 +743,7 @@ const GAB_CORRIGER: TutorBankItemV4[] = [
     const e = un([v - 1, v + 1].filter((x) => x > 0 && x !== v));
     const A = acteur();
     return {
-      text: `${cap(A.n)} doit avancer de ${n * v} cases. Le programme dit « répéter ${n} fois : avancer de ${e} ». ${un(["Par quel nombre remplacer le " + e + " ?", "Quel nombre écrire à la place du " + e + " ?"])}`,
+      text: `${cap(A.n)} doit avancer de ${n * v} cases. ${un(["Quel nombre écrire dans « avancer de " + e + " » ?", "Par quel nombre remplacer « avancer de " + e + " » ?"])}`,
       ...reponse(v),
       explanation: etapes(
         `La boucle fait ${n} tours : on cherche l'avancée d'un seul tour.`,
@@ -772,7 +769,7 @@ const GAB_DEFI: TutorBankItemV4[] = [
     const L = entre(2, 9);
     const A = acteur();
     return {
-      text: `${cap(A.n)} trace ${f.nom} : « répéter ${f.cotes} fois : avancer de ${L}, puis tourner ». ${un(["Quelle est la longueur du trait, en cases ?", "Combien de cases mesure tout le trait ?"])}`,
+      text: `${cap(A.n)} trace ${f.nom} avec ce programme. ${un(["Combien de cases mesure le trait ?", "Combien de cases mesure tout le trait ?"])}`,
       ...reponse(f.cotes * L),
       explanation: etapes(
         "Chaque tour trace un côté : on met les côtés bout à bout.",
@@ -789,7 +786,7 @@ const GAB_DEFI: TutorBankItemV4[] = [
     const recule = Math.random() < 0.4 && a > b;
     const parTour = recule ? a - b : a + b;
     return {
-      text: `${cap(A.n)} a ce programme : « répéter ${fois} fois : avancer de ${a}, puis ${recule ? "reculer" : "avancer"} de ${b} ». À combien de cases du départ arrive-t-${A.p} ?`,
+      text: `Voici le programme ${du(A)}. À combien de cases du départ arrive-t-${A.p} ?`,
       ...reponse(fois * parTour),
       explanation: etapes(
         "On cherche ce que fait UN tour, puis on multiplie par le nombre de tours.",
@@ -818,7 +815,7 @@ const GAB_DEFI: TutorBankItemV4[] = [
     }
     const R = { un: `le robot ${deP(P1)}`, deux: `le robot ${deP(P2)}`, egal: "ils vont aussi loin l'un que l'autre" };
     return {
-      text: `Le robot ${deP(P1)} : « répéter ${a} fois : avancer de ${b} ». Celui ${deP(P2)} : « répéter ${c} fois : avancer de ${d} ». ${un(["Lequel va le plus loin ?", "Quel robot avance le plus ?"])}`,
+      text: `Voici les programmes des robots ${deP(P1)} et ${deP(P2)}. ${un(["Lequel va le plus loin ?", "Quel robot avance le plus ?"])}`,
       ...qcm(R[cas], [...Object.values(R), "on ne peut pas savoir"]),
       explanation: etapes(
         "Pour chaque programme : tours × cases.",
@@ -878,7 +875,7 @@ const FIGES: TutorBankItemV4[] = [
     microId: "ce2_algo_instruction",
     difficulty: 4,
     theme: "neutral",
-    text: "Un robot regarde vers la droite. Programme A : « avancer de 3, puis tourner ». Programme B : « tourner, puis avancer de 3 ». Arrivent-ils au même endroit ?",
+    text: "A : « avancer de 3, puis tourner ». B : « tourner, puis avancer de 3 ». Arrivent-ils au même endroit ?",
     format: "qcm",
     choices: [
       "non, l'ordre des instructions change le résultat",
@@ -906,7 +903,7 @@ const FIGES: TutorBankItemV4[] = [
     microId: "ce2_algo_instruction",
     difficulty: 3,
     theme: "neutral",
-    text: "Un robot part d'une case, avance de 2 cases, puis avance encore de 3 cases dans la même direction. De combien de cases s'est-il déplacé en tout ?",
+    text: "Un robot avance de 2 cases, puis encore de 3, tout droit. Combien de cases en tout ?",
     format: "short",
     expected: ["5"],
     comparator: "number_equal",
@@ -961,7 +958,7 @@ const FIGES: TutorBankItemV4[] = [
     microId: "ce2_algo_deplacement",
     difficulty: 4,
     theme: "neutral",
-    text: "Un robot avance de 2 cases vers la droite, puis de 3 cases vers le haut, puis de 2 cases vers la gauche. Où se trouve-t-il par rapport au départ ?",
+    text: "Un robot va 2 cases à droite, 3 en haut, puis 2 à gauche. Où arrive-t-il ?",
     format: "qcm",
     choices: [
       "3 cases plus haut, à la même place horizontalement",
@@ -989,7 +986,7 @@ const FIGES: TutorBankItemV4[] = [
     microId: "ce2_algo_deplacement",
     difficulty: 3,
     theme: "neutral",
-    text: "Un robot doit aller 4 cases à droite et 2 cases en haut. Combien d'instructions au minimum lui faut-il ?",
+    text: "Un robot doit aller 4 cases à droite et 2 en haut. Combien d'instructions au minimum ?",
     format: "short",
     expected: ["2"],
     comparator: "number_equal",
@@ -1070,7 +1067,7 @@ const FIGES: TutorBankItemV4[] = [
     microId: "ce2_algo_repetition",
     difficulty: 3,
     theme: "neutral",
-    text: "Pour tracer un carré, un robot doit avancer puis tourner, quatre fois de suite. Comment écrire ce programme le plus court possible ?",
+    text: "Pour un carré, le robot avance puis tourne, 4 fois. Quel est le programme le plus court ?",
     format: "qcm",
     choices: [
       "répéter 4 fois : avancer, puis tourner",
@@ -1110,7 +1107,7 @@ const FIGES: TutorBankItemV4[] = [
     microId: "ce2_algo_corriger",
     difficulty: 3,
     theme: "neutral",
-    text: "Un robot devait avancer de 7 cases. Le programme dit « avancer de 5 cases ». Comment corriger sans ajouter d'instruction ?",
+    text: "Un robot devait avancer de 7 cases, pas de 5. Comment corriger sans ajouter d'instruction ?",
     format: "qcm",
     choices: [
       "remplacer le 5 par un 7",
@@ -1138,7 +1135,7 @@ const FIGES: TutorBankItemV4[] = [
     microId: "ce2_algo_corriger",
     difficulty: 5,
     theme: "neutral",
-    text: "Un robot devait tracer un carré. Le programme dit : « répéter 3 fois : avancer, puis tourner d'un quart de tour ». Que trace-t-il ?",
+    text: "Un robot devait tracer un carré avec ce programme. Que trace-t-il ?",
     format: "qcm",
     choices: [
       "trois côtés seulement : le carré n'est pas fermé",
@@ -1206,7 +1203,7 @@ const FIGES: TutorBankItemV4[] = [
     microId: "ce2_algo_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "« Répéter 4 fois : avancer de 3 cases, puis tourner d'un quart de tour ». Quelle est la longueur totale du trait tracé, en cases ?",
+    text: "Un robot suit ce programme. Combien de cases mesure tout le trait ?",
     format: "short",
     expected: ["12"],
     comparator: "number_equal",
@@ -1240,7 +1237,7 @@ const FIGES: TutorBankItemV4[] = [
     microId: "ce2_algo_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Deux programmes font avancer un robot de 12 cases. Le premier dit « répéter 6 fois : avancer de 2 ». Le second dit « répéter 4 fois : avancer de 3 ». Lequel écrit le moins d'instructions ?",
+    text: "1er : « répéter 6 fois : avancer de 2 ». 2e : « répéter 4 fois : avancer de 3 ». Lequel écrit le moins d'instructions ?",
     format: "qcm",
     choices: [
       "les deux en écrivent autant : une répétition et une avancée",

@@ -47,35 +47,34 @@ import {
 /** Où l'on rencontre une suite qui monte. `{n}` : rien, la suite suit la phrase. */
 const MONTE = (p: Personne, pas: number) =>
   randomChoice([
-    `Pic le paille-en-queue saute de ${pas} en ${pas} sur les pierres de la rivière :`,
-    `${p.nom} numérote les maisons de sa rue de ${pas} en ${pas} :`,
+    `Pic saute de ${pas} en ${pas} :`,
+    `Les maisons, de ${pas} en ${pas} :`,
     `${p.nom} compte de ${pas} en ${pas} :`,
-    `Le kangourou du zoo fait des bonds de ${pas} :`,
-    `Le compteur du train ${de(p.nom)} avance de ${pas} en ${pas} :`,
-    `${p.nom} écrit les pages de son cahier de ${pas} en ${pas} :`,
-    `Le robot ${de(p.nom)} avance de ${pas} cases à chaque pas :`,
-    `La grenouille de la mare saute de ${pas} en ${pas} :`,
-    `${p.nom} ramasse des coquillages, ${pas} par ${pas}, et compte :`,
-    `Sur le chemin du trésor, les bornes vont de ${pas} en ${pas} :`,
+    `Le kangourou fait des bonds de ${pas} :`,
+    `Le train avance de ${pas} en ${pas} :`,
+    `Le robot ${de(p.nom)} avance de ${pas} :`,
+    `La grenouille saute de ${pas} en ${pas} :`,
+    `${p.nom} ramasse des coquillages ${pas} par ${pas} :`,
+    `Les bornes, de ${pas} en ${pas} :`,
   ]);
 
 /** Où l'on rencontre une suite qui descend. */
 const DESCEND = (p: Personne, pas: number) =>
   randomChoice([
-    `La fusée ${de(p.nom)} fait son compte à rebours de ${pas} en ${pas} :`,
+    `Compte à rebours de ${pas} en ${pas} :`,
     `${p.nom} recule de ${pas} en ${pas} :`,
-    `Pic le paille-en-queue redescend l'escalier ${pas} marches par ${pas} marches :`,
-    `${p.nom} mange ses bonbons ${pas} par ${pas} et compte ce qui reste :`,
-    `Le marchand vend ses mangues ${pas} par ${pas} et compte ce qui reste :`,
+    `Pic descend l'escalier ${pas} par ${pas} :`,
+    `${p.nom} mange ses bonbons ${pas} par ${pas} :`,
+    `Le marchand vend ses mangues ${pas} par ${pas} :`,
     `${p.nom} compte à l'envers de ${pas} en ${pas} :`,
-    `Le dragon perd ${pas} écailles à chaque éternuement :`,
+    `Le dragon perd ses écailles ${pas} par ${pas} :`,
   ]);
 
 const Q_SUIVANT = [
   "Quel nombre vient ensuite ?",
-  "Quel est le nombre suivant ?",
-  "Continue : quel nombre vient après ?",
-  "Que dit-on juste après ?",
+  "Quel nombre suit ?",
+  "Et après ?",
+  "Que dit-on ensuite ?",
 ];
 
 /** Un départ qui fait souvent passer une centaine (le piège). */
@@ -103,6 +102,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
     difficulty: 3,
     theme: "neutral",
     text: "Continue la suite : 396, 397, 398, 399, …",
+    canvas: { kind: "suite", terms: [396, 397, 398, 399, "?"], missingIndex: 4, display: { showArrows: true, showRule: false, showLabels: false } },
     format: "short",
     expected: ["400"],
     comparator: "number_equal",
@@ -152,6 +152,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
             String(suivant),
             [String(suivant + 1 === suivant + pas ? suivant + 2 : suivant + 1), String(pas === 100 ? suivant + 10 : termes[3] + 10 * pas), String(suivant - pas), String(suivant + pas)].filter((t) => Number(t) <= 1000),
             ex,
+            suite({ terms: [...termes, "?"], missingIndex: 4, display: { showArrows: false, showRule: false, showLabels: false } }),
           ),
       ]);
     },
@@ -194,11 +195,12 @@ export const suiteNombreBank: TutorBankItemV4[] = [
             String(suivant),
             [String(termes[3] + pas), String(suivant - pas), String(suivant + 1 === termes[3] ? suivant - 1 : suivant + 1), String(termes[3] - 10 * pas)].filter((s) => Number(s) >= 0),
             ex,
+            suite({ terms: [...termes, "?"], missingIndex: 4, display: { showArrows: false, showRule: false, showLabels: false } }),
           ),
         // Le nombre d'AVANT le premier (on remonte la suite).
         () =>
           court(
-            `${DESCEND(p, pas)} ?, ${termes.join(", ")}. ${randomChoice(["Quel nombre était au début ?", "Quel nombre vient avant le premier ?", "Quel nombre manque au début ?"])}`,
+            `${DESCEND(p, pas)} ?, ${termes.join(", ")}. ${randomChoice(["Quel nombre était au début ?", "Quel nombre manque au début ?"])}`,
             depart + pas,
             exp(
               "Une suite qui descend enlève toujours le même nombre.",
@@ -226,6 +228,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
     difficulty: 4,
     theme: "neutral",
     text: "Quelle est la règle de cette suite : 4, 8, 12, 16 ?",
+    canvas: { kind: "suite", terms: [4, 8, 12, 16], display: { showArrows: true, showRule: false, showLabels: false } },
     format: "qcm",
     choices: [
       "on ajoute 4 à chaque fois",
@@ -262,7 +265,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
       const depart = monte ? randomInt(10, 500) : randomInt(500, 900);
       const termes = [0, 1, 2, 3].map((i) => (monte ? depart + i * pas : depart - i * pas));
       const intro = monte
-        ? randomChoice([`${p.nom} écrit cette suite :`, "Voici une suite :", `Pic le paille-en-queue saute sur les pierres :`, `Les numéros des maisons de la rue ${de(p.nom)} :`, `Le robot ${de(p.nom)} s'arrête sur les cases :`])
+        ? randomChoice([`${p.nom} écrit cette suite :`, "Voici une suite :", `Pic saute sur les pierres :`, `Les maisons de la rue :`, `Le robot s'arrête sur :`])
         : randomChoice([`La fusée ${de(p.nom)} compte à rebours :`, "Voici une suite qui descend :", `${p.nom} compte à l'envers :`]);
       const ex = exp(
         "Le pas d'une suite, c'est ce qu'on ajoute (ou enlève) d'un nombre au suivant.",
@@ -273,7 +276,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
       return tirer([
         () =>
           court(
-            `${intro} ${termes.join(", ")}. ${randomChoice([`De combien ${monte ? "avance" : "recule"}-t-on à chaque fois ?`, "Quel est l'écart entre deux nombres voisins ?", `Combien ${monte ? "ajoute" : "enlève"}-t-on à chaque fois ?`])}`,
+            `${intro} ${termes.join(", ")}. ${randomChoice([`De combien ${monte ? "avance" : "recule"}-t-on ?`, "Quel est l'écart entre deux voisins ?", `Combien ${monte ? "ajoute" : "enlève"}-t-on à chaque fois ?`])}`,
             pas,
             ex,
             suite({ terms: termes, display: { showArrows: true, showRule: false, showLabels: false } }),
@@ -282,10 +285,11 @@ export const suiteNombreBank: TutorBankItemV4[] = [
           const verbe = monte ? "ajoute" : "enlève";
           const autre = monte ? "enlève" : "ajoute";
           return qcm(
-            `${intro} ${termes.join(", ")}. ${randomChoice(["Quelle est la règle ?", "Quelle règle suit cette suite ?", `Que fait ${p.nom} à chaque fois ?`])}`,
+            `${intro} ${termes.join(", ")}. ${randomChoice(["Quelle est la règle ?", "Quelle règle suit cette suite ?"])}`,
             `on ${verbe} ${pas} à chaque fois`,
             [`on ${verbe} ${({ 2: 3, 3: 2, 5: 4, 10: 5, 20: 10, 50: 25, 100: 50 } as Record<number, number>)[pas]} à chaque fois`, `on ${autre} ${pas} à chaque fois`, `on ${verbe} ${pas * 2} à chaque fois`, `on ${verbe} 1 à chaque fois`],
             ex,
+            suite({ terms: termes, display: { showArrows: true, showRule: false, showLabels: false } }),
           );
         },
       ]);
@@ -311,12 +315,12 @@ export const suiteNombreBank: TutorBankItemV4[] = [
       const manquant = termes[trou];
       const affiche = termes.map((t, i) => (i === trou ? "?" : String(t)));
       const intro = randomChoice([
-        `${p.nom} a effacé un nombre de sa suite :`,
-        "Un nombre s'est caché dans cette suite :",
-        `Pic le paille-en-queue a picoré un nombre de la suite :`,
-        `Sur le chemin du trésor, une borne est tombée :`,
-        `Dans la rue ${de(p.nom)}, un numéro de maison est effacé :`,
-        "Le dragon a brûlé une case de la suite :",
+        `${p.nom} a effacé un nombre :`,
+        "Un nombre s'est caché :",
+        `Pic a picoré un nombre :`,
+        `Une borne du trésor est tombée :`,
+        `Un numéro de maison est effacé :`,
+        "Le dragon a brûlé une case :",
       ]);
       return court(
         `${intro} ${affiche.join(", ")}. ${randomChoice(["Quel nombre manque ?", "Quel nombre remplace le « ? » ?", "Retrouve le nombre caché."])}`,
@@ -345,7 +349,8 @@ export const suiteNombreBank: TutorBankItemV4[] = [
     microId: "ce1_suite_10_100",
     difficulty: 3,
     theme: "neutral",
-    text: "En comptant de 10 en 10 à partir de 347, quel nombre vient après 397 ?",
+    text: "On compte de 10 en 10 depuis 347. Que dit-on après 397 ?",
+    canvas: { kind: "suite", terms: [367, 377, 387, 397, "?"], missingIndex: 4, display: { showArrows: true, showRule: false, showLabels: false } },
     format: "short",
     expected: ["407"],
     comparator: "number_equal",
@@ -382,9 +387,9 @@ export const suiteNombreBank: TutorBankItemV4[] = [
             { t: "enlève une barre de dix", v: -10 },
             { t: "enlève une plaque de cent", v: -100 },
           ] as const);
-          if ((geste.v === -10 && d === 0) || (geste.v === -100 && c === 1)) return court(`${p.nom} a construit ce nombre. ${maj(p.il)} ajoute une barre de dix. Quel nombre obtient-${p.il} ?`, n + 10, explique(n, 10), baseDix(c, d, u));
+          if ((geste.v === -10 && d === 0) || (geste.v === -100 && c === 1)) return court(`Voici les cubes ${de(p.nom)}. ${maj(p.il)} ajoute une barre de dix. Quel nombre obtient-${p.il} ?`, n + 10, explique(n, 10), baseDix(c, d, u));
           return court(
-            `${randomChoice([`${p.nom} a construit ce nombre.`, `Voici les cubes ${de(p.nom)}.`, `${p.nom} a posé ce matériel.`])} ${maj(p.il)} ${geste.t}. ${randomChoice([`Quel nombre obtient-${p.il} ?`, "Quel nombre montre le matériel maintenant ?", geste.v > 0 ? "Combien de cubes y a-t-il maintenant ?" : "Combien de cubes reste-t-il ?"])}`,
+            `${randomChoice([`${p.nom} a construit ce nombre.`, `Voici les cubes ${de(p.nom)}.`, `${p.nom} a posé ce matériel.`])} ${maj(p.il)} ${geste.t}. ${randomChoice([`Quel nombre obtient-${p.il} ?`, "Quel nombre maintenant ?", geste.v > 0 ? "Combien de cubes maintenant ?" : "Combien de cubes reste-t-il ?"])}`,
             n + geste.v,
             explique(n, geste.v),
             baseDix(c, d, u),
@@ -397,19 +402,22 @@ export const suiteNombreBank: TutorBankItemV4[] = [
           const avant = Math.random() < 0.35;
           const n = pas === 10 ? randomChoice([randomInt(110, 890), randomInt(1, 8) * 100 + 90 + randomInt(0, 9)]) : randomInt(120, 880);
           const rep = avant ? n - pas : n + pas;
+          const dessin = Math.random() < 0.5;
           return court(
             randomChoice([
-              `En comptant de ${pas} en ${pas}, quel nombre vient juste ${avant ? "avant" : "après"} ${n} ?`,
-              `${p.nom} compte de ${pas} en ${pas}. ${maj(p.il)} dit ${n}. Que dit-${p.il} ${avant ? "juste avant" : "ensuite"} ?`,
-              `Pic le paille-en-queue saute de ${pas} en ${pas}. Il est sur ${n}. Où ${avant ? "était-il juste avant" : "va-t-il ensuite"} ?`,
-              `Le robot ${de(p.nom)} ${avant ? "recule" : "avance"} de ${pas}. Il part de ${n}. Où arrive-t-il ?`,
+              `De ${pas} en ${pas}, quel nombre vient juste ${avant ? "avant" : "après"} ${n} ?`,
+              `${p.nom} compte de ${pas} en ${pas}. ${maj(p.il)} dit ${n}. Et ${avant ? "juste avant" : "ensuite"} ?`,
+              `Pic saute de ${pas} en ${pas}. Il est sur ${n}. Où ${avant ? "était-il avant" : "va-t-il ensuite"} ?`,
+              `Le robot part de ${n} et ${avant ? "recule" : "avance"} de ${pas}. Où arrive-t-il ?`,
               `${p.nom} a ${n} billes. ${maj(p.il)} ${avant ? "en perd" : "en gagne"} ${pas}. Combien en a-t-${p.il} ?`,
               `Quel nombre a ${pas === 10 ? "une dizaine" : "une centaine"} de ${avant ? "moins" : "plus"} que ${n} ?`,
-              `${p.nom} cherche le nombre qui a ${pas} de ${avant ? "moins" : "plus"} que ${n}. Lequel est-ce ?`,
-              `Le livre ${de(p.nom)} a ${n} pages. Celui de sa sœur en a ${pas} de ${avant ? "moins" : "plus"}. Combien de pages ?`,
+              `Le livre ${de(p.nom)} a ${n} pages. Un autre en a ${pas} de ${avant ? "moins" : "plus"}. Combien ?`,
             ]),
             rep,
             explique(n, avant ? -pas : pas),
+            dessin
+              ? droite({ min: Math.min(n, rep) - pas, max: Math.max(n, rep) + pas, step: pas, valeursEcrites: [n], points: [{ value: rep, label: "?", color: "#ef4444" }] })
+              : undefined,
           );
         },
         // La droite graduée de dix en dix (ou de cent en cent).
@@ -419,7 +427,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
           const k = randomInt(2, 7);
           const x = depart + k * pas;
           return court(
-            `${randomChoice(["On compte de", "La droite avance de", `${quelquun().nom} compte de`, "Pic le paille-en-queue saute de"])} ${pas} en ${pas}. ${randomChoice(["Quel nombre est au point « ? » ?", "Quel nombre cache le « ? » ?", "Quel nombre se trouve sous le « ? » ?"])}`,
+            `${randomChoice(["On compte de", "La droite avance de", `${quelquun().nom} compte de`, "Pic saute de"])} ${pas} en ${pas}. ${randomChoice(["Quel nombre est au point « ? » ?", "Quel nombre cache le « ? » ?"])}`,
             x,
             exp(
               `Chaque graduation ajoute ${pas}.`,
@@ -445,7 +453,8 @@ export const suiteNombreBank: TutorBankItemV4[] = [
     microId: "ce1_suite_defi",
     difficulty: 5,
     theme: "neutral",
-    text: "Dans la suite 1, 2, 4, 8, 16, quelle est la règle ?",
+    text: "Quelle est la règle de la suite 1, 2, 4, 8, 16 ?",
+    canvas: { kind: "suite", terms: [1, 2, 4, 8, 16], display: { showArrows: true, showRule: false, showLabels: false } },
     format: "qcm",
     choices: [
       "on double à chaque fois",
@@ -509,11 +518,14 @@ export const suiteNombreBank: TutorBankItemV4[] = [
         "Défi ! Continue la suite :",
         `${p.nom} a inventé une suite :`,
         `Ti Margo lance un défi à ${p.nom} :`,
-        "Le magicien du cirque écrit au tableau :",
-        `Pic le paille-en-queue a trouvé ces nombres dans un vieux grimoire :`,
+        "Le magicien écrit au tableau :",
+        `Pic a trouvé dans un grimoire :`,
+        `${p.nom} écrit au tableau :`,
+        `Pic montre à ${p.nom} :`,
+        "Suite mystère :",
       ]);
       return court(
-        `${intro} ${termes.join(", ")}, … ${randomChoice(["Quel nombre vient ensuite ?", "Quel est le nombre suivant ?", "Trouve le nombre suivant."])}`,
+        `${intro} ${termes.join(", ")}, … ${randomChoice(["Quel nombre vient ensuite ?", "Quel est le nombre suivant ?", "Et après ?", "Trouve le suivant.", "Quel nombre suit ?"])}`,
         suivant,
         exp(
           "La règle d'une suite doit marcher entre TOUS les nombres, pas seulement entre les deux premiers.",
@@ -521,7 +533,7 @@ export const suiteNombreBank: TutorBankItemV4[] = [
           `Ici, ${regle} : ${termes.join(", ")}, puis ${suivant}.`,
           `Le nombre suivant est ${suivant}.`,
         ),
-        Math.random() < 0.5 ? suite({ terms: [...termes, "?"], missingIndex: termes.length, display: { showArrows: true, showRule: false, showLabels: false } }) : undefined,
+        suite({ terms: [...termes, "?"], missingIndex: termes.length, display: { showArrows: Math.random() < 0.5, showRule: false, showLabels: false } }),
       );
     },
   },
