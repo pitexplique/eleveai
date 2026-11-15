@@ -92,6 +92,8 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 - [x] Calculer une aire par découpage ou assemblage — `aire_composer`
 - [x] Résoudre un défi d’aire — `aire_defi`
 
+⛔ **Dates du manifeste RÉSERVÉES (15/11)** pour les 14 micros ci-dessous : contenance 23 → 26/03/2027, solides 27/03 → 01/04/2027, longueurs 02 → 05/04/2027 (1 paysage + son short par jour). Les 6e prennent leurs dates à partir du 06/04/2027. Voix validées le 15/11 : `manim/REPRISE-cm2-contenance-solides-longueurs.md`.
+
 **Volume et contenance** (4)
 - [ ] Comparer des contenances — `contenance_comparer`
 - [ ] Convertir des contenances — `contenance_convertir`
