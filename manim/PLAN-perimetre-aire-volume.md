@@ -117,21 +117,21 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 **Périmètre** (6)
 - [x] Comprendre le périmètre — `aire_perimetre_comprendre` — ↪ vidéo CM2 `cm2-perimetre-comprendre` (+ short) par `aussi`, coach branché 15/11
 - [ ] Calculer le périmètre d’un carré — `aire_perimetre_carre` — ↪ vidéo 6e P1 `6e-aire-perimetre-rectangle` par `aussi` (à produire)
-- [ ] Calculer le périmètre d’un rectangle — `aire_perimetre_rectangle` — ⏳ 6e P1 « formules du périmètre » (Lucas, paysagiste, verte) : voix écrite 15/11, à valider
+- [ ] Calculer le périmètre d’un rectangle — `aire_perimetre_rectangle` — ⏳ 6e P1 « formules du périmètre » (Lucas, paysagiste, verte) : ✅ voix validée 15/11 (« Oui, valide les 12 »)
 - [x] Calculer le périmètre d’une figure — `aire_perimetre_figure` — ↪ vidéo CM2 `cm2-perimetre-polygone` (+ short) par `aussi`, coach branché 15/11
 - [x] Résoudre un problème de périmètre — `aire_perimetre_probleme` — ↪ vidéo CM2 `cm2-perimetre-defi` (+ short) par `aussi`, coach branché 15/11
-- [ ] Défis de périmètre — `aire_perimetre_defi` — ⏳ 6e P2 (Chloé, fleuriste, bleue) : voix écrite 15/11, à valider
+- [ ] Défis de périmètre — `aire_perimetre_defi` — ⏳ 6e P2 (Chloé, fleuriste, bleue) : ✅ voix validée 15/11 (« Oui, valide les 12 »)
 
 **Aire** (9)
 - [x] Comprendre l’aire — `aire_comprendre` — ↪ vidéo CM2 `cm2-aire-comprendre` (+ short) par `aussi`, coach branché 15/11
 - [x] Calculer une aire par comptage — `aire_compter` — ↪ vidéo CM1 `cm1-aire-unite` (+ short) par `aussi`, coach branché 15/11
 - [x] Convertir des aires — `aire_convertir` — ↪ vidéo CM2 `cm2-aire-convertir-unites` (+ short) par `aussi`, coach branché 15/11
-- [ ] Calculer l’aire d’un rectangle — `aire_rectangle` — ⏳ 6e A1 « formules de l'aire » (Amina, jardinière, verte) : voix écrite 15/11, à valider
+- [ ] Calculer l’aire d’un rectangle — `aire_rectangle` — ⏳ 6e A1 « formules de l'aire » (Amina, jardinière, verte) : ✅ voix validée 15/11 (« Oui, valide les 12 »)
 - [ ] Calculer l’aire d’un carré — `aire_carre` — ↪ vidéo 6e A1 `6e-aire-rectangle` par `aussi` (à produire)
-- [ ] Comparer des aires — `aire_comparer` — ⏳ 6e A2 (Léna, agente immobilière, verte) : voix écrite 15/11, à valider
+- [ ] Comparer des aires — `aire_comparer` — ⏳ 6e A2 (Léna, agente immobilière, verte) : ✅ voix validée 15/11 (« Oui, valide les 12 »)
 - [x] Décomposer une figure pour calculer son aire — `aire_decomposer` — ↪ vidéo CM2 `cm2-aire-composer` (+ short) par `aussi`, coach branché 15/11
-- [ ] Résoudre des problèmes d’aires — `aire_probleme` — ⏳ 6e A3 (Yanis, maçon, verte) : voix écrite 15/11, à valider
-- [ ] Défis sur les aires — `aire_defi` — ⏳ 6e A4 (Théo, technicien en énergies renouvelables, bleue) : voix écrite 15/11, à valider
+- [ ] Résoudre des problèmes d’aires — `aire_probleme` — ⏳ 6e A3 (Yanis, maçon, verte) : ✅ voix validée 15/11 (« Oui, valide les 12 »)
+- [ ] Défis sur les aires — `aire_defi` — ⏳ 6e A4 (Théo, technicien en énergies renouvelables, bleue) : ✅ voix validée 15/11 (« Oui, valide les 12 »)
 
 **Volume et contenance** (6)
 - [ ] Comprendre l’unité de volume — `volume_unite` — ⏳ 15/11 voix écrites `6e-volume-unite(-short)` (Mathis, maître-nageur), à valider

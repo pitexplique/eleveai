@@ -14,19 +14,19 @@ Plan cochable : `manim/PLAN-perimetre-aire-volume.md`, section « ## 6E » (Pér
 |---|---|---|
 | `aire_perimetre_comprendre` | `cm2-perimetre-comprendre` (+ short) | ✅ `aussi` + coach |
 | `aire_perimetre_carre` | 6e P1 `6e-aire-perimetre-rectangle` | `aussi` à poser à la publication de P1 |
-| `aire_perimetre_rectangle` | **6e P1** | ⏳ voix écrite |
+| `aire_perimetre_rectangle` | **6e P1** | ✅ voix validée |
 | `aire_perimetre_figure` | `cm2-perimetre-polygone` (+ short) | ✅ `aussi` + coach |
 | `aire_perimetre_probleme` | `cm2-perimetre-defi` (+ short) | ✅ `aussi` + coach |
-| `aire_perimetre_defi` | **6e P2** | ⏳ voix écrite |
+| `aire_perimetre_defi` | **6e P2** | ✅ voix validée |
 | `aire_comprendre` | `cm2-aire-comprendre` (+ short) | ✅ `aussi` + coach |
 | `aire_compter` | `cm1-aire-unite` (+ short) | ✅ `aussi` + coach |
 | `aire_convertir` | `cm2-aire-convertir-unites` (+ short) | ✅ `aussi` + coach |
-| `aire_rectangle` | **6e A1** | ⏳ voix écrite |
+| `aire_rectangle` | **6e A1** | ✅ voix validée |
 | `aire_carre` | 6e A1 `6e-aire-rectangle` | `aussi` à poser à la publication de A1 |
-| `aire_comparer` | **6e A2** | ⏳ voix écrite |
+| `aire_comparer` | **6e A2** | ✅ voix validée |
 | `aire_decomposer` | `cm2-aire-composer` (+ short) | ✅ `aussi` + coach |
-| `aire_probleme` | **6e A3** | ⏳ voix écrite |
-| `aire_defi` | **6e A4** | ⏳ voix écrite |
+| `aire_probleme` | **6e A3** | ✅ voix validée |
+| `aire_defi` | **6e A4** | ✅ voix validée |
 | `aire_longueur_mesurer` | `ce2-longueur-choisir-unite` (+ short) — la banque 6e fait choisir l'unité | ✅ `aussi` + coach |
 | `aire_longueur_unite` | `ce2-longueur-relations` (+ short) | ✅ `aussi` + coach |
 | `aire_longueur_convertir` | `6e-aire-longueur-convertir-diagonale` (déjà en ligne) | ✅ déjà au coach |
@@ -37,7 +37,7 @@ Plan cochable : `manim/PLAN-perimetre-aire-volume.md`, section « ## 6E » (Pér
 - `aussi` posés dans le manifeste (commit `0fca526c`, 24 entrées : 12 paysages + leurs shorts), coach branché en production (`node scripts/brancher-videos-coach.mjs --classe 6e --ecrire` : 23 vidéos).
 - Quand la série Longueurs CM2 (autre session) sera finie, on pourra rebrancher `aire_longueur_comparer` / `aire_longueur_defi` sur les vidéos CM2, plus proches de la 6e (à décider avec Frédéric).
 
-## Les 12 voix (`manim/voix/`) — ⏳ ÉCRITES le 15/11, À VALIDER par Frédéric
+## Les 12 voix (`manim/voix/`) — ✅ VALIDÉES par Frédéric le 15/11/2026 (« Oui, valide les 12 »), ceintures comprises ; ni WAV ni rendu encore
 | Ép. | Micro (+ aussi) | Fichiers | Métier (matrice, marqué `V`) | Questions paysage | Short (réponse) | Ceinture | Centres proposés |
 |---|---|---|---|---|---|---|---|
 | P1 | `aire_perimetre_rectangle` (+ `aire_perimetre_carre`) | `6e-aire-perimetre-rectangle(-short)` | Lucas, paysagiste (jardin 15 × 9 → 48 m ; potager carré 6,5 → 26 m ; massif 12 m × 80 cm → 25,6 m ; piège des parenthèses ; défi 18 m × 950 cm − portail 3 m = 52 m) | B, A | guirlande fenêtre carrée 1,2 m → 4,8 m : A | verte | nature-ecologie, construction |
