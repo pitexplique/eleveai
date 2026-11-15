@@ -3575,6 +3575,42 @@
   "youtube": "ai3qedWj4nM",
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_longueur&microId=aire_longueur_defi&display=simple"
  },
+ "6e-aire-perimetre-defi": {
+  "fichier": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi.mp4",
+  "poster": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi.png",
+  "vignette": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi.vignette.webp",
+  "titre": "Que devient le tour quand on change les côtés ? — Défi de périmètre — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_defi&display=simple"
+ },
+ "6e-aire-perimetre-defi-short": {
+  "fichier": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi-short.mp4",
+  "poster": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi-short-miniature.png",
+  "vignette": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi-short-miniature.vignette.webp",
+  "titre": "20 cm de ruban : quelle boîte cadeau pile poil ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_defi&display=simple"
+ },
+ "6e-aire-perimetre-rectangle": {
+  "fichier": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle.mp4",
+  "poster": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle.png",
+  "vignette": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle.vignette.webp",
+  "titre": "Combien de clôture pour ce jardin ? — Les formules du périmètre — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_rectangle&display=simple"
+ },
+ "6e-aire-perimetre-rectangle-short": {
+  "fichier": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle-short.mp4",
+  "poster": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle-short-miniature.png",
+  "vignette": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle-short-miniature.vignette.webp",
+  "titre": "Ma guirlande trop courte : 2,4 m pour une fenêtre carrée ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_rectangle&display=simple"
+ },
  "6e-angle-comparer": {
   "fichier": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer.mp4",
   "poster": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer.png",
@@ -7090,6 +7126,132 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=tableau&microId=tableau_lire&display=simple"
  },
+ "cm2-aire-carre-rectangle": {
+  "fichier": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle.mp4",
+  "poster": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle.png",
+  "vignette": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle.vignette.webp",
+  "titre": "Panneaux solaires : combien de m² ? — L'aire du rectangle et du carré — épisode 4 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_carre_rectangle&display=simple"
+ },
+ "cm2-aire-carre-rectangle-short": {
+  "fichier": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle-short.mp4",
+  "poster": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle-short-miniature.png",
+  "vignette": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle-short-miniature.vignette.webp",
+  "titre": "Mon mur fait combien de m² ? Je repeins tout en vert ! #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_carre_rectangle&display=simple"
+ },
+ "cm2-aire-composer": {
+  "fichier": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer.mp4",
+  "poster": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer.png",
+  "vignette": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer.vignette.webp",
+  "titre": "Un enclos en L : combien de m² d'herbe ? — L'aire par découpage — épisode 6 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_composer&display=simple"
+ },
+ "cm2-aire-composer-short": {
+  "fichier": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer-short.mp4",
+  "poster": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer-short-miniature.png",
+  "vignette": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer-short-miniature.vignette.webp",
+  "titre": "Du gazon autour du bac à sable : combien de carreaux ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_composer&display=simple"
+ },
+ "cm2-aire-comprendre": {
+  "fichier": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre.mp4",
+  "poster": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre.png",
+  "vignette": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre.vignette.webp",
+  "titre": "Deux couvertures, même tissu ? — Comprendre l'aire — épisode 1 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_comprendre&display=simple"
+ },
+ "cm2-aire-comprendre-short": {
+  "fichier": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre-short.mp4",
+  "poster": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre-short-miniature.png",
+  "vignette": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre-short-miniature.vignette.webp",
+  "titre": "Sa serviette de plage a l'air plus grande… vraiment ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_comprendre&display=simple"
+ },
+ "cm2-aire-convertir-unites": {
+  "fichier": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites.mp4",
+  "poster": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites.png",
+  "vignette": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites.vignette.webp",
+  "titre": "1 dm² = 100 cm², pas 10 ! — Convertir des aires — épisode 3 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_convertir_unites&display=simple"
+ },
+ "cm2-aire-convertir-unites-short": {
+  "fichier": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites-short.mp4",
+  "poster": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites-short-miniature.png",
+  "vignette": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites-short-miniature.vignette.webp",
+  "titre": "Combien d'autocollants dans 1 dm² ? Ma sœur dit 10… #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_convertir_unites&display=simple"
+ },
+ "cm2-aire-defi": {
+  "fichier": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi.mp4",
+  "poster": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi.png",
+  "vignette": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi.vignette.webp",
+  "titre": "48 m² et 6 m de large : combien de long ? — Défi d'aire — épisode 7 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_defi&display=simple"
+ },
+ "cm2-aire-defi-short": {
+  "fichier": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi-short.mp4",
+  "poster": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi-short-miniature.png",
+  "vignette": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi-short-miniature.vignette.webp",
+  "titre": "24 dalles sur 4 m de large : combien de long ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_defi&display=simple"
+ },
+ "cm2-aire-triangle-rectangle": {
+  "fichier": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle.mp4",
+  "poster": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle.png",
+  "vignette": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle.vignette.webp",
+  "titre": "Sandwich coupé en diagonale : quelle aire ? — L'aire du triangle rectangle — épisode 5 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_triangle_rectangle&display=simple"
+ },
+ "cm2-aire-triangle-rectangle-short": {
+  "fichier": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle-short.mp4",
+  "poster": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle-short-miniature.png",
+  "vignette": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle-short-miniature.vignette.webp",
+  "titre": "Toast en triangle ou en rectangle : qui en a le plus ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_triangle_rectangle&display=simple"
+ },
+ "cm2-aire-unites": {
+  "fichier": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites.mp4",
+  "poster": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites.png",
+  "vignette": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites.vignette.webp",
+  "titre": "Timbre, affiche ou bâche : quelle unité d'aire ? — Les unités d'aire — épisode 2 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_unites&display=simple"
+ },
+ "cm2-aire-unites-short": {
+  "fichier": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites-short.mp4",
+  "poster": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites-short-miniature.png",
+  "vignette": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites-short-miniature.vignette.webp",
+  "titre": "J'ai commandé un tapis de 4 cm² au lieu de 4 m² ! #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_unites&display=simple"
+ },
  "cm2-decimal-droite": {
   "fichier": "cm2/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm2-decimal-droite.mp4",
   "poster": "cm2/maths/nombres-decimaux/decimal-droite/eleveai-maths-cm2-decimal-droite.png",
@@ -7342,6 +7504,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_quadrilatere&display=simple"
  },
+ "cm2-perimetre-triangle": {
+  "fichier": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle.mp4",
+  "poster": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle.png",
+  "vignette": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle.vignette.webp",
+  "titre": "Combien de bande autour d'une voile ? — Le périmètre du triangle — épisode 2 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_triangle&display=simple"
+ },
+ "cm2-perimetre-triangle-short": {
+  "fichier": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle-short.mp4",
+  "poster": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle-short-miniature.png",
+  "vignette": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle-short-miniature.vignette.webp",
+  "titre": "Mon cerf-volant : 60 + 60 + 1 = 121 ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_triangle&display=simple"
+ },
  "cm2-proba-comparer": {
   "fichier": "cm2/maths/probabilites/03-comparer/eleveai-maths-cm2-proba-comparer.mp4",
   "poster": "cm2/maths/probabilites/03-comparer/eleveai-maths-cm2-proba-comparer.png",
@@ -7539,6 +7719,24 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_tableau&display=simple"
+ },
+ "cm2-solides-reconnaitre": {
+  "fichier": "cm2/maths/solides/01-reconnaitre/eleveai-maths-cm2-solides-reconnaitre.mp4",
+  "poster": "cm2/maths/solides/01-reconnaitre/eleveai-maths-cm2-solides-reconnaitre.png",
+  "vignette": "cm2/maths/solides/01-reconnaitre/eleveai-maths-cm2-solides-reconnaitre.vignette.webp",
+  "titre": "Prisme, pyramide, cylindre, cône : les distinguer — Reconnaître les solides — épisode 1 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_reconnaitre&display=simple"
+ },
+ "cm2-solides-reconnaitre-short": {
+  "fichier": "cm2/maths/solides/01-reconnaitre/eleveai-maths-cm2-solides-reconnaitre-short.mp4",
+  "poster": "cm2/maths/solides/01-reconnaitre/eleveai-maths-cm2-solides-reconnaitre-short-miniature.png",
+  "vignette": "cm2/maths/solides/01-reconnaitre/eleveai-maths-cm2-solides-reconnaitre-short-miniature.vignette.webp",
+  "titre": "Il roule et a 2 disques : une boule ? Raté ! #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_reconnaitre&display=simple"
  },
  "cm2-stats-graphique-completer": {
   "fichier": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer.mp4",
@@ -15893,185 +16091,5 @@
   "short": false,
   "youtube": "ZZiXPXBTXIQ",
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=arithmetique_entiers&display=simple"
- },
- "cm2-perimetre-triangle": {
-  "fichier": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle.mp4",
-  "poster": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle.png",
-  "vignette": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle.vignette.webp",
-  "titre": "Combien de bande autour d'une voile ? — Le périmètre du triangle — épisode 2 · Maths CM2",
-  "short": false,
-  "youtube": null,
-  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_triangle&display=simple"
- },
- "cm2-perimetre-triangle-short": {
-  "fichier": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle-short.mp4",
-  "poster": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle-short-miniature.png",
-  "vignette": "cm2/maths/perimetre/02-triangle/eleveai-maths-cm2-perimetre-triangle-short-miniature.vignette.webp",
-  "titre": "Mon cerf-volant : 60 + 60 + 1 = 121 ? #maths #cm2",
-  "short": true,
-  "youtube": null,
-  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=perimetre&microId=perimetre_triangle&display=simple"
- },
- "cm2-aire-carre-rectangle": {
-  "fichier": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle.mp4",
-  "poster": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle.png",
-  "vignette": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle.vignette.webp",
-  "titre": "Panneaux solaires : combien de m² ? — L'aire du rectangle et du carré — épisode 4 · Maths CM2",
-  "short": false,
-  "youtube": null,
-  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_carre_rectangle&display=simple"
- },
- "cm2-aire-carre-rectangle-short": {
-  "fichier": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle-short.mp4",
-  "poster": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle-short-miniature.png",
-  "vignette": "cm2/maths/aire/04-carre-rectangle/eleveai-maths-cm2-aire-carre-rectangle-short-miniature.vignette.webp",
-  "titre": "Mon mur fait combien de m² ? Je repeins tout en vert ! #maths #cm2",
-  "short": true,
-  "youtube": null,
-  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_carre_rectangle&display=simple"
- },
- "cm2-aire-convertir-unites": {
-  "fichier": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites.mp4",
-  "poster": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites.png",
-  "vignette": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites.vignette.webp",
-  "titre": "1 dm² = 100 cm², pas 10 ! — Convertir des aires — épisode 3 · Maths CM2",
-  "short": false,
-  "youtube": null,
-  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_convertir_unites&display=simple"
- },
- "cm2-aire-convertir-unites-short": {
-  "fichier": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites-short.mp4",
-  "poster": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites-short-miniature.png",
-  "vignette": "cm2/maths/aire/03-convertir-unites/eleveai-maths-cm2-aire-convertir-unites-short-miniature.vignette.webp",
-  "titre": "Combien d'autocollants dans 1 dm² ? Ma sœur dit 10… #maths #cm2",
-  "short": true,
-  "youtube": null,
-  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_convertir_unites&display=simple"
- },
- "cm2-aire-defi": {
-  "fichier": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi.mp4",
-  "poster": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi.png",
-  "vignette": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi.vignette.webp",
-  "titre": "48 m² et 6 m de large : combien de long ? — Défi d'aire — épisode 7 · Maths CM2",
-  "short": false,
-  "youtube": null,
-  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_defi&display=simple"
- },
- "cm2-aire-defi-short": {
-  "fichier": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi-short.mp4",
-  "poster": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi-short-miniature.png",
-  "vignette": "cm2/maths/aire/07-defi/eleveai-maths-cm2-aire-defi-short-miniature.vignette.webp",
-  "titre": "24 dalles sur 4 m de large : combien de long ? #maths #cm2",
-  "short": true,
-  "youtube": null,
-  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_defi&display=simple"
- },
- "cm2-aire-triangle-rectangle": {
-  "fichier": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle.mp4",
-  "poster": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle.png",
-  "vignette": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle.vignette.webp",
-  "titre": "Sandwich coupé en diagonale : quelle aire ? — L'aire du triangle rectangle — épisode 5 · Maths CM2",
-  "short": false,
-  "youtube": null,
-  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_triangle_rectangle&display=simple"
- },
- "cm2-aire-triangle-rectangle-short": {
-  "fichier": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle-short.mp4",
-  "poster": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle-short-miniature.png",
-  "vignette": "cm2/maths/aire/05-triangle-rectangle/eleveai-maths-cm2-aire-triangle-rectangle-short-miniature.vignette.webp",
-  "titre": "Toast en triangle ou en rectangle : qui en a le plus ? #maths #cm2",
-  "short": true,
-  "youtube": null,
-  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_triangle_rectangle&display=simple"
- },
- "cm2-aire-unites": {
-  "fichier": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites.mp4",
-  "poster": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites.png",
-  "vignette": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites.vignette.webp",
-  "titre": "Timbre, affiche ou bâche : quelle unité d'aire ? — Les unités d'aire — épisode 2 · Maths CM2",
-  "short": false,
-  "youtube": null,
-  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_unites&display=simple"
- },
- "cm2-aire-unites-short": {
-  "fichier": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites-short.mp4",
-  "poster": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites-short-miniature.png",
-  "vignette": "cm2/maths/aire/02-unites/eleveai-maths-cm2-aire-unites-short-miniature.vignette.webp",
-  "titre": "J'ai commandé un tapis de 4 cm² au lieu de 4 m² ! #maths #cm2",
-  "short": true,
-  "youtube": null,
-  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_unites&display=simple"
- },
- "cm2-aire-comprendre": {
-  "fichier": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre.mp4",
-  "poster": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre.png",
-  "vignette": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre.vignette.webp",
-  "titre": "Deux couvertures, même tissu ? — Comprendre l'aire — épisode 1 · Maths CM2",
-  "short": false,
-  "youtube": null,
-  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_comprendre&display=simple"
- },
- "cm2-aire-comprendre-short": {
-  "fichier": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre-short.mp4",
-  "poster": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre-short-miniature.png",
-  "vignette": "cm2/maths/aire/01-comprendre/eleveai-maths-cm2-aire-comprendre-short-miniature.vignette.webp",
-  "titre": "Sa serviette de plage a l'air plus grande… vraiment ? #maths #cm2",
-  "short": true,
-  "youtube": null,
-  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_comprendre&display=simple"
- },
- "cm2-aire-composer": {
-  "fichier": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer.mp4",
-  "poster": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer.png",
-  "vignette": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer.vignette.webp",
-  "titre": "Un enclos en L : combien de m² d'herbe ? — L'aire par découpage — épisode 6 · Maths CM2",
-  "short": false,
-  "youtube": null,
-  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_composer&display=simple"
- },
- "cm2-aire-composer-short": {
-  "fichier": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer-short.mp4",
-  "poster": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer-short-miniature.png",
-  "vignette": "cm2/maths/aire/06-composer/eleveai-maths-cm2-aire-composer-short-miniature.vignette.webp",
-  "titre": "Du gazon autour du bac à sable : combien de carreaux ? #maths #cm2",
-  "short": true,
-  "youtube": null,
-  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_composer&display=simple"
- },
- "6e-aire-perimetre-defi": {
-  "fichier": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi.mp4",
-  "poster": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi.png",
-  "vignette": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi.vignette.webp",
-  "titre": "Que devient le tour quand on change les côtés ? — Défi de périmètre — épisode 2 · Maths 6e",
-  "short": false,
-  "youtube": null,
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_defi&display=simple"
- },
- "6e-aire-perimetre-defi-short": {
-  "fichier": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi-short.mp4",
-  "poster": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi-short-miniature.png",
-  "vignette": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi-short-miniature.vignette.webp",
-  "titre": "20 cm de ruban : quelle boîte cadeau pile poil ? #maths #6e",
-  "short": true,
-  "youtube": null,
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_defi&display=simple"
- },
- "6e-aire-perimetre-rectangle": {
-  "fichier": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle.mp4",
-  "poster": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle.png",
-  "vignette": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle.vignette.webp",
-  "titre": "Combien de clôture pour ce jardin ? — Les formules du périmètre — épisode 1 · Maths 6e",
-  "short": false,
-  "youtube": null,
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_rectangle&display=simple"
- },
- "6e-aire-perimetre-rectangle-short": {
-  "fichier": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle-short.mp4",
-  "poster": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle-short-miniature.png",
-  "vignette": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle-short-miniature.vignette.webp",
-  "titre": "Ma guirlande trop courte : 2,4 m pour une fenêtre carrée ? #maths #6e",
-  "short": true,
-  "youtube": null,
-  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_rectangle&display=simple"
  }
 }

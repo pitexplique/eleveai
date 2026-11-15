@@ -101,7 +101,7 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 - [ ] Résoudre un défi de contenances — `contenance_defi`
 
 **Solides et espace** (6)
-- [ ] Reconnaître les solides usuels — `solide_reconnaitre`
+- [x] Reconnaître les solides usuels — `solide_reconnaitre`
 - [ ] Identifier sommets, arêtes et faces — `solide_sommet_arete_face`
 - [ ] Identifier les faces d’un solide — `solide_face`
 - [ ] Reconnaître un patron de solide — `solide_patron`
