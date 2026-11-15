@@ -31,3 +31,13 @@ Estimations annoncées à Frédéric le 15/11 (mots ÷ débit) contre durées me
 | 41 short | 1 min 11 | **1 min 14** |
 
 L'écart vient des temps d'animation et des deux compte-à-rebours de 5 s, qui ne sont pas dans l'estimation de la voix. Les shorts dépassent la fourchette du brief (45 s à 1 min 15) ; la série en compte déjà à 1 min 24 et 1 min 26. **Décision de Frédéric attendue** : laisser, ou resserrer les respirations des shorts et re-rendre.
+
+## 7. ⚠️ Le gabarit de la série fabrique une image aux lettres déformées au passage « À toi de jouer ! » → « Correction »
+Trouvé sur l'ép. 40 : le titre du défi devient le titre de la correction par un `ReplacementTransform`, qui dure 0,45 s et produit des glyphes intermédiaires. Images extraites de l'ancien rendu : net à 268,9 s, **déformé à 269,2 s**, net à partir de 269,6 s. Corrigé dans l'ép. 40 par un fondu sortant puis un fondu entrant.
+⚠️ **`manim/scripts/terminale/suite_limite_comparaison.py` (ép. 36, le gabarit) et l'ép. 22 utilisent encore `ReplacementTransform(tit, cor)`** : le même défaut est donc probablement présent dans une partie des 38 épisodes déjà publiés. Il ne se voit que sur une image extraite au bon dixième de seconde — une planche à deux images par seconde peut le manquer.
+
+## 8. `_OutilsSuites.au_mot` repart toujours du début de la phrase
+Deux appels sur des mots qui ne sont pas dans l'ordre croissant de la phrase produisent un **faux RETARD** au dry run. Il faut donc donner les extraits dans l'ordre où la voix les dit. A coûté deux passes à l'agent de l'ép. 40 (écrans 02 et 04).
+
+## 9. Pas de binaire ffmpeg sur ce poste pour les agents
+`scripts/planche-video.py` et `verifier-bords-video.py` marchent (ils lisent avec PyAV), mais les agents n'ont pas trouvé de `ffmpeg` dans leur PATH et ont écrit leur propre extracteur d'images PyAV. *(Depuis la session principale, `ffmpeg` et `ffprobe` répondent bien, à `C:\ffmpeg\bin\` : c'est donc une question de PATH dans l'environnement des agents, pas une absence.)*
