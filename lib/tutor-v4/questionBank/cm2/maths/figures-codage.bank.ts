@@ -116,9 +116,10 @@ const figureCodage: TutorBankItemV4[] = [
   co(3, "Seul le codage compte : un dessin peut tromper l'œil.", () => {
     const g = un(["carré", "rectangle", "losange"] as const);
     const noms = melange(LETTRES).slice(0, 4);
-    const j = { carré: "Oui", rectangle: "Non", losange: "Non" }[g];
+    const RAISONS = ["Oui : 4 angles droits et 4 côtés égaux.", "Non : il manque les 4 côtés égaux.", "Non : il manque les angles droits.", "Oui : ses côtés opposés sont égaux."];
+    const j = RAISONS[{ carré: 0, rectangle: 1, losange: 2 }[g]];
     const O = un(["Une élève", "Un architecte", "Une menuisière", "Un carreleur", "Une dessinatrice", "Un maçon", "Une géomètre", "Un paysagiste"]);
-    return qcm(j, [j === "Oui" ? "Non" : "Oui"], expCodage(g === "carré" ? "le codage montre 4 angles droits et 4 côtés égaux." : g === "rectangle" ? "le codage montre les angles droits, mais pas 4 côtés égaux." : "le codage montre 4 côtés égaux, mais pas d'angle droit.", g === "carré" ? "c'est bien un carré." : "ce n'est pas un carré, d'après le codage."), `${O} ${v(["regarde ce plan", "lit ce plan", "observe cette figure"])}. ${v(["Le codage dit-il que c'est un carré ?", "Peut-on dire que c'est un carré, d'après le codage ?", "D'après le codage, est-ce un carré ?"])}`, quad(g, noms));
+    return qcm(j, RAISONS.filter((r0) => r0 !== j), expCodage(g === "carré" ? "le codage montre 4 angles droits et 4 côtés égaux." : g === "rectangle" ? "le codage montre les angles droits, mais pas 4 côtés égaux." : "le codage montre 4 côtés égaux, mais pas d'angle droit.", g === "carré" ? "c'est bien un carré." : "ce n'est pas un carré, d'après le codage."), `${O} ${v(["regarde ce plan", "lit ce plan", "observe cette figure"])}. ${v(["Le codage dit-il que c'est un carré ?", "Peut-on dire que c'est un carré, d'après le codage ?", "D'après le codage, est-ce un carré ?"])}`, quad(g, noms));
   }),
 ];
 
@@ -196,7 +197,9 @@ const cercleEnsemble: TutorBankItemV4[] = [
       `Une chèvre est attachée à un piquet par une corde de ${r} m. De l'herbe pousse à ${x} m du piquet. La chèvre peut-elle la manger ?`, `Un arroseur touche tout à ${r} m autour de lui. Une fleur est à ${x} m de l'arroseur. Reçoit-elle de l'eau ?`, `Une lampe éclaire tout à ${r} m autour d'elle. Un livre est à ${x} m de la lampe. Est-il éclairé ?`, `Un émetteur radio porte à ${r} km. Un bateau est à ${x} km de l'émetteur. Reçoit-il le signal ?`,
       `Un phare se voit à ${r} km. Un voilier est à ${x} km du phare. Le voit-il ?`, `Un chien attaché à une laisse de ${r} m veut un os à ${x} m du poteau. Peut-il l'attraper ?`, `Une sirène s'entend à ${r} km. Une maison est à ${x} km de la sirène. L'entend-on dans la maison ?`, `Un drone télécommandé s'éloigne au plus de ${r} km. Un sommet est à ${x} km de la télécommande. Le drone peut-il l'atteindre ?`, `Une borne Wi-Fi porte à ${r} m. Un élève est à ${x} m de la borne. Reçoit-il le Wi-Fi ?`, `Une tortue pond dans un rayon de ${r} km autour de sa plage. Une crique est à ${x} km de la plage. Peut-elle y pondre ?`,
     ]);
-    return qcm(peut ? "Oui" : "Non", [peut ? "Non" : "Oui"], exp("tout ce qui est atteint forme un disque, dont le rayon est la plus grande distance.", "on compare la distance au rayon.", `${x} ${x <= r ? "≤" : ">"} ${r}.`, x <= r ? "c'est à l'intérieur du disque (ou sur le bord)." : "c'est en dehors du disque."), C);
+    const RAISONS = ["Oui : la distance n'est pas plus grande que le rayon.", "Non : la distance est plus grande que le rayon.", "Oui : la distance est plus grande que le rayon.", "Non : il faudrait être à moins de la moitié du rayon."];
+    const bonne = RAISONS[peut ? 0 : 1];
+    return qcm(bonne, RAISONS.filter((r0) => r0 !== bonne), exp("tout ce qui est atteint forme un disque, dont le rayon est la plus grande distance.", "on compare la distance au rayon.", `${x} ${x <= r ? "≤" : ">"} ${r}.`, x <= r ? "c'est à l'intérieur du disque (ou sur le bord)." : "c'est en dehors du disque."), C);
   }),
   ce(3, "Tous les points à la même distance d'un même point : un cercle.", () => {
     const r = entre(2, 15);
