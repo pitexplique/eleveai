@@ -500,7 +500,7 @@ class VisionPatronPaveBase(PaysageVolume6e):
             y -= 0.62
         self.au_mot("6 faces")
         g = self.ligne([("6 faces,", VERT_OK), ("3 paires.", VERT_OK)], 38, buff=0.25)
-        g.move_to(P(3.3, -1.8))
+        g.move_to(P(2.9, -1.8))  # entre les mesures (x < 0,4) et Ti Margo (x > 5,5)
         self.aux_extraits(g, ["6 faces", "3 paires"])
         self.insister(g, 1.08, 0.25)
         self.attendre_voix()
