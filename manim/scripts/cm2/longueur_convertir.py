@@ -202,6 +202,14 @@ class LongueurConvertirBase(PaysageLongueurCM2):
         self.play(Write(p), run_time=0.8)
         self.attendre_voix(marge=marge)
 
+    def finale_haut(self, figure, textes, fs=34, buff_fig=0.45):
+        """Celle du commun, mais chaque ligne posée sur UNE ligne d'écriture (arrange alignait les
+        centres : « on multiplie ; » tombait plus bas que « Vers plus petit, »)."""
+        lignes = super().finale_haut(figure, textes, fs=fs, buff_fig=buff_fig)
+        for lg in lignes:
+            aligner_base(list(lg[1].submobjects))
+        return lignes
+
     # ── 00 : page de garde ──────────────────────────────────────────────────
     def page_de_garde(self):
         self.clear()
@@ -214,7 +222,7 @@ class LongueurConvertirBase(PaysageLongueurCM2):
         q1 = self.t("le tableau des unités.", 38, JAUNE_TITRE)
         q = VGroup(q0, q1).arrange(DOWN, aligned_edge=LEFT, buff=0.3)
         q.move_to(P(0, 0.3)).align_to(P(-6.2, 0), LEFT)
-        t = tableau_conv(cw=0.68, ch=0.5, fs=20).move_to(P(3.2, 0.45))
+        t = tableau_conv(cw=0.86, ch=0.5, fs=18).move_to(P(3.3, 0.45))  # « dam » à 0,15 des traits
         tr = trepied(0.8).next_to(t, UP, buff=0.15).align_to(t, RIGHT)
         self.au_mot("au millimètre")
         self.play(FadeIn(q0, shift=UP * 0.2), FadeIn(tr, shift=UP * 0.2), run_time=0.35)
@@ -236,7 +244,7 @@ class LongueurConvertirBase(PaysageLongueurCM2):
         XL = -2.9
         l0 = self.bloc(["Il mesure les terrains", "et les routes."], 32)
         gauche(l0, XL, 2.65)
-        tr = trepied(1.0).move_to(P(4.6, 2.4))
+        tr = trepied(0.9).move_to(P(5.0, 2.7))  # au-dessus de « 3,5 km. » (0,28 d'écart)
         self.au_mot("mesure les terrains")
         self.play(FadeIn(l0[0], shift=UP * 0.1), FadeIn(tr, shift=UP * 0.2), run_time=0.35)
         self.au_mot("et les routes")
@@ -361,19 +369,19 @@ class LongueurConvertirBase(PaysageLongueurCM2):
     # ── 04 : le poteau, 2,45 m en cm et en mm ───────────────────────────────
     def ecran_m_cm(self):
         self.ecran("04-m-cm")
-        sol = Line(P(-6.3, -2.75), P(-3.3, -2.75), color="#a8a29e", stroke_width=4)
+        sol = Line(P(-6.45, -2.75), P(-3.3, -2.75), color="#a8a29e", stroke_width=4)
         pe = arthur(0.88)
-        pe.move_to(P(-5.55, 0)).align_to(P(0, -2.75), DOWN)
+        pe.move_to(P(-5.7, 0)).align_to(P(0, -2.75), DOWN)
         um = pe.height / 1.75  # 1 m à l'échelle d'Arthur (1,75 m)
         po = poteau_bois(2.45 * um)
-        po.move_to(P(-4.35, 0)).align_to(P(0, -2.75), DOWN)
+        po.move_to(P(-4.55, 0)).align_to(P(0, -2.75), DOWN)
         br = Brace(po, RIGHT, color=JAUNE_TITRE)
         eb = hors_audit(Text("2,45 m", font_size=28, color=JAUNE_TITRE, weight=BOLD)).next_to(br, RIGHT, buff=0.1)
         cols = ["m", "dm", "cm", "mm"]
         t = tableau_conv(cols, cw=1.25, ch=0.62, fs=28, surligne=("m", "cm")).move_to(P(1.6, 2.45))
-        XL = -2.35
+        XL = -2.15  # « 2,45 m » de l'accolade finit à −2,37 (et sous « En mm »)
         l0 = self.ligne([("Le poteau :", WHITE), ("2,45 m", BLEU_D)], 40, buff=0.22)
-        gauche(l0, XL, 1.0)
+        gauche(l0, XL, 1.15)
         self.au_mot("Arthur mesure")
         self.play(FadeIn(sol), FadeIn(pe, shift=UP * 0.2), GrowFromEdge(po, DOWN), FadeIn(t), run_time=0.4)
         self.au_mot("poteau : 2,45")
@@ -384,7 +392,7 @@ class LongueurConvertirBase(PaysageLongueurCM2):
                   run_time=0.35)
         l1 = self.ligne([("En cm :", WHITE), ("2,45", BLEU_D), ("× 100", BLEU_D), ("= 245 cm", VERT_OK)], 40,
                         buff=0.22)
-        gauche(l1, XL, 0.0)
+        gauche(l1, XL, 0.3)
         self.au_mot("En centimètres")
         self.play(FadeIn(l1[0], shift=UP * 0.1), Indicate(t.tete["cm"], color=JAUNE_TITRE, scale_factor=1.3),
                   run_time=0.35)
@@ -395,7 +403,7 @@ class LongueurConvertirBase(PaysageLongueurCM2):
         self.play(FadeIn(l1[3], shift=UP * 0.1), v.animate.move_to(place_virgule(t, "cm")), run_time=0.4)
         self.play(FadeOut(v), run_time=0.2)
         l2 = self.ligne([("En mm :", WHITE), ("2 450 mm", VERT_OK)], 40, buff=0.25)
-        gauche(l2, XL, -1.0)
+        gauche(l2, XL, -0.55)
         self.au_mot("en millimètres")
         self.play(FadeIn(l2[0], shift=UP * 0.1), Indicate(t.tete["mm"], color=JAUNE_TITRE, scale_factor=1.3),
                   run_time=0.35)
@@ -471,8 +479,8 @@ class LongueurConvertirBase(PaysageLongueurCM2):
         gauche(tit, -6.2, 3.05)
         self.play(Write(tit), run_time=0.35)
         cols = ["km", "hm", "dam", "m"]
-        tf = tableau_conv(cols, cw=0.95, ch=0.55, fs=24).move_to(P(-4.3, 1.15))
-        tv = tableau_conv(cols, cw=0.95, ch=0.55, fs=24).move_to(P(-4.3, -1.35))
+        tf = tableau_conv(cols, cw=1.1, ch=0.55, fs=22).move_to(P(-4.2, 1.15))
+        tv = tableau_conv(cols, cw=1.1, ch=0.55, fs=22).move_to(P(-4.2, -1.35))
         XP = -1.55
         l0 = self.ligne([("3,5 km", BLEU_D), ("≠ 35 m,", ROUGE_ERREUR)], 42, buff=0.3)
         self.col(l0, 2.05, XP)
@@ -564,7 +572,7 @@ class LongueurConvertirBase(PaysageLongueurCM2):
         pqs = VGroup(*[piquet(0.32).next_to(P(x0 + k * pas, rt.route.get_top()[1]), UP, buff=0)
                        for k in range(9)])
         zoom = Rectangle(width=3.4, height=1.15, stroke_color=JAUNE_TITRE, stroke_width=3)
-        zoom.move_to(P(-4.3, -0.2))
+        zoom.move_to(P(-4.3, -0.75))  # plus bas : le pointillé passe à 0,19 de « 1,5 km »
         lz = VGroup(DashedLine(P(x0, rt.route.get_bottom()[1]), zoom.get_corner(UL), color=JAUNE_TITRE,
                                stroke_width=2),
                     DashedLine(P(x0 + pas, rt.route.get_bottom()[1]), zoom.get_corner(UR), color=JAUNE_TITRE,
@@ -573,35 +581,36 @@ class LongueurConvertirBase(PaysageLongueurCM2):
         tz.move_to(zoom).shift(DOWN * 0.2)
         pz = VGroup(piquet(0.5).next_to(tz, UP, buff=0).align_to(tz, LEFT),
                     piquet(0.5).next_to(tz, UP, buff=0).align_to(tz, RIGHT).shift(RIGHT * 0.02))
-        l1 = self.ligne([("Arthur la découpe", WHITE), ("en tronçons", WHITE)], 38, buff=0.2)
-        self.col(l1, 1.3, XP)
+        # « Arthur la découpe en tronçons » sur une ligne était réduit par col : coupé en deux rangs
+        l1 = self.ligne([("Arthur la découpe", WHITE)], 38, buff=0.2)
+        self.col(l1, 1.4, XP)
         self.au_mot("Arthur la découpe")
         self.play(FadeIn(l1[0], shift=UP * 0.1), run_time=0.25)
+        l2 = self.ligne([("en tronçons", WHITE), ("de", WHITE), ("25 m.", JAUNE_TITRE)], 38, buff=0.2)
+        self.col(l2, 0.65, XP)
         self.au_mot("en tronçons")
-        self.play(FadeIn(l1[1], shift=UP * 0.1), LaggedStart(*[FadeIn(p, shift=DOWN * 0.1) for p in pqs],
+        self.play(FadeIn(l2[0], shift=UP * 0.1), LaggedStart(*[FadeIn(p, shift=DOWN * 0.1) for p in pqs],
                                                              lag_ratio=0.1), run_time=0.5)
-        l2 = self.ligne([("de", WHITE), ("25 m.", JAUNE_TITRE)], 38, buff=0.2)
-        self.col(l2, 0.55, XP)
-        e25 = etiq(tz, "25 m", 28, cote=DOWN, buff=0.12)
+        e25 = etiq(zoom, "25 m", 28, cote=DOWN, buff=0.15)  # sous le cadre du zoom, plus collé à son bas
         self.au_mot("de 25")
-        self.play(FadeIn(l2, shift=UP * 0.1), Create(zoom), Create(lz), FadeIn(tz), FadeIn(pz), FadeIn(e25),
-                  run_time=0.4)
-        q = self.ligne([("Combien de", JAUNE_TITRE), ("tronçons ?", JAUNE_TITRE)], 42, buff=0.2)
-        self.col(q, -0.55, XP)
+        self.play(FadeIn(VGroup(l2[1], l2[2]), shift=UP * 0.1), Create(zoom), Create(lz), FadeIn(tz),
+                  FadeIn(pz), FadeIn(e25), run_time=0.4)
+        q = self.ligne([("Combien de", JAUNE_TITRE), ("tronçons ?", JAUNE_TITRE)], 38, buff=0.2)
+        self.col(q, -0.35, XP)
         self.au_mot("Combien de tronçons")
         self.play(FadeIn(q, shift=UP * 0.1), Wiggle(rt.route), run_time=0.5)
-        self.pause_defi(y=-2.0)
+        self.pause_defi(y=-2.4)
 
     def ecran_correction(self):
         self.ecran("08b-correction", 0.65)
         tit = self.t("Correction", 50, JAUNE_TITRE).move_to(P(0, 3.15))
         self.play(Write(tit), run_time=0.35)
         # la route de 1 500 m en 15 blocs de 100 m
-        w = 0.1 * self.U
+        w = 0.41  # les numéros 1 … 15 à 0,15 l'un de l'autre (1 500 m = 6,15)
         blocs = VGroup(*[Rectangle(width=w, height=0.34, fill_color=GOUDRON if k % 2 == 0 else "#64748b",
                                    fill_opacity=1, stroke_color=WHITE, stroke_width=1.5) for k in range(15)])
         blocs.arrange(RIGHT, buff=0)
-        gauche(blocs, -6.1, 2.05)
+        gauche(blocs, -6.3, 2.05)
         e15 = etiq(blocs, "1,5 km", 26, cote=UP, buff=0.12)
         self.add(blocs, e15)
         XP = 0.15
@@ -616,7 +625,8 @@ class LongueurConvertirBase(PaysageLongueurCM2):
         self.au_mot("kilomètre, 1 500")
         e1500 = etiq(blocs, "1 500 m", 26, VERT_OK, cote=UP, buff=0.12)
         self.play(FadeIn(l1[1], shift=UP * 0.1), Transform(e15, e1500), run_time=0.35)
-        l2 = self.ligne([("Puis", WHITE), ("1 500", BLEU_D), ("÷ 25 :", BLEU_D)], 40, buff=0.2)
+        # espaces entre morceaux = l'espace d'un mot (0,27 en 36) : « Dans1 500 », « ×25 » étaient serrés
+        l2 = self.ligne([("Puis", WHITE), ("1 500", BLEU_D), ("÷ 25 :", BLEU_D)], 36, buff=0.27)
         self.col(l2, 0.85, XP)
         self.au_mot("Puis")
         self.play(FadeIn(l2[0], shift=UP * 0.1), run_time=0.2)
@@ -630,13 +640,16 @@ class LongueurConvertirBase(PaysageLongueurCM2):
         gauche(z, -5.6, 0.2)
         pz = VGroup(*[piquet(0.42).next_to(P(z.get_left()[0] + k * 0.95, z.get_top()[1]), UP, buff=0)
                       for k in range(5)])
-        lz = VGroup(DashedLine(blocs[0].get_corner(DL), z.get_corner(UL) + UP * 0.45, color=JAUNE_TITRE,
+        n15 = VGroup(*[hors_audit(Text(str(k + 1), font_size=14, color=JAUNE_TITRE, weight=BOLD))
+                       .next_to(b, DOWN, buff=0.08) for k, b in enumerate(blocs)])
+        yd = n15.get_bottom()[1] - 0.15  # les pointillés partent SOUS les numéros
+        lz = VGroup(DashedLine(P(blocs[0].get_left()[0], yd), z.get_corner(UL) + UP * 0.45, color=JAUNE_TITRE,
                                stroke_width=2),
-                    DashedLine(blocs[0].get_corner(DR), z.get_corner(UR) + UP * 0.45, color=JAUNE_TITRE,
+                    DashedLine(P(blocs[0].get_right()[0], yd), z.get_corner(UR) + UP * 0.45, color=JAUNE_TITRE,
                                stroke_width=2))
         e100 = accolade(z, "100 m", 26, JAUNE_TITRE, dessus=False)
         e25s = VGroup(*[hors_audit(Text("25", font_size=22, color=WHITE, weight=BOLD)).move_to(b) for b in z])
-        l3 = self.ligne([("Dans 100 :", WHITE), ("4 ×", JAUNE_TITRE), ("25.", JAUNE_TITRE)], 40, buff=0.2)
+        l3 = self.ligne([("Dans 100 :", WHITE), ("4 ×", JAUNE_TITRE), ("25.", JAUNE_TITRE)], 36, buff=0.27)
         self.col(l3, 0.1, XP)
         self.au_mot("dans 100")
         self.play(FadeIn(l3[0], shift=UP * 0.1), Indicate(blocs[0], color=JAUNE_TITRE, scale_factor=1.3),
@@ -645,10 +658,8 @@ class LongueurConvertirBase(PaysageLongueurCM2):
         self.play(FadeIn(l3[1], shift=UP * 0.08), run_time=0.2)
         self.poser(l3[2], "25. Dans", anim=AnimationGroup(FadeIn(l3[2], shift=UP * 0.08), FadeIn(e25s)))
         l4 = self.ligne([("Dans", WHITE), ("1 500 :", WHITE), ("15 ×", JAUNE_TITRE), ("4", JAUNE_TITRE),
-                         ("= 60.", VERT_OK)], 40, buff=0.2)
+                         ("= 60.", VERT_OK)], 36, buff=0.27)
         self.col(l4, -0.65, XP)
-        n15 = VGroup(*[hors_audit(Text(str(k + 1), font_size=16, color=JAUNE_TITRE, weight=BOLD))
-                       .next_to(b, DOWN, buff=0.06) for k, b in enumerate(blocs)])
         self.au_mot("Dans 1 500")
         self.play(FadeIn(l4[0], shift=UP * 0.08), run_time=0.2)
         self.poser(l4[1], "1 500, 15", anim=AnimationGroup(FadeIn(l4[1], shift=UP * 0.08),
@@ -659,7 +670,7 @@ class LongueurConvertirBase(PaysageLongueurCM2):
         self.poser(l4[3], "4, 60")
         self.play(FadeIn(l4[4], scale=1.2), run_time=0.3)
         res = self.ligne([("Il y a", WHITE), ("60", VERT_OK), ("tronçons.", VERT_OK)], 46, buff=0.2)
-        self.col(res, -1.55, XP)
+        self.col(res, -1.45, XP)  # au-dessus de Ti-Margo : plus réduit par col
         self.au_mot("Il y a")
         self.play(FadeIn(res[0], shift=UP * 0.1), run_time=0.2)
         self.poser(res[1], "60 tronçons", anim=FadeIn(res[1], scale=1.2), run_time=0.25)

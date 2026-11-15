@@ -16721,5 +16721,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_defi&display=simple"
+ },
+ "cm2-longueur-convertir": {
+  "fichier": "cm2/maths/longueurs/02-convertir/eleveai-maths-cm2-longueur-convertir.mp4",
+  "poster": "cm2/maths/longueurs/02-convertir/eleveai-maths-cm2-longueur-convertir.png",
+  "vignette": "cm2/maths/longueurs/02-convertir/eleveai-maths-cm2-longueur-convertir.vignette.webp",
+  "titre": "3,5 km, combien de mètres ? — Convertir des longueurs — épisode 2 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_convertir&display=simple"
+ },
+ "cm2-longueur-convertir-short": {
+  "fichier": "cm2/maths/longueurs/02-convertir/eleveai-maths-cm2-longueur-convertir-short.mp4",
+  "poster": "cm2/maths/longueurs/02-convertir/eleveai-maths-cm2-longueur-convertir-short-miniature.png",
+  "vignette": "cm2/maths/longueurs/02-convertir/eleveai-maths-cm2-longueur-convertir-short-miniature.vignette.webp",
+  "titre": "2,5 m de ruban : combien de centimètres ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_convertir&display=simple"
  }
 }
