@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Trois parts de gâteau pour moi. Je prends la plus grande, évidemment !",
+  "01-parts": "A : 10 centimètres sur 6. B : un carré de 7 centimètres. C : 12 centimètres sur 4, la plus longue !",
+  "02-question": "Question ! Quelle part a la plus grande aire ? A, B ou C ? Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! 10 fois 6, 60 centimètres carrés. 7 fois 7, 49. 12 fois 4, 48. La plus longue est la plus petite !",
+  "03-ouf": "Trop tard… j'ai déjà croqué la C !",
+  "04-commentaire": "À toi : un carré de 8 centimètres de côté, ou un rectangle de 16 centimètres sur 4 ? Lequel a la plus grande aire ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Les formules du périmètre. Le rectangle et le carré, en une ligne.",
+  "01-situation": "Voici Lucas. Il est paysagiste : il dessine et plante des jardins. Avant de poser une clôture, il calcule toujours sa longueur. Pour aller vite, il utilise une formule.",
+  "02-rectangle": "Un jardin rectangulaire mesure 15 mètres de long et 9 mètres de large. Le tour, c'est deux longueurs et deux largeurs. On écrit : P égale 2 fois, entre parenthèses, L plus l. L, c'est la longueur ; l, c'est la largeur. 15 plus 9, 24. Fois 2 : 48 mètres de clôture.",
+  "03-carre": "Un potager carré a 4 côtés égaux. Si son côté mesure c, on écrit : P égale 4 fois c. Le potager de Lucas a 6 virgule 5 mètres de côté. 4 fois 6 virgule 5 : 26 mètres.",
+  "04-unites": "Avant d'utiliser la formule, les longueurs doivent être dans la même unité. Un massif de fleurs mesure 12 mètres sur 80 centimètres. 80 centimètres, c'est 0 virgule 8 mètre. 12 plus 0 virgule 8, 12 virgule 8. Fois 2 : 25 virgule 6 mètres.",
+  "05-question": "Question ! Un rectangle mesure 7 centimètres sur 4 centimètres. Quel est son périmètre ? A : 11 centimètres. B : 22 centimètres. C : 28 centimètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 7 plus 4, 11. Fois 2 : 22 centimètres. 28, c'est 7 fois 4 : ce n'est pas le tour.",
+  "06-piege": "Attention au piège ! Dans la formule, les parenthèses comptent. 2 fois 15 plus 9, sans parenthèses, ça fait 30 plus 9, 39 : c'est faux, on a oublié une largeur. Avec les parenthèses, on additionne d'abord : 15 plus 9, 24, puis fois 2, 48.",
+  "07-question": "Question ! Un carré a 2 virgule 5 centimètres de côté. Quel est son périmètre ? A : 10 centimètres. B : 6 virgule 25 centimètres. C : 5 centimètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. P égale 4 fois c : 4 fois 2 virgule 5, 10 centimètres. 6 virgule 25, c'est 2 virgule 5 fois 2 virgule 5 : c'est son aire, pas son tour.",
+  "08-defi": "À toi de jouer ! Lucas clôture un jardin rectangulaire de 18 mètres sur 950 centimètres. Il laisse un portail de 3 mètres sans clôture. Combien de mètres de clôture doit-il poser ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 950 centimètres, c'est 9 virgule 5 mètres. P égale 2 fois, 18 plus 9 virgule 5 : 2 fois 27 virgule 5, 55 mètres. Moins le portail : 55 moins 3, 52 mètres de clôture.",
+  "09-finale": "Ce que tu as appris. Rectangle : P égale 2 fois, L plus l. Carré : P égale 4 fois c. Toutes les longueurs dans la même unité, et les parenthèses d'abord !",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

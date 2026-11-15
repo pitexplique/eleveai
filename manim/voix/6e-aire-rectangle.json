@@ -1,0 +1,16 @@
+{
+  "00-garde": "Les formules de l'aire. Le rectangle et le carré, sans compter les carreaux.",
+  "01-situation": "Voici Amina. Elle est jardinière. Avant de semer une pelouse, elle calcule sa surface pour acheter le bon sac de graines. Compter les carreaux un par un ? Trop long sur un grand terrain.",
+  "02-rectangle": "Une pelouse rectangulaire mesure 12 mètres sur 8 mètres. On peut la couvrir de carrés de 1 mètre de côté : 8 rangées de 12. 12 fois 8, 96 mètres carrés. La formule : A égale L fois l.",
+  "03-carre": "Un carré de gazon a 4 côtés égaux. Si son côté mesure c, A égale c fois c. Côté 7 mètres : 7 fois 7, 49 mètres carrés.",
+  "04-unites": "Les deux longueurs doivent être dans la même unité. Une bordure mesure 3 mètres sur 50 centimètres. 50 centimètres, c'est 0 virgule 5 mètre. 3 fois 0 virgule 5 : 1 virgule 5 mètre carré.",
+  "05-question": "Question ! Quelle est l'aire d'un rectangle de 9 centimètres sur 4 centimètres ? A : 36 centimètres carrés. B : 26 centimètres carrés. C : 13 centimètres carrés. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. A égale L fois l : 9 fois 4, 36 centimètres carrés. 26, c'est le périmètre : le tour, pas la surface.",
+  "06-piege": "Attention au piège ! L'aire d'un carré de côté 7 mètres, ce n'est pas 7 fois 4. 7 fois 4, 28 : c'est son périmètre, en mètres. Son aire, c'est 7 fois 7, 49, en mètres carrés.",
+  "07-question": "Question ! Un carré a 6 centimètres de côté. Quelle est son aire ? A : 24 centimètres carrés. B : 12 centimètres carrés. C : 36 centimètres carrés. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. A égale c fois c : 6 fois 6, 36 centimètres carrés.",
+  "08-defi": "À toi de jouer ! Amina sème une pelouse de 9 mètres sur 6 mètres. Un sac de graines couvre 25 mètres carrés. Combien de sacs doit-elle acheter ? Mets pause, et cherche !",
+  "08b-correction": "Correction. L'aire : 9 fois 6, 54 mètres carrés. 2 sacs couvrent 50 : il manque 4 mètres carrés. Il faut 3 sacs.",
+  "09-finale": "Ce que tu as appris. Rectangle : A égale L fois l. Carré : A égale c fois c. Les deux longueurs dans la même unité, et la réponse en unités carrées : centimètres carrés, mètres carrés.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

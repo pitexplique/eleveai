@@ -1,0 +1,16 @@
+{
+  "00-garde": "Problèmes d'aires. Calculer une surface, puis s'en servir pour décider.",
+  "01-situation": "Voici Yanis. Il est maçon. Avant un chantier, il calcule les surfaces : c'est ce qui lui dit combien de pots d'enduit acheter, et combien ça va coûter.",
+  "02-aire": "Un mur mesure 6 mètres de long et 2 virgule 5 mètres de haut. Son aire : 6 fois 2 virgule 5, 15 mètres carrés.",
+  "03-pots": "Un pot d'enduit couvre 4 mètres carrés. 15 divisé par 4, 3 virgule 75. On ne peut pas acheter 3 virgule 75 pots : 3 pots couvrent 12, pas assez. Il en faut 4.",
+  "04-prix": "Un pot coûte 12 euros. 4 fois 12 : 48 euros. Trois étapes : l'aire, le nombre de pots, le prix.",
+  "05-question": "Question ! Un sol mesure 5 mètres sur 3 mètres. On le couvre de dalles de 1 mètre carré. Combien de dalles faut-il ? A : 16 dalles. B : 15 dalles. C : 8 dalles. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. L'aire : 5 fois 3, 15 mètres carrés. Une dalle par mètre carré : 15 dalles.",
+  "06-piege": "Attention au piège ! Si les dalles mesurent 50 centimètres de côté, une dalle ne fait pas 1 mètre carré. Dans 1 mètre, il y a 2 fois 50 centimètres : un mètre carré contient 2 fois 2, 4 dalles. Pour 15 mètres carrés : 15 fois 4, 60 dalles.",
+  "07-question": "Question ! Une terrasse a une aire de 50 mètres carrés. Un seau de peinture de sol couvre 20 mètres carrés. Combien de seaux faut-il ? A : 2 seaux. B : 2 virgule 5 seaux. C : 3 seaux. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 50 divisé par 20, 2 virgule 5. 2 seaux couvrent 40 : pas assez. Il en faut 3.",
+  "08-defi": "À toi de jouer ! Yanis enduit deux murs pareils de 5 mètres sur 2 virgule 4 mètres. Un pot couvre 5 mètres carrés et coûte 15 euros. Combien va-t-il payer ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Un mur : 5 fois 2 virgule 4, 12 mètres carrés. Deux murs : 24 mètres carrés. 4 pots couvrent 20 : pas assez ; 5 pots couvrent 25. 5 fois 15 : Yanis paie 75 euros.",
+  "09-finale": "Ce que tu as appris. Un problème d'aire se fait par étapes : la surface, puis ce qu'elle permet de calculer. Quand il faut acheter assez, on arrondit au-dessus. Et on garde la même unité partout.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

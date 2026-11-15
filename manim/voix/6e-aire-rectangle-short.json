@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Je veux un tapis carré de 3 mètres de côté pour ma chambre. Le vendeur m'en propose un de 12 mètres carrés.",
+  "01-calculer": "3 mètres de côté… 4 côtés… 4 fois 3, 12. Le vendeur a raison, non ?",
+  "02-question": "Question ! Quelle est l'aire d'un carré de 3 mètres de côté ? A : 12 mètres carrés. B : 9 mètres carrés. C : 6 mètres carrés. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! A égale c fois c : 3 fois 3, 9 mètres carrés. 12, c'est le tour en mètres : le périmètre !",
+  "03-ouf": "Avec le tapis de 12 mètres carrés… il remonte sur les murs !",
+  "04-commentaire": "À toi : un tapis rectangulaire de 4 mètres sur 2 virgule 5 mètres. Quelle est son aire ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

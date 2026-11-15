@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défi de périmètre. Que devient le tour quand on change les côtés ?",
+  "01-situation": "Voici Chloé. Elle est fleuriste. Autour de chaque boîte de fleurs, elle colle un ruban qui fait tout le tour. Une boîte rectangulaire mesure 7 centimètres sur 3 centimètres : 7 plus 3, 10, fois 2 : 20 centimètres de ruban.",
+  "02-allonger": "Un client veut une boîte plus longue d'1 centimètre : 8 centimètres sur 3. Le ruban n'augmente pas d'1 centimètre, mais de 2 : 8 plus 3, 11, fois 2, 22. Pourquoi ? La longueur apparaît deux fois dans le tour.",
+  "03-doubler": "Et si on double tous les côtés ? 14 centimètres sur 6. 14 plus 6, 20, fois 2 : 40 centimètres. Le périmètre double aussi : 20 fois 2, 40.",
+  "04-meme-tour": "Avec 20 centimètres de ruban, Chloé peut entourer d'autres boîtes : 9 sur 1, 6 sur 4, ou un carré de 5. Même tour, formes différentes.",
+  "05-question": "Question ! Un carré a 6 centimètres de côté. On ajoute 1 centimètre à chaque côté. De combien augmente son périmètre ? A : 1 centimètre. B : 4 centimètres. C : 2 centimètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Le carré a 4 côtés, et chacun grandit d'1 centimètre : 4 centimètres de plus. On vérifie : 6 fois 4, 24 ; 7 fois 4, 28 ; 28 moins 24, 4.",
+  "06-piege": "Attention au piège ! Même périmètre ne veut pas dire même surface. La boîte de 9 sur 1 et le carré de 5 ont le même ruban, 20 centimètres. Mais le carré a bien plus de place pour les fleurs : 25 carreaux contre 9.",
+  "07-question": "Question ! Un rectangle a un périmètre de 30 centimètres. On double sa longueur et sa largeur. Quel est son nouveau périmètre ? A : 60 centimètres. B : 32 centimètres. C : 120 centimètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Tous les côtés doublent, donc le tour double : 30 fois 2, 60 centimètres.",
+  "08-defi": "À toi de jouer ! Chloé a un ruban de 24 centimètres. Elle veut entourer une boîte rectangulaire dont la longueur fait 2 fois la largeur. Quelles sont les dimensions de la boîte ? Mets pause, et cherche !",
+  "08b-correction": "Correction. La moitié du tour : 24 divisé par 2, 12. Longueur plus largeur font 12, et la longueur vaut 2 largeurs : 3 largeurs font 12. La largeur : 4 centimètres, la longueur : 8 centimètres. On vérifie : 8 plus 4, 12, fois 2, 24.",
+  "09-finale": "Ce que tu as appris. Allonger un côté d'un rectangle de 1, c'est 2 de plus au tour. Doubler tous les côtés, c'est doubler le périmètre. Et deux formes peuvent avoir le même tour, sans avoir la même surface.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

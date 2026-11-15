@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défi d'aire. Que devient la surface quand on agrandit une figure ?",
+  "01-situation": "Voici Théo. Il est technicien en énergies renouvelables : il pose des panneaux solaires sur les toits. Plus la surface du toit est grande, plus il peut poser de panneaux.",
+  "02-doubler-longueur": "Un toit rectangulaire mesure 4 mètres sur 3 mètres : 4 fois 3, 12 mètres carrés. Si on double seulement la longueur, 8 mètres sur 3 : 24 mètres carrés. L'aire double.",
+  "03-doubler-tout": "Et si on double la longueur ET la largeur ? 8 mètres sur 6 : 48 mètres carrés. L'aire n'est pas doublée : elle est multipliée par 4 ! Dans le grand toit, on range 4 fois le petit.",
+  "04-cote-cache": "Dans l'autre sens. Un toit carré a une aire de 36 mètres carrés. Quel nombre, fois lui-même, donne 36 ? 6 fois 6. Le côté mesure 6 mètres. Un toit rectangulaire de 24 mètres carrés a une largeur de 4 mètres : 24 divisé par 4, 6 mètres de long.",
+  "05-question": "Question ! Un carré a 3 centimètres de côté. On double son côté. Que devient son aire ? A : elle double. B : elle ne change pas. C : elle est multipliée par 4. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. Avant : 3 fois 3, 9 centimètres carrés. Après : 6 fois 6, 36. Et 36, c'est 9 fois 4.",
+  "06-piege": "Attention au piège ! Quand on double les côtés, le périmètre double, mais l'aire est multipliée par 4. Le toit de 4 sur 3 a un tour de 14 mètres ; celui de 8 sur 6, un tour de 28 : 2 fois plus. Mais 12 mètres carrés deviennent 48 : 4 fois plus.",
+  "07-question": "Question ! Un carré a une aire de 49 centimètres carrés. Combien mesure son côté ? A : 12 virgule 25 centimètres. B : 7 centimètres. C : 24 virgule 5 centimètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. On cherche le nombre qui, fois lui-même, donne 49 : 7 fois 7, 49. Le côté mesure 7 centimètres.",
+  "08-defi": "À toi de jouer ! Un panneau solaire mesure 2 mètres sur 1 mètre. Théo a un toit carré de 4 mètres de côté. Combien de panneaux peut-il poser au maximum ? Et si le côté du toit doublait ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le toit : 4 fois 4, 16 mètres carrés. Un panneau : 2 fois 1, 2 mètres carrés. 16 divisé par 2 : 8 panneaux, en 4 rangées de 2. Si le côté double, 8 mètres : l'aire est multipliée par 4, 64 mètres carrés, donc 32 panneaux.",
+  "09-finale": "Ce que tu as appris. Doubler un seul côté double l'aire. Doubler tous les côtés multiplie l'aire par 4. Et pour retrouver le côté d'un carré, on cherche le nombre qui, fois lui-même, donne l'aire.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
