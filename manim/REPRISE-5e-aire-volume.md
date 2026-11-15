@@ -57,8 +57,15 @@ Ti Margo cache le bas du milieu-gauche de l'ardoise : dessins en haut, ou à DRO
 | A1 aire_comprendre | `5e_aire_comprendre.py` `AireComprendre5e` (jaune, Q 01:05 A, 01:55 C) | ✅ HD 230 s, bords 0, planche relue | `5e-aire-comprendre.js` « La pizza carrée » (B) | ✅ rendu 66,8 s |
 | A2 aire_triangle | pilote | ✅ HD 202,65 s | « Le pignon de la cabane » (C) | ✅ |
 | A3 aire_parallelogramme | `5e_aire_parallelogramme.py` `AireParallelogramme5e` (verte, Q 01:02 C, 01:47 B) | ✅ HD 213 s, bords 0 ; 2e HD relu à 52 s (cote « 4 cm » flottante corrigée) | `5e-aire-parallelogramme.js` « Le coup de ciseaux » (A) | ✅ rendu |
-| A4 aire_composer | `5e_aire_composer.py` `AireComposer5e` (verte, Q 01:06 A, 01:53 B) | ⏳ 2e HD lancé (question 01 écartée de Ti-Margo, trait de coupe effacé, piège descendu, Q2 remontée) → relire 20, 37, 112, 152 s | `5e-aire-composer.js` « La pancarte maison » (C) | ✅ rendu |
+| A4 aire_composer | `5e_aire_composer.py` `AireComposer5e` (verte, Q 01:06 A, 01:53 B) | ✅ HD 221 s, bords 0 ; 3e HD relu (question 01 écartée, trait de coupe effacé, piège descendu, Q2 remontée) | `5e-aire-composer.js` « La pancarte maison » (C) | ✅ rendu |
 | A5 aire_defi | — | ⏳ WAV, marques, cues FAITS ; script à écrire (Mehdi menuisier, bleue, B·C) | « Le tapis trop large » (A) | ⏳ |
+
+⛔ **COMPTEUR DES SHORTS (15/11, consigne de Frédéric « fait attention au short que le compteur s'affiche bien »)** :
+le rebours de 3 s ne s'affiche dans AUCUN short (toutes séries). Bug du socle partagé `prototypes/ti-margo/short.js` l. 135 :
+`style.display=reb?'':'none'` rend la main au CSS `#rebours{display:none}`. Correction testée à l'image : `reb?'block':'none'`
+(barre entière dans la carte, entre C et « Mets pause »). NON appliquée : fichier partagé, signalé au chef d'orchestre
+(session local_f0dee25c) et à Frédéric. Dès que le socle est corrigé : re-rendre les 4 shorts Aire (`manim/poste2/5e_film.sh 5e-aire <ep>`)
+et CONTRÔLER sur le MP4 (temps du rebours = début de 02-question + durée + 0,1 s, pendant 3 s).
 
 ⚠️ Vérifier au début de la session suivante : `ls manim/sorties/5e/maths/aire/0*/` (chaque dossier : paysage + short + `_muet.mp4`),
 et `python scripts/verifier-bords-video.py` sur les deux HD relancés. Les MP4 et WAV sont ignorés par git (normal).

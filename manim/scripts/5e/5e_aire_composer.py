@@ -95,7 +95,7 @@ class AireComposer5e(Paysage5e):
         self.play(FadeIn(ll, scale=1.2), Create(bord), run_time=0.6)
         self.play(FadeOut(bord), run_time=0.3)
         self.au_mot("Combien de mètres carrés")
-        q = self.t("Combien de mètres carrés de toit ?", 34, JAUNE_TITRE).move_to(P(0.4, -2.55))
+        q = self.t("Combien de mètres carrés de toit ?", 32, JAUNE_TITRE).move_to(P(0.85, -2.55))
         self.play(FadeIn(q, shift=UP * 0.15), run_time=0.45)
         self.attendre_voix()
 
