@@ -1,0 +1,74 @@
+{
+  "premiere-suite-expo-prolonger": {
+    "fichier": "premiere/maths/suites/39-expo-prolonger/eleveai-maths-premiere-suite-expo-prolonger.mp4",
+    "poster": "premiere/maths/suites/39-expo-prolonger/eleveai-maths-premiere-suite-expo-prolonger.png",
+    "vignette": "premiere/maths/suites/39-expo-prolonger/eleveai-maths-premiere-suite-expo-prolonger.vignette.webp",
+    "titre": "Un os vieux de 8 595 ans : combien reste-t-il de carbone 14 ? — Prolonger une suite géométrique par la fonction exponentielle — épisode 39 · Maths 1re",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "premiere-suite-expo-prolonger-short": {
+    "fichier": "premiere/maths/suites/39-expo-prolonger/eleveai-maths-premiere-suite-expo-prolonger-short.mp4",
+    "poster": "premiere/maths/suites/39-expo-prolonger/eleveai-maths-premiere-suite-expo-prolonger-short.png",
+    "vignette": "premiere/maths/suites/39-expo-prolonger/eleveai-maths-premiere-suite-expo-prolonger-short.vignette.webp",
+    "titre": "Un zoom entre deux crans : quelle distance ? 🧪 — 1re #Shorts",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "premiere-spe-suite-exp-geo": {
+    "fichier": "premiere-spe/maths/suites/40-exp-geo/eleveai-maths-premiere-spe-suite-exp-geo.mp4",
+    "poster": "premiere-spe/maths/suites/40-exp-geo/eleveai-maths-premiere-spe-suite-exp-geo.png",
+    "vignette": "premiere-spe/maths/suites/40-exp-geo/eleveai-maths-premiere-spe-suite-exp-geo.vignette.webp",
+    "titre": "400 mg dans le sang : de combien le médicament baisse-t-il chaque heure ? — L'exponentielle cache une suite géométrique — épisode 40 · Maths 1re spé",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "premiere-spe-suite-exp-geo-short": {
+    "fichier": "premiere-spe/maths/suites/40-exp-geo/eleveai-maths-premiere-spe-suite-exp-geo-short.mp4",
+    "poster": "premiere-spe/maths/suites/40-exp-geo/eleveai-maths-premiere-spe-suite-exp-geo-short.png",
+    "vignette": "premiere-spe/maths/suites/40-exp-geo/eleveai-maths-premiere-spe-suite-exp-geo-short.vignette.webp",
+    "titre": "Le son d'une guitare : il perd combien par seconde ? 🧪 — 1re spé #Shorts",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "terminale-suite-integrale": {
+    "fichier": "terminale/maths/suites/41-integrale/eleveai-maths-terminale-suite-integrale.mp4",
+    "poster": "terminale/maths/suites/41-integrale/eleveai-maths-terminale-suite-integrale.png",
+    "vignette": "terminale/maths/suites/41-integrale/eleveai-maths-terminale-suite-integrale.vignette.webp",
+    "titre": "Le béton d'une rampe de skatepark : quelle aire sous y = xⁿ ? — Une suite définie par une intégrale — épisode 41 · Maths Tle spé",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "terminale-suite-integrale-short": {
+    "fichier": "terminale/maths/suites/41-integrale/eleveai-maths-terminale-suite-integrale-short.mp4",
+    "poster": "terminale/maths/suites/41-integrale/eleveai-maths-terminale-suite-integrale-short.png",
+    "vignette": "terminale/maths/suites/41-integrale/eleveai-maths-terminale-suite-integrale-short.vignette.webp",
+    "titre": "Quatre aires qui rétrécissent : où vont-elles ? 🧪 — Tle spé #Shorts",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "terminale-suite-python": {
+    "fichier": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python.mp4",
+    "poster": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python.png",
+    "vignette": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python.vignette.webp",
+    "titre": "L'erreur d'un modèle d'IA : trois tours de boucle en Python — Programmer les termes d'une suite — épisode 42 · Maths Tle spé",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "terminale-suite-python-short": {
+    "fichier": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python-short.mp4",
+    "poster": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python-short.png",
+    "vignette": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python-short.vignette.webp",
+    "titre": "Une info qui circule : combien de partages après 3 tours ? 🧪 — Tle spé #Shorts",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  }
+}
