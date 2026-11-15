@@ -195,7 +195,7 @@ class AireProbleme6e(PaysageAire6eG):
         c25 = cote(f, "2,5 m", LEFT, couleur=BLEU_D)
         self.play(FadeIn(l2, shift=UP * 0.1), FadeIn(c25), run_time=0.35)
         self.au_mot("Son aire")
-        l3 = self.t("A = longueur × hauteur", 34, JAUNE_TITRE)
+        l3 = self.t("Son aire :", 34, JAUNE_TITRE)  # ce que dit la voix (plus de formule non dite)
         self.col(l3, 1.1)
         self.play(FadeIn(l3, shift=UP * 0.1), run_time=0.35)
         self.au_mot("6 fois 2,5")

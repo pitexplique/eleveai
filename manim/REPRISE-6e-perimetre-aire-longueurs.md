@@ -81,6 +81,6 @@ Notes et outils : `N = side-session-notes/local_c6fb8250-5329-4da1-acb1-04e271d6
 | A4 | `6e-aire-defi` | 3 min 59 | 01:12 C, 02:12 B | « La pizza géante » 73,2 s, Q 00:18 A | 11/04/2027 |
 - Fiches YouTube, vignettes, R2 (check), `videos-r2.json` / `bilans-videos.json`, coach (`brancher-videos-coach.mjs --id … --ecrire`) faits pour les 8 vidéos. Plan coché (6E Aire : rectangle, carré, comparer, problème, défi).
 - ⚠️ Short comparer : le défi en commentaire est une ÉGALITÉ (8 × 8 = 16 × 4 = 64 cm²) : réponse attendue « les deux pareil » (voulu par la voix validée).
-- À valider par Frédéric (douteux mineurs) : A3 écran 02 écrit « A = longueur × hauteur » (la voix dit seulement « Son aire ») ; A4 question 1, choix C sur deux lignes ; A1 écran 02, lettres « L » / « l » serrées contre les cotes.
+- A3 écran 02 : « A = longueur × hauteur » (non dit) remplacé par « Son aire : » et HD refait. À valider par Frédéric (douteux mineurs) : A4 question 1, choix C sur deux lignes ; A1 écran 02, lettres « L » / « l » serrées contre les cotes.
 - Retouches de la relève sur les planches : A2 « chambre » plus grand et « Mets pause » plus petit (il touchait Ti Margo) ; A3 « 5 × 15 » (le 15 collait au ×) ; A4 piège « (× 2) » / « (× 4) » entre parenthèses (« 28 m × 2 » se lisait comme un calcul).
 - Rien n'est poussé.
