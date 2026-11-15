@@ -74361,6 +74361,13 @@
       "centres": [
         "jeux-video",
         "art-design"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_unite",
+          "microId": "aire_compter"
+        }
       ]
     },
     {
@@ -74409,6 +74416,13 @@
       "centres": [
         "cuisine",
         "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_unite",
+          "microId": "aire_compter"
+        }
       ]
     },
     {
@@ -84846,6 +84860,13 @@
       "centres": [
         "mode",
         "art-design"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_longueur",
+          "microId": "aire_longueur_comparer"
+        }
       ]
     },
     {
@@ -84895,6 +84916,13 @@
       "centres": [
         "sport",
         "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_longueur",
+          "microId": "aire_longueur_comparer"
+        }
       ]
     },
     {
@@ -85153,6 +85181,13 @@
       "centres": [
         "transports",
         "velo"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_longueur",
+          "microId": "aire_longueur_defi"
+        }
       ]
     },
     {
@@ -85202,6 +85237,13 @@
       "centres": [
         "sport",
         "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_longueur",
+          "microId": "aire_longueur_defi"
+        }
       ]
     },
     {
@@ -85616,6 +85658,13 @@
       "centres": [
         "musique",
         "cinema-series"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_comprendre"
+        }
       ]
     },
     {
@@ -85665,6 +85714,13 @@
       "centres": [
         "animaux",
         "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_comprendre"
+        }
       ]
     },
     {
@@ -85924,6 +85980,13 @@
       "centres": [
         "art-design",
         "mode"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_figure"
+        }
       ]
     },
     {
@@ -85973,6 +86036,13 @@
       "centres": [
         "cuisine",
         "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_figure"
+        }
       ]
     },
     {
@@ -86078,6 +86148,13 @@
       "centres": [
         "technologie-ia",
         "nature-ecologie"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_probleme"
+        }
       ]
     },
     {
@@ -86128,6 +86205,13 @@
       "centres": [
         "animaux",
         "nature-ecologie"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_probleme"
+        }
       ]
     },
     {
@@ -86232,6 +86316,13 @@
       "centres": [
         "construction",
         "sciences"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_unite",
+          "microId": "aire_convertir"
+        }
       ]
     },
     {
@@ -86281,6 +86372,13 @@
       "centres": [
         "art-design",
         "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_unite",
+          "microId": "aire_convertir"
+        }
       ]
     },
     {
@@ -86544,6 +86642,11 @@
           "classe": "cm1",
           "notionId": "longueur",
           "microId": "longueur_convertir"
+        },
+        {
+          "classe": "6e",
+          "notionId": "aire_longueur",
+          "microId": "aire_longueur_unite"
         }
       ]
     },
@@ -86601,6 +86704,11 @@
           "classe": "cm1",
           "notionId": "longueur",
           "microId": "longueur_convertir"
+        },
+        {
+          "classe": "6e",
+          "notionId": "aire_longueur",
+          "microId": "aire_longueur_unite"
         }
       ]
     },
@@ -87030,6 +87138,13 @@
       ],
       "centres": [
         "transports"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_longueur",
+          "microId": "aire_longueur_mesurer"
+        }
       ]
     },
     {
@@ -87081,6 +87196,13 @@
       "centres": [
         "transports",
         "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_longueur",
+          "microId": "aire_longueur_mesurer"
+        }
       ]
     },
     {
@@ -87346,6 +87468,13 @@
       ],
       "centres": [
         "musique"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_longueur",
+          "microId": "aire_longueur_probleme"
+        }
       ]
     },
     {
@@ -87397,6 +87526,13 @@
       "centres": [
         "sport",
         "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_longueur",
+          "microId": "aire_longueur_probleme"
+        }
       ]
     },
     {
@@ -88423,6 +88559,13 @@
       "centres": [
         "art-design",
         "mode"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_unite",
+          "microId": "aire_comprendre"
+        }
       ]
     },
     {
@@ -88472,6 +88615,13 @@
       "centres": [
         "art-design",
         "mode"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_unite",
+          "microId": "aire_comprendre"
+        }
       ]
     },
     {
@@ -88575,6 +88725,13 @@
       "centres": [
         "animaux",
         "nature-ecologie"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_surface",
+          "microId": "aire_decomposer"
+        }
       ]
     },
     {
@@ -88624,6 +88781,13 @@
       "centres": [
         "jeux-defis",
         "nature-ecologie"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_surface",
+          "microId": "aire_decomposer"
+        }
       ]
     }
   ]
