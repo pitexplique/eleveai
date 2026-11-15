@@ -455,15 +455,16 @@ class SuiteExpGeo1reSpe(Bords6, AuditMilliers, OutilsEp12, OutilsGraphique, Pays
                   VGroup(cartes[2], ok).animate.move_to(P(0, 2.55)), run_time=0.4)
         self.maths([("e", "(n+1)a", WHITE, RAISON, "n plus 1"), ("t", "=", WHITE, "égale"),
                     ("e", "na", WHITE, RAISON, "n a,"), ("t", "×", WHITE, "fois e"),
-                    ("e", "a", RAISON, RAISON, "puissance a :")], 1.15, fs=54, centre=0, larg=11)
-        lg = LigneTermes(["", ""], centre=P(-0.3, -0.35), pas=2.6, largeur=2.2, hauteur=0.85, fs=36,
+                    ("e", "a", RAISON, RAISON, "puissance a :")], 1.35, fs=54, centre=0, larg=11)
+        # les cases descendent : l'étiquette « × eᵃ » du saut ne touche plus la ligne du dessus
+        lg = LigneTermes(["", ""], centre=P(-0.3, -0.85), pas=2.6, largeur=2.2, hauteur=0.85, fs=36,
                          noms=["uₙ", "uₙ₊₁"], fs_noms=32)
         self.au_mot("d'un terme au suivant")
         self.play(FadeIn(lg, shift=UP * 0.1), run_time=0.35)
-        self.calc([("d'un terme au suivant,", WHITE, None)], -1.75, centre=-0.3, fs=42, larg=10.4)
+        self.calc([("d'un terme au suivant,", WHITE, None)], -2.0, centre=-0.3, fs=42, larg=10.4)
         self.saut_e(lg, 0, "a", cote=UP, fs=32)
         fin = self.maths([("t", "on multiplie par", WHITE, "on multiplie"), ("e", "a", JUSTE, JUSTE, "puissance a.")],
-                         -2.6, fs=48, centre=-0.3, larg=10.4)
+                         -2.85, fs=48, centre=-0.3, larg=10.4)
         self.play(Create(self.encadre(fin, JUSTE, 0.16)), run_time=0.35)
         self.attendre_voix(marge=0.6)
 
@@ -657,8 +658,11 @@ class SuiteExpGeo1reSpe(Bords6, AuditMilliers, OutilsEp12, OutilsGraphique, Pays
         self.au_mot("Correction")
         cor = self.t("Correction", 46, JUSTE).move_to(tit)
         autres = [m for m in self.mobjects if m is not tit and m is not self._margo and m not in garder]
-        self.play(*[FadeOut(m) for m in autres], ReplacementTransform(tit, cor), run_time=0.45)
-        self.remove(*autres)
+        # ⛔ pas de ReplacementTransform entre deux titres : une image y montrait des
+        # lettres à moitié déformées (relecture du 15/11). L'ancien part, le neuf arrive.
+        self.play(*[FadeOut(m) for m in autres], FadeOut(tit), run_time=0.35)
+        self.remove(*autres, tit)
+        self.play(FadeIn(cor, shift=DOWN * 0.1), run_time=0.3)
         self.maths([("t", "uₙ =", TERME, None), ("e", "−0,2n", WHITE, RAISON, None)], 0.45, fs=46, centre=-2.4,
                    larg=4.4, rt=0.2)
         self.maths([("t", "vₙ =", TERME, None), ("e", "−0,5n", WHITE, RAISON, None)], 0.45, fs=46, centre=4.0,
