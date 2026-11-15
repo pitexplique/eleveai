@@ -370,6 +370,37 @@ class LongueurEstimerBase(VoixMilliers, PaysageLongueurCM2):
     _forces = {("05b-reponse", "6 cm."): 5.25, ("05b-reponse", "6 mm :"): 7.15,
                ("07b-reponse", "3 070 m"): 5.22}
 
+    def _carte_choix(self, lettre, txt, largeur, fs):
+        """Carte de choix : le texte laisse 0,6 de plus à droite pour la coche de la bonne réponse
+        (« environ 3 000 m » touchait la coche)."""
+        g = super()._carte_choix(lettre, txt, largeur, fs)
+        cadre, ligne = g
+        if ligne.width > largeur - 1.35:  # coche à ≈ 0,5 du texte (0,8 la laissait collée)
+            ligne.scale_to_fit_width(largeur - 1.35)
+            ligne.move_to(cadre).align_to(cadre.get_left() + RIGHT * 0.2, LEFT)
+        return g
+
+    def _disposer_q(self, question, choix, phrase):
+        """La phrase de réponse (à gauche) : tous ses morceaux à la MÊME taille (les morceaux coupés
+        sortaient plus petits ou plus gros), posés sur une même ligne d'écriture ; en 34 au plus,
+        réduite seulement pour tenir avant les choix (6,5 de large : finit à x ≤ 0,4, choix à 0,93)."""
+        r = super()._disposer_q(question, choix, phrase)
+        if self._ph_haut is None:
+            return r
+        ph = r[5]
+        for l in ph.submobjects:
+            pieces = [l] if isinstance(l, Text) else list(l.submobjects)
+            for p in pieces:
+                p.scale(34 / p.font_size)
+            if not isinstance(l, Text):
+                l.arrange(RIGHT, buff=0.18)
+                aligner_base(pieces)
+        ph.arrange(DOWN, aligned_edge=LEFT, buff=0.16)
+        if ph.width > 6.5:
+            ph.scale_to_fit_width(6.5)
+        ph.align_to(P(-6.1, 0), LEFT).align_to(P(0, self._ph_haut), UP)
+        return r
+
     def girafe_porte(self, u, sol, x_porte, x_gir):
         """La porte (2 m) et la girafe (5 m) côte à côte, à l'échelle (u unités Manim par mètre)."""
         pt = porte(2 * u).move_to(P(x_porte, 0)).align_to(P(0, sol), DOWN)
@@ -390,7 +421,7 @@ class LongueurEstimerBase(VoixMilliers, PaysageLongueurCM2):
         q = VGroup(q0, q1).arrange(DOWN, aligned_edge=LEFT, buff=0.3)
         q.move_to(P(0, 0.3)).align_to(P(-6.2, 0), LEFT)
         sol = -1.45
-        pt, gi = self.girafe_porte(0.64, sol, 2.3, 3.9)
+        pt, gi = self.girafe_porte(0.64, sol, 1.95, 3.9)  # porte écartée de la queue (0,5)
         ligne_sol = Line(P(1.4, sol), P(5.0, sol), color=GRAY_B, stroke_width=3)
         self.au_mot("Une girafe")
         self.play(FadeIn(q0, shift=UP * 0.2), FadeIn(gi, shift=UP * 0.3), FadeIn(ligne_sol), run_time=0.35)
@@ -412,7 +443,7 @@ class LongueurEstimerBase(VoixMilliers, PaysageLongueurCM2):
         self.au_mot("photographe animalière")
         met = self.bloc(["photographe", "animalière"], 26, "#84cc16").next_to(pe, DOWN, buff=0.12)
         self.play(FadeIn(met, shift=DOWN * 0.1), run_time=0.35)
-        XP = 0.8
+        XP = -0.5  # (« Elle photographie les animaux » : 6,41 de large → finit à 5,9)
         l0 = self.bloc(["Elle photographie les animaux", "dans la nature."], 30)
         self.col(l0, 2.55, XP)
         ph = photo(0.95).move_to(P(-2.35, 0.75))
@@ -472,10 +503,11 @@ class LongueurEstimerBase(VoixMilliers, PaysageLongueurCM2):
     # ── 03 : la girafe à côté d'une porte ───────────────────────────────────
     def ecran_girafe(self):
         self.ecran("03-girafe")
-        u, sol = 0.95, -2.3
-        pt, gi = self.girafe_porte(u, sol, -5.1, -2.65)
-        ligne_sol = Line(P(-6.2, sol), P(-0.9, sol), color=GRAY_B, stroke_width=3)
-        XP = 0.6
+        u, sol = 0.8, -2.3
+        # porte -5,73 → -4,97 ; girafe (2,77 de large) 0,3 plus loin : -4,66 → -1,89
+        pt, gi = self.girafe_porte(u, sol, -5.35, -3.275)
+        ligne_sol = Line(P(-6.2, sol), P(-1.2, sol), color=GRAY_B, stroke_width=3)
+        XP = -0.15  # « 5 m » finit vers -0,46
         r0 = self.ligne([("Une girafe :", WHITE), ("plus de 2 fois", WHITE)], 32, buff=0.2)
         r1 = self.t("plus haute qu'une porte.", 32)
         l0 = VGroup(r0, r1).arrange(DOWN, aligned_edge=LEFT, buff=0.12)
@@ -500,12 +532,12 @@ class LongueurEstimerBase(VoixMilliers, PaysageLongueurCM2):
         self.au_mot("fait 2")
         self.play(FadeIn(l1[1], shift=UP * 0.1), GrowFromCenter(fa), FadeIn(ea), run_time=0.3)
         # deux portes et demie l'une sur l'autre, en pointillés, à côté de la girafe
-        xb = gi.get_right()[0] + 0.3
+        xb = gi.get_right()[0] + 0.4
         etages = VGroup(*[DashedLine(P(xb - 0.12, sol + k * 2 * u), P(xb + 0.12, sol + k * 2 * u), color=BLEU_D,
                                      stroke_width=4) for k in (1, 2)])
         fb = DoubleArrow(P(xb, sol), P(xb, sol + 5 * u), buff=0, color=VERT_OK, stroke_width=4, tip_length=0.15)
         eb = hors_audit(Text("5 m", font_size=30, color=VERT_OK, weight=BOLD)).next_to(fb, RIGHT, buff=0.1)
-        eb.set_y(sol + 3.2 * u)
+        eb.set_y(sol + 3.5 * u)
         l2 = self.ligne([("La girafe :", WHITE), ("environ 5 m", VERT_OK)], 34, buff=0.2)
         self.col(l2, 1.1, XP)
         self.au_mot("la girafe mesure")
@@ -515,12 +547,12 @@ class LongueurEstimerBase(VoixMilliers, PaysageLongueurCM2):
         self.insister(l2[1], 1.12, 0.2)
         # 5 cm : trop petit
         mn = doigts(5, 0.38)
-        a1 = self.ligne([("5 cm", ROUGE_ERREUR), ("= 5 doigts :", WHITE)], 32, buff=0.2)
-        b1 = self.t("trop petit.", 32, ROUGE_ERREUR)
+        a1 = self.ligne([("5 cm", ROUGE_ERREUR), ("= 5 doigts :", WHITE)], 30, buff=0.2)
+        b1 = self.t("trop petit.", 30, ROUGE_ERREUR)
         hors_audit(a1[0])
         g1 = VGroup(a1, b1).arrange(DOWN, aligned_edge=LEFT, buff=0.12)
-        self.col(g1, 0.05, XP + 1.35)
-        mn.move_to(P(XP + 0.6, g1.get_y()))
+        self.col(g1, 0.05, XP + 1.3)
+        mn.move_to(P(XP + 0.5, g1.get_y()))
         self.au_t(8.9)
         self.play(FadeIn(a1[0], shift=UP * 0.1), run_time=0.25)
         self.au_mot("de 5 doigts")
@@ -529,11 +561,11 @@ class LongueurEstimerBase(VoixMilliers, PaysageLongueurCM2):
         self.play(FadeIn(b1, shift=UP * 0.1), run_time=0.25)
         # 5 km : impossible
         hl = horloge(4, 0.38)
-        a2 = self.ligne([("5 km :", ROUGE_ERREUR), ("plus d'une heure", WHITE)], 32, buff=0.2)
-        b2 = self.ligne([("de marche :", WHITE), ("impossible !", ROUGE_ERREUR)], 32, buff=0.2)
+        a2 = self.ligne([("5 km :", ROUGE_ERREUR), ("plus d'une heure", WHITE)], 30, buff=0.2)
+        b2 = self.ligne([("de marche :", WHITE), ("impossible !", ROUGE_ERREUR)], 30, buff=0.2)
         g2 = VGroup(a2, b2).arrange(DOWN, aligned_edge=LEFT, buff=0.12)
-        self.col(g2, -1.25, XP + 1.35)
-        hl.move_to(P(XP + 0.6, g2.get_y()))
+        self.col(g2, -1.25, XP + 1.3)
+        hl.move_to(P(XP + 0.5, g2.get_y()))
         self.au_mot("5 kilomètres")
         self.play(FadeIn(a2[0], shift=UP * 0.1), run_time=0.25)
         self.au_mot("plus d'une heure")
@@ -550,7 +582,7 @@ class LongueurEstimerBase(VoixMilliers, PaysageLongueurCM2):
         self.au_mot("estimer avec un nombre")
         tit = self.t("Estimer avec une virgule :", 40, JAUNE_TITRE).move_to(P(0, 2.95))
         self.play(Write(tit), run_time=0.45)
-        sep = DashedLine(P(-0.35, 2.4), P(-0.35, -2.6), color=GRAY_D, stroke_width=3)
+        sep = DashedLine(P(-0.05, 2.4), P(-0.05, -2.6), color=GRAY_D, stroke_width=3)
         # à gauche : l'enfant contre la toise (1 m = 1,55 unité)
         XG, u, sol = -3.4, 1.55, -0.95
         toise = Rectangle(width=0.35, height=1.6 * u, fill_color=BOIS, fill_opacity=1, stroke_color=BOIS_B,
@@ -559,9 +591,10 @@ class LongueurEstimerBase(VoixMilliers, PaysageLongueurCM2):
                                P(toise.get_right()[0], sol + k * 0.1 * u), color=TRAIT,
                                stroke_width=3 if k % 5 == 0 else 1.5) for k in range(17)])
         nums = VGroup(*[hors_audit(Text(s, font_size=20, color=GRAY_B, weight=BOLD))
-                        .next_to(np.array([toise.get_left()[0], sol + v * u, 0]), LEFT, buff=0.1)
+                        .next_to(np.array([toise.get_left()[0], sol + v * u, 0]), LEFT, buff=0.15)
                         for v, s in ((0, "0"), (0.5, "50 cm"), (1.0, "1 m"), (1.5, "1,5 m"))])
-        sol_g = Line(P(XG - 1.9, sol), P(XG + 1.5, sol), color=GRAY_B, stroke_width=3)
+        # le sol part du pied de la toise : le « 0 » ne se pose plus sur le trait
+        sol_g = Line(P(toise.get_left()[0], sol), P(XG + 1.5, sol), color=GRAY_B, stroke_width=3)
         enf = personne(peau="#e0ac69", tenue="#f43f5e", cheveux="#1f2937", s=1.0)
         enf.scale_to_fit_height(1.4 * u).move_to(P(XG + 0.15, 0)).align_to(P(0, sol), DOWN)
         tete = DashedLine(P(toise.get_right()[0], sol + 1.4 * u), P(enf.get_right()[0] + 0.1, sol + 1.4 * u),
@@ -745,7 +778,12 @@ class LongueurEstimerBase(VoixMilliers, PaysageLongueurCM2):
         self.play(FadeIn(l2[0], shift=UP * 0.1), run_time=0.3)
         self.au_mot("en mètres")
         self.play(FadeIn(l2[1], shift=UP * 0.1), Wiggle(sp), run_time=0.5)
-        self.pause_defi(y=-2.35)
+        # « Mets pause » à gauche, sous la question (à droite, il touchait Ti-Margo)
+        self.au_mot("Mets pause")
+        p = self.t("Mets pause, et cherche !", 32, ORANGE_RETENUE)
+        gauche(p, -6.2, -2.35)
+        self.play(Write(p), run_time=0.8)
+        self.attendre_voix(marge=2.0)
 
     def ecran_correction(self):
         self.ecran("08b-correction", 0.65)
@@ -773,16 +811,16 @@ class LongueurEstimerBase(VoixMilliers, PaysageLongueurCM2):
         nb = VGroup(*[hors_audit(Text(s, font_size=24, color=GRAY_B, weight=BOLD)).move_to(P(self.X0 + v * self.PAS, y - 0.38))
                       for v, s in ((0, "0"), (1, "1 m"), (2, "2 m"), (3, "3 m"))])
         l1 = self.ligne([("3 pas et demi :", WHITE), ("environ 3,5 m", VERT_OK)], 40, buff=0.25)
-        gauche(l1, -6.2, -1.8)
+        gauche(l1, -6.2, -2.0)
         hors_audit(l1[0])  # posé au « 3 » (sinon il attendait « demi », 0,6 s plus tard)
         self.au_mot("3 pas et demi")
         self.play(FadeIn(l1[0], shift=UP * 0.1), FadeIn(demi, scale=1.3), FadeIn(axe), FadeIn(tr), FadeIn(nb),
                   run_time=0.35)
         self.au_mot("environ 3,5")
-        e35 = hors_audit(Text("3,5 m", font_size=26, color=VERT_OK, weight=BOLD)).move_to(P(self.X0 + 3.5 * self.PAS, y - 0.38))
+        e35 = hors_audit(Text("3,5 m", font_size=26, color=VERT_OK, weight=BOLD)).move_to(P(self.X0 + 3.5 * self.PAS + 0.25, y - 0.38))  # écarté de « 3 m »
         self.play(FadeIn(l1[1], scale=1.15), FadeIn(e35, scale=1.3), run_time=0.35)
         l2 = self.ligne([("C'est un très long serpent :", WHITE), ("un python !", JAUNE_TITRE)], 34, buff=0.2)
-        gauche(l2, -6.2, -2.55)
+        gauche(l2, -6.2, -2.75)
         self.au_mot("très long serpent")
         self.play(FadeIn(l2[0], shift=UP * 0.1), run_time=0.3)
         self.au_mot("un python")
@@ -798,7 +836,12 @@ class LongueurEstimerBase(VoixMilliers, PaysageLongueurCM2):
         lignes = self.finale_gauche(fig, textes=[
             ("Pour estimer, choisis d'abord", "l'unité, puis compare avec un repère :"),
             ("1 mm : l'épaisseur d'un ongle ;", "1 cm : un doigt ;"),
-            ("1 m : un grand pas ;", "1 km : un quart d'heure de marche.")], fs=32)
+            ("1 m : un grand pas ;", "1 km : un quart d'heure de marche.")], fs=32, xl=-2.5)
+        # rien après x = 6 ; le tout remonté de 0,4 : la dernière ligne passe au-dessus de Ti-Margo
+        if lignes.get_right()[0] > 6.0:
+            lignes.scale_to_fit_width(6.0 + 2.5).align_to(P(-2.5, 0), LEFT)
+        lignes.shift(UP * 0.4)
+        fig.shift(UP * 0.4)
         self.add(fig)
         self.au_mot("Pour estimer")
         self.montrer_ligne(lignes[0], Indicate(fig, scale_factor=1.04))

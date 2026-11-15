@@ -16757,5 +16757,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_defi&display=simple"
+ },
+ "cm2-longueur-estimer": {
+  "fichier": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer.mp4",
+  "poster": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer.png",
+  "vignette": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer.vignette.webp",
+  "titre": "Une girafe : 5 cm, 5 m ou 5 km ? — Estimer une longueur — épisode 3 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_estimer&display=simple"
+ },
+ "cm2-longueur-estimer-short": {
+  "fichier": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer-short.mp4",
+  "poster": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer-short-miniature.png",
+  "vignette": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer-short-miniature.vignette.webp",
+  "titre": "Mon lit mesure 2 kilomètres ?! #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_estimer&display=simple"
  }
 }

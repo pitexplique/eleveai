@@ -95274,6 +95274,160 @@
         "jeux-defis",
         "art-design"
       ]
+    },
+    {
+      "id": "cm2-longueur-estimer",
+      "pas_avant": "2027-04-04",
+      "notionId": "longueur",
+      "microId": "longueur_estimer",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer.mp4",
+      "miniature": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer.png",
+      "titre": "Une girafe : 5 cm, 5 m ou 5 km ? — Estimer une longueur — épisode 3 · Maths CM2",
+      "accroche": "Mia est photographe animalière. Sous chaque photo, elle écrit la taille de l'animal. Mais elle n'a pas toujours de mètre ruban ! Alors elle estime.\n\nDans cette vidéo :\n• des repères : un ongle ≈ 1 mm, un doigt ≈ 1 cm, un grand pas ≈ 1 m, un quart d'heure de marche ≈ 1 km\n• la girafe, plus de 2 fois une porte de 2 m : environ 5 m\n• avec une virgule : un enfant de CM2 ≈ 1,4 m, un colibri ≈ 8 cm\n• le piège : choisir l'unité avant le nombre (une baleine bleue : 30 m, pas 30 cm)\n• le Piton des Neiges, à La Réunion : environ 3 000 m d'altitude\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un serpent aussi long que 3 grands pas et demi : combien de mètres ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_estimer&display=simple\n\n📏 Épisode 3 de la série Longueurs d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "5 cm, 5 m ou 5 km ?"
+        ],
+        [
+          "00:08",
+          "Mia, photographe animalière"
+        ],
+        [
+          "00:24",
+          "Les repères"
+        ],
+        [
+          "00:42",
+          "La girafe"
+        ],
+        [
+          "01:01",
+          "Avec une virgule"
+        ],
+        [
+          "01:16",
+          "Question 1"
+        ],
+        [
+          "01:52",
+          "Le piège : l'unité d'abord"
+        ],
+        [
+          "02:08",
+          "Question 2"
+        ],
+        [
+          "02:50",
+          "À toi de jouer"
+        ],
+        [
+          "03:06",
+          "Correction"
+        ],
+        [
+          "03:19",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "estimer une longueur",
+        "ordre de grandeur",
+        "repères",
+        "mètre",
+        "kilomètre",
+        "animaux",
+        "Piton des Neiges",
+        "longueurs",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:16",
+          "question": "Mia photographie un papillon, les ailes ouvertes. Combien mesure-t-il ?",
+          "choix": [
+            "6 millimètres",
+            "6 mètres",
+            "6 centimètres"
+          ],
+          "reponse": 2,
+          "explication": "Ses ailes ouvertes font environ la largeur de 6 doigts : 6 cm."
+        },
+        {
+          "t": "02:08",
+          "question": "Quelle est l'altitude du sommet du Piton des Neiges, à La Réunion ?",
+          "choix": [
+            "environ 300 mètres",
+            "environ 3 000 mètres",
+            "environ 30 kilomètres"
+          ],
+          "reponse": 1,
+          "explication": "Environ 3 000 m, c'est-à-dire 3 km : 3 070 m exactement."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "photo"
+      ]
+    },
+    {
+      "id": "cm2-longueur-estimer-short",
+      "pas_avant": "2027-04-04",
+      "notionId": "longueur",
+      "microId": "longueur_estimer",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-longueur-estimer",
+      "fichier": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer-short.mp4",
+      "miniature": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer-short-miniature.png",
+      "titre": "Mon lit mesure 2 kilomètres ?! #maths #cm2",
+      "accroche": "Mon cousin me demande la longueur de mon lit. Je réfléchis… « 2 kilomètres ! » Il éclate de rire. Combien mesure vraiment mon lit ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un crayon neuf mesure 18… millimètres, centimètres, ou mètres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #cm2",
+      "tags": [
+        "estimer une longueur",
+        "ordre de grandeur",
+        "mètre",
+        "kilomètre",
+        "lit",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "longueurs",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Combien mesure mon lit ?",
+          "choix": [
+            "2 centimètres",
+            "2 kilomètres",
+            "2 mètres"
+          ],
+          "reponse": 2,
+          "explication": "Environ 2 m : 2 grands pas, un peu plus que moi allongé."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "animaux"
+      ]
     }
   ]
 }
