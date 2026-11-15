@@ -100,3 +100,18 @@ def ethan(s=1.0):
 class PaysageSolidesCM2(PaysageSolidesCM1):
     identite = "Maths CM2 — EleveAI"
     ceinture = "verte"
+
+    def ligne(self, morceaux, fs=40, buff=0.2):
+        """Les morceaux côte à côte, sur la MÊME ligne de base (15/11 : « Sa base a 6 côtés : »
+        puis « hexagonale. » remontait, centré en hauteur à cause du g)."""
+        lg = super().ligne(morceaux, fs, buff)
+        txt = [m if isinstance(m, str) else m[0] for m in morceaux]
+        plein = Text(" ".join(txt), font_size=fs)
+        if len(plein.submobjects) == sum(1 for ch in " ".join(txt) if not ch.isspace()):
+            k = 0
+            for m, s in zip(lg, txt):
+                n = sum(1 for ch in s if not ch.isspace())
+                if n and len(m.submobjects) == n:
+                    m.shift(UP * (plein[k].get_center()[1] - m[0].get_center()[1]))
+                k += n
+        return lg

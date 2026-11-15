@@ -7720,6 +7720,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=proportionnalite&microId=prop_tableau&display=simple"
  },
+ "cm2-solides-patron": {
+  "fichier": "cm2/maths/solides/04-patron/eleveai-maths-cm2-solides-patron.mp4",
+  "poster": "cm2/maths/solides/04-patron/eleveai-maths-cm2-solides-patron.png",
+  "vignette": "cm2/maths/solides/04-patron/eleveai-maths-cm2-solides-patron.vignette.webp",
+  "titre": "Quel solide donne ce patron, une fois plié ? — Reconnaître un patron — épisode 4 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_patron&display=simple"
+ },
+ "cm2-solides-patron-short": {
+  "fichier": "cm2/maths/solides/04-patron/eleveai-maths-cm2-solides-patron-short.mp4",
+  "poster": "cm2/maths/solides/04-patron/eleveai-maths-cm2-solides-patron-short-miniature.png",
+  "vignette": "cm2/maths/solides/04-patron/eleveai-maths-cm2-solides-patron-short-miniature.vignette.webp",
+  "titre": "Ma boîte pyramide a un trou ! 3 triangles, ça suffit ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_patron&display=simple"
+ },
  "cm2-solides-reconnaitre": {
   "fichier": "cm2/maths/solides/01-reconnaitre/eleveai-maths-cm2-solides-reconnaitre.mp4",
   "poster": "cm2/maths/solides/01-reconnaitre/eleveai-maths-cm2-solides-reconnaitre.png",

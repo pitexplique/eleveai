@@ -89863,6 +89863,154 @@
       "centres": [
         "art-design"
       ]
+    },
+    {
+      "id": "cm2-solides-patron",
+      "pas_avant": "2027-03-30",
+      "prioritaire": true,
+      "notionId": "solide",
+      "microId": "solide_patron",
+      "classe": "cm2",
+      "ceinture": "verte",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/solides/04-patron/eleveai-maths-cm2-solides-patron.mp4",
+      "miniature": "cm2/maths/solides/04-patron/eleveai-maths-cm2-solides-patron.png",
+      "titre": "Quel solide donne ce patron, une fois plié ? — Reconnaître un patron — épisode 4 · Maths CM2",
+      "accroche": "Julia est maquettiste : elle construit des maquettes de bâtiments en carton, pour les architectes. Chaque bâtiment commence à plat, par un patron. Mais quel patron donne quel solide ?\n\nDans cette vidéo :\n• un patron : un dessin d'un seul morceau qui, plié, forme un solide sans trou ni face en double\n• compter les faces et leurs formes : 6 rectangles = pavé ; 1 carré + 4 triangles = pyramide ; 2 triangles + 3 rectangles = prisme\n• vérifier les longueurs : deux bords qui se collent ont la même longueur\n• le piège : 6 faces ne suffisent pas, il faut plier dans sa tête\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : le patron d'une tour en pavé : 4 rectangles de 5 cm sur 12 et 2 carrés : quel côté pour les carrés ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_patron&display=simple\n\n🔢 Épisode 4 de la série Solides d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Quel solide, une fois plié ?"
+        ],
+        [
+          "00:32",
+          "Compter les faces"
+        ],
+        [
+          "00:50",
+          "Vérifier les longueurs"
+        ],
+        [
+          "01:02",
+          "Question 1"
+        ],
+        [
+          "01:40",
+          "Le piège"
+        ],
+        [
+          "01:56",
+          "Question 2"
+        ],
+        [
+          "02:34",
+          "À toi de jouer"
+        ],
+        [
+          "02:52",
+          "Correction"
+        ],
+        [
+          "03:07",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "patron",
+        "solides",
+        "pavé droit",
+        "pyramide",
+        "prisme",
+        "maquette",
+        "maquettiste",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:02",
+          "question": "Un patron a 2 rectangles de 6 sur 4, 2 rectangles de 6 sur 3, et 2 rectangles de 4 sur 3. Quel solide donne-t-il ?",
+          "choix": [
+            "un cube",
+            "un prisme à base triangulaire",
+            "un pavé droit"
+          ],
+          "reponse": 2,
+          "explication": "6 rectangles, en 3 paires : c'est un pavé droit de 6 centimètres sur 4 sur 3. Un cube aurait 6 carrés pareils."
+        },
+        {
+          "t": "01:56",
+          "question": "Un patron a un hexagone au milieu, et un triangle sur chacun de ses 6 côtés. Quel solide donne-t-il ?",
+          "choix": [
+            "un prisme à base hexagonale",
+            "une pyramide à base hexagonale",
+            "un cylindre"
+          ],
+          "reponse": 1,
+          "explication": "Une base, et des triangles qui se replient vers une pointe : une pyramide. Sa base a 6 côtés : une pyramide à base hexagonale."
+        }
+      ],
+      "centres": [
+        "construction",
+        "art-design"
+      ]
+    },
+    {
+      "id": "cm2-solides-patron-short",
+      "pas_avant": "2027-03-30",
+      "prioritaire": true,
+      "notionId": "solide",
+      "microId": "solide_patron",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-solides-patron",
+      "fichier": "cm2/maths/solides/04-patron/eleveai-maths-cm2-solides-patron-short.mp4",
+      "miniature": "cm2/maths/solides/04-patron/eleveai-maths-cm2-solides-patron-short-miniature.png",
+      "titre": "Ma boîte pyramide a un trou ! 3 triangles, ça suffit ? #maths #cm2",
+      "accroche": "Je fabrique une boîte cadeau en pyramide pour Maman. Mon patron : 1 carré, et 3 triangles autour. Je plie, je colle… Oups !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un patron a 1 pentagone et 5 triangles. Quel solide donne-t-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_patron&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #solides #cm2 #primaire",
+      "tags": [
+        "patron",
+        "pyramide",
+        "boîte cadeau",
+        "bricolage",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Combien de triangles faut-il autour du carré ?",
+          "choix": [
+            "3 triangles",
+            "5 triangles",
+            "4 triangles"
+          ],
+          "reponse": 2,
+          "explication": "Un triangle sur chaque côté du carré : 4 côtés, 4 triangles. Avec 3, un côté reste ouvert."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
     }
   ]
 }
