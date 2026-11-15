@@ -1,0 +1,7 @@
+{
+  "voix": "cm2-solides-{ep}-short",
+  "sons": "public/sons/cm2-solides-{ep}-short",
+  "sortie": "manim/sorties/cm2/maths/solides/{num}-{ep}",
+  "nom": "eleveai-maths-cm2-solides-{ep}-short",
+  "episodes": { "reconnaitre": "01", "sommets-aretes-faces": "02", "faces": "03", "patron": "04", "patron-construire": "05", "defi": "06" }
+}
