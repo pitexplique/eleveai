@@ -173,6 +173,19 @@ class PaysageVolume6e(PaysageSolidesCM1):
     identite = "Maths 6e — EleveAI"
     ceinture = "jaune"
 
+    def _carte_choix(self, lettre, txt, largeur, fs):
+        """Comme le modèle, mais la place de la coche (0,85 à droite) est réservée dès la création :
+        sinon un choix long, réduit à la largeur de la carte (le fs n'y change rien), touche la coche,
+        que l'animation de la réponse ramène vers le centre (S1, 15/11)."""
+        carte = super()._carte_choix(lettre, txt, largeur, fs)
+        cadre, ligne = carte[0], carte[1]
+        maxi = cadre.get_right()[0] - 0.85
+        if ligne.get_right()[0] > maxi:
+            g = ligne.get_left()[0]
+            ligne.scale_to_fit_width(maxi - g)
+            ligne.shift(RIGHT * (g - ligne.get_left()[0]))
+        return carte
+
     def rep_bas(self, i, morceaux, fs=32, x=-6.2, y0=-1.6, pas=0.62, buff=0.24):
         """Comme le modèle, mais au moins une vraie espace entre les morceaux (à 0,14 on lisait
         « 3 couches :3 × 5= 15 »)."""

@@ -247,7 +247,7 @@ class VisionRepresentationBase(PaysageVolume6e):
         self.play(FadeIn(l1, shift=UP * 0.1), devant.animate.move_to(cr.face.get_center()), run_time=0.6)
         self.play(Create(cr.face), FadeOut(devant), run_time=0.4)
         self.au_mot("pour un cube, un vrai carré")
-        l2 = self.lg("pour un cube, un vrai carré.", 1.1, 34, JUSTE_C)
+        l2 = self.lg("pour un cube, un vrai carré.", 1.1, 30, JUSTE_C)
         cc = codes_cotes([cr.A, cr.B, cr.C, cr.D])
         self.play(FadeIn(l2, shift=UP * 0.1), Create(cc), run_time=0.5)
         self.insister(cr.face, 1.06, 0.3)
@@ -270,13 +270,13 @@ class VisionRepresentationBase(PaysageVolume6e):
         self.play(FadeIn(l1, shift=UP * 0.1), LaggedStart(*[Create(b) for b in cr.biais], lag_ratio=0.2),
                   run_time=1.0)
         self.au_mot("tous dans la même direction")
-        l2 = self.lg("tous dans la même direction,", 1.2, 32, BIAIS_C)
+        l2 = self.lg("tous dans la même direction,", 1.2, 29, BIAIS_C)
         angle = Arc(radius=0.55, start_angle=0, angle=A_CAV, arc_center=cr.B, color=BIAIS_C, stroke_width=4)
         horiz = DashedLine(cr.B, cr.B + RIGHT * 0.8, color=BIAIS_C, stroke_width=3, dash_length=0.08)
         self.play(FadeIn(l2, shift=UP * 0.1), Create(horiz), Create(angle),
                   *[Indicate(b, color=BIAIS_C, scale_factor=1.0) for b in cr.biais], run_time=0.6)
         self.au_mot("et tous de la même longueur")
-        l3 = self.lg("et tous de la même longueur.", 0.55, 32, BIAIS_C)
+        l3 = self.lg("et tous de la même longueur.", 0.55, 29, BIAIS_C)
         ticks = VGroup()
         for a, b in cr.paires_biais():
             m, u = (a + b) / 2, (b - a) / np.linalg.norm(b - a)
@@ -285,17 +285,18 @@ class VisionRepresentationBase(PaysageVolume6e):
                                for s in (-0.05, 0.05)]))
         self.play(FadeIn(l3, shift=UP * 0.1), LaggedStart(*[Create(t) for t in ticks], lag_ratio=0.15), run_time=0.6)
         self.au_mot("Ces traits sont plus courts")
-        l4 = self.bloc(["Ils sont plus courts", "que la vraie arête :"], 32, ORANGE_RETENUE)
-        gauche(l4, 0.4, -0.45)
-        vraie = Line(cr.D, cr.C, color=JUSTE_C, stroke_width=8)
-        self.play(FadeIn(l4, shift=UP * 0.1), Create(vraie), run_time=0.5)
+        l4a = self.lg("Ils sont plus courts", -0.2, 32, ORANGE_RETENUE)
+        self.play(FadeIn(l4a, shift=UP * 0.1), run_time=0.3)
         self.au_mot("que la vraie arête")
-        self.play(Rotate(vraie, angle=A_CAV, about_point=cr.D), run_time=0.7)
-        self.play(Indicate(cr.biais[3], color=BIAIS_C, scale_factor=1.0), run_time=0.4)
+        l4b = self.lg("que la vraie arête :", -0.75, 32, ORANGE_RETENUE)
+        vraie = Line(cr.D, cr.C, color=JUSTE_C, stroke_width=8)
+        self.play(FadeIn(l4b, shift=UP * 0.1), Create(vraie), run_time=0.3)
+        self.play(Rotate(vraie, angle=A_CAV, about_point=cr.D), run_time=0.6)
         self.au_mot("c'est ce qui donne l'impression de profondeur")
         l5 = self.t("l'impression de profondeur !", 28, VERT_OK)
         gauche(l5, 0.4, -1.45)
-        self.play(FadeIn(l5, scale=1.1), FadeOut(vraie), run_time=0.4)
+        self.play(FadeIn(l5, scale=1.1), FadeOut(vraie), Indicate(cr.biais[3], color=BIAIS_C, scale_factor=1.0),
+                  run_time=0.4)
         self.attendre_voix()
 
     # ── 04 : on relie les bouts, les arêtes cachées ─────────────────────────
@@ -323,7 +324,7 @@ class VisionRepresentationBase(PaysageVolume6e):
                   run_time=0.7)
         self.au_mot("Pour un cube")
         l3 = self.ligne([("Pour un cube :", WHITE), ("3 arêtes cachées.", VERT_OK)], 26, buff=0.2)
-        gauche(l3, 0.2, 0.2)
+        gauche(l3, 0.4, 0.2)
         self.play(FadeIn(l3, shift=UP * 0.1), run_time=0.35)
         self.play(LaggedStart(*[Indicate(p, color=CACHE_C, scale_factor=1.15) for p in pts], lag_ratio=0.3),
                   run_time=0.9)
@@ -415,19 +416,19 @@ class VisionRepresentationBase(PaysageVolume6e):
         self.play(FadeIn(l1, shift=UP * 0.1), run_time=0.4)
         vraies = VGroup(cr.poly("arriere", JUSTE_C, 0.3), cr.poly("avant", JUSTE_C, 0.45))
         self.au_mot("Seules la face avant")
-        l2 = self.lg("Face avant, face arrière : vraie forme.", 0.85, 30, VERT_OK)
-        if l2.get_right()[0] > 6.45:
-            l2.scale_to_fit_width(6.0).align_to(P(0.4, 0), LEFT)
+        l2 = self.bloc(["Face avant, face arrière :", "leur vraie forme."], 28, VERT_OK)
+        gauche(l2, 0.4, 0.75)
+        muet(l2[1])  # « leur vraie forme » : déjà dit (« ne gardent pas leur vraie forme »), posé avec sa 1re ligne
         self.play(FadeIn(l2, shift=UP * 0.1), FadeIn(vraies[1]), run_time=0.4)
         self.au_mot("et la face arrière")
         self.play(FadeIn(vraies[0]), run_time=0.35)
         self.au_mot("Les faces du côté et du dessus")
         penchees = VGroup(cr.poly("dessus", PENCHE_C, 0.45), cr.poly("droite", PENCHE_C, 0.45))
-        l3 = self.lg("Côté et dessus : penchées.", 0.1, 30, PENCHE_C)
+        l3 = self.lg("Côté et dessus : penchées.", -0.2, 30, PENCHE_C)
         self.play(FadeIn(l3, shift=UP * 0.1), FadeOut(vraies), FadeIn(penchees), run_time=0.45)
         self.au_mot("on ne mesure pas leurs angles")
         l4 = self.bloc(["On ne mesure pas leurs angles", "sur le dessin."], 27, ORANGE_RETENUE)
-        gauche(l4, 0.4, -0.95)
+        gauche(l4, 0.4, -1.2)
         arc = Arc(radius=0.5, start_angle=0, angle=A_CAV, arc_center=cr.D, color=ROUGE_ERREUR, stroke_width=6)
         dr = VMobject(stroke_color=ROUGE_ERREUR, stroke_width=4).set_points_as_corners(
             [cr.D + RIGHT * 0.3, cr.D + RIGHT * 0.3 + UP * 0.3, cr.D + UP * 0.3])
@@ -447,14 +448,17 @@ class VisionRepresentationBase(PaysageVolume6e):
             sc.play(FadeIn(f, scale=0.9), FadeIn(dessin), run_time=0.5)
 
         def apres(sc):
-            l0 = sc.rep_bas(0, ["Face avant et face arrière : face à nous,"], y0=-1.75, pas=0.6)
+            l0 = sc.rep_bas(0, ["Face avant et face arrière :"], fs=28, y0=-1.3, pas=0.55)
             sc.au_mot("La face avant et la face arrière")
             sc.play(FadeIn(l0, shift=UP * 0.08), FadeIn(cr.poly("avant", JUSTE_C, 0.45)),
                     FadeIn(cr.poly("arriere", JUSTE_C, 0.3)), run_time=0.4)
-            l1 = sc.rep_bas(1, ["elles restent deux vrais carrés."], y0=-1.75, pas=0.6)
+            l0b = sc.rep_bas(1, ["face à nous,"], fs=28, y0=-1.3, pas=0.55)
+            sc.au_mot("face à nous")
+            sc.play(FadeIn(l0b, shift=UP * 0.08), run_time=0.3)
+            l1 = sc.rep_bas(2, ["elles restent deux vrais carrés."], fs=28, y0=-1.3, pas=0.55)
             sc.au_mot("elles restent deux vrais carrés")
             sc.play(FadeIn(l1, shift=UP * 0.08), run_time=0.3)
-            l2 = sc.rep_bas(2, [("Les quatre autres sont penchées.", ORANGE_RETENUE)], y0=-1.75, pas=0.6)
+            l2 = sc.rep_bas(3, [("Les quatre autres sont penchées.", ORANGE_RETENUE)], fs=28, y0=-1.3, pas=0.55)
             sc.au_mot("Les quatre autres")
             sc.play(FadeIn(l2, shift=UP * 0.08), *[FadeIn(cr.poly(n, PENCHE_C, 0.3))
                                                    for n in ("dessus", "droite", "gauche", "dessous")],
@@ -465,7 +469,7 @@ class VisionRepresentationBase(PaysageVolume6e):
                             ["Sur le dessin d'un cube", "en perspective cavalière,", "combien de faces sont",
                              "de vrais carrés ?"],
                             [self.choix("6 faces"), self.choix("3 faces"), self.choix("2 faces")], 2,
-                            ["Face avant et face arrière : face à nous,", "elles restent deux vrais carrés.",
+                            ["Face avant et face arrière :", "face à nous,", "elles restent deux vrais carrés.",
                              "Les quatre autres sont penchées."],
                             mot_q="Sur le dessin d'un cube", autres_r=apres, avant_q=avant)
 
@@ -559,7 +563,8 @@ class VisionRepresentationBase(PaysageVolume6e):
         self.au_mot("4 traits en biais")
         self.wait(0.07)
         nb = VGroup(*[muet(Text(str(k + 1), font_size=24, color=BIAIS_C, weight=BOLD)
-                           .move_to(b.get_center() + P(-0.17, 0.17))) for k, b in enumerate(cr.biais)])
+                           .move_to(b.get_center() + (P(0.2, -0.17) if k == 1 else P(-0.17, 0.17))))
+                     for k, b in enumerate(cr.biais)])
         self.play(FadeIn(l1[0], shift=UP * 0.1), LaggedStart(*[Create(b) for b in cr.biais], lag_ratio=0.2),
                   LaggedStart(*[FadeIn(n) for n in nb], lag_ratio=0.2), run_time=0.9)
         self.au_mot("de même longueur")
@@ -597,7 +602,7 @@ class VisionRepresentationBase(PaysageVolume6e):
             ("En perspective cavalière, la face", "avant est en vraie grandeur."),
             ("Les traits en biais sont parallèles", "et de même longueur."),
             ("Les arêtes cachées sont en pointillés.",),
-            ("Le patron déplie le solide à plat.",)], fs=30, x_fig=-4.6, xl=-1.9)
+            ("Le patron déplie le solide à plat.",)], fs=28, x_fig=-4.6, xl=-1.9)
         for m in lignes.get_family():
             m.sans_synchro = True
         hors_audit(lignes)
