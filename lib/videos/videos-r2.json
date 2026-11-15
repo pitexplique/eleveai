@@ -16685,5 +16685,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_comparer&display=simple"
+ },
+ "cm2-contenance-estimer": {
+  "fichier": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer.mp4",
+  "poster": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer.png",
+  "vignette": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer.vignette.webp",
+  "titre": "Une chasse d'eau : 6 mL, 6 L ou 60 L ? — Estimer une contenance — épisode 3 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_estimer&display=simple"
+ },
+ "cm2-contenance-estimer-short": {
+  "fichier": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer-short.mp4",
+  "poster": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer-short-miniature.png",
+  "vignette": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer-short-miniature.vignette.webp",
+  "titre": "Un parfum de 50… litres ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_estimer&display=simple"
  }
 }

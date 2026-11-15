@@ -18,11 +18,72 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from contenance_cm1_commun import *  # noqa: E402,F401,F403
 from contenance_cm1_commun import PaysageContenanceCM1  # noqa: E402,F401
-from aire_cm2_commun import LigneAlignee, aligner_base, coiffe  # noqa: E402,F401
+from aire_cm2_commun import LigneAlignee, aligner_base, coiffe, ligne_de_base  # noqa: E402,F401
 
 MANGUE = "#fbbf24"     # sorbet mangue
 SIROP = "#e11d48"      # sirop de grenadine
 ANANAS = "#fde047"     # jus d'ananas
+
+
+def _glyphes(t):
+    """Les lettres d'un Text (sans les espaces) et leurs glyphes, ou None si le compte diffère."""
+    lettres = [c for c in getattr(t, "text", "") if not c.isspace()]
+    return (lettres, list(t.submobjects)) if lettres and len(lettres) == len(t.submobjects) else None
+
+
+def recaler_morceaux(g):
+    """Une ligne coupée en morceaux (VGroup de Text) : chaque lettre reprend la place qu'elle aurait
+    dans la ligne écrite d'un seul bloc (même ligne d'écriture, même espacement des lettres)."""
+    ms = [m for m in g.submobjects if isinstance(m, Text)]
+    gl = [_glyphes(m) for m in ms]
+    if len(ms) != len(g.submobjects) or any(x is None for x in gl):
+        return aligner_base(g)
+    t = Text(" ".join(getattr(m, "original_text", m.text) for m in ms), font_size=ms[0].font_size, font=ms[0].font)
+    tg = _glyphes(t)
+    if tg is None or len(tg[1]) != sum(len(x[1]) for x in gl):
+        return aligner_base(g)
+    t.scale(sum(x.width for x in ms[0].submobjects) / sum(x.width for x in tg[1][:len(gl[0][1])]))
+    t.shift(ms[0].submobjects[0].get_center() - tg[1][0].get_center())
+    k = 0
+    for lettres, glyphes in gl:
+        for x in glyphes:
+            x.move_to(tg[1][k].get_center())
+            k += 1
+    return g
+
+
+def _base(l):
+    for m in ([l] if isinstance(l, Text) else l.submobjects):
+        b = ligne_de_base(m)
+        if b is not None:
+            return b
+    return l.get_bottom()[1]
+
+
+def _hauteur_x(ph):
+    hs = []
+    for l in ph.submobjects:
+        for m in ([l] if isinstance(l, Text) else l.submobjects):
+            g = _glyphes(m)
+            if g:
+                hs += [x.height for c, x in zip(*g) if c in "acemnorsuvwxz"]
+    hs.sort()
+    return hs[len(hs) // 2] if hs else None
+
+
+def phrase_reguliere(ph, coupees, pas=2.15):
+    """Phrase de réponse : lignes coupées recalées, puis lignes posées à pas régulier sur leur ligne
+    d'écriture (arrange les posait par leurs boîtes : interlignes inégaux selon les jambages)."""
+    for i in coupees:
+        recaler_morceaux(ph.submobjects[i])
+    hx = _hauteur_x(ph)
+    if hx is None:
+        return ph
+    x0, b0 = ph.get_left()[0], _base(ph.submobjects[0])
+    for i, l in enumerate(ph.submobjects):
+        l.shift(UP * (b0 - pas * hx * i - _base(l)))
+        l.shift(RIGHT * (x0 - l.get_left()[0]))
+    return ph
 
 
 def paul(s=1.0):

@@ -94653,6 +94653,162 @@
         "technologie-ia",
         "transports"
       ]
+    },
+    {
+      "id": "cm2-contenance-estimer",
+      "pas_avant": "2027-03-25",
+      "notionId": "contenance",
+      "microId": "contenance_estimer",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer.mp4",
+      "miniature": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer.png",
+      "titre": "Une chasse d'eau : 6 mL, 6 L ou 60 L ? — Estimer une contenance — épisode 3 · Maths CM2",
+      "accroche": "Ibrahim est plombier. Il installe une chasse d'eau, et le client demande combien d'eau part à chaque fois. Ibrahim n'a pas besoin de mesurer : il estime, avec des repères.\n\nDans cette vidéo :\n• des repères : une cuillère 5 mL, un verre 20 cL, une grande bouteille 1,5 L, un seau 10 L\n• la chasse d'eau : 4 grandes bouteilles, environ 6 litres\n• choisir l'unité : millilitre, centilitre ou litre\n• le piège : un nombre seul ne dit rien, regarde l'unité\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un robinet perd un verre de 20 cL par heure : combien de litres en 24 heures ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_estimer&display=simple\n\n🧪 Épisode 3 de la série Contenance d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Estimer une contenance"
+        ],
+        [
+          "00:07",
+          "Ibrahim, plombier"
+        ],
+        [
+          "00:22",
+          "Des repères"
+        ],
+        [
+          "00:39",
+          "La chasse d'eau"
+        ],
+        [
+          "01:00",
+          "Choisir l'unité"
+        ],
+        [
+          "01:15",
+          "Question 1"
+        ],
+        [
+          "01:48",
+          "Le piège"
+        ],
+        [
+          "02:06",
+          "Question 2"
+        ],
+        [
+          "02:39",
+          "À toi de jouer"
+        ],
+        [
+          "02:57",
+          "Correction"
+        ],
+        [
+          "03:13",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "estimer une contenance",
+        "ordre de grandeur",
+        "repères",
+        "litre",
+        "centilitre",
+        "millilitre",
+        "plombier",
+        "contenances",
+        "litre",
+        "centilitre",
+        "millilitre",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:15",
+          "question": "Quelle est la contenance d'un bol de soupe ?",
+          "choix": [
+            "30 cL",
+            "3 mL",
+            "3 L"
+          ],
+          "reponse": 0,
+          "explication": "Un bol, c'est un peu plus qu'un verre de 20 cL : environ 30 cL."
+        },
+        {
+          "t": "02:06",
+          "question": "Combien contient un chauffe-eau ?",
+          "choix": [
+            "2 L",
+            "20 cL",
+            "200 L"
+          ],
+          "reponse": 2,
+          "explication": "Comme 20 seaux de 10 L : environ 200 litres."
+        }
+      ],
+      "centres": [
+        "construction",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "cm2-contenance-estimer-short",
+      "pas_avant": "2027-03-25",
+      "notionId": "contenance",
+      "microId": "contenance_estimer",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-contenance-estimer",
+      "fichier": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer-short.mp4",
+      "miniature": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer-short-miniature.png",
+      "titre": "Un parfum de 50… litres ? #maths #cm2",
+      "accroche": "Ti Margo achète un parfum pour Maman. Sur la boîte, il lit 50. 50 litres ? Il prépare déjà la brouette… mais la vendeuse lui tend une toute petite boîte. 50 quoi ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un arrosoir contient 10… millilitres, centilitres, ou litres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #contenance #cm2",
+      "tags": [
+        "estimer une contenance",
+        "millilitre",
+        "unités",
+        "parfum",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "contenances",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "Le flacon de parfum contient 50… quoi ?",
+          "choix": [
+            "50 mL",
+            "50 L",
+            "50 cL"
+          ],
+          "reponse": 0,
+          "explication": "Un flacon de parfum tient dans la main : 50 mL, c'est 10 cuillères à café."
+        }
+      ],
+      "centres": [
+        "mode",
+        "jeux-defis"
+      ]
     }
   ]
 }
