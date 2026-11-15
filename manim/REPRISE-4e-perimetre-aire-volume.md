@@ -7,9 +7,46 @@ Ouvert le 15/11/2026. 30 micros du coach, plan : `manim/PLAN-perimetre-aire-volu
 - [x] Inventaire des 30 micros (ci-dessous), fait sur les banques 4e et sur
       `manim/manifeste-youtube.json` + `manim/poste2/manifeste-5e.json`.
 - [ ] Inventaire validé par Frédéric (ce qu'on branche en `aussi`, ce qu'on tourne).
-- [ ] Voix du pilote `volume_pyramide` (paysage + short), validées à deux.
-- [ ] Pilote rendu en `-ql`, validé.
-- [ ] Reste de la série.
+- [x] Inventaire VALIDÉ par Frédéric le 15/11 (« Fais la 3e aussi »).
+- [x] Règle neuve : les centres d'intérêt se vérifient par ÂGE (voir plus bas).
+- [x] Inventaire des sujets 13-14 ans : `manim/poste2/SUJETS-13-14-ans.md`
+      (piscine, maison, territoire, poumons, muscles + les 18 centres).
+- [x] Tableau des 28 épisodes + voix du PILOTE : `manim/poste2/VOIX-4e-3e-perimetre-aire-volume.md`.
+- [x] **Pilote `volume_pyramide` rendu en `-ql`** (paysage 4 min 42 + short Manim 65 s).
+- [ ] Pilote validé par Frédéric.
+- [ ] Voix des 27 autres épisodes, puis rendus HD.
+
+## Le PILOTE V2 `volume_pyramide` (15/11) — vidéo COMMUNE 4e + 3e
+
+- Sujet : Awen, monteuse de stands de festival ; la tonnelle 3 × 3, toit pyramidal.
+  Centres `musique`, `sciences` (tranche 12-14 vérifiée).
+- Voix : `manim/voix/4e-volume-pyramide.json` et `-short.json` (Julie, débit −6) ;
+  WAV dans `public/sons/4e-volume-pyramide[-short]/`.
+- Marques : `python manim/scripts/4e/volume_4e_marques.py 4e-volume-pyramide 4e-volume-pyramide-short`
+  (⚠️ ce script importe `convertir` du script 5e avec un `sys.argv` vidé : le 5e traite argv au niveau du module).
+- Commun du lot : `manim/scripts/4e/volume_4e_commun.py` — importe le commun 5e sans le toucher,
+  ajoute `pyramide()`, `cone()`, `sable()`, `awen()`, `Paysage4e`, `Paysage3e`.
+- Paysage : `manim/scripts/4e/4e_volume_pyramide.py`, scène `VolumePyramide4e` (verte).
+  Questions à 01:51 (B) et 02:53 (A). Dry run AUDIT=1 BORDS=1 : 0 AVANCE, 0 RETARD, 0 TARD, 0 BORD ;
+  `verifier-bords-video.py` sur le MP4 : 0.
+- Short : `4e_volume_pyramide_short.py`, scène `ShortVolumePyramide4e`, **en MANIM** (`PausesShort` + `Short6e`),
+  « Trois fois le même sable », question-pause à 14,8 s, réponse C, compteur de 3 s **contrôlé sur le MP4**
+  (planche `manim/poste2/planche-4e-pyramide-short-compteur.png` : 3 → 2 → 1, dans la carte, rien par-dessus).
+- Aperçu (en pause) : `manim/sorties/4e/maths/volume/12-volume-pyramide/apercu.html`,
+  servi par `python -m http.server 3907 --directory manim/sorties`
+  (⚠️ la config `sorties-video` de `.claude/launch.json` est restée « starting » : lancer le serveur à la main).
+
+### Leçons du pilote (à appliquer aux 27 autres)
+1. Un texte n'écrit QUE des mots dits, à la lettre : « trois fois », pas « 3 fois » — sinon
+   `montrer_ligne` ne trouve pas le mot et tout l'écran glisse (4 s de retard sur la finale).
+2. `au_mot` attend la FIN de l'extrait : extraits COURTS finissant au mot à montrer
+   (« Il en faut », pas « Il en faut un de 1 200 »).
+3. Dans un écran de question, la figure monte à y ≈ +0,5 : la phrase de réponse s'écrit à partir de −0,3.
+4. Toute cote posée sur une face colorée prend un cartouche (`sur_fond`), sinon elle est illisible.
+5. Dans le cadre 9:16 (4,5 d'unités), tout texte passe par un `ajuster()` à 3,9 : un titre de
+   24 lettres déborde sans prévenir.
+6. Les deux solides à comparer se posent CÔTE À CÔTE, bases alignées : « même base, même hauteur »
+   doit se voir.
 
 ## Les notions 4e et leurs micros (source : les banques)
 
