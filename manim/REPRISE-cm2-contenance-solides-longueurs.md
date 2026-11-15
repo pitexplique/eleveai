@@ -73,3 +73,10 @@ Notes/outils `S = side-session-notes/local_02c3644d-…/solides/` (⛔ dossier p
 1. 03 : relire `%TEMP%/s2pl_faces/planche*.png` → `bash S/hd.sh faces SolidesFacesCM2 03 faces > S/hd-faces.log` → bords 0 → 4-8 images → `bash S/apres_hd.sh 03 faces solide_face` → commit (+ `solides_faces.py`).
 2. 06 : corriger l'énoncé de Q1 → `bash S/dry.sh defi SolidesDefiCM2` (0 alerte) → `bash S/hd.sh defi SolidesDefiCM2 06 defi > S/hd-defi.log` → bords 0 → images → `bash S/apres_hd.sh 06 defi solide_defi` → commit (+ `solides_defi.py`).
 3. Fin : lignes 03/06 dans `side-session-notes/local_02c3644d-…/rapport-solides.md` (01, 02, 04, 05 déjà) ; cette section ; mémoire `serie-solides-cm2.md` + MEMORY.md ; commit de la reprise (par chemin).
+
+### CONTENANCE CM2 — état au 15/11 ~11 h (session 1 passée la main à 64 %)
+- 02 convertir : ✅ script fini (dry run propre 10:41, planche relue ; tableau de l'écran 02 élargi à larg 1.35 pour les flèches « × 10 » : À RELIRE sur le HD vers 00:35-00:55). Q 01:25 B, 02:20 A. HD lancé par `contenance/chaine.sh contenance_convertir ContenanceConvertirCM2 02 convertir` (tâche de fond de la session 1 : attend le verrou HD + 2,5 Go ; log `contenance/hd-convertir.log`, puis bords). Si le mp4 `manim/sorties/cm2/maths/contenance/02-convertir/eleveai-maths-cm2-contenance-convertir.mp4` n'existe pas et qu'aucun process ne tourne : relancer cette commande.
+- 01 comparer : sous-agent de la session 1 en train de relire sa planche après corrections (rapport `contenance/rapport-paysage-comparer.md`, mis à jour à sa fin). Q 01:10 A, 02:00 C (à reconfirmer dans le dernier dry log).
+- 03 estimer : sous-agent de la session 1 lancé ~10 h 45 (script `contenance_estimer.py` écrit, chaîne -ql en cours ; rapport `contenance/rapport-paysage-estimer.md` à sa fin).
+- 04 defi : ⏳ pas commencé (sous-agent avec `CONSIGNE-paysages-contenance-cm2.md`).
+- Shorts : aucun écrit. `CONSIGNE-shorts-contenance-cm2.md` contient les 2 consignes de Frédéric du 15/11 sur le COMPTEUR / la barre du compte à rebours (socle corrigé 876c2d19) : la vérifier à l'image avant chaque `film`.

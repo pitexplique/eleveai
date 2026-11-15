@@ -56,7 +56,7 @@ def virgule(t, i=0, couleur=ORANGE_RETENUE, fs=40):
     """La virgule posée en bas, sur le trait à droite de la case i du tableau (après les litres)."""
     c = t.cases[i]
     return hors_audit(Text(",", font_size=fs, color=couleur, weight=BOLD)).move_to(
-        P(c.get_right()[0], c.get_bottom()[1] + 0.2))
+        P(c.get_right()[0] - 0.1, c.get_bottom()[1] + 0.2))
 
 
 def fleches_x10(t, s="× 10", couleur=ORANGE_RETENUE, fs=24, vers_gauche=False):
@@ -85,6 +85,14 @@ class ContenanceConvertirCM2(PaysageContenanceCM2):
     nom_voix = "cm2-contenance-convertir"
     fichier_marques = "contenance_convertir_marques.json"
     ceinture = "verte"
+
+    def pause_defi(self, y=-1.4, marge=2.0, xl=0.4):
+        """« Mets pause, et cherche ! » en 34, entier, dans la colonne du défi, au-dessus de Ti-Margo
+        (celui de la base était réduit par la règle Ti-Margo)."""
+        self.au_mot("Mets pause")
+        p = self.col(self.t("Mets pause, et cherche !", 34, ORANGE_RETENUE), y, xl)
+        self.play(Write(p), run_time=0.8)
+        self.attendre_voix(marge=marge)
 
     # ── 00 : page de garde ──────────────────────────────────────────────────
     def page_de_garde(self):
@@ -148,8 +156,8 @@ class ContenanceConvertirCM2(PaysageContenanceCM2):
     # ── 02 : le tableau des contenances (× 10 d'une colonne à la suivante) ──
     def ecran_tableau(self):
         self.ecran("02-tableau")
-        XL = 0.3
-        tab = tableau_unites(larg=1.1, fs=32).move_to(P(-3.6, 0.5))
+        XL = -0.5
+        tab = tableau_unites(larg=1.35, fs=32).move_to(P(-3.75, 0.5))
         self.au_mot("Voici le tableau")
         l0 = self.t("Le tableau des contenances", 36, JAUNE_TITRE)
         self.col(l0, 2.6, XL)
@@ -169,7 +177,7 @@ class ContenanceConvertirCM2(PaysageContenanceCM2):
         self.au_mot("par 10")
         self.play(FadeIn(l1b[1], scale=1.2), LaggedStart(*[FadeIn(f, shift=RIGHT * 0.1) for f in fl], lag_ratio=0.3),
                   run_time=0.25)
-        bt = recipient("bouteille", 1.2, 0.6, 0.85, EAU).move_to(P(-3.6, -1.75))
+        bt = recipient("bouteille", 1.2, 0.6, 0.85, EAU).move_to(P(-3.75, -1.75))
         l2 = self.ligne([("1 L", BLEU_D), ("= 10 dL", VERT_OK)], 42, buff=0.25)
         self.col(l2, 0.05, XL)
         self.au_mot("10. 1 litre")
@@ -436,9 +444,9 @@ class ContenanceConvertirCM2(PaysageContenanceCM2):
         self.play(FadeIn(l1[1], shift=UP * 0.1), FadeIn(contenance(bo, "1 L", 30)), run_time=0.25)
         self.au_mot("Combien de millilitres")
         q = self.bloc(["Combien de mL reste-t-il", "de place dans le bocal ?"], 36, JAUNE_TITRE)
-        self.col(q, -0.4, XL)
+        self.col(q, -0.15, XL)
         self.play(FadeIn(q, shift=UP * 0.1), Wiggle(bo), run_time=0.5)
-        self.pause_defi(y=-1.75)
+        self.pause_defi()
 
     def ecran_correction(self):
         self.ecran("08b-correction", 0.65)
@@ -482,7 +490,7 @@ class ContenanceConvertirCM2(PaysageContenanceCM2):
         self.play(FadeIn(l4[1], shift=UP * 0.1), run_time=0.3)
         res = self.gros("250 mL de place", fs=42)
         hors_audit(res[1])  # 250 vient d'être dit (ligne du dessus)
-        res.move_to(P(-3.3, -1.75))
+        res.move_to(P(-3.3, -2.15))
         self.au_mot("de place")
         self.play(FadeIn(res, scale=1.2), Indicate(vide, color=VERT_OK, scale_factor=1.05), run_time=0.5)
         self.attendre_voix()

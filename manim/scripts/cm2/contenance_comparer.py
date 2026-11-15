@@ -113,7 +113,7 @@ class ContenanceComparerCM2(PaysageContenanceCM2):
         self.au_mot("un de 240 centilitres")
         eb = contenance(b, "240 cL")
         self.play(FadeIn(b, shift=UP * 0.2), FadeIn(l2, shift=UP * 0.1), FadeIn(eb), run_time=0.4)
-        l3 = self.bloc(["Pour la fête du quartier :", "servir le plus grand."], 32)
+        l3 = self.bloc(["Pour la fête du quartier :", "servir le plus grand."], 30)
         l3.next_to(l2, DOWN, buff=0.45).align_to(l0, LEFT)
         self.au_mot("fête du quartier")
         self.play(FadeIn(l3[0], shift=UP * 0.1), run_time=0.3)
@@ -270,7 +270,7 @@ class ContenanceComparerCM2(PaysageContenanceCM2):
     def figure_q1(self):
         bo = bouteille(150, EAU, 0.011, 0.8)
         go = recipient("gourde", 0.011 * 120, 0.9, 0.9, "#a78bfa")
-        g = rangee_recipients([bo, go], 0.8).move_to(P(-3.8, 1.55))
+        g = rangee_recipients([bo, go], 0.8).move_to(P(-3.8, 2.0))
         ets = VGroup(contenance(bo, "1,5 L", 26), contenance(go, "1200 mL", 26))
         return VGroup(g, ets)
 
@@ -285,15 +285,16 @@ class ContenanceComparerCM2(PaysageContenanceCM2):
         self.question_gauche("05-question", "05b-reponse",
                              ["Qu'est-ce qui contient le plus :", "une bouteille de 1,5 L,", "ou une gourde de 1200 mL ?"],
                              [self.choix("la bouteille"), self.choix("la gourde"), self.choix("c'est pareil")], 0,
-                             ["1,5 L = 1500 mL.", "1500 est plus grand que 1200 :", "la bouteille contient le plus."],
-                             -0.75, couper={1: ("1500", "est plus grand", "que 1200 :")},
+                             ["1,5 L = 1500 mL.", "1500 est plus grand", "que 1200 :", "la bouteille",
+                              "contient le plus."],
+                             0.4, couper={1: ("1500", "est plus grand")},
                              mot_q="Qu'est-ce qui contient", autres_q=autres_q)
 
     # ── 06 : le piège (240 > 2,5, mais cL contre L) ─────────────────────────
     def ecran_piege(self):
         self.ecran("06-piege")
         self.au_mot("Attention")
-        XP = -0.2
+        XP = -0.6
         tit = self.t("Attention au piège !", 46, ROUGE_ERREUR)
         gauche(tit, -6.2, 3.05)
         self.play(Write(tit), run_time=0.35)
@@ -327,7 +328,7 @@ class ContenanceComparerCM2(PaysageContenanceCM2):
         l3 = self.bloc(["Mets toujours la même", "unité avant de comparer."], 34, JAUNE_TITRE)
         self.col(l3, -0.95, XP)
         self.play(FadeIn(l3[0], shift=UP * 0.1), run_time=0.3)
-        self.au_mot("avant de comparer")
+        self.au_mot("unité avant")
         self.play(FadeIn(l3[1], shift=UP * 0.1), run_time=0.3)
         self.insister(l3, 1.06, 0.25, about=l3.get_left())
         self.attendre_voix()
@@ -337,7 +338,7 @@ class ContenanceComparerCM2(PaysageContenanceCM2):
         k = 0.026
         ps = [recipient("pot", k * 50, 0.95, 0.9, LAIT), recipient("pot", k * 45, 0.95, 0.9, FRAISE),
               recipient("pot", k * 60, 0.95, 0.9, "#a3e635")]
-        g = rangee_recipients(ps, 0.55).move_to(P(-3.8, 1.6))
+        g = rangee_recipients(ps, 0.55).move_to(P(-3.8, 2.05))
         ets = VGroup(*[contenance(p, s, 26) for p, s in zip(ps, ["0,5 L", "45 cL", "600 mL"])])
         return VGroup(g, ets)
 
@@ -355,10 +356,9 @@ class ContenanceComparerCM2(PaysageContenanceCM2):
         self.question_gauche("07-question", "07b-reponse",
                              ["Trois pots :", "0,5 L, 45 cL et 600 mL.", "Lequel est le plus petit ?"],
                              [self.choix("0,5 L"), self.choix("600 mL"), self.choix("45 cL")], 2,
-                             ["Tout en mL : 0,5 L = 500 mL,", "45 cL = 450 mL, et 600 mL.",
+                             ["Tout en mL :", "0,5 L = 500 mL,", "45 cL = 450 mL,", "et 600 mL.",
                               "Le plus petit : 450 mL,", "le pot de 45 cL."],
-                             -0.75, couper={0: ("Tout en mL :", "0,5 L = 500 mL,"),
-                                            1: ("45 cL = 450 mL,", "et 600 mL.")},
+                             0.45,
                              mot_q="trois pots", autres_q=autres_q, autres_r=apres)
 
     # ── 08 : le défi (ranger trois bidons de lait) ──────────────────────────
@@ -372,7 +372,7 @@ class ContenanceComparerCM2(PaysageContenanceCM2):
         tit = self.t("À toi de jouer !", 50, JAUNE_TITRE).move_to(P(0, 3.15))
         self.play(Write(tit), run_time=0.4)
         bi = self.bidons()
-        rangee_recipients(bi, 0.55).move_to(P(-3.5, 0.55))
+        rangee_recipients(bi, 0.95).move_to(P(-3.6, 0.55))
         XP = 0.6
         l0 = self.bloc(["Range ces trois", "bidons de lait"], 34)
         self.col(l0, 2.05, XP)
@@ -388,7 +388,7 @@ class ContenanceComparerCM2(PaysageContenanceCM2):
         self.play(FadeIn(l1[1], shift=UP * 0.1), run_time=0.2)
         for k, (mot, s) in enumerate([("grand : 1,2", "1,2 L"), ("litre, 115", "115 cL"), ("et 1250", "1250 mL")]):
             self.au_mot(mot)
-            self.play(FadeIn(bi[k], shift=UP * 0.2), FadeIn(contenance(bi[k], s, 28, audit=True)), run_time=0.3)
+            self.play(FadeIn(bi[k], shift=UP * 0.2), FadeIn(contenance(bi[k], s, 26, audit=True)), run_time=0.3)
         self.pause_defi(y=-0.75)
 
     def ecran_correction(self):
@@ -396,8 +396,8 @@ class ContenanceComparerCM2(PaysageContenanceCM2):
         tit = self.t("Correction", 50, JAUNE_TITRE).move_to(P(0, 3.15))
         self.play(Write(tit), run_time=0.35)
         bi = self.bidons()
-        rangee_recipients(bi, 0.55).move_to(P(-3.5, 0.75))
-        ets = [contenance(r, s, 28) for r, s in zip(bi, ["1,2 L", "115 cL", "1250 mL"])]
+        rangee_recipients(bi, 0.95).move_to(P(-3.6, 0.75))
+        ets = [contenance(r, s, 26) for r, s in zip(bi, ["1,2 L", "115 cL", "1250 mL"])]
         self.add(bi, *ets)
         XP = 0.6
         self.au_mot("Tout en centilitres")
@@ -410,7 +410,7 @@ class ContenanceComparerCM2(PaysageContenanceCM2):
         self.play(FadeIn(l1[0], shift=UP * 0.1), Indicate(ets[0]), run_time=0.25)
         self.au_mot("litre, 120")
         self.play(FadeIn(l1[1], shift=UP * 0.1),
-                  Transform(ets[0], hors_audit(Text("120 cL", font_size=28, color=VERT_OK, weight=BOLD)
+                  Transform(ets[0], hors_audit(Text("120 cL", font_size=26, color=VERT_OK, weight=BOLD)
                                                .move_to(ets[0]))), run_time=0.35)
         l2 = self.ligne([("1250 mL", BLEU_D), ("= 125 cL", VERT_OK)], 38, buff=0.25)
         self.col(l2, 0.85, XP)
@@ -418,9 +418,9 @@ class ContenanceComparerCM2(PaysageContenanceCM2):
         self.play(FadeIn(l2[0], shift=UP * 0.1), Indicate(ets[2]), run_time=0.25)
         self.au_mot("millilitres, 125")
         self.play(FadeIn(l2[1], shift=UP * 0.1),
-                  Transform(ets[2], hors_audit(Text("125 cL", font_size=28, color=VERT_OK, weight=BOLD)
+                  Transform(ets[2], hors_audit(Text("125 cL", font_size=26, color=VERT_OK, weight=BOLD)
                                                .move_to(ets[2]))), run_time=0.35)
-        l3 = self.ligne([("On range :", WHITE), ("115, 120, 125", VERT_OK)], 36, buff=0.25)
+        l3 = self.ligne([("On range :", WHITE), ("115, 120, 125", VERT_OK)], 34, buff=0.22)
         self.col(l3, 0.1, XP)
         self.au_mot("On range")
         self.play(FadeIn(l3[0], shift=UP * 0.1), run_time=0.2)
