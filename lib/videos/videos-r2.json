@@ -2846,6 +2846,168 @@
   "short": false,
   "youtube": null
  },
+ "5e-aire-composer": {
+  "fichier": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer.mp4",
+  "poster": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer.png",
+  "vignette": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer.vignette.webp",
+  "titre": "Un toit en L : combien de m² de panneaux solaires ? — L'aire d'une figure composée — épisode 4 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_composer&display=simple"
+ },
+ "5e-aire-composer-short": {
+  "fichier": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer-short.mp4",
+  "poster": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer-short-miniature.png",
+  "vignette": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer-short-miniature.vignette.webp",
+  "titre": "La pancarte maison : quelle aire ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_composer&display=simple"
+ },
+ "5e-aire-comprendre": {
+  "fichier": "5e/maths/aire/01-comprendre/eleveai-maths-5e-aire-comprendre.mp4",
+  "poster": "5e/maths/aire/01-comprendre/eleveai-maths-5e-aire-comprendre.png",
+  "vignette": "5e/maths/aire/01-comprendre/eleveai-maths-5e-aire-comprendre.vignette.webp",
+  "titre": "Un mur de 4 m sur 3 m : combien de m² d'enduit ? — Comprendre l'aire — épisode 1 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_comprendre&display=simple"
+ },
+ "5e-aire-comprendre-short": {
+  "fichier": "5e/maths/aire/01-comprendre/eleveai-maths-5e-aire-comprendre-short.mp4",
+  "poster": "5e/maths/aire/01-comprendre/eleveai-maths-5e-aire-comprendre-short-miniature.png",
+  "vignette": "5e/maths/aire/01-comprendre/eleveai-maths-5e-aire-comprendre-short-miniature.vignette.webp",
+  "titre": "Pizza carrée ou rectangle : laquelle est la plus grande ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_comprendre&display=simple"
+ },
+ "5e-aire-defi": {
+  "fichier": "5e/maths/aire/05-defi/eleveai-maths-5e-aire-defi.mp4",
+  "poster": "5e/maths/aire/05-defi/eleveai-maths-5e-aire-defi.png",
+  "vignette": "5e/maths/aire/05-defi/eleveai-maths-5e-aire-defi.vignette.webp",
+  "titre": "24 dm² et 8 dm de base : quelle hauteur ? — Défis sur les aires — épisode 5 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_defi&display=simple"
+ },
+ "5e-aire-defi-short": {
+  "fichier": "5e/maths/aire/05-defi/eleveai-maths-5e-aire-defi-short.mp4",
+  "poster": "5e/maths/aire/05-defi/eleveai-maths-5e-aire-defi-short-miniature.png",
+  "vignette": "5e/maths/aire/05-defi/eleveai-maths-5e-aire-defi-short-miniature.vignette.webp",
+  "titre": "12 m² et 4 m de long : mon tapis rentre-t-il ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_defi&display=simple"
+ },
+ "5e-aire-parallelogramme": {
+  "fichier": "5e/maths/aire/03-parallelogramme/eleveai-maths-5e-aire-parallelogramme.mp4",
+  "poster": "5e/maths/aire/03-parallelogramme/eleveai-maths-5e-aire-parallelogramme.png",
+  "vignette": "5e/maths/aire/03-parallelogramme/eleveai-maths-5e-aire-parallelogramme.vignette.webp",
+  "titre": "Une forme penchée : comment mesurer son aire ? — L'aire du parallélogramme — épisode 3 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_parallelogramme&display=simple"
+ },
+ "5e-aire-parallelogramme-short": {
+  "fichier": "5e/maths/aire/03-parallelogramme/eleveai-maths-5e-aire-parallelogramme-short.mp4",
+  "poster": "5e/maths/aire/03-parallelogramme/eleveai-maths-5e-aire-parallelogramme-short-miniature.png",
+  "vignette": "5e/maths/aire/03-parallelogramme/eleveai-maths-5e-aire-parallelogramme-short-miniature.vignette.webp",
+  "titre": "Un coup de ciseaux change-t-il l'aire ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_parallelogramme&display=simple"
+ },
+ "5e-aire-triangle": {
+  "fichier": "5e/maths/aire/02-triangle/eleveai-maths-5e-aire-triangle.mp4",
+  "poster": "5e/maths/aire/02-triangle/eleveai-maths-5e-aire-triangle.png",
+  "vignette": "5e/maths/aire/02-triangle/eleveai-maths-5e-aire-triangle.vignette.webp",
+  "titre": "Un coin de champ en triangle : combien de m² à semer ? — L'aire du triangle — épisode 2 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_triangle&display=simple"
+ },
+ "5e-aire-triangle-short": {
+  "fichier": "5e/maths/aire/02-triangle/eleveai-maths-5e-aire-triangle-short.mp4",
+  "poster": "5e/maths/aire/02-triangle/eleveai-maths-5e-aire-triangle-short-miniature.png",
+  "vignette": "5e/maths/aire/02-triangle/eleveai-maths-5e-aire-triangle-short-miniature.vignette.webp",
+  "titre": "J'achète la peinture pour 12 m²… erreur ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_triangle&display=simple"
+ },
+ "5e-conversion-avant-calcul": {
+  "fichier": "5e/maths/conversion/03-avant-calcul/eleveai-maths-5e-conversion-avant-calcul.mp4",
+  "poster": "5e/maths/conversion/03-avant-calcul/eleveai-maths-5e-conversion-avant-calcul.png",
+  "vignette": "5e/maths/conversion/03-avant-calcul/eleveai-maths-5e-conversion-avant-calcul.vignette.webp",
+  "titre": "Peut-on additionner des litres et des centilitres ? — Convertir avant de calculer — épisode 3 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=grandeur_conversion&microId=conversion_avant_calcul&display=simple"
+ },
+ "5e-conversion-avant-calcul-short": {
+  "fichier": "5e/maths/conversion/03-avant-calcul/eleveai-maths-5e-conversion-avant-calcul-short.mp4",
+  "poster": "5e/maths/conversion/03-avant-calcul/eleveai-maths-5e-conversion-avant-calcul-short-miniature.png",
+  "vignette": "5e/maths/conversion/03-avant-calcul/eleveai-maths-5e-conversion-avant-calcul-short-miniature.vignette.webp",
+  "titre": "1 mètre moins 30 centimètres : moins 29 ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=grandeur_conversion&microId=conversion_avant_calcul&display=simple"
+ },
+ "5e-conversion-coherence": {
+  "fichier": "5e/maths/conversion/04-coherence/eleveai-maths-5e-conversion-coherence.mp4",
+  "poster": "5e/maths/conversion/04-coherence/eleveai-maths-5e-conversion-coherence.png",
+  "vignette": "5e/maths/conversion/04-coherence/eleveai-maths-5e-conversion-coherence.vignette.webp",
+  "titre": "Un paquet de riz de 24 grammes ? — Contrôler une conversion — épisode 4 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=grandeur_conversion&microId=conversion_coherence&display=simple"
+ },
+ "5e-conversion-coherence-short": {
+  "fichier": "5e/maths/conversion/04-coherence/eleveai-maths-5e-conversion-coherence-short.mp4",
+  "poster": "5e/maths/conversion/04-coherence/eleveai-maths-5e-conversion-coherence-short-miniature.png",
+  "vignette": "5e/maths/conversion/04-coherence/eleveai-maths-5e-conversion-coherence-short-miniature.vignette.webp",
+  "titre": "J'ai commandé 1,5 litre de jus… on m'apporte un bouchon ! #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=grandeur_conversion&microId=conversion_coherence&display=simple"
+ },
+ "5e-conversion-decimal": {
+  "fichier": "5e/maths/conversion/01-decimal/eleveai-maths-5e-conversion-decimal.mp4",
+  "poster": "5e/maths/conversion/01-decimal/eleveai-maths-5e-conversion-decimal.png",
+  "vignette": "5e/maths/conversion/01-decimal/eleveai-maths-5e-conversion-decimal.vignette.webp",
+  "titre": "0,5 g sur l'ordonnance, une balance en mg : que lire ? — Convertir une longueur, une masse, une contenance — épisode 1 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=grandeur_conversion&microId=conversion_decimal&display=simple"
+ },
+ "5e-conversion-decimal-short": {
+  "fichier": "5e/maths/conversion/01-decimal/eleveai-maths-5e-conversion-decimal-short.mp4",
+  "poster": "5e/maths/conversion/01-decimal/eleveai-maths-5e-conversion-decimal-short-miniature.png",
+  "vignette": "5e/maths/conversion/01-decimal/eleveai-maths-5e-conversion-decimal-short-miniature.vignette.webp",
+  "titre": "1,5 kilo de farine : je mets 15 grammes ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=grandeur_conversion&microId=conversion_decimal&display=simple"
+ },
+ "5e-conversion-duree": {
+  "fichier": "5e/maths/conversion/02-duree/eleveai-maths-5e-conversion-duree.mp4",
+  "poster": "5e/maths/conversion/02-duree/eleveai-maths-5e-conversion-duree.png",
+  "vignette": "5e/maths/conversion/02-duree/eleveai-maths-5e-conversion-duree.vignette.webp",
+  "titre": "Pourquoi une heure ne fait pas 100 minutes ? — Convertir une durée — épisode 2 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=grandeur_conversion&microId=conversion_duree&display=simple"
+ },
+ "5e-conversion-duree-short": {
+  "fichier": "5e/maths/conversion/02-duree/eleveai-maths-5e-conversion-duree-short.mp4",
+  "poster": "5e/maths/conversion/02-duree/eleveai-maths-5e-conversion-duree-short-miniature.png",
+  "vignette": "5e/maths/conversion/02-duree/eleveai-maths-5e-conversion-duree-short-miniature.vignette.webp",
+  "titre": "Un film de 100 minutes : je finis à 21 h ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=grandeur_conversion&microId=conversion_duree&display=simple"
+ },
  "5e-expression-comprendre": {
   "fichier": "5e/maths/expression-litterale/01-comprendre/eleveai-maths-5e-expression-comprendre.mp4",
   "poster": "5e/maths/expression-litterale/01-comprendre/eleveai-maths-5e-expression-comprendre.png",
@@ -3133,6 +3295,24 @@
   "short": true,
   "youtube": "YaeUd2bWUJo",
   "coach": "/coach/serie?classe=5e&matiere=maths&notion=litteral_calcul&microId=litteral_traduire&display=simple"
+ },
+ "5e-patron-prisme-cylindre": {
+  "fichier": "5e/maths/volume/01-patron-prisme-cylindre/eleveai-maths-5e-patron-prisme-cylindre.mp4",
+  "poster": "5e/maths/volume/01-patron-prisme-cylindre/eleveai-maths-5e-patron-prisme-cylindre.png",
+  "vignette": "5e/maths/volume/01-patron-prisme-cylindre/eleveai-maths-5e-patron-prisme-cylindre.vignette.webp",
+  "titre": "Que voit-on quand on déplie une boîte ronde ? — Le patron d'un prisme et d'un cylindre — épisode 1 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=patron_prisme_cylindre&display=simple"
+ },
+ "5e-patron-prisme-cylindre-short": {
+  "fichier": "5e/maths/volume/01-patron-prisme-cylindre/eleveai-maths-5e-patron-prisme-cylindre-short.mp4",
+  "poster": "5e/maths/volume/01-patron-prisme-cylindre/eleveai-maths-5e-patron-prisme-cylindre-short-miniature.png",
+  "vignette": "5e/maths/volume/01-patron-prisme-cylindre/eleveai-maths-5e-patron-prisme-cylindre-short-miniature.vignette.webp",
+  "titre": "Mon étiquette ne fait pas le tour de la boîte ! #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=patron_prisme_cylindre&display=simple"
  },
  "5e-proba-calculer": {
   "fichier": "5e/maths/probabilites/04-calculer/eleveai-maths-5e-proba-calculer.mp4",
@@ -3556,6 +3736,132 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_representer&display=simple"
+ },
+ "5e-volume-assemblage": {
+  "fichier": "5e/maths/volume/06-volume-assemblage/eleveai-maths-5e-volume-assemblage.mp4",
+  "poster": "5e/maths/volume/06-volume-assemblage/eleveai-maths-5e-volume-assemblage.png",
+  "vignette": "5e/maths/volume/06-volume-assemblage/eleveai-maths-5e-volume-assemblage.vignette.webp",
+  "titre": "Un gâteau à étages : quel volume de pâte ? — Le volume d'un assemblage — épisode 6 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_assemblage&display=simple"
+ },
+ "5e-volume-assemblage-short": {
+  "fichier": "5e/maths/volume/06-volume-assemblage/eleveai-maths-5e-volume-assemblage-short.mp4",
+  "poster": "5e/maths/volume/06-volume-assemblage/eleveai-maths-5e-volume-assemblage-short-miniature.png",
+  "vignette": "5e/maths/volume/06-volume-assemblage/eleveai-maths-5e-volume-assemblage-short-miniature.vignette.webp",
+  "titre": "Mon frère calcule le sable du château… #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_assemblage&display=simple"
+ },
+ "5e-volume-comprendre": {
+  "fichier": "5e/maths/volume/02-volume-comprendre/eleveai-maths-5e-volume-comprendre.mp4",
+  "poster": "5e/maths/volume/02-volume-comprendre/eleveai-maths-5e-volume-comprendre.png",
+  "vignette": "5e/maths/volume/02-volume-comprendre/eleveai-maths-5e-volume-comprendre.vignette.webp",
+  "titre": "Combien de caisses dans le camion ? — Comprendre le volume — épisode 2 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_comprendre&display=simple"
+ },
+ "5e-volume-comprendre-short": {
+  "fichier": "5e/maths/volume/02-volume-comprendre/eleveai-maths-5e-volume-comprendre-short.mp4",
+  "poster": "5e/maths/volume/02-volume-comprendre/eleveai-maths-5e-volume-comprendre-short-miniature.png",
+  "vignette": "5e/maths/volume/02-volume-comprendre/eleveai-maths-5e-volume-comprendre-short-miniature.vignette.webp",
+  "titre": "Combien de boîtes dans ma valise ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_comprendre&display=simple"
+ },
+ "5e-volume-cylindre": {
+  "fichier": "5e/maths/volume/05-volume-cylindre/eleveai-maths-5e-volume-cylindre.mp4",
+  "poster": "5e/maths/volume/05-volume-cylindre/eleveai-maths-5e-volume-cylindre.png",
+  "vignette": "5e/maths/volume/05-volume-cylindre/eleveai-maths-5e-volume-cylindre.vignette.webp",
+  "titre": "Combien d'eau dans un réservoir rond ? — Le volume du cylindre — épisode 5 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_cylindre&display=simple"
+ },
+ "5e-volume-cylindre-short": {
+  "fichier": "5e/maths/volume/05-volume-cylindre/eleveai-maths-5e-volume-cylindre-short.mp4",
+  "poster": "5e/maths/volume/05-volume-cylindre/eleveai-maths-5e-volume-cylindre-short-miniature.png",
+  "vignette": "5e/maths/volume/05-volume-cylindre/eleveai-maths-5e-volume-cylindre-short-miniature.vignette.webp",
+  "titre": "Ma canette contient-elle plus de 200 cm³ ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_cylindre&display=simple"
+ },
+ "5e-volume-defi": {
+  "fichier": "5e/maths/volume/08-volume-defi/eleveai-maths-5e-volume-defi.mp4",
+  "poster": "5e/maths/volume/08-volume-defi/eleveai-maths-5e-volume-defi.png",
+  "vignette": "5e/maths/volume/08-volume-defi/eleveai-maths-5e-volume-defi.vignette.webp",
+  "titre": "Combien de jours d'arrosage dans la cuve ? — Défis sur les volumes — épisode 8 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_defi&display=simple"
+ },
+ "5e-volume-defi-short": {
+  "fichier": "5e/maths/volume/08-volume-defi/eleveai-maths-5e-volume-defi-short.mp4",
+  "poster": "5e/maths/volume/08-volume-defi/eleveai-maths-5e-volume-defi-short-miniature.png",
+  "vignette": "5e/maths/volume/08-volume-defi/eleveai-maths-5e-volume-defi-short-miniature.vignette.webp",
+  "titre": "Mon bidon remplira-t-il l'arrosoir ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_defi&display=simple"
+ },
+ "5e-volume-pave": {
+  "fichier": "5e/maths/volume/03-volume-pave/eleveai-maths-5e-volume-pave.mp4",
+  "poster": "5e/maths/volume/03-volume-pave/eleveai-maths-5e-volume-pave.png",
+  "vignette": "5e/maths/volume/03-volume-pave/eleveai-maths-5e-volume-pave.vignette.webp",
+  "titre": "Quel climatiseur pour cette pièce ? — Le volume du pavé droit — épisode 3 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_pave&display=simple"
+ },
+ "5e-volume-pave-short": {
+  "fichier": "5e/maths/volume/03-volume-pave/eleveai-maths-5e-volume-pave-short.mp4",
+  "poster": "5e/maths/volume/03-volume-pave/eleveai-maths-5e-volume-pave-short-miniature.png",
+  "vignette": "5e/maths/volume/03-volume-pave/eleveai-maths-5e-volume-pave-short-miniature.vignette.webp",
+  "titre": "Mon aquarium contient-il 12 litres ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_pave&display=simple"
+ },
+ "5e-volume-prisme": {
+  "fichier": "5e/maths/volume/04-volume-prisme/eleveai-maths-5e-volume-prisme.mp4",
+  "poster": "5e/maths/volume/04-volume-prisme/eleveai-maths-5e-volume-prisme.png",
+  "vignette": "5e/maths/volume/04-volume-prisme/eleveai-maths-5e-volume-prisme.vignette.webp",
+  "titre": "Combien d'air dans une tente ? — Le volume du prisme droit — épisode 4 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_prisme&display=simple"
+ },
+ "5e-volume-prisme-short": {
+  "fichier": "5e/maths/volume/04-volume-prisme/eleveai-maths-5e-volume-prisme-short.mp4",
+  "poster": "5e/maths/volume/04-volume-prisme/eleveai-maths-5e-volume-prisme-short-miniature.png",
+  "vignette": "5e/maths/volume/04-volume-prisme/eleveai-maths-5e-volume-prisme-short-miniature.vignette.webp",
+  "titre": "Combien de coups de pompe pour ma tente ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_prisme&display=simple"
+ },
+ "5e-volume-unite": {
+  "fichier": "5e/maths/volume/07-volume-unite/eleveai-maths-5e-volume-unite.mp4",
+  "poster": "5e/maths/volume/07-volume-unite/eleveai-maths-5e-volume-unite.png",
+  "vignette": "5e/maths/volume/07-volume-unite/eleveai-maths-5e-volume-unite.vignette.webp",
+  "titre": "Combien de litres dans un mètre cube ? — Les unités de volume — épisode 7 · Maths 5e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_unite&display=simple"
+ },
+ "5e-volume-unite-short": {
+  "fichier": "5e/maths/volume/07-volume-unite/eleveai-maths-5e-volume-unite-short.mp4",
+  "poster": "5e/maths/volume/07-volume-unite/eleveai-maths-5e-volume-unite-short-miniature.png",
+  "vignette": "5e/maths/volume/07-volume-unite/eleveai-maths-5e-volume-unite-short-miniature.vignette.webp",
+  "titre": "1 litre dans une boîte de 10 cm : ça déborde ? #maths #5e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_unite&display=simple"
  },
  "6e-aire-comparer": {
   "fichier": "6e/maths/aire/02-comparer/eleveai-maths-6e-aire-comparer.mp4",
@@ -11652,6 +11958,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=suites&microId=suite_evolution&display=simple"
  },
+ "premiere-spe-suite-exp-geo": {
+  "fichier": "premiere-spe/maths/suites/40-exp-geo/eleveai-maths-premiere-spe-suite-exp-geo.mp4",
+  "poster": "premiere-spe/maths/suites/40-exp-geo/eleveai-maths-premiere-spe-suite-exp-geo.png",
+  "vignette": "premiere-spe/maths/suites/40-exp-geo/eleveai-maths-premiere-spe-suite-exp-geo.vignette.webp",
+  "titre": "400 mg dans le sang : de combien le médicament baisse-t-il chaque heure ? — L'exponentielle cache une suite géométrique — épisode 40 · Maths 1re spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=exponentielle&microId=exp_suite_geo&display=simple"
+ },
+ "premiere-spe-suite-exp-geo-short": {
+  "fichier": "premiere-spe/maths/suites/40-exp-geo/eleveai-maths-premiere-spe-suite-exp-geo-short.mp4",
+  "poster": "premiere-spe/maths/suites/40-exp-geo/eleveai-maths-premiere-spe-suite-exp-geo-short.png",
+  "vignette": "premiere-spe/maths/suites/40-exp-geo/eleveai-maths-premiere-spe-suite-exp-geo-short.vignette.webp",
+  "titre": "Le son d'une guitare : il perd combien par seconde ? 🧪 — 1re spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere-spe&matiere=maths&notion=exponentielle&microId=exp_suite_geo&display=simple"
+ },
  "premiere-spe-suite-limite": {
   "fichier": "premiere-spe/maths/suites/26-limite/eleveai-maths-premiere-spe-suite-limite.mp4",
   "poster": "premiere-spe/maths/suites/26-limite/eleveai-maths-premiere-spe-suite-limite.png",
@@ -11939,6 +12263,24 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=premiere&matiere=maths&notion=lin_suite_terme_general&microId=lin_suite_variation&display=simple"
+ },
+ "premiere-suite-expo-prolonger": {
+  "fichier": "premiere/maths/suites/39-expo-prolonger/eleveai-maths-premiere-suite-expo-prolonger.mp4",
+  "poster": "premiere/maths/suites/39-expo-prolonger/eleveai-maths-premiere-suite-expo-prolonger.png",
+  "vignette": "premiere/maths/suites/39-expo-prolonger/eleveai-maths-premiere-suite-expo-prolonger.vignette.webp",
+  "titre": "Un os vieux de 8 595 ans : combien reste-t-il de carbone 14 ? — Prolonger une suite géométrique par la fonction exponentielle — épisode 39 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_fonction_lecture&microId=expo_fct_prolonger_suite&display=simple"
+ },
+ "premiere-suite-expo-prolonger-short": {
+  "fichier": "premiere/maths/suites/39-expo-prolonger/eleveai-maths-premiere-suite-expo-prolonger-short.mp4",
+  "poster": "premiere/maths/suites/39-expo-prolonger/eleveai-maths-premiere-suite-expo-prolonger-short.png",
+  "vignette": "premiere/maths/suites/39-expo-prolonger/eleveai-maths-premiere-suite-expo-prolonger-short.vignette.webp",
+  "titre": "Un zoom entre deux crans : quelle distance ? 🧪 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=expo_fonction_lecture&microId=expo_fct_prolonger_suite&display=simple"
  },
  "premiere-suite-geo-explicite": {
   "fichier": "premiere/maths/suites/13-geo-explicite/eleveai-maths-premiere-suite-geo-explicite.mp4",
@@ -15200,6 +15542,24 @@
   "youtube": null,
   "coach": null
  },
+ "terminale-suite-integrale": {
+  "fichier": "terminale/maths/suites/41-integrale/eleveai-maths-terminale-suite-integrale.mp4",
+  "poster": "terminale/maths/suites/41-integrale/eleveai-maths-terminale-suite-integrale.png",
+  "vignette": "terminale/maths/suites/41-integrale/eleveai-maths-terminale-suite-integrale.vignette.webp",
+  "titre": "Le béton d'une rampe de skatepark : quelle aire sous y = xⁿ ? — Une suite définie par une intégrale — épisode 41 · Maths Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-integrale-short": {
+  "fichier": "terminale/maths/suites/41-integrale/eleveai-maths-terminale-suite-integrale-short.mp4",
+  "poster": "terminale/maths/suites/41-integrale/eleveai-maths-terminale-suite-integrale-short.png",
+  "vignette": "terminale/maths/suites/41-integrale/eleveai-maths-terminale-suite-integrale-short.vignette.webp",
+  "titre": "Quatre aires qui rétrécissent : où vont-elles ? 🧪 — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": null
+ },
  "terminale-suite-limite-calculer": {
   "fichier": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer.mp4",
   "poster": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer.png",
@@ -15304,6 +15664,24 @@
   "poster": "terminale/maths/suites/35-limite-operations/eleveai-maths-terminale-suite-limite-operations-short.png",
   "vignette": "terminale/maths/suites/35-limite-operations/eleveai-maths-terminale-suite-limite-operations-short.vignette.webp",
   "titre": "Infini moins infini, ça fait 0 ? 🗺️ — Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-python": {
+  "fichier": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python.mp4",
+  "poster": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python.png",
+  "vignette": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python.vignette.webp",
+  "titre": "L'erreur d'un modèle d'IA : trois tours de boucle en Python — Programmer les termes d'une suite — épisode 42 · Maths Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": null
+ },
+ "terminale-suite-python-short": {
+  "fichier": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python-short.mp4",
+  "poster": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python-short.png",
+  "vignette": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python-short.vignette.webp",
+  "titre": "Une info qui circule : combien de partages après 3 tours ? 🧪 — Tle spé #Shorts",
   "short": true,
   "youtube": null,
   "coach": null

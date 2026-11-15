@@ -141,6 +141,25 @@ EP = [
 # Terminale (28 à 38) : données dans leur propre fichier (session Tle, 12/11).
 from suites_terminale_donnees import EP_TLE  # noqa: E402
 EP += EP_TLE
+# Fin de série (2e poste, 15/11/2026) : épisodes 39 à 42, miniatures faites au 1er poste après la fusion.
+EP += [
+    ("premiere", "39-expo-prolonger", "verte",
+     ["COMPRENDRE L'EXPONENTIELLE", "QUI PROLONGE UNE SUITE"], "100 → 50 → 25 → 12,5", "+ à 1,5 demi-vie : ≈ 35 %",
+     "blanche", ["ENTRE", "DEUX CRANS ?"], "le zoom d'une appli de cartes",
+     [("400 → 200 → 100 km", 90, BLEU), ("rang 1,5 : ?", 110, VERT)]),
+    ("premiere-spe", "40-exp-geo", "verte",
+     ["L'EXPONENTIELLE CACHE", "UNE SUITE GÉOMÉTRIQUE"], "400 ; 296,3 ; 219,5 ; 162,6", "+ × 0,74 chaque heure",
+     "blanche", ["IL PERD", "COMBIEN ?"], "le son d'une guitare",
+     [("100 ; 67 ; 44,9 ; 30,1", 85, BLEU), ("− ? % par seconde", 90, VERT)]),
+    ("terminale", "41-integrale", "verte",
+     ["COMPRENDRE UNE SUITE", "D'INTÉGRALES"], "I_{n} = aire sous y = x^{n}", "+ I_{n} = 1 ÷ (n + 1) → 0",
+     "blanche", ["OÙ VONT", "CES AIRES ?"], "l'encre d'une affiche",
+     [("1/2 ; 1/3 ; 1/6 ; 1/21", 90, BLEU), ("→ ?", 130, VERT)]),
+    ("terminale", "42-python", "verte",
+     ["PROGRAMMER LES TERMES", "D'UNE SUITE EN PYTHON"], "u = 0,8*u + 1200", "+ 20 000 → 17 200 → 14 960",
+     "blanche", ["3 LIGNES", "DE PYTHON"], "une info qui circule",
+     [("u = 2*u + 1", 110, BLEU), ("jeudi : ?", 120, VERT)]),
+]
 
 
 import re
