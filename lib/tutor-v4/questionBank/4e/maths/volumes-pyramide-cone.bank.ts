@@ -54,7 +54,10 @@ const figPyramide = (hauteur: number, u: string, base: string) =>
 const figCone = (rayon: number, hauteur: number, u: string) =>
   figure({ solide: "cone", dimensions: { rayon, hauteur }, labels: { rayon: `${rayon} ${u}`, hauteur: `${hauteur} ${u}`, aireBase: "base" }, highlight: { base: false, hauteur: true }, display: { showLabels: true } });
 
-const UNITES = ["cm", "cm", "dm", "m", "mm"] as const;
+// 15/11 : quatre unités à égalité (cm doublé faisait grimper les répétitions de squelettes).
+const UNITES = ["mm", "cm", "dm", "m"] as const;
+/** Pavé numérique une fois sur deux (réponse = un nombre + une unité simple, jamais en π). */
+const auPave = () => (Math.random() < 0.5 ? { saisie: "pave" as const } : {});
 const DEF_P = "Définition : le volume d’une pyramide est égal à l’aire de sa base × sa hauteur ÷ 3.";
 const DEF_C = "Définition : le volume d’un cône de révolution est égal à π × rayon² × hauteur ÷ 3.";
 
@@ -139,25 +142,23 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
       const V = (A * h) / 3;
       const a2 = `${A} ${u}²`;
       const l = `${h} ${u}`;
+      // ★1 : ≤ 12 mots (« : » et « ? » comptent pour un mot).
       const text = un([
-        `Une pyramide a une base d’aire ${a2} et une hauteur de ${l}. Quel est son volume ?`,
-        `Calcule le volume d’une pyramide : aire de la base ${a2}, hauteur ${l}.`,
-        `Aire de la base : ${a2}. Hauteur : ${l}. Quel est le volume de cette pyramide ?`,
-        `Quel est le volume d’une pyramide de base ${a2} et de hauteur ${l} ?`,
-        `Pyramide : base de ${a2}, hauteur de ${l}. Calcule son volume.`,
-        `La base d’une pyramide mesure ${a2} et sa hauteur ${l}. Donne son volume.`,
-        `Donne le volume de cette pyramide : sa base a pour aire ${a2} et sa hauteur vaut ${l}.`,
-        `Une pyramide de base ${a2} a une hauteur de ${l}. Calcule son volume.`,
-        `Pour cette pyramide, l’aire de la base est ${a2} et la hauteur est ${l}. Quel est le volume ?`,
-        `Trouve le volume d’une pyramide dont la base fait ${a2} et la hauteur ${l}.`,
-        `Base : ${a2}. Hauteur : ${l}. Calcule le volume de la pyramide.`,
-        `Combien vaut le volume d’une pyramide de ${a2} de base et de ${l} de hauteur ?`,
+        `Pyramide : base ${a2}, hauteur ${l}. Calcule son volume.`,
+        `Calcule le volume d’une pyramide de base ${a2}, hauteur ${l}.`,
+        `Base ${a2}, hauteur ${l} : volume de la pyramide ?`,
+        `Quel volume pour cette pyramide ? Base ${a2}, hauteur ${l}.`,
+        `Donne le volume : pyramide de base ${a2}, hauteur ${l}.`,
+        `Trouve le volume : pyramide de base ${a2}, hauteur ${l}.`,
+        `Pyramide de base ${a2} et de hauteur ${l}. Volume ?`,
+        `Volume d’une pyramide de base ${a2}, hauteur ${l} ?`,
       ]);
       return {
         text,
         format: "short",
         expected: avecUnite(V, `${u}³`),
         comparator: "number_equal",
+        ...auPave(),
         canvas: figPyramide(h, u, a2),
         explanation:
           `${DEF_P}\n\nMéthode : on multiplie l’aire de la base par la hauteur, puis on divise par 3.\n\n` +
@@ -169,19 +170,24 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
     tpl("volume_pyramide", 2, 1, HINT_P, () => {
       const u = un(UNITES);
       const A = entre(5, 60);
-      const h = entre(3, 20);
+      // h ≠ 3 : sinon « A × 3 ÷ h » vaut autant que « A × h ÷ 3 ».
+      const h = entre(4, 20);
       const juste = `${A} × ${h} ÷ 3`;
       const text = un([
-        `Une pyramide a une base de ${A} ${u}² et une hauteur de ${h} ${u}. Quel calcul donne son volume ?`,
-        `Quel calcul donne le volume d’une pyramide de base ${A} ${u}² et de hauteur ${h} ${u} ?`,
-        `Base : ${A} ${u}². Hauteur : ${h} ${u}. Quel calcul donne le volume de la pyramide ?`,
-        `Pour une pyramide de base ${A} ${u}² et de hauteur ${h} ${u}, quel calcul faut-il faire ?`,
-        `Choisis le bon calcul du volume : pyramide de base ${A} ${u}², hauteur ${h} ${u}.`,
-        `Parmi ces calculs, lequel donne le volume d’une pyramide de base ${A} ${u}² et de hauteur ${h} ${u} ?`,
+        `Pyramide : base ${A} ${u}², hauteur ${h} ${u}. Quel calcul ?`,
+        `Quel calcul donne le volume ? Base ${A} ${u}², hauteur ${h} ${u}.`,
+        `Choisis le calcul : pyramide de base ${A} ${u}², hauteur ${h} ${u}.`,
+        `Pyramide de base ${A} ${u}², hauteur ${h} ${u} : quel calcul ?`,
+        `Quel calcul pour cette pyramide ? Base ${A} ${u}², hauteur ${h} ${u}.`,
+        `Quel calcul ? Pyramide de base ${A} ${u}², hauteur ${h} ${u}.`,
+        `Base ${A} ${u}², hauteur ${h} ${u} : quel calcul du volume ?`,
+        `Pyramide (base ${A} ${u}², hauteur ${h} ${u}) : quel calcul ?`,
+        `Repère le calcul du volume : base ${A} ${u}², hauteur ${h} ${u}.`,
       ]);
       return {
         text,
         format: "qcm",
+        canvas: figPyramide(h, u, `${A} ${u}²`),
         choices: qcm(juste, [`${A} × ${h}`, `${A} × ${h} ÷ 2`, `${A} + ${h} ÷ 3`, `${A} × 3 ÷ ${h}`]),
         expected: [juste],
         comparator: "mcq_exact",
@@ -197,14 +203,14 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
       const c = entre(2, 12);
       const h = hauteurDivisible(c * c, 3, 18);
       const V = (c * c * h) / 3;
+      // ★2 : ≤ 15 mots ; « carr » dans chaque phrase, côté avant hauteur (correcteur).
       const text = un([
-        `Une pyramide a une base carrée de côté ${c} ${u} et une hauteur de ${h} ${u}. Quel est son volume ?`,
+        `Pyramide à base carrée de côté ${c} ${u}, hauteur ${h} ${u}. Son volume ?`,
         `Calcule le volume d’une pyramide à base carrée : côté ${c} ${u}, hauteur ${h} ${u}.`,
-        `Base carrée de ${c} ${u} de côté, hauteur de ${h} ${u} : quel est le volume de la pyramide ?`,
-        `La base d’une pyramide est un carré de ${c} ${u} de côté. Sa hauteur est ${h} ${u}. Donne son volume.`,
-        `Quel est le volume d’une pyramide dont la base est un carré de côté ${c} ${u} et la hauteur ${h} ${u} ?`,
-        `Côté du carré de base : ${c} ${u}. Hauteur de la pyramide : ${h} ${u}. Calcule le volume.`,
-        `Trouve le volume d’une pyramide de base carrée (côté ${c} ${u}) et de hauteur ${h} ${u}.`,
+        `Pyramide : base carrée de ${c} ${u} de côté, hauteur ${h} ${u}. Volume ?`,
+        `Côté du carré : ${c} ${u}. Hauteur : ${h} ${u}. Volume de la pyramide ?`,
+        `Trouve le volume d’une pyramide à base carrée (côté ${c} ${u}, hauteur ${h} ${u}).`,
+        `Donne le volume de la pyramide : carré de ${c} ${u}, hauteur ${h} ${u}.`,
         `Pyramide à base carrée, côté ${c} ${u}, hauteur ${h} ${u}. Combien vaut son volume ?`,
       ]);
       return {
@@ -212,6 +218,7 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
         format: "short",
         expected: avecUnite(V, `${u}³`),
         comparator: "number_equal",
+        ...auPave(),
         canvas: figPyramide(h, u, `côté ${c} ${u}`),
         explanation:
           `${DEF_P}\n\nMéthode : la base est un carré, son aire est côté × côté.\n\n` +
@@ -226,19 +233,21 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
       const l = entre(2, L - 1);
       const h = hauteurDivisible(L * l, 3, 18);
       const V = (L * l * h) / 3;
+      // ★2 : ≤ 15 mots ; longueur, largeur, puis hauteur (correcteur).
       const text = un([
-        `Une pyramide a une base rectangulaire de ${L} ${u} sur ${l} ${u} et une hauteur de ${h} ${u}. Quel est son volume ?`,
-        `Calcule le volume d’une pyramide : base rectangle de ${L} ${u} sur ${l} ${u}, hauteur ${h} ${u}.`,
-        `La base d’une pyramide est un rectangle de ${L} ${u} sur ${l} ${u}. Sa hauteur est ${h} ${u}. Donne son volume.`,
-        `Quel est le volume d’une pyramide de base ${L} ${u} × ${l} ${u} et de hauteur ${h} ${u} ?`,
-        `Base : rectangle de ${L} ${u} sur ${l} ${u}. Hauteur : ${h} ${u}. Calcule le volume de la pyramide.`,
-        `Trouve le volume d’une pyramide à base rectangulaire (${L} ${u} sur ${l} ${u}), de hauteur ${h} ${u}.`,
+        `Pyramide à base rectangle de ${L} ${u} sur ${l} ${u}, hauteur ${h} ${u}. Volume ?`,
+        `Calcule le volume : pyramide de base ${L} ${u} × ${l} ${u}, hauteur ${h} ${u}.`,
+        `Pyramide : base de ${L} ${u} sur ${l} ${u}, hauteur ${h} ${u}. Volume ?`,
+        `Volume d’une pyramide de base ${L} ${u} × ${l} ${u}, hauteur ${h} ${u} ?`,
+        `Trouve le volume : pyramide de base ${L} ${u} × ${l} ${u}, hauteur ${h} ${u}.`,
+        `Pyramide de ${L} ${u} sur ${l} ${u} de base, haute de ${h} ${u}. Volume ?`,
       ]);
       return {
         text,
         format: "short",
         expected: avecUnite(V, `${u}³`),
         comparator: "number_equal",
+        ...auPave(),
         canvas: figPyramide(h, u, `${L} ${u} × ${l} ${u}`),
         explanation:
           `${DEF_P}\n\nMéthode : la base est un rectangle, son aire est longueur × largeur.\n\n` +
@@ -253,17 +262,18 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
       const pri = pyr * 3;
       const versPyr = Math.random() < 0.6;
       const text = versPyr
-        ? un([
-            `Un prisme et une pyramide ont la même base et la même hauteur. Le prisme a un volume de ${pri} ${u}³. Quel est le volume de la pyramide ?`,
+        ? // ≤ 15 mots ; « volume du prisme », « fait le prisme », « Prisme de même » = on demande le prisme (correcteur).
+          un([
             `Même base, même hauteur : le prisme fait ${pri} ${u}³. Combien fait la pyramide ?`,
-            `Un prisme de ${pri} ${u}³ et une pyramide ont la même base et la même hauteur. Donne le volume de la pyramide.`,
-            `Prisme : ${pri} ${u}³. Pyramide de même base et de même hauteur : quel volume ?`,
+            `Prisme : ${pri} ${u}³. Pyramide de même base et même hauteur : volume ?`,
+            `Prisme de ${pri} ${u}³, pyramide de même base et même hauteur : son volume ?`,
+            `Pyramide et prisme de même base et même hauteur. Prisme : ${pri} ${u}³. Pyramide ?`,
           ])
         : un([
-            `Une pyramide et un prisme ont la même base et la même hauteur. La pyramide a un volume de ${pyr} ${u}³. Quel est le volume du prisme ?`,
+            `Pyramide : ${pyr} ${u}³. Donne le volume du prisme de même base et même hauteur.`,
             `Même base, même hauteur : la pyramide fait ${pyr} ${u}³. Combien fait le prisme ?`,
-            `Une pyramide de ${pyr} ${u}³ et un prisme ont la même base et la même hauteur. Donne le volume du prisme.`,
-            `Pyramide : ${pyr} ${u}³. Prisme de même base et de même hauteur : quel volume ?`,
+            `Prisme de même base et même hauteur qu’une pyramide de ${pyr} ${u}³ : volume ?`,
+            `Une pyramide fait ${pyr} ${u}³. Calcule le volume du prisme de même base et hauteur.`,
           ]);
       const rep = versPyr ? pyr : pri;
       return {
@@ -271,6 +281,7 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
         format: "short",
         expected: avecUnite(rep, `${u}³`),
         comparator: "number_equal",
+        ...auPave(),
         explanation:
           `Définition : à base et hauteur égales, le volume de la pyramide est le tiers de celui du prisme.\n\n` +
           `Méthode : ${versPyr ? "on divise le volume du prisme par 3" : "on multiplie le volume de la pyramide par 3"}.\n\n` +
@@ -315,7 +326,7 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
       const A = (b * t) / 2;
       const h = hauteurDivisible(A, 3, 18);
       const V = (A * h) / 3;
-      const objet = un(["Un dé à quatre faces", "Un berlingot", "Un tétraèdre en bois", "Une pyramide en carton", "Une pièce de puzzle 3D", "Un sachet de thé pyramidal"]);
+      const objet = un(["Un dé à quatre faces", "Un berlingot", "Un tétraèdre en bois", "Un presse-papier en verre", "Une pièce de puzzle 3D", "Un sachet de thé pyramidal"]);
       const text = un([
         `${objet} a la forme d’une pyramide à base triangulaire. Le triangle de base a un côté de ${b} ${u} et une hauteur relative à ce côté de ${t} ${u}. La hauteur de la pyramide est ${h} ${u}. Quel est son volume ?`,
         `${objet} est une pyramide dont la base est un triangle (côté ${b} ${u}, hauteur relative ${t} ${u}). La pyramide mesure ${h} ${u} de haut. Calcule son volume.`,
@@ -431,22 +442,19 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
       const r = entre(2, 12);
       const h = hauteurDivisible(r * r, 3, 18);
       const a = (r * r * h) / 3;
-      const debut = un([
-        `Un cône a un rayon de ${r} ${u} et une hauteur de ${h} ${u}.`,
-        `Rayon : ${r} ${u}. Hauteur : ${h} ${u}.`,
-        `Voici un cône de rayon ${r} ${u} et de hauteur ${h} ${u}.`,
-        `Le rayon de la base d’un cône est ${r} ${u} et sa hauteur est ${h} ${u}.`,
-        `Cône : rayon ${r} ${u}, hauteur ${h} ${u}.`,
-        `La base d’un cône a pour rayon ${r} ${u}. Sa hauteur vaut ${h} ${u}.`,
-      ]);
-      const fin = un([
-        "Calcule son volume, sous la forme aπ.",
-        "Quel est son volume ? Écris-le sous la forme aπ.",
-        "Donne la valeur exacte du volume, sous la forme aπ.",
-        "Écris le volume sous la forme aπ.",
+      const R = `${r} ${u}`;
+      const H = `${h} ${u}`;
+      // ★1 : ≤ 12 mots ; rayon avant hauteur (correcteur).
+      const text = un([
+        `Cône : rayon ${R}, hauteur ${H}. Volume en aπ ?`,
+        `Volume exact du cône : rayon ${R}, hauteur ${H} ?`,
+        `Volume exact d’un cône de rayon ${R}, hauteur ${H} ?`,
+        `Rayon ${R}, hauteur ${H}. Écris le volume en aπ.`,
+        `Donne en aπ le volume : rayon ${R}, hauteur ${H}.`,
+        `Cône de rayon ${R}, hauteur ${H}. Volume exact ?`,
       ]);
       return {
-        text: `${debut} ${fin}`,
+        text,
         format: "short",
         expected: piAttendus(a, u),
         comparator: "exact_text",
@@ -460,20 +468,21 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
     // ★1 : le bon calcul.
     tpl("volume_cone", 2, 1, HINT_C, () => {
       const u = un(UNITES);
-      const r = entre(2, 12);
+      // r ≥ 3 : à r = 2, « 2 × π × r × h ÷ 3 » vaut autant que le bon calcul.
+      const r = entre(3, 12);
       const h = entre(3, 20);
       const juste = `π × ${r} × ${r} × ${h} ÷ 3`;
       const text = un([
-        `Un cône a un rayon de ${r} ${u} et une hauteur de ${h} ${u}. Quel calcul donne son volume ?`,
-        `Quel calcul donne le volume d’un cône de rayon ${r} ${u} et de hauteur ${h} ${u} ?`,
-        `Rayon : ${r} ${u}. Hauteur : ${h} ${u}. Quel calcul donne le volume du cône ?`,
-        `Choisis le bon calcul du volume : cône de rayon ${r} ${u}, hauteur ${h} ${u}.`,
-        `Parmi ces calculs, lequel donne le volume d’un cône de rayon ${r} ${u} et de hauteur ${h} ${u} ?`,
-        `Pour un cône de rayon ${r} ${u} et de hauteur ${h} ${u}, quel calcul faut-il faire ?`,
+        `Cône de rayon ${r} ${u}, hauteur ${h} ${u} : quel calcul ?`,
+        `Quel calcul pour ce cône ? Rayon ${r} ${u}, hauteur ${h} ${u}.`,
+        `Choisis le calcul : cône de rayon ${r} ${u}, hauteur ${h} ${u}.`,
+        `Rayon ${r} ${u}, hauteur ${h} ${u} : calcul du volume ?`,
+        `Trouve le calcul : cône de rayon ${r} ${u}, hauteur ${h} ${u}.`,
       ]);
       return {
         text,
         format: "qcm",
+        canvas: figCone(r, h, u),
         choices: qcm(juste, [`π × ${r} × ${r} × ${h}`, `π × ${r} × ${h} ÷ 3`, `2 × π × ${r} × ${h} ÷ 3`, `π × ${r} × ${r} × ${h} ÷ 2`]),
         expected: [juste],
         comparator: "mcq_exact",
@@ -490,20 +499,19 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
       const d = 2 * r;
       const h = hauteurDivisible(r * r, 3, 18);
       const a = (r * r * h) / 3;
-      const debut = un([
-        `Un cône a une base de diamètre ${d} ${u} et une hauteur de ${h} ${u}.`,
-        `Diamètre de la base : ${d} ${u}. Hauteur : ${h} ${u}.`,
-        `La base d’un cône mesure ${d} ${u} de diamètre. Sa hauteur vaut ${h} ${u}.`,
-        `Cône : diamètre ${d} ${u}, hauteur ${h} ${u}.`,
-      ]);
-      const fin = un([
-        "Calcule son volume, sous la forme aπ.",
-        "Quel est son volume ? Écris-le sous la forme aπ.",
-        "Donne la valeur exacte du volume, sous la forme aπ.",
-        "Écris le volume sous la forme aπ.",
+      const D = `${d} ${u}`;
+      const H = `${h} ${u}`;
+      // ★2 : ≤ 15 mots ; diamètre avant hauteur (correcteur).
+      const text = un([
+        `Cône : diamètre ${D}, hauteur ${H}. Calcule son volume exact, en aπ.`,
+        `Calcule le volume exact d’un cône de diamètre ${D} et de hauteur ${H}.`,
+        `Diamètre ${D}, hauteur ${H} : écris le volume du cône en aπ.`,
+        `Volume en aπ d’un cône de diamètre ${D} et de hauteur ${H} ?`,
+        `Donne le volume du cône en aπ : diamètre ${D}, hauteur ${H}.`,
+        `Cône de ${D} de diamètre, ${H} de haut : volume en aπ ?`,
       ]);
       return {
-        text: `${debut} ${fin}`,
+        text,
         format: "short",
         expected: piAttendus(a, u),
         comparator: "exact_text",
@@ -521,22 +529,22 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
       const h = hauteurDivisible(r * r, 3, 15);
       const a = (r * r * h) / 3;
       const V = Math.round(a * 314) / 100;
-      const debut = un([
-        `Un cône a un rayon de ${r} ${u} et une hauteur de ${h} ${u}.`,
-        `Rayon : ${r} ${u}. Hauteur : ${h} ${u}.`,
-        `Voici un cône de rayon ${r} ${u} et de hauteur ${h} ${u}.`,
-        `Cône : rayon ${r} ${u}, hauteur ${h} ${u}.`,
-      ]);
-      const fin = un([
-        "Calcule son volume en prenant π ≈ 3,14.",
-        "Avec π ≈ 3,14, quel est son volume ?",
-        "Prends π ≈ 3,14 et donne son volume.",
+      const R = `${r} ${u}`;
+      const H = `${h} ${u}`;
+      // ★2 : ≤ 15 mots ; rayon avant hauteur (correcteur).
+      const text = un([
+        `Cône : rayon ${R}, hauteur ${H}. Calcule son volume avec π ≈ 3,14.`,
+        `Avec π ≈ 3,14, volume d’un cône de rayon ${R}, hauteur ${H} ?`,
+        `Rayon ${R}, hauteur ${H}, π ≈ 3,14 : volume du cône ?`,
+        `Prends π ≈ 3,14. Volume d’un cône de rayon ${R}, hauteur ${H} ?`,
+        `Calcule le volume du cône (π ≈ 3,14) : rayon ${R}, hauteur ${H}.`,
       ]);
       return {
-        text: `${debut} ${fin}`,
+        text,
         format: "short",
         expected: avecUnite(V, `${u}³`),
         comparator: "number_equal",
+        ...auPave(),
         canvas: figCone(r, h, u),
         explanation:
           `${DEF_C}\n\nMéthode : on calcule rayon × rayon × hauteur ÷ 3, puis on multiplie par 3,14.\n\n` +
@@ -551,17 +559,18 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
       const cy = c * 3;
       const versCone = Math.random() < 0.6;
       const text = versCone
-        ? un([
-            `Un cylindre et un cône ont la même base et la même hauteur. Le cylindre a un volume de ${cy} ${u}³. Quel est le volume du cône ?`,
+        ? // ≤ 15 mots ; « volume du cylindre », « fait le cylindre », « Cylindre de même » = on demande le cylindre (correcteur).
+          un([
             `Même base, même hauteur : le cylindre fait ${cy} ${u}³. Combien fait le cône ?`,
-            `Un cylindre de ${cy} ${u}³ et un cône ont la même base et la même hauteur. Donne le volume du cône.`,
-            `Cylindre : ${cy} ${u}³. Cône de même base et de même hauteur : quel volume ?`,
+            `Cylindre : ${cy} ${u}³. Cône de même base et même hauteur : volume ?`,
+            `Cylindre de ${cy} ${u}³, cône de même base et même hauteur. Volume du cône ?`,
+            `Cône et cylindre de même base et même hauteur. Cylindre : ${cy} ${u}³. Cône ?`,
           ])
         : un([
-            `Un cône et un cylindre ont la même base et la même hauteur. Le cône a un volume de ${c} ${u}³. Quel est le volume du cylindre ?`,
+            `Cône : ${c} ${u}³. Donne le volume du cylindre de même base et même hauteur.`,
             `Même base, même hauteur : le cône fait ${c} ${u}³. Combien fait le cylindre ?`,
-            `Un cône de ${c} ${u}³ et un cylindre ont la même base et la même hauteur. Donne le volume du cylindre.`,
-            `Cône : ${c} ${u}³. Cylindre de même base et de même hauteur : quel volume ?`,
+            `Cylindre de même base et même hauteur qu’un cône de ${c} ${u}³ : volume ?`,
+            `Un cône fait ${c} ${u}³. Calcule le volume du cylindre de même base et hauteur.`,
           ]);
       const rep = versCone ? c : cy;
       return {
@@ -569,6 +578,7 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
         format: "short",
         expected: avecUnite(rep, `${u}³`),
         comparator: "number_equal",
+        ...auPave(),
         explanation:
           `Définition : à base et hauteur égales, le volume du cône est le tiers de celui du cylindre.\n\n` +
           `Méthode : ${versCone ? "on divise le volume du cylindre par 3" : "on multiplie le volume du cône par 3"}.\n\n` +
@@ -620,6 +630,7 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
         format: "short",
         expected: avecUnite(V, "L"),
         comparator: "number_equal",
+        ...auPave(),
         canvas: figCone(r, h, "dm"),
         explanation:
           `${DEF_C}\n\nMéthode : on calcule le volume en dm³, et 1 dm³ = 1 L.\n\n` +
@@ -666,12 +677,18 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
         `Quelle hauteur a un cône de volume ${frVol(a)}π ${u}³ et de rayon ${r} ${u} ?`,
         `On sait qu’un cône fait ${frVol(a)}π ${u}³, avec un rayon de ${r} ${u}. Donne sa hauteur.`,
         `Un cône de ${frVol(a)}π ${u}³ a pour rayon ${r} ${u}. Combien mesure sa hauteur ?`,
+        `Retrouve la hauteur d’un cône de ${frVol(a)}π ${u}³ dont le rayon vaut ${r} ${u}.`,
+        `Un cône occupe ${frVol(a)}π ${u}³. Son rayon est de ${r} ${u}. Quelle est sa hauteur ?`,
+        `Volume : ${frVol(a)}π ${u}³ ; rayon : ${r} ${u}. Détermine la hauteur de ce cône.`,
+        `Ce cône a un volume de ${frVol(a)}π ${u}³ pour un rayon de ${r} ${u}. Calcule sa hauteur.`,
       ]);
       return {
         text,
         format: "short",
         expected: avecUnite(h, u),
         comparator: "number_equal",
+        ...auPave(),
+        canvas: figure({ solide: "cone", dimensions: { rayon: r }, labels: { rayon: `${r} ${u}`, hauteur: `? ${u}`, aireBase: "base" }, highlight: { base: false, hauteur: true }, display: { showLabels: true } }),
         explanation:
           `${DEF_C}\n\nMéthode : on multiplie le volume par 3, puis on divise par r².\n\n` +
           `Calcul : ${frVol(a)} × 3 = ${frVol(a * 3)}, puis ${frVol(a * 3)} ÷ ${r * r} = ${h}.\n\nConclusion : la hauteur est ${h} ${u}.`,
@@ -689,6 +706,9 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
       const text = un([
         `${objet[0]} est ${objet[1]} d’un cylindre de rayon ${r} cm et de hauteur ${H} cm, surmonté d’un cône de même rayon et de hauteur ${h} cm. Quel est son volume total, sous la forme aπ ?`,
         `${objet[0]} : un cylindre (rayon ${r} cm, hauteur ${H} cm) et, au-dessus, un cône de même rayon (hauteur ${h} cm). Donne le volume total sous la forme aπ.`,
+        `On modélise ${objet[0].charAt(0).toLowerCase() + objet[0].slice(1)} par un cylindre de rayon ${r} cm et de hauteur ${H} cm, coiffé d’un cône de même rayon, haut de ${h} cm. Volume total, en aπ ?`,
+        `Pour ${objet[0].charAt(0).toLowerCase() + objet[0].slice(1)}, on empile un cylindre (rayon ${r} cm, hauteur ${H} cm) et un cône de même rayon (hauteur ${h} cm). Calcule le volume total, sous la forme aπ.`,
+        `Calcule, sous la forme aπ, le volume total : un cylindre de rayon ${r} cm et de hauteur ${H} cm, puis un cône de même rayon et de hauteur ${h} cm.`,
       ]);
       return {
         text,
@@ -723,6 +743,69 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
           `${DEF_C}\n\nMéthode : ${cas.m}.\n\nCalcul : ${V} × ${cas.k} = ${V * cas.k}.\n\nConclusion : le nouveau volume est ${V * cas.k} ${u}³.`,
       };
     }),
+
+    /* ===== 15/11/2026 — ★1 : choisir le résultat ===== */
+
+    // ★1 : le bon volume parmi les erreurs classiques (÷ 3 oublié, ÷ 2, × 3 au lieu de ÷ 3, aire + hauteur).
+    tpl("volume_pyramide", 12, 1, HINT_P, () => {
+      const u = un(UNITES);
+      const A = entre(4, 40);
+      const h = 3 * entre(1, 5);
+      const V = (A * h) / 3;
+      const ecr = (x: number) => `${frVol(x)} ${u}³`;
+      const pieges = [A * h, (A * h) / 2, A + h, A * h * 3].filter((x) => x !== V).map(ecr);
+      const text = un([
+        `Pyramide : base ${A} ${u}², hauteur ${h} ${u}. Son volume ?`,
+        `Choisis le volume : pyramide de base ${A} ${u}², hauteur ${h} ${u}.`,
+        `Pyramide (base ${A} ${u}², hauteur ${h} ${u}) : quel volume ?`,
+        `Base ${A} ${u}², hauteur ${h} ${u} : quel est le volume ?`,
+        `Repère le bon volume : base ${A} ${u}², hauteur ${h} ${u}.`,
+        `Calcule mentalement le volume : base ${A} ${u}², hauteur ${h} ${u}.`,
+        `Quel volume ? Pyramide de base ${A} ${u}², hauteur ${h} ${u}.`,
+        `Base ${A} ${u}², hauteur ${h} ${u} : volume de la pyramide ?`,
+        `Trouve le volume : pyramide de base ${A} ${u}², hauteur ${h} ${u}.`,
+      ]);
+      return {
+        text,
+        format: "qcm",
+        choices: qcm(ecr(V), pieges),
+        expected: [ecr(V)],
+        comparator: "mcq_exact",
+        canvas: figPyramide(h, u, `${A} ${u}²`),
+        explanation:
+          `${DEF_P}\n\nMéthode : on multiplie l’aire de la base par la hauteur, sans oublier de diviser par 3.\n\n` +
+          `Calcul : ${A} × ${h} = ${A * h}, puis ${A * h} ÷ 3 = ${frVol(V)}.\n\nConclusion : le volume est ${ecr(V)}.`,
+      };
+    }),
+
+    // ★1 : le bon volume exact (cylindre au lieu du cône, rayon non élevé au carré, périmètre).
+    tpl("volume_cone", 12, 1, HINT_C, () => {
+      const u = un(UNITES);
+      // r ≥ 3 : à r = 1 ou 2, les pièges « r × k » et « 2 × r × k » valent le bon résultat.
+      const r = entre(3, 9);
+      const k = entre(1, 5);
+      const h = 3 * k;
+      const a = r * r * k;
+      const ecr = (x: number) => `${frVol(x)}π ${u}³`;
+      const text = un([
+        `Cône : rayon ${r} ${u}, hauteur ${h} ${u}. Son volume exact ?`,
+        `Volume exact du cône ? Rayon ${r} ${u}, hauteur ${h} ${u}.`,
+        `Quel volume ? Cône de rayon ${r} ${u}, hauteur ${h} ${u}.`,
+        `Rayon ${r} ${u}, hauteur ${h} ${u} : volume exact du cône ?`,
+        `Trouve le volume du cône : rayon ${r} ${u}, hauteur ${h} ${u}.`,
+      ]);
+      return {
+        text,
+        format: "qcm",
+        choices: qcm(ecr(a), [r * r * h, r * k, 2 * r * k].filter((x) => x !== a).map(ecr)),
+        expected: [ecr(a)],
+        comparator: "mcq_exact",
+        canvas: figCone(r, h, u),
+        explanation:
+          `${DEF_C}\n\nMéthode : on calcule rayon × rayon × hauteur, on divise par 3 et on garde π.\n\n` +
+          `Calcul : ${r} × ${r} × ${h} = ${r * r * h}, puis ${r * r * h} ÷ 3 = ${a}.\n\nConclusion : le volume est ${ecr(a)}.`,
+      };
+    }),
   ];
 
   function retrouver(A: number, h: number, V: number, u: string) {
@@ -739,6 +822,8 @@ export function fabriquerPyramideCone(niveau: "4e" | "3e"): TutorBankItemV4[] {
       format: "short",
       expected: avecUnite(h, u),
       comparator: "number_equal",
+      ...auPave(),
+      canvas: figure({ solide: "pyramide", labels: { hauteur: `? ${u}`, aireBase: `${A} ${u}²` }, highlight: { base: true, hauteur: true }, display: { showLabels: true } }),
       explanation:
         `${DEF_P}\n\nMéthode : on multiplie le volume par 3, puis on divise par l’aire de la base.\n\n` +
         `Calcul : ${V} × 3 = ${V * 3}, puis ${V * 3} ÷ ${A} = ${h}.\n\nConclusion : la hauteur est ${h} ${u}.`,

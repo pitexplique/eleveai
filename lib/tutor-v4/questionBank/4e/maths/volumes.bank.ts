@@ -42,6 +42,7 @@
 import type {
   TutorBankItemV4,
   Solide3DCanvasData,
+  ContenanceCanvasData,
 } from "@/lib/tutor-v4/types";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
 
@@ -476,6 +477,129 @@ function explAireBase(A: number, h: number, u: string, sujet: string) {
   );
 }
 
+/* ---------------------------------------------------------------------------
+   ⭐ 15/11/2026 — ★1-★2 COURTS ET SANS CONTEXTE (règle du collège :
+   ★1 ≤ 12 mots, ★2 ≤ 15, aucune situation), un dessin sur deux au moins, le
+   pavé numérique une fois sur deux. Mesuré avant : 0 à 59 % de dessins selon
+   la micro, 73 à 100 % des ★1-★2 trop longs. Les situations vont à ★3.
+--------------------------------------------------------------------------- */
+const UNITES_NUES = ["mm", "cm", "dm", "m"] as const;
+const uniteNue = (): string => randomChoice(UNITES_NUES);
+/** Le pavé numérique une fois sur deux (réponse = un nombre + une unité simple). */
+const auPave = () => (Math.random() < 0.5 ? { saisie: "pave" as const } : {});
+/** Les solides « aire de base × hauteur », sans contexte. */
+const SOLIDES_NUS = ["prisme droit", "cylindre", "pavé droit"] as const;
+
+/** Un solide dont on connaît l'aire de base et la hauteur (null = l'inconnue, écrite « ? »). */
+function figureBase(solide: string, A: number | null, h: number | null, u: string): Solide3DCanvasData {
+  const aire = A == null ? `? ${u}²` : `${fr(A)} ${u}²`;
+  const haut = h == null ? `? ${u}` : `${fr(h)} ${u}`;
+  const commun = {
+    dimensions: { ...(A == null ? {} : { aireBase: A }), ...(h == null ? {} : { hauteur: h }) },
+    highlight: { base: true, hauteur: true },
+    display: { showLabels: true, showDimensions: true },
+  };
+  // Une étiquette vide n'est pas dessinée : pas de « r cm » ni de « L cm » inventés.
+  if (/cylindre/.test(solide)) return solideCanvas({ solide: "cylindre", labels: { rayon: "", aireBase: aire, hauteur: haut }, ...commun });
+  if (/pavé/.test(solide)) return solideCanvas({ solide: "pave_droit", labels: { longueur: "", largeur: "", aireBase: aire, hauteur: haut }, ...commun });
+  return solideCanvas({ solide: "prisme", labels: { aireBase: aire, hauteur: haut }, ...commun });
+}
+
+/** La figure d'un objet de la table BASES — aucune pour une base hexagonale (le prisme dessiné est triangulaire). */
+function figureObjet(o: ObjetBase, A: number | null, h: number | null) {
+  return /hexagon/.test(o.un) ? {} : { canvas: figureBase(o.solide, A, h, o.u) };
+}
+
+/** Un pavé droit coté (l'aire de la base en plus, sauf si on la cherche). */
+function figurePaveDroit(L: number, l: number, h: number, u: string, avecAire = true): Solide3DCanvasData {
+  return solideCanvas({
+    solide: "pave_droit",
+    dimensions: { longueur: L, largeur: l, hauteur: h },
+    labels: {
+      longueur: `${fr(L)} ${u}`,
+      largeur: `${fr(l)} ${u}`,
+      hauteur: `${fr(h)} ${u}`,
+      ...(avecAire ? { aireBase: `${fr(L * l)} ${u}²` } : {}),
+    },
+    highlight: { base: true, hauteur: true },
+    display: { showLabels: true, showDimensions: true },
+  });
+}
+
+/** Un cylindre coté par son rayon ; `base` = l'étiquette du disque (jamais le volume). */
+function figCylindre(r: number, h: number, u: string, base = "base"): Solide3DCanvasData {
+  return solideCanvas({
+    solide: "cylindre",
+    dimensions: { rayon: r, hauteur: h },
+    labels: { rayon: `${fr(r)} ${u}`, hauteur: `${fr(h)} ${u}`, aireBase: base },
+    highlight: { base: true, hauteur: true },
+    display: { showLabels: true, showDimensions: true },
+  });
+}
+
+/** Un assemblage de cubes pleins, étage par étage (aucun ne flotte), sans le compte écrit. */
+function blocCubes(cols: number, rows: number, layers: number, retirer = 0) {
+  const cubes: { x: number; y: number; z: number }[] = [];
+  for (let z = 0; z < layers; z++)
+    for (let x = 0; x < cols; x++) for (let y = 0; y < rows; y++) cubes.push({ x, y, z });
+  // On retire des cubes du DERNIER étage seulement : le solide tient debout.
+  for (let k = 0; k < retirer && cubes.length > 1; k++) {
+    const haut = cubes.filter((c) => c.z === layers - 1);
+    if (haut.length <= 1) break;
+    cubes.splice(cubes.indexOf(haut[haut.length - 1]), 1);
+  }
+  return cubes;
+}
+
+/** La donnée d'une conversion, dessinée sur une carte : « 2,5 L = ? cm³ ». */
+const ICONES_VOLUME = ["🧴", "🥛", "🧃", "🧊", "📦", "🪣"];
+function carteVolume(donnee: string, question: string, label = "volume"): ContenanceCanvasData {
+  return {
+    kind: "contenance",
+    variant: "objets",
+    objets: [{ label, icon: randomChoice(ICONES_VOLUME), contenance: donnee }],
+    questionLabel: question,
+    display: { showContenances: true, showLabels: true, showComparison: false },
+  };
+}
+
+/** Chaque unité de volume en cm³ (le litre vaut le dm³). */
+const EN_CM3_V: Record<string, number> = { "m³": 1e6, "dm³": 1000, L: 1000, "cm³": 1 };
+const motUnite = (u: string) => (u === "L" ? "litres" : u);
+
+/** Une conversion courte, sans contexte (★1-★2) : x dans l'unité `de`, réponse dans `vers`. */
+function conversionCourte(de: string, vers: string, x: number) {
+  const y = Math.round(((x * EN_CM3_V[de]) / EN_CM3_V[vers]) * 1000) / 1000;
+  const v = motUnite(vers);
+  const X = `${fr(x)} ${de}`;
+  const fait = x < 2 ? "fait" : "font";
+  const text = randomChoice([
+    `Convertis ${X} en ${v}.`,
+    `Combien de ${v} ${fait} ${X} ?`,
+    `Exprime ${X} en ${v}.`,
+    `${X}, c’est combien de ${v} ?`,
+    `Écris ${X} en ${v}.`,
+    `Trouve le nombre de ${v} dans ${X}.`,
+    `Combien vaut ${X} en ${v} ?`,
+  ]);
+  const f = EN_CM3_V[de] / EN_CM3_V[vers];
+  const methode = f === 1 ? "les deux unités sont égales : le nombre ne change pas" : f > 1 ? `on multiplie par ${fr(f)}` : `on divise par ${fr(1 / f)}`;
+  const calcul = f === 1 ? `${fr(x)} ${de} = ${fr(y)} ${vers}` : f > 1 ? `${fr(x)} × ${fr(f)} = ${fr(y)}` : `${fr(x)} ÷ ${fr(1 / f)} = ${fr(y)}`;
+  return {
+    text,
+    format: "short" as const,
+    expected: avecUnite(y, vers),
+    comparator: "number_equal" as const,
+    ...auPave(),
+    canvas: carteVolume(X, `${X} = ? ${vers}`),
+    explanation:
+      `Définition : 1 L = 1 dm³ = 1 000 cm³ et 1 m³ = 1 000 dm³ = 1 000 L.\n\n` +
+      `Méthode : pour passer des ${motUnite(de)} aux ${v}, ${methode}.\n\n` +
+      `Calcul : ${calcul}.\n\n` +
+      `Conclusion : ${X} = ${fr(y)} ${vers}.`,
+  };
+}
+
 export const volumesBank: TutorBankItemV4[] = [
   /* =========================
      VOLUME_COMPRENDRE
@@ -518,7 +642,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_comprendre",
     difficulty: 1,
     theme: "neutral",
-    text: "Un solide est formé de 6 cubes unités. Quel est son volume ?",
+    text: "Ce solide est formé de 6 cubes unités. Quel est son volume ?",
     format: "qcm",
     choices: ["3 unités de volume", "6 unités de volume", "12 unités de volume", "36 unités de volume"],
     expected: ["6 unités de volume"],
@@ -562,13 +686,14 @@ export const volumesBank: TutorBankItemV4[] = [
         y: Math.floor(i / 3) % 2,
         z: Math.floor(i / 6),
       }));
-      const b = randomChoice(BRIQUES);
-      const p = randomChoice(PRENOMS);
+      // ⭐ 15/11/2026 — ★2 : phrase courte, sans prénom (22 mots en moyenne avant).
+      const b = randomChoice(BRIQUES.filter((x) => !/boîte|caisse/.test(x.sg)));
       const text = randomChoice([
-        `Ce solide est construit avec des ${b.pl} identiques. En prenant ${unB(b)} comme unité de volume, quel est son volume ?`,
-        `${p} empile des ${b.pl} pour former ce solide. Combien d’unités de volume occupe-t-il, si ${unB(b)} vaut une unité ?`,
-        `Chaque ${b.sg} représente une unité de volume. Quel est le volume du solide dessiné ?`,
-        `Quel est le volume, en unités, de cet assemblage de ${b.pl} ? (${cap(unB(b))} = 1 unité de volume.)`,
+        `${cap(unB(b))} vaut une unité. Quel est le volume du solide ?`,
+        `Compte les ${b.pl}. Quel est le volume de ce solide ?`,
+        `Quel est le volume de ce solide, en ${b.pl} ?`,
+        `Combien de ${b.pl} forment ce solide ?`,
+        `Trouve le volume de ce solide : 1 ${b.sg} = 1 unité.`,
       ]);
 
       return {
@@ -576,6 +701,7 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(n)],
         comparator: "number_equal",
+        ...auPave(),
         explanation:
           `Définition : ${unB(b)} représente 1 unité de volume.\n\n` +
           `Méthode : on compte les ${b.pl} du solide étage par étage, y compris ceux qu’on voit à peine.\n\n` +
@@ -603,7 +729,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_lien_aire",
     difficulty: 1,
     theme: "neutral",
-    text: "Pour calculer le volume d’un prisme ou d’un cylindre, on utilise souvent la formule…",
+    text: "Quelle formule donne le volume d’un prisme ou d’un cylindre ?",
     format: "qcm",
     choices: [
       "Volume = aire de base × hauteur",
@@ -634,16 +760,21 @@ export const volumesBank: TutorBankItemV4[] = [
     hint: "Multiplie l’aire de la base par la hauteur.",
     tags: ["volume", "aire_base", "template", "canvas"],
     generate: () => {
-      const o = randomChoice(BASES);
-      const aireBase = tirer(o.A);
-      const hauteur = tirer(o.h);
+      // ⭐ 15/11/2026 — ★2 sans situation, ≤ 15 mots (23 en moyenne avant), dessin toujours.
+      const s = randomChoice(SOLIDES_NUS);
+      const u = uniteNue();
+      const aireBase = randomInt(4, 60);
+      const hauteur = randomInt(2, 15);
       const volume = aireBase * hauteur;
-      const u = o.u;
+      const A = `${fr(aireBase)} ${u}²`;
+      const H = `${hauteur} ${u}`;
       const text = randomChoice([
-        `${cap(o.un)} a la forme ${de(o.solide)}. L’aire de sa base est ${fr(aireBase)} ${u}² et sa hauteur ${hauteur} ${u}. Quel est son volume, en ${u}³ ?`,
-        `La base ${de(o.un)} a une aire de ${fr(aireBase)} ${u}². Sa hauteur est ${hauteur} ${u}. Calcule son volume en ${u}³.`,
-        `Quel est le volume, en ${u}³, ${de(o.un)} de ${hauteur} ${u} de hauteur dont la base mesure ${fr(aireBase)} ${u}² ?`,
-        `On assimile ${o.un} à ${o.solide} : base de ${fr(aireBase)} ${u}², hauteur de ${hauteur} ${u}. Combien de ${u}³ occupe-t-${o.il} ?`,
+        `Calcule le volume d’un ${s} : base ${A}, hauteur ${H}.`,
+        `Base de ${A}, hauteur de ${H}. Calcule le volume du ${s}.`,
+        `Aire de base ${A}, hauteur ${H}. Quel est le volume ?`,
+        `Trouve le volume de ce ${s} : base ${A}, hauteur ${H}.`,
+        `Donne le volume d’un ${s} de hauteur ${H} et de base ${A}.`,
+        `V = aire de base × hauteur. Calcule V pour ${A} et ${H}.`,
       ]);
 
       return {
@@ -651,21 +782,9 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
-        explanation: explAireBase(aireBase, hauteur, u, du(o.un)),
-        ...(o.solide === "un cylindre"
-          ? {}
-          : {
-              canvas: solideCanvas({
-                solide: "prisme",
-                dimensions: { aireBase, hauteur },
-                labels: {
-                  aireBase: `${fr(aireBase)} ${u}²`,
-                  hauteur: `${hauteur} ${u}`,
-                },
-                highlight: { base: true, hauteur: true },
-                display: { showLabels: true, showDimensions: true, showFormulaHint: true },
-              }),
-            }),
+        ...auPave(),
+        explanation: explAireBase(aireBase, hauteur, u, `du ${s}`),
+        canvas: figureBase(s, aireBase, hauteur, u),
       };
     },
   },
@@ -706,6 +825,7 @@ export const volumesBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: [juste ? "oui" : "non"],
         comparator: "mcq_exact",
+        ...figureObjet(o, aireBase, hauteur),
         explanation:
           `Définition : le volume se calcule par aire de base × hauteur.\n\n` +
           `Méthode : on multiplie, on n’additionne pas.\n\n` +
@@ -728,7 +848,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_pave",
     difficulty: 2,
     theme: "neutral",
-    text: "Un pavé droit mesure 4 cm de longueur, 3 cm de largeur et 5 cm de hauteur. Quel est son volume ?",
+    text: "Calcule le volume d’un pavé de 4 cm × 3 cm × 5 cm.",
     format: "qcm",
     choices: ["12 cm³", "20 cm³", "60 cm³", "45 cm³"],
     expected: ["60 cm³"],
@@ -766,18 +886,22 @@ export const volumesBank: TutorBankItemV4[] = [
     hint: "Calcule longueur × largeur × hauteur.",
     tags: ["volume", "pave_droit", "template", "canvas"],
     generate: () => {
-      const o = randomChoice(PAVES);
-      const longueur = tirer(o.L);
-      const largeur = tirer(o.l);
-      const hauteur = tirer(o.h);
+      // ⭐ 15/11/2026 — ★2 sans situation, ≤ 15 mots (21 en moyenne avant).
+      const u = uniteNue();
+      const longueur = randomInt(3, 12);
+      const largeur = randomInt(2, longueur);
+      const hauteur = randomInt(2, 10);
       const aireBase = longueur * largeur;
       const volume = aireBase * hauteur;
-      const u = o.u;
+      const [L, l, h] = [longueur, largeur, hauteur].map((x) => `${x} ${u}`);
       const text = randomChoice([
-        `${cap(o.un)} a la forme d’un pavé droit de ${longueur} ${u} de long, ${largeur} ${u} de large et ${hauteur} ${u} de haut. Quel est son volume, en ${u}³ ?`,
-        `On modélise ${o.un} par le pavé droit dessiné. Calcule son volume en ${u}³.`,
-        `Longueur : ${longueur} ${u}. Largeur : ${largeur} ${u}. Hauteur : ${hauteur} ${u}. Quel volume occupe ${o.un} de ces dimensions ?`,
-        `Quel est, en ${u}³, le volume ${de(o.un)} de ${longueur} ${u} × ${largeur} ${u} × ${hauteur} ${u} ?`,
+        `Un pavé droit mesure ${L} × ${l} × ${h}. Calcule son volume.`,
+        `Calcule le volume d’un pavé de ${L} sur ${l} sur ${h}.`,
+        `Longueur ${L}, largeur ${l}, hauteur ${h}. Quel est le volume ?`,
+        `Trouve le volume de ce pavé droit : ${L}, ${l}, ${h}.`,
+        `Quel est le volume d’un pavé de ${L}, ${l} et ${h} ?`,
+        `Donne le volume du pavé droit dessiné, en ${u}³.`,
+        `Pavé droit de ${L} × ${l} × ${h} : calcule son volume.`,
       ]);
 
       return {
@@ -785,7 +909,8 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
-        explanation: explPave(longueur, largeur, hauteur, u, du(o.un)),
+        ...auPave(),
+        explanation: explPave(longueur, largeur, hauteur, u, "du pavé droit"),
         canvas: solideCanvas({
           solide: "pave_droit",
           dimensions: { longueur, largeur, hauteur, aireBase, volume },
@@ -833,6 +958,7 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
+        ...auPave(),
         explanation: explPave(longueur, largeur, hauteur, u, du(o.un)),
         canvas: solideCanvas({
           solide: "pave_droit",
@@ -863,7 +989,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_prisme",
     difficulty: 2,
     theme: "neutral",
-    text: "Un prisme droit a une aire de base de 18 cm² et une hauteur de 7 cm. Quel est son volume ?",
+    text: "Prisme droit : aire de base 18 cm², hauteur 7 cm. Quel volume ?",
     format: "qcm",
     choices: ["25 cm³", "126 cm³", "63 cm³", "36 cm³"],
     expected: ["126 cm³"],
@@ -896,16 +1022,21 @@ export const volumesBank: TutorBankItemV4[] = [
     hint: "Multiplie l’aire de la base par la hauteur.",
     tags: ["volume", "prisme", "template", "canvas"],
     generate: () => {
-      const o = randomChoice(PRISMES);
-      const aireBase = tirer(o.A);
-      const hauteur = tirer(o.h);
+      // ⭐ 15/11/2026 — ★2 sans situation, ≤ 15 mots (25 en moyenne avant). Le
+      // dessin est un prisme à base triangulaire : le texte ne nomme pas d'autre base.
+      const u = uniteNue();
+      const aireBase = randomInt(4, 60);
+      const hauteur = randomInt(2, 15);
       const volume = aireBase * hauteur;
-      const u = o.u;
+      const A = `${fr(aireBase)} ${u}²`;
+      const H = `${hauteur} ${u}`;
       const text = randomChoice([
-        `${cap(o.un)} est un prisme droit dont la base, ${o.base}, a une aire de ${fr(aireBase)} ${u}². Sa hauteur est ${hauteur} ${u}. Quel est son volume ?`,
-        `Base : ${o.base} de ${fr(aireBase)} ${u}². Hauteur du prisme : ${hauteur} ${u}. Calcule le volume ${de(o.un)}.`,
-        `On modélise ${o.un} par un prisme droit de hauteur ${hauteur} ${u} ; l’aire de sa base vaut ${fr(aireBase)} ${u}². Quel est son volume, en ${u}³ ?`,
-        `Quel est le volume ${de(o.un)} (prisme droit, aire de base ${fr(aireBase)} ${u}², hauteur ${hauteur} ${u}) ?`,
+        `Prisme droit : base ${A}, hauteur ${H}. Calcule son volume.`,
+        `Calcule le volume d’un prisme droit de base ${A} et de hauteur ${H}.`,
+        `Base : un triangle de ${A}. Hauteur : ${H}. Volume du prisme ?`,
+        `Base triangulaire de ${A}, hauteur ${H} : calcule le volume du prisme.`,
+        `Quel est le volume d’un prisme : base ${A}, hauteur ${H} ?`,
+        `Trouve le volume de ce prisme droit : base ${A}, hauteur ${H}.`,
       ]);
 
       return {
@@ -913,11 +1044,12 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
+        ...auPave(),
         explanation:
           `Définition : le volume d’un prisme droit est aire de base × hauteur.\n\n` +
-          `Méthode : la base est ${o.base} ; on multiplie son aire par la hauteur du prisme.\n\n` +
+          `Méthode : on multiplie l’aire de la base par la hauteur du prisme.\n\n` +
           `Calcul : ${fr(aireBase)} × ${hauteur} = ${fr(volume)}.\n\n` +
-          `Conclusion : le volume ${du(o.un)} est ${fr(volume)} ${u}³.`,
+          `Conclusion : le volume du prisme est ${fr(volume)} ${u}³.`,
         canvas: solideCanvas({
           solide: "prisme",
           dimensions: { aireBase, hauteur, volume },
@@ -995,7 +1127,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_cylindre",
     difficulty: 2,
     theme: "neutral",
-    text: "Un cylindre a une aire de base de 25π cm² et une hauteur de 4 cm. Quel est son volume ?",
+    text: "Cylindre : base 25π cm², hauteur 4 cm. Quel est son volume ?",
     format: "qcm",
     choices: ["29π cm³", "100π cm³", "50π cm³", "25π cm³"],
     expected: ["100π cm³"],
@@ -1205,6 +1337,8 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(rep, versLitres ? "L" : "m³"),
         comparator: "number_equal",
+        ...auPave(),
+        canvas: carteVolume(versLitres ? `${fr(m3)} m³` : `${fr(litres)} L`, versLitres ? "? L" : "? m³", cap(o.un)),
         explanation:
           `Définition : 1 m³ = 1 000 dm³ et 1 dm³ = 1 L, donc 1 m³ = 1 000 L.\n\n` +
           `Méthode : ${versLitres ? "on multiplie le nombre de m³ par 1 000" : "on divise le nombre de litres par 1 000"}.\n\n` +
@@ -1265,6 +1399,7 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(y, cas.vers),
         comparator: "number_equal",
+        canvas: carteVolume(`${fr(x)} ${cas.de}`, `? ${cas.vers}`, cap(sujet)),
         explanation:
           `Définition : 1 L = 1 dm³ = 1 000 cm³ et 1 m³ = 1 000 dm³ = 1 000 L.\n\n` +
           `Méthode : pour passer des ${cas.de === "L" ? "litres" : cas.de} aux ${vers}, on ${cas.f > 1 ? "multiplie par 1 000" : "divise par 1 000"}.\n\n` +
@@ -1552,7 +1687,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_comprendre",
     difficulty: 1,
     theme: "neutral",
-    text: "Deux solides occupent exactement la même place dans l’espace. Que peut-on dire ?",
+    text: "Deux solides occupent la même place. Que peut-on dire ?",
     format: "qcm",
     choices: [
       "Ils ont le même volume.",
@@ -1580,10 +1715,12 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_comprendre",
     difficulty: 2,
     theme: "neutral",
-    text: "Une boîte est remplie par 4 rangées de 3 cubes unités, sur 2 étages. Combien de cubes unités contient-elle ?",
+    text: "4 rangées de 3 cubes, sur 2 étages. Combien de cubes en tout ?",
     format: "short",
     expected: ["24"],
     comparator: "number_equal",
+    saisie: "pave",
+    canvas: solideCanvas({ solide: "assemblage_cubes", cubes: blocCubes(4, 3, 2), display: { showLabels: false } }),
     hint: "On calcule le nombre de cubes par étage, puis on multiplie par le nombre d’étages.",
     explanation:
       "Définition : le volume en cubes unités est le nombre total de cubes.\n\n" +
@@ -1602,7 +1739,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_comprendre",
     difficulty: 2,
     theme: "neutral",
-    text: "Un solide est formé de 5 cubes unités. On le démonte et on range les 5 cubes autrement. Que devient son volume ?",
+    text: "On range autrement les 5 cubes d’un solide. Que devient son volume ?",
     format: "qcm",
     choices: [
       "Il reste égal à 5 unités de volume.",
@@ -1665,18 +1802,21 @@ export const volumesBank: TutorBankItemV4[] = [
           cubes.push({ x, y, z: 0 });
         }
       }
-      const b = randomChoice(BRIQUES);
+      // ⭐ 15/11/2026 — ★2 : phrase courte (24 mots en moyenne avant).
+      const b = randomChoice(BRIQUES.filter((x) => !/boîte|caisse/.test(x.sg)));
       const text = randomChoice([
-        `Une seule couche de ${b.pl} est posée sur la table. Chaque ${b.sg} compte pour une unité de volume. Quel est le volume de la couche ?`,
-        `Sur un plateau, on aligne des ${b.pl} en rangées, sur une seule épaisseur. Quel volume occupent-${b.f ? "elles" : "ils"}, si ${unB(b)} vaut une unité ?`,
-        `Combien d’unités de volume compte cette plaque de ${b.pl} ? On prend ${unB(b)} comme unité.`,
-        `Ce dallage de ${b.pl} n’a qu’un étage. Quel est son volume, en prenant ${unB(b)} comme unité ?`,
+        `Ce solide n’a qu’un étage. Quel est son volume, en ${b.pl} ?`,
+        `Une seule couche de ${b.pl}. Quel est son volume ?`,
+        `Compte les ${b.pl} de cette plaque. Quel est son volume ?`,
+        `Combien de ${b.pl} forment ce dallage ?`,
+        `Trouve le volume de cette plaque de ${b.pl}.`,
       ]);
       return {
         text,
         format: "short",
         expected: [String(n)],
         comparator: "number_equal",
+        ...auPave(),
         explanation:
           `Définition : ${unB(b)} représente 1 unité de volume.\n\n` +
           `Méthode : on compte les rangées et le nombre de ${b.pl} par rangée.\n\n` +
@@ -1728,6 +1868,7 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(n)],
         comparator: "number_equal",
+        ...auPave(),
         explanation:
           `Définition : le volume en cubes unités est le nombre total de cubes.\n\n` +
           `Méthode : on compte les cubes d’un étage, puis on multiplie par le nombre d’étages.\n\n` +
@@ -1799,7 +1940,8 @@ export const volumesBank: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "volume_solide",
     microId: "volume_comprendre",
-    difficulty: 1,
+    // ⭐ 15/11/2026 — ★1 → ★3 : chaque énoncé est une situation (piscine, colis…).
+    difficulty: 3,
     theme: "neutral",
     hint: "Un volume a trois dimensions, une aire deux, une longueur une seule.",
     tags: ["volume", "definition", "grandeur", "qcm", "template"],
@@ -1869,7 +2011,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_lien_aire",
     difficulty: 1,
     theme: "neutral",
-    text: "Dans la formule Volume = aire de base × hauteur, que représente l’aire de base ?",
+    text: "Que représente l’aire de base dans la formule du volume ?",
     format: "qcm",
     choices: [
       "l’aire de la face sur laquelle repose le solide",
@@ -1897,7 +2039,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_lien_aire",
     difficulty: 2,
     theme: "neutral",
-    text: "L’aire de base d’un solide est 20 cm² et sa hauteur 5 cm. Quel est son volume ?",
+    text: "Aire de base 20 cm², hauteur 5 cm. Quel est le volume ?",
     format: "qcm",
     choices: [
       "$100 \\text{ cm}^3$",
@@ -1925,7 +2067,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_lien_aire",
     difficulty: 1,
     theme: "neutral",
-    text: "Si l’aire de base est en cm² et la hauteur en cm, dans quelle unité s’exprime le volume ?",
+    text: "Une aire en cm² × une longueur en cm donne quelle unité ?",
     format: "qcm",
     choices: [
       "$\\text{cm}^3$",
@@ -1954,25 +2096,38 @@ export const volumesBank: TutorBankItemV4[] = [
     difficulty: 2,
     theme: "neutral",
     hint: "Multiplie l’aire de base par la hauteur.",
-    tags: ["volume", "aire_base", "template"],
+    tags: ["volume", "aire_base", "qcm", "template", "canvas"],
     generate: () => {
-      const o = randomChoice(BASES);
-      const aireBase = tirer(o.A);
-      const hauteur = tirer(o.h);
+      // ⭐ 15/11/2026 — ★2 en QCM, sans situation (21 mots et 60 % de contextes avant).
+      // Pièges : additionner, compter deux bases, diviser par 2 comme un triangle.
+      const s = randomChoice(SOLIDES_NUS);
+      const u = uniteNue();
+      const aireBase = 2 * randomInt(2, 30);
+      const hauteur = randomInt(2, 12);
       const volume = aireBase * hauteur;
-      const u = o.u;
+      const A = `${fr(aireBase)} ${u}²`;
+      const H = `${hauteur} ${u}`;
+      const ecr = (v: number) => `${fr(v)} ${u}³`;
       const text = randomChoice([
-        `Aire de la base : ${fr(aireBase)} ${u}². Hauteur : ${hauteur} ${u}. Donne le volume ${de(o.un)}, en ${u}³.`,
-        `${cap(o.un)} mesure ${hauteur} ${u} de haut et sa base a une aire de ${fr(aireBase)} ${u}². Quel volume occupe-t-${o.il} ?`,
-        `Pour ${o.un}, on sait que la base a une aire de ${fr(aireBase)} ${u}² et que la hauteur vaut ${hauteur} ${u}. Calcule son volume.`,
-        `Combien de ${u}³ occupe ${o.un} dont la base a une aire de ${fr(aireBase)} ${u}² et dont la hauteur vaut ${hauteur} ${u} ?`,
+        `Base : ${A}. Hauteur : ${H}. Quel est le volume ?`,
+        `Quel volume pour une base de ${A} et une hauteur de ${H} ?`,
+        `Choisis le volume d’un ${s} de base ${A}, haut de ${H}.`,
+        `Calcule le volume : base ${A}, hauteur ${H}.`,
+        `Volume = aire de base × hauteur. Combien pour ${A} et ${H} ?`,
       ]);
       return {
         text,
-        format: "short",
-        expected: avecUnite(volume, `${u}³`),
-        comparator: "number_equal",
-        explanation: explAireBase(aireBase, hauteur, u, du(o.un)),
+        format: "qcm",
+        choices: makeChoices(ecr(volume), [
+          ecr(aireBase + hauteur),
+          ecr(2 * volume),
+          ecr(volume / 2),
+          ecr(volume * hauteur),
+        ]),
+        expected: [ecr(volume)],
+        comparator: "mcq_exact",
+        explanation: explAireBase(aireBase, hauteur, u, `du ${s}`),
+        canvas: figureBase(s, aireBase, hauteur, u),
       };
     },
   },
@@ -2005,6 +2160,8 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(aireBase, `${u}²`),
         comparator: "number_equal",
+        ...auPave(),
+        ...figureObjet(o, null, hauteur),
         explanation:
           `Définition : comme Volume = aire de base × hauteur, on a aire de base = volume ÷ hauteur.\n\n` +
           `Méthode : on divise le volume par la hauteur.\n\n` +
@@ -2042,6 +2199,8 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(hauteur, u),
         comparator: "number_equal",
+        ...auPave(),
+        ...figureObjet(o, aireBase, null),
         explanation:
           `Définition : comme Volume = aire de base × hauteur, on a hauteur = volume ÷ aire de base.\n\n` +
           `Méthode : on divise le volume par l’aire de base.\n\n` +
@@ -2084,6 +2243,13 @@ export const volumesBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: [juste ? "oui" : "non"],
         comparator: "mcq_exact",
+        canvas: solideCanvas({
+          solide: "pave_droit",
+          dimensions: { longueur: cote, largeur: cote, hauteur },
+          labels: { longueur: `${cote} ${u}`, largeur: `${cote} ${u}`, hauteur: `${hauteur} ${u}`, aireBase: "base carrée" },
+          highlight: { base: true, hauteur: true },
+          display: { showLabels: true, showDimensions: true },
+        }),
         explanation:
           `Définition : le volume vaut aire de base × hauteur, et non périmètre × hauteur.\n\n` +
           `Méthode : on calcule d’abord l’aire de la base carrée : côté × côté.\n\n` +
@@ -2105,15 +2271,22 @@ export const volumesBank: TutorBankItemV4[] = [
     hint: "Volume = aire de base × hauteur.",
     tags: ["volume", "aire_base", "formule", "qcm", "template"],
     generate: () => {
-      const o = randomChoice(BASES);
-      const A = tirer(o.A);
-      const h = tirer(o.h);
-      const u = o.u;
+      // ⭐ 15/11/2026 — ★1 court et sans situation (25 mots avant). ⛔ Il tombait à
+      // DEUX propositions une fois sur deux : les objets à 1 m de haut (piscine)
+      // rendaient A × h × h et A ÷ h égaux à A × h, filtrés. Hauteur ≥ 2 et un
+      // quatrième piège (le ÷ 3 de la pyramide) : toujours quatre propositions.
+      const s = randomChoice(SOLIDES_NUS);
+      const u = uniteNue();
+      const A = randomInt(5, 60);
+      const h = randomInt(2, 12);
+      const a2 = `${fr(A)} ${u}²`;
+      const l = `${h} ${u}`;
       const text = randomChoice([
-        `${cap(o.un)} a la forme ${de(o.solide)} : l’aire de sa base est ${fr(A)} ${u}² et sa hauteur ${h} ${u}. Quel calcul donne son volume ?`,
-        `On connaît l’aire de la base ${de(o.un)} (${fr(A)} ${u}²) et sa hauteur (${h} ${u}). Pour obtenir son volume, on calcule…`,
-        `Pour ${o.un} de hauteur ${h} ${u}, dont la base a une aire de ${fr(A)} ${u}², quelle opération donne le volume ?`,
-        `Hauteur : ${h} ${u}. Aire de la base : ${fr(A)} ${u}². Quel calcul permet de trouver le volume ${de(o.un)} ?`,
+        `Base ${a2}, hauteur ${l}. Quel calcul donne le volume ?`,
+        `Choisis le calcul du volume : base ${a2}, hauteur ${l}.`,
+        `Aire de base ${a2}, hauteur ${l}. Quel calcul faire ?`,
+        `Quel calcul donne le volume ? Base ${a2}, hauteur ${l}.`,
+        `Trouve le bon calcul : base ${a2}, hauteur ${l}.`,
       ]);
       const correct = `${fr(A)} × ${h}`;
       return {
@@ -2123,10 +2296,11 @@ export const volumesBank: TutorBankItemV4[] = [
         // serait une seconde bonne réponse : on l'écarte.
         choices: makeChoices(
           correct,
-          ([[`${fr(A)} + ${h}`, A + h], [`${fr(A)} × ${h} × ${h}`, A * h * h], [`${fr(A)} ÷ ${h}`, A / h]] as [string, number][])
+          ([[`${fr(A)} + ${h}`, A + h], [`${fr(A)} × ${h} × ${h}`, A * h * h], [`${fr(A)} ÷ ${h}`, A / h], [`${fr(A)} × ${h} ÷ 3`, (A * h) / 3]] as [string, number][])
             .filter(([, v]) => v !== A * h)
             .map(([c]) => c)
         ),
+        canvas: figureBase(s, A, h, u),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
@@ -2212,7 +2386,14 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_pave",
     difficulty: 2,
     theme: "neutral",
-    text: "Une boîte cubique a une arête de 10 cm. Quel est son volume ?",
+    text: "Un cube a une arête de 10 cm. Quel est son volume ?",
+    canvas: solideCanvas({
+      solide: "pave_droit",
+      dimensions: { longueur: 10, largeur: 10, hauteur: 10 },
+      labels: { longueur: "10 cm", largeur: "10 cm", hauteur: "10 cm" },
+      highlight: { base: true, hauteur: true },
+      display: { showLabels: true, showDimensions: true },
+    }),
     format: "qcm",
     choices: [
       "$1000 \\text{ cm}^3$",
@@ -2243,27 +2424,29 @@ export const volumesBank: TutorBankItemV4[] = [
     hint: "Multiplie l’arête par elle-même trois fois.",
     tags: ["volume", "cube", "template", "canvas"],
     generate: () => {
-      const o = randomChoice(CUBES);
-      const a = tirer(o.a);
+      // ⭐ 15/11/2026 — ★2 sans situation (les objets cubiques vont au ★3 du pavé).
+      const u = uniteNue();
+      const a = randomInt(2, 12);
       const volume = a * a * a;
-      const u = o.u;
       const text = randomChoice([
-        `${cap(o.un)} a la forme d’un cube de ${a} ${u} d’arête. Quel est son volume, en ${u}³ ?`,
-        `Chaque arête ${de(o.un)} cubique mesure ${a} ${u}. Quel volume occupe-t-${o.il} ?`,
-        `Quel est le volume ${de(o.un)} cubique de ${a} ${u} de côté ?`,
-        `${cap(o.un)} cubique a des arêtes de ${a} ${u}. Combien de ${u}³ occupe-t-${o.il} ?`,
-        `Calcule, en ${u}³, le volume ${de(o.un)} en forme de cube d’arête ${a} ${u}.`,
+        `Un cube a une arête de ${a} ${u}. Calcule son volume.`,
+        `Calcule le volume d’un cube de ${a} ${u} d’arête.`,
+        `Quel est le volume d’un cube de côté ${a} ${u} ?`,
+        `Arête du cube : ${a} ${u}. Quel est son volume ?`,
+        `Trouve le volume de ce cube de ${a} ${u} de côté.`,
+        `Donne le volume d’un cube d’arête ${a} ${u}.`,
       ]);
       return {
         text,
         format: "short",
         expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
+        ...auPave(),
         explanation:
           `Définition : le volume d’un cube est arête × arête × arête.\n\n` +
           `Méthode : on multiplie l’arête trois fois par elle-même.\n\n` +
           `Calcul : ${a} × ${a} × ${a} = ${fr(volume)}.\n\n` +
-          `Conclusion : le volume ${du(o.un)} est ${fr(volume)} ${u}³.`,
+          `Conclusion : le volume du cube est ${fr(volume)} ${u}³.`,
         canvas: solideCanvas({
           solide: "pave_droit",
           dimensions: { longueur: a, largeur: a, hauteur: a },
@@ -2304,6 +2487,8 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
+        ...auPave(),
+        canvas: figurePaveDroit(longueur, largeur, hauteur, u, false),
         explanation: explPave(longueur, largeur, hauteur, u, du(o.un)),
       };
     },
@@ -2344,6 +2529,19 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(rep, u),
         comparator: "number_equal",
+        ...auPave(),
+        canvas: solideCanvas({
+          solide: "pave_droit",
+          dimensions: { longueur, largeur, hauteur },
+          labels: {
+            longueur: `${longueur} ${u}`,
+            largeur: chercheHauteur ? `${largeur} ${u}` : `? ${u}`,
+            hauteur: chercheHauteur ? `? ${u}` : `${hauteur} ${u}`,
+            aireBase: `V = ${fr(volume)} ${u}³`,
+          },
+          highlight: { base: true, hauteur: true },
+          display: { showLabels: true, showDimensions: true },
+        }),
         explanation:
           `Définition : le volume d’un pavé droit est le produit de ses trois dimensions, donc une dimension = volume ÷ (produit des deux autres).\n\n` +
           `Méthode : on multiplie les deux dimensions connues, puis on divise le volume par ce produit.\n\n` +
@@ -2386,6 +2584,7 @@ export const volumesBank: TutorBankItemV4[] = [
         choices: ["oui", "non"],
         expected: [juste ? "oui" : "non"],
         comparator: "mcq_exact",
+        canvas: figurePaveDroit(longueur, largeur, hauteur, u, false),
         explanation:
           `Définition : le volume d’un pavé droit est longueur × largeur × hauteur.\n\n` +
           `Méthode : ${cas === "oubli" ? "ici, la hauteur a été oubliée" : cas === "somme" ? "ici, les dimensions ont été additionnées au lieu d’être multipliées" : "on vérifie en multipliant les trois dimensions"}.\n\n` +
@@ -2407,16 +2606,20 @@ export const volumesBank: TutorBankItemV4[] = [
     hint: "On multiplie les trois dimensions.",
     tags: ["volume", "pave_droit", "formule", "qcm", "template"],
     generate: () => {
-      const o = randomChoice(PAVES);
-      const L = tirer(o.L);
-      const l = tirer(o.l);
-      const h = tirer(o.h);
-      const u = o.u;
+      // ⭐ 15/11/2026 — ★1 court et sans situation (25 mots avant). ⛔ Il tombait à
+      // TROIS propositions : h = 1 (piscine, boîte d'allumettes) rendait L × l
+      // égal au volume. Dimensions ≥ 2 et un quatrième piège (L × l + h).
+      const u = uniteNue();
+      const L = randomInt(3, 12);
+      const l = randomInt(2, L);
+      const h = randomInt(2, 9);
+      const d = `${L} ${u}, ${l} ${u}, ${h} ${u}`;
       const text = randomChoice([
-        `${cap(o.un)} a la forme d’un pavé droit de ${L} ${u} sur ${l} ${u}, et de ${h} ${u} de hauteur. Quel calcul donne son volume ?`,
-        `Quel calcul donne le volume ${de(o.un)} de ${L} ${u} de long, ${l} ${u} de large et ${h} ${u} de haut ?`,
-        `Longueur ${L} ${u}, largeur ${l} ${u}, hauteur ${h} ${u} : ce sont les dimensions ${de(o.un)}. Pour trouver son volume, on calcule…`,
-        `On modélise ${o.un} par un pavé droit (${L} ${u} × ${l} ${u} × ${h} ${u}). Quelle opération donne son volume ?`,
+        `Choisis le calcul du volume : ${d}.`,
+        `Quel calcul pour ce pavé ? ${d}.`,
+        `Trouve le calcul du volume : ${d}.`,
+        `Quel calcul donne le volume ? ${d}.`,
+        `Le pavé mesure ${d}. Quel calcul ?`,
       ]);
       const correct = `${L} × ${l} × ${h}`;
       return {
@@ -2426,10 +2629,11 @@ export const volumesBank: TutorBankItemV4[] = [
         // 6 et 3 : 2 × (6 + 3) = 6 × 3) serait une seconde bonne réponse : écarté.
         choices: makeChoices(
           correct,
-          ([[`${L} + ${l} + ${h}`, L + l + h], [`${L} × ${l}`, L * l], [`2 × (${L} + ${l}) × ${h}`, 2 * (L + l) * h]] as [string, number][])
+          ([[`${L} + ${l} + ${h}`, L + l + h], [`${L} × ${l}`, L * l], [`2 × (${L} + ${l}) × ${h}`, 2 * (L + l) * h], [`${L} × ${l} + ${h}`, L * l + h]] as [string, number][])
             .filter(([, v]) => v !== L * l * h)
             .map(([c]) => c)
         ),
+        canvas: figurePaveDroit(L, l, h, u, false),
         expected: [correct],
         comparator: "mcq_exact",
         explanation:
@@ -2480,7 +2684,14 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_prisme",
     difficulty: 2,
     theme: "neutral",
-    text: "Un prisme droit a une base triangulaire d’aire 12 cm² et une hauteur de 5 cm. Quel est son volume ?",
+    text: "Prisme droit : base triangulaire de 12 cm², hauteur 5 cm. Son volume ?",
+    canvas: solideCanvas({
+      solide: "prisme",
+      dimensions: { aireBase: 12, hauteur: 5 },
+      labels: { aireBase: "12 cm²", hauteur: "5 cm" },
+      highlight: { base: true, hauteur: true },
+      display: { showLabels: true, showDimensions: true },
+    }),
     format: "qcm",
     choices: [
       "$60 \\text{ cm}^3$",
@@ -2537,29 +2748,41 @@ export const volumesBank: TutorBankItemV4[] = [
     difficulty: 2,
     theme: "neutral",
     hint: "Multiplie l’aire de base par la hauteur.",
-    tags: ["volume", "prisme", "template"],
+    tags: ["volume", "prisme", "qcm", "template", "canvas"],
     generate: () => {
-      const o = randomChoice(PRISMES);
-      const aireBase = tirer(o.A);
-      const hauteur = tirer(o.h);
+      // ⭐ 15/11/2026 — ★2 en QCM, sans situation (25 mots avant). Pièges :
+      // additionner, compter les deux bases, diviser par 2 comme pour le triangle.
+      const u = uniteNue();
+      const aireBase = 2 * randomInt(2, 30);
+      const hauteur = randomInt(2, 12);
       const volume = aireBase * hauteur;
-      const u = o.u;
+      const A = `${fr(aireBase)} ${u}²`;
+      const H = `${hauteur} ${u}`;
+      const ecr = (v: number) => `${fr(v)} ${u}³`;
       const text = randomChoice([
-        `${cap(o.un)} a la forme d’un prisme droit. Sa base est ${o.base} d’aire ${fr(aireBase)} ${u}², et la distance entre ses deux bases est ${hauteur} ${u}. Calcule son volume.`,
-        `Combien de ${u}³ occupe ${o.un}, prisme droit de ${hauteur} ${u} de hauteur dont la base a une aire de ${fr(aireBase)} ${u}² ?`,
-        `La base ${de(o.un)} est ${o.base} de ${fr(aireBase)} ${u}² ; le prisme mesure ${hauteur} ${u} de hauteur. Donne son volume en ${u}³.`,
-        `Aire de la base ${de(o.un)} : ${fr(aireBase)} ${u}². Hauteur du prisme : ${hauteur} ${u}. Quel est son volume ?`,
+        `Prisme droit : base ${A}, hauteur ${H}. Quel est son volume ?`,
+        `Choisis le volume du prisme : base ${A}, hauteur ${H}.`,
+        `Base triangulaire de ${A}, hauteur ${H}. Quel volume ?`,
+        `Calcule le volume d’un prisme de base ${A}, haut de ${H}.`,
+        `Quel volume pour un prisme de base ${A} et de hauteur ${H} ?`,
       ]);
       return {
         text,
-        format: "short",
-        expected: avecUnite(volume, `${u}³`),
-        comparator: "number_equal",
+        format: "qcm",
+        choices: makeChoices(ecr(volume), [
+          ecr(aireBase + hauteur),
+          ecr(2 * volume),
+          ecr(volume / 2),
+          ecr(volume * hauteur),
+        ]),
+        expected: [ecr(volume)],
+        comparator: "mcq_exact",
+        canvas: figureBase("prisme", aireBase, hauteur, u),
         explanation:
           `Définition : le volume d’un prisme droit est aire de base × hauteur.\n\n` +
-          `Méthode : l’aire ${o.duBase} est donnée ; on la multiplie par la hauteur du prisme.\n\n` +
+          `Méthode : l’aire de la base est donnée ; on la multiplie par la hauteur du prisme.\n\n` +
           `Calcul : ${fr(aireBase)} × ${hauteur} = ${fr(volume)}.\n\n` +
-          `Conclusion : le volume ${du(o.un)} est ${fr(volume)} ${u}³.`,
+          `Conclusion : le volume du prisme est ${fr(volume)} ${u}³.`,
       };
     },
   },
@@ -2594,6 +2817,15 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
+        ...auPave(),
+        canvas: solideCanvas({
+          solide: "prisme",
+          // L'aire du triangle n'est PAS écrite : c'est l'étape que l'élève doit faire.
+          dimensions: { hauteur: hauteurPrisme },
+          labels: { aireBase: "base triangulaire", hauteur: `${hauteurPrisme} ${u}` },
+          highlight: { base: true, hauteur: true },
+          display: { showLabels: true, showDimensions: true },
+        }),
         explanation:
           `Définition : le volume d’un prisme droit est aire de base × hauteur.\n\n` +
           `Méthode : on calcule l’aire du triangle de base (base × hauteur ÷ 2), puis on multiplie par la hauteur du prisme.\n\n` +
@@ -2633,6 +2865,8 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(volume, `${u}³`),
         comparator: "number_equal",
+        ...auPave(),
+        canvas: figurePaveDroit(longueur, largeur, hauteur, u, false),
         explanation:
           `Définition : le volume d’un prisme droit est aire de base × hauteur.\n\n` +
           `Méthode : on calcule l’aire du rectangle de base, puis on multiplie par la hauteur (la longueur de l’objet).\n\n` +
@@ -2677,6 +2911,9 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(rep, chercheH ? u : `${u}²`),
         comparator: "number_equal",
+        ...auPave(),
+        // Le dessin est un prisme à base triangulaire : seulement quand la base en est un.
+        ...(o.pl === "triangles" ? { canvas: figureBase("prisme", chercheH ? aireBase : null, chercheH ? null : hauteur, u) } : {}),
         explanation:
           `Définition : Volume = aire de base × hauteur, donc ${chercheH ? "hauteur = volume ÷ aire de base" : "aire de base = volume ÷ hauteur"}.\n\n` +
           `Méthode : on divise le volume par ${chercheH ? "l’aire de base" : "la hauteur"}.\n\n` +
@@ -2698,12 +2935,14 @@ export const volumesBank: TutorBankItemV4[] = [
     hint: "Volume d’un prisme droit = aire de base × hauteur.",
     tags: ["volume", "prisme", "formule", "qcm", "template"],
     generate: () => {
-      const o = randomChoice(PRISMES);
+      // ⭐ 15/11/2026 — ★1 court et sans situation (21 mots avant).
+      const o = randomChoice([TRI, TRAP, HEX, PENT, RECT]);
       const text = randomChoice([
-        `${cap(o.un)} a la forme d’un prisme droit dont la base est ${o.base}. Son volume s’obtient en calculant…`,
-        `${cap(o.un)} est un prisme droit ; sa base est ${o.base}. Quelle méthode donne son volume ?`,
-        `Quelle méthode permet de calculer le volume ${de(o.un)}, prisme droit dont les deux bases sont des ${o.pl} identiques ?`,
-        `On veut le volume ${de(o.un)}, un prisme droit à base en forme de ${o.base.replace(/^une? /, "")}. Que faut-il calculer ?`,
+        `La base de ce prisme droit est ${o.base}. Que calcule-t-on ?`,
+        `Un prisme droit a pour base ${o.base}. Son volume ?`,
+        `Prisme dont la base est ${o.base} : que calcule-t-on ?`,
+        `Base : ${o.base}. Comment calculer le volume du prisme ?`,
+        `Ce prisme a deux bases : des ${o.pl}. Son volume vaut…`,
       ]);
       const correct = `l’aire ${o.duBase} multipliée par la hauteur du prisme`;
       return {
@@ -2716,11 +2955,15 @@ export const volumesBank: TutorBankItemV4[] = [
         ]),
         expected: [correct],
         comparator: "mcq_exact",
+        // Le prisme dessiné a une base triangulaire : la figure seulement dans ce cas.
+        ...(o === TRI
+          ? { canvas: solideCanvas({ solide: "prisme", labels: { aireBase: "base", hauteur: "hauteur" }, highlight: { base: true, hauteur: true }, display: { showLabels: true, showDimensions: true } }) }
+          : {}),
         explanation:
           `Définition : un prisme droit garde la même base tout le long de sa hauteur, donc Volume = aire de base × hauteur.\n\n` +
           `Méthode : ici la base est ${o.base} : on calcule son aire, puis on la multiplie par la hauteur du prisme.\n\n` +
           `Calcul : aucun calcul n’est nécessaire ici.\n\n` +
-          `Conclusion : le volume ${du(o.un)} s’obtient avec ${correct}.`,
+          `Conclusion : le volume du prisme s’obtient avec ${correct}.`,
       };
     },
   },
@@ -2764,7 +3007,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_cylindre",
     difficulty: 2,
     theme: "neutral",
-    text: "Un cylindre a une aire de base de 9π cm² et une hauteur de 2 cm. Quel est son volume ?",
+    text: "Base 9π cm², hauteur 2 cm : calcule le volume du cylindre.",
     format: "qcm",
     choices: [
       "$18\\pi \\text{ cm}^3$",
@@ -2780,7 +3023,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Méthode : on multiplie l’aire du disque par la hauteur.\n\n" +
       "Calcul : $9\\pi \\times 2 = 18\\pi$.\n\n" +
       "Conclusion : le volume est $18\\pi \\text{ cm}^3$.",
-    tags: ["volume", "cylindre", "pi", "qcm"],
+    canvas: solideCanvas({
+      solide: "cylindre",
+      dimensions: { rayon: 3, hauteur: 2 },
+      labels: { rayon: "", aireBase: "9π cm²", hauteur: "2 cm" },
+      highlight: { base: true, hauteur: true },
+      display: { showLabels: true, showDimensions: true },
+    }),
+    tags: ["volume", "cylindre", "pi", "qcm", "canvas"],
   },
 
   {
@@ -2792,7 +3042,7 @@ export const volumesBank: TutorBankItemV4[] = [
     microId: "volume_cylindre",
     difficulty: 2,
     theme: "neutral",
-    text: "Un cylindre a une aire de base de 16π cm² et une hauteur de 5 cm. Quel est son volume ?",
+    text: "Volume d’un cylindre de base 16π cm² et de hauteur 5 cm ?",
     format: "qcm",
     choices: [
       "$80\\pi \\text{ cm}^3$",
@@ -2808,7 +3058,14 @@ export const volumesBank: TutorBankItemV4[] = [
       "Méthode : on multiplie l’aire du disque par la hauteur.\n\n" +
       "Calcul : $16\\pi \\times 5 = 80\\pi$.\n\n" +
       "Conclusion : le volume est $80\\pi \\text{ cm}^3$.",
-    tags: ["volume", "cylindre", "pi", "qcm"],
+    canvas: solideCanvas({
+      solide: "cylindre",
+      dimensions: { rayon: 4, hauteur: 5 },
+      labels: { rayon: "", aireBase: "16π cm²", hauteur: "5 cm" },
+      highlight: { base: true, hauteur: true },
+      display: { showLabels: true, showDimensions: true },
+    }),
+    tags: ["volume", "cylindre", "pi", "qcm", "canvas"],
   },
 
   {
@@ -2898,6 +3155,7 @@ export const volumesBank: TutorBankItemV4[] = [
         ]),
         expected: [correct],
         comparator: "mcq_exact",
+        canvas: figCylindre(rayon, hauteur, u),
         explanation:
           `Définition : le volume d’un cylindre est aire de base × hauteur, soit π × r² × h.\n\n` +
           `Méthode : on calcule l’aire du disque (π × r²), puis on multiplie par la hauteur.\n\n` +
@@ -2935,6 +3193,7 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(v, `${u}³`),
         comparator: "number_equal",
+        canvas: figCylindre(rayon, hauteur, u),
         explanation:
           `Définition : le volume d’un cylindre est π × rayon² × hauteur.\n\n` +
           `Méthode : on remplace π par 3,14 et on calcule.\n\n` +
@@ -2995,15 +3254,21 @@ export const volumesBank: TutorBankItemV4[] = [
     tags: ["volume", "cylindre", "aire_base", "pi", "qcm", "template"],
     generate: () => {
       // r ≥ 3 : à r = 2, 2r et r² coïncident et le QCM perdrait une ligne.
-      const o = randomChoice(CYLINDRES.filter((c) => c.r[1] >= 3));
-      const rayon = Math.max(3, tirer(o.r));
-      const u = o.u;
+      // ⭐ 15/11/2026 — ★1 court et sans situation (21 mots avant).
+      const rayon = randomInt(3, 12);
+      const u = uniteNue();
       const correct = `${rayon * rayon}π ${u}²`;
       const text = randomChoice([
-        `Le fond ${de(o.un)} est un disque de ${rayon} ${u} de rayon. Quelle est l’aire de cette base ?`,
-        `${cap(o.un)} a la forme d’un cylindre de rayon ${rayon} ${u}. Quelle est l’aire de son disque de base ?`,
-        `Quelle est l’aire de la base ${de(o.un)} cylindrique dont le rayon mesure ${rayon} ${u} ?`,
-        `Pour calculer le volume ${de(o.un)}, on commence par l’aire de sa base, un disque de rayon ${rayon} ${u}. Que vaut cette aire ?`,
+        `Rayon de la base : ${rayon} ${u}. Quelle est son aire ?`,
+        `Cylindre de rayon ${rayon} ${u}. Aire de sa base ?`,
+        `Calcule l’aire du disque de base : rayon ${rayon} ${u}.`,
+        `Quelle est l’aire d’une base de rayon ${rayon} ${u} ?`,
+        `Trouve l’aire de la base d’un cylindre de rayon ${rayon} ${u}.`,
+        `Choisis l’aire du disque de rayon ${rayon} ${u}.`,
+        `Aire du disque de base ? Rayon ${rayon} ${u}.`,
+        `Rayon ${rayon} ${u} : quelle est l’aire de la base ?`,
+        `Donne l’aire de la base : rayon ${rayon} ${u}.`,
+        `Disque de base de rayon ${rayon} ${u}. Son aire ?`,
       ]);
       return {
         text,
@@ -3015,11 +3280,18 @@ export const volumesBank: TutorBankItemV4[] = [
         ]),
         expected: [correct],
         comparator: "mcq_exact",
+        canvas: solideCanvas({
+          solide: "cylindre",
+          dimensions: { rayon },
+          labels: { rayon: `${rayon} ${u}`, hauteur: "", aireBase: "aire ?" },
+          highlight: { base: true },
+          display: { showLabels: true, showDimensions: true },
+        }),
         explanation:
           `Définition : la base d’un cylindre est un disque ; l’aire d’un disque de rayon r est π × r².\n\n` +
           `Méthode : on élève le rayon au carré, puis on multiplie par π.\n\n` +
           `Calcul : π × ${rayon}² = π × ${rayon * rayon} = ${rayon * rayon}π.\n\n` +
-          `Conclusion : l’aire de la base ${du(o.un)} est ${rayon * rayon}π ${u}².`,
+          `Conclusion : l’aire de la base est ${rayon * rayon}π ${u}².`,
       };
     },
   },
@@ -3036,19 +3308,27 @@ export const volumesBank: TutorBankItemV4[] = [
     hint: "Volume = aire de base × hauteur.",
     tags: ["volume", "cylindre", "pi", "qcm", "template"],
     generate: () => {
-      const o = randomChoice(CYLINDRES);
-      const rayon = Math.max(2, tirer(o.r));
-      const hauteur = tirer(o.h);
-      const u = o.u;
+      // ⭐ 15/11/2026 — ★2 court et sans situation (22 mots avant). Unités cm, dm, m :
+      // le correcteur lit « aπ cm² ».
+      const rayon = randomInt(2, 10);
+      const hauteur = randomInt(2, 15);
+      const u = randomChoice(["cm", "dm", "m"]);
       const a = rayon * rayon;
       const v = a * hauteur;
       const ecr = (k: number) => `${fr(k)}π ${u}³`;
       const correct = ecr(v);
+      const B = `${a}π ${u}²`;
+      const H = `${hauteur} ${u}`;
       const text = randomChoice([
-        `La base ${de(o.un)} est un disque d’aire ${a}π ${u}², et sa hauteur est ${hauteur} ${u}. Quel est son volume ?`,
-        `${cap(o.un)} cylindrique a une base d’aire ${a}π ${u}² et mesure ${hauteur} ${u} de haut. Quel volume occupe-t-${o.il} ?`,
-        `Aire du disque de base : ${a}π ${u}². Hauteur : ${hauteur} ${u}. Quel est le volume ${de(o.un)} ?`,
-        `Le volume ${de(o.un)} s’obtient en multipliant l’aire de sa base, ${a}π ${u}², par sa hauteur, ${hauteur} ${u}. Que vaut ce volume ?`,
+        `Base de ${B}, hauteur ${H}. Quel est le volume du cylindre ?`,
+        `Cylindre : base ${B}, hauteur ${H}. Son volume ?`,
+        `Choisis le volume du cylindre : base ${B}, hauteur ${H}.`,
+        `Calcule le volume d’un cylindre de base ${B}, haut de ${H}.`,
+        `Aire de base ${B}, hauteur ${H}. Quel volume ?`,
+        `Volume d’un cylindre de base ${B} et de hauteur ${H} ?`,
+        `Trouve le volume : cylindre de base ${B}, hauteur ${H}.`,
+        `Hauteur ${H}, base ${B} : volume du cylindre ?`,
+        `Quel volume pour ce cylindre ? Base ${B}, hauteur ${H}.`,
       ]);
       return {
         text,
@@ -3056,11 +3336,12 @@ export const volumesBank: TutorBankItemV4[] = [
         choices: makeChoices(correct, [ecr(a + hauteur), ecr(a), ecr(2 * v), ecr(rayon * hauteur)]),
         expected: [correct],
         comparator: "mcq_exact",
+        canvas: figCylindre(rayon, hauteur, u, B),
         explanation:
           `Définition : le volume d’un cylindre est aire de base × hauteur.\n\n` +
           `Méthode : on multiplie l’aire du disque par la hauteur.\n\n` +
           `Calcul : ${a}π × ${hauteur} = ${v}π.\n\n` +
-          `Conclusion : le volume ${du(o.un)} est ${v}π ${u}³.`,
+          `Conclusion : le volume du cylindre est ${v}π ${u}³.`,
       };
     },
   },
@@ -3077,22 +3358,32 @@ export const volumesBank: TutorBankItemV4[] = [
     hint: "Volume = aire de base × hauteur.",
     tags: ["volume", "cylindre", "aire_base", "template"],
     generate: () => {
-      const o = randomChoice(CYL_AIRES);
-      const A = tirer(o.A);
-      const h = tirer(o.h);
-      const u = o.u;
+      // ⭐ 15/11/2026 — ★2 court et sans situation (22 mots avant) ; les objets
+      // cylindriques de CYL_AIRES servent désormais le ★3 (volume_cylindre_tpl_11).
+      const u = uniteNue();
+      const A = randomInt(5, 80);
+      const h = randomInt(2, 15);
+      const a2 = `${fr(A)} ${u}²`;
+      const l = `${h} ${u}`;
       const text = randomChoice([
-        `La base ${de(o.un)} a une aire de ${fr(A)} ${u}². Sa hauteur est ${h} ${u}. Quel est son volume, en ${u}³ ?`,
-        `${cap(o.un)} a la forme d’un cylindre : disque de base de ${fr(A)} ${u}², hauteur de ${h} ${u}. Calcule son volume.`,
-        `Quel volume, en ${u}³, occupe ${o.un} de ${h} ${u} de haut dont le fond a une aire de ${fr(A)} ${u}² ?`,
-        `On connaît l’aire du disque de base ${de(o.un)} : ${fr(A)} ${u}². Sa hauteur vaut ${h} ${u}. Donne son volume.`,
+        `Base de ${a2}, hauteur ${l}. Calcule le volume du cylindre.`,
+        `Cylindre : aire de base ${a2}, hauteur ${l}. Son volume ?`,
+        `Calcule le volume d’un cylindre : base ${a2}, hauteur ${l}.`,
+        `Quel est le volume d’un cylindre de base ${a2} et hauteur ${l} ?`,
+        `Trouve le volume du cylindre : base ${a2}, hauteur ${l}.`,
+        `Volume d’un cylindre de base ${a2}, hauteur ${l} ?`,
+        `Hauteur ${l}, aire de base ${a2} : volume du cylindre ?`,
+        `Donne le volume du cylindre : base ${a2}, hauteur ${l}.`,
+        `Quel volume pour ce cylindre ? Base ${a2}, hauteur ${l}.`,
       ]);
       return {
         text,
         format: "short",
         expected: avecUnite(A * h, `${u}³`),
         comparator: "number_equal",
-        explanation: explAireBase(A, h, u, du(o.un)),
+        ...auPave(),
+        canvas: figureBase("cylindre", A, h, u),
+        explanation: explAireBase(A, h, u, "du cylindre"),
       };
     },
   },
@@ -3157,32 +3448,11 @@ export const volumesBank: TutorBankItemV4[] = [
     hint: "1 L = 1 000 cm³.",
     tags: ["volume", "litre", "conversion", "template"],
     generate: () => {
-      const o = randomChoice(LIQUIDES);
-      const litres = tirer(o.L);
-      const cm3 = litres * 1000;
-      const versCm3 = Math.random() < 0.5;
-      const text = versCm3
-        ? randomChoice([
-            `${cap(o.un)} contient ${litres} L ${o.liq}. Combien de cm³ cela représente-t-il ?`,
-            `La contenance ${de(o.un)} est de ${litres} L. Exprime-la en cm³.`,
-            `Convertis en cm³ le volume ${de(o.un)} : ${litres} L.`,
-          ])
-        : randomChoice([
-            `${cap(o.un)} contient ${fr(cm3)} cm³ ${o.liq}. Combien de litres cela fait-il ?`,
-            `Exprime en litres la contenance ${de(o.un)}, qui est de ${fr(cm3)} cm³.`,
-            `${fr(cm3)} cm³ : c’est le volume ${o.liq} dans ${o.un}. Combien de litres ?`,
-          ]);
-      return {
-        text,
-        format: "short",
-        expected: avecUnite(versCm3 ? cm3 : litres, versCm3 ? "cm³" : "L"),
-        comparator: "number_equal",
-        explanation:
-          `Définition : 1 L = 1 dm³ = 1 000 cm³.\n\n` +
-          `Méthode : ${versCm3 ? "on multiplie le nombre de litres par 1 000" : "on divise le nombre de cm³ par 1 000"}.\n\n` +
-          `Calcul : ${versCm3 ? `${litres} × 1 000 = ${fr(cm3)}` : `${fr(cm3)} ÷ 1 000 = ${litres}`}.\n\n` +
-          `Conclusion : ${litres} L = ${fr(cm3)} cm³.`,
-      };
+      // ⭐ 15/11/2026 — ★2 court et sans situation ; litres OU dm³ ↔ cm³, décimaux
+      // compris (les contenants de LIQUIDES servent le ★3, volume_unite_tpl_11).
+      const x = randomChoice([0.25, 0.5, 0.75, 1, 1.2, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7.5, 8, 10]);
+      const [de, vers] = randomChoice([["L", "cm³"], ["dm³", "cm³"], ["cm³", "L"], ["cm³", "dm³"]] as [string, string][]);
+      return conversionCourte(de, vers, de === "cm³" ? x * 1000 : x);
     },
   },
 
@@ -3225,6 +3495,8 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(versDm3 ? dm3 : cm3, versDm3 ? "dm³" : "cm³"),
         comparator: "number_equal",
+        ...auPave(),
+        canvas: carteVolume(versDm3 ? `${fr(cm3)} cm³` : `${fr(dm3)} dm³`, versDm3 ? "? dm³" : "? cm³", cap(sujet)),
         explanation:
           `Définition : 1 dm = 10 cm, donc 1 dm³ = 10 × 10 × 10 cm³ = 1 000 cm³.\n\n` +
           `Méthode : ${versDm3 ? "on divise le nombre de cm³ par 1 000" : "on multiplie le nombre de dm³ par 1 000"}.\n\n` +
@@ -3281,6 +3553,8 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(versDm3 ? dm3 : m3, versDm3 ? "dm³" : "m³"),
         comparator: "number_equal",
+        ...auPave(),
+        canvas: carteVolume(versDm3 ? `${fr(m3)} m³` : `${fr(dm3)} dm³`, versDm3 ? "? dm³" : "? m³", cap(o.un)),
         explanation:
           `Définition : 1 m = 10 dm, donc 1 m³ = 10 × 10 × 10 dm³ = 1 000 dm³.\n\n` +
           `Méthode : ${versDm3 ? "on multiplie le nombre de m³ par 1 000" : "on divise le nombre de dm³ par 1 000"}.\n\n` +
@@ -3348,9 +3622,9 @@ export const volumesBank: TutorBankItemV4[] = [
         { d: "le volume d’une niche pour chien", u: "dm", m: "kg" },
       ]);
       const text = randomChoice([
-        `Pour exprimer ${o.d}, quelle unité convient ?`,
-        `On veut donner ${o.d}. Dans quelle unité l’écrire ?`,
-        `Parmi ces unités, laquelle permet d’exprimer ${o.d} ?`,
+        `Quelle unité pour ${o.d} ?`,
+        `Dans quelle unité écrire ${o.d} ?`,
+        `Choisis l’unité pour ${o.d}.`,
         `${cap(o.d)} s’exprime en…`,
       ]);
       const correct = `${o.u}³`;
@@ -3381,30 +3655,17 @@ export const volumesBank: TutorBankItemV4[] = [
     hint: "1 L = 1 dm³ : le nombre ne change pas.",
     tags: ["volume", "litre", "conversion", "template"],
     generate: () => {
-      const o = randomChoice(LIQUIDES);
-      const litres = tirer(o.L);
+      // ⭐ 15/11/2026 — ★2 court et sans situation (15 mots, 50 % trop longs avant).
+      const litres = randomChoice([0.5, 1.5, 2, 2.5, 3, 4, 5, 6, 7.5, 8, 12, 15, 20, 25, 40]);
       const versDm3 = Math.random() < 0.5;
-      const text = versDm3
-        ? randomChoice([
-            `${cap(o.un)} peut contenir ${litres} L. Quelle est sa contenance en dm³ ?`,
-            `On verse ${litres} L ${o.liq} dans ${o.un}. Combien de dm³ cela représente-t-il ?`,
-            `Exprime en dm³ la contenance ${de(o.un)} : ${litres} ${litres >= 2 ? "litres" : "litre"}.`,
-          ])
-        : randomChoice([
-            `Le volume intérieur ${de(o.un)} est de ${litres} dm³. Combien de litres ${o.liq} peut-${o.il} contenir ?`,
-            `${cap(o.un)} a un volume intérieur de ${litres} dm³. Quelle est sa contenance en litres ?`,
-            `${litres} dm³ : c’est le volume intérieur ${de(o.un)}. Combien de litres cela fait-il ?`,
-          ]);
+      const q = versDm3 ? conversionCourte("L", "dm³", litres) : conversionCourte("dm³", "L", litres);
       return {
-        text,
-        format: "short",
-        expected: avecUnite(litres, versDm3 ? "dm³" : "L"),
-        comparator: "number_equal",
+        ...q,
         explanation:
           `Définition : 1 litre correspond exactement à 1 dm³.\n\n` +
           `Méthode : on remplace chaque litre par un dm³ (ou l’inverse) : le nombre ne change pas.\n\n` +
-          `Calcul : ${litres} L = ${litres} dm³.\n\n` +
-          `Conclusion : la réponse est ${litres}.`,
+          `Calcul : ${fr(litres)} ${versDm3 ? "L" : "dm³"} = ${fr(litres)} ${versDm3 ? "dm³" : "L"}.\n\n` +
+          `Conclusion : la réponse est ${fr(litres)} ${versDm3 ? "dm³" : "L"}.`,
       };
     },
   },
@@ -3452,6 +3713,7 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(litres, "L"),
         comparator: "number_equal",
+        canvas: figurePaveDroit(L, l, h, u, false),
         explanation:
           `Définition : volume d’un pavé droit = longueur × largeur × hauteur ; 1 L = 1 dm³ = 1 000 cm³ et 1 m³ = 1 000 L.\n\n` +
           `Méthode : on calcule le volume en ${u}³, puis on convertit en litres.\n\n` +
@@ -3605,6 +3867,7 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: avecUnite(litres, "L"),
         comparator: "number_equal",
+        canvas: figCylindre(rayon, hauteur, "cm"),
         explanation:
           `Définition : le volume d’un cylindre est π × rayon² × hauteur, et 1 L = 1 dm³ = 1 000 cm³.\n\n` +
           `Méthode : on calcule le volume en cm³ avec π ≈ 3,14, puis on divise par 1 000 pour l’avoir en litres.\n\n` +
@@ -3660,6 +3923,7 @@ export const volumesBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(total)],
         comparator: "number_equal",
+        canvas: figurePaveDroit(longueur, largeur, hauteur, "cm", false),
         explanation:
           `Définition : on compte combien de petits cubes tiennent dans chaque direction.\n\n` +
           `Méthode : on divise chaque dimension par l’arête du cube, puis on multiplie les résultats.\n\n` +
@@ -3697,5 +3961,543 @@ export const volumesBank: TutorBankItemV4[] = [
       "Calcul : par exemple, 5 dm³ = 5 L.\n\n" +
       "Conclusion : pour passer des dm³ aux litres, on garde le même nombre car 1 dm³ = 1 L.",
     tags: ["volume", "defi", "qcm", "litre"],
+  },
+
+  /* =========================================================
+     ⭐ 15/11/2026 — GABARITS COURTS ★1 (+ situations déplacées au ★3)
+     Chaque micro a désormais deux gabarits au moins à ★1, ★2 et ★3.
+  ========================================================= */
+
+  {
+    kind: "template",
+    id: "volume_comprendre_tpl_6",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Compte les cubes, sans oublier ceux du dessous.",
+    tags: ["volume", "cubes_unite", "template", "canvas"],
+    generate: () => {
+      const cols = randomInt(1, 4);
+      const rows = randomInt(1, 2);
+      const layers = cols * rows === 1 ? 2 : randomInt(1, 2);
+      const cubes = blocCubes(cols, rows, layers, layers > 1 ? randomInt(0, 1) : 0);
+      const n = cubes.length;
+      const b = randomChoice(BRIQUES.filter((x) => !/boîte|caisse/.test(x.sg) && x.sg.split(" ").length <= 3));
+      const text = randomChoice([
+        `${cap(unB(b))} vaut 1 unité. Quel est le volume ?`,
+        `Combien de ${b.pl} forment ce solide ?`,
+        `Compte les ${b.pl}. Quel est le volume ?`,
+        `Donne le volume de ce solide en ${b.pl}.`,
+        `Quel est le volume de ce solide de ${b.pl} ?`,
+        `Trouve le volume : 1 ${b.sg} = 1 unité.`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        ...auPave(),
+        explanation:
+          `Définition : ${unB(b)} représente 1 unité de volume.\n\n` +
+          `Méthode : on compte les ${b.pl}, étage par étage.\n\n` +
+          `Calcul : il y en a ${n}.\n\n` +
+          `Conclusion : le volume est ${n} unités de volume.`,
+        canvas: solideCanvas({ solide: "assemblage_cubes", cubes, display: { showLabels: false } }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_comprendre_tpl_7",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Les cubes du dessous comptent aussi, même cachés.",
+    tags: ["volume", "cubes_unite", "qcm", "template", "canvas"],
+    generate: () => {
+      const cols = randomInt(2, 3);
+      const rows = randomInt(1, 3);
+      const etage = cols * rows;
+      const cubes = blocCubes(cols, rows, 2, randomInt(0, etage - 1));
+      const n = cubes.length;
+      const b = randomChoice(BRIQUES.filter((x) => !/boîte|caisse/.test(x.sg) && x.sg.split(" ").length <= 3));
+      const caches = b.f ? "cachées" : "cachés";
+      const text = randomChoice([
+        `${cap(unB(b))} vaut 1 unité. Quel est le volume ?`,
+        `Quel est le volume de ce solide de ${b.pl} ?`,
+        `Compte aussi les ${b.pl} ${caches}. Quel est le volume ?`,
+        `Choisis le volume de ce solide, en ${b.pl}.`,
+        `Combien d’unités occupe ce solide de ${b.pl} ?`,
+      ]);
+      const ecr = (k: number) => `${k} unités`;
+      // Pièges : un seul étage compté, un étage de trop, un cube oublié, le double.
+      return {
+        text,
+        format: "qcm",
+        choices: makeChoices(ecr(n), [ecr(etage), ecr(n + etage), ecr(n - 1), ecr(2 * n)]),
+        expected: [ecr(n)],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : ${unB(b)} représente 1 unité de volume.\n\n` +
+          `Méthode : on compte l’étage du bas (${etage}), puis ceux du haut, y compris ceux qu’on voit mal.\n\n` +
+          `Calcul : ${etage} + ${n - etage} = ${n}.\n\n` +
+          `Conclusion : le volume est ${n} unités.`,
+        canvas: solideCanvas({ solide: "assemblage_cubes", cubes, display: { showLabels: false } }),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_lien_aire_tpl_8",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_lien_aire",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Volume = aire de base × hauteur.",
+    tags: ["volume", "aire_base", "template", "canvas"],
+    generate: () => {
+      const s = randomChoice(SOLIDES_NUS);
+      const u = uniteNue();
+      const A = randomInt(3, 30);
+      const h = randomInt(2, 10);
+      const a2 = `${A} ${u}²`;
+      const l = `${h} ${u}`;
+      const text = randomChoice([
+        `Base ${a2}, hauteur ${l}. Calcule le volume.`,
+        `Calcule le volume : base ${a2}, hauteur ${l}.`,
+        `Aire de base ${a2}, hauteur ${l}. Quel volume ?`,
+        `Quel est le volume ? Base ${a2}, hauteur ${l}.`,
+        `Donne le volume du solide : base ${a2}, hauteur ${l}.`,
+        `Multiplie pour trouver le volume : base ${a2}, hauteur ${l}.`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: avecUnite(A * h, `${u}³`),
+        comparator: "number_equal",
+        ...auPave(),
+        explanation: explAireBase(A, h, u, `du ${s}`),
+        canvas: figureBase(s, A, h, u),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_pave_tpl_8",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_pave",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Multiplie les trois dimensions.",
+    tags: ["volume", "pave_droit", "template", "canvas"],
+    generate: () => {
+      const u = uniteNue();
+      const longueur = randomInt(2, 8);
+      const largeur = randomInt(2, 6);
+      const hauteur = randomInt(2, 6);
+      const [L, l, h] = [longueur, largeur, hauteur].map((x) => `${x} ${u}`);
+      const text = randomChoice([
+        `Calcule le volume : ${L} × ${l} × ${h}.`,
+        `Calcule le volume de ce pavé droit.`,
+        `Donne le volume du pavé dessiné, en ${u}³.`,
+        `Quel est le volume de ce pavé droit ?`,
+        `Multiplie les trois dimensions du pavé. Quel volume trouves-tu ?`,
+        `Pavé de ${L}, ${l}, ${h}. Calcule son volume.`,
+        `Trouve le volume : ${L}, ${l} et ${h}.`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: avecUnite(longueur * largeur * hauteur, `${u}³`),
+        comparator: "number_equal",
+        ...auPave(),
+        explanation: explPave(longueur, largeur, hauteur, u, "du pavé droit"),
+        canvas: figurePaveDroit(longueur, largeur, hauteur, u, false),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_pave_tpl_9",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_pave",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Multiplie l’arête par elle-même trois fois.",
+    tags: ["volume", "cube", "template", "canvas"],
+    generate: () => {
+      // Les objets cubiques (ancien ★2 de volume_pave_tpl_3) : leur place est au ★3.
+      const o = randomChoice(CUBES);
+      const a = tirer(o.a);
+      const volume = a * a * a;
+      const u = o.u;
+      const text = randomChoice([
+        `${cap(o.un)} a la forme d’un cube de ${a} ${u} d’arête. Quel est son volume, en ${u}³ ?`,
+        `Chaque arête ${de(o.un)} cubique mesure ${a} ${u}. Quel volume occupe-t-${o.il} ?`,
+        `Quel est le volume ${de(o.un)} cubique de ${a} ${u} de côté ?`,
+        `${cap(o.un)} cubique a des arêtes de ${a} ${u}. Combien de ${u}³ occupe-t-${o.il} ?`,
+        `Calcule, en ${u}³, le volume ${de(o.un)} en forme de cube d’arête ${a} ${u}.`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: avecUnite(volume, `${u}³`),
+        comparator: "number_equal",
+        ...auPave(),
+        explanation:
+          `Définition : le volume d’un cube est arête × arête × arête.\n\n` +
+          `Méthode : on multiplie l’arête trois fois par elle-même.\n\n` +
+          `Calcul : ${a} × ${a} × ${a} = ${fr(volume)}.\n\n` +
+          `Conclusion : le volume ${du(o.un)} est ${fr(volume)} ${u}³.`,
+        canvas: figurePaveDroit(a, a, a, u, false),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_prisme_tpl_8",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_prisme",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Volume = aire de base × hauteur.",
+    tags: ["volume", "prisme", "template", "canvas"],
+    generate: () => {
+      const u = uniteNue();
+      const A = randomInt(3, 30);
+      const h = randomInt(2, 10);
+      const a2 = `${A} ${u}²`;
+      const l = `${h} ${u}`;
+      const text = randomChoice([
+        `Prisme droit : base ${a2}, hauteur ${l}. Son volume ?`,
+        `Calcule le volume du prisme : base ${a2}, hauteur ${l}.`,
+        `Base ${a2}, hauteur ${l}. Calcule le volume du prisme.`,
+        `Quel volume pour ce prisme ? Base ${a2}, hauteur ${l}.`,
+        `Prisme de base ${a2} et de hauteur ${l}. Volume ?`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: avecUnite(A * h, `${u}³`),
+        comparator: "number_equal",
+        ...auPave(),
+        explanation: explAireBase(A, h, u, "du prisme"),
+        canvas: figureBase("prisme", A, h, u),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_cylindre_tpl_10",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_cylindre",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Volume d’un cylindre = π × rayon × rayon × hauteur.",
+    tags: ["volume", "cylindre", "formule", "qcm", "template", "canvas"],
+    generate: () => {
+      // r ≥ 3 : à r = 2, 2 × π × r × h et π × r × r × h sont égaux.
+      const r = randomInt(3, 9);
+      const h = randomInt(2, 12);
+      const u = uniteNue();
+      const R = `${r} ${u}`;
+      const H = `${h} ${u}`;
+      const text = randomChoice([
+        `Rayon ${R}, hauteur ${H}. Quel calcul donne le volume ?`,
+        `Choisis le calcul du volume : rayon ${R}, hauteur ${H}.`,
+        `Cylindre de rayon ${R}, hauteur ${H} : quel calcul ?`,
+        `Quel calcul donne le volume ? Rayon ${R}, hauteur ${H}.`,
+        `Trouve le calcul du volume : rayon ${R}, hauteur ${H}.`,
+      ]);
+      const correct = `π × ${r} × ${r} × ${h}`;
+      // Pièges : rayon non élevé au carré, périmètre du disque, ÷ 3 du cône, h au carré.
+      return {
+        text,
+        format: "qcm",
+        choices: makeChoices(
+          correct,
+          ([[`π × ${r} × ${h}`, r * h], [`2 × π × ${r} × ${h}`, 2 * r * h], [`π × ${r} × ${r} × ${h} ÷ 3`, (r * r * h) / 3], [`π × ${r} × ${h} × ${h}`, r * h * h]] as [string, number][])
+            .filter(([, v]) => v !== r * r * h)
+            .map(([c]) => c),
+        ),
+        expected: [correct],
+        comparator: "mcq_exact",
+        explanation:
+          `Définition : le volume d’un cylindre est aire de base × hauteur, soit π × r × r × h.\n\n` +
+          `Méthode : la base est un disque d’aire π × r × r ; on multiplie par la hauteur.\n\n` +
+          `Calcul : ${correct} = ${r * r * h}π.\n\n` +
+          `Conclusion : le bon calcul est ${correct}, soit ${r * r * h}π ${u}³.`,
+        canvas: figCylindre(r, h, u),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_cylindre_tpl_11",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_cylindre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Volume = aire de base × hauteur.",
+    tags: ["volume", "cylindre", "aire_base", "template", "canvas"],
+    generate: () => {
+      // Les objets cylindriques (ancien ★2 de volume_cylindre_tpl_9) : au ★3.
+      const o = randomChoice(CYL_AIRES);
+      const A = tirer(o.A);
+      const h = tirer(o.h);
+      const u = o.u;
+      const text = randomChoice([
+        `La base ${de(o.un)} a une aire de ${fr(A)} ${u}². Sa hauteur est ${h} ${u}. Quel est son volume, en ${u}³ ?`,
+        `${cap(o.un)} a la forme d’un cylindre : disque de base de ${fr(A)} ${u}², hauteur de ${h} ${u}. Calcule son volume.`,
+        `Quel volume, en ${u}³, occupe ${o.un} de ${h} ${u} de haut dont le fond a une aire de ${fr(A)} ${u}² ?`,
+        `On connaît l’aire du disque de base ${de(o.un)} : ${fr(A)} ${u}². Sa hauteur vaut ${h} ${u}. Donne son volume.`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: avecUnite(A * h, `${u}³`),
+        comparator: "number_equal",
+        ...auPave(),
+        explanation: explAireBase(A, h, u, du(o.un)),
+        canvas: figureBase("cylindre", A, h, u),
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_unite_tpl_9",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_unite",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "1 L = 1 dm³ = 1 000 cm³ ; 1 m³ = 1 000 dm³.",
+    tags: ["volume", "conversion", "template", "canvas"],
+    generate: () => {
+      const [de, vers] = randomChoice([["L", "dm³"], ["dm³", "L"], ["dm³", "cm³"], ["L", "cm³"], ["m³", "dm³"]] as [string, string][]);
+      return conversionCourte(de, vers, randomInt(1, 9));
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_unite_tpl_10",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_unite",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "1 m³ = 1 000 dm³ = 1 000 L.",
+    tags: ["volume", "conversion", "litre", "template", "canvas"],
+    generate: () => {
+      const m3 = randomChoice([0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 20]);
+      const [de, vers] = randomChoice([["m³", "dm³"], ["m³", "L"], ["dm³", "m³"], ["L", "m³"]] as [string, string][]);
+      return conversionCourte(de, vers, de === "m³" ? m3 : m3 * 1000);
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_unite_tpl_11",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_unite",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "1 L = 1 000 cm³.",
+    tags: ["volume", "litre", "conversion", "template", "canvas"],
+    generate: () => {
+      // Les contenants (ancien ★2 de volume_unite_tpl_3) : au ★3.
+      const o = randomChoice(LIQUIDES);
+      const litres = tirer(o.L);
+      const cm3 = litres * 1000;
+      const versCm3 = Math.random() < 0.5;
+      const text = versCm3
+        ? randomChoice([
+            `${cap(o.un)} contient ${litres} L ${o.liq}. Combien de cm³ cela représente-t-il ?`,
+            `La contenance ${de(o.un)} est de ${litres} L. Exprime-la en cm³.`,
+            `Convertis en cm³ le volume ${de(o.un)} : ${litres} L.`,
+          ])
+        : randomChoice([
+            `${cap(o.un)} contient ${fr(cm3)} cm³ ${o.liq}. Combien de litres cela fait-il ?`,
+            `Exprime en litres la contenance ${de(o.un)}, qui est de ${fr(cm3)} cm³.`,
+            `${fr(cm3)} cm³ : c’est le volume ${o.liq} dans ${o.un}. Combien de litres ?`,
+          ]);
+      return {
+        text,
+        format: "short",
+        expected: avecUnite(versCm3 ? cm3 : litres, versCm3 ? "cm³" : "L"),
+        comparator: "number_equal",
+        ...auPave(),
+        canvas: carteVolume(versCm3 ? `${litres} L` : `${fr(cm3)} cm³`, versCm3 ? "? cm³" : "? L", cap(o.un)),
+        explanation:
+          `Définition : 1 L = 1 dm³ = 1 000 cm³.\n\n` +
+          `Méthode : ${versCm3 ? "on multiplie le nombre de litres par 1 000" : "on divise le nombre de cm³ par 1 000"}.\n\n` +
+          `Calcul : ${versCm3 ? `${litres} × 1 000 = ${fr(cm3)}` : `${fr(cm3)} ÷ 1 000 = ${litres}`}.\n\n` +
+          `Conclusion : ${litres} L = ${fr(cm3)} cm³.`,
+      };
+    },
+  },
+
+  /* ===== 15/11/2026 — un second gabarit ★4 (lien aire, pavé, prisme) ===== */
+
+  {
+    kind: "template",
+    id: "volume_lien_aire_tpl_9",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_lien_aire",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Même aire de base : le volume est proportionnel à la hauteur.",
+    tags: ["volume", "aire_base", "template", "canvas"],
+    generate: () => {
+      const [s1, s2] = shuffle([...SOLIDES_NUS]).slice(0, 2);
+      const u = uniteNue();
+      const A = randomInt(4, 30);
+      const h1 = randomInt(2, 9);
+      let h2 = randomInt(2, 12);
+      if (h2 === h1) h2 = h1 + 3;
+      const V1 = A * h1;
+      const V2 = A * h2;
+      const text = randomChoice([
+        `Un ${s1} et un ${s2} ont la même aire de base. Le ${s1} mesure ${h1} ${u} de haut et a un volume de ${fr(V1)} ${u}³. Le ${s2} mesure ${h2} ${u} de haut. Quel est son volume ?`,
+        `Même aire de base pour un ${s1} de ${h1} ${u} de haut, de volume ${fr(V1)} ${u}³, et un ${s2} de ${h2} ${u} de haut. Calcule le volume du ${s2}.`,
+        `Un ${s1} haut de ${h1} ${u} a un volume de ${fr(V1)} ${u}³. Un ${s2} de même base est haut de ${h2} ${u}. Quel est le volume du ${s2} ?`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: avecUnite(V2, `${u}³`),
+        comparator: "number_equal",
+        ...auPave(),
+        canvas: figureBase(s2, null, h2, u),
+        explanation:
+          `Définition : volume = aire de base × hauteur.\n\n` +
+          `Méthode : on retrouve l’aire de base commune avec le premier solide, puis on la multiplie par la hauteur du second.\n\n` +
+          `Calcul : ${fr(V1)} ÷ ${h1} = ${A}, puis ${A} × ${h2} = ${fr(V2)}.\n\n` +
+          `Conclusion : le volume du ${s2} est ${fr(V2)} ${u}³.`,
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_pave_tpl_10",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_pave",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Cherche le nombre qui, multiplié trois fois par lui-même, donne le volume.",
+    tags: ["volume", "cube", "template", "canvas"],
+    generate: () => {
+      const u = uniteNue();
+      const a = randomInt(2, 10);
+      const V = a * a * a;
+      const text = randomChoice([
+        `Un cube a un volume de ${fr(V)} ${u}³. Combien mesure son arête ?`,
+        `Le volume d’un cube vaut ${fr(V)} ${u}³. Trouve la longueur de son arête.`,
+        `Quelle est l’arête d’un cube de ${fr(V)} ${u}³ ?`,
+        `Un cube occupe ${fr(V)} ${u}³. Retrouve la mesure d’une de ses arêtes.`,
+        `On sait qu’un cube fait ${fr(V)} ${u}³. Quelle longueur a chacune de ses arêtes ?`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: avecUnite(a, u),
+        comparator: "number_equal",
+        ...auPave(),
+        canvas: solideCanvas({
+          solide: "pave_droit",
+          dimensions: { longueur: a, largeur: a, hauteur: a },
+          labels: { longueur: `? ${u}`, largeur: `? ${u}`, hauteur: `? ${u}` },
+          highlight: { base: false, hauteur: true },
+          display: { showLabels: true, showDimensions: true },
+        }),
+        explanation:
+          `Définition : le volume d’un cube est arête × arête × arête.\n\n` +
+          `Méthode : on cherche le nombre qui, multiplié trois fois par lui-même, donne ${fr(V)}.\n\n` +
+          `Calcul : ${a} × ${a} × ${a} = ${fr(V)}.\n\n` +
+          `Conclusion : l’arête mesure ${a} ${u}.`,
+      };
+    },
+  },
+
+  {
+    kind: "template",
+    id: "volume_prisme_tpl_9",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "volume_solide",
+    microId: "volume_prisme",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Calcule l’aire du triangle de base, puis divise le volume par cette aire.",
+    tags: ["volume", "prisme", "triangle_base", "template", "canvas"],
+    generate: () => {
+      const u = uniteNue();
+      const b = 2 * randomInt(2, 8);
+      const t = randomInt(2, 10);
+      const A = (b * t) / 2;
+      const h = randomInt(2, 12);
+      const V = A * h;
+      const text = randomChoice([
+        `Un prisme droit a un volume de ${fr(V)} ${u}³. Sa base est un triangle de côté ${b} ${u} et de hauteur relative ${t} ${u}. Quelle est la hauteur du prisme ?`,
+        `Volume d’un prisme droit : ${fr(V)} ${u}³. Base triangulaire : côté ${b} ${u}, hauteur relative ${t} ${u}. Calcule la hauteur du prisme.`,
+        `Prisme droit de ${fr(V)} ${u}³ à base triangulaire (côté ${b} ${u}, hauteur relative ${t} ${u}). Trouve la hauteur du prisme.`,
+        `Un prisme droit de ${fr(V)} ${u}³ a pour base un triangle : côté ${b} ${u}, hauteur relative ${t} ${u}. Retrouve sa hauteur.`,
+        `Base triangulaire de côté ${b} ${u} et de hauteur relative ${t} ${u} ; volume du prisme droit : ${fr(V)} ${u}³. Quelle est sa hauteur ?`,
+      ]);
+      return {
+        text,
+        format: "short",
+        expected: avecUnite(h, u),
+        comparator: "number_equal",
+        ...auPave(),
+        canvas: solideCanvas({
+          solide: "prisme",
+          labels: { aireBase: "base triangulaire", hauteur: `? ${u}` },
+          highlight: { base: true, hauteur: true },
+          display: { showLabels: true, showDimensions: true },
+        }),
+        explanation:
+          `Définition : le volume d’un prisme droit est aire de base × hauteur.\n\n` +
+          `Méthode : on calcule l’aire du triangle, puis on divise le volume par cette aire.\n\n` +
+          `Calcul : ${b} × ${t} ÷ 2 = ${fr(A)}, puis ${fr(V)} ÷ ${fr(A)} = ${h}.\n\n` +
+          `Conclusion : la hauteur du prisme est ${h} ${u}.`,
+      };
+    },
   },
 ];

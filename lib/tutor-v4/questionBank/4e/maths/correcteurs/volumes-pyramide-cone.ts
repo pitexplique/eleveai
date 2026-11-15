@@ -107,6 +107,16 @@ function effetDimension(q: Q) {
   return verifierReponse(q, V.v * (auCarre ? fois * fois : fois), V.u);
 }
 
+/** QCM ★1 : le volume « V u³ » d'une pyramide (aire puis hauteur). */
+function qcmPyramide(q: Q) {
+  const u = unite(q.text);
+  const [A] = parExposant(q.text, "²");
+  const [h] = parExposant(q.text, "");
+  if (!u || !A || !h) return ["aire et hauteur illisibles"];
+  const juste = `${String(Math.round(((A.v * h.v) / 3) * 1000) / 1000).replace(".", ",")} ${u}³`;
+  return [...(q.expected[0] === juste ? [] : [`attendu ${juste}`]), ...qcmUnique(q, (x) => x === juste)];
+}
+
 /* ───── cône ───── */
 function rayonHauteurPi(q: Q) {
   const u = unite(q.text);
@@ -119,6 +129,16 @@ function calculCone(q: Q) {
   const l = parExposant(q.text, "");
   if (l.length !== 2) return ["rayon et hauteur illisibles"];
   const juste = `π × ${l[0].v} × ${l[0].v} × ${l[1].v} ÷ 3`;
+  return [...(q.expected[0] === juste ? [] : [`attendu ${juste}`]), ...qcmUnique(q, (x) => x === juste)];
+}
+/** QCM ★1 : le volume exact « aπ u³ » d'un cône (rayon puis hauteur). */
+function qcmCone(q: Q) {
+  const u = unite(q.text);
+  const l = parExposant(q.text, "");
+  if (!u || l.length !== 2) return ["rayon et hauteur illisibles"];
+  const a = (l[0].v * l[0].v * l[1].v) / 3;
+  if (!Number.isInteger(a)) return [`coefficient ${a} non entier`];
+  const juste = `${a}π ${u}³`;
   return [...(q.expected[0] === juste ? [] : [`attendu ${juste}`]), ...qcmUnique(q, (x) => x === juste)];
 }
 function rayonHauteur314(q: Q) {
@@ -154,6 +174,7 @@ export const correcteursPyramideCone = (pref: string): CorrecteursMaths =>
     [`${pref}volume_pyramide_tpl_9`]: retrouverHauteurPyramide,
     [`${pref}volume_pyramide_tpl_10`]: maison,
     [`${pref}volume_pyramide_tpl_11`]: effetDimension,
+    [`${pref}volume_pyramide_tpl_12`]: qcmPyramide,
     [`${pref}volume_cone_tpl_1`]: rayonHauteurPi,
     [`${pref}volume_cone_tpl_2`]: calculCone,
     [`${pref}volume_cone_tpl_3`]: rayonHauteurPi,
@@ -165,6 +186,7 @@ export const correcteursPyramideCone = (pref: string): CorrecteursMaths =>
     [`${pref}volume_cone_tpl_9`]: retrouverHauteurCone,
     [`${pref}volume_cone_tpl_10`]: cylindreCone,
     [`${pref}volume_cone_tpl_11`]: effetDimension,
+    [`${pref}volume_cone_tpl_12`]: qcmCone,
   });
 
 export const CORRECTEURS = correcteursPyramideCone("");

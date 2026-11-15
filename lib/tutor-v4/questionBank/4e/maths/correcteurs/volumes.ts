@@ -80,6 +80,15 @@ function corrigerCubes(q: Q): string[] {
   return [...p, ...verifierReponse(q, vus.size, "")];
 }
 
+/** QCM « N unités » : le nombre de cubes dessinés. */
+function corrigerCubesQcm(q: Q): string[] {
+  const cubes = ((q.canvas as any)?.cubes ?? []) as { x: number; y: number; z: number }[];
+  if (!cubes.length) return ["aucun cube dessiné"];
+  const n = new Set(cubes.map((c) => `${c.x},${c.y},${c.z}`)).size;
+  const juste = `${n} unités`;
+  return [...(q.expected[0] === juste ? [] : [`attendu « ${juste} »`]), ...qcmUnique(q, (c) => c === juste)];
+}
+
 /** Deux constructions : la plus grande a le plus de cubes. */
 function corrigerComparerCubes(q: Q): string[] {
   const [nA, nB] = nombres(q.text);
@@ -154,6 +163,18 @@ function corrigerInverse(q: Q): string[] {
   return [`données illisibles : ${JSON.stringify({ lon, aires })}`];
 }
 
+/** Même aire de base : V2 = V1 ÷ h1 × h2 (hauteurs dans l'ordre du texte, le premier solide a le volume connu). */
+function corrigerMemeBase(q: Q): string[] {
+  const { lon, vols } = lire(q.text);
+  if (vols.length !== 1 || lon.length !== 2) return ["un volume et deux hauteurs attendus"];
+  const u = memeUnite([...lon, ...vols]);
+  if (!u) return ["unités mélangées"];
+  const p = verifierReponse(q, (vols[0].v / lon[0].v) * lon[1].v, `${u}³`);
+  const c = (q.canvas as any)?.dimensions;
+  if (c && c.hauteur !== lon[1].v) p.push(`figure : hauteur ${c.hauteur} au lieu de ${lon[1].v}`);
+  return p;
+}
+
 /** Base carrée : l'aire est côté × côté (le périmètre 4 × côté est le piège). */
 function corrigerCarre(q: Q): string[] {
   const t = q.text;
@@ -196,6 +217,10 @@ export const CORRECTEURS_A: CorrecteursMaths = {
   volume_comprendre_tpl_3: corrigerCubes,
   volume_comprendre_tpl_4: corrigerComparerCubes,
   volume_comprendre_tpl_5: corrigerGrandeur,
+  volume_comprendre_tpl_6: corrigerCubes,
+  volume_comprendre_tpl_7: corrigerCubesQcm,
+  volume_lien_aire_tpl_8: corrigerAireFoisHauteur,
+  volume_lien_aire_tpl_9: corrigerMemeBase,
   volume_lien_aire_tpl_1: corrigerAireFoisHauteur,
   volume_lien_aire_tpl_2: corrigerOuiNonAire,
   volume_lien_aire_tpl_3: corrigerAireFoisHauteur,
@@ -266,6 +291,15 @@ function corrigerCube(q: Q): string[] {
   return [...verifierReponse(q, a ** 3, `${lon[0].u}³`), ...figurePave(q, [a, a, a], lon[0].u)];
 }
 
+/** Un cube de volume connu : l'arête est la racine cubique (un entier). */
+function corrigerAreteCube(q: Q): string[] {
+  const { vols, lon } = lire(q.text);
+  if (vols.length !== 1 || lon.length || !/cube/.test(q.text)) return ["un volume de cube attendu"];
+  const a = Math.round(Math.cbrt(vols[0].v));
+  if (a ** 3 !== vols[0].v) return [`${vols[0].v} n'est pas un cube parfait`];
+  return verifierReponse(q, a, base(vols[0].u));
+}
+
 /** Le volume et deux dimensions : la troisième. */
 function corrigerDimension(q: Q): string[] {
   const { lon, vols } = lire(q.text);
@@ -301,6 +335,11 @@ function corrigerPrismeTriangle(q: Q): string[] {
   const V = (lon[0].v * lon[1].v * lon[2].v) / 2;
   const p = verifierReponse(q, V, `${u}³`);
   const c = (q.canvas as any)?.dimensions;
+  // ⭐ 15/11/2026 — figure sans aire de base (l'élève la calcule) : seule la hauteur se vérifie.
+  if (c && c.aireBase == null) {
+    if (!lon.some((m) => m.v === c.hauteur)) p.push(`figure : hauteur ${c.hauteur} absente du texte`);
+    return p;
+  }
   if (c) {
     const autres = lon.map((m) => m.v);
     const i = autres.indexOf(c.hauteur);
@@ -313,6 +352,15 @@ function corrigerPrismeTriangle(q: Q): string[] {
     p.push(...verifierFigure(q, { aireBase: c.aireBase, hauteur: c.hauteur }, u));
   }
   return p;
+}
+
+/** Prisme à base triangulaire : h = V ÷ (côté × hauteur relative ÷ 2). */
+function corrigerPrismeTriangleInverse(q: Q): string[] {
+  const { lon, vols } = lire(q.text);
+  if (vols.length !== 1 || lon.length !== 2 || !/triang/.test(q.text)) return ["un volume et un triangle (côté, hauteur) attendus"];
+  const u = memeUnite([...lon, ...vols]);
+  if (!u) return ["unités mélangées"];
+  return verifierReponse(q, vols[0].v / ((lon[0].v * lon[1].v) / 2), u);
 }
 
 /** La méthode : l'aire de LA base (la bonne figure) × la hauteur du prisme. */
@@ -339,6 +387,11 @@ export const CORRECTEURS_B: CorrecteursMaths = {
   volume_prisme_tpl_5: corrigerPave,
   volume_prisme_tpl_6: corrigerInverse,
   volume_prisme_tpl_7: corrigerMethodePrisme,
+  volume_pave_tpl_8: corrigerPave,
+  volume_pave_tpl_9: corrigerCube,
+  volume_pave_tpl_10: corrigerAreteCube,
+  volume_prisme_tpl_8: corrigerAireFoisHauteur,
+  volume_prisme_tpl_9: corrigerPrismeTriangleInverse,
 };
 
 /* ───────────────────────── cylindre ───────────────────────── */
@@ -402,6 +455,19 @@ function corrigerCylindrePiQcm(q: Q): string[] {
   const juste = `${frV(c.r * c.r * c.h)}π ${c.u}³`;
   return [...(q.expected[0] === juste ? [] : [`attendu ${juste}`]), ...qcmUnique(q, (x) => x === juste)];
 }
+/** Le calcul à choisir : π × r × r × h ; aucun autre calcul proposé ne donne la même valeur. */
+function corrigerCylindreCalcul(q: Q): string[] {
+  const c = rayonHauteur(q.text);
+  if (!c) return ["rayon et hauteur illisibles"];
+  const juste = `π × ${frN(c.r)} × ${frN(c.r)} × ${frN(c.h)}`;
+  const V = c.r * c.r * c.h;
+  const val = (x: string) => calcul(x.replace(/π × /, "").replace(/ × π/, ""));
+  const p = q.expected[0] === juste ? [] : [`attendu « ${juste} »`];
+  const k = q.canvas as any;
+  if (k?.dimensions && (k.dimensions.rayon !== c.r || k.dimensions.hauteur !== c.h)) p.push("figure : rayon ou hauteur faux");
+  return [...p, ...qcmUnique(q, (x) => egal(val(x), V))];
+}
+
 /** π ≈ 3,14 : 3,14 × r² × h. */
 function corrigerCylindre314(q: Q): string[] {
   const c = rayonHauteur(q.text);
@@ -413,7 +479,7 @@ function corrigerCylindre314(q: Q): string[] {
 /** L'aire du disque de base : r²π. */
 function corrigerAireDisque(q: Q): string[] {
   const { lon } = lire(q.text);
-  if (lon.length !== 1 || !/rayon/.test(q.text)) return ["un rayon attendu"];
+  if (lon.length !== 1 || !/[Rr]ayon/.test(q.text)) return ["un rayon attendu"];
   const juste = `${frV(lon[0].v ** 2)}π ${lon[0].u}²`;
   return [...(q.expected[0] === juste ? [] : [`attendu ${juste}`]), ...qcmUnique(q, (x) => x === juste)];
 }
@@ -480,6 +546,8 @@ export const CORRECTEURS_C: CorrecteursMaths = {
   volume_cylindre_tpl_7: corrigerAireDisque,
   volume_cylindre_tpl_8: corrigerBasePi,
   volume_cylindre_tpl_9: corrigerAireFoisHauteur,
+  volume_cylindre_tpl_10: corrigerCylindreCalcul,
+  volume_cylindre_tpl_11: corrigerAireFoisHauteur,
   volume_unite_tpl_1: corrigerConversion,
   volume_unite_tpl_2: corrigerConversion,
   volume_unite_tpl_3: corrigerConversion,
@@ -488,6 +556,9 @@ export const CORRECTEURS_C: CorrecteursMaths = {
   volume_unite_tpl_6: corrigerUniteVolume,
   volume_unite_tpl_7: corrigerConversion,
   volume_unite_tpl_8: corrigerPave,
+  volume_unite_tpl_9: corrigerConversion,
+  volume_unite_tpl_10: corrigerConversion,
+  volume_unite_tpl_11: corrigerConversion,
   volume_defi_tpl_1: corrigerPave,
   volume_defi_tpl_2: corrigerComparer,
   volume_defi_tpl_3: corrigerCylindrePi,
