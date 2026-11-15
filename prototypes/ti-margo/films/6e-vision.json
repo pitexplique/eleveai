@@ -1,0 +1,7 @@
+{
+  "voix": "6e-vision-{ep}-short",
+  "sons": "public/sons/6e-vision-{ep}-short",
+  "sortie": "manim/sorties/6e/maths/vision-espace/{num}-{ep}",
+  "nom": "eleveai-maths-6e-vision-{ep}-short",
+  "episodes": { "vues": "01", "representation": "02", "patron-pave": "03", "defi": "04" }
+}
