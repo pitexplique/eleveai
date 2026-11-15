@@ -103,3 +103,76 @@ encore sur YouTube) · **primaire** = seulement CM1/CM2/CE2 · **—** = rien.
   métiers, ou les prendre dans d'autres notions.
 - Aucune vidéo 6e de périmètre ni d'aire n'existe (la banque 6e a les mêmes micros).
   Si le 1er poste en tourne, les deux séries se croiseront : à vérifier avant la fusion.
+
+---
+
+# La 3e : les vidéos communes (demandé par Frédéric le 15/11)
+
+Convention reprise des suites (`manim/REPRISE-suites.md` : « vidéo commune = faite
+dans la classe la plus basse, branchée par `aussi` ») : une vidéo commune 4e+3e est
+tournée en 4e, id `4e-…`, et branchée sur la 3e par `aussi`.
+
+## Les micros 3e de ces familles (banques réelles, 31 micros visibles en France)
+
+| notionId 3e | banque | micros |
+|---|---|---|
+| `aire_perimetre` | `perimetres.bank.ts` | comprendre, polygone, cercle, figure_composee, defi (5) |
+| `aire_surface` | `aires.bank.ts` | comprendre, triangle, disque, figure_composee, agrandissement_reduction, defi (6) |
+| `volume_solide` | `volumes.bank.ts` + `volumes-pyramide-cone.bank.ts` | comprendre, pave, prisme, cylindre, boule, unite, defi, agrandissement_reduction, pyramide_cone_reduction (9) |
+| `volume_geometrie_espace` | `geometrie-espace.bank.ts` | solide_reconnaitre, section, representation, defi (4) |
+| `sections_solides` | `sections_solides.bank.ts` + `angles-cercle.bank.ts` | reconnaitre, pave_cube, cylindre, cone_pyramide, sphere, calculer_longueur, defi (7) |
+
+⛔ Hors France, à NE PAS tourner (`lib/tutor-v4/micros-masquees.ts`) : les aires de
+solides en 3e (`aire_prisme_droit`, `aire_cylindre`, `aire_pyramide_cone`,
+`aire_sphere`). En revanche `section_sphere` EST au programme français.
+
+⚠️ Écart plan / banque : la section `## 3E` du plan annonce `volume_pyramide` et
+`volume_cone` en 3e ; la banque 3e ne les a pas (elle a la réduction par section).
+Les vidéos 4e de pyramide et de cône couvriront la 3e le jour où ces micros existent.
+
+## Ce que la 3e gagne sans aucun tournage
+
+- **13 micros 3e servis par la série 5e déjà tournée** (`aussi`, exactement les mêmes
+  microId) : `aire_comprendre`, `aire_triangle`, `volume_comprendre`, `volume_pave`,
+  `volume_prisme`, `volume_cylindre`, `volume_unite`.
+- **2 micros 3e servis par deux vidéos 4e DÉJÀ en ligne** : `4e-prop-agrandissement-aire`
+  → `aire_agrandissement_reduction`, `4e-prop-agrandissement-volume` →
+  `volume_agrandissement_reduction`. (Elles vivent sous `prop_echelle` en 4e.)
+
+## Découpage proposé : 17 vidéos communes 4e+3e, 10 vidéos 3e seules
+
+Vidéos tournées ici (4e), avec les micros qu'elles servent :
+
+| id | 4e | 3e |
+|---|---|---|
+| `4e-perimetre-polygones` | comprendre, rectangle, carre, triangle | comprendre, polygone |
+| `4e-perimetre-cercle` | (nourrit `figure`) | `aire_perimetre_cercle` |
+| `4e-perimetre-figure-composee` | `aire_perimetre_figure` | `aire_perimetre_figure_composee` |
+| `4e-perimetre-probleme` | `aire_perimetre_probleme` | — |
+| `4e-perimetre-defi` | `aire_perimetre_defi` | `aire_perimetre_defi` |
+| `4e-aire-rectangle-carre` | `aire_rectangle`, `aire_carre` | — |
+| `4e-aire-disque` | (nourrit `figure`) | `aire_disque` |
+| `4e-aire-figure-composee` | `aire_figure` | `aire_figure_composee` |
+| `4e-aire-probleme` | `aire_probleme` | — |
+| `4e-aire-defi` | `aire_defi` | `aire_defi` |
+| `4e-volume-lien-aire` | `volume_lien_aire` | — |
+| `4e-volume-pyramide` **(PILOTE)** | `volume_pyramide` | (quand la banque l'aura) |
+| `4e-volume-cone` | `volume_cone` | (idem) |
+| `4e-volume-defi` | `volume_defi` | `volume_defi` |
+| `4e-solides-reconnaitre` | `vision_reconnaitre` | `volume_solide_reconnaitre` |
+| `4e-solides-vues` | `vision_vues` | — |
+| `4e-solides-perspective` | `vision_representation` | `volume_representation` |
+| `4e-patron-pyramide` | `patron_pyramide` | — |
+| `4e-section-comprendre` | `vision_section` | `volume_section`, `section_reconnaitre` |
+| `4e-solides-defi` | `vision_defi` | `volume_geometrie_espace_defi` |
+
+19 paysages (+ 19 shorts Manim) couvrent les 30 micros de 4e et 12 micros de 3e.
+
+Restent **10 micros 3e purs**, à tourner en 3e (ce poste ou le 1er) :
+`volume_boule`, `volume_pyramide_cone_reduction`, `section_pave_cube`,
+`section_cylindre`, `section_cone_pyramide`, `section_sphere`,
+`section_calculer_longueur`, `section_defi`, et les deux défis si on les veut
+au niveau 3e plutôt que branchés depuis la 4e.
+
+⚠️ Le 1er poste doit faire la 3e après la 6e : à trancher avec Frédéric, pour que
+personne ne tourne deux fois les mêmes.
