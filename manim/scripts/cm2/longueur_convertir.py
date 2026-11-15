@@ -433,12 +433,12 @@ class LongueurConvertirBase(PaysageLongueurCM2):
         self.play(FadeIn(t), FadeIn(ch), FadeIn(v), FadeIn(km), FadeIn(b1), FadeIn(e1),
                   GrowFromEdge(ch750, LEFT), GrowFromCenter(b750), FadeIn(e750), run_time=0.45)
         l1 = self.ligne([("750", BLEU_D), ("÷ 1000", BLEU_D), ("= 0,75 km", VERT_OK)], 40, buff=0.22)
-        self.col(l1, 1.45, 0.5)
+        self.col(l1, 1.45, -0.3)  # à droite du tableau (bord gauche −0,8), loin du bord droit
         self.a_l_instant(4.6)  # le 2e « 750 » n'a pas de marque (« 750 mètres : 750 divisé »)
         self.poser(l1[0])
         self.au_mot("divisé par 1000")
         self.play(FadeIn(l1[1], shift=UP * 0.1), v.animate.move_to(place_virgule(t, "km")), run_time=0.45)
-        self.au_mot("1000, 0,75")
+        self.au_mot("0,75")  # « 1000, » et « 0,75 » : la marque de « 0,75 » (7,14 s)
         z = chiffre(t, "km", "0", ORANGE_RETENUE, fs=38)
         e075 = hors_audit(Text("0,75 km", font_size=28, color=VERT_OK, weight=BOLD)).next_to(e750, DOWN,
                                                                                            buff=0.12)

@@ -44,6 +44,44 @@ try:
 except ImportError:
     pass
 
+# La découpe d'un texte en morceaux (un par nombre) ne coupe plus « 12 300 » en « 12 » / « 300 » :
+# l'espace des milliers compte comme un chiffre pour trouver les débuts de nombres.
+_morceaux_orig = getattr(_j2, "_morceaux_orig", _j2._morceaux)
+
+
+def _morceaux_mil(t):
+    """_morceaux du module J2, mais « 12 300 » est UN nombre (pas de coupe après l'espace des milliers)."""
+    s = t.original_text
+    if not _MIL.search(s):
+        return _morceaux_orig(t)
+    s2 = _MIL.sub("0", _j2._ENUM.sub(lambda x: " " * len(x.group(0)), s))
+    debuts = [m.start() for m in re.finditer(r"[0-9]+(?:[,.][0-9]+)?", s2)]
+    if len(debuts) < 2 or len(t.submobjects) != sum(1 for c in s if not c.isspace()):
+        return [t]
+    bornes = [0] + debuts[1:] + [len(s)]
+    out, k = [], 0
+    for a, b in zip(bornes[:-1], bornes[1:]):
+        n = sum(1 for c in s[a:b] if not c.isspace())
+        g = _j2._Morceau(*t.submobjects[k:k + n])
+        g.original_text = s[a:b]
+        k += n
+        if n:
+            out.append(g)
+    return out
+
+
+_j2._morceaux_orig = _morceaux_orig
+_j2._morceaux = _morceaux_mil
+
+
+def fixe(m):
+    """Une étiquette qui mêle deux nombres déjà dits (« 12 km 300 m ») : d'un bloc, hors synchro et audit,
+    posée au mot par le script."""
+    hors_audit(m)
+    for f in m.get_family():
+        f._bloc = True
+    return m
+
 
 def sans_milliers(s):
     """« 12 500 » → « 12500 ». Renvoie (texte, carte) : carte[i] = la place du caractère i dans le nouveau texte."""
@@ -197,33 +235,35 @@ class LongueurComparerBase(VoixMilliers, PaysageLongueurCM2):
         self.au_mot("Voici Léonie")
         nom = self.t("Léonie", 42, PISTE).next_to(pe, UP, buff=0.2)
         self.play(FadeIn(pe, shift=UP * 0.3), FadeIn(nom), run_time=0.45)
-        XP = 0.6
+        XP = 0.5  # colonne de droite : tout finit avant x = 6,2 ; Ti-Margo libre (x < 5,3 en bas)
         l0 = self.bloc(["Elle court des trails :", "des courses en montagne."], 30)
-        self.col(l0, 2.55, XP)
+        self.col(l0, 2.9, XP)
         self.au_mot("Elle court des trails")
         met = self.bloc(["coureuse", "de trail"], 26, PISTE).next_to(pe, DOWN, buff=0.12)
         self.play(FadeIn(l0[0], shift=UP * 0.1), FadeIn(met, shift=DOWN * 0.1), run_time=0.35)
         self.au_mot("courses en montagne")
         self.play(FadeIn(l0[1], shift=UP * 0.1), FadeIn(mt, shift=UP * 0.2), run_time=0.4)
-        l1 = self.t("Elle hésite entre trois parcours :", 30, JAUNE_TITRE)
-        self.col(l1, 1.45, XP)
+        l1 = self.bloc(["Elle hésite entre", "trois parcours :"], 30, JAUNE_TITRE)  # une ligne allait au bord
+        self.col(l1, 1.8, XP)
         self.au_mot("hésite entre trois parcours")
         self.play(FadeIn(l1, shift=UP * 0.1), run_time=0.3)
         g = parcours([12.5, 12.3, 12.45], 0.22, buff=0.36)
-        g.move_to(P(0, 0.05)).align_to(P(XP, 0), LEFT)
+        g.move_to(P(0, -0.15)).align_to(P(XP, 0), LEFT)
         textes = [("12,5", "12,5 km"), ("12 kilomètres 300", "12 km 300 m"), ("12450", "12 450 m")]
         for k, (mot, s) in enumerate(textes):
             self.au_mot(mot)
             e = etiq(g[k], s, 24, audit=True)
+            if k == 1:
+                fixe(e)  # « 12 km 300 m » : posé au mot « 300 », le 12 est déjà dit
             self.play(GrowFromEdge(g[k], LEFT), FadeIn(e), run_time=0.35)
         l2 = self.bloc(["Pour s'entraîner,", "elle veut le plus court."], 30)
-        self.col(l2, -1.35, XP)
+        self.col(l2, -1.65, XP)  # ≥ 0,3 sous la 3e barre
         self.au_mot("Pour s'entraîner")
         self.play(FadeIn(l2[0], shift=UP * 0.1), run_time=0.3)
         self.au_mot("le plus court")
         self.play(FadeIn(l2[1], shift=UP * 0.1), run_time=0.3)
         self.au_mot("Lequel")
-        q = self.t("Lequel ?", 44, JAUNE_TITRE).move_to(P(2.0, -2.5))
+        q = self.t("Lequel ?", 44, JAUNE_TITRE).move_to(P(2.0, -2.65))
         self.play(FadeIn(q, scale=1.2), Wiggle(g), run_time=0.5)
         self.attendre_voix()
 
@@ -264,7 +304,7 @@ class LongueurComparerBase(VoixMilliers, PaysageLongueurCM2):
     # ── 03 : convertir avec le tableau ──────────────────────────────────────
     def ecran_convertir(self):
         self.ecran("03-convertir")
-        XP = 0.6
+        XP = -0.2  # « 12 450 m reste comme ça. » finit à x ≈ 6,2 (tableau : x ≤ −1,65)
         tb = tableau_conv(["km", "hm", "dam", "m"], cw=1.05, ch=0.62, fs=28, surligne=("m",))
         tb.move_to(P(-3.75, 2.05))
         g = parcours([12.5, 12.3, 12.45], 0.25, buff=0.4)
@@ -314,8 +354,6 @@ class LongueurComparerBase(VoixMilliers, PaysageLongueurCM2):
     def ecran_ranger(self):
         self.ecran("04-ranger")
         tit = self.t("On range :", 44, JAUNE_TITRE).move_to(P(-4.6, 2.95))
-        self.au_mot("On range")
-        self.play(Write(tit), run_time=0.3)
         x0, x1, v0, v1 = -5.6, 4.4, 12200, 12600
         X = lambda v: x0 + (v - v0) * (x1 - x0) / (v1 - v0)  # noqa: E731
         y = 1.35
@@ -325,8 +363,9 @@ class LongueurComparerBase(VoixMilliers, PaysageLongueurCM2):
                                color=WHITE, stroke_width=3 if v % 100 == 0 else 2) for v in range(v0, v1 + 1, 50)])
         nums = VGroup(*[hors_audit(Text(f"{v // 1000} {v % 1000:03d}", font_size=22, color=GRAY_B))
                         .move_to(P(X(v), y - 0.45)) for v in range(v0, v1 + 1, 100)])
-        unite = hors_audit(Text("(en m)", font_size=22, color=GRAY_B)).move_to(P(x1 + 0.5, y - 0.45))
-        self.play(FadeIn(axe), FadeIn(traits), FadeIn(nums), FadeIn(unite), run_time=0.3)
+        unite = hors_audit(Text("(en m)", font_size=22, color=GRAY_B)).move_to(P(x1 + 0.35, y + 0.42))  # au-dessus de la flèche, loin de « 12 600 »
+        self.au_mot("On range")
+        self.play(Write(tit), FadeIn(axe), FadeIn(traits), FadeIn(nums), FadeIn(unite), run_time=0.3)
         vals = [12300, 12450, 12500]
         cols = [PISTES[1], PISTES[2], PISTES[0]]
         pts = []
@@ -389,13 +428,13 @@ class LongueurComparerBase(VoixMilliers, PaysageLongueurCM2):
         gauche(tit, -6.2, 3.05)
         self.play(Write(tit), run_time=0.35)
         # à gauche : les deux nombres, chiffre sous chiffre (unités, dixièmes, centièmes)
-        XS = (-4.75, -3.45, -2.25)
+        XS = (-5.0, -3.5, -2.0)  # colonnes de 1,45 : « centièmes » y tient
         tetes = VGroup()
         for x, s in zip(XS, ("unités", "dixièmes", "centièmes")):
-            r = Rectangle(width=1.2, height=0.5, fill_color="#1e3a8a", fill_opacity=1, stroke_color=WHITE,
+            r = Rectangle(width=1.45, height=0.5, fill_color="#1e3a8a", fill_opacity=1, stroke_color=WHITE,
                           stroke_width=2).move_to(P(x, 1.75))
-            tetes.add(VGroup(r, hors_audit(Text(s, font_size=20, color=WHITE, weight=BOLD).move_to(r))))
-        fond = VGroup(*[Rectangle(width=1.2, height=2.1, fill_color="#0f172a", fill_opacity=1, stroke_color=WHITE,
+            tetes.add(VGroup(r, hors_audit(Text(s, font_size=19, color=WHITE, weight=BOLD).move_to(r))))
+        fond = VGroup(*[Rectangle(width=1.45, height=2.1, fill_color="#0f172a", fill_opacity=1, stroke_color=WHITE,
                                   stroke_width=2).move_to(P(x, 0.45)) for x in XS])
         YA, YB = 0.95, -0.05
 
@@ -408,7 +447,7 @@ class LongueurComparerBase(VoixMilliers, PaysageLongueurCM2):
         na = VGroup(chif("3", XS[0], YA), virg(YA), chif("4", XS[1], YA), chif("5", XS[2], YA))
         nb = VGroup(chif("3", XS[0], YB), virg(YB), chif("5", XS[1], YB))
         zero = chif("0", XS[2], YB, ORANGE_RETENUE)
-        XP = 0.1
+        XP = -0.6  # le tableau finit à x = −1,28 ; les lignes finissent avant x = 6
         l0 = self.ligne([("3,45", ROUGE_ERREUR), ("n'est pas plus grand", WHITE)], 34, buff=0.2)
         self.col(l0, 2.2, XP)
         self.au_mot("3,45 n'est")
@@ -435,7 +474,7 @@ class LongueurComparerBase(VoixMilliers, PaysageLongueurCM2):
         self.play(FadeIn(l2[0], shift=UP * 0.1), run_time=0.3)
         self.au_mot("chiffre par")
         self.play(FadeIn(l2[1], shift=UP * 0.1), run_time=0.3)
-        l3 = self.ligne([("4 dixièmes", ROUGE_ERREUR), ("contre", WHITE), ("5 dixièmes", VERT_OK)], 36, buff=0.22)
+        l3 = self.ligne([("4 dixièmes", ROUGE_ERREUR), ("contre", WHITE), ("5 dixièmes", VERT_OK)], 32, buff=0.22)
         self.col(l3, -0.45, XP)
         cadre = SurroundingRectangle(VGroup(na[2], nb[2]), color=JAUNE_TITRE, buff=0.12, stroke_width=6)
         self.au_mot("4 dixièmes")
@@ -459,7 +498,7 @@ class LongueurComparerBase(VoixMilliers, PaysageLongueurCM2):
     def ecran_question2(self):
         self.clear()
         self.add_mascotte()
-        g = rubans_alignes([408, 480, 475], [SABLE, RUBAN4, RUBAN2], 0.0095, buff=0.4, ep=0.28)
+        g = rubans_alignes([408, 480, 475], [SABLE, RUBAN4, RUBAN2], 0.0085, buff=0.4, ep=0.28)  # « 4 m 75 cm » finit à x ≈ 0,4 (cartes : 0,95)
         g.move_to(P(0, 1.45)).align_to(P(-5.9, 0), LEFT)
         planche = Rectangle(width=0.12, height=g.height + 0.35, fill_color=WHITE, fill_opacity=1, stroke_width=0)
         planche.move_to(g.get_left() + LEFT * 0.1)
@@ -479,7 +518,7 @@ class LongueurComparerBase(VoixMilliers, PaysageLongueurCM2):
     NOMS = ("1,3 km", "1 km 250 m", "1 280 m")
 
     def trois(self):
-        return parcours([1300, 1250, 1280], 0.0034, buff=0.75, ep=0.3)
+        return parcours([1300, 1250, 1280], 0.0034, buff=1.0, ep=0.3)  # l'étiquette au-dessus de chaque barre a sa place
 
     def ecran_defi(self):
         self.ecran("08-defi", 0.65)
@@ -499,6 +538,8 @@ class LongueurComparerBase(VoixMilliers, PaysageLongueurCM2):
         for k, (mot, s) in enumerate(zip(("1,3 kilomètre", "250 mètres", "et 1280"), self.NOMS)):
             self.au_mot(mot)
             e = etiq(g[k], s, 28, cote=UP, buff=0.12, audit=True).align_to(g[k], LEFT)
+            if k == 1:
+                fixe(e)  # « 1 km 250 m » : posé au mot « 250 », le 1 est déjà dit
             self.play(GrowFromEdge(g[k], LEFT), FadeIn(e), run_time=0.3)
         self.pause_defi(y=0.2)
 
@@ -507,16 +548,16 @@ class LongueurComparerBase(VoixMilliers, PaysageLongueurCM2):
         tit = self.t("Correction", 50, JAUNE_TITRE).move_to(P(0, 3.15))
         self.play(Write(tit), run_time=0.35)
         g = self.trois()
-        g.move_to(P(0, 0.85)).align_to(P(-5.6, 0), LEFT)
+        g.move_to(P(0, 0.6)).align_to(P(-5.6, 0), LEFT)
         ets = [etiq(r, s, 28, cote=UP, buff=0.12).align_to(r, LEFT) for r, s in zip(g, self.NOMS)]
         self.add(g, *ets)
         XP = 0.6
         l0 = self.t("Tout en mètres :", 36, ORANGE_RETENUE)
-        self.col(l0, 2.3, XP)
+        self.col(l0, 2.35, XP)
         self.au_mot("Tout en mètres")
         self.play(FadeIn(l0, shift=UP * 0.1), run_time=0.3)
         l1 = self.ligne([("1,3 km", BLEU_D), ("= 1 300 m", VERT_OK)], 36, buff=0.25)
-        self.col(l1, 1.55, XP)
+        self.col(l1, 1.65, XP)
         self.au_mot("1,3 kilomètre")
         self.play(FadeIn(l1[0], shift=UP * 0.1), run_time=0.25)
         self.au_mot("1300 mètres")
@@ -524,15 +565,16 @@ class LongueurComparerBase(VoixMilliers, PaysageLongueurCM2):
                   Transform(ets[0], etiq(g[0], "1 300 m", 28, VERT_OK, cote=UP, buff=0.12).align_to(g[0], LEFT)),
                   run_time=0.4)
         l2 = self.ligne([("1 km 250 m", BLEU_D), ("= 1 250 m", VERT_OK)], 36, buff=0.25)
-        self.col(l2, 0.85, XP)
-        self.au_mot("250 mètres, 1250")
+        fixe(l2[0])  # « 1 km 250 m » : posé au mot « 250 »
+        self.col(l2, 0.98, XP)
+        self.au_mot("250 mètres, 1250")  # la marque du « 250 » (7,67 s) : « 1 kilomètre » n'a pas la sienne
         self.play(FadeIn(l2[0], shift=UP * 0.1), run_time=0.25)
         self.au_mot("1250 mètres")
         self.play(FadeIn(l2[1], shift=UP * 0.1),
                   Transform(ets[1], etiq(g[1], "1 250 m", 28, VERT_OK, cote=UP, buff=0.12).align_to(g[1], LEFT)),
                   run_time=0.4)
         l3 = self.ligne([("Et", WHITE), ("1 280 m.", BLEU_D)], 36, buff=0.2)
-        self.col(l3, 0.15, XP)
+        self.col(l3, 0.3, XP)
         self.au_mot("Et 1280")
         self.play(FadeIn(l3, shift=UP * 0.1), ets[2].animate.set_color(VERT_OK), run_time=0.3)
         # le nouvel ordre, du plus court au plus long : 1 250, 1 280, 1 300 (mêmes places)
@@ -540,8 +582,8 @@ class LongueurComparerBase(VoixMilliers, PaysageLongueurCM2):
         places = [VGroup(ets[i], g[i]).copy() for i in range(3)]
         y_places = [p[1].get_y() for p in places]
         res = self.pile([("1 km 250 m,", VERT_OK), ("puis 1 280 m,", VERT_OK), ("puis 1,3 km.", VERT_OK)], 36,
-                        buff=0.16)
-        self.col(res, -1.05, XP)
+                        buff=0.12)
+        self.col(res, -1.0, XP)  # ≥ 0,3 sous « Et 1 280 m. »
         self.au_mot("Donc :")
         anims = [VGroup(ets[i], g[i]).animate.shift(UP * (y_places[k] - g[i].get_y())) for k, i in enumerate(ordre)]
         self.play(*anims, run_time=0.8)

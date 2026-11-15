@@ -30,6 +30,15 @@ PEAU = "#e0ac69"
 VIRG = ROUGE_ERREUR
 
 
+def fixe(m):
+    """Un calcul qui redit un nombre déjà dit (« 1 200 + 850 », posé au mot « 850 ») : d'un bloc (pas de
+    découpe en morceaux), hors synchro et audit ; le script le pose au mot."""
+    hors_audit(m)
+    for f in m.get_family():
+        f._bloc = True
+    return m
+
+
 # ── Les dessins de l'épisode ───────────────────────────────────────────────
 
 def bobine(r=1.0):
@@ -355,6 +364,7 @@ class LongueurDefiBase(PaysageLongueurCM2):
         XL = -5.6
         l1 = self.ligne([("Déjà posés :", WHITE), ("1 200 + 850", BLEU_D), ("= 2 050 m", VERT_OK)], 40, buff=0.25)
         gauche(l1, XL, -0.55)
+        fixe(l1[1])  # « 1 200 » est dit juste avant « 850 » : le calcul entier vient au mot « 850 »
         self.play(FadeIn(fond), FadeIn(haut), FadeIn(th), FadeIn(l1[0], shift=UP * 0.1), run_time=0.3)
         b1 = Brace(b[0], DOWN, color=FIBRE)
         t1 = hors_audit(Text("1 200 m", font_size=26, color=FIBRE, weight=BOLD)).next_to(b1, DOWN, buff=0.06)

@@ -394,7 +394,7 @@ class LongueurEstimerBase(VoixMilliers, PaysageLongueurCM2):
         ligne_sol = Line(P(1.4, sol), P(5.0, sol), color=GRAY_B, stroke_width=3)
         self.au_mot("Une girafe")
         self.play(FadeIn(q0, shift=UP * 0.2), FadeIn(gi, shift=UP * 0.3), FadeIn(ligne_sol), run_time=0.35)
-        self.au_mot("girafe : 5")
+        self.au_mot("5 centimètres")
         self.play(FadeIn(q1[0], shift=UP * 0.2), run_time=0.25)
         self.au_t(4.3)
         self.play(FadeIn(q1[1], shift=UP * 0.2), run_time=0.25)
@@ -491,8 +491,8 @@ class LongueurEstimerBase(VoixMilliers, PaysageLongueurCM2):
         # la porte : 2 m (double flèche à côté)
         xa = pt.get_left()[0] - 0.22
         fa = DoubleArrow(P(xa, sol), P(xa, sol + 2 * u), buff=0, color=BLEU_D, stroke_width=4, tip_length=0.15)
-        ea = hors_audit(Text("2 m", font_size=28, color=BLEU_D, weight=BOLD)).next_to(fa, LEFT, buff=0.08)
-        ea.set_y(sol + u)
+        # « 2 m » AU-DESSUS de la flèche (à sa gauche, il touchait le bord gauche)
+        ea = hors_audit(Text("2 m", font_size=28, color=BLEU_D, weight=BOLD)).next_to(fa, UP, buff=0.1)
         l1 = self.ligne([("Une porte :", WHITE), ("2 m", BLEU_D)], 34, buff=0.2)
         self.col(l1, 1.75, XP)
         self.au_mot("Une porte fait")
@@ -610,7 +610,8 @@ class LongueurEstimerBase(VoixMilliers, PaysageLongueurCM2):
                              [self.choix("6 mm"), self.choix("6 m"), self.choix("6 cm")], 2,
                              ["Ailes ouvertes : 6 doigts,", "6 cm.", "6 mm : moins qu'un petit pois ;",
                               "6 m : plus qu'une girafe !"],
-                             -0.75, couper={2: ("6 mm :", "moins qu'un petit pois ;")}, sans_audit=(1, 2),
+                             -0.75, couper={2: ("6 mm :", "moins qu'un petit pois ;"), 3: ("6 m :", "plus qu'une girafe !")},
+                             sans_audit=(1, 2),
                              mot_q="Mia photographie", autres_q=autres_q, autres_r=apres)
 
     # ── 06 : le piège (l'unité avant le nombre) ─────────────────────────────
@@ -690,7 +691,8 @@ class LongueurEstimerBase(VoixMilliers, PaysageLongueurCM2):
                               self.choix("environ 30 km")], 1,
                              ["Environ 3 000 m = 3 km :", "3 070 m exactement.", "30 km : bien plus haut",
                               "que les avions !"],
-                             -0.75, couper={0: ("Environ 3 000 m", "= 3 km :"), 1: ("3 070 m", "exactement.")},
+                             -0.75, couper={0: ("Environ 3 000 m", "= 3 km :"), 1: ("3 070 m", "exactement."),
+                                     2: ("30 km :", "bien plus haut")},
                              sans_audit=(1,),
                              mot_q="Mia monte", autres_q=autres_q, autres_r=apres)
 
@@ -772,6 +774,7 @@ class LongueurEstimerBase(VoixMilliers, PaysageLongueurCM2):
                       for v, s in ((0, "0"), (1, "1 m"), (2, "2 m"), (3, "3 m"))])
         l1 = self.ligne([("3 pas et demi :", WHITE), ("environ 3,5 m", VERT_OK)], 40, buff=0.25)
         gauche(l1, -6.2, -1.8)
+        hors_audit(l1[0])  # posé au « 3 » (sinon il attendait « demi », 0,6 s plus tard)
         self.au_mot("3 pas et demi")
         self.play(FadeIn(l1[0], shift=UP * 0.1), FadeIn(demi, scale=1.3), FadeIn(axe), FadeIn(tr), FadeIn(nb),
                   run_time=0.35)
