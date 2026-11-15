@@ -58,7 +58,7 @@ Ti Margo cache le bas du milieu-gauche de l'ardoise : dessins en haut, ou à DRO
 | A2 aire_triangle | pilote | ✅ HD 202,65 s | « Le pignon de la cabane » (C) | ✅ |
 | A3 aire_parallelogramme | `5e_aire_parallelogramme.py` `AireParallelogramme5e` (verte, Q 01:02 C, 01:47 B) | ✅ HD 213 s, bords 0 ; 2e HD relu à 52 s (cote « 4 cm » flottante corrigée) | `5e-aire-parallelogramme.js` « Le coup de ciseaux » (A) | ✅ rendu |
 | A4 aire_composer | `5e_aire_composer.py` `AireComposer5e` (verte, Q 01:06 A, 01:53 B) | ✅ HD 221 s, bords 0 ; 3e HD relu (question 01 écartée, trait de coupe effacé, piège descendu, Q2 remontée) | `5e-aire-composer.js` « La pancarte maison » (C) | ✅ rendu |
-| A5 aire_defi | — | ⏳ WAV, marques, cues FAITS ; script à écrire (Mehdi menuisier, bleue, B·C) | « Le tapis trop large » (A) | ⏳ |
+| A5 aire_defi | `5e_aire_defi.py` `AireDefi5e` (bleue, Q 01:07 B, 01:58 C) | ✅ HD 236,7 s, bords 0 ; 2e HD relu (cotes décollées de la hauteur) | `5e-aire-defi.js` « Le tapis trop large » (A) | ✅ rendu 59,9 s, compteur contrôlé |
 
 ✅ **Compteur des shorts (15/11)** : le rebours de 3 s ne s'affichait dans AUCUN short (bug du socle `short.js` l. 135,
 `''` au lieu de `'block'`). Le chef d'orchestre a corrigé le socle. Décision de Frédéric : « on refait les shorts de 5° mais pas
@@ -69,17 +69,26 @@ les autres ». Les 4 shorts Aire sont refaits et contrôlés sur le MP4 : barre 
 ⚠️ Vérifier au début de la session suivante : `ls manim/sorties/5e/maths/aire/0*/` (chaque dossier : paysage + short + `_muet.mp4`),
 et `python scripts/verifier-bords-video.py` sur les deux HD relancés. Les MP4 et WAV sont ignorés par git (normal).
 
-## Prochaine étape (session suivante)
-1. Contrôles ci-dessus ; puis A5 `aire_defi` (paysage + short).
-2. Série Volume (8 micros), puis Conversions (4) : même chaîne. Nouvelle série de shorts : `films/5e-volume.json`
-   (+ `5e-volume.js`, cues), `films/5e-conversion.json` (voir le tableau en tête de `VOIX-5e-aire-volume.md`).
-3. Miniatures (« Dessin animé » pour les shorts), `manim/poste2/manifeste-5e.json`, R2 si `.env.local` a les clés
-   (sinon noter dans `manim/poste2/videos-r2-5e.json`), `coach-5e.md`, cocher le plan. Commit par chemin, jamais de push.
-4. Aperçu pour Frédéric : comme le pilote (`manim/sorties/…/apercu.html` servi par la config `sorties-video`, port 3900), EN PAUSE.
+## Volume et Conversions (15/11, après-midi) : ✅ LES 17 MICROS SONT RENDUS
+- 12 micros écrits par des sous-agents sur un cahier des charges commun
+  (`…/side-session-notes/local_dbc3c6fd-…/brief-micro-5e-volume-conversions.md`, leçons comprises), puis HD + short ici,
+  un à la fois sous verrou ; CHAQUE planche HD et CHAQUE compteur relus ; 2e HD pour V2, V3, V4, V5, V8 après retouches.
+- Séries de shorts : `films/5e-volume.json` (⚠️ épisodes = slugs complets des voix, car le patron n'a pas le préfixe
+  « volume- » : fichiers `films/5e-volume-volume-pave.js`…) et `films/5e-conversion.json` (`decimal duree avant-calcul coherence`).
+- Commun paysage : `pave()`, `prisme_tri()`, `cylindre()` (cavalière). ⚠️ `prisme_tri` peint mal son pan gauche quand il est
+  caché (V6 le corrige dans son fichier). `5e-commun.js` : « ÷ » prend « divisé par », « = » prend « égale ».
+- Sorties : `manim/sorties/5e/maths/{aire,volume,conversion}/NN-…/` (paysage, short, `_muet.mp4`, miniature paysage `.png`,
+  miniature short `-short-miniature.png` « Dessin animé »). Miniatures paysage : `python manim/5e_miniatures_aire_volume.py`.
+- Manifeste : `python manim/poste2/5e_manifeste.py` → `manim/poste2/manifeste-5e.json` (34 entrées ; chapitres lus dans
+  `%TEMP%/dry-5e_<slug>.log`, relancés si absents ; `pas_avant` vide : au 1er poste de dater).
+- R2 : ⛔ pas de clés `R2_*` dans `.env.local` de ce poste → note et entrées prêtes dans `manim/poste2/videos-r2-5e.json`.
+- `coach-5e.md` à jour ; plan coché (section 5E, 17/17).
+- Aperçu pour Frédéric : `http://localhost:3900/5e/maths/apercu.html` (config `sorties-video`), 34 vidéos EN PAUSE.
+- Leçons (pour la suite) : la phrase de réponse d'une question est ramenée à 5,6 de large → lignes ≤ 22 caractères ;
+  énoncé ≤ 3 lignes (sinon « Mets pause » touche Ti Margo) ; la hauteur toujours verte, base/rayon bleus ; l'audit ne
+  trouve pas les milliers à espace (« 2 400 » → faux ABSENT ; V7 surcharge `_auditer` pour les coller).
+- À faire valider par Frédéric : quelques énoncés condensés pour tenir en 3 lignes (mots dits, mais pas tous) — V4, V5, V6, C4.
 
-### Prompt de reprise (à coller dans une nouvelle session)
-« 2e poste, branche `poste2`, série 5e Aire, volume, conversions. Lis `manim/REPRISE-5e-aire-volume.md` en entier, puis
-`manim/poste2/VOIX-5e-aire-volume.md` (voix validées : ne pas les retoucher). Fais les contrôles de la section « Production »,
-puis enchaîne `aire_defi`, les 8 Volume et les 4 Conversions avec la chaîne décrite, un HD à la fois, planche relue avant
-chaque HD final. Ne pousse jamais ; commit par chemin ; ne touche ni aux fichiers partagés ni aux fichiers des autres sessions
-(`manim/scripts/premiere/`, `terminale/`…). Au-delà de 65 % de contexte, mets cette reprise à jour et demande une nouvelle session. »
+## Prochaine étape (session suivante)
+1. Retours de Frédéric sur l'aperçu → retouches éventuelles (HD par `manim/poste2/5e_hd.sh`, short par `5e_film.sh`).
+2. Au 1er poste, après fusion : R2, `lib/videos/*.json`, manifeste partagé, coach (`coach-5e.md`).
