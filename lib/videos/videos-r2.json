@@ -16217,5 +16217,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_patron_construire&display=simple"
+ },
+ "cm2-solides-faces": {
+  "fichier": "cm2/maths/solides/03-faces/eleveai-maths-cm2-solides-faces.mp4",
+  "poster": "cm2/maths/solides/03-faces/eleveai-maths-cm2-solides-faces.png",
+  "vignette": "cm2/maths/solides/03-faces/eleveai-maths-cm2-solides-faces.vignette.webp",
+  "titre": "Combien de faces, et de quelles formes ? — Les faces d'un solide — épisode 3 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_face&display=simple"
+ },
+ "cm2-solides-faces-short": {
+  "fichier": "cm2/maths/solides/03-faces/eleveai-maths-cm2-solides-faces-short.mp4",
+  "poster": "cm2/maths/solides/03-faces/eleveai-maths-cm2-solides-faces-short-miniature.png",
+  "vignette": "cm2/maths/solides/03-faces/eleveai-maths-cm2-solides-faces-short-miniature.vignette.webp",
+  "titre": "4 couleurs pour ma boîte à chaussures ? Raté ! #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_face&display=simple"
  }
 }
