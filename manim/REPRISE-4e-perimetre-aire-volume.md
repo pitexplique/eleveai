@@ -87,10 +87,14 @@ encore sur YouTube) · **primaire** = seulement CM1/CM2/CE2 · **—** = rien.
 2. **Les rappels de périmètre et d'aire** : seules des vidéos CM1/CM2 existent.
    Brancher le CM2 sur un 4e serait visible (« Maths CM2 »). Proposition : deux
    paysages 4e de rappel plutôt qu'un branchement primaire.
-3. **Le short 4e reste en MANIM**, pas en dessin animé Ti Margo : `manim/REGLES.md`,
-   règle du 09/11/2026 (« à partir de la 4e, le short reste en Manim »). Donc pas
-   de `prototypes/ti-margo/films/4e-commun.js`, et les miniatures viennent des
-   générateurs `manim/miniature_*.py`.
+3. ✅ **Tranché le 15/11 : le short 4e reste en MANIM**, pas en dessin animé
+   (Frédéric, confirmant sa règle du 09/11/2026 dans `manim/REGLES.md` : « à partir
+   de la 4e, le short reste en Manim »), **et toujours avec un défi** (Frédéric,
+   15/11). Donc pas de `prototypes/ti-margo/films/4e-commun.js` à écrire, et les
+   miniatures viennent des générateurs `manim/miniature_*.py`.
+   Chaque short 4e porte : un défi (pas un mini-cours), sa ceinture (échelle
+   entière sous le titre), une question-pause avec compte à rebours de 3 s, la
+   question chiffrée en commentaire à la fin.
 
 ## Pièges relevés
 
