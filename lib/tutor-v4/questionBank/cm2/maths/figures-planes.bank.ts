@@ -8,6 +8,20 @@ import type {
   CercleCanvasData,
 } from "@/lib/tutor-v4/types";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
+// ⭐ 15/11/2026 — les gabarits à situations (objets, métiers) × tournures vivent
+// à côté : les items figés ci-dessous restent, ces gabarits portent le volume.
+import {
+  cercleGabarits,
+  construireGabarits,
+  defiGabarits,
+  intro,
+  introRond,
+  METIERS,
+  proprieteGabarits,
+  quadrilatereGabarits,
+  reconnaitreGabarits,
+  triangleGabarits,
+} from "./figures-planes-outils";
 
 function randomChoice<T>(items: T[]): T {
   return items[Math.floor(Math.random() * items.length)];
@@ -515,8 +529,8 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un carré est-il aussi un rectangle particulier ?",
     format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
+    choices: ["Oui : il a 4 angles droits.", "Non : ses 4 côtés sont égaux.", "Non : un rectangle est plus long que large.", "Oui : il a 4 côtés égaux."],
+    expected: ["Oui : il a 4 angles droits."],
     comparator: "mcq_exact",
     hint: "Un rectangle a 4 angles droits.",
     explanation:
@@ -536,8 +550,8 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un carré est-il aussi un losange particulier ?",
     format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
+    choices: ["Oui : ses 4 côtés sont égaux.", "Non : il a 4 angles droits.", "Non : un losange est toujours penché.", "Oui : il a 4 angles droits."],
+    expected: ["Oui : ses 4 côtés sont égaux."],
     comparator: "mcq_exact",
     hint: "Un losange a 4 côtés égaux.",
     explanation:
@@ -683,7 +697,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       ]);
 
       return {
-        text: `Combien de côtés possède un ${item.figure} ?`,
+        text: `${randomChoice(METIERS)} ${randomChoice(["dessine", "trace", "découpe"])} un ${item.figure}. ${randomChoice([`Combien de côtés possède ce ${item.figure} ?`, `Combien de côtés a ce ${item.figure} ?`, `Ce ${item.figure} a combien de côtés ?`])}`,
         format: "qcm",
         choices: shuffle(["3", "4", "5", "6"]),
         expected: [item.sides],
@@ -916,8 +930,8 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un triangle rectangle est-il forcément un rectangle ?",
     format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["non"],
+    choices: ["Non : il a 3 côtés, un rectangle en a 4.", "Oui : il a un angle droit.", "Oui : il a des angles droits comme un rectangle.", "Non : il n'a aucun angle droit."],
+    expected: ["Non : il a 3 côtés, un rectangle en a 4."],
     comparator: "mcq_exact",
     hint: "Un rectangle a 4 côtés.",
     explanation:
@@ -937,8 +951,8 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un triangle équilatéral est-il aussi un triangle isocèle particulier ?",
     format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
+    choices: ["Oui : il a au moins 2 côtés égaux.", "Non : il a 3 côtés égaux, pas 2.", "Non : un isocèle a toujours un angle droit.", "Oui : il a un angle droit."],
+    expected: ["Oui : il a au moins 2 côtés égaux."],
     comparator: "mcq_exact",
     hint: "Un triangle isocèle a au moins deux côtés égaux.",
     explanation:
@@ -1098,7 +1112,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       ]);
 
       return {
-        text: "Quelle est la nature du triangle représenté ?",
+        text: `${intro().phrase} ${randomChoice(["Quelle est la nature de ce triangle ?", "Lis le codage : quel est son nom le plus précis ?", "Quel est le nom le plus précis de ce triangle ?"])}`,
         format: "qcm",
         choices: makeChoices(item.correct, item.wrongs),
         expected: [item.correct],
@@ -1124,9 +1138,9 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       const askSides = Math.random() < 0.5;
 
       return {
-        text: askSides
-          ? "Combien de côtés possède un triangle ?"
-          : "Combien de sommets possède un triangle ?",
+        text: `${intro().phrase.replace(/\.$/, "")}, en forme de triangle. ${askSides
+          ? randomChoice(["Combien de côtés possède ce triangle ?", "Combien de côtés compte-t-il ?", "Ce triangle a combien de côtés ?"])
+          : randomChoice(["Combien de sommets possède ce triangle ?", "Combien de sommets compte-t-il ?", "Ce triangle a combien de sommets ?"])}`,
         format: "qcm",
         choices: shuffle(["2", "3", "4", "5"]),
         expected: ["3"],
@@ -1172,7 +1186,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       ]);
 
       return {
-        text: `Dans le triangle ABC, quel côté est opposé au sommet ${item.sommet} ?`,
+        text: `${intro().phrase.replace(/\.$/, "")}, un triangle ABC. ${randomChoice([`Quel côté est opposé au sommet ${item.sommet} ?`, `Quel côté est en face du sommet ${item.sommet} ?`, `Quel côté ne passe pas par ${item.sommet} ?`])}`,
         format: "qcm",
         choices: makeChoices(item.correct, ["[AB]", "[BC]", "[CA]", item.sommet]),
         expected: [item.correct],
@@ -1198,14 +1212,16 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       const item = randomChoice([
         {
           text: "Un triangle rectangle est-il forcément un rectangle ?",
-          expected: "non",
+          expected: "Non : il a 3 côtés, un rectangle en a 4.",
+          wrongs: ["Oui : il a un angle droit.", "Oui : il a des angles droits comme un rectangle.", "Non : il n'a aucun angle droit."],
           explanation:
             "Non. Un triangle rectangle a 3 côtés et un angle droit. Un rectangle a 4 côtés.",
           canvas: triangleRectangleCanvas(),
         },
         {
           text: "Un triangle équilatéral est-il aussi un triangle isocèle particulier ?",
-          expected: "oui",
+          expected: "Oui : il a au moins 2 côtés égaux.",
+          wrongs: ["Non : il a 3 côtés égaux, pas 2.", "Non : un isocèle a toujours un angle droit.", "Oui : il a un angle droit."],
           explanation:
             "Oui. Un triangle équilatéral a 3 côtés égaux. Il a donc au moins 2 côtés égaux, comme un triangle isocèle.",
           canvas: triangleCanvas({
@@ -1217,10 +1233,11 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
         },
       ]);
 
+      // 15/11/2026 : plus de « oui / non » à 2 choix ; la question en situation.
       return {
-        text: item.text,
+        text: `${randomChoice(METIERS)} ${randomChoice(["se demande", "demande", "hésite"])} : « ${item.text} » ${randomChoice(["Que réponds-tu ?", "Quelle est la bonne réponse ?", "Que faut-il répondre ?"])}`,
         format: "qcm",
-        choices: ["oui", "non"],
+        choices: makeChoices(item.expected, item.wrongs),
         expected: [item.expected],
         comparator: "mcq_exact",
         explanation: item.explanation,
@@ -1573,8 +1590,8 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un rectangle est-il toujours un losange ?",
     format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["non"],
+    choices: ["Non : ses 4 côtés ne sont pas forcément égaux.", "Oui : il a 4 angles droits.", "Oui : ses côtés opposés sont égaux.", "Non : il n'a pas d'angle droit."],
+    expected: ["Non : ses 4 côtés ne sont pas forcément égaux."],
     comparator: "mcq_exact",
     hint: "Un losange doit avoir 4 côtés égaux.",
     explanation:
@@ -1790,38 +1807,43 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       const item = randomChoice([
         {
           text: "Un carré est-il un rectangle particulier ?",
-          expected: "oui",
+          expected: "Oui : il a 4 angles droits.",
+          wrongs: ["Non : ses 4 côtés sont égaux.", "Non : un rectangle est plus long que large.", "Oui : il a 4 côtés égaux."],
           explanation:
             "Oui. Un carré a 4 angles droits, comme un rectangle. Il a en plus 4 côtés égaux.",
           canvas: carreCanvas(),
         },
         {
           text: "Un carré est-il un losange particulier ?",
-          expected: "oui",
+          expected: "Oui : ses 4 côtés sont égaux.",
+          wrongs: ["Non : il a 4 angles droits.", "Non : un losange est toujours penché.", "Oui : il a 4 angles droits."],
           explanation:
             "Oui. Un carré a 4 côtés égaux, comme un losange. Il a en plus 4 angles droits.",
           canvas: carreCanvas(),
         },
         {
           text: "Un rectangle est-il toujours un losange ?",
-          expected: "non",
+          expected: "Non : ses 4 côtés ne sont pas forcément égaux.",
+          wrongs: ["Oui : il a 4 angles droits.", "Oui : ses côtés opposés sont égaux.", "Non : il n'a pas d'angle droit."],
           explanation:
             "Non. Un rectangle n’a pas forcément 4 côtés égaux.",
           canvas: rectangleCanvas(),
         },
         {
           text: "Un losange est-il toujours un rectangle ?",
-          expected: "non",
+          expected: "Non : il n'a pas forcément 4 angles droits.",
+          wrongs: ["Oui : il a 4 côtés égaux.", "Oui : il a 4 sommets.", "Non : il n'a aucun côté égal."],
           explanation:
             "Non. Un losange n’a pas forcément 4 angles droits.",
           canvas: losangeCanvas(),
         },
       ]);
 
+      // 15/11/2026 : plus de « oui / non » à 2 choix ; la réponse ET sa raison.
       return {
-        text: item.text,
+        text: `${randomChoice(METIERS)} ${randomChoice(["se demande", "demande", "hésite"])} : « ${item.text} » ${randomChoice(["Que réponds-tu ?", "Quelle est la bonne réponse ?", "Que faut-il répondre ?"])}`,
         format: "qcm",
-        choices: ["oui", "non"],
+        choices: makeChoices(item.expected, item.wrongs),
         expected: [item.expected],
         comparator: "mcq_exact",
         explanation: item.explanation,
@@ -1980,8 +2002,8 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Le cercle désigne-t-il toute la surface intérieure ?",
     format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["non"],
+    choices: ["Non : le cercle est seulement le contour.", "Oui : le cercle, c'est tout l'intérieur.", "Non : le cercle, c'est seulement le centre.", "Oui : le cercle et le disque, c'est pareil."],
+    expected: ["Non : le cercle est seulement le contour."],
     comparator: "mcq_exact",
     hint: "Le cercle est seulement le contour.",
     explanation:
@@ -2253,7 +2275,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       ]);
 
       return {
-        text: item.text,
+        text: `${introRond().phrase} ${item.text}`,
         format: "qcm",
         choices: makeChoices(item.correct, item.wrongs),
         expected: [item.correct],
@@ -2280,7 +2302,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       const diametre = 2 * rayon;
 
       return {
-        text: `Un cercle a un rayon de ${rayon} cm. Quel est son diamètre ?`,
+        text: `${introRond().phrase} ${randomChoice(["Sur son dessin, le cercle", "Sur le plan, le cercle", "Sur la maquette, le cercle"])} a un rayon de ${rayon} cm. ${randomChoice(["Quel est son diamètre ?", "Combien mesure son diamètre ?", "Trouve son diamètre."])}`,
         format: "short",
         expected: [String(diametre), `${diametre} cm`, `${diametre}cm`],
         comparator: "number_equal",
@@ -2306,7 +2328,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       const diametre = 2 * rayon;
 
       return {
-        text: `Un cercle a un diamètre de ${diametre} cm. Quel est son rayon ?`,
+        text: `${introRond().phrase} ${randomChoice(["Sur son dessin, le cercle", "Sur le plan, le cercle", "Sur la maquette, le cercle"])} a un diamètre de ${diametre} cm. ${randomChoice(["Quel est son rayon ?", "Combien mesure son rayon ?", "Trouve son rayon."])}`,
         format: "short",
         expected: [String(rayon), `${rayon} cm`, `${rayon}cm`],
         comparator: "number_equal",
@@ -2332,8 +2354,8 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
 
       return {
         text: askDisk
-          ? "Le disque désigne..."
-          : "Le cercle désigne...",
+          ? `${introRond().phrase} ${randomChoice(["Sur son dessin, le disque désigne…", "En géométrie, le disque désigne…", "Le disque, c'est…"])}`
+          : `${introRond().phrase} ${randomChoice(["Sur son dessin, le cercle désigne…", "En géométrie, le cercle désigne…", "Le cercle, c'est…"])}`,
         format: "qcm",
         choices: askDisk
           ? shuffle([
@@ -2426,8 +2448,8 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un triangle isocèle est-il toujours équilatéral ?",
     format: "qcm",
-    choices: ["non", "oui"],
-    expected: ["non"],
+    choices: ["Non : son troisième côté peut être différent.", "Oui : il a des côtés égaux.", "Oui : il a 3 côtés.", "Non : il n'a aucun côté égal."],
+    expected: ["Non : son troisième côté peut être différent."],
     comparator: "mcq_exact",
     hint: "Un triangle isocèle demande DEUX côtés égaux. Le troisième, lui, est libre.",
     explanation:
@@ -2478,8 +2500,8 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un élève dit : “Le cercle, c’est toute la surface coloriée.” A-t-il raison ?",
     format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["non"],
+    choices: ["Non : la surface coloriée, c'est le disque.", "Oui : le cercle, c'est l'intérieur.", "Non : le cercle, c'est le centre.", "Oui : cercle et disque veulent dire la même chose."],
+    expected: ["Non : la surface coloriée, c'est le disque."],
     comparator: "mcq_exact",
     hint: "Le cercle est seulement le contour.",
     explanation:
@@ -2499,8 +2521,8 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un élève dit : “Tous les rectangles sont des losanges.” A-t-il raison ?",
     format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["non"],
+    choices: ["Non : un rectangle n'a pas forcément 4 côtés égaux.", "Oui : il a 4 côtés.", "Oui : ses côtés opposés sont égaux.", "Non : un rectangle n'a aucun côté égal."],
+    expected: ["Non : un rectangle n'a pas forcément 4 côtés égaux."],
     comparator: "mcq_exact",
     hint: "Un losange doit avoir 4 côtés égaux.",
     explanation:
@@ -2520,8 +2542,8 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Un élève dit : “Tous les losanges sont des rectangles.” A-t-il raison ?",
     format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["non"],
+    choices: ["Non : un losange n'a pas forcément 4 angles droits.", "Oui : il a 4 côtés égaux.", "Oui : il a 4 sommets.", "Non : un losange n'a aucun côté égal."],
+    expected: ["Non : un losange n'a pas forcément 4 angles droits."],
     comparator: "mcq_exact",
     hint: "Un rectangle doit avoir 4 angles droits.",
     explanation:
@@ -2785,39 +2807,44 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
     generate: () => {
       const item = randomChoice([
         {
-          text: "Un élève dit : “Un carré n’est jamais un rectangle.” A-t-il raison ?",
-          expected: "non",
+          text: "“Un carré n’est jamais un rectangle.”",
+          expected: "Non : un carré a 4 angles droits, c'est un rectangle particulier.",
+          wrongs: ["Oui : ses 4 côtés sont égaux, donc ce n'est pas un rectangle.", "Oui : un rectangle est toujours plus long que large.", "Non : un carré a 4 côtés égaux, comme un rectangle."],
           explanation:
             "Non. Un carré a 4 angles droits, comme un rectangle. C’est donc un rectangle particulier.",
           canvas: carreCanvas(),
         },
         {
-          text: "Un élève dit : “Un carré n’est jamais un losange.” A-t-il raison ?",
-          expected: "non",
+          text: "“Un carré n’est jamais un losange.”",
+          expected: "Non : un carré a 4 côtés égaux, c'est un losange particulier.",
+          wrongs: ["Oui : il a des angles droits, donc ce n'est pas un losange.", "Oui : un losange est toujours penché.", "Non : un carré a 4 angles droits, comme un losange."],
           explanation:
             "Non. Un carré a 4 côtés égaux, comme un losange. C’est donc un losange particulier.",
           canvas: carreCanvas(),
         },
         {
-          text: "Un élève dit : “Le diamètre est plus petit que le rayon.” A-t-il raison ?",
-          expected: "non",
+          text: "“Le diamètre est plus petit que le rayon.”",
+          expected: "Non : le diamètre vaut 2 fois le rayon.",
+          wrongs: ["Oui : le diamètre vaut la moitié du rayon.", "Non : ils ont la même longueur.", "Oui : le rayon traverse tout le cercle."],
           explanation:
             "Non. Le diamètre vaut deux fois le rayon. Il est donc plus grand que le rayon.",
           canvas: cercleCanvas({ diameter: true, radius: true }),
         },
         {
-          text: "Un élève dit : “Le cercle est toute la surface intérieure.” A-t-il raison ?",
-          expected: "non",
+          text: "“Le cercle est toute la surface intérieure.”",
+          expected: "Non : le cercle est le contour ; la surface, c'est le disque.",
+          wrongs: ["Oui : le cercle, c'est tout l'intérieur.", "Non : le cercle, c'est seulement le centre.", "Oui : cercle et disque veulent dire la même chose."],
           explanation:
             "Non. Le cercle est seulement le contour. La surface intérieure appartient au disque.",
           canvas: cercleCanvas({ showDisk: true }),
         },
       ]);
 
+      // 15/11/2026 : plus de « oui / non » à 2 choix ; l'affirmation en situation, la réponse ET sa raison.
       return {
-        text: item.text,
+        text: `${randomChoice(["Léo", "Inès", "Noah", "Jade", "Sami", "Lina", "Hugo", "Maya", "Adam", "Zoé"])} ${randomChoice(["affirme", "dit", "écrit au tableau"])} : ${item.text} ${randomChoice(["Est-ce vrai ? Pourquoi ?", "Que penses-tu de cette phrase ?", "Est-ce juste ?"])}`,
         format: "qcm",
-        choices: ["oui", "non"],
+        choices: makeChoices(item.expected, item.wrongs),
         expected: [item.expected],
         comparator: "mcq_exact",
         explanation: item.explanation,
@@ -2909,7 +2936,7 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       }
 
       return {
-        text: `Un cercle a un diamètre de ${diametre} cm. Quel est son rayon ?`,
+        text: `${introRond().phrase} ${randomChoice(["Sur son dessin, le cercle", "Sur le plan, le cercle", "Sur la maquette, le cercle"])} a un diamètre de ${diametre} cm. ${randomChoice(["Quel est son rayon ?", "Combien mesure son rayon ?", "Trouve son rayon."])}`,
         format: "short",
         expected: [String(rayon), `${rayon} cm`, `${rayon}cm`],
         comparator: "number_equal",
@@ -2981,4 +3008,17 @@ export const figuresPlanesBank: TutorBankItemV4[] = [
       };
     },
   },
+
+  // ============================================================
+  // GABARITS À SITUATIONS (15/11/2026) — figures-planes-outils.ts
+  // (figure_propriete et figure_construire aussi : leurs 10 items figés
+  // restent dans complements-eval-nationale.bank.ts.)
+  // ============================================================
+  ...reconnaitreGabarits,
+  ...triangleGabarits,
+  ...quadrilatereGabarits,
+  ...cercleGabarits,
+  ...proprieteGabarits,
+  ...construireGabarits,
+  ...defiGabarits,
 ];
