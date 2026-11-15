@@ -44,6 +44,7 @@
  *     → 5 vidéos de classes et de notions toutes différentes (voir choixDuJour).
  *   node scripts/publier-youtube.mjs --du-jour --programmer --oui
  *     → la même, programmée le lendemain sur CRENEAUX_REUNION, sans question.
+ *       ⛔ 15/11 : 3 shorts par jour au plus (SHORTS_PAR_JOUR), 2 paysages au plus.
  *       C'est ce que lance chaque jour à 12 h 30 (Réunion) la tâche Windows
  *       « EleveAI - publication YouTube du jour » ; journal dans
  *       manim/sorties/publication-auto.log.
@@ -613,9 +614,18 @@ function playlistsDe(v, m) {
 
 const classeDe = (v) => v.classe || v.fichier.split("/")[0];
 
+// ⛔ 15/11/2026, Frédéric (« Oui, les deux ») : AU PLUS 3 SHORTS PAR JOUR.
+// Mesuré sur la chaîne : ~250-300 vues par short fin septembre - début octobre,
+// puis la rafale du 12/10 (73 shorts en une semaine) les a fait tomber sous 90,
+// et ils ne s'en sont jamais remis. Les paysages continuent (2 au plus, comme
+// avant) : elles servent surtout au site et au coach. Les films comptent comme
+// des shorts.
+const SHORTS_PAR_JOUR = 3;
+const estShort = (v) => v.type === "short" || !!v.film;
+
 function choixDuJour(candidats, m, journal, enLigne, limite) {
   // Frédéric, 05/11 : les films d'animation passent devant tout le reste.
-  const films = candidats.filter((v) => v.film).slice(0, Math.min(FILMS_PAR_JOUR, limite));
+  const films = candidats.filter((v) => v.film).slice(0, Math.min(FILMS_PAR_JOUR, SHORTS_PAR_JOUR, limite));
   candidats = candidats.filter((v) => !v.film);
   // Date de la dernière publication par API de chaque classe (jamais = tout en tête).
   const derniere = {};
@@ -633,6 +643,7 @@ function choixDuJour(candidats, m, journal, enLigne, limite) {
 
   const choisis = [...films];
   const notions = new Set();
+  const placeShort = () => choisis.filter(estShort).length < SHORTS_PAR_JOUR;
   // `a_remplacer` (Pythagore refaites, 01/11) : une paysage et son short par
   // jour passent juste après les films, jusqu'à ce qu'il n'y en ait plus.
   // ⛔ 08/11, Frédéric : « ça fait plusieurs fois qu'on met Pythagore en avant ».
@@ -647,7 +658,7 @@ function choixDuJour(candidats, m, journal, enLigne, limite) {
     choisis.push(refaite);
     notions.add(refaite.notionId);
     const sonShort = candidats.find((v) => v.a_remplacer && v.renvoie_vers === refaite.id);
-    if (sonShort && choisis.length < limite) choisis.push(sonShort);
+    if (sonShort && choisis.length < limite && placeShort()) choisis.push(sonShort);
   }
   // Le short d'une refaite (même sans `a_remplacer`) attend sa paysage refaite.
   const refaitesEnAttente = new Set(candidats.filter((v) => v.a_remplacer).map((v) => v.id));
@@ -665,7 +676,9 @@ function choixDuJour(candidats, m, journal, enLigne, limite) {
       if (choisis.filter((x) => x.type === "longue").length >= 2) continue;
       choisis.push(v);
       const sonShort = candidats.find((x) => x.renvoie_vers === v.id);
-      if (sonShort && choisis.length < limite) choisis.push(sonShort);
+      if (sonShort && choisis.length < limite && placeShort()) choisis.push(sonShort);
+    } else if (!placeShort()) {
+      continue; // un short daté attend le lendemain : 3 par jour au plus
     } else if (!v.renvoie_vers || enLigne(v.renvoie_vers)) {
       choisis.push(v);
     }
@@ -677,7 +690,7 @@ function choixDuJour(candidats, m, journal, enLigne, limite) {
     // 08/11 : `parClasse` est construit avant le tri des refaites : on les écarte ici.
     const liste = parClasse.get(k).filter((v) => !notions.has(v.notionId) && candidats.includes(v));
     // 1. Un short dont la paysage est déjà en ligne.
-    const short = liste.find((v) => v.type === "short" && v.renvoie_vers && enLigne(v.renvoie_vers));
+    const short = placeShort() && liste.find((v) => v.type === "short" && v.renvoie_vers && enLigne(v.renvoie_vers));
     if (short) { choisis.push(short); notions.add(short.notionId); continue; }
     // 2. Sinon une paysage, suivie de son short s'il reste de la place.
     // 19/10 : « on ne publie pas autant de paysage que de short ! » → 2 au plus.
@@ -686,7 +699,7 @@ function choixDuJour(candidats, m, journal, enLigne, limite) {
     choisis.push(longue);
     notions.add(longue.notionId);
     const sonShort = candidats.find((v) => v.renvoie_vers === longue.id);
-    if (sonShort && choisis.length < limite) choisis.push(sonShort);
+    if (sonShort && choisis.length < limite && placeShort()) choisis.push(sonShort);
   }
   return choisis;
 }
@@ -829,6 +842,10 @@ async function main() {
     if (deja.length && deja.length < limite) {
       const pris = new Set(deja.map((j) => j.publieLe));
       const libres = horairesDeDemain(CRENEAUX_REUNION.length).filter((h) => !pris.has(h));
+      // 15/11 : les shorts déjà programmés demain comptent dans les 3 du jour.
+      const idsDemain = new Set(Object.entries(journal).filter(([, j]) => deja.includes(j)).map(([id]) => id));
+      let shortsRestants = SHORTS_PAR_JOUR - m.videos.filter((x) => idsDemain.has(x.id) && estShort(x)).length;
+      aFaire = aFaire.filter((x) => !estShort(x) || shortsRestants-- > 0);
       aFaire = aFaire.slice(0, Math.min(libres.length, limite - deja.length));
       horaires.splice(0, horaires.length, ...libres.slice(0, aFaire.length));
       console.log(`Demain a déjà ${deja.length} vidéo(s) : je complète ${aFaire.length} créneau(x) libre(s).`);
