@@ -499,8 +499,9 @@ class VisionPatronPaveBase(PaysageVolume6e):
             self.aux_extraits([t1[0], g2], mots)
             y -= 0.62
         self.au_mot("6 faces")
-        g = self.ligne([("6 faces,", VERT_OK), ("3 paires.", VERT_OK)], 38, buff=0.25)
-        g.move_to(P(2.9, -1.8))  # entre les mesures (x < 0,4) et Ti Margo (x > 5,5)
+        g = VGroup(self.t("6 faces,", 38, VERT_OK), self.t("3 paires.", 38, VERT_OK))
+        g.arrange(DOWN, aligned_edge=LEFT, buff=0.22)
+        g.move_to(P(2.75, -2.05))  # sur 2 lignes : sur une seule, « paires. » touchait Ti Margo (x > 5,4)
         self.aux_extraits(g, ["6 faces", "3 paires"])
         self.insister(g, 1.08, 0.25)
         self.attendre_voix()

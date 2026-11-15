@@ -222,26 +222,33 @@ class VisionDefiBase(PaysageVolume6e):
         self.play(FadeIn(l1[1], shift=UP * 0.1), run_time=0.3)
         anims = []
         for xz in ORDRE_PLAN:
-            anims.append(AnimationGroup(Indicate(grille.carreaux[xz], color=WHITE, scale_factor=1.08),
+            anims.append(AnimationGroup(Indicate(VGroup(grille.carreaux[xz], nums[xz]), color=WHITE, scale_factor=1.08),  # le nombre reste DEVANT
                                         LaggedStart(*[FadeIn(c, shift=DOWN * 0.3) for c in colonne(emp, xz)],
                                                     lag_ratio=0.3)))
         self.play(LaggedStart(*anims, lag_ratio=0.5), run_time=1.4)
-        self.add(emp)
+        self.add(emp, *nums.values())
         self.au_mot("Pour compter tous les cubes")
-        l2 = self.bloc(["Pour compter tous les cubes,", "on additionne les nombres :"], 30)
-        gauche(l2, x, 0.0)
-        self.play(FadeIn(l2[0], shift=UP * 0.1), run_time=0.3)
+        # 4 lignes : sur 2, « Pour compter tous les cubes, » sortait de l'écran à droite (BORD)
+        l2 = self.bloc(["Pour compter", "tous les cubes,", "on additionne", "les nombres :"], 30)
+        gauche(l2, x, 0.2)
+        self.play(FadeIn(l2[0], shift=UP * 0.1), FadeIn(l2[1], shift=UP * 0.1), run_time=0.3)
         self.au_mot("on additionne les nombres")
-        self.play(FadeIn(l2[1], shift=UP * 0.1), run_time=0.3)
+        self.play(FadeIn(l2[2], shift=UP * 0.1), FadeIn(l2[3], shift=UP * 0.1), run_time=0.3)
         s = self.ligne([("3", BLEU_D), ("+ 1", BLEU_D), ("+ 2", BLEU_D), ("+ 2", BLEU_D), ("= 8 cubes", VERT_OK)], 44,
                        buff=0.22)
         gauche(s, -6.2, -2.55)
         hors_audit(s[3])  # le 2e « 2 » (l'audit compare au 1er)
-        extraits = [("3 plus", 1, 0.0), ("1 plus", 1, 0.0), ("2 plus 2", 1, 0.0), ("2, 8", 1, 0.35)]
-        for k, (xz, (ex, n, d)) in enumerate(zip(ORDRE_PLAN, extraits)):
-            self.au_extrait(s[k], ex, n, d, avec=[Indicate(colonne(emp, xz), color=WHITE, scale_factor=1.05),
-                                                  Indicate(nums[xz], color=JAUNE_TITRE, scale_factor=1.3)],
-                            run_time=0.25)
+        extraits = [("3 plus", 1, 0.0), ("1 plus", 1, 0.0), ("2 plus 2", 1, 0.0), None]
+        for k, (xz, ext) in enumerate(zip(ORDRE_PLAN, extraits)):
+            avec = [Indicate(colonne(emp, xz), color=WHITE, scale_factor=1.05),
+                    Indicate(nums[xz], color=JAUNE_TITRE, scale_factor=1.3)]
+            if ext:
+                self.au_extrait(s[k], ext[0], ext[1], ext[2], avec=avec, run_time=0.25)
+            else:  # le 2e « 2 » n'a pas de marque à lui (« 2 plus 2, 8 ») : il suit le 1er de 0,2 s (RETARD sinon)
+                for f in s[k].get_family():
+                    f.sans_synchro = True
+                self.wait(0.2)
+                self.play(FadeIn(s[k], shift=UP * 0.08), *avec, run_time=0.25)
         self.au_extrait(s[4], "8 cubes", avec=[Indicate(emp, color=VERT_OK, scale_factor=1.03)], run_time=0.3)
         self.insister(s[4], 1.12, 0.25)
         self.attendre_voix()
@@ -292,10 +299,13 @@ class VisionDefiBase(PaysageVolume6e):
         emp = par_etages(Empilement(pyramide_cubes(4), e=0.4, centre=P(-4.0, 1.45), couleur=PYR_C))
         etages = [etage(emp, y) for y in range(4)]
         labs = VGroup(*[hors_audit(Text(str((4 - k) ** 2), font_size=26, color=JAUNE_TITRE, weight=BOLD)
-                                   .move_to(emp.pp((0.5 * k - 0.55, k + 0.5, 0.5 * k)))) for k in range(4)])
+                                   .next_to(emp.pp((0.5 * k, k + 0.5, 0.5 * k)), LEFT, buff=0.14)) for k in range(4)])  # ne touchent plus l'étage
 
-        def autres_q(sc):
-            sc.play(FadeIn(emp, shift=UP * 0.2), FadeIn(labs), run_time=0.4)
+        def avant_q(sc):  # la pyramide entre avec la question (« Une pyramide »), pas après les choix
+            sc.play(FadeIn(emp, shift=UP * 0.2), run_time=0.4)
+
+        def autres_q(sc):  # les étages déjà dits (16, 9, 4, 1) s'écrivent ensuite
+            sc.play(FadeIn(labs), run_time=0.4)
 
         def apres(sc):
             pas, y0 = 0.58, -1.3
@@ -326,7 +336,7 @@ class VisionDefiBase(PaysageVolume6e):
                              "Combien de cubes en tout ?"],
                             [self.choix("30 cubes"), self.choix("16 cubes"), self.choix("20 cubes")], 0,
                             ["16 + 9 = 25", "25 + 4 = 29", "29 + 1 = 30 cubes.", "16, c'est seulement l'étage du bas."],
-                            mot_q="Une pyramide", autres_q=autres_q, autres_r=apres)
+                            mot_q="Une pyramide", avant_q=avant_q, autres_q=autres_q, autres_r=apres)
 
     # ── 05 : le cube peint, les coins ───────────────────────────────────────
     def ecran_peint(self):
@@ -384,9 +394,12 @@ class VisionDefiBase(PaysageVolume6e):
         hors_audit(l2[1])  # le 2e « 12 » : la marque « 12 arêtes : 12 petits » est d'un seul tenant (6,0 s)
         aretes = cp.groupe(2)
         self.au_extrait(l2[0], "12 arêtes", run_time=0.25)
-        self.au_extrait(l2[1], "12 petits", 1, 0.6,
-                        avec=[LaggedStart(*[Indicate(c, color=WHITE, scale_factor=1.15) for c in aretes],
-                                          lag_ratio=0.06)], run_time=0.8)
+        for f in l2[1].get_family():  # même marque que « 12 arêtes » : il suit de 0,3 s (au_mot donnait un RETARD)
+            f.sans_synchro = True
+        self.wait(0.3)
+        self.play(FadeIn(l2[1], shift=UP * 0.08),
+                  LaggedStart(*[Indicate(c, color=WHITE, scale_factor=1.15) for c in aretes], lag_ratio=0.06),
+                  run_time=0.8)
         l3 = self.ligne([("Au milieu d'une face :", FACE_C2), ("1 face peinte", FACE_C2)], 30, buff=0.2)
         gauche(l3, x, 0.45)
         self.au_extrait(l3[0], "Au milieu de chaque face", avec=cp.isoler(1), run_time=0.45)
@@ -406,7 +419,7 @@ class VisionDefiBase(PaysageVolume6e):
         self.add_mascotte()
         cp = CubePeint(3, e=0.55, centre=P(-4.4, 1.35))
 
-        def autres_q(sc):
+        def avant_q(sc):  # le cube peint entre avec la question
             sc.play(FadeIn(cp, shift=UP * 0.2), run_time=0.35)
 
         def apres(sc):
@@ -434,7 +447,7 @@ class VisionDefiBase(PaysageVolume6e):
                             [self.choix("aucun"), self.choix("1 cube"), self.choix("6 cubes")], 1,
                             ["Un seul ne touche aucun bord :", "celui du centre, caché au milieu.",
                              "Vérifions : 8 + 12 + 6 + 1 = 27", "Le compte est bon !"],
-                            mot_q="Combien de petits cubes", autres_q=autres_q, autres_r=apres)
+                            mot_q="Combien de petits cubes", avant_q=avant_q, autres_r=apres)
 
     # ── 08 : le piège ───────────────────────────────────────────────────────
     def ecran_piege(self):
@@ -526,13 +539,13 @@ class VisionDefiBase(PaysageVolume6e):
         self.add(cp)
         x = -0.6
         l0 = self.bloc(["Les cubes sans peinture forment", "un cube caché au centre :"], 30)
-        gauche(l0, x, 2.25)
+        gauche(l0, x, 1.95)  # 2,25 collait au titre
         self.au_mot("Les petits cubes sans peinture")
         self.play(FadeIn(l0[0], shift=UP * 0.1), run_time=0.3)
         self.au_mot("un cube caché au centre")
         self.play(FadeIn(l0[1], shift=UP * 0.1), run_time=0.3)
         l1 = self.bloc(["On retire une couche", "de chaque côté."], 30, CACHE_C)
-        gauche(l1, x, 1.15)
+        gauche(l1, x, 0.85)
         self.au_mot("on retire une couche")
         self.play(FadeIn(l1[0], shift=UP * 0.1), run_time=0.3)
         self.au_mot("de chaque côté")
@@ -541,19 +554,19 @@ class VisionDefiBase(PaysageVolume6e):
         self.play(FadeIn(l1[1], shift=UP * 0.1), *cp.isoler(0, op=0.08), run_time=0.6)
         self.play(Create(cadres), run_time=0.4)
         l2 = self.ligne([("Il reste", WHITE), ("2 sur", WHITE), ("2 sur", WHITE), ("2 :", WHITE)], 34, buff=0.16)
-        gauche(l2, x, 0.15)
+        gauche(l2, x, -0.15)
         hors_audit(l2[2])
         hors_audit(l2[3])
         self.au_extrait(l2[0], "Il reste", run_time=0.2)
         for m, (ex, n) in zip(l2[1:], [("2 sur", 1), ("2 sur", 2), ("2 : 2", 1)]):
             self.au_extrait(m, ex, n, run_time=0.18)
         l3 = self.ligne([("2 × 2", BLEU_D), ("= 4", BLEU_D)], 36, buff=0.2)
-        gauche(l3, x, -0.6)
+        gauche(l3, x, -0.9)
         hors_audit(l3[0])  # les 2 sont déjà dits
         self.au_extrait(l3[0], "2 fois 2", run_time=0.2)
         self.au_extrait(l3[1], "4 ;", run_time=0.2)
         l4 = self.ligne([("4", BLEU_D), ("× 2", BLEU_D), ("= 8 petits cubes", VERT_OK)], 36, buff=0.2)
-        gauche(l4, x, -1.35)
+        gauche(l4, x, -1.65)
         hors_audit(l4[0])
         hors_audit(l4[1])
         self.au_extrait(VGroup(l4[0], l4[1]), "2, 8", run_time=0.2)
