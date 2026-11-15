@@ -1,0 +1,16 @@
+{
+  "00-garde": "Reconnaître les solides. Cube, pavé, prisme, pyramide, cylindre, cône, boule : comment les distinguer ?",
+  "01-situation": "Voici Gabriel. Il est ingénieur spatial : il dessine des fusées et des stations dans l'espace. Sa station est faite de morceaux, et chaque morceau a la forme d'un solide. Lesquels ?",
+  "02-rouler": "Premier tri : est-ce que le solide peut rouler ? La boule, le cylindre et le cône ont une surface courbe : ils roulent. Le cube, le pavé, le prisme et la pyramide n'ont que des faces plates.",
+  "03-pointe": "Deuxième tri : y a-t-il une pointe ? Le cône a un disque et une pointe. La pyramide a une base, et des triangles qui montent jusqu'à la pointe. Le cylindre et le prisme, eux, ont deux bases pareilles, face à face.",
+  "04-station": "Dans la station de Gabriel : le module où vivent les astronautes est un cylindre. Le nez de la fusée est un cône. Le réservoir est une boule. Et le panneau solaire ? Un pavé très plat.",
+  "05-question": "Question ! Un solide a deux bases en triangle, face à face, et 3 rectangles sur les côtés. Qu'est-ce que c'est ? A : une pyramide. B : un cône. C : un prisme droit. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. Deux bases pareilles face à face, et des rectangles autour : c'est un prisme droit, à base triangulaire. Une pyramide n'a qu'une base, et une pointe.",
+  "06-piege": "Attention au piège ! Le cylindre et le prisme se ressemblent : deux bases face à face. Mais le cylindre a des disques, et il roule. Le prisme a des polygones, et seulement des faces plates. Pareil pour le cône et la pyramide : un disque, ou un polygone.",
+  "07-question": "Question ! Le toit d'une antenne a une base carrée, et 4 triangles qui montent vers une pointe. C'est quel solide ? A : un cône. B : une pyramide. C : un prisme. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Une base, et des triangles jusqu'à une pointe : c'est une pyramide. Sa base est un carré : une pyramide à base carrée.",
+  "08-defi": "À toi de jouer ! Je suis un solide. J'ai 6 faces, toutes des rectangles, mais pas toutes des carrés. Qui suis-je ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 6 faces plates, des rectangles : c'est un pavé droit. Si les 6 faces étaient des carrés pareils, ce serait un cube.",
+  "09-finale": "Ce que tu as appris. Ça roule : la boule, le cylindre, le cône. Que des faces plates : le cube, le pavé, le prisme, la pyramide. Deux bases face à face : prisme ou cylindre. Une pointe : pyramide ou cône.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

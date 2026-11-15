@@ -1,0 +1,16 @@
+{
+  "00-garde": "Les faces d'un solide. Combien de faces, et de quelles formes ?",
+  "01-situation": "Voici Victor. Il est chocolatier. Il fabrique des boîtes en chocolat, et il décore chaque face avec un dessin. Pour chaque boîte, il doit savoir : combien de faces, et de quelles formes ?",
+  "02-pave": "Sa première boîte est un pavé droit : 6 faces, toutes des rectangles. Elles vont par paires : chaque face a une jumelle juste en face, exactement pareille. 3 paires de faces.",
+  "03-mesures": "Ce pavé mesure 10 centimètres de long, 6 de large et 4 de haut. Le dessus et le dessous : 10 sur 6. Le devant et le derrière : 10 sur 4. Les deux côtés : 6 sur 4.",
+  "04-prisme": "Sa deuxième boîte est un prisme à base triangulaire, comme certaines barres de chocolat. 2 faces en triangle, les bases, et 3 faces rectangles. 5 faces en tout.",
+  "05-question": "Question ! Un cube a des arêtes de 3 centimètres. Quelles sont ses faces ? A : 6 rectangles de 3 sur 6. B : 4 carrés et 2 rectangles. C : 6 carrés de 3 centimètres de côté. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. Un cube a 6 faces, toutes des carrés pareils. Ici, 6 carrés de 3 centimètres de côté.",
+  "06-piege": "Attention au piège ! Le cylindre n'a que 2 faces plates : 2 disques. La surface qui l'entoure est courbe : ce n'est pas une face plate. Et la boule n'a aucune face plate.",
+  "07-question": "Question ! Une boîte en pavé mesure 8 centimètres de long, 5 de large et 2 de haut. Quelles sont les mesures de la face du dessus ? A : 8 sur 2. B : 8 sur 5. C : 5 sur 2. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Le dessus a la longueur et la largeur : 8 centimètres sur 5. Les faces de 8 sur 2 sont devant et derrière ; celles de 5 sur 2, sur les côtés.",
+  "08-defi": "À toi de jouer ! Victor colle une étiquette sur chaque face d'une boîte en pyramide. Sa base a 5 côtés. Combien d'étiquettes, et de quelles formes ? Mets pause, et cherche !",
+  "08b-correction": "Correction. La base : 1 pentagone. Puis un triangle sur chaque côté de la base : 5 triangles. 6 étiquettes : 1 pentagone et 5 triangles.",
+  "09-finale": "Ce que tu as appris. Pour décrire les faces, on dit combien, et de quelle forme. Le pavé : 6 rectangles, par paires face à face. Le prisme : 2 bases et des rectangles. La pyramide : 1 base et des triangles.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

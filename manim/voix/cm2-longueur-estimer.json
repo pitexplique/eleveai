@@ -1,0 +1,16 @@
+{
+  "00-garde": "Estimer une longueur. Une girafe : 5 centimètres, 5 mètres, ou 5 kilomètres ?",
+  "01-situation": "Voici Mia. Elle est photographe animalière : elle photographie les animaux dans la nature. Sous chaque photo, elle écrit la taille de l'animal. Mais elle n'a pas toujours de mètre ruban ! Alors elle estime.",
+  "02-reperes": "Pour estimer, on se sert de repères. L'épaisseur d'un ongle : environ 1 millimètre. La largeur d'un doigt : 1 centimètre. Un grand pas : 1 mètre. Et 1 kilomètre, c'est environ un quart d'heure de marche.",
+  "03-girafe": "Une girafe est plus de 2 fois plus haute qu'une porte. Une porte fait 2 mètres : la girafe mesure environ 5 mètres. 5 centimètres, c'est la largeur de 5 doigts : trop petit. 5 kilomètres, plus d'une heure de marche : impossible.",
+  "04-virgule": "On peut aussi estimer avec un nombre à virgule. Un enfant de ton âge mesure environ 1,4 mètre : 140 centimètres. Un colibri, le plus petit oiseau, environ 8 centimètres.",
+  "05-question": "Question ! Mia photographie un papillon, les ailes ouvertes. Combien mesure-t-il ? A : 6 millimètres. B : 6 mètres. C : 6 centimètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. Ses ailes ouvertes font environ la largeur de 6 doigts : 6 centimètres. 6 millimètres, c'est moins qu'un petit pois ; 6 mètres, plus qu'une girafe !",
+  "06-piege": "Attention au piège ! Choisis l'unité avant le nombre. Une baleine bleue mesure environ 30 mètres, pas 30 centimètres. Demande-toi : est-ce plus petit qu'un doigt, plus petit qu'un pas, ou bien plus grand ?",
+  "07-question": "Question ! Mia monte au sommet du Piton des Neiges, à La Réunion, pour photographier des oiseaux. Quelle est l'altitude du sommet, sa hauteur au-dessus de la mer ? A : environ 300 mètres. B : environ 3 000 mètres. C : environ 30 kilomètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Environ 3 000 mètres, c'est-à-dire 3 kilomètres : 3 070 mètres exactement. 30 kilomètres, ce serait bien plus haut que les avions !",
+  "08-defi": "À toi de jouer ! Mia photographie un serpent. Il est à peu près aussi long que 3 grands pas et demi. Combien mesure-t-il environ, en mètres ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Un grand pas, environ 1 mètre. 3 pas et demi : environ 3,5 mètres. C'est un très long serpent : un python !",
+  "09-finale": "Ce que tu as appris. Pour estimer une longueur, choisis d'abord l'unité, puis compare avec un repère : 1 millimètre, l'épaisseur d'un ongle ; 1 centimètre, un doigt ; 1 mètre, un grand pas ; 1 kilomètre, un quart d'heure de marche.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

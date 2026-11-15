@@ -1,0 +1,16 @@
+{
+  "00-garde": "Comparer des contenances. Qui contient le plus : 2,5 litres ou 240 centilitres ?",
+  "01-situation": "Voici Paul. Il est glacier : il fabrique des glaces artisanales. Il a deux bacs de sorbet à la mangue : un de 2,5 litres, et un de 240 centilitres. Pour la fête du quartier, il veut servir le plus grand. Lequel prendre ?",
+  "02-meme-unite": "Pour comparer deux contenances, on les écrit d'abord dans la même unité. Retiens : 1 litre, c'est 10 décilitres, 100 centilitres, ou 1000 millilitres.",
+  "03-virgule": "2,5 litres, c'est 2 litres et demi. 2 litres : 200 centilitres. Un demi-litre : 50 centilitres. Donc 2,5 litres, c'est 250 centilitres.",
+  "04-comparer": "On compare 250 centilitres et 240 centilitres : 250 est plus grand. Le bac de 2,5 litres contient le plus, 10 centilitres de plus. Paul l'emporte à la fête.",
+  "05-question": "Question ! Qu'est-ce qui contient le plus : une bouteille de 1,5 litre, ou une gourde de 1200 millilitres ? A : la bouteille. B : la gourde. C : c'est pareil. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 1,5 litre, c'est 1500 millilitres. 1500 est plus grand que 1200 : la bouteille contient le plus.",
+  "06-piege": "Attention au piège ! On ne compare pas les nombres sans regarder les unités. 240 est plus grand que 2,5… mais ce sont des centilitres contre des litres. Mets toujours la même unité avant de comparer.",
+  "07-question": "Question ! Paul a trois pots de crème glacée : 0,5 litre, 45 centilitres et 600 millilitres. Lequel est le plus petit ? A : 0,5 litre. B : 600 millilitres. C : 45 centilitres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Tout en millilitres : 0,5 litre, 500 millilitres. 45 centilitres, 450 millilitres. Et 600 millilitres. Le plus petit : 450 millilitres, le pot de 45 centilitres.",
+  "08-defi": "À toi de jouer ! Range ces trois bidons de lait du plus petit au plus grand : 1,2 litre, 115 centilitres et 1250 millilitres. Mets pause, et cherche !",
+  "08b-correction": "Correction. Tout en centilitres : 1,2 litre, 120 centilitres. 1250 millilitres, 125 centilitres. On range 115, 120, 125 : d'abord 115 centilitres, puis 1,2 litre, puis 1250 millilitres.",
+  "09-finale": "Ce que tu as appris. Pour comparer des contenances, on les écrit dans la même unité. 1 litre, c'est 100 centilitres, ou 1000 millilitres. Un nombre à virgule se convertit aussi : 2,5 litres, c'est 250 centilitres.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

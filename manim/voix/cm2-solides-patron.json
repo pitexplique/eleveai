@@ -1,0 +1,16 @@
+{
+  "00-garde": "Reconnaître un patron. Quel solide va-t-il donner, une fois plié ?",
+  "01-situation": "Voici Julia. Elle est maquettiste : elle construit des maquettes de bâtiments en carton, pour les architectes. Chaque bâtiment commence à plat, par un patron. Mais quel patron donne quel solide ?",
+  "02-definition": "Un patron, c'est un dessin d'un seul morceau qui, une fois découpé et plié, forme un solide, sans trou et sans face en double.",
+  "03-compter": "Pour reconnaître un patron, on compte les faces et on regarde leurs formes. 6 rectangles, par paires : un pavé. 1 carré et 4 triangles autour : une pyramide à base carrée. 2 triangles et 3 rectangles : un prisme.",
+  "04-longueurs": "Puis on vérifie les longueurs. Deux bords qui se collent ensemble doivent avoir la même longueur. Sinon, la maquette bâille : il reste un trou.",
+  "05-question": "Question ! Un patron a 2 rectangles de 6 sur 4, 2 rectangles de 6 sur 3, et 2 rectangles de 4 sur 3. Quel solide donne-t-il ? A : un cube. B : un prisme à base triangulaire. C : un pavé droit. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. 6 rectangles, en 3 paires : c'est un pavé droit de 6 centimètres sur 4 sur 3. Un cube aurait 6 carrés pareils.",
+  "06-piege": "Attention au piège ! Avoir 6 faces, ça ne suffit pas. Si deux faces se retrouvent l'une sur l'autre quand on plie, il en manque une ailleurs : ce n'est pas un patron. Plie dans ta tête, face après face.",
+  "07-question": "Question ! Un patron a un hexagone au milieu, et un triangle sur chacun de ses 6 côtés. Quel solide donne-t-il ? A : un prisme à base hexagonale. B : une pyramide à base hexagonale. C : un cylindre. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Une base, et des triangles qui se replient vers une pointe : une pyramide. Sa base a 6 côtés : une pyramide à base hexagonale.",
+  "08-defi": "À toi de jouer ! Julia dessine le patron d'une tour en pavé : 4 rectangles de 5 centimètres sur 12, en ligne, et 2 carrés. Combien mesure le côté des carrés ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Les carrés ferment le haut et le bas de la tour. Leurs bords se collent aux petits côtés des rectangles, qui mesurent 5 centimètres. Les carrés ont donc 5 centimètres de côté.",
+  "09-finale": "Ce que tu as appris. Pour reconnaître un patron : on compte les faces, on regarde leurs formes, et on vérifie que les bords qui se collent ont la même longueur. Puis on plie dans sa tête.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

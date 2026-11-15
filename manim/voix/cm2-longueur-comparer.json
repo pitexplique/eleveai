@@ -1,0 +1,16 @@
+{
+  "00-garde": "Comparer des longueurs. Lequel est le plus long : 12,5 kilomètres, ou 12 kilomètres 300 mètres ?",
+  "01-situation": "Voici Léonie. Elle court des trails : des courses en montagne. Elle hésite entre trois parcours : 12,5 kilomètres, 12 kilomètres 300 mètres, et 12 450 mètres. Pour s'entraîner, elle veut le plus court. Lequel ?",
+  "02-meme-unite": "Comme pour toutes les mesures, on met d'abord la même unité. Ici, le mètre. 1 kilomètre, c'est 1000 mètres.",
+  "03-convertir": "12,5 kilomètres : 12 kilomètres et demi, 12 500 mètres. 12 kilomètres 300 mètres : 12 300 mètres. Et 12 450 mètres reste comme ça.",
+  "04-ranger": "On range : 12 300, puis 12 450, puis 12 500. Le plus court, c'est 12 kilomètres 300 mètres. Léonie le choisit pour s'entraîner.",
+  "05-question": "Question ! Qu'est-ce qui est le plus long : 3,45 mètres, ou 3,5 mètres ? A : 3,45 mètres. B : 3,5 mètres. C : c'est pareil. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. En centimètres : 3,45 mètres, 345 centimètres. 3,5 mètres, 350 centimètres. 350 est plus grand : 3,5 mètres est le plus long.",
+  "06-piege": "Attention au piège ! 3,45 n'est pas plus grand que 3,5 parce que 45 est plus grand que 5. Après la virgule, on compare chiffre par chiffre : 4 dixièmes contre 5 dixièmes. 3,5, c'est 3,50 : plus que 3,45.",
+  "07-question": "Question ! Trois sauts en longueur : 4,08 mètres, 4,8 mètres, et 4 mètres 75 centimètres. Lequel est le plus long ? A : 4,8 mètres. B : 4,08 mètres. C : 4 mètres 75 centimètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. En centimètres : 408, 480 et 475. Le plus grand, 480 : c'est le saut de 4,8 mètres.",
+  "08-defi": "À toi de jouer ! Range du plus court au plus long : 1,3 kilomètre, 1 kilomètre 250 mètres, et 1 280 mètres. Mets pause, et cherche !",
+  "08b-correction": "Correction. Tout en mètres : 1,3 kilomètre, 1 300 mètres. 1 kilomètre 250 mètres, 1 250 mètres. Et 1 280 mètres. Donc : 1 kilomètre 250 mètres, puis 1 280 mètres, puis 1,3 kilomètre.",
+  "09-finale": "Ce que tu as appris. Pour comparer des longueurs, on les écrit dans la même unité. Avec des nombres à virgule, on compare chiffre par chiffre : 3,5, c'est 3,50, plus que 3,45.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

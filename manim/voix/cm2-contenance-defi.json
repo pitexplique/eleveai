@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défi de contenances. Combien de bouteilles pour tout un marathon ?",
+  "01-situation": "Voici Manon. Elle organise un marathon. Au ravitaillement, elle doit servir 120 coureurs. Chacun reçoit un gobelet de 25 centilitres d'eau. Les bouteilles font 1,5 litre. Combien de bouteilles faut-il ?",
+  "02-etapes": "Un défi se résout en étapes. Étape 1 : la quantité totale. Étape 2 : la même unité. Étape 3 : le nombre de bouteilles.",
+  "03-total": "120 gobelets de 25 centilitres. 4 gobelets, c'est 100 centilitres : 1 litre. 120 gobelets, c'est 30 fois 4 gobelets : 30 litres d'eau.",
+  "04-bouteilles": "Une bouteille, 1,5 litre. 2 bouteilles, 3 litres. Pour 30 litres : 10 fois 2 bouteilles, 20 bouteilles.",
+  "05-question": "Question ! Une bouteille de 1,5 litre remplit des gobelets de 25 centilitres. Combien de gobelets ? A : 6 gobelets. B : 4 gobelets. C : 60 gobelets. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 1,5 litre, c'est 150 centilitres. 150 divisé par 25 : 6, car 6 fois 25, 150. 6 gobelets.",
+  "06-piege": "Attention au piège ! Quand il manque un peu, on prend une bouteille de plus. Pour 31 litres d'eau : 20 bouteilles donnent 30 litres, ce n'est pas assez. Il en faut 21.",
+  "07-question": "Question ! Manon a 18 litres de jus. Elle sert 40 gobelets de 20 centilitres. Combien de litres reste-t-il ? A : 17,2 litres. B : 8 litres. C : 10 litres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 40 fois 20 : 800 centilitres, c'est 8 litres. 18 moins 8 : il reste 10 litres.",
+  "08-defi": "À toi de jouer ! Une glacière contient 6 bouteilles de 75 centilitres et 4 bouteilles de 1,5 litre. Combien de litres en tout ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 6 fois 75 : 450 centilitres, c'est 4,5 litres. 4 fois 1,5 : 6 litres. 4,5 plus 6 : 10,5 litres en tout.",
+  "09-finale": "Ce que tu as appris. Un défi de contenances se fait en étapes : la quantité totale, la même unité, puis le partage. Et s'il manque un peu, on prend une bouteille de plus.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

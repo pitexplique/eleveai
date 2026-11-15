@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Mon gâteau est un cube. Je le couvre de chocolat partout, même dessous. Puis je le coupe en 27 petits cubes : 3, 3 et 3. Les meilleurs morceaux ont 3 faces au chocolat. Il y en a sûrement plein !",
+  "01-compte": "Je cherche les morceaux à 3 faces au chocolat… il n'y en a pas tant que ça !",
+  "02-question": "Question ! Combien de morceaux ont 3 faces au chocolat ? A : 6 morceaux. B : 8 morceaux. C : 12 morceaux. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! Un morceau a 3 faces au chocolat seulement s'il est dans un coin. Un cube a 8 sommets : 8 morceaux.",
+  "03-ouf": "8 super-morceaux… et 19 pour les copains !",
+  "04-commentaire": "À toi : combien de morceaux n'ont pas du tout de chocolat ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

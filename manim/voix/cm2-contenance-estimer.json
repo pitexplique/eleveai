@@ -1,0 +1,16 @@
+{
+  "00-garde": "Estimer une contenance. Une chasse d'eau : 6 millilitres, 6 litres, ou 60 litres ?",
+  "01-situation": "Voici Ibrahim. Il est plombier. Il installe une nouvelle chasse d'eau. Le client demande : combien d'eau part à chaque fois ? Ibrahim n'a pas besoin de mesurer : il estime.",
+  "02-reperes": "Pour estimer, on se sert de repères. Une cuillère à café : 5 millilitres. Un verre : 20 centilitres. Une grande bouteille d'eau : 1,5 litre. Un seau : 10 litres.",
+  "03-chasse": "Le réservoir de la chasse d'eau, c'est à peu près 4 grandes bouteilles. 4 fois 1,5 : 6 litres. 6 millilitres, c'est à peine plus qu'une cuillère : bien trop petit. 60 litres, 6 seaux : bien trop grand. La chasse d'eau contient environ 6 litres.",
+  "04-unite": "Choisis d'abord la bonne unité. Pour quelques gouttes ou une cuillère : le millilitre. Pour un verre ou une tasse : le centilitre. Pour un seau, une baignoire ou une citerne : le litre.",
+  "05-question": "Question ! Quelle est la contenance d'un bol de soupe ? A : 30 centilitres. B : 3 millilitres. C : 3 litres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Un bol, c'est un peu plus qu'un verre de 20 centilitres : environ 30 centilitres. 3 millilitres, c'est moins qu'une cuillère ; 3 litres, deux grandes bouteilles.",
+  "06-piege": "Attention au piège ! Un nombre seul ne dit rien : 2, c'est tout petit… ou énorme. 2 millilitres, quelques gouttes. 2 litres, une grosse bouteille. Regarde toujours l'unité, et compare avec un repère.",
+  "07-question": "Question ! Ibrahim remplit un chauffe-eau. Combien contient-il ? A : 2 litres. B : 20 centilitres. C : 200 litres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Un chauffe-eau, c'est comme 20 seaux de 10 litres : environ 200 litres. 2 litres, c'est une bouteille ; 20 centilitres, un verre.",
+  "08-defi": "À toi de jouer ! Ibrahim répare un robinet qui fuit. Il perd environ un verre de 20 centilitres par heure. Combien de litres sont perdus en une journée de 24 heures ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 24 fois 20 : 480 centilitres. 480 centilitres, c'est 4,8 litres : presque 5 litres perdus en une seule journée ! Ibrahim change le joint.",
+  "09-finale": "Ce que tu as appris. Pour estimer une contenance, choisis d'abord l'unité, puis compare avec un repère : une cuillère, 5 millilitres ; un verre, 20 centilitres ; une grande bouteille, 1,5 litre ; un seau, 10 litres.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

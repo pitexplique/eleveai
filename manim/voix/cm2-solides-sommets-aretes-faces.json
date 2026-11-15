@@ -1,0 +1,16 @@
+{
+  "00-garde": "Sommets, arêtes et faces. Comment les compter sans en oublier, même ceux qu'on ne voit pas ?",
+  "01-situation": "Voici Lisa. Elle est sculptrice. Elle taille une pyramide dans un bloc de pierre. Pour la finir, elle doit polir chaque face, adoucir chaque arête et arrondir chaque sommet. Combien de chaque ?",
+  "02-rappel": "Une face, c'est une surface plate. Une arête, c'est un bord, là où deux faces se touchent. Un sommet, c'est un coin, là où les arêtes se rejoignent.",
+  "03-cache": "Sur un dessin, certaines arêtes sont cachées derrière : on les trace en pointillés. Pour ne pas les oublier, on compte étage par étage : d'abord en bas, puis sur les côtés, puis en haut.",
+  "04-pyramide": "La pyramide de Lisa a une base carrée. Les faces : la base, plus 4 triangles, 5 faces. Les arêtes : 4 autour de la base, plus 4 qui montent, 8 arêtes. Les sommets : 4 en bas, plus la pointe, 5 sommets.",
+  "05-question": "Question ! Une pyramide a une base à 6 côtés. Combien a-t-elle d'arêtes ? A : 12 arêtes. B : 6 arêtes. C : 7 arêtes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 6 arêtes autour de la base, et 6 qui montent vers la pointe : 6 plus 6, 12 arêtes.",
+  "06-piege": "Attention au piège ! Ne compte pas seulement ce que tu vois. Sur ce dessin de pavé, on voit 9 arêtes… mais il en a 12. Les 3 autres sont cachées derrière, en pointillés.",
+  "07-question": "Question ! Combien de sommets a une pyramide à base triangulaire ? A : 3 sommets. B : 6 sommets. C : 4 sommets. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 3 sommets en bas, plus la pointe : 4 sommets. Et 4 faces, toutes des triangles.",
+  "08-defi": "À toi de jouer ! Une pyramide a 10 arêtes. Combien de côtés a sa base ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Une pyramide a autant d'arêtes autour de la base que d'arêtes qui montent. 10, c'est 5 plus 5. Sa base a 5 côtés : c'est une pyramide à base pentagonale.",
+  "09-finale": "Ce que tu as appris. Faces, arêtes, sommets : on compte étage par étage, sans oublier ce qui est caché. Une pyramide a 2 fois plus d'arêtes que sa base a de côtés, et un sommet de plus que sa base.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

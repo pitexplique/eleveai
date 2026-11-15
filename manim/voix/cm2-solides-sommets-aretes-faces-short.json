@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Je construis une pyramide avec des pailles et de la pâte à modeler. Base carrée. Une boule de pâte par sommet : 4 boules, c'est bon !",
+  "01-pointe": "Je monte les pailles… et la pointe tombe dans le vide !",
+  "02-question": "Question ! Combien de boules de pâte fallait-il ? A : 4 boules. B : 8 boules. C : 5 boules. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! 4 sommets en bas, plus 1 pour la pointe : 5 sommets, donc 5 boules.",
+  "03-ouf": "Une boule de plus, et ma pyramide tient debout !",
+  "04-commentaire": "À toi : combien de pailles faut-il pour cette pyramide à base carrée ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

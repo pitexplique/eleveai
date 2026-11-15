@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défi sur les solides. Combien de joint pour toutes les arêtes d'un aquarium ?",
+  "01-situation": "Voici Ethan. Il fabrique des aquariums en verre, en forme de pavé droit. Sur chaque arête, il colle un joint. Son aquarium mesure 60 centimètres de long, 30 de large et 40 de haut. Combien de joint lui faut-il ?",
+  "02-par-quatre": "Un pavé a 12 arêtes : 4 longueurs, 4 largeurs et 4 hauteurs. On calcule donc 4 fois chaque mesure.",
+  "03-calcul": "4 fois 60, 240. 4 fois 30, 120. 4 fois 40, 160. 240 plus 120 plus 160 : 520 centimètres. C'est 5,2 mètres de joint.",
+  "04-vitres": "Et combien de vitres ? L'aquarium est ouvert en haut : 6 faces moins 1, 5 vitres. Le fond de 60 sur 30, deux vitres de 60 sur 40, et deux de 30 sur 40.",
+  "05-question": "Question ! Un aquarium en cube a des arêtes de 25 centimètres. Combien de joint pour toutes ses arêtes ? A : 3 mètres. B : 1 mètre. C : 1,5 mètre. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Un cube a 12 arêtes pareilles. 12 fois 25 : 300 centimètres, c'est 3 mètres.",
+  "06-piege": "Attention au piège ! Pour les arêtes, on ne fait pas seulement 60 plus 30 plus 40 : ça ne compte que 3 arêtes sur 12. Chaque mesure revient 4 fois.",
+  "07-question": "Question ! Un aquarium en pavé mesure 50 centimètres de long et 30 de large. Pour toutes ses arêtes, il faut 400 centimètres de joint. Quelle est sa hauteur ? A : 100 centimètres. B : 320 centimètres. C : 20 centimètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Une longueur, une largeur et une hauteur font ensemble 400 divisé par 4 : 100 centimètres. 100 moins 50 moins 30 : la hauteur mesure 20 centimètres.",
+  "08-defi": "À toi de jouer ! Ethan a 10 mètres de joint. Il fabrique des aquariums en cube de 40 centimètres d'arête. Combien d'aquariums peut-il finir ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Un aquarium : 12 fois 40, 480 centimètres, soit 4,8 mètres. 2 aquariums : 9,6 mètres. 3 aquariums : 14,4 mètres, c'est trop. Ethan en finit 2, et il lui reste 40 centimètres de joint.",
+  "09-finale": "Ce que tu as appris. Un pavé a 12 arêtes : 4 longueurs, 4 largeurs, 4 hauteurs. Dans un défi de solides, on compte les faces, les arêtes et les sommets, puis on calcule, étape par étape.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

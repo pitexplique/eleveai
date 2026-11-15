@@ -1,0 +1,17 @@
+{
+  "00-garde": "Convertir des contenances. Litres, décilitres, centilitres, millilitres : le tableau des unités.",
+  "01-situation": "Voici Lucie. Elle est pharmacienne. Un flacon de sirop contient 0,2 litre. Le médecin prescrit des cuillères de 5 millilitres. Combien de cuillères dans le flacon ? Il faut d'abord convertir.",
+  "02-tableau": "Voici le tableau des contenances : litre, décilitre, centilitre, millilitre. D'une colonne à la suivante, on multiplie par 10. 1 litre, c'est 10 décilitres, 100 centilitres, 1000 millilitres.",
+  "03-virgule": "Pour 0,2 litre, on écrit 0 dans la colonne des litres, et 2 dans celle des décilitres. On complète avec des zéros jusqu'aux millilitres : 0,2 litre, c'est 200 millilitres.",
+  "04-calcul": "Une cuillère, 5 millilitres. 200 divisé par 5 : 40. Le flacon donne 40 cuillères.",
+  "04b-vers-litres": "Dans l'autre sens, on divise. 750 millilitres : 750 divisé par 1000, 0,75 litre. 35 centilitres : 35 divisé par 100, 0,35 litre.",
+  "05-question": "Question ! Combien de centilitres font 1,5 litre ? A : 15 centilitres. B : 150 centilitres. C : 1500 centilitres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 1 litre, 100 centilitres. 0,5 litre, 50 centilitres. 1,5 litre, c'est 150 centilitres.",
+  "06-piege": "Attention au piège ! 2,5 litres, ce n'est pas 25 centilitres. On n'efface pas la virgule pour coller les chiffres. 2,5 fois 100 : 250 centilitres. Dans le tableau : le 2 dans les litres, le 5 dans les décilitres, puis un zéro.",
+  "07-question": "Question ! Combien de litres font 450 centilitres ? A : 4,5 litres. B : 45 litres. C : 0,45 litre. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 450 divisé par 100 : 4,5. 450 centilitres, c'est 4,5 litres.",
+  "08-defi": "À toi de jouer ! Lucie verse 3 doses de 25 centilitres dans un bocal de 1 litre. Combien de millilitres reste-t-il de place dans le bocal ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 3 fois 25 : 75 centilitres. 1 litre, c'est 100 centilitres. 100 moins 75 : 25 centilitres. Et 25 centilitres, c'est 250 millilitres de place.",
+  "09-finale": "Ce que tu as appris. Litre, décilitre, centilitre, millilitre : d'une unité à la suivante, fois 10. Vers une unité plus petite, on multiplie ; vers une plus grande, on divise. Avec une virgule, le tableau place chaque chiffre au bon endroit.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

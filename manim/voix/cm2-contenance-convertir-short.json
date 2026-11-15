@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Je prépare une limonade géante : 1,5 litre d'eau. Mon verre doseur est en centilitres. 1,5 litre… 15 centilitres. Hop, c'est versé !",
+  "01-gout": "Je goûte… Beurk ! Dix fois trop sucrée !",
+  "02-question": "Question ! Combien de centilitres fallait-il verser ? A : 15 centilitres. B : 150 centilitres. C : 1500 centilitres. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 1,5 litre, c'est 1 litre et demi. 1 litre : 100 centilitres. Un demi-litre : 50. En tout, 150 centilitres.",
+  "03-ouf": "J'ajoute l'eau qui manque… Mmm, parfaite !",
+  "04-commentaire": "À toi : 0,75 litre, c'est combien de millilitres ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

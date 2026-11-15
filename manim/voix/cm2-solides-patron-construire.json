@@ -1,0 +1,16 @@
+{
+  "00-garde": "Construire un patron de cube. Où placer la dernière face ?",
+  "01-situation": "Voici Anna. Elle crée des lanternes en papier, en forme de cube. Elle dessine chaque patron sur une feuille quadrillée. Aujourd'hui, il lui manque une face. Où la mettre ?",
+  "02-regles": "Un patron de cube, c'est 6 carrés pareils, collés par leurs côtés. Quand on plie, chaque carré devient une face, et aucune ne doit se retrouver sur une autre.",
+  "03-croix": "Le plus connu, c'est la croix : 4 carrés en ligne, et 1 carré de chaque côté. La ligne fait le tour : devant, dessus, derrière, dessous. Les 2 carrés de côté ferment à gauche et à droite.",
+  "04-onze": "Il existe 11 patrons différents du cube. Pas besoin de les apprendre : on vérifie en pliant dans sa tête. Une astuce : dans une ligne de 3 carrés, le premier et le dernier deviennent des faces opposées, face à face.",
+  "05-question": "Question ! Dans une ligne de 4 carrés numérotés 1, 2, 3, 4, quelle face sera en face du 1 ? A : le 2. B : le 3. C : le 4. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Dans la ligne 1, 2, 3, le premier et le dernier sont face à face : le 1 est en face du 3. Et le 2 est en face du 4.",
+  "06-piege": "Attention au piège ! 6 carrés bien collés, ce n'est pas toujours un patron. 2 rangées de 3 carrés : quand on plie, deux faces se superposent, et il reste un trou. Ce n'est pas un patron de cube.",
+  "07-question": "Question ! Anna a 5 carrés en croix : 1 au milieu, et 1 sur chaque côté. Où peut-elle coller le 6e carré ? A : au bout d'un bras de la croix. B : dans un coin, à côté d'un bras. C : nulle part : 5 carrés suffisent. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Au bout d'un bras : on obtient la croix, 4 carrés en ligne et 1 de chaque côté. Le 6e carré ferme le dessus de la lanterne.",
+  "08-defi": "À toi de jouer ! Anna fabrique une lanterne en forme de dé. Sur un dé, deux faces opposées font toujours 7. Sur sa ligne de 4 carrés, elle écrit 1 sur le premier, et 2 sur le deuxième. Quels nombres écrire sur le troisième et le quatrième ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Dans la ligne, le troisième carré est en face du premier : 7 moins 1, 6. Le quatrième est en face du deuxième : 7 moins 2, 5. On écrit 6, puis 5.",
+  "09-finale": "Ce que tu as appris. Un patron de cube a 6 carrés, et aucune face ne se superpose. Il en existe 11. Dans une ligne de 3 carrés, le premier et le dernier sont face à face. Pour vérifier, on plie dans sa tête.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
