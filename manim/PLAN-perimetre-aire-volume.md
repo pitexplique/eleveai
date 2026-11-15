@@ -118,11 +118,11 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 
 **Périmètre** (6)
 - [x] Comprendre le périmètre — `aire_perimetre_comprendre` — ↪ vidéo CM2 `cm2-perimetre-comprendre` (+ short) par `aussi`, coach branché 15/11
-- [ ] Calculer le périmètre d’un carré — `aire_perimetre_carre` — ↪ vidéo 6e P1 `6e-aire-perimetre-rectangle` par `aussi` (à produire)
-- [ ] Calculer le périmètre d’un rectangle — `aire_perimetre_rectangle` — ⏳ 6e P1 « formules du périmètre » (Lucas, paysagiste, verte) : ✅ voix validée 15/11 (« Oui, valide les 12 »)
+- [x] Calculer le périmètre d’un carré — `aire_perimetre_carre` — ↪ vidéo 6e P1 `6e-aire-perimetre-rectangle` (+ short) par `aussi`, coach branché 15/11
+- [x] Calculer le périmètre d’un rectangle — `aire_perimetre_rectangle` — ✅ 6e P1 `6e-aire-perimetre-rectangle` (Lucas, paysagiste, verte, 4:10) + short « La guirlande trop courte » ; manifeste 06/04/2027, R2, coach 15/11
 - [x] Calculer le périmètre d’une figure — `aire_perimetre_figure` — ↪ vidéo CM2 `cm2-perimetre-polygone` (+ short) par `aussi`, coach branché 15/11
 - [x] Résoudre un problème de périmètre — `aire_perimetre_probleme` — ↪ vidéo CM2 `cm2-perimetre-defi` (+ short) par `aussi`, coach branché 15/11
-- [ ] Défis de périmètre — `aire_perimetre_defi` — ⏳ 6e P2 (Chloé, fleuriste, bleue) : ✅ voix validée 15/11 (« Oui, valide les 12 »)
+- [x] Défis de périmètre — `aire_perimetre_defi` — ✅ 6e P2 `6e-aire-perimetre-defi` (Chloé, fleuriste, bleue, 3:58) + short « Le ruban pile poil » ; manifeste 07/04/2027, R2, coach 15/11
 
 **Aire** (9)
 - [x] Comprendre l’aire — `aire_comprendre` — ↪ vidéo CM2 `cm2-aire-comprendre` (+ short) par `aussi`, coach branché 15/11

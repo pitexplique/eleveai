@@ -89227,6 +89227,336 @@
           "microId": "aire_decomposer"
         }
       ]
+    },
+    {
+      "id": "6e-aire-perimetre-rectangle",
+      "pas_avant": "2027-04-06",
+      "notionId": "aire_perimetre",
+      "microId": "aire_perimetre_rectangle",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle.mp4",
+      "miniature": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle.png",
+      "titre": "Combien de clôture pour ce jardin ? — Les formules du périmètre — épisode 1 · Maths 6e",
+      "accroche": "Lucas est paysagiste : il dessine et plante des jardins. Avant de poser une clôture, il calcule sa longueur. Pour aller vite, il utilise une formule.\n\nDans cette vidéo :\n• le rectangle : P = 2 × (L + l) ; un jardin de 15 m sur 9 m : 48 m de clôture\n• le carré : P = 4 × c ; un potager de 6,5 m de côté : 26 m\n• la même unité d'abord : 12 m sur 80 cm, c'est 12 m sur 0,8 m → 25,6 m\n• le piège : sans parenthèses, 2 × 15 + 9 = 39, c'est faux\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un jardin de 18 m sur 950 cm, avec un portail de 3 m : combien de mètres de clôture ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/aire-perimetre\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/aire-perimetre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_rectangle&display=simple\n\n📏 Épisode 1 sur 2 de la série Périmètre d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les formules du périmètre"
+        ],
+        [
+          "00:06",
+          "Lucas, paysagiste"
+        ],
+        [
+          "00:21",
+          "Le rectangle : P = 2 × (L + l)"
+        ],
+        [
+          "00:46",
+          "Le carré : P = 4 × c"
+        ],
+        [
+          "01:03",
+          "La même unité d'abord"
+        ],
+        [
+          "01:26",
+          "Question 1"
+        ],
+        [
+          "02:01",
+          "Le piège des parenthèses"
+        ],
+        [
+          "02:24",
+          "Question 2"
+        ],
+        [
+          "03:03",
+          "À toi de jouer"
+        ],
+        [
+          "03:23",
+          "Correction"
+        ],
+        [
+          "03:44",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/aire-perimetre",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/aire-perimetre",
+      "tags": [
+        "périmètre",
+        "formule du périmètre",
+        "périmètre du rectangle",
+        "périmètre du carré",
+        "P = 2 × (L + l)",
+        "P = 4 × c",
+        "parenthèses",
+        "conversion",
+        "nombres décimaux",
+        "paysagiste",
+        "jardin",
+        "clôture",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:26",
+          "question": "Un rectangle mesure 7 cm sur 4 cm. Quel est son périmètre ?",
+          "choix": [
+            "11 cm",
+            "22 cm",
+            "28 cm"
+          ],
+          "reponse": 1,
+          "explication": "7 + 4 = 11. × 2 = 22 cm. 28, c'est 7 × 4 : ce n'est pas le tour."
+        },
+        {
+          "t": "02:24",
+          "question": "Un carré a 2,5 cm de côté. Quel est son périmètre ?",
+          "choix": [
+            "10 cm",
+            "6,25 cm",
+            "5 cm"
+          ],
+          "reponse": 0,
+          "explication": "P = 4 × c : 4 × 2,5 = 10 cm. 6,25, c'est 2,5 × 2,5 : c'est son aire, pas son tour."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "construction"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_carre"
+        }
+      ]
+    },
+    {
+      "id": "6e-aire-perimetre-rectangle-short",
+      "pas_avant": "2027-04-06",
+      "notionId": "aire_perimetre",
+      "microId": "aire_perimetre_rectangle",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-aire-perimetre-rectangle",
+      "fichier": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle-short.mp4",
+      "miniature": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle-short-miniature.png",
+      "titre": "Ma guirlande trop courte : 2,4 m pour une fenêtre carrée ? #maths #6e",
+      "accroche": "Ti Margo veut une guirlande lumineuse autour de sa fenêtre carrée de 1,2 m de côté. Il achète 2,4 m de guirlande : ça devrait suffire, non ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une fenêtre rectangulaire de 1,5 m sur 1 m. Quelle longueur de guirlande pour le tour ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_rectangle&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #perimetre #6e #collège",
+      "tags": [
+        "périmètre",
+        "périmètre du carré",
+        "P = 4 × c",
+        "nombres décimaux",
+        "guirlande",
+        "fenêtre",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Quelle longueur de guirlande faut-il pour tout le tour ?",
+          "choix": [
+            "4,8 mètres",
+            "2,4 mètres",
+            "1,44 mètre"
+          ],
+          "reponse": 0,
+          "explication": "Un carré a 4 côtés égaux : P = 4 × c. 4 × 1,2 = 4,8 m. Avec 2,4 m, je n'en fais que la moitié !"
+        }
+      ],
+      "centres": [
+        "construction",
+        "art-design"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_carre"
+        }
+      ]
+    },
+    {
+      "id": "6e-aire-perimetre-defi",
+      "pas_avant": "2027-04-07",
+      "notionId": "aire_perimetre",
+      "microId": "aire_perimetre_defi",
+      "classe": "6e",
+      "ceinture": "bleue",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi.mp4",
+      "miniature": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi.png",
+      "titre": "Que devient le tour quand on change les côtés ? — Défi de périmètre — épisode 2 · Maths 6e",
+      "accroche": "Chloé est fleuriste. Autour de chaque boîte de fleurs, elle colle un ruban qui fait tout le tour. Que devient le ruban quand la boîte change de taille ?\n\nDans cette vidéo :\n• une boîte de 7 cm sur 3 cm : 20 cm de ruban\n• allonger la longueur d'1 cm : le tour grandit de 2 cm (8 + 3 = 11, × 2 = 22)\n• doubler tous les côtés : le périmètre double (14 sur 6 → 40 cm)\n• même tour, formes différentes : 9 sur 1, 6 sur 4, carré de 5\n• le piège : même périmètre ne veut pas dire même surface (25 carreaux contre 9)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : 24 cm de ruban, une boîte dont la longueur fait 2 fois la largeur : quelles dimensions ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/6e/aire-perimetre\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/6e/aire-perimetre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_defi&display=simple\n\n📏 Épisode 2 sur 2 de la série Périmètre d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Défi de périmètre"
+        ],
+        [
+          "00:06",
+          "Chloé, fleuriste"
+        ],
+        [
+          "00:25",
+          "+ 1 cm au côté, + 2 cm au tour"
+        ],
+        [
+          "00:43",
+          "Tous les côtés doublés"
+        ],
+        [
+          "00:59",
+          "Même tour, formes différentes"
+        ],
+        [
+          "01:11",
+          "Question 1"
+        ],
+        [
+          "01:54",
+          "Le piège : même tour, pas même surface"
+        ],
+        [
+          "02:12",
+          "Question 2"
+        ],
+        [
+          "02:47",
+          "À toi de jouer"
+        ],
+        [
+          "03:05",
+          "Correction"
+        ],
+        [
+          "03:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/6e/aire-perimetre",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/6e/aire-perimetre",
+      "tags": [
+        "périmètre",
+        "agrandissement",
+        "doubler les côtés",
+        "même périmètre",
+        "périmètre et aire",
+        "problème",
+        "défi",
+        "fleuriste",
+        "ruban",
+        "boîte cadeau",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:11",
+          "question": "Un carré a 6 cm de côté. On ajoute 1 cm à chaque côté. De combien augmente son périmètre ?",
+          "choix": [
+            "1 cm",
+            "4 cm",
+            "2 cm"
+          ],
+          "reponse": 1,
+          "explication": "Le carré a 4 côtés, chacun grandit d'1 cm : 4 cm de plus. On vérifie : 6 × 4 = 24 ; 7 × 4 = 28 ; 28 − 24 = 4."
+        },
+        {
+          "t": "02:12",
+          "question": "Un rectangle a un périmètre de 30 cm. On double sa longueur et sa largeur. Quel est son nouveau périmètre ?",
+          "choix": [
+            "60 cm",
+            "32 cm",
+            "120 cm"
+          ],
+          "reponse": 0,
+          "explication": "Tous les côtés doublent, donc le tour double : 30 × 2 = 60 cm."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "mode"
+      ]
+    },
+    {
+      "id": "6e-aire-perimetre-defi-short",
+      "pas_avant": "2027-04-07",
+      "notionId": "aire_perimetre",
+      "microId": "aire_perimetre_defi",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-aire-perimetre-defi",
+      "fichier": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi-short.mp4",
+      "miniature": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi-short-miniature.png",
+      "titre": "20 cm de ruban : quelle boîte cadeau pile poil ? #maths #6e",
+      "accroche": "Ti Margo a 20 cm de ruban doré. Il veut entourer une boîte cadeau pile poil, sans un millimètre de trop. Trois boîtes l'attendent : 6 sur 5, 10 sur 10, 7 sur 3.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : avec 20 cm de ruban, donne une AUTRE boîte rectangulaire qui marche. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #perimetre #6e #collège",
+      "tags": [
+        "périmètre",
+        "périmètre du rectangle",
+        "ruban",
+        "boîte cadeau",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Quelle boîte mon ruban entoure-t-il exactement ?",
+          "choix": [
+            "6 cm sur 5 cm",
+            "10 cm sur 10 cm",
+            "7 cm sur 3 cm"
+          ],
+          "reponse": 2,
+          "explication": "7 + 3 = 10, × 2 = 20 cm. Pour la B, 10 + 10 fait 20… mais ce n'est que la moitié du tour : 40 cm !"
+        }
+      ],
+      "centres": [
+        "art-design",
+        "mode"
+      ]
     }
   ]
 }

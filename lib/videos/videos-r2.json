@@ -16037,5 +16037,41 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=aire&microId=aire_composer&display=simple"
+ },
+ "6e-aire-perimetre-defi": {
+  "fichier": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi.mp4",
+  "poster": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi.png",
+  "vignette": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi.vignette.webp",
+  "titre": "Que devient le tour quand on change les côtés ? — Défi de périmètre — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_defi&display=simple"
+ },
+ "6e-aire-perimetre-defi-short": {
+  "fichier": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi-short.mp4",
+  "poster": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi-short-miniature.png",
+  "vignette": "6e/maths/perimetre/02-defi/eleveai-maths-6e-aire-perimetre-defi-short-miniature.vignette.webp",
+  "titre": "20 cm de ruban : quelle boîte cadeau pile poil ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_defi&display=simple"
+ },
+ "6e-aire-perimetre-rectangle": {
+  "fichier": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle.mp4",
+  "poster": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle.png",
+  "vignette": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle.vignette.webp",
+  "titre": "Combien de clôture pour ce jardin ? — Les formules du périmètre — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_rectangle&display=simple"
+ },
+ "6e-aire-perimetre-rectangle-short": {
+  "fichier": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle-short.mp4",
+  "poster": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle-short-miniature.png",
+  "vignette": "6e/maths/perimetre/01-rectangle/eleveai-maths-6e-aire-perimetre-rectangle-short-miniature.vignette.webp",
+  "titre": "Ma guirlande trop courte : 2,4 m pour une fenêtre carrée ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_rectangle&display=simple"
  }
 }
