@@ -1,0 +1,16 @@
+{
+  "00-garde": "La longueur d'un cercle. Combien mesure le tour d'un rond ?",
+  "01-situation": "Voici Marc. Il installe des piscines. Autour d'un bassin rond, il pose la margelle : la bordure sur laquelle on s'assoit. Elle se vend au mètre. Combien de mètres faut-il commander ?",
+  "02-le-nombre-pi": "Marc enroule une ficelle autour du bassin, puis il la déroule. Le tour fait un peu plus de trois fois le diamètre. Un peu plus de trois : c'est pi, environ 3,14. Ce nombre est le même pour tous les cercles du monde.",
+  "03-formule": "La longueur d'un cercle : pi fois le diamètre. Et comme le diamètre vaut deux rayons, on l'écrit aussi 2 fois pi fois le rayon.",
+  "04-exemple": "Le bassin de Marc a 4 mètres de diamètre. Sa longueur : pi fois 4, 4 pi mètres. Environ 12,6 mètres de margelle.",
+  "05-question": "Question ! Un cercle a un rayon de 3 mètres. Quelle est sa longueur ? A : 3 pi mètres. B : 6 pi mètres. C : 9 pi mètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 2 fois pi fois 3, 6 pi mètres. 9 pi, c'est pi fois 3 fois 3 : c'est l'aire du disque, pas le tour.",
+  "06-piege": "Attention au piège ! Rayon ou diamètre : il faut savoir lequel on te donne. Avec le diamètre, on multiplie par pi une seule fois. Avec le rayon, on multiplie par 2 et par pi.",
+  "07-question": "Question ! Un bassin a 5 mètres de diamètre. Quelle est sa longueur ? A : 10 pi mètres. B : 25 pi mètres. C : 5 pi mètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Pi fois 5, 5 pi mètres. 10 pi, c'est avoir pris le diamètre pour un rayon.",
+  "08-defi": "À toi de jouer ! Le bassin fait 6 mètres de diamètre. Marc pose une barrière de sécurité à 1 mètre du bord, tout autour. La barrière coûte 40 euros le mètre. Combien coûte-t-elle ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le rayon du bassin : 6 divisé par 2, 3 mètres. La barrière est 1 mètre plus loin : rayon 4 mètres. Sa longueur : 2 fois pi fois 4, 8 pi, environ 25,1 mètres. Le prix : 25,1 fois 40, environ 1 005 euros.",
+  "09-finale": "Ce que tu as appris. La longueur d'un cercle vaut pi fois son diamètre, ou 2 fois pi fois son rayon. Pi vaut environ 3,14. Le tour fait un peu plus de trois diamètres.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

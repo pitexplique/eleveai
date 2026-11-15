@@ -1,0 +1,16 @@
+{
+  "00-garde": "La section d'un cône et d'une pyramide. Que voit-on dans la coupe ?",
+  "01-situation": "Voici Jade. Elle est volcanologue, à La Réunion. Pour expliquer le Piton de la Fournaise, elle le dessine coupé en deux. Un volcan, c'est à peu près un cône : ses sections racontent son histoire.",
+  "02-parallele": "Quand on coupe un cône parallèlement à sa base, la section est un disque, plus petit que la base. Plus on monte, plus le disque rétrécit.",
+  "03-la-reduction": "Et ce disque est une réduction exacte de la base. À mi-hauteur, son rayon est la moitié du rayon de la base. Aux trois quarts de la hauteur, il n'en reste qu'un quart.",
+  "04-la-pyramide": "Pour une pyramide, c'est pareil : une coupe parallèle à la base donne la même forme que la base, en plus petit. Base carrée, section carrée.",
+  "05-question": "Question ! On coupe un cône parallèlement à sa base. La section est… A : un disque plus petit. B : un rectangle. C : un triangle. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Un disque plus petit, qui est une réduction de la base. Le triangle, c'est ce qu'on verrait en coupant le cône verticalement.",
+  "06-piege": "Attention au piège ! Si la coupe n'est pas parallèle à la base, la section n'est plus une réduction : sur un cône, elle devient un ovale. Le mot « parallèle » n'est pas décoratif.",
+  "07-question": "Question ! On coupe une pyramide à base carrée parallèlement à sa base. La section est… A : un triangle. B : un carré plus petit. C : un disque. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Un carré plus petit : la section a la forme de la base.",
+  "08-defi": "À toi de jouer ! Jade modélise un cône de 1 000 mètres de rayon à la base et 500 mètres de haut. Quel est le rayon de la section à 300 mètres d'altitude ? Mets pause, et cherche !",
+  "08b-correction": "Correction. À 300 mètres sur 500, il reste 200 mètres jusqu'au sommet, soit 200 divisé par 500, c'est-à-dire 0,4 de la hauteur. Le rapport de réduction est 0,4 : le rayon vaut 0,4 fois 1 000, soit 400 mètres.",
+  "09-finale": "Ce que tu as appris. Une section parallèle à la base d'un cône est un disque plus petit. Pour une pyramide, c'est la forme de la base en plus petit. Et ce petit solide est une réduction du grand.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

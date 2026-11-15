@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Le drone d'Enzo survole un bâtiment. De dessus : un rectangle.",
+  "01-defi": "De face : un rectangle surmonté d'un triangle. Quel solide est le toit ?",
+  "02-question": "Question ! A : une pyramide. B : un cylindre. C : une boule. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! Un triangle de face et un rectangle de dessus : c'est une pyramide posée sur le pavé.",
+  "03-visuel": "Deux vues, et le bâtiment devient deux solides.",
+  "04-commentaire": "À toi : de dessus un disque, de face un triangle. Quel toit ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

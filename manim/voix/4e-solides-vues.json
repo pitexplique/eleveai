@@ -1,0 +1,16 @@
+{
+  "00-garde": "Les vues d'un solide. Que voit-on de face, de dessus, de côté ?",
+  "01-situation": "Voici Karim. Il est architecte. Avant de construire une maquette, il dessine trois vues : de face, de dessus, de côté. Un ouvrier qui n'a jamais vu la maison doit pouvoir la fabriquer avec ces trois dessins.",
+  "02-l-ombre": "Une vue, c'est une ombre. On aplatit le solide sur un plan, et on garde seulement le contour. Un cylindre debout : de face, un rectangle. De dessus, un disque.",
+  "03-trois-vues": "La maison de Karim : un pavé surmonté d'un toit. De face, un rectangle et un triangle. De dessus, un rectangle. De côté, un rectangle et un triangle plus étroit.",
+  "04-methode": "Une seule vue ne suffit presque jamais. De face, un rectangle : c'est peut-être un pavé, peut-être un cylindre. Il faut la vue de dessus pour trancher.",
+  "05-question": "Question ! De dessus, on voit un disque. De face, un rectangle. Quel solide ? A : un cylindre. B : un cône. C : une boule. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Un cylindre debout. Le cône donnerait un triangle de face. La boule donnerait un disque des deux côtés.",
+  "06-piege": "Attention au piège ! Une vue ne montre pas la profondeur. Deux solides très différents peuvent avoir la même vue de face. C'est pour ça qu'on en dessine toujours plusieurs.",
+  "07-question": "Question ! De face, un triangle. De dessus, un disque. Quel solide ? A : une pyramide. B : un prisme. C : un cône. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Un cône. La pyramide donnerait un carré ou un triangle de dessus, jamais un disque.",
+  "08-defi": "À toi de jouer ! Karim pose un cylindre debout sur un pavé. Dessine ce qu'il voit de face, puis de dessus. Et dis combien de vues il faut pour que l'ouvrier ne se trompe pas. Mets pause, et cherche !",
+  "08b-correction": "Correction. De face : un rectangle large en bas, un rectangle étroit au-dessus. De dessus : le rectangle du pavé, avec un disque au milieu. Deux vues suffisent ici, parce que la vue de dessus montre le disque.",
+  "09-finale": "Ce que tu as appris. Une vue est une ombre : elle aplatit le solide. Une seule vue ne suffit presque jamais. De face, de dessus, de côté : ensemble, elles décrivent le solide.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

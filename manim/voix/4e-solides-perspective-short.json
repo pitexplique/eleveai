@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Maya dessine un cube : d'abord un carré bien droit, puis les fuyantes.",
+  "01-defi": "Ses fuyantes doivent-elles être parallèles, perpendiculaires, ou en vraie longueur ?",
+  "02-question": "Question ! A : parallèles entre elles. B : perpendiculaires au carré. C : de la vraie longueur. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! Toutes les fuyantes sont parallèles, de même longueur, et réduites. Sinon le cube se tord.",
+  "03-visuel": "Parallèles : le cube tient. Pas parallèles : il se tord.",
+  "04-commentaire": "À toi : dans un cube en perspective cavalière, combien d'arêtes sont en pointillés ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

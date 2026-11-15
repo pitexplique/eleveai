@@ -1,0 +1,16 @@
+{
+  "00-garde": "La section d'un cylindre. Disque ou rectangle ?",
+  "01-situation": "Voici Oscar. Il est tourneur sur métaux : il découpe des tubes. Le cadre d'une trottinette est fait de tubes, et la façon de les couper change tout.",
+  "02-en-travers": "Quand Oscar coupe perpendiculairement à l'axe du tube, la section est un disque. C'est la coupe qu'on voit au bout d'un tube.",
+  "03-dans-la-longueur": "Quand il coupe parallèlement à l'axe, en passant par le centre, la section est un rectangle. Sa largeur est le diamètre, sa longueur est celle du tube.",
+  "04-le-vide": "Et un tube n'est pas plein : sa section en travers est une couronne, un disque percé d'un disque. L'aire de métal est la différence des deux disques.",
+  "05-question": "Question ! On coupe un tube perpendiculairement à son axe. La section est… A : un rectangle. B : un disque. C : un triangle. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Perpendiculairement à l'axe, c'est parallèle aux bases : on retrouve la forme de la base, un disque.",
+  "06-piege": "Attention au piège ! Perpendiculaire à l'axe et parallèle à la base, c'est la même coupe. On parle tantôt de l'axe, tantôt de la base : il faut savoir à quoi on se réfère.",
+  "07-question": "Question ! On coupe un cylindre parallèlement à son axe, en passant par le centre. La section est… A : un rectangle. B : un disque. C : un ovale. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Un rectangle, dont la largeur est le diamètre du cylindre.",
+  "08-defi": "À toi de jouer ! Oscar coupe un tube de 3 centimètres de rayon extérieur et 2,5 centimètres de rayon intérieur. Quelle est l'aire de métal sur la coupe ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le grand disque : pi fois 3 fois 3, 9 pi. Le trou : pi fois 2,5 fois 2,5, 6,25 pi. La couronne : 9 pi moins 6,25 pi, 2,75 pi centimètres carrés. Environ 8,6 centimètres carrés de métal.",
+  "09-finale": "Ce que tu as appris. Une coupe perpendiculaire à l'axe d'un cylindre donne un disque. Une coupe parallèle à l'axe donne un rectangle. Et la section d'un tube est une couronne.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

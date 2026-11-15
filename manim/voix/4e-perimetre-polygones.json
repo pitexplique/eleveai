@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le périmètre. Combien mesure le tour d'une figure ?",
+  "01-situation": "Voici Nour. Elle est géomètre-topographe : elle mesure les terrains. La commune veut un skatepark. Avant les travaux, Nour doit borner le terrain et dire combien de mètres de barrière il faudra.",
+  "02-comprendre": "Le périmètre, c'est la longueur du tour. Nour marche le long du bord, et elle additionne tout ce qu'elle parcourt. Rien de ce qui est à l'intérieur ne compte.",
+  "03-rectangle": "Le terrain est un rectangle de 20 mètres sur 12. Le tour : 20 plus 12 plus 20 plus 12, 64 mètres. Plus court : 20 plus 12, 32, fois 2, 64 mètres.",
+  "04-carre-triangle": "Si la figure est un carré, les quatre côtés sont égaux : côté fois 4. Si c'est un triangle, on additionne ses trois côtés, et il n'y a pas de raccourci.",
+  "05-question": "Question ! Un rectangle mesure 12 mètres sur 5. Quel est son périmètre ? A : 34 mètres. B : 60 mètres. C : 17 mètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 12 plus 5, 17, fois 2, 34 mètres. 60, c'est l'aire. 17, c'est la longueur plus la largeur, le tour n'est pas fini.",
+  "06-piege": "Attention au piège ! Un périmètre se mesure en mètres, jamais en mètres carrés. Le mètre carré, c'est pour la surface. Si ta réponse est en mètres carrés, tu as calculé autre chose.",
+  "07-question": "Question ! Un carré a 7 mètres de côté. Quel est son périmètre ? A : 49 mètres. B : 28 mètres. C : 14 mètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 7 fois 4, 28 mètres. 49, c'est 7 fois 7 : c'est l'aire. 14, c'est seulement deux côtés.",
+  "08-defi": "À toi de jouer ! Le skatepark est un rectangle de 20 mètres sur 12. Nour pose une barrière tout autour, sauf une entrée de 3 mètres. La barrière coûte 25 euros le mètre. Combien va-t-elle coûter ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le tour : 20 plus 12, 32, fois 2, 64 mètres. Moins l'entrée : 64 moins 3, 61 mètres de barrière. Le prix : 61 fois 25, 1 525 euros.",
+  "09-finale": "Ce que tu as appris. Le périmètre est la longueur du tour. Pour un rectangle : longueur plus largeur, fois 2. Pour un carré : côté fois 4. Pour un triangle : on additionne les trois côtés.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

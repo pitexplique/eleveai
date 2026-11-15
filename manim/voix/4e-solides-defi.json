@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défis sur les solides. Comment calculer le volume d'un bâtiment entier ?",
+  "01-situation": "Voici Enzo. Il pilote un drone qui relève des bâtiments. Le drone prend des photos de dessus et de côté. Ensuite, Enzo remplace le bâtiment par des solides simples : c'est ce qu'on appelle modéliser.",
+  "02-modeliser": "Modéliser, c'est oublier les détails. Les fenêtres, la gouttière, la cheminée : on les enlève. Il reste un pavé pour le corps du bâtiment, et une pyramide pour le toit.",
+  "03-les-vues": "Les photos donnent les mesures. De dessus : un rectangle de 20 mètres sur 10. De face : un mur de 6 mètres de haut, surmonté d'un toit de 3 mètres.",
+  "04-decouper": "On calcule chaque solide séparément, puis on additionne. Jamais tout d'un coup.",
+  "05-question": "Question ! Le corps du bâtiment mesure 20 mètres sur 10, et 6 mètres de haut. Quel est son volume ? A : 360 mètres cubes. B : 1 200 mètres cubes. C : 120 mètres cubes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 20 fois 10, 200 mètres carrés de base. 200 fois 6, 1 200 mètres cubes. 360, c'est une addition des trois mesures multipliée.",
+  "06-piege": "Attention au piège ! Le toit n'est pas un pavé. C'est une pyramide : on n'oublie pas le divisé par 3, sinon le bâtiment devient bien plus gros qu'il n'est.",
+  "07-question": "Question ! Le toit est une pyramide de base 200 mètres carrés et de hauteur 3 mètres. Quel est son volume ? A : 600 mètres cubes. B : 300 mètres cubes. C : 200 mètres cubes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 200 fois 3, 600. Divisé par 3 : 200 mètres cubes. 600, c'est l'oubli du divisé par 3.",
+  "08-defi": "À toi de jouer ! Enzo doit chiffrer le chauffage du bâtiment entier : le corps, 1 200 mètres cubes, et le toit, 200 mètres cubes. Le chauffagiste compte 30 watts par mètre cube, mais le toit n'est pas chauffé. Quelle puissance faut-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Seul le corps est chauffé : 1 200 mètres cubes. 1 200 fois 30, 36 000 watts, soit 36 kilowatts. Si Enzo avait compté le toit, il aurait ajouté 6 000 watts pour rien.",
+  "09-finale": "Ce que tu as appris. Modéliser, c'est remplacer un objet réel par des solides simples. On calcule chaque solide, puis on additionne. Et on lit les mesures sur les vues.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

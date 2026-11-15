@@ -1,0 +1,16 @@
+{
+  "00-garde": "Reconnaître les solides. À quoi voit-on qu'un solide est un prisme ?",
+  "01-situation": "Voici Yuna. Elle est animatrice 3D : elle fabrique les personnages d'un jeu. Elle ne part jamais d'une forme compliquée. Elle assemble des solides simples : des pavés, des cylindres, des cônes, des pyramides, une boule.",
+  "02-les-bases": "Un solide se reconnaît à ses bases. Le prisme droit a deux bases identiques, posées l'une au-dessus de l'autre, et des faces latérales rectangulaires. La pyramide n'a qu'une seule base, et toutes ses autres faces sont des triangles qui se rejoignent au sommet.",
+  "03-les-ronds": "Quand la base est un disque, il y a deux cas. Deux disques et pas de pointe : c'est un cylindre. Un disque et une pointe : c'est un cône. Et la boule n'a aucune face plate.",
+  "04-compter": "Yuna compte aussi les faces, les arêtes et les sommets. Une pyramide à base carrée : un carré et quatre triangles, donc cinq faces. Huit arêtes. Cinq sommets.",
+  "05-question": "Question ! Un solide a deux bases triangulaires et trois faces rectangulaires. Qu'est-ce que c'est ? A : une pyramide. B : un pavé droit. C : un prisme droit. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. Deux bases identiques et des faces latérales rectangulaires : c'est un prisme droit. La pyramide n'aurait qu'une seule base.",
+  "06-piege": "Attention au piège ! Ce n'est pas l'allure générale qui décide, ce sont les bases. Un cube est un pavé droit dont toutes les faces sont des carrés. Un pavé droit est aussi un prisme droit : ses bases sont des rectangles.",
+  "07-question": "Question ! Une pyramide a une base carrée. Combien a-t-elle de faces en tout ? A : 5. B : 4. C : 6. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Le carré de la base, plus quatre triangles : cinq faces. 4, c'est oublier la base.",
+  "08-defi": "À toi de jouer ! Yuna modélise une fusée : un cylindre surmonté d'un cône, posé sur trois pavés. Combien de solides en tout, et combien de disques y a-t-il dans cet assemblage ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Les solides : un cylindre, un cône, trois pavés, cinq solides. Les disques : le cylindre en a deux, le cône en a un, les pavés n'en ont aucun. Trois disques.",
+  "09-finale": "Ce que tu as appris. Un solide se reconnaît à ses bases, pas à son allure. Deux bases identiques : un prisme. Une seule base et des triangles : une pyramide. Un disque et une pointe : un cône.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

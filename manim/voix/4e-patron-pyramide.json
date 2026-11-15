@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le patron d'une pyramide. Quel découpage se referme en pointe ?",
+  "01-situation": "Voici Tiago. Il fabrique des jeux de société. Aujourd'hui, il découpe des dés dans du carton : des dés à quatre faces, qui sont des pyramides. Pour les découper, il lui faut le patron.",
+  "02-deplier": "Un patron, c'est le solide déplié à plat. Chaque face y apparaît une fois, en vraie grandeur. Tiago déplie sa pyramide à base carrée : le carré reste au milieu, et les quatre triangles se rabattent autour.",
+  "03-compter": "Le patron a donc cinq morceaux : un carré et quatre triangles. Autant que de faces.",
+  "04-le-de": "Le dé à quatre faces, lui, a une base triangulaire. Son patron : quatre triangles, et rien d'autre.",
+  "05-question": "Question ! Le patron d'une pyramide à base carrée, combien de morceaux ? A : 4. B : 5. C : 6. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Cinq : le carré de la base et quatre triangles. 4, c'est oublier la base. 6, ce serait un cube.",
+  "06-piege": "Attention au piège ! Les triangles doivent être collés aux côtés du carré, pas n'importe où. Si deux triangles partent du même côté, le patron ne se referme pas.",
+  "07-question": "Question ! Le dé à quatre faces est une pyramide à base triangulaire. Son patron ? A : 4 triangles. B : 1 carré et 4 triangles. C : 3 triangles. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Quatre triangles : la base en est un, et les trois faces aussi. 3 triangles, c'est oublier la base.",
+  "08-defi": "À toi de jouer ! Tiago découpe une pyramide à base carrée de 6 centimètres de côté. Chaque triangle a une hauteur de 5 centimètres. Quelle est l'aire totale de carton découpé ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le carré : 6 fois 6, 36 centimètres carrés. Un triangle : 6 fois 5, divisé par 2, 15 centimètres carrés. Quatre triangles : 15 fois 4, 60. En tout : 36 plus 60, 96 centimètres carrés.",
+  "09-finale": "Ce que tu as appris. Un patron est le solide déplié à plat. Chaque face y apparaît une fois, en vraie grandeur. Une pyramide à base carrée a cinq morceaux, une pyramide à base triangulaire en a quatre.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

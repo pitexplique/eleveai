@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défis sur les volumes. Combien de jours tient une citerne pleine ?",
+  "01-situation": "Voici Elsa. Elle est hydrologue : elle étudie l'eau. Elle installe une citerne qui récupère l'eau de pluie. Cette citerne est un cylindre posé sur un fond en forme de cône.",
+  "02-le-cylindre": "Le cylindre : 1 mètre de rayon, 3 mètres de hauteur. Son volume : pi fois 1 fois 1, fois 3. Trois pi mètres cubes, environ 9,4 mètres cubes.",
+  "03-le-cone": "Le fond conique : 1 mètre de rayon, 0,6 mètre de hauteur. Pi fois 1 fois 1, fois 0,6, divisé par 3. Zéro virgule 2 pi mètres cubes, environ 0,6 mètre cube.",
+  "04-total": "En tout : 9,4 plus 0,6, environ 10 mètres cubes. Soit 10 000 litres d'eau de pluie.",
+  "05-question": "Question ! Un cylindre de rayon 2 mètres et de hauteur 5 mètres. Quel est son volume ? A : 10 pi mètres cubes. B : 20 pi mètres cubes. C : 40 pi mètres cubes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Pi fois 2 fois 2, 4 pi. Fois 5, 20 pi mètres cubes. 10 pi, c'est le rayon compté une seule fois.",
+  "06-piege": "Attention au piège ! Pour un cylindre, on multiplie par la hauteur. Pour un cône, on multiplie par la hauteur et on divise par 3. Le même début, deux fins différentes.",
+  "07-question": "Question ! Un fond conique de 2 mètres de rayon et 3 mètres de hauteur. Quel est son volume ? A : 12 pi mètres cubes. B : 6 pi mètres cubes. C : 4 pi mètres cubes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Pi fois 2 fois 2, 4 pi. Fois 3, 12 pi. Divisé par 3 : 4 pi mètres cubes. 12 pi, c'est l'oubli du divisé par 3.",
+  "08-defi": "À toi de jouer ! La citerne d'Elsa contient 10 000 litres, et elle est pleine. La famille utilise 400 litres par jour. Il n'a pas plu depuis une semaine. Combien de jours la citerne peut-elle encore tenir ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Pleine, elle tiendrait 10 000 divisé par 400, soit 25 jours. Mais la semaine passée en a déjà pris : 7 fois 400, 2 800 litres. Il reste 7 200 litres. 7 200 divisé par 400 : 18 jours.",
+  "09-finale": "Ce que tu as appris. Un solide compliqué se découpe en solides simples. On calcule chaque morceau, puis on additionne. Un mètre cube, c'est mille litres.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

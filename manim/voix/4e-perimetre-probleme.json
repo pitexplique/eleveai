@@ -1,0 +1,16 @@
+{
+  "00-garde": "Un problème de périmètre. Pourquoi un tour de piste fait-il 400 mètres ?",
+  "01-situation": "Voici Sonia. Elle entraîne des coureurs. Sur le stade, un tour de piste fait 400 mètres, dans le couloir du bord intérieur. Mais d'où vient ce nombre ?",
+  "02-la-piste": "La piste est faite de deux lignes droites et de deux virages. Chaque ligne droite mesure environ 85 mètres. Chaque virage est un demi-cercle de 36 mètres de rayon.",
+  "03-les-virages": "Les deux demi-cercles mis bout à bout font un cercle entier. Sa longueur : 2 fois pi fois 36, soit 72 pi mètres. Environ 226 mètres.",
+  "04-total": "Les droites : 85 fois 2, 170 mètres. En tout : 170 plus 226, environ 396 mètres. On arrondit à 400 : c'est le tour de piste.",
+  "05-question": "Question ! Deux demi-cercles de rayon 36 mètres, mis bout à bout, font un cercle. Quelle est sa longueur ? A : 72 pi mètres. B : 36 pi mètres. C : 1 296 pi mètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 2 fois pi fois 36, 72 pi mètres. 1 296 pi, c'est 36 fois 36 fois pi : c'est une aire.",
+  "06-piege": "Attention au piège ! Dans un problème, on cherche d'abord ce qu'on demande. Ici, on demande une longueur, donc des mètres. Une réponse en mètres carrés serait une surface : ce n'est pas la question.",
+  "07-question": "Question ! 72 pi mètres, c'est environ… A : 113 mètres. B : 452 mètres. C : 226 mètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 72 fois 3,14, environ 226 mètres. 113, c'est la moitié : un seul virage.",
+  "08-defi": "À toi de jouer ! Sonia fait courir 12 tours. Un coureur du couloir extérieur tourne 3 mètres plus loin du centre : son virage a donc 3 mètres de rayon en plus. Combien de mètres parcourt-il en plus sur les 12 tours ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Par tour, les deux virages font un cercle de rayon 39 au lieu de 36. La différence : 2 fois pi fois 39 moins 2 fois pi fois 36, soit 2 fois pi fois 3, environ 18,8 mètres par tour. Sur 12 tours : 18,8 fois 12, environ 226 mètres de plus.",
+  "09-finale": "Ce que tu as appris. Un problème de périmètre se découpe : les parties droites, puis les parties rondes. Deux demi-cercles font un cercle. Et la réponse est toujours une longueur.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

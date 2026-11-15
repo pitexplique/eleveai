@@ -1,0 +1,835 @@
+Manim Community v0.21.0
+
+ECRAN 00-accroche t=00:00 (0.00)
+[11/15/26 17:55:12] INFO     Caching disabled.             cairo_renderer.py:81
+Animation 0: FadeIn(Text('Trois fois le même sable')), etc.:   0%|          | 0/42 [00:00<?, ?it/s]Animation 0: FadeIn(Text('Trois fois le même sable')), etc.:  19%|#9        | 8/42 [00:00<00:00, 69.51it/s]Animation 0: FadeIn(Text('Trois fois le même sable')), etc.:  36%|###5      | 15/42 [00:00<00:00, 65.26it/s]Animation 0: FadeIn(Text('Trois fois le même sable')), etc.:  52%|#####2    | 22/42 [00:00<00:00, 63.21it/s]Animation 0: FadeIn(Text('Trois fois le même sable')), etc.:  69%|######9   | 29/42 [00:00<00:00, 61.71it/s]Animation 0: FadeIn(Text('Trois fois le même sable')), etc.:  86%|########5 | 36/42 [00:00<00:00, 62.36it/s]                                                                                                            [11/15/26 17:55:13] INFO     Animation 0 : Partial     scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00000.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 1: FadeIn(VGroup of 4 submobjects):   0%|          | 0/30 [00:00<?, ?it/s]Animation 1: FadeIn(VGroup of 4 submobjects):  67%|######6   | 20/30 [00:00<00:00, 193.17it/s]                                                                                              [11/15/26 17:55:14] INFO     Animation 1 : Partial     scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00001.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+                    INFO     Animation 2 : Partial     scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00002.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 3: FadeIn(VGroup of 16 submobjects):   0%|          | 0/24 [00:00<?, ?it/s]Animation 3: FadeIn(VGroup of 16 submobjects):  54%|#####4    | 13/24 [00:00<00:00, 128.96it/s]                                                                                                                   INFO     Animation 3 : Partial     scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00003.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:15] INFO     Animation 4 : Partial     scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00004.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 5: FadeIn(Text('60 cm³')):   0%|          | 0/24 [00:00<?, ?it/s]Animation 5: FadeIn(Text('60 cm³')):  67%|######6   | 16/24 [00:00<00:00, 150.77it/s]                                                                                                         INFO     Animation 5 : Partial     scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00005.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:17] INFO     Animation 6 : Partial     scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00006.mp4'                           
+ECRAN 01-defi t=00:06 (6.38)
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:18] INFO     Animation 7 : Partial     scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00007.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 8: FadeIn(VGroup of 4 submobjects):   0%|          | 0/30 [00:00<?, ?it/s]Animation 8: FadeIn(VGroup of 4 submobjects):  47%|####6     | 14/30 [00:00<00:00, 138.64it/s]Animation 8: FadeIn(VGroup of 4 submobjects):  93%|#########3| 28/30 [00:00<00:00, 127.39it/s]                                                                                                                  INFO     Animation 8 : Partial     scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00008.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:19] INFO     Animation 9 : Partial     scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00009.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 10: FadeIn(Text('même base, même hauteur')), etc.:   0%|          | 0/36 [00:00<?, ?it/s]Animation 10: FadeIn(Text('même base, même hauteur')), etc.:  22%|##2       | 8/36 [00:00<00:00, 79.20it/s]Animation 10: FadeIn(Text('même base, même hauteur')), etc.:  47%|####7     | 17/36 [00:00<00:00, 79.85it/s]Animation 10: FadeIn(Text('même base, même hauteur')), etc.:  72%|#######2  | 26/36 [00:00<00:00, 80.41it/s]Animation 10: FadeIn(Text('même base, même hauteur')), etc.:  97%|#########7| 35/36 [00:00<00:00, 80.33it/s]                                                                                                            [11/15/26 17:55:20] INFO     Animation 10 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00010.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:21] INFO     Animation 11 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00011.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 12: FadeIn(Text('Combien de pyramides ?')):   0%|          | 0/24 [00:00<?, ?it/s]Animation 12: FadeIn(Text('Combien de pyramides ?')):  50%|#####     | 12/24 [00:00<00:00, 109.85it/s]Animation 12: FadeIn(Text('Combien de pyramides ?')):  96%|#########5| 23/24 [00:00<00:00, 107.91it/s]                                                                                                      [11/15/26 17:55:22] INFO     Animation 12 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00012.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:24] INFO     Animation 13 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00013.mp4'                           
+ECRAN 02-question t=00:14 (14.82)
+                    INFO     Caching disabled.             cairo_renderer.py:81
+                    INFO     Animation 14 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00014.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 15: FadeIn(VGroup of 2 submobjects):   0%|          | 0/24 [00:00<?, ?it/s]Animation 15: FadeIn(VGroup of 2 submobjects):  58%|#####8    | 14/24 [00:00<00:00, 137.71it/s]                                                                                               [11/15/26 17:55:25] INFO     Animation 15 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00015.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 16: FadeIn(Text('Le prisme :')):   0%|          | 0/18 [00:00<?, ?it/s]Animation 16: FadeIn(Text('Le prisme :')):  78%|#######7  | 14/18 [00:00<00:00, 129.69it/s]                                                                                                               INFO     Animation 16 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00016.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 17: FadeIn(Text('60 cm³ de sable.')):   0%|          | 0/18 [00:00<?, ?it/s]Animation 17: FadeIn(Text('60 cm³ de sable.')):  72%|#######2  | 13/18 [00:00<00:00, 127.05it/s]                                                                                                                    INFO     Animation 17 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00017.mp4'                           
+[11/15/26 17:55:26] INFO     Caching disabled.             cairo_renderer.py:81
+Animation 18: FadeIn(Text('Combien de pyramides ?')):   0%|          | 0/18 [00:00<?, ?it/s]Animation 18: FadeIn(Text('Combien de pyramides ?')):  61%|######1   | 11/18 [00:00<00:00, 102.45it/s]                                                                                                                          INFO     Animation 18 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00018.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+                    INFO     Animation 19 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00019.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 20: FadeIn(RoundedRectangle), etc.:   0%|          | 0/12 [00:00<?, ?it/s]                                                                                                        INFO     Animation 20 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00020.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+                    INFO     Animation 21 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00021.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 22: FadeIn(Text('2 pyramides')):   0%|          | 0/12 [00:00<?, ?it/s]                                                                                 [11/15/26 17:55:27] INFO     Animation 22 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00022.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:28] INFO     Animation 23 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00023.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 24: FadeIn(RoundedRectangle), etc.:   0%|          | 0/12 [00:00<?, ?it/s]                                                                                                        INFO     Animation 24 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00024.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+                    INFO     Animation 25 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00025.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 26: FadeIn(Text('1 pyramide')):   0%|          | 0/12 [00:00<?, ?it/s]                                                                                [11/15/26 17:55:29] INFO     Animation 26 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00026.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:30] INFO     Animation 27 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00027.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 28: FadeIn(RoundedRectangle), etc.:   0%|          | 0/12 [00:00<?, ?it/s]                                                                                                        INFO     Animation 28 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00028.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+                    INFO     Animation 29 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00029.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 30: FadeIn(Text('3 pyramides')):   0%|          | 0/12 [00:00<?, ?it/s]                                                                                                     INFO     Animation 30 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00030.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:32] INFO     Animation 31 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00031.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 32: FadeIn(Text('Mets pause, et choisis !')), etc.:   0%|          | 0/24 [00:00<?, ?it/s]Animation 32: FadeIn(Text('Mets pause, et choisis !')), etc.:  42%|####1     | 10/24 [00:00<00:00, 95.46it/s]Animation 32: FadeIn(Text('Mets pause, et choisis !')), etc.:  83%|########3 | 20/24 [00:00<00:00, 96.82it/s]                                                                                                                                 INFO     Animation 32 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00032.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:33] INFO     Animation 33 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00033.mp4'                           
+[11/15/26 17:55:34] INFO     Caching disabled.             cairo_renderer.py:81
+Animation 34: UpdateFromAlphaFunc(Arc), etc.:   0%|          | 0/60 [00:00<?, ?it/s]Animation 34: UpdateFromAlphaFunc(Arc), etc.:  30%|###       | 18/60 [00:00<00:00, 168.03it/s]Animation 34: UpdateFromAlphaFunc(Arc), etc.:  58%|#####8    | 35/60 [00:00<00:00, 155.04it/s]Animation 34: UpdateFromAlphaFunc(Arc), etc.:  85%|########5 | 51/60 [00:00<00:00, 152.99it/s]                                                                                                                  INFO     Animation 34 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00034.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 35: UpdateFromAlphaFunc(Arc), etc.:   0%|          | 0/60 [00:00<?, ?it/s]Animation 35: UpdateFromAlphaFunc(Arc), etc.:  30%|###       | 18/60 [00:00<00:00, 179.11it/s]Animation 35: UpdateFromAlphaFunc(Arc), etc.:  60%|######    | 36/60 [00:00<00:00, 161.16it/s]Animation 35: UpdateFromAlphaFunc(Arc), etc.:  88%|########8 | 53/60 [00:00<00:00, 162.22it/s]                                                                                              [11/15/26 17:55:35] INFO     Animation 35 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00035.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 36: UpdateFromAlphaFunc(Arc), etc.:   0%|          | 0/60 [00:00<?, ?it/s]Animation 36: UpdateFromAlphaFunc(Arc), etc.:  32%|###1      | 19/60 [00:00<00:00, 184.45it/s]Animation 36: UpdateFromAlphaFunc(Arc), etc.:  63%|######3   | 38/60 [00:00<00:00, 166.16it/s]Animation 36: UpdateFromAlphaFunc(Arc), etc.:  92%|#########1| 55/60 [00:00<00:00, 164.39it/s]                                                                                              [11/15/26 17:55:36] INFO     Animation 36 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00036.mp4'                           
+QUESTION 02-question t=00:14 (14.82) reponse=2
+ECRAN 02b-reponse t=00:28 (28.68)
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:37] INFO     Animation 37 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00037.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 38: _MethodAnimation(RoundedRectangle), etc.:   0%|          | 0/18 [00:00<?, ?it/s]Animation 38: _MethodAnimation(RoundedRectangle), etc.:  39%|###8      | 7/18 [00:00<00:00, 63.33it/s]Animation 38: _MethodAnimation(RoundedRectangle), etc.:  78%|#######7  | 14/18 [00:00<00:00, 61.98it/s]                                                                                                                           INFO     Animation 38 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00038.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 39: _MethodAnimation(VGroup of 2 submobjects), etc.:   0%|          | 0/15 [00:00<?, ?it/s]Animation 39: _MethodAnimation(VGroup of 2 submobjects), etc.:  87%|########6 | 13/15 [00:00<00:00, 122.26it/s]                                                                                                               [11/15/26 17:55:38] INFO     Animation 39 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00039.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 40: _MethodAnimation(VGroup of 2 submobjects), etc.:   0%|          | 0/12 [00:00<?, ?it/s]Animation 40: _MethodAnimation(VGroup of 2 submobjects), etc.:  83%|########3 | 10/12 [00:00<00:00, 96.50it/s]                                                                                                                                  INFO     Animation 40 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00040.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 41: FadeIn(Text('Une pyramide')):   0%|          | 0/18 [00:00<?, ?it/s]Animation 41: FadeIn(Text('Une pyramide')):  72%|#######2  | 13/18 [00:00<00:00, 122.59it/s]                                                                                                                INFO     Animation 41 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00041.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 42: FadeIn(Text('= le tiers :')):   0%|          | 0/18 [00:00<?, ?it/s]Animation 42: FadeIn(Text('= le tiers :')):  67%|######6   | 12/18 [00:00<00:00, 117.72it/s]                                                                                            [11/15/26 17:55:39] INFO     Animation 42 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00042.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 43: FadeIn(Text('60')):   0%|          | 0/18 [00:00<?, ?it/s]                                                                                            INFO     Animation 43 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00043.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 44: FadeIn(Text('÷ 3')):   0%|          | 0/18 [00:00<?, ?it/s]                                                                                             INFO     Animation 44 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00044.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 45: FadeIn(Text('= 20 cm³')):   0%|          | 0/18 [00:00<?, ?it/s]Animation 45: FadeIn(Text('= 20 cm³')):  94%|#########4| 17/18 [00:00<00:00, 158.09it/s]                                                                                        [11/15/26 17:55:40] INFO     Animation 45 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00045.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 46: FadeIn(Text('chacune.')):   0%|          | 0/18 [00:00<?, ?it/s]Animation 46: FadeIn(Text('chacune.')):  78%|#######7  | 14/18 [00:00<00:00, 137.74it/s]                                                                                                            INFO     Animation 46 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00046.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:46] INFO     Animation 47 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00047.mp4'                           
+ECRAN 03-visuel t=00:41 (41.65)
+[11/15/26 17:55:47] INFO     Caching disabled.             cairo_renderer.py:81
+                    INFO     Animation 48 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00048.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 49: FadeIn(VGroup of 4 submobjects), etc.:   0%|          | 0/30 [00:00<?, ?it/s]Animation 49: FadeIn(VGroup of 4 submobjects), etc.:  40%|####      | 12/30 [00:00<00:00, 110.17it/s]Animation 49: FadeIn(VGroup of 4 submobjects), etc.:  80%|########  | 24/30 [00:00<00:00, 104.89it/s]                                                                                                                         INFO     Animation 49 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00049.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:48] INFO     Animation 50 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00050.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 51: FadeIn(VGroup of 4 submobjects), etc.:   0%|          | 0/30 [00:00<?, ?it/s]Animation 51: FadeIn(VGroup of 4 submobjects), etc.:  40%|####      | 12/30 [00:00<00:00, 109.35it/s]Animation 51: FadeIn(VGroup of 4 submobjects), etc.:  77%|#######6  | 23/30 [00:00<00:00, 100.33it/s]                                                                                                                         INFO     Animation 51 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00051.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:49] INFO     Animation 52 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00052.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 53: FadeIn(VGroup of 4 submobjects), etc.:   0%|          | 0/30 [00:00<?, ?it/s]Animation 53: FadeIn(VGroup of 4 submobjects), etc.:  37%|###6      | 11/30 [00:00<00:00, 100.90it/s]Animation 53: FadeIn(VGroup of 4 submobjects), etc.:  73%|#######3  | 22/30 [00:00<00:00, 98.53it/s]                                                                                                                         INFO     Animation 53 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00053.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:50] INFO     Animation 54 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00054.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 55: FadeIn(Text('le prisme est vide !')):   0%|          | 0/24 [00:00<?, ?it/s]Animation 55: FadeIn(Text('le prisme est vide !')):  50%|#####     | 12/24 [00:00<00:00, 114.83it/s]Animation 55: FadeIn(Text('le prisme est vide !')): 100%|##########| 24/24 [00:00<00:00, 103.94it/s]                                                                                                    [11/15/26 17:55:51] INFO     Animation 55 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00055.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:52] INFO     Animation 56 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00056.mp4'                           
+ECRAN 04-commentaire t=00:47 (47.82)
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 57: FadeIn(Text('À toi !')):   0%|          | 0/24 [00:00<?, ?it/s]Animation 57: FadeIn(Text('À toi !')):  71%|#######   | 17/24 [00:00<00:00, 160.88it/s]                                                                                                           INFO     Animation 57 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00057.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:53] INFO     Animation 58 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00058.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 59: FadeIn(VGroup of 4 submobjects), etc.:   0%|          | 0/30 [00:00<?, ?it/s]Animation 59: FadeIn(VGroup of 4 submobjects), etc.:  37%|###6      | 11/30 [00:00<00:00, 100.01it/s]Animation 59: FadeIn(VGroup of 4 submobjects), etc.:  73%|#######3  | 22/30 [00:00<00:00, 101.07it/s]                                                                                                                         INFO     Animation 59 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00059.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:55] INFO     Animation 60 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00060.mp4'                           
+[11/15/26 17:55:56] INFO     Caching disabled.             cairo_renderer.py:81
+Animation 61: FadeIn(VGroup of 4 submobjects), etc.:   0%|          | 0/30 [00:00<?, ?it/s]Animation 61: FadeIn(VGroup of 4 submobjects), etc.:  53%|#####3    | 16/30 [00:00<00:00, 158.77it/s]                                                                                                                         INFO     Animation 61 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00061.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:55:58] INFO     Animation 62 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00062.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 63: FadeIn(VGroup of 2 submobjects):   0%|          | 0/24 [00:00<?, ?it/s]Animation 63: FadeIn(VGroup of 2 submobjects):  42%|####1     | 10/24 [00:00<00:00, 94.39it/s]Animation 63: FadeIn(VGroup of 2 submobjects):  83%|########3 | 20/24 [00:00<00:00, 90.04it/s]                                                                                              [11/15/26 17:55:59] INFO     Animation 63 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00063.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:56:00] INFO     Animation 64 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00064.mp4'                           
+ECRAN 05-abonne t=00:58 (58.88)
+[11/15/26 17:56:01] INFO     Caching disabled.             cairo_renderer.py:81
+Animation 65: Write(Text('Entraîne-toi sur')):   0%|          | 0/24 [00:00<?, ?it/s]Animation 65: Write(Text('Entraîne-toi sur')):  54%|#####4    | 13/24 [00:00<00:00, 127.72it/s]                                                                                                                   INFO     Animation 65 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00065.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:56:02] INFO     Animation 66 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00066.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 67: GrowFromCenter(Text('eleveai.fr')), etc.:   0%|          | 0/30 [00:00<?, ?it/s]Animation 67: GrowFromCenter(Text('eleveai.fr')), etc.:  47%|####6     | 14/30 [00:00<00:00, 136.80it/s]Animation 67: GrowFromCenter(Text('eleveai.fr')), etc.:  93%|#########3| 28/30 [00:00<00:00, 121.76it/s]                                                                                                                            INFO     Animation 67 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00067.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:56:03] INFO     Animation 68 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00068.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 69: FadeIn(Text('Abonne-toi !')), etc.:   0%|          | 0/27 [00:00<?, ?it/s]Animation 69: FadeIn(Text('Abonne-toi !')), etc.:  41%|####      | 11/27 [00:00<00:00, 102.50it/s]Animation 69: FadeIn(Text('Abonne-toi !')), etc.:  81%|########1 | 22/27 [00:00<00:00, 99.32it/s]                                                                                                  [11/15/26 17:56:04] INFO     Animation 69 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00069.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:56:05] INFO     Animation 70 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00070.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+Animation 71: FadeIn(Text('Un pouce · La cloche')), etc.:   0%|          | 0/27 [00:00<?, ?it/s]Animation 71: FadeIn(Text('Un pouce · La cloche')), etc.:  41%|####      | 11/27 [00:00<00:00, 104.23it/s]Animation 71: FadeIn(Text('Un pouce · La cloche')), etc.:  81%|########1 | 22/27 [00:00<00:00, 100.91it/s]                                                                                                                              INFO     Animation 71 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00071.mp4'                           
+                    INFO     Caching disabled.             cairo_renderer.py:81
+[11/15/26 17:56:06] INFO     Animation 72 : Partial    scene_file_writer.py:192
+                             movie file written in                             
+                             'C:\Users\acade\Documents                         
+                             \eleveai\eleveai-app\mani                         
+                             m\scripts\4e\media-hd-4e-                         
+                             volume-pyramide-short\vid                         
+                             eos\4e_volume_pyramide_sh                         
+                             ort\1920p60\partial_movie                         
+                             _files\ShortVolumePyramid                         
+                             e4e\uncached_00072.mp4'                           
+[11/15/26 17:56:07] INFO     Combining to Movie file.  scene_file_writer.py:952
+[11/15/26 17:56:09] WARNING  Some options were not    scene_file_writer.py:1018
+                             used: {'shortest': '1',                           
+                             'metadata':                                       
+                             'comment=Rendered with                            
+                             Manim Community                                   
+                             v0.21.0'}                                         
+                    INFO                              scene_file_writer.py:1103
+                             File ready at                                     
+                             'C:\Users\acade\Document                          
+                             s\eleveai\eleveai-app\ma                          
+                             nim\scripts\4e\media-hd-                          
+                             4e-volume-pyramide-short                          
+                             \videos\4e_volume_pyrami                          
+                             de_short\1920p60\eleveai                          
+                             -maths-4e-volume-pyramid                          
+                             e-short.mp4'                                      
+                                                                               
+                    INFO     Rendered ShortVolumePyramide4e        scene.py:290
+                             Played 73 animations                              
+You are using manim version v0.21.0, but version v0.22.1 is available.
+You should consider upgrading via pip install -U manim

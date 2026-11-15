@@ -1,0 +1,16 @@
+{
+  "00-garde": "La section plane. Quelle forme apparaît quand on coupe un solide ?",
+  "01-situation": "Voici Naïma. Elle est manipulatrice en radiologie : elle règle le scanner. Le scanner ne coupe rien pour de vrai : il fabrique des images de tranches. Chaque tranche est une section.",
+  "02-definition": "Couper un solide par un plan, c'est le trancher. La section, c'est la surface plate qu'on voit sur la tranche, vue à plat.",
+  "03-le-cylindre": "Naïma scanne un bras, qui ressemble à un cylindre. Elle coupe en travers, parallèlement à la base : la section est un disque. Si elle coupait dans la longueur, elle verrait un rectangle.",
+  "04-le-muscle": "Et cette section sert à quelque chose. La force d'un muscle dépend de l'aire de sa section, pas de sa longueur. Deux fois plus large, ce n'est pas deux fois plus fort.",
+  "05-question": "Question ! On coupe un cylindre parallèlement à sa base. La section est… A : un disque. B : un rectangle. C : un triangle. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Une coupe parallèle à la base d'un cylindre donne un disque, de la même taille que la base.",
+  "06-piege": "Attention au piège ! La forme de la section dépend de l'orientation de la coupe. Le même cylindre donne un disque en travers, et un rectangle dans la longueur. Ce n'est pas le solide qui décide tout seul.",
+  "07-question": "Question ! On coupe un pavé droit parallèlement à une face. La section est… A : un triangle. B : un rectangle. C : un disque. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Un rectangle, identique à la face à laquelle la coupe est parallèle.",
+  "08-defi": "À toi de jouer ! Naïma scanne une cuisse. La section du muscle est un disque de 4 centimètres de rayon. Chez un sportif, le rayon est de 6 centimètres. De combien l'aire de la section est-elle multipliée ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Première section : pi fois 4 fois 4, 16 pi. Deuxième : pi fois 6 fois 6, 36 pi. 36 divisé par 16, c'est 2,25. L'aire est multipliée par 2,25, alors que le rayon n'est multiplié que par 1,5.",
+  "09-finale": "Ce que tu as appris. La section est la surface plane obtenue en coupant un solide. Sa forme dépend de l'orientation de la coupe. Une coupe parallèle à la base garde la forme de la base.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

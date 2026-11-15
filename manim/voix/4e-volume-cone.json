@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le volume d'un cône. Combien de glace tient dans un cornet ?",
+  "01-situation": "Voici Malo. Il est glacier. Ses cornets sont des cônes. Pour savoir combien de glace il prépare chaque matin, il doit calculer le volume d'un cornet.",
+  "02-le-tiers": "Le cône, c'est comme la pyramide : il tient trois fois dans le cylindre de même base et de même hauteur. Malo le montre avec du sable. Une fois. Deux fois. Trois fois. Le cylindre est plein.",
+  "03-formule": "La base d'un cône est un disque. Son aire : pi fois le rayon, fois le rayon. Volume du cône : pi fois le rayon, fois le rayon, fois la hauteur, divisé par 3.",
+  "04-exemple": "Le cornet de Malo : 3 centimètres de rayon, 12 centimètres de hauteur. Le disque de base : pi fois 3 fois 3, 9 pi centimètres carrés. On multiplie par 12 : 108 pi. On divise par 3 : 36 pi centimètres cubes. Environ 113 centimètres cubes.",
+  "05-question": "Question ! Un cône a un rayon de 2 centimètres et une hauteur de 9 centimètres. Quel est son volume ? A : 12 pi centimètres cubes. B : 36 pi centimètres cubes. C : 6 pi centimètres cubes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Pi fois 2 fois 2, 4 pi. Fois 9, 36 pi. Divisé par 3 : 12 pi centimètres cubes. 36 pi, c'est l'oubli du divisé par 3.",
+  "06-piege": "Attention au piège ! Quand on te donne le diamètre, ce n'est pas le rayon. Le rayon, c'est la moitié du diamètre. Un cornet de 6 centimètres de diamètre a 3 centimètres de rayon.",
+  "07-question": "Question ! Un cornet de 6 centimètres de diamètre et de 10 centimètres de hauteur. Quel est son volume ? A : 120 pi centimètres cubes. B : 30 pi centimètres cubes. C : 90 pi centimètres cubes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Le rayon vaut 3. Pi fois 3 fois 3, 9 pi. Fois 10, 90 pi. Divisé par 3 : 30 pi centimètres cubes. 120 pi, c'est le diamètre pris pour le rayon.",
+  "08-defi": "À toi de jouer ! Malo prépare 60 cornets. Chaque cornet fait environ 113 centimètres cubes. Un bac de glace contient 5 litres. Un seul bac suffit-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 60 cornets : 113 fois 60, 6 780 centimètres cubes. Un litre fait mille centimètres cubes, donc 5 litres font 5 000 centimètres cubes. 6 780, c'est plus que 5 000 : un seul bac ne suffit pas.",
+  "09-finale": "Ce que tu as appris. Le cône tient trois fois dans le cylindre de même base et de même hauteur. Son volume : pi fois le rayon, fois le rayon, fois la hauteur, divisé par 3. Le rayon est la moitié du diamètre.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

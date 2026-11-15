@@ -1,0 +1,16 @@
+{
+  "00-garde": "Calculer une longueur dans une section. Où se cache le triangle rectangle ?",
+  "01-situation": "Voici Maëlle. Elle est pilote de ligne. En vol, elle se repère dans l'espace : une position au sol et une altitude. Pour calculer une distance, elle ramène toujours le problème à un plan.",
+  "02-ramener-au-plan": "La méthode est toujours la même : on dessine la section à plat, on y place les longueurs connues, et on cherche le triangle rectangle.",
+  "03-la-diagonale": "Dans une section rectangulaire de 6 sur 8, la diagonale ferme un triangle rectangle. 6 au carré plus 8 au carré, 36 plus 64, 100. La racine de 100, c'est 10.",
+  "04-la-sphere": "Dans une sphère, c'est le même triangle : le rayon de la sphère est l'hypoténuse, la distance au centre et le rayon de la section sont les côtés de l'angle droit.",
+  "05-question": "Question ! Dans une section rectangulaire de 6 centimètres sur 8, combien mesure la diagonale ? A : 14 centimètres. B : 48 centimètres. C : 10 centimètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. 36 plus 64, 100 ; la racine de 100, c'est 10 centimètres. 14, c'est 6 plus 8 : on n'additionne pas les côtés.",
+  "06-piege": "Attention au piège ! Le théorème de Pythagore ne s'applique que dans un plan. Il faut d'abord dessiner la section, puis y travailler à plat.",
+  "07-question": "Question ! Une sphère de rayon 13 est coupée en un cercle de rayon 5. À quelle distance du centre est le plan ? A : 12. B : 8. C : 18. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 13 au carré moins 5 au carré, 169 moins 25, 144. La racine de 144, c'est 12. 8, c'est 13 moins 5.",
+  "08-defi": "À toi de jouer ! Maëlle survole un point à 9 kilomètres d'altitude. L'aéroport est à 40 kilomètres devant elle, au sol. Quelle distance la sépare de l'aéroport en ligne droite ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le triangle rectangle : 40 au carré plus 9 au carré, 1 600 plus 81, 1 681. La racine de 1 681, c'est 41. L'aéroport est à 41 kilomètres en ligne droite, à peine un de plus qu'au sol.",
+  "09-finale": "Ce que tu as appris. On ramène toujours le calcul à une section dessinée à plat. On y cherche le triangle rectangle. Et on applique Pythagore dans ce plan, jamais dans l'espace.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

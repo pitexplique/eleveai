@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Un cube de 6 centimètres d'arête. On trace la diagonale d'une de ses faces.",
+  "01-defi": "Combien mesure cette diagonale ?",
+  "02-question": "Question ! A : 12 centimètres. B : environ 8,5 centimètres. C : 6 centimètres. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 36 plus 36, 72. La racine de 72, environ 8,5 centimètres. 12, c'est 6 plus 6.",
+  "03-visuel": "La face est un carré : sa diagonale dépasse toujours son côté.",
+  "04-commentaire": "À toi : un carré de 10 centimètres de côté. Combien mesure sa diagonale ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

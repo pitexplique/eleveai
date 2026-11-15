@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Ton gobelet conique est rempli jusqu'à la moitié de sa hauteur.",
+  "01-defi": "Tu as payé plein tarif. As-tu vraiment la moitié de la boisson ?",
+  "02-question": "Question ! A : oui, la moitié. B : non, un huitième. C : non, un quart. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! La moitié de la hauteur, c'est un rapport d'un demi : le volume est divisé par 2 fois 2 fois 2, soit 8. Un huitième.",
+  "03-visuel": "La moitié de la hauteur, un huitième de la boisson.",
+  "04-commentaire": "À toi : rempli au tiers de la hauteur, quelle part du volume ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

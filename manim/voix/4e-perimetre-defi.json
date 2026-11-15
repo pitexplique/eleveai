@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défis sur les périmètres. Combien de grillage pour un enclos ?",
+  "01-situation": "Voici Thierry. Il est éleveur. Il veut agrandir l'enclos de ses chèvres. Le grillage coûte cher : il doit calculer juste, sans en commander trop ni trop peu.",
+  "02-le-demi-disque": "Le premier enclos est un demi-disque de 10 mètres de rayon. Attention : le tour d'un demi-disque, ce n'est pas seulement l'arc. C'est l'arc, plus le diamètre qui le ferme.",
+  "03-calcul": "L'arc : pi fois 20, divisé par 2, soit 10 pi mètres, environ 31,4. Le diamètre : 20 mètres. Le tour complet : 31,4 plus 20, environ 51,4 mètres.",
+  "04-comparer": "Thierry hésite avec un enclos carré de même aire. Un carré de 400 mètres carrés a un côté de 20 mètres, donc un tour de 80 mètres. Même place pour les chèvres, bien plus de grillage.",
+  "05-question": "Question ! Le tour d'un demi-disque de 10 mètres de rayon, c'est… A : 10 pi mètres. B : 20 pi mètres. C : 10 pi plus 20 mètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. L'arc fait 10 pi mètres, et le diamètre de 20 mètres ferme la figure : il est sur le contour, il compte.",
+  "06-piege": "Attention au piège ! Deux enclos de même aire n'ont pas le même tour. Plus la figure est ronde, moins il faut de grillage pour la même surface.",
+  "07-question": "Question ! Un enclos carré a une aire de 400 mètres carrés. Quel est son côté ? A : 100 mètres. B : 20 mètres. C : 40 mètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 20 fois 20, 400 mètres carrés. 100, c'est 400 divisé par 4 : ce serait le quart du tour, pas le côté.",
+  "08-defi": "À toi de jouer ! Thierry a 100 mètres de grillage. Il hésite entre un enclos carré et un enclos rond, en utilisant tout le grillage. Lequel donne le plus de place à ses chèvres ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le carré : 100 divisé par 4, côté 25 mètres. Son aire : 25 fois 25, 625 mètres carrés. Le rond : 100 égale 2 fois pi fois le rayon, donc le rayon vaut environ 15,9 mètres. Son aire : pi fois 15,9 fois 15,9, environ 796 mètres carrés. Le rond gagne, de 170 mètres carrés.",
+  "09-finale": "Ce que tu as appris. Le tour d'un demi-disque comprend son diamètre. À grillage égal, le rond donne plus de place que le carré. Et l'aire ne se déduit jamais du périmètre tout seul.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

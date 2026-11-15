@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Même prix : un cornet de 3 centimètres de rayon et 12 de haut, ou un pot de 3 centimètres de rayon et 4 de haut.",
+  "01-defi": "Le cornet est bien plus haut. Alors, lequel contient le plus de glace ?",
+  "02-question": "Question ! A : le cornet. B : le pot. C : les deux pareil. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! Le cornet : 9 pi fois 12, divisé par 3, 36 pi. Le pot : 9 pi fois 4, 36 pi aussi. Exactement la même glace.",
+  "03-visuel": "Trois fois plus haut, mais divisé par 3 : ça s'annule.",
+  "04-commentaire": "À toi : un cône de 2 centimètres de rayon et 6 de haut. Quelle hauteur doit avoir le pot de même rayon pour contenir autant ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
