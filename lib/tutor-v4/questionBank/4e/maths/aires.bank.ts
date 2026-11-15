@@ -35,6 +35,7 @@ import type {
   TriangleCanvasData,
 } from "@/lib/tutor-v4/types_canvas";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
+import { lirePave } from "@/lib/tutor-v4/paveNumerique";
 
 type Q = TutorGeneratedQuestionV4;
 
@@ -88,6 +89,13 @@ function U2(u: string): string {
 const lg = (x: number, u: string) => `${N(x)} ${u}`;
 const ar = (x: number, u: string) => `${N(x)} ${U2(u)}`;
 const ans = (x: number) => String(arrondi(x));
+/** Unité d’aire en texte simple, pour `expected` et les choix de QCM : « cm² », « ha ». */
+const U2t = (u: string) => (u === "unités" ? "unités²" : u === "ha" || u === "ares" ? u : `${u}²`);
+/** Réponse d’aire avec son unité (lue par le pavé) : « 12,5 cm² ». */
+const rep = (x: number, u: string) => `${ans(x).replace(".", ",")} ${U2t(u)}`;
+/** Choix de QCM en texte simple : aire « 24 cm² », longueur « 20 cm ». */
+const chA = (x: number, u: string) => `${fr(x)} ${U2t(u)}`;
+const chL = (x: number, u: string) => `${fr(x)} ${u}`;
 /** « de » + unité, avec élision : « d’ares », « de $\text{m}^2$ ». */
 const deU = (s: string) => (/^[aeiouy]/i.test(s) ? "d’" + s : "de " + s);
 
@@ -210,6 +218,22 @@ function figureLibreFromCells(
   };
 }
 
+/**
+ * Deux rectangles (lignes × colonnes) sur un même quadrillage, séparés d’une
+ * case : l’un sous l’autre (`empiles`) ou côte à côte. Même échelle pour les deux.
+ */
+function deuxFormesGrille(r1: [number, number], r2: [number, number], empiles: boolean): FigureLibreCanvasData {
+  const cells: GridCell[] = [];
+  for (let i = 0; i < r1[0]; i++) for (let j = 0; j < r1[1]; j++) cells.push([i, j]);
+  const [di, dj] = empiles ? [r1[0] + 1, 0] : [0, r1[1] + 1];
+  for (let i = 0; i < r2[0]; i++) for (let j = 0; j < r2[1]; j++) cells.push([di + i, dj + j]);
+  const rows = empiles ? r1[0] + 1 + r2[0] : Math.max(r1[0], r2[0]);
+  const cols = empiles ? Math.max(r1[1], r2[1]) : r1[1] + 1 + r2[1];
+  const fig = figureLibreFromCells(rows, cols, cells, false);
+  const cell = Math.max(10, Math.min(24, Math.floor(280 / cols), Math.floor(260 / rows)));
+  return { ...fig, size: { cellSize: cell, padding: 16, width: cols * cell + 32, height: rows * cell + 32 } };
+}
+
 type Forme = { rows: number; cols: number; cells: GridCell[]; dUne: string; deForme: string };
 
 /** Une forme sur quadrillage (au plus 5 lignes et 7 colonnes : lisible à 375 px). */
@@ -262,7 +286,14 @@ function formeGrille(sortes: readonly string[]): Forme {
 --------------------------------------------------------------------------- */
 
 /** Rectangle (ou carré) ABCD, A en haut à gauche ; étiquettes avec unité. */
-function rectCanvas(L: number, l: number, u: string, nom: string, carre = false): QuadrilatereCanvasData {
+function rectCanvas(
+  L: number,
+  l: number,
+  u: string,
+  nom: string,
+  carre = false,
+  etiq?: Partial<Record<"AB" | "BC", string>>
+): QuadrilatereCanvasData {
   const ratio = Math.min(Math.max(L, l) / Math.min(L, l), 3);
   const grand = Math.min(210, 130 * ratio);
   const petit = grand / ratio;
@@ -278,7 +309,9 @@ function rectCanvas(L: number, l: number, u: string, nom: string, carre = false)
       D: { x: x0, y: y0 + h },
     },
     labels: { A: nom[0], B: nom[1], C: nom[2], D: nom[3] },
-    sideLabels: carre ? { AB: `${fr(L)} ${u}` } : { AB: `${fr(L)} ${u}`, BC: `${fr(l)} ${u}` },
+    sideLabels: etiq
+      ? { ...etiq }
+      : carre ? { AB: `${fr(L)} ${u}` } : { AB: `${fr(L)} ${u}`, BC: `${fr(l)} ${u}` },
     display: { showPoints: true, showLabels: true, showSides: true, showAngles: false, showDiagonals: false },
     marks: carre
       ? { rightAnglesAt: ["A", "B", "C", "D"], equalSides: [["AB", "BC"], ["BC", "CD"], ["CD", "DA"]] }
@@ -406,19 +439,22 @@ const QUADRILLAGES: readonly Nom[] = [
 function genAireOuPerimetreGrille(): Q {
   const h = randomInt(2, 4), w = randomInt(2, 5);
   const cells = rectangleCells(h, w);
-  const o = randomChoice(QUADRILLAGES);
+  // ⛔ 15/11/2026 : ★1 = court et sans contexte (≤ 12 mots) ; les objets
+  // (mosaïque, damier…) restent dans QUADRILLAGES pour d’autres gabarits.
   const perimetre = 2 * (h + w);
   const canvas = figureLibreFromCells(h, w, cells, false);
+  const quoi = h === w ? "ce carré" : "ce rectangle";
   if (Math.random() < 0.6) {
     return {
       text: randomChoice([
-        `${cap(un(o))} est formé${eF(o)} de petits carrés de $1$ unité de côté. Quelle est son AIRE, en unités² ?`,
-        `Quelle est l’aire ${duN(o)} ci-contre, en unités² ? Chaque petit carré mesure $1$ unité de côté.`,
-        `Chaque carreau ${duN(o)} ci-contre mesure $1$ unité de côté. Combien d’unités² couvre-t-${ilN(o)} ?`,
-        `On veut connaître la surface ${duN(o)} dessiné${eF(o)} ci-contre. Chaque petit carré vaut $1$ unité². Quelle est cette aire ?`,
+        `Un carreau vaut $1$ unité². Calcule l’aire de la figure.`,
+        `Compte les carreaux : quelle est l’aire de la figure ?`,
+        `Calcule l’aire de la figure, en unités².`,
+        `Quelle est l’aire de ${quoi}, en unités² ?`,
+        `Donne l’aire de ${quoi} en unités².`,
       ]),
       format: "short",
-      expected: [String(cells.length)],
+      expected: [`${cells.length} unités²`],
       comparator: "number_equal",
       explanation:
         "Définition : l'aire est le nombre de carrés unité qui recouvrent la surface.\n\n" +
@@ -430,13 +466,14 @@ function genAireOuPerimetreGrille(): Q {
   }
   return {
     text: randomChoice([
-      `${cap(un(o))} est formé${eF(o)} de petits carrés de $1$ unité de côté. Quel est son PÉRIMÈTRE, en unités ?`,
-      `On fait le tour ${duN(o)} ci-contre en suivant son bord. Chaque petit carré mesure $1$ unité de côté. Quelle est la longueur de ce tour, en unités ?`,
-      `Chaque carreau ${duN(o)} ci-contre mesure $1$ unité de côté. Quelle longueur de ruban faut-il pour en faire exactement le tour, en unités ?`,
-      `Quel est le périmètre ${duN(o)} ci-contre, en unités, si le côté d’un carreau mesure $1$ unité ?`,
+      `Calcule le périmètre de la figure, en unités.`,
+      `Quel est le périmètre de ${quoi}, en unités ?`,
+      `Un carreau a $1$ unité de côté. Calcule le périmètre.`,
+      `Compte les côtés du bord : quel est le périmètre ?`,
+      `Donne le périmètre de ${quoi} en unités.`,
     ]),
     format: "short",
-    expected: [String(perimetre)],
+    expected: [`${perimetre} unités`],
     comparator: "number_equal",
     explanation:
       "Définition : le périmètre est la longueur du TOUR de la figure, pas la surface qu'elle couvre.\n\n" +
@@ -501,13 +538,13 @@ const UNITES_OBJETS: readonly { quoi: string; u: string; exclus: string[] }[] = 
   { quoi: "un pays", u: "km²", exclus: ["ha"] },
   { quoi: "le sol d’une salle de classe", u: "m²", exclus: [] },
   { quoi: "une feuille de cahier", u: "cm²", exclus: [] },
-  { quoi: "un terrain de football", u: "m²", exclus: ["ha"] },
+  { quoi: "un stade de football", u: "m²", exclus: ["ha"] },
   { quoi: "un champ de blé", u: "ha", exclus: ["m²", "km²"] },
   { quoi: "une puce électronique", u: "mm²", exclus: [] },
   { quoi: "un timbre-poste", u: "cm²", exclus: ["mm²"] },
   { quoi: "une île comme la Corse", u: "km²", exclus: [] },
   { quoi: "un grand lac", u: "km²", exclus: ["ha"] },
-  { quoi: "une pelouse de jardin", u: "m²", exclus: [] },
+  { quoi: "une pelouse", u: "m²", exclus: [] },
   { quoi: "une carte bancaire", u: "cm²", exclus: ["mm²"] },
   { quoi: "un parc national", u: "km²", exclus: ["ha"] },
   { quoi: "un appartement", u: "m²", exclus: [] },
@@ -521,14 +558,13 @@ const UNITES_OBJETS: readonly { quoi: string; u: string; exclus: string[] }[] = 
 /** ★2 — quelle unité d’aire convient ? */
 function genUniteAdaptee(): Q {
   const o = randomChoice(UNITES_OBJETS);
-  const [p, pr] = randomChoice(PRENOMS);
   const leurres = ["mm²", "cm²", "m²", "ha", "km²", "cm", "m", "m³"].filter((x) => x !== o.u && !o.exclus.includes(x));
   return {
     text: randomChoice([
       `Quelle unité choisir pour exprimer l’aire ${deGN(o.quoi)} ?`,
       `Pour donner la surface ${deGN(o.quoi)}, on utilise plutôt…`,
-      `Laquelle de ces unités convient le mieux pour mesurer l’aire ${deGN(o.quoi)} ?`,
-      `${p} veut indiquer la surface ${deGN(o.quoi)}. Quelle unité doit-${pr} choisir ?`,
+      `Quelle unité convient le mieux pour l’aire ${deGN(o.quoi)} ?`,
+      `Choisis l’unité adaptée à l’aire ${deGN(o.quoi)}.`,
     ]),
     format: "qcm",
     choices: makeChoices(o.u, leurres),
@@ -542,15 +578,15 @@ function genUniteAdaptee(): Q {
   };
 }
 
-const CONVERSIONS: readonly { de: string; vers: string; f: number; pourquoi: string }[] = [
-  { de: "m", vers: "cm", f: 10000, pourquoi: "$1$ m $= 100$ cm, donc $1\\ \\text{m}^2 = 100 \\times 100 = 10\\,000\\ \\text{cm}^2$" },
-  { de: "m", vers: "dm", f: 100, pourquoi: "$1$ m $= 10$ dm, donc $1\\ \\text{m}^2 = 10 \\times 10 = 100\\ \\text{dm}^2$" },
-  { de: "dm", vers: "cm", f: 100, pourquoi: "$1$ dm $= 10$ cm, donc $1\\ \\text{dm}^2 = 100\\ \\text{cm}^2$" },
-  { de: "cm", vers: "mm", f: 100, pourquoi: "$1$ cm $= 10$ mm, donc $1\\ \\text{cm}^2 = 100\\ \\text{mm}^2$" },
-  { de: "ha", vers: "m", f: 10000, pourquoi: "$1$ ha est l’aire d’un carré de $100$ m de côté : $100 \\times 100 = 10\\,000\\ \\text{m}^2$" },
-  { de: "km", vers: "ha", f: 100, pourquoi: "$1\\ \\text{km}^2 = 1\\,000\\,000\\ \\text{m}^2$ et $1$ ha $= 10\\,000\\ \\text{m}^2$, donc $1\\ \\text{km}^2 = 100$ ha" },
+const CONVERSIONS: readonly { de: string; vers: string; f: number; pourquoi: string; cote?: string }[] = [
+  { de: "m", vers: "cm", f: 10000, pourquoi: "$1$ m $= 100$ cm, donc $1\\ \\text{m}^2 = 100 \\times 100 = 10\\,000\\ \\text{cm}^2$", cote: "1 m = 100 cm" },
+  { de: "m", vers: "dm", f: 100, pourquoi: "$1$ m $= 10$ dm, donc $1\\ \\text{m}^2 = 10 \\times 10 = 100\\ \\text{dm}^2$", cote: "1 m = 10 dm" },
+  { de: "dm", vers: "cm", f: 100, pourquoi: "$1$ dm $= 10$ cm, donc $1\\ \\text{dm}^2 = 100\\ \\text{cm}^2$", cote: "1 dm = 10 cm" },
+  { de: "cm", vers: "mm", f: 100, pourquoi: "$1$ cm $= 10$ mm, donc $1\\ \\text{cm}^2 = 100\\ \\text{mm}^2$", cote: "1 cm = 10 mm" },
+  { de: "ha", vers: "m", f: 10000, pourquoi: "$1$ ha est l’aire d’un carré de $100$ m de côté : $100 \\times 100 = 10\\,000\\ \\text{m}^2$", cote: "100 m" },
+  { de: "km", vers: "ha", f: 100, pourquoi: "$1\\ \\text{km}^2 = 1\\,000\\,000\\ \\text{m}^2$ et $1$ ha $= 10\\,000\\ \\text{m}^2$, donc $1\\ \\text{km}^2 = 100$ ha", cote: "1 km = 1 000 m" },
   { de: "ha", vers: "ares", f: 100, pourquoi: "$1$ ha $= 100$ ares" },
-  { de: "ares", vers: "m", f: 100, pourquoi: "$1$ are est l’aire d’un carré de $10$ m de côté : $1$ are $= 100\\ \\text{m}^2$" },
+  { de: "ares", vers: "m", f: 100, pourquoi: "$1$ are est l’aire d’un carré de $10$ m de côté : $1$ are $= 100\\ \\text{m}^2$", cote: "10 m" },
 ];
 
 /** ★2 — conversions d’unités d’aire, dans les deux sens. */
@@ -578,6 +614,8 @@ function genConversionAire(): Q {
       `Méthode : ${c.pourquoi}.\n\n` +
       `Calcul : ${monte ? `$${tx(depart)} \\times ${tx(c.f)} = ${tx(arrivee)}$` : `$${tx(depart)} \\div ${tx(c.f)} = ${tx(arrivee)}$`}.\n\n` +
       `Conclusion : ${N(depart)} ${ud} $=$ ${N(arrivee)} ${ua}.`,
+    // Le carré-unité de départ, son côté converti : la méthode, pas la réponse.
+    ...(c.cote ? { canvas: rectCanvas(1, 1, c.de, randomChoice(NOMS4), true, { AB: c.cote }) } : {}),
   };
 }
 
@@ -739,7 +777,8 @@ function genRectAire(avecFigure: boolean): Q {
       `Méthode : on multiplie ${lg(L, u)} par ${lg(l, u)} ; le résultat est en ${U}.\n\n` +
       `Calcul : $${tx(L)} \\times ${tx(l)} = ${tx(A)}$.\n\n` +
       `Conclusion : l’aire vaut ${ar(A, u)}.`,
-    ...(avecFigure ? { canvas: rectCanvas(L, l, u, nom) } : {}),
+    // 15/11 : le dessin accompagne aussi l’énoncé chiffré (mêmes nombres).
+    canvas: rectCanvas(L, l, u, nom),
   };
 }
 
@@ -789,6 +828,7 @@ function genRectDecimalOuMixte(): Q {
         `Méthode : on multiplie ${lg(L, "m")} par ${lg(l, "m")}.\n\n` +
         `Calcul : $${tx(L)} \\times ${tx(l)} = ${tx(A)}$.\n\n` +
         `Conclusion : la surface vaut ${ar(A, "m")}.`,
+      canvas: rectCanvas(L, l, "m", randomChoice(NOMS4)),
     };
   }
   const o = randomChoice(RECT_MIXTES);
@@ -812,6 +852,7 @@ function genRectDecimalOuMixte(): Q {
         ? `Méthode : on convertit la longueur : ${lg(Lm, "m")} $=$ ${lg(Lm * 100, "cm")}.\n\nCalcul : $${tx(Lm * 100)} \\times ${tx(lcm)} = ${tx(A)}$.\n\n`
         : `Méthode : on convertit la largeur : ${lg(lcm, "cm")} $=$ ${lg(lcm / 100, "m")}.\n\nCalcul : $${tx(Lm)} \\times ${tx(lcm / 100)} = ${tx(A)}$.\n\n`) +
       `Conclusion : l’aire vaut ${N(A)} ${U}.`,
+    canvas: rectCanvas(Lm * 100, lcm, "cm", randomChoice(NOMS4), false, { AB: `${fr(Lm)} m`, BC: `${fr(lcm)} cm` }),
   };
 }
 
@@ -836,13 +877,14 @@ function genRectInverse(): Q {
       `Trouve la ${motCherche} ${dUn(o)} rectangulaire dont l’aire est ${ar(A, u)} et la ${motConnu} ${lg(connu, u)}.`,
     ]),
     format: "short",
-    expected: [ans(cherche)],
+    expected: [`${ans(cherche).replace(".", ",")} ${u}`],
     comparator: "number_equal",
     explanation:
       `Définition : aire $=$ longueur × largeur, donc la dimension cherchée $=$ aire ÷ dimension connue.\n\n` +
       `Méthode : on divise ${ar(A, u)} par ${lg(connu, u)}.\n\n` +
       `Calcul : $${tx(A)} \\div ${tx(connu)} = ${tx(cherche)}$ (vérification : $${tx(connu)} \\times ${tx(cherche)} = ${tx(A)}$).\n\n` +
       `Conclusion : la ${motCherche} mesure ${lg(cherche, u)}.`,
+    canvas: rectCanvas(L, l, u, randomChoice(NOMS4), false, chercheLargeur ? { AB: `${fr(L)} ${u}`, BC: "?" } : { AB: "?", BC: `${fr(l)} ${u}` }),
   };
 }
 
@@ -911,51 +953,48 @@ function genCarreAire(figureParfois: boolean): Q {
       canvas: rectCanvas(c, c, o.u, nom, true),
     };
   }
-  return { text: texteCarreAire(o, c), format: "short", expected: [ans(c * c)], comparator: "number_equal", explanation: explCarre(c, o.u) };
+  return { text: texteCarreAire(o, c), format: "short", expected: [ans(c * c)], comparator: "number_equal", explanation: explCarre(c, o.u), canvas: rectCanvas(c, c, o.u, randomChoice(NOMS4), true) };
 }
 
 /** ★2 — carré : figure nommée, côté décimal, ou aire à partir du périmètre. */
 function genCarreNiveau2(): Q {
-  const o = randomChoice(CARRE_OBJETS);
-  const u = o.u, U = U2(u);
+  // ⛔ 15/11/2026 : ★2 court (≤ 15 mots), sans objet ni prénom, avec la figure.
+  const u = randomChoice(["cm", "cm", "m", "mm", "dm"]);
+  const U = U2(u);
+  const nom = randomChoice(NOMS4);
   const mode = randomInt(0, 2);
   if (mode === 0) {
-    const c = pick(o.c);
+    const c = randomInt(2, 12);
     const P = 4 * c;
-    const [p] = randomChoice(PRENOMS);
     return {
       text: randomChoice([
-        `Le périmètre ${dUn(o)} ${carre(o)} est de ${lg(P, u)}. Quelle est son aire, en ${U} ?`,
-        `Le tour ${dUn(o)} ${carre(o)} mesure ${lg(P, u)}. Que vaut son aire, en ${U} ?`,
-        `${p} fait le tour ${dUn(o)} ${carre(o)} avec un ruban : il faut exactement ${lg(P, u)}. Quelle est l’aire ${duN(o)}, en ${U} ?`,
-        `On connaît seulement le périmètre ${dUn(o)} ${carre(o)} : ${lg(P, u)}. Calcule son aire en ${U}.`,
+        `Un carré a un périmètre de ${lg(P, u)}. Calcule son aire.`,
+        `Le périmètre du carré ${nom} vaut ${lg(P, u)}. Quelle est son aire ?`,
+        `Calcule l’aire d’un carré de périmètre ${lg(P, u)}, en ${U}.`,
+        `Le tour du carré ${nom} mesure ${lg(P, u)}. Trouve son aire en ${U}.`,
       ]),
       format: "short",
-      expected: [ans(c * c)],
+      expected: [rep(c * c, u)],
       comparator: "number_equal",
       explanation:
         "Définition : un carré a quatre côtés égaux ; périmètre $= 4 \\times$ côté, aire $=$ côté × côté.\n\n" +
         `Méthode : on trouve d’abord le côté : $${tx(P)} \\div 4 = ${tx(c)}$.\n\n` +
         `Calcul : $${tx(c)} \\times ${tx(c)} = ${tx(c * c)}$.\n\n` +
         `Conclusion : l’aire vaut ${ar(c * c, u)} (et non ${ar(P, u)} : ${N(P)} est le périmètre).`,
+      canvas: rectCanvas(c, c, u, nom, true, { AB: "?" }),
     };
   }
-  if (mode === 1) {
-    const c = randomInt(1, 9) + 0.5;
-    const oc = randomChoice(CARRE_OBJETS.filter((x) => x.u === "cm"));
-    return { text: texteCarreAire(oc, c), format: "short", expected: [ans(c * c)], comparator: "number_equal", explanation: explCarre(c, "cm") };
-  }
-  const c = pick(o.c);
-  const nom = randomChoice(NOMS4);
+  const c = mode === 1 ? randomInt(1, 9) + 0.5 : randomInt(11, 25);
   return {
     text: randomChoice([
-      `La figure représente ${un(o)} ${carre(o)} ${nom}. Calcule son aire en ${U}.`,
-      `Quelle est l’aire du carré ${nom} ci-contre, en ${U} ?`,
-      `${nom} est un carré dont le côté est indiqué sur la figure. Donne son aire, en ${U}.`,
-      `Calcule l’aire du carré ${nom} : c’est la forme ${dUn(o)}. Réponds en ${U}.`,
+      `Calcule l’aire du carré ${nom}, en ${U}.`,
+      `Quelle est l’aire d’un carré de ${lg(c, u)} de côté ?`,
+      `Le carré ${nom} a ${lg(c, u)} de côté. Calcule son aire.`,
+      `Trouve l’aire du carré ${nom} dessiné, en ${U}.`,
+      `Calcule l’aire d’un carré de côté ${lg(c, u)}, en ${U}.`,
     ]),
     format: "short",
-    expected: [ans(c * c)],
+    expected: [rep(c * c, u)],
     comparator: "number_equal",
     explanation: explCarre(c, u),
     canvas: rectCanvas(c, c, u, nom, true),
@@ -987,7 +1026,8 @@ function genCarreProbleme(): Q {
         `Prix : ${N(prix)} € par ${U2("m")}. Combien faut-il payer pour ${x.action} ${un(x.lieu)} ${carre(x.lieu)} dont le côté mesure ${lg(c, "m")} ?`,
       ]),
       format: "short",
-      expected: [ans(A * prix)],
+      // ⛔ 15/11 : l’unité € dans `expected`, quelle que soit la tournure.
+      expected: [`${ans(A * prix).replace(".", ",")} €`, `${ans(A * prix).replace(".", ",")} euros`],
       comparator: "number_equal",
       explanation:
         "Définition : le coût vaut l’aire × le prix d’un mètre carré.\n\n" +
@@ -1048,7 +1088,7 @@ function genCarreInverse(): Q {
         `Trouve le côté ${dUn(o)} ${carre(o)} d’aire ${ar(A, u)}.`,
       ]),
       format: "short",
-      expected: [ans(c)],
+      expected: [`${ans(c).replace(".", ",")} ${u}`],
       comparator: "number_equal",
       explanation:
         "Définition : aire du carré $=$ côté × côté.\n\n" +
@@ -1064,7 +1104,7 @@ function genCarreInverse(): Q {
       `${p} connaît l’aire de ${son(o)} ${carre(o)} : ${ar(A, u)}. Quel périmètre trouve-t-${pr}, en ${u} ?`,
     ]),
     format: "short",
-    expected: [ans(4 * c)],
+    expected: [`${ans(4 * c).replace(".", ",")} ${u}`],
     comparator: "number_equal",
     explanation:
       "Définition : aire $=$ côté × côté ; périmètre $= 4 \\times$ côté.\n\n" +
@@ -1118,6 +1158,7 @@ function genTriTexte(): Q {
     expected: [ans((b * h) / 2)],
     comparator: "number_equal",
     explanation: explTri(b, h, u),
+    canvas: triCanvas(b, h, arrondi(b * randomChoice([0.25, 0.4, 0.6, 0.75])), u, randomChoice(NOMS3)),
   };
 }
 
@@ -1133,14 +1174,17 @@ function genTriFigure(): Q {
   const oblique = Math.random() < 0.6;
   const U = U2(u);
   return {
+    // ⛔ 15/11/2026 : ★2 court (≤ 15 mots), sans objet ni prénom.
     text: randomChoice([
-      `Dans le triangle ${nom}, la hauteur issue de ${nom[2]} est tracée en pointillés. Calcule l’aire du triangle, en ${U}.`,
-      `Le triangle ${nom} ci-contre représente ${un(o)}. Quelle est son aire, en ${U} ?`,
-      `Sur la figure, [${nom[0]}${nom[1]}] mesure ${lg(b, u)} et la hauteur relative à [${nom[0]}${nom[1]}] mesure ${lg(h, u)}. Calcule l’aire du triangle ${nom}, en ${U}.`,
-      `Quelle est l’aire du triangle ${nom} ? Lis sur la figure la base et la hauteur qui lui correspond, puis réponds en ${U}.`,
+      `Calcule l’aire du triangle ${nom}, en ${U}.`,
+      `Quelle est l’aire du triangle ${nom}, en ${U} ?`,
+      `Lis la base et la hauteur, puis calcule l’aire de ${nom}.`,
+      `Trouve l’aire du triangle ${nom} : choisis bien la hauteur.`,
+      `[${nom[0]}${nom[1]}] mesure ${lg(b, u)} et la hauteur ${lg(h, u)}. Calcule l’aire de ${nom}.`,
     ]),
     format: "short",
-    expected: [ans((b * h) / 2)],
+    // ⛔ 15/11 : l’unité d’aire dans `expected`, même quand la tournure ne la dit pas.
+    expected: [rep((b * h) / 2, u)],
     comparator: "number_equal",
     explanation: explTri(b, h, u, oblique ? ` ⚠️ Le côté [${nom[0]}${nom[2]}] (${lg(s, u)}) n’est pas la hauteur : il n’est pas perpendiculaire à la base.` : ""),
     canvas: triCanvas(b, h, dec, u, nom, oblique ? { oblique: s } : {}),
@@ -1249,6 +1293,7 @@ function genTriErreur(): Q {
           ? ` ⚠️ Erreur : ${N(trouve)} est base × hauteur, on a oublié de diviser par $2$.`
           : ` ⚠️ Erreur : on a pris le côté oblique (${lg(s, u)}) au lieu de la hauteur.`) +
       ` Réponse : ${correct}.`,
+    canvas: triCanvas(b, h, Math.max(1, Math.round((s * s - h * h) ** 0.5)), u, randomChoice(NOMS3), { oblique: s }),
   };
 }
 
@@ -1270,7 +1315,7 @@ function genTriInverse(): Q {
       `Trouve la ${mx} ${dUn(o)} triangulaire dont l’aire est ${ar(A, u)} et la ${mc} ${lg(connu, u)}.`,
     ]),
     format: "short",
-    expected: [ans(cherche)],
+    expected: [`${ans(cherche).replace(".", ",")} ${u}`],
     comparator: "number_equal",
     explanation:
       "Définition : aire du triangle $= \\dfrac{\\text{base} \\times \\text{hauteur}}{2}$, donc base × hauteur $= 2 \\times$ aire.\n\n" +
@@ -1316,40 +1361,47 @@ const explPara = (b: number, h: number, u: string, extra = "") =>
   `Conclusion : l’aire vaut ${ar(b * h, u)}.`;
 
 /** ★2 — parallélogramme : figure nommée ou objet réel. */
-function genParaAire(): Q {
-  const o = randomChoice(PARA_OBJETS);
-  const { b, h, dec, s } = dimsPara(o);
-  const u = o.u, U = U2(u);
-  if (Math.random() < 0.5) {
-    const nom = randomChoice(NOMS4);
-    const oblique = Math.random() < 0.6;
-    return {
-      text: randomChoice([
-        `${nom} est un parallélogramme ; la hauteur issue de ${nom[3]} est tracée. Calcule son aire en ${U}.`,
-        `Le parallélogramme ${nom} ci-contre représente ${un(o)}. Quelle est son aire, en ${U} ?`,
-        `Calcule l’aire du parallélogramme ${nom}, en ${U}. Attention : toutes les longueurs de la figure ne servent pas forcément.`,
-        `Quelle est l’aire du parallélogramme ${nom}, en ${U} ?`,
-      ]),
-      format: "short",
-      expected: [ans(b * h)],
-      comparator: "number_equal",
-      explanation: explPara(b, h, u, oblique ? ` Le côté [${nom[0]}${nom[3]}] (${lg(s, u)}) est penché : ce n’est pas la hauteur.` : ""),
-      canvas: paraCanvas(b, h, dec, oblique ? s : null, u, nom),
-    };
-  }
-  const [p, pr] = randomChoice(PRENOMS);
+function genParaAire(niv: 1 | 2 = 2): Q {
+  // ⛔ 15/11/2026 : ★1-★2 courts (≤ 12 / ≤ 15 mots), sans objet ni prénom,
+  // toujours avec la figure. ★1 : base et hauteur seules ; ★2 : le côté penché
+  // est souvent affiché (le piège), ou la figure se lit sans les nombres.
+  const [dec0, h0, s0] = randomChoice(TRIPLETS);
+  const k = niv === 1 ? 1 : randomChoice([1, 1, 2]);
+  const dec = dec0 * k, h = h0 * k, s = s0 * k;
+  const b = k * randomInt(dec0 + 2, dec0 + 8);
+  const u = randomChoice(["cm", "cm", "m", "mm", "dm"]);
+  const U = U2(u);
+  const nom = randomChoice(NOMS4);
+  const oblique = niv === 2 && Math.random() < 0.6;
+  const text =
+    niv === 1
+      ? randomChoice([
+          `Calcule l’aire du parallélogramme ${nom}, en ${U}.`,
+          `Quelle est l’aire du parallélogramme ${nom} ?`,
+          `Calcule l’aire d’un parallélogramme : base ${lg(b, u)}, hauteur ${lg(h, u)}.`,
+          `Trouve l’aire du parallélogramme ${nom} dessiné, en ${U}.`,
+          `Lis la figure : quelle est l’aire de ${nom} ?`,
+        ])
+      : oblique
+        ? randomChoice([
+            `Calcule l’aire de ${nom}. Toutes les longueurs ne servent pas.`,
+            `Quelle est l’aire du parallélogramme ${nom}, en ${U} ? Attention au côté penché.`,
+            `Trouve l’aire de ${nom} : choisis la base et la bonne hauteur.`,
+            `Calcule l’aire du parallélogramme ${nom}, en ${U}. Un nombre est inutile.`,
+          ])
+        : randomChoice([
+            `Calcule l’aire d’un parallélogramme de base ${lg(b, u)} et de hauteur ${lg(h, u)}.`,
+            `Base ${lg(b, u)}, hauteur ${lg(h, u)} : calcule l’aire de ce parallélogramme.`,
+            `Quelle est l’aire du parallélogramme ${nom}, en ${U} ?`,
+            `Lis la figure et calcule l’aire du parallélogramme ${nom}.`,
+          ]);
   return {
-    text: randomChoice([
-      `${cap(un(o))} en forme de parallélogramme a une base de ${lg(b, u)} et une hauteur relative à cette base de ${lg(h, u)}. Quelle est son aire, en ${U} ?`,
-      `Quelle surface, en ${U}, couvre ${un(o)} en forme de parallélogramme, de base ${lg(b, u)} et de hauteur ${lg(h, u)} ?`,
-      `${p} dessine le plan ${dUn(o)} : un parallélogramme de base ${lg(b, u)} et de hauteur ${lg(h, u)}. Quelle aire doit-${pr} trouver, en ${U} ?`,
-      `La hauteur ${dUn(o)} en forme de parallélogramme mesure ${lg(h, u)}, sa base ${lg(b, u)}. Calcule son aire en ${U}.`,
-      `Calcule l’aire ${dUn(o)} en forme de parallélogramme : base ${lg(b, u)}, hauteur ${lg(h, u)}. Réponds en ${U}.`,
-    ]),
+    text,
     format: "short",
-    expected: [ans(b * h)],
+    expected: [rep(b * h, u)],
     comparator: "number_equal",
-    explanation: explPara(b, h, u),
+    explanation: explPara(b, h, u, oblique ? ` Le côté [${nom[0]}${nom[3]}] (${lg(s, u)}) est penché : ce n’est pas la hauteur.` : ""),
+    canvas: paraCanvas(b, h, dec, oblique ? s : null, u, nom),
   };
 }
 
@@ -1363,6 +1415,7 @@ function genParaPiege(): Q {
     const nom = randomChoice(NOMS4);
     const avecFigure = Math.random() < 0.5;
     return {
+      // 15/11 : la figure accompagne aussi l’énoncé chiffré (mêmes nombres).
       text: avecFigure
         ? randomChoice([
             `Le parallélogramme ${nom} a une base de ${lg(b, u)}, un côté penché de ${lg(s, u)} et une hauteur de ${lg(h, u)}. Quelle est son aire, en ${U} ?`,
@@ -1378,7 +1431,7 @@ function genParaPiege(): Q {
       expected: [ans(b * h)],
       comparator: "number_equal",
       explanation: explPara(b, h, u, ` ⚠️ Le côté penché (${lg(s, u)}) ne sert pas : ${tx(b)} × ${tx(s)} $= ${tx(b * s)}$ serait faux.`),
-      ...(avecFigure ? { canvas: paraCanvas(b, h, dec, s, u, nom) } : {}),
+      canvas: paraCanvas(b, h, dec, s, u, nom),
     };
   }
   // Deux côtés b et s, deux hauteurs : b × h_b = s × h_s.
@@ -1430,10 +1483,11 @@ function genParaProbleme(): Q {
         `Méthode : on calcule en ${U2("m")}, puis on convertit.\n\n` +
         `Calcul : $${tx(b)} \\times ${tx(h)} = ${tx(A)}\\ \\text{m}^2$, puis $${tx(A)} \\div ${enHa ? "10\\,000" : "100"} = ${tx(res)}$.\n\n` +
         `Conclusion : l’aire vaut ${N(res)} ${unite}.`,
+      canvas: paraCanvas(b, h, arrondi(b * 0.3), null, "m", randomChoice(NOMS4)),
     };
   }
   const o = randomChoice(PARA_OBJETS);
-  const { b, h } = dimsPara(o);
+  const { b, h, dec } = dimsPara(o);
   const u = o.u, U = U2(u);
   return {
     text: randomChoice([
@@ -1445,6 +1499,7 @@ function genParaProbleme(): Q {
     expected: [ans(b * h)],
     comparator: "number_equal",
     explanation: explPara(b, h, u),
+    canvas: paraCanvas(b, h, dec, null, u, randomChoice(NOMS4)),
   };
 }
 
@@ -1466,7 +1521,7 @@ function genParaInverse(): Q {
       `Trouve la ${mx} ${dUn(o)} en forme de parallélogramme : aire ${ar(A, u)}, ${mc} ${lg(connu, u)}.`,
     ]),
     format: "short",
-    expected: [ans(cherche)],
+    expected: [`${ans(cherche).replace(".", ",")} ${u}`],
     comparator: "number_equal",
     explanation:
       "Définition : aire du parallélogramme $=$ base × hauteur.\n\n" +
@@ -1489,24 +1544,24 @@ const DESSINS: readonly Nom[] = [
 
 /** ★2 — compter les carreaux d’une forme (L, T, U, croix, escalier, cadre…). */
 function genGrilleSimple(): Q {
+  // ⛔ 15/11/2026 : ★2 court (≤ 15 mots), sans objet ni prénom.
   const f = formeGrille(["rectangle", "L", "T", "U", "croix", "escalier", "cadre"]);
-  const o = randomChoice(DESSINS);
-  const [p, pr] = randomChoice(PRENOMS);
-  const [phrase, U] = randomChoice<[string, string]>([
-    ["Chaque carreau a une aire de $1$ unité².", "unités²"],
-    ["Chaque carreau est un carré de $1$ cm de côté.", U2("cm")],
-    [`Chaque carreau représente $1\\ \\text{m}^2$.`, U2("m")],
+  const [phrase, u] = randomChoice<[string, string]>([
+    ["Un carreau vaut $1$ unité².", "unités"],
+    ["Un carreau vaut $1\\ \\text{cm}^2$.", "cm"],
+    ["Un carreau représente $1\\ \\text{m}^2$.", "m"],
   ]);
+  const U = U2(u);
   const n = f.cells.length;
   return {
     text: randomChoice([
-      `${cap(un(o))} dessiné${eF(o)} sur un quadrillage a la forme ${f.dUne}. ${phrase} Quelle est son aire, en ${U} ?`,
-      `${phrase} Combien ${deU(U)} couvre ${le(o)} ci-contre ?`,
-      `Calcule l’aire ${duN(o)} ci-contre, en forme ${f.deForme}. ${phrase} Réponds en ${U}.`,
-      `${p} a dessiné ${un(o)} en forme ${f.deForme} sur du papier quadrillé. ${phrase} Quelle aire trouve-t-${pr}, en ${U} ?`,
+      `${phrase} Quelle est l’aire de la figure, en ${U} ?`,
+      `${phrase} Calcule l’aire de la figure en forme ${f.deForme}.`,
+      `Calcule l’aire de cette figure. ${phrase}`,
+      `${phrase} Combien ${deU(U)} couvre la figure ?`,
     ]),
     format: "short",
-    expected: [String(n)],
+    expected: [`${n} ${U2t(u)}`],
     comparator: "number_equal",
     explanation:
       "Définition : l’aire d’une figure tracée sur un quadrillage est le nombre de carreaux unité qu’elle recouvre.\n\n" +
@@ -1749,38 +1804,42 @@ function genComposeeCourbe(): Q {
 =========================================================================== */
 
 const M2 = U2("m");
-type Surf = { desc: string; A: number; calc: string };
+type Surf = { desc: string; A: number; calc: string; canvas?: Q["canvas"] };
 const sRect = (gn: string, L: number, l: number): Surf => ({
   desc: `${gn} rectangulaire de ${lg(L, "m")} sur ${lg(l, "m")}`,
   A: L * l,
   calc: `$${tx(L)} \\times ${tx(l)} = ${tx(L * l)}$`,
+  canvas: rectCanvas(L, l, "m", randomChoice(NOMS4)),
 });
 const sCarre = (gn: string, f: boolean, c: number): Surf => ({
   desc: `${gn} ${f ? "carrée" : "carré"} de ${lg(c, "m")} de côté`,
   A: c * c,
   calc: `$${tx(c)} \\times ${tx(c)} = ${tx(c * c)}$`,
+  canvas: rectCanvas(c, c, "m", randomChoice(NOMS4), true),
 });
 const sTri = (gn: string, b: number, h: number): Surf => ({
   desc: `${gn} triangulaire de ${lg(b, "m")} de base et ${lg(h, "m")} de hauteur`,
   A: (b * h) / 2,
   calc: `$\\dfrac{${tx(b)} \\times ${tx(h)}}{2} = ${tx((b * h) / 2)}$`,
+  canvas: triCanvas(b, h, arrondi(b * randomChoice([0.3, 0.5, 0.7])), "m", randomChoice(NOMS3)),
 });
 const sPara = (gn: string, b: number, h: number): Surf => ({
   desc: `${gn} en forme de parallélogramme, de base ${lg(b, "m")} et de hauteur ${lg(h, "m")}`,
   A: b * h,
   calc: `$${tx(b)} \\times ${tx(h)} = ${tx(b * h)}$`,
+  canvas: paraCanvas(b, h, arrondi(b * 0.3), null, "m", randomChoice(NOMS4)),
 });
 const pair = (a: number, b: number) => 2 * randomInt(a / 2, b / 2);
 
-const PEINTURES: readonly (() => { desc: string; A: number; calc: string })[] = [
-  () => { const L = randomInt(3, 6), h = randomChoice([2.5, 3]); return { desc: `un mur de chambre de ${lg(L, "m")} de long et ${lg(h, "m")} de haut`, A: L * h, calc: `$${tx(L)} \\times ${tx(h)} = ${tx(L * h)}$` }; },
-  () => { const L = randomInt(3, 5), l = randomInt(3, 4); return { desc: `le plafond d’une pièce rectangulaire de ${lg(L, "m")} sur ${lg(l, "m")}`, A: L * l, calc: `$${tx(L)} \\times ${tx(l)} = ${tx(L * l)}$` }; },
-  () => { const l = randomChoice([0.8, 0.9]); return { desc: `les deux faces d’une porte de ${lg(2, "m")} de haut et ${lg(l, "m")} de large`, A: 2 * 2 * l, calc: `$2 \\times ${tx(2)} \\times ${tx(l)} = ${tx(4 * l)}$` }; },
-  () => { const L = randomInt(10, 20), h = randomChoice([1.5, 2]); return { desc: `une palissade de ${lg(L, "m")} de long et ${lg(h, "m")} de haut (une seule face)`, A: L * h, calc: `$${tx(L)} \\times ${tx(h)} = ${tx(L * h)}$` }; },
+const PEINTURES: readonly (() => Surf)[] = [
+  () => { const L = randomInt(3, 6), h = randomChoice([2.5, 3]); return { desc: `un mur de chambre de ${lg(L, "m")} de long et ${lg(h, "m")} de haut`, A: L * h, calc: `$${tx(L)} \\times ${tx(h)} = ${tx(L * h)}$`, canvas: rectCanvas(L, h, "m", randomChoice(NOMS4)) }; },
+  () => { const L = randomInt(3, 5), l = randomInt(3, 4); return { desc: `le plafond d’une pièce rectangulaire de ${lg(L, "m")} sur ${lg(l, "m")}`, A: L * l, calc: `$${tx(L)} \\times ${tx(l)} = ${tx(L * l)}$`, canvas: rectCanvas(L, l, "m", randomChoice(NOMS4)) }; },
+  () => { const l = randomChoice([0.8, 0.9]); return { desc: `les deux faces d’une porte de ${lg(2, "m")} de haut et ${lg(l, "m")} de large`, A: 2 * 2 * l, calc: `$2 \\times ${tx(2)} \\times ${tx(l)} = ${tx(4 * l)}$`, canvas: rectCanvas(2, l, "m", randomChoice(NOMS4)) }; },
+  () => { const L = randomInt(10, 20), h = randomChoice([1.5, 2]); return { desc: `une palissade de ${lg(L, "m")} de long et ${lg(h, "m")} de haut (une seule face)`, A: L * h, calc: `$${tx(L)} \\times ${tx(h)} = ${tx(L * h)}$`, canvas: rectCanvas(L, h, "m", randomChoice(NOMS4)) }; },
   () => { const L = randomInt(3, 5), l = randomInt(3, 4), h = 2.5; return { desc: `les quatre murs d’une pièce de ${lg(L, "m")} sur ${lg(l, "m")}, hauts de ${lg(h, "m")} (sans ouverture)`, A: 2 * (L + l) * h, calc: `$2 \\times (${tx(L)} + ${tx(l)}) \\times ${tx(h)} = ${tx(2 * (L + l) * h)}$` }; },
-  () => { const L = randomInt(4, 8), h = randomInt(2, 3); return { desc: `la façade rectangulaire d’un garage de ${lg(L, "m")} sur ${lg(h, "m")}`, A: L * h, calc: `$${tx(L)} \\times ${tx(h)} = ${tx(L * h)}$` }; },
-  () => { const b = pair(4, 8), h = randomInt(2, 4); return { desc: `le pignon d’une maison : un triangle de ${lg(b, "m")} de base et ${lg(h, "m")} de hauteur`, A: (b * h) / 2, calc: `$\\dfrac{${tx(b)} \\times ${tx(h)}}{2} = ${tx((b * h) / 2)}$` }; },
-  () => { const L = randomChoice([1.5, 2, 2.5]); return { desc: `deux volets rectangulaires de ${lg(L, "m")} sur ${lg(1, "m")}, une seule face chacun`, A: 2 * L, calc: `$2 \\times ${tx(L)} \\times 1 = ${tx(2 * L)}$` }; },
+  () => { const L = randomInt(4, 8), h = randomInt(2, 3); return { desc: `la façade rectangulaire d’un garage de ${lg(L, "m")} sur ${lg(h, "m")}`, A: L * h, calc: `$${tx(L)} \\times ${tx(h)} = ${tx(L * h)}$`, canvas: rectCanvas(L, h, "m", randomChoice(NOMS4)) }; },
+  () => { const b = pair(4, 8), h = randomInt(2, 4); return { desc: `le pignon d’une maison : un triangle de ${lg(b, "m")} de base et ${lg(h, "m")} de hauteur`, A: (b * h) / 2, calc: `$\\dfrac{${tx(b)} \\times ${tx(h)}}{2} = ${tx((b * h) / 2)}$`, canvas: triCanvas(b, h, b / 2, "m", randomChoice(NOMS3)) }; },
+  () => { const L = randomChoice([1.5, 2, 2.5]); return { desc: `deux volets rectangulaires de ${lg(L, "m")} sur ${lg(1, "m")}, une seule face chacun`, A: 2 * L, calc: `$2 \\times ${tx(L)} \\times 1 = ${tx(2 * L)}$`, canvas: rectCanvas(L, 1, "m", randomChoice(NOMS4)) }; },
 ];
 
 /** ★3 — la surface à peindre. */
@@ -1801,6 +1860,7 @@ function genPeinture(): Q {
       "Méthode : on repère les rectangles (ou triangles) à peindre et on additionne leurs aires.\n\n" +
       `Calcul : ${s.calc}.\n\n` +
       `Conclusion : il faut peindre ${ar(s.A, "m")}.`,
+    canvas: s.canvas,
   };
 }
 
@@ -1821,6 +1881,7 @@ function genTriReel(): Q {
       expected: [ans((a * b) / 2)],
       comparator: "number_equal",
       explanation: explTri(a, b, "m", ` Dans un triangle rectangle, les côtés de l’angle droit servent de base et de hauteur ; le plus grand côté (${lg(c, "m")}) ne sert pas.`),
+      canvas: triCanvas(a, b, 0, "m", randomChoice(NOMS3), { droit: "A", hyp: c }),
     };
   }
   const o = randomChoice(TRI_OBJETS.filter((x) => x.u === "m"));
@@ -1837,6 +1898,7 @@ function genTriReel(): Q {
     expected: [ans((b * h) / 2)],
     comparator: "number_equal",
     explanation: explTri(b, h, "m"),
+    canvas: triCanvas(b, h, arrondi(b * randomChoice([0.3, 0.5, 0.7])), "m", randomChoice(NOMS3)),
   };
 }
 
@@ -1870,6 +1932,7 @@ function genChampHectares(): Q {
       `Méthode : on calcule en ${M2}${unite === "m" ? "" : ", puis on convertit"}.\n\n` +
       `Calcul : $${tx(L)} \\times ${tx(l)} = ${tx(A)}\\ \\text{m}^2$${unite === "ha" ? ` ; $${tx(A)} \\div 10\\,000 = ${tx(res)}$` : unite === "ares" ? ` ; $${tx(A)} \\div 100 = ${tx(res)}$` : ""}.\n\n` +
       `Conclusion : la superficie vaut ${N(res)} ${U}.`,
+    canvas: rectCanvas(L, l, "m", randomChoice(NOMS4)),
   };
 }
 
@@ -1948,6 +2011,7 @@ function genQuantiteParM2(): Q {
       `Méthode : on calcule d’abord l’aire : ${s.calc} ${M2}.\n\n` +
       `Calcul : $${tx(s.A)} \\times ${tx(q)} = ${tx(total)}$.\n\n` +
       `Conclusion : on obtient ${N(total)} ${x.unite}.`,
+    canvas: s.canvas,
   };
 }
 
@@ -1971,7 +2035,7 @@ function genPrixParM2(): Q {
   const [pn, pr] = randomChoice(PRENOMS);
   return {
     text: randomChoice([
-      `${x.prix(p)}. Quel est le prix à payer pour ${x.action} ${s.desc} ?`,
+      `${x.prix(p)}. Quel est le prix à payer, en €, pour ${x.action} ${s.desc} ?`,
       `${pn} veut ${x.action} ${s.desc}. ${x.prix(p)}. Combien va-t-${pr} payer, en € ?`,
       `Pour ${x.action} ${s.desc}, on paie ${N(p)} € par ${M2}. Quel est le coût total, en € ?`,
     ]),
@@ -1983,6 +2047,7 @@ function genPrixParM2(): Q {
       `Méthode : aire : ${s.calc} ${M2}.\n\n` +
       `Calcul : $${tx(s.A)} \\times ${tx(p)} = ${tx(total)}$.\n\n` +
       `Conclusion : le coût est de ${N(total)} €.`,
+    canvas: s.canvas,
   };
 }
 
@@ -2005,6 +2070,7 @@ function genNombreObjets(): Q {
         `Méthode : ${lg(L, "m")} $=$ ${lg(L * 100, "cm")} et ${lg(l, "m")} $=$ ${lg(l * 100, "cm")} ; on place $${tx((L * 100) / t)}$ dalles en longueur et $${tx((l * 100) / t)}$ en largeur.\n\n` +
         `Calcul : $${tx((L * 100) / t)} \\times ${tx((l * 100) / t)} = ${tx(nb)}$.\n\n` +
         `Conclusion : il faut ${N(nb)} dalles.`,
+      canvas: rectCanvas(L, l, "m", randomChoice(NOMS4)),
     };
   }
   if (mode === 1) {
@@ -2019,6 +2085,7 @@ function genNombreObjets(): Q {
         `Méthode : toit $${tx(L)} \\times ${tx(l)} = ${tx(L * l)}\\ \\text{m}^2$ ; panneau $2 \\times 1 = 2\\ \\text{m}^2$.\n\n` +
         `Calcul : $${tx(L * l)} \\div 2 = ${tx((L * l) / 2)}$.\n\n` +
         `Conclusion : on peut poser ${N((L * l) / 2)} panneaux.`,
+      canvas: rectCanvas(L, l, "m", randomChoice(NOMS4)),
     };
   }
   if (mode === 2) {
@@ -2034,6 +2101,7 @@ function genNombreObjets(): Q {
         `Méthode : panneau $${tx(a * cl)} \\times ${tx(b * cw)} = ${tx(a * cl * b * cw)}\\ \\text{cm}^2$ ; carte $${cl} \\times ${cw} = ${cl * cw}\\ \\text{cm}^2$.\n\n` +
         `Calcul : $${tx(a * cl * b * cw)} \\div ${cl * cw} = ${a * b}$ (soit $${a}$ cartes sur la longueur et $${b}$ sur la largeur).\n\n` +
         `Conclusion : il faut ${N(a * b)} cartes.`,
+      canvas: rectCanvas(a * cl, b * cw, "cm", randomChoice(NOMS4)),
     };
   }
   if (mode === 3) {
@@ -2051,6 +2119,7 @@ function genNombreObjets(): Q {
         `Méthode : surface $2 \\times ${tx(L)} \\times ${tx(h)} = ${tx(A)}\\ \\text{m}^2$.\n\n` +
         `Calcul : $${tx(A)} \\div ${couvre} \\approx ${tx(Math.round((A / couvre) * 100) / 100)}$, donc $${nb}$ pots.\n\n` +
         `Conclusion : il faut acheter ${N(nb)} pots.`,
+      canvas: rectCanvas(L, h, "m", randomChoice(NOMS4)),
     };
   }
   if (mode === 4) {
@@ -2067,6 +2136,7 @@ function genNombreObjets(): Q {
         `Méthode : aire : ${s.calc} ${M2}.\n\n` +
         `Calcul : $${tx(s.A)} \\div ${couvre} \\approx ${tx(Math.round((s.A / couvre) * 100) / 100)}$, donc $${nb}$ sacs.\n\n` +
         `Conclusion : il faut ${N(nb)} sacs.`,
+      canvas: s.canvas,
     };
   }
   const t = randomChoice([10, 20]);
@@ -2082,6 +2152,7 @@ function genNombreObjets(): Q {
       `Méthode : ${lg(L / 100, "m")} $=$ ${lg(L, "cm")} ; crédence $${tx(L)} \\times ${tx(h)} = ${tx(L * h)}\\ \\text{cm}^2$ ; carreau $${t} \\times ${t} = ${t * t}\\ \\text{cm}^2$.\n\n` +
       `Calcul : $${tx(L * h)} \\div ${t * t} = ${tx(nb)}$.\n\n` +
       `Conclusion : il faut ${N(nb)} carreaux.`,
+    canvas: rectCanvas(L, h, "cm", randomChoice(NOMS4), false, { AB: `${fr(L / 100)} m`, BC: `${fr(h)} cm` }),
   };
 }
 
@@ -2110,7 +2181,8 @@ function genMemeAireOuPerimetre(): Q {
   let a: number, b: number, c: number, d: number;
   if (cas === 0) {
     // Pas de côté 1 (une photo de 1 cm sur 24 cm n’est pas plausible).
-    const paires = deuxFacteurs(randomChoice(AIRES_MULTIPLES)).filter(([x]) => x >= 2);
+    // 15/11 : côtés ≤ 12, pour que les deux rectangles tiennent sur le quadrillage.
+    const paires = deuxFacteurs(randomChoice(AIRES_MULTIPLES)).filter(([x, y]) => x >= 2 && y <= 12);
     const [p1, p2] = shuffle(paires).slice(0, 2);
     [a, b, c, d] = [p1[0], p1[1], p2[0], p2[1]];
   } else if (cas === 1) {
@@ -2151,13 +2223,14 @@ function genMemeAireOuPerimetre(): Q {
       "Méthode : aire $=$ longueur × largeur ; périmètre $= 2 \\times$ (longueur + largeur).\n\n" +
       `Calcul : aires $${a} \\times ${b} = ${A1}$ et $${c} \\times ${d} = ${A2}$ ; périmètres $2 \\times (${a} + ${b}) = ${P1}$ et $2 \\times (${c} + ${d}) = ${P2}$.\n\n` +
       `Conclusion : ${correct}.`,
+    canvas: deuxFormesGrille([a, b], [c, d], true),
   };
 }
 
 /** ★5 — l’affirmation d’un élève sur un parallélogramme (parfois juste). */
 function genAffirmationPara(): Q {
   const o = randomChoice(PARA_OBJETS);
-  const { b, h, s } = dimsPara(o);
+  const { b, h, s, dec } = dimsPara(o);
   const u = o.u;
   const juste = Math.random() < 0.3;
   const annonce = juste ? b * h : b * s;
@@ -2182,6 +2255,7 @@ function genAffirmationPara(): Q {
       `Méthode : base ${lg(b, u)} × hauteur ${lg(h, u)}.\n\n` +
       `Calcul : $${tx(b)} \\times ${tx(h)} = ${tx(b * h)}$${juste ? "" : ` (et non $${tx(b)} \\times ${tx(s)} = ${tx(b * s)}$)`}.\n\n` +
       `Conclusion : ${juste ? "oui, c’est juste" : `non, l’aire vaut ${ar(b * h, u)}`}.`,
+    canvas: paraCanvas(b, h, dec, s, u, randomChoice(NOMS4)),
   };
 }
 
@@ -2193,7 +2267,8 @@ function genCompareRectCarre(): Q {
     { n: "enclos", v: true, u: "m", m: 2 }, { n: "bassin", u: "m", m: 1 }, { n: "nappe", f: true, u: "dm", m: 2 },
     { n: "parcelle", f: true, u: "m", m: 5 },
   ]);
-  const a = randomInt(2, 5) * o.m, b = randomInt(3, 7) * o.m, c = randomChoice([2, 3, 4, 5]) * o.m;
+  // 15/11 : b ≠ a, sinon « un rectangle de 3 m sur 3 m » est un carré.
+  const a = randomInt(2, 5) * o.m, b = randomInt(a / o.m + 1, 7) * o.m, c = randomChoice([2, 3, 4, 5]) * o.m;
   const R = a * b, C = c * c;
   const [p1] = randomChoice(PRENOMS);
   let [p2] = randomChoice(PRENOMS);
@@ -2217,6 +2292,7 @@ function genCompareRectCarre(): Q {
       `Méthode : rectangle $${tx(a)} \\times ${tx(b)}$ ; carré $${tx(c)} \\times ${tx(c)}$.\n\n` +
       `Calcul : $${tx(R)}$ ${U2(u)} contre $${tx(C)}$ ${U2(u)}.\n\n` +
       `Conclusion : ${correct}.`,
+    canvas: deuxFormesGrille([a / o.m, b / o.m], [c / o.m, c / o.m], false),
   };
 }
 
@@ -2372,6 +2448,9 @@ function genCompareFigures(): Q {
       `Méthode : rectangle $${a} \\times ${b}$ ; ${tri ? `triangle $\\dfrac{${base} \\times ${haut}}{2}$` : `parallélogramme $${base} \\times ${haut}$`}.\n\n` +
       `Calcul : $${tx(R)}\\ \\text{cm}^2$ contre $${tx(F)}\\ \\text{cm}^2$.\n\n` +
       `Conclusion : ${correct === "ils ont la même aire" ? "ils ont la même aire" : `${correct} a la plus grande aire`}.`,
+    canvas: tri
+      ? triCanvas(base, haut, arrondi(base * 0.4), "cm", randomChoice(NOMS3))
+      : paraCanvas(base, haut, arrondi(base * 0.3), null, "cm", randomChoice(NOMS4)),
   };
 }
 
@@ -2419,6 +2498,429 @@ function genAireLitterale(): Q {
       `Calcul : $${calc}$.\n\n` +
       `Conclusion : l’aire vaut $${A}\\ \\text{cm}^2$.`,
   };
+}
+
+/* ===========================================================================
+   ⭐ 15/11/2026 — ★1-★2 : COURTS, SANS CONTEXTE, SUR UNE FIGURE
+   Règle collège (6e/REGLES-6E.md) : ★1 ≤ 12 mots, ★2 ≤ 15 mots, ni prénom ni
+   situation ; la mise en situation commence à ★3. Ces gabarits posent la
+   question directement sur une figure dessinée à l’échelle, en saisie libre,
+   au pavé numérique ou en QCM dont les leurres sont les vraies erreurs
+   (périmètre au lieu de l’aire, oubli du ÷ 2, côté penché, unité de longueur).
+=========================================================================== */
+
+const UNITES_NU = ["cm", "cm", "m", "m", "mm", "dm"] as const;
+
+/** QCM : la bonne réponse et des leurres en texte simple (doublons retirés). */
+function qcmAire(text: string, correct: string, leurres: string[], explanation: string, canvas: Q["canvas"]): Q {
+  return { text, format: "qcm", choices: makeChoices(correct, leurres), expected: [correct], comparator: "mcq_exact", explanation, canvas };
+}
+
+/** AIRE_COMPRENDRE ★1-★2 — aire ou périmètre d’un rectangle dessiné, unité comprise. */
+function genAireOuPerimetreRect(niv: 1 | 2): Q {
+  const u = randomChoice(UNITES_NU);
+  const L = niv === 1 ? randomInt(3, 9) : randomInt(4, 9) + 0.5;
+  const l = randomInt(2, Math.max(2, Math.floor(L) - 1));
+  const A = L * l, P = 2 * (L + l);
+  const nom = randomChoice(NOMS4);
+  const canvas = rectCanvas(L, l, u, nom);
+  const aire = Math.random() < 0.5;
+  const explication =
+    "Définition : l’aire mesure la surface (unité carrée) ; le périmètre mesure le tour (unité de longueur).\n\n" +
+    `Méthode : aire $= L \\times l$ ; périmètre $= 2 \\times (L + l)$.\n\n` +
+    `Calcul : aire $${tx(L)} \\times ${tx(l)} = ${tx(A)}$ ; périmètre $2 \\times (${tx(L)} + ${tx(l)}) = ${tx(P)}$.\n\n` +
+    `Conclusion : ${aire ? `l’aire vaut ${ar(A, u)}` : `le périmètre vaut ${lg(P, u)}`}.`;
+  const leurres = aire
+    ? [chL(P, u), chA(P, u), chL(A, u), chA(L + l, u), chA(2 * A, u)]
+    : [chA(A, u), chA(P, u), chL(A, u), chL(L + l, u), chL(4 * L, u)];
+  if (Math.random() < 0.65) {
+    const text = aire
+      ? randomChoice([
+          `Quelle est l’aire du rectangle ${nom} ?`,
+          `Choisis l’aire du rectangle ${nom}.`,
+          `Lis la figure : quelle est l’aire de ${nom} ?`,
+          `Quelle mesure est l’aire du rectangle ${nom} ?`,
+        ])
+      : randomChoice([
+          `Quel est le périmètre du rectangle ${nom} ?`,
+          `Choisis le périmètre du rectangle ${nom}.`,
+          `Lis la figure : quel est le périmètre de ${nom} ?`,
+          `Quelle mesure est le périmètre du rectangle ${nom} ?`,
+        ]);
+    return qcmAire(text, aire ? chA(A, u) : chL(P, u), leurres, explication, canvas);
+  }
+  return {
+    text: aire
+      ? randomChoice([`Calcule l’aire du rectangle ${nom}, en ${U2(u)}.`, `Donne l’aire de ${nom} en ${U2(u)}.`])
+      : randomChoice([`Calcule le périmètre du rectangle ${nom}, en ${u}.`, `Donne le périmètre de ${nom} en ${u}.`]),
+    format: "short",
+    expected: [aire ? rep(A, u) : `${ans(P).replace(".", ",")} ${u}`],
+    comparator: "number_equal",
+    explanation: explication,
+    canvas,
+  };
+}
+
+/** Périmètre d’une forme sur quadrillage : les côtés de carreau sans voisin. */
+function perimetreCellules(cells: GridCell[]): number {
+  const pris = new Set(cells.map(([r, c]) => `${r},${c}`));
+  let p = 0;
+  for (const [r, c] of cells) for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) if (!pris.has(`${r + dr},${c + dc}`)) p++;
+  return p;
+}
+
+/** AIRE_COMPRENDRE ★2 — une forme en L, T, U, croix ou escalier : son aire ou son périmètre. */
+function genAireOuPerimetreForme(): Q {
+  const f = formeGrille(["L", "T", "U", "croix", "escalier"]);
+  const n = f.cells.length, P = perimetreCellules(f.cells);
+  const [u, phrase] = randomChoice<[string, string]>([
+    ["unités", "Un carreau a $1$ unité de côté."],
+    ["cm", "Un carreau mesure $1$ cm de côté."],
+  ]);
+  const aire = Math.random() < 0.5;
+  const canvas = figureLibreFromCells(f.rows, f.cols, f.cells, false);
+  const explication =
+    "Définition : l’aire compte les carreaux recouverts ; le périmètre compte les côtés de carreau sur le bord.\n\n" +
+    "Méthode : on compte ligne par ligne pour l’aire, on fait le tour pour le périmètre.\n\n" +
+    `Calcul : $${n}$ carreaux ; $${P}$ côtés de carreau sur le bord.\n\n` +
+    `Conclusion : ${aire ? `l’aire vaut $${n}$ ${U2t(u)}` : `le périmètre vaut $${P}$ ${u}`}.`;
+  if (Math.random() < 0.4) {
+    return qcmAire(
+      aire ? `${phrase} Quelle est l’aire de la figure ?` : `${phrase} Quel est le périmètre de la figure ?`,
+      aire ? chA(n, u) : chL(P, u),
+      aire
+        ? [chL(P, u), chA(P, u), chL(n, u), chA(f.rows * f.cols, u), chA(n + 1, u)]
+        : [chA(n, u), chL(n, u), chA(P, u), chL(P - 2, u), chL(P + 2, u)],
+      explication,
+      canvas
+    );
+  }
+  return {
+    text: aire
+      ? randomChoice([
+          `${phrase} Calcule l’aire de la figure.`,
+          `${phrase} Quelle est l’aire de la figure ?`,
+          `${phrase} Donne l’aire de la figure.`,
+        ])
+      : randomChoice([
+          `${phrase} Calcule le périmètre de la figure.`,
+          `${phrase} Quelle est la longueur du tour ?`,
+          `${phrase} Donne le périmètre de la figure.`,
+        ]),
+    format: "short",
+    expected: [aire ? `${n} ${U2t(u)}` : `${P} ${u}`],
+    comparator: "number_equal",
+    explanation: explication,
+    canvas,
+  };
+}
+
+/** AIRE_RECTANGLE ★1-★2 — calculer l’aire, figure presque toujours dessinée. */
+function genRectNu(niv: 1 | 2): Q {
+  const u = randomChoice(UNITES_NU);
+  const dec = niv === 2 && Math.random() < 0.4;
+  const L = niv === 1 ? randomInt(3, 10) : dec ? randomInt(3, 9) + 0.5 : randomInt(8, 20);
+  const l = niv === 1 ? randomInt(2, Math.min(L - 1, 7)) : randomInt(2, Math.min(Math.floor(L) - 1, 12));
+  const A = L * l;
+  const nom = randomChoice(NOMS4);
+  const U = U2(u);
+  const surFigure = Math.random() < 0.6;
+  const text = surFigure
+    ? randomChoice([
+        `Calcule l’aire du rectangle ${nom}, en ${U}.`,
+        `Quelle est l’aire du rectangle ${nom} ?`,
+        `Lis la figure, puis calcule l’aire de ${nom}.`,
+        `${nom} est un rectangle. Donne son aire en ${U}.`,
+        `Trouve l’aire du rectangle ${nom} dessiné, en ${U}.`,
+      ])
+    : niv === 1
+      ? randomChoice([
+          `Calcule l’aire d’un rectangle de ${lg(L, u)} sur ${lg(l, u)}.`,
+          `Un rectangle mesure ${lg(L, u)} sur ${lg(l, u)}. Calcule son aire.`,
+          `Quelle est l’aire d’un rectangle de ${lg(L, u)} par ${lg(l, u)} ?`,
+        ])
+      : randomChoice([
+          `Calcule l’aire d’un rectangle de longueur ${lg(L, u)} et de largeur ${lg(l, u)}.`,
+          `Un rectangle a pour côtés ${lg(L, u)} et ${lg(l, u)}. Quelle est son aire ?`,
+          `Longueur ${lg(L, u)}, largeur ${lg(l, u)} : calcule l’aire du rectangle, en ${U}.`,
+        ]);
+  return {
+    text,
+    format: "short",
+    expected: [rep(A, u)],
+    comparator: "number_equal",
+    explanation:
+      "Définition : l’aire d’un rectangle vaut longueur × largeur, les deux dans la même unité.\n\n" +
+      `Méthode : on multiplie ${lg(L, u)} par ${lg(l, u)} ; le résultat est en ${U}.\n\n` +
+      `Calcul : $${tx(L)} \\times ${tx(l)} = ${tx(A)}$.\n\n` +
+      `Conclusion : l’aire vaut ${ar(A, u)}.`,
+    ...(surFigure || Math.random() < 0.75 ? { canvas: rectCanvas(L, l, u, nom) } : {}),
+  };
+}
+
+/** AIRE_RECTANGLE ★1-★2 — QCM : l’aire parmi le périmètre et les erreurs d’unité. */
+function genRectQcm(niv: 1 | 2): Q {
+  const u = randomChoice(UNITES_NU);
+  const L = niv === 1 ? randomInt(3, 10) : randomInt(5, 15) + (Math.random() < 0.4 ? 0.5 : 0);
+  const l = randomInt(2, Math.min(Math.floor(L) - 1, niv === 1 ? 7 : 10));
+  const A = L * l, P = 2 * (L + l);
+  const nom = randomChoice(NOMS4);
+  const text =
+    niv === 1
+      ? randomChoice([
+          `Quelle est l’aire du rectangle ${nom} ?`,
+          `Choisis l’aire du rectangle ${nom}.`,
+          `Un rectangle mesure ${lg(L, u)} sur ${lg(l, u)}. Son aire ?`,
+          `Coche l’aire du rectangle ${nom}.`,
+        ])
+      : randomChoice([
+          `Quelle est l’aire du rectangle ${nom} ? Attention à l’unité.`,
+          `Choisis la bonne aire pour le rectangle ${nom}.`,
+          `Un rectangle mesure ${lg(L, u)} sur ${lg(l, u)}. Quelle est son aire ?`,
+          `Parmi ces mesures, laquelle est l’aire du rectangle ${nom} ?`,
+        ]);
+  return qcmAire(
+    text,
+    chA(A, u),
+    [chL(P, u), chA(P, u), chL(A, u), chA(L + l, u), chA(2 * A, u)],
+    "Définition : l’aire d’un rectangle vaut longueur × largeur, en unité CARRÉE.\n\n" +
+      `Méthode : on multiplie ${lg(L, u)} par ${lg(l, u)} (pas d’addition : ce serait le périmètre).\n\n` +
+      `Calcul : $${tx(L)} \\times ${tx(l)} = ${tx(A)}$ ; le périmètre, lui, vaut $${tx(P)}$ ${u}.\n\n` +
+      `Conclusion : l’aire vaut ${ar(A, u)}.`,
+    rectCanvas(L, l, u, nom)
+  );
+}
+
+/** AIRE_CARRE ★1 — côté donné ou lu sur la figure → aire. */
+function genCarreNu(): Q {
+  const u = randomChoice(UNITES_NU);
+  const c = randomInt(2, 12);
+  const nom = randomChoice(NOMS4);
+  const U = U2(u);
+  return {
+    text: randomChoice([
+      `Calcule l’aire du carré ${nom}, en ${U}.`,
+      `Quelle est l’aire du carré ${nom} ?`,
+      `Un carré a un côté de ${lg(c, u)}. Calcule son aire.`,
+      `Calcule l’aire d’un carré de ${lg(c, u)} de côté.`,
+      `Le carré ${nom} a ${lg(c, u)} de côté. Calcule son aire.`,
+      `Trouve l’aire du carré ${nom} dessiné, en ${U}.`,
+    ]),
+    format: "short",
+    expected: [rep(c * c, u)],
+    comparator: "number_equal",
+    explanation: explCarre(c, u),
+    canvas: rectCanvas(c, c, u, nom, true),
+  };
+}
+
+/** AIRE_CARRE ★1-★2 — QCM : côté × côté, pas 4 × côté ni 2 × côté. */
+function genCarreQcm(niv: 1 | 2): Q {
+  const u = randomChoice(UNITES_NU);
+  const c = niv === 1 ? randomInt(3, 10) : randomChoice([randomInt(11, 20), randomInt(1, 9) + 0.5]);
+  const nom = randomChoice(NOMS4);
+  const text =
+    niv === 1
+      ? randomChoice([
+          `Quelle est l’aire du carré ${nom} ?`,
+          `Choisis l’aire du carré ${nom}.`,
+          `Un carré a ${lg(c, u)} de côté. Son aire ?`,
+          `Coche l’aire du carré ${nom}.`,
+        ])
+      : randomChoice([
+          `Quelle est l’aire du carré ${nom} ? Attention à l’unité.`,
+          `Un carré a un côté de ${lg(c, u)}. Quelle est son aire ?`,
+          `Parmi ces mesures, laquelle est l’aire du carré ${nom} ?`,
+          `Choisis la bonne aire pour un carré de côté ${lg(c, u)}.`,
+        ]);
+  return qcmAire(
+    text,
+    chA(c * c, u),
+    [chL(4 * c, u), chA(4 * c, u), chA(2 * c, u), chL(c * c, u), chA(c * c * 2, u)],
+    explCarre(c, u) + ` ⚠️ ${lg(4 * c, u)} est le périmètre, et $2 \\times ${tx(c)}$ n’est pas $${tx(c)} \\times ${tx(c)}$.`,
+    rectCanvas(c, c, u, nom, true)
+  );
+}
+
+/** Un triangle dont la hauteur tombe dans la base (★1) : b pair, décalage entier. */
+function dimsTriSimple(): { b: number; h: number; dec: number } {
+  const b = 2 * randomInt(2, 8), h = randomInt(2, 10);
+  return { b, h, dec: randomInt(1, b - 1) };
+}
+
+/** AIRE_TRIANGLE ★1-★2 — base et hauteur sur la figure (★2 : côté penché affiché ou angle droit). */
+function genTriNu(niv: 1 | 2): Q {
+  const u = randomChoice(UNITES_NU);
+  const U = U2(u);
+  const nom = randomChoice(NOMS3);
+  let b: number, h: number, canvas: TriangleCanvasData, extra = "", piege = false;
+  if (niv === 1) {
+    const d = dimsTriSimple();
+    b = d.b; h = d.h;
+    canvas = triCanvas(b, h, d.dec, u, nom);
+  } else if (Math.random() < 0.5) {
+    const [dec0, h0, s0] = randomChoice(TRIPLETS);
+    const k = randomChoice([1, 2]);
+    h = h0 * k; b = k * randomInt(dec0 + 1, dec0 + 6);
+    canvas = triCanvas(b, h, dec0 * k, u, nom, { oblique: s0 * k });
+    extra = ` ⚠️ Le côté [${nom[0]}${nom[2]}] (${lg(s0 * k, u)}) est penché : ce n’est pas la hauteur.`;
+    piege = true;
+  } else {
+    const [a0, b0, c0] = randomChoice(TRIPLETS);
+    const k = randomChoice([1, 2]);
+    b = a0 * k; h = b0 * k;
+    const droit: "A" | "B" = Math.random() < 0.5 ? "A" : "B";
+    canvas = triCanvas(b, h, droit === "A" ? 0 : b, u, nom, { droit, hyp: c0 * k });
+    extra = ` Dans un triangle rectangle, les côtés de l’angle droit servent de base et de hauteur ; l’hypoténuse (${lg(c0 * k, u)}) ne sert pas.`;
+    piege = true;
+  }
+  const text =
+    niv === 1
+      ? randomChoice([
+          `Calcule l’aire du triangle ${nom}, en ${U}.`,
+          `Quelle est l’aire du triangle ${nom} ?`,
+          `Calcule l’aire du triangle : base ${lg(b, u)}, hauteur ${lg(h, u)}.`,
+          `Trouve l’aire du triangle ${nom} dessiné, en ${U}.`,
+          `Lis la figure : quelle est l’aire de ${nom} ?`,
+        ])
+      : randomChoice([
+          `Calcule l’aire du triangle ${nom}. Une longueur ne sert pas.`,
+          `Quelle est l’aire du triangle ${nom}, en ${U} ? Choisis la bonne hauteur.`,
+          `Trouve l’aire de ${nom} : base et hauteur perpendiculaires seulement.`,
+          `Calcule l’aire du triangle ${nom}, en ${U}. Attention au piège.`,
+        ]);
+  return {
+    text,
+    format: "short",
+    expected: [rep((b * h) / 2, u)],
+    comparator: "number_equal",
+    explanation: explTri(b, h, u, piege ? extra : ""),
+    canvas,
+  };
+}
+
+/** AIRE_TRIANGLE ★1-★2 — QCM : les leurres sont l’oubli du ÷ 2, l’addition, l’unité. */
+function genTriQcm(niv: 1 | 2): Q {
+  const u = randomChoice(UNITES_NU);
+  const nom = randomChoice(NOMS3);
+  let b: number, h: number, canvas: TriangleCanvasData, s: number | null = null;
+  if (niv === 1) {
+    const d = dimsTriSimple();
+    b = d.b; h = d.h;
+    canvas = triCanvas(b, h, d.dec, u, nom);
+  } else {
+    const [dec0, h0, s0] = randomChoice(TRIPLETS);
+    h = h0; b = randomInt(dec0 + 1, dec0 + 8); s = s0;
+    canvas = triCanvas(b, h, dec0, u, nom, { oblique: s0 });
+  }
+  const A = (b * h) / 2;
+  const text =
+    niv === 1
+      ? randomChoice([
+          `Quelle est l’aire du triangle ${nom} ?`,
+          `Choisis l’aire du triangle ${nom}.`,
+          `Coche l’aire du triangle ${nom}.`,
+          `Base ${lg(b, u)}, hauteur ${lg(h, u)} : quelle est l’aire ?`,
+        ])
+      : randomChoice([
+          `Quelle est l’aire du triangle ${nom} ? Une longueur est inutile.`,
+          `Choisis la bonne aire pour le triangle ${nom}.`,
+          `Parmi ces mesures, laquelle est l’aire du triangle ${nom} ?`,
+          `Coche l’aire de ${nom} : attention au côté penché.`,
+        ]);
+  return qcmAire(
+    text,
+    chA(A, u),
+    [chA(b * h, u), chL(A, u), chA(b + h, u), ...(s ? [chA((b * s) / 2, u), chA(b * s, u)] : [chA(A / 2, u), chA(2 * (b + h), u)])],
+    explTri(b, h, u, s ? ` Le côté penché (${lg(s, u)}) ne sert pas.` : "") + ` ⚠️ ${chA(b * h, u)}, c’est base × hauteur sans le ÷ 2.`,
+    canvas
+  );
+}
+
+/** AIRE_PARALLELOGRAMME ★1-★2 — QCM : base × hauteur, pas base × côté penché ni ÷ 2. */
+function genParaQcm(niv: 1 | 2): Q {
+  const [dec0, h0, s0] = randomChoice(TRIPLETS);
+  const k = niv === 1 ? 1 : randomChoice([1, 2]);
+  const dec = dec0 * k, h = h0 * k, s = s0 * k;
+  const b = k * randomInt(dec0 + 2, dec0 + 8);
+  const u = randomChoice(UNITES_NU);
+  const nom = randomChoice(NOMS4);
+  const A = b * h;
+  const text =
+    niv === 1
+      ? randomChoice([
+          `Quelle est l’aire du parallélogramme ${nom} ?`,
+          `Choisis l’aire du parallélogramme ${nom}.`,
+          `Coche l’aire du parallélogramme ${nom}.`,
+          `Base ${lg(b, u)}, hauteur ${lg(h, u)} : quelle est l’aire ?`,
+        ])
+      : randomChoice([
+          `Quelle est l’aire du parallélogramme ${nom} ? Une longueur est inutile.`,
+          `Choisis la bonne aire pour le parallélogramme ${nom}.`,
+          `Parmi ces mesures, laquelle est l’aire de ${nom} ?`,
+          `Coche l’aire de ${nom} : attention au côté penché.`,
+        ]);
+  return qcmAire(
+    text,
+    chA(A, u),
+    [chA(A / 2, u), chL(A, u), chA(b + h, u), ...(niv === 2 ? [chA(b * s, u), chA(2 * (b + s), u)] : [chA(2 * (b + h), u), chA(2 * A, u)])],
+    explPara(b, h, u, niv === 2 ? ` Le côté [${nom[0]}${nom[3]}] (${lg(s, u)}) est penché : ce n’est pas la hauteur.` : "") +
+      " ⚠️ Pas de ÷ 2 : c’est le triangle qui en a un.",
+    paraCanvas(b, h, dec, niv === 2 ? s : null, u, nom)
+  );
+}
+
+/** AIRE_FIGURE ★1-★2 — compter les carreaux d’une forme (★1 : rectangle ou L). */
+function genGrilleNu(niv: 1 | 2): Q {
+  const f = formeGrille(niv === 1 ? ["rectangle", "L", "L"] : ["T", "U", "croix", "escalier", "cadre"]);
+  const n = f.cells.length;
+  // Le squelette est le texte : on varie le sujet (« Un carreau », « Une case »…)
+  // et l’unité, sinon l’élève revoit la même phrase (mesuré : 7,7 sur 20).
+  const u = randomChoice(["unités", "unités", "cm", "m", "dm", "mm"]);
+  const sujet = randomChoice(["Un carreau vaut", "Chaque carreau vaut", "Une case vaut", "Chaque case vaut", "Un petit carré vaut"]);
+  const phrase = `${sujet} ${u === "unités" ? "$1$ unité²" : `$1\\ \\text{${u}}^2$`}.`;
+  const canvas = figureLibreFromCells(f.rows, f.cols, f.cells, false);
+  const explication =
+    "Définition : l’aire d’une figure sur quadrillage est le nombre de carreaux qu’elle recouvre.\n\n" +
+    "Méthode : on compte ligne par ligne, sans oublier de carreau ni en compter deux fois.\n\n" +
+    `Calcul : la figure contient $${n}$ carreaux.\n\n` +
+    `Conclusion : l’aire vaut $${n}$ ${U2t(u)}.`;
+  if (Math.random() < 0.4) {
+    return qcmAire(
+      randomChoice([`${phrase} Choisis l’aire de la figure.`, `${phrase} Quelle aire est la bonne ?`, `${phrase} Coche l’aire de la zone coloriée.`]),
+      chA(n, u),
+      [chA(f.rows * f.cols, u), chL(perimetreCellules(f.cells), u), chA(n + 1, u), chA(n - 1, u), chA(perimetreCellules(f.cells), u)],
+      explication + (f.rows * f.cols !== n ? ` ⚠️ Pas $${f.rows * f.cols}$ : ce serait le rectangle entier, cases vides comprises.` : ""),
+      canvas
+    );
+  }
+  return {
+    text: randomChoice([
+      `${phrase} Calcule l’aire de la figure.`,
+      `${phrase} Calcule l’aire de la zone coloriée.`,
+      `${phrase} Donne l’aire de la figure.`,
+      `${phrase} Quelle aire couvre la figure ?`,
+      `${phrase} Combien vaut l’aire coloriée ?`,
+      `${phrase} Compte : quelle est l’aire ?`,
+      ...(niv === 2 ? [`${phrase} Calcule l’aire de la figure en forme ${f.deForme}.`] : []),
+    ]),
+    format: "short",
+    expected: [`${n} ${U2t(u)}`],
+    comparator: "number_equal",
+    explanation: explication,
+    canvas,
+  };
+}
+
+/* ---------------------------------------------------------------------------
+   ⭐ 15/11/2026 — LE PAVÉ NUMÉRIQUE (demande de Frédéric) : une réponse
+   numérique sur deux, à ★1-★3, se tape sur le pavé à gros boutons (un peu
+   moins à ★4-★5). Seulement si la réponse est un nombre suivi d’une unité
+   simple (lirePave) ; jamais pour un QCM.
+--------------------------------------------------------------------------- */
+function peutEtrePave(q: Q, etoiles: number): Q {
+  if (q.format !== "short" || q.comparator !== "number_equal" || !lirePave(q.expected?.[0])) return q;
+  return Math.random() < (etoiles <= 3 ? 0.5 : 0.35) ? { ...q, saisie: "pave" } : q;
 }
 
 /* ===========================================================================
@@ -2519,9 +3021,9 @@ const ITEMS: TutorBankItemV4[] = [
     microId: "aire_rectangle",
     difficulty: 1,
     theme: "neutral",
-    text: "Calculer l’aire d’un rectangle de longueur 8 cm et de largeur 3 cm.",
+    text: "Calcule l’aire d’un rectangle de $8$ cm sur $3$ cm.",
     format: "short",
-    expected: ["24"],
+    expected: ["24 cm²"],
     comparator: "number_equal",
     hint: "Aire du rectangle = longueur × largeur.",
     explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
@@ -2541,7 +3043,7 @@ const ITEMS: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "On multiplie la longueur par la largeur.",
     tags: ["aire", "rectangle", "template"],
-    generate: () => genRectAire(false),
+    generate: () => genRectNu(2),
   },
   {
     kind: "template",
@@ -2550,7 +3052,7 @@ const ITEMS: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "aire_surface",
     microId: "aire_rectangle",
-    difficulty: 2,
+    difficulty: 3,
     theme: "neutral",
     hint: "La surface d’un objet rectangulaire est l’aire du rectangle : longueur × largeur.",
     tags: ["aire", "rectangle", "probleme", "template"],
@@ -2563,7 +3065,7 @@ const ITEMS: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "aire_surface",
     microId: "aire_rectangle",
-    difficulty: 2,
+    difficulty: 3,
     theme: "neutral",
     hint: "Lis les dimensions directement sur la figure.",
     tags: ["aire", "rectangle", "quadrilatere", "canvas", "template"],
@@ -2578,7 +3080,7 @@ const ITEMS: TutorBankItemV4[] = [
     microId: "aire_rectangle",
     difficulty: 2,
     theme: "neutral",
-    text: "L’aire d’un rectangle de longueur 8 cm et de largeur 3 cm vaut 24 cm². Pourquoi ?",
+    text: "Pourquoi un rectangle de $8$ cm sur $3$ cm a-t-il $24\\ \\text{cm}^2$ d’aire ?",
     format: "qcm",
     choices: [
       "on multiplie la longueur par la largeur : 8 × 3 = 24",
@@ -2609,9 +3111,9 @@ const ITEMS: TutorBankItemV4[] = [
     microId: "aire_carre",
     difficulty: 1,
     theme: "neutral",
-    text: "Calculer l’aire d’un carré de côté 6 cm.",
+    text: "Calcule l’aire d’un carré de côté $6$ cm.",
     format: "short",
-    expected: ["36"],
+    expected: ["36 cm²"],
     comparator: "number_equal",
     hint: "Aire du carré = côté × côté.",
     explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
@@ -2631,7 +3133,7 @@ const ITEMS: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Multiplie le côté par lui-même.",
     tags: ["aire", "carre", "template"],
-    generate: () => genCarreAire(false),
+    generate: () => genCarreNu(),
   },
 
   // =========================
@@ -2646,9 +3148,9 @@ const ITEMS: TutorBankItemV4[] = [
     microId: "aire_triangle",
     difficulty: 2,
     theme: "neutral",
-    text: "Calculer l’aire d’un triangle de base 10 cm et de hauteur 4 cm.",
+    text: "Calcule l’aire d’un triangle de base $10$ cm et de hauteur $4$ cm.",
     format: "short",
-    expected: ["20"],
+    expected: ["20 cm²"],
     comparator: "number_equal",
     hint: "Aire du triangle = (base × hauteur) ÷ 2.",
     explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
@@ -2723,9 +3225,9 @@ const ITEMS: TutorBankItemV4[] = [
     microId: "aire_parallelogramme",
     difficulty: 2,
     theme: "neutral",
-    text: "Calculer l’aire d’un parallélogramme de base 8 cm et de hauteur 5 cm.",
+    text: "Calcule l’aire d’un parallélogramme de base $8$ cm et de hauteur $5$ cm.",
     format: "short",
-    expected: ["40"],
+    expected: ["40 cm²"],
     comparator: "number_equal",
     hint: "Aire du parallélogramme = base × hauteur.",
     explanation: "Définition : une aire mesure la surface occupée par une figure, avec une unité carrée comme cm² ou m².\n\n" +
@@ -3015,11 +3517,50 @@ const ITEMS: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "aire_surface",
     microId: "aire_comprendre",
-    difficulty: 1,
+    difficulty: 3,
     theme: "neutral",
     hint: "Recouvrir une surface, c’est l’aire ; faire le tour, c’est le périmètre.",
     tags: ["aire", "comprendre", "aire_perimetre", "qcm", "template"],
     generate: () => genAireOuPerimetreSituation(),
+  },
+  {
+    kind: "template",
+    id: "4e_aire_comprendre_x12_rect_aire_perimetre",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_comprendre",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Aire : longueur × largeur, en unité carrée. Périmètre : le tour, en unité de longueur.",
+    tags: ["aire", "comprendre", "aire_perimetre", "quadrilatere", "template"],
+    generate: () => genAireOuPerimetreRect(1),
+  },
+  {
+    kind: "template",
+    id: "4e_aire_comprendre_x13_rect_aire_perimetre_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Regarde l’unité : cm² pour une aire, cm pour un périmètre.",
+    tags: ["aire", "comprendre", "aire_perimetre", "quadrilatere", "template"],
+    generate: () => genAireOuPerimetreRect(2),
+  },
+  {
+    kind: "template",
+    id: "4e_aire_comprendre_x14_forme_grille",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_comprendre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "L’aire compte les carreaux ; le périmètre compte les côtés de carreau sur le bord.",
+    tags: ["aire", "comprendre", "aire_perimetre", "figure_libre", "template"],
+    generate: () => genAireOuPerimetreForme(),
   },
   {
     kind: "template",
@@ -3125,11 +3666,11 @@ const ITEMS: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "aire_surface",
     microId: "aire_rectangle",
-    difficulty: 2,
+    difficulty: 1,
     theme: "neutral",
     hint: "$A = L \\times l$.",
     tags: ["aire", "rectangle", "template"],
-    generate: () => genRectAire(false),
+    generate: () => genRectNu(1),
   },
   {
     kind: "template",
@@ -3151,11 +3692,11 @@ const ITEMS: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "aire_surface",
     microId: "aire_rectangle",
-    difficulty: 2,
+    difficulty: 1,
     theme: "neutral",
     hint: "Lis les dimensions sur la figure.",
     tags: ["aire", "rectangle", "quadrilatere", "canvas", "template"],
-    generate: () => genRectAire(true),
+    generate: () => genRectQcm(1),
   },
   {
     kind: "fixed",
@@ -3188,6 +3729,19 @@ const ITEMS: TutorBankItemV4[] = [
     tags: ["aire", "rectangle", "probleme", "conversion", "template"],
     generate: () => genRectDecimalOuMixte(),
   },
+  {
+    kind: "template",
+    id: "4e_aire_rectangle_x6_qcm",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_rectangle",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Aire = longueur × largeur, en unité carrée.",
+    tags: ["aire", "rectangle", "quadrilatere", "qcm", "template"],
+    generate: () => genRectQcm(2),
+  },
 
   /* ===== CARRE (compléments) ===== */
   {
@@ -3201,7 +3755,7 @@ const ITEMS: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "$A = c \\times c = c^2$.",
     tags: ["aire", "carre", "template"],
-    generate: () => genCarreAire(true),
+    generate: () => genCarreQcm(1),
   },
   {
     kind: "fixed",
@@ -3321,6 +3875,32 @@ const ITEMS: TutorBankItemV4[] = [
     tags: ["aire", "carre", "template"],
     generate: () => genCarreNiveau2(),
   },
+  {
+    kind: "template",
+    id: "4e_aire_carre_x9_qcm",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_carre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Côté × côté, en unité carrée : 4 × côté, c’est le périmètre.",
+    tags: ["aire", "carre", "quadrilatere", "qcm", "template"],
+    generate: () => genCarreQcm(2),
+  },
+  {
+    kind: "template",
+    id: "4e_aire_carre_x10_objets",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_carre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Multiplie le côté par lui-même.",
+    tags: ["aire", "carre", "quadrilatere", "probleme", "template"],
+    generate: () => genCarreAire(true),
+  },
 
   /* ===== TRIANGLE (compléments) ===== */
   {
@@ -3330,7 +3910,7 @@ const ITEMS: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "aire_surface",
     microId: "aire_triangle",
-    difficulty: 2,
+    difficulty: 3,
     theme: "neutral",
     hint: "$A = \\dfrac{\\text{base} \\times \\text{hauteur}}{2}$.",
     tags: ["aire", "triangle", "template"],
@@ -3345,9 +3925,9 @@ const ITEMS: TutorBankItemV4[] = [
     microId: "aire_triangle",
     difficulty: 2,
     theme: "neutral",
-    text: "Un triangle a une base de $12$ cm et une hauteur de $5$ cm. Quelle est son aire (en $\\text{cm}^2$) ?",
+    text: "Calcule l’aire d’un triangle de base $12$ cm et de hauteur $5$ cm.",
     format: "short",
-    expected: ["30"],
+    expected: ["30 cm²"],
     comparator: "number_equal",
     hint: "$\\dfrac{12 \\times 5}{2}$.",
     explanation:
@@ -3426,6 +4006,58 @@ const ITEMS: TutorBankItemV4[] = [
     generate: () => genTriInverse(),
   },
   {
+    kind: "template",
+    id: "4e_aire_triangle_x9_nu",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_triangle",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "(base × hauteur) ÷ 2.",
+    tags: ["aire", "triangle", "canvas", "template"],
+    generate: () => genTriNu(1),
+  },
+  {
+    kind: "template",
+    id: "4e_aire_triangle_x10_qcm",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_triangle",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "N’oublie pas de diviser par 2.",
+    tags: ["aire", "triangle", "canvas", "qcm", "template"],
+    generate: () => genTriQcm(1),
+  },
+  {
+    kind: "template",
+    id: "4e_aire_triangle_x11_piege",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_triangle",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La hauteur est perpendiculaire à la base ; le côté penché ne sert pas.",
+    tags: ["aire", "triangle", "canvas", "template"],
+    generate: () => genTriNu(2),
+  },
+  {
+    kind: "template",
+    id: "4e_aire_triangle_x12_qcm",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_triangle",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Base × hauteur ÷ 2, avec la hauteur perpendiculaire à la base.",
+    tags: ["aire", "triangle", "canvas", "qcm", "template"],
+    generate: () => genTriQcm(2),
+  },
+  {
     kind: "fixed",
     id: "4e_aire_triangle_x6_formule",
     niveau: "4e",
@@ -3457,7 +4089,7 @@ const ITEMS: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "$A = \\text{base} \\times \\text{hauteur}$.",
     tags: ["aire", "parallelogramme", "template"],
-    generate: () => genParaAire(),
+    generate: () => genParaAire(2),
   },
   {
     kind: "fixed",
@@ -3468,9 +4100,9 @@ const ITEMS: TutorBankItemV4[] = [
     microId: "aire_parallelogramme",
     difficulty: 2,
     theme: "neutral",
-    text: "Un parallélogramme a une base de $9$ cm et une hauteur de $6$ cm. Quelle est son aire (en $\\text{cm}^2$) ?",
+    text: "Calcule l’aire d’un parallélogramme de base $9$ cm et de hauteur $6$ cm.",
     format: "short",
-    expected: ["54"],
+    expected: ["54 cm²"],
     comparator: "number_equal",
     hint: "$9 \\times 6$.",
     explanation:
@@ -3541,6 +4173,45 @@ const ITEMS: TutorBankItemV4[] = [
     tags: ["aire", "parallelogramme", "probleme", "template"],
     generate: () => genParaProbleme(),
   },
+  {
+    kind: "template",
+    id: "4e_aire_parallelogramme_x7_nu",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_parallelogramme",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Base × hauteur.",
+    tags: ["aire", "parallelogramme", "quadrilatere", "template"],
+    generate: () => genParaAire(1),
+  },
+  {
+    kind: "template",
+    id: "4e_aire_parallelogramme_x8_qcm",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_parallelogramme",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Base × hauteur, sans diviser par 2.",
+    tags: ["aire", "parallelogramme", "quadrilatere", "qcm", "template"],
+    generate: () => genParaQcm(1),
+  },
+  {
+    kind: "template",
+    id: "4e_aire_parallelogramme_x9_qcm",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_parallelogramme",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "La hauteur, pas le côté penché.",
+    tags: ["aire", "parallelogramme", "quadrilatere", "qcm", "template"],
+    generate: () => genParaQcm(2),
+  },
 
   /* ===== FIGURE (compléments) ===== */
   {
@@ -3554,7 +4225,7 @@ const ITEMS: TutorBankItemV4[] = [
     theme: "neutral",
     hint: "Compte les carrés remplis.",
     tags: ["aire", "figure", "figure_libre", "template"],
-    generate: () => genGrilleSimple(),
+    generate: () => genGrilleNu(2),
   },
   {
     kind: "template",
@@ -3649,6 +4320,32 @@ const ITEMS: TutorBankItemV4[] = [
     hint: "Découpe en morceaux connus : rectangle, triangle, demi-disque ($\\pi r^2 \\div 2$).",
     tags: ["aire", "figure_composee", "trapeze", "disque", "template"],
     generate: () => genComposeeCourbe(),
+  },
+  {
+    kind: "template",
+    id: "4e_aire_figure_x8_compte",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_figure",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Compte les carreaux de la figure.",
+    tags: ["aire", "figure", "figure_libre", "template"],
+    generate: () => genGrilleNu(1),
+  },
+  {
+    kind: "template",
+    id: "4e_aire_figure_x9_compte_2",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "aire_surface",
+    microId: "aire_figure",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Compte ligne par ligne, sans oublier de carreau.",
+    tags: ["aire", "figure", "figure_libre", "template"],
+    generate: () => genGrilleNu(1),
   },
 
   /* ===== PROBLEME (compléments) ===== */
@@ -3866,7 +4563,7 @@ function avecUniteAire(q: Q): Q {
 
 export const airesBank: TutorBankItemV4[] = ITEMS.map((it) =>
   it.kind === "template"
-    ? { ...it, generate: () => avecUniteAire(it.generate()) }
+    ? { ...it, generate: () => peutEtrePave(avecUniteAire(it.generate()), it.difficulty) }
     : // Les items figés aussi : « (en cm²) » → « 36 cm² ».
       ({ ...it, expected: avecUniteAire(it as unknown as Q).expected } as TutorBankItemV4)
 );
