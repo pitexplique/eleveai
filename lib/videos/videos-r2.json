@@ -16235,5 +16235,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_face&display=simple"
+ },
+ "cm2-solides-defi": {
+  "fichier": "cm2/maths/solides/06-defi/eleveai-maths-cm2-solides-defi.mp4",
+  "poster": "cm2/maths/solides/06-defi/eleveai-maths-cm2-solides-defi.png",
+  "vignette": "cm2/maths/solides/06-defi/eleveai-maths-cm2-solides-defi.vignette.webp",
+  "titre": "Combien de joint pour toutes les arêtes d'un aquarium ? — Défi : l'aquarium — épisode 6 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_defi&display=simple"
+ },
+ "cm2-solides-defi-short": {
+  "fichier": "cm2/maths/solides/06-defi/eleveai-maths-cm2-solides-defi-short.mp4",
+  "poster": "cm2/maths/solides/06-defi/eleveai-maths-cm2-solides-defi-short-miniature.png",
+  "vignette": "cm2/maths/solides/06-defi/eleveai-maths-cm2-solides-defi-short-miniature.vignette.webp",
+  "titre": "27 morceaux de gâteau : combien ont 3 faces au chocolat ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_defi&display=simple"
  }
 }

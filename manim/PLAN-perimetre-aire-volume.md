@@ -106,7 +106,7 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 - [x] Identifier les faces d’un solide — `solide_face`
 - [x] Reconnaître un patron de solide — `solide_patron`
 - [x] Construire un patron de cube — `solide_patron_construire`
-- [ ] Résoudre un défi sur les solides — `solide_defi`
+- [x] Résoudre un défi sur les solides — `solide_defi`
 
 **Longueurs et conversions** (4)
 - [ ] Comparer des longueurs — `longueur_comparer`
