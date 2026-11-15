@@ -40,6 +40,6 @@ Ceintures : paysage verte, short blanche. Lettres justes : 39 B/A + C · 40 C/B 
 1. Envoi R2 depuis un poste qui a les clés (voir ci-dessus).
 2. Côté 1er poste, après la fusion : dater les `pas_avant`, fabriquer les miniatures, ajouter les entrées au manifeste partagé et à `lib/videos/*.json`, créer les lignes `notion_ressources` d'après `coach-suites.md`, puis YouTube.
 
-## Deux décisions qui attendent Frédéric
-1. **Les shorts dépassent la fourchette du brief** (45 s à 1 min 15) : 1 min 30 (39), 1 min 27 (40), 1 min 14 (41). Les voix validées sont plus denses que l'estimation. Laisser, ou resserrer les respirations et re-rendre ?
-2. **Deux micros de la demande de départ n'ont pas de vidéo neuve** : `suite_calculer_termes` et `suite_explicite_recurrence` sont déjà servis par les entrées `aussi` des ép. 18 et 19 (voir `coach-suites.md`). Le coach les couvre ; seul inconvénient, un élève de terminale y voit « Maths 1re spé » en haut de l'écran.
+## Décisions
+1. ✅ **Tranché par Frédéric le 15/11 : on laisse les shorts tels quels.** Ils dépassent la fourchette du brief (45 s à 1 min 15) : 1 min 30 (39), 1 min 28 (40), 1 min 14 (41), 1 min 13 (42) — les voix validées sont plus denses que l'estimation faite en les écrivant. Rien à re-rendre. ⚠️ Pour les prochains lots : estimer la durée d'un short en ajoutant aux mots le compte à rebours de 3 s et les temps d'animation, sinon l'écart se reproduira.
+2. ⏳ **Deux micros de la demande de départ n'ont pas de vidéo neuve** : `suite_calculer_termes` et `suite_explicite_recurrence` sont déjà servis par les entrées `aussi` des ép. 18 et 19 (voir `coach-suites.md`). Le coach les couvre ; seul inconvénient, un élève de terminale y voit « Maths 1re spé » en haut de l'écran.
