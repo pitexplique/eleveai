@@ -1,0 +1,7 @@
+{
+  "voix": "cm2-longueur-{ep}-short",
+  "sons": "public/sons/cm2-longueur-{ep}-short",
+  "sortie": "manim/sorties/cm2/maths/longueurs/{num}-{ep}",
+  "nom": "eleveai-maths-cm2-longueur-{ep}-short",
+  "episodes": { "comparer": "01", "convertir": "02", "estimer": "03", "defi": "04" }
+}
