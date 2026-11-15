@@ -10,7 +10,7 @@
 // Ajouter une classe = ajouter ses renvois ; scripts/verifier-metiers.ts dit
 // quelle notion n'en a pas.
 
-import { F, M, type LienMetier } from "./metiers-catalogue";
+import { F, M, V, type LienMetier } from "./metiers-catalogue";
 
 export const FAMILLES_METIERS = {
   // ═══ PRIMAIRE ═══════════════════════════════════════════════════════════
@@ -56,16 +56,20 @@ export const FAMILLES_METIERS = {
     M("eleveur", "calcule combien de foin il faut pour nourrir ses vaches une semaine."),
   ],
   P_longueurs: [
-    F("couturier", "mesure la longueur d'une manche avec son mètre ruban."),
-    M("menuisier", "mesure une planche avant de la couper."),
-    F("entraineur", "mesure la longueur d'un saut dans le sable."),
-    // 14/11/2026 : les métiers de la série vidéo Longueurs CE2
-    F("astronome", "mesure à la règle les segments de sa carte du ciel."),
-    F("biologiste", "mesure une tortue de 1 m et un requin de 90 cm : qui est le plus long ?"),
-    M("pilote", "vole 900 km, dans un avion de 40 m de long."),
-    F("paysagiste", "estime une allée en grands pas : 6 pas, environ 6 m."),
-    M("eclairagiste", "met bout à bout un câble de 3 m et un câble de 250 cm."),
-    F("patissier", "coupe des rubans de 25 cm dans 1 m de ruban pour ses gâteaux."),
+    // `V` = montré dans une vidéo de la notion (séries Longueurs CE2 et CM1, relevé du 14/11/2026)
+    F("couturier", "compare un ruban de 1 m et un ruban de 85 cm pour finir une robe.", V),
+    M("menuisier", "mesure une planche avant de la couper.", V),
+    F("entraineur", "mesure la longueur d'un saut dans le sable.", V),
+    F("astronome", "mesure à la règle les segments de sa carte du ciel.", V),
+    F("biologiste", "mesure une tortue de 1 m et un requin de 90 cm : qui est le plus long ?", V),
+    M("pilote", "vole 900 km, dans un avion de 40 m de long.", V),
+    F("paysagiste", "estime une allée en grands pas : 6 pas, environ 6 m.", V),
+    M("eclairagiste", "met bout à bout un câble de 3 m et un câble de 250 cm.", V),
+    F("patissier", "coupe des rubans de 25 cm dans 1 m de ruban pour ses gâteaux.", V),
+    M("electricien", "coupe 5 m de câble, alors que son plan est écrit en centimètres : 500 cm.", V),
+    F("guide-nature", "estime qu'un sentier de forêt fait 3 km, pas 3 m.", V),
+    M("auteur-bd", "mesure à la règle les cases de sa planche, en partant bien du 0.", V),
+    F("facteur", "fait une tournée de 3 km à vélo : après 1 200 m, il lui reste 1 800 m.", V),
   ],
   P_masses: [
     M("boulanger", "pèse 1 kg de farine pour faire son pain."),
@@ -75,8 +79,13 @@ export const FAMILLES_METIERS = {
   ],
   P_contenances: [
     F("infirmier", "verse 5 mL de sirop dans une cuillère-mesure."),
-    M("cuisinier", "mesure 1 litre de lait pour une crème."),
     M("maitre-nageur", "sait qu'une piscine contient des milliers de litres d'eau."),
+    // `V` = montré dans une vidéo de la notion (série Contenance CE2, relevé du 14/11/2026)
+    M("cuisinier", "mesure l'eau, le lait et la crème de sa soupe, en litres et en centilitres.", V),
+    F("chimiste", "remplit un flacon de 1 L avec un petit pot de 1 dL : 10 pots.", V),
+    M("entraineur", "compare les gourdes de ses joueurs : 5 dL ou 75 cL, laquelle contient le plus ?", V),
+    F("horticulteur", "arrose ses plants avec un arrosoir de 5 L : combien en reste-t-il ?", V),
+    M("mecanicien", "verse 4 L d'huile dans un moteur, avec un bidon de 2 L et des bouteilles.", V),
   ],
   P_durees: [
     F("conducteur-bus", "part à 8 h et arrive à 8 h 25 : 25 minutes de trajet."),
@@ -91,8 +100,20 @@ export const FAMILLES_METIERS = {
   ],
   P_perimetre_aire: [
     F("eleveur", "pose une clôture tout autour du pré de ses chevaux."),
-    M("carreleur", "compte les carreaux qu'il faut pour couvrir le sol."),
-    F("jardinier", "fait le tour du potager pour savoir combien de bordure acheter."),
+    // `V` = montré dans une vidéo de la notion (Aire CM1 ép. 1 ; séries Périmètre et Aire CM2, relevé du 14/11/2026)
+    M("carreleur", "compte les carreaux qu'il faut pour couvrir le sol.", V),
+    M("jardinier", "trace les lignes blanches d'un terrain de foot de 100 m sur 64 m : 328 m.", V),
+    M("regisseur", "pose un ruban lumineux tout autour de la scène, et un tapis sur tout le sol.", V),
+    F("voilier", "coud une bande solide tout autour d'une voile triangulaire.", V),
+    F("bijoutier", "entoure d'un fil d'argent le bord d'un pendentif à 6 côtés.", V),
+    M("technicien-robotique", "enterre le fil d'un robot tondeuse tout autour du jardin.", V),
+    F("couturier", "coud des carrés de tissu en patchwork : 3 × 4 ou 2 × 6, la même aire.", V),
+    M("imprimeur", "note l'aire de chaque commande : un timbre en cm², une bâche en m².", V),
+    M("vitrier", "convertit une vitre de 3 dm² en 300 cm² pour sa machine.", V),
+    F("technicien-energie", "calcule l'aire d'un toit de 8 m sur 5 m avant de poser des panneaux solaires.", V),
+    M("traiteur", "coupe un sandwich rectangulaire en diagonale : deux triangles, chacun la moitié de l'aire.", V),
+    F("soigneur", "couvre d'herbe le sol d'un enclos en L, découpé en deux rectangles.", V),
+    F("concepteur-skatepark", "dessine un skatepark de 48 m² et 6 m de large : 8 m de long.", V),
   ],
   P_reperage: [
     M("facteur", "trouve la bonne rue grâce au plan de la ville."),
@@ -105,9 +126,17 @@ export const FAMILLES_METIERS = {
     F("graphiste", "dessine un logo avec des carrés, des cercles et des triangles."),
   ],
   P_solides: [
-    M("logisticien", "range des cartons en forme de cube dans un camion."),
     F("patissier", "monte un gâteau en forme de cylindre."),
     M("architecte", "fait une maquette de maison avec des cubes et des prismes."),
+    // `V` = montré dans une vidéo de la notion (séries Solides CE2 et CM1, relevé du 14/11/2026)
+    F("commercant", "range les jouets de son magasin par forme : cubes, pavés, boules, cônes.", V),
+    M("logisticien", "colle une étiquette sur chaque face d'un colis en forme de cube, du scotch sur les arêtes.", V),
+    F("archeologue", "fabrique en carton la maquette d'une pyramide d'Égypte.", V),
+    M("designer-emballage", "dessine à plat le patron d'une boîte en forme de cube.", V),
+    F("createur-lampes", "pose un fil de lumière sur toutes les arêtes de ses lampes.", V),
+    F("guide-montagne", "monte une tente en forme de prisme droit à base triangulaire.", V),
+    F("createur-jeux", "fabrique un dé en carton : les faces opposées font toujours 7.", V),
+    M("game-designer", "empile des blocs en cube pour un niveau de jeu, et compte ceux qui sont cachés.", V),
   ],
   P_symetrie: [
     F("styliste", "dessine une robe pareille à gauche et à droite."),

@@ -161,6 +161,24 @@ export const METIERS = {
   journaliste: { f: "journaliste", m: "journaliste", centres: ["reseaux-sociaux", "histoire-geographie"], etudes: "bac+5", ligne: "enquête et explique l'actualité." },
   sondeur: { f: "chargée d'études en sondages", m: "chargé d'études en sondages", centres: ["reseaux-sociaux", "histoire-geographie"], etudes: "bac+5", ligne: "interroge les gens et tire des conclusions de leurs réponses." },
   statisticien: { f: "statisticienne", m: "statisticien", centres: ["sciences", "argent-budget"], etudes: "bac+5", ligne: "tire des conclusions sûres à partir des données." },
+
+  // ─── 14/11/2026 : métiers montrés dans les séries vidéo du primaire ──────
+  // (contenance CE2, solides CE2-CM1, longueurs CM1, périmètre et aire CM2)
+  chimiste: { f: "chimiste", m: "chimiste", centres: ["sciences"], etudes: "bac+5", ligne: "fait des expériences en laboratoire et mesure les produits." },
+  horticulteur: { f: "horticultrice", m: "horticulteur", centres: ["nature-ecologie"], etudes: "CAP", ligne: "fait pousser des fleurs et des plantes dans une serre." },
+  "designer-emballage": { f: "designeuse d'emballages", m: "designer d'emballages", centres: ["art-design"], etudes: "bac+3", ligne: "invente les boîtes et les emballages des produits." },
+  "createur-lampes": { f: "créatrice de lampes", m: "créateur de lampes", centres: ["art-design", "sciences"], etudes: "bac+3", ligne: "dessine et fabrique des lampes et des luminaires." },
+  "createur-jeux": { f: "créatrice de jeux de société", m: "créateur de jeux de société", centres: ["jeux-defis", "art-design"], etudes: "variable", ligne: "invente les règles, le plateau, les dés et les pions d'un jeu." },
+  "guide-nature": { f: "guide nature", m: "guide nature", centres: ["nature-ecologie"], etudes: "bac+2", ligne: "emmène des groupes découvrir la forêt, les plantes et les animaux." },
+  "auteur-bd": { f: "autrice de bandes dessinées", m: "auteur de bandes dessinées", centres: ["art-design"], etudes: "variable", ligne: "écrit et dessine des histoires case par case." },
+  regisseur: { f: "régisseuse de spectacles", m: "régisseur de spectacles", centres: ["musique", "cinema-series"], etudes: "bac+2", ligne: "prépare la scène, les lumières et le son d'un spectacle." },
+  voilier: { f: "voilière", m: "voilier", centres: ["sport", "transports"], etudes: "CAP", ligne: "coupe et coud les voiles des bateaux." },
+  bijoutier: { f: "créatrice de bijoux", m: "créateur de bijoux", centres: ["art-design"], etudes: "CAP", ligne: "dessine et fabrique des bagues, des colliers et des pendentifs." },
+  "technicien-robotique": { f: "technicienne en robotique", m: "technicien en robotique", centres: ["technologie-ia"], etudes: "bac+2", ligne: "installe, règle et répare des robots." },
+  imprimeur: { f: "imprimeuse", m: "imprimeur", centres: ["art-design"], etudes: "bac pro", ligne: "imprime des affiches, des livres et des bâches." },
+  vitrier: { f: "vitrière", m: "vitrier", centres: ["art-design"], etudes: "CAP", ligne: "découpe et pose les vitres des fenêtres et des vitrines." },
+  traiteur: { f: "cheffe traiteur", m: "chef traiteur", centres: ["cuisine"], etudes: "CAP", ligne: "prépare les plats et les buffets des fêtes et des réceptions." },
+  "concepteur-skatepark": { f: "conceptrice de skateparks", m: "concepteur de skateparks", centres: ["sport", "art-design"], etudes: "bac+3", ligne: "dessine les rampes et les pistes d'un skatepark." },
 } satisfies Record<string, Metier>;
 
 export type MetierId = keyof typeof METIERS;
