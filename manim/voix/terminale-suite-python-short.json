@@ -1,0 +1,9 @@
+{
+  "00-garde": "Programmer les termes d'une suite. Tu paries sur la valeur de u à la fin ?",
+  "01-situation": "Lundi, 2 personnes connaissent une information. Chaque jour, chacune la dit à une personne de plus, et une personne la découvre toute seule. On a donc u indice n plus 1 égale 2 fois u indice n, plus 1.",
+  "02-code": "Trois lignes de Python. u égale 2. Pour i dans range de 3. Puis, décalée : u égale 2 fois u, plus 1.",
+  "03-question": "Question ! À la fin de ces trois lignes, u vaut : A : 11. B : 47. C : 23. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C. 2, puis 5, puis 11, puis 23. Trois tours depuis u indice 0 : u vaut 23, c'est jeudi.",
+  "04-commentaire": "Et toi : après un quatrième tour, combien de personnes connaissent l'information ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,9 @@
+{
+  "00-garde": "La suite e puissance n a. Tu paries que le son d'une guitare ne s'arrête jamais vraiment ?",
+  "01-situation": "On pince une corde, puis on la laisse vibrer. Le volume suit une exponentielle : A de t égale 100 fois e puissance moins 0,4 t, en pour cent, avec t en secondes.",
+  "02-releves": "Seconde par seconde : 100 %, puis environ 67 %, puis environ 44,9 %, puis environ 30,1 %.",
+  "03-question": "Question ! Cette suite de pourcentages est : A : géométrique de raison e puissance moins 0,4, soit environ 0,67. B : arithmétique de raison moins 33. C : géométrique de raison moins 0,4. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A. Chaque seconde, on multiplie par e puissance moins 0,4, soit environ 0,67 : le volume perd environ 33 % par seconde, et il ne devient jamais tout à fait nul.",
+  "04-commentaire": "Et toi : au bout de 4 secondes, quel pourcentage du volume reste-t-il ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

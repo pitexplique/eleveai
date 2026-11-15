@@ -1,0 +1,9 @@
+{
+  "00-garde": "Une suite d'intégrales. Tu paries que cette aire finit par disparaître ?",
+  "01-situation": "Sur une affiche, un dégradé va du blanc au noir. Son profil est la courbe y égale x puissance n, entre 0 et 1. L'encre utilisée, c'est l'aire sous la courbe.",
+  "02-courbes": "n égale 1 : l'aire vaut 1 divisé par 2. n égale 2 : 1 divisé par 3. n égale 5 : 1 divisé par 6. n égale 20 : 1 divisé par 21. À chaque fois, I indice n égale 1 divisé par n plus 1.",
+  "03-question": "Question ! La limite de I indice n, quand n tend vers plus l'infini, est : A : 1. B : 0. C : on ne peut pas conclure. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B. n plus 1 tend vers plus l'infini, donc 1 divisé par n plus 1 tend vers 0 : il ne reste presque plus d'encre.",
+  "04-commentaire": "Et toi : combien vaut I indice 9 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
