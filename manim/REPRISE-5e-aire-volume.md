@@ -33,11 +33,47 @@ Fiches : `lib/fiches/maths-5e-aires.tsx`, `maths-5e-volumes.tsx`, `maths-5e-conv
   - Questions : figure posée AVANT la question avec `avant_q=` (et non `autres_q=`, qui la pose après les choix).
   - Aperçu -ql : `manim/scripts/5e/media-5e-aire-triangle/videos/5e_aire_triangle/480p15/eleveai-maths-5e-aire-triangle.mp4` (⛔ dossier media jamais commité).
 - Short : série `prototypes/ti-margo/films/5e-aire.json` (+ `5e-commun.js` = copie de `cm2-commun.js`, `5e-aire.js`, `5e-aire-cues.js`), film `films/5e-aire-triangle.js` « Le pignon de la cabane » (Q C, 6 m²). Cues : `python scripts/ti-margo-cues.py 5e-aire triangle`. Rendu : `node scripts/ti-margo-short.mjs 5e-aire triangle film` → `manim/sorties/5e/maths/aire/02-triangle/eleveai-maths-5e-aire-triangle-short.mp4`.
-- ⏳ **En attente de la validation du pilote par Frédéric** (aperçu ouvert EN PAUSE). Pas de HD, pas de miniature, rien au manifeste.
+- ✅ Short rendu : 65 s, 1080 × 1920, avec son ; images contrôlées (cotes sur cartouche, « 6 m² » écarté de « 3 m »). Paysage -ql : `verifier-bords-video.py` = 0.
+- Aperçu pour Frédéric : `manim/sorties/5e/maths/aire/02-triangle/apercu.html` (+ copie du -ql), servi par la config `sorties-video` de `.claude/launch.json` (port 3900) → `http://localhost:3900/5e/maths/aire/02-triangle/apercu.html`. Vidéos SANS autoplay (en pause). ⛔ Une page `file:///` ne charge pas les vidéos dans le volet : passer par ce serveur.
+- ✅ Commit 586ffab01 (47 fichiers, par chemin, pas poussé).
+- ✅ **Pilote VALIDÉ par Frédéric le 15/11 (« Oui, lance la suite »).** HD fait : 202,65 s, `verifier-bords` = 0.
 
-## Prochaine étape (après le oui du pilote)
-1. Recopier les voix validées en `manim/voix/5e-<notion>-<ep>(-short).json` (clés paysage `00-garde … 10-abonne`, short `00-accroche … 05-abonne`, comme le CM2).
-2. Marquer `V` sur les 8 métiers de la matrice pris (maçonne, agriculteur, technicienne énergies renouvelables, logisticien, ingénieur de l'eau, pâtissière, pharmacien, cheffe cuisinière) — ⚠️ `lib/matrice/metiers-college.ts` est peut-être touché par le 1er poste (6e) : vérifier, sinon noter dans `coach-5e.md` pour la fusion.
-3. PILOTE `aire_triangle` : WAV (Julie, débit −6), marques, script paysage Manim sur le modèle `manim/scripts/cm2/aire_cm2_commun.py` (ceintures importées de `scripts/seconde/signes_expression_2de.py`), dry run AUDIT=1 BORDS=1 (0 AUDIT-AVANCE, 0 RETARD), rendu `-ql`, planche ; short Ti Margo (`prototypes/ti-margo/LISEZ-MOI.md`, série `films/5e-aire.json`) en aperçu. Montrer à Frédéric, aperçu EN PAUSE.
-4. Seulement après la validation du pilote : les 16 autres, puis HD un par un (verrou HD), `verifier-bords-video.py` = 0, miniatures (« Dessin animé » pour les shorts), entrées `manim/poste2/manifeste-5e.json`, R2 ou note, `coach-5e.md`.
-5. Cocher le plan, commit par chemin, jamais de push.
+## Production de la série Aire (15/11, après le oui du pilote)
+Outils du poste (dans le dépôt) : `manim/poste2/5e_hd.sh <script.py> <Scène> <nom> <media_dir> <sortie>` (verrou
+`%TEMP%/eleveai-rendu-hd.lock`, `-qh --disable_caching`, copie, durée, `verifier-bords`), `manim/poste2/5e_film.sh 5e-aire <ep>`
+(short sous le même verrou), `manim/poste2/5e_planche.sh <mp4> <png> <colonnes> t1 t2 …` (planche à relire avec Read).
+Chaîne d'un micro : WAV (2 fichiers) → marques → `ti-margo-cues.py 5e-aire <ep>` → script paysage → dry run AUDIT=1 BORDS=1
+jusqu'à 0 AVANCE / RETARD / TARD / BORD (les `AUDIT-ABSENT « 974 »` et « 2400 » sont normaux) → HD → planche aux fins
+d'écran (temps `ECRAN … t=` du dry run, moins 1 s) → corriger → HD à nouveau ; short : film JS → `CONTROLE=<dir> node
+scripts/ti-margo-short.mjs 5e-aire <ep> controle t…` → images relues → `5e_film.sh`.
+Leçons : `au_mot("extrait")` attend la FIN de l'extrait (extraits courts, finissant au mot à montrer ; `au_mot(x, n)` = n-ième) ;
+un texte n'écrit que des mots DITS (« Soraya coupe », pas « Elle coupe ») ; une figure de question longue à poser se pose AVANT
+`question_gauche` (sinon TARD sur le 1er mot) ; `couper={i: (début, fin)}` pour toute ligne de réponse qui commence par un nombre.
+Dans les shorts, `pgPoly pgTrait pgLigne pgEtiquette` sont dans `films/5e-aire.js` (le seul fichier chargé avec le film) ;
+Ti Margo cache le bas du milieu-gauche de l'ardoise : dessins en haut, ou à DROITE jusqu'en bas.
+
+| Micro | Paysage (scène) | État paysage | Short | État short |
+|---|---|---|---|---|
+| A1 aire_comprendre | `5e_aire_comprendre.py` `AireComprendre5e` (jaune, Q 01:05 A, 01:55 C) | ✅ HD 230 s, bords 0, planche relue | `5e-aire-comprendre.js` « La pizza carrée » (B) | ✅ rendu 66,8 s |
+| A2 aire_triangle | pilote | ✅ HD 202,65 s | « Le pignon de la cabane » (C) | ✅ |
+| A3 aire_parallelogramme | `5e_aire_parallelogramme.py` `AireParallelogramme5e` (verte, Q 01:02 C, 01:47 B) | ✅ HD 213 s, bords 0 ; 2e HD relu à 52 s (cote « 4 cm » flottante corrigée) | `5e-aire-parallelogramme.js` « Le coup de ciseaux » (A) | ✅ rendu |
+| A4 aire_composer | `5e_aire_composer.py` `AireComposer5e` (verte, Q 01:06 A, 01:53 B) | ⏳ 2e HD lancé (question 01 écartée de Ti-Margo, trait de coupe effacé, piège descendu, Q2 remontée) → relire 20, 37, 112, 152 s | `5e-aire-composer.js` « La pancarte maison » (C) | ✅ rendu |
+| A5 aire_defi | — | ⏳ WAV, marques, cues FAITS ; script à écrire (Mehdi menuisier, bleue, B·C) | « Le tapis trop large » (A) | ⏳ |
+
+⚠️ Vérifier au début de la session suivante : `ls manim/sorties/5e/maths/aire/0*/` (chaque dossier : paysage + short + `_muet.mp4`),
+et `python scripts/verifier-bords-video.py` sur les deux HD relancés. Les MP4 et WAV sont ignorés par git (normal).
+
+## Prochaine étape (session suivante)
+1. Contrôles ci-dessus ; puis A5 `aire_defi` (paysage + short).
+2. Série Volume (8 micros), puis Conversions (4) : même chaîne. Nouvelle série de shorts : `films/5e-volume.json`
+   (+ `5e-volume.js`, cues), `films/5e-conversion.json` (voir le tableau en tête de `VOIX-5e-aire-volume.md`).
+3. Miniatures (« Dessin animé » pour les shorts), `manim/poste2/manifeste-5e.json`, R2 si `.env.local` a les clés
+   (sinon noter dans `manim/poste2/videos-r2-5e.json`), `coach-5e.md`, cocher le plan. Commit par chemin, jamais de push.
+4. Aperçu pour Frédéric : comme le pilote (`manim/sorties/…/apercu.html` servi par la config `sorties-video`, port 3900), EN PAUSE.
+
+### Prompt de reprise (à coller dans une nouvelle session)
+« 2e poste, branche `poste2`, série 5e Aire, volume, conversions. Lis `manim/REPRISE-5e-aire-volume.md` en entier, puis
+`manim/poste2/VOIX-5e-aire-volume.md` (voix validées : ne pas les retoucher). Fais les contrôles de la section « Production »,
+puis enchaîne `aire_defi`, les 8 Volume et les 4 Conversions avec la chaîne décrite, un HD à la fois, planche relue avant
+chaque HD final. Ne pousse jamais ; commit par chemin ; ne touche ni aux fichiers partagés ni aux fichiers des autres sessions
+(`manim/scripts/premiere/`, `terminale/`…). Au-delà de 65 % de contexte, mets cette reprise à jour et demande une nouvelle session. »

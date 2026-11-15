@@ -6,10 +6,10 @@ Le 1er poste branchera, après la fusion et la mise en ligne R2 :
 
 | Notion (`notionId`) | Micro (`microId`) | id paysage | id short | État |
 |---|---|---|---|---|
-| `aire_surface` | `aire_comprendre` | `5e-aire-comprendre` | `5e-aire-comprendre-short` | voix validée |
-| `aire_surface` | `aire_triangle` | `5e-aire-triangle` | `5e-aire-triangle-short` | ⭐ pilote : aperçu -ql à valider |
-| `aire_surface` | `aire_parallelogramme` | `5e-aire-parallelogramme` | `5e-aire-parallelogramme-short` | voix validée |
-| `aire_surface` | `aire_composer` | `5e-aire-composer` | `5e-aire-composer-short` | voix validée |
+| `aire_surface` | `aire_comprendre` | `5e-aire-comprendre` | `5e-aire-comprendre-short` | ✅ HD + short rendus (MP4 dans `manim/sorties/`) |
+| `aire_surface` | `aire_triangle` | `5e-aire-triangle` | `5e-aire-triangle-short` | ✅ pilote validé ; HD + short rendus |
+| `aire_surface` | `aire_parallelogramme` | `5e-aire-parallelogramme` | `5e-aire-parallelogramme-short` | ✅ HD + short rendus (2e HD à relire) |
+| `aire_surface` | `aire_composer` | `5e-aire-composer` | `5e-aire-composer-short` | ⏳ HD + short en rendu |
 | `aire_surface` | `aire_defi` | `5e-aire-defi` | `5e-aire-defi-short` | voix validée |
 | `volume_solide` | `patron_prisme_cylindre` | `5e-patron-prisme-cylindre` | `5e-patron-prisme-cylindre-short` | voix validée |
 | `volume_solide` | `volume_comprendre` | `5e-volume-comprendre` | `5e-volume-comprendre-short` | voix validée |
