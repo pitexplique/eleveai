@@ -60,12 +60,11 @@ Ti Margo cache le bas du milieu-gauche de l'ardoise : dessins en haut, ou à DRO
 | A4 aire_composer | `5e_aire_composer.py` `AireComposer5e` (verte, Q 01:06 A, 01:53 B) | ✅ HD 221 s, bords 0 ; 3e HD relu (question 01 écartée, trait de coupe effacé, piège descendu, Q2 remontée) | `5e-aire-composer.js` « La pancarte maison » (C) | ✅ rendu |
 | A5 aire_defi | — | ⏳ WAV, marques, cues FAITS ; script à écrire (Mehdi menuisier, bleue, B·C) | « Le tapis trop large » (A) | ⏳ |
 
-⛔ **COMPTEUR DES SHORTS (15/11, consigne de Frédéric « fait attention au short que le compteur s'affiche bien »)** :
-le rebours de 3 s ne s'affiche dans AUCUN short (toutes séries). Bug du socle partagé `prototypes/ti-margo/short.js` l. 135 :
-`style.display=reb?'':'none'` rend la main au CSS `#rebours{display:none}`. Correction testée à l'image : `reb?'block':'none'`
-(barre entière dans la carte, entre C et « Mets pause »). NON appliquée : fichier partagé, signalé au chef d'orchestre
-(session local_f0dee25c) et à Frédéric. Dès que le socle est corrigé : re-rendre les 4 shorts Aire (`manim/poste2/5e_film.sh 5e-aire <ep>`)
-et CONTRÔLER sur le MP4 (temps du rebours = début de 02-question + durée + 0,1 s, pendant 3 s).
+✅ **Compteur des shorts (15/11)** : le rebours de 3 s ne s'affichait dans AUCUN short (bug du socle `short.js` l. 135,
+`''` au lieu de `'block'`). Le chef d'orchestre a corrigé le socle. Décision de Frédéric : « on refait les shorts de 5° mais pas
+les autres ». Les 4 shorts Aire sont refaits et contrôlés sur le MP4 : barre entière, carte dans le cadre, « Mets pause » visible.
+⭐ Pour chaque nouveau short : contrôler le compteur sur le MP4 (début de 02-question + durée + 0,1 s, pendant 3 s).
+⚠️ Ne jamais arrêter une file de rendus en plein film : le node orphelin échoue au mixage du son et laisse le verrou pris.
 
 ⚠️ Vérifier au début de la session suivante : `ls manim/sorties/5e/maths/aire/0*/` (chaque dossier : paysage + short + `_muet.mp4`),
 et `python scripts/verifier-bords-video.py` sur les deux HD relancés. Les MP4 et WAV sont ignorés par git (normal).
