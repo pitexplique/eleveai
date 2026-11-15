@@ -206,7 +206,7 @@ const CONTENUS: ContenuQuebec[] = [
 
   // Mathématiques financières (CST 5, mise à jour 2016)
   { code: "FIN 1-2", domaine: MF, annees: [5], texte: "Intérêt simple et composé, période, actualisation, capitalisation ; modéliser une situation financière.", couverture: "complete", micros: [...m("stmg", "suite_mod_capital", "suite_geo_taux", "suiteT_taux_equivalent_proportionnel", "suiteT_interets_simples_composes"), ...m("premiere", "auto_evo_valeur_finale")] },
-  { code: "FIN 3-4", domaine: MF, annees: [5], texte: "Capitalisation Cn = C0(1 + i)^n et actualisation C0 = Cn(1 + i)^(−n).", couverture: "complete", micros: [...m("stmg", "suite_mod_capital", "suiteT_geo_explicite"), ...m("premiere", "expo_suite_terme_rang")] },
+  { code: "FIN 3-4", domaine: MF, annees: [5], texte: "Capitalisation Cn = C0(1 + i)^n et actualisation C0 = Cn(1 + i)^(−n).", couverture: "complete", micros: [...m("stmg", "suite_mod_capital", "suiteT_geo_explicite"), ...m("premiere", "expo_suite_terme_rang", "expo_suite_taux", "expo_suite_interpreter")] },
   { code: "FIN 5-7", domaine: MF, annees: [5], texte: "Déterminer une valeur par la résolution d'équations ; comparer des situations financières ; décider.", couverture: "complete", micros: [...m("stmg", "logT_resoudre_exponentielle", "logT_nombre_annuites", "suiteT_comparer_geometriques", "suiteT_interets_simples_composes", "suiteT_somme_emprunt"), ...m("premiere", "expo_taux_moyen_calculer")] },
 ];
 

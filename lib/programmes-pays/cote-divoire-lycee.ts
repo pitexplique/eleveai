@@ -235,7 +235,7 @@ export const COTE_DIVOIRE_1RE: ProgrammePays = {
       code: "C1-L8", domaine: FONC,
       texte: "Suites numériques : formule explicite et récurrence, représentation graphique, suites arithmétiques et géométriques (terme général, raison, sommes), sens de variation.",
       couverture: "complete",
-      micros: m("premiere-spe", "suite_registres", "suite_termes", "suite_recurrence", "suite_arithmetique", "suite_geometrique", "suite_sommes", "suite_somme_geo", "suite_variation"),
+      micros: [...m("premiere-spe", "suite_registres", "suite_termes", "suite_recurrence", "suite_arithmetique", "suite_geometrique", "suite_sommes", "suite_somme_geo", "suite_variation"), ...m("premiere", "lin_suite_notation", "lin_suite_recurrence", "lin_suite_explicite", "lin_suite_variation", "lin_suite_graphique", "expo_suite_recurrence", "expo_suite_explicite", "expo_suite_variation", "expo_suite_graphique")],
     },
     {
       code: "C2-L1", domaine: DONN,

@@ -356,13 +356,13 @@ export const MAROC_1BAC: ProgrammePays = {
       code: "AA-2a", domaine: AA,
       texte: "Suites numériques : suites récurrentes, suites majorées, minorées, bornées, monotonie d'une suite.",
       couverture: "complete",
-      micros: [...m("premiere-spe", "suite_termes", "suite_recurrence", "suite_variation"), ...m("terminale-spe", "suite_bornee")],
+      micros: [...m("premiere-spe", "suite_termes", "suite_recurrence", "suite_variation"), ...m("terminale-spe", "suite_bornee"), ...m("premiere", "lin_suite_recurrence", "lin_suite_variation", "expo_suite_recurrence", "expo_suite_variation")],
     },
     {
       code: "AA-2b", domaine: AA,
       texte: "Suites arithmétiques et géométriques : raison, premier terme, somme de n termes consécutifs, problèmes.",
       couverture: "complete",
-      micros: m("premiere-spe", "suite_arithmetique", "suite_geometrique", "suite_sommes", "suite_somme_geo", "suite_modeliser"),
+      micros: [...m("premiere-spe", "suite_arithmetique", "suite_geometrique", "suite_sommes", "suite_somme_geo", "suite_modeliser"), ...m("premiere", "lin_suite_terme_rang", "lin_suite_explicite", "lin_suite_interpreter", "expo_suite_explicite", "expo_suite_taux", "expo_suite_interpreter")],
     },
     {
       code: "AA-3a", domaine: AA,

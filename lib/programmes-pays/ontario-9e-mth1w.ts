@@ -149,7 +149,7 @@ export const ONTARIO_9E_MTH1W: ProgrammePays = {
       micros: [
         ...m("4e", "fonction_graphique_lire"),
         ...m("seconde", "variation_croissance", "reference_carre"),
-        ...m("premiere", "lin_suite_reconnaitre", "expo_suite_reconnaitre"),
+        ...m("premiere", "lin_suite_reconnaitre", "expo_suite_reconnaitre", "lin_suite_variation", "lin_suite_graphique", "expo_suite_variation", "expo_suite_graphique"),
       ],
       note: "Les suites sont chez nous en 1re : il faudrait une micro « suite linéaire ou non ? » au niveau collège.",
     },
