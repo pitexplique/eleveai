@@ -16289,5 +16289,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_convertir&display=simple"
+ },
+ "cm2-longueur-comparer": {
+  "fichier": "cm2/maths/longueurs/01-comparer/eleveai-maths-cm2-longueur-comparer.mp4",
+  "poster": "cm2/maths/longueurs/01-comparer/eleveai-maths-cm2-longueur-comparer.png",
+  "vignette": "cm2/maths/longueurs/01-comparer/eleveai-maths-cm2-longueur-comparer.vignette.webp",
+  "titre": "3,45 m ou 3,5 m : lequel est le plus long ? — Comparer des longueurs — épisode 1 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_comparer&display=simple"
+ },
+ "cm2-longueur-comparer-short": {
+  "fichier": "cm2/maths/longueurs/01-comparer/eleveai-maths-cm2-longueur-comparer-short.mp4",
+  "poster": "cm2/maths/longueurs/01-comparer/eleveai-maths-cm2-longueur-comparer-short-miniature.png",
+  "vignette": "cm2/maths/longueurs/01-comparer/eleveai-maths-cm2-longueur-comparer-short-miniature.vignette.webp",
+  "titre": "3,8 m contre 3,15 m : quel avion est allé le plus loin ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_comparer&display=simple"
  }
 }

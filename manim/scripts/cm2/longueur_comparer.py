@@ -230,7 +230,7 @@ class LongueurComparerBase(VoixMilliers, PaysageLongueurCM2):
     # ── 01 : Léonie, coureuse de trail ──────────────────────────────────────
     def ecran_situation(self):
         self.ecran("01-situation")
-        pe = leonie(0.95).move_to(P(-5.25, 0.25))
+        pe = leonie(0.95).move_to(P(-5.6, 0.25))
         mt = montagne(0.95).move_to(P(-2.55, 0.55))
         self.au_mot("Voici Léonie")
         nom = self.t("Léonie", 42, PISTE).next_to(pe, UP, buff=0.2)
@@ -305,7 +305,7 @@ class LongueurComparerBase(VoixMilliers, PaysageLongueurCM2):
     def ecran_convertir(self):
         self.ecran("03-convertir")
         XP = -0.2  # « 12 450 m reste comme ça. » finit à x ≈ 6,2 (tableau : x ≤ −1,65)
-        tb = tableau_conv(["km", "hm", "dam", "m"], cw=1.05, ch=0.62, fs=28, surligne=("m",))
+        tb = tableau_conv(["km", "hm", "dam", "m"], cw=1.05, ch=0.62, fs=24, surligne=("m",))
         tb.move_to(P(-3.75, 2.05))
         g = parcours([12.5, 12.3, 12.45], 0.25, buff=0.4)
         g.move_to(P(0, -0.85)).align_to(P(-6.1, 0), LEFT)
@@ -433,7 +433,7 @@ class LongueurComparerBase(VoixMilliers, PaysageLongueurCM2):
         for x, s in zip(XS, ("unités", "dixièmes", "centièmes")):
             r = Rectangle(width=1.45, height=0.5, fill_color="#1e3a8a", fill_opacity=1, stroke_color=WHITE,
                           stroke_width=2).move_to(P(x, 1.75))
-            tetes.add(VGroup(r, hors_audit(Text(s, font_size=19, color=WHITE, weight=BOLD).move_to(r))))
+            tetes.add(VGroup(r, hors_audit(Text(s, font_size=16, color=WHITE, weight=BOLD).move_to(r))))
         fond = VGroup(*[Rectangle(width=1.45, height=2.1, fill_color="#0f172a", fill_opacity=1, stroke_color=WHITE,
                                   stroke_width=2).move_to(P(x, 0.45)) for x in XS])
         YA, YB = 0.95, -0.05
