@@ -98,7 +98,7 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 - [x] Comparer des contenances — `contenance_comparer`
 - [x] Convertir des contenances — `contenance_convertir`
 - [x] Estimer une contenance — `contenance_estimer`
-- [ ] Résoudre un défi de contenances — `contenance_defi`
+- [x] Résoudre un défi de contenances — `contenance_defi`
 
 **Solides et espace** (6)
 - [x] Reconnaître les solides usuels — `solide_reconnaitre`

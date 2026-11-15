@@ -16703,5 +16703,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_estimer&display=simple"
+ },
+ "cm2-contenance-defi": {
+  "fichier": "cm2/maths/contenance/04-defi/eleveai-maths-cm2-contenance-defi.mp4",
+  "poster": "cm2/maths/contenance/04-defi/eleveai-maths-cm2-contenance-defi.png",
+  "vignette": "cm2/maths/contenance/04-defi/eleveai-maths-cm2-contenance-defi.vignette.webp",
+  "titre": "120 coureurs, 25 cL chacun : combien de bouteilles ? — Défi de contenances — épisode 4 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_defi&display=simple"
+ },
+ "cm2-contenance-defi-short": {
+  "fichier": "cm2/maths/contenance/04-defi/eleveai-maths-cm2-contenance-defi-short.mp4",
+  "poster": "cm2/maths/contenance/04-defi/eleveai-maths-cm2-contenance-defi-short-miniature.png",
+  "vignette": "cm2/maths/contenance/04-defi/eleveai-maths-cm2-contenance-defi-short-miniature.vignette.webp",
+  "titre": "Le cocktail qui déborde : combien de litres ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_defi&display=simple"
  }
 }
