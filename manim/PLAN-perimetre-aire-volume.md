@@ -102,7 +102,7 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 
 **Solides et espace** (6)
 - [x] Reconnaître les solides usuels — `solide_reconnaitre`
-- [ ] Identifier sommets, arêtes et faces — `solide_sommet_arete_face`
+- [x] Identifier sommets, arêtes et faces — `solide_sommet_arete_face`
 - [ ] Identifier les faces d’un solide — `solide_face`
 - [ ] Reconnaître un patron de solide — `solide_patron`
 - [ ] Construire un patron de cube — `solide_patron_construire`

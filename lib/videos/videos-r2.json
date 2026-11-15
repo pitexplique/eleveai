@@ -7738,6 +7738,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_reconnaitre&display=simple"
  },
+ "cm2-solides-sommets-aretes-faces": {
+  "fichier": "cm2/maths/solides/02-sommets-aretes-faces/eleveai-maths-cm2-solides-sommets-aretes-faces.mp4",
+  "poster": "cm2/maths/solides/02-sommets-aretes-faces/eleveai-maths-cm2-solides-sommets-aretes-faces.png",
+  "vignette": "cm2/maths/solides/02-sommets-aretes-faces/eleveai-maths-cm2-solides-sommets-aretes-faces.vignette.webp",
+  "titre": "Compter sommets, arêtes et faces sans en oublier — Sommets, arêtes et faces — épisode 2 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_sommet_arete_face&display=simple"
+ },
+ "cm2-solides-sommets-aretes-faces-short": {
+  "fichier": "cm2/maths/solides/02-sommets-aretes-faces/eleveai-maths-cm2-solides-sommets-aretes-faces-short.mp4",
+  "poster": "cm2/maths/solides/02-sommets-aretes-faces/eleveai-maths-cm2-solides-sommets-aretes-faces-short-miniature.png",
+  "vignette": "cm2/maths/solides/02-sommets-aretes-faces/eleveai-maths-cm2-solides-sommets-aretes-faces-short-miniature.vignette.webp",
+  "titre": "4 boules de pâte pour ma pyramide ? Elle s'écroule ! #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_sommet_arete_face&display=simple"
+ },
  "cm2-stats-graphique-completer": {
   "fichier": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer.mp4",
   "poster": "cm2/maths/statistiques/06-graphique-completer/eleveai-maths-cm2-stats-graphique-completer.png",

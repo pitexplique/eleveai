@@ -89710,6 +89710,159 @@
       "centres": [
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm2-solides-sommets-aretes-faces",
+      "pas_avant": "2027-03-28",
+      "prioritaire": true,
+      "notionId": "solide",
+      "microId": "solide_sommet_arete_face",
+      "classe": "cm2",
+      "ceinture": "verte",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/solides/02-sommets-aretes-faces/eleveai-maths-cm2-solides-sommets-aretes-faces.mp4",
+      "miniature": "cm2/maths/solides/02-sommets-aretes-faces/eleveai-maths-cm2-solides-sommets-aretes-faces.png",
+      "titre": "Compter sommets, arêtes et faces sans en oublier — Sommets, arêtes et faces — épisode 2 · Maths CM2",
+      "accroche": "Lisa est sculptrice. Elle taille une pyramide dans un bloc de pierre. Pour la finir, elle doit polir chaque face, adoucir chaque arête et arrondir chaque sommet. Combien de chaque ?\n\nDans cette vidéo :\n• face = surface plate ; arête = bord où deux faces se touchent ; sommet = coin où les arêtes se rejoignent\n• les arêtes cachées en pointillés ; on compte étage par étage : en bas, sur les côtés, en haut\n• pyramide à base carrée : 5 faces, 8 arêtes, 5 sommets\n• le piège : sur le dessin d'un pavé, on voit 9 arêtes… il en a 12\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une pyramide a 10 arêtes : combien de côtés a sa base ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_sommet_arete_face&display=simple\n\n🔢 Épisode 2 de la série Solides d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Sans en oublier"
+        ],
+        [
+          "00:24",
+          "Face, arête, sommet"
+        ],
+        [
+          "00:37",
+          "Ce qui est caché"
+        ],
+        [
+          "00:51",
+          "La pyramide de Lisa"
+        ],
+        [
+          "01:10",
+          "Question 1"
+        ],
+        [
+          "01:39",
+          "Le piège"
+        ],
+        [
+          "01:54",
+          "Question 2"
+        ],
+        [
+          "02:23",
+          "À toi de jouer"
+        ],
+        [
+          "02:35",
+          "Correction"
+        ],
+        [
+          "02:49",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "sommets",
+        "arêtes",
+        "faces",
+        "pyramide",
+        "pavé droit",
+        "arêtes cachées",
+        "sculptrice",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:10",
+          "question": "Une pyramide a une base à 6 côtés. Combien a-t-elle d'arêtes ?",
+          "choix": [
+            "12 arêtes",
+            "6 arêtes",
+            "7 arêtes"
+          ],
+          "reponse": 0,
+          "explication": "6 arêtes autour de la base, et 6 qui montent vers la pointe : 6 + 6, 12 arêtes."
+        },
+        {
+          "t": "01:54",
+          "question": "Combien de sommets a une pyramide à base triangulaire ?",
+          "choix": [
+            "3 sommets",
+            "6 sommets",
+            "4 sommets"
+          ],
+          "reponse": 2,
+          "explication": "3 sommets en bas, plus la pointe : 4 sommets. Et 4 faces, toutes des triangles."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "cm2-solides-sommets-aretes-faces-short",
+      "pas_avant": "2027-03-28",
+      "prioritaire": true,
+      "notionId": "solide",
+      "microId": "solide_sommet_arete_face",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-solides-sommets-aretes-faces",
+      "fichier": "cm2/maths/solides/02-sommets-aretes-faces/eleveai-maths-cm2-solides-sommets-aretes-faces-short.mp4",
+      "miniature": "cm2/maths/solides/02-sommets-aretes-faces/eleveai-maths-cm2-solides-sommets-aretes-faces-short-miniature.png",
+      "titre": "4 boules de pâte pour ma pyramide ? Elle s'écroule ! #maths #cm2",
+      "accroche": "Je construis une pyramide avec des pailles et de la pâte à modeler. Base carrée. Une boule de pâte par sommet : 4 boules, c'est bon ! … Vraiment ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de pailles faut-il pour cette pyramide à base carrée ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_sommet_arete_face&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #solides #cm2 #primaire",
+      "tags": [
+        "pyramide",
+        "sommets",
+        "arêtes",
+        "pailles",
+        "bricolage",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Combien de boules de pâte fallait-il ?",
+          "choix": [
+            "4 boules",
+            "8 boules",
+            "5 boules"
+          ],
+          "reponse": 2,
+          "explication": "4 sommets en bas, plus 1 pour la pointe : 5 sommets, donc 5 boules."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
     }
   ]
 }
