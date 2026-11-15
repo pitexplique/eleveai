@@ -41,3 +41,10 @@ Deux appels sur des mots qui ne sont pas dans l'ordre croissant de la phrase pro
 
 ## 9. Pas de binaire ffmpeg sur ce poste pour les agents
 `scripts/planche-video.py` et `verifier-bords-video.py` marchent (ils lisent avec PyAV), mais les agents n'ont pas trouvé de `ffmpeg` dans leur PATH et ont écrit leur propre extracteur d'images PyAV. *(Depuis la session principale, `ffmpeg` et `ffprobe` répondent bien, à `C:\ffmpeg\bin\` : c'est donc une question de PATH dans l'environnement des agents, pas une absence.)*
+
+## 10. ⚠️⚠️ `suites_commun.fin_short` peut faire toucher les deux bords à `@eleveai974` — et le dry run ne peut pas le voir
+Trouvé sur l'ép. 42 : `fin_short` termine par `Indicate(poignee, scale_factor=1.12)` alors que `@eleveai974` est borné à `largeur_texte` (4,1). **Au pic de l'animation la poignée fait 4,59 et touche les deux bords.** Contourné dans `suite_python_short.py` en surchargeant `fin_short` (poignée bornée à 3,55), sans toucher au module.
+
+**Ce qui compte au-delà de cet épisode :** le dry run `BORDS=1` mesure **après** chaque animation, jamais pendant. Il est donc **structurellement incapable** de voir un dépassement qui n'existe qu'au pic d'un `Indicate` ou d'un `scale`. Seul `scripts/verifier-bords-video.py`, qui lit le MP4 image par image, le détecte. ⛔ **Ne jamais sauter cette étape**, et ne jamais conclure « 0 bord » sur la foi du seul dry run.
+
+**Vérification faite ici** : les quatre shorts du lot (39, 40, 41, 42) passent `verifier-bords-video.py` à « 0 instants qui touchent un bord ». Le défaut ne s'est donc manifesté que sur l'ép. 42, dont la poignée était la plus large. **Les 38 shorts déjà publiés n'ont pas pu être vérifiés** : leurs MP4 ne sont pas sur ce poste (`manim/sorties/` est dans `.gitignore` et ne contient que ce lot et la 5e). À repasser au vérificateur depuis le poste qui les a.

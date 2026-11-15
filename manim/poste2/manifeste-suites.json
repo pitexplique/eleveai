@@ -486,7 +486,52 @@
     "miniature": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python.png",
     "titre": "L'erreur d'un modèle d'IA : trois tours de boucle en Python — Programmer les termes d'une suite — épisode 42 · Maths Tle spé",
     "accroche": "Naïs est chercheuse en intelligence artificielle. L'erreur de son modèle part de 20 000 et, à chaque tour d'entraînement, elle devient 0,8 fois l'erreur précédente, plus 1 200 : 17 200, puis 14 960, puis 13 168. À la main, trois tours passent. Mais pour en faire mille, il faut une boucle — et savoir quel terme on a sous les yeux à la sortie.\n\nDans cette vidéo :\n• la relation de récurrence uₙ₊₁ = 0,8 uₙ + 1 200, calculée à la main puis programmée\n• les trois lignes qui suffisent : u = 20000, for i in range(3), u = 0.8 * u + 1200\n• la règle du rang : range(n) fait n tours, donc à la sortie u vaut uₙ\n• le piège : un print DANS la boucle affiche tous les termes au lieu du dernier\n• le deuxième piège : i est le compteur de tours, ce n'est pas le terme de la suite\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : u = 10, trois tours de u = 0.5 * u + 4 ; que vaut u à la fin, et quel terme est-ce ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/algorithmique-python\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=algorithmique_python&microId=python_suite&display=simple\n\n📈 Épisode 42 sur 42 de la série Suites d'EleveAI, de la 1re à la terminale.",
-    "chapitres": [],
+    "chapitres": [
+      [
+        "00:00",
+        "Programmer les termes d'une suite · Naïs, chercheuse en IA : l'erreur du modèle"
+      ],
+      [
+        "00:37",
+        "À la main, c'est long"
+      ],
+      [
+        "01:04",
+        "Trois lignes de Python"
+      ],
+      [
+        "01:25",
+        "Déroulons la boucle : le tableau de trace"
+      ],
+      [
+        "01:45",
+        "Question 1"
+      ],
+      [
+        "02:18",
+        "La règle du rang : range(n) fait n tours"
+      ],
+      [
+        "02:34",
+        "Le piège : où mettre le print ?"
+      ],
+      [
+        "02:54",
+        "Question 2"
+      ],
+      [
+        "03:32",
+        "À toi de jouer"
+      ],
+      [
+        "03:56",
+        "Correction"
+      ],
+      [
+        "04:25",
+        "Ce que tu as appris"
+      ]
+    ],
     "tags": [
       "Python",
       "boucle for",
@@ -506,7 +551,7 @@
     ],
     "questions": [
       {
-        "t": "",
+        "t": "01:45",
         "question": "On écrit u = 3, puis une boucle de 3 tours qui fait u = 2 * u. À la fin, u vaut :",
         "choix": [
           "12",
@@ -517,8 +562,8 @@
         "explication": "On double trois fois : 3, puis 6, puis 12, puis 24. u vaut 24, c'est-à-dire u₃."
       },
       {
-        "t": "",
-        "question": "On écrit u = 5, puis une boucle de 4 tours qui fait u = u + 3. À la fin, u vaut 17. Mais que représente u ?",
+        "t": "02:54",
+        "question": "On écrit u = 5, puis une boucle de 4 tours qui fait u = u + 3. À la fin, u vaut 17 : que représente u ?",
         "choix": [
           "u₄",
           "u₃",
@@ -566,8 +611,8 @@
     ],
     "questions": [
       {
-        "t": "",
-        "question": "À la fin de ces trois lignes, u vaut :",
+        "t": "00:32",
+        "question": "u = 2, puis une boucle de 3 tours qui fait u = 2 * u + 1. À la fin de ces trois lignes, u vaut :",
         "choix": [
           "11",
           "47",
