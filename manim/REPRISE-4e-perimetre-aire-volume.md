@@ -187,3 +187,30 @@ cette série. Qu'il ne la reprenne pas.
 
 La fiche `lib/fiches/maths-4e-volumes.tsx` n'a ni pyramide ni cône, alors que le
 coach les a depuis le 05/11. Les exemples du pilote viennent donc de la banque.
+
+---
+
+# ⛔⛔ Les centres d'intérêt se vérifient par ÂGE (Frédéric, 15/11/2026)
+
+« Les centres d'intérêts doivent être vérifiés par âge. » Règle inscrite dans
+`manim/REGLES.md` (section des centres d'intérêt) et rendue MESURABLE :
+`node scripts/verifier-centres-age.mjs [manifeste …]` doit afficher
+« 0 centre hors tranche ». Il relit les `tranches` de `lib/videos/centres-interet.ts`
+et la table classe → tranche de `manim/centres-interet-par-age.md`.
+
+## Ce que le premier passage a trouvé (15/11)
+
+Sur 775 vidéos du manifeste, **129 écarts**, de deux sortes :
+
+1. **76 centres INVENTÉS**, absents des 18 de la liste fermée : `construction` (24),
+   `mode` (7), `football` (7), `course-trail` (5), `avions` (5), `voitures-motos` (4),
+   `velo` (4), `photo` (3), `natation` (3), `chiens-chats` (3), `instrument`…
+   ⚠️ `manim/REPRISE-suites.md` affirme que « construction, photo, velo, natation
+   EXISTENT dans la liste fermée » : **c'est faux**, aucun des quatre n'y est.
+2. **53 centres hors tranche d'âge** : `cinema-series` en CM2 (n'ouvre qu'à 12-14),
+   `sport`, `transports` et `musique` en CE2 (n'ouvrent qu'à 9-11).
+
+**Corrigé ici** : les 2 écarts de mes fichiers (`manim/poste2/manifeste-suites.json` :
+`instrument` → `musique, sciences` ; `construction` → `sport, art-design`).
+**PAS corrigé** : les 127 autres sont dans `manim/manifeste-youtube.json`, interdit à
+ce poste. ⚠️ À faire reprendre par le 1er poste : ce sont surtout des vidéos CM2 et CE2.
