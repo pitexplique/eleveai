@@ -101,7 +101,7 @@ FILMS.vues=function(outils){
     <path d="M70 50 L82 38 L142 38 L130 50 Z" fill="#ffd43b" stroke="#1b2a3a" stroke-width="3"/>
     <rect x="80" y="14" width="44" height="18" rx="6" fill="#e03131"/><line x1="60" y1="16" x2="144" y2="16" stroke="#dee2e6" stroke-width="5"/>
     <text x="250" y="160" font-family="Segoe UI" font-weight="800" font-size="90" fill="#ffd43b" text-anchor="middle">?</text></svg>`;
-  poserMiniature(outils,acc+1,'Vu d’en haut :<br>combien de carreaux ?'+PARI,mini);
+  poserMiniature(outils,acc+1,'Vu d’en haut :<br>combien de carrés ?'+PARI,mini);
   return { clips,FIN,titre:'Mon drone et les tours',ceinture:0,finTitre,groupes,finClip:'05-abonne',
     cuts:[finTitre,dro,q,r,finR,ouf,com,f],
     question:{ qc:'02-question',rc:'02b-reponse',finR,cpt:B.fin('02-question')+.1,bonne:0,tBon:tA-r,

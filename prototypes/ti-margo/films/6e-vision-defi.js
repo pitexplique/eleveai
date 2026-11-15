@@ -64,7 +64,8 @@ FILMS.defi=function(outils){
       blocs(c,TOUS,o,{coul:faceGateau(),trait:TRAIT_G,lw:3,alpha:al});
       if(T>=rCoins) COINS.forEach(p=>contour(c,p,['av','haut','dr'],[0,0,0],'rgba(255,212,59,.9)'));
       if(T>=rUn){ const ordre=[[0,2,0],[2,2,0],[2,0,0],[0,0,0],[0,2,2],[2,2,2],[2,0,2],[0,0,2]];
-        ordre.forEach((p,i)=>{ const ti=rUn+(r8c-rUn)*i/7; if(T>=ti){ const m=P(p[0]+.5,p[1]+.5,p[2]); ecrire(c,String(i+1),m[0],m[1],50*zoom(T,ti,.4),CRAIE.jaune); } }); }
+        ordre.forEach((p,i)=>{ const ti=rUn+(r8c-rUn)*i/7; if(T>=ti){ const m=P(p[0]+.5,p[1]+.5,p[2]?p[2]+1:0); /* coins du fond : sur leur face arrière, sinon cachés par ceux de devant */ const fz=50*zoom(T,ti,.4); c.save(); c.font=`800 ${fz}px "Segoe UI"`; c.textAlign='center'; c.textBaseline='middle'; c.lineJoin='round'; c.lineWidth=9; c.strokeStyle='#2b1a0a'; c.strokeText(String(i+1),m[0],m[1]); c.restore(); /* liseré sombre : lisible sur le biscuit clair */
+          ecrire(c,String(i+1),m[0],m[1],fz,CRAIE.jaune); } }); }
       if(T>=r8) prog(c,[[r8,'8'],[r8c,'8 coins']],T,X,200,62,CRAIE.jaune);
       if(T>=r8m) ecrire(c,'8 morceaux',X,300,56*zoom(T,r8m,.4),CRAIE.ok);
       tab.maj(); return; }

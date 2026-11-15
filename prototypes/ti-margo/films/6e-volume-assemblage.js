@@ -52,14 +52,14 @@ FILMS.assemblage=function(outils){
     if(T<col){ /* le donjon (18), puis la tour (7), à part */
       if(T>=tDonjon-.05||T>=finTitre){ const n=Math.min(18,Math.floor(18*entre(T,tDonjon,t18c+.3))+1); blocs(c,DONJON.slice(0,n),o,{coul:DON,lw:4}); }
       if(T>=t18c+.3){ const d=P(1.5,3,1); drapeau(c,d[0],d[1],'#1971c2'); }
-      if(T>=t18){ const p=P(1.5,3,1); prog(c,[[t18,'18'],[t18c,'18 cubes']],T,p[0]-20,p[1]-110,56,CRAIE.blanc); }
+      if(T>=t18){ const p=P(1.5,3,1); prog(c,[[t18,'18'],[t18c,'18 cubes']],T,p[0]-60,p[1]-110,56,CRAIE.blanc); }
       if(T>=tTour){ const n=Math.min(7,Math.floor(7*entre(T,tTour,t7c+.2))+1); blocs(c,TOUR.slice(0,n),o,{coul:TOU,lw:4,decal:Object.fromEntries(TOUR.map(p=>[p.join(','),[3,0,0]]))}); }
       if(T>=t7c+.2){ const d=P(6.5,7,.5); drapeau(c,d[0],d[1]); }
       if(T>=t7){ const p=P(7,3.5,0); prog(c,[[t7,'7'],[t7c,'7 cubes']],T,p[0]+150,p[1],56,TOU); }
       tab.maj(); return; }
     if(T<q){ /* il colle la tour contre le donjon : clac ! */
       const v=lisse01(entre(T,tColle,tClac)); chateau(c,T,{v});
-      const p=P(1.5,3,1); ecrire(c,'18 cubes',p[0]-20,p[1]-110,56,CRAIE.blanc);
+      const p=P(1.5,3,1); ecrire(c,'18 cubes',p[0]-60,p[1]-110,56,CRAIE.blanc);
       const p7=P(4+3*(1-v),3.5,0); ecrire(c,'7 cubes',p7[0]+150,p7[1],56,TOU);
       if(T>=tClac){ const s=P(3,2.5,0), u=zoom(T,tClac,.6); c.save(); c.translate(s[0],s[1]); c.fillStyle=CRAIE.jaune;
         c.beginPath(); for(let k=0;k<16;k++){ const a=k*Math.PI/8, rr=(k%2?28:62)*u; k?c.lineTo(rr*Math.cos(a),rr*Math.sin(a)):c.moveTo(rr,0); } c.closePath(); c.globalAlpha=.85; c.fill(); c.restore();

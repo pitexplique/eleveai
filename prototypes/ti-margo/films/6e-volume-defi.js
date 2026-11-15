@@ -64,8 +64,8 @@ FILMS.defi=function(outils){
       const n=Math.min(24,Math.floor(24*entre(T,r6,r24+.2))+(T>=r6?1:0));
       bacPlein(c,oa,n);
       const pa=cav([6,.35,2],e1,oa.ox,oa.oy);
-      if(T>=r24) ecrire(c,'24',pa[0]+70,pa[1],56*zoom(T,r24,.4),CRAIE.ok);
-      if(T>=rDiv){ bacPlein(c,ob,T>=r2?24:0); const pb=cav([6,.35,2],e1,ob.ox,ob.oy); if(T>=r2) ecrire(c,'24',pb[0]+70,pb[1],56*zoom(T,r2,.4),CRAIE.ok); }
+      if(T>=r24) ecrire(c,'24',pa[0]+100,pa[1]+10,56*zoom(T,r24,.4),CRAIE.ok);
+      if(T>=rDiv){ bacPlein(c,ob,T>=r2?24:0); const pb=cav([6,.35,2],e1,ob.ox,ob.oy); if(T>=r2) ecrire(c,'24',pb[0]+100,pb[1]+10,56*zoom(T,r2,.4),CRAIE.ok); }
       const X=830;
       if(T>=r6) prog(c,[[r6,'6'],[rFois,'6 ×'],[r4,'6 × 4'],[r24,'6 × 4 = 24']],T,X,90,60,CRAIE.ok);
       if(T>=r48) prog(c,[[r48,'48'],[rDiv,'48 ÷'],[r24b,'48 ÷ 24'],[r2,'48 ÷ 24 = 2']],T,X,200,58,CRAIE.jaune);

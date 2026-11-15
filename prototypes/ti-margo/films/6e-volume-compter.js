@@ -47,11 +47,11 @@ FILMS.compter=function(outils){
       tab.maj(); return; }
     if(T<q){ bloc(c,T); cotes(c,T); tab.maj(); return; }
     if(T<ouf){ /* la réponse : un étage (4 × 2 = 8), puis 3 étages (8 × 3 = 24) ; 9 = 4 + 2 + 3, additionné */
-      const coul=(x,y,z)=>{ if(T>=r3e){ const k=Math.floor((T-r3e)/.25); return y<=k?ETAGE[y]:SUCRE; } return (T>=rEtage&&y===2)?ETAGE[0]:SUCRE; };
+      const coul=(x,y,z)=>{ if(T>=r3e){ const k=Math.floor((T-r3e)/.25); return (2-y)<=k?ETAGE[2-y]:SUCRE; }  /* du haut vers le bas : l'étage jaune du « 4 × 2 » reste en haut */ return (T>=rEtage&&y===2)?ETAGE[0]:SUCRE; };
       bloc(c,T,{couleurs:coul}); cotes(c,T);
       const X=830;
       if(T>=r4) prog(c,[[r4,'4'],[rFois,'4 ×'],[r2,'4 × 2'],[r8,'4 × 2 = 8']],T,X,130,70,ETAGE[0]);
-      if(T>=r3e) for(let y=0;y<3;y++) if(T>=r3e+.25*y){ const p=Pp(4,y+.5,2); ecrire(c,'8',p[0]+40,p[1],48*zoom(T,r3e+.25*y,.4),ETAGE[y]); }
+      if(T>=r3e) for(let y=0;y<3;y++){ const t8=r3e+.25*(2-y); if(T>=t8){ const p=Pp(4,y+.5,2); ecrire(c,'8',p[0]+40,p[1],48*zoom(T,t8,.4),ETAGE[2-y]); } }
       if(T>=r8b) prog(c,[[r8b,'8'],[rFois2,'8 ×'],[r3,'8 × 3'],[r24,'8 × 3 = 24']],T,X,260,70,CRAIE.ok);
       if(T>=r24m+.3) coche(c,X-50,340,.4);
       if(T>=r9) prog(c,[[r9,'9'],[r4p,'9 = 4 +'],[r2p,'9 = 4 + 2 +'],[r3c,'9 = 4 + 2 + 3']],T,X,470,52,CRAIE.faux);
