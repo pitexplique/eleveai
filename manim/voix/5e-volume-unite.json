@@ -1,0 +1,16 @@
+{
+  "00-garde": "Les unités de volume. Combien de litres dans un mètre cube ?",
+  "01-situation": "Voici Fanta. Elle est pompière. Son camion transporte une citerne d'eau. Sur la citerne, c'est écrit en mètres cubes. Sur la lance, en litres. Fanta doit passer de l'un à l'autre.",
+  "02-litre": "Un cube de 1 décimètre de côté, soit 10 centimètres. Il contient 10 fois 10 fois 10, 1 000 petits cubes de 1 centimètre cube. Et si on le remplit d'eau : exactement 1 litre. Donc 1 litre égale 1 décimètre cube égale 1 000 centimètres cubes.",
+  "03-metre": "Un cube de 1 mètre de côté, soit 10 décimètres. Il contient 10 fois 10 fois 10, 1 000 décimètres cubes. Donc 1 mètre cube égale 1 000 litres.",
+  "04-methode": "La méthode : d'une unité de volume à la suivante, on multiplie ou on divise par 1 000. Pas par 10 : par 1 000, car un cube a trois dimensions.",
+  "05-question": "Question ! 1 décimètre cube, c'est combien de centimètres cubes ? A : 100 centimètres cubes. B : 10 centimètres cubes. C : 1 000 centimètres cubes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. 10 fois 10 fois 10 : 1 000 centimètres cubes. 10 et 100, c'est oublier une ou deux dimensions.",
+  "06-piege": "Attention au piège ! Pour les longueurs, on passe d'une unité à l'autre par 10. Pour les volumes, c'est par 1 000. 3 décimètres cubes, c'est 3 000 centimètres cubes, pas 30.",
+  "07-question": "Question ! Combien de litres y a-t-il dans 1 mètre cube ? A : 1 000 litres. B : 10 litres. C : 100 litres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 1 mètre cube, c'est 1 000 décimètres cubes. Et 1 décimètre cube, c'est 1 litre : 1 000 litres.",
+  "08-defi": "À toi de jouer ! La citerne du camion contient 3,5 mètres cubes. La lance envoie 500 litres par minute. En combien de minutes la citerne est-elle vide ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 3,5 mètres cubes : 3,5 fois 1 000, 3 500 litres. 3 500 divisé par 500 : 7 minutes.",
+  "09-finale": "Ce que tu as appris. 1 litre égale 1 décimètre cube égale 1 000 centimètres cubes. 1 mètre cube égale 1 000 litres. D'une unité de volume à la suivante : fois 1 000, ou divisé par 1 000.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

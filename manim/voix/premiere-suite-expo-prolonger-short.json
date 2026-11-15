@@ -1,0 +1,10 @@
+{
+  "00-garde": "Suite géométrique et fonction exponentielle. Tu paries que tu peux zoomer entre deux crans ?",
+  "01-situation": "Sur une appli de cartes, chaque cran de zoom divise par 2 la largeur affichée : 400 kilomètres, 200, 100, 50.",
+  "02-crans": "C'est une suite géométrique de raison 0,5. Mais les crans sont des rangs entiers : 0, 1, 2, 3.",
+  "03-pincement": "Quand tu pinces l'écran avec deux doigts, tu ne t'arrêtes pas sur un cran. Tu t'arrêtes au rang 1,5. Et là, seule la fonction f de x égale 400 fois 0,5 puissance x sait répondre.",
+  "04-question": "Question ! Au rang 1,5, entre 200 et 100 kilomètres, la largeur affichée est : A : 150 kilomètres. B : 50 kilomètres. C : environ 141 kilomètres. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. 400 fois 0,5 puissance 1,5 égale environ 141. 150, ce serait le milieu de la ligne droite : la courbe passe en dessous.",
+  "05-commentaire": "Et toi : au rang 0,5, quelle largeur l'appli affiche-t-elle ? Réponds en commentaire !",
+  "06-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

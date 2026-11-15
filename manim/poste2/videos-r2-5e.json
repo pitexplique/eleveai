@@ -1,0 +1,275 @@
+{
+  "_note": "2e poste, 15/11/2026 : PAS envoyé sur R2 — .env.local n'a aucune clé R2_* sur ce poste. Les MP4 sont dans manim/sorties/5e/maths/… (ignorés par git). Au 1er poste, après la fusion : scripts/vignettes-videos.py, scripts/r2-videos.ps1 -Envoyer, node scripts/generer-videos-r2.mjs, puis recopier ces entrées dans lib/videos/videos-r2.json.",
+  "5e-aire-comprendre": {
+    "fichier": "5e/maths/aire/01-comprendre/eleveai-maths-5e-aire-comprendre.mp4",
+    "poster": "5e/maths/aire/01-comprendre/eleveai-maths-5e-aire-comprendre.png",
+    "vignette": "5e/maths/aire/01-comprendre/eleveai-maths-5e-aire-comprendre.vignette.webp",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-aire-comprendre-short": {
+    "fichier": "5e/maths/aire/01-comprendre/eleveai-maths-5e-aire-comprendre-short.mp4",
+    "poster": "5e/maths/aire/01-comprendre/eleveai-maths-5e-aire-comprendre-short-miniature.png",
+    "vignette": "5e/maths/aire/01-comprendre/eleveai-maths-5e-aire-comprendre-short-miniature.vignette.webp",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-aire-triangle": {
+    "fichier": "5e/maths/aire/02-triangle/eleveai-maths-5e-aire-triangle.mp4",
+    "poster": "5e/maths/aire/02-triangle/eleveai-maths-5e-aire-triangle.png",
+    "vignette": "5e/maths/aire/02-triangle/eleveai-maths-5e-aire-triangle.vignette.webp",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-aire-triangle-short": {
+    "fichier": "5e/maths/aire/02-triangle/eleveai-maths-5e-aire-triangle-short.mp4",
+    "poster": "5e/maths/aire/02-triangle/eleveai-maths-5e-aire-triangle-short-miniature.png",
+    "vignette": "5e/maths/aire/02-triangle/eleveai-maths-5e-aire-triangle-short-miniature.vignette.webp",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-aire-parallelogramme": {
+    "fichier": "5e/maths/aire/03-parallelogramme/eleveai-maths-5e-aire-parallelogramme.mp4",
+    "poster": "5e/maths/aire/03-parallelogramme/eleveai-maths-5e-aire-parallelogramme.png",
+    "vignette": "5e/maths/aire/03-parallelogramme/eleveai-maths-5e-aire-parallelogramme.vignette.webp",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-aire-parallelogramme-short": {
+    "fichier": "5e/maths/aire/03-parallelogramme/eleveai-maths-5e-aire-parallelogramme-short.mp4",
+    "poster": "5e/maths/aire/03-parallelogramme/eleveai-maths-5e-aire-parallelogramme-short-miniature.png",
+    "vignette": "5e/maths/aire/03-parallelogramme/eleveai-maths-5e-aire-parallelogramme-short-miniature.vignette.webp",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-aire-composer": {
+    "fichier": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer.mp4",
+    "poster": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer.png",
+    "vignette": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer.vignette.webp",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-aire-composer-short": {
+    "fichier": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer-short.mp4",
+    "poster": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer-short-miniature.png",
+    "vignette": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer-short-miniature.vignette.webp",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-aire-defi": {
+    "fichier": "5e/maths/aire/05-defi/eleveai-maths-5e-aire-defi.mp4",
+    "poster": "5e/maths/aire/05-defi/eleveai-maths-5e-aire-defi.png",
+    "vignette": "5e/maths/aire/05-defi/eleveai-maths-5e-aire-defi.vignette.webp",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-aire-defi-short": {
+    "fichier": "5e/maths/aire/05-defi/eleveai-maths-5e-aire-defi-short.mp4",
+    "poster": "5e/maths/aire/05-defi/eleveai-maths-5e-aire-defi-short-miniature.png",
+    "vignette": "5e/maths/aire/05-defi/eleveai-maths-5e-aire-defi-short-miniature.vignette.webp",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-patron-prisme-cylindre": {
+    "fichier": "5e/maths/volume/01-patron-prisme-cylindre/eleveai-maths-5e-patron-prisme-cylindre.mp4",
+    "poster": "5e/maths/volume/01-patron-prisme-cylindre/eleveai-maths-5e-patron-prisme-cylindre.png",
+    "vignette": "5e/maths/volume/01-patron-prisme-cylindre/eleveai-maths-5e-patron-prisme-cylindre.vignette.webp",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-patron-prisme-cylindre-short": {
+    "fichier": "5e/maths/volume/01-patron-prisme-cylindre/eleveai-maths-5e-patron-prisme-cylindre-short.mp4",
+    "poster": "5e/maths/volume/01-patron-prisme-cylindre/eleveai-maths-5e-patron-prisme-cylindre-short-miniature.png",
+    "vignette": "5e/maths/volume/01-patron-prisme-cylindre/eleveai-maths-5e-patron-prisme-cylindre-short-miniature.vignette.webp",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-volume-comprendre": {
+    "fichier": "5e/maths/volume/02-volume-comprendre/eleveai-maths-5e-volume-comprendre.mp4",
+    "poster": "5e/maths/volume/02-volume-comprendre/eleveai-maths-5e-volume-comprendre.png",
+    "vignette": "5e/maths/volume/02-volume-comprendre/eleveai-maths-5e-volume-comprendre.vignette.webp",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-volume-comprendre-short": {
+    "fichier": "5e/maths/volume/02-volume-comprendre/eleveai-maths-5e-volume-comprendre-short.mp4",
+    "poster": "5e/maths/volume/02-volume-comprendre/eleveai-maths-5e-volume-comprendre-short-miniature.png",
+    "vignette": "5e/maths/volume/02-volume-comprendre/eleveai-maths-5e-volume-comprendre-short-miniature.vignette.webp",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-volume-pave": {
+    "fichier": "5e/maths/volume/03-volume-pave/eleveai-maths-5e-volume-pave.mp4",
+    "poster": "5e/maths/volume/03-volume-pave/eleveai-maths-5e-volume-pave.png",
+    "vignette": "5e/maths/volume/03-volume-pave/eleveai-maths-5e-volume-pave.vignette.webp",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-volume-pave-short": {
+    "fichier": "5e/maths/volume/03-volume-pave/eleveai-maths-5e-volume-pave-short.mp4",
+    "poster": "5e/maths/volume/03-volume-pave/eleveai-maths-5e-volume-pave-short-miniature.png",
+    "vignette": "5e/maths/volume/03-volume-pave/eleveai-maths-5e-volume-pave-short-miniature.vignette.webp",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-volume-prisme": {
+    "fichier": "5e/maths/volume/04-volume-prisme/eleveai-maths-5e-volume-prisme.mp4",
+    "poster": "5e/maths/volume/04-volume-prisme/eleveai-maths-5e-volume-prisme.png",
+    "vignette": "5e/maths/volume/04-volume-prisme/eleveai-maths-5e-volume-prisme.vignette.webp",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-volume-prisme-short": {
+    "fichier": "5e/maths/volume/04-volume-prisme/eleveai-maths-5e-volume-prisme-short.mp4",
+    "poster": "5e/maths/volume/04-volume-prisme/eleveai-maths-5e-volume-prisme-short-miniature.png",
+    "vignette": "5e/maths/volume/04-volume-prisme/eleveai-maths-5e-volume-prisme-short-miniature.vignette.webp",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-volume-cylindre": {
+    "fichier": "5e/maths/volume/05-volume-cylindre/eleveai-maths-5e-volume-cylindre.mp4",
+    "poster": "5e/maths/volume/05-volume-cylindre/eleveai-maths-5e-volume-cylindre.png",
+    "vignette": "5e/maths/volume/05-volume-cylindre/eleveai-maths-5e-volume-cylindre.vignette.webp",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-volume-cylindre-short": {
+    "fichier": "5e/maths/volume/05-volume-cylindre/eleveai-maths-5e-volume-cylindre-short.mp4",
+    "poster": "5e/maths/volume/05-volume-cylindre/eleveai-maths-5e-volume-cylindre-short-miniature.png",
+    "vignette": "5e/maths/volume/05-volume-cylindre/eleveai-maths-5e-volume-cylindre-short-miniature.vignette.webp",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-volume-assemblage": {
+    "fichier": "5e/maths/volume/06-volume-assemblage/eleveai-maths-5e-volume-assemblage.mp4",
+    "poster": "5e/maths/volume/06-volume-assemblage/eleveai-maths-5e-volume-assemblage.png",
+    "vignette": "5e/maths/volume/06-volume-assemblage/eleveai-maths-5e-volume-assemblage.vignette.webp",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-volume-assemblage-short": {
+    "fichier": "5e/maths/volume/06-volume-assemblage/eleveai-maths-5e-volume-assemblage-short.mp4",
+    "poster": "5e/maths/volume/06-volume-assemblage/eleveai-maths-5e-volume-assemblage-short-miniature.png",
+    "vignette": "5e/maths/volume/06-volume-assemblage/eleveai-maths-5e-volume-assemblage-short-miniature.vignette.webp",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-volume-unite": {
+    "fichier": "5e/maths/volume/07-volume-unite/eleveai-maths-5e-volume-unite.mp4",
+    "poster": "5e/maths/volume/07-volume-unite/eleveai-maths-5e-volume-unite.png",
+    "vignette": "5e/maths/volume/07-volume-unite/eleveai-maths-5e-volume-unite.vignette.webp",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-volume-unite-short": {
+    "fichier": "5e/maths/volume/07-volume-unite/eleveai-maths-5e-volume-unite-short.mp4",
+    "poster": "5e/maths/volume/07-volume-unite/eleveai-maths-5e-volume-unite-short-miniature.png",
+    "vignette": "5e/maths/volume/07-volume-unite/eleveai-maths-5e-volume-unite-short-miniature.vignette.webp",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-volume-defi": {
+    "fichier": "5e/maths/volume/08-volume-defi/eleveai-maths-5e-volume-defi.mp4",
+    "poster": "5e/maths/volume/08-volume-defi/eleveai-maths-5e-volume-defi.png",
+    "vignette": "5e/maths/volume/08-volume-defi/eleveai-maths-5e-volume-defi.vignette.webp",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-volume-defi-short": {
+    "fichier": "5e/maths/volume/08-volume-defi/eleveai-maths-5e-volume-defi-short.mp4",
+    "poster": "5e/maths/volume/08-volume-defi/eleveai-maths-5e-volume-defi-short-miniature.png",
+    "vignette": "5e/maths/volume/08-volume-defi/eleveai-maths-5e-volume-defi-short-miniature.vignette.webp",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-conversion-decimal": {
+    "fichier": "5e/maths/conversion/01-decimal/eleveai-maths-5e-conversion-decimal.mp4",
+    "poster": "5e/maths/conversion/01-decimal/eleveai-maths-5e-conversion-decimal.png",
+    "vignette": "5e/maths/conversion/01-decimal/eleveai-maths-5e-conversion-decimal.vignette.webp",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-conversion-decimal-short": {
+    "fichier": "5e/maths/conversion/01-decimal/eleveai-maths-5e-conversion-decimal-short.mp4",
+    "poster": "5e/maths/conversion/01-decimal/eleveai-maths-5e-conversion-decimal-short-miniature.png",
+    "vignette": "5e/maths/conversion/01-decimal/eleveai-maths-5e-conversion-decimal-short-miniature.vignette.webp",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-conversion-duree": {
+    "fichier": "5e/maths/conversion/02-duree/eleveai-maths-5e-conversion-duree.mp4",
+    "poster": "5e/maths/conversion/02-duree/eleveai-maths-5e-conversion-duree.png",
+    "vignette": "5e/maths/conversion/02-duree/eleveai-maths-5e-conversion-duree.vignette.webp",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-conversion-duree-short": {
+    "fichier": "5e/maths/conversion/02-duree/eleveai-maths-5e-conversion-duree-short.mp4",
+    "poster": "5e/maths/conversion/02-duree/eleveai-maths-5e-conversion-duree-short-miniature.png",
+    "vignette": "5e/maths/conversion/02-duree/eleveai-maths-5e-conversion-duree-short-miniature.vignette.webp",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-conversion-avant-calcul": {
+    "fichier": "5e/maths/conversion/03-avant-calcul/eleveai-maths-5e-conversion-avant-calcul.mp4",
+    "poster": "5e/maths/conversion/03-avant-calcul/eleveai-maths-5e-conversion-avant-calcul.png",
+    "vignette": "5e/maths/conversion/03-avant-calcul/eleveai-maths-5e-conversion-avant-calcul.vignette.webp",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-conversion-avant-calcul-short": {
+    "fichier": "5e/maths/conversion/03-avant-calcul/eleveai-maths-5e-conversion-avant-calcul-short.mp4",
+    "poster": "5e/maths/conversion/03-avant-calcul/eleveai-maths-5e-conversion-avant-calcul-short-miniature.png",
+    "vignette": "5e/maths/conversion/03-avant-calcul/eleveai-maths-5e-conversion-avant-calcul-short-miniature.vignette.webp",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-conversion-coherence": {
+    "fichier": "5e/maths/conversion/04-coherence/eleveai-maths-5e-conversion-coherence.mp4",
+    "poster": "5e/maths/conversion/04-coherence/eleveai-maths-5e-conversion-coherence.png",
+    "vignette": "5e/maths/conversion/04-coherence/eleveai-maths-5e-conversion-coherence.vignette.webp",
+    "short": false,
+    "youtube": null,
+    "coach": null
+  },
+  "5e-conversion-coherence-short": {
+    "fichier": "5e/maths/conversion/04-coherence/eleveai-maths-5e-conversion-coherence-short.mp4",
+    "poster": "5e/maths/conversion/04-coherence/eleveai-maths-5e-conversion-coherence-short-miniature.png",
+    "vignette": "5e/maths/conversion/04-coherence/eleveai-maths-5e-conversion-coherence-short-miniature.vignette.webp",
+    "short": true,
+    "youtube": null,
+    "coach": null
+  }
+}

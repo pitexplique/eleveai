@@ -1,0 +1,16 @@
+{
+  "00-garde": "L'aire du parallélogramme. Une forme penchée, comment la mesurer ?",
+  "01-situation": "Voici Soraya. Elle est graphiste. Elle dessine des motifs pour des tissus. Son motif préféré : un parallélogramme, une forme penchée. Pour l'imprimer, elle doit connaître son aire.",
+  "02-decouper": "Le motif a une base de 6 centimètres et une hauteur de 4 centimètres. Soraya coupe le petit triangle à gauche. Elle le glisse à droite. Le parallélogramme devient un rectangle !",
+  "03-rectangle": "Ce rectangle mesure 6 centimètres sur 4. Son aire : 6 fois 4, 24 centimètres carrés. Rien n'a été perdu : le parallélogramme a la même aire, 24 centimètres carrés.",
+  "04-methode": "La méthode : base fois hauteur. Et c'est tout : pour le parallélogramme, on ne divise pas par 2.",
+  "05-question": "Question ! Un parallélogramme a une base de 8 centimètres et une hauteur de 5 centimètres. Quelle est son aire ? A : 20 centimètres carrés. B : 13 centimètres carrés. C : 40 centimètres carrés. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. 8 fois 5, 40 centimètres carrés. 20, c'est diviser par 2 en trop : ça, c'est pour le triangle.",
+  "06-piege": "Attention au piège ! La hauteur n'est pas le côté penché. Elle tombe tout droit sur la base, à angle droit.",
+  "07-question": "Question ! Un parallélogramme a une base de 6 centimètres, un côté penché de 5 centimètres et une hauteur de 4 centimètres. Quelle est son aire ? A : 30 centimètres carrés. B : 24 centimètres carrés. C : 12 centimètres carrés. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Base fois hauteur : 6 fois 4, 24 centimètres carrés. Le côté penché ne sert pas.",
+  "08-defi": "À toi de jouer ! Soraya imprime son motif sur un tissu de 60 centimètres sur 40 centimètres. Chaque motif a une base de 6 centimètres et une hauteur de 4 centimètres. Combien de fois l'aire d'un motif tient-elle dans le tissu ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le tissu : 60 fois 40, 2 400 centimètres carrés. Un motif : 6 fois 4, 24. 2 400 divisé par 24 : 100. L'aire du tissu vaut 100 motifs.",
+  "09-finale": "Ce que tu as appris. Un parallélogramme se transforme en rectangle de même aire. Son aire : base fois hauteur, sans diviser par 2. La hauteur tombe sur la base à angle droit.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

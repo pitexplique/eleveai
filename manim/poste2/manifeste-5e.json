@@ -1,0 +1,2484 @@
+{
+  "5e-aire-comprendre": {
+    "id": "5e-aire-comprendre",
+    "pas_avant": "",
+    "notionId": "aire_surface",
+    "microId": "aire_comprendre",
+    "classe": "5e",
+    "ceinture": "jaune",
+    "serie": "Maths 5e",
+    "type": "longue",
+    "fichier": "5e/maths/aire/01-comprendre/eleveai-maths-5e-aire-comprendre.mp4",
+    "miniature": "5e/maths/aire/01-comprendre/eleveai-maths-5e-aire-comprendre.png",
+    "titre": "Un mur de 4 m sur 3 m : combien de m² d'enduit ? — Comprendre l'aire — épisode 1 · Maths 5e",
+    "accroche": "Awa est maçonne. Elle doit couvrir un mur d'enduit, et l'enduit se vend au mètre carré. Combien de mètres carrés faut-il ?\n\nDans cette vidéo :\n• l'aire = le nombre de carrés-unité : 3 rangées de 4 carrés, 12 m²\n• le tour (14 m) n'est pas l'aire (12 m²) : des m, pas des m²\n• deux murs différents, même aire : 4 × 3 et 6 × 2, 12 m²\n• le piège : le petit 2 de m² compte\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : enduire 4 murs (deux de 4 m sur 2,5 m, deux de 3 m sur 2,5 m) avec des sacs de 10 m².\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/aire-surface\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/aire-surface\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_comprendre&display=simple\n\n📐 Épisode 1 de la série Aire d'EleveAI, en 5e.",
+    "chapitres": [
+      [
+        "00:00",
+        "L'aire"
+      ],
+      [
+        "00:05",
+        "Awa, maçonne"
+      ],
+      [
+        "00:19",
+        "Compter les carrés"
+      ],
+      [
+        "00:37",
+        "L'aire et le tour"
+      ],
+      [
+        "00:52",
+        "La méthode"
+      ],
+      [
+        "01:06",
+        "Question 1"
+      ],
+      [
+        "01:38",
+        "Le piège"
+      ],
+      [
+        "01:55",
+        "Question 2"
+      ],
+      [
+        "02:34",
+        "À toi de jouer"
+      ],
+      [
+        "02:57",
+        "Correction"
+      ],
+      [
+        "03:24",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "aire",
+      "mètre carré",
+      "aire et périmètre",
+      "unité d'aire",
+      "maçonne",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:06",
+        "question": "Un mur mesure 5 m sur 2 m. Quelle est son aire ?",
+        "choix": [
+          "10 m²",
+          "14 m²",
+          "7 m²"
+        ],
+        "reponse": 0,
+        "explication": "2 rangées de 5 carrés : 10 m². 14, c'est le tour du mur. 7, c'est 5 + 2."
+      },
+      {
+        "t": "01:55",
+        "question": "Deux terrasses. La première mesure 8 m sur 3 m. La deuxième mesure 6 m sur 4 m. Laquelle a la + grande aire ?",
+        "choix": [
+          "la deuxième",
+          "la première",
+          "elles ont la même aire"
+        ],
+        "reponse": 2,
+        "explication": "8 × 3 = 24. 6 × 4 = 24 aussi. Les deux terrasses ont la même aire : 24 m²."
+      }
+    ],
+    "centres": [
+      "art-design",
+      "argent-budget"
+    ]
+  },
+  "5e-aire-comprendre-short": {
+    "id": "5e-aire-comprendre-short",
+    "pas_avant": "",
+    "notionId": "aire_surface",
+    "microId": "aire_comprendre",
+    "classe": "5e",
+    "ceinture": "blanche",
+    "serie": "Maths 5e",
+    "type": "short",
+    "renvoie_vers": "5e-aire-comprendre",
+    "fichier": "5e/maths/aire/01-comprendre/eleveai-maths-5e-aire-comprendre-short.mp4",
+    "miniature": "5e/maths/aire/01-comprendre/eleveai-maths-5e-aire-comprendre-short-miniature.png",
+    "titre": "Pizza carrée ou rectangle : laquelle est la plus grande ? #maths #5e",
+    "accroche": "Ma pizza est carrée, 20 cm sur 20. Celle de mon frère est un rectangle, 25 cm sur 16. Il dit que la sienne est plus grande, parce qu'elle est plus longue… On compte ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une pizza de 30 cm sur 10. Quelle est son aire ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_comprendre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #5e",
+    "tags": [
+      "aire",
+      "pizza",
+      "comparer des aires",
+      "Ti Margo",
+      "dessin animé",
+      "ceinture blanche",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:17",
+        "question": "Quelle pizza a la + grande aire ?",
+        "choix": [
+          "la pizza rectangle",
+          "les deux ont la même aire",
+          "la pizza carrée"
+        ],
+        "reponse": 1,
+        "explication": "Ma pizza : 20 × 20 = 400 cm². La sienne : 25 × 16 = 400 aussi. Même aire !"
+      }
+    ],
+    "centres": [
+      "art-design",
+      "argent-budget"
+    ]
+  },
+  "5e-aire-triangle": {
+    "id": "5e-aire-triangle",
+    "pas_avant": "",
+    "notionId": "aire_surface",
+    "microId": "aire_triangle",
+    "classe": "5e",
+    "ceinture": "verte",
+    "serie": "Maths 5e",
+    "type": "longue",
+    "fichier": "5e/maths/aire/02-triangle/eleveai-maths-5e-aire-triangle.mp4",
+    "miniature": "5e/maths/aire/02-triangle/eleveai-maths-5e-aire-triangle.png",
+    "titre": "Un coin de champ en triangle : combien de m² à semer ? — L'aire du triangle — épisode 2 · Maths 5e",
+    "accroche": "Ibrahim est agriculteur. Au bout de son champ, il reste un coin en triangle, où il veut semer des fleurs pour les abeilles. Combien de mètres carrés doit-il semer ?\n\nDans cette vidéo :\n• le rectangle autour du triangle : 8 × 5 = 40 m²\n• le triangle en prend la moitié : 40 ÷ 2 = 20 m²\n• la formule : base × hauteur ÷ 2\n• le piège : la hauteur n'est pas le côté penché, et on n'oublie pas le ÷ 2\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : retrouver la hauteur d'un triangle de 20 m² et de base 8 m, puis compter les fleurs.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/aire-surface\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/aire-surface\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_triangle&display=simple\n\n📐 Épisode 2 de la série Aire d'EleveAI, en 5e.",
+    "chapitres": [
+      [
+        "00:00",
+        "L'aire du triangle"
+      ],
+      [
+        "00:06",
+        "Ibrahim, agriculteur"
+      ],
+      [
+        "00:22",
+        "Le rectangle autour"
+      ],
+      [
+        "00:36",
+        "La moitié"
+      ],
+      [
+        "00:46",
+        "La méthode"
+      ],
+      [
+        "00:55",
+        "Question 1"
+      ],
+      [
+        "01:28",
+        "Le piège"
+      ],
+      [
+        "01:41",
+        "Question 2"
+      ],
+      [
+        "02:22",
+        "À toi de jouer"
+      ],
+      [
+        "02:42",
+        "Correction"
+      ],
+      [
+        "02:58",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "aire du triangle",
+      "base",
+      "hauteur",
+      "formule",
+      "agriculteur",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:55",
+        "question": "Un triangle a une base de 10 cm et une hauteur de 6 cm. Quelle est son aire ?",
+        "choix": [
+          "60 cm²",
+          "30 cm²",
+          "16 cm²"
+        ],
+        "reponse": 1,
+        "explication": "10 × 6 = 60. Divisé par 2 : 30 cm²."
+      },
+      {
+        "t": "01:41",
+        "question": "Un triangle a une base de 6 cm, un côté penché de 5 cm et une hauteur de 4 cm. Quelle est son aire ?",
+        "choix": [
+          "12 cm²",
+          "15 cm²",
+          "24 cm²"
+        ],
+        "reponse": 0,
+        "explication": "On prend la base et la hauteur : 6 × 4 = 24. Divisé par 2 : 12 cm². Le côté de 5 cm ne sert pas."
+      }
+    ],
+    "centres": [
+      "nature-ecologie",
+      "cuisine"
+    ]
+  },
+  "5e-aire-triangle-short": {
+    "id": "5e-aire-triangle-short",
+    "pas_avant": "",
+    "notionId": "aire_surface",
+    "microId": "aire_triangle",
+    "classe": "5e",
+    "ceinture": "blanche",
+    "serie": "Maths 5e",
+    "type": "short",
+    "renvoie_vers": "5e-aire-triangle",
+    "fichier": "5e/maths/aire/02-triangle/eleveai-maths-5e-aire-triangle-short.mp4",
+    "miniature": "5e/maths/aire/02-triangle/eleveai-maths-5e-aire-triangle-short-miniature.png",
+    "titre": "J'achète la peinture pour 12 m²… erreur ? #maths #5e",
+    "accroche": "Je peins le haut de ma cabane : un triangle de 4 m de base et de 3 m de haut. 4 × 3 = 12, j'achète de la peinture pour 12 m²… Bonne idée ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un triangle de base 6 m et de hauteur 5 m. Quelle est son aire ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_triangle&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #5e",
+    "tags": [
+      "aire du triangle",
+      "cabane",
+      "peinture",
+      "Ti Margo",
+      "dessin animé",
+      "ceinture blanche",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:15",
+        "question": "Quelle est l'aire du triangle ?",
+        "choix": [
+          "12 m²",
+          "7 m²",
+          "6 m²"
+        ],
+        "reponse": 2,
+        "explication": "4 × 3 = 12 : c'est le rectangle entier. Le triangle en est la moitié : 6 m²."
+      }
+    ],
+    "centres": [
+      "nature-ecologie",
+      "cuisine"
+    ]
+  },
+  "5e-aire-parallelogramme": {
+    "id": "5e-aire-parallelogramme",
+    "pas_avant": "",
+    "notionId": "aire_surface",
+    "microId": "aire_parallelogramme",
+    "classe": "5e",
+    "ceinture": "verte",
+    "serie": "Maths 5e",
+    "type": "longue",
+    "fichier": "5e/maths/aire/03-parallelogramme/eleveai-maths-5e-aire-parallelogramme.mp4",
+    "miniature": "5e/maths/aire/03-parallelogramme/eleveai-maths-5e-aire-parallelogramme.png",
+    "titre": "Une forme penchée : comment mesurer son aire ? — L'aire du parallélogramme — épisode 3 · Maths 5e",
+    "accroche": "Soraya est graphiste. Son motif préféré pour les tissus : un parallélogramme, une forme penchée. Pour l'imprimer, elle doit connaître son aire.\n\nDans cette vidéo :\n• couper le petit triangle, le glisser de l'autre côté : un rectangle\n• 6 × 4 = 24 cm² : rien n'a été perdu\n• la formule : base × hauteur, sans diviser par 2\n• le piège : la hauteur n'est pas le côté penché\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : combien de fois l'aire d'un motif tient dans un tissu de 60 cm sur 40 cm.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/aire-surface\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/aire-surface\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_parallelogramme&display=simple\n\n📐 Épisode 3 de la série Aire d'EleveAI, en 5e.",
+    "chapitres": [
+      [
+        "00:00",
+        "L'aire du parallélogramme"
+      ],
+      [
+        "00:06",
+        "Soraya, graphiste"
+      ],
+      [
+        "00:23",
+        "Découper, glisser"
+      ],
+      [
+        "00:38",
+        "Le rectangle"
+      ],
+      [
+        "00:53",
+        "La méthode"
+      ],
+      [
+        "01:02",
+        "Question 1"
+      ],
+      [
+        "01:38",
+        "Le piège"
+      ],
+      [
+        "01:48",
+        "Question 2"
+      ],
+      [
+        "02:26",
+        "À toi de jouer"
+      ],
+      [
+        "02:48",
+        "Correction"
+      ],
+      [
+        "03:07",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "aire du parallélogramme",
+      "base",
+      "hauteur",
+      "graphiste",
+      "motif",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:02",
+        "question": "Un parallélogramme a une base de 8 cm et une hauteur de 5 cm. Quelle est son aire ?",
+        "choix": [
+          "20 cm²",
+          "13 cm²",
+          "40 cm²"
+        ],
+        "reponse": 2,
+        "explication": "8 × 5 = 40 cm². 20, c'est diviser par 2 en trop : ça, c'est pour le triangle."
+      },
+      {
+        "t": "01:48",
+        "question": "Un parallélogramme a une base de 6 cm, un côté penché de 5 cm et une hauteur de 4 cm. Quelle est son aire ?",
+        "choix": [
+          "30 cm²",
+          "24 cm²",
+          "12 cm²"
+        ],
+        "reponse": 1,
+        "explication": "Base × hauteur : 6 × 4 = 24 cm². Le côté penché ne sert pas."
+      }
+    ],
+    "centres": [
+      "reseaux-sociaux",
+      "jeux-defis"
+    ]
+  },
+  "5e-aire-parallelogramme-short": {
+    "id": "5e-aire-parallelogramme-short",
+    "pas_avant": "",
+    "notionId": "aire_surface",
+    "microId": "aire_parallelogramme",
+    "classe": "5e",
+    "ceinture": "blanche",
+    "serie": "Maths 5e",
+    "type": "short",
+    "renvoie_vers": "5e-aire-parallelogramme",
+    "fichier": "5e/maths/aire/03-parallelogramme/eleveai-maths-5e-aire-parallelogramme-short.mp4",
+    "miniature": "5e/maths/aire/03-parallelogramme/eleveai-maths-5e-aire-parallelogramme-short-miniature.png",
+    "titre": "Un coup de ciseaux change-t-il l'aire ? #maths #5e",
+    "accroche": "J'ai une feuille en parallélogramme : 5 cm de base, 2 cm de hauteur. Clac ! Je coupe le petit triangle et je le recolle de l'autre côté : un rectangle !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un parallélogramme de base 7 cm et de hauteur 3 cm. Quelle est son aire ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_parallelogramme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #5e",
+    "tags": [
+      "aire du parallélogramme",
+      "ciseaux",
+      "découpage",
+      "Ti Margo",
+      "dessin animé",
+      "ceinture blanche",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:19",
+        "question": "Quelle est l'aire du parallélogramme ?",
+        "choix": [
+          "10 cm²",
+          "5 cm²",
+          "7 cm²"
+        ],
+        "reponse": 0,
+        "explication": "Le rectangle : 5 × 2 = 10 cm². Je n'ai rien perdu : le parallélogramme fait 10 aussi."
+      }
+    ],
+    "centres": [
+      "reseaux-sociaux",
+      "jeux-defis"
+    ]
+  },
+  "5e-aire-composer": {
+    "id": "5e-aire-composer",
+    "pas_avant": "",
+    "notionId": "aire_surface",
+    "microId": "aire_composer",
+    "classe": "5e",
+    "ceinture": "verte",
+    "serie": "Maths 5e",
+    "type": "longue",
+    "fichier": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer.mp4",
+    "miniature": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer.png",
+    "titre": "Un toit en L : combien de m² de panneaux solaires ? — L'aire d'une figure composée — épisode 4 · Maths 5e",
+    "accroche": "Leïla pose des panneaux solaires. Ce toit a une drôle de forme : un L. Combien de mètres carrés de toit a-t-elle ?\n\nDans cette vidéo :\n• découper le L en deux rectangles : 24 + 6 = 30 m²\n• ou compléter en un grand rectangle et enlever le morceau en trop : 36 − 6 = 30 m²\n• la méthode : découper, calculer chaque morceau, additionner ou enlever\n• le piège : chaque morceau compte une seule fois\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un toit rectangle avec un triangle au bout : combien de panneaux de 2 m² ?.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/aire-surface\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/aire-surface\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_composer&display=simple\n\n📐 Épisode 4 de la série Aire d'EleveAI, en 5e.",
+    "chapitres": [
+      [
+        "00:00",
+        "L'aire d'une figure composée"
+      ],
+      [
+        "00:06",
+        "Leïla, technicienne en énergies renouvelables"
+      ],
+      [
+        "00:21",
+        "Découper en rectangles"
+      ],
+      [
+        "00:38",
+        "Compléter puis enlever"
+      ],
+      [
+        "00:55",
+        "La méthode"
+      ],
+      [
+        "01:06",
+        "Question 1"
+      ],
+      [
+        "01:42",
+        "Le piège"
+      ],
+      [
+        "01:54",
+        "Question 2"
+      ],
+      [
+        "02:33",
+        "À toi de jouer"
+      ],
+      [
+        "02:57",
+        "Correction"
+      ],
+      [
+        "03:16",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "figure composée",
+      "aire",
+      "découper",
+      "panneaux solaires",
+      "énergies renouvelables",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:06",
+        "question": "Une figure en L est faite d'un rectangle de 5 m sur 4 et d'un rectangle de 2 m sur 3. Quelle est son aire ?",
+        "choix": [
+          "26 m²",
+          "20 m²",
+          "14 m²"
+        ],
+        "reponse": 0,
+        "explication": "5 × 4 = 20. 2 × 3 = 6. 20 + 6 = 26 m²."
+      },
+      {
+        "t": "01:54",
+        "question": "Un carré de 10 m de côté. On enlève un carré de 4 m de côté. Quelle aire reste-t-il ?",
+        "choix": [
+          "96 m²",
+          "84 m²",
+          "60 m²"
+        ],
+        "reponse": 1,
+        "explication": "Le grand carré : 10 × 10 = 100. Le petit : 4 × 4 = 16. 100 − 16 = 84 m²."
+      }
+    ],
+    "centres": [
+      "nature-ecologie",
+      "technologie-ia"
+    ]
+  },
+  "5e-aire-composer-short": {
+    "id": "5e-aire-composer-short",
+    "pas_avant": "",
+    "notionId": "aire_surface",
+    "microId": "aire_composer",
+    "classe": "5e",
+    "ceinture": "blanche",
+    "serie": "Maths 5e",
+    "type": "short",
+    "renvoie_vers": "5e-aire-composer",
+    "fichier": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer-short.mp4",
+    "miniature": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer-short-miniature.png",
+    "titre": "La pancarte maison : quelle aire ? #maths #5e",
+    "accroche": "Je fabrique une pancarte en forme de maison : un carré de 4 dm de côté, et un toit en triangle de 4 dm de base et 3 dm de haut. Combien de peinture ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un carré de 5 dm et un toit de base 5 dm, de hauteur 4 dm. Quelle est l'aire de la pancarte ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_composer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #5e",
+    "tags": [
+      "figure composée",
+      "pancarte",
+      "maison",
+      "Ti Margo",
+      "dessin animé",
+      "ceinture blanche",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:17",
+        "question": "Quelle est l'aire de toute la pancarte ?",
+        "choix": [
+          "28 dm²",
+          "16 dm²",
+          "22 dm²"
+        ],
+        "reponse": 2,
+        "explication": "Le carré : 4 × 4 = 16. Le toit : 4 × 3 = 12, ÷ 2 = 6. En tout : 22 dm²."
+      }
+    ],
+    "centres": [
+      "nature-ecologie",
+      "technologie-ia"
+    ]
+  },
+  "5e-aire-defi": {
+    "id": "5e-aire-defi",
+    "pas_avant": "",
+    "notionId": "aire_surface",
+    "microId": "aire_defi",
+    "classe": "5e",
+    "ceinture": "bleue",
+    "serie": "Maths 5e",
+    "type": "longue",
+    "fichier": "5e/maths/aire/05-defi/eleveai-maths-5e-aire-defi.mp4",
+    "miniature": "5e/maths/aire/05-defi/eleveai-maths-5e-aire-defi.png",
+    "titre": "24 dm² et 8 dm de base : quelle hauteur ? — Défis sur les aires — épisode 5 · Maths 5e",
+    "accroche": "Mehdi est menuisier agenceur. Une cliente veut une tablette en triangle de 24 dm², avec une base de 8 dm. Quelle hauteur doit-il découper ?\n\nDans cette vidéo :\n• remonter la formule : base × hauteur = 24 × 2 = 48, puis 48 ÷ 8 = 6 dm\n• vérifier : 8 × 6 ÷ 2 = 24 dm²\n• triangle : hauteur = aire × 2 ÷ base ; parallélogramme : base = aire ÷ hauteur\n• le piège : le × 2 ne sert que pour le triangle\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : un plan de travail en L : combien de plaques de revêtement de 0,50 m² ?.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/aire-surface\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/aire-surface\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_defi&display=simple\n\n📐 Épisode 5 de la série Aire d'EleveAI, en 5e.",
+    "chapitres": [
+      [
+        "00:00",
+        "Défis sur les aires"
+      ],
+      [
+        "00:06",
+        "Mehdi, menuisier agenceur"
+      ],
+      [
+        "00:24",
+        "Remonter la formule"
+      ],
+      [
+        "00:40",
+        "Vérifier"
+      ],
+      [
+        "00:51",
+        "La méthode"
+      ],
+      [
+        "01:07",
+        "Question 1"
+      ],
+      [
+        "01:44",
+        "Le piège"
+      ],
+      [
+        "01:58",
+        "Question 2"
+      ],
+      [
+        "02:36",
+        "À toi de jouer"
+      ],
+      [
+        "03:04",
+        "Correction"
+      ],
+      [
+        "03:27",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "aire",
+      "défi",
+      "retrouver une longueur",
+      "formule",
+      "menuisier",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:07",
+        "question": "Un triangle a une aire de 20 cm² et une base de 8 cm. Quelle est sa hauteur ?",
+        "choix": [
+          "10 cm",
+          "5 cm",
+          "2,5 cm"
+        ],
+        "reponse": 1,
+        "explication": "20 × 2 = 40. 40 ÷ 8 = 5 cm. 2,5, c'est l'oubli du × 2."
+      },
+      {
+        "t": "01:58",
+        "question": "Un parallélogramme a une aire de 36 cm² et une hauteur de 4 cm. Quelle est sa base ?",
+        "choix": [
+          "32 cm",
+          "18 cm",
+          "9 cm"
+        ],
+        "reponse": 2,
+        "explication": "36 ÷ 4 = 9 cm. On vérifie : 9 × 4 = 36. 18 serait la base d'un triangle de même aire."
+      }
+    ],
+    "centres": [
+      "argent-budget",
+      "sciences"
+    ]
+  },
+  "5e-aire-defi-short": {
+    "id": "5e-aire-defi-short",
+    "pas_avant": "",
+    "notionId": "aire_surface",
+    "microId": "aire_defi",
+    "classe": "5e",
+    "ceinture": "blanche",
+    "serie": "Maths 5e",
+    "type": "short",
+    "renvoie_vers": "5e-aire-defi",
+    "fichier": "5e/maths/aire/05-defi/eleveai-maths-5e-aire-defi-short.mp4",
+    "miniature": "5e/maths/aire/05-defi/eleveai-maths-5e-aire-defi-short-miniature.png",
+    "titre": "12 m² et 4 m de long : mon tapis rentre-t-il ? #maths #5e",
+    "accroche": "J'ai acheté un tapis de 12 m², long de 4 m. Mon couloir fait 2 m de large. Le tapis va-t-il rentrer ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un tapis de 20 m² et de 5 m de long. Quelle est sa largeur ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=aire_surface&microId=aire_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #5e",
+    "tags": [
+      "aire",
+      "tapis",
+      "retrouver une longueur",
+      "Ti Margo",
+      "dessin animé",
+      "ceinture blanche",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:12",
+        "question": "Quelle est la largeur du tapis ?",
+        "choix": [
+          "3 m",
+          "8 m",
+          "48 m"
+        ],
+        "reponse": 0,
+        "explication": "Longueur × largeur = 12. 12 ÷ 4 = 3 m de large."
+      }
+    ],
+    "centres": [
+      "argent-budget",
+      "sciences"
+    ]
+  },
+  "5e-patron-prisme-cylindre": {
+    "id": "5e-patron-prisme-cylindre",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "patron_prisme_cylindre",
+    "classe": "5e",
+    "ceinture": "verte",
+    "serie": "Maths 5e",
+    "type": "longue",
+    "fichier": "5e/maths/volume/01-patron-prisme-cylindre/eleveai-maths-5e-patron-prisme-cylindre.mp4",
+    "miniature": "5e/maths/volume/01-patron-prisme-cylindre/eleveai-maths-5e-patron-prisme-cylindre.png",
+    "titre": "Que voit-on quand on déplie une boîte ronde ? — Le patron d'un prisme et d'un cylindre — épisode 1 · Maths 5e",
+    "accroche": "Gaël est concepteur d'emballages. Avant de fabriquer une boîte, il dessine son patron : la boîte dépliée à plat.\n\nDans cette vidéo :\n• le patron d'un cylindre : deux disques et un rectangle\n• la longueur du rectangle = le tour du disque : 2 × π × rayon\n• le patron d'un prisme droit : deux bases et un rectangle par côté\n• le piège : le rectangle n'est pas long comme le diamètre\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : les dimensions et l'aire de l'étiquette d'une boîte de rayon 3 cm et de hauteur 12 cm.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/volume-solide\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/volume-solide\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=patron_prisme_cylindre&display=simple\n\n📐 Épisode 1 de la série Volume d'EleveAI, en 5e.",
+    "chapitres": [
+      [
+        "00:00",
+        "Le patron d'un prisme et d'un cylindre"
+      ],
+      [
+        "00:07",
+        "Gaël, concepteur d'emballages"
+      ],
+      [
+        "00:21",
+        "Le patron du cylindre"
+      ],
+      [
+        "00:33",
+        "La longueur du rectangle"
+      ],
+      [
+        "00:53",
+        "Le patron du prisme"
+      ],
+      [
+        "01:12",
+        "Question 1"
+      ],
+      [
+        "01:41",
+        "Le piège"
+      ],
+      [
+        "01:56",
+        "Question 2"
+      ],
+      [
+        "02:39",
+        "À toi de jouer"
+      ],
+      [
+        "02:59",
+        "Correction"
+      ],
+      [
+        "03:20",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "patron",
+      "cylindre",
+      "prisme droit",
+      "périmètre du cercle",
+      "emballage",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:12",
+        "question": "Le patron d'un cylindre, c'est…",
+        "choix": [
+          "deux disques et un carré",
+          "un disque et un rectangle",
+          "deux disques et un rectangle"
+        ],
+        "reponse": 2,
+        "explication": "Deux disques, le fond et le couvercle. Et un rectangle, qui fait le tour."
+      },
+      {
+        "t": "01:56",
+        "question": "Un cylindre a un rayon de 5 cm. Quelle est la longueur du rectangle de son patron ? On prend π = 3,14.",
+        "choix": [
+          "31,4 cm",
+          "15,7 cm",
+          "10 cm"
+        ],
+        "reponse": 0,
+        "explication": "2 × 3,14 × 5 = 31,4 cm. 15,7, c'est un demi-tour. 10, c'est le diamètre."
+      }
+    ],
+    "centres": [
+      "nature-ecologie",
+      "sciences"
+    ]
+  },
+  "5e-patron-prisme-cylindre-short": {
+    "id": "5e-patron-prisme-cylindre-short",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "patron_prisme_cylindre",
+    "classe": "5e",
+    "ceinture": "blanche",
+    "serie": "Maths 5e",
+    "type": "short",
+    "renvoie_vers": "5e-patron-prisme-cylindre",
+    "fichier": "5e/maths/volume/01-patron-prisme-cylindre/eleveai-maths-5e-patron-prisme-cylindre-short.mp4",
+    "miniature": "5e/maths/volume/01-patron-prisme-cylindre/eleveai-maths-5e-patron-prisme-cylindre-short-miniature.png",
+    "titre": "Mon étiquette ne fait pas le tour de la boîte ! #maths #5e",
+    "accroche": "Je colle une étiquette autour de ma boîte de conserve, de rayon 2 cm. Je la coupe à 4 cm, comme le diamètre… il manque un gros morceau !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une boîte de rayon 5 cm. Quelle longueur doit avoir son étiquette ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=patron_prisme_cylindre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #volume #5e",
+    "tags": [
+      "patron du cylindre",
+      "étiquette",
+      "boîte de conserve",
+      "Ti Margo",
+      "dessin animé",
+      "ceinture blanche",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:17",
+        "question": "Quelle longueur doit avoir l'étiquette ? On prend π = 3,14.",
+        "choix": [
+          "6,28 cm",
+          "12,56 cm",
+          "4 cm"
+        ],
+        "reponse": 1,
+        "explication": "L'étiquette fait tout le tour : 2 × 3,14 × 2 = 12,56 cm. Plus de trois × le diamètre !"
+      }
+    ],
+    "centres": [
+      "nature-ecologie",
+      "sciences"
+    ]
+  },
+  "5e-volume-comprendre": {
+    "id": "5e-volume-comprendre",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_comprendre",
+    "classe": "5e",
+    "ceinture": "jaune",
+    "serie": "Maths 5e",
+    "type": "longue",
+    "fichier": "5e/maths/volume/02-volume-comprendre/eleveai-maths-5e-volume-comprendre.mp4",
+    "miniature": "5e/maths/volume/02-volume-comprendre/eleveai-maths-5e-volume-comprendre.png",
+    "titre": "Combien de caisses dans le camion ? — Comprendre le volume — épisode 2 · Maths 5e",
+    "accroche": "Tiago est logisticien. Il remplit des camions et des conteneurs. Son problème de chaque jour : combien de caisses vont rentrer ?\n\nDans cette vidéo :\n• ranger des cubes-unité couche par couche : 12 cubes, puis 24\n• le volume se compte en cubes : 24 dm³\n• une aire se compte en carrés (cm²), un volume en cubes (cm³)\n• le piège : le petit 2 pour une aire, le petit 3 pour un volume\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : combien de caisses de 1 m de côté dans un conteneur de 6 m, 2 m et 2 m, et combien pèse le chargement.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/volume-solide\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/volume-solide\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_comprendre&display=simple\n\n📐 Épisode 2 de la série Volume d'EleveAI, en 5e.",
+    "chapitres": [
+      [
+        "00:00",
+        "Le volume"
+      ],
+      [
+        "00:05",
+        "Tiago, logisticien"
+      ],
+      [
+        "00:17",
+        "Ranger des cubes"
+      ],
+      [
+        "00:29",
+        "Le volume"
+      ],
+      [
+        "00:39",
+        "La méthode"
+      ],
+      [
+        "00:53",
+        "Question 1"
+      ],
+      [
+        "01:27",
+        "Le piège"
+      ],
+      [
+        "01:40",
+        "Question 2"
+      ],
+      [
+        "02:18",
+        "À toi de jouer"
+      ],
+      [
+        "02:41",
+        "Correction"
+      ],
+      [
+        "02:54",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "volume",
+      "cube-unité",
+      "centimètre cube",
+      "aire et volume",
+      "logistique",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:53",
+        "question": "Un solide est fait de 12 cubes de 1 cm³. Quel est son volume ?",
+        "choix": [
+          "12 cm³",
+          "12 cm²",
+          "36 cm³"
+        ],
+        "reponse": 0,
+        "explication": "12 cubes de 1 cm³ : 12 cm³. Les cm², c'est pour une aire."
+      },
+      {
+        "t": "01:40",
+        "question": "Un pavé mesure 2 cm, 3 cm et 4 cm. Quel est son volume ?",
+        "choix": [
+          "12 cm³",
+          "9 cm³",
+          "24 cm³"
+        ],
+        "reponse": 2,
+        "explication": "Une couche : 2 × 3 = 6 cubes. 4 couches : 24 cm³. 9, c'est l'addition : faux."
+      }
+    ],
+    "centres": [
+      "transports",
+      "argent-budget"
+    ]
+  },
+  "5e-volume-comprendre-short": {
+    "id": "5e-volume-comprendre-short",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_comprendre",
+    "classe": "5e",
+    "ceinture": "blanche",
+    "serie": "Maths 5e",
+    "type": "short",
+    "renvoie_vers": "5e-volume-comprendre",
+    "fichier": "5e/maths/volume/02-volume-comprendre/eleveai-maths-5e-volume-comprendre-short.mp4",
+    "miniature": "5e/maths/volume/02-volume-comprendre/eleveai-maths-5e-volume-comprendre-short-miniature.png",
+    "titre": "Combien de boîtes dans ma valise ? #maths #5e",
+    "accroche": "Je pars en vacances et je range mes boîtes cubiques dans ma valise : une rangée de 3 boîtes, deux rangées, et une deuxième couche par-dessus.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 4 boîtes sur 3, en 2 couches. Combien de boîtes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_comprendre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #volume #5e",
+    "tags": [
+      "volume",
+      "valise",
+      "compter des cubes",
+      "Ti Margo",
+      "dessin animé",
+      "ceinture blanche",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:12",
+        "question": "Combien de boîtes dans la valise ?",
+        "choix": [
+          "7",
+          "12",
+          "6"
+        ],
+        "reponse": 1,
+        "explication": "Une couche : 3 × 2 = 6 boîtes. Deux couches : 12 boîtes."
+      }
+    ],
+    "centres": [
+      "transports",
+      "argent-budget"
+    ]
+  },
+  "5e-volume-pave": {
+    "id": "5e-volume-pave",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_pave",
+    "classe": "5e",
+    "ceinture": "verte",
+    "serie": "Maths 5e",
+    "type": "longue",
+    "fichier": "5e/maths/volume/03-volume-pave/eleveai-maths-5e-volume-pave.mp4",
+    "miniature": "5e/maths/volume/03-volume-pave/eleveai-maths-5e-volume-pave.png",
+    "titre": "Quel climatiseur pour cette pièce ? — Le volume du pavé droit — épisode 3 · Maths 5e",
+    "accroche": "Yuna est technicienne en climatisation. Pour choisir le bon climatiseur, elle doit connaître le volume d'air d'une pièce.\n\nDans cette vidéo :\n• au sol : 6 × 4 = 24 cubes de 1 m³, l'aire de la base\n• 3 couches jusqu'au plafond : 24 × 3 = 72 m³\n• la formule : longueur × largeur × hauteur (ou aire de la base × hauteur)\n• le piège : on multiplie les trois dimensions, on ne les additionne pas\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : deux salles à climatiser, un climatiseur pour 80 m³ : combien en faut-il ?.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/volume-solide\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/volume-solide\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_pave&display=simple\n\n📐 Épisode 3 de la série Volume d'EleveAI, en 5e.",
+    "chapitres": [
+      [
+        "00:00",
+        "Le volume du pavé droit"
+      ],
+      [
+        "00:06",
+        "Yuna, technicienne en climatisation"
+      ],
+      [
+        "00:18",
+        "Une couche au sol"
+      ],
+      [
+        "00:32",
+        "Jusqu'au plafond"
+      ],
+      [
+        "00:41",
+        "La méthode"
+      ],
+      [
+        "00:50",
+        "Question 1"
+      ],
+      [
+        "01:27",
+        "Le piège"
+      ],
+      [
+        "01:37",
+        "Question 2"
+      ],
+      [
+        "02:11",
+        "À toi de jouer"
+      ],
+      [
+        "02:36",
+        "Correction"
+      ],
+      [
+        "02:55",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "volume du pavé droit",
+      "formule",
+      "mètre cube",
+      "climatisation",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:50",
+        "question": "Un pavé mesure 5 cm, 3 cm et 2 cm. Quel est son volume ?",
+        "choix": [
+          "10 cm³",
+          "30 cm³",
+          "15 cm³"
+        ],
+        "reponse": 1,
+        "explication": "5 × 3 = 15. Fois 2 : 30 cm³. 10, c'est l'addition. 15, c'est oublier la hauteur."
+      },
+      {
+        "t": "01:37",
+        "question": "Un cube a une arête de 2 cm. Quel est son volume ?",
+        "choix": [
+          "8 cm³",
+          "6 cm³",
+          "4 cm³"
+        ],
+        "reponse": 0,
+        "explication": "2 × 2 × 2 = 8 cm³. 6, c'est 2 + 2 + 2. 4, c'est seulement une face."
+      }
+    ],
+    "centres": [
+      "technologie-ia",
+      "sciences"
+    ]
+  },
+  "5e-volume-pave-short": {
+    "id": "5e-volume-pave-short",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_pave",
+    "classe": "5e",
+    "ceinture": "blanche",
+    "serie": "Maths 5e",
+    "type": "short",
+    "renvoie_vers": "5e-volume-pave",
+    "fichier": "5e/maths/volume/03-volume-pave/eleveai-maths-5e-volume-pave-short.mp4",
+    "miniature": "5e/maths/volume/03-volume-pave/eleveai-maths-5e-volume-pave-short-miniature.png",
+    "titre": "Mon aquarium contient-il 12 litres ? #maths #5e",
+    "accroche": "Mon aquarium mesure 5 dm de long, 3 de large et 4 de haut. 5 + 3 + 4 = 12 litres ? Je verse 12 litres… le fond est à peine mouillé !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un aquarium de 6 dm sur 3, et 5 de haut. Combien de L ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_pave&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #volume #5e",
+    "tags": [
+      "volume du pavé",
+      "aquarium",
+      "litre",
+      "Ti Margo",
+      "dessin animé",
+      "ceinture blanche",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:17",
+        "question": "Quel est le volume de l'aquarium ?",
+        "choix": [
+          "12 dm³",
+          "20 dm³",
+          "60 dm³"
+        ],
+        "reponse": 2,
+        "explication": "5 × 3 = 15 au fond. Fois 4 : 60 dm³. Et 1 dm³, c'est 1 L : 60 L !"
+      }
+    ],
+    "centres": [
+      "technologie-ia",
+      "sciences"
+    ]
+  },
+  "5e-volume-prisme": {
+    "id": "5e-volume-prisme",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_prisme",
+    "classe": "5e",
+    "ceinture": "verte",
+    "serie": "Maths 5e",
+    "type": "longue",
+    "fichier": "5e/maths/volume/04-volume-prisme/eleveai-maths-5e-volume-prisme.mp4",
+    "miniature": "5e/maths/volume/04-volume-prisme/eleveai-maths-5e-volume-prisme.png",
+    "titre": "Combien d'air dans une tente ? — Le volume du prisme droit — épisode 4 · Maths 5e",
+    "accroche": "Maïa fabrique des tentes de randonnée. Une tente doit être légère, mais assez grande pour dormir. Combien d'air y a-t-il dedans ?\n\nDans cette vidéo :\n• la base de la tente, un triangle : 2 × 1,5 ÷ 2 = 1,5 m²\n• le triangle se répète sur 3 m de long : 1,5 × 3 = 4,5 m³\n• la formule : aire de la base × hauteur du prisme\n• le piège : le ÷ 2 du triangle, et la hauteur du triangle n'est pas celle du prisme\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : combien de campeurs dans une grande tente, avec 1,5 m³ d'air chacun.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/volume-solide\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/volume-solide\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_prisme&display=simple\n\n📐 Épisode 4 de la série Volume d'EleveAI, en 5e.",
+    "chapitres": [
+      [
+        "00:00",
+        "Le volume du prisme droit"
+      ],
+      [
+        "00:06",
+        "Maïa, fabricante de tentes"
+      ],
+      [
+        "00:19",
+        "L'aire de la base"
+      ],
+      [
+        "00:35",
+        "Empiler sur la longueur"
+      ],
+      [
+        "00:46",
+        "La méthode"
+      ],
+      [
+        "00:58",
+        "Question 1"
+      ],
+      [
+        "01:35",
+        "Le piège"
+      ],
+      [
+        "01:49",
+        "Question 2"
+      ],
+      [
+        "02:35",
+        "À toi de jouer"
+      ],
+      [
+        "02:57",
+        "Correction"
+      ],
+      [
+        "03:24",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "volume du prisme",
+      "prisme droit",
+      "aire de la base",
+      "tente",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:58",
+        "question": "Un prisme a une aire de base de 15 cm² et une hauteur de 8 cm. Quel est son volume ?",
+        "choix": [
+          "23 cm³",
+          "60 cm³",
+          "120 cm³"
+        ],
+        "reponse": 2,
+        "explication": "15 × 8 = 120 cm³. 23, c'est l'addition. 60, c'est diviser par 2 en trop."
+      },
+      {
+        "t": "01:49",
+        "question": "Un prisme droit a pour base un triangle de base 6 cm et de hauteur 4 cm. Le prisme mesure 10 cm de long. Quel est son volume ?",
+        "choix": [
+          "240 cm³",
+          "120 cm³",
+          "20 cm³"
+        ],
+        "reponse": 1,
+        "explication": "Le triangle : 6 × 4, ÷ 2 = 12 cm². Fois 10 : 120 cm³. 240, c'est l'oubli du ÷ 2."
+      }
+    ],
+    "centres": [
+      "sport",
+      "transports"
+    ]
+  },
+  "5e-volume-prisme-short": {
+    "id": "5e-volume-prisme-short",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_prisme",
+    "classe": "5e",
+    "ceinture": "blanche",
+    "serie": "Maths 5e",
+    "type": "short",
+    "renvoie_vers": "5e-volume-prisme",
+    "fichier": "5e/maths/volume/04-volume-prisme/eleveai-maths-5e-volume-prisme-short.mp4",
+    "miniature": "5e/maths/volume/04-volume-prisme/eleveai-maths-5e-volume-prisme-short-miniature.png",
+    "titre": "Combien de coups de pompe pour ma tente ? #maths #5e",
+    "accroche": "Je gonfle ma tente : vue de face, un triangle de 2 m de base et 1 m de haut, sur 3 m de long. Ma super pompe envoie 1 m³ à chaque coup.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un triangle de base 2 m et de hauteur 2 m, sur 4 m de long. Quel est le volume ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_prisme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #volume #5e",
+    "tags": [
+      "volume du prisme",
+      "tente",
+      "camping",
+      "Ti Margo",
+      "dessin animé",
+      "ceinture blanche",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:17",
+        "question": "Quel est le volume de la tente ?",
+        "choix": [
+          "3 m³",
+          "6 m³",
+          "1 m³"
+        ],
+        "reponse": 0,
+        "explication": "Le triangle : 2 × 1, ÷ 2 = 1 m². Fois 3 m de long : 3 m³. Trois coups de pompe !"
+      }
+    ],
+    "centres": [
+      "sport",
+      "transports"
+    ]
+  },
+  "5e-volume-cylindre": {
+    "id": "5e-volume-cylindre",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_cylindre",
+    "classe": "5e",
+    "ceinture": "bleue",
+    "serie": "Maths 5e",
+    "type": "longue",
+    "fichier": "5e/maths/volume/05-volume-cylindre/eleveai-maths-5e-volume-cylindre.mp4",
+    "miniature": "5e/maths/volume/05-volume-cylindre/eleveai-maths-5e-volume-cylindre.png",
+    "titre": "Combien d'eau dans un réservoir rond ? — Le volume du cylindre — épisode 5 · Maths 5e",
+    "accroche": "Hakim est ingénieur de l'eau. Il construit des réservoirs pour l'eau potable d'une ville. Ses réservoirs sont ronds : ce sont des cylindres.\n\nDans cette vidéo :\n• un cylindre, c'est un disque empilé : aire de la base × hauteur\n• l'aire du disque : π × rayon × rayon\n• rayon 3 cm, hauteur 5 cm : 28,26 × 5 = 141,3 cm³\n• le piège : le rayon, pas le diamètre ; rayon × rayon, pas rayon × 2\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : le volume d'un réservoir de rayon 2 m et de hauteur 3 m, en m³ puis en litres.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/volume-solide\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/volume-solide\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_cylindre&display=simple\n\n📐 Épisode 5 de la série Volume d'EleveAI, en 5e.",
+    "chapitres": [
+      [
+        "00:00",
+        "Le volume du cylindre"
+      ],
+      [
+        "00:06",
+        "Hakim, ingénieur de l'eau"
+      ],
+      [
+        "00:18",
+        "Empiler des disques"
+      ],
+      [
+        "00:30",
+        "L'aire du disque"
+      ],
+      [
+        "00:53",
+        "La méthode"
+      ],
+      [
+        "01:00",
+        "Question 1"
+      ],
+      [
+        "01:33",
+        "Le piège"
+      ],
+      [
+        "01:43",
+        "Question 2"
+      ],
+      [
+        "02:33",
+        "À toi de jouer"
+      ],
+      [
+        "02:52",
+        "Correction"
+      ],
+      [
+        "03:12",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "volume du cylindre",
+      "aire du disque",
+      "pi",
+      "réservoir",
+      "eau potable",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:00",
+        "question": "Un cylindre a une aire de base de 20 cm² et une hauteur de 6 cm. Quel est son volume ?",
+        "choix": [
+          "120 cm³",
+          "26 cm³",
+          "60 cm³"
+        ],
+        "reponse": 0,
+        "explication": "Aire de la base × hauteur : 20 × 6 = 120 cm³."
+      },
+      {
+        "t": "01:43",
+        "question": "Un cylindre a un rayon de 2 cm et une hauteur de 10 cm. Quel est son volume ? On prend π = 3,14.",
+        "choix": [
+          "502,4 cm³",
+          "125,6 cm³",
+          "62,8 cm³"
+        ],
+        "reponse": 1,
+        "explication": "Le disque : 3,14 × 2 × 2 = 12,56. Fois 10 : 125,6 cm³. 502,4, c'est le diamètre pris à la place du rayon."
+      }
+    ],
+    "centres": [
+      "sciences",
+      "corps-sante"
+    ]
+  },
+  "5e-volume-cylindre-short": {
+    "id": "5e-volume-cylindre-short",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_cylindre",
+    "classe": "5e",
+    "ceinture": "blanche",
+    "serie": "Maths 5e",
+    "type": "short",
+    "renvoie_vers": "5e-volume-cylindre",
+    "fichier": "5e/maths/volume/05-volume-cylindre/eleveai-maths-5e-volume-cylindre-short.mp4",
+    "miniature": "5e/maths/volume/05-volume-cylindre/eleveai-maths-5e-volume-cylindre-short-miniature.png",
+    "titre": "Ma canette contient-elle plus de 200 cm³ ? #maths #5e",
+    "accroche": "Je bois du jus dans une canette : 3 cm de rayon, 10 cm de haut. Mon copain parie qu'elle contient moins de 200 cm³. Moi, je dis plus !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un verre de rayon 4 cm et de hauteur 10 cm. Quel est son volume ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_cylindre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #volume #5e",
+    "tags": [
+      "volume du cylindre",
+      "canette",
+      "pari",
+      "Ti Margo",
+      "dessin animé",
+      "ceinture blanche",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:17",
+        "question": "Quel est le volume de la canette ? On prend π = 3,14.",
+        "choix": [
+          "188,4 cm³",
+          "94,2 cm³",
+          "282,6 cm³"
+        ],
+        "reponse": 2,
+        "explication": "Le disque : 3,14 × 3 × 3 = 28,26. Fois 10 : 282,6 cm³. Plus de 200 : j'ai gagné !"
+      }
+    ],
+    "centres": [
+      "sciences",
+      "corps-sante"
+    ]
+  },
+  "5e-volume-assemblage": {
+    "id": "5e-volume-assemblage",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_assemblage",
+    "classe": "5e",
+    "ceinture": "bleue",
+    "serie": "Maths 5e",
+    "type": "longue",
+    "fichier": "5e/maths/volume/06-volume-assemblage/eleveai-maths-5e-volume-assemblage.mp4",
+    "miniature": "5e/maths/volume/06-volume-assemblage/eleveai-maths-5e-volume-assemblage.png",
+    "titre": "Un gâteau à étages : quel volume de pâte ? — Le volume d'un assemblage — épisode 6 · Maths 5e",
+    "accroche": "Chloé est pâtissière. Elle crée des gâteaux à étages. Pour préparer juste assez de pâte, elle doit connaître le volume de chaque gâteau.\n\nDans cette vidéo :\n• un pavé et un prisme collés : 40 + 30 = 70 cm³\n• un pavé creusé d'un trou : 80 − 8 = 72 cm³\n• la méthode : découper en solides simples, additionner ou enlever\n• le piège : on additionne des volumes, jamais des longueurs\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : le volume d'un gâteau à deux étages, et combien de litres de pâte.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/volume-solide\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/volume-solide\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_assemblage&display=simple\n\n📐 Épisode 6 de la série Volume d'EleveAI, en 5e.",
+    "chapitres": [
+      [
+        "00:00",
+        "Le volume d'un assemblage"
+      ],
+      [
+        "00:07",
+        "Chloé, pâtissière"
+      ],
+      [
+        "00:20",
+        "Additionner"
+      ],
+      [
+        "00:35",
+        "Enlever le creux"
+      ],
+      [
+        "00:51",
+        "La méthode"
+      ],
+      [
+        "01:03",
+        "Question 1"
+      ],
+      [
+        "01:38",
+        "Le piège"
+      ],
+      [
+        "01:49",
+        "Question 2"
+      ],
+      [
+        "02:26",
+        "À toi de jouer"
+      ],
+      [
+        "02:54",
+        "Correction"
+      ],
+      [
+        "03:11",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "volume",
+      "assemblage de solides",
+      "pavé",
+      "pâtisserie",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:03",
+        "question": "Un solide est fait d'un cube de 8 cm³ collé contre un pavé de 20 cm³. Quel est son volume ?",
+        "choix": [
+          "160 cm³",
+          "28 cm³",
+          "12 cm³"
+        ],
+        "reponse": 1,
+        "explication": "On colle : on additionne. 8 + 20 = 28 cm³."
+      },
+      {
+        "t": "01:49",
+        "question": "Un pavé de 60 cm³. On y creuse un trou de 15 cm³. Quel volume reste-t-il ?",
+        "choix": [
+          "75 cm³",
+          "4 cm³",
+          "45 cm³"
+        ],
+        "reponse": 2,
+        "explication": "On creuse : on enlève. 60 − 15 = 45 cm³."
+      }
+    ],
+    "centres": [
+      "cuisine",
+      "jeux-defis"
+    ]
+  },
+  "5e-volume-assemblage-short": {
+    "id": "5e-volume-assemblage-short",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_assemblage",
+    "classe": "5e",
+    "ceinture": "blanche",
+    "serie": "Maths 5e",
+    "type": "short",
+    "renvoie_vers": "5e-volume-assemblage",
+    "fichier": "5e/maths/volume/06-volume-assemblage/eleveai-maths-5e-volume-assemblage-short.mp4",
+    "miniature": "5e/maths/volume/06-volume-assemblage/eleveai-maths-5e-volume-assemblage-short-miniature.png",
+    "titre": "Mon frère calcule le sable du château… #maths #5e",
+    "accroche": "Je construis un château de sable : un bloc de 40 dm³ et une tour de 10 dm³ par-dessus. Mon frère dit 40 × 10 = 400, et part chercher 400 dm³ de sable…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un bloc de 60 dm³ et deux tours de 12 dm³. Quel est le volume du château ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_assemblage&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #volume #5e",
+    "tags": [
+      "volume",
+      "château de sable",
+      "additionner des volumes",
+      "Ti Margo",
+      "dessin animé",
+      "ceinture blanche",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:20",
+        "question": "Quel est le volume du château ?",
+        "choix": [
+          "50 dm³",
+          "400 dm³",
+          "4 dm³"
+        ],
+        "reponse": 0,
+        "explication": "On empile, donc on additionne : 40 + 10 = 50 dm³."
+      }
+    ],
+    "centres": [
+      "cuisine",
+      "jeux-defis"
+    ]
+  },
+  "5e-volume-unite": {
+    "id": "5e-volume-unite",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_unite",
+    "classe": "5e",
+    "ceinture": "verte",
+    "serie": "Maths 5e",
+    "type": "longue",
+    "fichier": "5e/maths/volume/07-volume-unite/eleveai-maths-5e-volume-unite.mp4",
+    "miniature": "5e/maths/volume/07-volume-unite/eleveai-maths-5e-volume-unite.png",
+    "titre": "Combien de litres dans un mètre cube ? — Les unités de volume — épisode 7 · Maths 5e",
+    "accroche": "Fanta est pompière. Sur la citerne de son camion, c'est écrit en mètres cubes ; sur la lance, en litres. Elle doit passer de l'un à l'autre.\n\nDans cette vidéo :\n• un cube de 1 dm, c'est 10 × 10 × 10 = 1 000 cm³, et 1 litre d'eau\n• un cube de 1 m, c'est 1 000 dm³ : 1 m³ = 1 000 L\n• d'une unité de volume à la suivante : × 1 000 ou ÷ 1 000\n• le piège : pas × 10 comme les longueurs, × 1 000\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : en combien de minutes la lance vide une citerne de 3,5 m³ à 500 L par minute.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/volume-solide\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/volume-solide\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_unite&display=simple\n\n📐 Épisode 7 de la série Volume d'EleveAI, en 5e.",
+    "chapitres": [
+      [
+        "00:00",
+        "Les unités de volume"
+      ],
+      [
+        "00:06",
+        "Fanta, pompière"
+      ],
+      [
+        "00:23",
+        "1 L = 1 dm³"
+      ],
+      [
+        "00:42",
+        "1 m³ = 1 000 L"
+      ],
+      [
+        "00:55",
+        "La méthode"
+      ],
+      [
+        "01:06",
+        "Question 1"
+      ],
+      [
+        "01:37",
+        "Le piège"
+      ],
+      [
+        "01:52",
+        "Question 2"
+      ],
+      [
+        "02:20",
+        "À toi de jouer"
+      ],
+      [
+        "02:38",
+        "Correction"
+      ],
+      [
+        "02:51",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "unités de volume",
+      "litre",
+      "mètre cube",
+      "conversion",
+      "pompière",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:06",
+        "question": "1 dm³, c'est combien de cm³ ?",
+        "choix": [
+          "100 cm³",
+          "10 cm³",
+          "1 000 cm³"
+        ],
+        "reponse": 2,
+        "explication": "10 × 10 × 10 = 1 000 cm³. 10 et 100, c'est oublier une ou deux dimensions."
+      },
+      {
+        "t": "01:52",
+        "question": "Combien de L y a-t-il dans 1 m³ ?",
+        "choix": [
+          "1 000 L",
+          "10 L",
+          "100 L"
+        ],
+        "reponse": 0,
+        "explication": "1 m³, c'est 1 000 dm³. Et 1 dm³, c'est 1 L : 1 000 L."
+      }
+    ],
+    "centres": [
+      "sport",
+      "sciences"
+    ]
+  },
+  "5e-volume-unite-short": {
+    "id": "5e-volume-unite-short",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_unite",
+    "classe": "5e",
+    "ceinture": "blanche",
+    "serie": "Maths 5e",
+    "type": "short",
+    "renvoie_vers": "5e-volume-unite",
+    "fichier": "5e/maths/volume/07-volume-unite/eleveai-maths-5e-volume-unite-short.mp4",
+    "miniature": "5e/maths/volume/07-volume-unite/eleveai-maths-5e-volume-unite-short-miniature.png",
+    "titre": "1 litre dans une boîte de 10 cm : ça déborde ? #maths #5e",
+    "accroche": "J'ai une bouteille de 1 litre et une boîte cubique de 10 cm de côté. Je verse toute la bouteille dans la boîte… glou, glou, glou…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 2,5 L, c'est combien de cm³ ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_unite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #volume #5e",
+    "tags": [
+      "unités de volume",
+      "litre",
+      "centimètre cube",
+      "Ti Margo",
+      "dessin animé",
+      "ceinture blanche",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:11",
+        "question": "1 L, c'est combien de cm³ ?",
+        "choix": [
+          "100 cm³",
+          "1 000 cm³",
+          "10 cm³"
+        ],
+        "reponse": 1,
+        "explication": "La boîte : 10 × 10 × 10 = 1 000 cm³. Et la bouteille la remplit pile : 1 L = 1 000 cm³."
+      }
+    ],
+    "centres": [
+      "sport",
+      "sciences"
+    ]
+  },
+  "5e-volume-defi": {
+    "id": "5e-volume-defi",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_defi",
+    "classe": "5e",
+    "ceinture": "bleue",
+    "serie": "Maths 5e",
+    "type": "longue",
+    "fichier": "5e/maths/volume/08-volume-defi/eleveai-maths-5e-volume-defi.mp4",
+    "miniature": "5e/maths/volume/08-volume-defi/eleveai-maths-5e-volume-defi.png",
+    "titre": "Combien de jours d'arrosage dans la cuve ? — Défis sur les volumes — épisode 8 · Maths 5e",
+    "accroche": "Jonas installe des récupérateurs d'eau de pluie. À La Réunion, beaucoup de maisons gardent l'eau du toit pour arroser le jardin. Jonas doit choisir la bonne cuve.\n\nDans cette vidéo :\n• le volume d'une cuve cylindrique : 3,14 × 1 × 1 × 2 = 6,28 m³, soit 6 280 L\n• le jardin boit 150 L par jour : 6 280 ÷ 150, un peu plus de 41 jours\n• la méthode : la formule, la conversion, puis la vraie question\n• le piège : les longueurs dans la même unité avant de multiplier\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : 60 m² de toit, 40 mm de pluie, une cuve de 2 000 L : déborde-t-elle ?.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/volume-solide\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/volume-solide\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_defi&display=simple\n\n📐 Épisode 8 de la série Volume d'EleveAI, en 5e.",
+    "chapitres": [
+      [
+        "00:00",
+        "Défis sur les volumes"
+      ],
+      [
+        "00:06",
+        "Jonas, installateur de récupérateurs d'eau de pluie"
+      ],
+      [
+        "00:20",
+        "La cuve"
+      ],
+      [
+        "00:36",
+        "Le jardin"
+      ],
+      [
+        "00:50",
+        "La méthode"
+      ],
+      [
+        "01:02",
+        "Question 1"
+      ],
+      [
+        "01:30",
+        "Le piège"
+      ],
+      [
+        "01:41",
+        "Question 2"
+      ],
+      [
+        "02:18",
+        "À toi de jouer"
+      ],
+      [
+        "02:37",
+        "Correction"
+      ],
+      [
+        "02:57",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "volume",
+      "défi",
+      "litre",
+      "mètre cube",
+      "eau de pluie",
+      "La Réunion",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:02",
+        "question": "Une cuve contient 2 m³. Combien de L ?",
+        "choix": [
+          "2 000 L",
+          "200 L",
+          "20 000 L"
+        ],
+        "reponse": 0,
+        "explication": "1 m³ = 1 000 L. 2 × 1 000 = 2 000 L."
+      },
+      {
+        "t": "01:41",
+        "question": "Une cuve en pavé mesure 50 cm, 40 cm et 30 cm. Combien de L contient-elle ?",
+        "choix": [
+          "600 L",
+          "6 L",
+          "60 L"
+        ],
+        "reponse": 2,
+        "explication": "50 × 40 × 30 = 60 000 cm³. 1 L = 1 000 cm³ : 60 L."
+      }
+    ],
+    "centres": [
+      "nature-ecologie",
+      "meteo-climat"
+    ]
+  },
+  "5e-volume-defi-short": {
+    "id": "5e-volume-defi-short",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_defi",
+    "classe": "5e",
+    "ceinture": "blanche",
+    "serie": "Maths 5e",
+    "type": "short",
+    "renvoie_vers": "5e-volume-defi",
+    "fichier": "5e/maths/volume/08-volume-defi/eleveai-maths-5e-volume-defi-short.mp4",
+    "miniature": "5e/maths/volume/08-volume-defi/eleveai-maths-5e-volume-defi-short-miniature.png",
+    "titre": "Mon bidon remplira-t-il l'arrosoir ? #maths #5e",
+    "accroche": "Il pleut. Je mets un bidon sous la gouttière : 30 cm sur 20, et 10 de haut. Mon arrosoir fait 5 litres. Le bidon pourra-t-il le remplir ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un bidon de 40 cm sur 20, et 10 de haut. Combien de L ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=volume_solide&microId=volume_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #volume #5e",
+    "tags": [
+      "volume",
+      "litre",
+      "eau de pluie",
+      "Ti Margo",
+      "dessin animé",
+      "ceinture blanche",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:14",
+        "question": "Combien de L contient le bidon ?",
+        "choix": [
+          "60 L",
+          "6 L",
+          "600 L"
+        ],
+        "reponse": 1,
+        "explication": "30 × 20 × 10 = 6 000 cm³. Divisé par 1 000 : 6 L."
+      }
+    ],
+    "centres": [
+      "nature-ecologie",
+      "meteo-climat"
+    ]
+  },
+  "5e-conversion-decimal": {
+    "id": "5e-conversion-decimal",
+    "pas_avant": "",
+    "notionId": "grandeur_conversion",
+    "microId": "conversion_decimal",
+    "classe": "5e",
+    "ceinture": "jaune",
+    "serie": "Maths 5e",
+    "type": "longue",
+    "fichier": "5e/maths/conversion/01-decimal/eleveai-maths-5e-conversion-decimal.mp4",
+    "miniature": "5e/maths/conversion/01-decimal/eleveai-maths-5e-conversion-decimal.png",
+    "titre": "0,5 g sur l'ordonnance, une balance en mg : que lire ? — Convertir une longueur, une masse, une contenance — épisode 1 · Maths 5e",
+    "accroche": "Samir est pharmacien. Une ordonnance indique 0,5 gramme, et sa balance affiche des milligrammes. Une erreur, et le médicament est faux.\n\nDans cette vidéo :\n• 1 g = 1 000 mg : 0,5 × 1 000 = 500 mg\n• pareil pour les autres unités : 2,4 kg = 2 400 g, 3,5 km = 3 500 m, 0,75 L = 75 cL\n• vers une unité plus petite on multiplie, vers une plus grande on divise\n• le piège : se tromper de sens\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un sirop : 0,15 L d'eau en mL et 0,02 kg de sucre en g.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/grandeur-conversion\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/grandeur-conversion\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=grandeur_conversion&microId=conversion_decimal&display=simple\n\n📐 Épisode 1 de la série Conversions d'EleveAI, en 5e.",
+    "chapitres": [
+      [
+        "00:00",
+        "Convertir une longueur, une masse ou une contenance"
+      ],
+      [
+        "00:08",
+        "Samir, pharmacien"
+      ],
+      [
+        "00:22",
+        "Des grammes aux milligrammes"
+      ],
+      [
+        "00:34",
+        "Les autres unités"
+      ],
+      [
+        "00:51",
+        "La méthode"
+      ],
+      [
+        "01:06",
+        "Question 1"
+      ],
+      [
+        "01:34",
+        "Le piège"
+      ],
+      [
+        "01:49",
+        "Question 2"
+      ],
+      [
+        "02:18",
+        "À toi de jouer"
+      ],
+      [
+        "02:38",
+        "Correction"
+      ],
+      [
+        "02:52",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "conversion",
+      "masse",
+      "contenance",
+      "longueur",
+      "nombre décimal",
+      "pharmacien",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:06",
+        "question": "1,8 kg, c'est combien de g ?",
+        "choix": [
+          "18 g",
+          "1 800 g",
+          "180 g"
+        ],
+        "reponse": 1,
+        "explication": "1 kg = 1 000 g. 1,8 × 1 000 = 1 800 g."
+      },
+      {
+        "t": "01:49",
+        "question": "0,6 L, c'est combien de cL ?",
+        "choix": [
+          "60 cL",
+          "6 cL",
+          "600 cL"
+        ],
+        "reponse": 0,
+        "explication": "1 L = 100 cL. 0,6 × 100 = 60 cL."
+      }
+    ],
+    "centres": [
+      "corps-sante",
+      "sciences"
+    ]
+  },
+  "5e-conversion-decimal-short": {
+    "id": "5e-conversion-decimal-short",
+    "pas_avant": "",
+    "notionId": "grandeur_conversion",
+    "microId": "conversion_decimal",
+    "classe": "5e",
+    "ceinture": "blanche",
+    "serie": "Maths 5e",
+    "type": "short",
+    "renvoie_vers": "5e-conversion-decimal",
+    "fichier": "5e/maths/conversion/01-decimal/eleveai-maths-5e-conversion-decimal-short.mp4",
+    "miniature": "5e/maths/conversion/01-decimal/eleveai-maths-5e-conversion-decimal-short-miniature.png",
+    "titre": "1,5 kilo de farine : je mets 15 grammes ? #maths #5e",
+    "accroche": "Je fais un gâteau. La recette dit 1,5 kilo de farine, ma balance compte en grammes. Je mets 15 grammes : une petite cuillère…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 0,25 kg, c'est combien de g ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=grandeur_conversion&microId=conversion_decimal&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #conversion #5e",
+    "tags": [
+      "conversion",
+      "kilo",
+      "gramme",
+      "recette",
+      "Ti Margo",
+      "dessin animé",
+      "ceinture blanche",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:16",
+        "question": "1,5 kg, c'est combien de g ?",
+        "choix": [
+          "150 g",
+          "15 g",
+          "1 500 g"
+        ],
+        "reponse": 2,
+        "explication": "1 kg = 1 000 g. 1,5 × 1 000 = 1 500 g."
+      }
+    ],
+    "centres": [
+      "corps-sante",
+      "sciences"
+    ]
+  },
+  "5e-conversion-duree": {
+    "id": "5e-conversion-duree",
+    "pas_avant": "",
+    "notionId": "grandeur_conversion",
+    "microId": "conversion_duree",
+    "classe": "5e",
+    "ceinture": "verte",
+    "serie": "Maths 5e",
+    "type": "longue",
+    "fichier": "5e/maths/conversion/02-duree/eleveai-maths-5e-conversion-duree.mp4",
+    "miniature": "5e/maths/conversion/02-duree/eleveai-maths-5e-conversion-duree.png",
+    "titre": "Pourquoi une heure ne fait pas 100 minutes ? — Convertir une durée — épisode 2 · Maths 5e",
+    "accroche": "Léna est monteuse de films. Son logiciel compte en minutes, mais le cinéma veut la durée en heures et minutes.\n\nDans cette vidéo :\n• 1 h = 60 min, pas 100 ; 1 min = 60 s\n• 135 min : 60 + 60 = 120, il reste 15, donc 2 h 15 min\n• dans l'autre sens : 2 h 45 = 2 × 60 + 45 = 165 min\n• le piège : 1 h 50 + 20 min, ce n'est pas 1 h 70\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un documentaire en trois parties : sa durée en heures et minutes, et combien couper pour 2 h pile.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/grandeur-conversion\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/grandeur-conversion\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=grandeur_conversion&microId=conversion_duree&display=simple\n\n📐 Épisode 2 de la série Conversions d'EleveAI, en 5e.",
+    "chapitres": [
+      [
+        "00:00",
+        "Convertir une durée"
+      ],
+      [
+        "00:06",
+        "Léna, monteuse de films"
+      ],
+      [
+        "00:19",
+        "Des paquets de 60"
+      ],
+      [
+        "00:32",
+        "135 minutes"
+      ],
+      [
+        "00:49",
+        "La méthode"
+      ],
+      [
+        "01:09",
+        "Question 1"
+      ],
+      [
+        "01:45",
+        "Le piège"
+      ],
+      [
+        "02:01",
+        "Question 2"
+      ],
+      [
+        "02:29",
+        "À toi de jouer"
+      ],
+      [
+        "02:52",
+        "Correction"
+      ],
+      [
+        "03:07",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "durée",
+      "conversion",
+      "heure",
+      "minute",
+      "montage vidéo",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:09",
+        "question": "150 minutes, c'est combien d'heures et de minutes ?",
+        "choix": [
+          "1 heure 50 minutes",
+          "2 heures 50 minutes",
+          "2 heures 30 minutes"
+        ],
+        "reponse": 2,
+        "explication": "60 + 60 = 120. Il reste 30. 2 heures 30 minutes. 1 heure 50, c'est compter 100 minutes dans une heure : faux."
+      },
+      {
+        "t": "02:01",
+        "question": "3 heures 20 minutes, c'est combien de minutes ?",
+        "choix": [
+          "320 minutes",
+          "200 minutes",
+          "180 minutes"
+        ],
+        "reponse": 1,
+        "explication": "3 × 60 = 180. Plus 20 : 200 minutes."
+      }
+    ],
+    "centres": [
+      "cinema-series",
+      "musique"
+    ]
+  },
+  "5e-conversion-duree-short": {
+    "id": "5e-conversion-duree-short",
+    "pas_avant": "",
+    "notionId": "grandeur_conversion",
+    "microId": "conversion_duree",
+    "classe": "5e",
+    "ceinture": "blanche",
+    "serie": "Maths 5e",
+    "type": "short",
+    "renvoie_vers": "5e-conversion-duree",
+    "fichier": "5e/maths/conversion/02-duree/eleveai-maths-5e-conversion-duree-short.mp4",
+    "miniature": "5e/maths/conversion/02-duree/eleveai-maths-5e-conversion-duree-short-miniature.png",
+    "titre": "Un film de 100 minutes : je finis à 21 h ? #maths #5e",
+    "accroche": "Ce soir, je regarde un film de 100 minutes. Il commence à 20 heures. 100 minutes, c'est 1 heure pile ? Alors je finis à 21 heures !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un film de 145 minutes. Combien d'heures et de minutes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=grandeur_conversion&microId=conversion_duree&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #conversion #5e",
+    "tags": [
+      "durée",
+      "film",
+      "heures et minutes",
+      "Ti Margo",
+      "dessin animé",
+      "ceinture blanche",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:13",
+        "question": "100 minutes, c'est…",
+        "choix": [
+          "1 heure 40 minutes",
+          "1 heure pile",
+          "1 heure 20 minutes"
+        ],
+        "reponse": 0,
+        "explication": "Une heure, c'est 60 minutes. 100 − 60 : il reste 40. 1 heure 40 minutes."
+      }
+    ],
+    "centres": [
+      "cinema-series",
+      "musique"
+    ]
+  },
+  "5e-conversion-avant-calcul": {
+    "id": "5e-conversion-avant-calcul",
+    "pas_avant": "",
+    "notionId": "grandeur_conversion",
+    "microId": "conversion_avant_calcul",
+    "classe": "5e",
+    "ceinture": "verte",
+    "serie": "Maths 5e",
+    "type": "longue",
+    "fichier": "5e/maths/conversion/03-avant-calcul/eleveai-maths-5e-conversion-avant-calcul.mp4",
+    "miniature": "5e/maths/conversion/03-avant-calcul/eleveai-maths-5e-conversion-avant-calcul.png",
+    "titre": "Peut-on additionner des litres et des centilitres ? — Convertir avant de calculer — épisode 3 · Maths 5e",
+    "accroche": "Lucie est cheffe cuisinière. Ses recettes mélangent les unités : des litres, des centilitres, des millilitres. Avant de calculer, elle met tout dans la même unité.\n\nDans cette vidéo :\n• comparer 0,5 L, 75 cL et 400 mL : tout en mL, 500, 750 et 400\n• 1,2 m − 45 cm : 120 cm − 45 cm = 75 cm\n• la méthode : une seule unité, on convertit tout, puis on calcule\n• le piège : 1,2 − 45 ne veut rien dire\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 1,5 L de crème, 60 cL pour une sauce, 250 mL pour un dessert : combien en reste-t-il ?.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/grandeur-conversion\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/grandeur-conversion\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=grandeur_conversion&microId=conversion_avant_calcul&display=simple\n\n📐 Épisode 3 de la série Conversions d'EleveAI, en 5e.",
+    "chapitres": [
+      [
+        "00:00",
+        "Convertir avant de calculer"
+      ],
+      [
+        "00:07",
+        "Lucie, cheffe cuisinière"
+      ],
+      [
+        "00:22",
+        "Comparer"
+      ],
+      [
+        "00:41",
+        "Soustraire"
+      ],
+      [
+        "01:00",
+        "La méthode"
+      ],
+      [
+        "01:11",
+        "Question 1"
+      ],
+      [
+        "01:45",
+        "Le piège"
+      ],
+      [
+        "02:00",
+        "Question 2"
+      ],
+      [
+        "02:31",
+        "À toi de jouer"
+      ],
+      [
+        "02:53",
+        "Correction"
+      ],
+      [
+        "03:13",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "conversion",
+      "même unité",
+      "comparer",
+      "cuisine",
+      "contenance",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:11",
+        "question": "Un ruban de 2 m. On en coupe 60 cm. Combien reste-t-il ?",
+        "choix": [
+          "140 cm",
+          "58 cm",
+          "1,4 cm"
+        ],
+        "reponse": 0,
+        "explication": "2 m = 200 cm. 200 − 60 = 140 cm."
+      },
+      {
+        "t": "02:00",
+        "question": "Quelle est la + grande quantité ?",
+        "choix": [
+          "0,8 L",
+          "85 cL",
+          "700 mL"
+        ],
+        "reponse": 1,
+        "explication": "En mL : 800, 850 et 700. La + grande, c'est 85 cL."
+      }
+    ],
+    "centres": [
+      "cuisine",
+      "argent-budget"
+    ]
+  },
+  "5e-conversion-avant-calcul-short": {
+    "id": "5e-conversion-avant-calcul-short",
+    "pas_avant": "",
+    "notionId": "grandeur_conversion",
+    "microId": "conversion_avant_calcul",
+    "classe": "5e",
+    "ceinture": "blanche",
+    "serie": "Maths 5e",
+    "type": "short",
+    "renvoie_vers": "5e-conversion-avant-calcul",
+    "fichier": "5e/maths/conversion/03-avant-calcul/eleveai-maths-5e-conversion-avant-calcul-short.mp4",
+    "miniature": "5e/maths/conversion/03-avant-calcul/eleveai-maths-5e-conversion-avant-calcul-short-miniature.png",
+    "titre": "1 mètre moins 30 centimètres : moins 29 ? #maths #5e",
+    "accroche": "Mon ruban de cadeau mesure 1 mètre. J'en coupe 30 centimètres pour le nœud. 1 moins 30… moins 29 ? Un ruban plus petit que rien ?!\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un ruban de 2 m. On en coupe 45 cm. Combien reste-t-il, en cm ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=grandeur_conversion&microId=conversion_avant_calcul&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #conversion #5e",
+    "tags": [
+      "conversion",
+      "ruban",
+      "même unité",
+      "Ti Margo",
+      "dessin animé",
+      "ceinture blanche",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:14",
+        "question": "Combien mesure le ruban qui reste ?",
+        "choix": [
+          "0,7 cm",
+          "29 cm",
+          "70 cm"
+        ],
+        "reponse": 2,
+        "explication": "1 m = 100 cm. 100 − 30 = 70 cm."
+      }
+    ],
+    "centres": [
+      "cuisine",
+      "argent-budget"
+    ]
+  },
+  "5e-conversion-coherence": {
+    "id": "5e-conversion-coherence",
+    "pas_avant": "",
+    "notionId": "grandeur_conversion",
+    "microId": "conversion_coherence",
+    "classe": "5e",
+    "ceinture": "bleue",
+    "serie": "Maths 5e",
+    "type": "longue",
+    "fichier": "5e/maths/conversion/04-coherence/eleveai-maths-5e-conversion-coherence.mp4",
+    "miniature": "5e/maths/conversion/04-coherence/eleveai-maths-5e-conversion-coherence.png",
+    "titre": "Un paquet de riz de 24 grammes ? — Contrôler une conversion — épisode 4 · Maths 5e",
+    "accroche": "Ana est contrôleuse qualité dans une usine. Sur ce paquet de riz, l'étiquette dit 2,4 kilos ; la fiche dit 24 grammes. Ana sent qu'il y a un problème.\n\nDans cette vidéo :\n• 24 g, c'est quelques morceaux de sucre : le bon résultat, 2 400 g\n• des repères : 1 L, une grande bouteille ; 1 kg, un paquet de farine ; 1 km, un quart d'heure de marche\n• après une conversion : le résultat est-il possible ?\n• le piège : un résultat propre peut être faux, on vérifie le sens\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : 48 boîtes de 250 g et une étiquette de 120 kg : est-ce cohérent ?.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/5e/grandeur-conversion\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/5e/grandeur-conversion\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=grandeur_conversion&microId=conversion_coherence&display=simple\n\n📐 Épisode 4 de la série Conversions d'EleveAI, en 5e.",
+    "chapitres": [
+      [
+        "00:00",
+        "Contrôler une conversion"
+      ],
+      [
+        "00:07",
+        "Ana, contrôleuse qualité"
+      ],
+      [
+        "00:27",
+        "L'ordre de grandeur"
+      ],
+      [
+        "00:41",
+        "Des repères"
+      ],
+      [
+        "00:57",
+        "La méthode"
+      ],
+      [
+        "01:14",
+        "Question 1"
+      ],
+      [
+        "01:50",
+        "Le piège"
+      ],
+      [
+        "02:02",
+        "Question 2"
+      ],
+      [
+        "02:37",
+        "À toi de jouer"
+      ],
+      [
+        "02:53",
+        "Correction"
+      ],
+      [
+        "03:09",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "conversion",
+      "ordre de grandeur",
+      "vérifier un résultat",
+      "contrôle qualité",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:14",
+        "question": "Un camion pèse 12 t. Un élève écrit 1 200 kg. Est-ce cohérent ?",
+        "choix": [
+          "oui, c'est juste",
+          "non, c'est 12 000 kg",
+          "non, c'est 120 kg"
+        ],
+        "reponse": 1,
+        "explication": "1 t = 1 000 kg. 12 × 1 000 = 12 000 kg. 1 200 kg, c'est le poids d'une petite voiture, pas d'un camion."
+      },
+      {
+        "t": "02:02",
+        "question": "Une piste mesure 1,5 km. Lequel de ces résultats est cohérent ?",
+        "choix": [
+          "150 m",
+          "15 m",
+          "1 500 m"
+        ],
+        "reponse": 2,
+        "explication": "1,5 × 1 000 = 1 500 m. 15 m, c'est à peine la longueur d'une salle de classe : beaucoup trop court pour une piste."
+      }
+    ],
+    "centres": [
+      "technologie-ia",
+      "transports"
+    ]
+  },
+  "5e-conversion-coherence-short": {
+    "id": "5e-conversion-coherence-short",
+    "pas_avant": "",
+    "notionId": "grandeur_conversion",
+    "microId": "conversion_coherence",
+    "classe": "5e",
+    "ceinture": "blanche",
+    "serie": "Maths 5e",
+    "type": "short",
+    "renvoie_vers": "5e-conversion-coherence",
+    "fichier": "5e/maths/conversion/04-coherence/eleveai-maths-5e-conversion-coherence-short.mp4",
+    "miniature": "5e/maths/conversion/04-coherence/eleveai-maths-5e-conversion-coherence-short-miniature.png",
+    "titre": "J'ai commandé 1,5 litre de jus… on m'apporte un bouchon ! #maths #5e",
+    "accroche": "J'ai commandé 1,5 litre de jus en ligne. Le livreur m'apporte… un bouchon. Sur le bon : 1,5 centilitre. Quelqu'un s'est trompé en convertissant !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 0,8 L, c'est combien de cL ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=5e&matiere=maths&notion=grandeur_conversion&microId=conversion_coherence&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #conversion #5e",
+    "tags": [
+      "conversion",
+      "litre",
+      "centilitre",
+      "ordre de grandeur",
+      "Ti Margo",
+      "dessin animé",
+      "ceinture blanche",
+      "maths",
+      "5e",
+      "collège",
+      "cycle 4",
+      "EleveAI",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:16",
+        "question": "1,5 L, c'est combien de cL ?",
+        "choix": [
+          "150 cL",
+          "15 cL",
+          "1 500 cL"
+        ],
+        "reponse": 0,
+        "explication": "1 L = 100 cL. 1,5 × 100 = 150 cL. Une grande bouteille, pas un bouchon !"
+      }
+    ],
+    "centres": [
+      "technologie-ia",
+      "transports"
+    ]
+  }
+}

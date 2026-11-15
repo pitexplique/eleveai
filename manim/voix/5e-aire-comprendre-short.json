@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Ma pizza est carrée : 20 centimètres sur 20. Celle de mon frère est un rectangle : 25 centimètres sur 16.",
+  "01-dispute": "Il dit : la mienne est plus longue, donc plus grande ! Moi, je dis : on compte !",
+  "02-question": "Question ! Quelle pizza a la plus grande aire ? A : la pizza rectangle. B : les deux ont la même aire. C : la pizza carrée. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! Ma pizza : 20 fois 20, 400 centimètres carrés. La sienne : 25 fois 16, 400 aussi. Même aire !",
+  "03-ouf": "Égalité… alors on partage les deux !",
+  "04-commentaire": "À toi : une pizza de 30 centimètres sur 10. Quelle est son aire ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

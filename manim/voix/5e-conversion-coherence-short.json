@@ -1,0 +1,9 @@
+{
+  "00-accroche": "J'ai commandé 1,5 litre de jus en ligne. Le livreur m'apporte… un bouchon.",
+  "01-bon": "Sur le bon, c'est écrit : 1,5 centilitre. Quelqu'un s'est trompé en convertissant !",
+  "02-question": "Question ! 1,5 litre, c'est combien de centilitres ? A : 150 centilitres. B : 15 centilitres. C : 1 500 centilitres. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! 1 litre égale 100 centilitres. 1,5 fois 100 : 150 centilitres. Une grande bouteille, pas un bouchon !",
+  "03-ouf": "Le livreur revient… avec la vraie bouteille. Santé !",
+  "04-commentaire": "À toi : 0,8 litre, c'est combien de centilitres ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

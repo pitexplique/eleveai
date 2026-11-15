@@ -1,0 +1,16 @@
+{
+  "00-garde": "Convertir une durée. Pourquoi une heure ne fait pas 100 minutes ?",
+  "01-situation": "Voici Léna. Elle est monteuse de films. Elle colle les scènes bout à bout. Son logiciel compte en minutes. Mais le cinéma veut la durée en heures et minutes.",
+  "02-soixante": "Une heure, c'est 60 minutes. Pas 100 : 60. Et une minute, c'est 60 secondes. Les durées comptent par paquets de 60.",
+  "03-paquets": "Le film dure 135 minutes. Léna fait des paquets de 60 : 60, et encore 60, ça fait 120. Il reste 15. 135 minutes, c'est 2 heures et 15 minutes.",
+  "04-methode": "La méthode : pour passer en heures, on fait des paquets de 60 minutes. Pour passer en minutes, on multiplie les heures par 60, puis on ajoute les minutes. 2 heures 45, c'est 2 fois 60, 120, plus 45 : 165 minutes.",
+  "05-question": "Question ! 150 minutes, c'est combien d'heures et de minutes ? A : 1 heure 50 minutes. B : 2 heures 50 minutes. C : 2 heures 30 minutes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. 60 plus 60, 120. Il reste 30. 2 heures 30 minutes. 1 heure 50, c'est compter 100 minutes dans une heure : faux.",
+  "06-piege": "Attention au piège ! Une heure ne contient que 60 minutes. 1 heure 50 plus 20 minutes, ce n'est pas 1 heure 70 : 70 minutes, c'est 1 heure 10. Donc 2 heures 10.",
+  "07-question": "Question ! 3 heures 20 minutes, c'est combien de minutes ? A : 320 minutes. B : 200 minutes. C : 180 minutes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 3 fois 60, 180. Plus 20 : 200 minutes.",
+  "08-defi": "À toi de jouer ! Léna monte un documentaire en trois parties : 48 minutes, 35 minutes et 52 minutes. Combien dure-t-il en heures et minutes ? La chaîne de télé veut 2 heures pile. Combien de minutes faut-il couper ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 48 plus 35 plus 52 : 135 minutes. C'est 2 heures et 15 minutes. Pour arriver à 2 heures pile, Léna coupe 15 minutes.",
+  "09-finale": "Ce que tu as appris. 1 heure égale 60 minutes, 1 minute égale 60 secondes. Pour convertir une durée, on fait des paquets de 60. Une durée ne s'écrit pas comme un nombre à virgule.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

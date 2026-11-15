@@ -1,0 +1,16 @@
+{
+  "00-garde": "Convertir avant de calculer. Peut-on additionner des litres et des centilitres ?",
+  "01-situation": "Voici Lucie. Elle est cheffe cuisinière. Ses recettes mélangent les unités : des litres, des centilitres, des millilitres. Avant de calculer, elle met tout dans la même unité.",
+  "02-comparer": "Trois bouteilles de crème : 0,5 litre, 75 centilitres et 400 millilitres. Laquelle est la plus grande ? Lucie met tout en millilitres : 500, 750 et 400. La plus grande, c'est 75 centilitres.",
+  "03-soustraire": "Un rouleau de ficelle de cuisine mesure 1,2 mètre. Lucie en coupe 45 centimètres. Tout en centimètres : 1,2 mètre égale 120 centimètres. 120 moins 45 : il reste 75 centimètres.",
+  "04-methode": "La méthode : on choisit une seule unité. On convertit tout dans cette unité. Ensuite seulement, on compare ou on calcule.",
+  "05-question": "Question ! Un ruban de 2 mètres. On en coupe 60 centimètres. Combien reste-t-il ? A : 140 centimètres. B : 58 centimètres. C : 1,4 centimètre. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 2 mètres égale 200 centimètres. 200 moins 60 : 140 centimètres.",
+  "06-piege": "Attention au piège ! On ne calcule jamais avec deux unités différentes. 1,2 moins 45, ça ne veut rien dire. 120 centimètres moins 45 centimètres, oui.",
+  "07-question": "Question ! Quelle est la plus grande quantité ? A : 0,8 litre. B : 85 centilitres. C : 700 millilitres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. En millilitres : 800, 850 et 700. La plus grande, c'est 85 centilitres.",
+  "08-defi": "À toi de jouer ! Lucie a 1,5 litre de crème. Elle en utilise 60 centilitres pour une sauce et 250 millilitres pour un dessert. Combien en reste-t-il, en millilitres ? Peut-elle refaire la même sauce ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Tout en millilitres : 1 500, 600 et 250. 1 500 moins 600 moins 250 : 650 millilitres. La sauce demande 600 : oui, elle peut la refaire. Il restera 50 millilitres.",
+  "09-finale": "Ce que tu as appris. Avant de comparer ou de calculer, on met tout dans la même unité. Ensuite seulement, on calcule.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

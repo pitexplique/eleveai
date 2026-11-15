@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le patron d'un prisme et d'un cylindre. Que voit-on quand on déplie une boîte ?",
+  "01-situation": "Voici Gaël. Il est concepteur d'emballages. Il invente des boîtes en carton. Avant de fabriquer une boîte, il dessine son patron : la boîte dépliée à plat.",
+  "02-cylindre": "Une boîte ronde, c'est un cylindre. Gaël la déplie. Il obtient deux disques, le fond et le couvercle, et un rectangle : le tour de la boîte.",
+  "03-longueur": "Le rectangle s'enroule autour du disque. Sa longueur est donc le tour du disque : 2 fois pi fois le rayon. Pour un rayon de 4 centimètres : 2 fois 3,14 fois 4, 25,12 centimètres. Sa largeur, c'est la hauteur de la boîte.",
+  "04-prisme": "Une boîte en forme de prisme droit, maintenant. Sa base est un triangle de côtés 3, 4 et 5 centimètres. Dépliée : deux triangles, et un rectangle par côté du triangle. Les trois rectangles ont tous pour largeur la hauteur du prisme.",
+  "05-question": "Question ! Le patron d'un cylindre, c'est… A : deux disques et un carré. B : un disque et un rectangle. C : deux disques et un rectangle. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. Deux disques, le fond et le couvercle. Et un rectangle, qui fait le tour.",
+  "06-piege": "Attention au piège ! La longueur du rectangle n'est pas le diamètre du disque. C'est tout le tour : 2 fois pi fois le rayon. Si le rectangle est trop court, la boîte ne ferme pas.",
+  "07-question": "Question ! Un cylindre a un rayon de 5 centimètres. Quelle est la longueur du rectangle de son patron ? On prend pi égal 3,14. A : 31,4 centimètres. B : 15,7 centimètres. C : 10 centimètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 2 fois 3,14 fois 5 : 31,4 centimètres. 15,7, c'est un demi-tour. 10, c'est le diamètre.",
+  "08-defi": "À toi de jouer ! Gaël habille une boîte ronde d'une étiquette. La boîte a un rayon de 3 centimètres et une hauteur de 12 centimètres. Quelles sont les dimensions de l'étiquette ? Et quelle est son aire ? Mets pause, et cherche !",
+  "08b-correction": "Correction. La longueur : 2 fois 3,14 fois 3, 18,84 centimètres. La largeur : la hauteur, 12 centimètres. L'aire : 18,84 fois 12, 226,08 centimètres carrés.",
+  "09-finale": "Ce que tu as appris. Le patron d'un cylindre : deux disques et un rectangle, long comme le tour du disque. Le patron d'un prisme droit : deux bases, et un rectangle par côté. La largeur des rectangles, c'est la hauteur du solide.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

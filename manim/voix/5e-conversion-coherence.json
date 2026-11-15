@@ -1,0 +1,16 @@
+{
+  "00-garde": "Contrôler une conversion. Comment savoir si un résultat est possible ?",
+  "01-situation": "Voici Ana. Elle est contrôleuse qualité dans une usine. Son travail : repérer les erreurs avant que les produits partent. Sur ce paquet de riz, l'étiquette dit 2,4 kilos. La fiche dit 24 grammes. Ana sent qu'il y a un problème.",
+  "02-ordre": "24 grammes, c'est le poids de quelques morceaux de sucre. Un gros paquet de riz ne peut pas peser ça. Le bon résultat : 2,4 fois 1 000, 2 400 grammes.",
+  "03-reperes": "Ana garde des repères en tête. 1 litre : une grande bouteille d'eau. 1 kilo : un paquet de farine. 1 kilomètre : un quart d'heure de marche. Elle compare chaque résultat à ses repères.",
+  "04-methode": "La méthode : après une conversion, on se demande si le résultat est possible. Vers une unité plus petite, le nombre doit grandir. Si le résultat est 10 fois ou 100 fois trop petit ou trop grand, on refait le calcul.",
+  "05-question": "Question ! Un camion pèse 12 tonnes. Un élève écrit 1 200 kilos. Est-ce cohérent ? A : oui, c'est juste. B : non, c'est 12 000 kilos. C : non, c'est 120 kilos. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 1 tonne égale 1 000 kilos. 12 fois 1 000 : 12 000 kilos. 1 200 kilos, c'est le poids d'une petite voiture, pas d'un camion.",
+  "06-piege": "Attention au piège ! Un résultat qui a l'air propre peut être faux. On vérifie toujours le sens : unité plus petite, nombre plus grand.",
+  "07-question": "Question ! Une piste mesure 1,5 kilomètre. Lequel de ces résultats est cohérent ? A : 150 mètres. B : 15 mètres. C : 1 500 mètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 1,5 fois 1 000 : 1 500 mètres. 15 mètres, c'est à peine la longueur d'une salle de classe : beaucoup trop court pour une piste.",
+  "08-defi": "À toi de jouer ! Ana contrôle une palette de 48 boîtes de 250 grammes. L'étiquette de la palette annonce 120 kilos. Est-ce cohérent ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 48 fois 250 : 12 000 grammes. Divisé par 1 000 : 12 kilos. L'étiquette annonce 120 kilos : 10 fois trop. Ana la fait corriger.",
+  "09-finale": "Ce que tu as appris. Après une conversion, on vérifie que le résultat est possible. On le compare à des repères connus. Un résultat 10 fois trop grand ou trop petit cache une erreur de sens.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

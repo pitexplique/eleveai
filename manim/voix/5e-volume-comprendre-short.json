@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Je pars en vacances. Je range mes boîtes cubiques dans ma valise.",
+  "01-rangement": "Une rangée de 3 boîtes, deux rangées, et une deuxième couche par-dessus.",
+  "02-question": "Question ! Combien de boîtes dans la valise ? A : 7. B : 12. C : 6. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! Une couche : 3 fois 2, 6 boîtes. Deux couches : 12 boîtes.",
+  "03-ouf": "12 boîtes… et plus de place pour mon maillot !",
+  "04-commentaire": "À toi : 4 boîtes sur 3, en 2 couches. Combien de boîtes ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

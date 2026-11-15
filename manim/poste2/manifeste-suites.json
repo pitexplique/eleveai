@@ -1,0 +1,629 @@
+{
+  "premiere-suite-expo-prolonger": {
+    "id": "premiere-suite-expo-prolonger",
+    "notionId": "expo_fonction_lecture",
+    "microId": "expo_fct_prolonger_suite",
+    "classe": "premiere",
+    "serie": "Maths 1re",
+    "prioritaire": true,
+    "pas_avant": "",
+    "ceinture": "verte",
+    "type": "longue",
+    "fichier": "premiere/maths/suites/39-expo-prolonger/eleveai-maths-premiere-suite-expo-prolonger.mp4",
+    "miniature": "premiere/maths/suites/39-expo-prolonger/eleveai-maths-premiere-suite-expo-prolonger.png",
+    "titre": "Un os vieux de 8 595 ans : combien reste-t-il de carbone 14 ? — Prolonger une suite géométrique par la fonction exponentielle — épisode 39 · Maths 1re",
+    "accroche": "Fanta est archéologue. Tous les 5 730 ans, la moitié du carbone 14 d'un os disparaît : 100 %, puis 50 %, puis 25 %, puis 12,5 %. Sa suite lui donne les demi-vies entières. Mais l'os qu'elle date n'a presque jamais un âge qui tombe pile sur une demi-vie. Comment calculer ce qui reste au bout de 1,5 période ?\n\nDans cette vidéo :\n• la suite uₙ = 100 × 0,5ⁿ : un terme pour chaque demi-vie entière\n• la fonction f(x) = 100 × 0,5ˣ passe exactement par tous les points de la suite\n• ce que la fonction ajoute : les rangs qui ne sont pas entiers, f(1,5) ≈ 35,4 %\n• 1,5 × 5 730 = 8 595 ans : l'âge que la suite seule ne pouvait pas traiter\n• le piège : relier les points par une ligne droite donnerait 37,5 %, la courbe passe en dessous\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un os daté de 14 325 ans, combien de périodes, et quel pourcentage de carbone 14 reste-t-il ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/expo-fonction-lecture\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=expo_fonction_lecture&microId=expo_fct_prolonger_suite&display=simple\n\n📈 Épisode 39 sur 42 de la série Suites d'EleveAI, de la 1re à la terminale.",
+    "chapitres": [
+      [
+        "00:00",
+        "Prolonger une suite par une fonction · Fanta, archéologue : dater un os au carbone 14"
+      ],
+      [
+        "00:36",
+        "La suite uₙ = 100 × 0,5ⁿ : une valeur par demi-vie entière"
+      ],
+      [
+        "00:55",
+        "L'os à 35,4 % : la suite ne sait pas répondre"
+      ],
+      [
+        "01:14",
+        "La fonction f(x) = 100 × 0,5ˣ passe par tous les points"
+      ],
+      [
+        "01:34",
+        "Question 1"
+      ],
+      [
+        "02:08",
+        "f(1,5) ≈ 35,4 %, soit 8 595 ans"
+      ],
+      [
+        "02:41",
+        "Le piège : la ligne droite donnerait 37,5 %"
+      ],
+      [
+        "03:09",
+        "Question 2"
+      ],
+      [
+        "03:44",
+        "À toi de jouer"
+      ],
+      [
+        "04:09",
+        "Correction"
+      ],
+      [
+        "04:41",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "fonction exponentielle",
+      "suite géométrique",
+      "prolonger une suite",
+      "demi-vie",
+      "carbone 14",
+      "archéologue",
+      "datation",
+      "maths",
+      "première",
+      "suites",
+      "lycée",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:34",
+        "question": "Que fait la courbe de f(x) = 100 × 0,5ˣ par rapport aux points de la suite uₙ = 100 × 0,5ⁿ ?",
+        "choix": [
+          "elle passe sous tous les points",
+          "elle passe exactement par tous les points",
+          "elle ne touche les points qu'en x = 0"
+        ],
+        "reponse": 1,
+        "explication": "À chaque rang entier, la fonction donne la même valeur que la suite : f(0) = 100, f(1) = 50, f(2) = 25."
+      },
+      {
+        "t": "03:09",
+        "question": "Que peut calculer la fonction, que la suite ne peut pas calculer ?",
+        "choix": [
+          "le pourcentage au bout de 1,5 période",
+          "le pourcentage au bout de 3 périodes",
+          "la somme de tous les pourcentages"
+        ],
+        "reponse": 0,
+        "explication": "Les rangs entiers, la suite les donne aussi : ce que la fonction ajoute, ce sont les rangs qui ne sont pas entiers."
+      }
+    ],
+    "centres": [
+      "histoire-geographie",
+      "sciences"
+    ],
+    "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere/expo-fonction-lecture"
+  },
+  "premiere-suite-expo-prolonger-short": {
+    "id": "premiere-suite-expo-prolonger-short",
+    "notionId": "expo_fonction_lecture",
+    "microId": "expo_fct_prolonger_suite",
+    "classe": "premiere",
+    "serie": "Maths 1re",
+    "prioritaire": true,
+    "pas_avant": "",
+    "ceinture": "blanche",
+    "type": "short",
+    "renvoie_vers": "premiere-suite-expo-prolonger",
+    "fichier": "premiere/maths/suites/39-expo-prolonger/eleveai-maths-premiere-suite-expo-prolonger-short.mp4",
+    "miniature": "premiere/maths/suites/39-expo-prolonger/eleveai-maths-premiere-suite-expo-prolonger-short.png",
+    "titre": "Un zoom entre deux crans : quelle distance ? 🧪 — 1re #Shorts",
+    "accroche": "Dans une appli de cartes, chaque cran de zoom divise la largeur affichée par 2 : 400 km, 200 km, 100 km, 50 km. Mais le zoom est continu — on peut s'arrêter entre deux crans. Au rang 1,5, l'appli affiche quoi ?\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : au rang 0,5, quelle largeur l'appli affiche-t-elle ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=expo_fonction_lecture&microId=expo_fct_prolonger_suite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1re #lycée",
+    "tags": [
+      "zoom",
+      "carte",
+      "fonction exponentielle",
+      "suite géométrique",
+      "rang non entier",
+      "maths",
+      "première",
+      "suites",
+      "lycée",
+      "EleveAI",
+      "ceinture blanche",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:41",
+        "question": "Au rang 1,5, entre 200 km et 100 km, la largeur affichée est :",
+        "choix": [
+          "150 km",
+          "50 km",
+          "≈ 141 km"
+        ],
+        "reponse": 2,
+        "explication": "400 × 0,5^1,5 ≈ 141. 150, ce serait le milieu de la ligne droite : la courbe passe en dessous."
+      }
+    ],
+    "centres": [
+      "transports",
+      "technologie-ia"
+    ]
+  },
+  "premiere-spe-suite-exp-geo": {
+    "id": "premiere-spe-suite-exp-geo",
+    "notionId": "exponentielle",
+    "microId": "exp_suite_geo",
+    "classe": "premiere-spe",
+    "serie": "Maths 1re spé",
+    "prioritaire": true,
+    "pas_avant": "",
+    "ceinture": "verte",
+    "type": "longue",
+    "fichier": "premiere-spe/maths/suites/40-exp-geo/eleveai-maths-premiere-spe-suite-exp-geo.mp4",
+    "miniature": "premiere-spe/maths/suites/40-exp-geo/eleveai-maths-premiere-spe-suite-exp-geo.png",
+    "titre": "400 mg dans le sang : de combien le médicament baisse-t-il chaque heure ? — L'exponentielle cache une suite géométrique — épisode 40 · Maths 1re spé",
+    "accroche": "Soraya est pharmacienne hospitalière. Après une injection, la concentration du médicament dans le sang suit C(t) = 400 e^(−0,3t) milligrammes. Elle relève une valeur chaque heure : 400 ; 296,3 ; 219,5 ; 162,6. Est-ce qu'il part une quantité fixe par heure, ou un pourcentage ?\n\nDans cette vidéo :\n• relever une exponentielle aux heures entières fabrique une suite : uₙ = 400 e^(−0,3n)\n• le quotient de deux relevés qui se suivent vaut toujours e^(−0,3) ≈ 0,74\n• donc la suite est géométrique de raison e^(−0,3) : −26 % par heure, pas une quantité fixe\n• le premier terme : u₀ = 400 e⁰ = 400, parce que e⁰ = 1\n• le piège : pour e^(2n), la raison est e² ≈ 7,39, pas 2\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : deux médicaments, e^(−0,2n) et e^(−0,5n) ; leurs raisons, et lequel s'élimine le plus vite.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere-spe/exponentielle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=exponentielle&microId=exp_suite_geo&display=simple\n\n📈 Épisode 40 sur 42 de la série Suites d'EleveAI, de la 1re à la terminale.",
+    "chapitres": [
+      [
+        "00:00",
+        "La suite eⁿᵃ · Soraya, pharmacienne à l'hôpital : le médicament dans le sang"
+      ],
+      [
+        "00:33",
+        "Un relevé chaque heure"
+      ],
+      [
+        "00:56",
+        "La suite des relevés : uₙ = 400 × e^(−0,3n)"
+      ],
+      [
+        "01:11",
+        "Le quotient de deux termes qui se suivent"
+      ],
+      [
+        "01:36",
+        "Une suite géométrique de raison e^(−0,3) ≈ 0,74"
+      ],
+      [
+        "01:54",
+        "Question 1"
+      ],
+      [
+        "02:27",
+        "Le premier terme : u₀ = e⁰ = 1"
+      ],
+      [
+        "02:41",
+        "Le piège : pour e^(2n), la raison est e², pas 2"
+      ],
+      [
+        "03:11",
+        "Question 2"
+      ],
+      [
+        "03:58",
+        "À toi de jouer"
+      ],
+      [
+        "04:28",
+        "Correction"
+      ],
+      [
+        "04:54",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "fonction exponentielle",
+      "suite géométrique",
+      "raison",
+      "e puissance a",
+      "décroissance exponentielle",
+      "pharmacienne",
+      "médicament",
+      "maths",
+      "première",
+      "spé maths",
+      "suites",
+      "lycée",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:54",
+        "question": "Pour tout réel a, la suite uₙ = e^(na) est :",
+        "choix": [
+          "arithmétique de raison a",
+          "géométrique de raison a",
+          "géométrique de raison eᵃ"
+        ],
+        "reponse": 2,
+        "explication": "e^((n+1)a) = e^(na) × eᵃ : d'un terme au suivant, on multiplie par eᵃ."
+      },
+      {
+        "t": "03:11",
+        "question": "La suite vₙ = e^(−0,5n) est :",
+        "choix": [
+          "géométrique de raison −0,5, et décroissante",
+          "géométrique de raison e^(−0,5) ≈ 0,61, et décroissante",
+          "géométrique de raison e^(−0,5), et croissante"
+        ],
+        "reponse": 1,
+        "explication": "La raison vaut environ 0,61 : entre 0 et 1, donc chaque terme est plus petit que le précédent, tout en restant strictement positif."
+      }
+    ],
+    "centres": [
+      "corps-sante"
+    ],
+    "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/premiere-spe/exponentielle"
+  },
+  "premiere-spe-suite-exp-geo-short": {
+    "id": "premiere-spe-suite-exp-geo-short",
+    "notionId": "exponentielle",
+    "microId": "exp_suite_geo",
+    "classe": "premiere-spe",
+    "serie": "Maths 1re spé",
+    "prioritaire": true,
+    "pas_avant": "",
+    "ceinture": "blanche",
+    "type": "short",
+    "renvoie_vers": "premiere-spe-suite-exp-geo",
+    "fichier": "premiere-spe/maths/suites/40-exp-geo/eleveai-maths-premiere-spe-suite-exp-geo-short.mp4",
+    "miniature": "premiere-spe/maths/suites/40-exp-geo/eleveai-maths-premiere-spe-suite-exp-geo-short.png",
+    "titre": "Le son d'une guitare : il perd combien par seconde ? 🧪 — 1re spé #Shorts",
+    "accroche": "On pince une corde de guitare et le son s'éteint : le volume suit A(t) = 100 e^(−0,4t) %. Relevé chaque seconde : 100 ; 67 ; 44,9 ; 30,1. Une quantité fixe qui s'en va, ou un pourcentage ?\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : au bout de 4 secondes, quel pourcentage du volume reste-t-il ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=exponentielle&microId=exp_suite_geo&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #1respé #lycée",
+    "tags": [
+      "guitare",
+      "son",
+      "volume",
+      "fonction exponentielle",
+      "suite géométrique",
+      "raison",
+      "maths",
+      "première",
+      "spé maths",
+      "suites",
+      "lycée",
+      "EleveAI",
+      "ceinture blanche",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:32",
+        "question": "Cette suite de pourcentages est :",
+        "choix": [
+          "géométrique de raison e^(−0,4) ≈ 0,67",
+          "arithmétique de raison −33",
+          "géométrique de raison −0,4"
+        ],
+        "reponse": 0,
+        "explication": "Chaque seconde, on multiplie par e^(−0,4) ≈ 0,67 : le volume perd environ 33 % par seconde, et il ne devient jamais tout à fait nul."
+      }
+    ],
+    "centres": [
+      "musique",
+      "instrument"
+    ]
+  },
+  "terminale-suite-integrale": {
+    "id": "terminale-suite-integrale",
+    "notionId": "primitive_integrale",
+    "microId": "integrale_suite",
+    "classe": "terminale",
+    "serie": "Maths Tle spé",
+    "prioritaire": true,
+    "pas_avant": "",
+    "ceinture": "verte",
+    "type": "longue",
+    "fichier": "terminale/maths/suites/41-integrale/eleveai-maths-terminale-suite-integrale.mp4",
+    "miniature": "terminale/maths/suites/41-integrale/eleveai-maths-terminale-suite-integrale.png",
+    "titre": "Le béton d'une rampe de skatepark : quelle aire sous y = xⁿ ? — Une suite définie par une intégrale — épisode 41 · Maths Tle spé",
+    "accroche": "Marius conçoit des skateparks. Pour le profil d'une rampe, il hésite entre les courbes y = x, y = x², y = x³ sur [0 ; 1] : plus l'exposant est grand, plus la rampe part à plat. L'aire sous la courbe, c'est le béton à couler. Comment varie cette aire quand l'exposant grandit, et jusqu'où descend-elle ?\n\nDans cette vidéo :\n• Iₙ = ∫₀¹ xⁿ dx = 1/(n+1) : I₁ = 1/2, I₂ = 1/3, I₃ = 1/4\n• pourquoi la suite décroît : sur [0 ; 1], x^(n+1) ≤ xⁿ, et intégrer conserve l'ordre\n• le piège : hors de [0 ; 1] l'inégalité s'inverse (2² = 4 > 2, mais 0,5² = 0,25 < 0,5)\n• la limite est 0 : il ne reste presque plus d'aire\n• Jₙ = ∫₀¹ xⁿ eˣ dx et une intégration par parties : Jₙ₊₁ = e − (n+1) Jₙ\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : calculer J₂ avec la relation de récurrence, puis trouver la limite de Jₙ par encadrement.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/primitive-integrale\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=primitive_integrale&microId=integrale_suite&display=simple\n\n📈 Épisode 41 sur 42 de la série Suites d'EleveAI, de la 1re à la terminale.",
+    "chapitres": [
+      [
+        "00:00",
+        "Une suite définie par une intégrale · Marius, concepteur de skateparks : le béton d'une rampe"
+      ],
+      [
+        "00:29",
+        "L'aire sous la courbe y = xⁿ"
+      ],
+      [
+        "00:48",
+        "Le calcul : Iₙ = 1/(n + 1)"
+      ],
+      [
+        "01:11",
+        "Question 1"
+      ],
+      [
+        "01:39",
+        "Les variations : sur [0 ; 1], xⁿ⁺¹ ≤ xⁿ"
+      ],
+      [
+        "02:02",
+        "Le piège : hors de [0 ; 1], l'inégalité s'inverse"
+      ],
+      [
+        "02:28",
+        "La limite est 0"
+      ],
+      [
+        "02:50",
+        "Question 2"
+      ],
+      [
+        "03:28",
+        "Quand l'intégrale ne se calcule pas"
+      ],
+      [
+        "03:49",
+        "L'intégration par parties : Jₙ₊₁ = e − (n + 1) Jₙ"
+      ],
+      [
+        "04:14",
+        "À toi de jouer"
+      ],
+      [
+        "04:41",
+        "Correction"
+      ],
+      [
+        "05:20",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "suite d'intégrales",
+      "intégrale",
+      "aire sous la courbe",
+      "variations",
+      "limite",
+      "encadrement",
+      "intégration par parties",
+      "récurrence",
+      "skatepark",
+      "maths",
+      "terminale",
+      "spé maths",
+      "suites",
+      "bac",
+      "lycée",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:11",
+        "question": "Iₙ = ∫₀¹ xⁿ dx. Combien vaut I₄ ?",
+        "choix": [
+          "1/5",
+          "1/3",
+          "1/4"
+        ],
+        "reponse": 0,
+        "explication": "Iₙ = 1/(n + 1), donc I₄ = 1/5."
+      },
+      {
+        "t": "02:50",
+        "question": "Pourquoi la suite Iₙ est-elle décroissante ?",
+        "choix": [
+          "parce que l'aire devient négative",
+          "parce que 1/(n + 1) est une somme de n termes",
+          "parce que, sur [0 ; 1], xⁿ⁺¹ ≤ xⁿ"
+        ],
+        "reponse": 2,
+        "explication": "On compare les deux fonctions sur l'intervalle, puis on intègre l'inégalité : intégrer conserve l'ordre."
+      }
+    ],
+    "centres": [
+      "sport",
+      "construction"
+    ],
+    "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/primitive-integrale"
+  },
+  "terminale-suite-integrale-short": {
+    "id": "terminale-suite-integrale-short",
+    "notionId": "primitive_integrale",
+    "microId": "integrale_suite",
+    "classe": "terminale",
+    "serie": "Maths Tle spé",
+    "prioritaire": true,
+    "pas_avant": "",
+    "ceinture": "blanche",
+    "type": "short",
+    "renvoie_vers": "terminale-suite-integrale",
+    "fichier": "terminale/maths/suites/41-integrale/eleveai-maths-terminale-suite-integrale-short.mp4",
+    "miniature": "terminale/maths/suites/41-integrale/eleveai-maths-terminale-suite-integrale-short.png",
+    "titre": "Quatre aires qui rétrécissent : où vont-elles ? 🧪 — Tle spé #Shorts",
+    "accroche": "Sur une affiche, le dégradé est tracé par y = xⁿ sur [0 ; 1] : l'encre, c'est l'aire sous la courbe. n = 1 : 1/2. n = 2 : 1/3. n = 5 : 1/6. n = 20 : 1/21. Elle rétrécit à chaque fois — mais vers quoi ?\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien vaut I₉ ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=primitive_integrale&microId=integrale_suite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #Tlespé #lycée",
+    "tags": [
+      "suite d'intégrales",
+      "aire sous la courbe",
+      "limite",
+      "dégradé",
+      "affiche",
+      "maths",
+      "terminale",
+      "spé maths",
+      "suites",
+      "bac",
+      "lycée",
+      "EleveAI",
+      "ceinture blanche",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:37",
+        "question": "La limite de Iₙ quand n → +∞ est :",
+        "choix": [
+          "1",
+          "0",
+          "on ne peut pas conclure"
+        ],
+        "reponse": 1,
+        "explication": "n + 1 tend vers +∞, donc 1/(n + 1) tend vers 0 : il ne reste presque plus d'encre."
+      }
+    ],
+    "centres": [
+      "art-design",
+      "jeux-defis"
+    ]
+  },
+  "terminale-suite-python": {
+    "id": "terminale-suite-python",
+    "notionId": "algorithmique_python",
+    "microId": "python_suite",
+    "classe": "terminale",
+    "serie": "Maths Tle spé",
+    "prioritaire": true,
+    "pas_avant": "",
+    "ceinture": "verte",
+    "type": "longue",
+    "fichier": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python.mp4",
+    "miniature": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python.png",
+    "titre": "L'erreur d'un modèle d'IA : trois tours de boucle en Python — Programmer les termes d'une suite — épisode 42 · Maths Tle spé",
+    "accroche": "Naïs est chercheuse en intelligence artificielle. L'erreur de son modèle part de 20 000 et, à chaque tour d'entraînement, elle devient 0,8 fois l'erreur précédente, plus 1 200 : 17 200, puis 14 960, puis 13 168. À la main, trois tours passent. Mais pour en faire mille, il faut une boucle — et savoir quel terme on a sous les yeux à la sortie.\n\nDans cette vidéo :\n• la relation de récurrence uₙ₊₁ = 0,8 uₙ + 1 200, calculée à la main puis programmée\n• les trois lignes qui suffisent : u = 20000, for i in range(3), u = 0.8 * u + 1200\n• la règle du rang : range(n) fait n tours, donc à la sortie u vaut uₙ\n• le piège : un print DANS la boucle affiche tous les termes au lieu du dernier\n• le deuxième piège : i est le compteur de tours, ce n'est pas le terme de la suite\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : u = 10, trois tours de u = 0.5 * u + 4 ; que vaut u à la fin, et quel terme est-ce ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/algorithmique-python\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=algorithmique_python&microId=python_suite&display=simple\n\n📈 Épisode 42 sur 42 de la série Suites d'EleveAI, de la 1re à la terminale.",
+    "chapitres": [
+      [
+        "00:00",
+        "Programmer les termes d'une suite · Naïs, chercheuse en IA : l'erreur du modèle"
+      ],
+      [
+        "00:37",
+        "À la main, c'est long"
+      ],
+      [
+        "01:04",
+        "Trois lignes de Python"
+      ],
+      [
+        "01:25",
+        "Déroulons la boucle : le tableau de trace"
+      ],
+      [
+        "01:45",
+        "Question 1"
+      ],
+      [
+        "02:18",
+        "La règle du rang : range(n) fait n tours"
+      ],
+      [
+        "02:34",
+        "Le piège : où mettre le print ?"
+      ],
+      [
+        "02:54",
+        "Question 2"
+      ],
+      [
+        "03:32",
+        "À toi de jouer"
+      ],
+      [
+        "03:56",
+        "Correction"
+      ],
+      [
+        "04:25",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "Python",
+      "boucle for",
+      "range",
+      "suite définie par récurrence",
+      "programmer une suite",
+      "algorithmique",
+      "intelligence artificielle",
+      "chercheuse",
+      "maths",
+      "terminale",
+      "spé maths",
+      "suites",
+      "bac",
+      "lycée",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:45",
+        "question": "On écrit u = 3, puis une boucle de 3 tours qui fait u = 2 * u. À la fin, u vaut :",
+        "choix": [
+          "12",
+          "24",
+          "48"
+        ],
+        "reponse": 1,
+        "explication": "On double trois fois : 3, puis 6, puis 12, puis 24. u vaut 24, c'est-à-dire u₃."
+      },
+      {
+        "t": "02:54",
+        "question": "On écrit u = 5, puis une boucle de 4 tours qui fait u = u + 3. À la fin, u vaut 17 : que représente u ?",
+        "choix": [
+          "u₄",
+          "u₃",
+          "la raison de la suite"
+        ],
+        "reponse": 0,
+        "explication": "On part de u₀ = 5 et on applique la relation 4 fois : on arrive à u₄, qui vaut 17."
+      }
+    ],
+    "centres": [
+      "technologie-ia"
+    ],
+    "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/algorithmique-python"
+  },
+  "terminale-suite-python-short": {
+    "id": "terminale-suite-python-short",
+    "notionId": "algorithmique_python",
+    "microId": "python_suite",
+    "classe": "terminale",
+    "serie": "Maths Tle spé",
+    "prioritaire": true,
+    "pas_avant": "",
+    "ceinture": "blanche",
+    "type": "short",
+    "renvoie_vers": "terminale-suite-python",
+    "fichier": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python-short.mp4",
+    "miniature": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python-short.png",
+    "titre": "Une info qui circule : combien de partages après 3 tours ? 🧪 — Tle spé #Shorts",
+    "accroche": "Lundi, 2 personnes connaissent l'information. Chaque jour, chacune la dit à une autre, et une personne de plus la découvre toute seule : uₙ₊₁ = 2 uₙ + 1. Trois lignes de Python suffisent pour arriver à jeudi.\n\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : après un quatrième tour, combien de personnes connaissent l'information ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=algorithmique_python&microId=python_suite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #Tlespé #lycée",
+    "tags": [
+      "Python",
+      "boucle for",
+      "range",
+      "suite définie par récurrence",
+      "information qui circule",
+      "maths",
+      "terminale",
+      "spé maths",
+      "suites",
+      "bac",
+      "lycée",
+      "EleveAI",
+      "ceinture blanche",
+      "Shorts"
+    ],
+    "questions": [
+      {
+        "t": "00:32",
+        "question": "u = 2, puis une boucle de 3 tours qui fait u = 2 * u + 1. À la fin de ces trois lignes, u vaut :",
+        "choix": [
+          "11",
+          "47",
+          "23"
+        ],
+        "reponse": 2,
+        "explication": "2, puis 5, puis 11, puis 23 : trois tours depuis u₀, donc u vaut 23."
+      }
+    ],
+    "centres": [
+      "reseaux-sociaux"
+    ]
+  }
+}

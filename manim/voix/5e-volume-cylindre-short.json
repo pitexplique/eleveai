@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Je bois du jus dans une canette. Rayon : 3 centimètres. Hauteur : 10 centimètres.",
+  "01-pari": "Mon copain parie qu'elle contient moins de 200 centimètres cubes. Moi, je dis plus !",
+  "02-question": "Question ! Quel est le volume de la canette ? On prend pi égal 3,14. A : 188,4 centimètres cubes. B : 94,2 centimètres cubes. C : 282,6 centimètres cubes. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! Le disque : 3,14 fois 3 fois 3, 28,26. Fois 10 : 282,6 centimètres cubes. Plus de 200 : j'ai gagné !",
+  "03-ouf": "Son gage : il porte toutes nos canettes au recyclage !",
+  "04-commentaire": "À toi : un verre de rayon 4 centimètres et de hauteur 10 centimètres. Quel est son volume ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

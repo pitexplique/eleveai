@@ -161,27 +161,27 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 ## 5E
 
 **Aire** (5)
-- [ ] Comprendre ce qu’est une aire — `aire_comprendre`
-- [ ] Calculer l’aire d’un triangle — `aire_triangle`
-- [ ] Calculer l’aire d’un parallélogramme — `aire_parallelogramme`
-- [ ] Calculer l’aire d’une figure composée — `aire_composer`
-- [ ] Défis sur les aires — `aire_defi`
+- [x] Comprendre ce qu’est une aire — `aire_comprendre`
+- [x] Calculer l’aire d’un triangle — `aire_triangle`
+- [x] Calculer l’aire d’un parallélogramme — `aire_parallelogramme`
+- [x] Calculer l’aire d’une figure composée — `aire_composer`
+- [x] Défis sur les aires — `aire_defi`
 
 **Volume et contenance** (8)
-- [ ] Construire le patron… — `patron_prisme_cylindre`
-- [ ] Comprendre ce qu’est un volume — `volume_comprendre`
-- [ ] Calculer le volume d’un pavé droit — `volume_pave`
-- [ ] Calculer le volume d’un prisme droit — `volume_prisme`
-- [ ] Calculer le volume d’un cylindre — `volume_cylindre`
-- [ ] Calculer le volume d’un assemblage de solides — `volume_assemblage`
-- [ ] Convertir et utiliser les unités de volume — `volume_unite`
-- [ ] Résoudre des problèmes et défis sur les volumes — `volume_defi`
+- [x] Construire le patron… — `patron_prisme_cylindre`
+- [x] Comprendre ce qu’est un volume — `volume_comprendre`
+- [x] Calculer le volume d’un pavé droit — `volume_pave`
+- [x] Calculer le volume d’un prisme droit — `volume_prisme`
+- [x] Calculer le volume d’un cylindre — `volume_cylindre`
+- [x] Calculer le volume d’un assemblage de solides — `volume_assemblage`
+- [x] Convertir et utiliser les unités de volume — `volume_unite`
+- [x] Résoudre des problèmes et défis sur les volumes — `volume_defi`
 
 **Longueurs et conversions** (4)
-- [ ] Convertir une longueur, une masse ou une contenance — `conversion_decimal`
-- [ ] Convertir une durée en heures et minutes — `conversion_duree`
-- [ ] Convertir avant de comparer ou de calculer — `conversion_avant_calcul`
-- [ ] Contrôler qu’un résultat converti est cohérent — `conversion_coherence`
+- [x] Convertir une longueur, une masse ou une contenance — `conversion_decimal`
+- [x] Convertir une durée en heures et minutes — `conversion_duree`
+- [x] Convertir avant de comparer ou de calculer — `conversion_avant_calcul`
+- [x] Contrôler qu’un résultat converti est cohérent — `conversion_coherence`
 
 ## 4E
 

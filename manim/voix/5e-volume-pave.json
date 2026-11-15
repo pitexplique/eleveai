@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le volume du pavé droit. Comment calculer la place dans une boîte ?",
+  "01-situation": "Voici Yuna. Elle est technicienne en climatisation. Pour choisir le bon climatiseur, elle doit connaître le volume d'air d'une pièce.",
+  "02-couche": "La pièce mesure 6 mètres de long, 4 mètres de large et 3 mètres de haut. Au sol : 6 fois 4, 24 cubes de 1 mètre cube. C'est l'aire de la base, 24 mètres carrés.",
+  "03-hauteur": "Il y a 3 couches comme celle-là, jusqu'au plafond. 24 fois 3 : 72 mètres cubes.",
+  "04-methode": "La méthode : volume égale longueur fois largeur fois hauteur. C'est aussi l'aire de la base, fois la hauteur.",
+  "05-question": "Question ! Un pavé mesure 5 centimètres, 3 centimètres et 2 centimètres. Quel est son volume ? A : 10 centimètres cubes. B : 30 centimètres cubes. C : 15 centimètres cubes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 5 fois 3, 15. Fois 2 : 30 centimètres cubes. 10, c'est l'addition. 15, c'est oublier la hauteur.",
+  "06-piege": "Attention au piège ! On multiplie les trois dimensions, on ne les additionne pas. Et la réponse est en unités cubes.",
+  "07-question": "Question ! Un cube a une arête de 2 centimètres. Quel est son volume ? A : 8 centimètres cubes. B : 6 centimètres cubes. C : 4 centimètres cubes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 2 fois 2 fois 2 : 8 centimètres cubes. 6, c'est 2 plus 2 plus 2. 4, c'est seulement une face.",
+  "08-defi": "À toi de jouer ! Yuna climatise deux salles. La première : 7 mètres sur 5, et 3 mètres de haut. La deuxième : 4 mètres sur 3, et 3 mètres de haut. Un climatiseur refroidit 80 mètres cubes. Combien de climatiseurs faut-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Première salle : 7 fois 5 fois 3, 105 mètres cubes. Deuxième : 4 fois 3 fois 3, 36. En tout : 141 mètres cubes. Un climatiseur ne suffit pas. Il en faut 2.",
+  "09-finale": "Ce que tu as appris. Volume du pavé droit : longueur fois largeur fois hauteur. C'est aussi l'aire de la base fois la hauteur. La réponse s'écrit en unités cubes.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

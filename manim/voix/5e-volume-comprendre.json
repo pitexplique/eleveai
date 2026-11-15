@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le volume. Combien de place prend un objet ?",
+  "01-situation": "Voici Tiago. Il est logisticien. Il remplit des camions et des conteneurs. Son problème de chaque jour : combien de caisses vont rentrer ?",
+  "02-cubes": "Tiago range des cubes de 1 décimètre de côté dans une caisse. Une couche : 4 cubes sur 3, 12 cubes. Deux couches : 24 cubes.",
+  "03-volume": "Chaque cube, c'est 1 décimètre cube. La caisse contient 24 cubes : son volume est 24 décimètres cubes.",
+  "04-methode": "Une aire couvre une surface plate : elle se compte en carrés. Un volume remplit un espace : il se compte en cubes. Il s'écrit en centimètres cubes, en décimètres cubes, en mètres cubes.",
+  "05-question": "Question ! Un solide est fait de 12 cubes de 1 centimètre cube. Quel est son volume ? A : 12 centimètres cubes. B : 12 centimètres carrés. C : 36 centimètres cubes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 12 cubes de 1 centimètre cube : 12 centimètres cubes. Les centimètres carrés, c'est pour une aire.",
+  "06-piege": "Attention au piège ! Le petit 2, c'est une aire, à plat. Le petit 3, c'est un volume, en trois dimensions : longueur, largeur, hauteur.",
+  "07-question": "Question ! Un pavé mesure 2 centimètres, 3 centimètres et 4 centimètres. Quel est son volume ? A : 12 centimètres cubes. B : 9 centimètres cubes. C : 24 centimètres cubes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Une couche : 2 fois 3, 6 cubes. 4 couches : 24 centimètres cubes. 9, c'est l'addition : faux.",
+  "08-defi": "À toi de jouer ! Un conteneur mesure 6 mètres de long, 2 mètres de large et 2 mètres de haut. Tiago y range des caisses cubiques de 1 mètre de côté. Chaque caisse pèse 50 kilos. Combien de caisses rentrent ? Et combien pèse le chargement ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Une couche : 6 fois 2, 12 caisses. 2 couches : 24 caisses. Le chargement : 24 fois 50, 1 200 kilos.",
+  "09-finale": "Ce que tu as appris. Le volume, c'est la place qu'occupe un objet. On le compte en cubes-unité. Il s'écrit en centimètres cubes, décimètres cubes ou mètres cubes.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

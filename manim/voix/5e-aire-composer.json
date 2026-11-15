@@ -1,0 +1,16 @@
+{
+  "00-garde": "L'aire d'une figure composée. Comment mesurer une forme compliquée ?",
+  "01-situation": "Voici Leïla. Elle est technicienne en énergies renouvelables. Elle pose des panneaux solaires. Ce toit a une drôle de forme : un L. Combien de mètres carrés de toit a-t-elle ?",
+  "02-decouper": "Leïla coupe le L en deux rectangles. Le premier : 6 mètres sur 4, 24 mètres carrés. Le second : 3 mètres sur 2, 6 mètres carrés. En tout : 24 plus 6, 30 mètres carrés.",
+  "03-enlever": "Autre méthode : elle complète le L en un grand rectangle de 6 mètres sur 6, 36 mètres carrés. Puis elle enlève le morceau en trop : 3 mètres sur 2, 6. 36 moins 6 : 30 mètres carrés. Le même résultat !",
+  "04-methode": "La méthode : on découpe en rectangles et en triangles. On calcule chaque morceau. Puis on additionne… ou on enlève.",
+  "05-question": "Question ! Une figure en L est faite d'un rectangle de 5 mètres sur 4 et d'un rectangle de 2 mètres sur 3. Quelle est son aire ? A : 26 mètres carrés. B : 20 mètres carrés. C : 14 mètres carrés. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 5 fois 4, 20. 2 fois 3, 6. 20 plus 6 : 26 mètres carrés.",
+  "06-piege": "Attention au piège ! Quand on découpe, chaque morceau compte une seule fois. Et quand on enlève un morceau, on enlève son aire, pas sa longueur.",
+  "07-question": "Question ! Un carré de 10 mètres de côté. On enlève un carré de 4 mètres de côté. Quelle aire reste-t-il ? A : 96 mètres carrés. B : 84 mètres carrés. C : 60 mètres carrés. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Le grand carré : 10 fois 10, 100. Le petit : 4 fois 4, 16. 100 moins 16 : 84 mètres carrés.",
+  "08-defi": "À toi de jouer ! Un autre toit : un rectangle de 9 mètres sur 4, avec un triangle collé au bout. Le triangle a une base de 4 mètres et une hauteur de 3 mètres. Un panneau solaire couvre 2 mètres carrés. Combien de panneaux Leïla peut-elle poser ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le rectangle : 9 fois 4, 36. Le triangle : 4 fois 3, 12, divisé par 2, 6. Le toit : 36 plus 6, 42 mètres carrés. 42 divisé par 2 : 21 panneaux.",
+  "09-finale": "Ce que tu as appris. Une figure compliquée se découpe en rectangles et en triangles. On calcule chaque morceau. Puis on additionne, ou on enlève ce qui manque.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
