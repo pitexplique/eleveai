@@ -355,7 +355,7 @@ class SuiteExpoProlonger1re(AuditMilliers, VerifMargo, OutilsExpo, OutilsCalcul,
                    -0.05, fs=52)
         self.ligne([("Mais attention :", GREY_A, "Mais attention"), ("n", TERME, "n est"),
                     ("est un nombre de périodes", WHITE, "un nombre"), ("ENTIER.", JAUNE_TITRE, "ENTIER")],
-                   -1.3, x=self.X0, fs=38)
+                   -1.3, x=self.X0, fs=38, larg=12.2)
         self.ligne([("Cette suite ne répond", WHITE, "Cette suite"), ("qu'aux rangs :", JAUNE_TITRE, "qu'aux rangs")],
                    -2.45, x=self.X0, fs=40)
         rangs = VGroup()
@@ -375,9 +375,9 @@ class SuiteExpoProlonger1re(AuditMilliers, VerifMargo, OutilsExpo, OutilsCalcul,
         o = os_fossile(1.2).move_to(P(4.9, 2.5)).rotate(-0.2)
         jg = jauge(0.354, P(6.05, 2.2), h=1.5, w=0.44, couleur=JAUNE_TITRE)
         self.ligne([("Or l'os contient environ", WHITE, "contient environ"), ("35,4 %", JAUNE_TITRE, "35,4")],
-                   2.3, x=self.X0, fs=36,
+                   2.3, x=self.X0, fs=36, larg=10.2,
                    avec_k={0: [FadeIn(o, scale=0.7)], 1: [FadeIn(jg, shift=UP * 0.2)]}, rt=0.45)
-        self.ligne([("de carbone", WHITE, "de carbone"), ("14.", WHITE, "14.")], 1.62, x=self.X0, fs=36)
+        self.ligne([("de carbone", WHITE, "de carbone"), ("14.", WHITE, "14.")], 1.62, x=self.X0, fs=36, larg=10.2)
         lg = self.cases_quatre(y=-2.4, pas=2.8, largeur=2.0, fs=34, x=-0.9)
         self.ligne([("Ce n'est", WHITE, "Ce n'est"), ("ni 50 %,", TERME, "ni 50"), ("ni 25 %.", TERME, "ni 25")],
                    0.92, x=self.X0, fs=36, avec_k={1: [FadeIn(lg.cases, shift=UP * 0.12)],
@@ -409,18 +409,19 @@ class SuiteExpoProlonger1re(AuditMilliers, VerifMargo, OutilsExpo, OutilsCalcul,
         nu = self.nuage((0, 3.5), (0, 118), P(2.2, -2.35), P(4.6, 0.9))
         pts = self.points_suite(nu)
         cb = self.courbe(nu, 0, 3.45)
-        self.ligne([("Elle prend la fonction :", WHITE, "Elle prend")], 2.25, x=self.X0, fs=40)
+        L = 7.7                                   # avant l'étiquette « 100 » du repère (x = 1,7)
+        self.ligne([("Elle prend la fonction :", WHITE, "Elle prend")], 2.25, x=self.X0, fs=40, larg=L)
         self.ligne([("f(x) =", JUSTE, "f de x"), ("100", WHITE, "100"), ("× 0,5ˣ", RAISON, "0,5 puissance")],
-                   1.35, x=self.X0, fs=52)
-        self.ligne([("Elle accepte tous les nombres", WHITE, "accepte tous")], 0.45, x=self.X0, fs=36)
+                   1.35, x=self.X0, fs=52, larg=L)
+        self.ligne([("Elle accepte tous les nombres", WHITE, "accepte tous")], 0.45, x=self.X0, fs=36, larg=L)
         self.ligne([("positifs :", WHITE, "les nombres"), ("1 ;", TERME, "1 ;"), ("1,5 ;", JUSTE, "1,5"),
-                    ("2,5 …", JUSTE, "2,5")], -0.4, x=self.X0, fs=42)
-        self.ligne([("On place d'abord", WHITE, "On place"), ("les points de la suite,", TERME, "les points")],
-                   -1.45, x=self.X0, fs=36,
-                   avec_k={0: self.axes(nu, [FadeIn(self.repere(nu))]),
-                           1: [LaggedStart(*[GrowFromCenter(d) for d in pts], lag_ratio=0.18)]}, rt=0.7)
+                    ("2,5 …", JUSTE, "2,5")], -0.4, x=self.X0, fs=42, larg=L)
+        self.ligne([("On place d'abord les points", WHITE, "On place")], -1.35, x=self.X0, fs=36, larg=L,
+                   avec_k={0: self.axes(nu, [FadeIn(self.repere(nu))])}, rt=0.5)
+        self.ligne([("de la suite,", TERME, "les points")], -1.95, x=self.X0, fs=36, larg=L,
+                   avec_k={0: [LaggedStart(*[GrowFromCenter(d) for d in pts], lag_ratio=0.18)]}, rt=0.7)
         self.ligne([("puis on trace", WHITE, "puis on trace"), ("la courbe de f.", JUSTE, "la courbe")],
-                   -2.5, x=self.X0, fs=38, avec_k={1: [Create(cb)]}, rt=1.0)
+                   -2.65, x=self.X0, fs=36, larg=L, avec_k={1: [Create(cb)]}, rt=1.0)
         self.attendre_voix(marge=0.5)
 
     # ── 05 : question-pause n° 1 → B (la courbe passe par tous les points) ──
@@ -438,20 +439,23 @@ class SuiteExpoProlonger1re(AuditMilliers, VerifMargo, OutilsExpo, OutilsCalcul,
         q = self.question_lignes("05-question", [g1, g2], [cA, cB, cC], 1, fs=32)
         self.dire("05b-reponse")
         ok = self.q_reponse(q, 1)
-        self.play(FadeOut(q.cartes[0]), FadeOut(q.cartes[2]), FadeOut(g1), FadeOut(g2),
+        # le titre « Question ! » s'en va : la carte-réponse prend sa place, sans le recouvrir
+        self.play(FadeOut(q.cartes[0]), FadeOut(q.cartes[2]), FadeOut(g1), FadeOut(g2), FadeOut(q.tete),
                   VGroup(q.cartes[1], ok).animate.move_to(P(0, 2.55)), run_time=0.35)
         nu = self.nuage((0, 3.5), (0, 118), P(1.9, -2.4), P(4.6, 0.8))
         pts = self.points_suite(nu)
         cb = self.courbe(nu, 0, 3.45)
-        self.ligne([("À chaque rang entier,", JAUNE_TITRE, "À chaque rang")], 1.45, x=self.X0, fs=40)
-        self.ligne([("la fonction donne", WHITE, "la fonction donne"), ("la même valeur", JUSTE, "la même valeur"),
-                    ("que la suite :", TERME, "que la suite")], 0.6, x=self.X0, fs=38,
-                   avec_k={0: self.axes(nu, [FadeIn(self.repere(nu))]),
-                           2: [LaggedStart(*[GrowFromCenter(d) for d in pts], lag_ratio=0.15), Create(cb)]}, rt=0.7)
-        for k, (f_, v, ex_f, ex_v, y) in enumerate(((0, "100", "f de 0", "100,", -0.4),
-                                                    (1, "50", "f de 1", "50,", -1.3),
-                                                    (2, "25", "f de 2", "25.", -2.2))):
-            g = self.ligne([(f"f({f_}) =", JUSTE, ex_f), (v, TERME, ex_v)], y, x=self.X0, fs=42,
+        L = 7.4                                   # avant l'étiquette « 100 » du repère (x = 1,4)
+        self.ligne([("À chaque rang entier,", JAUNE_TITRE, "À chaque rang")], 1.45, x=self.X0, fs=40, larg=L)
+        self.ligne([("la fonction donne", WHITE, "la fonction donne"), ("la même valeur", JUSTE, "la même valeur")],
+                   0.72, x=self.X0, fs=36, larg=L,
+                   avec_k={0: self.axes(nu, [FadeIn(self.repere(nu))])}, rt=0.5)
+        self.ligne([("que la suite :", TERME, "que la suite")], 0.08, x=self.X0, fs=36, larg=L,
+                   avec_k={0: [LaggedStart(*[GrowFromCenter(d) for d in pts], lag_ratio=0.15), Create(cb)]}, rt=0.7)
+        for k, (f_, v, ex_f, ex_v, y) in enumerate(((0, "100", "f de 0", "100,", -0.65),
+                                                    (1, "50", "f de 1", "50,", -1.45),
+                                                    (2, "25", "f de 2", "25.", -2.25))):
+            g = self.ligne([(f"f({f_}) =", JUSTE, ex_f), (v, TERME, ex_v)], y, x=self.X0, fs=42, larg=L,
                            avec_k={1: [Flash(pts[k], color=JUSTE, line_length=0.16, num_lines=10),
                                        Indicate(pts[k], color=JUSTE, scale_factor=1.6)]}, rt=0.4)
             self.add(g)
@@ -471,23 +475,24 @@ class SuiteExpoProlonger1re(AuditMilliers, VerifMargo, OutilsExpo, OutilsCalcul,
                   run_time=0.9)
         self.mixte([("t", [("f(1,5) =", JUSTE, "f de 1,5"), ("100 ×", WHITE, "100 fois")]),
                     ("p", "0,5", "1,5", RAISON, "0,5 puissance", "1,5,"),
-                    ("t", [("≈ 35,4", JUSTE, "environ 35,4")])], 2.35, x=self.X0, fs=44)
+                    ("t", [("≈ 35,4", JUSTE, "environ 35,4")])], 2.35, x=self.X0, fs=44, larg=8.6)
         d15 = nu.point(1.5, 35.4, JUSTE, 0.11)
         po = self.pointille(nu, 1.5, 35.4)
         oo = os_fossile(0.8).move_to(nu.G(1.5, 35.4) + RIGHT * 0.55 + UP * 0.3).rotate(-0.25)
-        self.ligne([("C'est l'os de Fanta.", WHITE, "C'est l'os")], 1.55, x=self.X0, fs=36,
+        self.ligne([("C'est l'os de Fanta.", WHITE, "C'est l'os")], 1.55, x=self.X0, fs=36, larg=8.6,
                    avec_k={0: [Create(po), GrowFromCenter(d15), FadeIn(oo, scale=0.6)]}, rt=0.6)
         self.ligne([("1,5 période,", TERME, "1,5 période"), ("c'est 1,5 ×", WHITE, "c'est 1,5"),
-                    ("5 730,", WHITE, "5 730,")], 0.85, x=self.X0, fs=34)
-        self.ligne([("donc 8 595 ans.", JUSTE, "donc 8 595")], 0.2, x=self.X0, fs=34)
-        self.ligne([("La fonction exponentielle", JUSTE, "la fonction exponentielle")], -0.55, x=self.X0, fs=34)
+                    ("5 730,", WHITE, "5 730,")], 0.85, x=self.X0, fs=34, larg=8.6)
+        self.ligne([("donc 8 595 ans.", JUSTE, "donc 8 595")], 0.2, x=self.X0, fs=34, larg=8.6)
+        self.ligne([("La fonction exponentielle", JUSTE, "la fonction exponentielle")], -0.55, x=self.X0, fs=34,
+                   larg=8.6)
         self.ligne([("PROLONGE", JAUNE_TITRE, "PROLONGE"), ("la suite.", TERME, "la suite")],
-                   -1.2, x=self.X0, fs=34)
+                   -1.2, x=self.X0, fs=34, larg=8.6)
         self.ligne([("Les points sont des", TERME, "les points"), ("piquets,", PIQUET, "piquets")],
-                   -1.9, x=self.X0, fs=34,
+                   -1.9, x=self.X0, fs=34, larg=8.6,
                    avec_k={1: [LaggedStart(*[FadeIn(p, shift=UP * 0.1) for p in piq], lag_ratio=0.15)]}, rt=0.6)
-        self.ligne([("la courbe est le fil tendu", JUSTE, "la courbe est")], -2.55, x=self.X0, fs=34)
-        self.ligne([("qui existe partout entre eux.", JUSTE, "qui existe")], -3.2, x=self.X0, fs=34,
+        self.ligne([("la courbe est le fil tendu", JUSTE, "la courbe est")], -2.55, x=self.X0, fs=34, larg=8.6)
+        self.ligne([("qui existe partout entre eux.", JUSTE, "qui existe")], -3.2, x=self.X0, fs=34, larg=8.6,
                    avec_k={0: [Indicate(cb, color=JUSTE, scale_factor=1.04)]}, rt=0.8)
         self.attendre_voix(marge=0.5)
 
@@ -509,26 +514,26 @@ class SuiteExpoProlonger1re(AuditMilliers, VerifMargo, OutilsExpo, OutilsCalcul,
                             tip_length=0.12)
         rg = regle(0.85).move_to(P(3.9, -3.05)).rotate(-0.2)
         self.ligne([("Pour aller de", WHITE, "Pour aller"), ("50 %", TERME, "50 %"), ("à", WHITE, None),
-                    ("25 %,", TERME, "25 %"), ], 2.5, x=self.X0, fs=34,
+                    ("25 %,", TERME, "25 %"), ], 2.5, x=self.X0, fs=34, larg=7.9,
                    avec_k={1: self.axes(nu, [FadeIn(g) for g in nu[4:]]) + [GrowFromCenter(p1)],
                            3: [GrowFromCenter(p2)]}, rt=0.45)
-        self.ligne([("on est tenté de tirer", WHITE, "on est tenté")], 1.93, x=self.X0, fs=34)
-        self.ligne([("une ligne droite.", PIEGE, "une ligne")], 1.36, x=self.X0, fs=34,
+        self.ligne([("on est tenté de tirer", WHITE, "on est tenté")], 1.93, x=self.X0, fs=34, larg=7.9)
+        self.ligne([("une ligne droite.", PIEGE, "une ligne")], 1.36, x=self.X0, fs=34, larg=7.9,
                    avec_k={0: [Create(corde)]}, rt=0.6)
-        self.ligne([("À mi-chemin, cette droite", WHITE, "À mi-chemin")], 0.79, x=self.X0, fs=34)
-        self.ligne([("donne", WHITE, "donne"), ("37,5 %.", PIEGE, "37,5")], 0.22, x=self.X0, fs=34,
+        self.ligne([("À mi-chemin, cette droite", WHITE, "À mi-chemin")], 0.79, x=self.X0, fs=34, larg=7.9)
+        self.ligne([("donne", WHITE, "donne"), ("37,5 %.", PIEGE, "37,5")], 0.22, x=self.X0, fs=34, larg=7.9,
                    avec_k={1: [GrowFromCenter(dm), FadeIn(lm, scale=1.3)]}, rt=0.5)
-        self.ligne([("Mais la vraie valeur", WHITE, "Mais la vraie")], -0.35, x=self.X0, fs=34)
-        self.ligne([("est environ", WHITE, "est environ"), ("35,4 %.", JUSTE, "35,4 %")], -0.92, x=self.X0, fs=34,
+        self.ligne([("Mais la vraie valeur", WHITE, "Mais la vraie")], -0.35, x=self.X0, fs=34, larg=7.9)
+        self.ligne([("est environ", WHITE, "est environ"), ("35,4 %.", JUSTE, "35,4 %")], -0.92, x=self.X0, fs=34, larg=7.9,
                    avec_k={1: [GrowFromCenter(dv), FadeIn(lv, scale=1.3)]}, rt=0.5)
-        self.ligne([("La courbe n'est pas une droite :", WHITE, "La courbe de")], -1.5, x=self.X0, fs=30,
+        self.ligne([("La courbe n'est pas une droite :", WHITE, "La courbe de")], -1.5, x=self.X0, fs=30, larg=7.9,
                    avec_k={0: [Create(cb)]}, rt=0.8)
         self.ligne([("elle passe", WHITE, "elle passe"), ("EN DESSOUS", JUSTE, "EN DESSOUS"),
-                    ("du segment.", PIEGE, "du segment")], -2.05, x=self.X0, fs=30,
+                    ("du segment.", PIEGE, "du segment")], -2.05, x=self.X0, fs=30, larg=7.9,
                    avec_k={1: [GrowFromCenter(ecart)]}, rt=0.5)
-        self.ligne([("Relier les points à la règle", WHITE, "Relier les points")], -2.6, x=self.X0, fs=30,
+        self.ligne([("Relier les points à la règle", WHITE, "Relier les points")], -2.6, x=self.X0, fs=30, larg=7.9,
                    avec_k={0: [FadeIn(rg, shift=UP * 0.15)]}, rt=0.5)
-        fin = self.ligne([("donne un âge faux.", PIEGE, "donne un âge")], -3.18, x=self.X0, fs=30,
+        fin = self.ligne([("donne un âge faux.", PIEGE, "donne un âge")], -3.18, x=self.X0, fs=30, larg=7.9,
                          avec_k={0: [Create(self.barrer(rg))]}, rt=0.5)
         self.play(Indicate(fin[0], color=PIEGE, scale_factor=1.08), run_time=0.5)
         self.attendre_voix(marge=0.5)
@@ -547,7 +552,8 @@ class SuiteExpoProlonger1re(AuditMilliers, VerifMargo, OutilsExpo, OutilsCalcul,
         q = self.question_lignes("08-question", [g1, g2], [cA, cB, cC], 0, fs=32)
         self.dire("08b-reponse")
         ok = self.q_reponse(q, 0)
-        self.play(FadeOut(q.cartes[1]), FadeOut(q.cartes[2]), FadeOut(g1), FadeOut(g2),
+        # le titre « Question ! » s'en va : la carte-réponse prend sa place, sans le recouvrir
+        self.play(FadeOut(q.cartes[1]), FadeOut(q.cartes[2]), FadeOut(g1), FadeOut(g2), FadeOut(q.tete),
                   VGroup(q.cartes[0], ok).animate.move_to(P(0, 2.55)), run_time=0.35)
         # l'axe des rangs : les entiers (bleu) ; entre eux, ce que la fonction ajoute (vert)
         y_ax = 0.5
@@ -565,12 +571,12 @@ class SuiteExpoProlonger1re(AuditMilliers, VerifMargo, OutilsExpo, OutilsCalcul,
         dec = VGroup(*[self.t(x, 24, JUSTE, audit=False).next_to(milieux[k], UP, buff=0.16)
                        for k, x in enumerate(("0,5", "1,5", "2,5"))])
         self.ligne([("Les rangs entiers :", TERME, "Les rangs entiers"),
-                    ("la suite les donne aussi.", WHITE, "la suite les donne")], 1.5, x=self.X0, fs=38,
+                    ("la suite les donne aussi.", WHITE, "la suite les donne")], 1.5, x=self.X0, fs=38, larg=11.2,
                    avec_k={0: [GrowArrow(ax)],
                            1: [LaggedStart(*[FadeIn(e, scale=0.7) for e in ent], lag_ratio=0.12)]}, rt=0.6)
-        self.ligne([("Ce que la fonction ajoute :", JUSTE, "Ce que la fonction")], -1.2, x=self.X0, fs=40)
+        self.ligne([("Ce que la fonction ajoute :", JUSTE, "Ce que la fonction")], -1.2, x=self.X0, fs=40, larg=11.2)
         self.ligne([("tous les rangs", JUSTE, "ce sont les rangs"),
-                    ("qui ne sont pas entiers.", JAUNE_TITRE, "qui ne sont pas")], -2.1, x=self.X0, fs=40,
+                    ("qui ne sont pas entiers.", JAUNE_TITRE, "qui ne sont pas")], -2.1, x=self.X0, fs=40, larg=11.2,
                    avec_k={0: [LaggedStart(*[Create(b) for b in bande], lag_ratio=0.15)],
                            1: [LaggedStart(*[GrowFromCenter(d) for d in milieux], lag_ratio=0.15), FadeIn(dec)]},
                    rt=0.7)
@@ -583,15 +589,16 @@ class SuiteExpoProlonger1re(AuditMilliers, VerifMargo, OutilsExpo, OutilsCalcul,
         tit = self.titre("À toi de jouer !", JAUNE_TITRE, 48, extrait="À toi")
         fo = fouille(2.6).move_to(P(4.9, 1.95))
         o = os_fossile(1.2).move_to(P(4.6, 1.8)).rotate(0.15)
-        self.ligne([("Fanta reçoit un os", WHITE, "Fanta reçoit")], 2.1, x=self.X0, fs=38,
+        self.ligne([("Fanta reçoit un os", WHITE, "Fanta reçoit")], 2.1, x=self.X0, fs=38, larg=9.5,
                    avec_k={0: [FadeIn(fo, shift=DOWN * 0.15), FadeIn(o, scale=0.7)]}, rt=0.5)
-        self.ligne([("daté de", WHITE, "daté de"), ("14 325 ans.", JAUNE_TITRE, "14 325")], 1.4, x=self.X0, fs=38)
+        self.ligne([("daté de", WHITE, "daté de"), ("14 325 ans.", JAUNE_TITRE, "14 325")], 1.4, x=self.X0, fs=38,
+                   larg=9.5)
         self.ligne([("Première étape :", RAISON, "Première étape"),
-                    ("combien de périodes", WHITE, "combien de")], 0.5, x=self.X0, fs=38)
-        self.ligne([("de 5 730 ans cela fait-il ?", WHITE, "de 5 730")], -0.15, x=self.X0, fs=38)
+                    ("combien de périodes", WHITE, "combien de")], 0.5, x=self.X0, fs=38, larg=12.2)
+        self.ligne([("de 5 730 ans cela fait-il ?", WHITE, "de 5 730")], -0.15, x=self.X0, fs=38, larg=12.2)
         self.ligne([("Deuxième étape :", RAISON, "Deuxième étape"),
-                    ("quel pourcentage", WHITE, "quel pourcentage")], -1.1, x=self.X0, fs=38)
-        self.ligne([("de carbone 14 reste-t-il ?", WHITE, "de carbone 14")], -1.75, x=self.X0, fs=38)
+                    ("quel pourcentage", WHITE, "quel pourcentage")], -1.1, x=self.X0, fs=38, larg=12.2)
+        self.ligne([("de carbone 14 reste-t-il ?", WHITE, "de carbone 14")], -1.75, x=self.X0, fs=38, larg=12.2)
         self.defi_pause(-2.75, x=-1.6)
         self._tit_defi = tit
 
@@ -610,21 +617,21 @@ class SuiteExpoProlonger1re(AuditMilliers, VerifMargo, OutilsExpo, OutilsCalcul,
                                   LaggedStart(*[GrowFromCenter(d) for d in pts], lag_ratio=0.1), Create(cb)]),
                   run_time=0.8)
         self.ligne([("14 325", TERME, "14 325"), ("÷", WHITE, "divisé"), ("5 730", RAISON, "par 5 730"),
-                    ("= 2,5", JUSTE, "égale 2,5")], 2.15, x=self.X0, fs=48)
+                    ("= 2,5", JUSTE, "égale 2,5")], 2.15, x=self.X0, fs=48, larg=8.6)
         self.ligne([("Il s'est écoulé", WHITE, "il s'est écoulé"), ("2,5 périodes.", TERME, "2,5 périodes")],
-                   1.3, x=self.X0, fs=36)
+                   1.3, x=self.X0, fs=36, larg=8.6)
         self.mixte([("t", [("f(2,5) =", JUSTE, "f de 2,5"), ("100 ×", WHITE, "100 fois")]),
                     ("p", "0,5", "2,5", RAISON, "0,5 puissance", "2,5,"),
-                    ("t", [("≈ 17,7", JUSTE, "environ 17,7")])], 0.5, x=self.X0, fs=44)
+                    ("t", [("≈ 17,7", JUSTE, "environ 17,7")])], 0.5, x=self.X0, fs=44, larg=8.6)
         d25 = nu.point(2.5, 17.7, JUSTE, 0.11)
         po = self.pointille(nu, 2.5, 17.7)
         f1 = self.ligne([("Il reste environ", WHITE, "Il reste environ"), ("17,7 %", JUSTE, "17,7 %")],
-                        -0.5, x=self.X0, fs=36, avec_k={1: [Create(po), GrowFromCenter(d25)]}, rt=0.5)
-        f2 = self.ligne([("de carbone 14.", WHITE, "de carbone 14.")], -1.1, x=self.X0, fs=36)
+                        -0.5, x=self.X0, fs=36, larg=8.6, avec_k={1: [Create(po), GrowFromCenter(d25)]}, rt=0.5)
+        f2 = self.ligne([("de carbone 14.", WHITE, "de carbone 14.")], -1.1, x=self.X0, fs=36, larg=8.6)
         self.play(FadeIn(self.encadre(VGroup(f1, f2), JUSTE, 0.16)), run_time=0.3)
-        self.ligne([("La suite, seule,", TERME, "La suite, seule")], -1.9, x=self.X0, fs=34)
-        self.ligne([("n'aurait pas pu répondre :", PIEGE, "n'aurait jamais")], -2.5, x=self.X0, fs=34)
-        self.ligne([("2,5 n'est pas un rang entier.", PIEGE, "2,5 n'est pas")], -3.1, x=self.X0, fs=34)
+        self.ligne([("La suite, seule,", TERME, "La suite, seule")], -1.9, x=self.X0, fs=34, larg=8.6)
+        self.ligne([("n'aurait pas pu répondre :", PIEGE, "n'aurait jamais")], -2.5, x=self.X0, fs=34, larg=8.6)
+        self.ligne([("2,5 n'est pas un rang entier.", PIEGE, "2,5 n'est pas")], -3.1, x=self.X0, fs=34, larg=8.6)
         self.attendre_voix(marge=0.5)
 
     # ── 10 : ce que tu as appris ───────────────────────────────────────────
