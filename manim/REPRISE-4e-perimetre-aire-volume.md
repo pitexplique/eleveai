@@ -13,8 +13,18 @@ Ouvert le 15/11/2026. 30 micros du coach, plan : `manim/PLAN-perimetre-aire-volu
       (piscine, maison, territoire, poumons, muscles + les 18 centres).
 - [x] Tableau des 28 épisodes + voix du PILOTE : `manim/poste2/VOIX-4e-3e-perimetre-aire-volume.md`.
 - [x] **Pilote `volume_pyramide` rendu en `-ql`** (paysage 4 min 42 + short Manim 65 s).
-- [ ] Pilote validé par Frédéric.
-- [ ] Voix des 27 autres épisodes, puis rendus HD.
+- [x] **Pilote VALIDÉ par Frédéric le 15/11 (« Oui, lance la suite »).**
+- [x] HD du pilote : paysage 282,6 s et short 65,9 s en 1080 × 1920, `verifier-bords` = 0.
+      Outil : `manim/poste2/4e_hd.sh <script> <Scène> <nom> <media> <sortie> [résolution]`
+      (la résolution sert aux shorts 9:16 : passer `1080,1920`).
+- [x] **Les 54 voix des 27 autres épisodes sont ÉCRITES** dans le même fichier
+      `manim/poste2/VOIX-4e-3e-perimetre-aire-volume.md` (899 lignes, 28 épisodes).
+      84 questions-pauses : exactement 28 A, 28 B, 28 C, jamais deux fois la même
+      lettre dans une vidéo ; tous les nombres recalculés par script ; les 17 centres
+      d'intérêt utilisés sont dans la liste fermée et ouverts en 12-14 ans.
+      ⚠️ Un défi corrigé à la relecture : le gobelet conique a la pointe EN BAS, donc
+      aux trois quarts de la hauteur le client a 20 cL sur 48, pas 47.
+- [ ] Voix validées par Frédéric → puis WAV, marques, scripts, dry run, HD, un épisode à la fois.
 
 ## Le PILOTE V2 `volume_pyramide` (15/11) — vidéo COMMUNE 4e + 3e
 
