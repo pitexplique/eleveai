@@ -68,3 +68,19 @@ Notes : `N = side-session-notes/local_c6fb8250-5329-4da1-acb1-04e271d69053/` (�
 - Shorts : `prototypes/ti-margo/films/6e-perimetre-{rectangle,defi}.js` (+ série `6e-perimetre.js/.json/-cues.js`). ⚠️ Ils chargent `films/6e-commun.js`, créé par le lot Aire 6e et NON commité au 15/11 matin : c'est à ce lot de le committer.
 - ✅ Manifeste 06/04/2027 (P1) et 07/04/2027 (P2), 4 entrées ; fiches YouTube ; vignettes ; R2 `6e/maths/perimetre/01-rectangle` et `02-defi` (7 fichiers chacun, `check` = 0 différence) ; `videos-r2.json` + `bilans-videos.json` ; coach : 4 vidéos + 2 alias `@aire_perimetre_carre`. Plan coché (carré, rectangle, défi).
 - Reste (à Frédéric) : regarder les deux shorts. Douteux notés par les sous-agents : le leurre C « 1,44 m » du short rectangle est une aire (voulu) ; la boîte cadeau du gag du défi est un peu décalée à gauche de Ti Margo.
+
+## ✅ AIRE 6e (A1-A4) — FINI le 15/11 (session « prod aire 6e » puis sa relève)
+Notes et outils : `N = side-session-notes/local_c6fb8250-5329-4da1-acb1-04e271d69053/` (fichiers du lot Aire : `ep-aire-<ep>.json` écrits par `ecrire_ep_aire6.py`, `entrees_aire6.py <ep>`, `dry-aire_<ep>.log`, `chaine.sh`, rapports `rapport-paysage-<ep>.md` / `rapport-short-<ep>.md`).
+- Commun `manim/scripts/6e/aire_6e_commun.py` (`PaysageAire6eG` ; amina, lena, yanis, theo), marques `aire_surface_marques.py <ep>`, scripts `aire_{rectangle,comparer,probleme,defi}.py`, miniatures `python manim/miniature_aire_6e.py <ep>`. Shorts : `prototypes/ti-margo/films/6e-aire*.js` (+ `6e-commun.js`, chargé pour toute série `6e-*`).
+- Sorties `manim/sorties/6e/maths/aire/0N-<ep>/`, R2 `6e/maths/aire/0N-<ep>/`. Tous les HD : `verifier-bords-video.py` = 0.
+| Ép. | id | Paysage | Questions | Short | Manifeste |
+|---|---|---|---|---|---|
+| A1 | `6e-aire-rectangle` (+ `aussi` `aire_carre`) | 3 min 32 | 01:09 A, 02:03 C | « Le tapis du vendeur » 68,7 s, Q 00:17 B | 08/04/2027 |
+| A2 | `6e-aire-comparer` | 3 min 51 | 01:16 B, 02:08 C | « La plus grande part » 66,3 s, Q 00:16 A | 09/04/2027 |
+| A3 | `6e-aire-probleme` | 3 min 31 | 00:56 B, 01:51 C | « Les pots de peinture » 69,7 s, Q 00:19 C | 10/04/2027 |
+| A4 | `6e-aire-defi` | 3 min 59 | 01:12 C, 02:12 B | « La pizza géante » 73,2 s, Q 00:18 A | 11/04/2027 |
+- Fiches YouTube, vignettes, R2 (check), `videos-r2.json` / `bilans-videos.json`, coach (`brancher-videos-coach.mjs --id … --ecrire`) faits pour les 8 vidéos. Plan coché (6E Aire : rectangle, carré, comparer, problème, défi).
+- ⚠️ Short comparer : le défi en commentaire est une ÉGALITÉ (8 × 8 = 16 × 4 = 64 cm²) : réponse attendue « les deux pareil » (voulu par la voix validée).
+- À valider par Frédéric (douteux mineurs) : A3 écran 02 écrit « A = longueur × hauteur » (la voix dit seulement « Son aire ») ; A4 question 1, choix C sur deux lignes ; A1 écran 02, lettres « L » / « l » serrées contre les cotes.
+- Retouches de la relève sur les planches : A2 « chambre » plus grand et « Mets pause » plus petit (il touchait Ti Margo) ; A3 « 5 × 15 » (le 15 collait au ×) ; A4 piège « (× 2) » / « (× 4) » entre parenthèses (« 28 m × 2 » se lisait comme un calcul).
+- Rien n'est poussé.

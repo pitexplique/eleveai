@@ -1,0 +1,68 @@
+# miniature_aire_6e.py
+# LES MINIATURES des PAYSAGES de la série AIRE de la 6e (lot A1-A4, 15/11/2026, copie de miniature_aire_cm2.py).
+# « COMPRENDRE X » + pastille « EN N MIN », la maths en gros, l'échelle des ceintures (celle de l'épisode).
+# Les miniatures des shorts viennent du film Ti Margo (window.tiMargoMiniature, mention « Dessin animé »).
+# Rangées À CÔTÉ DE LEUR VIDÉO : manim/sorties/6e/maths/aire/<NN-slug>/.
+# La durée « EN N MIN » est lue dans le mp4 : relancer après un re-rendu.
+#
+# Usage : python manim/miniature_aire_6e.py [filtre]   (« rectangle », « defi »…)
+
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from miniature import BLEU, ROUGE, VERT, police  # noqa: E402
+from miniature_angles import ajuste, minutes  # noqa: E402
+from miniature_essai_v2 import construire as construire_paysage  # noqa: E402
+from miniature_short_expression import echelle  # noqa: E402
+
+RACINE = Path(__file__).resolve().parents[1]
+SORTIES = RACINE / "manim" / "sorties"
+
+# slug, dossier, titre, haut, bas, le bas en vert ?, ceinture, (inutilisé)
+EP = [
+    ("rectangle", "01-rectangle", ["L'AIRE DU RECTANGLE", "ET DU CARRÉ"], "A = L × l",
+     "12 × 8 = 96 m²", True, "verte", (0, 0)),
+    ("comparer", "02-comparer", ["COMPARER", "DES AIRES"], "24 m² ou 25 m² ?",
+     "grand tour ≠ grande aire !", False, "verte", (0, 0)),
+    ("probleme", "03-probleme", ["RÉSOUDRE UN PROBLÈME", "D'AIRE"], "15 m² → 4 pots",
+     "on arrondit au-dessus !", True, "verte", (0, 0)),
+    ("defi", "04-defi", ["RÉSOUDRE UN DÉFI", "D'AIRES"], "côtés × 2 → aire × 4",
+     "pas × 2 !", False, "bleue", (0, 0)),
+]
+
+
+def accroche(haut, bas, vert, ceinture, cases, y0=352):
+    def f(d):
+        th = ajuste(d, haut, 92, 900)
+        tb = ajuste(d, bas, 58, 900)
+        d.text((56, y0), haut, font=police("ariblk.ttf", th), fill=BLEU)
+        d.text((60, y0 + th + 26), bas, font=police("ariblk.ttf", tb), fill=VERT if vert else ROUGE)
+        echelle(d, 690, 592, ceinture, s=0.5)
+    return f
+
+
+def main():
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    filtre = sys.argv[1] if len(sys.argv) > 1 else ""
+    for slug, rep, tit, haut, bas, vert, ceint, cases, *notion in EP:
+        notion = notion[0] if notion else "aire"
+        if filtre and filtre not in (slug, f"{notion}-{slug}"):
+            continue
+        if notion != "aire" and filtre == slug:  # « defi » seul = l'aire ; le périmètre se demande « perimetre-defi »
+            continue
+        rel = f"6e/maths/{notion}/{rep}"
+        nom = f"eleveai-maths-6e-{notion}-{slug}"
+        mp4 = SORTIES / rel / (nom + ".mp4")
+        if not mp4.exists():
+            print("pas encore de vidéo :", nom)
+            continue
+        construire_paysage(nom, {
+            "badge": "MATHS · 6e", "duree": f"EN {minutes(mp4)} MIN",
+            "titre": tit, "accroche": accroche(haut, bas, vert, ceint, cases), "dossier": rel,
+        })
+
+
+if __name__ == "__main__":
+    main()

@@ -3557,6 +3557,42 @@
   "youtube": null,
   "coach": "/coach/serie?classe=5e&matiere=maths&notion=stat_statistique&microId=stat_representer&display=simple"
  },
+ "6e-aire-comparer": {
+  "fichier": "6e/maths/aire/02-comparer/eleveai-maths-6e-aire-comparer.mp4",
+  "poster": "6e/maths/aire/02-comparer/eleveai-maths-6e-aire-comparer.png",
+  "vignette": "6e/maths/aire/02-comparer/eleveai-maths-6e-aire-comparer.vignette.webp",
+  "titre": "Comparer des aires : on calcule, on ne devine pas — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_surface&microId=aire_comparer&display=simple"
+ },
+ "6e-aire-comparer-short": {
+  "fichier": "6e/maths/aire/02-comparer/eleveai-maths-6e-aire-comparer-short.mp4",
+  "poster": "6e/maths/aire/02-comparer/eleveai-maths-6e-aire-comparer-short-miniature.png",
+  "vignette": "6e/maths/aire/02-comparer/eleveai-maths-6e-aire-comparer-short-miniature.vignette.webp",
+  "titre": "3 parts de gâteau : laquelle est la plus grande ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_surface&microId=aire_comparer&display=simple"
+ },
+ "6e-aire-defi": {
+  "fichier": "6e/maths/aire/04-defi/eleveai-maths-6e-aire-defi.mp4",
+  "poster": "6e/maths/aire/04-defi/eleveai-maths-6e-aire-defi.png",
+  "vignette": "6e/maths/aire/04-defi/eleveai-maths-6e-aire-defi.vignette.webp",
+  "titre": "Défi d'aire : doubler les côtés, l'aire × 4 — épisode 4 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_surface&microId=aire_defi&display=simple"
+ },
+ "6e-aire-defi-short": {
+  "fichier": "6e/maths/aire/04-defi/eleveai-maths-6e-aire-defi-short.mp4",
+  "poster": "6e/maths/aire/04-defi/eleveai-maths-6e-aire-defi-short-miniature.png",
+  "vignette": "6e/maths/aire/04-defi/eleveai-maths-6e-aire-defi-short-miniature.vignette.webp",
+  "titre": "Pizza de 40 cm à 16 € ou de 20 cm à 8 € ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_surface&microId=aire_defi&display=simple"
+ },
  "6e-aire-longueur-convertir-diagonale": {
   "fichier": "6e/maths/paysage/fr/aire-longueur-convertir/eleveai-maths-6e-aire-longueur-convertir-diagonale.mp4",
   "poster": "6e/maths/paysage/fr/aire-longueur-convertir/eleveai-maths-6e-aire-longueur-convertir-diagonale.png",
@@ -3610,6 +3646,42 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_rectangle&display=simple"
+ },
+ "6e-aire-probleme": {
+  "fichier": "6e/maths/aire/03-probleme/eleveai-maths-6e-aire-probleme.mp4",
+  "poster": "6e/maths/aire/03-probleme/eleveai-maths-6e-aire-probleme.png",
+  "vignette": "6e/maths/aire/03-probleme/eleveai-maths-6e-aire-probleme.vignette.webp",
+  "titre": "Problèmes d'aires : la surface, les pots, le prix — épisode 3 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_surface&microId=aire_probleme&display=simple"
+ },
+ "6e-aire-probleme-short": {
+  "fichier": "6e/maths/aire/03-probleme/eleveai-maths-6e-aire-probleme-short.mp4",
+  "poster": "6e/maths/aire/03-probleme/eleveai-maths-6e-aire-probleme-short-miniature.png",
+  "vignette": "6e/maths/aire/03-probleme/eleveai-maths-6e-aire-probleme-short-miniature.vignette.webp",
+  "titre": "Mur de 12 m², pots de 5 m² : 2 pots suffisent ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_surface&microId=aire_probleme&display=simple"
+ },
+ "6e-aire-rectangle": {
+  "fichier": "6e/maths/aire/01-rectangle/eleveai-maths-6e-aire-rectangle.mp4",
+  "poster": "6e/maths/aire/01-rectangle/eleveai-maths-6e-aire-rectangle.png",
+  "vignette": "6e/maths/aire/01-rectangle/eleveai-maths-6e-aire-rectangle.vignette.webp",
+  "titre": "L'aire du rectangle et du carré : A = L × l, A = c × c — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_surface&microId=aire_rectangle&display=simple"
+ },
+ "6e-aire-rectangle-short": {
+  "fichier": "6e/maths/aire/01-rectangle/eleveai-maths-6e-aire-rectangle-short.mp4",
+  "poster": "6e/maths/aire/01-rectangle/eleveai-maths-6e-aire-rectangle-short-miniature.png",
+  "vignette": "6e/maths/aire/01-rectangle/eleveai-maths-6e-aire-rectangle-short-miniature.vignette.webp",
+  "titre": "Tapis carré de 3 m : 9 m² ou 12 m² ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=aire_surface&microId=aire_rectangle&display=simple"
  },
  "6e-angle-comparer": {
   "fichier": "6e/maths/angles/03-comparer/eleveai-maths-6e-angle-comparer.mp4",

@@ -128,12 +128,12 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 - [x] Comprendre l’aire — `aire_comprendre` — ↪ vidéo CM2 `cm2-aire-comprendre` (+ short) par `aussi`, coach branché 15/11
 - [x] Calculer une aire par comptage — `aire_compter` — ↪ vidéo CM1 `cm1-aire-unite` (+ short) par `aussi`, coach branché 15/11
 - [x] Convertir des aires — `aire_convertir` — ↪ vidéo CM2 `cm2-aire-convertir-unites` (+ short) par `aussi`, coach branché 15/11
-- [ ] Calculer l’aire d’un rectangle — `aire_rectangle` — ⏳ 6e A1 « formules de l'aire » (Amina, jardinière, verte) : ✅ voix validée 15/11 (« Oui, valide les 12 »)
-- [ ] Calculer l’aire d’un carré — `aire_carre` — ↪ vidéo 6e A1 `6e-aire-rectangle` par `aussi` (à produire)
-- [ ] Comparer des aires — `aire_comparer` — ⏳ 6e A2 (Léna, agente immobilière, verte) : ✅ voix validée 15/11 (« Oui, valide les 12 »)
+- [x] Calculer l’aire d’un rectangle — `aire_rectangle` — ✅ 15/11 6e A1 `6e-aire-rectangle` (Amina, jardinière, verte) : paysage HD (3 min 32, bords 0) + short dessin animé « Le tapis du vendeur » (68,7 s), manifeste 08/04/2027, R2, coach
+- [x] Calculer l’aire d’un carré — `aire_carre` — ↪ vidéo 6e A1 `6e-aire-rectangle` par `aussi` (✅ 15/11, coach branché)
+- [x] Comparer des aires — `aire_comparer` — ✅ 15/11 6e A2 `6e-aire-comparer` (Léna, agente immobilière, verte) : paysage HD (3 min 51, bords 0) + short dessin animé « La plus grande part » (66,3 s), manifeste 09/04/2027, R2, coach
 - [x] Décomposer une figure pour calculer son aire — `aire_decomposer` — ↪ vidéo CM2 `cm2-aire-composer` (+ short) par `aussi`, coach branché 15/11
-- [ ] Résoudre des problèmes d’aires — `aire_probleme` — ⏳ 6e A3 (Yanis, maçon, verte) : ✅ voix validée 15/11 (« Oui, valide les 12 »)
-- [ ] Défis sur les aires — `aire_defi` — ⏳ 6e A4 (Théo, technicien en énergies renouvelables, bleue) : ✅ voix validée 15/11 (« Oui, valide les 12 »)
+- [x] Résoudre des problèmes d’aires — `aire_probleme` — ✅ 15/11 6e A3 `6e-aire-probleme` (Yanis, maçon, verte) : paysage HD (3 min 31, bords 0) + short dessin animé « Les pots de peinture » (69,7 s), manifeste 10/04/2027, R2, coach
+- [x] Défis sur les aires — `aire_defi` — ✅ 15/11 6e A4 `6e-aire-defi` (Théo, technicien en énergies renouvelables, bleue) : paysage HD (3 min 59, bords 0) + short dessin animé « La pizza géante » (73,2 s), manifeste 11/04/2027, R2, coach
 
 **Volume et contenance** (6)
 - [ ] Comprendre l’unité de volume — `volume_unite` — ⏳ 15/11 voix VALIDÉES `6e-volume-unite(-short)` (Mathis, maître-nageur)
