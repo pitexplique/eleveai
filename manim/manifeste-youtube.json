@@ -90625,6 +90625,158 @@
         "cuisine",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm2-solides-patron-construire",
+      "pas_avant": "2027-03-31",
+      "prioritaire": true,
+      "notionId": "solide",
+      "microId": "solide_patron_construire",
+      "classe": "cm2",
+      "ceinture": "verte",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/solides/05-patron-construire/eleveai-maths-cm2-solides-patron-construire.mp4",
+      "miniature": "cm2/maths/solides/05-patron-construire/eleveai-maths-cm2-solides-patron-construire.png",
+      "titre": "Patron de cube : où placer la dernière face ? — Construire un patron de cube — épisode 5 · Maths CM2",
+      "accroche": "Anna crée des lanternes en papier, en forme de cube. Elle dessine chaque patron sur une feuille quadrillée. Aujourd'hui, il lui manque une face. Où la mettre ?\n\nDans cette vidéo :\n• un patron de cube : 6 carrés pareils, et aucune face ne se retrouve sur une autre\n• la croix : 4 carrés en ligne (le tour) et 1 de chaque côté\n• il existe 11 patrons du cube ; dans une ligne de 3 carrés, le premier et le dernier sont face à face\n• le piège : 2 rangées de 3 carrés, ce n'est pas un patron de cube\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un dé en lanterne : 1 et 2 sur une ligne de 4 carrés, quels nombres sur le 3e et le 4e ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_patron_construire&display=simple\n\n🔢 Épisode 5 de la série Solides d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Où placer la dernière face ?"
+        ],
+        [
+          "00:21",
+          "6 carrés, sans superposition"
+        ],
+        [
+          "00:34",
+          "La croix"
+        ],
+        [
+          "00:49",
+          "11 patrons"
+        ],
+        [
+          "01:06",
+          "Question 1"
+        ],
+        [
+          "01:40",
+          "Le piège"
+        ],
+        [
+          "01:56",
+          "Question 2"
+        ],
+        [
+          "02:34",
+          "À toi de jouer"
+        ],
+        [
+          "02:57",
+          "Correction"
+        ],
+        [
+          "03:11",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "patron du cube",
+        "11 patrons",
+        "cube",
+        "dé",
+        "faces opposées",
+        "lanterne",
+        "pliage",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:06",
+          "question": "Dans une ligne de 4 carrés numérotés 1, 2, 3, 4, quelle face sera en face du 1 ?",
+          "choix": [
+            "le 2",
+            "le 3",
+            "le 4"
+          ],
+          "reponse": 1,
+          "explication": "Dans la ligne 1, 2, 3, le premier et le dernier sont face à face : le 1 est en face du 3. Et le 2 est en face du 4."
+        },
+        {
+          "t": "01:56",
+          "question": "Anna a 5 carrés en croix : 1 au milieu, et 1 sur chaque côté. Où peut-elle coller le 6e carré ?",
+          "choix": [
+            "au bout d'un bras de la croix",
+            "dans un coin, à côté d'un bras",
+            "nulle part : 5 carrés suffisent"
+          ],
+          "reponse": 0,
+          "explication": "Au bout d'un bras : on obtient la croix, 4 carrés en ligne et 1 de chaque côté. Le 6e carré ferme le dessus de la lanterne."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm2-solides-patron-construire-short",
+      "pas_avant": "2027-03-31",
+      "prioritaire": true,
+      "notionId": "solide",
+      "microId": "solide_patron_construire",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-solides-patron-construire",
+      "fichier": "cm2/maths/solides/05-patron-construire/eleveai-maths-cm2-solides-patron-construire-short.mp4",
+      "miniature": "cm2/maths/solides/05-patron-construire/eleveai-maths-cm2-solides-patron-construire-short-miniature.png",
+      "titre": "Mon dé en 2 rangées de 3 ne se ferme pas ! Pourquoi ? #maths #cm2",
+      "accroche": "Je découpe un patron pour fabriquer mon dé. 6 carrés : 3 en haut, 3 en bas. Je plie… Deux faces l'une sur l'autre, et un trou de chaque côté !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : sur un dé, le 1 est en face du 6. Qu'y a-t-il en face du 3 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_patron_construire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #solides #cm2 #primaire",
+      "tags": [
+        "patron du cube",
+        "dé",
+        "pliage",
+        "11 patrons",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Combien de patrons de cube différents existe-t-il ?",
+          "choix": [
+            "1 patron",
+            "11 patrons",
+            "6 patrons"
+          ],
+          "reponse": 1,
+          "explication": "Il en existe 11 ! La croix en est un. Mes 2 rangées de 3, non : ce n'est pas un patron de cube."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
     }
   ]
 }

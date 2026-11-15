@@ -16199,5 +16199,23 @@
   "short": false,
   "youtube": "ZZiXPXBTXIQ",
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=arithmetique_entiers&display=simple"
+ },
+ "cm2-solides-patron-construire": {
+  "fichier": "cm2/maths/solides/05-patron-construire/eleveai-maths-cm2-solides-patron-construire.mp4",
+  "poster": "cm2/maths/solides/05-patron-construire/eleveai-maths-cm2-solides-patron-construire.png",
+  "vignette": "cm2/maths/solides/05-patron-construire/eleveai-maths-cm2-solides-patron-construire.vignette.webp",
+  "titre": "Patron de cube : où placer la dernière face ? — Construire un patron de cube — épisode 5 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_patron_construire&display=simple"
+ },
+ "cm2-solides-patron-construire-short": {
+  "fichier": "cm2/maths/solides/05-patron-construire/eleveai-maths-cm2-solides-patron-construire-short.mp4",
+  "poster": "cm2/maths/solides/05-patron-construire/eleveai-maths-cm2-solides-patron-construire-short-miniature.png",
+  "vignette": "cm2/maths/solides/05-patron-construire/eleveai-maths-cm2-solides-patron-construire-short-miniature.vignette.webp",
+  "titre": "Mon dé en 2 rangées de 3 ne se ferme pas ! Pourquoi ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_patron_construire&display=simple"
  }
 }
