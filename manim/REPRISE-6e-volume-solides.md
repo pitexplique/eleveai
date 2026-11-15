@@ -25,7 +25,7 @@ Paysage en Manim, short en DESSIN ANIMÉ Ti Margo (6e < 4e). Voix validée À DE
 ⇒ 9 paysages + 9 shorts à produire ; 2 micros branchées par `aussi` seulement.
 ⛔ Les `aussi` vont dans `manim/manifeste-youtube.json`, qui a des modifs NON commitées d'autres sessions : ne rien y écrire tant qu'on n'est pas sûr de ne toucher qu'à nos entrées (relire juste avant, upsert de nos clés, vérifier le diff). Format (comme les solides CE2) : `"aussi": [{"classe": "6e", "notionId": "vision_espace", "microId": "vision_denombrer"}]` ajouté aux entrées `cm1-solides-defi(-short)` ; `{"classe": "6e", "notionId": "volume_solide", "microId": "volume_compter"}` aussi sur `cm1-solides-defi` ; `{"classe": "6e", "notionId": "vision_espace", "microId": "vision_representation"}` sur `cm1-solides-patron(-short)` ; `{"classe": "6e", "notionId": "volume_solide", "microId": "volume_lire"}` sur `6e-volume-unite(-short)`.
 
-## Les 18 voix (`manim/voix/6e-volume-*.json`, `6e-vision-*.json`) — ⏳ ÉCRITES le 15/11, EN ATTENTE DE VALIDATION
+## Les 18 voix (`manim/voix/6e-volume-*.json`, `6e-vision-*.json`) — ✅ VALIDÉES par Frédéric le 15/11/2026 (« Oui, valide les 18 »), ceintures comprises ; ⛔ ne plus les retoucher sans lui
 | Ép. | Micro | Fichiers | Métier (matrice) | Questions paysage | Short (réponse) | Ceinture (proposée) | Centres (proposés) |
 |---|---|---|---|---|---|---|---|
 | V1 | `volume_unite` (+ `volume_lire`) | `6e-volume-unite(-short)` | Mathis, maître-nageur (piscine 300 m³) | B, A | boîte à trésors de 20 cm³ = 20 cubes : C | jaune | natation, sport ; short jeux-defis |
@@ -43,7 +43,7 @@ Paysage en Manim, short en DESSIN ANIMÉ Ti Margo (6e < 4e). Voix validée À DE
 - Métiers : 6 pris dans `npx tsx scripts/metiers-pour-video.ts 6e volume_solide|vision_espace` (aucun n'était `V`) ; la matrice n'en avait que 6 pour 9 vidéos : 3 liens ajoutés le 15/11 dans `lib/matrice/metiers-college.ts` (`menuisier` F et `patissier` F à `volume_solide`, `designer-emballage` F à `vision_espace`). 5 filles, 4 garçons ; aucun prénom repris du CE2, du CM1 ou du CM2. ⏳ À la production : marquer `V` sur les 9 liens.
 - Clés : paysage `00-garde … 10-abonne` (11-abonne pour V1, V4, S4 ; 12-abonne pour S2, qui a un écran patron) ; short `00-accroche, 01-…, 02-question, 02b-reponse, 03-ouf, 04-commentaire, 05-abonne`.
 
-## Prochaine étape (après la validation de Frédéric)
+## Prochaine étape : production (voix validées le 15/11)
 UNE session de production, dans l'ordre V1 → V5 puis S1 → S4 :
 1. WAV (Julie, débit −6 : `scripts/generer-voix.ps1 -Fichier … -Debit -6`) dans `public/sons/6e-<ep>[-short]/` ; marques mot à mot (copie de `manim/scripts/cm2/aire_marques_cm2.py` adaptée aux noms `6e-volume-*` / `6e-vision-*` ; ⛔ jamais sans argument).
 2. Scripts `manim/scripts/6e/volume_<ep>.py` et `vision_<ep>.py` ; commun à écrire en réutilisant `manim/scripts/ce2/solides_ce2_commun.py` (`Solide` en cavalière, arêtes cachées en pointillés, `cube`, `pave`, `Patron`) ; identité « Maths 6e — EleveAI ». En tête : mapping micro → écrans et ceinture.

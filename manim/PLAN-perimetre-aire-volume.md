@@ -134,19 +134,19 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 - [ ] Défis sur les aires — `aire_defi` — ⏳ 6e A4 (Théo, technicien en énergies renouvelables, bleue) : ✅ voix validée 15/11 (« Oui, valide les 12 »)
 
 **Volume et contenance** (6)
-- [ ] Comprendre l’unité de volume — `volume_unite` — ⏳ 15/11 voix écrites `6e-volume-unite(-short)` (Mathis, maître-nageur), à valider
-- [ ] Compter des volumes — `volume_compter` — ⏳ 15/11 voix écrites `6e-volume-compter(-short)` (Yanis, logisticien), à valider ; + ↪ `cm1-solides-defi` par `aussi`
-- [ ] Comparer des volumes — `volume_comparer` — ⏳ 15/11 voix écrites `6e-volume-comparer(-short)` (Léna, ingénieure de l'eau), à valider
-- [ ] Assembler des volumes — `volume_assemblage` — ⏳ 15/11 voix écrites `6e-volume-assemblage(-short)` (Manon, menuisière), à valider
+- [ ] Comprendre l’unité de volume — `volume_unite` — ⏳ 15/11 voix VALIDÉES `6e-volume-unite(-short)` (Mathis, maître-nageur)
+- [ ] Compter des volumes — `volume_compter` — ⏳ 15/11 voix VALIDÉES `6e-volume-compter(-short)` (Yanis, logisticien) ; + ↪ `cm1-solides-defi` par `aussi`
+- [ ] Comparer des volumes — `volume_comparer` — ⏳ 15/11 voix VALIDÉES `6e-volume-comparer(-short)` (Léna, ingénieure de l'eau)
+- [ ] Assembler des volumes — `volume_assemblage` — ⏳ 15/11 voix VALIDÉES `6e-volume-assemblage(-short)` (Manon, menuisière)
 - [ ] Lire un volume — `volume_lire` — ↪ vidéo 6e `6e-volume-unite` par `aussi` (écran « Lire un volume » ; pas de vidéo à part)
-- [ ] Défis sur les volumes — `volume_defi` — ⏳ 15/11 voix écrites `6e-volume-defi(-short)` (Clara, pâtissière-chocolatière), à valider
+- [ ] Défis sur les volumes — `volume_defi` — ⏳ 15/11 voix VALIDÉES `6e-volume-defi(-short)` (Clara, pâtissière-chocolatière)
 
 **Solides et espace** (5)
-- [ ] Les quatre vues : dessus, face, gauche, droite — `vision_vues` — ⏳ 15/11 voix écrites `6e-vision-vues(-short)` (Samuel, architecte), à valider
+- [ ] Les quatre vues : dessus, face, gauche, droite — `vision_vues` — ⏳ 15/11 voix VALIDÉES `6e-vision-vues(-short)` (Samuel, architecte)
 - [ ] Compter les cubes d’un empilement, cachés compris — `vision_denombrer` — ↪ vidéo CM1 `cm1-solides-defi` par `aussi` (cubes cachés, étage par étage) ; pyramide 16 + 9 + 4 + 1 dans `6e-vision-defi`
-- [ ] Perspective cavalière, dessin à main levée, patron — `vision_representation` — ⏳ 15/11 voix écrites `6e-vision-representation(-short)` (Lina, animatrice 3D), à valider ; + ↪ `cm1-solides-patron` par `aussi` (patrons)
-- [ ] Construire le patron… — `patron_pave_dimensions` — ⏳ 15/11 voix écrites `6e-vision-patron-pave(-short)` (Jeanne, designer d'emballages), à valider
-- [ ] Défis : cubes cachés, cube peint puis découpé — `vision_defi` — ⏳ 15/11 voix écrites `6e-vision-defi(-short)` (Enzo, dessinateur-projeteur), à valider
+- [ ] Perspective cavalière, dessin à main levée, patron — `vision_representation` — ⏳ 15/11 voix VALIDÉES `6e-vision-representation(-short)` (Lina, animatrice 3D) ; + ↪ `cm1-solides-patron` par `aussi` (patrons)
+- [ ] Construire le patron… — `patron_pave_dimensions` — ⏳ 15/11 voix VALIDÉES `6e-vision-patron-pave(-short)` (Jeanne, designer d'emballages)
+- [ ] Défis : cubes cachés, cube peint puis découpé — `vision_defi` — ⏳ 15/11 voix VALIDÉES `6e-vision-defi(-short)` (Enzo, dessinateur-projeteur)
 
 **Longueurs et conversions** (6)
 - [x] Mesurer une longueur — `aire_longueur_mesurer` — ↪ vidéo CE2 `ce2-longueur-choisir-unite` (+ short) par `aussi` (la banque 6e fait choisir l'unité), coach branché 15/11
