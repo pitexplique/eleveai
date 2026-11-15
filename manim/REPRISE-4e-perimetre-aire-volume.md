@@ -126,9 +126,10 @@ tournée en 4e, id `4e-…`, et branchée sur la 3e par `aussi`.
 solides en 3e (`aire_prisme_droit`, `aire_cylindre`, `aire_pyramide_cone`,
 `aire_sphere`). En revanche `section_sphere` EST au programme français.
 
-⚠️ Écart plan / banque : la section `## 3E` du plan annonce `volume_pyramide` et
-`volume_cone` en 3e ; la banque 3e ne les a pas (elle a la réduction par section).
-Les vidéos 4e de pyramide et de cône couvriront la 3e le jour où ces micros existent.
+✅ `volume_pyramide` et `volume_cone` existent bien en 3e : la banque 3e importe
+`fabriquerPyramideCone` de la banque 4e (préfixe `3e_`), et les deux micros sont
+déclarés dans `knowledge/maths/3e/microSkills.ts`. Les vidéos 4e de pyramide et de
+cône servent donc les deux classes. Décompte exact : **4e = 30 micros, 3e = 33**.
 
 ## Ce que la 3e gagne sans aucun tournage
 
@@ -156,8 +157,8 @@ Vidéos tournées ici (4e), avec les micros qu'elles servent :
 | `4e-aire-probleme` | `aire_probleme` | — |
 | `4e-aire-defi` | `aire_defi` | `aire_defi` |
 | `4e-volume-lien-aire` | `volume_lien_aire` | — |
-| `4e-volume-pyramide` **(PILOTE)** | `volume_pyramide` | (quand la banque l'aura) |
-| `4e-volume-cone` | `volume_cone` | (idem) |
+| `4e-volume-pyramide` **(PILOTE)** | `volume_pyramide` | `volume_pyramide` |
+| `4e-volume-cone` | `volume_cone` | `volume_cone` |
 | `4e-volume-defi` | `volume_defi` | `volume_defi` |
 | `4e-solides-reconnaitre` | `vision_reconnaitre` | `volume_solide_reconnaitre` |
 | `4e-solides-vues` | `vision_vues` | — |
@@ -166,13 +167,23 @@ Vidéos tournées ici (4e), avec les micros qu'elles servent :
 | `4e-section-comprendre` | `vision_section` | `volume_section`, `section_reconnaitre` |
 | `4e-solides-defi` | `vision_defi` | `volume_geometrie_espace_defi` |
 
-19 paysages (+ 19 shorts Manim) couvrent les 30 micros de 4e et 12 micros de 3e.
+**20 paysages 4e** (+ 20 shorts Manim) couvrent les 30 micros de 4e et 18 de 3e.
 
-Restent **10 micros 3e purs**, à tourner en 3e (ce poste ou le 1er) :
-`volume_boule`, `volume_pyramide_cone_reduction`, `section_pave_cube`,
-`section_cylindre`, `section_cone_pyramide`, `section_sphere`,
-`section_calculer_longueur`, `section_defi`, et les deux défis si on les veut
-au niveau 3e plutôt que branchés depuis la 4e.
+Restent **8 micros 3e purs**, 8 paysages de plus : `volume_boule`,
+`volume_pyramide_cone_reduction`, `section_pave_cube`, `section_cylindre`,
+`section_cone_pyramide`, `section_sphere`, `section_calculer_longueur`,
+`section_defi`.
 
-⚠️ Le 1er poste doit faire la 3e après la 6e : à trancher avec Frédéric, pour que
-personne ne tourne deux fois les mêmes.
+## ✅ Décidé le 15/11 par Frédéric : « Fais la 3e aussi »
+
+**28 paysages + 28 shorts Manim** pour couvrir les 30 micros de 4e ET les 33 de 3e
+(9 micros de plus sont servis par la série 5e déjà tournée, 2 par deux vidéos 4e
+déjà en ligne). Voix dans `manim/poste2/VOIX-4e-3e-perimetre-aire-volume.md`.
+
+⚠️ À dire au 1er poste : il ne reste RIEN à tourner en 3e dans ces familles après
+cette série. Qu'il ne la reprenne pas.
+
+## Suivi (follow-up, hors série)
+
+La fiche `lib/fiches/maths-4e-volumes.tsx` n'a ni pyramide ni cône, alors que le
+coach les a depuis le 05/11. Les exemples du pilote viennent donc de la banque.
