@@ -69,7 +69,7 @@ les autres ». Les 4 shorts Aire sont refaits et contrôlés sur le MP4 : barre 
 ⚠️ Vérifier au début de la session suivante : `ls manim/sorties/5e/maths/aire/0*/` (chaque dossier : paysage + short + `_muet.mp4`),
 et `python scripts/verifier-bords-video.py` sur les deux HD relancés. Les MP4 et WAV sont ignorés par git (normal).
 
-## Volume et Conversions (15/11, après-midi) : ✅ LES 17 MICROS SONT RENDUS
+## Volume et Conversions (15/11, après-midi) : ✅ LES 17 MICROS SONT RENDUS — ✅ VALIDÉS par Frédéric le 15/11 (« Pas de retouche »)
 - 12 micros écrits par des sous-agents sur un cahier des charges commun
   (`…/side-session-notes/local_dbc3c6fd-…/brief-micro-5e-volume-conversions.md`, leçons comprises), puis HD + short ici,
   un à la fois sous verrou ; CHAQUE planche HD et CHAQUE compteur relus ; 2e HD pour V2, V3, V4, V5, V8 après retouches.
@@ -90,5 +90,5 @@ et `python scripts/verifier-bords-video.py` sur les deux HD relancés. Les MP4 e
 - À faire valider par Frédéric : quelques énoncés condensés pour tenir en 3 lignes (mots dits, mais pas tous) — V4, V5, V6, C4.
 
 ## Prochaine étape (session suivante)
-1. Retours de Frédéric sur l'aperçu → retouches éventuelles (HD par `manim/poste2/5e_hd.sh`, short par `5e_film.sh`).
+1. ✅ Aperçu validé sans retouche (15/11), énoncés condensés compris.
 2. Au 1er poste, après fusion : R2, `lib/videos/*.json`, manifeste partagé, coach (`coach-5e.md`).
