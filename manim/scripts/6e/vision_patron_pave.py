@@ -295,13 +295,14 @@ class VisionPatronPaveBase(PaysageVolume6e):
         self.bring_to_front(b1, b2)
         self.play(FadeOut(VGroup(b1, b2)), run_time=0.2)
         self.play(pa.plier(PLI, run_time=1.2))
+        self.wait(0.8)  # la boîte refermée reste à l'écran
         self.attendre_voix(marge=0.4)
 
     # ── 05 : QUESTION 1 (réponse B) ─────────────────────────────────────────
     def ecran_question1(self):
         self.clear()
         self.add_mascotte()
-        pa = PatronBoite(10, 4, 6, e=0.24, couleur=CARTON, plie=True).poser(P(-4.2, 1.65))
+        pa = PatronBoite(10, 4, 6, e=0.24, couleur=CARTON, plie=True).poser(P(-3.8, 1.65))
         d, c = pa.coins("dev"), pa.coins("c1")
         dv = (c[1] - c[0]) / np.linalg.norm(c[1] - c[0])
         nrm = np.array([dv[1], -dv[0], 0])
@@ -326,12 +327,14 @@ class VisionPatronPaveBase(PaysageVolume6e):
             sc.au_mot("Le dessus prend")
             sc.play(FadeIn(lg0), run_time=0.3)
             lg1 = sc.rep_bas(1, [("10 sur", VERT_OK), ("4.", VERT_OK)], fs=30, y0=-1.35, pas=0.6)
+            lg1[1].shift(LEFT * 0.09)  # une seule espace entre « sur » et le nombre
             sc.aux_extraits([VGroup(lg1[0], dessus), VGroup(lg1[1], et)], [("10 sur", 1), "4. La"])
             lg2 = sc.rep_bas(2, [("La hauteur ne se voit pas d'en haut.", VERT_OK)], fs=30, y0=-1.35, pas=0.6)
             sc.au_mot("La hauteur ne se voit")
             sc.play(FadeIn(lg2), Indicate(cotes[2], color=WHITE), run_time=0.35)
             lg3 = sc.rep_bas(3, [("10 sur", ORANGE_RETENUE), ("6, c'est le devant.", ORANGE_RETENUE)], fs=30,
                              y0=-1.35, pas=0.6)
+            lg3[1].shift(LEFT * 0.09)
             hors_audit(lg3[0])  # le 2e « 10 » de la clé
             sc.aux_extraits([lg3[0], VGroup(lg3[1], pa.contour_carre("dev", ORANGE_RETENUE, 7))],
                             [("10 sur", 2), "6, c'est"])
@@ -453,8 +456,10 @@ class VisionPatronPaveBase(PaysageVolume6e):
         for cs in cases:
             cs[1].move_to(cs[0])
         cases.arrange_in_grid(3, 2, buff=(0.25, 0.2)).move_to(P(3.3, 1.0))
-        self.play(FadeIn(q, shift=UP * 0.1), LaggedStart(*[FadeIn(cs, scale=0.8) for cs in cases], lag_ratio=0.1),
-                  run_time=0.7)
+        self.play(FadeIn(q[0], shift=UP * 0.1), run_time=0.3)
+        self.au_mot("6 faces")
+        self.play(FadeIn(q[1], shift=UP * 0.1), LaggedStart(*[FadeIn(cs, scale=0.8) for cs in cases], lag_ratio=0.1),
+                  run_time=0.6)
         self.au_mot("Mets pause")
         pz = self.t("Mets pause, et cherche !", 32, ORANGE_RETENUE).move_to(P(-1.6, -2.3))
         self.play(Write(pz), run_time=0.8)
@@ -463,12 +468,11 @@ class VisionPatronPaveBase(PaysageVolume6e):
     def ecran_correction(self):
         self.ecran("08b-correction", 0.65)
         tit = self.t("Correction", 50, JAUNE_TITRE).move_to(P(0, 3.25))
-        self.play(Write(tit), run_time=0.35)
         pa = PatronBoite(30, 20, 10, e=0.062, centre=P(-0.6, 0.75), couleur=CHAUSS)
         pa.angles.update(PLI)
         pa.maj()
         self.add(pa)
-        self.play(pa.plier(A_PLAT, run_time=1.0))
+        self.play(Write(tit, run_time=0.35), pa.plier(A_PLAT, run_time=0.75))
         # « a sur » puis « b », chacun à SON extrait ; un nombre déjà dit dans la clé : hors audit.
         rangs = [(("des", "sous"), ("30 sur", "20"), DESS_C, "Dessus et dessous :", "Le dessus et le dessous",
                   [("30 sur", 1), ("20.", 1)], ()),
@@ -487,23 +491,27 @@ class VisionPatronPaveBase(PaysageVolume6e):
             et = hors_audit(VGroup(*[pa.etiquette(n, f"{mes[0]} {mes[1]}", 20) for n in (n1, n2)]))
             self.au_mot(m0)
             recolorer(pa, {n1: col, n2: col})
-            self.play(FadeIn(t0, shift=UP * 0.1), Indicate(pa, color=col, scale_factor=1.01), run_time=0.35)
-            self.aux_extraits([t1[0], VGroup(t1[1], et)], mots)
+            for m in t0.get_family():  # posé au début de sa phrase : sinon il attend « derrière » et le nombre arrive tard
+                m.sans_synchro = True
+            self.play(FadeIn(t0, shift=UP * 0.1), Indicate(pa, color=col, scale_factor=1.01), run_time=0.25)
+            g2 = VGroup(t1[1], et)
+            g2._bloc = True  # sinon la synchro découpe les étiquettes « 30 sur 10 » en morceaux (« 30 sur ») : TARD
+            self.aux_extraits([t1[0], g2], mots)
             y -= 0.62
         self.au_mot("6 faces")
         g = self.ligne([("6 faces,", VERT_OK), ("3 paires.", VERT_OK)], 38, buff=0.25)
-        g.move_to(P(2.4, -2.05))
+        g.move_to(P(3.3, -1.8))
         self.aux_extraits(g, ["6 faces", "3 paires"])
         self.insister(g, 1.08, 0.25)
         self.attendre_voix()
 
     def ecran_finale(self):
         self.ecran("09-finale", 0.65)
-        pa = PatronBoite(20, 8, 30, e=0.042, couleurs=PAIRES)
+        pa = PatronBoite(20, 8, 30, e=0.06, couleurs=PAIRES)
         lignes = self.finale_gauche(pa, textes=[
             ("Le patron d'un pavé droit a", "6 rectangles, pareils deux par deux."),
             ("Chaque face prend deux", "des trois mesures."),
-            ("Deux faces qui se plient ensemble", "ont un bord de même longueur.")], fs=30, x_fig=-5.0, xl=-2.6)
+            ("Deux faces qui se plient ensemble", "ont un bord de même longueur.")], fs=30, x_fig=-4.6, xl=-2.6)
         pa.recaler()
         for f in lignes.get_family():
             f.sans_synchro = True
@@ -536,3 +544,4 @@ class VisionPatronPaveBase(PaysageVolume6e):
 class VisionPatronPave6e(VisionPatronPaveBase):
     identite = "Maths 6e — EleveAI"
     ceinture = "verte"
+
