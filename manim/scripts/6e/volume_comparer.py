@@ -288,8 +288,8 @@ class VolumeComparerBase(PaysageVolume6e):
         self.question_pause("05-question", "05b-reponse",
                             ["E : 2 couches de 6 cubes.", "F : 4 couches de 3 cubes.", "Lequel a le plus",
                              "grand volume ?"],
-                            [self.choix("le même volume"), self.choix("le solide E"),
-                             self.choix("le solide F (plus haut)")], 0,
+                            [self.choix("le même volume", fs=27), self.choix("le solide E", fs=27),
+                             self.choix("le solide F (plus haut)", fs=27)], 0,
                             ["E : 2 × 6 = 12 cubes.", "F : 4 × 3 = 12 cubes.", "Même volume !",
                              "F est plus haut, mais plus étroit."],
                             mot_q="Le solide E", avant_q=avant, autres_r=apres)
@@ -379,8 +379,8 @@ class VolumeComparerBase(PaysageVolume6e):
 
         self.question_pause("07-question", "07b-reponse",
                             ["Carton : 5 × 2 × 2", "Boîte : 3 × 3 × 3", "Lequel a le plus", "grand volume ?"],
-                            [self.choix("le carton (plus long)"), self.choix("ils sont égaux"),
-                             self.choix("la boîte")], 2,
+                            [self.choix("le carton (plus long)", fs=27), self.choix("ils sont égaux", fs=27),
+                             self.choix("la boîte", fs=27)], 2,
                             ["Carton : 5 × 2 = 10 ; 10 × 2 = 20 cubes.", "Boîte : 3 × 3 = 9 ; 9 × 3 = 27 cubes.",
                              "27 > 20 !"],
                             mot_q="Un carton fait", avant_q=avant, autres_r=apres)

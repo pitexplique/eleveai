@@ -84,3 +84,14 @@ UNE session de production, dans l'ordre V1 → V5 puis S1 → S4 :
 - ⏭ Ensuite : V4, V5, S1 → S4 (même chaîne), puis shorts, miniatures, passe (DATES 12/04 → 20/04/2027), fiches, R2, coach, plan, matrice.
 - Dates confirmées : 12/04 → 20/04/2027 (CM2 23/03 → 05/04, Périmètre 6e 06-07/04, Aire 6e 08 → 11/04).
 - Planches : `bash <outils>/planche.sh <dossier v6pl_…> "e01b.png e02b.png …" r` (2 × 3, tuiles 854 × 480).
+
+## Production (3e session, 15/11 matin, `local_4bc5a7db…`) — avancement et passation
+- Outil maison : `bash <notes local_4bc5a7db…>/hd2.sh <fichier> <Scene> <nom> <dossier>` = attend qu'AUCUN `manim render -qh` ne tourne (la session CM2 rend sans verrou !) puis `hd.sh` (verrou + 2,5 Go + bords).
+- ✅ V3 comparer : choix à fs 27 (la coche touchait) ; HD `volume/03-comparer/`, bords 0, relu.
+- ✅ V4 assemblage : TARD 06 (« bloc de 20 », « la niche : » puis « 6 cubes » à son extrait), RETARD 08b (calcul en 3 morceaux), 09 « Manon creuse… » (sans « Puis »), 04 étiquettes 18 / 12 cm³ écartées au collage ; HD `volume/04-assemblage/`, bords 0.
+- ✅ V5 defi : 02 « Deux couches » fs 30 + insister 1,06 ; 05b « Une couche : 5 × 2 = 10. » ; HD `volume/05-defi/`, bords 0.
+- ✅ Miniatures V1 → V5 + S1 (`python manim/miniature_volume_6e.py`), relues. ✅ `DATES` remplies dans `manim/passe_volume_6e.py` (12/04 → 20/04/2027).
+- ⏳ S1 vues : bug `c in (UL, DL)` corrigé ; 8 défauts de place corrigés (01, 02, 03, 04, 05b, 06, 08b, correction) ; `sans_synchro` sur les 2 lignes de 05b posées par au_mot ; choix de la question 2 sans « un/une » et à fs 23 (la carte de la bonne réponse rogne le texte à 0,6 du bord : sous fs 23 la coche touchait). HD relancé à 09:25 (tâche de fond de la session précédente) : ⏭ vérifier `vision-espace/01-vues/…mp4` (bords 0, image à 148,4 s : la coche ne touche plus), sinon relancer `hd2.sh vision_vues VisionVues6e eleveai-maths-6e-vision-vues manim/sorties/6e/maths/vision-espace/01-vues`.
+- ⏳ S2 representation : BORDS corrigés (03 l5 fs 28 ; 04 l3 fs 26 x 0,2 ; 06 l1-l3 fs 28 ; 07 l1, l4 fs 27), TARD 05-question corrigé (avant_q en un seul play 0,3 s). Un dry était en cours à la passation (attente RAM) : ⏭ relancer `dry.sh vision_representation VisionRepresentation6e` → 0 → -ql relu → HD.
+- ⏭ Puis S3, S4 (dry → -ql relu → HD), miniatures S2-S4, 9 shorts Ti Margo (`shorts.md`), passe (`temps`, `voir`, `manifeste`, `aussi`), fiches YouTube, R2, `generer-videos-r2.mjs` (nos clés seules), coach, plan coché, `V` sur les 9 liens. Leçon : choix longs → fs ≤ 25 dès l'écriture.
+- ⛔ Frédéric (15/11, via le chef d'orchestre) : « fait attention au compteur dans les shorts ». Avant TOUT film HD d'un short : le compteur du défi (chrono, compte à rebours, score) a des chiffres lisibles, ne chevauche rien, ne sort pas de l'écran, tombe juste et suit la voix, ne saute ni ne fige (le vérifier au contrôle image par image).

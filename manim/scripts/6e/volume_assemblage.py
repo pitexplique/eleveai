@@ -219,7 +219,8 @@ class VolumeAssemblageBase(PaysageVolume6e):
         v = coller_a(b, a.pp((3, 0, 0)))
         ens = self.t("Ensemble :", 36)
         gauche(ens, -5.6, -1.45)
-        self.play(b.animate.shift(v), lb.animate.shift(v), FadeIn(ens, shift=UP * 0.1), run_time=0.4)
+        self.play(b.animate.shift(v), lb.animate.shift(v + RIGHT * 0.45), la.animate.shift(LEFT * 0.45),
+                  FadeIn(ens, shift=UP * 0.1), run_time=0.4)
         self.calc([("18 cm³", VOL_C), ("+ 12 cm³", "#60a5fa"), ("= 30 cm³", VERT_OK)], ens.get_right()[0] + 0.25, -1.45,
                   ex=["18 plus", "12, 30", "30 centimètres cubes"], fs=40)
         tot = SurroundingRectangle(VGroup(a, b), color=VERT_OK, buff=0.12, stroke_width=5)
@@ -272,14 +273,14 @@ class VolumeAssemblageBase(PaysageVolume6e):
         self.au_mot("Manon creuse une niche")
         self.play(FadeIn(mp, shift=UP * 0.2), FadeIn(bloc, scale=0.7), run_time=0.4)
         lb = self.t("bloc de 20 cubes", 30).next_to(bloc, UP, buff=0.2)
-        self.au_mot("20 cubes")
+        self.au_mot("bloc de 20")
         self.play(FadeIn(lb, shift=DOWN * 0.1), run_time=0.3)
         niche = [(x, y, 0) for x in (1, 2, 3) for y in (0, 1)]
         self.au_mot("La niche prend")
         self.play(*[a for q in niche for a in recolorer(bloc.cubes[q], NICHE_C)], run_time=0.35)
-        ln = self.t("la niche : 6 cubes", 30, NICHE_C).move_to(P(-2.9, -0.45))
-        self.au_mot("6 cubes")
-        self.play(FadeIn(ln, shift=UP * 0.1), run_time=0.3)
+        ln = self.ligne([("la niche :", NICHE_C), ("6 cubes", NICHE_C)], 30, buff=0.14).move_to(P(-2.9, -0.45))
+        self.play(FadeIn(ln[0], shift=UP * 0.1), run_time=0.25)
+        self.aux_extraits(ln[1:], ["6 cubes"])
         self.au_mot("Il reste")
         trous = VGroup(*[bloc.fantome(q, JAUNE_TITRE, 3) for q in niche])
         ir = self.t("Il reste :", 34)
@@ -354,8 +355,8 @@ class VolumeAssemblageBase(PaysageVolume6e):
             sc.play(FadeIn(l0[0], shift=UP * 0.08), blocs[1].animate.shift(v1), blocs[2].animate.shift(v2),
                     FadeOut(labs), run_time=0.3)
             sc.aux_extraits(l0[1:], ["8 : 8"])
-            l1 = sc.rep_bas(1, ["8", "+ 8", "+ 8,", "ou 3", "× 8", "= 24 cm³."], fs=32, y0=-1.3, pas=0.6, buff=0.14)
-            sc.aux_extraits(l1, ["8 plus 8 plus", "8 plus 8, ou", "8, ou 3", "3 fois 8", "8, 24", "24 centimètres cubes"])
+            l1 = sc.rep_bas(1, ["8 + 8 + 8,", "ou 3 × 8", "= 24 cm³."], fs=32, y0=-1.3, pas=0.6, buff=0.14)
+            sc.aux_extraits(l1, ["8 plus 8 plus", "3 fois 8", "24 centimètres cubes"])
             l2 = sc.rep_bas(2, [("16, c'est seulement", ORANGE_RETENUE), ("2 blocs.", ORANGE_RETENUE)], fs=32,
                             y0=-1.3, pas=0.6, buff=0.16)
             sc.aux_extraits(l2[:1], ["16, c'est seulement"])
@@ -414,7 +415,7 @@ class VolumeAssemblageBase(PaysageVolume6e):
         gauche(l2b, x, 0.35)
         self.play(FadeIn(l2b, shift=UP * 0.1), run_time=0.25)
         self.au_mot("Puis Manon creuse")
-        l3 = self.ligne([("Puis Manon creuse une niche de", WHITE), ("2 cubes.", NICHE_C)], 30, buff=0.14)
+        l3 = self.ligne([("Manon creuse une niche de", WHITE), ("2 cubes.", NICHE_C)], 30, buff=0.14)
         gauche(l3, x, -0.35)
         self.play(FadeIn(l3[0], shift=UP * 0.1), *[a for q in self.NICHE for a in recolorer(grand.cubes[q], NICHE_C)],
                   run_time=0.35)

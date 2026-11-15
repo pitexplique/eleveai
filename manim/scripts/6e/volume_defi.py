@@ -139,18 +139,18 @@ class VolumeDefiBase(PaysageVolume6e):
                           ["4 chocolats de long", "3 de large", "2 de haut"])
         k0, k1 = couche(ref, 4, 3, 0), couche(ref, 4, 3, 1)
         self.au_mot("Une couche")
-        u = self.t("Une couche :", 32, COUCHE_C)
+        u = self.t("Une couche :", 30, COUCHE_C)
         gauche(u, x, 1.0)
         self.poser(k0, run_time=0.4, lag=0.03, avec=[FadeIn(u, shift=UP * 0.1)])
         self.calc([("4", BLEU_D), ("× 3", BLEU_D), ("= 12 chocolats.", BLEU_D)], u.get_right()[0] + 0.2, 1.0,
                   ex=["4 fois 3", "3, 12", "12 chocolats. Deux"])
         self.au_mot("Deux couches")
-        d = self.t("Deux couches :", 32, COUCHE_C)
+        d = self.t("Deux couches :", 30, COUCHE_C)
         gauche(d, x, 0.1)
         self.poser(k1, run_time=0.4, lag=0.03, avec=[FadeIn(d, shift=UP * 0.1)])
         lg = self.calc([("12", BLEU_D), ("× 2", BLEU_D), ("= 24 chocolats.", VERT_OK)], d.get_right()[0] + 0.2, 0.1,
                        ex=["12 fois 2", "2, 24", "24 chocolats"])
-        self.insister(lg[2], 1.15, 0.25)
+        self.insister(lg[2], 1.06, 0.25)
         self.attendre_voix()
 
     # ── 03 : ce qui manque ──────────────────────────────────────────────────
@@ -245,7 +245,7 @@ class VolumeDefiBase(PaysageVolume6e):
             sc.play(FadeIn(k[0], shift=UP * 0.2), FadeIn(c1), FadeIn(c2), run_time=0.35)
 
         def apres(sc):
-            l0 = sc.rep_bas(0, [("Une couche :", COUCHE_C), "5", "× 2", "= 10 chocolats."], fs=32, y0=-1.3, pas=0.58,
+            l0 = sc.rep_bas(0, [("Une couche :", COUCHE_C), "5", "× 2", "= 10."], fs=32, y0=-1.3, pas=0.58,
                             buff=0.15)
             sc.au_mot("Une couche")
             sc.play(FadeIn(l0[0], shift=UP * 0.08), Indicate(k[0], color="#fbbf24", scale_factor=1.05), run_time=0.3)

@@ -293,7 +293,7 @@ class VisionRepresentationBase(PaysageVolume6e):
         self.play(Rotate(vraie, angle=A_CAV, about_point=cr.D), run_time=0.7)
         self.play(Indicate(cr.biais[3], color=BIAIS_C, scale_factor=1.0), run_time=0.4)
         self.au_mot("c'est ce qui donne l'impression de profondeur")
-        l5 = self.t("l'impression de profondeur !", 32, VERT_OK)
+        l5 = self.t("l'impression de profondeur !", 28, VERT_OK)
         gauche(l5, 0.4, -1.45)
         self.play(FadeIn(l5, scale=1.1), FadeOut(vraie), run_time=0.4)
         self.attendre_voix()
@@ -322,8 +322,8 @@ class VisionRepresentationBase(PaysageVolume6e):
         self.play(FadeIn(l2, shift=UP * 0.1), *[FadeOut(t) for t in trio], *[Create(p) for p in pts],
                   run_time=0.7)
         self.au_mot("Pour un cube")
-        l3 = self.ligne([("Pour un cube :", WHITE), ("3 arêtes cachées.", VERT_OK)], 30, buff=0.2)
-        gauche(l3, 0.4, 0.2)
+        l3 = self.ligne([("Pour un cube :", WHITE), ("3 arêtes cachées.", VERT_OK)], 26, buff=0.2)
+        gauche(l3, 0.2, 0.2)
         self.play(FadeIn(l3, shift=UP * 0.1), run_time=0.35)
         self.play(LaggedStart(*[Indicate(p, color=CACHE_C, scale_factor=1.15) for p in pts], lag_ratio=0.3),
                   run_time=0.9)
@@ -339,8 +339,7 @@ class VisionRepresentationBase(PaysageVolume6e):
         muet(doute)
 
         def avant(sc):
-            sc.play(FadeIn(f, scale=0.9), FadeIn(vus), run_time=0.5)
-            sc.play(FadeIn(doute, scale=1.4), run_time=0.25)
+            sc.play(FadeIn(f, scale=0.9), FadeIn(vus), FadeIn(doute, scale=1.4), run_time=0.3)
 
         def apres(sc):
             pts = cr.caches()
@@ -376,14 +375,14 @@ class VisionRepresentationBase(PaysageVolume6e):
         tit = self.lg("Pour un pavé droit", 2.9, 38, JAUNE_TITRE)
         self.play(Write(tit), run_time=0.45)
         self.au_mot("La face avant est un vrai rectangle")
-        l1 = self.lg("face avant : un vrai rectangle,", 1.95, 30)
+        l1 = self.lg("face avant : un vrai rectangle,", 1.95, 28)
         self.play(FadeIn(l1, shift=UP * 0.1), Create(cr.face), run_time=0.6)
         self.au_mot("Les traits en biais sont parallèles")
-        l2 = self.lg("traits en biais : parallèles", 1.35, 30, BIAIS_C)
+        l2 = self.lg("traits en biais : parallèles", 1.35, 28, BIAIS_C)
         self.play(FadeIn(l2, shift=UP * 0.1), LaggedStart(*[Create(b) for b in cr.biais], lag_ratio=0.2),
                   run_time=0.9)
         self.au_mot("et de même longueur")
-        l3 = self.lg("et de même longueur.", 0.8, 30, BIAIS_C)
+        l3 = self.lg("et de même longueur.", 0.8, 28, BIAIS_C)
         pts = cr.caches()
         self.play(FadeIn(l3, shift=UP * 0.1), Create(cr.fond_vu), FadeOut(cr.biais[0]),
                   *[Create(p) for p in pts], run_time=0.7)
@@ -411,7 +410,7 @@ class VisionRepresentationBase(PaysageVolume6e):
         tit = self.lg("Attention au piège !", 2.9, 40, ROUGE_ERREUR)
         self.play(Write(tit), run_time=0.4)
         self.au_mot("toutes les faces ne gardent pas")
-        l1 = self.bloc(["Toutes les faces ne gardent pas", "leur vraie forme."], 30)
+        l1 = self.bloc(["Toutes les faces ne gardent pas", "leur vraie forme."], 27)
         gauche(l1, 0.4, 1.85)
         self.play(FadeIn(l1, shift=UP * 0.1), run_time=0.4)
         vraies = VGroup(cr.poly("arriere", JUSTE_C, 0.3), cr.poly("avant", JUSTE_C, 0.45))
@@ -427,7 +426,7 @@ class VisionRepresentationBase(PaysageVolume6e):
         l3 = self.lg("Côté et dessus : penchées.", 0.1, 30, PENCHE_C)
         self.play(FadeIn(l3, shift=UP * 0.1), FadeOut(vraies), FadeIn(penchees), run_time=0.45)
         self.au_mot("on ne mesure pas leurs angles")
-        l4 = self.bloc(["On ne mesure pas leurs angles", "sur le dessin."], 30, ORANGE_RETENUE)
+        l4 = self.bloc(["On ne mesure pas leurs angles", "sur le dessin."], 27, ORANGE_RETENUE)
         gauche(l4, 0.4, -0.95)
         arc = Arc(radius=0.5, start_angle=0, angle=A_CAV, arc_center=cr.D, color=ROUGE_ERREUR, stroke_width=6)
         dr = VMobject(stroke_color=ROUGE_ERREUR, stroke_width=4).set_points_as_corners(

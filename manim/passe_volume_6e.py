@@ -36,17 +36,17 @@ NOTIONS = {
     "vision": dict(notion="vision_espace", rep="vision-espace", serie="Solides et espace", hashtag="#solides"),
 }
 
-# ⏳ Les dates `pas_avant` : la session mère les remplit (1 paysage + son short par jour, après les séries en cours).
+# Dates `pas_avant` confirmées le 15/11 : 1 paysage + son short par jour, après l'Aire 6e (08 → 11/04/2027).
 DATES = {
-    "6e-volume-unite": None,
-    "6e-volume-compter": None,
-    "6e-volume-comparer": None,
-    "6e-volume-assemblage": None,
-    "6e-volume-defi": None,
-    "6e-vision-vues": None,
-    "6e-vision-representation": None,
-    "6e-vision-patron-pave": None,
-    "6e-vision-defi": None,
+    "6e-volume-unite": "2027-04-12",
+    "6e-volume-compter": "2027-04-13",
+    "6e-volume-comparer": "2027-04-14",
+    "6e-volume-assemblage": "2027-04-15",
+    "6e-volume-defi": "2027-04-16",
+    "6e-vision-vues": "2027-04-17",
+    "6e-vision-representation": "2027-04-18",
+    "6e-vision-patron-pave": "2027-04-19",
+    "6e-vision-defi": "2027-04-20",
 }
 
 # Les `aussi` de nos entrées (micro 6e sans vidéo à elle).
