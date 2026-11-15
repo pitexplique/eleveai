@@ -1,2416 +1,1097 @@
-// lib/tutor-v4/question-banks/maths/cm2/symetrie.bank.ts
+// lib/tutor-v4/questionBank/cm2/maths/symetrie.bank.ts
+//
+// LA SYMÉTRIE AXIALE du CM2 : cinq micros (axe, compléter, construire,
+// propriétés, défi). Vocabulaire de la vidéo CM2 (`manim/scripts/cm2/symetrie.py`)
+// et du cycle 3 : l'axe = un miroir, le reflet, plier, se superposer, reporter
+// carreau par carreau, de l'autre côté, à la même distance.
+//
+// ⭐ 15/11/2026 — GÉNÉRATEURS ET DESSINS, sur le modèle du jumeau CM1 (commit
+// f4ac8236). Avant : 15 à 20 squelettes par micro, 9 à 18 répétitions sur 20,
+// des questions « open » (retirées par `applyMathsKeyboardFree`), des QCM
+// « oui / non » figés et 5 contextes réunionnais sur ~90. Maintenant chaque
+// gabarit tire une SITUATION (logo, vitrail, grille de portail, papier peint…
+// et le métier de qui dessine) × une TOURNURE, et pose sa figure : quadrillage
+// (`transformation`) ou figure usuelle avec ses axes (`construction`).
+// ⭐ Le niveau CM2, au-delà du CM1 :
+//  - les axes des FIGURES USUELLES : carré 4, rectangle 2, losange 2, triangle
+//    équilatéral 3, triangle isocèle 1, trapèze isocèle 1, parallélogramme 0,
+//    cercle une infinité (hexagone régulier 6 en défi) ;
+//  - compléter avec un axe vertical, horizontal OU OBLIQUE (on compte en
+//    suivant les diagonales des carreaux) ;
+//  - les propriétés : même distance à l'axe, segment [point, symétrique]
+//    PERPENDICULAIRE à l'axe et coupé en son MILIEU, longueurs, angles et aires
+//    conservés (en cm, décimaux à ★4-★5).
+// ⛔ Les leurres = vraies erreurs : la figure qui GLISSE, les carreaux comptés
+// depuis le BORD, la figure retournée dans le mauvais sens, l'axe oblique traité
+// comme un axe vertical, le rectangle « à 4 axes », le losange « à 4 axes »,
+// le parallélogramme « à 2 axes », le cercle « à 2 axes », le périmètre doublé.
+// ⛔ CM2 = zéro clavier : que des QCM de 3 ou 4 choix.
+// Les outils : ./symetrie-outils.ts (qui reprend ceux du CM1).
 
-import type {
-  TutorBankItemV4,
-  TransformationCanvasData,
-} from "@/lib/tutor-v4/types";
-import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
+import type { DifficultyLevel, TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
+import { atelier, fr, qcm, qcmN } from "../../cm1/maths/trous-outils";
+import {
+  LIEUX, MEME, OPPOSE, USUELLES, VERDICT, VERDICT_OBLIQUE,
+  aire, boite, bouge, cadre, candidat, candidatOblique, cap, car, defiDebut, dessin, dessinUsuelle, entre,
+  figureAsym, nbAxes, norm, ouverture, perso, placer, placerOblique, un, unPoint, unPointOblique,
+  type Axe, type Cote, type Pt, type Usuelle, type Verdict, type VerdictOblique,
+} from "./symetrie-outils";
 
-function randomChoice<T>(arr: T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)];
+type Gen = TutorGeneratedQuestionV4;
+
+const court = (methode: string, conclusion: string) => `Méthode : ${methode}\n\nConclusion : ${conclusion}`;
+
+const H_AXE = "Compte les carreaux depuis l'axe, pas depuis le bord de la feuille.";
+
+/* ═════════════════ petites briques ═════════════════ */
+
+const estVertical = (c: Cote) => c === "gauche" || c === "droite";
+
+/** « 3 carreaux à droite de l'axe ». */
+const ou = (n: number, c: Cote, meme = false) => `${car(n)} ${meme ? MEME[c] : OPPOSE[c]}`;
+
+/** QCM de carreaux : leurres distincts, voisins s'il en manque. */
+function qcmC(juste: number, faux: number[]) {
+  const vals: number[] = [];
+  for (const v of faux) if (v > 0 && v !== juste && !vals.includes(v)) vals.push(v);
+  for (let k = 1; vals.length < 3 && k < 10; k++) for (const v of [juste + k, juste - k]) if (v > 0 && !vals.includes(v) && vals.length < 3) vals.push(v);
+  return qcm(car(juste), vals.map(car));
 }
 
-function shuffle<T>(arr: T[]): T[] {
-  return melangeEnPlace([...arr]);
+/** Les lettres capitales : leurs axes. */
+const L_V = ["A", "M", "T", "U", "V", "W", "Y"];
+const L_H = ["B", "C", "D", "E", "K"];
+const L_2 = ["H", "I", "O", "X"];
+const L_0 = ["F", "G", "J", "L", "N", "P", "R", "S", "Z"];
+
+/** Une figure symétrique sur quadrillage (pour « la ligne verte est-elle un axe ? »). */
+type SymQ = { nom: string; pts: Pt[]; v?: number; h?: number; diag?: boolean };
+const PQ = (...xy: number[]): Pt[] => { const r: Pt[] = []; for (let i = 0; i < xy.length; i += 2) r.push({ x: xy[i], y: xy[i + 1] }); return r; };
+const SYMS_Q: readonly SymQ[] = [
+  { nom: "une maison", pts: PQ(0, 2, 2, 0, 4, 2, 4, 5, 0, 5), v: 2 },
+  { nom: "une flèche", pts: PQ(2, 0, 4, 2, 3, 2, 3, 5, 1, 5, 1, 2, 0, 2), v: 2 },
+  { nom: "un sapin", pts: PQ(2, 0, 4, 3, 3, 3, 3, 5, 1, 5, 1, 3, 0, 3), v: 2 },
+  { nom: "une couronne", pts: PQ(0, 0, 1, 2, 2, 0, 3, 2, 4, 0, 4, 3, 0, 3), v: 2 },
+  { nom: "une fusée", pts: PQ(2, 0, 3, 2, 3, 4, 4, 5, 0, 5, 1, 4, 1, 2), v: 2 },
+  { nom: "un nœud papillon", pts: PQ(0, 0, 2, 1, 4, 0, 4, 4, 2, 3, 0, 4), v: 2, h: 2 },
+  { nom: "un rectangle", pts: PQ(0, 0, 6, 0, 6, 2, 0, 2), v: 3, h: 1 },
+  { nom: "un carré", pts: PQ(0, 0, 4, 0, 4, 4, 0, 4), v: 2, h: 2, diag: true },
+  { nom: "une croix", pts: PQ(2, 0, 4, 0, 4, 2, 6, 2, 6, 4, 4, 4, 4, 6, 2, 6, 2, 4, 0, 4, 0, 2, 2, 2), v: 3, h: 3, diag: true },
+  { nom: "la lettre H", pts: PQ(0, 0, 1, 0, 1, 2, 3, 2, 3, 0, 4, 0, 4, 6, 3, 6, 3, 4, 1, 4, 1, 6, 0, 6), v: 2, h: 3 },
+  { nom: "la lettre T", pts: PQ(0, 0, 4, 0, 4, 1, 3, 1, 3, 5, 1, 5, 1, 1, 0, 1), v: 2 },
+  { nom: "la lettre C", pts: PQ(0, 0, 3, 0, 3, 1, 1, 1, 1, 3, 3, 3, 3, 4, 0, 4), h: 2 },
+  { nom: "un trapèze", pts: PQ(0, 3, 1, 0, 3, 0, 4, 3), v: 2 },
+  { nom: "un écusson", pts: PQ(0, 0, 4, 0, 4, 3, 2, 5, 0, 3), v: 2 },
+];
+
+function poserQ(s: SymQ) {
+  const pts = bouge(norm(s.pts), 1, 1);
+  const b = boite(pts);
+  return { pts, b, cols: b.x1 + 1, rows: b.y1 + 1 };
 }
 
-// La bonne réponse ne doit JAMAIS sauter au découpage : on la met de côté, on
-// tire trois distracteurs distincts, puis on mélange l'ensemble.
-function makeChoices(correct: string, wrongs: readonly string[]) {
-  const distracteurs = shuffle(
-    Array.from(new Set(wrongs)).filter((w) => w !== correct),
-  ).slice(0, 3);
-  return shuffle([correct, ...distracteurs]);
+/** Les axes vrais d'une figure posée, et des lignes fausses plausibles. */
+function lignesQ(s: SymQ, pts: Pt[]) {
+  const b = boite(pts);
+  const vrais: Axe[] = [];
+  const faux: Axe[] = [];
+  if (s.v !== undefined) {
+    vrais.push({ type: "vertical", x: 1 + s.v });
+    if (1 + s.v + 1 < b.x1) faux.push({ type: "vertical", x: 1 + s.v + 1 });
+    if (1 + s.v - 1 > b.x0) faux.push({ type: "vertical", x: 1 + s.v - 1 });
+  } else faux.push({ type: "vertical", x: (b.x0 + b.x1) / 2 });
+  if (s.h !== undefined) {
+    vrais.push({ type: "horizontal", y: 1 + s.h });
+    if (1 + s.h + 1 < b.y1) faux.push({ type: "horizontal", y: 1 + s.h + 1 });
+  } else faux.push({ type: "horizontal", y: Math.round((b.y0 + b.y1) / 2) + 0.5 });
+  const d1: Axe = { type: "line", from: { x: b.x0, y: b.y0 }, to: { x: b.x1, y: b.y1 } };
+  const d2: Axe = { type: "line", from: { x: b.x1, y: b.y0 }, to: { x: b.x0, y: b.y1 } };
+  if (s.diag) vrais.push(d1, d2);
+  else if (s.nom === "un rectangle") faux.push(d1);
+  return { vrais, faux };
 }
 
-function transformationCanvas(
-  data: Omit<TransformationCanvasData, "kind">
-): TransformationCanvasData {
-  return { kind: "transformation", ...data };
+const fem = (nom: string) => /^une |^la /.test(nom);
+
+/* ═════════════════ fabricants ═════════════════ */
+
+const A = {
+  construire: atelier("cm2", "symetrie", "symetrie_construire", "cm2_"),
+  axe: atelier("cm2", "symetrie", "symetrie_axe", "cm2_"),
+  completer: atelier("cm2", "symetrie", "symetrie_completer", "cm2_"),
+  propriete: atelier("cm2", "symetrie", "symetrie_propriete", "cm2_"),
+  defi: atelier("cm2", "symetrie", "symetrie_defi", "cm2_"),
+};
+
+/* ═════════════════ construire : un point, un sommet ═════════════════ */
+
+/** Le point bleu à d carreaux : où va son symétrique ? */
+function genPointOu(debut: () => string = ouverture): Gen {
+  const d = entre(1, 6);
+  const u = unPoint(d);
+  const juste = ou(d, u.cote);
+  return {
+    text: `${debut()} ${un(["Le point bleu est à", "Le point bleu se trouve à", "Le point bleu est placé à"])} ${ou(d, u.cote, true)}. ${un([
+      "Où places-tu son symétrique ?",
+      "Où sera son symétrique ?",
+      "Où faut-il dessiner son symétrique ?",
+      "Où se trouve son reflet dans le miroir de l'axe ?",
+    ])}`,
+    ...qcm(juste, [ou(d, u.cote, true), ou(2 * d, u.cote), ou(d + 1, u.cote), "sur l'axe"]),
+    explanation: court(`Le symétrique est de l'autre côté de l'axe, à la même distance : ${car(d)}.`, `Il est à ${juste}.`),
+    canvas: dessin({ cols: u.cols, rows: u.rows, source: [u.p], axe: u.axe }),
+  };
 }
 
-// ============================================================
-// HELPERS CANVAS
-// ============================================================
-
-function symVerticalOui(): TransformationCanvasData {
-  return transformationCanvas({
-    transformation: "symetrie_axiale",
-    grid: { rows: 8, cols: 8 },
-    source: {
-      label: "F",
-      points: [
-        { x: 1, y: 2 },
-        { x: 3, y: 2 },
-        { x: 2, y: 4 },
-      ],
-    },
-    image: {
-      label: "F'",
-      points: [
-        { x: 7, y: 2 },
-        { x: 5, y: 2 },
-        { x: 6, y: 4 },
-      ],
-    },
-    axis: { type: "vertical", x: 4, label: "axe" },
-  });
+/** Le symétrique du sommet le plus éloigné ou le plus proche, piège du bord. */
+function genSommet(moitie = false): Gen {
+  const f = figureAsym();
+  const d = moitie ? 0 : entre(1, 3);
+  const pl = placer(f, d);
+  const loin = moitie || Math.random() < 0.6;
+  const D = loin ? pl.dMax : pl.dMin;
+  const bord = loin ? pl.dBord : pl.dBord + (pl.dMax - pl.dMin);
+  const juste = ou(D, pl.cote);
+  const qui = loin ? "le plus éloigné de l'axe" : "le plus proche de l'axe";
+  const debut = moitie
+    ? `${ouverture()} ${un(["La moitié bleue est tracée contre l'axe.", "Une moitié est déjà dessinée en bleu.", "On a déjà tracé la moitié bleue."])}`
+    : `${ouverture()} ${un(["Il faut construire le symétrique de la figure bleue.", "On construit le symétrique de la figure bleue.", "Tu reportes la figure bleue carreau par carreau."])}`;
+  return {
+    text: `${debut} ${un([`Où va le symétrique du sommet ${qui} ?`, `Où places-tu le symétrique du sommet ${qui} ?`, `Le sommet ${qui} : où sera son symétrique ?`])}`,
+    ...qcm(juste, [ou(D, pl.cote, true), ou(bord, pl.cote), ou(2 * D, pl.cote), ou(D + 1, pl.cote)]),
+    explanation: court(`On compte les carreaux entre ce sommet et l'axe (pas depuis le bord) : ${car(D)}. On reporte la même distance de l'autre côté.`, `Son symétrique est à ${juste}.`),
+    canvas: dessin({ cols: pl.cols, rows: pl.rows, source: pl.source, axe: pl.axe }),
+  };
 }
 
-function symHorizontalOui(): TransformationCanvasData {
-  return transformationCanvas({
-    transformation: "symetrie_axiale",
-    grid: { rows: 8, cols: 8 },
-    source: {
-      label: "F",
-      points: [
-        { x: 2, y: 1 },
-        { x: 5, y: 1 },
-        { x: 3, y: 3 },
-      ],
-    },
-    image: {
-      label: "F'",
-      points: [
-        { x: 2, y: 7 },
-        { x: 5, y: 7 },
-        { x: 3, y: 5 },
-      ],
-    },
-    axis: { type: "horizontal", y: 4, label: "axe" },
-  });
+/** Combien de carreaux entre un point et son symétrique ? */
+function genSepare(): Gen {
+  const d = entre(1, 6);
+  const u = unPoint(d);
+  return {
+    text: `${ouverture()} ${un(["Le point bleu est à", "Le point bleu se trouve à"])} ${car(d)} de l'axe. ${un([
+      "Combien de carreaux sépareront ce point et son symétrique ?",
+      "Quelle distance y aura-t-il entre ce point et son symétrique ?",
+      "Combien de carreaux y aura-t-il entre le point et son reflet ?",
+    ])}`,
+    ...qcmC(2 * d, [d, 2 * d + 2, d + 1, 2 * d - 1]),
+    explanation: court(`${car(d)} jusqu'à l'axe, puis encore ${car(d)} de l'autre côté : ${d} + ${d} = ${2 * d}.`, `${cap(car(2 * d))}.`),
+    canvas: dessin({ cols: u.cols, rows: u.rows, source: [u.p], axe: u.axe }),
+  };
 }
 
-function symVerticalNon(): TransformationCanvasData {
-  return transformationCanvas({
-    transformation: "symetrie_axiale",
-    grid: { rows: 8, cols: 8 },
-    source: {
-      label: "F",
-      points: [
-        { x: 1, y: 2 },
-        { x: 3, y: 2 },
-        { x: 2, y: 4 },
-      ],
-    },
-    image: {
-      label: "F'",
-      points: [
-        { x: 7, y: 2 },
-        { x: 5, y: 2 },
-        { x: 5, y: 4 },
-      ],
-    },
-    axis: { type: "vertical", x: 4, label: "axe" },
-  });
+/** La méthode à l'équerre : la perpendiculaire à l'axe. */
+function genEquerre(): Gen {
+  const d = entre(1, 5);
+  const u = unPoint(d);
+  const p = perso();
+  const etape = un([
+    { q: "Quelle est la première étape ?", juste: "tracer la perpendiculaire à l'axe qui passe par le point", faux: ["tracer une droite parallèle à l'axe", "mesurer la distance au bord de la feuille", "tracer un cercle autour du point"] },
+    { q: "Sur quelle droite se trouvera le symétrique ?", juste: "sur la perpendiculaire à l'axe qui passe par le point", faux: ["sur la parallèle à l'axe qui passe par le point", "sur l'axe lui-même", "sur le bord de la feuille"] },
+    { q: "Une fois la perpendiculaire tracée, que fait-on ?", juste: "on reporte la même distance de l'autre côté de l'axe", faux: ["on reporte deux fois la distance du même côté", "on place le point sur l'axe", "on reporte la distance au bord de la feuille"] },
+  ]);
+  return {
+    text: `${p.txt} veut construire avec son équerre le symétrique du point bleu, sans compter les carreaux. ${etape.q}`,
+    ...qcm(etape.juste, etape.faux),
+    explanation: court("Le point et son symétrique sont sur une même perpendiculaire à l'axe, de part et d'autre, à la même distance.", cap(etape.juste) + "."),
+    canvas: dessin({ cols: u.cols, rows: u.rows, source: [u.p], axe: u.axe }),
+  };
 }
 
-function symObliqueOui(): TransformationCanvasData {
-  return transformationCanvas({
-    transformation: "symetrie_axiale",
-    grid: { rows: 8, cols: 8 },
-    source: {
-      label: "F",
-      points: [
-        { x: 1, y: 5 },
-        { x: 2, y: 5 },
-        { x: 1, y: 6 },
-      ],
-    },
-    image: {
-      label: "F'",
-      points: [
-        { x: 5, y: 1 },
-        { x: 5, y: 2 },
-        { x: 6, y: 1 },
-      ],
-    },
-    axis: {
-      type: "line",
-      from: { x: 0, y: 0 },
-      to: { x: 8, y: 8 },
-      label: "axe",
-    },
-  });
+const EXPLI_VERDICT: Record<Verdict, string> = {
+  oui: "Chaque sommet rouge est à la même distance de l'axe que son sommet bleu, de l'autre côté : la figure est retournée comme dans un miroir.",
+  glisse: "La figure rouge a gardé le même sens que la bleue : elle a glissé. Un symétrique est RETOURNÉ, comme un reflet.",
+  distance: "Compte les carreaux de chaque sommet jusqu'à l'axe : la figure rouge est un carreau trop loin.",
+  sens: "La figure rouge est retournée, mais dans l'autre sens (de haut en bas au lieu de gauche à droite, ou l'inverse).",
+};
+
+/** La figure rouge est-elle le symétrique de la bleue ? */
+function genVerifier(d0: number, d1: number, debut: () => string = ouverture): Gen {
+  const pl = placer(figureAsym(), entre(d0, d1));
+  const v = un(["oui", "oui", "glisse", "distance", "sens"] as Verdict[]);
+  const c = candidat(pl, v);
+  const k = cadre(pl.cols, pl.rows, c);
+  return {
+    text: `${debut()} ${un([
+      "La figure rouge doit être le symétrique de la bleue.",
+      "On a dessiné en rouge le symétrique de la figure bleue.",
+      "La figure rouge est censée être le reflet de la bleue.",
+      "Un camarade a construit en rouge le symétrique de la figure bleue.",
+    ])} ${un(["Est-ce juste ?", "Le dessin est-il juste ?", "Est-ce bien son symétrique ?", "Qu'en penses-tu ?"])}`,
+    ...qcm(VERDICT[v], Object.values(VERDICT)),
+    explanation: court(EXPLI_VERDICT[v], cap(VERDICT[v]) + "."),
+    canvas: dessin({ cols: k.cols, rows: k.rows, source: pl.source, image: c, axe: pl.axe }),
+  };
 }
 
-function symPointVertical(distance = 2): TransformationCanvasData {
-  const axisX = 4;
-  const y = 3;
+const EXPLI_OBLIQUE: Record<VerdictOblique, string> = {
+  oui: "Avec un axe oblique, on suit les diagonales des carreaux : chaque sommet rouge est en face de son sommet bleu, à la même distance de l'axe.",
+  glisse: "La figure rouge a le même sens que la bleue : elle a seulement glissé.",
+  vertical: "On a retourné la figure de gauche à droite, comme si l'axe était vertical. Avec un axe oblique, on compte en suivant les diagonales des carreaux.",
+  horizontal: "On a retourné la figure de haut en bas, comme si l'axe était horizontal. Avec un axe oblique, on compte en suivant les diagonales des carreaux.",
+};
 
-  return transformationCanvas({
-    transformation: "symetrie_axiale",
-    grid: { rows: 7, cols: 8 },
-    source: {
-      label: "A",
-      points: [{ x: axisX - distance, y }],
-    },
-    image: {
-      label: "A'",
-      points: [{ x: axisX + distance, y }],
-    },
-    axis: { type: "vertical", x: axisX, label: "axe" },
-  });
+/** Axe oblique : la figure rouge est-elle le symétrique ? */
+function genOblique(debut: () => string = ouverture, moitie = false): Gen {
+  for (let k = 0; k < 30; k++) {
+    const o = placerOblique();
+    const v = un(["oui", "oui", "glisse", "vertical", "horizontal"] as VerdictOblique[]);
+    const c = candidatOblique(o, v);
+    if (!c) continue;
+    const kd = cadre(o.n, o.n, c);
+    const n = Math.max(kd.cols, kd.rows);
+    if (n > 11) continue;
+    return {
+      text: `${debut()} ${un([
+        "L'axe est oblique : il suit la diagonale des carreaux.",
+        "Cette fois, l'axe est en biais, sur la diagonale des carreaux.",
+        "L'axe vert est oblique.",
+      ])} ${moitie
+        ? un(["On complète le motif de l'autre côté de l'axe : la partie rouge est-elle juste ?", "La partie rouge complète-t-elle bien le motif par symétrie ?", "La partie rouge doit compléter le motif : est-ce le symétrique de la bleue ?"])
+        : un(["La figure rouge est-elle le symétrique de la bleue ?", "La figure rouge est-elle juste ?", "Est-ce bien le symétrique ?"])}`,
+      ...qcm(VERDICT_OBLIQUE[v], Object.values(VERDICT_OBLIQUE)),
+      explanation: court(EXPLI_OBLIQUE[v], cap(VERDICT_OBLIQUE[v]) + "."),
+      canvas: dessin({ cols: n, rows: n, source: o.source, image: c, axe: { type: "line", from: { x: 0, y: 0 }, to: { x: n, y: n } } }),
+    };
+  }
+  return genVerifier(1, 2, debut);
 }
 
-function symPointHorizontal(distance = 2): TransformationCanvasData {
-  const axisY = 4;
-  const x = 3;
-
-  return transformationCanvas({
-    transformation: "symetrie_axiale",
-    grid: { rows: 8, cols: 7 },
-    source: {
-      label: "A",
-      points: [{ x, y: axisY - distance }],
-    },
-    image: {
-      label: "A'",
-      points: [{ x, y: axisY + distance }],
-    },
-    axis: { type: "horizontal", y: axisY, label: "axe" },
-  });
+/** Axe oblique : un point à d diagonales de carreau. */
+function genPointOblique(debut: () => string = ouverture): Gen {
+  const d = entre(1, 3);
+  const u = unPointOblique(d);
+  const dg = (k: number) => (k === 1 ? "1 diagonale de carreau" : `${k} diagonales de carreau`);
+  const cas = Math.random() < 0.5;
+  return {
+    text: `${debut()} L'axe vert est oblique. ${un(["Le point bleu est à", "Pour rejoindre l'axe, le point bleu traverse"])} ${dg(d)}. ${cas
+      ? un(["Combien de diagonales de carreau le séparent de son symétrique ?", "Combien de diagonales de carreau y aura-t-il entre ce point et son symétrique ?"])
+      : un(["Comment trouver son symétrique ?", "Où places-tu son symétrique ?"])}`,
+    ...(cas
+      ? qcm(dg(2 * d), [dg(d), dg(2 * d + 1), dg(d + 1), dg(4 * d)])
+      : qcm(`on continue tout droit en diagonale, ${dg(d)} après l'axe`, [
+        `on avance de ${car(d)} vers la droite`,
+        `on descend de ${car(d)} tout droit`,
+        `on continue en diagonale, ${dg(2 * d)} après l'axe`,
+      ])),
+    explanation: court(`On suit la diagonale des carreaux, qui est perpendiculaire à l'axe : ${dg(d)} jusqu'à l'axe, puis autant de l'autre côté.`, cas ? `${cap(dg(2 * d))}.` : `On continue en diagonale, ${dg(d)} après l'axe.`),
+    canvas: dessin({ cols: u.n, rows: u.n, source: [u.p], axe: { type: "line", from: { x: 0, y: 0 }, to: { x: u.n, y: u.n } } }),
+  };
 }
 
-function symSegmentVertical(): TransformationCanvasData {
-  return transformationCanvas({
-    transformation: "symetrie_axiale",
-    grid: { rows: 8, cols: 8 },
-    source: {
-      label: "AB",
-      points: [
-        { x: 1, y: 2 },
-        { x: 2, y: 5 },
-      ],
-    },
-    image: {
-      label: "A'B'",
-      points: [
-        { x: 7, y: 2 },
-        { x: 6, y: 5 },
-      ],
-    },
-    axis: { type: "vertical", x: 4, label: "axe" },
-  });
+/** Combien de carreaux entre le sommet le plus éloigné et son symétrique ? */
+function genSepareFigure(moitie = false, debut0: () => string = ouverture): Gen {
+  const pl = placer(figureAsym(), moitie ? 0 : entre(1, 3));
+  const D = pl.dMax;
+  const debut = moitie ? `${debut0()} ${un(["La moitié bleue est déjà tracée.", "On a tracé une moitié en bleu, contre l'axe."])}` : debut0();
+  return {
+    text: `${debut} ${un([
+      "Combien de carreaux sépareront le sommet le plus éloigné de l'axe et son symétrique ?",
+      "Le sommet le plus éloigné de l'axe et son symétrique : combien de carreaux entre eux ?",
+      "Quelle distance séparera le sommet le plus éloigné de l'axe de son symétrique ?",
+    ])}`,
+    ...qcmC(2 * D, [D, 2 * pl.dMin || D + 1, D + pl.dMin, 2 * D + 2]),
+    explanation: court(`Ce sommet est à ${car(D)} de l'axe ; son symétrique aussi, de l'autre côté : ${D} + ${D} = ${2 * D}.`, `${cap(car(2 * D))}.`),
+    canvas: dessin({ cols: pl.cols, rows: pl.rows, source: pl.source, axe: pl.axe }),
+  };
 }
 
-function symFigureVertical(): TransformationCanvasData {
-  return transformationCanvas({
-    transformation: "symetrie_axiale",
-    grid: { rows: 8, cols: 8 },
-    source: {
-      label: "F",
-      points: [
-        { x: 1, y: 2 },
-        { x: 3, y: 2 },
-        { x: 3, y: 4 },
-        { x: 2, y: 5 },
-      ],
-    },
-    image: {
-      label: "F'",
-      points: [
-        { x: 7, y: 2 },
-        { x: 5, y: 2 },
-        { x: 5, y: 4 },
-        { x: 6, y: 5 },
-      ],
-    },
-    axis: { type: "vertical", x: 4, label: "axe" },
-  });
+/** Combien de sommets ne bougent pas ? */
+function genSommetsFixes(): Gen {
+  const pl = placer(figureAsym(), 0);
+  const surAxe = pl.source.filter((p) => (pl.axe.type === "vertical" ? p.x === pl.axe.x : pl.axe.type === "horizontal" ? p.y === pl.axe.y : false)).length;
+  const n = pl.source.length;
+  const ecr = (k: number) => (k === 0 ? "aucun sommet" : k === 1 ? "1 sommet" : `${k} sommets`);
+  return {
+    text: `${ouverture()} ${un(["On construit le symétrique de la figure bleue.", "Il faut construire le symétrique de la figure bleue."])} ${un([
+      "Combien de ses sommets restent à leur place ?",
+      "Combien de sommets ne bougent pas ?",
+      "Combien de sommets sont leur propre symétrique ?",
+    ])}`,
+    ...qcm(ecr(surAxe), [ecr(0), ecr(n), ecr(surAxe + 1), ecr(Math.max(surAxe - 1, 0))]),
+    explanation: court("Un sommet posé SUR l'axe est à 0 carreau de l'axe : son symétrique est lui-même. Les autres passent de l'autre côté.", `${cap(ecr(surAxe))} sur l'axe : ${surAxe === 1 ? "il ne bouge" : "ils ne bougent"} pas.`),
+    canvas: dessin({ cols: pl.cols, rows: pl.rows, source: pl.source, axe: pl.axe }),
+  };
 }
 
-function symFigureVerticalErreur(): TransformationCanvasData {
-  return transformationCanvas({
-    transformation: "symetrie_axiale",
-    grid: { rows: 8, cols: 8 },
-    source: {
-      label: "F",
-      points: [
-        { x: 1, y: 2 },
-        { x: 3, y: 2 },
-        { x: 3, y: 4 },
-        { x: 2, y: 5 },
-      ],
-    },
-    image: {
-      label: "F'",
-      points: [
-        { x: 7, y: 2 },
-        { x: 5, y: 2 },
-        { x: 5, y: 4 },
-        { x: 5, y: 5 },
-      ],
-    },
-    axis: { type: "vertical", x: 4, label: "axe" },
-  });
+/* ═════════════════ axes ═════════════════ */
+
+const introQ = (nom: string) => {
+  const p = perso();
+  return un([
+    `${p.txt} a dessiné ${nom} ${un(LIEUX)}.`,
+    `Voici ${nom}, tracé${fem(nom) ? "e" : ""} par ${p.nom} ${un(LIEUX)}.`,
+    `${p.txt} reproduit ${nom} sur quadrillage.`,
+  ]);
+};
+
+/** La ligne verte est-elle un axe de symétrie ? (quadrillage) */
+function genLigneAxe(): Gen {
+  const s = un(SYMS_Q);
+  const { pts, cols, rows } = poserQ(s);
+  const { vrais, faux } = lignesQ(s, pts);
+  const oui = vrais.length > 0 && (Math.random() < 0.5 || faux.length === 0);
+  const axe = oui ? un(vrais) : un(faux);
+  const juste = oui ? "oui, les deux moitiés se superposent" : "non, les deux moitiés ne se superposent pas";
+  const pieges = oui
+    ? ["non, les deux moitiés ne se superposent pas", "on ne peut pas savoir sans découper", axe.type === "horizontal" ? "non, un axe de symétrie est toujours vertical" : "non, il faudrait une ligne horizontale"]
+    : ["oui, les deux moitiés se superposent", "oui, car la ligne coupe la figure en deux", "on ne peut pas savoir sans découper"];
+  return {
+    text: `${introQ(s.nom)} ${un([
+      "La ligne verte est-elle un axe de symétrie de cette figure ?",
+      "Est-ce que la ligne verte est un axe de symétrie ?",
+      "Si on plie le long de la ligne verte, les deux moitiés se superposent-elles ?",
+      "La ligne verte joue-t-elle le rôle d'un miroir pour cette figure ?",
+    ])}`,
+    ...qcm(juste, pieges),
+    explanation: court("On imagine qu'on plie la feuille le long de la ligne verte : si les deux moitiés tombent exactement l'une sur l'autre, c'est un axe de symétrie.", cap(juste) + "."),
+    canvas: dessin({ cols, rows, source: pts, axe, points: false }),
+  };
 }
 
-// ============================================================
-// BANK
-// ============================================================
+/** Comment est l'axe entre la figure et son image ? */
+function genOrientation(oblique: number): Gen {
+  const debut = un([
+    `${ouverture()} La figure rouge est le symétrique de la bleue.`,
+    `${ouverture()} En rouge, on voit le reflet de la figure bleue.`,
+  ]);
+  const Q = un(["Comment est l'axe de symétrie ?", "Comment est placé l'axe de symétrie ?", "L'axe de symétrie est…"]);
+  const choix = ["il est vertical", "il est horizontal", "il est oblique (en biais)", "il n'y a pas d'axe"];
+  if (Math.random() < oblique) {
+    const o = placerOblique();
+    return {
+      text: `${debut} ${Q}`,
+      ...qcm(choix[2], choix),
+      explanation: court("La figure s'est retournée par-dessus la diagonale des carreaux : chaque sommet a son symétrique en face, en biais.", "L'axe est oblique."),
+      canvas: dessin({ cols: o.n, rows: o.n, source: o.source, image: o.image }),
+    };
+  }
+  const pl = placer(figureAsym(), entre(1, 2));
+  const v = pl.axe.type === "vertical";
+  return {
+    text: `${debut} ${Q}`,
+    ...qcm(v ? choix[0] : choix[1], choix),
+    explanation: court(v ? "Les deux figures sont l'une à côté de l'autre, retournées de gauche à droite : l'axe est une ligne debout entre elles." : "Les deux figures sont l'une au-dessus de l'autre, retournées de haut en bas : l'axe est une ligne couchée entre elles.", v ? "L'axe est vertical." : "L'axe est horizontal."),
+    canvas: dessin({ cols: pl.cols, rows: pl.rows, source: pl.source, image: pl.image }),
+  };
+}
+
+/** Où passe l'axe entre deux figures écartées de 2d carreaux ? */
+function genMilieu(donne: boolean): Gen {
+  const pl = placer(figureAsym(), entre(1, 3));
+  const d = pl.dMin;
+  const juste = `à ${car(d)} de chaque figure`;
+  return {
+    text: `${ouverture()} La figure rouge est le symétrique de la bleue. ${donne ? `Il y a ${car(2 * d)} entre les deux figures. ` : un(["Compte les carreaux entre les deux figures. ", "Regarde l'écart entre les deux figures. "])}${un(["Où passe l'axe de symétrie ?", "Où faut-il tracer l'axe de symétrie ?", "Où se trouve l'axe de symétrie ?"])}`,
+    ...qcm(juste, [`à ${car(2 * d)} de la figure bleue`, `à ${car(d + 1)} de la figure bleue`, d > 1 ? `à ${car(d - 1)} de la figure bleue` : "contre la figure bleue", "contre la figure rouge"]),
+    explanation: court(`L'axe est au milieu de l'écart : ${2 * d} ÷ 2 = ${d}.`, `L'axe passe ${juste}.`),
+    canvas: dessin({ cols: pl.cols, rows: pl.rows, source: pl.source, image: pl.image }),
+  };
+}
+
+/** Le nom de la ligne de pliage. */
+function genNomAxe(): Gen {
+  const s = un(SYMS_Q);
+  const { pts, cols, rows } = poserQ(s);
+  const { vrais } = lignesQ(s, pts);
+  const p = perso();
+  return {
+    text: `${p.txt} plie ${s.nom} le long de la ligne verte : les deux moitiés se superposent. ${un([
+      "Comment s'appelle cette ligne ?",
+      "Quel est le nom de cette ligne ?",
+      "Cette ligne verte est…",
+    ])}`,
+    ...qcm("un axe de symétrie", ["une diagonale", "un côté", "un rayon", "une hauteur"]),
+    explanation: court("La ligne de pliage qui superpose les deux moitiés s'appelle un axe de symétrie : elle joue le rôle d'un miroir.", "C'est un axe de symétrie."),
+    canvas: dessin({ cols, rows, source: pts, axe: un(vrais), points: false }),
+  };
+}
+
+/** Les lettres capitales et leurs axes. */
+function genLettres(): Gen {
+  const p = perso();
+  const lieu = un(["sur l'affiche du club", "sur la banderole du tournoi", "sur l'enseigne de la boulangerie", "sur la couverture de son classeur", "sur le panneau du gymnase", "sur un sweat"]);
+  const debut = un([`${p.txt} écrit en lettres capitales ${lieu}.`, `${p.txt} découpe des lettres capitales pour les coller ${lieu}.`, `${p.txt} peint des lettres capitales ${lieu}.`]);
+  const cas = un(["v", "h", "0", "2"] as const);
+  const pick = (l: string[], k: number) => [...l].sort(() => Math.random() - 0.5).slice(0, k);
+  const [juste, faux, q, expl]: [string, string[], string, string] =
+    cas === "v" ? [un(L_V), pick([...L_H, ...L_0], 4), "Quelle lettre a un axe de symétrie vertical ?", "on la plie de gauche à droite"]
+    : cas === "h" ? [un(L_H), pick([...L_V, ...L_0], 4), "Quelle lettre a un axe de symétrie horizontal ?", "on la plie de haut en bas"]
+    : cas === "0" ? [un(L_0), pick(["A", "T", "U", "C", "E", "H", "M"], 4), "Quelle lettre n'a aucun axe de symétrie ?", "aucun pliage ne superpose ses deux moitiés (N, S et Z se retournent par un demi-tour, pas par un pliage)"]
+    : [un(L_2), pick(["A", "T", "U", "C", "E", "B", "M"], 4), "Quelle lettre a deux axes de symétrie ?", "on peut la plier de gauche à droite ET de haut en bas"];
+  return {
+    text: `${debut} ${q}`,
+    ...qcm(juste, faux),
+    explanation: court(`Pour chaque lettre, on imagine le pliage : ${expl}.`, `C'est la lettre ${juste}.`),
+  };
+}
+
+/* ── figures usuelles ── */
+
+const PIEGES_AXES: Record<string, number[]> = {
+  carre: [2, 1, 8],
+  rectangle: [4, 1, 0],
+  losange: [4, 1, 0],
+  equilateral: [1, 6, 2],
+  isocele: [3, 2, 0],
+  trapeze: [2, 0, 4],
+  parallelogramme: [2, 4, 1],
+  cercle: [1, 2, 4],
+  hexagone: [3, 2, 12],
+};
+
+const introU = (u: Usuelle) => {
+  const p = perso();
+  return un([
+    `${p.txt} a tracé ${u.nom} ${un(LIEUX)}.`,
+    `Voici ${u.nom}, dessiné par ${p.nom} ${un(LIEUX)}.`,
+    `${p.txt} découpe ${u.nom} dans du papier de couleur.`,
+    `${p.txt} observe ${u.nom} ${un(LIEUX)}.`,
+  ]);
+};
+
+/** Combien d'axes a cette figure usuelle ? */
+function genAxesUsuelle(noms: string[], debut?: () => string): Gen {
+  const cle = un(noms);
+  const u = USUELLES[cle]();
+  return {
+    text: `${debut ? `${debut()} Sa figure : ${u.nom}.` : introU(u)} ${un([
+      "Combien d'axes de symétrie a cette figure ?",
+      "Combien cette figure a-t-elle d'axes de symétrie ?",
+      `Combien d'axes de symétrie possède ${u.nom} ?`,
+      "Combien a-t-elle d'axes de symétrie (de lignes de pliage) ?",
+    ])}`,
+    ...qcm(nbAxes(u.n), PIEGES_AXES[cle].filter((k) => k !== u.n).map(nbAxes)),
+    explanation: court(`On essaie chaque pliage : ${u.pourquoi}.`, u.n === 0 ? `${cap(u.nom)} n'a aucun axe de symétrie.` : `${cap(u.nom)} a ${nbAxes(u.n)} de symétrie.`),
+    canvas: dessinUsuelle(u),
+  };
+}
+
+/** La ligne verte est-elle un axe de cette figure usuelle ? */
+function genLigneUsuelle(noms: string[]): Gen {
+  const cle = un(noms);
+  const u = USUELLES[cle]();
+  const oui = u.axes.length > 0 && Math.random() < 0.5;
+  const ligne = oui ? un(u.axes) : un(u.faux);
+  const juste = oui ? "oui, en pliant, les deux moitiés se superposent" : "non, en pliant, les deux moitiés ne se superposent pas";
+  return {
+    text: `${introU(u)} ${un([
+      "La ligne verte en pointillés est-elle un axe de symétrie ?",
+      "Est-ce que la ligne verte est un axe de symétrie de la figure ?",
+      "Si on plie le long de la ligne verte, les deux moitiés se superposent-elles ?",
+    ])}`,
+    ...qcm(juste, [
+      oui ? "non, en pliant, les deux moitiés ne se superposent pas" : "oui, en pliant, les deux moitiés se superposent",
+      "oui, car la ligne coupe la figure en deux parts égales",
+      "non, un axe de symétrie n'est jamais en biais",
+    ]),
+    explanation: court(`Plie en pensée le long de la ligne verte : ${u.pourquoi}.`, cap(juste) + "."),
+    canvas: dessinUsuelle(u, [ligne]),
+  };
+}
+
+/** Quelle figure a exactement n axes ? (sans dessin, ou la figure juste dessinée en défi) */
+function genQuelleFigure(): Gen {
+  const cas = un([
+    { n: 3, juste: "le triangle équilatéral", faux: ["le triangle isocèle", "le rectangle", "le losange"] },
+    { n: 4, juste: "le carré", faux: ["le rectangle", "le losange", "le triangle équilatéral"] },
+    { n: 0, juste: "le parallélogramme", faux: ["le losange", "le trapèze isocèle", "le rectangle"] },
+    { n: 1, juste: un(["le triangle isocèle", "le trapèze isocèle"]), faux: ["le carré", "le triangle équilatéral", "le rectangle"] },
+    { n: -1, juste: "le cercle", faux: ["le carré", "l'hexagone régulier", "le triangle équilatéral"] },
+    { n: 2, juste: un(["le rectangle", "le losange"]), faux: ["le carré", "le triangle équilatéral", "le parallélogramme"] },
+  ]);
+  const p = perso();
+  const q = cas.n < 0 ? "Quelle figure a une infinité d'axes de symétrie ?" : cas.n === 0 ? "Quelle figure n'a aucun axe de symétrie ?" : `Quelle figure a exactement ${nbAxes(cas.n)} de symétrie ?`;
+  return {
+    text: `${un([`${p.txt} range ses gabarits de géométrie.`, `${p.txt} prépare une affiche sur les figures usuelles.`, `${p.txt} trie des formes découpées dans du carton.`, `${p.txt} révise sa leçon de géométrie.`])} ${q}`,
+    ...qcm(cas.juste, cas.faux),
+    explanation: court("Carré 4 axes, rectangle 2, losange 2, triangle équilatéral 3, triangle isocèle 1, trapèze isocèle 1, parallélogramme aucun, cercle une infinité.", `C'est ${cas.juste}.`),
+  };
+}
+
+/** Une diagonale est-elle un axe ? (rectangle, carré, losange, parallélogramme) */
+function genDiagonale(): Gen {
+  const cle = un(["carre", "rectangle", "losange", "parallelogramme", "rectangle"]);
+  const u = USUELLES[cle]();
+  const d1: [Pt, Pt] = [u.pts[0], u.pts[2]];
+  const oui = cle === "carre" || cle === "losange";
+  const juste = oui ? "oui, en pliant, les deux moitiés se superposent" : "non, en pliant, les deux moitiés ne se superposent pas";
+  return {
+    text: `${introU(u)} ${un(["La ligne verte suit une diagonale de la figure.", "On a tracé en vert une diagonale."])} ${un([
+      "Est-ce un axe de symétrie ?",
+      "Cette diagonale est-elle un axe de symétrie ?",
+      "Peut-on plier la figure le long de cette diagonale pour superposer les deux moitiés ?",
+    ])}`,
+    ...qcm(juste, [
+      oui ? "non, en pliant, les deux moitiés ne se superposent pas" : "oui, en pliant, les deux moitiés se superposent",
+      "oui, une diagonale est toujours un axe de symétrie",
+      "non, un axe de symétrie n'est jamais en biais",
+    ]),
+    explanation: court(
+      oui ? `En pliant le long de cette diagonale, chaque sommet tombe sur un autre sommet : ${u.pourquoi}.` : `Plie en pensée : les coins ne tombent pas l'un sur l'autre. ${cap(u.pourquoi)}.`,
+      cap(juste) + "."
+    ),
+    canvas: dessinUsuelle(u, [d1]),
+  };
+}
+
+/** Le cercle : combien d'axes, et lesquels ? */
+function genCercle(): Gen {
+  const u = USUELLES.cercle();
+  const p = perso();
+  const debut = un([
+    `${p.txt} découpe un disque de papier pour le blason.`,
+    `${p.txt} plie une galette de papier ronde.`,
+    `${p.txt} trace un cercle au compas ${un(LIEUX)}.`,
+  ]);
+  if (Math.random() < 0.5) {
+    return {
+      text: `${debut} ${un(["Quelles droites sont des axes de symétrie du cercle ?", "Par où doit passer un pliage pour que les deux moitiés se superposent ?", "Quelles lignes de pliage partagent le cercle en deux moitiés superposables ?"])}`,
+      ...qcm("toutes les droites qui passent par le centre", ["seulement la droite verticale et la droite horizontale", "toutes les droites qui touchent le cercle", "aucune droite"]),
+      explanation: court("Tout diamètre partage le cercle en deux moitiés qui se superposent : chaque droite passant par le centre est un axe.", "Toutes les droites qui passent par le centre."),
+      canvas: dessinUsuelle(u, u.axes),
+    };
+  }
+  return {
+    text: `${debut} ${un(["Combien d'axes de symétrie a un cercle ?", "Combien un cercle a-t-il d'axes de symétrie ?"])}`,
+    ...qcm(nbAxes(-1), [nbAxes(2), nbAxes(1), nbAxes(4)]),
+    explanation: court(u.pourquoi, "Le cercle a une infinité d'axes de symétrie."),
+    canvas: dessinUsuelle(u, u.axes),
+  };
+}
+
+/* ═════════════════ compléter ═════════════════ */
+
+const moitieDebut = () => `${ouverture()} ${un(["La moitié bleue est déjà tracée.", "Une moitié est dessinée en bleu, contre l'axe.", "On a commencé par la moitié bleue.", "Il ne reste que la moitié bleue à reporter de l'autre côté."])}`;
+
+/** Compléter : le point de la moitié, son reflet (★1). */
+function genCompleterPoint(): Gen {
+  const d = entre(1, 5);
+  const u = unPoint(d);
+  const juste = ou(d, u.cote);
+  return {
+    text: `${ouverture()} Pour compléter la figure, il faut reporter le point bleu, ${ou(d, u.cote, true)}. ${un([
+      "Où places-tu le point de l'autre moitié ?",
+      "Où sera le point qui lui correspond ?",
+      "Où va son reflet ?",
+    ])}`,
+    ...qcm(juste, [ou(d, u.cote, true), ou(2 * d, u.cote), ou(d + 1, u.cote), "sur l'axe"]),
+    explanation: court(`On reporte de l'autre côté de l'axe, à la même distance : ${car(d)}.`, `${cap(juste)}.`),
+    canvas: dessin({ cols: u.cols, rows: u.rows, source: [u.p], axe: u.axe }),
+  };
+}
+
+/** Compléter : que faut-il faire ? (★1) */
+function genCompleterSens(): Gen {
+  const pl = placer(figureAsym(), 0);
+  const vertical = pl.axe.type === "vertical";
+  return {
+    text: `${moitieDebut()} ${un(["Comment complètes-tu la figure ?", "Que faut-il faire pour finir la figure ?", "Comment dessiner l'autre moitié ?"])}`,
+    ...qcm("on dessine son reflet de l'autre côté de l'axe", [
+      "on recopie la même moitié juste à côté, sans la retourner",
+      "on dessine son reflet du même côté de l'axe",
+      `on la retourne ${vertical ? "de haut en bas" : "de gauche à droite"}`,
+    ]),
+    explanation: court("L'axe est un miroir : l'autre moitié est le reflet de la moitié bleue, retournée de l'autre côté, à la même distance.", "On dessine son reflet de l'autre côté de l'axe."),
+    canvas: dessin({ cols: pl.cols, rows: pl.rows, source: pl.source, axe: pl.axe }),
+  };
+}
+
+/** Jusqu'où ira l'autre moitié ? */
+function genJusquou(): Gen {
+  const pl = placer(figureAsym(), 0);
+  const W = pl.dMax;
+  const juste = ou(W, pl.cote);
+  return {
+    text: `${moitieDebut()} ${un([
+      "Jusqu'où ira l'autre moitié ?",
+      "Où s'arrêtera l'autre moitié ?",
+      "Jusqu'à quel carreau ira l'autre moitié, en partant de l'axe ?",
+    ])}`,
+    ...qcm(`jusqu'à ${juste}`, [`jusqu'à ${ou(2 * W, pl.cote)}`, `jusqu'à ${ou(W + 1, pl.cote)}`, `jusqu'à ${ou(pl.dBord, pl.cote)}`, W > 1 ? `jusqu'à ${ou(W - 1, pl.cote)}` : `jusqu'à ${ou(W, pl.cote, true)}`]),
+    explanation: court(`La moitié bleue va jusqu'à ${car(W)} de l'axe : l'autre moitié ira aussi loin, de l'autre côté.`, `Jusqu'à ${juste}.`),
+    canvas: dessin({ cols: pl.cols, rows: pl.rows, source: pl.source, axe: pl.axe }),
+  };
+}
+
+/** La largeur (ou la hauteur) du motif complet. */
+function genLargeur(): Gen {
+  const pl = placer(figureAsym(), 0);
+  const W = pl.dMax;
+  const dim = estVertical(pl.cote) ? "de large" : "de haut";
+  return {
+    text: `${moitieDebut()} ${un([`Elle mesure ${car(W)} ${dim}.`, `Cette moitié fait ${car(W)} ${dim}.`])} ${un([
+      `Combien de carreaux ${dim} fera le motif complet ?`,
+      `Quelle sera la mesure ${dim === "de large" ? "en largeur" : "en hauteur"} du motif complet ?`,
+      `Une fois complété, combien mesurera le motif ${dim} ?`,
+    ])}`,
+    ...qcmC(2 * W, [W, 2 * W + 1, W + 2, 2 * W - 1]),
+    explanation: court(`La moitié symétrique a la même mesure : ${W} + ${W} = ${2 * W}.`, `${cap(car(2 * W))} ${dim}.`),
+    canvas: dessin({ cols: pl.cols, rows: pl.rows, source: pl.source, axe: pl.axe }),
+  };
+}
+
+/** L'aire du motif complet, en carreaux ou en cm². */
+function genAireComplete(cm: boolean): Gen {
+  for (let k = 0; k < 20; k++) {
+    const f = figureAsym();
+    const a = aire(f);
+    if (!Number.isInteger(a)) continue;
+    const pl = placer(f, 0);
+    const canvas = dessin({ cols: pl.cols, rows: pl.rows, source: pl.source, axe: pl.axe });
+    if (cm) {
+      return {
+        text: `${moitieDebut()} Un carreau mesure 1 cm de côté. ${un([`La moitié bleue a une aire de ${a} cm².`, `Cette moitié a une aire de ${a} cm².`])} ${un([
+          "Quelle sera l'aire du motif complet ?",
+          "Une fois complété, quelle aire aura le motif ?",
+          "Quelle surface faudra-t-il peindre en tout ?",
+        ])}`,
+        ...qcmN(2 * a, [a, 4 * a, a + 2, 2 * a + 1], "cm²"),
+        explanation: court(`La symétrie conserve les aires : l'autre moitié mesure aussi ${a} cm². ${a} + ${a} = ${2 * a}.`, `${2 * a} cm².`),
+        canvas,
+      };
+    }
+    return {
+      text: `${moitieDebut()} ${un([`Elle couvre ${a} carreaux.`, `Cette moitié recouvre ${a} carreaux.`])} ${un([
+        "Combien de carreaux couvrira le motif complet ?",
+        "Une fois complété, combien de carreaux le motif recouvrira-t-il ?",
+        "Combien de carreaux faudra-t-il colorier en tout ?",
+      ])}`,
+      ...qcmC(2 * a, [a, 2 * a + 2, a + 2, 2 * a - 1]),
+      explanation: court(`Le symétrique de la moitié a la même taille : il couvre aussi ${a} carreaux. ${a} + ${a} = ${2 * a}.`, `${2 * a} carreaux.`),
+      canvas,
+    };
+  }
+  return genLargeur();
+}
+
+/** Le périmètre du rectangle complété : le côté sur l'axe disparaît. */
+function genPerimetreComplet(debut: () => string, demi: boolean): Gen {
+  const W = entre(1, 3), H = entre(2, 4);
+  const rect = [{ x: 0, y: 0 }, { x: W, y: 0 }, { x: W, y: H }, { x: 0, y: H }];
+  const vertical = Math.random() < 0.5;
+  const f = vertical ? rect : rect.map((p) => ({ x: p.y, y: p.x }));
+  const pl = placer(f, 0, vertical ? "vertical" : "horizontal");
+  const c = demi ? 0.5 : 1;
+  const Pj = 2 * (2 * W + H) * c;
+  const u = demi ? "0,5 cm" : "1 cm";
+  return {
+    text: `${debut()} La moitié bleue est un rectangle de ${car(W)} sur ${car(H)}, collé à l'axe. Un carreau mesure ${u}. ${un([
+      "Quel sera le périmètre de la figure complète ?",
+      "Combien mesurera le tour de la figure complète ?",
+      "Quel périmètre aura le rectangle complet ?",
+    ])}`,
+    ...qcmN(Pj, [4 * (W + H) * c, 2 * (W + H) * c, 2 * (W + 2 * H) * c, Pj + 2 * c], "cm", c),
+    explanation: court(
+      `La figure complète est un rectangle de ${2 * W} carreaux sur ${H} carreaux (le côté collé à l'axe disparaît : on ne double pas le périmètre de la moitié). ${2 * W} + ${H} + ${2 * W} + ${H} = ${2 * (2 * W + H)} carreaux${demi ? `, et ${2 * (2 * W + H)} × 0,5 = ${fr(Pj)}` : ""}.`,
+      `${fr(Pj)} cm.`
+    ),
+    canvas: dessin({ cols: pl.cols, rows: pl.rows, source: pl.source, axe: pl.axe }),
+  };
+}
+
+/** Le périmètre d'un motif en L complété (★5) : deux étapes. */
+function genPerimetreL(): Gen {
+  // Moitié en L collée à l'axe vertical par son grand côté gauche (hauteur H).
+  const a = entre(2, 3), b = 1, H = entre(3, 4), h = entre(1, H - 1);
+  // L : (0,0) (a,0) (a,h) (b,h) (b,H) (0,H) — côté collé : x = 0, de 0 à H.
+  const L = [{ x: 0, y: 0 }, { x: a, y: 0 }, { x: a, y: h }, { x: b, y: h }, { x: b, y: H }, { x: 0, y: H }];
+  const mir = L.map((p) => ({ x: a - p.x, y: p.y })); // le côté collé passe à droite
+  const pl = placer(mir, 0, "vertical");
+  const Pmoitie = 2 * (a + H);
+  const Pj = 2 * Pmoitie - 2 * H;
+  return {
+    text: `${defiDebut()} La moitié bleue a la forme d'un L, collée à l'axe. Un carreau mesure 1 cm. Son périmètre est de ${Pmoitie} cm et le côté collé à l'axe mesure ${H} cm. ${un([
+      "Quel sera le périmètre de la figure complète ?",
+      "Combien mesurera le tour du motif complet ?",
+    ])}`,
+    ...qcmN(Pj, [2 * Pmoitie, 2 * Pmoitie - H, Pmoitie + H, Pj + 2], "cm"),
+    explanation: court(`Les deux moitiés ont chacune ${Pmoitie} cm de tour, mais le côté collé à l'axe (${H} cm) est compté deux fois et n'est plus sur le bord : ${Pmoitie} + ${Pmoitie} − ${H} − ${H} = ${Pj}.`, `${Pj} cm.`),
+    canvas: dessin({ cols: pl.cols, rows: pl.rows, source: pl.source, axe: pl.axe }),
+  };
+}
+
+/* ═════════════════ propriétés ═════════════════ */
+
+const FAITS = [
+  {
+    q: ["Si on plie le long de l'axe vert, que se passe-t-il ?", "En pliant la feuille sur l'axe vert, que remarque-t-on ?"],
+    juste: "les deux moitiés se superposent exactement",
+    faux: ["les deux moitiés se croisent", "une moitié dépasse de l'autre", "les deux moitiés restent côte à côte"],
+    m: "Le pliage le long de l'axe superpose exactement les deux moitiés : c'est le test de la symétrie.",
+  },
+  {
+    q: ["Que peut-on dire d'un point et de son symétrique ?", "Un point d'une moitié et son symétrique dans l'autre moitié sont…"],
+    juste: "à la même distance de l'axe",
+    faux: ["du même côté de l'axe", "deux fois plus loin l'un que l'autre", "collés à l'axe"],
+    m: "Un point et son symétrique sont de part et d'autre de l'axe, à la même distance.",
+  },
+  {
+    q: ["Comment sont les deux moitiés de la figure ?", "Si on compare les deux moitiés, elles ont…"],
+    juste: "la même forme et la même taille",
+    faux: ["la même forme mais pas la même taille", "des formes différentes", "la même taille mais pas la même forme"],
+    m: "La symétrie ne change ni la forme ni la taille : seule la position change, retournée comme dans un miroir.",
+  },
+];
+
+/** Les propriétés, illustrées par une figure et son axe. */
+function genFait(): Gen {
+  const s = un(SYMS_Q);
+  const { pts, cols, rows } = poserQ(s);
+  const { vrais } = lignesQ(s, pts);
+  const f = un(FAITS);
+  return {
+    text: `${introQ(s.nom)} ${un(f.q)}`,
+    ...qcm(f.juste, f.faux),
+    explanation: court(f.m, cap(f.juste) + "."),
+    canvas: dessin({ cols, rows, source: pts, axe: un(vrais), points: false }),
+  };
+}
+
+/** Un rectangle et son symétrique ont les mêmes mesures. */
+function genMesures(): Gen {
+  let W = entre(2, 4), H = entre(1, 3);
+  if (W === H) W += 1;
+  const rect = [{ x: 0, y: 0 }, { x: W, y: 0 }, { x: W, y: H }, { x: 0, y: H }];
+  const pl = placer(rect, entre(1, 2));
+  const m = (a: number, b: number) => `${car(a)} de large et ${car(b)} de haut`;
+  return {
+    text: `${ouverture()} Le rectangle bleu mesure ${m(W, H)}. ${un([
+      "Combien mesurera son symétrique ?",
+      "Quelles seront les mesures de son symétrique ?",
+      "Et son reflet, combien mesurera-t-il ?",
+    ])}`,
+    ...qcm(m(W, H), [m(2 * W, 2 * H), m(H, W), m(W + 1, H + 1), m(W, 2 * H)]),
+    explanation: court("La symétrie conserve les longueurs : le symétrique d'un rectangle est un rectangle aux mêmes mesures. Avec un axe vertical ou horizontal, il ne tourne pas d'un quart de tour.", cap(m(W, H)) + "."),
+    canvas: dessin({ cols: pl.cols, rows: pl.rows, source: pl.source, axe: pl.axe }),
+  };
+}
+
+/** Un segment en cm (décimal) et son symétrique. */
+function genLongueurCm(): Gen {
+  const pl = placer(figureAsym(), entre(1, 2));
+  const l = un([2.5, 3.5, 4.2, 4.8, 5.5, 6.3, 7.5, 3.8, 2.7, 6.4]);
+  const obj = un(["Le côté le plus long de la figure bleue", "Un côté de la figure bleue", "Le plus grand côté de la figure bleue"]);
+  return {
+    text: `${ouverture()} ${obj} mesure ${fr(l)} cm. ${un([
+      "Combien mesure le côté qui lui correspond sur le symétrique ?",
+      "Quelle est la longueur du côté symétrique ?",
+      "Combien mesurera ce côté sur la figure rouge ?",
+    ])}`,
+    ...qcmN(l, [2 * l, l / 2, l + 1], "cm", 0.5),
+    explanation: court("La symétrie conserve les longueurs : chaque côté de l'image mesure autant que le côté de départ.", `${fr(l)} cm.`),
+    canvas: dessin({ cols: pl.cols, rows: pl.rows, source: pl.source, image: pl.image, axe: pl.axe }),
+  };
+}
+
+const FLECHE = [{ x: 0, y: 1 }, { x: 2, y: 1 }, { x: 2, y: 0 }, { x: 4, y: 2 }, { x: 2, y: 4 }, { x: 2, y: 3 }, { x: 0, y: 3 }];
+const DIRS = ["vers la droite", "vers le bas", "vers la gauche", "vers le haut"];
+const tourne = (l: Pt[]) => l.map((p) => ({ x: -p.y, y: p.x }));
+
+/** Vers où pointe la flèche symétrique ? */
+function genFleche(): Gen {
+  const q = entre(0, 3);
+  let f: Pt[] = FLECHE;
+  for (let i = 0; i < q; i++) f = tourne(f);
+  f = norm(f);
+  const pl = placer(f, entre(1, 2));
+  const vertical = pl.axe.type === "vertical";
+  const horizontale = q % 2 === 0;
+  const flip = vertical === horizontale;
+  const juste = DIRS[flip ? (q + 2) % 4 : q];
+  return {
+    text: `${ouverture()} La flèche bleue pointe ${DIRS[q]}. ${un([
+      "Vers où pointera sa symétrique ?",
+      "Dans quelle direction pointera la flèche symétrique ?",
+      "Où sera tournée la pointe de son reflet ?",
+    ])}`,
+    ...qcm(juste, DIRS),
+    explanation: court(
+      flip ? "La flèche pointe vers l'axe ou s'en éloigne : en se retournant comme dans un miroir, sa pointe change de sens." : "La flèche est parallèle à l'axe : le miroir la retourne, mais sa pointe garde la même direction.",
+      `Elle pointera ${juste}.`
+    ),
+    canvas: dessin({ cols: pl.cols, rows: pl.rows, source: pl.source, axe: pl.axe }),
+  };
+}
+
+/** Un point sur l'axe, ou un point et son symétrique écartés de 2d. */
+function genPointAxe(): Gen {
+  if (Math.random() < 0.4) {
+    const u = unPoint(1);
+    const p = u.axe.type === "vertical" ? { x: u.axe.x, y: u.p.y } : { x: u.p.x, y: u.axe.type === "horizontal" ? u.axe.y : 0 };
+    return {
+      text: `${ouverture()} Le point bleu est posé sur l'axe. ${un(["Où est son symétrique ?", "Où faut-il placer son symétrique ?", "Que devient-il par la symétrie ?"])}`,
+      ...qcm("au même endroit, sur l'axe", ["à 1 carreau de l'autre côté de l'axe", "contre le bord de la feuille", "il n'a pas de symétrique"]),
+      explanation: court("Un point sur l'axe est à 0 carreau de l'axe : son symétrique est à 0 carreau aussi, donc au même endroit.", "Au même endroit, sur l'axe."),
+      canvas: dessin({ cols: u.cols, rows: u.rows, source: [p], axe: u.axe }),
+    };
+  }
+  const d = entre(1, 6);
+  const u = unPoint(d);
+  return {
+    text: `${ouverture()} Le point bleu et son symétrique rouge sont à ${car(2 * d)} l'un de l'autre. ${un([
+      "À combien de carreaux de l'axe est chacun d'eux ?",
+      "Quelle est la distance de chaque point à l'axe ?",
+      "À quelle distance de l'axe se trouve le point bleu ?",
+    ])}`,
+    ...qcmC(d, [2 * d, d + 1, 4 * d, d - 1]),
+    explanation: court(`L'axe est au milieu : ${2 * d} ÷ 2 = ${d}.`, `${cap(car(d))}.`),
+    canvas: dessin({ cols: u.cols, rows: u.rows, source: [u.p], image: [u.img], axe: u.axe, liens: true }),
+  };
+}
+
+/** Le segment [point, symétrique] : perpendiculaire à l'axe, coupé en son milieu. */
+function genPerpendiculaire(): Gen {
+  const d = entre(1, 5);
+  const u = unPoint(d);
+  const cas = un([
+    { q: ["Comment est le segment pointillé qui relie les deux points, par rapport à l'axe ?", "Le segment qui joint le point à son symétrique est…"], juste: "perpendiculaire à l'axe", faux: ["parallèle à l'axe", "confondu avec l'axe", "en biais par rapport à l'axe"], m: "Le segment qui relie un point à son symétrique coupe l'axe à angle droit." },
+    { q: ["Où l'axe coupe-t-il le segment pointillé ?", "En quel point l'axe coupe-t-il le segment qui relie les deux points ?"], juste: "en son milieu", faux: ["à une de ses extrémités", "au tiers du segment", "il ne le coupe pas"], m: "Les deux points sont à la même distance de l'axe : l'axe coupe le segment en son milieu." },
+    { q: ["Quel angle font l'axe et le segment pointillé ?", "L'axe et le segment qui relie les deux points forment…"], juste: "un angle droit", faux: ["un angle aigu", "un angle obtus", "aucun angle, ils sont parallèles"], m: "Le segment qui relie un point à son symétrique est perpendiculaire à l'axe : ils forment un angle droit." },
+  ]);
+  return {
+    text: `${ouverture()} Le point rouge est le symétrique du point bleu ; un segment pointillé les relie. ${un(cas.q)}`,
+    ...qcm(cas.juste, cas.faux),
+    explanation: court(cas.m, cap(cas.juste) + "."),
+    canvas: dessin({ cols: u.cols, rows: u.rows, source: [u.p], image: [u.img], axe: u.axe, liens: true }),
+  };
+}
+
+/** Le nombre de sommets se conserve. */
+function genNbSommets(): Gen {
+  const pl = placer(figureAsym(), entre(1, 2));
+  const n = pl.source.length;
+  return {
+    text: `${ouverture()} La figure bleue a ${n} sommets. ${un(["Combien de sommets aura son symétrique ?", "Et son symétrique, combien aura-t-il de sommets ?", "Combien de sommets faudra-t-il reporter ?"])}`,
+    ...qcmN(n, [2 * n, n - 1, n + 1], "sommets"),
+    explanation: court("Chaque sommet a un symétrique, un seul : le symétrique a autant de sommets.", `${n} sommets.`),
+    canvas: dessin({ cols: pl.cols, rows: pl.rows, source: pl.source, axe: pl.axe }),
+  };
+}
+
+const ORTHO = (l: Pt[]) => l.every((p, i) => { const q = l[(i + 1) % l.length]; return p.x === q.x || p.y === q.y; });
+const perim = (l: Pt[]) => l.reduce((s, p, i) => { const q = l[(i + 1) % l.length]; return s + Math.abs(p.x - q.x) + Math.abs(p.y - q.y); }, 0);
+
+/** Périmètre, aire, angle droit : tout se conserve (carreau 1 cm ou 0,5 cm). */
+function genConserve(): Gen {
+  for (let k = 0; k < 30; k++) {
+    const f = figureAsym();
+    const cas = un(["perimetre", "aire", "angle"] as const);
+    if (cas === "perimetre" && !ORTHO(f)) continue;
+    if (cas === "aire" && !Number.isInteger(aire(f))) continue;
+    const pl = placer(f, entre(1, 2));
+    const canvas = dessin({ cols: pl.cols, rows: pl.rows, source: pl.source, image: pl.image, axe: pl.axe });
+    if (cas === "perimetre") {
+      const c = un([1, 0.5]);
+      const P = perim(f) * c;
+      return {
+        text: `${ouverture()} Un carreau mesure ${fr(c)} cm. La figure bleue a un périmètre de ${fr(P)} cm. ${un(["Quel est le périmètre de son symétrique rouge ?", "Combien mesure le tour de la figure rouge ?", "Quel périmètre a la figure rouge ?"])}`,
+        ...qcmN(P, [2 * P, P + 2 * c, P / 2], "cm", c),
+        explanation: court("La symétrie conserve les longueurs : chaque côté rouge mesure autant que son côté bleu.", `${fr(P)} cm.`),
+        canvas,
+      };
+    }
+    if (cas === "aire") {
+      const a = aire(f);
+      return {
+        text: `${ouverture()} La figure bleue a une aire de ${a} cm² (un carreau = 1 cm²). ${un(["Quelle est l'aire de son symétrique rouge ?", "Et la figure rouge, quelle aire a-t-elle ?", "Quelle surface couvre la figure rouge ?"])}`,
+        ...qcmN(a, [2 * a, a + 1, a - 1], "cm²"),
+        explanation: court("Le symétrique a la même forme et la même taille : il a la même aire.", `${a} cm².`),
+        canvas,
+      };
+    }
+    const droit = f.some((p, i) => {
+      const a = f[(i + f.length - 1) % f.length], c = f[(i + 1) % f.length];
+      return (a.x - p.x) * (c.x - p.x) + (a.y - p.y) * (c.y - p.y) === 0;
+    });
+    if (!droit) continue;
+    return {
+      text: `${ouverture()} La figure bleue a un angle droit. ${un(["Et son symétrique rouge ?", "Que peut-on dire de la figure rouge ?", "Son symétrique a-t-il un angle droit ?"])}`,
+      ...qcm("il a aussi un angle droit, au coin correspondant", ["il n'a plus d'angle droit", "il a deux fois plus d'angles droits", "son angle devient plus ouvert"]),
+      explanation: court("La symétrie conserve les angles : un angle droit reste un angle droit.", "Il a aussi un angle droit."),
+      canvas,
+    };
+  }
+  return genNbSommets();
+}
+
+const VRAIES = [
+  "le symétrique d'un point est à la même distance de l'axe",
+  "une figure et son symétrique ont la même taille",
+  "un point posé sur l'axe reste à sa place",
+  "le symétrique d'une figure est retourné, comme dans un miroir",
+  "le segment qui relie un point à son symétrique est perpendiculaire à l'axe",
+  "l'axe coupe le segment qui relie un point à son symétrique en son milieu",
+  "le symétrique d'un segment a la même longueur",
+];
+const FAUSSES = [
+  "le symétrique d'une figure a seulement glissé de l'autre côté",
+  "on compte les carreaux depuis le bord de la feuille",
+  "le symétrique d'une figure est deux fois plus grand",
+  "un axe de symétrie est toujours vertical",
+  "le symétrique d'un point est deux fois plus loin de l'axe",
+  "le segment qui relie un point à son symétrique est parallèle à l'axe",
+  "le symétrique d'un angle droit n'est plus un angle droit",
+];
+
+/** Quelle phrase est vraie ? */
+function genPhraseVraie(): Gen {
+  const pl = placer(figureAsym(), entre(1, 2));
+  const p = perso();
+  return {
+    text: `${p.txt} ${un(["prépare un exposé sur la symétrie.", "vérifie ses symétries avant de colorier.", "explique la symétrie à sa petite sœur.", "corrige le dessin d'un camarade."])} ${un(["Quelle phrase est vraie ?", "Laquelle de ces phrases est juste ?", "Quelle règle est correcte ?"])}`,
+    ...qcm(un(VRAIES), FAUSSES),
+    explanation: court("Sur le dessin, la figure rouge est le symétrique de la bleue : même taille, même distance à l'axe, retournée comme dans un miroir, chaque point relié à son symétrique par un segment perpendiculaire à l'axe.", "Seule la phrase juste respecte ces règles."),
+    canvas: dessin({ cols: pl.cols, rows: pl.rows, source: pl.source, image: pl.image, axe: pl.axe }),
+  };
+}
+
+/* ═════════════════ la banque ═════════════════ */
+
+type Fixe = Omit<Extract<TutorBankItemV4, { kind: "fixed" }>, "kind" | "niveau" | "matiere" | "notionId" | "theme">;
+const fixe = (f: Fixe): TutorBankItemV4 => ({ kind: "fixed", niveau: "cm2", matiere: "maths", notionId: "symetrie", theme: "neutral", ...f });
+
+const tpl = (fab: ReturnType<typeof atelier>, n: number, d: DifficultyLevel, hint: string, g: () => Gen) => fab(n, d, hint, g);
+
+const TOUTES = ["carre", "rectangle", "losange", "equilateral", "isocele", "trapeze", "parallelogramme", "cercle"];
+const PIEGES = ["rectangle", "losange", "parallelogramme", "equilateral", "cercle"];
+const USUELLES_SIMPLES = ["carre", "rectangle", "isocele", "trapeze", "equilateral"];
 
 export const symetrieBank: TutorBankItemV4[] = [
-  // ============================================================
-  // SYMETRIE_AXE
-  // ============================================================
-
-  {
-    kind: "fixed",
+  /* ── SYMETRIE_AXE (★1-★4) ── */
+  fixe({
     id: "cm2_symetrie_axe_fixed_1_definition",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
     microId: "symetrie_axe",
     difficulty: 1,
-    theme: "neutral",
     text: "Un axe de symétrie fonctionne comme...",
     format: "qcm",
-    choices: [
-      "un miroir",
-      "une multiplication",
-      "un chronomètre",
-      "une mesure de masse",
-    ],
+    choices: ["un miroir", "une règle graduée", "un compas", "une loupe"],
     expected: ["un miroir"],
     comparator: "mcq_exact",
-    hint: "Imagine que l’on plie la figure.",
-    explanation:
-      "Un axe de symétrie fonctionne comme un miroir. Si on plie selon cet axe, les deux parties doivent se superposer.",
+    hint: "Imagine que l'on plie la figure.",
+    explanation: "Un axe de symétrie fonctionne comme un miroir. Si on plie selon cet axe, les deux parties se superposent.",
     tags: ["cm2", "symetrie", "axe", "definition", "qcm"],
-  },
+  }),
+  tpl(A.axe, 10, 1, "Plie la figure en pensée le long de la ligne verte.", genLigneAxe),
+  tpl(A.axe, 11, 1, "Les figures sont-elles côte à côte ou l'une au-dessus de l'autre ?", () => genOrientation(0)),
+  tpl(A.axe, 12, 1, "C'est la ligne de pliage.", genNomAxe),
+  tpl(A.axe, 13, 2, "L'axe est au milieu de l'écart entre les deux figures.", () => genMilieu(true)),
+  tpl(A.axe, 14, 2, "Regarde comment la figure s'est retournée.", () => genOrientation(0.35)),
+  tpl(A.axe, 15, 2, "Plie la figure en pensée le long de la ligne verte.", () => genLigneUsuelle(USUELLES_SIMPLES)),
+  tpl(A.axe, 16, 2, "Essaie tous les pliages : vertical, horizontal, en diagonale.", () => genAxesUsuelle(["carre", "rectangle", "isocele", "trapeze"])),
+  tpl(A.axe, 17, 3, "Imagine chaque lettre pliée.", genLettres),
+  tpl(A.axe, 18, 3, "Essaie tous les pliages : vertical, horizontal, en diagonale.", () => genAxesUsuelle(TOUTES)),
+  tpl(A.axe, 19, 3, "Compte les carreaux entre les figures, puis prends la moitié.", () => genMilieu(false)),
+  tpl(A.axe, 20, 3, "Plie la figure en pensée le long de la ligne verte.", () => genLigneUsuelle(TOUTES)),
+  tpl(A.axe, 21, 4, "Une diagonale n'est pas toujours un axe de symétrie.", genDiagonale),
+  tpl(A.axe, 22, 4, "Rectangle, losange, parallélogramme : attention aux pièges.", () => genAxesUsuelle(PIEGES)),
+  tpl(A.axe, 23, 4, "Un axe peut être vertical, horizontal ou en biais.", () => genOrientation(0.6)),
+  tpl(A.axe, 24, 4, "Récite les axes des figures usuelles.", genQuelleFigure),
+  tpl(A.axe, 25, 4, "Toute droite qui passe par le centre…", genCercle),
 
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_axe_fixed_2_axe_est_droite",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_axe",
-    difficulty: 1,
-    theme: "neutral",
-    text: "Un axe de symétrie est...",
-    format: "qcm",
-    choices: [
-      "une droite",
-      "un point seulement",
-      "une surface",
-      "un volume",
-    ],
-    expected: ["une droite"],
-    comparator: "mcq_exact",
-    hint: "On plie la figure selon cette droite.",
-    explanation:
-      "Un axe de symétrie est une droite. Elle sert de ligne de pliage ou de miroir.",
-    tags: ["cm2", "symetrie", "axe", "droite", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_axe_fixed_3_reconnaitre_oui_vertical",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_axe",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Les deux figures sont-elles symétriques par rapport à l’axe vertical ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
-    comparator: "mcq_exact",
-    hint: "Regarde si l’axe joue le rôle de miroir.",
-    explanation:
-      "Oui. La figure rouge est placée comme le reflet de la figure bleue de l’autre côté de l’axe.",
-    tags: ["cm2", "symetrie", "axe", "vertical", "reconnaitre", "qcm", "canvas"],
-    canvas: symVerticalOui(),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_axe_fixed_4_reconnaitre_oui_horizontal",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_axe",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Les deux figures sont-elles symétriques par rapport à l’axe horizontal ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
-    comparator: "mcq_exact",
-    hint: "L’image doit être de l’autre côté de l’axe, à la même distance.",
-    explanation:
-      "Oui. Chaque sommet de la figure rouge est placé de l’autre côté de l’axe horizontal, à la même distance que le sommet correspondant.",
-    tags: ["cm2", "symetrie", "axe", "horizontal", "reconnaitre", "qcm", "canvas"],
-    canvas: symHorizontalOui(),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_axe_fixed_5_reconnaitre_non",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_axe",
-    difficulty: 3,
-    theme: "neutral",
-    text: "La figure rouge est-elle vraiment l’image de la figure bleue par symétrie ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["non"],
-    comparator: "mcq_exact",
-    hint: "Vérifie tous les sommets.",
-    explanation:
-      "Non. La figure rouge ressemble presque à une image symétrique, mais un sommet n’est pas placé correctement.",
-    tags: ["cm2", "symetrie", "axe", "erreur", "qcm", "canvas"],
-    canvas: symVerticalNon(),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_axe_fixed_6_axe_oblique",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_axe",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Un axe de symétrie peut-il être oblique ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
-    comparator: "mcq_exact",
-    hint: "Un axe est une droite de pliage : elle peut être penchée.",
-    explanation:
-      "Oui. Un axe de symétrie peut être vertical, horizontal ou oblique, si le pliage superpose bien les deux parties.",
-    tags: ["cm2", "symetrie", "axe", "oblique", "qcm", "canvas"],
-    canvas: symObliqueOui(),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_axe_fixed_7_axe_oblique_canvas",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_axe",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Les deux figures sont-elles symétriques par rapport à l’axe oblique ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
-    comparator: "mcq_exact",
-    hint: "L’axe oblique joue ici le rôle de miroir.",
-    explanation:
-      "Oui. Même si l’axe est penché, les deux figures se correspondent comme dans un miroir.",
-    tags: ["cm2", "symetrie", "axe", "oblique", "reconnaitre", "qcm", "canvas"],
-    canvas: symObliqueOui(),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_axe_fixed_8_pliage",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_axe",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Pour vérifier un axe de symétrie, on peut imaginer...",
-    format: "qcm",
-    choices: [
-      "un pliage",
-      "une division posée",
-      "un calcul de durée",
-      "un tableau de conversion",
-    ],
-    expected: ["un pliage"],
-    comparator: "mcq_exact",
-    hint: "Les deux parties doivent se superposer.",
-    explanation:
-      "Pour vérifier un axe de symétrie, on peut imaginer que l’on plie la figure selon l’axe. Les deux parties doivent se superposer.",
-    tags: ["cm2", "symetrie", "axe", "pliage", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_axe_fixed_9_axes_rectangle",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_axe",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Combien d’axes de symétrie possède un rectangle qui n’est pas un carré ?",
-    format: "qcm",
-    choices: ["2", "4", "1", "0"],
-    expected: ["2"],
-    comparator: "mcq_exact",
-    hint: "Il y a un axe vertical et un axe horizontal.",
-    explanation:
-      "Un rectangle non carré possède 2 axes de symétrie : un axe vertical et un axe horizontal.",
-    tags: ["cm2", "symetrie", "axe", "rectangle", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_axe_fixed_10_axes_carre",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_axe",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Combien d’axes de symétrie possède un carré ?",
-    format: "qcm",
-    choices: ["4", "2", "1", "0"],
-    expected: ["4"],
-    comparator: "mcq_exact",
-    hint: "Pense aux deux axes du milieu et aux deux diagonales.",
-    explanation:
-      "Un carré possède 4 axes de symétrie : deux axes passant par les milieux des côtés opposés et deux diagonales.",
-    tags: ["cm2", "symetrie", "axe", "carre", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_axe_fixed_11_axes_triangle_isocele",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_axe",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Combien d’axes de symétrie possède un triangle isocèle non équilatéral ?",
-    format: "qcm",
-    choices: ["1", "2", "3", "0"],
-    expected: ["1"],
-    comparator: "mcq_exact",
-    hint: "L’axe passe par le sommet principal et le milieu de la base.",
-    explanation:
-      "Un triangle isocèle non équilatéral possède 1 axe de symétrie.",
-    tags: ["cm2", "symetrie", "axe", "triangle_isocele", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_axe_fixed_12_axes_triangle_equilateral",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_axe",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Combien d’axes de symétrie possède un triangle équilatéral ?",
-    format: "qcm",
-    choices: ["3", "1", "2", "0"],
-    expected: ["3"],
-    comparator: "mcq_exact",
-    hint: "Les trois sommets jouent le même rôle.",
-    explanation:
-      "Un triangle équilatéral possède 3 axes de symétrie.",
-    tags: ["cm2", "symetrie", "axe", "triangle_equilateral", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_axe_fixed_13_erreur_diagonale_rectangle",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_axe",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Un élève dit : “La diagonale d’un rectangle non carré est un axe de symétrie.” A-t-il raison ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["non"],
-    comparator: "mcq_exact",
-    hint: "Imagine le pliage selon la diagonale.",
-    explanation:
-      "Non. Dans un rectangle non carré, les diagonales ne sont pas des axes de symétrie. Le pliage ne superpose pas exactement les deux parties.",
-    tags: ["cm2", "symetrie", "axe", "erreur", "rectangle", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_axe_fixed_14_open_methode",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_axe",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Explique comment vérifier qu’une droite est un axe de symétrie.",
-    format: "open",
-    expected: ["plier", "axe", "superposer", "miroir"],
-    comparator: "contains_keyword",
-    hint: "Utilise l’idée du pliage ou du miroir.",
-    explanation:
-      "Pour vérifier qu’une droite est un axe de symétrie, on imagine un pliage selon cette droite. Si les deux parties se superposent exactement, c’est un axe de symétrie.",
-    tags: ["cm2", "symetrie", "axe", "open", "methode"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_axe_fixed_15_reunion_motif",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_axe",
-    difficulty: 3,
-    theme: "reunion",
-    text: "Sur un motif de carrelage à La Réunion, une droite partage le dessin en deux parties superposables. Cette droite est...",
-    format: "qcm",
-    choices: [
-      "un axe de symétrie",
-      "un diamètre",
-      "une durée",
-      "une masse",
-    ],
-    expected: ["un axe de symétrie"],
-    comparator: "mcq_exact",
-    hint: "Les deux parties se superposent par pliage.",
-    explanation:
-      "Si une droite partage un motif en deux parties superposables, alors cette droite est un axe de symétrie.",
-    tags: ["cm2", "symetrie", "axe", "reunion", "motif", "qcm"],
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_axe_tpl_1_reconnaitre_vertical_horizontal",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_axe",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "L’axe doit jouer le rôle de miroir.",
-    tags: ["cm2", "symetrie", "axe", "template", "qcm", "canvas"],
-    generate: () => {
-      const vertical = Math.random() < 0.5;
-
-      return {
-        text: vertical
-          ? "Les deux figures sont-elles symétriques par rapport à l’axe vertical ?"
-          : "Les deux figures sont-elles symétriques par rapport à l’axe horizontal ?",
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: ["oui"],
-        comparator: "mcq_exact",
-        explanation: vertical
-          ? "Oui. La figure image est placée de l’autre côté de l’axe vertical, comme dans un miroir."
-          : "Oui. La figure image est placée de l’autre côté de l’axe horizontal, comme dans un miroir.",
-        canvas: vertical ? symVerticalOui() : symHorizontalOui(),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_axe_tpl_2_axes_figures_classiques",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_axe",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Imagine les pliages possibles.",
-    tags: ["cm2", "symetrie", "axe", "figures_classiques", "template", "qcm"],
-    generate: () => {
-      const item = randomChoice([
-        {
-          figure: "un carré",
-          expected: "4",
-          explanation:
-            "Un carré possède 4 axes de symétrie : deux axes du milieu et deux diagonales.",
-        },
-        {
-          figure: "un rectangle qui n’est pas un carré",
-          expected: "2",
-          explanation:
-            "Un rectangle non carré possède 2 axes de symétrie : un axe vertical et un axe horizontal.",
-        },
-        {
-          figure: "un triangle isocèle non équilatéral",
-          expected: "1",
-          explanation:
-            "Un triangle isocèle non équilatéral possède 1 axe de symétrie.",
-        },
-        {
-          figure: "un triangle équilatéral",
-          expected: "3",
-          explanation:
-            "Un triangle équilatéral possède 3 axes de symétrie.",
-        },
-      ]);
-
-      return {
-        text: `Combien d’axes de symétrie possède ${item.figure} ?`,
-        format: "qcm",
-        // Le test portait sur un premier mélange, et renvoyait un SECOND
-        // mélange indépendant : rien ne garantissait que la bonne réponse y
-        // figure. Neuf tirages sur soixante donnaient une question impossible.
-        choices: makeChoices(item.expected, ["0", "1", "2", "3", "4"]),
-        expected: [item.expected],
-        comparator: "mcq_exact",
-        explanation: item.explanation,
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_axe_tpl_3_oui_non",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_axe",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Vérifie si tous les sommets correspondent.",
-    tags: ["cm2", "symetrie", "axe", "erreur", "template", "qcm", "canvas"],
-    generate: () => {
-      const ok = Math.random() < 0.5;
-
-      return {
-        text: "La figure rouge est-elle l’image de la figure bleue par symétrie axiale ?",
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: [ok ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation: ok
-          ? "Oui. Les sommets correspondants sont bien placés de l’autre côté de l’axe."
-          : "Non. Au moins un sommet rouge n’est pas placé correctement par rapport à l’axe.",
-        canvas: ok ? symVerticalOui() : symVerticalNon(),
-      };
-    },
-  },
-  // ============================================================
-  // SYMETRIE_COMPLETER
-  // ============================================================
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_completer_fixed_1_principe",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_completer",
-    difficulty: 1,
-    theme: "neutral",
-    text: "Compléter une figure par symétrie, c’est...",
-    format: "qcm",
-    choices: [
-      "dessiner l’autre moitié comme dans un miroir",
-      "changer toutes les longueurs",
-      "effacer l’axe",
-      "transformer la figure en cercle",
-    ],
-    expected: ["dessiner l’autre moitié comme dans un miroir"],
-    comparator: "mcq_exact",
-    hint: "L’axe sert de miroir.",
-    explanation:
-      "Compléter une figure par symétrie, c’est dessiner l’autre moitié comme dans un miroir, de l’autre côté de l’axe.",
-    tags: ["cm2", "symetrie", "completer", "definition", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_completer_fixed_2_distance",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_completer",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Pour compléter une figure par symétrie, un point image doit être placé...",
-    format: "qcm",
-    choices: [
-      "de l’autre côté de l’axe, à la même distance",
-      "sur un point choisi au hasard",
-      "toujours sur l’axe",
-      "plus loin que le point de départ",
-    ],
-    expected: ["de l’autre côté de l’axe, à la même distance"],
-    comparator: "mcq_exact",
-    hint: "Même distance à l’axe.",
-    explanation:
-      "Dans une symétrie, le point image se place de l’autre côté de l’axe, à la même distance que le point de départ.",
-    tags: ["cm2", "symetrie", "completer", "distance", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_completer_fixed_3_vertical_oui",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_completer",
-    difficulty: 2,
-    theme: "neutral",
-    text: "La figure rouge complète-t-elle correctement la figure bleue par symétrie ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
-    comparator: "mcq_exact",
-    hint: "Compare les distances à l’axe.",
-    explanation:
-      "Oui. La partie rouge est placée de l’autre côté de l’axe vertical, comme le reflet de la partie bleue.",
-    tags: ["cm2", "symetrie", "completer", "axe_vertical", "qcm", "canvas"],
-    canvas: symVerticalOui(),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_completer_fixed_4_horizontal_oui",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_completer",
-    difficulty: 2,
-    theme: "neutral",
-    text: "La figure rouge complète-t-elle correctement la figure bleue par symétrie par rapport à l’axe horizontal ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
-    comparator: "mcq_exact",
-    hint: "L’image doit être sous l’axe, à la même distance.",
-    explanation:
-      "Oui. La partie rouge est placée de l’autre côté de l’axe horizontal, à la même distance que la partie bleue.",
-    tags: ["cm2", "symetrie", "completer", "axe_horizontal", "qcm", "canvas"],
-    canvas: symHorizontalOui(),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_completer_fixed_5_erreur",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_completer",
-    difficulty: 3,
-    theme: "neutral",
-    text: "La figure rouge complète-t-elle correctement la figure bleue par symétrie ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["non"],
-    comparator: "mcq_exact",
-    hint: "Une figure presque correcte peut contenir une erreur.",
-    explanation:
-      "Non. Une partie de la figure rouge n’est pas à la bonne place : elle ne complète donc pas correctement la symétrie.",
-    tags: ["cm2", "symetrie", "completer", "erreur", "qcm", "canvas"],
-    canvas: symVerticalNon(),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_completer_fixed_6_point_distance",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_completer",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Un point est à 3 carreaux de l’axe. Son point symétrique doit être...",
-    format: "qcm",
-    choices: [
-      "à 3 carreaux de l’axe de l’autre côté",
-      "à 1 carreau de l’axe",
-      "sur l’axe",
-      "à 6 carreaux de l’axe",
-    ],
-    expected: ["à 3 carreaux de l’axe de l’autre côté"],
-    comparator: "mcq_exact",
-    hint: "On garde la même distance.",
-    explanation:
-      "Le point symétrique doit être placé de l’autre côté de l’axe, à la même distance. Ici, il est donc à 3 carreaux.",
-    tags: ["cm2", "symetrie", "completer", "distance", "qcm"],
-  },
-
-  {
-    kind: "fixed",
+  /* ── SYMETRIE_COMPLETER (★1-★5) ── */
+  fixe({
     id: "cm2_symetrie_completer_fixed_7_point_sur_axe",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
     microId: "symetrie_completer",
     difficulty: 3,
-    theme: "neutral",
-    text: "Si un point est placé sur l’axe de symétrie, son symétrique est...",
+    text: "Pour compléter une figure, que devient un sommet placé sur l'axe de symétrie ?",
     format: "qcm",
-    choices: [
-      "le point lui-même",
-      "toujours à droite",
-      "toujours plus loin",
-      "impossible à trouver",
-    ],
-    expected: ["le point lui-même"],
+    choices: ["il reste à sa place", "il passe à 1 carreau de l'autre côté", "il va contre le bord de la feuille", "il disparaît"],
+    expected: ["il reste à sa place"],
     comparator: "mcq_exact",
-    hint: "Un point sur le miroir ne bouge pas.",
-    explanation:
-      "Un point placé sur l’axe de symétrie reste au même endroit. Son symétrique est le point lui-même.",
+    hint: "Il est à 0 carreau de l'axe.",
+    explanation: "Un sommet sur l'axe est à 0 carreau de l'axe : son symétrique est lui-même, il reste à sa place.",
     tags: ["cm2", "symetrie", "completer", "point_sur_axe", "qcm"],
-  },
+  }),
+  tpl(A.completer, 10, 1, "Reporte de l'autre côté de l'axe, à la même distance.", genCompleterPoint),
+  tpl(A.completer, 11, 1, "L'axe est un miroir.", genCompleterSens),
+  tpl(A.completer, 12, 2, "L'autre moitié va aussi loin de l'axe que la moitié bleue.", genJusquou),
+  tpl(A.completer, 13, 2, "Vérifie chaque sommet : même distance à l'axe, de l'autre côté, et la moitié doit être retournée.", () => genVerifier(0, 0, moitieDebut)),
+  tpl(A.completer, 14, 2, "Les deux moitiés ont la même mesure.", genLargeur),
+  tpl(A.completer, 15, 3, "Les deux moitiés couvrent autant de carreaux.", () => genAireComplete(false)),
+  tpl(A.completer, 16, 3, "Compte jusqu'à l'axe, puis autant de l'autre côté.", () => genSepareFigure(true)),
+  tpl(A.completer, 17, 3, H_AXE, () => genSommet(true)),
+  tpl(A.completer, 18, 4, "Avec un axe oblique, suis les diagonales des carreaux.", () => genOblique(ouverture, true)),
+  tpl(A.completer, 19, 4, "La symétrie conserve les aires.", () => genAireComplete(true)),
+  tpl(A.completer, 20, 4, "Le côté collé à l'axe n'est plus sur le tour de la figure complète.", () => genPerimetreComplet(moitieDebut, false)),
+  tpl(A.completer, 21, 5, "Avec un axe oblique, suis les diagonales des carreaux.", () => genPointOblique()),
+  tpl(A.completer, 22, 5, "Compte le tour en carreaux, puis multiplie par 0,5.", () => genPerimetreComplet(moitieDebut, true)),
+  tpl(A.completer, 23, 5, "Avec un axe oblique, suis les diagonales des carreaux.", () => genOblique(defiDebut, true)),
 
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_completer_fixed_8_ordre",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_completer",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Pour compléter une figure sur quadrillage, que faut-il faire avec chaque sommet ?",
-    format: "qcm",
-    choices: [
-      "placer son symétrique de l’autre côté de l’axe",
-      "le déplacer au hasard",
-      "le placer toujours sur l’axe",
-      "le supprimer",
-    ],
-    expected: ["placer son symétrique de l’autre côté de l’axe"],
-    comparator: "mcq_exact",
-    hint: "On complète sommet par sommet.",
-    explanation:
-      "Pour compléter une figure par symétrie, on place le symétrique de chaque sommet, puis on relie les points obtenus.",
-    tags: ["cm2", "symetrie", "completer", "methode", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_completer_fixed_9_open_methode",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_completer",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Explique comment compléter une figure par symétrie sur quadrillage.",
-    format: "open",
-    expected: ["axe", "même", "distance", "autre côté", "relier"],
-    comparator: "contains_keyword",
-    hint: "Parle de l’axe, de la distance et des points à relier.",
-    explanation:
-      "On repère chaque sommet de la figure. Pour chacun, on place son symétrique de l’autre côté de l’axe, à la même distance, puis on relie les points.",
-    tags: ["cm2", "symetrie", "completer", "open", "methode"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_completer_fixed_10_reunion_motif",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_completer",
-    difficulty: 3,
-    theme: "reunion",
-    text: "Sur un motif de carrelage réunionnais, on voit seulement la moitié gauche. Pour compléter le motif, il faut...",
-    format: "qcm",
-    choices: [
-      "dessiner la moitié droite comme dans un miroir",
-      "changer toutes les couleurs au hasard",
-      "effacer l’axe",
-      "dessiner une figure plus grande",
-    ],
-    expected: ["dessiner la moitié droite comme dans un miroir"],
-    comparator: "mcq_exact",
-    hint: "L’axe sert de miroir.",
-    explanation:
-      "Pour compléter un motif symétrique, on dessine l’autre moitié comme son reflet par rapport à l’axe.",
-    tags: ["cm2", "symetrie", "completer", "reunion", "motif", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_completer_fixed_11_axe_oblique_defi",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_completer",
-    difficulty: 5,
-    theme: "neutral",
-    text: "La figure rouge complète-t-elle correctement la figure bleue avec un axe oblique ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
-    comparator: "mcq_exact",
-    hint: "Même avec un axe oblique, l’axe joue le rôle de miroir.",
-    explanation:
-      "Oui. L’axe est oblique, mais il joue bien le rôle de miroir : les deux parties se correspondent.",
-    tags: ["cm2", "symetrie", "completer", "axe_oblique", "defi", "qcm", "canvas"],
-    canvas: symObliqueOui(),
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_completer_tpl_1_distance_point",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_completer",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Le point symétrique garde la même distance à l’axe.",
-    tags: ["cm2", "symetrie", "completer", "distance", "template", "qcm"],
-    generate: () => {
-      const d = randomChoice([1, 2, 3, 4]);
-      // À un carreau, « un de moins » s'écrivait comme la bonne réponse.
-      const autre = d > 1 ? d - 1 : d + 2;
-
-      return {
-        text: `Un point est à ${d} carreau(x) de l’axe. À quelle distance de l’axe se trouve son symétrique ?`,
-        format: "qcm",
-        choices: shuffle([
-          `${d} carreau(x)`,
-          `${d + 1} carreau(x)`,
-          `${autre} carreau(x)`,
-          "sur l’axe",
-        ]),
-        expected: [`${d} carreau(x)`],
-        comparator: "mcq_exact",
-        explanation:
-          `Le symétrique d’un point est à la même distance de l’axe. Il est donc à ${d} carreau(x) de l’axe.`,
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_completer_tpl_2_vertical_horizontal",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_completer",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Observe si la figure rouge complète correctement la figure bleue.",
-    tags: ["cm2", "symetrie", "completer", "template", "qcm", "canvas"],
-    generate: () => {
-      const horizontal = Math.random() < 0.5;
-
-      return {
-        text: horizontal
-          ? "La figure rouge complète-t-elle correctement la figure bleue par rapport à l’axe horizontal ?"
-          : "La figure rouge complète-t-elle correctement la figure bleue par rapport à l’axe vertical ?",
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: ["oui"],
-        comparator: "mcq_exact",
-        explanation: horizontal
-          ? "Oui. La partie rouge est le reflet de la partie bleue par rapport à l’axe horizontal."
-          : "Oui. La partie rouge est le reflet de la partie bleue par rapport à l’axe vertical.",
-        canvas: horizontal ? symHorizontalOui() : symVerticalOui(),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_completer_tpl_3_erreur_ou_non",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_completer",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Une seule erreur suffit pour que la symétrie soit fausse.",
-    tags: ["cm2", "symetrie", "completer", "erreur", "template", "qcm", "canvas"],
-    generate: () => {
-      const ok = Math.random() < 0.5;
-
-      return {
-        text: "La figure rouge complète-t-elle correctement la figure bleue par symétrie ?",
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: [ok ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation: ok
-          ? "Oui. Les sommets rouges sont placés comme les reflets des sommets bleus."
-          : "Non. Au moins un sommet rouge n’est pas placé au bon endroit.",
-        canvas: ok ? symVerticalOui() : symVerticalNon(),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_completer_tpl_4_position",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_completer",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "L’image est de l’autre côté de l’axe.",
-    tags: ["cm2", "symetrie", "completer", "position", "template", "qcm"],
-    generate: () => {
-      const d = randomChoice([1, 2, 3]);
-      const left = Math.random() < 0.5;
-
-      return {
-        text: left
-          ? `Un point est à ${d} carreau(x) à gauche d’un axe vertical. Où se trouve son symétrique ?`
-          : `Un point est à ${d} carreau(x) à droite d’un axe vertical. Où se trouve son symétrique ?`,
-        format: "qcm",
-        choices: shuffle([
-          left
-            ? `${d} carreau(x) à droite de l’axe`
-            : `${d} carreau(x) à gauche de l’axe`,
-          left
-            ? `${d} carreau(x) à gauche de l’axe`
-            : `${d} carreau(x) à droite de l’axe`,
-          "sur l’axe",
-          `${d + 1} carreau(x) de l’autre côté`,
-        ]),
-        expected: [
-          left
-            ? `${d} carreau(x) à droite de l’axe`
-            : `${d} carreau(x) à gauche de l’axe`,
-        ],
-        comparator: "mcq_exact",
-        explanation:
-          "Le symétrique d’un point se place de l’autre côté de l’axe, à la même distance.",
-      };
-    },
-  },
-    // ============================================================
-  // SYMETRIE_CONSTRUIRE
-  // ============================================================
-
-  {
-    kind: "fixed",
+  /* ── SYMETRIE_CONSTRUIRE (★2-★4) ── */
+  fixe({
     id: "cm2_symetrie_construire_fixed_1_point_methode",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
     microId: "symetrie_construire",
     difficulty: 2,
-    theme: "neutral",
-    text: "Pour construire le symétrique A' d’un point A, il faut placer A'...",
+    text: "Pour construire le symétrique d'un point, on le place...",
     format: "qcm",
-    choices: [
-      "de l’autre côté de l’axe, à la même distance",
-      "sur n’importe quel point du quadrillage",
-      "toujours sur l’axe",
-      "plus loin que le point A",
-    ],
-    expected: ["de l’autre côté de l’axe, à la même distance"],
+    choices: ["de l'autre côté de l'axe, à la même distance", "du même côté de l'axe, à la même distance", "de l'autre côté de l'axe, deux fois plus loin", "contre le bord de la feuille"],
+    expected: ["de l'autre côté de l'axe, à la même distance"],
     comparator: "mcq_exact",
-    hint: "L’axe joue le rôle de miroir.",
-    explanation:
-      "Pour construire A', on place le point de l’autre côté de l’axe, à la même distance que A.",
-    tags: ["cm2", "symetrie", "construire", "point", "methode", "qcm"],
-  },
+    hint: "L'axe est un miroir.",
+    explanation: "Le symétrique d'un point est de l'autre côté de l'axe, sur la perpendiculaire à l'axe, à la même distance.",
+    tags: ["cm2", "symetrie", "construire", "methode", "qcm"],
+  }),
+  tpl(A.construire, 10, 2, "Le symétrique est de l'autre côté de l'axe, à la même distance.", () => genPointOu()),
+  tpl(A.construire, 11, 2, H_AXE, () => genSommet(false)),
+  tpl(A.construire, 12, 2, "Compte jusqu'à l'axe, puis autant de l'autre côté.", genSepare),
+  tpl(A.construire, 13, 3, "Vérifie chaque sommet : même distance à l'axe, de l'autre côté, et la figure doit être retournée.", () => genVerifier(1, 3)),
+  tpl(A.construire, 14, 3, "Compte jusqu'à l'axe, puis autant de l'autre côté.", () => genSepareFigure(false)),
+  tpl(A.construire, 15, 3, "Le point et son symétrique sont sur une perpendiculaire à l'axe.", genEquerre),
+  tpl(A.construire, 16, 4, "Avec un axe oblique, compte en suivant les diagonales des carreaux.", () => genOblique()),
+  tpl(A.construire, 17, 4, "Un sommet posé sur l'axe est son propre symétrique.", genSommetsFixes),
+  tpl(A.construire, 18, 4, "Vérifie chaque sommet, même ceux qui touchent l'axe.", () => genVerifier(0, 1)),
+  tpl(A.construire, 19, 4, "Avec un axe oblique, suis les diagonales des carreaux.", () => genPointOblique()),
 
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_construire_fixed_2_point_canvas_vertical",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_construire",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Le point A' est-il bien le symétrique du point A par rapport à l’axe vertical ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
-    comparator: "mcq_exact",
-    hint: "A et A' doivent être à la même distance de l’axe.",
-    explanation:
-      "Oui. Le point A et son image A' sont de chaque côté de l’axe vertical, à la même distance.",
-    tags: ["cm2", "symetrie", "construire", "point", "axe_vertical", "qcm", "canvas"],
-    canvas: symPointVertical(2),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_construire_fixed_3_point_canvas_horizontal",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_construire",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Le point A' est-il bien le symétrique du point A par rapport à l’axe horizontal ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
-    comparator: "mcq_exact",
-    hint: "A et A' doivent être de part et d’autre de l’axe.",
-    explanation:
-      "Oui. Le point A' est placé de l’autre côté de l’axe horizontal, à la même distance que A.",
-    tags: ["cm2", "symetrie", "construire", "point", "axe_horizontal", "qcm", "canvas"],
-    canvas: symPointHorizontal(2),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_construire_fixed_4_point_distance",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_construire",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Le point A est à 4 carreaux à gauche de l’axe vertical. Où doit être A' ?",
-    format: "qcm",
-    choices: [
-      "à 4 carreaux à droite de l’axe",
-      "à 4 carreaux à gauche de l’axe",
-      "sur l’axe",
-      "à 2 carreaux à droite de l’axe",
-    ],
-    expected: ["à 4 carreaux à droite de l’axe"],
-    comparator: "mcq_exact",
-    hint: "Même distance, autre côté.",
-    explanation:
-      "A' doit être placé de l’autre côté de l’axe, à la même distance. Il sera donc à 4 carreaux à droite de l’axe.",
-    tags: ["cm2", "symetrie", "construire", "point", "distance", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_construire_fixed_5_point_sur_axe",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_construire",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Un point placé sur l’axe de symétrie...",
-    format: "qcm",
-    choices: [
-      "reste au même endroit",
-      "se déplace toujours à droite",
-      "se déplace toujours en haut",
-      "disparaît",
-    ],
-    expected: ["reste au même endroit"],
-    comparator: "mcq_exact",
-    hint: "Un point sur le miroir ne bouge pas.",
-    explanation:
-      "Un point placé sur l’axe de symétrie est son propre symétrique. Il reste au même endroit.",
-    tags: ["cm2", "symetrie", "construire", "point_sur_axe", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_construire_fixed_6_segment",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_construire",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Le segment A'B' est-il bien l’image du segment AB par symétrie axiale ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
-    comparator: "mcq_exact",
-    hint: "Compare les extrémités A avec A' et B avec B'.",
-    explanation:
-      "Oui. Les extrémités A et B ont été placées de l’autre côté de l’axe à la même distance. Le segment A'B' est donc l’image de AB.",
-    tags: ["cm2", "symetrie", "construire", "segment", "qcm", "canvas"],
-    canvas: symSegmentVertical(),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_construire_fixed_7_figure",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_construire",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Pour construire le symétrique d’une figure, il faut construire le symétrique...",
-    format: "qcm",
-    choices: [
-      "de chacun de ses sommets importants",
-      "d’un seul sommet seulement",
-      "de l’axe seulement",
-      "d’un point choisi au hasard",
-    ],
-    expected: ["de chacun de ses sommets importants"],
-    comparator: "mcq_exact",
-    hint: "Une figure est construite à partir de ses points.",
-    explanation:
-      "Pour construire le symétrique d’une figure, on construit le symétrique de chaque sommet important, puis on relie les points obtenus.",
-    tags: ["cm2", "symetrie", "construire", "figure", "methode", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_construire_fixed_8_figure_canvas",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_construire",
-    difficulty: 3,
-    theme: "neutral",
-    text: "La figure rouge est-elle bien la construction symétrique de la figure bleue ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
-    comparator: "mcq_exact",
-    hint: "Vérifie les sommets un par un.",
-    explanation:
-      "Oui. Chaque sommet rouge correspond au sommet bleu placé en miroir par rapport à l’axe.",
-    tags: ["cm2", "symetrie", "construire", "figure", "qcm", "canvas"],
-    canvas: symFigureVertical(),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_construire_fixed_9_figure_erreur_canvas",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_construire",
-    difficulty: 4,
-    theme: "neutral",
-    text: "La construction rouge est-elle correcte ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["non"],
-    comparator: "mcq_exact",
-    hint: "Une seule erreur de sommet rend la construction fausse.",
-    explanation:
-      "Non. Un des sommets rouges n’est pas placé au bon endroit. La construction symétrique n’est donc pas correcte.",
-    tags: ["cm2", "symetrie", "construire", "figure", "erreur", "qcm", "canvas"],
-    canvas: symFigureVerticalErreur(),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_construire_fixed_10_open_point",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_construire",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Explique comment construire le symétrique A' d’un point A sur quadrillage.",
-    format: "open",
-    expected: ["axe", "autre côté", "même", "distance"],
-    comparator: "contains_keyword",
-    hint: "Parle de l’axe et de la distance.",
-    explanation:
-      "On repère la distance entre A et l’axe. Puis on place A' de l’autre côté de l’axe, à la même distance.",
-    tags: ["cm2", "symetrie", "construire", "point", "open", "methode"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_construire_fixed_11_open_figure",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_construire",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Explique comment construire le symétrique d’une figure sur quadrillage.",
-    format: "open",
-    expected: ["sommets", "axe", "distance", "relier"],
-    comparator: "contains_keyword",
-    hint: "Construis d’abord les sommets images.",
-    explanation:
-      "On construit le symétrique de chaque sommet de la figure, puis on relie les sommets obtenus dans le bon ordre.",
-    tags: ["cm2", "symetrie", "construire", "figure", "open", "methode"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_construire_fixed_12_erreur_distance",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_construire",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Un élève place A' de l’autre côté de l’axe, mais pas à la même distance que A. Est-ce correct ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["non"],
-    comparator: "mcq_exact",
-    hint: "La distance à l’axe doit être conservée.",
-    explanation:
-      "Non. Pour une symétrie correcte, A et A' doivent être à la même distance de l’axe.",
-    tags: ["cm2", "symetrie", "construire", "erreur", "distance", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_construire_fixed_13_erreur_un_seul_sommet",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_construire",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Pour vérifier la construction symétrique d’une figure, suffit-il de vérifier un seul sommet ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["non"],
-    comparator: "mcq_exact",
-    hint: "Un autre sommet peut être mal placé.",
-    explanation:
-      "Non. Il faut vérifier tous les sommets importants. Un seul sommet correct ne suffit pas à valider toute la figure.",
-    tags: ["cm2", "symetrie", "construire", "verification", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_construire_fixed_14_reunion_frise",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_construire",
-    difficulty: 3,
-    theme: "reunion",
-    text: "Pour reproduire un motif symétrique sur une frise réunionnaise, il faut placer chaque point image...",
-    format: "qcm",
-    choices: [
-      "de l’autre côté de l’axe, à la même distance",
-      "au hasard pour décorer",
-      "uniquement sur l’axe",
-      "toujours plus loin que le modèle",
-    ],
-    expected: ["de l’autre côté de l’axe, à la même distance"],
-    comparator: "mcq_exact",
-    hint: "La symétrie doit être précise.",
-    explanation:
-      "Pour construire un motif symétrique, chaque point image doit être placé de l’autre côté de l’axe, à la même distance.",
-    tags: ["cm2", "symetrie", "construire", "reunion", "motif", "qcm"],
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_construire_tpl_1_distance_verticale",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_construire",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Même distance, autre côté.",
-    tags: ["cm2", "symetrie", "construire", "point", "distance", "template", "qcm", "canvas"],
-    generate: () => {
-      const d = randomChoice([1, 2, 3]);
-
-      return {
-        text: `Le point A est à ${d} carreau(x) à gauche de l’axe vertical. Où doit être A' ?`,
-        format: "qcm",
-        choices: shuffle([
-          `${d} carreau(x) à droite de l’axe`,
-          `${d} carreau(x) à gauche de l’axe`,
-          `${d + 1} carreau(x) à droite de l’axe`,
-          "sur l’axe",
-        ]),
-        expected: [`${d} carreau(x) à droite de l’axe`],
-        comparator: "mcq_exact",
-        explanation:
-          `A' doit être de l’autre côté de l’axe, à la même distance que A : donc à ${d} carreau(x) à droite.`,
-        canvas: symPointVertical(d),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_construire_tpl_2_distance_horizontale",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_construire",
-    difficulty: 2,
-    theme: "neutral",
-    hint: "Même distance, de l’autre côté de l’axe horizontal.",
-    tags: ["cm2", "symetrie", "construire", "point", "distance", "template", "qcm", "canvas"],
-    generate: () => {
-      const d = randomChoice([1, 2, 3]);
-
-      return {
-        text: `Le point A est à ${d} carreau(x) au-dessus de l’axe horizontal. Où doit être A' ?`,
-        format: "qcm",
-        choices: shuffle([
-          `${d} carreau(x) au-dessous de l’axe`,
-          `${d} carreau(x) au-dessus de l’axe`,
-          `${d + 1} carreau(x) au-dessous de l’axe`,
-          "sur l’axe",
-        ]),
-        expected: [`${d} carreau(x) au-dessous de l’axe`],
-        comparator: "mcq_exact",
-        explanation:
-          `A' doit être de l’autre côté de l’axe, à la même distance que A : donc à ${d} carreau(x) au-dessous.`,
-        canvas: symPointHorizontal(d),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_construire_tpl_3_point_ou_figure",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_construire",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Vérifie la distance à l’axe.",
-    tags: ["cm2", "symetrie", "construire", "template", "qcm", "canvas"],
-    generate: () => {
-      const askPoint = Math.random() < 0.5;
-
-      return {
-        text: askPoint
-          ? "Le point A' est-il bien le symétrique du point A ?"
-          : "La figure rouge est-elle bien le symétrique de la figure bleue ?",
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: ["oui"],
-        comparator: "mcq_exact",
-        explanation: askPoint
-          ? "Oui. A et A' sont de chaque côté de l’axe, à la même distance."
-          : "Oui. Les sommets rouges correspondent aux sommets bleus par symétrie.",
-        canvas: askPoint ? symPointVertical(2) : symFigureVertical(),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_construire_tpl_4_erreur",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_construire",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Vérifie tous les points importants.",
-    tags: ["cm2", "symetrie", "construire", "erreur", "template", "qcm", "canvas"],
-    generate: () => ({
-      text: "La construction rouge est-elle une construction symétrique correcte ?",
-      format: "qcm",
-      choices: ["oui", "non"],
-      expected: ["non"],
-      comparator: "mcq_exact",
-      explanation:
-        "Non. Un sommet rouge est mal placé : la figure n’est donc pas correctement construite par symétrie.",
-      canvas: symFigureVerticalErreur(),
-    }),
-  },
-    // ============================================================
-  // SYMETRIE_PROPRIETE
-  // ============================================================
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_propriete_fixed_1_meme_distance",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_propriete",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Dans une symétrie axiale, un point et son image sont...",
-    format: "qcm",
-    choices: [
-      "à la même distance de l’axe",
-      "toujours sur l’axe",
-      "toujours à 1 carreau de l’axe",
-      "placés au hasard",
-    ],
-    expected: ["à la même distance de l’axe"],
-    comparator: "mcq_exact",
-    hint: "L’axe sert de miroir.",
-    explanation:
-      "Dans une symétrie axiale, un point et son image sont à la même distance de l’axe.",
-    tags: ["cm2", "symetrie", "propriete", "distance", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_propriete_fixed_2_autre_cote",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_propriete",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Dans une symétrie axiale, l’image d’un point est généralement...",
-    format: "qcm",
-    choices: [
-      "de l’autre côté de l’axe",
-      "toujours au même endroit",
-      "toujours plus grande",
-      "toujours effacée",
-    ],
-    expected: ["de l’autre côté de l’axe"],
-    comparator: "mcq_exact",
-    hint: "Comme dans un miroir.",
-    explanation:
-      "Dans une symétrie axiale, l’image d’un point est généralement de l’autre côté de l’axe, sauf si le point est déjà sur l’axe.",
-    tags: ["cm2", "symetrie", "propriete", "autre_cote", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_propriete_fixed_3_point_sur_axe",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_propriete",
-    difficulty: 2,
-    theme: "neutral",
-    text: "Un point placé sur l’axe de symétrie...",
-    format: "qcm",
-    choices: [
-      "ne change pas de place",
-      "se déplace toujours à gauche",
-      "se déplace toujours à droite",
-      "devient un segment",
-    ],
-    expected: ["ne change pas de place"],
-    comparator: "mcq_exact",
-    hint: "Il est déjà sur le miroir.",
-    explanation:
-      "Un point placé sur l’axe de symétrie est son propre symétrique. Il ne change pas de place.",
-    tags: ["cm2", "symetrie", "propriete", "point_sur_axe", "qcm"],
-  },
-
-  {
-    kind: "fixed",
+  /* ── SYMETRIE_PROPRIETE (★2-★4) ── */
+  fixe({
     id: "cm2_symetrie_propriete_fixed_4_conserve_longueurs",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
     microId: "symetrie_propriete",
     difficulty: 3,
-    theme: "neutral",
     text: "Une symétrie axiale conserve...",
     format: "qcm",
-    choices: [
-      "les longueurs",
-      "seulement les couleurs",
-      "seulement les noms des points",
-      "aucune mesure",
-    ],
-    expected: ["les longueurs"],
+    choices: ["les longueurs, les angles et les aires", "seulement les longueurs", "seulement la forme, pas la taille", "rien : tout change"],
+    expected: ["les longueurs, les angles et les aires"],
     comparator: "mcq_exact",
-    hint: "La figure n’est pas déformée.",
-    explanation:
-      "Une symétrie axiale ne déforme pas la figure : les longueurs sont conservées.",
-    tags: ["cm2", "symetrie", "propriete", "longueurs", "qcm"],
-  },
+    hint: "Pense à un reflet dans un miroir.",
+    explanation: "Le reflet a exactement la même forme et la même taille : longueurs, angles et aires sont conservés.",
+    tags: ["cm2", "symetrie", "propriete", "conservation", "qcm"],
+  }),
+  tpl(A.propriete, 10, 2, "Pense au pliage le long de l'axe.", genFait),
+  tpl(A.propriete, 11, 2, "La symétrie ne change pas les longueurs.", genMesures),
+  tpl(A.propriete, 12, 2, "Un point et son symétrique : même distance à l'axe.", () => genPointOu()),
+  tpl(A.propriete, 13, 3, "La flèche pointe-t-elle vers l'axe, ou le long de l'axe ?", genFleche),
+  tpl(A.propriete, 14, 3, "L'axe est à mi-chemin entre un point et son symétrique.", genPointAxe),
+  tpl(A.propriete, 15, 3, "Le segment qui relie un point à son symétrique coupe l'axe à angle droit.", genPerpendiculaire),
+  tpl(A.propriete, 16, 3, "La symétrie conserve les longueurs.", genLongueurCm),
+  tpl(A.propriete, 17, 4, "La symétrie conserve les longueurs, les angles et les aires.", genConserve),
+  tpl(A.propriete, 18, 4, "Regarde le dessin : même taille, même distance à l'axe, retournée.", genPhraseVraie),
+  tpl(A.propriete, 19, 4, "Le symétrique est retourné, pas glissé.", () => genVerifier(1, 2)),
+  tpl(A.propriete, 20, 4, "Chaque sommet a un seul symétrique.", genNbSommets),
 
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_propriete_fixed_5_conserve_forme",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_propriete",
-    difficulty: 3,
-    theme: "neutral",
-    text: "L’image d’une figure par symétrie axiale a...",
-    format: "qcm",
-    choices: [
-      "la même forme et la même taille",
-      "toujours une taille plus grande",
-      "toujours une forme différente",
-      "toujours 4 côtés",
-    ],
-    expected: ["la même forme et la même taille"],
-    comparator: "mcq_exact",
-    hint: "Un miroir ne déforme pas.",
-    explanation:
-      "La symétrie axiale conserve la forme et la taille de la figure.",
-    tags: ["cm2", "symetrie", "propriete", "forme", "taille", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_propriete_fixed_6_segment_longueur",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_propriete",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Un segment [AB] mesure 5 cm. Son image [A'B'] par symétrie axiale mesure...",
-    format: "qcm",
-    choices: ["5 cm", "10 cm", "2 cm", "on ne peut pas savoir"],
-    expected: ["5 cm"],
-    comparator: "mcq_exact",
-    hint: "La symétrie conserve les longueurs.",
-    explanation:
-      "La symétrie axiale conserve les longueurs. Si [AB] mesure 5 cm, alors [A'B'] mesure aussi 5 cm.",
-    tags: ["cm2", "symetrie", "propriete", "longueur", "segment", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_propriete_fixed_7_erreur_agrandit",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_propriete",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Un élève dit : “La symétrie axiale agrandit la figure.” A-t-il raison ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["non"],
-    comparator: "mcq_exact",
-    hint: "Une symétrie ne change pas la taille.",
-    explanation:
-      "Non. Une symétrie axiale ne change pas la taille de la figure. Elle produit une image en miroir.",
-    tags: ["cm2", "symetrie", "propriete", "erreur", "agrandissement", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_propriete_fixed_8_erreur_distance",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_propriete",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Un élève place A' de l’autre côté de l’axe, mais plus loin que A. Est-ce une symétrie correcte ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["non"],
-    comparator: "mcq_exact",
-    hint: "La distance à l’axe doit être la même.",
-    explanation:
-      "Non. Pour une symétrie correcte, A et A' doivent être à la même distance de l’axe.",
-    tags: ["cm2", "symetrie", "propriete", "erreur", "distance", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_propriete_fixed_9_canvas_distance",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_propriete",
-    difficulty: 3,
-    theme: "neutral",
-    text: "Sur la figure, A et A' respectent-ils la propriété de même distance à l’axe ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
-    comparator: "mcq_exact",
-    hint: "Compte les carreaux de chaque côté de l’axe.",
-    explanation:
-      "Oui. A et A' sont placés de part et d’autre de l’axe, à la même distance.",
-    tags: ["cm2", "symetrie", "propriete", "distance", "qcm", "canvas"],
-    canvas: symPointVertical(2),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_propriete_fixed_10_canvas_figure",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_propriete",
-    difficulty: 3,
-    theme: "neutral",
-    text: "La figure rouge a-t-elle la même forme que la figure bleue ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
-    comparator: "mcq_exact",
-    hint: "Une symétrie ne déforme pas la figure.",
-    explanation:
-      "Oui. La figure rouge est l’image symétrique de la figure bleue : elle a donc la même forme et la même taille.",
-    tags: ["cm2", "symetrie", "propriete", "forme", "taille", "qcm", "canvas"],
-    canvas: symFigureVertical(),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_propriete_fixed_11_open_conservation",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_propriete",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Cite deux choses conservées par une symétrie axiale.",
-    format: "open",
-    expected: ["longueur", "forme", "taille", "angle", "distance"],
-    comparator: "contains_keyword",
-    hint: "Pense à ce qui ne change pas dans l’image.",
-    explanation:
-      "Une symétrie axiale conserve par exemple les longueurs, la forme, la taille et les angles.",
-    tags: ["cm2", "symetrie", "propriete", "open", "conservation"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_propriete_fixed_12_open_distance",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_propriete",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Explique la propriété de même distance à l’axe.",
-    format: "open",
-    expected: ["point", "image", "même", "distance", "axe"],
-    comparator: "contains_keyword",
-    hint: "Parle d’un point et de son image.",
-    explanation:
-      "Dans une symétrie axiale, un point et son image sont placés de part et d’autre de l’axe, à la même distance de cet axe.",
-    tags: ["cm2", "symetrie", "propriete", "distance", "open"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_propriete_fixed_13_reunion_motif",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_propriete",
-    difficulty: 3,
-    theme: "reunion",
-    text: "Sur un motif symétrique de carrelage à La Réunion, la partie image garde...",
-    format: "qcm",
-    choices: [
-      "la même forme et la même taille",
-      "une taille toujours plus grande",
-      "une forme complètement différente",
-      "seulement la couleur",
-    ],
-    expected: ["la même forme et la même taille"],
-    comparator: "mcq_exact",
-    hint: "La symétrie ne déforme pas.",
-    explanation:
-      "Dans un motif symétrique, l’image garde la même forme et la même taille que le motif de départ.",
-    tags: ["cm2", "symetrie", "propriete", "reunion", "motif", "qcm"],
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_propriete_tpl_1_longueur",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_propriete",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "La symétrie conserve les longueurs.",
-    tags: ["cm2", "symetrie", "propriete", "longueur", "template"],
-    generate: () => {
-      const l = randomChoice([3, 4, 5, 6, 7, 8]);
-
-      return {
-        text: `Un segment [AB] mesure ${l} cm. Son image [A'B'] par symétrie axiale mesure combien ?`,
-        format: "short",
-        expected: [String(l), `${l} cm`, `${l}cm`],
-        comparator: "number_equal",
-        explanation:
-          `La symétrie axiale conserve les longueurs. Donc si AB = ${l} cm, alors A'B' = ${l} cm.`,
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_propriete_tpl_2_distance",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_propriete",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "Un point et son image sont à la même distance de l’axe.",
-    tags: ["cm2", "symetrie", "propriete", "distance", "template", "qcm", "canvas"],
-    generate: () => {
-      const d = randomChoice([1, 2, 3]);
-      // « Un carreau de moins » n'existe pas quand A est déjà à un carreau : le
-      // piège s'écrivait alors comme la bonne réponse. Dans ce cas seulement,
-      // on éloigne le piège au lieu de le rapprocher.
-      const autre = d > 1 ? d - 1 : d + 2;
-
-      return {
-        text: `A est à ${d} carreau(x) de l’axe. À quelle distance de l’axe se trouve A' ?`,
-        format: "qcm",
-        choices: shuffle([
-          `${d} carreau(x)`,
-          `${d + 1} carreau(x)`,
-          "sur l’axe",
-          `${autre} carreau(x)`,
-        ]),
-        expected: [`${d} carreau(x)`],
-        comparator: "mcq_exact",
-        explanation:
-          `A' est à la même distance de l’axe que A. Il est donc à ${d} carreau(x) de l’axe.`,
-        canvas: symPointVertical(d),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_propriete_tpl_3_vrai_faux",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_propriete",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Une symétrie ne déforme pas.",
-    tags: ["cm2", "symetrie", "propriete", "vrai_faux", "template", "qcm"],
-    generate: () => {
-      const item = randomChoice([
-        {
-          text: "Une symétrie axiale conserve les longueurs.",
-          expected: "vrai",
-          explanation:
-            "Vrai. La symétrie axiale conserve les longueurs.",
-        },
-        {
-          text: "Une symétrie axiale agrandit toujours la figure.",
-          expected: "faux",
-          explanation:
-            "Faux. La symétrie axiale ne change pas la taille de la figure.",
-        },
-        {
-          text: "Un point sur l’axe reste au même endroit.",
-          expected: "vrai",
-          explanation:
-            "Vrai. Un point placé sur l’axe est son propre symétrique.",
-        },
-        {
-          text: "Un point et son image peuvent être à des distances différentes de l’axe.",
-          expected: "faux",
-          explanation:
-            "Faux. Un point et son image sont à la même distance de l’axe.",
-        },
-      ]);
-
-      return {
-        text: item.text,
-        format: "qcm",
-        choices: ["vrai", "faux"],
-        expected: [item.expected],
-        comparator: "mcq_exact",
-        explanation: item.explanation,
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_propriete_tpl_4_forme_taille",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_propriete",
-    difficulty: 3,
-    theme: "neutral",
-    hint: "L’image symétrique ne change pas de taille.",
-    tags: ["cm2", "symetrie", "propriete", "forme", "taille", "template", "qcm", "canvas"],
-    generate: () => {
-      const ok = Math.random() < 0.5;
-
-      return {
-        text: ok
-          ? "La figure rouge est-elle de même forme et de même taille que la figure bleue ?"
-          : "Une image par symétrie axiale peut-elle être plus grande que la figure de départ ?",
-        format: "qcm",
-        choices: ok ? ["oui", "non"] : ["oui", "non"],
-        expected: [ok ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation: ok
-          ? "Oui. Une symétrie axiale conserve la forme et la taille."
-          : "Non. Une symétrie axiale ne change pas la taille de la figure.",
-        canvas: symFigureVertical(),
-      };
-    },
-  },
-    // ============================================================
-  // SYMETRIE_DEFI
-  // ============================================================
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_defi_fixed_1_presque_symetrique",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_defi",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Les deux figures semblent presque symétriques. Peut-on conclure qu’elles sont vraiment symétriques ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["non"],
-    comparator: "mcq_exact",
-    hint: "Une impression visuelle ne suffit pas.",
-    explanation:
-      "Non. Une figure presque symétrique peut contenir une erreur. Il faut vérifier les distances à l’axe pour les sommets importants.",
-    tags: ["cm2", "symetrie", "defi", "presque", "erreur", "qcm", "canvas"],
-    canvas: symVerticalNon(),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_defi_fixed_2_axe_oblique",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_defi",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Les deux figures sont symétriques par rapport à un axe oblique. Quelle affirmation est vraie ?",
-    format: "qcm",
-    choices: [
-      "un axe de symétrie peut être oblique",
-      "un axe de symétrie est toujours vertical",
-      "un axe oblique est impossible",
-      "la symétrie change la taille",
-    ],
-    expected: ["un axe de symétrie peut être oblique"],
-    comparator: "mcq_exact",
-    hint: "L’axe est une droite de pliage.",
-    explanation:
-      "Un axe de symétrie peut être vertical, horizontal ou oblique. L’important est que le pliage superpose bien les deux parties.",
-    tags: ["cm2", "symetrie", "defi", "axe_oblique", "qcm", "canvas"],
-    canvas: symObliqueOui(),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_defi_fixed_3_erreur_distance",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_defi",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Un élève place tous les points images du bon côté de l’axe, mais certains ne sont pas à la même distance. Sa construction est-elle correcte ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["non"],
-    comparator: "mcq_exact",
-    hint: "Le bon côté ne suffit pas.",
-    explanation:
-      "Non. Dans une symétrie axiale, il faut être du bon côté de l’axe, mais aussi à la même distance de l’axe.",
-    tags: ["cm2", "symetrie", "defi", "erreur", "distance", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_defi_fixed_4_erreur_un_sommet",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_defi",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Dans une figure symétrique, si un seul sommet image est mal placé, la construction est...",
-    format: "qcm",
-    choices: ["fausse", "toujours correcte", "plus grande", "sans axe"],
-    expected: ["fausse"],
-    comparator: "mcq_exact",
-    hint: "Tous les sommets importants doivent être corrects.",
-    explanation:
-      "La construction est fausse. Pour construire une figure symétrique, chaque sommet important doit être bien placé.",
-    tags: ["cm2", "symetrie", "defi", "erreur", "sommet", "qcm", "canvas"],
-    canvas: symFigureVerticalErreur(),
-  },
-
-  {
-    kind: "fixed",
+  /* ── SYMETRIE_DEFI (★4-★5) ── */
+  fixe({
     id: "cm2_symetrie_defi_fixed_5_devinette_axe",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
     microId: "symetrie_defi",
     difficulty: 4,
-    theme: "neutral",
     text: "Je suis une droite qui permet de plier une figure en deux parties superposables. Qui suis-je ?",
     format: "qcm",
-    choices: [
-      "un axe de symétrie",
-      "un diamètre",
-      "un sommet",
-      "une aire",
-    ],
+    choices: ["un axe de symétrie", "une diagonale", "un rayon", "un côté"],
     expected: ["un axe de symétrie"],
     comparator: "mcq_exact",
-    hint: "Le mot important est axe.",
-    explanation:
-      "Une droite qui permet de plier une figure en deux parties superposables est un axe de symétrie.",
-    tags: ["cm2", "symetrie", "defi", "devinette", "axe", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_defi_fixed_6_devinette_point",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_defi",
-    difficulty: 4,
-    theme: "neutral",
-    text: "Je suis un point placé sur l’axe de symétrie. Que devient mon image ?",
-    format: "qcm",
-    choices: [
-      "elle reste au même endroit",
-      "elle part toujours à droite",
-      "elle disparaît",
-      "elle double de taille",
-    ],
-    expected: ["elle reste au même endroit"],
-    comparator: "mcq_exact",
-    hint: "Un point sur le miroir ne bouge pas.",
-    explanation:
-      "Un point placé sur l’axe de symétrie est son propre symétrique. Il reste au même endroit.",
-    tags: ["cm2", "symetrie", "defi", "point_sur_axe", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_defi_fixed_7_reunion_carrelage",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_defi",
-    difficulty: 4,
-    theme: "reunion",
-    text: "Sur un carrelage à La Réunion, un motif est répété comme dans un miroir par rapport à une droite. Quelle notion de géométrie reconnaît-on ?",
-    format: "qcm",
-    choices: [
-      "la symétrie axiale",
-      "la division posée",
-      "la proportionnalité",
-      "le calcul de durée",
-    ],
-    expected: ["la symétrie axiale"],
-    comparator: "mcq_exact",
-    hint: "Il y a un axe qui joue le rôle de miroir.",
-    explanation:
-      "Quand un motif est répété comme dans un miroir par rapport à une droite, on reconnaît une symétrie axiale.",
-    tags: ["cm2", "symetrie", "defi", "reunion", "carrelage", "qcm"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_defi_fixed_8_reunion_margouillat",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_defi",
-    difficulty: 5,
-    theme: "reunion",
-    text: "Sur un logo de margouillat stylisé, une droite semble couper le dessin en deux parties semblables. Que faut-il vérifier avant de dire que c’est un axe de symétrie ?",
-    format: "open",
-    expected: ["plier", "superposer", "axe", "distance", "parties"],
-    comparator: "contains_keyword",
-    hint: "Ne te fie pas seulement à l’apparence.",
-    explanation:
-      "Il faut vérifier que le pliage selon cette droite superpose exactement les deux parties. Les points correspondants doivent aussi être à la même distance de l’axe.",
-    tags: ["cm2", "symetrie", "defi", "reunion", "open", "verification"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_defi_fixed_9_open_presque_symetrique",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_defi",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Explique pourquoi une figure presque symétrique n’est pas forcément symétrique.",
-    format: "open",
-    expected: ["vérifier", "distance", "axe", "sommet", "exact"],
-    comparator: "contains_keyword",
-    hint: "Une seule erreur peut suffire.",
-    explanation:
-      "Une figure peut sembler symétrique, mais il faut vérifier précisément les sommets et les distances à l’axe. Si un point est mal placé, la symétrie n’est pas exacte.",
-    tags: ["cm2", "symetrie", "defi", "open", "erreur", "raisonnement"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_defi_fixed_10_open_axe_oblique",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_defi",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Explique pourquoi un axe de symétrie peut être oblique.",
-    format: "open",
-    expected: ["axe", "oblique", "plier", "superposer", "miroir"],
-    comparator: "contains_keyword",
-    hint: "Un axe est une droite de pliage.",
-    explanation:
-      "Un axe de symétrie est une droite qui permet un pliage. Cette droite peut être verticale, horizontale ou oblique si les deux parties se superposent exactement.",
-    tags: ["cm2", "symetrie", "defi", "open", "axe_oblique", "raisonnement"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_defi_fixed_11_open_methode_complete",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_defi",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Décris une méthode complète pour vérifier qu’une figure rouge est l’image d’une figure bleue par symétrie axiale.",
-    format: "open",
-    expected: ["axe", "sommets", "distance", "autre côté", "vérifier"],
-    comparator: "contains_keyword",
-    hint: "Parle de l’axe et des sommets correspondants.",
-    explanation:
-      "On repère l’axe. Puis on vérifie que chaque sommet rouge correspond à un sommet bleu placé de l’autre côté de l’axe, à la même distance. Si tous les sommets sont corrects, les figures sont symétriques.",
-    tags: ["cm2", "symetrie", "defi", "open", "methode", "verification"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_defi_fixed_12_open_erreur_eleve",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_defi",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Un élève dit : “Si la figure est du bon côté de l’axe, alors elle est forcément symétrique.” Explique son erreur.",
-    format: "open",
-    expected: ["distance", "axe", "même", "sommet", "vérifier"],
-    comparator: "contains_keyword",
-    hint: "Le bon côté ne suffit pas.",
-    explanation:
-      "L’élève oublie qu’il faut aussi respecter la même distance à l’axe. Une figure peut être du bon côté, mais mal placée.",
-    tags: ["cm2", "symetrie", "defi", "open", "erreur", "distance"],
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_defi_fixed_13_canvas_verification_oui",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_defi",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Après vérification des sommets, peut-on dire que les deux figures sont symétriques ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["oui"],
-    comparator: "mcq_exact",
-    hint: "Chaque sommet image est bien placé.",
-    explanation:
-      "Oui. Les sommets correspondants sont placés de chaque côté de l’axe, à la même distance.",
-    tags: ["cm2", "symetrie", "defi", "verification", "qcm", "canvas"],
-    canvas: symFigureVertical(),
-  },
-
-  {
-    kind: "fixed",
-    id: "cm2_symetrie_defi_fixed_14_canvas_verification_non",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_defi",
-    difficulty: 5,
-    theme: "neutral",
-    text: "Après vérification des sommets, peut-on dire que les deux figures sont symétriques ?",
-    format: "qcm",
-    choices: ["oui", "non"],
-    expected: ["non"],
-    comparator: "mcq_exact",
-    hint: "Cherche le sommet mal placé.",
-    explanation:
-      "Non. Au moins un sommet image est mal placé : les deux figures ne sont donc pas exactement symétriques.",
-    tags: ["cm2", "symetrie", "defi", "verification", "erreur", "qcm", "canvas"],
-    canvas: symFigureVerticalErreur(),
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_defi_tpl_1_oui_non",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_defi",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Vérifie si la symétrie est exacte.",
-    tags: ["cm2", "symetrie", "defi", "template", "qcm", "canvas"],
-    generate: () => {
-      const ok = Math.random() < 0.5;
-
-      return {
-        text: "Les deux figures sont-elles vraiment symétriques par rapport à l’axe ?",
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: [ok ? "oui" : "non"],
-        comparator: "mcq_exact",
-        explanation: ok
-          ? "Oui. Les sommets correspondants sont bien à la même distance de l’axe."
-          : "Non. Au moins un sommet n’est pas correctement placé.",
-        canvas: ok ? symFigureVertical() : symFigureVerticalErreur(),
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_defi_tpl_2_axes",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_defi",
-    difficulty: 4,
-    theme: "neutral",
-    hint: "Pense aux différents types d’axes.",
-    tags: ["cm2", "symetrie", "defi", "axe", "template", "qcm", "canvas"],
-    generate: () => {
-      const item = randomChoice([
-        {
-          text: "Un axe de symétrie peut-il être horizontal ?",
-          expected: "oui",
-          explanation:
-            "Oui. Un axe de symétrie peut être horizontal si le pliage superpose les deux parties.",
-          canvas: symHorizontalOui(),
-        },
-        {
-          text: "Un axe de symétrie peut-il être vertical ?",
-          expected: "oui",
-          explanation:
-            "Oui. Un axe de symétrie peut être vertical si le pliage superpose les deux parties.",
-          canvas: symVerticalOui(),
-        },
-        {
-          text: "Un axe de symétrie peut-il être oblique ?",
-          expected: "oui",
-          explanation:
-            "Oui. Un axe de symétrie peut aussi être oblique.",
-          canvas: symObliqueOui(),
-        },
-      ]);
-
-      return {
-        text: item.text,
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: [item.expected],
-        comparator: "mcq_exact",
-        explanation: item.explanation,
-        canvas: item.canvas,
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_defi_tpl_3_erreur_eleve",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Cherche la propriété oubliée.",
-    tags: ["cm2", "symetrie", "defi", "erreur", "template", "qcm"],
-    generate: () => {
-      const item = randomChoice([
-        {
-          text: "Un élève dit : “La symétrie axiale agrandit la figure.” A-t-il raison ?",
-          expected: "non",
-          explanation:
-            "Non. La symétrie axiale conserve la taille de la figure.",
-        },
-        {
-          text: "Un élève dit : “Si un point est sur l’axe, son image reste au même endroit.” A-t-il raison ?",
-          expected: "oui",
-          explanation:
-            "Oui. Un point placé sur l’axe est son propre symétrique.",
-        },
-        {
-          text: "Un élève dit : “Le point image doit être à la même distance de l’axe.” A-t-il raison ?",
-          expected: "oui",
-          explanation:
-            "Oui. Un point et son image sont à la même distance de l’axe.",
-        },
-        {
-          text: "Un élève dit : “Il suffit de vérifier un seul sommet pour toute une figure.” A-t-il raison ?",
-          expected: "non",
-          explanation:
-            "Non. Il faut vérifier tous les sommets importants.",
-        },
-      ]);
-
-      return {
-        text: item.text,
-        format: "qcm",
-        choices: ["oui", "non"],
-        expected: [item.expected],
-        comparator: "mcq_exact",
-        explanation: item.explanation,
-      };
-    },
-  },
-
-  {
-    kind: "template",
-    id: "cm2_symetrie_defi_tpl_4_distance",
-    niveau: "cm2",
-    matiere: "maths",
-    notionId: "symetrie",
-    microId: "symetrie_defi",
-    difficulty: 5,
-    theme: "neutral",
-    hint: "Même distance à l’axe.",
-    tags: ["cm2", "symetrie", "defi", "distance", "template", "qcm", "canvas"],
-    generate: () => {
-      const d = randomChoice([2, 3, 4]);
-      const vertical = Math.random() < 0.5;
-
-      return {
-        text: vertical
-          ? `A est à ${d} carreaux à gauche de l’axe vertical. Où doit être A' ?`
-          : `A est à ${d} carreaux au-dessus de l’axe horizontal. Où doit être A' ?`,
-        format: "qcm",
-        choices: vertical
-          ? shuffle([
-              `${d} carreaux à droite de l’axe`,
-              `${d + 1} carreaux à droite de l’axe`,
-              `${d} carreaux à gauche de l’axe`,
-              "sur l’axe",
-            ])
-          : shuffle([
-              `${d} carreaux au-dessous de l’axe`,
-              `${d + 1} carreaux au-dessous de l’axe`,
-              `${d} carreaux au-dessus de l’axe`,
-              "sur l’axe",
-            ]),
-        expected: vertical
-          ? [`${d} carreaux à droite de l’axe`]
-          : [`${d} carreaux au-dessous de l’axe`],
-        comparator: "mcq_exact",
-        explanation:
-          "Le point image doit être de l’autre côté de l’axe, à la même distance.",
-        canvas: vertical ? symPointVertical(d) : symPointHorizontal(d),
-      };
-    },
-  },
+    hint: "C'est la ligne de pliage, le miroir.",
+    explanation: "La droite de pliage qui superpose les deux parties est un axe de symétrie.",
+    tags: ["cm2", "symetrie", "defi", "devinette", "qcm"],
+  }),
+  tpl(A.defi, 10, 4, "Le côté collé à l'axe n'est plus sur le tour de la figure complète.", () => genPerimetreComplet(defiDebut, false)),
+  tpl(A.defi, 11, 4, "Avec un axe oblique, compte en suivant les diagonales des carreaux.", () => genOblique(defiDebut)),
+  tpl(A.defi, 12, 4, "Une diagonale n'est pas toujours un axe de symétrie.", genDiagonale),
+  tpl(A.defi, 13, 4, "Rectangle, losange, parallélogramme, cercle : attention aux pièges.", () => genAxesUsuelle(PIEGES, defiDebut)),
+  tpl(A.defi, 14, 4, "Vérifie chaque sommet : même distance à l'axe, de l'autre côté, et retournée.", () => genVerifier(1, 3, defiDebut)),
+  tpl(A.defi, 15, 4, "L'autre moitié va aussi loin de l'axe que la moitié bleue.", () => genSepareFigure(true, defiDebut)),
+  tpl(A.defi, 16, 5, "Les deux moitiés ont le même tour, mais le côté collé à l'axe disparaît.", genPerimetreL),
+  tpl(A.defi, 17, 5, "Compte le tour en carreaux, puis multiplie par 0,5.", () => genPerimetreComplet(defiDebut, true)),
+  tpl(A.defi, 18, 5, "Avec un axe oblique, suis les diagonales des carreaux.", () => genPointOblique(defiDebut)),
+  tpl(A.defi, 19, 5, "Essaie tous les pliages, même en diagonale.", () => genAxesUsuelle(["hexagone", "equilateral", "losange", "cercle", "parallelogramme"], defiDebut)),
+  tpl(A.defi, 20, 5, "Avec un axe oblique, compte en suivant les diagonales des carreaux.", () => genOblique(defiDebut, true)),
 ];
