@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Ce soir, je regarde un film de 100 minutes. Il commence à 20 heures.",
+  "01-calcul": "100 minutes, c'est 1 heure pile ? Alors je finis à 21 heures !",
+  "02-question": "Question ! 100 minutes, c'est… A : 1 heure 40 minutes. B : 1 heure pile. C : 1 heure 20 minutes. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! Une heure, c'est 60 minutes. 100 moins 60 : il reste 40. 1 heure 40 minutes.",
+  "03-ouf": "À 21 heures, maman éteint la télé… j'ai raté la fin !",
+  "04-commentaire": "À toi : un film de 145 minutes. Combien d'heures et de minutes ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

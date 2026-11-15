@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le volume du prisme droit. Comment mesurer l'air d'une tente ?",
+  "01-situation": "Voici Maïa. Elle fabrique des tentes de randonnée. Une tente doit être légère, mais assez grande pour dormir. Combien d'air y a-t-il dedans ?",
+  "02-base": "La tente est un prisme droit. Vue de face, c'est un triangle : 2 mètres de base, 1,5 mètre de hauteur. Son aire : 2 fois 1,5, divisé par 2, 1,5 mètre carré.",
+  "03-empiler": "Ce triangle se répète sur toute la longueur de la tente : 3 mètres. Volume : 1,5 fois 3, 4,5 mètres cubes.",
+  "04-methode": "La méthode : volume du prisme droit égale aire de la base, fois la hauteur du prisme. Ici, la hauteur du prisme, c'est la longueur de la tente.",
+  "05-question": "Question ! Un prisme a une aire de base de 15 centimètres carrés et une hauteur de 8 centimètres. Quel est son volume ? A : 23 centimètres cubes. B : 60 centimètres cubes. C : 120 centimètres cubes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. 15 fois 8 : 120 centimètres cubes. 23, c'est l'addition. 60, c'est diviser par 2 en trop.",
+  "06-piege": "Attention au piège ! Quand la base est un triangle, on calcule d'abord son aire, sans oublier le divisé par 2. Et on ne confond pas la hauteur du triangle avec la hauteur du prisme.",
+  "07-question": "Question ! Un prisme droit a pour base un triangle de base 6 centimètres et de hauteur 4 centimètres. Le prisme mesure 10 centimètres de long. Quel est son volume ? A : 240 centimètres cubes. B : 120 centimètres cubes. C : 20 centimètres cubes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Le triangle : 6 fois 4, divisé par 2, 12 centimètres carrés. Fois 10 : 120 centimètres cubes. 240, c'est l'oubli du divisé par 2.",
+  "08-defi": "À toi de jouer ! Une grande tente : un triangle de base 2,4 mètres et de hauteur 1,5 mètre, sur 3 mètres de long. Chaque campeur a besoin de 1,5 mètre cube d'air. Combien de campeurs peuvent y dormir ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le triangle : 2,4 fois 1,5, 3,6, divisé par 2, 1,8 mètre carré. Le volume : 1,8 fois 3, 5,4 mètres cubes. 3 campeurs ont besoin de 4,5 : ça passe. 4 campeurs, de 6 : trop. Donc 3 campeurs.",
+  "09-finale": "Ce que tu as appris. Volume du prisme droit : aire de la base fois la hauteur du prisme. Si la base est un triangle, on n'oublie pas de diviser par 2.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Je peins le haut de ma cabane : un triangle. Sa base mesure 4 mètres, sa hauteur 3 mètres.",
+  "01-achat": "4 fois 3, 12 ! J'achète de la peinture pour 12 mètres carrés.",
+  "02-question": "Question ! Quelle est l'aire du triangle ? A : 12 mètres carrés. B : 7 mètres carrés. C : 6 mètres carrés. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! 4 fois 3, 12 : c'est le rectangle entier. Le triangle en est la moitié : 6 mètres carrés.",
+  "03-ouf": "Il me reste la moitié de la peinture… je peins aussi la cabane de mon voisin !",
+  "04-commentaire": "À toi : un triangle de base 6 mètres et de hauteur 5 mètres. Quelle est son aire ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

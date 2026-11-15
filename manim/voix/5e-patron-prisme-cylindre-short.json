@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Je colle une étiquette autour de ma boîte de conserve. Le rayon de la boîte : 2 centimètres.",
+  "01-coupe": "Je coupe une étiquette de 4 centimètres, comme le diamètre. Je l'enroule… il manque un gros morceau !",
+  "02-question": "Question ! Quelle longueur doit avoir l'étiquette ? On prend pi égal 3,14. A : 6,28 centimètres. B : 12,56 centimètres. C : 4 centimètres. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! L'étiquette fait tout le tour : 2 fois 3,14 fois 2, 12,56 centimètres. Plus de trois fois le diamètre !",
+  "03-ouf": "Cette fois, elle fait le tour… et elle ferme pile !",
+  "04-commentaire": "À toi : une boîte de rayon 5 centimètres. Quelle longueur doit avoir son étiquette ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

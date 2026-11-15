@@ -1,0 +1,9 @@
+{
+  "00-accroche": "J'ai une bouteille de 1 litre et une boîte cubique de 10 centimètres de côté.",
+  "01-verse": "Je verse toute la bouteille dans la boîte… glou, glou, glou…",
+  "02-question": "Question ! 1 litre, c'est combien de centimètres cubes ? A : 100 centimètres cubes. B : 1 000 centimètres cubes. C : 10 centimètres cubes. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! La boîte : 10 fois 10 fois 10, 1 000 centimètres cubes. Et la bouteille la remplit pile : 1 litre égale 1 000 centimètres cubes.",
+  "03-ouf": "Pas une goutte de trop… c'est magique ? Non, ce sont les maths !",
+  "04-commentaire": "À toi : 2,5 litres, c'est combien de centimètres cubes ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

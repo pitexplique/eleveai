@@ -1,0 +1,9 @@
+{
+  "00-accroche": "J'ai une feuille en forme de parallélogramme. Base : 5 centimètres. Hauteur : 2 centimètres.",
+  "01-ciseaux": "Clac ! Je coupe le petit triangle penché. Je le recolle de l'autre côté. Un rectangle !",
+  "02-question": "Question ! Quelle est l'aire du parallélogramme ? A : 10 centimètres carrés. B : 5 centimètres carrés. C : 7 centimètres carrés. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! Le rectangle : 5 fois 2, 10 centimètres carrés. Je n'ai rien perdu : le parallélogramme fait 10 aussi.",
+  "03-ouf": "Même aire… mais maintenant, il tient droit dans ma boîte !",
+  "04-commentaire": "À toi : un parallélogramme de base 7 centimètres et de hauteur 3 centimètres. Quelle est son aire ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

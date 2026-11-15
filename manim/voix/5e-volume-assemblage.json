@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le volume d'un assemblage. Comment mesurer un solide fait de plusieurs morceaux ?",
+  "01-situation": "Voici Chloé. Elle est pâtissière. Elle crée des gâteaux à étages. Pour préparer juste assez de pâte, elle doit connaître le volume de chaque gâteau.",
+  "02-additionner": "Ce gâteau a deux morceaux : un pavé de 40 centimètres cubes et, collé dessus, un prisme de 30 centimètres cubes. Volume total : 40 plus 30, 70 centimètres cubes.",
+  "03-enlever": "Cet autre gâteau est un pavé de 80 centimètres cubes. Chloé creuse au milieu un trou cubique de 8 centimètres cubes, pour la crème. Il reste : 80 moins 8, 72 centimètres cubes de gâteau.",
+  "04-methode": "La méthode : on découpe le solide en morceaux simples. On calcule le volume de chacun. Puis on additionne… ou on enlève ce qui est creusé.",
+  "05-question": "Question ! Un solide est fait d'un cube de 8 centimètres cubes collé contre un pavé de 20 centimètres cubes. Quel est son volume ? A : 160 centimètres cubes. B : 28 centimètres cubes. C : 12 centimètres cubes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. On colle : on additionne. 8 plus 20, 28 centimètres cubes.",
+  "06-piege": "Attention au piège ! On additionne des volumes, jamais des longueurs. Et les volumes doivent être dans la même unité avant d'additionner.",
+  "07-question": "Question ! Un pavé de 60 centimètres cubes. On y creuse un trou de 15 centimètres cubes. Quel volume reste-t-il ? A : 75 centimètres cubes. B : 4 centimètres cubes. C : 45 centimètres cubes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. On creuse : on enlève. 60 moins 15, 45 centimètres cubes.",
+  "08-defi": "À toi de jouer ! Chloé monte un gâteau à deux étages. En bas : un pavé de 20 centimètres sur 20, et 6 centimètres de haut. En haut : un pavé de 10 centimètres sur 10, et 6 centimètres de haut. Quel est le volume du gâteau ? Et combien de litres de pâte faut-il ? 1 litre, c'est 1 000 centimètres cubes. Mets pause, et cherche !",
+  "08b-correction": "Correction. En bas : 20 fois 20 fois 6, 2 400 centimètres cubes. En haut : 10 fois 10 fois 6, 600. En tout : 3 000 centimètres cubes. C'est 3 litres de pâte.",
+  "09-finale": "Ce que tu as appris. Un assemblage se découpe en solides simples. On additionne leurs volumes. Et si on a creusé, on enlève le volume du trou.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

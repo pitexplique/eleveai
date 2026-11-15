@@ -1,0 +1,9 @@
+{
+  "00-accroche": "J'ai acheté un tapis de 12 mètres carrés. Il est long de 4 mètres.",
+  "01-couloir": "Mon couloir fait 2 mètres de large. Le tapis va-t-il rentrer ?",
+  "02-question": "Question ! Quelle est la largeur du tapis ? A : 3 mètres. B : 8 mètres. C : 48 mètres. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! Longueur fois largeur égale 12. 12 divisé par 4 : 3 mètres de large.",
+  "03-ouf": "3 mètres dans un couloir de 2… je le pose dans le salon !",
+  "04-commentaire": "À toi : un tapis de 20 mètres carrés et de 5 mètres de long. Quelle est sa largeur ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

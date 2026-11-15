@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le volume du cylindre. Combien d'eau dans un réservoir rond ?",
+  "01-situation": "Voici Hakim. Il est ingénieur de l'eau. Il construit des réservoirs pour l'eau potable d'une ville. Ses réservoirs sont ronds : ce sont des cylindres.",
+  "02-empiler": "Un cylindre, c'est un disque qu'on empile, tranche après tranche, jusqu'en haut. Comme le prisme : volume égale aire de la base, fois la hauteur.",
+  "03-disque": "La base est un disque. Son aire : pi fois le rayon fois le rayon. Un rayon de 3 centimètres : 3,14 fois 3 fois 3, 28,26 centimètres carrés. Avec 5 centimètres de haut : 28,26 fois 5, 141,3 centimètres cubes.",
+  "04-methode": "La méthode : volume du cylindre égale pi, fois rayon, fois rayon, fois hauteur.",
+  "05-question": "Question ! Un cylindre a une aire de base de 20 centimètres carrés et une hauteur de 6 centimètres. Quel est son volume ? A : 120 centimètres cubes. B : 26 centimètres cubes. C : 60 centimètres cubes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Aire de la base fois hauteur : 20 fois 6, 120 centimètres cubes.",
+  "06-piege": "Attention au piège ! On prend le rayon, pas le diamètre. Et c'est rayon fois rayon, pas rayon fois 2.",
+  "07-question": "Question ! Un cylindre a un rayon de 2 centimètres et une hauteur de 10 centimètres. Quel est son volume ? On prend pi égal 3,14. A : 502,4 centimètres cubes. B : 125,6 centimètres cubes. C : 62,8 centimètres cubes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Le disque : 3,14 fois 2 fois 2, 12,56. Fois 10 : 125,6 centimètres cubes. 502,4, c'est le diamètre pris à la place du rayon.",
+  "08-defi": "À toi de jouer ! Un réservoir de Hakim a un rayon de 2 mètres et une hauteur de 3 mètres. Quel est son volume ? Et combien de litres d'eau contient-il ? 1 mètre cube, c'est 1 000 litres. Mets pause, et cherche !",
+  "08b-correction": "Correction. Le disque : 3,14 fois 2 fois 2, 12,56 mètres carrés. Fois 3 : 37,68 mètres cubes. En litres : 37,68 fois 1 000, 37 680 litres.",
+  "09-finale": "Ce que tu as appris. Un cylindre se calcule comme un prisme : aire de la base fois hauteur. Sa base est un disque : pi fois rayon fois rayon.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

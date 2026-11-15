@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Je construis un château de sable. En bas, un bloc de 40 décimètres cubes. Au-dessus, une tour de 10 décimètres cubes.",
+  "01-frere": "Mon frère dit : 40 fois 10, 400 ! Il part chercher 400 décimètres cubes de sable…",
+  "02-question": "Question ! Quel est le volume du château ? A : 50 décimètres cubes. B : 400 décimètres cubes. C : 4 décimètres cubes. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! On empile, donc on additionne : 40 plus 10, 50 décimètres cubes.",
+  "03-ouf": "Il a rapporté 350 décimètres cubes de trop… on construit tout un village !",
+  "04-commentaire": "À toi : un bloc de 60 décimètres cubes et deux tours de 12 décimètres cubes. Quel est le volume du château ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

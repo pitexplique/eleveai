@@ -1,0 +1,16 @@
+{
+  "00-garde": "L'aire. Combien de place prend une surface ?",
+  "01-situation": "Voici Awa. Elle est maçonne. Elle doit couvrir un mur d'enduit. Au magasin, l'enduit se vend au mètre carré. Combien de mètres carrés faut-il ?",
+  "02-carreaux": "Le mur mesure 4 mètres sur 3 mètres. Awa le découpe en carrés de 1 mètre sur 1 mètre. Chaque carré, c'est 1 mètre carré. Elle compte : 3 rangées de 4 carrés, 12 carrés. L'aire du mur est 12 mètres carrés.",
+  "03-tour": "Attention : le tour du mur, c'est autre chose. 4 plus 3 plus 4 plus 3 : 14 mètres. Le tour se mesure en mètres. La surface se mesure en mètres carrés.",
+  "04-methode": "Deux murs différents peuvent avoir la même aire. Un mur de 6 mètres sur 2 mètres : 12 carrés aussi. Même aire, 12 mètres carrés. Mais son tour fait 16 mètres.",
+  "05-question": "Question ! Un mur mesure 5 mètres sur 2 mètres. Quelle est son aire ? A : 10 mètres carrés. B : 14 mètres carrés. C : 7 mètres carrés. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 2 rangées de 5 carrés : 10 mètres carrés. 14, c'est le tour du mur. 7, c'est 5 plus 2.",
+  "06-piege": "Attention au piège ! Une aire s'écrit en unités carrées : centimètres carrés, mètres carrés. Le petit 2 en haut compte. 12 mètres, c'est une longueur. 12 mètres carrés, c'est une surface.",
+  "07-question": "Question ! Deux terrasses. La première mesure 8 mètres sur 3 mètres. La deuxième mesure 6 mètres sur 4 mètres. Laquelle a la plus grande aire ? A : la deuxième. B : la première. C : elles ont la même aire. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 8 fois 3, 24. 6 fois 4, 24 aussi. Les deux terrasses ont la même aire : 24 mètres carrés.",
+  "08-defi": "À toi de jouer ! Awa enduit une pièce. Deux murs mesurent 4 mètres sur 2,5 mètres. Deux autres mesurent 3 mètres sur 2,5 mètres. Un sac d'enduit couvre 10 mètres carrés. Combien de sacs faut-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Un grand mur : 4 fois 2,5, 10 mètres carrés. Deux grands murs : 20. Un petit mur : 3 fois 2,5, 7,5. Deux petits murs : 15. En tout : 20 plus 15, 35 mètres carrés. 3 sacs couvrent 30 : pas assez. Il faut 4 sacs.",
+  "09-finale": "Ce que tu as appris. L'aire, c'est le nombre de carrés-unité qui couvrent une surface. Elle s'écrit en centimètres carrés ou en mètres carrés. Deux figures différentes peuvent avoir la même aire.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

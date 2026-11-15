@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Il pleut. Je mets un bidon sous la gouttière : 30 centimètres sur 20, et 10 de haut.",
+  "01-arrosoir": "Mon arrosoir fait 5 litres. Le bidon pourra-t-il le remplir ?",
+  "02-question": "Question ! Combien de litres contient le bidon ? A : 60 litres. B : 6 litres. C : 600 litres. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 30 fois 20 fois 10 : 6 000 centimètres cubes. Divisé par 1 000 : 6 litres.",
+  "03-ouf": "6 litres : l'arrosoir est plein, et il reste un litre pour mes plantes en pot !",
+  "04-commentaire": "À toi : un bidon de 40 centimètres sur 20, et 10 de haut. Combien de litres ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

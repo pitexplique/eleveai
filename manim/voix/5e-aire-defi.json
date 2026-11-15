@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défis sur les aires. Et si on connaît l'aire, mais pas la longueur ?",
+  "01-situation": "Voici Mehdi. Il est menuisier agenceur. Il fabrique des meubles sur mesure. Une cliente veut une tablette en triangle de 24 décimètres carrés, avec une base de 8 décimètres. Quelle hauteur doit-il découper ?",
+  "02-remonter": "Base fois hauteur, divisé par 2, égale 24. Donc base fois hauteur égale 24 fois 2, 48. La base fait 8 : 48 divisé par 8, la hauteur fait 6 décimètres.",
+  "03-verifier": "Mehdi vérifie : 8 fois 6, 48, divisé par 2, 24. C'est bien 24 décimètres carrés.",
+  "04-methode": "La méthode : on écrit la formule, on remplace ce qu'on connaît, puis on remonte le calcul. Triangle : hauteur égale aire fois 2, divisé par la base. Parallélogramme : base égale aire divisée par la hauteur.",
+  "05-question": "Question ! Un triangle a une aire de 20 centimètres carrés et une base de 8 centimètres. Quelle est sa hauteur ? A : 10 centimètres. B : 5 centimètres. C : 2,5 centimètres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 20 fois 2, 40. 40 divisé par 8 : 5 centimètres. 2,5, c'est l'oubli du fois 2.",
+  "06-piege": "Attention au piège ! Pour un triangle, on multiplie l'aire par 2 avant de diviser. Pour un parallélogramme, non. Et toujours : on vérifie en refaisant le calcul.",
+  "07-question": "Question ! Un parallélogramme a une aire de 36 centimètres carrés et une hauteur de 4 centimètres. Quelle est sa base ? A : 32 centimètres. B : 18 centimètres. C : 9 centimètres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 36 divisé par 4 : 9 centimètres. On vérifie : 9 fois 4, 36. 18 serait la base d'un triangle de même aire.",
+  "08-defi": "À toi de jouer ! Mehdi pose un plan de travail en L. Un morceau mesure 1,20 mètre sur 0,60 mètre. L'autre mesure 0,80 mètre sur 0,60 mètre. Le revêtement se vend en plaques de 0,50 mètre carré. Combien de plaques faut-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 1,20 fois 0,60 : 0,72 mètre carré. 0,80 fois 0,60 : 0,48. En tout : 1,20 mètre carré. 2 plaques couvrent 1 mètre carré : pas assez. Il faut 3 plaques.",
+  "09-finale": "Ce que tu as appris. Si on connaît l'aire, on remonte la formule. Triangle : hauteur égale aire fois 2, divisé par la base. Parallélogramme : base égale aire divisée par la hauteur. Et on vérifie toujours.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

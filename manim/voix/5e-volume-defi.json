@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défis sur les volumes. Combien d'eau de pluie peut-on garder ?",
+  "01-situation": "Voici Jonas. Il installe des récupérateurs d'eau de pluie. À La Réunion, beaucoup de maisons gardent l'eau du toit pour arroser le jardin. Jonas doit choisir la bonne cuve.",
+  "02-cuve": "Cette cuve est un cylindre : 1 mètre de rayon, 2 mètres de haut. Son volume : 3,14 fois 1 fois 1 fois 2, 6,28 mètres cubes. En litres : 6 280 litres.",
+  "03-jardin": "Le jardin boit 150 litres par jour. 6 280 divisé par 150 : un peu plus de 41. La cuve pleine arrose le jardin pendant 41 jours.",
+  "04-methode": "La méthode d'un défi : on calcule le volume avec la bonne formule. On le convertit dans l'unité de la question. Puis on répond à la vraie question.",
+  "05-question": "Question ! Une cuve contient 2 mètres cubes. Combien de litres ? A : 2 000 litres. B : 200 litres. C : 20 000 litres. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 1 mètre cube égale 1 000 litres. 2 fois 1 000 : 2 000 litres.",
+  "06-piege": "Attention au piège ! Toutes les longueurs doivent être dans la même unité avant de multiplier. Et à la fin, on convertit dans l'unité demandée.",
+  "07-question": "Question ! Une cuve en pavé mesure 50 centimètres, 40 centimètres et 30 centimètres. Combien de litres contient-elle ? A : 600 litres. B : 6 litres. C : 60 litres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 50 fois 40 fois 30 : 60 000 centimètres cubes. 1 litre égale 1 000 centimètres cubes : 60 litres.",
+  "08-defi": "À toi de jouer ! Un toit mesure 60 mètres carrés. Il tombe 40 millimètres de pluie. Toute l'eau va dans une cuve de 2 000 litres. La cuve déborde-t-elle ? De combien ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 40 millimètres, c'est 0,04 mètre. Le volume d'eau : 60 fois 0,04, 2,4 mètres cubes, soit 2 400 litres. La cuve fait 2 000 litres : elle déborde de 400 litres.",
+  "09-finale": "Ce que tu as appris. Dans un défi de volume : on met tout dans la même unité, on applique la formule, puis on convertit. 1 mètre cube égale 1 000 litres.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

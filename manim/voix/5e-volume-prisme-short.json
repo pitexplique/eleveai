@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Je gonfle ma tente. Vue de face, c'est un triangle : 2 mètres de base, 1 mètre de haut. Elle fait 3 mètres de long.",
+  "01-pompe": "Ma super pompe envoie 1 mètre cube à chaque coup. Combien de coups faut-il ?",
+  "02-question": "Question ! Quel est le volume de la tente ? A : 3 mètres cubes. B : 6 mètres cubes. C : 1 mètre cube. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! Le triangle : 2 fois 1, divisé par 2, 1 mètre carré. Fois 3 mètres de long : 3 mètres cubes. Trois coups de pompe !",
+  "03-ouf": "Pouf, pouf, pouf… la tente est gonflée !",
+  "04-commentaire": "À toi : un triangle de base 2 mètres et de hauteur 2 mètres, sur 4 mètres de long. Quel est le volume ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
