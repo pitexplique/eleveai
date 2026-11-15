@@ -270,7 +270,7 @@ class ContenanceComparerCM2(PaysageContenanceCM2):
     def figure_q1(self):
         bo = bouteille(150, EAU, 0.011, 0.8)
         go = recipient("gourde", 0.011 * 120, 0.9, 0.9, "#a78bfa")
-        g = rangee_recipients([bo, go], 0.8).move_to(P(-3.8, 2.0))
+        g = rangee_recipients([bo, go], 1.15).move_to(P(-3.8, 2.0))
         ets = VGroup(contenance(bo, "1,5 L", 26), contenance(go, "1200 mL", 26))
         return VGroup(g, ets)
 
@@ -287,7 +287,7 @@ class ContenanceComparerCM2(PaysageContenanceCM2):
                              [self.choix("la bouteille"), self.choix("la gourde"), self.choix("c'est pareil")], 0,
                              ["1,5 L = 1500 mL.", "1500 est plus grand", "que 1200 :", "la bouteille",
                               "contient le plus."],
-                             0.4, couper={1: ("1500", "est plus grand")},
+                             0.0, couper={1: ("1500", "est plus grand")},
                              mot_q="Qu'est-ce qui contient", autres_q=autres_q)
 
     # ── 06 : le piège (240 > 2,5, mais cL contre L) ─────────────────────────
@@ -338,7 +338,7 @@ class ContenanceComparerCM2(PaysageContenanceCM2):
         k = 0.026
         ps = [recipient("pot", k * 50, 0.95, 0.9, LAIT), recipient("pot", k * 45, 0.95, 0.9, FRAISE),
               recipient("pot", k * 60, 0.95, 0.9, "#a3e635")]
-        g = rangee_recipients(ps, 0.55).move_to(P(-3.8, 2.05))
+        g = rangee_recipients(ps, 0.8).move_to(P(-3.8, 2.05))
         ets = VGroup(*[contenance(p, s, 26) for p, s in zip(ps, ["0,5 L", "45 cL", "600 mL"])])
         return VGroup(g, ets)
 
@@ -358,7 +358,7 @@ class ContenanceComparerCM2(PaysageContenanceCM2):
                              [self.choix("0,5 L"), self.choix("600 mL"), self.choix("45 cL")], 2,
                              ["Tout en mL :", "0,5 L = 500 mL,", "45 cL = 450 mL,", "et 600 mL.",
                               "Le plus petit : 450 mL,", "le pot de 45 cL."],
-                             0.45,
+                             0.3,
                              mot_q="trois pots", autres_q=autres_q, autres_r=apres)
 
     # ── 08 : le défi (ranger trois bidons de lait) ──────────────────────────

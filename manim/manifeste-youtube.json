@@ -91078,6 +91078,161 @@
       "centres": [
         "cuisine"
       ]
+    },
+    {
+      "id": "cm2-contenance-comparer",
+      "pas_avant": "2027-03-23",
+      "notionId": "contenance",
+      "microId": "contenance_comparer",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/contenance/01-comparer/eleveai-maths-cm2-contenance-comparer.mp4",
+      "miniature": "cm2/maths/contenance/01-comparer/eleveai-maths-cm2-contenance-comparer.png",
+      "titre": "2,5 L ou 240 cL : lequel contient le plus ? — Comparer des contenances — épisode 1 · Maths CM2",
+      "accroche": "Paul est glacier. Il a deux bacs de sorbet à la mangue : 2,5 litres et 240 centilitres. 240, c'est plus que 2,5… mais pas dans la même unité ! Lequel contient le plus ?\n\nDans cette vidéo :\n• la même unité d'abord : 1 L = 10 dL = 100 cL = 1000 mL\n• un nombre à virgule : 2,5 L = 250 cL, donc plus que 240 cL\n• ranger des contenances en litres, centilitres et millilitres\n• le piège : comparer les nombres sans regarder les unités\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : ranger 1,2 L, 115 cL et 1250 mL du plus petit au plus grand.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_comparer&display=simple\n\n🧪 Épisode 1 de la série Contenance d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comparer des contenances"
+        ],
+        [
+          "00:08",
+          "Paul, glacier"
+        ],
+        [
+          "00:28",
+          "La même unité"
+        ],
+        [
+          "00:39",
+          "2,5 L en centilitres"
+        ],
+        [
+          "00:55",
+          "250 cL contre 240 cL"
+        ],
+        [
+          "01:10",
+          "Question 1"
+        ],
+        [
+          "01:44",
+          "Le piège"
+        ],
+        [
+          "02:00",
+          "Question 2"
+        ],
+        [
+          "02:48",
+          "À toi de jouer"
+        ],
+        [
+          "03:03",
+          "Correction"
+        ],
+        [
+          "03:25",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "comparer des contenances",
+        "litre",
+        "centilitre",
+        "millilitre",
+        "nombre décimal",
+        "glacier",
+        "contenances",
+        "litre",
+        "centilitre",
+        "millilitre",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:10",
+          "question": "Qu'est-ce qui contient le plus : une bouteille de 1,5 L ou une gourde de 1200 mL ?",
+          "choix": [
+            "la bouteille",
+            "la gourde",
+            "c'est pareil"
+          ],
+          "reponse": 0,
+          "explication": "1,5 L = 1500 mL. 1500 > 1200 : la bouteille contient le plus."
+        },
+        {
+          "t": "02:00",
+          "question": "Trois pots : 0,5 L, 45 cL et 600 mL. Lequel est le plus petit ?",
+          "choix": [
+            "0,5 L",
+            "600 mL",
+            "45 cL"
+          ],
+          "reponse": 2,
+          "explication": "En mL : 500, 450 et 600. Le plus petit : 450 mL, le pot de 45 cL."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "cm2-contenance-comparer-short",
+      "pas_avant": "2027-03-23",
+      "notionId": "contenance",
+      "microId": "contenance_comparer",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-contenance-comparer",
+      "fichier": "cm2/maths/contenance/01-comparer/eleveai-maths-cm2-contenance-comparer-short.mp4",
+      "miniature": "cm2/maths/contenance/01-comparer/eleveai-maths-cm2-contenance-comparer-short-miniature.png",
+      "titre": "33 cL ou 0,5 L : laquelle contient le plus ? #maths #cm2",
+      "accroche": "Au snack, même prix : une canette de 33 centilitres, ou une bouteille de 0,5 litre. Ti Margo se dit que 33, c'est bien plus que 0,5… Et toi, tu prendrais quoi ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un seau de 1,25 litre, et une casserole de 130 centilitres. Lequel contient le plus ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #contenance #cm2",
+      "tags": [
+        "comparer des contenances",
+        "centilitre",
+        "litre",
+        "canette",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "contenances",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Une canette de 33 cL ou une bouteille de 0,5 L : qu'est-ce qui contient le plus ?",
+          "choix": [
+            "la canette",
+            "la bouteille",
+            "c'est pareil"
+          ],
+          "reponse": 1,
+          "explication": "0,5 L, c'est un demi-litre : 50 cL. 50 > 33 : la bouteille contient 17 cL de plus."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
     }
   ]
 }

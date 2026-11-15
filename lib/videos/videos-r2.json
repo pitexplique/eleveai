@@ -16253,5 +16253,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_defi&display=simple"
+ },
+ "cm2-contenance-comparer": {
+  "fichier": "cm2/maths/contenance/01-comparer/eleveai-maths-cm2-contenance-comparer.mp4",
+  "poster": "cm2/maths/contenance/01-comparer/eleveai-maths-cm2-contenance-comparer.png",
+  "vignette": "cm2/maths/contenance/01-comparer/eleveai-maths-cm2-contenance-comparer.vignette.webp",
+  "titre": "2,5 L ou 240 cL : lequel contient le plus ? — Comparer des contenances — épisode 1 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_comparer&display=simple"
+ },
+ "cm2-contenance-comparer-short": {
+  "fichier": "cm2/maths/contenance/01-comparer/eleveai-maths-cm2-contenance-comparer-short.mp4",
+  "poster": "cm2/maths/contenance/01-comparer/eleveai-maths-cm2-contenance-comparer-short-miniature.png",
+  "vignette": "cm2/maths/contenance/01-comparer/eleveai-maths-cm2-contenance-comparer-short-miniature.vignette.webp",
+  "titre": "33 cL ou 0,5 L : laquelle contient le plus ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_comparer&display=simple"
  }
 }
