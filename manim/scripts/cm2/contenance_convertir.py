@@ -180,6 +180,7 @@ class ContenanceConvertirCM2(PaysageContenanceCM2):
         bt = recipient("bouteille", 1.2, 0.6, 0.85, EAU).move_to(P(-3.75, -1.75))
         l2 = self.ligne([("1 L", BLEU_D), ("= 10 dL", VERT_OK)], 42, buff=0.25)
         self.col(l2, 0.05, XL)
+        l2.shift(RIGHT * 0.25)
         self.au_mot("10. 1 litre")
         self.play(FadeIn(l2[0], shift=UP * 0.1), FadeIn(chiffre(tab, 0, "1")), FadeIn(bt, shift=UP * 0.2),
                   run_time=0.3)
@@ -194,7 +195,7 @@ class ContenanceConvertirCM2(PaysageContenanceCM2):
         l4.next_to(l3, DOWN, buff=0.3).align_to(l2[1], LEFT)
         self.au_mot("centilitres, 1000")
         self.play(FadeIn(l4, shift=UP * 0.1), FadeIn(chiffre(tab, 3, "0", couleur=ORANGE_RETENUE)), run_time=0.3)
-        cadre = SurroundingRectangle(VGroup(l2, l3, l4), color=JAUNE_TITRE, buff=0.2, corner_radius=0.15)
+        cadre = SurroundingRectangle(VGroup(l2, l3, l4), color=JAUNE_TITRE, buff=0.4, corner_radius=0.15)
         self.play(Create(cadre), Indicate(bt, color=VERT_OK, scale_factor=1.05), run_time=0.5)
         self.attendre_voix()
 
@@ -317,7 +318,7 @@ class ContenanceConvertirCM2(PaysageContenanceCM2):
         self.add_mascotte()
         b1 = recipient("bouteille", 1.5, 0.7, 0.85, ANANAS)
         b2 = recipient("bouteille", 1.5, 0.7, 0.425, ANANAS)
-        g = rangee_recipients([b1, b2], 0.5).move_to(P(-3.8, 1.6))
+        g = rangee_recipients([b1, b2], 0.9).move_to(P(-3.8, 1.6))
         e1, e2 = contenance(b1, "1 L", 26), contenance(b2, "0,5 L", 26)
 
         def autres_q(sc):

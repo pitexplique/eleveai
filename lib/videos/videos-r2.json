@@ -16271,5 +16271,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_comparer&display=simple"
+ },
+ "cm2-contenance-convertir": {
+  "fichier": "cm2/maths/contenance/02-convertir/eleveai-maths-cm2-contenance-convertir.mp4",
+  "poster": "cm2/maths/contenance/02-convertir/eleveai-maths-cm2-contenance-convertir.png",
+  "vignette": "cm2/maths/contenance/02-convertir/eleveai-maths-cm2-contenance-convertir.vignette.webp",
+  "titre": "0,2 L de sirop : combien de cuillères de 5 mL ? — Convertir des contenances — épisode 2 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_convertir&display=simple"
+ },
+ "cm2-contenance-convertir-short": {
+  "fichier": "cm2/maths/contenance/02-convertir/eleveai-maths-cm2-contenance-convertir-short.mp4",
+  "poster": "cm2/maths/contenance/02-convertir/eleveai-maths-cm2-contenance-convertir-short-miniature.png",
+  "vignette": "cm2/maths/contenance/02-convertir/eleveai-maths-cm2-contenance-convertir-short-miniature.vignette.webp",
+  "titre": "1,5 litre = 15 cL ? La limonade ratée #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_convertir&display=simple"
  }
 }

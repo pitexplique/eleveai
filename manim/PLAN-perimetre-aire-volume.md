@@ -96,7 +96,7 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 
 **Volume et contenance** (4)
 - [x] Comparer des contenances — `contenance_comparer`
-- [ ] Convertir des contenances — `contenance_convertir`
+- [x] Convertir des contenances — `contenance_convertir`
 - [ ] Estimer une contenance — `contenance_estimer`
 - [ ] Résoudre un défi de contenances — `contenance_defi`
 

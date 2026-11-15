@@ -91233,6 +91233,166 @@
         "cuisine",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm2-contenance-convertir",
+      "pas_avant": "2027-03-24",
+      "notionId": "contenance",
+      "microId": "contenance_convertir",
+      "classe": "cm2",
+      "ceinture": "verte",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/contenance/02-convertir/eleveai-maths-cm2-contenance-convertir.mp4",
+      "miniature": "cm2/maths/contenance/02-convertir/eleveai-maths-cm2-contenance-convertir.png",
+      "titre": "0,2 L de sirop : combien de cuillères de 5 mL ? — Convertir des contenances — épisode 2 · Maths CM2",
+      "accroche": "Lucie est pharmacienne. Un flacon de sirop contient 0,2 litre, et le médecin prescrit des cuillères de 5 millilitres. Combien de cuillères dans le flacon ? Il faut d'abord convertir.\n\nDans cette vidéo :\n• le tableau des contenances : L, dL, cL, mL, × 10 d'une colonne à la suivante\n• un nombre à virgule dans le tableau : 0,2 L = 200 mL, donc 40 cuillères\n• dans l'autre sens, on divise : 750 mL = 0,75 L ; 35 cL = 0,35 L\n• le piège : 2,5 L, ce n'est pas 25 cL, mais 250 cL\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : 3 doses de 25 cL dans un bocal de 1 L : combien de mL reste-t-il de place ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_convertir&display=simple\n\n🧪 Épisode 2 de la série Contenance d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Convertir des contenances"
+        ],
+        [
+          "00:08",
+          "Lucie, pharmacienne"
+        ],
+        [
+          "00:27",
+          "Le tableau des contenances"
+        ],
+        [
+          "00:43",
+          "0,2 L dans le tableau"
+        ],
+        [
+          "00:57",
+          "40 cuillères"
+        ],
+        [
+          "01:07",
+          "Vers les litres : on divise"
+        ],
+        [
+          "01:25",
+          "Question 1"
+        ],
+        [
+          "01:59",
+          "Le piège"
+        ],
+        [
+          "02:20",
+          "Question 2"
+        ],
+        [
+          "02:53",
+          "À toi de jouer"
+        ],
+        [
+          "03:09",
+          "Correction"
+        ],
+        [
+          "03:28",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "convertir des contenances",
+        "tableau de conversion",
+        "décilitre",
+        "centilitre",
+        "millilitre",
+        "nombre décimal",
+        "pharmacienne",
+        "contenances",
+        "litre",
+        "centilitre",
+        "millilitre",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:25",
+          "question": "Combien de centilitres font 1,5 litre ?",
+          "choix": [
+            "15 cL",
+            "150 cL",
+            "1500 cL"
+          ],
+          "reponse": 1,
+          "explication": "1 L = 100 cL et 0,5 L = 50 cL : 1,5 L = 150 cL."
+        },
+        {
+          "t": "02:20",
+          "question": "Combien de litres font 450 centilitres ?",
+          "choix": [
+            "4,5 L",
+            "45 L",
+            "0,45 L"
+          ],
+          "reponse": 0,
+          "explication": "450 ÷ 100 = 4,5 : 450 cL = 4,5 L."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "sciences"
+      ]
+    },
+    {
+      "id": "cm2-contenance-convertir-short",
+      "pas_avant": "2027-03-24",
+      "notionId": "contenance",
+      "microId": "contenance_convertir",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-contenance-convertir",
+      "fichier": "cm2/maths/contenance/02-convertir/eleveai-maths-cm2-contenance-convertir-short.mp4",
+      "miniature": "cm2/maths/contenance/02-convertir/eleveai-maths-cm2-contenance-convertir-short-miniature.png",
+      "titre": "1,5 litre = 15 cL ? La limonade ratée #maths #cm2",
+      "accroche": "Ti Margo prépare une limonade géante avec 1,5 litre d'eau. Son verre doseur est en centilitres : il verse 15 centilitres… Beurk, dix fois trop sucrée ! Combien fallait-il verser ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 0,75 litre, c'est combien de millilitres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_convertir&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #contenance #cm2",
+      "tags": [
+        "convertir des contenances",
+        "litre",
+        "centilitre",
+        "limonade",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "contenances",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "1,5 litre d'eau : combien de centilitres fallait-il verser ?",
+          "choix": [
+            "15 cL",
+            "150 cL",
+            "1500 cL"
+          ],
+          "reponse": 1,
+          "explication": "1 L = 100 cL, un demi-litre = 50 cL : 1,5 L = 150 cL."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
     }
   ]
 }
