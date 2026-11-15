@@ -132,7 +132,7 @@ function preparerVideo(){
       mots($('cq'),Q.phrase,T);
       ids.forEach((id,i)=>{ const e=$(id), [s,t1,t2]=Q.choix[i]; e.style.visibility=tq>=t1?'':'hidden'; e.lastElementChild.innerHTML=s; e.lastElementChild.style.visibility=tq>=t2?'':'hidden'; e.classList.remove('bon','pale'); e.style.transform=''; });
       mots($('pause'),Q.pause,T);
-      const reb=T>=Q.cpt&&T<Q.cpt+3; $('rebours').style.display=reb?'':'none';
+      const reb=T>=Q.cpt&&T<Q.cpt+3; $('rebours').style.display=reb?'block':'none';
       if(reb) $('rebours').firstChild.style.width=(100*(1-(T-Q.cpt)/3))+'%';
     }
     if(r){
