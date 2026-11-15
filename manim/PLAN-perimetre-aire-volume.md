@@ -109,10 +109,10 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 - [x] Résoudre un défi sur les solides — `solide_defi`
 
 **Longueurs et conversions** (4)
-- [ ] Comparer des longueurs — `longueur_comparer`
-- [ ] Convertir des longueurs — `longueur_convertir`
-- [ ] Estimer une longueur — `longueur_estimer`
-- [ ] Résoudre un défi de longueurs — `longueur_defi`
+- [x] Comparer des longueurs — `longueur_comparer` — ✅ 15/11 paysage (Léonie, jaune, 4 min 05) + short ; manifeste 02/04/2027, R2, coach (`0103dc53`)
+- [x] Convertir des longueurs — `longueur_convertir` — ✅ 15/11 paysage (Arthur, verte, 3 min 59) + short ; manifeste 03/04/2027, R2, coach (`ed254562`)
+- [x] Estimer une longueur — `longueur_estimer` — ✅ 15/11 paysage (Mia, jaune, 3 min 48) + short ; manifeste 04/04/2027, R2, coach (`d61285f1`)
+- [x] Résoudre un défi de longueurs — `longueur_defi` — ✅ 15/11 paysage (Nathan, bleue, 3 min 17) + short ; manifeste 05/04/2027, R2, coach (`059a6f2f`)
 
 ## 6E
 
