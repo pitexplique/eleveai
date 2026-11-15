@@ -164,7 +164,56 @@
     "miniature": "premiere-spe/maths/suites/40-exp-geo/eleveai-maths-premiere-spe-suite-exp-geo.png",
     "titre": "400 mg dans le sang : de combien le médicament baisse-t-il chaque heure ? — L'exponentielle cache une suite géométrique — épisode 40 · Maths 1re spé",
     "accroche": "Soraya est pharmacienne hospitalière. Après une injection, la concentration du médicament dans le sang suit C(t) = 400 e^(−0,3t) milligrammes. Elle relève une valeur chaque heure : 400 ; 296,3 ; 219,5 ; 162,6. Est-ce qu'il part une quantité fixe par heure, ou un pourcentage ?\n\nDans cette vidéo :\n• relever une exponentielle aux heures entières fabrique une suite : uₙ = 400 e^(−0,3n)\n• le quotient de deux relevés qui se suivent vaut toujours e^(−0,3) ≈ 0,74\n• donc la suite est géométrique de raison e^(−0,3) : −26 % par heure, pas une quantité fixe\n• le premier terme : u₀ = 400 e⁰ = 400, parce que e⁰ = 1\n• le piège : pour e^(2n), la raison est e² ≈ 7,39, pas 2\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : deux médicaments, e^(−0,2n) et e^(−0,5n) ; leurs raisons, et lequel s'élimine le plus vite.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere-spe/exponentielle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere-spe&matiere=maths&notion=exponentielle&microId=exp_suite_geo&display=simple\n\n📈 Épisode 40 sur 42 de la série Suites d'EleveAI, de la 1re à la terminale.",
-    "chapitres": [],
+    "chapitres": [
+      [
+        "00:00",
+        "La suite eⁿᵃ · Soraya, pharmacienne à l'hôpital : le médicament dans le sang"
+      ],
+      [
+        "00:33",
+        "Un relevé chaque heure"
+      ],
+      [
+        "00:56",
+        "La suite des relevés : uₙ = 400 × e^(−0,3n)"
+      ],
+      [
+        "01:11",
+        "Le quotient de deux termes qui se suivent"
+      ],
+      [
+        "01:36",
+        "Une suite géométrique de raison e^(−0,3) ≈ 0,74"
+      ],
+      [
+        "01:54",
+        "Question 1"
+      ],
+      [
+        "02:27",
+        "Le premier terme : u₀ = e⁰ = 1"
+      ],
+      [
+        "02:41",
+        "Le piège : pour e^(2n), la raison est e², pas 2"
+      ],
+      [
+        "03:11",
+        "Question 2"
+      ],
+      [
+        "03:58",
+        "À toi de jouer"
+      ],
+      [
+        "04:28",
+        "Correction"
+      ],
+      [
+        "04:54",
+        "Ce que tu as appris"
+      ]
+    ],
     "tags": [
       "fonction exponentielle",
       "suite géométrique",
@@ -182,7 +231,7 @@
     ],
     "questions": [
       {
-        "t": "",
+        "t": "01:54",
         "question": "Pour tout réel a, la suite uₙ = e^(na) est :",
         "choix": [
           "arithmétique de raison a",
@@ -193,7 +242,7 @@
         "explication": "e^((n+1)a) = e^(na) × eᵃ : d'un terme au suivant, on multiplie par eᵃ."
       },
       {
-        "t": "",
+        "t": "03:11",
         "question": "La suite vₙ = e^(−0,5n) est :",
         "choix": [
           "géométrique de raison −0,5, et décroissante",
@@ -242,7 +291,7 @@
     ],
     "questions": [
       {
-        "t": "",
+        "t": "00:32",
         "question": "Cette suite de pourcentages est :",
         "choix": [
           "géométrique de raison e^(−0,4) ≈ 0,67",
