@@ -218,3 +218,79 @@ class Paysage5e(LigneAlignee, PaysageAireCM2G):
     """La base de la série : identité 5e, phrase de réponse à gauche, lignes sur la ligne d'écriture."""
     identite = "Maths 5e — EleveAI"
     ceinture = "verte"
+
+
+# ── les solides (série Volume, 15/11) : perspective cavalière, fuyante à 35°, coefficient 0,5 ────────────────
+import math as _math
+
+FUITE = 0.5 * _math.cos(_math.radians(35)), 0.5 * _math.sin(_math.radians(35))
+PAVE_FACE, PAVE_DESSUS, PAVE_COTE, PAVE_BORD = "#38bdf8", "#7dd3fc", "#0284c7", "#0c4a6e"
+
+
+def point3(o, u, x, y, z):
+    """Le point (x en largeur, y en profondeur, z en hauteur) d'un solide en cavalière, o = coin avant-bas-gauche."""
+    return o + P((x + y * FUITE[0]) * u, (z + y * FUITE[1]) * u)
+
+
+def pave(l, p, h, u, o=ORIGIN, face=PAVE_FACE, dessus=PAVE_DESSUS, cote=PAVE_COTE, bord=PAVE_BORD, sw=4,
+         grille=False, op=1.0):
+    """Un pavé l × p × h (unités) en cavalière ; o = le coin avant-bas-gauche. grille=True : les cubes-unité
+    tracés sur les trois faces visibles. Attributs : .face .dessus .cote .grille .pt(x, y, z) .u .o"""
+    q = lambda x, y, z: point3(o, u, x, y, z)  # noqa: E731
+    f = Polygon(q(0, 0, 0), q(l, 0, 0), q(l, 0, h), q(0, 0, h), fill_color=face, fill_opacity=op,
+                stroke_color=bord, stroke_width=sw)
+    d = Polygon(q(0, 0, h), q(l, 0, h), q(l, p, h), q(0, p, h), fill_color=dessus, fill_opacity=op,
+                stroke_color=bord, stroke_width=sw)
+    c = Polygon(q(l, 0, 0), q(l, p, 0), q(l, p, h), q(l, 0, h), fill_color=cote, fill_opacity=op,
+                stroke_color=bord, stroke_width=sw)
+    g = VGroup()
+    if grille:
+        for i in range(1, int(round(l))):
+            g.add(Line(q(i, 0, 0), q(i, 0, h)), Line(q(i, 0, h), q(i, p, h)))
+        for k in range(1, int(round(h))):
+            g.add(Line(q(0, 0, k), q(l, 0, k)), Line(q(l, 0, k), q(l, p, k)))
+        for j in range(1, int(round(p))):
+            g.add(Line(q(0, j, h), q(l, j, h)), Line(q(l, j, 0), q(l, j, h)))
+        g.set_stroke(bord, max(1.5, sw * 0.5))
+    v = VGroup(f, d, c, g)
+    v.face, v.dessus, v.cote, v.grille, v.pt, v.u, v.o = f, d, c, g, q, u, o
+    return v
+
+
+def prisme_tri(base, haut, x_sommet, longueur, u, o=ORIGIN, face="#fb923c", cote="#c2410c", dessus="#fdba74",
+               bord="#7c2d12", sw=4, op=1.0):
+    """Un prisme droit à base triangulaire, la base (triangle) DE FACE : côté du bas `base`, hauteur `haut`, sommet
+    au-dessus de x_sommet ; il fuit en profondeur sur `longueur`. o = le coin avant-bas-gauche.
+    Attributs : .avant (le triangle de face) .pt(x, y, z) .u .o"""
+    q = lambda x, y, z: point3(o, u, x, y, z)  # noqa: E731
+    L = longueur
+    pans = VGroup(
+        Polygon(q(x_sommet, 0, haut), q(base, 0, 0), q(base, L, 0), q(x_sommet, L, haut), fill_color=cote,
+                fill_opacity=op, stroke_color=bord, stroke_width=sw),
+        Polygon(q(0, 0, 0), q(x_sommet, 0, haut), q(x_sommet, L, haut), q(0, L, 0), fill_color=dessus,
+                fill_opacity=op, stroke_color=bord, stroke_width=sw))
+    avant = Polygon(q(0, 0, 0), q(base, 0, 0), q(x_sommet, 0, haut), fill_color=face, fill_opacity=op,
+                    stroke_color=bord, stroke_width=sw)
+    v = VGroup(pans, avant)
+    v.avant, v.pans, v.pt, v.u, v.o = avant, pans, q, u, o
+    return v
+
+
+def cylindre(r, h, u, o=ORIGIN, corps="#38bdf8", dessus="#7dd3fc", bord="#0c4a6e", sw=4, aplat=0.32, op=1.0):
+    """Un cylindre debout de rayon r et de hauteur h (unités) ; o = le centre du disque du BAS. Les disques sont des
+    ellipses (aplatissement `aplat`) ; le bord arrière du bas est en pointillé. Attributs : .haut .bas .corps .u .o"""
+    w, e = 2 * r * u, 2 * r * u * aplat
+    ar = DashedVMobject(Arc(radius=1, start_angle=0, angle=PI).stretch(r * u, 0).stretch(r * u * aplat, 1)
+                        .move_to(o + UP * e / 4), num_dashes=14).set_stroke(bord, sw * 0.7)
+    corps_ = Polygon(o + P(-r * u, 0), o + P(r * u, 0), o + P(r * u, h * u), o + P(-r * u, h * u),
+                     fill_color=corps, fill_opacity=op, stroke_width=0)
+    fond = Ellipse(width=w, height=e, fill_color=corps, fill_opacity=op, stroke_width=0).move_to(o)
+    devant = Arc(radius=1, start_angle=PI, angle=PI).stretch(r * u, 0).stretch(r * u * aplat, 1).move_to(
+        o + DOWN * e / 4).set_stroke(bord, sw)
+    cotes = VGroup(Line(o + P(-r * u, 0), o + P(-r * u, h * u)), Line(o + P(r * u, 0), o + P(r * u, h * u)))
+    cotes.set_stroke(bord, sw)
+    haut_ = Ellipse(width=w, height=e, fill_color=dessus, fill_opacity=op, stroke_color=bord,
+                    stroke_width=sw).move_to(o + UP * h * u)
+    v = VGroup(fond, corps_, ar, devant, cotes, haut_)
+    v.haut, v.bas, v.corps, v.u, v.o, v.r, v.h = haut_, VGroup(fond, ar, devant), VGroup(corps_, cotes), u, o, r, h
+    return v

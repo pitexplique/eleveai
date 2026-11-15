@@ -13,7 +13,10 @@ function voixDe(A){
     const f=txt=>{ const toks=txt.split(' '), tm=[]; let av=null;
       toks.forEach((w,k)=>{ const n=norme(w);
         /* un signe écrit (+, −, ×) prend le mot dit seul (« plus », « moins », « fois ») */
-        if(!n){ const sg={'+':'plus','−':'moins','×':'fois'}[w]; if(sg&&l[i]&&norme(l[i][1])===sg){ av=A[clip]+l[i][0]; i++; } tm.push(av); return; }
+        /* (15/11, 2e poste) « ÷ » prend « divisé » (et le « par » qui suit), « = » prend « égale » : la division s'écrit ÷ */
+        if(!n){ const sg={'+':'plus','−':'moins','×':'fois','÷':'divise','=':'egale'}[w];
+          if(sg&&l[i]&&norme(l[i][1].split(/\s+/)[0])===sg){ av=A[clip]+l[i][0]; i++; if(w==='÷'&&l[i]&&norme(l[i][1])==='par') i++; }
+          tm.push(av); return; }
         if(i>=l.length) throw new Error(`${clip} : plus de mots pour « ${txt} »`);
         const c=norme(l[i][1]); if(!c.includes(n)&&!n.includes(c)) throw new Error(`${clip} : écrit « ${w} », dit « ${l[i][1]} »`);
         av=A[clip]+l[i][0]; tm.push(av);

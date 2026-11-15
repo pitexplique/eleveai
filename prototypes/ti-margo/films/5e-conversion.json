@@ -1,0 +1,7 @@
+{
+  "voix": "5e-conversion-{ep}-short",
+  "sons": "public/sons/5e-conversion-{ep}-short",
+  "sortie": "manim/sorties/5e/maths/conversion/{num}-{ep}",
+  "nom": "eleveai-maths-5e-conversion-{ep}-short",
+  "episodes": { "decimal": "01", "duree": "02", "avant-calcul": "03", "coherence": "04" }
+}
