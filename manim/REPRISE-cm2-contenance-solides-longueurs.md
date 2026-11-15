@@ -43,3 +43,19 @@ Notes/outils `NL = side-session-notes/local_02c3644d-ad14-466c-9776-106b2f5c7f6a
 2. HD un par un : `PYTHONIOENCODING=utf-8 bash NL/chaine.sh longueur_<ep> <Scène> <0N> <ep>` (bords inclus).
 3. Shorts : 4 films `prototypes/ti-margo/films/cm2-longueur-<ep>.js` (consigne `NL/CONSIGNE-shorts-longueur-cm2.md`), puis `SQ` dans `NL/ecrire_ep_longueur.py` → `python NL/ecrire_ep_longueur.py` → `python NL/entrees_longueur.py <ep>`.
 4. Miniature, fiche YouTube, vignettes, R2 (`cm2/maths/longueurs/0N-<ep>`), `generer-videos-r2.mjs` (nos clés seules, `indexer_cles.py cm2-longueur-`), coach, plan, commit par chemin.
+
+## CONTENANCE CM2 — session « cm2-contenance » (15/11, ~05 h 35 : EN PAUSE sur ordre du chef d'orchestre, RAM < 1,5 Go)
+Notes et outils : `side-session-notes/local_02c3644d-ad14-466c-9776-106b2f5c7f6a/contenance/` (⛔ PAS la racine de ce dossier, elle est aux sessions solides / longueurs) : `drylock.sh <fichier> <Scène>` (verrou `eleveai-dry-c2.lock`, attend ≥ 2,5 Go) → `dry-contenance_<ep>.log`, `chaine-ql.sh <fichier> <Scène> <ep>` (dry → -ql → planche `%TEMP%\c2pl_<ep>\`), `chaine.sh <fichier> <Scène> <0N> <ep>` (dry propre → HD sous verrou → bords), `ecrire_ep.py` (les 4 `ep-*.json` déjà rédigés : titres, accroches, chapitres, tags, questions, centres, dates 23 → 26/03/2027 ; REMPLIR `SHORT_T` et les titres des shorts d'après les rapports des films), `entrees_contenance.py <ep>` (upsert des 2 entrées du manifeste), `indexer_cles.py cm2-contenance- <json…>` (met dans l'index HEAD + nos seules clés), consignes `CONSIGNE-paysages-contenance-cm2.md` / `CONSIGNE-shorts-contenance-cm2.md`, rapports `rapport-paysage-<ep>.md`.
+- ✅ Commun `manim/scripts/cm2/contenance_cm2_commun.py` (importe `contenance_cm1_commun` + `LigneAlignee` sans les modifier ; `paul lucie ibrahim manon`, `tableau_unites()` L | dL | cL | mL, `chiffre()`, base `PaysageContenanceCM2`).
+- ✅ Miniatures paysage : `python manim/miniature_contenance_cm2.py <ep>` (après le HD ; relire l'accroche contre le script final).
+- ✅ Shorts : série `prototypes/ti-margo/films/cm2-contenance.json` + `cm2-contenance.js` (récipients à la craie copiés du CM1) + cues des 4 (`cm2-contenance-cues.js`). Aucun film écrit encore.
+| Ép. | Script / Scène | État |
+|---|---|---|
+| 01 comparer | `contenance_comparer.py` / `ContenanceComparerCM2` (jaune) | écrit ; 2e dry run : 0 AVANCE/RETARD, mais piège 1 TARD + 2 BORD corrigés SANS dry run de contrôle ; planche -ql jamais rendue. Q 01:10 A, 02:00 C, ~3 min 50 |
+| 02 convertir | `contenance_convertir.py` / `ContenanceConvertirCM2` (verte) | écrit ; dry run propre à 05:15 ; planche relue, corrections de 05:22 (écrans 02, 03, piège, correction) NON revérifiées. Q 01:25 B, 02:20 A, ~3 min 55 |
+| 03 estimer | `contenance_estimer.py` (Ibrahim, jaune) | ⏳ à écrire (sous-agent avec la consigne) |
+| 04 defi | `contenance_defi.py` (Manon, bleue) | ⏳ à écrire |
+### Reprise (quand le chef d'orchestre relance)
+1. 01 et 02 : `bash <notes>/contenance/chaine-ql.sh contenance_<ep> <Scène> <ep>`, relire planche (écrans cités dans `rapport-paysage-<ep>.md`), puis `chaine.sh … 0N <ep>` en arrière-plan (un HD à la fois).
+2. 03 et 04 : sous-agents (pas plus de 2 à la fois) avec `CONSIGNE-paysages-contenance-cm2.md` ; puis les 4 shorts avec `CONSIGNE-shorts-contenance-cm2.md`.
+3. Par ép. : miniature → `ecrire_ep.py <ep>` → `entrees_contenance.py <ep>` → `fiches-youtube.py cm2-contenance-<ep>` → `vignettes-videos.py` → R2 du seul dossier `cm2/maths/contenance/0N-<ep>` → `generer-videos-r2.mjs` → coach `brancher-videos-coach.mjs --id cm2-contenance-<ep>,cm2-contenance-<ep>-short --ecrire` → plan coché → commit PAR CHEMIN (`indexer_cles.py` pour les json partagés). Jamais de push.
