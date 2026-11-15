@@ -173,7 +173,7 @@ class VolumeCompterBase(PaysageVolume6e):
         self.au_mot("On retient")
         tit = self.t("On retient :", 44, JAUNE_TITRE)
         gauche(tit, -6.2, 3.05)
-        emp = Empilement(pave_cubes(4, 2, 3), e=0.8, centre=P(-3.5, 0.75),
+        emp = Empilement(pave_cubes(4, 2, 3), e=0.8, centre=P(-2.75, 0.75),
                          couleurs={q: HAUT_C for q in pave_cubes(4, 2, 3) if q[1] == 1})
         bas, haut = couche(emp, 0), couche(emp, 1)
         self.play(Write(tit), FadeIn(bas), FadeIn(haut), run_time=0.5)
@@ -258,14 +258,18 @@ class VolumeCompterBase(PaysageVolume6e):
         self.au_mot("Ceux du fond et du dessous")
         l2 = self.bloc(["Ceux du fond et du dessous", "sont cachés."], 32, ORANGE_RETENUE)
         self.col(l2, 0.75)
-        self.play(FadeIn(l2, shift=UP * 0.1), haut.animate.shift(UP * 0.72 * 1.4), run_time=0.7)
+        for f in l2[1].get_family():
+            f.sans_synchro = True
+        self.play(FadeIn(l2[0], shift=UP * 0.1), haut.animate.shift(UP * 0.72 * 2.3), run_time=0.35)
         self.au_mot("sont cachés")
         caches = VGroup(*[emp.cubes[q] for q in pos if q[1] == 0 and (q[2] > 0)])
-        self.play(Indicate(caches, color=ORANGE_RETENUE, scale_factor=1.04), run_time=0.5)
+        self.play(FadeIn(l2[1], shift=UP * 0.1), Indicate(caches, color=ORANGE_RETENUE, scale_factor=1.04),
+                  run_time=0.5)
+        self.add(bas, haut)  # Indicate a mis les cubes cachés au premier plan : on remet l'ordre de dessin
         self.au_mot("Ils sont là quand même")
         l3 = self.t("Ils sont là quand même !", 32)
         self.col(l3, -0.25)
-        self.play(FadeIn(l3, shift=UP * 0.1), haut.animate.shift(DOWN * 0.72 * 1.4), run_time=0.6)
+        self.play(FadeIn(l3, shift=UP * 0.1), haut.animate.shift(DOWN * 0.72 * 2.3), run_time=0.6)
         self.au_mot("en comptant par couches")
         l4 = self.bloc(["Par couches :", "on n'en oublie aucun."], 36, VERT_OK)
         self.col(l4, -1.25)

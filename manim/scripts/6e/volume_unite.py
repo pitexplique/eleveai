@@ -26,6 +26,28 @@ def cube_cote(e=1.6, centre=ORIGIN, couleur=VOL_C):
     return Empilement([(0, 0, 0)], e=e, centre=centre, couleur=couleur, sw=3, trait=WHITE)
 
 
+def enfant_debout(m=2.6):
+    """Un enfant de 1,4 m (m = 1 mètre à l'écran), aux vraies proportions : petite tête, la poitrine
+    vers 1 m (le dessin `personne` a une tête trop grosse : le haut du cube tombait sur le visage)."""
+    peau, tenue, jean = "#c68642", "#2563eb", "#1e3a8a"
+    j = VGroup(*[RoundedRectangle(width=0.13 * m, height=0.75 * m, corner_radius=0.04 * m, fill_color=jean,
+                                  fill_opacity=1, stroke_width=0).move_to(P(x * m, 0.375 * m)) for x in (-0.08, 0.08)])
+    corps = RoundedRectangle(width=0.32 * m, height=0.48 * m, corner_radius=0.07 * m, fill_color=tenue,
+                             fill_opacity=1, stroke_width=0).move_to(P(0, 0.95 * m))
+    bras = VGroup(*[RoundedRectangle(width=0.08 * m, height=0.46 * m, corner_radius=0.04 * m, fill_color=tenue,
+                                     fill_opacity=1, stroke_width=0).rotate(x * 0.9).move_to(P(x * 1.05 * m, 0.9 * m))
+                    for x in (-0.2, 0.2)])
+    mains = VGroup(*[Circle(radius=0.04 * m, fill_color=peau, fill_opacity=1, stroke_width=0)
+                     .move_to(P(x * m, 0.665 * m)) for x in (-0.235, 0.235)])
+    cou = Rectangle(width=0.08 * m, height=0.06 * m, fill_color=peau, fill_opacity=1, stroke_width=0)         .move_to(P(0, 1.2 * m))
+    tete = Circle(radius=0.1 * m, fill_color=peau, fill_opacity=1, stroke_width=0).move_to(P(0, 1.3 * m))
+    cheveux = Sector(radius=0.105 * m, angle=PI, start_angle=0, fill_color="#111827", fill_opacity=1,
+                     stroke_width=0).move_to(P(0, 1.36 * m))
+    yeux = VGroup(*[Dot(P(x * m, 1.3 * m), radius=0.012 * m, color=BLACK) for x in (-0.035, 0.035)])
+    bouche = Arc(radius=0.03 * m, start_angle=PI * 1.15, angle=PI * 0.7, color=BLACK, stroke_width=3)         .move_to(P(0, 1.255 * m))
+    return VGroup(j, bras, mains, corps, cou, tete, cheveux, yeux, bouche)
+
+
 class VolumeUniteBase(PaysageVolume6e):
     nom_voix = "6e-volume-unite"
     fichier_marques = "volume_unite_marques.json"
@@ -68,16 +90,16 @@ class VolumeUniteBase(PaysageVolume6e):
         self.play(FadeIn(fl, shift=DOWN * 0.2), run_time=0.35)
         self.play(fl.animate.rotate(-0.8).shift(DOWN * 0.3), run_time=0.4)
         self.au_mot("La dose dépend")
-        l1 = self.t("La dose dépend de la place que prend l'eau :", 30)
-        gauche(l1, -3.6, -1.15)
+        l1 = self.t("La dose dépend de la place que prend l'eau :", 28)
+        gauche(l1, -3.0, -1.15)
         self.play(FadeIn(l1, shift=UP * 0.1), run_time=0.35)
         self.au_mot("son volume")
         l2 = self.t("son volume.", 40, VOL_C)
-        gauche(l2, -3.6, -1.85)
+        gauche(l2, -3.0, -1.85)
         self.play(FadeIn(l2, scale=1.2), Indicate(eau, color="#7dd3fc", scale_factor=1.03), run_time=0.5)
         self.au_mot("comment le mesure-t-on")
         q = self.t("Comment le mesure-t-on ?", 38, JAUNE_TITRE)
-        gauche(q, -3.6, -2.7)
+        gauche(q, -3.0, -2.7)
         self.play(FadeIn(q, shift=UP * 0.1), run_time=0.4)
         self.attendre_voix()
 
@@ -87,10 +109,10 @@ class VolumeUniteBase(PaysageVolume6e):
         self.au_mot("On mesure un volume")
         tit = self.t("On mesure un volume avec des petits cubes.", 36, JAUNE_TITRE)
         gauche(tit, -6.2, 3.05)
-        petits = Empilement(pave_cubes(3, 2, 2), e=0.5, centre=P(4.6, 1.5))
+        petits = Empilement(pave_cubes(3, 2, 2), e=0.5, centre=P(4.6, 1.85))
         self.play(Write(tit), LaggedStart(*[FadeIn(c, shift=DOWN * 0.2) for c in petits], lag_ratio=0.05),
                   run_time=0.8)
-        cu = cube_cote(2.0, P(-3.6, -0.3))
+        cu = cube_cote(2.0, P(-3.2, -0.3))
         self.au_mot("Voici un cube de 1 centimètre")
         self.play(FadeIn(cu, scale=0.5), run_time=0.4)
         e = cu.e
@@ -102,8 +124,8 @@ class VolumeUniteBase(PaysageVolume6e):
         c3 = fleche_cote(p1 + P(0.22, -0.12), p2 + P(0.22, -0.12), "1 cm", 28, LONG_C, RIGHT, 0.12)
         noms = VGroup(self.t("longueur", 26, LONG_C), self.t("largeur", 26, LONG_C), self.t("hauteur", 26, LONG_C))
         noms[0].next_to(c1, DOWN, buff=0.08)
-        noms[1].next_to(c3, RIGHT, buff=0.12).shift(DOWN * 0.35)
-        noms[2].next_to(c2[1], DOWN, buff=0.12)
+        noms[1].next_to(c3[1], DOWN, buff=0.08).align_to(c3[1], LEFT)
+        noms[2].next_to(c2[1], DOWN, buff=0.1).align_to(c2[1], RIGHT)
         for c in (c1, c2, c3):
             hors_audit(c)
         self.au_mot("sa longueur")
@@ -114,23 +136,24 @@ class VolumeUniteBase(PaysageVolume6e):
         self.play(GrowFromCenter(c2), FadeIn(noms[2]), run_time=0.35)
         self.au_mot("Son volume, c'est")
         l1 = self.t("Son volume :", 34)
-        gauche(l1, 0.9, 0.5)
+        gauche(l1, 0.9, 0.85)
         self.play(FadeIn(l1, shift=UP * 0.1), run_time=0.3)
         v = self.gros("1 centimètre cube", couleur=VOL_C, fs=34)
-        gauche(v, 0.9, -0.3)
+        gauche(v, 0.9, 0.05)
         self.au_mot("1 centimètre cube")
         self.play(FadeIn(v, scale=1.2), run_time=0.35)
         self.au_mot("On l'écrit cm")
-        ec = self.ligne([("On l'écrit", WHITE), ("1 cm³", VOL_C)], 38, buff=0.25)
-        gauche(ec, 0.9, -1.3)
+        ec = self.ligne([("On l'écrit", WHITE), ("1 cm³", VOL_C)], 34, buff=0.35)
+        gauche(ec, 0.9, -0.95)
         hors_audit(ec)
         self.play(FadeIn(ec, shift=UP * 0.1), run_time=0.35)
         self.au_mot("avec un petit 3")
-        pt = self.t("le petit 3", 28, JAUNE_TITRE).next_to(ec[1], DOWN, buff=0.6).align_to(ec[1], RIGHT)
-        pt.shift(RIGHT * 0.5)
-        f = Arrow(pt.get_top(), ec[1].get_corner(UR), buff=0.08, color=JAUNE_TITRE, stroke_width=5)
+        expo = ec[1][-1]
+        pt = self.t("le petit 3", 26, JAUNE_TITRE).move_to(P(expo.get_x() + 0.35, -1.85))
+        f = Arrow(pt.get_top(), expo.get_bottom() + RIGHT * 0.05, buff=0.06, color=JAUNE_TITRE, stroke_width=5,
+                  max_tip_length_to_length_ratio=0.3)
         self.play(GrowArrow(f), FadeIn(pt), run_time=0.35)
-        self.insister(ec[1], 1.25, 0.3)
+        self.insister(ec[1], 1.2, 0.3, about=ec[1].get_left())
         self.attendre_voix()
 
     # ── 03 : cm, cm², cm³ ───────────────────────────────────────────────────
@@ -217,19 +240,30 @@ class VolumeUniteBase(PaysageVolume6e):
         self.clear()
         self.add_mascotte()
 
+        bloc24 = pave(2.4, 1.2, 1.0, e=1.0, centre=P(-4.0, 1.6), couleur=VOL_C)
+        l24 = hors_audit(self.t("24 cm³", 32, VOL_C).next_to(bloc24, DOWN, buff=0.25))
+        un = cube_cote(0.55, P(-1.0, 1.4))
+        l1 = hors_audit(self.t("1 cm³", 28, VOL_C).next_to(un, DOWN, buff=0.25))
+        qm = self.t("?", 48, JAUNE_TITRE).next_to(un, UP, buff=0.2)
+
+        def autres_q(sc):
+            sc.play(FadeIn(bloc24, shift=UP * 0.2), FadeIn(l24), FadeIn(un, scale=0.6), FadeIn(l1), FadeIn(qm),
+                    run_time=0.4)
+
         def apres(sc):
-            sc.rep_lignes(["24 cm³, ce sont 24 cubes de 1 cm³.",
+            sc.rep_lignes(["24 cm³, ce sont 24 cubes", "de 1 cm³.",
                            ("Le petit 3 ne se multiplie pas :", ORANGE_RETENUE),
                            ("il dit « cube ».", ORANGE_RETENUE)],
-                          ["24 centimètres cubes, ce sont", "Le petit 3 n'est pas", "il dit « cube »"],
-                          y0=-1.4, pas=0.6)
+                          ["24 centimètres cubes, ce sont", "1 centimètre cube", "Le petit 3 n'est pas",
+                           "il dit « cube »"],
+                          fs=30, y0=-1.3, pas=0.55)
 
         self.question_pause("05-question", "05b-reponse",
                             ["Un solide a un volume", "de 24 cm³.", "Combien de cubes de 1 cm³", "contient-il ?"],
                             [self.choix("8 cubes"), self.choix("24 cubes"), self.choix("72 cubes")], 1,
                             ["24 cm³, ce sont 24 cubes de 1 cm³.", "Le petit 3 ne se multiplie pas :",
                              "il dit « cube »."],
-                            mot_q="Un solide a un volume", autres_r=apres)
+                            mot_q="Un solide a un volume", autres_q=autres_q, autres_r=apres)
 
     # ── 06 : le mètre cube ──────────────────────────────────────────────────
     def ecran_metre_cube(self):
@@ -238,8 +272,9 @@ class VolumeUniteBase(PaysageVolume6e):
         tit = self.t("Pour un grand objet : un grand cube.", 38, JAUNE_TITRE)
         gauche(tit, -6.2, 3.05)
         sol = Line(P(-6.4, -1.9), P(0.6, -1.9), color="#64748b", stroke_width=4)
-        gc = Empilement([(0, 0, 0)], e=2.6, centre=ORIGIN, couleur="#a16207", sw=3, trait=WHITE)
-        gc.shift(P(-5.6, -1.9) - gc.pp((0, 0, 0)))
+        g0 = Empilement([(0, 0, 0)], e=2.6, centre=ORIGIN, couleur="#a16207", sw=3, trait=WHITE)
+        gc = Empilement([(0, 0, 0)], e=2.6, centre=P(-5.6, -1.9) - g0.pp((0, 0, 0)), couleur="#a16207", sw=3,
+                        trait=WHITE)  # construit avec centre= : Empilement.shift ne recale pas pp()
         self.play(Write(tit), Create(sol), FadeIn(gc, scale=0.6), run_time=0.5)
         self.au_mot("1 mètre de côté")
         a, b = gc.pp((0, 0, 0)), gc.pp((1, 0, 0))
@@ -248,22 +283,24 @@ class VolumeUniteBase(PaysageVolume6e):
         self.au_mot("C'est 1 mètre cube")
         u = self.t("1 m³", 48, "#fbbf24").move_to(gc.centre_cube((0, 0, 0)))
         self.play(FadeIn(u, scale=1.3), run_time=0.35)
-        enf = personne(peau="#c68642", tenue="#2563eb", s=1.0)
-        enf = visage(enf)
-        enf.scale_to_fit_height(2.6 * 1.55).move_to(P(-0.6, 0)).align_to(P(0, -1.9), DOWN)
+        enf = enfant_debout(2.6)  # 1,4 m pour un cube de 1 m : le haut du cube à la poitrine
+        enf.align_to(P(0, -1.9), DOWN)
+        enf.align_to(P(gc.get_right()[0] + 0.5, 0), LEFT)
         self.au_mot("t'arriverait à peu près à la poitrine")
-        po = DashedLine(gc.pp((1, 1, 0)), P(-0.2, gc.pp((1, 1, 0))[1]), color=JAUNE_TITRE, stroke_width=4)
+        yh = gc.pp((1, 1, 0))[1]
+        po = DashedLine(P(gc.get_right()[0] + 0.05, yh), P(enf.get_right()[0] + 0.15, yh), color=JAUNE_TITRE,
+                        stroke_width=4)
         self.play(FadeIn(enf, shift=LEFT * 0.3), Create(po), run_time=0.5)
-        mp = mathis(0.75).move_to(P(2.6, -0.4))
+        mp = mathis(0.75).move_to(P(2.0, -0.9))
         self.au_mot("La piscine de Mathis")
         bas = Rectangle(width=3.0, height=1.3, fill_color=EAU, fill_opacity=0.9, stroke_color="#e5e7eb",
-                        stroke_width=6).move_to(P(4.6, -1.2))
+                        stroke_width=6).move_to(P(4.75, -1.2))
         self.play(FadeIn(mp), FadeIn(bas), run_time=0.4)
         l = self.ligne([("300 m³", "#fbbf24")], 44)
         l.move_to(bas.get_center())
         self.au_mot("fait 300 mètres cubes")
         self.play(FadeIn(l, scale=1.2), run_time=0.35)
-        l2 = self.t("300 grands cubes d'eau", 30, EAU).move_to(P(3.9, 1.2))
+        l2 = self.t("300 grands cubes d'eau", 30, EAU).move_to(P(4.0, 0.6))
         self.au_mot("300 grands cubes d'eau")
         self.play(FadeIn(l2, shift=UP * 0.1), run_time=0.35)
         self.attendre_voix()
@@ -302,19 +339,26 @@ class VolumeUniteBase(PaysageVolume6e):
     def ecran_question2(self):
         self.clear()
         self.add_mascotte()
+        pis = VGroup(Rectangle(width=4.0, height=1.8, fill_color="#e5e7eb", fill_opacity=1, stroke_width=0),
+                     Rectangle(width=3.6, height=1.4, fill_color=EAU, fill_opacity=0.9, stroke_width=0))
+        pis.move_to(P(-2.9, 1.5))
+        mp = mathis(0.8).next_to(pis, LEFT, buff=0.35).align_to(pis, DOWN)
+
+        def autres_q(sc):
+            sc.play(FadeIn(pis, shift=UP * 0.2), FadeIn(mp, shift=UP * 0.2), run_time=0.4)
 
         def apres(sc):
             sc.rep_lignes(["Un volume a le petit 3.", "Pour un grand objet : le m³.",
                            ("Le cm³, c'est pour un petit objet,", ORANGE_RETENUE), ("comme un dé.", ORANGE_RETENUE)],
                           ["Un volume a le petit 3", "pour un objet aussi grand", "Le centimètre cube, c'est",
-                           "comme un dé"], y0=-1.3, pas=0.58)
+                           "comme un dé"], fs=30, y0=-1.3, pas=0.55)
 
         self.question_pause("08-question", "08b-reponse",
                             ["Quelle unité choisir", "pour le volume", "de la piscine ?"],
                             [self.choix("le m³"), self.choix("le m²"), self.choix("le cm³")], 0,
                             ["Un volume a le petit 3.", "Pour un grand objet : le m³.",
                              "Le cm³, c'est pour un petit objet,", "comme un dé."],
-                            mot_q="Quelle unité choisir", autres_r=apres)
+                            mot_q="Quelle unité choisir", autres_q=autres_q, autres_r=apres)
 
     # ── 09 : le défi ────────────────────────────────────────────────────────
     def eleves(self):

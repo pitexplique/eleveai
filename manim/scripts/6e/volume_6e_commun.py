@@ -23,6 +23,19 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "cm1"))
 from solides_cm1_commun import *  # noqa: E402,F401,F403
 from solides_cm1_commun import _rot, _normale  # noqa: E402,F401
 
+_EmpilementCM1 = Empilement  # noqa: F405
+
+
+class Empilement(_EmpilementCM1):
+    """L'Empilement du CM1, mais pp() suit les déplacements : shift (donc move_to, next_to, align_to)
+    recale aussi l'origine _dec (le bug du 15/11 : la cote « 1 m » restait à l'ancienne place)."""
+
+    def shift(self, *vecteurs):
+        super().shift(*vecteurs)
+        if hasattr(self, "_dec"):
+            self._dec = self._dec + sum(np.array(v, dtype=float) for v in vecteurs)
+        return self
+
 VOL_C = "#22c55e"     # le volume (cubes verts)
 AIRE_C = "#38bdf8"    # l'aire (carré à plat, bleu)
 LONG_C = "#f97316"    # la longueur (trait orange)
@@ -159,3 +172,31 @@ def enzo(s=1.0):
 class PaysageVolume6e(PaysageSolidesCM1):
     identite = "Maths 6e — EleveAI"
     ceinture = "jaune"
+
+    def rep_bas(self, i, morceaux, fs=32, x=-6.2, y0=-1.6, pas=0.62, buff=0.24):
+        """Comme le modèle, mais au moins une vraie espace entre les morceaux (à 0,14 on lisait
+        « 3 couches :3 × 5= 15 »)."""
+        return super().rep_bas(i, morceaux, fs=fs, x=x, y0=y0, pas=pas, buff=max(buff, 0.24 * fs / 32))
+
+    def ligne(self, morceaux, fs=40, buff=0.2):
+        """La ligne de morceaux, posés sur la MÊME ligne d'écriture (centrés, « 8 cm³ » et
+        « = 8 petits cubes » flottaient : l'exposant d'un côté, le jambage de l'autre)."""
+        lg = super().ligne(morceaux, fs, buff)
+        bases = [base_ecriture(m) for m in lg]
+        if len(lg) > 1 and bases[0] is not None:
+            for m, b in zip(lg[1:], bases[1:]):
+                if b is not None:
+                    m.shift(UP * (bases[0] - b))
+        return lg
+
+
+def base_ecriture(t):
+    """Le bas des lettres et chiffres sans jambage d'un Text (ni exposant) ; None sinon."""
+    if not isinstance(t, Text):
+        return None
+    chars = [c for c in t.text if not c.isspace()]
+    if len(chars) != len(t.submobjects):
+        return None
+    bas = [g.get_bottom()[1] for c, g in zip(chars, t.submobjects)
+           if (c.isalpha() and c not in "gjpqyçQ") or c in "0123456789"]
+    return max(bas) if bas else None

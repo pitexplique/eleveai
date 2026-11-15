@@ -246,7 +246,7 @@ class VolumeComparerBase(PaysageVolume6e):
         copie = barre.copy()
         self.au_mot("et un bloc")
         self.play(FadeIn(lk[0], shift=UP * 0.08),
-                  LaggedStart(*[Transform(copie[k], bloc[k]) for k in range(12)], lag_ratio=0.05), run_time=1.0)
+                  LaggedStart(*[Transform(copie[k], bloc[k]) for k in range(12)], lag_ratio=0.05), run_time=0.45)
         self.aux_extraits(lk[1:], ["3 sur 2 sur 2", "12 cubes aussi"])
         self.au_mot("Même volume")
         g = self.gros("Même volume, autre forme !", couleur=VERT_OK, fs=38)
@@ -350,27 +350,28 @@ class VolumeComparerBase(PaysageVolume6e):
         sol = Line(P(-6.2, 0.55), P(-0.8, 0.55), color="#64748b", stroke_width=4)
         nc = self.t("le carton", 30, BLEU_CALCUL).next_to(sol, DOWN, buff=0.12).set_x(carton.get_x())
         nb = self.t("la boîte", 30, BLEU_CALCUL).next_to(sol, DOWN, buff=0.12).set_x(boite.get_x())
+        for f in [*nc.get_family(), *nb.get_family()]:
+            f.sans_synchro = True  # « Un carton », « Une boîte » : les noms entrent avec leur dessin
 
         def avant(sc):
-            sc.play(Create(sol), FadeIn(carton, shift=UP * 0.2), FadeIn(nc), run_time=0.4)
-            sc.play(FadeIn(boite, shift=UP * 0.2), FadeIn(nb), run_time=0.3)
+            sc.play(Create(sol), FadeIn(carton, shift=UP * 0.2), FadeIn(nc), FadeIn(boite, shift=UP * 0.2),
+                    FadeIn(nb), run_time=0.25)
 
         def apres(sc):
             kw = dict(fs=30, y0=-0.95, pas=0.52)
-            l1 = sc.rep_bas(0, [("Carton :", VERT_OK), ("5 × 2", VERT_OK), ("= 10 ;", VERT_OK)], **kw)
+            # « 5 fois 2, 10 ; fois 2, 20 » : le 10 de la 2e ligne paraît avec « = 10 », le « × 2 » à son mot
+            l1 = sc.rep_bas(0, [("Carton :", VERT_OK), ("5 × 2", VERT_OK), ("= 10", VERT_OK)], **kw)
+            l2 = sc.rep_bas(1, [("10", VERT_OK), ("× 2", VERT_OK), ("= 20 cubes.", VERT_OK)], **kw)
             sc.au_mot("Le carton")
             sc.play(FadeIn(l1[0], shift=UP * 0.08), Indicate(carton, color=VERT_OK, scale_factor=1.05), run_time=0.3)
-            sc.aux_extraits(l1[1:], ["5 fois 2", "10 ; fois 2"])
-            l2 = sc.rep_bas(1, [("10 × 2", VERT_OK), ("= 20 cubes.", VERT_OK)], **kw)
-            hors_audit(l2[0])
-            sc.aux_extraits(l2, [("fois 2", 2), "20 cubes"])
-            l3 = sc.rep_bas(2, [("Boîte :", VERT_OK), ("3 × 3", VERT_OK), ("= 9 ;", VERT_OK)], **kw)
+            sc.aux_extraits([l1[1], VGroup(l1[2], l2[0]), l2[1], l2[2]],
+                            ["5 fois 2", "10 ;", "2, 20", "20 cubes"])
+            l3 = sc.rep_bas(2, [("Boîte :", VERT_OK), ("3 × 3", VERT_OK), ("= 9", VERT_OK)], **kw)
+            l4 = sc.rep_bas(3, [("9", VERT_OK), ("× 3", VERT_OK), ("= 27 cubes.", VERT_OK)], **kw)
             sc.au_mot("La boîte")
             sc.play(FadeIn(l3[0], shift=UP * 0.08), Indicate(boite, color=VERT_OK, scale_factor=1.05), run_time=0.3)
-            sc.aux_extraits(l3[1:], ["3 fois 3", "9 ; fois 3"])
-            l4 = sc.rep_bas(3, [("9 × 3", VERT_OK), ("= 27 cubes.", VERT_OK)], **kw)
-            hors_audit(l4[0])
-            sc.aux_extraits(l4, [("fois 3", 2), "27 cubes"])
+            sc.aux_extraits([l3[1], VGroup(l3[2], l4[0]), l4[1], l4[2]],
+                            ["3 fois 3", "9 ;", "3, 27", "27 cubes"])
             l5 = sc.rep_bas(4, [("27 > 20 !", JAUNE_TITRE)], **kw)
             hors_audit(l5)
             sc.aux_extraits([l5], ["27, c'est plus que"])
@@ -417,7 +418,7 @@ class VolumeComparerBase(PaysageVolume6e):
             for f in [*n.get_family(), *d.get_family()]:
                 f.sans_synchro = True
             self.au_mot(mot_n)
-            self.wait(0.07)
+            self.wait(0.32)  # le numéro de la cuve, pas avant que la voix le dise
             self.play(FadeIn(n), FadeIn(cuves[k], shift=UP * 0.2), run_time=0.3)
             self.au_mot(mot_d)
             self.wait(0.07)
@@ -439,30 +440,28 @@ class VolumeComparerBase(PaysageVolume6e):
         for n in noms:
             hors_audit(n)
         self.add(sol, *cuves, *noms)
+        # « 3 fois 2, 6 ; fois 4, 24 » : le 6 de la 2e ligne paraît avec « = 6 », le « × 4 » à son mot
         calc = [
-            ([("3 × 2", WHITE), ("= 6", WHITE)], ["3 fois 2", "6 ; fois 4"], (),
-             [("6 × 4", WHITE), ("= 24", VERT_OK)], ["fois 4", "24 cubes"], (0,)),
-            ([("5 × 5", WHITE), ("= 25", WHITE)], ["5 fois 5", "25 ; fois 1"], (),
-             [("25 × 1", WHITE), ("= 25", VERT_OK)], ["fois 1", "25 cubes"], (0, 1)),
-            ([("2 × 2", WHITE), ("= 4", WHITE)], ["2 fois 2", "4 ; fois 5"], (0, 1),
-             [("4 × 5", WHITE), ("= 20", VERT_OK)], [("fois 5, 20", 1), "20 cubes"], (0,)),
+            ([("3 × 2", WHITE), ("= 6", WHITE)], [("6", WHITE), ("× 4", WHITE), ("= 24", VERT_OK)],
+             ["3 fois 2", "6 ;", "4, 24", "24 cubes"]),
+            ([("5 × 5", WHITE), ("= 25", WHITE)], [("25", WHITE), ("× 1", WHITE), ("= 25", VERT_OK)],
+             ["5 fois 5", "25 ;", "1, 25", ("25 cubes", 1)]),
+            ([("2 × 2", WHITE), ("= 4", WHITE)], [("4", WHITE), ("× 5", WHITE), ("= 20", VERT_OK)],
+             ["2 fois 2", "4 ;", "5, 20", "20 cubes"]),
         ]
         groupes = []
-        for k, (m1, x1, h1, m2, x2, h2) in enumerate(calc):
-            a = self.ligne(m1, 30, buff=0.15)
+        for k, (m1, m2, x) in enumerate(calc):
+            a = self.ligne(m1, 30, buff=0.2)
             a.next_to(noms[k], DOWN, buff=0.2).set_x(self.XS_CUVES[k])
-            b = self.ligne(m2, 30, buff=0.15)
+            b = self.ligne(m2, 30, buff=0.2)
             b.next_to(a, DOWN, buff=0.15).set_x(self.XS_CUVES[k])
-            for i in h1:
-                hors_audit(a[i])
-            for i in h2:
-                hors_audit(b[i])
             self.au_mot(f"Cuve {k + 1}")
             self.play(Indicate(cuves[k], color=JAUNE_TITRE, scale_factor=1.05), run_time=0.3)
-            self.aux_extraits(a, x1)
-            self.aux_extraits(b, x2)
+            self.aux_extraits([a[0], VGroup(a[1], b[0]), b[1], b[2]], x)
             groupes.append(VGroup(cuves[k], noms[k], a, b))
         # le rangement : cuve 3, cuve 1, cuve 2 (les cuves changent de place)
+        for g in groupes:
+            hors_audit(g)  # déjà audités à leur entrée ; le rangement les déplace seulement
         self.au_mot("De la plus petite à la plus grande")
         ordre = (2, 0, 1)
         self.play(*[groupes[k].animate.set_x(self.XS_CUVES[i]) for i, k in enumerate(ordre)], run_time=0.8)
