@@ -632,7 +632,8 @@
         "antécédent",
         "courbe",
         "lycée"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "fv-dissymetrie",
@@ -653,7 +654,8 @@
         "antécédent",
         "2de",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "fv-image",
@@ -674,7 +676,8 @@
         "calculer",
         "2de",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "fv-lecture",
@@ -695,7 +698,8 @@
         "courbe",
         "2de",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "python",
@@ -761,7 +765,8 @@
         "boucle",
         "variable",
         "lycée"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "py-egal",
@@ -781,7 +786,8 @@
         "affectation",
         "maths",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "py-boucles",
@@ -802,7 +808,8 @@
         "while",
         "maths",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "py-tracer",
@@ -823,7 +830,8 @@
         "méthode",
         "maths",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "974-temperature-altitude",
@@ -7624,7 +7632,8 @@
         "dauphin",
         "La Réunion",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-isoler-une-lettre",
@@ -11659,7 +11668,8 @@
         "2de",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-vocabulaire-short",
@@ -11686,7 +11696,8 @@
         "maths visuel",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-modele",
@@ -11749,7 +11760,8 @@
         "2de",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-modele-short",
@@ -11775,7 +11787,8 @@
         "maths visuel",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-conditionnelle",
@@ -11840,7 +11853,8 @@
         "spécialité maths",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-conditionnelle-short",
@@ -11867,7 +11881,8 @@
         "maths visuel",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-registres",
@@ -11928,7 +11943,8 @@
         "spécialité maths",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-registres-short",
@@ -11955,7 +11971,8 @@
         "maths visuel",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-arbre",
@@ -12118,7 +12135,8 @@
         "spécialité maths",
         "bac",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-formule-short",
@@ -12145,7 +12163,8 @@
         "maths visuel",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-reconnaitre",
@@ -12213,7 +12232,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-reconnaitre-short",
@@ -12241,7 +12261,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-notation",
@@ -12305,7 +12326,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-notation-short",
@@ -12332,7 +12354,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-encadrement",
@@ -12396,7 +12419,8 @@
         "1re",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-encadrement-short",
@@ -12423,7 +12447,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-contraire",
@@ -12488,7 +12513,8 @@
         "1re",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-contraire-short",
@@ -12514,7 +12540,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "6e-aire-longueur-convertir-diagonale",
@@ -14005,7 +14032,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-tableau-short",
@@ -14034,7 +14062,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-tableau",
@@ -14115,7 +14144,8 @@
           "notionId": "auto_proba_lecture",
           "microId": "auto_proba_conditionnelle_lecture"
         }
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-tableau-short",
@@ -14152,7 +14182,8 @@
           "notionId": "auto_proba_lecture",
           "microId": "auto_proba_conditionnelle_lecture"
         }
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-distinguer",
@@ -14225,7 +14256,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-distinguer-short",
@@ -14254,7 +14286,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-distinguer",
@@ -14335,7 +14368,8 @@
           "notionId": "auto_proba_lecture",
           "microId": "auto_proba_intersection_tableau"
         }
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-distinguer-short",
@@ -14372,7 +14406,8 @@
           "notionId": "auto_proba_lecture",
           "microId": "auto_proba_intersection_tableau"
         }
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-interpreter",
@@ -14441,7 +14476,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-interpreter-short",
@@ -14470,7 +14506,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-interpreter",
@@ -14540,7 +14577,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-interpreter-short",
@@ -14570,7 +14608,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-faux-positifs",
@@ -14643,7 +14682,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-faux-positifs-short",
@@ -14747,7 +14787,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-faux-positifs-short",
@@ -14777,7 +14818,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-arbre-lire",
@@ -14852,7 +14894,8 @@
           "notionId": "proba_arbre",
           "microId": "probaT_arbre_interpreter"
         }
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-arbre-lire-short",
@@ -14886,7 +14929,8 @@
           "notionId": "proba_arbre",
           "microId": "probaT_arbre_interpreter"
         }
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-arbre-lire",
@@ -14955,7 +14999,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-arbre-lire-short",
@@ -14983,7 +15028,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-arbre-completer",
@@ -15055,7 +15101,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-arbre-completer-short",
@@ -15082,7 +15129,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-arbre-completer",
@@ -15155,7 +15203,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-arbre-completer-short",
@@ -15183,7 +15232,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-arbre-construire",
@@ -15255,7 +15305,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-arbre-construire-short",
@@ -15283,7 +15334,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-arbre-construire",
@@ -15356,7 +15408,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-arbre-construire-short",
@@ -15385,7 +15438,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-chemin",
@@ -15457,7 +15511,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-chemin-short",
@@ -15485,7 +15540,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-chemin",
@@ -15565,7 +15621,8 @@
           "notionId": "alea_conditionnelle_calcul",
           "microId": "alea_cond_intersection"
         }
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-chemin-short",
@@ -15601,7 +15658,8 @@
           "notionId": "alea_conditionnelle_calcul",
           "microId": "alea_cond_intersection"
         }
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-somme-chemins",
@@ -15674,7 +15732,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-somme-chemins-short",
@@ -15702,7 +15761,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-somme-chemins",
@@ -15776,7 +15836,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-somme-chemins-short",
@@ -15805,7 +15866,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-arbre-tableau",
@@ -15882,7 +15944,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-arbre-tableau-short",
@@ -15910,7 +15973,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-arbre-tableau",
@@ -15988,7 +16052,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-arbre-tableau-short",
@@ -16017,7 +16082,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-indep-definition",
@@ -16089,7 +16155,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-indep-definition-short",
@@ -16117,7 +16184,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-indep-definition",
@@ -16190,7 +16258,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-indep-definition-short",
@@ -16219,7 +16288,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-indep-produit",
@@ -16287,7 +16357,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-indep-produit-short",
@@ -16315,7 +16386,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-indep-produit",
@@ -16384,7 +16456,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-indep-produit-short",
@@ -16413,7 +16486,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-indep-justifier",
@@ -16485,7 +16559,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-indep-justifier-short",
@@ -16513,7 +16588,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-indep-justifier",
@@ -16586,7 +16662,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-indep-justifier-short",
@@ -16615,7 +16692,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-indep-incompatible",
@@ -16686,7 +16764,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-indep-incompatible-short",
@@ -16713,7 +16792,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-indep-incompatible",
@@ -16785,7 +16865,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-indep-incompatible-short",
@@ -16813,7 +16894,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-remise",
@@ -16885,7 +16967,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-remise-short",
@@ -16913,7 +16996,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-remise",
@@ -16986,7 +17070,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-remise-short",
@@ -17015,7 +17100,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bern-epreuve",
@@ -17083,7 +17169,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bern-epreuve-short",
@@ -17110,7 +17197,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-bern-epreuve",
@@ -17179,7 +17267,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-bern-epreuve-short",
@@ -17207,7 +17296,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bern-repetition",
@@ -17275,7 +17365,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bern-repetition-short",
@@ -17302,7 +17393,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-bern-repetition",
@@ -17371,7 +17463,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-bern-repetition-short",
@@ -17399,7 +17492,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bern-arbre",
@@ -17471,7 +17565,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bern-arbre-short",
@@ -17498,7 +17593,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-bern-arbre",
@@ -17571,7 +17667,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-bern-arbre-short",
@@ -17599,7 +17696,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bern-calculer",
@@ -17667,7 +17765,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bern-calculer-short",
@@ -17694,7 +17793,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-bern-calculer",
@@ -17763,7 +17863,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-bern-calculer-short",
@@ -17791,7 +17892,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-au-moins-un",
@@ -17859,7 +17961,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-au-moins-un-short",
@@ -17886,7 +17989,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-au-moins-un",
@@ -17955,7 +18059,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-au-moins-un-short",
@@ -17983,7 +18088,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-va-notation",
@@ -18050,7 +18156,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-va-notation-short",
@@ -18077,7 +18184,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-notation",
@@ -18145,7 +18253,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-notation-short",
@@ -18173,7 +18282,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-va-loi",
@@ -18248,7 +18358,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-va-loi-short",
@@ -18275,7 +18386,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-loi",
@@ -18351,7 +18463,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-loi-short",
@@ -18379,7 +18492,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-va-esperance",
@@ -18446,7 +18560,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-va-esperance-short",
@@ -18473,7 +18588,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-esperance",
@@ -18541,7 +18657,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-esperance-short",
@@ -18569,7 +18686,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-va-equitable",
@@ -18641,7 +18759,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-va-equitable-short",
@@ -18669,7 +18788,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-equitable",
@@ -18742,7 +18862,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-equitable-short",
@@ -18771,7 +18892,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-va-moyenne",
@@ -18839,7 +18961,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-va-moyenne-short",
@@ -18867,7 +18990,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-moyenne",
@@ -18936,7 +19060,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-moyenne-short",
@@ -18965,7 +19090,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "5e-proba-vocabulaire",
@@ -19452,7 +19578,8 @@
         "2de",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-calculer-short",
@@ -19479,7 +19606,8 @@
         "maths visuel",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-contraire",
@@ -19539,7 +19667,8 @@
         "2de",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-contraire-short",
@@ -19566,7 +19695,8 @@
         "maths visuel",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-reunion",
@@ -19619,7 +19749,8 @@
         "2de",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-reunion-short",
@@ -19646,7 +19777,8 @@
         "maths visuel",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-formule-union",
@@ -19707,7 +19839,8 @@
         "2de",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-formule-union-short",
@@ -19734,7 +19867,8 @@
         "maths visuel",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-tableau-arbre",
@@ -19792,7 +19926,8 @@
         "2de",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-tableau-arbre-short",
@@ -19819,7 +19954,8 @@
         "maths visuel",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-conditionnelle",
@@ -19880,7 +20016,8 @@
         "2de",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-conditionnelle-short",
@@ -19907,7 +20044,8 @@
         "maths visuel",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-arbre-pondere",
@@ -19965,7 +20103,8 @@
         "2de",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-arbre-pondere-short",
@@ -19992,7 +20131,8 @@
         "maths visuel",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-arbre-chemins",
@@ -20054,7 +20194,8 @@
         "2de",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-arbre-chemins-short",
@@ -20081,7 +20222,8 @@
         "maths visuel",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-tableau-croise",
@@ -20139,7 +20281,8 @@
         "2de",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-tableau-croise-short",
@@ -20166,7 +20309,8 @@
         "maths visuel",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-faux-positifs",
@@ -20232,7 +20376,8 @@
         "2de",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-faux-positifs-short",
@@ -20259,7 +20404,8 @@
         "maths visuel",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-fluctuation",
@@ -20321,7 +20467,8 @@
         "2de",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-fluctuation-short",
@@ -20348,7 +20495,8 @@
         "maths visuel",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-grands-nombres",
@@ -20405,7 +20553,8 @@
         "2de",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-grands-nombres-short",
@@ -20432,7 +20581,8 @@
         "maths visuel",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-simulation",
@@ -20499,7 +20649,8 @@
         "2de",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-simulation-short",
@@ -20526,7 +20677,8 @@
         "maths visuel",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-interpreter",
@@ -20587,7 +20739,8 @@
         "2de",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-proba-interpreter-short",
@@ -20614,7 +20767,8 @@
         "maths visuel",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-reconnaitre",
@@ -20684,7 +20838,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-reconnaitre-short",
@@ -20714,7 +20869,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-notation",
@@ -20780,7 +20936,8 @@
         "première",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-notation-short",
@@ -20809,7 +20966,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-somme-issues",
@@ -20863,7 +21021,8 @@
         "1re",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-somme-issues-short",
@@ -20890,7 +21049,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-equiprobabilite",
@@ -20940,7 +21100,8 @@
         "1re",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-proba-equiprobabilite-short",
@@ -20966,7 +21127,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-totales",
@@ -21023,7 +21185,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-totales-short",
@@ -21051,7 +21214,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-totales",
@@ -21109,7 +21273,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-totales-short",
@@ -21138,7 +21303,8 @@
         "eleveai",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-va-calculer",
@@ -21205,7 +21371,8 @@
           "notionId": "va_loi_probabilite",
           "microId": "va_somme_un"
         }
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-va-calculer-short",
@@ -21239,7 +21406,8 @@
           "notionId": "va_loi_probabilite",
           "microId": "va_somme_un"
         }
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-va-decision",
@@ -21296,7 +21464,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-va-decision-short",
@@ -21323,7 +21492,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bern-esperance",
@@ -21378,7 +21548,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bern-esperance-short",
@@ -21404,7 +21575,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bern-simuler",
@@ -21458,7 +21630,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bern-simuler-short",
@@ -21484,7 +21657,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bern-representer",
@@ -21541,7 +21715,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bern-representer-short",
@@ -21567,7 +21742,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-ech-distance",
@@ -21624,7 +21800,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-ech-distance-short",
@@ -21650,7 +21827,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-ech-rare",
@@ -21706,7 +21884,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-ech-rare-short",
@@ -21732,7 +21911,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-ech-taille",
@@ -21792,7 +21972,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-ech-taille-short",
@@ -21818,7 +21999,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-ech-fluctuation",
@@ -21875,7 +22057,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-ech-fluctuation-short",
@@ -21902,7 +22085,8 @@
         "eleveai",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bin-reconnaitre",
@@ -21926,7 +22110,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bin-reconnaitre-short",
@@ -21954,7 +22139,8 @@
         "EleveAI",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-bin-reconnaitre",
@@ -21981,7 +22167,8 @@
         "bac",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-bin-reconnaitre-short",
@@ -22012,7 +22199,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bin-remise",
@@ -22036,7 +22224,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bin-remise-short",
@@ -22064,7 +22253,8 @@
         "EleveAI",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-bin-remise",
@@ -22091,7 +22281,8 @@
         "bac",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-bin-remise-short",
@@ -22122,7 +22313,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bin-calculer",
@@ -22146,7 +22338,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bin-calculer-short",
@@ -22174,7 +22367,8 @@
         "EleveAI",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-bin-calculer",
@@ -22201,7 +22395,8 @@
         "bac",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-bin-calculer-short",
@@ -22232,7 +22427,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bin-parametres",
@@ -22256,7 +22452,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bin-parametres-short",
@@ -22284,7 +22481,8 @@
         "EleveAI",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-coef-definition",
@@ -22309,7 +22507,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-coef-definition-short",
@@ -22338,7 +22537,8 @@
         "EleveAI",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-triangle-pascal",
@@ -22361,7 +22561,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-triangle-pascal-short",
@@ -22388,7 +22589,8 @@
         "EleveAI",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-formule-pascal",
@@ -22412,7 +22614,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-formule-pascal-short",
@@ -22440,7 +22643,8 @@
         "EleveAI",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-coef-denombrer",
@@ -22464,7 +22668,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-coef-denombrer-short",
@@ -22492,7 +22697,8 @@
         "EleveAI",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bin-extremes",
@@ -22516,7 +22722,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bin-extremes-short",
@@ -22544,7 +22751,8 @@
         "EleveAI",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bin-esperance",
@@ -22569,7 +22777,8 @@
         "STMG",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-proba-bin-esperance-short",
@@ -22598,7 +22807,8 @@
         "EleveAI",
         "ceinture jaune",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-bin-esperance-variance",
@@ -22625,7 +22835,8 @@
         "bac",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-bin-esperance-variance-short",
@@ -22656,7 +22867,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-bin-intervalle",
@@ -22682,7 +22894,8 @@
         "bac",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-bin-intervalle-short",
@@ -22712,7 +22925,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-bin-defi",
@@ -22738,7 +22952,8 @@
         "bac",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-bin-defi-short",
@@ -22768,7 +22983,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-tableau",
@@ -22843,7 +23059,8 @@
           "02:33",
           "Le coach et l'abonnement"
         ]
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-tableau-short",
@@ -22874,7 +23091,8 @@
         "1re spé",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-arbre-construire",
@@ -22948,7 +23166,8 @@
           "02:30",
           "Le coach et l'abonnement"
         ]
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-arbre-construire-short",
@@ -22978,7 +23197,8 @@
         "1re spé",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-arbre",
@@ -23053,7 +23273,8 @@
           "02:34",
           "Le coach et l'abonnement"
         ]
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-arbre-short",
@@ -23083,7 +23304,8 @@
         "1re spé",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-inverser",
@@ -23158,7 +23380,8 @@
           "02:47",
           "Le coach et l'abonnement"
         ]
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-inverser-short",
@@ -23189,7 +23412,8 @@
         "1re spé",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-independance",
@@ -23263,7 +23487,8 @@
           "02:11",
           "Entraîne-toi et abonne-toi"
         ]
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-independance-short",
@@ -23293,7 +23518,8 @@
         "1re spé",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-indep-incompatible",
@@ -23366,7 +23592,8 @@
           "02:48",
           "Entraîne-toi et abonne-toi"
         ]
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-indep-incompatible-short",
@@ -23395,7 +23622,8 @@
         "1re spé",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-succession",
@@ -23465,7 +23693,8 @@
           "01:55",
           "Entraîne-toi et abonne-toi"
         ]
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-succession-short",
@@ -23494,7 +23723,8 @@
         "1re spé",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-simulation",
@@ -23550,7 +23780,8 @@
           "01:20",
           "Ce que tu as appris"
         ]
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-simulation-short",
@@ -23578,7 +23809,8 @@
         "1re spé",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-partition",
@@ -23605,7 +23837,8 @@
         "spécialité maths",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-partition-short",
@@ -23636,7 +23869,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-definition",
@@ -23664,7 +23898,8 @@
         "spécialité maths",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-definition-short",
@@ -23696,7 +23931,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-modeliser",
@@ -23724,7 +23960,8 @@
         "spécialité maths",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-modeliser-short",
@@ -23756,7 +23993,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-variance",
@@ -23782,7 +24020,8 @@
         "spécialité maths",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-variance-short",
@@ -23812,7 +24051,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-ecart-type",
@@ -23839,7 +24079,8 @@
         "spécialité maths",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-proba-va-ecart-type-short",
@@ -23870,7 +24111,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-totales",
@@ -23927,7 +24169,8 @@
           "01:45",
           "Ce que tu as appris"
         ]
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-totales-short",
@@ -23955,7 +24198,8 @@
         "terminale",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-bayes",
@@ -24028,7 +24272,8 @@
           "02:47",
           "Le coach et l'abonnement"
         ]
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-bayes-short",
@@ -24057,7 +24302,8 @@
         "terminale",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-va-definition",
@@ -24085,7 +24331,8 @@
         "lycée",
         "EleveAI",
         "terminale"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-va-definition-short",
@@ -24117,7 +24364,8 @@
         "terminale",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-va-loi",
@@ -24192,7 +24440,8 @@
           "02:16",
           "Entraîne-toi et abonne-toi"
         ]
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-va-loi-short",
@@ -24219,7 +24468,8 @@
         "terminale",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-va-esperance",
@@ -24286,7 +24536,8 @@
           "02:00",
           "Entraîne-toi et abonne-toi"
         ]
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-va-esperance-short",
@@ -24313,7 +24564,8 @@
         "terminale",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-va-ecart-type",
@@ -24340,7 +24592,8 @@
         "lycée",
         "EleveAI",
         "terminale"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-va-ecart-type-short",
@@ -24371,7 +24624,8 @@
         "terminale",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-va-interpreter",
@@ -24439,7 +24693,8 @@
           "01:49",
           "Entraîne-toi et abonne-toi"
         ]
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-va-interpreter-short",
@@ -24467,7 +24722,8 @@
         "terminale",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-cond-defi",
@@ -24495,7 +24751,8 @@
         "bac",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-cond-defi-short",
@@ -24527,7 +24784,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-va-defi",
@@ -24555,7 +24813,8 @@
         "bac",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-va-defi-short",
@@ -24587,7 +24846,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-conc-moyenne",
@@ -24615,7 +24875,8 @@
         "bac",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-conc-moyenne-short",
@@ -24647,7 +24908,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-conc-bienayme",
@@ -24674,7 +24936,8 @@
         "bac",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-conc-bienayme-short",
@@ -24705,7 +24968,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-conc-inegalite",
@@ -24732,7 +24996,8 @@
         "bac",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-conc-inegalite-short",
@@ -24763,7 +25028,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-conc-lgn",
@@ -24790,7 +25056,8 @@
         "bac",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-conc-lgn-short",
@@ -24821,7 +25088,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-conc-fluctuation",
@@ -24849,7 +25117,8 @@
         "bac",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-conc-fluctuation-short",
@@ -24881,7 +25150,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-conc-defi",
@@ -24908,7 +25178,8 @@
         "bac",
         "lycée",
         "EleveAI"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-conc-defi-short",
@@ -24939,7 +25210,8 @@
         "EleveAI",
         "ceinture orange",
         "Shorts"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "cm1-stats-tableau-lire",
@@ -29573,7 +29845,8 @@
       "centres": [
         "sport"
       ],
-      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de"
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de",
+      "plus_tard": true
     },
     {
       "id": "seconde-stats-lire-serie-short",
@@ -29618,7 +29891,8 @@
       ],
       "centres": [
         "sport"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-stats-moyenne",
@@ -29732,7 +30006,8 @@
         "espace",
         "sciences"
       ],
-      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de"
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de",
+      "plus_tard": true
     },
     {
       "id": "seconde-stats-moyenne-short",
@@ -29777,7 +30052,8 @@
       "centres": [
         "espace",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-stats-moyenne-ponderee",
@@ -29894,7 +30170,8 @@
       "centres": [
         "sport"
       ],
-      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de"
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de",
+      "plus_tard": true
     },
     {
       "id": "seconde-stats-moyenne-ponderee-short",
@@ -29938,7 +30215,8 @@
       ],
       "centres": [
         "sport"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-stats-mediane-quartiles",
@@ -30055,7 +30333,8 @@
       "centres": [
         "musique"
       ],
-      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de"
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de",
+      "plus_tard": true
     },
     {
       "id": "seconde-stats-mediane-quartiles-short",
@@ -30099,7 +30378,8 @@
       ],
       "centres": [
         "musique"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-stats-frequence",
@@ -30217,7 +30497,8 @@
         "technologie-ia",
         "histoire-geographie"
       ],
-      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de"
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de",
+      "plus_tard": true
     },
     {
       "id": "seconde-stats-frequence-short",
@@ -30262,7 +30543,8 @@
       "centres": [
         "technologie-ia",
         "histoire-geographie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-stats-ecart-interquartile",
@@ -30370,7 +30652,8 @@
         "meteo-climat",
         "nature-ecologie"
       ],
-      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de"
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de",
+      "plus_tard": true
     },
     {
       "id": "seconde-stats-ecart-interquartile-short",
@@ -30415,7 +30698,8 @@
       "centres": [
         "meteo-climat",
         "nature-ecologie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-stats-linearite-moyenne",
@@ -30517,7 +30801,8 @@
         "cinema-series",
         "technologie-ia"
       ],
-      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de"
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de",
+      "plus_tard": true
     },
     {
       "id": "seconde-stats-linearite-moyenne-short",
@@ -30562,7 +30847,8 @@
       "centres": [
         "cinema-series",
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-stats-ecart-type",
@@ -30662,7 +30948,8 @@
         "transports",
         "histoire-geographie"
       ],
-      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de"
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de",
+      "plus_tard": true
     },
     {
       "id": "seconde-stats-ecart-type-short",
@@ -30708,7 +30995,8 @@
       "centres": [
         "transports",
         "histoire-geographie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-stats-interpreter",
@@ -30818,7 +31106,8 @@
         "argent-budget",
         "reseaux-sociaux"
       ],
-      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de"
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/statistiques-descriptives-2de",
+      "plus_tard": true
     },
     {
       "id": "seconde-stats-interpreter-short",
@@ -30863,7 +31152,8 @@
       "centres": [
         "argent-budget",
         "reseaux-sociaux"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-rep-barres",
@@ -30964,7 +31254,8 @@
       ],
       "centres": [
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-rep-barres-short",
@@ -31008,7 +31299,8 @@
       ],
       "centres": [
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-rep-circulaire",
@@ -31107,7 +31399,8 @@
       "centres": [
         "nature-ecologie",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-rep-circulaire-short",
@@ -31152,7 +31445,8 @@
       "centres": [
         "nature-ecologie",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-rep-choisir",
@@ -31250,7 +31544,8 @@
       "centres": [
         "jeux-video",
         "argent-budget"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-rep-choisir-short",
@@ -31295,7 +31590,8 @@
       "centres": [
         "jeux-video",
         "argent-budget"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-rep-commenter",
@@ -31397,7 +31693,8 @@
       "centres": [
         "sport",
         "corps-sante"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-rep-commenter-short",
@@ -31442,7 +31739,8 @@
       "centres": [
         "sport",
         "corps-sante"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-filtre-effectif",
@@ -31545,7 +31843,8 @@
       "centres": [
         "histoire-geographie",
         "art-design"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-filtre-effectif-short",
@@ -31590,7 +31889,8 @@
       "centres": [
         "histoire-geographie",
         "art-design"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-boite",
@@ -31691,7 +31991,8 @@
       "centres": [
         "argent-budget",
         "histoire-geographie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-boite-short",
@@ -31735,7 +32036,8 @@
       "centres": [
         "argent-budget",
         "histoire-geographie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-tab-marges",
@@ -31830,7 +32132,8 @@
       ],
       "centres": [
         "corps-sante"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-tab-marges-short",
@@ -31873,7 +32176,8 @@
       ],
       "centres": [
         "corps-sante"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-freq-marginale",
@@ -31969,7 +32273,8 @@
       "centres": [
         "histoire-geographie",
         "transports"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-freq-marginale-short",
@@ -32013,7 +32318,8 @@
       "centres": [
         "histoire-geographie",
         "transports"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-freq-conditionnelle",
@@ -32114,7 +32420,8 @@
       "centres": [
         "sport",
         "corps-sante"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-freq-conditionnelle-short",
@@ -32158,7 +32465,8 @@
       "centres": [
         "sport",
         "corps-sante"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-freq-completer",
@@ -32259,7 +32567,8 @@
       "centres": [
         "transports",
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-freq-completer-short",
@@ -32303,7 +32612,8 @@
       "centres": [
         "transports",
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-freq-interpreter",
@@ -32399,7 +32709,8 @@
       "centres": [
         "corps-sante",
         "transports"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-freq-interpreter-short",
@@ -32443,7 +32754,8 @@
       "centres": [
         "corps-sante",
         "transports"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-lire-graphique",
@@ -32542,7 +32854,8 @@
       "centres": [
         "meteo-climat",
         "nature-ecologie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-lire-graphique-short",
@@ -32587,7 +32900,8 @@
       "centres": [
         "meteo-climat",
         "nature-ecologie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-lire-graphique",
@@ -32686,7 +33000,8 @@
       "centres": [
         "meteo-climat",
         "nature-ecologie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-lire-graphique-short",
@@ -32731,7 +33046,8 @@
       "centres": [
         "meteo-climat",
         "nature-ecologie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-graphiques-usuels",
@@ -32832,7 +33148,8 @@
       ],
       "centres": [
         "cinema-series"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-graphiques-usuels-short",
@@ -32876,7 +33193,8 @@
       ],
       "centres": [
         "cinema-series"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-diagrammes-usuels",
@@ -32977,7 +33295,8 @@
       ],
       "centres": [
         "cinema-series"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-diagrammes-usuels-short",
@@ -33021,7 +33340,8 @@
       ],
       "centres": [
         "cinema-series"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-graphique-donnees",
@@ -33119,7 +33439,8 @@
       ],
       "centres": [
         "sport"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-graphique-donnees-short",
@@ -33163,7 +33484,8 @@
       ],
       "centres": [
         "sport"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-graphique-donnees",
@@ -33261,7 +33583,8 @@
       ],
       "centres": [
         "sport"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-graphique-donnees-short",
@@ -33305,7 +33628,8 @@
       ],
       "centres": [
         "sport"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-tab-lire",
@@ -33403,7 +33727,8 @@
       "centres": [
         "histoire-geographie",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-tab-lire-short",
@@ -33448,7 +33773,8 @@
       "centres": [
         "histoire-geographie",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-tab-lire",
@@ -33546,7 +33872,8 @@
       "centres": [
         "histoire-geographie",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-tab-lire-short",
@@ -33591,7 +33918,8 @@
       "centres": [
         "histoire-geographie",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-tab-completer",
@@ -33685,7 +34013,8 @@
       "centres": [
         "espace",
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-tab-completer-short",
@@ -33730,7 +34059,8 @@
       "centres": [
         "espace",
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-tab-completer",
@@ -33824,7 +34154,8 @@
       "centres": [
         "espace",
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-tab-completer-short",
@@ -33869,7 +34200,8 @@
       "centres": [
         "espace",
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-tab-construire",
@@ -33966,7 +34298,8 @@
       ],
       "centres": [
         "musique"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-tab-construire-short",
@@ -34010,7 +34343,8 @@
       ],
       "centres": [
         "musique"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-tab-dresser",
@@ -34107,7 +34441,8 @@
       ],
       "centres": [
         "musique"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-tab-dresser-short",
@@ -34151,7 +34486,8 @@
       ],
       "centres": [
         "musique"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-nuage-lire",
@@ -34253,7 +34589,8 @@
       ],
       "centres": [
         "sport"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-nuage-lire-short",
@@ -34297,7 +34634,8 @@
       ],
       "centres": [
         "sport"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-nuage-lire",
@@ -34399,7 +34737,8 @@
       ],
       "centres": [
         "sport"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-nuage-lire-short",
@@ -34443,7 +34782,8 @@
       ],
       "centres": [
         "sport"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-nuage-construire",
@@ -34545,7 +34885,8 @@
       ],
       "centres": [
         "transports"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-nuage-construire-short",
@@ -34589,7 +34930,8 @@
       ],
       "centres": [
         "transports"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-nuage-representer",
@@ -34691,7 +35033,8 @@
       ],
       "centres": [
         "transports"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-nuage-representer-short",
@@ -34735,7 +35078,8 @@
       ],
       "centres": [
         "transports"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-nuage-tendance",
@@ -34837,7 +35181,8 @@
       "centres": [
         "histoire-geographie",
         "meteo-climat"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-nuage-tendance-short",
@@ -34882,7 +35227,8 @@
       "centres": [
         "histoire-geographie",
         "meteo-climat"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-nuage-tendance",
@@ -34984,7 +35330,8 @@
       "centres": [
         "histoire-geographie",
         "meteo-climat"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-nuage-tendance-short",
@@ -35029,7 +35376,8 @@
       "centres": [
         "histoire-geographie",
         "meteo-climat"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-filtre-sous-ensemble",
@@ -35130,7 +35478,8 @@
       ],
       "centres": [
         "cinema-series"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-filtre-sous-ensemble-short",
@@ -35174,7 +35523,8 @@
       ],
       "centres": [
         "cinema-series"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-filtre-sous-ensemble",
@@ -35275,7 +35625,8 @@
       ],
       "centres": [
         "cinema-series"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-filtre-sous-ensemble-short",
@@ -35319,7 +35670,8 @@
       ],
       "centres": [
         "cinema-series"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-filtre-et",
@@ -35417,7 +35769,8 @@
       "centres": [
         "nature-ecologie",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-filtre-et-short",
@@ -35462,7 +35815,8 @@
       "centres": [
         "nature-ecologie",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-filtre-et",
@@ -35560,7 +35914,8 @@
       "centres": [
         "nature-ecologie",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-filtre-et-short",
@@ -35605,7 +35960,8 @@
       "centres": [
         "nature-ecologie",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-filtre-ou",
@@ -35706,7 +36062,8 @@
       ],
       "centres": [
         "art-design"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-filtre-ou-short",
@@ -35750,7 +36107,8 @@
       ],
       "centres": [
         "art-design"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-filtre-ou",
@@ -35851,7 +36209,8 @@
       ],
       "centres": [
         "art-design"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-filtre-ou-short",
@@ -35895,7 +36254,8 @@
       ],
       "centres": [
         "art-design"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-filtre-non",
@@ -35998,7 +36358,8 @@
       "centres": [
         "espace",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-commun-stats-filtre-non-short",
@@ -36043,7 +36404,8 @@
       "centres": [
         "espace",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-filtre-non",
@@ -36146,7 +36508,8 @@
       "centres": [
         "espace",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-filtre-non-short",
@@ -36191,7 +36554,8 @@
       "centres": [
         "espace",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-ajust-pertinence",
@@ -36288,7 +36652,8 @@
       "centres": [
         "musique",
         "transports"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-ajust-pertinence-short",
@@ -36332,7 +36697,8 @@
       "centres": [
         "musique",
         "transports"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-ajust-au-juge",
@@ -36430,7 +36796,8 @@
       "centres": [
         "argent-budget",
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-ajust-au-juge-short",
@@ -36474,7 +36841,8 @@
       "centres": [
         "argent-budget",
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-ajust-equation",
@@ -36575,7 +36943,8 @@
       "centres": [
         "corps-sante",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-ajust-equation-short",
@@ -36619,7 +36988,8 @@
       "centres": [
         "corps-sante",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-ajust-calculer",
@@ -36716,7 +37086,8 @@
       "centres": [
         "nature-ecologie",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-ajust-calculer-short",
@@ -36760,7 +37131,8 @@
       "centres": [
         "nature-ecologie",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-interpoler",
@@ -36856,7 +37228,8 @@
       ],
       "centres": [
         "histoire-geographie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-interpoler-short",
@@ -36899,7 +37272,8 @@
       ],
       "centres": [
         "histoire-geographie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-extrapoler",
@@ -37000,7 +37374,8 @@
       "centres": [
         "transports",
         "nature-ecologie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-extrapoler-short",
@@ -37044,7 +37419,8 @@
       "centres": [
         "transports",
         "nature-ecologie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-limites",
@@ -37140,7 +37516,8 @@
       "centres": [
         "reseaux-sociaux",
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-limites-short",
@@ -37184,7 +37561,8 @@
       "centres": [
         "reseaux-sociaux",
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-mc-principe",
@@ -37289,7 +37667,8 @@
       "centres": [
         "argent-budget",
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-mc-principe-short",
@@ -37333,7 +37712,8 @@
       "centres": [
         "argent-budget",
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-mc-calculer",
@@ -37448,7 +37828,8 @@
       ],
       "centres": [
         "corps-sante"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-mc-calculer-short",
@@ -37491,7 +37872,8 @@
       ],
       "centres": [
         "corps-sante"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-mc-comparer",
@@ -37596,7 +37978,8 @@
       ],
       "centres": [
         "transports"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-mc-comparer-short",
@@ -37639,7 +38022,8 @@
       ],
       "centres": [
         "transports"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-cv-appliquer",
@@ -37745,7 +38129,8 @@
       "centres": [
         "argent-budget",
         "transports"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-cv-appliquer-short",
@@ -37789,7 +38174,8 @@
       "centres": [
         "argent-budget",
         "transports"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-cv-lire",
@@ -37894,7 +38280,8 @@
       "centres": [
         "technologie-ia",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-cv-lire-short",
@@ -37938,7 +38325,8 @@
       "centres": [
         "technologie-ia",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-cv-revenir",
@@ -38043,7 +38431,8 @@
       ],
       "centres": [
         "histoire-geographie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-stats-cv-revenir-short",
@@ -38086,7 +38475,8 @@
       ],
       "centres": [
         "histoire-geographie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "6e-frac-lire-ecrire",
@@ -53861,7 +54251,8 @@
       "centres": [
         "nature-ecologie",
         "histoire-geographie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-prop-proportion-short",
@@ -53905,7 +54296,8 @@
       ],
       "centres": [
         "reseaux-sociaux"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-prop-pourcentage-de-pourcentage",
@@ -54003,7 +54395,8 @@
       "centres": [
         "argent-budget",
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "seconde-prop-pourcentage-de-pourcentage-short",
@@ -54047,7 +54440,8 @@
       ],
       "centres": [
         "sport"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-prop-pourcentage-de-pourcentage",
@@ -54144,7 +54538,8 @@
       "centres": [
         "argent-budget",
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-prop-pourcentage-de-pourcentage-short",
@@ -54188,7 +54583,8 @@
       ],
       "centres": [
         "sport"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-prop-pourcentage-de-pourcentage",
@@ -54285,7 +54681,8 @@
       "centres": [
         "argent-budget",
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-prop-pourcentage-de-pourcentage-short",
@@ -54329,7 +54726,8 @@
       ],
       "centres": [
         "sport"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-prop-calculer",
@@ -54423,7 +54821,8 @@
       "centres": [
         "sciences",
         "nature-ecologie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-prop-calculer-short",
@@ -54467,7 +54866,8 @@
       ],
       "centres": [
         "musique"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-prop-calculer",
@@ -54561,7 +54961,8 @@
       "centres": [
         "sciences",
         "nature-ecologie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-prop-calculer-short",
@@ -54605,7 +55006,8 @@
       ],
       "centres": [
         "musique"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-prop-formes",
@@ -54702,7 +55104,8 @@
       "centres": [
         "nature-ecologie",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-prop-formes-short",
@@ -54746,7 +55149,8 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-prop-formes",
@@ -54843,7 +55247,8 @@
       "centres": [
         "nature-ecologie",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-prop-formes-short",
@@ -54887,7 +55292,8 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-prop-appliquer",
@@ -54983,7 +55389,8 @@
       ],
       "centres": [
         "corps-sante"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-prop-appliquer-short",
@@ -55026,7 +55433,8 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-prop-appliquer",
@@ -55122,7 +55530,8 @@
       ],
       "centres": [
         "corps-sante"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-prop-appliquer-short",
@@ -55165,7 +55574,8 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-prop-partie-tout",
@@ -55262,7 +55672,8 @@
       "centres": [
         "espace",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-prop-partie-tout-short",
@@ -55306,7 +55717,8 @@
       ],
       "centres": [
         "jeux-video"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-prop-tout-partie",
@@ -55403,7 +55815,8 @@
       "centres": [
         "meteo-climat",
         "transports"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-prop-tout-partie-short",
@@ -55447,7 +55860,8 @@
       ],
       "centres": [
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-prop-nature-pourcentage",
@@ -55543,7 +55957,8 @@
       ],
       "centres": [
         "sport"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-prop-nature-pourcentage-short",
@@ -55587,7 +56002,8 @@
       ],
       "centres": [
         "argent-budget"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-prop-taux-equivalent",
@@ -55688,7 +56104,8 @@
       ],
       "centres": [
         "argent-budget"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "stmg-prop-taux-equivalent-short",
@@ -55733,7 +56150,8 @@
       "centres": [
         "argent-budget",
         "jeux-defis"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-convexite-reconnaitre",
@@ -55835,7 +56253,8 @@
       "centres": [
         "sport",
         "art-design"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-convexite-reconnaitre-short",
@@ -55878,7 +56297,8 @@
       ],
       "centres": [
         "sport"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-convexite-derivee-seconde",
@@ -55980,7 +56400,8 @@
       "centres": [
         "espace",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-convexite-derivee-seconde-short",
@@ -56024,7 +56445,8 @@
       "centres": [
         "voitures-motos",
         "transports"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-convexite-point-inflexion",
@@ -56125,7 +56547,8 @@
       ],
       "centres": [
         "musique"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-convexite-point-inflexion-short",
@@ -56167,7 +56590,8 @@
       ],
       "centres": [
         "jeux-video"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-convexite-tangente",
@@ -56278,7 +56702,8 @@
       "centres": [
         "voitures-motos",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-convexite-tangente-short",
@@ -56321,7 +56746,8 @@
       "centres": [
         "voitures-motos",
         "transports"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-convexite-defi",
@@ -56431,7 +56857,8 @@
       "centres": [
         "velo",
         "argent-budget"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-convexite-defi-short",
@@ -56475,7 +56902,8 @@
       "centres": [
         "velo",
         "argent-budget"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "cp-pas-a-pas-chiffre-0",
@@ -56923,8 +57351,7 @@
           "explication": "On compte : il y en a quatre."
         }
       ],
-      "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-4/eleveai-francais-cp-pas-a-pas-chiffre-4.png",
-      "prioritaire": true
+      "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-4/eleveai-francais-cp-pas-a-pas-chiffre-4.png"
     },
     {
       "id": "cp-pas-a-pas-chiffre-5",
@@ -57012,8 +57439,7 @@
           "explication": "On compte : il y en a cinq."
         }
       ],
-      "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-5/eleveai-francais-cp-pas-a-pas-chiffre-5.png",
-      "prioritaire": true
+      "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-5/eleveai-francais-cp-pas-a-pas-chiffre-5.png"
     },
     {
       "id": "cp-pas-a-pas-chiffre-6",
@@ -57101,8 +57527,7 @@
           "explication": "On compte : il y en a six."
         }
       ],
-      "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-6/eleveai-francais-cp-pas-a-pas-chiffre-6.png",
-      "prioritaire": true
+      "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-6/eleveai-francais-cp-pas-a-pas-chiffre-6.png"
     },
     {
       "id": "cp-pas-a-pas-chiffre-7",
@@ -57190,8 +57615,7 @@
           "explication": "On compte : il y en a sept."
         }
       ],
-      "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-7/eleveai-francais-cp-pas-a-pas-chiffre-7.png",
-      "prioritaire": true
+      "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-7/eleveai-francais-cp-pas-a-pas-chiffre-7.png"
     },
     {
       "id": "cp-pas-a-pas-chiffre-8",
@@ -57279,8 +57703,7 @@
           "explication": "On compte : il y en a huit."
         }
       ],
-      "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-8/eleveai-francais-cp-pas-a-pas-chiffre-8.png",
-      "prioritaire": true
+      "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-8/eleveai-francais-cp-pas-a-pas-chiffre-8.png"
     },
     {
       "id": "cp-pas-a-pas-chiffre-9",
@@ -57368,8 +57791,7 @@
           "explication": "On compte : il y en a neuf."
         }
       ],
-      "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-9/eleveai-francais-cp-pas-a-pas-chiffre-9.png",
-      "prioritaire": true
+      "miniature": "cp/francais/paysage/fr/pas-a-pas/chiffre-9/eleveai-francais-cp-pas-a-pas-chiffre-9.png"
     },
     {
       "id": "terminale-denombrement-reconnaitre",
@@ -57484,7 +57906,8 @@
         "argent-budget",
         "chevaux",
         "jeux-defis"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-denombrement-reconnaitre-short",
@@ -57527,7 +57950,8 @@
       "centres": [
         "sciences",
         "corps-sante"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-denombrement-produit-somme",
@@ -57627,7 +58051,8 @@
         "transports",
         "avions",
         "histoire-geographie"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-denombrement-produit-somme-short",
@@ -57671,7 +58096,8 @@
       "centres": [
         "mode",
         "art-design"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-denombrement-arrangement-combinaison",
@@ -57789,7 +58215,8 @@
       "centres": [
         "jeux-video",
         "jeux-defis"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-denombrement-arrangement-combinaison-short",
@@ -57833,7 +58260,8 @@
       "centres": [
         "jeux-defis",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-denombrement-coefficient-binomial",
@@ -57951,7 +58379,8 @@
       "centres": [
         "musique",
         "cinema-series"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-denombrement-coefficient-binomial-short",
@@ -57994,7 +58423,8 @@
       ],
       "centres": [
         "cuisine"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-denombrement-pascal",
@@ -58100,7 +58530,8 @@
       "centres": [
         "transports",
         "jeux-defis"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-denombrement-pascal-short",
@@ -58144,7 +58575,8 @@
       "centres": [
         "art-design",
         "mode"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-denombrement-defi",
@@ -58259,7 +58691,8 @@
       "centres": [
         "avions",
         "technologie-ia"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-denombrement-defi-short",
@@ -58301,7 +58734,8 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-va-somme",
@@ -58421,7 +58855,8 @@
       "centres": [
         "corps-sante",
         "argent-budget"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "terminale-proba-va-somme-short",
@@ -58464,7 +58899,8 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "4e-puissance-comprendre",
@@ -59893,7 +60329,8 @@
         "corps-sante",
         "histoire-geographie",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "4e-puissance-notation-scientifique-short",
@@ -61343,7 +61780,8 @@
       "centres": [
         "nature-ecologie",
         "sciences"
-      ]
+      ],
+      "plus_tard": true
     },
     {
       "id": "premiere-puissance-cinq-regles-short",

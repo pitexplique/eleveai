@@ -667,7 +667,10 @@ function choixDuJour(candidats, m, journal, enLigne, limite) {
   // rotation des classes, une paysage n'occupant jamais plus de 2 places.
   // Une vidéo datée (`pas_avant`, calendrier validé par Frédéric) passe avant les
   // autres prioritaires : sa date tient même si la file est longue.
-  const prioritaires = candidats.filter((x) => x.prioritaire)
+  // 15/11 : TOUTE vidéo datée passe devant (prioritaire ou non), puis les
+  // prioritaires sans date. Avant, seules les prioritaires comptaient : 64 vidéos
+  // datées (CM1, CM2, 5e…) sortaient avec 2 à 7 mois de retard.
+  const prioritaires = candidats.filter((x) => x.pas_avant || x.prioritaire)
     // 08/11 : la plus ancienne date d'abord (un retard ne passe plus derrière le jour).
     .sort((a, b) => (a.pas_avant ?? "9999").localeCompare(b.pas_avant ?? "9999"));
   for (const v of prioritaires) {
@@ -685,10 +688,13 @@ function choixDuJour(candidats, m, journal, enLigne, limite) {
     if (v.notionId) notions.add(v.notionId);
   }
   candidats = candidats.filter((v) => !choisis.includes(v));
-  for (const k of classes) {
+  // 15/11 : `plus_tard` (paysages et lots anciens peu utiles sur YouTube, déjà sur
+  // R2 pour le site et le coach) : une seconde passe, en fin de file. Le short
+  // d'une paysage repoussée porte le drapeau aussi (il ne reste pas bloqué derrière).
+  for (const reporte of [false, true]) for (const k of classes) {
     if (choisis.length >= limite) break;
     // 08/11 : `parClasse` est construit avant le tri des refaites : on les écarte ici.
-    const liste = parClasse.get(k).filter((v) => !notions.has(v.notionId) && candidats.includes(v));
+    const liste = parClasse.get(k).filter((v) => !!v.plus_tard === reporte && !notions.has(v.notionId) && candidats.includes(v));
     // 1. Un short dont la paysage est déjà en ligne.
     const short = placeShort() && liste.find((v) => v.type === "short" && v.renvoie_vers && enLigne(v.renvoie_vers));
     if (short) { choisis.push(short); notions.add(short.notionId); continue; }
