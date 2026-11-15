@@ -7,6 +7,12 @@ import type {
   TutorBankItemV4,
 } from "@/lib/tutor-v4/types";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
+import {
+  masseComparerGabarits,
+  masseConvertirGabarits,
+  masseDefiGabarits,
+  masseEstimerGabarits,
+} from "./masses-outils";
 
 function randomChoice<T>(arr: readonly T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -171,8 +177,16 @@ function lighter(a: MasseObjet, b: MasseObjet): MasseObjet {
 // ============================================================
 // BANK
 // ============================================================
+//
+// ⭐ 15/11/2026 — Les gabarits (situation × tournure × nombres) sont dans
+// `masses-outils.ts` (jumeau du CM1). De la liste ci-dessous, on ne SERT que
+// les items figés justes, à 3-4 choix et avec unité (GARDES, en bas). Écartés :
+// les questions « open » (CM2 = zéro clavier), les QCM « oui / non », les
+// réponses courtes sans unité (le pavé les changeait en QCM de nombres nus),
+// les comparaisons discutables (pomme / banane, crayon / gomme), et les
+// anciens gabarits (15 à 31 squelettes par micro, 9 à 18 répétitions sur 20).
 
-export const massesBank: TutorBankItemV4[] = [
+const anciensItems: TutorBankItemV4[] = [
   // ============================================================
   // MASSE_COMPARER
   // ============================================================
@@ -1250,7 +1264,7 @@ export const massesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Quelle masse semble la plus raisonnable pour un crayon ?",
     format: "qcm",
-    choices: ["10 g", "10 kg", "100 kg", "1 tonne"],
+    choices: ["10 g", "10 kg", "100 kg", "1 t"],
     expected: ["10 g"],
     comparator: "mcq_exact",
     hint: "Un crayon est très léger.",
@@ -1400,7 +1414,7 @@ export const massesBank: TutorBankItemV4[] = [
     theme: "neutral",
     text: "Quelle masse semble la plus raisonnable pour un ordinateur portable ?",
     format: "qcm",
-    choices: ["1,5 kg", "15 g", "150 kg", "1500 kg"],
+    choices: ["1,5 kg", "15 g", "150 kg", "1 500 kg"],
     expected: ["1,5 kg"],
     comparator: "mcq_exact",
     hint: "Un ordinateur portable se porte à la main, mais il n’est pas aussi léger qu’un stylo.",
@@ -2352,4 +2366,30 @@ export const massesBank: TutorBankItemV4[] = [
       };
     },
   },
+];
+
+/** Les items figés qu'on sert encore (justes, 3-4 choix, unité écrite). */
+const GARDES = new Set([
+  "cm2_masse_comparer_fixed_2_unite",
+  "cm2_masse_comparer_fixed_6_riz_farines",
+  "cm2_masse_comparer_fixed_10_kg_g",
+  "cm2_masse_estimer_fixed_2_crayon",
+  "cm2_masse_estimer_fixed_3_cartable",
+  "cm2_masse_estimer_fixed_4_pomme",
+  "cm2_masse_estimer_fixed_5_bouteille",
+  "cm2_masse_estimer_fixed_6_balloon",
+  "cm2_masse_estimer_fixed_7_ananas",
+  "cm2_masse_estimer_fixed_8_ordinateur",
+  "cm2_masse_estimer_fixed_11_unite_raisonnable",
+  "cm2_masse_estimer_fixed_12_unite_kg",
+  "cm2_masse_defi_fixed_7_reunion_coco_ananas",
+  "cm2_masse_defi_fixed_13_comparer_total",
+]);
+
+export const massesBank: TutorBankItemV4[] = [
+  ...anciensItems.filter((i) => GARDES.has(i.id)),
+  ...masseComparerGabarits,
+  ...masseEstimerGabarits,
+  ...masseConvertirGabarits,
+  ...masseDefiGabarits,
 ];
