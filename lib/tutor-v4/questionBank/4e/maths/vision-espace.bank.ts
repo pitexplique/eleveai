@@ -37,7 +37,34 @@
 // pavé droit », « un prisme droit » n'est pas proposé (`choixSolides`).
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import type { CanvasFigure } from "@/lib/tutor-v4/types_canvas";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
+import { entre, mesure } from "@/lib/tutor-v4/questionBank/outils-geometrie";
+import { comparer } from "@/lib/tutor-v4/questionBank/patrons-outils";
+import { cotePiece, patronCylindre, patronPave, patronPrisme } from "@/lib/canvas/patron-solide";
+import {
+  assemblage,
+  auPave,
+  colonnes,
+  enFace,
+  nomArete,
+  paveDeCubes,
+  perspective,
+  plier,
+  unNonPatronCube,
+  unPatronCube,
+  vuesCubes,
+  type Cases,
+  type Cube,
+} from "./vision-espace-outils";
+
+// ⭐⭐ 15/11/2026 — LA NOTION LA PLUS FAIBLE DU BLOC SOLIDES, REMISE À NIVEAU.
+// Mesuré avant : 2 à 4 gabarits par micro, aucune étoile ★1-★2 pour les vues,
+// la représentation et les sections. Ajouté : des gabarits ★1-★2-★3 SANS
+// contexte (le dessin seul), la PERSPECTIVE CAVALIÈRE avec ses pointillés
+// (`repere3d`, calculée dans vision-espace-outils.ts), les PATRONS du cube, du
+// pavé, du prisme et du cylindre, les ASSEMBLAGES de cubes et leurs vues, et une
+// réponse numérique sur deux au pavé numérique.
 
 function randomChoice<T>(arr: readonly T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -195,6 +222,30 @@ function solide(kind: SolideKind) {
   };
 }
 
+/** Le solide dessiné ; la pyramide peut avoir une base triangulaire. */
+function dessine(kind: SolideKind, tri = false) {
+  return { ...solide(kind), ...(tri ? { baseTriangulaire: true } : {}) };
+}
+
+/** Les figures planes proposées en QCM (assez de leurres pour garder quatre lignes). */
+const FORMES = ["un carré", "un rectangle", "un disque", "un triangle", "un losange", "un trapèze", "un hexagone"];
+/** Un carré est AUSSI un rectangle et un losange : jamais en leurres d'un carré. */
+const leurresFormes = (f: string) => FORMES.filter((w) => !(f === "un carré" && (w === "un rectangle" || w === "un losange")) && !(f === "un rectangle" && w === "un carré"));
+
+/** Faces, arêtes, sommets des solides à faces planes, tels que le canvas les dessine. */
+const A_COMPTER = [
+  { kind: "cube" as const, tri: false, n: { faces: 6, arêtes: 12, sommets: 8 } as Record<string, number>, detail: "un cube a 6 faces (dessus, dessous, 4 autour), 12 arêtes (4 en haut, 4 en bas, 4 verticales) et 8 sommets (4 en haut, 4 en bas)" },
+  { kind: "pave_droit" as const, tri: false, n: { faces: 6, arêtes: 12, sommets: 8 } as Record<string, number>, detail: "un pavé droit a 6 faces, 12 arêtes (4 en haut, 4 en bas, 4 verticales) et 8 sommets (4 en haut, 4 en bas)" },
+  { kind: "prisme" as const, tri: false, n: { faces: 5, arêtes: 9, sommets: 6 } as Record<string, number>, detail: "ce prisme a 2 triangles et 3 rectangles (5 faces), 9 arêtes (3 devant, 3 derrière, 3 qui les relient) et 6 sommets (3 devant, 3 derrière)" },
+  { kind: "pyramide" as const, tri: false, n: { faces: 5, arêtes: 8, sommets: 5 } as Record<string, number>, detail: "cette pyramide a une base à 4 côtés et 4 triangles (5 faces), 8 arêtes (4 autour de la base, 4 qui montent) et 5 sommets (4 en bas, 1 en haut)" },
+  { kind: "pyramide" as const, tri: true, n: { faces: 4, arêtes: 6, sommets: 4 } as Record<string, number>, detail: "cette pyramide a une base triangulaire et 3 triangles (4 faces), 6 arêtes (3 autour de la base, 3 qui montent) et 4 sommets (3 en bas, 1 en haut)" },
+];
+const EXPL_COMPTER = (detail: string, n: number, quoi: string) =>
+  "Définition : une FACE est une surface plane, une ARÊTE est un segment où deux faces se rejoignent, un SOMMET est un point où des arêtes se rencontrent.\n\n" +
+  "Méthode : on compte par groupes — le dessous, le dessus, puis le tour — sans oublier ce qui est caché derrière.\n\n" +
+  `Calcul : ${detail}.\n\n` +
+  `Conclusion : ce solide a ${n} ${quoi}. ⚠️ Sur un dessin en perspective, une partie du solide est cachée : on la compte quand même.`;
+
 /* ---------------------------------------------------------------------------
    OBJETS RÉELS, par solide (g = genre, pour les pronoms et les accords)
 --------------------------------------------------------------------------- */
@@ -313,6 +364,48 @@ const SECTIONS = [
     ],
   },
 ];
+
+/* ---------------------------------------------------------------------------
+   SECTIONS DESSINÉES (15/11/2026) — le plan est tracé sur le canvas
+--------------------------------------------------------------------------- */
+type SolideCoupe = "cube" | "pave_droit" | "cylindre" | "cone" | "pyramide";
+type TypeCoupe = "parallele_base" | "parallele_axe" | "horizontale" | "verticale" | "diagonale";
+const POSITIONS_PLAN = ["parallèlement à la base", "perpendiculairement à la base", "en biais, ni parallèle ni perpendiculaire à la base"] as const;
+const COUPES_DESSIN: { s: SolideCoupe; sec: TypeCoupe; forme: string; pos: (typeof POSITIONS_PLAN)[number]; dit: string }[] = [
+  // ⛔ 15/11/2026 : le canvas `section_solide` dessine le cube avec une face avant NON carrée (138 × 94 px) :
+  // « nomme la forme → un carré » contredisait le dessin. Les coupes de cube parallèles à une face sont retirées d'ici
+  // (elles restent dans les gabarits de mesure, où l'arête est donnée dans le texte).
+  { s: "cube", sec: "diagonale", forme: "un rectangle", pos: POSITIONS_PLAN[2], dit: "le plan passe par deux arêtes opposées : la section est un rectangle, plus long que l'arête (il suit une diagonale de face)" },
+  { s: "pave_droit", sec: "horizontale", forme: "un rectangle", pos: POSITIONS_PLAN[0], dit: "le plan est parallèle à la base du pavé : la section est un rectangle identique à la base" },
+  { s: "pave_droit", sec: "verticale", forme: "un rectangle", pos: POSITIONS_PLAN[1], dit: "le plan est parallèle à une face latérale : la section est un rectangle identique à cette face" },
+  { s: "cylindre", sec: "parallele_base", forme: "un disque", pos: POSITIONS_PLAN[0], dit: "le plan est parallèle à la base du cylindre : la section est un disque identique à la base" },
+  { s: "cylindre", sec: "parallele_axe", forme: "un rectangle", pos: POSITIONS_PLAN[1], dit: "le plan est parallèle à l'axe du cylindre : la section est un rectangle" },
+  { s: "cone", sec: "parallele_base", forme: "un disque", pos: POSITIONS_PLAN[0], dit: "le plan est parallèle à la base du cône : la section est un disque, plus petit que la base" },
+  { s: "cone", sec: "verticale", forme: "un triangle", pos: POSITIONS_PLAN[1], dit: "le plan passe par la pointe du cône, perpendiculairement à la base : la section est un triangle" },
+  { s: "pyramide", sec: "parallele_base", forme: "un carré", pos: POSITIONS_PLAN[0], dit: "le plan est parallèle à la base carrée : la section est un carré, plus petit que la base" },
+  { s: "pyramide", sec: "verticale", forme: "un triangle", pos: POSITIONS_PLAN[1], dit: "le plan passe par le sommet de la pyramide, perpendiculairement à la base : la section est un triangle" },
+];
+const TITRES_SECTION: Record<SolideCoupe, string> = {
+  cube: "Section d'un cube",
+  pave_droit: "Section d'un pavé droit",
+  cylindre: "Section d'un cylindre",
+  cone: "Section d'un cône",
+  pyramide: "Section d'une pyramide à base carrée",
+};
+/** Le solide, le plan et la section colorée — sans le nom de la section. */
+const coupeDessin = (s: SolideCoupe, sec: TypeCoupe) => ({
+  kind: "section_solide" as const,
+  solide: s,
+  section: sec,
+  labels: { titre: TITRES_SECTION[s] },
+  display: { showLabels: true, showSectionName: false, showPlane: true },
+  size: { width: 340, height: 280 },
+});
+const EXPL_SECTION_MESURE = (calc: string, rep: string) =>
+  "Définition : la SECTION est la surface plane obtenue en coupant le solide par un plan.\n\n" +
+  "Méthode : coupé parallèlement à une face (ou à sa base), un cube, un pavé ou un cylindre donne une section IDENTIQUE à cette face : mêmes formes, mêmes mesures.\n\n" +
+  `Calcul : ${calc}.\n\n` +
+  `Conclusion : la réponse est ${rep}. ⚠️ Pour un cône ou une pyramide, la section garde la forme de la base mais RÉTRÉCIT en montant.`;
 
 export const visionEspaceBank: TutorBankItemV4[] = [
   /* =========================================================================
@@ -481,7 +574,9 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     // ⭐ VALEUR PARTICULIÈRE : le cube est un pavé droit. C'est une inclusion,
     // pas une ressemblance, et elle se retient comme celle du carré dans les
     // rectangles.
-    kind: "fixed",
+    // ⭐ 15/11/2026 : l'item figé devient un gabarit (même id) — quatre
+    // inclusions, dans les deux sens, pour que ★4 ait deux gabarits.
+    kind: "template",
     id: "4e_vision_reconnaitre_fixed_cube_pave",
     niveau: "4e",
     matiere: "maths",
@@ -489,23 +584,48 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     microId: "vision_reconnaitre",
     difficulty: 4,
     theme: "neutral",
-    text: "Un cube est-il un pavé droit ?",
-    format: "qcm",
-    choices: [
-      "oui : c'est un pavé droit dont toutes les faces sont des carrés",
-      "non : ce sont deux solides différents",
-      "oui, mais seulement si ses arêtes mesurent 1",
-      "non : un pavé droit a forcément des faces rectangulaires non carrées",
-    ],
-    expected: ["oui : c'est un pavé droit dont toutes les faces sont des carrés"],
-    comparator: "mcq_exact",
-    hint: "Un carré est-il un rectangle ?",
-    explanation:
-      "Définition : un pavé droit est un solide à six faces rectangulaires. Or un CARRÉ est un rectangle particulier — celui dont les quatre côtés sont égaux.\n\n" +
-      "Méthode : on vérifie que le cube remplit bien la définition du pavé, sans rien y ajouter.\n\n" +
-      "Calcul : les six faces d'un cube sont des carrés, donc des rectangles. La définition est remplie.\n\n" +
-      "Conclusion : ⭐ c'est la même inclusion qu'entre le carré et le rectangle, d'un étage plus haut. ⚠️ Et elle marche dans UN seul sens : tout cube est un pavé, mais une boîte à chaussures n'est pas un cube.",
-    tags: ["solide", "reconnaitre", "valeur_particuliere", "inclusion", "qcm"],
+    hint: "Un carré est-il un rectangle ? Un rectangle est-il un carré ?",
+    tags: ["solide", "reconnaitre", "valeur_particuliere", "inclusion", "qcm", "template"],
+    generate: () => {
+      const cas = randomChoice([
+        {
+          q: ["Un cube est-il un pavé droit ?", "Peut-on dire qu'un cube est un pavé droit ?", "Un dé à jouer, cubique, est-il un pavé droit ?"],
+          r: "oui : c'est un pavé droit dont toutes les faces sont des carrés",
+          f: ["non : ce sont deux solides différents", "oui, mais seulement si ses arêtes mesurent 1", "non : un pavé droit a forcément des faces rectangulaires non carrées"],
+          calc: "les six faces d'un cube sont des carrés, donc des rectangles : la définition du pavé droit est remplie",
+        },
+        {
+          q: ["Un pavé droit est-il toujours un cube ?", "Une boîte à chaussures, un pavé droit, est-elle un cube ?", "Tout pavé droit est-il un cube ?"],
+          r: "non : ses faces ne sont pas forcément des carrés",
+          f: ["oui : il a six faces comme le cube", "oui : il a douze arêtes comme le cube", "non : un pavé droit n'a que quatre faces"],
+          calc: "un pavé droit a six faces rectangulaires ; elles ne sont des carrés que dans le cas particulier du cube",
+        },
+        {
+          q: ["Un pavé droit est-il un prisme droit ?", "Peut-on dire qu'un pavé droit est un prisme droit ?", "Une brique de lait, un pavé droit, est-elle un prisme droit ?"],
+          r: "oui : c'est un prisme droit dont les bases sont des rectangles",
+          f: ["non : un prisme droit a toujours des bases triangulaires", "non : un prisme droit a une pointe", "oui, mais seulement s'il est posé debout"],
+          calc: "un prisme droit a deux bases superposables reliées par des rectangles ; dans un pavé, les deux bases sont des rectangles",
+        },
+        {
+          q: ["Un prisme droit est-il toujours un pavé droit ?", "Une tente canadienne, un prisme droit, est-elle un pavé droit ?", "Tout prisme droit est-il un pavé droit ?"],
+          r: "non : ses bases peuvent être des triangles",
+          f: ["oui : ses faces latérales sont des rectangles", "oui : il a deux bases parallèles", "non : un prisme droit n'a pas de faces rectangulaires"],
+          calc: "les bases d'un prisme droit peuvent être des triangles, des pentagones… ; ce n'est un pavé que si ce sont des rectangles",
+        },
+      ]);
+      return {
+        text: randomChoice(cas.q),
+        format: "qcm",
+        choices: shuffle([cas.r, ...cas.f]),
+        expected: [cas.r],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : un pavé droit a six faces rectangulaires ; un prisme droit a deux bases superposables et parallèles reliées par des rectangles. Un CARRÉ est un rectangle particulier.\n\n" +
+          "Méthode : on vérifie si le solide remplit la définition, sans rien y ajouter.\n\n" +
+          `Calcul : ${cas.calc}.\n\n` +
+          "Conclusion : ⭐ cube ⊂ pavé droit ⊂ prisme droit, comme carré ⊂ rectangle. ⚠️ L'inclusion marche dans UN seul sens : tout cube est un pavé, mais un pavé n'est pas toujours un cube.",
+      };
+    },
   },
   {
     // ⭐ 30/09 : second gabarit à l'étoile 4, pour que l'item figé n'y soit pas
@@ -563,6 +683,180 @@ export const visionEspaceBank: TutorBankItemV4[] = [
       };
     },
   },
+  {
+    // ⭐ 15/11/2026 — ★1 : compter sur le dessin, sans contexte.
+    kind: "template",
+    id: "4e_vision_reconnaitre_tpl_5_compter",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_reconnaitre",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Compte par groupes : le dessous, le dessus, puis le tour. Ce qui est caché compte aussi.",
+    tags: ["solide", "reconnaitre", "compter", "template", "canvas"],
+    generate: () => {
+      const s = randomChoice(A_COMPTER);
+      const quoi = randomChoice(["faces", "arêtes", "sommets"] as const);
+      const n = s.n[quoi];
+      const d = quoi === "arêtes" ? "d'arêtes" : `de ${quoi}`;
+      const m = quoi === "sommets";
+      const text = randomChoice([
+        `Combien ${d} a ce solide ?`,
+        `Compte les ${quoi} de ce solide.`,
+        `Ce solide a combien ${d} ?`,
+        `Combien ${d} compte ce solide, ${m ? "cachés compris" : "cachées comprises"} ?`,
+        `Observe ce solide. Combien ${d} a-t-il ?`,
+        `Trouve le nombre ${d} de ce solide.`,
+        `Regarde bien : combien ${d} en tout ?`,
+        `Compte ${m ? "tous" : "toutes"} les ${quoi}, même ${m ? "cachés" : "cachées"}.`,
+      ]);
+      return auPave({
+        text,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation: EXPL_COMPTER(s.detail, n, quoi),
+        canvas: dessine(s.kind, s.tri),
+      });
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★1 : la forme d'une base, lue sur le dessin.
+    kind: "template",
+    id: "4e_vision_reconnaitre_tpl_6_base",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_reconnaitre",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Une base est une face « du bout » : opposée à la pointe, ou parallèle à l'autre base.",
+    tags: ["solide", "reconnaitre", "bases", "qcm", "template", "canvas"],
+    generate: () => {
+      const cas = randomChoice([
+        { kind: "cylindre" as const, tri: false, forme: "un disque", dit: "un cylindre a deux bases : deux disques identiques" },
+        { kind: "cone" as const, tri: false, forme: "un disque", dit: "un cône a une seule base, un disque, opposé à la pointe" },
+        { kind: "prisme" as const, tri: false, forme: "un triangle", dit: "ce prisme droit a deux bases triangulaires, devant et derrière" },
+        { kind: "pyramide" as const, tri: true, forme: "un triangle", dit: "cette pyramide a une base triangulaire, opposée à la pointe" },
+        { kind: "cube" as const, tri: false, forme: "un carré", dit: "toutes les faces d'un cube sont des carrés : chacune peut servir de base" },
+      ]);
+      const text = randomChoice([
+        "Quelle est la forme d'une base de ce solide ?",
+        "Une base de ce solide a quelle forme ?",
+        "Regarde une base de ce solide. Quelle figure est-ce ?",
+        "Quelle figure plane forme une base de ce solide ?",
+        "De quelle forme est une base de ce solide ?",
+        "Observe ce solide. Quelle forme a sa base ?",
+        "Nomme la figure qui forme une base de ce solide.",
+      ]);
+      return {
+        text,
+        format: "qcm",
+        choices: makeChoices(cas.forme, leurresFormes(cas.forme)),
+        expected: [cas.forme],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : les BASES d'un prisme ou d'un cylindre sont ses deux faces parallèles et identiques ; celle d'un cône ou d'une pyramide est la face opposée à la pointe.\n\n" +
+          "Méthode : on repère la face « du bout », puis on nomme sa forme.\n\n" +
+          `Calcul : ${cas.dit}.\n\n` +
+          `Conclusion : une base de ce solide est ${cas.forme}. ⭐ C'est la base qui donne son nom complet au solide : « prisme à base triangulaire ».`,
+        canvas: dessine(cas.kind, cas.tri),
+      };
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★2 : les faces d'une sorte (latérales, triangulaires…), sur le dessin.
+    kind: "template",
+    id: "4e_vision_reconnaitre_tpl_7_parties",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_reconnaitre",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Les faces latérales font le tour ; les bases sont les faces « du bout ».",
+    tags: ["solide", "reconnaitre", "compter", "template", "canvas"],
+    generate: () => {
+      const tri = Math.random() < 0.5;
+      const cas = randomChoice([
+        { kind: "prisme" as const, tri: false, quoi: "faces rectangulaires", n: 3, dit: "les 3 faces qui relient les deux triangles sont des rectangles" },
+        { kind: "prisme" as const, tri: false, quoi: "faces triangulaires", n: 2, dit: "seules les deux bases, devant et derrière, sont des triangles" },
+        { kind: "prisme" as const, tri: false, quoi: "faces latérales", n: 3, dit: "une face latérale par côté du triangle de base : 3" },
+        { kind: "prisme" as const, tri: false, quoi: "bases", n: 2, dit: "un prisme a deux bases, superposables et parallèles" },
+        { kind: "pyramide" as const, tri: false, quoi: "faces triangulaires", n: 4, dit: "un triangle par côté de la base : 4 côtés, donc 4 triangles" },
+        { kind: "pyramide" as const, tri: false, quoi: "faces latérales", n: 4, dit: "une face latérale par côté de la base : 4" },
+        { kind: "pyramide" as const, tri: true, quoi: "faces latérales", n: 3, dit: "une face latérale par côté de la base triangulaire : 3" },
+        { kind: "pyramide" as const, tri: true, quoi: "faces triangulaires", n: 4, dit: "les 3 faces latérales ET la base sont des triangles : 4" },
+        { kind: "pyramide" as const, tri, quoi: "bases", n: 1, dit: "une pyramide n'a qu'une base, opposée à la pointe" },
+        { kind: "cylindre" as const, tri: false, quoi: "bases", n: 2, dit: "un cylindre a deux bases : deux disques" },
+        { kind: "cone" as const, tri: false, quoi: "bases", n: 1, dit: "un cône n'a qu'une base, un disque" },
+        { kind: "cube" as const, tri: false, quoi: "faces carrées", n: 6, dit: "les 6 faces d'un cube sont des carrés" },
+        { kind: "pave_droit" as const, tri: false, quoi: "faces rectangulaires", n: 6, dit: "les 6 faces d'un pavé droit sont des rectangles" },
+      ]);
+      const text = randomChoice([
+        `Combien de ${cas.quoi} a ce solide ?`,
+        `Compte les ${cas.quoi} de ce solide, même cachées.`,
+        `Sur ce solide, combien de ${cas.quoi} y a-t-il ?`,
+        `Ce solide compte combien de ${cas.quoi} ?`,
+        `Observe ce solide : combien a-t-il de ${cas.quoi} ?`,
+        `Trouve le nombre de ${cas.quoi} de ce solide.`,
+        `Combien de ${cas.quoi} vois-tu, cachées comprises ?`,
+      ]);
+      return auPave({
+        text,
+        format: "short",
+        expected: [String(cas.n)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : les BASES sont les faces « du bout » (deux pour un prisme ou un cylindre, une pour une pyramide ou un cône) ; les FACES LATÉRALES font le tour.\n\n" +
+          "Méthode : on repère d'abord la base, puis on compte les faces du tour — une par côté de la base.\n\n" +
+          `Calcul : ${cas.dit}.\n\n` +
+          `Conclusion : ce solide a ${cas.n} ${cas.quoi}.`,
+        canvas: dessine(cas.kind, cas.tri),
+      });
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★3 : compter, porté par une situation.
+    kind: "template",
+    id: "4e_vision_reconnaitre_tpl_8_compter_situation",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_reconnaitre",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une arête = un segment, un sommet = un coin, une face = une surface plane.",
+    tags: ["solide", "reconnaitre", "compter", "situation", "template", "canvas"],
+    generate: () => {
+      const s = randomChoice(A_COMPTER);
+      const e = randomChoice(ELEVES);
+      const sit = randomChoice([
+        { q: "arêtes", t: "Un menuisier ponce chaque arête de ce bloc de bois. Combien d'arêtes ponce-t-il ?" },
+        { q: "arêtes", t: `Pour une maquette en baguettes, ${e.n} met une baguette par arête de ce solide. Combien de baguettes ?` },
+        { q: "arêtes", t: "Une artiste souligne d'un fil doré chaque arête de cette sculpture. Combien de fils lui faut-il ?" },
+        { q: "arêtes", t: "Un soudeur fabrique ce solide en tiges de métal, une tige par arête. Combien de tiges ?" },
+        { q: "sommets", t: "Une décoratrice colle une perle sur chaque sommet de ce solide en carton. Combien de perles ?" },
+        { q: "sommets", t: "Un jardinier pose une lanterne à chaque sommet de cette sculpture. Combien de lanternes ?" },
+        { q: "sommets", t: `${e.n} plante une épingle à chaque sommet de ce solide en mousse. Combien d'épingles ?` },
+        { q: "sommets", t: "Un ingénieur fixe un boulon à chaque sommet de cette structure. Combien de boulons ?" },
+        { q: "faces", t: "Un peintre peint chaque face de cette maquette d'une couleur différente. Combien de couleurs ?" },
+        { q: "faces", t: "Une couturière recouvre chaque face de ce pouf d'un morceau de tissu. Combien de morceaux ?" },
+        { q: "faces", t: `${e.n} colle une gommette sur chaque face de ce solide. Combien de gommettes ?` },
+        { q: "faces", t: "Un verrier découpe une plaque de verre par face pour ce solide. Combien de plaques ?" },
+      ]);
+      const n = s.n[sit.q];
+      return auPave({
+        text: sit.t,
+        format: "short",
+        expected: [String(n)],
+        comparator: "number_equal",
+        explanation: EXPL_COMPTER(s.detail, n, sit.q),
+        canvas: dessine(s.kind, s.tri),
+      });
+    },
+  },
 
   /* =========================================================================
      VISION_VUES — réactivation 6e
@@ -610,9 +904,10 @@ export const visionEspaceBank: TutorBankItemV4[] = [
         format: "qcm",
         // ⛔ 08/10/2026 — un carré est AUSSI un rectangle et un losange : ces
         // deux leurres étaient de bonnes réponses quand la vue est un carré.
+        // 15/11/2026 : + « un trapèze » — pour un carré, il ne restait que deux leurres.
         choices: makeChoices(
           cas.forme,
-          ["un carré", "un rectangle", "un disque", "un triangle", "un losange"].filter(
+          ["un carré", "un rectangle", "un disque", "un triangle", "un losange", "un trapèze"].filter(
             (w) => !(cas.forme === "un carré" && (w === "un rectangle" || w === "un losange"))
           )
         ),
@@ -684,6 +979,310 @@ export const visionEspaceBank: TutorBankItemV4[] = [
           `Calcul : ${d} de dessus, ${f} de face${c ? ` et ${c} de côté` : ""} désignent ${cas.rep}.\n\n` +
           "Conclusion : ⚠️ un disque vu de dessus peut être un cylindre, un cône OU une boule. C'est la seconde vue qui tranche — et c'est pour cela que les plans techniques en donnent toujours au moins deux.",
       };
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★1 : la vue de dessus d'un assemblage, lue sur le dessin.
+    // Toutes les colonnes ont la même hauteur : aucun dessus n'est caché.
+    kind: "template",
+    id: "4e_vision_vues_tpl_3_dessus_cubes",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_vues",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "De dessus, chaque colonne de cubes ne donne qu'un carreau.",
+    tags: ["solide", "vues", "cubes", "template", "canvas"],
+    generate: () => {
+      let cubes: Cube[];
+      if (Math.random() < 0.5) cubes = paveDeCubes(entre(2, 4), entre(2, 3), entre(1, 3));
+      else {
+        // Une forme plate de 4 à 7 cases sur une grille 3 × 3, de hauteur constante.
+        const cases = new Set<string>(["1,1"]);
+        const k = entre(4, 7);
+        while (cases.size < k) {
+          const [x, y] = randomChoice([...cases]).split(",").map(Number);
+          const [dx, dy] = randomChoice([[1, 0], [-1, 0], [0, 1], [0, -1]]);
+          if (x + dx >= 0 && x + dx < 3 && y + dy >= 0 && y + dy < 3) cases.add(`${x + dx},${y + dy}`);
+        }
+        const h = entre(1, 2);
+        cubes = colonnes([0, 1, 2].map((y) => [0, 1, 2].map((x) => (cases.has(`${x},${y}`) ? h : 0))));
+      }
+      const n = vuesCubes(cubes).dessus;
+      const text = randomChoice([
+        "Combien de carreaux a la vue de dessus ?",
+        "Vue de dessus de cet assemblage : combien de carreaux ?",
+        "Dessine la vue de dessus. Combien de carreaux ?",
+        "Vu d'en haut, combien de carreaux voit-on ?",
+        "Compte les carreaux de la vue de dessus.",
+        "De dessus, cet assemblage montre combien de carreaux ?",
+        "Combien de carreaux colories-tu pour la vue de dessus ?",
+        "Regarde cet assemblage d'en haut. Combien de carreaux ?",
+      ]);
+      return auPave({
+        text,
+        format: "short",
+        expected: [`${n} carreaux`, String(n)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : la vue de dessus est ce qu'on voit en regardant exactement d'en haut. Chaque colonne de cubes y donne UN carreau, quelle que soit sa hauteur.\n\n" +
+          "Méthode : on compte les colonnes posées au sol, pas les cubes.\n\n" +
+          `Calcul : l'assemblage occupe ${n} cases au sol.\n\n` +
+          `Conclusion : la vue de dessus a ${n} carreaux. ⚠️ Elle ne dit rien de la hauteur : ${cubes.length} cubes ici.`,
+        canvas: assemblage(cubes),
+      });
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★1 : la forme d'une vue d'un solide usuel dessiné.
+    kind: "template",
+    id: "4e_vision_vues_tpl_4_forme_dessin",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_vues",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Une vue aplatit le solide : il ne reste qu'un contour plat.",
+    tags: ["solide", "vues", "qcm", "template", "canvas"],
+    generate: () => {
+      const cas = randomChoice([
+        { kind: "cube" as const, vue: "de dessus", forme: "un carré" },
+        { kind: "cube" as const, vue: "de face", forme: "un carré" },
+        { kind: "pave_droit" as const, vue: "de face", forme: "un rectangle" },
+        { kind: "cylindre" as const, vue: "de dessus", forme: "un disque" },
+        { kind: "cylindre" as const, vue: "de face", forme: "un rectangle" },
+        { kind: "cone" as const, vue: "de dessus", forme: "un disque" },
+        { kind: "cone" as const, vue: "de face", forme: "un triangle" },
+        { kind: "boule" as const, vue: "de dessus", forme: "un disque" },
+        { kind: "boule" as const, vue: "de face", forme: "un disque" },
+        { kind: "pyramide" as const, vue: "de face", forme: "un triangle" },
+        { kind: "prisme" as const, vue: "de face", forme: "un triangle" },
+        { kind: "prisme" as const, vue: "de dessus", forme: "un rectangle" },
+      ]);
+      const text = randomChoice([
+        `Vu ${cas.vue}, ce solide donne quelle forme ?`,
+        `Quelle forme voit-on en regardant ce solide ${cas.vue} ?`,
+        `Quelle est la vue ${cas.vue} de ce solide ?`,
+        `On regarde ce solide ${cas.vue}. Quelle forme voit-on ?`,
+        `Quelle figure plane donne ce solide vu ${cas.vue} ?`,
+        `Dessine la vue ${cas.vue} de ce solide. Quelle figure ?`,
+      ]);
+      return {
+        text,
+        format: "qcm",
+        choices: makeChoices(cas.forme, leurresFormes(cas.forme)),
+        expected: [cas.forme],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : une vue est ce qu'on voit en regardant le solide bien en face d'une direction — comme son ombre sur un mur.\n\n" +
+          "Méthode : on écrase le solide dans cette direction ; le relief disparaît, il reste un contour plat.\n\n" +
+          `Calcul : vu ${cas.vue}, ce solide donne ${cas.forme}.\n\n` +
+          "Conclusion : ⚠️ deux solides différents peuvent avoir la même vue : un cylindre, un cône et une boule donnent tous un disque de dessus.",
+        canvas: solide(cas.kind),
+      };
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★2 : une rangée de colonnes, toutes visibles.
+    kind: "template",
+    id: "4e_vision_vues_tpl_5_rangee",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_vues",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "De face, on voit chaque colonne en entier ; de côté, seulement la plus haute.",
+    tags: ["solide", "vues", "cubes", "template", "canvas"],
+    generate: () => {
+      const k = entre(3, 5);
+      const h = Array.from({ length: k }, () => entre(1, 3));
+      if (new Set(h).size === 1) h[0] = h[0] === 3 ? 1 : h[0] + 1;
+      const cubes = colonnes([h]);
+      const v = vuesCubes(cubes);
+      const cas = randomChoice([
+        { vue: "de face", n: v.face, calc: `de face, chaque colonne se voit en entier : ${h.join(" + ")} = ${v.face}` },
+        { vue: "de face", n: v.face, calc: `de face, chaque colonne se voit en entier : ${h.join(" + ")} = ${v.face}` },
+        { vue: "de côté", n: v.cote, calc: `de côté, les colonnes se cachent l'une derrière l'autre : on ne voit que la plus haute, ${v.cote} cubes` },
+        { vue: "de dessus", n: v.dessus, calc: `de dessus, chaque colonne donne un carreau : ${k} colonnes` },
+      ]);
+      const text = randomChoice([
+        `Ces colonnes de cubes sont alignées. Combien de carreaux a la vue ${cas.vue} ?`,
+        `Vue ${cas.vue} de cette rangée de colonnes : combien de carreaux ?`,
+        `Dessine la vue ${cas.vue} de cette rangée de cubes. Combien de carreaux ?`,
+        `Combien de carreaux compte la vue ${cas.vue} de cette rangée ?`,
+        `Cette rangée de cubes, vue ${cas.vue} : combien de carreaux ?`,
+        `Compte les carreaux de la vue ${cas.vue} de cette rangée.`,
+      ]);
+      return auPave({
+        text,
+        format: "short",
+        expected: [`${cas.n} carreau${cas.n > 1 ? "x" : ""}`, String(cas.n)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : une vue d'un assemblage se dessine sur un quadrillage — un carreau pour chaque cube qu'on voit dans cette direction.\n\n" +
+          "Méthode : on se place dans la direction demandée ; les cubes alignés derrière un autre se cachent.\n\n" +
+          `Calcul : ${cas.calc}.\n\n` +
+          `Conclusion : la vue ${cas.vue} a ${cas.n} carreau${cas.n > 1 ? "x" : ""}. ⚠️ Une vue ne compte pas les cubes : il y en a ${v.total}.`,
+        canvas: assemblage(cubes),
+      });
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★2 : laquelle des trois vues d'un pavé de cubes a ce nombre de carreaux ?
+    kind: "template",
+    id: "4e_vision_vues_tpl_6_quelle_vue",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_vues",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Dessus : longueur × largeur. Face : longueur × hauteur. Côté : largeur × hauteur.",
+    tags: ["solide", "vues", "cubes", "qcm", "template", "canvas"],
+    generate: () => {
+      let L = 0, l = 0, h = 0;
+      do {
+        L = entre(3, 6);
+        l = entre(2, 4);
+        h = entre(2, 4);
+      } while (new Set([L * l, L * h, l * h]).size < 3);
+      const vues = [
+        { nom: "la vue de dessus", n: L * l },
+        { nom: "la vue de face", n: L * h },
+        { nom: "la vue de côté", n: l * h },
+      ];
+      // Une fois sur cinq, aucune vue n'a ce nombre.
+      const aucune = Math.random() < 0.2;
+      let n = 0;
+      let rep = "aucune des trois";
+      if (aucune) {
+        n = randomChoice([L * l * h, L + l + h, L * l + 1, L * h + 2].filter((x) => !vues.some((w) => w.n === x)));
+      } else {
+        const w = randomChoice(vues);
+        n = w.n;
+        rep = w.nom;
+      }
+      const text = randomChoice([
+        `Longueur ${L}, largeur ${l}, hauteur ${h} (en cubes). Quelle vue a ${n} carreaux ?`,
+        `Longueur ${L}, largeur ${l}, hauteur ${h} : quelle vue compte ${n} carreaux ?`,
+        `Quelle vue a ${n} carreaux ? Longueur ${L}, largeur ${l}, hauteur ${h}.`,
+        `En cubes : longueur ${L}, largeur ${l}, hauteur ${h}. Quelle vue fait ${n} carreaux ?`,
+        `Longueur ${L}, largeur ${l}, hauteur ${h}. Laquelle de ses vues a ${n} carreaux ?`,
+      ]);
+      return {
+        text,
+        format: "qcm",
+        choices: shuffle(["la vue de dessus", "la vue de face", "la vue de côté", "aucune des trois"]),
+        expected: [rep],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : la vue de dessus montre la longueur et la largeur, la vue de face la longueur et la hauteur, la vue de côté la largeur et la hauteur.\n\n" +
+          "Méthode : on calcule les trois vues, puis on cherche celle qui a le bon nombre de carreaux.\n\n" +
+          `Calcul : dessus ${L} × ${l} = ${L * l} ; face ${L} × ${h} = ${L * h} ; côté ${l} × ${h} = ${l * h}.\n\n` +
+          `Conclusion : ${aucune ? `aucune vue n'a ${n} carreaux` : `c'est ${rep}`}.`,
+        canvas: assemblage(paveDeCubes(L, l, h)),
+      };
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★3 : la vue d'un pavé de cubes, en situation.
+    kind: "template",
+    id: "4e_vision_vues_tpl_7_situation_cubes",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_vues",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une vue garde deux dimensions sur trois.",
+    tags: ["solide", "vues", "cubes", "situation", "template", "canvas"],
+    generate: () => {
+      const L = entre(3, 6), l = entre(2, 4), h = entre(2, 4);
+      const e = randomChoice(ELEVES);
+      const ctx = randomChoice([
+        "Un maçon empile des parpaings cubiques",
+        "Au marché, un primeur empile des cagettes cubiques",
+        `${e.n} range des cubes de construction`,
+        "Une pâtissière empile des petits-fours cubiques",
+        "Un manutentionnaire empile des colis cubiques",
+        "Dans un jeu vidéo, une joueuse empile des blocs",
+        "Un sculpteur empile des cubes de pierre",
+        "Une bibliothécaire empile des boîtes d'archives cubiques",
+        "Un fromager empile des cubes de fromage",
+        "Une architecte empile des cubes pour une maquette",
+      ]);
+      const vue = randomChoice([
+        { nom: "de dessus", n: L * l, calc: `${L} × ${l}` },
+        { nom: "de face", n: L * h, calc: `${L} × ${h}` },
+        { nom: "de côté", n: l * h, calc: `${l} × ${h}` },
+      ]);
+      const text = `${ctx} : ${L} de long, ${l} de large, ${h} de haut. ${randomChoice([
+        `Combien de carreaux a la vue ${vue.nom} ?`,
+        `Sur la vue ${vue.nom}, combien de carreaux ?`,
+        `Combien de carreaux faut-il pour dessiner la vue ${vue.nom} ?`,
+      ])}`;
+      return auPave({
+        text,
+        format: "short",
+        expected: [`${vue.n} carreaux`, String(vue.n)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : la vue de dessus montre la longueur et la largeur, la vue de face la longueur et la hauteur, la vue de côté la largeur et la hauteur.\n\n" +
+          "Méthode : la troisième dimension part vers l'arrière et ne se voit pas : on multiplie les deux autres.\n\n" +
+          `Calcul : ${vue.calc} = ${vue.n}.\n\n` +
+          `Conclusion : la vue ${vue.nom} a ${vue.n} carreaux, alors que l'assemblage compte ${L * l * h} cubes.`,
+        canvas: assemblage(paveDeCubes(L, l, h)),
+      });
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★4 : deux rangées de colonnes, des cubes se cachent.
+    kind: "template",
+    id: "4e_vision_vues_tpl_8_deux_rangees",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_vues",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "De face, pour chaque position, seule la colonne la plus haute compte.",
+    tags: ["solide", "vues", "cubes", "template", "canvas"],
+    generate: () => {
+      let der: number[] = [], dev: number[] = [];
+      do {
+        const k = entre(3, 4);
+        der = Array.from({ length: k }, () => entre(0, 3));
+        dev = Array.from({ length: k }, () => entre(0, 3));
+      } while (!der.some((x) => x > 0) || !dev.some((x) => x > 0) || der.reduce((a, b) => a + b, 0) + dev.reduce((a, b) => a + b, 0) < 5);
+      const cubes = colonnes([der, dev]);
+      const v = vuesCubes(cubes);
+      const cas = randomChoice([
+        { nom: "de face", n: v.face, calc: `pour chaque position, la plus haute des deux colonnes : ${der.map((x, i) => Math.max(x, dev[i])).join(" + ")} = ${v.face}` },
+        { nom: "de côté", n: v.cote, calc: `chaque rangée montre sa colonne la plus haute : ${Math.max(...der)} + ${Math.max(...dev)} = ${v.cote}` },
+        { nom: "de dessus", n: v.dessus, calc: `chaque colonne non vide donne un carreau : ${v.dessus}` },
+      ]);
+      const e = randomChoice(ELEVES);
+      const ctx = randomChoice(["", `${e.n} empile des cubes.`, "Un enfant empile des cubes.", "Voici un assemblage de cubes."]);
+      const text = `${ctx} Hauteurs des colonnes, de gauche à droite : derrière ${der.join(", ")} ; devant ${dev.join(", ")}. ${randomChoice([
+        `Combien de carreaux a la vue ${cas.nom} ?`,
+        `Dessine la vue ${cas.nom} : combien de carreaux ?`,
+        `Combien de carreaux compte la vue ${cas.nom} ?`,
+      ])}`.trim();
+      return auPave({
+        text,
+        format: "short",
+        expected: [`${cas.n} carreau${cas.n > 1 ? "x" : ""}`, String(cas.n)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : une vue montre un carreau pour chaque position où l'on voit au moins un cube dans cette direction.\n\n" +
+          "Méthode : on regarde dans la direction demandée ; une colonne cachée derrière une plus haute ne compte pas en plus.\n\n" +
+          `Calcul : ${cas.calc}.\n\n` +
+          `Conclusion : la vue ${cas.nom} a ${cas.n} carreau${cas.n > 1 ? "x" : ""}, pour ${v.total} cubes en tout.`,
+        canvas: assemblage(cubes),
+      });
     },
   },
 
@@ -814,6 +1413,303 @@ export const visionEspaceBank: TutorBankItemV4[] = [
       };
     },
   },
+  {
+    // ⭐ 15/11/2026 — ★1 : compter sur une perspective cavalière (pointillés calculés).
+    kind: "template",
+    id: "4e_vision_representation_tpl_3_compter_perspective",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_representation",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "En perspective cavalière, les arêtes cachées sont en pointillés.",
+    tags: ["solide", "perspective", "pointilles", "template", "canvas"],
+    generate: () => {
+      const p = perspective();
+      const caches = p.segs.filter((s) => s.cachee).length;
+      const pleins = p.segs.length - caches;
+      const facesVues = p.quoi === "cube" || p.quoi === "pave" ? 3 : 2;
+      const cas = randomChoice([
+        { n: caches, q: randomChoice(["Combien d'arêtes sont dessinées en pointillés ?", "Compte les arêtes en pointillés.", "Combien d'arêtes cachées sont tracées ?"]), calc: `${caches} arêtes sont cachées, donc en pointillés` },
+        { n: pleins, q: randomChoice(["Combien d'arêtes sont en traits pleins ?", "Compte les arêtes tracées en traits pleins.", "Combien d'arêtes voit-on vraiment ?"]), calc: `${p.segs.length} arêtes en tout, dont ${caches} cachées : ${p.segs.length} − ${caches} = ${pleins} en traits pleins` },
+        { n: p.segs.length, q: randomChoice(["Combien d'arêtes a ce solide, cachées comprises ?", "Compte toutes les arêtes, pointillés compris."]), calc: `${pleins} en traits pleins + ${caches} en pointillés = ${p.segs.length}` },
+        { n: p.poly.sommets.length, q: randomChoice(["Combien de sommets a ce solide ?", "Compte les sommets nommés de ce solide."]), calc: `les sommets sont ${p.noms.join(", ")}, soit ${p.poly.sommets.length}` },
+        { n: facesVues, q: randomChoice(["Combien de faces voit-on sur cette figure ?", "Combien de faces sont visibles ici ?"]), calc: `seules les faces bordées de traits pleins sont vues : ${facesVues}` },
+      ]);
+      const debut = randomChoice(["", "", "Perspective cavalière :", "Voici un solide."]);
+      return auPave({
+        text: `${debut} ${debut === "Perspective cavalière :" ? cas.q.charAt(0).toLowerCase() + cas.q.slice(1) : cas.q}`.trim(),
+        format: "short",
+        expected: [String(cas.n)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : en perspective cavalière, les arêtes qu'on voit sont en traits pleins, les arêtes CACHÉES derrière le solide sont en pointillés.\n\n" +
+          "Méthode : on compte sur la figure, en distinguant les traits pleins et les pointillés.\n\n" +
+          `Calcul : ${cas.calc}.\n\n` +
+          `Conclusion : la réponse est ${cas.n}. ⭐ Les pointillés montrent ce que l'œil ne voit pas : sans eux, on ne saurait pas que le solide est fermé derrière.`,
+        canvas: p.canvas,
+      });
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★1 : lequel de ces assemblages de carrés est un patron de cube ?
+    kind: "template",
+    id: "4e_vision_representation_tpl_4_patron_cube",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_representation",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Pas de bloc de 4 carrés, pas plus de 4 carrés en ligne.",
+    tags: ["solide", "patron", "cube", "qcm", "template", "canvas"],
+    generate: () => {
+      const NOMS_P = ["A", "B", "C", "D"];
+      const l = shuffle([unPatronCube(), unNonPatronCube(), unNonPatronCube(), unNonPatronCube()].map((c, i) => ({ c, ok: i === 0 })));
+      const j = l.findIndex((x) => x.ok);
+      const text = randomChoice([
+        "Lequel de ces dessins est un patron de cube ?",
+        "Quel dessin se plie en cube ?",
+        "Avec quel dessin peut-on fabriquer un cube ?",
+        "Un seul dessin est un patron de cube. Lequel ?",
+        "Plie ces dessins dans ta tête : lequel donne un cube ?",
+        "Quel assemblage de carrés est un patron de cube ?",
+        "Lequel de ces dessins se referme en cube ?",
+      ]);
+      return {
+        text,
+        format: "qcm",
+        choices: NOMS_P.map((n) => `Le dessin ${n}`),
+        expected: [`Le dessin ${NOMS_P[j]}`],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : un patron de cube, c'est 6 carrés qui se replient en cube, sans trou ni face en double.\n\n" +
+          "Méthode : on choisit un carré comme fond et on replie les autres autour, en pensée. Un bloc de 4 carrés ou une ligne de 5 carrés ne se referme jamais.\n\n" +
+          `Calcul : seul le dessin ${NOMS_P[j]} donne 6 faces différentes ; dans les autres, deux carrés tombent sur la même face.\n\n` +
+          `Conclusion : le dessin ${NOMS_P[j]} est un patron de cube. ⭐ Il existe exactement 11 patrons du cube.`,
+        canvas: { kind: "patrons_cube", patrons: l.map((x, i) => ({ nom: NOMS_P[i], cases: x.c })) } as CanvasFigure,
+      };
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★2 : quel sommet, quelle arête sont cachés ?
+    kind: "template",
+    id: "4e_vision_representation_tpl_5_cache",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_representation",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Ce qui est caché est dessiné en pointillés.",
+    tags: ["solide", "perspective", "pointilles", "qcm", "template", "canvas"],
+    generate: () => {
+      const p = perspective();
+      const caches = p.segs.filter((s) => s.cachee);
+      const vus = p.segs.filter((s) => !s.cachee);
+      // Le sommet caché : toutes ses arêtes sont en pointillés.
+      const iCache = p.poly.sommets.findIndex((_, i) => p.segs.filter((s) => s.de === i || s.a === i).every((s) => s.cachee));
+      const debut = randomChoice(["", "Solide en perspective cavalière.", "Voici un solide en perspective cavalière."]);
+      const cas = randomChoice([
+        {
+          q: randomChoice(["Quel sommet de ce solide est caché ?", "Quel sommet ne voit-on pas ?", "Un seul sommet est caché. Lequel ?", "Quel est le sommet caché ?"]),
+          r: p.noms[iCache],
+          f: shuffle(p.noms.filter((_, i) => i !== iCache)).slice(0, 3),
+          calc: `les trois arêtes qui partent de ${p.noms[iCache]} sont en pointillés`,
+        },
+        {
+          q: randomChoice(["Quelle arête est cachée ?", "Laquelle de ces arêtes est en pointillés ?", "Quelle arête ne voit-on pas ?", "Parmi ces arêtes, laquelle est cachée ?"]),
+          r: nomArete(p, randomChoice(caches)),
+          f: shuffle(vus).slice(0, 3).map((s) => nomArete(p, s)),
+          calc: "c'est la seule des quatre qui est tracée en pointillés",
+        },
+        {
+          q: randomChoice(["Laquelle de ces arêtes est en trait plein ?", "Quelle arête voit-on vraiment ?", "Parmi ces arêtes, laquelle est visible ?"]),
+          r: nomArete(p, randomChoice(vus)),
+          f: shuffle(caches).slice(0, 3).map((s) => nomArete(p, s)),
+          calc: "les trois autres sont en pointillés : elles sont cachées",
+        },
+      ]);
+      return {
+        text: `${debut} ${cas.q}`.trim(),
+        format: "qcm",
+        choices: shuffle([cas.r, ...cas.f]),
+        expected: [cas.r],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : en perspective cavalière, on dessine en POINTILLÉS ce qui est caché derrière le solide ; le reste est en traits pleins.\n\n" +
+          "Méthode : on repère les pointillés ; un sommet est caché quand toutes ses arêtes le sont.\n\n" +
+          `Calcul : ${cas.calc}.\n\n` +
+          `Conclusion : la réponse est ${cas.r}. ⭐ Sur ${p.nom} dessiné ainsi, on voit le devant, le dessus et la droite : le coin du fond, en bas à gauche, est caché.`,
+        canvas: p.canvas,
+      };
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★2 : le patron d'un pavé, d'un prisme ou d'un cylindre parmi quatre dépliages.
+    kind: "template",
+    id: "4e_vision_representation_tpl_6_patron_solide",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_representation",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Chaque face une fois, et les côtés qui se recollent ont la même longueur.",
+    tags: ["solide", "patron", "qcm", "template", "canvas"],
+    generate: () => {
+      const quoi = randomChoice(["pave", "prisme", "cylindre"] as const);
+      let vrai, faux, nom: string, piege: string;
+      if (quoi === "pave") {
+        let L = 0, l = 0, h = 0;
+        do { L = entre(4, 7); l = entre(2, 4); h = entre(2, 5); } while (new Set([L, l, h]).size < 3);
+        const o = { haut: randomChoice([0, 1] as const), bas: randomChoice([0, 1] as const) };
+        vrai = patronPave(L, l, h, o);
+        faux = (["deux_couvercles_meme_cote", "couvercle_trop_large", "face_manquante", "bande_desordonnee"] as const).map((d) => patronPave(L, l, h, { ...o, defaut: d }));
+        nom = "un pavé droit";
+        piege = "un couvercle trop large, une face qui manque, deux couvercles du même côté ou une bande mal ordonnée";
+      } else if (quoi === "prisme") {
+        const [a, b, c] = randomChoice([[3, 4, 5], [4, 5, 6], [5, 5, 6], [4, 6, 7], [5, 6, 7], [4, 4, 6]]);
+        const h = entre(4, 7);
+        vrai = patronPrisme(a, b, c, h);
+        faux = (["triangle_faux", "deux_triangles_meme_cote", "rectangle_manquant", "rectangle_trop_large"] as const).map((d) => patronPrisme(a, b, c, h, { defaut: d }));
+        nom = "un prisme droit";
+        piege = "un triangle qui ne s'ajuste pas, deux triangles du même côté, un rectangle qui manque ou trop large";
+      } else {
+        const r = entre(1, 3), h = entre(3, 6);
+        const o = { decalageHaut: Math.random(), decalageBas: Math.random() };
+        vrai = patronCylindre(r, h, o);
+        faux = (["rectangle_diametre", "rectangle_demi_perimetre", "disques_meme_cote", "disque_trop_grand"] as const).map((d) => patronCylindre(r, h, { ...o, defaut: d }));
+        nom = "un cylindre";
+        piege = "un rectangle trop court pour faire le tour du disque, deux disques du même côté ou un disque trop grand";
+      }
+      const sans = nom.replace(/^une? /, "");
+      const text = randomChoice([
+        `Lequel de ces dépliages est un patron de ${sans} ?`,
+        `Quel dépliage se plie en ${nom} ?`,
+        `Un seul dépliage est le patron ${de(nom)}. Lequel ?`,
+        `Quel dépliage permet de fabriquer ${nom} ?`,
+        `Lequel de ces dépliages se referme en ${nom} ?`,
+        `Quel est le bon patron ${de(nom)} ?`,
+      ]);
+      return comparer(
+        text,
+        vrai,
+        faux,
+        "Définition : un patron est le solide DÉPLIÉ à plat : chaque face y apparaît une fois, en vraie grandeur.\n\n" +
+          "Méthode : on vérifie le nombre de faces, leur place, et que les côtés qui se recollent ont la même longueur.\n\n" +
+          `Calcul : les faux dépliages ont ${piege}.\n\n` +
+          "Conclusion : un seul dépliage se referme sans trou ni recouvrement.",
+        `Quatre dépliages, A, B, C et D, dont un seul est le patron ${de(nom)}`
+      );
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★3 : sur un patron de cube, quelle face sera opposée ?
+    kind: "template",
+    id: "4e_vision_representation_tpl_7_face_opposee",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_representation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Dans une ligne de trois carrés, les deux du bout seront face à face.",
+    tags: ["solide", "patron", "cube", "situation", "qcm", "template", "canvas"],
+    generate: () => {
+      const c: Cases = unPatronCube();
+      const lettres = shuffle(["A", "B", "C", "D", "E", "F"]);
+      const k = Math.floor(Math.random() * 6);
+      const opp = enFace(c, c[k]);
+      const iOpp = c.findIndex(([r, x]) => r === opp[0] && x === opp[1]);
+      const X = lettres[k];
+      const R = lettres[iOpp];
+      const e = randomChoice(ELEVES);
+      const ctx = randomChoice([
+        "Un fabricant de jouets découpe ce patron de cube.",
+        "Une architecte plie ce patron pour une maquette cubique.",
+        "Pour un jeu de société, une graphiste imprime ce patron de cube.",
+        "Un professeur de technologie distribue ce patron de cube.",
+        `${e.n} construit un cube avec ce patron.`,
+        "Un pâtissier plie ce patron en carton pour une boîte cubique.",
+        "Une décoratrice prépare ce patron de lanterne cubique.",
+        "Un emballeur découpe ce patron dans du carton.",
+      ]);
+      const q = randomChoice([
+        `Quelle face sera opposée à la face ${X} ?`,
+        `Une fois plié, quelle face sera en face de ${X} ?`,
+        `Après pliage, quelle lettre se trouvera à l'opposé de ${X} ?`,
+        `Quelle face ne touchera jamais la face ${X} ?`,
+      ]);
+      return {
+        text: `${ctx} ${q}`,
+        format: "qcm",
+        choices: shuffle([R, ...shuffle(lettres.filter((t) => t !== X && t !== R)).slice(0, 3)]),
+        expected: [R],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : sur un cube, chaque face a une seule face OPPOSÉE, qu'elle ne touche pas ; elle touche les quatre autres.\n\n" +
+          "Méthode : on plie en pensée, en partant de la face donnée. Deux carrés séparés par un seul carré, sur une même ligne, seront opposés.\n\n" +
+          `Calcul : en repliant le patron autour de la face ${X}, c'est la face ${R} qui vient se placer en face.\n\n` +
+          `Conclusion : la face opposée à ${X} est ${R}.`,
+        canvas: { kind: "patrons_cube", patrons: [{ cases: c, textes: c.map((cc, i) => ({ case: cc, texte: lettres[i] })) }] } as CanvasFigure,
+      };
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★3 : sur un patron de pavé, la longueur « ? » d'un côté qui se recolle.
+    kind: "template",
+    id: "4e_vision_representation_tpl_8_patron_pave_cote",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_representation",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Deux côtés qui se recollent au pliage ont la même longueur.",
+    tags: ["solide", "patron", "pave", "situation", "template", "canvas"],
+    generate: () => {
+      let L = 0, l = 0, h = 0;
+      do { L = entre(5, 9); l = entre(2, 4); h = entre(3, 6); } while (new Set([L, l, h]).size < 3);
+      const P = patronPave(L, l, h, { haut: randomChoice([0, 1] as const), bas: randomChoice([0, 1] as const) });
+      const T = P.pieces;
+      // Pièces : 0 (l × h), 1 (L × h), 2 (l × h), 3 (L × h), 4 couvercle du haut, 5 couvercle du bas.
+      const inc = randomChoice([
+        { p: 2, k: 0, x: l },
+        { p: 3, k: 0, x: L },
+        { p: 3, k: 1, x: h },
+        { p: 4, k: 3, x: l },
+        { p: 5, k: 1, x: l },
+        { p: 2, k: 1, x: h },
+      ]);
+      P.cotes = [cotePiece(T[1], 0, `${L} cm`), cotePiece(T[0], 0, `${l} cm`), cotePiece(T[0], 3, `${h} cm`), cotePiece(T[inc.p], inc.k, "?", true)];
+      const e = randomChoice(ELEVES);
+      const ctx = randomChoice([
+        "Un cartonnier trace ce patron de pavé droit.",
+        "Une fleuriste prépare ce patron pour un coffret à bouquets.",
+        "Pour un emballage cadeau, un vendeur trace ce patron de pavé.",
+        `En technologie, ${e.n} dessine ce patron de pavé droit.`,
+        "Une designer prépare le patron de ce coffret.",
+        "Un apiculteur découpe ce patron pour un coffret à miel.",
+        "Un imprimeur prépare ce patron d'emballage.",
+        "Une modéliste trace ce patron pour une maquette d'immeuble.",
+      ]);
+      const q = randomChoice(["Combien mesure le côté « ? » ?", "Quelle longueur faut-il pour « ? » ?", "Que vaut « ? » pour que le pavé se ferme ?", "Quelle est la longueur « ? » ?"]);
+      return auPave({
+        text: `${ctx} ${q}`,
+        format: "short",
+        expected: mesure(inc.x, "cm"),
+        comparator: "number_equal",
+        explanation:
+          "Définition : au pliage, chaque côté d'une face se recolle sur un côté d'une autre face : ces deux côtés ont la même longueur.\n\n" +
+          "Méthode : on cherche le côté qui viendra se coller sur « ? », ou une face identique déjà cotée.\n\n" +
+          `Calcul : les faces du pavé mesurent ${L} cm sur ${h} cm, ${l} cm sur ${h} cm et ${L} cm sur ${l} cm ; le côté « ? » vaut ${inc.x} cm.\n\n` +
+          `Conclusion : « ? » mesure ${inc.x} cm.`,
+        canvas: { kind: "patron_solide", panneaux: [P], description: "Le patron d'un pavé droit, trois longueurs cotées et un côté marqué d'un point d'interrogation" } as CanvasFigure,
+      });
+    },
+  },
 
   /* =========================================================================
      VISION_SECTION — ce que la 4e ajoute à la 6e
@@ -851,9 +1747,10 @@ export const visionEspaceBank: TutorBankItemV4[] = [
         // ⛔ 08/10/2026 — un carré est AUSSI un rectangle et un losange ; et la
         // tranche d'un cylindre ou d'un pavé PEUT être carrée (cylindre aussi
         // haut que large) : « un carré » n'est pas un leurre d'« un rectangle ».
+        // 15/11/2026 : + « un trapèze » — pour un carré, il ne restait que deux leurres.
         choices: makeChoices(
           cas.forme,
-          ["un carré", "un rectangle", "un disque", "un triangle", "un losange"].filter(
+          ["un carré", "un rectangle", "un disque", "un triangle", "un losange", "un trapèze"].filter(
             (w) =>
               !(cas.forme === "un carré" && (w === "un rectangle" || w === "un losange")) &&
               !(cas.forme === "un rectangle" && w === "un carré")
@@ -887,7 +1784,8 @@ export const visionEspaceBank: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "vision_espace",
     microId: "vision_section",
-    difficulty: 5,
+    // 15/11/2026 : ★5 → ★4, pour que ★4 ait deux gabarits (tpl_1 et celui-ci).
+    difficulty: 4,
     theme: "neutral",
     hint: "Une section ronde vient d'une coupe parallèle à une base ronde.",
     tags: ["solide", "section", "inverse", "qcm", "template"],
@@ -914,6 +1812,289 @@ export const visionEspaceBank: TutorBankItemV4[] = [
           `Calcul : ${objet.startsWith(nomSolide) ? "" : `${objet} se modélise par ${nomSolide} ; `}pour obtenir ${cas.forme} en coupant ${nomSolide}, il faut ${cas.rep}.\n\n` +
           "Conclusion : ⭐ le cylindre est le seul des sept à donner DEUX formes très différentes selon la coupe : un disque à plat, un rectangle en long. C'est ce qui en fait le meilleur exemple pour comprendre qu'une section n'est pas une propriété du solide, mais du couple solide + plan.",
       };
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★1 : le plan est dessiné, on nomme la section.
+    kind: "template",
+    id: "4e_vision_section_tpl_3_forme_dessin",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_section",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "La section est la surface colorée, là où le plan coupe le solide.",
+    tags: ["solide", "section", "qcm", "template", "canvas"],
+    generate: () => {
+      const cas = randomChoice(COUPES_DESSIN);
+      const text = randomChoice([
+        "Quelle est la forme de la section ?",
+        "La section colorée est quelle figure ?",
+        "Quelle figure obtient-on sur la coupe ?",
+        "Regarde la coupe. Quelle forme a la section ?",
+        "Quelle figure plane forme cette section ?",
+        "Nomme la forme de cette section.",
+        "Ce plan coupe le solide. Quelle est la section ?",
+        "Quelle forme a la tranche coupée par le plan ?",
+      ]);
+      return {
+        text,
+        format: "qcm",
+        choices: makeChoices(cas.forme, leurresFormes(cas.forme)),
+        expected: [cas.forme],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : la SECTION est la surface plane obtenue en coupant le solide par un plan — la forme qu'on voit sur la tranche.\n\n" +
+          "Méthode : on regarde où le plan coupe les faces du solide, et la figure que dessinent ces traits.\n\n" +
+          `Calcul : ${cas.dit}.\n\n` +
+          `Conclusion : la section est ${cas.forme}.`,
+        canvas: coupeDessin(cas.s, cas.sec),
+      };
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★1 : comment le plan est-il placé ?
+    kind: "template",
+    id: "4e_vision_section_tpl_4_position_plan",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_section",
+    difficulty: 1,
+    theme: "neutral",
+    hint: "Compare le plan à la base du solide : à plat, debout, ou penché ?",
+    tags: ["solide", "section", "plan", "qcm", "template", "canvas"],
+    generate: () => {
+      const cas = randomChoice(COUPES_DESSIN);
+      const text = randomChoice([
+        "Comment le plan coupe-t-il ce solide ?",
+        "Comment est placé le plan de coupe ?",
+        "Décris la position du plan de coupe.",
+        "Où passe ce plan par rapport à la base ?",
+        "Le plan de coupe est placé comment ?",
+        "Quelle est la position du plan par rapport à la base ?",
+      ]);
+      return {
+        text,
+        format: "qcm",
+        choices: shuffle([...POSITIONS_PLAN]),
+        expected: [cas.pos],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : la position du plan se lit par rapport à la BASE du solide : parallèle (à plat), perpendiculaire (debout), ou en biais.\n\n" +
+          "Méthode : on compare la surface colorée à la base du solide.\n\n" +
+          `Calcul : ici le plan coupe le solide ${cas.pos} ; la section est ${cas.forme}.\n\n` +
+          "Conclusion : ⭐ c'est la position du plan qui décide de la forme de la section.",
+        canvas: coupeDessin(cas.s, cas.sec),
+      };
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★2 : une mesure de la section (elle garde celles de la face).
+    kind: "template",
+    id: "4e_vision_section_tpl_5_mesure",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_section",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Parallèle à une face, la section d'un cube ou d'un cylindre est identique à cette face.",
+    tags: ["solide", "section", "mesure", "template", "canvas"],
+    generate: () => {
+      const cube = Math.random() < 0.55;
+      if (cube) {
+        const a = entre(3, 12);
+        const cas = randomChoice([
+          { q: "son côté ?", x: a, u: "cm", calc: `la section est un carré identique à une face : côté ${a} cm` },
+          { q: "son aire ?", x: a * a, u: "cm²", calc: `la section est un carré de côté ${a} cm : ${a} × ${a} = ${a * a}` },
+          { q: "son périmètre ?", x: 4 * a, u: "cm", calc: `la section est un carré de côté ${a} cm : 4 × ${a} = ${4 * a}` },
+        ]);
+        return auPave({
+          text: randomChoice([
+            `Section d'un cube d'arête ${a} cm, parallèle à une face : ${cas.q}`,
+            `Cube d'arête ${a} cm, coupé parallèlement à une face. Section : ${cas.q}`,
+            `On coupe un cube d'arête ${a} cm parallèlement à une face : ${cas.q}`,
+            `Tranche parallèle à une face d'un cube d'arête ${a} cm : ${cas.q}`,
+            `Cube de ${a} cm d'arête, tranché parallèlement à une face. Tranche : ${cas.q}`,
+          ]),
+          format: "short",
+          expected: mesure(cas.x, cas.u),
+          comparator: "number_equal",
+          explanation: EXPL_SECTION_MESURE(cas.calc, `${cas.x} ${cas.u}`),
+          canvas: coupeDessin("cube", "horizontale"),
+        });
+      }
+      const r = entre(2, 9);
+      const cas = randomChoice([
+        { t: `Cylindre de rayon ${r} cm, coupé parallèlement à sa base. Rayon de la section ?`, x: r, calc: `la section est un disque identique à la base : rayon ${r} cm` },
+        { t: `Section d'un cylindre de rayon ${r} cm, parallèle à la base : son rayon ?`, x: r, calc: `la section est un disque identique à la base : rayon ${r} cm` },
+        { t: `Section d'un cylindre de diamètre ${2 * r} cm, parallèle à la base : son diamètre ?`, x: 2 * r, calc: `la section est un disque identique à la base : diamètre ${2 * r} cm` },
+        { t: `Cylindre de rayon ${r} cm, coupé parallèlement à sa base. Diamètre de la section ?`, x: 2 * r, calc: `la section est un disque de rayon ${r} cm, donc de diamètre 2 × ${r} = ${2 * r} cm` },
+        { t: `Cylindre de diamètre ${2 * r} cm, tranche parallèle à la base : son rayon ?`, x: r, calc: `la tranche est un disque identique à la base : diamètre ${2 * r} cm, donc rayon ${2 * r} ÷ 2 = ${r} cm` },
+        { t: `Cylindre de diamètre ${2 * r} cm, tranche parallèle à la base : son diamètre ?`, x: 2 * r, calc: `la tranche est un disque identique à la base : diamètre ${2 * r} cm` },
+        { t: `Tranche parallèle à la base d'un cylindre de rayon ${r} cm : son rayon ?`, x: r, calc: `la tranche est un disque identique à la base : rayon ${r} cm` },
+        { t: `Tranche parallèle à la base d'un cylindre de rayon ${r} cm : son diamètre ?`, x: 2 * r, calc: `la tranche est un disque de rayon ${r} cm : diamètre 2 × ${r} = ${2 * r} cm` },
+      ]);
+      return auPave({
+        text: cas.t,
+        format: "short",
+        expected: mesure(cas.x, "cm"),
+        comparator: "number_equal",
+        explanation: EXPL_SECTION_MESURE(cas.calc, `${cas.x} cm`),
+        canvas: coupeDessin("cylindre", "parallele_base"),
+      });
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★2 : le plan n'est pas dessiné, on l'imagine.
+    kind: "template",
+    id: "4e_vision_section_tpl_6_imaginer",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_section",
+    difficulty: 2,
+    theme: "neutral",
+    hint: "Imagine le couteau qui passe : la tranche a la forme de la face à laquelle il est parallèle.",
+    tags: ["solide", "section", "qcm", "template", "canvas"],
+    generate: () => {
+      const cas = randomChoice([
+        { kind: "cube" as const, adv: "parallèlement à une face", forme: "un carré" },
+        { kind: "pave_droit" as const, adv: "parallèlement à une face", forme: "un rectangle" },
+        { kind: "cylindre" as const, adv: "parallèlement à sa base", forme: "un disque" },
+        { kind: "cylindre" as const, adv: "parallèlement à son axe", forme: "un rectangle" },
+        { kind: "cone" as const, adv: "parallèlement à sa base", forme: "un disque" },
+        { kind: "cone" as const, adv: "verticalement, par sa pointe", forme: "un triangle" },
+        { kind: "pyramide" as const, adv: "verticalement, par son sommet", forme: "un triangle" },
+        { kind: "prisme" as const, adv: "parallèlement à ses bases triangulaires", forme: "un triangle" },
+        { kind: "prisme" as const, adv: "parallèlement au sol", forme: "un rectangle" },
+      ]);
+      const text = randomChoice([
+        `On coupe ce solide ${cas.adv}. Forme de la section ?`,
+        `Ce solide est coupé ${cas.adv}. Quelle figure obtient-on ?`,
+        `Coupe ce solide ${cas.adv} : quelle forme a la tranche ?`,
+        `Quelle section donne ce solide coupé ${cas.adv} ?`,
+        `Imagine ce solide coupé ${cas.adv}. Quelle section ?`,
+      ]);
+      return {
+        text,
+        format: "qcm",
+        choices: makeChoices(cas.forme, leurresFormes(cas.forme)),
+        expected: [cas.forme],
+        comparator: "mcq_exact",
+        explanation:
+          "Définition : la SECTION est la surface plane obtenue en coupant le solide par un plan.\n\n" +
+          "Méthode : un plan parallèle à une face (ou à une base) donne une section de même forme que cette face ; un plan qui passe par la pointe d'un cône ou d'une pyramide donne un triangle.\n\n" +
+          `Calcul : ce solide coupé ${cas.adv} donne ${cas.forme}.\n\n` +
+          `Conclusion : la section est ${cas.forme}.`,
+        canvas: solide(cas.kind),
+      };
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★3 : l'aire (ou le diamètre) d'une tranche, en situation.
+    kind: "template",
+    id: "4e_vision_section_tpl_7_tranche",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_section",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "Une tranche parallèle à la base a les mêmes mesures que la base.",
+    tags: ["solide", "section", "situation", "template", "canvas"],
+    generate: () => {
+      const k = randomChoice(["pave", "cube", "cylindre"] as const);
+      if (k === "pave") {
+        const L = entre(6, 15), l = entre(3, 8);
+        const [qui, o] = randomChoice([["Un traiteur", "un pâté"], ["Une pâtissière", "un cake"], ["Un cuisinier", "un bloc de tofu"], ["Une boulangère", "un pain de mie"], ["Un sculpteur", "un bloc d'argile"], ["Une tapissière", "un bloc de mousse"]]);
+        const x = L * l;
+        return auPave({
+          text: `${qui} tranche ${o} en forme de pavé, de base ${L} cm sur ${l} cm, parallèlement à la base. ${randomChoice(["Aire d'une tranche ?", "Quelle est l'aire d'une tranche ?"])}`,
+          format: "short",
+          expected: mesure(x, "cm²"),
+          comparator: "number_equal",
+          explanation: EXPL_SECTION_MESURE(`la tranche est un rectangle identique à la base : ${L} × ${l} = ${x}`, `${x} cm²`),
+          canvas: coupeDessin("pave_droit", "horizontale"),
+        });
+      }
+      if (k === "cube") {
+        const a = entre(3, 12);
+        const [qui, o] = randomChoice([["Une fromagère", "un cube de comté"], ["Un menuisier", "un cube de bois"], ["Un confiseur", "un cube de pâte d'amande"], ["Une savonnière", "un cube de savon"], ["Un sculpteur sur glace", "un cube de glace"]]);
+        const x = a * a;
+        return auPave({
+          text: `${qui} coupe ${o} de ${a} cm d'arête, parallèlement à une face. ${randomChoice(["Aire de la tranche ?", "Quelle est l'aire de la tranche ?"])}`,
+          format: "short",
+          expected: mesure(x, "cm²"),
+          comparator: "number_equal",
+          explanation: EXPL_SECTION_MESURE(`la tranche est un carré identique à une face : ${a} × ${a} = ${x}`, `${x} cm²`),
+          canvas: coupeDessin("cube", "horizontale"),
+        });
+      }
+      const d = 2 * entre(2, 8);
+      const [qui, o] = randomChoice([["Un charcutier", "un saucisson"], ["Un bûcheron", "une bûche"], ["Une artisane", "une bougie cylindrique"], ["Un cuisinier", "un concombre"], ["Une pâtissière", "un rouleau de pâte à biscuits"]]);
+      return auPave({
+        text: `${qui} coupe ${o} de ${d} cm de diamètre en rondelles, parallèlement à la base. ${randomChoice(["Diamètre d'une rondelle ?", "Quel est le diamètre d'une rondelle ?"])}`,
+        format: "short",
+        expected: mesure(d, "cm"),
+        comparator: "number_equal",
+        explanation: EXPL_SECTION_MESURE(`une rondelle est un disque identique à la base du cylindre : diamètre ${d} cm`, `${d} cm`),
+        canvas: coupeDessin("cylindre", "parallele_base"),
+      });
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★3 : le périmètre d'une tranche, en situation.
+    kind: "template",
+    id: "4e_vision_section_tpl_8_perimetre",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_section",
+    difficulty: 3,
+    theme: "neutral",
+    hint: "D'abord la forme et les mesures de la section, ensuite son tour.",
+    tags: ["solide", "section", "situation", "template", "canvas"],
+    generate: () => {
+      const k = randomChoice(["cube", "pave", "cylindre"] as const);
+      const ruban = randomChoice(["La tranche est bordée d'un ruban.", "On fait le tour de la tranche avec un ruban.", "On entoure la tranche d'un fil."]);
+      const fin = randomChoice(["Quel est le périmètre de la tranche ?", "Quelle longueur faut-il ?", "Combien mesure le tour de la tranche ?"]);
+      if (k === "cube") {
+        const a = entre(3, 12);
+        const qui = randomChoice(["Un menuisier scie un cube de bois", "Une fromagère coupe un cube de fromage", "Un artisan coupe un cube de savon", "Une sculptrice taille un cube d'argile"]);
+        return auPave({
+          text: `${qui} de ${a} cm d'arête, parallèlement à une face. ${ruban} ${fin}`,
+          format: "short",
+          expected: mesure(4 * a, "cm"),
+          comparator: "number_equal",
+          explanation: EXPL_SECTION_MESURE(`la tranche est un carré de côté ${a} cm : 4 × ${a} = ${4 * a}`, `${4 * a} cm`),
+          canvas: coupeDessin("cube", "horizontale"),
+        });
+      }
+      if (k === "pave") {
+        const L = entre(6, 15), l = entre(3, 8);
+        const qui = randomChoice(["Un traiteur tranche un pâté en pavé", "Une boulangère coupe un pain de mie", "Un menuisier scie une poutre en pavé", "Une pâtissière tranche un cake"]);
+        return auPave({
+          text: `${qui}, de base ${L} cm sur ${l} cm, parallèlement à la base. ${ruban} ${fin}`,
+          format: "short",
+          expected: mesure(2 * (L + l), "cm"),
+          comparator: "number_equal",
+          explanation: EXPL_SECTION_MESURE(`la tranche est un rectangle de ${L} cm sur ${l} cm : 2 × (${L} + ${l}) = ${2 * (L + l)}`, `${2 * (L + l)} cm`),
+          canvas: coupeDessin("pave_droit", "horizontale"),
+        });
+      }
+      const d = 2 * entre(2, 6), h = entre(10, 30);
+      const qui = randomChoice(["Une cuisinière coupe un concombre", "Un bûcheron fend une bûche", "Un charcutier coupe un saucisson", "Une artisane coupe une bougie"]);
+      return auPave({
+        text: `${qui} de ${d} cm de diamètre et ${h} cm de long en deux, par son axe. Périmètre de la coupe ?`,
+        format: "short",
+        expected: mesure(2 * (d + h), "cm"),
+        comparator: "number_equal",
+        explanation: EXPL_SECTION_MESURE(`coupé par son axe, le cylindre donne un rectangle de ${h} cm sur ${d} cm (le diamètre) : 2 × (${h} + ${d}) = ${2 * (d + h)}`, `${2 * (d + h)} cm`),
+        canvas: coupeDessin("cylindre", "parallele_axe"),
+      });
     },
   },
 
@@ -1060,7 +2241,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
               ? () => `${e.n} pose une perle sur chaque sommet ${de(objet)} (${fam.modele}). Combien de perles lui faut-il ?`
               : null;
       const text = randomChoice(action ? [...generiques, action] : generiques)();
-      return {
+      return auPave({
         text,
         format: "short",
         expected: [String(n)],
@@ -1071,7 +2252,7 @@ export const visionEspaceBank: TutorBankItemV4[] = [
           `Calcul : ${fam.detail}.\n\n` +
           `Conclusion : ${objet}, modélisé${g === "f" ? "e" : ""} par ${fam.modele}, a ${n} ${quoi}. ⚠️ L'erreur la plus fréquente est d'oublier ce qui est CACHÉ derrière : sur un cube dessiné en perspective, on ne voit que 3 faces sur 6.`,
         canvas: solide(fam.s.kind),
-      };
+      });
     },
   },
   {
@@ -1108,6 +2289,155 @@ export const visionEspaceBank: TutorBankItemV4[] = [
           `Calcul : ${cas.objet} se modélise par ${cas.rep}.\n\n` +
           "Conclusion : ⭐ c'est ce geste qui rend les formules utiles : on ne calcule jamais le volume d'une boîte de conserve, on calcule celui d'un cylindre. La modélisation est le pont entre le monde et les mathématiques.",
       };
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★4 : le patron d'un dé, faces opposées de somme 7.
+    kind: "template",
+    id: "4e_vision_defi_tpl_4_patron_de",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Trouve d'abord la face qui sera EN FACE du « ? » une fois le dé plié.",
+    tags: ["solide", "defi", "patron", "cube", "template", "canvas"],
+    generate: () => {
+      const c: Cases = unPatronCube();
+      const faces = plier(c);
+      // Les nombres : 1 face sur chaque paire opposée, au hasard, l'autre vaut 7 − elle.
+      const paires = shuffle([["h", "b"], ["n", "s"], ["e", "o"]]);
+      const valeur: Record<string, number> = {};
+      shuffle([1, 2, 3]).forEach((v, i) => {
+        const [f, g] = Math.random() < 0.5 ? paires[i] : [paires[i][1], paires[i][0]];
+        valeur[f] = v;
+        valeur[g] = 7 - v;
+      });
+      const nb = (cc: [number, number]) => valeur[faces.get(`${cc[0]},${cc[1]}`)!];
+      const k = Math.floor(Math.random() * 6);
+      const opp = enFace(c, c[k]);
+      const rep = nb(c[k]);
+      const e = randomChoice(ELEVES);
+      const ctx = randomChoice([
+        "Sur un dé, deux faces opposées totalisent toujours 7.",
+        "Une fabricante de jeux imprime ce patron de dé. Sur un dé, deux faces opposées font 7 en tout.",
+        `${e.n} fabrique un dé avec ce patron. Deux faces opposées d'un dé ont une somme de 7.`,
+        "Règle du dé : la somme de deux faces opposées vaut 7.",
+        "Un dé bien fait a des faces opposées dont la somme est 7.",
+      ]);
+      const q = randomChoice([
+        "Quel nombre faut-il écrire à la place du « ? » ?",
+        "Quel nombre va sur la case « ? » ?",
+        "Que doit-on écrire sur la face « ? » ?",
+        "Complète la case « ? » de ce patron.",
+      ]);
+      return auPave({
+        text: `${ctx} ${q}`,
+        format: "short",
+        expected: [String(rep)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : sur un cube, chaque face a une face opposée, qu'elle ne touche pas. Sur un dé, deux faces opposées font 7.\n\n" +
+          "Méthode : on plie le patron en pensée pour trouver la face qui sera en face du « ? » ; deux carrés séparés par un seul carré, sur une même ligne, sont opposés.\n\n" +
+          `Calcul : la face opposée au « ? » porte ${nb(opp)} ; 7 − ${nb(opp)} = ${rep}.\n\n` +
+          `Conclusion : on écrit ${rep}.`,
+        canvas: {
+          kind: "patrons_cube",
+          patrons: [{ cases: c, textes: c.map((cc, i) => ({ case: cc, texte: i === k ? "?" : String(nb(cc)) })) }],
+        } as CanvasFigure,
+      });
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★5 : le grand cube peint puis découpé.
+    kind: "template",
+    id: "4e_vision_defi_tpl_5_cube_peint",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_defi",
+    difficulty: 5,
+    theme: "neutral",
+    hint: "Coins : 3 faces peintes. Arêtes sans les coins : 2. Milieu des faces : 1. Cœur : 0.",
+    tags: ["solide", "defi", "cubes", "template", "canvas"],
+    generate: () => {
+      const n = entre(3, 5);
+      const e = randomChoice(ELEVES);
+      const sit = randomChoice([
+        { t: `${e.n} peint en rouge un grand cube de ${n} cubes de côté, puis le démonte en ${n ** 3} petits cubes.`, adj: "peinte", pl: "peintes" },
+        { t: `Un gâteau cubique de ${n} parts de côté est glacé sur ses 6 faces, puis coupé en ${n ** 3} petits cubes.`, adj: "glacée", pl: "glacées" },
+        { t: `Un bloc de fromage de ${n} sur ${n} sur ${n} a une croûte sur ses 6 faces. On le coupe en ${n ** 3} petits cubes.`, adj: "avec de la croûte", pl: "avec de la croûte" },
+        { t: `Un cube de ${n} sur ${n} sur ${n}, fait de petits cubes, est recouvert de papier doré, puis démonté.`, adj: "dorée", pl: "dorées" },
+        { t: `Une artiste trempe dans la peinture un cube de ${n ** 3} petits cubes (${n} sur ${n} sur ${n}).`, adj: "peinte", pl: "peintes" },
+      ]);
+      const m = n - 2;
+      const cas = randomChoice([
+        { quoi: "exactement trois faces", x: 8, calc: "ce sont les petits cubes des coins : un cube a 8 sommets" },
+        { quoi: "exactement deux faces", x: 12 * m, calc: `ce sont les petits cubes des arêtes, sans les coins : ${m} par arête, et 12 arêtes : 12 × ${m} = ${12 * m}` },
+        { quoi: "exactement une face", x: 6 * m * m, calc: `ce sont les petits cubes du milieu de chaque face : ${m} × ${m} = ${m * m} par face, et 6 faces : 6 × ${m * m} = ${6 * m * m}` },
+        { quoi: "aucune face", x: m ** 3, calc: `ce sont les petits cubes du cœur, un cube de ${m} de côté : ${m} × ${m} × ${m} = ${m ** 3}` },
+      ]);
+      const adj = /deux|trois/.test(cas.quoi) ? sit.pl : sit.adj;
+      const q = randomChoice([
+        `Combien de petits cubes ${cas.quoi === "aucune face" ? "n'ont" : "ont"} ${cas.quoi} ${adj} ?`,
+        `Parmi les petits cubes, combien ${cas.quoi === "aucune face" ? "n'ont" : "ont"} ${cas.quoi} ${adj} ?`,
+      ]);
+      return auPave({
+        text: `${sit.t} ${q}`,
+        format: "short",
+        expected: [String(cas.x)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : dans un grand cube découpé, la place d'un petit cube décide du nombre de ses faces extérieures : coin, arête, milieu de face ou cœur.\n\n" +
+          "Méthode : on compte par catégorie, sans oublier ce qui est caché.\n\n" +
+          `Calcul : ${cas.calc}.\n\n` +
+          `Conclusion : ${cas.x} petits cubes. ⭐ Vérification : 8 + ${12 * m} + ${6 * m * m} + ${m ** 3} = ${n ** 3}.`,
+        canvas: assemblage(paveDeCubes(n, n, n)),
+      });
+    },
+  },
+  {
+    // ⭐ 15/11/2026 — ★4 : combien de cubes manque-t-il pour un pavé plein ?
+    kind: "template",
+    id: "4e_vision_defi_tpl_6_completer",
+    niveau: "4e",
+    matiere: "maths",
+    notionId: "vision_espace",
+    microId: "vision_defi",
+    difficulty: 4,
+    theme: "neutral",
+    hint: "Calcule d'abord les cubes du pavé plein, puis enlève ceux qui sont déjà là.",
+    tags: ["solide", "defi", "cubes", "template", "canvas"],
+    generate: () => {
+      let der: number[] = [], dev: number[] = [];
+      do {
+        const k = entre(3, 4);
+        der = Array.from({ length: k }, () => entre(1, 3));
+        dev = Array.from({ length: k }, () => entre(0, 3));
+      } while (Math.max(...der, ...dev) < 2 || der.reduce((a, b) => a + b, 0) + dev.reduce((a, b) => a + b, 0) >= der.length * 2 * Math.max(...der, ...dev));
+      const H = Math.max(...der, ...dev);
+      const cubes = colonnes([der, dev]);
+      const plein = der.length * 2 * H;
+      const x = plein - cubes.length;
+      const e = randomChoice(ELEVES);
+      const ctx = randomChoice([`${e.n} empile des cubes.`, "Un maçon empile des parpaings cubiques.", "Une enfant joue avec des cubes.", "Un magasinier empile des colis cubiques.", "Une architecte assemble des cubes pour une maquette."]);
+      const q = randomChoice([
+        `Combien de cubes faut-il ajouter pour obtenir un pavé plein de ${der.length} sur 2 sur ${H} ?`,
+        `Combien de cubes manque-t-il pour un pavé plein de ${der.length} sur 2 sur ${H} ?`,
+      ]);
+      return auPave({
+        text: `${ctx} Hauteurs des colonnes, de gauche à droite : derrière ${der.join(", ")} ; devant ${dev.join(", ")}. ${q}`,
+        format: "short",
+        expected: [String(x)],
+        comparator: "number_equal",
+        explanation:
+          "Définition : un pavé plein de L sur l sur h contient L × l × h cubes.\n\n" +
+          "Méthode : on calcule le pavé plein, on compte les cubes déjà posés (colonne par colonne, même cachés), et on fait la différence.\n\n" +
+          `Calcul : ${der.length} × 2 × ${H} = ${plein} ; déjà posés : ${[...der, ...dev].join(" + ")} = ${cubes.length} ; ${plein} − ${cubes.length} = ${x}.\n\n` +
+          `Conclusion : il faut ajouter ${x} cubes.`,
+        canvas: assemblage(cubes),
+      });
     },
   },
 ];
