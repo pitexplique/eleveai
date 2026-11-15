@@ -95122,6 +95122,158 @@
         "art-design",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm2-longueur-defi",
+      "pas_avant": "2027-04-05",
+      "notionId": "longueur",
+      "microId": "longueur_defi",
+      "classe": "cm2",
+      "ceinture": "bleue",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/longueurs/04-defi/eleveai-maths-cm2-longueur-defi.mp4",
+      "miniature": "cm2/maths/longueurs/04-defi/eleveai-maths-cm2-longueur-defi.png",
+      "titre": "Combien de câble reste-t-il sur la bobine ? — Défis de longueurs — épisode 4 · Maths CM2",
+      "accroche": "Nathan installe la fibre optique, les câbles qui apportent internet dans les maisons. Sa bobine : 2,5 km de câble. Il en pose 1 200 m dans une rue, 850 m dans une autre. Combien en reste-t-il ?\n\nDans cette vidéo :\n• un défi se fait en étapes : d'abord la même unité, puis les calculs, un par un\n• 2,5 km = 2 500 m ; 1 200 + 850 = 2 050 ; 2 500 − 2 050 = 450 m\n• le piège : on ne calcule jamais avec deux unités différentes\n• intervalles et poteaux : un boîtier au début et un au bout, un objet de plus que d'espaces\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : une rue de 1,2 km, un boîtier tous les 150 m, du début au bout : combien de boîtiers ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_defi&display=simple\n\n📏 Épisode 4 de la série Longueurs d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de câble reste-t-il ?"
+        ],
+        [
+          "00:06",
+          "Nathan, technicien fibre optique"
+        ],
+        [
+          "00:26",
+          "Un défi en étapes"
+        ],
+        [
+          "00:34",
+          "D'abord la même unité"
+        ],
+        [
+          "00:39",
+          "Les calculs"
+        ],
+        [
+          "00:52",
+          "Question 1"
+        ],
+        [
+          "01:23",
+          "Le piège : deux unités"
+        ],
+        [
+          "01:39",
+          "Question 2"
+        ],
+        [
+          "02:11",
+          "À toi de jouer"
+        ],
+        [
+          "02:29",
+          "Correction : intervalles et boîtiers"
+        ],
+        [
+          "02:50",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "problèmes de longueurs",
+        "défi",
+        "intervalles",
+        "kilomètre",
+        "mètre",
+        "fibre optique",
+        "longueurs",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:52",
+          "question": "Nathan relie 4 maisons, 35 mètres de câble par maison. Combien en tout ?",
+          "choix": [
+            "39 mètres",
+            "1 400 mètres",
+            "140 mètres"
+          ],
+          "reponse": 2,
+          "explication": "4 × 35 = 140 m de câble."
+        },
+        {
+          "t": "01:39",
+          "question": "Nathan coupe un câble de 6 mètres en morceaux de 75 centimètres. Combien de morceaux ?",
+          "choix": [
+            "8 morceaux",
+            "80 morceaux",
+            "12 morceaux"
+          ],
+          "reponse": 0,
+          "explication": "6 m = 600 cm, et 8 × 75 = 600 : 8 morceaux."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "construction"
+      ]
+    },
+    {
+      "id": "cm2-longueur-defi-short",
+      "pas_avant": "2027-04-05",
+      "notionId": "longueur",
+      "microId": "longueur_defi",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-longueur-defi",
+      "fichier": "cm2/maths/longueurs/04-defi/eleveai-maths-cm2-longueur-defi-short.mp4",
+      "miniature": "cm2/maths/longueurs/04-defi/eleveai-maths-cm2-longueur-defi-short-miniature.png",
+      "titre": "10 m de clôture, un ballon tous les 2 m : 5 ballons ? #maths #cm2",
+      "accroche": "Je décore la clôture du jardin : 10 m, un ballon tous les 2 m, du début jusqu'au bout. « 10 ÷ 2 : 5 ballons ! » J'accroche… et le dernier poteau reste tout nu !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 1 kilomètre, un drapeau tous les 250 mètres, du départ à l'arrivée. Combien de drapeaux ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #cm2",
+      "tags": [
+        "problèmes de longueurs",
+        "intervalles",
+        "ballons",
+        "clôture",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "longueurs",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Combien de ballons fallait-il ?",
+          "choix": [
+            "6 ballons",
+            "5 ballons",
+            "20 ballons"
+          ],
+          "reponse": 0,
+          "explication": "10 ÷ 2 = 5 espaces ; avec un ballon au début et un au bout : 6 ballons."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "art-design"
+      ]
     }
   ]
 }

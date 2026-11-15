@@ -240,6 +240,8 @@ class LongueurDefiBase(PaysageLongueurCM2):
         XL = -2.9
         l0 = VGroup(self.ligne([("Il installe", WHITE), ("la fibre optique :", WHITE)], 30, buff=0.15),
                     self.t("internet dans les maisons.", 30)).arrange(DOWN, aligned_edge=LEFT, buff=0.14)
+        # « fibre » : la ligature fi fait renoncer ligne_de_base → base posée à la main sur le « a » de « la »
+        l0[0][1].shift(UP * (l0[0][0][0].get_bottom()[1] - l0[0][1][1].get_bottom()[1]))
         gauche(l0, XL, 2.75)
         self.au_mot("Il installe")
         self.play(FadeIn(met[0], shift=DOWN * 0.1), FadeIn(l0[0][0], shift=UP * 0.1), run_time=0.25)
@@ -247,7 +249,7 @@ class LongueurDefiBase(PaysageLongueurCM2):
         self.play(FadeIn(l0[0][1], shift=UP * 0.1), FadeIn(met[1], shift=DOWN * 0.1), run_time=0.3)
         self.au_mot("internet dans les maisons")
         self.play(FadeIn(l0[1], shift=UP * 0.1), run_time=0.3)
-        bo = bobine(0.75).move_to(P(4.85, 2.35))
+        bo = bobine(0.75).move_to(P(5.3, 2.6))
         l1 = self.ligne([("Sa bobine :", WHITE), ("2,5 km", FIBRE), ("de câble.", WHITE)], 34, buff=0.18)
         gauche(l1, XL, 1.55)
         self.au_mot("une bobine")
@@ -259,9 +261,9 @@ class LongueurDefiBase(PaysageLongueurCM2):
         self.play(FadeIn(l1[2], shift=UP * 0.1), run_time=0.25)
         # les deux rues, à l'échelle
         r1 = rue(1200 * self.E)
-        gauche(r1, XL, -1.5)
+        gauche(r1, XL, -1.9)
         r2 = rue(850 * self.E)
-        gauche(r2, XL, -2.6)
+        gauche(r2, XL, -3.25)
         ms = VGroup(*[maison(0.62).next_to(r1, UP, buff=0.02).set_x(r1.get_left()[0] + x)
                       for x in (0.6, 2.0, 3.4, 4.5)])
         ms2 = VGroup(*[maison(0.62).next_to(r2, UP, buff=0.02).set_x(r2.get_left()[0] + x)
@@ -352,7 +354,7 @@ class LongueurDefiBase(PaysageLongueurCM2):
     # ── 04 : le calcul, avec le schéma en barre ─────────────────────────────
     def ecran_calcul(self):
         self.ecran("04-calcul")
-        ech = 0.0024  # 2 500 m = 6 unités
+        ech = 0.003  # 2 500 m = 7,5 unités
         b = barre([1200, 850, 450], ech, couleurs=(FIBRE, FIBRE2, "#475569"), h=0.7, inconnue=2)
         b.move_to(P(-0.6, 1.55))
         haut = Brace(b, UP, color=JAUNE_TITRE)
@@ -602,16 +604,18 @@ class LongueurDefiBase(PaysageLongueurCM2):
         self.play(FadeIn(l4[2], scale=1.2), LaggedStart(*[FadeIn(b, shift=DOWN * 0.1) for b in bxs[1:8]],
                                                        lag_ratio=0.08),
                   LaggedStart(*[FadeIn(n) for n in nb], lag_ratio=0.08), run_time=0.7)
-        mn = main_ouverte(0.85).move_to(P(-3.6, -1.35))
+        mn = main_ouverte(1.4)
+        d = mn[1]
+        y_num = max(x.get_top()[1] for x in d) + 0.36
+        gaps = VGroup(*[hors_audit(Text(str(k + 1), font_size=24, color=JAUNE_TITRE, weight=BOLD))
+                        .move_to(P((d[k].get_top()[0] + d[k + 1].get_top()[0]) / 2, y_num)) for k in range(4)])
+        VGroup(mn, gaps).move_to(P(-3.6, 0)).align_to(P(0, 0.6), UP)
         l5 = self.t("Comme les doigts d'une main :", 32)
         self.col(l5, -1.35, XP)
         self.au_mot("Comme les doigts")
         self.play(FadeIn(l5, shift=UP * 0.1), FadeIn(mn, shift=UP * 0.2), run_time=0.35)
-        l6 = self.ligne([("4 espaces,", WHITE), ("5 doigts.", JAUNE_TITRE)], 40, buff=0.25)
+        l6 = self.ligne([("4 espaces,", WHITE), ("5 doigts.", JAUNE_TITRE)], 36, buff=0.22)
         self.col(l6, -2.05, XP)
-        d = mn[1]
-        gaps = VGroup(*[hors_audit(Text(str(k + 1), font_size=20, color=JAUNE_TITRE, weight=BOLD))
-                        .move_to((d[k].get_top() + d[k + 1].get_top()) / 2 + DOWN * 0.15) for k in range(4)])
         self.au_mot("4 espaces")
         self.play(FadeIn(l6[0], shift=UP * 0.1), LaggedStart(*[FadeIn(g) for g in gaps], lag_ratio=0.15),
                   run_time=0.4)
@@ -634,7 +638,7 @@ class LongueurDefiBase(PaysageLongueurCM2):
         lignes = self.finale_gauche(fig, textes=[
             ("Dans un défi de longueurs :", "d'abord la même unité,"),
             ("puis les calculs,", "étape par étape."),
-            ("Quand on compte les deux bouts :", "un objet de plus que d'espaces.")], fs=32)
+            ("Quand on compte les deux bouts :", "un objet de plus que d'espaces.")], fs=32, x_fig=-4.65, xl=-2.6)
         self.add(fig)
         self.au_mot("Dans un défi")
         self.montrer_ligne(lignes[0], Indicate(fig, scale_factor=1.05))
