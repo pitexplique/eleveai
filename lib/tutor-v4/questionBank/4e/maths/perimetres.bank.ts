@@ -26,10 +26,13 @@
 import type { TutorBankItemV4, TutorGeneratedQuestionV4 } from "@/lib/tutor-v4/types";
 import type {
   CercleCanvasData,
+  ConstructionCanvasData,
   QuadrilatereCanvasData,
   TriangleCanvasData,
 } from "@/lib/tutor-v4/types_canvas";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
+import { polygoneRegulier } from "@/lib/canvas/construction";
+import { lirePave } from "@/lib/tutor-v4/paveNumerique";
 
 type Q = TutorGeneratedQuestionV4;
 
@@ -422,9 +425,9 @@ function rectCanvas(nom: string, L: number, l: number, labL: string, labl: strin
       C: { x: x0 + W, y: y0 + H },
       D: { x: x0, y: y0 + H },
     },
-    labels: { A: nom[0], B: nom[1], C: nom[2], D: nom[3] },
+    labels: { A: nom[0] ?? "", B: nom[1] ?? "", C: nom[2] ?? "", D: nom[3] ?? "" },
     sideLabels: { AB: labL, BC: labl },
-    display: { showPoints: true, showLabels: true, showSides: true, showAngles: false, showDiagonals: false },
+    display: { showPoints: !!nom, showLabels: !!nom, showSides: true, showAngles: false, showDiagonals: false },
     marks: { rightAnglesAt: ["A", "B", "C", "D"] },
     size: { width: W + 80, height: H + 80 },
   };
@@ -442,9 +445,9 @@ function carreCanvas(nom: string, lab: string): QuadrilatereCanvasData {
       C: { x: x0 + c, y: y0 + c },
       D: { x: x0, y: y0 + c },
     },
-    labels: { A: nom[0], B: nom[1], C: nom[2], D: nom[3] },
+    labels: { A: nom[0] ?? "", B: nom[1] ?? "", C: nom[2] ?? "", D: nom[3] ?? "" },
     sideLabels: { AB: lab },
-    display: { showPoints: true, showLabels: true, showSides: true, showAngles: false, showDiagonals: false },
+    display: { showPoints: !!nom, showLabels: !!nom, showSides: true, showAngles: false, showDiagonals: false },
     marks: {
       rightAnglesAt: ["A", "B", "C", "D"],
       equalSides: [["AB", "BC"], ["BC", "CD"], ["CD", "DA"]],
@@ -473,9 +476,9 @@ function triCanvas(
   return {
     kind: "triangle",
     points: { A: { x: px(0), y: py(0) }, B: { x: px(ab), y: py(0) }, C: { x: px(x), y: py(y) } },
-    labels: { A: nom[0], B: nom[1], C: nom[2] },
+    labels: { A: nom[0] ?? "", B: nom[1] ?? "", C: nom[2] ?? "" },
     sideLabels: labs,
-    display: { showPoints: true, showLabels: true, showSides: true, showAngles: false },
+    display: { showPoints: !!nom, showLabels: !!nom, showSides: true, showAngles: false },
     ...(egaux ? { marks: { equalSides: egaux } } : {}),
     size: { width: Math.max(220, Math.round((maxX - minX) * s) + 60), height: Math.max(140, Math.round(y * s) + 60) },
   };
@@ -523,6 +526,148 @@ function cercleCanvas(type: "rayon" | "diametre", label: string): CercleCanvasDa
       showDiameter: type === "diametre",
     },
   };
+}
+
+/* ---------------------------------------------------------------------------
+   ⭐ 15/11/2026 — DES DESSINS PARTOUT (robustesse du coach 4e) : polygones
+   cotés, figures composées, deux figures côte à côte, avec le canvas
+   `construction` (coordonnées de maths, y vers le haut, cadre ajusté seul).
+   ⛔ Le dessin porte les DONNÉES de l'énoncé, jamais la réponse (« ? » au plus).
+--------------------------------------------------------------------------- */
+type Pt = { x: number; y: number };
+const pt = (x: number, y: number): Pt => ({ x, y });
+/** « 12,5 cm » : une mesure écrite sur le dessin (texte simple, sans LaTeX). */
+const cm = (n: number, u: string) => `${fr(n)} ${u}`;
+
+type Trace = {
+  /** Le contour, sommet après sommet. */
+  pts: Pt[];
+  /** Une lettre par sommet ; absent : sommets sans nom. */
+  noms?: string;
+  /** Le texte du côté i (du sommet i au sommet i + 1). */
+  cotes?: (string | undefined)[];
+  /** Codage des longueurs égales (1, 2 ou 3 tirets) du côté i. */
+  codes?: (number | undefined)[];
+  /** Les sommets à angle droit. */
+  droits?: number[];
+  /** Les côtés du contour qui ne sont PAS sur le bord (tracés en pointillés). */
+  interieurs?: number[];
+  fond?: string;
+};
+type Arc = { centre: Pt; de: Pt; vers: Pt; eviter: Pt };
+
+function construire(traces: Trace[], description: string, arcs: Arc[] = []): ConstructionCanvasData {
+  const points: ConstructionCanvasData["points"] = [];
+  const segments: NonNullable<ConstructionCanvasData["segments"]> = [];
+  const polygones: NonNullable<ConstructionCanvasData["polygones"]> = [];
+  const angles: NonNullable<ConstructionCanvasData["angles"]> = [];
+  let k = 0;
+  const pid = (p: Pt, nom?: string) => {
+    const id = `p${k++}`;
+    points.push({ id, x: arrondi(p.x, 4), y: arrondi(p.y, 4), ...(nom ? { nom } : { cache: true }) });
+    return id;
+  };
+  for (const t of traces) {
+    const ids = t.pts.map((p, i) => pid(p, t.noms?.[i]));
+    const n = ids.length;
+    polygones.push({ sommets: ids, fond: t.fond ?? "#dbeafe", contour: "none" });
+    ids.forEach((id, i) => {
+      const texte = t.cotes?.[i];
+      const code = t.codes?.[i];
+      segments.push({
+        a: id,
+        b: ids[(i + 1) % n],
+        ...(t.interieurs?.includes(i) ? { pointille: true } : {}),
+        ...(texte ? { texte } : {}),
+        ...(code ? { code } : {}),
+      });
+    });
+    for (const i of t.droits ?? []) angles.push({ sommet: ids[i], de: ids[(i + n - 1) % n], vers: ids[(i + 1) % n], droit: true, couleur: "#0f172a" });
+  }
+  const lesArcs = arcs.map((a) => {
+    // Le sommet de l'arc, point caché : le cadre (calculé sur les points) le contient.
+    const r = Math.hypot(a.de.x - a.centre.x, a.de.y - a.centre.y);
+    const d = Math.hypot(a.centre.x - a.eviter.x, a.centre.y - a.eviter.y) || 1;
+    pid(pt(a.centre.x + ((a.centre.x - a.eviter.x) / d) * r, a.centre.y + ((a.centre.y - a.eviter.y) / d) * r));
+    return { centre: pid(a.centre), de: pid(a.de), vers: pid(a.vers), eviter: pid(a.eviter), couleur: "#0f172a" };
+  });
+  return {
+    kind: "construction",
+    points,
+    polygones,
+    segments,
+    ...(angles.length ? { angles } : {}),
+    ...(lesArcs.length ? { arcs: lesArcs } : {}),
+    description,
+  };
+}
+
+/** Un rectangle de L sur l, posé à (x0, y0). */
+const ptsRect = (L: number, l: number, x0 = 0, y0 = 0): Pt[] => [pt(x0, y0), pt(x0 + L, y0), pt(x0 + L, y0 + l), pt(x0, y0 + l)];
+
+/** Le rectangle coté (sans noms si `noms` est vide). */
+function traceRect(L: number, l: number, labL: string, labl: string, noms = "", x0 = 0, y0 = 0): Trace {
+  return { pts: ptsRect(L, l, x0, y0), noms: noms || undefined, cotes: [labL, labl], droits: [0, 1, 2, 3] };
+}
+function traceCarre(c: number, lab: string, noms = "", x0 = 0, y0 = 0): Trace {
+  return { pts: ptsRect(c, c, x0, y0), noms: noms || undefined, cotes: [lab], codes: [1, 1, 1, 1], droits: [0, 1, 2, 3] };
+}
+/** Le triangle construit à partir de ses trois côtés (AB en bas, puis BC, CA). */
+function traceTri(ab: number, bc: number, ca: number, labs: (string | undefined)[], noms = "", codes?: (number | undefined)[], x0 = 0): Trace {
+  const x = (ca * ca + ab * ab - bc * bc) / (2 * ab);
+  const y = Math.sqrt(Math.max(0, ca * ca - x * x));
+  return { pts: [pt(x0, 0), pt(x0 + ab, 0), pt(x0 + x, y)], noms: noms || undefined, cotes: labs, codes, fond: "#fef3c7" };
+}
+
+/**
+ * Le polygone INSCRIT dans un cercle qui a exactement ces côtés (le premier en
+ * bas, à l'horizontale). null si le centre tomberait hors du polygone (un côté
+ * trop long) : on retire alors d'autres côtés.
+ */
+function polygoneInscrit(cotes: number[]): Pt[] | null {
+  const m = Math.max(...cotes);
+  const f = (R: number) => cotes.reduce((s, a) => s + 2 * Math.asin(Math.min(1, a / (2 * R))), 0) - 2 * Math.PI;
+  if (f(m / 2) < 0) return null;
+  let lo = m / 2;
+  let hi = 100 * m;
+  for (let i = 0; i < 60; i++) {
+    const mid = (lo + hi) / 2;
+    if (f(mid) > 0) lo = mid;
+    else hi = mid;
+  }
+  const R = (lo + hi) / 2;
+  const th = cotes.map((a) => 2 * Math.asin(Math.min(1, a / (2 * R))));
+  let t = -Math.PI / 2 - th[0] / 2;
+  return cotes.map((_, i) => {
+    const p = pt(R * Math.cos(t), R * Math.sin(t));
+    t += th[i];
+    return p;
+  });
+}
+
+/** Un polygone régulier (ou un losange) de n côtés, un côté coté, tous codés. */
+function traceRegulier(n: number, lab: string, losange = false, noms = ""): Trace {
+  const pts = losange
+    ? [pt(0, -3), pt(4, 0), pt(0, 3), pt(-4, 0)]
+    : polygoneRegulier(n, 3, -90 - 180 / n);
+  return {
+    pts,
+    noms: noms || undefined,
+    cotes: [lab],
+    codes: pts.map(() => 1),
+    ...(n === 4 && !losange ? { droits: [0, 1, 2, 3] } : {}),
+  };
+}
+
+/** Une figure nue (sans mesure) pour les questions de vocabulaire. */
+function formeNue(fig: string): ConstructionCanvasData {
+  if (fig === "rect") return construire([{ pts: ptsRect(6, 3.5), droits: [0, 1, 2, 3] }], "Un rectangle");
+  if (fig === "carre") return construire([{ pts: ptsRect(4, 4), codes: [1, 1, 1, 1], droits: [0, 1, 2, 3] }], "Un carré");
+  if (fig === "tri") return construire([{ pts: [pt(0, 0), pt(6, 0), pt(2, 4)], fond: "#fef3c7" }], "Un triangle");
+  if (fig === "poly") return construire([{ pts: polygoneInscrit([4, 3, 3.5, 2.5, 3])! }], "Un polygone à cinq côtés");
+  if (fig === "disque")
+    return { kind: "construction", points: [{ id: "O", x: 0, y: 0, cache: true }], cercles: [{ centre: "O", rayon: 3, fond: "#dbeafe" }], description: "Un disque" };
+  return construire([{ pts: [pt(0, 0), pt(6, 0), pt(6, 2), pt(3, 2), pt(3, 4), pt(0, 4)] }], "Une figure en L");
 }
 
 /* ---------------------------------------------------------------------------
@@ -624,20 +769,21 @@ const SITUATIONS: { s: string; g: "p" | "a" }[] = [
 
 // 03/11/2026 (règle des longueurs) : ★1 SANS situation de vie, en 12 mots au
 // plus ; les situations (clôturer, carreler…) passent au gabarit ★3.
-const SITUATIONS_SIMPLES: { s: string; g: "p" | "a" }[] = [
-  { s: "faire le tour d’un rectangle", g: "p" },
-  { s: "mesurer le bord d’un carré", g: "p" },
-  { s: "suivre le contour d’un triangle", g: "p" },
-  { s: "repasser le contour d’une figure", g: "p" },
-  { s: "entourer une figure d’un trait", g: "p" },
-  { s: "additionner les côtés d’un polygone", g: "p" },
-  { s: "mesurer le tour d’un disque", g: "p" },
-  { s: "colorier l’intérieur d’un rectangle", g: "a" },
-  { s: "compter les carreaux dans un carré", g: "a" },
-  { s: "hachurer la surface d’un triangle", g: "a" },
-  { s: "paver un rectangle de carreaux", g: "a" },
-  { s: "remplir une figure de petits carrés", g: "a" },
-  { s: "couvrir l’intérieur d’un disque", g: "a" },
+// 15/11/2026 : `fig` = la figure dessinée à côté de la question (nue, sans mesure).
+const SITUATIONS_SIMPLES: { s: string; g: "p" | "a"; fig: string }[] = [
+  { s: "faire le tour d’un rectangle", g: "p", fig: "rect" },
+  { s: "mesurer le bord d’un carré", g: "p", fig: "carre" },
+  { s: "suivre le contour d’un triangle", g: "p", fig: "tri" },
+  { s: "repasser le contour d’une figure", g: "p", fig: "L" },
+  { s: "entourer une figure d’un trait", g: "p", fig: "L" },
+  { s: "additionner les côtés d’un polygone", g: "p", fig: "poly" },
+  { s: "mesurer le tour d’un disque", g: "p", fig: "disque" },
+  { s: "colorier l’intérieur d’un rectangle", g: "a", fig: "rect" },
+  { s: "compter les carreaux dans un carré", g: "a", fig: "carre" },
+  { s: "hachurer la surface d’un triangle", g: "a", fig: "tri" },
+  { s: "paver un rectangle de carreaux", g: "a", fig: "rect" },
+  { s: "remplir une figure de petits carrés", g: "a", fig: "L" },
+  { s: "couvrir l’intérieur d’un disque", g: "a", fig: "disque" },
 ];
 const METIERS = [
   { p: "Une paysagiste", f: true },
@@ -654,7 +800,7 @@ const quiCtx = (): { p: string; f: boolean } => (Math.random() < 0.5 ? randomCho
 
 function compGrandeur(simple = true): Q {
   if (simple) {
-    const { s: s0, g: g0 } = randomChoice(SITUATIONS_SIMPLES);
+    const { s: s0, g: g0, fig: fig0 } = randomChoice(SITUATIONS_SIMPLES);
     const peri0 = g0 === "p";
     const f0 = randomChoice([
       () => ({ text: `${cap(s0)} : périmètre ou aire ?`, ok: peri0 ? "un périmètre" : "une aire", faux: [peri0 ? "une aire" : "un périmètre", "un volume", "une durée"] }),
@@ -674,6 +820,7 @@ function compGrandeur(simple = true): Q {
         `le résultat s’exprimera ${peri0 ? "en m ou en cm (une longueur)" : "en m² ou en cm² (une aire)"}.`,
         `il faut calculer ${peri0 ? "le périmètre" : "l’aire"}.`
       ),
+      canvas: formeNue(fig0),
     };
   }
   const { s, g } = randomChoice(SITUATIONS);
@@ -793,21 +940,32 @@ function compPolygone(simple = true): Q {
   const u = simple ? randomChoice(["mm", "cm", "m"]) : lieu.u;
   const r = simple ? [3, 20] : lieu.r;
   let cotes: number[] = [];
-  for (let k = 0; k < 100; k++) {
+  // 15/11/2026 : des côtés qui se DESSINENT (polygone inscrit, voir `polygoneInscrit`).
+  let forme: Pt[] | null = null;
+  for (let k = 0; k < 200; k++) {
     cotes = Array.from({ length: poly.n }, () => randomInt(r[0], r[1]));
     const m = Math.max(...cotes);
-    if (cotes.reduce((s, x) => s + x, 0) - m > m) break;
+    if (cotes.reduce((s, x) => s + x, 0) - m <= m) continue;
+    forme = polygoneInscrit(cotes);
+    if (forme) break;
+  }
+  if (!forme) {
+    cotes = Array.from({ length: poly.n }, (_, i) => r[0] + 2 + (i % 3));
+    forme = polygoneInscrit(cotes)!;
   }
   const P = cotes.reduce((s, x) => s + x, 0);
   const nom = randomChoice(POLY_NOMS).slice(0, poly.n);
   const mes = cotes.map((c) => q(c, u));
   const segs = cotes.map((c, i) => `${nom[i]}${nom[(i + 1) % poly.n]} $=$ ${q(c, u)}`);
   const du = poly.n === 6 ? "de l’" : "du ";
+  // 15/11/2026 : à ★2, les côtés sont SUR LA FIGURE (la liste faisait 17 mots).
   const text = simple ? randomChoice([
-    `Côtés ${du}${poly.nom} : ${liste(mes)}. Périmètre en ${u} ?`,
-    `Périmètre d’un ${poly.nom} de côtés ${liste(mes)}, en ${u} ?`,
-    `Un ${poly.nom} a pour côtés ${liste(mes)}. Périmètre en ${u} ?`,
-    `Additionne les côtés ${du}${poly.nom} : ${liste(mes)}, en ${u}.`,
+    `Calcule le périmètre ${du}${poly.nom} ${nom}, en ${u}.`,
+    `Quel est le périmètre ${du}${poly.nom} ${nom}, en ${u} ?`,
+    `Lis les côtés ${du}${poly.nom} ${nom}. Périmètre en ${u} ?`,
+    `Additionne les côtés ${du}${poly.nom} ${nom}, en ${u}.`,
+    `Périmètre ${du}${poly.nom} ${nom} dessiné, en ${u} ?`,
+    `Le tour ${du}${poly.nom} ${nom} mesure combien de ${UMOT[u]} ?`,
   ]) : randomChoice([
     `${poly.n === 6 ? "L’" : "Le "}${poly.nom} ${nom} a des côtés de ${liste(mes)}. Quel est son périmètre ?`,
     `Calcule le périmètre d’un ${poly.nom} dont les côtés mesurent ${liste(mes)}.`,
@@ -827,6 +985,7 @@ function compPolygone(simple = true): Q {
       `$${cotes.map(T).join(" + ")} = ${T(P)}$.`,
       `le périmètre est ${q(P, u)}.`
     ),
+    canvas: construire([{ pts: forme, noms: nom, cotes: cotes.map((c) => cm(c, u)) }], `Un ${poly.nom} et ses côtés`),
   };
 }
 
@@ -883,6 +1042,7 @@ function compRegulier(simple = true): Q {
       `$${fig.n} \\times ${T(c)} = ${T(P)}$.`,
       `le périmètre est ${q(P, u)}.`
     ),
+    canvas: construire([traceRegulier(fig.n, cm(c, u), fig.fig === "un losange")], `${cap(fig.fig)} aux côtés codés égaux`),
   };
 }
 
@@ -1001,6 +1161,37 @@ function rectTexte(): Q {
       `$2 \\times (${T(L)} + ${T(l)}) = 2 \\times ${T(L + l)} = ${T(P)}$.`,
       `le périmètre est ${q(P, u)}.`
     ),
+    ...(Math.random() < 0.6 ? { canvas: rectCanvas("", L, l, cm(L, u), cm(l, u)) } : {}),
+  };
+}
+
+/** ★1 (15/11/2026) : le périmètre du rectangle dessiné, en QCM ; les distracteurs sont les erreurs d'élève. */
+function rectQcm(): Q {
+  const nom = randomChoice(RECT_NOMS);
+  const u = randomChoice(["mm", "cm", "m", "dm"]);
+  const L = randomInt(4, 13);
+  const l = randomInt(2, L - 1);
+  const P = 2 * (L + l);
+  const ok = `${P} ${u}`;
+  const faux = [`${L + l} ${u}`, `${L * l} ${u}`, `${2 * L + l} ${u}`, `${4 * L} ${u}`, `${P + 2} ${u}`];
+  return {
+    text: randomChoice([
+      `Quel est le périmètre du rectangle ${nom}, en ${u} ?`,
+      `Choisis le périmètre du rectangle ${nom}, en ${u}.`,
+      `${nom} est un rectangle. Son périmètre, en ${u} ?`,
+      `Le périmètre de ${nom}, en ${u}, vaut…`,
+    ]),
+    format: "qcm",
+    choices: makeChoices(ok, faux),
+    expected: [ok],
+    comparator: "mcq_exact",
+    explanation: E(
+      DEF_P,
+      "deux longueurs et deux largeurs : $P = 2 \\times (L + l)$ (et non $L + l$, qui n’est que la moitié du tour, ni $L \\times l$, qui est l’aire).",
+      `$2 \\times (${T(L)} + ${T(l)}) = ${T(P)}$.`,
+      `le périmètre du rectangle ${nom} est ${q(P, u)}.`
+    ),
+    canvas: rectCanvas(nom, L, l, cm(L, u), cm(l, u)),
   };
 }
 
@@ -1051,6 +1242,7 @@ function rectObjet(simple = true): Q {
         `$2 \\times (${T(L0)} + ${T(l0)}) = 2 \\times ${T(L0 + l0)} = ${T(P0)}$.`,
         `le périmètre du rectangle ${nom0} est ${q(P0, u0)}.`
       ),
+      canvas: rectCanvas(nom0, L0, l0, cm(L0, u0), cm(l0, u0)),
     };
   }
   const o = randomChoice(OBJ_RECT);
@@ -1081,6 +1273,7 @@ function rectObjet(simple = true): Q {
       `$2 \\times (${T(L)} + ${T(l)}) = 2 \\times ${T(L + l)} = ${T(P)}$.`,
       `le périmètre est ${q(P, o.u)}.`
     ),
+    canvas: rectCanvas("", L, l, cm(L, o.u), cm(l, o.u)),
   };
 }
 
@@ -1109,6 +1302,7 @@ function rectMateriau(simple = true): Q {
         `$2 \\times (${T(L0)} + ${T(l0)}) = 2 \\times ${T(L0 + l0)} = ${T(P0)}$.`,
         `le tour mesure ${q(P0, u0)}.`
       ),
+      ...(Math.random() < 0.6 ? { canvas: rectCanvas("", L0, l0, cm(L0, u0), cm(l0, u0)) } : {}),
     };
   }
   const c = randomChoice(CONTOURS);
@@ -1134,6 +1328,7 @@ function rectMateriau(simple = true): Q {
       `$2 \\times (${T(L)} + ${T(l)}) = 2 \\times ${T(L + l)} = ${T(P)}$.`,
       `il faut ${q(P, u)} ${deNu(c.mat)}.`
     ),
+    canvas: rectCanvas("", L, l, cm(L, u), cm(l, u)),
   };
 }
 
@@ -1165,6 +1360,7 @@ function rectConversion(): Q {
       `$2 \\times (${T(L)} + ${T(l)}) = ${T(P)}$ cm${ua === "m" ? `, soit ${q(res, "m")}` : ""}.`,
       `il faut ${q(res, ua)} ${deNu(c.mat)}.`
     ),
+    canvas: rectCanvas("", L, l, enM === "L" ? cm(L / 100, "m") : cm(L, "cm"), enM === "l" ? cm(l / 100, "m") : cm(l, "cm")),
   };
 }
 
@@ -1203,6 +1399,7 @@ function rectInverse(): Q {
       `${text.startsWith("Avec") ? `${q(P / 100, "m")} $=$ ${q(P, "cm")} ; ` : ""}$${T(P)} \\div 2 = ${T(P / 2)}$ ; $${T(P / 2)} - ${T(connu)} = ${T(res)}$.`,
       `la ${motCherche} mesure ${q(res, ua)}.`
     ),
+    canvas: rectCanvas("", L, l, chercheLarg ? cm(L, u) : "?", chercheLarg ? "?" : cm(l, u)),
   };
 }
 
@@ -1275,6 +1472,7 @@ function carreObjet(simple = true): Q {
       expected: rep(P0, u0),
       comparator: "number_equal",
       explanation: E(DEF_P, "un carré a 4 côtés égaux : $P = 4 \\times c$.", `$4 \\times ${T(c0)} = ${T(P0)}$.`, `le périmètre est ${q(P0, u0)}.`),
+      canvas: carreCanvas("", cm(c0, u0)),
     };
   }
   const o = randomChoice(OBJ_CARRE);
@@ -1293,6 +1491,35 @@ function carreObjet(simple = true): Q {
     expected: rep(P, o.u),
     comparator: "number_equal",
     explanation: E(DEF_P, "un carré a 4 côtés égaux : $P = 4 \\times c$.", `$4 \\times ${T(c)} = ${T(P)}$.`, `le périmètre est ${q(P, o.u)}.`),
+    canvas: carreCanvas("", cm(c, o.u)),
+  };
+}
+
+/** ★2 (15/11/2026) : le périmètre du carré dessiné, en QCM ; aire et demi-tour en distracteurs. */
+function carreQcm(): Q {
+  const nom = randomChoice(RECT_NOMS);
+  const u = randomChoice(["mm", "cm", "m", "dm"]);
+  const c = randomChoice([3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 18, 20, 25]);
+  const ok = `${4 * c} ${u}`;
+  const faux = [`${c * c} ${u}`, `${2 * c} ${u}`, `${c + 4} ${u}`, `${3 * c} ${u}`];
+  return {
+    text: randomChoice([
+      `Quel est le périmètre du carré ${nom}, en ${u} ?`,
+      `Choisis le périmètre du carré ${nom}, en ${u}.`,
+      `${nom} est un carré. Son périmètre, en ${u}, vaut…`,
+      `Les codages montrent un carré. Périmètre de ${nom} en ${u} ?`,
+    ]),
+    format: "qcm",
+    choices: makeChoices(ok, faux),
+    expected: [ok],
+    comparator: "mcq_exact",
+    explanation: E(
+      DEF_P,
+      "un carré a 4 côtés égaux : $P = 4 \\times c$ (et non $c \\times c$, qui est l’aire).",
+      `$4 \\times ${T(c)} = ${T(4 * c)}$.`,
+      `le périmètre du carré ${nom} est ${q(4 * c, u)}.`
+    ),
+    canvas: carreCanvas(nom, cm(c, u)),
   };
 }
 
@@ -1319,6 +1546,7 @@ function carreMateriau(simple = true): Q {
       expected: rep(P0, u0),
       comparator: "number_equal",
       explanation: E(DEF_P, "on fait le tour d’un carré : $P = 4 \\times c$.", `$4 \\times ${T(c0)} = ${T(P0)}$.`, `le tour mesure ${q(P0, u0)}.`),
+      ...(Math.random() < 0.6 ? { canvas: carreCanvas("", cm(c0, u0)) } : {}),
     };
   }
   const ctx = randomChoice(CONTOURS_CARRES);
@@ -1342,6 +1570,7 @@ function carreMateriau(simple = true): Q {
     expected: rep(P, u),
     comparator: "number_equal",
     explanation: E(DEF_P, "on fait le tour d’un carré : $P = 4 \\times c$.", `$4 \\times ${T(c)} = ${T(P)}$.`, `il faut ${q(P, u)} ${deNu(ctx.mat)}.`),
+    canvas: carreCanvas("", cm(c, u)),
   };
 }
 
@@ -1366,6 +1595,7 @@ function carreInverse(): Q {
     expected: rep(c, u),
     comparator: "number_equal",
     explanation: E("pour un carré, $P = 4 \\times c$.", "on divise le périmètre par 4.", `$${T(P)} \\div 4 = ${T(c)}$.`, `le côté mesure ${q(c, u)}.`),
+    canvas: carreCanvas("", "?"),
   };
 }
 
@@ -1426,6 +1656,7 @@ function carreProbleme(): Q {
       expected: rep(res, "m"),
       comparator: "number_equal",
       explanation: E(DEF_P, "on calcule le tour complet, puis on retire la largeur de l’ouverture.", `$4 \\times ${T(c)} = ${T(4 * c)}$ ; $${T(4 * c)} - ${T(g)} = ${T(res)}$.`, `il faut ${q(res, "m")} ${deNu(ctx.mat)}.`),
+      canvas: carreCanvas("", cm(c, "m")),
     };
   }
   const lieu = randomChoice(LIEUX_TOUR);
@@ -1529,6 +1760,30 @@ function triTexte(): Q {
   };
 }
 
+/** ★1 (15/11/2026) : le périmètre du triangle dessiné, en QCM. */
+function triQcm(): Q {
+  const nom = randomChoice(TRI_NOMS);
+  const u = randomChoice(["mm", "cm", "m"]);
+  const [a, b, c] = cotesTriangle(3, 12);
+  const P = a + b + c;
+  const ok = `${P} ${u}`;
+  const faux = [`${a + b} ${u}`, `${b + c} ${u}`, `${P + Math.max(a, b, c)} ${u}`, `${2 * (a + b)} ${u}`, `${P - 1} ${u}`];
+  return {
+    text: randomChoice([
+      `Quel est le périmètre du triangle ${nom}, en ${u} ?`,
+      `Choisis le périmètre du triangle ${nom}, en ${u}.`,
+      `Le tour du triangle ${nom} mesure, en ${u}…`,
+      `Additionne les trois côtés de ${nom}. Périmètre en ${u} ?`,
+    ]),
+    format: "qcm",
+    choices: makeChoices(ok, faux),
+    expected: [ok],
+    comparator: "mcq_exact",
+    explanation: E(DEF_P, "un triangle a trois côtés : on les additionne TOUS, chacun une fois.", `$${T(a)} + ${T(b)} + ${T(c)} = ${T(P)}$.`, `le périmètre est ${q(P, u)}.`),
+    canvas: triCanvas(nom, a, b, c, { AB: cm(a, u), BC: cm(b, u), CA: cm(c, u) }),
+  };
+}
+
 const OBJ_TRI: { gn: string; u: string; r: [number, number] }[] = [
   { gn: "une voile de bateau", u: "m", r: [2, 8] },
   { gn: "un fanion", u: "cm", r: [15, 40] },
@@ -1615,6 +1870,7 @@ function triEquilateral(simple = true): Q {
     expected: rep(P, o.u),
     comparator: "number_equal",
     explanation: E("un triangle équilatéral a trois côtés égaux.", "$P = 3 \\times$ côté.", `$3 \\times ${T(c)} = ${T(P)}$.`, `le périmètre est ${q(P, o.u)}.`),
+    canvas: triCanvas(text.includes(nom) ? nom : "", c, c, c, { AB: cm(c, o.u) }, [["AB", "BC"], ["BC", "CA"]]),
   };
 }
 
@@ -1686,6 +1942,7 @@ function triIsoceleProbleme(): Q {
       `$2 \\times ${T(s)} + ${T(base)} = ${T(P)}$.`,
       `le périmètre est ${q(P, o.u)}.`
     ),
+    canvas: triCanvas("", base, s, s, { AB: conv ? cm(base * 100, "cm") : cm(base, o.u), CA: cm(s, o.u) }, [["BC", "CA"]]),
   };
 }
 
@@ -1707,6 +1964,7 @@ function triInverse(): Q {
       format: "short",
       expected: rep(c, u),
       comparator: "number_equal",
+      canvas: triCanvas(text.includes(nom) ? nom : "", a, b, c, { AB: cm(a, u), BC: cm(b, u), CA: "?" }),
       explanation: E("le périmètre est la somme des trois côtés.", "on retire du périmètre les deux côtés connus.", `$${T(P)} - ${T(a)} - ${T(b)} = ${T(c)}$.`, `le troisième côté mesure ${q(c, u)}.`),
     };
   }
@@ -1724,6 +1982,7 @@ function triInverse(): Q {
       format: "short",
       expected: rep(c, o.u),
       comparator: "number_equal",
+      canvas: triCanvas("", c, c, c, { AB: "?" }, [["AB", "BC"], ["BC", "CA"]]),
       explanation: E("un triangle équilatéral a trois côtés égaux.", "côté $=$ périmètre $\\div 3$.", `$${T(P)} \\div 3 = ${T(c)}$.`, `le côté mesure ${q(c, o.u)}.`),
     };
   }
@@ -1740,6 +1999,7 @@ function triInverse(): Q {
       format: "short",
       expected: rep(base, u),
       comparator: "number_equal",
+      canvas: triCanvas(text.includes(nom) ? nom : "", base, s, s, { AB: "?", CA: cm(s, u) }, [["BC", "CA"]]),
       explanation: E("un triangle isocèle a deux côtés égaux.", "base $=$ périmètre $- 2 \\times$ côté égal.", `$${T(P)} - 2 \\times ${T(s)} = ${T(P)} - ${T(2 * s)} = ${T(base)}$.`, `la base mesure ${q(base, u)}.`),
     };
   }
@@ -1752,6 +2012,7 @@ function triInverse(): Q {
     format: "short",
     expected: rep(s, u),
     comparator: "number_equal",
+    canvas: triCanvas(text.includes(nom) ? nom : "", base, s, s, { AB: cm(base, u), CA: "?" }, [["BC", "CA"]]),
     explanation: E("un triangle isocèle a deux côtés égaux.", "on retire la base, puis on partage en deux.", `$${T(P)} - ${T(base)} = ${T(2 * s)}$ ; $${T(2 * s)} \\div 2 = ${T(s)}$.`, `chaque côté égal mesure ${q(s, u)}.`),
   };
 }
@@ -1783,6 +2044,14 @@ function composeToit(): Q {
     const s = randomInt(Math.ceil(L * 0.6) + 1, L);
     const P = L + 2 * h + 2 * s;
     const u = o.u;
+    const ht = Math.sqrt(Math.max(0.01, s * s - (L / 2) * (L / 2)));
+    const dessin = construire(
+      [
+        { pts: ptsRect(L, h), cotes: [cm(L, u), cm(h, u)], interieurs: [2], droits: [0, 1] },
+        { pts: [pt(0, h), pt(L, h), pt(L / 2, h + ht)], cotes: [undefined, cm(s, u)], codes: [undefined, 1, 1], interieurs: [0], fond: "#fef3c7" },
+      ],
+      "Un rectangle surmonté d’un triangle isocèle"
+    );
     const text = randomChoice([
       `On modélise ${o.gn} par un rectangle de ${q(L, u)} de large et ${q(h, u)} de haut, surmonté d’un triangle isocèle dont les côtés égaux mesurent ${q(s, u)}. Quel est le périmètre de la figure obtenue ?`,
       `${cap(o.gn)} : un rectangle (largeur ${q(L, u)}, hauteur ${q(h, u)}) et, posé dessus, un toit en triangle isocèle de côtés ${q(s, u)}. Calcule la longueur du contour.`,
@@ -1794,11 +2063,12 @@ function composeToit(): Q {
       expected: rep(P, u),
       comparator: "number_equal",
       explanation: E(
-        `${DEF_P} Le côté commun au rectangle et au triangle est À L’INTÉRIEUR : il ne compte pas.`,
+        `${DEF_P} Le côté commun au rectangle et au triangle (en pointillés) est À L’INTÉRIEUR : il ne compte pas.`,
         "on fait le tour : le bas du rectangle, ses deux côtés verticaux, puis les deux côtés du toit.",
         `$${T(L)} + 2 \\times ${T(h)} + 2 \\times ${T(s)} = ${T(L)} + ${T(2 * h)} + ${T(2 * s)} = ${T(P)}$.`,
         `le périmètre est ${q(P, u)}.`
       ),
+      canvas: dessin,
     };
   }
   const o = randomChoice(FLECHES);
@@ -1806,6 +2076,13 @@ function composeToit(): Q {
   const l = randomInt(o.l[0], o.l[1]);
   const P = 2 * L + 3 * l;
   const u = o.u;
+  const dessin = construire(
+    [
+      { pts: ptsRect(L, l), cotes: [cm(L, u), undefined, undefined, cm(l, u)], codes: [undefined, 1, undefined, 1], interieurs: [1], droits: [0, 1, 2, 3] },
+      { pts: [pt(L, 0), pt(L + (l * Math.sqrt(3)) / 2, l / 2), pt(L, l)], codes: [1, 1, 1], interieurs: [2], fond: "#fef3c7" },
+    ],
+    "Un rectangle prolongé par un triangle équilatéral"
+  );
   const text = randomChoice([
     `On modélise ${o.gn} par un rectangle de ${q(L, u)} sur ${q(l, u)}, prolongé, sur un côté de ${q(l, u)}, par un triangle équilatéral. Quel est le périmètre de la figure ?`,
     `Dessin ${de(o.gn)} : un rectangle de ${q(L, u)} de long et ${q(l, u)} de large, et un triangle équilatéral collé contre sa largeur. Calcule le périmètre de la figure.`,
@@ -1822,6 +2099,7 @@ function composeToit(): Q {
       `$2 \\times ${T(L)} + ${T(l)} + 2 \\times ${T(l)} = ${T(2 * L)} + ${T(3 * l)} = ${T(P)}$.`,
       `le périmètre est ${q(P, u)}.`
     ),
+    canvas: dessin,
   };
 }
 
@@ -1846,9 +2124,23 @@ function composeAccole(): Q {
     const o = randomChoice(ACCOLES);
     const L = randomInt(o.L[0], o.L[1]);
     const l = randomInt(o.l[0], o.l[1]);
-    const c = randomInt(Math.max(1, Math.round(l * 0.4)), l);
+    // 15/11/2026 : le carré plus petit que la largeur (sinon la figure n'est qu'un rectangle).
+    const c = randomInt(Math.max(1, Math.round(l * 0.4)), l - 1);
     const P = 2 * (L + l) + 2 * c;
     const u = o.u;
+    const y0 = (l - c) / 2;
+    const dessin = construire(
+      [
+        {
+          pts: [pt(0, 0), pt(L, 0), pt(L, y0), pt(L + c, y0), pt(L + c, y0 + c), pt(L, y0 + c), pt(L, l), pt(0, l)],
+          cotes: [cm(L, u), undefined, undefined, cm(c, u), undefined, undefined, undefined, cm(l, u)],
+          codes: [undefined, undefined, 1, 1, 1],
+          droits: [0, 7],
+        },
+        { pts: [pt(L, y0), pt(L + c, y0), pt(L + c, y0 + c), pt(L, y0 + c)], interieurs: [3], droits: [1, 2] },
+      ],
+      "Un rectangle et un carré accolé"
+    );
     const text = randomChoice([
       `Le plan représente ${o.gn} : un rectangle de ${q(L, u)} sur ${q(l, u)} et un carré de ${q(c, u)} de côté, collé contre un côté de ${q(l, u)}. Quel est le périmètre de l’ensemble ?`,
       `On fait le tour ${de(o.gn)}. Le rectangle mesure ${q(L, u)} sur ${q(l, u)} ; le carré accolé a ${q(c, u)} de côté. Quelle distance parcourt-on ?`,
@@ -1865,6 +2157,7 @@ function composeAccole(): Q {
         `$2 \\times (${T(L)} + ${T(l)}) - ${T(c)} + 3 \\times ${T(c)} = ${T(2 * (L + l))} + 2 \\times ${T(c)} = ${T(P)}$.`,
         `le périmètre est ${q(P, u)}.`
       ),
+      canvas: dessin,
     };
   }
   const o = randomChoice(PIECES_L);
@@ -1886,6 +2179,10 @@ function composeAccole(): Q {
     expected: rep(P, u),
     comparator: "number_equal",
     explanation: E(DEF_P, "on additionne les six côtés du contour.", `$${cotes.map(T).join(" + ")} = ${T(P)}$.`, `le périmètre est ${q(P, u)}.`),
+    canvas: construire(
+      [{ pts: [pt(0, 0), pt(W, 0), pt(W, H - h), pt(W - w, H - h), pt(W - w, H), pt(0, H)], cotes: cotes.map((x) => cm(x, u)), droits: [0, 1, 2, 4, 5] }],
+      "Une figure en L et ses six côtés"
+    ),
   };
 }
 
@@ -1917,6 +2214,15 @@ function composeDemiDisque(): Q {
     `${cap(o.gn)} est formé${estFem(o.gn) ? "e" : ""} ${de(forme)}. Quelle est la longueur de son contour ? Arrondis ${MOT_ARRONDI[d]}.`,
     `Quelle longueur faut-il pour faire le tour ${de(o.gn)}, composé${estFem(o.gn) ? "e" : ""} ${de(forme)} ? Donne un arrondi ${MOT_ARRONDI[d]}.`,
   ]);
+  const dedans = pt(L / 2, l / 2);
+  const dessin = construire(
+    [{ pts: ptsRect(L, l), cotes: [cm(L, u), cm(l, u)], interieurs: o.n === 2 ? [1, 3] : [1], droits: o.n === 2 ? [] : [0, 3] }],
+    o.n === 2 ? "Un rectangle et deux demi-cercles" : "Un rectangle et un demi-cercle",
+    [
+      { centre: pt(L, l / 2), de: pt(L, 0), vers: pt(L, l), eviter: dedans },
+      ...(o.n === 2 ? [{ centre: pt(0, l / 2), de: pt(0, l), vers: pt(0, 0), eviter: dedans }] : []),
+    ]
+  );
   const calc =
     o.n === 2
       ? `deux longueurs : $2 \\times ${T(L)} = ${T(2 * L)}$ ; deux demi-cercles font un cercle entier : $\\pi \\times ${T(l)}$. Total : $${T(2 * L)} + \\pi \\times ${T(l)} \\approx ${T(r.val)}$${r.note}.`
@@ -1931,6 +2237,66 @@ function composeDemiDisque(): Q {
       "on additionne les segments du bord et les arcs ; le côté du rectangle recouvert par l’arc n’est pas sur le contour.",
       calc,
       `le périmètre vaut environ ${q(r.val, u)}.`
+    ),
+    canvas: dessin,
+  };
+}
+
+/** ★1 (15/11/2026) : compter le contour sur quadrillage, chaque carreau de 1. */
+function figureGrilleUn(): Q {
+  const u = randomChoice(["cm", "cm", "m", "mm"]);
+  const h = randomInt(2, 4);
+  const w = randomInt(3, 6);
+  const enL = Math.random() < 0.5;
+  const cells = enL ? lShapeCells(h + 1, w, randomInt(1, w - 2), 1) : rectangleCells(h, w);
+  const f = recadrer(cells);
+  const n = computeGridPerimeter(f.cells);
+  return {
+    text: randomChoice([
+      `Chaque carreau mesure $1$ ${u}. Périmètre de la figure, en ${u} ?`,
+      `Un carreau a $1$ ${u} de côté. Compte le contour, en ${u}.`,
+      `Côté d’un carreau : $1$ ${u}. Contour rouge, en ${u} ?`,
+      `Compte les côtés de carreau du contour rouge, en ${u}.`,
+    ]),
+    format: "short",
+    expected: rep(n, u),
+    comparator: "number_equal",
+    explanation: E(
+      DEF_P,
+      "on suit le bord rouge et on compte les côtés de carreau ; les traits intérieurs ne comptent pas.",
+      `le contour compte $${n}$ côtés de carreau de $1$ ${u} : $${n} \\times 1 = ${n}$.`,
+      `le périmètre est ${q(n, u)}.`
+    ),
+    canvas: figureLibreFromCells(f.rows, f.cols, f.cells, true),
+  };
+}
+
+/** ★1 (15/11/2026) : une figure en L cotée, son périmètre en QCM. */
+function figureQcmL(): Q {
+  const u = randomChoice(["cm", "m", "mm", "dm"]);
+  const W = randomInt(5, 10);
+  const H = randomInt(4, 8);
+  const w = randomInt(1, W - 2);
+  const h = randomInt(1, H - 2);
+  const cotes = [W, H - h, w, h, W - w, H];
+  const P = 2 * (W + H);
+  const ok = `${P} ${u}`;
+  const faux = [`${P - w} ${u}`, `${P - h} ${u}`, `${W * H - w * h} ${u}`, `${W + H} ${u}`, `${P + 2 * w} ${u}`];
+  return {
+    text: randomChoice([
+      `Quel est le périmètre de cette figure, en ${u} ?`,
+      `Additionne les six côtés. Périmètre en ${u} ?`,
+      `Choisis le périmètre de la figure en L, en ${u}.`,
+      `Le contour de cette figure mesure, en ${u}…`,
+    ]),
+    format: "qcm",
+    choices: makeChoices(ok, faux),
+    expected: [ok],
+    comparator: "mcq_exact",
+    explanation: E(DEF_P, "on fait le tour : on additionne les six côtés, chacun une fois.", `$${cotes.map(T).join(" + ")} = ${T(P)}$.`, `le périmètre est ${q(P, u)}.`),
+    canvas: construire(
+      [{ pts: [pt(0, 0), pt(W, 0), pt(W, H - h), pt(W - w, H - h), pt(W - w, H), pt(0, H)], cotes: cotes.map((x) => cm(x, u)), droits: [0, 1, 2, 4, 5] }],
+      "Une figure en L et ses six côtés"
     ),
   };
 }
@@ -1960,6 +2326,7 @@ function probTours(): Q {
   const P = 2 * (L + l);
   const k = randomInt(2, 8);
   const D = k * P;
+  const dessin = rectCanvas("", L, l, cm(L, "m"), cm(l, "m"));
   const p = randomChoice(PRENOMS);
   const expl = (res: string) =>
     E("un tour correspond au périmètre.", "on calcule un tour, puis on multiplie par le nombre de tours.", `$2 \\times (${T(L)} + ${T(l)}) = ${T(P)}$ m ; $${T(P)} \\times ${k} = ${T(D)}$ m.`, res);
@@ -1967,6 +2334,7 @@ function probTours(): Q {
     return {
       text: `${p.p} fait ${k} fois le tour ${de(lieu.un)} rectangulaire de ${q(L, "m")} sur ${q(l, "m")}. Quelle distance parcourt-${il(p)}, en m ?`,
       format: "short",
+      canvas: dessin,
       expected: rep(D, "m"),
       comparator: "number_equal",
       explanation: expl(`${p.p} parcourt ${q(D, "m")}.`),
@@ -1975,6 +2343,7 @@ function probTours(): Q {
     return {
       text: `En s’entraînant, ${p.p} court ${k} tours autour ${de(lieu.un)} rectangulaire de ${q(L, "m")} de long et ${q(l, "m")} de large. Quelle distance a-t-${il(p)} parcourue, en km ?`,
       format: "short",
+      canvas: dessin,
       expected: rep(D / 1000, "km"),
       comparator: "number_equal",
       explanation: expl(`${q(D, "m")} $=$ ${q(D / 1000, "km")} : ${p.p} a parcouru ${q(D / 1000, "km")}.`),
@@ -1983,6 +2352,7 @@ function probTours(): Q {
     return {
       text: `Pour s’entraîner, ${p.p} doit courir ${q(D, "m")} autour ${de(lieu.un)} rectangulaire de ${q(L, "m")} sur ${q(l, "m")}. Combien de tours doit-${il(p)} faire ?`,
       format: "short",
+      canvas: dessin,
       expected: rep(k, "tours"),
       comparator: "number_equal",
       explanation: E("un tour correspond au périmètre.", "on calcule un tour, puis on cherche combien de tours font la distance.", `$2 \\times (${T(L)} + ${T(l)}) = ${T(P)}$ m ; $${T(D)} \\div ${T(P)} = ${k}$.`, `${p.p} doit faire ${k} tours.`),
@@ -1990,6 +2360,7 @@ function probTours(): Q {
   return {
     text: `Un tour ${de(lieu.un)}, rectangle de ${q(L, "m")} sur ${q(l, "m")} : ${p.p} en fait ${k}. Quelle distance totale, en m ?`,
     format: "short",
+    canvas: dessin,
     expected: rep(D, "m"),
     comparator: "number_equal",
     explanation: expl(`la distance totale est ${q(D, "m")}.`),
@@ -2029,6 +2400,7 @@ function probTriangle(): Q {
       expected: rep(P, o.u),
       comparator: "number_equal",
       explanation: E(DEF_P, "on additionne les trois côtés.", `$${T(a)} + ${T(b)} + ${T(c)} = ${T(P)}$.`, `il faut ${q(P, o.u)} ${deNu(o.mat)}.`),
+      canvas: triCanvas("", a, b, c, { AB: cm(a, o.u), BC: cm(b, o.u), CA: cm(c, o.u) }),
     };
   }
   if (t === 1) {
@@ -2046,6 +2418,7 @@ function probTriangle(): Q {
       format: "short",
       expected: rep(res, "cm"),
       comparator: "number_equal",
+      canvas: triCanvas("", a, b, c, { AB: cm(a, "cm"), BC: cm(b, "cm"), CA: cm(c, "cm") }),
       explanation: E(DEF_P, "on calcule le tour d’un triangle, puis on multiplie par le nombre d’objets.", `$${T(a)} + ${T(b)} + ${T(c)} = ${T(P)}$ ; $${T(P)} \\times ${n} = ${T(res)}$.`, `il faut ${q(res, "cm")} ${deNu(o.mat)}.`),
     };
   }
@@ -2063,6 +2436,7 @@ function probTriangle(): Q {
     format: "short",
     expected: enKm ? rep(D / 1000, "km") : rep(D, "m"),
     comparator: "number_equal",
+    canvas: triCanvas(nom, A, B, C, { AB: cm(A, "m"), BC: cm(B, "m"), CA: cm(C, "m") }),
     explanation: E("une boucle correspond au périmètre du triangle.", "on additionne les trois côtés, puis on multiplie par le nombre de boucles.", `$${T(A)} + ${T(B)} + ${T(C)} = ${T(A + B + C)}$ m ; $${T(A + B + C)} \\times ${k} = ${T(D)}$ m${enKm ? `, soit ${q(D / 1000, "km")}` : ""}.`, `${p.p} parcourt ${enKm ? q(D / 1000, "km") : q(D, "m")}.`),
   };
 }
@@ -2074,6 +2448,7 @@ function probPortail(): Q {
   const g = randomChoice([1, 1.5, 2, 2.5, 3, 4].filter((x) => x < l));
   const P = 2 * (L + l);
   const res = P - g;
+  const dessin = rectCanvas("", L, l, cm(L, "m"), cm(l, "m"));
   const ouv = randomChoice(["un portail", "un portillon", "un passage", "une entrée"]);
   const p = randomChoice(PRENOMS);
   const text = randomChoice([
@@ -2085,6 +2460,7 @@ function probPortail(): Q {
   return {
     text,
     format: "short",
+    canvas: dessin,
     expected: rep(res, "m"),
     comparator: "number_equal",
     explanation: E(DEF_P, "on calcule le tour complet, puis on retire l’ouverture.", `$2 \\times (${T(L)} + ${T(l)}) = ${T(P)}$ ; $${T(P)} - ${T(g)} = ${T(res)}$.`, `il faut ${q(res, "m")} ${deNu(c.mat)}.`),
@@ -2097,17 +2473,20 @@ function probCout(): Q {
   let P: number;
   let desc: string;
   let calc: string;
+  let dessin: Q["canvas"];
   const u = c.u;
   if (forme === 0 || c.carre === false) {
     const { L, l } = dims(c);
     P = 2 * (L + l);
     desc = `rectangulaire de ${q(L, u)} sur ${q(l, u)}`;
+    dessin = rectCanvas("", L, l, cm(L, u), cm(l, u));
     calc = `$2 \\times (${T(L)} + ${T(l)}) = ${T(P)}$ ${u}`;
   } else if (forme === 1) {
     let s = randomInt(c.l[0], c.l[1]);
     if (u === "cm") s = Math.round(s / 5) * 5;
     P = 4 * s;
     desc = `${adjCarre(c.un)} de ${q(s, u)} de côté`;
+    dessin = carreCanvas("", cm(s, u));
     calc = `$4 \\times ${T(s)} = ${T(P)}$ ${u}`;
   } else {
     const [a, b, cc] = cotesTriangle(c.l[0], c.L[1]);
@@ -2117,6 +2496,7 @@ function probCout(): Q {
     const C = Math.round(cc / k) * k;
     P = A + B + C;
     desc = `triangulaire de côtés ${q(A, u)}, ${q(B, u)} et ${q(C, u)}`;
+    dessin = triCanvas("", A, B, C, { AB: cm(A, u), BC: cm(B, u), CA: cm(C, u) });
     calc = `$${T(A)} + ${T(B)} + ${T(C)} = ${T(P)}$ ${u}`;
   }
   const prix = randomInt(c.prix[0] * 10, c.prix[1] * 10) / 10;
@@ -2138,6 +2518,7 @@ function probCout(): Q {
   return {
     text: `${text}${Math.abs(Pm * prix - cout) > 1e-9 ? " Arrondis au centime." : ""}`,
     format: "short",
+    canvas: dessin,
     // ⛔ 08/10/2026 : un prix s'affiche avec deux chiffres après la virgule (« 91,20 € ») ; « 91,2 € » reste accepté.
     expected: Number.isInteger(cout)
       ? rep(cout, "€")
@@ -2161,6 +2542,7 @@ function probRouleaux(): Q {
   );
   const { L, l } = dims(c);
   const P = 2 * (L + l);
+  const dessin = rectCanvas("", L, l, cm(L, "m"), cm(l, "m"));
   const p = randomChoice(PRENOMS);
   if (t === 0) {
     const rouleau = P + randomInt(2, 15);
@@ -2171,6 +2553,7 @@ function probRouleaux(): Q {
     return {
       text,
       format: "short",
+      canvas: dessin,
       expected: rep(rouleau - P, "m"),
       comparator: "number_equal",
       explanation: E(DEF_P, "on calcule le périmètre, puis on le retire de la longueur achetée.", `$2 \\times (${T(L)} + ${T(l)}) = ${T(P)}$ ; $${T(rouleau)} - ${T(P)} = ${T(rouleau - P)}$.`, `il restera ${q(rouleau - P, "m")}.`),
@@ -2186,6 +2569,7 @@ function probRouleaux(): Q {
     return {
       text,
       format: "short",
+      canvas: dessin,
       expected: rep(n, compte(n, "rouleau", "rouleaux")),
       comparator: "number_equal",
       explanation: E(DEF_P, "on calcule le périmètre, puis on cherche combien de rouleaux le couvrent (on arrondit au-dessus : un rouleau entamé s’achète entier).", `$2 \\times (${T(L)} + ${T(l)}) = ${T(P)}$ m ; $${T(P)} \\div ${R} \\approx ${T(arrondi(P / R, 2))}$, donc ${n} ${compte(n, "rouleau", "rouleaux")}.`, `il faut acheter ${n} ${compte(n, "rouleau", "rouleaux")}.`),
@@ -2203,6 +2587,7 @@ function probRouleaux(): Q {
   return {
     text,
     format: "short",
+    canvas: dessin,
     expected: rep(n, mot),
     comparator: "number_equal",
     explanation: E(DEF_P, `sur un contour fermé, il y a autant de ${mot} que d’intervalles : périmètre $\\div$ écart.`, `$2 \\times (${T(L)} + ${T(l)}) = ${T(P)}$ m ; $${T(P)} \\div ${T(d)} = ${T(n)}$.`, `il faut ${n} ${mot}.`),
@@ -2345,6 +2730,11 @@ function defiCompare(): Q {
     const l = l0 * s;
     const Pc = 4 * c;
     const Pr = 2 * (L + l);
+    const gap = Math.max(c, L) * 0.35;
+    const deux = construire(
+      [traceCarre(c, cm(c, t === 1 ? ctx.u : u)), traceRect(L, l, cm(L, t === 1 ? ctx.u : u), cm(l, t === 1 ? ctx.u : u), "", c + gap)],
+      "Un carré et un rectangle"
+    );
     if (t === 0) {
       const ok = Pc === Pr ? MEME : Pc > Pr ? "le carré" : "le rectangle";
       return {
@@ -2359,6 +2749,7 @@ function defiCompare(): Q {
         expected: [ok],
         comparator: "mcq_exact",
         explanation: E(DEF_P, "on calcule les deux périmètres, puis on compare.", `carré : $4 \\times ${T(c)} = ${T(Pc)}$ ; rectangle : $2 \\times (${T(L)} + ${T(l)}) = ${T(Pr)}$.`, `réponse : ${ok}.`),
+        canvas: deux,
       };
     }
     let p1 = randomChoice(PRENOMS);
@@ -2372,6 +2763,7 @@ function defiCompare(): Q {
       choices: makeChoices(okP, [p1.p, p2.p, "il leur faudra la même longueur", "on ne peut pas savoir sans l’aire"]),
       expected: [okP],
       comparator: "mcq_exact",
+      canvas: deux,
       explanation: E(`${DEF_P} La longueur ${deNu(ctx.mat)} est le périmètre.`, "on calcule les deux périmètres, puis on compare.", `${p1.p} : $4 \\times ${T(c)} = ${T(Pc)}$ ; ${p2.p} : $2 \\times (${T(L)} + ${T(l)}) = ${T(Pr)}$.`, `réponse : ${okP}.`),
     };
   }
@@ -2395,6 +2787,10 @@ function defiCompare(): Q {
       expected: [ok],
       comparator: "mcq_exact",
       explanation: E(DEF_P, "on calcule les deux périmètres, puis on compare.", `triangle : $3 \\times ${T(tc)} = ${T(Pt)}$ ; carré : $4 \\times ${T(c)} = ${T(Pc)}$.`, `réponse : ${ok}.`),
+      canvas: construire(
+        [traceTri(tc, tc, tc, [cm(tc, u)], "", [1, 1, 1]), traceCarre(c, cm(c, u), "", tc * 1.35)],
+        "Un triangle équilatéral et un carré"
+      ),
     };
   }
   const n1 = randomChoice(RECT_NOMS);
@@ -2429,6 +2825,10 @@ function defiCompare(): Q {
     expected: [ok],
     comparator: "mcq_exact",
     explanation: E(DEF_P, "on calcule les deux périmètres, puis on compare.", `${n1} : $2 \\times (${T(a)} + ${T(b)}) = ${T(P1)}$ ; ${n2} : $2 \\times (${T(c2)} + ${T(d2)}) = ${T(P2)}$.`, `réponse : ${ok}.`),
+    canvas: construire(
+      [traceRect(a, b, cm(a, u), cm(b, u), n1), traceRect(c2, d2, cm(c2, u), cm(d2, u), n2, a + Math.max(a, c2) * 0.35)],
+      "Deux rectangles"
+    ),
   };
 }
 
@@ -2450,6 +2850,7 @@ function defiAugmente(): Q {
       format: "short",
       expected: rep(inc, u),
       comparator: "number_equal",
+      canvas: rectCanvas("", L, l, cm(L, u), cm(l, u)),
       explanation: E("$P = 2 \\times (L + l)$.", `chaque longueur gagne ${q(a, u)} et chaque largeur ${q(b, u)} : il y a deux longueurs et deux largeurs.`, `$2 \\times ${T(a)} + 2 \\times ${T(b)} = ${T(inc)}$ (ancien périmètre $${T(P)}$, nouveau $${T(P + inc)}$).`, `le périmètre augmente de ${q(inc, u)}.`),
     };
   }
@@ -2463,6 +2864,7 @@ function defiAugmente(): Q {
       format: "short",
       expected: rep(newP, u),
       comparator: "number_equal",
+      canvas: rectCanvas("", L, l, cm(L, u), cm(l, u)),
       explanation: E("$P = 2 \\times (L + l)$.", "on calcule les nouvelles dimensions, puis le périmètre.", `$${T(L)} + ${T(a)} = ${T(L + a)}$ ; $${T(l)} + ${T(b)} = ${T(l + b)}$ ; $2 \\times (${T(L + a)} + ${T(l + b)}) = ${T(newP)}$.`, `le nouveau périmètre est ${q(newP, u)}.`),
     };
   }
@@ -2476,6 +2878,7 @@ function defiAugmente(): Q {
     format: "short",
     expected: rep(4 * k, u),
     comparator: "number_equal",
+    canvas: carreCanvas("", cm(s, u)),
     explanation: E("$P = 4 \\times c$.", "chacun des 4 côtés gagne la même longueur.", `$4 \\times ${T(k)} = ${T(4 * k)}$ (de $${T(4 * s)}$ à $${T(4 * (s + k))}$).`, `le périmètre augmente de ${q(4 * k, u)}.`),
   };
 }
@@ -2484,9 +2887,11 @@ function defiLitteral(): Q {
   const t = randomInt(0, 4);
   const lettre = randomChoice(["x", "a", "t", "n", "y"]);
   const u = randomChoice(["cm", "m"]);
-  const v = randomInt(4, 12); // 2v > 6 : le triangle isocèle existe toujours
   const k = randomInt(1, 6);
   const k2 = randomInt(1, 6);
+  // 2v > 6 : le triangle isocèle existe toujours ; 15/11/2026 : v > |k − k2| pour
+  // que le triangle x, x + k, x + k2 existe aussi (x = 4, x + 1, x + 6 sortait).
+  const v = Math.max(randomInt(4, 12), Math.abs(k - k2) + 2);
   const x = lettre;
   type Fig = { desc: string; coef: number; cst: number; formule: string };
   const figs: Fig[] = [
@@ -2498,6 +2903,13 @@ function defiLitteral(): Q {
   ];
   const f = figs[t];
   const P = f.coef * v + f.cst;
+  // Le dessin porte les expressions, jamais la valeur de la lettre.
+  const dessin =
+    t === 0 ? rectCanvas("", v + k, v, `${x} + ${k}`, x)
+    : t === 1 ? carreCanvas("", `${x} + ${k}`)
+    : t === 2 ? triCanvas("", k, v, v, { AB: `${k}`, BC: x, CA: x }, [["BC", "CA"]])
+    : t === 3 ? triCanvas("", v, v + k, v + k2, { AB: x, BC: `${x} + ${k}`, CA: `${x} + ${k2}` })
+    : rectCanvas("", 2 * v, v, `2${x}`, x);
   const desc = f.desc;
   if (Math.random() < 0.5) {
     return {
@@ -2507,6 +2919,7 @@ function defiLitteral(): Q {
         `Exprime le périmètre ${de(desc)} en fonction de $${lettre}$, puis calcule-le pour $${lettre} = ${v}$ (en ${u}).`,
       ]),
       format: "short",
+      canvas: dessin,
       expected: rep(P, u),
       comparator: "number_equal",
       explanation: E(DEF_P, `on écrit le périmètre en fonction de ${lettre} : $${f.formule}$, puis on remplace ${lettre} par $${v}$.`, `$${f.coef} \\times ${v}${f.cst ? ` + ${f.cst}` : ""} = ${T(P)}$.`, `le périmètre vaut ${q(P, u)}.`),
@@ -2519,6 +2932,7 @@ function defiLitteral(): Q {
       `Trouve $${lettre}$ sachant qu’${desc} a un périmètre de ${q(P, u)}.`,
     ]),
     format: "short",
+    canvas: dessin,
     expected: rep(v, u),
     comparator: "number_equal",
     explanation: E(DEF_P, `le périmètre s’écrit $${f.formule}$ ; on résout $${f.coef}${lettre}${f.cst ? ` + ${f.cst}` : ""} = ${T(P)}$.`, `${f.cst ? `$${f.coef}${lettre} = ${T(P)} - ${f.cst} = ${T(P - f.cst)}$, puis ` : ""}$${lettre} = ${T(P - f.cst)} \\div ${f.coef} = ${v}$.`, `$${lettre} = ${v}$ ${u}.`),
@@ -2606,6 +3020,7 @@ function defiEgal(): Q {
       format: "short",
       expected: rep(c, u),
       comparator: "number_equal",
+      canvas: rectCanvas("", L, l, cm(L, u), cm(l, u)),
       explanation: E("même périmètre = même longueur de contour.", "on calcule le périmètre du rectangle, puis on le partage en 4 côtés égaux.", `$2 \\times (${T(L)} + ${T(l)}) = ${T(2 * (L + l))}$ ; $${T(2 * (L + l))} \\div 4 = ${T(c)}$.`, `le côté mesure ${q(c, u)}.`),
     };
   }
@@ -2621,6 +3036,7 @@ function defiEgal(): Q {
       format: "short",
       expected: rep(tc, u),
       comparator: "number_equal",
+      canvas: carreCanvas("", cm(c, u)),
       explanation: E("même périmètre = même longueur de contour.", "périmètre du carré $= 4 \\times$ côté, puis côté du triangle $=$ périmètre $\\div 3$.", `$4 \\times ${T(c)} = ${T(4 * c)}$ ; $${T(4 * c)} \\div 3 = ${T(tc)}$.`, `le côté du triangle mesure ${q(tc, u)}.`),
     };
   }
@@ -2637,6 +3053,7 @@ function defiEgal(): Q {
       format: "short",
       expected: rep(l, u),
       comparator: "number_equal",
+      canvas: carreCanvas("", cm(c, u)),
       explanation: E("même périmètre = même longueur de contour.", "périmètre du carré, puis demi-périmètre moins la longueur.", `$4 \\times ${T(c)} = ${T(4 * c)}$ ; $${T(4 * c)} \\div 2 = ${T(2 * c)}$ ; $${T(2 * c)} - ${T(L)} = ${T(l)}$.`, `la largeur mesure ${q(l, u)}.`),
     };
   }
@@ -2652,6 +3069,7 @@ function defiEgal(): Q {
     format: "short",
     expected: rep((x + y + z) / 4, u),
     comparator: "number_equal",
+    canvas: triCanvas("", x, y, z, { AB: cm(x, u), BC: cm(y, u), CA: cm(z, u) }),
     explanation: E("même périmètre = même longueur de contour.", "on additionne les côtés du triangle, puis on divise par 4.", `$${T(x)} + ${T(y)} + ${T(z)} = ${T(x + y + z)}$ ; $${T(x + y + z)} \\div 4 = ${T((x + y + z) / 4)}$.`, `le côté du carré mesure ${q((x + y + z) / 4, u)}.`),
   };
 }
@@ -3906,9 +4324,70 @@ const ITEMS: TutorBankItemV4[] = [
     tags: ["aire_perimetre", "triangle", "contexte", "template"],
     generate: () => (Math.random() < 0.5 ? triFigure(false) : triEquilateral(false)),
   },
+  // 15/11/2026 (robustesse 4e) : un deuxième gabarit aux étoiles qui n'en avaient qu'un, avec dessin.
+  {
+    ...base,
+    kind: "template",
+    id: "4e_aire_perimetre_rectangle_tpl_qcm_figure",
+    microId: "aire_perimetre_rectangle",
+    difficulty: 1,
+    hint: "Deux longueurs ET deux largeurs : $P = 2 \\times (L + l)$.",
+    tags: ["aire_perimetre", "rectangle", "canvas", "qcm", "template"],
+    generate: rectQcm,
+  },
+  {
+    ...base,
+    kind: "template",
+    id: "4e_aire_perimetre_carre_tpl_qcm_figure",
+    microId: "aire_perimetre_carre",
+    difficulty: 2,
+    hint: "Quatre côtés égaux : $4 \\times$ côté (et non côté $\\times$ côté, qui est l’aire).",
+    tags: ["aire_perimetre", "carre", "canvas", "qcm", "template"],
+    generate: carreQcm,
+  },
+  {
+    ...base,
+    kind: "template",
+    id: "4e_aire_perimetre_triangle_tpl_qcm_figure",
+    microId: "aire_perimetre_triangle",
+    difficulty: 1,
+    hint: "On additionne les trois côtés, chacun une fois.",
+    tags: ["aire_perimetre", "triangle", "canvas", "qcm", "template"],
+    generate: triQcm,
+  },
+  {
+    ...base,
+    kind: "template",
+    id: "4e_aire_perimetre_figure_tpl_grille_unite",
+    microId: "aire_perimetre_figure",
+    difficulty: 1,
+    hint: "Suis le bord rouge et compte les côtés de carreau.",
+    tags: ["aire_perimetre", "figure", "figure_libre", "template"],
+    generate: figureGrilleUn,
+  },
+  {
+    ...base,
+    kind: "template",
+    id: "4e_aire_perimetre_figure_tpl_qcm_L",
+    microId: "aire_perimetre_figure",
+    difficulty: 1,
+    hint: "Fais le tour : additionne les six côtés, chacun une fois.",
+    tags: ["aire_perimetre", "figure", "canvas", "qcm", "template"],
+    generate: figureQcmL,
+  },
 ];
+
+/**
+ * ⭐ 15/11/2026 — LE PAVÉ NUMÉRIQUE (demande de Frédéric) : une réponse
+ * numérique sur deux environ (★1-★3 ; un peu moins à ★4-★5) se donne au pavé.
+ * `lirePave` refuse ce qui ne s'y tape pas (« 2 h 30 », expressions…).
+ */
+function avecPave(q: Q, etoiles: number): Q {
+  if (q.format !== "short" || q.saisie || !lirePave(q.expected?.[0])) return q;
+  return Math.random() < (etoiles <= 3 ? 0.55 : 0.35) ? { ...q, saisie: "pave" } : q;
+}
 
 /** Chaque question chiffrée dit son unité (voir `avecUnite`). */
 export const perimetresBank: TutorBankItemV4[] = ITEMS.map((it) =>
-  it.kind === "template" ? { ...it, generate: () => avecUnite(it.generate()) } : it
+  it.kind === "template" ? { ...it, generate: () => avecPave(avecUnite(it.generate()), it.difficulty) } : it
 );
