@@ -1,0 +1,9 @@
+{
+  "00-accroche": "C'est la fête ! Il me faut 48 glaçons en forme de cube.",
+  "01-bac": "Mon bac à glaçons fait 6 cases de long et 4 de large.",
+  "02-question": "Question ! Combien de bacs pleins dois-je faire ? A : 24. B : 10. C : 2. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! Un bac : 6 fois 4, 24 glaçons. 48 divisé par 24, 2 bacs. 24, c'est ce que contient un bac, pas le nombre de bacs !",
+  "03-ouf": "2 bacs au congélateur… et maintenant, j'attends. Le plus dur, c'est d'attendre !",
+  "04-commentaire": "À toi : une boîte de dés fait 3 sur 3 sur 3. J'en ai déjà rangé 20. Combien en manque-t-il ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,17 @@
+{
+  "00-garde": "L'unité de volume. Avec quoi mesure-t-on la place que prend un objet ?",
+  "01-situation": "Voici Mathis. Il est maître-nageur. Chaque matin, il verse un produit dans la piscine pour garder l'eau propre. La dose dépend de la place que prend l'eau : son volume. Mais un volume, comment le mesure-t-on ?",
+  "02-cube-unite": "On mesure un volume avec des petits cubes. Voici un cube de 1 centimètre de côté : sa longueur, sa largeur et sa hauteur font 1 centimètre. Son volume, c'est 1 centimètre cube. On l'écrit cm, avec un petit 3.",
+  "03-trois-unites": "Attention aux trois écritures. Le centimètre mesure une longueur : un trait. Le centimètre carré mesure une aire : un carré à plat. Le centimètre cube mesure un volume : un cube. Le petit 2 dit « carré », le petit 3 dit « cube ».",
+  "04-lire": "Lire un volume. Dans 18 centimètres cubes, le nombre 18 compte les cubes. L'unité dit leur taille : des cubes de 1 centimètre de côté. 18 centimètres cubes, ce sont 18 petits cubes de 1 centimètre cube.",
+  "05-question": "Question ! Un solide a un volume de 24 centimètres cubes. Combien de cubes de 1 centimètre cube contient-il ? A : 8 cubes. B : 24 cubes. C : 72 cubes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 24 centimètres cubes, ce sont 24 cubes de 1 centimètre cube. Le petit 3 n'est pas un nombre à multiplier : il dit « cube ».",
+  "06-metre-cube": "Pour un grand objet, on prend un grand cube : 1 mètre de côté. C'est 1 mètre cube. Une caisse de 1 mètre cube t'arriverait à peu près à la poitrine. La piscine de Mathis fait 300 mètres cubes : 300 grands cubes d'eau.",
+  "07-piege": "Attention au piège ! Un volume s'écrit avec le petit 3. 24 centimètres carrés, c'est une aire, pas un volume. On regarde toujours l'unité.",
+  "08-question": "Question ! Quelle unité choisir pour le volume de la piscine ? A : le mètre cube. B : le mètre carré. C : le centimètre cube. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. Un volume a le petit 3. Et pour un objet aussi grand, on prend le grand cube : le mètre cube. Le centimètre cube, c'est pour un petit objet, comme un dé.",
+  "09-defi": "À toi de jouer ! Trois élèves écrivent le volume d'un dé : Léo écrit 8 centimètres, Maya 8 centimètres carrés, Sami 8 centimètres cubes. Qui a raison ? Et combien de petits cubes de 1 centimètre cube font ce volume ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Léo a écrit une longueur, Maya une aire. Sami a raison : un volume s'écrit avec le petit 3, 8 centimètres cubes. Et 8 centimètres cubes, ce sont 8 petits cubes de 1 centimètre cube.",
+  "10-finale": "Ce que tu as appris. Le volume, c'est la place que prend un objet. On le mesure en cubes : le centimètre cube pour un petit objet, le mètre cube pour un grand. Dans 18 centimètres cubes, le nombre 18 compte les cubes.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

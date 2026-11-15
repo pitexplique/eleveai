@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Mon copain a construit deux tours de 5 cubes, collées. Moi, je les survole avec mon drone !",
+  "01-drone": "Vu d'en haut, plus de hauteur : je ne vois que le dessus des colonnes.",
+  "02-question": "Question ! Combien de carreaux voit mon drone ? A : 2. B : 10. C : 5. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! Chaque colonne donne un seul carreau vu d'en haut. 2 tours : 2 carreaux. Les 10 cubes se cachent les uns sous les autres.",
+  "03-ouf": "10 cubes, et mon drone n'en voit que 2… Il lui faut des lunettes !",
+  "04-commentaire": "À toi : un escalier de 4 colonnes, de 4, 3, 2 et 1 cubes. Combien de carreaux dans sa vue de face ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

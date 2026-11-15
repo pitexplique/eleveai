@@ -92,19 +92,19 @@ export const METIERS_6E: Record<string, LienMetier[]> = {
     F("entraineur", "mesure un saut en longueur : 4,35 m, soit 435 cm."),
   ],
   aire_perimetre: [
-    M("paysagiste", "calcule la longueur de clôture autour d'un jardin rectangulaire."),
+    M("paysagiste", "calcule la longueur de clôture autour d'un jardin rectangulaire.", V),
     F("eleveur", "pose le grillage tout autour de l'enclos de ses chèvres."),
-    F("fleuriste", "mesure le tour d'un vase pour couper juste assez de ruban."),
+    F("fleuriste", "mesure le tour d'un vase pour couper juste assez de ruban.", V),
   ],
   aire_unite: [
     F("carreleur", "compte les carreaux d'1 m² qu'il faut pour couvrir une pièce."),
     M("agriculteur", "parle en hectares : 1 ha, c'est un carré de 100 m de côté."),
-    F("agent-immobilier", "compare deux appartements : 65 m² ou 58 m² ?"),
+    F("agent-immobilier", "compare deux appartements : 65 m² ou 58 m² ?", V),
   ],
   aire_surface: [
-    M("macon", "calcule l'aire d'un mur pour acheter le bon nombre de pots d'enduit."),
-    F("jardinier", "calcule l'aire d'une pelouse pour acheter le bon sac de graines."),
-    M("technicien-energie", "calcule l'aire du toit disponible pour poser des panneaux solaires."),
+    M("macon", "calcule l'aire d'un mur pour acheter le bon nombre de pots d'enduit.", V),
+    F("jardinier", "calcule l'aire d'une pelouse pour acheter le bon sac de graines.", V),
+    M("technicien-energie", "calcule l'aire du toit disponible pour poser des panneaux solaires.", V),
   ],
   distance_segment: [
     F("geometre", "mesure la distance entre deux bornes d'un terrain."),
@@ -141,11 +141,14 @@ export const METIERS_6E: Record<string, LienMetier[]> = {
     F("animateur-3d", "fait tourner un objet 3D pour le voir de face, de dessus et de côté."),
     M("architecte", "dessine les vues d'une maison avant de la construire."),
     M("dessinateur-projeteur", "lit un plan vu de dessus et imagine la pièce en volume."),
+    F("designer-emballage", "trace le patron d'une boîte de 20 × 8 × 30 cm : 6 rectangles, pareils deux par deux."),
   ],
   volume_solide: [
     M("logisticien", "compte combien de cartons cubiques tiennent dans un camion."),
     F("ingenieur-hydraulique", "calcule le volume d'eau d'une citerne."),
     M("maitre-nageur", "connaît le volume de la piscine en m³ pour doser le traitement de l'eau."),
+    F("menuisier", "assemble deux caissons de bois : leurs volumes s'additionnent."),
+    F("patissier", "range 36 chocolats cubiques par couches de 4 × 3 : 3 couches."),
   ],
   angle_mesure: [
     F("kine", "mesure la flexion d'un genou après une blessure : 90°, puis 120°.", V),

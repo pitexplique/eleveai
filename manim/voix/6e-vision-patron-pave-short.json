@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Je fabrique une boîte cadeau : 10 centimètres de long, 6 de large, 4 de haut.",
+  "01-couvercle": "Je plie… et mon couvercle est trop petit ! La boîte reste ouverte !",
+  "02-question": "Question ! Quelles mesures pour le couvercle ? A : 6 sur 4. B : 10 sur 10. C : 10 sur 6. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! Le couvercle, c'est le dessus : la longueur et la largeur, 10 sur 6. 6 sur 4, c'est un côté !",
+  "03-ouf": "Et voilà, ça ferme ! Le cadeau est dedans… Zut, c'était le mien !",
+  "04-commentaire": "À toi : une boîte de 12 centimètres de long, 5 de large et 3 de haut. Quelles sont les mesures de ses deux faces de côté ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

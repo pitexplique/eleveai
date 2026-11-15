@@ -1,0 +1,16 @@
+{
+  "00-garde": "Les quatre vues. À quoi ressemble un assemblage de cubes, vu de dessus, de face, de gauche ou de droite ?",
+  "01-situation": "Voici Samuel. Il est architecte. Avant de construire une maison, il la dessine sous plusieurs angles : vue de dessus, vue de face, vues de côté. Chaque vue est un dessin plat. Aujourd'hui, il présente sa maquette en cubes.",
+  "02-face": "Une vue est plate. De face, on voit la longueur et la hauteur. La largeur part vers l'arrière : elle disparaît. Ce pavé de 4 cubes de long, 3 de large et 2 de haut, vu de face : 4 fois 2, 8 carreaux.",
+  "03-cotes": "De droite, on voit la largeur et la hauteur : 3 fois 2, 6 carreaux. De gauche, c'est le même dessin, retourné comme dans un miroir.",
+  "04-dessus": "De dessus, on voit la longueur et la largeur : 4 fois 3, 12 carreaux. La hauteur ne se voit pas. Une colonne de cubes, vue d'en haut, ne donne qu'un seul carreau.",
+  "05-question": "Question ! Un escalier de 3 colonnes, en ligne : 3 cubes, 2 cubes, 1 cube. Combien de carreaux dans sa vue de dessus ? A : 3 carreaux. B : 6 carreaux. C : 1 carreau. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Vue d'en haut, chaque colonne donne un carreau, quelle que soit sa hauteur. 3 colonnes : 3 carreaux. 6, c'est le nombre de cubes.",
+  "06-piege": "Attention au piège ! La vue de dessus compte les colonnes, pas les cubes. Et un cube caché au milieu n'apparaît sur aucune vue. Les vues ne disent pas tout.",
+  "07-question": "Question ! Le même escalier, vu de face. Que voit-on ? A : une ligne de 3 carreaux. B : un escalier de 6 carreaux. C : un carré de 9 carreaux. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. De face, on voit la hauteur de chaque colonne : 3, puis 2, puis 1. Un escalier de 6 carreaux.",
+  "08-defi": "À toi de jouer ! La maquette de Samuel : une rangée de 4 colonnes, hautes de 1, 3, 2 et 1 cubes. Dessine sa vue de face et sa vue de dessus. Combien de carreaux dans chacune ? Mets pause, et cherche !",
+  "08b-correction": "Correction. De face, on voit les hauteurs : 1 plus 3 plus 2 plus 1, 7 carreaux. De dessus, une rangée de 4 colonnes : 4 carreaux. 7 cubes, mais seulement 4 carreaux vus d'en haut.",
+  "09-finale": "Ce que tu as appris. Un assemblage se regarde de quatre côtés : dessus, face, gauche et droite. Chaque vue est plate : elle garde deux dimensions sur trois. La vue de dessus compte les colonnes, pas les cubes.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

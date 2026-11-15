@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défis sur les volumes. Sauras-tu retrouver un volume, ou ce qui manque ?",
+  "01-situation": "Voici Clara. Elle est pâtissière et chocolatière. Elle range ses chocolats, en forme de petits cubes, dans des boîtes en pavé droit. Pour chaque boîte, elle doit savoir combien de chocolats il faut.",
+  "02-boite": "Première boîte : 4 chocolats de long, 3 de large, 2 de haut. Une couche : 4 fois 3, 12 chocolats. Deux couches : 12 fois 2, 24 chocolats.",
+  "03-manque": "Deuxième boîte, la même. Clara a rempli la première couche, et posé 5 chocolats sur la deuxième. Elle en a posé 12 plus 5, 17. Il en manque 24 moins 17, 7 chocolats.",
+  "04-hauteur": "Troisième boîte : Clara a 36 chocolats. Le fond fait 4 sur 3 : 12 chocolats par couche. Combien de couches ? 36 divisé par 12, 3 couches. La boîte doit avoir 3 chocolats de haut.",
+  "05-question": "Question ! Une boîte a un fond de 5 sur 2. Elle contient 30 chocolats. Combien de couches ? A : 10 couches. B : 3 couches. C : 6 couches. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Une couche : 5 fois 2, 10 chocolats. 30 divisé par 10, 3 couches. 10, c'est le nombre de chocolats d'une couche.",
+  "06-piege": "Attention au piège ! Un élève écrit : la boîte fait 24 centimètres carrés. Le nombre est juste, mais l'unité est fausse. Un volume a le petit 3 : 24 centimètres cubes.",
+  "07-question": "Question ! Un cube a une arête de 4 centimètres. Quel est son volume ? A : 64 centimètres cubes. B : 16 centimètres cubes. C : 12 centimètres cubes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Une couche : 4 fois 4, 16. 4 couches : 16 fois 4, 64 centimètres cubes. 16, c'est une seule couche. 12, c'est 4 plus 4 plus 4 : on a additionné.",
+  "08-defi": "À toi de jouer ! Clara a deux boîtes. La boîte rouge : 6 sur 2 sur 2. La boîte bleue : 3 sur 3 sur 3. Laquelle contient le plus de chocolats, et combien de plus ? Mets pause, et cherche !",
+  "08b-correction": "Correction. La rouge : 6 fois 2, 12 ; fois 2, 24 chocolats. La bleue : 3 fois 3, 9 ; fois 3, 27 chocolats. La bleue en contient le plus : 27 moins 24, 3 chocolats de plus.",
+  "09-finale": "Ce que tu as appris. Un défi se résout étape par étape : une couche, puis les couches. Ce qui manque se trouve par une soustraction, le nombre de couches par une division. Et on vérifie l'unité : le petit 3.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

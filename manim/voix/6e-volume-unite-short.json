@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Ma boîte à trésors est vide ! Sur l'étiquette, c'est écrit : 20 centimètres cubes.",
+  "01-cubes": "Je la remplis avec des petits cubes de 1 centimètre de côté. Chaque petit cube, c'est 1 centimètre cube.",
+  "02-question": "Question ! Combien de petits cubes vont dans la boîte ? A : 60. B : 23. C : 20. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! 20 centimètres cubes, ce sont 20 petits cubes de 1 centimètre cube. Le petit 3 veut dire « cube » : on ne le compte pas.",
+  "03-ouf": "J'en avais préparé 60… Avec les 40 en trop, je me construis un château !",
+  "04-commentaire": "À toi : un coffre de 35 centimètres cubes contient déjà 12 petits cubes de 1 centimètre cube. Combien en manque-t-il pour le remplir ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

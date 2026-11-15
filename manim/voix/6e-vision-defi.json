@@ -1,0 +1,17 @@
+{
+  "00-garde": "Défis dans l'espace. Cubes cachés, cube peint puis découpé : sauras-tu voir ce qu'on ne voit pas ?",
+  "01-situation": "Voici Enzo. Il est dessinateur-projeteur : à partir d'un plan vu de dessus, il imagine la pièce en volume. Aujourd'hui, il prépare des énigmes en cubes pour un escape game.",
+  "02-plan": "Premier défi : un plan vu de dessus, avec un nombre dans chaque carreau. Le nombre dit combien de cubes sont empilés à cet endroit. Pour compter tous les cubes, on additionne les nombres : 3 plus 1 plus 2 plus 2, 8 cubes.",
+  "03-pyramide": "Deuxième défi : une pyramide de cubes. En bas, 3 sur 3 : 9 cubes. Au milieu, 2 sur 2 : 4 cubes. En haut, 1 cube. 9 plus 4 plus 1, 14 cubes. Beaucoup sont cachés dessous !",
+  "04-question": "Question ! Une pyramide a 4 étages : 16, puis 9, puis 4, puis 1 cube. Combien de cubes en tout ? A : 30 cubes. B : 16 cubes. C : 20 cubes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. On additionne les étages : 16 plus 9, 25. Plus 4, 29. Plus 1, 30 cubes. 16, c'est seulement l'étage du bas.",
+  "05-peint": "Troisième défi, le plus célèbre. Un grand cube de 3 sur 3 sur 3 est peint en rouge, dehors. On le découpe en 27 petits cubes. Les petits cubes des coins ont 3 faces peintes : il y a 8 coins.",
+  "06-aretes": "Sur chaque arête, entre deux coins, un petit cube a 2 faces peintes. Le grand cube a 12 arêtes : 12 petits cubes. Au milieu de chaque face, un petit cube a 1 face peinte : 6 faces, 6 petits cubes.",
+  "07-question": "Question ! Combien de petits cubes n'ont aucune face peinte ? A : aucun. B : 1 cube. C : 6 cubes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Un seul petit cube ne touche aucun bord : celui du centre, caché au milieu. Vérifions : 8 plus 12 plus 6 plus 1, 27. Le compte est bon !",
+  "08-piege": "Attention au piège ! On ne compte pas seulement ce qu'on voit. Le cube du centre n'apparaît sur aucune vue, et il existe quand même. Pour vérifier, le total doit retomber sur 27.",
+  "09-defi": "À toi de jouer ! Enzo peint un grand cube de 4 sur 4 sur 4, puis le découpe en 64 petits cubes. Combien de petits cubes n'ont aucune face peinte ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Les petits cubes sans peinture forment un cube caché au centre : on retire une couche de chaque côté. Il reste 2 sur 2 sur 2 : 2 fois 2, 4 ; fois 2, 8 petits cubes sans peinture.",
+  "10-finale": "Ce que tu as appris. Pour compter des cubes, on pense aux cachés : étage par étage, ou colonne par colonne avec le plan. Dans le cube peint, les coins, les arêtes, les faces et le centre se comptent à part. Et on vérifie le total.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

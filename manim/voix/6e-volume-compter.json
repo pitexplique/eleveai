@@ -1,0 +1,16 @@
+{
+  "00-garde": "Compter des volumes. Comment compter les cubes d'un pavé, sans les compter un par un ?",
+  "01-situation": "Voici Yanis. Il est logisticien : il organise le chargement des camions. Aujourd'hui, il range des cartons en forme de cube dans une remorque. Combien de cartons vont tenir ? Il ne va pas les compter un par un !",
+  "02-couche": "L'idée : compter par couches. Voici une boîte de 3 cubes de long et 2 cubes de large. Au fond, une couche : 3 fois 2, 6 cubes.",
+  "03-multiplier": "La boîte a 2 couches pareilles. 6 cubes par couche, 2 couches : 6 fois 2, 12 cubes. Avec des cubes de 1 centimètre cube, le volume est 12 centimètres cubes.",
+  "04-formule": "On retient : une couche, c'est la longueur fois la largeur. Puis on multiplie par le nombre de couches : la hauteur. Volume du pavé : longueur fois largeur fois hauteur.",
+  "05-question": "Question ! Un pavé a 3 couches de 5 cubes. Quel est son volume ? A : 8 cubes. B : 35 cubes. C : 15 cubes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. Une couche : 5 cubes. 3 couches pareilles : 3 fois 5, 15 cubes. 8, c'est 3 plus 5 : on a additionné au lieu de multiplier.",
+  "06-piege": "Attention au piège ! Sur un dessin, on ne voit pas tous les cubes. Ceux du fond et du dessous sont cachés. Ils sont là quand même : en comptant par couches, on ne les oublie pas.",
+  "07-question": "Question ! Un cube a une arête de 3 centimètres. Quel est son volume ? A : 9 centimètres cubes. B : 27 centimètres cubes. C : 12 centimètres cubes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Une couche : 3 fois 3, 9 cubes. 3 couches : 9 fois 3, 27 centimètres cubes. 9, c'est une seule couche !",
+  "08-defi": "À toi de jouer ! La remorque de Yanis mesure 8 cartons de long, 4 de large et 3 de haut. Combien de cartons peut-il charger ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Une couche : 8 fois 4, 32 cartons. 3 couches : 32 fois 3, 96 cartons. Yanis peut charger 96 cartons.",
+  "09-finale": "Ce que tu as appris. Pour un pavé, on compte une couche, puis on multiplie par le nombre de couches : longueur fois largeur fois hauteur. Les cubes cachés sont comptés aussi.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le patron d'un pavé droit. Quelles mesures donner à chaque face, pour que la boîte se ferme ?",
+  "01-situation": "Voici Jeanne. Elle est designer d'emballages. Elle invente la boîte d'une nouvelle marque de céréales : 20 centimètres de long, 8 de large, 30 de haut. Avant de l'imprimer, elle trace son patron, à plat.",
+  "02-six": "Un pavé droit a 6 faces, toutes des rectangles. Elles vont par paires : deux faces pareilles, l'une en face de l'autre. Il y a donc 3 sortes de rectangles.",
+  "03-mesures": "Le devant et le derrière : 20 sur 30. Les deux côtés : 8 sur 30. Le dessus et le dessous : 20 sur 8. Chaque face prend deux des trois mesures.",
+  "04-assembler": "Sur le patron, les 4 faces du tour se suivent en bande : devant, côté, derrière, côté. Le dessus et le dessous s'accrochent en haut et en bas de la bande. Deux faces qui se touchent ont un bord de même longueur.",
+  "05-question": "Question ! Une boîte mesure 10 centimètres de long, 4 de large et 6 de haut. Quelles sont les mesures de sa face du dessus ? A : 10 sur 6. B : 10 sur 4. C : 4 sur 6. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Le dessus prend la longueur et la largeur : 10 sur 4. La hauteur ne se voit pas d'en haut. 10 sur 6, c'est le devant.",
+  "06-piege": "Attention au piège ! Deux faces qui se plient l'une contre l'autre doivent avoir un bord de même longueur. Si les bords ne collent pas, la boîte ne se ferme pas. On vérifie chaque pli.",
+  "07-question": "Question ! Combien de faces de 8 sur 30 a la boîte de céréales de Jeanne ? A : 2 faces. B : 4 faces. C : 1 face. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Les faces vont par paires. Les deux côtés font 8 sur 30 : il y en a 2.",
+  "08-defi": "À toi de jouer ! Une boîte à chaussures mesure 30 centimètres de long, 20 de large et 10 de haut. Donne les mesures de ses 6 faces. Mets pause, et cherche !",
+  "08b-correction": "Correction. Le dessus et le dessous : 30 sur 20. Le devant et le derrière : 30 sur 10. Les deux côtés : 20 sur 10. 6 faces, 3 paires.",
+  "09-finale": "Ce que tu as appris. Le patron d'un pavé droit a 6 rectangles, pareils deux par deux. Chaque face prend deux des trois mesures. Deux faces qui se plient ensemble ont un bord de même longueur.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,18 @@
+{
+  "00-garde": "La perspective cavalière. Comment dessiner un cube sur une feuille plate, pour qu'on le voie en volume ?",
+  "01-situation": "Voici Lina. Elle est animatrice 3D : elle crée des objets en volume pour des dessins animés. Mais avant l'ordinateur, elle fait toujours un croquis à main levée, sur une feuille plate. Comment donner de la profondeur au dessin ?",
+  "02-face": "On commence par la face avant. On la dessine en vraie grandeur : pour un cube, un vrai carré.",
+  "03-biais": "Ensuite, la profondeur. Depuis chaque coin, on trace un trait en biais : tous dans la même direction, et tous de la même longueur. Ces traits sont plus courts que la vraie arête : c'est ce qui donne l'impression de profondeur.",
+  "04-cachees": "Enfin, on relie les bouts. Les arêtes qu'on ne verrait pas, derrière, se dessinent en pointillés. Pour un cube : 3 arêtes cachées.",
+  "05-question": "Question ! En perspective cavalière, comment dessine-t-on une arête cachée ? A : en pointillés. B : en trait épais. C : on ne la dessine pas. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Les pointillés disent : elle est là, mais derrière. Sans elles, on ne saurait pas où est le fond.",
+  "06-pave": "Pour un pavé droit, c'est pareil. La face avant est un vrai rectangle. Les traits en biais sont parallèles et de même longueur. Des arêtes parallèles dans la réalité restent parallèles sur le dessin.",
+  "07-piege": "Attention au piège ! Sur le dessin, toutes les faces ne gardent pas leur vraie forme. Seules la face avant et la face arrière la gardent. Les faces du côté et du dessus sont penchées : on ne mesure pas leurs angles sur le dessin.",
+  "08-question": "Question ! Sur le dessin d'un cube en perspective cavalière, combien de faces sont dessinées comme de vrais carrés ? A : 6 faces. B : 3 faces. C : 2 faces. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. La face avant et la face arrière sont face à nous : elles restent deux vrais carrés. Les quatre autres sont penchées.",
+  "09-patron": "Et pour fabriquer le solide, on passe au patron : on déplie toutes ses faces à plat. Pour le cube, 6 carrés. Le dessin en perspective montre le solide ; le patron permet de le construire.",
+  "10-defi": "À toi de jouer ! Lina dessine un pavé droit dont la face avant fait 4 carreaux de long et 2 de haut. Combien de traits en biais trace-t-elle ? Et combien d'arêtes en pointillés ? Mets pause, et cherche !",
+  "10b-correction": "Correction. Depuis les 4 coins de la face avant, 4 traits en biais, de même longueur. On relie les bouts. Le trait en biais du coin en bas à gauche est caché : en pointillés. Avec les deux arêtes du fond qui partent de ce coin caché, cela fait 3 arêtes en pointillés.",
+  "11-finale": "Ce que tu as appris. En perspective cavalière, la face avant est en vraie grandeur. Les traits en biais sont parallèles et de même longueur. Les arêtes cachées sont en pointillés. Et le patron déplie le solide à plat.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

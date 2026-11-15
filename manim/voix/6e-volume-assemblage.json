@@ -1,0 +1,17 @@
+{
+  "00-garde": "Assembler des volumes. Quand on colle deux solides, que devient le volume ?",
+  "01-situation": "Voici Manon. Elle est menuisière. Elle fabrique des meubles en assemblant des caissons en bois, comme de gros blocs. Avant de construire une bibliothèque, elle en fait une maquette avec des cubes. Quel volume prendra le meuble entier ?",
+  "02-coller": "On colle un solide de 8 cubes et un solide de 4 cubes. On compte tout : 8 plus 4, 12 cubes. Coller, c'est additionner.",
+  "03-forme": "Aucun cube ne disparaît quand on colle. La forme change, mais le nombre de cubes reste le même. Que je colle à droite, dessus ou derrière : toujours 12 cubes.",
+  "04-unites": "Avec des unités, c'est pareil. Un bloc de 18 centimètres cubes et un bloc de 12 centimètres cubes. Ensemble : 18 plus 12, 30 centimètres cubes.",
+  "05-question": "Question ! On colle un solide de 15 centimètres cubes et un solide de 9 centimètres cubes. Quel est le volume du nouveau solide ? A : 24 centimètres cubes. B : 6 centimètres cubes. C : 15 centimètres cubes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Coller, c'est additionner : 15 plus 9, 24 centimètres cubes. 6, c'est la différence : on a enlevé au lieu d'ajouter.",
+  "06-enlever": "Et si on enlève un morceau ? Manon creuse une niche dans un bloc de 20 cubes. La niche prend 6 cubes. Il reste 20 moins 6, 14 cubes. Enlever, c'est soustraire.",
+  "07-piege": "Attention au piège ! Quand deux solides se collent, leurs faces collées se cachent. Mais les cubes sont toujours là : le volume ne diminue pas. On additionne tous les cubes.",
+  "08-question": "Question ! Manon colle 3 blocs pareils de 8 centimètres cubes. Quel est le volume du meuble ? A : 11 centimètres cubes. B : 24 centimètres cubes. C : 16 centimètres cubes. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 3 blocs de 8 : 8 plus 8 plus 8, ou 3 fois 8, 24 centimètres cubes. 16, c'est seulement 2 blocs.",
+  "09-defi": "À toi de jouer ! La maquette d'une armoire : un bloc de 4 sur 2 sur 3 cubes, avec un petit bloc de 2 sur 2 sur 1 collé dessus. Puis Manon creuse une niche de 2 cubes. Quel est le volume final ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Le grand bloc : 4 fois 2, 8 ; fois 3, 24 cubes. Le petit bloc : 2 fois 2, 4 ; fois 1, 4 cubes. Collés : 24 plus 4, 28 cubes. On creuse la niche : 28 moins 2, 26 cubes.",
+  "10-finale": "Ce que tu as appris. Coller deux solides, c'est additionner leurs volumes. Enlever un morceau, c'est soustraire. La forme change, mais aucun cube ne disparaît.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

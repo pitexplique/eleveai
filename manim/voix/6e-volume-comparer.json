@@ -1,0 +1,16 @@
+{
+  "00-garde": "Comparer des volumes. Le solide le plus haut a-t-il toujours le plus grand volume ?",
+  "01-situation": "Voici Léna. Elle est ingénieure de l'eau. À La Réunion, beaucoup de maisons gardent l'eau de pluie dans une cuve. Léna doit choisir une cuve pour une école. Laquelle garde le plus d'eau ?",
+  "02-compter": "Léna fabrique la maquette de chaque cuve avec des cubes. Pour comparer deux volumes, on compte les cubes de chacune. La cuve A a 14 cubes, la cuve B en a 12. 14, c'est plus que 12 : la cuve A a le plus grand volume.",
+  "03-haut": "Mais la cuve la plus haute n'est pas forcément la plus grande. La cuve C : 2 cubes de long, 2 de large, 5 de haut. 2 fois 2, 4 par couche ; 5 couches, 20 cubes. La cuve D, basse et large : 4 de long, 3 de large, 2 de haut. 4 fois 3, 12 par couche ; 2 couches, 24 cubes. La basse gagne !",
+  "04-meme": "Et deux formes différentes peuvent avoir le même volume. Une barre de 12 cubes, et un bloc de 3 sur 2 sur 2 : 12 cubes aussi. Même volume, autre forme.",
+  "05-question": "Question ! Le solide E a 2 couches de 6 cubes. Le solide F a 4 couches de 3 cubes. Lequel a le plus grand volume ? A : ils ont le même volume. B : le solide E. C : le solide F, il est plus haut. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. E : 2 fois 6, 12 cubes. F : 4 fois 3, 12 cubes. Même volume ! F est plus haut, mais plus étroit.",
+  "06-piege": "Attention au piège ! On ne juge pas un volume à l'œil, ni à la hauteur. On compte les cubes, puis on compare les nombres. Et on compare des cubes de la même taille.",
+  "07-question": "Question ! Un carton fait 5 cubes de long, 2 de large, 2 de haut. Une boîte fait 3 cubes de long, 3 de large, 3 de haut. Lequel a le plus grand volume ? A : le carton, il est plus long. B : ils sont égaux. C : la boîte. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Le carton : 5 fois 2, 10 ; fois 2, 20 cubes. La boîte : 3 fois 3, 9 ; fois 3, 27 cubes. 27, c'est plus que 20.",
+  "08-defi": "À toi de jouer ! Léna range trois cuves, de la plus petite à la plus grande. Cuve 1 : 3 sur 2 sur 4. Cuve 2 : 5 sur 5 sur 1. Cuve 3 : 2 sur 2 sur 5. Mets pause, et cherche !",
+  "08b-correction": "Correction. Cuve 1 : 3 fois 2, 6 ; fois 4, 24 cubes. Cuve 2 : 5 fois 5, 25 ; fois 1, 25 cubes. Cuve 3 : 2 fois 2, 4 ; fois 5, 20 cubes. De la plus petite à la plus grande : cuve 3, cuve 1, cuve 2. La plus plate est la plus grande !",
+  "09-finale": "Ce que tu as appris. Pour comparer des volumes, on compte les cubes de chacun. Le plus haut n'a pas toujours le plus de cubes. Deux formes différentes peuvent avoir le même volume.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

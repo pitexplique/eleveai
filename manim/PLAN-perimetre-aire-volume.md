@@ -115,46 +115,46 @@ Ordre de production : 1 Périmètre → 2 Aire → 3 Volume et contenance → 4 
 ## 6E
 
 **Périmètre** (6)
-- [ ] Comprendre le périmètre — `aire_perimetre_comprendre`
-- [ ] Calculer le périmètre d’un carré — `aire_perimetre_carre`
-- [ ] Calculer le périmètre d’un rectangle — `aire_perimetre_rectangle`
-- [ ] Calculer le périmètre d’une figure — `aire_perimetre_figure`
-- [ ] Résoudre un problème de périmètre — `aire_perimetre_probleme`
-- [ ] Défis de périmètre — `aire_perimetre_defi`
+- [x] Comprendre le périmètre — `aire_perimetre_comprendre` — ↪ vidéo CM2 `cm2-perimetre-comprendre` (+ short) par `aussi`, coach branché 15/11
+- [ ] Calculer le périmètre d’un carré — `aire_perimetre_carre` — ↪ vidéo 6e P1 `6e-aire-perimetre-rectangle` par `aussi` (à produire)
+- [ ] Calculer le périmètre d’un rectangle — `aire_perimetre_rectangle` — ⏳ 6e P1 « formules du périmètre » (Lucas, paysagiste, verte) : voix écrite 15/11, à valider
+- [x] Calculer le périmètre d’une figure — `aire_perimetre_figure` — ↪ vidéo CM2 `cm2-perimetre-polygone` (+ short) par `aussi`, coach branché 15/11
+- [x] Résoudre un problème de périmètre — `aire_perimetre_probleme` — ↪ vidéo CM2 `cm2-perimetre-defi` (+ short) par `aussi`, coach branché 15/11
+- [ ] Défis de périmètre — `aire_perimetre_defi` — ⏳ 6e P2 (Chloé, fleuriste, bleue) : voix écrite 15/11, à valider
 
 **Aire** (9)
-- [ ] Comprendre l’aire — `aire_comprendre`
-- [ ] Calculer une aire par comptage — `aire_compter`
-- [ ] Convertir des aires — `aire_convertir`
-- [ ] Calculer l’aire d’un rectangle — `aire_rectangle`
-- [ ] Calculer l’aire d’un carré — `aire_carre`
-- [ ] Comparer des aires — `aire_comparer`
-- [ ] Décomposer une figure pour calculer son aire — `aire_decomposer`
-- [ ] Résoudre des problèmes d’aires — `aire_probleme`
-- [ ] Défis sur les aires — `aire_defi`
+- [x] Comprendre l’aire — `aire_comprendre` — ↪ vidéo CM2 `cm2-aire-comprendre` (+ short) par `aussi`, coach branché 15/11
+- [x] Calculer une aire par comptage — `aire_compter` — ↪ vidéo CM1 `cm1-aire-unite` (+ short) par `aussi`, coach branché 15/11
+- [x] Convertir des aires — `aire_convertir` — ↪ vidéo CM2 `cm2-aire-convertir-unites` (+ short) par `aussi`, coach branché 15/11
+- [ ] Calculer l’aire d’un rectangle — `aire_rectangle` — ⏳ 6e A1 « formules de l'aire » (Amina, jardinière, verte) : voix écrite 15/11, à valider
+- [ ] Calculer l’aire d’un carré — `aire_carre` — ↪ vidéo 6e A1 `6e-aire-rectangle` par `aussi` (à produire)
+- [ ] Comparer des aires — `aire_comparer` — ⏳ 6e A2 (Léna, agente immobilière, verte) : voix écrite 15/11, à valider
+- [x] Décomposer une figure pour calculer son aire — `aire_decomposer` — ↪ vidéo CM2 `cm2-aire-composer` (+ short) par `aussi`, coach branché 15/11
+- [ ] Résoudre des problèmes d’aires — `aire_probleme` — ⏳ 6e A3 (Yanis, maçon, verte) : voix écrite 15/11, à valider
+- [ ] Défis sur les aires — `aire_defi` — ⏳ 6e A4 (Théo, technicien en énergies renouvelables, bleue) : voix écrite 15/11, à valider
 
 **Volume et contenance** (6)
-- [ ] Comprendre l’unité de volume — `volume_unite`
-- [ ] Compter des volumes — `volume_compter`
-- [ ] Comparer des volumes — `volume_comparer`
-- [ ] Assembler des volumes — `volume_assemblage`
-- [ ] Lire un volume — `volume_lire`
-- [ ] Défis sur les volumes — `volume_defi`
+- [ ] Comprendre l’unité de volume — `volume_unite` — ⏳ 15/11 voix écrites `6e-volume-unite(-short)` (Mathis, maître-nageur), à valider
+- [ ] Compter des volumes — `volume_compter` — ⏳ 15/11 voix écrites `6e-volume-compter(-short)` (Yanis, logisticien), à valider ; + ↪ `cm1-solides-defi` par `aussi`
+- [ ] Comparer des volumes — `volume_comparer` — ⏳ 15/11 voix écrites `6e-volume-comparer(-short)` (Léna, ingénieure de l'eau), à valider
+- [ ] Assembler des volumes — `volume_assemblage` — ⏳ 15/11 voix écrites `6e-volume-assemblage(-short)` (Manon, menuisière), à valider
+- [ ] Lire un volume — `volume_lire` — ↪ vidéo 6e `6e-volume-unite` par `aussi` (écran « Lire un volume » ; pas de vidéo à part)
+- [ ] Défis sur les volumes — `volume_defi` — ⏳ 15/11 voix écrites `6e-volume-defi(-short)` (Clara, pâtissière-chocolatière), à valider
 
 **Solides et espace** (5)
-- [ ] Les quatre vues : dessus, face, gauche, droite — `vision_vues`
-- [ ] Compter les cubes d’un empilement, cachés compris — `vision_denombrer`
-- [ ] Perspective cavalière, dessin à main levée, patron — `vision_representation`
-- [ ] Construire le patron… — `patron_pave_dimensions`
-- [ ] Défis : cubes cachés, cube peint puis découpé — `vision_defi`
+- [ ] Les quatre vues : dessus, face, gauche, droite — `vision_vues` — ⏳ 15/11 voix écrites `6e-vision-vues(-short)` (Samuel, architecte), à valider
+- [ ] Compter les cubes d’un empilement, cachés compris — `vision_denombrer` — ↪ vidéo CM1 `cm1-solides-defi` par `aussi` (cubes cachés, étage par étage) ; pyramide 16 + 9 + 4 + 1 dans `6e-vision-defi`
+- [ ] Perspective cavalière, dessin à main levée, patron — `vision_representation` — ⏳ 15/11 voix écrites `6e-vision-representation(-short)` (Lina, animatrice 3D), à valider ; + ↪ `cm1-solides-patron` par `aussi` (patrons)
+- [ ] Construire le patron… — `patron_pave_dimensions` — ⏳ 15/11 voix écrites `6e-vision-patron-pave(-short)` (Jeanne, designer d'emballages), à valider
+- [ ] Défis : cubes cachés, cube peint puis découpé — `vision_defi` — ⏳ 15/11 voix écrites `6e-vision-defi(-short)` (Enzo, dessinateur-projeteur), à valider
 
 **Longueurs et conversions** (6)
-- [ ] Mesurer une longueur — `aire_longueur_mesurer`
-- [ ] Connaître les unités de longueur — `aire_longueur_unite`
-- [ ] Convertir des longueurs — `aire_longueur_convertir`
-- [ ] Comparer des longueurs — `aire_longueur_comparer`
-- [ ] Résoudre un problème de longueurs — `aire_longueur_probleme`
-- [ ] Défis de longueurs — `aire_longueur_defi`
+- [x] Mesurer une longueur — `aire_longueur_mesurer` — ↪ vidéo CE2 `ce2-longueur-choisir-unite` (+ short) par `aussi` (la banque 6e fait choisir l'unité), coach branché 15/11
+- [x] Connaître les unités de longueur — `aire_longueur_unite` — ↪ vidéo CE2 `ce2-longueur-relations` (+ short) par `aussi`, coach branché 15/11
+- [x] Convertir des longueurs — `aire_longueur_convertir` — ✅ vidéo 6e déjà en ligne `6e-aire-longueur-convertir-diagonale` (Grand Raid), déjà au coach
+- [x] Comparer des longueurs — `aire_longueur_comparer` — ↪ vidéo CM1 `cm1-longueur-comparer` (+ short) par `aussi`, coach branché 15/11
+- [x] Résoudre un problème de longueurs — `aire_longueur_probleme` — ↪ vidéo CE2 `ce2-longueur-probleme` (+ short) par `aussi`, coach branché 15/11
+- [x] Défis de longueurs — `aire_longueur_defi` — ↪ vidéo CM1 `cm1-longueur-defi` par `aussi` (paysage ; le short 6e « Diagonale » garde la case short), coach branché 15/11
 
 ## 5E
 
