@@ -35,8 +35,16 @@ CP : Awa déménageuse, Hugo primeur, Zoé toiletteuse, Noé livreur à vélo. C
 Outils ajoutés : `perimetre_marques.py masse:<slug>:<classe>` (→ `masse_<classe>_<slug>_marques.json`), `films/cp-commun.js` (copie de ce2-commun.js), `films/cp-masse.js` (balance, sac, ballon, bille, plume, pomme, pastèque à la craie), `passe_masse.py` : champ `notion` (CP = `masse_contenance`), tags sans doublon. Scripts CP/CE1/CE2 : `manim/scripts/ce2/masse_<classe>_<slug>.py`. Rendu HD : `-o eleveai-maths-<classe>-masse-<slug> --media_dir manim/scripts/ce2/media-mas-<classe><NN>`, copie dans `manim/sorties/<classe>/maths/masse/<NN>-<slug>/` ; supprimer `_muet.mp4` après le film.
 - **CP 01 lexique** (Awa) : paysage 2 min 25, dry run 0, bords 0, planche HD relue ; short 60 s, ✅ compteur contrôlé avant le film (barre pleine à 29,9 s, vide à 32,7 s, dans la carte, rien dessus) ; miniatures (« Dessin animé ») ; manifeste 30/04/2027 ; fiche, vignettes, R2, videos-r2 (nos 2 clés seulement), coach + Supabase (2 lignes `cp_masse_lexique`).
 
+## ⛔⛔ 16/11 soir : la BALANCE de Manim penchait À L'ENVERS (corrigé, à re-rendre)
+`Balance` (masse_commun.py) faisait MONTER le plateau du plus lourd (`ang = -penche*0.32`). Corrigé : `ang = penche*0.32` → penche > 0 = la GAUCHE descend, < 0 = la DROITE descend (comme la docstring). Les valeurs `penche` des scripts suivaient déjà la docstring : elles sont justes maintenant. Le short (`balanceCraie`, a > 0 = droite descend) était juste.
+**À REFAIRE EN PREMIER** (dry runs déjà relancés : 0 alerte pour les trois) :
+1. Pilote CE2 03 comparer : HD (`MasseComparerCE2`, `-o eleveai-maths-ce2-masse-comparer --media_dir manim/scripts/ce2/media-mas-03`), copie dans `manim/sorties/ce2/maths/masse/03-comparer/`, bords 0, planche HD relue (écrans 02, 03, 08 : le plateau du plus lourd DESCEND).
+2. CP 01 lexique : HD (`MasseLexiqueCP`, `media-mas-cp01`), copie, bords, planche (écran 05 piège : la bille descend).
+3. Pour les deux : `passe_masse.py temps <id>` (vérifier que les temps ne bougent pas, sinon `manifeste`), `miniature_masse.py <id>` (durée), `vignettes-videos.py`, R2 (`rclone copy` remplace les fichiers changés), `generer-videos-r2.mjs` (nos clés seulement). Coach : rien (mêmes URL).
+Script du rendu HD sous verrou : voir plus bas (copie de hd.sh).
+
 ## Reste (dans l'ordre)
-1. CP 02 comparer (script écrit, `masse_cp_comparer.py`, à auditer) → CP 03-04 → CE1 (5) → reste du CE2 (6) → CM1 (5) → CM2 (4) : par épisode, script `manim/scripts/<classe>/masse_<slug>.py` sur le modèle du pilote, marques (`perimetre_marques.py masse:<slug>` : vérifier le dossier de sortie pour les autres classes), dry run, -ql + planche, HD sous verrou, bords, short (série `<classe>-masse`), miniatures, entrée dans `passe_masse.py` (dates après la dernière de la file, ⛔ 3 shorts/jour au plus), fiche, vignettes, R2, videos-r2, coach + Supabase (+ alias `aussi` : `cp-masse-comparer@ce1_masse_soupeser`).
+1. CP 02 comparer (Hugo primeur ; script `masse_cp_comparer.py` + marques faits, dry run 0 alerte, -ql vu avant la correction de la balance : à refaire, puis planche, HD, short `films/cp-masse-comparer.js` à écrire — doudou / petite voiture en fer, bonne B ; `aussi` → ce1 `ce1_masse_soupeser`) → CP 03-04 → CE1 (5) → reste du CE2 (6) → CM1 (5) → CM2 (4) : par épisode, script `manim/scripts/<classe>/masse_<slug>.py` sur le modèle du pilote, marques (`perimetre_marques.py masse:<slug>` : vérifier le dossier de sortie pour les autres classes), dry run, -ql + planche, HD sous verrou, bords, short (série `<classe>-masse`), miniatures, entrée dans `passe_masse.py` (dates après la dernière de la file, ⛔ 3 shorts/jour au plus), fiche, vignettes, R2, videos-r2, coach + Supabase (+ alias `aussi` : `cp-masse-comparer@ce1_masse_soupeser`).
 2. Commit par chemin après chaque épisode ; jamais de push.
 
 ## ⭐ 16/11 soir — consignes de Frédéric (relayées par le chef) : coach robuste, pavé, dessins, compteur, phrases courtes
@@ -64,3 +72,17 @@ Compteur des shorts : à contrôler short par short avant `film` (barre visible,
 | CM2 | defi / convertir | 399 / 450 | 100 % | 0 % | 19 / 8 | 0 % |
 Partout : 0 erreur de générateur, 0 QCM à deux choix égaux, 0 QCM sans le juste, ≥ 38 énoncés différents par micro (≥ 10 ✅).
 **À corriger** : (1) pavé numérique ≈ 0 % partout → viser 1 réponse sur 2 (sauf CP où presque tout est lourd/léger : pavé là où la réponse est un nombre) ; (2) dessins CE1 relation_kg_g, defi, kg_g et CE2 unites, estimer, defi, relations, choisir_unite → 100 % visé ; (3) phrases CM1 comparer / mesurer, CM2 comparer / estimer / defi → ≤ 18 mots. Travail des banques : session coach dédiée (fichiers `lib/tutor-v4/questionBank/{cp,ce1,ce2,cm1,cm2}/maths/masse*`), pas de rendu → l'APRÈS sera écrit ici.
+
+
+## Outils de la session D (copiés ici pour la relève)
+Rendu HD sous verrou (bash) :
+```
+L="$TEMP/eleveai-rendu-hd.lock"; while [ -e "$L" ]; do sleep 60; done; echo "masses <id>" > "$L"
+python -m manim render -qh --disable_caching <script> <Scene> -o <nom> --media_dir <media>; rm -f "$L"
+cp $(find <media> -name "<nom>.mp4" -path "*1080p60*") <sortie>/ && python scripts/verifier-bords-video.py <sortie>/<nom>.mp4
+```
+Film du short : même verrou autour de `node scripts/ti-margo-short.mjs <série> <ep> film`, puis `… miniature` ; effacer `_muet.mp4`.
+Contrôle du compteur : `CONTROLE=<dossier> node scripts/ti-margo-short.mjs <série> <ep> controle <t>…` aux instants cpt, cpt+1, cpt+2, cpt+2,9 (cpt = fin du clip 02-question + 0,1 s) + `python scripts/ti-margo-planche.py <dossier> <png>`.
+Lignes Supabase : `node .tmp-lire-ress-masses.mjs <micro> …` (non suivi par git).
+R2 : `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/r2-videos.ps1 -Rclone "copy manim/sorties/<cl>/maths/masse/<NN-slug> R2:<cl>/maths/masse/<NN-slug> --include *.{mp4,png,webp}"`.
+Manifeste : relire la dernière date juste avant (`max pas_avant`), 1 paysage + 1 short par jour ; CP 01 = 30/04/2027, donc CP 02 = 01/05/2027 si personne n'a écrit après.

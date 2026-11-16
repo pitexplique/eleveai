@@ -41,7 +41,7 @@ class Balance(VGroup):
         colonne = Rectangle(width=0.16 * s, height=h, fill_color=METAL, fill_opacity=1, stroke_width=0)
         colonne.next_to(socle, UP, buff=0)
         pivot = colonne.get_top()
-        ang = -penche * 0.32  # rad : 0,32 rad au plus
+        ang = penche * 0.32  # rad : 0,32 rad au plus (17/11 : signe corrigé, le côté lourd DESCEND)
         demi = larg / 2
         g_ = pivot + demi * np.array([-np.cos(ang), -np.sin(ang), 0])
         d_ = pivot + demi * np.array([np.cos(ang), np.sin(ang), 0])
