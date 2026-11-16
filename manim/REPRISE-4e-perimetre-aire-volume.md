@@ -44,14 +44,15 @@ Ouvert le 15/11/2026. 30 micros du coach, plan : `manim/PLAN-perimetre-aire-volu
 | S2 `vision_vues` (maquette) | ✅ | ✅ | ✅ 203,9 s / 54,7 s, bords 0 |
 | S3 `vision_representation` (manga) | ✅ | ✅ | ✅ 188,6 s / 57,4 s, bords 0 |
 | S4 `patron_pyramide` (dé à 4 faces) | ✅ | ✅ | ✅ 200,2 s / 57,0 s, bords 0 |
-| S5 `vision_section` (muscle, scanner) | ⏳ | ⏳ | — |
-| S6 `vision_defi` (drone) | ⏳ | ⏳ | — |
+| S5 `vision_section` (muscle, scanner) | ✅ | ✅ | ✅ 201,8 s / 56,5 s, bords 0 |
+| S6 `vision_defi` (drone) | ✅ | ✅ | ✅ 208,4 s / 53,4 s, bords 0 |
 | P1 → P5 (périmètre) | ⏳ | ⏳ | — |
 | A1 → A5 (aire) | ⏳ | ⏳ | — |
 | T1 → T8 (3e) | ⏳ | ⏳ | — |
 
-**8 épisodes finis sur 28** (V1, V2, V3, V4, S1, S2, S3, S4) — paysages et shorts rendus en HD,
-`verifier-bords-video` = 0 sur les 16 MP4. **20 restent à écrire et à rendre.**
+**10 épisodes finis sur 28** (V1 à V4, S1 à S6) — paysages et shorts rendus en HD,
+`verifier-bords-video` = 0 sur les 20 MP4. **18 restent à écrire et à rendre.**
+⭐ Le LOT SOLIDES est COMPLET : les 6 micros `vision_espace` de 4e sont couverts.
 
 Chaîne d'un épisode : script paysage → dry run `AUDIT=1 BORDS=1` jusqu'à 0 AVANCE / RETARD / TARD /
 BORD → script short (même contrôle, en `-r 1080,1920`) → `manim/poste2/4e_hd.sh` pour les deux
@@ -96,6 +97,26 @@ BORD → script short (même contrôle, en `-r 1080,1920`) → `manim/poste2/4e_
 17. Dans un écran de question, la figure monte **au-dessus de y = +0,5** (la phrase de réponse
     s'écrit à partir de −0,3), et la phrase de réponse tient en **3 lignes** : à 4 elle est
     rétrécie jusqu'à devenir illisible sur un vidéoprojecteur.
+
+### Leçons ajoutées par S5 et S6 (16/11)
+18. ⭐⭐ **Le gabarit paysage ne regarde qu'UN mot par texte** : `_jetons` renvoie tous les NOMBRES
+    plus le PREMIER mot de 4 lettres ou plus. D'où la règle de découpe : un morceau ne contient
+    jamais à la fois un nombre et un mot long dits à plus de 0,4 s d'écart. « rayon 4 cm »,
+    « 4 m de diamètre », « 25 € le mètre », « 1 m plus loin » : tous à couper en deux.
+19. ⛔⛔ **Un mot de 4 lettres qui REVIENT plus loin décale tout l'écran.** « Elle coûte » attendait
+    le « elle » de « Combien coûte-t-elle ? », douze mots plus loin : tout le reste de l'écran
+    partait en retard. Avant d'écrire une étiquette, vérifier que son premier mot long n'est pas
+    caché dans un mot de la fin (« elle » dans « va-t-elle »).
+20. Un TITRE qui redit un mot prononcé plus tard se met en `hors_audit` : il sort de la synchro
+    au lieu de retarder la ligne qui l'accompagne (S6, « Un solide à la fois »).
+21. ⛔ **Les milliers prennent une ESPACE INSÉCABLE** (U+00A0) : l'audit efface l'espace ordinaire
+    ET l'espace fine (U+202F), « 1 200 » devient « 1200 », introuvable dans la voix, et le nombre
+    sort du contrôle (c'est pour ça que V4 affiche AUDIT-ABSENT « 10000 »).
+22. Dans un SHORT, `au_mot` cherche une SOUS-CHAÎNE : « 6 000 watts » se trouve dans
+    « 36 000 watts », et « Les fuyantes » dans « paral-lès-… ». Choisir un extrait unique
+    (« ajouté 6 000 ») ou passer `n=2`.
+23. Un visuel faux reste faux même s'il est joli : quatre petits disques posés sur un grand ne le
+    remplissent pas. Quatre QUARTS du grand disque, si — et ils ont bien l'aire du petit (S5 short).
 
 ## Le PILOTE V2 `volume_pyramide` (15/11) — vidéo COMMUNE 4e + 3e
 
