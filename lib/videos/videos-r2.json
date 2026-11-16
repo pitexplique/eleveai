@@ -5726,6 +5726,168 @@
   "youtube": null,
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=triangle_figure&microId=triangle_type_cote&display=simple"
  },
+ "6e-vision-defi": {
+  "fichier": "6e/maths/vision-espace/04-defi/eleveai-maths-6e-vision-defi.mp4",
+  "poster": "6e/maths/vision-espace/04-defi/eleveai-maths-6e-vision-defi.png",
+  "vignette": "6e/maths/vision-espace/04-defi/eleveai-maths-6e-vision-defi.vignette.webp",
+  "titre": "Cubes cachés, cube peint : un défi dans l'espace — Défis dans l'espace — épisode 4 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=vision_espace&microId=vision_defi&display=simple"
+ },
+ "6e-vision-defi-short": {
+  "fichier": "6e/maths/vision-espace/04-defi/eleveai-maths-6e-vision-defi-short.mp4",
+  "poster": "6e/maths/vision-espace/04-defi/eleveai-maths-6e-vision-defi-short-miniature.png",
+  "vignette": "6e/maths/vision-espace/04-defi/eleveai-maths-6e-vision-defi-short-miniature.vignette.webp",
+  "titre": "12 morceaux tout chocolat dans mon gâteau, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=vision_espace&microId=vision_defi&display=simple"
+ },
+ "6e-vision-patron-pave": {
+  "fichier": "6e/maths/vision-espace/03-patron-pave/eleveai-maths-6e-vision-patron-pave.mp4",
+  "poster": "6e/maths/vision-espace/03-patron-pave/eleveai-maths-6e-vision-patron-pave.png",
+  "vignette": "6e/maths/vision-espace/03-patron-pave/eleveai-maths-6e-vision-patron-pave.vignette.webp",
+  "titre": "Les mesures de chaque face : le patron d'un pavé droit — Le patron du pavé — épisode 3 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=vision_espace&microId=patron_pave_dimensions&display=simple"
+ },
+ "6e-vision-patron-pave-short": {
+  "fichier": "6e/maths/vision-espace/03-patron-pave/eleveai-maths-6e-vision-patron-pave-short.mp4",
+  "poster": "6e/maths/vision-espace/03-patron-pave/eleveai-maths-6e-vision-patron-pave-short-miniature.png",
+  "vignette": "6e/maths/vision-espace/03-patron-pave/eleveai-maths-6e-vision-patron-pave-short-miniature.vignette.webp",
+  "titre": "Un couvercle de 6 sur 4 ferme ma boîte, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=vision_espace&microId=patron_pave_dimensions&display=simple"
+ },
+ "6e-vision-representation": {
+  "fichier": "6e/maths/vision-espace/02-representation/eleveai-maths-6e-vision-representation.mp4",
+  "poster": "6e/maths/vision-espace/02-representation/eleveai-maths-6e-vision-representation.png",
+  "vignette": "6e/maths/vision-espace/02-representation/eleveai-maths-6e-vision-representation.vignette.webp",
+  "titre": "Dessiner un cube en volume sur une feuille plate — La perspective cavalière — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=vision_espace&microId=vision_representation&display=simple"
+ },
+ "6e-vision-representation-short": {
+  "fichier": "6e/maths/vision-espace/02-representation/eleveai-maths-6e-vision-representation-short.mp4",
+  "poster": "6e/maths/vision-espace/02-representation/eleveai-maths-6e-vision-representation-short-miniature.png",
+  "vignette": "6e/maths/vision-espace/02-representation/eleveai-maths-6e-vision-representation-short-miniature.vignette.webp",
+  "titre": "Mon cube n'est qu'un carré, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=vision_espace&microId=vision_representation&display=simple"
+ },
+ "6e-vision-vues": {
+  "fichier": "6e/maths/vision-espace/01-vues/eleveai-maths-6e-vision-vues.mp4",
+  "poster": "6e/maths/vision-espace/01-vues/eleveai-maths-6e-vision-vues.png",
+  "vignette": "6e/maths/vision-espace/01-vues/eleveai-maths-6e-vision-vues.vignette.webp",
+  "titre": "De face, de dessus, de côté : les vues d'un assemblage — Les quatre vues — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=vision_espace&microId=vision_vues&display=simple"
+ },
+ "6e-vision-vues-short": {
+  "fichier": "6e/maths/vision-espace/01-vues/eleveai-maths-6e-vision-vues-short.mp4",
+  "poster": "6e/maths/vision-espace/01-vues/eleveai-maths-6e-vision-vues-short-miniature.png",
+  "vignette": "6e/maths/vision-espace/01-vues/eleveai-maths-6e-vision-vues-short-miniature.vignette.webp",
+  "titre": "Mon drone voit les 10 cubes, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=vision_espace&microId=vision_vues&display=simple"
+ },
+ "6e-volume-assemblage": {
+  "fichier": "6e/maths/volume/04-assemblage/eleveai-maths-6e-volume-assemblage.mp4",
+  "poster": "6e/maths/volume/04-assemblage/eleveai-maths-6e-volume-assemblage.png",
+  "vignette": "6e/maths/volume/04-assemblage/eleveai-maths-6e-volume-assemblage.vignette.webp",
+  "titre": "Coller deux solides : que devient le volume ? — Assembler des volumes — épisode 4 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_assemblage&display=simple"
+ },
+ "6e-volume-assemblage-short": {
+  "fichier": "6e/maths/volume/04-assemblage/eleveai-maths-6e-volume-assemblage-short.mp4",
+  "poster": "6e/maths/volume/04-assemblage/eleveai-maths-6e-volume-assemblage-short-miniature.png",
+  "vignette": "6e/maths/volume/04-assemblage/eleveai-maths-6e-volume-assemblage-short-miniature.vignette.webp",
+  "titre": "Coller ma tour fait perdre des cubes, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_assemblage&display=simple"
+ },
+ "6e-volume-comparer": {
+  "fichier": "6e/maths/volume/03-comparer/eleveai-maths-6e-volume-comparer.mp4",
+  "poster": "6e/maths/volume/03-comparer/eleveai-maths-6e-volume-comparer.png",
+  "vignette": "6e/maths/volume/03-comparer/eleveai-maths-6e-volume-comparer.vignette.webp",
+  "titre": "La cuve la plus haute est-elle la plus grande ? — Comparer des volumes — épisode 3 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_comparer&display=simple"
+ },
+ "6e-volume-comparer-short": {
+  "fichier": "6e/maths/volume/03-comparer/eleveai-maths-6e-volume-comparer-short.mp4",
+  "poster": "6e/maths/volume/03-comparer/eleveai-maths-6e-volume-comparer-short-miniature.png",
+  "vignette": "6e/maths/volume/03-comparer/eleveai-maths-6e-volume-comparer-short-miniature.vignette.webp",
+  "titre": "Ma tour de 10 cubes gagne, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_comparer&display=simple"
+ },
+ "6e-volume-compter": {
+  "fichier": "6e/maths/volume/02-compter/eleveai-maths-6e-volume-compter.mp4",
+  "poster": "6e/maths/volume/02-compter/eleveai-maths-6e-volume-compter.png",
+  "vignette": "6e/maths/volume/02-compter/eleveai-maths-6e-volume-compter.vignette.webp",
+  "titre": "Le volume d'un pavé : compter les cubes par couches — Compter les cubes — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_compter&display=simple"
+ },
+ "6e-volume-compter-short": {
+  "fichier": "6e/maths/volume/02-compter/eleveai-maths-6e-volume-compter-short.mp4",
+  "poster": "6e/maths/volume/02-compter/eleveai-maths-6e-volume-compter-short-miniature.png",
+  "vignette": "6e/maths/volume/02-compter/eleveai-maths-6e-volume-compter-short-miniature.vignette.webp",
+  "titre": "9 sucres dans mon bloc, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_compter&display=simple"
+ },
+ "6e-volume-defi": {
+  "fichier": "6e/maths/volume/05-defi/eleveai-maths-6e-volume-defi.mp4",
+  "poster": "6e/maths/volume/05-defi/eleveai-maths-6e-volume-defi.png",
+  "vignette": "6e/maths/volume/05-defi/eleveai-maths-6e-volume-defi.vignette.webp",
+  "titre": "Ce qui manque, les couches : un défi de volumes — Défis sur les volumes — épisode 5 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_defi&display=simple"
+ },
+ "6e-volume-defi-short": {
+  "fichier": "6e/maths/volume/05-defi/eleveai-maths-6e-volume-defi-short.mp4",
+  "poster": "6e/maths/volume/05-defi/eleveai-maths-6e-volume-defi-short-miniature.png",
+  "vignette": "6e/maths/volume/05-defi/eleveai-maths-6e-volume-defi-short-miniature.vignette.webp",
+  "titre": "24 bacs de glaçons pour ma fête, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_defi&display=simple"
+ },
+ "6e-volume-unite": {
+  "fichier": "6e/maths/volume/01-unite/eleveai-maths-6e-volume-unite.mp4",
+  "poster": "6e/maths/volume/01-unite/eleveai-maths-6e-volume-unite.png",
+  "vignette": "6e/maths/volume/01-unite/eleveai-maths-6e-volume-unite.vignette.webp",
+  "titre": "Centimètre cube, mètre cube : mesurer un volume en cubes — L'unité de volume — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_unite&display=simple"
+ },
+ "6e-volume-unite-short": {
+  "fichier": "6e/maths/volume/01-unite/eleveai-maths-6e-volume-unite-short.mp4",
+  "poster": "6e/maths/volume/01-unite/eleveai-maths-6e-volume-unite-short-miniature.png",
+  "vignette": "6e/maths/volume/01-unite/eleveai-maths-6e-volume-unite-short-miniature.vignette.webp",
+  "titre": "Ma boîte de 20 cm³ prend 60 cubes, tu paries ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_unite&display=simple"
+ },
  "974-antecedent": {
   "fichier": "974/maths/shorts/fr/temperature-altitude/eleveai-maths-974-temperature-altitude-short-antecedent.mp4",
   "poster": null,

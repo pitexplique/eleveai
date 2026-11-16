@@ -95428,6 +95428,1416 @@
         "jeux-defis",
         "animaux"
       ]
+    },
+    {
+      "id": "6e-volume-unite",
+      "pas_avant": "2027-04-12",
+      "prioritaire": true,
+      "notionId": "volume_solide",
+      "microId": "volume_unite",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/volume/01-unite/eleveai-maths-6e-volume-unite.mp4",
+      "miniature": "6e/maths/volume/01-unite/eleveai-maths-6e-volume-unite.png",
+      "titre": "Centimètre cube, mètre cube : mesurer un volume en cubes — L'unité de volume — épisode 1 · Maths 6e",
+      "accroche": "Mathis est maître-nageur. Chaque matin, il verse un produit dans la piscine pour garder l'eau propre. La dose dépend de la place que prend l'eau : son volume. Mais un volume, comment le mesure-t-on ?\n\nDans cette vidéo :\n• le cube unité : 1 cm de côté, c'est 1 cm³\n• cm, cm², cm³ : une longueur, une aire, un volume\n• lire un volume : 18 cm³, ce sont 18 cubes de 1 cm³\n• le mètre cube pour les grands objets : la piscine fait 300 m³\n• le piège : 24 cm², c'est une aire, pas un volume\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : trois élèves écrivent le volume d'un dé : 8 cm, 8 cm² ou 8 cm³. Qui a raison, et combien de petits cubes ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_unite&display=simple\n\n🔢 Épisode 1 de la série Volume d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Mesurer la place d'un objet"
+        ],
+        [
+          "00:24",
+          "Le centimètre cube"
+        ],
+        [
+          "00:42",
+          "cm, cm², cm³"
+        ],
+        [
+          "01:02",
+          "Lire un volume"
+        ],
+        [
+          "01:19",
+          "Question 1"
+        ],
+        [
+          "01:55",
+          "Le mètre cube"
+        ],
+        [
+          "02:12",
+          "Le piège"
+        ],
+        [
+          "02:26",
+          "Question 2"
+        ],
+        [
+          "03:01",
+          "À toi de jouer"
+        ],
+        [
+          "03:22",
+          "Correction"
+        ],
+        [
+          "03:39",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "volume",
+        "unité de volume",
+        "centimètre cube",
+        "mètre cube",
+        "cm³",
+        "piscine",
+        "maître-nageur",
+        "grandeurs et mesures",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:19",
+          "question": "Un solide a un volume de 24 centimètres cubes. Combien de cubes de 1 centimètre cube contient-il ?",
+          "choix": [
+            "8 cubes",
+            "24 cubes",
+            "72 cubes"
+          ],
+          "reponse": 1,
+          "explication": "24 centimètres cubes, ce sont 24 cubes de 1 centimètre cube. Le petit 3 n'est pas un nombre à multiplier : il dit « cube »."
+        },
+        {
+          "t": "02:26",
+          "question": "Quelle unité choisir pour le volume de la piscine ?",
+          "choix": [
+            "le mètre cube",
+            "le mètre carré",
+            "le centimètre cube"
+          ],
+          "reponse": 0,
+          "explication": "Un volume a le petit 3. Et pour un objet aussi grand, on prend le grand cube : le mètre cube. Le centimètre cube, c'est pour un petit objet, comme un dé."
+        }
+      ],
+      "centres": [
+        "natation",
+        "sport"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "volume_solide",
+          "microId": "volume_lire"
+        }
+      ]
+    },
+    {
+      "id": "6e-volume-unite-short",
+      "pas_avant": "2027-04-12",
+      "prioritaire": true,
+      "notionId": "volume_solide",
+      "microId": "volume_unite",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-volume-unite",
+      "fichier": "6e/maths/volume/01-unite/eleveai-maths-6e-volume-unite-short.mp4",
+      "miniature": "6e/maths/volume/01-unite/eleveai-maths-6e-volume-unite-short-miniature.png",
+      "titre": "Ma boîte de 20 cm³ prend 60 cubes, tu paries ? #maths #6e",
+      "accroche": "Ma boîte à trésors est vide. Sur l'étiquette, c'est écrit : 20 cm³. Je prépare des petits cubes de 1 cm de côté… 60, ça devrait aller ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : un coffre de 35 cm³ contient déjà 12 petits cubes de 1 cm³ : combien en manque-t-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_unite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #volume #6e #college",
+      "tags": [
+        "cm³",
+        "volume",
+        "boîte à trésors",
+        "cubes",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "grandeurs et mesures",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Combien de petits cubes vont dans la boîte ?",
+          "choix": [
+            "60",
+            "23",
+            "20"
+          ],
+          "reponse": 2,
+          "explication": "20 centimètres cubes, ce sont 20 petits cubes de 1 centimètre cube. Le petit 3 veut dire « cube » : on ne le compte pas."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "volume_solide",
+          "microId": "volume_lire"
+        }
+      ]
+    },
+    {
+      "id": "6e-volume-compter",
+      "pas_avant": "2027-04-13",
+      "prioritaire": true,
+      "notionId": "volume_solide",
+      "microId": "volume_compter",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/volume/02-compter/eleveai-maths-6e-volume-compter.mp4",
+      "miniature": "6e/maths/volume/02-compter/eleveai-maths-6e-volume-compter.png",
+      "titre": "Le volume d'un pavé : compter les cubes par couches — Compter les cubes — épisode 2 · Maths 6e",
+      "accroche": "Yanis est logisticien : il organise le chargement des camions. Aujourd'hui, il range des cartons en forme de cube dans une remorque. Combien de cartons vont tenir, sans les compter un par un ?\n\nDans cette vidéo :\n• une couche : longueur × largeur (3 × 2 = 6 cubes)\n• puis les couches : 6 × 2 = 12 cubes, soit 12 cm³\n• volume du pavé = longueur × largeur × hauteur\n• le piège : les cubes cachés du fond et du dessous comptent aussi\n• un cube de 3 cm d'arête : une couche ne suffit pas\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une remorque de 8 cartons de long, 4 de large et 3 de haut : combien de cartons ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_compter&display=simple\n\n🔢 Épisode 2 de la série Volume d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Compter sans compter un par un"
+        ],
+        [
+          "00:24",
+          "Une couche"
+        ],
+        [
+          "00:36",
+          "Multiplier les couches"
+        ],
+        [
+          "00:49",
+          "Longueur × largeur × hauteur"
+        ],
+        [
+          "01:03",
+          "Question 1"
+        ],
+        [
+          "01:39",
+          "Les cubes cachés"
+        ],
+        [
+          "01:53",
+          "Question 2"
+        ],
+        [
+          "02:29",
+          "À toi de jouer"
+        ],
+        [
+          "02:44",
+          "Correction"
+        ],
+        [
+          "02:58",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "volume",
+        "pavé droit",
+        "longueur × largeur × hauteur",
+        "couches",
+        "cubes",
+        "logistique",
+        "camion",
+        "cm³",
+        "grandeurs et mesures",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:03",
+          "question": "Un pavé a 3 couches de 5 cubes. Quel est son volume ?",
+          "choix": [
+            "8 cubes",
+            "35 cubes",
+            "15 cubes"
+          ],
+          "reponse": 2,
+          "explication": "Une couche : 5 cubes. 3 couches pareilles : 3 × 5, 15 cubes. 8, c'est 3 + 5 : on a additionné au lieu de multiplier."
+        },
+        {
+          "t": "01:53",
+          "question": "Un cube a une arête de 3 centimètres. Quel est son volume ?",
+          "choix": [
+            "9 centimètres cubes",
+            "27 centimètres cubes",
+            "12 centimètres cubes"
+          ],
+          "reponse": 1,
+          "explication": "Une couche : 3 × 3, 9 cubes. 3 couches : 9 × 3, 27 centimètres cubes. 9, c'est une seule couche !"
+        }
+      ],
+      "centres": [
+        "transports"
+      ]
+    },
+    {
+      "id": "6e-volume-compter-short",
+      "pas_avant": "2027-04-13",
+      "prioritaire": true,
+      "notionId": "volume_solide",
+      "microId": "volume_compter",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-volume-compter",
+      "fichier": "6e/maths/volume/02-compter/eleveai-maths-6e-volume-compter-short.mp4",
+      "miniature": "6e/maths/volume/02-compter/eleveai-maths-6e-volume-compter-short-miniature.png",
+      "titre": "9 sucres dans mon bloc, tu paries ? #maths #6e",
+      "accroche": "Je construis un bloc avec des morceaux de sucre : 4 de long, 2 de large, et j'empile 3 étages pareils. 4, 2, 3… ça fait 9 morceaux ? Vraiment ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : un bloc de 5 sucres de long, 3 de large et 2 étages : combien de morceaux ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_compter&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #volume #6e #college",
+      "tags": [
+        "sucre",
+        "pavé",
+        "couches",
+        "volume",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "cm³",
+        "grandeurs et mesures",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:09",
+          "question": "Combien de morceaux de sucre en tout ?",
+          "choix": [
+            "9",
+            "8",
+            "24"
+          ],
+          "reponse": 2,
+          "explication": "Un étage : 4 × 2, 8 morceaux. 3 étages : 8 × 3, 24 morceaux. 9, c'est 4 + 2 plus 3 : on a additionné !"
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "6e-volume-comparer",
+      "pas_avant": "2027-04-14",
+      "prioritaire": true,
+      "notionId": "volume_solide",
+      "microId": "volume_comparer",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/volume/03-comparer/eleveai-maths-6e-volume-comparer.mp4",
+      "miniature": "6e/maths/volume/03-comparer/eleveai-maths-6e-volume-comparer.png",
+      "titre": "La cuve la plus haute est-elle la plus grande ? — Comparer des volumes — épisode 3 · Maths 6e",
+      "accroche": "Léna est ingénieure de l'eau. À La Réunion, beaucoup de maisons gardent l'eau de pluie dans une cuve. Léna doit choisir une cuve pour une école : laquelle garde le plus d'eau ?\n\nDans cette vidéo :\n• comparer deux volumes : on compte les cubes de chacun (14 contre 12)\n• la plus haute n'est pas forcément la plus grande : 20 cubes contre 24\n• deux formes différentes peuvent avoir le même volume\n• le piège : juger à l'œil, ou à la hauteur\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : ranger trois cuves de la plus petite à la plus grande : 3 × 2 × 4, 5 × 5 × 1 et 2 × 2 × 5.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_comparer&display=simple\n\n🔢 Épisode 3 de la série Volume d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le plus haut, le plus grand ?"
+        ],
+        [
+          "00:22",
+          "Compter pour comparer"
+        ],
+        [
+          "00:40",
+          "Haute ou large ?"
+        ],
+        [
+          "01:07",
+          "Même volume, autre forme"
+        ],
+        [
+          "01:20",
+          "Question 1"
+        ],
+        [
+          "01:59",
+          "Le piège"
+        ],
+        [
+          "02:13",
+          "Question 2"
+        ],
+        [
+          "02:56",
+          "À toi de jouer"
+        ],
+        [
+          "03:16",
+          "Correction"
+        ],
+        [
+          "03:42",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "comparer des volumes",
+        "volume",
+        "pavé droit",
+        "cubes",
+        "cuve",
+        "eau de pluie",
+        "La Réunion",
+        "ingénieure de l'eau",
+        "cm³",
+        "grandeurs et mesures",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:20",
+          "question": "Le solide E a 2 couches de 6 cubes. Le solide F a 4 couches de 3 cubes. Lequel a le plus grand volume ?",
+          "choix": [
+            "ils ont le même volume",
+            "le solide E",
+            "le solide F, il est plus haut"
+          ],
+          "reponse": 0,
+          "explication": "E : 2 × 6, 12 cubes. F : 4 × 3, 12 cubes. Même volume ! F est plus haut, mais plus étroit."
+        },
+        {
+          "t": "02:13",
+          "question": "Un carton fait 5 cubes de long, 2 de large, 2 de haut. Une boîte fait 3 cubes de long, 3 de large, 3 de haut. Lequel a le plus grand volume ?",
+          "choix": [
+            "le carton, il est plus long",
+            "ils sont égaux",
+            "la boîte"
+          ],
+          "reponse": 2,
+          "explication": "Le carton : 5 × 2, 10 ; × 2, 20 cubes. La boîte : 3 × 3, 9 ; × 3, 27 cubes. 27, c'est plus que 20."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "6e-volume-comparer-short",
+      "pas_avant": "2027-04-14",
+      "prioritaire": true,
+      "notionId": "volume_solide",
+      "microId": "volume_comparer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-volume-comparer",
+      "fichier": "6e/maths/volume/03-comparer/eleveai-maths-6e-volume-comparer-short.mp4",
+      "miniature": "6e/maths/volume/03-comparer/eleveai-maths-6e-volume-comparer-short-miniature.png",
+      "titre": "Ma tour de 10 cubes gagne, tu paries ? #maths #6e",
+      "accroche": "Ma tour de cubes monte jusqu'au ciel : 10 cubes, l'un sur l'autre ! Mon copain a fait un bloc tout plat : 3 sur 2 sur 2. Ma tour est bien plus grande… non ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : une tour de 15 cubes, l'un sur l'autre, et un bloc de 4 sur 2 sur 2 : lequel a le plus de cubes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #volume #6e #college",
+      "tags": [
+        "tour de cubes",
+        "comparer",
+        "volume",
+        "cubes",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "cm³",
+        "grandeurs et mesures",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Qui a utilisé le plus de cubes ?",
+          "choix": [
+            "moi, ma tour est plus haute",
+            "mon copain",
+            "on est à égalité"
+          ],
+          "reponse": 1,
+          "explication": "Le bloc : 3 × 2, 6 par étage ; 2 étages, 12 cubes. Ma tour : 10 cubes. 12, c'est plus que 10 !"
+        }
+      ],
+      "centres": [
+        "construction"
+      ]
+    },
+    {
+      "id": "6e-volume-assemblage",
+      "pas_avant": "2027-04-15",
+      "prioritaire": true,
+      "notionId": "volume_solide",
+      "microId": "volume_assemblage",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/volume/04-assemblage/eleveai-maths-6e-volume-assemblage.mp4",
+      "miniature": "6e/maths/volume/04-assemblage/eleveai-maths-6e-volume-assemblage.png",
+      "titre": "Coller deux solides : que devient le volume ? — Assembler des volumes — épisode 4 · Maths 6e",
+      "accroche": "Manon est menuisière. Elle fabrique des meubles en assemblant des caissons en bois, comme de gros blocs. Avant de construire, elle fait une maquette en cubes : quel volume prendra le meuble entier ?\n\nDans cette vidéo :\n• coller, c'est additionner : 8 + 4 = 12 cubes\n• la forme change, mais aucun cube ne disparaît\n• avec les unités : 18 cm³ + 12 cm³ = 30 cm³\n• enlever un morceau, c'est soustraire : 20 − 6 = 14 cubes\n• le piège : les faces collées se cachent, mais les cubes restent\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : la maquette d'une armoire : un bloc de 4 × 2 × 3 cubes, un bloc de 2 × 2 × 1 collé dessus, puis une niche de 2 cubes creusée. Quel volume final ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_assemblage&display=simple\n\n🔢 Épisode 4 de la série Volume d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Coller deux solides"
+        ],
+        [
+          "00:25",
+          "Coller, c'est additionner"
+        ],
+        [
+          "00:36",
+          "La forme change"
+        ],
+        [
+          "00:49",
+          "Avec des cm³"
+        ],
+        [
+          "01:02",
+          "Question 1"
+        ],
+        [
+          "01:41",
+          "Enlever un morceau"
+        ],
+        [
+          "01:56",
+          "Le piège"
+        ],
+        [
+          "02:09",
+          "Question 2"
+        ],
+        [
+          "02:45",
+          "À toi de jouer"
+        ],
+        [
+          "03:05",
+          "Correction"
+        ],
+        [
+          "03:27",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "volume",
+        "assemblage",
+        "additionner des volumes",
+        "cm³",
+        "solides",
+        "menuiserie",
+        "meuble",
+        "grandeurs et mesures",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:02",
+          "question": "On colle un solide de 15 centimètres cubes et un solide de 9 centimètres cubes. Quel est le volume du nouveau solide ?",
+          "choix": [
+            "24 centimètres cubes",
+            "6 centimètres cubes",
+            "15 centimètres cubes"
+          ],
+          "reponse": 0,
+          "explication": "Coller, c'est additionner : 15 + 9, 24 centimètres cubes. 6, c'est la différence : on a enlevé au lieu d'ajouter."
+        },
+        {
+          "t": "02:09",
+          "question": "Manon colle 3 blocs pareils de 8 centimètres cubes. Quel est le volume du meuble ?",
+          "choix": [
+            "11 centimètres cubes",
+            "24 centimètres cubes",
+            "16 centimètres cubes"
+          ],
+          "reponse": 1,
+          "explication": "3 blocs de 8 : 8 + 8 plus 8, ou 3 × 8, 24 centimètres cubes. 16, c'est seulement 2 blocs."
+        }
+      ],
+      "centres": [
+        "construction",
+        "art-design"
+      ]
+    },
+    {
+      "id": "6e-volume-assemblage-short",
+      "pas_avant": "2027-04-15",
+      "prioritaire": true,
+      "notionId": "volume_solide",
+      "microId": "volume_assemblage",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-volume-assemblage",
+      "fichier": "6e/maths/volume/04-assemblage/eleveai-maths-6e-volume-assemblage-short.mp4",
+      "miniature": "6e/maths/volume/04-assemblage/eleveai-maths-6e-volume-assemblage-short-miniature.png",
+      "titre": "Coller ma tour fait perdre des cubes, tu paries ? #maths #6e",
+      "accroche": "Je construis mon château en cubes : un donjon de 18 cubes, une tour de 7 cubes. Je colle la tour contre le donjon… clac ! Combien de cubes maintenant ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : je colle un pont de 9 cubes et deux tours de 6 cubes chacune : combien de cubes en tout ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_assemblage&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #volume #6e #college",
+      "tags": [
+        "château",
+        "cubes",
+        "assembler",
+        "volume",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "cm³",
+        "grandeurs et mesures",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Combien de cubes dans mon château ?",
+          "choix": [
+            "11",
+            "18",
+            "25"
+          ],
+          "reponse": 2,
+          "explication": "Coller, c'est additionner : 18 + 7, 25 cubes. Aucun cube ne disparaît !"
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-volume-defi",
+      "pas_avant": "2027-04-16",
+      "prioritaire": true,
+      "notionId": "volume_solide",
+      "microId": "volume_defi",
+      "classe": "6e",
+      "ceinture": "bleue",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/volume/05-defi/eleveai-maths-6e-volume-defi.mp4",
+      "miniature": "6e/maths/volume/05-defi/eleveai-maths-6e-volume-defi.png",
+      "titre": "Ce qui manque, les couches : un défi de volumes — Défis sur les volumes — épisode 5 · Maths 6e",
+      "accroche": "Clara est pâtissière et chocolatière. Elle range ses chocolats, en forme de petits cubes, dans des boîtes en pavé droit. Pour chaque boîte, combien de chocolats faut-il ? Et s'il en manque ?\n\nDans cette vidéo :\n• une boîte de 4 × 3 × 2 : 12 chocolats par couche, 2 couches\n• ce qui manque se trouve par une soustraction (24 − 17 = 7)\n• le nombre de couches se trouve par une division (36 ÷ 12 = 3)\n• le piège : le bon nombre avec la mauvaise unité (cm² au lieu de cm³)\n• un cube de 4 cm d'arête : une couche, puis 4 couches\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : deux boîtes de 6 × 2 × 2 et de 3 × 3 × 3 : laquelle contient le plus de chocolats, et combien de plus ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_defi&display=simple\n\n🔢 Épisode 5 de la série Volume d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Retrouver un volume"
+        ],
+        [
+          "00:23",
+          "La première boîte"
+        ],
+        [
+          "00:36",
+          "Ce qui manque"
+        ],
+        [
+          "00:53",
+          "Combien de couches ?"
+        ],
+        [
+          "01:11",
+          "Question 1"
+        ],
+        [
+          "01:47",
+          "Le piège de l'unité"
+        ],
+        [
+          "02:03",
+          "Question 2"
+        ],
+        [
+          "02:45",
+          "À toi de jouer"
+        ],
+        [
+          "03:05",
+          "Correction"
+        ],
+        [
+          "03:23",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "volume",
+        "défi",
+        "pavé droit",
+        "cm³",
+        "division",
+        "chocolat",
+        "pâtisserie",
+        "grandeurs et mesures",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:11",
+          "question": "Une boîte a un fond de 5 sur 2. Elle contient 30 chocolats. Combien de couches ?",
+          "choix": [
+            "10 couches",
+            "3 couches",
+            "6 couches"
+          ],
+          "reponse": 1,
+          "explication": "Une couche : 5 × 2, 10 chocolats. 30 ÷ 10, 3 couches. 10, c'est le nombre de chocolats d'une couche."
+        },
+        {
+          "t": "02:03",
+          "question": "Un cube a une arête de 4 centimètres. Quel est son volume ?",
+          "choix": [
+            "64 centimètres cubes",
+            "16 centimètres cubes",
+            "12 centimètres cubes"
+          ],
+          "reponse": 0,
+          "explication": "Une couche : 4 × 4, 16. 4 couches : 16 × 4, 64 centimètres cubes. 16, c'est une seule couche. 12, c'est 4 + 4 plus 4 : on a additionné."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "6e-volume-defi-short",
+      "pas_avant": "2027-04-16",
+      "prioritaire": true,
+      "notionId": "volume_solide",
+      "microId": "volume_defi",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-volume-defi",
+      "fichier": "6e/maths/volume/05-defi/eleveai-maths-6e-volume-defi-short.mp4",
+      "miniature": "6e/maths/volume/05-defi/eleveai-maths-6e-volume-defi-short-miniature.png",
+      "titre": "24 bacs de glaçons pour ma fête, tu paries ? #maths #6e",
+      "accroche": "C'est la fête ! Il me faut 48 glaçons en forme de cube. Mon bac à glaçons fait 6 cases de long et 4 de large. Combien de bacs pleins dois-je faire ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : une boîte de dés fait 3 sur 3 sur 3 et j'en ai déjà rangé 20 : combien en manque-t-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=volume_solide&microId=volume_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #volume #6e #college",
+      "tags": [
+        "glaçons",
+        "volume",
+        "division",
+        "fête",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "cm³",
+        "grandeurs et mesures",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:11",
+          "question": "Combien de bacs pleins dois-je faire ?",
+          "choix": [
+            "24",
+            "10",
+            "2"
+          ],
+          "reponse": 2,
+          "explication": "Un bac : 6 × 4, 24 glaçons. 48 ÷ 24, 2 bacs. 24, c'est ce que contient un bac, pas le nombre de bacs !"
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "6e-vision-vues",
+      "pas_avant": "2027-04-17",
+      "prioritaire": true,
+      "notionId": "vision_espace",
+      "microId": "vision_vues",
+      "classe": "6e",
+      "ceinture": "jaune",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/vision-espace/01-vues/eleveai-maths-6e-vision-vues.mp4",
+      "miniature": "6e/maths/vision-espace/01-vues/eleveai-maths-6e-vision-vues.png",
+      "titre": "De face, de dessus, de côté : les vues d'un assemblage — Les quatre vues — épisode 1 · Maths 6e",
+      "accroche": "Samuel est architecte. Avant de construire une maison, il la dessine sous plusieurs angles : vue de dessus, vue de face, vues de côté. Chaque vue est un dessin plat. Aujourd'hui, il présente sa maquette en cubes.\n\nDans cette vidéo :\n• une vue est plate : elle garde deux dimensions sur trois\n• de face : la longueur et la hauteur (4 × 2 = 8 carreaux)\n• de droite : la largeur et la hauteur ; de gauche, le même dessin en miroir\n• de dessus : la longueur et la largeur (4 × 3 = 12 carreaux)\n• le piège : la vue de dessus compte les colonnes, pas les cubes\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une rangée de 4 colonnes de 1, 3, 2 et 1 cubes : combien de carreaux dans la vue de face, et dans la vue de dessus ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=vision_espace&microId=vision_vues&display=simple\n\n🔢 Épisode 1 de la série Solides et espace d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Quatre vues"
+        ],
+        [
+          "00:27",
+          "La vue de face"
+        ],
+        [
+          "00:44",
+          "Les vues de côté"
+        ],
+        [
+          "00:56",
+          "La vue de dessus"
+        ],
+        [
+          "01:09",
+          "Question 1"
+        ],
+        [
+          "01:45",
+          "Le piège"
+        ],
+        [
+          "01:57",
+          "Question 2"
+        ],
+        [
+          "02:30",
+          "À toi de jouer"
+        ],
+        [
+          "02:49",
+          "Correction"
+        ],
+        [
+          "03:05",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "vues",
+        "vue de dessus",
+        "vue de face",
+        "assemblage de cubes",
+        "architecte",
+        "maquette",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:09",
+          "question": "Un escalier de 3 colonnes, en ligne : 3 cubes, 2 cubes, 1 cube. Combien de carreaux dans sa vue de dessus ?",
+          "choix": [
+            "3 carreaux",
+            "6 carreaux",
+            "1 carreau"
+          ],
+          "reponse": 0,
+          "explication": "Vue d'en haut, chaque colonne donne un carreau, quelle que soit sa hauteur. 3 colonnes : 3 carreaux. 6, c'est le nombre de cubes."
+        },
+        {
+          "t": "01:57",
+          "question": "Le même escalier, vu de face. Que voit-on ?",
+          "choix": [
+            "une ligne de 3 carreaux",
+            "un escalier de 6 carreaux",
+            "un carré de 9 carreaux"
+          ],
+          "reponse": 1,
+          "explication": "De face, on voit la hauteur de chaque colonne : 3, puis 2, puis 1. Un escalier de 6 carreaux."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "construction"
+      ]
+    },
+    {
+      "id": "6e-vision-vues-short",
+      "pas_avant": "2027-04-17",
+      "prioritaire": true,
+      "notionId": "vision_espace",
+      "microId": "vision_vues",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-vision-vues",
+      "fichier": "6e/maths/vision-espace/01-vues/eleveai-maths-6e-vision-vues-short.mp4",
+      "miniature": "6e/maths/vision-espace/01-vues/eleveai-maths-6e-vision-vues-short-miniature.png",
+      "titre": "Mon drone voit les 10 cubes, tu paries ? #maths #6e",
+      "accroche": "Mon copain a construit deux tours de 5 cubes, collées. Moi, je les survole avec mon drone ! Vu d'en haut, combien de carreaux je vois ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : un escalier de 4 colonnes, de 4, 3, 2 et 1 cubes : combien de carreaux dans sa vue de face ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=vision_espace&microId=vision_vues&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #solides #6e #college",
+      "tags": [
+        "vue de dessus",
+        "drone",
+        "cubes",
+        "vues",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Combien de carreaux voit mon drone ?",
+          "choix": [
+            "2",
+            "10",
+            "5"
+          ],
+          "reponse": 0,
+          "explication": "Chaque colonne donne un seul carreau vu d'en haut. 2 tours : 2 carreaux. Les 10 cubes se cachent les uns sous les autres."
+        }
+      ],
+      "centres": [
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "6e-vision-representation",
+      "pas_avant": "2027-04-18",
+      "prioritaire": true,
+      "notionId": "vision_espace",
+      "microId": "vision_representation",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/vision-espace/02-representation/eleveai-maths-6e-vision-representation.mp4",
+      "miniature": "6e/maths/vision-espace/02-representation/eleveai-maths-6e-vision-representation.png",
+      "titre": "Dessiner un cube en volume sur une feuille plate — La perspective cavalière — épisode 2 · Maths 6e",
+      "accroche": "Lina est animatrice 3D : elle crée des objets en volume pour des dessins animés. Mais avant l'ordinateur, elle fait toujours un croquis à main levée, sur une feuille plate. Comment donner de la profondeur au dessin ?\n\nDans cette vidéo :\n• la face avant en vraie grandeur : pour un cube, un vrai carré\n• les traits en biais : même direction, même longueur, plus courts que l'arête\n• les arêtes cachées en pointillés : 3 pour un cube\n• le pavé droit : les arêtes parallèles restent parallèles\n• le piège : seules la face avant et la face arrière gardent leur vraie forme\n• le patron déplie le solide à plat : 6 carrés pour le cube\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un pavé droit dont la face avant fait 4 carreaux sur 2 : combien de traits en biais, et combien d'arêtes en pointillés ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=vision_espace&microId=vision_representation&display=simple\n\n🔢 Épisode 2 de la série Solides et espace d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Dessiner en volume"
+        ],
+        [
+          "00:34",
+          "Les traits en biais"
+        ],
+        [
+          "00:50",
+          "Les arêtes cachées"
+        ],
+        [
+          "01:01",
+          "Question 1"
+        ],
+        [
+          "01:31",
+          "Le pavé droit"
+        ],
+        [
+          "01:46",
+          "Le piège"
+        ],
+        [
+          "02:03",
+          "Question 2"
+        ],
+        [
+          "02:36",
+          "Du dessin au patron"
+        ],
+        [
+          "02:51",
+          "À toi de jouer"
+        ],
+        [
+          "03:08",
+          "Correction"
+        ],
+        [
+          "03:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "perspective cavalière",
+        "cube",
+        "pavé droit",
+        "arêtes cachées",
+        "pointillés",
+        "patron",
+        "animation 3D",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:01",
+          "question": "En perspective cavalière, comment dessine-t-on une arête cachée ?",
+          "choix": [
+            "en pointillés",
+            "en trait épais",
+            "on ne la dessine pas"
+          ],
+          "reponse": 0,
+          "explication": "Les pointillés disent : elle est là, mais derrière. Sans elles, on ne saurait pas où est le fond."
+        },
+        {
+          "t": "02:03",
+          "question": "Sur le dessin d'un cube en perspective cavalière, combien de faces sont dessinées comme de vrais carrés ?",
+          "choix": [
+            "6 faces",
+            "3 faces",
+            "2 faces"
+          ],
+          "reponse": 2,
+          "explication": "La face avant et la face arrière sont face à nous : elles restent deux vrais carrés. Les quatre autres sont penchées."
+        }
+      ],
+      "centres": [
+        "cinema-series",
+        "dessin-manga"
+      ]
+    },
+    {
+      "id": "6e-vision-representation-short",
+      "pas_avant": "2027-04-18",
+      "prioritaire": true,
+      "notionId": "vision_espace",
+      "microId": "vision_representation",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-vision-representation",
+      "fichier": "6e/maths/vision-espace/02-representation/eleveai-maths-6e-vision-representation-short.mp4",
+      "miniature": "6e/maths/vision-espace/02-representation/eleveai-maths-6e-vision-representation-short-miniature.png",
+      "titre": "Mon cube n'est qu'un carré, tu paries ? #maths #6e",
+      "accroche": "J'ai dessiné un cube pour mon copain. Il me dit : « C'est un carré, ton truc ! » Ma feuille est plate… Comment montrer la profondeur ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : sur le dessin d'un cube en perspective cavalière, combien d'arêtes en tout, pointillés compris ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=vision_espace&microId=vision_representation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #solides #6e #college",
+      "tags": [
+        "perspective cavalière",
+        "cube",
+        "dessin",
+        "pointillés",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "Qu'est-ce que je dois ajouter ?",
+          "choix": [
+            "un deuxième carré, collé à côté",
+            "rien, c'est parfait",
+            "des traits en biais, depuis les coins"
+          ],
+          "reponse": 2,
+          "explication": "Depuis chaque coin, un trait en biais, tous pareils. On relie les bouts, et les arêtes cachées en pointillés. Voilà un vrai cube !"
+        }
+      ],
+      "centres": [
+        "dessin-manga"
+      ]
+    },
+    {
+      "id": "6e-vision-patron-pave",
+      "pas_avant": "2027-04-19",
+      "prioritaire": true,
+      "notionId": "vision_espace",
+      "microId": "patron_pave_dimensions",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/vision-espace/03-patron-pave/eleveai-maths-6e-vision-patron-pave.mp4",
+      "miniature": "6e/maths/vision-espace/03-patron-pave/eleveai-maths-6e-vision-patron-pave.png",
+      "titre": "Les mesures de chaque face : le patron d'un pavé droit — Le patron du pavé — épisode 3 · Maths 6e",
+      "accroche": "Jeanne est designer d'emballages. Elle invente la boîte d'une nouvelle marque de céréales : 20 cm de long, 8 de large, 30 de haut. Avant de l'imprimer, elle trace son patron, à plat : quelles mesures pour chaque face ?\n\nDans cette vidéo :\n• 6 faces rectangulaires, pareilles deux par deux : 3 sortes de rectangles\n• chaque face prend deux des trois mesures : 20 sur 30, 8 sur 30, 20 sur 8\n• le patron : 4 faces en bande, le dessus et le dessous accrochés en haut et en bas\n• le piège : deux faces pliées ensemble ont un bord de même longueur\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une boîte à chaussures de 30 cm de long, 20 de large et 10 de haut : les mesures de ses 6 faces.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=vision_espace&microId=patron_pave_dimensions&display=simple\n\n🔢 Épisode 3 de la série Solides et espace d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les mesures du patron"
+        ],
+        [
+          "00:24",
+          "Six faces, trois paires"
+        ],
+        [
+          "00:37",
+          "Les mesures des faces"
+        ],
+        [
+          "00:50",
+          "Assembler le patron"
+        ],
+        [
+          "01:07",
+          "Question 1"
+        ],
+        [
+          "01:44",
+          "Le piège des bords"
+        ],
+        [
+          "01:59",
+          "Question 2"
+        ],
+        [
+          "02:28",
+          "À toi de jouer"
+        ],
+        [
+          "02:42",
+          "Correction"
+        ],
+        [
+          "02:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "patron",
+        "pavé droit",
+        "faces",
+        "dimensions",
+        "emballage",
+        "boîte",
+        "design",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:07",
+          "question": "Une boîte mesure 10 centimètres de long, 4 de large et 6 de haut. Quelles sont les mesures de sa face du dessus ?",
+          "choix": [
+            "10 sur 6",
+            "10 sur 4",
+            "4 sur 6"
+          ],
+          "reponse": 1,
+          "explication": "Le dessus prend la longueur et la largeur : 10 sur 4. La hauteur ne se voit pas d'en haut. 10 sur 6, c'est le devant."
+        },
+        {
+          "t": "01:59",
+          "question": "Combien de faces de 8 sur 30 a la boîte de céréales de Jeanne ?",
+          "choix": [
+            "2 faces",
+            "4 faces",
+            "1 face"
+          ],
+          "reponse": 0,
+          "explication": "Les faces vont par paires. Les deux côtés font 8 sur 30 : il y en a 2."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "6e-vision-patron-pave-short",
+      "pas_avant": "2027-04-19",
+      "prioritaire": true,
+      "notionId": "vision_espace",
+      "microId": "patron_pave_dimensions",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-vision-patron-pave",
+      "fichier": "6e/maths/vision-espace/03-patron-pave/eleveai-maths-6e-vision-patron-pave-short.mp4",
+      "miniature": "6e/maths/vision-espace/03-patron-pave/eleveai-maths-6e-vision-patron-pave-short-miniature.png",
+      "titre": "Un couvercle de 6 sur 4 ferme ma boîte, tu paries ? #maths #6e",
+      "accroche": "Je fabrique une boîte cadeau : 10 cm de long, 6 de large, 4 de haut. Je plie… et mon couvercle est trop petit ! La boîte reste ouverte !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : une boîte de 12 cm de long, 5 de large et 3 de haut : quelles sont les mesures de ses deux faces de côté ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=vision_espace&microId=patron_pave_dimensions&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #solides #6e #college",
+      "tags": [
+        "patron",
+        "boîte cadeau",
+        "pavé droit",
+        "couvercle",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Quelles mesures pour le couvercle ?",
+          "choix": [
+            "6 sur 4",
+            "10 sur 10",
+            "10 sur 6"
+          ],
+          "reponse": 2,
+          "explication": "Le couvercle, c'est le dessus : la longueur et la largeur, 10 sur 6. 6 sur 4, c'est un côté !"
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "6e-vision-defi",
+      "pas_avant": "2027-04-20",
+      "prioritaire": true,
+      "notionId": "vision_espace",
+      "microId": "vision_defi",
+      "classe": "6e",
+      "ceinture": "bleue",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/vision-espace/04-defi/eleveai-maths-6e-vision-defi.mp4",
+      "miniature": "6e/maths/vision-espace/04-defi/eleveai-maths-6e-vision-defi.png",
+      "titre": "Cubes cachés, cube peint : un défi dans l'espace — Défis dans l'espace — épisode 4 · Maths 6e",
+      "accroche": "Enzo est dessinateur-projeteur : à partir d'un plan vu de dessus, il imagine la pièce en volume. Aujourd'hui, il prépare des énigmes en cubes pour un escape game. Sauras-tu voir ce qu'on ne voit pas ?\n\nDans cette vidéo :\n• un plan vu de dessus, un nombre par carreau : on additionne (3 + 1 + 2 + 2 = 8 cubes)\n• une pyramide de cubes : étage par étage (9 + 4 + 1 = 14 cubes)\n• le cube peint puis découpé : les coins, les arêtes, les faces… et le centre\n• le piège : un cube caché au centre n'apparaît sur aucune vue\n• vérifier : le total doit retomber sur le nombre de petits cubes\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : un grand cube de 4 × 4 × 4 peint, puis découpé en 64 petits cubes : combien n'ont aucune face peinte ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=vision_espace&microId=vision_defi&display=simple\n\n🔢 Épisode 4 de la série Solides et espace d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Voir ce qu'on ne voit pas"
+        ],
+        [
+          "00:22",
+          "Le plan vu de dessus"
+        ],
+        [
+          "00:39",
+          "La pyramide de cubes"
+        ],
+        [
+          "00:58",
+          "Question 1"
+        ],
+        [
+          "01:37",
+          "Le cube peint : les coins"
+        ],
+        [
+          "01:53",
+          "Les arêtes et les faces"
+        ],
+        [
+          "02:09",
+          "Question 2"
+        ],
+        [
+          "02:42",
+          "Le piège"
+        ],
+        [
+          "02:58",
+          "À toi de jouer"
+        ],
+        [
+          "03:14",
+          "Correction"
+        ],
+        [
+          "03:30",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "cube peint",
+        "cubes cachés",
+        "dénombrer",
+        "pyramide de cubes",
+        "plan coté",
+        "défi",
+        "escape game",
+        "énigme",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:58",
+          "question": "Une pyramide a 4 étages : 16, puis 9, puis 4, puis 1 cube. Combien de cubes en tout ?",
+          "choix": [
+            "30 cubes",
+            "16 cubes",
+            "20 cubes"
+          ],
+          "reponse": 0,
+          "explication": "On additionne les étages : 16 + 9, 25. Plus 4, 29. Plus 1, 30 cubes. 16, c'est seulement l'étage du bas."
+        },
+        {
+          "t": "02:09",
+          "question": "Combien de petits cubes n'ont aucune face peinte ?",
+          "choix": [
+            "aucun",
+            "1 cube",
+            "6 cubes"
+          ],
+          "reponse": 1,
+          "explication": "Un seul petit cube ne touche aucun bord : celui du centre, caché au milieu. Vérifions : 8 + 12 + 6 plus 1, 27. Le compte est bon !"
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "sciences"
+      ]
+    },
+    {
+      "id": "6e-vision-defi-short",
+      "pas_avant": "2027-04-20",
+      "prioritaire": true,
+      "notionId": "vision_espace",
+      "microId": "vision_defi",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-vision-defi",
+      "fichier": "6e/maths/vision-espace/04-defi/eleveai-maths-6e-vision-defi-short.mp4",
+      "miniature": "6e/maths/vision-espace/04-defi/eleveai-maths-6e-vision-defi-short-miniature.png",
+      "titre": "12 morceaux tout chocolat dans mon gâteau, tu paries ? #maths #6e",
+      "accroche": "Mon gâteau en cube, 3 sur 3 sur 3, est recouvert de chocolat dehors. Je le coupe en 27 petits cubes. Les gourmands veulent ceux qui ont 3 faces au chocolat : combien y en a-t-il ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien de morceaux ont exactement 2 faces au chocolat ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=vision_espace&microId=vision_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #solides #6e #college",
+      "tags": [
+        "cube peint",
+        "gâteau",
+        "chocolat",
+        "cubes",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "6e",
+        "sixième",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Combien de morceaux ont 3 faces au chocolat ?",
+          "choix": [
+            "6",
+            "8",
+            "12"
+          ],
+          "reponse": 1,
+          "explication": "Ce sont les coins du gâteau. Un cube a 8 coins : 8 morceaux."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
     }
   ]
 }
