@@ -59,7 +59,7 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
 
   // ⭐ 16/11, Frédéric : deux encarts côte à côte, « La famille » à gauche et
   // « Le prof » à droite (le coach sert à 78 % entre 8 h et 17 h : en classe),
-  // puis « En chiffres » en BANDE horizontale dessous, puis Tommy.
+  // puis « En chiffres » en BANDE horizontale dessous (Tommy retiré le 17/11).
   // ⛔ L'encart prof ne parle d'AUCUNE offre payante ni d'aucun prix.
   const chiffre = (valeur: string, libelle: string) => (
     <div className="flex flex-col-reverse items-center text-center sm:items-start sm:text-left">
@@ -173,15 +173,7 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
           </dl>
         </div>
       </div>
-      {/* ⭐ 16/11 — UNE PHRASE VRAIE, dite à Frédéric par un de ses élèves (ses
-          mots : « tommy : monsieur hier soir j'ai répondu à 115 questions »).
-          Prénom seul, jamais de nom ni de classe. */}
-      <figure className="rounded-2xl bg-amber-50/90 px-4 py-3 text-center shadow-sm ring-1 ring-amber-200 sm:col-span-2">
-        <blockquote className="text-lg font-black text-slate-800">
-          « Monsieur, hier soir, j&apos;ai répondu à 115 questions ! »
-        </blockquote>
-        <figcaption className="mt-0.5 text-sm font-bold text-slate-600">Tommy, un élève de Frédéric</figcaption>
-      </figure>
+      {/* 17/11, Frédéric : « enlève la ligne sur Tommy » → citation d'élève retirée. */}
     </div>
   );
 }
