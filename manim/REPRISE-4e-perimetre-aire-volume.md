@@ -24,7 +24,35 @@ Ouvert le 15/11/2026. 30 micros du coach, plan : `manim/PLAN-perimetre-aire-volu
       d'intérêt utilisés sont dans la liste fermée et ouverts en 12-14 ans.
       ⚠️ Un défi corrigé à la relecture : le gobelet conique a la pointe EN BAS, donc
       aux trois quarts de la hauteur le client a 20 cL sur 48, pas 47.
-- [ ] Voix validées par Frédéric → puis WAV, marques, scripts, dry run, HD, un épisode à la fois.
+- [x] **Voix VALIDÉES par Frédéric le 15/11 (« Oui, valide tout »).** ⛔ Ne plus les retoucher sans lui.
+- [x] Les 54 voix extraites en JSON (`manim/poste2/voix-depuis-md.py` : le .md reste la source de
+      vérité), leurs WAV (`manim/poste2/4e_wav.ps1`, Julie, débit −6) et leurs 56 fichiers de marques.
+- [x] Socle de la série : `volume_4e_commun.py` (figures `cercle`, `demi_disque`, `boule`, `figure_L`,
+      `piste`, `vues_trois`, `patron_pyramide_carree`, plus les 28 personnages) et
+      `volume_4e_short_commun.py` (`Short4e` : `ajuster()` à 3,9, `FS_PH = 30`, fin aux bonnes tailles).
+- [ ] Les 27 épisodes, un par un.
+
+## Avancement des 28 épisodes (au 16/11)
+
+| Épisode | Paysage | Short | HD |
+|---|---|---|---|
+| V2 `volume_pyramide` ⭐ pilote | ✅ | ✅ | ✅ 282,6 s / 65,9 s, bords 0 |
+| V1 `volume_lien_aire` (piscine) | ✅ | ✅ | ✅ 201,6 s / 61,1 s, bords 0 |
+| V3 `volume_cone` (cornet) | ✅ | ✅ | ✅ 242,1 s / 65,6 s, bords 0 |
+| V4 `volume_defi` (citerne) | ✅ | ✅ | ⏳ dry run en cours |
+| S1 → S6, P1 → P5, A1 → A5, T1 → T8 | ⏳ | ⏳ | — |
+
+Chaîne d'un épisode : script paysage → dry run `AUDIT=1 BORDS=1` jusqu'à 0 AVANCE / RETARD / TARD /
+BORD → script short (même contrôle, en `-r 1080,1920`) → `manim/poste2/4e_hd.sh` pour les deux
+(le short prend `1080,1920` en 6ᵉ argument) → planche → contrôle du compteur sur le MP4.
+
+### Leçons ajoutées par le lot Volume
+7. Un TITRE d'écran qui reprend un mot dit dans les deux premières secondes de la voix part en
+   `hors_audit` : il s'affiche forcément après, et l'audit le compte en retard (V4, écrans 02 et 03).
+8. Quand la voix d'un écran COMMENCE par ce qui doit s'écrire, la ligne passe AVANT le titre (V1, 02).
+9. Dans une phrase de correction, un morceau ne contient qu'UN nombre : « 9π », « × 12 », « ÷ 3 »
+   séparés, sinon le dernier chiffre s'affiche avant d'être dit (V3 short, AUDIT-TARD).
+10. `au_mot(x, 2)` pour un nombre répété (V4 : « 7 200 » dit deux fois).
 
 ## Le PILOTE V2 `volume_pyramide` (15/11) — vidéo COMMUNE 4e + 3e
 
