@@ -45,7 +45,7 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
             <Users className="mr-1.5 inline h-5 w-5 align-[-4px] text-sky-700" aria-hidden="true" />
             le coach
           </span>{" "}
-          qui suit <span className="whitespace-nowrap">et aide votre enfant</span>
+          qui suit <span className="whitespace-nowrap">chaque élève</span>, du CP à la Terminale
         </p>
         {LIENS_OFFRE && (
           <p className="mt-1.5 flex flex-wrap justify-center gap-x-4 text-sm font-bold">
@@ -72,7 +72,7 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
         <p className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-sky-700">
           <Users className="h-5 w-5" aria-hidden="true" /> La famille
         </p>
-        <p className="mt-1 text-xl font-black leading-snug text-slate-900">Le coach qui suit et aide votre enfant</p>
+        <p className="mt-1 text-xl font-black leading-snug text-slate-900">Le coach qui suit chaque élève, du CP à la Terminale</p>
         <p className="mt-1 flex items-center gap-2 text-sm font-bold text-orange-700">
           <Image src="/ti-margo/animations/encouragement.png" alt="" width={320} height={320} sizes="48px" className="h-12 w-12 shrink-0" />
           Avec l&apos;aide de Ti Margo et de ses dessins animés.
