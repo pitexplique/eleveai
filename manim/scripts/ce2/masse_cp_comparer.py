@@ -31,6 +31,31 @@ def court(s):
 
 class MasseComparerCPBase(PaysageMasse):
     nom_voix = "cp-masse-comparer"
+
+    def _disposer_q(self, question, choix, phrase):
+        """Les choix longs (« À gauche, c'est le plus lourd ») rétrécissaient seuls dans leur carte :
+        la colonne de la question glisse de 1,8 vers la gauche, les cartes s'élargissent de 1,2 (leur bord
+        droit s'écarte de Ti Margo),
+        et les trois choix gardent la MÊME taille (24)."""
+        r = super()._disposer_q(question, choix, phrase)
+        tete, q, cartes, pause, rebours = r[:5]
+        D, E = 1.8, 1.2
+        for m in (tete, q, cartes, pause, rebours):
+            m.shift(LEFT * D)
+        for c in cartes:
+            fond, corps = c[0], c[1][1]
+            g = fond.get_left()[0]
+            fond.stretch_to_fit_width(fond.width + E).shift(RIGHT * (g - fond.get_left()[0]))
+            g = corps.get_left()[0]
+            corps.scale(24 / corps.font_size).shift(RIGHT * (g - corps.get_left()[0]))
+            assert corps.get_right()[0] < fond.get_right()[0] - 0.8, corps  # la place de la coche
+        ph = r[5]  # la phrase de la réponse, à gauche : elle ne touche pas les cartes
+        lim = cartes.get_left()[0] - 0.35
+        if ph.get_right()[0] > lim:
+            g, h = ph.get_left()[0], ph.get_top()[1]
+            ph.scale((lim - g) / ph.width)
+            ph.shift(RIGHT * (g - ph.get_left()[0]) + UP * (h - ph.get_top()[1]))
+        return r
     fichier_marques = "masse_cp_comparer_marques.json"
     ceinture = "blanche"
 
@@ -140,7 +165,7 @@ class MasseComparerCPBase(PaysageMasse):
 
         self.question_gauche("04-question", "04b-reponse",
                              ["Sur la balance, le plateau", "de gauche descend.", "Que peut-on dire ?"],
-                             [self.choix(court(c), fs=26) for c in Q1["choix"]], Q1["reponse"],
+                             [self.choix(court(c), fs=24) for c in Q1["choix"]], Q1["reponse"],
                              ["Le plateau qui descend", "porte l'objet", "le plus lourd."],
                              -0.75, mot_q="Sur la balance", autres_q=autres_q, autres_r=apres)
 
@@ -182,8 +207,8 @@ class MasseComparerCPBase(PaysageMasse):
                     fig[1].animate.scale(0.6).move_to(bb.sur("d"), aligned_edge=DOWN), run_time=0.5)
 
         self.question_gauche("06-question", "06b-reponse",
-                             ["Deux boîtes fermées sont pareilles.", "Comment savoir", "laquelle est la plus lourde ?"],
-                             [self.choix(court(c), fs=26) for c in Q2["choix"]], Q2["reponse"],
+                             ["Deux boîtes fermées", "sont pareilles.", "Comment savoir laquelle", "est la plus lourde ?"],
+                             [self.choix(court(c), fs=24) for c in Q2["choix"]], Q2["reponse"],
                              ["À l'œil, elles sont pareilles.", "La balance, elle,", "sait le dire."],
                              -0.75, mot_q="Deux boîtes fermées", autres_q=autres_q, autres_r=apres)
 
@@ -219,7 +244,7 @@ class MasseComparerCPBase(PaysageMasse):
         q = self.t("Qui est le plus lourd ?", 42, JAUNE_TITRE)
         self.col(q, -0.7, XP)
         self.play(FadeIn(q, shift=UP * 0.1), run_time=0.4)
-        self.pause_defi(y=-2.2)
+        self.pause_defi(y=-1.6)  # au-dessus de Ti Margo (à -2,2 le texte le touchait)
 
     def ecran_correction(self):
         self.ecran("07b-correction", 0.65)

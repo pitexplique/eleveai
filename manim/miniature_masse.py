@@ -26,6 +26,8 @@ EP = [
      "même unité, puis on compare !", True, "jaune"),
     ("cp", "lexique", "01-lexique", ["LOURD", "OU LÉGER ?"], "On soupèse !",
      "gros ne veut pas dire lourd", False, "blanche"),
+    ("cp", "comparer", "02-comparer", ["COMPARER", "DES MASSES"], "Le plateau qui descend",
+     "porte le plus lourd !", True, "blanche"),
 ]
 
 

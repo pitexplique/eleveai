@@ -62,6 +62,37 @@ function pastequeCraie(c,x,y,w,h,z=1){ if(z<=0) return; const k=Math.min(1.15,z)
   c.fillStyle='#2f9e44'; c.beginPath(); c.ellipse(x,y,w/2,h/2,0,0,7); c.fill();
   c.strokeStyle='#1b5e20'; c.lineWidth=7; for(const u of [-.6,-.2,.2,.6]){ c.beginPath(); c.ellipse(x+u*w*.32,y,w*.07,h*.46,0,0,7); c.stroke(); } }
 
+/* Un doudou ours, brun et tout doux : (x, yBas) = le milieu, en bas ; s = l'échelle (1 = 150 px de haut) */
+function doudouCraie(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const B='#c08552', F='#f1d3b3';
+  const cy=yBas-48*s, ty=yBas-112*s;
+  c.fillStyle=B; c.strokeStyle='#6f4518'; c.lineWidth=4;
+  for(const u of [-1,1]){ c.beginPath(); c.ellipse(x+u*34*s,yBas-14*s,20*s,14*s,0,0,7); c.fill(); c.stroke(); }
+  c.beginPath(); c.ellipse(x,cy,44*s,46*s,0,0,7); c.fill(); c.stroke();
+  c.fillStyle=F; c.beginPath(); c.ellipse(x,cy+6*s,26*s,28*s,0,0,7); c.fill();
+  c.fillStyle=B; for(const u of [-1,1]){ c.beginPath(); c.arc(x+u*28*s,ty-30*s,14*s,0,7); c.fill(); c.stroke(); }
+  c.beginPath(); c.arc(x,ty,38*s,0,7); c.fill(); c.stroke();
+  c.fillStyle=F; c.beginPath(); c.ellipse(x,ty+12*s,17*s,13*s,0,0,7); c.fill();
+  c.fillStyle='#212529'; for(const u of [-1,1]){ c.beginPath(); c.arc(x+u*14*s,ty-6*s,4.5*s,0,7); c.fill(); }
+  c.beginPath(); c.ellipse(x,ty+7*s,6*s,4.5*s,0,0,7); c.fill();
+  c.fillStyle='#e03131'; c.beginPath(); c.moveTo(x,ty+38*s); c.lineTo(x-20*s,ty+28*s); c.lineTo(x-20*s,ty+50*s); c.closePath();
+  c.moveTo(x,ty+38*s); c.lineTo(x+20*s,ty+28*s); c.lineTo(x+20*s,ty+50*s); c.closePath(); c.fill(); }
+
+/* Une petite voiture en fer, grise et brillante : (x, yBas) = le milieu, au sol ; s = l'échelle (1 = 150 px de long) */
+function voitureFerCraie(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z);
+  c.fillStyle='#868e96'; c.strokeStyle='#343a40'; c.lineWidth=4; c.lineJoin='round';
+  c.beginPath(); c.roundRect(x-75*s,yBas-48*s,150*s,30*s,8*s); c.fill(); c.stroke();
+  c.beginPath(); c.moveTo(x-42*s,yBas-48*s); c.lineTo(x-26*s,yBas-76*s); c.lineTo(x+28*s,yBas-76*s); c.lineTo(x+46*s,yBas-48*s); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle='#a5d8ff'; c.beginPath(); c.moveTo(x-32*s,yBas-50*s); c.lineTo(x-21*s,yBas-70*s); c.lineTo(x-2*s,yBas-70*s); c.lineTo(x-2*s,yBas-50*s); c.closePath(); c.fill();
+  c.beginPath(); c.moveTo(x+4*s,yBas-50*s); c.lineTo(x+4*s,yBas-70*s); c.lineTo(x+24*s,yBas-70*s); c.lineTo(x+36*s,yBas-50*s); c.closePath(); c.fill();
+  c.fillStyle='#f8f9fa'; c.fillRect(x-60*s,yBas-40*s,26*s,5*s);
+  c.fillStyle='#212529'; for(const u of [-1,1]){ c.beginPath(); c.arc(x+u*45*s,yBas-17*s,17*s,0,7); c.fill(); }
+  c.fillStyle='#ced4da'; for(const u of [-1,1]){ c.beginPath(); c.arc(x+u*45*s,yBas-17*s,7*s,0,7); c.fill(); } }
+
+/* Le goûter : un petit biscuit rond, doré : (x, y) = le centre */
+function biscuitCraie(c,x,y,r,z=1){ if(z<=0) return; r*=Math.min(1.15,z);
+  c.fillStyle='#e9b872'; c.strokeStyle='#8a5a2b'; c.lineWidth=4; c.beginPath(); c.arc(x,y,r,0,7); c.fill(); c.stroke();
+  c.fillStyle='#6f4518'; for(const [u,v] of [[-.4,-.3],[.35,-.35],[0,.1],[-.35,.45],[.4,.38]]){ c.beginPath(); c.arc(x+u*r,y+v*r,r*.1,0,7); c.fill(); } }
+
 /* WinRT donne parfois 3 ou 4 jetons identiques : on en garde 2 au plus (voixDe sait sauter une paire) */
 function deuxAuPlusM(){ const CL=(window.CUES||{})[VIDEO]||{};
   for(const k in CL){ const res=[]; for(const x of CL[k]){ const n=res.length;

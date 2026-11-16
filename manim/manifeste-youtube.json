@@ -97173,6 +97173,147 @@
         "sport",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cp-masse-comparer",
+      "pas_avant": "2027-05-01",
+      "prioritaire": true,
+      "notionId": "masse_contenance",
+      "microId": "cp_masse_comparer",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/masse/02-comparer/eleveai-maths-cp-masse-comparer.mp4",
+      "miniature": "cp/maths/masse/02-comparer/eleveai-maths-cp-masse-comparer.png",
+      "titre": "Un melon ou un ananas : lequel est le plus lourd ? — Comparer des masses — épisode 2 · Maths CP",
+      "accroche": "Hugo est primeur : il vend des fruits et des légumes. Il a un melon et un ananas. Lequel est le plus lourd ? Il sort sa balance à deux plateaux.\n\nDans cette vidéo :\n• la balance à deux plateaux : un objet de chaque côté\n• le plateau qui descend porte le plus lourd\n• même niveau : même masse (deux pommes)\n• deux boîtes pareilles : à l'œil on ne sait pas, la balance le dit\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : une orange à gauche, un citron à droite, le plateau de droite monte : qui est le plus lourd ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_comparer&display=simple\n\n⚖️ Épisode 2 de la série Masses d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le plus lourd ?"
+        ],
+        [
+          "00:34",
+          "Question 1"
+        ],
+        [
+          "01:12",
+          "Question 2"
+        ],
+        [
+          "01:43",
+          "À toi de jouer"
+        ],
+        [
+          "02:06",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "comparer des masses",
+        "balance",
+        "balance à deux plateaux",
+        "plus lourd",
+        "primeur",
+        "fruits",
+        "maths",
+        "CP",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Sur la balance, le plateau de gauche descend. Que peut-on dire ?",
+          "choix": [
+            "les deux sont pareils",
+            "à gauche, c'est le plus lourd",
+            "à droite, c'est le plus lourd"
+          ],
+          "reponse": 1,
+          "explication": "Le plateau qui descend porte l'objet le plus lourd."
+        },
+        {
+          "t": "01:12",
+          "question": "Deux boîtes fermées sont pareilles. Comment savoir laquelle est la plus lourde ?",
+          "choix": [
+            "on prend la plus jolie",
+            "on choisit au hasard",
+            "on les pèse sur la balance"
+          ],
+          "reponse": 2,
+          "explication": "À l'œil, elles sont pareilles. La balance, elle, sait le dire."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ],
+      "aussi": [
+        {
+          "classe": "ce1",
+          "notionId": "masse",
+          "microId": "ce1_masse_soupeser"
+        }
+      ]
+    },
+    {
+      "id": "cp-masse-comparer-short",
+      "pas_avant": "2027-05-01",
+      "prioritaire": true,
+      "notionId": "masse_contenance",
+      "microId": "cp_masse_comparer",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "short",
+      "renvoie_vers": "cp-masse-comparer",
+      "fichier": "cp/maths/masse/02-comparer/eleveai-maths-cp-masse-comparer-short.mp4",
+      "miniature": "cp/maths/masse/02-comparer/eleveai-maths-cp-masse-comparer-short-miniature.png",
+      "titre": "Mon gros doudou monte sur la balance : il est léger ? #maths #cp",
+      "accroche": "Je mets mon doudou sur la balance. Mon copain met sa petite voiture en fer. Mon doudou monte tout en haut !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : 2 pommes sur un plateau. Combien de pommes pareilles de l'autre côté, pour l'équilibre ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cp #primaire",
+      "tags": [
+        "masse",
+        "balance",
+        "plus lourd",
+        "doudou",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Le plateau du doudou monte. Qui est le plus lourd ?",
+          "choix": [
+            "le doudou",
+            "la voiture",
+            "personne"
+          ],
+          "reponse": 1,
+          "explication": "Le plateau qui descend porte le plus lourd : la voiture."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "ce1",
+          "notionId": "masse",
+          "microId": "ce1_masse_soupeser"
+        }
+      ]
     }
   ]
 }

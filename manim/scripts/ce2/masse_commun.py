@@ -484,3 +484,99 @@ def hugo(s=1.0):
     p.add(tablier(p, "#92400e"))
     p.add(p.yeux, p.bouche)
     return p
+
+
+# ── CP 03 (17/11) : Zoé la toiletteuse, ses chiens, les animaux à deviner, les fruits à ranger ──────
+def zoe(s=1.0):
+    """Zoé, toiletteuse : blouse turquoise, tablier rose, cheveux longs roux."""
+    p = visage(personne(peau="#f1c27d", tenue="#14b8a6", cheveux="#b45309", longs=True, s=s))
+    p.add(tablier(p, "#f472b6"))
+    p.add(p.yeux, p.bouche)
+    return p
+
+
+def chien(s=1.0, couleur="#d97706", oreille="#92400e"):
+    """Un chien vu de profil, tourné vers la droite ; s règle sa taille (chiot 0,55, moyen 0,9, gros 1,35)."""
+    contour = dict(stroke_color="#451a03", stroke_width=2.5)
+    corps = Ellipse(width=1.3 * s, height=0.62 * s, fill_color=couleur, fill_opacity=1, **contour)
+    pattes = VGroup(*[RoundedRectangle(corner_radius=0.05 * s, width=0.16 * s, height=0.42 * s, fill_color=couleur,
+                                       fill_opacity=1, **contour).move_to(P(x * s, -0.36 * s))
+                      for x in (-0.42, -0.2, 0.22, 0.42)])
+    tete = Circle(radius=0.3 * s, fill_color=couleur, fill_opacity=1, **contour).move_to(P(0.72 * s, 0.34 * s))
+    museau = Ellipse(width=0.3 * s, height=0.2 * s, fill_color="#fde68a", fill_opacity=1, stroke_width=0)
+    museau.move_to(P(0.96 * s, 0.26 * s))
+    truffe = Dot(P(1.09 * s, 0.29 * s), radius=0.045 * s, color="#111827")
+    oeil = Dot(P(0.78 * s, 0.42 * s), radius=0.04 * s, color="#111827")
+    oreille_ = Ellipse(width=0.17 * s, height=0.36 * s, fill_color=oreille, fill_opacity=1, stroke_width=0)
+    oreille_.rotate(-0.35).move_to(P(0.6 * s, 0.38 * s))
+    queue = Line(P(-0.62 * s, 0.1 * s), P(-0.86 * s, 0.42 * s), color=couleur, stroke_width=9 * s)
+    return VGroup(queue, pattes, corps, tete, museau, truffe, oeil, oreille_)
+
+
+def souris(s=1.0):
+    """Une souris grise, tournée vers la droite."""
+    corps = Ellipse(width=0.62 * s, height=0.36 * s, fill_color="#9ca3af", fill_opacity=1, stroke_color="#4b5563",
+                    stroke_width=2)
+    oreille_ = Circle(radius=0.11 * s, fill_color="#f9a8d4", fill_opacity=1, stroke_color="#9ca3af",
+                      stroke_width=3).move_to(P(0.16 * s, 0.2 * s))
+    nez = Dot(P(0.32 * s, 0.0), radius=0.035 * s, color="#ec4899")
+    oeil = Dot(P(0.2 * s, 0.06 * s), radius=0.03 * s, color="#111827")
+    queue = ArcBetweenPoints(P(-0.3 * s, -0.02 * s), P(-0.62 * s, 0.12 * s), angle=-1.2, color="#f9a8d4",
+                             stroke_width=3)
+    return VGroup(queue, corps, oreille_, nez, oeil)
+
+
+def chat(s=1.0, couleur="#fb923c"):
+    """Un chat assis, de face : corps en poire, tête ronde, oreilles pointues, queue relevée."""
+    contour = dict(stroke_color="#7c2d12", stroke_width=2.5)
+    corps = Ellipse(width=0.7 * s, height=0.82 * s, fill_color=couleur, fill_opacity=1, **contour).move_to(P(0, -0.2 * s))
+    tete = Circle(radius=0.3 * s, fill_color=couleur, fill_opacity=1, **contour).move_to(P(0, 0.42 * s))
+    oreilles = VGroup(*[Polygon(P(x * s, 0.6 * s), P((x + 0.2 * u) * s, 0.62 * s), P((x + 0.06 * u) * s, 0.86 * s),
+                                fill_color=couleur, fill_opacity=1, **contour) for x, u in ((-0.24, 1), (0.24, -1))])
+    yeux = VGroup(*[Dot(P(x * s, 0.46 * s), radius=0.04 * s, color="#166534") for x in (-0.11, 0.11)])
+    nez = Triangle(fill_color="#ec4899", fill_opacity=1, stroke_width=0).scale(0.04 * s).rotate(PI).move_to(P(0, 0.36 * s))
+    queue = ArcBetweenPoints(P(0.3 * s, -0.5 * s), P(0.55 * s, 0.15 * s), angle=0.9, color=couleur, stroke_width=10 * s)
+    return VGroup(queue, corps, oreilles, tete, yeux, nez)
+
+
+def cheval(s=1.0, couleur="#92400e"):
+    """Un cheval de profil, tourné vers la droite : grand corps, cou, tête, crinière, quatre jambes."""
+    contour = dict(stroke_color="#3f1d0b", stroke_width=2.5)
+    jambes = VGroup(*[Rectangle(width=0.14 * s, height=0.78 * s, fill_color=couleur, fill_opacity=1, **contour)
+                      .move_to(P(x * s, -0.62 * s)) for x in (-0.55, -0.35, 0.38, 0.58)])
+    sabots = VGroup(*[Rectangle(width=0.16 * s, height=0.1 * s, fill_color="#1f2937", fill_opacity=1, stroke_width=0)
+                      .move_to(j.get_bottom() + UP * 0.05 * s) for j in jambes])
+    corps = Ellipse(width=1.65 * s, height=0.7 * s, fill_color=couleur, fill_opacity=1, **contour)
+    cou = Polygon(P(0.5 * s, 0.15 * s), P(0.8 * s, 0.85 * s), P(1.02 * s, 0.75 * s), P(0.8 * s, -0.05 * s),
+                  fill_color=couleur, fill_opacity=1, **contour)
+    tete = Ellipse(width=0.62 * s, height=0.28 * s, fill_color=couleur, fill_opacity=1, **contour)
+    tete.rotate(-0.85).move_to(P(1.17 * s, 0.6 * s))  # le museau vers le bas, à droite
+    criniere = Polygon(P(0.75 * s, 0.9 * s), P(0.45 * s, 0.25 * s), P(0.58 * s, 0.2 * s), P(0.86 * s, 0.82 * s),
+                       fill_color="#1f2937", fill_opacity=1, stroke_width=0)
+    oeil = Dot(P(1.04 * s, 0.76 * s), radius=0.035 * s, color="#111827")
+    queue = ArcBetweenPoints(P(-0.8 * s, 0.15 * s), P(-1.0 * s, -0.5 * s), angle=0.6, color="#1f2937",
+                             stroke_width=12 * s)
+    return VGroup(queue, jambes, sabots, corps, cou, tete, criniere, oeil)
+
+
+def fraise(s=1.0):
+    """Une fraise : cœur rouge pointé vers le bas, graines, collerette verte."""
+    corps = Polygon(P(-0.2 * s, 0.14 * s), P(0.2 * s, 0.14 * s), P(0.14 * s, -0.12 * s), P(0, -0.26 * s),
+                    P(-0.14 * s, -0.12 * s), fill_color="#dc2626", fill_opacity=1, stroke_width=0)
+    corps = VGroup(corps, Circle(radius=0.12 * s, fill_color="#dc2626", fill_opacity=1, stroke_width=0)
+                   .move_to(P(-0.09 * s, 0.07 * s)),
+                   Circle(radius=0.12 * s, fill_color="#dc2626", fill_opacity=1, stroke_width=0).move_to(P(0.09 * s, 0.07 * s)))
+    graines = VGroup(*[Dot(P(x * s, y * s), radius=0.014 * s, color="#fde68a")
+                       for x, y in ((-0.1, 0.05), (0.08, 0.06), (0, -0.05), (-0.06, -0.12), (0.07, -0.1))])
+    col = VGroup(*[Ellipse(width=0.16 * s, height=0.07 * s, fill_color="#16a34a", fill_opacity=1, stroke_width=0)
+                   .rotate(a).move_to(P(0.06 * s * np.cos(a), 0.2 * s + 0.03 * s * np.sin(a))) for a in (0, PI / 3, 2 * PI / 3, PI)])
+    return VGroup(corps, graines, col)
+
+
+def pasteque(s=1.0):
+    """Une pastèque entière : grosse ellipse verte, rayures foncées."""
+    c = Ellipse(width=1.5 * s, height=1.0 * s, fill_color="#16a34a", fill_opacity=1, stroke_color="#14532d",
+                stroke_width=3)
+    rayures = VGroup(*[Ellipse(width=0.16 * s, height=0.92 * s, stroke_color="#14532d", stroke_width=4)
+                       .move_to(P(x * s, 0)) for x in (-0.45, -0.15, 0.15, 0.45)])
+    return VGroup(c, rayures)
