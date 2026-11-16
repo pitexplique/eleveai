@@ -40,7 +40,9 @@ Ouvert le 15/11/2026. 30 micros du coach, plan : `manim/PLAN-perimetre-aire-volu
 | V1 `volume_lien_aire` (piscine) | ✅ | ✅ | ✅ 201,6 s / 61,1 s, bords 0 |
 | V3 `volume_cone` (cornet) | ✅ | ✅ | ✅ 242,1 s / 65,6 s, bords 0 |
 | V4 `volume_defi` (citerne) | ✅ | ✅ | ⏳ dry run en cours |
-| S1 → S6, P1 → P5, A1 → A5, T1 → T8 | ⏳ | ⏳ | — |
+| S1 `vision_reconnaitre` (jeu vidéo) | ✅ | ✅ | ✅ 208,9 s / 56,7 s, bords 0 |
+| S2 `vision_vues` (maquette) | ✅ | ✅ | ⏳ paysage en rendu, short ✅ 54,7 s |
+| S3 → S6, P1 → P5, A1 → A5, T1 → T8 | ⏳ | ⏳ | — |
 
 Chaîne d'un épisode : script paysage → dry run `AUDIT=1 BORDS=1` jusqu'à 0 AVANCE / RETARD / TARD /
 BORD → script short (même contrôle, en `-r 1080,1920`) → `manim/poste2/4e_hd.sh` pour les deux
@@ -53,6 +55,13 @@ BORD → script short (même contrôle, en `-r 1080,1920`) → `manim/poste2/4e_
 9. Dans une phrase de correction, un morceau ne contient qu'UN nombre : « 9π », « × 12 », « ÷ 3 »
    séparés, sinon le dernier chiffre s'affiche avant d'être dit (V3 short, AUDIT-TARD).
 10. `au_mot(x, 2)` pour un nombre répété (V4 : « 7 200 » dit deux fois).
+11. ⭐ **Une carte de question ne reprend jamais mot pour mot le début de l'annonce.** Le gabarit
+    ne pose la carte qu'APRÈS « Question ! » : tout mot déjà dit y est compté en retard (3 s).
+    Le remède n'est pas de couper l'audit — `q_sans_audit` vise le mauvais objet dans le commun
+    CM1 (`r[1]` = le compte à rebours ; `Paysage4e._disposer_q` le réapplique à `r[2]`), et la
+    valeur `"tout"` fait planter le RENDU alors que le dry run passait. Le remède est éditorial,
+    et il est meilleur : les données sont DESSINÉES par `avant_q`, et la carte ne garde que la
+    question (« Quel solide ? »). C'est « montrer, pas raconter » appliqué à l'écran de question.
 
 ## Le PILOTE V2 `volume_pyramide` (15/11) — vidéo COMMUNE 4e + 3e
 
