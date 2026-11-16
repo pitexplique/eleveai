@@ -42,6 +42,14 @@ def gros_chien(s=1.0):
     return chien(1.35 * s, *GROS)
 
 
+def meme_ligne(etiquettes, y):
+    """Pose des étiquettes sur la MÊME ligne de base : elles commencent toutes par la même lettre
+    (« un », « une », « le », « la ») ; le bas de cette première lettre va à y."""
+    for e in etiquettes:
+        e.shift(UP * (y - e[0].get_bottom()[1]))
+    return etiquettes
+
+
 def boite_lettre(lettre, s=1.0, couleur="#a78bfa"):
     """Une boîte fermée qui porte sa lettre (A, B, C)."""
     b = boite(s, couleur)
@@ -90,8 +98,8 @@ class MasseEstimerCPBase(PaysageMasse):
         q1 = self.t("lequel est le plus léger ?", 40, JAUNE_TITRE)
         q = VGroup(q0, q1).arrange(DOWN, aligned_edge=LEFT, buff=0.3)
         q.move_to(P(0, 0.35)).align_to(P(-6.2, 0), LEFT)
-        f = VGroup(chiot(0.8), chien_moyen(0.8), gros_chien(0.8)).arrange(RIGHT, buff=0.3, aligned_edge=DOWN)
-        f.move_to(P(3.6, 0.3))
+        f = VGroup(chiot(0.7), chien_moyen(0.7), gros_chien(0.7)).arrange(RIGHT, buff=0.3, aligned_edge=DOWN)
+        f.move_to(P(4.3, 0.3))
         self.au_mot("Trois chiens")
         self.play(FadeIn(q0, shift=UP * 0.2), LaggedStart(*[FadeIn(x, scale=1.1) for x in f], lag_ratio=0.25),
                   run_time=0.6)
@@ -114,14 +122,13 @@ class MasseEstimerCPBase(PaysageMasse):
         self.col(l0, 2.5, -2.6)
         self.play(FadeIn(l0, shift=UP * 0.1), run_time=0.4)
         Y = -1.0
-        c1, c2, c3 = chiot().move_to(P(-1.6, Y)), chien_moyen().move_to(P(0.9, Y)), gros_chien().move_to(P(4.0, Y))
+        c1, c2, c3 = chiot().move_to(P(-1.8, Y)), chien_moyen().move_to(P(1.2, Y)), gros_chien().move_to(P(4.6, Y))
         for c in (c1, c2, c3):
             c.align_to(P(0, Y - 0.6), DOWN)
-        n1 = self.t("un chiot", 30).next_to(c1, DOWN, buff=0.2)
-        n2 = self.t("un chien moyen", 30).next_to(c2, DOWN, buff=0.2)
-        n3 = self.t("un gros chien", 30).next_to(c3, DOWN, buff=0.2)
-        for n in (n2, n3):
-            n.align_to(n1, DOWN)
+        n1 = self.t("un chiot", 28).next_to(c1, DOWN, buff=0.2)
+        n2 = self.t("un chien moyen", 28).next_to(c2, DOWN, buff=0.2)
+        n3 = self.t("un gros chien", 28).next_to(c3, DOWN, buff=0.2)
+        meme_ligne((n1, n2, n3), n1[0].get_bottom()[1])
         self.au_mot("un chiot")
         self.play(FadeIn(c1, shift=DOWN * 0.3), FadeIn(n1), run_time=0.35)
         self.au_mot("un chien moyen")
@@ -136,21 +143,21 @@ class MasseEstimerCPBase(PaysageMasse):
         self.au_mot("Pour ranger, on compare deux par deux")
         tit = self.t("On compare deux par deux", 40, JAUNE_TITRE).move_to(P(0, 3.0))
         self.play(Write(tit), run_time=0.5)
-        b1 = Balance(4.0).move_to(P(-3.3, 0.4))
-        b2 = Balance(4.0).move_to(P(3.0, 0.4))
-        g1, d1 = b1.poser(chiot(0.55), "g"), b1.poser(chien_moyen(0.55), "d")
-        g2, d2 = b2.poser(chien_moyen(0.55), "g"), b2.poser(gros_chien(0.5), "d")
+        b1 = Balance(4.5).move_to(P(-3.5, 0.5))
+        b2 = Balance(4.5).move_to(P(3.3, 0.5))
+        g1, d1 = b1.poser(chiot(0.75), "g"), b1.poser(chien_moyen(0.7), "d")
+        g2, d2 = b2.poser(chien_moyen(0.7), "g"), b2.poser(gros_chien(0.6), "d")
         self.au_mot("Le chiot est plus léger que le chien moyen")
         self.play(FadeIn(b1), FadeIn(g1, shift=DOWN * 0.3), FadeIn(d1, shift=DOWN * 0.3), run_time=0.45)
         basculer(self, b1, -0.5, [g1], [d1], run_time=0.8)
         l1 = self.bloc(["Le chiot est plus léger", "que le chien moyen."], 30, LEGER)
-        l1.move_to(P(-3.3, -2.2))
+        l1.move_to(P(-3.5, -1.45))
         self.play(FadeIn(l1, shift=UP * 0.1), run_time=0.35)
         self.au_mot("Le chien moyen est plus léger que le gros chien")
         self.play(FadeIn(b2), FadeIn(g2, shift=DOWN * 0.3), FadeIn(d2, shift=DOWN * 0.3), run_time=0.45)
         basculer(self, b2, -0.5, [g2], [d2], run_time=0.8)
         l2 = self.bloc(["Le chien moyen est plus léger", "que le gros chien."], 30, LEGER)
-        l2.move_to(P(3.0, -2.2))
+        l2.move_to(P(2.9, -1.45))
         self.play(FadeIn(l2, shift=UP * 0.1), run_time=0.35)
         self.attendre_voix()
 
@@ -171,9 +178,9 @@ class MasseEstimerCPBase(PaysageMasse):
         for k, (c, n) in enumerate(zip(chiens, noms)):
             self.au_mot(n)
             num = self.t(str(k + 1), 44, JAUNE_TITRE)
-            num.move_to(P(c.get_center()[0], 1.15))
+            num.move_to(P(c.get_center()[0], 0.8))
             hors_audit(num)
-            et = self.t(n, 30).next_to(c, DOWN, buff=0.25).align_to(P(0, Y - 0.85), UP)
+            et = meme_ligne([self.t(n, 30).move_to(P(c.get_center()[0], 0))], Y - 1.1)[0]
             self.play(FadeIn(c, shift=RIGHT * 0.3), FadeIn(num, scale=1.2), FadeIn(et), run_time=0.4)
         self.insister(chiens[0], 1.2, 0.3)
         self.attendre_voix()
@@ -182,10 +189,10 @@ class MasseEstimerCPBase(PaysageMasse):
     def ecran_question1(self):
         self.clear()
         self.add_mascotte()
-        ba = Balance(2.3, penche=0.5, s=0.62).move_to(P(-5.15, 1.5))
-        bb = Balance(2.3, penche=0.5, s=0.62).move_to(P(-2.55, 1.5))
-        A, B1 = ba.poser(boite_lettre("A", 0.55, "#f472b6"), "g"), ba.poser(boite_lettre("B", 0.55, "#60a5fa"), "d")
-        B2, C = bb.poser(boite_lettre("B", 0.55, "#60a5fa"), "g"), bb.poser(boite_lettre("C", 0.55, "#4ade80"), "d")
+        ba = Balance(2.4, penche=0.5, s=0.72).move_to(P(-4.95, 2.05))
+        bb = Balance(2.4, penche=0.5, s=0.72).move_to(P(-2.75, 0.45))
+        A, B1 = ba.poser(boite_lettre("A", 0.8, "#f472b6"), "g"), ba.poser(boite_lettre("B", 0.8, "#60a5fa"), "d")
+        B2, C = bb.poser(boite_lettre("B", 0.8, "#60a5fa"), "g"), bb.poser(boite_lettre("C", 0.8, "#4ade80"), "d")
         fig = VGroup(ba, A, B1, bb, B2, C)
 
         def autres_q(sc):
@@ -199,7 +206,7 @@ class MasseEstimerCPBase(PaysageMasse):
                               "Laquelle est la plus lourde ?"],
                              [self.choix(court(c), fs=26) for c in Q1["choix"]], Q1["reponse"],
                              ["A pèse plus que B,", "et B plus que C.", "Donc A est la plus lourde."],
-                             -0.75, mot_q="La boîte A", autres_q=autres_q, autres_r=apres)
+                             -1.05, mot_q="La boîte A", autres_q=autres_q, autres_r=apres)
 
     # ── 05 : sans balance, on devine ────────────────────────────────────────
     def ecran_deviner(self):
@@ -251,9 +258,9 @@ class MasseEstimerCPBase(PaysageMasse):
 
     # ── 07 : le défi (pastèque, fraise, pomme) ──────────────────────────────
     def fruits(self):
-        Y = -0.3
+        Y = 0.15
         f = [pasteque(1.0), fraise(1.6), pomme(1.2)]
-        for o, x in zip(f, (-4.3, -1.6, 0.9)):
+        for o, x in zip(f, (-4.6, -1.6, 1.3)):
             o.move_to(P(x, Y)).align_to(P(0, Y - 0.5), DOWN)
         return f
 
@@ -270,9 +277,9 @@ class MasseEstimerCPBase(PaysageMasse):
         noms = ["une pastèque", "une fraise", "une pomme"]
         for o, n in zip(f, noms):
             self.au_mot(n)
-            et = self.t(n, 28).next_to(o, DOWN, buff=0.2).align_to(P(0, -1.0), UP)
+            et = meme_ligne([self.t(n, 28).move_to(P(o.get_center()[0], 0))], -0.8)[0]
             self.play(FadeIn(o, scale=1.1), FadeIn(et), run_time=0.35)
-        self.pause_defi(y=-2.2)
+        self.pause_defi(y=-1.6)  # au-dessus de Ti Margo
 
     def ecran_correction(self):
         self.ecran("07b-correction", 0.65)
@@ -290,7 +297,7 @@ class MasseEstimerCPBase(PaysageMasse):
             self.au_mot(mot)
             num = self.t(str(k + 1), 44, JAUNE_TITRE).move_to(P(x, 0.75))
             hors_audit(num)
-            et = self.t(n, 30, VERT_OK).next_to(o, DOWN, buff=0.2).align_to(P(0, Y - 0.75), UP)
+            et = meme_ligne([self.t(n, 30, VERT_OK).move_to(P(x, 0))], Y - 1.0)[0]
             self.play(FadeIn(o, shift=RIGHT * 0.3), FadeIn(num, scale=1.2), FadeIn(et), run_time=0.4)
         self.attendre_voix()
 
