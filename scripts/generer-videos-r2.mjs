@@ -115,11 +115,16 @@ for (const abs of parcourir(SORTIES)) {
   if (table[id]) continue;
   const voisine = rel.replace(/\.mp4$/, ".png");
   const poster = existe(voisine) ? voisine : null;
+  // 13/11/2026 : un film Ti Margo hors manifeste peut donner son titre du site dans
+  // sa fiche `publication.md` (ligne « Titre du site : … »), à côté du MP4. Sans
+  // cette ligne, rien ne change : le titre reste tiré du nom du fichier.
+  const fiche = path.join(path.dirname(abs), "publication.md");
+  const titreSite = fs.existsSync(fiche) ? fs.readFileSync(fiche, "utf8").match(/^Titre du site\s*:\s*(.+?)\s*$/m)?.[1] : null;
   table[id] = {
     fichier: rel,
     poster,
     vignette: vignetteDe(poster, rel),
-    titre: yt ? DEPUIS_YT[yt]?.titre ?? yt : id.replace(/-/g, " "),
+    titre: yt ? DEPUIS_YT[yt]?.titre ?? yt : titreSite ?? id.replace(/-/g, " "),
     short: yt ? Boolean(DEPUIS_YT[yt]?.short) : /\/shorts\//.test(rel) || /-short(-|$)/.test(id),
     youtube: yt,
   };

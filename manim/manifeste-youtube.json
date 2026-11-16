@@ -60125,7 +60125,8 @@
         "sciences"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-15"
+      "pas_avant": "2026-11-15",
+      "url": "https://youtu.be/RM5JcQnsZ9Q"
     },
     {
       "id": "3e-puissance-notation-scientifique",
@@ -60391,7 +60392,8 @@
         }
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-15"
+      "pas_avant": "2026-11-15",
+      "url": "https://youtube.com/shorts/n5QSE0RfiN8"
     },
     {
       "id": "4e-puissance-comparer",
@@ -60494,7 +60496,8 @@
         "animaux"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-16"
+      "pas_avant": "2026-11-16",
+      "url": "https://youtu.be/sWNQ2y_3DX4"
     },
     {
       "id": "4e-puissance-comparer-short",
@@ -60544,7 +60547,8 @@
         "jeux-defis"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-16"
+      "pas_avant": "2026-11-16",
+      "url": "https://youtube.com/shorts/13kxgLJoAow"
     },
     {
       "id": "4e-puissance-calcul",
@@ -65438,7 +65442,8 @@
       "centres": [
         "art-design"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/R3TecKnzdTs"
     },
     {
       "id": "6e-triangle-type-cote-short",
@@ -65487,7 +65492,8 @@
       "centres": [
         "jeux-defis"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtube.com/shorts/k18gkt9BFuk"
     },
     {
       "id": "6e-triangle-type-angle",
@@ -68480,7 +68486,8 @@
       "centres": [
         "cuisine"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/Vt7deLdAxtY"
     },
     {
       "id": "4e-div-critere-2-5-10-short",
@@ -68529,7 +68536,8 @@
       "centres": [
         "cuisine"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtube.com/shorts/wmYOXoWF7s8"
     },
     {
       "id": "4e-div-critere-3-9",
@@ -84990,6 +84998,13 @@
       "centres": [
         "jeux-defis",
         "art-design"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "vision_espace",
+          "microId": "vision_representation"
+        }
       ]
     },
     {
@@ -85040,6 +85055,13 @@
       ],
       "centres": [
         "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "vision_espace",
+          "microId": "vision_representation"
+        }
       ]
     },
     {
@@ -85142,6 +85164,18 @@
       "centres": [
         "jeux-video",
         "construction"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "vision_espace",
+          "microId": "vision_denombrer"
+        },
+        {
+          "classe": "6e",
+          "notionId": "volume_solide",
+          "microId": "volume_compter"
+        }
       ]
     },
     {
@@ -85192,6 +85226,18 @@
       ],
       "centres": [
         "construction"
+      ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "vision_espace",
+          "microId": "vision_denombrer"
+        },
+        {
+          "classe": "6e",
+          "notionId": "volume_solide",
+          "microId": "volume_compter"
+        }
       ]
     },
     {
@@ -90023,6 +90069,156 @@
       ]
     },
     {
+      "id": "6e-aire-comparer",
+      "pas_avant": "2027-04-09",
+      "notionId": "aire_surface",
+      "microId": "aire_comparer",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/aire/02-comparer/eleveai-maths-6e-aire-comparer.mp4",
+      "miniature": "6e/maths/aire/02-comparer/eleveai-maths-6e-aire-comparer.png",
+      "titre": "Comparer des aires : on calcule, on ne devine pas — épisode 2 · Maths 6e",
+      "accroche": "Léna est agente immobilière. Une famille hésite entre deux salons : l'un a l'air plus long, l'autre plus large. Lequel est le plus grand ? Léna ne devine pas : elle calcule.\n\nDans cette vidéo :\n• 6 m sur 4 m = 24 m², un carré de 5 m = 25 m² : le carré gagne, de 1 m²\n• deux formes différentes, la même aire : 8 × 3 = 6 × 4 = 24 m²\n• la même unité pour comparer : 2 m² = 200 dm², plus que 150 dm²\n• le piège : le plus grand tour n'a pas forcément la plus grande aire\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un salon de 5 m sur 4 et une chambre carrée de 3 m, ou un séjour de 7 m sur 4 : lequel est le plus grand, et de combien ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=aire_surface&microId=aire_comparer&display=simple\n\n📐 Épisode 2 de la série Aire d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comparer des aires"
+        ],
+        [
+          "00:07",
+          "Léna, agente immobilière"
+        ],
+        [
+          "00:24",
+          "Calculer pour comparer"
+        ],
+        [
+          "00:44",
+          "Formes différentes, même aire"
+        ],
+        [
+          "00:55",
+          "La même unité"
+        ],
+        [
+          "01:16",
+          "Question 1"
+        ],
+        [
+          "01:49",
+          "Le piège"
+        ],
+        [
+          "02:08",
+          "Question 2"
+        ],
+        [
+          "02:45",
+          "À toi de jouer"
+        ],
+        [
+          "03:06",
+          "Correction"
+        ],
+        [
+          "03:23",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "comparer des aires",
+        "aire du rectangle",
+        "aire et périmètre",
+        "m²",
+        "dm²",
+        "agente immobilière",
+        "appartement",
+        "aires",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:16",
+          "question": "Quelle surface est la plus grande ?",
+          "choix": [
+            "un carré de 4 m de côté",
+            "un rectangle de 6 m sur 3",
+            "un rectangle de 8 m sur 1"
+          ],
+          "reponse": 1,
+          "explication": "4 × 4 = 16 m², 6 × 3 = 18 m², 8 × 1 = 8 m². Le plus long n'est pas le plus grand !"
+        },
+        {
+          "t": "02:08",
+          "question": "Terrasse A : 30 m². Terrasse B : 4 m sur 7 m. Quel est l'écart ?",
+          "choix": [
+            "19 m²",
+            "8 m²",
+            "2 m²"
+          ],
+          "reponse": 2,
+          "explication": "B : 4 × 7 = 28 m². 30 − 28 = 2 m² d'écart."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "construction"
+      ]
+    },
+    {
+      "id": "6e-aire-comparer-short",
+      "pas_avant": "2027-04-09",
+      "notionId": "aire_surface",
+      "microId": "aire_comparer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-aire-comparer",
+      "fichier": "6e/maths/aire/02-comparer/eleveai-maths-6e-aire-comparer-short.mp4",
+      "miniature": "6e/maths/aire/02-comparer/eleveai-maths-6e-aire-comparer-short-miniature.png",
+      "titre": "3 parts de gâteau : laquelle est la plus grande ? #maths #6e",
+      "accroche": "Trois parts de gâteau pour Ti Margo : 10 cm sur 6, un carré de 7 cm, et 12 cm sur 4, la plus longue. Elle prend la plus grande… mais laquelle est-ce ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un carré de 8 cm de côté, ou un rectangle de 16 cm sur 4 ? Lequel a la plus grande aire ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=aire_surface&microId=aire_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #6e",
+      "tags": [
+        "comparer des aires",
+        "aire du rectangle",
+        "gâteau",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "aires",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Quelle part de gâteau a la plus grande aire ?",
+          "choix": [
+            "10 cm sur 6",
+            "un carré de 7 cm",
+            "12 cm sur 4"
+          ],
+          "reponse": 0,
+          "explication": "10 × 6 = 60 cm², 7 × 7 = 49 cm², 12 × 4 = 48 cm². La plus longue est la plus petite !"
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
       "id": "cm2-solides-reconnaitre",
       "pas_avant": "2027-03-27",
       "prioritaire": true,
@@ -90329,6 +90525,158 @@
       ]
     },
     {
+      "id": "cm2-solides-faces",
+      "pas_avant": "2027-03-29",
+      "prioritaire": true,
+      "notionId": "solide",
+      "microId": "solide_face",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/solides/03-faces/eleveai-maths-cm2-solides-faces.mp4",
+      "miniature": "cm2/maths/solides/03-faces/eleveai-maths-cm2-solides-faces.png",
+      "titre": "Combien de faces, et de quelles formes ? — Les faces d'un solide — épisode 3 · Maths CM2",
+      "accroche": "Victor est chocolatier. Il fabrique des boîtes en chocolat, et il décore chaque face avec un dessin. Pour chaque boîte, il doit savoir : combien de faces, et de quelles formes ?\n\nDans cette vidéo :\n• le pavé droit : 6 faces rectangles, par paires face à face (3 paires)\n• un pavé de 10 × 6 × 4 cm : dessus 10 sur 6, devant 10 sur 4, côtés 6 sur 4\n• le prisme à base triangulaire : 2 triangles (les bases) et 3 rectangles, 5 faces\n• le piège : le cylindre n'a que 2 faces plates, la boule aucune\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une boîte en pyramide à base pentagonale : combien d'étiquettes, et de quelles formes ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_face&display=simple\n\n🔢 Épisode 3 de la série Solides d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de faces ?"
+        ],
+        [
+          "00:22",
+          "Le pavé droit"
+        ],
+        [
+          "00:36",
+          "Les mesures des faces"
+        ],
+        [
+          "00:52",
+          "Le prisme"
+        ],
+        [
+          "01:05",
+          "Question 1"
+        ],
+        [
+          "01:40",
+          "Le piège"
+        ],
+        [
+          "01:55",
+          "Question 2"
+        ],
+        [
+          "02:33",
+          "À toi de jouer"
+        ],
+        [
+          "02:49",
+          "Correction"
+        ],
+        [
+          "03:03",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "faces",
+        "solides",
+        "pavé droit",
+        "prisme",
+        "pyramide",
+        "cylindre",
+        "chocolatier",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:05",
+          "question": "Un cube a des arêtes de 3 centimètres. Quelles sont ses faces ?",
+          "choix": [
+            "6 rectangles de 3 sur 6",
+            "4 carrés et 2 rectangles",
+            "6 carrés de 3 centimètres de côté"
+          ],
+          "reponse": 2,
+          "explication": "Un cube a 6 faces, toutes des carrés pareils. Ici, 6 carrés de 3 centimètres de côté."
+        },
+        {
+          "t": "01:55",
+          "question": "Une boîte en pavé mesure 8 centimètres de long, 5 de large et 2 de haut. Quelles sont les mesures de la face du dessus ?",
+          "choix": [
+            "8 sur 2",
+            "8 sur 5",
+            "5 sur 2"
+          ],
+          "reponse": 1,
+          "explication": "Le dessus a la longueur et la largeur : 8 centimètres sur 5. Les faces de 8 sur 2 sont devant et derrière ; celles de 5 sur 2, sur les côtés."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "art-design"
+      ]
+    },
+    {
+      "id": "cm2-solides-faces-short",
+      "pas_avant": "2027-03-29",
+      "prioritaire": true,
+      "notionId": "solide",
+      "microId": "solide_face",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-solides-faces",
+      "fichier": "cm2/maths/solides/03-faces/eleveai-maths-cm2-solides-faces-short.mp4",
+      "miniature": "cm2/maths/solides/03-faces/eleveai-maths-cm2-solides-faces-short-miniature.png",
+      "titre": "4 couleurs pour ma boîte à chaussures ? Raté ! #maths #cm2",
+      "accroche": "Je peins une boîte à chaussures, une couleur par face. Rouge sur le dessus, puis bleu, vert et jaune sur les côtés. 4 couleurs, c'est fini ! … Vraiment ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une boîte en prisme a 2 bases en triangle. Combien de faces en tout ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_face&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #solides #cm2 #primaire",
+      "tags": [
+        "faces",
+        "pavé droit",
+        "peinture",
+        "boîte",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "solides",
+        "géométrie dans l'espace",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Combien de couleurs fallait-il ?",
+          "choix": [
+            "6 couleurs",
+            "4 couleurs",
+            "8 couleurs"
+          ],
+          "reponse": 0,
+          "explication": "Une boîte à chaussures, c'est un pavé droit : 6 faces. Le dessus, le dessous, et 4 côtés : 6 couleurs."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
       "id": "cm2-solides-patron",
       "pas_avant": "2027-03-30",
       "prioritaire": true,
@@ -90474,156 +90822,6 @@
       ],
       "centres": [
         "art-design"
-      ]
-    },
-    {
-      "id": "6e-aire-comparer",
-      "pas_avant": "2027-04-09",
-      "notionId": "aire_surface",
-      "microId": "aire_comparer",
-      "classe": "6e",
-      "ceinture": "verte",
-      "serie": "Maths 6e",
-      "type": "longue",
-      "fichier": "6e/maths/aire/02-comparer/eleveai-maths-6e-aire-comparer.mp4",
-      "miniature": "6e/maths/aire/02-comparer/eleveai-maths-6e-aire-comparer.png",
-      "titre": "Comparer des aires : on calcule, on ne devine pas — épisode 2 · Maths 6e",
-      "accroche": "Léna est agente immobilière. Une famille hésite entre deux salons : l'un a l'air plus long, l'autre plus large. Lequel est le plus grand ? Léna ne devine pas : elle calcule.\n\nDans cette vidéo :\n• 6 m sur 4 m = 24 m², un carré de 5 m = 25 m² : le carré gagne, de 1 m²\n• deux formes différentes, la même aire : 8 × 3 = 6 × 4 = 24 m²\n• la même unité pour comparer : 2 m² = 200 dm², plus que 150 dm²\n• le piège : le plus grand tour n'a pas forcément la plus grande aire\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un salon de 5 m sur 4 et une chambre carrée de 3 m, ou un séjour de 7 m sur 4 : lequel est le plus grand, et de combien ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=aire_surface&microId=aire_comparer&display=simple\n\n📐 Épisode 2 de la série Aire d'EleveAI, en 6e.",
-      "chapitres": [
-        [
-          "00:00",
-          "Comparer des aires"
-        ],
-        [
-          "00:07",
-          "Léna, agente immobilière"
-        ],
-        [
-          "00:24",
-          "Calculer pour comparer"
-        ],
-        [
-          "00:44",
-          "Formes différentes, même aire"
-        ],
-        [
-          "00:55",
-          "La même unité"
-        ],
-        [
-          "01:16",
-          "Question 1"
-        ],
-        [
-          "01:49",
-          "Le piège"
-        ],
-        [
-          "02:08",
-          "Question 2"
-        ],
-        [
-          "02:45",
-          "À toi de jouer"
-        ],
-        [
-          "03:06",
-          "Correction"
-        ],
-        [
-          "03:23",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "comparer des aires",
-        "aire du rectangle",
-        "aire et périmètre",
-        "m²",
-        "dm²",
-        "agente immobilière",
-        "appartement",
-        "aires",
-        "maths",
-        "6e",
-        "collège",
-        "cycle 3",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "01:16",
-          "question": "Quelle surface est la plus grande ?",
-          "choix": [
-            "un carré de 4 m de côté",
-            "un rectangle de 6 m sur 3",
-            "un rectangle de 8 m sur 1"
-          ],
-          "reponse": 1,
-          "explication": "4 × 4 = 16 m², 6 × 3 = 18 m², 8 × 1 = 8 m². Le plus long n'est pas le plus grand !"
-        },
-        {
-          "t": "02:08",
-          "question": "Terrasse A : 30 m². Terrasse B : 4 m sur 7 m. Quel est l'écart ?",
-          "choix": [
-            "19 m²",
-            "8 m²",
-            "2 m²"
-          ],
-          "reponse": 2,
-          "explication": "B : 4 × 7 = 28 m². 30 − 28 = 2 m² d'écart."
-        }
-      ],
-      "centres": [
-        "argent-budget",
-        "construction"
-      ]
-    },
-    {
-      "id": "6e-aire-comparer-short",
-      "pas_avant": "2027-04-09",
-      "notionId": "aire_surface",
-      "microId": "aire_comparer",
-      "classe": "6e",
-      "ceinture": "blanche",
-      "serie": "Maths 6e",
-      "type": "short",
-      "renvoie_vers": "6e-aire-comparer",
-      "fichier": "6e/maths/aire/02-comparer/eleveai-maths-6e-aire-comparer-short.mp4",
-      "miniature": "6e/maths/aire/02-comparer/eleveai-maths-6e-aire-comparer-short-miniature.png",
-      "titre": "3 parts de gâteau : laquelle est la plus grande ? #maths #6e",
-      "accroche": "Trois parts de gâteau pour Ti Margo : 10 cm sur 6, un carré de 7 cm, et 12 cm sur 4, la plus longue. Elle prend la plus grande… mais laquelle est-ce ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un carré de 8 cm de côté, ou un rectangle de 16 cm sur 4 ? Lequel a la plus grande aire ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=aire_surface&microId=aire_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #aire #6e",
-      "tags": [
-        "comparer des aires",
-        "aire du rectangle",
-        "gâteau",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "aires",
-        "maths",
-        "6e",
-        "collège",
-        "cycle 3",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:16",
-          "question": "Quelle part de gâteau a la plus grande aire ?",
-          "choix": [
-            "10 cm sur 6",
-            "un carré de 7 cm",
-            "12 cm sur 4"
-          ],
-          "reponse": 0,
-          "explication": "10 × 6 = 60 cm², 7 × 7 = 49 cm², 12 × 4 = 48 cm². La plus longue est la plus petite !"
-        }
-      ],
-      "centres": [
-        "cuisine",
-        "jeux-defis"
       ]
     },
     {
@@ -90776,158 +90974,6 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
-    },
-    {
-      "id": "cm2-solides-faces",
-      "pas_avant": "2027-03-29",
-      "prioritaire": true,
-      "notionId": "solide",
-      "microId": "solide_face",
-      "classe": "cm2",
-      "ceinture": "jaune",
-      "serie": "Maths CM2",
-      "type": "longue",
-      "fichier": "cm2/maths/solides/03-faces/eleveai-maths-cm2-solides-faces.mp4",
-      "miniature": "cm2/maths/solides/03-faces/eleveai-maths-cm2-solides-faces.png",
-      "titre": "Combien de faces, et de quelles formes ? — Les faces d'un solide — épisode 3 · Maths CM2",
-      "accroche": "Victor est chocolatier. Il fabrique des boîtes en chocolat, et il décore chaque face avec un dessin. Pour chaque boîte, il doit savoir : combien de faces, et de quelles formes ?\n\nDans cette vidéo :\n• le pavé droit : 6 faces rectangles, par paires face à face (3 paires)\n• un pavé de 10 × 6 × 4 cm : dessus 10 sur 6, devant 10 sur 4, côtés 6 sur 4\n• le prisme à base triangulaire : 2 triangles (les bases) et 3 rectangles, 5 faces\n• le piège : le cylindre n'a que 2 faces plates, la boule aucune\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une boîte en pyramide à base pentagonale : combien d'étiquettes, et de quelles formes ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_face&display=simple\n\n🔢 Épisode 3 de la série Solides d'EleveAI, en CM2.",
-      "chapitres": [
-        [
-          "00:00",
-          "Combien de faces ?"
-        ],
-        [
-          "00:22",
-          "Le pavé droit"
-        ],
-        [
-          "00:36",
-          "Les mesures des faces"
-        ],
-        [
-          "00:52",
-          "Le prisme"
-        ],
-        [
-          "01:05",
-          "Question 1"
-        ],
-        [
-          "01:40",
-          "Le piège"
-        ],
-        [
-          "01:55",
-          "Question 2"
-        ],
-        [
-          "02:33",
-          "À toi de jouer"
-        ],
-        [
-          "02:49",
-          "Correction"
-        ],
-        [
-          "03:03",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "faces",
-        "solides",
-        "pavé droit",
-        "prisme",
-        "pyramide",
-        "cylindre",
-        "chocolatier",
-        "solides",
-        "géométrie dans l'espace",
-        "maths",
-        "CM2",
-        "primaire",
-        "cycle 3",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "01:05",
-          "question": "Un cube a des arêtes de 3 centimètres. Quelles sont ses faces ?",
-          "choix": [
-            "6 rectangles de 3 sur 6",
-            "4 carrés et 2 rectangles",
-            "6 carrés de 3 centimètres de côté"
-          ],
-          "reponse": 2,
-          "explication": "Un cube a 6 faces, toutes des carrés pareils. Ici, 6 carrés de 3 centimètres de côté."
-        },
-        {
-          "t": "01:55",
-          "question": "Une boîte en pavé mesure 8 centimètres de long, 5 de large et 2 de haut. Quelles sont les mesures de la face du dessus ?",
-          "choix": [
-            "8 sur 2",
-            "8 sur 5",
-            "5 sur 2"
-          ],
-          "reponse": 1,
-          "explication": "Le dessus a la longueur et la largeur : 8 centimètres sur 5. Les faces de 8 sur 2 sont devant et derrière ; celles de 5 sur 2, sur les côtés."
-        }
-      ],
-      "centres": [
-        "cuisine",
-        "art-design"
-      ]
-    },
-    {
-      "id": "cm2-solides-faces-short",
-      "pas_avant": "2027-03-29",
-      "prioritaire": true,
-      "notionId": "solide",
-      "microId": "solide_face",
-      "classe": "cm2",
-      "ceinture": "blanche",
-      "serie": "Maths CM2",
-      "type": "short",
-      "renvoie_vers": "cm2-solides-faces",
-      "fichier": "cm2/maths/solides/03-faces/eleveai-maths-cm2-solides-faces-short.mp4",
-      "miniature": "cm2/maths/solides/03-faces/eleveai-maths-cm2-solides-faces-short-miniature.png",
-      "titre": "4 couleurs pour ma boîte à chaussures ? Raté ! #maths #cm2",
-      "accroche": "Je peins une boîte à chaussures, une couleur par face. Rouge sur le dessus, puis bleu, vert et jaune sur les côtés. 4 couleurs, c'est fini ! … Vraiment ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une boîte en prisme a 2 bases en triangle. Combien de faces en tout ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=solide&microId=solide_face&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #solides #cm2 #primaire",
-      "tags": [
-        "faces",
-        "pavé droit",
-        "peinture",
-        "boîte",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "solides",
-        "géométrie dans l'espace",
-        "maths",
-        "CM2",
-        "primaire",
-        "cycle 3",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:18",
-          "question": "Combien de couleurs fallait-il ?",
-          "choix": [
-            "6 couleurs",
-            "4 couleurs",
-            "8 couleurs"
-          ],
-          "reponse": 0,
-          "explication": "Une boîte à chaussures, c'est un pavé droit : 6 faces. Le dessus, le dessous, et 4 côtés : 6 couleurs."
-        }
-      ],
-      "centres": [
-        "art-design"
       ]
     },
     {
@@ -94655,781 +94701,6 @@
       ]
     },
     {
-      "id": "cm2-contenance-estimer",
-      "pas_avant": "2027-03-25",
-      "notionId": "contenance",
-      "microId": "contenance_estimer",
-      "classe": "cm2",
-      "ceinture": "jaune",
-      "serie": "Maths CM2",
-      "type": "longue",
-      "fichier": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer.mp4",
-      "miniature": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer.png",
-      "titre": "Une chasse d'eau : 6 mL, 6 L ou 60 L ? — Estimer une contenance — épisode 3 · Maths CM2",
-      "accroche": "Ibrahim est plombier. Il installe une chasse d'eau, et le client demande combien d'eau part à chaque fois. Ibrahim n'a pas besoin de mesurer : il estime, avec des repères.\n\nDans cette vidéo :\n• des repères : une cuillère 5 mL, un verre 20 cL, une grande bouteille 1,5 L, un seau 10 L\n• la chasse d'eau : 4 grandes bouteilles, environ 6 litres\n• choisir l'unité : millilitre, centilitre ou litre\n• le piège : un nombre seul ne dit rien, regarde l'unité\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un robinet perd un verre de 20 cL par heure : combien de litres en 24 heures ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_estimer&display=simple\n\n🧪 Épisode 3 de la série Contenance d'EleveAI, en CM2.",
-      "chapitres": [
-        [
-          "00:00",
-          "Estimer une contenance"
-        ],
-        [
-          "00:07",
-          "Ibrahim, plombier"
-        ],
-        [
-          "00:22",
-          "Des repères"
-        ],
-        [
-          "00:39",
-          "La chasse d'eau"
-        ],
-        [
-          "01:00",
-          "Choisir l'unité"
-        ],
-        [
-          "01:15",
-          "Question 1"
-        ],
-        [
-          "01:48",
-          "Le piège"
-        ],
-        [
-          "02:06",
-          "Question 2"
-        ],
-        [
-          "02:39",
-          "À toi de jouer"
-        ],
-        [
-          "02:57",
-          "Correction"
-        ],
-        [
-          "03:13",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "estimer une contenance",
-        "ordre de grandeur",
-        "repères",
-        "litre",
-        "centilitre",
-        "millilitre",
-        "plombier",
-        "contenances",
-        "litre",
-        "centilitre",
-        "millilitre",
-        "maths",
-        "CM2",
-        "école",
-        "cycle 3",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "01:15",
-          "question": "Quelle est la contenance d'un bol de soupe ?",
-          "choix": [
-            "30 cL",
-            "3 mL",
-            "3 L"
-          ],
-          "reponse": 0,
-          "explication": "Un bol, c'est un peu plus qu'un verre de 20 cL : environ 30 cL."
-        },
-        {
-          "t": "02:06",
-          "question": "Combien contient un chauffe-eau ?",
-          "choix": [
-            "2 L",
-            "20 cL",
-            "200 L"
-          ],
-          "reponse": 2,
-          "explication": "Comme 20 seaux de 10 L : environ 200 litres."
-        }
-      ],
-      "centres": [
-        "construction",
-        "nature-ecologie"
-      ]
-    },
-    {
-      "id": "cm2-contenance-estimer-short",
-      "pas_avant": "2027-03-25",
-      "notionId": "contenance",
-      "microId": "contenance_estimer",
-      "classe": "cm2",
-      "ceinture": "blanche",
-      "serie": "Maths CM2",
-      "type": "short",
-      "renvoie_vers": "cm2-contenance-estimer",
-      "fichier": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer-short.mp4",
-      "miniature": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer-short-miniature.png",
-      "titre": "Un parfum de 50… litres ? #maths #cm2",
-      "accroche": "Ti Margo achète un parfum pour Maman. Sur la boîte, il lit 50. 50 litres ? Il prépare déjà la brouette… mais la vendeuse lui tend une toute petite boîte. 50 quoi ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un arrosoir contient 10… millilitres, centilitres, ou litres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #contenance #cm2",
-      "tags": [
-        "estimer une contenance",
-        "millilitre",
-        "unités",
-        "parfum",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "contenances",
-        "maths",
-        "CM2",
-        "école",
-        "cycle 3",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:14",
-          "question": "Le flacon de parfum contient 50… quoi ?",
-          "choix": [
-            "50 mL",
-            "50 L",
-            "50 cL"
-          ],
-          "reponse": 0,
-          "explication": "Un flacon de parfum tient dans la main : 50 mL, c'est 10 cuillères à café."
-        }
-      ],
-      "centres": [
-        "mode",
-        "jeux-defis"
-      ]
-    },
-    {
-      "id": "cm2-contenance-defi",
-      "pas_avant": "2027-03-26",
-      "notionId": "contenance",
-      "microId": "contenance_defi",
-      "classe": "cm2",
-      "ceinture": "bleue",
-      "serie": "Maths CM2",
-      "type": "longue",
-      "fichier": "cm2/maths/contenance/04-defi/eleveai-maths-cm2-contenance-defi.mp4",
-      "miniature": "cm2/maths/contenance/04-defi/eleveai-maths-cm2-contenance-defi.png",
-      "titre": "120 coureurs, 25 cL chacun : combien de bouteilles ? — Défi de contenances — épisode 4 · Maths CM2",
-      "accroche": "Manon organise un marathon. Au ravitaillement, 120 coureurs reçoivent chacun un gobelet de 25 centilitres d'eau. Les bouteilles font 1,5 litre. Combien de bouteilles faut-il ?\n\nDans cette vidéo :\n• un défi en 3 étapes : la quantité totale, la même unité, le nombre de bouteilles\n• 120 gobelets de 25 cL = 30 litres, donc 20 bouteilles de 1,5 L\n• partager une bouteille de 1,5 L en gobelets de 25 cL\n• le piège : s'il manque un peu, on prend une bouteille de plus\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : 6 bouteilles de 75 cL et 4 bouteilles de 1,5 L : combien de litres en tout ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_defi&display=simple\n\n🧪 Épisode 4 de la série Contenance d'EleveAI, en CM2.",
-      "chapitres": [
-        [
-          "00:00",
-          "Défi de contenances"
-        ],
-        [
-          "00:06",
-          "Manon, organisatrice de marathon"
-        ],
-        [
-          "00:24",
-          "Les étapes"
-        ],
-        [
-          "00:36",
-          "La quantité totale"
-        ],
-        [
-          "00:49",
-          "Le nombre de bouteilles"
-        ],
-        [
-          "01:00",
-          "Question 1"
-        ],
-        [
-          "01:38",
-          "Le piège"
-        ],
-        [
-          "01:52",
-          "Question 2"
-        ],
-        [
-          "02:26",
-          "À toi de jouer"
-        ],
-        [
-          "02:42",
-          "Correction"
-        ],
-        [
-          "03:00",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "problème de contenances",
-        "défi",
-        "litre",
-        "centilitre",
-        "étapes",
-        "marathon",
-        "contenances",
-        "litre",
-        "centilitre",
-        "millilitre",
-        "maths",
-        "CM2",
-        "école",
-        "cycle 3",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "01:00",
-          "question": "Une bouteille de 1,5 L remplit des gobelets de 25 cL. Combien de gobelets ?",
-          "choix": [
-            "6 gobelets",
-            "4 gobelets",
-            "60 gobelets"
-          ],
-          "reponse": 0,
-          "explication": "1,5 L = 150 cL. 150 ÷ 25 = 6, car 6 × 25 = 150."
-        },
-        {
-          "t": "01:52",
-          "question": "18 L de jus, 40 gobelets de 20 cL servis : combien de litres reste-t-il ?",
-          "choix": [
-            "17,2 L",
-            "8 L",
-            "10 L"
-          ],
-          "reponse": 2,
-          "explication": "40 × 20 = 800 cL = 8 L. 18 − 8 = 10 L."
-        }
-      ],
-      "centres": [
-        "sport",
-        "jeux-defis"
-      ]
-    },
-    {
-      "id": "cm2-contenance-defi-short",
-      "pas_avant": "2027-03-26",
-      "notionId": "contenance",
-      "microId": "contenance_defi",
-      "classe": "cm2",
-      "ceinture": "blanche",
-      "serie": "Maths CM2",
-      "type": "short",
-      "renvoie_vers": "cm2-contenance-defi",
-      "fichier": "cm2/maths/contenance/04-defi/eleveai-maths-cm2-contenance-defi-short.mp4",
-      "miniature": "cm2/maths/contenance/04-defi/eleveai-maths-cm2-contenance-defi-short-miniature.png",
-      "titre": "Le cocktail qui déborde : combien de litres ? #maths #cm2",
-      "accroche": "Ti Margo fait un cocktail : 1,5 litre de jus d'orange, 75 centilitres de jus d'ananas et 250 millilitres de sirop, dans un pichet de 2 litres. « Ça rentre facile ! » Vraiment ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 1 litre de lait, plus 30 centilitres, plus 200 millilitres. Combien de centilitres en tout ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #contenance #cm2",
-      "tags": [
-        "problème de contenances",
-        "addition",
-        "litre",
-        "cocktail",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "contenances",
-        "maths",
-        "CM2",
-        "école",
-        "cycle 3",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:25",
-          "question": "1,5 L + 75 cL + 250 mL : combien de litres en tout ?",
-          "choix": [
-            "2 L",
-            "3,25 L",
-            "2,5 L"
-          ],
-          "reponse": 2,
-          "explication": "En cL : 150 + 75 + 25 = 250 cL = 2,5 L. Le pichet de 2 L déborde d'un demi-litre."
-        }
-      ],
-      "centres": [
-        "cuisine",
-        "jeux-defis"
-      ]
-    },
-    {
-      "id": "cm2-longueur-convertir",
-      "pas_avant": "2027-04-03",
-      "notionId": "longueur",
-      "microId": "longueur_convertir",
-      "classe": "cm2",
-      "ceinture": "verte",
-      "serie": "Maths CM2",
-      "type": "longue",
-      "fichier": "cm2/maths/longueurs/02-convertir/eleveai-maths-cm2-longueur-convertir.mp4",
-      "miniature": "cm2/maths/longueurs/02-convertir/eleveai-maths-cm2-longueur-convertir.png",
-      "titre": "3,5 km, combien de mètres ? — Convertir des longueurs — épisode 2 · Maths CM2",
-      "accroche": "Arthur est géomètre : il mesure les terrains et les routes. Sur son plan, une route fait 3,5 km. Mais son rapport doit être écrit en mètres. Combien de mètres ?\n\nDans cette vidéo :\n• le tableau des longueurs : km, hm, dam, m, dm, cm, mm ; d'une colonne à la suivante, × 10\n• 3,5 km = 3 500 m ; 2,45 m = 245 cm = 2 450 mm\n• dans l'autre sens, on divise : 750 m = 0,75 km\n• le piège : 3,5 km, ce n'est ni 35 m, ni 3 005 m\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une route de 1,5 km découpée en tronçons de 25 m : combien de tronçons ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_convertir&display=simple\n\n📏 Épisode 2 de la série Longueurs d'EleveAI, en CM2.",
-      "chapitres": [
-        [
-          "00:00",
-          "Du km au mm : le tableau"
-        ],
-        [
-          "00:07",
-          "Arthur, géomètre"
-        ],
-        [
-          "00:23",
-          "Le tableau des longueurs"
-        ],
-        [
-          "00:37",
-          "3,5 km en mètres"
-        ],
-        [
-          "00:54",
-          "2,45 m en cm et en mm"
-        ],
-        [
-          "01:10",
-          "Vers le km : on divise"
-        ],
-        [
-          "01:21",
-          "Question 1"
-        ],
-        [
-          "01:52",
-          "Le piège : 35 m ou 3 005 m ?"
-        ],
-        [
-          "02:10",
-          "Question 2"
-        ],
-        [
-          "02:49",
-          "À toi de jouer"
-        ],
-        [
-          "03:05",
-          "Correction"
-        ],
-        [
-          "03:26",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "convertir des longueurs",
-        "tableau de conversion",
-        "kilomètre",
-        "mètre",
-        "centimètre",
-        "millimètre",
-        "géomètre",
-        "longueurs",
-        "maths",
-        "CM2",
-        "école",
-        "cycle 3",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "01:21",
-          "question": "Combien de centimètres font 1,8 mètre ?",
-          "choix": [
-            "18 centimètres",
-            "180 centimètres",
-            "108 centimètres"
-          ],
-          "reponse": 1,
-          "explication": "1,8 × 100 = 180 : 1,8 m, c'est 180 cm."
-        },
-        {
-          "t": "02:10",
-          "question": "Arthur trace un chemin de 650 mètres. Combien de kilomètres ?",
-          "choix": [
-            "0,65 kilomètre",
-            "6,5 kilomètres",
-            "65 kilomètres"
-          ],
-          "reponse": 0,
-          "explication": "650 ÷ 1 000 = 0,65 : un peu plus d'un demi-kilomètre."
-        }
-      ],
-      "centres": [
-        "construction",
-        "sciences"
-      ]
-    },
-    {
-      "id": "cm2-longueur-convertir-short",
-      "pas_avant": "2027-04-03",
-      "notionId": "longueur",
-      "microId": "longueur_convertir",
-      "classe": "cm2",
-      "ceinture": "blanche",
-      "serie": "Maths CM2",
-      "type": "short",
-      "renvoie_vers": "cm2-longueur-convertir",
-      "fichier": "cm2/maths/longueurs/02-convertir/eleveai-maths-cm2-longueur-convertir-short.mp4",
-      "miniature": "cm2/maths/longueurs/02-convertir/eleveai-maths-cm2-longueur-convertir-short-miniature.png",
-      "titre": "2,5 m de ruban : combien de centimètres ? #maths #cm2",
-      "accroche": "J'ai 2,5 m de ruban pour emballer mes cadeaux, 30 cm par cadeau. « 2,5 mètres… 25 centimètres. Pas même un cadeau ! » Et pourtant, le ruban traverse tout le salon…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 4,2 kilomètres, c'est combien de mètres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_convertir&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #cm2",
-      "tags": [
-        "convertir des longueurs",
-        "mètre",
-        "centimètre",
-        "ruban",
-        "cadeaux",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "longueurs",
-        "maths",
-        "CM2",
-        "école",
-        "cycle 3",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:18",
-          "question": "Combien de centimètres de ruban ai-je ?",
-          "choix": [
-            "25 centimètres",
-            "250 centimètres",
-            "205 centimètres"
-          ],
-          "reponse": 1,
-          "explication": "2,5 × 100 = 250 cm : assez pour 8 cadeaux (8 × 30 = 240)."
-        }
-      ],
-      "centres": [
-        "art-design",
-        "jeux-defis"
-      ]
-    },
-    {
-      "id": "cm2-longueur-defi",
-      "pas_avant": "2027-04-05",
-      "notionId": "longueur",
-      "microId": "longueur_defi",
-      "classe": "cm2",
-      "ceinture": "bleue",
-      "serie": "Maths CM2",
-      "type": "longue",
-      "fichier": "cm2/maths/longueurs/04-defi/eleveai-maths-cm2-longueur-defi.mp4",
-      "miniature": "cm2/maths/longueurs/04-defi/eleveai-maths-cm2-longueur-defi.png",
-      "titre": "Combien de câble reste-t-il sur la bobine ? — Défis de longueurs — épisode 4 · Maths CM2",
-      "accroche": "Nathan installe la fibre optique, les câbles qui apportent internet dans les maisons. Sa bobine : 2,5 km de câble. Il en pose 1 200 m dans une rue, 850 m dans une autre. Combien en reste-t-il ?\n\nDans cette vidéo :\n• un défi se fait en étapes : d'abord la même unité, puis les calculs, un par un\n• 2,5 km = 2 500 m ; 1 200 + 850 = 2 050 ; 2 500 − 2 050 = 450 m\n• le piège : on ne calcule jamais avec deux unités différentes\n• intervalles et poteaux : un boîtier au début et un au bout, un objet de plus que d'espaces\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : une rue de 1,2 km, un boîtier tous les 150 m, du début au bout : combien de boîtiers ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_defi&display=simple\n\n📏 Épisode 4 de la série Longueurs d'EleveAI, en CM2.",
-      "chapitres": [
-        [
-          "00:00",
-          "Combien de câble reste-t-il ?"
-        ],
-        [
-          "00:06",
-          "Nathan, technicien fibre optique"
-        ],
-        [
-          "00:26",
-          "Un défi en étapes"
-        ],
-        [
-          "00:34",
-          "D'abord la même unité"
-        ],
-        [
-          "00:39",
-          "Les calculs"
-        ],
-        [
-          "00:52",
-          "Question 1"
-        ],
-        [
-          "01:23",
-          "Le piège : deux unités"
-        ],
-        [
-          "01:39",
-          "Question 2"
-        ],
-        [
-          "02:11",
-          "À toi de jouer"
-        ],
-        [
-          "02:29",
-          "Correction : intervalles et boîtiers"
-        ],
-        [
-          "02:50",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "problèmes de longueurs",
-        "défi",
-        "intervalles",
-        "kilomètre",
-        "mètre",
-        "fibre optique",
-        "longueurs",
-        "maths",
-        "CM2",
-        "école",
-        "cycle 3",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "00:52",
-          "question": "Nathan relie 4 maisons, 35 mètres de câble par maison. Combien en tout ?",
-          "choix": [
-            "39 mètres",
-            "1 400 mètres",
-            "140 mètres"
-          ],
-          "reponse": 2,
-          "explication": "4 × 35 = 140 m de câble."
-        },
-        {
-          "t": "01:39",
-          "question": "Nathan coupe un câble de 6 mètres en morceaux de 75 centimètres. Combien de morceaux ?",
-          "choix": [
-            "8 morceaux",
-            "80 morceaux",
-            "12 morceaux"
-          ],
-          "reponse": 0,
-          "explication": "6 m = 600 cm, et 8 × 75 = 600 : 8 morceaux."
-        }
-      ],
-      "centres": [
-        "technologie-ia",
-        "construction"
-      ]
-    },
-    {
-      "id": "cm2-longueur-defi-short",
-      "pas_avant": "2027-04-05",
-      "notionId": "longueur",
-      "microId": "longueur_defi",
-      "classe": "cm2",
-      "ceinture": "blanche",
-      "serie": "Maths CM2",
-      "type": "short",
-      "renvoie_vers": "cm2-longueur-defi",
-      "fichier": "cm2/maths/longueurs/04-defi/eleveai-maths-cm2-longueur-defi-short.mp4",
-      "miniature": "cm2/maths/longueurs/04-defi/eleveai-maths-cm2-longueur-defi-short-miniature.png",
-      "titre": "10 m de clôture, un ballon tous les 2 m : 5 ballons ? #maths #cm2",
-      "accroche": "Je décore la clôture du jardin : 10 m, un ballon tous les 2 m, du début jusqu'au bout. « 10 ÷ 2 : 5 ballons ! » J'accroche… et le dernier poteau reste tout nu !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 1 kilomètre, un drapeau tous les 250 mètres, du départ à l'arrivée. Combien de drapeaux ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #cm2",
-      "tags": [
-        "problèmes de longueurs",
-        "intervalles",
-        "ballons",
-        "clôture",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "longueurs",
-        "maths",
-        "CM2",
-        "école",
-        "cycle 3",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:15",
-          "question": "Combien de ballons fallait-il ?",
-          "choix": [
-            "6 ballons",
-            "5 ballons",
-            "20 ballons"
-          ],
-          "reponse": 0,
-          "explication": "10 ÷ 2 = 5 espaces ; avec un ballon au début et un au bout : 6 ballons."
-        }
-      ],
-      "centres": [
-        "jeux-defis",
-        "art-design"
-      ]
-    },
-    {
-      "id": "cm2-longueur-estimer",
-      "pas_avant": "2027-04-04",
-      "notionId": "longueur",
-      "microId": "longueur_estimer",
-      "classe": "cm2",
-      "ceinture": "jaune",
-      "serie": "Maths CM2",
-      "type": "longue",
-      "fichier": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer.mp4",
-      "miniature": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer.png",
-      "titre": "Une girafe : 5 cm, 5 m ou 5 km ? — Estimer une longueur — épisode 3 · Maths CM2",
-      "accroche": "Mia est photographe animalière. Sous chaque photo, elle écrit la taille de l'animal. Mais elle n'a pas toujours de mètre ruban ! Alors elle estime.\n\nDans cette vidéo :\n• des repères : un ongle ≈ 1 mm, un doigt ≈ 1 cm, un grand pas ≈ 1 m, un quart d'heure de marche ≈ 1 km\n• la girafe, plus de 2 fois une porte de 2 m : environ 5 m\n• avec une virgule : un enfant de CM2 ≈ 1,4 m, un colibri ≈ 8 cm\n• le piège : choisir l'unité avant le nombre (une baleine bleue : 30 m, pas 30 cm)\n• le Piton des Neiges, à La Réunion : environ 3 000 m d'altitude\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un serpent aussi long que 3 grands pas et demi : combien de mètres ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_estimer&display=simple\n\n📏 Épisode 3 de la série Longueurs d'EleveAI, en CM2.",
-      "chapitres": [
-        [
-          "00:00",
-          "5 cm, 5 m ou 5 km ?"
-        ],
-        [
-          "00:08",
-          "Mia, photographe animalière"
-        ],
-        [
-          "00:24",
-          "Les repères"
-        ],
-        [
-          "00:42",
-          "La girafe"
-        ],
-        [
-          "01:01",
-          "Avec une virgule"
-        ],
-        [
-          "01:16",
-          "Question 1"
-        ],
-        [
-          "01:52",
-          "Le piège : l'unité d'abord"
-        ],
-        [
-          "02:08",
-          "Question 2"
-        ],
-        [
-          "02:50",
-          "À toi de jouer"
-        ],
-        [
-          "03:06",
-          "Correction"
-        ],
-        [
-          "03:19",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "estimer une longueur",
-        "ordre de grandeur",
-        "repères",
-        "mètre",
-        "kilomètre",
-        "animaux",
-        "Piton des Neiges",
-        "longueurs",
-        "maths",
-        "CM2",
-        "école",
-        "cycle 3",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "01:16",
-          "question": "Mia photographie un papillon, les ailes ouvertes. Combien mesure-t-il ?",
-          "choix": [
-            "6 millimètres",
-            "6 mètres",
-            "6 centimètres"
-          ],
-          "reponse": 2,
-          "explication": "Ses ailes ouvertes font environ la largeur de 6 doigts : 6 cm."
-        },
-        {
-          "t": "02:08",
-          "question": "Quelle est l'altitude du sommet du Piton des Neiges, à La Réunion ?",
-          "choix": [
-            "environ 300 mètres",
-            "environ 3 000 mètres",
-            "environ 30 kilomètres"
-          ],
-          "reponse": 1,
-          "explication": "Environ 3 000 m, c'est-à-dire 3 km : 3 070 m exactement."
-        }
-      ],
-      "centres": [
-        "animaux",
-        "photo"
-      ]
-    },
-    {
-      "id": "cm2-longueur-estimer-short",
-      "pas_avant": "2027-04-04",
-      "notionId": "longueur",
-      "microId": "longueur_estimer",
-      "classe": "cm2",
-      "ceinture": "blanche",
-      "serie": "Maths CM2",
-      "type": "short",
-      "renvoie_vers": "cm2-longueur-estimer",
-      "fichier": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer-short.mp4",
-      "miniature": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer-short-miniature.png",
-      "titre": "Mon lit mesure 2 kilomètres ?! #maths #cm2",
-      "accroche": "Mon cousin me demande la longueur de mon lit. Je réfléchis… « 2 kilomètres ! » Il éclate de rire. Combien mesure vraiment mon lit ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un crayon neuf mesure 18… millimètres, centimètres, ou mètres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #cm2",
-      "tags": [
-        "estimer une longueur",
-        "ordre de grandeur",
-        "mètre",
-        "kilomètre",
-        "lit",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "longueurs",
-        "maths",
-        "CM2",
-        "école",
-        "cycle 3",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:15",
-          "question": "Combien mesure mon lit ?",
-          "choix": [
-            "2 centimètres",
-            "2 kilomètres",
-            "2 mètres"
-          ],
-          "reponse": 2,
-          "explication": "Environ 2 m : 2 grands pas, un peu plus que moi allongé."
-        }
-      ],
-      "centres": [
-        "jeux-defis",
-        "animaux"
-      ]
-    },
-    {
       "id": "6e-volume-unite",
       "pas_avant": "2027-04-12",
       "prioritaire": true,
@@ -96837,6 +96108,781 @@
       ],
       "centres": [
         "cuisine"
+      ]
+    },
+    {
+      "id": "cm2-contenance-estimer",
+      "pas_avant": "2027-03-25",
+      "notionId": "contenance",
+      "microId": "contenance_estimer",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer.mp4",
+      "miniature": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer.png",
+      "titre": "Une chasse d'eau : 6 mL, 6 L ou 60 L ? — Estimer une contenance — épisode 3 · Maths CM2",
+      "accroche": "Ibrahim est plombier. Il installe une chasse d'eau, et le client demande combien d'eau part à chaque fois. Ibrahim n'a pas besoin de mesurer : il estime, avec des repères.\n\nDans cette vidéo :\n• des repères : une cuillère 5 mL, un verre 20 cL, une grande bouteille 1,5 L, un seau 10 L\n• la chasse d'eau : 4 grandes bouteilles, environ 6 litres\n• choisir l'unité : millilitre, centilitre ou litre\n• le piège : un nombre seul ne dit rien, regarde l'unité\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un robinet perd un verre de 20 cL par heure : combien de litres en 24 heures ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_estimer&display=simple\n\n🧪 Épisode 3 de la série Contenance d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Estimer une contenance"
+        ],
+        [
+          "00:07",
+          "Ibrahim, plombier"
+        ],
+        [
+          "00:22",
+          "Des repères"
+        ],
+        [
+          "00:39",
+          "La chasse d'eau"
+        ],
+        [
+          "01:00",
+          "Choisir l'unité"
+        ],
+        [
+          "01:15",
+          "Question 1"
+        ],
+        [
+          "01:48",
+          "Le piège"
+        ],
+        [
+          "02:06",
+          "Question 2"
+        ],
+        [
+          "02:39",
+          "À toi de jouer"
+        ],
+        [
+          "02:57",
+          "Correction"
+        ],
+        [
+          "03:13",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "estimer une contenance",
+        "ordre de grandeur",
+        "repères",
+        "litre",
+        "centilitre",
+        "millilitre",
+        "plombier",
+        "contenances",
+        "litre",
+        "centilitre",
+        "millilitre",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:15",
+          "question": "Quelle est la contenance d'un bol de soupe ?",
+          "choix": [
+            "30 cL",
+            "3 mL",
+            "3 L"
+          ],
+          "reponse": 0,
+          "explication": "Un bol, c'est un peu plus qu'un verre de 20 cL : environ 30 cL."
+        },
+        {
+          "t": "02:06",
+          "question": "Combien contient un chauffe-eau ?",
+          "choix": [
+            "2 L",
+            "20 cL",
+            "200 L"
+          ],
+          "reponse": 2,
+          "explication": "Comme 20 seaux de 10 L : environ 200 litres."
+        }
+      ],
+      "centres": [
+        "construction",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "cm2-contenance-estimer-short",
+      "pas_avant": "2027-03-25",
+      "notionId": "contenance",
+      "microId": "contenance_estimer",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-contenance-estimer",
+      "fichier": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer-short.mp4",
+      "miniature": "cm2/maths/contenance/03-estimer/eleveai-maths-cm2-contenance-estimer-short-miniature.png",
+      "titre": "Un parfum de 50… litres ? #maths #cm2",
+      "accroche": "Ti Margo achète un parfum pour Maman. Sur la boîte, il lit 50. 50 litres ? Il prépare déjà la brouette… mais la vendeuse lui tend une toute petite boîte. 50 quoi ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un arrosoir contient 10… millilitres, centilitres, ou litres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #contenance #cm2",
+      "tags": [
+        "estimer une contenance",
+        "millilitre",
+        "unités",
+        "parfum",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "contenances",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "Le flacon de parfum contient 50… quoi ?",
+          "choix": [
+            "50 mL",
+            "50 L",
+            "50 cL"
+          ],
+          "reponse": 0,
+          "explication": "Un flacon de parfum tient dans la main : 50 mL, c'est 10 cuillères à café."
+        }
+      ],
+      "centres": [
+        "mode",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm2-contenance-defi",
+      "pas_avant": "2027-03-26",
+      "notionId": "contenance",
+      "microId": "contenance_defi",
+      "classe": "cm2",
+      "ceinture": "bleue",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/contenance/04-defi/eleveai-maths-cm2-contenance-defi.mp4",
+      "miniature": "cm2/maths/contenance/04-defi/eleveai-maths-cm2-contenance-defi.png",
+      "titre": "120 coureurs, 25 cL chacun : combien de bouteilles ? — Défi de contenances — épisode 4 · Maths CM2",
+      "accroche": "Manon organise un marathon. Au ravitaillement, 120 coureurs reçoivent chacun un gobelet de 25 centilitres d'eau. Les bouteilles font 1,5 litre. Combien de bouteilles faut-il ?\n\nDans cette vidéo :\n• un défi en 3 étapes : la quantité totale, la même unité, le nombre de bouteilles\n• 120 gobelets de 25 cL = 30 litres, donc 20 bouteilles de 1,5 L\n• partager une bouteille de 1,5 L en gobelets de 25 cL\n• le piège : s'il manque un peu, on prend une bouteille de plus\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : 6 bouteilles de 75 cL et 4 bouteilles de 1,5 L : combien de litres en tout ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_defi&display=simple\n\n🧪 Épisode 4 de la série Contenance d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Défi de contenances"
+        ],
+        [
+          "00:06",
+          "Manon, organisatrice de marathon"
+        ],
+        [
+          "00:24",
+          "Les étapes"
+        ],
+        [
+          "00:36",
+          "La quantité totale"
+        ],
+        [
+          "00:49",
+          "Le nombre de bouteilles"
+        ],
+        [
+          "01:00",
+          "Question 1"
+        ],
+        [
+          "01:38",
+          "Le piège"
+        ],
+        [
+          "01:52",
+          "Question 2"
+        ],
+        [
+          "02:26",
+          "À toi de jouer"
+        ],
+        [
+          "02:42",
+          "Correction"
+        ],
+        [
+          "03:00",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "problème de contenances",
+        "défi",
+        "litre",
+        "centilitre",
+        "étapes",
+        "marathon",
+        "contenances",
+        "litre",
+        "centilitre",
+        "millilitre",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:00",
+          "question": "Une bouteille de 1,5 L remplit des gobelets de 25 cL. Combien de gobelets ?",
+          "choix": [
+            "6 gobelets",
+            "4 gobelets",
+            "60 gobelets"
+          ],
+          "reponse": 0,
+          "explication": "1,5 L = 150 cL. 150 ÷ 25 = 6, car 6 × 25 = 150."
+        },
+        {
+          "t": "01:52",
+          "question": "18 L de jus, 40 gobelets de 20 cL servis : combien de litres reste-t-il ?",
+          "choix": [
+            "17,2 L",
+            "8 L",
+            "10 L"
+          ],
+          "reponse": 2,
+          "explication": "40 × 20 = 800 cL = 8 L. 18 − 8 = 10 L."
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm2-contenance-defi-short",
+      "pas_avant": "2027-03-26",
+      "notionId": "contenance",
+      "microId": "contenance_defi",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-contenance-defi",
+      "fichier": "cm2/maths/contenance/04-defi/eleveai-maths-cm2-contenance-defi-short.mp4",
+      "miniature": "cm2/maths/contenance/04-defi/eleveai-maths-cm2-contenance-defi-short-miniature.png",
+      "titre": "Le cocktail qui déborde : combien de litres ? #maths #cm2",
+      "accroche": "Ti Margo fait un cocktail : 1,5 litre de jus d'orange, 75 centilitres de jus d'ananas et 250 millilitres de sirop, dans un pichet de 2 litres. « Ça rentre facile ! » Vraiment ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 1 litre de lait, plus 30 centilitres, plus 200 millilitres. Combien de centilitres en tout ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=contenance&microId=contenance_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #contenance #cm2",
+      "tags": [
+        "problème de contenances",
+        "addition",
+        "litre",
+        "cocktail",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "contenances",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "1,5 L + 75 cL + 250 mL : combien de litres en tout ?",
+          "choix": [
+            "2 L",
+            "3,25 L",
+            "2,5 L"
+          ],
+          "reponse": 2,
+          "explication": "En cL : 150 + 75 + 25 = 250 cL = 2,5 L. Le pichet de 2 L déborde d'un demi-litre."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm2-longueur-convertir",
+      "pas_avant": "2027-04-03",
+      "notionId": "longueur",
+      "microId": "longueur_convertir",
+      "classe": "cm2",
+      "ceinture": "verte",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/longueurs/02-convertir/eleveai-maths-cm2-longueur-convertir.mp4",
+      "miniature": "cm2/maths/longueurs/02-convertir/eleveai-maths-cm2-longueur-convertir.png",
+      "titre": "3,5 km, combien de mètres ? — Convertir des longueurs — épisode 2 · Maths CM2",
+      "accroche": "Arthur est géomètre : il mesure les terrains et les routes. Sur son plan, une route fait 3,5 km. Mais son rapport doit être écrit en mètres. Combien de mètres ?\n\nDans cette vidéo :\n• le tableau des longueurs : km, hm, dam, m, dm, cm, mm ; d'une colonne à la suivante, × 10\n• 3,5 km = 3 500 m ; 2,45 m = 245 cm = 2 450 mm\n• dans l'autre sens, on divise : 750 m = 0,75 km\n• le piège : 3,5 km, ce n'est ni 35 m, ni 3 005 m\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : une route de 1,5 km découpée en tronçons de 25 m : combien de tronçons ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_convertir&display=simple\n\n📏 Épisode 2 de la série Longueurs d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Du km au mm : le tableau"
+        ],
+        [
+          "00:07",
+          "Arthur, géomètre"
+        ],
+        [
+          "00:23",
+          "Le tableau des longueurs"
+        ],
+        [
+          "00:37",
+          "3,5 km en mètres"
+        ],
+        [
+          "00:54",
+          "2,45 m en cm et en mm"
+        ],
+        [
+          "01:10",
+          "Vers le km : on divise"
+        ],
+        [
+          "01:21",
+          "Question 1"
+        ],
+        [
+          "01:52",
+          "Le piège : 35 m ou 3 005 m ?"
+        ],
+        [
+          "02:10",
+          "Question 2"
+        ],
+        [
+          "02:49",
+          "À toi de jouer"
+        ],
+        [
+          "03:05",
+          "Correction"
+        ],
+        [
+          "03:26",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "convertir des longueurs",
+        "tableau de conversion",
+        "kilomètre",
+        "mètre",
+        "centimètre",
+        "millimètre",
+        "géomètre",
+        "longueurs",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:21",
+          "question": "Combien de centimètres font 1,8 mètre ?",
+          "choix": [
+            "18 centimètres",
+            "180 centimètres",
+            "108 centimètres"
+          ],
+          "reponse": 1,
+          "explication": "1,8 × 100 = 180 : 1,8 m, c'est 180 cm."
+        },
+        {
+          "t": "02:10",
+          "question": "Arthur trace un chemin de 650 mètres. Combien de kilomètres ?",
+          "choix": [
+            "0,65 kilomètre",
+            "6,5 kilomètres",
+            "65 kilomètres"
+          ],
+          "reponse": 0,
+          "explication": "650 ÷ 1 000 = 0,65 : un peu plus d'un demi-kilomètre."
+        }
+      ],
+      "centres": [
+        "construction",
+        "sciences"
+      ]
+    },
+    {
+      "id": "cm2-longueur-convertir-short",
+      "pas_avant": "2027-04-03",
+      "notionId": "longueur",
+      "microId": "longueur_convertir",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-longueur-convertir",
+      "fichier": "cm2/maths/longueurs/02-convertir/eleveai-maths-cm2-longueur-convertir-short.mp4",
+      "miniature": "cm2/maths/longueurs/02-convertir/eleveai-maths-cm2-longueur-convertir-short-miniature.png",
+      "titre": "2,5 m de ruban : combien de centimètres ? #maths #cm2",
+      "accroche": "J'ai 2,5 m de ruban pour emballer mes cadeaux, 30 cm par cadeau. « 2,5 mètres… 25 centimètres. Pas même un cadeau ! » Et pourtant, le ruban traverse tout le salon…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 4,2 kilomètres, c'est combien de mètres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_convertir&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #cm2",
+      "tags": [
+        "convertir des longueurs",
+        "mètre",
+        "centimètre",
+        "ruban",
+        "cadeaux",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "longueurs",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Combien de centimètres de ruban ai-je ?",
+          "choix": [
+            "25 centimètres",
+            "250 centimètres",
+            "205 centimètres"
+          ],
+          "reponse": 1,
+          "explication": "2,5 × 100 = 250 cm : assez pour 8 cadeaux (8 × 30 = 240)."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm2-longueur-defi",
+      "pas_avant": "2027-04-05",
+      "notionId": "longueur",
+      "microId": "longueur_defi",
+      "classe": "cm2",
+      "ceinture": "bleue",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/longueurs/04-defi/eleveai-maths-cm2-longueur-defi.mp4",
+      "miniature": "cm2/maths/longueurs/04-defi/eleveai-maths-cm2-longueur-defi.png",
+      "titre": "Combien de câble reste-t-il sur la bobine ? — Défis de longueurs — épisode 4 · Maths CM2",
+      "accroche": "Nathan installe la fibre optique, les câbles qui apportent internet dans les maisons. Sa bobine : 2,5 km de câble. Il en pose 1 200 m dans une rue, 850 m dans une autre. Combien en reste-t-il ?\n\nDans cette vidéo :\n• un défi se fait en étapes : d'abord la même unité, puis les calculs, un par un\n• 2,5 km = 2 500 m ; 1 200 + 850 = 2 050 ; 2 500 − 2 050 = 450 m\n• le piège : on ne calcule jamais avec deux unités différentes\n• intervalles et poteaux : un boîtier au début et un au bout, un objet de plus que d'espaces\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : une rue de 1,2 km, un boîtier tous les 150 m, du début au bout : combien de boîtiers ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_defi&display=simple\n\n📏 Épisode 4 de la série Longueurs d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de câble reste-t-il ?"
+        ],
+        [
+          "00:06",
+          "Nathan, technicien fibre optique"
+        ],
+        [
+          "00:26",
+          "Un défi en étapes"
+        ],
+        [
+          "00:34",
+          "D'abord la même unité"
+        ],
+        [
+          "00:39",
+          "Les calculs"
+        ],
+        [
+          "00:52",
+          "Question 1"
+        ],
+        [
+          "01:23",
+          "Le piège : deux unités"
+        ],
+        [
+          "01:39",
+          "Question 2"
+        ],
+        [
+          "02:11",
+          "À toi de jouer"
+        ],
+        [
+          "02:29",
+          "Correction : intervalles et boîtiers"
+        ],
+        [
+          "02:50",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "problèmes de longueurs",
+        "défi",
+        "intervalles",
+        "kilomètre",
+        "mètre",
+        "fibre optique",
+        "longueurs",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:52",
+          "question": "Nathan relie 4 maisons, 35 mètres de câble par maison. Combien en tout ?",
+          "choix": [
+            "39 mètres",
+            "1 400 mètres",
+            "140 mètres"
+          ],
+          "reponse": 2,
+          "explication": "4 × 35 = 140 m de câble."
+        },
+        {
+          "t": "01:39",
+          "question": "Nathan coupe un câble de 6 mètres en morceaux de 75 centimètres. Combien de morceaux ?",
+          "choix": [
+            "8 morceaux",
+            "80 morceaux",
+            "12 morceaux"
+          ],
+          "reponse": 0,
+          "explication": "6 m = 600 cm, et 8 × 75 = 600 : 8 morceaux."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "construction"
+      ]
+    },
+    {
+      "id": "cm2-longueur-defi-short",
+      "pas_avant": "2027-04-05",
+      "notionId": "longueur",
+      "microId": "longueur_defi",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-longueur-defi",
+      "fichier": "cm2/maths/longueurs/04-defi/eleveai-maths-cm2-longueur-defi-short.mp4",
+      "miniature": "cm2/maths/longueurs/04-defi/eleveai-maths-cm2-longueur-defi-short-miniature.png",
+      "titre": "10 m de clôture, un ballon tous les 2 m : 5 ballons ? #maths #cm2",
+      "accroche": "Je décore la clôture du jardin : 10 m, un ballon tous les 2 m, du début jusqu'au bout. « 10 ÷ 2 : 5 ballons ! » J'accroche… et le dernier poteau reste tout nu !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 1 kilomètre, un drapeau tous les 250 mètres, du départ à l'arrivée. Combien de drapeaux ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #cm2",
+      "tags": [
+        "problèmes de longueurs",
+        "intervalles",
+        "ballons",
+        "clôture",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "longueurs",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Combien de ballons fallait-il ?",
+          "choix": [
+            "6 ballons",
+            "5 ballons",
+            "20 ballons"
+          ],
+          "reponse": 0,
+          "explication": "10 ÷ 2 = 5 espaces ; avec un ballon au début et un au bout : 6 ballons."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "art-design"
+      ]
+    },
+    {
+      "id": "cm2-longueur-estimer",
+      "pas_avant": "2027-04-04",
+      "notionId": "longueur",
+      "microId": "longueur_estimer",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer.mp4",
+      "miniature": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer.png",
+      "titre": "Une girafe : 5 cm, 5 m ou 5 km ? — Estimer une longueur — épisode 3 · Maths CM2",
+      "accroche": "Mia est photographe animalière. Sous chaque photo, elle écrit la taille de l'animal. Mais elle n'a pas toujours de mètre ruban ! Alors elle estime.\n\nDans cette vidéo :\n• des repères : un ongle ≈ 1 mm, un doigt ≈ 1 cm, un grand pas ≈ 1 m, un quart d'heure de marche ≈ 1 km\n• la girafe, plus de 2 fois une porte de 2 m : environ 5 m\n• avec une virgule : un enfant de CM2 ≈ 1,4 m, un colibri ≈ 8 cm\n• le piège : choisir l'unité avant le nombre (une baleine bleue : 30 m, pas 30 cm)\n• le Piton des Neiges, à La Réunion : environ 3 000 m d'altitude\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un serpent aussi long que 3 grands pas et demi : combien de mètres ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_estimer&display=simple\n\n📏 Épisode 3 de la série Longueurs d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "5 cm, 5 m ou 5 km ?"
+        ],
+        [
+          "00:08",
+          "Mia, photographe animalière"
+        ],
+        [
+          "00:24",
+          "Les repères"
+        ],
+        [
+          "00:42",
+          "La girafe"
+        ],
+        [
+          "01:01",
+          "Avec une virgule"
+        ],
+        [
+          "01:16",
+          "Question 1"
+        ],
+        [
+          "01:52",
+          "Le piège : l'unité d'abord"
+        ],
+        [
+          "02:08",
+          "Question 2"
+        ],
+        [
+          "02:50",
+          "À toi de jouer"
+        ],
+        [
+          "03:06",
+          "Correction"
+        ],
+        [
+          "03:19",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "estimer une longueur",
+        "ordre de grandeur",
+        "repères",
+        "mètre",
+        "kilomètre",
+        "animaux",
+        "Piton des Neiges",
+        "longueurs",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:16",
+          "question": "Mia photographie un papillon, les ailes ouvertes. Combien mesure-t-il ?",
+          "choix": [
+            "6 millimètres",
+            "6 mètres",
+            "6 centimètres"
+          ],
+          "reponse": 2,
+          "explication": "Ses ailes ouvertes font environ la largeur de 6 doigts : 6 cm."
+        },
+        {
+          "t": "02:08",
+          "question": "Quelle est l'altitude du sommet du Piton des Neiges, à La Réunion ?",
+          "choix": [
+            "environ 300 mètres",
+            "environ 3 000 mètres",
+            "environ 30 kilomètres"
+          ],
+          "reponse": 1,
+          "explication": "Environ 3 000 m, c'est-à-dire 3 km : 3 070 m exactement."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "photo"
+      ]
+    },
+    {
+      "id": "cm2-longueur-estimer-short",
+      "pas_avant": "2027-04-04",
+      "notionId": "longueur",
+      "microId": "longueur_estimer",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-longueur-estimer",
+      "fichier": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer-short.mp4",
+      "miniature": "cm2/maths/longueurs/03-estimer/eleveai-maths-cm2-longueur-estimer-short-miniature.png",
+      "titre": "Mon lit mesure 2 kilomètres ?! #maths #cm2",
+      "accroche": "Mon cousin me demande la longueur de mon lit. Je réfléchis… « 2 kilomètres ! » Il éclate de rire. Combien mesure vraiment mon lit ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un crayon neuf mesure 18… millimètres, centimètres, ou mètres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=longueur&microId=longueur_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #longueur #cm2",
+      "tags": [
+        "estimer une longueur",
+        "ordre de grandeur",
+        "mètre",
+        "kilomètre",
+        "lit",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "longueurs",
+        "maths",
+        "CM2",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Combien mesure mon lit ?",
+          "choix": [
+            "2 centimètres",
+            "2 kilomètres",
+            "2 mètres"
+          ],
+          "reponse": 2,
+          "explication": "Environ 2 m : 2 grands pas, un peu plus que moi allongé."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "animaux"
       ]
     }
   ]
