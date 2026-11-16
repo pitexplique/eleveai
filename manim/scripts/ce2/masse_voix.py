@@ -1,6 +1,6 @@
 # masse_voix.py
 # EleveAI — série MASSES du CP au CM2 (session C, mardi-mercredi 17-18/11/2026).
-# LA source unique des voix de la série : 24 paysages + 24 shorts.
+# LA source unique des voix de la série : 25 paysages + 25 shorts.
 # ⛔ 16/11 Frédéric : « si la 6e n'a pas de masse tu fais pas » → pas de vidéos 6e (pas de notion masse au coach 6e).
 #   python manim/scripts/ce2/masse_voix.py            → écrit manim/VOIX-masses-cp-cm2.md (à faire valider)
 #   python manim/scripts/ce2/masse_voix.py --ecrire   → écrit manim/voix/<id>.json (⛔ seulement après le « oui »)
@@ -556,6 +556,38 @@ SERIE = [
         ("04-commentaire", "À toi : qui est le plus lourd, 2 tonnes ou 1 900 kilogrammes ? "
                            "Réponds en commentaire !"),
     ]),
+    ("cm1-masse-mesurer", "cm1", "masse_mesurer", "jaune", "blanche", "Kenza, herboriste", [
+        ("00-garde", "Lire une masse. Où pointe l'aiguille de la balance ?"),
+        ("01-situation", "Voici Kenza. Elle est herboriste : elle vend des plantes pour les tisanes. "
+                         "Elle les pèse sur une balance à aiguille."),
+        ("02-graduation", "D'abord, on lit la graduation. Les nombres vont de 100 en 100 grammes. "
+                          "Entre deux nombres, 5 intervalles : chacun vaut 20 grammes."),
+        ("03-lire", "L'aiguille s'arrête 3 petits traits après 400. 400 plus 3 fois 20 : 460 grammes."),
+        ("04-question", Q("Les nombres vont de 100 en 100 grammes. L'aiguille est pile au milieu de 500 et 600. "
+                          "Quelle masse ?", "550 grammes", ["505 grammes", "600 grammes"],
+                          "Au milieu de 500 et 600, c'est 550 grammes.")),
+        ("05-masses", "Sur une balance à plateaux, on additionne les masses marquées. Kenza équilibre son sac "
+                      "avec 500 grammes, 200 grammes et 50 grammes : 750 grammes."),
+        ("06-question", Q("Pour équilibrer un paquet, il faut 2 kilogrammes, 200 grammes et 100 grammes. "
+                          "Quelle masse ?", "2 300 grammes", ["302 grammes", "2 030 grammes"],
+                          "2 kilogrammes, c'est 2 000 grammes. 2 000 plus 200 plus 100 : 2 300 grammes.")),
+        ("07-defi", "À toi de jouer ! Sur le pèse-personne, les nombres vont de 10 en 10 kilogrammes. "
+                    "Entre deux nombres, 10 petits traits. L'aiguille est 4 traits après 30. Quelle masse ? "
+                    "Mets pause, et cherche !"),
+        ("07b-correction", "Correction. 10 petits traits pour 10 kilogrammes : chaque trait vaut 1 kilogramme. "
+                           "4 traits après 30 : 34 kilogrammes."),
+        ("08-finale", "Ce que tu as appris. Pour lire une balance, on cherche d'abord ce que vaut un petit trait. "
+                      "Sur une balance à plateaux, on additionne les masses marquées."),
+    ], [
+        ("00-accroche", "Salut ! Je pèse ma pastèque. L'aiguille s'arrête entre 2 et 3 kilogrammes, pile au milieu."),
+        ("01-oups", "Mon copain lit le nombre le plus proche : 3 kilogrammes !"),
+        ("02-question", Q("Combien pèse la pastèque ?", "2 kilogrammes 500 grammes",
+                          ["2 kilogrammes 300 grammes", "3 kilogrammes"],
+                          "Au milieu de 2 et 3 kilogrammes : 2 kilogrammes 500 grammes, soit 2 500 grammes.")),
+        ("03-fin", "Bien lu ! Et maintenant… on la mange !"),
+        ("04-commentaire", "À toi : l'aiguille est au milieu de 1 et 2 kilogrammes. Combien de grammes ? "
+                           "Réponds en commentaire !"),
+    ]),
     ("cm1-masse-convertir", "cm1", "masse_convertir", "verte", "blanche", "Margaux, diététicienne", [
         ("00-garde", "Convertir des masses. 2 kilogrammes, c'est combien de grammes ? "
                      "Et 3 000 kilogrammes, combien de tonnes ?"),
@@ -667,8 +699,8 @@ SERIE = [
         ("06-question", Q("La plus légère : 2,3 tonnes, 2 350 kilogrammes, ou 2,08 tonnes ?", "2,08 tonnes",
                           ["2,3 tonnes", "2 350 kilogrammes"],
                           "En kilogrammes : 2 300, 2 350 et 2 080. La plus légère : 2,08 tonnes.")),
-        ("07-defi", "À toi de jouer ! Range trois bagages du plus léger au plus lourd : 23,5 kilogrammes, "
-                    "23 050 grammes, et 23,45 kilogrammes. Mets pause, et cherche !"),
+        ("07-defi", "À toi de jouer ! Trois bagages : 23,5 kilogrammes, 23 050 grammes, et 23,45 kilogrammes. "
+                    "Range-les du plus léger au plus lourd. Mets pause, et cherche !"),
         ("07b-correction", "Correction. En grammes : 23 500, 23 050 et 23 450. Du plus léger au plus lourd : "
                            "23 050 grammes, 23,45 kilogrammes, puis 23,5 kilogrammes."),
         ("08-finale", "Ce que tu as appris. Pour comparer, on met la même unité, la virgule bien placée. "
@@ -690,8 +722,8 @@ SERIE = [
                          "Un fer pèse 0,75 kilogramme."),
         ("02-tableau", "Le tableau des unités : kilogramme, hectogramme, décagramme, gramme. "
                        "Chaque colonne vaut 10 fois celle de droite. Du kilogramme au gramme : on multiplie par 1 000."),
-        ("03-placer", "0,75 kilogramme : le 0 sous les k g, le 7 sous les h g, le 5 sous les d a g, "
-                      "un zéro sous les g. On lit : 750 grammes."),
+        ("03-placer", "0,75 kilogramme dans le tableau. Le 0 sous les k g, le 7 sous les h g. "
+                      "Le 5 sous les d a g, un zéro sous les g. On lit : 750 grammes."),
         ("04-question", Q("1,2 kilogramme, c'est combien de grammes ?", "1 200 grammes",
                           ["120 grammes", "1 002 grammes"],
                           "1,2 fois 1 000 : 1 200 grammes. Les chiffres avancent de 3 rangs, pas de 1 !")),
@@ -784,7 +816,7 @@ SERIE = [
     ]),
 ]
 
-SEUIL_MOTS = {"cp": 14, "ce1": 16, "ce2": 18}
+SEUIL_MOTS = {"cp": 14, "ce1": 16, "ce2": 18, "cm1": 18, "cm2": 18}  # 16/11 soir : phrases courtes jusqu'au CM2
 
 
 def tirer_lettres():
@@ -867,7 +899,7 @@ def recap(tout):
          "",
          "Session C des séries de mardi-mercredi (`manim/PLAN-mardi-mercredi-17-18-11.md`). "
          "Source : `manim/scripts/ce2/masse_voix.py` (on corrige là, puis `--ecrire`).",
-         f"24 paysages + 24 shorts (pas de 6e : aucune notion masse au coach 6e, décision de Frédéric le 16/11). Bonnes réponses tirées au hasard : A {cpt['A']}, B {cpt['B']}, C {cpt['C']} "
+         f"25 paysages + 25 shorts (CM1 masse_mesurer ajoutée le 16/11 ; pas de 6e : aucune notion masse au coach 6e, décision de Frédéric le 16/11). Bonnes réponses tirées au hasard : A {cpt['A']}, B {cpt['B']}, C {cpt['C']} "
          "(jamais deux fois la même lettre de suite dans une paysage).",
          "Shorts : Ti Margo en dessin animé (« mon copain », « ma copine »). Un seul passage à La Réunion : "
          "Malo, pêcheur à Saint-Pierre (CE1).", ""]
