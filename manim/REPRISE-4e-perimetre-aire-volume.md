@@ -39,7 +39,7 @@ Ouvert le 15/11/2026. 30 micros du coach, plan : `manim/PLAN-perimetre-aire-volu
 | V2 `volume_pyramide` ⭐ pilote | ✅ | ✅ | ✅ 282,6 s / 65,9 s, bords 0 |
 | V1 `volume_lien_aire` (piscine) | ✅ | ✅ | ✅ 201,6 s / 61,1 s, bords 0 |
 | V3 `volume_cone` (cornet) | ✅ | ✅ | ✅ 242,1 s / 65,6 s, bords 0 |
-| V4 `volume_defi` (citerne) | ✅ | ✅ | ⏳ dry run en cours |
+| V4 `volume_defi` (citerne) | ✅ | ✅ | ✅ 214,7 s / 53,7 s, bords 0 |
 | S1 `vision_reconnaitre` (jeu vidéo) | ✅ | ✅ | ✅ 208,9 s / 56,7 s, bords 0 |
 | S2 `vision_vues` (maquette) | ✅ | ✅ | ✅ 203,9 s / 54,7 s, bords 0 |
 | S3 `vision_representation` (manga) | ⏳ | ⏳ | — |
