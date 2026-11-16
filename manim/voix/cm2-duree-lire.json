@@ -1,0 +1,16 @@
+{
+  "00-garde": "Lire une heure ou une durée. Que veut dire 14:35:20 sur un écran ?",
+  "01-situation": "Voici Agathe. Elle est plongeuse sous-marine. Avant de plonger, elle regarde sa montre : 14:35:20. Sous l'eau, son chronomètre compte le temps de plongée. Comment lire tout ça ?",
+  "02-heures-minutes-secondes": "Sur un écran, on lit de gauche à droite. D'abord les heures, puis les minutes, puis les secondes. 14:35:20, c'est 14 heures, 35 minutes et 20 secondes.",
+  "03-sur-24-heures": "Une journée dure 24 heures. Après midi, on continue de compter : 13 heures, 14 heures, jusqu'à 23 heures. 14 heures, c'est 2 heures de l'après-midi. On a ajouté 12 : 2 plus 12, 14.",
+  "04-chronometre": "Le chronomètre, lui, mesure une durée. Il affiche les minutes, puis les secondes. Il affiche 12:45 : Agathe a plongé 12 minutes et 45 secondes. 1 minute, c'est 60 secondes : le chrono ne dépasse jamais 59 secondes.",
+  "05-question": "Question ! Agathe remonte. Sa montre affiche 16:08:30. Que lit-elle ? A : 16 heures 30 minutes 8 secondes. B : 16 heures 8 minutes 30 secondes. C : 16 heures 8 minutes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. On lit dans l'ordre : les heures, les minutes, puis les secondes. 16 heures, 8 minutes et 30 secondes.",
+  "06-piege": "Attention au piège ! Sur un chronomètre, 12:45, ce n'est pas 12 heures 45. Agathe ne reste pas 12 heures sous l'eau ! C'est 12 minutes et 45 secondes.",
+  "07-question": "Question ! Le soir, Agathe plonge une dernière fois, à 8 heures 20 du soir. Comment l'écrit-on sur 24 heures ? A : 19 heures 20. B : 8 heures 20. C : 20 heures 20. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Après midi, on ajoute 12 heures. 8 plus 12, 20 : il est 20 heures 20.",
+  "08-defi": "À toi de jouer ! Le chronomètre d'Agathe affiche 47:09. Sa montre affiche 21:05:40. Que lit-elle sur chacun ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Sur le chronomètre : 47 minutes et 9 secondes de plongée. Sur la montre : 21 heures, 5 minutes et 40 secondes. 21 heures, c'est 9 heures du soir.",
+  "09-finale": "Ce que tu as appris. Sur un écran, on lit les heures, puis les minutes, puis les secondes. Après midi, on compte jusqu'à 23 heures : on ajoute 12. Un chronomètre mesure une durée, en minutes et secondes. 1 minute, c'est 60 secondes.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

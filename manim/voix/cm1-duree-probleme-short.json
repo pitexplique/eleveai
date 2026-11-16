@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Mon bus devait passer à 8 heures 45. Il arrive à 9 heures 10. 10 moins 45… Le bus est arrivé avant d'être en retard ?",
+  "01-bonds": "Je fais des bonds sur la frise. De 8 heures 45 à 9 heures : 15 minutes. Hop ! De 9 heures à 9 heures 10 : 10 minutes.",
+  "02-question": "Question ! Combien de minutes de retard ? A : 25 minutes. B : 65 minutes. C : 35 minutes. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! 15 plus 10 : 25 minutes de retard.",
+  "03-ouf": "Le chauffeur s'excuse : une poule traversait la route. Très, très lentement.",
+  "04-commentaire": "À toi : un train devait partir à 10 heures 50. Il part à 11 heures 20. Combien de minutes de retard ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

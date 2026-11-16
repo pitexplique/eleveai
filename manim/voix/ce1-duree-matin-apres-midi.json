@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le matin et l'après-midi. 15 heures, c'est quelle heure sur l'horloge ?",
+  "01-situation": "Voici Lou. Elle est éducatrice canine. Elle apprend aux chiens à obéir. Elle a un cours à 9 heures, et un autre à 15 heures.",
+  "02-deux-tours": "Une journée dure 24 heures. Le cadran n'a que 12 nombres. Alors les aiguilles font 2 tours par jour. Un tour le matin, un tour l'après-midi et le soir.",
+  "03-matin": "Le matin va de minuit à midi. Midi, c'est 12 heures. 9 heures vient avant midi : c'est le matin.",
+  "04-apres-midi": "Après midi, on compte 13 heures, 14 heures, 15 heures. 15 heures, c'est 3 heures de l'après-midi. Sur l'horloge, la petite aiguille est sur le 3. De 3 à 15, on ajoute 12.",
+  "05-question": "Question ! Il est 14 heures. Comment le dit-on autrement ? A : 2 heures de l'après-midi. B : 4 heures de l'après-midi. C : 2 heures du matin. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. On enlève 12 : 14 moins 12, ça fait 2. C'est 2 heures de l'après-midi.",
+  "06-piege": "Attention au piège ! L'horloge à aiguilles ne dit pas si c'est le matin. Le 3 du cadran, c'est 3 heures ou 15 heures. On regarde le moment de la journée.",
+  "07-question": "Question ! Lou promène un chien l'après-midi. L'horloge montre 5 heures. Quelle heure est-il ? A : 15 heures. B : 17 heures. C : 5 heures du matin. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. C'est l'après-midi : on ajoute 12. 5 plus 12, ça fait 17. Il est 17 heures.",
+  "08-defi": "À toi de jouer ! Lou nourrit les chiens à 8 heures et à 18 heures. Laquelle de ces heures est le matin ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le matin s'arrête à midi, 12 heures. 8 heures vient avant 12 heures : c'est le matin. 18 heures vient après : c'est le soir.",
+  "09-finale": "Ce que tu as appris. Une journée dure 24 heures. Le matin va jusqu'à midi. L'après-midi, on ajoute 12 à l'heure du cadran.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

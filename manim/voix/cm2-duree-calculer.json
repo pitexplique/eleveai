@@ -1,0 +1,16 @@
+{
+  "00-garde": "Calculer une durée. Combien de temps entre 22 heures 35 et 1 heure 15 du matin ?",
+  "01-situation": "Voici Juliette. Elle est hôtesse de l'air. Ce soir, son avion décolle à 22 heures 35. Il atterrit à 1 heure 15 du matin, après minuit. Combien de temps dure le vol ?",
+  "02-frise": "On dessine une frise du temps. Au départ : 22 heures 35. À l'arrivée : 1 heure 15. Au milieu, un repère important : minuit. On avance par bonds, en passant par les heures pile.",
+  "03-bonds": "Premier bond : de 22 heures 35 à 23 heures, 25 minutes. Deuxième bond : de 23 heures à minuit, 1 heure. Troisième bond : de minuit à 1 heure, encore 1 heure. Dernier bond : de 1 heure à 1 heure 15, 15 minutes.",
+  "04-total": "On additionne les bonds. 2 heures, plus 25 minutes, plus 15 minutes : 2 heures 40 minutes. Le vol a duré 2 heures 40.",
+  "05-question": "Question ! Un vol part à 11 heures 40. Il arrive à 13 heures 5. Combien de temps dure-t-il ? A : 1 heure 25 minutes. B : 1 heure 65 minutes. C : 2 heures 35 minutes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. De 11 heures 40 à midi : 20 minutes. Puis 1 heure jusqu'à 13 heures, et encore 5 minutes. En tout : 1 heure 25 minutes.",
+  "06-piege": "Attention au piège ! Après minuit, l'heure repart de 0. On ne calcule pas 1 moins 22. On avance par bonds jusqu'à minuit, puis on continue.",
+  "07-question": "Question ! L'annonce de sécurité commence à 10 heures 12 minutes 50 secondes. Elle finit à 10 heures 13 minutes 25 secondes. Combien de temps dure-t-elle ? A : 75 secondes. B : 25 secondes. C : 35 secondes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. De 50 secondes à la minute pile : 10 secondes. Puis encore 25 secondes. En tout : 35 secondes.",
+  "08-defi": "À toi de jouer ! Juliette décolle à 21 heures 50. Le vol dure 3 heures 35 minutes. À quelle heure atterrit-elle ? Mets pause, et cherche !",
+  "08b-correction": "Correction. De 21 heures 50 à 22 heures : 10 minutes. Il reste 3 heures 25. De 22 heures à minuit : 2 heures. Il reste 1 heure 25. Juliette atterrit à 1 heure 25 du matin.",
+  "09-finale": "Ce que tu as appris. Pour calculer une durée, on avance par bonds sur une frise. On passe par les heures pile, par midi ou par minuit. Après minuit, l'heure repart de 0. Pour les secondes, on passe par la minute pile.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

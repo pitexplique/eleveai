@@ -1,0 +1,16 @@
+{
+  "00-garde": "Placer les aiguilles. Comment montrer 4 heures sur une horloge ?",
+  "01-situation": "Voici Léo. Il est clown de cirque. Son spectacle commence à 4 heures. Il veut régler la grande horloge du cirque.",
+  "02-petite": "D'abord, la petite aiguille. C'est elle qui donne l'heure. Léo la met sur le 4.",
+  "03-grande": "Ensuite, la grande aiguille. 4 heures, c'est une heure pile. Alors Léo met la grande sur le 12.",
+  "04-verifier": "On vérifie. La petite aiguille est sur le 4. La grande aiguille est sur le 12. L'horloge montre 4 heures.",
+  "05-question": "Question ! Pour montrer 9 heures, où va la petite aiguille ? A : sur le 12. B : sur le 9. C : sur le 10. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. La petite aiguille donne l'heure. Elle va sur le 9.",
+  "06-piege": "Attention au piège ! Il ne faut pas inverser les aiguilles. La petite va sur l'heure. La grande va sur le 12.",
+  "07-question": "Question ! Pour montrer 2 heures, où va la grande aiguille ? A : sur le 12. B : sur le 2. C : sur le 6. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Pour une heure pile, la grande aiguille va toujours sur le 12.",
+  "08-defi": "À toi de jouer ! Léo jongle à 11 heures. Où places-tu les 2 aiguilles ? Mets pause, et cherche !",
+  "08b-correction": "Correction. La petite aiguille donne l'heure : elle va sur le 11. C'est une heure pile : la grande va sur le 12.",
+  "09-finale": "Ce que tu as appris. La petite aiguille va sur le nombre de l'heure. Pour une heure pile, la grande va sur le 12. On vérifie toujours les 2 aiguilles.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

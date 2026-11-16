@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Je suis à l'arrêt à 15 heures 40. Le tableau dit : un car à 15 heures 35, puis un à 16 heures 5. Le car de 15 heures 35 ? Je l'attends !",
+  "01-erreur": "J'attends… j'attends… Mais 15 heures 35, c'est AVANT 15 heures 40. Il est déjà parti !",
+  "02-question": "Question ! Combien de temps vais-je attendre le prochain car ? A : 25 minutes. B : 65 minutes. C : 35 minutes. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! De 15 heures 40 à 16 heures : 20 minutes. Puis 5 minutes. En tout : 25 minutes.",
+  "03-ouf": "25 minutes d'attente. J'ai eu le temps de manger tout mon goûter. Et celui du chauffeur !",
+  "04-commentaire": "À toi : il est 11 heures 50. Le prochain car passe à 12 heures 15. Combien de temps d'attente ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

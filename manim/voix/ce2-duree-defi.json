@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défi des durées. 1 heure 10 ou 75 minutes : laquelle est la plus longue ?",
+  "01-situation": "Voici Hugo. Il est cascadeur de cinéma. Il saute, il tombe, il court… sans se faire mal ! Aujourd'hui, il tourne deux cascades. La première dure 1 heure 10. La deuxième dure 75 minutes. Laquelle est la plus longue ?",
+  "02-meme-unite": "Pour comparer, on écrit les deux durées dans la même unité. On choisit les minutes. 1 heure, c'est 60 minutes. Donc 1 heure 10, c'est 60 plus 10 : 70 minutes.",
+  "03-comparer": "On compare : 70 minutes et 75 minutes. 75 est plus grand que 70. La deuxième cascade est la plus longue, de 5 minutes.",
+  "04-etapes": "Autre défi : plusieurs étapes à la suite. Hugo se fait maquiller 20 minutes, puis il répète 30 minutes. On ajoute les durées : 50 minutes. Il commence à 9 heures 30. 30 minutes jusqu'à 10 heures, puis 20 : il finit à 10 heures 20.",
+  "05-question": "Question ! Hugo court pendant 1 heure 5. Lina court pendant 70 minutes. Qui court le plus longtemps ? A : Hugo. B : Lina. C : autant tous les deux. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 1 heure 5, c'est 60 plus 5 : 65 minutes. 70 minutes, c'est plus long : Lina court plus longtemps.",
+  "06-piege": "Attention au piège ! On ne compare pas 1 heure 10 et 75 en regardant juste les nombres. 1 heure, c'est 60 minutes, pas 100. On met tout en minutes avant de comparer.",
+  "07-question": "Question ! Hugo commence à 14 heures. Chute : 15 minutes. Saut : 30 minutes. Course : 25 minutes. Quand finit-il ? A : 15 heures 10. B : 14 heures 70. C : 14 heures 45. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 15 plus 30 plus 25 : 70 minutes, c'est 1 heure 10. 14 heures plus 1 heure 10 : 15 heures 10.",
+  "08-defi": "À toi de jouer ! Le tournage commence à 9 heures 40. Maquillage : 25 minutes. Répétition : 45 minutes. Cascade : 30 minutes. À quelle heure tout est-il fini ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 25 plus 45 plus 30 : 100 minutes. 100 minutes, c'est 1 heure 40. 9 heures 40 plus 1 heure : 10 heures 40. Puis 20 minutes jusqu'à 11 heures, et encore 20. Tout est fini à 11 heures 20.",
+  "09-finale": "Ce que tu as appris. Pour comparer deux durées, on les écrit dans la même unité. 1 heure, c'est 60 minutes. Avec plusieurs étapes, on ajoute toutes les durées. Puis on ajoute le total à l'heure du début.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

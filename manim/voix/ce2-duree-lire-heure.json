@@ -1,0 +1,16 @@
+{
+  "00-garde": "Lire l'heure. La petite aiguille a dépassé le 3. La grande est sur le 8. Quelle heure est-il ?",
+  "01-situation": "Voici Nour. Elle est réceptionniste d'hôtel. Elle accueille les voyageurs et leur donne la clé de leur chambre. Derrière elle, il y a une grande horloge à aiguilles. Un client demande : « Quelle heure est-il ? » Nour lève les yeux vers l'horloge.",
+  "02-aiguilles": "Une horloge a deux aiguilles. La petite aiguille donne l'heure. La grande aiguille donne les minutes. Ici, la petite a dépassé le 3. Il est donc 3 heures et des minutes.",
+  "03-minutes": "Pour la grande aiguille, chaque nombre du cadran vaut 5 minutes. On compte de 5 en 5 : 5, 10, 15, 20, 25, 30, 35, 40. La grande est sur le 8 : 40 minutes. Il est 3 heures 40. Entre deux nombres, il y a des petits traits. Chaque petit trait vaut 1 minute.",
+  "04-vingt-quatre-heures": "Une journée compte 24 heures. Le cadran, lui, ne va que jusqu'à 12. Midi, c'est 12 heures. Minuit, c'est 0 heure. L'après-midi et le soir, on ajoute 12 aux heures. 3 heures 40 de l'après-midi, c'est 15 heures 40.",
+  "05-question": "Question ! La petite aiguille a dépassé le 9. La grande est sur le 4. Quelle heure est-il ? A : 4 heures 45. B : 9 heures 4. C : 9 heures 20. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. La petite aiguille donne 9 heures. La grande est sur le 4 : 4 fois 5, 20 minutes.",
+  "06-piege": "Attention au piège ! À 7 heures 50, la petite aiguille est presque sur le 8. Mais elle ne l'a pas encore atteint. Il n'est pas encore 8 heures ! On lit le nombre que la petite aiguille a dépassé : il est 7 heures 50.",
+  "07-question": "Question ! Un voyageur arrive le soir. L'horloge montre 8 heures 35. Comment l'écrire de 0 à 24 heures ? A : 20 heures 35. B : 8 heures 35. C : 18 heures 35. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Le soir, on ajoute 12 aux heures. 8 plus 12 : il est 20 heures 35.",
+  "08-defi": "À toi de jouer ! C'est le matin. La petite aiguille a dépassé le 10. La grande est 3 petits traits après le 5. Quelle heure est-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. La petite aiguille a dépassé le 10 : 10 heures. La grande aiguille sur le 5 : 25 minutes. Puis 3 petits traits : 26, 27, 28. Il est 10 heures 28.",
+  "09-finale": "Ce que tu as appris. La petite aiguille donne l'heure, la grande les minutes. Chaque nombre vaut 5 minutes, chaque petit trait 1 minute. L'après-midi et le soir, on ajoute 12 aux heures.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

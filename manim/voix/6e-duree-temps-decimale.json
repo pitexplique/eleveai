@@ -1,0 +1,16 @@
+{
+  "00-garde": "Les durées écrites avec une virgule. Combien d'heures et de minutes dans 1,25 heure ?",
+  "01-situation": "Voici Léa. Elle est coach sportive. Sa montre connectée écrit les durées avec une virgule. Ce matin, elle lit : 1,25 heure de vélo. Combien d'heures et de minutes, en vrai ?",
+  "02-demi-et-quarts": "Les durées à connaître. 0,5 heure, c'est une demi-heure : 30 minutes. 0,25 heure, c'est un quart d'heure : 15 minutes. 0,75 heure, ce sont trois quarts d'heure : 45 minutes.",
+  "03-dixiemes": "Pour les autres, on multiplie par 60. 0,1 heure, c'est un dixième d'heure. 60 divisé par 10 : 6 minutes. Donc 0,3 heure, c'est 3 fois 6 : 18 minutes.",
+  "04-retour-a-lea": "Revenons à Léa. 1,25 heure, c'est 1 heure, plus 0,25 heure. 0,25 heure, c'est 15 minutes. Léa a pédalé 1 heure 15 minutes.",
+  "05-question": "Question ! La séance de yoga dure 0,75 heure. Combien de minutes ? A : 75 minutes. B : 30 minutes. C : 45 minutes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. 0,75 heure, ce sont trois quarts d'heure. 3 fois 15 : 45 minutes.",
+  "06-piege": "Attention au piège ! 1,30 heure, ce n'est pas 1 heure 30. Après la virgule, on compte des dixièmes d'heure, pas des minutes. 0,3 heure, c'est 3 fois 6 : 18 minutes. Donc 1,30 heure, c'est 1 heure 18 minutes.",
+  "07-question": "Question ! Léa court 2 heures 30 minutes. Comment l'écrire avec une virgule ? A : 2,30 heures. B : 2,5 heures. C : 2,25 heures. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 30 minutes, c'est une demi-heure : 0,5 heure. Donc 2 heures 30, c'est 2,5 heures.",
+  "08-defi": "À toi de jouer ! La montre de Léa affiche 1,4 heure de natation. Combien d'heures et de minutes ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 1,4 heure, c'est 1 heure, plus 0,4 heure. 0,1 heure, c'est 6 minutes. Donc 0,4 heure, c'est 4 fois 6 : 24 minutes. Léa a nagé 1 heure 24 minutes, et pas 1 heure 40.",
+  "09-finale": "Ce que tu as appris. 0,5 heure, c'est 30 minutes. 0,25 heure, c'est 15 minutes, et 0,75 heure, 45 minutes. Pour les autres, on multiplie par 60 : 0,1 heure, c'est 6 minutes. 1,30 heure n'est pas 1 heure 30.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

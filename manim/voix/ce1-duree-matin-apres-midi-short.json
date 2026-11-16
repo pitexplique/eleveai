@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Rendez-vous chez le dentiste à 16 heures. Je cherche le 16 sur mon horloge. Il n'y a pas de 16 ! Elle est cassée ?",
+  "01-oups": "Mais non ! L'horloge n'a que 12 nombres. L'après-midi, on enlève 12.",
+  "02-question": "Question ! 16 heures, c'est quelle heure sur l'horloge ? A : 6 heures. B : 10 heures. C : 4 heures. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! 16 moins 12, ça fait 4. 16 heures, c'est 4 heures de l'après-midi.",
+  "03-ouf": "Je file chez le dentiste. Finalement, j'aurais préféré une horloge cassée !",
+  "04-commentaire": "À toi : 20 heures, c'est quelle heure sur l'horloge ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

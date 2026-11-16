@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défi sur les durées. Partie lundi à 14 heures, Capucine navigue 50 heures. Quand arrive-t-elle ?",
+  "01-situation": "Voici Capucine. Elle est navigatrice en course au large. Seule sur son bateau, elle traverse l'océan. Elle part lundi à 14 heures. Elle doit naviguer 50 heures jusqu'à l'île suivante. Quel jour arrive-t-elle, et à quelle heure ?",
+  "02-jours": "Une journée, c'est 24 heures. Dans 50 heures, il y a 2 journées : 48 heures. Il reste 2 heures. 50 heures, c'est 2 jours et 2 heures.",
+  "03-avancer": "On avance de 2 jours : de lundi 14 heures à mercredi 14 heures. Puis encore 2 heures : mercredi, 16 heures. Capucine arrive mercredi à 16 heures.",
+  "04-virgule": "Sur son ordinateur, une durée s'écrit parfois avec une virgule. 0,5 heure, c'est une demi-heure : 30 minutes. 0,25 heure, c'est un quart d'heure : 15 minutes. Donc 1,5 heure, c'est 1 heure 30.",
+  "05-question": "Question ! Quelle durée est la plus longue ? A : 1 heure 20. B : 75 minutes. C : 1,5 heure. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. On écrit tout en minutes. 1 heure 20, c'est 80 minutes. 1,5 heure, c'est 90 minutes. 90 est le plus grand.",
+  "06-piege": "Attention au piège ! 1,5 heure, ce n'est pas 1 heure 50. Après la virgule, ce ne sont pas des minutes. 0,5 heure, c'est la moitié d'une heure : 30 minutes.",
+  "07-question": "Question ! Le bateau de Capucine parcourt 20 kilomètres en 1 heure. Combien de temps pour 70 kilomètres ? A : 3 heures 50. B : 3 heures 30. C : 3 heures 5. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. En 3 heures, elle fait 60 kilomètres. Il reste 10 kilomètres : la moitié de 20, donc une demi-heure. En tout : 3 heures 30.",
+  "08-defi": "À toi de jouer ! Capucine part samedi à 21 heures 40. Elle navigue 27 heures 35 minutes. Quel jour arrive-t-elle, et à quelle heure ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 27 heures 35, c'est 24 heures, plus 3 heures 35. Avec 24 heures, on avance d'un jour : dimanche, 21 heures 40. Puis 20 minutes jusqu'à 22 heures. Il reste 3 heures 15. 2 heures jusqu'à minuit : on passe à lundi. Il reste 1 heure 15. Elle arrive lundi, à 1 heure 15 du matin.",
+  "09-finale": "Ce que tu as appris. 1 jour, c'est 24 heures : chaque fois 24 heures, on avance d'un jour. À minuit, on change de jour. Pour comparer des durées, on les écrit toutes en minutes. 1,5 heure, c'est 1 heure 30.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

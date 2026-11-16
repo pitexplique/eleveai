@@ -1,0 +1,16 @@
+{
+  "00-garde": "Convertir des durées. Combien de minutes dans 2 heures 15 ?",
+  "01-situation": "Voici Louise. Elle est sage-femme. Elle aide les mamans à mettre leur bébé au monde. Cette nuit, une naissance a duré 2 heures 15. Sur son carnet, elle note les durées en minutes. Combien de minutes doit-elle écrire ?",
+  "02-egalites": "Les égalités à connaître. 1 heure, c'est 60 minutes. 1 minute, c'est 60 secondes. 1 jour, c'est 24 heures. 1 semaine, c'est 7 jours. Attention : 60, jamais 100.",
+  "03-en-minutes": "On change les heures en minutes. 2 heures, c'est 2 fois 60 : 120 minutes. Puis on ajoute les 15 minutes. 120 plus 15 : 135 minutes. Louise écrit 135 minutes.",
+  "04-en-heures": "Dans l'autre sens. 200 minutes, combien d'heures et de minutes ? On compte de 60 en 60 : 60, 120, 180. Ça fait 3 heures. Il reste 200 moins 180 : 20 minutes. 200 minutes, c'est 3 heures 20.",
+  "05-question": "Question ! Louise écoute le cœur du bébé pendant 3 minutes. Combien de secondes ? A : 300 secondes. B : 30 secondes. C : 180 secondes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. 1 minute, c'est 60 secondes. 3 fois 60 : 180 secondes.",
+  "06-piege": "Attention au piège ! 130 minutes, ce n'est pas 1 heure 30. Une heure, c'est 60 minutes, pas 100. 130 minutes, c'est 120 minutes plus 10. Donc 130 minutes, c'est 2 heures 10.",
+  "07-question": "Question ! Une maman et son bébé restent 3 jours à la maternité. Combien d'heures ? A : 72 heures. B : 30 heures. C : 36 heures. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 1 jour, c'est 24 heures. 3 fois 24 : 72 heures.",
+  "08-defi": "À toi de jouer ! Louise fait deux visites chez des mamans. La première dure 1 heure 45. La deuxième dure 110 minutes. Laquelle est la plus longue ? Mets pause, et cherche !",
+  "08b-correction": "Correction. On met tout en minutes. 1 heure 45, c'est 60 plus 45 : 105 minutes. 110 minutes, c'est plus que 105. La deuxième visite est la plus longue, de 5 minutes.",
+  "09-finale": "Ce que tu as appris. 1 heure, c'est 60 minutes. 1 minute, c'est 60 secondes. 1 jour, c'est 24 heures, et 1 semaine, 7 jours. Pour convertir, on compte de 60 en 60, puis on ajoute ce qui reste.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

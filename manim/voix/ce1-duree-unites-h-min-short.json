@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Je fais du vélo pendant 1 heure. Je me dis : 1 heure, c'est 100 minutes. Alors je pédale 100 minutes !",
+  "01-oups": "Mes jambes sont en compote. J'ai pédalé beaucoup trop longtemps !",
+  "02-question": "Question ! Combien de minutes ai-je pédalé en trop ? A : 100 minutes. B : 40 minutes. C : 60 minutes. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 1 heure, c'est 60 minutes. De 60 à 100, il y a 40 minutes en trop.",
+  "03-ouf": "La prochaine fois, je pédale 60 minutes. Et je garde les 40 minutes pour la sieste !",
+  "04-commentaire": "À toi : combien de minutes y a-t-il dans 2 heures ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

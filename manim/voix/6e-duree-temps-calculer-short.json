@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Mon match de foot commence à 16 heures 50. Il dure 1 heure 30. Je calcule : 16 plus 1, 17. 50 plus 30, 80. Rendez-vous à 17 heures 80 !",
+  "01-retenue": "Mon entraîneur rigole. 80 minutes, c'est plus d'une heure ! 80 minutes, c'est 1 heure 20. Je reporte la retenue sur les heures.",
+  "02-question": "Question ! À quelle heure finit mon match ? A : 17 heures 20. B : 18 heures 30. C : 18 heures 20. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! 17 heures, plus 1 heure 20 : 18 heures 20.",
+  "03-ouf": "J'ai donné rendez-vous à mes parents à 17 heures 80. Ils m'attendent encore !",
+  "04-commentaire": "À toi : un film commence à 20 heures 45 et dure 1 heure 50. À quelle heure finit-il ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

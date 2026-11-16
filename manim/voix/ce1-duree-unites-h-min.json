@@ -1,0 +1,16 @@
+{
+  "00-garde": "Les heures et les minutes. Combien de minutes y a-t-il dans 1 heure ?",
+  "01-situation": "Voici Rayan. Il est mécanicien de vélos. Il répare un pneu en 15 minutes. Il révise un vélo entier en 1 heure.",
+  "02-symboles": "On mesure le temps en heures et en minutes. L'heure s'écrit h. La minute s'écrit m, i, n.",
+  "03-soixante": "La grande aiguille fait le tour du cadran en 1 heure. Sur ce tour, il y a 60 petits traits. 1 heure, c'est 60 minutes.",
+  "04-demi-quart": "La moitié de 60, c'est 30. Une demi-heure, c'est 30 minutes. Le quart de 60, c'est 15. Un quart d'heure, c'est 15 minutes.",
+  "05-question": "Question ! Combien de minutes dure une demi-heure ? A : 30 minutes. B : 50 minutes. C : 15 minutes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 1 heure, c'est 60 minutes. La moitié de 60, c'est 30.",
+  "06-piege": "Attention au piège ! 1 mètre, c'est 100 centimètres. Mais 1 heure, ce n'est pas 100 minutes. 1 heure, c'est 60 minutes.",
+  "07-question": "Question ! Rayan répare un frein en 1 heure. Combien de minutes cela fait-il ? A : 100 minutes. B : 60 minutes. C : 12 minutes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Un tour de grande aiguille, c'est 1 heure. Et c'est 60 minutes.",
+  "08-defi": "À toi de jouer ! Rayan travaille 1 heure. Son ami Sam travaille 70 minutes. Qui travaille le plus longtemps ? Mets pause, et cherche !",
+  "08b-correction": "Correction. On écrit tout en minutes. 1 heure, c'est 60 minutes. 70 minutes, c'est plus que 60 minutes. Sam travaille le plus longtemps.",
+  "09-finale": "Ce que tu as appris. 1 heure, c'est 60 minutes, pas 100. Une demi-heure, c'est 30 minutes. Un quart d'heure, c'est 15 minutes. On écrit h et min.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

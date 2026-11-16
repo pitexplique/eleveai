@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Je règle mon réveil sur 5 heures. Je mets la grande aiguille sur le 5. Et la petite sur le 12. Hop !",
+  "01-oups": "Mais mon réveil montre 12 heures ! J'ai inversé les aiguilles. C'est la petite qui donne l'heure.",
+  "02-question": "Question ! Pour 5 heures, où va la grande aiguille ? A : sur le 12. B : sur le 5. C : sur le 6. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! La grande va sur le 12. La petite va sur le 5.",
+  "03-ouf": "Voilà mon réveil réparé. Maintenant, c'est moi qui dois me réveiller !",
+  "04-commentaire": "À toi : pour montrer 10 heures, où va la petite aiguille ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

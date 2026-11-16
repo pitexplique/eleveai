@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défi sur l'heure. À midi, où sont les 2 aiguilles ?",
+  "01-situation": "Voici Tom. Il est pâtissier. Ses gâteaux sortent du four à midi. Tom regarde l'horloge de sa pâtisserie.",
+  "02-midi": "Midi, c'est 12 heures pile. La petite aiguille est sur le 12. La grande aussi est sur le 12. Les 2 aiguilles sont l'une sur l'autre.",
+  "03-avance": "Une horloge peut avancer. Elle montre 1 heure de plus que la vraie heure. Une horloge peut aussi retarder. Elle montre 1 heure de moins.",
+  "04-deux-tours": "Une journée a 24 heures. Le cadran n'a que 12 nombres. Alors la petite aiguille fait 2 tours par jour.",
+  "05-question": "Question ! À midi, où sont les aiguilles ? A : les 2 sur le 12. B : la petite sur le 12, la grande sur le 6. C : les 2 sur le 6. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Midi, c'est 12 heures pile. Les 2 aiguilles sont sur le 12.",
+  "06-piege": "Attention au piège ! Quand l'horloge avance, la vraie heure est plus tôt. Alors on recule de 1 heure.",
+  "07-question": "Question ! L'horloge de Tom avance de 1 heure. Elle montre 5 heures. Quelle est la vraie heure ? A : 6 heures. B : 4 heures. C : 5 heures. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. L'horloge avance : on recule de 1 heure. Il est 4 heures.",
+  "08-defi": "À toi de jouer ! La pendule du four retarde de 1 heure. Elle montre 2 heures. Quelle est la vraie heure ? Mets pause, et cherche !",
+  "08b-correction": "Correction. La pendule retarde : elle est en retard. Alors on avance de 1 heure. Après 2 vient 3. Il est 3 heures.",
+  "09-finale": "Ce que tu as appris. À midi, les 2 aiguilles sont sur le 12. Si l'horloge avance, on recule. Si elle retarde, on avance. La petite aiguille fait 2 tours par jour.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

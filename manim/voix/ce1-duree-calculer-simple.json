@@ -1,0 +1,16 @@
+{
+  "00-garde": "Mesurer une durée. Combien de temps entre 14 heures 30 et 16 heures ?",
+  "01-situation": "Voici Clara. Elle est coiffeuse. Une cliente arrive à 14 heures 30. Elle repart à 16 heures, avec une belle coiffure. Combien de temps est-elle restée ?",
+  "02-frise": "Une durée, c'est le temps entre le début et la fin. On dessine une frise. Au début : 14 heures 30. À la fin : 16 heures.",
+  "03-bonds": "Premier bond : de 14 heures 30 à 15 heures, 30 minutes. On arrive à l'heure pile. Deuxième bond : de 15 heures à 16 heures, 1 heure.",
+  "04-total": "On additionne les bonds. 30 minutes plus 1 heure : 1 heure 30. La cliente est restée 1 heure 30.",
+  "05-question": "Question ! Une coupe commence à 10 heures. Elle finit à 10 heures 15. Combien de temps dure-t-elle ? A : 10 minutes. B : 1 heure 15. C : 15 minutes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. La grande aiguille va du 12 au 3. C'est 15 minutes.",
+  "06-piege": "Attention au piège ! 30 minutes plus 60 minutes, ce n'est pas 1 heure 70. 60 minutes font déjà 1 heure. On écrit 1 heure 30.",
+  "07-question": "Question ! Une couleur pose de 15 heures à 17 heures. Combien de temps dure-t-elle ? A : 2 heures. B : 3 heures. C : 1 heure. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. De 15 heures à 16 heures : 1 heure. De 16 heures à 17 heures : 1 heure. En tout : 2 heures.",
+  "08-defi": "À toi de jouer ! Clara ouvre à 9 heures 30. Elle ferme pour déjeuner à 12 heures. Combien de temps a-t-elle travaillé ? Mets pause, et cherche !",
+  "08b-correction": "Correction. De 9 heures 30 à 10 heures : 30 minutes. De 10 heures à 12 heures : 2 heures. En tout : 2 heures 30.",
+  "09-finale": "Ce que tu as appris. Une durée, c'est le temps entre le début et la fin. On avance par bonds sur une frise. On passe par l'heure pile. Puis on additionne les bonds.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

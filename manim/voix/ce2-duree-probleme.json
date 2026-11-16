@@ -1,0 +1,16 @@
+{
+  "00-garde": "Résoudre un problème de durée. Le car part à 8 heures 40 et roule 35 minutes. À quelle heure arrive-t-il ?",
+  "01-situation": "Voici Yasmine. Elle est organisatrice de voyages. Aujourd'hui, elle emmène un groupe visiter un château. Le car part à 8 heures 40. Le trajet dure 35 minutes. À quelle heure le groupe arrive-t-il ?",
+  "02-lire": "D'abord, on lit bien le problème. On connaît le début : 8 heures 40. On connaît la durée : 35 minutes. On cherche la fin. La fin, c'est le début plus la durée.",
+  "03-bonds": "On avance par bonds sur la frise. De 8 heures 40 à 9 heures : 20 minutes. Il reste 35 moins 20 : 15 minutes. 9 heures plus 15 minutes : le car arrive à 9 heures 15.",
+  "04-deux-etapes": "Ensuite, la visite dure 1 heure 30. On ajoute d'abord l'heure : 10 heures 15. Puis les 30 minutes : 10 heures 45. La visite finit à 10 heures 45.",
+  "05-question": "Question ! Le pique-nique commence à 12 heures 15. Il dure 50 minutes. À quelle heure finit-il ? A : 13 heures 5. B : 12 heures 65. C : 14 heures 5. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. De 12 heures 15 à 13 heures : 45 minutes. Il reste 5 minutes : 13 heures 5.",
+  "06-piege": "Attention au piège ! Lis bien ce qu'on cherche. Une heure de fin ? On ajoute la durée au début. Un temps d'attente ? On cherche l'écart entre deux heures. Et 60 minutes font toujours une heure.",
+  "07-question": "Question ! Il est 13 heures 50. Le car repart à 14 heures 15. Combien de minutes faut-il attendre ? A : 35 minutes. B : 25 minutes. C : 65 minutes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. De 13 heures 50 à 14 heures : 10 minutes. Puis 15 minutes. 10 plus 15 : 25 minutes.",
+  "08-defi": "À toi de jouer ! Le groupe quitte le château à 14 heures 15. Le car roule 40 minutes. Puis la balade au lac dure 30 minutes. À quelle heure finit la balade ? Mets pause, et cherche !",
+  "08b-correction": "Correction. On ajoute les durées : 40 plus 30, 70 minutes. 70 minutes, c'est 1 heure 10. 14 heures 15 plus 1 heure : 15 heures 15. Plus 10 minutes : la balade finit à 15 heures 25.",
+  "09-finale": "Ce que tu as appris. On lit bien ce qu'on cherche : une heure ou une durée. L'heure de fin, c'est le début plus la durée. On avance par bonds, en passant par l'heure pile. Avec deux étapes, on ajoute les deux durées.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

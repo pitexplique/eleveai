@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défi sur les horaires. Un concert commence à 22 heures 40 et dure 2 heures 35. À quelle heure finit-il ?",
+  "01-situation": "Voici Océane. Elle est organisatrice de festival. Ce soir, elle prépare le programme de la grande scène. Le dernier concert commence à 22 heures 40. Il dure 2 heures 35. À quelle heure les lumières s'éteignent-elles ?",
+  "02-jusqu-a-minuit": "On passe par l'heure ronde, puis par minuit. De 22 heures 40 à 23 heures : 20 minutes. De 23 heures à minuit : 1 heure. On a déjà avancé de 1 heure 20.",
+  "03-apres-minuit": "Il reste 2 heures 35, moins 1 heure 20 : 1 heure 15. Après minuit, l'heure repart de 0. Le concert finit à 1 heure 15 du matin, le lendemain.",
+  "04-calcul-pose": "On vérifie en posant l'addition. Les minutes : 40 plus 35, 75 minutes, soit 1 heure 15. Les heures : 22 plus 2, plus la retenue de 1 : 25 heures. Mais une journée n'a que 24 heures : minuit est passé, il est 1 heure 15.",
+  "05-question": "Question ! Le groupe 1 joue de 19 heures 30 à 20 heures 25. Puis 15 minutes de pause. Puis le groupe 2 joue 50 minutes. À quelle heure finit le groupe 2 ? A : 22 heures 30. B : 21 heures 30. C : 21 heures 15. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 20 heures 25, plus 15 minutes de pause : 20 heures 40. Plus 50 minutes : 21 heures 30.",
+  "06-piege": "Attention au piège ! 25 heures 15, ça n'existe pas. Une journée n'a que 24 heures. Après minuit, on repart de 0, et on change de jour.",
+  "07-question": "Question ! Les techniciens finissent de ranger à 2 heures 10 du matin. Ils ont travaillé 3 heures 30. À quelle heure ont-ils commencé ? A : 22 heures 40. B : 23 heures 40. C : 5 heures 40. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. De 2 heures 10, on recule jusqu'à minuit : 2 heures 10. Il reste 1 heure 20 à reculer. Minuit moins 1 heure 20 : 22 heures 40, la veille.",
+  "08-defi": "À toi de jouer ! Le festival ouvre à 16 heures 45. Il y a 6 concerts de 40 minutes. Entre deux concerts, 10 minutes de pause. À quelle heure finit le dernier concert ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 6 concerts de 40 minutes : 240 minutes, c'est 4 heures. Entre 6 concerts, il n'y a que 5 pauses : 50 minutes. En tout : 4 heures 50. De 16 heures 45 à 17 heures : 15 minutes. Il reste 4 heures 35 : le dernier concert finit à 21 heures 35.",
+  "09-finale": "Ce que tu as appris. On passe par l'heure ronde, puis par minuit. Après minuit, l'heure repart de 0, et on change de jour. Pour reculer, on fait les bonds à l'envers. Et on compte bien les pauses : une de moins que les concerts.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

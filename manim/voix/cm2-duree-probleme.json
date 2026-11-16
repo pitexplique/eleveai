@@ -1,0 +1,16 @@
+{
+  "00-garde": "Résoudre un problème de durées. Départ 7 heures 45 : 1 heure 50 de trajet, 10 minutes d'arrêt, 1 heure 35 de trajet. Arrivée ?",
+  "01-situation": "Voici Naël. Il est conducteur de TGV. Ce matin, il part de Paris à 7 heures 45. Il roule 1 heure 50 jusqu'à Lyon. Le train s'arrête 10 minutes en gare. Puis il roule encore 1 heure 35 jusqu'à Marseille. À quelle heure arrive-t-il ?",
+  "02-etapes": "D'abord, on range les étapes dans l'ordre. Trajet : 1 heure 50. Arrêt : 10 minutes. Trajet : 1 heure 35. On additionne les heures, puis les minutes.",
+  "03-total": "Les heures : 1 plus 1, 2 heures. Les minutes : 50 plus 10 plus 35, 95 minutes. 95 minutes, c'est plus de 60 : c'est 1 heure 35. En tout : 3 heures 35 minutes.",
+  "04-arrivee": "Maintenant, on avance sur la frise à partir de 7 heures 45. De 7 heures 45 à 8 heures : 15 minutes. Il reste 3 heures 20. 8 heures, plus 3 heures 20 : 11 heures 20. Naël arrive à Marseille à 11 heures 20.",
+  "05-question": "Question ! Naël doit arriver à 16 heures 10. Le trajet dure 2 heures 30. À quelle heure doit-il partir ? A : 14 heures 40. B : 18 heures 40. C : 13 heures 40. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. On recule par bonds. 10 minutes : 16 heures. Puis 2 heures : 14 heures. Encore 20 minutes : 13 heures 40.",
+  "06-piege": "Attention au piège ! 2 heures 95 minutes, ça ne s'écrit pas. Dès qu'on a 60 minutes, on forme 1 heure de plus. Et on relit la question : une heure d'arrivée, ou une durée ?",
+  "07-question": "Question ! Au retour, Naël part à 14 heures 20. Il roule 1 heure 45, s'arrête 15 minutes, puis roule 1 heure 30. À quelle heure arrive-t-il ? A : 17 heures 50. B : 18 heures 50. C : 17 heures 35. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 1 heure 45, plus 15 minutes, plus 1 heure 30 : 3 heures 30. 14 heures 20, plus 3 heures 30 : 17 heures 50.",
+  "08-defi": "À toi de jouer ! Naël commence son service à 6 heures 30. Il fait 3 trajets de 1 heure 40. Entre deux trajets, il fait une pause de 20 minutes. À quelle heure finit-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 3 trajets de 1 heure 40 : 3 heures et 120 minutes. 120 minutes, c'est 2 heures : 5 heures en tout. Entre 3 trajets, il y a 2 pauses : 40 minutes. Service : 5 heures 40. De 6 heures 30 à 7 heures : 30 minutes. Il reste 5 heures 10. Naël finit à 12 heures 10.",
+  "09-finale": "Ce que tu as appris. Dans un problème, on range les étapes dans l'ordre. On additionne les durées : les heures, puis les minutes. 60 minutes font 1 heure. Puis on avance par bonds sur la frise.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

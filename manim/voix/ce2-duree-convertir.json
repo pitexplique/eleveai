@@ -1,0 +1,16 @@
+{
+  "00-garde": "Convertir des durées. Combien de minutes dans 1 heure 20 ?",
+  "01-situation": "Voici Elsa. Elle est entraîneuse de natation. Ce soir, ses nageurs s'entraînent pendant 1 heure 20. Son chronomètre compte seulement en minutes. Combien de minutes doit-elle régler ?",
+  "02-une-heure": "1 heure, c'est 60 minutes. Pas 100 : 60. Une demi-heure, c'est 30 minutes. Un quart d'heure, c'est 15 minutes. Et un jour entier, c'est 24 heures.",
+  "03-heures-en-minutes": "On change l'heure en minutes : 1 heure, c'est 60 minutes. Puis on ajoute les 20 minutes. 60 plus 20 : 80 minutes. Elsa règle son chronomètre sur 80 minutes.",
+  "04-minutes-en-heures": "Dans l'autre sens. 150 minutes, combien d'heures ? On compte de 60 en 60 : 60, 120. Ça fait 2 heures. Il reste 30 minutes. 150 minutes, c'est 2 heures 30.",
+  "05-question": "Question ! Le stage de natation dure 2 heures. Combien de minutes ? A : 120 minutes. B : 200 minutes. C : 60 minutes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 1 heure, c'est 60 minutes. 60 plus 60 : 120 minutes.",
+  "06-piege": "Attention au piège ! 1 heure 30, ce n'est pas 130 minutes. 1 heure, c'est 60 minutes, pas 100. 60 plus 30 : 90 minutes.",
+  "07-question": "Question ! La compétition dure 75 minutes. Combien d'heures et de minutes ? A : 1 heure 45. B : 2 heures 15. C : 1 heure 15. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Dans 75 minutes, il y a 60 minutes : 1 heure. Il reste 15 minutes : 1 heure 15.",
+  "08-defi": "À toi de jouer ! Elsa nage depuis 35 minutes. Combien de minutes manque-t-il pour faire 1 heure ? Et 2 heures 10, ça fait combien de minutes ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 1 heure, c'est 60 minutes. De 35 à 60, il manque 25 minutes. Ensuite, 2 heures, c'est 120 minutes. Plus 10 : 130 minutes.",
+  "09-finale": "Ce que tu as appris. 1 heure, c'est 60 minutes, jamais 100. Une demi-heure, c'est 30 minutes, un quart d'heure, 15 minutes. Pour convertir, on compte de 60 en 60. Puis on ajoute les minutes.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Placer les aiguilles. Comment montrer 7 heures 30 sur une horloge ?",
+  "01-situation": "Voici Noah. Il est animateur radio. Son émission commence à 7 heures 30. Il règle l'horloge du studio.",
+  "02-grande": "D'abord, la grande aiguille. Heure pile : sur le 12. Et quart : sur le 3. Et demie : sur le 6. Moins le quart : sur le 9.",
+  "03-petite": "Ensuite, la petite aiguille. À 7 heures 30, la moitié de l'heure est passée. Alors la petite est au milieu, entre le 7 et le 8.",
+  "04-verifier": "On vérifie. La grande est sur le 6. La petite est entre le 7 et le 8. L'horloge montre 7 heures 30.",
+  "05-question": "Question ! Pour 4 heures 15, où va la grande aiguille ? A : sur le 3. B : sur le 4. C : sur le 15. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Un quart d'heure, c'est 15 minutes. La grande aiguille va sur le 3.",
+  "06-piege": "Attention au piège ! La petite aiguille ne saute pas d'un nombre à l'autre. Elle avance un peu à chaque minute. À la demie, elle n'est pas sur l'heure pile.",
+  "07-question": "Question ! Il est 9 heures 45. Où est la petite aiguille ? A : exactement sur le 9. B : exactement sur le 10. C : entre le 9 et le 10, tout près du 10. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Les trois quarts de l'heure sont passés. La petite est tout près du 10, sans l'atteindre.",
+  "08-defi": "À toi de jouer ! Les infos passent à 11 heures 15. Où places-tu les 2 aiguilles ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Et quart : la grande aiguille va sur le 3. Un quart de l'heure est passé. Alors la petite est juste après le 11. L'horloge montre 11 heures 15.",
+  "09-finale": "Ce que tu as appris. On place d'abord la grande aiguille. Elle va sur le 12, le 3, le 6 ou le 9. Puis la petite, qui avance pendant l'heure. À la demie, elle est au milieu.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

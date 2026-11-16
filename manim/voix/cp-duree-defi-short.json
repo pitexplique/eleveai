@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Mon gâteau doit cuire jusqu'à 3 heures. Mon horloge montre 3 heures. Je sors le gâteau du four !",
+  "01-oups": "Il est tout mou ! J'avais oublié : mon horloge avance de 1 heure.",
+  "02-question": "Question ! Quelle est la vraie heure ? A : 4 heures. B : 6 heures. C : 2 heures. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! L'horloge avance de 1 heure. On recule : il est 2 heures.",
+  "03-ouf": "Je remets mon gâteau au four. Et demain, je change d'horloge !",
+  "04-commentaire": "À toi : une horloge retarde de 1 heure. Elle montre 8 heures. Quelle est la vraie heure ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

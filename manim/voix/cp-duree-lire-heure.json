@@ -1,0 +1,16 @@
+{
+  "00-garde": "Lire l'heure. La petite aiguille est sur le 3. Quelle heure est-il ?",
+  "01-situation": "Voici Rose. Elle est horlogère. Elle répare les horloges. Ce matin, une horloge sonne. Rose la regarde. Quelle heure est-il ?",
+  "02-aiguilles": "Une horloge a 2 aiguilles. La petite aiguille est courte. La grande aiguille est longue. C'est la petite qui donne l'heure.",
+  "03-lire": "Regarde la petite aiguille. Elle est sur le 3. La grande est sur le 12. Alors il est 3 heures pile.",
+  "04-encore": "Une autre horloge. La petite aiguille est sur le 8. La grande est sur le 12. Il est 8 heures.",
+  "05-question": "Question ! La petite aiguille est sur le 5. La grande est sur le 12. Quelle heure est-il ? A : 12 heures. B : 5 heures. C : 6 heures. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. La petite aiguille est sur le 5. Il est 5 heures.",
+  "06-piege": "Attention au piège ! La grande aiguille se voit mieux. Mais elle ne donne pas l'heure. Sur le 12, elle dit seulement : heure pile.",
+  "07-question": "Question ! La petite aiguille est sur le 10. La grande est sur le 12. Quelle heure est-il ? A : 10 heures. B : 12 heures. C : 11 heures. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. On lit la petite aiguille : elle est sur le 10. Il est 10 heures.",
+  "08-defi": "À toi de jouer ! Rose répare une pendule. La petite aiguille est sur le 7. La grande est sur le 12. Quelle heure est-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. On cherche la petite aiguille. Elle est sur le 7. La grande est sur le 12 : c'est l'heure pile. Il est 7 heures.",
+  "09-finale": "Ce que tu as appris. La petite aiguille donne l'heure. On lit le nombre qu'elle montre. La grande sur le 12, c'est l'heure pile.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

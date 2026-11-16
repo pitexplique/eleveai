@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Mon réveil sonne. La petite aiguille est sur le 6, la grande sur le 12. Je crie : « Il est 12 heures 6, je rate le déjeuner ! »",
+  "01-aiguilles": "Oups, j'ai tout inversé. La petite aiguille donne l'heure. La grande donne les minutes. Sur le 12, c'est l'heure pile. Il est 6 heures du matin !",
+  "02-question": "Question ! Pour mon goûter, la petite aiguille a dépassé le 4. La grande est sur le 3. Quelle heure est-il ? A : 4 heures 15. B : 3 heures 20. C : 4 heures 3. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! La petite donne 4 heures. La grande sur le 3 : 3 fois 5, 15 minutes.",
+  "03-ouf": "Bon. À 6 heures du matin, je suis le seul réveillé. Même les poules dorment encore !",
+  "04-commentaire": "À toi : c'est l'après-midi. La petite aiguille a dépassé le 2, la grande est sur le 7. Quelle heure est-il, de 0 à 24 heures ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

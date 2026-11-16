@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Je fais la course contre mon cousin. Mon chrono affiche 2:15. Waouh, j'ai couru 2 heures 15 ! Je suis un champion !",
+  "01-lecture": "Euh, attends. Sur un chrono, avant les deux points, ce sont les minutes. Après, ce sont les secondes.",
+  "02-question": "Question ! Combien de temps ai-je couru ? A : 2 minutes 15 secondes. B : 2 heures 15 minutes. C : 15 minutes 2 secondes. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! 2 minutes et 15 secondes. Pas 2 heures !",
+  "03-ouf": "Et mon cousin ? 1 minute 58. Bon… revanche demain !",
+  "04-commentaire": "À toi : un chrono affiche 3:07. Combien de minutes, et combien de secondes ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le calendrier. Aujourd'hui, c'est lundi. Quel jour sera-t-on dans 3 jours ?",
+  "01-situation": "Voici Alice. Elle est bibliothécaire. Elle prête des livres pour 1 semaine. Sur le calendrier, elle note le jour du retour.",
+  "02-jours": "Une semaine a 7 jours. Lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche. Après dimanche, on recommence à lundi.",
+  "03-mois": "Une année a 12 mois. Janvier, février, mars, avril, mai, juin. Puis juillet, août, septembre, octobre, novembre, décembre.",
+  "04-avancer": "Pour avancer, on compte 1 jour à la fois. Après lundi : mardi, mercredi, jeudi. Cela fait 3 bonds. Dans 3 jours, on sera jeudi.",
+  "05-question": "Question ! Aujourd'hui, c'est vendredi. Quel jour sera-t-on demain ? A : jeudi. B : dimanche. C : samedi. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. Après vendredi vient samedi.",
+  "06-piege": "Attention au piège ! On ne compte pas le jour d'aujourd'hui. Le premier bond mène à demain. Et après dimanche, on revient à lundi.",
+  "07-question": "Question ! Un livre est prêté pour 2 semaines. Combien de jours cela fait-il ? A : 9 jours. B : 14 jours. C : 10 jours. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 1 semaine, c'est 7 jours. 7 plus 7, ça fait 14 jours.",
+  "08-defi": "À toi de jouer ! Aujourd'hui, c'est samedi. Un lecteur rend son livre dans 4 jours. Quel jour le rend-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. On avance 1 jour à la fois. Dimanche, lundi, mardi, mercredi : 4 bonds. Après dimanche, on a recommencé à lundi. Il rend son livre mercredi.",
+  "09-finale": "Ce que tu as appris. Une semaine a 7 jours, toujours dans le même ordre. Une année a 12 mois. Pour avancer, on compte 1 jour à la fois. Après dimanche, on revient à lundi.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

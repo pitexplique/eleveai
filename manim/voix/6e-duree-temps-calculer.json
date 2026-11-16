@@ -1,0 +1,16 @@
+{
+  "00-garde": "Calculer un horaire ou une durée. Combien de temps entre 8 heures 50 et 11 heures 25 ?",
+  "01-situation": "Voici Enzo. Il est pilote de rallye. La course part à 8 heures 50. Enzo passe la ligne d'arrivée à 11 heures 25. Combien de temps a duré sa course ?",
+  "02-heure-ronde": "Première méthode : on passe par l'heure ronde. De 8 heures 50 à 9 heures : 10 minutes. De 9 heures à 11 heures : 2 heures. De 11 heures à 11 heures 25 : 25 minutes. En tout : 2 heures 35 minutes.",
+  "03-calcul-pose": "Deuxième méthode : on pose la soustraction, heures sous heures, minutes sous minutes. 11 heures 25, moins 8 heures 50. Mais 25 moins 50, c'est impossible.",
+  "04-retenue-de-60": "Alors on casse 1 heure en 60 minutes. 11 heures 25 devient 10 heures 85. 85 moins 50 : 35 minutes. 10 moins 8 : 2 heures. On retrouve 2 heures 35 minutes.",
+  "05-question": "Question ! Une épreuve spéciale part à 14 heures 45. Elle dure 50 minutes. À quelle heure finit-elle ? A : 15 heures 45. B : 15 heures 35. C : 14 heures 95. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 45 plus 50 : 95 minutes, c'est 1 heure 35. 14 heures, plus 1 heure 35 : 15 heures 35.",
+  "06-piege": "Attention au piège ! 1 heure, ce n'est pas 100 minutes. Avec 100 minutes, 11 heures 25 moins 8 heures 50 donnerait 2 heures 75. C'est faux ! On casse toujours 1 heure en 60 minutes.",
+  "07-question": "Question ! Enzo part à 9 heures 35 et arrive à 13 heures 10. Combien de temps a-t-il roulé ? A : 3 heures 75 minutes. B : 4 heures 25 minutes. C : 3 heures 35 minutes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. On casse 1 heure : 13 heures 10 devient 12 heures 70. 70 moins 35 : 35 minutes. 12 moins 9 : 3 heures.",
+  "08-defi": "À toi de jouer ! Une étape part à 16 heures 35. Enzo met 2 heures 48 minutes. À quelle heure arrive-t-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. On pose l'addition. Les minutes : 35 plus 48, 83 minutes. 83 minutes, c'est 1 heure 23 : on garde 23, et on retient 1 heure. Les heures : 16 plus 2, plus la retenue de 1 : 19. Enzo arrive à 19 heures 23.",
+  "09-finale": "Ce que tu as appris. Pour une durée, on peut passer par l'heure ronde. On peut aussi poser le calcul, heures sous heures, minutes sous minutes. Les retenues se font par 60, jamais par 100. 1 heure, c'est 60 minutes.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

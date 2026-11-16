@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Mon train part à 5 heures 45. La grande aiguille est sur le 9. La petite est presque sur le 6. Il est 6 heures 45, j'ai raté mon train !",
+  "01-oups": "Le contrôleur rigole. Regarde mieux la petite aiguille ! Elle n'a pas encore atteint le 6.",
+  "02-question": "Question ! Quelle heure est-il vraiment ? A : 6 heures 9. B : 6 heures 45. C : 5 heures 45. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! La petite a dépassé le 5, pas le 6. La grande sur le 9, c'est 45 minutes. Il est 5 heures 45.",
+  "03-ouf": "Je saute dans le train, juste à temps. Les portes se ferment… sur ma casquette !",
+  "04-commentaire": "À toi : la grande aiguille est sur le 6. La petite est entre le 4 et le 5. Quelle heure est-il ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

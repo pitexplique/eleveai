@@ -1,0 +1,16 @@
+{
+  "00-garde": "Calculer une durée. Combien de temps entre 8 heures 35 et 10 heures 10 ?",
+  "01-situation": "Voici Adrien. Il est capitaine de ferry. Son bateau emmène des voitures et des passagers jusqu'à une île. Le ferry part à 8 heures 35. Il arrive à 10 heures 10. Combien de temps dure la traversée ?",
+  "02-frise": "On dessine une frise du temps. À gauche, le départ : 8 heures 35. À droite, l'arrivée : 10 heures 10. On va avancer par bonds.",
+  "03-bonds": "Premier bond : de 8 heures 35 à 9 heures, 25 minutes. On tombe sur une heure pile. Deuxième bond : de 9 heures à 10 heures, 1 heure. Dernier bond : de 10 heures à 10 heures 10, 10 minutes.",
+  "04-total": "On additionne les bonds. 25 minutes plus 10 minutes : 35 minutes. Avec l'heure du milieu : 1 heure 35. La traversée dure 1 heure 35.",
+  "05-question": "Question ! Le ferry part à 15 heures 40. Il arrive à 16 heures 20. Combien de temps dure le trajet ? A : 1 heure 20. B : 20 minutes. C : 40 minutes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. De 15 heures 40 à 16 heures : 20 minutes. Puis encore 20 minutes. 20 plus 20 : 40 minutes.",
+  "06-piege": "Attention au piège ! Le ferry part à 9 heures 40 et navigue 30 minutes. Il n'arrive pas à 9 heures 70 ! Une heure, c'est 60 minutes. Il arrive à 10 heures 10.",
+  "07-question": "Question ! Le ferry part à 11 heures 45. La traversée dure 1 heure 30. À quelle heure arrive-t-il ? A : 13 heures 15. B : 12 heures 75. C : 13 heures 45. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 11 heures 45 plus 1 heure : 12 heures 45. Puis 15 minutes jusqu'à 13 heures, et encore 15 : 13 heures 15.",
+  "08-defi": "À toi de jouer ! Le dernier ferry part à 17 heures 50. Il arrive à 19 heures 15. Combien de temps dure la traversée ? Mets pause, et cherche !",
+  "08b-correction": "Correction. De 17 heures 50 à 18 heures : 10 minutes. De 18 heures à 19 heures : 1 heure. De 19 heures à 19 heures 15 : 15 minutes. En tout : 1 heure 25 minutes.",
+  "09-finale": "Ce que tu as appris. Pour calculer une durée, on dessine une frise. On avance par bonds, en passant par l'heure pile. Puis on additionne les bonds. 1 heure, c'est 60 minutes.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
