@@ -57,38 +57,17 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
     );
   }
 
+  // ⭐ 16/11, Frédéric : « tu inverses : l'encart la famille à gauche, et les
+  // statistiques (vidéos, exercices…) dans l'encart à droite ».
+  const chiffre = (valeur: string, libelle: string) => (
+    <div className="flex flex-col-reverse">
+      <dt className="text-xs font-bold text-slate-600">{libelle}</dt>
+      <dd className="text-xl font-black tabular-nums text-slate-900">{valeur}</dd>
+    </div>
+  );
   return (
-    <div className="mx-auto mt-5 grid max-w-3xl items-stretch gap-2 text-left sm:grid-cols-[1fr_auto_1fr]">
-      <div className="rounded-2xl bg-white/90 p-4 shadow-sm ring-1 ring-teal-200">
-        <p className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-rose-700">
-          <PlayCircle className="h-5 w-5" aria-hidden="true" /> Les vidéos
-        </p>
-        {c.capAtteint ? (
-          <p className="mt-1 text-2xl font-black text-slate-900">Plus de {cap} vidéos</p>
-        ) : (
-          <>
-            <p className="mt-1 text-2xl font-black text-slate-900">
-              {c.nombreTexte} <span className="text-lg font-bold text-slate-600">aujourd&apos;hui</span>
-            </p>
-            <div
-              className="mt-2 h-3 overflow-hidden rounded-full bg-slate-200"
-              role="progressbar"
-              aria-valuemin={0}
-              aria-valuemax={CAP_VIDEOS}
-              aria-valuenow={c.nombre}
-              aria-label={c.phrase}
-            >
-              <div className="h-full rounded-full bg-gradient-to-r from-teal-500 to-emerald-500" style={{ width: `${c.pourcent}%` }} />
-            </div>
-            <p className="mt-1.5 text-sm font-bold text-slate-600">
-              <span className="text-teal-700">{cap} {ECHEANCE_CAP}</span> : toutes les micro-compétences du CP à la Terminale.
-            </p>
-          </>
-        )}
-      </div>
-      <span aria-hidden="true" className="self-center text-center text-3xl font-black text-teal-700">+</span>
-      {/* ⭐ 16/11, Frédéric : « mets le nombre d'exercices pour la famille et
-          ajoute l'aide de Ti Margo ». */}
+    <div className="mx-auto mt-5 grid max-w-3xl items-stretch gap-3 text-left sm:grid-cols-2">
+      {/* À GAUCHE : LA FAMILLE (le coach + l'aide de Ti Margo). */}
       <div className="rounded-2xl bg-white/90 p-4 shadow-sm ring-1 ring-sky-200">
         <p className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-sky-700">
           <Users className="h-5 w-5" aria-hidden="true" /> La famille
@@ -111,24 +90,45 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
         ) : (
           <p className="mt-1 text-sm font-bold text-slate-600">Il trouve ce qui manque, l&apos;entraîne là-dessus et garde ses progrès.</p>
         )}
-        {/* ⭐ 16/11 : les chiffres de la semaine (lib/accueil/chiffres-semaine.ts). */}
-        <dl className="mt-3 grid grid-cols-2 gap-2 border-t border-slate-100 pt-3">
-          <div>
-            <dd className="text-xl font-black tabular-nums text-slate-900">{EXERCICES.exercices.toLocaleString("fr-FR")}</dd>
-            <dt className="text-xs font-bold text-slate-600">exercices de maths</dt>
-          </div>
-          {visiteurs !== null && (
-            <div>
-              <dd className="text-xl font-black tabular-nums text-slate-900">{visiteurs.toLocaleString("fr-FR")}</dd>
-              <dt className="text-xs font-bold text-slate-600">visiteurs cette semaine</dt>
+      </div>
+
+      {/* À DROITE : LES CHIFFRES. Vidéos comptées (lib/videos/compteur.ts),
+          exercices et visiteurs de la semaine (lib/accueil/chiffres-semaine.ts). */}
+      <div className="rounded-2xl bg-white/90 p-4 shadow-sm ring-1 ring-teal-200">
+        <p className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-rose-700">
+          <PlayCircle className="h-5 w-5" aria-hidden="true" /> En chiffres
+        </p>
+        {c.capAtteint ? (
+          <p className="mt-1 text-2xl font-black text-slate-900">Plus de {cap} vidéos</p>
+        ) : (
+          <>
+            <p className="mt-1 text-2xl font-black text-slate-900">
+              {c.nombreTexte} <span className="text-lg font-bold text-slate-600">vidéos aujourd&apos;hui</span>
+            </p>
+            <div
+              className="mt-2 h-3 overflow-hidden rounded-full bg-slate-200"
+              role="progressbar"
+              aria-valuemin={0}
+              aria-valuemax={CAP_VIDEOS}
+              aria-valuenow={c.nombre}
+              aria-label={c.phrase}
+            >
+              <div className="h-full rounded-full bg-gradient-to-r from-teal-500 to-emerald-500" style={{ width: `${c.pourcent}%` }} />
             </div>
-          )}
+            <p className="mt-1.5 text-sm font-bold text-slate-600">
+              <span className="text-teal-700">{cap} {ECHEANCE_CAP}</span> : toutes les micro-compétences du CP à la Terminale.
+            </p>
+          </>
+        )}
+        <dl className="mt-3 grid grid-cols-2 gap-2 border-t border-slate-100 pt-3">
+          {chiffre(EXERCICES.exercices.toLocaleString("fr-FR"), "exercices de maths")}
+          {visiteurs !== null && chiffre(visiteurs.toLocaleString("fr-FR"), "visiteurs cette semaine")}
         </dl>
       </div>
       {/* ⭐ 16/11 — UNE PHRASE VRAIE, dite à Frédéric par un de ses élèves (ses
           mots : « tommy : monsieur hier soir j'ai répondu à 115 questions »).
           Prénom seul, jamais de nom ni de classe. */}
-      <figure className="rounded-2xl bg-amber-50/90 px-4 py-3 text-center shadow-sm ring-1 ring-amber-200 sm:col-span-3">
+      <figure className="rounded-2xl bg-amber-50/90 px-4 py-3 text-center shadow-sm ring-1 ring-amber-200 sm:col-span-2">
         <blockquote className="text-lg font-black text-slate-800">
           « Monsieur, hier soir, j&apos;ai répondu à 115 questions ! »
         </blockquote>
