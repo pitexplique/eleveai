@@ -104,19 +104,32 @@ class Paysage4e(Paysage5e):
     identite = "Maths 4e — EleveAI"
     ceinture = "verte"
 
+    def question_gauche(self, *a, carte_hors_synchro=False, **k):
+        """`carte_hors_synchro=True` sort la CARTE DE QUESTION de la synchro (voir `_disposer_q`).
+        ⛔ Ne jamais passer cette consigne au commun partagé : il itérerait dessus et planterait."""
+        self._carte_hors_synchro = carte_hors_synchro
+        try:
+            return super().question_gauche(*a, **k)
+        finally:
+            self._carte_hors_synchro = False
+
     def _disposer_q(self, question, choix, phrase, *a, **k):
-        """⛔ `q_sans_audit` visait le mauvais objet. Le commun CM1 l'applique à `r[1]`, or
-        `_disposer_q` renvoie (tete, rebours, q, cartes, pause, ph) : `r[1]` est le compte à
-        rebours. On le réapplique ici à la QUESTION (`r[2]`), sans toucher au commun partagé.
-        Sert aux écrans dont la question reprend mot pour mot le début de la voix : la carte
-        ne peut s'afficher qu'après l'annonce, et l'audit la compterait en retard.
-        `q_sans_audit="tout"` sort la carte entière de la synchro — à n'employer QUE dans ce cas
-        (la phrase de RÉPONSE, elle, reste toujours auditée : c'est là que se cachent les nombres
-        qui ne doivent jamais apparaître avant d'être dits)."""
+        """⛔ Deux corrections, sans toucher au commun partagé :
+        · `q_sans_audit` visait le mauvais objet — le commun CM1 l'applique à `r[1]`, or
+          `_disposer_q` renvoie (tete, rebours, q, cartes, pause, ph) : `r[1]` est le compte à
+          rebours. On le réapplique ici à la QUESTION (`r[2]`).
+        · `carte_hors_synchro` sort la carte entière de la synchro. Elle sert aux écrans dont la
+          question reprend mot pour mot le début de l'annonce : le gabarit ne peut la poser
+          qu'APRÈS « Question ! », donc l'audit la compterait en retard quoi qu'on écrive.
+        La phrase de RÉPONSE, elle, reste toujours auditée : c'est là que se cachent les nombres
+        qui ne doivent jamais apparaître avant d'être dits."""
         r = list(super()._disposer_q(question, choix, phrase, *a, **k))
-        q = r[2]
-        idx = getattr(self, "_q_sans_audit", ())
-        cibles = q if idx == "tout" else [q[i] for i in idx]
+        # ⚠️ On marque les LIGNES une par une (itérer sur r[2]) : marquer le groupe entier
+        #    ne suffit pas, l'audit lit le drapeau sur les objets animés.
+        if getattr(self, "_carte_hors_synchro", False):
+            cibles = list(r[2])
+        else:
+            cibles = [r[2][i] for i in getattr(self, "_q_sans_audit", ())]
         for c_ in cibles:
             for f in c_.get_family():
                 f._pas_audit = True

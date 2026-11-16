@@ -36,7 +36,7 @@ def cadre_vue(contenu, titre, u=1.0, taille=1.9, couleur=VUE_C):
     c = Square(side_length=taille, stroke_color="#475569", stroke_width=3,
                fill_color="#0f172a", fill_opacity=0.85)
     contenu.move_to(c.get_center())
-    t = Text(titre, font_size=24, color=couleur, weight=BOLD).next_to(c, DOWN, buff=0.12)
+    t = hors_audit(Text(titre, font_size=24, color=couleur, weight=BOLD)).next_to(c, DOWN, buff=0.12)
     g = VGroup(c, contenu, t)
     g.cadre, g.contenu, g.titre = c, contenu, t
     return g
@@ -200,10 +200,10 @@ class SolidesVues4e(Paysage4e):
             sc.play(FadeIn(vs), run_time=0.4)
 
         self.question_gauche("05-question", "05b-reponse",
-                             ["De dessus, un disque.", "De face, un rectangle.", "Quel solide ?"],
+                             ["Quel solide ?"],
                              [self.choix("un cylindre"), self.choix("un cône"), self.choix("une boule")], 0,
                              ["Un cylindre debout.", "Le cône donnerait", "un triangle de face."],
-                             -0.3, mot_q="Question", avant_q=avant_q, q_sans_audit="tout")
+                             -0.3, mot_q="Question", avant_q=avant_q)
 
     # ── 06 : le piège ───────────────────────────────────────────────────────
     def ecran_piege(self):
@@ -244,11 +244,11 @@ class SolidesVues4e(Paysage4e):
             sc.play(FadeIn(vs), run_time=0.4)
 
         self.question_gauche("07-question", "07b-reponse",
-                             ["De face, un triangle.", "De dessus, un disque.", "Quel solide ?"],
+                             ["Quel solide ?"],
                              [self.choix("une pyramide"), self.choix("un prisme"), self.choix("un cône")], 2,
                              ["Un cône.", "La pyramide donnerait", "un carré de dessus,",
                               "jamais un disque."],
-                             -0.3, mot_q="Question", avant_q=avant_q, q_sans_audit="tout")
+                             -0.3, mot_q="Question", avant_q=avant_q)
 
     # ── 08 : le défi ────────────────────────────────────────────────────────
     def tour(self, u=0.8, o=P(-5.4, -2.2)):
