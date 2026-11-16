@@ -13,7 +13,6 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import DevBanner from "@/components/DevBanner";
 import Header from "@/components/Header";
-import BandeauJournal from "@/components/BandeauJournal";
 import BanniereCrpe from "@/components/accueil/BanniereCrpe";
 import Footer from "@/components/Footer";
 import MasqueSurEmbed from "@/components/MasqueSurEmbed";
@@ -440,8 +439,9 @@ export default function RootLayout({
             {/* 17/10/2026 : la bannière CRPE, en haut sur TÉLÉPHONE seulement
                 (sur ordinateur, elle est au-dessus des colonnes de l'accueil). */}
             <BanniereCrpe place="haut" />
-            {/* 10/11/2026 : bandeau vers le Journal, au-dessus de l'en-tête. */}
-            <BandeauJournal />
+            {/* ⛔ 16/11/2026 : le bandeau du Journal est retiré de l'accueil (Frédéric :
+                « enlève le bandeau header journal, ça les intéresse pas »). Pour le
+                remettre : <BandeauJournal />, components/BandeauJournal.tsx. */}
             <Header />
           </MasqueSurEmbed>
 
