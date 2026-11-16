@@ -43,15 +43,15 @@ Ouvert le 15/11/2026. 30 micros du coach, plan : `manim/PLAN-perimetre-aire-volu
 | S1 `vision_reconnaitre` (jeu vidéo) | ✅ | ✅ | ✅ 208,9 s / 56,7 s, bords 0 |
 | S2 `vision_vues` (maquette) | ✅ | ✅ | ✅ 203,9 s / 54,7 s, bords 0 |
 | S3 `vision_representation` (manga) | ✅ | ✅ | ✅ 188,6 s / 57,4 s, bords 0 |
-| S4 `patron_pyramide` (dé à 4 faces) | ⏳ | ⏳ | — |
+| S4 `patron_pyramide` (dé à 4 faces) | ✅ | ✅ | ✅ 200,2 s / 57,0 s, bords 0 |
 | S5 `vision_section` (muscle, scanner) | ⏳ | ⏳ | — |
 | S6 `vision_defi` (drone) | ⏳ | ⏳ | — |
 | P1 → P5 (périmètre) | ⏳ | ⏳ | — |
 | A1 → A5 (aire) | ⏳ | ⏳ | — |
 | T1 → T8 (3e) | ⏳ | ⏳ | — |
 
-**7 épisodes finis sur 28** (V1, V2, V3, V4, S1, S2, S3) — paysages et shorts rendus en HD,
-`verifier-bords-video` = 0 sur les 14 MP4. **21 restent à écrire et à rendre.**
+**8 épisodes finis sur 28** (V1, V2, V3, V4, S1, S2, S3, S4) — paysages et shorts rendus en HD,
+`verifier-bords-video` = 0 sur les 16 MP4. **20 restent à écrire et à rendre.**
 
 Chaîne d'un épisode : script paysage → dry run `AUDIT=1 BORDS=1` jusqu'à 0 AVANCE / RETARD / TARD /
 BORD → script short (même contrôle, en `-r 1080,1920`) → `manim/poste2/4e_hd.sh` pour les deux
