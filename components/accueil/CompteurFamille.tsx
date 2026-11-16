@@ -94,27 +94,24 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
         )}
       </div>
 
-      {/* À DROITE : LE PROF. ⛔ La phrase est SON expérience de prof (ses mots :
-          « si vous commencez par une vidéo, vous captez 100 % de vos élèves »),
-          présentée comme sa parole, jamais comme une statistique mesurée.
-          Outils réels : /prof/classes, /prof/classes/direct (toutes les 15 s),
+      {/* À DROITE : LE PROF. Outils réels : /prof/classes, /prof/classes/direct (toutes les 15 s),
           /prof/classes/bilan (réussite de chaque élève par micro). */}
       <div className="flex flex-col rounded-2xl bg-white/90 p-4 shadow-sm ring-1 ring-violet-200">
         <p className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-violet-700">
           <GraduationCap className="h-5 w-5" aria-hidden="true" /> Le prof
         </p>
-        <figure className="mt-1">
-          <blockquote className="text-lg font-black leading-snug text-slate-900 sm:text-xl">
-            « Commencez votre cours par une vidéo : 100&nbsp;% de mes élèves accrochent. »
-          </blockquote>
-          <figcaption className="mt-0.5 text-sm font-bold text-slate-600">Frédéric, professeur de maths</figcaption>
-        </figure>
+        {/* 17/11, Frédéric : « propose autre chose » que la citation « 100 % de
+            mes élèves accrochent » → titre simple, sans chiffre ni citation. */}
+        <p className="mt-1 text-xl font-black leading-snug text-slate-900">
+          Une vidéo au tableau, puis chaque élève s&apos;entraîne à son niveau
+        </p>
         <ul className="mt-2 space-y-0.5 text-sm font-bold text-slate-700">
           {[
             "Vos classes, un code pour chaque élève",
             // 16/11, Frédéric : « et vous pouvez suivre vos élèves en direct en
             // salle info » + « ils travaillent à leurs niveaux ».
-            "En salle info, suivez vos élèves en direct : chacun travaille à son niveau",
+            // 17/11 : « à son niveau » est maintenant dans le titre de l'encart.
+            "En salle info, suivez vos élèves en direct",
             // U+2011 : trait d'union insécable, « micro‑compétence » ne se coupe pas.
             "Le bilan de chaque élève, par micro‑compétence",
           ].map((t) => (
