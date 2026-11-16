@@ -104,6 +104,11 @@ const ROUTES: RouteConfig[] = [
   // revenait à donner aux moteurs une adresse de redirection en page la plus
   // prioritaire du site — et à contredire la canonique, qui dit /accueil.
   { path: "/accueil", priority: 1.0, changeFrequency: "daily", lastMod: LASTMOD_HOME },
+  // ⭐ 16/11/2026 — Le Journal d'EleveAI : le bandeau de l'accueil qui y menait est
+  // retiré (« ça les intéresse pas »), mais Frédéric : « garde-le dans le
+  // sitemap ». Plus aucun lien interne n'y mène : le sitemap le garde trouvable.
+  // lastMod = dernier article (lib/accueil/articles.ts, 14/11) : à suivre avec lui.
+  { path: "/accueil-journal", priority: 0.6, changeFrequency: "weekly", lastMod: new Date("2026-11-14") },
 
   // ── EXPLORER (catalogue de toutes les actions) ─────────────────────────────
   { path: "/explorer",        priority: 0.9,  changeFrequency: "weekly", lastMod: LASTMOD_EXPLORER },

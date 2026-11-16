@@ -22,7 +22,8 @@ import { donneesDuJournal } from "./donnees";
 
 // ⭐ 10/11/2026 : ce n'est plus une maquette, c'est LE Journal d'EleveAI
 // (« comprendre le monde avec les maths »), lié depuis le bandeau en haut de
-// la page d'accueil seulement (components/BandeauJournal.tsx, 11/11). Il s'indexe donc.
+// la page d'accueil jusqu'au 16/11 (bandeau retiré : « ça les intéresse pas »).
+// Il s'indexe toujours, et il est dans le sitemap (app/sitemap.ts).
 export const metadata: Metadata = {
   title: "Le Journal d'EleveAI : comprendre le monde et le changer",
   description:
