@@ -372,9 +372,10 @@ type SolideCoupe = "cube" | "pave_droit" | "cylindre" | "cone" | "pyramide";
 type TypeCoupe = "parallele_base" | "parallele_axe" | "horizontale" | "verticale" | "diagonale";
 const POSITIONS_PLAN = ["parallèlement à la base", "perpendiculairement à la base", "en biais, ni parallèle ni perpendiculaire à la base"] as const;
 const COUPES_DESSIN: { s: SolideCoupe; sec: TypeCoupe; forme: string; pos: (typeof POSITIONS_PLAN)[number]; dit: string }[] = [
-  // ⛔ 15/11/2026 : le canvas `section_solide` dessine le cube avec une face avant NON carrée (138 × 94 px) :
-  // « nomme la forme → un carré » contredisait le dessin. Les coupes de cube parallèles à une face sont retirées d'ici
-  // (elles restent dans les gabarits de mesure, où l'arête est donnée dans le texte).
+  // ⭐ 16/11/2026 : le canvas `section_solide` dessine enfin le cube avec une face avant CARRÉE
+  // (elle faisait 138 × 94 px) : les deux coupes de cube parallèles à une face reviennent.
+  { s: "cube", sec: "horizontale", forme: "un carré", pos: POSITIONS_PLAN[0], dit: "le plan est parallèle à la base du cube : la section est un carré identique à une face" },
+  { s: "cube", sec: "verticale", forme: "un carré", pos: POSITIONS_PLAN[1], dit: "le plan est parallèle à une face latérale du cube : la section est un carré identique à cette face" },
   { s: "cube", sec: "diagonale", forme: "un rectangle", pos: POSITIONS_PLAN[2], dit: "le plan passe par deux arêtes opposées : la section est un rectangle, plus long que l'arête (il suit une diagonale de face)" },
   { s: "pave_droit", sec: "horizontale", forme: "un rectangle", pos: POSITIONS_PLAN[0], dit: "le plan est parallèle à la base du pavé : la section est un rectangle identique à la base" },
   { s: "pave_droit", sec: "verticale", forme: "un rectangle", pos: POSITIONS_PLAN[1], dit: "le plan est parallèle à une face latérale : la section est un rectangle identique à cette face" },

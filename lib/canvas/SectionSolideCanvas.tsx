@@ -174,7 +174,8 @@ function getSectionName(figure: SectionSolideCanvasData) {
   if (figure.solide === "cube") {
     if (figure.section === "parallele_face") return "carré";
     if (figure.section === "horizontale") return "carré";
-    if (figure.section === "verticale") return "rectangle";
+    // Plan vertical parallèle à une face latérale : un carré (corrigé le 16/11/2026).
+    if (figure.section === "verticale") return "carré";
     if (figure.section === "diagonale") return "rectangle";
   }
 
@@ -237,10 +238,16 @@ function drawPaveOrCube({
   const showCallouts = figure.display?.showCallouts ?? true;
   const showSectionName = figure.display?.showSectionName ?? true;
 
-  const frontA = { x: 82, y: 96 };
-  const frontB = { x: 220, y: 96 };
-  const frontC = { x: 220, y: 190 };
-  const frontD = { x: 82, y: 190 };
+  // ⛔ 16/11/2026 : le CUBE avait une face avant de 138 × 94 px — un rectangle.
+  // Les questions « section parallèle à une face d'un cube → un carré » (3e, 4e)
+  // contredisaient le dessin. Sa face avant est désormais un carré de 94 px,
+  // recentré dans le cadre ; le pavé droit ne bouge pas d'un pixel.
+  const left = isCube ? 107 : 82;
+  const right = isCube ? left + 94 : 220;
+  const frontA = { x: left, y: 96 };
+  const frontB = { x: right, y: 96 };
+  const frontC = { x: right, y: 190 };
+  const frontD = { x: left, y: 190 };
 
   const depth = isCube ? { x: 48, y: -40 } : { x: 62, y: -36 };
 
@@ -256,11 +263,13 @@ function drawPaveOrCube({
     { x: backA.x + 24, y: backA.y + 30 },
   ];
 
+  // Le plan vertical passe au milieu de la largeur (58 px sur 138 pour le pavé, comme avant).
+  const mid = isCube ? 47 : 58;
   const verticalSection: Point[] = [
-    { x: frontA.x + 58, y: frontA.y },
-    { x: frontA.x + 58 + depth.x, y: frontA.y + depth.y },
-    { x: frontD.x + 58 + depth.x, y: frontD.y + depth.y },
-    { x: frontD.x + 58, y: frontD.y },
+    { x: frontA.x + mid, y: frontA.y },
+    { x: frontA.x + mid + depth.x, y: frontA.y + depth.y },
+    { x: frontD.x + mid + depth.x, y: frontD.y + depth.y },
+    { x: frontD.x + mid, y: frontD.y },
   ];
 
   const diagonalSection: Point[] = [
