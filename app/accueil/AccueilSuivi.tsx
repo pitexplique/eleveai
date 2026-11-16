@@ -58,6 +58,8 @@ import RechercheEntete from "@/components/accueil/RechercheEntete";
 import { DONS, VENTE } from "@/lib/legal/editeur";
 import { ETABLISSEMENT_ETRANGER, NOM_VISIO, OUVERTURE_VISIO, PRIX_ETABLISSEMENT_PAR_PAYS, PRIX_MENSUEL, PRIX_VISIO, SUIVI_DES_MAINTENANT, montant } from "@/lib/tarifs";
 import { PAYS_AVENTURE } from "@/lib/aventure/pays";
+import CompteurFamille, { type VarianteCompteur } from "@/components/accueil/CompteurFamille";
+import { CAP_VIDEOS, ECHEANCE_CAP, etatCompteurVideos } from "@/lib/videos/compteur";
 
 /** La classe du coach → son dossier de vidéos sur R2 (et la clé de /video). */
 const DOSSIER_VIDEO: Record<string, string> = {
@@ -116,7 +118,9 @@ const ETAPES = [
 /* Ce qui reste ouvert à tous, pour toujours.
    ⭐ 02/11 : le coach garde la vidéo de chaque micro (avis de déontologie : le
    coach utilisé en classe ne renvoie jamais vers une offre). Ce qui se vend en
-   plus, c'est la vidéothèque entière : 3 500 vidéos sur le site, 500 sur YouTube. */
+   plus, c'est la vidéothèque entière.
+   ⛔ 16/11 : la ligne « 3 500 vidéos, dont 3 000 hors YouTube » était écrite à
+   la main et fausse (1 915 sur R2) : la vidéothèque se compte dans le composant. */
 const GRATUIT = [
   "Le coach de maths, sur tout le programme, micro-compétence par micro-compétence",
   "Dans le coach, la vidéo de chaque micro-compétence, avec ses questions-pauses",
@@ -127,7 +131,6 @@ const GRATUIT = [
 
 /* Ce qui sera proposé aux familles — à l'ouverture, fin décembre 2026. */
 const SUIVI_FAMILLE = [
-  { Icone: PlayCircle, texte: "Toute la vidéothèque : 3 500 vidéos du CP à la Terminale, dont 3 000 qu'on ne trouve pas sur YouTube" },
   { Icone: ClipboardList, texte: "Un bilan de départ : la carte de votre enfant sur toute sa classe" },
   { Icone: Mail, texte: "Un compte rendu chaque semaine : ce qui est acquis, les erreurs qui reviennent, les 3 choses à revoir" },
   { Icone: CalendarCheck, texte: "10 minutes par jour choisies par le coach, et la préparation ciblée d'un contrôle" },
@@ -182,7 +185,7 @@ function Puce({ children }: { children: React.ReactNode }) {
  * accord écrit (Frédéric, 31/10 : « tu enlèves "en préparation" tant que je
  * n'ai pas le feu vert du rectorat ») ; VRAI sur la maquette /accueil/nouvelle.
  */
-export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean }) {
+export default function AccueilSuivi({ offresFamille, compteur }: { offresFamille: boolean; compteur?: VarianteCompteur }) {
   const notions = listerToutesLesNotions().filter((n) => n.matiere === "maths");
   const videos = toutesLesVideos().filter((v) => v.vignette);
   const nbVideos = (dossier: string) => videos.filter((v) => v.fichier.split("/")[0] === dossier).length;
@@ -201,7 +204,15 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
   }).filter((c) => c.micros > 0);
 
   const totalMicros = cartes.reduce((s, c) => s + c.micros, 0);
-  const totalVideos = Math.floor(videos.length / 100) * 100;
+  // ⭐ 16/11 : le même compteur que l'argument de vente (lib/videos/compteur.ts).
+  const compteurVideos = etatCompteurVideos();
+  const videotheque = compteurVideos.capAtteint
+    ? `Toute la vidéothèque : plus de ${CAP_VIDEOS.toLocaleString("fr-FR")} vidéos du CP à la Terminale`
+    : `Toute la vidéothèque : ${compteurVideos.nombreTexte} vidéos du CP à la Terminale aujourd'hui, ${CAP_VIDEOS.toLocaleString("fr-FR")} ${ECHEANCE_CAP}`;
+  const suiviFamille = [
+    { Icone: PlayCircle, texte: videotheque },
+    ...(VENTE.ouverte ? SUIVI_DES_MAINTENANT.map((texte) => ({ Icone: ClipboardList, texte })) : SUIVI_FAMILLE),
+  ];
 
   return (
     <div className="min-h-screen bg-white text-slate-900 [color-scheme:light]">
@@ -252,6 +263,9 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
               </p>
             </div>
           </div>
+          {/* ⭐ 16/11/2026 — L'ARGUMENT DE VENTE : les vidéos + le coach qui suit
+              la famille, compté au build (components/accueil/CompteurFamille.tsx). */}
+          {compteur && <CompteurFamille variante={compteur} />}
           {/* ⭐ 03/11/2026 — Frédéric : « EleveAI adaptée à huit pays
               francophones, à mettre dans la page d'accueil ». Sous le titre,
               visible de tous ; les 8 pays du plan, voir lib/aventure/pays.ts.
@@ -286,7 +300,7 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
           </Link>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             <Nuage Icone={GraduationCap} titre="Tout le programme">
-              Du CP à la Terminale : {totalMicros.toLocaleString("fr-FR")} micro-compétences de maths et {totalVideos.toLocaleString("fr-FR")}+ vidéos, rangées comme le programme officiel.
+              Du CP à la Terminale : {totalMicros.toLocaleString("fr-FR")} micro-compétences de maths et {compteurVideos.nombreTexte} vidéos, rangées comme le programme officiel.
             </Nuage>
             <Nuage Icone={Target} titre="Chacun à son niveau">
               Le coach trouve ce qui manque à chaque élève et l&apos;entraîne là-dessus, pas sur ce qu&apos;il sait déjà. Deux élèves, deux parcours.
@@ -456,7 +470,7 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
             ✅ 02/11 : le rectorat n'exige aucune autorisation ; les offres
             ouvrent fin décembre, quand les vidéos seront faites. Prix adapté à
             chaque pays. Toujours aucun bouton de paiement avant l'ouverture. */}
-        <section className="mt-12">
+        <section id="familles" className="mt-12 scroll-mt-24">
           <h2 className="text-2xl font-black sm:text-3xl">
             {offresFamille ? (VENTE.ouverte ? "Ce qui est ouvert à tous, et ce qui est proposé aux familles" : "Ce qui est ouvert à tous, et ce qui s'ouvre aux familles fin décembre") : "Pour les élèves et les professeurs"}
           </h2>
@@ -482,7 +496,7 @@ export default function AccueilSuivi({ offresFamille }: { offresFamille: boolean
               </h3>
               <p className="mt-1 text-slate-600">Pour les parents qui veulent savoir où en est leur enfant, sans faire à sa place.</p>
               <ul className="mt-4 space-y-2 text-slate-800">
-                {(VENTE.ouverte ? SUIVI_DES_MAINTENANT.map((texte) => ({ Icone: ClipboardList, texte })) : SUIVI_FAMILLE).map(({ Icone, texte }) => (
+                {suiviFamille.map(({ Icone, texte }) => (
                   <li key={texte} className="flex gap-2">
                     <Icone className="mt-0.5 h-5 w-5 shrink-0 text-sky-600" aria-hidden="true" />
                     <span>{texte}</span>

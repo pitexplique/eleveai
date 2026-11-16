@@ -16,6 +16,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { cgvEnVigueur } from "@/lib/legal/editeur";
 import CompteurReponsesCoach from "@/components/coach/CompteurReponsesCoach";
+import { CAP_VIDEOS, ECHEANCE_CAP, etatCompteurVideos } from "@/lib/videos/compteur";
 import {
   IconeInstagram,
   IconeYoutube,
@@ -262,6 +263,25 @@ const francaisClasses = [
   { label: "3e", slug: "3e" },
 ];
 
+/** « 1 875 vidéos de maths, 5 000 fin janvier 2027 » — même style que les questions. */
+function CompteurVideosPied() {
+  const c = etatCompteurVideos();
+  return (
+    <p className="min-h-6 text-base text-slate-400">
+      {c.capAtteint ? (
+        <>
+          Plus de <strong className="font-bold tabular-nums text-white">{CAP_VIDEOS.toLocaleString("fr-FR")}</strong> vidéos de maths&nbsp;!
+        </>
+      ) : (
+        <>
+          <strong className="font-bold tabular-nums text-white">{c.nombreTexte}</strong> vidéos de maths,{" "}
+          <strong className="font-bold tabular-nums text-white">{CAP_VIDEOS.toLocaleString("fr-FR")}</strong> {ECHEANCE_CAP}&nbsp;!
+        </>
+      )}
+    </p>
+  );
+}
+
 export default function Footer() {
   return (
     <footer
@@ -500,8 +520,15 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ⭐ 28/10/2026 — le compteur façon IXL, sur toutes les pages. */}
-        <CompteurReponsesCoach sombre className="mt-10 text-center" />
+        {/* ⭐ 28/10/2026 — le compteur façon IXL, sur toutes les pages.
+            ⭐ 16/11 : Frédéric, « les élèves adorent aussi le nombre de questions
+            répondues dans le footer » → on n'y touche pas ; le compteur de
+            vidéos vient À CÔTÉ, même style (deux chiffres vivants). Le nombre
+            de vidéos est calculé au build (lib/videos/compteur.ts). */}
+        <div className="mt-10 flex flex-col items-center justify-center gap-x-8 gap-y-1 text-center sm:flex-row">
+          <CompteurReponsesCoach sombre />
+          <CompteurVideosPied />
+        </div>
 
         <div className="mt-6 flex flex-col gap-2 border-t border-slate-800 pt-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} EleveAI - Tous droits réservés.</p>

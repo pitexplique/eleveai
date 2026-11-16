@@ -104,5 +104,9 @@ export { metadata } from "./metadata";
 export const revalidate = 3600;
 
 export default function AccueilPage() {
-  return <AccueilSuivi offresFamille />;
+  // ⭐ 16/11/2026 — Frédéric choisit la maquette A (« barre ») : les vidéos
+  // comptées (lib/videos/compteur.ts) + « le coach qui suit et aide votre
+  // enfant », avec les exercices et les visiteurs de la semaine
+  // (lib/accueil/chiffres-semaine.ts, à mettre à jour chaque semaine).
+  return <AccueilSuivi offresFamille compteur="barre" />;
 }
