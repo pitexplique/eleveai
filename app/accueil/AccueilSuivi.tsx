@@ -263,9 +263,21 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
               </p>
             </div>
           </div>
-          {/* ⭐ 16/11/2026 — L'ARGUMENT DE VENTE : les vidéos + le coach qui suit
-              la famille, compté au build (components/accueil/CompteurFamille.tsx). */}
-          {compteur && <CompteurFamille variante={compteur} />}
+          {/* ⭐ 17/11/2026, Frédéric : « s'entraîner avec le coach arrive tard alors
+              que c'est le départ » → les deux portes principales (le coach, et le
+              compte qui garde les résultats) remontent juste sous le titre, sur
+              tous les écrans. Avant : après les encarts, les chiffres et les
+              trois nuages (et un doublon téléphone seul, retiré). */}
+          <div className="mt-5 flex flex-wrap justify-center gap-3">
+            <Link href="/coach-ia/maths" className="rounded-full bg-teal-700 px-8 py-4 text-lg font-black text-white shadow-lg hover:bg-teal-800">
+              Essayer le coach gratuitement
+            </Link>
+            <Link href="/auth/signin?inscription=1" className="rounded-full bg-white px-8 py-4 text-lg font-black text-teal-800 shadow ring-2 ring-teal-600 hover:bg-teal-50">
+              Créer un compte pour garder mes résultats
+            </Link>
+          </div>
+          {/* 08/11 : les mots de la collecte (« gratuitement, sans compte »). */}
+          <p className="mt-2 text-sm font-bold text-slate-600">Sans compte et sans abonnement.</p>
           {/* ⭐ 03/11/2026 — Frédéric : « EleveAI adaptée à huit pays
               francophones, à mettre dans la page d'accueil ». Sous le titre,
               visible de tous ; les 8 pays du plan, voir lib/aventure/pays.ts.
@@ -290,14 +302,6 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
               ))}
             </span>
           </Link>
-          {/* 08/11 : sur TÉLÉPHONE, le bouton arrivait après les trois nuages, à
-              plus d'un écran et demi du haut. Il est répété ici, téléphone seul. */}
-          <Link
-            href="/coach-ia/maths"
-            className="mt-5 inline-block rounded-full bg-teal-700 px-7 py-3.5 text-lg font-black text-white shadow-lg hover:bg-teal-800 sm:hidden"
-          >
-            Essayer le coach gratuitement
-          </Link>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             <Nuage Icone={GraduationCap} titre="Tout le programme">
               Du CP à la Terminale : {totalMicros.toLocaleString("fr-FR")} micro-compétences de maths et {compteurVideos.nombreTexte} vidéos, rangées comme le programme officiel.
@@ -309,18 +313,6 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
               Chaque réponse est gardée. Le prof voit les erreurs de toute sa classe ; les parents voient les progrès de leur enfant.
             </Nuage>
           </div>
-          {/* Deux portes principales : le coach, et le compte qui garde les
-              résultats (le suivi). */}
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link href="/coach-ia/maths" className="rounded-full bg-teal-700 px-8 py-4 text-lg font-black text-white shadow-lg hover:bg-teal-800">
-              Essayer le coach gratuitement
-            </Link>
-            <Link href="/auth/signin?inscription=1" className="rounded-full bg-white px-8 py-4 text-lg font-black text-teal-800 shadow ring-2 ring-teal-600 hover:bg-teal-50">
-              Créer un compte pour garder mes résultats
-            </Link>
-          </div>
-          {/* 08/11 : les mots de la collecte (« gratuitement, sans compte »). */}
-          <p className="mt-2 text-sm font-bold text-slate-600">Sans compte et sans abonnement.</p>
           {/* ⭐ PRÉVU POUR LA COLLECTE (lib/collecte.ts), ÉTEINT : Frédéric, 08/11 —
               « ne mets pas Ulule sur l'accueil maintenant, mais prévois-le ».
               Une ligne, pas un bandeau (⛔ la banderole rouge reste retirée). */}
@@ -350,6 +342,12 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
               </Link>
             ))}
           </div>
+          {/* ⭐ 16/11/2026 — L'ARGUMENT DE VENTE : les vidéos + le coach qui suit
+              la famille, compté au build (components/accueil/CompteurFamille.tsx).
+              17/11, Frédéric : APRÈS « Essayer le coach » et les accès directs
+              (vidéos, calcul rapide…), AVANT « Le projet EleveAI » : on agit
+              d'abord, on se fait convaincre ensuite. */}
+          {compteur && <CompteurFamille variante={compteur} />}
         </div>
       </section>
 
