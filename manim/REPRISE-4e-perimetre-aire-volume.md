@@ -46,12 +46,16 @@ Ouvert le 15/11/2026. 30 micros du coach, plan : `manim/PLAN-perimetre-aire-volu
 | S4 `patron_pyramide` (dé à 4 faces) | ✅ | ✅ | ✅ 200,2 s / 57,0 s, bords 0 |
 | S5 `vision_section` (muscle, scanner) | ✅ | ✅ | ✅ 201,8 s / 56,5 s, bords 0 |
 | S6 `vision_defi` (drone) | ✅ | ✅ | ✅ 208,4 s / 53,4 s, bords 0 |
-| P1 → P5 (périmètre) | ⏳ | ⏳ | — |
+| P1 `aire_perimetre_comprendre`+3 (skatepark) | ✅ | ✅ | ✅ 215,4 s / 62,6 s, bords 0 |
+| P2 `aire_perimetre_cercle` (margelle) | ✅ | ✅ | ✅ 208,3 s / 64,9 s, bords 0 |
+| P3 `aire_perimetre_figure` (piste BMX) | ✅ | ✅ | ✅ 210,4 s / 64,3 s, bords 0 |
+| P4 `aire_perimetre_probleme` (tour de piste) | ⏳ | ⏳ | — |
+| P5 `aire_perimetre_defi` (enclos) | ⏳ | ⏳ | — |
 | A1 → A5 (aire) | ⏳ | ⏳ | — |
 | T1 → T8 (3e) | ⏳ | ⏳ | — |
 
-**10 épisodes finis sur 28** (V1 à V4, S1 à S6) — paysages et shorts rendus en HD,
-`verifier-bords-video` = 0 sur les 20 MP4. **18 restent à écrire et à rendre.**
+**13 épisodes finis sur 28** (V1 à V4, S1 à S6, P1 à P3) — paysages et shorts rendus en HD,
+`verifier-bords-video` = 0 sur les 26 MP4. **15 restent à écrire et à rendre.**
 ⭐ Le LOT SOLIDES est COMPLET : les 6 micros `vision_espace` de 4e sont couverts.
 
 Chaîne d'un épisode : script paysage → dry run `AUDIT=1 BORDS=1` jusqu'à 0 AVANCE / RETARD / TARD /
@@ -117,6 +121,28 @@ BORD → script short (même contrôle, en `-r 1080,1920`) → `manim/poste2/4e_
     (« ajouté 6 000 ») ou passer `n=2`.
 23. Un visuel faux reste faux même s'il est joli : quatre petits disques posés sur un grand ne le
     remplissent pas. Quatre QUARTS du grand disque, si — et ils ont bien l'aire du petit (S5 short).
+
+### Leçons ajoutées par le lot Périmètre (P1 à P4, 16/11)
+24. ⛔⛔ **Un morceau ne contient jamais un nombre ET un mot long dits à plus de 0,4 s d'écart.**
+    La liste de ce qui s'est fait prendre : « rayon 4 cm », « 4 m de diamètre », « 25 € le mètre »,
+    « 1 m plus loin », « de 36 m de rayon », « 6 m de haut », « rayon 6 cm ». Deux morceaux,
+    toujours : le nombre d'un côté, le mot de l'autre.
+25. ⛔⛔ **Vérifier que le premier mot long d'une étiquette n'est pas caché à la fin de la voix.**
+    « Elle coûte » attendait le « elle » de « Combien coûte-t-elle ? » et « Prix : » le « prix »
+    de « Quel est le prix ? » : tout l'écran partait 2,5 s en retard. Prendre un mot dit AU BON
+    ENDROIT (« La bordure : », « La barrière : »).
+26. ⛔ **Un `au_mot` placé AVANT un texte que le gabarit attend déjà met ses autres mots en TARD.**
+    Sur la page de garde, `au_mot("400 mètres")` puis la ligne « fait-il 400 mètres ? » : « fait »
+    était déjà dit. On laisse le gabarit attendre tout seul, et on réserve `au_mot` aux figures.
+27. Dans un SHORT, `au_mot` se pose sur LE NOMBRE, jamais sur le début de la phrase
+    (« 31 mètres », pas « Le virage ajoute 31 mètres ») : sinon le nombre s'écrit 1 s trop tôt.
+28. ⛔ **La phrase de réponse d'un short ne porte que les nombres dits APRÈS le premier point**
+    de la voix de réponse : `_poser` ne cherche qu'à partir de là. Un nombre dit avant (« 504 »,
+    « 400 », « 60 ») s'écrit en avance ou en retard, jamais au bon moment.
+29. ⛔ Dans un SHORT, l'audit efface AUSSI l'espace insécable : « 2 000 » devient « 2000 »,
+    introuvable dans la voix. Les nombres à quatre chiffres restent aux paysages.
+30. Trois diamètres bout à bout font UNE ligne à l'œil : on les sépare par des barres blanches et
+    on alterne les teintes, sinon l'élève ne peut pas compter « un peu plus de trois » (P2).
 
 ## Le PILOTE V2 `volume_pyramide` (15/11) — vidéo COMMUNE 4e + 3e
 
