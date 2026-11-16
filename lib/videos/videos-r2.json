@@ -8701,6 +8701,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_comparer&display=simple"
  },
+ "cp-masse-estimer": {
+  "fichier": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer.mp4",
+  "poster": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer.png",
+  "vignette": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer.vignette.webp",
+  "titre": "Trois chiens : lequel est le plus léger ? — Ranger des masses — épisode 3 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_contenance_estimer&display=simple"
+ },
+ "cp-masse-estimer-short": {
+  "fichier": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer-short.mp4",
+  "poster": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer-short-miniature.png",
+  "vignette": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer-short-miniature.vignette.webp",
+  "titre": "Trois chats sur ma branche : qui monte en premier ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_contenance_estimer&display=simple"
+ },
  "cp-masse-lexique": {
   "fichier": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique.mp4",
   "poster": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique.png",

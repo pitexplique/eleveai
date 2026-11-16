@@ -28,6 +28,8 @@ EP = [
      "gros ne veut pas dire lourd", False, "blanche"),
     ("cp", "comparer", "02-comparer", ["COMPARER", "DES MASSES"], "Le plateau qui descend",
      "porte le plus lourd !", True, "blanche"),
+    ("cp", "estimer", "03-estimer", ["RANGER", "DES MASSES"], "Du plus léger au plus lourd",
+     "on compare deux par deux !", True, "blanche"),
 ]
 
 

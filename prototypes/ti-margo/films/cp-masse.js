@@ -97,3 +97,70 @@ function biscuitCraie(c,x,y,r,z=1){ if(z<=0) return; r*=Math.min(1.15,z);
 function deuxAuPlusM(){ const CL=(window.CUES||{})[VIDEO]||{};
   for(const k in CL){ const res=[]; for(const x of CL[k]){ const n=res.length;
     if(n>=2&&res[n-1][1]===x[1]&&res[n-2][1]===x[1]) continue; res.push(x); } CL[k]=res; } }
+
+/* ---- Épisode 03 (estimer) : la branche, les chats, et les trois animaux du commentaire ---- */
+/* La branche : le tronc à gauche (x0), la branche jusqu'à x1, à la hauteur y ; elle plie de « pli » px au bout.
+   brancheY donne la hauteur du DESSUS de la branche en x (pour y asseoir un chat). */
+const BR={x0:100,x1:740,y:430,ep:26};
+const brancheY=(x,pli)=>{ const u=Math.max(0,Math.min(1,(x-BR.x0)/(BR.x1-BR.x0))); return BR.y+pli*u*u-BR.ep/2; };
+function brancheCraie(c,pli,crac=0){ const N=24;
+  c.fillStyle='#6f4518'; c.fillRect(28,150,86,600);
+  c.strokeStyle='#8a5a2b'; c.lineWidth=BR.ep; c.lineCap='round'; c.beginPath();
+  for(let k=0;k<=N;k++){ const x=BR.x0+(BR.x1-BR.x0)*k/N, y=brancheY(x,pli)+BR.ep/2; k?c.lineTo(x,y):c.moveTo(x,y); } c.stroke();
+  c.fillStyle='#51cf66'; const yb=brancheY(BR.x1,pli);
+  for(const [dx,dy,r] of [[18,-8,24],[40,12,20],[6,24,18]]){ c.beginPath(); c.ellipse(BR.x1+dx,yb+dy,r,r*.6,.5,0,7); c.fill(); }
+  if(crac>0){ /* la fêlure près du tronc, en zigzag jaune */
+    const u=Math.min(1,crac); c.strokeStyle=CRAIE.jaune; c.lineWidth=7; c.lineJoin='round'; c.beginPath();
+    const x=158, y=brancheY(x,pli)+BR.ep/2; c.lineWidth=9; c.moveTo(x-6,y-44*u); c.lineTo(x+16,y-18*u); c.lineTo(x-10,y+4*u); c.lineTo(x+16,y+26*u); c.lineTo(x-2,y+46*u); c.stroke();
+    c.lineWidth=6; c.beginPath(); c.moveTo(x+30,y-30*u); c.lineTo(x+52,y-48*u); c.moveTo(x+32,y+30*u); c.lineTo(x+54,y+46*u); c.stroke(); } }
+
+/* Un chat assis : (x, yBas) = le milieu, en bas ; s = l'échelle (1 = 142 px de haut). raye = des rayures sombres. */
+function chatCraie(c,x,yBas,s=1,z=1,coul='#adb5bd',raye=false){ if(z<=0) return; s*=Math.min(1.15,z);
+  const by=yBas-48*s, hy=yBas-108*s, bord='#343a40';
+  c.strokeStyle=coul; c.lineWidth=12*s; c.lineCap='round'; c.beginPath(); c.moveTo(x+46*s,yBas-14*s);
+  c.quadraticCurveTo(x+96*s,yBas-20*s,x+84*s,yBas-78*s); c.stroke();
+  c.fillStyle=coul; c.strokeStyle=bord; c.lineWidth=3.5;
+  c.beginPath(); c.ellipse(x,by,50*s,50*s,0,0,7); c.fill(); c.stroke();
+  for(const u of [-1,1]){ c.beginPath(); c.ellipse(x+u*20*s,yBas-6*s,15*s,9*s,0,0,7); c.fill(); c.stroke(); }
+  for(const u of [-1,1]){ c.beginPath(); c.moveTo(x+u*12*s,hy-26*s); c.lineTo(x+u*30*s,hy-54*s); c.lineTo(x+u*34*s,hy-12*s); c.closePath(); c.fill(); c.stroke(); }
+  c.beginPath(); c.arc(x,hy,34*s,0,7); c.fill(); c.stroke();
+  if(raye){ c.strokeStyle='rgba(60,20,0,.55)'; c.lineWidth=6*s; for(const u of [-.5,0,.5]){ c.beginPath(); c.moveTo(x+u*40*s,by-36*s); c.lineTo(x+u*30*s,by-12*s); c.stroke(); }
+    c.beginPath(); c.moveTo(x-10*s,hy-32*s); c.lineTo(x-6*s,hy-18*s); c.moveTo(x+10*s,hy-32*s); c.lineTo(x+6*s,hy-18*s); c.stroke(); }
+  c.fillStyle='#94d82d'; for(const u of [-1,1]){ c.beginPath(); c.ellipse(x+u*13*s,hy-4*s,7*s,8*s,0,0,7); c.fill(); }
+  c.fillStyle='#212529'; for(const u of [-1,1]){ c.beginPath(); c.ellipse(x+u*13*s,hy-4*s,2.5*s,6*s,0,0,7); c.fill(); }
+  c.fillStyle='#f783ac'; c.beginPath(); c.moveTo(x-6*s,hy+8*s); c.lineTo(x+6*s,hy+8*s); c.lineTo(x,hy+15*s); c.fill();
+  c.strokeStyle='#f8f9fa'; c.lineWidth=2; for(const u of [-1,1]) for(const v of [-1,1]){ c.beginPath(); c.moveTo(x+u*12*s,hy+12*s); c.lineTo(x+u*40*s,hy+(12+v*7)*s); c.stroke(); } }
+/* Les trois chats du film : le chaton (petit, roux clair), le chat (gris), le gros matou (roux rayé) */
+const CHATS={ chaton:{s:.7,coul:'#ffc078',raye:false}, chat:{s:1.15,coul:'#adb5bd',raye:false}, matou:{s:1.6,coul:'#e8590c',raye:true} };
+const unChat=(c,nom,x,yBas,z=1)=>{ const k=CHATS[nom]; chatCraie(c,x,yBas,k.s,z,k.coul,k.raye); };
+
+/* Un éléphant gris, de profil, trompe à droite : (x, yBas) = le milieu, au sol ; s = l'échelle (1 ≈ 300 × 230 px) */
+function elephantCraie(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const G='#adb5bd', B='#495057';
+  c.fillStyle=G; c.strokeStyle=B; c.lineWidth=4;
+  for(const u of [-.75,-.35,.25,.6]){ c.beginPath(); c.roundRect(x+u*110*s-17*s,yBas-80*s,34*s,80*s,8*s); c.fill(); c.stroke(); }
+  c.beginPath(); c.ellipse(x-10*s,yBas-120*s,120*s,72*s,0,0,7); c.fill(); c.stroke();
+  c.strokeStyle=G; c.lineWidth=26*s; c.lineCap='round'; c.beginPath(); c.moveTo(x+140*s,yBas-130*s);
+  c.quadraticCurveTo(x+175*s,yBas-60*s,x+150*s,yBas-22*s); c.stroke();
+  c.fillStyle=G; c.strokeStyle=B; c.lineWidth=4; c.beginPath(); c.arc(x+112*s,yBas-160*s,52*s,0,7); c.fill(); c.stroke();
+  c.fillStyle='#ced4da'; c.beginPath(); c.ellipse(x+82*s,yBas-152*s,34*s,48*s,-.2,0,7); c.fill(); c.stroke();
+  c.fillStyle='#212529'; c.beginPath(); c.arc(x+128*s,yBas-176*s,6*s,0,7); c.fill();
+  c.fillStyle='#f8f9fa'; c.beginPath(); c.moveTo(x+130*s,yBas-124*s); c.quadraticCurveTo(x+162*s,yBas-112*s,x+168*s,yBas-132*s); c.lineTo(x+140*s,yBas-134*s); c.fill();
+  c.strokeStyle=B; c.lineWidth=5; c.beginPath(); c.moveTo(x-128*s,yBas-130*s); c.lineTo(x-150*s,yBas-96*s); c.stroke(); }
+/* Une fourmi noire, toute petite : (x, yBas) = le milieu, au sol ; s = l'échelle (1 ≈ 90 px de long) */
+function fourmiCraie(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const y=yBas-18*s;
+  c.strokeStyle='#f8f9fa'; c.lineWidth=3; c.lineCap='round';
+  for(const u of [-14,0,14]){ c.beginPath(); c.moveTo(x+u*s,y); c.lineTo(x+(u-10)*s,yBas); c.moveTo(x+u*s,y); c.lineTo(x+(u+10)*s,yBas); c.stroke(); }
+  c.beginPath(); c.moveTo(x+36*s,y-8*s); c.lineTo(x+50*s,y-30*s); c.moveTo(x+40*s,y-6*s); c.lineTo(x+60*s,y-22*s); c.stroke();
+  c.fillStyle='#212529'; c.strokeStyle='#f8f9fa'; c.lineWidth=2.5;
+  for(const [dx,r] of [[-30,15],[0,9],[32,11]]){ c.beginPath(); c.arc(x+dx*s,y-2*s,r*s,0,7); c.fill(); c.stroke(); } }
+/* Un lapin blanc assis, de profil : (x, yBas) = le milieu, au sol ; s = l'échelle (1 ≈ 170 px de haut) */
+function lapinCraie(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const W='#f8f9fa', B='#868e96';
+  c.fillStyle=W; c.strokeStyle=B; c.lineWidth=3.5;
+  c.beginPath(); c.arc(x-48*s,yBas-36*s,14*s,0,7); c.fill(); c.stroke();
+  c.beginPath(); c.ellipse(x-8*s,yBas-42*s,44*s,42*s,0,0,7); c.fill(); c.stroke();
+  c.beginPath(); c.ellipse(x+10*s,yBas-8*s,26*s,9*s,0,0,7); c.fill(); c.stroke();
+  for(const [dx,rot] of [[16,-.12],[34,.18]]){ c.fillStyle=W; c.beginPath(); c.ellipse(x+dx*s,yBas-140*s,11*s,38*s,rot,0,7); c.fill(); c.stroke();
+    c.fillStyle='#fcc2d7'; c.beginPath(); c.ellipse(x+dx*s,yBas-140*s,5*s,28*s,rot,0,7); c.fill(); }
+  c.fillStyle=W; c.beginPath(); c.arc(x+26*s,yBas-92*s,28*s,0,7); c.fill(); c.stroke();
+  c.fillStyle='#212529'; c.beginPath(); c.arc(x+36*s,yBas-98*s,4.5*s,0,7); c.fill();
+  c.fillStyle='#f783ac'; c.beginPath(); c.arc(x+53*s,yBas-86*s,4.5*s,0,7); c.fill(); }

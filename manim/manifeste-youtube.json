@@ -97314,6 +97314,138 @@
           "microId": "ce1_masse_soupeser"
         }
       ]
+    },
+    {
+      "id": "cp-masse-estimer",
+      "pas_avant": "2027-05-02",
+      "prioritaire": true,
+      "notionId": "masse_contenance",
+      "microId": "cp_masse_contenance_estimer",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer.mp4",
+      "miniature": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer.png",
+      "titre": "Trois chiens : lequel est le plus léger ? — Ranger des masses — épisode 3 · Maths CP",
+      "accroche": "Zoé est toiletteuse : elle lave et coiffe les chiens. Aujourd'hui : un chiot, un chien moyen et un gros chien. Comment les ranger du plus léger au plus lourd ?\n\nDans cette vidéo :\n• pour ranger, on compare deux par deux\n• du plus léger au plus lourd : le chiot, le chien moyen, le gros chien\n• A pèse plus que B, et B plus que C : donc A est la plus lourde\n• sans balance, on peut deviner : une souris, un chat, un cheval\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : ranger du plus léger au plus lourd : une pastèque, une fraise, une pomme.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_contenance_estimer&display=simple\n\n⚖️ Épisode 3 de la série Masses d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le plus léger ?"
+        ],
+        [
+          "00:16",
+          "Deux par deux"
+        ],
+        [
+          "00:33",
+          "Question 1"
+        ],
+        [
+          "01:12",
+          "Question 2"
+        ],
+        [
+          "01:38",
+          "À toi de jouer"
+        ],
+        [
+          "01:56",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "ranger des masses",
+        "plus léger",
+        "plus lourd",
+        "comparer des masses",
+        "toiletteuse",
+        "chiens",
+        "maths",
+        "CP",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "La boîte A pèse plus que la B. La B pèse plus que la C. Laquelle est la plus lourde ?",
+          "choix": [
+            "la boîte C",
+            "la boîte A",
+            "la boîte B"
+          ],
+          "reponse": 1,
+          "explication": "A pèse plus que B, et B plus que C. Donc A est la plus lourde."
+        },
+        {
+          "t": "01:12",
+          "question": "Une souris, un chat, un cheval. Qui est le plus lourd ?",
+          "choix": [
+            "la souris",
+            "le chat",
+            "le cheval"
+          ],
+          "reponse": 2,
+          "explication": "Le cheval est bien plus lourd que le chat et la souris."
+        }
+      ],
+      "centres": [
+        "animaux"
+      ]
+    },
+    {
+      "id": "cp-masse-estimer-short",
+      "pas_avant": "2027-05-02",
+      "prioritaire": true,
+      "notionId": "masse_contenance",
+      "microId": "cp_masse_contenance_estimer",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "short",
+      "renvoie_vers": "cp-masse-estimer",
+      "fichier": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer-short.mp4",
+      "miniature": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer-short-miniature.png",
+      "titre": "Trois chats sur ma branche : qui monte en premier ? #maths #cp",
+      "accroche": "Trois chats montent sur ma branche : un chaton, un chat, un gros matou. La branche craque !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : un éléphant, une fourmi, un lapin : range-les du plus léger au plus lourd. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_contenance_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cp #primaire",
+      "tags": [
+        "masse",
+        "plus léger",
+        "ranger",
+        "chats",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Qui monte en premier, le plus léger ?",
+          "choix": [
+            "le chaton",
+            "le gros matou",
+            "le chat"
+          ],
+          "reponse": 0,
+          "explication": "Le chaton est le plus léger. Puis le chat, puis le gros matou."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
     }
   ]
 }
