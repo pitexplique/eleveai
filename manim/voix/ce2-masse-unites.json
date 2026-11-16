@@ -1,0 +1,15 @@
+{
+  "00-garde": "Les unités de masse. Un conteneur se pèse-t-il en grammes, en kilogrammes, ou en tonnes ?",
+  "01-situation": "Voici Rayan. Il est grutier au port. Avec sa grue, il soulève des conteneurs énormes et les pose sur les bateaux.",
+  "02-trois": "Trois unités de masse. Le gramme, g, pour les objets légers. Le kilogramme, k g, pour les objets plus lourds. La tonne, t, pour les très lourds.",
+  "03-tonne": "Un conteneur plein pèse 20 tonnes. 1 tonne, c'est 1 000 kilogrammes : la masse d'une petite voiture.",
+  "04-question": "Question ! Le gramme, le kilogramme, la tonne : quelle est la plus petite unité ? A : le kilogramme. B : la tonne. C : le gramme. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. Le gramme est la plus petite : c'est la masse d'un trombone.",
+  "05-kilo": "Dans kilogramme, il y a kilo. Kilo veut dire 1 000. 1 kilogramme, c'est 1 000 grammes.",
+  "06-question": "Question ! Dans le mot kilogramme, que veut dire kilo ? A : 10. B : 1 000. C : 100. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. Kilo veut dire 1 000 : 1 kilogramme, c'est 1 000 grammes. Comme 1 kilomètre, 1 000 mètres.",
+  "07-defi": "À toi de jouer ! Rayan pèse une vis, sa caisse à outils, et un bateau. Quelle unité pour chacun ? Mets pause, et cherche !",
+  "07b-correction": "Correction. La vis, en grammes. La caisse à outils, en kilogrammes. Le bateau, en tonnes.",
+  "08-finale": "Ce que tu as appris. Trois unités : le gramme, le kilogramme, la tonne. Kilo veut dire 1 000.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,7 @@
+{
+  "voix": "ce2-masse-{ep}-short",
+  "sons": "public/sons/ce2-masse-{ep}-short",
+  "sortie": "manim/sorties/ce2/maths/masse/{num}-{ep}",
+  "nom": "eleveai-maths-ce2-masse-{ep}-short",
+  "episodes": { "unites": "01", "relations": "02", "comparer": "03", "choisir-unite": "04", "estimer": "05", "probleme": "06", "defi": "07" }
+}

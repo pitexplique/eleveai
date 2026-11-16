@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Ma copine et moi, on fait un pari. Le plus lourd : 1 kilogramme de plumes, ou 1 kilogramme de cailloux ?",
+  "01-pari": "Elle dit : les cailloux, c'est sûr ! Je pose les deux sacs sur la balance…",
+  "02-question": "Question ! Que fait la balance ? A : elle reste en équilibre. B : les cailloux descendent. C : les plumes descendent. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! 1 kilogramme, c'est 1 kilogramme ! Le sac de plumes est juste plus gros.",
+  "03-fin": "Pari gagné ! Mais je dors sur l'oreiller de plumes, pas sur les cailloux.",
+  "04-commentaire": "À toi : combien de grammes dans 2 kilogrammes de plumes ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

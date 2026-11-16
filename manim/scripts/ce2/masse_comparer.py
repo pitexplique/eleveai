@@ -24,7 +24,7 @@ from masse_commun import *  # noqa: E402,F403
 _V = {e["id"]: e for e in json.load(open(Path(__file__).resolve().parent / "masse_voix.json", encoding="utf-8"))}
 EP = _V["ce2-masse-comparer"]
 Q1, Q2 = EP["questions"]
-ABR = {"1 000 grammes": "1 000 g", "kilogramme": "kg", "grammes": "g"}
+ABR = {}  # choix courts : écrits en entier, comme la voix
 
 
 def court(s):
@@ -91,32 +91,35 @@ class MasseComparerBase(PaysageMasse):
     # ── 02 : même unité ─────────────────────────────────────────────────────
     def ecran_meme_unite(self):
         self.ecran("02-meme-unite")
-        b = Balance(3.8).move_to(P(-3.6, 0.0))
+        b = Balance(3.4).move_to(P(-4.2, 0.0))
         pa, pb = part_fromage(0.6), part_fromage(0.8)
         b.poser(pa, "g")
         b.poser(pb, "d")
         self.add(b)
         self.au_mot("la même unité")
+        XP = -0.9
         l0 = self.t("Même unité : c'est facile !", 36, JAUNE_TITRE)
-        self.col(l0, 2.4)
+        self.col(l0, 2.4, XP)
         self.play(FadeIn(l0, shift=UP * 0.1), run_time=0.35)
         self.au_mot("part de 300")
-        ea = self.etiquette(pa, "300 g", 26, audit=True, cote=UP, buff=0.1)
+        ea = self.etiquette_plateau(b, "g", "300 g", audit=True)
         self.play(FadeIn(pa, shift=DOWN * 0.3), FadeIn(ea), run_time=0.35)
         self.au_mot("autre de 450")
-        eb = self.etiquette(pb, "450 g", 26, audit=True, cote=UP, buff=0.1)
-        self.play(FadeIn(pb, shift=DOWN * 0.3), FadeIn(eb), run_time=0.35)
-        basculer(self, b, -0.5, [pa, ea], [pb, eb])
+        eb = self.etiquette_plateau(b, "d", "450 g", audit=True)
+        self.play(FadeIn(pb, shift=DOWN * 0.3), FadeIn(eb), run_time=0.25)
         l1 = self.ligne([("450", BLEU_D), ("est plus grand que", WHITE), ("300", BLEU_D)], 38, buff=0.2)
-        self.col(l1, 1.1)
-        self.aux_extraits(list(l1), [("grammes. 450", 1), "est plus grand", ("que 300", 1)])
+        self.col(l1, 1.1, XP)
+        for m in l1:
+            hors_audit(m)  # nombres déjà dits par les étiquettes
+        self.aux_extraits([VGroup(l1[0], l1[1]), l1[2]], [("grammes. 450", 1), ("que 300", 1)])
+        basculer(self, b, -0.5, [pa, ea], [pb, eb], run_time=0.5)
         self.au_mot("La part de 450")
         l2 = self.ligne([("La part de", WHITE), ("450 g", VERT_OK)], 36, buff=0.2)
-        self.col(l2, -0.1)
+        self.col(l2, -0.1, XP)
         self.play(FadeIn(l2, shift=UP * 0.1), run_time=0.3)
         self.au_mot("est la plus lourde")
-        res = self.gros("est la plus lourde.", fs=46)
-        self.col(res, -1.0)
+        res = self.gros("est la plus lourde.", fs=42)
+        self.col(res, -1.0, XP)
         self.play(FadeIn(res, scale=1.2), Indicate(pb, color=VERT_OK, scale_factor=1.1), run_time=0.5)
         self.attendre_voix()
 
@@ -127,8 +130,8 @@ class MasseComparerBase(PaysageMasse):
         a, c = meule(0.6), part_fromage(0.75)
         b.poser(a, "g")
         b.poser(c, "d")
-        ea = self.etiquette(a, "1 kg", 26, cote=UP, buff=0.1)
-        ec = self.etiquette(c, "900 g", 26, cote=UP, buff=0.1)
+        ea = self.etiquette_plateau(b, "g", "1 kg")
+        ec = self.etiquette_plateau(b, "d", "900 g")
         self.add(b, a, c, ea, ec)
         XP = -0.9
         self.au_mot("Avec deux unités")
@@ -141,6 +144,7 @@ class MasseComparerBase(PaysageMasse):
         self.play(FadeIn(l1, shift=UP * 0.1), run_time=0.3)
         l2 = self.ligne([("1 kg", BLEU_D), ("= 1 000 g", VERT_OK)], 42, buff=0.3)
         self.col(l2, 1.15, XP)
+        hors_audit(l2[1])  # « 1 000 » : posé à son mot
         self.au_mot("1 kilogramme, c'est")
         self.play(FadeIn(l2[0], shift=UP * 0.1), Indicate(ea, color=JAUNE_TITRE), run_time=0.3)
         self.au_mot("1 000 grammes")
@@ -148,11 +152,13 @@ class MasseComparerBase(PaysageMasse):
         self.play(FadeIn(l2[1], shift=UP * 0.1), Transform(ea, e1000), run_time=0.4)
         l3 = self.ligne([("On compare", WHITE), ("1 000", BLEU_D), ("et", WHITE), ("900", BLEU_D)], 36, buff=0.18)
         self.col(l3, 0.2, XP)
+        hors_audit(l3[1])
         self.au_mot("On compare 1 000")
         self.play(FadeIn(l3[:2], shift=UP * 0.1), run_time=0.25)
         self.au_mot("et 900")
         self.play(FadeIn(l3[2:], shift=UP * 0.1), run_time=0.25)
         l4 = self.ligne([("1 000", VERT_OK), ("est plus grand.", WHITE)], 36, buff=0.2)
+        hors_audit(l4[0])
         self.col(l4, -0.65, XP)
         self.au_mot("1 000 est plus grand")
         self.play(FadeIn(l4, shift=UP * 0.1), run_time=0.3)
@@ -180,11 +186,11 @@ class MasseComparerBase(PaysageMasse):
             sc.play(Indicate(fig, color=VERT_OK, scale_factor=1.04), run_time=0.2)
 
         self.question_gauche("04-question", "04b-reponse",
-                             ["Balance à deux plateaux :", "1 kg d'un côté,", "1 000 g de l'autre.",
+                             ["Balance à deux plateaux :", "1 kg d'un côté, 1 000 g de l'autre.",
                               "Que se passe-t-il ?"],
-                             [self.choix(court(c)) for c in Q1["choix"]], Q1["reponse"],
-                             ["1 kg = 1 000 g :", "même masse,", "la balance est en équilibre."],
-                             -0.75, mot_q="Balance à deux plateaux", autres_q=autres_q, autres_r=apres)
+                             [self.choix(court(c), fs=24) for c in Q1["choix"]], Q1["reponse"],  # même taille pour les 3
+                             ["1 kg = 1 000 g.", "Même masse : les plateaux", "restent au même niveau."],
+                             -0.75, q_sans_audit=(1,), mot_q="Balance à deux plateaux", autres_q=autres_q, autres_r=apres)
 
     # ── 05 : le piège ───────────────────────────────────────────────────────
     def ecran_piege(self):
@@ -195,18 +201,15 @@ class MasseComparerBase(PaysageMasse):
         self.play(Write(tit), run_time=0.4)
         n = self.ligne([("900", ROUGE_ERREUR), (">", WHITE), ("1", ROUGE_ERREUR)], 64, buff=0.4)
         n.move_to(P(-3.4, 1.3))
-        self.au_mot("900 est plus grand que 1")
-        self.play(FadeIn(n, scale=1.2), run_time=0.4)
+        self.aux_extraits([VGroup(n[0], n[1]), n[2]], ["900 est plus grand", ("que 1", 1, 0.15)], run_time=0.2)
         self.au_mot("Mais 1 kilogramme")
         barre = Line(n.get_corner(DL), n.get_corner(UR), color=ROUGE_ERREUR, stroke_width=8)
         vrai = self.ligne([("1 kg", BLEU_D), ("=", WHITE), ("1 000 g", VERT_OK)], 48, buff=0.3).move_to(P(-3.4, -0.1))
-        self.play(Create(barre), run_time=0.3)
+        hors_audit(vrai[2])  # « 1 000 » : posé à son mot
+        self.play(Create(barre), FadeIn(vrai[0], shift=UP * 0.2), run_time=0.3)
         self.au_mot("c'est 1 000 grammes")
-        self.play(FadeIn(vrai, shift=UP * 0.2), run_time=0.35)
+        self.play(FadeIn(vrai[1:], shift=UP * 0.2), run_time=0.3)
         self.insister(vrai, 1.15, 0.25)
-        cmp_ = self.ligne([("1 000 g", VERT_OK), (">", WHITE), ("900 g", BLEU_D)], 48, buff=0.3).move_to(P(-3.4, -1.3))
-        hors_audit(cmp_)
-        self.play(FadeIn(cmp_, shift=UP * 0.2), run_time=0.35)
         self.au_mot("On compare les nombres seulement")
         res = self.bloc(["On compare les nombres", "seulement avec", "la même unité."], 36, JAUNE_TITRE)
         self.col(res, 0.4, 1.2)
@@ -220,8 +223,8 @@ class MasseComparerBase(PaysageMasse):
         b = Balance(3.0, s=0.8).move_to(P(-3.9, 1.2))
         pl = b.poser(plumes(0.55), "g")
         ca = b.poser(cailloux(0.6), "d")
-        ep = self.etiquette(pl, "1 kg", 22, cote=UP, buff=0.08)
-        ec = self.etiquette(ca, "1 kg", 22, cote=UP, buff=0.08)
+        ep = self.etiquette_plateau(b, "g", "1 kg", 22)
+        ec = self.etiquette_plateau(b, "d", "1 kg", 22)
         fig = VGroup(b, pl, ca, ep, ec)
 
         def autres_q(sc):
@@ -235,7 +238,7 @@ class MasseComparerBase(PaysageMasse):
                              [self.choix(court(c)) for c in Q2["choix"]], Q2["reponse"],
                              ["1 kg, c'est 1 kg !", "Les plumes prennent", "plus de place,",
                               "même masse."],
-                             -0.75, mot_q="Qu'est-ce qui est le plus lourd", autres_q=autres_q, autres_r=apres)
+                             -0.75, q_sans_audit=(1, 2), mot_q="Qu'est-ce qui est le plus lourd", autres_q=autres_q, autres_r=apres)
 
     # ── 07 : le défi (ranger 3 fromages) ────────────────────────────────────
     def trois(self):
@@ -258,7 +261,7 @@ class MasseComparerBase(PaysageMasse):
         self.play(FadeIn(l1, shift=UP * 0.1), run_time=0.35)
         for f_, s, ex in zip(g, ["2 kg", "1 500 g", "800 g"], ["2 kilogrammes", "1 500", "et 800"]):
             self.au_mot(ex)
-            self.play(FadeIn(self.etiquette(f_, s, 28, audit=True), scale=1.2), run_time=0.25)
+            self.play(FadeIn(self.etiquette(f_, s, 28), scale=1.2), run_time=0.25)  # posée à son mot
         self.au_mot("Dans quel ordre")
         q = self.t("Dans quel ordre ?", 40, JAUNE_TITRE)
         gauche(q, -0.9, 0.0)
@@ -279,6 +282,7 @@ class MasseComparerBase(PaysageMasse):
         self.play(FadeIn(l0, shift=UP * 0.1), run_time=0.3)
         a = self.ligne([("2 kg", BLEU_D), ("= 2 000 g", VERT_OK)], 40, buff=0.3)
         self.col(a, 1.4, XP)
+        hors_audit(a[1])
         self.aux_extraits([a[0], a[1]], ["2 kilogrammes, c'est", "2 000 grammes"])
         self.play(Transform(ets[0], hors_audit(Text("2 000 g", font_size=28, color=VERT_OK, weight=BOLD)
                                                 .move_to(ets[0]))), run_time=0.4)

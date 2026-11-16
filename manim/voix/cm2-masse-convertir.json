@@ -1,0 +1,16 @@
+{
+  "00-garde": "Convertir des masses. 0,75 kilogramme, c'est combien de grammes ?",
+  "01-situation": "Voici Mathis. Il est maréchal-ferrant : il fabrique et pose les fers des chevaux. Un fer pèse 0,75 kilogramme.",
+  "02-tableau": "Le tableau des unités : kilogramme, hectogramme, décagramme, gramme. Chaque colonne vaut 10 fois celle de droite. Du kilogramme au gramme : on multiplie par 1 000.",
+  "03-placer": "0,75 kilogramme dans le tableau. Le 0 sous les k g, le 7 sous les h g. Le 5 sous les d a g, un zéro sous les g. On lit : 750 grammes.",
+  "04-question": "Question ! 1,2 kilogramme, c'est combien de grammes ? A : 120 grammes. B : 1 200 grammes. C : 1 002 grammes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 1,2 fois 1 000 : 1 200 grammes. Les chiffres avancent de 3 rangs, pas de 1 !",
+  "05-diviser": "Dans l'autre sens, on divise par 1 000. 4 fers : 4 fois 750, 3 000 grammes. 3 000 divisé par 1 000 : 3 kilogrammes.",
+  "06-question": "Question ! Un élève écrit : 250 grammes, c'est 2,5 kilogrammes. A-t-il raison ? A : oui. B : non, c'est 25 kilogrammes. C : non, c'est 0,25 kilogramme. Mets pause, et choisis !",
+  "06b-reponse": "Réponse C. Des grammes aux kilogrammes, on divise par 1 000. 250 divisé par 1 000 : 0,25 kilogramme.",
+  "07-mg": "Et les toutes petites masses ? Le comprimé du cheval pèse 500 milligrammes. 1 gramme, c'est 1 000 milligrammes : 500 milligrammes, c'est 0,5 gramme.",
+  "08-defi": "À toi de jouer ! Mathis commande 24 fers de 750 grammes. Combien de kilogrammes en tout ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 24 fois 750 : 18 000 grammes. 18 000 divisé par 1 000 : 18 kilogrammes.",
+  "09-finale": "Ce que tu as appris. Du kilogramme au gramme, on multiplie par 1 000. Du gramme au kilogramme, on divise par 1 000. Le tableau place la virgule.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

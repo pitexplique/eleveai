@@ -1,0 +1,15 @@
+{
+  "00-garde": "Ranger des masses. Trois chiens : lequel est le plus léger ?",
+  "01-situation": "Voici Zoé. Elle est toiletteuse : elle lave et coiffe les chiens. Aujourd'hui : un chiot, un chien moyen et un gros chien.",
+  "02-deux-par-deux": "Pour ranger, on compare deux par deux. Le chiot est plus léger que le chien moyen. Le chien moyen est plus léger que le gros chien.",
+  "03-rang": "Du plus léger au plus lourd : le chiot, le chien moyen, le gros chien.",
+  "04-question": "Question ! La boîte A pèse plus que la B. La B pèse plus que la C. Laquelle est la plus lourde ? A : la boîte C. B : la boîte A. C : la boîte B. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. A pèse plus que B, et B plus que C. Donc A est la plus lourde.",
+  "05-deviner": "Sans balance, on peut deviner. Une souris est plus légère qu'un chat. Un chat est plus léger qu'un cheval.",
+  "06-question": "Question ! Une souris, un chat, un cheval. Qui est le plus lourd ? A : la souris. B : le chat. C : le cheval. Mets pause, et choisis !",
+  "06b-reponse": "Réponse C. Le cheval est bien plus lourd que le chat et la souris.",
+  "07-defi": "À toi de jouer ! Range du plus léger au plus lourd : une pastèque, une fraise, une pomme. Mets pause, et cherche !",
+  "07b-correction": "Correction. La fraise, puis la pomme, puis la pastèque.",
+  "08-finale": "Ce que tu as appris. Pour ranger des masses, on compare deux par deux. Du plus léger au plus lourd.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

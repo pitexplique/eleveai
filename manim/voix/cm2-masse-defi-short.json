@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! On prend le téléphérique. Il porte 0,4 tonne. Nous sommes 5 enfants de 35 kilogrammes, avec un moniteur de 85 kilogrammes.",
+  "01-calcul": "Ma copine sort sa calculatrice…",
+  "02-question": "Question ! Combien de kilogrammes reste-t-il ? A : 260 kilogrammes. B : 140 kilogrammes. C : 3,4 kilogrammes. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 0,4 tonne, c'est 400 kilogrammes. 5 fois 35, plus 85 : 260. 400 moins 260 : 140.",
+  "03-fin": "Il reste de la place… pour le pique-nique !",
+  "04-commentaire": "À toi : combien d'enfants de 35 kilogrammes peuvent encore monter ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

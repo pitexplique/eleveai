@@ -64,6 +64,12 @@ class Balance(VGroup):
             self.plateaux[cle] = haut_pl
         self.add(socle, colonne, *pend, fleau, axe, aig)
 
+    def sous(self, cote, buff=0.28):
+        """Le point juste SOUS le plateau (pour l'étiquette de masse, loin des fils et du fléau)."""
+        pl = self.plateaux[cote]
+        prof = self.larg * 0.17 * (1 - np.sin(0.35))
+        return pl.get_center() + P(0, -prof - buff)
+
     def sur(self, cote):
         return self.plateaux[cote].get_center() + P(0, 0.02)
 
@@ -240,7 +246,9 @@ def sac(texte=None, s=1.0, couleur="#d6b98c"):
 def paquet(texte=None, s=1.0, couleur="#60a5fa"):
     corps = RoundedRectangle(width=1.0 * s, height=0.7 * s, corner_radius=0.06 * s, fill_color=couleur,
                              fill_opacity=1, stroke_color=WHITE, stroke_width=2)
-    g = VGroup(corps, Line(corps.get_top(), corps.get_bottom(), color=WHITE, stroke_width=2))
+    g = VGroup(corps)
+    if not texte:  # le ruban du paquet, seulement s'il n'y a pas d'étiquette à lire
+        g.add(Line(corps.get_top(), corps.get_bottom(), color=WHITE, stroke_width=2))
     if texte:
         g.add(hors_audit(Text(texte, font_size=int(20 * s), color=WHITE, weight=BOLD)).move_to(corps))
     return g
@@ -286,6 +294,11 @@ class PaysageMasse(PaysageContenanceCE2):
     """La base des paysages masses (CP → CM2). identite, ceinture, nom_voix, fichier_marques par épisode."""
     identite = "Maths CE2 — EleveAI"
     ceinture = "jaune"
+
+    def etiquette_plateau(self, b, cote, s, fs=26, couleur=JAUNE_TITRE, audit=False):
+        """L'étiquette de masse SOUS un plateau de la balance b (« 450 g »)."""
+        t = Text(s, font_size=fs, color=couleur, weight=BOLD).move_to(b.sous(cote))
+        return t if audit else hors_audit(t)
 
     def etiquette(self, obj, s, fs=28, couleur=JAUNE_TITRE, buff=0.18, audit=False, cote=DOWN):
         """L'étiquette de masse sous (ou au-dessus d') un objet. Hors audit par défaut."""

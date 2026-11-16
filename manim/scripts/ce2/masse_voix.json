@@ -771,8 +771,8 @@
    "01-situation": "Voici Anaïs. Elle est fromagère. Elle coupe des parts de fromage et les pèse. Un client veut le plus gros morceau : 1 kilogramme, ou 900 grammes ?",
    "02-meme-unite": "Avec la même unité, c'est facile. Une part de 300 grammes, une autre de 450 grammes. 450 est plus grand que 300. La part de 450 grammes est la plus lourde.",
    "03-convertir": "Avec deux unités, on met d'abord la même unité. 1 kilogramme, c'est 1 000 grammes. On compare 1 000 et 900 : 1 000 est plus grand. Le morceau de 1 kilogramme est le plus lourd !",
-   "04-question": "Question ! Balance à deux plateaux : 1 kilogramme d'un côté, 1 000 grammes de l'autre. Que se passe-t-il ? A : les 1 000 grammes descendent. B : les plateaux restent au même niveau. C : le kilogramme descend. Mets pause, et choisis !",
-   "04b-reponse": "Réponse B. 1 kilogramme, c'est 1 000 grammes : même masse, la balance est en équilibre.",
+   "04-question": "Question ! Balance à deux plateaux : 1 kilogramme d'un côté, 1 000 grammes de l'autre. Que se passe-t-il ? A : les grammes descendent. B : rien ne bouge. C : le kilogramme descend. Mets pause, et choisis !",
+   "04b-reponse": "Réponse B. 1 kilogramme, c'est 1 000 grammes. Même masse : les plateaux restent au même niveau.",
    "05-piege": "Attention au piège : 900 est plus grand que 1. Mais 1 kilogramme, c'est 1 000 grammes ! On compare les nombres seulement avec la même unité.",
    "06-question": "Question ! Qu'est-ce qui est le plus lourd : 1 kilogramme de plumes, ou 1 kilogramme de cailloux ? A : les plumes. B : les cailloux. C : c'est pareil. Mets pause, et choisis !",
    "06b-reponse": "Réponse C. 1 kilogramme, c'est 1 kilogramme ! Les plumes prennent plus de place, mais elles ont la même masse.",
@@ -795,12 +795,12 @@
     "cle": "04-question",
     "question": "Balance à deux plateaux : 1 kilogramme d'un côté, 1 000 grammes de l'autre. Que se passe-t-il ?",
     "choix": [
-     "les 1 000 grammes descendent",
-     "les plateaux restent au même niveau",
+     "les grammes descendent",
+     "rien ne bouge",
      "le kilogramme descend"
     ],
     "reponse": 1,
-    "explication": "1 kilogramme, c'est 1 000 grammes : même masse, la balance est en équilibre."
+    "explication": "1 kilogramme, c'est 1 000 grammes. Même masse : les plateaux restent au même niveau."
    },
    {
     "cle": "06-question",

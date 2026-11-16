@@ -1,0 +1,16 @@
+{
+  "00-garde": "Les relations entre les unités. 1 kilogramme 200 grammes, c'est combien de grammes ?",
+  "01-situation": "Voici Emma. Elle est torréfactrice : elle grille les grains de café. Puis elle les met en paquets.",
+  "02-mille": "1 kilogramme, c'est 1 000 grammes. Emma remplit 4 paquets de 250 grammes. 250, 500, 750, 1 000 : 1 kilogramme de café.",
+  "03-demi": "Un demi-kilogramme, c'est la moitié de 1 000 grammes : 500 grammes.",
+  "04-question": "Question ! Un demi-kilogramme, c'est combien de grammes ? A : 50 grammes. B : 200 grammes. C : 500 grammes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. La moitié de 1 000, c'est 500. Un demi-kilogramme, c'est 500 grammes.",
+  "05-kg-et-g": "Un sac pèse 1 kilogramme 200 grammes. 1 kilogramme, c'est 1 000 grammes. 1 000 plus 200 : 1 200 grammes.",
+  "06-tonne": "Même idée pour la tonne : 1 tonne, c'est 1 000 kilogrammes. Le camion livre 2 tonnes de grains : 2 000 kilogrammes.",
+  "07-question": "Question ! Un élève écrit : 2 kilogrammes 50 grammes, c'est 250 grammes. A-t-il raison ? A : oui. B : non, c'est 2 050 grammes. C : non, c'est 2 500 grammes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. 2 kilogrammes, c'est 2 000 grammes. 2 000 plus 50 : 2 050 grammes.",
+  "08-defi": "À toi de jouer ! Emma a 3 kilogrammes de café. Elle fait des paquets de 500 grammes. Combien de paquets ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 3 kilogrammes, c'est 3 000 grammes. Il faut 2 paquets pour 1 kilogramme. Pour 3 kilogrammes : 6 paquets.",
+  "09-finale": "Ce que tu as appris. 1 kilogramme, c'est 1 000 grammes. 1 tonne, c'est 1 000 kilogrammes.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

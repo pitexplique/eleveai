@@ -1,0 +1,16 @@
+{
+  "00-garde": "Convertir des masses. 2 kilogrammes, c'est combien de grammes ? Et 3 000 kilogrammes, combien de tonnes ?",
+  "01-situation": "Voici Margaux. Elle est diététicienne : elle aide les gens à bien manger. Elle prépare les menus d'une cantine, avec les bonnes quantités.",
+  "02-multiplier": "1 kilogramme, c'est 1 000 grammes. Des kilogrammes aux grammes, on multiplie par 1 000. 2 kilogrammes de pâtes : 2 fois 1 000, 2 000 grammes.",
+  "03-diviser": "Dans l'autre sens, on divise par 1 000. 5 000 grammes de riz : 5 000 divisé par 1 000, 5 kilogrammes.",
+  "04-question": "Question ! Combien de grammes dans 3 kilogrammes ? A : 300 grammes. B : 3 000 grammes. C : 30 grammes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 3 fois 1 000 : 3 000 grammes.",
+  "05-tonne": "Pour la tonne, c'est pareil avec les kilogrammes. 1 tonne, c'est 1 000 kilogrammes. La cantine reçoit 2 tonnes de légumes par an : 2 000 kilogrammes.",
+  "06-tableau": "Le tableau aide aussi : tonne, kilogramme, hectogramme, décagramme, gramme. 1 kilogramme : un 1 sous les k g, puis un zéro par colonne jusqu'aux g. 1 000 grammes.",
+  "07-question": "Question ! Un élève écrit : 4 000 grammes, c'est 40 kilogrammes. A-t-il raison ? A : non, c'est 400 kilogrammes. B : oui. C : non, c'est 4 kilogrammes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Des grammes aux kilogrammes, on divise par 1 000. 4 000 divisé par 1 000 : 4 kilogrammes.",
+  "08-defi": "À toi de jouer ! Margaux prévoit 120 grammes de poisson par élève. Il y a 50 élèves. Combien de kilogrammes commander ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 120 fois 50 : 6 000 grammes. 6 000 divisé par 1 000 : 6 kilogrammes.",
+  "09-finale": "Ce que tu as appris. Des kilogrammes aux grammes, on multiplie par 1 000. Des grammes aux kilogrammes, on divise par 1 000. Pareil entre tonnes et kilogrammes.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

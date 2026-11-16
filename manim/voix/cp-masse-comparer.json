@@ -1,0 +1,15 @@
+{
+  "00-garde": "Comparer des masses. Un melon, un ananas : lequel est le plus lourd ?",
+  "01-situation": "Voici Hugo. Il est primeur : il vend des fruits et des légumes. Il a un melon et un ananas. Lequel est le plus lourd ?",
+  "02-balance": "Hugo prend une balance à deux plateaux. Le melon à gauche, l'ananas à droite. Le plateau du melon descend.",
+  "03-regle": "Le plateau qui descend porte le plus lourd. Le melon est plus lourd que l'ananas.",
+  "04-question": "Question ! Sur la balance, le plateau de gauche descend. Que peut-on dire ? A : les deux sont pareils. B : à gauche, c'est le plus lourd. C : à droite, c'est le plus lourd. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. Le plateau qui descend porte l'objet le plus lourd.",
+  "05-equilibre": "Maintenant, deux pommes. Les plateaux restent au même niveau. Les deux pommes ont la même masse.",
+  "06-question": "Question ! Deux boîtes fermées sont pareilles. Comment savoir laquelle est la plus lourde ? A : on prend la plus jolie. B : on choisit au hasard. C : on les pèse sur la balance. Mets pause, et choisis !",
+  "06b-reponse": "Réponse C. À l'œil, elles sont pareilles. La balance, elle, sait le dire.",
+  "07-defi": "À toi de jouer ! Une orange à gauche, un citron à droite. Le plateau de droite monte. Qui est le plus lourd ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Le plateau de droite monte, donc celui de gauche descend. L'orange est la plus lourde.",
+  "08-finale": "Ce que tu as appris. Sur une balance, le plateau qui descend porte le plus lourd. Au même niveau, c'est la même masse.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

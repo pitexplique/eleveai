@@ -6568,6 +6568,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=ce2&matiere=maths&notion=longueur&microId=ce2_longueur_unites&display=simple"
  },
+ "ce2-masse-comparer": {
+  "fichier": "ce2/maths/masse/03-comparer/eleveai-maths-ce2-masse-comparer.mp4",
+  "poster": "ce2/maths/masse/03-comparer/eleveai-maths-ce2-masse-comparer.png",
+  "vignette": "ce2/maths/masse/03-comparer/eleveai-maths-ce2-masse-comparer.vignette.webp",
+  "titre": "1 kg ou 900 g : lequel est le plus lourd ? — Comparer des masses — épisode 3 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_comparer&display=simple"
+ },
+ "ce2-masse-comparer-short": {
+  "fichier": "ce2/maths/masse/03-comparer/eleveai-maths-ce2-masse-comparer-short.mp4",
+  "poster": "ce2/maths/masse/03-comparer/eleveai-maths-ce2-masse-comparer-short-miniature.png",
+  "vignette": "ce2/maths/masse/03-comparer/eleveai-maths-ce2-masse-comparer-short-miniature.vignette.webp",
+  "titre": "900 g ou 1 kg : 900 est plus grand, donc plus lourd ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_comparer&display=simple"
+ },
  "ce2-perimetre-comparer": {
   "fichier": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer.mp4",
   "poster": "ce2/maths/perimetre/03-comparer/eleveai-maths-ce2-perimetre-comparer.png",

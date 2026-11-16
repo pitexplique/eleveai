@@ -1,0 +1,15 @@
+{
+  "00-garde": "Le défi des masses. La nacelle porte au plus 450 kilogrammes. Combien de passagers ?",
+  "01-situation": "Voici Hamza. Il est pilote de montgolfière. Avant chaque vol, il additionne toutes les masses : rien ne doit dépasser 450 kilogrammes.",
+  "02-pilote-gaz": "Hamza pèse 78,5 kilogrammes. Les bouteilles de gaz : 3 fois 22, 66 kilogrammes. 78,5 plus 66 : 144,5 kilogrammes.",
+  "03-reste": "Il reste 450 moins 144,5 : 305,5 kilogrammes pour les passagers.",
+  "04-question": "Question ! Un passager pèse 72 kilogrammes, avec un sac de 3 500 grammes. Quelle masse en tout ? A : 75,5 kilogrammes. B : 3 572 kilogrammes. C : 72,35 kilogrammes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 3 500 grammes, c'est 3,5 kilogrammes. 72 plus 3,5 : 75,5 kilogrammes.",
+  "05-quatre": "Quatre passagers de 75,5 kilogrammes : 4 fois 75,5, 302 kilogrammes. 302 est plus petit que 305,5 : ils peuvent monter !",
+  "06-question": "Question ! Un cinquième passager de 60 kilogrammes veut monter. Est-ce possible ? A : oui, il reste 60 kilogrammes. B : non, il reste 3,5 kilogrammes. C : oui, 450 kilogrammes tout juste. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 305,5 moins 302 : il reste 3,5 kilogrammes. 60, c'est bien trop !",
+  "07-defi": "À toi de jouer ! Une autre nacelle porte 0,5 tonne. Le pilote pèse 80 kilogrammes, le gaz 70 kilogrammes. Combien de passagers de 75 kilogrammes, au plus ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 0,5 tonne, c'est 500 kilogrammes. 500 moins 80 moins 70 : 350. 4 passagers : 300 kilogrammes. 5 passagers : 375, trop. Au plus 4 passagers.",
+  "08-finale": "Ce que tu as appris. Dans un défi à étapes, on convertit, on calcule chaque étape, et on vérifie avec la limite.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

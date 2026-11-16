@@ -1,0 +1,15 @@
+{
+  "00-garde": "Comparer des masses. 1,25 kilogramme, ou 1 200 grammes : qu'est-ce qui est le plus lourd ?",
+  "01-situation": "Voici Théa. Elle est ingénieure en aéronautique. Dans un avion, chaque gramme compte : plus il est lourd, plus il consomme de carburant.",
+  "02-convertir": "Une pièce pèse 1,25 kilogramme. Une autre, 1 200 grammes. On met la même unité : 1,25 kilogramme, c'est 1 250 grammes. 1 250 est plus grand que 1 200.",
+  "03-virgule": "Le piège de la virgule : 1,5 kilogramme ou 1,25 kilogramme ? On écrit 1,50 et 1,25. 50 centièmes, c'est plus que 25 centièmes : 1,5 kilogramme est le plus lourd.",
+  "04-question": "Question ! 1,5 kilogramme ou 1 500 grammes : lequel est le plus lourd ? A : c'est pareil. B : 1 500 grammes. C : 1,5 kilogramme. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 1,5 kilogramme, c'est 1 500 grammes : même masse.",
+  "05-tonne": "Avec les tonnes : l'avion vide pèse 42 tonnes. On ajoute 8 500 kilogrammes de bagages et de carburant, soit 8,5 tonnes. 42 plus 8,5 : 50,5 tonnes.",
+  "06-question": "Question ! La plus légère : 2,3 tonnes, 2 350 kilogrammes, ou 2,08 tonnes ? A : 2 350 kilogrammes. B : 2,3 tonnes. C : 2,08 tonnes. Mets pause, et choisis !",
+  "06b-reponse": "Réponse C. En kilogrammes : 2 300, 2 350 et 2 080. La plus légère : 2,08 tonnes.",
+  "07-defi": "À toi de jouer ! Trois bagages : 23,5 kilogrammes, 23 050 grammes, et 23,45 kilogrammes. Range-les du plus léger au plus lourd. Mets pause, et cherche !",
+  "07b-correction": "Correction. En grammes : 23 500, 23 050 et 23 450. Du plus léger au plus lourd : 23 050 grammes, 23,45 kilogrammes, puis 23,5 kilogrammes.",
+  "08-finale": "Ce que tu as appris. Pour comparer, on met la même unité, la virgule bien placée. Puis on compare chiffre par chiffre.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

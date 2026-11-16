@@ -1,0 +1,15 @@
+{
+  "00-garde": "Lire une masse. Où pointe l'aiguille de la balance ?",
+  "01-situation": "Voici Kenza. Elle est herboriste : elle vend des plantes pour les tisanes. Elle les pèse sur une balance à aiguille.",
+  "02-graduation": "D'abord, on lit la graduation. Les nombres vont de 100 en 100 grammes. Entre deux nombres, 5 intervalles : chacun vaut 20 grammes.",
+  "03-lire": "L'aiguille s'arrête 3 petits traits après 400. 400 plus 3 fois 20 : 460 grammes.",
+  "04-question": "Question ! Les nombres vont de 100 en 100 grammes. L'aiguille est pile au milieu de 500 et 600. Quelle masse ? A : 600 grammes. B : 505 grammes. C : 550 grammes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. Au milieu de 500 et 600, c'est 550 grammes.",
+  "05-masses": "Sur une balance à plateaux, on additionne les masses marquées. Kenza équilibre son sac avec 500 grammes, 200 grammes et 50 grammes : 750 grammes.",
+  "06-question": "Question ! Pour équilibrer un paquet, il faut 2 kilogrammes, 200 grammes et 100 grammes. Quelle masse ? A : 2 030 grammes. B : 2 300 grammes. C : 302 grammes. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 2 kilogrammes, c'est 2 000 grammes. 2 000 plus 200 plus 100 : 2 300 grammes.",
+  "07-defi": "À toi de jouer ! Sur le pèse-personne, les nombres vont de 10 en 10 kilogrammes. Entre deux nombres, 10 petits traits. L'aiguille est 4 traits après 30. Quelle masse ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 10 petits traits pour 10 kilogrammes : chaque trait vaut 1 kilogramme. 4 traits après 30 : 34 kilogrammes.",
+  "08-finale": "Ce que tu as appris. Pour lire une balance, on cherche d'abord ce que vaut un petit trait. Sur une balance à plateaux, on additionne les masses marquées.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

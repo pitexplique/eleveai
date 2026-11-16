@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Mon copain pèse une plume d'oiseau. La balance affiche… zéro !",
+  "01-surprise": "Zéro ? La plume a pourtant une masse !",
+  "02-question": "Question ! Une plume pèse… A : environ 1 kilogramme. B : environ 100 grammes. C : moins de 1 gramme. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! Une plume pèse moins de 1 gramme : moins qu'un trombone !",
+  "03-fin": "Il en pose 1 000… et la balance bouge enfin !",
+  "04-commentaire": "À toi : combien pèse un œuf, à ton avis, en grammes ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

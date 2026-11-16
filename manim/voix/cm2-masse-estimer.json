@@ -1,0 +1,15 @@
+{
+  "00-garde": "Estimer une masse. Une baleine bleue pèse-t-elle 150 kilogrammes, ou 150 tonnes ?",
+  "01-situation": "Voici Juliette. Elle est océanographe : elle étudie la mer et ses animaux. Elle estime la masse des baleines, sans pouvoir les peser !",
+  "02-baleine": "Une baleine bleue pèse environ 150 tonnes, soit 150 000 kilogrammes : autant qu'environ 150 voitures !",
+  "03-reperes": "Pour estimer, on prend un repère. Un poisson de 1,2 kilogramme : un peu plus qu'une brique de lait. Une tortue de mer de 150 kilogrammes : comme deux adultes.",
+  "04-question": "Question ! La masse la plus vraisemblable d'un dauphin ? A : 200 kilogrammes. B : 2 kilogrammes. C : 20 tonnes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. Un dauphin pèse environ 200 kilogrammes : moins qu'une voiture, plus que deux adultes.",
+  "05-piege": "Attention à l'unité et à la virgule ! Un crabe pèse 0,5 kilogramme, pas 0,5 tonne. 0,5 tonne, c'est 500 kilogrammes !",
+  "06-question": "Question ! Un élève écrit : mon cartable pèse 4 500 kilogrammes. Que voulait-il écrire ? A : 45 kilogrammes. B : 4 500 grammes. C : 4,5 tonnes. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 4 500 grammes, c'est 4,5 kilogrammes : un vrai cartable. 4 500 kilogrammes, c'est un camion !",
+  "07-defi": "À toi de jouer ! Une crevette, un requin, une orque. 8 grammes, 300 kilogrammes, 5 tonnes. Qui pèse quoi ? Mets pause, et cherche !",
+  "07b-correction": "Correction. La crevette : 8 grammes. Le requin : 300 kilogrammes. L'orque : 5 tonnes.",
+  "08-finale": "Ce que tu as appris. Pour estimer, on choisit l'unité adaptée et on compare à un repère. Attention à la virgule !",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

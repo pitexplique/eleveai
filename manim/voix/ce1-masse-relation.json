@@ -1,0 +1,15 @@
+{
+  "00-garde": "1 kilogramme, c'est combien de grammes ? Deux sacs de 500 grammes, est-ce 1 kilogramme ?",
+  "01-situation": "Voici Liam. Il vend du riz, des lentilles et des graines en vrac. On vient avec son sac, et il pèse ce qu'on veut.",
+  "02-equilibre": "D'un côté de la balance, 1 kilogramme. De l'autre, 1 000 grammes. Équilibre ! 1 kilogramme, c'est 1 000 grammes.",
+  "03-deux-sacs": "Un client veut 1 kilogramme de lentilles. Liam remplit deux sacs de 500 grammes. 500 plus 500 : 1 000 grammes, 1 kilogramme.",
+  "04-question": "Question ! Un élève écrit : 1 kilogramme égale 100 grammes. A-t-il raison ? A : non, c'est 1 000 grammes. B : oui. C : non, c'est 10 grammes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 1 kilogramme, c'est 1 000 grammes. Pas 100 !",
+  "05-quatre-sacs": "Avec des sacs de 250 grammes ? 250, 500, 750, 1 000. Il en faut 4 pour 1 kilogramme.",
+  "06-question": "Question ! Combien de paquets de 500 grammes pour faire 1 kilogramme ? A : 10. B : 5. C : 2. Mets pause, et choisis !",
+  "06b-reponse": "Réponse C. 500 plus 500 : 1 000 grammes, 1 kilogramme. Il en faut 2.",
+  "07-defi": "À toi de jouer ! Liam a 600 grammes de riz sur la balance. Combien de grammes ajouter pour avoir 1 kilogramme ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 1 kilogramme, c'est 1 000 grammes. De 600 à 1 000, il manque 400. Liam ajoute 400 grammes.",
+  "08-finale": "Ce que tu as appris. 1 kilogramme, c'est 1 000 grammes. 2 fois 500 grammes, c'est 1 kilogramme.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

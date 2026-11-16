@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Mon copain a 3 kilogrammes de pommes. Il veut des sachets de 500 grammes. Il calcule : 3 divisé par 500… zéro sachet !",
+  "01-oups": "Zéro ? Mais les pommes sont là !",
+  "02-question": "Question ! Combien de sachets de 500 grammes ? A : 15. B : 6. C : 0. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! 3 kilogrammes, c'est 3 000 grammes. 3 000, c'est 6 fois 500 : 6 sachets.",
+  "03-fin": "La même unité d'abord ! Et maintenant… compote pour tout le monde !",
+  "04-commentaire": "À toi : combien de grammes dans 7 kilogrammes ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

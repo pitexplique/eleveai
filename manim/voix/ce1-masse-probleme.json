@@ -1,0 +1,15 @@
+{
+  "00-garde": "Problèmes de masses. Panier plein : 1 kilogramme. Vide : 300 grammes. Combien pèsent les poissons ?",
+  "01-situation": "Voici Malo. Il est pêcheur au port de Saint-Pierre, à La Réunion. Il pèse sa pêche pour la vendre.",
+  "02-plein-vide": "Le panier plein de poissons pèse 1 kilogramme, donc 1 000 grammes. Le panier vide pèse 300 grammes.",
+  "03-soustraire": "Les poissons, c'est le plein moins le panier. 1 000 moins 300 : 700. Les poissons pèsent 700 grammes.",
+  "04-question": "Question ! Un sac de 1 kilogramme de farine. On en prend 400 grammes. Combien reste-t-il ? A : 400 grammes. B : 600 grammes. C : 1 400 grammes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 1 kilogramme, c'est 1 000 grammes. 1 000 moins 400 : il reste 600 grammes.",
+  "05-ajouter": "Malo vend 3 kilogrammes de thon et 2 kilogrammes de dorade. 3 plus 2 : 5 kilogrammes en tout.",
+  "06-question": "Question ! Sur le plateau, 750 grammes de poisson. Combien ajouter pour faire 1 kilogramme ? A : 250 grammes. B : 350 grammes. C : 1 750 grammes. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. 1 kilogramme, c'est 1 000 grammes. De 750 à 1 000, il manque 250 grammes.",
+  "07-defi": "À toi de jouer ! Malo a 2 kilogrammes de crevettes. Il en vend 500 grammes. Combien de grammes lui reste-t-il ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 2 kilogrammes, c'est 2 000 grammes. 2 000 moins 500 : 1 500. Il reste 1 500 grammes.",
+  "08-finale": "Ce que tu as appris. On calcule avec la même unité. Ce qu'il y a dedans, c'est le plein moins le vide.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

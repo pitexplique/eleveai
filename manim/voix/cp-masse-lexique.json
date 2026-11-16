@@ -1,0 +1,15 @@
+{
+  "00-garde": "Lourd ou léger ? Qu'est-ce qui est le plus lourd : un carton de livres, ou un oreiller ?",
+  "01-situation": "Voici Awa. Elle est déménageuse. Toute la journée, elle porte des cartons. Certains sont lourds. D'autres sont légers.",
+  "02-lourd-leger": "Un carton de livres : Awa le porte avec peine. Il est lourd. Un oreiller : elle le soulève d'un doigt. Il est léger.",
+  "03-soupeser": "Pour savoir, on soupèse. On prend un objet dans chaque main. La main qui descend tient le plus lourd.",
+  "04-question": "Question ! Qu'est-ce qui est le plus léger : une plume, ou un dictionnaire ? A : la plume. B : c'est pareil. C : le dictionnaire. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. La plume est légère : on la sent à peine dans la main.",
+  "05-piege": "Attention : gros ne veut pas dire lourd ! Un gros ballon de plage est léger. Une petite bille en fer est lourde.",
+  "06-question": "Question ! Un gros ballon de plage, une petite bille en fer. Lequel est le plus lourd ? A : le ballon de plage. B : la bille en fer. C : c'est pareil. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. La bille est petite, mais elle est en fer. Elle est plus lourde que le ballon.",
+  "07-defi": "À toi de jouer ! Awa a un oreiller, un carton de livres et une chaise. Lequel est le plus léger ? Mets pause, et cherche !",
+  "07b-correction": "Correction. L'oreiller est le plus léger. Le carton et la chaise sont plus lourds.",
+  "08-finale": "Ce que tu as appris. Lourd ou léger : on soupèse avec ses mains. Et un gros objet n'est pas toujours lourd.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

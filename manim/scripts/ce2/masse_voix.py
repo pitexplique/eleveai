@@ -371,9 +371,9 @@ SERIE = [
                          "On compare 1 000 et 900 : 1 000 est plus grand. Le morceau de 1 kilogramme "
                          "est le plus lourd !"),
         ("04-question", Q("Balance à deux plateaux : 1 kilogramme d'un côté, 1 000 grammes de l'autre. "
-                          "Que se passe-t-il ?", "les plateaux restent au même niveau",
-                          ["le kilogramme descend", "les 1 000 grammes descendent"],
-                          "1 kilogramme, c'est 1 000 grammes : même masse, la balance est en équilibre.")),
+                          "Que se passe-t-il ?", "rien ne bouge",
+                          ["le kilogramme descend", "les grammes descendent"],
+                          "1 kilogramme, c'est 1 000 grammes. Même masse : les plateaux restent au même niveau.")),
         ("05-piege", "Attention au piège : 900 est plus grand que 1. Mais 1 kilogramme, c'est 1 000 grammes ! "
                      "On compare les nombres seulement avec la même unité."),
         ("06-question", Q("Qu'est-ce qui est le plus lourd : 1 kilogramme de plumes, ou 1 kilogramme de cailloux ?",

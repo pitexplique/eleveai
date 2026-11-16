@@ -1,0 +1,15 @@
+{
+  "00-garde": "Problèmes de masses. Une valise peut peser 23 kilogrammes au plus. Celle-ci passe-t-elle ?",
+  "01-situation": "Voici Adam. Il travaille à l'aéroport, au comptoir d'enregistrement. Il pèse chaque valise : 23 kilogrammes au plus !",
+  "02-ajouter": "La valise de Lou pèse 18 kilogrammes. Elle ajoute un sac de 3 kilogrammes. 18 plus 3 : 21 kilogrammes. C'est moins que 23 : la valise passe !",
+  "03-enlever": "La valise de Max pèse 25 kilogrammes. Il doit enlever 25 moins 23 : 2 kilogrammes.",
+  "04-question": "Question ! Un sac : 2 kilogrammes de livres et 750 grammes de jouets. Combien de grammes en tout ? A : 950 grammes. B : 2 750 grammes. C : 752 grammes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. 2 kilogrammes, c'est 2 000 grammes. 2 000 plus 750 : 2 750 grammes.",
+  "05-plein-vide": "Une boîte vide pèse 300 grammes. Pleine de billes : 1 kilogramme 200 grammes, soit 1 200 grammes. Les billes : 1 200 moins 300, 900 grammes.",
+  "06-question": "Question ! Un paquet est en équilibre avec 500 grammes et deux masses de 200 grammes. Combien pèse-t-il ? A : 520 grammes. B : 700 grammes. C : 900 grammes. Mets pause, et choisis !",
+  "06b-reponse": "Réponse C. 500 plus 200 plus 200 : 900 grammes. On compte bien les deux masses de 200 !",
+  "07-defi": "À toi de jouer ! La valise de Nina pèse 20 kilogrammes. Elle y met 4 paquets de 500 grammes, puis un sac de 2 kilogrammes. Passe-t-elle ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 4 paquets de 500 grammes : 2 000 grammes, soit 2 kilogrammes. 20 plus 2 plus 2 : 24 kilogrammes. C'est plus que 23 : la valise ne passe pas !",
+  "08-finale": "Ce que tu as appris. Pour un problème de masses, on met tout dans la même unité, on calcule, puis on vérifie.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

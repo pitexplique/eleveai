@@ -1,0 +1,15 @@
+{
+  "00-garde": "Estimer une masse. Une trousse peut-elle peser 3 kilogrammes ?",
+  "01-situation": "Voici Chloé. Elle est bibliothécaire. Elle range des livres, des gros et des petits. Elle doit savoir ce qu'elle peut porter.",
+  "02-reperes": "Deux repères. Un trombone pèse environ 1 gramme. Une brique de lait pleine pèse environ 1 kilogramme.",
+  "03-livres": "Un gros dictionnaire pèse environ 1 kilogramme, comme la brique. Un petit livre pèse environ 200 grammes.",
+  "04-question": "Question ! Environ combien pèse une brique de lait pleine ? A : 1 gramme. B : 1 kilogramme. C : 10 kilogrammes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. Une brique de lait de 1 litre pèse environ 1 kilogramme.",
+  "05-piege": "Attention aux nombres impossibles ! 3 kilogrammes, c'est trois briques de lait. Une trousse pèse environ 300 grammes.",
+  "06-question": "Question ! Un élève écrit : ma trousse pèse 3 kilogrammes. Est-ce possible ? A : non, c'est trop lourd. B : oui, c'est normal. C : non, c'est trop léger. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. 3 kilogrammes, c'est trois briques de lait. Une trousse pèse environ 300 grammes.",
+  "07-defi": "À toi de jouer ! Le cartable de Chloé pèse-t-il 3 grammes, 3 kilogrammes, ou 300 kilogrammes ? Mets pause, et cherche !",
+  "07b-correction": "Correction. 3 grammes, c'est trois trombones : trop léger. 300 kilogrammes, c'est un piano : trop lourd. Le cartable pèse environ 3 kilogrammes.",
+  "08-finale": "Ce que tu as appris. Pour estimer, on compare à un repère. 1 gramme : un trombone. 1 kilogramme : une brique de lait.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

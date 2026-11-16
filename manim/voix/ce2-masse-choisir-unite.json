@@ -1,0 +1,16 @@
+{
+  "00-garde": "Choisir la bonne unité. Un letchi, un sac de riz, un camion : en grammes, en kilogrammes, ou en tonnes ?",
+  "01-situation": "Voici Tom. Il est chauffeur routier. Son gros camion livre des fruits et du riz aux magasins.",
+  "02-gramme": "Pour un objet léger, comme un letchi, on choisit le gramme. Un letchi pèse environ 20 grammes.",
+  "03-kilo": "Pour un objet qu'on porte, comme un sac de riz, on choisit le kilogramme : 5 kilogrammes.",
+  "04-tonne": "Pour un objet très lourd, comme le camion de Tom, on choisit la tonne : 12 tonnes.",
+  "05-question": "Question ! Avec quelle unité pèse-t-on un camion ? A : le gramme. B : la tonne. C : le kilogramme. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Un camion est très lourd : on le pèse en tonnes.",
+  "06-piege": "Attention ! Un élève écrit : mon cartable pèse 3 tonnes. 3 tonnes, c'est trois voitures ! Il fallait écrire 3 kilogrammes.",
+  "07-question": "Question ! Un élève dit : ma gomme pèse 1 kilogramme. Qu'aurait-il dû dire ? A : 20 grammes. B : 20 kilogrammes. C : 1 tonne. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Une gomme est légère : environ 20 grammes. 1 kilogramme, c'est une brique de lait !",
+  "08-defi": "À toi de jouer ! Trouve l'unité. Une banane pèse 150… Tom pèse 80… Son camion chargé pèse 20… Mets pause, et cherche !",
+  "08b-correction": "Correction. La banane : 150 grammes. Tom : 80 kilogrammes. Le camion chargé : 20 tonnes.",
+  "09-finale": "Ce que tu as appris. Le gramme pour les objets légers, le kilogramme pour ce qu'on porte, la tonne pour les très lourds.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

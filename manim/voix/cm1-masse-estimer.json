@@ -1,0 +1,15 @@
+{
+  "00-garde": "Estimer une masse. Un colibri pèse-t-il 3 grammes, 3 kilogrammes, ou 3 tonnes ?",
+  "01-situation": "Voici Enzo. Il est ornithologue : il étudie les oiseaux. Il les pèse doucement, puis il les relâche.",
+  "02-unite": "D'abord, la bonne unité. Un colibri : quelques grammes. Un aigle : quelques kilogrammes. Un avion : des tonnes.",
+  "03-repere": "Puis un repère. 1 gramme, c'est un trombone : le colibri pèse environ 3 grammes. 1 kilogramme, c'est une brique de lait : un aigle pèse environ 5 kilogrammes.",
+  "04-question": "Question ! Environ combien pèse un œuf de poule ? A : 600 grammes. B : 6 grammes. C : 60 grammes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. Un œuf pèse environ 60 grammes. 600 grammes, c'est plus qu'une demi-brique de lait !",
+  "05-piege": "Attention à l'unité ! Un élève écrit : un éléphant pèse 5 kilogrammes. 5 kilogrammes, c'est un chat ! L'éléphant pèse environ 5 tonnes.",
+  "06-question": "Question ! Quelle unité choisir pour la masse d'un éléphant ? A : la tonne. B : le litre. C : le gramme. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. Un éléphant pèse environ 5 tonnes : la tonne est l'unité adaptée.",
+  "07-defi": "À toi de jouer ! Un moineau, un chien, une baleine. 30 grammes, 30 kilogrammes, 30 tonnes. Qui pèse quoi ? Mets pause, et cherche !",
+  "07b-correction": "Correction. Le moineau : 30 grammes. Le chien : 30 kilogrammes. La baleine : 30 tonnes.",
+  "08-finale": "Ce que tu as appris. Pour estimer une masse, on choisit l'unité, puis on compare à un repère connu.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

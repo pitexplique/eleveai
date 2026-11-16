@@ -1,0 +1,15 @@
+{
+  "00-garde": "Le défi des masses. Trois colis : lequel est le plus lourd ?",
+  "01-situation": "Voici Noé. Il est livreur à vélo. Il a trois colis : le rouge, le bleu et le vert. Lequel est le plus lourd ?",
+  "02-pesee1": "Première pesée : le rouge contre le bleu. Le rouge descend. Il est plus lourd que le bleu.",
+  "03-pesee2": "Deuxième pesée : le bleu contre le vert. Le bleu descend. Il est plus lourd que le vert.",
+  "04-question": "Question ! Quel colis est le plus léger ? A : le vert. B : le rouge. C : le bleu. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. Le rouge bat le bleu, le bleu bat le vert. Le vert est le plus léger.",
+  "05-rang": "Du plus lourd au plus léger : le rouge, le bleu, le vert. Le rouge est le plus lourd !",
+  "06-question": "Question ! Un sac de plumes, un sac de billes. Même taille. Pèsent-ils pareil ? A : non, les plumes sont plus lourdes. B : oui, c'est la même taille. C : non, les billes sont plus lourdes. Mets pause, et choisis !",
+  "06b-reponse": "Réponse C. Même taille, mais pas même masse. Les billes sont bien plus lourdes.",
+  "07-defi": "À toi de jouer ! La pomme est plus lourde que la prune. La prune est plus lourde que la cerise. Quel fruit est le plus léger ? Mets pause, et cherche !",
+  "07b-correction": "Correction. La cerise est plus légère que la prune, et la prune que la pomme. La cerise est la plus légère.",
+  "08-finale": "Ce que tu as appris. Avec deux pesées, on range trois objets. Et la taille ne dit pas la masse.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
