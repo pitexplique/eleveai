@@ -8701,6 +8701,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_comparer&display=simple"
  },
+ "cp-masse-defi": {
+  "fichier": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi.mp4",
+  "poster": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi.png",
+  "vignette": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi.vignette.webp",
+  "titre": "Trois colis : lequel est le plus lourd ? — Le défi des masses — épisode 4 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_contenance_defi&display=simple"
+ },
+ "cp-masse-defi-short": {
+  "fichier": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi-short.mp4",
+  "poster": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi-short-miniature.png",
+  "vignette": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi-short-miniature.vignette.webp",
+  "titre": "Trois cadeaux de la même taille : lequel est le plus lourd ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_contenance_defi&display=simple"
+ },
  "cp-masse-estimer": {
   "fichier": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer.mp4",
   "poster": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer.png",

@@ -97446,6 +97446,140 @@
         "animaux",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cp-masse-defi",
+      "pas_avant": "2027-05-03",
+      "prioritaire": true,
+      "notionId": "masse_contenance",
+      "microId": "cp_masse_contenance_defi",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi.mp4",
+      "miniature": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi.png",
+      "titre": "Trois colis : lequel est le plus lourd ? — Le défi des masses — épisode 4 · Maths CP",
+      "accroche": "Noé est livreur à vélo. Il a trois colis : le rouge, le bleu et le vert. Lequel est le plus lourd ? Deux pesées suffisent.\n\nDans cette vidéo :\n• première pesée : le rouge descend, il est plus lourd que le bleu\n• deuxième pesée : le bleu descend, il est plus lourd que le vert\n• du plus lourd au plus léger : le rouge, le bleu, le vert\n• la taille ne dit pas la masse : un sac de plumes, un sac de billes\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : la pomme est plus lourde que la prune, la prune plus lourde que la cerise : quel fruit est le plus léger ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_contenance_defi&display=simple\n\n⚖️ Épisode 4 de la série Masses d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le plus lourd ?"
+        ],
+        [
+          "00:17",
+          "Deux pesées"
+        ],
+        [
+          "00:33",
+          "Question 1"
+        ],
+        [
+          "01:06",
+          "Question 2"
+        ],
+        [
+          "01:39",
+          "À toi de jouer"
+        ],
+        [
+          "02:03",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "défi",
+        "balance",
+        "pesée",
+        "plus lourd",
+        "plus léger",
+        "livreur",
+        "vélo",
+        "maths",
+        "CP",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "Quel colis est le plus léger ?",
+          "choix": [
+            "le vert",
+            "le rouge",
+            "le bleu"
+          ],
+          "reponse": 0,
+          "explication": "Le rouge bat le bleu, le bleu bat le vert. Le vert est le plus léger."
+        },
+        {
+          "t": "01:06",
+          "question": "Un sac de plumes, un sac de billes. Même taille. Pèsent-ils pareil ?",
+          "choix": [
+            "non, les plumes sont plus lourdes",
+            "oui, c'est la même taille",
+            "non, les billes sont plus lourdes"
+          ],
+          "reponse": 2,
+          "explication": "Même taille, mais pas même masse. Les billes sont bien plus lourdes."
+        }
+      ],
+      "centres": [
+        "transports",
+        "sport"
+      ]
+    },
+    {
+      "id": "cp-masse-defi-short",
+      "pas_avant": "2027-05-03",
+      "prioritaire": true,
+      "notionId": "masse_contenance",
+      "microId": "cp_masse_contenance_defi",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "short",
+      "renvoie_vers": "cp-masse-defi",
+      "fichier": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi-short.mp4",
+      "miniature": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi-short-miniature.png",
+      "titre": "Trois cadeaux de la même taille : lequel est le plus lourd ? #maths #cp",
+      "accroche": "J'ai trois cadeaux de la même taille. Ma copine veut le plus lourd. Deux pesées… et une surprise dedans !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : le chat pèse plus que le lapin, le lapin plus que la souris : qui est le plus léger ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_contenance_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cp #primaire",
+      "tags": [
+        "masse",
+        "balance",
+        "cadeau",
+        "plus lourd",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Quel cadeau est le plus lourd ?",
+          "choix": [
+            "le rose",
+            "le bleu",
+            "le jaune"
+          ],
+          "reponse": 2,
+          "explication": "Le jaune bat le rose, et le rose bat le bleu. Le jaune est le plus lourd !"
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "animaux"
+      ]
     }
   ]
 }

@@ -30,6 +30,8 @@ EP = [
      "porte le plus lourd !", True, "blanche"),
     ("cp", "estimer", "03-estimer", ["RANGER", "DES MASSES"], "Du plus léger au plus lourd",
      "on compare deux par deux !", True, "blanche"),
+    ("cp", "defi", "04-defi", ["LE DÉFI", "DES MASSES"], "Deux pesées, trois colis",
+     "la taille ne dit pas la masse !", True, "blanche"),
 ]
 
 

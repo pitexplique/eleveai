@@ -164,3 +164,25 @@ function lapinCraie(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); con
   c.fillStyle=W; c.beginPath(); c.arc(x+26*s,yBas-92*s,28*s,0,7); c.fill(); c.stroke();
   c.fillStyle='#212529'; c.beginPath(); c.arc(x+36*s,yBas-98*s,4.5*s,0,7); c.fill();
   c.fillStyle='#f783ac'; c.beginPath(); c.arc(x+53*s,yBas-86*s,4.5*s,0,7); c.fill(); }
+
+/* ---- Épisode 04 (défi) : les trois cadeaux de la même taille, le caillou, la souris du commentaire ---- */
+/* Un cadeau carré : (x, yBas) = le milieu, en bas ; s = l'échelle (1 = 90 px de côté). ouvre (0 → 1) soulève le couvercle. */
+function cadeauCraie(c,x,yBas,s=1,z=1,coul='#ffd43b',ouvre=0){ if(z<=0) return; s*=Math.min(1.15,z); const C=90*s, R='#e03131';
+  c.fillStyle=coul; c.strokeStyle='#343a40'; c.lineWidth=4; c.beginPath(); c.rect(x-C/2,yBas-C,C,C); c.fill(); c.stroke();
+  c.fillStyle=R; c.fillRect(x-C*.08,yBas-C,C*.16,C);
+  c.save(); c.translate(x-C*.56+C*1.18*ouvre,yBas-C-C*.1*ouvre); c.rotate(Math.PI/2*ouvre); /* ouvert : debout contre le côté droit */
+  c.fillStyle=coul; c.beginPath(); c.rect(0,-C*.2,C*1.12,C*.2); c.fill(); c.stroke(); c.fillStyle=R; c.fillRect(C*.48,-C*.2,C*.16,C*.2);
+  c.beginPath(); c.ellipse(C*.4,-C*.3,C*.16,C*.1,-.4,0,7); c.ellipse(C*.72,-C*.3,C*.16,C*.1,.4,0,7); c.fill(); c.restore(); }
+/* Un gros caillou gris : (x, y) = le centre */
+function caillouCraie(c,x,y,r,z=1){ if(z<=0) return; r*=Math.min(1.15,z);
+  c.fillStyle='#868e96'; c.strokeStyle='#343a40'; c.lineWidth=4; c.beginPath();
+  c.moveTo(x-r,y+r*.2); c.quadraticCurveTo(x-r*.9,y-r*.8,x-r*.1,y-r*.75); c.quadraticCurveTo(x+r*.9,y-r*.9,x+r,y); c.quadraticCurveTo(x+r*.8,y+r*.7,x,y+r*.6); c.quadraticCurveTo(x-r*.8,y+r*.7,x-r,y+r*.2);
+  c.fill(); c.stroke(); c.fillStyle='#adb5bd'; c.beginPath(); c.ellipse(x-r*.3,y-r*.35,r*.22,r*.12,-.3,0,7); c.fill(); }
+/* Une souris grise, de profil : (x, yBas) = le milieu, au sol ; s = l'échelle (1 ≈ 110 px de long) */
+function sourisCraie(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z);
+  c.strokeStyle='#f783ac'; c.lineWidth=4; c.lineCap='round'; c.beginPath(); c.moveTo(x-40*s,yBas-14*s); c.quadraticCurveTo(x-80*s,yBas-4*s,x-70*s,yBas-36*s); c.stroke();
+  c.fillStyle='#adb5bd'; c.strokeStyle='#495057'; c.lineWidth=3; c.beginPath(); c.ellipse(x,yBas-22*s,44*s,22*s,0,0,7); c.fill(); c.stroke();
+  c.beginPath(); c.ellipse(x+40*s,yBas-26*s,18*s,14*s,.3,0,7); c.fill(); c.stroke();
+  c.fillStyle='#fcc2d7'; c.beginPath(); c.arc(x+30*s,yBas-46*s,12*s,0,7); c.fill(); c.stroke();
+  c.fillStyle='#212529'; c.beginPath(); c.arc(x+46*s,yBas-30*s,3.5*s,0,7); c.fill();
+  c.fillStyle='#f783ac'; c.beginPath(); c.arc(x+58*s,yBas-24*s,4*s,0,7); c.fill(); }

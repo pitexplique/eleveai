@@ -580,3 +580,80 @@ def pasteque(s=1.0):
     rayures = VGroup(*[Ellipse(width=0.16 * s, height=0.92 * s, stroke_color="#14532d", stroke_width=4)
                        .move_to(P(x * s, 0)) for x in (-0.45, -0.15, 0.15, 0.45)])
     return VGroup(c, rayures)
+
+
+# ── CP 04 (17/11) : Noé le livreur à vélo, ses colis, les sacs de même taille, les fruits du défi ───────
+def noe(s=1.0):
+    """Noé, livreur à vélo : gilet jaune, casque de vélo bleu, cheveux courts."""
+    p = visage(personne(peau="#8d5524", tenue="#facc15", cheveux="#111827", s=s))
+    c, r = p.tete.get_center(), p.tete.width / 2
+    casque = AnnularSector(inner_radius=0, outer_radius=r * 1.12, angle=PI, start_angle=0, fill_color="#2563eb",
+                           fill_opacity=1, stroke_width=0).move_to(c + UP * r * 0.55)
+    visiere = RoundedRectangle(width=r * 2.4, height=r * 0.22, corner_radius=r * 0.1, fill_color="#1e3a8a",
+                               fill_opacity=1, stroke_width=0).move_to(c + UP * r * 0.32)
+    p.add(casque, visiere)
+    return p
+
+
+def velo_livreur(s=1.0, couleur="#22c55e"):
+    """Un vélo de livreur, de profil : deux roues, cadre, selle, guidon, une caisse à l'arrière."""
+    r1 = Circle(radius=0.42 * s, color=WHITE, stroke_width=5).move_to(P(-0.75 * s, 0))
+    r2 = Circle(radius=0.42 * s, color=WHITE, stroke_width=5).move_to(P(0.75 * s, 0))
+    cadre = VMobject(stroke_color=couleur, stroke_width=6).set_points_as_corners(
+        [P(-0.75 * s, 0), P(-0.2 * s, 0.55 * s), P(0.45 * s, 0.55 * s), P(0.75 * s, 0), P(0, 0), P(-0.75 * s, 0)])
+    tige = Line(P(0, 0), P(-0.2 * s, 0.55 * s), color=couleur, stroke_width=6)
+    selle = Line(P(-0.36 * s, 0.68 * s), P(-0.06 * s, 0.68 * s), color="#1f2937", stroke_width=8)
+    guidon = VMobject(stroke_color="#cbd5e1", stroke_width=6).set_points_as_corners(
+        [P(0.45 * s, 0.55 * s), P(0.55 * s, 0.85 * s), P(0.75 * s, 0.85 * s)])
+    caisse = RoundedRectangle(width=0.62 * s, height=0.48 * s, corner_radius=0.06 * s, fill_color="#f97316",
+                              fill_opacity=1, stroke_color=WHITE, stroke_width=2).move_to(P(-0.82 * s, 0.72 * s))
+    return VGroup(r1, r2, cadre, tige, selle, guidon, caisse)
+
+
+def colis(couleur, s=1.0):
+    """Un colis fermé, d'une couleur, avec sa bande adhésive en croix ; tous les colis ont la MÊME taille."""
+    corps = RoundedRectangle(width=1.0 * s, height=0.8 * s, corner_radius=0.05 * s, fill_color=couleur,
+                             fill_opacity=1, stroke_color=WHITE, stroke_width=2)
+    bande = VGroup(Line(corps.get_top(), corps.get_bottom(), color="#fef3c7", stroke_width=6 * s),
+                   Line(corps.get_left(), corps.get_right(), color="#fef3c7", stroke_width=6 * s))
+    return VGroup(corps, bande)
+
+
+def sac_plein(contenu, s=1.0):
+    """Un sac en toile ouvert en haut, qui laisse voir ce qu'il contient : « plumes » ou « billes ».
+    Les deux sacs ont la MÊME taille (la taille ne dit pas la masse)."""
+    corps = RoundedRectangle(width=1.1 * s, height=1.2 * s, corner_radius=0.25 * s, fill_color="#d6b98c",
+                             fill_opacity=1, stroke_color="#92400e", stroke_width=2)
+    bord = Ellipse(width=0.9 * s, height=0.22 * s, fill_color="#92400e", fill_opacity=1, stroke_width=0)
+    bord.move_to(corps.get_top() + DOWN * 0.08 * s)
+    if contenu == "plumes":
+        dedans = VGroup(*[Ellipse(width=0.14 * s, height=0.5 * s, fill_color="#f8fafc", fill_opacity=1,
+                                  stroke_color="#cbd5e1", stroke_width=1.5).rotate(a)
+                          .move_to(bord.get_center() + P(dx * s, 0.2 * s)) for dx, a in ((-0.24, 0.55), (0, 0), (0.24, -0.55))])
+    else:
+        dedans = VGroup(*[Circle(radius=0.1 * s, fill_color=c_, fill_opacity=1, stroke_color="#1f2937", stroke_width=1.5)
+                          .move_to(bord.get_center() + P(dx * s, dy * s))
+                          for dx, dy, c_ in ((-0.22, 0.06, "#60a5fa"), (0, 0.1, "#f87171"), (0.22, 0.06, "#4ade80"),
+                                             (-0.11, 0.2, "#facc15"), (0.11, 0.2, "#a78bfa"))])
+    return VGroup(corps, bord, dedans)
+
+
+def prune(s=1.0):
+    """Une prune violette, ovale, avec sa queue et une feuille."""
+    c = Ellipse(width=0.5 * s, height=0.58 * s, fill_color="#7c3aed", fill_opacity=1, stroke_color="#4c1d95",
+                stroke_width=2)
+    reflet = Ellipse(width=0.1 * s, height=0.18 * s, fill_color="#c4b5fd", fill_opacity=0.8, stroke_width=0)
+    reflet.move_to(c.get_center() + P(-0.12 * s, 0.1 * s))
+    queue = Line(c.get_top(), c.get_top() + P(0.04 * s, 0.16 * s), color="#78350f", stroke_width=3)
+    feuille = Ellipse(width=0.2 * s, height=0.09 * s, fill_color="#16a34a", fill_opacity=1, stroke_width=0)
+    feuille.rotate(0.4).move_to(c.get_top() + P(0.14 * s, 0.12 * s))
+    return VGroup(c, reflet, queue, feuille)
+
+
+def cerise(s=1.0):
+    """Une cerise : petite boule rouge, longue queue verte."""
+    c = Circle(radius=0.16 * s, fill_color="#dc2626", fill_opacity=1, stroke_color="#7f1d1d", stroke_width=2)
+    reflet = Dot(c.get_center() + P(-0.06 * s, 0.06 * s), radius=0.035 * s, color="#fecaca")
+    queue = ArcBetweenPoints(c.get_top(), c.get_top() + P(0.14 * s, 0.38 * s), angle=-0.6, color="#15803d",
+                             stroke_width=3)
+    return VGroup(queue, c, reflet)

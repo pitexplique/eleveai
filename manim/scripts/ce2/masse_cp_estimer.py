@@ -61,6 +61,8 @@ class MasseEstimerCPBase(PaysageMasse):
     nom_voix = "cp-masse-estimer"
     fichier_marques = "masse_cp_estimer_marques.json"
     ceinture = "blanche"
+    fs_choix = 26  # la taille commune des trois choix (CP 04, question 2 : 22, les choix sont longs)
+    decal_q, elargir_q = 1.8, 1.2  # la colonne glisse à gauche de decal_q, les cartes s'élargissent de elargir_q
 
     def _disposer_q(self, question, choix, phrase):
         """Comme en CP 02 : la colonne de la question glisse de 1,8 vers la gauche, les cartes s'élargissent
@@ -68,7 +70,7 @@ class MasseEstimerCPBase(PaysageMasse):
         phrase de la réponse ne touche pas les cartes."""
         r = super()._disposer_q(question, choix, phrase)
         tete, q, cartes, pause, rebours = r[:5]
-        D, E = 1.8, 1.2
+        D, E = self.decal_q, self.elargir_q
         for m in (tete, q, cartes, pause, rebours):
             m.shift(LEFT * D)
         for c in cartes:
@@ -76,7 +78,7 @@ class MasseEstimerCPBase(PaysageMasse):
             g = fond.get_left()[0]
             fond.stretch_to_fit_width(fond.width + E).shift(RIGHT * (g - fond.get_left()[0]))
             g = corps.get_left()[0]
-            corps.scale(26 / corps.font_size).shift(RIGHT * (g - corps.get_left()[0]))
+            corps.scale(self.fs_choix / corps.font_size).shift(RIGHT * (g - corps.get_left()[0]))
             assert corps.get_right()[0] < fond.get_right()[0] - 0.8, corps  # la place de la coche
         ph = r[5]
         lim = cartes.get_left()[0] - 0.35
