@@ -18,8 +18,9 @@ Notes et outils : `side-session-notes/local_9cbb7607-cba7-48c1-a984-bb5d28d2f97c
 ## État (16/11 soir)
 - ✅ Inventaire, commun CP → 6e, commun CM1.
 - ✅ Voix du PILOTE CM1 `duree_calculer` : `manim/voix/cm1-duree-calculer(-short).json` (Théo, contrôleur aérien ; Q C puis B ; short C).
-- ⏳ Les 61 autres voix écrites par 3 sous-agents (CP+CE1, CE2+CM1, CM2+6e) d'après la consigne ; rapports `ND/rapport-voix-<groupe>.md`.
-- ⏳ RECAP à montrer EN ENTIER à Frédéric → attendre son « oui » avant le moindre WAV.
+- ✅ Les 61 autres voix (3 sous-agents, rapports `ND/rapport-voix-<groupe>.md`), commit `51faaca3` : 63 fichiers, lettres justes vérifiées par script (0 écart), calculs relus par sondage.
+- ⏳ `manim/voix/RECAP-durees-cp-6e.md` montré à Frédéric le 16/11 → attendre son « oui » avant le moindre WAV.
+- Notes des agents : `cp-duree-jour-semaine` = moments de la journée (comme la banque) ; CM1 sans durées décimales (réservées à la 6e) ; 6e problème : afficher le tableau des 2 cars (7 h 22, 7 h 35, 7 h 48, 8 h 11).
 
 ## Reste, dans l'ordre
 1. Frédéric valide `manim/voix/RECAP-durees-cp-6e.md` (retouches : modifier le JSON puis relancer `python ND/recap.py`).
