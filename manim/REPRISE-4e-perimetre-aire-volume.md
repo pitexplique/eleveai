@@ -49,13 +49,14 @@ Ouvert le 15/11/2026. 30 micros du coach, plan : `manim/PLAN-perimetre-aire-volu
 | P1 `aire_perimetre_comprendre`+3 (skatepark) | ✅ | ✅ | ✅ 215,4 s / 62,6 s, bords 0 |
 | P2 `aire_perimetre_cercle` (margelle) | ✅ | ✅ | ✅ 208,3 s / 64,9 s, bords 0 |
 | P3 `aire_perimetre_figure` (piste BMX) | ✅ | ✅ | ✅ 210,4 s / 64,3 s, bords 0 |
-| P4 `aire_perimetre_probleme` (tour de piste) | ⏳ | ⏳ | — |
-| P5 `aire_perimetre_defi` (enclos) | ⏳ | ⏳ | — |
+| P4 `aire_perimetre_probleme` (tour de piste) | ✅ | ✅ | ✅ 222,2 s / 51,8 s, bords 0 |
+| P5 `aire_perimetre_defi` (enclos) | ✅ | ✅ | ✅ 215,1 s / 50,4 s, bords 0 |
 | A1 → A5 (aire) | ⏳ | ⏳ | — |
 | T1 → T8 (3e) | ⏳ | ⏳ | — |
 
-**13 épisodes finis sur 28** (V1 à V4, S1 à S6, P1 à P3) — paysages et shorts rendus en HD,
-`verifier-bords-video` = 0 sur les 26 MP4. **15 restent à écrire et à rendre.**
+**15 épisodes finis sur 28** (V1 à V4, S1 à S6, P1 à P5) — paysages et shorts rendus en HD,
+`verifier-bords-video` = 0 sur les 30 MP4. **13 restent à écrire et à rendre.**
+⭐ Le LOT PÉRIMÈTRE est COMPLET : les 7 micros `aire_perimetre` de 4e sont couverts.
 ⭐ Le LOT SOLIDES est COMPLET : les 6 micros `vision_espace` de 4e sont couverts.
 
 Chaîne d'un épisode : script paysage → dry run `AUDIT=1 BORDS=1` jusqu'à 0 AVANCE / RETARD / TARD /
