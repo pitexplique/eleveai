@@ -21,7 +21,9 @@ import { EXERCICES, visiteursDeLaSemaine } from "@/lib/accueil/chiffres-semaine"
 
 export type VarianteCompteur = "barre" | "ligne";
 
-export default function CompteurFamille({ variante }: { variante: VarianteCompteur }) {
+// `micros` (17/11) : le nombre de micro-compétences du CP à la Terminale, que
+// donnait le nuage « Tout le programme », retiré ; affiché dans « En chiffres ».
+export default function CompteurFamille({ variante, micros }: { variante: VarianteCompteur; micros?: number }) {
   const c = etatCompteurVideos();
   const cap = CAP_VIDEOS.toLocaleString("fr-FR");
   const visiteurs = visiteursDeLaSemaine();
@@ -132,7 +134,10 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
       {/* EN DESSOUS : LA BANDE DES CHIFFRES. Vidéos comptées (lib/videos/compteur.ts),
           exercices et visiteurs de la semaine (lib/accueil/chiffres-semaine.ts). */}
       <div className="rounded-2xl bg-white/90 px-4 py-3 shadow-sm ring-1 ring-teal-200 sm:col-span-2">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
+        {/* 17/11 : avec 3 nombres, la bande ne passe sur une ligne qu'à partir de
+            lg (1024 px) ; en dessous, « En chiffres » + barre au-dessus, les
+            nombres dessous (sinon la barre et sa phrase s'écrasaient). */}
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-5">
           <div className="min-w-0 flex-1">
             <p className="flex flex-wrap items-baseline gap-x-2">
               <span className="flex items-center gap-1.5 self-center text-sm font-black uppercase tracking-wide text-rose-700">
@@ -164,7 +169,8 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
               </>
             )}
           </div>
-          <dl className="grid shrink-0 grid-cols-2 gap-3 border-t border-slate-100 pt-2 sm:border-l sm:border-t-0 sm:pl-5 sm:pt-0">
+          <dl className={`grid shrink-0 ${micros ? "grid-cols-3" : "grid-cols-2"} gap-3 border-t border-slate-100 pt-2 lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0`}>
+            {micros ? chiffre(micros.toLocaleString("fr-FR"), "micro-compétences") : null}
             {chiffre(EXERCICES.exercices.toLocaleString("fr-FR"), "exercices de maths")}
             {visiteurs !== null && chiffre(visiteurs.toLocaleString("fr-FR"), "visiteurs cette semaine")}
           </dl>

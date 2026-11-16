@@ -153,22 +153,10 @@ const PRIX_ETABLISSEMENT = PRIX_ETABLISSEMENT_PAR_PAYS.map((e) => ({
 // Le titre et les nuages en lettres à empattements fines, plus douces que le gras.
 const slab = Roboto_Slab({ subsets: ["latin"], weight: ["300", "700"], display: "swap" });
 
-// Un vrai nuage : deux bosses blanches posées sur la carte.
-function Nuage({ Icone, titre, children }: { Icone: typeof Target; titre: string; children: React.ReactNode }) {
-  return (
-    <div className="relative mt-6">
-      <span aria-hidden="true" className="absolute -top-6 left-[22%] h-20 w-20 rounded-full bg-white ring-1 ring-sky-200" />
-      <span aria-hidden="true" className="absolute -top-9 right-[24%] h-24 w-24 rounded-full bg-white ring-1 ring-sky-200" />
-      <div className="relative rounded-[2.5rem] bg-white px-5 pb-5 pt-4 text-center shadow-sm ring-1 ring-sky-200">
-        {/* Cache les traits des bosses à l'intérieur du nuage */}
-        <span aria-hidden="true" className="absolute inset-x-6 top-0 h-6 bg-white" />
-        <Icone className="relative mx-auto h-7 w-7 text-teal-600" aria-hidden="true" />
-        <h2 className={`${slab.className} relative mt-1 text-2xl font-light text-teal-700`}>{titre}</h2>
-        <p className="relative mt-1 text-sm leading-relaxed text-slate-600">{children}</p>
-      </div>
-    </div>
-  );
-}
+// 17/11/2026 : les trois nuages (« Tout le programme », « Chacun à son
+// niveau », « Le suivi ») sont retirés à la demande de Frédéric : redites des
+// encarts famille / prof et de « S'entraîner micro par micro ». Le composant
+// Nuage est dans l'historique (git show 6ca6a295:app/accueil/AccueilSuivi.tsx).
 
 function Puce({ children }: { children: React.ReactNode }) {
   return (
@@ -278,40 +266,20 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
           </div>
           {/* 08/11 : les mots de la collecte (« gratuitement, sans compte »). */}
           <p className="mt-2 text-sm font-bold text-slate-600">Sans compte et sans abonnement.</p>
-          {/* ⭐ 03/11/2026 — Frédéric : « EleveAI adaptée à huit pays
-              francophones, à mettre dans la page d'accueil ». Sous le titre,
-              visible de tous ; les 8 pays du plan, voir lib/aventure/pays.ts.
-              04/11 : retirée le matin, remise à sa demande (« remets tout »). */}
-          <Link
-            href="/rejoindre-l-aventure"
-            className="mx-auto mt-4 inline-flex flex-wrap items-center justify-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-black text-teal-800 shadow-sm ring-1 ring-teal-200 hover:ring-teal-400 sm:text-base"
-          >
-            Adaptée à 8 pays francophones
-            <span className="flex gap-1">
-              {PAYS_AVENTURE.map((p) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  key={p.slug}
-                  src={`/drapeaux/${p.slug}.svg`}
-                  alt={p.nom}
-                  title={p.nom}
-                  width={20}
-                  height={15}
-                  className="h-[15px] w-5 rounded-[3px] object-cover ring-1 ring-black/10"
-                />
-              ))}
-            </span>
-          </Link>
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            <Nuage Icone={GraduationCap} titre="Tout le programme">
-              Du CP à la Terminale : {totalMicros.toLocaleString("fr-FR")} micro-compétences de maths et {compteurVideos.nombreTexte} vidéos, rangées comme le programme officiel.
-            </Nuage>
-            <Nuage Icone={Target} titre="Chacun à son niveau">
-              Le coach trouve ce qui manque à chaque élève et l&apos;entraîne là-dessus, pas sur ce qu&apos;il sait déjà. Deux élèves, deux parcours.
-            </Nuage>
-            <Nuage Icone={BarChart3} titre="Le suivi">
-              Chaque réponse est gardée. Le prof voit les erreurs de toute sa classe ; les parents voient les progrès de leur enfant.
-            </Nuage>
+          {/* ⭐ 31/10/2026 — Frédéric : « le prof, il voit quelque chose pour
+              lui » : les automatismes et les fiches d'exercices tout de suite,
+              puis les vidéos et le calcul rapide. Accès directs, même style.
+              17/11, Frédéric (« applique ») : remontés juste sous les deux
+              boutons ; les trois nuages (redites) et le badge 8 pays (passé dans
+              « Le projet EleveAI ») sont retirés d'ici. */}
+          <p className="mt-5 text-sm font-bold text-slate-500">Ou va directement à :</p>
+          <div className="mt-2 flex flex-wrap justify-center gap-2">
+            {ACCES_DIRECTS.map(({ href, label, Icone, couleur }) => (
+              <Link key={href} href={href} className="flex items-center gap-2 rounded-full bg-white px-4 py-2 font-bold text-slate-800 shadow-sm ring-1 ring-slate-200 hover:ring-teal-400">
+                <Icone className={`h-4 w-4 ${couleur}`} aria-hidden />
+                {label}
+              </Link>
+            ))}
           </div>
           {/* ⭐ PRÉVU POUR LA COLLECTE (lib/collecte.ts), ÉTEINT : Frédéric, 08/11 —
               « ne mets pas Ulule sur l'accueil maintenant, mais prévois-le ».
@@ -330,24 +298,12 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
               )}
             </p>
           )}
-          {/* ⭐ 31/10/2026 — Frédéric : « le prof, il voit quelque chose pour
-              lui » : les automatismes et les fiches d'exercices tout de suite,
-              puis les vidéos et le calcul rapide. Accès directs, même style. */}
-          <p className="mt-6 text-sm font-bold text-slate-500">Ou va directement à :</p>
-          <div className="mt-2 flex flex-wrap justify-center gap-2">
-            {ACCES_DIRECTS.map(({ href, label, Icone, couleur }) => (
-              <Link key={href} href={href} className="flex items-center gap-2 rounded-full bg-white px-4 py-2 font-bold text-slate-800 shadow-sm ring-1 ring-slate-200 hover:ring-teal-400">
-                <Icone className={`h-4 w-4 ${couleur}`} aria-hidden />
-                {label}
-              </Link>
-            ))}
-          </div>
           {/* ⭐ 16/11/2026 — L'ARGUMENT DE VENTE : les vidéos + le coach qui suit
               la famille, compté au build (components/accueil/CompteurFamille.tsx).
               17/11, Frédéric : APRÈS « Essayer le coach » et les accès directs
               (vidéos, calcul rapide…), AVANT « Le projet EleveAI » : on agit
               d'abord, on se fait convaincre ensuite. */}
-          {compteur && <CompteurFamille variante={compteur} />}
+          {compteur && <CompteurFamille variante={compteur} micros={totalMicros} />}
         </div>
       </section>
 
@@ -358,6 +314,29 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
             établissements. */}
         <section className="mt-10 rounded-3xl bg-teal-50 p-5 sm:p-8">
           <h2 className="text-center text-2xl font-black sm:text-3xl">Le projet EleveAI, en quatre phrases</h2>
+          {/* 03/11 : le badge 8 pays (« à mettre dans la page d'accueil ») ; 17/11 : déplacé ici, à côté de « 8 pays, puis 40 ». */}
+          <div className="text-center">
+            <Link
+              href="/rejoindre-l-aventure"
+              className="mx-auto mt-3 inline-flex flex-wrap items-center justify-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-black text-teal-800 shadow-sm ring-1 ring-teal-200 hover:ring-teal-400 sm:text-base"
+            >
+              Adaptée à 8 pays francophones
+              <span className="flex gap-1">
+                {PAYS_AVENTURE.map((p) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    key={p.slug}
+                    src={`/drapeaux/${p.slug}.svg`}
+                    alt={p.nom}
+                    title={p.nom}
+                    width={20}
+                    height={15}
+                    className="h-[15px] w-5 rounded-[3px] object-cover ring-1 ring-black/10"
+                  />
+                ))}
+              </span>
+            </Link>
+          </div>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { Icone: Target, titre: "Un coach de maths", texte: "Il trouve ce qui manque à chaque élève et l'entraîne là-dessus, du CP à la Terminale." },
