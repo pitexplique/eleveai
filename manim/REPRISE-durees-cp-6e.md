@@ -22,6 +22,16 @@ Notes et outils : `side-session-notes/local_9cbb7607-cba7-48c1-a984-bb5d28d2f97c
 - ⏳ `manim/voix/RECAP-durees-cp-6e.md` montré à Frédéric le 16/11 → attendre son « oui » avant le moindre WAV.
 - Notes des agents : `cp-duree-jour-semaine` = moments de la journée (comme la banque) ; CM1 sans durées décimales (réservées à la 6e) ; 6e problème : afficher le tableau des 2 cars (7 h 22, 7 h 35, 7 h 48, 8 h 11).
 
+## Fait le 16/11 au soir (session de relève)
+- ✅ Frédéric : « Oui, lance le pilote » (après le RECAP). Les 62 autres voix : validées seulement s'il ne corrige rien en voyant le pilote (le lui demander avec l'aperçu).
+- ✅ WAV du pilote (Julie, −6) : `public/sons/cm1-duree-calculer(-short)/` (14 + 7 clips).
+- ✅ Marques : `python manim/scripts/cm1/aire_marques.py duree:calculer` → `manim/scripts/cm1/duree_calculer_marques.json` (0 introuvable).
+- ✅ Script `manim/scripts/cm1/duree_calculer.py` (`DureeCalculerCM1`) : dry run AUDIT PROPRE (seul « 974 »). Questions 01:04 rép 2 (C), 01:55 rép 1 (B). Durée ≈ 3 min 25.
+  - Outils du script : `hl()` horloge hors audit ; `ecran_hm()` écran digital en 2 morceaux (« 11: » puis « 15 ») ; `frise_libre()` frise PAS à l'échelle (défi : 15 min et 10 min) ; `_avec_q` : chaque ligne de la question arrive AVEC son morceau de frise (sinon les heures arrivaient 11 s en retard) ; « 8 h » / « 45. » en deux morceaux (sinon TARD 0,47 s).
+- ✅ Aperçu -ql (3 min 30) relu sur planche 2 fois, corrigés : écran « 11:15 » presque noir (couleur prise sur le Text parent), « 12 h » / « 12 h 10 » qui se chevauchaient (frise du défi : places 0, 19, 81, 100), le X du piège sur « puis », la figure de « Ce que tu as appris » (petits bonds : textes écartés du grand arc). `verifier-bords-video.py` = 0. Copie : `manim/sorties/cm1/maths/duree/04-calculer/apercu-cm1-duree-calculer.mp4`, page `manim/sorties/apercu.html` (port 3900).
+- ⏳ MONTRÉ à Frédéric le 16/11 : attendre son avis sur l'aperçu ET sur les 62 autres voix (validées seulement s'il ne corrige rien).
+- Vérifier un seul écran : petite scène qui n'appelle que `ecran_xxx()`, `fichier_marques` en chemin absolu, `-ql -s`.
+
 ## Reste, dans l'ordre
 1. Frédéric valide `manim/voix/RECAP-durees-cp-6e.md` (retouches : modifier le JSON puis relancer `python ND/recap.py`).
 2. Pilote CM1 `duree_calculer` : WAV (Julie, débit −6, comme les séries CM1) → marques (`aire_marques.py duree:calculer`, à ajouter à ses chemins) → script `manim/scripts/cm1/duree_calculer.py` (modèle `cm1/longueur_convertir.py`) → dry run AUDIT → aperçu -ql → Frédéric valide → HD (verrou) → short Ti Margo (compteur vérifié) → chaîne de fin.
