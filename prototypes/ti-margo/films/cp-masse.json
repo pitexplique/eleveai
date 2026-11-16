@@ -1,0 +1,7 @@
+{
+  "voix": "cp-masse-{ep}-short",
+  "sons": "public/sons/cp-masse-{ep}-short",
+  "sortie": "manim/sorties/cp/maths/masse/{num}-{ep}",
+  "nom": "eleveai-maths-cp-masse-{ep}-short",
+  "episodes": { "lexique": "01", "comparer": "02", "estimer": "03", "defi": "04" }
+}

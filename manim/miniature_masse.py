@@ -24,6 +24,8 @@ SORTIES = RACINE / "manim" / "sorties"
 EP = [
     ("ce2", "comparer", "03-comparer", ["COMPARER", "DES MASSES"], "1 kg = 1 000 g > 900 g",
      "même unité, puis on compare !", True, "jaune"),
+    ("cp", "lexique", "01-lexique", ["LOURD", "OU LÉGER ?"], "On soupèse !",
+     "gros ne veut pas dire lourd", False, "blanche"),
 ]
 
 

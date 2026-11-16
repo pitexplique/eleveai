@@ -96945,7 +96945,6 @@
         "balance",
         "fromagère",
         "fromage",
-        "masse",
         "maths",
         "CE2",
         "primaire",
@@ -97011,7 +97010,6 @@
         "Ti Margo",
         "dessin animé",
         "ceinture jaune",
-        "masse",
         "maths",
         "CE2",
         "primaire",
@@ -97043,6 +97041,137 @@
           "notionId": "masse",
           "microId": "ce1_masse_comparer"
         }
+      ]
+    },
+    {
+      "id": "cp-masse-lexique",
+      "pas_avant": "2027-04-30",
+      "prioritaire": true,
+      "notionId": "masse_contenance",
+      "microId": "cp_masse_lexique",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique.mp4",
+      "miniature": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique.png",
+      "titre": "Carton de livres ou oreiller : lequel est le plus lourd ? — Lourd ou léger — épisode 1 · Maths CP",
+      "accroche": "Awa est déménageuse. Toute la journée, elle porte des cartons. Certains sont lourds. D'autres sont légers.\n\nDans cette vidéo :\n• lourd, léger : un carton de livres, un oreiller\n• on soupèse : un objet dans chaque main, la main qui descend tient le plus lourd\n• le piège : gros ne veut pas dire lourd (le ballon de plage, la bille en fer)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : trouver le plus léger : un oreiller, un carton de livres, une chaise.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_lexique&display=simple\n\n⚖️ Épisode 1 de la série Masses d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Lourd ou léger ?"
+        ],
+        [
+          "00:19",
+          "Lourd, léger"
+        ],
+        [
+          "00:38",
+          "Question 1"
+        ],
+        [
+          "01:14",
+          "Question 2"
+        ],
+        [
+          "01:45",
+          "À toi de jouer"
+        ],
+        [
+          "02:05",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "lourd",
+        "léger",
+        "soupeser",
+        "comparer des masses",
+        "déménageuse",
+        "maths",
+        "CP",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:38",
+          "question": "Qu'est-ce qui est le plus léger : une plume, ou un dictionnaire ?",
+          "choix": [
+            "la plume",
+            "c'est pareil",
+            "le dictionnaire"
+          ],
+          "reponse": 0,
+          "explication": "La plume est légère : on la sent à peine dans la main."
+        },
+        {
+          "t": "01:14",
+          "question": "Un gros ballon de plage, une petite bille en fer. Lequel est le plus lourd ?",
+          "choix": [
+            "le ballon de plage",
+            "la bille en fer",
+            "c'est pareil"
+          ],
+          "reponse": 1,
+          "explication": "La bille est petite, mais elle est en fer. Elle est plus lourde que le ballon."
+        }
+      ],
+      "centres": [
+        "construction"
+      ]
+    },
+    {
+      "id": "cp-masse-lexique-short",
+      "pas_avant": "2027-04-30",
+      "prioritaire": true,
+      "notionId": "masse_contenance",
+      "microId": "cp_masse_lexique",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "short",
+      "renvoie_vers": "cp-masse-lexique",
+      "fichier": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique-short.mp4",
+      "miniature": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique-short-miniature.png",
+      "titre": "Un gros ballon de plage, c'est lourd ? #maths #cp",
+      "accroche": "Mon copain veut porter le gros ballon de plage. Il prend son élan… et il le soulève d'un doigt !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : une pomme, une plume, une pastèque : range-les du plus léger au plus lourd. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_lexique&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cp #primaire",
+      "tags": [
+        "masse",
+        "lourd",
+        "léger",
+        "ballon",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "Le gros ballon, ou la petite bille en fer : qui est le plus lourd ?",
+          "choix": [
+            "la bille en fer",
+            "c'est pareil",
+            "le gros ballon"
+          ],
+          "reponse": 0,
+          "explication": "Petite, mais en fer : la bille est plus lourde."
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
       ]
     }
   ]

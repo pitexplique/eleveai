@@ -304,3 +304,183 @@ class PaysageMasse(PaysageContenanceCE2):
         """L'étiquette de masse sous (ou au-dessus d') un objet. Hors audit par défaut."""
         t = Text(s, font_size=fs, color=couleur, weight=BOLD).next_to(obj, cote, buff=buff)
         return t if audit else hors_audit(t)
+
+
+# ── CP (17/11) : objets du quotidien, mains qui soupèsent, Awa la déménageuse ───────────────────
+CARTON = "#c08a4a"
+
+
+def carton(texte=None, s=1.0, couleur=CARTON):
+    """Un carton de déménagement fermé (rabats + scotch), étiquette optionnelle (« livres »)."""
+    corps = Rectangle(width=1.5 * s, height=1.1 * s, fill_color=couleur, fill_opacity=1, stroke_color="#7c4a1e",
+                      stroke_width=3)
+    scotch = Rectangle(width=0.26 * s, height=1.1 * s, fill_color="#e7c98f", fill_opacity=1, stroke_width=0).move_to(corps)
+    rabat = Line(corps.get_corner(UL), corps.get_corner(UR), color="#7c4a1e", stroke_width=5)
+    g = VGroup(corps, scotch, rabat)
+    if texte:
+        et = RoundedRectangle(width=1.0 * s, height=0.32 * s, corner_radius=0.05 * s, fill_color=WHITE,
+                              fill_opacity=1, stroke_width=0).move_to(corps.get_center() + P(0, -0.22 * s))
+        g.add(et, hors_audit(Text(texte, font_size=int(18 * s), color="#1f2937", weight=BOLD)).move_to(et))
+    return g
+
+
+def livres(s=1.0):
+    """Une pile de trois livres de couleur."""
+    g = VGroup()
+    for i, (c, w) in enumerate((("#dc2626", 1.3), ("#2563eb", 1.15), ("#16a34a", 1.25))):
+        g.add(RoundedRectangle(width=w * s, height=0.26 * s, corner_radius=0.04 * s, fill_color=c, fill_opacity=1,
+                               stroke_color=WHITE, stroke_width=1.5).move_to(P(0.05 * (i % 2) * s, i * 0.27 * s)))
+    return g
+
+
+def oreiller(s=1.0):
+    """Un oreiller blanc, gonflé, avec ses coins."""
+    corps = RoundedRectangle(width=1.7 * s, height=0.95 * s, corner_radius=0.4 * s, fill_color="#f1f5f9",
+                             fill_opacity=1, stroke_color="#94a3b8", stroke_width=2)
+    plis = VGroup(*[Line(corps.get_corner(c) + P(dx * s, dy * s), corps.get_corner(c) + P(2.2 * dx * s, 2.2 * dy * s),
+                         color="#cbd5e1", stroke_width=2)
+                    for c, dx, dy in ((UL, 0.12, -0.12), (UR, -0.12, -0.12), (DL, 0.12, 0.12), (DR, -0.12, 0.12))])
+    return VGroup(corps, plis)
+
+
+def plume(s=1.0):
+    """Une plume : tige courbe + barbes."""
+    tige = Line(P(-0.55 * s, -0.55 * s), P(0.5 * s, 0.55 * s), color="#e2e8f0", stroke_width=3)
+    barbe = Ellipse(width=0.42 * s, height=1.35 * s, fill_color="#f8fafc", fill_opacity=0.95, stroke_color="#cbd5e1",
+                    stroke_width=1.5).rotate(-PI / 4).move_to(P(0.05 * s, 0.08 * s))
+    return VGroup(barbe, tige)
+
+
+def dictionnaire(s=1.0):
+    """Un gros dictionnaire rouge, épais, posé à plat (tranche blanche)."""
+    pages = Rectangle(width=1.5 * s, height=0.55 * s, fill_color="#f8fafc", fill_opacity=1, stroke_width=0)
+    couv = RoundedRectangle(width=1.6 * s, height=0.65 * s, corner_radius=0.06 * s, fill_color="#b91c1c",
+                            fill_opacity=1, stroke_width=0)
+    pages.move_to(couv).shift(RIGHT * 0.05 * s)
+    dos = Rectangle(width=0.16 * s, height=0.65 * s, fill_color="#7f1d1d", fill_opacity=1, stroke_width=0)
+    dos.move_to(couv.get_left(), aligned_edge=LEFT)
+    traits = VGroup(*[Line(P(-0.6 * s, y * s), P(0.72 * s, y * s), color="#cbd5e1", stroke_width=1)
+                      .shift(pages.get_center()) for y in (-0.15, 0, 0.15)])
+    return VGroup(couv, pages, traits, dos)
+
+
+def ballon_plage(s=1.0):
+    """Un gros ballon de plage à quartiers colorés."""
+    r = 0.8 * s
+    fond = Circle(radius=r, fill_color=WHITE, fill_opacity=1, stroke_color="#94a3b8", stroke_width=2)
+    g = VGroup(fond)
+    for i, c in enumerate(("#ef4444", "#facc15", "#3b82f6")):
+        sect = AnnularSector(inner_radius=0, outer_radius=r, angle=PI / 3, start_angle=PI / 2 + i * 2 * PI / 3,
+                             fill_color=c, fill_opacity=1, stroke_width=0)
+        g.add(sect.move_arc_center_to(fond.get_center()))
+    g.add(Circle(radius=0.16 * s, fill_color=WHITE, fill_opacity=1, stroke_width=0).move_to(fond))
+    g.add(Circle(radius=r, stroke_color="#94a3b8", stroke_width=2, fill_opacity=0).move_to(fond))
+    return g
+
+
+def bille_fer(s=1.0):
+    """Une petite bille en fer, grise et brillante."""
+    b = Circle(radius=0.2 * s, fill_color="#64748b", fill_opacity=1, stroke_color="#334155", stroke_width=2)
+    reflet = Circle(radius=0.06 * s, fill_color=WHITE, fill_opacity=0.9, stroke_width=0)
+    reflet.move_to(b.get_center() + P(-0.07 * s, 0.07 * s))
+    return VGroup(b, reflet)
+
+
+def chaise(s=1.0):
+    """Une chaise en bois vue de côté."""
+    c = BOIS
+    assise = Rectangle(width=1.0 * s, height=0.14 * s, fill_color=c, fill_opacity=1, stroke_width=0)
+    dossier = Rectangle(width=0.14 * s, height=0.95 * s, fill_color=c, fill_opacity=1, stroke_width=0)
+    dossier.next_to(assise, UP, buff=0).align_to(assise, RIGHT)
+    pieds = VGroup(*[Rectangle(width=0.12 * s, height=0.8 * s, fill_color=c, fill_opacity=1, stroke_width=0)
+                     .next_to(assise, DOWN, buff=0).align_to(assise, cote) for cote in (LEFT, RIGHT)])
+    return VGroup(assise, dossier, pieds)
+
+
+def main_ouverte(s=1.0, peau="#c68642", miroir=False):
+    """Une main paume vers le haut (le plateau de la main qui soupèse) : paume + pouce + avant-bras."""
+    paume = RoundedRectangle(width=1.1 * s, height=0.34 * s, corner_radius=0.16 * s, fill_color=peau,
+                             fill_opacity=1, stroke_width=0)
+    pouce = Ellipse(width=0.36 * s, height=0.2 * s, fill_color=peau, fill_opacity=1, stroke_width=0)
+    pouce.rotate(0.5).move_to(paume.get_corner(UL) + P(0.05 * s, 0.02 * s))
+    doigts = VGroup(*[Line(paume.get_right() + P(-0.06 * s, dy * s), paume.get_right() + P(-0.32 * s, dy * s),
+                           color="#7c4a1e", stroke_width=1.5, stroke_opacity=0.6) for dy in (-0.06, 0.06)])
+    bras = RoundedRectangle(width=0.4 * s, height=1.2 * s, corner_radius=0.18 * s, fill_color=peau, fill_opacity=1,
+                            stroke_width=0).next_to(paume, DOWN, buff=-0.15 * s).shift(RIGHT * 0.25 * s)
+    manche = RoundedRectangle(width=0.5 * s, height=0.4 * s, corner_radius=0.1 * s, fill_color="#f97316",
+                              fill_opacity=1, stroke_width=0).move_to(bras.get_bottom() + P(0, 0.1 * s))
+    g = VGroup(bras, manche, paume, pouce, doigts)
+    if miroir:
+        g.flip(UP)
+    g.paume = paume
+    return g
+
+
+def awa(s=1.0):
+    """Awa, déménageuse : salopette orange, casquette verte."""
+    p = visage(personne(peau="#8d5524", tenue="#ea580c", cheveux="#111827", s=s))
+    p.add(casquette(p, "#16a34a"))
+    return p
+
+
+# ── CP 02 (17/11) : les fruits du primeur, les boîtes fermées, Hugo ─────────────────────────────
+def melon(s=1.0):
+    """Un melon : rond, vert pâle, côtes."""
+    c = Circle(radius=0.55 * s, fill_color="#bef264", fill_opacity=1, stroke_color="#4d7c0f", stroke_width=3)
+    cotes = VGroup(*[Arc(radius=0.55 * s, start_angle=PI / 2 - a, angle=2 * a, color="#65a30d", stroke_width=2)
+                     .stretch(f, 0).move_to(c) for a, f in ((PI / 2, 0.35), (PI / 2, 0.7))])
+    queue = Line(c.get_top(), c.get_top() + P(0.08 * s, 0.15 * s), color="#4d7c0f", stroke_width=4)
+    return VGroup(c, cotes, queue)
+
+
+def ananas(s=1.0):
+    """Un ananas : corps jaune-orangé quadrillé + couronne de feuilles."""
+    corps = Ellipse(width=0.62 * s, height=0.85 * s, fill_color="#f59e0b", fill_opacity=1, stroke_color="#b45309",
+                    stroke_width=2)
+    grille = VGroup(*[Line(P(-0.3 * s, y * s), P(0.3 * s, (y + 0.3) * s), color="#b45309", stroke_width=1.5)
+                      for y in (-0.35, -0.1, 0.15)], *[Line(P(-0.3 * s, (y + 0.3) * s), P(0.3 * s, y * s),
+                                                            color="#b45309", stroke_width=1.5) for y in (-0.35, -0.1, 0.15)])
+    grille.move_to(corps)
+    feuilles = VGroup(*[Polygon(P(0, 0), P(dx * s - 0.07 * s, 0), P(dx * s * 1.6, h * s), fill_color="#16a34a",
+                                fill_opacity=1, stroke_width=0).shift(corps.get_top() + P(0.03 * s, -0.04 * s))
+                        for dx, h in ((-0.12, 0.42), (0.04, 0.55), (0.16, 0.4))])
+    return VGroup(feuilles, corps, grille)
+
+
+def pomme(s=1.0, couleur="#dc2626"):
+    corps = VGroup(Circle(radius=0.3 * s, fill_color=couleur, fill_opacity=1, stroke_width=0).shift(LEFT * 0.12 * s),
+                   Circle(radius=0.3 * s, fill_color=couleur, fill_opacity=1, stroke_width=0).shift(RIGHT * 0.12 * s))
+    queue = Line(P(0, 0.22 * s), P(0.04 * s, 0.42 * s), color="#78350f", stroke_width=3)
+    feuille = Ellipse(width=0.22 * s, height=0.1 * s, fill_color="#16a34a", fill_opacity=1, stroke_width=0)
+    feuille.rotate(0.4).move_to(P(0.16 * s, 0.38 * s))
+    return VGroup(corps, queue, feuille)
+
+
+def agrume(s=1.0, couleur="#f97316", citron=False):
+    """Une orange (ronde) ou un citron (ovale, jaune, à bouts)."""
+    if citron:
+        c = Ellipse(width=0.62 * s, height=0.44 * s, fill_color="#facc15", fill_opacity=1, stroke_color="#ca8a04",
+                    stroke_width=2)
+        bouts = VGroup(*[Dot(c.get_edge_center(d), radius=0.05 * s, color="#ca8a04") for d in (LEFT, RIGHT)])
+        return VGroup(c, bouts)
+    c = Circle(radius=0.36 * s, fill_color=couleur, fill_opacity=1, stroke_color="#c2410c", stroke_width=2)
+    f = Ellipse(width=0.18 * s, height=0.08 * s, fill_color="#16a34a", fill_opacity=1, stroke_width=0)
+    return VGroup(c, f.move_to(c.get_top() + P(0.06 * s, 0.02 * s)))
+
+
+def boite(s=1.0, couleur="#a78bfa"):
+    """Une boîte fermée, avec son couvercle et un ruban : on ne voit pas ce qu'il y a dedans."""
+    corps = Rectangle(width=0.9 * s, height=0.7 * s, fill_color=couleur, fill_opacity=1, stroke_color=WHITE,
+                      stroke_width=2)
+    couv = Rectangle(width=1.0 * s, height=0.18 * s, fill_color=couleur, fill_opacity=1, stroke_color=WHITE,
+                     stroke_width=2).next_to(corps, UP, buff=0)
+    ruban = Line(couv.get_top(), corps.get_bottom(), color="#fde047", stroke_width=5)
+    return VGroup(corps, couv, ruban)
+
+
+def hugo(s=1.0):
+    """Hugo, primeur : chemise verte, tablier marron, cheveux courts."""
+    p = visage(personne(peau="#e0ac69", tenue="#16a34a", cheveux="#78350f", s=s))
+    p.add(tablier(p, "#92400e"))
+    p.add(p.yeux, p.bouche)
+    return p

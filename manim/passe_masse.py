@@ -23,7 +23,7 @@ SORTIES = RACINE / "manim" / "sorties"
 VOIX = RACINE / "manim" / "voix"
 MANIFESTE = RACINE / "manim" / "manifeste-youtube.json"
 NOTION = "masse"
-COACH = "https://www.eleveai.fr/coach/serie?classe={classe}&matiere=maths&notion=masse&microId={micro}&display=simple"
+COACH = "https://www.eleveai.fr/coach/serie?classe={classe}&matiere=maths&notion={notion}&microId={micro}&display=simple"
 NOM_CEINT = {"blanche": "Ceinture blanche", "jaune": "Ceinture jaune", "orange": "Ceinture orange",
              "verte": "Ceinture verte", "bleue": "Ceinture bleue", "marron": "Ceinture marron", "noire": "Ceinture noire"}
 CYCLE = {"cp": "cycle 2", "ce1": "cycle 2", "ce2": "cycle 2", "cm1": "cycle 3", "cm2": "cycle 3"}
@@ -50,6 +50,23 @@ EP = [
       s_accroche="Ma copine a un fromage de 900 grammes. Moi, un morceau de 1 kilogramme. Elle dit : 900, c'est plus que 1 ! On pose les deux sur la balance…",
       s_toi="qui est le plus lourd, 2 kilogrammes ou 1 800 grammes ?",
       s_tags=["masse", "comparer", "balance", "fromage"], s_centres=["cuisine", "jeux-defis"]),
+ dict(classe="cp", n=1, slug="lexique", micro="cp_masse_lexique", notion="masse_contenance", nom="Lourd ou léger",
+      date="2027-04-30", ceinture="blanche",
+      titre="Carton de livres ou oreiller : lequel est le plus lourd ?",
+      intro="Awa est déménageuse. Toute la journée, elle porte des cartons. Certains sont lourds. D'autres sont légers.",
+      points=["lourd, léger : un carton de livres, un oreiller",
+              "on soupèse : un objet dans chaque main, la main qui descend tient le plus lourd",
+              "le piège : gros ne veut pas dire lourd (le ballon de plage, la bille en fer)"],
+      defi="trouver le plus léger : un oreiller, un carton de livres, une chaise.",
+      chap={"00-garde": "Lourd ou léger ?", "02-lourd-leger": "Lourd, léger", "03-soupeser": "On soupèse",
+            "04-question": "Question 1", "05-piege": "Le piège", "06-question": "Question 2",
+            "07-defi": "À toi de jouer", "07b-correction": "Correction", "08-finale": "Ce que tu as appris"},
+      tags=["masse", "lourd", "léger", "soupeser", "comparer des masses", "déménageuse"],
+      centres=["construction"],
+      s_titre="Un gros ballon de plage, c'est lourd ?", s_ceinture="blanche",
+      s_accroche="Mon copain veut porter le gros ballon de plage. Il prend son élan… et il le soulève d'un doigt !",
+      s_toi="une pomme, une plume, une pastèque : range-les du plus léger au plus lourd.",
+      s_tags=["masse", "lourd", "léger", "ballon"], s_centres=["sport", "jeux-defis"]),
 ]
 
 COMMUNS = ["masse", "maths"]
@@ -76,7 +93,8 @@ def entrees():
         communs = COMMUNS + [CL, "primaire", CYCLE[cl], "CRPE", "EleveAI"]
         dos = dossier(e)
         nom = f"eleveai-maths-{ident}"
-        coach = COACH.format(classe=cl, micro=e["micro"])
+        notion = e.get("notion", NOTION)  # CP : masse_contenance
+        coach = COACH.format(classe=cl, micro=e["micro"], notion=notion)
         voix = json.loads((VOIX / f"{ident}.json").read_text(encoding="utf-8"))
         t = temps[ident]
         titre = f"{e['titre']} — {e['nom']} — épisode {n} · Maths {CL}"
@@ -87,11 +105,11 @@ def entrees():
         acc += f"\n\n⚖️ Épisode {n} de la série Masses d'EleveAI, en {CL}."
         qs = [dict(t=mmss(t["clips"][c]), **question(voix, c)) for c in voix if c.endswith("-question")]
         out.append({
-            "id": ident, "pas_avant": e["date"], "prioritaire": True, "notionId": NOTION, "microId": e["micro"], "classe": cl,
+            "id": ident, "pas_avant": e["date"], "prioritaire": True, "notionId": notion, "microId": e["micro"], "classe": cl,
             "ceinture": e["ceinture"], "serie": f"Maths {CL}", "type": "longue", "fichier": f"{dos}/{nom}.mp4",
             "miniature": f"{dos}/{nom}.png", "titre": titre, "accroche": acc,
             "chapitres": chapitres(e["chap"], t["clips"], t["duree"]),
-            "tags": e["tags"] + communs, "questions": qs, "centres": e["centres"],
+            "tags": list(dict.fromkeys(e["tags"] + communs)), "questions": qs, "centres": e["centres"],
         })
         if e.get("aussi"):  # la même vidéo sert aussi une micro d'une classe voisine
             out[-1]["aussi"] = e["aussi"]
@@ -107,11 +125,11 @@ def entrees():
         sacc += (f"\n\n▶️ L'épisode complet : {{{{LONGUE}}}}\n🎯 Le coach : {coach}\n\n"
                  f"Fait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #{cl} #primaire")
         out.append({
-            "id": f"{ident}-short", "pas_avant": e["date"], "prioritaire": True, "notionId": NOTION, "microId": e["micro"],
+            "id": f"{ident}-short", "pas_avant": e["date"], "prioritaire": True, "notionId": notion, "microId": e["micro"],
             "classe": cl, "ceinture": sc, "serie": f"Maths {CL}", "type": "short", "renvoie_vers": ident,
             "fichier": f"{dos}/{nom}-short.mp4", "miniature": f"{dos}/{nom}-short-miniature.png",
             "titre": stitre, "accroche": sacc,
-            "tags": e["s_tags"] + ["Ti Margo", "dessin animé", NOM_CEINT[sc].lower()] + communs + ["Shorts"],
+            "tags": list(dict.fromkeys(e["s_tags"] + ["Ti Margo", "dessin animé", NOM_CEINT[sc].lower()] + communs + ["Shorts"])),
             "questions": [dict(t=mmss(ts["clips"][c]), **question(sv, c)) for c in sv if c.endswith("-question")],
             "centres": e["s_centres"],
         })

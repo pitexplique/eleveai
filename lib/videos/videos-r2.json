@@ -8683,6 +8683,24 @@
   "youtube": "WnkU0_-Lj8U",
   "coach": "/coach/serie?classe=cp&matiere=maths&notion=calcul_mental&microId=cp_calcul_complements_10&display=simple"
  },
+ "cp-masse-lexique": {
+  "fichier": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique.mp4",
+  "poster": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique.png",
+  "vignette": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique.vignette.webp",
+  "titre": "Carton de livres ou oreiller : lequel est le plus lourd ? — Lourd ou léger — épisode 1 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_lexique&display=simple"
+ },
+ "cp-masse-lexique-short": {
+  "fichier": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique-short.mp4",
+  "poster": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique-short-miniature.png",
+  "vignette": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique-short-miniature.vignette.webp",
+  "titre": "Un gros ballon de plage, c'est lourd ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_lexique&display=simple"
+ },
  "cp-pas-a-pas-chiffre-0": {
   "fichier": "cp/francais/paysage/fr/pas-a-pas/chiffre-0/eleveai-francais-cp-pas-a-pas-chiffre-0.mp4",
   "poster": "cp/francais/paysage/fr/pas-a-pas/chiffre-0/eleveai-francais-cp-pas-a-pas-chiffre-0.png",

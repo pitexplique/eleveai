@@ -83,13 +83,17 @@ def convertir(textes, tsv):
 
 for arg in sys.argv[1:] or SLUGS:
     # « contenance:unites » → voix ce2-contenance-unites, marques contenance_unites_marques.json
-    notion, slug = arg.split(":") if ":" in arg else ("perimetre", arg)
-    voix = RACINE / "manim" / "voix" / f"ce2-{notion}-{slug}.json"
+    # « masse:lexique:cp » (17/11, autres classes) → voix cp-masse-lexique, marques masse_cp_lexique_marques.json
+    morceaux = arg.split(":")
+    classe = morceaux[2] if len(morceaux) == 3 else "ce2"
+    notion, slug = morceaux[:2] if ":" in arg else ("perimetre", arg)
+    voix = RACINE / "manim" / "voix" / f"{classe}-{notion}-{slug}.json"
     with tempfile.TemporaryDirectory() as d:
         base = str(Path(d) / slug)
         subprocess.run(["powershell", "-NoProfile", "-File", str(RACINE / "scripts" / "marques_dump.ps1"), "-Fichier",
                         str(voix), "-Sortie", base, "-Debit", "-6"], check=True, capture_output=True)
         res = convertir(json.loads(voix.read_text(encoding="utf-8")), base + ".cues.tsv")
-    sortie = ICI / f"{notion}_{slug.replace('-', '_')}_marques.json"
+    pre = f"{notion}_" if classe == "ce2" else f"{notion}_{classe}_"
+    sortie = ICI / f"{pre}{slug.replace('-', '_')}_marques.json"
     sortie.write_text(json.dumps(res, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(slug, len(res), "clips")
