@@ -1,5 +1,7 @@
 # Reprise : série MASSES du CP au CM2 (session C, mardi-mercredi 17-18/11)
 
+> ⛔⛔ **16/11, Frédéric : la QUALITÉ OPTIMALE avant le rythme** (« le principale est de tout finir avec une qulité optimum », « meme si on finit fin janviert »). Le rythme de 150 vidéos/semaine ne passe JAMAIS avant : contrôles complets, compteur des shorts vérifié avant chaque film, voix validées à deux, coach robuste. Ne jamais presser la série. (À recopier en tête du prompt de la relève.)
+
 Prompt : `docs/prompt-serie-masses-angles-cm.md` ; plan : `manim/PLAN-mardi-mercredi-17-18-11.md` (session C). Rien n'est poussé.
 ⛔ 16/11 Frédéric : « si la 6e n'a pas de masse tu fais pas » → PAS de vidéos 6e (aucune notion masse au coach 6e).
 
