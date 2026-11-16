@@ -54,10 +54,18 @@ function lienCoach(v) {
   return `/coach/serie?classe=${ok[0]}&matiere=maths&notion=${v.notionId}${micro}&display=simple`;
 }
 
+const TABLE_AVANT = fs.existsSync(SORTIE) ? JSON.parse(fs.readFileSync(SORTIE, "utf8")) : {};
 const table = {};
 let sansFichier = 0;
 for (const v of manifeste.videos) {
-  if (!existe(v.fichier)) { sansFichier++; continue; }
+  // ⛔ 16/11/2026 : une vidéo rendue sur un AUTRE poste (le 2e poste, ex. 5e aire)
+  // est sur R2 sans MP4 ici. On garde son entrée de la table actuelle, sinon chaque
+  // relance la retirait du site (42 vidéos du poste 2 perdues le 15/11 au soir).
+  if (!existe(v.fichier)) {
+    const avant = TABLE_AVANT[v.id];
+    if (avant && avant.fichier === v.fichier) { table[v.id] = { ...avant, titre: v.titre, youtube: ytId(v.url) ?? avant.youtube }; continue; }
+    sansFichier++; continue;
+  }
   // L'image d'attente : la miniature à côté du MP4, sinon celle du manifeste.
   const voisine = v.fichier.replace(/\.mp4$/, ".png");
   const poster = existe(voisine) ? voisine : existe(v.miniature) ? v.miniature : null;
