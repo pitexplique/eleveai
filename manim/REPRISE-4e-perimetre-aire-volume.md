@@ -42,7 +42,7 @@ Ouvert le 15/11/2026. 30 micros du coach, plan : `manim/PLAN-perimetre-aire-volu
 | V4 `volume_defi` (citerne) | ✅ | ✅ | ✅ 214,7 s / 53,7 s, bords 0 |
 | S1 `vision_reconnaitre` (jeu vidéo) | ✅ | ✅ | ✅ 208,9 s / 56,7 s, bords 0 |
 | S2 `vision_vues` (maquette) | ✅ | ✅ | ✅ 203,9 s / 54,7 s, bords 0 |
-| S3 `vision_representation` (manga) | ⏳ | ⏳ | — |
+| S3 `vision_representation` (manga) | ✅ | ✅ | ✅ 188,6 s / 57,4 s, bords 0 |
 | S4 `patron_pyramide` (dé à 4 faces) | ⏳ | ⏳ | — |
 | S5 `vision_section` (muscle, scanner) | ⏳ | ⏳ | — |
 | S6 `vision_defi` (drone) | ⏳ | ⏳ | — |
@@ -50,8 +50,8 @@ Ouvert le 15/11/2026. 30 micros du coach, plan : `manim/PLAN-perimetre-aire-volu
 | A1 → A5 (aire) | ⏳ | ⏳ | — |
 | T1 → T8 (3e) | ⏳ | ⏳ | — |
 
-**6 épisodes finis sur 28** (V1, V2, V3, V4, S1, S2) — paysages et shorts rendus en HD,
-`verifier-bords-video` = 0 sur les 12 MP4. **22 restent à écrire et à rendre.**
+**7 épisodes finis sur 28** (V1, V2, V3, V4, S1, S2, S3) — paysages et shorts rendus en HD,
+`verifier-bords-video` = 0 sur les 14 MP4. **21 restent à écrire et à rendre.**
 
 Chaîne d'un épisode : script paysage → dry run `AUDIT=1 BORDS=1` jusqu'à 0 AVANCE / RETARD / TARD /
 BORD → script short (même contrôle, en `-r 1080,1920`) → `manim/poste2/4e_hd.sh` pour les deux
@@ -71,6 +71,31 @@ BORD → script short (même contrôle, en `-r 1080,1920`) → `manim/poste2/4e_
     valeur `"tout"` fait planter le RENDU alors que le dry run passait. Le remède est éditorial,
     et il est meilleur : les données sont DESSINÉES par `avant_q`, et la carte ne garde que la
     question (« Quel solide ? »). C'est « montrer, pas raconter » appliqué à l'écran de question.
+
+### Leçons ajoutées par le lot Solides (S3, 16/11) — elles valent pour les 21 restants
+12. ⭐⭐ **Le gabarit PAYSAGE attend tout seul.** À chaque `play`, `SynchroJ2._attente` retarde
+    l'animation jusqu'à ce que la voix ait dit, pour chaque texte neuf, ses NOMBRES et son
+    PREMIER mot de 4 lettres ou plus (`_jetons`). Conséquences :
+    · deux lignes dont les mots sont dits à des moments différents = DEUX `play`, jamais un
+      `FadeIn` du bloc entier (sinon le gabarit attend le mot le plus tardif, et le mot le plus
+      tôt est compté en `TARD`) ;
+    · un `au_mot` placé APRÈS un `play` qui a déjà attendu plus loin = `RETARD` : on le supprime.
+    Le SHORT, lui, n'a pas ce moteur : là, tout se cale à la main avec `au_mot`.
+13. ⛔ **Ne jamais passer `mot_q="Question"`** à `question_gauche` : le gabarit fait déjà
+    `au_mot("Question")` avant la tête, puis rejoue `mot_q` 0,4 s plus tard → `RETARD 0,40 s`
+    sur CHAQUE question-pause. (Les épisodes V1-S2 le passent : c'est à corriger s'ils sont refaits.)
+14. Dans un SHORT, `_cue` cherche **par sous-chaîne** : « Les fuyantes » attendait le « les » de
+    « paral-lès-… » et la carte A arrivait 0,9 s trop tard. La carte de question d'un short ne
+    porte qu'UNE ligne courte, faite de mots absents de la voix (« Quelles fuyantes ? »).
+15. Un nombre collé au premier mot long de sa ligne s'écrit en retard : « 4, c'est oublier la
+    base. » attend « oublier ». Remède : `couper={i: ("4,", "c'est oublier la base.")}` en paysage,
+    et un morceau à part (`["4", "seuls : …"]`) dans un short.
+16. Le patron d'un tétraèdre se dessine à partir d'un triangle du milieu qui pointe vers le BAS :
+    ses trois symétriques forment alors le grand triangle partagé en quatre. Vers le haut, on
+    obtient une étoile, et l'élève ne reconnaît plus rien.
+17. Dans un écran de question, la figure monte **au-dessus de y = +0,5** (la phrase de réponse
+    s'écrit à partir de −0,3), et la phrase de réponse tient en **3 lignes** : à 4 elle est
+    rétrécie jusqu'à devenir illisible sur un vidéoprojecteur.
 
 ## Le PILOTE V2 `volume_pyramide` (15/11) — vidéo COMMUNE 4e + 3e
 
