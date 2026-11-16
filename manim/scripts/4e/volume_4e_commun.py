@@ -104,6 +104,25 @@ class Paysage4e(Paysage5e):
     identite = "Maths 4e — EleveAI"
     ceinture = "verte"
 
+    def _disposer_q(self, question, choix, phrase, *a, **k):
+        """⛔ `q_sans_audit` visait le mauvais objet. Le commun CM1 l'applique à `r[1]`, or
+        `_disposer_q` renvoie (tete, rebours, q, cartes, pause, ph) : `r[1]` est le compte à
+        rebours. On le réapplique ici à la QUESTION (`r[2]`), sans toucher au commun partagé.
+        Sert aux écrans dont la question reprend mot pour mot le début de la voix : la carte
+        ne peut s'afficher qu'après l'annonce, et l'audit la compterait en retard.
+        `q_sans_audit="tout"` sort la carte entière de la synchro — à n'employer QUE dans ce cas
+        (la phrase de RÉPONSE, elle, reste toujours auditée : c'est là que se cachent les nombres
+        qui ne doivent jamais apparaître avant d'être dits)."""
+        r = list(super()._disposer_q(question, choix, phrase, *a, **k))
+        q = r[2]
+        idx = getattr(self, "_q_sans_audit", ())
+        cibles = q if idx == "tout" else [q[i] for i in idx]
+        for c_ in cibles:
+            for f in c_.get_family():
+                f._pas_audit = True
+                f.sans_synchro = True
+        return tuple(r)
+
 
 class Paysage3e(Paysage5e):
     identite = "Maths 3e — EleveAI"
