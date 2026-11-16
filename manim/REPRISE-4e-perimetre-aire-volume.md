@@ -41,8 +41,17 @@ Ouvert le 15/11/2026. 30 micros du coach, plan : `manim/PLAN-perimetre-aire-volu
 | V3 `volume_cone` (cornet) | ✅ | ✅ | ✅ 242,1 s / 65,6 s, bords 0 |
 | V4 `volume_defi` (citerne) | ✅ | ✅ | ⏳ dry run en cours |
 | S1 `vision_reconnaitre` (jeu vidéo) | ✅ | ✅ | ✅ 208,9 s / 56,7 s, bords 0 |
-| S2 `vision_vues` (maquette) | ✅ | ✅ | ⏳ paysage en rendu, short ✅ 54,7 s |
-| S3 → S6, P1 → P5, A1 → A5, T1 → T8 | ⏳ | ⏳ | — |
+| S2 `vision_vues` (maquette) | ✅ | ✅ | ✅ 203,9 s / 54,7 s, bords 0 |
+| S3 `vision_representation` (manga) | ⏳ | ⏳ | — |
+| S4 `patron_pyramide` (dé à 4 faces) | ⏳ | ⏳ | — |
+| S5 `vision_section` (muscle, scanner) | ⏳ | ⏳ | — |
+| S6 `vision_defi` (drone) | ⏳ | ⏳ | — |
+| P1 → P5 (périmètre) | ⏳ | ⏳ | — |
+| A1 → A5 (aire) | ⏳ | ⏳ | — |
+| T1 → T8 (3e) | ⏳ | ⏳ | — |
+
+**6 épisodes finis sur 28** (V1, V2, V3, V4, S1, S2) — paysages et shorts rendus en HD,
+`verifier-bords-video` = 0 sur les 12 MP4. **22 restent à écrire et à rendre.**
 
 Chaîne d'un épisode : script paysage → dry run `AUDIT=1 BORDS=1` jusqu'à 0 AVANCE / RETARD / TARD /
 BORD → script short (même contrôle, en `-r 1080,1920`) → `manim/poste2/4e_hd.sh` pour les deux
@@ -298,3 +307,47 @@ Sur 775 vidéos du manifeste, **129 écarts**, de deux sortes :
 `instrument` → `musique, sciences` ; `construction` → `sport, art-design`).
 **PAS corrigé** : les 127 autres sont dans `manim/manifeste-youtube.json`, interdit à
 ce poste. ⚠️ À faire reprendre par le 1er poste : ce sont surtout des vidéos CM2 et CE2.
+
+---
+
+# ⭐ PROMPT DE REPRISE (passage de main, 16/11/2026)
+
+Tu reprends la série 4e + 3e « Périmètre, aire, volume, solides » sur la branche `poste2`.
+**6 épisodes sur 28 sont finis** (tableau ci-dessus) ; **22 restent**. Tout ce qui suit est prêt :
+les 54 voix VALIDÉES par Frédéric, leurs WAV, leurs marques, et le socle de la série.
+
+## Ce que tu ne refais pas
+- Les voix : `manim/poste2/VOIX-4e-3e-perimetre-aire-volume.md` fait foi. ⛔ Ne change pas un mot
+  sans Frédéric. Pour (re)générer un JSON : `python manim/poste2/voix-depuis-md.py --tout`.
+- Les WAV (`public/sons/<id>/`) et les marques (`manim/scripts/4e/<id>_marques.json`) : déjà là.
+- Le socle : `volume_4e_commun.py` (figures + 28 personnages + `Paysage4e`) et
+  `volume_4e_short_commun.py` (`Short4e`). ⛔ Les shorts sont en MANIM, jamais en dessin animé
+  (REGLES.md 09/11, redit par Frédéric le 16/11).
+
+## La chaîne d'un épisode (compte ~30 min)
+1. `manim/scripts/4e/<id>.py`, scène en PascalCase, classe de base `Paysage4e`.
+   Modèles les plus proches : `4e_volume_cone.py` (formule + piège), `4e_solides_vues.py` (figures),
+   `4e_volume_defi.py` (deux solides à composer).
+2. `PYTHONIOENCODING=utf-8 AUDIT=1 BORDS=1 python -m manim render --dry_run <script> <Scène>`
+   → 0 AUDIT-AVANCE, 0 RETARD, 0 TARD, 0 BORD. Les 11 leçons ci-dessus évitent 90 % des allers-retours.
+3. Le short : `Short4e`, même contrôle avec `-r 1080,1920`.
+4. `bash manim/poste2/4e_hd.sh <script> <Scène> <nom-sortie> <media_dir> <dossier-sortie> [1080,1920]`
+   (le 6ᵉ argument pour les shorts). Un seul rendu HD à la fois : le script prend un verrou.
+5. Planche de contrôle : `bash manim/poste2/5e_planche.sh <mp4> <png> <colonnes> t1 t2 …`, puis
+   relire les images. ⛔ Pour un short, contrôler le COMPTEUR autour de « Mets pause » (Frédéric, 15/11).
+6. Commit PAR CHEMIN, et mettre le tableau d'avancement à jour.
+
+## Nommage et sorties
+- Ids : `4e-perimetre-polygones`, `4e-aire-disque`, `3e-volume-boule`… (colonne « Id » du tableau
+  des 28 épisodes dans le fichier de voix). Fichiers MP4 : `eleveai-maths-<classe>-<id sans classe>.mp4`.
+- Sorties : `manim/sorties/4e/maths/{volume,solides,perimetre,aire}/NN-<slug>/` et
+  `manim/sorties/3e/maths/<notion>/NN-<slug>/`.
+
+## La passe finale (quand les 28 seront là)
+- `manim/poste2/manifeste-4e.json` et `videos-r2-4e.json` (⛔ ne jamais toucher
+  `manim/manifeste-youtube.json` ni `lib/videos/*.json` : ce sont les fichiers du 1er poste),
+  `manim/poste2/coach-4e.md` pour le branchement, avec les `aussi` vers la 3e.
+- `node scripts/verifier-centres-age.mjs manim/poste2/manifeste-4e.json` → 0 centre hors tranche.
+- R2 : les clés sont dans `.env.local` et rclone 1.76 est installé, mais on n'envoie qu'une série
+  validée par Frédéric.
+- ⛔ Jamais de push : c'est le 1er poste qui fusionne `poste2` dans `main`.
