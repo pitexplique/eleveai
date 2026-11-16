@@ -1,5 +1,7 @@
 # Reprise : série DURÉES du CP à la 6e (session B de mardi-mercredi 17-18/11)
 
+> ⛔⛔ **LA QUALITÉ AVANT LE RYTHME** (Frédéric, 16/11 : « le principale est de tout finir avec une qulité optimum », « meme si on finit fin janviert »). Les 150 vidéos par semaine ne passent JAMAIS avant la qualité : contrôles complets, compteur des shorts vérifié avant chaque film, voix validées à deux. Ne jamais presser la série. (À recopier en tête du prompt de toute relève.)
+
 Prompt : `docs/prompt-serie-durees-cm1-6e.md` (étendue CP → 6e le 16/11). Plan : `manim/PLAN-mardi-mercredi-17-18-11.md`, session B.
 Inventaire VALIDÉ par Frédéric le 16/11 (« Oui, continue » ; « donc programme durée du CP à la 6e ») : `manim/INVENTAIRE-durees-cp-6e.md`.
 36 micros → 32 paysages + 31 shorts à tourner. `aussi` : CE2 lire → CM1 `duree_lire` ; CE2 placer → CM1 + CM2 `duree_positionner_aiguilles` ; 5e `conversion-duree` → 6e `duree_convertir` (paysage ; à revoir à l'œil).
