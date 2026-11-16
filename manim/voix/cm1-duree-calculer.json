@@ -1,0 +1,16 @@
+{
+  "00-garde": "Calculer une durée. Combien de temps entre 9 heures 40 et 11 heures 15 ?",
+  "01-situation": "Voici Théo. Il est contrôleur aérien. Depuis la tour de contrôle, il guide les avions. Un avion décolle à 9 heures 40. Il atterrit à 11 heures 15. Combien de temps a duré le vol ?",
+  "02-frise": "On dessine une frise du temps. À gauche, le départ : 9 heures 40. À droite, l'arrivée : 11 heures 15. On va avancer par bonds.",
+  "03-bonds": "Premier bond : de 9 heures 40 à 10 heures, 20 minutes. On tombe sur une heure pile. Deuxième bond : de 10 heures à 11 heures, 1 heure. Dernier bond : de 11 heures à 11 heures 15, 15 minutes.",
+  "04-total": "On additionne les bonds. 1 heure, plus 20 minutes, plus 15 minutes : 1 heure 35 minutes. Le vol a duré 1 heure 35.",
+  "05-question": "Question ! Un avion part à 14 heures 30. Il arrive à 16 heures. Combien de temps de vol ? A : 2 heures 30. B : 1 heure. C : 1 heure 30. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. De 14 heures 30 à 15 heures : 30 minutes. De 15 heures à 16 heures : 1 heure. En tout : 1 heure 30.",
+  "06-piege": "Attention au piège ! On ne calcule pas 11 moins 9, puis 15 moins 40. Une heure, ce n'est pas 100 minutes : c'est 60 minutes. Alors on avance par bonds, en passant par l'heure pile.",
+  "07-question": "Question ! Un avion se pose à 10 heures 50. Il repart 25 minutes plus tard. À quelle heure repart-il ? A : 10 heures 75. B : 11 heures 15. C : 11 heures 25. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. De 10 heures 50 à 11 heures : 10 minutes. Il reste 15 minutes. 11 heures, plus 15 minutes : 11 heures 15.",
+  "08-defi": "À toi de jouer ! Un avion décolle à 8 heures 45. Il atterrit à 12 heures 10. Combien de temps a duré le vol ? Mets pause, et cherche !",
+  "08b-correction": "Correction. De 8 heures 45 à 9 heures : 15 minutes. De 9 heures à 12 heures : 3 heures. De 12 heures à 12 heures 10 : 10 minutes. En tout : 3 heures 25 minutes.",
+  "09-finale": "Ce que tu as appris. Pour calculer une durée, on dessine une frise. On avance par bonds, en passant par l'heure pile. Puis on additionne les bonds. 1 heure, c'est 60 minutes.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

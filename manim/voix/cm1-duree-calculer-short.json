@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Mon film commence à 15 heures 45. Il finit à 17 heures 20. Combien de temps dure-t-il ? Facile : 17 moins 15, et 20 moins 45… Aïe, ça ne marche pas !",
+  "01-bonds": "Alors je saute sur la frise. De 15 heures 45 à 16 heures : 15 minutes. Hop ! De 16 heures à 17 heures : 1 heure. Hop ! De 17 heures à 17 heures 20 : 20 minutes.",
+  "02-question": "Question ! Combien de temps dure mon film ? A : 2 heures 25. B : 1 heure 75. C : 1 heure 35. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! 1 heure, plus 15 minutes, plus 20 minutes : 1 heure 35.",
+  "03-ouf": "J'ai tellement sauté… que j'ai raté la fin du film !",
+  "04-commentaire": "À toi : un dessin animé commence à 10 heures 50 et finit à 11 heures 30. Combien de temps dure-t-il ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
