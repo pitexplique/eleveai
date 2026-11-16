@@ -322,7 +322,7 @@ class VolumeDefi4e(Paysage4e):
         l4 = self.ligne([("7 200 ÷ 400", BLEU_D)], 34, buff=0.2)
         self.col(l4, -0.4, x)
         self.au_mot("7 200", 2)
-        self.play(FadeIn(l4, shift=UP * 0.1), run_time=0.35)
+        self.play(FadeIn(l4), run_time=0.18)
         self.au_mot("18 jours")
         res = self.gros("18 jours", fs=46)
         self.col(res, -1.3, x)
