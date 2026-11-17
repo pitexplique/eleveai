@@ -131,6 +131,26 @@ BORD → script short (même contrôle, en `-r 1080,1920`) → `manim/poste2/4e_
 23. Un visuel faux reste faux même s'il est joli : quatre petits disques posés sur un grand ne le
     remplissent pas. Quatre QUARTS du grand disque, si — et ils ont bien l'aire du petit (S5 short).
 
+## Passe finale de la 4e — FAITE le 17/11
+
+- `manim/poste2/manifeste-4e.json` (40 entrées), `videos-r2-4e.json` et `coach-4e.md` sont
+  **générés** par `manim/poste2/manifeste-4e.py` : il relit le tableau de la série et les voix
+  du fichier VOIX, et les **logs de rendu HD** (`manim/scripts/4e/media-hd-*.hd.log`), qui portent
+  l'instant exact de chaque écran et de chaque question-pause. Rien n'est saisi deux fois.
+  Pour refaire les trois fichiers après un re-rendu : `python manim/poste2/manifeste-4e.py`.
+- `node scripts/verifier-centres-age.mjs manim/poste2/manifeste-4e.json` → **0 centre hors tranche**
+  sur les 40 vidéos.
+- Aperçu en pause des 20 épisodes : `manim/sorties/4e/maths/apercu-4e-complet.html`,
+  servi par `python -m http.server 3907 --directory manim/sorties`.
+- ⏳ Restent pour le 1er poste : les miniatures, l'envoi R2, et le branchement du coach
+  (`coach-4e.md` porte la commande et le tableau notion / micro / id / `aussi`).
+
+### Un point à trancher avec Frédéric
+Dans les CARTES de question (A / B / C), le « ² » de « m² » est composé par `texte_maths` :
+il est plus petit mais posé à mi-hauteur, pas en vrai exposant (« 46 m2 » à l'œil). C'est le
+comportement du gabarit partagé, identique dans les 6 épisodes déjà validés — donc laissé tel quel.
+Hors des cartes (titres, calculs, finale), le « ² » est un vrai exposant.
+
 ### Leçons ajoutées par le lot Périmètre (P1 à P4, 16/11)
 24. ⛔⛔ **Un morceau ne contient jamais un nombre ET un mot long dits à plus de 0,4 s d'écart.**
     La liste de ce qui s'est fait prendre : « rayon 4 cm », « 4 m de diamètre », « 25 € le mètre »,
