@@ -103826,10 +103826,10 @@
       "ceinture": "blanche",
       "serie": "En classe avec EleveAI",
       "type": "longue",
-      "fichier": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-paysage.mp4",
-      "miniature": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-paysage-miniature.png",
-      "titre": "Le restaurant de la classe : chacun apprend à sa façon · En classe avec EleveAI",
-      "accroche": "Ce matin, un prof doit choisir pour 25 élèves. Qu'est-ce qu'il leur prend ?\n\nUne séance vécue en 6e, racontée par Ti Margo :\n• d'abord en classe entière, un plat imposé pour tous : la carte mentale à colorier ;\n• ensuite en groupes, à la carte : le coach, les exercices interactifs, le cours au cahier, le découpage, la vidéo ;\n• pas de bonne réponse : chacun apprend à sa façon, et chacun a son objectif ;\n• le dessert : va trouver des longueurs dans ce que tu aimes.\n\nDessin animé, voix de synthèse.\n\n👩‍🏫 La séance en détail, clic par clic : https://www.eleveai.fr/seances\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=aire_longueur&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "fichier": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-mathematiques-paysage.mp4",
+      "miniature": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-mathematiques-paysage-miniature.png",
+      "titre": "Le restaurant de mathématiques, en classe ou à la maison · En classe avec EleveAI",
+      "accroche": "Ce matin, un prof doit choisir pour 25 élèves. Qu'est-ce qu'il leur prend ?\n\nLe restaurant de mathématiques, en classe ou à la maison : une séance vécue en 6e, racontée par Ti Margo.\n\n• d'abord en classe entière, un plat imposé pour tous : la carte mentale à colorier ;\n• ensuite en groupes, à la carte : le coach, les exercices interactifs, le cours au cahier, le découpage, la vidéo ;\n• pas de bonne réponse : chacun apprend à sa façon, et chacun a son objectif ;\n• le dessert : va trouver des longueurs dans ce que tu aimes.\n\nDessin animé, voix de synthèse.\n\n👩‍🏫 La séance en détail, clic par clic : https://www.eleveai.fr/seances\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=aire_longueur&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste",
       "chapitres": [
         [
           "00:00",
@@ -103869,9 +103869,12 @@
         "CRPE",
         "Ti Margo",
         "dessin animé",
-        "EleveAI"
+        "EleveAI",
+        "restaurant de mathématiques",
+        "à la maison"
       ],
-      "url": "https://youtu.be/aCes5qsfHs0"
+      "brouillon_prive": "https://youtu.be/aCes5qsfHs0",
+      "url": "https://youtu.be/va9nMf8ozHU"
     },
     {
       "id": "6e-seance-restaurant-short",
@@ -103881,10 +103884,10 @@
       "serie": "En classe avec EleveAI",
       "type": "short",
       "renvoie_vers": "6e-seance-restaurant",
-      "fichier": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-short.mp4",
-      "miniature": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-short-miniature.png",
-      "titre": "Le restaurant de la classe : et toi, tu prends quoi ? #prof #maths",
-      "accroche": "Ce matin, un prof doit choisir pour 25 élèves. Qu'est-ce qu'il leur prend ? Un plat imposé pour tous, puis chacun à la carte.\n\nDessin animé, voix de synthèse.\n👉 Et toi, au restaurant de la classe, tu prends quoi ? Réponds en commentaire !\n\n▶️ La vidéo complète : {{LONGUE}}\n👩‍🏫 La séance, clic par clic : https://www.eleveai.fr/seances\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #prof #maths #6e #pedagogie",
+      "fichier": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-mathematiques-short.mp4",
+      "miniature": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-mathematiques-short-miniature.png",
+      "titre": "Le restaurant de mathématiques : et toi, tu prends quoi ? #prof #maths",
+      "accroche": "Ce matin, un prof doit choisir pour 25 élèves. Qu'est-ce qu'il leur prend ? Un plat imposé pour tous, puis chacun à la carte.\n\nDessin animé, voix de synthèse.\n👉 Et toi, au restaurant de mathématiques, tu prends quoi ? Réponds en commentaire !\n\n▶️ La vidéo complète : {{LONGUE}}\n👩‍🏫 La séance, clic par clic : https://www.eleveai.fr/seances\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #prof #maths #6e #pedagogie",
       "tags": [
         "séance",
         "prof",
@@ -103899,9 +103902,11 @@
         "Ti Margo",
         "dessin animé",
         "EleveAI",
-        "Shorts"
+        "Shorts",
+        "restaurant de mathématiques"
       ],
-      "url": "https://youtube.com/shorts/-2Fq5VurmGw"
+      "brouillon_prive": "https://youtube.com/shorts/-2Fq5VurmGw",
+      "url": "https://youtube.com/shorts/zcLYy1Lnb2A"
     }
   ]
 }

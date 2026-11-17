@@ -1,5 +1,5 @@
 /* ============================================================
-   Série « Séances » (6e) — ÉPISODE 01 : LE RESTAURANT DE LA CLASSE (17/11/2026).
+   Série « Séances » (6e) — ÉPISODE 01 : LE RESTAURANT DE MATHÉMATIQUES (17/11/2026).
    Outils : films/6e-commun.js. Le hub /seances raconte la séance vécue de Frédéric.
    Ti Margo raconte : un prof doit choisir pour 25 élèves. La carte : coach, exercices, cahier,
    découpage, vidéo. D'abord en CLASSE ENTIÈRE (les 25 en rangées) : un plat imposé, la carte
@@ -11,7 +11,7 @@
    ============================================================ */
 FILMS['restaurant']=function(outils){
   const DUR={'00-accroche':7.73,'01-carte':6.8,'02-impose':7.2,'03-groupes':4.95,'04-doute':5.45,'05-question':11.78,
-    '06-choix':7.72,'07-dessert':4.27,'08-commentaire':6.27,'09-abonne':6.05};
+    '06-choix':7.72,'07-dessert':4.27,'08-commentaire':6.52,'09-abonne':6.05};
   const clips=enchainer(.4,Object.keys(DUR),DUR,{'00-accroche':.6,'02-impose':.6,'03-groupes':1.2,'04-doute':1,'05-question':3.3,'06-choix':1.6,'07-dessert':1.2,'08-commentaire':2.2});
   const A=Object.fromEntries(clips), {dit,mot}=voixDe(A);
   const [acc,car,imp,grp,dou,q,cho,des,com,f]=clips.map(x=>x[1]), FIN=+(f+DUR['09-abonne']+.5).toFixed(2);
@@ -24,7 +24,7 @@ FILMS['restaurant']=function(outils){
   if(PAYSAGE){ const c=tab.c, f=tab.fond, W=tab.W, H=tab.H;
     tab.effacer=()=>{ c.setTransform(1,0,0,1,0,0); c.fillStyle=f; c.fillRect(0,0,W,H); c.setTransform(1.25,0,0,1.25,(W-1056*1.25)/2,(H-720*1.25)/2); };
     const css2=document.createElement('style'); css2.textContent=`
-      #titre{left:520px;right:520px;top:40px;font-size:70px;}
+      #titre{left:300px;right:300px;top:40px;font-size:66px;}
       #echelle{left:560px;right:560px;top:170px;}
       #legende{left:60px;right:60px;top:auto!important;bottom:28px;font-size:46px!important;padding:12px 26px;border-radius:30px;line-height:1.2;}
       #carte{left:760px!important;right:60px!important;top:90px!important;}
@@ -34,7 +34,8 @@ FILMS['restaurant']=function(outils){
   outils.panneau.style.display='none'; cssCartes();
   /* La carte du socle s'appelle « Au choix ! » ici : il n'y a pas de bonne réponse. */
   const css=document.createElement('style');
-  css.textContent='#ct{font-size:0!important;}#ct::after{content:"Au choix !";font-size:56px;}';
+  /* « Le restaurant de mathématiques » tient sur une ligne : police un peu plus petite que le socle */
+  css.textContent='#ct{font-size:0!important;}#ct::after{content:"Au choix !";font-size:56px;}'+(PAYSAGE?'':'#titre{font-size:54px!important;}');
   document.head.append(css);
 
   const t25=mot('00-accroche','25'), tPrend=mot('00-accroche','prend'), tCe=mot('00-accroche','Ce');
@@ -174,22 +175,22 @@ FILMS['restaurant']=function(outils){
     ...suiteDe(q,60,60,[a4('Le prof ne sait pas'),a4('ce qui marche pour chacun.')],[a4('Eux, peut-être.')]),
     ...suiteDe(des,60,60,[a6('Pas de bonne réponse :'),a6("c'est ton choix !")],[a6('Chacun apprend à sa façon,')],[a6('et chacun a son objectif.')]),
     ...suiteDe(com,60,62,[a7('Et le dessert :')],[a7('va trouver des longueurs'),a7('dans ce que tu aimes !')]),
-    ...suiteDe(f,60,60,[a8('Et toi, au restaurant'),a8('de la classe,')],[a8('tu prends quoi ?')],[a8('Réponds en commentaire !')])
+    ...suiteDe(f,60,60,[a8('Et toi, au restaurant'),a8('de mathématiques,')],[a8('tu prends quoi ?')],[a8('Réponds en commentaire !')])
   ];
   const phraseQ=[qd('Et toi, que veux-tu faire ?')];
   const tq=m=>mot('05-question',m)-q;
   qd.jusque('Mets'); const pauseQ=[qd('Mets pause, et choisis !')];
 
-  if(!PAYSAGE) poserMiniature(outils,car+1,'Le restaurant<br>de la classe',ardoiseMini([['Plat imposé'],['+ à la carte','#ffd43b']]));
+  if(!PAYSAGE) poserMiniature(outils,car+1,'Le restaurant<br>de mathématiques<div style="color:#e8590c;font-size:62px;margin-top:10px">EN CLASSE OU À LA MAISON</div>',ardoiseMini([['Plat imposé'],['+ à la carte','#ffd43b']]));
   else window.tiMargoMiniature=()=>{ const {$,carte,legende}=outils; window.MINI=true; window.tiMargo.aller(car+1);
     carte.style.display='none'; legende.style.display='none'; $('titre').style.display='none'; $('fin').style.display='none'; $('echelle').style.display='none';
     const m=document.createElement('div'); m.className='cv';
-    m.innerHTML='Le restaurant<br>de la classe<div style="color:#e8590c;font-size:84px;margin-top:8px">CHACUN SA FAÇON</div>';
+    m.innerHTML='Le restaurant<br>de mathématiques<div style="color:#e8590c;font-size:72px;margin-top:8px">EN CLASSE OU À LA MAISON</div>';
     m.style.cssText='left:700px;right:60px;top:120px;z-index:6;font-size:100px;line-height:1.05;text-align:center;background:#fff;border:8px solid #17452a;border-radius:40px;padding:26px 20px;';
     document.body.append(m);
     const d=document.createElement('div'); d.className='cv'; d.textContent='Dessin animé';
     d.style.cssText='left:900px;right:260px;bottom:60px;text-align:center;font-size:64px;background:#17452a;color:#fff;border-radius:999px;padding:12px 0;z-index:6;'; document.body.append(d); };
-  return { clips,FIN,titre:'Le restaurant de la classe',ceinture:0,finTitre,groupes,finClip:'09-abonne',
+  return { clips,FIN,titre:'Le restaurant de mathématiques',ceinture:0,finTitre,groupes,finClip:'09-abonne',
     cuts:[finTitre,car,imp,grp,dou,q,cho,des,com,f],
     /* Pas de bonne réponse : la carte s'arrête au début de « 06-choix » (finR), aucune n'est marquée. */
     question:{ qc:'05-question',rc:'06-choix',finR:cho,cpt:fin('05-question')+.1,bonne:-1,tBon:99,

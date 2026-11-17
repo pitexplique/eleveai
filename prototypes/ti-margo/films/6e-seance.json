@@ -2,6 +2,6 @@
   "voix": "6e-seance-{ep}-short",
   "sons": "public/sons/6e-seance-{ep}-short",
   "sortie": "manim/sorties/6e/seances/{num}-{ep}",
-  "nom": "eleveai-seance-6e-{ep}-short",
+  "nom": "eleveai-seance-6e-{ep}-mathematiques-short",
   "episodes": { "restaurant": "01" }
 }
