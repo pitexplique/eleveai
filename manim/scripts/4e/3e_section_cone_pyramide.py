@@ -155,7 +155,7 @@ class SectionConePyramide3e(Paysage3e):
         self.col(l2, 1.1, x)
         self.au_mot("la section est un disque")
         self.play(FadeIn(l2, shift=UP * 0.1), FadeIn(s), FadeIn(d, scale=0.8), run_time=0.9)
-        gd = disque_plat(1.4, P(4.9, -1.6), couleur=BASE_C)
+        gd = disque_plat(1.2, P(4.8, -1.3), couleur=BASE_C)
         l3 = self.t("plus petit que la base.", 30, WHITE)
         self.col(l3, 0.2, x)
         self.au_mot("plus petit que la base")
@@ -233,8 +233,8 @@ class SectionConePyramide3e(Paysage3e):
         self.col(l3, 0.2, x)
         self.au_mot("donne la même forme")
         self.play(FadeIn(l3, shift=UP * 0.1), FadeIn(car, scale=0.8), run_time=0.8)
-        gcar = Square(1.8, fill_color=BASE_C, fill_opacity=0.3, stroke_color=BASE_C,
-                      stroke_width=5).move_to(P(4.9, -1.6))
+        gcar = Square(1.6, fill_color=BASE_C, fill_opacity=0.3, stroke_color=BASE_C,
+                      stroke_width=5).move_to(P(4.7, -1.4))
         l4 = self.t("en plus petit.", 32, WHITE)
         self.col(l4, -0.7, x)
         self.au_mot("en plus petit")

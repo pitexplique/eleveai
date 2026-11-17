@@ -199,7 +199,7 @@ class SectionSphere3e(Paysage3e):
         self.col(l3, 0.0, x)
         self.au_mot("son rayon est celui")
         self.play(FadeIn(l3, shift=UP * 0.1), Create(cs.R_trait), run_time=0.8)
-        gl = globe(1.0, 1.0, P(5.3, -2.2))
+        gl = globe(0.9, 1.0, P(4.9, -1.7))
         l4 = self.t("C'est l'équateur.", 34, EQUA_C)
         self.col(l4, -1.0, x)
         self.au_mot("C'est l'équateur")
