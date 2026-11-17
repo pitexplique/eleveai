@@ -109,6 +109,10 @@ export default function SignInPage() {
     token: string | null;
   }>(null);
   const [forcerNouveauPin, setForcerNouveauPin] = useState(false);
+  // Sans mail (17/11) : ancien compte sans code → « choisir » ; adresse
+  // inconnue → « nouveau ». Dans les deux cas on fait retaper le code.
+  const [etapePin, setEtapePin] = useState<null | "choisir" | "nouveau">(null);
+  const [pinChoisi, setPinChoisi] = useState("");
   const [pendingAuth, setPendingAuth] = useState<PendingAuth | null>(null);
   const [nom, setNom] = useState("");
   const [typeUtilisateur, setTypeUtilisateur] = useState<UserEmailType>("perso");
@@ -266,6 +270,8 @@ export default function SignInPage() {
     setModePin(false);
     setChoisirPin(null);
     setForcerNouveauPin(false);
+    setEtapePin(null);
+    setPinChoisi("");
   };
 
   // Après le code par mail : on entre si la personne a déjà son code à
@@ -474,6 +480,55 @@ export default function SignInPage() {
   // ---------------------------
   // 2 bis) Connexion avec le code à 6 chiffres
   // ---------------------------
+  // Une fois connecté (code bon) : profil, puis accueil.
+  const apresConnexionPin = async (
+    session: { access_token: string; user: { id: string; email?: string } },
+    emailToUse: string
+  ) => {
+    const authUser = session.user;
+    const { data: profile, error: profileError } = await supabase
+      .from("users_email")
+      .select("id, auth_user_id, email, nom, type_utilisateur, classe")
+      .eq("auth_user_id", authUser.id)
+      .maybeSingle();
+
+    if (profileError) {
+      logSupabaseError("users_email lookup error:", profileError);
+      setErrorMsg("Erreur de lecture du profil. Réessayez.");
+      return;
+    }
+
+    if (!profile) {
+      const verifiedEmail = authUser.email ?? emailToUse;
+      setPendingAuth({
+        authUserId: authUser.id,
+        email: verifiedEmail,
+        accessToken: session.access_token,
+      });
+      if (verifiedEmail === ADMIN_EMAIL) setTypeUtilisateur("admin");
+      setNeedsProfile(true);
+      setFeedback("Dernière étape : complète ton profil.");
+      return;
+    }
+
+    const sessionToken = await fetchEmailSessionToken(session.access_token);
+    setFeedback("Connexion réussie. Redirection…");
+    routeEmailProfile(profile as UserEmailProfile, sessionToken);
+  };
+
+  const appelCode6 = async (
+    emailToUse: string,
+    code: string,
+    confirmer: boolean
+  ): Promise<{ ok?: boolean; etat?: string; error?: string }> => {
+    const res = await fetch("/api/code-6-chiffres", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: emailToUse, code, confirmer }),
+    });
+    return res.json().catch(() => ({ ok: false }));
+  };
+
   const handlePinLogin = async (e: FormEvent) => {
     e.preventDefault();
     setFeedback(null);
@@ -491,52 +546,53 @@ export default function SignInPage() {
 
     setLoading(true);
     try {
+      // 2e passage : le code retapé doit être le même.
+      if (etapePin) {
+        if (pin !== pinChoisi) {
+          setPin("");
+          setErrorMsg("Les deux codes ne sont pas pareils. Retapez-le.");
+          return;
+        }
+        const r = await appelCode6(emailToUse, pin, true);
+        if (!r?.ok || r.etat !== "pret") {
+          setPin("");
+          setErrorMsg(r?.error ?? "Erreur inattendue. Réessayez.");
+          return;
+        }
+      }
+
       const { data, error } = await supabase.auth.signInWithPassword({
         email: emailToUse,
         password: pin,
       });
 
-      if (error || !data?.session) {
-        logSupabaseError("signInWithPassword error:", error);
+      if (!error && data?.session) {
+        await apresConnexionPin(data.session, emailToUse);
+        return;
+      }
+
+      if (etapePin) {
+        logSupabaseError("signInWithPassword after set error:", error);
+        setErrorMsg("Code enregistré, mais la connexion a échoué. Réessayez.");
+        return;
+      }
+
+      // Le code ne va pas : mauvais code, ancien compte sans code, ou
+      // adresse inconnue ? C'est le serveur qui le dit.
+      const r = await appelCode6(emailToUse, pin, false);
+      if (!r?.ok) {
         setPin("");
-        setErrorMsg(
-          "Email ou code incorrect. Pas encore de code, ou code oublié ? Recevez un code par mail."
-        );
+        setErrorMsg(r?.error ?? "Erreur inattendue. Réessayez.");
         return;
       }
-
-      const authUser = data.session.user;
-      const { data: profile, error: profileError } = await supabase
-        .from("users_email")
-        .select("id, auth_user_id, email, nom, type_utilisateur, classe")
-        .eq("auth_user_id", authUser.id)
-        .maybeSingle();
-
-      if (profileError) {
-        logSupabaseError("users_email lookup error:", profileError);
-        setErrorMsg("Erreur de lecture du profil. Réessayez.");
+      if (r.etat === "choisir" || r.etat === "nouveau") {
+        setPinChoisi(pin);
+        setPin("");
+        setEtapePin(r.etat);
         return;
       }
-
-      if (!profile) {
-        const verifiedEmail = authUser.email ?? emailToUse;
-        setPendingAuth({
-          authUserId: authUser.id,
-          email: verifiedEmail,
-          accessToken: data.session.access_token,
-        });
-        if (verifiedEmail === ADMIN_EMAIL) setTypeUtilisateur("admin");
-        setForcerNouveauPin(false);
-        setNeedsProfile(true);
-        setFeedback("Dernière étape : complète ton profil.");
-        return;
-      }
-
-      const sessionToken = await fetchEmailSessionToken(
-        data.session.access_token
-      );
-      setFeedback("Connexion réussie. Redirection…");
-      routeEmailProfile(profile as UserEmailProfile, sessionToken);
+      setPin("");
+      setErrorMsg("Email ou code incorrect.");
     } catch (err: any) {
       console.error("Unexpected PIN sign-in error:", err);
       setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
@@ -642,7 +698,8 @@ export default function SignInPage() {
 
       const sessionToken = await fetchEmailSessionToken(pendingAuth.accessToken);
 
-      finirConnexion(profile as UserEmailProfile, sessionToken, false);
+      setFeedback("Compte créé. Bienvenue sur EleveAI !");
+      routeEmailProfile(profile as UserEmailProfile, sessionToken);
     } catch (err: any) {
       console.error("Unexpected profile submit error:", err);
       setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
@@ -768,8 +825,8 @@ export default function SignInPage() {
                 </p>
                 <p className="mt-0.5 text-xs text-slate-600">
                   Déjà un compte : votre email, puis votre code à 6 chiffres.
-                  Première fois : on vous envoie un code par mail, puis vous
-                  choisissez votre code à 6 chiffres.
+                  Première fois : vous choisissez votre code à 6 chiffres, sans
+                  attendre de mail.
                 </p>
               </div>
 
@@ -783,7 +840,20 @@ export default function SignInPage() {
 
               {/* EMAIL */}
               {!needsProfile && !choisirPin && (
-              <form onSubmit={handleEmailSubmit} className="mt-5 space-y-3">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setFeedback(null);
+                  if (!normalizeEmail(email)) {
+                    setErrorMsg("Merci de renseigner votre email.");
+                    return;
+                  }
+                  setErrorMsg(null);
+                  setPin("");
+                  setModePin(true);
+                }}
+                className="mt-5 space-y-3"
+              >
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium text-slate-800">
                     Adresse email
@@ -801,37 +871,13 @@ export default function SignInPage() {
                 </div>
 
                 {!modePin && !emailSent && (
-                  <>
-                    <button
-                      type="button"
-                      disabled={loading}
-                      onClick={() => {
-                        setFeedback(null);
-                        if (!normalizeEmail(email)) {
-                          setErrorMsg("Merci de renseigner votre email.");
-                          return;
-                        }
-                        setErrorMsg(null);
-                        setPin("");
-                        setModePin(true);
-                      }}
-                      className="w-full rounded-lg bg-emerald-600 text-white py-2.5 text-sm font-semibold hover:bg-emerald-500 transition disabled:cursor-not-allowed disabled:opacity-60"
-                    >
-                      J’ai mon code à 6 chiffres
-                    </button>
-
-                    <button
-                      type="submit"
-                      disabled={loading || cooldown > 0}
-                      className="w-full rounded-lg border border-emerald-300 bg-white py-2.5 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 transition disabled:cursor-not-allowed disabled:opacity-60"
-                    >
-                      {loading
-                        ? "Envoi..."
-                        : cooldown > 0
-                          ? `Attendez ${cooldown}s…`
-                          : "Première fois ? Recevoir un code par mail"}
-                    </button>
-                  </>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full rounded-lg bg-emerald-600 text-white py-2.5 text-sm font-semibold hover:bg-emerald-500 transition disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    Continuer
+                  </button>
                 )}
 
                 {!modePin && errorMsg && (
@@ -850,8 +896,25 @@ export default function SignInPage() {
                   className="mt-4 space-y-3 rounded-lg bg-emerald-50 p-3 border border-emerald-200"
                 >
                   <p className="text-xs font-semibold text-emerald-800 uppercase">
-                    Mon code (6 chiffres)
+                    {etapePin === "nouveau"
+                      ? "Nouveau compte : retapez votre code"
+                      : etapePin === "choisir"
+                        ? "Confirmez votre nouveau code"
+                        : "Mon code (6 chiffres)"}
                   </p>
+                  {etapePin === "nouveau" && (
+                    <p className="text-[11px] text-emerald-700">
+                      Pas encore de compte pour cette adresse. Retapez le code
+                      que vous venez de choisir : il servira à chaque connexion.
+                    </p>
+                  )}
+                  {etapePin === "choisir" && (
+                    <p className="text-[11px] text-emerald-700">
+                      Votre compte n’a pas encore de code à 6 chiffres. Retapez
+                      celui que vous venez de choisir : il servira à chaque
+                      connexion.
+                    </p>
+                  )}
                   <PointsCode n={pin.length} onEffacer={() => setPin("")} />
                   <ClavierCode
                     valeur={pin}
@@ -864,7 +927,13 @@ export default function SignInPage() {
                     disabled={loading || pin.length !== 6}
                     className="w-full rounded-lg bg-emerald-600 text-white py-2.5 text-sm font-semibold hover:bg-emerald-500 transition disabled:cursor-not-allowed disabled:opacity-60"
                   >
-                    {loading ? "Vérification..." : "Se connecter"}
+                    {loading
+                      ? "Vérification..."
+                      : etapePin === "nouveau"
+                        ? "Créer mon compte"
+                        : etapePin === "choisir"
+                          ? "Enregistrer mon code"
+                          : "Se connecter"}
                   </button>
 
                   {errorMsg && <p className="text-xs text-red-600">{errorMsg}</p>}
@@ -883,24 +952,14 @@ export default function SignInPage() {
                         demandez vos codes à votre professeur.
                       </p>
                       <p>
-                        <span className="font-semibold">Code oublié :</span> on
-                        vous envoie un code par mail, puis vous choisissez un
-                        nouveau code à 6 chiffres.
+                        <span className="font-semibold">Code oublié :</span>{" "}
+                        écrivez-nous depuis la page{" "}
+                        <Link href="/contact" className="font-semibold underline">
+                          Contact
+                        </Link>
+                        , avec votre adresse email. On remet votre code à zéro,
+                        puis vous en choisissez un nouveau.
                       </p>
-                      <button
-                        type="button"
-                        disabled={loading || cooldown > 0}
-                        onClick={() => {
-                          setForcerNouveauPin(true);
-                          setModePin(false);
-                          handleEmailSubmit();
-                        }}
-                        className="w-full rounded-lg border border-emerald-300 bg-white py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 transition disabled:opacity-60"
-                      >
-                        {cooldown > 0
-                          ? `Attendez ${cooldown}s…`
-                          : "Recevoir un code par mail"}
-                      </button>
                     </div>
                   </details>
 
