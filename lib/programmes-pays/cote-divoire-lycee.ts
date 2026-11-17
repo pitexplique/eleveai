@@ -235,7 +235,7 @@ export const COTE_DIVOIRE_1RE: ProgrammePays = {
       code: "C1-L8", domaine: FONC,
       texte: "Suites numériques : formule explicite et récurrence, représentation graphique, suites arithmétiques et géométriques (terme général, raison, sommes), sens de variation.",
       couverture: "complete",
-      micros: [...m("premiere-spe", "suite_registres", "suite_termes", "suite_recurrence", "suite_arithmetique", "suite_geometrique", "suite_sommes", "suite_somme_geo", "suite_variation"), ...m("premiere", "lin_suite_notation", "lin_suite_recurrence", "lin_suite_explicite", "lin_suite_variation", "lin_suite_graphique", "expo_suite_recurrence", "expo_suite_explicite", "expo_suite_variation", "expo_suite_graphique")],
+      micros: [...m("premiere-spe", "suite_registres", "suite_termes", "suite_recurrence", "suite_arithmetique", "suite_geometrique", "suite_sommes", "suite_somme_geo", "suite_variation"), ...m("premiere", "lin_suite_notation", "lin_suite_recurrence", "lin_suite_explicite", "lin_suite_variation", "lin_suite_graphique", "expo_suite_recurrence", "expo_suite_explicite", "expo_suite_variation", "expo_suite_graphique", "lin_suite_reconnaitre", "expo_suite_reconnaitre")],
     },
     {
       code: "C2-L1", domaine: DONN,
@@ -350,7 +350,7 @@ export const COTE_DIVOIRE_TLE: ProgrammePays = {
       couverture: "partielle",
       micros: [
         ...m("terminale-spe", "exp_definition", "exp_proprietes", "exp_deriver", "exp_equation_inequation", "exp_limite", "expo_ratio_regles", "primitive_calculer", "exp_base_a"),
-        ...m("stmg", "expoT_reconnaitre", "expoT_sens_selon_a"),
+        ...m("stmg", "expoT_reconnaitre", "expoT_sens_selon_a"), ...m("premiere", "expo_fct_prolonger_suite"),
       ],
       note: "Manque x^α pour α réel.",
     },
@@ -366,7 +366,7 @@ export const COTE_DIVOIRE_TLE: ProgrammePays = {
       texte: "Suites numériques : majorée, minorée, bornée, convergente ; suites monotones ; suites récurrentes uₙ₊₁ = f(uₙ) ; comparaison ; raisonnement par récurrence ; seuils ; suites arithmético-géométriques.",
       couverture: "complete",
       micros: [
-        ...m("terminale-spe", "suite_recurrence_preuve", "suite_bornee", "suite_variation", "limite_suite_calculer", "limite_suite_operations", "limite_suite_comparaison", "limite_suite_monotone_bornee", "python_seuil"),
+        ...m("terminale-spe", "suite_recurrence_preuve", "suite_bornee", "suite_variation", "limite_suite_calculer", "limite_suite_operations", "limite_suite_comparaison", "limite_suite_monotone_bornee", "python_seuil", "python_suite"),
         ...m("premiere-spe", "suite_auxiliaire"),
       ],
     },

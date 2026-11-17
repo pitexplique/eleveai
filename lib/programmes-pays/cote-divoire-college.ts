@@ -59,6 +59,7 @@ export const COTE_DIVOIRE_6E: ProgrammePays = {
       micros: [
         ...m("5e", "div_multiple_diviseur", "div_critere_2_5_10", "div_critere_3_9", "div_lister_diviseurs"),
         ...m("cm2", "entier_multiple"),
+        ...m("4e", "div_lister_diviseurs"),
         ...m("seconde", "reels_ensembles", "logique_appartenance_inclusion"),
       ],
       note: "Les symboles ∈ / ∉ et ℕ sont en seconde chez nous (reels_ensembles, logique_appartenance_inclusion) ; manque le nombre d'entiers consécutifs de m à n (n − m + 1).",
@@ -314,6 +315,7 @@ export const COTE_DIVOIRE_4E: ProgrammePays = {
       micros: [
         ...m("4e", "fraction_rationnel", "fraction_additionner", "fraction_multiplier", "fraction_inverse", "fraction_diviser", "fraction_simplifier"),
         ...m("3e", "entier_pgcd_ppcm"),
+        ...m("cm2", "entier_diviseurs_communs", "entier_multiples_communs"),
         ...m("6e", "decimal_arrondir"),
         ...m("5e", "approx_encadrer_quotient", "approx_defaut_exces", "approx_troncature_arrondi"),
       ],

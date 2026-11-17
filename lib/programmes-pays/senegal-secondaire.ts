@@ -267,7 +267,7 @@ export const SENEGAL_1RE: ProgrammePays = {
       couverture: "complete",
       micros: [
         ...m("premiere-spe", "suite_termes", "suite_recurrence", "suite_variation", "suite_arithmetique", "suite_geometrique", "suite_sommes", "suite_somme_geo", "suite_limite", "suite_algorithme"),
-        ...m("premiere", "lin_suite_variation", "lin_suite_graphique", "lin_suite_explicite", "expo_suite_variation", "expo_suite_graphique", "expo_suite_explicite"),
+        ...m("premiere", "lin_suite_variation", "lin_suite_graphique", "lin_suite_explicite", "expo_suite_variation", "expo_suite_graphique", "expo_suite_explicite", "lin_suite_reconnaitre", "expo_suite_reconnaitre"),
         ...m("terminale-spe", "suite_bornee", "suite_recurrence_preuve"),
       ],
     },

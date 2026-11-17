@@ -218,8 +218,9 @@ export const SENEGAL_5E: ProgrammePays = {
       couverture: "complete",
       micros: [
         ...m("5e", "div_multiple_diviseur", "div_critere_2_5_10", "div_critere_3_9", "div_lister_diviseurs"),
-        ...m("4e", "premier_definition", "premier_decomposer"),
+        ...m("4e", "premier_definition", "premier_decomposer", "div_lister_diviseurs", "div_probleme"),
         ...m("3e", "entier_pgcd_ppcm"),
+        ...m("cm2", "entier_diviseurs_communs", "entier_multiples_communs"),
       ],
     },
     {
