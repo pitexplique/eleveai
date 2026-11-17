@@ -29,11 +29,11 @@ def hl(*a, **k):
     return hors_audit(hg)
 
 
-def entoure(hg, k, couleur=JAUNE_TITRE, sw=5):
-    """Un cercle autour du nombre k du cadran de l'horloge hg."""
+def entoure(hg, k, couleur=JAUNE_TITRE, sw=5, f=1.0):
+    """Un cercle autour du nombre k du cadran de l'horloge hg (f < 1 : plus petit, pour deux nombres voisins)."""
     n = hg.nums[k]
     r = 0.165 * hg.cadran.width / 2
-    return Circle(radius=max(r, n.height * 0.75), color=couleur, stroke_width=sw).move_to(n)
+    return Circle(radius=f * max(r, n.height * 0.75), color=couleur, stroke_width=sw).move_to(n)
 
 
 def fleche_vers(depart, cible, couleur=WHITE, sw=5):

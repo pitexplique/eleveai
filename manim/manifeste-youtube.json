@@ -97039,6 +97039,158 @@
       ]
     },
     {
+      "id": "cp-duree-lire-heure",
+      "pas_avant": "2027-05-08",
+      "notionId": "duree",
+      "microId": "cp_duree_lire_heure",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/duree/01-lire-heure/eleveai-maths-cp-duree-lire-heure.mp4",
+      "miniature": "cp/maths/duree/01-lire-heure/eleveai-maths-cp-duree-lire-heure.png",
+      "titre": "La petite aiguille est sur le 3 : quelle heure est-il ? — Lire l'heure — épisode 1 · Maths CP",
+      "accroche": "Rose est horlogère : elle répare les horloges. Ce matin, une horloge sonne. La petite aiguille est sur le 3. Quelle heure est-il ?\n\nDans cette vidéo :\n• les 2 aiguilles : la petite est courte, la grande est longue\n• c'est la petite aiguille qui donne l'heure\n• la grande sur le 12 : c'est l'heure pile (3 heures, 8 heures)\n• le piège : la grande aiguille se voit mieux, mais elle ne donne pas l'heure\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : la pendule de Rose.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_lire_heure&display=simple\n\n⏰ Épisode 1 de la série Durées d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Lire l'heure"
+        ],
+        [
+          "00:06",
+          "Rose, horlogère"
+        ],
+        [
+          "00:20",
+          "Les 2 aiguilles"
+        ],
+        [
+          "00:30",
+          "Lire 3 heures"
+        ],
+        [
+          "00:40",
+          "Une autre horloge : 8 heures"
+        ],
+        [
+          "00:50",
+          "Question 1"
+        ],
+        [
+          "01:20",
+          "Le piège : la grande aiguille"
+        ],
+        [
+          "01:31",
+          "Question 2"
+        ],
+        [
+          "02:01",
+          "À toi de jouer"
+        ],
+        [
+          "02:16",
+          "Correction"
+        ],
+        [
+          "02:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "lire l'heure",
+        "heure entière",
+        "horloge",
+        "petite aiguille",
+        "grande aiguille",
+        "heure pile",
+        "horlogère",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:50",
+          "question": "La petite aiguille est sur le 5, la grande sur le 12. Quelle heure est-il ?",
+          "choix": [
+            "12 heures",
+            "5 heures",
+            "6 heures"
+          ],
+          "reponse": 1,
+          "explication": "La petite aiguille est sur le 5 : il est 5 heures."
+        },
+        {
+          "t": "01:31",
+          "question": "La petite aiguille est sur le 10, la grande sur le 12. Quelle heure est-il ?",
+          "choix": [
+            "10 heures",
+            "12 heures",
+            "11 heures"
+          ],
+          "reponse": 0,
+          "explication": "On lit la petite aiguille : elle est sur le 10. Il est 10 heures."
+        }
+      ],
+      "centres": [
+        "sciences",
+        "art-design"
+      ]
+    },
+    {
+      "id": "cp-duree-lire-heure-short",
+      "pas_avant": "2027-05-08",
+      "notionId": "duree",
+      "microId": "cp_duree_lire_heure",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "short",
+      "renvoie_vers": "cp-duree-lire-heure",
+      "fichier": "cp/maths/duree/01-lire-heure/eleveai-maths-cp-duree-lire-heure-short.mp4",
+      "miniature": "cp/maths/duree/01-lire-heure/eleveai-maths-cp-duree-lire-heure-short-miniature.png",
+      "titre": "Mon réveil sonne : « il est 12 heures » ? Oups ! #maths #cp",
+      "accroche": "Le réveil de Ti Margo sonne. La petite aiguille est sur le 6, la grande sur le 12. « Il est 12 heures ! » Oups… La grande aiguille l'a trompé : c'est la petite qui donne l'heure.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : la petite aiguille est sur le 9, la grande sur le 12. Quelle heure est-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_lire_heure&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #heure #cp",
+      "tags": [
+        "lire l'heure",
+        "heure entière",
+        "horloge",
+        "réveil",
+        "petite aiguille",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Le réveil : la petite aiguille est sur le 6, la grande sur le 12. Quelle heure est-il ?",
+          "choix": [
+            "12 heures",
+            "7 heures",
+            "6 heures"
+          ],
+          "reponse": 2,
+          "explication": "La petite aiguille est sur le 6 : il est 6 heures."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "corps-sante"
+      ]
+    },
+    {
       "id": "ce2-masse-comparer",
       "pas_avant": "2027-04-29",
       "prioritaire": true,
@@ -98147,72 +98299,72 @@
       ]
     },
     {
-      "id": "cp-duree-lire-heure",
-      "pas_avant": "2027-05-08",
+      "id": "cp-duree-placer-aiguilles",
+      "pas_avant": "2027-05-09",
       "notionId": "duree",
-      "microId": "cp_duree_lire_heure",
+      "microId": "cp_duree_placer_aiguilles",
       "classe": "cp",
       "ceinture": "blanche",
       "serie": "Maths CP",
       "type": "longue",
-      "fichier": "cp/maths/duree/01-lire-heure/eleveai-maths-cp-duree-lire-heure.mp4",
-      "miniature": "cp/maths/duree/01-lire-heure/eleveai-maths-cp-duree-lire-heure.png",
-      "titre": "La petite aiguille est sur le 3 : quelle heure est-il ? — Lire l'heure — épisode 1 · Maths CP",
-      "accroche": "Rose est horlogère : elle répare les horloges. Ce matin, une horloge sonne. La petite aiguille est sur le 3. Quelle heure est-il ?\n\nDans cette vidéo :\n• les 2 aiguilles : la petite est courte, la grande est longue\n• c'est la petite aiguille qui donne l'heure\n• la grande sur le 12 : c'est l'heure pile (3 heures, 8 heures)\n• le piège : la grande aiguille se voit mieux, mais elle ne donne pas l'heure\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : la pendule de Rose.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_lire_heure&display=simple\n\n⏰ Épisode 1 de la série Durées d'EleveAI, en CP.",
+      "fichier": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles.mp4",
+      "miniature": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles.png",
+      "titre": "Comment montrer 4 heures sur une horloge ? — Placer les aiguilles — épisode 2 · Maths CP",
+      "accroche": "Léo est clown de cirque. Son spectacle commence à 4 heures : il veut régler la grande horloge du cirque. Où va la petite aiguille ? Et la grande ?\n\nDans cette vidéo :\n• d'abord la petite aiguille : elle va sur le nombre de l'heure\n• ensuite la grande : pour une heure pile, elle va sur le 12\n• on vérifie toujours les 2 aiguilles\n• le piège : ne pas inverser les aiguilles\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : Léo jongle à 11 heures.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_placer_aiguilles&display=simple\n\n⏰ Épisode 2 de la série Durées d'EleveAI, en CP.",
       "chapitres": [
         [
           "00:00",
-          "Lire l'heure"
+          "Placer les aiguilles"
         ],
         [
           "00:06",
-          "Rose, horlogère"
+          "Léo, clown de cirque"
         ],
         [
-          "00:20",
-          "Les 2 aiguilles"
+          "00:17",
+          "D'abord, la petite aiguille"
         ],
         [
-          "00:30",
-          "Lire 3 heures"
+          "00:25",
+          "Ensuite, la grande aiguille"
         ],
         [
-          "00:40",
-          "Une autre horloge : 8 heures"
+          "00:34",
+          "On vérifie"
         ],
         [
-          "00:50",
+          "00:45",
           "Question 1"
         ],
         [
-          "01:20",
-          "Le piège : la grande aiguille"
+          "01:11",
+          "Le piège : inverser les aiguilles"
         ],
         [
-          "01:31",
+          "01:22",
           "Question 2"
         ],
         [
-          "02:01",
+          "01:48",
           "À toi de jouer"
         ],
         [
-          "02:16",
+          "01:59",
           "Correction"
         ],
         [
-          "02:29",
+          "02:09",
           "Ce que tu as appris"
         ]
       ],
       "tags": [
-        "lire l'heure",
+        "placer les aiguilles",
         "heure entière",
         "horloge",
         "petite aiguille",
         "grande aiguille",
         "heure pile",
-        "horlogère",
+        "cirque",
         "maths",
         "CP",
         "école",
@@ -98222,53 +98374,54 @@
       ],
       "questions": [
         {
-          "t": "00:50",
-          "question": "La petite aiguille est sur le 5, la grande sur le 12. Quelle heure est-il ?",
+          "t": "00:45",
+          "question": "Pour montrer 9 heures, où va la petite aiguille ?",
           "choix": [
-            "12 heures",
-            "5 heures",
-            "6 heures"
+            "sur le 12",
+            "sur le 9",
+            "sur le 10"
           ],
           "reponse": 1,
-          "explication": "La petite aiguille est sur le 5 : il est 5 heures."
+          "explication": "La petite aiguille donne l'heure : elle va sur le 9."
         },
         {
-          "t": "01:31",
-          "question": "La petite aiguille est sur le 10, la grande sur le 12. Quelle heure est-il ?",
+          "t": "01:22",
+          "question": "Pour montrer 2 heures, où va la grande aiguille ?",
           "choix": [
-            "10 heures",
-            "12 heures",
-            "11 heures"
+            "sur le 12",
+            "sur le 2",
+            "sur le 6"
           ],
           "reponse": 0,
-          "explication": "On lit la petite aiguille : elle est sur le 10. Il est 10 heures."
+          "explication": "Pour une heure pile, la grande aiguille va toujours sur le 12."
         }
       ],
       "centres": [
-        "sciences",
-        "art-design"
+        "art-design",
+        "jeux-defis"
       ]
     },
     {
-      "id": "cp-duree-lire-heure-short",
-      "pas_avant": "2027-05-08",
+      "id": "cp-duree-placer-aiguilles-short",
+      "pas_avant": "2027-05-09",
       "notionId": "duree",
-      "microId": "cp_duree_lire_heure",
+      "microId": "cp_duree_placer_aiguilles",
       "classe": "cp",
       "ceinture": "blanche",
       "serie": "Maths CP",
       "type": "short",
-      "renvoie_vers": "cp-duree-lire-heure",
-      "fichier": "cp/maths/duree/01-lire-heure/eleveai-maths-cp-duree-lire-heure-short.mp4",
-      "miniature": "cp/maths/duree/01-lire-heure/eleveai-maths-cp-duree-lire-heure-short-miniature.png",
-      "titre": "Mon réveil sonne : « il est 12 heures » ? Oups ! #maths #cp",
-      "accroche": "Le réveil de Ti Margo sonne. La petite aiguille est sur le 6, la grande sur le 12. « Il est 12 heures ! » Oups… La grande aiguille l'a trompé : c'est la petite qui donne l'heure.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : la petite aiguille est sur le 9, la grande sur le 12. Quelle heure est-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_lire_heure&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #heure #cp",
+      "renvoie_vers": "cp-duree-placer-aiguilles",
+      "fichier": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles-short.mp4",
+      "miniature": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles-short-miniature.png",
+      "titre": "Je règle mon réveil sur 5 heures… il montre 12 heures ! #maths #cp",
+      "accroche": "Ti Margo règle son réveil sur 5 heures : la grande aiguille sur le 5, la petite sur le 12. Hop ! Mais le réveil montre 12 heures… Il a inversé les aiguilles : c'est la petite qui donne l'heure.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : pour montrer 10 heures, où va la petite aiguille ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_placer_aiguilles&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #heure #cp",
       "tags": [
-        "lire l'heure",
+        "placer les aiguilles",
         "heure entière",
         "horloge",
         "réveil",
         "petite aiguille",
+        "grande aiguille",
         "Ti Margo",
         "dessin animé",
         "ceinture blanche",
@@ -98282,15 +98435,15 @@
       ],
       "questions": [
         {
-          "t": "00:18",
-          "question": "Le réveil : la petite aiguille est sur le 6, la grande sur le 12. Quelle heure est-il ?",
+          "t": "00:19",
+          "question": "Pour 5 heures, où va la grande aiguille ?",
           "choix": [
-            "12 heures",
-            "7 heures",
-            "6 heures"
+            "sur le 12",
+            "sur le 5",
+            "sur le 6"
           ],
-          "reponse": 2,
-          "explication": "La petite aiguille est sur le 6 : il est 6 heures."
+          "reponse": 0,
+          "explication": "Pour une heure pile, la grande va sur le 12 ; la petite va sur le 5."
         }
       ],
       "centres": [

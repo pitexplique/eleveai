@@ -45,8 +45,10 @@ Notes et outils : `side-session-notes/local_9cbb7607-cba7-48c1-a984-bb5d28d2f97c
 - ⚠️ Piège Manim : `FadeIn(hg)` et `Indicate(hg.aig_h)` dans le MÊME `play` → la petite aiguille disparaît pour de bon. Toujours deux `play`.
 - Shorts : série `cp-duree` (`prototypes/ti-margo/films/cp-duree.json`, épisodes lire-heure 01, placer-aiguilles 02, jour-semaine 03, ordonner 04, defi 05) ; outils `cp-duree.js` (`horlogeCraie` aux 12 nombres, `horlogeNum` aiguilles en « nombres du cadran » + `vis` pour les faire pousser, `reveilCraie`, `litCraie`, `placeNombre`) ; `cp-commun.js` (série masses) NON modifié.
 - Scripts de la session (scratchpad) : `hd.sh` (attend verrou + 2,5 Go, HD, copie, bords) et `film.sh` (film sous verrou).
-- ✅ CP 01 `cp_duree_lire_heure` : paysage (Rose horlogère) HD 2 min 50, bords 0 ; short Ti Margo « le réveil » 64 s, réponse C, compteur vérifié (30,5 → 33,2 s).
-- ⏳ CP 02 `cp_duree_placer_aiguilles` : WAV + marques, script (Léo clown), dry run propre, aperçu corrigé, short écrit et contrôlé (compteur 32,9 → 35,9 s) ; reste HD, film, chaîne de fin.
+- ✅ CP 01 `cp_duree_lire_heure` FINI (`96efd9fe`) : paysage (Rose horlogère) HD 2 min 50, bords 0 ; short Ti Margo « le réveil » 64 s, réponse C, compteur vérifié (30,5 → 33,2 s) ; manifeste 08/05/2027, R2, coach.
+- ✅ CP 02 `cp_duree_placer_aiguilles` FINI : paysage (Léo clown, chapiteau) HD 2 min 30, bords 0 ; short Ti Margo « le réveil à l'envers » (réponse A, compteur 32,9 → 35,9 s) ; manifeste 09/05/2027, R2 (7 fichiers), coach (2 lignes). `entoure(hg, n, f=0.8)` pour deux nombres voisins (11 et 12 se chevauchaient).
+- ⏳ CP 03 `cp_duree_jour_semaine` (Malo maître-nageur) : WAV + marques faits ; script à écrire.
+- Chapitres : `_temps_cp.py` temporaire dans `manim/scripts/cp/` (enveloppe chaque écran, imprime `renderer.time` en dry run), supprimé après.
 
 ## Reste, dans l'ordre
 1. ✅ Voix validées (17/11).

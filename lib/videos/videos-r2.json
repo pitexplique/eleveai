@@ -8764,6 +8764,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_lire_heure&display=simple"
  },
+ "cp-duree-placer-aiguilles": {
+  "fichier": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles.mp4",
+  "poster": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles.png",
+  "vignette": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles.vignette.webp",
+  "titre": "Comment montrer 4 heures sur une horloge ? — Placer les aiguilles — épisode 2 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_placer_aiguilles&display=simple"
+ },
+ "cp-duree-placer-aiguilles-short": {
+  "fichier": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles-short.mp4",
+  "poster": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles-short-miniature.png",
+  "vignette": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles-short-miniature.vignette.webp",
+  "titre": "Je règle mon réveil sur 5 heures… il montre 12 heures ! #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_placer_aiguilles&display=simple"
+ },
  "cp-famille-coccinelle": {
   "fichier": "cp/maths/shorts/fr/eleveai-maths-cp-short-famille-coccinelle.mp4",
   "poster": "cp/maths/shorts/fr/vignette-short-eleveai-maths-cp-short-famille-coccinelle.png",

@@ -26,6 +26,8 @@ EP = [
      "on saute par l'heure pile !", True, "verte"),
     ("cp", "lire-heure", "01-lire-heure", ["LIRE", "L'HEURE"], "La petite aiguille sur le 3 ?",
      "c'est elle qui donne l'heure !", True, "blanche"),
+    ("cp", "placer-aiguilles", "02-placer-aiguilles", ["PLACER", "LES AIGUILLES"], "4 heures : la petite sur le 4 ?",
+     "et la grande sur le 12 !", True, "blanche"),
 ]
 
 
