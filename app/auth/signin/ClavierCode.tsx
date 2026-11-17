@@ -1,9 +1,10 @@
 "use client";
 
-// Clavier à chiffres pour taper le code reçu par mail, « comme La Banque
-// Postale » (17/11) : 10 grosses touches mélangées à chaque ouverture, puis
-// « Effacer ». Le champ texte reste au-dessus pour coller le code depuis le
-// mail. Rien ne change dans la vérification : on remplit seulement `otpCode`.
+// Clavier à chiffres pour taper le code, « comme La Banque Postale » (17/11) :
+// 10 grosses touches mélangées à chaque ouverture, sur 2 lignes de 5. Pour
+// effacer, une croix apparaît à droite des ronds dès le premier chiffre
+// (PointsCode). Rien ne change dans la vérification : on remplit seulement
+// la valeur du code.
 
 import { useRef, useState } from "react";
 
@@ -29,8 +30,8 @@ export default function ClavierCode({
   longueurMax = 8,
   desactive = false,
 }: Props) {
-  // Le formulaire du code n'existe qu'après l'envoi du mail : ce composant
-  // naît dans le navigateur, le mélange ne gêne donc pas le rendu serveur.
+  // Le formulaire du code n'existe qu'après un clic : ce composant naît dans
+  // le navigateur, le mélange ne gêne donc pas le rendu serveur.
   const [touches] = useState(melanger);
   // Dernière valeur connue : deux appuis très rapides comptent pour deux.
   const courant = useRef(valeur);
@@ -42,52 +43,60 @@ export default function ClavierCode({
     onChange(courant.current);
   };
 
-  const classeTouche =
-    "h-12 rounded-lg bg-white border border-emerald-200 text-xl font-semibold text-slate-800 shadow-sm hover:bg-emerald-100 active:scale-95 transition disabled:opacity-50";
-
   return (
-    <div className="space-y-2" aria-label="Clavier pour taper le code">
-      <div className="grid grid-cols-5 gap-2">
-        {touches.map((c) => (
-          <button
-            key={c}
-            type="button"
-            onClick={() => ajouter(c)}
-            disabled={desactive}
-            className={classeTouche}
-          >
-            {c}
-          </button>
-        ))}
-      </div>
-      <button
-        type="button"
-        onClick={() => onChange(valeur.slice(0, -1))}
-        disabled={desactive || valeur.length === 0}
-        className="w-full rounded-lg border border-emerald-300 bg-white py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 transition disabled:opacity-50"
-      >
-        ⌫ Effacer
-      </button>
+    <div
+      className="grid grid-cols-5 gap-2"
+      aria-label="Clavier pour taper le code"
+    >
+      {touches.map((c) => (
+        <button
+          key={c}
+          type="button"
+          onClick={() => ajouter(c)}
+          disabled={desactive}
+          className="h-12 rounded-lg bg-white border border-emerald-200 text-xl font-semibold text-slate-800 shadow-sm hover:bg-emerald-100 active:scale-95 transition disabled:opacity-50"
+        >
+          {c}
+        </button>
+      ))}
     </div>
   );
 }
 
 // Les ronds du code : pleins pour les chiffres tapés (le code ne s'affiche
-// jamais en clair, comme à la banque).
-export function PointsCode({ n, total = 6 }: { n: number; total?: number }) {
+// jamais en clair, comme à la banque). Dès le premier chiffre, une croix à
+// droite efface tout.
+export function PointsCode({
+  n,
+  total = 6,
+  onEffacer,
+}: {
+  n: number;
+  total?: number;
+  onEffacer?: () => void;
+}) {
   return (
-    <div
-      className="flex justify-center gap-3 py-1"
-      aria-label={`${n} chiffres sur ${total}`}
-    >
-      {Array.from({ length: total }, (_, i) => (
-        <span
-          key={i}
-          className={`h-4 w-4 rounded-full border-2 border-emerald-600 ${
-            i < n ? "bg-emerald-600" : "bg-white"
-          }`}
-        />
-      ))}
+    <div className="relative flex h-10 items-center justify-center">
+      <div className="flex gap-3" aria-label={`${n} chiffres sur ${total}`}>
+        {Array.from({ length: total }, (_, i) => (
+          <span
+            key={i}
+            className={`h-4 w-4 rounded-full border-2 border-emerald-700 ${
+              i < n ? "bg-emerald-700" : "bg-white"
+            }`}
+          />
+        ))}
+      </div>
+      {onEffacer && n > 0 && (
+        <button
+          type="button"
+          onClick={onEffacer}
+          aria-label="Effacer le code"
+          className="absolute right-0 flex h-10 w-10 items-center justify-center rounded-lg bg-white text-2xl leading-none text-emerald-800 hover:bg-emerald-100"
+        >
+          ×
+        </button>
+      )}
     </div>
   );
 }

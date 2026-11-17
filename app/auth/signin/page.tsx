@@ -852,7 +852,7 @@ export default function SignInPage() {
                   <p className="text-xs font-semibold text-emerald-800 uppercase">
                     Mon code (6 chiffres)
                   </p>
-                  <PointsCode n={pin.length} />
+                  <PointsCode n={pin.length} onEffacer={() => setPin("")} />
                   <ClavierCode
                     valeur={pin}
                     onChange={setPin}
@@ -928,7 +928,7 @@ export default function SignInPage() {
                     La prochaine fois : votre email, puis ce code. Plus besoin
                     d’attendre le mail.
                   </p>
-                  <PointsCode n={pin.length} />
+                  <PointsCode n={pin.length} onEffacer={() => setPin("")} />
                   <ClavierCode
                     valeur={pin}
                     onChange={setPin}
