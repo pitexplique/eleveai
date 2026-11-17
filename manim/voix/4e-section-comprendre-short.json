@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Le scanner coupe un bras en travers. La section du muscle est un disque.",
+  "01-defi": "Chez quelqu'un dont le muscle est deux fois plus large, la section est combien de fois plus grande ?",
+  "02-question": "Question ! A : deux fois plus grande. B : la même. C : quatre fois plus grande. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C ! Le rayon double, mais l'aire du disque dépend du rayon multiplié par lui-même : deux fois deux, quatre.",
+  "03-visuel": "Rayon doublé, aire multipliée par quatre.",
+  "04-commentaire": "À toi : si le rayon est multiplié par 3, par combien l'aire est-elle multipliée ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,16 @@
+{
+  "00-garde": "La réduction par une section. À mi-hauteur, combien reste-t-il ?",
+  "01-situation": "Voici Adam. Il dirige une salle de cinéma. Les boissons sont servies dans des gobelets coniques. Un client se plaint : son gobelet est rempli jusqu'à la moitié de la hauteur, et il trouve qu'il n'y a pas assez. Il a raison, et les mathématiques le disent.",
+  "02-la-section": "Un gobelet conique, c'est un cône posé sur sa pointe. Quand on verse, la surface du liquide coupe le cône par un plan parallèle à la base : le liquide forme un petit cône, de la même forme que le gobelet. C'est une réduction.",
+  "03-le-rapport": "À mi-hauteur, le rapport vaut un demi. La hauteur du liquide est la moitié, et son rayon aussi.",
+  "04-le-cube": "Mais le volume, lui, est divisé par 2 fois 2 fois 2, c'est-à-dire par 8. Un gobelet rempli à mi-hauteur ne contient qu'un huitième de la boisson.",
+  "05-question": "Question ! Un gobelet conique rempli jusqu'à la moitié de sa hauteur contient quelle part du total ? A : un huitième. B : la moitié. C : un quart. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Le rapport est un demi, donc le volume est divisé par 2 fois 2 fois 2, soit 8. Un huitième seulement.",
+  "06-piege": "Attention au piège ! Une longueur se multiplie par le rapport. Une aire se multiplie par le rapport deux fois. Un volume, par le rapport trois fois. Trois règles différentes, à ne pas mélanger.",
+  "07-question": "Question ! Dans une réduction de rapport un tiers, le volume est divisé par… A : 3. B : 9. C : 27. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 3 fois 3 fois 3, 27. 9, ce serait pour une aire.",
+  "08-defi": "À toi de jouer ! Le gobelet d'Adam contient 48 centilitres une fois plein. Le serveur le remplit aux trois quarts de la hauteur, et le verre a l'air presque plein. Combien de centilitres le client a-t-il vraiment, et combien lui manque-t-il ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le liquide forme un petit cône de rapport trois quarts, soit 0,75. Son volume : 0,75 fois 0,75 fois 0,75, environ 0,42. 48 fois 0,42, environ 20 centilitres. Il en manque donc 28 : plus de la moitié du gobelet, alors qu'il a l'air rempli aux trois quarts.",
+  "09-finale": "Ce que tu as appris. Une section parallèle à la base donne une réduction. Les longueurs sont multipliées par le rapport, les aires par le rapport deux fois, les volumes par le rapport trois fois.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

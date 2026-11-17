@@ -1,0 +1,16 @@
+{
+  "00-garde": "La section d'une sphère. Pourquoi est-ce toujours un cercle ?",
+  "01-situation": "Voici Rayan. Il est géographe. Sur son globe, il montre l'équateur et les parallèles. Ce sont tous des cercles, et ce n'est pas un hasard : ce sont des sections de la sphère.",
+  "02-toujours-un-cercle": "Un plan qui coupe une sphère donne toujours un cercle. Jamais un ovale, jamais autre chose. Quelle que soit l'inclinaison du plan.",
+  "03-le-grand-cercle": "Si le plan passe par le centre, le cercle est le plus grand possible : son rayon est celui de la sphère. C'est l'équateur. On l'appelle un grand cercle.",
+  "04-le-triangle": "Plus le plan s'éloigne du centre, plus le cercle rétrécit. Et il y a un triangle rectangle caché : le rayon de la sphère est l'hypoténuse, la distance au centre et le rayon de la section sont les deux côtés.",
+  "05-question": "Question ! Un plan coupe une sphère. La section est toujours… A : un ovale. B : un cercle. C : un carré. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. Toujours un cercle, quelle que soit l'inclinaison du plan.",
+  "06-piege": "Attention au piège ! Si le plan est trop loin du centre, il ne coupe plus la sphère du tout. La distance au centre doit rester inférieure au rayon.",
+  "07-question": "Question ! Une sphère de rayon 10 est coupée par un plan situé à 6 du centre. Quel est le rayon de la section ? A : 4. B : 16. C : 8. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Le triangle rectangle : 10 au carré moins 6 au carré, 100 moins 36, 64. La racine de 64, c'est 8. 4, c'est 10 moins 6 : la soustraction directe ne marche pas.",
+  "08-defi": "À toi de jouer ! La Terre fait environ 6 370 kilomètres de rayon. Un parallèle passe à 3 185 kilomètres du centre, soit la moitié du rayon. Quel est son rayon, arrondi au kilomètre ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le triangle rectangle : 6 370 au carré moins 3 185 au carré. Soit environ 40 576 900 moins 10 144 225, environ 30 432 675. La racine : environ 5 517 kilomètres. Le parallèle est plus petit que l'équateur, mais pas de moitié.",
+  "09-finale": "Ce que tu as appris. La section d'une sphère par un plan est toujours un cercle. Par le centre, c'est un grand cercle. Et un triangle rectangle relie le rayon, la distance au centre et le rayon de la section.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

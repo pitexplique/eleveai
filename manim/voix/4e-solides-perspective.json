@@ -1,0 +1,16 @@
+{
+  "00-garde": "La perspective cavalière. Comment dessiner un solide à plat sans mentir ?",
+  "01-situation": "Voici Maya. Elle dessine des mangas. Dans sa case, il y a une chambre vue en volume. Elle utilise la même méthode qu'en mathématiques : la perspective cavalière.",
+  "02-la-face": "La face de devant se dessine en vraie grandeur. Un cube de 3 centimètres d'arête : un carré de 3 centimètres, sans déformation.",
+  "03-les-fuyantes": "Ensuite, les fuyantes. Elles partent de chaque sommet, toutes parallèles entre elles, toutes de la même longueur. Et cette longueur est RÉDUITE : ce qui fuit n'est pas dessiné en vraie grandeur.",
+  "04-les-cachees": "Enfin, les arêtes qu'on ne voit pas se dessinent en pointillés. Elles existent, mais le solide les cache.",
+  "05-question": "Question ! Dans un cube dessiné en perspective cavalière, la face de devant est dessinée… A : plus petite. B : en losange. C : en vraie grandeur. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. La face de devant garde ses vraies mesures. Ce sont les fuyantes qui sont réduites.",
+  "06-piege": "Attention au piège ! Sur le dessin, deux arêtes de même longueur réelle peuvent être dessinées de longueurs différentes. On ne mesure jamais une fuyante sur le dessin pour en déduire une vraie longueur.",
+  "07-question": "Question ! Les arêtes cachées se dessinent… A : en gras. B : en pointillés. C : pas du tout. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. En pointillés. Si on ne les dessinait pas du tout, on ne saurait plus que le solide est fermé derrière.",
+  "08-defi": "À toi de jouer ! Maya dessine un pavé de 4 centimètres sur 2, profond de 3 centimètres. Elle réduit les fuyantes de moitié. Quelle longueur fait la fuyante sur le papier, et combien d'arêtes sont en pointillés ? Mets pause, et cherche !",
+  "08b-correction": "Correction. La fuyante : 3 divisé par 2, 1,5 centimètre sur le papier. Les arêtes cachées : celles du sommet du fond. Pour un pavé, il y en a trois en pointillés.",
+  "09-finale": "Ce que tu as appris. La face de devant est en vraie grandeur. Les fuyantes sont parallèles, de même longueur, et réduites. Les arêtes cachées sont en pointillés.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

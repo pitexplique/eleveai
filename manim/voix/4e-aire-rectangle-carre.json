@@ -1,0 +1,16 @@
+{
+  "00-garde": "L'aire d'un rectangle et d'un carré. Combien de place prend une surface ?",
+  "01-situation": "Voici Noé. Il répare des smartphones. Quand un écran est cassé, il découpe un film de protection à la bonne taille. Le film se vend au centimètre carré : il doit calculer la surface de l'écran.",
+  "02-compter": "L'écran mesure 14 centimètres sur 7. Noé le quadrille en carrés de 1 centimètre de côté. Sept rangées de 14 carrés : 98 carrés. L'aire est de 98 centimètres carrés.",
+  "03-formule": "On n'a pas besoin de compter à chaque fois. Aire d'un rectangle : longueur fois largeur. 14 fois 7, 98 centimètres carrés.",
+  "04-le-carre": "Le carré est un rectangle dont les côtés sont égaux. Son aire : côté fois côté. Un carré de 9 centimètres : 9 fois 9, 81 centimètres carrés.",
+  "05-question": "Question ! Un écran mesure 15 centimètres sur 7. Quelle est son aire ? A : 44 centimètres carrés. B : 105 centimètres carrés. C : 22 centimètres carrés. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 15 fois 7, 105 centimètres carrés. 44, c'est le périmètre. 22, c'est la longueur plus la largeur.",
+  "06-piege": "Attention au piège ! L'aire se mesure en centimètres carrés, le tour en centimètres. Deux écrans de même tour peuvent avoir des surfaces différentes.",
+  "07-question": "Question ! Un carré a 9 centimètres de côté. Quelle est son aire ? A : 81 centimètres carrés. B : 36 centimètres carrés. C : 18 centimètres carrés. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 9 fois 9, 81 centimètres carrés. 36, c'est le périmètre : 9 fois 4.",
+  "08-defi": "À toi de jouer ! Noé doit protéger deux écrans de 15 centimètres sur 7. Le film se vend par feuilles de 150 centimètres carrés, à 12 euros la feuille. Combien de feuilles, et combien ça coûte ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Un écran : 15 fois 7, 105 centimètres carrés. Deux écrans : 105 fois 2, 210 centimètres carrés. Une feuille couvre 150 : il en faut 2, car une seule ne suffit pas. Le prix : 12 fois 2, 24 euros.",
+  "09-finale": "Ce que tu as appris. L'aire d'un rectangle est longueur fois largeur. L'aire d'un carré est côté fois côté. Une aire se mesure en unités carrées.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

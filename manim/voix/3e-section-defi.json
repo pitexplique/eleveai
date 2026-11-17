@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défis sur les sections. Peut-on reconnaître un solide à ses tranches ?",
+  "01-situation": "Voici Nathan. Il numérise des objets pour les imprimer en 3D. Son scanner ne voit pas le solide entier : il enregistre des centaines de sections horizontales, l'une au-dessus de l'autre. L'ordinateur reconstruit le solide à partir d'elles.",
+  "02-le-cylindre": "Si toutes les sections sont des disques de même rayon, empilés, le solide est un cylindre. Rien d'autre ne donne ça.",
+  "03-le-cone": "Si les disques rétrécissent régulièrement du bas vers un point en haut, c'est un cône. Et si la base n'est pas un disque mais un carré qui rétrécit, c'est une pyramide.",
+  "04-la-boule": "Pour une boule, les disques grandissent, puis rétrécissent : le plus grand est au milieu, à l'équateur. C'est la signature de la sphère.",
+  "05-question": "Question ! Les sections horizontales sont des disques : le plus grand en bas, et ils rétrécissent jusqu'à un point en haut. Quel solide ? A : un cône. B : une boule. C : un cylindre. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Un cône. Pour une boule, le plus grand disque serait au milieu, pas en bas.",
+  "06-piege": "Attention au piège ! Une seule section ne suffit jamais. Un disque peut venir d'un cylindre, d'un cône ou d'une boule. C'est la suite des sections qui identifie le solide.",
+  "07-question": "Question ! Les sections horizontales d'une boule sont des disques qui… A : grandissent vers le haut. B : restent égaux. C : grandissent puis rétrécissent. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Le plus grand est au milieu. En haut et en bas, ils se réduisent à un point.",
+  "08-defi": "À toi de jouer ! Le scanner de Nathan donne trois sections d'un objet : un carré de 10 centimètres de côté en bas, un carré de 5 centimètres à mi-hauteur, et un point au sommet. Quel solide est-ce, et quel est son volume si la hauteur est 12 centimètres ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Des carrés qui rétrécissent régulièrement jusqu'à un point : c'est une pyramide à base carrée. À mi-hauteur, le côté est bien la moitié : la réduction est régulière. Son volume : la base, 10 fois 10, 100 centimètres carrés ; fois la hauteur, 100 fois 12, 1 200 ; divisé par 3 : 400 centimètres cubes.",
+  "09-finale": "Ce que tu as appris. Une suite de sections identifie un solide. Des disques égaux : un cylindre. Des disques qui rétrécissent vers un point : un cône. Des disques qui grandissent puis rétrécissent : une boule.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

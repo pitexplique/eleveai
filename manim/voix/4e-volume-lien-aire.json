@@ -1,0 +1,16 @@
+{
+  "00-garde": "Aire de base et volume. Comment passer d'un fond plat à des litres d'eau ?",
+  "01-situation": "Voici Léa. Elle s'occupe de l'eau des piscines. Avant de doser le produit qui garde l'eau propre, elle doit savoir combien d'eau il y a dans le bassin. Le produit se dose au mètre cube.",
+  "02-le-fond": "Le bassin est un rectangle de 8 mètres sur 4. Le fond, c'est une aire : 8 fois 4, 32 mètres carrés.",
+  "03-empiler": "Maintenant, l'eau monte. Chaque tranche d'eau d'un mètre d'épaisseur, c'est 32 mètres cubes. Le bassin a 1,5 mètre de profondeur : 32 fois 1,5, 48 mètres cubes.",
+  "04-methode": "La règle vaut pour tous ces solides : volume égale aire de la base, fois la hauteur. Le fond donne l'aire, la profondeur donne la hauteur.",
+  "05-question": "Question ! Un bassin a un fond de 20 mètres carrés et 1,5 mètre de profondeur. Quel est son volume ? A : 21,5 mètres cubes. B : 15 mètres cubes. C : 30 mètres cubes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. 20 fois 1,5, 30 mètres cubes. 21,5, c'est une addition : on n'additionne pas une aire et une longueur.",
+  "06-piege": "Attention au piège ! Un mètre cube, ce n'est pas un litre. Un mètre cube, c'est mille litres. Un bassin de 48 mètres cubes, ce n'est pas 48 litres : c'est 48 000 litres.",
+  "07-question": "Question ! Le bassin fait 48 mètres cubes. Combien de litres ? A : 4 800 litres. B : 48 000 litres. C : 480 litres. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Un mètre cube, c'est mille litres. 48 fois mille, 48 000 litres.",
+  "08-defi": "À toi de jouer ! Un autre bassin : 10 mètres sur 5, profondeur 1,4 mètre. Le produit se dose à une pastille pour 10 mètres cubes. Combien de pastilles Léa doit-elle mettre ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le fond : 10 fois 5, 50 mètres carrés. Le volume : 50 fois 1,4, 70 mètres cubes. Les pastilles : 70 divisé par 10, 7 pastilles.",
+  "09-finale": "Ce que tu as appris. Volume égale aire de la base, fois la hauteur. L'aire du fond se calcule d'abord. Un mètre cube, c'est mille litres.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

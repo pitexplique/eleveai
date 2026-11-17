@@ -304,7 +304,7 @@
     ],
     "centres": [
       "musique",
-      "instrument"
+      "sciences"
     ]
   },
   "terminale-suite-integrale": {
@@ -419,7 +419,7 @@
     ],
     "centres": [
       "sport",
-      "construction"
+      "art-design"
     ],
     "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/primitive-integrale"
   },

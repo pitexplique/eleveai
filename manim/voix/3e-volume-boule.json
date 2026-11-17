@@ -1,0 +1,16 @@
+{
+  "00-garde": "Le volume d'une boule. Combien d'air tient dans un ballon ?",
+  "01-situation": "Voici Lina. Elle est kinésithérapeute : elle fait travailler la respiration de ses patients. Elle leur demande de souffler tout l'air de leurs poumons dans un ballon. La taille du ballon dit beaucoup de choses.",
+  "02-formule": "Le volume d'une boule se calcule avec son rayon : 4 fois pi, fois le rayon, fois le rayon, fois le rayon, divisé par 3. Le rayon y passe trois fois : c'est un volume.",
+  "03-exemple": "Le ballon gonflé mesure 10 centimètres de rayon. 10 fois 10 fois 10, mille. 4 fois pi fois mille, 4 000 pi. Divisé par 3 : environ 4 189 centimètres cubes. Soit un peu plus de 4 litres.",
+  "04-les-poumons": "Et c'est exactement l'ordre de grandeur d'une grande inspiration : chez un adolescent, les poumons tiennent 3 à 4 litres. Ce ballon, c'est une respiration.",
+  "05-question": "Question ! Une boule a 3 centimètres de rayon. Quel est son volume ? A : 12 pi centimètres cubes. B : 27 pi centimètres cubes. C : 36 pi centimètres cubes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C. 3 fois 3 fois 3, 27. 4 fois pi fois 27, 108 pi. Divisé par 3 : 36 pi centimètres cubes. 27 pi, c'est avoir oublié le 4 et le divisé par 3.",
+  "06-piege": "Attention au piège ! Le rayon est la moitié du diamètre. Comme il est multiplié trois fois, une erreur de 2 sur le rayon devient une erreur de 8 sur le volume.",
+  "07-question": "Question ! Une boule a 6 centimètres de diamètre. Quel est son volume ? A : 36 pi centimètres cubes. B : 288 pi centimètres cubes. C : 48 pi centimètres cubes. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. Le rayon vaut 3. 4 fois pi fois 27, divisé par 3 : 36 pi centimètres cubes. 288 pi, c'est le diamètre pris pour le rayon : huit fois trop.",
+  "08-defi": "À toi de jouer ! Lina compare deux patients. Le premier gonfle un ballon de 10 centimètres de rayon, le second un ballon de 12 centimètres de rayon. Combien de litres chacun, et combien de litres d'écart ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le premier : 4 fois pi fois mille, divisé par 3, environ 4 189 centimètres cubes, soit 4,2 litres. Le second : 12 fois 12 fois 12, 1 728. 4 fois pi fois 1 728, divisé par 3, environ 7 238 centimètres cubes, soit 7,2 litres. L'écart : 3 litres.",
+  "09-finale": "Ce que tu as appris. Le volume d'une boule vaut 4 fois pi, fois le rayon trois fois, divisé par 3. Le rayon est la moitié du diamètre. Un ballon de 20 centimètres de diamètre, c'est à peu près une respiration.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

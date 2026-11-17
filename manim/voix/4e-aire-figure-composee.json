@@ -1,0 +1,16 @@
+{
+  "00-garde": "L'aire d'une figure composée. Comment mesurer une surface qui n'est pas un rectangle ?",
+  "01-situation": "Voici Hugo. Il est paysagiste. Le collège veut du gazon synthétique dans sa cour. La cour a la forme d'un L : ce n'est ni un rectangle, ni un carré. Combien de mètres carrés faut-il commander ?",
+  "02-decouper": "La méthode : on découpe la figure en rectangles. Hugo trace un trait, et le L devient deux rectangles : un de 10 mètres sur 6, un autre de 4 mètres sur 3.",
+  "03-additionner": "Le premier : 10 fois 6, 60 mètres carrés. Le second : 4 fois 3, 12 mètres carrés. En tout : 60 plus 12, 72 mètres carrés.",
+  "04-soustraire": "Il y a une autre façon de faire : partir du grand rectangle et enlever le morceau manquant. Les deux méthodes donnent le même résultat. On choisit la plus simple à calculer.",
+  "05-question": "Question ! Une cour en L : un rectangle de 10 mètres sur 6, et un rectangle de 4 mètres sur 3. Quelle est l'aire totale ? A : 23 mètres carrés. B : 72 mètres carrés. C : 60 mètres carrés. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B. 60 plus 12, 72 mètres carrés. 23, c'est une addition de longueurs. 60, c'est avoir oublié le deuxième morceau.",
+  "06-piege": "Attention au piège ! Quand on découpe, on ne compte jamais deux fois la partie commune. Et le trait qu'on a tracé ne change pas l'aire : il n'est là que pour nous aider.",
+  "07-question": "Question ! Un carré de 10 mètres de côté, dans lequel on enlève un carré de 4 mètres au coin. Quelle est l'aire restante ? A : 100 mètres carrés. B : 96 mètres carrés. C : 84 mètres carrés. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 10 fois 10, 100. Moins 4 fois 4, 16. 100 moins 16, 84 mètres carrés. 96, c'est avoir enlevé 4 au lieu de 16.",
+  "08-defi": "À toi de jouer ! La cour fait 72 mètres carrés, et un rond-point planté d'arbres occupe un disque de 2 mètres de rayon, qu'on ne gazonne pas. Le gazon coûte 28 euros le mètre carré. Quel est le prix ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Le disque : pi fois 2 fois 2, 4 pi, environ 12,6 mètres carrés. La surface à gazonner : 72 moins 12,6, environ 59,4 mètres carrés. Le prix : 59,4 fois 28, environ 1 663 euros.",
+  "09-finale": "Ce que tu as appris. Une figure composée se découpe en figures simples. On additionne les morceaux, ou on enlève ce qui manque. Et les traits de découpe ne changent pas l'aire.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

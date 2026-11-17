@@ -1,0 +1,16 @@
+{
+  "00-garde": "Défis sur les aires. Combien de film pour floquer une équipe ?",
+  "01-situation": "Voici Ryan. Il imprime les flocages des maillots : le numéro dans le dos, et le logo rond sur la manche. Le film se vend au mètre carré, et il n'aime pas en jeter.",
+  "02-le-numero": "Le numéro tient dans un rectangle de 25 centimètres sur 18. Son aire : 25 fois 18, 450 centimètres carrés.",
+  "03-le-logo": "Le logo est un disque de 6 centimètres de rayon. Son aire : pi fois 6 fois 6, 36 pi, environ 113 centimètres carrés.",
+  "04-par-maillot": "Un maillot, c'est donc 450 plus 113, environ 563 centimètres carrés de film.",
+  "05-question": "Question ! Un rectangle de 25 centimètres sur 18. Quelle est son aire ? A : 450 centimètres carrés. B : 86 centimètres carrés. C : 43 centimètres carrés. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. 25 fois 18, 450 centimètres carrés. 86, c'est le périmètre.",
+  "06-piege": "Attention au piège ! Un mètre carré, ce n'est pas 100 centimètres carrés, c'est 10 000. Un carré d'un mètre de côté, c'est 100 centimètres sur 100.",
+  "07-question": "Question ! Un disque de 6 centimètres de rayon, c'est environ… A : environ 38 centimètres carrés. B : environ 226 centimètres carrés. C : environ 113 centimètres carrés. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. Pi fois 6 fois 6, 36 pi, environ 113 centimètres carrés. 38, c'est la longueur du cercle.",
+  "08-defi": "À toi de jouer ! Ryan floque 18 maillots, 563 centimètres carrés chacun. Le film se vend au mètre carré, à 30 euros, et on ne vend que des mètres entiers. Combien va-t-il payer ? Mets pause, et cherche !",
+  "08b-correction": "Correction. 563 fois 18, 10 134 centimètres carrés. Un mètre carré fait 10 000 centimètres carrés : ça fait un peu plus d'un mètre carré. Comme on ne vend que des mètres entiers, Ryan en achète 2, soit 60 euros.",
+  "09-finale": "Ce que tu as appris. On additionne les aires des morceaux, même quand ils n'ont pas la même forme. Un mètre carré vaut 10 000 centimètres carrés. Et on arrondit au-dessus quand on achète.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

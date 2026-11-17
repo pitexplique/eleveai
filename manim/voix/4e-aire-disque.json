@@ -1,0 +1,16 @@
+{
+  "00-garde": "L'aire d'un disque. Combien de peau pour un tambour ?",
+  "01-situation": "Voici Nina. Elle fabrique des tambours. Sur chaque tambour, elle tend une peau ronde. La peau se vend au décimètre carré : Nina doit calculer l'aire d'un disque.",
+  "02-pas-le-tour": "Attention : le tour du tambour et la peau, ce ne sont pas la même chose. Le tour est une longueur. La peau est une surface.",
+  "03-formule": "L'aire d'un disque : pi fois le rayon, fois le rayon. Le rayon y passe deux fois, et c'est ce qui change tout.",
+  "04-exemple": "Le tambour de Nina a 20 centimètres de rayon. Son aire : pi fois 20 fois 20, soit 400 pi centimètres carrés. Environ 1 256 centimètres carrés.",
+  "05-question": "Question ! Un disque a 5 centimètres de rayon. Quelle est son aire ? A : 25 pi centimètres carrés. B : 10 pi centimètres carrés. C : 5 pi centimètres carrés. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A. Pi fois 5 fois 5, 25 pi centimètres carrés. 10 pi, c'est la longueur du cercle, pas son aire.",
+  "06-piege": "Attention au piège ! Quand on donne le diamètre, il faut d'abord le diviser par 2. Une peau de 40 centimètres de diamètre a 20 centimètres de rayon : sinon, l'aire est multipliée par 4 sans raison.",
+  "07-question": "Question ! Une peau mesure 40 centimètres de diamètre. Quelle est son aire ? A : 1 600 pi centimètres carrés. B : 400 pi centimètres carrés. C : 80 pi centimètres carrés. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. Le rayon vaut 20. Pi fois 20 fois 20, 400 pi centimètres carrés. 1 600 pi, c'est le diamètre pris pour le rayon.",
+  "08-defi": "À toi de jouer ! Nina prépare 6 tambours de 20 centimètres de rayon. La peau se vend par carrés de 50 centimètres sur 50. Combien de carrés de peau faut-il au minimum, si elle découpe un disque par carré ? Mets pause, et cherche !",
+  "08b-correction": "Correction. Un disque de 20 centimètres de rayon fait 40 centimètres de large : il entre tout juste dans un carré de 50. Un carré par tambour : 6 carrés. Et il reste de la chute : 2 500 moins 1 256, environ 1 244 centimètres carrés perdus par carré.",
+  "09-finale": "Ce que tu as appris. L'aire d'un disque vaut pi fois le rayon, fois le rayon. Le rayon est la moitié du diamètre. Le tour, lui, vaut 2 fois pi fois le rayon.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

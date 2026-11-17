@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Une terrasse carrée de 8 mètres de côté, un bassin rond de 4 mètres de diamètre au milieu.",
+  "01-defi": "Combien de mètres carrés faut-il carreler ?",
+  "02-question": "Question ! A : 64 mètres carrés. B : environ 51,4 mètres carrés. C : environ 12,6 mètres carrés. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! Le carré : 64. Le bassin : pi fois 2 fois 2, environ 12,6. 64 moins 12,6, environ 51,4 mètres carrés.",
+  "03-visuel": "On carrelle tout, sauf le rond.",
+  "04-commentaire": "À toi : terrasse de 10 mètres de côté, bassin rond de 6 mètres de diamètre. Combien de mètres carrés ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
