@@ -102,7 +102,7 @@ class ShortVolumeBoule3e(Short4e):
         self.play(Create(diam), FadeIn(d20, shift=UP * 0.1), run_time=0.7)
         self.au_mot("c'est une respiration")
         pou = poumons(1.0, P(0, -1.6))
-        resp = self.t("une respiration", 28, VERT_OK).move_to(P(0, -2.9))
+        resp = self.t("une respiration", 28, VERT_OK).move_to(P(0, -2.8))
         self.play(FadeIn(pou, scale=0.85), FadeIn(resp, scale=1.15), run_time=0.9)
         self.attendre_voix(marge=0.3)
 
@@ -123,7 +123,9 @@ class ShortVolumeBoule3e(Short4e):
         lq = self.t("combien de litres ?", 30, JAUNE_TITRE).move_to(P(0, -1.3))
         self.play(FadeIn(lq, scale=1.12), run_time=0.45)
         self.au_mot("Réponds en commentaire")
-        self.play(FadeIn(self.commentaire(y=-2.85)), run_time=0.4)
+                # ⛔ Rien ne descend sous y = −3,0 dans un short : Ti-Margo occupe la bande basse
+        #    (centré en −3,45, environ 0,55 de haut). Le commentaire fait 0,8 de haut.
+        self.play(FadeIn(self.commentaire(y=-2.6)), run_time=0.4)
         self.attendre_voix(marge=0.3)
 
         # ── 05 ──────────────────────────────────────────────────────────────

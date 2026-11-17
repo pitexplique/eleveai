@@ -60,7 +60,7 @@ class ShortSectionDefi3e(Short4e):
         # ── 01 : le défi ────────────────────────────────────────────────────
         self.dire("01-defi")
         self.au_mot("Quel solide")
-        q = self.accroche("quel solide ?", fs=30, couleur=JAUNE_TITRE, y=-2.9)
+        q = self.accroche("quel solide ?", fs=30, couleur=JAUNE_TITRE, y=-2.8)
         self.play(FadeIn(q, scale=1.15), run_time=0.6)
         self.au_mot("a-t-il scanné")
         self.play(Indicate(VGroup(c1, c2, pt), color=SCAN_C, scale_factor=1.06), run_time=0.8)
@@ -109,7 +109,9 @@ class ShortSectionDefi3e(Short4e):
         sq = self.t("quel solide ?", 30, JAUNE_TITRE).move_to(P(0, -1.6))
         self.play(FadeIn(sq, scale=1.12), run_time=0.5)
         self.au_mot("Réponds en commentaire")
-        self.play(FadeIn(self.commentaire(y=-2.8)), run_time=0.4)
+                # ⛔ Rien ne descend sous y = −3,0 dans un short : Ti-Margo occupe la bande basse
+        #    (centré en −3,45, environ 0,55 de haut). Le commentaire fait 0,8 de haut.
+        self.play(FadeIn(self.commentaire(y=-2.6)), run_time=0.4)
         self.attendre_voix(marge=0.3)
 
         # ── 05 ──────────────────────────────────────────────────────────────

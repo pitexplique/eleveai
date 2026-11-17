@@ -12,14 +12,17 @@ WAV : `public/sons/3e-*/`. Marques : `manim/scripts/4e/3e_*_marques.json`. Tout 
 
 | Épisode | Id | Ceinture | Paysage | Short | HD |
 |---|---|---|---|---|---|
-| T1 | `3e-volume-boule` (le ballon, les poumons) | verte | ⏳ | ⏳ | — |
-| T2 | `3e-volume-reduction-section` (le gobelet du cinéma) | bleue | ⏳ | ⏳ | — |
-| T3 | `3e-section-pave-cube` (la tranche de pain de mie) | jaune | ⏳ | ⏳ | — |
-| T4 | `3e-section-cylindre` (le tube d'une trottinette) | verte | ⏳ | ⏳ | — |
-| T5 | `3e-section-cone-pyramide` (le volcan, 974) | verte | ⏳ | ⏳ | — |
-| T6 | `3e-section-sphere` (les parallèles du globe) | bleue | ⏳ | ⏳ | — |
-| T7 | `3e-section-longueur` (la position en vol) | bleue | ⏳ | ⏳ | — |
-| T8 | `3e-section-defi` (scanner pour imprimer en 3D) | marron | ⏳ | ⏳ | — |
+| T1 | `3e-volume-boule` (le ballon, les poumons) | verte | ✅ | ✅ | ✅ 241,8 s / 57,8 s, bords 0 |
+| T2 | `3e-volume-reduction-section` (le gobelet du cinéma) | bleue | ✅ | ✅ | ✅ 214,8 s / 55,3 s, bords 0 |
+| T3 | `3e-section-pave-cube` (la tranche de pain de mie) | jaune | ✅ | ✅ | ✅ 199,1 s / 49,7 s, bords 0 |
+| T4 | `3e-section-cylindre` (le tube d'une trottinette) | verte | ✅ | ✅ | ✅ 187,7 s / 58,3 s, bords 0 |
+| T5 | `3e-section-cone-pyramide` (le volcan, 974) | verte | ✅ | ✅ | ⏳ |
+| T6 | `3e-section-sphere` (les parallèles du globe) | bleue | ✅ | ✅ | ⏳ |
+| T7 | `3e-section-longueur` (la position en vol) | bleue | ✅ | ✅ | ⏳ |
+| T8 | `3e-section-defi` (scanner pour imprimer en 3D) | marron | ✅ | ✅ | ⏳ |
+
+⚠️ Les quatre premiers paysages ont été RE-RENDUS après la correction de la pause (leçon 32) :
+les durées ci-dessus sont celles du premier rendu, à remettre à jour.
 
 ## La chaîne d'un épisode (rappel)
 
@@ -68,7 +71,13 @@ WAV : `public/sons/3e-*/`. Marques : `manim/scripts/4e/3e_*_marques.json`. Tout 
     en −2,4 déborde.
 39. ⭐ Deux barres de comparaison se dessinent À L'ÉCHELLE : si le ballon écrase les poumons,
     l'écran dit le contraire de la voix (« c'est le même ordre de grandeur »).
-40. ⭐ Outil : `scratchpad/verif_aumot.py <script> <nom-voix>` relit le script, suit les
+40. ⛔⛔ **Dans un SHORT, rien ne descend sous y = −3,0** : Ti-Margo occupe la bande basse
+    (`margo_bas()` le pose centré en −3,45, environ 0,55 de haut, au MILIEU de l'écran).
+    Le bloc `commentaire()` fait 0,8 de haut : posé à −2,85 il mord déjà sur la mascotte, et une
+    phrase seule à −2,9 lui passe sur la tête (vu sur le MP4 de T2, « un huitième ! »).
+    Valeurs sûres : `commentaire(y=-2.6)`, une phrase seule à −2,8. ⚠️ `BORDS=1` ne voit RIEN de
+    ces chevauchements : ils ne sortent pas du cadre. Seule la relecture des images les attrape.
+41. ⭐ Outil : `manim/poste2/verif-au-mot.py <script> <nom-voix>` relit le script, suit les
     `dire`/`ecran`/`question_gauche` et vérifie que CHAQUE `au_mot` existe dans la voix de SON
     écran. Il attrape en une seconde les fautes de casse (« La surface » vs « la surface ») qui
     font planter le rendu à la moitié de la vidéo.

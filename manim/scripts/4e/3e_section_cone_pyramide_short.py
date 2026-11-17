@@ -128,9 +128,9 @@ class ShortSectionConePyramide3e(Short4e):
         rq = self.t("quel rapport ?", 30, JAUNE_TITRE).move_to(P(0, -1.8))
         self.play(FadeIn(rq, scale=1.12), run_time=0.5)
         self.au_mot("Réponds en commentaire")
-        # ⛔ Ti-Margo occupe y ∈ [−3,85 ; −3,05] dans un short : le commentaire (deux lignes,
-        #    0,9 de haut) ne descend pas sous y = −2,85, sinon il lui passe dessus.
-        self.play(FadeIn(self.commentaire(y=-2.85)), run_time=0.4)
+        # ⛔ Rien ne descend sous y = −3,0 dans un short : Ti-Margo occupe la bande basse
+        #    (centré en −3,45, environ 0,55 de haut). Le commentaire fait 0,8 de haut.
+        self.play(FadeIn(self.commentaire(y=-2.6)), run_time=0.4)
         self.attendre_voix(marge=0.3)
 
         # ── 05 ──────────────────────────────────────────────────────────────

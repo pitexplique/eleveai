@@ -110,7 +110,9 @@ class ShortSectionLongueur3e(Short4e):
         dq = self.t("diagonale = ?", 30, HYPO_C).move_to(P(0, -1.8))
         self.play(Create(fc.diag), FadeIn(dq, scale=1.1), run_time=0.9)
         self.au_mot("Réponds en commentaire")
-        self.play(FadeIn(self.commentaire(y=-2.9)), run_time=0.4)
+                # ⛔ Rien ne descend sous y = −3,0 dans un short : Ti-Margo occupe la bande basse
+        #    (centré en −3,45, environ 0,55 de haut). Le commentaire fait 0,8 de haut.
+        self.play(FadeIn(self.commentaire(y=-2.6)), run_time=0.4)
         self.attendre_voix(marge=0.3)
 
         # ── 05 ──────────────────────────────────────────────────────────────
