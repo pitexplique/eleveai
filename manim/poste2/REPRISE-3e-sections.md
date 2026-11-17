@@ -260,136 +260,6 @@ trancher au plein format, jamais sur une planche réduite (leçon 43).
 
 ⛔ Jamais de push.
 
-## Leçons propres à ce lot (elles s'ajoutent aux 30 de `manim/REPRISE-4e-perimetre-aire-volume.md`)
-
-31. ⛔⛔ **Un dry run qui PLANTE passe inaperçu** : l'exception s'écrit sur la même ligne que la
-    barre de progression, et un `grep` ordinaire ne la voit pas. Deux garde-fous, à garder :
-    · filtrer la sortie par `tr '\r' '\n'` avant le grep (sinon les messages AUDIT/TARD collés
-      à la barre de progression sont invisibles eux aussi) ;
-    · vérifier que la ligne `ECRAN 10-abonne` est bien là — c'est la preuve que la scène est allée
-      jusqu'au bout. (`manim/poste2/3e_dry.sh` fait les deux.)
-32. ⛔ **`pause_defi(x=…)` n'existe pas** : la méthode effective est celle de `PaysageJ2`
-    (`y`, `marge`). Et surtout, dans la colonne de droite, « Mets pause, et cherche ! » TOUCHE
-    Ti-Margo (vu sur les planches de T1, T2, T3 et T4 : la mascotte occupe x > 4,6 et y < −2,2).
-    Chaque épisode définit donc sa `pause_gauche()`, qui pose la phrase en bas À GAUCHE (x = −6,2).
-33. ⛔⛔ **Un morceau réduit à « <nombre>. » perd son jeton** : `_jetons` applique
-    `_ENUM = ^\s*[0-9]+\.(\s|$)` pour retirer les numérotations (« 1. »), donc « 3. » ne contient
-    plus rien à attendre et s'affiche EN AVANCE. Couper autrement (« Le rayon » / « vaut 3. »).
-34. ⛔ **Dans un SHORT, la phrase de réponse se cale sur ce qui est dit APRÈS le premier point
-    de la voix** (`_poser` ne cherche qu'à partir de là). Avant d'écrire la phrase, lire la voix
-    de réponse et repérer ce point : s'il tombe à la fin, la phrase ne doit porter AUCUN nombre.
-    Un nombre et son unité vont dans deux morceaux (« 4,2 » puis « litres d'air. ») : sinon on
-    attend le mot et le nombre part en AUDIT-TARD.
-35. ⛔ **Le premier mot long d'une ligne de question doit être dit JUSTE avant son nombre.**
-    « Une sphère de rayon 10 » attendait le « 10 » et mettait « sphère » en TARD de 0,9 s :
-    « Rayon de la sphère : 10. » passe. (Même remède que la leçon 24, côté question.)
-36. ⛔ **Un `Write(titre)` avant le premier `au_mot` d'un écran met l'écran en RETARD** quand la
-    voix commence par le mot attendu (T5, « Pour une pyramide »). Le titre part alors dans le même
-    `play` que la première ligne. Dans un SHORT, l'ouverture (0,7 s) suffit à retarder un FadeIn :
-    poser la figure avec `add()`, sans animation.
-37. ⚠️ `finale_gauche` centre la figure en x = −4,6 : au-delà de 3,8 d'unités de large, elle
-    déborde (BORD). Un `fig.scale(0.7)` avant l'appel suffit.
-38. ⚠️ La marge basse du paysage est y = −3,57 (et non −3,88) : un disque de rayon 1,2 centré
-    en −2,4 déborde.
-39. ⭐ Deux barres de comparaison se dessinent À L'ÉCHELLE : si le ballon écrase les poumons,
-    l'écran dit le contraire de la voix (« c'est le même ordre de grandeur »).
-40. ⛔⛔ **Dans un SHORT, on se cale sur les PIXELS de Ti-Margo, pas sur sa boîte.**
-    `margo_bas()` le pose à `scale(0.38)` en y = −3,45. Sa boîte englobante monte à −2,92, mais
-    elle contient du vide en haut : ses pixels réels s'arrêtent à **y = −3,02** (x de −0,28 à
-    +0,29). Mesure de la session « passe finale des 28 », qui a compté les pixels au lieu de les
-    estimer. D'où les valeurs sûres, par hauteur de bloc :
-    · `commentaire()` (deux lignes, 0,852 de haut) → **y = −2,45** ; à −2,6 son bas tombe à
-      −3,026 et il TOUCHE, à −2,9 (la valeur des 20 shorts de 4e) il le recouvre de 0,31 ;
-    · une phrase seule (0,36 de haut) → **y = −2,65**.
-    ⚠️ `BORDS=1` ne voit RIEN de tout cela : rien ne sort du cadre.
-    ⭐ L'outil qui le mesure sans re-rendre en HD :
-    `python manim/poste2/verifier-zone-margo.py <mp4> [--pas 0.4]` → « 0 instant où quelque chose
-    recouvre Ti-Margo », ou la liste des instants fautifs. Il marche sur un rendu `-ql`, donc
-    AVANT le HD, et il s'étalonne seul (la mascotte ne bouge jamais : le minimum de pixels allumés
-    dans son rectangle sur toute la vidéo, c'est elle toute seule). Il connaît aussi le cadre
-    paysage, où il regarde en bas à droite.
-41. ⭐ Outil : `manim/poste2/verif-au-mot.py <script> <nom-voix>` relit le script, suit les
-    `dire`/`ecran`/`question_gauche` et vérifie que CHAQUE `au_mot` existe dans la voix de SON
-    écran. Il attrape en une seconde les fautes de casse (« La surface » vs « la surface ») qui
-    font planter le rendu à la moitié de la vidéo.
-
-42. ⛔⛔ **La date d'un MP4 ne prouve rien toute seule : elle se compare à l'ÉDITION qui l'a
-    produit, pas au commit.** Un script écrit à 05 h 06 et commité à 05 h 27 donne un MP4 de
-    05 h 06 qui peut être périmé sans qu'aucune date ne le dise. Au moindre doute, **refaire le
-    rendu coûte six minutes ; une vidéo fausse en classe coûte bien plus.** Le short de T3 était
-    dans ce cas : le tableau le disait « à jour », il ne l'était pas.
-43. ⛔⛔ **Une planche à 4 ou 5 colonnes MENT sur les chevauchements.** Deux vignettes collées
-    côte à côte donnent l'illusion qu'un texte d'une image touche une figure de la voisine, et
-    une vignette de 640 px cache un contact de quelques pixels. **Toute suspicion se tranche sur
-    une image PLEINE RÉSOLUTION** (`ffmpeg -ss … -vf "crop=…"`), jamais sur la planche. Trois
-    « défauts » de ce lot étaient des faux positifs (T4 écran 08, T6 et T7 écrans de défi) ; deux
-    vrais n'étaient visibles qu'au zoom.
-44. ⛔⛔ **Le ✓ de la bonne réponse mord sur le libellé le plus long, et aucun garde-fou ne le
-    voit.** `pythagore_pauses._carte` étire le contenu d'une carte jusqu'à 0,8 de son bord,
-    alors que `question_pause` pose la coche à 0,38 du bord DROIT : il reste 0,07 d'air.
-    ⛔ **Baisser `FS_C` ne sert à RIEN** — le gabarit redescend de toute façon le texte à la
-    largeur de la carte : on rapetisse les libellés courts sans libérer le long. Le remède,
-    local et sans toucher au gabarit partagé : surcharger `_carte` dans la scène et réserver la
-    place (`self.LARG - 1.2`). Fait sur T2s, T3, T5, T7s, T8 et T8s.
-    ⚠️ Les 20 épisodes de 4e tournent sur le même gabarit : à regarder de leur côté.
-45. ⛔ **Un `Indicate(scale_factor=1.1)` déborde là où la figure au repos ne débordait pas.**
-    Dans le short de T4, un disque de rayon 0,75 centré en −2,2 s'arrête à −2,95 ; pulsé à 1,1
-    il descend à −3,03 et touche la tête de Ti-Margo. La pulsation compte dans la marge.
-46. ⭐ **Une FIGURE recouvre Ti-Margo aussi bien qu'un texte.** Sur T5, le grand disque
-    (écran 02) et le grand carré (écran 04) lui passaient dessus : la règle « x > 4,6 et
-    y < −2,2 » vaut pour tout ce qu'on pose, pas seulement pour les phrases.
-    ⭐ `verifier-zone-margo.py` (leçon 40) l'attrape tout seul : il a rendu « 0 instant » sur
-    les 16 MP4 du lot une fois les corrections faites.
-47. ⭐ **Écarter la colonne ne suffit pas : il faut regarder les HAUTEURS.** Quand une ligne et
-    une figure se croisent, sortir la figure par le haut ou par le bas coûte moins cher que de
-    la pousser à droite — poussée, elle finit par toucher le bord ou la mascotte. C'est ce qui a
-    servi sur T3 (la tranche monte entre deux lignes, le carré descend sous elles) et sur T8
-    (la pile de disques passe au-dessus de la phrase de réponse).
-48. ⭐ Outils ajoutés pour ce lot, dans `manim/poste2/` : `planche-3e-paysage.sh <tag> <mp4>` et
-    `planche-3e-short.sh <tag> <mp4>` fabriquent les deux planches d'un épisode en lisant les
-    instants des écrans dans son `.hd.log` — et, pour un short, les trois images du compteur.
-    `file-3e-lot*.sh` enchaînent plusieurs rendus sous le verrou commun.
-
----
-
-# ⭐ PROMPT DE REPRISE (lot 3e, 17/11/2026)
-
-Tu reprends les **8 épisodes propres à la 3e** de la série « Périmètre, aire, volume, solides »,
-sur la branche `poste2`, dans ce dossier **partagé avec une autre session** : ne touche QUE les
-fichiers `manim/scripts/4e/3e_*.py` et ce fichier-ci.
-⛔ Avant d'écrire quoi que ce soit, fais `git log --oneline -8` et vérifie que le dernier commit
-du lot 3e est bien passé : on partage le dossier et la branche.
-
-## Ce qui est fait et ne se refait pas
-
-- **Les 16 scripts sont écrits, relus et commités** (6 commits, un lot par épisode ou deux).
-  Tous passent `bash manim/poste2/3e_dry.sh <script> <Scène> 10-abonne` (ou `05-abonne 1080,1920`
-  pour un short) avec **0 AUDIT-AVANCE, 0 AUDIT-TARD, 0 RETARD, 0 TARD, 0 BORD** — le seul message
-  toléré est `AUDIT-ABSENT 10-abonne « 974 »`, qui vient du gabarit de fin.
-- Les voix, les WAV et les marques étaient déjà là : ⛔ ne les retouche pas.
-- L'aperçu en pause des 16 vidéos est écrit : `manim/sorties/3e/apercu-lot-3e.html`
-  (servi par `python -m http.server 3907 --directory manim/sorties`).
-
-## Ce qui reste
-
-1. Les rendus HD qui manquent au tableau ci-dessus (colonne « HD »). La commande :
-   `bash manim/poste2/4e_hd.sh manim/scripts/4e/3e_<slug>[_short].py <Scène> eleveai-maths-3e-<slug>[-short] manim/scripts/4e/media-hd-<t>[s] manim/sorties/3e/maths/<notion>/NN-<slug> [1080,1920]`
-   — **un seul rendu HD à la fois** sur la machine (le script prend un verrou, l'autre session s'en
-   sert aussi) : lance-les en arrière-plan, ils s'attendent tout seuls.
-2. **La planche de contrôle de chaque épisode, et la RELECTURE des images** :
-   `bash manim/poste2/5e_planche.sh <mp4> <png> 4 t1 t2 …`. Les instants des écrans se lisent dans
-   `manim/scripts/4e/media-hd-<t>.hd.log` (`tr '\r' '\n' < … | grep ECRAN`).
-   ⛔ C'est là qu'on attrape ce que les garde-fous ne voient pas : les chevauchements (leçons 32
-   et 40) ne sortent pas du cadre, donc `BORDS=1` les ignore.
-3. **Le compteur de chaque short**, sur le MP4 : trois images dans les 3 s qui précèdent le début
-   de l'écran `02b-reponse` (lu dans le `.hd.log`) → 3, puis 2, puis 1, DANS la carte, rien
-   par-dessus.
-4. Remettre ce tableau à jour avec les durées réelles, et montrer l'aperçu à Frédéric.
-
-⛔ Jamais de push : c'est le 1er poste qui fusionne `poste2` dans `main`.
-⛔ Ne touche pas `manim/REPRISE-4e-perimetre-aire-volume.md` (l'autre session le tient), ni
-`manim/manifeste-youtube.json`, ni `lib/videos/*.json`.
-
 ---
 
 # ⏸️ RENDUS SUSPENDUS (17/11, consigne de Frédéric relayée par la session 4e)
@@ -445,22 +315,29 @@ attrapait le texte, du même cyan que la figure, puis son filtre de hauteur rata
 moitié transparent. Le même piège de couleur a été rencontré sur deux outils différents ce
 jour-là : un masque par couleur doit être vérifié sur un cas connu avant d'être cru.
 
-## ⭐ LE lot de rendus qui reste : `manim/poste2/3e_lot_final.sh`
+## ⛔ `manim/poste2/3e_lot_final.sh` : NEUTRALISÉ, aucun de ses 11 rendus n'est nécessaire
 
-**11 rendus, un seul passage par fichier** — les périmés et la coche sont réunis, pour qu'aucun
-fichier ne parte deux fois (le verrou est unique et trois sessions sont dessus) :
+Ce script avait été écrit pour refaire 11 épisodes, sur deux motifs. **Les deux sont tombés à la
+mesure, et le compte final est 0 rendu, 0 script à corriger.** Il reste commité comme outil, ses
+lignes en commentaire ; ⛔ ne pas le « compléter » ni le réactiver sans refaire les mesures.
 
-- **5 paysages** : T1, T2, T4, T6, T7 ;
-- **6 shorts** : T1, T2, T3, T4, T5, T6.
+**Motif 1, « la surcharge de la coche manque à 9 scripts ».** Vrai pour le source, faux pour le
+résultat (leçon 51). Mesuré sur les 9, sans rendre : sur 8, la condition ne se déclenche jamais
+— la ligne la plus large y va de 1,85 à 3,42 pour un seuil à 2,70 en short et 4,16 en paysage,
+donc l'ajouter ne changerait pas un pixel. Le 9ᵉ, `3e_section_sphere_short`, dépasse le seuil sur
+« les deux pareil »… qui est le choix **C** alors que la bonne réponse est **A** : le ✓ ne se
+pose jamais sur cette carte (leçon 52). Vérification croisée sur les 16 MP4 : 20 à 449 px
+d'écart sous le ✓, le plus serré étant ce même T6 short à 73 px.
 
-Pas dans le lot, parce qu'à jour ET déjà corrigés : paysages T3, T5, T8 ; shorts T7, T8.
+**Motif 2, « des MP4 plus anciens que leur script ».** Quatre relevés successifs ont conclu
+« périmé » sur 11, puis 8, puis 5, puis 1 fichiers : **la vérité était 0 à chaque fois**
+(leçons 50 et 53). Le dernier cas, T4 paysage, était le mieux argumenté — MP4 06:40 contre
+script 07:10 — mais 07:10 était l'heure du COMMIT, l'édition datant de 06:35. Preuve par l'image,
+puisque le diff déplaçait des objets : sur le MP4, « un disque. » est séparé du cercle d'environ
+60 px, alors qu'avant correction le point final le touchait. Les quatre autres étaient déjà
+prouvés de même : les 8 poignées « @eleveai974 » lues en entier (donc `margo_bas()` a bien quitté
+l'écran de commentaire) et « Mets pause, et cherche ! » en bas À GAUCHE sur T1.
 
-⛔ **Avant de lancer**, ajouter la surcharge de la coche aux **9 scripts** qui ne l'ont pas
-(la liste est en bas du script). ⚠️ En PAYSAGE la carte vient de `_carte_choix`, dans un SHORT
-de `_carte` : surcharger l'une pour l'autre ne fait rien, et ça ne se voit qu'à l'image.
-⚠️ Ce n'est pas la longueur du libellé qui décide, c'est la largeur de la carte : on applique la
-surcharge partout, les libellés courts ne bougent pas.
-
-⚠️ Le script porte une garde contre le CRLF que git lui donnera au checkout (la session 4e a
-perdu un rendu là-dessus). Je n'ai pas réussi à reproduire le symptôme sur cette machine — la
-garde est là par précaution, elle ne change rien quand le fichier est propre.
+⚠️ Le script porte une garde contre le CRLF que git peut lui donner au checkout (la session 4e a
+perdu un rendu là-dessus ; le symptôme n'a pas été reproduit sur cette machine). Elle ne change
+rien quand le fichier est propre : la garder.
