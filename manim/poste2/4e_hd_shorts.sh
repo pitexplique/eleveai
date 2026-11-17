@@ -62,11 +62,11 @@ while IFS='|' read -r script scene dossier nom cle res; do
   python manim/poste2/verifier-zone-margo.py "manim/sorties/$dossier/$nom.mp4" --pas 0.4 \
     < /dev/null | sed -n '2p'
 # ⛔ `tr -d` : git livre ce fichier en CRLF, et le 
- se retrouve dans le DERNIER champ
-# lu — donc dans la resolution passee a manim. Le 17/11 le lot est mort au 2e episode
-# avec un chemin tronque, et le verrou ne protege pas de ca. On purge a la lecture.
-done <<< "$(printf '%s' "$LOT" | tr -d '
-')"
+# tr -d : git livre ce fichier en CRLF, et le retour chariot se retrouverait dans le
+# DERNIER champ lu, donc dans la resolution passee a manim. On purge a la lecture.
+# (Ce commentaire ne doit PAS contenir de vrai retour chariot : le 17/11 il en portait
+#  un, il a coupe la ligne en deux, et la boucle n'a lu qu'un seul episode.)
+done <<< "$(printf '%s' "$LOT" | tr -d '\r')"
 echo
 echo "=== LOT TERMINE ==="
 echo "Ensuite : python manim/poste2/manifeste-4e.py, puis python manim/poste2/apercu-serie.py"
