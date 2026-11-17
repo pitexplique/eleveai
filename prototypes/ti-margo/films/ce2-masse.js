@@ -43,3 +43,51 @@ function sacCraie(c,x,yBas,w,h,z=1,coul=TOILE){ if(z<=0) return; const k=Math.mi
 function deuxAuPlusM(){ const CL=(window.CUES||{})[VIDEO]||{};
   for(const k in CL){ const res=[]; for(const x of CL[k]){ const n=res.length;
     if(n>=2&&res[n-1][1]===x[1]&&res[n-2][1]===x[1]) continue; res.push(x); } CL[k]=res; } }
+
+/* ---- Épisode 01 (unités) : l'éléphant, la balance de cuisine à aiguille, la bascule du port ---- */
+/* Un éléphant gris : (x, yBas) = le milieu, au sol ; s = l'échelle (1 ≈ 330 px de long) ; sens = 1 (trompe à droite) ou −1 */
+function elephantM(c,x,yBas,s=1,z=1,sens=1){ if(z<=0) return; s*=Math.min(1.15,z); const G='#adb5bd', B='#495057';
+  c.save(); c.translate(x,yBas); c.scale(sens,1);
+  c.fillStyle=G; c.strokeStyle=B; c.lineWidth=4; c.lineJoin='round';
+  for(const u of [-.75,-.35,.25,.6]){ c.beginPath(); c.roundRect(u*110*s-17*s,-80*s,34*s,80*s,8*s); c.fill(); c.stroke(); }
+  c.beginPath(); c.ellipse(-10*s,-120*s,120*s,72*s,0,0,7); c.fill(); c.stroke();
+  c.strokeStyle=G; c.lineWidth=26*s; c.lineCap='round'; c.beginPath(); c.moveTo(140*s,-130*s);
+  c.quadraticCurveTo(175*s,-60*s,150*s,-22*s); c.stroke();
+  c.fillStyle=G; c.strokeStyle=B; c.lineWidth=4; c.beginPath(); c.arc(112*s,-160*s,52*s,0,7); c.fill(); c.stroke();
+  c.fillStyle='#ced4da'; c.beginPath(); c.ellipse(82*s,-152*s,34*s,48*s,-.2,0,7); c.fill(); c.stroke();
+  c.fillStyle='#212529'; c.beginPath(); c.arc(128*s,-176*s,6*s,0,7); c.fill();
+  c.fillStyle='#f8f9fa'; c.beginPath(); c.moveTo(130*s,-124*s); c.quadraticCurveTo(162*s,-112*s,168*s,-132*s); c.lineTo(140*s,-134*s); c.fill();
+  c.strokeStyle=B; c.lineWidth=5; c.beginPath(); c.moveTo(-128*s,-130*s); c.lineTo(-150*s,-96*s); c.stroke();
+  c.restore(); }
+/* Une balance de cuisine à aiguille : (x, yBas) = le milieu du dessous ; a = l'angle de l'aiguille (0 = en haut, 2π = un tour) ;
+   casse ∈ [0, 1] : le plateau s'écrase, le cadran se fend, le ressort sort. Renvoie le dessus du plateau. */
+function balanceCuisineCraie(c,x,yBas,s=1,a=0,z=1,casse=0){ if(z<=0) return yBas-200*s; const k=Math.min(1.15,z)*s;
+  const w=230*k, h=170*k, cy=yBas-h*.52, R=62*k, ecr=casse*48*k;
+  c.fillStyle='#f3d9fa'; c.strokeStyle='#862e9c'; c.lineWidth=6; c.lineJoin='round';
+  c.beginPath(); c.roundRect(x-w/2,yBas-h,w,h,26*k); c.fill(); c.stroke();
+  c.fillStyle='#ffffff'; c.strokeStyle='#495057'; c.lineWidth=5; c.beginPath(); c.arc(x,cy,R,0,7); c.fill(); c.stroke();
+  c.strokeStyle='#495057'; c.lineWidth=3; for(let i=0;i<12;i++){ const t=i*Math.PI/6;
+    c.beginPath(); c.moveTo(x+Math.sin(t)*R*.78,cy-Math.cos(t)*R*.78); c.lineTo(x+Math.sin(t)*R*.92,cy-Math.cos(t)*R*.92); c.stroke(); }
+  c.strokeStyle='#e03131'; c.lineWidth=5*k; c.lineCap='round'; c.beginPath(); c.moveTo(x,cy); c.lineTo(x+Math.sin(a)*R*.74,cy-Math.cos(a)*R*.74); c.stroke();
+  c.fillStyle='#e03131'; c.beginPath(); c.arc(x,cy,7*k,0,7); c.fill();
+  if(casse>0){ /* la fêlure du cadran et le ressort qui saute */
+    c.strokeStyle='#212529'; c.lineWidth=4; c.beginPath(); c.moveTo(x-R*.9,cy-R*.2); c.lineTo(x-R*.3,cy+R*.1); c.lineTo(x+R*.1,cy-R*.35);
+    c.lineTo(x+R*.5,cy+R*.25); c.lineTo(x+R*.95,cy+R*.05); c.stroke();
+    c.strokeStyle='#adb5bd'; c.lineWidth=5; c.beginPath(); const rx=x+w/2+6, ry=yBas-h+10;
+    for(let i=0;i<=24;i++){ const u=i/24; c.lineTo(rx+u*70*k*casse,ry-u*60*k*casse+Math.sin(u*Math.PI*8)*12*k); } c.stroke(); }
+  /* le plateau : une tige et un plat ; écrasé, il penche et descend */
+  const py=yBas-h-34*k+ecr*.7, pen=casse*.22;
+  c.strokeStyle='#868e96'; c.lineWidth=12*k; c.beginPath(); c.moveTo(x,yBas-h); c.lineTo(x,Math.min(py,yBas-h)); c.stroke();
+  c.save(); c.translate(x,py); c.rotate(pen); c.fillStyle='#dee2e6'; c.strokeStyle='#495057'; c.lineWidth=5;
+  c.beginPath(); c.ellipse(0,0,w*.62,16*k,0,0,7); c.fill(); c.stroke(); c.restore();
+  return py-14*k; }
+/* La bascule du port : une grande plaque d'acier au sol (rayée jaune et noir) et son afficheur ; (x, yBas) = le milieu */
+function basculeCraie(c,x,yBas,w,texte='',z=1){ if(z<=0) return yBas; const k=Math.min(1.15,z), W=w*k, H=34*k;
+  c.fillStyle='#868e96'; c.strokeStyle='#343a40'; c.lineWidth=5; c.beginPath(); c.rect(x-W/2,yBas-H,W,H); c.fill(); c.stroke();
+  c.save(); c.beginPath(); c.rect(x-W/2,yBas-12*k,W,12*k); c.clip(); c.fillStyle='#ffd43b';
+  for(let u=x-W/2;u<x+W/2;u+=44*k){ c.beginPath(); c.moveTo(u,yBas); c.lineTo(u+22*k,yBas); c.lineTo(u+34*k,yBas-12*k); c.lineTo(u+12*k,yBas-12*k); c.fill(); } c.restore();
+  /* le poteau et l'afficheur, à droite */
+  const px=x+W/2+70*k; c.fillStyle='#495057'; c.fillRect(px-8*k,yBas-210*k,16*k,210*k);
+  c.fillStyle='#212529'; c.strokeStyle='#adb5bd'; c.lineWidth=5; c.beginPath(); c.roundRect(px-80*k,yBas-300*k,160*k,96*k,12*k); c.fill(); c.stroke();
+  if(texte) ecrire(c,texte,px,yBas-252*k,62*k,'#8ce99a');
+  return yBas-H; }

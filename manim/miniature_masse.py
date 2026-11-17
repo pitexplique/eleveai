@@ -42,6 +42,8 @@ EP = [
      "les poissons : 700 g", True, "blanche"),
     ("ce1", "defi", "05-defi", ["LE DÉFI", "DES MASSES"], "5 quilles de 200 g",
      "= 1 000 g = 1 kg !", True, "jaune"),
+    ("ce2", "unites", "01-unites", ["g, kg", "OU TONNE ?"], "Un conteneur : 20 t",
+     "1 t = 1 000 kg", True, "jaune"),
 ]
 
 

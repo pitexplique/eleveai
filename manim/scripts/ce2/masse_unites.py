@@ -145,9 +145,9 @@ class MasseUnitesCE2Base(MasseEstimerCPBase):
     def ecran_question1(self):
         self.clear()
         self.add_mascotte()
-        tr = trombone_m(1.0).move_to(P(-5.4, 2.0))
-        br = brique_lait(0.75).move_to(P(-4.3, 2.0))
-        ct = conteneur(0.5).move_to(P(-2.9, 1.95))
+        tr = trombone_m(1.3).move_to(P(-5.5, 1.9))
+        br = brique_lait(1.0).move_to(P(-4.2, 1.9))
+        ct = conteneur(0.62).move_to(P(-2.6, 1.85))
         fig = VGroup(tr, br, ct)
 
         def avant_q(sc):
@@ -159,7 +159,7 @@ class MasseUnitesCE2Base(MasseEstimerCPBase):
         self.question_gauche("04-question", "04b-reponse",
                              ["Le gramme, le kilogramme,", "la tonne : quelle est", "la plus petite unité ?"],
                              [self.choix(court(c_), fs=26) for c_ in Q1["choix"]], Q1["reponse"],
-                             ["Le gramme est la plus petite :", "c'est la masse d'un trombone."],
+                             ["Le gramme est", "la plus petite :", "c'est la masse", "d'un trombone."],
                              0.0, mot_q="Le gramme", avant_q=avant_q, autres_r=apres)
 
     # ── 05 : kilo veut dire 1 000 ───────────────────────────────────────────
@@ -173,8 +173,9 @@ class MasseUnitesCE2Base(MasseEstimerCPBase):
         self.au_mot("Dans kilogramme")
         self.play(FadeIn(mot_, shift=UP * 0.2), run_time=0.4)
         self.au_mot("il y a kilo")
-        cad = SurroundingRectangle(mot_[0], color=JAUNE_TITRE, buff=0.12)
-        self.play(Create(cad), mot_[0].animate.scale(1.12), run_time=0.4)
+        cad = Line(mot_[0].get_corner(DL) + DOWN * 0.18, mot_[0].get_corner(DR) + DOWN * 0.18,
+                   color=JAUNE_TITRE, stroke_width=8)
+        self.play(Create(cad), Indicate(mot_[0], color=JAUNE_TITRE, scale_factor=1.1), run_time=0.4)
         l0 = base_commune(self.ligne([("kilo", JAUNE_TITRE), ("= 1 000", JAUNE_TITRE)], 52, buff=0.25))
         l0.move_to(P(0, 0.7))
         self.au_mot("Kilo veut dire")
@@ -268,8 +269,10 @@ class MasseUnitesCE2Base(MasseEstimerCPBase):
     # ── 08 : ce que tu as appris ────────────────────────────────────────────
     def ecran_finale(self):
         self.ecran("08-finale", 0.65)
-        fig = VGroup(trombone_m(0.9), brique_lait(0.7), conteneur(0.5)).arrange(RIGHT, buff=0.3, aligned_edge=DOWN)
-        fig.move_to(P(-4.4, 0.0))
+        tit = self.t("Ce que tu as appris", 46, JAUNE_TITRE).to_edge(UP, buff=0.45)
+        self.play(Write(tit), run_time=0.7)
+        fig = VGroup(trombone_m(1.25), brique_lait(0.95), conteneur(0.66)).arrange(RIGHT, buff=0.35, aligned_edge=DOWN)
+        fig.move_to(P(-4.3, -0.1))
         self.add(fig)
         # chaque morceau à son mot (« le kilogramme, la tonne » ne s'affichent pas avant d'être dits)
         l0 = base_commune(self.ligne([("Trois unités :", WHITE), ("le gramme,", C_G)], 38, buff=0.22))
