@@ -98299,6 +98299,141 @@
       ]
     },
     {
+      "id": "ce1-masse-probleme",
+      "pas_avant": "2027-05-08",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_probleme",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "type": "longue",
+      "fichier": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme.mp4",
+      "miniature": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme.png",
+      "titre": "Le panier pèse 1 kg : et les poissons ? — Problèmes de masses — épisode 4 · Maths CE1",
+      "accroche": "Malo est pêcheur au port de Saint-Pierre, à La Réunion. Il pèse sa pêche pour la vendre. Pour résoudre un problème de masses, on calcule avec la même unité.\n\nDans cette vidéo :\n• le panier plein pèse 1 kg = 1 000 g, vide 300 g : les poissons, c'est le plein moins le vide, 700 g\n• 1 kg de farine, on en prend 400 g : 1 000 − 400, il reste 600 g\n• 3 kg de thon et 2 kg de dorade : 3 + 2 = 5 kg en tout\n• 750 g sur le plateau : de 750 à 1 000, il manque 250 g pour faire 1 kg\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : Malo a 2 kg de crevettes et en vend 500 g : combien de grammes lui reste-t-il ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_probleme&display=simple\n\n⚖️ Épisode 4 de la série Masses d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Problèmes de masses"
+        ],
+        [
+          "00:38",
+          "Question 1"
+        ],
+        [
+          "01:19",
+          "Question 2"
+        ],
+        [
+          "01:53",
+          "À toi de jouer"
+        ],
+        [
+          "02:07",
+          "Correction"
+        ],
+        [
+          "02:19",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "problème",
+        "kilogramme",
+        "gramme",
+        "soustraction",
+        "addition",
+        "pêcheur",
+        "La Réunion",
+        "maths",
+        "CE1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:38",
+          "question": "Un sac de 1 kilogramme de farine. On en prend 400 grammes. Combien reste-t-il ?",
+          "choix": [
+            "400 grammes",
+            "600 grammes",
+            "1 400 grammes"
+          ],
+          "reponse": 1,
+          "explication": "1 kilogramme, c'est 1 000 grammes. 1 000 − 400 : il reste 600 grammes."
+        },
+        {
+          "t": "01:19",
+          "question": "Sur le plateau, 750 grammes de poisson. Combien ajouter pour faire 1 kilogramme ?",
+          "choix": [
+            "250 grammes",
+            "350 grammes",
+            "1 750 grammes"
+          ],
+          "reponse": 0,
+          "explication": "1 kilogramme, c'est 1 000 grammes. De 750 à 1 000, il manque 250 grammes."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "ce1-masse-probleme-short",
+      "pas_avant": "2027-05-08",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_probleme",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "type": "short",
+      "renvoie_vers": "ce1-masse-probleme",
+      "fichier": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme-short.mp4",
+      "miniature": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme-short-miniature.png",
+      "titre": "1 kg de coquillages ? Et le seau, alors ? #maths #ce1",
+      "accroche": "Mon seau plein de coquillages pèse 1 kilogramme. Mon copain dit : 1 kilogramme de coquillages !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : un panier plein pèse 900 grammes, vide 100 grammes : combien pèsent les fruits ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce1 #primaire",
+      "tags": [
+        "masse",
+        "problème",
+        "gramme",
+        "kilogramme",
+        "coquillages",
+        "plage",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Combien pèsent les coquillages ?",
+          "choix": [
+            "800 grammes",
+            "1 kilogramme",
+            "1 200 grammes"
+          ],
+          "reponse": 0,
+          "explication": "1 000 grammes moins 200 grammes de seau : 800 grammes de coquillages."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
       "id": "cp-duree-placer-aiguilles",
       "pas_avant": "2027-05-09",
       "notionId": "duree",
