@@ -428,6 +428,23 @@ Même mécanique sur T4 paysage (écrit 06:27, rendu 06:40, commité 07:10).
 
 ⛔ Ne jamais relancer un rendu sur la foi d'une comparaison avec un commit : passer l'outil.
 
+⭐⭐ **Et quand un doute subsiste, la règle qui tranche vraiment : un diff qui DÉPLACE quelque
+chose laisse une trace mesurable dans l'image — on va la chercher dans le MP4.** C'est ainsi que
+les cinq derniers doutes du lot ont été levés sans un seul rendu :
+· T4 paysage, dont le diff poussait un disque de x = 3,9 à 4,3, soit 54 px à 1920 : sur le MP4,
+  « un disque. » est nettement séparé du cercle (~60 px d'air), la correction est dedans ;
+· les trois shorts dont le correctif retirait Ti-Margo de l'écran de commentaire : les huit
+  poignées « @eleveai974 » se lisent en entier, donc aucune tête ne couvre de lettre ;
+· T1 paysage, dont le seul changement était `pause_defi` → `pause_gauche` : « Mets pause, et
+  cherche ! » est bien en bas à gauche.
+Quand un diff ne déplace rien de visible, c'est que le rendu n'avait pas d'enjeu.
+
+⚠️ Pour une question BINAIRE (ça touche / ça ne touche pas), une image bien cadrée bat un
+détecteur mal calibré. La session qui a mesuré T4 s'y est reprise à trois fois : son masque
+attrapait le texte, du même cyan que la figure, puis son filtre de hauteur ratait le disque à
+moitié transparent. Le même piège de couleur a été rencontré sur deux outils différents ce
+jour-là : un masque par couleur doit être vérifié sur un cas connu avant d'être cru.
+
 ## ⭐ LE lot de rendus qui reste : `manim/poste2/3e_lot_final.sh`
 
 **11 rendus, un seul passage par fichier** — les périmés et la coche sont réunis, pour qu'aucun
