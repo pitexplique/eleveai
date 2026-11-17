@@ -16683,7 +16683,7 @@
   "titre": "Le béton d'une rampe de skatepark : quelle aire sous y = xⁿ ? — Une suite définie par une intégrale — épisode 41 · Maths Tle spé",
   "short": false,
   "youtube": null,
-  "coach": null
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=primitive_integrale&microId=integrale_suite&display=simple"
  },
  "terminale-suite-integrale-short": {
   "fichier": "terminale/maths/suites/41-integrale/eleveai-maths-terminale-suite-integrale-short.mp4",
@@ -16692,7 +16692,7 @@
   "titre": "Quatre aires qui rétrécissent : où vont-elles ? 🧪 — Tle spé #Shorts",
   "short": true,
   "youtube": null,
-  "coach": null
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=primitive_integrale&microId=integrale_suite&display=simple"
  },
  "terminale-suite-limite-calculer": {
   "fichier": "terminale/maths/suites/34-limite-calculer/eleveai-maths-terminale-suite-limite-calculer.mp4",
@@ -16809,7 +16809,7 @@
   "titre": "L'erreur d'un modèle d'IA : trois tours de boucle en Python — Programmer les termes d'une suite — épisode 42 · Maths Tle spé",
   "short": false,
   "youtube": null,
-  "coach": null
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=algorithmique_python&microId=python_suite&display=simple"
  },
  "terminale-suite-python-short": {
   "fichier": "terminale/maths/suites/42-python/eleveai-maths-terminale-suite-python-short.mp4",
@@ -16818,7 +16818,7 @@
   "titre": "Une info qui circule : combien de partages après 3 tours ? 🧪 — Tle spé #Shorts",
   "short": true,
   "youtube": null,
-  "coach": null
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=algorithmique_python&microId=python_suite&display=simple"
  },
  "terminale-suite-reconnaitre": {
   "fichier": "terminale/maths/suites/28-reconnaitre/eleveai-maths-terminale-suite-reconnaitre.mp4",
