@@ -28,29 +28,23 @@ fmt, fin = trouver(travail, travail_txt)
 ours = lambda k: isinstance(k, str) and k.startswith(prefixes)
 
 if isinstance(travail, dict) and "videos" in travail and isinstance(travail["videos"], list):
-    hv = {v["id"]: v for v in head["videos"]}
-    res = []
-    for v in travail["videos"]:
-        if ours(v["id"]):
-            res.append(v)
-        elif v["id"] in hv:
-            res.append(hv[v["id"]])
+    # (17/11, relève L) l'ORDRE de HEAD est gardé (la copie de travail d'une autre session peut l'avoir changé,
+    # cf. 7b7a55f1) : nos vidéos déjà dans HEAD sont remplacées sur place, les nouvelles ajoutées à la fin.
+    tv = {v["id"]: v for v in travail["videos"]}
+    res = [tv[v["id"]] if ours(v["id"]) and v["id"] in tv else v for v in head["videos"]]
     vus = {v["id"] for v in res}
-    for v in head["videos"]:  # une vidéo de HEAD retirée par une autre session : on la garde
-        if v["id"] not in vus:
+    for v in travail["videos"]:
+        if ours(v["id"]) and v["id"] not in vus:
             res.append(v)
     out = dict(travail); out.update({k: head[k] for k in head if k != "videos"}); out["videos"] = res
     nous = [v["id"] for v in res if ours(v["id"])]
 else:
-    out = {}
+    out = {}  # (17/11) l'ordre de HEAD, nos clés remplacées sur place, les nouvelles à la fin
+    for k, v in head.items():
+        out[k] = travail[k] if ours(k) and k in travail else v
     for k, v in travail.items():
-        if ours(k):
+        if ours(k) and k not in out:
             out[k] = v
-        elif k in head:
-            out[k] = head[k]
-    for k in head:
-        if k not in out:
-            out[k] = head[k]
     nous = [k for k in out if ours(k)]
 open(sortie, "w", encoding="utf-8", newline="").write(json.dumps(out, **fmt) + fin)
 print(chemin, "nos clés :", nous)

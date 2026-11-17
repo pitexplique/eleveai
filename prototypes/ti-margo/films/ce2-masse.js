@@ -91,3 +91,16 @@ function basculeCraie(c,x,yBas,w,texte='',z=1){ if(z<=0) return yBas; const k=Ma
   c.fillStyle='#212529'; c.strokeStyle='#adb5bd'; c.lineWidth=5; c.beginPath(); c.roundRect(px-80*k,yBas-300*k,160*k,96*k,12*k); c.fill(); c.stroke();
   if(texte) ecrire(c,texte,px,yBas-252*k,62*k,'#8ce99a');
   return yBas-H; }
+
+/* ---- Épisode 02 (relations) : la petite voiture (copie de voitureCraie de ce2-longueur.js, non chargé ici) ---- */
+/* Une petite voiture : (x, yBas) = le milieu, au sol ; s = l'échelle (1 = 160 px de long) */
+function voitureM(c,x,yBas,s=1,z=1,coul='#4dabf7'){ if(z<=0) return; s*=Math.min(1.15,z);
+  c.fillStyle=coul; c.beginPath(); c.roundRect(x-80*s,yBas-60*s,160*s,40*s,10*s); c.fill(); c.beginPath(); c.roundRect(x-46*s,yBas-94*s,86*s,40*s,12*s); c.fill();
+  c.fillStyle='#e7f5ff'; c.fillRect(x-36*s,yBas-86*s,30*s,26*s); c.fillRect(x+2*s,yBas-86*s,30*s,26*s);
+  c.fillStyle='#212529'; for(const dx of [-48,48]){ c.beginPath(); c.arc(x+dx*s,yBas-18*s,18*s,0,7); c.fill(); } }
+/* Un sac de riz blanc à la craie, son étiquette écrite dedans (réduite pour tenir) : (x, yBas) = le milieu du fond */
+function sacRizCraie(c,x,yBas,s=1,z=1,et=''){ if(z<=0) return; const k=Math.min(1.15,z)*s;
+  sacCraie(c,x,yBas,200*k,230*k,1,'#f8f9fa');
+  c.fillStyle='#ffe8cc'; for(const [u,v] of [[-.18,.82],[.05,.88],[.2,.8],[-.05,.76],[.12,.7]]){ c.beginPath(); c.ellipse(x+u*200*k,yBas-v*230*k,7*k,4*k,.5,0,7); c.fill(); }
+  if(et){ c.font=`800 ${Math.round(52*k)}px "Segoe UI"`; const fs=52*k*Math.min(1,170*k/c.measureText(et).width);
+    ecrire(c,et,x,yBas-100*k,fs,'#212529'); } }

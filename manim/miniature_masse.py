@@ -44,6 +44,8 @@ EP = [
      "= 1 000 g = 1 kg !", True, "jaune"),
     ("ce2", "unites", "01-unites", ["g, kg", "OU TONNE ?"], "Un conteneur : 20 t",
      "1 t = 1 000 kg", True, "jaune"),
+    ("ce2", "relations", "02-relations", ["1 kg 200 g", "= ? g"], "1 kg = 1 000 g",
+     "1 000 + 200 = 1 200 g", True, "jaune"),
 ]
 
 
