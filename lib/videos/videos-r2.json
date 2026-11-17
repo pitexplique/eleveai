@@ -6982,6 +6982,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_decimal&microId=decimal_droite&display=simple"
  },
+ "cm1-duree-calculer": {
+  "fichier": "cm1/maths/duree/04-calculer/eleveai-maths-cm1-duree-calculer.mp4",
+  "poster": "cm1/maths/duree/04-calculer/eleveai-maths-cm1-duree-calculer.png",
+  "vignette": "cm1/maths/duree/04-calculer/eleveai-maths-cm1-duree-calculer.vignette.webp",
+  "titre": "De 9 h 40 à 11 h 15 : combien de temps ? — Calculer une durée — épisode 4 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=duree&microId=duree_calculer&display=simple"
+ },
+ "cm1-duree-calculer-short": {
+  "fichier": "cm1/maths/duree/04-calculer/eleveai-maths-cm1-duree-calculer-short.mp4",
+  "poster": "cm1/maths/duree/04-calculer/eleveai-maths-cm1-duree-calculer-short-miniature.png",
+  "vignette": "cm1/maths/duree/04-calculer/eleveai-maths-cm1-duree-calculer-short-miniature.vignette.webp",
+  "titre": "15 h 45 → 17 h 20 : « 20 moins 45 » ? Aïe ! #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=duree&microId=duree_calculer&display=simple"
+ },
  "cm1-frac-comparer": {
   "fichier": "cm1/maths/fractions/04-comparer/eleveai-maths-cm1-frac-comparer.mp4",
   "poster": "cm1/maths/fractions/04-comparer/eleveai-maths-cm1-frac-comparer.png",

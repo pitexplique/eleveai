@@ -5,7 +5,7 @@
 Prompt : `docs/prompt-serie-durees-cm1-6e.md` (étendue CP → 6e le 16/11). Plan : `manim/PLAN-mardi-mercredi-17-18-11.md`, session B.
 Inventaire VALIDÉ par Frédéric le 16/11 (« Oui, continue » ; « donc programme durée du CP à la 6e ») : `manim/INVENTAIRE-durees-cp-6e.md`.
 36 micros → 32 paysages + 31 shorts à tourner. `aussi` : CE2 lire → CM1 `duree_lire` ; CE2 placer → CM1 + CM2 `duree_positionner_aiguilles` ; 5e `conversion-duree` → 6e `duree_convertir` (paysage ; à revoir à l'œil).
-Rien n'est poussé.
+Rien n'est poussé. ⏭ PROCHAIN : le CP (`cp_duree_lire_heure` d'abord), commun de classe qui importe `cp/duree_commun.py`.
 
 ## Outils
 Notes et outils : `side-session-notes/local_9cbb7607-cba7-48c1-a984-bb5d28d2f97c/durees/` (= `ND`)
@@ -32,8 +32,16 @@ Notes et outils : `side-session-notes/local_9cbb7607-cba7-48c1-a984-bb5d28d2f97c
 - ⏳ MONTRÉ à Frédéric le 16/11 : attendre son avis sur l'aperçu ET sur les 62 autres voix (validées seulement s'il ne corrige rien).
 - Vérifier un seul écran : petite scène qui n'appelle que `ecran_xxx()`, `fichier_marques` en chemin absolu, `-ql -s`.
 
+## Fait le 17/11 (matin, session relève B)
+- ✅ Frédéric : « Oui, lance la HD » sur l'aperçu du pilote, sans retouche → les 62 autres voix du RECAP sont VALIDÉES.
+- ✅ **PILOTE CM1 `duree_calculer` FINI** : paysage HD 3 min 30 (`verifier-bords-video.py` = 0), chapitres par dry run (`_temps.py` temporaire : 00:07 situation, 00:24 frise, 00:36 bonds, 00:52 total, 01:04 Q1, 01:39 piège, 01:55 Q2, 02:32 défi, 02:47 correction, 03:03 appris).
+- ✅ Short Ti Margo : série `cm1-duree` (`prototypes/ti-margo/films/cm1-duree.json` = épisodes lire 01, positionner 02, convertir 03, calculer 04, probleme 05, defi 06 ; outils `cm1-duree.js` : `horlogeCraie` petite aiguille bleue / grande rouge, `billetCraie`, `friseCraie`, `bondCraie`), film `cm1-duree-calculer.js` 82 s, réponse C, compteur vérifié (47,7 → 50,6 s : visible, dans la carte, se vide sans saut). Ti Margo saute à chaque « Hop » (`scene.y`, 0,3 : à 0,6 sa tête cachait la frise) ; frise HAUTE (FY = 330), le calcul juste à DROITE (Ti Margo cache le bas milieu-gauche).
+  - ⚠️ Sous-titres : un nombre suivi de « à » / « et » (marque « 45 à », « 50 et ») doit rester sur la MÊME ligne que le mot suivant, sinon `voixDe` saute le mot.
+- ✅ Miniatures : `python manim/miniature_duree.py <filtre>` (table `EP` à compléter par épisode) ; short = `… miniature`.
+- ✅ Manifeste **06/05/2027** (paysage + short), fiche YouTube, vignettes, R2 (7 fichiers), `generer-videos-r2.mjs`, coach + Supabase (2 lignes cm1 `duree_calculer`). Commit par chemin (clés `cm1-duree` seulement dans les JSON partagés). Pas poussé.
+
 ## Reste, dans l'ordre
-1. Frédéric valide `manim/voix/RECAP-durees-cp-6e.md` (retouches : modifier le JSON puis relancer `python ND/recap.py`).
-2. Pilote CM1 `duree_calculer` : WAV (Julie, débit −6, comme les séries CM1) → marques (`aire_marques.py duree:calculer`, à ajouter à ses chemins) → script `manim/scripts/cm1/duree_calculer.py` (modèle `cm1/longueur_convertir.py`) → dry run AUDIT → aperçu -ql → Frédéric valide → HD (verrou) → short Ti Margo (compteur vérifié) → chaîne de fin.
+1. ✅ Voix validées (17/11).
+2. ✅ Pilote CM1 `duree_calculer` FINI (17/11). Chaîne type par épisode : WAV (Julie, débit −6, comme les séries CM1) → marques (`aire_marques.py duree:calculer`, à ajouter à ses chemins) → script `manim/scripts/cm1/duree_calculer.py` (modèle `cm1/longueur_convertir.py`) → dry run AUDIT → aperçu -ql → Frédéric valide → HD (verrou) → short Ti Margo (compteur vérifié) → chaîne de fin.
 3. Puis CP → CE1 → CE2 → CM1 → CM2 → 6e, même chaîne (commun par classe qui importe `cp/duree_commun.py`).
-4. Manifeste à la suite de la file (dernière date le 16/11 : 28/04/2027 ; 3 shorts par jour au plus), R2, coach + Supabase `notion_ressources`, plan coché, mémoire `serie-durees-cp-6e.md`.
+4. Manifeste à la suite de la file (relire `max pas_avant` juste avant : le 17/11, CM1 calculer = 06/05/2027 ; la série Masses écrit aussi à la suite ; 3 shorts par jour au plus), R2, coach + Supabase `notion_ressources`, plan coché, mémoire `serie-durees-cp-6e.md`.
