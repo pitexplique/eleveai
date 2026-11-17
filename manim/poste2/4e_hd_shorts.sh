@@ -50,15 +50,23 @@ while IFS='|' read -r script scene dossier nom cle res; do
   n=$((n + 1))
   echo
   echo "--- [$n/21] $nom"
+  # ⛔⛔ « < /dev/null » : sans lui, manim lit l'ENTREE STANDARD de la boucle —
+  # c'est-a-dire le lot lui-meme — et avale le debut de la ligne suivante. Le 17/11 il a
+  # mange les six caracteres « 4e_vol » et le 2e episode a cherche « ume_pyramide_short.py ».
+  # Deux lots morts avant de le voir : la panne ressemble a un defaut de lecture du fichier,
+  # alors qu'elle vient de ce que le rendu consomme le flux. Toute commande lancee dans un
+  # « while read » doit avoir son entree fermee.
   bash manim/poste2/4e_hd.sh "manim/scripts/4e/$script.py" "$scene" "$nom" \
-       "manim/scripts/4e/media-hd-$cle" "manim/sorties/$dossier" ${res:+"$res"} || {
+       "manim/scripts/4e/media-hd-$cle" "manim/sorties/$dossier" ${res:+"$res"} < /dev/null || {
     echo "⛔ ECHEC sur $nom — on s'arrête là plutôt que d'enchaîner à l'aveugle"; exit 1; }
   python manim/poste2/verifier-zone-margo.py "manim/sorties/$dossier/$nom.mp4" --pas 0.4 \
-    | sed -n '2p'
-# ⛔ `tr -d` : git livre ce fichier en CRLF, et le  se retrouve dans le DERNIER champ
+    < /dev/null | sed -n '2p'
+# ⛔ `tr -d` : git livre ce fichier en CRLF, et le 
+ se retrouve dans le DERNIER champ
 # lu — donc dans la resolution passee a manim. Le 17/11 le lot est mort au 2e episode
 # avec un chemin tronque, et le verrou ne protege pas de ca. On purge a la lecture.
-done <<< "$(printf '%s' "$LOT" | tr -d '')"
+done <<< "$(printf '%s' "$LOT" | tr -d '
+')"
 echo
 echo "=== LOT TERMINE ==="
 echo "Ensuite : python manim/poste2/manifeste-4e.py, puis python manim/poste2/apercu-serie.py"
