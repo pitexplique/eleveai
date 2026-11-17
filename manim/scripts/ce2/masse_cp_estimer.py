@@ -67,15 +67,25 @@ class MasseEstimerCPBase(PaysageMasse):
 
     _ph_mots = {}
     _q_apres = {}
+    _q_mots = {}
 
     def poser_lignes(self, mob, anim="fade", run_time=0.4):
         """(17/11) Phrase de réponse : un morceau de `_ph_mots` {(ligne, morceau): extrait} attend SON mot
         (« 1 kg. » attendait le « 1 » de « 1 litre », dit juste avant)."""
-        if self._q_apres and mob is not getattr(self, "ph_q", None):
+        if (self._q_apres or self._q_mots) and mob is not getattr(self, "ph_q", None):
             # (17/11) Un crochet posé dans avant_q : {ligne: fonction} joué juste APRÈS cette ligne de la question
-            crochets, self._q_apres = self._q_apres, {}
+            # (17/11, CE1 05) `_q_mots` {ligne: extrait ou instant} : cette ligne arrive à CE mot (le socle la calait
+            # sur son dernier mot : « 1 kg de plumes, » attendait « plumes », 0,95 s après le « 1 »)
+            crochets, mots, self._q_apres, self._q_mots = self._q_apres, self._q_mots, {}, {}
             for i, m in enumerate(mob.submobjects):
-                super().poser_lignes(VGroup(m), anim, run_time)
+                if i in mots:
+                    v = mots[i]
+                    self.au_t(v) if isinstance(v, (int, float)) else self.au_mot(v)
+                    for f in m.get_family():
+                        f.sans_synchro = True
+                    self.play(FadeIn(m, shift=UP * 0.2), run_time=run_time)
+                else:
+                    super().poser_lignes(VGroup(m), anim, run_time)
                 if i in crochets:
                     crochets[i](self)
             return mob

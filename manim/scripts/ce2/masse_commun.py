@@ -755,8 +755,9 @@ def base_commune(ligne):
     lettre) de chaque morceau va au niveau de celui du premier morceau ; « + », « = » restent centrés."""
     def repere(m):
         txt = m.text.replace(" ", "") if hasattr(m, "text") else ""
+        # (17/11, CE1 05) une lettre SANS jambage (« que », « pèse » : le bas du q ou du p n'est pas la ligne de base)
         for k, ch in enumerate(txt):
-            if ch.isalnum() and k < len(m.submobjects):
+            if ch.isalnum() and ch not in "gjpqyQ," and k < len(m.submobjects):
                 return m.submobjects[k].get_bottom()[1]
         return None
     y0 = repere(ligne[0])
@@ -920,3 +921,172 @@ def bac_crevettes(s=1.0):
     cr = VGroup(*[crevette(0.55 * s).rotate(a).move_to(bac.get_top() + P(x * s, 0.12 * s))
                   for x, a in ((-0.65, 0.3), (-0.2, -0.2), (0.25, 0.4), (0.65, -0.1))])
     return VGroup(cr, bac)
+
+
+# ── CE1 05 (17/11) : Lina la jongleuse de cirque, ses quilles, ses balles, sa valise ─────────────────────────
+def balle(s=1.0, couleur="#ef4444"):
+    """Une balle de jonglage : une boule, une bande blanche courbe, un reflet."""
+    b = Circle(radius=0.26 * s, fill_color=couleur, fill_opacity=1, stroke_color="#1f2937", stroke_width=2)
+    bande = Arc(radius=0.3 * s, start_angle=PI * 0.62, angle=PI * 0.76, stroke_color=WHITE, stroke_width=5 * s)
+    bande.move_to(b.get_center() + RIGHT * 0.04 * s)
+    reflet = Circle(radius=0.05 * s, fill_color=WHITE, fill_opacity=0.8, stroke_width=0)
+    reflet.move_to(b.get_center() + P(-0.11 * s, 0.11 * s))
+    return VGroup(b, bande, reflet)
+
+
+def lina(s=1.0):
+    """Lina, jongleuse de cirque : tenue rouge à losanges jaunes, bandeau jaune, trois balles en l'air."""
+    p = visage(personne(peau="#a0522d", tenue="#dc2626", cheveux="#111827", longs=True, s=s))
+    c, r = p.tete.get_center(), p.tete.width / 2
+    bandeau = RoundedRectangle(width=r * 2.1, height=r * 0.28, corner_radius=r * 0.12, fill_color="#facc15",
+                               fill_opacity=1, stroke_width=0).move_to(c + UP * r * 0.55)
+    corps = p.corps if hasattr(p, "corps") else p
+    cc, w = corps.get_center(), corps.width
+    losanges = VGroup(*[Square(side_length=w * 0.13, fill_color="#facc15", fill_opacity=1, stroke_width=0)
+                        .rotate(PI / 4).move_to(cc + P(dx * w, dy * w)) for dx, dy in ((-0.12, 0.1), (0.12, 0.1), (0, -0.12))])
+    jeu = VGroup(*[balle(0.95 * s, k).move_to(c + P(x * s, y * s))
+                   for x, y, k in ((-0.7, 0.95, "#3b82f6"), (0.0, 1.2, "#facc15"), (0.7, 0.95, "#22c55e"))])
+    p.add(bandeau, losanges, jeu)
+    return p
+
+
+def quille(s=1.0, couleur="#3b82f6"):
+    """Une quille de jonglage, debout : le corps renflé, deux bandes blanches, le manche, le bouton."""
+    corps = Ellipse(width=0.42 * s, height=0.95 * s, fill_color=couleur, fill_opacity=1, stroke_color="#1f2937",
+                    stroke_width=2).move_to(P(0, -0.25 * s))
+    b1 = Rectangle(width=0.36 * s, height=0.07 * s, fill_color=WHITE, fill_opacity=1, stroke_width=0).move_to(P(0, -0.05 * s))
+    b2 = Rectangle(width=0.4 * s, height=0.07 * s, fill_color=WHITE, fill_opacity=1, stroke_width=0).move_to(P(0, -0.25 * s))
+    manche = Rectangle(width=0.12 * s, height=0.5 * s, fill_color=WHITE, fill_opacity=1, stroke_color="#1f2937",
+                       stroke_width=2).move_to(P(0, 0.43 * s))
+    bouton = Circle(radius=0.09 * s, fill_color=couleur, fill_opacity=1, stroke_color="#1f2937",
+                    stroke_width=2).move_to(P(0, 0.72 * s))
+    return VGroup(manche, corps, b1, b2, bouton)
+
+
+QUILLES = ("#3b82f6", "#22c55e", "#f97316", "#a855f7", "#ec4899")
+
+
+def cinq_quilles(s=1.0, buff=0.12):
+    return VGroup(*[quille(s, c) for c in QUILLES]).arrange(RIGHT, buff=buff * s, aligned_edge=DOWN)
+
+
+def valise(s=1.0, couleur="#7c3aed", texte=None):
+    """Une valise de cirque : coque arrondie, poignée, deux sangles, une étoile collée ; étiquette optionnelle."""
+    corps = RoundedRectangle(width=2.2 * s, height=1.45 * s, corner_radius=0.18 * s, fill_color=couleur,
+                             fill_opacity=1, stroke_color="#1f2937", stroke_width=3)
+    poignee = Arc(radius=0.3 * s, start_angle=0, angle=PI, stroke_color="#1f2937", stroke_width=7 * s)
+    poignee.next_to(corps, UP, buff=-0.02)
+    sangles = VGroup(*[Line(corps.get_top() + RIGHT * x * s, corps.get_bottom() + RIGHT * x * s, color="#4c1d95",
+                            stroke_width=6 * s) for x in (-0.6, 0.6)])
+    g = VGroup(poignee, corps, sangles)
+    if texte:
+        et = hors_audit(Text(texte, font_size=int(30 * s), color=WHITE, weight=BOLD)).move_to(corps)
+        g.add(et)
+    else:
+        g.add(Star(5, outer_radius=0.22 * s, inner_radius=0.1 * s, fill_color="#facc15", fill_opacity=1,
+                   stroke_width=0).move_to(corps.get_center()))
+    return g
+
+
+# ── CE2 01 (17/11) : Rayan le grutier, la grue, le conteneur, la voiture, la vis, la caisse à outils, le cargo ───
+def rayan(s=1.0):
+    """Rayan, grutier : gilet orange à bandes, casque de chantier jaune."""
+    p = visage(personne(peau="#8d5524", tenue="#f97316", cheveux="#111827", s=s))
+    c, r = p.tete.get_center(), p.tete.width / 2
+    casque = AnnularSector(inner_radius=0, outer_radius=r * 1.1, angle=PI, start_angle=0, fill_color="#facc15",
+                           fill_opacity=1, stroke_color="#a16207", stroke_width=2).move_to(c + UP * r * 0.6)
+    visiere = RoundedRectangle(width=r * 2.6, height=r * 0.22, corner_radius=r * 0.1, fill_color="#eab308",
+                               fill_opacity=1, stroke_width=0).move_to(c + UP * r * 0.32)
+    cc, w = p.corps.get_center(), p.corps.width
+    bandes = VGroup(*[Rectangle(width=w * 0.8, height=w * 0.07, fill_color="#e5e7eb", fill_opacity=1, stroke_width=0)
+                      .move_to(cc + UP * dy * w) for dy in (0.05, -0.15)])
+    p.add(bandes, casque, visiere)
+    return p
+
+
+def conteneur(s=1.0, couleur="#dc2626", texte=None):
+    """Un conteneur de port : une grande boîte ondulée (nervures verticales), deux portes."""
+    corps = Rectangle(width=2.4 * s, height=1.0 * s, fill_color=couleur, fill_opacity=1, stroke_color="#450a0a",
+                      stroke_width=3)
+    nerv = VGroup(*[Line(corps.get_bottom() + RIGHT * x * s + UP * 0.08 * s, corps.get_top() + RIGHT * x * s + DOWN * 0.08 * s,
+                         color="#7f1d1d", stroke_width=2) for x in np.arange(-1.0, 1.05, 0.2)])
+    g = VGroup(corps, nerv)
+    if texte:
+        et = hors_audit(Text(texte, font_size=int(34 * s), color=WHITE, weight=BOLD))
+        fond = RoundedRectangle(width=et.width + 0.3 * s, height=et.height + 0.2 * s, corner_radius=0.06 * s,
+                                fill_color="#111827", fill_opacity=0.85, stroke_width=0).move_to(corps)
+        g.add(fond, et.move_to(corps))
+    return g
+
+
+def grue(s=1.0):
+    """Une grue de port (portique) : le mât en treillis, la flèche, le câble et le crochet ; renvoie aussi .crochet."""
+    jaune = "#f59e0b"
+    mat = Rectangle(width=0.35 * s, height=3.4 * s, stroke_color=jaune, stroke_width=4).move_to(P(0, 0))
+    treillis = VGroup(*[Line(P(-0.175 * s, y * s), P(0.175 * s, (y + 0.34) * s), color=jaune, stroke_width=2)
+                        for y in np.arange(-1.7, 1.4, 0.34)])
+    fleche = Rectangle(width=3.2 * s, height=0.25 * s, fill_color=jaune, fill_opacity=1, stroke_width=0)
+    fleche.move_to(P(1.2 * s, 1.75 * s))
+    cabine = Rectangle(width=0.5 * s, height=0.4 * s, fill_color="#1e3a8a", fill_opacity=1, stroke_width=0)
+    cabine.move_to(P(0.3 * s, 1.4 * s))
+    socle = Rectangle(width=1.0 * s, height=0.25 * s, fill_color="#374151", fill_opacity=1, stroke_width=0)
+    socle.move_to(P(0, -1.82 * s))
+    cable = Line(P(2.5 * s, 1.62 * s), P(2.5 * s, 0.5 * s), color="#d1d5db", stroke_width=3)
+    crochet = Arc(radius=0.12 * s, start_angle=PI, angle=PI * 1.3, color="#d1d5db", stroke_width=4).move_to(P(2.5 * s, 0.42 * s))
+    g = VGroup(mat, treillis, fleche, cabine, socle, cable, crochet)
+    g.cable, g.crochet = cable, crochet
+    return g
+
+
+def voiture_m(s=1.0, couleur="#3b82f6"):
+    """Une petite voiture de profil."""
+    caisse = RoundedRectangle(width=2.0 * s, height=0.55 * s, corner_radius=0.18 * s, fill_color=couleur, fill_opacity=1,
+                              stroke_width=0)
+    toit = Polygon(P(-0.55 * s, 0.27 * s), P(0.5 * s, 0.27 * s), P(0.3 * s, 0.72 * s), P(-0.35 * s, 0.72 * s),
+                   fill_color=couleur, fill_opacity=1, stroke_width=0)
+    vitre = Polygon(P(-0.4 * s, 0.32 * s), P(0.38 * s, 0.32 * s), P(0.24 * s, 0.64 * s), P(-0.27 * s, 0.64 * s),
+                    fill_color="#bfdbfe", fill_opacity=1, stroke_width=0)
+    roues = VGroup(*[Circle(radius=0.22 * s, fill_color="#111827", fill_opacity=1, stroke_color="#9ca3af",
+                            stroke_width=3).move_to(P(x * s, -0.28 * s)) for x in (-0.6, 0.6)])
+    return VGroup(toit, vitre, caisse, roues)
+
+
+def vis(s=1.0):
+    """Une petite vis : tête plate fendue, tige filetée."""
+    tete = RoundedRectangle(width=0.5 * s, height=0.14 * s, corner_radius=0.05 * s, fill_color="#9ca3af", fill_opacity=1,
+                            stroke_width=0).move_to(P(0, 0.45 * s))
+    fente = Line(P(-0.12 * s, 0.45 * s), P(0.12 * s, 0.45 * s), color="#374151", stroke_width=3)
+    tige = Polygon(P(-0.09 * s, 0.38 * s), P(0.09 * s, 0.38 * s), P(0.09 * s, -0.3 * s), P(0, -0.48 * s), P(-0.09 * s, -0.3 * s),
+                   fill_color="#d1d5db", fill_opacity=1, stroke_width=0)
+    filets = VGroup(*[Line(P(-0.11 * s, y * s), P(0.11 * s, (y - 0.06) * s), color="#6b7280", stroke_width=2)
+                      for y in np.arange(0.3, -0.3, -0.11)])
+    return VGroup(tige, filets, tete, fente)
+
+
+def caisse_outils(s=1.0):
+    """Une caisse à outils rouge, poignée, un marteau qui dépasse."""
+    corps = RoundedRectangle(width=1.6 * s, height=0.8 * s, corner_radius=0.08 * s, fill_color="#dc2626", fill_opacity=1,
+                             stroke_color="#7f1d1d", stroke_width=3)
+    couv = Rectangle(width=1.6 * s, height=0.12 * s, fill_color="#991b1b", fill_opacity=1, stroke_width=0)
+    couv.move_to(corps.get_top() + DOWN * 0.12 * s)
+    poignee = Arc(radius=0.3 * s, start_angle=0, angle=PI, color="#374151", stroke_width=6).next_to(corps, UP, buff=0)
+    manche = Rectangle(width=0.12 * s, height=0.7 * s, fill_color="#a16207", fill_opacity=1, stroke_width=0)
+    manche.rotate(-0.5).move_to(corps.get_top() + P(0.55 * s, 0.22 * s))
+    tete = Rectangle(width=0.4 * s, height=0.14 * s, fill_color="#6b7280", fill_opacity=1, stroke_width=0)
+    tete.rotate(-0.5).move_to(manche.get_center() + P(0.17 * s, 0.3 * s))
+    return VGroup(manche, tete, poignee, corps, couv)
+
+
+def cargo(s=1.0):
+    """Un bateau-cargo : coque bleue, château blanc, des conteneurs empilés."""
+    coque = Polygon(P(-2.0 * s, 0.2 * s), P(2.2 * s, 0.2 * s), P(1.8 * s, -0.5 * s), P(-1.8 * s, -0.5 * s),
+                    fill_color="#1e3a8a", fill_opacity=1, stroke_color="#0f172a", stroke_width=3)
+    flot = Rectangle(width=3.7 * s, height=0.1 * s, fill_color="#dc2626", fill_opacity=1, stroke_width=0).move_to(P(0, -0.35 * s))
+    chateau = Rectangle(width=0.55 * s, height=0.75 * s, fill_color="#f8fafc", fill_opacity=1, stroke_width=0)
+    chateau.move_to(P(-1.5 * s, 0.57 * s))
+    boites = VGroup(*[Rectangle(width=0.55 * s, height=0.32 * s, fill_color=c, fill_opacity=1, stroke_color="#0f172a",
+                                stroke_width=1).move_to(P(x * s, y * s))
+                      for x, y, c in ((-0.8, 0.36, "#dc2626"), (-0.25, 0.36, "#16a34a"), (0.3, 0.36, "#f59e0b"),
+                                      (0.85, 0.36, "#3b82f6"), (1.4, 0.36, "#dc2626"), (-0.25, 0.68, "#3b82f6"),
+                                      (0.3, 0.68, "#dc2626"), (0.85, 0.68, "#16a34a"))])
+    return VGroup(chateau, boites, coque, flot)

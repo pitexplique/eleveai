@@ -97191,6 +97191,312 @@
       ]
     },
     {
+      "id": "cp-duree-placer-aiguilles",
+      "pas_avant": "2027-05-09",
+      "notionId": "duree",
+      "microId": "cp_duree_placer_aiguilles",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles.mp4",
+      "miniature": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles.png",
+      "titre": "Comment montrer 4 heures sur une horloge ? — Placer les aiguilles — épisode 2 · Maths CP",
+      "accroche": "Léo est clown de cirque. Son spectacle commence à 4 heures : il veut régler la grande horloge du cirque. Où va la petite aiguille ? Et la grande ?\n\nDans cette vidéo :\n• d'abord la petite aiguille : elle va sur le nombre de l'heure\n• ensuite la grande : pour une heure pile, elle va sur le 12\n• on vérifie toujours les 2 aiguilles\n• le piège : ne pas inverser les aiguilles\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : Léo jongle à 11 heures.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_placer_aiguilles&display=simple\n\n⏰ Épisode 2 de la série Durées d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Placer les aiguilles"
+        ],
+        [
+          "00:06",
+          "Léo, clown de cirque"
+        ],
+        [
+          "00:17",
+          "D'abord, la petite aiguille"
+        ],
+        [
+          "00:25",
+          "Ensuite, la grande aiguille"
+        ],
+        [
+          "00:34",
+          "On vérifie"
+        ],
+        [
+          "00:45",
+          "Question 1"
+        ],
+        [
+          "01:11",
+          "Le piège : inverser les aiguilles"
+        ],
+        [
+          "01:22",
+          "Question 2"
+        ],
+        [
+          "01:48",
+          "À toi de jouer"
+        ],
+        [
+          "01:59",
+          "Correction"
+        ],
+        [
+          "02:09",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "placer les aiguilles",
+        "heure entière",
+        "horloge",
+        "petite aiguille",
+        "grande aiguille",
+        "heure pile",
+        "cirque",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:45",
+          "question": "Pour montrer 9 heures, où va la petite aiguille ?",
+          "choix": [
+            "sur le 12",
+            "sur le 9",
+            "sur le 10"
+          ],
+          "reponse": 1,
+          "explication": "La petite aiguille donne l'heure : elle va sur le 9."
+        },
+        {
+          "t": "01:22",
+          "question": "Pour montrer 2 heures, où va la grande aiguille ?",
+          "choix": [
+            "sur le 12",
+            "sur le 2",
+            "sur le 6"
+          ],
+          "reponse": 0,
+          "explication": "Pour une heure pile, la grande aiguille va toujours sur le 12."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-duree-placer-aiguilles-short",
+      "pas_avant": "2027-05-09",
+      "notionId": "duree",
+      "microId": "cp_duree_placer_aiguilles",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "short",
+      "renvoie_vers": "cp-duree-placer-aiguilles",
+      "fichier": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles-short.mp4",
+      "miniature": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles-short-miniature.png",
+      "titre": "Je règle mon réveil sur 5 heures… il montre 12 heures ! #maths #cp",
+      "accroche": "Ti Margo règle son réveil sur 5 heures : la grande aiguille sur le 5, la petite sur le 12. Hop ! Mais le réveil montre 12 heures… Il a inversé les aiguilles : c'est la petite qui donne l'heure.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : pour montrer 10 heures, où va la petite aiguille ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_placer_aiguilles&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #heure #cp",
+      "tags": [
+        "placer les aiguilles",
+        "heure entière",
+        "horloge",
+        "réveil",
+        "petite aiguille",
+        "grande aiguille",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "Pour 5 heures, où va la grande aiguille ?",
+          "choix": [
+            "sur le 12",
+            "sur le 5",
+            "sur le 6"
+          ],
+          "reponse": 0,
+          "explication": "Pour une heure pile, la grande va sur le 12 ; la petite va sur le 5."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "cp-duree-jour-semaine",
+      "pas_avant": "2027-05-10",
+      "notionId": "duree",
+      "microId": "cp_duree_jour_semaine",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/duree/03-jour-semaine/eleveai-maths-cp-duree-jour-semaine.mp4",
+      "miniature": "cp/maths/duree/03-jour-semaine/eleveai-maths-cp-duree-jour-semaine.png",
+      "titre": "7 heures, c'est le matin ou le soir ? — Les moments de la journée — épisode 3 · Maths CP",
+      "accroche": "Malo est maître-nageur : le matin, il ouvre la piscine ; le soir, il la ferme. Mais 7 heures, c'est le matin ou le soir ?\n\nDans cette vidéo :\n• les moments de la journée : le matin, midi, l'après-midi, le soir\n• une heure revient 2 fois par jour : 7 heures du matin, 7 heures du soir\n• pour trouver le moment, on pense à ce qu'on fait\n• le piège : le nombre seul ne suffit pas\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : Malo se lève à 7 heures du soir ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_jour_semaine&display=simple\n\n⏰ Épisode 3 de la série Durées d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les moments de la journée"
+        ],
+        [
+          "00:06",
+          "Malo, maître-nageur"
+        ],
+        [
+          "00:18",
+          "Une journée : matin, midi, après-midi, soir"
+        ],
+        [
+          "00:33",
+          "Une heure revient 2 fois par jour"
+        ],
+        [
+          "00:43",
+          "On pense à ce qu'on fait"
+        ],
+        [
+          "00:52",
+          "Question 1"
+        ],
+        [
+          "01:18",
+          "Le piège : le nombre seul ne suffit pas"
+        ],
+        [
+          "01:30",
+          "Question 2"
+        ],
+        [
+          "01:58",
+          "À toi de jouer"
+        ],
+        [
+          "02:09",
+          "Correction"
+        ],
+        [
+          "02:21",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "moments de la journée",
+        "matin",
+        "midi",
+        "après-midi",
+        "soir",
+        "heure",
+        "se repérer dans le temps",
+        "piscine",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:52",
+          "question": "Il est midi. Que fait-on d'habitude ?",
+          "choix": [
+            "on se couche",
+            "on déjeune",
+            "on se lève"
+          ],
+          "reponse": 1,
+          "explication": "À midi, on déjeune, à la cantine ou à la maison."
+        },
+        {
+          "t": "01:30",
+          "question": "Malo prend son goûter à 4 heures. C'est quel moment de la journée ?",
+          "choix": [
+            "l'après-midi",
+            "le matin",
+            "la nuit"
+          ],
+          "reponse": 0,
+          "explication": "On prend le goûter l'après-midi : c'est 4 heures de l'après-midi."
+        }
+      ],
+      "centres": [
+        "natation",
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "cp-duree-jour-semaine-short",
+      "pas_avant": "2027-05-10",
+      "notionId": "duree",
+      "microId": "cp_duree_jour_semaine",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "short",
+      "renvoie_vers": "cp-duree-jour-semaine",
+      "fichier": "cp/maths/duree/03-jour-semaine/eleveai-maths-cp-duree-jour-semaine-short.mp4",
+      "miniature": "cp/maths/duree/03-jour-semaine/eleveai-maths-cp-duree-jour-semaine-short-miniature.png",
+      "titre": "Il est 8 heures : bonne nuit ! … Oups, c'est le matin ! #maths #cp",
+      "accroche": "Il est 8 heures : Ti Margo met son pyjama et va au lit. Bonne nuit ! Mais le soleil se lève et ses copains partent à l'école… Il est 8 heures du matin !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : il est 4 heures de l'après-midi. Que fais-tu d'habitude ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_jour_semaine&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #heure #cp",
+      "tags": [
+        "moments de la journée",
+        "matin",
+        "soir",
+        "heure",
+        "école",
+        "pyjama",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "À 8 heures du matin, que fait-on ?",
+          "choix": [
+            "on va à l'école",
+            "on se couche",
+            "on dîne"
+          ],
+          "reponse": 0,
+          "explication": "Le matin, on va à l'école. Le soir, on va au lit."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "corps-sante"
+      ]
+    },
+    {
       "id": "ce2-masse-comparer",
       "pas_avant": "2027-04-29",
       "prioritaire": true,
@@ -98434,101 +98740,91 @@
       ]
     },
     {
-      "id": "cp-duree-placer-aiguilles",
-      "pas_avant": "2027-05-09",
-      "notionId": "duree",
-      "microId": "cp_duree_placer_aiguilles",
-      "classe": "cp",
-      "ceinture": "blanche",
-      "serie": "Maths CP",
+      "id": "ce1-masse-defi",
+      "pas_avant": "2027-05-11",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_defi",
+      "classe": "ce1",
+      "ceinture": "jaune",
+      "serie": "Maths CE1",
       "type": "longue",
-      "fichier": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles.mp4",
-      "miniature": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles.png",
-      "titre": "Comment montrer 4 heures sur une horloge ? — Placer les aiguilles — épisode 2 · Maths CP",
-      "accroche": "Léo est clown de cirque. Son spectacle commence à 4 heures : il veut régler la grande horloge du cirque. Où va la petite aiguille ? Et la grande ?\n\nDans cette vidéo :\n• d'abord la petite aiguille : elle va sur le nombre de l'heure\n• ensuite la grande : pour une heure pile, elle va sur le 12\n• on vérifie toujours les 2 aiguilles\n• le piège : ne pas inverser les aiguilles\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : Léo jongle à 11 heures.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_placer_aiguilles&display=simple\n\n⏰ Épisode 2 de la série Durées d'EleveAI, en CP.",
+      "fichier": "ce1/maths/masse/05-defi/eleveai-maths-ce1-masse-defi.mp4",
+      "miniature": "ce1/maths/masse/05-defi/eleveai-maths-ce1-masse-defi.png",
+      "titre": "5 quilles de 200 g : plus lourd que 1 kg ? — Le défi des masses — épisode 5 · Maths CE1",
+      "accroche": "Lina est jongleuse dans un cirque. Dans sa valise, elle range ses quilles et ses balles : la valise doit rester légère. Pour additionner des masses, on les met dans la même unité.\n\nDans cette vidéo :\n• 5 quilles de 200 g : 200, 400, 600, 800, 1 000 g\n• 1 000 g, c'est 1 kg : la balance reste à niveau, ni plus, ni moins\n• avec 3 balles de 100 g : 1 000 + 300 = 1 300 g, plus que 1 kg\n• 1 kg de plumes et 1 kg de cailloux : c'est pareil, les plumes prennent juste plus de place\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : La valise vide pèse 2 kg ; Lina y met 5 quilles de 200 g et 2 balles de 500 g : combien pèse la valise ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_defi&display=simple\n\n⚖️ Épisode 5 de la série Masses d'EleveAI, en CE1.",
       "chapitres": [
         [
           "00:00",
-          "Placer les aiguilles"
+          "Le défi des masses"
         ],
         [
-          "00:06",
-          "Léo, clown de cirque"
+          "00:07",
+          "Lina, jongleuse de cirque"
         ],
         [
-          "00:17",
-          "D'abord, la petite aiguille"
+          "00:19",
+          "5 quilles de 200 g"
         ],
         [
-          "00:25",
-          "Ensuite, la grande aiguille"
-        ],
-        [
-          "00:34",
-          "On vérifie"
-        ],
-        [
-          "00:45",
+          "00:39",
           "Question 1"
         ],
         [
-          "01:11",
-          "Le piège : inverser les aiguilles"
-        ],
-        [
-          "01:22",
+          "01:17",
           "Question 2"
         ],
         [
-          "01:48",
+          "01:45",
           "À toi de jouer"
         ],
         [
-          "01:59",
+          "02:01",
           "Correction"
         ],
         [
-          "02:09",
+          "02:15",
           "Ce que tu as appris"
         ]
       ],
       "tags": [
-        "placer les aiguilles",
-        "heure entière",
-        "horloge",
-        "petite aiguille",
-        "grande aiguille",
-        "heure pile",
+        "masse",
+        "défi",
+        "kilogramme",
+        "gramme",
+        "1 kg = 1 000 g",
+        "addition",
         "cirque",
+        "jongleuse",
         "maths",
-        "CP",
-        "école",
+        "CE1",
+        "primaire",
         "cycle 2",
         "CRPE",
         "EleveAI"
       ],
       "questions": [
         {
-          "t": "00:45",
-          "question": "Pour montrer 9 heures, où va la petite aiguille ?",
+          "t": "00:39",
+          "question": "Le même sac : Léa écrit 1 kilogramme, Kevin écrit 1 000 grammes. Qui a raison ?",
           "choix": [
-            "sur le 12",
-            "sur le 9",
-            "sur le 10"
-          ],
-          "reponse": 1,
-          "explication": "La petite aiguille donne l'heure : elle va sur le 9."
-        },
-        {
-          "t": "01:22",
-          "question": "Pour montrer 2 heures, où va la grande aiguille ?",
-          "choix": [
-            "sur le 12",
-            "sur le 2",
-            "sur le 6"
+            "les deux",
+            "Kevin seulement",
+            "Léa seulement"
           ],
           "reponse": 0,
-          "explication": "Pour une heure pile, la grande aiguille va toujours sur le 12."
+          "explication": "1 kilogramme, c'est 1 000 grammes : les deux ont raison."
+        },
+        {
+          "t": "01:17",
+          "question": "Qu'est-ce qui est le plus lourd : 1 kilogramme de plumes, ou 1 kilogramme de cailloux ?",
+          "choix": [
+            "les cailloux",
+            "les plumes",
+            "c'est pareil"
+          ],
+          "reponse": 2,
+          "explication": "1 kilogramme, c'est 1 kilogramme ! Les plumes prennent juste plus de place."
         }
       ],
       "centres": [
@@ -98537,32 +98833,33 @@
       ]
     },
     {
-      "id": "cp-duree-placer-aiguilles-short",
-      "pas_avant": "2027-05-09",
-      "notionId": "duree",
-      "microId": "cp_duree_placer_aiguilles",
-      "classe": "cp",
+      "id": "ce1-masse-defi-short",
+      "pas_avant": "2027-05-11",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_defi",
+      "classe": "ce1",
       "ceinture": "blanche",
-      "serie": "Maths CP",
+      "serie": "Maths CE1",
       "type": "short",
-      "renvoie_vers": "cp-duree-placer-aiguilles",
-      "fichier": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles-short.mp4",
-      "miniature": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles-short-miniature.png",
-      "titre": "Je règle mon réveil sur 5 heures… il montre 12 heures ! #maths #cp",
-      "accroche": "Ti Margo règle son réveil sur 5 heures : la grande aiguille sur le 5, la petite sur le 12. Hop ! Mais le réveil montre 12 heures… Il a inversé les aiguilles : c'est la petite qui donne l'heure.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : pour montrer 10 heures, où va la petite aiguille ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_placer_aiguilles&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #heure #cp",
+      "renvoie_vers": "ce1-masse-defi",
+      "fichier": "ce1/maths/masse/05-defi/eleveai-maths-ce1-masse-defi-short.mp4",
+      "miniature": "ce1/maths/masse/05-defi/eleveai-maths-ce1-masse-defi-short-miniature.png",
+      "titre": "1 kg de plumes ou 1 kg de cailloux : le plus lourd ? #maths #ce1",
+      "accroche": "Ma copine et moi, on fait un pari. Le plus lourd : 1 kilogramme de plumes, ou 1 kilogramme de cailloux ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien de grammes dans 2 kilogrammes de plumes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce1 #primaire",
       "tags": [
-        "placer les aiguilles",
-        "heure entière",
-        "horloge",
-        "réveil",
-        "petite aiguille",
-        "grande aiguille",
+        "masse",
+        "kilogramme",
+        "plumes",
+        "cailloux",
+        "balance",
+        "pari",
         "Ti Margo",
         "dessin animé",
         "ceinture blanche",
         "maths",
-        "CP",
-        "école",
+        "CE1",
+        "primaire",
         "cycle 2",
         "CRPE",
         "EleveAI",
@@ -98570,173 +98867,19 @@
       ],
       "questions": [
         {
-          "t": "00:19",
-          "question": "Pour 5 heures, où va la grande aiguille ?",
+          "t": "00:17",
+          "question": "Que fait la balance ?",
           "choix": [
-            "sur le 12",
-            "sur le 5",
-            "sur le 6"
+            "elle reste en équilibre",
+            "les cailloux descendent",
+            "les plumes descendent"
           ],
           "reponse": 0,
-          "explication": "Pour une heure pile, la grande va sur le 12 ; la petite va sur le 5."
+          "explication": "1 kilogramme, c'est 1 kilogramme ! Le sac de plumes est juste plus gros."
         }
       ],
       "centres": [
-        "jeux-defis",
-        "corps-sante"
-      ]
-    },
-    {
-      "id": "cp-duree-jour-semaine",
-      "pas_avant": "2027-05-10",
-      "notionId": "duree",
-      "microId": "cp_duree_jour_semaine",
-      "classe": "cp",
-      "ceinture": "blanche",
-      "serie": "Maths CP",
-      "type": "longue",
-      "fichier": "cp/maths/duree/03-jour-semaine/eleveai-maths-cp-duree-jour-semaine.mp4",
-      "miniature": "cp/maths/duree/03-jour-semaine/eleveai-maths-cp-duree-jour-semaine.png",
-      "titre": "7 heures, c'est le matin ou le soir ? — Les moments de la journée — épisode 3 · Maths CP",
-      "accroche": "Malo est maître-nageur : le matin, il ouvre la piscine ; le soir, il la ferme. Mais 7 heures, c'est le matin ou le soir ?\n\nDans cette vidéo :\n• les moments de la journée : le matin, midi, l'après-midi, le soir\n• une heure revient 2 fois par jour : 7 heures du matin, 7 heures du soir\n• pour trouver le moment, on pense à ce qu'on fait\n• le piège : le nombre seul ne suffit pas\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : Malo se lève à 7 heures du soir ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_jour_semaine&display=simple\n\n⏰ Épisode 3 de la série Durées d'EleveAI, en CP.",
-      "chapitres": [
-        [
-          "00:00",
-          "Les moments de la journée"
-        ],
-        [
-          "00:06",
-          "Malo, maître-nageur"
-        ],
-        [
-          "00:18",
-          "Une journée : matin, midi, après-midi, soir"
-        ],
-        [
-          "00:33",
-          "Une heure revient 2 fois par jour"
-        ],
-        [
-          "00:43",
-          "On pense à ce qu'on fait"
-        ],
-        [
-          "00:52",
-          "Question 1"
-        ],
-        [
-          "01:18",
-          "Le piège : le nombre seul ne suffit pas"
-        ],
-        [
-          "01:30",
-          "Question 2"
-        ],
-        [
-          "01:58",
-          "À toi de jouer"
-        ],
-        [
-          "02:09",
-          "Correction"
-        ],
-        [
-          "02:21",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "moments de la journée",
-        "matin",
-        "midi",
-        "après-midi",
-        "soir",
-        "heure",
-        "se repérer dans le temps",
-        "piscine",
-        "maths",
-        "CP",
-        "école",
-        "cycle 2",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "00:52",
-          "question": "Il est midi. Que fait-on d'habitude ?",
-          "choix": [
-            "on se couche",
-            "on déjeune",
-            "on se lève"
-          ],
-          "reponse": 1,
-          "explication": "À midi, on déjeune, à la cantine ou à la maison."
-        },
-        {
-          "t": "01:30",
-          "question": "Malo prend son goûter à 4 heures. C'est quel moment de la journée ?",
-          "choix": [
-            "l'après-midi",
-            "le matin",
-            "la nuit"
-          ],
-          "reponse": 0,
-          "explication": "On prend le goûter l'après-midi : c'est 4 heures de l'après-midi."
-        }
-      ],
-      "centres": [
-        "natation",
-        "corps-sante"
-      ]
-    },
-    {
-      "id": "cp-duree-jour-semaine-short",
-      "pas_avant": "2027-05-10",
-      "notionId": "duree",
-      "microId": "cp_duree_jour_semaine",
-      "classe": "cp",
-      "ceinture": "blanche",
-      "serie": "Maths CP",
-      "type": "short",
-      "renvoie_vers": "cp-duree-jour-semaine",
-      "fichier": "cp/maths/duree/03-jour-semaine/eleveai-maths-cp-duree-jour-semaine-short.mp4",
-      "miniature": "cp/maths/duree/03-jour-semaine/eleveai-maths-cp-duree-jour-semaine-short-miniature.png",
-      "titre": "Il est 8 heures : bonne nuit ! … Oups, c'est le matin ! #maths #cp",
-      "accroche": "Il est 8 heures : Ti Margo met son pyjama et va au lit. Bonne nuit ! Mais le soleil se lève et ses copains partent à l'école… Il est 8 heures du matin !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : il est 4 heures de l'après-midi. Que fais-tu d'habitude ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_jour_semaine&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #heure #cp",
-      "tags": [
-        "moments de la journée",
-        "matin",
-        "soir",
-        "heure",
-        "école",
-        "pyjama",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "maths",
-        "CP",
-        "cycle 2",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:16",
-          "question": "À 8 heures du matin, que fait-on ?",
-          "choix": [
-            "on va à l'école",
-            "on se couche",
-            "on dîne"
-          ],
-          "reponse": 0,
-          "explication": "Le matin, on va à l'école. Le soir, on va au lit."
-        }
-      ],
-      "centres": [
-        "jeux-defis",
-        "corps-sante"
+        "jeux-defis"
       ]
     }
   ]

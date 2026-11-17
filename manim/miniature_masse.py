@@ -40,6 +40,8 @@ EP = [
      "1 kg : une brique de lait", True, "blanche"),
     ("ce1", "probleme", "04-probleme", ["PROBLÈMES", "DE MASSES"], "Plein 1 kg, vide 300 g",
      "les poissons : 700 g", True, "blanche"),
+    ("ce1", "defi", "05-defi", ["LE DÉFI", "DES MASSES"], "5 quilles de 200 g",
+     "= 1 000 g = 1 kg !", True, "jaune"),
 ]
 
 
