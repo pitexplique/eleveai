@@ -81,3 +81,43 @@ les durées ci-dessus sont celles du premier rendu, à remettre à jour.
     `dire`/`ecran`/`question_gauche` et vérifie que CHAQUE `au_mot` existe dans la voix de SON
     écran. Il attrape en une seconde les fautes de casse (« La surface » vs « la surface ») qui
     font planter le rendu à la moitié de la vidéo.
+
+---
+
+# ⭐ PROMPT DE REPRISE (lot 3e, 17/11/2026)
+
+Tu reprends les **8 épisodes propres à la 3e** de la série « Périmètre, aire, volume, solides »,
+sur la branche `poste2`, dans ce dossier **partagé avec une autre session** : ne touche QUE les
+fichiers `manim/scripts/4e/3e_*.py` et ce fichier-ci.
+⛔ Avant d'écrire quoi que ce soit, fais `git log --oneline -8` et vérifie que le dernier commit
+du lot 3e est bien passé : on partage le dossier et la branche.
+
+## Ce qui est fait et ne se refait pas
+
+- **Les 16 scripts sont écrits, relus et commités** (6 commits, un lot par épisode ou deux).
+  Tous passent `bash manim/poste2/3e_dry.sh <script> <Scène> 10-abonne` (ou `05-abonne 1080,1920`
+  pour un short) avec **0 AUDIT-AVANCE, 0 AUDIT-TARD, 0 RETARD, 0 TARD, 0 BORD** — le seul message
+  toléré est `AUDIT-ABSENT 10-abonne « 974 »`, qui vient du gabarit de fin.
+- Les voix, les WAV et les marques étaient déjà là : ⛔ ne les retouche pas.
+- L'aperçu en pause des 16 vidéos est écrit : `manim/sorties/3e/apercu-lot-3e.html`
+  (servi par `python -m http.server 3907 --directory manim/sorties`).
+
+## Ce qui reste
+
+1. Les rendus HD qui manquent au tableau ci-dessus (colonne « HD »). La commande :
+   `bash manim/poste2/4e_hd.sh manim/scripts/4e/3e_<slug>[_short].py <Scène> eleveai-maths-3e-<slug>[-short] manim/scripts/4e/media-hd-<t>[s] manim/sorties/3e/maths/<notion>/NN-<slug> [1080,1920]`
+   — **un seul rendu HD à la fois** sur la machine (le script prend un verrou, l'autre session s'en
+   sert aussi) : lance-les en arrière-plan, ils s'attendent tout seuls.
+2. **La planche de contrôle de chaque épisode, et la RELECTURE des images** :
+   `bash manim/poste2/5e_planche.sh <mp4> <png> 4 t1 t2 …`. Les instants des écrans se lisent dans
+   `manim/scripts/4e/media-hd-<t>.hd.log` (`tr '\r' '\n' < … | grep ECRAN`).
+   ⛔ C'est là qu'on attrape ce que les garde-fous ne voient pas : les chevauchements (leçons 32
+   et 40) ne sortent pas du cadre, donc `BORDS=1` les ignore.
+3. **Le compteur de chaque short**, sur le MP4 : trois images dans les 3 s qui précèdent le début
+   de l'écran `02b-reponse` (lu dans le `.hd.log`) → 3, puis 2, puis 1, DANS la carte, rien
+   par-dessus.
+4. Remettre ce tableau à jour avec les durées réelles, et montrer l'aperçu à Frédéric.
+
+⛔ Jamais de push : c'est le 1er poste qui fusionne `poste2` dans `main`.
+⛔ Ne touche pas `manim/REPRISE-4e-perimetre-aire-volume.md` (l'autre session le tient), ni
+`manim/manifeste-youtube.json`, ni `lib/videos/*.json`.
