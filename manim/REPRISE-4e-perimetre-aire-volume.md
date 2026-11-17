@@ -55,11 +55,12 @@ Ouvert le 15/11/2026. 30 micros du coach, plan : `manim/PLAN-perimetre-aire-volu
 | A2 `aire_disque` (tambour) | ✅ | ✅ | ✅ 210,1 s / 52,1 s, bords 0 |
 | A3 `aire_figure` (cour en L) | ✅ | ✅ | ✅ 224,2 s / 55,0 s, bords 0 |
 | A4 `aire_probleme` (terrasse) | ✅ | ✅ | ✅ 212,2 s / 65,2 s, bords 0 |
-| A5 `aire_defi` (maillots) | ⏳ | ⏳ | — |
+| A5 `aire_defi` (maillots) | ✅ | ✅ | ✅ 200,3 s / 57,1 s, bords 0 |
 | T1 → T8 (3e) | ⏳ | ⏳ | — |
 
-**19 épisodes finis sur 28** (V1 à V4, S1 à S6, P1 à P5, A1 à A4) — paysages et shorts rendus
-en HD, `verifier-bords-video` = 0 sur les 38 MP4. **9 restent à écrire et à rendre.**
+**20 épisodes finis sur 28** — TOUS LES ÉPISODES DE 4e SONT FAITS (V1 à V4, S1 à S6, P1 à P5,
+A1 à A5), paysages et shorts rendus en HD, `verifier-bords-video` = 0 sur les 40 MP4.
+⭐ Les 30 micros de 4e sont couverts, et 18 des 33 micros de 3e par les `aussi`.
 ⚠️ Les 8 épisodes de 3e (T1 à T8) sont confiés à une SESSION SŒUR depuis le 17/11 : elle écrit
 `manim/scripts/4e/3e_*.py` et tient son propre tableau dans `manim/poste2/REPRISE-3e-sections.md`.
 Il ne reste donc ici que A5.
