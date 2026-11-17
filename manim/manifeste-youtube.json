@@ -99110,9 +99110,9 @@
           "t": "00:56",
           "question": "Un bassin a un fond de 20 mètres carrés et 1,5 mètre de profondeur. Quel est son volume ?",
           "choix": [
-            "21,5 mètres cubes",
-            "15 mètres cubes",
-            "30 mètres cubes"
+            "21,5 m³",
+            "15 m³",
+            "30 m³"
           ],
           "reponse": 2,
           "explication": "20 fois 1,5, 30 mètres cubes. 21,5, c'est une addition : on n'additionne pas une aire et une longueur."
@@ -99121,9 +99121,9 @@
           "t": "01:49",
           "question": "Le bassin fait 48 mètres cubes. Combien de litres ?",
           "choix": [
-            "4 800 litres",
-            "48 000 litres",
-            "480 litres"
+            "4 800 L",
+            "48 000 L",
+            "480 L"
           ],
           "reponse": 1,
           "explication": "Un mètre cube, c'est mille litres. 48 fois mille, 48 000 litres."
@@ -99167,9 +99167,9 @@
           "t": "00:13",
           "question": "Le tuyau donne 100 litres par minute. Combien de litres faut-il mettre dedans ?",
           "choix": [
-            "1 500 litres",
-            "150 litres",
-            "15 000 litres"
+            "1 500 L",
+            "150 L",
+            "15 000 L"
           ],
           "reponse": 0,
           "explication": "3 fois 0,5, c'est 1,5 mètre cube. Un mètre cube fait mille litres : 1 500 litres."
@@ -99256,9 +99256,9 @@
           "t": "01:27",
           "question": "Une pyramide a une base de 15 mètres carrés et une hauteur de 4 mètres. Quel est son volume ?",
           "choix": [
-            "60 mètres cubes",
-            "20 mètres cubes",
-            "30 mètres cubes"
+            "60 m³",
+            "20 m³",
+            "30 m³"
           ],
           "reponse": 1,
           "explication": "15 fois 4, 60. 60 divisé par 3 : 20 mètres cubes. 60, c'est le volume du prisme : le divisé par 3 a été oublié. 30, c'est divisé par 2."
@@ -99267,9 +99267,9 @@
           "t": "02:25",
           "question": "Un prisme et une pyramide ont la même base et la même hauteur. Le prisme fait 45 mètres cubes. Quel est le volume de la pyramide ?",
           "choix": [
-            "15 mètres cubes",
-            "135 mètres cubes",
-            "22,5 mètres cubes"
+            "15 m³",
+            "135 m³",
+            "22,5 m³"
           ],
           "reponse": 0,
           "explication": "La pyramide, c'est le tiers du prisme. 45 divisé par 3 : 15 mètres cubes. 135, c'est fois 3 : ça, c'est le prisme quand on connaît la pyramide."
@@ -99416,9 +99416,9 @@
           "t": "01:12",
           "question": "Un cône a un rayon de 2 centimètres et une hauteur de 9 centimètres. Quel est son volume ?",
           "choix": [
-            "12 pi centimètres cubes",
-            "36 pi centimètres cubes",
-            "6 pi centimètres cubes"
+            "12π cm³",
+            "36π cm³",
+            "6π cm³"
           ],
           "reponse": 0,
           "explication": "Pi fois 2 fois 2, 4 pi. Fois 9, 36 pi. Divisé par 3 : 12 pi centimètres cubes. 36 pi, c'est l'oubli du divisé par 3."
@@ -99427,9 +99427,9 @@
           "t": "02:08",
           "question": "Un cornet de 6 centimètres de diamètre et de 10 centimètres de hauteur. Quel est son volume ?",
           "choix": [
-            "120 pi centimètres cubes",
-            "30 pi centimètres cubes",
-            "90 pi centimètres cubes"
+            "120π cm³",
+            "30π cm³",
+            "90π cm³"
           ],
           "reponse": 1,
           "explication": "Le rayon vaut 3. Pi fois 3 fois 3, 9 pi. Fois 10, 90 pi. Divisé par 3 : 30 pi centimètres cubes. 120 pi, c'est le diamètre pris pour le rayon."
@@ -99576,9 +99576,9 @@
           "t": "01:00",
           "question": "Un cylindre de rayon 2 mètres et de hauteur 5 mètres. Quel est son volume ?",
           "choix": [
-            "10 pi mètres cubes",
-            "20 pi mètres cubes",
-            "40 pi mètres cubes"
+            "10π m³",
+            "20π m³",
+            "40π m³"
           ],
           "reponse": 1,
           "explication": "Pi fois 2 fois 2, 4 pi. Fois 5, 20 pi mètres cubes. 10 pi, c'est le rayon compté une seule fois."
@@ -99587,9 +99587,9 @@
           "t": "01:49",
           "question": "Un fond conique de 2 mètres de rayon et 3 mètres de hauteur. Quel est son volume ?",
           "choix": [
-            "12 pi mètres cubes",
-            "6 pi mètres cubes",
-            "4 pi mètres cubes"
+            "12π m³",
+            "6π m³",
+            "4π m³"
           ],
           "reponse": 2,
           "explication": "Pi fois 2 fois 2, 4 pi. Fois 3, 12 pi. Divisé par 3 : 4 pi mètres cubes. 12 pi, c'est l'oubli du divisé par 3."
@@ -100518,9 +100518,9 @@
           "t": "00:56",
           "question": "Le corps du bâtiment mesure 20 mètres sur 10, et 6 mètres de haut. Quel est son volume ?",
           "choix": [
-            "360 mètres cubes",
-            "1 200 mètres cubes",
-            "120 mètres cubes"
+            "360 m³",
+            "1 200 m³",
+            "120 m³"
           ],
           "reponse": 1,
           "explication": "20 fois 10, 200 mètres carrés de base. 200 fois 6, 1 200 mètres cubes. 360, c'est une addition des trois mesures multipliée."
@@ -100529,9 +100529,9 @@
           "t": "01:47",
           "question": "Le toit est une pyramide de base 200 mètres carrés et de hauteur 3 mètres. Quel est son volume ?",
           "choix": [
-            "600 mètres cubes",
-            "300 mètres cubes",
-            "200 mètres cubes"
+            "600 m³",
+            "300 m³",
+            "200 m³"
           ],
           "reponse": 2,
           "explication": "200 fois 3, 600. Divisé par 3 : 200 mètres cubes. 600, c'est l'oubli du divisé par 3."
@@ -100678,9 +100678,9 @@
           "t": "01:01",
           "question": "Un rectangle mesure 12 mètres sur 5. Quel est son périmètre ?",
           "choix": [
-            "34 mètres",
-            "60 mètres",
-            "17 mètres"
+            "34 m",
+            "60 m",
+            "17 m"
           ],
           "reponse": 0,
           "explication": "12 plus 5, 17, fois 2, 34 mètres. 60, c'est l'aire. 17, c'est la longueur plus la largeur, le tour n'est pas fini."
@@ -100689,9 +100689,9 @@
           "t": "01:53",
           "question": "Un carré a 7 mètres de côté. Quel est son périmètre ?",
           "choix": [
-            "49 mètres",
-            "28 mètres",
-            "14 mètres"
+            "49 m",
+            "28 m",
+            "14 m"
           ],
           "reponse": 1,
           "explication": "7 fois 4, 28 mètres. 49, c'est 7 fois 7 : c'est l'aire. 14, c'est seulement deux côtés."
@@ -100762,9 +100762,9 @@
           "t": "00:13",
           "question": "Nour doit poser une bordure tout autour de ce triangle. Combien de mètres ?",
           "choix": [
-            "48 mètres",
-            "14 mètres",
-            "24 mètres"
+            "48 m",
+            "14 m",
+            "24 m"
           ],
           "reponse": 2,
           "explication": "8 plus 6 plus 10, 24 mètres. 48, c'est 8 fois 6 : ce serait une aire. 14, c'est deux côtés oubliés en route."
@@ -100878,9 +100878,9 @@
           "t": "01:01",
           "question": "Un cercle a un rayon de 3 mètres. Quelle est sa longueur ?",
           "choix": [
-            "3 pi mètres",
-            "6 pi mètres",
-            "9 pi mètres"
+            "3π m",
+            "6π m",
+            "9π m"
           ],
           "reponse": 1,
           "explication": "2 fois pi fois 3, 6 pi mètres. 9 pi, c'est pi fois 3 fois 3 : c'est l'aire du disque, pas le tour."
@@ -100889,9 +100889,9 @@
           "t": "01:48",
           "question": "Un bassin a 5 mètres de diamètre. Quelle est sa longueur ?",
           "choix": [
-            "10 pi mètres",
-            "25 pi mètres",
-            "5 pi mètres"
+            "10π m",
+            "25π m",
+            "5π m"
           ],
           "reponse": 2,
           "explication": "Pi fois 5, 5 pi mètres. 10 pi, c'est avoir pris le diamètre pour un rayon."
@@ -101038,9 +101038,9 @@
           "t": "01:03",
           "question": "Un demi-cercle a 10 mètres de diamètre. Quelle est la longueur de son arc ?",
           "choix": [
-            "10 pi mètres",
-            "100 pi mètres",
-            "5 pi mètres"
+            "10π m",
+            "100π m",
+            "5π m"
           ],
           "reponse": 2,
           "explication": "Pi fois 10, divisé par 2 : 5 pi mètres. 10 pi, c'est le cercle entier."
@@ -101102,9 +101102,9 @@
           "t": "00:11",
           "question": "Combien mesure le tour complet de la piste ?",
           "choix": [
-            "80 mètres",
-            "environ 91,4 mètres",
-            "environ 123 mètres"
+            "80 m",
+            "environ 91,4 m",
+            "environ 123 m"
           ],
           "reponse": 1,
           "explication": "Les droites : 60 mètres. Le demi-cercle : pi fois 20, divisé par 2, environ 31,4. En tout, environ 91,4 mètres."
@@ -101198,9 +101198,9 @@
           "t": "01:03",
           "question": "Deux demi-cercles de rayon 36 mètres, mis bout à bout, font un cercle. Quelle est sa longueur ?",
           "choix": [
-            "72 pi mètres",
-            "36 pi mètres",
-            "1 296 pi mètres"
+            "72π m",
+            "36π m",
+            "1 296π m"
           ],
           "reponse": 0,
           "explication": "2 fois pi fois 36, 72 pi mètres. 1 296 pi, c'est 36 fois 36 fois pi : c'est une aire."
@@ -101209,9 +101209,9 @@
           "t": "01:57",
           "question": "72 pi mètres, c'est environ…",
           "choix": [
-            "113 mètres",
-            "452 mètres",
-            "226 mètres"
+            "113 m",
+            "452 m",
+            "226 m"
           ],
           "reponse": 2,
           "explication": "72 fois 3,14, environ 226 mètres. 113, c'est la moitié : un seul virage."
@@ -101255,9 +101255,9 @@
           "t": "00:09",
           "question": "Ça fait combien de kilomètres ?",
           "choix": [
-            "20 kilomètres",
-            "2 kilomètres",
-            "200 mètres"
+            "20 km",
+            "2 km",
+            "200 m"
           ],
           "reponse": 1,
           "explication": "400 fois 5, 2 000 mètres. Et 2 000 mètres, c'est 2 kilomètres."
@@ -101344,9 +101344,9 @@
           "t": "01:05",
           "question": "Le tour d'un demi-disque de 10 mètres de rayon, c'est…",
           "choix": [
-            "10 pi mètres",
-            "20 pi mètres",
-            "10 pi plus 20 mètres"
+            "10π m",
+            "20π m",
+            "10π + 20 m"
           ],
           "reponse": 2,
           "explication": "L'arc fait 10 pi mètres, et le diamètre de 20 mètres ferme la figure : il est sur le contour, il compte."
@@ -101355,9 +101355,9 @@
           "t": "01:47",
           "question": "Un enclos carré a une aire de 400 mètres carrés. Quel est son côté ?",
           "choix": [
-            "100 mètres",
-            "20 mètres",
-            "40 mètres"
+            "100 m",
+            "20 m",
+            "40 m"
           ],
           "reponse": 1,
           "explication": "20 fois 20, 400 mètres carrés. 100, c'est 400 divisé par 4 : ce serait le quart du tour, pas le côté."
@@ -101504,9 +101504,9 @@
           "t": "01:04",
           "question": "Un écran mesure 15 centimètres sur 7. Quelle est son aire ?",
           "choix": [
-            "44 centimètres carrés",
-            "105 centimètres carrés",
-            "22 centimètres carrés"
+            "44 cm²",
+            "105 cm²",
+            "22 cm²"
           ],
           "reponse": 1,
           "explication": "15 fois 7, 105 centimètres carrés. 44, c'est le périmètre. 22, c'est la longueur plus la largeur."
@@ -101515,9 +101515,9 @@
           "t": "01:52",
           "question": "Un carré a 9 centimètres de côté. Quelle est son aire ?",
           "choix": [
-            "81 centimètres carrés",
-            "36 centimètres carrés",
-            "18 centimètres carrés"
+            "81 cm²",
+            "36 cm²",
+            "18 cm²"
           ],
           "reponse": 0,
           "explication": "9 fois 9, 81 centimètres carrés. 36, c'est le périmètre : 9 fois 4."
@@ -101664,9 +101664,9 @@
           "t": "00:52",
           "question": "Un disque a 5 centimètres de rayon. Quelle est son aire ?",
           "choix": [
-            "25 pi centimètres carrés",
-            "10 pi centimètres carrés",
-            "5 pi centimètres carrés"
+            "25π cm²",
+            "10π cm²",
+            "5π cm²"
           ],
           "reponse": 0,
           "explication": "Pi fois 5 fois 5, 25 pi centimètres carrés. 10 pi, c'est la longueur du cercle, pas son aire."
@@ -101675,9 +101675,9 @@
           "t": "01:42",
           "question": "Une peau mesure 40 centimètres de diamètre. Quelle est son aire ?",
           "choix": [
-            "1 600 pi centimètres carrés",
-            "400 pi centimètres carrés",
-            "80 pi centimètres carrés"
+            "1 600π cm²",
+            "400π cm²",
+            "80π cm²"
           ],
           "reponse": 1,
           "explication": "Le rayon vaut 20. Pi fois 20 fois 20, 400 pi centimètres carrés. 1 600 pi, c'est le diamètre pris pour le rayon."
@@ -101824,9 +101824,9 @@
           "t": "01:02",
           "question": "Une cour en L : un rectangle de 10 mètres sur 6, et un rectangle de 4 mètres sur 3. Quelle est l'aire totale ?",
           "choix": [
-            "23 mètres carrés",
-            "72 mètres carrés",
-            "60 mètres carrés"
+            "23 m²",
+            "72 m²",
+            "60 m²"
           ],
           "reponse": 1,
           "explication": "60 plus 12, 72 mètres carrés. 23, c'est une addition de longueurs. 60, c'est avoir oublié le deuxième morceau."
@@ -101835,9 +101835,9 @@
           "t": "01:54",
           "question": "Un carré de 10 mètres de côté, dans lequel on enlève un carré de 4 mètres au coin. Quelle est l'aire restante ?",
           "choix": [
-            "100 mètres carrés",
-            "96 mètres carrés",
-            "84 mètres carrés"
+            "100 m²",
+            "96 m²",
+            "84 m²"
           ],
           "reponse": 2,
           "explication": "10 fois 10, 100. Moins 4 fois 4, 16. 100 moins 16, 84 mètres carrés. 96, c'est avoir enlevé 4 au lieu de 16."
@@ -101888,9 +101888,9 @@
           "t": "00:12",
           "question": "Combien de mètres carrés de gazon doit-il commander ?",
           "choix": [
-            "46 mètres carrés",
-            "40 mètres carrés",
-            "52 mètres carrés"
+            "46 m²",
+            "40 m²",
+            "52 m²"
           ],
           "reponse": 0,
           "explication": "8 fois 5, 40. 3 fois 2, 6. 40 plus 6, 46 mètres carrés. 40, c'est avoir oublié le petit morceau."
@@ -101984,9 +101984,9 @@
           "t": "00:50",
           "question": "Terrain de 12 mètres sur 8, bassin de 8 mètres sur 4. Quelle est l'aire de la terrasse ?",
           "choix": [
-            "96 mètres carrés",
-            "32 mètres carrés",
-            "64 mètres carrés"
+            "96 m²",
+            "32 m²",
+            "64 m²"
           ],
           "reponse": 2,
           "explication": "96 moins 32, 64 mètres carrés. 96, c'est le terrain entier, bassin compris."
@@ -102041,9 +102041,9 @@
           "t": "00:10",
           "question": "Combien de mètres carrés faut-il carreler ?",
           "choix": [
-            "64 mètres carrés",
-            "environ 51,4 mètres carrés",
-            "environ 12,6 mètres carrés"
+            "64 m²",
+            "environ 51,4 m²",
+            "environ 12,6 m²"
           ],
           "reponse": 1,
           "explication": "Le carré : 64. Le bassin : pi fois 2 fois 2, environ 12,6. 64 moins 12,6, environ 51,4 mètres carrés."
@@ -102130,9 +102130,9 @@
           "t": "00:51",
           "question": "Un rectangle de 25 centimètres sur 18. Quelle est son aire ?",
           "choix": [
-            "450 centimètres carrés",
-            "86 centimètres carrés",
-            "43 centimètres carrés"
+            "450 cm²",
+            "86 cm²",
+            "43 cm²"
           ],
           "reponse": 0,
           "explication": "25 fois 18, 450 centimètres carrés. 86, c'est le périmètre."
@@ -102141,9 +102141,9 @@
           "t": "01:39",
           "question": "Un disque de 6 centimètres de rayon, c'est environ…",
           "choix": [
-            "environ 38 centimètres carrés",
-            "environ 226 centimètres carrés",
-            "environ 113 centimètres carrés"
+            "environ 38 cm²",
+            "environ 226 cm²",
+            "environ 113 cm²"
           ],
           "reponse": 2,
           "explication": "Pi fois 6 fois 6, 36 pi, environ 113 centimètres carrés. 38, c'est la longueur du cercle."
@@ -102194,9 +102194,9 @@
           "t": "00:10",
           "question": "En mètres carrés, ça fait combien ?",
           "choix": [
-            "101 mètres carrés",
-            "environ 1 mètre carré",
-            "environ 10 mètres carrés"
+            "101 m²",
+            "environ 1 m²",
+            "environ 10 m²"
           ],
           "reponse": 1,
           "explication": "563 fois 18, 10 134 centimètres carrés. Un mètre carré en fait 10 000 : ça fait à peine plus d'un mètre carré."
@@ -102290,9 +102290,9 @@
           "t": "01:06",
           "question": "Une boule a 3 centimètres de rayon. Quel est son volume ?",
           "choix": [
-            "12 pi centimètres cubes",
-            "27 pi centimètres cubes",
-            "36 pi centimètres cubes"
+            "12π cm³",
+            "27π cm³",
+            "36π cm³"
           ],
           "reponse": 2,
           "explication": "3 fois 3 fois 3, 27. 4 fois pi fois 27, 108 pi. Divisé par 3 : 36 pi centimètres cubes. 27 pi, c'est avoir oublié le 4 et le divisé par 3."
@@ -102301,9 +102301,9 @@
           "t": "02:01",
           "question": "Une boule a 6 centimètres de diamètre. Quel est son volume ?",
           "choix": [
-            "36 pi centimètres cubes",
-            "288 pi centimètres cubes",
-            "48 pi centimètres cubes"
+            "36π cm³",
+            "288π cm³",
+            "48π cm³"
           ],
           "reponse": 0,
           "explication": "Le rayon vaut 3. 4 fois pi fois 27, divisé par 3 : 36 pi centimètres cubes. 288 pi, c'est le diamètre pris pour le rayon : huit fois trop."
@@ -102347,9 +102347,9 @@
           "t": "00:08",
           "question": "Quel rayon fait ce ballon une fois gonflé ?",
           "choix": [
-            "5 centimètres",
-            "10 centimètres",
-            "20 centimètres"
+            "5 cm",
+            "10 cm",
+            "20 cm"
           ],
           "reponse": 1,
           "explication": "Avec 10 centimètres de rayon : 4 fois pi fois mille, divisé par 3, environ 4 189 centimètres cubes. Soit 4,2 litres."
@@ -102593,9 +102593,9 @@
           "t": "01:38",
           "question": "On coupe un cube de 8 centimètres de côté parallèlement à une face. Quelle est l'aire de la section ?",
           "choix": [
-            "512 centimètres carrés",
-            "64 centimètres carrés",
-            "32 centimètres carrés"
+            "512 cm²",
+            "64 cm²",
+            "32 cm²"
           ],
           "reponse": 1,
           "explication": "8 fois 8, 64 centimètres carrés. 512, c'est 8 fois 8 fois 8 : c'est le volume du cube."
@@ -102785,9 +102785,9 @@
           "t": "00:10",
           "question": "Si le tube était plein, quelle serait l'aire de la coupe ?",
           "choix": [
-            "6 pi centimètres carrés",
-            "3 pi centimètres carrés",
-            "9 pi centimètres carrés"
+            "6π cm²",
+            "3π cm²",
+            "9π cm²"
           ],
           "reponse": 2,
           "explication": "Pi fois 3 fois 3, 9 pi centimètres carrés. 6 pi, c'est la longueur du cercle."
@@ -103166,9 +103166,9 @@
           "t": "00:58",
           "question": "Dans une section rectangulaire de 6 centimètres sur 8, combien mesure la diagonale ?",
           "choix": [
-            "14 centimètres",
-            "48 centimètres",
-            "10 centimètres"
+            "14 cm",
+            "48 cm",
+            "10 cm"
           ],
           "reponse": 2,
           "explication": "36 plus 64, 100 ; la racine de 100, c'est 10 centimètres. 14, c'est 6 plus 8 : on n'additionne pas les côtés."
@@ -103223,9 +103223,9 @@
           "t": "00:09",
           "question": "Combien mesure cette diagonale ?",
           "choix": [
-            "12 centimètres",
-            "environ 8,5 centimètres",
-            "6 centimètres"
+            "12 cm",
+            "environ 8,5 cm",
+            "6 cm"
           ],
           "reponse": 1,
           "explication": "36 plus 36, 72. La racine de 72, environ 8,5 centimètres. 12, c'est 6 plus 6."
