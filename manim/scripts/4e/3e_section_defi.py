@@ -154,7 +154,10 @@ class SectionDefi3e(Paysage3e):
     def ecran_le_cylindre(self):
         self.ecran("02-le-cylindre")
         tit = hors_audit(self.t("Des disques égaux", 44, JAUNE_TITRE)).move_to(P(0, 3.15))
-        x = -1.2
+        # ⛔ La colonne de texte et la figure de droite doivent s'écarter : à l'ancienne
+        #    position, les lignes mordaient sur la figure (vu sur la planche ; BORDS=1
+        #    ne voit pas un chevauchement, il ne sort pas du cadre).
+        x = -2.6
         l1 = self.t("Si toutes les sections sont", 30, WHITE)
         self.col(l1, 2.0, x)
         self.au_mot("Si toutes les sections")
@@ -169,7 +172,7 @@ class SectionDefi3e(Paysage3e):
         self.col(l3, 0.3, x)
         self.au_mot("empilés")
         self.play(FadeIn(l3, shift=UP * 0.1), run_time=0.4)
-        cy = cylindre(0.8, 2.6, 1.0, P(2.8, -1.9), corps=CYL_C, dessus="#7dd3fc", bord="#0c4a6e")
+        cy = cylindre(0.8, 2.6, 1.0, P(4.6, -1.9), corps=CYL_C, dessus="#7dd3fc", bord="#0c4a6e")
         l4 = self.t("le solide est un cylindre.", 34, VERT_OK)
         self.col(l4, -0.6, x)
         self.au_mot("le solide est un cylindre")
@@ -184,8 +187,8 @@ class SectionDefi3e(Paysage3e):
     def ecran_le_cone(self):
         self.ecran("03-le-cone")
         tit = hors_audit(self.t("Vers un point", 44, JAUNE_TITRE)).move_to(P(0, 3.15))
-        x = -0.8
-        pl = pile_disques([0.85, 0.68, 0.51, 0.34, 0.17, 0.0], 1.0, P(-5.0, -2.2), pas=0.5,
+        x = -1.6
+        pl = pile_disques([0.85, 0.68, 0.51, 0.34, 0.17, 0.0], 1.0, P(-5.2, -2.2), pas=0.5,
                           couleur=CONE_C)
         l1 = self.t("Si les disques rétrécissent", 30, CONE_C)
         self.col(l1, 2.0, x)
@@ -196,13 +199,13 @@ class SectionDefi3e(Paysage3e):
         self.col(l2, 1.1, x)
         self.au_mot("vers un point en haut")
         self.play(FadeIn(l2, shift=UP * 0.1), run_time=0.5)
-        co = cone(0.85, 2.5, 1.0, P(-2.6, -2.2))
+        co = cone(0.85, 2.5, 1.0, P(-3.4, -2.2))
         l3 = self.t("c'est un cône.", 34, VERT_OK)
         self.col(l3, 0.2, x)
         self.au_mot("c'est un cône")
         self.play(FadeIn(l3, scale=1.08), FadeIn(co, scale=0.85), run_time=0.9)
-        pc = pile_carres([0.9, 0.72, 0.54, 0.36, 0.0], 1.0, P(3.8, -2.0), pas=0.55)
-        l4 = self.t("Et si c'est un carré qui rétrécit,", 30, PYR_C)
+        pc = pile_carres([0.9, 0.72, 0.54, 0.36, 0.0], 1.0, P(4.9, -2.0), pas=0.55)
+        l4 = self.t("Et si c'est un carré,", 30, PYR_C)
         self.col(l4, -0.9, x)
         self.au_mot("un carré qui rétrécit")
         self.play(FadeIn(l4, shift=UP * 0.1),

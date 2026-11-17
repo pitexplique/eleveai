@@ -141,19 +141,21 @@ class SectionConePyramide3e(Paysage3e):
         self.add(c)
         tit = hors_audit(self.t("Parallèlement à la base", 42, JAUNE_TITRE)).move_to(P(0, 3.15))
         self.play(Write(tit), run_time=0.5)
-        x = -1.3
+        # ⛔ Colonne à −2,4 et figures à x = 4,9 : à −1,3 les lignes venaient mordre sur le
+        #    disque de droite (vu sur la planche, BORDS=1 ne voit pas ça).
+        x = -2.4
         pl = plan_horizontal(3.4, u, c.o + UP * 0.9 * u)
         l1 = self.t("Coupe un cône parallèlement", 30, PLAN_C)
         self.col(l1, 2.0, x)
         self.au_mot("coupe un cône parallèlement")
         self.play(FadeIn(l1, shift=UP * 0.1), FadeIn(pl, shift=DOWN * 0.3), run_time=0.7)
         s = section_cone(c, 0.375)
-        d = disque_plat(0.9, P(4.3, 1.2))
+        d = disque_plat(0.85, P(4.9, 1.3))
         l2 = self.t("la section est un disque,", 32, SECTION_C)
         self.col(l2, 1.1, x)
         self.au_mot("la section est un disque")
         self.play(FadeIn(l2, shift=UP * 0.1), FadeIn(s), FadeIn(d, scale=0.8), run_time=0.9)
-        gd = disque_plat(1.45, P(4.3, -1.6), couleur=BASE_C)
+        gd = disque_plat(1.4, P(4.9, -1.6), couleur=BASE_C)
         l3 = self.t("plus petit que la base.", 30, WHITE)
         self.col(l3, 0.2, x)
         self.au_mot("plus petit que la base")
@@ -213,7 +215,7 @@ class SectionConePyramide3e(Paysage3e):
         u = 1.0
         py = pyramide(2.0, 2.3, u, P(-5.6, -1.9))
         tit = hors_audit(self.t("Et la pyramide ?", 42, JAUNE_TITRE)).move_to(P(0, 3.15))
-        x = -1.3
+        x = -2.4
         l1 = self.t("Pour une pyramide, c'est pareil :", 30, WHITE)
         self.col(l1, 2.0, x)
         # ⛔ « Pour » est le PREMIER mot de la voix : un Write de titre avant l'au_mot met déjà
@@ -226,13 +228,13 @@ class SectionConePyramide3e(Paysage3e):
         self.au_mot("une coupe parallèle")
         self.play(FadeIn(l2, shift=UP * 0.1), FadeIn(pl, shift=DOWN * 0.3), run_time=0.8)
         car = Square(1.1, fill_color=SECTION_C, fill_opacity=0.35, stroke_color=SECTION_C,
-                     stroke_width=5).move_to(P(3.9, 1.1))
+                     stroke_width=5).move_to(P(4.9, 1.2))
         l3 = self.t("donne la même forme que la base,", 30, SECTION_C)
         self.col(l3, 0.2, x)
         self.au_mot("donne la même forme")
         self.play(FadeIn(l3, shift=UP * 0.1), FadeIn(car, scale=0.8), run_time=0.8)
         gcar = Square(1.8, fill_color=BASE_C, fill_opacity=0.3, stroke_color=BASE_C,
-                      stroke_width=5).move_to(P(3.9, -1.6))
+                      stroke_width=5).move_to(P(4.9, -1.6))
         l4 = self.t("en plus petit.", 32, WHITE)
         self.col(l4, -0.7, x)
         self.au_mot("en plus petit")

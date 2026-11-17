@@ -213,14 +213,17 @@ class VolumeReductionSection3e(Paysage3e):
         self.ecran("04-le-cube")
         tit = hors_audit(self.t("Et le volume ?", 44, JAUNE_TITRE)).move_to(P(0, 3.15))
         self.play(Write(tit), run_time=0.4)
+        # ⛔ Tout le texte en HAUT, toutes les figures en BAS : à l'ancienne disposition, les
+        #    huit gobelets recouvraient « Rempli à mi-hauteur : » et la dernière ligne, posée en
+        #    bas à droite, touchait Ti-Margo (vu sur la planche).
         x = -1.5
         l1 = self.t("Mais le volume,", 32, WHITE)
-        self.col(l1, 2.1, x)
+        self.col(l1, 2.3, x)
         self.au_mot("Mais le volume")
         self.play(FadeIn(l1, shift=UP * 0.1), run_time=0.4)
         l2 = self.ligne([("divisé par 2 × 2 × 2,", BLEU_D), ("c'est-à-dire par 8.", ROUGE_ERREUR)],
                         32, buff=0.2)
-        self.col(l2, 1.2, x)
+        self.col(l2, 1.4, x)
         self.au_mot("divisé par 2 fois 2")
         self.play(FadeIn(l2[0], shift=UP * 0.1), run_time=0.45)
         self.au_mot("c'est-à-dire par 8")
@@ -228,20 +231,20 @@ class VolumeReductionSection3e(Paysage3e):
         # ⭐ Huit gobelets remplis à mi-hauteur pour UN gobelet plein : une égalité de VOLUMES,
         #    dite comme telle (pas un découpage géométrique du cône, qui serait faux).
         u = 0.62
-        plein = gobelet(1.1, 2.6, u, P(-5.6, -2.3))
+        plein = gobelet(1.1, 2.6, u, P(-5.6, -2.9))
         tout = liquide(plein, 1.0)
         petits = VGroup()
         for k in range(8):
-            gp = gobelet(1.1, 2.6, u * 0.62, P(-3.1 + (k % 4) * 1.0, -0.9 - (k // 4) * 1.6))
+            gp = gobelet(1.1, 2.6, u * 0.62, P(-3.0 + (k % 4) * 1.0, -1.9 - (k // 4) * 1.3))
             petits.add(VGroup(gp, liquide(gp, 0.5)))
         self.play(FadeIn(plein), FadeIn(tout), run_time=0.5)
         l3 = self.t("Rempli à mi-hauteur :", 32, SODA_C)
-        self.col(l3, 0.3, x)
+        self.col(l3, 0.5, x)
         self.au_mot("rempli à mi-hauteur")
         self.play(FadeIn(l3, shift=UP * 0.1),
                   LaggedStart(*[FadeIn(c, scale=0.8) for c in petits], lag_ratio=0.12), run_time=1.1)
         l4 = self.t("un huitième de la boisson.", 36, ROUGE_ERREUR)
-        self.col(l4, -2.9, 0.4)
+        self.col(l4, -0.4, x)
         self.au_mot("un huitième")
         self.play(FadeIn(l4, scale=1.12), run_time=0.5)
         self.insister(l4, 1.06, 0.25)

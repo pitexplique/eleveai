@@ -133,14 +133,17 @@ class SectionPaveCube3e(Paysage3e):
         pn = pain(2.6, 1.6, 1.4, u, P(-5.8, -1.6))
         self.add(pn)
         tit = hors_audit(self.t("Parallèlement à une face", 42, JAUNE_TITRE)).move_to(P(0, 3.15))
+        # ⛔ La colonne de texte et la figure de droite doivent s'écarter : à l'ancienne
+        #    position, les lignes mordaient sur la figure (vu sur la planche ; BORDS=1
+        #    ne voit pas un chevauchement, il ne sort pas du cadre).
         self.play(Write(tit), run_time=0.5)
-        x = -1.2
+        x = -2.5
         pl = plan_face(2.6, 1.4, u, pn.o, y0=1.1)
         l1 = self.t("Coupe parallèlement à une face :", 30, PLAN_C)
         self.col(l1, 2.0, x)
         self.au_mot("coupe parallèlement")
         self.play(FadeIn(l1, shift=UP * 0.1), FadeIn(pl, shift=LEFT * 0.3), run_time=0.7)
-        tr = tranche(1.6, 1.4, u, P(4.2, 0.6))
+        tr = tranche(1.6, 1.4, u, P(5.2, 0.6))
         l2 = self.bloc(["la tranche a exactement", "la forme de cette face :"], 30, WHITE)
         self.col(l2, 1.0, x)
         self.au_mot("tranche a exactement")
@@ -167,7 +170,7 @@ class SectionPaveCube3e(Paysage3e):
         cb = pain(1.6, 1.6, 1.6, u, P(-5.6, -1.7))
         tit = hors_audit(self.t("Et sur un cube ?", 44, JAUNE_TITRE)).move_to(P(0, 3.15))
         self.play(Write(tit), run_time=0.4)
-        x = -1.3
+        x = -2.8
         l1 = self.ligne([("Un cube de", WHITE), ("8 cm", BASE_C)], 32, buff=0.18)
         self.col(l1, 2.0, x)
         self.au_mot("un cube de 8")
@@ -178,7 +181,7 @@ class SectionPaveCube3e(Paysage3e):
         self.col(l2, 1.1, x)
         self.au_mot("chaque tranche parallèle")
         self.play(FadeIn(l2, shift=UP * 0.1), FadeIn(pl, shift=LEFT * 0.3), run_time=0.7)
-        car = tranche(1.6, 1.6, u, P(4.0, 0.2))
+        car = tranche(1.6, 1.6, u, P(5.2, 0.2))
         # ⛔ « 8 cm de côté » attendait « côté », dit 0,8 s après le 8 : le nombre et le mot long
         #    vont dans deux morceaux (leçon 24).
         l3 = self.ligne([("serait un carré de", WHITE), ("8 cm", BASE_C), ("de côté :", WHITE)],

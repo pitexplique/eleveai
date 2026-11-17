@@ -140,10 +140,13 @@ class SectionSphere3e(Paysage3e):
     def ecran_toujours_un_cercle(self):
         self.ecran("02-toujours-un-cercle")
         tit = hors_audit(self.t("Toujours un cercle", 44, JAUNE_TITRE)).move_to(P(0, 3.15))
+        # ⛔ La colonne de texte et la figure de droite doivent s'écarter : à l'ancienne
+        #    position, les lignes mordaient sur la figure (vu sur la planche ; BORDS=1
+        #    ne voit pas un chevauchement, il ne sort pas du cadre).
         self.play(Write(tit), run_time=0.4)
         u = 1.3
-        cs = coupe_sphere(1.4, 0.55, u, P(-4.0, 0.2))
-        x = -1.1
+        cs = coupe_sphere(1.4, 0.55, u, P(-4.3, 0.2))
+        x = -2.3
         l1 = self.t("Un plan qui coupe une sphère", 30, WHITE)
         self.col(l1, 2.0, x)
         self.au_mot("Un plan qui coupe")
@@ -153,9 +156,9 @@ class SectionSphere3e(Paysage3e):
         self.au_mot("donne toujours un cercle")
         self.play(FadeIn(l2, shift=UP * 0.1), Create(cs.corde), run_time=0.8)
         croix = VGroup(Ellipse(width=1.7, height=0.9, stroke_color=ROUGE_ERREUR, stroke_width=5,
-                               fill_opacity=0).move_to(P(4.3, 1.5)),
+                               fill_opacity=0).move_to(P(5.1, 1.5)),
                        Square(1.2, stroke_color=ROUGE_ERREUR, stroke_width=5,
-                              fill_opacity=0).move_to(P(4.3, -0.4)))
+                              fill_opacity=0).move_to(P(5.1, -0.4)))
         barres = VGroup(*[Line(m.get_corner(DL), m.get_corner(UR), color=ROUGE_ERREUR,
                                stroke_width=6) for m in croix])
         l3 = self.ligne([("Jamais un ovale,", ROUGE_ERREUR), ("jamais autre chose.", ROUGE_ERREUR)],
@@ -196,7 +199,7 @@ class SectionSphere3e(Paysage3e):
         self.col(l3, 0.0, x)
         self.au_mot("son rayon est celui")
         self.play(FadeIn(l3, shift=UP * 0.1), Create(cs.R_trait), run_time=0.8)
-        gl = globe(1.0, 1.0, P(4.6, -2.0))
+        gl = globe(1.0, 1.0, P(5.3, -2.2))
         l4 = self.t("C'est l'équateur.", 34, EQUA_C)
         self.col(l4, -1.0, x)
         self.au_mot("C'est l'équateur")
