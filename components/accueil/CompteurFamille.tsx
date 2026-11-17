@@ -15,7 +15,7 @@
 const LIENS_OFFRE = false;
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, GraduationCap, Gift, PlayCircle, Users } from "lucide-react";
+import { ArrowRight, GraduationCap, Gift, PlayCircle, Users, Utensils } from "lucide-react";
 import { CAP_VIDEOS, ECHEANCE_CAP, etatCompteurVideos } from "@/lib/videos/compteur";
 import { EXERCICES, visiteursDeLaSemaine } from "@/lib/accueil/chiffres-semaine";
 
@@ -124,8 +124,10 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
           ))}
         </ul>
         {/* 17/11, Frédéric : « créer ma classe et exemple de séances ! c'est le
-            mieux » → deuxième bouton, en CONTOUR, vers le hub /seances. */}
-        <div className="mt-3 flex flex-wrap gap-2">
+            mieux », puis « rajoute une chips sur l'accueil à côté de créer ma
+            classe » → une CHIP (même style que « Ou va directement à : »
+            d'AccueilSuivi) juste après le bouton, vers le hub /seances. */}
+        <div className="mt-3 flex flex-wrap items-center gap-2">
           <Link
             href="/prof/classes"
             className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-violet-700 px-4 py-2 text-sm font-black text-white shadow-sm hover:bg-violet-800"
@@ -134,8 +136,9 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
           </Link>
           <Link
             href="/seances"
-            className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-white px-4 py-2 text-sm font-black text-violet-800 ring-2 ring-inset ring-violet-300 hover:bg-violet-50"
+            className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-slate-200 hover:ring-violet-400"
           >
+            <Utensils className="h-4 w-4 text-violet-700" aria-hidden="true" />
             Exemples de séances
           </Link>
         </div>

@@ -42,14 +42,17 @@ export type CompetenceId =
   | "memoire"
   | "entraide"
   | "passions"
-  | "inclusion";
+  | "inclusion"
+  | "cadre";
 
 /** ✅ a fonctionné · ➖ en partie · ⬜ pas visé. */
 export type EtatCompetence = "oui" | "partiel" | "non";
 
 export const COMPETENCES: { id: CompetenceId; nom: string; aide: string }[] = [
   { id: "autonomie", nom: "Autonomie", aide: "L'élève travaille en autonomie assistée, sur le coach ou les exercices." },
-  { id: "choix", nom: "Choisir sa façon d'apprendre", aide: "Chacun prend son « plat » au menu." },
+  { id: "choix", nom: "Choisir sa façon d'apprendre", aide: "Chacun prend son « plat » à la carte." },
+  // 17/11 : « des plats imposés et d'autres à la carte » → le cadre a sa case.
+  { id: "cadre", nom: "Respecter un cadre", aide: "Le plat imposé est fait par tous." },
   { id: "ecoute", nom: "Écoute et attention", aide: "La vidéo coupée, les questions-pauses." },
   { id: "parole", nom: "Prise de parole et reformulation", aide: "Ce sont les élèves qui font le résumé." },
   { id: "memoire", nom: "Mémorisation et trace écrite", aide: "Carte mentale, cours au cahier." },
@@ -76,6 +79,9 @@ export type Seance = {
     /** Une phrase de Frédéric, mot pour mot (orthographe rétablie). */
     citation?: string;
   };
+  /** Le « restaurant » : un menu IMPOSÉ et une CARTE libre (17/11, Frédéric :
+   *  « parfois dans un restaurant il y a des plats imposés et d'autres à la carte »). */
+  menu?: { impose: string[]; carte: string[]; dessert: string; conseil: string };
   /** « Concrètement, clic par clic ». */
   clicParClic: EtapeClic[];
   /** La mission « va trouver… dans ce que tu aimes ». */
@@ -189,15 +195,15 @@ export const SEANCES: Seance[] = [
     objectif: "Retenir les unités de longueur, puis s'entraîner chacun avec le « plat » qui lui va.",
     temoin: { nom: "Frédéric", role: "prof de maths", date: "novembre 2026" },
     plan: [
-      { minutes: 20, bloc: "cours", titre: "L'entrée : la carte mentale", detail: "Tout le monde colorie la carte mentale, puis on l'explique ensemble." },
-      { minutes: 25, bloc: "entrainement", titre: "Le plat, au choix", detail: "Le coach, les exercices interactifs, le découpage (ULIS) ou le cours au cahier." },
+      { minutes: 20, bloc: "cours", titre: "Le plat imposé", detail: "Tout le monde colorie la carte mentale, puis on l'explique ensemble." },
+      { minutes: 25, bloc: "entrainement", titre: "À la carte", detail: "Chacun choisit : le coach, les exercices interactifs, le découpage (ULIS) ou le cours au cahier." },
       { minutes: 10, bloc: "synthese", titre: "Le dessert", detail: "On se retrouve, et chacun part avec sa mission « longueurs »." },
     ],
     descriptif: {
       prof: [
         "Imprime la carte mentale des longueurs, une par élève.",
         "Fait colorier, puis explique la carte avec la classe.",
-        "Présente le menu : chacun choisit son plat.",
+        "Présente le menu : le plat imposé pour tous, puis chacun choisit à la carte.",
         "Circule d'une table à l'autre, l'AESH accompagne le découpage.",
         "Donne le dessert : une mission pour la maison.",
       ],
@@ -208,6 +214,19 @@ export const SEANCES: Seance[] = [
         "Partent chercher des longueurs dans ce qu'ils aiment.",
       ],
       citation: "Chacun a appris à sa façon.",
+    },
+    menu: {
+      impose: ["Colorier la carte mentale des longueurs et l'expliquer ensemble."],
+      carte: [
+        "Le coach, sur les longueurs",
+        "Les exercices interactifs",
+        "Le cours écrit dans le cahier",
+        "Le découpage (ULIS, avec l'AESH)",
+        "La vidéo, à revoir",
+      ],
+      dessert: "Va trouver des longueurs dans ce que tu aimes.",
+      conseil:
+        "C'est vous qui réglez la part d'imposé. Une classe qui a besoin de cadre : ajoutez un plat pour tous, par exemple « 5 questions du coach ». Une classe autonome : la carte mentale suffit.",
     },
     clicParClic: [
       {
@@ -247,14 +266,14 @@ export const SEANCES: Seance[] = [
       "À la fin, je leur ai dit d'aller trouver des longueurs dans ce qu'ils aiment : les terrains de foot, etc.",
       "Chacun a appris à sa façon. Ça fait plusieurs façons d'aborder EleveAI.",
     ],
-    competences: { choix: "oui", autonomie: "oui", memoire: "oui", inclusion: "oui", passions: "oui" },
+    competences: { choix: "oui", cadre: "oui", autonomie: "oui", memoire: "oui", inclusion: "oui", passions: "oui" },
   },
 ];
 
 /** Les types de séances du hub (les 2 premiers sont validés et vécus). */
 export const TYPES_SEANCES: { titre: string; resume: string; emoji: string; seanceId?: string }[] = [
   { emoji: "🎬", titre: "La vidéo coupée", resume: "Classe entière : la vidéo s'arrête aux questions-pauses, puis le coach, puis les élèves résument.", seanceId: "video-coupee-4e-puissances" },
-  { emoji: "🍽️", titre: "Le restaurant", resume: "Chacun sa façon : carte mentale pour tous, puis chacun son plat (coach, exercices, découpage, cahier).", seanceId: "restaurant-6e-longueurs" },
+  { emoji: "🍽️", titre: "Le restaurant", resume: "Chacun sa façon : un plat imposé pour tous (la carte mentale), puis à la carte (coach, exercices, découpage, cahier).", seanceId: "restaurant-6e-longueurs" },
   { emoji: "💻", titre: "Le coach en salle info", resume: "Une séance d'entraînement : micros cochées par le prof, suivi en direct, bilan le soir." },
   { emoji: "⚡", titre: "Le rituel de calcul mental", resume: "10 minutes en début d'heure, au vidéoprojecteur ou sur les postes, tous les jours." },
   { emoji: "🤝", titre: "La remédiation AESH / ULIS", resume: "Le mode classe de Ti Margo, le coach qui se lit à voix haute, le découpage." },
