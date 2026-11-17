@@ -34,7 +34,6 @@ class MasseEstimerCE1Base(MasseEstimerCPBase):
     nom_voix = "ce1-masse-estimer"
     fichier_marques = "masse_ce1_estimer_marques.json"
     ceinture = "blanche"
-
     # ── 00 : page de garde ──────────────────────────────────────────────────
     def page_de_garde(self):
         self.clear()
@@ -69,7 +68,7 @@ class MasseEstimerCE1Base(MasseEstimerCPBase):
         self.col(l0, 2.7, -2.4)
         self.play(FadeIn(l0, shift=UP * 0.1), run_time=0.3)
         d = dictionnaire(1.5).move_to(P(-0.6, 0.7))
-        pl = petit_livre(1.2).move_to(P(2.4, 0.55))
+        pl = petit_livre(0.9).move_to(P(2.4, 0.55))
         self.au_mot("des gros")
         l1 = self.t("des gros et des petits.", 34, GRAY_B)
         self.col(l1, 2.05, -2.4)
@@ -77,8 +76,9 @@ class MasseEstimerCE1Base(MasseEstimerCPBase):
         self.au_mot("des petits")
         self.play(FadeIn(pl, shift=DOWN * 0.3), run_time=0.3)
         self.au_mot("Elle doit savoir")
-        l2 = self.bloc(["Elle doit savoir", "ce qu'elle peut porter."], 36, JAUNE_TITRE)
-        self.col(l2, -1.3, -2.4)
+        l2 = VGroup(self.t("Elle doit savoir", 36, JAUNE_TITRE), self.t("ce qu'elle peut porter.", 36, JAUNE_TITRE))
+        self.col(l2[0], -1.3, -2.4)
+        self.col(l2[1], -1.95, -2.4)  # (17/11) même interligne que les deux lignes du haut
         self.play(FadeIn(l2[0], shift=UP * 0.1), run_time=0.3)
         self.au_mot("ce qu'elle peut porter")
         self.play(FadeIn(l2[1], shift=UP * 0.1), run_time=0.3)
@@ -110,16 +110,18 @@ class MasseEstimerCE1Base(MasseEstimerCPBase):
         self.ecran("03-livres")
         d = dictionnaire(2.0).move_to(P(-4.0, 1.5))
         br = brique_lait(1.1).move_to(P(-1.5, 1.6))
-        pl = petit_livre(1.4).move_to(P(-4.0, -0.9))
+        pl = petit_livre(1.1).move_to(P(-4.0, -0.9))
         XT = -0.2
         self.au_mot("Un gros dictionnaire")
         l0 = self.t("Un gros dictionnaire :", 34)
         gauche(l0, XT, 2.0)
         self.play(FadeIn(d, shift=DOWN * 0.3), FadeIn(l0, shift=UP * 0.1), run_time=0.4)
-        self.au_mot("1 kilogramme")
-        l1 = self.t("environ 1 kg,", 40, LOURD)
+        l1 = base_commune(self.ligne([("environ", LOURD), ("1 kg,", LOURD)], 40, buff=0.22))
         gauche(l1, XT, 1.35)
-        self.play(FadeIn(l1, scale=1.1), run_time=0.3)
+        self.au_mot("environ 1 kilo")
+        self.play(FadeIn(l1[0], shift=UP * 0.1), run_time=0.25)
+        self.au_mot("1 kilogramme")
+        self.play(FadeIn(l1[1], scale=1.1), run_time=0.3)
         self.au_mot("comme la brique")
         l2 = self.t("comme la brique.", 34, GRAY_B)
         gauche(l2, XT, 0.75)
@@ -128,10 +130,12 @@ class MasseEstimerCE1Base(MasseEstimerCPBase):
         l3 = self.t("Un petit livre :", 34)
         gauche(l3, XT, -0.6)
         self.play(FadeIn(pl, shift=DOWN * 0.3), FadeIn(l3, shift=UP * 0.1), run_time=0.4)
-        self.au_mot("200 grammes")
-        l4 = self.t("environ 200 g.", 40, LEGER)
+        l4 = base_commune(self.ligne([("environ", LEGER), ("200 g.", LEGER)], 40, buff=0.22))
         gauche(l4, XT, -1.25)
-        self.play(FadeIn(l4, scale=1.1), run_time=0.3)
+        self.au_mot("environ 200")
+        self.play(FadeIn(l4[0], shift=UP * 0.1), run_time=0.25)
+        self.au_mot("200 grammes")
+        self.play(FadeIn(l4[1], scale=1.1), run_time=0.3)
         self.attendre_voix()
 
     # ── 04 : QUESTION 1 (la brique de lait) ─────────────────────────────────
@@ -147,11 +151,14 @@ class MasseEstimerCE1Base(MasseEstimerCPBase):
         def apres(sc):
             sc.play(Indicate(br, color=VERT_OK, scale_factor=1.1), run_time=0.4)
 
+        self._ph_mots = {(2, 1): "1 kilogramme"}
         self.question_gauche("04-question", "04b-reponse",
                              ["Environ combien pèse", "une brique de lait", "pleine ?"],
                              [self.choix(court(c_), fs=26) for c_ in Q1["choix"]], Q1["reponse"],
                              ["Une brique de lait", "de 1 litre pèse", "environ 1 kg."],
-                             -0.3, mot_q="Environ combien", avant_q=avant_q, autres_r=apres)
+                             -0.3, couper={2: ("environ", "1 kg.")}, mot_q="Environ combien", avant_q=avant_q,
+                             autres_r=apres)
+        self._ph_mots = {}
 
     # ── 05 : le piège ───────────────────────────────────────────────────────
     def ecran_piege(self):
@@ -175,10 +182,12 @@ class MasseEstimerCE1Base(MasseEstimerCPBase):
         l2 = self.t("Une trousse :", 34)
         gauche(l2, -6.0, -0.6)
         self.play(FadeIn(tr, shift=DOWN * 0.3), FadeIn(l2, shift=UP * 0.1), run_time=0.4)
-        self.au_mot("300 grammes")
-        l3 = self.t("environ 300 g.", 44, VERT_OK)
+        l3 = base_commune(self.ligne([("environ", VERT_OK), ("300 g.", VERT_OK)], 44, buff=0.22))
         gauche(l3, -6.0, -1.35)
-        self.play(FadeIn(l3, scale=1.1), run_time=0.3)
+        self.au_mot("environ 300")
+        self.play(FadeIn(l3[0], shift=UP * 0.1), run_time=0.25)
+        self.au_mot("300 grammes")
+        self.play(FadeIn(l3[1], scale=1.1), run_time=0.3)
         self.insister(l3, 1.15, 0.3)
         self.attendre_voix()
 
@@ -201,7 +210,8 @@ class MasseEstimerCE1Base(MasseEstimerCPBase):
                              ["Un élève écrit :", "« Ma trousse", "pèse 3 kg. »", "Est-ce possible ?"],
                              [self.choix(court(c_), fs=26) for c_ in Q2["choix"]], Q2["reponse"],
                              ["3 kg, c'est trois", "briques de lait.", "Une trousse :", "environ 300 g."],
-                             0.4, mot_q="Un élève écrit", avant_q=avant_q, autres_r=apres)
+                             0.4, couper={0: ("3 kg,", "c'est trois"), 3: ("environ", "300 g.")},
+                             mot_q="Un élève écrit", avant_q=avant_q, autres_r=apres)
         self.fs_choix, self.decal_q, self.elargir_q = 26, 1.8, 1.2
 
     # ── 07 : le défi (le cartable) ──────────────────────────────────────────
@@ -220,7 +230,12 @@ class MasseEstimerCE1Base(MasseEstimerCPBase):
             gauche(o, -5.6 + k * 2.6, 0.8)
         self.au_mot("3 grammes")
         self.play(FadeIn(ops[0], scale=1.2), run_time=0.3)
-        self.wait(1.0)  # « 3 kilogrammes » n'a pas de marque : juste après « 3 grammes, »
+        # « 3 kilogrammes » n'a pas de marque : il commence à 4,95 s dans le son (énergie du WAV, 17/11),
+        # soit 0,75 s après la fin du « 3 g ? » ; hors audit (l'audit le compare au « 3 grammes » d'avant).
+        ops[1]._pas_audit = True
+        for f in ops[1].get_family():
+            f._pas_audit = True
+        self.wait(0.75)
         self.play(FadeIn(ops[1], scale=1.2), run_time=0.3)
         self.au_mot("ou 300 kilogrammes")
         self.play(FadeIn(ops[2], scale=1.2), run_time=0.3)
@@ -235,8 +250,10 @@ class MasseEstimerCE1Base(MasseEstimerCPBase):
         tit = self.t("Correction", 50, JAUNE_TITRE).move_to(P(0, 3.15))
         self.play(Write(tit), run_time=0.35)
         tbs = VGroup(*[trombone_m(1.4) for _ in range(3)]).arrange(RIGHT, buff=0.25).move_to(P(-4.4, 1.5))
-        pi = piano(1.3).move_to(P(-0.3, 1.5))
+        pi = piano(1.15).move_to(P(-0.3, 1.5))
         ca = cartable(1.4).move_to(P(3.9, 1.5))
+        for o in (tbs, pi, ca):  # (17/11) les trois dessins posés sur la même ligne : le piano ne frôle plus « 300 kg : »
+            o.align_to(P(0, 0.7), DOWN)
         self.au_mot("3 grammes")
         a0 = self.t("3 g :", 38, LEGER).move_to(P(-4.4, 0.15))
         self.play(FadeIn(a0, shift=UP * 0.1), run_time=0.3)
@@ -258,9 +275,11 @@ class MasseEstimerCE1Base(MasseEstimerCPBase):
         self.au_mot("Le cartable pèse")
         c1 = self.t("le cartable", 30).move_to(P(3.9, b1.get_center()[1]))
         self.play(FadeIn(ca, shift=DOWN * 0.2), FadeIn(c1), run_time=0.35)
+        c0 = base_commune(self.ligne([("environ", VERT_OK), ("3 kg", VERT_OK)], 38, buff=0.2)).move_to(P(3.9, 0.15))
+        self.au_mot("environ 3")
+        self.play(FadeIn(c0[0], shift=UP * 0.1), run_time=0.25)
         self.au_mot("3 kilogrammes")
-        c0 = self.t("environ 3 kg", 38, VERT_OK).move_to(P(3.9, 0.15))
-        self.play(FadeIn(c0, scale=1.2), run_time=0.35)
+        self.play(FadeIn(c0[1], scale=1.2), run_time=0.35)
         self.insister(c0, 1.15, 0.3)
         self.attendre_voix()
 
@@ -271,11 +290,23 @@ class MasseEstimerCE1Base(MasseEstimerCPBase):
         lignes = self.finale_gauche(fig, textes=[
             ("Pour estimer, on compare", "à un repère."),
             ("1 g : un trombone.", "1 kg : une brique de lait.")], fs=36)
+        # « 1 g : » / « un trombone. » en deux morceaux : chacun à son mot (sinon le « 1 » attend « trombone »)
+        bloc, morceaux = lignes[1][1], []
+        for j, (a, b) in enumerate((("1 g :", "un trombone."), ("1 kg :", "une brique de lait."))):
+            old = bloc[j]
+            k = old.width / self.t(old.original_text, 36).width
+            g = base_commune(VGroup(self.t(a, 36), self.t(b, 36)).arrange(RIGHT, buff=0.2)).scale(k)
+            g.move_to(old, aligned_edge=LEFT)
+            bloc.submobjects[j] = g
+            morceaux += list(g)
         self.add(fig)
         self.au_mot("Pour estimer")
         self.montrer_ligne(lignes[0], Indicate(fig, scale_factor=1.05))
-        self.au_mot("1 gramme")
-        self.montrer_ligne(lignes[1])
+        # chaque morceau à SON mot, explicitement (le « 1 » de « 1 kg » se calait sur « 1 gramme »)
+        for k, mot in enumerate(("1 gramme", "un trombone", "1 kilogramme", "une brique")):
+            self.au_mot(mot)
+            self.play(FadeIn(morceaux[k], shift=RIGHT * 0.2), *([Create(lignes[1][0])] if k == 0 else []),
+                      run_time=0.35)
         self.attendre_voix(marge=1.0)
 
     def construct(self):

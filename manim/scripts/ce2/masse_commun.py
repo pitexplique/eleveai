@@ -792,11 +792,18 @@ def brique_lait(s=1.0):
 
 
 def petit_livre(s=1.0, couleur="#16a34a"):
-    """Un petit livre fin, posé à plat."""
-    pages = Rectangle(width=0.9 * s, height=0.16 * s, fill_color="#f8fafc", fill_opacity=1, stroke_width=0)
-    couv = RoundedRectangle(width=1.0 * s, height=0.22 * s, corner_radius=0.03 * s, fill_color=couleur, fill_opacity=1,
-                            stroke_width=0)
-    return VGroup(couv, pages.move_to(couv).shift(RIGHT * 0.03 * s))
+    """(17/11) Un petit livre vu de face, debout : couverture, dos plus foncé, tranche des pages, titre."""
+    couv = RoundedRectangle(width=0.75 * s, height=1.0 * s, corner_radius=0.05 * s, fill_color=couleur, fill_opacity=1,
+                            stroke_color="#14532d", stroke_width=2)
+    dos = Rectangle(width=0.1 * s, height=1.0 * s, fill_color="#14532d", fill_opacity=1, stroke_width=0)
+    dos.align_to(couv, LEFT)
+    tranche = Rectangle(width=0.06 * s, height=0.9 * s, fill_color="#f8fafc", fill_opacity=1, stroke_width=0)
+    tranche.next_to(couv, RIGHT, buff=0)
+    titre = RoundedRectangle(width=0.45 * s, height=0.22 * s, corner_radius=0.03 * s, fill_color="#f8fafc",
+                             fill_opacity=1, stroke_width=0).move_to(couv.get_center() + UP * 0.2 * s + RIGHT * 0.05 * s)
+    traits = VGroup(*[Line(LEFT * 0.15 * s, RIGHT * 0.15 * s, color="#14532d", stroke_width=2)
+                      .move_to(titre.get_center() + UP * dy * s) for dy in (0.04, -0.04)])
+    return VGroup(couv, dos, tranche, titre, traits)
 
 
 def trousse(s=1.0, couleur="#ec4899"):
@@ -832,3 +839,74 @@ def piano(s=1.0):
     pieds = VGroup(*[Rectangle(width=0.12 * s, height=0.3 * s, fill_color="#1f2937", fill_opacity=1, stroke_width=0)
                      .next_to(corps, DOWN, buff=0).shift(RIGHT * dx * s) for dx in (-0.75, 0.75)])
     return VGroup(corps, clav, noires, pieds)
+
+
+# ── CE1 04 (17/11) : Malo le pêcheur de Saint-Pierre, le panier, les poissons, les crevettes ───
+def malo(s=1.0):
+    """Malo, pêcheur : ciré jaune, bonnet rouge."""
+    p = visage(personne(peau="#8d5524", tenue="#facc15", cheveux="#111827", s=s))
+    c, r = p.tete.get_center(), p.tete.width / 2
+    bonnet = AnnularSector(inner_radius=0, outer_radius=r * 1.06, angle=PI, start_angle=0, fill_color="#dc2626",
+                           fill_opacity=1, stroke_width=0).move_to(c + UP * r * 0.55)
+    revers = RoundedRectangle(width=r * 2.2, height=r * 0.3, corner_radius=r * 0.12, fill_color="#991b1b",
+                              fill_opacity=1, stroke_width=0).move_to(c + UP * r * 0.35)
+    p.add(bonnet, revers)
+    return p
+
+
+def poisson(s=1.0, couleur="#60a5fa", ventre="#dbeafe"):
+    """Un poisson de profil (tête à droite) : corps, ventre clair, queue, œil, nageoire."""
+    corps = Ellipse(width=1.4 * s, height=0.6 * s, fill_color=couleur, fill_opacity=1, stroke_color="#1e293b",
+                    stroke_width=2)
+    bas = Ellipse(width=1.0 * s, height=0.22 * s, fill_color=ventre, fill_opacity=1, stroke_width=0)
+    bas.move_to(corps.get_center() + DOWN * 0.13 * s + RIGHT * 0.08 * s)
+    queue = Polygon(P(-0.6 * s, 0), P(-0.98 * s, 0.3 * s), P(-0.98 * s, -0.3 * s), fill_color=couleur, fill_opacity=1,
+                    stroke_color="#1e293b", stroke_width=2).shift(corps.get_center())
+    nag = Polygon(P(-0.1 * s, 0.26 * s), P(0.2 * s, 0.26 * s), P(-0.15 * s, 0.48 * s), fill_color=couleur,
+                  fill_opacity=1, stroke_color="#1e293b", stroke_width=2).shift(corps.get_center())
+    oeil = VGroup(Circle(radius=0.07 * s, fill_color=WHITE, fill_opacity=1, stroke_width=0),
+                  Circle(radius=0.035 * s, fill_color="#111827", fill_opacity=1, stroke_width=0))
+    oeil.move_to(corps.get_center() + RIGHT * 0.45 * s + UP * 0.07 * s)
+    return VGroup(queue, nag, corps, bas, oeil)
+
+
+def thon(s=1.0):
+    """Un gros thon : bleu foncé, ventre argenté."""
+    return poisson(1.3 * s, "#1e3a8a", "#cbd5e1")
+
+
+def dorade(s=1.0):
+    """Une dorade (coryphène) : vert et jaune."""
+    return poisson(s, "#16a34a", "#fde047")
+
+
+def panier(s=1.0, plein=True):
+    """Un panier de pêcheur en osier (tressé), vide ou plein de poissons."""
+    corps = Polygon(P(-0.85 * s, 0.35 * s), P(0.85 * s, 0.35 * s), P(0.65 * s, -0.55 * s), P(-0.65 * s, -0.55 * s),
+                    fill_color="#b45309", fill_opacity=1, stroke_color="#78350f", stroke_width=3)
+    tresse = VGroup(*[Line(P(-0.8 * s + 0.04 * k * s, y * s), P(0.8 * s - 0.04 * k * s, y * s), color="#78350f",
+                           stroke_width=2) for k, y in enumerate((0.15, -0.05, -0.25, -0.45))])
+    bord = RoundedRectangle(width=1.85 * s, height=0.16 * s, corner_radius=0.06 * s, fill_color="#92400e",
+                            fill_opacity=1, stroke_width=0).move_to(P(0, 0.37 * s))
+    g = VGroup()
+    if plein:
+        for dx, dy, ang, coul in ((-0.35, 0.5, 0.25, "#60a5fa"), (0.35, 0.52, -0.2, "#f97316"), (0, 0.62, 0.05, "#a3e635")):
+            g.add(poisson(0.75 * s, coul).rotate(ang).move_to(P(dx * s, dy * s)))
+    return VGroup(g, corps, tresse, bord)
+
+
+def crevette(s=1.0):
+    """Une crevette rose, courbée."""
+    corps = Arc(radius=0.3 * s, start_angle=-0.3, angle=PI * 1.1, stroke_color="#fb7185", stroke_width=14 * s)
+    tete = Circle(radius=0.11 * s, fill_color="#fb7185", fill_opacity=1, stroke_width=0).move_to(corps.get_end())
+    ant = Line(tete.get_center(), tete.get_center() + P(0.35 * s, 0.15 * s), color="#fda4af", stroke_width=2)
+    return VGroup(corps, tete, ant)
+
+
+def bac_crevettes(s=1.0):
+    """Un bac en plastique plein de crevettes."""
+    bac = RoundedRectangle(width=2.0 * s, height=0.7 * s, corner_radius=0.1 * s, fill_color="#0ea5e9", fill_opacity=1,
+                           stroke_color="#0369a1", stroke_width=3)
+    cr = VGroup(*[crevette(0.55 * s).rotate(a).move_to(bac.get_top() + P(x * s, 0.12 * s))
+                  for x, a in ((-0.65, 0.3), (-0.2, -0.2), (0.25, 0.4), (0.65, -0.1))])
+    return VGroup(cr, bac)

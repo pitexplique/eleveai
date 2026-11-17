@@ -200,3 +200,35 @@ function etiquetteCraie(c,x,y,texte,z=1,barre=0,coul='#fff3bf',s=1){ if(z<=0) re
   c.fillStyle='#8a5a2b'; c.beginPath(); c.arc(x-w/2+22*k,y,7*k,0,7); c.fill();
   c.fillStyle='#212529'; c.font=`800 ${Math.round(54*k)}px "Segoe UI"`; c.textAlign='center'; c.textBaseline='middle'; c.fillText(texte,x+12*k,y+3*k);
   if(barre>0){ c.strokeStyle='#e03131'; c.lineWidth=9; c.beginPath(); c.moveTo(x-w/2+30*k,y+h/3); c.lineTo(x-w/2+30*k+(w-40*k)*barre,y-h/3); c.stroke(); } }
+
+/* ── CE1 03 (17/11) : les mains du copain, la gomme, la brique de lait, le cartable ───────────── */
+/* Une main tendue, paume en l'air : le bras vient du bord (cote −1 : de la gauche, +1 : de la droite).
+   Ce qu'on y pose a son bas à y − 24·s. */
+function mainCraie(c,x,y,s=1,z=1,cote=-1){ if(z<=0) return; const k=Math.min(1.15,z)*s, bord=cote<0?36:1020;
+  c.fillStyle='#748ffc'; c.strokeStyle='#364fc7'; c.lineWidth=5; c.lineJoin='round';
+  const xm=x+cote*70*k; c.beginPath(); c.rect(Math.min(xm,bord),y-30*k,Math.abs(bord-xm),62*k); c.fill(); c.stroke();
+  c.fillStyle='#ffe8cc'; c.fillRect(cote<0?xm:xm-16*k,y-32*k,16*k,66*k);
+  c.fillStyle='#f1c27d'; c.strokeStyle='#a0522d'; c.lineWidth=4; c.beginPath();
+  c.ellipse(x,y,100*k,26*k,0,0,7); c.fill(); c.stroke();
+  c.beginPath(); c.ellipse(x+cote*40*k,y-24*k,28*k,13*k,cote*.5,0,7); c.fill(); c.stroke(); /* le pouce */
+  c.strokeStyle='#a0522d'; c.lineWidth=3;
+  for(const d of [-.15,.15,.45]){ c.beginPath(); c.moveTo(x-cote*(55+d*60)*k,y-6*k); c.lineTo(x-cote*(80+d*60)*k,y+12*k); c.stroke(); } }
+/* Une gomme : moitié bleue, moitié rose, un peu penchée ; (x, yBas) = le milieu du bas */
+function gommeCraie(c,x,yBas,s=1,z=1){ if(z<=0) return; const k=Math.min(1.15,z)*s, w=150*k, h=62*k;
+  c.save(); c.translate(x,yBas-h/2); c.rotate(-.06);
+  c.fillStyle='#ffc9c9'; c.strokeStyle='#c92a2a'; c.lineWidth=4; c.beginPath(); c.roundRect(-w/2,-h/2,w,h,12*k); c.fill(); c.stroke();
+  c.fillStyle='#4dabf7'; c.strokeStyle='#1864ab'; c.beginPath(); c.roundRect(-w/2,-h/2,w*.55,h,[12*k,0,0,12*k]); c.fill(); c.stroke();
+  c.restore(); }
+/* Une brique de lait (1 L) : le toit, la bande bleue « LAIT » */
+function briqueCraie(c,x,yBas,s=1,z=1){ if(z<=0) return; const k=Math.min(1.15,z)*s, w=110*k, h=170*k, t=42*k;
+  c.fillStyle='#f8f9fa'; c.strokeStyle='#868e96'; c.lineWidth=4; c.lineJoin='round';
+  c.beginPath(); c.rect(x-w/2,yBas-h,w,h); c.fill(); c.stroke();
+  c.fillStyle='#dee2e6'; c.beginPath(); c.moveTo(x-w/2,yBas-h); c.lineTo(x,yBas-h-t); c.lineTo(x+w/2,yBas-h); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle='#1c7ed6'; c.fillRect(x-w/2+2,yBas-h*.62,w-4,h*.3);
+  c.fillStyle='#fff'; c.font=`800 ${Math.round(34*k)}px "Segoe UI"`; c.textAlign='center'; c.textBaseline='middle'; c.fillText('LAIT',x,yBas-h*.47); }
+/* Un cartable d'écolier ; (x, yBas) = le milieu du bas */
+function cartableCraie(c,x,yBas,s=1,z=1){ if(z<=0) return; const k=Math.min(1.15,z)*s, w=230*k, h=180*k;
+  c.lineJoin='round'; c.strokeStyle='#1e3a8a'; c.lineWidth=6; c.beginPath(); c.arc(x,yBas-h,42*k,Math.PI,0); c.stroke();
+  c.fillStyle='#3b5bdb'; c.lineWidth=4; c.beginPath(); c.roundRect(x-w/2,yBas-h,w,h,16*k); c.fill(); c.stroke();
+  c.fillStyle='#364fc7'; c.beginPath(); c.roundRect(x-w/2,yBas-h,w,h*.5,16*k); c.fill(); c.stroke();
+  c.fillStyle='#fab005'; for(const d of [-.28,.28]){ c.beginPath(); c.roundRect(x+d*w-11*k,yBas-h*.5-14*k,22*k,30*k,4*k); c.fill(); } }

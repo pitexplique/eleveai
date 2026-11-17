@@ -36,6 +36,8 @@ EP = [
      "un colis : 3 kg, une lettre : 20 g", True, "blanche"),
     ("ce1", "relation", "02-relation", ["1 kg", "= 1 000 g"], "Deux sacs de 500 g",
      "font 1 kg !", True, "blanche"),
+    ("ce1", "estimer", "03-estimer", ["ESTIMER", "UNE MASSE"], "1 g : un trombone",
+     "1 kg : une brique de lait", True, "blanche"),
 ]
 
 

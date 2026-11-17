@@ -6334,6 +6334,24 @@
   "short": true,
   "youtube": null
  },
+ "ce1-masse-estimer": {
+  "fichier": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer.mp4",
+  "poster": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer.png",
+  "vignette": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer.vignette.webp",
+  "titre": "Une trousse peut-elle peser 3 kg ? — Estimer une masse — épisode 3 · Maths CE1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_estimer&display=simple"
+ },
+ "ce1-masse-estimer-short": {
+  "fichier": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer-short.mp4",
+  "poster": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer-short-miniature.png",
+  "vignette": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer-short-miniature.vignette.webp",
+  "titre": "Une gomme de 1 kilogramme ? Vraiment ? #maths #ce1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_estimer&display=simple"
+ },
  "ce1-masse-kg-g": {
   "fichier": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g.mp4",
   "poster": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g.png",

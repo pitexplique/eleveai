@@ -96886,6 +96886,159 @@
       ]
     },
     {
+      "id": "cm1-duree-calculer",
+      "pas_avant": "2027-05-06",
+      "notionId": "duree",
+      "microId": "duree_calculer",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/duree/04-calculer/eleveai-maths-cm1-duree-calculer.mp4",
+      "miniature": "cm1/maths/duree/04-calculer/eleveai-maths-cm1-duree-calculer.png",
+      "titre": "De 9 h 40 à 11 h 15 : combien de temps ? — Calculer une durée — épisode 4 · Maths CM1",
+      "accroche": "Théo est contrôleur aérien. Depuis la tour de contrôle, il guide les avions. Un avion décolle à 9 h 40 et atterrit à 11 h 15. Combien de temps a duré le vol ?\n\nDans cette vidéo :\n• la frise du temps : le départ à gauche, l'arrivée à droite\n• avancer par bonds, en passant par l'heure pile : + 20 min, + 1 h, + 15 min\n• additionner les bonds : 1 h 35 min\n• le piège : 1 heure, ce n'est pas 100 minutes, c'est 60 minutes\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : de 8 h 45 à 12 h 10.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=duree&microId=duree_calculer&display=simple\n\n⏰ Épisode 4 de la série Durées d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Calculer une durée"
+        ],
+        [
+          "00:07",
+          "Théo, contrôleur aérien"
+        ],
+        [
+          "00:24",
+          "La frise du temps"
+        ],
+        [
+          "00:36",
+          "Les bonds par l'heure pile"
+        ],
+        [
+          "00:52",
+          "On additionne : 1 h 35 min"
+        ],
+        [
+          "01:04",
+          "Question 1"
+        ],
+        [
+          "01:39",
+          "Le piège : 1 h = 60 min"
+        ],
+        [
+          "01:55",
+          "Question 2"
+        ],
+        [
+          "02:32",
+          "À toi de jouer"
+        ],
+        [
+          "02:47",
+          "Correction"
+        ],
+        [
+          "03:03",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "durée",
+        "calculer une durée",
+        "durée écoulée",
+        "frise du temps",
+        "heures et minutes",
+        "1 h = 60 min",
+        "contrôleur aérien",
+        "avion",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:04",
+          "question": "Un avion part à 14 h 30 et arrive à 16 h. Combien de temps de vol ?",
+          "choix": [
+            "2 h 30",
+            "1 h",
+            "1 h 30"
+          ],
+          "reponse": 2,
+          "explication": "De 14 h 30 à 15 h : 30 min. De 15 h à 16 h : 1 h. En tout : 1 h 30."
+        },
+        {
+          "t": "01:55",
+          "question": "Un avion se pose à 10 h 50 et repart 25 minutes plus tard. À quelle heure repart-il ?",
+          "choix": [
+            "10 h 75",
+            "11 h 15",
+            "11 h 25"
+          ],
+          "reponse": 1,
+          "explication": "De 10 h 50 à 11 h : 10 min. Il reste 15 min : 11 h 15."
+        }
+      ],
+      "centres": [
+        "avions",
+        "transports"
+      ]
+    },
+    {
+      "id": "cm1-duree-calculer-short",
+      "pas_avant": "2027-05-06",
+      "notionId": "duree",
+      "microId": "duree_calculer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-duree-calculer",
+      "fichier": "cm1/maths/duree/04-calculer/eleveai-maths-cm1-duree-calculer-short.mp4",
+      "miniature": "cm1/maths/duree/04-calculer/eleveai-maths-cm1-duree-calculer-short-miniature.png",
+      "titre": "15 h 45 → 17 h 20 : « 20 moins 45 » ? Aïe ! #maths #cm1",
+      "accroche": "Le film de Ti Margo commence à 15 h 45 et finit à 17 h 20. « Facile : 17 moins 15, et 20 moins 45… » Aïe, ça ne marche pas ! Alors il saute sur la frise.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un dessin animé commence à 10 h 50 et finit à 11 h 30. Combien de temps dure-t-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=duree&microId=duree_calculer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #duree #cm1",
+      "tags": [
+        "durée",
+        "calculer une durée",
+        "frise du temps",
+        "heures et minutes",
+        "film",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "école",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "Un film de 15 h 45 à 17 h 20 : combien de temps dure-t-il ?",
+          "choix": [
+            "2 h 25",
+            "1 h 75",
+            "1 h 35"
+          ],
+          "reponse": 2,
+          "explication": "De 15 h 45 à 16 h : 15 min. De 16 h à 17 h : 1 h. De 17 h à 17 h 20 : 20 min. En tout : 1 h 35."
+        }
+      ],
+      "centres": [
+        "cinema-series",
+        "jeux-defis"
+      ]
+    },
+    {
       "id": "ce2-masse-comparer",
       "pas_avant": "2027-04-29",
       "prioritaire": true,
@@ -97857,155 +98010,139 @@
       ]
     },
     {
-      "id": "cm1-duree-calculer",
-      "pas_avant": "2027-05-06",
-      "notionId": "duree",
-      "microId": "duree_calculer",
-      "classe": "cm1",
-      "ceinture": "verte",
-      "serie": "Maths CM1",
+      "id": "ce1-masse-estimer",
+      "pas_avant": "2027-05-07",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_estimer",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
       "type": "longue",
-      "fichier": "cm1/maths/duree/04-calculer/eleveai-maths-cm1-duree-calculer.mp4",
-      "miniature": "cm1/maths/duree/04-calculer/eleveai-maths-cm1-duree-calculer.png",
-      "titre": "De 9 h 40 à 11 h 15 : combien de temps ? — Calculer une durée — épisode 4 · Maths CM1",
-      "accroche": "Théo est contrôleur aérien. Depuis la tour de contrôle, il guide les avions. Un avion décolle à 9 h 40 et atterrit à 11 h 15. Combien de temps a duré le vol ?\n\nDans cette vidéo :\n• la frise du temps : le départ à gauche, l'arrivée à droite\n• avancer par bonds, en passant par l'heure pile : + 20 min, + 1 h, + 15 min\n• additionner les bonds : 1 h 35 min\n• le piège : 1 heure, ce n'est pas 100 minutes, c'est 60 minutes\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : de 8 h 45 à 12 h 10.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=duree&microId=duree_calculer&display=simple\n\n⏰ Épisode 4 de la série Durées d'EleveAI, en CM1.",
+      "fichier": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer.mp4",
+      "miniature": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer.png",
+      "titre": "Une trousse peut-elle peser 3 kg ? — Estimer une masse — épisode 3 · Maths CE1",
+      "accroche": "Chloé est bibliothécaire : elle range des livres, des gros et des petits. Elle doit savoir ce qu'elle peut porter. Pour estimer une masse, on la compare à un repère.\n\nDans cette vidéo :\n• deux repères : un trombone pèse environ 1 g, une brique de lait pleine environ 1 kg\n• un gros dictionnaire : environ 1 kg ; un petit livre : environ 200 g\n• 3 kg, c'est trois briques de lait : une trousse pèse environ 300 g\n• le cartable : 3 g (trop léger), 300 kg (trop lourd), environ 3 kg\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : Le cartable de Chloé pèse-t-il 3 g, 3 kg ou 300 kg ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_estimer&display=simple\n\n⚖️ Épisode 3 de la série Masses d'EleveAI, en CE1.",
       "chapitres": [
         [
           "00:00",
-          "Calculer une durée"
+          "Estimer une masse"
         ],
         [
-          "00:07",
-          "Théo, contrôleur aérien"
-        ],
-        [
-          "00:24",
-          "La frise du temps"
-        ],
-        [
-          "00:36",
-          "Les bonds par l'heure pile"
-        ],
-        [
-          "00:52",
-          "On additionne : 1 h 35 min"
-        ],
-        [
-          "01:04",
+          "00:35",
           "Question 1"
         ],
         [
-          "01:39",
-          "Le piège : 1 h = 60 min"
+          "01:01",
+          "Les nombres impossibles"
         ],
         [
-          "01:55",
+          "01:11",
           "Question 2"
         ],
         [
-          "02:32",
+          "01:42",
           "À toi de jouer"
         ],
         [
-          "02:47",
+          "01:54",
           "Correction"
         ],
         [
-          "03:03",
+          "02:08",
           "Ce que tu as appris"
         ]
       ],
       "tags": [
-        "durée",
-        "calculer une durée",
-        "durée écoulée",
-        "frise du temps",
-        "heures et minutes",
-        "1 h = 60 min",
-        "contrôleur aérien",
-        "avion",
+        "masse",
+        "estimer",
+        "kilogramme",
+        "gramme",
+        "repère",
+        "ordre de grandeur",
+        "bibliothèque",
         "maths",
-        "CM1",
-        "école",
-        "cycle 3",
+        "CE1",
+        "primaire",
+        "cycle 2",
         "CRPE",
         "EleveAI"
       ],
       "questions": [
         {
-          "t": "01:04",
-          "question": "Un avion part à 14 h 30 et arrive à 16 h. Combien de temps de vol ?",
+          "t": "00:35",
+          "question": "Environ combien pèse une brique de lait pleine ?",
           "choix": [
-            "2 h 30",
-            "1 h",
-            "1 h 30"
-          ],
-          "reponse": 2,
-          "explication": "De 14 h 30 à 15 h : 30 min. De 15 h à 16 h : 1 h. En tout : 1 h 30."
-        },
-        {
-          "t": "01:55",
-          "question": "Un avion se pose à 10 h 50 et repart 25 minutes plus tard. À quelle heure repart-il ?",
-          "choix": [
-            "10 h 75",
-            "11 h 15",
-            "11 h 25"
+            "1 gramme",
+            "1 kilogramme",
+            "10 kilogrammes"
           ],
           "reponse": 1,
-          "explication": "De 10 h 50 à 11 h : 10 min. Il reste 15 min : 11 h 15."
+          "explication": "Une brique de lait de 1 litre pèse environ 1 kilogramme."
+        },
+        {
+          "t": "01:11",
+          "question": "Un élève écrit : ma trousse pèse 3 kilogrammes. Est-ce possible ?",
+          "choix": [
+            "non, c'est trop lourd",
+            "oui, c'est normal",
+            "non, c'est trop léger"
+          ],
+          "reponse": 0,
+          "explication": "3 kilogrammes, c'est trois briques de lait. Une trousse pèse environ 300 grammes."
         }
       ],
       "centres": [
-        "avions",
-        "transports"
+        "histoire-geographie",
+        "art-design"
       ]
     },
     {
-      "id": "cm1-duree-calculer-short",
-      "pas_avant": "2027-05-06",
-      "notionId": "duree",
-      "microId": "duree_calculer",
-      "classe": "cm1",
+      "id": "ce1-masse-estimer-short",
+      "pas_avant": "2027-05-07",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_estimer",
+      "classe": "ce1",
       "ceinture": "blanche",
-      "serie": "Maths CM1",
+      "serie": "Maths CE1",
       "type": "short",
-      "renvoie_vers": "cm1-duree-calculer",
-      "fichier": "cm1/maths/duree/04-calculer/eleveai-maths-cm1-duree-calculer-short.mp4",
-      "miniature": "cm1/maths/duree/04-calculer/eleveai-maths-cm1-duree-calculer-short-miniature.png",
-      "titre": "15 h 45 → 17 h 20 : « 20 moins 45 » ? Aïe ! #maths #cm1",
-      "accroche": "Le film de Ti Margo commence à 15 h 45 et finit à 17 h 20. « Facile : 17 moins 15, et 20 moins 45… » Aïe, ça ne marche pas ! Alors il saute sur la frise.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un dessin animé commence à 10 h 50 et finit à 11 h 30. Combien de temps dure-t-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=duree&microId=duree_calculer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #duree #cm1",
+      "renvoie_vers": "ce1-masse-estimer",
+      "fichier": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer-short.mp4",
+      "miniature": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer-short-miniature.png",
+      "titre": "Une gomme de 1 kilogramme ? Vraiment ? #maths #ce1",
+      "accroche": "Mon copain dit : ma gomme pèse 1 kilogramme ! Je lui donne une brique de lait. Ça, c'est 1 kilogramme.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien pèse ton cartable, en kilogrammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce1 #primaire",
       "tags": [
-        "durée",
-        "calculer une durée",
-        "frise du temps",
-        "heures et minutes",
-        "film",
+        "masse",
+        "estimer",
+        "gramme",
+        "kilogramme",
+        "gomme",
         "Ti Margo",
         "dessin animé",
         "ceinture blanche",
         "maths",
-        "CM1",
-        "école",
-        "cycle 3",
+        "CE1",
+        "primaire",
+        "cycle 2",
         "CRPE",
         "EleveAI",
         "Shorts"
       ],
       "questions": [
         {
-          "t": "00:33",
-          "question": "Un film de 15 h 45 à 17 h 20 : combien de temps dure-t-il ?",
+          "t": "00:17",
+          "question": "Une gomme pèse environ…",
           "choix": [
-            "2 h 25",
-            "1 h 75",
-            "1 h 35"
+            "20 kilogrammes",
+            "20 grammes",
+            "1 kilogramme"
           ],
-          "reponse": 2,
-          "explication": "De 15 h 45 à 16 h : 15 min. De 16 h à 17 h : 1 h. De 17 h à 17 h 20 : 20 min. En tout : 1 h 35."
+          "reponse": 1,
+          "explication": "Une gomme pèse environ 20 grammes : comme 20 trombones."
         }
       ],
       "centres": [
-        "cinema-series",
         "jeux-defis"
       ]
     }

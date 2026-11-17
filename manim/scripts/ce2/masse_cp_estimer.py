@@ -12,6 +12,7 @@
 # Sortie : manim/sorties/cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer.mp4
 
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -64,6 +65,44 @@ class MasseEstimerCPBase(PaysageMasse):
     fs_choix = 26  # la taille commune des trois choix (CP 04, question 2 : 22, les choix sont longs)
     decal_q, elargir_q = 1.8, 1.2  # la colonne glisse à gauche de decal_q, les cartes s'élargissent de elargir_q
 
+    _ph_mots = {}
+
+    def poser_lignes(self, mob, anim="fade", run_time=0.4):
+        """(17/11) Phrase de réponse : un morceau de `_ph_mots` {(ligne, morceau): extrait} attend SON mot
+        (« 1 kg. » attendait le « 1 » de « 1 litre », dit juste avant)."""
+        if not self._ph_mots or mob is not getattr(self, "ph_q", None):
+            return super().poser_lignes(mob, anim, run_time)
+        for i, m in enumerate(mob.submobjects):
+            for k, piece in enumerate(m.submobjects if i in self._ph_couper else [m]):
+                if (i, k) in self._ph_mots:
+                    v = self._ph_mots[(i, k)]
+                    self.au_t(v) if isinstance(v, (int, float)) else self.au_mot(v)
+                self.play(FadeIn(piece, shift=RIGHT * 0.2), run_time=run_time)
+        return mob
+
+    def au_t(self, t):
+        """(17/11) Attend l'instant t (s) de la voix de l'écran (pour un mot sans marque : repéré dans le WAV,
+        début du son après un silence). Arrondi à l'image SUIVANTE : jamais une image d'avance."""
+        reste = self._debut_voix + t - self.renderer.time
+        if reste > 0.001:
+            fps = config.frame_rate
+            self.wait(math.ceil(reste * fps - 1e-6) / fps)
+
+    def au_mot(self, extrait, n=1):
+        """(17/11) Comme au_mot du socle, mais arrondi à l'image suivante (le socle tolérait 0,05 s d'avance)."""
+        i = -1
+        for _ in range(n):
+            i = self._texte_voix.find(extrait, i + 1)
+            if i < 0:
+                raise ValueError(f"« {extrait} » (n = {n}) absent de la voix : {self._texte_voix[:60]}…")
+        marques = self._marques().get(getattr(self, "_cle_voix", None))
+        if not marques:
+            raise ValueError(f"pas de marques pour {getattr(self, '_cle_voix', None)}")
+        t = max([m[1] for m in marques if m[0] <= i] or [0.0])
+        if self._debut_voix + t - self.renderer.time < -0.3:
+            print(f"RETARD {self._cle_voix} « {extrait} » : {self.renderer.time - self._debut_voix - t:.2f} s", flush=True)
+        self.au_t(t)
+
     def _disposer_q(self, question, choix, phrase):
         """Comme en CP 02 : la colonne de la question glisse de 1,8 vers la gauche, les cartes s'élargissent
         de 1,2 (leur bord droit s'écarte de Ti Margo), les trois choix gardent la MÊME taille (26), et la
@@ -81,6 +120,8 @@ class MasseEstimerCPBase(PaysageMasse):
             corps.scale(self.fs_choix / corps.font_size).shift(RIGHT * (g - corps.get_left()[0]))
             assert corps.get_right()[0] < fond.get_right()[0] - 0.8, corps  # la place de la coche
         ph = r[5]
+        for i in getattr(self, "_ph_couper", {}):  # (17/11) ligne coupée : les morceaux sur la même ligne de base
+            base_commune(ph[i])
         lim = cartes.get_left()[0] - 0.35
         if ph.get_right()[0] > lim:
             g, h = ph.get_left()[0], ph.get_top()[1]
