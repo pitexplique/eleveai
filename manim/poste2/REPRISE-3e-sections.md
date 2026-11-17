@@ -24,10 +24,17 @@ WAV : `public/sons/3e-*/`. Marques : `manim/scripts/4e/3e_*_marques.json`. Tout 
 ## ✅ Les 16 MP4 sont à jour et contrôlés (17/11, 12 h 35)
 
 Sur CHACUN des seize : `verifier-bords-video` → 0 instant qui touche un bord ;
-`verifier-zone-margo.py` → 0 instant où quelque chose recouvre Ti-Margo. Les 8 planches ont été
-relues écran par écran, les 8 compteurs contrôlés sur le MP4 (3 → 2 → 1 dans la carte, rien
-par-dessus), les 8 poignées « @eleveai974 » lues en entier (Ti-Margo a quitté l'écran de
-commentaire, REGLES.md), et les 16 cartes gagnantes regardées en PLEINE RÉSOLUTION, une par une.
+`verifier-zone-margo.py` → 0 instant où quelque chose recouvre Ti-Margo ;
+`verifier-coche-carte.py` → 20 à 449 px entre le libellé et le ✓ (il mord sous 6) ;
+`verifier-fraicheur-mp4.py --serie 3e` → **16 prouvés à jour, 0 douteux**.
+À l'œil : les 8 planches relues écran par écran, les 8 compteurs contrôlés sur le MP4
+(3 → 2 → 1 dans la carte, rien par-dessus), les 8 poignées « @eleveai974 » lues en entier
+(Ti-Margo a quitté l'écran de commentaire, REGLES.md), et les 16 cartes gagnantes regardées en
+PLEINE RÉSOLUTION, une par une.
+
+⭐ **Trois méthodes indépendantes, une seule réponse.** Le contenu des MP4 (poignées, ✓, zone de
+la mascotte), les seuils mesurés sur les sources, et l'outil de fraîcheur : les trois concluent
+que rien n'est à re-rendre. C'est ce faisceau qui permet de clore, pas une date.
 
 ## ⛔ Ce que la relecture a trouvé, et qu'aucun garde-fou ne voyait
 
@@ -272,10 +279,11 @@ rendu en cours.
 Ce qui reste utile en attendant, et qui ne coûte presque rien : les dry runs, les entrées de
 manifeste, et ce tableau.
 
-## ✅ Les 16 MP4 sont à jour — mon relevé de dates était FAUX
+## ⭐ Comment on PROUVE qu'un MP4 est à jour (et pourquoi une date n'y suffit pas)
 
-⛔ **J'avais écrit ici que sept MP4 étaient périmés. C'est faux, et il ne faut PAS les re-rendre.**
-La session « Série 4e/3e » a mesuré, et l'outil le prouve :
+⛔ Quatre relevés successifs ont conclu « périmé » sur ce lot — 11, puis 8, puis 5, puis 1
+fichiers. **La vérité était 0 à chaque fois**, et aucun n'avait été fait avec la bonne référence.
+L'outil, lui, tranche :
 
 ```
 python -X utf8 -I manim/poste2/verifier-fraicheur-mp4.py --serie 3e
