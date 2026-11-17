@@ -66,10 +66,19 @@ class MasseEstimerCPBase(PaysageMasse):
     decal_q, elargir_q = 1.8, 1.2  # la colonne glisse à gauche de decal_q, les cartes s'élargissent de elargir_q
 
     _ph_mots = {}
+    _q_apres = {}
 
     def poser_lignes(self, mob, anim="fade", run_time=0.4):
         """(17/11) Phrase de réponse : un morceau de `_ph_mots` {(ligne, morceau): extrait} attend SON mot
         (« 1 kg. » attendait le « 1 » de « 1 litre », dit juste avant)."""
+        if self._q_apres and mob is not getattr(self, "ph_q", None):
+            # (17/11) Un crochet posé dans avant_q : {ligne: fonction} joué juste APRÈS cette ligne de la question
+            crochets, self._q_apres = self._q_apres, {}
+            for i, m in enumerate(mob.submobjects):
+                super().poser_lignes(VGroup(m), anim, run_time)
+                if i in crochets:
+                    crochets[i](self)
+            return mob
         if not self._ph_mots or mob is not getattr(self, "ph_q", None):
             return super().poser_lignes(mob, anim, run_time)
         for i, m in enumerate(mob.submobjects):
