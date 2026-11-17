@@ -129,8 +129,13 @@ class ShortVolumePyramide4e(PausesShort, Short6e):
         self.ecran_question("02-question", "02b-reponse",
                             ["Le prisme :", "60 cm³ de sable.", "Combien de pyramides ?"],
                             ["2 pyramides", "1 pyramide", "3 pyramides"], 2,
-                            # ⛔ « 60 » et « ÷ 3 » séparés : ensemble, le 3 s'affichait 3,8 s avant d'être dit.
-                            [["Une pyramide", "= le tiers :"], ["60", "÷ 3", "= 20 cm³"], "chacune."])
+                            # ⛔ Leçon 28 : la phrase ne porte que ce qui est dit APRÈS le premier
+                            # point de la voix. Ici la voix dit « … 60 divisé par 3, 20 centimètres
+                            # cubes chacune. Trois pyramides, et le prisme est vide. » : « 60 »,
+                            # « 3 » et « 20 » tombent AVANT ce point (AUDIT-AVANCE de 2,34 s,
+                            # 3,48 s et 3,71 s). On reformule sur la seconde phrase ; le calcul
+                            # reste lisible sur la carte de question (« 60 cm³ de sable. »).
+                            [["Trois pyramides,"], "et le prisme est vide."])
 
         # ── 03 : on verse, une, deux, trois ────────────────────────────────
         self.clear()

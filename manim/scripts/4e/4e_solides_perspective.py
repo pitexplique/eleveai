@@ -366,6 +366,21 @@ class SolidesPerspective4e(Paysage4e):
         self.montrer_ligne(lignes[2], Indicate(cu.caches, color=CACHE_C, scale_factor=1.0))
         self.attendre_voix(marge=1.0)
 
+    def _carte_choix(self, lettre, txt, largeur, fs):
+        """⛔ La carte d'un choix, avec la PLACE DU ✓ au bout. Le socle étire le libellé
+        jusqu'à 0,4 du bord et pose le ✓ à 0,4 du bord DROIT : sur « en vraie grandeur »
+        il touchait le « r » (mesuré à l'image : écart 0 px, le seul des 20 paysages de
+        4e — les 39 autres cartes vont de 18 à 500 px). `BORDS=1` ne voit rien.
+        ⚠️ En paysage la carte vient de `_carte_choix`, PAS de `_carte` : surcharger
+        `_carte` ici ne ferait rien du tout, et ça ne se verrait qu'à l'image.
+        Surcharge locale et non dans `pythagore_pauses.py`, que les autres séries du
+        site utilisent."""
+        c = super()._carte_choix(lettre, txt, largeur, fs)
+        cadre, ligne = c
+        if ligne.width > largeur - 1.0:
+            ligne.scale_to_fit_width(largeur - 1.0).align_to(cadre.get_left() + RIGHT * 0.2, LEFT)
+        return c
+
     def construct(self):
         self.page_de_garde()
         self.ecran_situation()

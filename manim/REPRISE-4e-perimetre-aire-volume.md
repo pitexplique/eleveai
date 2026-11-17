@@ -144,6 +144,45 @@ BORD → script short (même contrôle, en `-r 1080,1920`) → `manim/poste2/4e_
     identifiants sont `aire_perimetre_comprendre` et `aire_perimetre_polygone`. Vérifier un `microId`
     dans la banque (`lib/tutor-v4/questionBank/3e/maths/*.bank.ts`) avant de l'écrire dans un `aussi`.
 
+### Leçons 39 à 41 — le ✓ qui mord, et la carte qu'on ne surcharge pas (17/11)
+
+39. ⛔⛔ **Le ✓ de la bonne réponse mord la dernière lettre, et AUCUN garde-fou ne le voit.**
+    Le socle pose le ✓ à distance fixe du bord droit de la carte
+    (`pythagore_pauses.py` : `move_to(b[0].get_right() + LEFT * 0.38)`) pendant que le gabarit
+    étire le libellé jusqu'à 0,4 (paysage) ou 0,8 (short) du bord : sur un libellé long, les
+    deux se rencontrent. `BORDS=1` ne voit rien — rien ne sort du cadre. Remède d'origine :
+    `manim/scripts/cm2/aire_comprendre.py` ; on réserve la place du ✓ (`largeur - 1.0` en
+    paysage, `self.LARG - 1.2` en short), **dans le script**, jamais dans le socle partagé que
+    les autres séries du site utilisent.
+40. ⛔⛔ **En PAYSAGE la carte vient de `_carte_choix` (stmg), en SHORT de `_carte`
+    (pythagore_pauses).** Surcharger `_carte` dans un paysage ne fait RIEN : la méthode n'est
+    jamais appelée, et rien ne le signale — ni erreur, ni audit, ni bords. La session 3e y a
+    perdu deux rendus. ⭐ Vérifier par introspection AVANT de rendre :
+    `C._carte_choix.__qualname__` (ou `_carte`) doit commencer par le nom de TA classe.
+41. ⭐⭐ **Compter ce défaut sur les voix ou sur le manifeste donne un chiffre FAUX, toujours
+    trop grand** : la carte porte « 30 m³ » là où la voix dit « 30 mètres cubes ». Estimé sur
+    les textes dits : 14 paysages et 15 shorts. Mesuré sur les MP4 : **10 shorts sur 20, et
+    1 SEUL paysage sur 20** (`4e-solides-perspective`, 1re question, « en vraie grandeur »,
+    écart 0 px ; les 39 autres cartes vont de 18 px à 500 px, médiane 283).
+    Outil : `python manim/poste2/verifier-coche-carte.py <mp4> <seconde>`. ⚠️ Il ne regarde que
+    la colonne des cartes : en paysage l'explication est écrite en VERT elle aussi, et la
+    chercher sur toute l'image fait partir le cadrage.
+
+### Leçon 42 — les nombres qui s'affichent avant d'être dits (17/11)
+
+42. ⛔ **Dans un SHORT, un morceau de la phrase de réponse qui n'a PAS de repère après le
+    premier point de la voix se pose SANS attendre** : `_cue` ne cherche qu'à partir de là, et
+    `_poser` joue le morceau tout de suite quand il ne trouve rien. D'où l'AUDIT-AVANCE.
+    Trois épisodes en portaient : `volume-lien-aire` (« 3 », « 0,5 », « 1,5 » : 0,31 / 0,65 /
+    2,12 s), `volume-pyramide` (« 60 », « 3 », « 20 » : 2,34 / 3,48 / 3,71 s) et `volume-defi`
+    (« 400 », « 25 » : 1,25 / 1,81 s). ⭐ Le remède : reformuler la phrase ÉCRITE sur la
+    SECONDE phrase de la voix (⛔ sans toucher à la voix, validée). Et quand le premier point
+    tombe à la fin — `volume-defi` : « Réponse A ! 10 000 divisé par 400, 25 jours. » — il n'y
+    a rien après lui : la phrase ne doit alors porter AUCUN nombre.
+    ⚠️ Choisir pour chaque morceau un premier mot long que la voix dit APRÈS ce point :
+    « Donc 1 500 L. » n'a pas de repère (« donc » est absent de la voix) et se posait encore
+    sans attendre ; « 1 500 litres. » se cale sur « litres ».
+
 ## La poignée cachée — les 20 shorts de 4e corrigés le 17/11
 
 **Ce qui n'allait pas.** Sur l'écran `04-commentaire`, la tête de Ti-Margo couvrait une lettre de

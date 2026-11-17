@@ -76,7 +76,17 @@ class ShortVolumeLienAire4e(Short4e):
         self.ecran_question("02-question", "02b-reponse",
                             ["Fond : 3 m².", "Eau : 0,5 m.", "Combien de litres ?"],
                             ["1 500 L", "150 L", "15 000 L"], 0,
-                            [["3", "× 0,5", "= 1,5 m³"], ["1 m³", "= 1 000 L"], "donc 1 500 L."])
+                            # ⛔ Leçon 28 : dans un SHORT, la phrase de réponse ne porte que
+                            # ce qui est dit APRÈS le premier point de la voix de réponse —
+                            # « _cue » ne cherche qu'à partir de là, et un morceau sans repère
+                            # se pose SANS attendre, donc en avance. La voix dit « Réponse A !
+                            # 3 fois 0,5, c'est 1,5 mètre cube. Un mètre cube fait mille
+                            # litres : 1 500 litres. » : « 3 », « 0,5 » et « 1,5 » tombent
+                            # avant ce point (AUDIT-AVANCE de 0,31 s, 0,65 s et 2,12 s). On
+                            # reformule donc sur la SECONDE phrase. Les données du calcul
+                            # restent lisibles : la carte de question porte « Fond : 3 m². »
+                            # et « Eau : 0,5 m. ».
+                            [["Un mètre cube", "fait mille litres."], "1 500 litres."])
 
         # ── 03 : le quart d'heure ───────────────────────────────────────────
         self.clear()

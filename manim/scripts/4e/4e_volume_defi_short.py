@@ -81,7 +81,12 @@ class ShortVolumeDefi4e(Short4e):
         self.ecran_question("02-question", "02b-reponse",
                             ["La citerne : 10 000 L.", "400 L par jour.", "Combien de jours ?"],
                             ["25 jours", "40 jours", "2,5 jours"], 0,
-                            [["10 000", "÷ 400", "= 25 jours."]])
+                            # ⛔ Leçon 28, cas extrême : la voix est « Réponse A ! 10 000 divisé
+                            # par 400, 25 jours. » — le premier point tombe À LA FIN, donc il n'y a
+                            # RIEN après lui pour caler un morceau. La phrase ne doit alors porter
+                            # AUCUN nombre (sinon AUDIT-AVANCE, mesuré à 1,25 s et 1,81 s). Les
+                            # nombres restent sur la carte de question et sur la carte gagnante.
+                            [["Le volume de la citerne"], "divisé par la dose d'un jour."])
 
         # ── 03 : 25 jours, et plus rien ─────────────────────────────────────
         self.clear()
