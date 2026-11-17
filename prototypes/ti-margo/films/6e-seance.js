@@ -17,7 +17,20 @@ FILMS['restaurant']=function(outils){
   const [acc,car,imp,grp,dou,q,cho,des,com,f]=clips.map(x=>x[1]), FIN=+(f+DUR['09-abonne']+.5).toFixed(2);
   const fin=x=>A[x]+DUR[x];
 
-  poserClasse(); const tab=poserTableau({L:4.4,H:3,x:0,y:4.55});
+  /* ⭐ 17/11, Frédéric : « le paysage et le short ? » → le MÊME film en 1920 × 1080 (série 6e-seance-paysage,
+     qui relit ce fichier) : Ti Margo à gauche, un grand tableau à droite ; les dessins (prévus pour l'ardoise
+     1056 × 720 du short) y sont agrandis ×1,25 et centrés. */
+  poserClasse(); const tab=PAYSAGE?poserTableau({L:6.6,H:3.75,x:1.85,y:2.75}):poserTableau({L:4.4,H:3,x:0,y:4.55});
+  if(PAYSAGE){ const c=tab.c, f=tab.fond, W=tab.W, H=tab.H;
+    tab.effacer=()=>{ c.setTransform(1,0,0,1,0,0); c.fillStyle=f; c.fillRect(0,0,W,H); c.setTransform(1.25,0,0,1.25,(W-1056*1.25)/2,(H-720*1.25)/2); };
+    const css2=document.createElement('style'); css2.textContent=`
+      #titre{left:520px;right:520px;top:40px;font-size:70px;}
+      #echelle{left:560px;right:560px;top:170px;}
+      #legende{left:60px;right:60px;top:auto!important;bottom:28px;font-size:46px!important;padding:12px 26px;border-radius:30px;line-height:1.2;}
+      #carte{left:760px!important;right:60px!important;top:90px!important;}
+      #fin{left:430px;right:430px;top:60px;font-size:56px;padding:22px;}
+      #fin .site{font-size:88px;margin:6px 0 12px;} #fin .geste{margin:4px 0;} #fin .ico{font-size:62px;}`;
+    document.head.append(css2); }
   outils.panneau.style.display='none'; cssCartes();
   /* La carte du socle s'appelle « Au choix ! » ici : il n'y a pas de bonne réponse. */
   const css=document.createElement('style');
@@ -167,7 +180,15 @@ FILMS['restaurant']=function(outils){
   const tq=m=>mot('05-question',m)-q;
   qd.jusque('Mets'); const pauseQ=[qd('Mets pause, et choisis !')];
 
-  poserMiniature(outils,car+1,'Le restaurant<br>de la classe',ardoiseMini([['Plat imposé'],['+ à la carte','#ffd43b']]));
+  if(!PAYSAGE) poserMiniature(outils,car+1,'Le restaurant<br>de la classe',ardoiseMini([['Plat imposé'],['+ à la carte','#ffd43b']]));
+  else window.tiMargoMiniature=()=>{ const {$,carte,legende}=outils; window.MINI=true; window.tiMargo.aller(car+1);
+    carte.style.display='none'; legende.style.display='none'; $('titre').style.display='none'; $('fin').style.display='none'; $('echelle').style.display='none';
+    const m=document.createElement('div'); m.className='cv';
+    m.innerHTML='Le restaurant<br>de la classe<div style="color:#e8590c;font-size:84px;margin-top:8px">CHACUN SA FAÇON</div>';
+    m.style.cssText='left:700px;right:60px;top:120px;z-index:6;font-size:100px;line-height:1.05;text-align:center;background:#fff;border:8px solid #17452a;border-radius:40px;padding:26px 20px;';
+    document.body.append(m);
+    const d=document.createElement('div'); d.className='cv'; d.textContent='Dessin animé';
+    d.style.cssText='left:900px;right:260px;bottom:60px;text-align:center;font-size:64px;background:#17452a;color:#fff;border-radius:999px;padding:12px 0;z-index:6;'; document.body.append(d); };
   return { clips,FIN,titre:'Le restaurant de la classe',ceinture:0,finTitre,groupes,finClip:'09-abonne',
     cuts:[finTitre,car,imp,grp,dou,q,cho,des,com,f],
     /* Pas de bonne réponse : la carte s'arrête au début de « 06-choix » (finR), aucune n'est marquée. */
@@ -179,7 +200,10 @@ FILMS['restaurant']=function(outils){
       const g=gestes(P,T); dessiner(T);
       const dansQ=T>=q&&T<cho, dansF=T>=f, gros=T<finTitre;
       tab.g.visible=!gros&&!dansQ&&!dansF&&!window.MINI;
-      cadrer(cam,{gros,large:dansQ||dansF});
+      if(PAYSAGE){ scene.x=-2.95; scene.ry=.22; cam.x=0; cam.y=2.3; cam.d=7.1; cam.e=.02;
+        if(gros){ scene.x=0; scene.ry=-.12; cam.y=2.75; cam.d=8.6; }
+        if(dansQ||dansF){ scene.x=-3.6; scene.ry=.25; } }
+      else cadrer(cam,{gros,large:dansQ||dansF});
 
       if(T<acc+1.4) g.salut(T-acc,1.4);
       else if(gros) g.ouvre();
@@ -192,6 +216,7 @@ FILMS['restaurant']=function(outils){
       else if(T<f){ T<tRep?g.ouvre():g.pouce(); }
       else { T-f<2.35?g.ouvre():g.pouce(); }
 
-      if(window.MINI){ scene.x=.1; scene.ry=-.12; cam.x=.2; cam.y=2.62; cam.d=9.2; cam.e=.04; P.jaw=.62; g.fier(); }
+      if(window.MINI&&PAYSAGE){ tab.g.visible=false; scene.x=-3.1; scene.ry=.2; cam.x=0; cam.y=2.75; cam.d=7.6; cam.e=.02; P.jaw=.62; g.fier(); }
+      else if(window.MINI){ scene.x=.1; scene.ry=-.12; cam.x=.2; cam.y=2.62; cam.d=9.2; cam.e=.04; P.jaw=.62; g.fier(); }
     } };
 };

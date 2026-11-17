@@ -103818,6 +103818,90 @@
         "cuisine",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "6e-seance-restaurant",
+      "notionId": "seance",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "En classe avec EleveAI",
+      "type": "longue",
+      "fichier": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-paysage.mp4",
+      "miniature": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-paysage-miniature.png",
+      "titre": "Le restaurant de la classe : chacun apprend à sa façon · En classe avec EleveAI",
+      "accroche": "Ce matin, un prof doit choisir pour 25 élèves. Qu'est-ce qu'il leur prend ?\n\nUne séance vécue en 6e, racontée par Ti Margo :\n• d'abord en classe entière, un plat imposé pour tous : la carte mentale à colorier ;\n• ensuite en groupes, à la carte : le coach, les exercices interactifs, le cours au cahier, le découpage, la vidéo ;\n• pas de bonne réponse : chacun apprend à sa façon, et chacun a son objectif ;\n• le dessert : va trouver des longueurs dans ce que tu aimes.\n\nDessin animé, voix de synthèse.\n\n👩‍🏫 La séance en détail, clic par clic : https://www.eleveai.fr/seances\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=aire_longueur&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le prof doit choisir"
+        ],
+        [
+          "00:15",
+          "Classe entière, puis en groupes"
+        ],
+        [
+          "00:36",
+          "Au choix !"
+        ],
+        [
+          "00:51",
+          "Chacun sa façon"
+        ],
+        [
+          "01:06",
+          "Et toi ?"
+        ]
+      ],
+      "tags": [
+        "séance",
+        "enseignant",
+        "prof",
+        "différenciation",
+        "pédagogie",
+        "carte mentale",
+        "travail en groupes",
+        "classe entière",
+        "autonomie",
+        "coach",
+        "maths",
+        "6e",
+        "collège",
+        "CRPE",
+        "Ti Margo",
+        "dessin animé",
+        "EleveAI"
+      ],
+      "url": "https://youtu.be/aCes5qsfHs0"
+    },
+    {
+      "id": "6e-seance-restaurant-short",
+      "notionId": "seance",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "En classe avec EleveAI",
+      "type": "short",
+      "renvoie_vers": "6e-seance-restaurant",
+      "fichier": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-short.mp4",
+      "miniature": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-short-miniature.png",
+      "titre": "Le restaurant de la classe : et toi, tu prends quoi ? #prof #maths",
+      "accroche": "Ce matin, un prof doit choisir pour 25 élèves. Qu'est-ce qu'il leur prend ? Un plat imposé pour tous, puis chacun à la carte.\n\nDessin animé, voix de synthèse.\n👉 Et toi, au restaurant de la classe, tu prends quoi ? Réponds en commentaire !\n\n▶️ La vidéo complète : {{LONGUE}}\n👩‍🏫 La séance, clic par clic : https://www.eleveai.fr/seances\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #prof #maths #6e #pedagogie",
+      "tags": [
+        "séance",
+        "prof",
+        "enseignant",
+        "différenciation",
+        "pédagogie",
+        "carte mentale",
+        "groupes",
+        "maths",
+        "6e",
+        "CRPE",
+        "Ti Margo",
+        "dessin animé",
+        "EleveAI",
+        "Shorts"
+      ],
+      "url": "https://youtube.com/shorts/-2Fq5VurmGw"
     }
   ]
 }
