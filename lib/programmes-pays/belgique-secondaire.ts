@@ -105,7 +105,7 @@ export const BELGIQUE_S1: ProgrammePays = {
     },
     {
       code: "2.1 SF1", domaine: GRA, texte: "Calculer périmètres et aires : côté d'un polygone régulier de périmètre donné, périmètre du cercle, aire d'une figure simple, décomposition d'une surface complexe.",
-      couverture: "complete", micros: [...m("6e", "aire_perimetre_figure", "cercle_perimetre"), ...m("5e", "aire_composer", "polygone_regulier_reconnaitre"), ...m("3e", "aire_disque", "aire_figure_composee", "aire_perimetre_polygone", "aire_triangle"), ...m("4e", "aire_perimetre_rectangle", "aire_perimetre_carre", "aire_rectangle", "aire_carre", "aire_parallelogramme", "quadrilatere_parallelogramme_aire")],
+      couverture: "complete", micros: [...m("6e", "aire_perimetre_figure", "cercle_perimetre"), ...m("5e", "aire_composer", "polygone_regulier_reconnaitre"), ...m("3e", "aire_disque", "aire_figure_composee", "aire_perimetre_polygone", "aire_perimetre_defi", "aire_triangle"), ...m("4e", "aire_perimetre_rectangle", "aire_perimetre_carre", "aire_rectangle", "aire_carre", "aire_parallelogramme", "quadrilatere_parallelogramme_aire")],
       note: "Âge : les micros de rappel de 4e (rectangle, carré, parallélogramme) et de 3e (polygone, triangle) s'ajoutent à celles de 6e et 5e.",
     },
     {

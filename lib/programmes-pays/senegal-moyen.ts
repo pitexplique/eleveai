@@ -576,6 +576,7 @@ export const SENEGAL_3E: ProgrammePays = {
       couverture: "complete",
       micros: [
         ...m("3e", "volume_solide_reconnaitre", "volume_representation", "section_cone_pyramide", "pythagore_solide", "volume_agrandissement_reduction", "volume_pyramide", "volume_cone", "volume_pyramide_cone_reduction", "aire_pyramide_cone"),
+        ...m("4e", "agrandissement_volume"),
         ...m("cm2", "solide_patron"),
       ],
       note: "Patrons : on les reconnaît, on ne les trace pas.",

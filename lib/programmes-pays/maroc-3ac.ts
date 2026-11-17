@@ -200,6 +200,7 @@ export const MAROC_3AC: ProgrammePays = {
       couverture: "complete",
       micros: [
         ...m("3e", "volume_pave", "volume_prisme", "volume_cylindre", "volume_boule", "pythagore_solide", "aire_agrandissement_reduction", "volume_agrandissement_reduction", "volume_pyramide", "volume_cone", "aire_prisme_droit", "aire_cylindre", "aire_pyramide_cone", "aire_sphere"),
+        ...m("4e", "agrandissement_volume"),
         ...m("seconde", "espace_positions_relatives", "espace_orthogonalite_droite_plan"),
       ],
       note: "Les positions relatives et l'orthogonalité de droites et de plans sur un solide sont entraînées dans deux micros de seconde (âge : un an plus tard).",

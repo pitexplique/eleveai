@@ -528,6 +528,7 @@ export const COTE_DIVOIRE_3E: ProgrammePays = {
       couverture: "partielle",
       micros: [
         ...m("3e", "section_cone_pyramide", "aire_agrandissement_reduction", "volume_agrandissement_reduction", "volume_pyramide", "volume_cone", "volume_pyramide_cone_reduction", "aire_pyramide_cone"),
+        ...m("4e", "agrandissement_volume"),
         ...m("cm2", "solide_patron"),
       ],
       note: "Volumes, aires et réduction couverts ; restent l'angle de développement et les troncs.",

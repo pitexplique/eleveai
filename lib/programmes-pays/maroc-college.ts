@@ -220,7 +220,7 @@ export const MAROC_1AC: ProgrammePays = {
       couverture: "complete",
       micros: [
         ...m("6e", "prop_reconnaitre", "prop_table", "prop_coeff", "echelle_distance_reelle"),
-        ...m("5e", "prop_quatrieme", "prop_pourcentage", "conversion_decimal"),
+        ...m("5e", "prop_quatrieme", "prop_pourcentage", "conversion_decimal", "conversion_avant_calcul"),
         ...m("3e", "prop_vitesse_debit"),
       ],
     },
