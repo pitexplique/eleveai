@@ -12,17 +12,33 @@ WAV : `public/sons/3e-*/`. Marques : `manim/scripts/4e/3e_*_marques.json`. Tout 
 
 | Épisode | Id | Ceinture | Paysage | Short | HD |
 |---|---|---|---|---|---|
-| T1 | `3e-volume-boule` (le ballon, les poumons) | verte | ✅ | ✅ | ✅ 241,8 s / 57,8 s, bords 0 |
-| T2 | `3e-volume-reduction-section` (le gobelet du cinéma) | bleue | ✅ | ✅ | ✅ 214,8 s / 55,3 s, bords 0 |
-| T3 | `3e-section-pave-cube` (la tranche de pain de mie) | jaune | ✅ | ✅ | ✅ 199,1 s / 49,7 s, bords 0 |
-| T4 | `3e-section-cylindre` (le tube d'une trottinette) | verte | ✅ | ✅ | ✅ 187,7 s / 58,3 s, bords 0 |
-| T5 | `3e-section-cone-pyramide` (le volcan, 974) | verte | ✅ | ✅ | ⏳ |
-| T6 | `3e-section-sphere` (les parallèles du globe) | bleue | ✅ | ✅ | ⏳ |
-| T7 | `3e-section-longueur` (la position en vol) | bleue | ✅ | ✅ | ⏳ |
-| T8 | `3e-section-defi` (scanner pour imprimer en 3D) | marron | ✅ | ✅ | ⏳ |
+| T1 | `3e-volume-boule` (le ballon, les poumons) | verte | ✅ | ✅ | ✅ 241,8 s / 57,8 s — **les deux à jour** |
+| T2 | `3e-volume-reduction-section` (le gobelet du cinéma) | bleue | ✅ | ✅ | ⏳ paysage À REFAIRE · ✅ short 55,3 s |
+| T3 | `3e-section-pave-cube` (la tranche de pain de mie) | jaune | ✅ | ✅ | ⏳ paysage À REFAIRE · ✅ short 49,7 s |
+| T4 | `3e-section-cylindre` (le tube d'une trottinette) | verte | ✅ | ✅ | ✅ 187,7 s / 58,3 s — **les deux à jour** |
+| T5 | `3e-section-cone-pyramide` (le volcan, 974) | verte | ✅ | ✅ | ⏳ paysage ET short À REFAIRE |
+| T6 | `3e-section-sphere` (les parallèles du globe) | bleue | ✅ | ✅ | ⏳ paysage ET short À REFAIRE |
+| T7 | `3e-section-longueur` (la position en vol) | bleue | ✅ | ✅ | ✅ 196,9 s / short à vérifier |
+| T8 | `3e-section-defi` (scanner pour imprimer en 3D) | marron | ✅ | ✅ | ⏳ paysage et short EN COURS de 1er rendu |
 
-⚠️ Les quatre premiers paysages ont été RE-RENDUS après la correction de la pause (leçon 32) :
-les durées ci-dessus sont celles du premier rendu, à remettre à jour.
+## ⛔ L'état EXACT des MP4 au passage de main (17/11, 06 h 15)
+
+Les 16 scripts sont **finis, contrôlés et commités** : il ne reste QUE des rendus et des contrôles.
+Le dernier commit qui change l'image est `73a262d2c` (06:09) — **tout MP4 plus ancien que l'édition
+qui l'a produit est périmé**. Au moment du passage de main :
+
+**À jour, ne pas y toucher (8 MP4)** : T1 paysage + short, T2 short, T3 short, T4 paysage + short,
+T7 paysage, et T7 short (à regarder une fois, il est passé juste après la correction du bas).
+
+**À refaire ou en cours (8 MP4)** : T2, T3, T5 et T6 **paysages** (ils datent d'avant l'écartement
+des textes et des figures) ; T5 et T6 **shorts** (rendus pendant que leur bas était remonté) ;
+T8 paysage et short (premier rendu, il était en cours).
+
+⚠️ Des files de rendu tournaient en arrière-plan dans la session précédente et ont pu s'arrêter
+avec elle. **Première chose à faire : comparer les dates des MP4 à celles des commits**
+(`ls -l --time-style=+%H:%M:%S manim/sorties/3e/maths/*/*/*.mp4` et `git log -1 --format=%cd`)
+et relancer ce qui manque. Un rendu de trop ne coûte que du temps ; un MP4 périmé mis en ligne
+coûte une vidéo fausse chez les élèves.
 
 ## La chaîne d'un épisode (rappel)
 
