@@ -386,3 +386,23 @@ manifeste, et ce tableau.
 ⛔ Ne rien publier sur la foi d'un « tout est à jour » : un MP4 périmé mis en ligne, c'est une
 vidéo fausse projetée en classe. La règle reste celle du haut de ce fichier — comparer la date du
 MP4 à celle du dernier commit qui change son image.
+
+## ⭐ LE lot de rendus qui reste : `manim/poste2/3e_lot_final.sh`
+
+**11 rendus, un seul passage par fichier** — les périmés et la coche sont réunis, pour qu'aucun
+fichier ne parte deux fois (le verrou est unique et trois sessions sont dessus) :
+
+- **5 paysages** : T1, T2, T4, T6, T7 ;
+- **6 shorts** : T1, T2, T3, T4, T5, T6.
+
+Pas dans le lot, parce qu'à jour ET déjà corrigés : paysages T3, T5, T8 ; shorts T7, T8.
+
+⛔ **Avant de lancer**, ajouter la surcharge de la coche aux **9 scripts** qui ne l'ont pas
+(la liste est en bas du script). ⚠️ En PAYSAGE la carte vient de `_carte_choix`, dans un SHORT
+de `_carte` : surcharger l'une pour l'autre ne fait rien, et ça ne se voit qu'à l'image.
+⚠️ Ce n'est pas la longueur du libellé qui décide, c'est la largeur de la carte : on applique la
+surcharge partout, les libellés courts ne bougent pas.
+
+⚠️ Le script porte une garde contre le CRLF que git lui donnera au checkout (la session 4e a
+perdu un rendu là-dessus). Je n'ai pas réussi à reproduire le symptôme sur cette machine — la
+garde est là par précaution, elle ne change rien quand le fichier est propre.
