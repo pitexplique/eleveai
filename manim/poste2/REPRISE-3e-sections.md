@@ -21,24 +21,27 @@ WAV : `public/sons/3e-*/`. Marques : `manim/scripts/4e/3e_*_marques.json`. Tout 
 | T7 | `3e-section-longueur` (la position en vol) | bleue | ✅ | ✅ | ✅ 196,9 s / short à vérifier |
 | T8 | `3e-section-defi` (scanner pour imprimer en 3D) | marron | ✅ | ✅ | ⏳ paysage et short EN COURS de 1er rendu |
 
-## ⛔ L'état EXACT des MP4 au passage de main (17/11, 06 h 15)
+## ⛔ L'état EXACT des MP4 (17/11, 06 h 40 — DERNIÈRE mise à jour de la 1ʳᵉ session)
 
-Les 16 scripts sont **finis, contrôlés et commités** : il ne reste QUE des rendus et des contrôles.
-Le dernier commit qui change l'image est `73a262d2c` (06:09) — **tout MP4 plus ancien que l'édition
-qui l'a produit est périmé**. Au moment du passage de main :
+Les 16 scripts sont **finis, contrôlés et commités** : il ne reste que des rendus et des contrôles.
 
-**À jour, ne pas y toucher (8 MP4)** : T1 paysage + short, T2 short, T3 short, T4 paysage + short,
-T7 paysage, et T7 short (à regarder une fois, il est passé juste après la correction du bas).
+**À jour, ne pas y toucher (6 MP4)** : les **paysages** T1, T2, T3, T4, T7, T8.
 
-**À refaire ou en cours (8 MP4)** : T2, T3, T5 et T6 **paysages** (ils datent d'avant l'écartement
-des textes et des figures) ; T5 et T6 **shorts** (rendus pendant que leur bas était remonté) ;
-T8 paysage et short (premier rendu, il était en cours).
+**À re-rendre (10 MP4)** :
+- les **8 shorts**, sans exception — commit `02e1097fc` : leur bas se cale désormais sur les
+  pixels de Ti-Margo (voir la leçon 40), les MP4 actuels le touchent encore ;
+- les **paysages T5 et T6** — commit `a2928def1` : en écartant les figures du texte, je les avais
+  poussées sur la mascotte (en paysage elle occupe x ∈ [5,8 ; 6,7] et y ∈ [−3,1 ; −2,7]).
 
-⚠️ Des files de rendu tournaient en arrière-plan dans la session précédente et ont pu s'arrêter
-avec elle. **Première chose à faire : comparer les dates des MP4 à celles des commits**
-(`ls -l --time-style=+%H:%M:%S manim/sorties/3e/maths/*/*/*.mp4` et `git log -1 --format=%cd`)
-et relancer ce qui manque. Un rendu de trop ne coûte que du temps ; un MP4 périmé mis en ligne
-coûte une vidéo fausse chez les élèves.
+⚠️ **Un `ECHEC manim rc=1` avec `FileNotFoundError` sur `partial_movie_file_list.txt` ne veut pas
+dire que le rendu a raté** : il arrive quand deux rendus manim partagent le même `media_dir`. Le
+verrou de `4e_hd.sh` sérialise les rendus d'une même file, pas ceux de deux sessions lancées en
+parallèle sur le même dossier. Vérifier le MP4 (durée par `ffprobe`, une image pour la mise en
+page) avant de le refaire.
+
+**Reste à contrôler, et rien n'en est fait** : les planches de T6 et T8 (jamais vus en images),
+les écrans corrigés de T2 (04), T3 (02 et 03), T5 (02 et 04), T6 (02 et 03), T8 (02 et 03), et
+les compteurs de T5, T6, T7 et T8.
 
 ## La chaîne d'un épisode (rappel)
 
