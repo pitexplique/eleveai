@@ -103674,6 +103674,150 @@
         "animaux",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "ce2-masse-relations",
+      "pas_avant": "2027-06-12",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_relations",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/masse/02-relations/eleveai-maths-ce2-masse-relations.mp4",
+      "miniature": "ce2/maths/masse/02-relations/eleveai-maths-ce2-masse-relations.png",
+      "titre": "1 kg 200 g, c'est combien de grammes ? — Les relations entre les unités — épisode 2 · Maths CE2",
+      "accroche": "Emma est torréfactrice : elle grille les grains de café, puis elle les met en paquets. Pour peser ses paquets, elle passe des kilogrammes aux grammes.\n\nDans cette vidéo :\n• 1 kg = 1 000 g : 4 paquets de 250 g font 1 kg\n• un demi-kilogramme, c'est la moitié de 1 000 g : 500 g\n• 1 kg 200 g = 1 000 g + 200 g = 1 200 g\n• même idée pour la tonne : 1 t = 1 000 kg, 2 t = 2 000 kg\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : Emma a 3 kg de café ; elle fait des paquets de 500 g : combien de paquets ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_relations&display=simple\n\n⚖️ Épisode 2 de la série Masses d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "1 kg 200 g = ? g"
+        ],
+        [
+          "00:16",
+          "1 kg = 1 000 g"
+        ],
+        [
+          "00:36",
+          "Question 1"
+        ],
+        [
+          "01:05",
+          "1 kg 200 g = 1 200 g"
+        ],
+        [
+          "01:25",
+          "Question 2"
+        ],
+        [
+          "01:58",
+          "À toi de jouer"
+        ],
+        [
+          "02:13",
+          "Correction"
+        ],
+        [
+          "02:24",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "relations entre unités",
+        "kilogramme",
+        "gramme",
+        "tonne",
+        "1 kg = 1 000 g",
+        "conversion",
+        "café",
+        "torréfactrice",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:36",
+          "question": "Un demi-kilogramme, c'est combien de grammes ?",
+          "choix": [
+            "50 grammes",
+            "200 grammes",
+            "500 grammes"
+          ],
+          "reponse": 2,
+          "explication": "La moitié de 1 000, c'est 500. Un demi-kilogramme, c'est 500 grammes."
+        },
+        {
+          "t": "01:25",
+          "question": "Un élève écrit : 2 kilogrammes 50 grammes, c'est 250 grammes. A-t-il raison ?",
+          "choix": [
+            "oui",
+            "non, c'est 2 050 grammes",
+            "non, c'est 2 500 grammes"
+          ],
+          "reponse": 1,
+          "explication": "2 kilogrammes, c'est 2 000 grammes. 2 000 + 50 : 2 050 grammes."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ]
+    },
+    {
+      "id": "ce2-masse-relations-short",
+      "pas_avant": "2027-06-12",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_relations",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-masse-relations",
+      "fichier": "ce2/maths/masse/02-relations/eleveai-maths-ce2-masse-relations-short.mp4",
+      "miniature": "ce2/maths/masse/02-relations/eleveai-maths-ce2-masse-relations-short-miniature.png",
+      "titre": "1 kg 200 g de riz… ou 1 200 kg ? #maths #ce2",
+      "accroche": "Sur le sac de riz : 1 kilogramme 200 grammes. Mon copain lit : 1 200 kilogrammes ! Il le soulève… facile !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : 3 kilogrammes 500 grammes, c'est combien de grammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_relations&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce2 #primaire",
+      "tags": [
+        "masse",
+        "kilogramme",
+        "gramme",
+        "conversion",
+        "riz",
+        "sac",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "1 kilogramme 200 grammes, c'est…",
+          "choix": [
+            "120 grammes",
+            "1 200 kilogrammes",
+            "1 200 grammes"
+          ],
+          "reponse": 2,
+          "explication": "1 kilogramme, c'est 1 000 grammes. Plus 200 : 1 200 grammes."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
     }
   ]
 }

@@ -126,6 +126,30 @@ class MasseRelationsCE2Base(MasseEstimerCPBase):
                 self.au_t(mot) if isinstance(mot, (int, float)) else self.au_mot(mot)
             self.play(FadeIn(m, shift=UP * 0.1), run_time=run_time)
 
+    _ph_egal = False
+
+    def _disposer_q(self, question, choix, phrase):
+        """(18/11) Avec _ph_egal : les lignes de la phrase de réponse à interligne ÉGAL, mesuré de ligne de base à
+        ligne de base (arrange(DOWN) espace les boîtes : une ligne à jambage « g, » paraissait plus écartée)."""
+        r = super()._disposer_q(question, choix, phrase)
+        if not self._ph_egal:
+            return r
+        ph = r[5]
+
+        def base(m):
+            for f in m.get_family():
+                txt = f.text.replace(" ", "") if hasattr(f, "text") else ""
+                for k, ch in enumerate(txt):
+                    if ch.isalnum() and ch not in "gjpqyQ," and k < len(f.submobjects):
+                        return f.submobjects[k].get_bottom()[1]
+            return m.get_bottom()[1]
+
+        bases = [base(l) for l in ph]
+        pas = (bases[0] - bases[-1]) / (len(ph) - 1)
+        for i, l in enumerate(ph):
+            l.shift(UP * (bases[0] - i * pas - bases[i]))
+        return r
+
     # ── 00 : page de garde ──────────────────────────────────────────────────
     def page_de_garde(self):
         self.clear()
@@ -315,6 +339,7 @@ class MasseRelationsCE2Base(MasseEstimerCPBase):
 
         self.fs_choix, self.decal_q, self.elargir_q = 22, 2.6, 2.1  # choix longs (« Non, c'est 2 050 grammes »)
         self._ph_mots = {(0, 0): "2 kilogrammes,", (0, 1): "c'est 2 000", (1, 0): 3.96, (2, 0): "2 050 grammes"}
+        self._ph_egal = True
         self.question_gauche("07-question", "07b-reponse",
                              ["Un élève écrit :", "2 kg 50 g = 250 g.", "A-t-il raison ?"],
                              [self.choix(court(c_), fs=22) for c_ in Q2["choix"]], Q2["reponse"],
@@ -322,6 +347,7 @@ class MasseRelationsCE2Base(MasseEstimerCPBase):
                              -0.4, couper={0: ("2 kg =", "2 000 g,")},
                              mot_q="Un élève", avant_q=avant_q, autres_r=apres)
         self._ph_mots = {}
+        self._ph_egal = False
         self.fs_choix, self.decal_q, self.elargir_q = 26, 1.8, 1.2
 
     # ── 08 : le défi (3 kg en paquets de 500 g) ────────────────────────────
