@@ -250,3 +250,31 @@ L'écran de fin « Entraîne-toi sur eleveai.fr » est PARFAIT (24/10) : on gard
 - Contrôle : le dry run ne doit signaler aucun RETARD ; vérifier sur la planche les écrans où un nombre apparaît.
 - ⛔ PRÉVENIR AVANT DE RENDRE (Frédéric, 25/10 : « ça coûte beaucoup d'argent, les erreurs au départ ») : AVANT tout rendu HD, lancer l'audit automatique de synchro en dry run (modèle : section « AUDIT » de `manim/scripts/stmg/stats_lycee_j1_commun.py`, lancé par `AUDIT=1 python -m manim render --dry_run …`). Il doit afficher 0 ligne `AUDIT-AVANCE`. Chaque nouveau module commun (fractions, etc.) reprend cet audit dès le premier épisode. Corriger en brouillon coûte une minute ; refaire un rendu HD en coûte dix.
 - Ordre de travail de chaque vidéo : voix + calage → dry run (0 RETARD, 0 AUDIT-AVANCE, BORDS=1 sans alerte) → planche basse définition → UN SEUL rendu HD → `verifier-bords-video.py` → planche finale.
+
+## ⛔⛔ UN INSTRUMENT NE PROUVE RIEN TANT QU'ON N'A PAS REGARDÉ L'IMAGE (lot 4e/3e, 17/11/2026)
+Trois fois le même jour, un outil a désigné un défaut qui n'existait pas, et les trois fois il aurait fait relancer des rendus HD. **Dix rendus évités en tout**, uniquement parce que quelqu'un a extrait l'image au lieu de croire le chiffre.
+
+- ⭐⭐ **Le SOURCE n'est pas le RÉSULTAT.** « La surcharge manque dans le script » et « le MP4 est plus vieux que le commit » décrivent le source. « Le ✓ touche la dernière lettre » et « le MP4 ne correspond pas à ce qui a été rendu » décrivent le résultat. **Seul le résultat est un défaut, et il se mesure à l'image.** En 3e, neuf scripts n'avaient pas la surcharge du ✓ : sur les seize MP4, l'écart allait de 20 à 449 px, rien ne touchait. Zéro rendu nécessaire.
+- ⚠️ **Trois valeurs qui se ressemblent trop sont un artefact, pas trois défauts.** Les faux chevauchements sortaient à −32, −33 et −37 px. Des défauts indépendants ne tombent pas si près.
+
+### ⛔ Un MP4 n'est pas périmé parce qu'un commit est plus récent que lui
+Un commit **enregistre** un contenu, il ne l'écrit pas : huit shorts de 3e écrits en une passe à 07:18:40 ont été commités ensemble à 07:32:13, et les cinq rendus faits entre les deux paraissaient en retard. Sept MP4 déclarés périmés, les seize étaient bons.
+La bonne référence est le **mtime du `.py`**, et la preuve tient en trois points, les trois nécessaires :
+1. `mtime(.py) < mtime(.mp4)` ;
+2. le `.py` sur le disque est identique à HEAD — ce qui est commité EST ce qui a été rendu ;
+3. le `mtime` du MP4 **coïncide avec un log de rendu** : c'est un rendu, pas une copie. C'est le point qu'on oublie, et `cp`/`mv` rafraîchissent un mtime sans rien rendre.
+
+`python -X utf8 -I manim/poste2/verifier-fraicheur-mp4.py --serie <classe>` — il sert aussi de **contrôle de fin de lot** : après un lot, il doit afficher « 0 douteux ». Un rendu sauté en silence y apparaît, alors qu'un compte de lignes dans un log ne le voit pas.
+
+- ⛔ **Corollaire : on ne modifie pas le source d'un script déjà rendu si on ne le re-rend pas.** Une retouche cosmétique rend son MP4 « douteux » pour toujours, et la session suivante relancera le rendu pour rien. Aucun outil ne peut distinguer une retouche d'un vrai changement — c'est à nous de ne pas lui mentir. La correction s'ajoute le jour où le script repart en rendu pour une autre raison ; en attendant, on l'écrit dans le fichier qu'on lira ce jour-là.
+
+### ⛔ La coche ✓ des questions-pauses
+Sur la carte gagnante, le ✓ se pose à 0,4 du bord droit alors que le gabarit étire le libellé jusqu'à 0,4 : sur un libellé long il touche la dernière lettre (« en vraie grandeu✓r »). `BORDS=1` ne voit rien — rien ne sort du cadre.
+- ⚠️ **Ce n'est pas la longueur du libellé qui décide, c'est la largeur de la carte** (étroite dans un short). On applique la réserve de place partout : les libellés courts ne bougent pas, et les libellés écrits plus tard sont couverts.
+- ⛔⛔ **En PAYSAGE la carte vient de `_carte_choix`, dans un SHORT de `_carte`.** Surcharger l'une pour l'autre ne fait **rien du tout**, et ça ne se voit qu'à l'image.
+- Mesure : `python -X utf8 -I manim/poste2/verifier-coche-carte.py <mp4> <seconde>` (⚠️ `-X utf8` en plus de `-I`, sinon les accents font planter l'outil). Instant : `02b-reponse + 4 s` pour un short, le milieu de l'écran de réponse pour un paysage, lus dans le `.hd.log`. Trop tôt, on mesure une carte sans ✓.
+- ⚠️ L'outil refuse de mesurer un écran **sans carte** (les écrans « Correction » n'en ont pas) : il prenait un nombre écrit en vert pour une coche.
+
+### ⛔ Un lot de rendus : le vol d'entrée standard
+Dans un `while read`, **toute commande lancée hérite de l'entrée standard de la boucle**. `manim` lit stdin, avale le début de la ligne suivante, et le chemin arrive amputé : un lot est mort sur « ume_pyramide_short.py » — six caractères mangés à « 4e_vol ». La panne se présente comme un fichier introuvable alors que c'est un vol de stdin.
+**Remède : `< /dev/null` sur chaque commande du lot.** Et avant de lancer : relire le lot sans rien rendre (chemins résolus, scènes trouvées). Dix secondes contre vingt-et-un rendus perdus.
