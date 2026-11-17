@@ -1,0 +1,7 @@
+{
+  "voix": "cp-duree-{ep}-short",
+  "sons": "public/sons/cp-duree-{ep}-short",
+  "sortie": "manim/sorties/cp/maths/duree/{num}-{ep}",
+  "nom": "eleveai-maths-cp-duree-{ep}-short",
+  "episodes": { "lire-heure": "01", "placer-aiguilles": "02", "jour-semaine": "03", "ordonner": "04", "defi": "05" }
+}

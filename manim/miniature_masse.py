@@ -38,8 +38,6 @@ EP = [
      "font 1 kg !", True, "blanche"),
     ("ce1", "estimer", "03-estimer", ["ESTIMER", "UNE MASSE"], "1 g : un trombone",
      "1 kg : une brique de lait", True, "blanche"),
-    ("ce1", "probleme", "04-probleme", ["PROBLÈMES", "DE MASSES"], "Plein 1 kg, vide 300 g",
-     "les poissons : 700 g", True, "blanche"),
 ]
 
 

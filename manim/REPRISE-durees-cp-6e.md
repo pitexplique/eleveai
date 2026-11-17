@@ -40,6 +40,14 @@ Notes et outils : `side-session-notes/local_9cbb7607-cba7-48c1-a984-bb5d28d2f97c
 - ✅ Miniatures : `python manim/miniature_duree.py <filtre>` (table `EP` à compléter par épisode) ; short = `… miniature`.
 - ✅ Manifeste **06/05/2027** (paysage + short), fiche YouTube, vignettes, R2 (7 fichiers), `generer-videos-r2.mjs`, coach + Supabase (2 lignes cm1 `duree_calculer`). Commit par chemin (clés `cm1-duree` seulement dans les JSON partagés). Pas poussé.
 
+## Fait le 17/11 (matin, session relève C : le CP)
+- Outils CP : `manim/scripts/cp/duree_marques.py <ep>` (ou `ce1:<ep>`) → `<classe>/duree_<ep>_marques.json` ; commun `manim/scripts/cp/duree_cp_commun.py` (base `PaysageDureeCP` = `PaysageLongueurCM1`, ceinture BLANCHE ; `hl()` horloge hors audit aux nombres réduits à 0,8 (11-12-1 se touchaient), `entoure(hg, n)`, `pointer(hg, "h"|"m", n)` fait tourner UNE aiguille, `sans_aiguille`, `coche_v`, `croix_x`, `chapiteau` ; personnages `rose leo malo inaya tom`).
+- ⚠️ Piège Manim : `FadeIn(hg)` et `Indicate(hg.aig_h)` dans le MÊME `play` → la petite aiguille disparaît pour de bon. Toujours deux `play`.
+- Shorts : série `cp-duree` (`prototypes/ti-margo/films/cp-duree.json`, épisodes lire-heure 01, placer-aiguilles 02, jour-semaine 03, ordonner 04, defi 05) ; outils `cp-duree.js` (`horlogeCraie` aux 12 nombres, `horlogeNum` aiguilles en « nombres du cadran » + `vis` pour les faire pousser, `reveilCraie`, `litCraie`, `placeNombre`) ; `cp-commun.js` (série masses) NON modifié.
+- Scripts de la session (scratchpad) : `hd.sh` (attend verrou + 2,5 Go, HD, copie, bords) et `film.sh` (film sous verrou).
+- ✅ CP 01 `cp_duree_lire_heure` : paysage (Rose horlogère) HD 2 min 50, bords 0 ; short Ti Margo « le réveil » 64 s, réponse C, compteur vérifié (30,5 → 33,2 s).
+- ⏳ CP 02 `cp_duree_placer_aiguilles` : WAV + marques, script (Léo clown), dry run propre, aperçu corrigé, short écrit et contrôlé (compteur 32,9 → 35,9 s) ; reste HD, film, chaîne de fin.
+
 ## Reste, dans l'ordre
 1. ✅ Voix validées (17/11).
 2. ✅ Pilote CM1 `duree_calculer` FINI (17/11). Chaîne type par épisode : WAV (Julie, débit −6, comme les séries CM1) → marques (`aire_marques.py duree:calculer`, à ajouter à ses chemins) → script `manim/scripts/cm1/duree_calculer.py` (modèle `cm1/longueur_convertir.py`) → dry run AUDIT → aperçu -ql → Frédéric valide → HD (verrou) → short Ti Margo (compteur vérifié) → chaîne de fin.

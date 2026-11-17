@@ -6370,24 +6370,6 @@
   "youtube": null,
   "coach": "/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_kg_g&display=simple"
  },
- "ce1-masse-probleme": {
-  "fichier": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme.mp4",
-  "poster": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme.png",
-  "vignette": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme.vignette.webp",
-  "titre": "Le panier pèse 1 kg : et les poissons ? — Problèmes de masses — épisode 4 · Maths CE1",
-  "short": false,
-  "youtube": null,
-  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_probleme&display=simple"
- },
- "ce1-masse-probleme-short": {
-  "fichier": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme-short.mp4",
-  "poster": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme-short-miniature.png",
-  "vignette": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme-short-miniature.vignette.webp",
-  "titre": "1 kg de coquillages ? Et le seau, alors ? #maths #ce1",
-  "short": true,
-  "youtube": null,
-  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_probleme&display=simple"
- },
  "ce1-masse-relation": {
   "fichier": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation.mp4",
   "poster": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation.png",
@@ -8763,6 +8745,24 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_lire&display=simple"
+ },
+ "cp-duree-lire-heure": {
+  "fichier": "cp/maths/duree/01-lire-heure/eleveai-maths-cp-duree-lire-heure.mp4",
+  "poster": "cp/maths/duree/01-lire-heure/eleveai-maths-cp-duree-lire-heure.png",
+  "vignette": "cp/maths/duree/01-lire-heure/eleveai-maths-cp-duree-lire-heure.vignette.webp",
+  "titre": "La petite aiguille est sur le 3 : quelle heure est-il ? — Lire l'heure — épisode 1 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_lire_heure&display=simple"
+ },
+ "cp-duree-lire-heure-short": {
+  "fichier": "cp/maths/duree/01-lire-heure/eleveai-maths-cp-duree-lire-heure-short.mp4",
+  "poster": "cp/maths/duree/01-lire-heure/eleveai-maths-cp-duree-lire-heure-short-miniature.png",
+  "vignette": "cp/maths/duree/01-lire-heure/eleveai-maths-cp-duree-lire-heure-short-miniature.vignette.webp",
+  "titre": "Mon réveil sonne : « il est 12 heures » ? Oups ! #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_lire_heure&display=simple"
  },
  "cp-famille-coccinelle": {
   "fichier": "cp/maths/shorts/fr/eleveai-maths-cp-short-famille-coccinelle.mp4",

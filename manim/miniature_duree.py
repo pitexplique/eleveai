@@ -24,6 +24,8 @@ SORTIES = RACINE / "manim" / "sorties"
 EP = [
     ("cm1", "calculer", "04-calculer", ["CALCULER", "UNE DURÉE"], "De 9 h 40 à 11 h 15 ?",
      "on saute par l'heure pile !", True, "verte"),
+    ("cp", "lire-heure", "01-lire-heure", ["LIRE", "L'HEURE"], "La petite aiguille sur le 3 ?",
+     "c'est elle qui donne l'heure !", True, "blanche"),
 ]
 
 

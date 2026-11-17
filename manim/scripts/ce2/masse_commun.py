@@ -152,13 +152,11 @@ def balance_electronique(texte="0 g", s=1.0, bouton_tare=True):
     ecran = RoundedRectangle(width=1.2 * s, height=0.34 * s, corner_radius=0.05 * s, fill_color="#052e16",
                              fill_opacity=1, stroke_width=0).move_to(corps).shift(LEFT * 0.4 * s)
     aff = hors_audit(Text(texte, font_size=int(20 * s), color="#4ade80", weight=BOLD)).move_to(ecran)
-    if aff.width > ecran.width * 0.86:  # (17/11) « 1 000 g » reste dans l'afficheur
-        aff.scale_to_fit_width(ecran.width * 0.86)
     g = VGroup(corps, plateau, ecran, aff)
     if bouton_tare:
         bt = VGroup(Circle(radius=0.13 * s, fill_color="#f59e0b", fill_opacity=1, stroke_width=0),
                     hors_audit(Text("TARE", font_size=int(10 * s), color="#e2e8f0")))
-        bt[0].move_to(corps).shift(RIGHT * 0.6 * s)  # (17/11) « TARE » reste dans le boîtier
+        bt[0].move_to(corps).shift(RIGHT * 0.75 * s)
         bt[1].next_to(bt[0], RIGHT, buff=0.06)
         g.add(bt)
         g.tare = bt
@@ -168,10 +166,7 @@ def balance_electronique(texte="0 g", s=1.0, bouton_tare=True):
 
 def afficher(bal, texte, s=1.0):
     """Le nouvel affichage d'une balance électronique (pour un Transform)."""
-    t = hors_audit(Text(texte, font_size=int(20 * s), color="#4ade80", weight=BOLD)).move_to(bal.ecran)
-    if t.width > bal.ecran.width * 0.86:  # (17/11) « 1 000 g » reste dans l'afficheur
-        t.scale_to_fit_width(bal.ecran.width * 0.86)
-    return t
+    return hors_audit(Text(texte, font_size=int(20 * s), color="#4ade80", weight=BOLD)).move_to(bal.ecran)
 
 
 def pese_personne(texte="0 kg", s=1.0):
@@ -895,8 +890,8 @@ def panier(s=1.0, plein=True):
                             fill_opacity=1, stroke_width=0).move_to(P(0, 0.37 * s))
     g = VGroup()
     if plein:
-        for dx, dy, ang, coul in ((-0.3, 0.48, 0.3, "#60a5fa"), (0.3, 0.5, -0.25, "#f97316"), (0, 0.6, 0.05, "#a3e635")):
-            g.add(poisson(0.62 * s, coul).rotate(ang).move_to(P(dx * s, dy * s)))
+        for dx, dy, ang, coul in ((-0.35, 0.5, 0.25, "#60a5fa"), (0.35, 0.52, -0.2, "#f97316"), (0, 0.62, 0.05, "#a3e635")):
+            g.add(poisson(0.75 * s, coul).rotate(ang).move_to(P(dx * s, dy * s)))
     return VGroup(g, corps, tresse, bord)
 
 
@@ -905,12 +900,7 @@ def crevette(s=1.0):
     corps = Arc(radius=0.3 * s, start_angle=-0.3, angle=PI * 1.1, stroke_color="#fb7185", stroke_width=14 * s)
     tete = Circle(radius=0.11 * s, fill_color="#fb7185", fill_opacity=1, stroke_width=0).move_to(corps.get_end())
     ant = Line(tete.get_center(), tete.get_center() + P(0.35 * s, 0.15 * s), color="#fda4af", stroke_width=2)
-    d = corps.get_start()
-    queue = Polygon(d, d + P(-0.16 * s, -0.12 * s), d + P(0.02 * s, -0.2 * s), fill_color="#f43f5e", fill_opacity=1,
-                    stroke_width=0)
-    anneaux = VGroup(*[Line(corps.point_from_proportion(u) + P(0, -0.06 * s), corps.point_from_proportion(u) + P(0, 0.06 * s),
-                            color="#be123c", stroke_width=2) for u in (0.3, 0.5, 0.7)])
-    return VGroup(corps, queue, anneaux, tete, ant)
+    return VGroup(corps, tete, ant)
 
 
 def bac_crevettes(s=1.0):
