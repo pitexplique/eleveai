@@ -125,10 +125,12 @@ class ShortSectionConePyramide3e(Short4e):
         depuis = self.t("depuis le sommet", 24, ORANGE_RETENUE).move_to(P(0, 2.1))
         self.play(Create(fl), FadeIn(depuis), run_time=0.8)
         self.au_mot("quel est le rapport")
-        rq = self.t("quel rapport ?", 30, JAUNE_TITRE).move_to(P(0, -2.4))
+        rq = self.t("quel rapport ?", 30, JAUNE_TITRE).move_to(P(0, -1.8))
         self.play(FadeIn(rq, scale=1.12), run_time=0.5)
         self.au_mot("Réponds en commentaire")
-        self.play(FadeIn(self.commentaire(y=-3.2)), run_time=0.4)
+        # ⛔ Ti-Margo occupe y ∈ [−3,85 ; −3,05] dans un short : le commentaire (deux lignes,
+        #    0,9 de haut) ne descend pas sous y = −2,85, sinon il lui passe dessus.
+        self.play(FadeIn(self.commentaire(y=-2.85)), run_time=0.4)
         self.attendre_voix(marge=0.3)
 
         # ── 05 ──────────────────────────────────────────────────────────────
