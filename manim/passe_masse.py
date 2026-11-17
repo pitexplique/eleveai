@@ -214,7 +214,7 @@ EP = [
       s_tags=["masse", "kilogramme", "plumes", "cailloux", "balance", "pari"], s_centres=["jeux-defis"]),
  dict(classe="ce2", n=1, slug="unites", micro="ce2_masse_unites", nom="Les unités de masse",
       date="2027-06-11", ceinture="jaune",
-      titre="Un conteneur : en grammes, en kilogrammes ou en tonnes ?",
+      titre="Un conteneur : en grammes, en kilos ou en tonnes ?",
       intro="Rayan est grutier au port. Avec sa grue, il soulève des conteneurs énormes et les pose sur les bateaux. Pour chaque masse, il faut choisir la bonne unité.",
       points=["trois unités : le gramme (g), le kilogramme (kg), la tonne (t)",
               "1 tonne = 1 000 kg : la masse d'une petite voiture",
