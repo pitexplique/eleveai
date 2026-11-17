@@ -55,7 +55,10 @@ while IFS='|' read -r script scene dossier nom cle res; do
     echo "⛔ ECHEC sur $nom — on s'arrête là plutôt que d'enchaîner à l'aveugle"; exit 1; }
   python manim/poste2/verifier-zone-margo.py "manim/sorties/$dossier/$nom.mp4" --pas 0.4 \
     | sed -n '2p'
-done <<< "$LOT"
+# ⛔ `tr -d` : git livre ce fichier en CRLF, et le  se retrouve dans le DERNIER champ
+# lu — donc dans la resolution passee a manim. Le 17/11 le lot est mort au 2e episode
+# avec un chemin tronque, et le verrou ne protege pas de ca. On purge a la lecture.
+done <<< "$(printf '%s' "$LOT" | tr -d '')"
 echo
 echo "=== LOT TERMINE ==="
 echo "Ensuite : python manim/poste2/manifeste-4e.py, puis python manim/poste2/apercu-serie.py"
