@@ -58,6 +58,16 @@ class VolumeBoule3e(Paysage3e):
     fichier_marques = "3e_volume_boule_marques.json"
     ceinture = "verte"
 
+    def pause_gauche(self, y=-3.2, x=-6.2, marge=2.0):
+        """« Mets pause, et cherche ! » en bas À GAUCHE.
+        ⛔ Dans la colonne de droite (pause_defi du commun), le « ! » touche Ti-Margo : constaté
+        sur les planches de T1, T2, T3 et T4. La mascotte occupe x > 4,6 et y < −2,2."""
+        self.au_mot("Mets pause")
+        p = self.t("Mets pause, et cherche !", 32, ORANGE_RETENUE)
+        self.col(p, y, x)
+        self.play(Write(p), run_time=0.8)
+        self.attendre_voix(marge=marge)
+
     # ── 00 ──────────────────────────────────────────────────────────────────
     def page_de_garde(self):
         self.clear()
@@ -336,7 +346,7 @@ class VolumeBoule3e(Paysage3e):
         self.play(FadeIn(l3[0], shift=UP * 0.1), run_time=0.5)
         self.au_mot("combien de litres d'écart")
         self.play(FadeIn(l3[1], shift=UP * 0.1), run_time=0.5)
-        self.pause_defi(y=-2.6)
+        self.pause_gauche()
 
     def ecran_correction(self):
         self.ecran("08b-correction", 0.65)
