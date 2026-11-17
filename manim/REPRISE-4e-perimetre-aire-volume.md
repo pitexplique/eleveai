@@ -32,7 +32,7 @@ Ouvert le 15/11/2026. 30 micros du coach, plan : `manim/PLAN-perimetre-aire-volu
       `volume_4e_short_commun.py` (`Short4e` : `ajuster()` à 3,9, `FS_PH = 30`, fin aux bonnes tailles).
 - [ ] Les 27 épisodes, un par un.
 
-## Avancement des 28 épisodes (au 16/11)
+## Avancement des 28 épisodes (au 17/11)
 
 | Épisode | Paysage | Short | HD |
 |---|---|---|---|
@@ -56,14 +56,15 @@ Ouvert le 15/11/2026. 30 micros du coach, plan : `manim/PLAN-perimetre-aire-volu
 | A3 `aire_figure` (cour en L) | ✅ | ✅ | ✅ 224,2 s / 55,0 s, bords 0 |
 | A4 `aire_probleme` (terrasse) | ✅ | ✅ | ✅ 212,2 s / 65,2 s, bords 0 |
 | A5 `aire_defi` (maillots) | ✅ | ✅ | ✅ 200,3 s / 57,1 s, bords 0 |
-| T1 → T8 (3e) | ⏳ | ⏳ | — |
+| T1 → T8 (3e) | ⏳ | ⏳ | — (session sœur, `manim/poste2/REPRISE-3e-sections.md`) |
 
 **20 épisodes finis sur 28** — TOUS LES ÉPISODES DE 4e SONT FAITS (V1 à V4, S1 à S6, P1 à P5,
 A1 à A5), paysages et shorts rendus en HD, `verifier-bords-video` = 0 sur les 40 MP4.
 ⭐ Les 30 micros de 4e sont couverts, et 18 des 33 micros de 3e par les `aussi`.
-⚠️ Les 8 épisodes de 3e (T1 à T8) sont confiés à une SESSION SŒUR depuis le 17/11 : elle écrit
-`manim/scripts/4e/3e_*.py` et tient son propre tableau dans `manim/poste2/REPRISE-3e-sections.md`.
-Il ne reste donc ici que A5.
+⚠️⚠️ Les 8 épisodes de 3e (T1 à T8) sont confiés à une SESSION SŒUR, démarrée par Frédéric le
+17/11 : elle écrit `manim/scripts/4e/3e_*.py` et tient SON PROPRE tableau d'avancement dans
+`manim/poste2/REPRISE-3e-sections.md`. ⛔ Ne pas les écrire ici : deux sessions sur les mêmes
+fichiers, c'est un écrasement garanti. Le tableau ci-dessus les laisse en ⏳ exprès.
 ⭐ Le LOT PÉRIMÈTRE est COMPLET : les 7 micros `aire_perimetre` de 4e sont couverts.
 ⭐ Le LOT SOLIDES est COMPLET : les 6 micros `vision_espace` de 4e sont couverts.
 
@@ -130,6 +131,18 @@ BORD → script short (même contrôle, en `-r 1080,1920`) → `manim/poste2/4e_
     (« ajouté 6 000 ») ou passer `n=2`.
 23. Un visuel faux reste faux même s'il est joli : quatre petits disques posés sur un grand ne le
     remplissent pas. Quatre QUARTS du grand disque, si — et ils ont bien l'aire du petit (S5 short).
+
+### Leçons de la passe finale (17/11)
+31. ⭐⭐ **Les logs de rendu HD sont une SOURCE, pas un déchet.** `manim/scripts/4e/media-hd-*.hd.log`
+    porte une ligne `ECRAN <clé> t=MM:SS` par écran et une ligne `QUESTION <clé> … reponse=N` par
+    question-pause : de quoi écrire les `chapitres` et les `questions` du manifeste sans rouvrir une
+    seule vidéo. ⛔ Ne pas les effacer avant la passe finale.
+32. Le manifeste ne se tape pas à la main : `manim/poste2/manifeste-4e.py` le GÉNÈRE à partir du
+    tableau de la série, des voix et des logs. Après un re-rendu, une commande suffit pour que les
+    trois fichiers de branchement redeviennent justes.
+33. Le tableau de la série abrège deux micros de 3e (« comprendre », « polygone ») : les vrais
+    identifiants sont `aire_perimetre_comprendre` et `aire_perimetre_polygone`. Vérifier un `microId`
+    dans la banque (`lib/tutor-v4/questionBank/3e/maths/*.bank.ts`) avant de l'écrire dans un `aussi`.
 
 ## Passe finale de la 4e — FAITE le 17/11
 
@@ -411,44 +424,71 @@ ce poste. ⚠️ À faire reprendre par le 1er poste : ce sont surtout des vidé
 
 ---
 
-# ⭐ PROMPT DE REPRISE (passage de main, 16/11/2026)
+# ⭐ PROMPT DE REPRISE (passage de main, 17/11/2026)
 
-Tu reprends la série 4e + 3e « Périmètre, aire, volume, solides » sur la branche `poste2`.
-**6 épisodes sur 28 sont finis** (tableau ci-dessus) ; **22 restent**. Tout ce qui suit est prêt :
-les 54 voix VALIDÉES par Frédéric, leurs WAV, leurs marques, et le socle de la série.
+**Les 20 épisodes de 4e sont FINIS** : écrits, rendus en HD, bords à 0, compteurs des shorts
+contrôlés sur le MP4, committés sur `poste2`. Les trois fichiers de branchement de la 4e sont
+écrits, et générés. **Il ne reste de cette série que les 8 épisodes de 3e (T1 à T8), et ils sont
+confiés à une SESSION SŒUR** (démarrée par Frédéric le 17/11) : `manim/scripts/4e/3e_*.py`,
+avancement dans `manim/poste2/REPRISE-3e-sections.md`.
 
-## Ce que tu ne refais pas
-- Les voix : `manim/poste2/VOIX-4e-3e-perimetre-aire-volume.md` fait foi. ⛔ Ne change pas un mot
-  sans Frédéric. Pour (re)générer un JSON : `python manim/poste2/voix-depuis-md.py --tout`.
-- Les WAV (`public/sons/<id>/`) et les marques (`manim/scripts/4e/<id>_marques.json`) : déjà là.
-- Le socle : `volume_4e_commun.py` (figures + 28 personnages + `Paysage4e`) et
-  `volume_4e_short_commun.py` (`Short4e`). ⛔ Les shorts sont en MANIM, jamais en dessin animé
-  (REGLES.md 09/11, redit par Frédéric le 16/11).
+⛔⛔ **N'écris donc AUCUN épisode toi-même.** Deux sessions sur les mêmes fichiers s'écrasent.
+Avant d'écrire quoi que ce soit : `git log --oneline -5`, et vérifie que le dernier commit de la
+4e est bien passé (le plus récent doit être « A3 : la cour en L recadrée » ou plus récent).
 
-## La chaîne d'un épisode (compte ~30 min)
-1. `manim/scripts/4e/<id>.py`, scène en PascalCase, classe de base `Paysage4e`.
-   Modèles les plus proches : `4e_volume_cone.py` (formule + piège), `4e_solides_vues.py` (figures),
-   `4e_volume_defi.py` (deux solides à composer).
+## Ce qui reste à faire, dans l'ordre
+1. **Attendre la session sœur.** Quand ses 8 épisodes sont rendus (16 MP4 dans
+   `manim/sorties/3e/maths/`), relire son tableau et ses planches.
+2. **Étendre les trois fichiers de branchement aux 8 épisodes de 3e.** Le générateur
+   `manim/poste2/manifeste-4e.py` ne couvre que la 4e : lui ajouter les 8 entrées (même structure,
+   `classe="3e"`, `serie="Maths 3e"`, dossiers `3e/maths/<notion>/NN-<slug>/`), puis relancer
+   `python manim/poste2/manifeste-4e.py`. Il relit tout seul les voix et les logs de rendu HD.
+   Vérifier ensuite `node scripts/verifier-centres-age.mjs manim/poste2/manifeste-4e.json`
+   → « 0 centre hors tranche ».
+3. **Un aperçu des 28 épisodes pour Frédéric**, en pause, sur le modèle de
+   `manim/sorties/4e/maths/apercu-4e-complet.html` (servi par
+   `python -m http.server 3907 --directory manim/sorties`).
+4. ⏳ Le contrôle de bords global tournait en arrière-plan au moment du passage de main :
+   `manim/poste2/bords-4e.log`. Chaque vidéo a DÉJÀ été contrôlée à son rendu (le script
+   `4e_hd.sh` le fait) ; ce log n'est qu'une ceinture de plus. Vérifier qu'il ne contient que
+   des lignes « 0 instants qui touchent un bord ».
+
+## Ce que tu ne refais JAMAIS
+- Les voix : `manim/poste2/VOIX-4e-3e-perimetre-aire-volume.md` fait foi, validé par Frédéric.
+  ⛔ Pas un mot sans lui.
+- Les WAV (`public/sons/<id>/`) et les marques (`manim/scripts/4e/<id>_marques.json`).
+- Le socle `volume_4e_commun.py` / `volume_4e_short_commun.py` : la session sœur s'en sert au
+  même moment.
+- `manim/manifeste-youtube.json`, `lib/videos/*.json`, les banques du coach : fichiers du 1er poste.
+- ⛔ Jamais de push : c'est le 1er poste qui fusionne `poste2` dans `main`.
+
+## Si Frédéric demande un épisode de plus
+Alors seulement, la chaîne complète (compte ~30 min par épisode) :
+1. `manim/scripts/4e/<id>.py`, scène en PascalCase, classe de base `Paysage4e` (ou `Paysage3e`).
+   Modèles : `4e_section_comprendre.py` (sections), `4e_volume_cone.py` (formule + piège),
+   `4e_perimetre_defi.py` (comparaison), `4e_aire_figure_composee.py` (découpage) ;
+   pour les shorts, `4e_section_comprendre_short.py`.
 2. `PYTHONIOENCODING=utf-8 AUDIT=1 BORDS=1 python -m manim render --dry_run <script> <Scène>`
-   → 0 AUDIT-AVANCE, 0 RETARD, 0 TARD, 0 BORD. Les 11 leçons ci-dessus évitent 90 % des allers-retours.
+   → **0 AUDIT-AVANCE, 0 AUDIT-TARD, 0 RETARD, 0 TARD, 0 BORD**. Seul message toléré :
+   `AUDIT-ABSENT 10-abonne « 974 »`, qui vient du gabarit.
+   ⭐ **Les 33 leçons ci-dessus évitent l'essentiel des allers-retours.** Les deux qui coûtent le
+   plus cher : la n° 24 (un morceau ne mélange jamais un nombre et un mot long dits à plus de
+   0,4 s d'écart) et la n° 25 (le premier mot long d'une étiquette ne doit pas être caché à la
+   fin de la voix — « Elle coûte » attendait le « elle » de « Combien coûte-t-elle ? »).
 3. Le short : `Short4e`, même contrôle avec `-r 1080,1920`.
 4. `bash manim/poste2/4e_hd.sh <script> <Scène> <nom-sortie> <media_dir> <dossier-sortie> [1080,1920]`
-   (le 6ᵉ argument pour les shorts). Un seul rendu HD à la fois : le script prend un verrou.
+   (le 6ᵉ argument pour les shorts). Un seul rendu HD à la fois sur la machine : le script prend un
+   verrou, et la session sœur s'en sert aussi. Lancer en arrière-plan et enchaîner.
 5. Planche de contrôle : `bash manim/poste2/5e_planche.sh <mp4> <png> <colonnes> t1 t2 …`, puis
-   relire les images. ⛔ Pour un short, contrôler le COMPTEUR autour de « Mets pause » (Frédéric, 15/11).
-6. Commit PAR CHEMIN, et mettre le tableau d'avancement à jour.
+   **relire vraiment les images** : c'est là qu'on attrape les textes qui se chevauchent et les
+   figures fausses, que le dry run ne voit pas. Pour un short, contrôler le COMPTEUR autour de
+   « Mets pause » (3 → 2 → 1, dans la carte, rien par-dessus).
+6. Commit PAR CHEMIN, et mettre le tableau d'avancement ci-dessus à jour dans le même commit.
 
 ## Nommage et sorties
 - Ids : `4e-perimetre-polygones`, `4e-aire-disque`, `3e-volume-boule`… (colonne « Id » du tableau
-  des 28 épisodes dans le fichier de voix). Fichiers MP4 : `eleveai-maths-<classe>-<id sans classe>.mp4`.
+  des 28 épisodes dans le fichier de voix). MP4 : `eleveai-maths-<classe>-<id sans classe>.mp4`.
 - Sorties : `manim/sorties/4e/maths/{volume,solides,perimetre,aire}/NN-<slug>/` et
   `manim/sorties/3e/maths/<notion>/NN-<slug>/`.
-
-## La passe finale (quand les 28 seront là)
-- `manim/poste2/manifeste-4e.json` et `videos-r2-4e.json` (⛔ ne jamais toucher
-  `manim/manifeste-youtube.json` ni `lib/videos/*.json` : ce sont les fichiers du 1er poste),
-  `manim/poste2/coach-4e.md` pour le branchement, avec les `aussi` vers la 3e.
-- `node scripts/verifier-centres-age.mjs manim/poste2/manifeste-4e.json` → 0 centre hors tranche.
 - R2 : les clés sont dans `.env.local` et rclone 1.76 est installé, mais on n'envoie qu'une série
   validée par Frédéric.
-- ⛔ Jamais de push : c'est le 1er poste qui fusionne `poste2` dans `main`.
