@@ -69,7 +69,7 @@ class AireFigureComposee4e(Paysage4e):
         self.play(Write(titre), FadeIn(ident, shift=DOWN * 0.2), FadeIn(ech), run_time=0.7)
         q = self.bloc(["Comment mesurer une surface", "qui n'est pas un rectangle ?"], 34)
         q.move_to(P(0, 0.35)).align_to(P(-6.2, 0), LEFT)
-        L = cour_en_L(0.28, P(2.6, -1.7))
+        L = cour_en_L(0.26, P(3.6, -1.9))   # ⛔ à 2.6 le L touchait la question
         self.au_mot("Comment mesurer une surface")
         self.play(FadeIn(q[0], shift=UP * 0.2), FadeIn(L, scale=0.85), run_time=0.5)
         self.au_mot("qui n'est pas un rectangle")
@@ -88,7 +88,7 @@ class AireFigureComposee4e(Paysage4e):
         met = self.t("paysagiste", 24, BLEU_CALCUL).next_to(p, DOWN, buff=0.2)
         self.play(FadeIn(met, shift=DOWN * 0.1), run_time=0.4)
         x = -2.8
-        L = cour_en_L(0.3, P(3.4, -1.9))
+        L = cour_en_L(0.24, P(4.15, -2.1))   # ⛔ à 3.4 le L mordait sur la colonne de texte
         l1 = self.bloc(["Le collège veut du gazon", "synthétique dans sa cour."], 30, WHITE)
         self.col(l1, 2.0, x)
         self.au_mot("Le collège veut du gazon")
