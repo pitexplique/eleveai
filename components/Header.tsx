@@ -607,16 +607,16 @@ export default function Header() {
           place. On préfère un centrage imparfait à un chevauchement. */}
       <nav
         className={[
-          "grid grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 py-2.5",
+          "grid grid-cols-[1fr_auto_1fr] items-center gap-1 px-3 py-2.5 min-[400px]:gap-2 min-[400px]:px-4",
           paper ? "w-full" : "mx-auto max-w-7xl",
         ].join(" ")}
       >
         {/* ── ZONE 1 : LA MARQUE, complètement à gauche ─────────────────── */}
-        <div className="flex min-w-0 items-center gap-1.5 justify-self-start">
+        <div className="flex min-w-0 items-center gap-1 justify-self-start min-[400px]:gap-1.5">
           <Link
             prefetch={false}
             href="/accueil"
-            className="group flex shrink-0 items-center gap-2.5 rounded-full pr-1 transition hover:brightness-110"
+            className="group flex shrink-0 items-center gap-2.5 rounded-full transition max-[359px]:hidden min-[400px]:pr-1 hover:brightness-110"
           >
             {/* ⚠️ `alt` ET `aria-hidden` VONT PAR PAIRE ICI — NE PAS EN DÉFAIRE UN
                 SEUL (22/08, Bing Webmaster : « Alt attribute for images is
@@ -636,7 +636,7 @@ export default function Header() {
                 MUET pour un lecteur d'écran sous 1280 px : plus d'image, plus de
                 texte. Retirer `aria-hidden` sans revider `alt` le ferait bégayer
                 « EleveAI EleveAI ». Les deux lignes ne se relisent qu'ensemble. */}
-            <div className="relative h-10 w-[72px] overflow-hidden rounded-[16px] shadow-[0_0_22px_rgba(248,200,70,0.22)] ring-1 ring-white/15">
+            <div className="relative h-8 w-12 overflow-hidden rounded-[12px] min-[400px]:h-10 min-[400px]:w-[72px] min-[400px]:rounded-[16px] shadow-[0_0_22px_rgba(248,200,70,0.22)] ring-1 ring-white/15">
               <Image
                 src="/logo-eleveai-header.svg"
                 alt="EleveAI"
@@ -835,14 +835,14 @@ export default function Header() {
             champ est la raison d'être du centre sur l'accueil, et le masquer
             sous 1 024 px le retirerait à la tablette comme au portable. Sous
             `sm`, la page pose son propre champ (voir app/accueil/AccueilMatieres.tsx) — la
-            zone 1 et la zone 3 ne laissent pas 200 px libres à 360 px. */}
-        <div
-          className={
-            rechercheAuCentre
-              ? "hidden min-w-0 items-center gap-1 justify-self-center sm:flex"
-              : "hidden items-center gap-1 justify-self-center lg:flex"
-          }
-        >
+            zone 1 et la zone 3 ne laissent pas 200 px libres à 360 px.
+            ⛔ 17/11/2026 : DE NOUVEAU `lg:flex` PARTOUT. Mesuré à 768 px sur
+            l'accueil, AVANT d'ajouter « Connexion » à la barre du téléphone :
+            le champ (17rem) recouvrait déjà de 48 px le mot « EleveAI », la
+            photo et Ti Margo ; avec « Connexion », 151 px. Entre `sm` et `lg`
+            le champ descend donc sur une DEUXIÈME LIGNE de l'en-tête, pleine
+            largeur (voir « LA RECHERCHE SUR TABLETTE » en bas de la `<nav>`). */}
+        <div className="hidden min-w-0 items-center gap-1 justify-self-center lg:flex">
           {rechercheAuCentre && <RechercheEntete />}
           {/* ⛔ 31/10/2026 — Frédéric : « quand l'élève est connecté, enlève
               matières, guide, dictée, etc. ; laisse que Mon espace ». Le menu
@@ -1047,7 +1047,7 @@ export default function Header() {
           )}
 
           {/* Mobile — bouton hamburger */}
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="flex items-center gap-1 min-[400px]:gap-1.5 sm:gap-2 lg:hidden">
             {/* ⭐ « INSCRIPTION » ET NON PLUS « CONNEXION » (20/08). Le mot
                 « Connexion » était écrit DEUX FOIS sur le même écran : ici en
                 pastille pleine, et à nouveau dans le tiroir juste en dessous.
@@ -1058,34 +1058,73 @@ export default function Header() {
                 tiroir garde « Connexion », pour celui qui revient et qui, lui,
                 sait ce qu'il cherche. Même flux au bout des deux : le
                 formulaire reconnaît tout seul un compte existant. */}
+            {/* ⛔⛔ 17/11/2026 — « CONNEXION » REVIENT DANS LA BARRE, À CÔTÉ
+                D'« INSCRIPTION ». Frédéric : « le téléphone et le menu, car
+                inscription s'affiche mais pas connexion ». La règle du 20/08
+                ci-dessus (l'action seule dans la barre, la connexion dans le
+                tiroir) avait un coût qu'on n'avait pas mesuré : ses élèves et
+                les familles ONT un compte, viennent surtout sur téléphone, et
+                ne pensent pas à ouvrir le ☰ pour le trouver. Pas de compte
+                trouvé = pas de suivi. Les deux portes sont donc côte à côte, dans
+                le même ordre que sur ordinateur ; « Connexion » est en contour,
+                « Inscription » en plein : deux formes, deux destinations.
+                ⚠️ LA PLACE, mesurée à 360 px : il ne restait que 13 px. On la
+                prend sous 400 px au logo (72 → 48 px), à l'icône de la
+                pastille et aux marges de la barre (voir `gap` et `px` de la
+                `<nav>`) ; le tiroir garde aussi « Connexion ». */}
             {!eleve && (
-              <Link
-                prefetch={false}
-                href="/auth/signin?mode=eleve&inscription=1"
-                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-black shadow-lg ${
-                  paper
-                    ? "bg-teal-700 text-white"
-                    : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
-                }`}
-              >
-                <GraduationCap className="h-4 w-4" />
-                Inscription
-              </Link>
+              <>
+                <Link
+                  prefetch={false}
+                  href="/auth/signin?mode=eleve&inscription=1"
+                  className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-2 py-2 text-[11px] font-black leading-4 shadow-lg min-[400px]:px-3 min-[400px]:text-xs ${
+                    paper
+                      ? "bg-teal-700 text-white"
+                      : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
+                  }`}
+                >
+                  <GraduationCap className="hidden h-4 w-4 min-[400px]:block" />
+                  Inscription
+                </Link>
+                <Link
+                  prefetch={false}
+                  href="/auth/signin?mode=eleve"
+                  className={`inline-flex items-center whitespace-nowrap rounded-full border px-2 py-[7px] text-[11px] font-black leading-4 min-[400px]:px-3 min-[400px]:text-xs ${
+                    paper
+                      ? "border-[#1d1c16]/30 bg-white/60 text-[#1d1c16]"
+                      : "border-white/30 bg-white/10 text-white"
+                  }`}
+                >
+                  Connexion
+                </Link>
+              </>
             )}
             <button
               type="button"
               onClick={() => setMobileOpen((v) => !v)}
-              className={`rounded-full border p-2 shadow-lg ${
+              className={`shrink-0 rounded-full border p-1.5 shadow-lg sm:p-2 ${
                 paper
                   ? "border-[#1d1c16]/25 bg-[#1d1c16]/5 text-[#1d1c16]"
                   : "border-cyan-200/20 bg-white/10 text-white"
               }`}
               aria-label="Ouvrir le menu du site"
             >
-              {mobileOpen ? <X /> : <Menu />}
+              {mobileOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
             </button>
           </div>
         </div>
+
+        {/* ── LA RECHERCHE SUR TABLETTE (17/11/2026) ─────────────────────── */}
+        {/* Sur l'accueil, de `sm` à `lg` : la marque, la paire photo + Ti Margo
+            et les deux portes « Inscription » + « Connexion » prennent toute la
+            barre ; le champ passe dessous, sur toute la largeur. Sous `sm` la
+            page pose le sien (AccueilSuivi / AccueilMatieres / AccueilCoach,
+            `sm:hidden`), au-dessus de `lg` il est au centre de la barre. */}
+        {rechercheAuCentre && (
+          <div className="col-span-3 hidden sm:block lg:hidden">
+            <RechercheEntete variante="page" />
+          </div>
+        )}
       </nav>
 
       {/* Mobile menu */}
@@ -1172,17 +1211,36 @@ export default function Header() {
                 </div>
               </div>
             ) : (
-              /* Une seule porte ici : « Inscription » est déjà en pastille dans
-                 la barre, deux centimètres plus haut et toujours visible, elle.
-                 Celle-ci est pour qui revient. */
-              /* ⚠️ `grid-cols-1`, ET C'ÉTAIT `grid-cols-2` (23/08/2026). Cette
+              /* HISTORIQUE (remplacé le 17/11/2026, voir juste en dessous) :
+                 « Une seule porte ici : « Inscription » est déjà en pastille
+                 dans la barre. Celle-ci est pour qui revient. »
+                 ⚠️ `grid-cols-1`, ET C'ÉTAIT `grid-cols-2` (23/08/2026). Cette
                  grille tenait DEUX boutons, « Connexion » et « Tarifs » ; depuis
                  que le second est éteint le temps que Stripe arrive, deux
                  colonnes laisseraient « Connexion » sur la moitié gauche et un
                  trou à droite — la forme exacte d'un bouton qui n'a pas chargé.
                  ✅ À remettre à `grid-cols-2` en même temps qu'on rallume les
                  tarifs, sinon le bouton reviendra pleine largeur sous l'autre. */
-              <div className="grid grid-cols-1 gap-2">
+              /* ⭐ 17/11/2026 : `grid-cols-2`, « Inscription » + « Connexion ».
+                 Frédéric cherchait les deux DANS LE MENU ☰ (« le menu, car
+                 inscription s'affiche mais pas connexion ») : le tiroir montre
+                 désormais la même paire que la barre et que l'ordinateur, dans
+                 le même ordre. Si les tarifs reviennent, ils prennent une
+                 ligne pleine en dessous (`col-span-2`). */
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  prefetch={false}
+                  href="/auth/signin?mode=eleve&inscription=1"
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-black shadow-lg ${
+                    paper
+                      ? "bg-teal-700 text-white"
+                      : "bg-gradient-to-r from-emerald-300 to-cyan-300 text-[#041B33]"
+                  }`}
+                >
+                  <GraduationCap className="h-4 w-4" />
+                  Inscription
+                </Link>
                 <Link
                   prefetch={false}
                   href="/auth/signin?mode=eleve"

@@ -70,10 +70,15 @@ export default function RechercheEntete({
          droite (Inscription + Connexion) ~180 — 816 pour 800, et toute la page
          partait en défilement horizontal. La piste `auto` de la grille ne
          rétrécit pas sous la largeur d'un champ : c'est donc au champ de le
-         faire, par paliers. */
+         faire, par paliers.
+         17/11/2026 : `lg:w-[21rem]` (c'était 24rem) — mesuré à 1 024 px, le
+         champ mordait de 14 px sur Ti Margo ; il en reste 10 d'air. Entre
+         `sm` et `lg` il n'est plus dans la barre (Header.tsx, deuxième
+         ligne) : les paliers `w-[13rem]` et `md:` ne servent plus qu'en
+         filet de sécurité. */
       className={
         variante === "entete"
-          ? "relative w-[13rem] min-w-0 md:w-[17rem] lg:w-[24rem] xl:w-[30rem]"
+          ? "relative w-[13rem] min-w-0 md:w-[17rem] lg:w-[21rem] xl:w-[30rem]"
           : "relative w-full"
       }
       onBlur={(e) => {
