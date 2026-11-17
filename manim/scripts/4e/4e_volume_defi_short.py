@@ -35,6 +35,21 @@ class ShortVolumeDefi4e(Short4e):
     nom_voix = "4e-volume-defi-short"
     fichier_marques = "4e_volume_defi_short_marques.json"
 
+    def _carte(self, lettre, contenu, fs):
+        """⛔ La carte d'un choix, avec la PLACE DU ✓ au bout. Le gabarit étire le libellé
+        jusqu'à 0,8 du bord de la carte, or le ✓ de la bonne réponse se pose à 0,38 du bord
+        DROIT : sur un libellé long il TOUCHE la dernière lettre (« le deuxièm✓e »,
+        « environ 51,4 m✓² » — mesuré à l'image, 10 des 20 shorts de 4e, écarts de -8 à
+        -27 px). `BORDS=1` ne voit rien : rien ne sort du cadre. Même remède qu'en CM2
+        (`manim/scripts/cm2/aire_comprendre.py`). Les libellés courts ne bougent pas : la
+        condition ne les atteint jamais."""
+        g = super()._carte(lettre, contenu, fs)
+        cadre, ligne = g
+        if ligne.width > self.LARG - 1.2:
+            ligne.scale_to_fit_width(self.LARG - 1.2)
+            ligne.move_to(cadre).align_to(cadre.get_left() + RIGHT * 0.2, LEFT)
+        return g
+
     def construct(self):
         self.margo_bas()
 
