@@ -202,6 +202,22 @@ le plein format à TRANCHER.
 52. ⚠️ **Un libellé peut dépasser le seuil sans que ce soit un défaut** : regarder QUELLE carte
     est la bonne réponse avant de corriger. Le ✓ n'est posé que sur elle.
 
+53. ⭐⭐ **Pour savoir si un MP4 porte une correction, on cherche dans l'IMAGE la trace que le
+    diff a laissée — pas une date.** Un diff qui déplace quelque chose est mesurable : sur T4,
+    le disque passait de x = 3,9 à 4,3, soit 54 px à 1920 ; une image à 25 s suffit à voir si
+    « un disque. » touche le cercle ou en est séparé. Le MP4 accusé d'être périmé portait la
+    correction. Quand un diff ne déplace rien de visible, c'est que le rendu n'avait pas d'enjeu.
+    ⛔ Sur ce lot, TROIS relevés successifs ont conclu « périmé » sur une date (11, puis 8, puis
+    5, puis 1 fichiers) ; à chaque fois la vérité était 0. **La date ne tranche jamais : ni le
+    commit, ni même l'horodatage du source, puisqu'un rendu dure cinq minutes et qu'une édition
+    précède son commit.**
+54. ⚠️ **Un détecteur mal calibré coûte plus cher qu'un œil bien placé, pour une question
+    binaire.** En voulant mesurer la position du disque de T4 j'ai échoué deux fois : mon masque
+    attrapait le texte, qui est du MÊME cyan que la figure (`SECTION_C` sert aux deux), puis mon
+    filtre par hauteur ratait le disque, rempli à 0,35 donc sombre. Une image recadrée au bon
+    instant a répondu en une seconde. ⭐ Mesurer vaut pour un contrôle qu'on répète sur 16
+    fichiers (le ✓, la zone de Ti-Margo) ; pour trancher UN cas, on regarde.
+
 ---
 
 # ⭐ PROMPT DE REPRISE (lot 3e, 17/11/2026)
