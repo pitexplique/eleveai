@@ -34,6 +34,13 @@ import FIGURES_6E from "./remplies/figures-6e.json";
 import FIGURES_4E from "./remplies/figures-4e.json";
 import FIGURES_CM1 from "./remplies/figures-cm1.json";
 import FIGURES_CM2 from "./remplies/figures-cm2.json";
+// ⭐ 17/11 — CP, CE1, CE2 : textes très courts (enfants de 6 à 8 ans), beaucoup de dessins.
+import CP from "./remplies/cp.json";
+import CE1 from "./remplies/ce1.json";
+import CE2 from "./remplies/ce2.json";
+import FIGURES_CP from "./remplies/figures-cp.json";
+import FIGURES_CE1 from "./remplies/figures-ce1.json";
+import FIGURES_CE2 from "./remplies/figures-ce2.json";
 
 // ⭐ 09/11 soir — Frédéric : « mettre dans les cartes mentales les graphiques
 // si possible et là où c’est nécessaire ». `figure` = un petit dessin du moteur
@@ -515,6 +522,9 @@ const BASE: Record<string, BulleRemplie[]> = {
   ...(QUATRIEME as Record<string, BulleRemplie[]>),
   ...(CM2 as Record<string, BulleRemplie[]>),
   ...(CM1 as Record<string, BulleRemplie[]>),
+  ...(CP as Record<string, BulleRemplie[]>),
+  ...(CE1 as Record<string, BulleRemplie[]>),
+  ...(CE2 as Record<string, BulleRemplie[]>),
   // Le JSON élargit les `kind` des dessins en simple chaîne : passage par unknown.
   ...(CINQUIEME as unknown as Record<string, BulleRemplie[]>),
   ...(TROISIEME as unknown as Record<string, BulleRemplie[]>),
@@ -525,6 +535,8 @@ type Figures = Record<string, Record<string, CanvasFigure>>;
 const FIGURES: Figures = { ...(FIGURES_6E as unknown as Figures), ...(FIGURES_4E as unknown as Figures), ...(FIGURES_CM2 as unknown as Figures) };
 // Les dessins du CM1 (28 notions), même forme.
 Object.assign(FIGURES, FIGURES_CM1 as unknown as Figures);
+// Les dessins du CP, du CE1 et du CE2, même forme.
+Object.assign(FIGURES, FIGURES_CP as unknown as Figures, FIGURES_CE1 as unknown as Figures, FIGURES_CE2 as unknown as Figures);
 
 export const CARTES_REMPLIES: Record<string, BulleRemplie[]> = Object.fromEntries(
   Object.entries(BASE).map(([cle, bulles]) => {

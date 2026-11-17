@@ -1,0 +1,473 @@
+{
+  "cp/nombre_entier": [
+    {
+      "regle": "On fait des rangées de 10, puis on compte.",
+      "exemple": "23 poissons : 2 rangées de 10 et 3 poissons.",
+      "piege": "Un poisson compté deux fois : 24 au lieu de 23."
+    },
+    {
+      "regle": "On lit d’abord les dizaines, puis les unités.",
+      "exemple": "47 se lit « quarante-sept ».",
+      "piege": "« Soixante-douze », c’est 72, pas 6012."
+    },
+    {
+      "regle": "On prend juste le bon nombre d’objets.",
+      "exemple": "Pour 15 : 1 barre de 10 et 5 cubes.",
+      "piege": "Pour 15, pas 1 cube et 5 cubes : ça fait 6."
+    },
+    {
+      "regle": "Le chiffre de gauche dit les dizaines.",
+      "exemple": "Dans 58, le 5 compte 5 dizaines.",
+      "piege": "Dans 58, le 5 vaut 50, pas 5."
+    },
+    {
+      "regle": "Un nombre s’écrit en chiffres ou en lettres.",
+      "exemple": "36 = trente-six = 30 + 6.",
+      "piege": "« Quatre-vingts », c’est 80, pas 420."
+    },
+    {
+      "regle": "On sépare les dizaines et les unités.",
+      "exemple": "64 = 6 dizaines et 4 unités = 60 + 4.",
+      "piege": "64, ce n’est pas 6 + 4 : c’est 60 + 4."
+    },
+    {
+      "regle": "La pointe du signe montre le plus petit.",
+      "exemple": "42 > 38 : 4 dizaines, c’est plus que 3.",
+      "piege": "29 < 31, même si 9 est plus grand que 1."
+    },
+    {
+      "regle": "On commence par le plus petit nombre.",
+      "exemple": "17 < 45 < 54 < 71.",
+      "piege": "45 et 54 ne sont pas pareils : 45 vient avant."
+    },
+    {
+      "regle": "On trouve la dizaine, puis on compte les petits pas.",
+      "exemple": "36 est entre 30 et 40, au 6e petit trait.",
+      "piege": "36 n’est pas juste après 30 : il faut 6 petits pas."
+    },
+    {
+      "regle": "On ajoute « ième » : quatre → quatrième.",
+      "exemple": "1er, 2e, 3e… 10e… 20e.",
+      "piege": "On dit « premier », pas « unième »."
+    },
+    {
+      "regle": "On compte depuis le début de la file.",
+      "exemple": "Le chat est 4e : 3 animaux sont devant lui.",
+      "piege": "Depuis l’autre bout, il est 3e : on part du début."
+    },
+    {
+      "regle": "Défi : écris les dizaines, puis les unités.",
+      "exemple": "4 dizaines et 12 unités = 40 + 12 = 52.",
+      "piege": "Pas 412 : 12 unités = 1 dizaine et 2 unités."
+    }
+  ],
+  "cp/suite_nombre": [
+    {
+      "regle": "On part du nombre, puis on ajoute 1.",
+      "exemple": "Depuis 27 : 28, 29, 30, 31.",
+      "piege": "Après 29 vient 30, pas 20 ni 210."
+    },
+    {
+      "regle": "On enlève 1 à chaque fois.",
+      "exemple": "Depuis 43 : 42, 41, 40, 39.",
+      "piege": "Avant 40 vient 39, pas 30."
+    },
+    {
+      "regle": "On saute toujours le même nombre.",
+      "exemple": "De 5 en 5 : 5, 10, 15, 20, 25.",
+      "piege": "De 2 en 2 : 8, 10, 12. Pas 8, 9, 10."
+    },
+    {
+      "regle": "On trouve le saut, puis on remplit le trou.",
+      "exemple": "20, 30, …, 50 : le trou est 40.",
+      "piege": "20, 30, …, 50 : pas 31, on saute de 10."
+    },
+    {
+      "regle": "Défi : regarde de combien on avance.",
+      "exemple": "Léo gagne 2 billes par jour. Au jour 4 : 8 billes.",
+      "piege": "Pas 4 billes : on compte 2, 4, 6, 8."
+    }
+  ],
+  "cp/addition_soustraction": [
+    {
+      "regle": "Ajouter, c’est réunir deux paquets.",
+      "exemple": "3 poules et 4 poules : 3 + 4 = 7 poules.",
+      "piege": "3 + 4, ce n’est pas 34 : c’est 7."
+    },
+    {
+      "regle": "Enlever, c’est retirer une partie.",
+      "exemple": "8 ballons, 3 s’envolent : 8 − 3 = 5.",
+      "piege": "On ne fait pas 3 − 8 : on part de 8."
+    },
+    {
+      "regle": "Le signe = veut dire « autant que ».",
+      "exemple": "5 + 2 = 7.",
+      "piege": "7 = 5 + 2 est juste aussi : les deux côtés font 7."
+    },
+    {
+      "regle": "On passe par 10 : c’est plus facile.",
+      "exemple": "8 + 5 = 8 + 2 + 3 = 10 + 3 = 13.",
+      "piege": "8 + 5 = 13, pas 12 : on avance de 5."
+    },
+    {
+      "regle": "On recule, ou on cherche ce qui manque.",
+      "exemple": "12 − 4 = 8, car 8 + 4 = 12.",
+      "piege": "12 − 4 = 8, pas 16 : on enlève, on n’ajoute pas."
+    },
+    {
+      "regle": "On cherche ce qui manque pour aller au total.",
+      "exemple": "6 + … = 10 : il manque 4.",
+      "piege": "6 + … = 10 : ce n’est pas 16, c’est 4."
+    },
+    {
+      "regle": "Unités sous unités, dizaines sous dizaines.",
+      "exemple": "34 + 25 = 59 : 4 + 5 = 9, puis 3 + 2 = 5.",
+      "piege": "34 + 5 = 39 : le 5 va sous le 4, pas sous le 3."
+    },
+    {
+      "regle": "Plusieurs fois la même quantité : on répète l’addition.",
+      "exemple": "3 rangs de 2 coccinelles : 2 + 2 + 2 = 6.",
+      "piege": "3 rangs de 2, ce n’est pas 3 + 2 = 5."
+    },
+    {
+      "regle": "Défi : dessine les objets avant de calculer.",
+      "exemple": "Lina a 9 billes. Elle en gagne 5 : 9 + 5 = 14.",
+      "piege": "« Gagne » veut dire ajouter : pas 9 − 5 = 4."
+    }
+  ],
+  "cp/calcul_mental": [
+    {
+      "regle": "On sait 3 + 5, et aussi 5 + 3.",
+      "exemple": "3 + 5 = 8 et 5 + 3 = 8.",
+      "piege": "5 + 3 ne fait pas plus que 3 + 5 : c’est 8 aussi."
+    },
+    {
+      "regle": "On cherche ce qui manque pour faire 10.",
+      "exemple": "7 + 3 = 10 ; 6 + 4 = 10.",
+      "piege": "De 7 à 10, il manque 3, pas 4."
+    },
+    {
+      "regle": "Le double : on ajoute le même nombre.",
+      "exemple": "Double de 6 : 6 + 6 = 12. Double de 30 : 60.",
+      "piege": "Le double de 40 est 80, pas 42."
+    },
+    {
+      "regle": "La moitié : on partage en 2 parts égales.",
+      "exemple": "La moitié de 8 est 4, car 4 + 4 = 8.",
+      "piege": "La moitié de 8 n’est pas 16 : 16, c’est le double."
+    },
+    {
+      "regle": "+ 10 : le chiffre des dizaines grandit de 1.",
+      "exemple": "35 + 10 = 45 ; 35 + 2 = 37.",
+      "piege": "35 + 10 = 45, pas 36 : on ajoute une dizaine."
+    },
+    {
+      "regle": "On ajoute les dizaines, les unités ne bougent pas.",
+      "exemple": "25 + 30 = 55 ; 68 − 40 = 28.",
+      "piege": "25 + 30 = 55, pas 28 : 30, c’est 3 dizaines."
+    },
+    {
+      "regle": "On cherche ce qui manque pour la dizaine suivante.",
+      "exemple": "37 + 3 = 40 ; 52 + 8 = 60.",
+      "piege": "De 37 à 40, il manque 3, pas 7."
+    },
+    {
+      "regle": "Pour + 9 : on ajoute 10, puis on retire 1.",
+      "exemple": "24 + 9 = 24 + 10 − 1 = 33.",
+      "piege": "Après + 10, on retire 1 : 33, pas 35."
+    },
+    {
+      "regle": "On ajoute les dizaines, puis les unités.",
+      "exemple": "32 + 45 : 30 + 40 = 70, 2 + 5 = 7, donc 77.",
+      "piege": "Pas 3 + 2 + 4 + 5 = 14 : le 3 vaut 30."
+    },
+    {
+      "regle": "On casse une dizaine en 10 cubes pour enlever.",
+      "exemple": "40 − 3 = 37.",
+      "piege": "40 − 3 = 37, pas 43 : on enlève 3 cubes."
+    },
+    {
+      "regle": "Défi : fais d’abord 10, puis le reste.",
+      "exemple": "Tom a 7 € et gagne 5 € : 7 + 3 + 2 = 12 €.",
+      "piege": "7 + 5 = 12, pas 11 : 7 + 3 = 10, il reste 2."
+    }
+  ],
+  "cp/probleme": [
+    {
+      "regle": "On lit la question : que veut-on savoir ?",
+      "exemple": "5 pommes et 3 bananes. « Combien de fruits ? » → 8.",
+      "piege": "« Combien de pommes ? » → 5, pas 8."
+    },
+    {
+      "regle": "On connaît les parties : on les ajoute.",
+      "exemple": "12 filles et 9 garçons : 12 + 9 = 21 enfants.",
+      "piege": "21 enfants, 9 garçons : filles = 21 − 9, pas 21 + 9."
+    },
+    {
+      "regle": "Pour l’écart, on enlève le petit au grand.",
+      "exemple": "Sam a 15 cartes, Ana 9 : 15 − 9 = 6 de plus.",
+      "piege": "« Combien de plus ? » : 15 − 9, pas 15 + 9."
+    },
+    {
+      "regle": "On dessine des ronds ou une barre pour voir.",
+      "exemple": "4 oiseaux, puis 3 arrivent : 4 + 3 = 7 oiseaux.",
+      "piege": "Pour 7 oiseaux, 7 ronds suffisent : pas besoin d’ailes."
+    },
+    {
+      "regle": "On fait un calcul, puis un autre.",
+      "exemple": "Lou a 10 €. Il paie 3 € puis 2 € : reste 5 €.",
+      "piege": "Il ne reste pas 7 € : il faut aussi enlever 2 €."
+    },
+    {
+      "regle": "Chaque groupe a autant : on ajoute plusieurs fois.",
+      "exemple": "4 boîtes de 5 crayons : 5 + 5 + 5 + 5 = 20.",
+      "piege": "Ce n’est pas 4 + 5 = 9 : il y a 4 fois 5."
+    },
+    {
+      "regle": "On distribue un par un : chacun a pareil.",
+      "exemple": "12 bonbons pour Lou, Noé et Mia : 4 chacun.",
+      "piege": "3 chacun ne va pas : 3 + 3 + 3 = 9, pas 12."
+    },
+    {
+      "regle": "On répond par une phrase, avec l’unité.",
+      "exemple": "12 + 9 = 21. Réponse : il y a 21 enfants.",
+      "piege": "8 − 3 = 11 ? Impossible : on a enlevé, c’est moins."
+    },
+    {
+      "regle": "Défi : dessine, puis calcule.",
+      "exemple": "3 tables de 4 enfants : 12. 2 partent : 10.",
+      "piege": "Pas 3 + 4 − 2 = 5 : il y a 3 fois 4 enfants."
+    }
+  ],
+  "cp/longueur": [
+    {
+      "regle": "Long, court : la taille. Près, loin : la distance.",
+      "exemple": "Le banc est à 2 pas : près. L’arbre à 30 pas : loin.",
+      "piege": "5 carreaux : long à côté de 2. Court à côté de 9."
+    },
+    {
+      "regle": "On met les deux bouts au même départ.",
+      "exemple": "Crayon : 8 carreaux. Gomme : 3. Le crayon est plus long.",
+      "piege": "Ruban de 6 décalé : il paraît plus long que 7."
+    },
+    {
+      "regle": "On reporte la bandelette bout à bout, et on compte.",
+      "exemple": "Table : 4 bandelettes. Banc : 3. La table est plus longue.",
+      "piege": "Avec des trous entre les reports, on compte 3, pas 4."
+    },
+    {
+      "regle": "Le 0 de la règle va au début du trait.",
+      "exemple": "Trait de 0 à 7 : il mesure 7 cm.",
+      "piege": "Du 1 au 7 : 6 cm, pas 7 cm."
+    },
+    {
+      "regle": "1 mètre, c’est 100 centimètres : 1 m = 100 cm.",
+      "exemple": "Un grand pas fait environ 1 m. Un ongle, 1 cm.",
+      "piege": "1 m = 100 cm, pas 10 cm."
+    },
+    {
+      "regle": "Défi : dessine les deux longueurs avant de comparer.",
+      "exemple": "Léo : 6 carreaux. Ana : 9. 9 − 6 = 3 de plus pour Ana.",
+      "piege": "Ce n’est pas 6 + 9 = 15 : on cherche l’écart."
+    }
+  ],
+  "cp/masse_contenance": [
+    {
+      "regle": "Lourd : dur à porter. Léger : facile à porter.",
+      "exemple": "La pastèque est lourde. La plume est légère.",
+      "piege": "Gros ne veut pas dire lourd : un ballon de plage est léger."
+    },
+    {
+      "regle": "Le plateau qui descend porte le plus lourd.",
+      "exemple": "Pomme contre plume : le plateau de la pomme descend.",
+      "piege": "Le plateau en haut porte l’objet le plus léger."
+    },
+    {
+      "regle": "On compare deux par deux, puis on range.",
+      "exemple": "Clé, puis pomme, puis cartable plein.",
+      "piege": "Le plus léger d’abord : le cartable plein va en dernier."
+    },
+    {
+      "regle": "Défi : compare les objets deux par deux.",
+      "exemple": "Le livre pèse plus que la pomme. La pomme, plus que la clé.",
+      "piege": "Pas besoin de peser livre et clé : le livre gagne."
+    }
+  ],
+  "cp/duree": [
+    {
+      "regle": "La petite aiguille dit l’heure. La grande est sur 12.",
+      "exemple": "Petite sur 3, grande sur 12 : il est 3 heures.",
+      "piege": "Ce n’est pas 12 heures : on lit la petite aiguille."
+    },
+    {
+      "regle": "La grande va sur 12. La petite va sur l’heure.",
+      "exemple": "Pour 8 heures : grande sur 12, petite sur 8.",
+      "piege": "La grande reste sur 12, jamais sur 8."
+    },
+    {
+      "regle": "Chaque moment de la journée a son heure.",
+      "exemple": "8 h du matin : l’école. Midi, 12 h : on mange.",
+      "piege": "Le soir, 8 h, c’est le lit, pas l’école."
+    },
+    {
+      "regle": "Matin, puis midi, puis après-midi, puis soir.",
+      "exemple": "Lever, repas de midi, goûter, puis dodo.",
+      "piege": "Le goûter à 4 h suit le repas de midi."
+    },
+    {
+      "regle": "Défi : compte les heures sur l’horloge, une par une.",
+      "exemple": "Nina joue de 2 h à 4 h : 2 heures.",
+      "piege": "Compter 2, 3, 4 donne 3 : faux, c’est 2 heures."
+    }
+  ],
+  "cp/monnaie": [
+    {
+      "regle": "Les pièces vont jusqu’à 2 €. Après, ce sont des billets.",
+      "exemple": "Pièces : 1 €, 2 €. Billets : 5 €, 10 €, 20 €.",
+      "piege": "5 €, c’est un billet, pas une pièce."
+    },
+    {
+      "regle": "On commence par le plus gros, puis on ajoute.",
+      "exemple": "10 € + 2 € + 2 € + 1 € = 15 €.",
+      "piege": "Ce n’est pas 4 € : on lit chaque valeur."
+    },
+    {
+      "regle": "On compte chaque somme, puis on compare.",
+      "exemple": "Lou : 5 € + 5 € = 10 €. Téo : 10 € + 2 € = 12 €.",
+      "piege": "Lou a 2 billets, Téo 1, mais Téo a plus."
+    },
+    {
+      "regle": "On prend pièces et billets jusqu’à la somme.",
+      "exemple": "Pour 8 € : 5 € + 2 € + 1 € = 8 €.",
+      "piege": "5 € + 2 € = 7 € : il manque encore 1 €."
+    },
+    {
+      "regle": "On part du prix et on compte jusqu’au billet donné.",
+      "exemple": "Livre à 7 €, je donne 10 € : 8, 9, 10. On rend 3 €.",
+      "piege": "On ne rend pas 7 € : on rend 10 − 7 = 3 €."
+    },
+    {
+      "regle": "Défi : dessine les pièces, puis compte-les.",
+      "exemple": "Ana : 2 pièces de 2 €, 1 billet de 5 €. Total 9 €.",
+      "piege": "3 objets, mais pas 3 € : Ana a 9 €."
+    }
+  ],
+  "cp/reperage": [
+    {
+      "regle": "Sur : au-dessus et ça touche. Sous : en dessous.",
+      "exemple": "Le chat est sous la table. Le livre est sur la table.",
+      "piege": "« Sous la table » n’est pas « sur la table »."
+    },
+    {
+      "regle": "Gauche, droite : on se place comme le personnage.",
+      "exemple": "La pomme est à gauche du ballon. La voiture, à droite.",
+      "piege": "Face à moi, ma droite est à ta gauche."
+    },
+    {
+      "regle": "Le plan montre la classe vue d’en haut.",
+      "exemple": "Sur le plan, ma table est dans la 2e rangée.",
+      "piege": "La 2e rangée depuis le tableau, pas depuis le fond."
+    },
+    {
+      "regle": "On dit le nombre de cases et le sens.",
+      "exemple": "Maison : 3 à droite, 1 en haut → la fleur.",
+      "piege": "Ne compte pas la case de départ : 3, pas 4."
+    },
+    {
+      "regle": "On regarde chaque étage, puis on pose les mêmes pièces.",
+      "exemple": "En bas 3 cubes, en haut 1. Cela fait 4 cubes.",
+      "piege": "Le cube du haut compte aussi : 4 cubes, pas 3."
+    },
+    {
+      "regle": "Défi : suis le chemin avec ton doigt, case par case.",
+      "exemple": "Zoé : 2 cases en haut, 2 à droite. Elle trouve le trésor.",
+      "piege": "Ne fais pas 4 cases en haut : 2, puis tourne."
+    }
+  ],
+  "cp/figures_solides": [
+    {
+      "regle": "Disque : rond. Triangle : 3 côtés. Carré, rectangle : 4.",
+      "exemple": "Carré : 4 côtés pareils. Rectangle : 2 longs, 2 courts.",
+      "piege": "Penché, le carré reste un carré : 4 côtés pareils."
+    },
+    {
+      "regle": "Un côté est un trait droit. Un sommet est un coin.",
+      "exemple": "Le triangle a 3 côtés et 3 sommets.",
+      "piege": "Un disque n’a ni côté ni sommet : 0, pas 1."
+    },
+    {
+      "regle": "La boule roule partout. Le cube a des faces carrées.",
+      "exemple": "Un dé est un cube. Une boîte de conserve est un cylindre.",
+      "piege": "Le cube n’est pas un carré : le carré est plat."
+    },
+    {
+      "regle": "Une face est un côté plat du solide. On les compte.",
+      "exemple": "Le cube a 6 faces, toutes des carrés.",
+      "piege": "On en voit 3, mais le cube a 6 faces."
+    },
+    {
+      "regle": "On pose la règle sur les points. Tous touchent ? Alignés.",
+      "exemple": "3 piquets touchent la règle : ils sont alignés.",
+      "piege": "2 points touchent, le 3e non : pas alignés."
+    },
+    {
+      "regle": "On compte les carreaux de chaque côté, puis on trace.",
+      "exemple": "Carré de 3 carreaux : 4 côtés de 3 carreaux.",
+      "piege": "On compte les carreaux, pas les traits : 3, pas 4."
+    },
+    {
+      "regle": "Défi : compte les côtés de chaque figure, une à une.",
+      "exemple": "2 triangles et 1 carré : 3 + 3 + 4 = 10 côtés.",
+      "piege": "3 figures, mais 10 côtés : ne compte pas 3."
+    }
+  ],
+  "cp/donnees": [
+    {
+      "regle": "On cherche la ligne, puis on lit la case.",
+      "exemple": "Les buts : Lou 3, Sam 5. Sam a marqué 5 buts.",
+      "piege": "Pas la case voisine : Sam a 5, pas 3."
+    },
+    {
+      "regle": "On suit le haut de la barre jusqu’au nombre.",
+      "exemple": "Fraises 6, pommes 4. La barre des fraises monte à 6.",
+      "piege": "Lis le haut de la barre : 6, pas 3."
+    },
+    {
+      "regle": "On croise la ligne et la colonne : c’est la case.",
+      "exemple": "Ligne « chat », colonne « CP » : on écrit 4.",
+      "piege": "Ne mets pas 4 dans la colonne CE1 : c’est CP."
+    },
+    {
+      "regle": "Le plus : le plus grand nombre. Le moins : le plus petit.",
+      "exemple": "Billes : Ali 7, Mia 4, Tom 7. Mia en a le moins.",
+      "piege": "7 et 7 : ce n’est pas plus, c’est autant."
+    },
+    {
+      "regle": "Défi : lis les deux nombres, puis fais le calcul.",
+      "exemple": "Lundi 8 livres, mardi 5. 8 − 5 = 3 de plus lundi.",
+      "piege": "Ce n’est pas 8 + 5 = 13 : on cherche l’écart."
+    }
+  ],
+  "cp/algorithmique": [
+    {
+      "regle": "On fait les instructions une par une, dans l’ordre.",
+      "exemple": "Avance de 2, tourne à droite, avance de 1.",
+      "piege": "Après « tourne », on reste sur la même case."
+    },
+    {
+      "regle": "On écrit une flèche par case : → ↑ ← ↓.",
+      "exemple": "Du chat au poisson : → → ↑. 2 à droite, 1 en haut.",
+      "piege": "Une flèche par case : 2 cases, c’est → →, pas →."
+    },
+    {
+      "regle": "On trouve le motif, puis on le répète.",
+      "exemple": "Pomme, banane, pomme, banane : le 5e est une pomme.",
+      "piege": "Le 6e n’est pas une pomme : c’est une banane."
+    },
+    {
+      "regle": "Défi : joue le chemin avec ton doigt avant de répondre.",
+      "exemple": "Robot : avance 3, recule 1. Il est à 2 cases du départ.",
+      "piege": "Ce n’est pas 3 + 1 = 4 : reculer, c’est enlever."
+    }
+  ]
+}

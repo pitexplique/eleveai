@@ -1,0 +1,2922 @@
+{
+  "ce1/nombre_entier": {
+    "0": {
+      "kind": "base_dix",
+      "dizaines": 4,
+      "unites": 3,
+      "size": {
+        "width": 300
+      }
+    },
+    "2": {
+      "kind": "base_dix",
+      "centaines": 1,
+      "dizaines": 3,
+      "unites": 2,
+      "size": {
+        "width": 300
+      }
+    },
+    "3": {
+      "kind": "base_dix",
+      "dizaines": 10,
+      "echange": "dizaines",
+      "size": {
+        "width": 300
+      }
+    },
+    "5": {
+      "kind": "tableau_donnees",
+      "headers": [
+        "centaines",
+        "dizaines",
+        "unités"
+      ],
+      "rows": [
+        {
+          "values": [
+            "3",
+            "5",
+            "2"
+          ]
+        }
+      ],
+      "highlight": {
+        "col": 1
+      },
+      "display": {
+        "compact": true
+      }
+    },
+    "6": {
+      "kind": "base_dix",
+      "centaines": 2,
+      "dizaines": 4,
+      "unites": 7,
+      "etiquettes": true,
+      "size": {
+        "width": 300
+      }
+    },
+    "9": {
+      "kind": "number_line",
+      "min": 340,
+      "max": 350,
+      "step": 10,
+      "minorStep": 1,
+      "points": [
+        {
+          "value": 347,
+          "label": "347",
+          "color": "#2563eb"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "11": {
+      "kind": "number_line",
+      "min": 400,
+      "max": 500,
+      "step": 100,
+      "minorStep": 10,
+      "points": [
+        {
+          "value": 430,
+          "label": "430",
+          "color": "#2563eb"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "15": {
+      "kind": "animaux",
+      "groupes": [
+        {
+          "animal": "chien",
+          "nombre": 3
+        },
+        {
+          "animal": "chat",
+          "nombre": 1
+        },
+        {
+          "animal": "chien",
+          "nombre": 1
+        }
+      ],
+      "colonnes": 5,
+      "melange": false,
+      "graine": 7,
+      "taille": 40,
+      "description": "une file de cinq animaux, la tête à gauche",
+      "consigne": "la tête de la file est à gauche"
+    }
+  },
+  "ce1/suite_nombre": {
+    "0": {
+      "kind": "number_line",
+      "min": 0,
+      "max": 25,
+      "step": 5,
+      "minorStep": 1,
+      "points": [
+        {
+          "value": 5,
+          "color": "#dc2626"
+        },
+        {
+          "value": 10,
+          "color": "#dc2626"
+        },
+        {
+          "value": 15,
+          "color": "#dc2626"
+        },
+        {
+          "value": 20,
+          "color": "#dc2626"
+        },
+        {
+          "value": 25,
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "1": {
+      "kind": "number_line",
+      "min": 12,
+      "max": 21,
+      "step": 3,
+      "minorStep": 1,
+      "points": [
+        {
+          "value": 12,
+          "label": "12",
+          "color": "#2563eb"
+        },
+        {
+          "value": 15,
+          "label": "15",
+          "color": "#059669"
+        },
+        {
+          "value": 18,
+          "label": "18",
+          "color": "#7c3aed"
+        },
+        {
+          "value": 21,
+          "label": "21",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "2": {
+      "kind": "number_line",
+      "min": 360,
+      "max": 400,
+      "step": 10,
+      "points": [
+        {
+          "value": 370,
+          "color": "#dc2626"
+        },
+        {
+          "value": 380,
+          "color": "#dc2626"
+        },
+        {
+          "value": 390,
+          "color": "#dc2626"
+        },
+        {
+          "value": 400,
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    }
+  },
+  "ce1/addition_soustraction": {
+    "0": {
+      "kind": "calcul_pose",
+      "operation": "addition",
+      "numbers": [
+        "247",
+        "135"
+      ],
+      "result": "382",
+      "display": {
+        "showResult": true,
+        "compact": true
+      }
+    },
+    "1": {
+      "kind": "calcul_pose",
+      "operation": "soustraction",
+      "numbers": [
+        "352",
+        "127"
+      ],
+      "result": "225",
+      "display": {
+        "showResult": true,
+        "compact": true
+      }
+    },
+    "2": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "52",
+      "parts": [
+        {
+          "label": "déjà",
+          "value": "35",
+          "color": "#2563eb"
+        },
+        {
+          "label": "manque",
+          "unknown": true,
+          "color": "#9ca3af"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "4": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "125",
+      "parts": [
+        {
+          "label": "donne",
+          "value": "40",
+          "color": "#2563eb"
+        },
+        {
+          "label": "reste",
+          "unknown": true,
+          "color": "#9ca3af"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    }
+  },
+  "ce1/multiplication": {
+    "0": {
+      "kind": "animaux",
+      "groupes": [
+        {
+          "animal": "coccinelle",
+          "nombre": 12
+        }
+      ],
+      "colonnes": 3,
+      "melange": false,
+      "graine": 7,
+      "taille": 28,
+      "description": "quatre rangs de trois coccinelles"
+    },
+    "2": {
+      "kind": "animaux",
+      "groupes": [
+        {
+          "animal": "poussin",
+          "nombre": 15
+        }
+      ],
+      "colonnes": 5,
+      "melange": false,
+      "graine": 7,
+      "taille": 40,
+      "description": "trois rangs de cinq poussins"
+    },
+    "3": {
+      "kind": "animaux",
+      "groupes": [
+        {
+          "animal": "lapin",
+          "nombre": 14
+        }
+      ],
+      "colonnes": 7,
+      "melange": false,
+      "graine": 7,
+      "taille": 40,
+      "description": "deux rangs de sept lapins"
+    },
+    "4": {
+      "kind": "number_line",
+      "min": 0,
+      "max": 14,
+      "step": 2,
+      "points": [
+        {
+          "value": 2,
+          "color": "#dc2626"
+        },
+        {
+          "value": 4,
+          "color": "#dc2626"
+        },
+        {
+          "value": 6,
+          "color": "#dc2626"
+        },
+        {
+          "value": 8,
+          "color": "#dc2626"
+        },
+        {
+          "value": 10,
+          "color": "#dc2626"
+        },
+        {
+          "value": 12,
+          "color": "#dc2626"
+        },
+        {
+          "value": 14,
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "5": {
+      "kind": "monnaie",
+      "elements": [
+        {
+          "valeur": "5e",
+          "nombre": 6
+        }
+      ],
+      "size": {
+        "width": 300
+      }
+    },
+    "6": {
+      "kind": "base_dix",
+      "dizaines": 4,
+      "size": {
+        "width": 300
+      }
+    },
+    "7": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "12",
+      "parts": [
+        {
+          "label": "sac",
+          "value": "4",
+          "color": "#2563eb"
+        },
+        {
+          "label": "sac",
+          "value": "4",
+          "color": "#059669"
+        },
+        {
+          "label": "sac",
+          "value": "4",
+          "color": "#2563eb"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    }
+  },
+  "ce1/division_partage": {
+    "0": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "12",
+      "parts": [
+        {
+          "label": "Ana",
+          "value": "4",
+          "color": "#2563eb"
+        },
+        {
+          "label": "Noé",
+          "value": "4",
+          "color": "#059669"
+        },
+        {
+          "label": "Sam",
+          "value": "4",
+          "color": "#2563eb"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "1": {
+      "kind": "animaux",
+      "groupes": [
+        {
+          "animal": "poisson",
+          "nombre": 20
+        }
+      ],
+      "colonnes": 5,
+      "melange": false,
+      "graine": 7,
+      "taille": 28,
+      "description": "quatre rangs de cinq poissons"
+    },
+    "3": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "46",
+      "parts": [
+        {
+          "label": "Lou",
+          "value": "23",
+          "color": "#2563eb"
+        },
+        {
+          "label": "Max",
+          "value": "23",
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    }
+  },
+  "ce1/calcul_mental": {
+    "0": {
+      "kind": "base_dix",
+      "variante": "cadres",
+      "nombre": 7,
+      "ajout": 5,
+      "size": {
+        "width": 300
+      }
+    },
+    "4": {
+      "kind": "number_line",
+      "min": 40,
+      "max": 50,
+      "step": 10,
+      "minorStep": 1,
+      "points": [
+        {
+          "value": 47,
+          "label": "47",
+          "color": "#2563eb"
+        },
+        {
+          "value": 50,
+          "label": "50",
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "6": {
+      "kind": "tableau_donnees",
+      "headers": [
+        "",
+        "centaines",
+        "dizaines",
+        "unités"
+      ],
+      "rows": [
+        {
+          "values": [
+            "23",
+            "",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "values": [
+            "23 × 10",
+            "2",
+            "3",
+            "0"
+          ]
+        }
+      ],
+      "highlight": {
+        "row": 1
+      },
+      "display": {
+        "compact": true
+      }
+    },
+    "9": {
+      "kind": "number_line",
+      "min": 35,
+      "max": 45,
+      "step": 5,
+      "minorStep": 1,
+      "points": [
+        {
+          "value": 42,
+          "label": "42",
+          "color": "#2563eb"
+        },
+        {
+          "value": 40,
+          "label": "40",
+          "color": "#059669"
+        },
+        {
+          "value": 37,
+          "label": "37",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "10": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "48",
+      "parts": [
+        {
+          "label": "moitié",
+          "value": "24",
+          "color": "#2563eb"
+        },
+        {
+          "label": "moitié",
+          "value": "24",
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    }
+  },
+  "ce1/fraction": {
+    "0": {
+      "kind": "fraction",
+      "model": "circle",
+      "fraction": {
+        "numerator": 1,
+        "denominator": 4
+      },
+      "display": {
+        "showFraction": true,
+        "showParts": true
+      },
+      "size": {
+        "width": 220,
+        "height": 200
+      }
+    },
+    "1": {
+      "kind": "fraction",
+      "model": "bar",
+      "fraction": {
+        "numerator": 1,
+        "denominator": 2
+      },
+      "display": {
+        "showFraction": true,
+        "showParts": true
+      },
+      "size": {
+        "width": 240,
+        "height": 140
+      }
+    },
+    "2": {
+      "kind": "fraction",
+      "model": "grid",
+      "grid": {
+        "rows": 2,
+        "cols": 4,
+        "shaded": 2
+      },
+      "display": {
+        "showParts": true
+      },
+      "size": {
+        "width": 240,
+        "height": 140
+      }
+    },
+    "3": {
+      "kind": "fraction",
+      "model": "bar",
+      "fraction": {
+        "numerator": 1,
+        "denominator": 3
+      },
+      "display": {
+        "showFraction": true,
+        "showParts": true
+      },
+      "size": {
+        "width": 240,
+        "height": 140
+      }
+    },
+    "5": {
+      "kind": "fraction",
+      "model": "bar",
+      "fraction": {
+        "numerator": 3,
+        "denominator": 4
+      },
+      "display": {
+        "showFraction": true,
+        "showParts": true
+      },
+      "size": {
+        "width": 240,
+        "height": 140
+      }
+    },
+    "6": {
+      "kind": "fraction",
+      "model": "bar",
+      "fraction": {
+        "numerator": 2,
+        "denominator": 5
+      },
+      "display": {
+        "showFraction": true,
+        "showParts": true
+      },
+      "size": {
+        "width": 240,
+        "height": 140
+      }
+    },
+    "8": {
+      "kind": "fraction",
+      "model": "compare",
+      "fractions": [
+        {
+          "numerator": 3,
+          "denominator": 8,
+          "color": "#2563eb"
+        },
+        {
+          "numerator": 5,
+          "denominator": 8,
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showLabel": true,
+        "showFraction": true,
+        "showParts": true
+      },
+      "size": {
+        "width": 260,
+        "height": 200
+      }
+    },
+    "9": {
+      "kind": "fraction",
+      "model": "compare",
+      "fractions": [
+        {
+          "numerator": 1,
+          "denominator": 4,
+          "color": "#2563eb"
+        },
+        {
+          "numerator": 1,
+          "denominator": 8,
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showLabel": true,
+        "showFraction": true,
+        "showParts": true
+      },
+      "size": {
+        "width": 260,
+        "height": 200
+      }
+    },
+    "11": {
+      "kind": "fraction",
+      "model": "circle",
+      "fraction": {
+        "numerator": 3,
+        "denominator": 4
+      },
+      "display": {
+        "showFraction": true,
+        "showParts": true
+      },
+      "size": {
+        "width": 220,
+        "height": 200
+      }
+    },
+    "12": {
+      "kind": "fraction",
+      "model": "circle",
+      "fraction": {
+        "numerator": 2,
+        "denominator": 6
+      },
+      "display": {
+        "showFraction": true,
+        "showParts": true
+      },
+      "size": {
+        "width": 220,
+        "height": 200
+      }
+    }
+  },
+  "ce1/probleme": {
+    "1": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "27",
+      "parts": [
+        {
+          "label": "filles",
+          "value": "14",
+          "color": "#2563eb"
+        },
+        {
+          "label": "garçons",
+          "value": "13",
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "3": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "40",
+      "parts": [
+        {
+          "label": "lundi",
+          "value": "12",
+          "color": "#2563eb"
+        },
+        {
+          "label": "mardi",
+          "value": "15",
+          "color": "#059669"
+        },
+        {
+          "label": "reste",
+          "unknown": true,
+          "color": "#9ca3af"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "4": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "20",
+      "parts": [
+        {
+          "label": "",
+          "value": "4",
+          "color": "#2563eb"
+        },
+        {
+          "label": "",
+          "value": "4",
+          "color": "#059669"
+        },
+        {
+          "label": "",
+          "value": "4",
+          "color": "#2563eb"
+        },
+        {
+          "label": "",
+          "value": "4",
+          "color": "#059669"
+        },
+        {
+          "label": "",
+          "value": "4",
+          "color": "#2563eb"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": false,
+        "showValues": true
+      }
+    },
+    "5": {
+      "kind": "monnaie",
+      "elements": [
+        {
+          "valeur": "2e",
+          "nombre": 3
+        },
+        {
+          "valeur": "1e"
+        }
+      ],
+      "size": {
+        "width": 300
+      }
+    },
+    "6": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "50",
+      "parts": [
+        {
+          "label": "occupées",
+          "value": "32",
+          "color": "#2563eb"
+        },
+        {
+          "label": "libres",
+          "unknown": true,
+          "color": "#9ca3af"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    }
+  },
+  "ce1/longueur": {
+    "1": {
+      "kind": "number_line",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "points": [
+        {
+          "value": 0,
+          "color": "#2563eb"
+        },
+        {
+          "value": 7,
+          "label": "7 cm",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "2": {
+      "kind": "objets",
+      "elements": [
+        {
+          "quoi": "ballon",
+          "label": "ballon : 22 cm"
+        },
+        {
+          "quoi": "voiture",
+          "label": "voiture : 4 m"
+        }
+      ],
+      "mode": "couleur",
+      "size": {
+        "width": 280,
+        "height": 140
+      }
+    },
+    "3": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 150
+      },
+      "total": "200 cm",
+      "parts": [
+        {
+          "label": "1 m",
+          "value": "100 cm",
+          "color": "#2563eb"
+        },
+        {
+          "label": "1 m",
+          "value": "100 cm",
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "4": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "A",
+          "x": 0,
+          "y": 40,
+          "nom": ""
+        },
+        {
+          "id": "B",
+          "x": 200,
+          "y": 40,
+          "nom": ""
+        },
+        {
+          "id": "Cc",
+          "x": 0,
+          "y": 0,
+          "nom": ""
+        },
+        {
+          "id": "D",
+          "x": 180,
+          "y": 0,
+          "nom": ""
+        },
+        {
+          "id": "z1",
+          "x": 100,
+          "y": 75,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "z2",
+          "x": 100,
+          "y": -25,
+          "nom": "",
+          "cache": true
+        }
+      ],
+      "segments": [
+        {
+          "a": "A",
+          "b": "B",
+          "couleur": "#2563eb",
+          "epais": true,
+          "texte": "1 m = 100 cm"
+        },
+        {
+          "a": "Cc",
+          "b": "D",
+          "couleur": "#ea580c",
+          "epais": true,
+          "texte": "90 cm"
+        }
+      ],
+      "largeur": 210,
+      "hauteurMax": 140
+    },
+    "6": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 150
+      },
+      "total": "200 cm",
+      "parts": [
+        {
+          "label": "pas",
+          "value": "50 cm",
+          "color": "#2563eb"
+        },
+        {
+          "label": "pas",
+          "value": "50 cm",
+          "color": "#059669"
+        },
+        {
+          "label": "pas",
+          "value": "50 cm",
+          "color": "#ea580c"
+        },
+        {
+          "label": "pas",
+          "value": "50 cm",
+          "color": "#2563eb"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "7": {
+      "kind": "number_line",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "points": [
+        {
+          "value": 0,
+          "color": "#2563eb"
+        },
+        {
+          "value": 6,
+          "label": "6 cm",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "8": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 150
+      },
+      "total": "100 cm",
+      "parts": [
+        {
+          "label": "coupé",
+          "value": "40 cm",
+          "color": "#2563eb"
+        },
+        {
+          "label": "reste",
+          "value": "60 cm",
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    }
+  },
+  "ce1/masse": {
+    "0": {
+      "kind": "masse",
+      "variant": "objets",
+      "objets": [
+        {
+          "label": "pastèque",
+          "icon": "🍉"
+        },
+        {
+          "label": "pomme",
+          "icon": "🍎"
+        }
+      ],
+      "display": {
+        "showMasses": false,
+        "showLabels": true,
+        "showComparison": false
+      },
+      "size": {
+        "width": 260,
+        "height": 140
+      }
+    },
+    "1": {
+      "kind": "masse",
+      "variant": "objets",
+      "objets": [
+        {
+          "label": "pomme",
+          "icon": "🍎",
+          "masse": "150 g"
+        },
+        {
+          "label": "riz",
+          "icon": "🍚",
+          "masse": "5 kg"
+        }
+      ],
+      "display": {
+        "showMasses": true,
+        "showLabels": true,
+        "showComparison": false
+      },
+      "size": {
+        "width": 280,
+        "height": 150
+      }
+    },
+    "2": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 150
+      },
+      "total": "1 kg",
+      "parts": [
+        {
+          "label": "paquet",
+          "value": "500 g",
+          "color": "#2563eb"
+        },
+        {
+          "label": "paquet",
+          "value": "500 g",
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "3": {
+      "kind": "masse",
+      "variant": "objets",
+      "objets": [
+        {
+          "label": "sucre",
+          "icon": "🍬",
+          "masse": "1 kg"
+        },
+        {
+          "label": "farine",
+          "icon": "🌾",
+          "masse": "900 g"
+        }
+      ],
+      "display": {
+        "showMasses": true,
+        "showLabels": true,
+        "showComparison": false
+      },
+      "size": {
+        "width": 280,
+        "height": 150
+      }
+    },
+    "5": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 150
+      },
+      "total": "5 kg",
+      "parts": [
+        {
+          "label": "pommes",
+          "value": "2 kg",
+          "color": "#2563eb"
+        },
+        {
+          "label": "patates",
+          "value": "3 kg",
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "6": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 150
+      },
+      "total": "1 000 g",
+      "parts": [
+        {
+          "label": "pris",
+          "value": "300 g",
+          "color": "#2563eb"
+        },
+        {
+          "label": "reste",
+          "value": "700 g",
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    }
+  },
+  "ce1/duree": {
+    "0": {
+      "kind": "duree",
+      "variant": "horloge",
+      "time": {
+        "hour": 3,
+        "minute": 30,
+        "label": "3 h 30"
+      },
+      "display": {
+        "showNumbers": true,
+        "showMinuteTicks": true,
+        "showDigital": false
+      },
+      "size": {
+        "width": 180,
+        "height": 180
+      }
+    },
+    "1": {
+      "kind": "duree",
+      "variant": "horloge",
+      "time": {
+        "hour": 8,
+        "minute": 15,
+        "label": "8 h 15"
+      },
+      "display": {
+        "showNumbers": true,
+        "showMinuteTicks": true,
+        "showDigital": false
+      },
+      "size": {
+        "width": 180,
+        "height": 180
+      }
+    },
+    "2": {
+      "kind": "duree",
+      "variant": "digital",
+      "digital": {
+        "text": "15 h 00",
+        "label": "3 h de l’après-midi"
+      },
+      "size": {
+        "width": 240,
+        "height": 120
+      }
+    },
+    "3": {
+      "kind": "duree",
+      "variant": "frise",
+      "frise": {
+        "startLabel": "0 min",
+        "endLabel": "60 min",
+        "steps": [
+          {
+            "label": "30 min",
+            "minutes": 30
+          },
+          {
+            "label": "15 min",
+            "minutes": 15
+          },
+          {
+            "label": "15 min",
+            "minutes": 15
+          }
+        ]
+      }
+    },
+    "4": {
+      "kind": "duree",
+      "variant": "frise",
+      "frise": {
+        "startLabel": "14 h",
+        "endLabel": "16 h",
+        "steps": [
+          {
+            "label": "1 h",
+            "minutes": 60
+          },
+          {
+            "label": "1 h",
+            "minutes": 60
+          }
+        ]
+      }
+    },
+    "5": {
+      "kind": "duree",
+      "variant": "frise",
+      "frise": {
+        "startLabel": "0",
+        "endLabel": "1 h 50",
+        "steps": [
+          {
+            "label": "1 h 20 min",
+            "minutes": 80
+          },
+          {
+            "label": "30 min",
+            "minutes": 30
+          }
+        ]
+      }
+    },
+    "6": {
+      "kind": "tableau_donnees",
+      "headers": [
+        "lun",
+        "mar",
+        "mer",
+        "jeu",
+        "ven",
+        "sam",
+        "dim"
+      ],
+      "rows": [
+        {
+          "values": [
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        },
+        {
+          "values": [
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16"
+          ]
+        }
+      ],
+      "highlight": {
+        "cell": {
+          "row": 1,
+          "col": 0
+        }
+      },
+      "display": {
+        "compact": true
+      }
+    },
+    "7": {
+      "kind": "duree",
+      "variant": "frise",
+      "frise": {
+        "startLabel": "9 h 30",
+        "endLabel": "10 h 15",
+        "steps": [
+          {
+            "label": "30 min",
+            "minutes": 30
+          },
+          {
+            "label": "15 min",
+            "minutes": 15
+          }
+        ]
+      }
+    }
+  },
+  "ce1/monnaie": {
+    "0": {
+      "kind": "monnaie",
+      "groupes": [
+        {
+          "nom": "50 c + 50 c",
+          "elements": [
+            {
+              "valeur": "50c",
+              "nombre": 2
+            }
+          ]
+        },
+        {
+          "nom": "1 €",
+          "elements": [
+            {
+              "valeur": "1e"
+            }
+          ]
+        }
+      ],
+      "size": {
+        "width": 300
+      }
+    },
+    "1": {
+      "kind": "monnaie",
+      "elements": [
+        {
+          "valeur": "10e"
+        },
+        {
+          "valeur": "2e",
+          "nombre": 2
+        },
+        {
+          "valeur": "1e"
+        }
+      ],
+      "size": {
+        "width": 300
+      }
+    },
+    "2": {
+      "kind": "monnaie",
+      "groupes": [
+        {
+          "nom": "Nina",
+          "elements": [
+            {
+              "valeur": "5e",
+              "nombre": 2
+            }
+          ]
+        },
+        {
+          "nom": "Tom",
+          "elements": [
+            {
+              "valeur": "2e",
+              "nombre": 3
+            }
+          ]
+        }
+      ],
+      "size": {
+        "width": 300
+      }
+    },
+    "3": {
+      "kind": "monnaie",
+      "elements": [
+        {
+          "valeur": "20e"
+        },
+        {
+          "valeur": "5e"
+        },
+        {
+          "valeur": "2e"
+        }
+      ],
+      "size": {
+        "width": 300
+      }
+    },
+    "4": {
+      "kind": "monnaie",
+      "groupes": [
+        {
+          "nom": "je donne",
+          "elements": [
+            {
+              "valeur": "10e"
+            }
+          ]
+        },
+        {
+          "nom": "on me rend",
+          "elements": [
+            {
+              "valeur": "2e"
+            },
+            {
+              "valeur": "1e"
+            }
+          ]
+        }
+      ],
+      "size": {
+        "width": 300
+      }
+    },
+    "5": {
+      "kind": "monnaie",
+      "elements": [
+        {
+          "valeur": "1e",
+          "nombre": 3
+        },
+        {
+          "valeur": "50c"
+        }
+      ],
+      "size": {
+        "width": 300
+      }
+    },
+    "6": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 150
+      },
+      "total": "5 €",
+      "parts": [
+        {
+          "label": "cahier",
+          "value": "3 €",
+          "color": "#2563eb"
+        },
+        {
+          "label": "stylo",
+          "value": "2 €",
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "7": {
+      "kind": "monnaie",
+      "elements": [
+        {
+          "valeur": "2e",
+          "nombre": 3
+        }
+      ],
+      "size": {
+        "width": 300
+      }
+    }
+  },
+  "ce1/reperage": {
+    "1": {
+      "kind": "objets",
+      "elements": [
+        {
+          "quoi": "ballon",
+          "label": "ballon"
+        },
+        {
+          "quoi": "chat",
+          "label": "chat",
+          "marque": true
+        },
+        {
+          "quoi": "livre",
+          "label": "livre"
+        }
+      ],
+      "colonnes": 3,
+      "mode": "couleur",
+      "size": {
+        "width": 280,
+        "height": 130
+      }
+    },
+    "3": {
+      "kind": "solide_3d",
+      "solide": "assemblage_cubes",
+      "cubes": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "z": 0
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "z": 1
+        }
+      ],
+      "display": {
+        "showLabels": false,
+        "showDimensions": false
+      }
+    },
+    "4": {
+      "kind": "reperage",
+      "size": {
+        "width": 260,
+        "height": 200
+      },
+      "display": {
+        "showGrid": true,
+        "showAxes": false,
+        "showCoordinates": false,
+        "showPointLabels": true,
+        "showTarget": true
+      },
+      "grid": {
+        "rows": 3,
+        "cols": 3
+      },
+      "points": [
+        {
+          "x": 1,
+          "y": 2,
+          "label": "nœud",
+          "color": "#dc2626"
+        }
+      ]
+    },
+    "5": {
+      "kind": "reperage",
+      "size": {
+        "width": 260,
+        "height": 200
+      },
+      "display": {
+        "showGrid": true,
+        "showAxes": false,
+        "showCoordinates": true,
+        "showPointLabels": true,
+        "showTarget": true
+      },
+      "grid": {
+        "rows": 4,
+        "cols": 4,
+        "xLabels": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "yLabels": [
+          "",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "points": [
+        {
+          "x": 1,
+          "y": 3,
+          "label": "★",
+          "color": "#dc2626"
+        }
+      ]
+    },
+    "6": {
+      "kind": "reperage",
+      "size": {
+        "width": 260,
+        "height": 200
+      },
+      "display": {
+        "showGrid": true,
+        "showAxes": false,
+        "showCoordinates": false,
+        "showPointLabels": true,
+        "showTarget": true
+      },
+      "grid": {
+        "rows": 3,
+        "cols": 5
+      },
+      "path": {
+        "start": {
+          "x": 0,
+          "y": 0,
+          "label": "départ"
+        },
+        "steps": [
+          {
+            "direction": "droite",
+            "count": 3
+          },
+          {
+            "direction": "haut",
+            "count": 2
+          }
+        ],
+        "showArrows": true
+      },
+      "target": {
+        "x": 3,
+        "y": 2,
+        "label": "★",
+        "hidden": false
+      }
+    },
+    "7": {
+      "kind": "reperage",
+      "size": {
+        "width": 260,
+        "height": 200
+      },
+      "display": {
+        "showGrid": true,
+        "showAxes": false,
+        "showCoordinates": true,
+        "showPointLabels": true,
+        "showTarget": true
+      },
+      "grid": {
+        "rows": 3,
+        "cols": 4,
+        "xLabels": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "yLabels": [
+          "",
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "path": {
+        "start": {
+          "x": 0,
+          "y": 1,
+          "label": "A1"
+        },
+        "steps": [
+          {
+            "direction": "droite",
+            "count": 2
+          },
+          {
+            "direction": "haut",
+            "count": 1
+          }
+        ],
+        "showArrows": true
+      },
+      "target": {
+        "x": 2,
+        "y": 2,
+        "label": "C2",
+        "hidden": false
+      }
+    }
+  },
+  "ce1/droites_segments": {
+    "0": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "A",
+          "x": 0,
+          "y": 4,
+          "nom": ""
+        },
+        {
+          "id": "B",
+          "x": 5,
+          "y": 4,
+          "nom": ""
+        },
+        {
+          "id": "E",
+          "x": 1,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "F",
+          "x": 5,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "z",
+          "x": 7,
+          "y": 2,
+          "nom": "",
+          "cache": true
+        }
+      ],
+      "segments": [
+        {
+          "a": "A",
+          "b": "B",
+          "couleur": "#2563eb",
+          "epais": true,
+          "texte": "segment"
+        },
+        {
+          "a": "E",
+          "b": "F",
+          "sansTrait": true,
+          "couleur": "#dc2626",
+          "texte": "droite"
+        }
+      ],
+      "droites": [
+        {
+          "a": "E",
+          "b": "F",
+          "couleur": "#dc2626"
+        }
+      ],
+      "largeur": 240,
+      "hauteurMax": 160
+    },
+    "1": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "P",
+          "x": 0,
+          "y": 0,
+          "nom": "",
+          "couleur": "#dc2626"
+        },
+        {
+          "id": "Q",
+          "x": 3,
+          "y": 1,
+          "nom": "",
+          "couleur": "#dc2626"
+        },
+        {
+          "id": "R",
+          "x": 6,
+          "y": 2,
+          "nom": "",
+          "couleur": "#dc2626"
+        }
+      ],
+      "droites": [
+        {
+          "a": "P",
+          "b": "R",
+          "couleur": "#2563eb",
+          "pointille": true
+        }
+      ],
+      "largeur": 240,
+      "hauteurMax": 120
+    },
+    "2": {
+      "kind": "number_line",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "points": [
+        {
+          "value": 0,
+          "color": "#2563eb"
+        },
+        {
+          "value": 8,
+          "label": "8 cm",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "3": {
+      "kind": "number_line",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "points": [
+        {
+          "value": 0,
+          "color": "#2563eb"
+        },
+        {
+          "value": 5,
+          "label": "milieu",
+          "color": "#dc2626"
+        },
+        {
+          "value": 10,
+          "label": "10 cm",
+          "color": "#2563eb"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "4": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "A",
+          "x": 0,
+          "y": 0,
+          "nom": ""
+        },
+        {
+          "id": "B",
+          "x": 5,
+          "y": 0,
+          "nom": ""
+        },
+        {
+          "id": "Cc",
+          "x": 1.5,
+          "y": 3,
+          "nom": ""
+        }
+      ],
+      "segments": [
+        {
+          "a": "A",
+          "b": "B",
+          "couleur": "#2563eb"
+        },
+        {
+          "a": "B",
+          "b": "Cc",
+          "couleur": "#2563eb"
+        },
+        {
+          "a": "Cc",
+          "b": "A",
+          "couleur": "#2563eb"
+        }
+      ],
+      "largeur": 200,
+      "hauteurMax": 140
+    }
+  },
+  "ce1/figures_planes": {
+    "0": {
+      "kind": "quadrilatere",
+      "size": {
+        "width": 260,
+        "height": 200
+      },
+      "points": {
+        "A": {
+          "x": 130,
+          "y": 25
+        },
+        "B": {
+          "x": 205,
+          "y": 100
+        },
+        "C": {
+          "x": 130,
+          "y": 175
+        },
+        "D": {
+          "x": 55,
+          "y": 100
+        }
+      },
+      "labels": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "sideLabels": {},
+      "display": {
+        "showPoints": false,
+        "showLabels": false,
+        "showSides": false
+      },
+      "marks": {
+        "rightAnglesAt": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      }
+    },
+    "1": {
+      "kind": "triangle",
+      "size": {
+        "width": 240,
+        "height": 190
+      },
+      "points": {
+        "A": {
+          "x": 40,
+          "y": 155
+        },
+        "B": {
+          "x": 190,
+          "y": 155
+        },
+        "C": {
+          "x": 40,
+          "y": 42.5
+        }
+      },
+      "labels": {
+        "A": "",
+        "B": "",
+        "C": ""
+      },
+      "sideLabels": {
+        "AB": "4 cm",
+        "CA": "3 cm"
+      },
+      "marks": {
+        "rightAngleAt": "A"
+      },
+      "display": {
+        "showPoints": true,
+        "showLabels": false,
+        "showSides": true,
+        "showAngles": false
+      }
+    },
+    "4": {
+      "kind": "deux_angles",
+      "mode": "cote_a_cote",
+      "angles": [
+        {
+          "deg": 30,
+          "nom": "1 h : aigu",
+          "longueur": 95,
+          "rotation": 0
+        },
+        {
+          "deg": 150,
+          "nom": "5 h : obtus",
+          "longueur": 55,
+          "rotation": 0
+        }
+      ]
+    },
+    "5": {
+      "kind": "quadrilatere",
+      "size": {
+        "width": 260,
+        "height": 200
+      },
+      "points": {
+        "A": {
+          "x": 70,
+          "y": 30
+        },
+        "B": {
+          "x": 190,
+          "y": 30
+        },
+        "C": {
+          "x": 190,
+          "y": 150
+        },
+        "D": {
+          "x": 70,
+          "y": 150
+        }
+      },
+      "labels": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "sideLabels": {},
+      "display": {
+        "showPoints": false,
+        "showLabels": false,
+        "showSides": false
+      },
+      "marks": {
+        "rightAnglesAt": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      }
+    },
+    "6": {
+      "kind": "quadrilatere",
+      "size": {
+        "width": 260,
+        "height": 200
+      },
+      "points": {
+        "A": {
+          "x": 50,
+          "y": 45
+        },
+        "B": {
+          "x": 210,
+          "y": 45
+        },
+        "C": {
+          "x": 210,
+          "y": 152
+        },
+        "D": {
+          "x": 50,
+          "y": 152
+        }
+      },
+      "labels": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "sideLabels": {
+        "AB": "6 cm",
+        "BC": "4 cm",
+        "CD": "6 cm",
+        "DA": "4 cm"
+      },
+      "display": {
+        "showPoints": false,
+        "showLabels": false,
+        "showSides": true
+      },
+      "marks": {
+        "rightAnglesAt": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      }
+    },
+    "7": {
+      "kind": "figure_libre",
+      "size": {
+        "width": 204,
+        "height": 170,
+        "cellSize": 34
+      },
+      "grid": {
+        "rows": 5,
+        "cols": 6,
+        "filledCells": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ]
+        ]
+      },
+      "display": {
+        "showGrid": true,
+        "showFilled": true,
+        "showPerimeter": true
+      },
+      "colors": {
+        "filled": "#dbeafe",
+        "perimeter": "#dc2626"
+      }
+    },
+    "8": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "O",
+          "x": 0,
+          "y": 0,
+          "nom": "centre"
+        },
+        {
+          "id": "M",
+          "x": 3,
+          "y": 0,
+          "nom": "",
+          "couleur": "#059669"
+        }
+      ],
+      "segments": [
+        {
+          "a": "O",
+          "b": "M",
+          "couleur": "#059669",
+          "texte": "3 cm"
+        }
+      ],
+      "cercles": [
+        {
+          "centre": "O",
+          "rayon": 3,
+          "couleur": "#2563eb"
+        }
+      ],
+      "largeur": 170,
+      "hauteurMax": 170
+    },
+    "9": {
+      "kind": "construction",
+      "points": [
+        {
+          "id": "A",
+          "x": 0,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "B",
+          "x": 6,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "Cc",
+          "x": 6,
+          "y": 3,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "D",
+          "x": 0,
+          "y": 3,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "M",
+          "x": 3,
+          "y": 0,
+          "nom": "",
+          "cache": true
+        },
+        {
+          "id": "N",
+          "x": 3,
+          "y": 3,
+          "nom": "",
+          "cache": true
+        }
+      ],
+      "polygones": [
+        {
+          "sommets": [
+            "A",
+            "M",
+            "N",
+            "D"
+          ],
+          "fond": "rgba(37,99,235,0.12)"
+        },
+        {
+          "sommets": [
+            "M",
+            "B",
+            "Cc",
+            "N"
+          ],
+          "fond": "rgba(5,150,105,0.12)"
+        }
+      ],
+      "segments": [
+        {
+          "a": "A",
+          "b": "B"
+        },
+        {
+          "a": "B",
+          "b": "Cc"
+        },
+        {
+          "a": "Cc",
+          "b": "D"
+        },
+        {
+          "a": "D",
+          "b": "A"
+        },
+        {
+          "a": "M",
+          "b": "N",
+          "couleur": "#dc2626",
+          "epais": true
+        }
+      ],
+      "largeur": 220,
+      "hauteurMax": 120
+    }
+  },
+  "ce1/solides": {
+    "0": {
+      "kind": "solide_3d",
+      "solide": "cylindre",
+      "display": {
+        "showLabels": false,
+        "showDimensions": false
+      }
+    },
+    "1": {
+      "kind": "solide_3d",
+      "solide": "pave_droit",
+      "display": {
+        "showLabels": false,
+        "showDimensions": false
+      }
+    },
+    "2": {
+      "kind": "solide_3d",
+      "solide": "cube",
+      "display": {
+        "showLabels": false,
+        "showDimensions": false
+      }
+    },
+    "5": {
+      "kind": "solide_3d",
+      "solide": "pyramide",
+      "display": {
+        "showLabels": false,
+        "showDimensions": false
+      }
+    }
+  },
+  "ce1/donnees": {
+    "0": {
+      "kind": "tableau_donnees",
+      "headers": [
+        "fruit",
+        "nombre"
+      ],
+      "rows": [
+        {
+          "values": [
+            "pommes",
+            "8"
+          ]
+        },
+        {
+          "values": [
+            "bananes",
+            "5"
+          ]
+        }
+      ],
+      "highlight": {
+        "row": 0
+      },
+      "display": {
+        "compact": true
+      }
+    },
+    "1": {
+      "kind": "tableau_donnees",
+      "coin": "",
+      "headers": [
+        "lundi",
+        "mardi"
+      ],
+      "rows": [
+        {
+          "label": "Léa",
+          "values": [
+            "2",
+            "4"
+          ]
+        },
+        {
+          "label": "Hugo",
+          "values": [
+            "3",
+            "5"
+          ]
+        }
+      ],
+      "highlight": {
+        "cell": {
+          "row": 0,
+          "col": 1
+        }
+      },
+      "display": {}
+    },
+    "2": {
+      "kind": "stat_graph",
+      "graphType": "barres",
+      "data": [
+        {
+          "label": "chats",
+          "value": 6
+        },
+        {
+          "label": "chiens",
+          "value": 4
+        }
+      ],
+      "display": {
+        "showValues": true,
+        "showLabels": true,
+        "showAxis": true,
+        "step": 1,
+        "highlightIndex": 0
+      },
+      "size": {
+        "width": 280,
+        "height": 170
+      }
+    },
+    "3": {
+      "kind": "stat_graph",
+      "graphType": "barres",
+      "data": [
+        {
+          "label": "foot",
+          "value": 9
+        },
+        {
+          "label": "judo",
+          "value": 4
+        }
+      ],
+      "display": {
+        "showValues": true,
+        "showLabels": true,
+        "showAxis": true,
+        "step": 1,
+        "highlightIndex": 0
+      },
+      "size": {
+        "width": 280,
+        "height": 170
+      }
+    },
+    "4": {
+      "kind": "tableau_donnees",
+      "headers": [
+        "rouges",
+        "bleues",
+        "total"
+      ],
+      "rows": [
+        {
+          "values": [
+            "7",
+            "?",
+            "12"
+          ]
+        }
+      ],
+      "highlight": {
+        "col": 1
+      },
+      "display": {}
+    },
+    "5": {
+      "kind": "stat_graph",
+      "graphType": "barres",
+      "data": [
+        {
+          "label": "rouge",
+          "value": 3
+        },
+        {
+          "label": "bleu",
+          "value": 5
+        }
+      ],
+      "display": {
+        "showValues": true,
+        "showLabels": true,
+        "showAxis": true,
+        "step": 1
+      },
+      "size": {
+        "width": 280,
+        "height": 170
+      }
+    },
+    "6": {
+      "kind": "tableau_donnees",
+      "headers": [
+        "filles",
+        "garçons",
+        "en tout"
+      ],
+      "rows": [
+        {
+          "values": [
+            "12",
+            "10",
+            "22"
+          ]
+        }
+      ],
+      "highlight": {
+        "col": 2
+      },
+      "display": {}
+    }
+  },
+  "ce1/algorithmique": {
+    "0": {
+      "kind": "reperage",
+      "size": {
+        "width": 260,
+        "height": 200
+      },
+      "display": {
+        "showGrid": true,
+        "showAxes": false,
+        "showCoordinates": false,
+        "showPointLabels": true,
+        "showTarget": true
+      },
+      "grid": {
+        "rows": 3,
+        "cols": 4
+      },
+      "path": {
+        "start": {
+          "x": 0,
+          "y": 0,
+          "label": "départ"
+        },
+        "steps": [
+          {
+            "direction": "droite",
+            "count": 2
+          },
+          {
+            "direction": "haut",
+            "count": 1
+          }
+        ],
+        "showArrows": true
+      },
+      "target": {
+        "x": 2,
+        "y": 1,
+        "label": "★",
+        "hidden": false
+      }
+    },
+    "1": {
+      "kind": "reperage",
+      "size": {
+        "width": 260,
+        "height": 200
+      },
+      "display": {
+        "showGrid": true,
+        "showAxes": false,
+        "showCoordinates": false,
+        "showPointLabels": true,
+        "showTarget": true
+      },
+      "grid": {
+        "rows": 3,
+        "cols": 5
+      },
+      "path": {
+        "start": {
+          "x": 0,
+          "y": 0,
+          "label": "départ"
+        },
+        "steps": [
+          {
+            "direction": "droite",
+            "count": 3
+          },
+          {
+            "direction": "haut",
+            "count": 1
+          }
+        ],
+        "showArrows": true
+      },
+      "target": {
+        "x": 3,
+        "y": 1,
+        "label": "★",
+        "hidden": false
+      }
+    },
+    "2": {
+      "kind": "scratch",
+      "blocks": [
+        {
+          "type": "repeat",
+          "times": 4,
+          "children": [
+            {
+              "type": "move",
+              "value": 1,
+              "text": "avancer"
+            }
+          ]
+        }
+      ],
+      "display": {
+        "compact": true
+      }
+    },
+    "3": {
+      "kind": "reperage",
+      "size": {
+        "width": 260,
+        "height": 200
+      },
+      "display": {
+        "showGrid": true,
+        "showAxes": false,
+        "showCoordinates": false,
+        "showPointLabels": true,
+        "showTarget": true
+      },
+      "grid": {
+        "rows": 3,
+        "cols": 4
+      },
+      "path": {
+        "start": {
+          "x": 0,
+          "y": 0,
+          "label": "robot"
+        },
+        "steps": [
+          {
+            "direction": "haut",
+            "count": 2
+          },
+          {
+            "direction": "droite",
+            "count": 2
+          }
+        ],
+        "showArrows": true
+      },
+      "target": {
+        "x": 2,
+        "y": 2,
+        "label": "★",
+        "hidden": false
+      }
+    }
+  },
+  "ce1/trier_classer": {
+    "0": {
+      "kind": "objets",
+      "elements": [
+        {
+          "quoi": "pomme",
+          "label": "pomme"
+        },
+        {
+          "quoi": "banane",
+          "label": "banane"
+        },
+        {
+          "quoi": "ballon",
+          "label": "ballon",
+          "marque": true
+        }
+      ],
+      "colonnes": 3,
+      "mode": "couleur",
+      "size": {
+        "width": 280,
+        "height": 130
+      }
+    },
+    "1": {
+      "kind": "ensembles",
+      "ensembles": [
+        "rouge",
+        "fruit"
+      ],
+      "elements": [
+        {
+          "nom": "fraise",
+          "dans": [
+            0,
+            1
+          ]
+        },
+        {
+          "nom": "banane",
+          "dans": [
+            1
+          ]
+        },
+        {
+          "nom": "coccinelle",
+          "dans": [
+            0
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1927 @@
+{
+  "cp/nombre_entier": {
+    "0": {
+      "kind": "animaux",
+      "groupes": [
+        {
+          "animal": "poisson",
+          "nombre": 23
+        }
+      ],
+      "colonnes": 10,
+      "taille": 26,
+      "mode": "couleur",
+      "graine": 4123,
+      "description": "des poissons rangés par 10"
+    },
+    "2": {
+      "kind": "base_dix",
+      "dizaines": 1,
+      "unites": 5,
+      "etiquettes": true,
+      "mode": "couleur",
+      "size": {
+        "width": 300
+      }
+    },
+    "3": {
+      "kind": "base_dix",
+      "dizaines": 5,
+      "unites": 8,
+      "etiquettes": true,
+      "mode": "couleur",
+      "size": {
+        "width": 300
+      }
+    },
+    "8": {
+      "kind": "number_line",
+      "min": 30,
+      "max": 40,
+      "step": 10,
+      "minorStep": 1,
+      "points": [
+        {
+          "value": 36,
+          "label": "36",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "10": {
+      "kind": "animaux",
+      "groupes": [
+        {
+          "animal": "chien",
+          "nombre": 1
+        },
+        {
+          "animal": "lapin",
+          "nombre": 1
+        },
+        {
+          "animal": "poule",
+          "nombre": 1
+        },
+        {
+          "animal": "chat",
+          "nombre": 1
+        },
+        {
+          "animal": "canard",
+          "nombre": 1
+        },
+        {
+          "animal": "mouton",
+          "nombre": 1
+        }
+      ],
+      "colonnes": 6,
+      "taille": 40,
+      "melange": false,
+      "mode": "couleur",
+      "graine": 61,
+      "consigne": "Le début de la file est à gauche.",
+      "description": "une file de six animaux"
+    },
+    "11": {
+      "kind": "base_dix",
+      "dizaines": 4,
+      "unites": 12,
+      "etiquettes": true,
+      "mode": "couleur",
+      "size": {
+        "width": 300
+      }
+    }
+  },
+  "cp/suite_nombre": {
+    "0": {
+      "kind": "number_line",
+      "min": 27,
+      "max": 31,
+      "step": 1,
+      "points": [
+        {
+          "value": 27,
+          "label": "27",
+          "color": "#dc2626"
+        },
+        {
+          "value": 28,
+          "label": "28",
+          "color": "#dc2626"
+        },
+        {
+          "value": 29,
+          "label": "29",
+          "color": "#dc2626"
+        },
+        {
+          "value": 30,
+          "label": "30",
+          "color": "#dc2626"
+        },
+        {
+          "value": 31,
+          "label": "31",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": false,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "1": {
+      "kind": "number_line",
+      "min": 39,
+      "max": 43,
+      "step": 1,
+      "points": [
+        {
+          "value": 43,
+          "label": "43",
+          "color": "#dc2626"
+        },
+        {
+          "value": 42,
+          "label": "42",
+          "color": "#dc2626"
+        },
+        {
+          "value": 41,
+          "label": "41",
+          "color": "#dc2626"
+        },
+        {
+          "value": 40,
+          "label": "40",
+          "color": "#dc2626"
+        },
+        {
+          "value": 39,
+          "label": "39",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": false,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "2": {
+      "kind": "number_line",
+      "min": 0,
+      "max": 25,
+      "step": 5,
+      "minorStep": 1,
+      "points": [
+        {
+          "value": 5,
+          "label": "5",
+          "color": "#dc2626"
+        },
+        {
+          "value": 10,
+          "label": "10",
+          "color": "#dc2626"
+        },
+        {
+          "value": 15,
+          "label": "15",
+          "color": "#dc2626"
+        },
+        {
+          "value": 20,
+          "label": "20",
+          "color": "#dc2626"
+        },
+        {
+          "value": 25,
+          "label": "25",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": false,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "3": {
+      "kind": "number_line",
+      "min": 20,
+      "max": 50,
+      "step": 10,
+      "points": [
+        {
+          "value": 40,
+          "label": "le trou",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "4": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "8 billes",
+      "parts": [
+        {
+          "label": "jour 1",
+          "value": "2",
+          "color": "#2563eb"
+        },
+        {
+          "label": "jour 2",
+          "value": "2",
+          "color": "#059669"
+        },
+        {
+          "label": "jour 3",
+          "value": "2",
+          "color": "#7c3aed"
+        },
+        {
+          "label": "jour 4",
+          "value": "2",
+          "color": "#ea580c"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    }
+  },
+  "cp/addition_soustraction": {
+    "0": {
+      "kind": "animaux",
+      "collections": [
+        {
+          "groupes": [
+            {
+              "animal": "poule",
+              "nombre": 3
+            }
+          ]
+        },
+        {
+          "groupes": [
+            {
+              "animal": "poule",
+              "nombre": 4
+            }
+          ]
+        }
+      ],
+      "taille": 36,
+      "mode": "couleur",
+      "graine": 347,
+      "description": "deux groupes de poules"
+    },
+    "1": {
+      "kind": "objets",
+      "elements": [
+        {
+          "quoi": "ballon",
+          "nombre": 5,
+          "label": "restent"
+        },
+        {
+          "quoi": "ballon",
+          "nombre": 3,
+          "label": "s’envolent",
+          "marque": true
+        }
+      ],
+      "colonnes": 2,
+      "mode": "couleur",
+      "size": {
+        "width": 300
+      }
+    },
+    "2": {
+      "kind": "base_dix",
+      "variante": "cadres",
+      "nombre": 5,
+      "ajout": 2,
+      "mode": "couleur",
+      "size": {
+        "width": 300
+      }
+    },
+    "3": {
+      "kind": "base_dix",
+      "variante": "cadres",
+      "nombre": 8,
+      "ajout": 5,
+      "cadres": 2,
+      "mode": "couleur",
+      "size": {
+        "width": 300
+      }
+    },
+    "5": {
+      "kind": "base_dix",
+      "variante": "cadres",
+      "nombre": 6,
+      "cadres": 1,
+      "mode": "couleur",
+      "size": {
+        "width": 300
+      }
+    },
+    "6": {
+      "kind": "calcul_pose",
+      "operation": "addition",
+      "numbers": [
+        "34",
+        "25"
+      ],
+      "result": "59",
+      "display": {
+        "showResult": true,
+        "compact": true
+      }
+    },
+    "7": {
+      "kind": "animaux",
+      "groupes": [
+        {
+          "animal": "coccinelle",
+          "nombre": 6
+        }
+      ],
+      "colonnes": 2,
+      "taille": 36,
+      "mode": "couleur",
+      "graine": 326,
+      "description": "des coccinelles en rangs de deux"
+    },
+    "8": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "14",
+      "parts": [
+        {
+          "label": "avant",
+          "value": "9",
+          "color": "#2563eb"
+        },
+        {
+          "label": "gagnées",
+          "value": "5",
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    }
+  },
+  "cp/calcul_mental": {
+    "0": {
+      "kind": "base_dix",
+      "variante": "cadres",
+      "nombre": 3,
+      "ajout": 5,
+      "mode": "couleur",
+      "size": {
+        "width": 300
+      }
+    },
+    "1": {
+      "kind": "base_dix",
+      "variante": "cadres",
+      "nombre": 7,
+      "ajout": 3,
+      "mode": "couleur",
+      "size": {
+        "width": 300
+      }
+    },
+    "2": {
+      "kind": "animaux",
+      "collections": [
+        {
+          "groupes": [
+            {
+              "animal": "poussin",
+              "nombre": 6
+            }
+          ]
+        },
+        {
+          "groupes": [
+            {
+              "animal": "poussin",
+              "nombre": 6
+            }
+          ]
+        }
+      ],
+      "colonnes": 3,
+      "taille": 34,
+      "mode": "couleur",
+      "graine": 66,
+      "description": "deux groupes égaux de poussins"
+    },
+    "3": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "8",
+      "parts": [
+        {
+          "label": "moitié",
+          "value": "4",
+          "color": "#2563eb"
+        },
+        {
+          "label": "moitié",
+          "value": "4",
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "5": {
+      "kind": "number_line",
+      "min": 25,
+      "max": 55,
+      "step": 10,
+      "points": [
+        {
+          "value": 25,
+          "label": "25",
+          "color": "#dc2626"
+        },
+        {
+          "value": 55,
+          "label": "55",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": false,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "6": {
+      "kind": "number_line",
+      "min": 30,
+      "max": 40,
+      "step": 10,
+      "minorStep": 1,
+      "points": [
+        {
+          "value": 37,
+          "label": "37",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showPoints": true,
+        "showPointLabels": true,
+        "showZero": true
+      },
+      "size": {
+        "width": 300,
+        "height": 90
+      }
+    },
+    "9": {
+      "kind": "base_dix",
+      "dizaines": 4,
+      "etiquettes": true,
+      "mode": "couleur",
+      "size": {
+        "width": 300
+      },
+      "echange": "unites"
+    },
+    "10": {
+      "kind": "monnaie",
+      "groupes": [
+        {
+          "nom": "Tom",
+          "elements": [
+            {
+              "valeur": "5e"
+            },
+            {
+              "valeur": "2e"
+            }
+          ]
+        },
+        {
+          "nom": "gagné",
+          "elements": [
+            {
+              "valeur": "5e"
+            }
+          ]
+        }
+      ],
+      "mode": "couleur",
+      "size": {
+        "width": 300
+      }
+    }
+  },
+  "cp/probleme": {
+    "0": {
+      "kind": "objets",
+      "elements": [
+        {
+          "quoi": "pomme",
+          "nombre": 5,
+          "label": "pommes"
+        },
+        {
+          "quoi": "banane",
+          "nombre": 3,
+          "label": "bananes"
+        }
+      ],
+      "colonnes": 2,
+      "mode": "couleur",
+      "size": {
+        "width": 300
+      }
+    },
+    "1": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "21",
+      "parts": [
+        {
+          "label": "filles",
+          "value": "12",
+          "color": "#2563eb"
+        },
+        {
+          "label": "garçons",
+          "value": "9",
+          "color": "#059669"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "2": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 150
+      },
+      "total": "Sam 15",
+      "parts": [
+        {
+          "label": "Ana",
+          "value": "9",
+          "color": "#2563eb"
+        },
+        {
+          "label": "de plus",
+          "value": "6",
+          "color": "#f97316"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "3": {
+      "kind": "animaux",
+      "collections": [
+        {
+          "nom": "au début",
+          "groupes": [
+            {
+              "animal": "oiseau",
+              "nombre": 4
+            }
+          ]
+        },
+        {
+          "nom": "arrivent",
+          "groupes": [
+            {
+              "animal": "oiseau",
+              "nombre": 3
+            }
+          ]
+        }
+      ],
+      "taille": 34,
+      "mode": "couleur",
+      "graine": 437,
+      "description": "des oiseaux, puis d’autres qui arrivent"
+    },
+    "4": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "10 €",
+      "parts": [
+        {
+          "label": "payé",
+          "value": "3 €",
+          "color": "#2563eb"
+        },
+        {
+          "label": "payé",
+          "value": "2 €",
+          "color": "#059669"
+        },
+        {
+          "label": "reste",
+          "value": "5 €",
+          "color": "#7c3aed"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "5": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "20",
+      "parts": [
+        {
+          "label": "boîte",
+          "value": "5",
+          "color": "#2563eb"
+        },
+        {
+          "label": "boîte",
+          "value": "5",
+          "color": "#059669"
+        },
+        {
+          "label": "boîte",
+          "value": "5",
+          "color": "#7c3aed"
+        },
+        {
+          "label": "boîte",
+          "value": "5",
+          "color": "#ea580c"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "6": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "12",
+      "parts": [
+        {
+          "label": "Lou",
+          "value": "4",
+          "color": "#2563eb"
+        },
+        {
+          "label": "Noé",
+          "value": "4",
+          "color": "#059669"
+        },
+        {
+          "label": "Mia",
+          "value": "4",
+          "color": "#7c3aed"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    },
+    "8": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "total": "12",
+      "parts": [
+        {
+          "label": "table",
+          "value": "4",
+          "color": "#2563eb"
+        },
+        {
+          "label": "table",
+          "value": "4",
+          "color": "#059669"
+        },
+        {
+          "label": "table",
+          "value": "4",
+          "color": "#7c3aed"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    }
+  },
+  "cp/longueur": {
+    "1": {
+      "kind": "figure_libre",
+      "size": {
+        "width": 300,
+        "height": 110,
+        "cellSize": 30
+      },
+      "grid": {
+        "rows": 3,
+        "cols": 9,
+        "filledCells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ]
+        ]
+      },
+      "display": {
+        "showGrid": true,
+        "showFilled": true,
+        "showPerimeter": true
+      },
+      "colors": {
+        "filled": "#fdba74"
+      }
+    },
+    "2": {
+      "kind": "figure_libre",
+      "size": {
+        "width": 300,
+        "height": 140,
+        "cellSize": 40
+      },
+      "grid": {
+        "rows": 3,
+        "cols": 5,
+        "filledCells": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            2,
+            0
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ]
+        ]
+      },
+      "display": {
+        "showGrid": true,
+        "showFilled": true,
+        "showPerimeter": true
+      },
+      "colors": {
+        "filled": "#a7f3d0"
+      }
+    },
+    "3": {
+      "kind": "number_line",
+      "size": {
+        "width": 300,
+        "height": 90
+      },
+      "min": -1,
+      "max": 10,
+      "step": 1,
+      "valeursEcrites": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "intervalles": [
+        {
+          "de": 0,
+          "a": 7,
+          "deInclus": true,
+          "aInclus": true,
+          "color": "#f97316"
+        }
+      ],
+      "points": [],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showZero": true,
+        "showPoints": true,
+        "showPointLabels": true
+      }
+    },
+    "5": {
+      "kind": "schema_barre",
+      "size": {
+        "width": 300,
+        "height": 150
+      },
+      "total": "Ana : 9",
+      "parts": [
+        {
+          "label": "Léo",
+          "value": "6",
+          "color": "#2563eb"
+        },
+        {
+          "label": "de plus",
+          "value": "3",
+          "color": "#f97316"
+        }
+      ],
+      "display": {
+        "showTotal": true,
+        "showPartLabels": true,
+        "showValues": true
+      }
+    }
+  },
+  "cp/masse_contenance": {
+    "0": {
+      "kind": "masse",
+      "variant": "objets",
+      "objets": [
+        {
+          "label": "pastèque",
+          "icon": "🍉"
+        },
+        {
+          "label": "plume",
+          "icon": "🪶"
+        }
+      ],
+      "display": {
+        "showMasses": false,
+        "showLabels": true
+      },
+      "size": {
+        "width": 300,
+        "height": 150
+      }
+    },
+    "1": {
+      "kind": "masse",
+      "variant": "objets",
+      "objets": [
+        {
+          "label": "pomme : en bas",
+          "icon": "🍎"
+        },
+        {
+          "label": "plume : en haut",
+          "icon": "🪶"
+        }
+      ],
+      "display": {
+        "showMasses": false,
+        "showLabels": true
+      },
+      "size": {
+        "width": 300,
+        "height": 150
+      }
+    },
+    "2": {
+      "kind": "objets",
+      "colonnes": 3,
+      "elements": [
+        {
+          "quoi": "cle",
+          "label": "clé"
+        },
+        {
+          "quoi": "pomme",
+          "label": "pomme"
+        },
+        {
+          "quoi": "cartable",
+          "label": "cartable"
+        }
+      ],
+      "mode": "couleur",
+      "size": {
+        "width": 300
+      }
+    },
+    "3": {
+      "kind": "objets",
+      "colonnes": 3,
+      "elements": [
+        {
+          "quoi": "livre",
+          "label": "livre",
+          "marque": true
+        },
+        {
+          "quoi": "pomme",
+          "label": "pomme"
+        },
+        {
+          "quoi": "cle",
+          "label": "clé"
+        }
+      ],
+      "mode": "couleur",
+      "size": {
+        "width": 300
+      }
+    }
+  },
+  "cp/duree": {
+    "0": {
+      "kind": "duree",
+      "variant": "horloge",
+      "time": {
+        "hour": 3,
+        "minute": 0
+      },
+      "display": {
+        "showNumbers": true,
+        "showMinuteTicks": false,
+        "showLabels": true
+      },
+      "size": {
+        "width": 160,
+        "height": 160
+      }
+    },
+    "1": {
+      "kind": "duree",
+      "variant": "horloge",
+      "time": {
+        "hour": 8,
+        "minute": 0
+      },
+      "display": {
+        "showNumbers": true,
+        "showMinuteTicks": false,
+        "showLabels": true
+      },
+      "size": {
+        "width": 160,
+        "height": 160
+      }
+    },
+    "2": {
+      "kind": "duree",
+      "variant": "frise",
+      "frise": {
+        "startLabel": "8 h",
+        "endLabel": "12 h",
+        "steps": [
+          {
+            "label": "l’école",
+            "minutes": 240
+          }
+        ]
+      }
+    },
+    "4": {
+      "kind": "duree",
+      "variant": "frise",
+      "frise": {
+        "startLabel": "2 h",
+        "endLabel": "4 h",
+        "steps": [
+          {
+            "label": "1 h",
+            "minutes": 60
+          },
+          {
+            "label": "1 h",
+            "minutes": 60
+          }
+        ]
+      }
+    }
+  },
+  "cp/monnaie": {
+    "0": {
+      "kind": "monnaie",
+      "elements": [
+        {
+          "valeur": "1e"
+        },
+        {
+          "valeur": "2e"
+        },
+        {
+          "valeur": "5e"
+        },
+        {
+          "valeur": "10e"
+        },
+        {
+          "valeur": "20e"
+        }
+      ],
+      "size": {
+        "width": 300
+      }
+    },
+    "1": {
+      "kind": "monnaie",
+      "elements": [
+        {
+          "valeur": "10e"
+        },
+        {
+          "valeur": "2e",
+          "nombre": 2
+        },
+        {
+          "valeur": "1e"
+        }
+      ],
+      "size": {
+        "width": 300
+      }
+    },
+    "2": {
+      "kind": "monnaie",
+      "groupes": [
+        {
+          "nom": "Lou",
+          "elements": [
+            {
+              "valeur": "5e",
+              "nombre": 2
+            }
+          ]
+        },
+        {
+          "nom": "Téo",
+          "elements": [
+            {
+              "valeur": "10e"
+            },
+            {
+              "valeur": "2e"
+            }
+          ]
+        }
+      ],
+      "size": {
+        "width": 300
+      }
+    },
+    "3": {
+      "kind": "monnaie",
+      "elements": [
+        {
+          "valeur": "5e"
+        },
+        {
+          "valeur": "2e"
+        },
+        {
+          "valeur": "1e"
+        }
+      ],
+      "size": {
+        "width": 300
+      }
+    },
+    "4": {
+      "kind": "monnaie",
+      "groupes": [
+        {
+          "nom": "je donne",
+          "elements": [
+            {
+              "valeur": "10e"
+            }
+          ]
+        },
+        {
+          "nom": "on rend",
+          "elements": [
+            {
+              "valeur": "1e",
+              "nombre": 3
+            }
+          ]
+        }
+      ],
+      "size": {
+        "width": 300
+      }
+    },
+    "5": {
+      "kind": "monnaie",
+      "elements": [
+        {
+          "valeur": "2e",
+          "nombre": 2
+        },
+        {
+          "valeur": "5e"
+        }
+      ],
+      "size": {
+        "width": 300
+      }
+    }
+  },
+  "cp/reperage": {
+    "1": {
+      "kind": "objets",
+      "colonnes": 3,
+      "elements": [
+        {
+          "quoi": "pomme",
+          "label": "pomme"
+        },
+        {
+          "quoi": "ballon",
+          "label": "ballon"
+        },
+        {
+          "quoi": "voiture",
+          "label": "voiture"
+        }
+      ],
+      "mode": "couleur",
+      "size": {
+        "width": 300
+      }
+    },
+    "3": {
+      "kind": "reperage",
+      "grid": {
+        "rows": 3,
+        "cols": 5
+      },
+      "points": [
+        {
+          "x": 3.5,
+          "y": 1.5,
+          "label": "🌸",
+          "color": "#a855f7"
+        }
+      ],
+      "path": {
+        "start": {
+          "x": 0.5,
+          "y": 0.5,
+          "label": "🏠",
+          "color": "#ef4444"
+        },
+        "steps": [
+          {
+            "direction": "droite",
+            "count": 3
+          },
+          {
+            "direction": "haut",
+            "count": 1
+          }
+        ],
+        "showArrows": true
+      },
+      "display": {
+        "showGrid": true,
+        "showAxes": false,
+        "showCoordinates": false,
+        "showPointLabels": true,
+        "showTarget": false
+      },
+      "size": {
+        "width": 210,
+        "height": 150
+      }
+    },
+    "4": {
+      "kind": "solide_3d",
+      "solide": "assemblage_cubes",
+      "cubes": [
+        {
+          "x": 3,
+          "y": 7,
+          "z": 8
+        },
+        {
+          "x": 4,
+          "y": 7,
+          "z": 8
+        },
+        {
+          "x": 5,
+          "y": 7,
+          "z": 8
+        },
+        {
+          "x": 4,
+          "y": 7,
+          "z": 9
+        }
+      ],
+      "display": {
+        "showLabels": false,
+        "showDimensions": false,
+        "showFormulaHint": false,
+        "showUnitCubes": false
+      },
+      "size": {
+        "width": 141,
+        "height": 138
+      }
+    },
+    "5": {
+      "kind": "reperage",
+      "grid": {
+        "rows": 3,
+        "cols": 3
+      },
+      "points": [
+        {
+          "x": 2.5,
+          "y": 2.5,
+          "label": "💎",
+          "color": "#a855f7"
+        }
+      ],
+      "path": {
+        "start": {
+          "x": 0.5,
+          "y": 0.5,
+          "label": "👧",
+          "color": "#ef4444"
+        },
+        "steps": [
+          {
+            "direction": "haut",
+            "count": 2
+          },
+          {
+            "direction": "droite",
+            "count": 2
+          }
+        ],
+        "showArrows": true
+      },
+      "display": {
+        "showGrid": true,
+        "showAxes": false,
+        "showCoordinates": false,
+        "showPointLabels": true,
+        "showTarget": false
+      },
+      "size": {
+        "width": 170,
+        "height": 150
+      }
+    }
+  },
+  "cp/figures_solides": {
+    "0": {
+      "kind": "quadrilatere",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "points": {
+        "A": {
+          "x": 150,
+          "y": 16
+        },
+        "B": {
+          "x": 214,
+          "y": 80
+        },
+        "C": {
+          "x": 150,
+          "y": 144
+        },
+        "D": {
+          "x": 86,
+          "y": 80
+        }
+      },
+      "labels": {
+        "A": "",
+        "B": "",
+        "C": "",
+        "D": ""
+      },
+      "display": {
+        "showPoints": false,
+        "showLabels": false,
+        "showSides": false,
+        "showAngles": false,
+        "showDiagonals": false
+      }
+    },
+    "1": {
+      "kind": "triangle",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "points": {
+        "A": {
+          "x": 150,
+          "y": 25
+        },
+        "B": {
+          "x": 60,
+          "y": 140
+        },
+        "C": {
+          "x": 240,
+          "y": 140
+        }
+      },
+      "labels": {
+        "A": "",
+        "B": "",
+        "C": ""
+      },
+      "display": {
+        "showPoints": true,
+        "showLabels": false,
+        "showSides": false,
+        "showAngles": false
+      }
+    },
+    "2": {
+      "kind": "solide_3d",
+      "solide": "cylindre",
+      "display": {
+        "showLabels": false,
+        "showDimensions": false,
+        "showFormulaHint": false,
+        "showUnitCubes": false
+      },
+      "size": {
+        "width": 340,
+        "height": 225
+      }
+    },
+    "3": {
+      "kind": "solide_3d",
+      "solide": "assemblage_cubes",
+      "cubes": [
+        {
+          "x": -1,
+          "y": 3,
+          "z": 5
+        }
+      ],
+      "size": {
+        "width": 87,
+        "height": 80
+      },
+      "colors": {
+        "cubeStroke": "#0f172a"
+      },
+      "display": {
+        "showLabels": false,
+        "showDimensions": false,
+        "showFormulaHint": false,
+        "showUnitCubes": false
+      }
+    },
+    "4": {
+      "kind": "droites",
+      "size": {
+        "width": 300,
+        "height": 160
+      },
+      "lines": [
+        {
+          "id": "d0",
+          "type": "droite",
+          "from": {
+            "x": 60,
+            "y": 120
+          },
+          "to": {
+            "x": 240,
+            "y": 40
+          },
+          "color": "#2563eb",
+          "strokeWidth": 3
+        }
+      ],
+      "points": [
+        {
+          "x": 60,
+          "y": 120,
+          "color": "#dc2626"
+        },
+        {
+          "x": 150,
+          "y": 80,
+          "color": "#dc2626"
+        },
+        {
+          "x": 240,
+          "y": 40,
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showGrid": false,
+        "showLabels": false,
+        "showPoints": true,
+        "showIntersections": false,
+        "showRightAngleMarkers": false,
+        "showParallelMarkers": false
+      }
+    },
+    "5": {
+      "kind": "figure_libre",
+      "size": {
+        "width": 230,
+        "height": 170,
+        "cellSize": 28,
+        "padding": 14
+      },
+      "grid": {
+        "rows": 5,
+        "cols": 5,
+        "filledCells": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ]
+        ]
+      },
+      "display": {
+        "showGrid": true,
+        "showFilled": true,
+        "showCellLabels": false,
+        "showPerimeter": true,
+        "showVertices": false,
+        "showVertexLabels": false
+      },
+      "colors": {
+        "filled": "#dbeafe"
+      }
+    }
+  },
+  "cp/donnees": {
+    "0": {
+      "kind": "tableau_donnees",
+      "headers": [
+        "",
+        "buts"
+      ],
+      "rows": [
+        {
+          "values": [
+            "Lou",
+            "3"
+          ]
+        },
+        {
+          "values": [
+            "Sam",
+            "5"
+          ]
+        }
+      ],
+      "highlight": {
+        "row": 1
+      },
+      "display": {
+        "compact": true
+      }
+    },
+    "1": {
+      "kind": "stat_graph",
+      "graphType": "barres",
+      "size": {
+        "width": 280,
+        "height": 170
+      },
+      "data": [
+        {
+          "label": "fraises",
+          "value": 6
+        },
+        {
+          "label": "pommes",
+          "value": 4
+        }
+      ],
+      "display": {
+        "showValues": true,
+        "showLabels": true,
+        "showAxis": true,
+        "step": 1,
+        "highlightIndex": 0
+      }
+    },
+    "2": {
+      "kind": "tableau_donnees",
+      "headers": [
+        "",
+        "CP",
+        "CE1"
+      ],
+      "rows": [
+        {
+          "values": [
+            "chat",
+            "4",
+            "2"
+          ]
+        },
+        {
+          "values": [
+            "chien",
+            "3",
+            "5"
+          ]
+        }
+      ],
+      "highlight": {
+        "cell": {
+          "row": 0,
+          "col": 1
+        }
+      },
+      "display": {
+        "compact": true
+      }
+    },
+    "3": {
+      "kind": "stat_graph",
+      "graphType": "barres",
+      "size": {
+        "width": 280,
+        "height": 170
+      },
+      "data": [
+        {
+          "label": "Ali",
+          "value": 7
+        },
+        {
+          "label": "Mia",
+          "value": 4
+        },
+        {
+          "label": "Tom",
+          "value": 7
+        }
+      ],
+      "display": {
+        "showValues": true,
+        "showLabels": true,
+        "showAxis": true,
+        "step": 1,
+        "highlightIndex": 1,
+        "axeY": "billes"
+      }
+    },
+    "4": {
+      "kind": "stat_graph",
+      "graphType": "barres",
+      "size": {
+        "width": 280,
+        "height": 170
+      },
+      "data": [
+        {
+          "label": "lundi",
+          "value": 8
+        },
+        {
+          "label": "mardi",
+          "value": 5
+        }
+      ],
+      "display": {
+        "showValues": true,
+        "showLabels": true,
+        "showAxis": true,
+        "step": 1,
+        "axeY": "livres"
+      }
+    }
+  },
+  "cp/algorithmique": {
+    "0": {
+      "kind": "scratch",
+      "blocks": [
+        {
+          "type": "turn",
+          "text": "avancer de 2 cases"
+        },
+        {
+          "type": "turn",
+          "text": "tourner à droite"
+        },
+        {
+          "type": "turn",
+          "text": "avancer d’1 case"
+        }
+      ],
+      "display": {
+        "compact": true
+      }
+    },
+    "1": {
+      "kind": "reperage",
+      "grid": {
+        "rows": 3,
+        "cols": 4
+      },
+      "points": [
+        {
+          "x": 2.5,
+          "y": 1.5,
+          "label": "🐟",
+          "color": "#3b82f6"
+        }
+      ],
+      "path": {
+        "start": {
+          "x": 0.5,
+          "y": 0.5,
+          "label": "🐱",
+          "color": "#ef4444"
+        },
+        "steps": [
+          {
+            "direction": "droite",
+            "count": 2
+          },
+          {
+            "direction": "haut",
+            "count": 1
+          }
+        ],
+        "showArrows": true
+      },
+      "display": {
+        "showGrid": true,
+        "showAxes": false,
+        "showCoordinates": false,
+        "showPointLabels": true,
+        "showTarget": false
+      },
+      "size": {
+        "width": 180,
+        "height": 150
+      }
+    },
+    "2": {
+      "kind": "objets",
+      "elements": [
+        {
+          "quoi": "pomme",
+          "label": "1er"
+        },
+        {
+          "quoi": "banane",
+          "label": "2e"
+        },
+        {
+          "quoi": "pomme",
+          "label": "3e"
+        },
+        {
+          "quoi": "banane",
+          "label": "4e"
+        }
+      ],
+      "colonnes": 4,
+      "mode": "couleur",
+      "size": {
+        "width": 300
+      }
+    },
+    "3": {
+      "kind": "number_line",
+      "size": {
+        "width": 300,
+        "height": 90
+      },
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "points": [
+        {
+          "value": 0,
+          "label": "départ",
+          "color": "#2563eb"
+        },
+        {
+          "value": 2,
+          "label": "fin",
+          "color": "#dc2626"
+        }
+      ],
+      "display": {
+        "showTicks": true,
+        "showValues": true,
+        "showZero": true,
+        "showPoints": true,
+        "showPointLabels": true
+      }
+    }
+  }
+}
