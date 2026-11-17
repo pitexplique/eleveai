@@ -51,11 +51,18 @@ Ouvert le 15/11/2026. 30 micros du coach, plan : `manim/PLAN-perimetre-aire-volu
 | P3 `aire_perimetre_figure` (piste BMX) | ✅ | ✅ | ✅ 210,4 s / 64,3 s, bords 0 |
 | P4 `aire_perimetre_probleme` (tour de piste) | ✅ | ✅ | ✅ 222,2 s / 51,8 s, bords 0 |
 | P5 `aire_perimetre_defi` (enclos) | ✅ | ✅ | ✅ 215,1 s / 50,4 s, bords 0 |
-| A1 → A5 (aire) | ⏳ | ⏳ | — |
+| A1 `aire_rectangle`, `aire_carre` (écran) | ✅ | ✅ | ✅ 211,2 s / 59,2 s, bords 0 |
+| A2 `aire_disque` (tambour) | ✅ | ✅ | ✅ 210,1 s / 52,1 s, bords 0 |
+| A3 `aire_figure` (cour en L) | ✅ | ✅ | ✅ 224,2 s / 55,0 s, bords 0 |
+| A4 `aire_probleme` (terrasse) | ✅ | ✅ | ✅ 212,2 s / 65,2 s, bords 0 |
+| A5 `aire_defi` (maillots) | ⏳ | ⏳ | — |
 | T1 → T8 (3e) | ⏳ | ⏳ | — |
 
-**15 épisodes finis sur 28** (V1 à V4, S1 à S6, P1 à P5) — paysages et shorts rendus en HD,
-`verifier-bords-video` = 0 sur les 30 MP4. **13 restent à écrire et à rendre.**
+**19 épisodes finis sur 28** (V1 à V4, S1 à S6, P1 à P5, A1 à A4) — paysages et shorts rendus
+en HD, `verifier-bords-video` = 0 sur les 38 MP4. **9 restent à écrire et à rendre.**
+⚠️ Les 8 épisodes de 3e (T1 à T8) sont confiés à une SESSION SŒUR depuis le 17/11 : elle écrit
+`manim/scripts/4e/3e_*.py` et tient son propre tableau dans `manim/poste2/REPRISE-3e-sections.md`.
+Il ne reste donc ici que A5.
 ⭐ Le LOT PÉRIMÈTRE est COMPLET : les 7 micros `aire_perimetre` de 4e sont couverts.
 ⭐ Le LOT SOLIDES est COMPLET : les 6 micros `vision_espace` de 4e sont couverts.
 
