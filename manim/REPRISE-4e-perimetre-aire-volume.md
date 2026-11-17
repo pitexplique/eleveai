@@ -437,21 +437,39 @@ Avant d'écrire quoi que ce soit : `git log --oneline -5`, et vérifie que le de
 4e est bien passé (le plus récent doit être « A3 : la cour en L recadrée » ou plus récent).
 
 ## Ce qui reste à faire, dans l'ordre
-1. **Attendre la session sœur.** Quand ses 8 épisodes sont rendus (16 MP4 dans
-   `manim/sorties/3e/maths/`), relire son tableau et ses planches.
-2. **Étendre les trois fichiers de branchement aux 8 épisodes de 3e.** Le générateur
-   `manim/poste2/manifeste-4e.py` ne couvre que la 4e : lui ajouter les 8 entrées (même structure,
-   `classe="3e"`, `serie="Maths 3e"`, dossiers `3e/maths/<notion>/NN-<slug>/`), puis relancer
-   `python manim/poste2/manifeste-4e.py`. Il relit tout seul les voix et les logs de rendu HD.
-   Vérifier ensuite `node scripts/verifier-centres-age.mjs manim/poste2/manifeste-4e.json`
-   → « 0 centre hors tranche ».
-3. **Un aperçu des 28 épisodes pour Frédéric**, en pause, sur le modèle de
-   `manim/sorties/4e/maths/apercu-4e-complet.html` (servi par
-   `python -m http.server 3907 --directory manim/sorties`).
-4. ⏳ Le contrôle de bords global tournait en arrière-plan au moment du passage de main :
-   `manim/poste2/bords-4e.log`. Chaque vidéo a DÉJÀ été contrôlée à son rendu (le script
-   `4e_hd.sh` le fait) ; ce log n'est qu'une ceinture de plus. Vérifier qu'il ne contient que
-   des lignes « 0 instants qui touchent un bord ».
+
+- [x] **Le contrôle de bords global est RELU** (17/11) : `manim/poste2/bords-4e.log` porte
+      40 vidéos et 40 lignes « 0 instants qui touchent un bord », pas une autre ligne.
+      Les 40 MP4 de 4e y sont tous, paysages et shorts. Rien à relancer.
+- [x] **Les trois fichiers de branchement sont ÉTENDUS aux 8 épisodes de 3e** (17/11) :
+      `manim/poste2/manifeste-4e.py` porte maintenant les 28 épisodes, avec `classe` par épisode.
+      Ce qui a changé : les deux lectures du fichier de voix acceptent les ids `3e-…` ;
+      `NOTION_PAR_FAMILLE` remplace `NOTION_4E` (en 3e : `volume` → `volume_solide`,
+      `sections` → `sections_solides`, vérifié dans
+      `lib/tutor-v4/knowledge/maths/3e/microSkills.ts`) ; `SLUG_FICHE` reçoit
+      `sections-solides` ; les liens du site, la série du coach, les tags, les dossiers et
+      `serie` prennent la classe ; et `log_short` existe parce que les logs HD du lot T
+      finissent par « s » (`media-hd-t1s.hd.log`), pas par « -short ».
+      ⭐ Sur la ligne d'un épisode de 3e, le tableau de la série met SON micro dans la colonne
+      « aussi 3e » (la colonne des micros 4e vaut « — ») : le générateur le lit là, et ne
+      fabrique aucun `aussi`.
+- [x] **Garde-fou neuf dans `lire_log`** : un log de rendu encore EN COURS s'arrêtait au milieu
+      et sortait un `KeyError` illisible (ou, pire, un manifeste amputé). Il doit finir sur un
+      écran `*-abonne` (`10-abonne` en paysage, `05-abonne` en short), sinon le script s'arrête
+      et dit à quel écran le log s'arrête. C'est la leçon 31 du lot T, côté manifeste.
+- [x] **L'aperçu se GÉNÈRE lui aussi** : `manim/poste2/apercu-serie.py` écrit
+      `manim/sorties/apercu-4e-3e-complet.html` à partir du manifeste et de la durée RÉELLE des
+      MP4 (`ffprobe`), jamais d'un tableau recopié. Toutes les vidéos sont en pause
+      (`preload="metadata"`, pas d'`autoplay`). Sans `--partiel`, il refuse d'écrire une page
+      amputée et nomme les vidéos absentes.
+      Servir : `python -m http.server 3907 --directory manim/sorties`
+      → `http://localhost:3907/apercu-4e-3e-complet.html`
+- [ ] ⏳ **Attendre la session sœur**, puis relancer les deux générateurs. Au 17/11 elle en est
+      à T6 : il manque les logs `t6`, `t7s`, `t8`, `t8s` et 7 des 16 MP4 de 3e. Dès qu'ils sont
+      là : `python manim/poste2/manifeste-4e.py`, puis
+      `node scripts/verifier-centres-age.mjs manim/poste2/manifeste-4e.json`
+      → « 0 centre hors tranche », puis `python manim/poste2/apercu-serie.py`.
+      ⛔ Ne rien saisir à la main dans les trois fichiers de branchement : tout est généré.
 
 ## Ce que tu ne refais JAMAIS
 - Les voix : `manim/poste2/VOIX-4e-3e-perimetre-aire-volume.md` fait foi, validé par Frédéric.

@@ -1,12 +1,15 @@
-# manifeste-4e.py — EleveAI, 2e poste, série 4e « Périmètre, aire, volume, solides » (17/11/2026).
+# manifeste-4e.py — EleveAI, 2e poste, série « Périmètre, aire, volume, solides » (17/11/2026).
 #
-# Écrit `manim/poste2/manifeste-4e.json` et `manim/poste2/videos-r2-4e.json` : les 20 épisodes de 4e
-# (20 paysages + 20 shorts), prêts à être intégrés par le 1er poste dans `manim/manifeste-youtube.json`
-# et `lib/videos/*.json`. ⛔ Ce script ne touche JAMAIS ces deux fichiers-là : ce sont ceux du 1er poste.
+# Écrit `manim/poste2/manifeste-4e.json` et `manim/poste2/videos-r2-4e.json` : les 28 épisodes de la
+# série — 20 en 4e, et les 8 propres à la 3e (lot T) — soit 28 paysages + 28 shorts, prêts à être
+# intégrés par le 1er poste dans `manim/manifeste-youtube.json` et `lib/videos/*.json`.
+# ⛔ Ce script ne touche JAMAIS ces deux fichiers-là : ce sont ceux du 1er poste.
+# (Le nom du fichier reste `manifeste-4e` : c'est celui que citent les fiches de reprise.)
 #
 # Trois sources, aucune saisie en double :
 #   · le TABLEAU DE LA SÉRIE de `manim/poste2/VOIX-4e-3e-perimetre-aire-volume.md` → id, micros 4e,
-#     `aussi` 3e, métier, ceinture ;
+#     `aussi` 3e, métier, ceinture. ⚠️ Sur la ligne d'un épisode de 3e, la colonne « aussi 3e »
+#     porte SON micro, et la colonne des micros 4e vaut « — » ;
 #   · les VOIX du même fichier → la situation, les questions-pauses (énoncé, choix, bonne réponse,
 #     explication) et le défi ;
 #   · les LOGS DE RENDU HD `manim/scripts/4e/media-hd-<clé>.hd.log` → les instants exacts de chaque
@@ -154,6 +157,67 @@ EPISODES = {
         court="Défis sur les aires",
         ch={"02": "Le numéro", "03": "Le logo", "04": "Un maillot"},
         short_titre="18 flocages : ça fait combien de mètres carrés ? #maths #4e"),
+
+    # ── Les 8 épisodes propres à la 3e (lot T, écrits par la session sœur) ─────
+    # `classe="3e"` : la colonne « aussi 3e » du tableau de la série porte alors LE micro
+    # de l'épisode, et il n'y a pas d'`aussi`. Les logs HD du lot T finissent par « s »
+    # pour le short (`media-hd-t1s.hd.log`), d'où `log_short`.
+    "3e-volume-boule": dict(
+        classe="3e", log="t1", log_short="t1s", num=31, famille="volume",
+        dossier="volume/31-volume-boule",
+        titre="Combien d'air tient dans un ballon ? — Le volume d'une boule — Maths 3e",
+        court="Le volume d'une boule",
+        ch={"02": "La formule", "03": "Un exemple", "04": "Et tes poumons"},
+        short_titre="Tout l'air de tes poumons : quel rayon de ballon ? #maths #3e"),
+    "3e-volume-reduction-section": dict(
+        classe="3e", log="t2", log_short="t2s", num=32, famille="volume",
+        dossier="volume/32-volume-reduction-section",
+        titre="Un gobelet rempli à mi-hauteur : as-tu la moitié ? — La réduction par une section — Maths 3e",
+        court="La réduction par une section",
+        ch={"02": "La section du cône", "03": "Le rapport", "04": "Le volume, trois fois"},
+        short_titre="Gobelet conique à mi-hauteur : un huitième seulement #maths #3e"),
+    "3e-section-pave-cube": dict(
+        classe="3e", log="t3", log_short="t3s", num=33, famille="sections",
+        dossier="sections/33-section-pave-cube",
+        titre="Trancher un pain de mie : quelle forme ? — La section d'un pavé ou d'un cube — Maths 3e",
+        court="La section d'un pavé ou d'un cube",
+        ch={"02": "Parallèlement à une face", "03": "Le cube", "04": "La coupe en biais"},
+        short_titre="La tranche en biais est-elle plus grande ? #maths #3e"),
+    "3e-section-cylindre": dict(
+        classe="3e", log="t4", log_short="t4s", num=34, famille="sections",
+        dossier="sections/34-section-cylindre",
+        titre="Couper le tube d'une trottinette : disque ou rectangle ? — La section d'un cylindre — Maths 3e",
+        court="La section d'un cylindre",
+        ch={"02": "En travers", "03": "Dans la longueur", "04": "Le tube est creux"},
+        short_titre="Le bout du tube : quelle aire sur la coupe ? #maths #3e"),
+    "3e-section-cone-pyramide": dict(
+        classe="3e", log="t5", log_short="t5s", num=35, famille="sections",
+        dossier="sections/35-section-cone-pyramide",
+        titre="Le Piton de la Fournaise coupé en deux — La section d'un cône et d'une pyramide — Maths 3e",
+        court="La section d'un cône et d'une pyramide",
+        ch={"02": "Parallèlement à la base", "03": "Une réduction exacte", "04": "La pyramide"},
+        short_titre="Le volcan à mi-hauteur : quel rayon dans la coupe ? #maths #3e"),
+    "3e-section-sphere": dict(
+        classe="3e", log="t6", log_short="t6s", num=36, famille="sections",
+        dossier="sections/36-section-sphere",
+        titre="Les parallèles du globe : pourquoi toujours un cercle ? — La section d'une sphère — Maths 3e",
+        court="La section d'une sphère",
+        ch={"02": "Toujours un cercle", "03": "Le grand cercle", "04": "Le triangle caché"},
+        short_titre="L'équateur ou le parallèle : lequel est le plus grand ? #maths #3e"),
+    "3e-section-longueur": dict(
+        classe="3e", log="t7", log_short="t7s", num=37, famille="sections",
+        dossier="sections/37-section-longueur",
+        titre="La position d'un avion en vol : où est le triangle rectangle ? — Calculer une longueur dans une section — Maths 3e",
+        court="Calculer une longueur dans une section",
+        ch={"02": "Ramener au plan", "03": "La diagonale", "04": "Dans la sphère"},
+        short_titre="La diagonale d'une face de cube : 12 cm ? #maths #3e"),
+    "3e-section-defi": dict(
+        classe="3e", log="t8", log_short="t8s", num=38, famille="sections",
+        dossier="sections/38-section-defi",
+        titre="Scanner un objet pour l'imprimer en 3D — Défis sur les sections planes — Maths 3e",
+        court="Défis sur les sections planes",
+        ch={"02": "Le cylindre", "03": "Le cône", "04": "La boule"},
+        short_titre="Trois tranches, un solide : lequel ? #maths #3e"),
 }
 
 # Le tableau de la série abrège deux micros de 3e : voici leurs vrais identifiants.
@@ -173,13 +237,19 @@ NOTION_3E = {
     "section_reconnaitre": "sections_solides",
 }
 
-# La notion 4e de chaque famille.
-NOTION_4E = {"volume": "volume_solide", "solides": "vision_espace",
-             "perimetre": "aire_perimetre", "aire": "aire_surface"}
+# La notion de chaque famille, par classe. Les 6 épisodes de sections de 3e visent
+# `sections_solides` (vérifié dans `lib/tutor-v4/knowledge/maths/3e/microSkills.ts`),
+# et les deux de volume `volume_solide`, qui porte le même nom en 4e et en 3e.
+NOTION_PAR_FAMILLE = {
+    "4e": {"volume": "volume_solide", "solides": "vision_espace",
+           "perimetre": "aire_perimetre", "aire": "aire_surface"},
+    "3e": {"volume": "volume_solide", "sections": "sections_solides"},
+}
 
-# Le slug de fiche/exercices du site, par notion 4e.
+# Le slug de fiche/exercices du site, par notion (identique en 4e et en 3e).
 SLUG_FICHE = {"volume_solide": "volume-solide", "vision_espace": "vision-espace",
-              "aire_perimetre": "aire-perimetre", "aire_surface": "aire-surface"}
+              "aire_perimetre": "aire-perimetre", "aire_surface": "aire-surface",
+              "sections_solides": "sections-solides"}
 
 
 # ── Lecture des trois sources ─────────────────────────────────────────────────
@@ -188,7 +258,7 @@ def lire_tableau(md):
     """Le tableau de la série : id → micros 4e, aussi 3e, métier, ceinture."""
     out = {}
     for ligne in md.splitlines():
-        m = re.match(r"^\|\s*\*?\*?[PAVST]\d\*?\*?\s*\|\s*`?\*?\*?`?(4e-[a-z-]+)`", ligne)
+        m = re.match(r"^\|\s*\*?\*?[PAVST]\d\*?\*?\s*\|\s*`?\*?\*?`?((?:3e|4e)-[a-z-]+)`", ligne)
         if not m:
             continue
         cols = [c.strip() for c in ligne.strip("|").split("|")]
@@ -207,7 +277,7 @@ def lire_voix(md):
     """id → {'paysage': {clé: texte}, 'short': {clé: texte}, 'centres': [...], 'micro_ligne': str}."""
     out, cur, sect = {}, None, "paysage"
     for ligne in md.splitlines():
-        m = re.match(r"^#+ .*`(4e-[a-z-]+)`", ligne)
+        m = re.match(r"^#+ .*`((?:3e|4e)-[a-z-]+)`", ligne)
         if m:
             cur, sect = m.group(1), "paysage"
             out.setdefault(cur, {"paysage": {}, "short": {}, "centres": [], "micro_ligne": ""})
@@ -239,6 +309,13 @@ def lire_log(cle):
     ecrans = [(m.group(1), m.group(2)) for m in re.finditer(r"ECRAN ([0-9a-z-]+) t=(\d\d:\d\d)", txt)]
     reponses = {m.group(1): int(m.group(2))
                 for m in re.finditer(r"QUESTION ([0-9a-z-]+) .*reponse=(\d)", txt)}
+    # Un log de rendu ENCORE EN COURS (ou d'un rendu qui a planté) s'arrête au milieu :
+    # sans ce garde-fou, il sort un manifeste amputé ou un KeyError illisible.
+    # La dernière ligne d'un paysage est « 10-abonne », celle d'un short « 05-abonne ».
+    if not ecrans or not ecrans[-1][0].endswith("-abonne"):
+        fin = ecrans[-1][0] if ecrans else "aucun écran"
+        raise SystemExit(f"⛔ log de rendu incomplet : {p} s'arrête à « {fin} ». "
+                         f"Le rendu HD n'est pas fini : attendre, puis relancer.")
     return ecrans, reponses
 
 
@@ -264,14 +341,23 @@ def main():
 
     for eid, meta in EPISODES.items():
         t, v = tab[eid], voix[eid]
-        notion = NOTION_4E[meta["famille"]]
-        micro = t["micros4"][0] if t["micros4"] else notion + "_comprendre"
+        classe = meta.get("classe", "4e")
+        notion = NOTION_PAR_FAMILLE[classe][meta["famille"]]
         ecrans, reponses = lire_log(meta["log"])
         temps = dict(ecrans)
-        micro = meta.get("micro", micro)
         a3 = [ALIAS_3E.get(a, a) for a in t["aussi3"]]
-        aussi = [dict(classe="3e", notionId=NOTION_3E[a], microId=a) for a in a3 if a in NOTION_3E]
-        aussi += [dict(classe="4e", notionId=notion, microId=m) for m in meta.get("aussi4", [])]
+        if classe == "3e":
+            # Dans la ligne d'un episode de 3e, la colonne « aussi 3e » du tableau porte
+            # SON micro (la colonne des micros 4e vaut « — ») : pas d'`aussi` a ajouter.
+            micro = meta.get("micro", a3[0])
+            aussi = []
+        else:
+            micro = meta.get("micro",
+                             t["micros4"][0] if t["micros4"] else notion + "_comprendre")
+            aussi = [dict(classe="3e", notionId=NOTION_3E[a], microId=a)
+                     for a in a3 if a in NOTION_3E]
+            aussi += [dict(classe="4e", notionId=notion, microId=m)
+                      for m in meta.get("aussi4", [])]
 
         # chapitres : un par écran porteur
         libelles = {"00-garde": meta["court"], "01-situation": prenom_metier(t["metier"]),
@@ -293,9 +379,9 @@ def main():
                                       choix=d["choix"], reponse=reponses.get(q, 0),
                                       explication=d["explication"]))
 
-        base = f"{SITE}/fiches-cours/maths/4e/{SLUG_FICHE[notion]}"
-        exos = f"{SITE}/fiches-exercices/maths/4e/{SLUG_FICHE[notion]}"
-        serie = (f"{SITE}/coach/serie?classe=4e&matiere=maths&notion={notion}"
+        base = f"{SITE}/fiches-cours/maths/{classe}/{SLUG_FICHE[notion]}"
+        exos = f"{SITE}/fiches-exercices/maths/{classe}/{SLUG_FICHE[notion]}"
+        serie = (f"{SITE}/coach/serie?classe={classe}&matiere=maths&notion={notion}"
                  f"&microId={micro}&display=simple")
         puces = "\n".join(f"• {lib.lower()}" for k, lib in meta["ch"].items())
         accroche = (f"{v['paysage']['01-situation']}\n\n"
@@ -308,24 +394,24 @@ def main():
                     f"Pour s'entraîner :\n• la fiche de cours : {base}\n"
                     f"• les exercices corrigés : {exos}\n"
                     f"• la série du coach sur cette compétence : {serie}\n\n"
-                    f"📐 Épisode {meta['num']} de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\n"
+                    f"📐 Épisode {meta['num']} de la série Périmètre, aire, volume et solides d'EleveAI, en {classe}.\n"
                     f"Fait à La Réunion 🌋 — Frédéric Lacoste")
         tags = [meta["court"].lower(), t["sujet"].split("(")[0].strip().lower(),
                 t["metier"].split("(")[0].strip().lower(), notion.replace("_", " "),
-                f"ceinture {t['ceinture']}", "maths", "4e", "collège", "cycle 4", "EleveAI"]
+                f"ceinture {t['ceinture']}", "maths", classe, "collège", "cycle 4", "EleveAI"]
 
-        dossier = f"4e/maths/{meta['dossier']}"
+        dossier = f"{classe}/maths/{meta['dossier']}"
         nom = f"eleveai-maths-{eid}"
         manifeste[eid] = dict(
-            id=eid, pas_avant="", notionId=notion, microId=micro, classe="4e",
-            ceinture=t["ceinture"], serie="Maths 4e", type="longue",
+            id=eid, pas_avant="", notionId=notion, microId=micro, classe=classe,
+            ceinture=t["ceinture"], serie=f"Maths {classe}", type="longue",
             fichier=f"{dossier}/{nom}.mp4", miniature=f"{dossier}/{nom}.png",
             titre=meta["titre"], accroche=accroche, chapitres=chapitres, tags=tags,
             questions=questions, centres=v["centres"], **({"aussi": aussi} if aussi else {}))
 
         # ── le short ──────────────────────────────────────────────────────────
         sid = eid + "-short"
-        secrans, sreponses = lire_log(meta["log"] + "-short")
+        secrans, sreponses = lire_log(meta.get("log_short", meta["log"] + "-short"))
         stemps = dict(secrans)
         sq = decouper_question(v["short"]["02-question"], v["short"]["02b-reponse"])
         s_accroche = (f"{v['short']['00-accroche']} {v['short']['01-defi']}\n\n"
@@ -333,10 +419,10 @@ def main():
                       f"👉 {v['short']['04-commentaire'].replace('À toi : ', '')}\n\n"
                       f"▶️ L'épisode complet : {{{{LONGUE}}}}\n🎯 Le coach : {serie}\n\n"
                       f"Fait à La Réunion 🌋 — Frédéric Lacoste\n\n"
-                      f"#Shorts #maths #4e #{meta['famille']}")
+                      f"#Shorts #maths #{classe} #{meta['famille']}")
         manifeste[sid] = dict(
-            id=sid, pas_avant="", notionId=notion, microId=micro, classe="4e",
-            ceinture="blanche", serie="Maths 4e", type="short", renvoie_vers=eid,
+            id=sid, pas_avant="", notionId=notion, microId=micro, classe=classe,
+            ceinture="blanche", serie=f"Maths {classe}", type="short", renvoie_vers=eid,
             fichier=f"{dossier}/{nom}-short.mp4", miniature=f"{dossier}/{nom}-short-miniature.png",
             titre=meta["short_titre"], accroche=s_accroche,
             tags=tags[:-1] + ["ceinture blanche", "Shorts", "EleveAI"],
@@ -347,38 +433,43 @@ def main():
 
         for suffixe in ("", "-short"):
             r2.append(dict(id=eid + suffixe, cle=f"{dossier}/{nom}{suffixe}.mp4",
-                           classe="4e", serie="Maths 4e"))
+                           classe=classe, serie=f"Maths {classe}"))
 
     # ── coach-4e.md : ce que le 1er poste aura à brancher ─────────────────────
-    lignes = ["# Coach 4e : ce qu'il faudra brancher (2e poste → 1er poste, à la fusion)",
+    n_4e = sum(1 for m in EPISODES.values() if m.get("classe", "4e") == "4e")
+    n_3e = len(EPISODES) - n_4e
+    lignes = ["# Coach 4e et 3e : ce qu'il faudra brancher (2e poste → 1er poste, à la fusion)",
               "",
               "Le 2e poste ne touche ni aux banques du coach, ni à `manifeste-youtube.json`, ni à",
               "`lib/videos/*.json`. Le 1er poste branchera, après la fusion et la mise en ligne R2",
               "(⚠️ ce poste n'a pas envoyé les fichiers : voir `videos-r2-4e.json`) :",
-              "`node scripts/brancher-videos-coach.mjs --id 4e-<micro en tirets>,4e-<micro en tirets>-short --ecrire`.",
+              "`node scripts/brancher-videos-coach.mjs --id <id>,<id>-short --ecrire`.",
               "",
-              "⭐ Les 20 épisodes couvrent les **30 micros de 4e**. 18 micros de 3e sont servis en plus",
-              "par les `aussi` ci-dessous : la 3e n'a RIEN à retourner dans ces familles.",
-              "Les 8 épisodes propres à la 3e (T1 à T8) sont suivis à part, dans",
-              "`manim/poste2/REPRISE-3e-sections.md`.",
+              f"⭐ La série fait **{len(EPISODES)} épisodes** : {n_4e} en 4e et {n_3e} propres à la 3e,",
+              f"soit {2 * len(EPISODES)} vidéos (un paysage et un short chacun).",
+              "Les 20 épisodes de 4e couvrent les **30 micros de 4e**, et servent 18 micros de 3e",
+              "de plus par leurs `aussi`. Avec les 8 épisodes de 3e ci-dessous, **il ne reste RIEN",
+              "à tourner en 3e** dans ces familles : qu'aucun poste ne les reprenne.",
               "",
-              "| Notion (`notionId`) | Micro (`microId`) | id paysage | id short | Aussi | État |",
-              "|---|---|---|---|---|---|"]
+              "| Classe | Notion (`notionId`) | Micro (`microId`) | id paysage | id short | Aussi | État |",
+              "|---|---|---|---|---|---|---|"]
     for eid, meta in EPISODES.items():
         e = manifeste[eid]
         a = " · ".join(f"{x['classe']} `{x['microId']}`" for x in e.get("aussi", [])) or "—"
-        lignes.append(f"| `{e['notionId']}` | `{e['microId']}` | `{eid}` | `{eid}-short` | {a} | "
+        lignes.append(f"| {e['classe']} | `{e['notionId']}` | `{e['microId']}` | `{eid}` | "
+                      f"`{eid}-short` | {a} | "
                       f"✅ HD + short rendus et contrôlés (17/11), bords à 0 ; "
                       f"⏳ miniatures et R2 |")
     lignes += ["",
                "## Métiers (matrice)",
-               "Les 20 métiers de la série sont tous différents et aucun n'est repris de la série 5e.",
-               "À marquer `V` sur leur ligne dans `lib/matrice/metiers-college.ts` (section 4e) :",
+               f"Les {len(EPISODES)} métiers de la série sont tous différents, et aucun n'est repris",
+               "de la série 5e. À marquer `V` sur leur ligne dans `lib/matrice/metiers-college.ts`",
+               "(section 4e pour les 20 premiers, section 3e pour les 8 du lot T) :",
                "  " + ", ".join(sorted({prenom_metier(tab[e]['metier']) for e in EPISODES})),
                "",
                "## Centres d'intérêt",
                "`node scripts/verifier-centres-age.mjs manim/poste2/manifeste-4e.json` :",
-               "**0 centre hors tranche** sur les 40 vidéos (tranche 12-14 ans).",
+               f"**0 centre hors tranche** sur les {2 * len(EPISODES)} vidéos.",
                ""]
     (SORTIE / "coach-4e.md").write_text(chr(10).join(lignes), encoding="utf-8")
 
