@@ -56,9 +56,18 @@ Ouvert le 15/11/2026. 30 micros du coach, plan : `manim/PLAN-perimetre-aire-volu
 | A3 `aire_figure` (cour en L) | ✅ | ✅ | ✅ 224,2 s / 55,0 s, bords 0 |
 | A4 `aire_probleme` (terrasse) | ✅ | ✅ | ✅ 212,2 s / 65,2 s, bords 0 |
 | A5 `aire_defi` (maillots) | ✅ | ✅ | ✅ 200,3 s / 57,1 s, bords 0 |
-| T1 → T8 (3e) | ⏳ | ⏳ | — (session sœur, `manim/poste2/REPRISE-3e-sections.md`) |
+| T1 `3e-volume-boule` (ballon, poumons) | ✅ | ✅ | ✅ 241,8 s / 57,8 s, bords 0 |
+| T2 `3e-volume-reduction-section` (gobelet) | ✅ | ✅ | ✅ 214,8 s / 55,3 s, bords 0 |
+| T3 `3e-section-pave-cube` (pain de mie) | ✅ | ✅ | ✅ 199,1 s / 49,7 s, bords 0 |
+| T4 `3e-section-cylindre` (trottinette) | ✅ | ✅ | ✅ 187,7 s / 58,3 s, bords 0 |
+| T5 `3e-section-cone-pyramide` (le volcan) | ✅ | ✅ | ✅ 195,8 s / 54,1 s, bords 0 |
+| T6 `3e-section-sphere` (parallèles du globe) | ✅ | ✅ | ✅ 217,1 s / 54,6 s, bords 0 |
+| T7 `3e-section-longueur` (position en vol) | ✅ | ✅ | ✅ 208,1 s / 61,0 s, bords 0 |
+| T8 `3e-section-defi` (scanner 3D) | ✅ | ✅ | ✅ 208,8 s / 54,2 s, bords 0 |
 
-**20 épisodes finis sur 28** — TOUS LES ÉPISODES DE 4e SONT FAITS (V1 à V4, S1 à S6, P1 à P5,
+**LES 28 ÉPISODES SONT FINIS** (les 8 de 3e par la session sœur)
+
+~~20 épisodes finis sur 28~~ — TOUS LES ÉPISODES DE 4e SONT FAITS (V1 à V4, S1 à S6, P1 à P5,
 A1 à A5), paysages et shorts rendus en HD, `verifier-bords-video` = 0 sur les 40 MP4.
 ⭐ Les 30 micros de 4e sont couverts, et 18 des 33 micros de 3e par les `aussi`.
 ⚠️⚠️ Les 8 épisodes de 3e (T1 à T8) sont confiés à une SESSION SŒUR, démarrée par Frédéric le
@@ -257,6 +266,35 @@ et la poignée revient 2 s plus tard sur l'écran d'abonnement, à y = -0,75, pa
     ne bouge jamais, la valeur la plus fréquente du nombre de pixels allumés dans son
     rectangle EST « lui tout seul ». Aucune image de référence à tenir à jour. Il reconnaît
     le cadre paysage à son format et y regarde en bas à droite.
+
+
+## ✅ La série est FINIE — 28 épisodes, 56 vidéos (17/11/2026)
+
+**Ce qui est prouvé, chiffre à l'appui, et non déclaré :**
+- `python -X utf8 -I manim/poste2/verifier-fraicheur-mp4.py --serie 4e` → **40 prouvés à
+  jour, 0 douteux**. Idem sur la 3e : 16/16. ⭐ Ce contrôle vaut mieux qu'un compte de lignes
+  dans un log : il mesure les FICHIERS, pas ce que le lot prétend avoir fait.
+- `verifier-bords-video` → **0 bord** sur les 21 vidéos re-rendues ; les 35 autres l'avaient déjà.
+- `verifier-zone-margo.py` → **0 instant** où quelque chose recouvre Ti-Margo, sur les 21.
+- `verifier-coche-carte.py` → **0 carte** où le ✓ touche le libellé, sur les 21 (de 20 à 511 px).
+- Dry run `AUDIT=1 BORDS=1` sur les 20 shorts : 16 nets ; les 4 écarts restants préexistent
+  (vérifié en sortant l'ancienne version du commit) et ne sont PAS des nombres en avance.
+- `node scripts/verifier-centres-age.mjs manim/poste2/manifeste-4e.json` → **0 centre hors
+  tranche** sur les 56.
+
+**Les trois fichiers de branchement couvrent les 28 épisodes** : `manifeste-4e.json` (56
+entrées), `videos-r2-4e.json` (56 lignes) et `coach-4e.md`. ⛔ Ils se GÉNÈRENT :
+`python manim/poste2/manifeste-4e.py`. ⚠️ La régénération a corrigé une question fausse que
+le manifeste committé portait depuis des jours — le short `4e-aire-defi` affichait les choix
+d'un épisode de 3e (« un cube / une pyramide / un cône ») au lieu des siens. Les 59 autres
+questions étaient justes : comparées une par une aux voix.
+
+**L'aperçu des 28 pour Frédéric** : `manim/sorties/apercu-4e-3e-complet.html`, généré par
+`python manim/poste2/apercu-serie.py` (56 vidéos, toutes EN PAUSE, 0 `autoplay`, 0 fichier
+manquant). Servir : `python -m http.server 3907 --directory manim/sorties` →
+`http://localhost:3907/apercu-4e-3e-complet.html`.
+
+⏳ **Restent pour le 1er poste** : les miniatures, l'envoi R2, et le branchement du coach.
 
 ## Passe finale de la 4e — FAITE le 17/11
 

@@ -3115,8 +3115,8 @@
       }
     ],
     "centres": [
-      "technologie-ia",
-      "jeux-video"
+      "sport",
+      "argent-budget"
     ],
     "aussi": [
       {
@@ -3139,7 +3139,7 @@
     "fichier": "4e/maths/aire/30-aire-defi/eleveai-maths-4e-aire-defi-short.mp4",
     "miniature": "4e/maths/aire/30-aire-defi/eleveai-maths-4e-aire-defi-short-miniature.png",
     "titre": "18 flocages : ça fait combien de mètres carrés ? #maths #4e",
-    "accroche": "Le scanner de Nathan donne trois tranches : un carré en bas, un carré plus petit au milieu, un point en haut. Quel solide a-t-il scanné ?\n\n🥋 Ceinture blanche.\n👉 des disques tous égaux, du bas jusqu'en haut. Quel solide ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #aire",
+    "accroche": "Ryan floque 18 maillots. Chaque flocage fait 563 centimètres carrés. En mètres carrés, ça fait combien ?\n\n🥋 Ceinture blanche.\n👉 combien de centimètres carrés dans 3 mètres carrés ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #aire",
     "tags": [
       "défis sur les aires",
       "floquer les maillots d'un tournoi",
@@ -3148,6 +3148,1181 @@
       "ceinture bleue",
       "maths",
       "4e",
+      "collège",
+      "cycle 4",
+      "ceinture blanche",
+      "Shorts",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:10",
+        "question": "En mètres carrés, ça fait combien ?",
+        "choix": [
+          "101 mètres carrés",
+          "environ 1 mètre carré",
+          "environ 10 mètres carrés"
+        ],
+        "reponse": 1,
+        "explication": "563 fois 18, 10 134 centimètres carrés. Un mètre carré en fait 10 000 : ça fait à peine plus d'un mètre carré."
+      }
+    ],
+    "centres": [
+      "sport",
+      "argent-budget"
+    ],
+    "aussi": [
+      {
+        "classe": "3e",
+        "notionId": "aire_surface",
+        "microId": "aire_defi"
+      }
+    ]
+  },
+  "3e-volume-boule": {
+    "id": "3e-volume-boule",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_boule",
+    "classe": "3e",
+    "ceinture": "verte",
+    "serie": "Maths 3e",
+    "type": "longue",
+    "fichier": "3e/maths/volume/31-volume-boule/eleveai-maths-3e-volume-boule.mp4",
+    "miniature": "3e/maths/volume/31-volume-boule/eleveai-maths-3e-volume-boule.png",
+    "titre": "Combien d'air tient dans un ballon ? — Le volume d'une boule — Maths 3e",
+    "accroche": "Voici Lina. Elle est kinésithérapeute : elle fait travailler la respiration de ses patients. Elle leur demande de souffler tout l'air de leurs poumons dans un ballon. La taille du ballon dit beaucoup de choses.\n\nDans cette vidéo :\n• la formule\n• un exemple\n• et tes poumons\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Lina compare deux patients. Le premier gonfle un ballon de 10 centimètres de rayon, le second un ballon de 12 centimètres de rayon. Combien de litres chacun, et combien de litres d'écart ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/volume-solide\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/volume-solide\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=volume_solide&microId=volume_boule&display=simple\n\n📐 Épisode 31 de la série Périmètre, aire, volume et solides d'EleveAI, en 3e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+    "chapitres": [
+      [
+        "00:00",
+        "Le volume d'une boule"
+      ],
+      [
+        "00:05",
+        "Lina, kinésithérapeute"
+      ],
+      [
+        "00:20",
+        "La formule"
+      ],
+      [
+        "00:34",
+        "Un exemple"
+      ],
+      [
+        "00:54",
+        "Et tes poumons"
+      ],
+      [
+        "01:06",
+        "Question 1"
+      ],
+      [
+        "01:48",
+        "Le piège"
+      ],
+      [
+        "02:01",
+        "Question 2"
+      ],
+      [
+        "02:42",
+        "À toi de jouer"
+      ],
+      [
+        "03:02",
+        "Correction"
+      ],
+      [
+        "03:32",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "le volume d'une boule",
+      "souffler dans un ballon : tes poumons",
+      "kinésithérapeute",
+      "volume solide",
+      "ceinture verte",
+      "maths",
+      "3e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:06",
+        "question": "Une boule a 3 centimètres de rayon. Quel est son volume ?",
+        "choix": [
+          "12 pi centimètres cubes",
+          "27 pi centimètres cubes",
+          "36 pi centimètres cubes"
+        ],
+        "reponse": 2,
+        "explication": "3 fois 3 fois 3, 27. 4 fois pi fois 27, 108 pi. Divisé par 3 : 36 pi centimètres cubes. 27 pi, c'est avoir oublié le 4 et le divisé par 3."
+      },
+      {
+        "t": "02:01",
+        "question": "Une boule a 6 centimètres de diamètre. Quel est son volume ?",
+        "choix": [
+          "36 pi centimètres cubes",
+          "288 pi centimètres cubes",
+          "48 pi centimètres cubes"
+        ],
+        "reponse": 0,
+        "explication": "Le rayon vaut 3. 4 fois pi fois 27, divisé par 3 : 36 pi centimètres cubes. 288 pi, c'est le diamètre pris pour le rayon : huit fois trop."
+      }
+    ],
+    "centres": [
+      "corps-sante",
+      "sport"
+    ]
+  },
+  "3e-volume-boule-short": {
+    "id": "3e-volume-boule-short",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_boule",
+    "classe": "3e",
+    "ceinture": "blanche",
+    "serie": "Maths 3e",
+    "type": "short",
+    "renvoie_vers": "3e-volume-boule",
+    "fichier": "3e/maths/volume/31-volume-boule/eleveai-maths-3e-volume-boule-short.mp4",
+    "miniature": "3e/maths/volume/31-volume-boule/eleveai-maths-3e-volume-boule-short-miniature.png",
+    "titre": "Tout l'air de tes poumons : quel rayon de ballon ? #maths #3e",
+    "accroche": "Souffle tout l'air de tes poumons dans un ballon : environ 4 litres. Quel rayon fait ce ballon une fois gonflé ?\n\n🥋 Ceinture blanche.\n👉 un ballon de 5 centimètres de rayon. Combien de litres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=volume_solide&microId=volume_boule&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #3e #volume",
+    "tags": [
+      "le volume d'une boule",
+      "souffler dans un ballon : tes poumons",
+      "kinésithérapeute",
+      "volume solide",
+      "ceinture verte",
+      "maths",
+      "3e",
+      "collège",
+      "cycle 4",
+      "ceinture blanche",
+      "Shorts",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:08",
+        "question": "Quel rayon fait ce ballon une fois gonflé ?",
+        "choix": [
+          "5 centimètres",
+          "10 centimètres",
+          "20 centimètres"
+        ],
+        "reponse": 1,
+        "explication": "Avec 10 centimètres de rayon : 4 fois pi fois mille, divisé par 3, environ 4 189 centimètres cubes. Soit 4,2 litres."
+      }
+    ],
+    "centres": [
+      "corps-sante",
+      "sport"
+    ]
+  },
+  "3e-volume-reduction-section": {
+    "id": "3e-volume-reduction-section",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_pyramide_cone_reduction",
+    "classe": "3e",
+    "ceinture": "bleue",
+    "serie": "Maths 3e",
+    "type": "longue",
+    "fichier": "3e/maths/volume/32-volume-reduction-section/eleveai-maths-3e-volume-reduction-section.mp4",
+    "miniature": "3e/maths/volume/32-volume-reduction-section/eleveai-maths-3e-volume-reduction-section.png",
+    "titre": "Un gobelet rempli à mi-hauteur : as-tu la moitié ? — La réduction par une section — Maths 3e",
+    "accroche": "Voici Adam. Il dirige une salle de cinéma. Les boissons sont servies dans des gobelets coniques. Un client se plaint : son gobelet est rempli jusqu'à la moitié de la hauteur, et il trouve qu'il n'y a pas assez. Il a raison, et les mathématiques le disent.\n\nDans cette vidéo :\n• la section du cône\n• le rapport\n• le volume, trois fois\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : Le gobelet d'Adam contient 48 centilitres une fois plein. Le serveur le remplit aux trois quarts de la hauteur, et le verre a l'air presque plein. Combien de centilitres le client a-t-il vraiment, et combien lui manque-t-il ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/volume-solide\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/volume-solide\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=volume_solide&microId=volume_pyramide_cone_reduction&display=simple\n\n📐 Épisode 32 de la série Périmètre, aire, volume et solides d'EleveAI, en 3e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+    "chapitres": [
+      [
+        "00:00",
+        "La réduction par une section"
+      ],
+      [
+        "00:06",
+        "Adam, responsable de salle"
+      ],
+      [
+        "00:25",
+        "La section du cône"
+      ],
+      [
+        "00:42",
+        "Le rapport"
+      ],
+      [
+        "00:51",
+        "Le volume, trois fois"
+      ],
+      [
+        "01:02",
+        "Question 1"
+      ],
+      [
+        "01:34",
+        "Le piège"
+      ],
+      [
+        "01:51",
+        "Question 2"
+      ],
+      [
+        "02:16",
+        "À toi de jouer"
+      ],
+      [
+        "02:38",
+        "Correction"
+      ],
+      [
+        "03:08",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "la réduction par une section",
+      "le gobelet du cinéma à moitié haut",
+      "responsable de salle",
+      "volume solide",
+      "ceinture bleue",
+      "maths",
+      "3e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "01:02",
+        "question": "Un gobelet conique rempli jusqu'à la moitié de sa hauteur contient quelle part du total ?",
+        "choix": [
+          "un huitième",
+          "la moitié",
+          "un quart"
+        ],
+        "reponse": 0,
+        "explication": "Le rapport est un demi, donc le volume est divisé par 2 fois 2 fois 2, soit 8. Un huitième seulement."
+      },
+      {
+        "t": "01:51",
+        "question": "Dans une réduction de rapport un tiers, le volume est divisé par…",
+        "choix": [
+          "3",
+          "9",
+          "27"
+        ],
+        "reponse": 2,
+        "explication": "3 fois 3 fois 3, 27. 9, ce serait pour une aire."
+      }
+    ],
+    "centres": [
+      "cinema-series",
+      "argent-budget"
+    ]
+  },
+  "3e-volume-reduction-section-short": {
+    "id": "3e-volume-reduction-section-short",
+    "pas_avant": "",
+    "notionId": "volume_solide",
+    "microId": "volume_pyramide_cone_reduction",
+    "classe": "3e",
+    "ceinture": "blanche",
+    "serie": "Maths 3e",
+    "type": "short",
+    "renvoie_vers": "3e-volume-reduction-section",
+    "fichier": "3e/maths/volume/32-volume-reduction-section/eleveai-maths-3e-volume-reduction-section-short.mp4",
+    "miniature": "3e/maths/volume/32-volume-reduction-section/eleveai-maths-3e-volume-reduction-section-short-miniature.png",
+    "titre": "Gobelet conique à mi-hauteur : un huitième seulement #maths #3e",
+    "accroche": "Ton gobelet conique est rempli jusqu'à la moitié de sa hauteur. Tu as payé plein tarif. As-tu vraiment la moitié de la boisson ?\n\n🥋 Ceinture blanche.\n👉 rempli au tiers de la hauteur, quelle part du volume ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=volume_solide&microId=volume_pyramide_cone_reduction&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #3e #volume",
+    "tags": [
+      "la réduction par une section",
+      "le gobelet du cinéma à moitié haut",
+      "responsable de salle",
+      "volume solide",
+      "ceinture bleue",
+      "maths",
+      "3e",
+      "collège",
+      "cycle 4",
+      "ceinture blanche",
+      "Shorts",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:10",
+        "question": "Tu as payé plein tarif. As-tu vraiment la moitié de la boisson ?",
+        "choix": [
+          "oui, la moitié",
+          "non, un huitième",
+          "non, un quart"
+        ],
+        "reponse": 1,
+        "explication": "La moitié de la hauteur, c'est un rapport d'un demi : le volume est divisé par 2 fois 2 fois 2, soit 8. Un huitième."
+      }
+    ],
+    "centres": [
+      "cinema-series",
+      "argent-budget"
+    ]
+  },
+  "3e-section-pave-cube": {
+    "id": "3e-section-pave-cube",
+    "pas_avant": "",
+    "notionId": "sections_solides",
+    "microId": "section_pave_cube",
+    "classe": "3e",
+    "ceinture": "jaune",
+    "serie": "Maths 3e",
+    "type": "longue",
+    "fichier": "3e/maths/sections/33-section-pave-cube/eleveai-maths-3e-section-pave-cube.mp4",
+    "miniature": "3e/maths/sections/33-section-pave-cube/eleveai-maths-3e-section-pave-cube.png",
+    "titre": "Trancher un pain de mie : quelle forme ? — La section d'un pavé ou d'un cube — Maths 3e",
+    "accroche": "Voici Fatou. Elle est boulangère. Chaque matin, elle tranche des pains de mie. Un pain de mie, c'est un pavé droit. Et chaque tranche est une section.\n\nDans cette vidéo :\n• parallèlement à une face\n• le cube\n• la coupe en biais\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : Le pain de Fatou est un pavé de 30 centimètres de long, 10 de large, 10 de haut. Elle fait des tranches de 1 centimètre d'épaisseur, parallèles à la face carrée. Combien de tranches, et quelle est l'aire d'une tranche ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/sections-solides\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/sections-solides\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_pave_cube&display=simple\n\n📐 Épisode 33 de la série Périmètre, aire, volume et solides d'EleveAI, en 3e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+    "chapitres": [
+      [
+        "00:00",
+        "La section d'un pavé ou d'un cube"
+      ],
+      [
+        "00:05",
+        "Fatou, boulangère"
+      ],
+      [
+        "00:18",
+        "Parallèlement à une face"
+      ],
+      [
+        "00:30",
+        "Le cube"
+      ],
+      [
+        "00:41",
+        "La coupe en biais"
+      ],
+      [
+        "00:55",
+        "Question 1"
+      ],
+      [
+        "01:25",
+        "Le piège"
+      ],
+      [
+        "01:38",
+        "Question 2"
+      ],
+      [
+        "02:15",
+        "À toi de jouer"
+      ],
+      [
+        "02:37",
+        "Correction"
+      ],
+      [
+        "02:51",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "la section d'un pavé ou d'un cube",
+      "trancher un pain de mie",
+      "boulangère",
+      "sections solides",
+      "ceinture jaune",
+      "maths",
+      "3e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:55",
+        "question": "On tranche un pain de mie parallèlement à sa face avant. La tranche est…",
+        "choix": [
+          "un carré plus petit",
+          "un triangle",
+          "un rectangle identique à la face"
+        ],
+        "reponse": 2,
+        "explication": "Une coupe parallèle à une face donne exactement cette face, à la même taille."
+      },
+      {
+        "t": "01:38",
+        "question": "On coupe un cube de 8 centimètres de côté parallèlement à une face. Quelle est l'aire de la section ?",
+        "choix": [
+          "512 centimètres carrés",
+          "64 centimètres carrés",
+          "32 centimètres carrés"
+        ],
+        "reponse": 1,
+        "explication": "8 fois 8, 64 centimètres carrés. 512, c'est 8 fois 8 fois 8 : c'est le volume du cube."
+      }
+    ],
+    "centres": [
+      "cuisine",
+      "art-design"
+    ]
+  },
+  "3e-section-pave-cube-short": {
+    "id": "3e-section-pave-cube-short",
+    "pas_avant": "",
+    "notionId": "sections_solides",
+    "microId": "section_pave_cube",
+    "classe": "3e",
+    "ceinture": "blanche",
+    "serie": "Maths 3e",
+    "type": "short",
+    "renvoie_vers": "3e-section-pave-cube",
+    "fichier": "3e/maths/sections/33-section-pave-cube/eleveai-maths-3e-section-pave-cube-short.mp4",
+    "miniature": "3e/maths/sections/33-section-pave-cube/eleveai-maths-3e-section-pave-cube-short-miniature.png",
+    "titre": "La tranche en biais est-elle plus grande ? #maths #3e",
+    "accroche": "Fatou coupe le pain droit, puis elle le coupe en biais. La tranche en biais est-elle plus grande, plus petite, ou pareille ?\n\n🥋 Ceinture blanche.\n👉 quelle forme a la section d'un cube coupé parallèlement à une face ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_pave_cube&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #3e #sections",
+    "tags": [
+      "la section d'un pavé ou d'un cube",
+      "trancher un pain de mie",
+      "boulangère",
+      "sections solides",
+      "ceinture jaune",
+      "maths",
+      "3e",
+      "collège",
+      "cycle 4",
+      "ceinture blanche",
+      "Shorts",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:09",
+        "question": "La tranche en biais est-elle plus grande, plus petite, ou pareille ?",
+        "choix": [
+          "plus grande",
+          "plus petite",
+          "la même"
+        ],
+        "reponse": 0,
+        "explication": "En biais, la coupe traverse le pain sur une plus grande longueur : la section est plus grande."
+      }
+    ],
+    "centres": [
+      "cuisine",
+      "art-design"
+    ]
+  },
+  "3e-section-cylindre": {
+    "id": "3e-section-cylindre",
+    "pas_avant": "",
+    "notionId": "sections_solides",
+    "microId": "section_cylindre",
+    "classe": "3e",
+    "ceinture": "verte",
+    "serie": "Maths 3e",
+    "type": "longue",
+    "fichier": "3e/maths/sections/34-section-cylindre/eleveai-maths-3e-section-cylindre.mp4",
+    "miniature": "3e/maths/sections/34-section-cylindre/eleveai-maths-3e-section-cylindre.png",
+    "titre": "Couper le tube d'une trottinette : disque ou rectangle ? — La section d'un cylindre — Maths 3e",
+    "accroche": "Voici Oscar. Il est tourneur sur métaux : il découpe des tubes. Le cadre d'une trottinette est fait de tubes, et la façon de les couper change tout.\n\nDans cette vidéo :\n• en travers\n• dans la longueur\n• le tube est creux\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Oscar coupe un tube de 3 centimètres de rayon extérieur et 2,5 centimètres de rayon intérieur. Quelle est l'aire de métal sur la coupe ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/sections-solides\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/sections-solides\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_cylindre&display=simple\n\n📐 Épisode 34 de la série Périmètre, aire, volume et solides d'EleveAI, en 3e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+    "chapitres": [
+      [
+        "00:00",
+        "La section d'un cylindre"
+      ],
+      [
+        "00:05",
+        "Oscar, tourneur sur métaux"
+      ],
+      [
+        "00:17",
+        "En travers"
+      ],
+      [
+        "00:26",
+        "Dans la longueur"
+      ],
+      [
+        "00:38",
+        "Le tube est creux"
+      ],
+      [
+        "00:48",
+        "Question 1"
+      ],
+      [
+        "01:17",
+        "Le piège"
+      ],
+      [
+        "01:31",
+        "Question 2"
+      ],
+      [
+        "02:00",
+        "À toi de jouer"
+      ],
+      [
+        "02:17",
+        "Correction"
+      ],
+      [
+        "02:42",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "la section d'un cylindre",
+      "couper le tube d'une trottinette",
+      "tourneur sur métaux",
+      "sections solides",
+      "ceinture verte",
+      "maths",
+      "3e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:48",
+        "question": "On coupe un tube perpendiculairement à son axe. La section est…",
+        "choix": [
+          "un rectangle",
+          "un disque",
+          "un triangle"
+        ],
+        "reponse": 1,
+        "explication": "Perpendiculairement à l'axe, c'est parallèle aux bases : on retrouve la forme de la base, un disque."
+      },
+      {
+        "t": "01:31",
+        "question": "On coupe un cylindre parallèlement à son axe, en passant par le centre. La section est…",
+        "choix": [
+          "un rectangle",
+          "un disque",
+          "un ovale"
+        ],
+        "reponse": 0,
+        "explication": "Un rectangle, dont la largeur est le diamètre du cylindre."
+      }
+    ],
+    "centres": [
+      "transports",
+      "technologie-ia"
+    ]
+  },
+  "3e-section-cylindre-short": {
+    "id": "3e-section-cylindre-short",
+    "pas_avant": "",
+    "notionId": "sections_solides",
+    "microId": "section_cylindre",
+    "classe": "3e",
+    "ceinture": "blanche",
+    "serie": "Maths 3e",
+    "type": "short",
+    "renvoie_vers": "3e-section-cylindre",
+    "fichier": "3e/maths/sections/34-section-cylindre/eleveai-maths-3e-section-cylindre-short.mp4",
+    "miniature": "3e/maths/sections/34-section-cylindre/eleveai-maths-3e-section-cylindre-short-miniature.png",
+    "titre": "Le bout du tube : quelle aire sur la coupe ? #maths #3e",
+    "accroche": "Oscar coupe un tube de trottinette de 3 centimètres de rayon, bien en travers. Si le tube était plein, quelle serait l'aire de la coupe ?\n\n🥋 Ceinture blanche.\n👉 quelle est la forme de la section d'un tube coupé en travers, en tenant compte du vide ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_cylindre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #3e #sections",
+    "tags": [
+      "la section d'un cylindre",
+      "couper le tube d'une trottinette",
+      "tourneur sur métaux",
+      "sections solides",
+      "ceinture verte",
+      "maths",
+      "3e",
+      "collège",
+      "cycle 4",
+      "ceinture blanche",
+      "Shorts",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:10",
+        "question": "Si le tube était plein, quelle serait l'aire de la coupe ?",
+        "choix": [
+          "6 pi centimètres carrés",
+          "3 pi centimètres carrés",
+          "9 pi centimètres carrés"
+        ],
+        "reponse": 2,
+        "explication": "Pi fois 3 fois 3, 9 pi centimètres carrés. 6 pi, c'est la longueur du cercle."
+      }
+    ],
+    "centres": [
+      "transports",
+      "technologie-ia"
+    ]
+  },
+  "3e-section-cone-pyramide": {
+    "id": "3e-section-cone-pyramide",
+    "pas_avant": "",
+    "notionId": "sections_solides",
+    "microId": "section_cone_pyramide",
+    "classe": "3e",
+    "ceinture": "verte",
+    "serie": "Maths 3e",
+    "type": "longue",
+    "fichier": "3e/maths/sections/35-section-cone-pyramide/eleveai-maths-3e-section-cone-pyramide.mp4",
+    "miniature": "3e/maths/sections/35-section-cone-pyramide/eleveai-maths-3e-section-cone-pyramide.png",
+    "titre": "Le Piton de la Fournaise coupé en deux — La section d'un cône et d'une pyramide — Maths 3e",
+    "accroche": "Voici Jade. Elle est volcanologue, à La Réunion. Pour expliquer le Piton de la Fournaise, elle le dessine coupé en deux. Un volcan, c'est à peu près un cône : ses sections racontent son histoire.\n\nDans cette vidéo :\n• parallèlement à la base\n• une réduction exacte\n• la pyramide\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Jade modélise un cône de 1 000 mètres de rayon à la base et 500 mètres de haut. Quel est le rayon de la section à 300 mètres d'altitude ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/sections-solides\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/sections-solides\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_cone_pyramide&display=simple\n\n📐 Épisode 35 de la série Périmètre, aire, volume et solides d'EleveAI, en 3e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+    "chapitres": [
+      [
+        "00:00",
+        "La section d'un cône et d'une pyramide"
+      ],
+      [
+        "00:05",
+        "Jade, volcanologue"
+      ],
+      [
+        "00:22",
+        "Parallèlement à la base"
+      ],
+      [
+        "00:32",
+        "Une réduction exacte"
+      ],
+      [
+        "00:45",
+        "La pyramide"
+      ],
+      [
+        "00:56",
+        "Question 1"
+      ],
+      [
+        "01:29",
+        "Le piège"
+      ],
+      [
+        "01:43",
+        "Question 2"
+      ],
+      [
+        "02:12",
+        "À toi de jouer"
+      ],
+      [
+        "02:28",
+        "Correction"
+      ],
+      [
+        "02:49",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "la section d'un cône et d'une pyramide",
+      "le volcan coupé en deux",
+      "volcanologue",
+      "sections solides",
+      "ceinture verte",
+      "maths",
+      "3e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:56",
+        "question": "On coupe un cône parallèlement à sa base. La section est…",
+        "choix": [
+          "un disque plus petit",
+          "un rectangle",
+          "un triangle"
+        ],
+        "reponse": 0,
+        "explication": "Un disque plus petit, qui est une réduction de la base. Le triangle, c'est ce qu'on verrait en coupant le cône verticalement."
+      },
+      {
+        "t": "01:43",
+        "question": "On coupe une pyramide à base carrée parallèlement à sa base. La section est…",
+        "choix": [
+          "un triangle",
+          "un carré plus petit",
+          "un disque"
+        ],
+        "reponse": 1,
+        "explication": "Un carré plus petit : la section a la forme de la base."
+      }
+    ],
+    "centres": [
+      "nature-ecologie",
+      "sciences"
+    ]
+  },
+  "3e-section-cone-pyramide-short": {
+    "id": "3e-section-cone-pyramide-short",
+    "pas_avant": "",
+    "notionId": "sections_solides",
+    "microId": "section_cone_pyramide",
+    "classe": "3e",
+    "ceinture": "blanche",
+    "serie": "Maths 3e",
+    "type": "short",
+    "renvoie_vers": "3e-section-cone-pyramide",
+    "fichier": "3e/maths/sections/35-section-cone-pyramide/eleveai-maths-3e-section-cone-pyramide-short.mp4",
+    "miniature": "3e/maths/sections/35-section-cone-pyramide/eleveai-maths-3e-section-cone-pyramide-short-miniature.png",
+    "titre": "Le volcan à mi-hauteur : quel rayon dans la coupe ? #maths #3e",
+    "accroche": "Jade coupe son volcan en deux, à mi-hauteur. Le cratère du bas fait 1 000 mètres de rayon. À mi-hauteur, quel est le rayon du disque de la coupe ?\n\n🥋 Ceinture blanche.\n👉 au quart de la hauteur en partant du sommet, quel est le rapport ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_cone_pyramide&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #3e #sections",
+    "tags": [
+      "la section d'un cône et d'une pyramide",
+      "le volcan coupé en deux",
+      "volcanologue",
+      "sections solides",
+      "ceinture verte",
+      "maths",
+      "3e",
+      "collège",
+      "cycle 4",
+      "ceinture blanche",
+      "Shorts",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:11",
+        "question": "À mi-hauteur, quel est le rayon du disque de la coupe ?",
+        "choix": [
+          "le même",
+          "le quart",
+          "la moitié"
+        ],
+        "reponse": 2,
+        "explication": "À mi-hauteur, le rapport est un demi : le rayon est la moitié, soit 500 mètres. C'est l'aire qui serait divisée par 4."
+      }
+    ],
+    "centres": [
+      "nature-ecologie",
+      "sciences"
+    ]
+  },
+  "3e-section-sphere": {
+    "id": "3e-section-sphere",
+    "pas_avant": "",
+    "notionId": "sections_solides",
+    "microId": "section_sphere",
+    "classe": "3e",
+    "ceinture": "bleue",
+    "serie": "Maths 3e",
+    "type": "longue",
+    "fichier": "3e/maths/sections/36-section-sphere/eleveai-maths-3e-section-sphere.mp4",
+    "miniature": "3e/maths/sections/36-section-sphere/eleveai-maths-3e-section-sphere.png",
+    "titre": "Les parallèles du globe : pourquoi toujours un cercle ? — La section d'une sphère — Maths 3e",
+    "accroche": "Voici Rayan. Il est géographe. Sur son globe, il montre l'équateur et les parallèles. Ce sont tous des cercles, et ce n'est pas un hasard : ce sont des sections de la sphère.\n\nDans cette vidéo :\n• toujours un cercle\n• le grand cercle\n• le triangle caché\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : La Terre fait environ 6 370 kilomètres de rayon. Un parallèle passe à 3 185 kilomètres du centre, soit la moitié du rayon. Quel est son rayon, arrondi au kilomètre ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/sections-solides\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/sections-solides\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_sphere&display=simple\n\n📐 Épisode 36 de la série Périmètre, aire, volume et solides d'EleveAI, en 3e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+    "chapitres": [
+      [
+        "00:00",
+        "La section d'une sphère"
+      ],
+      [
+        "00:05",
+        "Rayan, géographe"
+      ],
+      [
+        "00:20",
+        "Toujours un cercle"
+      ],
+      [
+        "00:31",
+        "Le grand cercle"
+      ],
+      [
+        "00:43",
+        "Le triangle caché"
+      ],
+      [
+        "00:58",
+        "Question 1"
+      ],
+      [
+        "01:24",
+        "Le piège"
+      ],
+      [
+        "01:36",
+        "Question 2"
+      ],
+      [
+        "02:15",
+        "À toi de jouer"
+      ],
+      [
+        "02:37",
+        "Correction"
+      ],
+      [
+        "03:09",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "la section d'une sphère",
+      "les parallèles du globe",
+      "géographe",
+      "sections solides",
+      "ceinture bleue",
+      "maths",
+      "3e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:58",
+        "question": "Un plan coupe une sphère. La section est toujours…",
+        "choix": [
+          "un ovale",
+          "un cercle",
+          "un carré"
+        ],
+        "reponse": 1,
+        "explication": "Toujours un cercle, quelle que soit l'inclinaison du plan."
+      },
+      {
+        "t": "01:36",
+        "question": "Une sphère de rayon 10 est coupée par un plan situé à 6 du centre. Quel est le rayon de la section ?",
+        "choix": [
+          "4",
+          "16",
+          "8"
+        ],
+        "reponse": 2,
+        "explication": "Le triangle rectangle : 10 au carré moins 6 au carré, 100 moins 36, 64. La racine de 64, c'est 8. 4, c'est 10 moins 6 : la soustraction directe ne marche pas."
+      }
+    ],
+    "centres": [
+      "histoire-geographie",
+      "espace"
+    ]
+  },
+  "3e-section-sphere-short": {
+    "id": "3e-section-sphere-short",
+    "pas_avant": "",
+    "notionId": "sections_solides",
+    "microId": "section_sphere",
+    "classe": "3e",
+    "ceinture": "blanche",
+    "serie": "Maths 3e",
+    "type": "short",
+    "renvoie_vers": "3e-section-sphere",
+    "fichier": "3e/maths/sections/36-section-sphere/eleveai-maths-3e-section-sphere-short.mp4",
+    "miniature": "3e/maths/sections/36-section-sphere/eleveai-maths-3e-section-sphere-short-miniature.png",
+    "titre": "L'équateur ou le parallèle : lequel est le plus grand ? #maths #3e",
+    "accroche": "Sur le globe de Rayan, deux cercles : l'équateur, et un parallèle tout près du pôle. Lequel est le plus grand cercle ?\n\n🥋 Ceinture blanche.\n👉 que devient la section quand le plan touche la sphère sans la traverser ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_sphere&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #3e #sections",
+    "tags": [
+      "la section d'une sphère",
+      "les parallèles du globe",
+      "géographe",
+      "sections solides",
+      "ceinture bleue",
+      "maths",
+      "3e",
+      "collège",
+      "cycle 4",
+      "ceinture blanche",
+      "Shorts",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:09",
+        "question": "Lequel est le plus grand cercle ?",
+        "choix": [
+          "l'équateur",
+          "le parallèle",
+          "les deux pareil"
+        ],
+        "reponse": 0,
+        "explication": "L'équateur passe par le centre de la Terre : c'est un grand cercle. Plus un plan s'éloigne du centre, plus son cercle rétrécit."
+      }
+    ],
+    "centres": [
+      "histoire-geographie",
+      "espace"
+    ]
+  },
+  "3e-section-longueur": {
+    "id": "3e-section-longueur",
+    "pas_avant": "",
+    "notionId": "sections_solides",
+    "microId": "section_calculer_longueur",
+    "classe": "3e",
+    "ceinture": "bleue",
+    "serie": "Maths 3e",
+    "type": "longue",
+    "fichier": "3e/maths/sections/37-section-longueur/eleveai-maths-3e-section-longueur.mp4",
+    "miniature": "3e/maths/sections/37-section-longueur/eleveai-maths-3e-section-longueur.png",
+    "titre": "La position d'un avion en vol : où est le triangle rectangle ? — Calculer une longueur dans une section — Maths 3e",
+    "accroche": "Voici Maëlle. Elle est pilote de ligne. En vol, elle se repère dans l'espace : une position au sol et une altitude. Pour calculer une distance, elle ramène toujours le problème à un plan.\n\nDans cette vidéo :\n• ramener au plan\n• la diagonale\n• dans la sphère\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : Maëlle survole un point à 9 kilomètres d'altitude. L'aéroport est à 40 kilomètres devant elle, au sol. Quelle distance la sépare de l'aéroport en ligne droite ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/sections-solides\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/sections-solides\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_calculer_longueur&display=simple\n\n📐 Épisode 37 de la série Périmètre, aire, volume et solides d'EleveAI, en 3e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+    "chapitres": [
+      [
+        "00:00",
+        "Calculer une longueur dans une section"
+      ],
+      [
+        "00:06",
+        "Maëlle, pilote de ligne"
+      ],
+      [
+        "00:22",
+        "Ramener au plan"
+      ],
+      [
+        "00:31",
+        "La diagonale"
+      ],
+      [
+        "00:47",
+        "Dans la sphère"
+      ],
+      [
+        "00:58",
+        "Question 1"
+      ],
+      [
+        "01:34",
+        "Le piège"
+      ],
+      [
+        "01:46",
+        "Question 2"
+      ],
+      [
+        "02:22",
+        "À toi de jouer"
+      ],
+      [
+        "02:41",
+        "Correction"
+      ],
+      [
+        "03:02",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "calculer une longueur dans une section",
+      "la position en vol",
+      "pilote de ligne",
+      "sections solides",
+      "ceinture bleue",
+      "maths",
+      "3e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:58",
+        "question": "Dans une section rectangulaire de 6 centimètres sur 8, combien mesure la diagonale ?",
+        "choix": [
+          "14 centimètres",
+          "48 centimètres",
+          "10 centimètres"
+        ],
+        "reponse": 2,
+        "explication": "36 plus 64, 100 ; la racine de 100, c'est 10 centimètres. 14, c'est 6 plus 8 : on n'additionne pas les côtés."
+      },
+      {
+        "t": "01:46",
+        "question": "Une sphère de rayon 13 est coupée en un cercle de rayon 5. À quelle distance du centre est le plan ?",
+        "choix": [
+          "12",
+          "8",
+          "18"
+        ],
+        "reponse": 0,
+        "explication": "13 au carré moins 5 au carré, 169 moins 25, 144. La racine de 144, c'est 12. 8, c'est 13 moins 5."
+      }
+    ],
+    "centres": [
+      "transports",
+      "espace"
+    ]
+  },
+  "3e-section-longueur-short": {
+    "id": "3e-section-longueur-short",
+    "pas_avant": "",
+    "notionId": "sections_solides",
+    "microId": "section_calculer_longueur",
+    "classe": "3e",
+    "ceinture": "blanche",
+    "serie": "Maths 3e",
+    "type": "short",
+    "renvoie_vers": "3e-section-longueur",
+    "fichier": "3e/maths/sections/37-section-longueur/eleveai-maths-3e-section-longueur-short.mp4",
+    "miniature": "3e/maths/sections/37-section-longueur/eleveai-maths-3e-section-longueur-short-miniature.png",
+    "titre": "La diagonale d'une face de cube : 12 cm ? #maths #3e",
+    "accroche": "Un cube de 6 centimètres d'arête. On trace la diagonale d'une de ses faces. Combien mesure cette diagonale ?\n\n🥋 Ceinture blanche.\n👉 un carré de 10 centimètres de côté. Combien mesure sa diagonale ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_calculer_longueur&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #3e #sections",
+    "tags": [
+      "calculer une longueur dans une section",
+      "la position en vol",
+      "pilote de ligne",
+      "sections solides",
+      "ceinture bleue",
+      "maths",
+      "3e",
+      "collège",
+      "cycle 4",
+      "ceinture blanche",
+      "Shorts",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:09",
+        "question": "Combien mesure cette diagonale ?",
+        "choix": [
+          "12 centimètres",
+          "environ 8,5 centimètres",
+          "6 centimètres"
+        ],
+        "reponse": 1,
+        "explication": "36 plus 36, 72. La racine de 72, environ 8,5 centimètres. 12, c'est 6 plus 6."
+      }
+    ],
+    "centres": [
+      "transports",
+      "espace"
+    ]
+  },
+  "3e-section-defi": {
+    "id": "3e-section-defi",
+    "pas_avant": "",
+    "notionId": "sections_solides",
+    "microId": "section_defi",
+    "classe": "3e",
+    "ceinture": "marron",
+    "serie": "Maths 3e",
+    "type": "longue",
+    "fichier": "3e/maths/sections/38-section-defi/eleveai-maths-3e-section-defi.mp4",
+    "miniature": "3e/maths/sections/38-section-defi/eleveai-maths-3e-section-defi.png",
+    "titre": "Scanner un objet pour l'imprimer en 3D — Défis sur les sections planes — Maths 3e",
+    "accroche": "Voici Nathan. Il numérise des objets pour les imprimer en 3D. Son scanner ne voit pas le solide entier : il enregistre des centaines de sections horizontales, l'une au-dessus de l'autre. L'ordinateur reconstruit le solide à partir d'elles.\n\nDans cette vidéo :\n• le cylindre\n• le cône\n• la boule\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture marron.\nUn défi en fin de vidéo, avec sa correction : Le scanner de Nathan donne trois sections d'un objet : un carré de 10 centimètres de côté en bas, un carré de 5 centimètres à mi-hauteur, et un point au sommet. Quel solide est-ce, et quel est son volume si la hauteur est 12 centimètres ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/sections-solides\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/sections-solides\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_defi&display=simple\n\n📐 Épisode 38 de la série Périmètre, aire, volume et solides d'EleveAI, en 3e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+    "chapitres": [
+      [
+        "00:00",
+        "Défis sur les sections planes"
+      ],
+      [
+        "00:06",
+        "Nathan, technicien en numérisation 3D"
+      ],
+      [
+        "00:25",
+        "Le cylindre"
+      ],
+      [
+        "00:34",
+        "Le cône"
+      ],
+      [
+        "00:45",
+        "La boule"
+      ],
+      [
+        "00:56",
+        "Question 1"
+      ],
+      [
+        "01:29",
+        "Le piège"
+      ],
+      [
+        "01:43",
+        "Question 2"
+      ],
+      [
+        "02:12",
+        "À toi de jouer"
+      ],
+      [
+        "02:34",
+        "Correction"
+      ],
+      [
+        "03:00",
+        "Ce que tu as appris"
+      ]
+    ],
+    "tags": [
+      "défis sur les sections planes",
+      "scanner un objet pour l'imprimer en 3d",
+      "technicien en numérisation 3d",
+      "sections solides",
+      "ceinture marron",
+      "maths",
+      "3e",
+      "collège",
+      "cycle 4",
+      "EleveAI"
+    ],
+    "questions": [
+      {
+        "t": "00:56",
+        "question": "Les sections horizontales sont des disques : le plus grand en bas, et ils rétrécissent jusqu'à un point en haut. Quel solide ?",
+        "choix": [
+          "un cône",
+          "une boule",
+          "un cylindre"
+        ],
+        "reponse": 0,
+        "explication": "Un cône. Pour une boule, le plus grand disque serait au milieu, pas en bas."
+      },
+      {
+        "t": "01:43",
+        "question": "Les sections horizontales d'une boule sont des disques qui…",
+        "choix": [
+          "grandissent vers le haut",
+          "restent égaux",
+          "grandissent puis rétrécissent"
+        ],
+        "reponse": 2,
+        "explication": "Le plus grand est au milieu. En haut et en bas, ils se réduisent à un point."
+      }
+    ],
+    "centres": [
+      "technologie-ia",
+      "jeux-video"
+    ]
+  },
+  "3e-section-defi-short": {
+    "id": "3e-section-defi-short",
+    "pas_avant": "",
+    "notionId": "sections_solides",
+    "microId": "section_defi",
+    "classe": "3e",
+    "ceinture": "blanche",
+    "serie": "Maths 3e",
+    "type": "short",
+    "renvoie_vers": "3e-section-defi",
+    "fichier": "3e/maths/sections/38-section-defi/eleveai-maths-3e-section-defi-short.mp4",
+    "miniature": "3e/maths/sections/38-section-defi/eleveai-maths-3e-section-defi-short-miniature.png",
+    "titre": "Trois tranches, un solide : lequel ? #maths #3e",
+    "accroche": "Le scanner de Nathan donne trois tranches : un carré en bas, un carré plus petit au milieu, un point en haut. Quel solide a-t-il scanné ?\n\n🥋 Ceinture blanche.\n👉 des disques tous égaux, du bas jusqu'en haut. Quel solide ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #3e #sections",
+    "tags": [
+      "défis sur les sections planes",
+      "scanner un objet pour l'imprimer en 3d",
+      "technicien en numérisation 3d",
+      "sections solides",
+      "ceinture marron",
+      "maths",
+      "3e",
       "collège",
       "cycle 4",
       "ceinture blanche",
@@ -3170,13 +4345,6 @@
     "centres": [
       "technologie-ia",
       "jeux-video"
-    ],
-    "aussi": [
-      {
-        "classe": "3e",
-        "notionId": "aire_surface",
-        "microId": "aire_defi"
-      }
     ]
   }
 }

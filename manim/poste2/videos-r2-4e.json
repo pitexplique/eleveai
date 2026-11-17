@@ -238,5 +238,101 @@
     "cle": "4e/maths/aire/30-aire-defi/eleveai-maths-4e-aire-defi-short.mp4",
     "classe": "4e",
     "serie": "Maths 4e"
+  },
+  {
+    "id": "3e-volume-boule",
+    "cle": "3e/maths/volume/31-volume-boule/eleveai-maths-3e-volume-boule.mp4",
+    "classe": "3e",
+    "serie": "Maths 3e"
+  },
+  {
+    "id": "3e-volume-boule-short",
+    "cle": "3e/maths/volume/31-volume-boule/eleveai-maths-3e-volume-boule-short.mp4",
+    "classe": "3e",
+    "serie": "Maths 3e"
+  },
+  {
+    "id": "3e-volume-reduction-section",
+    "cle": "3e/maths/volume/32-volume-reduction-section/eleveai-maths-3e-volume-reduction-section.mp4",
+    "classe": "3e",
+    "serie": "Maths 3e"
+  },
+  {
+    "id": "3e-volume-reduction-section-short",
+    "cle": "3e/maths/volume/32-volume-reduction-section/eleveai-maths-3e-volume-reduction-section-short.mp4",
+    "classe": "3e",
+    "serie": "Maths 3e"
+  },
+  {
+    "id": "3e-section-pave-cube",
+    "cle": "3e/maths/sections/33-section-pave-cube/eleveai-maths-3e-section-pave-cube.mp4",
+    "classe": "3e",
+    "serie": "Maths 3e"
+  },
+  {
+    "id": "3e-section-pave-cube-short",
+    "cle": "3e/maths/sections/33-section-pave-cube/eleveai-maths-3e-section-pave-cube-short.mp4",
+    "classe": "3e",
+    "serie": "Maths 3e"
+  },
+  {
+    "id": "3e-section-cylindre",
+    "cle": "3e/maths/sections/34-section-cylindre/eleveai-maths-3e-section-cylindre.mp4",
+    "classe": "3e",
+    "serie": "Maths 3e"
+  },
+  {
+    "id": "3e-section-cylindre-short",
+    "cle": "3e/maths/sections/34-section-cylindre/eleveai-maths-3e-section-cylindre-short.mp4",
+    "classe": "3e",
+    "serie": "Maths 3e"
+  },
+  {
+    "id": "3e-section-cone-pyramide",
+    "cle": "3e/maths/sections/35-section-cone-pyramide/eleveai-maths-3e-section-cone-pyramide.mp4",
+    "classe": "3e",
+    "serie": "Maths 3e"
+  },
+  {
+    "id": "3e-section-cone-pyramide-short",
+    "cle": "3e/maths/sections/35-section-cone-pyramide/eleveai-maths-3e-section-cone-pyramide-short.mp4",
+    "classe": "3e",
+    "serie": "Maths 3e"
+  },
+  {
+    "id": "3e-section-sphere",
+    "cle": "3e/maths/sections/36-section-sphere/eleveai-maths-3e-section-sphere.mp4",
+    "classe": "3e",
+    "serie": "Maths 3e"
+  },
+  {
+    "id": "3e-section-sphere-short",
+    "cle": "3e/maths/sections/36-section-sphere/eleveai-maths-3e-section-sphere-short.mp4",
+    "classe": "3e",
+    "serie": "Maths 3e"
+  },
+  {
+    "id": "3e-section-longueur",
+    "cle": "3e/maths/sections/37-section-longueur/eleveai-maths-3e-section-longueur.mp4",
+    "classe": "3e",
+    "serie": "Maths 3e"
+  },
+  {
+    "id": "3e-section-longueur-short",
+    "cle": "3e/maths/sections/37-section-longueur/eleveai-maths-3e-section-longueur-short.mp4",
+    "classe": "3e",
+    "serie": "Maths 3e"
+  },
+  {
+    "id": "3e-section-defi",
+    "cle": "3e/maths/sections/38-section-defi/eleveai-maths-3e-section-defi.mp4",
+    "classe": "3e",
+    "serie": "Maths 3e"
+  },
+  {
+    "id": "3e-section-defi-short",
+    "cle": "3e/maths/sections/38-section-defi/eleveai-maths-3e-section-defi-short.mp4",
+    "classe": "3e",
+    "serie": "Maths 3e"
   }
 ]
