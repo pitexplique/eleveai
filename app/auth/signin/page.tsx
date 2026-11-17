@@ -571,6 +571,16 @@ export default function SignInPage() {
         return;
       }
 
+      // Trop de connexions depuis ce réseau (limite Supabase par IP) : on
+      // le dit, au lieu de « code incorrect ».
+      if (error?.status === 429) {
+        setPin("");
+        setErrorMsg(
+          "Trop de connexions depuis ce réseau (collège, wifi partagé). Réessayez dans quelques minutes."
+        );
+        return;
+      }
+
       if (etapePin) {
         logSupabaseError("signInWithPassword after set error:", error);
         setErrorMsg("Code enregistré, mais la connexion a échoué. Réessayez.");

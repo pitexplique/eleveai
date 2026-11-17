@@ -72,7 +72,9 @@ export async function POST(req: Request) {
 
   const ip = clientIp(req);
   const [ipOk, emailOk] = await Promise.all([
-    rateLimitOk(admin, `code6:ip:${ip}`, 20, 60),
+    // Large par IP (17/11) : au collège, tout le monde sort par la même IP ;
+    // la vraie protection est par adresse email.
+    rateLimitOk(admin, `code6:ip:${ip}`, 300, 60),
     rateLimitOk(admin, `code6:email:${email}`, 10, 600),
   ]);
   if (!ipOk || !emailOk) {
