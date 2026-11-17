@@ -49,7 +49,7 @@ class ShortSolidesVues4e(Short4e):
         self.dire("01-defi")
         self.au_mot("la vue de dessus")
         vd = cadre(Circle(radius=0.4, color=VUE_C, stroke_width=4), "de dessus", taille=1.7)
-        vd.move_to(P(0, -2.1))
+        vd.move_to(P(0, -1.75))
         self.play(FadeIn(vd, shift=UP * 0.2), run_time=0.55)
         self.au_mot("pavé ou cylindre")
         q = self.accroche("Pavé ou cylindre ?", fs=30, couleur=JAUNE_TITRE, y=Y_ACCROCHE)
@@ -78,13 +78,16 @@ class ShortSolidesVues4e(Short4e):
         self.play(FadeIn(vf), run_time=0.5)
         self.au_mot("Deux vues, ça décide")
         vd = cadre(Circle(radius=0.34, color=VUE_C, stroke_width=4), "de dessus", taille=1.4)
-        vd.move_to(P(0, -2.45))
+        vd.move_to(P(0, -2.03))
         self.play(FadeIn(vd), FadeOut(pv), Indicate(cy, color=JAUNE_TITRE, scale_factor=1.1), run_time=0.8)
         self.attendre_voix(marge=0.3)
 
         # ── 04 : la question en commentaire ────────────────────────────────
         self.clear()
-        self.margo_bas()
+        # ⛔ Pas de margo_bas() sur CET écran : Ti-Margo occupe y ∈ [-3.85, -3.02]
+        # et sa tête couvrait une lettre de « @eleveai974 » (17/11). Le gabarit le dit
+        # lui-même : dans la bande basse il ne porte aucune information, il peut être
+        # masqué sans rien coûter. Il reste présent sur l'écran d'abonnement.
         self.dire("04-commentaire")
         self.play(FadeIn(self.grand("À toi !", font_size=50, color=JAUNE_TITRE).move_to(P(0, 3.2))), run_time=0.4)
         tri = Polygon(P(-0.42, -0.42), P(0.42, -0.42), P(0, 0.5), color=VUE_C, stroke_width=4)

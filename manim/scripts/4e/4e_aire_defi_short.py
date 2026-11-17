@@ -76,7 +76,7 @@ class ShortAireDefi4e(Short4e):
         # ── 01 : le défi ────────────────────────────────────────────────────
         self.dire("01-defi")
         self.au_mot("En mètres carrés")
-        q = self.accroche("en m², ça fait combien ?", fs=26, couleur=JAUNE_TITRE, y=-3.0)
+        q = self.accroche("en m², ça fait combien ?", fs=26, couleur=JAUNE_TITRE, y=-2.76)
         self.play(FadeIn(q), run_time=0.5)
         self.attendre_voix(marge=0.25)
 
@@ -110,7 +110,10 @@ class ShortAireDefi4e(Short4e):
 
         # ── 04 : la question en commentaire ────────────────────────────────
         self.clear()
-        self.margo_bas()
+        # ⛔ Pas de margo_bas() sur CET écran : Ti-Margo occupe y ∈ [-3.85, -3.02]
+        # et sa tête couvrait une lettre de « @eleveai974 » (17/11). Le gabarit le dit
+        # lui-même : dans la bande basse il ne porte aucune information, il peut être
+        # masqué sans rien coûter. Il reste présent sur l'écran d'abonnement.
         self.dire("04-commentaire")
         self.play(FadeIn(self.grand("À toi !", font_size=50, color=JAUNE_TITRE).move_to(P(0, 3.2))),
                   run_time=0.4)

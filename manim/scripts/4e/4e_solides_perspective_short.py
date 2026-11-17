@@ -118,13 +118,16 @@ class ShortSolidesPerspective4e(Short4e):
                                    np.array([0.80, 0.18, 0.0]), np.array([0.12, 0.80, 0.0])])
         self.play(Create(tordu), run_time=0.8)
         self.au_mot("il se tord")
-        t2 = self.t("il se tord", 26, ROUGE_ERREUR).move_to(P(0, -2.95))
+        t2 = self.t("il se tord", 26, ROUGE_ERREUR).move_to(P(0, -2.6))
         self.play(FadeIn(t2, scale=1.15), Wiggle(tordu, scale_value=1.05), run_time=0.7)
         self.attendre_voix(marge=0.3)
 
         # ── 04 : la question en commentaire ────────────────────────────────
         self.clear()
-        self.margo_bas()
+        # ⛔ Pas de margo_bas() sur CET écran : Ti-Margo occupe y ∈ [-3.85, -3.02]
+        # et sa tête couvrait une lettre de « @eleveai974 » (17/11). Le gabarit le dit
+        # lui-même : dans la bande basse il ne porte aucune information, il peut être
+        # masqué sans rien coûter. Il reste présent sur l'écran d'abonnement.
         self.dire("04-commentaire")
         self.play(FadeIn(self.grand("À toi !", font_size=50, color=JAUNE_TITRE).move_to(P(0, 3.2))),
                   run_time=0.4)

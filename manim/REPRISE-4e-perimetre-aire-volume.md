@@ -144,6 +144,81 @@ BORD → script short (même contrôle, en `-r 1080,1920`) → `manim/poste2/4e_
     identifiants sont `aire_perimetre_comprendre` et `aire_perimetre_polygone`. Vérifier un `microId`
     dans la banque (`lib/tutor-v4/questionBank/3e/maths/*.bank.ts`) avant de l'écrire dans un `aussi`.
 
+## La poignée cachée — les 20 shorts de 4e corrigés le 17/11
+
+**Ce qui n'allait pas.** Sur l'écran `04-commentaire`, la tête de Ti-Margo couvrait une lettre de
+« @eleveai974 » : on lisait « @elev◼i974 ». Dans les **20 shorts de 4e**, pilote compris — donc
+pas une régression du lot, mais un défaut d'origine. ⭐ Frédéric a tranché le 17/11 : « Oui,
+retire-le là », et l'exception est inscrite dans `manim/REGLES.md`, ligne « Mascotte ».
+
+**Le correctif.** `margo_bas()` est retiré du SEUL écran `04-commentaire` des 20 scripts
+`4e_*_short.py`. Le texte ne bouge pas d'un pixel. Remonter le bloc était impossible : le contenu
+descend jusqu'à ≈ -2,47 et les pixels de Ti-Margo commencent à -3,02, soit 0,55 d'unité libre pour
+un bloc qui en fait 0,852 — essayé, rendu en `-ql`, le bloc remonté cogne le texte du dessus.
+
+**Trois recouvrements de plus, trouvés par l'outil et corrigés** (aucun n'avait été vu) :
+
+| Épisode | Ce qui tombait sur lui | Correctif |
+|---|---|---|
+| `4e-solides-vues-short` | l'étiquette « de dessus », à 6 s et 37 s | les deux groupes `vd` remontés à -1,75 et -2,03 |
+| `4e-aire-defi-short` | « en m², ça fait combien ? », à 8 s | la question passe de -3,0 à -2,76 (« 563 cm² chacun » reste à -2,4, sa position validée) |
+| `4e-solides-perspective-short` | « il se tord », à 40 s | de -2,95 à -2,60 |
+
+Planche avant/après : `manim/poste2/planche-trois-recouvrements-4e.png`.
+Preuve du défaut d'origine : `manim/poste2/planche-poignee-cachee-shorts-4e.png`.
+
+**Contrôles passés, tous AVANT le moindre rendu HD :**
+- `verifier-zone-margo.py` sur les 20 rendus `-ql` → **0 instant** sur les 20 ;
+- dry run `AUDIT=1 BORDS=1 -r 1080,1920` sur les 20 → **16 nets**. Les 4 autres
+  (`volume_cone`, `volume_defi`, `volume_lien_aire`, `volume_pyramide`) portent des RETARD /
+  AUDIT-TARD / AUDIT-AVANCE sur `00-accroche`, `02-question` et `02b-reponse`.
+  ⭐ **Vérifié, ce n'est PAS moi** : la version d'origine sortie du commit (`git show HEAD:…`)
+  donne EXACTEMENT les mêmes lignes. Ces écarts préexistent et ont été acceptés au rendu ;
+  ⏳ à poser à Frédéric un jour, mais hors de ce correctif.
+
+⏳ **Reste à faire** : re-rendre les 20 shorts en HD — ⛔ seulement quand les sessions 3e auront
+fini, le verrou `%TEMP%\eleveai-rendu-hd.lock` est à elles. Puis relancer
+`manifeste-4e.py` et `apercu-serie.py`, dont les durées de short changeront peut-être d'une
+image. ⛔ Les 8 shorts de 3e passent par le même helper mais appartiennent aux sessions 3e :
+ne pas y toucher.
+
+### ⏳ Un point ouvert, posé à Frédéric et non tranché
+La poignée reste posée à y = -2,9, donc dans la bande basse que l'interface d'un téléphone
+recouvre (le gabarit dit « rien de vital sous -2,2 »). La remonter demanderait de redessiner les
+20 écrans, c'est mesuré. Deux arguments pour la laisser : c'est le standard de toutes les séries,
+et la poignée revient 2 s plus tard sur l'écran d'abonnement, à y = -0,75, parfaitement lisible.
+
+### Leçons du 17/11 — ce qui m'a coûté 20 rendus HD pour rien
+
+34. ⛔⛔ **`BORDS=1` ne voit PAS un texte posé sur Ti-Margo** : le texte ne sort pas du cadre,
+    il tombe sur la mascotte. C'est un angle mort entier du garde-fou, et il a laissé passer
+    la poignée « @eleveai974 » recouverte dans les **20 shorts de 4e**, plus l'étiquette
+    « de dessus » dans `4e-solides-vues-short`.
+35. ⭐⭐ **La BOÎTE englobante de Ti-Margo ment : ce sont ses pixels qui décident.**
+    `gabarit_seconde.margo_bas` fait `MascotteMargouillat().scale(0.38).move_to([0, -3.45, 0])`,
+    donc une boîte y ∈ [-3.98, **-2.918**] — mais ses pixels réels ne vont que de
+    y = -3.85 à **-3.02**, x de -0.28 à +0.29 : le haut de sa boîte est du vide.
+    Mesurer sur l'écran d'abonnement, où il est SEUL dans la bande basse.
+36. ⛔ **Dans un short, il n'y a pas la place de glisser le bloc de commentaire entre le
+    contenu et la mascotte.** Mesuré sur les 20 : le contenu descend jusqu'à ≈ -2,47 et
+    Ti-Margo commence à -3,02, soit 0,55 d'unité pour un bloc qui en fait 0,852 (deux lignes,
+    corps 30, buff 0,14). Remonter le bloc le fait heurter le texte du dessus — vu en `-ql`.
+    ⭐ Le remède est celui que le gabarit énonce lui-même : « dans la bande basse il ne porte
+    aucune information, il peut être masqué sans rien coûter ». On retire donc `margo_bas()`
+    du SEUL écran 04-commentaire ; il reste sur l'écran d'abonnement.
+37. ⭐⭐⭐ **Le contrôle d'un short se fait sur un rendu `-ql`, JAMAIS au HD.**
+    `python -m manim render -ql -r 270,480 --disable_caching <script> <Scène>` coûte **44 s**,
+    contre plusieurs minutes en HD et le verrou partagé. Ma faute du 17/11 : avoir contrôlé
+    les shorts APRÈS leurs 20 rendus HD — et seulement l'écran du compteur, jamais les
+    derniers écrans. **La planche d'un short doit couvrir TOUS les écrans du log**, pas celui
+    qu'on soupçonne : c'est la liste des `ECRAN` qui dit quoi regarder, pas l'intuition.
+38. ⭐⭐ **Outil : `python manim/poste2/verifier-zone-margo.py <mp4> [--pas 0.4] [--planche p.png]`**
+    → « 0 instant où quelque chose recouvre Ti-Margo », ou la liste des instants fautifs.
+    Il tourne sur un `-ql`, donc avant le HD, et il s'étalonne TOUT SEUL : comme la mascotte
+    ne bouge jamais, la valeur la plus fréquente du nombre de pixels allumés dans son
+    rectangle EST « lui tout seul ». Aucune image de référence à tenir à jour. Il reconnaît
+    le cadre paysage à son format et y regarde en bas à droite.
+
 ## Passe finale de la 4e — FAITE le 17/11
 
 - `manim/poste2/manifeste-4e.json` (40 entrées), `videos-r2-4e.json` et `coach-4e.md` sont

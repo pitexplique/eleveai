@@ -102,7 +102,10 @@ class ShortVolumeCone4e(Short4e):
 
         # ── 04 : la question en commentaire ────────────────────────────────
         self.clear()
-        self.margo_bas()
+        # ⛔ Pas de margo_bas() sur CET écran : Ti-Margo occupe y ∈ [-3.85, -3.02]
+        # et sa tête couvrait une lettre de « @eleveai974 » (17/11). Le gabarit le dit
+        # lui-même : dans la bande basse il ne porte aucune information, il peut être
+        # masqué sans rien coûter. Il reste présent sur l'écran d'abonnement.
         self.dire("04-commentaire")
         self.play(FadeIn(self.grand("À toi !", font_size=50, color=JAUNE_TITRE).move_to(P(0, 3.2))), run_time=0.4)
         co3 = cornet_simple(0.7, 2.0, 0.45, P(-1.0, 0.2), glace=False)
