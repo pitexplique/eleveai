@@ -326,6 +326,18 @@ export default function MesClassesClient() {
                   📊 Bilan
                 </Link>
                 <Link
+                  href={`/prof/classes/bulletin?code=${encodeURIComponent(c.code_etablissement)}`}
+                  className="rounded-xl border border-indigo-300 bg-indigo-50 px-4 py-2 text-sm font-bold text-indigo-900 hover:bg-indigo-100"
+                >
+                  📝 Bulletin
+                </Link>
+                <Link
+                  href={`/prof/classes/podium?code=${encodeURIComponent(c.code_etablissement)}`}
+                  className="rounded-xl border border-amber-300 bg-amber-50 px-4 py-2 text-sm font-bold text-amber-900 hover:bg-amber-100"
+                >
+                  🏆 Podium
+                </Link>
+                <Link
                   href={`/prof/cartes?code=${encodeURIComponent(c.code_etablissement)}`}
                   className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-slate-700"
                 >
