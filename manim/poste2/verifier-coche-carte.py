@@ -51,6 +51,25 @@ def mesurer(png):
     x0, x1 = int(colonnes.min()), int(colonnes.max())
     larg = x1 - x0
 
+    # ⛔ UNE CARTE EST UN CADRE, PAS UN MOT VERT. Sans ce controle, l'outil mesurait un
+    # ecart NEGATIF (-32 a -37 px) sur les ecrans « Correction » de T2, T3 et T6 de 3e,
+    # qui n'ont ni carte ni ✓ : il prenait le nombre vert de la correction (« 30, »,
+    # « 6 370² ») pour une coche et le texte blanc d'a cote pour un libelle. Trois faux
+    # defauts, donc trois rendus HD relances pour rien si personne ne regarde l'image.
+    # Un cadre a ses QUATRE bords verts ; un mot n'en a aucun.
+    def bord(bande, longueur):
+        return bande.any(axis=0).sum() / max(1, longueur) if bande.size else 0.0
+
+    e = max(2, (y1 - y0) // 40)
+    haut = bord(v[y0:y0 + e + 1, x0:x1 + 1], larg + 1)
+    bas = bord(v[max(y0, y1 - e):y1 + 1, x0:x1 + 1], larg + 1)
+    gauche = bord(v[y0:y1 + 1, x0:x0 + e + 1].T, y1 - y0 + 1)
+    droite = bord(v[y0:y1 + 1, max(x0, x1 - e):x1 + 1].T, y1 - y0 + 1)
+    if min(haut, bas, gauche, droite) < 0.70:
+        return None, ("pas un cadre de carte (bords verts "
+                      f"h={haut:.2f} b={bas:.2f} g={gauche:.2f} d={droite:.2f}) : "
+                      "probablement du TEXTE vert, pas une carte")
+
     # la bande du MILIEU : on évite les bords haut et bas du cadre
     m0, m1 = y0 + int((y1 - y0) * 0.30), y1 - int((y1 - y0) * 0.30)
     if m1 - m0 < 4:
