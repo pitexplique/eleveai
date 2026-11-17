@@ -1,6 +1,7 @@
 // app/auth/signin/page.tsx
 "use client";
 
+import ClavierCode, { PointsCode } from "./ClavierCode";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -96,6 +97,18 @@ export default function SignInPage() {
   // Complément de profil (nouveaux comptes uniquement)
   // ---------------------------
   const [needsProfile, setNeedsProfile] = useState(false);
+
+  // ⭐ CODE À 6 CHIFFRES (17/11, Frédéric : « comme La Banque Postale »).
+  // Mot de passe Supabase de 6 chiffres, tapé sur un clavier mélangé.
+  // Le code par mail reste la porte d'entrée : première fois, ancien compte
+  // sans code, code oublié. Après le mail, on fait choisir le code.
+  const [pin, setPin] = useState("");
+  const [modePin, setModePin] = useState(false);
+  const [choisirPin, setChoisirPin] = useState<null | {
+    profile: UserEmailProfile;
+    token: string | null;
+  }>(null);
+  const [forcerNouveauPin, setForcerNouveauPin] = useState(false);
   const [pendingAuth, setPendingAuth] = useState<PendingAuth | null>(null);
   const [nom, setNom] = useState("");
   const [typeUtilisateur, setTypeUtilisateur] = useState<UserEmailType>("perso");
@@ -249,6 +262,28 @@ export default function SignInPage() {
     setCooldown(0);
     setNeedsProfile(false);
     setPendingAuth(null);
+    setPin("");
+    setModePin(false);
+    setChoisirPin(null);
+    setForcerNouveauPin(false);
+  };
+
+  // Après le code par mail : on entre si la personne a déjà son code à
+  // 6 chiffres, sinon on le lui fait choisir (anciens comptes, nouveaux
+  // comptes, code oublié).
+  const finirConnexion = (
+    profile: UserEmailProfile,
+    token: string | null,
+    aDejaUnCode: boolean
+  ) => {
+    if (aDejaUnCode && !forcerNouveauPin) {
+      setFeedback("Connexion réussie. Redirection…");
+      routeEmailProfile(profile, token);
+      return;
+    }
+    setPin("");
+    setChoisirPin({ profile, token });
+    setFeedback(null);
   };
 
   const logSupabaseError = (label: string, err: any) => {
@@ -263,8 +298,8 @@ export default function SignInPage() {
   // ---------------------------
   // 1) Envoi du code OTP
   // ---------------------------
-  const handleEmailSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const handleEmailSubmit = async (e?: FormEvent) => {
+    e?.preventDefault();
     setFeedback(null);
     setErrorMsg(null);
 
@@ -423,10 +458,125 @@ export default function SignInPage() {
         data.session.access_token
       );
 
+      finirConnexion(
+        profile as UserEmailProfile,
+        sessionToken,
+        authUser.user_metadata?.code_6_chiffres === true
+      );
+    } catch (err: any) {
+      console.error("Unexpected OTP verify error:", err);
+      setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ---------------------------
+  // 2 bis) Connexion avec le code à 6 chiffres
+  // ---------------------------
+  const handlePinLogin = async (e: FormEvent) => {
+    e.preventDefault();
+    setFeedback(null);
+    setErrorMsg(null);
+
+    const emailToUse = normalizeEmail(email);
+    if (!emailToUse) {
+      setErrorMsg("Merci de renseigner votre email.");
+      return;
+    }
+    if (!/^[0-9]{6}$/.test(pin)) {
+      setErrorMsg("Le code a 6 chiffres.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: emailToUse,
+        password: pin,
+      });
+
+      if (error || !data?.session) {
+        logSupabaseError("signInWithPassword error:", error);
+        setPin("");
+        setErrorMsg(
+          "Email ou code incorrect. Pas encore de code, ou code oublié ? Recevez un code par mail."
+        );
+        return;
+      }
+
+      const authUser = data.session.user;
+      const { data: profile, error: profileError } = await supabase
+        .from("users_email")
+        .select("id, auth_user_id, email, nom, type_utilisateur, classe")
+        .eq("auth_user_id", authUser.id)
+        .maybeSingle();
+
+      if (profileError) {
+        logSupabaseError("users_email lookup error:", profileError);
+        setErrorMsg("Erreur de lecture du profil. Réessayez.");
+        return;
+      }
+
+      if (!profile) {
+        const verifiedEmail = authUser.email ?? emailToUse;
+        setPendingAuth({
+          authUserId: authUser.id,
+          email: verifiedEmail,
+          accessToken: data.session.access_token,
+        });
+        if (verifiedEmail === ADMIN_EMAIL) setTypeUtilisateur("admin");
+        setForcerNouveauPin(false);
+        setNeedsProfile(true);
+        setFeedback("Dernière étape : complète ton profil.");
+        return;
+      }
+
+      const sessionToken = await fetchEmailSessionToken(
+        data.session.access_token
+      );
       setFeedback("Connexion réussie. Redirection…");
       routeEmailProfile(profile as UserEmailProfile, sessionToken);
     } catch (err: any) {
-      console.error("Unexpected OTP verify error:", err);
+      console.error("Unexpected PIN sign-in error:", err);
+      setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Choisir (ou changer) son code à 6 chiffres, juste après le code par mail.
+  const handleChoisirPin = async (e: FormEvent) => {
+    e.preventDefault();
+    setFeedback(null);
+    setErrorMsg(null);
+    if (!choisirPin) return;
+
+    if (!/^[0-9]{6}$/.test(pin)) {
+      setErrorMsg("Choisissez 6 chiffres.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.updateUser({
+        password: pin,
+        data: { code_6_chiffres: true },
+      });
+      if (error) {
+        logSupabaseError("updateUser password error:", error);
+        setPin("");
+        setErrorMsg(
+          process.env.NODE_ENV === "development"
+            ? `Erreur Supabase: ${error.message}`
+            : "Ce code n'a pas été accepté. Essayez 6 autres chiffres."
+        );
+        return;
+      }
+      setFeedback("Code enregistré. Redirection…");
+      routeEmailProfile(choisirPin.profile, choisirPin.token);
+    } catch (err: any) {
+      console.error("Unexpected set PIN error:", err);
       setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
     } finally {
       setLoading(false);
@@ -492,8 +642,7 @@ export default function SignInPage() {
 
       const sessionToken = await fetchEmailSessionToken(pendingAuth.accessToken);
 
-      setFeedback("Compte créé. Bienvenue sur EleveAI !");
-      routeEmailProfile(profile as UserEmailProfile, sessionToken);
+      finirConnexion(profile as UserEmailProfile, sessionToken, false);
     } catch (err: any) {
       console.error("Unexpected profile submit error:", err);
       setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
@@ -618,9 +767,9 @@ export default function SignInPage() {
                   Inscription et connexion, au même endroit 👇
                 </p>
                 <p className="mt-0.5 text-xs text-slate-600">
-                  Entrez votre adresse email : que vous ayez déjà un compte ou
-                  non, on vous envoie un code. Nouveau compte ? On vous demandera
-                  juste votre nom juste après.
+                  Déjà un compte : votre email, puis votre code à 6 chiffres.
+                  Première fois : on vous envoie un code par mail, puis vous
+                  choisissez votre code à 6 chiffres.
                 </p>
               </div>
 
@@ -629,11 +778,11 @@ export default function SignInPage() {
               </h1>
 
               <p className="mt-1 text-sm text-slate-600">
-                Connexion par email (code à usage unique) – sans mot de passe.
+                Votre email, puis votre code à 6 chiffres.
               </p>
 
               {/* EMAIL */}
-              {!needsProfile && (
+              {!needsProfile && !choisirPin && (
               <form onSubmit={handleEmailSubmit} className="mt-5 space-y-3">
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium text-slate-800">
@@ -646,32 +795,172 @@ export default function SignInPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="votre.email@exemple.fr"
-                    disabled={emailSent || loading}
+                    disabled={emailSent || loading || modePin}
                     className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:bg-slate-100"
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={loading || emailSent || cooldown > 0}
-                  className="w-full rounded-lg bg-emerald-600 text-white py-2.5 text-sm font-semibold hover:bg-emerald-500 transition disabled:cursor-not-allowed disabled:opacity-60"
-                >
-                  {loading
-                    ? "Envoi..."
-                    : cooldown > 0
-                      ? `Attendez ${cooldown}s…`
-                      : "Recevoir mon code"}
-                </button>
+                {!modePin && !emailSent && (
+                  <>
+                    <button
+                      type="button"
+                      disabled={loading}
+                      onClick={() => {
+                        setFeedback(null);
+                        if (!normalizeEmail(email)) {
+                          setErrorMsg("Merci de renseigner votre email.");
+                          return;
+                        }
+                        setErrorMsg(null);
+                        setPin("");
+                        setModePin(true);
+                      }}
+                      className="w-full rounded-lg bg-emerald-600 text-white py-2.5 text-sm font-semibold hover:bg-emerald-500 transition disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      J’ai mon code à 6 chiffres
+                    </button>
 
-                {errorMsg && <p className="text-xs text-red-600">{errorMsg}</p>}
-                {feedback && (
+                    <button
+                      type="submit"
+                      disabled={loading || cooldown > 0}
+                      className="w-full rounded-lg border border-emerald-300 bg-white py-2.5 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 transition disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      {loading
+                        ? "Envoi..."
+                        : cooldown > 0
+                          ? `Attendez ${cooldown}s…`
+                          : "Première fois ? Recevoir un code par mail"}
+                    </button>
+                  </>
+                )}
+
+                {!modePin && errorMsg && (
+                  <p className="text-xs text-red-600">{errorMsg}</p>
+                )}
+                {!modePin && feedback && (
                   <p className="text-xs text-emerald-600">{feedback}</p>
                 )}
               </form>
               )}
 
+              {/* CODE À 6 CHIFFRES : connexion */}
+              {modePin && !emailSent && !needsProfile && !choisirPin && (
+                <form
+                  onSubmit={handlePinLogin}
+                  className="mt-4 space-y-3 rounded-lg bg-emerald-50 p-3 border border-emerald-200"
+                >
+                  <p className="text-xs font-semibold text-emerald-800 uppercase">
+                    Mon code (6 chiffres)
+                  </p>
+                  <PointsCode n={pin.length} />
+                  <ClavierCode
+                    valeur={pin}
+                    onChange={setPin}
+                    longueurMax={6}
+                    desactive={loading}
+                  />
+                  <button
+                    type="submit"
+                    disabled={loading || pin.length !== 6}
+                    className="w-full rounded-lg bg-emerald-600 text-white py-2.5 text-sm font-semibold hover:bg-emerald-500 transition disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    {loading ? "Vérification..." : "Se connecter"}
+                  </button>
+
+                  {errorMsg && <p className="text-xs text-red-600">{errorMsg}</p>}
+                  {feedback && (
+                    <p className="text-xs text-emerald-600">{feedback}</p>
+                  )}
+
+                  <details className="rounded-lg bg-white p-2 text-xs text-slate-700 border border-emerald-200">
+                    <summary className="cursor-pointer text-center font-semibold text-emerald-700 underline">
+                      Identifiant / code oublié
+                    </summary>
+                    <div className="mt-2 space-y-2">
+                      <p>
+                        <span className="font-semibold">Identifiant oublié :</span>{" "}
+                        c’est votre adresse email. Élève d’un établissement :
+                        demandez vos codes à votre professeur.
+                      </p>
+                      <p>
+                        <span className="font-semibold">Code oublié :</span> on
+                        vous envoie un code par mail, puis vous choisissez un
+                        nouveau code à 6 chiffres.
+                      </p>
+                      <button
+                        type="button"
+                        disabled={loading || cooldown > 0}
+                        onClick={() => {
+                          setForcerNouveauPin(true);
+                          setModePin(false);
+                          handleEmailSubmit();
+                        }}
+                        className="w-full rounded-lg border border-emerald-300 bg-white py-2 text-sm font-semibold text-emerald-700 hover:bg-emerald-50 transition disabled:opacity-60"
+                      >
+                        {cooldown > 0
+                          ? `Attendez ${cooldown}s…`
+                          : "Recevoir un code par mail"}
+                      </button>
+                    </div>
+                  </details>
+
+                  <button
+                    type="button"
+                    onClick={resetEmailFlow}
+                    disabled={loading}
+                    className="w-full text-center text-xs text-slate-500 underline"
+                  >
+                    Changer d’email
+                  </button>
+                </form>
+              )}
+
+              {/* CODE À 6 CHIFFRES : le choisir (après le code par mail) */}
+              {choisirPin && (
+                <form
+                  onSubmit={handleChoisirPin}
+                  className="mt-4 space-y-3 rounded-lg bg-emerald-50 p-3 border border-emerald-200"
+                >
+                  <p className="text-xs font-semibold text-emerald-800 uppercase">
+                    Choisissez votre code à 6 chiffres
+                  </p>
+                  <p className="text-[11px] text-emerald-700">
+                    La prochaine fois : votre email, puis ce code. Plus besoin
+                    d’attendre le mail.
+                  </p>
+                  <PointsCode n={pin.length} />
+                  <ClavierCode
+                    valeur={pin}
+                    onChange={setPin}
+                    longueurMax={6}
+                    desactive={loading}
+                  />
+                  <button
+                    type="submit"
+                    disabled={loading || pin.length !== 6}
+                    className="w-full rounded-lg bg-emerald-600 text-white py-2.5 text-sm font-semibold hover:bg-emerald-500 transition disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    {loading ? "Enregistrement..." : "Enregistrer mon code"}
+                  </button>
+                  <button
+                    type="button"
+                    disabled={loading}
+                    onClick={() =>
+                      routeEmailProfile(choisirPin.profile, choisirPin.token)
+                    }
+                    className="w-full text-center text-xs text-slate-500 underline"
+                  >
+                    Plus tard
+                  </button>
+                  {errorMsg && <p className="text-xs text-red-600">{errorMsg}</p>}
+                  {feedback && (
+                    <p className="text-xs text-emerald-600">{feedback}</p>
+                  )}
+                </form>
+              )}
+
               {/* OTP */}
-              {emailSent && !needsProfile && (
+              {emailSent && !needsProfile && !choisirPin && (
                 <form
                   onSubmit={handleOtpSubmit}
                   className="mt-4 space-y-3 rounded-lg bg-emerald-50 p-3 border border-emerald-200"
@@ -695,7 +984,14 @@ export default function SignInPage() {
                       setOtpCode(e.target.value.replace(/[^\d]/g, ""))
                     }
                     placeholder="Code (6 à 8 chiffres)"
-                    className="w-full rounded-lg border border-emerald-300 px-3 py-2 text-sm outline-none focus:border-emerald-500 focus:ring"
+                    maxLength={8}
+                    className="w-full rounded-lg border border-emerald-300 px-3 py-2 text-center text-xl font-semibold tracking-[0.4em] outline-none focus:border-emerald-500 focus:ring"
+                  />
+
+                  <ClavierCode
+                    valeur={otpCode}
+                    onChange={setOtpCode}
+                    desactive={loading}
                   />
 
                   <button
