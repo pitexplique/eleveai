@@ -41,9 +41,11 @@ pour `BORDS=1`, qui ne signale que ce qui SORT du cadre :
   poussé sous la mascotte par son propre `Indicate(×1,1)`) ;
 - **une figure traversait le texte** : T8 (la pile de disques sur la phrase de réponse) ;
 - **le texte touchait Ti-Margo** : T8 (écran de défi) ;
-- **le ✓ de la bonne réponse mordait sur la dernière lettre** : T3, T5, T8 et les shorts T2, T7
-  et T8 — voir la leçon 44, et surtout le piège qui m'a coûté deux rendus : la méthode à
+- **le ✓ de la bonne réponse mordait sur la dernière lettre** : T3, T5, T8 et les shorts T2, T3,
+  T7 et T8 — voir les leçons 44 et 49, et le piège qui m'a coûté deux rendus : la méthode à
   surcharger n'est PAS la même en paysage (`_carte_choix`) et en short (`_carte`).
+  ⭐ Le treizième, le short T3, n'a PAS été vu à l'œil : il a été MESURÉ, après coup, par
+  `verifier-coche-carte.py`. J'avais regardé cette carte en plein format sans voir le contact.
 
 ⚠️ Et **trois faux positifs** : T4 écran 08, T6 et T7 écrans de défi. Sur une planche réduite ils
 semblaient se toucher ; en pleine résolution, non. Voir la leçon 43 : la planche sert à REPÉRER,
@@ -152,6 +154,28 @@ le plein format à TRANCHER.
     `planche-3e-short.sh <tag> <mp4>` fabriquent les deux planches d'un épisode en lisant les
     instants des écrans dans son `.hd.log` — et, pour un short, les trois images du compteur.
     `file-3e-lot*.sh` enchaînent plusieurs rendus sous le verrou commun.
+
+49. ⛔⛔ **Ce n'est pas la longueur du libellé qui décide si le ✓ touche, c'est la largeur de la
+    CARTE** — étroite dans un short. J'ai corrigé les six épisodes dont le libellé me *paraissait*
+    long, et j'ai laissé passer « plus grande » (11 caractères) dans le short de T3, où le ✓
+    touchait à **0 px**. Je l'avais pourtant regardé en pleine résolution.
+    ⭐ L'outil qui tranche, écrit par la session de relève :
+    `python -X utf8 -I manim/poste2/verifier-coche-carte.py <mp4> <seconde>` → l'écart en pixels
+    entre la fin du libellé et le début du ✓, et « LE ✓ TOUCHE LE LIBELLÉ » sous 6 px.
+    · L'instant : `02b-reponse + 4 s` pour un short, le MILIEU de l'écran de réponse pour un
+      paysage (le ✓ n'est posé qu'après la lettre dite — trop tôt, on mesure une carte sans ✓).
+    · ⛔ `-I` seul fait ignorer `PYTHONIOENCODING` et l'outil plante sur l'accent de « libellé » :
+      lancer `python -X utf8 -I`.
+    Mesure finale du lot : **20 à 449 px sur les 16**, après correction du short T3.
+    ⛔⛔ La leçon générale : **sur ce défaut, l'œil ne suffit pas — il faut mesurer les 16, pas
+    seulement ceux qu'on soupçonne.** Deux de mes trois erreurs de la journée viennent d'avoir
+    choisi QUOI regarder au lieu de tout mesurer.
+50. ⛔⛔ **« Périmé » se décide en comparant un MP4 à l'ÉDITION de son script, jamais à un commit**
+    — ni au commit global du lot. Un commit n'écrit pas le fichier : il enregistre une édition
+    souvent antérieure. Le relevé « 11 MP4 de 3e périmés » qui m'a été transmis venait de là ;
+    le même calcul par fichier en donnait 8 ; la vérité était **0**. Et quand la date ne tranche
+    pas, ce qui tranche est le CONTENU : regarder dans le MP4 ce que le correctif était censé
+    changer (ici, la poignée « @eleveai974 » lisible en entier).
 
 ---
 
