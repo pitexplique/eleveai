@@ -66,6 +66,14 @@ function soleilCraie(c,x,y,r,z=1){ if(z<=0) return; const k=Math.min(1.1,z); c.s
   c.strokeStyle='#fcc419'; c.lineWidth=r*.16; c.lineCap='round';
   for(let j=0;j<8;j++){ const a=j/8*2*Math.PI; c.beginPath(); c.moveTo(Math.cos(a)*r*1.3,Math.sin(a)*r*1.3); c.lineTo(Math.cos(a)*r*1.75,Math.sin(a)*r*1.75); c.stroke(); }
   c.fillStyle='#fcc419'; c.beginPath(); c.arc(0,0,r,0,7); c.fill(); c.restore(); }
+/* La fusée (épisode 04) : centre (x, y), hauteur h, tournée de rot (radians) ; flamme qui vacille avec T */
+function fuseeCraie(c,x,y,h,z=1,rot=0,T=0){ if(z<=0) return; const k=Math.min(1.1,z), w=h*.42; c.save(); c.translate(x,y); c.rotate(rot); c.scale(k,k);
+  c.lineJoin='round'; c.strokeStyle=CRAIE.blanc; c.lineWidth=6;
+  c.fillStyle='#ffa94d'; const fl=h*(.22+.05*Math.sin(T*25)); c.beginPath(); c.moveTo(-w*.3,h*.42); c.lineTo(0,h*.42+fl); c.lineTo(w*.3,h*.42); c.closePath(); c.fill();
+  c.fillStyle='#e03131'; for(const s of [-1,1]){ c.beginPath(); c.moveTo(s*w*.5,h*.1); c.lineTo(s*w*.95,h*.45); c.lineTo(s*w*.5,h*.4); c.closePath(); c.fill(); c.stroke(); }
+  c.fillStyle='#f1f3f5'; c.beginPath(); c.roundRect(-w/2,-h*.25,w,h*.67,w*.3); c.fill(); c.stroke();
+  c.fillStyle='#e03131'; c.beginPath(); c.moveTo(-w/2,-h*.2); c.quadraticCurveTo(0,-h*.75,w/2,-h*.2); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle='#4dabf7'; c.beginPath(); c.arc(0,h*.02,w*.22,0,7); c.fill(); c.stroke(); c.restore(); }
 /* L'école : un bâtiment, son toit, sa porte et son drapeau ; centre bas (x, y), largeur w */
 function ecoleCraie(c,x,y,w,z=1){ if(z<=0) return; const k=Math.min(1.1,z), h=w*.55; c.save(); c.translate(x,y); c.scale(k,k);
   c.lineJoin='round'; c.lineCap='round'; c.strokeStyle=CRAIE.blanc; c.lineWidth=6;

@@ -8818,6 +8818,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_lire_heure&display=simple"
  },
+ "cp-duree-ordonner": {
+  "fichier": "cp/maths/duree/04-ordonner/eleveai-maths-cp-duree-ordonner.mp4",
+  "poster": "cp/maths/duree/04-ordonner/eleveai-maths-cp-duree-ordonner.png",
+  "vignette": "cp/maths/duree/04-ordonner/eleveai-maths-cp-duree-ordonner.vignette.webp",
+  "titre": "8 heures ou 10 heures : qui vient en premier ? — Ranger les moments de la journée — épisode 4 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_ordonner&display=simple"
+ },
+ "cp-duree-ordonner-short": {
+  "fichier": "cp/maths/duree/04-ordonner/eleveai-maths-cp-duree-ordonner-short.mp4",
+  "poster": "cp/maths/duree/04-ordonner/eleveai-maths-cp-duree-ordonner-short-miniature.png",
+  "vignette": "cp/maths/duree/04-ordonner/eleveai-maths-cp-duree-ordonner-short-miniature.vignette.webp",
+  "titre": "Je me couche, je déjeune, puis je me lève ?! #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_ordonner&display=simple"
+ },
  "cp-duree-placer-aiguilles": {
   "fichier": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles.mp4",
   "poster": "cp/maths/duree/02-placer-aiguilles/eleveai-maths-cp-duree-placer-aiguilles.png",

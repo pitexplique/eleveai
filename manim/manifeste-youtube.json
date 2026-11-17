@@ -98881,6 +98881,158 @@
       "centres": [
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cp-duree-ordonner",
+      "pas_avant": "2027-05-12",
+      "notionId": "duree",
+      "microId": "cp_duree_ordonner",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/duree/04-ordonner/eleveai-maths-cp-duree-ordonner.mp4",
+      "miniature": "cp/maths/duree/04-ordonner/eleveai-maths-cp-duree-ordonner.png",
+      "titre": "8 heures ou 10 heures : qui vient en premier ? — Ranger les moments de la journée — épisode 4 · Maths CP",
+      "accroche": "Inaya est astronaute. Dans sa fusée, elle suit un programme : elle range ses activités dans l'ordre. Mais qui vient en premier : 8 heures ou 10 heures ?\n\nDans cette vidéo :\n• la journée suit toujours le même ordre : le matin, midi, l'après-midi, le soir\n• dans le même matin, la plus petite heure vient d'abord\n• les heures se suivent comme les nombres : après 3 heures vient 4 heures\n• le piège : on ne range pas au hasard, on part du réveil\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : Inaya regarde la Terre à 5 heures.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_ordonner&display=simple\n\n⏰ Épisode 4 de la série Durées d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Ranger les moments de la journée"
+        ],
+        [
+          "00:06",
+          "Inaya, astronaute"
+        ],
+        [
+          "00:17",
+          "Toujours le même ordre"
+        ],
+        [
+          "00:28",
+          "Dans le même matin : 8 heures avant 10 heures"
+        ],
+        [
+          "00:38",
+          "Les heures se suivent"
+        ],
+        [
+          "00:47",
+          "Question 1"
+        ],
+        [
+          "01:17",
+          "Le piège : on ne range pas au hasard"
+        ],
+        [
+          "01:29",
+          "Question 2"
+        ],
+        [
+          "02:01",
+          "À toi de jouer"
+        ],
+        [
+          "02:13",
+          "Correction"
+        ],
+        [
+          "02:22",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "ranger dans l'ordre",
+        "ordre chronologique",
+        "moments de la journée",
+        "avant après",
+        "heures",
+        "se repérer dans le temps",
+        "espace",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:47",
+          "question": "Ce matin, Inaya mange à 7 heures. Elle fait du sport à 9 heures. Que fait-elle en premier ?",
+          "choix": [
+            "le sport",
+            "manger",
+            "les deux en même temps"
+          ],
+          "reponse": 1,
+          "explication": "7 heures vient avant 9 heures : Inaya mange d'abord."
+        },
+        {
+          "t": "01:29",
+          "question": "Quel est le bon ordre ?",
+          "choix": [
+            "se lever, déjeuner, se coucher",
+            "se coucher, se lever, déjeuner",
+            "déjeuner, se lever, se coucher"
+          ],
+          "reponse": 0,
+          "explication": "Le matin, on se lève. À midi, on déjeune. Le soir, on se couche."
+        }
+      ],
+      "centres": [
+        "espace",
+        "sciences"
+      ]
+    },
+    {
+      "id": "cp-duree-ordonner-short",
+      "pas_avant": "2027-05-12",
+      "notionId": "duree",
+      "microId": "cp_duree_ordonner",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "short",
+      "renvoie_vers": "cp-duree-ordonner",
+      "fichier": "cp/maths/duree/04-ordonner/eleveai-maths-cp-duree-ordonner-short.mp4",
+      "miniature": "cp/maths/duree/04-ordonner/eleveai-maths-cp-duree-ordonner-short-miniature.png",
+      "titre": "Je me couche, je déjeune, puis je me lève ?! #maths #cp",
+      "accroche": "Dans sa fusée, Ti Margo range sa journée à l'envers : il se couche, il déjeune, puis il se lève. Ça ne va pas du tout ! Il recommence : 7 heures, 10 heures… et après ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : quelle heure vient juste avant 4 heures ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_ordonner&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #heure #cp",
+      "tags": [
+        "ranger dans l'ordre",
+        "heures",
+        "avant après",
+        "fusée",
+        "espace",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Quelle heure vient juste après 10 heures ?",
+          "choix": [
+            "9 heures",
+            "12 heures",
+            "11 heures"
+          ],
+          "reponse": 2,
+          "explication": "Après 10 vient 11 : c'est 11 heures."
+        }
+      ],
+      "centres": [
+        "espace",
+        "jeux-defis"
+      ]
     }
   ]
 }

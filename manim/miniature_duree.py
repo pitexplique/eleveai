@@ -30,6 +30,8 @@ EP = [
      "et la grande sur le 12 !", True, "blanche"),
     ("cp", "jour-semaine", "03-jour-semaine", ["LE MATIN", "OU LE SOIR ?"], "7 heures : on se lève ou on dort ?",
      "pense à ce que tu fais !", True, "blanche"),
+    ("cp", "ordonner", "04-ordonner", ["RANGER", "DANS L'ORDRE"], "8 heures ou 10 heures : qui d'abord ?",
+     "la plus petite heure !", True, "blanche"),
 ]
 
 
