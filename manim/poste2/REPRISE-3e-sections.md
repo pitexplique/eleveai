@@ -10,38 +10,44 @@ WAV : `public/sons/3e-*/`. Marques : `manim/scripts/4e/3e_*_marques.json`. Tout 
 
 ## Avancement
 
-| Épisode | Id | Ceinture | Paysage | Short | HD |
+| Épisode | Id | Ceinture | Paysage | Short | HD — durées réelles |
 |---|---|---|---|---|---|
-| T1 | `3e-volume-boule` (le ballon, les poumons) | verte | ✅ | ✅ | ✅ 241,8 s / 57,8 s — **les deux à jour** |
-| T2 | `3e-volume-reduction-section` (le gobelet du cinéma) | bleue | ✅ | ✅ | ⏳ paysage À REFAIRE · ✅ short 55,3 s |
-| T3 | `3e-section-pave-cube` (la tranche de pain de mie) | jaune | ✅ | ✅ | ⏳ paysage À REFAIRE · ✅ short 49,7 s |
-| T4 | `3e-section-cylindre` (le tube d'une trottinette) | verte | ✅ | ✅ | ✅ 187,7 s / 58,3 s — **les deux à jour** |
-| T5 | `3e-section-cone-pyramide` (le volcan, 974) | verte | ✅ | ✅ | ⏳ paysage ET short À REFAIRE |
-| T6 | `3e-section-sphere` (les parallèles du globe) | bleue | ✅ | ✅ | ⏳ paysage ET short À REFAIRE |
-| T7 | `3e-section-longueur` (la position en vol) | bleue | ✅ | ✅ | ✅ 196,9 s / short à vérifier |
-| T8 | `3e-section-defi` (scanner pour imprimer en 3D) | marron | ✅ | ✅ | ⏳ paysage et short EN COURS de 1er rendu |
+| T1 | `3e-volume-boule` (le ballon, les poumons) | verte | ✅ | ✅ | ✅ 241,8 s / 57,8 s |
+| T2 | `3e-volume-reduction-section` (le gobelet du cinéma) | bleue | ✅ | ✅ | ✅ 214,8 s / 55,3 s |
+| T3 | `3e-section-pave-cube` (la tranche de pain de mie) | jaune | ✅ | ✅ | ✅ 199,1 s / 49,7 s |
+| T4 | `3e-section-cylindre` (le tube d'une trottinette) | verte | ✅ | ✅ | ✅ 187,7 s / 58,3 s |
+| T5 | `3e-section-cone-pyramide` (le volcan, 974) | verte | ✅ | ✅ | ✅ 195,8 s / 54,1 s |
+| T6 | `3e-section-sphere` (les parallèles du globe) | bleue | ✅ | ✅ | ✅ 217,1 s / 54,6 s |
+| T7 | `3e-section-longueur` (la position en vol) | bleue | ✅ | ✅ | ✅ 208,1 s / 61,0 s |
+| T8 | `3e-section-defi` (scanner pour imprimer en 3D) | marron | ✅ | ✅ | ✅ 208,8 s / 54,2 s |
 
-## ⛔ L'état EXACT des MP4 (17/11, 06 h 40 — DERNIÈRE mise à jour de la 1ʳᵉ session)
+## ✅ Les 16 MP4 sont à jour et contrôlés (17/11, 12 h 35)
 
-Les 16 scripts sont **finis, contrôlés et commités** : il ne reste que des rendus et des contrôles.
+Sur CHACUN des seize : `verifier-bords-video` → 0 instant qui touche un bord ;
+`verifier-zone-margo.py` → 0 instant où quelque chose recouvre Ti-Margo. Les 8 planches ont été
+relues écran par écran, les 8 compteurs contrôlés sur le MP4 (3 → 2 → 1 dans la carte, rien
+par-dessus), les 8 poignées « @eleveai974 » lues en entier (Ti-Margo a quitté l'écran de
+commentaire, REGLES.md), et les 16 cartes gagnantes regardées en PLEINE RÉSOLUTION, une par une.
 
-**À jour, ne pas y toucher (6 MP4)** : les **paysages** T1, T2, T3, T4, T7, T8.
+## ⛔ Ce que la relecture a trouvé, et qu'aucun garde-fou ne voyait
 
-**À re-rendre (10 MP4)** :
-- les **8 shorts**, sans exception — commit `02e1097fc` : leur bas se cale désormais sur les
-  pixels de Ti-Margo (voir la leçon 40), les MP4 actuels le touchent encore ;
-- les **paysages T5 et T6** — commit `a2928def1` : en écartant les figures du texte, je les avais
-  poussées sur la mascotte (en paysage elle occupe x ∈ [5,8 ; 6,7] et y ∈ [−3,1 ; −2,7]).
+Le tableau reçu au passage de main donnait six épisodes pour bons. La relecture image par image
+en a démenti cinq et a trouvé **douze chevauchements réels**, tous corrigés — tous invisibles
+pour `BORDS=1`, qui ne signale que ce qui SORT du cadre :
 
-⚠️ **Un `ECHEC manim rc=1` avec `FileNotFoundError` sur `partial_movie_file_list.txt` ne veut pas
-dire que le rendu a raté** : il arrive quand deux rendus manim partagent le même `media_dir`. Le
-verrou de `4e_hd.sh` sérialise les rendus d'une même file, pas ceux de deux sessions lancées en
-parallèle sur le même dossier. Vérifier le MP4 (durée par `ffprobe`, une image pour la mise en
-page) avant de le refaire.
+- **la colonne de texte mordait sur la figure de droite** : T3 (écrans 02 et 03), T4 (écrans 01,
+  02 et 03), T6 (écrans 01 et 02) ;
+- **une figure recouvrait Ti-Margo** : T5 (écrans 02 et 04), et dans un SHORT T4 (le disque,
+  poussé sous la mascotte par son propre `Indicate(×1,1)`) ;
+- **une figure traversait le texte** : T8 (la pile de disques sur la phrase de réponse) ;
+- **le texte touchait Ti-Margo** : T8 (écran de défi) ;
+- **le ✓ de la bonne réponse mordait sur la dernière lettre** : T3, T5, T8 et les shorts T2, T7
+  et T8 — voir la leçon 44, et surtout le piège qui m'a coûté deux rendus : la méthode à
+  surcharger n'est PAS la même en paysage (`_carte_choix`) et en short (`_carte`).
 
-**Reste à contrôler, et rien n'en est fait** : les planches de T6 et T8 (jamais vus en images),
-les écrans corrigés de T2 (04), T3 (02 et 03), T5 (02 et 04), T6 (02 et 03), T8 (02 et 03), et
-les compteurs de T5, T6, T7 et T8.
+⚠️ Et **trois faux positifs** : T4 écran 08, T6 et T7 écrans de défi. Sur une planche réduite ils
+semblaient se toucher ; en pleine résolution, non. Voir la leçon 43 : la planche sert à REPÉRER,
+le plein format à TRANCHER.
 
 ## La chaîne d'un épisode (rappel)
 
@@ -110,6 +116,43 @@ les compteurs de T5, T6, T7 et T8.
     écran. Il attrape en une seconde les fautes de casse (« La surface » vs « la surface ») qui
     font planter le rendu à la moitié de la vidéo.
 
+42. ⛔⛔ **La date d'un MP4 ne prouve rien toute seule : elle se compare à l'ÉDITION qui l'a
+    produit, pas au commit.** Un script écrit à 05 h 06 et commité à 05 h 27 donne un MP4 de
+    05 h 06 qui peut être périmé sans qu'aucune date ne le dise. Au moindre doute, **refaire le
+    rendu coûte six minutes ; une vidéo fausse en classe coûte bien plus.** Le short de T3 était
+    dans ce cas : le tableau le disait « à jour », il ne l'était pas.
+43. ⛔⛔ **Une planche à 4 ou 5 colonnes MENT sur les chevauchements.** Deux vignettes collées
+    côte à côte donnent l'illusion qu'un texte d'une image touche une figure de la voisine, et
+    une vignette de 640 px cache un contact de quelques pixels. **Toute suspicion se tranche sur
+    une image PLEINE RÉSOLUTION** (`ffmpeg -ss … -vf "crop=…"`), jamais sur la planche. Trois
+    « défauts » de ce lot étaient des faux positifs (T4 écran 08, T6 et T7 écrans de défi) ; deux
+    vrais n'étaient visibles qu'au zoom.
+44. ⛔⛔ **Le ✓ de la bonne réponse mord sur le libellé le plus long, et aucun garde-fou ne le
+    voit.** `pythagore_pauses._carte` étire le contenu d'une carte jusqu'à 0,8 de son bord,
+    alors que `question_pause` pose la coche à 0,38 du bord DROIT : il reste 0,07 d'air.
+    ⛔ **Baisser `FS_C` ne sert à RIEN** — le gabarit redescend de toute façon le texte à la
+    largeur de la carte : on rapetisse les libellés courts sans libérer le long. Le remède,
+    local et sans toucher au gabarit partagé : surcharger `_carte` dans la scène et réserver la
+    place (`self.LARG - 1.2`). Fait sur T2s, T3, T5, T7s, T8 et T8s.
+    ⚠️ Les 20 épisodes de 4e tournent sur le même gabarit : à regarder de leur côté.
+45. ⛔ **Un `Indicate(scale_factor=1.1)` déborde là où la figure au repos ne débordait pas.**
+    Dans le short de T4, un disque de rayon 0,75 centré en −2,2 s'arrête à −2,95 ; pulsé à 1,1
+    il descend à −3,03 et touche la tête de Ti-Margo. La pulsation compte dans la marge.
+46. ⭐ **Une FIGURE recouvre Ti-Margo aussi bien qu'un texte.** Sur T5, le grand disque
+    (écran 02) et le grand carré (écran 04) lui passaient dessus : la règle « x > 4,6 et
+    y < −2,2 » vaut pour tout ce qu'on pose, pas seulement pour les phrases.
+    ⭐ `verifier-zone-margo.py` (leçon 40) l'attrape tout seul : il a rendu « 0 instant » sur
+    les 16 MP4 du lot une fois les corrections faites.
+47. ⭐ **Écarter la colonne ne suffit pas : il faut regarder les HAUTEURS.** Quand une ligne et
+    une figure se croisent, sortir la figure par le haut ou par le bas coûte moins cher que de
+    la pousser à droite — poussée, elle finit par toucher le bord ou la mascotte. C'est ce qui a
+    servi sur T3 (la tranche monte entre deux lignes, le carré descend sous elles) et sur T8
+    (la pile de disques passe au-dessus de la phrase de réponse).
+48. ⭐ Outils ajoutés pour ce lot, dans `manim/poste2/` : `planche-3e-paysage.sh <tag> <mp4>` et
+    `planche-3e-short.sh <tag> <mp4>` fabriquent les deux planches d'un épisode en lisant les
+    instants des écrans dans son `.hd.log` — et, pour un short, les trois images du compteur.
+    `file-3e-lot*.sh` enchaînent plusieurs rendus sous le verrou commun.
+
 ---
 
 # ⭐ PROMPT DE REPRISE (lot 3e, 17/11/2026)
@@ -149,3 +192,29 @@ du lot 3e est bien passé : on partage le dossier et la branche.
 ⛔ Jamais de push : c'est le 1er poste qui fusionne `poste2` dans `main`.
 ⛔ Ne touche pas `manim/REPRISE-4e-perimetre-aire-volume.md` (l'autre session le tient), ni
 `manim/manifeste-youtube.json`, ni `lib/videos/*.json`.
+
+---
+
+# ⏸️ RENDUS SUSPENDUS (17/11, consigne de Frédéric relayée par la session 4e)
+
+**La 4e passe en premier : 75 % du budget hebdomadaire atteint.** Aucun rendu HD de 3e ne se
+relance avant le feu vert de la session « 4e Périmètre, aire, volume et solides ». Le verrou
+`%TEMP%\eleveai-rendu-hd.lock` lui revient. Vérifié au moment d'écrire : verrou libre, aucun
+rendu en cours.
+
+Ce qui reste utile en attendant, et qui ne coûte presque rien : les dry runs, les entrées de
+manifeste, et ce tableau.
+
+## Relevé des dates au moment de la suspension
+
+⚠️ C'est un relevé de DATES (MP4 contre le dernier commit qui touche son script), pas un contrôle
+à l'œil. À confirmer par la session qui a rendu.
+
+| | à jour | a priori PÉRIMÉ |
+|---|---|---|
+| paysages | T1, T2, T3, T5, T7, T8 | **T4** (06:40 < `ebba43063` 07:10) · **T6** (07:11, rendu démarré avant l'édition) |
+| shorts | T6, T7, T8 | **T1 à T5** (07:28–07:32 < `6d47f3b3a` 07:32) |
+
+⛔ Ne rien publier sur la foi d'un « tout est à jour » : un MP4 périmé mis en ligne, c'est une
+vidéo fausse projetée en classe. La règle reste celle du haut de ce fichier — comparer la date du
+MP4 à celle du dernier commit qui change son image.
