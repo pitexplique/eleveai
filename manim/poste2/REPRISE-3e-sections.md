@@ -402,19 +402,31 @@ rendu en cours.
 Ce qui reste utile en attendant, et qui ne coûte presque rien : les dry runs, les entrées de
 manifeste, et ce tableau.
 
-## Relevé des dates au moment de la suspension
+## ✅ Les 16 MP4 sont à jour — mon relevé de dates était FAUX
 
-⚠️ C'est un relevé de DATES (MP4 contre le dernier commit qui touche son script), pas un contrôle
-à l'œil. À confirmer par la session qui a rendu.
+⛔ **J'avais écrit ici que sept MP4 étaient périmés. C'est faux, et il ne faut PAS les re-rendre.**
+La session « Série 4e/3e » a mesuré, et l'outil le prouve :
 
-| | à jour | a priori PÉRIMÉ |
-|---|---|---|
-| paysages | T1, T2, T3, T5, T7, T8 | **T4** (06:40 < `ebba43063` 07:10) · **T6** (07:11, rendu démarré avant l'édition) |
-| shorts | T6, T7, T8 | **T1 à T5** (07:28–07:32 < `6d47f3b3a` 07:32) |
+```
+python -X utf8 -I manim/poste2/verifier-fraicheur-mp4.py --serie 3e
+→ 16 MP4 : 16 prouvés à jour, 0 douteux.
+```
 
-⛔ Ne rien publier sur la foi d'un « tout est à jour » : un MP4 périmé mis en ligne, c'est une
-vidéo fausse projetée en classe. La règle reste celle du haut de ce fichier — comparer la date du
-MP4 à celle du dernier commit qui change son image.
+**Pourquoi mon relevé déviait — et c'est la leçon, pas l'erreur.** J'avais comparé la date du MP4
+à celle du **commit** du script. Or un commit *enregistre* un contenu, il ne l'écrit pas : entre
+l'écriture et l'enregistrement il peut s'écouler une demi-heure. Mes huit shorts ont tous été
+écrits à 07:18:40, en une seule passe, et commités ensemble à 07:32:13 ; les cinq rendus lancés
+entre ces deux instants paraissaient « en retard sur leur commit » alors que rien n'avait changé.
+Même mécanique sur T4 paysage (écrit 06:27, rendu 06:40, commité 07:10).
+
+⭐ **La bonne référence, ce sont les trois preuves réunies**, et c'est ce que l'outil vérifie :
+1. `mtime(.py) < mtime(.mp4)` — le rendu suit la dernière écriture du script ;
+2. le `.py` du disque est identique à HEAD — ce qui est commité est ce qui a été rendu ;
+3. le `mtime` du MP4 coïncide à la seconde avec son `media-hd-t<N>[s].hd.log` — donc c'est un
+   rendu, pas une copie. ⚠️ C'est la preuve qui manquait à mon relevé : `cp` et `mv` rafraîchissent
+   un mtime sans rien rendre, et un MP4 recopié se déclare alors à jour.
+
+⛔ Ne jamais relancer un rendu sur la foi d'une comparaison avec un commit : passer l'outil.
 
 ## ⭐ LE lot de rendus qui reste : `manim/poste2/3e_lot_final.sh`
 
