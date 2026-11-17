@@ -382,6 +382,114 @@
   "youtube": "db8qvhoqW-M",
   "coach": "/coach/serie?classe=3e&matiere=maths&notion=pythagore_theoreme&microId=pythagore_solide&display=simple"
  },
+ "3e-section-cone-pyramide": {
+  "fichier": "3e/maths/sections/35-section-cone-pyramide/eleveai-maths-3e-section-cone-pyramide.mp4",
+  "poster": "3e/maths/sections/35-section-cone-pyramide/eleveai-maths-3e-section-cone-pyramide.png",
+  "vignette": "3e/maths/sections/35-section-cone-pyramide/eleveai-maths-3e-section-cone-pyramide.vignette.webp",
+  "titre": "Le Piton de la Fournaise coupé en deux — La section d'un cône et d'une pyramide — Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_cone_pyramide&display=simple"
+ },
+ "3e-section-cone-pyramide-short": {
+  "fichier": "3e/maths/sections/35-section-cone-pyramide/eleveai-maths-3e-section-cone-pyramide-short.mp4",
+  "poster": "3e/maths/sections/35-section-cone-pyramide/eleveai-maths-3e-section-cone-pyramide-short-miniature.png",
+  "vignette": "3e/maths/sections/35-section-cone-pyramide/eleveai-maths-3e-section-cone-pyramide-short-miniature.vignette.webp",
+  "titre": "Le volcan à mi-hauteur : quel rayon dans la coupe ? #maths #3e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_cone_pyramide&display=simple"
+ },
+ "3e-section-cylindre": {
+  "fichier": "3e/maths/sections/34-section-cylindre/eleveai-maths-3e-section-cylindre.mp4",
+  "poster": "3e/maths/sections/34-section-cylindre/eleveai-maths-3e-section-cylindre.png",
+  "vignette": "3e/maths/sections/34-section-cylindre/eleveai-maths-3e-section-cylindre.vignette.webp",
+  "titre": "Couper le tube d'une trottinette : disque ou rectangle ? — La section d'un cylindre — Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_cylindre&display=simple"
+ },
+ "3e-section-cylindre-short": {
+  "fichier": "3e/maths/sections/34-section-cylindre/eleveai-maths-3e-section-cylindre-short.mp4",
+  "poster": "3e/maths/sections/34-section-cylindre/eleveai-maths-3e-section-cylindre-short-miniature.png",
+  "vignette": "3e/maths/sections/34-section-cylindre/eleveai-maths-3e-section-cylindre-short-miniature.vignette.webp",
+  "titre": "Le bout du tube : quelle aire sur la coupe ? #maths #3e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_cylindre&display=simple"
+ },
+ "3e-section-defi": {
+  "fichier": "3e/maths/sections/38-section-defi/eleveai-maths-3e-section-defi.mp4",
+  "poster": "3e/maths/sections/38-section-defi/eleveai-maths-3e-section-defi.png",
+  "vignette": "3e/maths/sections/38-section-defi/eleveai-maths-3e-section-defi.vignette.webp",
+  "titre": "Scanner un objet pour l'imprimer en 3D — Défis sur les sections planes — Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_defi&display=simple"
+ },
+ "3e-section-defi-short": {
+  "fichier": "3e/maths/sections/38-section-defi/eleveai-maths-3e-section-defi-short.mp4",
+  "poster": "3e/maths/sections/38-section-defi/eleveai-maths-3e-section-defi-short-miniature.png",
+  "vignette": "3e/maths/sections/38-section-defi/eleveai-maths-3e-section-defi-short-miniature.vignette.webp",
+  "titre": "Trois tranches, un solide : lequel ? #maths #3e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_defi&display=simple"
+ },
+ "3e-section-longueur": {
+  "fichier": "3e/maths/sections/37-section-longueur/eleveai-maths-3e-section-longueur.mp4",
+  "poster": "3e/maths/sections/37-section-longueur/eleveai-maths-3e-section-longueur.png",
+  "vignette": "3e/maths/sections/37-section-longueur/eleveai-maths-3e-section-longueur.vignette.webp",
+  "titre": "La position d'un avion en vol : où est le triangle rectangle ? — Calculer une longueur dans une section — Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_calculer_longueur&display=simple"
+ },
+ "3e-section-longueur-short": {
+  "fichier": "3e/maths/sections/37-section-longueur/eleveai-maths-3e-section-longueur-short.mp4",
+  "poster": "3e/maths/sections/37-section-longueur/eleveai-maths-3e-section-longueur-short-miniature.png",
+  "vignette": "3e/maths/sections/37-section-longueur/eleveai-maths-3e-section-longueur-short-miniature.vignette.webp",
+  "titre": "La diagonale d'une face de cube : 12 cm ? #maths #3e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_calculer_longueur&display=simple"
+ },
+ "3e-section-pave-cube": {
+  "fichier": "3e/maths/sections/33-section-pave-cube/eleveai-maths-3e-section-pave-cube.mp4",
+  "poster": "3e/maths/sections/33-section-pave-cube/eleveai-maths-3e-section-pave-cube.png",
+  "vignette": "3e/maths/sections/33-section-pave-cube/eleveai-maths-3e-section-pave-cube.vignette.webp",
+  "titre": "Trancher un pain de mie : quelle forme ? — La section d'un pavé ou d'un cube — Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_pave_cube&display=simple"
+ },
+ "3e-section-pave-cube-short": {
+  "fichier": "3e/maths/sections/33-section-pave-cube/eleveai-maths-3e-section-pave-cube-short.mp4",
+  "poster": "3e/maths/sections/33-section-pave-cube/eleveai-maths-3e-section-pave-cube-short-miniature.png",
+  "vignette": "3e/maths/sections/33-section-pave-cube/eleveai-maths-3e-section-pave-cube-short-miniature.vignette.webp",
+  "titre": "La tranche en biais est-elle plus grande ? #maths #3e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_pave_cube&display=simple"
+ },
+ "3e-section-sphere": {
+  "fichier": "3e/maths/sections/36-section-sphere/eleveai-maths-3e-section-sphere.mp4",
+  "poster": "3e/maths/sections/36-section-sphere/eleveai-maths-3e-section-sphere.png",
+  "vignette": "3e/maths/sections/36-section-sphere/eleveai-maths-3e-section-sphere.vignette.webp",
+  "titre": "Les parallèles du globe : pourquoi toujours un cercle ? — La section d'une sphère — Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_sphere&display=simple"
+ },
+ "3e-section-sphere-short": {
+  "fichier": "3e/maths/sections/36-section-sphere/eleveai-maths-3e-section-sphere-short.mp4",
+  "poster": "3e/maths/sections/36-section-sphere/eleveai-maths-3e-section-sphere-short-miniature.png",
+  "vignette": "3e/maths/sections/36-section-sphere/eleveai-maths-3e-section-sphere-short-miniature.vignette.webp",
+  "titre": "L'équateur ou le parallèle : lequel est le plus grand ? #maths #3e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_sphere&display=simple"
+ },
  "3e-stats-defi": {
   "fichier": "3e/maths/statistiques/08-defi/eleveai-maths-3e-stats-defi.mp4",
   "poster": "3e/maths/statistiques/08-defi/eleveai-maths-3e-stats-defi.png",
@@ -535,6 +643,42 @@
   "youtube": "H7Ow0W3NKCM",
   "coach": "/coach/serie?classe=3e&matiere=maths&notion=trigo_trigonometrie&display=simple"
  },
+ "3e-volume-boule": {
+  "fichier": "3e/maths/volume/31-volume-boule/eleveai-maths-3e-volume-boule.mp4",
+  "poster": "3e/maths/volume/31-volume-boule/eleveai-maths-3e-volume-boule.png",
+  "vignette": "3e/maths/volume/31-volume-boule/eleveai-maths-3e-volume-boule.vignette.webp",
+  "titre": "Combien d'air tient dans un ballon ? — Le volume d'une boule — Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=volume_solide&microId=volume_boule&display=simple"
+ },
+ "3e-volume-boule-short": {
+  "fichier": "3e/maths/volume/31-volume-boule/eleveai-maths-3e-volume-boule-short.mp4",
+  "poster": "3e/maths/volume/31-volume-boule/eleveai-maths-3e-volume-boule-short-miniature.png",
+  "vignette": "3e/maths/volume/31-volume-boule/eleveai-maths-3e-volume-boule-short-miniature.vignette.webp",
+  "titre": "Tout l'air de tes poumons : quel rayon de ballon ? #maths #3e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=volume_solide&microId=volume_boule&display=simple"
+ },
+ "3e-volume-reduction-section": {
+  "fichier": "3e/maths/volume/32-volume-reduction-section/eleveai-maths-3e-volume-reduction-section.mp4",
+  "poster": "3e/maths/volume/32-volume-reduction-section/eleveai-maths-3e-volume-reduction-section.png",
+  "vignette": "3e/maths/volume/32-volume-reduction-section/eleveai-maths-3e-volume-reduction-section.vignette.webp",
+  "titre": "Un gobelet rempli à mi-hauteur : as-tu la moitié ? — La réduction par une section — Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=volume_solide&microId=volume_pyramide_cone_reduction&display=simple"
+ },
+ "3e-volume-reduction-section-short": {
+  "fichier": "3e/maths/volume/32-volume-reduction-section/eleveai-maths-3e-volume-reduction-section-short.mp4",
+  "poster": "3e/maths/volume/32-volume-reduction-section/eleveai-maths-3e-volume-reduction-section-short-miniature.png",
+  "vignette": "3e/maths/volume/32-volume-reduction-section/eleveai-maths-3e-volume-reduction-section-short-miniature.vignette.webp",
+  "titre": "Gobelet conique à mi-hauteur : un huitième seulement #maths #3e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=volume_solide&microId=volume_pyramide_cone_reduction&display=simple"
+ },
  "4-essai-avec-voix-gtts": {
   "fichier": "atelier-video-essais/4-essai-avec-voix-gtts.mp4",
   "poster": null,
@@ -542,6 +686,96 @@
   "titre": "4 essai avec voix gtts",
   "short": false,
   "youtube": null
+ },
+ "4e-aire-defi": {
+  "fichier": "4e/maths/aire/30-aire-defi/eleveai-maths-4e-aire-defi.mp4",
+  "poster": "4e/maths/aire/30-aire-defi/eleveai-maths-4e-aire-defi.png",
+  "vignette": "4e/maths/aire/30-aire-defi/eleveai-maths-4e-aire-defi.vignette.webp",
+  "titre": "Floquer 18 maillots : 1 m², c'est 10 000 cm² — Défis sur les aires — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_defi&display=simple"
+ },
+ "4e-aire-defi-short": {
+  "fichier": "4e/maths/aire/30-aire-defi/eleveai-maths-4e-aire-defi-short.mp4",
+  "poster": "4e/maths/aire/30-aire-defi/eleveai-maths-4e-aire-defi-short-miniature.png",
+  "vignette": "4e/maths/aire/30-aire-defi/eleveai-maths-4e-aire-defi-short-miniature.vignette.webp",
+  "titre": "18 flocages : ça fait combien de mètres carrés ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_defi&display=simple"
+ },
+ "4e-aire-disque": {
+  "fichier": "4e/maths/aire/27-aire-disque/eleveai-maths-4e-aire-disque.mp4",
+  "poster": "4e/maths/aire/27-aire-disque/eleveai-maths-4e-aire-disque.png",
+  "vignette": "4e/maths/aire/27-aire-disque/eleveai-maths-4e-aire-disque.vignette.webp",
+  "titre": "La peau d'un tambour : combien de centimètres carrés ? — L'aire d'un disque — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_figure&display=simple"
+ },
+ "4e-aire-disque-short": {
+  "fichier": "4e/maths/aire/27-aire-disque/eleveai-maths-4e-aire-disque-short.mp4",
+  "poster": "4e/maths/aire/27-aire-disque/eleveai-maths-4e-aire-disque-short-miniature.png",
+  "vignette": "4e/maths/aire/27-aire-disque/eleveai-maths-4e-aire-disque-short-miniature.vignette.webp",
+  "titre": "Un tambour deux fois plus large : la peau coûte ×4 #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_figure&display=simple"
+ },
+ "4e-aire-figure-composee": {
+  "fichier": "4e/maths/aire/28-aire-figure-composee/eleveai-maths-4e-aire-figure-composee.mp4",
+  "poster": "4e/maths/aire/28-aire-figure-composee/eleveai-maths-4e-aire-figure-composee.png",
+  "vignette": "4e/maths/aire/28-aire-figure-composee/eleveai-maths-4e-aire-figure-composee.vignette.webp",
+  "titre": "Du gazon dans une cour en L : combien de m² ? — L'aire d'une figure composée — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_figure&display=simple"
+ },
+ "4e-aire-figure-composee-short": {
+  "fichier": "4e/maths/aire/28-aire-figure-composee/eleveai-maths-4e-aire-figure-composee-short.mp4",
+  "poster": "4e/maths/aire/28-aire-figure-composee/eleveai-maths-4e-aire-figure-composee-short-miniature.png",
+  "vignette": "4e/maths/aire/28-aire-figure-composee/eleveai-maths-4e-aire-figure-composee-short-miniature.vignette.webp",
+  "titre": "Une terrasse en L : un trait, deux rectangles #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_figure&display=simple"
+ },
+ "4e-aire-probleme": {
+  "fichier": "4e/maths/aire/29-aire-probleme/eleveai-maths-4e-aire-probleme.mp4",
+  "poster": "4e/maths/aire/29-aire-probleme/eleveai-maths-4e-aire-probleme.png",
+  "vignette": "4e/maths/aire/29-aire-probleme/eleveai-maths-4e-aire-probleme.vignette.webp",
+  "titre": "Carreler autour d'une piscine : le grand moins le trou — Un problème d'aire — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_probleme&display=simple"
+ },
+ "4e-aire-probleme-short": {
+  "fichier": "4e/maths/aire/29-aire-probleme/eleveai-maths-4e-aire-probleme-short.mp4",
+  "poster": "4e/maths/aire/29-aire-probleme/eleveai-maths-4e-aire-probleme-short-miniature.png",
+  "vignette": "4e/maths/aire/29-aire-probleme/eleveai-maths-4e-aire-probleme-short-miniature.vignette.webp",
+  "titre": "Un bassin rond dans une terrasse carrée : combien de m² ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_probleme&display=simple"
+ },
+ "4e-aire-rectangle-carre": {
+  "fichier": "4e/maths/aire/26-aire-rectangle-carre/eleveai-maths-4e-aire-rectangle-carre.mp4",
+  "poster": "4e/maths/aire/26-aire-rectangle-carre/eleveai-maths-4e-aire-rectangle-carre.png",
+  "vignette": "4e/maths/aire/26-aire-rectangle-carre/eleveai-maths-4e-aire-rectangle-carre.vignette.webp",
+  "titre": "Un film de protection sur un écran : combien de cm² ? — L'aire d'un rectangle et d'un carré — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_rectangle&display=simple"
+ },
+ "4e-aire-rectangle-carre-short": {
+  "fichier": "4e/maths/aire/26-aire-rectangle-carre/eleveai-maths-4e-aire-rectangle-carre-short.mp4",
+  "poster": "4e/maths/aire/26-aire-rectangle-carre/eleveai-maths-4e-aire-rectangle-carre-short-miniature.png",
+  "vignette": "4e/maths/aire/26-aire-rectangle-carre/eleveai-maths-4e-aire-rectangle-carre-short-miniature.vignette.webp",
+  "titre": "Deux téléphones, même prix : lequel a le plus grand écran ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_rectangle&display=simple"
  },
  "4e-distrib-defi": {
   "fichier": "4e/maths/distributivite/05-defi/eleveai-maths-4e-distrib-defi.mp4",
@@ -1316,6 +1550,114 @@
   "short": false,
   "youtube": "x2n_wQ9d0AY",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_factorisation&display=simple"
+ },
+ "4e-patron-pyramide": {
+  "fichier": "4e/maths/solides/18-patron-pyramide/eleveai-maths-4e-patron-pyramide.mp4",
+  "poster": "4e/maths/solides/18-patron-pyramide/eleveai-maths-4e-patron-pyramide.png",
+  "vignette": "4e/maths/solides/18-patron-pyramide/eleveai-maths-4e-patron-pyramide.vignette.webp",
+  "titre": "Un dé à quatre faces en carton : quel patron ? — Le patron d'une pyramide — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=patron_pyramide&display=simple"
+ },
+ "4e-patron-pyramide-short": {
+  "fichier": "4e/maths/solides/18-patron-pyramide/eleveai-maths-4e-patron-pyramide-short.mp4",
+  "poster": "4e/maths/solides/18-patron-pyramide/eleveai-maths-4e-patron-pyramide-short-miniature.png",
+  "vignette": "4e/maths/solides/18-patron-pyramide/eleveai-maths-4e-patron-pyramide-short-miniature.vignette.webp",
+  "titre": "Trois patrons : lequel se referme en pyramide ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=patron_pyramide&display=simple"
+ },
+ "4e-perimetre-cercle": {
+  "fichier": "4e/maths/perimetre/22-perimetre-cercle/eleveai-maths-4e-perimetre-cercle.mp4",
+  "poster": "4e/maths/perimetre/22-perimetre-cercle/eleveai-maths-4e-perimetre-cercle.png",
+  "vignette": "4e/maths/perimetre/22-perimetre-cercle/eleveai-maths-4e-perimetre-cercle.vignette.webp",
+  "titre": "La margelle d'une piscine ronde : combien de mètres ? — La longueur d'un cercle — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_figure&display=simple"
+ },
+ "4e-perimetre-cercle-short": {
+  "fichier": "4e/maths/perimetre/22-perimetre-cercle/eleveai-maths-4e-perimetre-cercle-short.mp4",
+  "poster": "4e/maths/perimetre/22-perimetre-cercle/eleveai-maths-4e-perimetre-cercle-short-miniature.png",
+  "vignette": "4e/maths/perimetre/22-perimetre-cercle/eleveai-maths-4e-perimetre-cercle-short-miniature.vignette.webp",
+  "titre": "Un bassin de 4 m de large fait 12,6 m de tour #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_figure&display=simple"
+ },
+ "4e-perimetre-defi": {
+  "fichier": "4e/maths/perimetre/25-perimetre-defi/eleveai-maths-4e-perimetre-defi.mp4",
+  "poster": "4e/maths/perimetre/25-perimetre-defi/eleveai-maths-4e-perimetre-defi.png",
+  "vignette": "4e/maths/perimetre/25-perimetre-defi/eleveai-maths-4e-perimetre-defi.vignette.webp",
+  "titre": "100 m de grillage : enclos carré ou rond ? — Défis sur les périmètres — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_defi&display=simple"
+ },
+ "4e-perimetre-defi-short": {
+  "fichier": "4e/maths/perimetre/25-perimetre-defi/eleveai-maths-4e-perimetre-defi-short.mp4",
+  "poster": "4e/maths/perimetre/25-perimetre-defi/eleveai-maths-4e-perimetre-defi-short-miniature.png",
+  "vignette": "4e/maths/perimetre/25-perimetre-defi/eleveai-maths-4e-perimetre-defi-short-miniature.vignette.webp",
+  "titre": "Rayon doublé : le grillage est multiplié par combien ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_defi&display=simple"
+ },
+ "4e-perimetre-figure-composee": {
+  "fichier": "4e/maths/perimetre/23-perimetre-figure-composee/eleveai-maths-4e-perimetre-figure-composee.mp4",
+  "poster": "4e/maths/perimetre/23-perimetre-figure-composee/eleveai-maths-4e-perimetre-figure-composee.png",
+  "vignette": "4e/maths/perimetre/23-perimetre-figure-composee/eleveai-maths-4e-perimetre-figure-composee.vignette.webp",
+  "titre": "La bordure d'une piste de BMX : droites + virage — Le périmètre d'une figure composée — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_figure&display=simple"
+ },
+ "4e-perimetre-figure-composee-short": {
+  "fichier": "4e/maths/perimetre/23-perimetre-figure-composee/eleveai-maths-4e-perimetre-figure-composee-short.mp4",
+  "poster": "4e/maths/perimetre/23-perimetre-figure-composee/eleveai-maths-4e-perimetre-figure-composee-short-miniature.png",
+  "vignette": "4e/maths/perimetre/23-perimetre-figure-composee/eleveai-maths-4e-perimetre-figure-composee-short-miniature.vignette.webp",
+  "titre": "Le virage compte 31 m, pas 20 #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_figure&display=simple"
+ },
+ "4e-perimetre-polygones": {
+  "fichier": "4e/maths/perimetre/21-perimetre-polygones/eleveai-maths-4e-perimetre-polygones.mp4",
+  "poster": "4e/maths/perimetre/21-perimetre-polygones/eleveai-maths-4e-perimetre-polygones.png",
+  "vignette": "4e/maths/perimetre/21-perimetre-polygones/eleveai-maths-4e-perimetre-polygones.vignette.webp",
+  "titre": "Borner un skatepark : combien de mètres de barrière ? — Le périmètre — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_comprendre&display=simple"
+ },
+ "4e-perimetre-polygones-short": {
+  "fichier": "4e/maths/perimetre/21-perimetre-polygones/eleveai-maths-4e-perimetre-polygones-short.mp4",
+  "poster": "4e/maths/perimetre/21-perimetre-polygones/eleveai-maths-4e-perimetre-polygones-short-miniature.png",
+  "vignette": "4e/maths/perimetre/21-perimetre-polygones/eleveai-maths-4e-perimetre-polygones-short-miniature.vignette.webp",
+  "titre": "Une rampe triangulaire : combien de mètres de bordure ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_comprendre&display=simple"
+ },
+ "4e-perimetre-probleme": {
+  "fichier": "4e/maths/perimetre/24-perimetre-probleme/eleveai-maths-4e-perimetre-probleme.mp4",
+  "poster": "4e/maths/perimetre/24-perimetre-probleme/eleveai-maths-4e-perimetre-probleme.png",
+  "vignette": "4e/maths/perimetre/24-perimetre-probleme/eleveai-maths-4e-perimetre-probleme.vignette.webp",
+  "titre": "Pourquoi un tour de piste fait 400 m — Un problème de périmètre — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_probleme&display=simple"
+ },
+ "4e-perimetre-probleme-short": {
+  "fichier": "4e/maths/perimetre/24-perimetre-probleme/eleveai-maths-4e-perimetre-probleme-short.mp4",
+  "poster": "4e/maths/perimetre/24-perimetre-probleme/eleveai-maths-4e-perimetre-probleme-short-miniature.png",
+  "vignette": "4e/maths/perimetre/24-perimetre-probleme/eleveai-maths-4e-perimetre-probleme-short-miniature.vignette.webp",
+  "titre": "Cinq tours de piste : ça fait combien de kilomètres ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_probleme&display=simple"
  },
  "4e-premier-decomposer": {
   "fichier": "4e/maths/divisibilite/10-decomposer/eleveai-maths-4e-premier-decomposer.mp4",
@@ -2631,6 +2973,96 @@
   "youtube": "D20ZmhSSHGc",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=relatif_operation&microId=relatif_soustraction&display=simple"
  },
+ "4e-section-comprendre": {
+  "fichier": "4e/maths/solides/19-section-comprendre/eleveai-maths-4e-section-comprendre.mp4",
+  "poster": "4e/maths/solides/19-section-comprendre/eleveai-maths-4e-section-comprendre.png",
+  "vignette": "4e/maths/solides/19-section-comprendre/eleveai-maths-4e-section-comprendre.vignette.webp",
+  "titre": "La force d'un muscle se lit sur sa section — La section plane — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_section&display=simple"
+ },
+ "4e-section-comprendre-short": {
+  "fichier": "4e/maths/solides/19-section-comprendre/eleveai-maths-4e-section-comprendre-short.mp4",
+  "poster": "4e/maths/solides/19-section-comprendre/eleveai-maths-4e-section-comprendre-short-miniature.png",
+  "vignette": "4e/maths/solides/19-section-comprendre/eleveai-maths-4e-section-comprendre-short-miniature.vignette.webp",
+  "titre": "Un muscle deux fois plus large : combien de fois plus fort ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_section&display=simple"
+ },
+ "4e-solides-defi": {
+  "fichier": "4e/maths/solides/20-solides-defi/eleveai-maths-4e-solides-defi.mp4",
+  "poster": "4e/maths/solides/20-solides-defi/eleveai-maths-4e-solides-defi.png",
+  "vignette": "4e/maths/solides/20-solides-defi/eleveai-maths-4e-solides-defi.vignette.webp",
+  "titre": "Relever un bâtiment au drone : quel volume ? — Défis sur les solides — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_defi&display=simple"
+ },
+ "4e-solides-defi-short": {
+  "fichier": "4e/maths/solides/20-solides-defi/eleveai-maths-4e-solides-defi-short.mp4",
+  "poster": "4e/maths/solides/20-solides-defi/eleveai-maths-4e-solides-defi-short-miniature.png",
+  "vignette": "4e/maths/solides/20-solides-defi/eleveai-maths-4e-solides-defi-short-miniature.vignette.webp",
+  "titre": "Ce que voit le drone : quel solide pour le toit ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_defi&display=simple"
+ },
+ "4e-solides-perspective": {
+  "fichier": "4e/maths/solides/17-solides-perspective/eleveai-maths-4e-solides-perspective.mp4",
+  "poster": "4e/maths/solides/17-solides-perspective/eleveai-maths-4e-solides-perspective.png",
+  "vignette": "4e/maths/solides/17-solides-perspective/eleveai-maths-4e-solides-perspective.vignette.webp",
+  "titre": "Dessiner un cube sans mentir — La perspective cavalière — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_representation&display=simple"
+ },
+ "4e-solides-perspective-short": {
+  "fichier": "4e/maths/solides/17-solides-perspective/eleveai-maths-4e-solides-perspective-short.mp4",
+  "poster": "4e/maths/solides/17-solides-perspective/eleveai-maths-4e-solides-perspective-short-miniature.png",
+  "vignette": "4e/maths/solides/17-solides-perspective/eleveai-maths-4e-solides-perspective-short-miniature.vignette.webp",
+  "titre": "Les fuyantes d'un cube : parallèles ou pas ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_representation&display=simple"
+ },
+ "4e-solides-reconnaitre": {
+  "fichier": "4e/maths/solides/15-solides-reconnaitre/eleveai-maths-4e-solides-reconnaitre.mp4",
+  "poster": "4e/maths/solides/15-solides-reconnaitre/eleveai-maths-4e-solides-reconnaitre.png",
+  "vignette": "4e/maths/solides/15-solides-reconnaitre/eleveai-maths-4e-solides-reconnaitre.vignette.webp",
+  "titre": "Modéliser un personnage de jeu : quels solides ? — Reconnaître les solides — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_reconnaitre&display=simple"
+ },
+ "4e-solides-reconnaitre-short": {
+  "fichier": "4e/maths/solides/15-solides-reconnaitre/eleveai-maths-4e-solides-reconnaitre-short.mp4",
+  "poster": "4e/maths/solides/15-solides-reconnaitre/eleveai-maths-4e-solides-reconnaitre-short-miniature.png",
+  "vignette": "4e/maths/solides/15-solides-reconnaitre/eleveai-maths-4e-solides-reconnaitre-short-miniature.vignette.webp",
+  "titre": "Le chapeau du personnage : quel solide ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_reconnaitre&display=simple"
+ },
+ "4e-solides-vues": {
+  "fichier": "4e/maths/solides/16-solides-vues/eleveai-maths-4e-solides-vues.mp4",
+  "poster": "4e/maths/solides/16-solides-vues/eleveai-maths-4e-solides-vues.png",
+  "vignette": "4e/maths/solides/16-solides-vues/eleveai-maths-4e-solides-vues.vignette.webp",
+  "titre": "La maquette d'une maison : que voit-on de face ? — Les vues d'un solide — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_vues&display=simple"
+ },
+ "4e-solides-vues-short": {
+  "fichier": "4e/maths/solides/16-solides-vues/eleveai-maths-4e-solides-vues-short.mp4",
+  "poster": "4e/maths/solides/16-solides-vues/eleveai-maths-4e-solides-vues-short-miniature.png",
+  "vignette": "4e/maths/solides/16-solides-vues/eleveai-maths-4e-solides-vues-short-miniature.vignette.webp",
+  "titre": "Un rectangle de face : pavé ou cylindre ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_vues&display=simple"
+ },
  "4e-stats-defi": {
   "fichier": "4e/maths/statistiques/11-defi/eleveai-maths-4e-stats-defi.mp4",
   "poster": "4e/maths/statistiques/11-defi/eleveai-maths-4e-stats-defi.png",
@@ -2837,6 +3269,78 @@
   "short": false,
   "youtube": "MG0rSH1IZlM",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=trigo_cosinus&display=simple"
+ },
+ "4e-volume-cone": {
+  "fichier": "4e/maths/volume/13-volume-cone/eleveai-maths-4e-volume-cone.mp4",
+  "poster": "4e/maths/volume/13-volume-cone/eleveai-maths-4e-volume-cone.png",
+  "vignette": "4e/maths/volume/13-volume-cone/eleveai-maths-4e-volume-cone.vignette.webp",
+  "titre": "Un cornet de glace : combien de centimètres cubes ? — Le volume d'un cône — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_cone&display=simple"
+ },
+ "4e-volume-cone-short": {
+  "fichier": "4e/maths/volume/13-volume-cone/eleveai-maths-4e-volume-cone-short.mp4",
+  "poster": "4e/maths/volume/13-volume-cone/eleveai-maths-4e-volume-cone-short-miniature.png",
+  "vignette": "4e/maths/volume/13-volume-cone/eleveai-maths-4e-volume-cone-short-miniature.vignette.webp",
+  "titre": "Le cornet ou le pot : lequel en contient le plus ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_cone&display=simple"
+ },
+ "4e-volume-defi": {
+  "fichier": "4e/maths/volume/14-volume-defi/eleveai-maths-4e-volume-defi.mp4",
+  "poster": "4e/maths/volume/14-volume-defi/eleveai-maths-4e-volume-defi.png",
+  "vignette": "4e/maths/volume/14-volume-defi/eleveai-maths-4e-volume-defi.vignette.webp",
+  "titre": "Une citerne à fond conique : combien de jours d'eau ? — Défis sur les volumes — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_defi&display=simple"
+ },
+ "4e-volume-defi-short": {
+  "fichier": "4e/maths/volume/14-volume-defi/eleveai-maths-4e-volume-defi-short.mp4",
+  "poster": "4e/maths/volume/14-volume-defi/eleveai-maths-4e-volume-defi-short-miniature.png",
+  "vignette": "4e/maths/volume/14-volume-defi/eleveai-maths-4e-volume-defi-short-miniature.vignette.webp",
+  "titre": "La citerne et la sécheresse : combien de jours ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_defi&display=simple"
+ },
+ "4e-volume-lien-aire": {
+  "fichier": "4e/maths/volume/11-volume-lien-aire/eleveai-maths-4e-volume-lien-aire.mp4",
+  "poster": "4e/maths/volume/11-volume-lien-aire/eleveai-maths-4e-volume-lien-aire.png",
+  "vignette": "4e/maths/volume/11-volume-lien-aire/eleveai-maths-4e-volume-lien-aire.vignette.webp",
+  "titre": "Une piscine de 8 m sur 4 : combien de litres ? — Le volume et l'aire du fond — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_lien_aire&display=simple"
+ },
+ "4e-volume-lien-aire-short": {
+  "fichier": "4e/maths/volume/11-volume-lien-aire/eleveai-maths-4e-volume-lien-aire-short.mp4",
+  "poster": "4e/maths/volume/11-volume-lien-aire/eleveai-maths-4e-volume-lien-aire-short-miniature.png",
+  "vignette": "4e/maths/volume/11-volume-lien-aire/eleveai-maths-4e-volume-lien-aire-short-miniature.vignette.webp",
+  "titre": "Une piscine de 48 m³ : combien de litres ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_lien_aire&display=simple"
+ },
+ "4e-volume-pyramide": {
+  "fichier": "4e/maths/volume/12-volume-pyramide/eleveai-maths-4e-volume-pyramide.mp4",
+  "poster": "4e/maths/volume/12-volume-pyramide/eleveai-maths-4e-volume-pyramide.png",
+  "vignette": "4e/maths/volume/12-volume-pyramide/eleveai-maths-4e-volume-pyramide.vignette.webp",
+  "titre": "Le toit d'une tonnelle : combien d'air dessous ? — Le volume d'une pyramide — Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_pyramide&display=simple"
+ },
+ "4e-volume-pyramide-short": {
+  "fichier": "4e/maths/volume/12-volume-pyramide/eleveai-maths-4e-volume-pyramide-short.mp4",
+  "poster": "4e/maths/volume/12-volume-pyramide/eleveai-maths-4e-volume-pyramide-short-miniature.png",
+  "vignette": "4e/maths/volume/12-volume-pyramide/eleveai-maths-4e-volume-pyramide-short-miniature.vignette.webp",
+  "titre": "Un prisme de sable, combien de pyramides ? #maths #4e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_pyramide&display=simple"
  },
  "5-version2-voix-eleve-puis-voix-generee": {
   "fichier": "atelier-video-essais/5-version2-voix-eleve-puis-voix-generee.mp4",

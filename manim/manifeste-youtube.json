@@ -99033,6 +99033,4354 @@
         "espace",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "4e-volume-lien-aire",
+      "pas_avant": "2027-05-13",
+      "notionId": "volume_solide",
+      "microId": "volume_lien_aire",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/volume/11-volume-lien-aire/eleveai-maths-4e-volume-lien-aire.mp4",
+      "miniature": "4e/maths/volume/11-volume-lien-aire/eleveai-maths-4e-volume-lien-aire.png",
+      "titre": "Une piscine de 8 m sur 4 : combien de litres ? — Le volume et l'aire du fond — Maths 4e",
+      "accroche": "Voici Léa. Elle s'occupe de l'eau des piscines. Avant de doser le produit qui garde l'eau propre, elle doit savoir combien d'eau il y a dans le bassin. Le produit se dose au mètre cube.\n\nDans cette vidéo :\n• l'aire du fond\n• fois la profondeur\n• des m³ aux litres\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Un autre bassin : 10 mètres sur 5, profondeur 1,4 mètre. Le produit se dose à une pastille pour 10 mètres cubes. Combien de pastilles Léa doit-elle mettre ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/volume-solide\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/volume-solide\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_lien_aire&display=simple\n\n📐 Épisode 11 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le volume et l'aire du fond"
+        ],
+        [
+          "00:05",
+          "Léa, technicienne en traitement de l'eau"
+        ],
+        [
+          "00:20",
+          "L'aire du fond"
+        ],
+        [
+          "00:30",
+          "Fois la profondeur"
+        ],
+        [
+          "00:46",
+          "Des m³ aux litres"
+        ],
+        [
+          "00:56",
+          "Question 1"
+        ],
+        [
+          "01:33",
+          "Le piège"
+        ],
+        [
+          "01:49",
+          "Question 2"
+        ],
+        [
+          "02:21",
+          "À toi de jouer"
+        ],
+        [
+          "02:40",
+          "Correction"
+        ],
+        [
+          "02:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "le volume et l'aire du fond",
+        "la piscine : aire du fond × profondeur, puis les litres et la dose",
+        "technicienne en traitement de l'eau",
+        "volume solide",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:56",
+          "question": "Un bassin a un fond de 20 mètres carrés et 1,5 mètre de profondeur. Quel est son volume ?",
+          "choix": [
+            "21,5 mètres cubes",
+            "15 mètres cubes",
+            "30 mètres cubes"
+          ],
+          "reponse": 2,
+          "explication": "20 fois 1,5, 30 mètres cubes. 21,5, c'est une addition : on n'additionne pas une aire et une longueur."
+        },
+        {
+          "t": "01:49",
+          "question": "Le bassin fait 48 mètres cubes. Combien de litres ?",
+          "choix": [
+            "4 800 litres",
+            "48 000 litres",
+            "480 litres"
+          ],
+          "reponse": 1,
+          "explication": "Un mètre cube, c'est mille litres. 48 fois mille, 48 000 litres."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-volume-lien-aire-short",
+      "pas_avant": "2027-05-13",
+      "notionId": "volume_solide",
+      "microId": "volume_lien_aire",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-volume-lien-aire",
+      "fichier": "4e/maths/volume/11-volume-lien-aire/eleveai-maths-4e-volume-lien-aire-short.mp4",
+      "miniature": "4e/maths/volume/11-volume-lien-aire/eleveai-maths-4e-volume-lien-aire-short-miniature.png",
+      "titre": "Une piscine de 48 m³ : combien de litres ? #maths #4e",
+      "accroche": "La piscine gonflable du jardin : un fond de 3 mètres carrés, 50 centimètres d'eau. Le tuyau donne 100 litres par minute. Combien de litres faut-il mettre dedans ?\n\n🥋 Ceinture blanche.\n👉 un fond de 6 mètres carrés et 40 centimètres d'eau. Combien de litres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_lien_aire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #volume",
+      "tags": [
+        "le volume et l'aire du fond",
+        "la piscine : aire du fond × profondeur, puis les litres et la dose",
+        "technicienne en traitement de l'eau",
+        "volume solide",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Le tuyau donne 100 litres par minute. Combien de litres faut-il mettre dedans ?",
+          "choix": [
+            "1 500 litres",
+            "150 litres",
+            "15 000 litres"
+          ],
+          "reponse": 0,
+          "explication": "3 fois 0,5, c'est 1,5 mètre cube. Un mètre cube fait mille litres : 1 500 litres."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-volume-pyramide",
+      "pas_avant": "2027-05-14",
+      "notionId": "volume_solide",
+      "microId": "volume_pyramide",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/volume/12-volume-pyramide/eleveai-maths-4e-volume-pyramide.mp4",
+      "miniature": "4e/maths/volume/12-volume-pyramide/eleveai-maths-4e-volume-pyramide.png",
+      "titre": "Le toit d'une tonnelle : combien d'air dessous ? — Le volume d'une pyramide — Maths 4e",
+      "accroche": "Voici Awen. Elle monte les stands d'un festival. Son stand est une tonnelle de 3 mètres sur 3, avec un toit pointu en forme de pyramide. Il fait chaud sous la toile : il faut un groupe de climatisation. Pour choisir le bon, Awen doit savoir combien de mètres cubes d'air il y a dedans.\n\nDans cette vidéo :\n• trois fois le même sable\n• la formule\n• un exemple\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : La tonnelle d'Awen. Les parois forment un pavé de 3 mètres sur 3, haut de 2,4 mètres. Le toit est une pyramide de même base, haute de 1,8 mètre. La climatisation demande 40 watts par mètre cube. Le groupe de 1 000 watts du festival suffit-il ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/volume-solide\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/volume-solide\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_pyramide&display=simple\n\n📐 Épisode 12 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le volume d'une pyramide"
+        ],
+        [
+          "00:06",
+          "Awen, monteuse de stands"
+        ],
+        [
+          "00:28",
+          "Trois fois le même sable"
+        ],
+        [
+          "00:50",
+          "La formule"
+        ],
+        [
+          "01:03",
+          "Un exemple"
+        ],
+        [
+          "01:27",
+          "Question 1"
+        ],
+        [
+          "02:08",
+          "Le piège"
+        ],
+        [
+          "02:25",
+          "Question 2"
+        ],
+        [
+          "03:09",
+          "À toi de jouer"
+        ],
+        [
+          "03:36",
+          "Correction"
+        ],
+        [
+          "04:13",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "le volume d'une pyramide",
+        "la tonnelle du festival",
+        "monteuse de stands",
+        "volume solide",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:27",
+          "question": "Une pyramide a une base de 15 mètres carrés et une hauteur de 4 mètres. Quel est son volume ?",
+          "choix": [
+            "60 mètres cubes",
+            "20 mètres cubes",
+            "30 mètres cubes"
+          ],
+          "reponse": 1,
+          "explication": "15 fois 4, 60. 60 divisé par 3 : 20 mètres cubes. 60, c'est le volume du prisme : le divisé par 3 a été oublié. 30, c'est divisé par 2."
+        },
+        {
+          "t": "02:25",
+          "question": "Un prisme et une pyramide ont la même base et la même hauteur. Le prisme fait 45 mètres cubes. Quel est le volume de la pyramide ?",
+          "choix": [
+            "15 mètres cubes",
+            "135 mètres cubes",
+            "22,5 mètres cubes"
+          ],
+          "reponse": 0,
+          "explication": "La pyramide, c'est le tiers du prisme. 45 divisé par 3 : 15 mètres cubes. 135, c'est fois 3 : ça, c'est le prisme quand on connaît la pyramide."
+        }
+      ],
+      "centres": [
+        "musique",
+        "sciences"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "volume_solide",
+          "microId": "volume_pyramide"
+        }
+      ]
+    },
+    {
+      "id": "4e-volume-pyramide-short",
+      "pas_avant": "2027-05-14",
+      "notionId": "volume_solide",
+      "microId": "volume_pyramide",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-volume-pyramide",
+      "fichier": "4e/maths/volume/12-volume-pyramide/eleveai-maths-4e-volume-pyramide-short.mp4",
+      "miniature": "4e/maths/volume/12-volume-pyramide/eleveai-maths-4e-volume-pyramide-short-miniature.png",
+      "titre": "Un prisme de sable, combien de pyramides ? #maths #4e",
+      "accroche": "Awen a rempli ce prisme de sable : 60 centimètres cubes, ras bord. Elle le verse dans des pyramides qui ont la même base et la même hauteur que lui. Combien de pyramides va-t-elle remplir ?\n\n🥋 Ceinture blanche.\n👉 une pyramide fait 25 centimètres cubes. Quel est le volume du prisme de même base et de même hauteur ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_pyramide&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #volume",
+      "tags": [
+        "le volume d'une pyramide",
+        "la tonnelle du festival",
+        "monteuse de stands",
+        "volume solide",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "Elle le verse dans des pyramides qui ont la même base et la même hauteur que lui. Combien de pyramides va-t-elle remplir ?",
+          "choix": [
+            "2 pyramides",
+            "1 pyramide",
+            "3 pyramides"
+          ],
+          "reponse": 2,
+          "explication": "Une pyramide fait le tiers du prisme : 60 divisé par 3, 20 centimètres cubes chacune. Trois pyramides, et le prisme est vide."
+        }
+      ],
+      "centres": [
+        "musique",
+        "sciences"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "volume_solide",
+          "microId": "volume_pyramide"
+        }
+      ]
+    },
+    {
+      "id": "4e-volume-cone",
+      "pas_avant": "2027-05-15",
+      "notionId": "volume_solide",
+      "microId": "volume_cone",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/volume/13-volume-cone/eleveai-maths-4e-volume-cone.mp4",
+      "miniature": "4e/maths/volume/13-volume-cone/eleveai-maths-4e-volume-cone.png",
+      "titre": "Un cornet de glace : combien de centimètres cubes ? — Le volume d'un cône — Maths 4e",
+      "accroche": "Voici Malo. Il est glacier. Ses cornets sont des cônes. Pour savoir combien de glace il prépare chaque matin, il doit calculer le volume d'un cornet.\n\nDans cette vidéo :\n• trois cônes dans le cylindre\n• la formule\n• le cornet\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Malo prépare 60 cornets. Chaque cornet fait environ 113 centimètres cubes. Un bac de glace contient 5 litres. Un seul bac suffit-il ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/volume-solide\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/volume-solide\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_cone&display=simple\n\n📐 Épisode 13 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le volume d'un cône"
+        ],
+        [
+          "00:05",
+          "Malo, glacier"
+        ],
+        [
+          "00:18",
+          "Trois cônes dans le cylindre"
+        ],
+        [
+          "00:35",
+          "La formule"
+        ],
+        [
+          "00:49",
+          "Le cornet"
+        ],
+        [
+          "01:12",
+          "Question 1"
+        ],
+        [
+          "01:53",
+          "Le piège"
+        ],
+        [
+          "02:08",
+          "Question 2"
+        ],
+        [
+          "02:53",
+          "À toi de jouer"
+        ],
+        [
+          "03:12",
+          "Correction"
+        ],
+        [
+          "03:33",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "le volume d'un cône",
+        "le cornet de glace",
+        "glacier",
+        "volume solide",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:12",
+          "question": "Un cône a un rayon de 2 centimètres et une hauteur de 9 centimètres. Quel est son volume ?",
+          "choix": [
+            "12 pi centimètres cubes",
+            "36 pi centimètres cubes",
+            "6 pi centimètres cubes"
+          ],
+          "reponse": 0,
+          "explication": "Pi fois 2 fois 2, 4 pi. Fois 9, 36 pi. Divisé par 3 : 12 pi centimètres cubes. 36 pi, c'est l'oubli du divisé par 3."
+        },
+        {
+          "t": "02:08",
+          "question": "Un cornet de 6 centimètres de diamètre et de 10 centimètres de hauteur. Quel est son volume ?",
+          "choix": [
+            "120 pi centimètres cubes",
+            "30 pi centimètres cubes",
+            "90 pi centimètres cubes"
+          ],
+          "reponse": 1,
+          "explication": "Le rayon vaut 3. Pi fois 3 fois 3, 9 pi. Fois 10, 90 pi. Divisé par 3 : 30 pi centimètres cubes. 120 pi, c'est le diamètre pris pour le rayon."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "argent-budget"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "volume_solide",
+          "microId": "volume_cone"
+        }
+      ]
+    },
+    {
+      "id": "4e-volume-cone-short",
+      "pas_avant": "2027-05-15",
+      "notionId": "volume_solide",
+      "microId": "volume_cone",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-volume-cone",
+      "fichier": "4e/maths/volume/13-volume-cone/eleveai-maths-4e-volume-cone-short.mp4",
+      "miniature": "4e/maths/volume/13-volume-cone/eleveai-maths-4e-volume-cone-short-miniature.png",
+      "titre": "Le cornet ou le pot : lequel en contient le plus ? #maths #4e",
+      "accroche": "Même prix : un cornet de 3 centimètres de rayon et 12 de haut, ou un pot de 3 centimètres de rayon et 4 de haut. Le cornet est bien plus haut. Alors, lequel contient le plus de glace ?\n\n🥋 Ceinture blanche.\n👉 un cône de 2 centimètres de rayon et 6 de haut. Quelle hauteur doit avoir le pot de même rayon pour contenir autant ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_cone&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #volume",
+      "tags": [
+        "le volume d'un cône",
+        "le cornet de glace",
+        "glacier",
+        "volume solide",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "Le cornet est bien plus haut. Alors, lequel contient le plus de glace ?",
+          "choix": [
+            "le cornet",
+            "le pot",
+            "les deux pareil"
+          ],
+          "reponse": 2,
+          "explication": "Le cornet : 9 pi fois 12, divisé par 3, 36 pi. Le pot : 9 pi fois 4, 36 pi aussi. Exactement la même glace."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "argent-budget"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "volume_solide",
+          "microId": "volume_cone"
+        }
+      ]
+    },
+    {
+      "id": "4e-volume-defi",
+      "pas_avant": "2027-05-16",
+      "notionId": "volume_solide",
+      "microId": "volume_defi",
+      "classe": "4e",
+      "ceinture": "bleue",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/volume/14-volume-defi/eleveai-maths-4e-volume-defi.mp4",
+      "miniature": "4e/maths/volume/14-volume-defi/eleveai-maths-4e-volume-defi.png",
+      "titre": "Une citerne à fond conique : combien de jours d'eau ? — Défis sur les volumes — Maths 4e",
+      "accroche": "Voici Elsa. Elle est hydrologue : elle étudie l'eau. Elle installe une citerne qui récupère l'eau de pluie. Cette citerne est un cylindre posé sur un fond en forme de cône.\n\nDans cette vidéo :\n• deux solides à composer\n• le cylindre\n• le cône du fond\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : La citerne d'Elsa contient 10 000 litres, et elle est pleine. La famille utilise 400 litres par jour. Il n'a pas plu depuis une semaine. Combien de jours la citerne peut-elle encore tenir ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/volume-solide\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/volume-solide\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_defi&display=simple\n\n📐 Épisode 14 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Défis sur les volumes"
+        ],
+        [
+          "00:06",
+          "Elsa, hydrologue"
+        ],
+        [
+          "00:20",
+          "Deux solides à composer"
+        ],
+        [
+          "00:34",
+          "Le cylindre"
+        ],
+        [
+          "00:50",
+          "Le cône du fond"
+        ],
+        [
+          "01:00",
+          "Question 1"
+        ],
+        [
+          "01:34",
+          "Le piège"
+        ],
+        [
+          "01:49",
+          "Question 2"
+        ],
+        [
+          "02:27",
+          "À toi de jouer"
+        ],
+        [
+          "02:48",
+          "Correction"
+        ],
+        [
+          "03:09",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "défis sur les volumes",
+        "la citerne à fond conique",
+        "hydrologue",
+        "volume solide",
+        "ceinture bleue",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:00",
+          "question": "Un cylindre de rayon 2 mètres et de hauteur 5 mètres. Quel est son volume ?",
+          "choix": [
+            "10 pi mètres cubes",
+            "20 pi mètres cubes",
+            "40 pi mètres cubes"
+          ],
+          "reponse": 1,
+          "explication": "Pi fois 2 fois 2, 4 pi. Fois 5, 20 pi mètres cubes. 10 pi, c'est le rayon compté une seule fois."
+        },
+        {
+          "t": "01:49",
+          "question": "Un fond conique de 2 mètres de rayon et 3 mètres de hauteur. Quel est son volume ?",
+          "choix": [
+            "12 pi mètres cubes",
+            "6 pi mètres cubes",
+            "4 pi mètres cubes"
+          ],
+          "reponse": 2,
+          "explication": "Pi fois 2 fois 2, 4 pi. Fois 3, 12 pi. Divisé par 3 : 4 pi mètres cubes. 12 pi, c'est l'oubli du divisé par 3."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "meteo-climat"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "volume_solide",
+          "microId": "volume_defi"
+        }
+      ]
+    },
+    {
+      "id": "4e-volume-defi-short",
+      "pas_avant": "2027-05-16",
+      "notionId": "volume_solide",
+      "microId": "volume_defi",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-volume-defi",
+      "fichier": "4e/maths/volume/14-volume-defi/eleveai-maths-4e-volume-defi-short.mp4",
+      "miniature": "4e/maths/volume/14-volume-defi/eleveai-maths-4e-volume-defi-short-miniature.png",
+      "titre": "La citerne et la sécheresse : combien de jours ? #maths #4e",
+      "accroche": "La citerne d'Elsa est pleine : 10 000 litres d'eau de pluie. La famille en utilise 400 litres par jour. Combien de jours avant qu'elle soit vide ?\n\n🥋 Ceinture blanche.\n👉 la même citerne, mais 250 litres par jour. Combien de jours ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #volume",
+      "tags": [
+        "défis sur les volumes",
+        "la citerne à fond conique",
+        "hydrologue",
+        "volume solide",
+        "ceinture bleue",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:11",
+          "question": "La famille en utilise 400 litres par jour. Combien de jours avant qu'elle soit vide ?",
+          "choix": [
+            "25 jours",
+            "40 jours",
+            "2,5 jours"
+          ],
+          "reponse": 0,
+          "explication": "10 000 divisé par 400, 25 jours."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "meteo-climat"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "volume_solide",
+          "microId": "volume_defi"
+        }
+      ]
+    },
+    {
+      "id": "4e-solides-reconnaitre",
+      "pas_avant": "2027-05-17",
+      "notionId": "vision_espace",
+      "microId": "vision_reconnaitre",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/solides/15-solides-reconnaitre/eleveai-maths-4e-solides-reconnaitre.mp4",
+      "miniature": "4e/maths/solides/15-solides-reconnaitre/eleveai-maths-4e-solides-reconnaitre.png",
+      "titre": "Modéliser un personnage de jeu : quels solides ? — Reconnaître les solides — Maths 4e",
+      "accroche": "Voici Yuna. Elle est animatrice 3D : elle fabrique les personnages d'un jeu. Elle ne part jamais d'une forme compliquée. Elle assemble des solides simples : des pavés, des cylindres, des cônes, des pyramides, une boule.\n\nDans cette vidéo :\n• les solides usuels\n• faces, arêtes, sommets\n• reconnaître\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : Yuna modélise une fusée : un cylindre surmonté d'un cône, posé sur trois pavés. Combien de solides en tout, et combien de disques y a-t-il dans cet assemblage ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/vision-espace\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/vision-espace\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_reconnaitre&display=simple\n\n📐 Épisode 15 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Reconnaître les solides"
+        ],
+        [
+          "00:06",
+          "Yuna, animatrice 3D"
+        ],
+        [
+          "00:23",
+          "Les solides usuels"
+        ],
+        [
+          "00:41",
+          "Faces, arêtes, sommets"
+        ],
+        [
+          "00:55",
+          "Reconnaître"
+        ],
+        [
+          "01:10",
+          "Question 1"
+        ],
+        [
+          "01:43",
+          "Le piège"
+        ],
+        [
+          "01:59",
+          "Question 2"
+        ],
+        [
+          "02:27",
+          "À toi de jouer"
+        ],
+        [
+          "02:45",
+          "Correction"
+        ],
+        [
+          "03:00",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "reconnaître les solides",
+        "modéliser un personnage de jeu",
+        "animatrice 3d",
+        "vision espace",
+        "ceinture jaune",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:10",
+          "question": "Un solide a deux bases triangulaires et trois faces rectangulaires. Qu'est-ce que c'est ?",
+          "choix": [
+            "une pyramide",
+            "un pavé droit",
+            "un prisme droit"
+          ],
+          "reponse": 2,
+          "explication": "Deux bases identiques et des faces latérales rectangulaires : c'est un prisme droit. La pyramide n'aurait qu'une seule base."
+        },
+        {
+          "t": "01:59",
+          "question": "Une pyramide a une base carrée. Combien a-t-elle de faces en tout ?",
+          "choix": [
+            "5",
+            "4",
+            "6"
+          ],
+          "reponse": 0,
+          "explication": "Le carré de la base, plus quatre triangles : cinq faces. 4, c'est oublier la base."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "cinema-series"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "volume_geometrie_espace",
+          "microId": "volume_solide_reconnaitre"
+        }
+      ]
+    },
+    {
+      "id": "4e-solides-reconnaitre-short",
+      "pas_avant": "2027-05-17",
+      "notionId": "vision_espace",
+      "microId": "vision_reconnaitre",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-solides-reconnaitre",
+      "fichier": "4e/maths/solides/15-solides-reconnaitre/eleveai-maths-4e-solides-reconnaitre-short.mp4",
+      "miniature": "4e/maths/solides/15-solides-reconnaitre/eleveai-maths-4e-solides-reconnaitre-short-miniature.png",
+      "titre": "Le chapeau du personnage : quel solide ? #maths #4e",
+      "accroche": "Yuna termine son personnage. Il lui manque un chapeau. Le chapeau a une base ronde, une pointe en haut, et aucune arête sur le côté. Quel solide est-ce ?\n\n🥋 Ceinture blanche.\n👉 deux disques, pas de pointe, aucune arête. Quel solide ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #solides",
+      "tags": [
+        "reconnaître les solides",
+        "modéliser un personnage de jeu",
+        "animatrice 3d",
+        "vision espace",
+        "ceinture jaune",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:12",
+          "question": "Le chapeau a une base ronde, une pointe en haut, et aucune arête sur le côté. Quel solide est-ce ?",
+          "choix": [
+            "une pyramide",
+            "un cône",
+            "un cylindre"
+          ],
+          "reponse": 1,
+          "explication": "Une base ronde et une pointe : c'est un cône. La pyramide aurait des arêtes, le cylindre deux disques et pas de pointe."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "cinema-series"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "volume_geometrie_espace",
+          "microId": "volume_solide_reconnaitre"
+        }
+      ]
+    },
+    {
+      "id": "4e-solides-vues",
+      "pas_avant": "2027-05-18",
+      "notionId": "vision_espace",
+      "microId": "vision_vues",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/solides/16-solides-vues/eleveai-maths-4e-solides-vues.mp4",
+      "miniature": "4e/maths/solides/16-solides-vues/eleveai-maths-4e-solides-vues.png",
+      "titre": "La maquette d'une maison : que voit-on de face ? — Les vues d'un solide — Maths 4e",
+      "accroche": "Voici Karim. Il est architecte. Avant de construire une maquette, il dessine trois vues : de face, de dessus, de côté. Un ouvrier qui n'a jamais vu la maison doit pouvoir la fabriquer avec ces trois dessins.\n\nDans cette vidéo :\n• une vue est une ombre\n• les trois vues\n• une vue ne suffit pas\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Karim pose un cylindre debout sur un pavé. Dessine ce qu'il voit de face, puis de dessus. Et dis combien de vues il faut pour que l'ouvrier ne se trompe pas.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/vision-espace\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/vision-espace\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_vues&display=simple\n\n📐 Épisode 16 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Les vues d'un solide"
+        ],
+        [
+          "00:06",
+          "Karim, architecte"
+        ],
+        [
+          "00:23",
+          "Une vue est une ombre"
+        ],
+        [
+          "00:38",
+          "Les trois vues"
+        ],
+        [
+          "00:52",
+          "Une vue ne suffit pas"
+        ],
+        [
+          "01:05",
+          "Question 1"
+        ],
+        [
+          "01:38",
+          "Le piège"
+        ],
+        [
+          "01:52",
+          "Question 2"
+        ],
+        [
+          "02:23",
+          "À toi de jouer"
+        ],
+        [
+          "02:40",
+          "Correction"
+        ],
+        [
+          "02:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "les vues d'un solide",
+        "la maquette d'une maison",
+        "architecte",
+        "vision espace",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:05",
+          "question": "De dessus, on voit un disque. De face, un rectangle. Quel solide ?",
+          "choix": [
+            "un cylindre",
+            "un cône",
+            "une boule"
+          ],
+          "reponse": 0,
+          "explication": "Un cylindre debout. Le cône donnerait un triangle de face. La boule donnerait un disque des deux côtés."
+        },
+        {
+          "t": "01:52",
+          "question": "De face, un triangle. De dessus, un disque. Quel solide ?",
+          "choix": [
+            "une pyramide",
+            "un prisme",
+            "un cône"
+          ],
+          "reponse": 2,
+          "explication": "Un cône. La pyramide donnerait un carré ou un triangle de dessus, jamais un disque."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "4e-solides-vues-short",
+      "pas_avant": "2027-05-18",
+      "notionId": "vision_espace",
+      "microId": "vision_vues",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-solides-vues",
+      "fichier": "4e/maths/solides/16-solides-vues/eleveai-maths-4e-solides-vues-short.mp4",
+      "miniature": "4e/maths/solides/16-solides-vues/eleveai-maths-4e-solides-vues-short-miniature.png",
+      "titre": "Un rectangle de face : pavé ou cylindre ? #maths #4e",
+      "accroche": "De face, Karim voit un rectangle. Rien d'autre. Il ajoute la vue de dessus : un disque. Alors, pavé ou cylindre ?\n\n🥋 Ceinture blanche.\n👉 de face un triangle, de dessus un carré. Quel solide ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_vues&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #solides",
+      "tags": [
+        "les vues d'un solide",
+        "la maquette d'une maison",
+        "architecte",
+        "vision espace",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:11",
+          "question": "Il ajoute la vue de dessus : un disque. Alors, pavé ou cylindre ?",
+          "choix": [
+            "un pavé",
+            "un cylindre",
+            "on ne peut pas savoir"
+          ],
+          "reponse": 1,
+          "explication": "Le disque vu de dessus ne peut venir que du cylindre. Un pavé donnerait un rectangle."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "4e-solides-perspective",
+      "pas_avant": "2027-05-19",
+      "notionId": "vision_espace",
+      "microId": "vision_representation",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/solides/17-solides-perspective/eleveai-maths-4e-solides-perspective.mp4",
+      "miniature": "4e/maths/solides/17-solides-perspective/eleveai-maths-4e-solides-perspective.png",
+      "titre": "Dessiner un cube sans mentir — La perspective cavalière — Maths 4e",
+      "accroche": "Voici Maya. Elle dessine des mangas. Dans sa case, il y a une chambre vue en volume. Elle utilise la même méthode qu'en mathématiques : la perspective cavalière.\n\nDans cette vidéo :\n• la face de devant\n• les fuyantes\n• les arêtes cachées\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Maya dessine un pavé de 4 centimètres sur 2, profond de 3 centimètres. Elle réduit les fuyantes de moitié. Quelle longueur fait la fuyante sur le papier, et combien d'arêtes sont en pointillés ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/vision-espace\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/vision-espace\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_representation&display=simple\n\n📐 Épisode 17 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "La perspective cavalière"
+        ],
+        [
+          "00:06",
+          "Maya, dessinatrice de BD"
+        ],
+        [
+          "00:20",
+          "La face de devant"
+        ],
+        [
+          "00:31",
+          "Les fuyantes"
+        ],
+        [
+          "00:45",
+          "Les arêtes cachées"
+        ],
+        [
+          "00:54",
+          "Question 1"
+        ],
+        [
+          "01:24",
+          "Le piège"
+        ],
+        [
+          "01:39",
+          "Question 2"
+        ],
+        [
+          "02:07",
+          "À toi de jouer"
+        ],
+        [
+          "02:27",
+          "Correction"
+        ],
+        [
+          "02:43",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "la perspective cavalière",
+        "une planche de manga",
+        "dessinatrice de bd",
+        "vision espace",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:54",
+          "question": "Dans un cube dessiné en perspective cavalière, la face de devant est dessinée…",
+          "choix": [
+            "plus petite",
+            "en losange",
+            "en vraie grandeur"
+          ],
+          "reponse": 2,
+          "explication": "La face de devant garde ses vraies mesures. Ce sont les fuyantes qui sont réduites."
+        },
+        {
+          "t": "01:39",
+          "question": "Les arêtes cachées se dessinent…",
+          "choix": [
+            "en gras",
+            "en pointillés",
+            "pas du tout"
+          ],
+          "reponse": 1,
+          "explication": "En pointillés. Si on ne les dessinait pas du tout, on ne saurait plus que le solide est fermé derrière."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "cinema-series"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "volume_geometrie_espace",
+          "microId": "volume_representation"
+        }
+      ]
+    },
+    {
+      "id": "4e-solides-perspective-short",
+      "pas_avant": "2027-05-19",
+      "notionId": "vision_espace",
+      "microId": "vision_representation",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-solides-perspective",
+      "fichier": "4e/maths/solides/17-solides-perspective/eleveai-maths-4e-solides-perspective-short.mp4",
+      "miniature": "4e/maths/solides/17-solides-perspective/eleveai-maths-4e-solides-perspective-short-miniature.png",
+      "titre": "Les fuyantes d'un cube : parallèles ou pas ? #maths #4e",
+      "accroche": "Maya dessine un cube : d'abord un carré bien droit, puis les fuyantes. Ses fuyantes doivent-elles être parallèles, perpendiculaires, ou en vraie longueur ?\n\n🥋 Ceinture blanche.\n👉 dans un cube en perspective cavalière, combien d'arêtes sont en pointillés ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_representation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #solides",
+      "tags": [
+        "la perspective cavalière",
+        "une planche de manga",
+        "dessinatrice de bd",
+        "vision espace",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:11",
+          "question": "Ses fuyantes doivent-elles être parallèles, perpendiculaires, ou en vraie longueur ?",
+          "choix": [
+            "parallèles entre elles",
+            "perpendiculaires au carré",
+            "de la vraie longueur"
+          ],
+          "reponse": 0,
+          "explication": "Toutes les fuyantes sont parallèles, de même longueur, et réduites. Sinon le cube se tord."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "cinema-series"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "volume_geometrie_espace",
+          "microId": "volume_representation"
+        }
+      ]
+    },
+    {
+      "id": "4e-patron-pyramide",
+      "pas_avant": "2027-05-20",
+      "notionId": "vision_espace",
+      "microId": "patron_pyramide",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/solides/18-patron-pyramide/eleveai-maths-4e-patron-pyramide.mp4",
+      "miniature": "4e/maths/solides/18-patron-pyramide/eleveai-maths-4e-patron-pyramide.png",
+      "titre": "Un dé à quatre faces en carton : quel patron ? — Le patron d'une pyramide — Maths 4e",
+      "accroche": "Voici Tiago. Il fabrique des jeux de société. Aujourd'hui, il découpe des dés dans du carton : des dés à quatre faces, qui sont des pyramides. Pour les découper, il lui faut le patron.\n\nDans cette vidéo :\n• déplier le solide\n• cinq morceaux\n• le dé à quatre faces\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Tiago découpe une pyramide à base carrée de 6 centimètres de côté. Chaque triangle a une hauteur de 5 centimètres. Quelle est l'aire totale de carton découpé ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/vision-espace\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/vision-espace\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=patron_pyramide&display=simple\n\n📐 Épisode 18 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le patron d'une pyramide"
+        ],
+        [
+          "00:06",
+          "Tiago, fabricant de jeux"
+        ],
+        [
+          "00:21",
+          "Déplier le solide"
+        ],
+        [
+          "00:37",
+          "Cinq morceaux"
+        ],
+        [
+          "00:45",
+          "Le dé à quatre faces"
+        ],
+        [
+          "00:54",
+          "Question 1"
+        ],
+        [
+          "01:22",
+          "Le piège"
+        ],
+        [
+          "01:36",
+          "Question 2"
+        ],
+        [
+          "02:11",
+          "À toi de jouer"
+        ],
+        [
+          "02:29",
+          "Correction"
+        ],
+        [
+          "02:52",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "le patron d'une pyramide",
+        "le dé à 4 faces d'un jeu",
+        "fabricant de jeux",
+        "vision espace",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:54",
+          "question": "Le patron d'une pyramide à base carrée, combien de morceaux ?",
+          "choix": [
+            "4",
+            "5",
+            "6"
+          ],
+          "reponse": 1,
+          "explication": "Cinq : le carré de la base et quatre triangles. 4, c'est oublier la base. 6, ce serait un cube."
+        },
+        {
+          "t": "01:36",
+          "question": "Le dé à quatre faces est une pyramide à base triangulaire. Son patron ?",
+          "choix": [
+            "4 triangles",
+            "1 carré et 4 triangles",
+            "3 triangles"
+          ],
+          "reponse": 0,
+          "explication": "Quatre triangles : la base en est un, et les trois faces aussi. 3 triangles, c'est oublier la base."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-patron-pyramide-short",
+      "pas_avant": "2027-05-20",
+      "notionId": "vision_espace",
+      "microId": "patron_pyramide",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-patron-pyramide",
+      "fichier": "4e/maths/solides/18-patron-pyramide/eleveai-maths-4e-patron-pyramide-short.mp4",
+      "miniature": "4e/maths/solides/18-patron-pyramide/eleveai-maths-4e-patron-pyramide-short-miniature.png",
+      "titre": "Trois patrons : lequel se referme en pyramide ? #maths #4e",
+      "accroche": "Tiago veut une pyramide à base carrée. Trois patrons sont posés sur sa table. Lequel se referme vraiment en pyramide ?\n\n🥋 Ceinture blanche.\n👉 combien de triangles dans le patron d'un dé à quatre faces ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=patron_pyramide&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #solides",
+      "tags": [
+        "le patron d'une pyramide",
+        "le dé à 4 faces d'un jeu",
+        "fabricant de jeux",
+        "vision espace",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "Lequel se referme vraiment en pyramide ?",
+          "choix": [
+            "5 carrés",
+            "4 triangles",
+            "1 carré et 4 triangles"
+          ],
+          "reponse": 2,
+          "explication": "Un carré pour la base, quatre triangles pour les côtés. 4 triangles seuls donneraient une pyramide à base triangulaire."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-section-comprendre",
+      "pas_avant": "2027-05-21",
+      "notionId": "vision_espace",
+      "microId": "vision_section",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/solides/19-section-comprendre/eleveai-maths-4e-section-comprendre.mp4",
+      "miniature": "4e/maths/solides/19-section-comprendre/eleveai-maths-4e-section-comprendre.png",
+      "titre": "La force d'un muscle se lit sur sa section — La section plane — Maths 4e",
+      "accroche": "Voici Naïma. Elle est manipulatrice en radiologie : elle règle le scanner. Le scanner ne coupe rien pour de vrai : il fabrique des images de tranches. Chaque tranche est une section.\n\nDans cette vidéo :\n• couper par un plan\n• le cylindre\n• à quoi ça sert\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Naïma scanne une cuisse. La section du muscle est un disque de 4 centimètres de rayon. Chez un sportif, le rayon est de 6 centimètres. De combien l'aire de la section est-elle multipliée ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/vision-espace\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/vision-espace\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_section&display=simple\n\n📐 Épisode 19 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "La section plane"
+        ],
+        [
+          "00:05",
+          "Naïma, manipulatrice en radiologie"
+        ],
+        [
+          "00:20",
+          "Couper par un plan"
+        ],
+        [
+          "00:30",
+          "Le cylindre"
+        ],
+        [
+          "00:44",
+          "À quoi ça sert"
+        ],
+        [
+          "00:57",
+          "Question 1"
+        ],
+        [
+          "01:26",
+          "Le piège"
+        ],
+        [
+          "01:42",
+          "Question 2"
+        ],
+        [
+          "02:10",
+          "À toi de jouer"
+        ],
+        [
+          "02:31",
+          "Correction"
+        ],
+        [
+          "02:55",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "la section plane",
+        "la section d'une cuisse : la force du muscle",
+        "manipulatrice en radiologie",
+        "vision espace",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:57",
+          "question": "On coupe un cylindre parallèlement à sa base. La section est…",
+          "choix": [
+            "un disque",
+            "un rectangle",
+            "un triangle"
+          ],
+          "reponse": 0,
+          "explication": "Une coupe parallèle à la base d'un cylindre donne un disque, de la même taille que la base."
+        },
+        {
+          "t": "01:42",
+          "question": "On coupe un pavé droit parallèlement à une face. La section est…",
+          "choix": [
+            "un triangle",
+            "un rectangle",
+            "un disque"
+          ],
+          "reponse": 1,
+          "explication": "Un rectangle, identique à la face à laquelle la coupe est parallèle."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "technologie-ia"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "volume_geometrie_espace",
+          "microId": "volume_section"
+        },
+        {
+          "classe": "3e",
+          "notionId": "sections_solides",
+          "microId": "section_reconnaitre"
+        }
+      ]
+    },
+    {
+      "id": "4e-section-comprendre-short",
+      "pas_avant": "2027-05-21",
+      "notionId": "vision_espace",
+      "microId": "vision_section",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-section-comprendre",
+      "fichier": "4e/maths/solides/19-section-comprendre/eleveai-maths-4e-section-comprendre-short.mp4",
+      "miniature": "4e/maths/solides/19-section-comprendre/eleveai-maths-4e-section-comprendre-short-miniature.png",
+      "titre": "Un muscle deux fois plus large : combien de fois plus fort ? #maths #4e",
+      "accroche": "Le scanner coupe un bras en travers. La section du muscle est un disque. Chez quelqu'un dont le muscle est deux fois plus large, la section est combien de fois plus grande ?\n\n🥋 Ceinture blanche.\n👉 si le rayon est multiplié par 3, par combien l'aire est-elle multipliée ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_section&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #solides",
+      "tags": [
+        "la section plane",
+        "la section d'une cuisse : la force du muscle",
+        "manipulatrice en radiologie",
+        "vision espace",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:12",
+          "question": "Chez quelqu'un dont le muscle est deux fois plus large, la section est combien de fois plus grande ?",
+          "choix": [
+            "deux fois plus grande",
+            "la même",
+            "quatre fois plus grande"
+          ],
+          "reponse": 2,
+          "explication": "Le rayon double, mais l'aire du disque dépend du rayon multiplié par lui-même : deux fois deux, quatre."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "technologie-ia"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "volume_geometrie_espace",
+          "microId": "volume_section"
+        },
+        {
+          "classe": "3e",
+          "notionId": "sections_solides",
+          "microId": "section_reconnaitre"
+        }
+      ]
+    },
+    {
+      "id": "4e-solides-defi",
+      "pas_avant": "2027-05-22",
+      "notionId": "vision_espace",
+      "microId": "vision_defi",
+      "classe": "4e",
+      "ceinture": "bleue",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/solides/20-solides-defi/eleveai-maths-4e-solides-defi.mp4",
+      "miniature": "4e/maths/solides/20-solides-defi/eleveai-maths-4e-solides-defi.png",
+      "titre": "Relever un bâtiment au drone : quel volume ? — Défis sur les solides — Maths 4e",
+      "accroche": "Voici Enzo. Il pilote un drone qui relève des bâtiments. Le drone prend des photos de dessus et de côté. Ensuite, Enzo remplace le bâtiment par des solides simples : c'est ce qu'on appelle modéliser.\n\nDans cette vidéo :\n• modéliser\n• lire les vues\n• un solide à la fois\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : Enzo doit chiffrer le chauffage du bâtiment entier : le corps, 1 200 mètres cubes, et le toit, 200 mètres cubes. Le chauffagiste compte 30 watts par mètre cube, mais le toit n'est pas chauffé. Quelle puissance faut-il ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/vision-espace\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/vision-espace\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_defi&display=simple\n\n📐 Épisode 20 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Défis sur les solides"
+        ],
+        [
+          "00:06",
+          "Enzo, pilote de drone"
+        ],
+        [
+          "00:22",
+          "Modéliser"
+        ],
+        [
+          "00:36",
+          "Lire les vues"
+        ],
+        [
+          "00:48",
+          "Un solide à la fois"
+        ],
+        [
+          "00:56",
+          "Question 1"
+        ],
+        [
+          "01:34",
+          "Le piège"
+        ],
+        [
+          "01:47",
+          "Question 2"
+        ],
+        [
+          "02:22",
+          "À toi de jouer"
+        ],
+        [
+          "02:45",
+          "Correction"
+        ],
+        [
+          "03:02",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "défis sur les solides",
+        "le relevé d'un bâtiment par drone",
+        "pilote de drone",
+        "vision espace",
+        "ceinture bleue",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:56",
+          "question": "Le corps du bâtiment mesure 20 mètres sur 10, et 6 mètres de haut. Quel est son volume ?",
+          "choix": [
+            "360 mètres cubes",
+            "1 200 mètres cubes",
+            "120 mètres cubes"
+          ],
+          "reponse": 1,
+          "explication": "20 fois 10, 200 mètres carrés de base. 200 fois 6, 1 200 mètres cubes. 360, c'est une addition des trois mesures multipliée."
+        },
+        {
+          "t": "01:47",
+          "question": "Le toit est une pyramide de base 200 mètres carrés et de hauteur 3 mètres. Quel est son volume ?",
+          "choix": [
+            "600 mètres cubes",
+            "300 mètres cubes",
+            "200 mètres cubes"
+          ],
+          "reponse": 2,
+          "explication": "200 fois 3, 600. Divisé par 3 : 200 mètres cubes. 600, c'est l'oubli du divisé par 3."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "transports"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "volume_geometrie_espace",
+          "microId": "volume_geometrie_espace_defi"
+        }
+      ]
+    },
+    {
+      "id": "4e-solides-defi-short",
+      "pas_avant": "2027-05-22",
+      "notionId": "vision_espace",
+      "microId": "vision_defi",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-solides-defi",
+      "fichier": "4e/maths/solides/20-solides-defi/eleveai-maths-4e-solides-defi-short.mp4",
+      "miniature": "4e/maths/solides/20-solides-defi/eleveai-maths-4e-solides-defi-short-miniature.png",
+      "titre": "Ce que voit le drone : quel solide pour le toit ? #maths #4e",
+      "accroche": "Le drone d'Enzo survole un bâtiment. De dessus : un rectangle. De face : un rectangle surmonté d'un triangle. Quel solide est le toit ?\n\n🥋 Ceinture blanche.\n👉 de dessus un disque, de face un triangle. Quel toit ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=vision_espace&microId=vision_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #solides",
+      "tags": [
+        "défis sur les solides",
+        "le relevé d'un bâtiment par drone",
+        "pilote de drone",
+        "vision espace",
+        "ceinture bleue",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:12",
+          "question": "De face : un rectangle surmonté d'un triangle. Quel solide est le toit ?",
+          "choix": [
+            "une pyramide",
+            "un cylindre",
+            "une boule"
+          ],
+          "reponse": 0,
+          "explication": "Un triangle de face et un rectangle de dessus : c'est une pyramide posée sur le pavé."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "transports"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "volume_geometrie_espace",
+          "microId": "volume_geometrie_espace_defi"
+        }
+      ]
+    },
+    {
+      "id": "4e-perimetre-polygones",
+      "pas_avant": "2027-05-23",
+      "notionId": "aire_perimetre",
+      "microId": "aire_perimetre_comprendre",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/perimetre/21-perimetre-polygones/eleveai-maths-4e-perimetre-polygones.mp4",
+      "miniature": "4e/maths/perimetre/21-perimetre-polygones/eleveai-maths-4e-perimetre-polygones.png",
+      "titre": "Borner un skatepark : combien de mètres de barrière ? — Le périmètre — Maths 4e",
+      "accroche": "Voici Nour. Elle est géomètre-topographe : elle mesure les terrains. La commune veut un skatepark. Avant les travaux, Nour doit borner le terrain et dire combien de mètres de barrière il faudra.\n\nDans cette vidéo :\n• la longueur du tour\n• le rectangle\n• le carré et le triangle\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : Le skatepark est un rectangle de 20 mètres sur 12. Nour pose une barrière tout autour, sauf une entrée de 3 mètres. La barrière coûte 25 euros le mètre. Combien va-t-elle coûter ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/aire-perimetre\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/aire-perimetre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_comprendre&display=simple\n\n📐 Épisode 21 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le périmètre"
+        ],
+        [
+          "00:05",
+          "Nour, géomètre-topographe"
+        ],
+        [
+          "00:20",
+          "La longueur du tour"
+        ],
+        [
+          "00:33",
+          "Le rectangle"
+        ],
+        [
+          "00:49",
+          "Le carré et le triangle"
+        ],
+        [
+          "01:01",
+          "Question 1"
+        ],
+        [
+          "01:37",
+          "Le piège"
+        ],
+        [
+          "01:53",
+          "Question 2"
+        ],
+        [
+          "02:26",
+          "À toi de jouer"
+        ],
+        [
+          "02:47",
+          "Correction"
+        ],
+        [
+          "03:06",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "le périmètre",
+        "borner un skatepark",
+        "géomètre-topographe",
+        "aire perimetre",
+        "ceinture jaune",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:01",
+          "question": "Un rectangle mesure 12 mètres sur 5. Quel est son périmètre ?",
+          "choix": [
+            "34 mètres",
+            "60 mètres",
+            "17 mètres"
+          ],
+          "reponse": 0,
+          "explication": "12 plus 5, 17, fois 2, 34 mètres. 60, c'est l'aire. 17, c'est la longueur plus la largeur, le tour n'est pas fini."
+        },
+        {
+          "t": "01:53",
+          "question": "Un carré a 7 mètres de côté. Quel est son périmètre ?",
+          "choix": [
+            "49 mètres",
+            "28 mètres",
+            "14 mètres"
+          ],
+          "reponse": 1,
+          "explication": "7 fois 4, 28 mètres. 49, c'est 7 fois 7 : c'est l'aire. 14, c'est seulement deux côtés."
+        }
+      ],
+      "centres": [
+        "sport",
+        "technologie-ia"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_comprendre"
+        },
+        {
+          "classe": "3e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_polygone"
+        },
+        {
+          "classe": "4e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_rectangle"
+        },
+        {
+          "classe": "4e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_carre"
+        },
+        {
+          "classe": "4e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_triangle"
+        }
+      ]
+    },
+    {
+      "id": "4e-perimetre-polygones-short",
+      "pas_avant": "2027-05-23",
+      "notionId": "aire_perimetre",
+      "microId": "aire_perimetre_comprendre",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-perimetre-polygones",
+      "fichier": "4e/maths/perimetre/21-perimetre-polygones/eleveai-maths-4e-perimetre-polygones-short.mp4",
+      "miniature": "4e/maths/perimetre/21-perimetre-polygones/eleveai-maths-4e-perimetre-polygones-short-miniature.png",
+      "titre": "Une rampe triangulaire : combien de mètres de bordure ? #maths #4e",
+      "accroche": "Au coin du skatepark, une rampe triangulaire : 8 mètres, 6 mètres, 10 mètres. Nour doit poser une bordure tout autour de ce triangle. Combien de mètres ?\n\n🥋 Ceinture blanche.\n👉 un triangle de 5 mètres, 12 mètres et 13 mètres. Son périmètre ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_comprendre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #perimetre",
+      "tags": [
+        "le périmètre",
+        "borner un skatepark",
+        "géomètre-topographe",
+        "aire perimetre",
+        "ceinture jaune",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Nour doit poser une bordure tout autour de ce triangle. Combien de mètres ?",
+          "choix": [
+            "48 mètres",
+            "14 mètres",
+            "24 mètres"
+          ],
+          "reponse": 2,
+          "explication": "8 plus 6 plus 10, 24 mètres. 48, c'est 8 fois 6 : ce serait une aire. 14, c'est deux côtés oubliés en route."
+        }
+      ],
+      "centres": [
+        "sport",
+        "technologie-ia"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_comprendre"
+        },
+        {
+          "classe": "3e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_polygone"
+        },
+        {
+          "classe": "4e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_rectangle"
+        },
+        {
+          "classe": "4e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_carre"
+        },
+        {
+          "classe": "4e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_triangle"
+        }
+      ]
+    },
+    {
+      "id": "4e-perimetre-cercle",
+      "pas_avant": "2027-05-24",
+      "notionId": "aire_perimetre",
+      "microId": "aire_perimetre_figure",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/perimetre/22-perimetre-cercle/eleveai-maths-4e-perimetre-cercle.mp4",
+      "miniature": "4e/maths/perimetre/22-perimetre-cercle/eleveai-maths-4e-perimetre-cercle.png",
+      "titre": "La margelle d'une piscine ronde : combien de mètres ? — La longueur d'un cercle — Maths 4e",
+      "accroche": "Voici Marc. Il installe des piscines. Autour d'un bassin rond, il pose la margelle : la bordure sur laquelle on s'assoit. Elle se vend au mètre. Combien de mètres faut-il commander ?\n\nDans cette vidéo :\n• la ficelle et π\n• la formule\n• le bassin de marc\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Le bassin fait 6 mètres de diamètre. Marc pose une barrière de sécurité à 1 mètre du bord, tout autour. La barrière coûte 40 euros le mètre. Combien coûte-t-elle ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/aire-perimetre\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/aire-perimetre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_figure&display=simple\n\n📐 Épisode 22 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "La longueur d'un cercle"
+        ],
+        [
+          "00:05",
+          "Marc, pisciniste"
+        ],
+        [
+          "00:21",
+          "La ficelle et π"
+        ],
+        [
+          "00:38",
+          "La formule"
+        ],
+        [
+          "00:48",
+          "Le bassin de Marc"
+        ],
+        [
+          "01:01",
+          "Question 1"
+        ],
+        [
+          "01:32",
+          "Le piège"
+        ],
+        [
+          "01:48",
+          "Question 2"
+        ],
+        [
+          "02:18",
+          "À toi de jouer"
+        ],
+        [
+          "02:38",
+          "Correction"
+        ],
+        [
+          "03:01",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "la longueur d'un cercle",
+        "la margelle d'une piscine ronde",
+        "pisciniste",
+        "aire perimetre",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:01",
+          "question": "Un cercle a un rayon de 3 mètres. Quelle est sa longueur ?",
+          "choix": [
+            "3 pi mètres",
+            "6 pi mètres",
+            "9 pi mètres"
+          ],
+          "reponse": 1,
+          "explication": "2 fois pi fois 3, 6 pi mètres. 9 pi, c'est pi fois 3 fois 3 : c'est l'aire du disque, pas le tour."
+        },
+        {
+          "t": "01:48",
+          "question": "Un bassin a 5 mètres de diamètre. Quelle est sa longueur ?",
+          "choix": [
+            "10 pi mètres",
+            "25 pi mètres",
+            "5 pi mètres"
+          ],
+          "reponse": 2,
+          "explication": "Pi fois 5, 5 pi mètres. 10 pi, c'est avoir pris le diamètre pour un rayon."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "argent-budget"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_cercle"
+        }
+      ]
+    },
+    {
+      "id": "4e-perimetre-cercle-short",
+      "pas_avant": "2027-05-24",
+      "notionId": "aire_perimetre",
+      "microId": "aire_perimetre_figure",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-perimetre-cercle",
+      "fichier": "4e/maths/perimetre/22-perimetre-cercle/eleveai-maths-4e-perimetre-cercle-short.mp4",
+      "miniature": "4e/maths/perimetre/22-perimetre-cercle/eleveai-maths-4e-perimetre-cercle-short-miniature.png",
+      "titre": "Un bassin de 4 m de large fait 12,6 m de tour #maths #4e",
+      "accroche": "Le bassin de Marc fait 4 mètres de diamètre. Sa margelle coûte 40 euros le mètre. Le tour du bassin mesure environ 12,6 mètres. Combien va coûter la margelle ?\n\n🥋 Ceinture blanche.\n👉 un bassin de 6 mètres de diamètre. Quelle est la longueur de sa margelle ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_figure&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #perimetre",
+      "tags": [
+        "la longueur d'un cercle",
+        "la margelle d'une piscine ronde",
+        "pisciniste",
+        "aire perimetre",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "Le tour du bassin mesure environ 12,6 mètres. Combien va coûter la margelle ?",
+          "choix": [
+            "environ 504 euros",
+            "environ 160 euros",
+            "environ 50 euros"
+          ],
+          "reponse": 0,
+          "explication": "12,6 fois 40, environ 504 euros. 160, c'est avoir compté 4 mètres de tour au lieu de 12,6."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "argent-budget"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_cercle"
+        }
+      ]
+    },
+    {
+      "id": "4e-perimetre-figure-composee",
+      "pas_avant": "2027-05-25",
+      "notionId": "aire_perimetre",
+      "microId": "aire_perimetre_figure",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/perimetre/23-perimetre-figure-composee/eleveai-maths-4e-perimetre-figure-composee.mp4",
+      "miniature": "4e/maths/perimetre/23-perimetre-figure-composee/eleveai-maths-4e-perimetre-figure-composee.png",
+      "titre": "La bordure d'une piste de BMX : droites + virage — Le périmètre d'une figure composée — Maths 4e",
+      "accroche": "Voici Zahia. Elle dessine des pistes de BMX. Sa piste a trois lignes droites et un virage arrondi. Il faut une bordure tout autour. Combien de mètres ?\n\nDans cette vidéo :\n• faire le tour\n• le demi-cercle\n• on additionne\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : La piste de Zahia : trois côtés droits de 20 mètres, et un demi-cercle de 20 mètres de diamètre pour fermer. La bordure coûte 18 euros le mètre. Quel est le prix ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/aire-perimetre\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/aire-perimetre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_figure&display=simple\n\n📐 Épisode 23 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le périmètre d'une figure composée"
+        ],
+        [
+          "00:06",
+          "Zahia, conceptrice de pistes"
+        ],
+        [
+          "00:20",
+          "Faire le tour"
+        ],
+        [
+          "00:32",
+          "Le demi-cercle"
+        ],
+        [
+          "00:49",
+          "On additionne"
+        ],
+        [
+          "01:03",
+          "Question 1"
+        ],
+        [
+          "01:34",
+          "Le piège"
+        ],
+        [
+          "01:48",
+          "Question 2"
+        ],
+        [
+          "02:18",
+          "À toi de jouer"
+        ],
+        [
+          "02:37",
+          "Correction"
+        ],
+        [
+          "03:04",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "le périmètre d'une figure composée",
+        "une piste de bmx avec un virage",
+        "conceptrice de pistes",
+        "aire perimetre",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:03",
+          "question": "Un demi-cercle a 10 mètres de diamètre. Quelle est la longueur de son arc ?",
+          "choix": [
+            "10 pi mètres",
+            "100 pi mètres",
+            "5 pi mètres"
+          ],
+          "reponse": 2,
+          "explication": "Pi fois 10, divisé par 2 : 5 pi mètres. 10 pi, c'est le cercle entier."
+        },
+        {
+          "t": "01:48",
+          "question": "Dans une figure composée, le trait intérieur qui sépare les deux morceaux…",
+          "choix": [
+            "ne compte pas",
+            "compte une fois",
+            "compte deux fois"
+          ],
+          "reponse": 0,
+          "explication": "Il ne compte pas. Le périmètre, c'est le tour : seul ce qui est sur le bord compte."
+        }
+      ],
+      "centres": [
+        "sport",
+        "art-design"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_figure_composee"
+        }
+      ]
+    },
+    {
+      "id": "4e-perimetre-figure-composee-short",
+      "pas_avant": "2027-05-25",
+      "notionId": "aire_perimetre",
+      "microId": "aire_perimetre_figure",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-perimetre-figure-composee",
+      "fichier": "4e/maths/perimetre/23-perimetre-figure-composee/eleveai-maths-4e-perimetre-figure-composee-short.mp4",
+      "miniature": "4e/maths/perimetre/23-perimetre-figure-composee/eleveai-maths-4e-perimetre-figure-composee-short-miniature.png",
+      "titre": "Le virage compte 31 m, pas 20 #maths #4e",
+      "accroche": "La piste de Zahia : trois côtés droits de 20 mètres, et un virage en demi-cercle de 20 mètres de diamètre. Combien mesure le tour complet de la piste ?\n\n🥋 Ceinture blanche.\n👉 un demi-cercle de 14 mètres de diamètre. Quelle est la longueur de son arc ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_figure&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #perimetre",
+      "tags": [
+        "le périmètre d'une figure composée",
+        "une piste de bmx avec un virage",
+        "conceptrice de pistes",
+        "aire perimetre",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:11",
+          "question": "Combien mesure le tour complet de la piste ?",
+          "choix": [
+            "80 mètres",
+            "environ 91,4 mètres",
+            "environ 123 mètres"
+          ],
+          "reponse": 1,
+          "explication": "Les droites : 60 mètres. Le demi-cercle : pi fois 20, divisé par 2, environ 31,4. En tout, environ 91,4 mètres."
+        }
+      ],
+      "centres": [
+        "sport",
+        "art-design"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_figure_composee"
+        }
+      ]
+    },
+    {
+      "id": "4e-perimetre-probleme",
+      "pas_avant": "2027-05-26",
+      "notionId": "aire_perimetre",
+      "microId": "aire_perimetre_probleme",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/perimetre/24-perimetre-probleme/eleveai-maths-4e-perimetre-probleme.mp4",
+      "miniature": "4e/maths/perimetre/24-perimetre-probleme/eleveai-maths-4e-perimetre-probleme.png",
+      "titre": "Pourquoi un tour de piste fait 400 m — Un problème de périmètre — Maths 4e",
+      "accroche": "Voici Sonia. Elle entraîne des coureurs. Sur le stade, un tour de piste fait 400 mètres, dans le couloir du bord intérieur. Mais d'où vient ce nombre ?\n\nDans cette vidéo :\n• deux droites, deux virages\n• les virages font un cercle\n• le total\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Sonia fait courir 12 tours. Un coureur du couloir extérieur tourne 3 mètres plus loin du centre : son virage a donc 3 mètres de rayon en plus. Combien de mètres parcourt-il en plus sur les 12 tours ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/aire-perimetre\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/aire-perimetre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_probleme&display=simple\n\n📐 Épisode 24 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Un problème de périmètre"
+        ],
+        [
+          "00:07",
+          "Sonia, entraîneuse d'athlétisme"
+        ],
+        [
+          "00:20",
+          "Deux droites, deux virages"
+        ],
+        [
+          "00:33",
+          "Les virages font un cercle"
+        ],
+        [
+          "00:47",
+          "Le total"
+        ],
+        [
+          "01:03",
+          "Question 1"
+        ],
+        [
+          "01:41",
+          "Le piège"
+        ],
+        [
+          "01:57",
+          "Question 2"
+        ],
+        [
+          "02:29",
+          "À toi de jouer"
+        ],
+        [
+          "02:50",
+          "Correction"
+        ],
+        [
+          "03:15",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "un problème de périmètre",
+        "le tour de piste, 400 m",
+        "entraîneuse d'athlétisme",
+        "aire perimetre",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:03",
+          "question": "Deux demi-cercles de rayon 36 mètres, mis bout à bout, font un cercle. Quelle est sa longueur ?",
+          "choix": [
+            "72 pi mètres",
+            "36 pi mètres",
+            "1 296 pi mètres"
+          ],
+          "reponse": 0,
+          "explication": "2 fois pi fois 36, 72 pi mètres. 1 296 pi, c'est 36 fois 36 fois pi : c'est une aire."
+        },
+        {
+          "t": "01:57",
+          "question": "72 pi mètres, c'est environ…",
+          "choix": [
+            "113 mètres",
+            "452 mètres",
+            "226 mètres"
+          ],
+          "reponse": 2,
+          "explication": "72 fois 3,14, environ 226 mètres. 113, c'est la moitié : un seul virage."
+        }
+      ],
+      "centres": [
+        "sport",
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "4e-perimetre-probleme-short",
+      "pas_avant": "2027-05-26",
+      "notionId": "aire_perimetre",
+      "microId": "aire_perimetre_probleme",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-perimetre-probleme",
+      "fichier": "4e/maths/perimetre/24-perimetre-probleme/eleveai-maths-4e-perimetre-probleme-short.mp4",
+      "miniature": "4e/maths/perimetre/24-perimetre-probleme/eleveai-maths-4e-perimetre-probleme-short-miniature.png",
+      "titre": "Cinq tours de piste : ça fait combien de kilomètres ? #maths #4e",
+      "accroche": "Sonia fait courir cinq tours de piste. Un tour, c'est 400 mètres. Ça fait combien de kilomètres ?\n\n🥋 Ceinture blanche.\n👉 combien de tours pour courir 10 kilomètres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #perimetre",
+      "tags": [
+        "un problème de périmètre",
+        "le tour de piste, 400 m",
+        "entraîneuse d'athlétisme",
+        "aire perimetre",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:09",
+          "question": "Ça fait combien de kilomètres ?",
+          "choix": [
+            "20 kilomètres",
+            "2 kilomètres",
+            "200 mètres"
+          ],
+          "reponse": 1,
+          "explication": "400 fois 5, 2 000 mètres. Et 2 000 mètres, c'est 2 kilomètres."
+        }
+      ],
+      "centres": [
+        "sport",
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "4e-perimetre-defi",
+      "pas_avant": "2027-05-27",
+      "notionId": "aire_perimetre",
+      "microId": "aire_perimetre_defi",
+      "classe": "4e",
+      "ceinture": "bleue",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/perimetre/25-perimetre-defi/eleveai-maths-4e-perimetre-defi.mp4",
+      "miniature": "4e/maths/perimetre/25-perimetre-defi/eleveai-maths-4e-perimetre-defi.png",
+      "titre": "100 m de grillage : enclos carré ou rond ? — Défis sur les périmètres — Maths 4e",
+      "accroche": "Voici Thierry. Il est éleveur. Il veut agrandir l'enclos de ses chèvres. Le grillage coûte cher : il doit calculer juste, sans en commander trop ni trop peu.\n\nDans cette vidéo :\n• le demi-disque\n• le tour complet\n• même aire, autre tour\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : Thierry a 100 mètres de grillage. Il hésite entre un enclos carré et un enclos rond, en utilisant tout le grillage. Lequel donne le plus de place à ses chèvres ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/aire-perimetre\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/aire-perimetre\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_defi&display=simple\n\n📐 Épisode 25 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Défis sur les périmètres"
+        ],
+        [
+          "00:06",
+          "Thierry, éleveur"
+        ],
+        [
+          "00:19",
+          "Le demi-disque"
+        ],
+        [
+          "00:32",
+          "Le tour complet"
+        ],
+        [
+          "00:50",
+          "Même aire, autre tour"
+        ],
+        [
+          "01:05",
+          "Question 1"
+        ],
+        [
+          "01:35",
+          "Le piège"
+        ],
+        [
+          "01:47",
+          "Question 2"
+        ],
+        [
+          "02:19",
+          "À toi de jouer"
+        ],
+        [
+          "02:37",
+          "Correction"
+        ],
+        [
+          "03:08",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "défis sur les périmètres",
+        "le grillage d'un enclos rond",
+        "éleveur",
+        "aire perimetre",
+        "ceinture bleue",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:05",
+          "question": "Le tour d'un demi-disque de 10 mètres de rayon, c'est…",
+          "choix": [
+            "10 pi mètres",
+            "20 pi mètres",
+            "10 pi plus 20 mètres"
+          ],
+          "reponse": 2,
+          "explication": "L'arc fait 10 pi mètres, et le diamètre de 20 mètres ferme la figure : il est sur le contour, il compte."
+        },
+        {
+          "t": "01:47",
+          "question": "Un enclos carré a une aire de 400 mètres carrés. Quel est son côté ?",
+          "choix": [
+            "100 mètres",
+            "20 mètres",
+            "40 mètres"
+          ],
+          "reponse": 1,
+          "explication": "20 fois 20, 400 mètres carrés. 100, c'est 400 divisé par 4 : ce serait le quart du tour, pas le côté."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "nature-ecologie"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_defi"
+        }
+      ]
+    },
+    {
+      "id": "4e-perimetre-defi-short",
+      "pas_avant": "2027-05-27",
+      "notionId": "aire_perimetre",
+      "microId": "aire_perimetre_defi",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-perimetre-defi",
+      "fichier": "4e/maths/perimetre/25-perimetre-defi/eleveai-maths-4e-perimetre-defi-short.mp4",
+      "miniature": "4e/maths/perimetre/25-perimetre-defi/eleveai-maths-4e-perimetre-defi-short-miniature.png",
+      "titre": "Rayon doublé : le grillage est multiplié par combien ? #maths #4e",
+      "accroche": "Thierry double le rayon de son enclos rond. Le grillage qui en fait le tour est multiplié par combien ?\n\n🥋 Ceinture blanche.\n👉 si le rayon est multiplié par 3, par combien le grillage est-il multiplié ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_perimetre&microId=aire_perimetre_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #perimetre",
+      "tags": [
+        "défis sur les périmètres",
+        "le grillage d'un enclos rond",
+        "éleveur",
+        "aire perimetre",
+        "ceinture bleue",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:08",
+          "question": "Le grillage qui en fait le tour est multiplié par combien ?",
+          "choix": [
+            "2",
+            "4",
+            "3"
+          ],
+          "reponse": 0,
+          "explication": "Le tour vaut 2 fois pi fois le rayon : si le rayon double, le tour double. C'est l'aire qui serait multipliée par 4."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "nature-ecologie"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "aire_perimetre",
+          "microId": "aire_perimetre_defi"
+        }
+      ]
+    },
+    {
+      "id": "4e-aire-rectangle-carre",
+      "pas_avant": "2027-05-28",
+      "notionId": "aire_surface",
+      "microId": "aire_rectangle",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/aire/26-aire-rectangle-carre/eleveai-maths-4e-aire-rectangle-carre.mp4",
+      "miniature": "4e/maths/aire/26-aire-rectangle-carre/eleveai-maths-4e-aire-rectangle-carre.png",
+      "titre": "Un film de protection sur un écran : combien de cm² ? — L'aire d'un rectangle et d'un carré — Maths 4e",
+      "accroche": "Voici Noé. Il répare des smartphones. Quand un écran est cassé, il découpe un film de protection à la bonne taille. Le film se vend au centimètre carré : il doit calculer la surface de l'écran.\n\nDans cette vidéo :\n• compter les carrés\n• la formule\n• le carré\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : Noé doit protéger deux écrans de 15 centimètres sur 7. Le film se vend par feuilles de 150 centimètres carrés, à 12 euros la feuille. Combien de feuilles, et combien ça coûte ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/aire-surface\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/aire-surface\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_rectangle&display=simple\n\n📐 Épisode 26 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "L'aire d'un rectangle et d'un carré"
+        ],
+        [
+          "00:06",
+          "Noé, réparateur de smartphones"
+        ],
+        [
+          "00:22",
+          "Compter les carrés"
+        ],
+        [
+          "00:39",
+          "La formule"
+        ],
+        [
+          "00:51",
+          "Le carré"
+        ],
+        [
+          "01:04",
+          "Question 1"
+        ],
+        [
+          "01:40",
+          "Le piège"
+        ],
+        [
+          "01:52",
+          "Question 2"
+        ],
+        [
+          "02:25",
+          "À toi de jouer"
+        ],
+        [
+          "02:46",
+          "Correction"
+        ],
+        [
+          "03:07",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "l'aire d'un rectangle et d'un carré",
+        "l'écran d'un smartphone",
+        "réparateur de smartphones",
+        "aire surface",
+        "ceinture jaune",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:04",
+          "question": "Un écran mesure 15 centimètres sur 7. Quelle est son aire ?",
+          "choix": [
+            "44 centimètres carrés",
+            "105 centimètres carrés",
+            "22 centimètres carrés"
+          ],
+          "reponse": 1,
+          "explication": "15 fois 7, 105 centimètres carrés. 44, c'est le périmètre. 22, c'est la longueur plus la largeur."
+        },
+        {
+          "t": "01:52",
+          "question": "Un carré a 9 centimètres de côté. Quelle est son aire ?",
+          "choix": [
+            "81 centimètres carrés",
+            "36 centimètres carrés",
+            "18 centimètres carrés"
+          ],
+          "reponse": 0,
+          "explication": "9 fois 9, 81 centimètres carrés. 36, c'est le périmètre : 9 fois 4."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "argent-budget"
+      ],
+      "aussi": [
+        {
+          "classe": "4e",
+          "notionId": "aire_surface",
+          "microId": "aire_carre"
+        }
+      ]
+    },
+    {
+      "id": "4e-aire-rectangle-carre-short",
+      "pas_avant": "2027-05-28",
+      "notionId": "aire_surface",
+      "microId": "aire_rectangle",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-aire-rectangle-carre",
+      "fichier": "4e/maths/aire/26-aire-rectangle-carre/eleveai-maths-4e-aire-rectangle-carre-short.mp4",
+      "miniature": "4e/maths/aire/26-aire-rectangle-carre/eleveai-maths-4e-aire-rectangle-carre-short-miniature.png",
+      "titre": "Deux téléphones, même prix : lequel a le plus grand écran ? #maths #4e",
+      "accroche": "Deux téléphones, même prix. L'un fait 16 centimètres sur 7, l'autre 15 sur 8. Le premier est plus long. Mais lequel a le plus grand écran ?\n\n🥋 Ceinture blanche.\n👉 un écran de 14 centimètres sur 9. Quelle est son aire ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_rectangle&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #aire",
+      "tags": [
+        "l'aire d'un rectangle et d'un carré",
+        "l'écran d'un smartphone",
+        "réparateur de smartphones",
+        "aire surface",
+        "ceinture jaune",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:12",
+          "question": "Le premier est plus long. Mais lequel a le plus grand écran ?",
+          "choix": [
+            "le premier",
+            "les deux pareil",
+            "le deuxième"
+          ],
+          "reponse": 2,
+          "explication": "Le premier : 16 fois 7, 112 centimètres carrés. Le deuxième : 15 fois 8, 120. Le plus long n'est pas le plus grand."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "argent-budget"
+      ],
+      "aussi": [
+        {
+          "classe": "4e",
+          "notionId": "aire_surface",
+          "microId": "aire_carre"
+        }
+      ]
+    },
+    {
+      "id": "4e-aire-disque",
+      "pas_avant": "2027-05-29",
+      "notionId": "aire_surface",
+      "microId": "aire_figure",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/aire/27-aire-disque/eleveai-maths-4e-aire-disque.mp4",
+      "miniature": "4e/maths/aire/27-aire-disque/eleveai-maths-4e-aire-disque.png",
+      "titre": "La peau d'un tambour : combien de centimètres carrés ? — L'aire d'un disque — Maths 4e",
+      "accroche": "Voici Nina. Elle fabrique des tambours. Sur chaque tambour, elle tend une peau ronde. La peau se vend au décimètre carré : Nina doit calculer l'aire d'un disque.\n\nDans cette vidéo :\n• le tour n'est pas la peau\n• la formule\n• le tambour de nina\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Nina prépare 6 tambours de 20 centimètres de rayon. La peau se vend par carrés de 50 centimètres sur 50. Combien de carrés de peau faut-il au minimum, si elle découpe un disque par carré ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/aire-surface\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/aire-surface\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_figure&display=simple\n\n📐 Épisode 27 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "L'aire d'un disque"
+        ],
+        [
+          "00:05",
+          "Nina, fabricante de tambours"
+        ],
+        [
+          "00:18",
+          "Le tour n'est pas la peau"
+        ],
+        [
+          "00:29",
+          "La formule"
+        ],
+        [
+          "00:38",
+          "Le tambour de Nina"
+        ],
+        [
+          "00:52",
+          "Question 1"
+        ],
+        [
+          "01:26",
+          "Le piège"
+        ],
+        [
+          "01:42",
+          "Question 2"
+        ],
+        [
+          "02:20",
+          "À toi de jouer"
+        ],
+        [
+          "02:41",
+          "Correction"
+        ],
+        [
+          "03:04",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "l'aire d'un disque",
+        "la peau d'un tambour",
+        "fabricante de tambours",
+        "aire surface",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:52",
+          "question": "Un disque a 5 centimètres de rayon. Quelle est son aire ?",
+          "choix": [
+            "25 pi centimètres carrés",
+            "10 pi centimètres carrés",
+            "5 pi centimètres carrés"
+          ],
+          "reponse": 0,
+          "explication": "Pi fois 5 fois 5, 25 pi centimètres carrés. 10 pi, c'est la longueur du cercle, pas son aire."
+        },
+        {
+          "t": "01:42",
+          "question": "Une peau mesure 40 centimètres de diamètre. Quelle est son aire ?",
+          "choix": [
+            "1 600 pi centimètres carrés",
+            "400 pi centimètres carrés",
+            "80 pi centimètres carrés"
+          ],
+          "reponse": 1,
+          "explication": "Le rayon vaut 20. Pi fois 20 fois 20, 400 pi centimètres carrés. 1 600 pi, c'est le diamètre pris pour le rayon."
+        }
+      ],
+      "centres": [
+        "musique",
+        "art-design"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "aire_surface",
+          "microId": "aire_disque"
+        }
+      ]
+    },
+    {
+      "id": "4e-aire-disque-short",
+      "pas_avant": "2027-05-29",
+      "notionId": "aire_surface",
+      "microId": "aire_figure",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-aire-disque",
+      "fichier": "4e/maths/aire/27-aire-disque/eleveai-maths-4e-aire-disque-short.mp4",
+      "miniature": "4e/maths/aire/27-aire-disque/eleveai-maths-4e-aire-disque-short-miniature.png",
+      "titre": "Un tambour deux fois plus large : la peau coûte ×4 #maths #4e",
+      "accroche": "Nina fabrique un tambour deux fois plus large que le premier. La peau coûte combien de fois plus cher ?\n\n🥋 Ceinture blanche.\n👉 un tambour trois fois plus large. Combien de fois plus de peau ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_figure&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #aire",
+      "tags": [
+        "l'aire d'un disque",
+        "la peau d'un tambour",
+        "fabricante de tambours",
+        "aire surface",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:08",
+          "question": "La peau coûte combien de fois plus cher ?",
+          "choix": [
+            "2 fois",
+            "3 fois",
+            "4 fois"
+          ],
+          "reponse": 2,
+          "explication": "L'aire vaut pi fois le rayon fois le rayon. Si le rayon double, l'aire est multipliée par 2 fois 2, donc par 4."
+        }
+      ],
+      "centres": [
+        "musique",
+        "art-design"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "aire_surface",
+          "microId": "aire_disque"
+        }
+      ]
+    },
+    {
+      "id": "4e-aire-figure-composee",
+      "pas_avant": "2027-05-30",
+      "notionId": "aire_surface",
+      "microId": "aire_figure",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/aire/28-aire-figure-composee/eleveai-maths-4e-aire-figure-composee.mp4",
+      "miniature": "4e/maths/aire/28-aire-figure-composee/eleveai-maths-4e-aire-figure-composee.png",
+      "titre": "Du gazon dans une cour en L : combien de m² ? — L'aire d'une figure composée — Maths 4e",
+      "accroche": "Voici Hugo. Il est paysagiste. Le collège veut du gazon synthétique dans sa cour. La cour a la forme d'un L : ce n'est ni un rectangle, ni un carré. Combien de mètres carrés faut-il commander ?\n\nDans cette vidéo :\n• découper en rectangles\n• on additionne\n• l'autre façon\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : La cour fait 72 mètres carrés, et un rond-point planté d'arbres occupe un disque de 2 mètres de rayon, qu'on ne gazonne pas. Le gazon coûte 28 euros le mètre carré. Quel est le prix ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/aire-surface\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/aire-surface\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_figure&display=simple\n\n📐 Épisode 28 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "L'aire d'une figure composée"
+        ],
+        [
+          "00:07",
+          "Hugo, paysagiste"
+        ],
+        [
+          "00:24",
+          "Découper en rectangles"
+        ],
+        [
+          "00:36",
+          "On additionne"
+        ],
+        [
+          "00:50",
+          "L'autre façon"
+        ],
+        [
+          "01:02",
+          "Question 1"
+        ],
+        [
+          "01:42",
+          "Le piège"
+        ],
+        [
+          "01:54",
+          "Question 2"
+        ],
+        [
+          "02:35",
+          "À toi de jouer"
+        ],
+        [
+          "02:55",
+          "Correction"
+        ],
+        [
+          "03:18",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "l'aire d'une figure composée",
+        "la cour du collège en l",
+        "paysagiste",
+        "aire surface",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:02",
+          "question": "Une cour en L : un rectangle de 10 mètres sur 6, et un rectangle de 4 mètres sur 3. Quelle est l'aire totale ?",
+          "choix": [
+            "23 mètres carrés",
+            "72 mètres carrés",
+            "60 mètres carrés"
+          ],
+          "reponse": 1,
+          "explication": "60 plus 12, 72 mètres carrés. 23, c'est une addition de longueurs. 60, c'est avoir oublié le deuxième morceau."
+        },
+        {
+          "t": "01:54",
+          "question": "Un carré de 10 mètres de côté, dans lequel on enlève un carré de 4 mètres au coin. Quelle est l'aire restante ?",
+          "choix": [
+            "100 mètres carrés",
+            "96 mètres carrés",
+            "84 mètres carrés"
+          ],
+          "reponse": 2,
+          "explication": "10 fois 10, 100. Moins 4 fois 4, 16. 100 moins 16, 84 mètres carrés. 96, c'est avoir enlevé 4 au lieu de 16."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sport"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "aire_surface",
+          "microId": "aire_figure_composee"
+        }
+      ]
+    },
+    {
+      "id": "4e-aire-figure-composee-short",
+      "pas_avant": "2027-05-30",
+      "notionId": "aire_surface",
+      "microId": "aire_figure",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-aire-figure-composee",
+      "fichier": "4e/maths/aire/28-aire-figure-composee/eleveai-maths-4e-aire-figure-composee-short.mp4",
+      "miniature": "4e/maths/aire/28-aire-figure-composee/eleveai-maths-4e-aire-figure-composee-short-miniature.png",
+      "titre": "Une terrasse en L : un trait, deux rectangles #maths #4e",
+      "accroche": "Hugo pose du gazon sur une terrasse en L : un rectangle de 8 mètres sur 5, et un autre de 3 mètres sur 2. Combien de mètres carrés de gazon doit-il commander ?\n\n🥋 Ceinture blanche.\n👉 un L fait d'un rectangle 9 sur 4 et d'un rectangle 5 sur 2. Son aire ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_figure&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #aire",
+      "tags": [
+        "l'aire d'une figure composée",
+        "la cour du collège en l",
+        "paysagiste",
+        "aire surface",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:12",
+          "question": "Combien de mètres carrés de gazon doit-il commander ?",
+          "choix": [
+            "46 mètres carrés",
+            "40 mètres carrés",
+            "52 mètres carrés"
+          ],
+          "reponse": 0,
+          "explication": "8 fois 5, 40. 3 fois 2, 6. 40 plus 6, 46 mètres carrés. 40, c'est avoir oublié le petit morceau."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sport"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "aire_surface",
+          "microId": "aire_figure_composee"
+        }
+      ]
+    },
+    {
+      "id": "4e-aire-probleme",
+      "pas_avant": "2027-05-31",
+      "notionId": "aire_surface",
+      "microId": "aire_probleme",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/aire/29-aire-probleme/eleveai-maths-4e-aire-probleme.mp4",
+      "miniature": "4e/maths/aire/29-aire-probleme/eleveai-maths-4e-aire-probleme.png",
+      "titre": "Carreler autour d'une piscine : le grand moins le trou — Un problème d'aire — Maths 4e",
+      "accroche": "Voici Salomé. Elle est carreleuse. Autour d'une piscine, elle pose une terrasse. Le bassin, lui, n'est pas carrelé : c'est de l'eau. Combien de mètres carrés de carrelage faut-il ?\n\nDans cette vidéo :\n• le terrain entier\n• le bassin\n• tout le reste\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Un autre chantier : terrain carré de 8 mètres de côté, bassin rond de 4 mètres de diamètre au milieu. Le carrelage coûte 35 euros le mètre carré. Quel est le prix ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/aire-surface\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/aire-surface\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_probleme&display=simple\n\n📐 Épisode 29 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Un problème d'aire"
+        ],
+        [
+          "00:05",
+          "Salomé, carreleuse"
+        ],
+        [
+          "00:21",
+          "Le terrain entier"
+        ],
+        [
+          "00:30",
+          "Le bassin"
+        ],
+        [
+          "00:43",
+          "Tout le reste"
+        ],
+        [
+          "00:50",
+          "Question 1"
+        ],
+        [
+          "01:26",
+          "Le piège"
+        ],
+        [
+          "01:40",
+          "Question 2"
+        ],
+        [
+          "02:18",
+          "À toi de jouer"
+        ],
+        [
+          "02:37",
+          "Correction"
+        ],
+        [
+          "03:05",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "un problème d'aire",
+        "la terrasse autour de la piscine",
+        "carreleuse",
+        "aire surface",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:50",
+          "question": "Terrain de 12 mètres sur 8, bassin de 8 mètres sur 4. Quelle est l'aire de la terrasse ?",
+          "choix": [
+            "96 mètres carrés",
+            "32 mètres carrés",
+            "64 mètres carrés"
+          ],
+          "reponse": 2,
+          "explication": "96 moins 32, 64 mètres carrés. 96, c'est le terrain entier, bassin compris."
+        },
+        {
+          "t": "01:40",
+          "question": "Le carrelage se vend par paquets de 1,5 mètre carré. Pour 64 mètres carrés, combien de paquets ?",
+          "choix": [
+            "43 paquets",
+            "42 paquets",
+            "96 paquets"
+          ],
+          "reponse": 0,
+          "explication": "64 divisé par 1,5, environ 42,7. On ne peut pas acheter 42,7 paquets : il en faut 43."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-aire-probleme-short",
+      "pas_avant": "2027-05-31",
+      "notionId": "aire_surface",
+      "microId": "aire_probleme",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-aire-probleme",
+      "fichier": "4e/maths/aire/29-aire-probleme/eleveai-maths-4e-aire-probleme-short.mp4",
+      "miniature": "4e/maths/aire/29-aire-probleme/eleveai-maths-4e-aire-probleme-short-miniature.png",
+      "titre": "Un bassin rond dans une terrasse carrée : combien de m² ? #maths #4e",
+      "accroche": "Une terrasse carrée de 8 mètres de côté, un bassin rond de 4 mètres de diamètre au milieu. Combien de mètres carrés faut-il carreler ?\n\n🥋 Ceinture blanche.\n👉 terrasse de 10 mètres de côté, bassin rond de 6 mètres de diamètre. Combien de mètres carrés ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #aire",
+      "tags": [
+        "un problème d'aire",
+        "la terrasse autour de la piscine",
+        "carreleuse",
+        "aire surface",
+        "ceinture verte",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "Combien de mètres carrés faut-il carreler ?",
+          "choix": [
+            "64 mètres carrés",
+            "environ 51,4 mètres carrés",
+            "environ 12,6 mètres carrés"
+          ],
+          "reponse": 1,
+          "explication": "Le carré : 64. Le bassin : pi fois 2 fois 2, environ 12,6. 64 moins 12,6, environ 51,4 mètres carrés."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-aire-defi",
+      "pas_avant": "2027-06-01",
+      "notionId": "aire_surface",
+      "microId": "aire_defi",
+      "classe": "4e",
+      "ceinture": "bleue",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/aire/30-aire-defi/eleveai-maths-4e-aire-defi.mp4",
+      "miniature": "4e/maths/aire/30-aire-defi/eleveai-maths-4e-aire-defi.png",
+      "titre": "Floquer 18 maillots : 1 m², c'est 10 000 cm² — Défis sur les aires — Maths 4e",
+      "accroche": "Voici Ryan. Il imprime les flocages des maillots : le numéro dans le dos, et le logo rond sur la manche. Le film se vend au mètre carré, et il n'aime pas en jeter.\n\nDans cette vidéo :\n• le numéro\n• le logo\n• un maillot\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : Ryan floque 18 maillots, 563 centimètres carrés chacun. Le film se vend au mètre carré, à 30 euros, et on ne vend que des mètres entiers. Combien va-t-il payer ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/aire-surface\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/aire-surface\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_defi&display=simple\n\n📐 Épisode 30 de la série Périmètre, aire, volume et solides d'EleveAI, en 4e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Défis sur les aires"
+        ],
+        [
+          "00:06",
+          "Ryan, imprimeur grand format"
+        ],
+        [
+          "00:19",
+          "Le numéro"
+        ],
+        [
+          "00:31",
+          "Le logo"
+        ],
+        [
+          "00:42",
+          "Un maillot"
+        ],
+        [
+          "00:51",
+          "Question 1"
+        ],
+        [
+          "01:26",
+          "Le piège"
+        ],
+        [
+          "01:39",
+          "Question 2"
+        ],
+        [
+          "02:14",
+          "À toi de jouer"
+        ],
+        [
+          "02:34",
+          "Correction"
+        ],
+        [
+          "02:54",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "défis sur les aires",
+        "floquer les maillots d'un tournoi",
+        "imprimeur grand format",
+        "aire surface",
+        "ceinture bleue",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:51",
+          "question": "Un rectangle de 25 centimètres sur 18. Quelle est son aire ?",
+          "choix": [
+            "450 centimètres carrés",
+            "86 centimètres carrés",
+            "43 centimètres carrés"
+          ],
+          "reponse": 0,
+          "explication": "25 fois 18, 450 centimètres carrés. 86, c'est le périmètre."
+        },
+        {
+          "t": "01:39",
+          "question": "Un disque de 6 centimètres de rayon, c'est environ…",
+          "choix": [
+            "environ 38 centimètres carrés",
+            "environ 226 centimètres carrés",
+            "environ 113 centimètres carrés"
+          ],
+          "reponse": 2,
+          "explication": "Pi fois 6 fois 6, 36 pi, environ 113 centimètres carrés. 38, c'est la longueur du cercle."
+        }
+      ],
+      "centres": [
+        "sport",
+        "argent-budget"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "aire_surface",
+          "microId": "aire_defi"
+        }
+      ]
+    },
+    {
+      "id": "4e-aire-defi-short",
+      "pas_avant": "2027-06-01",
+      "notionId": "aire_surface",
+      "microId": "aire_defi",
+      "classe": "4e",
+      "ceinture": "blanche",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-aire-defi",
+      "fichier": "4e/maths/aire/30-aire-defi/eleveai-maths-4e-aire-defi-short.mp4",
+      "miniature": "4e/maths/aire/30-aire-defi/eleveai-maths-4e-aire-defi-short-miniature.png",
+      "titre": "18 flocages : ça fait combien de mètres carrés ? #maths #4e",
+      "accroche": "Ryan floque 18 maillots. Chaque flocage fait 563 centimètres carrés. En mètres carrés, ça fait combien ?\n\n🥋 Ceinture blanche.\n👉 combien de centimètres carrés dans 3 mètres carrés ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=aire_surface&microId=aire_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #4e #aire",
+      "tags": [
+        "défis sur les aires",
+        "floquer les maillots d'un tournoi",
+        "imprimeur grand format",
+        "aire surface",
+        "ceinture bleue",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "En mètres carrés, ça fait combien ?",
+          "choix": [
+            "101 mètres carrés",
+            "environ 1 mètre carré",
+            "environ 10 mètres carrés"
+          ],
+          "reponse": 1,
+          "explication": "563 fois 18, 10 134 centimètres carrés. Un mètre carré en fait 10 000 : ça fait à peine plus d'un mètre carré."
+        }
+      ],
+      "centres": [
+        "sport",
+        "argent-budget"
+      ],
+      "aussi": [
+        {
+          "classe": "3e",
+          "notionId": "aire_surface",
+          "microId": "aire_defi"
+        }
+      ]
+    },
+    {
+      "id": "3e-volume-boule",
+      "pas_avant": "2027-06-02",
+      "notionId": "volume_solide",
+      "microId": "volume_boule",
+      "classe": "3e",
+      "ceinture": "verte",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/volume/31-volume-boule/eleveai-maths-3e-volume-boule.mp4",
+      "miniature": "3e/maths/volume/31-volume-boule/eleveai-maths-3e-volume-boule.png",
+      "titre": "Combien d'air tient dans un ballon ? — Le volume d'une boule — Maths 3e",
+      "accroche": "Voici Lina. Elle est kinésithérapeute : elle fait travailler la respiration de ses patients. Elle leur demande de souffler tout l'air de leurs poumons dans un ballon. La taille du ballon dit beaucoup de choses.\n\nDans cette vidéo :\n• la formule\n• un exemple\n• et tes poumons\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Lina compare deux patients. Le premier gonfle un ballon de 10 centimètres de rayon, le second un ballon de 12 centimètres de rayon. Combien de litres chacun, et combien de litres d'écart ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/volume-solide\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/volume-solide\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=volume_solide&microId=volume_boule&display=simple\n\n📐 Épisode 31 de la série Périmètre, aire, volume et solides d'EleveAI, en 3e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le volume d'une boule"
+        ],
+        [
+          "00:05",
+          "Lina, kinésithérapeute"
+        ],
+        [
+          "00:20",
+          "La formule"
+        ],
+        [
+          "00:34",
+          "Un exemple"
+        ],
+        [
+          "00:54",
+          "Et tes poumons"
+        ],
+        [
+          "01:06",
+          "Question 1"
+        ],
+        [
+          "01:48",
+          "Le piège"
+        ],
+        [
+          "02:01",
+          "Question 2"
+        ],
+        [
+          "02:42",
+          "À toi de jouer"
+        ],
+        [
+          "03:02",
+          "Correction"
+        ],
+        [
+          "03:32",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "le volume d'une boule",
+        "souffler dans un ballon : tes poumons",
+        "kinésithérapeute",
+        "volume solide",
+        "ceinture verte",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:06",
+          "question": "Une boule a 3 centimètres de rayon. Quel est son volume ?",
+          "choix": [
+            "12 pi centimètres cubes",
+            "27 pi centimètres cubes",
+            "36 pi centimètres cubes"
+          ],
+          "reponse": 2,
+          "explication": "3 fois 3 fois 3, 27. 4 fois pi fois 27, 108 pi. Divisé par 3 : 36 pi centimètres cubes. 27 pi, c'est avoir oublié le 4 et le divisé par 3."
+        },
+        {
+          "t": "02:01",
+          "question": "Une boule a 6 centimètres de diamètre. Quel est son volume ?",
+          "choix": [
+            "36 pi centimètres cubes",
+            "288 pi centimètres cubes",
+            "48 pi centimètres cubes"
+          ],
+          "reponse": 0,
+          "explication": "Le rayon vaut 3. 4 fois pi fois 27, divisé par 3 : 36 pi centimètres cubes. 288 pi, c'est le diamètre pris pour le rayon : huit fois trop."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "sport"
+      ]
+    },
+    {
+      "id": "3e-volume-boule-short",
+      "pas_avant": "2027-06-02",
+      "notionId": "volume_solide",
+      "microId": "volume_boule",
+      "classe": "3e",
+      "ceinture": "blanche",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-volume-boule",
+      "fichier": "3e/maths/volume/31-volume-boule/eleveai-maths-3e-volume-boule-short.mp4",
+      "miniature": "3e/maths/volume/31-volume-boule/eleveai-maths-3e-volume-boule-short-miniature.png",
+      "titre": "Tout l'air de tes poumons : quel rayon de ballon ? #maths #3e",
+      "accroche": "Souffle tout l'air de tes poumons dans un ballon : environ 4 litres. Quel rayon fait ce ballon une fois gonflé ?\n\n🥋 Ceinture blanche.\n👉 un ballon de 5 centimètres de rayon. Combien de litres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=volume_solide&microId=volume_boule&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #3e #volume",
+      "tags": [
+        "le volume d'une boule",
+        "souffler dans un ballon : tes poumons",
+        "kinésithérapeute",
+        "volume solide",
+        "ceinture verte",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:08",
+          "question": "Quel rayon fait ce ballon une fois gonflé ?",
+          "choix": [
+            "5 centimètres",
+            "10 centimètres",
+            "20 centimètres"
+          ],
+          "reponse": 1,
+          "explication": "Avec 10 centimètres de rayon : 4 fois pi fois mille, divisé par 3, environ 4 189 centimètres cubes. Soit 4,2 litres."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "sport"
+      ]
+    },
+    {
+      "id": "3e-volume-reduction-section",
+      "pas_avant": "2027-06-03",
+      "notionId": "volume_solide",
+      "microId": "volume_pyramide_cone_reduction",
+      "classe": "3e",
+      "ceinture": "bleue",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/volume/32-volume-reduction-section/eleveai-maths-3e-volume-reduction-section.mp4",
+      "miniature": "3e/maths/volume/32-volume-reduction-section/eleveai-maths-3e-volume-reduction-section.png",
+      "titre": "Un gobelet rempli à mi-hauteur : as-tu la moitié ? — La réduction par une section — Maths 3e",
+      "accroche": "Voici Adam. Il dirige une salle de cinéma. Les boissons sont servies dans des gobelets coniques. Un client se plaint : son gobelet est rempli jusqu'à la moitié de la hauteur, et il trouve qu'il n'y a pas assez. Il a raison, et les mathématiques le disent.\n\nDans cette vidéo :\n• la section du cône\n• le rapport\n• le volume, trois fois\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : Le gobelet d'Adam contient 48 centilitres une fois plein. Le serveur le remplit aux trois quarts de la hauteur, et le verre a l'air presque plein. Combien de centilitres le client a-t-il vraiment, et combien lui manque-t-il ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/volume-solide\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/volume-solide\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=volume_solide&microId=volume_pyramide_cone_reduction&display=simple\n\n📐 Épisode 32 de la série Périmètre, aire, volume et solides d'EleveAI, en 3e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "La réduction par une section"
+        ],
+        [
+          "00:06",
+          "Adam, responsable de salle"
+        ],
+        [
+          "00:25",
+          "La section du cône"
+        ],
+        [
+          "00:42",
+          "Le rapport"
+        ],
+        [
+          "00:51",
+          "Le volume, trois fois"
+        ],
+        [
+          "01:02",
+          "Question 1"
+        ],
+        [
+          "01:34",
+          "Le piège"
+        ],
+        [
+          "01:51",
+          "Question 2"
+        ],
+        [
+          "02:16",
+          "À toi de jouer"
+        ],
+        [
+          "02:38",
+          "Correction"
+        ],
+        [
+          "03:08",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "la réduction par une section",
+        "le gobelet du cinéma à moitié haut",
+        "responsable de salle",
+        "volume solide",
+        "ceinture bleue",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:02",
+          "question": "Un gobelet conique rempli jusqu'à la moitié de sa hauteur contient quelle part du total ?",
+          "choix": [
+            "un huitième",
+            "la moitié",
+            "un quart"
+          ],
+          "reponse": 0,
+          "explication": "Le rapport est un demi, donc le volume est divisé par 2 fois 2 fois 2, soit 8. Un huitième seulement."
+        },
+        {
+          "t": "01:51",
+          "question": "Dans une réduction de rapport un tiers, le volume est divisé par…",
+          "choix": [
+            "3",
+            "9",
+            "27"
+          ],
+          "reponse": 2,
+          "explication": "3 fois 3 fois 3, 27. 9, ce serait pour une aire."
+        }
+      ],
+      "centres": [
+        "cinema-series",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "3e-volume-reduction-section-short",
+      "pas_avant": "2027-06-03",
+      "notionId": "volume_solide",
+      "microId": "volume_pyramide_cone_reduction",
+      "classe": "3e",
+      "ceinture": "blanche",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-volume-reduction-section",
+      "fichier": "3e/maths/volume/32-volume-reduction-section/eleveai-maths-3e-volume-reduction-section-short.mp4",
+      "miniature": "3e/maths/volume/32-volume-reduction-section/eleveai-maths-3e-volume-reduction-section-short-miniature.png",
+      "titre": "Gobelet conique à mi-hauteur : un huitième seulement #maths #3e",
+      "accroche": "Ton gobelet conique est rempli jusqu'à la moitié de sa hauteur. Tu as payé plein tarif. As-tu vraiment la moitié de la boisson ?\n\n🥋 Ceinture blanche.\n👉 rempli au tiers de la hauteur, quelle part du volume ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=volume_solide&microId=volume_pyramide_cone_reduction&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #3e #volume",
+      "tags": [
+        "la réduction par une section",
+        "le gobelet du cinéma à moitié haut",
+        "responsable de salle",
+        "volume solide",
+        "ceinture bleue",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "Tu as payé plein tarif. As-tu vraiment la moitié de la boisson ?",
+          "choix": [
+            "oui, la moitié",
+            "non, un huitième",
+            "non, un quart"
+          ],
+          "reponse": 1,
+          "explication": "La moitié de la hauteur, c'est un rapport d'un demi : le volume est divisé par 2 fois 2 fois 2, soit 8. Un huitième."
+        }
+      ],
+      "centres": [
+        "cinema-series",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "3e-section-pave-cube",
+      "pas_avant": "2027-06-04",
+      "notionId": "sections_solides",
+      "microId": "section_pave_cube",
+      "classe": "3e",
+      "ceinture": "jaune",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/sections/33-section-pave-cube/eleveai-maths-3e-section-pave-cube.mp4",
+      "miniature": "3e/maths/sections/33-section-pave-cube/eleveai-maths-3e-section-pave-cube.png",
+      "titre": "Trancher un pain de mie : quelle forme ? — La section d'un pavé ou d'un cube — Maths 3e",
+      "accroche": "Voici Fatou. Elle est boulangère. Chaque matin, elle tranche des pains de mie. Un pain de mie, c'est un pavé droit. Et chaque tranche est une section.\n\nDans cette vidéo :\n• parallèlement à une face\n• le cube\n• la coupe en biais\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : Le pain de Fatou est un pavé de 30 centimètres de long, 10 de large, 10 de haut. Elle fait des tranches de 1 centimètre d'épaisseur, parallèles à la face carrée. Combien de tranches, et quelle est l'aire d'une tranche ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/sections-solides\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/sections-solides\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_pave_cube&display=simple\n\n📐 Épisode 33 de la série Périmètre, aire, volume et solides d'EleveAI, en 3e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "La section d'un pavé ou d'un cube"
+        ],
+        [
+          "00:05",
+          "Fatou, boulangère"
+        ],
+        [
+          "00:18",
+          "Parallèlement à une face"
+        ],
+        [
+          "00:30",
+          "Le cube"
+        ],
+        [
+          "00:41",
+          "La coupe en biais"
+        ],
+        [
+          "00:55",
+          "Question 1"
+        ],
+        [
+          "01:25",
+          "Le piège"
+        ],
+        [
+          "01:38",
+          "Question 2"
+        ],
+        [
+          "02:15",
+          "À toi de jouer"
+        ],
+        [
+          "02:37",
+          "Correction"
+        ],
+        [
+          "02:51",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "la section d'un pavé ou d'un cube",
+        "trancher un pain de mie",
+        "boulangère",
+        "sections solides",
+        "ceinture jaune",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:55",
+          "question": "On tranche un pain de mie parallèlement à sa face avant. La tranche est…",
+          "choix": [
+            "un carré plus petit",
+            "un triangle",
+            "un rectangle identique à la face"
+          ],
+          "reponse": 2,
+          "explication": "Une coupe parallèle à une face donne exactement cette face, à la même taille."
+        },
+        {
+          "t": "01:38",
+          "question": "On coupe un cube de 8 centimètres de côté parallèlement à une face. Quelle est l'aire de la section ?",
+          "choix": [
+            "512 centimètres carrés",
+            "64 centimètres carrés",
+            "32 centimètres carrés"
+          ],
+          "reponse": 1,
+          "explication": "8 fois 8, 64 centimètres carrés. 512, c'est 8 fois 8 fois 8 : c'est le volume du cube."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "art-design"
+      ]
+    },
+    {
+      "id": "3e-section-pave-cube-short",
+      "pas_avant": "2027-06-04",
+      "notionId": "sections_solides",
+      "microId": "section_pave_cube",
+      "classe": "3e",
+      "ceinture": "blanche",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-section-pave-cube",
+      "fichier": "3e/maths/sections/33-section-pave-cube/eleveai-maths-3e-section-pave-cube-short.mp4",
+      "miniature": "3e/maths/sections/33-section-pave-cube/eleveai-maths-3e-section-pave-cube-short-miniature.png",
+      "titre": "La tranche en biais est-elle plus grande ? #maths #3e",
+      "accroche": "Fatou coupe le pain droit, puis elle le coupe en biais. La tranche en biais est-elle plus grande, plus petite, ou pareille ?\n\n🥋 Ceinture blanche.\n👉 quelle forme a la section d'un cube coupé parallèlement à une face ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_pave_cube&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #3e #sections",
+      "tags": [
+        "la section d'un pavé ou d'un cube",
+        "trancher un pain de mie",
+        "boulangère",
+        "sections solides",
+        "ceinture jaune",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:09",
+          "question": "La tranche en biais est-elle plus grande, plus petite, ou pareille ?",
+          "choix": [
+            "plus grande",
+            "plus petite",
+            "la même"
+          ],
+          "reponse": 0,
+          "explication": "En biais, la coupe traverse le pain sur une plus grande longueur : la section est plus grande."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "art-design"
+      ]
+    },
+    {
+      "id": "3e-section-cylindre",
+      "pas_avant": "2027-06-05",
+      "notionId": "sections_solides",
+      "microId": "section_cylindre",
+      "classe": "3e",
+      "ceinture": "verte",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/sections/34-section-cylindre/eleveai-maths-3e-section-cylindre.mp4",
+      "miniature": "3e/maths/sections/34-section-cylindre/eleveai-maths-3e-section-cylindre.png",
+      "titre": "Couper le tube d'une trottinette : disque ou rectangle ? — La section d'un cylindre — Maths 3e",
+      "accroche": "Voici Oscar. Il est tourneur sur métaux : il découpe des tubes. Le cadre d'une trottinette est fait de tubes, et la façon de les couper change tout.\n\nDans cette vidéo :\n• en travers\n• dans la longueur\n• le tube est creux\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Oscar coupe un tube de 3 centimètres de rayon extérieur et 2,5 centimètres de rayon intérieur. Quelle est l'aire de métal sur la coupe ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/sections-solides\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/sections-solides\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_cylindre&display=simple\n\n📐 Épisode 34 de la série Périmètre, aire, volume et solides d'EleveAI, en 3e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "La section d'un cylindre"
+        ],
+        [
+          "00:05",
+          "Oscar, tourneur sur métaux"
+        ],
+        [
+          "00:17",
+          "En travers"
+        ],
+        [
+          "00:26",
+          "Dans la longueur"
+        ],
+        [
+          "00:38",
+          "Le tube est creux"
+        ],
+        [
+          "00:48",
+          "Question 1"
+        ],
+        [
+          "01:17",
+          "Le piège"
+        ],
+        [
+          "01:31",
+          "Question 2"
+        ],
+        [
+          "02:00",
+          "À toi de jouer"
+        ],
+        [
+          "02:17",
+          "Correction"
+        ],
+        [
+          "02:42",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "la section d'un cylindre",
+        "couper le tube d'une trottinette",
+        "tourneur sur métaux",
+        "sections solides",
+        "ceinture verte",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:48",
+          "question": "On coupe un tube perpendiculairement à son axe. La section est…",
+          "choix": [
+            "un rectangle",
+            "un disque",
+            "un triangle"
+          ],
+          "reponse": 1,
+          "explication": "Perpendiculairement à l'axe, c'est parallèle aux bases : on retrouve la forme de la base, un disque."
+        },
+        {
+          "t": "01:31",
+          "question": "On coupe un cylindre parallèlement à son axe, en passant par le centre. La section est…",
+          "choix": [
+            "un rectangle",
+            "un disque",
+            "un ovale"
+          ],
+          "reponse": 0,
+          "explication": "Un rectangle, dont la largeur est le diamètre du cylindre."
+        }
+      ],
+      "centres": [
+        "transports",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "3e-section-cylindre-short",
+      "pas_avant": "2027-06-05",
+      "notionId": "sections_solides",
+      "microId": "section_cylindre",
+      "classe": "3e",
+      "ceinture": "blanche",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-section-cylindre",
+      "fichier": "3e/maths/sections/34-section-cylindre/eleveai-maths-3e-section-cylindre-short.mp4",
+      "miniature": "3e/maths/sections/34-section-cylindre/eleveai-maths-3e-section-cylindre-short-miniature.png",
+      "titre": "Le bout du tube : quelle aire sur la coupe ? #maths #3e",
+      "accroche": "Oscar coupe un tube de trottinette de 3 centimètres de rayon, bien en travers. Si le tube était plein, quelle serait l'aire de la coupe ?\n\n🥋 Ceinture blanche.\n👉 quelle est la forme de la section d'un tube coupé en travers, en tenant compte du vide ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_cylindre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #3e #sections",
+      "tags": [
+        "la section d'un cylindre",
+        "couper le tube d'une trottinette",
+        "tourneur sur métaux",
+        "sections solides",
+        "ceinture verte",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "Si le tube était plein, quelle serait l'aire de la coupe ?",
+          "choix": [
+            "6 pi centimètres carrés",
+            "3 pi centimètres carrés",
+            "9 pi centimètres carrés"
+          ],
+          "reponse": 2,
+          "explication": "Pi fois 3 fois 3, 9 pi centimètres carrés. 6 pi, c'est la longueur du cercle."
+        }
+      ],
+      "centres": [
+        "transports",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "3e-section-cone-pyramide",
+      "pas_avant": "2027-06-06",
+      "notionId": "sections_solides",
+      "microId": "section_cone_pyramide",
+      "classe": "3e",
+      "ceinture": "verte",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/sections/35-section-cone-pyramide/eleveai-maths-3e-section-cone-pyramide.mp4",
+      "miniature": "3e/maths/sections/35-section-cone-pyramide/eleveai-maths-3e-section-cone-pyramide.png",
+      "titre": "Le Piton de la Fournaise coupé en deux — La section d'un cône et d'une pyramide — Maths 3e",
+      "accroche": "Voici Jade. Elle est volcanologue, à La Réunion. Pour expliquer le Piton de la Fournaise, elle le dessine coupé en deux. Un volcan, c'est à peu près un cône : ses sections racontent son histoire.\n\nDans cette vidéo :\n• parallèlement à la base\n• une réduction exacte\n• la pyramide\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Jade modélise un cône de 1 000 mètres de rayon à la base et 500 mètres de haut. Quel est le rayon de la section à 300 mètres d'altitude ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/sections-solides\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/sections-solides\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_cone_pyramide&display=simple\n\n📐 Épisode 35 de la série Périmètre, aire, volume et solides d'EleveAI, en 3e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "La section d'un cône et d'une pyramide"
+        ],
+        [
+          "00:05",
+          "Jade, volcanologue"
+        ],
+        [
+          "00:22",
+          "Parallèlement à la base"
+        ],
+        [
+          "00:32",
+          "Une réduction exacte"
+        ],
+        [
+          "00:45",
+          "La pyramide"
+        ],
+        [
+          "00:56",
+          "Question 1"
+        ],
+        [
+          "01:29",
+          "Le piège"
+        ],
+        [
+          "01:43",
+          "Question 2"
+        ],
+        [
+          "02:12",
+          "À toi de jouer"
+        ],
+        [
+          "02:28",
+          "Correction"
+        ],
+        [
+          "02:49",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "la section d'un cône et d'une pyramide",
+        "le volcan coupé en deux",
+        "volcanologue",
+        "sections solides",
+        "ceinture verte",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:56",
+          "question": "On coupe un cône parallèlement à sa base. La section est…",
+          "choix": [
+            "un disque plus petit",
+            "un rectangle",
+            "un triangle"
+          ],
+          "reponse": 0,
+          "explication": "Un disque plus petit, qui est une réduction de la base. Le triangle, c'est ce qu'on verrait en coupant le cône verticalement."
+        },
+        {
+          "t": "01:43",
+          "question": "On coupe une pyramide à base carrée parallèlement à sa base. La section est…",
+          "choix": [
+            "un triangle",
+            "un carré plus petit",
+            "un disque"
+          ],
+          "reponse": 1,
+          "explication": "Un carré plus petit : la section a la forme de la base."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "3e-section-cone-pyramide-short",
+      "pas_avant": "2027-06-06",
+      "notionId": "sections_solides",
+      "microId": "section_cone_pyramide",
+      "classe": "3e",
+      "ceinture": "blanche",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-section-cone-pyramide",
+      "fichier": "3e/maths/sections/35-section-cone-pyramide/eleveai-maths-3e-section-cone-pyramide-short.mp4",
+      "miniature": "3e/maths/sections/35-section-cone-pyramide/eleveai-maths-3e-section-cone-pyramide-short-miniature.png",
+      "titre": "Le volcan à mi-hauteur : quel rayon dans la coupe ? #maths #3e",
+      "accroche": "Jade coupe son volcan en deux, à mi-hauteur. Le cratère du bas fait 1 000 mètres de rayon. À mi-hauteur, quel est le rayon du disque de la coupe ?\n\n🥋 Ceinture blanche.\n👉 au quart de la hauteur en partant du sommet, quel est le rapport ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_cone_pyramide&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #3e #sections",
+      "tags": [
+        "la section d'un cône et d'une pyramide",
+        "le volcan coupé en deux",
+        "volcanologue",
+        "sections solides",
+        "ceinture verte",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:11",
+          "question": "À mi-hauteur, quel est le rayon du disque de la coupe ?",
+          "choix": [
+            "le même",
+            "le quart",
+            "la moitié"
+          ],
+          "reponse": 2,
+          "explication": "À mi-hauteur, le rapport est un demi : le rayon est la moitié, soit 500 mètres. C'est l'aire qui serait divisée par 4."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "3e-section-sphere",
+      "pas_avant": "2027-06-07",
+      "notionId": "sections_solides",
+      "microId": "section_sphere",
+      "classe": "3e",
+      "ceinture": "bleue",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/sections/36-section-sphere/eleveai-maths-3e-section-sphere.mp4",
+      "miniature": "3e/maths/sections/36-section-sphere/eleveai-maths-3e-section-sphere.png",
+      "titre": "Les parallèles du globe : pourquoi toujours un cercle ? — La section d'une sphère — Maths 3e",
+      "accroche": "Voici Rayan. Il est géographe. Sur son globe, il montre l'équateur et les parallèles. Ce sont tous des cercles, et ce n'est pas un hasard : ce sont des sections de la sphère.\n\nDans cette vidéo :\n• toujours un cercle\n• le grand cercle\n• le triangle caché\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : La Terre fait environ 6 370 kilomètres de rayon. Un parallèle passe à 3 185 kilomètres du centre, soit la moitié du rayon. Quel est son rayon, arrondi au kilomètre ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/sections-solides\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/sections-solides\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_sphere&display=simple\n\n📐 Épisode 36 de la série Périmètre, aire, volume et solides d'EleveAI, en 3e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "La section d'une sphère"
+        ],
+        [
+          "00:05",
+          "Rayan, géographe"
+        ],
+        [
+          "00:20",
+          "Toujours un cercle"
+        ],
+        [
+          "00:31",
+          "Le grand cercle"
+        ],
+        [
+          "00:43",
+          "Le triangle caché"
+        ],
+        [
+          "00:58",
+          "Question 1"
+        ],
+        [
+          "01:24",
+          "Le piège"
+        ],
+        [
+          "01:36",
+          "Question 2"
+        ],
+        [
+          "02:15",
+          "À toi de jouer"
+        ],
+        [
+          "02:37",
+          "Correction"
+        ],
+        [
+          "03:09",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "la section d'une sphère",
+        "les parallèles du globe",
+        "géographe",
+        "sections solides",
+        "ceinture bleue",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:58",
+          "question": "Un plan coupe une sphère. La section est toujours…",
+          "choix": [
+            "un ovale",
+            "un cercle",
+            "un carré"
+          ],
+          "reponse": 1,
+          "explication": "Toujours un cercle, quelle que soit l'inclinaison du plan."
+        },
+        {
+          "t": "01:36",
+          "question": "Une sphère de rayon 10 est coupée par un plan situé à 6 du centre. Quel est le rayon de la section ?",
+          "choix": [
+            "4",
+            "16",
+            "8"
+          ],
+          "reponse": 2,
+          "explication": "Le triangle rectangle : 10 au carré moins 6 au carré, 100 moins 36, 64. La racine de 64, c'est 8. 4, c'est 10 moins 6 : la soustraction directe ne marche pas."
+        }
+      ],
+      "centres": [
+        "histoire-geographie",
+        "espace"
+      ]
+    },
+    {
+      "id": "3e-section-sphere-short",
+      "pas_avant": "2027-06-07",
+      "notionId": "sections_solides",
+      "microId": "section_sphere",
+      "classe": "3e",
+      "ceinture": "blanche",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-section-sphere",
+      "fichier": "3e/maths/sections/36-section-sphere/eleveai-maths-3e-section-sphere-short.mp4",
+      "miniature": "3e/maths/sections/36-section-sphere/eleveai-maths-3e-section-sphere-short-miniature.png",
+      "titre": "L'équateur ou le parallèle : lequel est le plus grand ? #maths #3e",
+      "accroche": "Sur le globe de Rayan, deux cercles : l'équateur, et un parallèle tout près du pôle. Lequel est le plus grand cercle ?\n\n🥋 Ceinture blanche.\n👉 que devient la section quand le plan touche la sphère sans la traverser ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_sphere&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #3e #sections",
+      "tags": [
+        "la section d'une sphère",
+        "les parallèles du globe",
+        "géographe",
+        "sections solides",
+        "ceinture bleue",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:09",
+          "question": "Lequel est le plus grand cercle ?",
+          "choix": [
+            "l'équateur",
+            "le parallèle",
+            "les deux pareil"
+          ],
+          "reponse": 0,
+          "explication": "L'équateur passe par le centre de la Terre : c'est un grand cercle. Plus un plan s'éloigne du centre, plus son cercle rétrécit."
+        }
+      ],
+      "centres": [
+        "histoire-geographie",
+        "espace"
+      ]
+    },
+    {
+      "id": "3e-section-longueur",
+      "pas_avant": "2027-06-08",
+      "notionId": "sections_solides",
+      "microId": "section_calculer_longueur",
+      "classe": "3e",
+      "ceinture": "bleue",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/sections/37-section-longueur/eleveai-maths-3e-section-longueur.mp4",
+      "miniature": "3e/maths/sections/37-section-longueur/eleveai-maths-3e-section-longueur.png",
+      "titre": "La position d'un avion en vol : où est le triangle rectangle ? — Calculer une longueur dans une section — Maths 3e",
+      "accroche": "Voici Maëlle. Elle est pilote de ligne. En vol, elle se repère dans l'espace : une position au sol et une altitude. Pour calculer une distance, elle ramène toujours le problème à un plan.\n\nDans cette vidéo :\n• ramener au plan\n• la diagonale\n• dans la sphère\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : Maëlle survole un point à 9 kilomètres d'altitude. L'aéroport est à 40 kilomètres devant elle, au sol. Quelle distance la sépare de l'aéroport en ligne droite ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/sections-solides\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/sections-solides\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_calculer_longueur&display=simple\n\n📐 Épisode 37 de la série Périmètre, aire, volume et solides d'EleveAI, en 3e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Calculer une longueur dans une section"
+        ],
+        [
+          "00:06",
+          "Maëlle, pilote de ligne"
+        ],
+        [
+          "00:22",
+          "Ramener au plan"
+        ],
+        [
+          "00:31",
+          "La diagonale"
+        ],
+        [
+          "00:47",
+          "Dans la sphère"
+        ],
+        [
+          "00:58",
+          "Question 1"
+        ],
+        [
+          "01:34",
+          "Le piège"
+        ],
+        [
+          "01:46",
+          "Question 2"
+        ],
+        [
+          "02:22",
+          "À toi de jouer"
+        ],
+        [
+          "02:41",
+          "Correction"
+        ],
+        [
+          "03:02",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "calculer une longueur dans une section",
+        "la position en vol",
+        "pilote de ligne",
+        "sections solides",
+        "ceinture bleue",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:58",
+          "question": "Dans une section rectangulaire de 6 centimètres sur 8, combien mesure la diagonale ?",
+          "choix": [
+            "14 centimètres",
+            "48 centimètres",
+            "10 centimètres"
+          ],
+          "reponse": 2,
+          "explication": "36 plus 64, 100 ; la racine de 100, c'est 10 centimètres. 14, c'est 6 plus 8 : on n'additionne pas les côtés."
+        },
+        {
+          "t": "01:46",
+          "question": "Une sphère de rayon 13 est coupée en un cercle de rayon 5. À quelle distance du centre est le plan ?",
+          "choix": [
+            "12",
+            "8",
+            "18"
+          ],
+          "reponse": 0,
+          "explication": "13 au carré moins 5 au carré, 169 moins 25, 144. La racine de 144, c'est 12. 8, c'est 13 moins 5."
+        }
+      ],
+      "centres": [
+        "transports",
+        "espace"
+      ]
+    },
+    {
+      "id": "3e-section-longueur-short",
+      "pas_avant": "2027-06-08",
+      "notionId": "sections_solides",
+      "microId": "section_calculer_longueur",
+      "classe": "3e",
+      "ceinture": "blanche",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-section-longueur",
+      "fichier": "3e/maths/sections/37-section-longueur/eleveai-maths-3e-section-longueur-short.mp4",
+      "miniature": "3e/maths/sections/37-section-longueur/eleveai-maths-3e-section-longueur-short-miniature.png",
+      "titre": "La diagonale d'une face de cube : 12 cm ? #maths #3e",
+      "accroche": "Un cube de 6 centimètres d'arête. On trace la diagonale d'une de ses faces. Combien mesure cette diagonale ?\n\n🥋 Ceinture blanche.\n👉 un carré de 10 centimètres de côté. Combien mesure sa diagonale ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_calculer_longueur&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #3e #sections",
+      "tags": [
+        "calculer une longueur dans une section",
+        "la position en vol",
+        "pilote de ligne",
+        "sections solides",
+        "ceinture bleue",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:09",
+          "question": "Combien mesure cette diagonale ?",
+          "choix": [
+            "12 centimètres",
+            "environ 8,5 centimètres",
+            "6 centimètres"
+          ],
+          "reponse": 1,
+          "explication": "36 plus 36, 72. La racine de 72, environ 8,5 centimètres. 12, c'est 6 plus 6."
+        }
+      ],
+      "centres": [
+        "transports",
+        "espace"
+      ]
+    },
+    {
+      "id": "3e-section-defi",
+      "pas_avant": "2027-06-09",
+      "notionId": "sections_solides",
+      "microId": "section_defi",
+      "classe": "3e",
+      "ceinture": "marron",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/sections/38-section-defi/eleveai-maths-3e-section-defi.mp4",
+      "miniature": "3e/maths/sections/38-section-defi/eleveai-maths-3e-section-defi.png",
+      "titre": "Scanner un objet pour l'imprimer en 3D — Défis sur les sections planes — Maths 3e",
+      "accroche": "Voici Nathan. Il numérise des objets pour les imprimer en 3D. Son scanner ne voit pas le solide entier : il enregistre des centaines de sections horizontales, l'une au-dessus de l'autre. L'ordinateur reconstruit le solide à partir d'elles.\n\nDans cette vidéo :\n• le cylindre\n• le cône\n• la boule\n• le piège à éviter, et deux questions-pauses pour t'arrêter\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture marron.\nUn défi en fin de vidéo, avec sa correction : Le scanner de Nathan donne trois sections d'un objet : un carré de 10 centimètres de côté en bas, un carré de 5 centimètres à mi-hauteur, et un point au sommet. Quel solide est-ce, et quel est son volume si la hauteur est 12 centimètres ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/sections-solides\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/3e/sections-solides\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_defi&display=simple\n\n📐 Épisode 38 de la série Périmètre, aire, volume et solides d'EleveAI, en 3e.\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Défis sur les sections planes"
+        ],
+        [
+          "00:06",
+          "Nathan, technicien en numérisation 3D"
+        ],
+        [
+          "00:25",
+          "Le cylindre"
+        ],
+        [
+          "00:34",
+          "Le cône"
+        ],
+        [
+          "00:45",
+          "La boule"
+        ],
+        [
+          "00:56",
+          "Question 1"
+        ],
+        [
+          "01:29",
+          "Le piège"
+        ],
+        [
+          "01:43",
+          "Question 2"
+        ],
+        [
+          "02:12",
+          "À toi de jouer"
+        ],
+        [
+          "02:34",
+          "Correction"
+        ],
+        [
+          "03:00",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "défis sur les sections planes",
+        "scanner un objet pour l'imprimer en 3d",
+        "technicien en numérisation 3d",
+        "sections solides",
+        "ceinture marron",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:56",
+          "question": "Les sections horizontales sont des disques : le plus grand en bas, et ils rétrécissent jusqu'à un point en haut. Quel solide ?",
+          "choix": [
+            "un cône",
+            "une boule",
+            "un cylindre"
+          ],
+          "reponse": 0,
+          "explication": "Un cône. Pour une boule, le plus grand disque serait au milieu, pas en bas."
+        },
+        {
+          "t": "01:43",
+          "question": "Les sections horizontales d'une boule sont des disques qui…",
+          "choix": [
+            "grandissent vers le haut",
+            "restent égaux",
+            "grandissent puis rétrécissent"
+          ],
+          "reponse": 2,
+          "explication": "Le plus grand est au milieu. En haut et en bas, ils se réduisent à un point."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "jeux-video"
+      ]
+    },
+    {
+      "id": "3e-section-defi-short",
+      "pas_avant": "2027-06-09",
+      "notionId": "sections_solides",
+      "microId": "section_defi",
+      "classe": "3e",
+      "ceinture": "blanche",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-section-defi",
+      "fichier": "3e/maths/sections/38-section-defi/eleveai-maths-3e-section-defi-short.mp4",
+      "miniature": "3e/maths/sections/38-section-defi/eleveai-maths-3e-section-defi-short-miniature.png",
+      "titre": "Trois tranches, un solide : lequel ? #maths #3e",
+      "accroche": "Le scanner de Nathan donne trois tranches : un carré en bas, un carré plus petit au milieu, un point en haut. Quel solide a-t-il scanné ?\n\n🥋 Ceinture blanche.\n👉 des disques tous égaux, du bas jusqu'en haut. Quel solide ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=sections_solides&microId=section_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #3e #sections",
+      "tags": [
+        "défis sur les sections planes",
+        "scanner un objet pour l'imprimer en 3d",
+        "technicien en numérisation 3d",
+        "sections solides",
+        "ceinture marron",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "ceinture blanche",
+        "Shorts",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "Quel solide a-t-il scanné ?",
+          "choix": [
+            "un cube",
+            "une pyramide",
+            "un cône"
+          ],
+          "reponse": 1,
+          "explication": "Des carrés qui rétrécissent jusqu'à un point : une pyramide. Le cône donnerait des disques, le cube des carrés tous égaux."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "jeux-video"
+      ]
     }
   ]
 }
