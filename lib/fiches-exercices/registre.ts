@@ -357,6 +357,113 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
       "Suivre des flèches sur un quadrillage, écrire le code d'un chemin, tourner d'un quart de tour sans avancer, utiliser « répéter », éviter les obstacles. Problèmes : un drone livreur, un robot d'entrepôt, une informaticienne, une tondeuse robot.",
   },
 
+  // ⭐ LE CE2 (17/11/2026) — après le CP et le CE1, Frédéric : « oui, le CE2 ».
+  // Une feuille par notion du coach, phrases ≤ 18 mots, dessins partout.
+  "maths/ce2/nombre-entier": {
+    titre: "Les nombres jusqu'à 10 000 : 20 exercices corrigés",
+    resume:
+      "Lire et écrire les nombres jusqu'à 10 000, milliers, centaines, dizaines et unités, décomposer, comparer, ranger, encadrer, placer sur une droite graduée. Des villages, une boulangerie, des letchis, une usine de bouchons et une course.",
+  },
+  "maths/ce2/suite-nombre": {
+    titre: "Les suites de nombres : 20 exercices corrigés",
+    resume:
+      "Continuer une suite de 25 en 25, de 50 en 50, de 1 000 en 1 000, trouver la règle, dire si la suite est croissante ou décroissante, passer le millier. Défis : des nénuphars, deux compteurs, les places d'un théâtre, un verger.",
+  },
+  "maths/ce2/addition-soustraction": {
+    titre: "Additions et soustractions posées : 20 exercices corrigés",
+    resume:
+      "Poser une addition et une soustraction avec retenues jusqu'à 10 000, les mots terme, somme et différence, compléter une égalité, estimer pour vérifier, trouver l'erreur. Problèmes : un voyage de classe, une boulangère, des vacances en voiture, un nombre caché.",
+  },
+  "maths/ce2/multiplication": {
+    titre: "La multiplication : 20 exercices corrigés",
+    resume:
+      "Les tables de 2 à 9, un rectangle de billes, les mots facteur, produit et multiple, multiplier par 10 et par 100, poser une multiplication par un nombre à un ou deux chiffres. Défis : un maraîcher, une salle de concert, des chocolats, des maillots.",
+  },
+  "maths/ce2/division": {
+    titre: "Partages et groupements : 20 exercices corrigés",
+    resume:
+      "Partager en parts égales, faire des groupes, écrire avec le signe ÷, retrouver une division dans une table, savoir quoi faire du reste. Sans division posée. Problèmes : une fête d'école, un fleuriste, des cartes, des pots de miel.",
+  },
+  "maths/ce2/calcul-mental": {
+    titre: "Le calcul mental : 20 exercices corrigés",
+    resume:
+      "Compléter à 100 et à 1 000, doubles et moitiés, ajouter 9 ou 19, enlever 29 ou 39, multiplier par 4 ou par 8 en doublant, les multiples de 25, 7 × 30, 23 × 4 en coupant 23. Défis : des fléchettes, un glacier, un pâtissier, un nombre mystère.",
+  },
+  "maths/ce2/fraction": {
+    titre: "Les fractions inférieures ou égales à 1 : 20 exercices corrigés",
+    resume:
+      "Partager l'unité en parts égales, lire et représenter une fraction, trouver deux fractions égales, additionner et soustraire (1/2 + 1/4), la bande unité, la droite graduée, comparer deux fractions et comparer à 1. Problèmes : un jardin partagé, un ruban de couturière, une course de relais, un gâteau d'anniversaire.",
+  },
+  "maths/ce2/probleme": {
+    titre: "Résoudre des problèmes : 20 problèmes corrigés",
+    resume:
+      "Choisir l'opération, chercher le tout ou une partie avec un schéma en barres, comparer (de plus, de moins, fois plus, fois moins), compter les tenues possibles, vérifier qu'un résultat a du sens, problèmes à deux et trois étapes. Une fleuriste, une cantine, une kermesse, un nombre mystère.",
+  },
+  "maths/ce2/longueur": {
+    titre: "Les longueurs : 20 exercices corrigés",
+    resume:
+      "Le kilomètre, le mètre, le décimètre, le centimètre et le millimètre, mesurer à la règle au millimètre, comparer et ranger, choisir l'unité, estimer. Problèmes : une guirlande, un escargot qui grimpe, la tournée du facteur, trois rubans.",
+  },
+  "maths/ce2/masse": {
+    titre: "Les masses : 20 exercices corrigés",
+    resume:
+      "1 kg = 1 000 g et 1 t = 1 000 kg, lire une balance à plateaux, comparer et ranger des masses, choisir l'unité, estimer, la boîte pleine et la boîte vide. Problèmes : un camion de sable, de la confiture, un sac de randonnée, une énigme de balances.",
+  },
+  "maths/ce2/contenance": {
+    titre: "Les contenances : 20 exercices corrigés",
+    resume:
+      "1 L = 10 dL = 100 cL, lire un pichet gradué, comparer des récipients sans se fier à leur forme, convertir. Problèmes : un aquarium, le jus de la fête de l'école, l'énigme des deux bidons, un robinet qui fuit.",
+  },
+  "maths/ce2/duree": {
+    titre: "Le temps et les durées : 20 exercices corrigés",
+    resume:
+      "Lire l'heure à 5 minutes près, placer les aiguilles, 1 h = 60 min et 1 jour = 24 h, changer les heures en minutes, calculer une durée en passant par l'heure pile. Problèmes : un zoo, une sortie au volcan, une pendule, un sirop.",
+  },
+  "maths/ce2/monnaie": {
+    titre: "La monnaie et l'écriture à virgule : 20 exercices corrigés",
+    resume:
+      "Écrire un prix avec une virgule, 1 € = 100 centimes, compter des pièces et des billets, additionner des prix, rendre la monnaie. Problèmes : une kermesse, un marché, des pièces de 20 centimes, une tirelire.",
+  },
+  "maths/ce2/perimetre": {
+    titre: "Le périmètre : 20 exercices corrigés",
+    resume:
+      "Le périmètre, c'est le tour : additionner les côtés d'un polygone, compter le tour sur un quadrillage, comparer au compas, le rectangle et le carré. Problèmes : un poulailler, une nappe, deux carreaux collés, un fil de fer.",
+  },
+  "maths/ce2/reperage": {
+    titre: "Le repérage sur quadrillage : 20 exercices corrigés",
+    resume:
+      "Trouver une case avec sa lettre et son nombre, suivre un déplacement codé par des flèches, décrire un trajet, lire un plan. Problèmes : un trésor de pirates, une ferme, le retour d'un robot, deux amis.",
+  },
+  "maths/ce2/donnees": {
+    titre: "Tableaux et diagrammes en barres : 20 exercices corrigés",
+    resume:
+      "Lire un tableau et un tableau à double entrée, le compléter, lire un diagramme gradué de 2 en 2, de 5 en 5 ou de 10 en 10, tracer une barre, comparer et calculer. Problèmes : une tombola, un atelier de vélos, un potager, un club de sport.",
+  },
+  "maths/ce2/droites-angles": {
+    titre: "Droites, angles droits et codages : 20 exercices corrigés",
+    resume:
+      "Vérifier des points alignés avec la règle, reconnaître un angle droit à l'équerre, même penché, lire le codage (petit carré, petits traits), trouver deux côtés perpendiculaires. Problèmes : les vitres d'une fenêtre, le tour d'un terrain de sport, les étagères d'une menuisière, un cerf-volant.",
+  },
+  "maths/ce2/figures-planes": {
+    titre: "Les figures planes : 20 exercices corrigés",
+    resume:
+      "Reconnaître le carré, le rectangle, le losange, le triangle rectangle et le cercle, même penchés, utiliser les angles droits et les côtés égaux, lire un programme de construction, ouvrir le compas du rayon. Problèmes : la terrasse d'un carreleur, un massif rond, le drapeau du Brésil, le cadre d'un menuisier.",
+  },
+  "maths/ce2/solides": {
+    titre: "Les solides : 20 exercices corrigés",
+    resume:
+      "Nommer le cube, le pavé, la boule, le cylindre, le cône et la pyramide, compter faces, arêtes et sommets sur un dessin en perspective, les faces d'une pyramide, choisir et compléter un patron de cube. Problèmes : la boîte d'une chocolatière, la pyramide du Louvre, des dés collés, les cartons d'un déménageur.",
+  },
+  "maths/ce2/symetrie": {
+    titre: "La symétrie axiale : 20 exercices corrigés",
+    resume:
+      "Trouver les axes de symétrie d'une figure ou d'une lettre (le rectangle n'en a que deux), compléter une figure sur quadrillage, trouver la case ou le point symétrique en comptant depuis l'axe. Problèmes : le papillon d'une artiste, la frise d'une carreleuse, la façade d'une case créole, les rosiers d'un jardin.",
+  },
+  "maths/ce2/algorithmique": {
+    titre: "Programmes et déplacements codés : 20 exercices corrigés",
+    resume:
+      "Suivre un code de flèches sur un quadrillage, avancer et tourner d'un quart de tour, l'ordre des instructions, utiliser « répéter », corriger une instruction fausse. Problèmes : un livreur à vélo, une tondeuse robot, un robot d'entrepôt, un robot qui dessine un carré.",
+  },
   "maths/cm1/tableau": {
     titre: "Lire et compléter un tableau : 20 exercices corrigés",
     resume:
