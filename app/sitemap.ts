@@ -396,6 +396,8 @@ const ROUTES: RouteConfig[] = [
   // Pages d'audience = portes du header et de l'accueil (destinations principales).
   { path: "/parents",         priority: 0.9,  changeFrequency: "monthly", lastMod: LASTMOD_AUDIENCES },
   { path: "/espace-profs",     priority: 0.9,  changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
+  // 17/11/2026 : le hub « En classe avec EleveAI » (séances vécues, 20 / 25 / 10).
+  { path: "/seances",          priority: 0.85, changeFrequency: "monthly", lastMod: new Date("2026-11-17") },
   // ⚠️ Entrée au sitemap le 12/08 — ce qui a OBLIGÉ à retirer le `noindex` de
   // la page. Annoncer une adresse à Google et lui interdire de l'indexer dans
   // la même journée, c'est se signaler une erreur à soi-même dans la Search

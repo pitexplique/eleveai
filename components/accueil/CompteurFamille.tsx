@@ -123,12 +123,23 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
             </li>
           ))}
         </ul>
-        <Link
-          href="/prof/classes"
-          className="mt-3 inline-flex items-center justify-center gap-1.5 self-start rounded-xl bg-violet-700 px-4 py-2 text-sm font-black text-white shadow-sm hover:bg-violet-800"
-        >
-          Créer ma classe <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </Link>
+        {/* 17/11, Frédéric : « créer ma classe et exemple de séances ! c'est le
+            mieux » → deuxième bouton, en CONTOUR, vers le hub /seances. */}
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Link
+            href="/prof/classes"
+            className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-violet-700 px-4 py-2 text-sm font-black text-white shadow-sm hover:bg-violet-800"
+          >
+            Créer ma classe <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+          <Link
+            href="/seances"
+            className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-white px-4 py-2 text-sm font-black text-violet-800 ring-2 ring-inset ring-violet-300 hover:bg-violet-50"
+          >
+            Exemples de séances
+          </Link>
+        </div>
+        <p className="mt-1.5 text-xs font-bold text-slate-600"><span className="whitespace-nowrap">20 min de cours,</span> <span className="whitespace-nowrap">25 min de coach et vidéos,</span> <span className="whitespace-nowrap">10 min de synthèse</span></p>
       </div>
 
       {/* EN DESSOUS : LA BANDE DES CHIFFRES. Vidéos comptées (lib/videos/compteur.ts),

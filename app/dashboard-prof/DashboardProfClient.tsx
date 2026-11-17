@@ -484,6 +484,10 @@ export default function DashboardProfClient() {
                 <Link href="/prof/cartes" className="rounded-2xl bg-slate-100 px-4 py-2 text-slate-800 ring-1 ring-slate-200 hover:brightness-95">
                   Cartes de connexion des élèves
                 </Link>
+                {/* 17/11 : le hub des séances (« comment ils font concrètement »). */}
+                <Link href="/seances" className="rounded-2xl bg-violet-100 px-4 py-2 text-violet-900 ring-1 ring-violet-300 hover:brightness-95">
+                  🍽️ Exemples de séances
+                </Link>
               </div>
             </div>
 

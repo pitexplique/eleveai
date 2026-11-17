@@ -132,6 +132,15 @@ export default function EnseignantsPage() {
               Votre classe offerte toute l’année : rejoignez l’aventure
             </Link>
           </p>
+          {/* 17/11, Frédéric : le hub des séances (« comment ils font concrètement »). */}
+          <p className="mt-5">
+            <Link
+              href="/seances"
+              className="inline-flex items-center gap-2 rounded-2xl bg-violet-50 px-5 py-3 text-base font-black text-violet-900 ring-2 ring-violet-300 transition hover:bg-violet-100"
+            >
+              🍽️ Exemples de séances : 20 min de cours, 25 min de coach, 10 min de synthèse →
+            </Link>
+          </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
               href="/dashboard-prof"
