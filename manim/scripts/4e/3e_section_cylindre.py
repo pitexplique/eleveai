@@ -124,14 +124,17 @@ class SectionCylindre3e(Paysage3e):
         self.au_mot("tourneur sur métaux")
         met = self.t("tourneur sur métaux", 20, BLEU_CALCUL).next_to(p, DOWN, buff=0.2)
         self.play(FadeIn(met, shift=DOWN * 0.1), run_time=0.4)
-        x = -2.6
+        # ⛔ La colonne et la figure de droite doivent s'écarter : « Le cadre d'une trottinette »
+        #    passait sur la colonne de la trottinette (vu sur la planche ; BORDS=1 ne voit pas
+        #    un chevauchement, il ne sort pas du cadre).
+        x = -3.2
         tbs = VGroup(*[tube(0.3, 1.4, 0.8, P(-5.0 + k * 0.9, -2.9), sw=3) for k in range(3)])
         l1 = self.t("il découpe des tubes.", 32, WHITE)
         self.col(l1, 2.1, x)
         self.au_mot("découpe des tubes")
         self.play(FadeIn(l1, shift=UP * 0.1),
                   LaggedStart(*[FadeIn(t, scale=0.8) for t in tbs], lag_ratio=0.18), run_time=0.9)
-        tr = trottinette(1.0, P(3.3, 0.3))
+        tr = trottinette(1.0, P(4.1, 0.6))
         l2 = self.t("Le cadre d'une trottinette", 30, WHITE)
         self.col(l2, 1.2, x)
         self.au_mot("Le cadre d'une trottinette")
@@ -165,7 +168,7 @@ class SectionCylindre3e(Paysage3e):
         self.au_mot("à l'axe du tube")
         self.play(FadeIn(l1[1], shift=UP * 0.1), Indicate(tb.axe, color=AXE_C, scale_factor=1.05),
                   run_time=0.6)
-        d = disque_plat(0.95, u, P(3.9, 0.9))
+        d = disque_plat(0.95, u, P(4.3, 0.9))  # ⛔ en 3,9 le disque touchait le point de « un disque. »
         l2 = self.t("la section est un disque.", 32, SECTION_C)
         self.col(l2, 0.9, x)
         self.au_mot("la section est un disque")
@@ -187,7 +190,9 @@ class SectionCylindre3e(Paysage3e):
         self.add(tb, tb.axe)
         tit = hors_audit(self.t("Dans la longueur", 44, JAUNE_TITRE)).move_to(P(0, 3.15))
         self.play(Write(tit), run_time=0.4)
-        x = -2.3
+        # ⛔ « la section est un rectangle. » et « Sa largeur est le diamètre, » mordaient sur
+        #    le rectangle posé à droite : la colonne recule et la figure avance.
+        x = -3.0
         pl = plan_long(0.35, 2.8, u, P(-5.0, -0.6))
         l1 = self.t("Coupe parallèlement à l'axe,", 30, PLAN_C)
         self.col(l1, 2.0, x)
@@ -199,7 +204,7 @@ class SectionCylindre3e(Paysage3e):
         self.play(FadeIn(l2, shift=UP * 0.1), FadeIn(Dot(tb.o, radius=0.08, color=PLAN_C)),
                   run_time=0.6)
         r = Rectangle(width=1.5 * u, height=2.2 * u, fill_color=SECTION_C, fill_opacity=0.35,
-                      stroke_color=SECTION_C, stroke_width=5).move_to(P(4.1, 0.3))
+                      stroke_color=SECTION_C, stroke_width=5).move_to(P(4.6, 0.3))
         l3 = self.t("la section est un rectangle.", 32, SECTION_C)
         self.col(l3, 0.3, x)
         self.au_mot("la section est un rectangle")

@@ -73,7 +73,9 @@ class ShortSectionCylindre3e(Short4e):
         # ── 01 : le défi ────────────────────────────────────────────────────
         self.dire("01-defi")
         self.au_mot("Si le tube était plein")
-        d = disque_plat(0.75, P(0, -2.2))
+        # ⛔ Rien ne descend sous y = −3,0 : en rayon 0,75 centré en −2,2, le disque
+        #    descendait à −2,95, et l'Indicate (×1,1) le posait sur la tête de Ti-Margo.
+        d = disque_plat(0.7, P(0, -2.0))
         self.play(FadeIn(d, scale=0.8), run_time=0.7)
         self.au_mot("l'aire de la coupe")
         q = self.accroche("son aire ?", fs=30, couleur=JAUNE_TITRE, y=Y_ACCROCHE)

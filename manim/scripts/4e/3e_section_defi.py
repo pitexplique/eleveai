@@ -82,6 +82,19 @@ class SectionDefi3e(Paysage3e):
     fichier_marques = "3e_section_defi_marques.json"
     ceinture = "marron"
 
+    def _carte(self, lettre, contenu, fs):
+        """⛔ Le gabarit étire le contenu jusqu'à 0,8 du bord de la carte, or le ✓ de la bonne
+        réponse se pose à 0,38 du bord DROIT : sur un libellé long, il TOUCHAIT la dernière
+        lettre (vu sur la planche ; BORDS=1 ne voit rien, rien ne sort du cadre). On lui
+        réserve sa place ici, sans toucher au gabarit partagé. Les libellés courts, eux, ne
+        bougent pas : la condition ne les atteint jamais."""
+        g = super()._carte(lettre, contenu, fs)
+        cadre, ligne = g
+        if ligne.width > self.LARG - 1.2:
+            ligne.scale_to_fit_width(self.LARG - 1.2)
+            ligne.move_to(cadre).align_to(cadre.get_left() + RIGHT * 0.2, LEFT)
+        return g
+
     def pause_gauche(self, y=-3.2, x=-6.2, marge=2.0):
         """« Mets pause, et cherche ! » en bas À GAUCHE.
         ⛔ Dans la colonne de droite (pause_defi du commun), le « ! » touche Ti-Margo : constaté
@@ -258,7 +271,9 @@ class SectionDefi3e(Paysage3e):
     def ecran_question1(self):
         self.clear()
         self.add_mascotte()
-        pl = pile_disques([0.8, 0.62, 0.44, 0.26, 0.0], 0.85, P(-5.0, -0.9), pas=0.52,
+        # ⛔ La phrase de réponse se pose en bas à gauche (y = −0,3) : à −0,9 la pile lui
+        #    passait au travers (vu sur la planche). Elle monte au-dessus de la phrase.
+        pl = pile_disques([0.8, 0.62, 0.44, 0.26, 0.0], 0.85, P(-5.0, 0.6), pas=0.52,
                           couleur=CONE_C)
 
         def avant_q(sc):
@@ -335,7 +350,9 @@ class SectionDefi3e(Paysage3e):
         self.au_mot("À toi de jouer")
         tit = self.t("À toi de jouer !", 50, JAUNE_TITRE).move_to(P(0, 3.15))
         self.play(Write(tit), run_time=0.4)
-        x = 0.5
+        # ⛔ En x = 0,5 « Quel solide, et quel volume » (y = −2,3) touchait Ti-Margo, qui occupe
+        #    x > 4,6 et y < −2,2. La colonne recule : la ligne finit avant 4,6.
+        x = -1.0
         l0 = self.t("Le scanner de Nathan", 32, WHITE)
         self.col(l0, 2.0, x)
         self.au_mot("Le scanner de Nathan")

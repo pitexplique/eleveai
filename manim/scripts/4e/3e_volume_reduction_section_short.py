@@ -54,6 +54,20 @@ class ShortVolumeReductionSection3e(Short4e):
     nom_voix = "3e-volume-reduction-section-short"
     fichier_marques = "3e_volume_reduction_section_short_marques.json"
 
+    def _carte(self, lettre, contenu, fs):
+        """⛔ Le gabarit étire le contenu jusqu'à 0,8 du bord de la carte, or le ✓ de la bonne
+        réponse se pose à 0,38 du bord DROIT : sur un libellé long, il TOUCHAIT la dernière
+        lettre (vu sur la planche ; BORDS=1 ne voit rien, rien ne sort du cadre). On lui
+        réserve sa place ici, sans toucher au gabarit partagé. Les libellés courts, eux, ne
+        bougent pas : la condition ne les atteint jamais."""
+        g = super()._carte(lettre, contenu, fs)
+        cadre, ligne = g
+        if ligne.width > self.LARG - 1.2:
+            ligne.scale_to_fit_width(self.LARG - 1.2)
+            ligne.move_to(cadre).align_to(cadre.get_left() + RIGHT * 0.2, LEFT)
+        return g
+
+
     def construct(self):
         self.margo_bas()
 
@@ -124,7 +138,9 @@ class ShortVolumeReductionSection3e(Short4e):
         self.play(FadeIn(g, scale=0.85), run_time=0.5)
         self.au_mot("rempli au tiers")
         li = liquide(g, 1 / 3)
-        t3 = self.t("au tiers de la hauteur", 28, SODA_C).move_to(P(0, 2.1))
+        # ⛔ En y = 2,1 le texte mordait sur le bord haut du gobelet (son ellipse monte
+        #    à 2,05) : il passe au-dessus.
+        t3 = self.t("au tiers de la hauteur", 28, SODA_C).move_to(P(0, 2.45))
         self.play(FadeIn(li, shift=UP * 0.25), FadeIn(t3, shift=UP * 0.1), run_time=0.8)
         self.au_mot("quelle part du volume")
         vq = self.t("quelle part du volume ?", 28, JAUNE_TITRE).move_to(P(0, -1.9))

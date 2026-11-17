@@ -68,6 +68,19 @@ class SectionConePyramide3e(Paysage3e):
     fichier_marques = "3e_section_cone_pyramide_marques.json"
     ceinture = "verte"
 
+    def _carte(self, lettre, contenu, fs):
+        """⛔ Le gabarit étire le contenu jusqu'à 0,8 du bord de la carte, or le ✓ de la bonne
+        réponse se pose à 0,38 du bord DROIT : sur un libellé long, il TOUCHAIT la dernière
+        lettre (vu sur la planche ; BORDS=1 ne voit rien, rien ne sort du cadre). On lui
+        réserve sa place ici, sans toucher au gabarit partagé. Les libellés courts, eux, ne
+        bougent pas : la condition ne les atteint jamais."""
+        g = super()._carte(lettre, contenu, fs)
+        cadre, ligne = g
+        if ligne.width > self.LARG - 1.2:
+            ligne.scale_to_fit_width(self.LARG - 1.2)
+            ligne.move_to(cadre).align_to(cadre.get_left() + RIGHT * 0.2, LEFT)
+        return g
+
     def pause_gauche(self, y=-3.2, x=-6.2, marge=2.0):
         """« Mets pause, et cherche ! » en bas À GAUCHE.
         ⛔ Dans la colonne de droite (pause_defi du commun), le « ! » touche Ti-Margo : constaté
@@ -150,12 +163,14 @@ class SectionConePyramide3e(Paysage3e):
         self.au_mot("coupe un cône parallèlement")
         self.play(FadeIn(l1, shift=UP * 0.1), FadeIn(pl, shift=DOWN * 0.3), run_time=0.7)
         s = section_cone(c, 0.375)
-        d = disque_plat(0.85, P(4.9, 1.3))
+        d = disque_plat(0.85, P(4.9, 1.6))
         l2 = self.t("la section est un disque,", 32, SECTION_C)
         self.col(l2, 1.1, x)
         self.au_mot("la section est un disque")
         self.play(FadeIn(l2, shift=UP * 0.1), FadeIn(s), FadeIn(d, scale=0.8), run_time=0.9)
-        gd = disque_plat(1.2, P(4.8, -1.3), couleur=BASE_C)
+        # ⛔ En y = −1,3 le grand disque descendait à −2,5 et RECOUVRAIT Ti-Margo
+        #    (x > 4,6 et y < −2,2) : les deux disques remontent ensemble.
+        gd = disque_plat(1.2, P(4.8, -0.85), couleur=BASE_C)
         l3 = self.t("plus petit que la base.", 30, WHITE)
         self.col(l3, 0.2, x)
         self.au_mot("plus petit que la base")
@@ -213,7 +228,9 @@ class SectionConePyramide3e(Paysage3e):
     def ecran_la_pyramide(self):
         self.ecran("04-la-pyramide")
         u = 1.0
-        py = pyramide(2.0, 2.3, u, P(-5.6, -1.9))
+        # ⛔ Le plan jaune de la pyramide avançait jusqu'à x = −2,1 et « en plus petit. »
+        #    commence en −2,4 : la figure recule à gauche.
+        py = pyramide(2.0, 2.3, u, P(-6.1, -1.9))
         tit = hors_audit(self.t("Et la pyramide ?", 42, JAUNE_TITRE)).move_to(P(0, 3.15))
         x = -2.4
         l1 = self.t("Pour une pyramide, c'est pareil :", 30, WHITE)
@@ -234,7 +251,8 @@ class SectionConePyramide3e(Paysage3e):
         self.au_mot("donne la même forme")
         self.play(FadeIn(l3, shift=UP * 0.1), FadeIn(car, scale=0.8), run_time=0.8)
         gcar = Square(1.6, fill_color=BASE_C, fill_opacity=0.3, stroke_color=BASE_C,
-                      stroke_width=5).move_to(P(4.7, -1.4))
+                      stroke_width=5).move_to(P(5.4, -1.0))  # ⛔ en (4,7 ; −1,4) il couvrait
+        # Ti-Margo ET « Base carrée, section carrée. » (y = −1,8).
         l4 = self.t("en plus petit.", 32, WHITE)
         self.col(l4, -0.7, x)
         self.au_mot("en plus petit")

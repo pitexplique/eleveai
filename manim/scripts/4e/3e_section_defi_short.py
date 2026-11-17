@@ -40,6 +40,20 @@ class ShortSectionDefi3e(Short4e):
     nom_voix = "3e-section-defi-short"
     fichier_marques = "3e_section_defi_short_marques.json"
 
+    def _carte(self, lettre, contenu, fs):
+        """⛔ Le gabarit étire le contenu jusqu'à 0,8 du bord de la carte, or le ✓ de la bonne
+        réponse se pose à 0,38 du bord DROIT : sur un libellé long, il TOUCHAIT la dernière
+        lettre (vu sur la planche ; BORDS=1 ne voit rien, rien ne sort du cadre). On lui
+        réserve sa place ici, sans toucher au gabarit partagé. Les libellés courts, eux, ne
+        bougent pas : la condition ne les atteint jamais."""
+        g = super()._carte(lettre, contenu, fs)
+        cadre, ligne = g
+        if ligne.width > self.LARG - 1.2:
+            ligne.scale_to_fit_width(self.LARG - 1.2)
+            ligne.move_to(cadre).align_to(cadre.get_left() + RIGHT * 0.2, LEFT)
+        return g
+
+
     def construct(self):
         self.margo_bas()
 

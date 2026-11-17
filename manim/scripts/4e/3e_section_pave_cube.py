@@ -63,6 +63,19 @@ class SectionPaveCube3e(Paysage3e):
     fichier_marques = "3e_section_pave_cube_marques.json"
     ceinture = "jaune"
 
+    def _carte(self, lettre, contenu, fs):
+        """⛔ Le gabarit étire le contenu jusqu'à 0,8 du bord de la carte, or le ✓ de la bonne
+        réponse se pose à 0,38 du bord DROIT : sur un libellé long, il TOUCHAIT la dernière
+        lettre (vu sur la planche ; BORDS=1 ne voit rien, rien ne sort du cadre). On lui
+        réserve sa place ici, sans toucher au gabarit partagé. Les libellés courts, eux, ne
+        bougent pas : la condition ne les atteint jamais."""
+        g = super()._carte(lettre, contenu, fs)
+        cadre, ligne = g
+        if ligne.width > self.LARG - 1.2:
+            ligne.scale_to_fit_width(self.LARG - 1.2)
+            ligne.move_to(cadre).align_to(cadre.get_left() + RIGHT * 0.2, LEFT)
+        return g
+
     def pause_gauche(self, y=-3.2, x=-6.2, marge=2.0):
         """« Mets pause, et cherche ! » en bas À GAUCHE.
         ⛔ Dans la colonne de droite (pause_defi du commun), le « ! » touche Ti-Margo : constaté
@@ -143,7 +156,9 @@ class SectionPaveCube3e(Paysage3e):
         self.col(l1, 2.0, x)
         self.au_mot("coupe parallèlement")
         self.play(FadeIn(l1, shift=UP * 0.1), FadeIn(pl, shift=LEFT * 0.3), run_time=0.7)
-        tr = tranche(1.6, 1.4, u, P(5.2, 0.6))
+        # ⛔ En (5,2 ; 0,6) le bas de la tranche touchait « un rectangle, de mêmes
+        #    dimensions. » (y = −0,2) : elle monte entre les deux lignes et recule à droite.
+        tr = tranche(1.6, 1.4, u, P(5.5, 0.95))
         l2 = self.bloc(["la tranche a exactement", "la forme de cette face :"], 30, WHITE)
         self.col(l2, 1.0, x)
         self.au_mot("tranche a exactement")
@@ -181,7 +196,9 @@ class SectionPaveCube3e(Paysage3e):
         self.col(l2, 1.1, x)
         self.au_mot("chaque tranche parallèle")
         self.play(FadeIn(l2, shift=UP * 0.1), FadeIn(pl, shift=LEFT * 0.3), run_time=0.7)
-        car = tranche(1.6, 1.6, u, P(5.2, 0.2))
+        # ⛔ En (5,2 ; 0,2) « Chaque tranche parallèle à une face » (y = 1,1) passait DANS
+        #    le carré : il descend sous la ligne et recule à droite.
+        car = tranche(1.6, 1.6, u, P(5.7, -0.25))
         # ⛔ « 8 cm de côté » attendait « côté », dit 0,8 s après le 8 : le nombre et le mot long
         #    vont dans deux morceaux (leçon 24).
         l3 = self.ligne([("serait un carré de", WHITE), ("8 cm", BASE_C), ("de côté :", WHITE)],

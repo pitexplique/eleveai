@@ -110,7 +110,8 @@ class SectionSphere3e(Paysage3e):
         met = self.t("géographe", 26, BLEU_CALCUL).next_to(p, DOWN, buff=0.2)
         self.play(FadeIn(met, shift=DOWN * 0.1), run_time=0.4)
         x = -2.9
-        gl = globe(1.5, 1.0, P(3.6, 0.0))
+        # ⛔ En x = 3,6 le globe mordait sur « Ce sont tous des cercles, » : il recule.
+        gl = globe(1.5, 1.0, P(4.2, 0.0))
         l1 = self.t("Sur son globe,", 32, WHITE)
         self.col(l1, 2.1, x)
         self.au_mot("Sur son globe")
@@ -157,8 +158,10 @@ class SectionSphere3e(Paysage3e):
         self.play(FadeIn(l2, shift=UP * 0.1), Create(cs.corde), run_time=0.8)
         croix = VGroup(Ellipse(width=1.7, height=0.9, stroke_color=ROUGE_ERREUR, stroke_width=5,
                                fill_opacity=0).move_to(P(5.1, 1.5)),
+                       # ⛔ En y = −0,4 le carré barré recevait « Jamais un ovale, jamais
+                       #    autre chose. » (y = 0,2) en plein milieu : il descend.
                        Square(1.2, stroke_color=ROUGE_ERREUR, stroke_width=5,
-                              fill_opacity=0).move_to(P(5.1, -0.4)))
+                              fill_opacity=0).move_to(P(5.1, -1.2)))
         barres = VGroup(*[Line(m.get_corner(DL), m.get_corner(UR), color=ROUGE_ERREUR,
                                stroke_width=6) for m in croix])
         l3 = self.ligne([("Jamais un ovale,", ROUGE_ERREUR), ("jamais autre chose.", ROUGE_ERREUR)],
