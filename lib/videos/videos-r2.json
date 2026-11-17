@@ -9286,6 +9286,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_lire&display=simple"
  },
+ "cp-duree-defi": {
+  "fichier": "cp/maths/duree/05-defi/eleveai-maths-cp-duree-defi.mp4",
+  "poster": "cp/maths/duree/05-defi/eleveai-maths-cp-duree-defi.png",
+  "vignette": "cp/maths/duree/05-defi/eleveai-maths-cp-duree-defi.vignette.webp",
+  "titre": "L'horloge avance : quelle heure est-il vraiment ? — Défi sur l'heure — épisode 5 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_defi&display=simple"
+ },
+ "cp-duree-defi-short": {
+  "fichier": "cp/maths/duree/05-defi/eleveai-maths-cp-duree-defi-short.mp4",
+  "poster": "cp/maths/duree/05-defi/eleveai-maths-cp-duree-defi-short-miniature.png",
+  "vignette": "cp/maths/duree/05-defi/eleveai-maths-cp-duree-defi-short-miniature.vignette.webp",
+  "titre": "Mon gâteau est tout mou… à cause de l'horloge ! #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_defi&display=simple"
+ },
  "cp-duree-jour-semaine": {
   "fichier": "cp/maths/duree/03-jour-semaine/eleveai-maths-cp-duree-jour-semaine.mp4",
   "poster": "cp/maths/duree/03-jour-semaine/eleveai-maths-cp-duree-jour-semaine.png",

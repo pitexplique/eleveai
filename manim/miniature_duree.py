@@ -32,6 +32,8 @@ EP = [
      "pense à ce que tu fais !", True, "blanche"),
     ("cp", "ordonner", "04-ordonner", ["RANGER", "DANS L'ORDRE"], "8 heures ou 10 heures : qui d'abord ?",
      "la plus petite heure !", True, "blanche"),
+    ("cp", "defi", "05-defi", ["L'HORLOGE", "AVANCE !"], "Elle montre 5 heures : quelle heure est-il ?",
+     "on recule de 1 heure !", True, "blanche"),
 ]
 
 
