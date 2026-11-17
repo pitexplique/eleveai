@@ -21,10 +21,16 @@
 #    décrivent le RÉSULTAT. Seul le résultat est un défaut, et il se mesure.
 #
 # Les lignes de rendu sont conservées plus bas, commentées : si un rendu redevient nécessaire,
-# les chemins, les noms de scène et les dossiers de sortie sont justes, et la garde CRLF aussi.
+# les chemins, les noms de scène et les dossiers de sortie sont justes.
 # ⛔ Ne rien dé-commenter sans avoir d'abord mesuré le défaut à l'image.
 
-if grep -q $'\r' "$0" 2>/dev/null; then exec bash <(tr -d '\r' < "$0") "$@"; fi
+# ⛔ (Une garde contre le CRLF se trouvait ici. Retirée : le CRLF n'était PAS la cause du
+#    rendu perdu par la session 4e, et une garde contre un fantôme fait croire au fantôme.
+#    Le vrai défaut est le VOL D'ENTRÉE STANDARD : dans un `while read`, toute commande
+#    héritée lit le même stdin, `manim` avalait le début de la ligne suivante, d'où un chemin
+#    amputé. Ce lot n'a aucune boucle — il appelle `rendu` ligne par ligne — donc il n'y est
+#    pas exposé.
+#    ⭐ Si un jour ce lot passe en boucle : `< /dev/null` sur chaque commande de la boucle.)
 
 cd /c/Users/acade/Documents/eleveai/eleveai-app || exit 1
 H=manim/poste2/4e_hd.sh
@@ -55,7 +61,17 @@ echo "=== LOT FINAL 3e TERMINE (11 rendus)"
 #     script (`6d47f3b3a`, 07:32), et ils ont déjà `_carte_choix`. À jour.
 #   shorts T7, T8 : MP4 de 12:19 et 12:20, et ils ont déjà la surcharge `_carte`. À jour.
 #
-# LES 9 SCRIPTS À CORRIGER AVANT DE LANCER (la coche)
+# LES 9 SCRIPTS OÙ LA SURCHARGE DE LA COCHE MANQUE
+#   ⛔⛔ NE PAS LES « RATTRAPER » MAINTENANT. La surcharge ne changerait rien à l'image
+#      (mesuré : ces neuf libellés sont loin sous le seuil où le ✓ mord), et toucher au source
+#      d'un script DÉJÀ RENDU sans le re-rendre fait passer `mtime(.py)` devant `mtime(.mp4)` :
+#      à partir de là, `verifier-fraicheur-mp4.py` déclarera ces neuf MP4 douteux POUR
+#      TOUJOURS, et la prochaine session relancera neuf rendus pour rien.
+#   ⭐ LA RÈGLE : on ne modifie pas le source d'un script déjà rendu si on ne le re-rend pas.
+#      Un outil ne sait pas distinguer une retouche cosmétique d'un vrai changement — il doit
+#      traiter les deux pareil, et c'est à nous de ne pas lui mentir.
+#   ⭐ Donc : la surcharge s'ajoute à chacun de ces neuf scripts LE JOUR OÙ IL REPART EN
+#      RENDU pour une autre raison. Pas avant, et jamais pour elle seule.
 #   paysages (surcharge `_carte_choix`, comme 3e_section_pave_cube.py) :
 #     3e_volume_boule.py · 3e_volume_reduction_section.py · 3e_section_cylindre.py ·
 #     3e_section_sphere.py · 3e_section_longueur.py
