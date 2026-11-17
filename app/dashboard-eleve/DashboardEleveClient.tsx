@@ -11,6 +11,7 @@ import CarteAvatar from "./CarteAvatar";
 import CartePseudo from "./CartePseudo";
 import BulletinDashboard from "@/components/bulletin/BulletinDashboard";
 import CarteCodeParent from "./CarteCodeParent";
+import CarteMaLigneBulletin from "./CarteMaLigneBulletin";
 import type { Bulletin } from "@/lib/bulletin/types";
 import { prenomFromNom } from "@/lib/prenom";
 import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
@@ -448,6 +449,9 @@ export default function DashboardEleveClient() {
             <BulletinDashboard bulletin={bulletin} />
           </div>
         )}
+
+        {/* Sa ligne du bulletin de la classe, comme la voit son prof (17/11). */}
+        <CarteMaLigneBulletin />
 
         <CarteMesNotions notions={mesNotions} />
 
