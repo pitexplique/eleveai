@@ -102,7 +102,7 @@ class ShortVolumeBoule3e(Short4e):
         self.play(Create(diam), FadeIn(d20, shift=UP * 0.1), run_time=0.7)
         self.au_mot("c'est une respiration")
         pou = poumons(1.0, P(0, -1.6))
-        resp = self.t("une respiration", 28, VERT_OK).move_to(P(0, -2.8))
+        resp = self.t("une respiration", 28, VERT_OK).move_to(P(0, -2.65))
         self.play(FadeIn(pou, scale=0.85), FadeIn(resp, scale=1.15), run_time=0.9)
         self.attendre_voix(marge=0.3)
 
@@ -124,8 +124,10 @@ class ShortVolumeBoule3e(Short4e):
         self.play(FadeIn(lq, scale=1.12), run_time=0.45)
         self.au_mot("Réponds en commentaire")
                 # ⛔ Rien ne descend sous y = −3,0 dans un short : Ti-Margo occupe la bande basse
-        #    (centré en −3,45, environ 0,55 de haut). Le commentaire fait 0,8 de haut.
-        self.play(FadeIn(self.commentaire(y=-2.6)), run_time=0.4)
+        #    Ses PIXELS s'arrêtent à y = −3,02 (sa boîte, elle, monte à −2,92 : elle a du
+        #    vide en haut). Le commentaire fait 0,852 de haut, donc −2,45 ; une phrase
+        #    seule fait 0,36, donc −2,65. ⛔ À −2,6 le commentaire TOUCHE encore.
+        self.play(FadeIn(self.commentaire(y=-2.45)), run_time=0.4)
         self.attendre_voix(marge=0.3)
 
         # ── 05 ──────────────────────────────────────────────────────────────

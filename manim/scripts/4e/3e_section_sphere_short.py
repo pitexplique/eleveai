@@ -65,7 +65,7 @@ class ShortSectionSphere3e(Short4e):
         # ── 01 : le défi ────────────────────────────────────────────────────
         self.dire("01-defi")
         self.au_mot("Lequel est le plus grand")
-        q = self.accroche("le plus grand ?", fs=30, couleur=JAUNE_TITRE, y=-2.8)
+        q = self.accroche("le plus grand ?", fs=30, couleur=JAUNE_TITRE, y=-2.65)
         self.play(FadeIn(q, scale=1.15),
                   Indicate(gl.equateur_t, color=EQUA_C, scale_factor=1.1),
                   Indicate(par, color=PARA_C, scale_factor=1.25), run_time=1.0)
@@ -116,8 +116,10 @@ class ShortSectionSphere3e(Short4e):
         self.play(FadeIn(sq, shift=UP * 0.1), run_time=0.45)
         self.au_mot("Réponds en commentaire")
                 # ⛔ Rien ne descend sous y = −3,0 dans un short : Ti-Margo occupe la bande basse
-        #    (centré en −3,45, environ 0,55 de haut). Le commentaire fait 0,8 de haut.
-        self.play(FadeIn(self.commentaire(y=-2.6)), run_time=0.4)
+        #    Ses PIXELS s'arrêtent à y = −3,02 (sa boîte, elle, monte à −2,92 : elle a du
+        #    vide en haut). Le commentaire fait 0,852 de haut, donc −2,45 ; une phrase
+        #    seule fait 0,36, donc −2,65. ⛔ À −2,6 le commentaire TOUCHE encore.
+        self.play(FadeIn(self.commentaire(y=-2.45)), run_time=0.4)
         self.attendre_voix(marge=0.3)
 
         # ── 05 ──────────────────────────────────────────────────────────────

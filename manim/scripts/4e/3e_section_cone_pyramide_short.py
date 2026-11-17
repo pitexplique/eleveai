@@ -104,7 +104,7 @@ class ShortSectionConePyramide3e(Short4e):
         self.play(Create(rb), Create(rs), run_time=0.9)
         cmp = VGroup(Line(ORIGIN, RIGHT * 1.26).set_stroke(BASE_C, 8),
                      Line(ORIGIN, RIGHT * 0.63).set_stroke(SECTION_C, 8))
-        cmp.arrange(DOWN, buff=0.3, aligned_edge=LEFT).move_to(P(0, -2.8))
+        cmp.arrange(DOWN, buff=0.3, aligned_edge=LEFT).move_to(P(0, -2.65))
         self.play(FadeIn(cmp), run_time=0.6)
         self.attendre_voix(marge=0.3)
 
@@ -129,8 +129,10 @@ class ShortSectionConePyramide3e(Short4e):
         self.play(FadeIn(rq, scale=1.12), run_time=0.5)
         self.au_mot("Réponds en commentaire")
         # ⛔ Rien ne descend sous y = −3,0 dans un short : Ti-Margo occupe la bande basse
-        #    (centré en −3,45, environ 0,55 de haut). Le commentaire fait 0,8 de haut.
-        self.play(FadeIn(self.commentaire(y=-2.6)), run_time=0.4)
+        #    Ses PIXELS s'arrêtent à y = −3,02 (sa boîte, elle, monte à −2,92 : elle a du
+        #    vide en haut). Le commentaire fait 0,852 de haut, donc −2,45 ; une phrase
+        #    seule fait 0,36, donc −2,65. ⛔ À −2,6 le commentaire TOUCHE encore.
+        self.play(FadeIn(self.commentaire(y=-2.45)), run_time=0.4)
         self.attendre_voix(marge=0.3)
 
         # ── 05 ──────────────────────────────────────────────────────────────

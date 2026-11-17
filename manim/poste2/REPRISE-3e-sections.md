@@ -87,12 +87,21 @@ coûte une vidéo fausse chez les élèves.
     en −2,4 déborde.
 39. ⭐ Deux barres de comparaison se dessinent À L'ÉCHELLE : si le ballon écrase les poumons,
     l'écran dit le contraire de la voix (« c'est le même ordre de grandeur »).
-40. ⛔⛔ **Dans un SHORT, rien ne descend sous y = −3,0** : Ti-Margo occupe la bande basse
-    (`margo_bas()` le pose centré en −3,45, environ 0,55 de haut, au MILIEU de l'écran).
-    Le bloc `commentaire()` fait 0,8 de haut : posé à −2,85 il mord déjà sur la mascotte, et une
-    phrase seule à −2,9 lui passe sur la tête (vu sur le MP4 de T2, « un huitième ! »).
-    Valeurs sûres : `commentaire(y=-2.6)`, une phrase seule à −2,8. ⚠️ `BORDS=1` ne voit RIEN de
-    ces chevauchements : ils ne sortent pas du cadre. Seule la relecture des images les attrape.
+40. ⛔⛔ **Dans un SHORT, on se cale sur les PIXELS de Ti-Margo, pas sur sa boîte.**
+    `margo_bas()` le pose à `scale(0.38)` en y = −3,45. Sa boîte englobante monte à −2,92, mais
+    elle contient du vide en haut : ses pixels réels s'arrêtent à **y = −3,02** (x de −0,28 à
+    +0,29). Mesure de la session « passe finale des 28 », qui a compté les pixels au lieu de les
+    estimer. D'où les valeurs sûres, par hauteur de bloc :
+    · `commentaire()` (deux lignes, 0,852 de haut) → **y = −2,45** ; à −2,6 son bas tombe à
+      −3,026 et il TOUCHE, à −2,9 (la valeur des 20 shorts de 4e) il le recouvre de 0,31 ;
+    · une phrase seule (0,36 de haut) → **y = −2,65**.
+    ⚠️ `BORDS=1` ne voit RIEN de tout cela : rien ne sort du cadre.
+    ⭐ L'outil qui le mesure sans re-rendre en HD :
+    `python manim/poste2/verifier-zone-margo.py <mp4> [--pas 0.4]` → « 0 instant où quelque chose
+    recouvre Ti-Margo », ou la liste des instants fautifs. Il marche sur un rendu `-ql`, donc
+    AVANT le HD, et il s'étalonne seul (la mascotte ne bouge jamais : le minimum de pixels allumés
+    dans son rectangle sur toute la vidéo, c'est elle toute seule). Il connaît aussi le cadre
+    paysage, où il regarde en bas à droite.
 41. ⭐ Outil : `manim/poste2/verif-au-mot.py <script> <nom-voix>` relit le script, suit les
     `dire`/`ecran`/`question_gauche` et vérifie que CHAQUE `au_mot` existe dans la voix de SON
     écran. Il attrape en une seconde les fautes de casse (« La surface » vs « la surface ») qui
