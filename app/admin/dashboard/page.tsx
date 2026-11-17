@@ -12,6 +12,7 @@ import AdminCallsClient from "./AdminCallsClient";
 import AdminContactMessagesClient from "./AdminContactMessagesClient";
 import MaintenanceChecklist from "./MaintenanceChecklist";
 import PhotoCoursClient from "./PhotoCoursClient";
+import AdminCodeOublieClient from "./AdminCodeOublieClient";
 
 export default async function AdminDashboardPage() {
   const cookieStore = await cookies();
@@ -197,6 +198,8 @@ export default async function AdminDashboardPage() {
             en badge « ▶ Vidéo » à côté de la fiche.
           </p>
         </Link>
+
+        <AdminCodeOublieClient />
 
         <AdminContactMessagesClient />
       </div>
