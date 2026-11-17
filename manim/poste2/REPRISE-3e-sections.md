@@ -167,6 +167,18 @@ le plein format à TRANCHER.
     · ⛔ `-I` seul fait ignorer `PYTHONIOENCODING` et l'outil plante sur l'accent de « libellé » :
       lancer `python -X utf8 -I`.
     Mesure finale du lot : **20 à 449 px sur les 16**, après correction du short T3.
+    ⭐⭐ **La mesure qui explique tout, et qui se fait SANS RENDRE** (quelques secondes) :
+    `ligne.width` n'est pas la largeur du texte — c'est rond de la lettre + buff 0,25 + texte,
+    soit ~0,8 de plus. Un libellé COURT ne fait donc pas une ligne étroite. Mesuré sur le short
+    de T3 (`LARG = 3,9`, `FS_C = 28`) : « plus grande » → 2,991 ; « plus petite » → 2,741 ;
+    « la même » → 2,325 ; « non, un huitième » et « une pyramide » → 3,100 (déjà rognés par le
+    gabarit). D'où **la zone aveugle, entre 2,7 et 3,1** : au-dessus de 3,1 (= `LARG − 0,8`) le
+    gabarit rogne lui-même et le texte s'arrête PILE où le ✓ commence ; en dessous de 2,7 il
+    reste de l'air ; **entre les deux le gabarit ne fait rien et le ✓ mord quand même.**
+    Se mesure ainsi, en lecture seule (⚠️ régler `config.frame_width/height` AVANT d'importer
+    la scène, sinon les largeurs sont fausses — 4,5 × 8,0 en short, 14,22 × 8,0 en paysage) :
+    `sc = C.__new__(C)` puis comparer `super(C, sc)._carte("A", t, sc.FS_C)[1].width` à
+    `C._carte(sc, "A", t, sc.FS_C)[1].width`. Tout ce qui dépasse 2,7 touchait.
     ⛔⛔ La leçon générale : **sur ce défaut, l'œil ne suffit pas — il faut mesurer les 16, pas
     seulement ceux qu'on soupçonne.** Deux de mes trois erreurs de la journée viennent d'avoir
     choisi QUOI regarder au lieu de tout mesurer.
