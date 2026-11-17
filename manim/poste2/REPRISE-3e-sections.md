@@ -189,6 +189,19 @@ le plein format à TRANCHER.
     pas, ce qui tranche est le CONTENU : regarder dans le MP4 ce que le correctif était censé
     changer (ici, la poignée « @eleveai974 » lisible en entier).
 
+51. ⛔⛔ **« La surcharge manque » décrit le SOURCE ; « le ✓ touche » décrit le RÉSULTAT. Seul le
+    second est un défaut.** Le 17/11 on m'a listé 9 scripts de 3e « à corriger » et un lot de
+    11 rendus à relancer. Mesure faite, les deux listes étaient vides : sur 8 des 9, la condition
+    de la surcharge ne se déclenche JAMAIS (la ligne la plus large va de 1,85 à 3,42 pour un
+    seuil à 2,70 en short et 4,16 en paysage) — l'ajouter ne changerait pas un pixel. Le 9ᵉ,
+    `3e_section_sphere_short`, dépasse bien le seuil sur « les deux pareil »… qui est le choix C
+    alors que la bonne réponse est A : **le ✓ ne se pose jamais sur cette carte**. Vérifié des
+    deux côtés : mesure sur les sources ET mesure sur les 16 MP4 (20 à 449 px), même conclusion.
+    ⛔ Ne jamais conclure « à re-rendre » d'une absence dans le code : seul le MP4 fait foi, et
+    un rendu inutile est une heure de verrou prise à deux autres sessions.
+52. ⚠️ **Un libellé peut dépasser le seuil sans que ce soit un défaut** : regarder QUELLE carte
+    est la bonne réponse avant de corriger. Le ✓ n'est posé que sur elle.
+
 ---
 
 # ⭐ PROMPT DE REPRISE (lot 3e, 17/11/2026)
