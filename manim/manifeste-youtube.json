@@ -97710,6 +97710,151 @@
         "animaux",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "ce1-masse-relation",
+      "pas_avant": "2027-05-05",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_relation_kg_g",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "type": "longue",
+      "fichier": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation.mp4",
+      "miniature": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation.png",
+      "titre": "1 kg, c'est combien de grammes ? — 1 kilogramme = 1 000 grammes — épisode 2 · Maths CE1",
+      "accroche": "Liam vend du riz, des lentilles et des graines en vrac. Un client veut 1 kilogramme de lentilles : Liam remplit deux sacs de 500 grammes. Est-ce bien 1 kilogramme ?\n\nDans cette vidéo :\n• sur la balance, 1 kg d'un côté et 1 000 g de l'autre : équilibre\n• 1 kg = 1 000 g\n• 500 g + 500 g = 1 000 g = 1 kg\n• 4 sacs de 250 g font 1 kg\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : Liam a 600 g de riz sur la balance : combien de grammes ajouter pour avoir 1 kg ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_relation_kg_g&display=simple\n\n⚖️ Épisode 2 de la série Masses d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "1 kg, combien de grammes ?"
+        ],
+        [
+          "00:18",
+          "L'équilibre"
+        ],
+        [
+          "00:29",
+          "Deux sacs de 500 g"
+        ],
+        [
+          "00:41",
+          "Question 1"
+        ],
+        [
+          "01:09",
+          "Quatre sacs de 250 g"
+        ],
+        [
+          "01:20",
+          "Question 2"
+        ],
+        [
+          "01:45",
+          "À toi de jouer"
+        ],
+        [
+          "01:59",
+          "Correction"
+        ],
+        [
+          "02:10",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "kilogramme",
+        "gramme",
+        "1 kg = 1 000 g",
+        "convertir",
+        "balance",
+        "vrac",
+        "maths",
+        "CE1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:41",
+          "question": "Un élève écrit : 1 kilogramme égale 100 grammes. A-t-il raison ?",
+          "choix": [
+            "non, c'est 1 000 grammes",
+            "oui",
+            "non, c'est 10 grammes"
+          ],
+          "reponse": 0,
+          "explication": "1 kilogramme, c'est 1 000 grammes. Pas 100 !"
+        },
+        {
+          "t": "01:20",
+          "question": "Combien de paquets de 500 grammes pour faire 1 kilogramme ?",
+          "choix": [
+            "10",
+            "5",
+            "2"
+          ],
+          "reponse": 2,
+          "explication": "500 + 500 : 1 000 grammes, 1 kilogramme. Il en faut 2."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "ce1-masse-relation-short",
+      "pas_avant": "2027-05-05",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_relation_kg_g",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "type": "short",
+      "renvoie_vers": "ce1-masse-relation",
+      "fichier": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation-short.mp4",
+      "miniature": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation-short-miniature.png",
+      "titre": "1 000 grammes contre 1 kilogramme : qui gagne ? #maths #ce1",
+      "accroche": "Ma copine a un sac de 1 kilogramme de billes. Moi, j'ai 1 000 grammes. 1 000, c'est plus que 1 : j'ai gagné ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien de sacs de 250 grammes pour faire 1 kilogramme ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_relation_kg_g&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce1 #primaire",
+      "tags": [
+        "masse",
+        "kilogramme",
+        "gramme",
+        "billes",
+        "balance",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Que fait la balance ?",
+          "choix": [
+            "elle reste en équilibre",
+            "mon sac descend",
+            "son sac descend"
+          ],
+          "reponse": 0,
+          "explication": "1 kilogramme, c'est 1 000 grammes. Même masse : équilibre !"
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
     }
   ]
 }

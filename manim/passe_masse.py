@@ -140,6 +140,22 @@ EP = [
       s_accroche="Sur l'étiquette du chaton, mon copain écrit : 1 gramme. Mais 1 gramme, c'est la masse d'un trombone !",
       s_toi="un trombone pèse 1 gramme : combien pèsent 10 trombones ?",
       s_tags=["masse", "kilogramme", "gramme", "chaton"], s_centres=["animaux", "jeux-defis"]),
+ dict(classe="ce1", n=2, slug="relation", micro="ce1_masse_relation_kg_g", nom="1 kilogramme = 1 000 grammes",
+      date="2027-05-05", ceinture="blanche",
+      titre="1 kg, c'est combien de grammes ?",
+      intro="Liam vend du riz, des lentilles et des graines en vrac. Un client veut 1 kilogramme de lentilles : Liam remplit deux sacs de 500 grammes. Est-ce bien 1 kilogramme ?",
+      points=["sur la balance, 1 kg d'un côté et 1 000 g de l'autre : équilibre", "1 kg = 1 000 g",
+              "500 g + 500 g = 1 000 g = 1 kg", "4 sacs de 250 g font 1 kg"],
+      defi="Liam a 600 g de riz sur la balance : combien de grammes ajouter pour avoir 1 kg ?",
+      chap={"00-garde": "1 kg, combien de grammes ?", "02-equilibre": "L'équilibre", "03-deux-sacs": "Deux sacs de 500 g",
+            "04-question": "Question 1", "05-quatre-sacs": "Quatre sacs de 250 g", "06-question": "Question 2",
+            "07-defi": "À toi de jouer", "07b-correction": "Correction", "08-finale": "Ce que tu as appris"},
+      tags=["masse", "kilogramme", "gramme", "1 kg = 1 000 g", "convertir", "balance", "vrac"],
+      centres=["cuisine", "argent-budget"],
+      s_titre="1 000 grammes contre 1 kilogramme : qui gagne ?", s_ceinture="blanche",
+      s_accroche="Ma copine a un sac de 1 kilogramme de billes. Moi, j'ai 1 000 grammes. 1 000, c'est plus que 1 : j'ai gagné ?",
+      s_toi="combien de sacs de 250 grammes pour faire 1 kilogramme ?",
+      s_tags=["masse", "kilogramme", "gramme", "billes", "balance"], s_centres=["jeux-defis"]),
 ]
 
 COMMUNS = ["masse", "maths"]

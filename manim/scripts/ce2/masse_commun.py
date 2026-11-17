@@ -760,3 +760,75 @@ def base_commune(ligne):
         if y is not None and y0 is not None:
             m.shift(UP * (y0 - y))
     return ligne
+
+
+# ── CE1 03 (17/11) : Chloé la bibliothécaire, les repères (trombone, brique de lait), trousse, cartable, piano ───
+def chloe(s=1.0):
+    """Chloé, bibliothécaire : gilet violet, lunettes rondes, cheveux longs."""
+    p = visage(personne(peau="#e0ac69", tenue="#7c3aed", cheveux="#b45309", longs=True, s=s))
+    c, r = p.tete.get_center(), p.tete.width / 2
+    for dx in (-0.38, 0.38):
+        p.add(Circle(radius=r * 0.27, color="#1f2937", stroke_width=3).move_to(c + RIGHT * dx * r + UP * 0.08 * r))
+    p.add(Line(c + LEFT * 0.11 * r + UP * 0.08 * r, c + RIGHT * 0.11 * r + UP * 0.08 * r, color="#1f2937", stroke_width=3))
+    return p
+
+
+def trombone_m(s=1.0):
+    """Un trombone gris, dessiné en trait."""
+    pts = [(-0.1, 0.32), (-0.1, -0.26), (0.02, -0.38), (0.14, -0.26), (0.14, 0.38), (-0.01, 0.53), (-0.16, 0.38),
+           (-0.16, -0.34), (0.02, -0.52), (0.2, -0.34), (0.2, 0.2)]
+    return VMobject(stroke_color="#cbd5e1", stroke_width=6 * s).set_points_smoothly([P(x * s, y * s) for x, y in pts])
+
+
+def brique_lait(s=1.0):
+    """Une brique de lait de 1 litre : un pavé blanc et bleu, un toit en pointe."""
+    corps = Rectangle(width=0.7 * s, height=1.2 * s, fill_color="#f8fafc", fill_opacity=1, stroke_color="#94a3b8",
+                      stroke_width=2)
+    bande = Rectangle(width=0.7 * s, height=0.4 * s, fill_color="#3b82f6", fill_opacity=1, stroke_width=0).move_to(corps)
+    toit = Polygon(corps.get_corner(UL), corps.get_corner(UR), corps.get_top() + UP * 0.28 * s, fill_color="#e2e8f0",
+                   fill_opacity=1, stroke_color="#94a3b8", stroke_width=2)
+    goutte = hors_audit(Text("LAIT", font_size=int(16 * s), color=WHITE, weight=BOLD)).move_to(bande)
+    return VGroup(corps, bande, toit, goutte)
+
+
+def petit_livre(s=1.0, couleur="#16a34a"):
+    """Un petit livre fin, posé à plat."""
+    pages = Rectangle(width=0.9 * s, height=0.16 * s, fill_color="#f8fafc", fill_opacity=1, stroke_width=0)
+    couv = RoundedRectangle(width=1.0 * s, height=0.22 * s, corner_radius=0.03 * s, fill_color=couleur, fill_opacity=1,
+                            stroke_width=0)
+    return VGroup(couv, pages.move_to(couv).shift(RIGHT * 0.03 * s))
+
+
+def trousse(s=1.0, couleur="#ec4899"):
+    """Une trousse d'écolier (fermeture éclair)."""
+    corps = RoundedRectangle(width=1.4 * s, height=0.5 * s, corner_radius=0.22 * s, fill_color=couleur, fill_opacity=1,
+                             stroke_color="#9d174d", stroke_width=2)
+    eclair = Line(corps.get_left() + RIGHT * 0.2 * s + UP * 0.12 * s, corps.get_right() + LEFT * 0.2 * s + UP * 0.12 * s,
+                  color="#fde68a", stroke_width=3)
+    tirette = RoundedRectangle(width=0.1 * s, height=0.18 * s, corner_radius=0.03, fill_color="#fde68a", fill_opacity=1,
+                               stroke_width=0).move_to(eclair.get_end())
+    return VGroup(corps, eclair, tirette)
+
+
+def cartable(s=1.0, couleur="#2563eb"):
+    """Un cartable : le corps, le rabat, la poignée, deux fermoirs."""
+    corps = RoundedRectangle(width=1.4 * s, height=1.1 * s, corner_radius=0.12 * s, fill_color=couleur, fill_opacity=1,
+                             stroke_color="#1e3a8a", stroke_width=2)
+    rabat = RoundedRectangle(width=1.4 * s, height=0.55 * s, corner_radius=0.12 * s, fill_color="#1d4ed8", fill_opacity=1,
+                             stroke_color="#1e3a8a", stroke_width=2).align_to(corps, UP)
+    poignee = Arc(radius=0.22 * s, start_angle=0, angle=PI, color="#1e3a8a", stroke_width=6).next_to(corps, UP, buff=-0.02)
+    ferm = VGroup(*[RoundedRectangle(width=0.14 * s, height=0.2 * s, corner_radius=0.03, fill_color=LAITON, fill_opacity=1,
+                                     stroke_width=0).move_to(rabat.get_bottom() + RIGHT * dx * s) for dx in (-0.35, 0.35)])
+    return VGroup(corps, rabat, poignee, ferm)
+
+
+def piano(s=1.0):
+    """Un piano droit, noir, avec son clavier."""
+    corps = Rectangle(width=1.8 * s, height=1.3 * s, fill_color="#1f2937", fill_opacity=1, stroke_color="#475569", stroke_width=2)
+    clav = Rectangle(width=1.8 * s, height=0.22 * s, fill_color="#f8fafc", fill_opacity=1, stroke_width=0)
+    clav.move_to(corps.get_center() + DOWN * 0.1 * s)
+    noires = VGroup(*[Rectangle(width=0.06 * s, height=0.12 * s, fill_color="#111827", fill_opacity=1, stroke_width=0)
+                      .move_to(clav.get_top() + DOWN * 0.06 * s + RIGHT * (-0.8 + 0.2 * k) * s) for k in range(9)])
+    pieds = VGroup(*[Rectangle(width=0.12 * s, height=0.3 * s, fill_color="#1f2937", fill_opacity=1, stroke_width=0)
+                     .next_to(corps, DOWN, buff=0).shift(RIGHT * dx * s) for dx in (-0.75, 0.75)])
+    return VGroup(corps, clav, noires, pieds)

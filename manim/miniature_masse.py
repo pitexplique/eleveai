@@ -34,6 +34,8 @@ EP = [
      "la taille ne dit pas la masse !", True, "blanche"),
     ("ce1", "kg-g", "01-kg-g", ["LE KILOGRAMME", "ET LE GRAMME"], "kg pour le lourd, g pour le léger",
      "un colis : 3 kg, une lettre : 20 g", True, "blanche"),
+    ("ce1", "relation", "02-relation", ["1 kg", "= 1 000 g"], "Deux sacs de 500 g",
+     "font 1 kg !", True, "blanche"),
 ]
 
 

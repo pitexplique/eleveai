@@ -6352,6 +6352,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_kg_g&display=simple"
  },
+ "ce1-masse-relation": {
+  "fichier": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation.mp4",
+  "poster": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation.png",
+  "vignette": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation.vignette.webp",
+  "titre": "1 kg, c'est combien de grammes ? — 1 kilogramme = 1 000 grammes — épisode 2 · Maths CE1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_relation_kg_g&display=simple"
+ },
+ "ce1-masse-relation-short": {
+  "fichier": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation-short.mp4",
+  "poster": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation-short-miniature.png",
+  "vignette": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation-short-miniature.vignette.webp",
+  "titre": "1 000 grammes contre 1 kilogramme : qui gagne ? #maths #ce1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_relation_kg_g&display=simple"
+ },
  "ce2-contenance-comparer": {
   "fichier": "ce2/maths/contenance/03-comparer/eleveai-maths-ce2-contenance-comparer.mp4",
   "poster": "ce2/maths/contenance/03-comparer/eleveai-maths-ce2-contenance-comparer.png",
