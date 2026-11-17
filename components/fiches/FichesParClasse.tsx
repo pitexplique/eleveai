@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Download, FileText, PencilLine } from "lucide-react";
+import { ArrowRight, Download, FileText, PencilLine, Search, X } from "lucide-react";
 import { TEINTES } from "@/components/accueil/matieres";
 
 /* ═══ LES CLASSES À GAUCHE, LES FICHES À DROITE (27/09/2026) ════════════════
@@ -52,6 +52,19 @@ export default function FichesParClasse({
   sorte: keyof typeof ACCENTS;
 }) {
   const [choisie, setChoisie] = useState(groupes[0]?.cle);
+  // ⭐ 17/11/2026 — Frédéric : « ajouter un champ recherche quand on clique
+  // sur une classe, ce matin j'ai eu du mal à en trouver une ». Le filtre agit
+  // sur la classe choisie, sur le titre ET le résumé, sans accents ni
+  // majuscules (« fraction » trouve « Fractions »).
+  const [recherche, setRecherche] = useState("");
+  const sansAccent = (t: string) =>
+    t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const mots = sansAccent(recherche).split(/\s+/).filter(Boolean);
+  const correspond = (f: { titre: string; resume?: string }) => {
+    if (!mots.length) return true;
+    const texte = sansAccent(`${f.titre} ${f.resume ?? ""}`);
+    return mots.every((m) => texte.includes(m));
+  };
   const accent = ACCENTS[sorte];
 
   // Lu APRÈS le premier rendu : la page est statique, le serveur ne voit pas
@@ -132,10 +145,37 @@ export default function FichesParClasse({
                 {g.sous && ` · ${g.sous}`}
               </span>
             </h2>
+            <div className="relative mb-5 max-w-xl">
+              <Search className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
+              <input
+                type="search"
+                value={recherche}
+                onChange={(e) => setRecherche(e.target.value)}
+                placeholder={`Chercher une fiche en ${g.label} : fractions, aire, heure…`}
+                aria-label={`Chercher une fiche en ${g.label}`}
+                className="w-full rounded-xl border border-slate-300 bg-white py-2.5 pl-10 pr-10 text-base text-slate-800 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-300"
+              />
+              {recherche && (
+                <button
+                  type="button"
+                  onClick={() => setRecherche("")}
+                  aria-label="Effacer la recherche"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              )}
+            </div>
+            {mots.length > 0 && !g.fiches.some(correspond) && (
+              <p className="mb-4 rounded-xl border border-dashed border-slate-300 bg-white px-4 py-3 text-sm text-slate-600">
+                Aucune fiche en {g.label} pour « {recherche} ». Essaie un autre mot.
+              </p>
+            )}
             <div className="grid gap-4 md:grid-cols-2">
               {g.fiches.map((f) => (
                 <Link
                   key={f.href}
+                  hidden={!correspond(f)}
                   href={f.href}
                   className={`group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg ${accent.carte}`}
                 >

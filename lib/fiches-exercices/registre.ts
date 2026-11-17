@@ -185,6 +185,178 @@ export const FICHES_EXERCICES_REGISTRE: Record<string, FicheExercicesEntry> = {
     resume:
       "Lire un programme Scratch dans l'ordre, faire avancer et tourner le lutin, utiliser une boucle « répéter », tracer un carré, un rectangle ou un triangle équilatéral. Un robot qui sème, une course d'orientation, une ruche, une chasse au trésor.",
   },
+  // ⭐ LE CP ET LE CE1 (17/11/2026) — Frédéric : « il manque série d'exercices
+  // CP CE1 », « les élèves adorent les fiches exercices ». Une feuille par
+  // notion du coach, phrases ≤ 14 mots (CP) / 16 (CE1), dessins partout.
+
+  // ── CP : notions du coach, interactives (17/11/2026, lot A) ──
+  "maths/cp/nombre-entier": {
+    titre: "Les nombres jusqu'à 100 : 20 exercices corrigés",
+    resume:
+      "Compter une collection, lire les dizaines et les unités avec des barres et des cubes, écrire un nombre en chiffres, comparer et ranger, placer un nombre sur une ligne graduée, trouver le rang dans une file. Problèmes : un nombre mystère, des letchis au marché, le petit train du zoo, des cartes à chiffres.",
+  },
+  "maths/cp/suite-nombre": {
+    titre: "Les suites de nombres : 20 exercices corrigés",
+    resume:
+      "Le nombre qui vient après et celui qui vient avant, compter de 2 en 2, de 5 en 5, de 10 en 10, compter à rebours, passer la dizaine, trouver le pas, compléter une suite. Problèmes : les maisons de la rue, une tirelire de billes, les croissants d'une boulangère, un code secret.",
+  },
+  "maths/cp/addition-soustraction": {
+    titre: "Additions et soustractions : 20 exercices corrigés",
+    resume:
+      "Réunir et enlever, calculer une addition et une soustraction, comprendre le signe =, trouver le nombre qui manque, poser une addition en colonnes, compter des groupes égaux avec le mot « fois ». Problèmes : un boulanger, une pyramide de nombres, des égalités à équilibrer, un match de basket.",
+  },
+  "maths/cp/calcul-mental": {
+    titre: "Le calcul mental : 20 exercices corrigés",
+    resume:
+      "Les tables d'addition, les compléments à 10, les doubles et les moitiés, ajouter ou enlever 1, 2, 10 et des dizaines, ajouter 9 en deux temps, passer la dizaine, ajouter deux nombres. Problèmes : une fleuriste, un jeu de l'oie, les œufs de la ferme, des devinettes.",
+  },
+  "maths/cp/probleme": {
+    titre: "Résoudre des problèmes : 20 problèmes corrigés",
+    resume:
+      "Comprendre ce qu'on cherche, réunir, enlever, chercher un écart, faire un schéma en barre, compter des groupes égaux, partager, résoudre en deux étapes, vérifier qu'une réponse est possible. Un aquarium, un bus, des araignées, une bibliothèque, un jardin à Cilaos, une sortie au zoo.",
+  },
+  "maths/cp/longueur": {
+    titre: "Les longueurs : 20 exercices corrigés",
+    resume:
+      "Long, court, près, loin, comparer deux rubans en les alignant, compter les carreaux, mesurer un trait avec la règle en partant du 0, choisir entre le mètre et le centimètre, 1 m = 100 cm. Problèmes : un ruban de couturière, une course d'escargots, une tour de cubes, un lapin et une fourmi.",
+  },
+  "maths/cp/masse-contenance": {
+    titre: "Les masses : 20 exercices corrigés",
+    resume:
+      "Dire lourd ou léger, lire une balance à plateaux, comparer deux objets, ranger trois objets, se méfier du plus gros, sans aucune unité comme le veut le programme du CP. Problèmes : des fruits au marché, des chiots chez la vétérinaire, des boîtes mystère, une bascule au parc.",
+  },
+
+  "maths/cp/duree": {
+    titre: "Lire l'heure : 20 exercices corrigés",
+    resume:
+      "Lire une heure entière sur une horloge à aiguilles, placer la petite et la grande aiguille, associer une heure au matin, à midi ou au soir, ranger les moments de la journée. Défis : l'horloge qui avance, la journée d'une pompière, le réveil mal réglé.",
+  },
+  "maths/cp/monnaie": {
+    titre: "La monnaie : 20 exercices corrigés",
+    resume:
+      "Reconnaître les pièces et les billets en euros, compter une somme, comparer deux sommes, payer un prix, rendre la monnaie. Des euros entiers jusqu'à 100. Problèmes : une tirelire, le marché, une fête foraine, une boulangerie.",
+  },
+  "maths/cp/reperage": {
+    titre: "Se repérer dans l'espace : 20 exercices corrigés",
+    resume:
+      "Sur, sous, entre, devant, au-dessus ; la gauche et la droite ; le plan de la classe ; des déplacements sur un quadrillage ; des tours de cubes. Défis : un trésor caché, une chanteuse sur scène, le mur du maçon, la poule de la fermière.",
+  },
+  "maths/cp/figures-solides": {
+    titre: "Figures planes et solides : 20 exercices corrigés",
+    resume:
+      "Le carré, le rectangle, le triangle et le disque, leurs côtés et leurs sommets ; le cube, le pavé et la boule, leurs faces ; des points alignés à vérifier avec la règle ; une figure à finir sur un quadrillage. Défis : une jardinière, un couturier.",
+  },
+  "maths/cp/donnees": {
+    titre: "Tableaux et diagrammes : 20 exercices corrigés",
+    resume:
+      "Compter des bâtons, lire un tableau, lire un diagramme en barres, trouver la case d'un tableau à double entrée, dire le plus, le moins, autant. Problèmes : une boulangère, un vétérinaire, un peintre, le potager de l'école.",
+  },
+  "maths/cp/algorithmique": {
+    titre: "Instructions et déplacements codés : 20 exercices corrigés",
+    resume:
+      "Suivre des flèches sur un quadrillage, coder un déplacement, lire les cartes du robot, trouver le dessin suivant d'une suite qui se répète. Défis : le robot livreur, le collier de perles, le chemin du jardinier, deux chemins vers la plage.",
+  },
+
+  // ── CE1 : nombres et calcul, interactives (17/11/2026) ──
+  "maths/ce1/nombre-entier": {
+    titre: "Les nombres jusqu'à 1 000 : 20 exercices corrigés",
+    resume:
+      "Compter par dizaines, lire et écrire les nombres jusqu'à 1 000, centaines, dizaines et unités, comparer, ranger, encadrer, placer sur une droite graduée, les rangs (premier, dixième, centième). Des roses, une course, un cinéma, des bouchons et un casier de piscine.",
+  },
+  "maths/ce1/suite-nombre": {
+    titre: "Les suites de nombres : 20 exercices corrigés",
+    resume:
+      "Compter de 1 en 1, de 2 en 2, de 5 en 5, de 10 en 10 et de 100 en 100, en avançant et à l'envers, trouver le pas, trouver le nombre caché, passer la centaine. Défis : un escalier, une tirelire, deux suites qui se croisent, les maisons d'une rue.",
+  },
+  "maths/ce1/addition-soustraction": {
+    titre: "Additions et soustractions : 20 exercices corrigés",
+    resume:
+      "Poser une addition avec ou sans retenue, additionner trois nombres, poser une soustraction, trouver le nombre qui manque, estimer un résultat, corriger l'erreur d'un camarade. Problèmes : un car pour le zoo, une bibliothèque, des devinettes, une course de relais.",
+  },
+  "maths/ce1/multiplication": {
+    titre: "La multiplication : 20 exercices corrigés",
+    resume:
+      "Comprendre « 4 fois 3 », écrire avec le signe ×, lire un rectangle de billes, savoir que 3 × 5 = 5 × 3, reconnaître un nombre pair ou impair, les tables de 2, de 5 et de 10. Défis : des bouquets, une grande roue, des chaussettes, un jeu de mains.",
+  },
+  "maths/ce1/division-partage": {
+    titre: "Partages et groupements : 20 exercices corrigés",
+    resume:
+      "Partager en parts égales, faire des paquets de même taille, savoir ce qu'on fait des objets qui restent, vérifier avec une multiplication. Problèmes : les 75 œufs du fermier, le goûter de la classe, des barques sur le lac, un potager.",
+  },
+  "maths/ce1/calcul-mental": {
+    titre: "Le calcul mental : 20 exercices corrigés",
+    resume:
+      "Tables d'addition et de multiplication, doubles et moitiés, compter de 25 en 25, compléter à la dizaine ou à la centaine, ajouter 9, 19 ou 29, enlever 9, multiplier par 10, calculer 13 × 4 en coupant 13. Défis : un jeu de points, une boulangère, un fleuriste, un nombre mystère.",
+  },
+  "maths/ce1/fraction": {
+    titre: "Les fractions simples : 20 exercices corrigés",
+    resume:
+      "Couper un tout en parts égales, reconnaître un demi, un tiers, un quart, un dixième, le numérateur et le dénominateur, comparer deux fractions, ajouter et enlever des parts, compléter jusqu'au tout. Défis : un jardin partagé, un ruban, des pizzas, une tablette de chocolat.",
+  },
+
+  "maths/ce1/probleme": {
+    titre: "Les problèmes : 20 exercices corrigés",
+    resume:
+      "Choisir le bon calcul, trouver le tout ou une partie, comparer, faire deux étapes, multiplier et partager, lire un schéma en barre, choisir la phrase réponse. Problèmes : une kermesse, une cantine, une ferme, un pâtissier.",
+  },
+  "maths/ce1/longueur": {
+    titre: "Les longueurs : 20 exercices corrigés",
+    resume:
+      "Mesurer avec la règle, choisir le centimètre, le mètre ou le kilomètre, 1 m = 100 cm et 1 km = 1 000 m, comparer, estimer, tracer. Problèmes : une haie, une piste, une étagère, le chemin de l'école.",
+  },
+  "maths/ce1/masse": {
+    titre: "Les masses : 20 exercices corrigés",
+    resume:
+      "Lire une balance à plateaux, choisir le gramme ou le kilogramme, 1 kg = 1 000 g, comparer et ranger des masses, estimer. Problèmes : une vétérinaire, un pâtissier, un défi de balances, un colis.",
+  },
+  "maths/ce1/duree": {
+    titre: "Le temps et les durées : 20 exercices corrigés",
+    resume:
+      "Lire l'heure (heures, demies, quarts), placer les aiguilles, le matin et l'après-midi, 1 h = 60 min, calculer une durée, lire un calendrier. Problèmes : une boulangère, une leçon de natation, un stage, la lecture du soir.",
+  },
+  "maths/ce1/monnaie": {
+    titre: "La monnaie : 20 exercices corrigés",
+    resume:
+      "Compter des pièces et des billets, comparer deux sommes, payer un prix, rendre la monnaie, 1 € = 100 centimes, lire un prix à virgule. Problèmes : un fleuriste, une tirelire, un marché, un magasin de jouets.",
+  },
+  "maths/ce1/reperage": {
+    titre: "Se repérer : 20 exercices corrigés",
+    resume:
+      "Devant, entre, au-dessus, à gauche ; le plan de la classe et du quartier ; compter des cubes ; cases et nœuds ; repérer une case (C2) ; suivre un déplacement. Problèmes : une chasse au trésor, un potager, des escaliers de cubes, un robot.",
+  },
+
+
+  "maths/ce1/droites-segments": {
+    titre: "Droites et segments : 20 exercices corrigés",
+    resume:
+      "Reconnaître un segment et une droite, vérifier des points alignés avec la règle, mesurer un segment en partant du 0, trouver le milieu par pliage. Problèmes : des piquets de jardin, un ruban de couturière, une planche de menuisier, les fils d'une électricienne.",
+  },
+  "maths/ce1/figures-planes": {
+    titre: "Les figures planes : 20 exercices corrigés",
+    resume:
+      "Nommer le carré, le rectangle, le triangle et le cercle, même penchés, reconnaître un triangle rectangle, vérifier un angle droit à l'équerre et lire son code, angle aigu ou obtus, tracer un cercle au compas. Problèmes : un carrelage, un massif rond, un gâteau coupé, une fenêtre.",
+  },
+  "maths/ce1/solides": {
+    titre: "Les solides : 20 exercices corrigés",
+    resume:
+      "Reconnaître et nommer le cube, le pavé, la boule, le cylindre, le cône et la pyramide, compter les faces, les sommets et les arêtes, même cachés, construire un cube avec des pailles. Problèmes : une boîte de bonbons, un escalier de cubes, des dés, des cartons.",
+  },
+  "maths/ce1/donnees": {
+    titre: "Tableaux et graphiques simples : 20 exercices corrigés",
+    resume:
+      "Lire un tableau et un tableau à double entrée, lire un diagramme en barres sur un axe gradué, compléter un tableau d'enquête, préparer un diagramme. Problèmes : une boulangère, une vétérinaire, des letchis au marché, des voitures à compter.",
+  },
+  "maths/ce1/trier-classer": {
+    titre: "Trier et classer : 20 exercices corrigés",
+    resume:
+      "Trier selon une règle, trouver l'intrus, trouver le point commun d'un groupe, lire deux ensembles qui se croisent. Problèmes : une bibliothécaire, un facteur, un marchand de fruits, une animatrice de colonie.",
+  },
+  "maths/ce1/algorithmique": {
+    titre: "Instructions et déplacements codés : 20 exercices corrigés",
+    resume:
+      "Suivre des flèches sur un quadrillage, écrire le code d'un chemin, tourner d'un quart de tour sans avancer, utiliser « répéter », éviter les obstacles. Problèmes : un drone livreur, un robot d'entrepôt, une informaticienne, une tondeuse robot.",
+  },
+
   "maths/cm1/tableau": {
     titre: "Lire et compléter un tableau : 20 exercices corrigés",
     resume:
