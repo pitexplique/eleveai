@@ -82,18 +82,19 @@ class SectionDefi3e(Paysage3e):
     fichier_marques = "3e_section_defi_marques.json"
     ceinture = "marron"
 
-    def _carte(self, lettre, contenu, fs):
-        """⛔ Le gabarit étire le contenu jusqu'à 0,8 du bord de la carte, or le ✓ de la bonne
-        réponse se pose à 0,38 du bord DROIT : sur un libellé long, il TOUCHAIT la dernière
-        lettre (vu sur la planche ; BORDS=1 ne voit rien, rien ne sort du cadre). On lui
-        réserve sa place ici, sans toucher au gabarit partagé. Les libellés courts, eux, ne
-        bougent pas : la condition ne les atteint jamais."""
-        g = super()._carte(lettre, contenu, fs)
-        cadre, ligne = g
-        if ligne.width > self.LARG - 1.2:
-            ligne.scale_to_fit_width(self.LARG - 1.2)
-            ligne.move_to(cadre).align_to(cadre.get_left() + RIGHT * 0.2, LEFT)
-        return g
+    def _carte_choix(self, lettre, txt, largeur, fs):
+        """⛔ La carte d'un choix, avec la PLACE DE LA COCHE au bout. Le gabarit étire le
+        contenu jusqu'à 0,4 du bord, or le ✓ de la bonne réponse se pose dans la carte, à
+        0,4 du bord DROIT : sur un libellé long il touchait la dernière lettre (vu sur la
+        planche ; BORDS=1 ne voit rien, rien ne sort du cadre). Même remède qu'en CM2
+        (`cm2/aire_comprendre.py`). Les libellés courts, eux, ne bougent pas.
+        ⚠️ En paysage la carte vient de `_carte_choix` (stmg), PAS de `_carte` : surcharger
+        `_carte` ne fait rien du tout, et ça ne se voit qu'à l'image."""
+        c = super()._carte_choix(lettre, txt, largeur, fs)
+        cadre, ligne = c
+        if ligne.width > largeur - 1.0:
+            ligne.scale_to_fit_width(largeur - 1.0).align_to(cadre.get_left() + RIGHT * 0.2, LEFT)
+        return c
 
     def pause_gauche(self, y=-3.2, x=-6.2, marge=2.0):
         """« Mets pause, et cherche ! » en bas À GAUCHE.

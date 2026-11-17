@@ -106,7 +106,10 @@ class ShortSectionPaveCube3e(Short4e):
 
         # ── 04 : la question en commentaire ────────────────────────────────
         self.clear()
-        self.margo_bas()
+        # ⛔ Pas de margo_bas() sur CET écran (REGLES.md, « Mascotte », Frédéric 17/11) :
+        #    Ti-Margo occupe y ∈ [−3,85 ; −3,02] et sa tête couvrait une lettre de
+        #    « @eleveai974 » — on lisait « @elev◼i974 ». Le remonter est impossible
+        #    (0,55 d'unité libre pour un bloc de 0,852). Il revient à l'écran suivant.
         self.dire("04-commentaire")
         self.play(FadeIn(self.grand("À toi !", font_size=50, color=JAUNE_TITRE).move_to(P(0, 3.2))),
                   run_time=0.4)
