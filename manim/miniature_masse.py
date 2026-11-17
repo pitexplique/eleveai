@@ -32,6 +32,8 @@ EP = [
      "on compare deux par deux !", True, "blanche"),
     ("cp", "defi", "04-defi", ["LE DÉFI", "DES MASSES"], "Deux pesées, trois colis",
      "la taille ne dit pas la masse !", True, "blanche"),
+    ("ce1", "kg-g", "01-kg-g", ["LE KILOGRAMME", "ET LE GRAMME"], "kg pour le lourd, g pour le léger",
+     "un colis : 3 kg, une lettre : 20 g", True, "blanche"),
 ]
 
 

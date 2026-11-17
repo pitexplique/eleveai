@@ -239,6 +239,8 @@ def sac(texte=None, s=1.0, couleur="#d6b98c"):
     g = VGroup(corps, col_, lien)
     if texte:
         et = hors_audit(Text(texte, font_size=int(22 * s), color="#1f2937", weight=BOLD)).move_to(corps)
+        if et.width > corps.width * 0.86:  # (17/11) « 1 000 g » : le texte reste dans le sac
+            et.scale_to_fit_width(corps.width * 0.86)
         g.add(et)
     return g
 
@@ -657,3 +659,104 @@ def cerise(s=1.0):
     queue = ArcBetweenPoints(c.get_top(), c.get_top() + P(0.14 * s, 0.38 * s), angle=-0.6, color="#15803d",
                              stroke_width=3)
     return VGroup(queue, c, reflet)
+
+
+# ── CE1 01 (17/11) : Jade la postière, la lettre, la carte postale, le vélo, la clé ─────────────────────
+def jade(s=1.0):
+    """Jade, postière : veste bleue, casquette jaune, cheveux longs."""
+    p = visage(personne(peau="#f1c27d", tenue="#1d4ed8", cheveux="#78350f", longs=True, s=s))
+    c, r = p.tete.get_center(), p.tete.width / 2
+    calotte = AnnularSector(inner_radius=0, outer_radius=r * 1.08, angle=PI, start_angle=0, fill_color="#facc15",
+                            fill_opacity=1, stroke_width=0).move_to(c + UP * r * 0.55)
+    visiere = RoundedRectangle(width=r * 1.5, height=r * 0.22, corner_radius=r * 0.1, fill_color="#ca8a04",
+                               fill_opacity=1, stroke_width=0).move_to(c + UP * r * 0.3 + RIGHT * r * 0.45)
+    p.add(calotte, visiere)
+    return p
+
+
+def lettre(s=1.0):
+    """Une enveloppe blanche fermée, avec son timbre."""
+    corps = Rectangle(width=1.2 * s, height=0.78 * s, fill_color="#f8fafc", fill_opacity=1, stroke_color="#94a3b8",
+                      stroke_width=2)
+    ul, ur = corps.get_corner(UL), corps.get_corner(UR)
+    rabat = VMobject(stroke_color="#94a3b8", stroke_width=2).set_points_as_corners(
+        [ul, corps.get_center() + DOWN * 0.08 * s, ur])
+    timbre = Rectangle(width=0.2 * s, height=0.24 * s, fill_color="#ef4444", fill_opacity=1, stroke_color=WHITE,
+                       stroke_width=1).move_to(ur + P(-0.17 * s, -0.18 * s))
+    return VGroup(corps, rabat, timbre)
+
+
+def carte_postale(s=1.0):
+    """Une carte postale : un paysage de plage (ciel, mer, soleil)."""
+    corps = Rectangle(width=1.1 * s, height=0.72 * s, fill_color="#7dd3fc", fill_opacity=1, stroke_color=WHITE,
+                      stroke_width=2)
+    mer = Rectangle(width=1.1 * s, height=0.26 * s, fill_color="#0369a1", fill_opacity=1, stroke_width=0)
+    mer.align_to(corps, DOWN)
+    soleil = Circle(radius=0.11 * s, fill_color="#facc15", fill_opacity=1, stroke_width=0)
+    soleil.move_to(corps.get_corner(UR) + P(-0.25 * s, -0.2 * s))
+    return VGroup(corps, mer, soleil)
+
+
+def velo(s=1.0, couleur="#ef4444"):
+    """Un vélo de profil, sans caisse."""
+    return VGroup(*velo_livreur(s, couleur)[:6])
+
+
+def cle(s=1.0):
+    """Une petite clé dorée : un anneau et une tige à dents."""
+    anneau = Annulus(inner_radius=0.09 * s, outer_radius=0.2 * s, fill_color=LAITON, fill_opacity=1, stroke_width=0)
+    tige = Rectangle(width=0.5 * s, height=0.08 * s, fill_color=LAITON, fill_opacity=1, stroke_width=0)
+    tige.next_to(anneau, RIGHT, buff=-0.02)
+    dents = VGroup(*[Rectangle(width=0.06 * s, height=0.1 * s, fill_color=LAITON, fill_opacity=1, stroke_width=0)
+                     .next_to(tige, DOWN, buff=0).align_to(tige, RIGHT).shift(LEFT * k * 0.12 * s) for k in (0, 1)])
+    return VGroup(anneau, tige, dents)
+
+
+# ── CE1 02 (17/11) : Liam le vendeur en vrac, ses bocaux, une ardoise d'élève ───────────────────────
+def liam(s=1.0):
+    """Liam, vendeur en vrac : tee-shirt beige, tablier vert, bonnet orange."""
+    p = visage(personne(peau="#a0522d", tenue="#e7d5b5", cheveux="#1f2937", s=s))
+    p.add(tablier(p, "#15803d"))
+    c, r = p.tete.get_center(), p.tete.width / 2
+    bonnet = AnnularSector(inner_radius=0, outer_radius=r * 1.06, angle=PI, start_angle=0, fill_color="#f97316",
+                           fill_opacity=1, stroke_width=0).move_to(c + UP * r * 0.55)
+    revers = RoundedRectangle(width=r * 2.2, height=r * 0.3, corner_radius=r * 0.12, fill_color="#ea580c",
+                              fill_opacity=1, stroke_width=0).move_to(c + UP * r * 0.35)
+    p.add(bonnet, revers)
+    return p
+
+
+def bocal(couleur, s=1.0):
+    """Un grand bocal de vrac en verre, rempli aux trois quarts (riz : blanc, lentilles : orange…)."""
+    verre = RoundedRectangle(width=0.9 * s, height=1.2 * s, corner_radius=0.15 * s, fill_color="#e0f2fe",
+                             fill_opacity=0.25, stroke_color="#bae6fd", stroke_width=3)
+    dedans = RoundedRectangle(width=0.8 * s, height=0.85 * s, corner_radius=0.12 * s, fill_color=couleur,
+                              fill_opacity=1, stroke_width=0).align_to(verre, DOWN).shift(UP * 0.05 * s)
+    couv = RoundedRectangle(width=0.7 * s, height=0.16 * s, corner_radius=0.05 * s, fill_color=BOIS, fill_opacity=1,
+                            stroke_width=0).next_to(verre, UP, buff=0)
+    return VGroup(dedans, verre, couv)
+
+
+def ardoise(texte, s=1.0, couleur=WHITE):
+    """Une ardoise d'élève (cadre bois) avec ce qu'il a écrit."""
+    t = hors_audit(Text(texte, font_size=int(34 * s), color=couleur))
+    fond = RoundedRectangle(width=t.width + 0.7 * s, height=1.0 * s, corner_radius=0.08 * s, fill_color="#1f3b2c",
+                            fill_opacity=1, stroke_color=BOIS, stroke_width=8)
+    return VGroup(fond, t.move_to(fond))
+
+
+def base_commune(ligne):
+    """(17/11) Les morceaux d'une ligne() sur la MÊME ligne de base : le bas du premier chiffre (ou de la première
+    lettre) de chaque morceau va au niveau de celui du premier morceau ; « + », « = » restent centrés."""
+    def repere(m):
+        txt = m.text.replace(" ", "") if hasattr(m, "text") else ""
+        for k, ch in enumerate(txt):
+            if ch.isalnum() and k < len(m.submobjects):
+                return m.submobjects[k].get_bottom()[1]
+        return None
+    y0 = repere(ligne[0])
+    for m in ligne[1:]:
+        y = repere(m)
+        if y is not None and y0 is not None:
+            m.shift(UP * (y0 - y))
+    return ligne

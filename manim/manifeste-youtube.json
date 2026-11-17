@@ -97580,6 +97580,136 @@
         "jeux-defis",
         "animaux"
       ]
+    },
+    {
+      "id": "ce1-masse-kg-g",
+      "pas_avant": "2027-05-04",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_kg_g",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "type": "longue",
+      "fichier": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g.mp4",
+      "miniature": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g.png",
+      "titre": "Un colis, une lettre : kilogramme ou gramme ? — Le kilogramme et le gramme — épisode 1 · Maths CE1",
+      "accroche": "Jade est postière. Elle pèse chaque colis et chaque lettre : le prix de l'envoi dépend de la masse. Avec quelle unité ?\n\nDans cette vidéo :\n• le kilogramme (kg) pour les objets lourds : le gros colis pèse 3 kg\n• le gramme (g) pour les objets légers : la lettre pèse 20 g\n• kilogramme s'écrit kg : le k de kilo, le g de gramme\n• lire une balance : le paquet pèse 2 kg, la carte postale 5 g\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : un vélo et une clé : lequel pèse 12 kg, lequel pèse 12 g ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_kg_g&display=simple\n\n⚖️ Épisode 1 de la série Masses d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Kilogramme ou gramme ?"
+        ],
+        [
+          "00:36",
+          "Question 1"
+        ],
+        [
+          "01:08",
+          "Question 2"
+        ],
+        [
+          "01:36",
+          "À toi de jouer"
+        ],
+        [
+          "01:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "kilogramme",
+        "gramme",
+        "kg",
+        "g",
+        "unités de masse",
+        "balance",
+        "postière",
+        "maths",
+        "CE1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:36",
+          "question": "Comment écrit-on « kilogramme » en abrégé ?",
+          "choix": [
+            "k g",
+            "k l",
+            "g k"
+          ],
+          "reponse": 0,
+          "explication": "Kilogramme s'écrit k g : le k de kilo, le g de gramme."
+        },
+        {
+          "t": "01:08",
+          "question": "La lettre de Jade pèse 20… quoi ?",
+          "choix": [
+            "20 litres",
+            "20 kilogrammes",
+            "20 grammes"
+          ],
+          "reponse": 2,
+          "explication": "Une lettre est légère : 20 grammes. Le litre, lui, mesure une contenance."
+        }
+      ],
+      "centres": [
+        "transports",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "ce1-masse-kg-g-short",
+      "pas_avant": "2027-05-04",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_kg_g",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "type": "short",
+      "renvoie_vers": "ce1-masse-kg-g",
+      "fichier": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g-short.mp4",
+      "miniature": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g-short-miniature.png",
+      "titre": "Un chaton de 1 gramme ? Vraiment ? #maths #ce1",
+      "accroche": "Sur l'étiquette du chaton, mon copain écrit : 1 gramme. Mais 1 gramme, c'est la masse d'un trombone !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : un trombone pèse 1 gramme : combien pèsent 10 trombones ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_kg_g&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce1 #primaire",
+      "tags": [
+        "masse",
+        "kilogramme",
+        "gramme",
+        "chaton",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "Le chaton pèse environ…",
+          "choix": [
+            "1 gramme",
+            "100 kilogrammes",
+            "1 kilogramme"
+          ],
+          "reponse": 2,
+          "explication": "Un chaton pèse environ 1 kilogramme. 1 gramme, c'est un trombone !"
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
     }
   ]
 }

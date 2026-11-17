@@ -1,0 +1,7 @@
+{
+  "voix": "ce1-masse-{ep}-short",
+  "sons": "public/sons/ce1-masse-{ep}-short",
+  "sortie": "manim/sorties/ce1/maths/masse/{num}-{ep}",
+  "nom": "eleveai-maths-ce1-masse-{ep}-short",
+  "episodes": { "kg-g": "01", "relation": "02", "estimer": "03", "probleme": "04", "defi": "05" }
+}

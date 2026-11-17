@@ -6334,6 +6334,24 @@
   "short": true,
   "youtube": null
  },
+ "ce1-masse-kg-g": {
+  "fichier": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g.mp4",
+  "poster": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g.png",
+  "vignette": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g.vignette.webp",
+  "titre": "Un colis, une lettre : kilogramme ou gramme ? — Le kilogramme et le gramme — épisode 1 · Maths CE1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_kg_g&display=simple"
+ },
+ "ce1-masse-kg-g-short": {
+  "fichier": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g-short.mp4",
+  "poster": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g-short-miniature.png",
+  "vignette": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g-short-miniature.vignette.webp",
+  "titre": "Un chaton de 1 gramme ? Vraiment ? #maths #ce1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_kg_g&display=simple"
+ },
  "ce2-contenance-comparer": {
   "fichier": "ce2/maths/contenance/03-comparer/eleveai-maths-ce2-contenance-comparer.mp4",
   "poster": "ce2/maths/contenance/03-comparer/eleveai-maths-ce2-contenance-comparer.png",
