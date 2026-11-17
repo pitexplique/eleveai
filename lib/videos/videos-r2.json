@@ -8764,6 +8764,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=tableau&microId=tableau_lire&display=simple"
  },
+ "cp-duree-jour-semaine": {
+  "fichier": "cp/maths/duree/03-jour-semaine/eleveai-maths-cp-duree-jour-semaine.mp4",
+  "poster": "cp/maths/duree/03-jour-semaine/eleveai-maths-cp-duree-jour-semaine.png",
+  "vignette": "cp/maths/duree/03-jour-semaine/eleveai-maths-cp-duree-jour-semaine.vignette.webp",
+  "titre": "7 heures, c'est le matin ou le soir ? — Les moments de la journée — épisode 3 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_jour_semaine&display=simple"
+ },
+ "cp-duree-jour-semaine-short": {
+  "fichier": "cp/maths/duree/03-jour-semaine/eleveai-maths-cp-duree-jour-semaine-short.mp4",
+  "poster": "cp/maths/duree/03-jour-semaine/eleveai-maths-cp-duree-jour-semaine-short-miniature.png",
+  "vignette": "cp/maths/duree/03-jour-semaine/eleveai-maths-cp-duree-jour-semaine-short-miniature.vignette.webp",
+  "titre": "Il est 8 heures : bonne nuit ! … Oups, c'est le matin ! #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_jour_semaine&display=simple"
+ },
  "cp-duree-lire-heure": {
   "fichier": "cp/maths/duree/01-lire-heure/eleveai-maths-cp-duree-lire-heure.mp4",
   "poster": "cp/maths/duree/01-lire-heure/eleveai-maths-cp-duree-lire-heure.png",

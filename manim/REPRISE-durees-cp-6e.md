@@ -47,7 +47,8 @@ Notes et outils : `side-session-notes/local_9cbb7607-cba7-48c1-a984-bb5d28d2f97c
 - Scripts de la session (scratchpad) : `hd.sh` (attend verrou + 2,5 Go, HD, copie, bords) et `film.sh` (film sous verrou).
 - ✅ CP 01 `cp_duree_lire_heure` FINI (`96efd9fe`) : paysage (Rose horlogère) HD 2 min 50, bords 0 ; short Ti Margo « le réveil » 64 s, réponse C, compteur vérifié (30,5 → 33,2 s) ; manifeste 08/05/2027, R2, coach.
 - ✅ CP 02 `cp_duree_placer_aiguilles` FINI : paysage (Léo clown, chapiteau) HD 2 min 30, bords 0 ; short Ti Margo « le réveil à l'envers » (réponse A, compteur 32,9 → 35,9 s) ; manifeste 09/05/2027, R2 (7 fichiers), coach (2 lignes). `entoure(hg, n, f=0.8)` pour deux nombres voisins (11 et 12 se chevauchaient).
-- ⏳ CP 03 `cp_duree_jour_semaine` (Malo maître-nageur) : WAV + marques faits ; script à écrire.
+- ✅ CP 03 `cp_duree_jour_semaine` FINI : paysage (Malo maître-nageur, piscine OUVERT/FERMÉ, 4 cartes matin/midi/après-midi/soir, 7 h du matin / 7 h du soir) HD 2 min 45, bords 0 ; short Ti Margo « bonne nuit… à 8 heures du matin » (réponse A, compteur 29,4 → 32 s) ; manifeste 10/05/2027, R2 (7 fichiers), coach (2 lignes). Dessins ajoutés au commun : `soleil lune assiette lit gouter piscine panneau` ; au short : `soleilCraie`, `ecoleCraie` (cp-duree.js).
+- ⏭ CP 04 `cp_duree_ordonner` (Inaya astronaute, Q1 B, Q2 A, défi C) puis CP 05 `cp_duree_defi` (Tom pâtissier, A B C).
 - Chapitres : `_temps_cp.py` temporaire dans `manim/scripts/cp/` (enveloppe chaque écran, imprime `renderer.time` en dry run), supprimé après.
 
 ## Reste, dans l'ordre

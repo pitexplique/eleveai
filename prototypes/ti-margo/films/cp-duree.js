@@ -60,3 +60,18 @@ function litCraie(c,x,y,w,z=1,zz=0){ if(z<=0) return; const k=Math.min(1.08,z), 
 function friseCraie(c,x1,x2,y,xs,vus=[],u=1){ if(u<=0) return; c.strokeStyle=CRAIE.blanc; c.lineWidth=7; c.lineCap='round';
   c.beginPath(); c.moveTo(x1,y); c.lineTo(x1+(x2-x1)*Math.min(1,u),y); c.stroke();
   xs.forEach((xx,k)=>{ if(vus[k]===false) return; c.lineWidth=7; c.beginPath(); c.moveTo(xx,y-22); c.lineTo(xx,y+22); c.stroke(); }); }
+
+/* Le soleil (épisode 03) : un disque jaune et 8 rayons ; z = zoom (0 à 1) */
+function soleilCraie(c,x,y,r,z=1){ if(z<=0) return; const k=Math.min(1.1,z); c.save(); c.translate(x,y); c.scale(k,k);
+  c.strokeStyle='#fcc419'; c.lineWidth=r*.16; c.lineCap='round';
+  for(let j=0;j<8;j++){ const a=j/8*2*Math.PI; c.beginPath(); c.moveTo(Math.cos(a)*r*1.3,Math.sin(a)*r*1.3); c.lineTo(Math.cos(a)*r*1.75,Math.sin(a)*r*1.75); c.stroke(); }
+  c.fillStyle='#fcc419'; c.beginPath(); c.arc(0,0,r,0,7); c.fill(); c.restore(); }
+/* L'école : un bâtiment, son toit, sa porte et son drapeau ; centre bas (x, y), largeur w */
+function ecoleCraie(c,x,y,w,z=1){ if(z<=0) return; const k=Math.min(1.1,z), h=w*.55; c.save(); c.translate(x,y); c.scale(k,k);
+  c.lineJoin='round'; c.lineCap='round'; c.strokeStyle=CRAIE.blanc; c.lineWidth=6;
+  c.fillStyle='#f4a261'; c.fillRect(-w/2,-h,w,h); c.strokeRect(-w/2,-h,w,h);
+  c.fillStyle='#e03131'; c.beginPath(); c.moveTo(-w/2-14,-h); c.lineTo(0,-h-w*.32); c.lineTo(w/2+14,-h); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle='#16302a'; c.fillRect(-w*.1,-h*.5,w*.2,h*.5);
+  c.fillStyle='#a5d8ff'; for(const s of [-1,1]) c.fillRect(s*w*.3-w*.08,-h*.75,w*.16,h*.22);
+  c.beginPath(); c.moveTo(0,-h-w*.32); c.lineTo(0,-h-w*.6); c.stroke();
+  c.fillStyle='#4dabf7'; c.fillRect(0,-h-w*.6,w*.18,w*.11); c.restore(); }

@@ -159,3 +159,75 @@ def chapiteau(s=1.0):
     mat = Line(P(0, 1.3), P(0, 1.75), color=WHITE, stroke_width=4)
     fanion = Polygon(P(0, 1.75), P(0.4, 1.62), P(0, 1.5), fill_color="#facc15", fill_opacity=1, stroke_width=0)
     return VGroup(mur, porte, g, mat, fanion).scale(s)
+
+
+# ── Les moments de la journée (épisode 03) : soleil, lune, assiette, lit, goûter, piscine ─────────────
+def soleil(s=1.0):
+    """Le soleil : un disque jaune et 8 rayons."""
+    d = Circle(radius=0.32, fill_color="#facc15", fill_opacity=1, stroke_width=0)
+    r = VGroup(*[Line(P(0.42 * np.cos(a), 0.42 * np.sin(a)), P(0.6 * np.cos(a), 0.6 * np.sin(a)))
+                 for a in np.arange(8) * TAU / 8]).set_stroke("#facc15", 6)
+    return VGroup(r, d).scale(s)
+
+
+def lune(s=1.0):
+    """La lune : un croissant pâle (un disque moins un disque décalé)."""
+    a = Circle(radius=0.36)
+    b = Circle(radius=0.31).shift(P(0.17, 0.08))
+    c = Difference(a, b, fill_color="#fde68a", fill_opacity=1, stroke_width=0)
+    etoiles = VGroup(*[Star(5, outer_radius=0.07, inner_radius=0.03, fill_color="#fef9c3", fill_opacity=1,
+                            stroke_width=0).move_to(P(x, y)) for x, y in ((0.45, 0.3), (0.62, -0.12))])
+    return VGroup(c, etoiles).scale(s)
+
+
+def assiette(s=1.0):
+    """L'assiette, la fourchette et le couteau (le repas)."""
+    a = Circle(radius=0.38, fill_color="#f8fafc", fill_opacity=1, stroke_color="#cbd5e1", stroke_width=3)
+    b = Circle(radius=0.25, fill_color="#e2e8f0", fill_opacity=1, stroke_width=0)
+    f = VGroup(Line(P(-0.55, -0.32), P(-0.55, 0.3)),
+               *[Line(P(-0.55 + dx, 0.12), P(-0.55 + dx, 0.32)) for dx in (-0.06, 0.06)]).set_stroke("#cbd5e1", 4)
+    k = Line(P(0.55, -0.32), P(0.55, 0.32)).set_stroke("#cbd5e1", 6)
+    return VGroup(a, b, f, k).scale(s)
+
+
+def lit(s=1.0):
+    """Le lit : tête de lit, matelas, oreiller, couette bleue."""
+    tete = Rectangle(width=0.12, height=0.7, fill_color="#92400e", fill_opacity=1, stroke_width=0).move_to(P(-0.74, 0.05))
+    pied = Rectangle(width=0.12, height=0.42, fill_color="#92400e", fill_opacity=1, stroke_width=0).move_to(P(0.74, -0.09))
+    mat = Rectangle(width=1.4, height=0.16, fill_color="#f1f5f9", fill_opacity=1, stroke_width=0).move_to(P(0, -0.12))
+    ore = RoundedRectangle(width=0.36, height=0.16, corner_radius=0.06, fill_color="#f8fafc", fill_opacity=1,
+                           stroke_width=0).move_to(P(-0.47, 0.04))
+    cou = RoundedRectangle(width=1.0, height=0.22, corner_radius=0.08, fill_color="#60a5fa", fill_opacity=1,
+                           stroke_width=0).move_to(P(0.17, 0.05))
+    return VGroup(tete, pied, mat, ore, cou).scale(s)
+
+
+def gouter(s=1.0):
+    """Le goûter : un pain au chocolat et un verre de lait."""
+    pain = RoundedRectangle(width=0.8, height=0.36, corner_radius=0.12, fill_color="#d97706", fill_opacity=1,
+                            stroke_width=0).move_to(P(-0.25, -0.12))
+    choc = VGroup(*[Line(P(x, -0.27), P(x, 0.03)) for x in (-0.42, -0.08)]).set_stroke("#451a03", 6)
+    verre = Polygon(P(0.33, 0.25), P(0.63, 0.25), P(0.58, -0.3), P(0.38, -0.3), fill_color="#f8fafc", fill_opacity=1,
+                    stroke_color="#cbd5e1", stroke_width=2)
+    return VGroup(pain, choc, verre).scale(s)
+
+
+def piscine(w=3.6, h=1.2):
+    """La piscine vue de face : un bassin bleu, ses vagues, son bord blanc."""
+    eau = RoundedRectangle(width=w, height=h, corner_radius=0.15, fill_color="#0ea5e9", fill_opacity=1,
+                           stroke_color="#e2e8f0", stroke_width=6)
+    vagues = VGroup()
+    for k, y in enumerate((h * 0.18, -h * 0.18)):
+        pts = [P(x, y + 0.07 * np.sin(6 * x + k)) for x in np.linspace(-w / 2 + 0.3, w / 2 - 0.3, 40)]
+        vagues.add(VMobject(stroke_color="#e0f2fe", stroke_width=4).set_points_smoothly(pts))
+    return VGroup(eau, vagues)
+
+
+def panneau(texte, couleur, s=1.0):
+    """Un petit panneau (« OUVERT », « FERMÉ ») sur un poteau."""
+    t = Text(texte, font_size=26, color=WHITE, weight=BOLD)
+    fond = RoundedRectangle(width=t.width + 0.4, height=t.height + 0.3, corner_radius=0.1, fill_color=couleur,
+                            fill_opacity=1, stroke_width=0)
+    t.move_to(fond)
+    poteau = Line(fond.get_bottom(), fond.get_bottom() + DOWN * 0.6).set_stroke("#e2e8f0", 6)
+    return VGroup(poteau, fond, t).scale(s)

@@ -28,6 +28,8 @@ EP = [
      "c'est elle qui donne l'heure !", True, "blanche"),
     ("cp", "placer-aiguilles", "02-placer-aiguilles", ["PLACER", "LES AIGUILLES"], "4 heures : la petite sur le 4 ?",
      "et la grande sur le 12 !", True, "blanche"),
+    ("cp", "jour-semaine", "03-jour-semaine", ["LE MATIN", "OU LE SOIR ?"], "7 heures : on se lève ou on dort ?",
+     "pense à ce que tu fais !", True, "blanche"),
 ]
 
 
