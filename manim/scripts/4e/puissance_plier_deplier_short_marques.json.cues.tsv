@@ -1,0 +1,137 @@
+﻿00-defi	0.1014375	Défi
+00-defi	1.5164375	Je
+00-defi	1.7414375	plie
+00-defi	2.0264375	une
+00-defi	2.1764375	feuille
+00-defi	2.5064375	3 fois
+00-defi	2.7614375	3 fois
+00-defi	4.0314375	Je
+00-defi	4.2564375	déplie
+00-defi	5.6164375	Combien
+00-defi	6.1764375	de
+00-defi	6.3114375	parts
+00-defi	7.6564375	Et
+00-defi	7.7664375	une
+00-defi	7.9364375	part
+00-defi	8.5414375	c'est
+00-defi	8.7814375	quelle
+00-defi	9.0264375	part
+00-defi	9.2914375	de
+00-defi	9.4114375	la
+00-defi	9.5414375	feuille
+01-plier	0.1014375	1
+01-plier	0.2564375	pliage
+01-plier	1.0564375	2 parts
+01-plier	1.2614375	2 parts
+01-plier	2.6014375	2
+01-plier	2.8114375	pliages
+01-plier	3.6164375	4
+01-plier	3.9964375	3
+01-plier	4.2814375	pliages
+01-plier	5.0914375	8
+01-plier	5.3864375	2 fois
+01-plier	5.5714375	2 fois
+01-plier	5.8814375	2 fois
+01-plier	6.0564375	2 fois
+01-plier	6.3664375	2
+01-plier	6.8114375	2 puissance
+01-plier	7.0214375	2 puissance
+01-plier	7.6264375	3
+02-deplier	0.1014375	Je
+02-deplier	0.3264375	déplie
+02-deplier	0.7314375	un
+02-deplier	0.8464375	pli
+02-deplier	1.3664375	4 parts
+02-deplier	1.7214375	4 parts
+02-deplier	3.0614375	Encore
+02-deplier	3.8014375	2
+02-deplier	4.0264375	À
+02-deplier	4.1264375	chaque
+02-deplier	4.4114375	fois
+02-deplier	4.9764375	on
+02-deplier	5.0964375	divise
+02-deplier	5.5364375	par
+02-deplier	5.7714375	2
+03-zero	0.1014375	Plus
+03-zero	0.4014375	de
+03-zero	0.5464375	pli
+03-zero	1.0664375	la
+03-zero	1.2464375	feuille
+03-zero	1.5464375	entière
+03-zero	2.3314375	1
+03-zero	2.4714375	seule
+03-zero	2.7664375	part
+03-zero	4.1064375	2 puissance
+03-zero	4.3164375	2 puissance
+03-zero	4.9414375	0 égale
+03-zero	5.3614375	0 égale
+03-zero	5.7014375	1
+03q-question	0.1014375	Question
+03q-question	1.6314375	On
+03q-question	1.7864375	divise
+03q-question	2.2264375	encore
+03q-question	2.6114375	par
+03q-question	2.8564375	2
+03q-question	4.0064375	2 puissance
+03q-question	4.2164375	2 puissance
+03q-question	4.8564375	moins
+03q-question	5.1214375	1
+03q-question	5.5764375	c'est
+03q-question	5.8264375	quoi
+03q-question	7.0214375	A
+03q-question	7.3714375	moins
+03q-question	7.6964375	2
+03q-question	8.8414375	B
+03q-question	9.2914375	0
+03q-question	9.6114375	C
+03q-question	10.1314375	la
+03q-question	10.3264375	moitié
+03q-question	11.7914375	Mets
+03q-question	12.0014375	pause
+03q-question	12.6314375	et
+03q-question	12.7414375	choisis
+03r-reponse	0.1014375	Réponse
+03r-reponse	0.6464375	C
+03r-reponse	1.1664375	la
+03r-reponse	1.3614375	moitié
+03r-reponse	2.8264375	C'est
+03r-reponse	3.0714375	une
+03r-reponse	3.3414375	part
+03r-reponse	3.6314375	après
+03r-reponse	3.9314375	1
+03r-reponse	4.0464375	pliage
+04-moins3	0.1014375	Et 2
+04-moins3	0.5314375	Et 2
+04-moins3	0.7064375	puissance
+04-moins3	1.3414375	moins
+04-moins3	1.6114375	3
+04-moins3	2.8414375	Une
+04-moins3	3.0864375	part
+04-moins3	3.3764375	après
+04-moins3	3.6964375	3
+04-moins3	3.9864375	pliages
+04-moins3	4.7964375	un
+04-moins3	4.9364375	huitième
+04-moins3	5.4464375	de
+04-moins3	5.5864375	feuille
+05-question	0.1014375	Défi
+05-question	0.8264375	2 puissance
+05-question	1.0314375	2 puissance
+05-question	1.6614375	moins
+05-question	1.9264375	5
+05-question	2.6264375	quelle
+05-question	2.8764375	part
+05-question	3.1464375	de
+05-question	3.2664375	la
+05-question	3.3964375	feuille
+05-question	4.7914375	Réponds
+05-question	5.2414375	en
+05-question	5.3664375	commentaire
+06-abonne	0.1014375	Entraîne-toi
+06-abonne	0.8764375	sur
+06-abonne	1.1514375	éleveai
+06-abonne	1.5814375	point
+06-abonne	1.8964375	f
+06-abonne	2.1314375	r
+06-abonne	3.3764375	Et
+06-abonne	3.5064375	abonne-toi

@@ -1,0 +1,11 @@
+{
+  "00-defi": "Défi ! Je plie une feuille 3 fois. Je déplie. Combien de parts ? Et une part, c'est quelle part de la feuille ?",
+  "01-plier": "1 pliage : 2 parts. 2 pliages : 4. 3 pliages : 8. 2 fois 2 fois 2 : 2 puissance 3.",
+  "02-deplier": "Je déplie un pli : 4 parts. Encore : 2. À chaque fois, on divise par 2.",
+  "03-zero": "Plus de pli : la feuille entière, 1 seule part. 2 puissance 0 égale 1.",
+  "03q-question": "Question ! On divise encore par 2. 2 puissance moins 1, c'est quoi ? A : moins 2. B : 0. C : la moitié. Mets pause, et choisis !",
+  "03r-reponse": "Réponse C : la moitié. C'est une part après 1 pliage.",
+  "04-moins3": "Et 2 puissance moins 3 ? Une part après 3 pliages : un huitième de feuille.",
+  "05-question": "Défi : 2 puissance moins 5, quelle part de la feuille ? Réponds en commentaire !",
+  "06-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}
