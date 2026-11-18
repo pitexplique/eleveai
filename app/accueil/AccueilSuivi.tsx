@@ -56,6 +56,10 @@ import { DONS, VENTE } from "@/lib/legal/editeur";
 import { ETABLISSEMENT_ETRANGER, NOM_VISIO, OUVERTURE_SUIVI, OUVERTURE_VISIO, PRIX_ETABLISSEMENT_PAR_PAYS, PRIX_MENSUEL, PRIX_VISIO, SUIVI_A_VENIR, SUIVI_DES_MAINTENANT, montant } from "@/lib/tarifs";
 import { PAYS_AVENTURE } from "@/lib/aventure/pays";
 import CompteurFamille, { type VarianteCompteur } from "@/components/accueil/CompteurFamille";
+import MenuDuJour from "@/components/seances/MenuDuJour";
+import { SEANCES } from "@/lib/seances/seances";
+
+const MENU_RESTAURANT = SEANCES.find((s) => s.id === "restaurant-6e-longueurs")?.menu;
 import { CAP_VIDEOS, ECHEANCE_CAP, etatCompteurVideos } from "@/lib/videos/compteur";
 
 /** La classe du coach → son dossier de vidéos sur R2 (et la clé de /video). */
@@ -345,6 +349,26 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
             ))}
           </div>
         </section>
+
+        {/* 1 ter. LE RESTAURANT DE MATHS — ⭐ 18/11, Frédéric : « les élèves ont
+            adoré » le menu du jour, puis « cette section doit être sur la page
+            d'accueil ». Même menu que /seances (lib/seances/seances.ts). */}
+        {MENU_RESTAURANT && (
+          <section className="mt-12">
+            <h2 className="text-center text-2xl font-black sm:text-3xl">Le restaurant de maths, en classe</h2>
+            <p className="mx-auto mt-2 max-w-2xl text-center text-slate-600">
+              Un plat pour tous, puis chacun choisit sa façon d&apos;apprendre. Testé en 6e : les élèves ont adoré.
+            </p>
+            <div className="mx-auto mt-5 max-w-2xl">
+              <MenuDuJour menu={MENU_RESTAURANT} />
+            </div>
+            <p className="mt-4 text-center">
+              <Link href="/seances#restaurant-6e-longueurs" className="inline-flex items-center gap-1.5 font-black text-amber-900 underline">
+                Voir la séance en entier
+              </Link>
+            </p>
+          </section>
+        )}
 
         {/* 2. CE QUE L'IA NE FAIT PAS */}
         <section className="mt-12">
