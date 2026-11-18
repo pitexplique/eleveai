@@ -192,7 +192,7 @@ export default function TarifsClient() {
           </div>
         </section>
         <p className="-mt-8 text-center text-sm text-slate-500">
-          {!VENTE.ouverte && <>Rien n&apos;est encaissé avant l&apos;ouverture. </>}Ces offres ne s&apos;adressent pas aux élèves de Frédéric.
+          {!VENTE.ouverte && <>Rien n&apos;est encaissé avant l&apos;ouverture. </>}Ces offres ne s&apos;adressent pas aux élèves de l&apos;auteur du site.
         </p>
         {DONS.ouverts && (
           <p className="-mt-8 text-center">

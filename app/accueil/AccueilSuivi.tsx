@@ -534,7 +534,7 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
           )}
           {offresFamille && (
             <p className="mt-4 text-sm text-slate-500">
-            {!VENTE.ouverte && <>Le suivi famille et l&apos;offre établissement ouvrent {OUVERTURE_SUIVI}, les visios en {OUVERTURE_VISIO}. </>}Ces offres ne s&apos;adressent ni aux établissements situés en France, ni aux élèves de Frédéric.
+            {!VENTE.ouverte && <>Le suivi famille et l&apos;offre établissement ouvrent {OUVERTURE_SUIVI}, les visios en {OUVERTURE_VISIO}. </>}Ces offres ne s&apos;adressent ni aux établissements situés en France, ni aux élèves de l&apos;auteur du site.
           </p>
           )}
         </section>
