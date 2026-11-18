@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accueil, phrase du don — maquette</title>
+<style>
+  :root { --encre:#1f2937; --doux:#6b7280; --vert:#0f766e; --orange:#c2410c; }
+  body { margin:0; background:#f0fdfa; color:var(--encre); font:17px/1.5 system-ui, sans-serif; }
+  .bandeau { background:#fff7ed; border-bottom:1px solid #fed7aa; padding:10px 16px; text-align:center;
+             font:600 14px/1.4 system-ui, sans-serif; color:var(--orange); }
+  .zone { max-width:900px; margin:0 auto; padding:56px 16px; text-align:center; }
+  h1 { font:700 40px/1.15 Georgia, serif; margin:0 0 12px; }
+  h1 em { font-style:normal; color:var(--vert); }
+  .sous { font-size:19px; color:var(--doux); margin:0 auto 22px; max-width:640px; }
+  .boutons { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  .b1 { background:var(--vert); color:#fff; padding:14px 26px; border-radius:10px; font-weight:700; text-decoration:none; }
+  .ligne-don { margin-top:22px; font-size:15px; color:var(--doux); }
+  .ligne-don a { color:var(--orange); font-weight:600; text-decoration:none; border-bottom:1px solid currentColor; }
+  .variante { max-width:900px; margin:0 auto 40px; padding:0 16px; font-size:14px; color:var(--doux); }
+  .variante h2 { font-size:16px; color:var(--encre); }
+  .pied { background:#fff; border:1px solid #e5e7eb; border-radius:8px; padding:12px 16px; text-align:center; }
+  @media (max-width:600px) { h1 { font-size:30px; } }
+</style>
+</head>
+<body>
+<div class="bandeau">MAQUETTE — rien n'est en ligne.</div>
+<div class="zone">
+  <h1>Une éducation <em>libre, gratuite et universelle</em></h1>
+  <p class="sous">Le coach, les vidéos et les fiches, du CP à la Terminale. Offerts à chaque élève, partout dans le monde.</p>
+  <div class="boutons"><a class="b1" href="#">Commencer</a></div>
+  <p class="ligne-don">EleveAI vit de dons. Ses frais sont publics. <a href="page-dons.html">Faire un don →</a></p>
+</div>
+<div class="variante">
+  <h2>Variante : la même ligne en pied de page</h2>
+  <div class="pied">Une éducation libre, gratuite et universelle · <a href="page-dons.html" style="color:#c2410c;font-weight:600">Faire un don</a> · Nos frais du mois : 38 % couverts</div>
+  <p>⛔ Comme convenu le 05/11 : aucune ligne de don dans le coach utilisé en classe, ni pour les comptes d'établissement.</p>
+</div>
+</body>
+</html>
