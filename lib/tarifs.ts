@@ -318,7 +318,7 @@ export function pourcent(valeur: number): string {
    ───────────────────────────────────────────────────────────────────────────── */
 
 /** Les dates d'ouverture, dites partout pareil. */
-export const OUVERTURE_SUIVI = "fin décembre 2026";
+export const OUVERTURE_SUIVI = "fin janvier 2027"; // 18/11/2026 (était fin décembre 2026)
 export const OUVERTURE_VISIO = "janvier 2027";
 
 /** La séance de visio en groupe, en France. */

@@ -33,7 +33,6 @@ import { CollinesAccueil, MontgolfiereAccueil, SoleilAccueil } from "@/component
 import {
   ArrowRight,
   BarChart3,
-  Bell,
   CalendarCheck,
   Check,
   ClipboardList,
@@ -41,12 +40,10 @@ import {
   FileText,
   Globe2,
   GraduationCap,
-  Mail,
   MonitorPlay,
   Building2,
   PlayCircle,
   Save,
-  Sparkles,
   Target,
   Timer,
   Users,
@@ -56,7 +53,7 @@ import { PROGRAMME_CLASSES, listerToutesLesNotions } from "@/lib/programme";
 import { toutesLesVideos } from "@/lib/videos/r2";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
 import { DONS, VENTE } from "@/lib/legal/editeur";
-import { ETABLISSEMENT_ETRANGER, NOM_VISIO, OUVERTURE_VISIO, PRIX_ETABLISSEMENT_PAR_PAYS, PRIX_MENSUEL, PRIX_VISIO, SUIVI_DES_MAINTENANT, montant } from "@/lib/tarifs";
+import { ETABLISSEMENT_ETRANGER, NOM_VISIO, OUVERTURE_SUIVI, OUVERTURE_VISIO, PRIX_ETABLISSEMENT_PAR_PAYS, PRIX_MENSUEL, PRIX_VISIO, SUIVI_A_VENIR, SUIVI_DES_MAINTENANT, montant } from "@/lib/tarifs";
 import { PAYS_AVENTURE } from "@/lib/aventure/pays";
 import CompteurFamille, { type VarianteCompteur } from "@/components/accueil/CompteurFamille";
 import { CAP_VIDEOS, ECHEANCE_CAP, etatCompteurVideos } from "@/lib/videos/compteur";
@@ -129,14 +126,9 @@ const GRATUIT = [
   "Les feuilles d'exercices corrigées",
 ];
 
-/* Ce qui sera proposé aux familles — à l'ouverture, fin décembre 2026. */
-const SUIVI_FAMILLE = [
-  { Icone: ClipboardList, texte: "Un bilan de départ : la carte de votre enfant sur toute sa classe" },
-  { Icone: Mail, texte: "Un compte rendu chaque semaine : ce qui est acquis, les erreurs qui reviennent, les 3 choses à revoir" },
-  { Icone: CalendarCheck, texte: "10 minutes par jour choisies par le coach, et la préparation ciblée d'un contrôle" },
-  { Icone: Bell, texte: "Une alerte quand il décroche sur une notion" },
-  { Icone: Sparkles, texte: "L'aide de l'IA sans limite pour réexpliquer et corriger" },
-];
+/* ⛔ 18/11/2026 : la famille ne reçoit que ce qui EXISTE (SUIVI_DES_MAINTENANT),
+   le reste est dit « à venir » (SUIVI_A_VENIR). Plus jamais « l aide de l IA sans
+   limite » : la Famille ne vend pas d IA (Ti Margo viendra au printemps 2027). */
 /* ⭐ 03/11 — Frédéric : « enlève les cours en visio et remplace par une offre
    établissement », « suivant les pays ». ⛔ Hors de France seulement. */
 const ETABLISSEMENT = [
@@ -199,7 +191,8 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
     : `Toute la vidéothèque : ${compteurVideos.nombreTexte} vidéos du CP à la Terminale aujourd'hui, ${CAP_VIDEOS.toLocaleString("fr-FR")} ${ECHEANCE_CAP}`;
   const suiviFamille = [
     { Icone: PlayCircle, texte: videotheque },
-    ...(VENTE.ouverte ? SUIVI_DES_MAINTENANT.map((texte) => ({ Icone: ClipboardList, texte })) : SUIVI_FAMILLE),
+    ...SUIVI_DES_MAINTENANT.map((texte) => ({ Icone: ClipboardList, texte })),
+    ...SUIVI_A_VENIR.map((t) => ({ Icone: CalendarCheck, texte: `À venir : ${t.charAt(0).toLowerCase()}${t.slice(1)}` })),
   ];
 
   return (
@@ -342,7 +335,7 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
               { Icone: Target, titre: "Un coach de maths", texte: "Il trouve ce qui manque à chaque élève et l'entraîne là-dessus, du CP à la Terminale." },
               { Icone: PlayCircle, titre: "Avec ses vidéos", texte: "Chaque micro-compétence a sa vidéo, avec des questions-pauses, pour comprendre avant de s'entraîner." },
               { Icone: Globe2, titre: "8 pays, puis 40", texte: "Adapté au programme de 8 pays francophones aujourd'hui, et demain de 40." },
-              { Icone: Users, titre: "Gratuit pour l'élève", texte: "Chaque élève étudie gratuitement. Les familles qui veulent le suivi paient, les établissements paient pour leurs élèves." },
+              { Icone: Users, titre: "Offert à chaque élève", texte: "Le coach, les vidéos et les fiches sont offerts à tous. Les familles qui veulent le suivi s'abonnent." },
             ].map(({ Icone, titre, texte }) => (
               <div key={titre} className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-teal-100">
                 <Icone className="h-7 w-7 text-teal-700" aria-hidden="true" />
@@ -449,7 +442,7 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
             chaque pays. Toujours aucun bouton de paiement avant l'ouverture. */}
         <section id="familles" className="mt-12 scroll-mt-24">
           <h2 className="text-2xl font-black sm:text-3xl">
-            {offresFamille ? (VENTE.ouverte ? "Ce qui est ouvert à tous, et ce qui est proposé aux familles" : "Ce qui est ouvert à tous, et ce qui s'ouvre aux familles fin décembre") : "Pour les élèves et les professeurs"}
+            {offresFamille ? (VENTE.ouverte ? "Ce qui est ouvert à tous, et ce qui est proposé aux familles" : `Ce qui est ouvert à tous, et ce qui s'ouvre aux familles ${OUVERTURE_SUIVI}`) : "Pour les élèves et les professeurs"}
           </h2>
           <div className={`mt-6 grid gap-5 ${offresFamille ? "lg:grid-cols-3" : ""}`}>
             <div className="rounded-3xl border-2 border-emerald-300 bg-emerald-50/50 p-6">
@@ -467,7 +460,7 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
             {offresFamille && (
               <>
             <div className="rounded-3xl border border-slate-200 p-6">
-              <p className="text-sm font-black uppercase tracking-wide text-sky-700">{VENTE.ouverte ? "Pour les familles" : "Ouverture fin décembre 2026"}</p>
+              <p className="text-sm font-black uppercase tracking-wide text-sky-700">{VENTE.ouverte ? "Pour les familles" : `Ouverture ${OUVERTURE_SUIVI}`}</p>
               <h3 className="mt-1 flex items-center gap-2 text-2xl font-black">
                 <Eye className="h-6 w-6 text-sky-700" aria-hidden="true" /> Le suivi famille
               </h3>
@@ -541,7 +534,7 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
           )}
           {offresFamille && (
             <p className="mt-4 text-sm text-slate-500">
-            {!VENTE.ouverte && <>Le suivi famille et l&apos;offre établissement ouvrent fin décembre 2026, les visios en janvier. </>}Ces offres ne s&apos;adressent ni aux établissements situés en France, ni aux élèves de son professeur.
+            {!VENTE.ouverte && <>Le suivi famille et l&apos;offre établissement ouvrent {OUVERTURE_SUIVI}, les visios en {OUVERTURE_VISIO}. </>}Ces offres ne s&apos;adressent ni aux établissements situés en France, ni aux élèves de Frédéric.
           </p>
           )}
         </section>

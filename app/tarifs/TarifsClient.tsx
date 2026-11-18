@@ -18,6 +18,7 @@ import Link from "next/link";
 import { ArrowRight, Building2, Check, Eye, Globe2, Heart, MonitorPlay, Sparkles } from "lucide-react";
 import { DONS, VENTE } from "@/lib/legal/editeur";
 import { toutesLesVideos } from "@/lib/videos/r2";
+import { CAP_VIDEOS, ECHEANCE_CAP, etatCompteurVideos } from "@/lib/videos/compteur";
 import {
   ETABLISSEMENT_ETRANGER,
   OUVERTURE_SUIVI,
@@ -31,8 +32,6 @@ import {
   SUIVI_DES_MAINTENANT,
   NOM_VISIO,
   VISIO_MATHS_REELLES,
-  VIDEOS_SITE,
-  VIDEOS_YOUTUBE,
   montant,
 } from "@/lib/tarifs";
 
@@ -51,23 +50,17 @@ const OUVERT = [
 const VIDEOS_REELLES = toutesLesVideos().filter((v) => !/\/(gb|en)\//.test(v.fichier)).length;
 const SUIVI_AUJOURDHUI = VENTE.ouverte
   ? `Dès aujourd'hui : toute la vidéothèque, ${nombre(VIDEOS_REELLES)} vidéos du CP à la Terminale, à parcourir par classe`
-  : `Toute la vidéothèque : ${nombre(VIDEOS_SITE)} vidéos du CP à la Terminale (${nombre(VIDEOS_YOUTUBE)} seulement sur YouTube)`;
-const SUIVI_PROMIS = [
-  "Un bilan de départ : la carte de votre enfant sur toute sa classe",
-  "Un compte rendu chaque semaine : ce qui est acquis, les erreurs qui reviennent, les 3 choses à revoir",
-  "10 minutes par jour choisies par le coach, et la préparation ciblée d'un contrôle",
-  "Une alerte quand il décroche sur une notion",
-];
+  : `Toute la vidéothèque : ${etatCompteurVideos().nombreTexte} vidéos du CP à la Terminale aujourd'hui, ${nombre(CAP_VIDEOS)} ${ECHEANCE_CAP}`; // ⛔ 18/11 : le vrai compte, plus « 3 500 »
 const SUIVI = VENTE.ouverte
   ? [SUIVI_AUJOURDHUI, ...SUIVI_DES_MAINTENANT, ...SUIVI_A_VENIR.map((t) => `À venir, en exclusivité : ${t.charAt(0).toLowerCase()}${t.slice(1)}`)]
-  : [SUIVI_AUJOURDHUI, ...SUIVI_PROMIS, "Un seul abonnement pour tous les enfants de la maison"];
+  : [SUIVI_AUJOURDHUI, ...SUIVI_DES_MAINTENANT, ...SUIVI_A_VENIR.map((t) => `À venir : ${t.charAt(0).toLowerCase()}${t.slice(1)}`)]; // ⛔ 18/11 : rien de promis qui n'existe pas
 
 // ⭐ 03/11 : « Maths réelles », la liste vit dans lib/tarifs.ts.
 const VISIO = VISIO_MATHS_REELLES;
 
 const ETABLISSEMENT = [
   "Un compte pour chaque professeur et chaque élève, avec « Mes classes » et le bilan par micro-compétence",
-  `La vidéothèque entière pour tous les élèves : ${nombre(VIDEOS_SITE)} vidéos`,
+  `La vidéothèque entière pour tous les élèves : ${etatCompteurVideos().nombreTexte} vidéos aujourd'hui`,
   "Le suivi famille ouvert aux parents de vos élèves, sans rien de plus à payer",
   "Une formation de vos professeurs en visio (1 h 30) au démarrage",
   "Le programme français, et celui de votre pays dès qu'il est prêt sur le site",
@@ -199,7 +192,7 @@ export default function TarifsClient() {
           </div>
         </section>
         <p className="-mt-8 text-center text-sm text-slate-500">
-          {!VENTE.ouverte && <>Rien n&apos;est encaissé avant l&apos;ouverture. </>}Ces offres ne s&apos;adressent pas aux élèves de son professeur.
+          {!VENTE.ouverte && <>Rien n&apos;est encaissé avant l&apos;ouverture. </>}Ces offres ne s&apos;adressent pas aux élèves de Frédéric.
         </p>
         {DONS.ouverts && (
           <p className="-mt-8 text-center">
@@ -234,7 +227,7 @@ export default function TarifsClient() {
             <Globe2 className="h-7 w-7 text-sky-700" aria-hidden="true" /> Un prix adapté à chaque pays
           </h2>
           <p className="mt-2 max-w-3xl text-slate-600">
-            Le même suivi partout, à un prix qui suit le niveau de vie. Paiement par carte, et par paiement mobile là où c&apos;est possible.
+            Le même suivi partout, à un prix qui suit le niveau de vie. Paiement par carte bancaire.
           </p>
           <div className="mt-5 overflow-x-auto rounded-2xl ring-1 ring-slate-200">
             <table className="w-full min-w-[560px] text-left text-sm">
