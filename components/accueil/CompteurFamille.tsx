@@ -18,6 +18,7 @@ import Link from "next/link";
 import { ArrowRight, GraduationCap, Gift, PlayCircle, Users, Utensils } from "lucide-react";
 import { CAP_VIDEOS, ECHEANCE_CAP, etatCompteurVideos } from "@/lib/videos/compteur";
 import { EXERCICES, visiteursDeLaSemaine } from "@/lib/accueil/chiffres-semaine";
+import CompteurReponsesCoach from "@/components/coach/CompteurReponsesCoach";
 
 export type VarianteCompteur = "barre" | "ligne";
 
@@ -189,6 +190,10 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
             {visiteurs !== null && chiffre(visiteurs.toLocaleString("fr-FR"), "visiteurs cette semaine")}
           </dl>
         </div>
+        {/* 18/11, Frédéric : « mets 10 752 questions répondues au coach par tous
+            les élèves, tu l'as sur le footer » → le MÊME compteur en direct que le
+            pied de page (jamais un chiffre tapé, il serait vite faux). */}
+        <CompteurReponsesCoach className="mt-2 border-t border-slate-100 pt-2 text-center sm:text-left" />
       </div>
       {/* 17/11, Frédéric : « enlève la ligne sur Tommy » → citation d'élève retirée. */}
     </div>
