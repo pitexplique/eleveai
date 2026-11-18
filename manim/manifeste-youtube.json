@@ -103907,6 +103907,61 @@
       ],
       "brouillon_prive": "https://youtube.com/shorts/-2Fq5VurmGw",
       "url": "https://youtube.com/shorts/zcLYy1Lnb2A"
+    },
+    {
+      "id": "4e-puissance-plier-deplier-short",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_exposant_negatif",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-puissance-zero-negatif",
+      "fichier": "4e/maths/puissances/14-plier-deplier/eleveai-maths-4e-puissance-plier-deplier-short.mp4",
+      "miniature": "4e/maths/puissances/14-plier-deplier/eleveai-maths-4e-puissance-plier-deplier-short.png",
+      "titre": "Plie une feuille : 2 puissance −1, c'est quoi ? 📄 — 4e #Shorts",
+      "accroche": "Défi ! Je plie une feuille 3 fois : 2, 4, 8 parts, 2³. Je déplie : 8 → 4 → 2, on divise par 2. Plus de pli : la feuille entière, 2⁰ = 1. Et 2⁻³ ? Une part après 3 pliages : 1/8 de la feuille.\n\n🥋 Ceinture orange : le défi.\n👉 À toi : 2⁻⁵, quelle part de la feuille ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_exposant_negatif&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
+      "tags": [
+        "exposant négatif",
+        "puissance zéro",
+        "pliage",
+        "feuille",
+        "défi",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:37",
+          "question": "On divise encore par 2. 2⁻¹, c'est quoi ?",
+          "choix": [
+            "−2",
+            "0",
+            "la moitié"
+          ],
+          "reponse": 2,
+          "explication": "La moitié : c'est une part après 1 pliage."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "art-design"
+      ],
+      "aussi": [
+        {
+          "classe": "seconde",
+          "notionId": "puissances_2de",
+          "microId": "puiss_exposant_negatif"
+        }
+      ],
+      "pas_avant": "2026-11-25"
     }
   ]
 }

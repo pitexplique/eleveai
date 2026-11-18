@@ -2685,6 +2685,15 @@
   "youtube": "n5QSE0RfiN8",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_notation_scientifique&display=simple"
  },
+ "4e-puissance-plier-deplier-short": {
+  "fichier": "4e/maths/puissances/14-plier-deplier/eleveai-maths-4e-puissance-plier-deplier-short.mp4",
+  "poster": "4e/maths/puissances/14-plier-deplier/eleveai-maths-4e-puissance-plier-deplier-short.png",
+  "vignette": "4e/maths/puissances/14-plier-deplier/eleveai-maths-4e-puissance-plier-deplier-short.vignette.webp",
+  "titre": "Plie une feuille : 2 puissance −1, c'est quoi ? 📄 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_exposant_negatif&display=simple"
+ },
  "4e-puissance-zero-negatif": {
   "fichier": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif.mp4",
   "poster": "4e/maths/puissances/04-zero-negatif/eleveai-maths-4e-puissance-zero-negatif.png",
