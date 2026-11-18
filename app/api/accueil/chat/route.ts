@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { autoriserQuestionIA } from "@/lib/ia/plafond";
 import { createClient } from "@supabase/supabase-js";
 import { openai } from "@/lib/openai";
 import { libellePassion, passionValide } from "@/lib/videos/centres-interet";
@@ -78,6 +79,12 @@ export async function POST(req: Request) {
         { error: "Compte eleve non autorise." },
         { status: 403 }
       );
+    }
+
+    // ⛔ 18/11/2026 : plafond des questions à l'IA, AVANT l'appel (lib/ia/plafond.ts).
+    const verdict = await autoriserQuestionIA(req, { cle: `eleve:${eleve.id}` });
+    if (!verdict.ok) {
+      return NextResponse.json({ error: verdict.message, quota: true }, { status: 429 });
     }
 
     const history = (Array.isArray(body.history) ? body.history : [])

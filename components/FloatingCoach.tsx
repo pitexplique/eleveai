@@ -67,7 +67,14 @@ export default function FloatingCoach({ enBas }: { enBas?: boolean } = {}) {
           passions: lirePassions(eleve) ?? [],
         }),
       });
-      const data = (await res.json().catch(() => ({}))) as { answer?: string; error?: string };
+      const data = (await res.json().catch(() => ({}))) as { answer?: string; error?: string;
+        quota?: boolean; };
+      // ⛔ 18/11 : plafond des questions à l IA atteint → le message dit « reviens demain », jamais d offre.
+      if (res.status === 429 && data.quota && data.error) {
+        const quota = data.error;
+        setMessages((prev) => [...prev, { role: "coach", content: quota }]);
+        return;
+      }
       if (!res.ok || !data.answer) throw new Error(data.error ?? "Réponse indisponible.");
       setMessages((prev) => [...prev, { role: "coach", content: data.answer! }]);
     } catch {

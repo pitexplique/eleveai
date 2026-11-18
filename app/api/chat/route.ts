@@ -1,5 +1,6 @@
 // app/api/chat/route.ts
 import { NextResponse } from "next/server";
+import { autoriserQuestionIA } from "@/lib/ia/plafond";
 import OpenAI from "openai";
 
 const client = new OpenAI({
@@ -102,6 +103,12 @@ Si l'utilisateur demande du code (LaTeX, Manim, etc.), place-le dans des blocs d
 `.trim();
 
     const systemPrompt = latexMode ? systemPromptLatexProf : systemPromptSansLatex;
+
+    // ⛔ 18/11/2026 : route sans compte → plafond par adresse IP (lib/ia/plafond.ts).
+    const verdict = await autoriserQuestionIA(req);
+    if (!verdict.ok) {
+      return NextResponse.json({ error: verdict.message, quota: true }, { status: 429 });
+    }
 
     // 🔥 Appel OpenAI optimisé (chat.completions, modèle mini)
     const completion = await client.chat.completions.create({

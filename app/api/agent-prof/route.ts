@@ -1,5 +1,6 @@
 // app/api/agent-prof/route.ts
 import OpenAI from "openai";
+import { autoriserQuestionIA } from "@/lib/ia/plafond";
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -90,6 +91,12 @@ MISE EN FORME :
 `.trim();
 
     const systemPrompt = latexMode ? systemAvecLatex : systemSansLatex;
+
+    // ⛔ 18/11/2026 : route sans compte → plafond par adresse IP (lib/ia/plafond.ts).
+    const verdict = await autoriserQuestionIA(req);
+    if (!verdict.ok) {
+      return Response.json({ error: verdict.message, quota: true }, { status: 429 });
+    }
 
     const completion = await client.chat.completions.create({
       model: "gpt-4.1-mini",

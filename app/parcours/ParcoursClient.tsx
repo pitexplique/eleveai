@@ -450,8 +450,14 @@ export default function ParcoursClient({ videosNotions }: { videosNotions: Recor
       const data = (await response.json().catch(() => ({}))) as {
         answer?: string;
         error?: string;
+        quota?: boolean;
       };
 
+      if (response.status === 429 && data.quota && data.error) {
+        const quota = data.error;
+        setChatMessages((prev) => [...prev, { role: "coach", text: quota }]);
+        return;
+      }
       if (!response.ok || !data.answer) {
         throw new Error(data.error ?? "Reponse indisponible.");
       }
