@@ -1,0 +1,108 @@
+{
+  "_lisez-moi": "Gabarit A des miniatures de shorts (18/11/2026). Clé = id du manifeste. question : 1 ou 2 lignes ; accroche : en orange (défaut « TU PARIES ? ») ; calcul : lignes [texte, couleur (blanc, jaune, bleu, rouge, vert, gris, rose), taille] ; figure : « triangles » à la place du calcul ; ceinture : blanche → noire ; mention : défaut « Dessin animé » (null = aucune) ; margo : [x, y, côté] pour cadrer Ti Margo dans l'ancienne miniature ; sans_decor / margo_2d : short Manim (fond clair, Ti Margo 2D). Lancer : python scripts/miniatures-shorts-grille.py [filtre] --planche",
+  "eq-balance": {
+    "question": ["2x + 3 = 11"], "accroche": "x = 7 ?",
+    "calcul": [["2 × 7 + 3", "blanc", 190], ["= 11 ?", "rouge", 190]],
+    "sans_decor": true, "margo_2d": true, "mention": "Vérifie !", "fond_mention": "#e8590c"
+  },
+  "6e-seance-restaurant-short": {
+    "question": ["Le restaurant", "de mathématiques"], "accroche": "TU PRENDS QUOI ?",
+    "calcul": [["Plat imposé", "blanc", 140], ["+ à la carte", "jaune", 140]],
+    "ceinture": "blanche"
+  },
+  "4e-relatif-multiplication-short": {
+    "question": ["Moins × moins = ?"],
+    "calcul": [["(−3) × (−2)", "blanc", 180], ["= −6 ?", "rouge", 190]],
+    "ceinture": "orange"
+  },
+  "4e-puissance-calcul-short": {
+    "margo": [40, 880, 450],
+    "question": ["10² × 10⁴ = ?"],
+    "calcul": [["10² × 10⁴", "blanc", 200], ["= 10⁸ ?", "rouge", 200]],
+    "ceinture": "blanche"
+  },
+  "6e-decimal-comparer-short": {
+    "question": ["Le plus grand ?"],
+    "calcul": [["1,5 L", "jaune", 200], ["ou", "gris", 80], ["1,125 L", "bleu", 200]],
+    "ceinture": "jaune"
+  },
+  "6e-triangle-type-cote-short": {
+    "question": ["Un triangle avec", "9 bâtonnets ?"],
+    "calcul": [["5 + 2 + 2", "blanc", 200], ["ça ferme ?", "jaune", 130]],
+    "ceinture": "blanche"
+  },
+  "4e-puissance-comparer-short": {
+    "question": ["9 × 10⁵ contre 2 × 10⁶"], "accroche": "QUI GAGNE ?",
+    "calcul": [["9 × 10⁵", "jaune", 200], ["ou", "gris", 80], ["2 × 10⁶", "bleu", 200]],
+    "ceinture": "blanche"
+  },
+  "4e-div-critere-2-5-10-short": {
+    "question": ["Divisible par 5 ?"],
+    "calcul": [["7 384 615", "blanc", 190], ["÷ 5 ?", "jaune", 180]],
+    "ceinture": "jaune"
+  },
+  "4e-puissance-notation-scientifique-short": {
+    "margo": [40, 760, 450],
+    "question": ["8 milliards d’humains"], "accroche": "COMMENT L’ÉCRIRE ?",
+    "calcul": [["8 000 000 000", "blanc", 150], ["= 8 × 10⁸ ?", "rouge", 170]],
+    "ceinture": "blanche"
+  },
+  "6e-decimal-rang-short": {
+    "question": ["Le code du coffre :", "5, 7 ou 6 ?"],
+    "calcul": [["5,762", "jaune", 240]],
+    "ceinture": "blanche"
+  },
+  "4e-relatif-soustraction-short": {
+    "question": ["J’enlève un sac…", "je descends ?"],
+    "calcul": [["− (−1)", "blanc", 210], ["= ?", "jaune", 190]],
+    "ceinture": "orange"
+  },
+  "4e-puissance-zero-negatif-short": {
+    "margo": [420, 700, 480],
+    "question": ["2026⁰ = ?"], "accroche": "ÇA FAIT COMBIEN ?",
+    "calcul": [["2026⁰", "jaune", 240], ["0 ? 1 ? 2026 ?", "blanc", 120]],
+    "ceinture": "blanche"
+  },
+  "6e-triangle-sommet-cote-short": {
+    "question": ["Combien de triangles ?"], "figure": "triangles",
+    "ceinture": "blanche"
+  },
+  "4e-puissance-dix-short": {
+    "margo": [40, 740, 450],
+    "question": ["Un milliard de vues"], "accroche": "COMBIEN DE ZÉROS ?",
+    "calcul": [["1 000 000 000", "blanc", 150], ["= 10 puissance ?", "jaune", 120]],
+    "ceinture": "blanche"
+  },
+  "4e-div-multiple-short": {
+    "question": ["Multiple ou diviseur ?"],
+    "calcul": [["45 = 9 × 5", "blanc", 180], ["45 est … de 9 ?", "jaune", 120]],
+    "ceinture": "jaune"
+  },
+  "4e-puissance-calculer-short": {
+    "margo": [40, 800, 450],
+    "question": ["Ma calculatrice", "est cassée ?"],
+    "calcul": [["−2⁴", "blanc", 220], ["= −16 ?", "rouge", 200]],
+    "ceinture": "blanche"
+  },
+  "6e-decimal-lire-ecrire-short": {
+    "question": ["3 unités et", "5 centièmes"],
+    "calcul": [["3,5 ?", "rouge", 260]],
+    "ceinture": "blanche"
+  },
+  "6e-triangle-nommer-short": {
+    "question": ["Combien de noms", "pour un triangle ?"],
+    "calcul": [["MRE ? REM ?", "blanc", 150], ["ERM ? …", "jaune", 150]],
+    "ceinture": "blanche"
+  },
+  "4e-relatif-addition-short": {
+    "question": ["L’ascenseur fou :", "je sors où ?"],
+    "calcul": [["−3 + 7", "blanc", 220], ["= ?", "jaune", 190]],
+    "ceinture": "jaune"
+  },
+  "4e-puissance-comprendre-short": {
+    "margo": [40, 920, 420],
+    "question": ["Plie 7 fois :", "combien de couches ?"],
+    "calcul": [["2 × 2 × 2 × …", "blanc", 150], ["= ?", "jaune", 190]],
+    "ceinture": "blanche"
+  }
+}
