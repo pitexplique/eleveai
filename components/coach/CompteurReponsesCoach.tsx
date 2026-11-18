@@ -18,6 +18,7 @@
 // ne coûte rien.
 // Rien ne s'affiche tant que le compteur est à 0 ou illisible.
 
+import type React from "react";
 import { useEffect, useRef, useState } from "react";
 
 const RELECTURE_MS = 30_000;
@@ -25,14 +26,16 @@ const RELECTURE_MS = 30_000;
 export default function CompteurReponsesCoach({
   className = "",
   sombre = false,
+  chiffre = false,
 }: {
   className?: string;
   sombre?: boolean;
+  chiffre?: boolean;
 }) {
   const [cible, setCible] = useState<number | null>(null);
   const [affiche, setAffiche] = useState<number | null>(null);
   const afficheRef = useRef<number | null>(null);
-  const boite = useRef<HTMLParagraphElement>(null);
+  const boite = useRef<HTMLElement>(null);
 
   useEffect(() => {
     let actif = true;
@@ -94,10 +97,25 @@ export default function CompteurReponsesCoach({
     return () => clearInterval(id);
   }, [cible]);
 
+  // `chiffre` (18/11) : la version de la bande « En chiffres » de l'accueil,
+  // à placer dans un <dl> (même allure que « exercices de maths »).
+  if (chiffre) {
+    return (
+      <div ref={boite as React.RefObject<HTMLDivElement>} className={["flex min-h-10 flex-col-reverse items-center text-center sm:items-start sm:text-left", className].join(" ")}>
+        {affiche ? (
+          <>
+            <dt className="text-xs font-bold leading-tight text-slate-600">questions répondues au coach</dt>
+            <dd className="text-lg font-black tabular-nums text-slate-900 sm:text-xl">{affiche.toLocaleString("fr-FR")}</dd>
+          </>
+        ) : null}
+      </div>
+    );
+  }
+
   // La boîte reste dans la page (vide, mais haute d'une ligne) pour que
   // l'observateur la voie : un élément de hauteur nulle n'entre jamais à l'écran.
   return (
-    <p ref={boite} className={["min-h-6 text-base", sombre ? "text-slate-400" : "text-slate-600", className].join(" ")}>
+    <p ref={boite as React.RefObject<HTMLParagraphElement>}className={["min-h-6 text-base", sombre ? "text-slate-400" : "text-slate-600", className].join(" ")}>
       {affiche ? (
         <>
           <strong className={["font-bold tabular-nums", sombre ? "text-white" : "text-slate-800"].join(" ")}>

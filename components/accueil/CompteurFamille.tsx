@@ -17,7 +17,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, GraduationCap, Gift, PlayCircle, Users, Utensils } from "lucide-react";
 import { CAP_VIDEOS, ECHEANCE_CAP, etatCompteurVideos } from "@/lib/videos/compteur";
-import { EXERCICES, visiteursDeLaSemaine } from "@/lib/accueil/chiffres-semaine";
+import { EXERCICES } from "@/lib/accueil/chiffres-semaine";
 import CompteurReponsesCoach from "@/components/coach/CompteurReponsesCoach";
 
 export type VarianteCompteur = "barre" | "ligne";
@@ -27,7 +27,6 @@ export type VarianteCompteur = "barre" | "ligne";
 export default function CompteurFamille({ variante, micros }: { variante: VarianteCompteur; micros?: number }) {
   const c = etatCompteurVideos();
   const cap = CAP_VIDEOS.toLocaleString("fr-FR");
-  const visiteurs = visiteursDeLaSemaine();
 
   if (variante === "ligne") {
     return (
@@ -187,13 +186,12 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
           <dl className={`grid shrink-0 ${micros ? "grid-cols-3" : "grid-cols-2"} gap-3 border-t border-slate-100 pt-2 lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0`}>
             {micros ? chiffre(micros.toLocaleString("fr-FR"), "micro-compétences") : null}
             {chiffre(EXERCICES.exercices.toLocaleString("fr-FR"), "exercices de maths")}
-            {visiteurs !== null && chiffre(visiteurs.toLocaleString("fr-FR"), "visiteurs cette semaine")}
+            {/* 18/11, Frédéric : « il fallait enlever le nombre de visiteurs » →
+                à sa place, le compteur EN DIRECT des questions répondues au coach
+                (le même que le pied de page, jamais un chiffre tapé). */}
+            <CompteurReponsesCoach chiffre />
           </dl>
         </div>
-        {/* 18/11, Frédéric : « mets 10 752 questions répondues au coach par tous
-            les élèves, tu l'as sur le footer » → le MÊME compteur en direct que le
-            pied de page (jamais un chiffre tapé, il serait vite faux). */}
-        <CompteurReponsesCoach className="mt-2 border-t border-slate-100 pt-2 text-center sm:text-left" />
       </div>
       {/* 17/11, Frédéric : « enlève la ligne sur Tommy » → citation d'élève retirée. */}
     </div>
