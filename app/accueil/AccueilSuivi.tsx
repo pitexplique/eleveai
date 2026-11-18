@@ -188,7 +188,7 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
   const compteurVideos = etatCompteurVideos();
   const videotheque = compteurVideos.capAtteint
     ? `Toute la vidéothèque : plus de ${CAP_VIDEOS.toLocaleString("fr-FR")} vidéos du CP à la Terminale`
-    : `Toute la vidéothèque : ${compteurVideos.nombreTexte} vidéos du CP à la Terminale aujourd'hui, ${CAP_VIDEOS.toLocaleString("fr-FR")} ${ECHEANCE_CAP}`;
+    : `Toute la vidéothèque : ${compteurVideos.nombreTexte} vidéos du CP à la Terminale aujourd'hui (objectif : ${CAP_VIDEOS.toLocaleString("fr-FR")} ${ECHEANCE_CAP})`;
   const suiviFamille = [
     { Icone: PlayCircle, texte: videotheque },
     ...SUIVI_DES_MAINTENANT.map((texte) => ({ Icone: ClipboardList, texte })),

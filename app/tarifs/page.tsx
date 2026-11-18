@@ -10,7 +10,11 @@ import TarifsClient from "./TarifsClient";
 // encore. C'est exactement la leçon de `retirer-du-sitemap-ne-ferme-rien` :
 // retirer une carte n'éteint pas une page, il faut éteindre les quatre
 // endroits — la carte, la description, le JSON-LD et le llms.txt.
-import { ETABLISSEMENT_ETRANGER, OUVERTURE_SUIVI, PRIX_MENSUEL, VIDEOS_SITE, montant } from "@/lib/tarifs";
+import { ETABLISSEMENT_ETRANGER, OUVERTURE_SUIVI, PRIX_MENSUEL, montant } from "@/lib/tarifs";
+import { etatCompteurVideos } from "@/lib/videos/compteur";
+
+// ⛔ 18/11/2026 : le VRAI nombre de vidéos, compté au build (fini les « 3 500 »).
+const VIDEOS_DU_JOUR = etatCompteurVideos().nombreTexte;
 
 const url = "https://www.eleveai.fr/tarifs";
 
@@ -20,7 +24,7 @@ const url = "https://www.eleveai.fr/tarifs";
 // il suit le texte visible, et ses prix viennent des constantes.
 const resume =
   `Le coach de maths reste ouvert à tous. Le suivi famille (${montant(PRIX_MENSUEL)} par mois en France, un prix adapté à chaque pays) ouvre ${OUVERTURE_SUIVI} : ` +
-  `${VIDEOS_SITE} vidéos, un bilan chaque semaine, et les visios « Maths réelles ». Offre aux établissements hors de France : ${ETABLISSEMENT_ETRANGER.parEleveEtParAn} par élève et par an.`;
+  `${VIDEOS_DU_JOUR} vidéos, un bilan chaque semaine, et les visios « Maths réelles ». Offre aux établissements hors de France : ${ETABLISSEMENT_ETRANGER.parEleveEtParAn} par élève et par an.`;
 
 export const metadata: Metadata = {
   title: "Offres — le suivi famille, la visio, les établissements hors de France",

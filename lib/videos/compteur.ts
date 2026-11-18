@@ -47,6 +47,6 @@ export function etatCompteurVideos(): EtatCompteur {
     pourcent: Math.min(100, Math.round((nombre / CAP_VIDEOS) * 100)),
     phrase: capAtteint
       ? `Plus de ${capTexte} vidéos de maths`
-      : `${nombreTexte} vidéos de maths aujourd'hui — ${capTexte} ${ECHEANCE_CAP}`,
+      : `${nombreTexte} vidéos de maths aujourd'hui — objectif : ${capTexte} ${ECHEANCE_CAP}`,
   };
 }

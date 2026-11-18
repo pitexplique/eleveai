@@ -38,11 +38,12 @@ import {
   PERIODE_ANNUELLE,
   PRIX_ANNUEL,
   PRIX_MENSUEL,
-  PRIX_PAR_PAYS,
-  VIDEOS_SITE,
-  VIDEOS_YOUTUBE,
-  montant,
+  PRIX_PAR_PAYS,  montant,
 } from "@/lib/tarifs";
+import { etatCompteurVideos } from "@/lib/videos/compteur";
+
+// ⛔ 18/11/2026 : le VRAI nombre de vidéos, compté au build (fini les « 3 500 »).
+const VIDEOS_DU_JOUR = etatCompteurVideos().nombreTexte;
 
 const nombre = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 const PRIX_FCFA = PRIX_PAR_PAYS.find((p) => p.suivi.includes("FCFA"))?.suivi;
@@ -53,7 +54,7 @@ export const metadata: Metadata = {
      la SERP : ce texte est ce que Google affiche sous le lien, et il s'y
      périme plus lentement que la page — une grille annoncée ici survit des
      semaines à la carte qui l'a produite (« 4,90 €/mois », voir lib/tarifs.ts). */
-  description: `Une IA qui explique, jamais qui fait à la place. Votre enfant s'entraîne sur tout le programme sans abonnement. Le suivi famille — ${VIDEOS_SITE} vidéos, un bilan chaque semaine — ouvre ${OUVERTURE_SUIVI} : ${montant(PRIX_MENSUEL)} par mois en France, un prix adapté à chaque pays.`,
+  description: `Une IA qui explique, jamais qui fait à la place. Votre enfant s'entraîne sur tout le programme sans abonnement. Le suivi famille — ${VIDEOS_DU_JOUR} vidéos, un bilan chaque semaine — ouvre ${OUVERTURE_SUIVI} : ${montant(PRIX_MENSUEL)} par mois en France, un prix adapté à chaque pays.`,
   alternates: { canonical: "https://www.eleveai.fr/parents" },
 };
 
@@ -118,7 +119,7 @@ const faq = [
     // d'aide). Ici, non. ⛔ Le jour où une limite apparaîtrait côté élève,
     // c'est CETTE réponse qui devient un mensonge — la relire avant.
     q: "Si je ne m'abonne pas, mon enfant est-il limité ?",
-    a: `Non. Il garde le coach en entier, la vidéo de chaque micro-compétence dans le coach, les exercices, les parcours, les évaluations et ses résultats. L'abonnement ajoute votre vue à vous (bilan, compte rendu, alertes) et la vidéothèque entière : ${nombre(VIDEOS_SITE)} vidéos, dont ${nombre(VIDEOS_SITE - VIDEOS_YOUTUBE)} qu'on ne trouve pas sur YouTube.`,
+    a: `Non. Il garde le coach en entier, la vidéo de chaque micro-compétence dans le coach, les exercices, les parcours, les évaluations et ses résultats. L'abonnement ajoute votre vue à vous (bilan, compte rendu, alertes) et la vidéothèque entière : ${VIDEOS_DU_JOUR} vidéos aujourd'hui.`,
   },
   {
     q: "Je suis enseignant — est-ce que ça change quelque chose ?",
@@ -424,7 +425,7 @@ export default function ParentsPage() {
               </p>
               <ul className="mt-4 space-y-2.5">
                 {[
-                  ["🎬", `Toute la vidéothèque : ${nombre(VIDEOS_SITE)} vidéos, ${nombre(VIDEOS_YOUTUBE)} seulement sur YouTube`],
+                  ["🎬", `Toute la vidéothèque : ${VIDEOS_DU_JOUR} vidéos aujourd'hui`],
                   ["📊", "Un bilan de départ, puis un compte rendu chaque semaine"],
                   ["📌", "Les erreurs qui reviennent, et les 3 choses à revoir"],
                   ["🔔", "Une alerte quand il décroche sur une notion"],

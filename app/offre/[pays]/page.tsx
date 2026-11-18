@@ -21,11 +21,13 @@ import {
   OFFRE_PAYS,
   OUVERTURE_SUIVI,
   OUVERTURE_VISIO,
-  VIDEOS_SITE,
-  VIDEOS_YOUTUBE,
   VISIO_FCFA,
   NOM_VISIO,
 } from "@/lib/tarifs";
+import { etatCompteurVideos } from "@/lib/videos/compteur";
+
+// ⛔ 18/11/2026 : le VRAI nombre de vidéos, compté au build (fini les « 3 500 »).
+const VIDEOS_DU_JOUR = etatCompteurVideos().nombreTexte;
 import { programmesDuPays } from "@/lib/programmes-pays/pays";
 
 const nombre = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -41,7 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ pays: str
   if (!o) return {};
   return {
     title: `EleveAI ${o.du} : le suivi en maths à ${DUREES_FCFA[0].prix} par mois`,
-    description: `Pour les familles et les écoles ${o.du} : le coach de maths ouvert à tous, et le suivi famille — ${VIDEOS_SITE} vidéos, un bilan chaque semaine — à ${DUREES_FCFA[0].prix} par mois. Paiement mobile prévu. Ouverture ${OUVERTURE_SUIVI}.`,
+    description: `Pour les familles et les écoles ${o.du} : le coach de maths ouvert à tous, et le suivi famille — ${VIDEOS_DU_JOUR} vidéos, un bilan chaque semaine — à ${DUREES_FCFA[0].prix} par mois. Ouverture ${OUVERTURE_SUIVI}.`,
     alternates: { canonical: `/offre/${pays}` },
   };
 }
@@ -53,7 +55,7 @@ export default async function OffrePays({ params }: { params: Promise<{ pays: st
   const niveaux = programmesDuPays(pays).map((p) => p.niveau);
 
   const SUIVI = [
-    `Toute la vidéothèque : ${nombre(VIDEOS_SITE)} vidéos de maths (${nombre(VIDEOS_YOUTUBE)} seulement sur YouTube)`,
+    `Toute la vidéothèque : ${VIDEOS_DU_JOUR} vidéos de maths aujourd'hui`,
     "Un bilan de départ : ce que votre enfant sait, et ce qui lui manque",
     "Un compte rendu chaque semaine, et une alerte quand il décroche",
     `La préparation ciblée des examens : ${o.examens}`,
@@ -150,7 +152,7 @@ export default async function OffrePays({ params }: { params: Promise<{ pays: st
           </div>
           <ul className="space-y-3 self-center text-slate-800">
             <Puce couleur="text-amber-600">Un compte pour chaque professeur et chaque élève, avec « Mes classes »</Puce>
-            <Puce couleur="text-amber-600">{`La vidéothèque entière pour tous les élèves : ${nombre(VIDEOS_SITE)} vidéos`}</Puce>
+            <Puce couleur="text-amber-600">{`La vidéothèque entière pour tous les élèves : ${VIDEOS_DU_JOUR} vidéos aujourd'hui`}</Puce>
             <Puce couleur="text-amber-600">Le suivi famille ouvert aux parents, sans rien de plus à payer</Puce>
             <Puce couleur="text-amber-600">Une formation de vos professeurs en visio au démarrage</Puce>
           </ul>

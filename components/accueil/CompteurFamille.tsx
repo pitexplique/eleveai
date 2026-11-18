@@ -38,7 +38,7 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
             <>Plus de {cap} vidéos</>
           ) : (
             <>
-              {c.nombreTexte} vidéos aujourd&apos;hui, <span className="whitespace-nowrap text-teal-700">{cap} {ECHEANCE_CAP}</span>
+              {c.nombreTexte} vidéos aujourd&apos;hui, <span className="whitespace-nowrap text-teal-700">objectif : {cap} {ECHEANCE_CAP}</span>
             </>
           )}
           <br />

@@ -50,7 +50,7 @@ const OUVERT = [
 const VIDEOS_REELLES = toutesLesVideos().filter((v) => !/\/(gb|en)\//.test(v.fichier)).length;
 const SUIVI_AUJOURDHUI = VENTE.ouverte
   ? `Dès aujourd'hui : toute la vidéothèque, ${nombre(VIDEOS_REELLES)} vidéos du CP à la Terminale, à parcourir par classe`
-  : `Toute la vidéothèque : ${etatCompteurVideos().nombreTexte} vidéos du CP à la Terminale aujourd'hui, ${nombre(CAP_VIDEOS)} ${ECHEANCE_CAP}`; // ⛔ 18/11 : le vrai compte, plus « 3 500 »
+  : `Toute la vidéothèque : ${etatCompteurVideos().nombreTexte} vidéos du CP à la Terminale aujourd'hui (objectif : ${nombre(CAP_VIDEOS)} ${ECHEANCE_CAP})`; // ⛔ 18/11 : le vrai compte, plus « 3 500 »
 const SUIVI = VENTE.ouverte
   ? [SUIVI_AUJOURDHUI, ...SUIVI_DES_MAINTENANT, ...SUIVI_A_VENIR.map((t) => `À venir, en exclusivité : ${t.charAt(0).toLowerCase()}${t.slice(1)}`)]
   : [SUIVI_AUJOURDHUI, ...SUIVI_DES_MAINTENANT, ...SUIVI_A_VENIR.map((t) => `À venir : ${t.charAt(0).toLowerCase()}${t.slice(1)}`)]; // ⛔ 18/11 : rien de promis qui n'existe pas
