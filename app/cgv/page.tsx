@@ -302,16 +302,26 @@ export default function CgvPage() {
             depuis son espace, sans motif ni frais ; l’accès dure alors jusqu’à la
             fin du mois déjà payé.
           </p>
+          {/* ⛔ 19/11/2026 — NOUVEAU MODÈLE : l'annuel devient un abonnement de
+              douze mois, renouvelé (Stripe, suivi_yearly). La reconduction
+              tacite oblige à prévenir le Client avant le terme (art. L215-1 du
+              code de la consommation) : activer dans Stripe l'envoi du courriel
+              avant renouvellement. */}
           <p>
-            L’abonnement annuel est souscrit pour une <strong>année scolaire</strong>,
-            et non pour douze mois glissants : quelle que soit sa date de
-            souscription, il prend fin le 31 août de l’année scolaire concernée,
-            à la date indiquée avant le paiement. Une souscription à partir du
-            1er juin couvre l’année scolaire suivante.
+            L’abonnement annuel est souscrit pour douze mois, à compter de la
+            commande. Il se renouvelle ensuite pour douze mois, sauf si le Client
+            l’arrête avant la date de renouvellement, depuis son espace, sans
+            motif ni frais ; l’accès dure alors jusqu’à la fin de l’année déjà
+            payée.
           </p>
           <p>
-            L’abonnement annuel n’est pas reconduit : à son terme, l’accès prend
-            fin et aucun prélèvement n’intervient sans une nouvelle commande.
+            Le Client est prévenu par courriel au plus tôt trois mois et au plus
+            tard un mois avant chaque renouvellement, avec la possibilité de ne
+            pas le reconduire (art. L215-1 du code de la consommation).
+          </p>
+          <p>
+            À la fin d’un abonnement, le compte redevient un compte gratuit : son
+            historique est conservé.
           </p>
         </Article>
 

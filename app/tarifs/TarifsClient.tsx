@@ -17,8 +17,7 @@
 import Link from "next/link";
 import { ArrowRight, Building2, Check, Eye, Globe2, Heart, MonitorPlay, Sparkles } from "lucide-react";
 import { DONS, VENTE } from "@/lib/legal/editeur";
-import { toutesLesVideos } from "@/lib/videos/r2";
-import { CAP_VIDEOS, ECHEANCE_CAP, etatCompteurVideos } from "@/lib/videos/compteur";
+import { etatCompteurVideos } from "@/lib/videos/compteur";
 import {
   ETABLISSEMENT_ETRANGER,
   OUVERTURE_SUIVI,
@@ -33,27 +32,32 @@ import {
   NOM_VISIO,
   VISIO_MATHS_REELLES,
   montant,
+  AIDE_IA,
+  COMPTE_GRATUIT,
+  FREE_CLASSES_PER_TEACHER,
+  MENTION_TVA,
+  MOIS_OFFERTS,
+  PHRASE_LANCEMENT,
+  PHRASE_OFFRE,
+  QUOTAS_IA,
+  SUIVI as OFFRE_SUIVI,
 } from "@/lib/tarifs";
 
-const nombre = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-
+// ⭐ 19/11/2026 — LE MODÈLE : le contenu est offert à tous, on paie le suivi.
+// ⛔ Jamais « illimité » pour l'aide IA, jamais de pourcentage, jamais « Coach IA ».
 const OUVERT = [
-  "Le coach de maths sur tout le programme, micro-compétence par micro-compétence",
-  "Dans le coach, la vidéo de chaque micro-compétence, avec ses questions-pauses",
-  "Les résultats gardés dans le compte de l'élève",
-  "Pour le prof : ses classes, la séance en direct, le bilan par micro",
-  "Les feuilles d'exercices corrigées",
+  `${AIDE_IA.coachOuvert.replace(/\.$/, "")}, sur tout le programme, micro-compétence par micro-compétence`,
+  `Toute la vidéothèque (${etatCompteurVideos().nombreTexte} vidéos aujourd'hui) et les feuilles d'exercices corrigées, sans compte`,
+  `Avec un compte gratuit : ${QUOTAS_IA.gratuitParJour} aides de Ti Margo par jour, sa semaine et ses ${COMPTE_GRATUIT.historiqueJours} derniers jours`,
+  `Pour le prof : ${FREE_CLASSES_PER_TEACHER} classes gratuites, la séance en direct, le bilan par micro`,
 ];
 
 // ⛔ 05/11/2026 : on écrit le nombre réel de vidéos le jour de l'ouverture, et
 // ce qui n'existe pas encore est annoncé comme « à venir ».
-const VIDEOS_REELLES = toutesLesVideos().filter((v) => !/\/(gb|en)\//.test(v.fichier)).length;
-const SUIVI_AUJOURDHUI = VENTE.ouverte
-  ? `Dès aujourd'hui : toute la vidéothèque, ${nombre(VIDEOS_REELLES)} vidéos du CP à la Terminale, à parcourir par classe`
-  : `Toute la vidéothèque : ${etatCompteurVideos().nombreTexte} vidéos du CP à la Terminale aujourd'hui (objectif : ${nombre(CAP_VIDEOS)} ${ECHEANCE_CAP})`; // ⛔ 18/11 : le vrai compte, plus « 3 500 »
+// 19/11/2026 : la vidéothèque est offerte à tous (liste OUVERT), elle n'est plus dans le Suivi.
 const SUIVI = VENTE.ouverte
-  ? [SUIVI_AUJOURDHUI, ...SUIVI_DES_MAINTENANT, ...SUIVI_A_VENIR.map((t) => `À venir, en exclusivité : ${t.charAt(0).toLowerCase()}${t.slice(1)}`)]
-  : [SUIVI_AUJOURDHUI, ...SUIVI_DES_MAINTENANT, ...SUIVI_A_VENIR.map((t) => `À venir : ${t.charAt(0).toLowerCase()}${t.slice(1)}`)]; // ⛔ 18/11 : rien de promis qui n'existe pas
+  ? [...SUIVI_DES_MAINTENANT, ...SUIVI_A_VENIR.map((t) => `À venir, en exclusivité : ${t.charAt(0).toLowerCase()}${t.slice(1)}`)]
+  : [...SUIVI_DES_MAINTENANT, ...SUIVI_A_VENIR.map((t) => `À venir : ${t.charAt(0).toLowerCase()}${t.slice(1)}`)]; // ⛔ 18/11 : rien de promis qui n'existe pas
 
 // ⭐ 03/11 : « Maths réelles », la liste vit dans lib/tarifs.ts.
 const VISIO = VISIO_MATHS_REELLES;
@@ -61,7 +65,7 @@ const VISIO = VISIO_MATHS_REELLES;
 const ETABLISSEMENT = [
   "Un compte pour chaque professeur et chaque élève, avec « Mes classes » et le bilan par micro-compétence",
   `La vidéothèque entière pour tous les élèves : ${etatCompteurVideos().nombreTexte} vidéos aujourd'hui`,
-  "Le suivi famille ouvert aux parents de vos élèves, sans rien de plus à payer",
+  `${OFFRE_SUIVI.nom} ouvert aux parents de vos élèves, sans rien de plus à payer`,
   "Une formation de vos professeurs en visio (1 h 30) au démarrage",
   "Le programme français, et celui de votre pays dès qu'il est prêt sur le site",
 ];
@@ -69,17 +73,17 @@ const ETABLISSEMENT = [
 const faq = [
   {
     q: "Pourquoi payer, alors qu'une IA explique tout ?",
-    a: "Une IA explique, mais elle ne sait pas où en est votre enfant dans son programme, elle ne garde pas ses résultats d'une semaine à l'autre et elle ne vous dit pas quoi revoir. C'est cela que vous achetez : le suivi, la vidéothèque entière et, si vous le voulez, un professeur en direct.",
+    a: "Une IA explique, mais elle ne sait pas où en est votre enfant dans son programme, elle ne garde pas ses résultats d'une semaine à l'autre et elle ne vous dit pas quoi revoir. C'est cela que vous achetez : le suivi. Les vidéos, les fiches et les exercices restent offerts à tous.",
   },
   {
     q: "Sans abonnement, mon enfant est-il bridé ?",
-    a: "Non. Il garde le coach sur tout le programme, la vidéo de chaque micro-compétence dans le coach, les exercices et ses résultats. L'abonnement ajoute votre vue à vous et la vidéothèque complète.",
+    a: `Non. Le coach est illimité et ouvert à tous, avec toutes les vidéos et les fiches. Avec un compte gratuit, il a aussi ${QUOTAS_IA.gratuitParJour} aides de Ti Margo par jour et ses ${COMPTE_GRATUIT.historiqueJours} derniers jours. Le Suivi ajoute votre vue à vous, tout son historique, des conseils et ${QUOTAS_IA.suiviParJour} aides de Ti Margo par jour.`,
   },
   {
     q: "Quand est-ce que ça ouvre ?",
     a: VENTE.ouverte
-      ? `Le suivi famille est ouvert. Les visios « ${NOM_VISIO} » arrivent en ${OUVERTURE_VISIO}.`
-      : `Le suivi famille ouvre ${OUVERTURE_SUIVI}, les visios « ${NOM_VISIO} » en ${OUVERTURE_VISIO}. Rien n'est encaissé avant l'ouverture.`,
+      ? `${OFFRE_SUIVI.nom} est ouvert. Les visios « ${NOM_VISIO} » arrivent en ${OUVERTURE_VISIO}.`
+      : `${OFFRE_SUIVI.nom} ouvre ${OUVERTURE_SUIVI}, les visios « ${NOM_VISIO} » en ${OUVERTURE_VISIO}. Rien n'est encaissé avant l'ouverture.`,
   },
   {
     q: "Le prix est-il le même dans tous les pays ?",
@@ -87,7 +91,11 @@ const faq = [
   },
   {
     q: "Puis-je arrêter quand je veux ?",
-    a: `Oui. La formule au mois est sans engagement. La formule à l'année (${montant(PRIX_ANNUEL)}) vaut ${PERIODE_ANNUELLE}.`,
+    a: `Oui. La formule au mois est sans engagement. La formule à l'année (${montant(PRIX_ANNUEL)}, ${MOIS_OFFERTS} mois offerts) se renouvelle chaque année : vous l'arrêtez quand vous voulez pour l'année suivante. À la fin de l'abonnement, le compte redevient gratuit et garde son historique.`,
+  },
+  {
+    q: "Et pour les professeurs ?",
+    a: `Chaque professeur a ${FREE_CLASSES_PER_TEACHER} classes gratuites, avec la séance en direct et le bilan par micro-compétence. Le coach reste illimité pour ses élèves.`,
   },
   {
     q: "Notre école est en France, pouvons-nous prendre l'offre établissement ?",
@@ -109,13 +117,14 @@ export default function TarifsClient() {
         {/* 1. LA PROMESSE */}
         <section className="text-center">
           <p className="inline-flex rounded-full bg-sky-100 px-4 py-1.5 text-xs font-black uppercase tracking-wide text-sky-800 ring-1 ring-sky-200">
-            {VENTE.ouverte ? "Le suivi famille est ouvert" : `Ouverture ${OUVERTURE_SUIVI}`}
+            {VENTE.ouverte ? `${OFFRE_SUIVI.nom} est ouvert` : `Ouverture ${OUVERTURE_SUIVI}`}
           </p>
           <h1 className="mt-4 text-3xl font-black leading-tight sm:text-5xl">Les offres d&apos;EleveAI</h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
-            Le coach reste ouvert à tous. Ce qui s&apos;achète, c&apos;est ce qu&apos;une IA ne fait pas : suivre votre enfant dans
-            son programme, toute la vidéothèque, et un professeur en direct.
+            Tout le contenu est offert à tous. Ce qui s&apos;achète, c&apos;est le suivi de votre enfant dans son programme.
           </p>
+          <p className="mx-auto mt-3 max-w-2xl text-lg font-black text-slate-900">{PHRASE_OFFRE}</p>
+          <p className="mx-auto mt-1 max-w-2xl text-sm font-bold text-emerald-800">{PHRASE_LANCEMENT}</p>
         </section>
 
         {/* 2. LES QUATRE CARTES */}
@@ -135,15 +144,16 @@ export default function TarifsClient() {
           <div className="flex flex-col rounded-3xl border-2 border-sky-300 p-6 shadow-lg">
             <p className="text-sm font-black uppercase tracking-wide text-sky-700">{VENTE.ouverte ? "Pour les familles" : `Ouverture ${OUVERTURE_SUIVI}`}</p>
             <h2 className="mt-1 flex items-center gap-2 text-2xl font-black">
-              <Eye className="h-6 w-6 text-sky-700" aria-hidden="true" /> Le suivi famille
+              <Eye className="h-6 w-6 text-sky-700" aria-hidden="true" /> {OFFRE_SUIVI.nom}
             </h2>
             <Link href="/suivi/exemple" className="mt-1 text-sm font-black text-sky-700 underline">Voir un exemple</Link>
             <p className="mt-3 text-3xl font-black">
               {montant(PRIX_MENSUEL)} <span className="text-base font-bold text-slate-500">par mois</span>
             </p>
             <p className="text-sm text-slate-500">
-              Sans engagement, ou {montant(PRIX_ANNUEL)} {PERIODE_ANNUELLE}. Prix de la France.
+              Sans engagement, ou {montant(PRIX_ANNUEL)} {PERIODE_ANNUELLE}. Prix de la France. {MENTION_TVA}.
             </p>
+            <p className="mt-1 text-sm font-bold text-emerald-800">{PHRASE_LANCEMENT}</p>
             <ul className="mt-4 flex-1 space-y-2 text-sm text-slate-800">
               {SUIVI.map((t) => <Puce key={t} couleur="text-sky-600">{t}</Puce>)}
             </ul>

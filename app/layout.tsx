@@ -356,9 +356,9 @@ export default function RootLayout({
              a survécu au changement de grille. Aucun nom ne porte de chiffre.
              ⚠️ L'OFFRE CLASSE ELLE-MÊME EST REMPLACÉE LE 01/09/2026 par la
              seconde formule famille : il n'y a plus de tarif de groupe. */
-          name: "Famille, à l'année scolaire — par foyer, jamais par enfant",
+          name: "Famille, à l'année — par foyer, 2 mois offerts",
           description:
-            "La même chose au tarif annuel : l'abonnement couvre l'année scolaire, et non douze mois glissants. Une seule adresse courriel pour tous les enfants du foyer. Le coach, les exercices et les évaluations, eux, ne se paient jamais.",
+            "La même chose au tarif annuel, renouvelée chaque année. Une seule adresse courriel, jusqu'à 3 enfants. Le coach, les vidéos, les exercices et les évaluations, eux, ne se paient jamais.",
           priceSpecification: {
             "@type": "UnitPriceSpecification",
             price: PRIX_ANNUEL,

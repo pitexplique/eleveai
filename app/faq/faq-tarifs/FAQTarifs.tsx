@@ -32,9 +32,7 @@ import {
   PERIODE_ANNUELLE,
   PRIX_ANNUEL,
   PRIX_MENSUEL,
-  REDUCTION_ANNUEL_POURCENT,
   montant,
-  pourcent,
 } from "@/lib/tarifs";
 
 export default function FAQTarifs() {
@@ -71,7 +69,7 @@ export default function FAQTarifs() {
         PRIX_ANNUEL,
       )} au lieu de ${montant(
         ANNUEL_AU_TARIF_MENSUEL,
-      )} : ${pourcent(REDUCTION_ANNUEL_POURCENT)} de moins, l'équivalent de ${MOIS_OFFERTS} mois offerts. En échange, l'abonnement annuel couvre l'année scolaire et non douze mois glissants — souscrit en janvier, il s'arrête à la fin de l'année scolaire en cours.`,
+      )} : ${MOIS_OFFERTS} mois offerts. L'abonnement annuel se renouvelle chaque année ; vous l'arrêtez quand vous voulez pour l'année suivante.`, // 19/11/2026 : jamais de pourcentage
     },
     {
       q: "Et si je suis professeur ?",

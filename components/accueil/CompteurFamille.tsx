@@ -12,13 +12,17 @@
 // ⏸ 16/11 : « enlève l'offre famille et carte cadeau pour le moment, on le
 // remettra plus tard » → les liens (et « un seul abonnement… ») sont ÉTEINTS par
 // LIENS_OFFRE ; passer à true pour les rallumer.
-const LIENS_OFFRE = false;
+// ✅ 19/11/2026, Frédéric : « modifie page d'accueil » → l'offre revient, avec la
+// phrase principale du nouveau modèle. La carte cadeau reste éteinte.
+const LIENS_OFFRE = true;
+const CARTE_CADEAU = false;
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, GraduationCap, Gift, PlayCircle, Users, Utensils } from "lucide-react";
 import { CAP_VIDEOS, ECHEANCE_CAP, etatCompteurVideos } from "@/lib/videos/compteur";
 import { EXERCICES } from "@/lib/accueil/chiffres-semaine";
 import CompteurReponsesCoach from "@/components/coach/CompteurReponsesCoach";
+import { FREE_CLASSES_PER_TEACHER, PHRASE_OFFRE, QUOTAS_IA } from "@/lib/tarifs";
 
 export type VarianteCompteur = "barre" | "ligne";
 
@@ -52,7 +56,7 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
         {LIENS_OFFRE && (
           <p className="mt-1.5 flex flex-wrap justify-center gap-x-4 text-sm font-bold">
             <Link href="#familles" className="text-sky-800 underline">L&apos;offre famille</Link>
-            <Link href="/carte-cadeau" className="text-emerald-800 underline">Offrir la carte cadeau de Noël</Link>
+            {CARTE_CADEAU && <Link href="/carte-cadeau" className="text-emerald-800 underline">Offrir la carte cadeau de Noël</Link>}
           </p>
         )}
       </div>
@@ -83,12 +87,19 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
         </p>
         {LIENS_OFFRE ? (
           <>
-            <p className="mt-1 text-sm font-bold text-slate-600">Un seul abonnement pour tous les enfants de la maison.</p>
+            {/* 19/11/2026 : le modèle en clair. ⛔ Jamais « illimité » pour l'aide IA. */}
+            <p className="mt-1 text-sm font-bold text-slate-600">
+              Le coach est illimité et ouvert à tous. Un compte gratuit donne {QUOTAS_IA.gratuitParJour} aides de Ti Margo par jour,
+              le Suivi en donne {QUOTAS_IA.suiviParJour}.
+            </p>
+            <p className="mt-1 text-sm font-black text-slate-800">{PHRASE_OFFRE}</p>
             <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm font-black">
               <Link href="#familles" className="text-sky-800 underline">L&apos;offre famille</Link>
-              <Link href="/carte-cadeau" className="inline-flex items-center gap-1 text-emerald-800 underline">
-                <Gift className="h-4 w-4" aria-hidden="true" /> La carte cadeau
-              </Link>
+              {CARTE_CADEAU && (
+                <Link href="/carte-cadeau" className="inline-flex items-center gap-1 text-emerald-800 underline">
+                  <Gift className="h-4 w-4" aria-hidden="true" /> La carte cadeau
+                </Link>
+              )}
             </p>
           </>
         ) : (
@@ -109,7 +120,8 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
         </p>
         <ul className="mt-2 space-y-0.5 text-sm font-bold text-slate-700">
           {[
-            "Vos classes, un code pour chaque élève",
+            // 19/11/2026 : « 2 classes gratuites par prof », dit en clair, sans prix.
+            `${FREE_CLASSES_PER_TEACHER} classes gratuites, un code pour chaque élève`,
             // 16/11, Frédéric : « et vous pouvez suivre vos élèves en direct en
             // salle info » + « ils travaillent à leurs niveaux ».
             // 17/11 : « à son niveau » est maintenant dans le titre de l'encart.

@@ -53,7 +53,7 @@ import { PROGRAMME_CLASSES, listerToutesLesNotions } from "@/lib/programme";
 import { toutesLesVideos } from "@/lib/videos/r2";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
 import { DONS, VENTE } from "@/lib/legal/editeur";
-import { ETABLISSEMENT_ETRANGER, NOM_VISIO, OUVERTURE_SUIVI, OUVERTURE_VISIO, PRIX_ETABLISSEMENT_PAR_PAYS, PRIX_MENSUEL, PRIX_VISIO, SUIVI_A_VENIR, SUIVI_DES_MAINTENANT, montant } from "@/lib/tarifs";
+import { AIDE_IA, COMPTE_GRATUIT, ETABLISSEMENT_ETRANGER, FREE_CLASSES_PER_TEACHER, MENTION_TVA, MOIS_OFFERTS, NOM_VISIO, OUVERTURE_SUIVI, OUVERTURE_VISIO, PHRASE_LANCEMENT, PRIX_ANNUEL, PRIX_ETABLISSEMENT_PAR_PAYS, PRIX_MENSUEL, PRIX_VISIO, QUOTAS_IA, SUIVI, SUIVI_A_VENIR, SUIVI_DES_MAINTENANT, montant } from "@/lib/tarifs";
 import { PAYS_AVENTURE } from "@/lib/aventure/pays";
 import CompteurFamille, { type VarianteCompteur } from "@/components/accueil/CompteurFamille";
 import MenuDuJour from "@/components/seances/MenuDuJour";
@@ -122,12 +122,14 @@ const ETAPES = [
    plus, c'est la vidéothèque entière.
    ⛔ 16/11 : la ligne « 3 500 vidéos, dont 3 000 hors YouTube » était écrite à
    la main et fausse (1 915 sur R2) : la vidéothèque se compte dans le composant. */
+/* ⭐ 19/11/2026 — LE MODÈLE : le contenu est offert à tous, on paie le suivi.
+   Le coach est illimité et ouvert à tous ; l'aide de Ti Margo par l'IA est
+   comptée (lib/tarifs.ts, QUOTAS_IA). ⛔ Jamais « illimité » pour l'aide IA. */
 const GRATUIT = [
-  "Le coach de maths, sur tout le programme, micro-compétence par micro-compétence",
-  "Dans le coach, la vidéo de chaque micro-compétence, avec ses questions-pauses",
-  "Les résultats gardés dans le compte de l'élève",
-  "Pour le prof : ses classes, la séance en direct, le bilan par micro",
-  "Les feuilles d'exercices corrigées",
+  `${AIDE_IA.coachOuvert.replace(/\.$/, "")}, sur tout le programme, micro-compétence par micro-compétence`,
+  "Toutes les vidéos et les feuilles d'exercices corrigées, sans compte",
+  `Avec un compte gratuit : ${QUOTAS_IA.gratuitParJour} aides de Ti Margo par jour, ma semaine et mes ${COMPTE_GRATUIT.historiqueJours} derniers jours`,
+  `Pour le prof : ${FREE_CLASSES_PER_TEACHER} classes gratuites, la séance en direct, le bilan par micro`,
 ];
 
 /* ⛔ 18/11/2026 : la famille ne reçoit que ce qui EXISTE (SUIVI_DES_MAINTENANT),
@@ -137,7 +139,7 @@ const GRATUIT = [
    établissement », « suivant les pays ». ⛔ Hors de France seulement. */
 const ETABLISSEMENT = [
   "Tous les élèves et tous les professeurs de l'établissement",
-  "Toute la vidéothèque et le suivi famille pour chaque élève",
+  `${SUIVI.nom} pour chaque élève`,
   "Le bilan par micro-compétence, classe par classe",
   "Vos professeurs signalent ce qui ne va pas : le coach est corrigé chaque semaine",
 ];
@@ -193,8 +195,10 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
   const videotheque = compteurVideos.capAtteint
     ? `Toute la vidéothèque : plus de ${CAP_VIDEOS.toLocaleString("fr-FR")} vidéos du CP à la Terminale`
     : `Toute la vidéothèque : ${compteurVideos.nombreTexte} vidéos du CP à la Terminale aujourd'hui (objectif : ${CAP_VIDEOS.toLocaleString("fr-FR")} ${ECHEANCE_CAP})`;
+  // 19/11/2026 : la vidéothèque est offerte à tous (liste « Ouvert à tous ») ;
+  // le Suivi ne vend que le suivi.
+  const gratuit = [GRATUIT[0], videotheque, ...GRATUIT.slice(1)];
   const suiviFamille = [
-    { Icone: PlayCircle, texte: videotheque },
     ...SUIVI_DES_MAINTENANT.map((texte) => ({ Icone: ClipboardList, texte })),
     ...SUIVI_A_VENIR.map((t) => ({ Icone: CalendarCheck, texte: `À venir : ${t.charAt(0).toLowerCase()}${t.slice(1)}` })),
   ];
@@ -472,7 +476,7 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
               <h3 className="mt-1 text-2xl font-black">Ouvert à tous</h3>
               <p className="mt-1 text-slate-600">Élèves et professeurs, sans abonnement.</p>
               <ul className="mt-4 space-y-2 text-slate-800">
-                {GRATUIT.map((g) => <Puce key={g}>{g}</Puce>)}
+                {gratuit.map((g) => <Puce key={g}>{g}</Puce>)}
               </ul>
               <Link href="/coach-ia/maths" className="mt-6 block rounded-full bg-emerald-600 px-5 py-3 text-center font-black text-white hover:bg-emerald-700">
                 Commencer avec le coach de maths
@@ -484,7 +488,7 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
             <div className="rounded-3xl border border-slate-200 p-6">
               <p className="text-sm font-black uppercase tracking-wide text-sky-700">{VENTE.ouverte ? "Pour les familles" : `Ouverture ${OUVERTURE_SUIVI}`}</p>
               <h3 className="mt-1 flex items-center gap-2 text-2xl font-black">
-                <Eye className="h-6 w-6 text-sky-700" aria-hidden="true" /> Le suivi famille
+                <Eye className="h-6 w-6 text-sky-700" aria-hidden="true" /> {SUIVI.nom}
               </h3>
               <p className="mt-1 text-slate-600">Pour les parents qui veulent savoir où en est leur enfant, sans faire à sa place.</p>
               <ul className="mt-4 space-y-2 text-slate-800">
@@ -495,8 +499,13 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
                   </li>
                 ))}
               </ul>
-              <p className="mt-5 text-lg font-black">{montant(PRIX_MENSUEL)} par mois en France</p>
-              <p className="text-sm text-slate-500">Un prix adapté à chaque pays, et sans engagement.</p>
+              <p className="mt-5 text-lg font-black">
+                {montant(PRIX_MENSUEL)} par mois ou {montant(PRIX_ANNUEL)} par an ({MOIS_OFFERTS} mois offerts)
+              </p>
+              <p className="mt-1 text-sm font-bold text-emerald-800">{PHRASE_LANCEMENT}</p>
+              <p className="mt-1 text-sm text-slate-500">
+                Au mois, sans engagement. Prix en France, adapté à chaque pays. {MENTION_TVA}.
+              </p>
               {VENTE.ouverte && (
                 <Link href="/abonnement" className="mt-3 inline-flex rounded-full bg-sky-700 px-5 py-2.5 font-black text-white hover:bg-sky-800">
                   S&apos;abonner
@@ -556,7 +565,7 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
           )}
           {offresFamille && (
             <p className="mt-4 text-sm text-slate-500">
-            {!VENTE.ouverte && <>Le suivi famille et l&apos;offre établissement ouvrent {OUVERTURE_SUIVI}, les visios en {OUVERTURE_VISIO}. </>}Ces offres ne s&apos;adressent ni aux établissements situés en France, ni aux élèves de l&apos;auteur du site.
+            {!VENTE.ouverte && <>{SUIVI.nom} et l&apos;offre établissement ouvrent {OUVERTURE_SUIVI}, les visios en {OUVERTURE_VISIO}. </>}Ces offres ne s&apos;adressent ni aux établissements situés en France, ni aux élèves de l&apos;auteur du site.
           </p>
           )}
         </section>

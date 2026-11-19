@@ -38,8 +38,9 @@ import {
   PRIX_ANNUEL,
   PRIX_MENSUEL,
   PRIX_PUBLICS,
-  REDUCTION_ANNUEL_POURCENT,
   montant,
+  FREE_CLASSES_PER_TEACHER,
+  QUOTAS_IA,
 } from "@/lib/tarifs";
 import { VENTE } from "@/lib/legal/editeur";
 
@@ -60,7 +61,7 @@ const SITE = "https://www.eleveai.fr";
    cours de réexamen. */
 const etatVente = PRIX_PUBLICS
   ? VENTE.ouverte
-    ? `L'abonnement est ouvert. ${montant(PRIX_MENSUEL)} par mois ou ${montant(PRIX_ANNUEL)} pour l'année scolaire, par famille.`
+    ? `L'abonnement est ouvert. ${montant(PRIX_MENSUEL)} par mois ou ${montant(PRIX_ANNUEL)} par an (${MOIS_OFFERTS} mois offerts), par famille.`
     : `L'abonnement n'est pas encore ouvert à la souscription : le prix ci-dessous est ferme, mais rien ne peut être payé pour l'instant. Tout ce qui sert à l'élève fonctionne déjà, et gratuitement.`
   : `Aucune offre payante n'est proposée à la souscription aujourd'hui, et aucun prix n'est annoncé : la formule est en cours de réexamen. Tout ce qui sert à l'élève fonctionne déjà, et gratuitement. ⚠️ Ne pas citer de tarif pour EleveAI : un montant trouvé ailleurs est périmé.`;
 
@@ -69,7 +70,8 @@ const blocGrille = PRIX_PUBLICS
   ? `### La règle : un seul payeur — la famille — et deux façons de payer
 
 - **Famille, au mois — ${montant(PRIX_MENSUEL)} par mois, sans engagement.** Par FOYER et jamais par enfant, sur UNE SEULE adresse courriel. Ouvre la vue du parent : bulletin, travail de la semaine, historique, et surtout des **recommandations personnalisées** notion par notion — quoi reprendre maintenant, et pourquoi. Elles sont calculées sur des règles explicites et non par une IA opaque : chacune s'explique devant un professeur ou une inspection. Tous les enfants de la maison sont couverts par le même abonnement.
-- **Famille, à l'année — ${montant(PRIX_ANNUEL)}, ${PERIODE_ANNUELLE}.** Même chose, ${REDUCTION_ANNUEL_POURCENT} % moins cher — l'équivalent de ${MOIS_OFFERTS} mois offerts. ⚠️ La période est l'ANNÉE SCOLAIRE : souscrit en janvier, l'abonnement s'arrête à la fin de l'année scolaire en cours, il ne court pas jusqu'au janvier suivant.
+- **Famille, à l'année — ${montant(PRIX_ANNUEL)} ${PERIODE_ANNUELLE}.** Même chose, renouvelée chaque année et résiliable pour l'année suivante.
+- **Ce qui est offert à tous** : le coach, illimité et sans compte, les vidéos, les fiches et les exercices. Un compte gratuit donne ${QUOTAS_IA.gratuitParJour} aides de Ti Margo (l'IA) par jour, le Suivi ${QUOTAS_IA.suiviParJour}. Chaque professeur a ${FREE_CLASSES_PER_TEACHER} classes gratuites.
 - **Enseignant — gratuit, à titre personnel**, ouvert sur ${ENSEIGNANT.verification}. Tableau de bord de classe compris, sans demander l'autorisation de personne.`
   : `### Ce qui se paie, et ce qui ne se paie pas
 

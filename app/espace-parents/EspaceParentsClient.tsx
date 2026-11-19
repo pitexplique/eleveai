@@ -296,7 +296,7 @@ export default function EspaceParentsClient() {
                         mois glissants, et c'est une mention obligatoire. Elle se
                         colle au prix, elle ne se renvoie pas aux CGV. */}
                     <span className="text-lg font-black text-slate-900">
-                      pour l&apos;année scolaire
+                      par an (2 mois offerts)
                     </span>
                   </p>
                   <p className="mt-1 text-sm font-black text-emerald-700">

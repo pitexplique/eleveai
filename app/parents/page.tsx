@@ -38,7 +38,14 @@ import {
   PERIODE_ANNUELLE,
   PRIX_ANNUEL,
   PRIX_MENSUEL,
-  PRIX_PAR_PAYS,  montant,
+  PRIX_PAR_PAYS,
+  montant,
+  COMPTE_GRATUIT,
+  FREE_CLASSES_PER_TEACHER,
+  MENTION_TVA,
+  PHRASE_LANCEMENT,
+  QUOTAS_IA,
+  SUIVI,
 } from "@/lib/tarifs";
 import { etatCompteurVideos } from "@/lib/videos/compteur";
 
@@ -54,7 +61,7 @@ export const metadata: Metadata = {
      la SERP : ce texte est ce que Google affiche sous le lien, et il s'y
      périme plus lentement que la page — une grille annoncée ici survit des
      semaines à la carte qui l'a produite (« 4,90 €/mois », voir lib/tarifs.ts). */
-  description: `Une IA qui explique, jamais qui fait à la place. Votre enfant s'entraîne sur tout le programme sans abonnement. Le suivi famille — ${VIDEOS_DU_JOUR} vidéos, un bilan chaque semaine — ouvre ${OUVERTURE_SUIVI} : ${montant(PRIX_MENSUEL)} par mois en France, un prix adapté à chaque pays.`,
+  description: `Le coach est illimité et ouvert à tous, avec ${VIDEOS_DU_JOUR} vidéos offertes. ${SUIVI.nom} — tout son historique, un bilan chaque semaine — ouvre ${OUVERTURE_SUIVI} : ${montant(PRIX_MENSUEL)} par mois en France, un prix adapté à chaque pays.`,
   alternates: { canonical: "https://www.eleveai.fr/parents" },
 };
 
@@ -110,7 +117,7 @@ const faq = [
        ⚠️ Ne pas supprimer la question : une FAQ de page parents sans ligne sur
        le coût donne à croire qu'on l'esquive. */
     q: "Combien ça coûte, pour moi ?",
-    a: `Rien pour essayer : votre enfant s'entraîne sur tout le programme sans abonnement. Le suivi famille ouvre ${OUVERTURE_SUIVI} : ${montant(PRIX_MENSUEL)} par mois en France sans engagement, ou ${montant(PRIX_ANNUEL)} ${PERIODE_ANNUELLE}, pour tous les enfants de la maison. Hors de France, le prix suit le niveau de vie du pays.`,
+    a: `Rien pour essayer : votre enfant s'entraîne sur tout le programme sans abonnement. ${SUIVI.nom} ouvre ${OUVERTURE_SUIVI} : ${montant(PRIX_MENSUEL)} par mois en France sans engagement, ou ${montant(PRIX_ANNUEL)} ${PERIODE_ANNUELLE}, jusqu'à ${SUIVI.enfantsMax} enfants. ${PHRASE_LANCEMENT} ${MENTION_TVA}. Hors de France, le prix suit le niveau de vie du pays.`,
   },
   {
     // ⭐ LA QUESTION QUE POSE LA COMPARAISON AVEC LES CONCURRENTS, et la seule
@@ -119,11 +126,12 @@ const faq = [
     // d'aide). Ici, non. ⛔ Le jour où une limite apparaîtrait côté élève,
     // c'est CETTE réponse qui devient un mensonge — la relire avant.
     q: "Si je ne m'abonne pas, mon enfant est-il limité ?",
-    a: `Non. Il garde le coach en entier, la vidéo de chaque micro-compétence dans le coach, les exercices, les parcours, les évaluations et ses résultats. L'abonnement ajoute votre vue à vous (bilan, compte rendu, alertes) et la vidéothèque entière : ${VIDEOS_DU_JOUR} vidéos aujourd'hui.`,
+    // ⛔ 19/11/2026 : il y a maintenant deux limites, dites ici en clair : l'aide de Ti Margo par l'IA et l'historique visible.
+    a: `Pour s'entraîner, non : le coach est illimité et ouvert à tous, avec les exercices, les parcours, les évaluations et les ${VIDEOS_DU_JOUR} vidéos. Avec un compte gratuit, il a ${QUOTAS_IA.gratuitParJour} aides de Ti Margo par jour et voit ses ${COMPTE_GRATUIT.historiqueJours} derniers jours. L'abonnement ajoute votre vue à vous (bilan, compte rendu, alertes), tout son historique, des conseils et ${QUOTAS_IA.suiviParJour} aides de Ti Margo par jour.`,
   },
   {
     q: "Je suis enseignant — est-ce que ça change quelque chose ?",
-    a: `Votre compte à vous ne se paie pas, sur une adresse académique en ${ENSEIGNANT.verification}. ⚠️ Pour vous, à titre personnel : cela ne couvre pas les familles de vos élèves, qui s'abonnent comme les autres.`,
+    a: `Votre compte à vous ne se paie pas, sur une adresse académique en ${ENSEIGNANT.verification}, avec ${FREE_CLASSES_PER_TEACHER} classes gratuites. ⚠️ Pour vous, à titre personnel : cela ne couvre pas les familles de vos élèves, qui s'abonnent comme les autres.`,
   },
   {
     q: "Nous vivons hors de France : le prix est-il le même ?",
@@ -341,8 +349,8 @@ export default function ParentsPage() {
             Votre enfant s&apos;entraîne sans abonnement. Vous, vous choisissez de le suivre.
           </h2>
           <p className="mx-auto mt-2 max-w-2xl text-center text-sm font-semibold text-slate-500">
-            Sans abonnement, il garde le coach sur tout le programme. Le suivi
-            famille ajoute votre vue à vous et la vidéothèque entière.
+            Sans abonnement, il garde le coach illimité et toutes les vidéos.
+            {SUIVI.nom} ajoute votre vue à vous et tout son historique.
           </p>
 
           <div className="mt-8 grid gap-4 lg:grid-cols-2">
@@ -371,11 +379,11 @@ export default function ParentsPage() {
               </p>
               <ul className="mt-4 space-y-2.5">
                 {[
-                  ["🧭", "Le coach qui explique, sur tout le programme"],
-                  ["🎬", "Dans le coach, la vidéo de chaque micro-compétence"],
-                  ["✏️", "Tous les exercices et tous les parcours"],
-                  ["📋", "Les évaluations, et ses résultats gardés"],
-                  ["⏳", "Sans limite de temps, et sans adresse e-mail à donner"],
+                  ["🧭", "Le coach illimité, sur tout le programme, sans compte"],
+                  ["🎬", `Toutes les vidéos : ${VIDEOS_DU_JOUR} aujourd'hui`],
+                  ["✏️", "Tous les exercices, les parcours et les évaluations"],
+                  ["🦎", `Avec un compte gratuit : ${QUOTAS_IA.gratuitParJour} aides de Ti Margo par jour`],
+                  ["📋", `Sa semaine et ses ${COMPTE_GRATUIT.historiqueJours} derniers jours`],
                 ].map(([emoji, texte]) => (
                   <li key={texte} className="flex gap-2.5 text-sm font-semibold leading-relaxed text-slate-700">
                     <span aria-hidden="true">{emoji}</span>
@@ -421,15 +429,17 @@ export default function ParentsPage() {
               </p>
               <p className="mt-1 text-sm font-bold text-slate-500">
                 En France, sans engagement, ou {montant(PRIX_ANNUEL)} {PERIODE_ANNUELLE}.
-                Un prix adapté à chaque pays.
+                Un prix adapté à chaque pays. {MENTION_TVA}.
               </p>
+              <p className="mt-1 text-sm font-black text-emerald-800">{PHRASE_LANCEMENT}</p>
               <ul className="mt-4 space-y-2.5">
                 {[
-                  ["🎬", `Toute la vidéothèque : ${VIDEOS_DU_JOUR} vidéos aujourd'hui`],
+                  ["📚", "Tout son historique, depuis le premier jour"],
+                  ["🦎", `${QUOTAS_IA.suiviParJour} aides de Ti Margo par jour, au lieu de ${QUOTAS_IA.gratuitParJour}`],
                   ["📊", "Un bilan de départ, puis un compte rendu chaque semaine"],
                   ["📌", "Les erreurs qui reviennent, et les 3 choses à revoir"],
                   ["🔔", "Une alerte quand il décroche sur une notion"],
-                  ["👪", "Une seule adresse courriel, quel que soit le nombre d'enfants"],
+                  ["👪", `Une seule adresse courriel, jusqu'à ${SUIVI.enfantsMax} enfants`],
                 ].map(([emoji, texte]) => (
                   <li key={texte} className="flex gap-2.5 text-sm font-semibold leading-relaxed text-slate-700">
                     <span aria-hidden="true">{emoji}</span>

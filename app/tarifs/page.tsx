@@ -23,11 +23,11 @@ const url = "https://www.eleveai.fr/tarifs";
 // indépendant ; ouverture fin décembre. ⚠️ Ce texte est ce que Google affiche :
 // il suit le texte visible, et ses prix viennent des constantes.
 const resume =
-  `Le coach de maths reste ouvert à tous. Le suivi famille (${montant(PRIX_MENSUEL)} par mois en France, un prix adapté à chaque pays) ouvre ${OUVERTURE_SUIVI} : ` +
-  `${VIDEOS_DU_JOUR} vidéos, un bilan chaque semaine, et les visios « Maths réelles ». Offre aux établissements hors de France : ${ETABLISSEMENT_ETRANGER.parEleveEtParAn} par élève et par an.`;
+  `Le coach de maths est illimité et ouvert à tous, avec ${VIDEOS_DU_JOUR} vidéos offertes. Le suivi de votre enfant (${montant(PRIX_MENSUEL)} par mois en France, un prix adapté à chaque pays) ouvre ${OUVERTURE_SUIVI} : ` +
+  `tout son historique, un bilan chaque semaine, et les visios « Maths réelles ». Offre aux établissements hors de France : ${ETABLISSEMENT_ETRANGER.parEleveEtParAn} par élève et par an.`;
 
 export const metadata: Metadata = {
-  title: "Offres — le suivi famille, la visio, les établissements hors de France",
+  title: "Offres — le suivi de votre enfant, la visio, les établissements hors de France",
   description: resume,
   alternates: { canonical: url },
   /* ✅ 02/11/2026 : `noindex` levé (il datait du 09/09, « je veux plus voir des

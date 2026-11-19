@@ -184,7 +184,7 @@ export const PRIX_ANNUEL = 79; // 19/11/2026 : 79 € par an = 10 mois, « 2 moi
  * s'affiche partout où `PRIX_ANNUEL` s'affiche, sans exception.
  */
 export const PERIODE_ANNUELLE =
-  "pour douze mois, résiliable à tout moment pour l'année suivante"; // 19/11/2026 : abonnement annuel Stripe (suivi_yearly)
+  "par an (2 mois offerts)"; // 19/11/2026 : abonnement annuel Stripe (suivi_yearly), plus l'année scolaire
 
 /** Ce que coûterait une année entière payée au mois : 30 €. Sert au calcul. */
 export const ANNUEL_AU_TARIF_MENSUEL = PRIX_MENSUEL * 12;

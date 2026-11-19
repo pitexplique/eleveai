@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ pays: str
   if (!o) return {};
   return {
     title: `EleveAI ${o.du} : le suivi en maths à ${DUREES_FCFA[0].prix} par mois`,
-    description: `Pour les familles et les écoles ${o.du} : le coach de maths ouvert à tous, et le suivi famille — ${VIDEOS_DU_JOUR} vidéos, un bilan chaque semaine — à ${DUREES_FCFA[0].prix} par mois. Ouverture ${OUVERTURE_SUIVI}.`,
+    description: `Pour les familles et les écoles ${o.du} : le coach de maths illimité et ouvert à tous avec ${VIDEOS_DU_JOUR} vidéos offertes, et le suivi de votre enfant — tout son historique, un bilan chaque semaine — à ${DUREES_FCFA[0].prix} par mois. Ouverture ${OUVERTURE_SUIVI}.`,
     alternates: { canonical: `/offre/${pays}` },
   };
 }
@@ -55,7 +55,8 @@ export default async function OffrePays({ params }: { params: Promise<{ pays: st
   const niveaux = programmesDuPays(pays).map((p) => p.niveau);
 
   const SUIVI = [
-    `Toute la vidéothèque : ${VIDEOS_DU_JOUR} vidéos de maths aujourd'hui`,
+    // 19/11/2026 : la vidéothèque est offerte à tous ; le Suivi ne vend que le suivi.
+    "Tout son historique, depuis le premier jour",
     "Un bilan de départ : ce que votre enfant sait, et ce qui lui manque",
     "Un compte rendu chaque semaine, et une alerte quand il décroche",
     `La préparation ciblée des examens : ${o.examens}`,
@@ -92,9 +93,9 @@ export default async function OffrePays({ params }: { params: Promise<{ pays: st
         {/* 2. LE SUIVI FAMILLE, EN DURÉES PRÉPAYÉES */}
         <section className="rounded-3xl border-2 border-sky-300 p-6 shadow-lg sm:p-8">
           <h2 className="flex items-center gap-2 text-2xl font-black sm:text-3xl">
-            <Eye className="h-7 w-7 text-sky-700" aria-hidden="true" /> Le suivi famille
+            <Eye className="h-7 w-7 text-sky-700" aria-hidden="true" /> Le suivi de votre enfant
           </h2>
-          <p className="mt-1 text-slate-600">Sans abonnement, votre enfant garde le coach sur tout le programme. Le suivi ajoute :</p>
+          <p className="mt-1 text-slate-600">Sans abonnement, votre enfant garde le coach illimité et toutes les vidéos. Le suivi ajoute :</p>
           <ul className="mt-4 grid gap-2 sm:grid-cols-2">
             {SUIVI.map((t) => <Puce key={t} couleur="text-sky-600">{t}</Puce>)}
           </ul>
@@ -153,7 +154,7 @@ export default async function OffrePays({ params }: { params: Promise<{ pays: st
           <ul className="space-y-3 self-center text-slate-800">
             <Puce couleur="text-amber-600">Un compte pour chaque professeur et chaque élève, avec « Mes classes »</Puce>
             <Puce couleur="text-amber-600">{`La vidéothèque entière pour tous les élèves : ${VIDEOS_DU_JOUR} vidéos aujourd'hui`}</Puce>
-            <Puce couleur="text-amber-600">Le suivi famille ouvert aux parents, sans rien de plus à payer</Puce>
+            <Puce couleur="text-amber-600">Le suivi de chaque élève ouvert aux parents, sans rien de plus à payer</Puce>
             <Puce couleur="text-amber-600">Une formation de vos professeurs en visio au démarrage</Puce>
           </ul>
         </section>
