@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Énigmes des puissances</title>
+<meta name="description" content="Six énigmes sur les puissances (4e) à projeter en classe : l'échiquier, la vidéo partagée, le piège du signe, la fourmi, la lumière du Soleil, le défi des trois puissances. EleveAI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Layout: one board per énigme, full screen, chalk drawing beside the question; arrows to move, space to reveal */
+:root {
+  --board: #20372c;
+  --board-edge: #5a3d24;
+  --chalk: #f2f0e6;
+  --chalk-dim: #b9c4bb;
+  --yellow: #f3d36b;
+  --pink: #f29fae;
+  --blue: #9fd0f2;
+  --display: 'Kalam', 'Comic Sans MS', cursive;
+  --body: 'Atkinson Hyperlegible', 'Segoe UI', Arial, sans-serif;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body {
+  background: var(--board-edge);
+  color: var(--chalk);
+  font-family: var(--body);
+  margin: 0;
+}
+.wrap {
+  box-sizing: border-box;
+  height: 100%;
+  padding-block: 14px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.board {
+  flex: 1;
+  min-height: 0;
+  background: radial-gradient(ellipse at 30% 20%, #2a4638 0%, var(--board) 60%);
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 3px #172a21;
+  padding: clamp(16px, 3vw, 44px);
+  overflow: auto;
+}
+.slide { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(16px, 3vw, 48px); align-items: center; min-height: 100%; }
+.slide > * { min-width: 0; }
+.tag { font-family: var(--display); color: var(--yellow); font-size: clamp(18px, 2vw, 26px); letter-spacing: .04em; }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(32px, 4.6vw, 64px); line-height: 1.05; margin: 4px 0 14px; text-wrap: balance; }
+.q { font-size: clamp(20px, 2.3vw, 32px); line-height: 1.4; max-width: 34ch; }
+.q b { color: var(--yellow); }
+.answer {
+  margin-top: 18px;
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1.4;
+  border-top: 2px dashed var(--chalk-dim);
+  padding-top: 12px;
+  max-width: 36ch;
+}
+.answer .big { font-family: var(--display); color: var(--pink); font-size: 1.35em; font-weight: 700; }
+.art svg { width: 100%; height: auto; max-height: 62vh; display: block; }
+.art text { font-family: var(--display); }
+.bar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.bar button {
+  font-family: var(--body); font-size: 16px; font-weight: 700;
+  background: #2b2016; color: var(--chalk); border: 2px solid #8a6a48; border-radius: 6px;
+  padding: 8px 14px; cursor: pointer;
+}
+.bar button:hover { background: #3a2b1e; }
+.bar button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+.bar .reveal { background: var(--yellow); color: #2b2016; border-color: var(--yellow); }
+.dots { display: flex; gap: 6px; margin-left: auto; }
+.dots button { width: 14px; height: 14px; padding: 0; border-radius: 50%; border: 2px solid var(--chalk-dim); background: transparent; }
+.dots button[aria-current="true"] { background: var(--chalk); border-color: var(--chalk); }
+.hint { font-size: 13px; color: var(--chalk-dim); }
+@media (max-width: 760px) {
+  .slide { grid-template-columns: 1fr; }
+  .art svg { max-height: 40vh; }
+  .hint { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .answer:not([hidden]) { animation: chalk .5s ease-out; }
+  @keyframes chalk { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+}
+</style>
+</head><body>
+
+
+<div class="wrap">
+  <main class="board" id="board" aria-live="polite"></main>
+  <div class="bar">
+    <button id="prev" type="button">◀ Précédente</button>
+    <button id="reveal" class="reveal" type="button">Voir la réponse</button>
+    <button id="next" type="button">Suivante ▶</button>
+    <button id="full" type="button">Plein écran</button>
+    <span class="hint">Flèches ← → pour changer · Espace pour la réponse</span>
+    <div class="dots" id="dots"></div>
+  </div>
+</div>
+
+<script>
+const C = { chalk: '#f2f0e6', dim: '#b9c4bb', y: '#f3d36b', p: '#f29fae', b: '#9fd0f2' };
+const S = `stroke="${C.chalk}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"`;
+
+function grid(x0, y0, n, size, color) {
+  let s = '';
+  for (let i = 0; i < n; i++) for (let j = 0; j < n; j++)
+    s += `<rect x="${x0 + i*size}" y="${y0 + j*size}" width="${size}" height="${size}" fill="${color}" fill-opacity=".18" stroke="${color}" stroke-width="2"/>`;
+  return s;
+}
+
+const ENIGMES = [
+  {
+    tag: 'Énigme 1 · Une vieille légende',
+    title: 'Les grains de l’échiquier',
+    q: `Un roi offre une récompense : <b>1 grain de riz</b> sur la 1<sup>re</sup> case, <b>2</b> sur la 2<sup>e</sup>, <b>4</b> sur la 3<sup>e</sup>… À chaque case, on <b>double</b>.<br><br>Combien de grains sur la <b>10<sup>e</sup> case</b> ? Écris-le avec une <b>puissance de 2</b>.`,
+    a: `Case 1 : 2⁰ = 1. Case 2 : 2¹ = 2. Case 3 : 2² = 4… L'exposant a toujours 1 de moins que le numéro de la case.<br>Case 10 : <span class="big">2⁹ = 512 grains</span>.`,
+    art: () => {
+      let s = '';
+      const haut = ['1', '2', '4', '8', '16'];
+      for (let k = 0; k < 5; k++) {
+        s += `<rect x="${40 + k*80}" y="110" width="80" height="80" fill="${k % 2 ? C.chalk : 'none'}" fill-opacity=".12" stroke="${C.chalk}" stroke-width="3"/>`;
+        s += `<text x="${80 + k*80}" y="162" fill="${C.y}" font-size="30" text-anchor="middle">${haut[k]}</text>`;
+        s += `<rect x="${40 + k*80}" y="230" width="80" height="80" fill="${k % 2 ? 'none' : C.chalk}" fill-opacity=".12" stroke="${C.chalk}" stroke-width="3"/>`;
+        s += `<text x="${80 + k*80}" y="282" fill="${k === 4 ? C.p : C.dim}" font-size="${k === 4 ? 40 : 30}" text-anchor="middle">${k === 4 ? '?' : '…'}</text>`;
+      }
+      return `<svg viewBox="0 0 480 420" role="img" aria-label="Échiquier : 1, 2, 4, 8, 16 grains, puis la 10e case">
+        ${s}
+        <text x="240" y="80" fill="${C.dim}" font-size="24" text-anchor="middle">cases 1 à 5</text>
+        <text x="240" y="350" fill="${C.dim}" font-size="24" text-anchor="middle">cases 6 à 10</text>
+      </svg>`;
+    }
+  },
+  {
+    tag: 'Énigme 2 · Sur les téléphones',
+    title: 'La vidéo qui se partage',
+    q: `Lundi, tu envoies une vidéo à <b>3 amis</b>. Le lendemain, chacun l'envoie à <b>3 nouveaux amis</b>. Et ainsi de suite, chaque jour.<br><br>Combien de personnes la <b>reçoivent le jeudi</b> ?`,
+    a: `Lundi : 3. Mardi : 3 × 3 = 9. Mercredi : 3 × 3 × 3 = 27. Jeudi : 3 × 3 × 3 × 3.<br>Jeudi : <span class="big">3⁴ = 81 personnes</span>.`,
+    art: () => {
+      let s = '';
+      const n1 = [100, 240, 380];
+      n1.forEach(x => { s += `<path d="M240 60 L${x} 160" ${S} stroke-width="3"/>`; });
+      n1.forEach(x => [-45, 0, 45].forEach(d => { s += `<path d="M${x} 160 L${x + d} 250" stroke="${C.dim}" stroke-width="2" fill="none"/><circle cx="${x + d}" cy="250" r="9" fill="${C.b}"/>`; }));
+      n1.forEach(x => { s += `<circle cx="${x}" cy="160" r="14" fill="${C.y}"/>`; });
+      return `<svg viewBox="0 0 480 420" role="img" aria-label="Arbre : toi, puis 3 amis, puis 9 amis">
+        ${s}
+        <circle cx="240" cy="60" r="18" fill="${C.p}"/>
+        <text x="270" y="50" fill="${C.p}" font-size="26">toi</text>
+        <text x="20" y="130" fill="${C.y}" font-size="22">lundi : 3</text>
+        <text x="20" y="295" fill="${C.b}" font-size="22">mardi : 9</text>
+        <text x="240" y="340" fill="${C.dim}" font-size="26" text-anchor="middle">mercredi : …</text>
+        <text x="240" y="395" fill="${C.p}" font-size="32" text-anchor="middle">jeudi : ?</text>
+      </svg>`;
+    }
+  },
+  {
+    tag: 'Énigme 3 · Attention au piège',
+    title: 'Les faux jumeaux',
+    q: `Voici deux écritures : <b>(−2)⁴</b> et <b>−2⁴</b>. Elles se ressemblent beaucoup.<br><br><b>Sont-elles égales ?</b>`,
+    a: `(−2)⁴ = (−2) × (−2) × (−2) × (−2) = 16.<br>−2⁴ = −(2 × 2 × 2 × 2) = −16.<br><span class="big">16 ≠ −16</span> : les parenthèses décident du signe !`,
+    art: () => `<svg viewBox="0 0 480 420" role="img" aria-label="(−2) puissance 4 et −2 puissance 4">
+      <text x="240" y="150" fill="${C.y}" font-size="78" text-anchor="middle">(−2)⁴</text>
+      <text x="240" y="225" fill="${C.p}" font-size="48" text-anchor="middle">= ?</text>
+      <text x="240" y="320" fill="${C.b}" font-size="78" text-anchor="middle">−2⁴</text>
+    </svg>`
+  },
+  {
+    tag: 'Énigme 4 · Tout petit',
+    title: 'La fourmi',
+    q: `Une fourmi mesure <b>3 × 10⁻³ m</b>.<br><br>Combien mesure-t-elle en <b>millimètres</b> ?`,
+    a: `10⁻³ = 0,001. Donc 3 × 10⁻³ m = 0,003 m.<br>1 m = 1 000 mm, donc la fourmi mesure <span class="big">3 mm</span>.<br>Un exposant négatif ne donne pas un nombre négatif : il donne un nombre <b>très petit</b>.`,
+    art: () => {
+      let t = '';
+      for (let k = 0; k <= 5; k++) t += `<path d="M${40 + k*80} 250 L${40 + k*80} 290" ${S} stroke-width="3"/><text x="${40 + k*80}" y="325" fill="${C.chalk}" font-size="24" text-anchor="middle">${k}</text>`;
+      return `<svg viewBox="0 0 480 420" role="img" aria-label="Une fourmi posée sur une règle graduée en millimètres, très agrandie">
+        <rect x="20" y="250" width="440" height="100" rx="6" fill="${C.y}" fill-opacity=".12" stroke="${C.y}" stroke-width="3"/>
+        ${t}
+        <text x="445" y="340" fill="${C.dim}" font-size="22" text-anchor="end">mm</text>
+        <path d="M110 215 l-25 30 M140 220 l0 30 M170 215 l25 30" ${S} stroke-width="3"/>
+        <path d="M60 188 q-15 -40 0 -62 M75 186 q10 -40 30 -50" ${S} stroke-width="3"/>
+        <ellipse cx="72" cy="205" rx="32" ry="22" fill="${C.chalk}"/>
+        <ellipse cx="140" cy="205" rx="38" ry="18" fill="${C.chalk}"/>
+        <ellipse cx="220" cy="205" rx="60" ry="30" fill="${C.chalk}"/>
+        <text x="330" y="150" fill="${C.p}" font-size="34" text-anchor="middle">? mm</text>
+        <text x="240" y="400" fill="${C.dim}" font-size="20" text-anchor="middle">dessin très agrandi</text>
+      </svg>`;
+    }
+  },
+  {
+    tag: 'Énigme 5 · Dans l’espace',
+    title: 'La lumière du Soleil',
+    q: `La lumière va à <b>3 × 10⁵ km par seconde</b>. Celle du Soleil met environ <b>500 secondes</b> pour arriver jusqu'à nous.<br><br>À quelle <b>distance</b> est le Soleil ? Donne la réponse en <b>notation scientifique</b>.`,
+    a: `500 × 3 × 10⁵ = 1 500 × 10⁵ = 1,5 × 10³ × 10⁵.<br>Le Soleil est à environ <span class="big">1,5 × 10⁸ km</span>, soit 150 millions de kilomètres.`,
+    art: () => `<svg viewBox="0 0 480 420" role="img" aria-label="Le Soleil, la Terre et le rayon de lumière">
+      <circle cx="80" cy="210" r="60" fill="${C.y}" fill-opacity=".85"/>
+      <path d="M80 130 l0 -25 M80 290 l0 25 M140 150 l18 -18 M140 270 l18 18" stroke="${C.y}" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="420" cy="210" r="20" fill="${C.b}"/>
+      <path d="M150 210 L390 210" stroke="${C.chalk}" stroke-width="4" stroke-dasharray="14 10" fill="none"/>
+      <path d="M375 198 L392 210 L375 222" ${S} stroke-width="4"/>
+      <text x="270" y="190" fill="${C.chalk}" font-size="26" text-anchor="middle">500 s</text>
+      <text x="270" y="260" fill="${C.p}" font-size="30" text-anchor="middle">? km</text>
+      <text x="80" y="370" fill="${C.y}" font-size="24" text-anchor="middle">Soleil</text>
+      <text x="420" y="370" fill="${C.b}" font-size="24" text-anchor="middle">Terre</text>
+      <text x="240" y="60" fill="${C.dim}" font-size="22" text-anchor="middle">pas à l'échelle</text>
+    </svg>`
+  },
+  {
+    tag: 'Énigme 6 · Le défi des curieux',
+    title: 'Le plus grand des trois',
+    q: `Voici trois nombres : <b>2¹⁰</b>, <b>10³</b> et <b>3⁶</b>.<br><br>Sans calculatrice, <b>range-les</b> du plus petit au plus grand.`,
+    a: `2¹⁰ = 1 024. 10³ = 1 000. 3⁶ = 729.<br>Donc <span class="big">3⁶ &lt; 10³ &lt; 2¹⁰</span>.<br>Le petit 2 gagne, grâce à son grand exposant !`,
+    art: () => `<svg viewBox="0 0 480 420" role="img" aria-label="Trois puissances à ranger">
+      <text x="110" y="130" fill="${C.y}" font-size="64" text-anchor="middle">2¹⁰</text>
+      <text x="240" y="240" fill="${C.b}" font-size="64" text-anchor="middle">10³</text>
+      <text x="370" y="350" fill="${C.p}" font-size="64" text-anchor="middle">3⁶</text>
+      <text x="360" y="110" fill="${C.dim}" font-size="26" text-anchor="middle">… &lt; … &lt; …</text>
+    </svg>`
+  },
+];
+
+let i = 0, shown = false;
+const board = document.getElementById('board');
+const dots = document.getElementById('dots');
+const revealBtn = document.getElementById('reveal');
+
+ENIGMES.forEach((_, k) => {
+  const d = document.createElement('button');
+  d.type = 'button';
+  d.setAttribute('aria-label', 'Énigme ' + (k + 1));
+  d.addEventListener('click', () => go(k));
+  dots.appendChild(d);
+});
+
+function render() {
+  const e = ENIGMES[i];
+  board.innerHTML = `<section class="slide">
+    <div>
+      <div class="tag">${e.tag}</div>
+      <h1>${e.title}</h1>
+      <div class="q">${e.q}</div>
+      <div class="answer" id="ans" ${shown ? '' : 'hidden'}>${e.a}</div>
+    </div>
+    <div class="art">${e.art()}</div>
+  </section>`;
+  revealBtn.textContent = shown ? 'Cacher la réponse' : 'Voir la réponse';
+  [...dots.children].forEach((d, k) => d.setAttribute('aria-current', k === i ? 'true' : 'false'));
+  try { localStorage.setItem('enigme-puissances', String(i)); } catch (_) {}
+}
+function go(k) { i = (k + ENIGMES.length) % ENIGMES.length; shown = false; render(); }
+function toggle() { shown = !shown; render(); }
+
+document.getElementById('prev').addEventListener('click', () => go(i - 1));
+document.getElementById('next').addEventListener('click', () => go(i + 1));
+revealBtn.addEventListener('click', toggle);
+document.getElementById('full').addEventListener('click', () => {
+  const el = document.documentElement;
+  try {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+  } catch (_) {}
+});
+document.addEventListener('keydown', (ev) => {
+  if (ev.key === 'ArrowRight' || ev.key === 'PageDown') { go(i + 1); ev.preventDefault(); }
+  else if (ev.key === 'ArrowLeft' || ev.key === 'PageUp') { go(i - 1); ev.preventDefault(); }
+  else if (ev.key === ' ' || ev.key === 'Enter') { if (ev.target.tagName !== 'BUTTON') { toggle(); ev.preventDefault(); } }
+});
+
+try { const s = parseInt(localStorage.getItem('enigme-puissances'), 10); if (s >= 0 && s < ENIGMES.length) i = s; } catch (_) {}
+render();
+</script>
+
+</body></html>

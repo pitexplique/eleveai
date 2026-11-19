@@ -114,7 +114,7 @@ const ENIGMES = [
   {
     tag: 'Énigme 1 · Une vieille histoire',
     title: 'La corde à 13 nœuds',
-    q: `On raconte que les bâtisseurs égyptiens traçaient leurs angles droits avec une <b>corde à 13 nœuds</b> : 12 intervalles égaux, et le 13<sup>e</sup> nœud se pose sur le 1<sup>er</sup> pour fermer la corde.<br><br>Comment s'en servir pour fabriquer un <b>angle droit</b> parfait ?`,
+    q: `On raconte que les bâtisseurs égyptiens traçaient leurs angles droits avec une <b>corde à 13 nœuds</b> : 12 intervalles égaux, et le 13<sup>e</sup> nœud se pose sur le 1<sup>er</sup> pour fermer la corde.<br><br>Comment s'en servir pour fabriquer un <b>angle droit</b> parfait ?`,
     a: `On tend la corde en triangle de côtés <span class="big">3, 4 et 5</span> intervalles.<br>3² + 4² = 9 + 16 = 25 = 5², donc d'après la réciproque de Pythagore, le triangle est rectangle.`,
     art: () => {
       let knots = '';
@@ -138,7 +138,7 @@ const ENIGMES = [
   {
     tag: 'Énigme 2 · Le chemin de l’école',
     title: 'Le raccourci',
-    q: `Pour aller au collège, Léa marche <b>300 m vers l'est</b>, puis <b>400 m vers le nord</b>.<br><br>Un jour, elle coupe à travers le parc, en ligne droite. <b>Combien de mètres</b> économise-t-elle ?`,
+    q: `Pour aller au collège, Léa marche <b>300 m vers l'est</b>, puis <b>400 m vers le nord</b>.<br><br>Un jour, elle coupe à travers le parc, en ligne droite. <b>Combien de mètres</b> économise-t-elle ?`,
     a: `Le raccourci est l'hypoténuse : 300² + 400² = 90 000 + 160 000 = 250 000, et √250 000 = 500 m.<br>Elle marche 500 m au lieu de 700 m : elle économise <span class="big">200 m</span>.`,
     art: () => `<svg viewBox="0 0 480 420" role="img" aria-label="Trajet en L de 300 m puis 400 m, et raccourci en diagonale">
       <path d="M70 360 L270 360 L270 90" ${S}/>
@@ -156,7 +156,7 @@ const ENIGMES = [
   {
     tag: 'Énigme 3 · Sauvetage',
     title: 'Le chat dans l’arbre',
-    q: `Un chat est coincé en haut d'un arbre. Les pompiers posent une <b>échelle de 13 m</b>, dont le pied est à <b>5 m de l'arbre</b>.<br><br>À <b>quelle hauteur</b> est le chat, si l'échelle touche juste le haut de l'arbre ?`,
+    q: `Un chat est coincé en haut d'un arbre. Les pompiers posent une <b>échelle de 13 m</b>, dont le pied est à <b>5 m de l'arbre</b>.<br><br>À <b>quelle hauteur</b> est le chat, si l'échelle touche juste le haut de l'arbre ?`,
     a: `L'échelle est l'hypoténuse : 13² = 5² + h², donc h² = 169 − 25 = 144.<br>h = √144 = <span class="big">12 m</span>.`,
     art: () => `<svg viewBox="0 0 480 420" role="img" aria-label="Arbre, échelle de 13 m, pied à 5 m">
       <path d="M330 380 L330 70" stroke="${C.chalk}" stroke-width="10" stroke-linecap="round"/>
@@ -173,8 +173,8 @@ const ENIGMES = [
   {
     tag: 'Énigme 4 · Compte les carreaux',
     title: 'Le puzzle des carrés',
-    q: `Sur chaque côté du triangle rectangle, on a dessiné un carré.<br><br>Compte les petits carreaux dans le <b style="color:${'#9fd0f2'}">carré bleu</b>, puis dans le <b style="color:${'#f3d36b'}">carré jaune</b>, puis dans le <b style="color:${'#f29fae'}">carré rose</b>. <b>Que remarques-tu ?</b>`,
-    a: `Bleu : 9 carreaux. Jaune : 16 carreaux. Rose : 25 carreaux.<br><span class="big">9 + 16 = 25</span> : l'aire du grand carré est la somme des deux autres. C'est exactement le théorème de Pythagore !`,
+    q: `Sur chaque côté du triangle rectangle, on a dessiné un carré.<br><br>Compte les petits carreaux dans le <b style="color:${'#9fd0f2'}">carré bleu</b>, puis dans le <b style="color:${'#f3d36b'}">carré jaune</b>, puis dans le <b style="color:${'#f29fae'}">carré rose</b>. <b>Que remarques-tu ?</b>`,
+    a: `Bleu : 9 carreaux. Jaune : 16 carreaux. Rose : 25 carreaux.<br><span class="big">9 + 16 = 25</span> : l'aire du grand carré est la somme des deux autres. C'est exactement le théorème de Pythagore !`,
     art: () => {
       const u = 34, ox = 150, oy = 254;
       const A = [ox, oy], B = [ox + 4*u, oy], Cc = [ox, oy - 3*u];
@@ -198,8 +198,8 @@ const ENIGMES = [
   {
     tag: 'Énigme 5 · Attention au piège',
     title: 'Il a l’air droit…',
-    q: `Ce triangle a pour côtés <b>6 cm</b>, <b>8 cm</b> et <b>11 cm</b>. Sur le dessin, il a l'air rectangle.<br><br><b>Est-il vraiment rectangle ?</b>`,
-    a: `Plus grand côté : 11. D'une part 11² = 121. D'autre part 6² + 8² = 36 + 64 = 100.<br>121 ≠ 100 : <span class="big">il n'est pas rectangle</span>. On ne conclut jamais « à l'œil » !`,
+    q: `Ce triangle a pour côtés <b>6 cm</b>, <b>8 cm</b> et <b>11 cm</b>. Sur le dessin, il a l'air rectangle.<br><br><b>Est-il vraiment rectangle ?</b>`,
+    a: `Plus grand côté : 11. D'une part 11² = 121. D'autre part 6² + 8² = 36 + 64 = 100.<br>121 ≠ 100 : <span class="big">il n'est pas rectangle</span>. On ne conclut jamais « à l'œil » !`,
     art: () => `<svg viewBox="0 0 480 420" role="img" aria-label="Triangle 6-8-11 qui semble rectangle">
       <path d="M100 340 L380 340 L89 130 Z" ${S}/>
       <text x="78" y="245" fill="${C.chalk}" font-size="30" text-anchor="end">6</text>
@@ -212,8 +212,8 @@ const ENIGMES = [
   {
     tag: 'Énigme 6 · Le défi des curieux',
     title: 'La diagonale du carré',
-    q: `Un carré a des côtés de <b>1 m</b>.<br><br>Combien mesure sa <b>diagonale</b> ? Et peux-tu écrire ce nombre <b>exactement</b> avec des chiffres après la virgule ?`,
-    a: `d² = 1² + 1² = 2, donc d = <span class="big">√2 ≈ 1,414 m</span>.<br>Ses chiffres après la virgule ne s'arrêtent jamais, et ils ne forment jamais un motif qui revient. Selon la légende, cette découverte a fait scandale chez les élèves de Pythagore !`,
+    q: `Un carré a des côtés de <b>1 m</b>.<br><br>Combien mesure sa <b>diagonale</b> ? Et peux-tu écrire ce nombre <b>exactement</b> avec des chiffres après la virgule ?`,
+    a: `d² = 1² + 1² = 2, donc d = <span class="big">√2 ≈ 1,414 m</span>.<br>Ses chiffres après la virgule ne s'arrêtent jamais, et ils ne forment jamais un motif qui revient. Selon la légende, cette découverte a fait scandale chez les élèves de Pythagore !`,
     art: () => `<svg viewBox="0 0 480 420" role="img" aria-label="Carré de côté 1 et sa diagonale">
       <rect x="110" y="80" width="260" height="260" ${S}/>
       <path d="M110 340 L370 80" stroke="${C.y}" stroke-width="5" fill="none" stroke-linecap="round"/>

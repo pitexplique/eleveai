@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Énigmes des longueurs</title>
+<meta name="description" content="Six énigmes sur les longueurs (6e) à projeter en classe : fourmis et crayon, qui est le plus grand, le grillage, les tours de piste, le piège de Tom, le tour de roue. EleveAI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Layout: one board per énigme, full screen, chalk drawing beside the question; arrows to move, space to reveal */
+:root {
+  --board: #20372c;
+  --board-edge: #5a3d24;
+  --chalk: #f2f0e6;
+  --chalk-dim: #b9c4bb;
+  --yellow: #f3d36b;
+  --pink: #f29fae;
+  --blue: #9fd0f2;
+  --display: 'Kalam', 'Comic Sans MS', cursive;
+  --body: 'Atkinson Hyperlegible', 'Segoe UI', Arial, sans-serif;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body {
+  background: var(--board-edge);
+  color: var(--chalk);
+  font-family: var(--body);
+  margin: 0;
+}
+.wrap {
+  box-sizing: border-box;
+  height: 100%;
+  padding-block: 14px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.board {
+  flex: 1;
+  min-height: 0;
+  background: radial-gradient(ellipse at 30% 20%, #2a4638 0%, var(--board) 60%);
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 3px #172a21;
+  padding: clamp(16px, 3vw, 44px);
+  overflow: auto;
+}
+.slide { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(16px, 3vw, 48px); align-items: center; min-height: 100%; }
+.slide > * { min-width: 0; }
+.tag { font-family: var(--display); color: var(--yellow); font-size: clamp(18px, 2vw, 26px); letter-spacing: .04em; }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(32px, 4.6vw, 64px); line-height: 1.05; margin: 4px 0 14px; text-wrap: balance; }
+.q { font-size: clamp(20px, 2.3vw, 32px); line-height: 1.4; max-width: 34ch; }
+.q b { color: var(--yellow); }
+.answer {
+  margin-top: 18px;
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1.4;
+  border-top: 2px dashed var(--chalk-dim);
+  padding-top: 12px;
+  max-width: 36ch;
+}
+.answer .big { font-family: var(--display); color: var(--pink); font-size: 1.35em; font-weight: 700; }
+.art svg { width: 100%; height: auto; max-height: 62vh; display: block; }
+.art text { font-family: var(--display); }
+.bar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.bar button {
+  font-family: var(--body); font-size: 16px; font-weight: 700;
+  background: #2b2016; color: var(--chalk); border: 2px solid #8a6a48; border-radius: 6px;
+  padding: 8px 14px; cursor: pointer;
+}
+.bar button:hover { background: #3a2b1e; }
+.bar button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+.bar .reveal { background: var(--yellow); color: #2b2016; border-color: var(--yellow); }
+.dots { display: flex; gap: 6px; margin-left: auto; }
+.dots button { width: 14px; height: 14px; padding: 0; border-radius: 50%; border: 2px solid var(--chalk-dim); background: transparent; }
+.dots button[aria-current="true"] { background: var(--chalk); border-color: var(--chalk); }
+.hint { font-size: 13px; color: var(--chalk-dim); }
+@media (max-width: 760px) {
+  .slide { grid-template-columns: 1fr; }
+  .art svg { max-height: 40vh; }
+  .hint { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .answer:not([hidden]) { animation: chalk .5s ease-out; }
+  @keyframes chalk { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+}
+</style>
+</head><body>
+
+
+<div class="wrap">
+  <main class="board" id="board" aria-live="polite"></main>
+  <div class="bar">
+    <button id="prev" type="button">◀ Précédente</button>
+    <button id="reveal" class="reveal" type="button">Voir la réponse</button>
+    <button id="next" type="button">Suivante ▶</button>
+    <button id="full" type="button">Plein écran</button>
+    <span class="hint">Flèches ← → pour changer · Espace pour la réponse</span>
+    <div class="dots" id="dots"></div>
+  </div>
+</div>
+
+<script>
+const C = { chalk: '#f2f0e6', dim: '#b9c4bb', y: '#f3d36b', p: '#f29fae', b: '#9fd0f2' };
+const S = `stroke="${C.chalk}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"`;
+
+function grid(x0, y0, n, size, color) {
+  let s = '';
+  for (let i = 0; i < n; i++) for (let j = 0; j < n; j++)
+    s += `<rect x="${x0 + i*size}" y="${y0 + j*size}" width="${size}" height="${size}" fill="${color}" fill-opacity=".18" stroke="${color}" stroke-width="2"/>`;
+  return s;
+}
+
+const ENIGMES = [
+  {
+    tag: 'Énigme 1 · Sur la table',
+    title: 'Les fourmis et le crayon',
+    q: `Un crayon mesure <b>18 cm</b>. Une fourmi mesure <b>6 mm</b>.<br><br>Les fourmis marchent en file, l'une derrière l'autre. <b>Combien de fourmis</b> pour faire la longueur du crayon ?`,
+    a: `D'abord, la même unité : 18 cm = 180 mm.<br>180 ÷ 6 = 30. Il faut <span class="big">30 fourmis</span>.`,
+    art: () => {
+      let f = '';
+      for (let k = 0; k < 6; k++) { const x = 60 + k*40; f += `<ellipse cx="${x}" cy="262" rx="7" ry="6" fill="${C.chalk}"/><ellipse cx="${x + 13}" cy="262" rx="9" ry="7" fill="${C.chalk}"/>`; }
+      return `<svg viewBox="0 0 480 420" role="img" aria-label="Un crayon de 18 cm et une file de fourmis">
+        <rect x="40" y="140" width="340" height="50" fill="${C.y}" fill-opacity=".25" stroke="${C.y}" stroke-width="4"/>
+        <path d="M380 140 L440 165 L380 190" ${S} stroke="${C.y}"/>
+        <path d="M425 159 L440 165 L425 171" stroke="${C.chalk}" stroke-width="4" fill="none"/>
+        <text x="240" y="120" fill="${C.y}" font-size="30" text-anchor="middle">18 cm</text>
+        ${f}
+        <text x="310" y="270" fill="${C.dim}" font-size="30">…</text>
+        <text x="80" y="310" fill="${C.chalk}" font-size="24" text-anchor="middle">6 mm</text>
+        <text x="240" y="370" fill="${C.p}" font-size="32" text-anchor="middle">? fourmis</text>
+      </svg>`;
+    }
+  },
+  {
+    tag: 'Énigme 2 · Dans la cour',
+    title: 'Qui est le plus grand ?',
+    q: `Noé mesure <b>1,45 m</b>. Lina mesure <b>139 cm</b>. Sam mesure <b>1 m 42 cm</b>.<br><br><b>Qui est le plus grand ?</b> Et qui est le plus petit ?`,
+    a: `Tout en centimètres : Noé 145 cm, Lina 139 cm, Sam 142 cm.<br><span class="big">Noé est le plus grand</span>, Lina est la plus petite.`,
+    art: () => {
+      const gens = [['Noé', '1,45 m', 145, 100, C.y], ['Lina', '139 cm', 139, 240, C.b], ['Sam', '1 m 42 cm', 142, 380, C.p]];
+      let s = '';
+      gens.forEach(([nom, t, cm, x, c]) => {
+        const haut = 340 - cm * 1.9;
+        s += `<circle cx="${x}" cy="${haut + 16}" r="16" stroke="${c}" stroke-width="4" fill="none"/>`;
+        s += `<path d="M${x} ${haut + 32} L${x} ${haut + 130} M${x - 30} ${haut + 65} L${x + 30} ${haut + 65} M${x} ${haut + 130} L${x - 24} 340 M${x} ${haut + 130} L${x + 24} 340" stroke="${c}" stroke-width="4" stroke-linecap="round" fill="none"/>`;
+        s += `<text x="${x}" y="372" fill="${c}" font-size="24" text-anchor="middle">${nom}</text>`;
+        s += `<text x="${x}" y="402" fill="${C.chalk}" font-size="20" text-anchor="middle">${t}</text>`;
+      });
+      return `<svg viewBox="0 0 480 420" role="img" aria-label="Trois enfants de tailles presque égales">
+        <path d="M30 340 L450 340" ${S} stroke-width="3"/>
+        ${s}
+      </svg>`;
+    }
+  },
+  {
+    tag: 'Énigme 3 · Au jardin',
+    title: 'Le grillage',
+    q: `Un jardin a la forme d'un rectangle de <b>12 m</b> sur <b>7 m</b>. Mamie veut mettre un grillage tout autour.<br><br>Elle a <b>35 m</b> de grillage. <b>Est-ce assez ?</b>`,
+    a: `Le tour du jardin : 12 + 7 + 12 + 7 = 38 m.<br>38 m, c'est plus que 35 m : <span class="big">non, il manque 3 m</span>.`,
+    art: () => `<svg viewBox="0 0 480 420" role="img" aria-label="Jardin rectangulaire de 12 m sur 7 m">
+      <rect x="30" y="100" width="380" height="222" fill="${C.b}" fill-opacity=".08" stroke="${C.chalk}" stroke-width="4" stroke-dasharray="4 8"/>
+      <circle cx="140" cy="200" r="28" fill="${C.b}" fill-opacity=".35"/><circle cx="330" cy="250" r="22" fill="${C.b}" fill-opacity=".35"/>
+      <text x="220" y="85" fill="${C.chalk}" font-size="30" text-anchor="middle">12 m</text>
+      <text x="420" y="222" fill="${C.chalk}" font-size="30">7 m</text>
+      <text x="240" y="385" fill="${C.p}" font-size="28" text-anchor="middle">35 m de grillage : assez ?</text>
+    </svg>`
+  },
+  {
+    tag: 'Énigme 4 · Au stade',
+    title: 'Les tours de piste',
+    q: `Un tour de piste mesure <b>400 m</b>. Inès veut courir <b>2 km</b>.<br><br><b>Combien de tours</b> doit-elle faire ?`,
+    a: `D'abord, la même unité : 2 km = 2 000 m.<br>400 + 400 + 400 + 400 + 400 = 2 000. Elle fait <span class="big">5 tours</span>.`,
+    art: () => `<svg viewBox="0 0 480 420" role="img" aria-label="Une piste d'athlétisme">
+      <rect x="50" y="110" width="380" height="200" rx="100" fill="none" stroke="${C.p}" stroke-width="22" stroke-opacity=".35"/>
+      <rect x="50" y="110" width="380" height="200" rx="100" fill="none" stroke="${C.chalk}" stroke-width="3"/>
+      <path d="M240 98 L240 122" stroke="${C.chalk}" stroke-width="4"/>
+      <circle cx="300" cy="110" r="10" fill="${C.y}"/>
+      <text x="240" y="200" fill="${C.chalk}" font-size="28" text-anchor="middle">1 tour = 400 m</text>
+      <text x="240" y="245" fill="${C.p}" font-size="28" text-anchor="middle">2 km = ? tours</text>
+    </svg>`
+  },
+  {
+    tag: 'Énigme 5 · Attention au piège',
+    title: 'Le calcul de Tom',
+    q: `Tom écrit : <b>3 m + 40 cm = 43 cm</b>.<br><br><b>A-t-il raison ?</b> Sinon, quel est le bon résultat ?`,
+    a: `Non ! 3 m, c'est 300 cm.<br>300 cm + 40 cm = <span class="big">340 cm, soit 3,40 m</span>.<br>On n'ajoute jamais des mètres et des centimètres sans convertir.`,
+    art: () => {
+      let t = '';
+      for (let k = 0; k <= 4; k++) t += `<path d="M${40 + k*100} 270 L${40 + k*100} 300" ${S} stroke-width="3"/><text x="${40 + k*100}" y="330" fill="${C.chalk}" font-size="22" text-anchor="middle">${k} m</text>`;
+      return `<svg viewBox="0 0 480 420" role="img" aria-label="Le calcul de Tom et un mètre ruban">
+        <text x="240" y="130" fill="${C.chalk}" font-size="42" text-anchor="middle">3 m + 40 cm</text>
+        <text x="240" y="200" fill="${C.p}" font-size="42" text-anchor="middle">= 43 cm ?</text>
+        <rect x="30" y="260" width="420" height="20" fill="${C.y}" fill-opacity=".3" stroke="${C.y}" stroke-width="2"/>
+        ${t}
+        <path d="M340 255 L340 240 L380 240 L380 255" stroke="${C.b}" stroke-width="3" fill="none"/>
+        <text x="360" y="232" fill="${C.b}" font-size="20" text-anchor="middle">40 cm</text>
+      </svg>`;
+    }
+  },
+  {
+    tag: 'Énigme 6 · Le défi des curieux',
+    title: 'Un tour de roue',
+    q: `La roue d'un vélo a un <b>diamètre de 70 cm</b>.<br><br>Quand la roue fait <b>un tour complet</b>, de combien le vélo avance-t-il ? (On prend <b>π ≈ 3,14</b>.)`,
+    a: `Le vélo avance de la longueur du cercle : π × diamètre.<br>3,14 × 70 = 219,8. Il avance d'environ <span class="big">220 cm, soit 2,20 m</span>.`,
+    art: () => `<svg viewBox="0 0 480 420" role="img" aria-label="Une roue de 70 cm de diamètre qui roule sur le sol">
+      <circle cx="80" cy="200" r="50" ${S}/>
+      <path d="M80 150 L80 250 M30 200 L130 200 M45 165 L115 235 M115 165 L45 235" stroke="${C.dim}" stroke-width="2"/>
+      <path d="M80 150 L80 250" stroke="${C.y}" stroke-width="5" stroke-linecap="round"/>
+      <text x="150" y="160" fill="${C.y}" font-size="26">70 cm</text>
+      <path d="M20 250 L460 250" ${S} stroke-width="3"/>
+      <path d="M80 280 L394 280" stroke="${C.p}" stroke-width="4" stroke-dasharray="12 8"/>
+      <path d="M380 270 L395 280 L380 290" stroke="${C.p}" stroke-width="4" fill="none"/>
+      <circle cx="394" cy="200" r="50" stroke="${C.chalk}" stroke-width="2" stroke-dasharray="6 8" fill="none"/>
+      <text x="237" y="325" fill="${C.p}" font-size="28" text-anchor="middle">1 tour = ? cm</text>
+    </svg>`
+  },
+];
+
+let i = 0, shown = false;
+const board = document.getElementById('board');
+const dots = document.getElementById('dots');
+const revealBtn = document.getElementById('reveal');
+
+ENIGMES.forEach((_, k) => {
+  const d = document.createElement('button');
+  d.type = 'button';
+  d.setAttribute('aria-label', 'Énigme ' + (k + 1));
+  d.addEventListener('click', () => go(k));
+  dots.appendChild(d);
+});
+
+function render() {
+  const e = ENIGMES[i];
+  board.innerHTML = `<section class="slide">
+    <div>
+      <div class="tag">${e.tag}</div>
+      <h1>${e.title}</h1>
+      <div class="q">${e.q}</div>
+      <div class="answer" id="ans" ${shown ? '' : 'hidden'}>${e.a}</div>
+    </div>
+    <div class="art">${e.art()}</div>
+  </section>`;
+  revealBtn.textContent = shown ? 'Cacher la réponse' : 'Voir la réponse';
+  [...dots.children].forEach((d, k) => d.setAttribute('aria-current', k === i ? 'true' : 'false'));
+  try { localStorage.setItem('enigme-longueurs', String(i)); } catch (_) {}
+}
+function go(k) { i = (k + ENIGMES.length) % ENIGMES.length; shown = false; render(); }
+function toggle() { shown = !shown; render(); }
+
+document.getElementById('prev').addEventListener('click', () => go(i - 1));
+document.getElementById('next').addEventListener('click', () => go(i + 1));
+revealBtn.addEventListener('click', toggle);
+document.getElementById('full').addEventListener('click', () => {
+  const el = document.documentElement;
+  try {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+  } catch (_) {}
+});
+document.addEventListener('keydown', (ev) => {
+  if (ev.key === 'ArrowRight' || ev.key === 'PageDown') { go(i + 1); ev.preventDefault(); }
+  else if (ev.key === 'ArrowLeft' || ev.key === 'PageUp') { go(i - 1); ev.preventDefault(); }
+  else if (ev.key === ' ' || ev.key === 'Enter') { if (ev.target.tagName !== 'BUTTON') { toggle(); ev.preventDefault(); } }
+});
+
+try { const s = parseInt(localStorage.getItem('enigme-longueurs'), 10); if (s >= 0 && s < ENIGMES.length) i = s; } catch (_) {}
+render();
+</script>
+
+</body></html>
