@@ -12,9 +12,12 @@
 import Stripe from "stripe";
 
 const NOM = "EleveAI Suivi";
+// 19/11/2026 : prix normal 7,95 € / 79 €, prix de lancement (et Ulule) 4,95 € / 49 €.
 const TARIFS = [
-  { lookup: "suivi_monthly", montant: 495, intervalle: "month", nom: "EleveAI Suivi, au mois" },
-  { lookup: "suivi_yearly", montant: 4900, intervalle: "year", nom: "EleveAI Suivi, à l'année (2 mois offerts)" },
+  { lookup: "suivi_monthly", montant: 795, intervalle: "month", nom: "EleveAI Suivi, au mois" },
+  { lookup: "suivi_yearly", montant: 7900, intervalle: "year", nom: "EleveAI Suivi, à l'année (2 mois offerts)" },
+  { lookup: "suivi_monthly_launch", montant: 495, intervalle: "month", nom: "EleveAI Suivi, au mois, prix de lancement" },
+  { lookup: "suivi_yearly_launch", montant: 4900, intervalle: "year", nom: "EleveAI Suivi, à l'année, prix de lancement" },
 ];
 
 const cle = process.env.STRIPE_SECRET_KEY ?? "";

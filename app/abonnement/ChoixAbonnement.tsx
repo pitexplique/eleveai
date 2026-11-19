@@ -3,11 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { MENTION_TVA, SUIVI, SUIVI_A_VENIR, SUIVI_DES_MAINTENANT } from "@/lib/tarifs";
+import { MENTION_TVA, PRIX_LANCEMENT, SUIVI, SUIVI_A_VENIR, SUIVI_DES_MAINTENANT } from "@/lib/tarifs";
 
-type Props = { ouvert: boolean; mensuel: string; annee: string };
+type Props = { ouvert: boolean; mensuel: string; annee: string; normal: { mensuel: string; annee: string } | null };
 
-export default function ChoixAbonnement({ ouvert, mensuel, annee }: Props) {
+export default function ChoixAbonnement({ ouvert, mensuel, annee, normal }: Props) {
   const [formule, setFormule] = useState<"mensuel" | "annee">("annee");
   const [cgv, setCgv] = useState(false);
   const [pasEleve, setPasEleve] = useState(false);
@@ -74,6 +74,11 @@ export default function ChoixAbonnement({ ouvert, mensuel, annee }: Props) {
           {carte("annee", "À l'année", annee, `par an, ${SUIVI.moisOfferts} mois offerts`, "Renouvelé chaque année, à arrêter quand vous voulez.")}
           {carte("mensuel", "Au mois", mensuel, "par mois", "Prélevé chaque mois, à arrêter quand vous voulez.")}
         </div>
+        {normal && (
+          <p className="mt-3 text-center text-sm font-bold text-emerald-800">
+            {PRIX_LANCEMENT.nom}, au lieu de {normal.mensuel} par mois ou {normal.annee} par an, garanti jusqu&apos;au {PRIX_LANCEMENT.garantiJusquauTexte} tant que l&apos;abonnement continue.
+          </p>
+        )}
         <p className="mt-2 text-center text-xs text-slate-500">{MENTION_TVA}.</p>
 
         {!ouvert ? (

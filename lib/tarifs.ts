@@ -167,7 +167,7 @@ export const PRIX_PUBLICS = VENTE.ouverte; // 05/11/2026 : un seul interrupteur,
  * ⚠️ Il se dit toujours AU MOIS. « 30 € par an » est le même montant et le
  * mauvais nombre — c'est celui qui fait renoncer.
  */
-export const PRIX_MENSUEL = 4.95; // 02/11/2026 (était 2,50 €)
+export const PRIX_MENSUEL = 7.95; // 19/11/2026, Frédéric : « mets les prix à 7,95 € » (était 4,95 €, 2,50 € avant)
 
 /**
  * ⭐ 19,90 € POUR L'ANNÉE SCOLAIRE — la formule à recommander.
@@ -177,7 +177,7 @@ export const PRIX_MENSUEL = 4.95; // 02/11/2026 (était 2,50 €)
  * suivant, il s'arrête avec l'année scolaire. Le taire, c'est vendre onze mois
  * pour cinq — et c'est le genre de silence qui se retrouve en litige.
  */
-export const PRIX_ANNUEL = 49; // 19/11/2026 : 49 € par an, « 2 mois offerts » (était 39 €, 19,90 € avant)
+export const PRIX_ANNUEL = 79; // 19/11/2026 : 79 € par an = 10 mois, « 2 mois offerts » (était 49 €, 39 € avant)
 
 /**
  * La période que couvre l'abonnement annuel. ⛔ MENTION OBLIGATOIRE : elle
@@ -361,7 +361,7 @@ export const ZONES_PAIEMENT: Record<CodeZone, { devise: string; mensuel: number;
   // 19/11/2026 : l'année = 10 mois (« 2 mois offerts »), dans toutes les zones.
   // ⚠️ Hors France, les montants annuels ont suivi cette règle sans décision
   // pays par pays (les pays sont gelés) : à revoir le jour où on les ouvre.
-  europe: { devise: "eur", mensuel: 495, annee: 4900 },
+  europe: { devise: "eur", mensuel: 795, annee: 7900 }, // 19/11 : 7,95 € / 79 € (le prix de lancement est dans PRIX_LANCEMENT)
   suisse: { devise: "chf", mensuel: 500, annee: 5000 },
   canada: { devise: "cad", mensuel: 695, annee: 6950 },
   maghreb: { devise: "eur", mensuel: 250, annee: 2500 },
@@ -545,7 +545,38 @@ function entierEnv(nom: string, defaut: number): number {
   return Number.isFinite(n) && n >= 0 ? Math.floor(n) : defaut;
 }
 
-/** L'offre payante : un produit Stripe, deux tarifs. */
+/**
+ * ⭐ 19/11/2026, Frédéric : « en promotion ou Ulule on restera à 4,95 € ».
+ * Le PRIX DE LANCEMENT : 4,95 € par mois ou 49 € par an (2 mois offerts aussi).
+ * Il vaut pour les familles ET pour les profs (« idem pour les profs »), et pour
+ * les contributeurs Ulule. `fin` : null = pas encore de date (à fixer par
+ * Frédéric) ; une fois la date passée, Checkout prend le prix normal.
+ * ⛔ Aucun « bloqué à vie » n'est écrit nulle part.
+ */
+export const PRIX_LANCEMENT = {
+  actif: true,
+  nom: "Prix de lancement",
+  mensuel: 4.95,
+  annuel: 49,
+  /** Dernier jour pour S'ABONNER au prix de lancement (AAAA-MM-JJ), ou null.
+      ⚠️ La vente ouvre fin janvier 2027 : une date avant n'aurait pas de sens. */
+  fin: null as string | null,
+  /** ✅ 19/11/2026, Frédéric choisit « 1 » : le prix de lancement est GARANTI
+      jusqu'au 31 août 2028 tant que l'abonnement continue. ⛔ Jamais « à vie ».
+      ⏳ Avant cette date, prévenir les abonnés et passer leurs abonnements au
+      tarif normal (script à écrire, pas avant 2028). */
+  garantiJusquau: "2028-08-31",
+  garantiJusquauTexte: "31 août 2028",
+} as const;
+
+/** Le prix de lancement s'applique-t-il aujourd'hui ? */
+export function prixDeLancementEnCours(maintenant: Date = new Date()): boolean {
+  if (!PRIX_LANCEMENT.actif) return false;
+  if (!PRIX_LANCEMENT.fin) return true;
+  return maintenant.getTime() <= new Date(`${PRIX_LANCEMENT.fin}T23:59:59+04:00`).getTime();
+}
+
+/** L'offre payante : un produit Stripe, quatre tarifs (normal et lancement). */
 export const SUIVI = {
   /** Le nom du produit dans Stripe et sur la facture. */
   nom: "EleveAI Suivi",
@@ -556,6 +587,8 @@ export const SUIVI = {
   /** Les `lookup_key` des deux tarifs Stripe (créés par scripts/stripe-test-produit-suivi.ts). */
   lookupMensuel: "suivi_monthly",
   lookupAnnuel: "suivi_yearly",
+  lookupMensuelLancement: "suivi_monthly_launch",
+  lookupAnnuelLancement: "suivi_yearly_launch",
   /** Un abonnement couvre au plus 3 enfants (espace parent et bilan par courriel). */
   enfantsMax: 3,
   /** ⏳ À confirmer par Frédéric. Recommandé : 0 (pas d'essai, le compte gratuit en tient lieu). */
@@ -564,6 +597,8 @@ export const SUIVI = {
 
 /** La phrase principale de l'offre, écrite une fois. ⛔ Jamais « illimité » ni « sans limite ». */
 export const PHRASE_OFFRE = `Inscris-toi gratuitement. Pour le vrai suivi : ${montant(PRIX_MENSUEL)}/mois ou ${montant(PRIX_ANNUEL)}/an (${MOIS_OFFERTS} mois offerts).`;
+/** La ligne du prix de lancement, à côté de la phrase principale. */
+export const PHRASE_LANCEMENT = `${PRIX_LANCEMENT.nom} : ${montant(PRIX_LANCEMENT.mensuel)}/mois ou ${montant(PRIX_LANCEMENT.annuel)}/an, garanti jusqu'au ${PRIX_LANCEMENT.garantiJusquauTexte} tant que l'abonnement continue.`;
 
 /** ⛔ Mention légale à côté de chaque prix et sur chaque facture (pas d'automatic_tax). */
 export const MENTION_TVA = "TVA non applicable, art. 293 B du CGI";
@@ -596,7 +631,7 @@ export const COMPTE_GRATUIT = {
 /**
  * ⭐ LES PROFS — les classes offertes par prof. Réglable sur Vercel
  * (`FREE_CLASSES_PER_TEACHER`). ⛔ 19/11, Frédéric : « 2 classes gratuites »
- * (le document disait 1) → 2 par défaut, à confirmer.
+ * (le document disait 1) → 2 par défaut, TRANCHÉ le 19/11 (ne plus le reposer).
  */
 export const FREE_CLASSES_PER_TEACHER = entierEnv("FREE_CLASSES_PER_TEACHER", 2);
 
@@ -607,9 +642,13 @@ export const FREE_CLASSES_PER_TEACHER = entierEnv("FREE_CLASSES_PER_TEACHER", 2)
  */
 export const CLASSES_SUPPLEMENTAIRES = {
   enVente: false,
-  nom: "EleveAI Classes supplémentaires",
-  lookup: "classes_supplementaires",
-  prixParClasseAnnuel: null as number | null,
+  nom: "EleveAI Prof",
+  /** 19/11/2026, Frédéric : « idem pour les profs » → mêmes prix que le Suivi,
+      par prof (pas par classe), au-delà des classes offertes. */
+  prixMensuel: PRIX_MENSUEL,
+  prixAnnuel: PRIX_ANNUEL,
+  lookupMensuel: "prof_monthly",
+  lookupAnnuel: "prof_yearly",
 } as const;
 
 /**

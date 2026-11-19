@@ -3,7 +3,7 @@
 import { NextResponse } from "next/server";
 import { abonnementDisponible, PIED_FACTURE, stripe } from "@/lib/stripe/serveur";
 import { accesEnCours, adminSupabase, compteDeLaRequete, lireAbonnement } from "@/lib/server/abonnement";
-import { SUIVI, ZONES_PAIEMENT, zoneDuPays, type Formule } from "@/lib/tarifs";
+import { PRIX_LANCEMENT, SUIVI, ZONES_PAIEMENT, prixDeLancementEnCours, zoneDuPays, type Formule } from "@/lib/tarifs";
 
 export async function POST(req: Request) {
   if (!abonnementDisponible()) {
@@ -51,7 +51,7 @@ export async function POST(req: Request) {
   }
 
   const origine = new URL(req.url).origin;
-  const metadata = { type: "abonnement", user_id: compte.id, formule, zone };
+  const metadata = { type: "abonnement", user_id: compte.id, formule, zone, lancement: prixDeLancementEnCours() ? "oui" : "non" };
   const message =
     "En validant, vous commandez avec obligation de paiement. Vous avez 14 jours pour changer d'avis : tout vous est remboursé, sans motif.";
 
@@ -60,7 +60,11 @@ export async function POST(req: Request) {
   // Hors zone europe, ou si les tarifs n'existent pas encore, le montant vient de
   // ZONES_PAIEMENT (lib/tarifs.ts). ⛔ Pas d'automatic_tax (franchise, art. 293 B).
   const intervalle = formule === "mensuel" ? ("month" as const) : ("year" as const);
-  const lookup = formule === "mensuel" ? SUIVI.lookupMensuel : SUIVI.lookupAnnuel;
+  // 19/11/2026 : prix normal 7,95 € / 79 €, prix de lancement 4,95 € / 49 € tant qu'il court.
+  const lancement = prixDeLancementEnCours();
+  const lookup = lancement
+    ? formule === "mensuel" ? SUIVI.lookupMensuelLancement : SUIVI.lookupAnnuelLancement
+    : formule === "mensuel" ? SUIVI.lookupMensuel : SUIVI.lookupAnnuel;
   let tarifId: string | null = null;
   if (zone === "europe") {
     const { data } = await s.prices.list({ lookup_keys: [lookup], active: true, limit: 1 }).catch(() => ({ data: [] }));
@@ -72,7 +76,10 @@ export async function POST(req: Request) {
         quantity: 1,
         price_data: {
           currency: prix.devise,
-          unit_amount: formule === "mensuel" ? prix.mensuel : prix.annee,
+          unit_amount:
+            zone === "europe" && lancement
+              ? Math.round((formule === "mensuel" ? PRIX_LANCEMENT.mensuel : PRIX_LANCEMENT.annuel) * 100)
+              : formule === "mensuel" ? prix.mensuel : prix.annee,
           recurring: { interval: intervalle },
           product_data: { name: formule === "mensuel" ? `${SUIVI.nom}, au mois` : `${SUIVI.nom}, à l'année` },
         },
