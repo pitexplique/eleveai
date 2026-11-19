@@ -1,6 +1,6 @@
-// Énigmes à projeter — 4e, notion relatif_operation (additionner, soustraire,
+// Problèmes à projeter — 4e, notion relatif_operation (additionner, soustraire,
 // multiplier, calculer, problèmes, défi). 19/11/2026.
-import type { EnigmesNotion } from "../types";
+import type { ProblemesNotion } from "../types";
 import { COULEURS as C } from "../types";
 
 const S = `stroke="${C.craie}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"`;
@@ -115,14 +115,14 @@ const signe = () => `<svg viewBox="0 0 480 420" role="img" aria-label="Le produi
   <text x="240" y="365" fill="${C.pale}" font-size="24" text-anchor="middle">Le signe d'abord, le calcul ensuite</text>
   </svg>`;
 
-const enigmes: EnigmesNotion = {
+const problemes: ProblemesNotion = {
   classe: "4e",
   notionId: "relatif_operation",
-  titre: "Énigmes des nombres relatifs",
+  titre: "Problèmes sur les nombres relatifs",
   description: "L'ascenseur, le thermomètre, le plongeur, le quiz, le piège de Lou, le signe d'un produit.",
-  enigmes: [
+  problemes: [
     {
-      tag: "Énigme 1 · Au parking",
+      tag: "Problème 1 · Au parking",
       titre: "L'ascenseur",
       question: `Tu es au <b>niveau −3</b> du parking, avec ta famille.<br>Tu prends l'ascenseur et tu <b>montes de 5 étages</b>.<br><br>À <b>quel étage</b> arrives-tu ?`,
       reponse: `Monter de 5, c'est ajouter 5 : −3 + 5 = 2.<br>Tu arrives à <span class="big">l'étage 2</span>.<br>3 étages pour remonter au rez-de-chaussée, puis 2 de plus.`,
@@ -131,7 +131,7 @@ const enigmes: EnigmesNotion = {
       dessin: ascenseur(),
     },
     {
-      tag: "Énigme 2 · En montagne",
+      tag: "Problème 2 · En montagne",
       titre: "Le thermomètre",
       question: `Dans un village des Alpes, il fait <b>−7 °C</b> le matin.<br>L'après-midi, il fait <b>4 °C</b>.<br><br>De <b>combien de degrés</b> la température a-t-elle monté ?`,
       reponse: `L'écart, c'est l'arrivée moins le départ : 4 − (−7) = 4 + 7 = 11.<br>Elle a monté de <span class="big">11 °C</span> : 7 degrés pour arriver à 0, puis 4 de plus.`,
@@ -140,7 +140,7 @@ const enigmes: EnigmesNotion = {
       dessin: thermometre(),
     },
     {
-      tag: "Énigme 3 · Sous la mer",
+      tag: "Problème 3 · Sous la mer",
       titre: "Le plongeur",
       question: `Un plongeur part de la surface (0 m).<br>Il descend de <b>3 m chaque minute</b>.<br><br>À <b>quelle profondeur</b> est-il après <b>5 minutes</b> ? Écris-la avec un nombre relatif.`,
       reponse: `Chaque minute : −3 m. Pendant 5 minutes : 5 × (−3) = −15.<br>Il est à <span class="big">−15 m</span>.`,
@@ -149,7 +149,7 @@ const enigmes: EnigmesNotion = {
       dessin: plongee(),
     },
     {
-      tag: "Énigme 4 · Le grand quiz",
+      tag: "Problème 4 · Le grand quiz",
       titre: "Le score de Sami",
       question: `Au quiz, une bonne réponse rapporte <b>+3 points</b>. Une mauvaise réponse coûte <b>−2 points</b>.<br>Sami a <b>7 bonnes réponses</b> et <b>5 mauvaises</b>.<br><br>Quel est son <b>score</b> ?`,
       reponse: `7 × 3 = 21 et 5 × (−2) = −10.<br>21 + (−10) = 11. Sami a <span class="big">11 points</span>.`,
@@ -158,7 +158,7 @@ const enigmes: EnigmesNotion = {
       dessin: quiz(),
     },
     {
-      tag: "Énigme 5 · Attention au piège",
+      tag: "Problème 5 · Attention au piège",
       titre: "Moins par moins ?",
       sorte: "piege",
       question: `Lou écrit : <b>−3 − 5 = 8</b>.<br>Elle explique : « moins par moins donne plus ! »<br><br><b>A-t-elle raison ?</b>`,
@@ -168,7 +168,7 @@ const enigmes: EnigmesNotion = {
       dessin: lou(),
     },
     {
-      tag: "Énigme 6 · Le défi des curieux",
+      tag: "Problème 6 · Le défi des curieux",
       titre: "Le signe d'abord",
       sorte: "defi",
       question: `Calcule <b>(−2) × (−3) × (−4) × (−5) × (−6)</b>.<br><br>Astuce : trouve d'abord le <b>signe</b> du résultat, <b>sans calculer</b>.`,
@@ -180,4 +180,4 @@ const enigmes: EnigmesNotion = {
   ],
 };
 
-export default enigmes;
+export default problemes;

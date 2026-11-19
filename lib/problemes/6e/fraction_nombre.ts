@@ -1,7 +1,7 @@
-// Énigmes à projeter — 6e, notion fraction_nombre (lire, représenter, fraction
+// Problèmes à projeter — 6e, notion fraction_nombre (lire, représenter, fraction
 // quotient, fraction et décimal, comparer, écriture mixte). 19/11/2026.
 // Phrases courtes (les 6e lisent difficilement) ; fractions en étage.
-import type { EnigmesNotion } from "../types";
+import type { ProblemesNotion } from "../types";
 import { COULEURS as C } from "../types";
 import { frac, svgFrac } from "../outils";
 
@@ -93,14 +93,14 @@ const piste = () => `<svg viewBox="0 0 480 420" role="img" aria-label="Une piste
   <text x="240" y="240" fill="${C.rose}" font-size="30" text-anchor="middle">= ? tours</text>
   </svg>`;
 
-const enigmes: EnigmesNotion = {
+const problemes: ProblemesNotion = {
   classe: "6e",
   notionId: "fraction_nombre",
-  titre: "Énigmes des fractions",
+  titre: "Problèmes sur les fractions",
   description: "Le potager, le chocolat, les crêpes, la gourde, le piège de Tom, les tours de piste.",
-  enigmes: [
+  problemes: [
     {
-      tag: "Énigme 1 · Au jardin",
+      tag: "Problème 1 · Au jardin",
       titre: "Le potager",
       question: `Le potager est partagé en <b>8 parcelles égales</b>.<br>Il y a des tomates dans <b>3 parcelles</b>.<br><br>Quelle <b>fraction</b> du potager a des tomates ?`,
       reponse: `Le potager entier, ce sont 8 parts. On en prend 3.<br>Les tomates occupent <span class="big">${frac(3, 8)} du potager</span>.`,
@@ -109,7 +109,7 @@ const enigmes: EnigmesNotion = {
       dessin: jardin(),
     },
     {
-      tag: "Énigme 2 · Au goûter",
+      tag: "Problème 2 · Au goûter",
       titre: "Le chocolat",
       question: `Léo et Zoé ont la <b>même tablette</b> de 12 carrés.<br>Léo mange <b>la moitié</b> de la sienne.<br>Zoé mange ${frac(6, 12)} de la sienne.<br><br><b>Qui mange le plus ?</b>`,
       reponse: `La moitié de 12 carrés : 12 ÷ 2 = 6 carrés.<br>${frac(6, 12)}, c'est aussi 6 carrés. <span class="big">Ils mangent autant !</span><br>${frac(6, 12)} = ${frac(1, 2)} : deux écritures, la même part.`,
@@ -118,7 +118,7 @@ const enigmes: EnigmesNotion = {
       dessin: chocolat(),
     },
     {
-      tag: "Énigme 3 · À la crêperie",
+      tag: "Problème 3 · À la crêperie",
       titre: "Le partage des crêpes",
       question: `<b>4 amis</b> partagent <b>3 crêpes</b>.<br>Chacun doit avoir la même part.<br><br>Quelle part de crêpe a <b>chaque ami</b> ?`,
       reponse: `On coupe chaque crêpe en 4 quarts : 3 × 4 = 12 quarts.<br>12 ÷ 4 = 3 quarts pour chacun.<br>Chacun a <span class="big">${frac(3, 4)} de crêpe</span> : 3 ÷ 4 = ${frac(3, 4)}.`,
@@ -127,7 +127,7 @@ const enigmes: EnigmesNotion = {
       dessin: crepes(),
     },
     {
-      tag: "Énigme 4 · En randonnée",
+      tag: "Problème 4 · En randonnée",
       titre: "La gourde",
       question: `Une gourde contient <b>1 litre</b> quand elle est pleine.<br>Elle est remplie aux ${frac(3, 4)}.<br><br><b>Combien de litres</b> d'eau contient-elle ?`,
       reponse: `${frac(3, 4)} = 3 ÷ 4 = 0,75.<br>La gourde contient <span class="big">0,75 L</span>, soit 75 cL.`,
@@ -136,7 +136,7 @@ const enigmes: EnigmesNotion = {
       dessin: gourde(),
     },
     {
-      tag: "Énigme 5 · Attention au piège",
+      tag: "Problème 5 · Attention au piège",
       titre: "Le calcul de Tom",
       sorte: "piege",
       question: `Tom dit : « ${frac(1, 8)} est plus grand que ${frac(1, 4)}, car 8 est plus grand que 4. »<br><br><b>A-t-il raison ?</b>`,
@@ -146,7 +146,7 @@ const enigmes: EnigmesNotion = {
       dessin: tom(),
     },
     {
-      tag: "Énigme 6 · Le défi des curieux",
+      tag: "Problème 6 · Le défi des curieux",
       titre: "Les tours de piste",
       sorte: "defi",
       question: `Inès court sur une piste ronde.<br>Elle court <b>7 quarts de tour</b>.<br><br>Combien de <b>tours entiers</b> fait-elle ? Et combien de quarts en plus ?`,
@@ -158,4 +158,4 @@ const enigmes: EnigmesNotion = {
   ],
 };
 
-export default enigmes;
+export default problemes;

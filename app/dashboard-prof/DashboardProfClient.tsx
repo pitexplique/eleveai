@@ -488,9 +488,9 @@ export default function DashboardProfClient() {
                 <Link href="/seances" className="rounded-2xl bg-violet-100 px-4 py-2 text-violet-900 ring-1 ring-violet-300 hover:brightness-95">
                   🍽️ Exemples de séances
                 </Link>
-                {/* 19/11 : le hub des énigmes à projeter au tableau. */}
-                <Link href="/enigmes" className="rounded-2xl bg-emerald-100 px-4 py-2 text-emerald-900 ring-1 ring-emerald-300 hover:brightness-95">
-                  🧩 Projeter les énigmes
+                {/* 19/11 : le hub des problèmes à projeter au tableau. */}
+                <Link href="/problemes" className="rounded-2xl bg-emerald-100 px-4 py-2 text-emerald-900 ring-1 ring-emerald-300 hover:brightness-95">
+                  🧩 Projeter les problèmes
                 </Link>
               </div>
             </div>

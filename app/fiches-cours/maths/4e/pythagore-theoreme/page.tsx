@@ -18,14 +18,14 @@ export default function PythagoreQuatriemePage() {
   return (
     <>
       <FicheCoursClient fiche={fichePythagore4e} slides={slidesPythagore4e} />
-      {/* 19/11/2026 (Frédéric) : les 6 énigmes au tableau noir, à projeter
-          (données lib/enigmes/4e/pythagore_theoreme.ts). */}
+      {/* 19/11/2026 (Frédéric) : les 6 problèmes au tableau noir, à projeter
+          (données lib/problemes/4e/pythagore_theoreme.ts). */}
       <p className="mx-auto mb-10 max-w-3xl px-4 text-center print:hidden">
         <a
-          href="/enigmes/4e/pythagore-theoreme"
+          href="/problemes/4e/pythagore-theoreme"
           className="inline-block rounded-full bg-emerald-800 px-6 py-3 font-black text-white hover:bg-emerald-900"
         >
-          🧩 6 énigmes de Pythagore à projeter en classe
+          🧩 Projeter les 6 problèmes de Pythagore
         </a>
       </p>
     </>

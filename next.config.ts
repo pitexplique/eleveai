@@ -38,14 +38,18 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // ─── 19/11/2026 — LES ÉNIGMES À PROJETER ONT UN SEUL MODÈLE ─────────────
+      // ─── 19/11/2026 — LES PROBLÈMES À PROJETER ONT UN SEUL MODÈLE ───────────
       // Les trois premières pages HTML seules (public/enigmes/*.html) sont
-      // devenues des données (lib/enigmes/) rendues par /enigmes/<classe>/<notion>.
-      // Les favoris des profs gardent leur adresse. Le hub est `/enigmes` (`/enigmes-slide` y redirige).
-      { source: "/enigmes/pythagore-4e.html", destination: "/enigmes/4e/pythagore-theoreme", permanent: true },
-      { source: "/enigmes/puissances-4e.html", destination: "/enigmes/4e/puissance-ecriture", permanent: true },
-      { source: "/enigmes/longueurs-6e.html", destination: "/enigmes/6e/aire-longueur", permanent: true },
-      { source: "/enigmes-slide", destination: "/enigmes", permanent: true },
+      // devenues des données (lib/problemes/) rendues par /problemes/<classe>/<notion>.
+      // Elles se sont d'abord appelées « énigmes » (hub /enigmes-slide puis
+      // /enigmes), puis Frédéric : « le mot énigme n'est pas exact ». Toutes les
+      // anciennes adresses mènent au bon endroit.
+      { source: "/enigmes/pythagore-4e.html", destination: "/problemes/4e/pythagore-theoreme", permanent: true },
+      { source: "/enigmes/puissances-4e.html", destination: "/problemes/4e/puissance-ecriture", permanent: true },
+      { source: "/enigmes/longueurs-6e.html", destination: "/problemes/6e/aire-longueur", permanent: true },
+      { source: "/enigmes-slide", destination: "/problemes", permanent: true },
+      { source: "/enigmes", destination: "/problemes", permanent: true },
+      { source: "/enigmes/:classe/:notion", destination: "/problemes/:classe/:notion", permanent: true },
       // ─── 23/09/2026 — « TUTOR V4 » DISPARAÎT DE CE QUE L'ÉLÈVE VOIT ────────
       // Frédéric a tranché le nom : un seul mot, « le coach », de la liste
       // jusqu'à la question. `/tutor-v4` cumulait trois défauts — de l'anglais

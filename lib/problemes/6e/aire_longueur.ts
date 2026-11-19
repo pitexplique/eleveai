@@ -1,15 +1,15 @@
-// Énigmes à projeter — 6e, notion aire_longueur. Migrées le 19/11/2026
+// Problèmes à projeter — 6e, notion aire_longueur. Migrées le 19/11/2026
 // depuis public/enigmes/longueurs-6e.html (fond blanc, lignes d'écriture).
-import type { EnigmesNotion } from "../types";
+import type { ProblemesNotion } from "../types";
 
-const enigmes: EnigmesNotion = {
+const problemes: ProblemesNotion = {
   classe: "6e",
   notionId: "aire_longueur",
-  titre: "Énigmes des longueurs",
+  titre: "Problèmes sur les longueurs",
   description: "Fourmis et crayon, qui est le plus grand, grillage, tours de piste, piège de Tom, tour de roue.",
-  enigmes: [
+  problemes: [
     {
-      tag: "Énigme 1 · Sur la table",
+      tag: "Problème 1 · Sur la table",
       titre: "Les fourmis et le crayon",
       question: `Un crayon mesure <b>18 cm</b>. Une fourmi mesure <b>6 mm</b>.<br><br>Les fourmis marchent en file, l'une derrière l'autre. <b>Combien de fourmis</b> pour faire la longueur du crayon ?`,
       reponse: `D'abord, la même unité : 18 cm = 180 mm.<br>180 ÷ 6 = 30. Il faut <span class="big">30 fourmis</span>.`,
@@ -27,7 +27,7 @@ const enigmes: EnigmesNotion = {
   </svg>`,
     },
     {
-      tag: "Énigme 2 · Dans la cour",
+      tag: "Problème 2 · Dans la cour",
       titre: "Qui est le plus grand ?",
       question: `Noé mesure <b>1,45 m</b>. Lina mesure <b>139 cm</b>. Sam mesure <b>1 m 42 cm</b>.<br><br><b>Qui est le plus grand ?</b> Et qui est le plus petit ?`,
       reponse: `Tout en centimètres : Noé 145 cm, Lina 139 cm, Sam 142 cm.<br><span class="big">Noé est le plus grand</span>, Lina est la plus petite.`,
@@ -39,7 +39,7 @@ const enigmes: EnigmesNotion = {
   </svg>`,
     },
     {
-      tag: "Énigme 3 · Au jardin",
+      tag: "Problème 3 · Au jardin",
       titre: "Le grillage",
       question: `Un jardin a la forme d'un rectangle de <b>12 m</b> sur <b>7 m</b>. Mamie veut mettre un grillage tout autour.<br><br>Elle a <b>35 m</b> de grillage. <b>Est-ce assez ?</b>`,
       reponse: `Le tour du jardin : 12 + 7 + 12 + 7 = 38 m.<br>38 m, c'est plus que 35 m : <span class="big">non, il manque 3 m</span>.`,
@@ -54,7 +54,7 @@ const enigmes: EnigmesNotion = {
   </svg>`,
     },
     {
-      tag: "Énigme 4 · Au stade",
+      tag: "Problème 4 · Au stade",
       titre: "Les tours de piste",
       question: `Un tour de piste mesure <b>400 m</b>. Inès veut courir <b>2 km</b>.<br><br><b>Combien de tours</b> doit-elle faire ?`,
       reponse: `D'abord, la même unité : 2 km = 2 000 m.<br>400 + 400 + 400 + 400 + 400 = 2 000. Elle fait <span class="big">5 tours</span>.`,
@@ -70,7 +70,7 @@ const enigmes: EnigmesNotion = {
   </svg>`,
     },
     {
-      tag: "Énigme 5 · Attention au piège",
+      tag: "Problème 5 · Attention au piège",
       titre: "Le calcul de Tom",
       sorte: "piege",
       question: `Tom écrit : <b>3 m + 40 cm = 43 cm</b>.<br><br><b>A-t-il raison ?</b> Sinon, quel est le bon résultat ?`,
@@ -87,7 +87,7 @@ const enigmes: EnigmesNotion = {
   </svg>`,
     },
     {
-      tag: "Énigme 6 · Le défi des curieux",
+      tag: "Problème 6 · Le défi des curieux",
       titre: "Un tour de roue",
       sorte: "defi",
       question: `La roue d'un vélo a un <b>diamètre de 70 cm</b>.<br><br>Quand la roue fait <b>un tour complet</b>, de combien le vélo avance-t-il ? (On prend <b>π ≈ 3,14</b>.)`,
@@ -109,4 +109,4 @@ const enigmes: EnigmesNotion = {
   ],
 };
 
-export default enigmes;
+export default problemes;

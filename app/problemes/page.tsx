@@ -1,26 +1,31 @@
-// /enigmes — LE HUB DES ÉNIGMES À PROJETER (19/11/2026, Frédéric : « et
-// crée un hub enigmes-slide »). ⭐ Adresse /enigmes (Bing, 19/11 : « énigme
-// mathématique » est bien plus cherché que « questions flash ») ; /enigmes-slide y redirige. Toutes les notions de maths du CP à la
-// terminale, classe par classe, et pour chacune : ses 6 énigmes si elles sont
-// faites (lien de projection), sinon « à venir ».
+// /problemes — LE HUB DES PROBLÈMES À PROJETER (19/11/2026, Frédéric : « et
+// crée un hub enigmes-slide »). Toutes les notions de maths du CP à la
+// terminale, classe par classe, et pour chacune : ses 6 problèmes s'ils sont
+// faits (lien de projection), sinon « bientôt ».
+// ⭐ LE NOM, 19/11 : d'abord « énigmes » (hub /enigmes-slide puis /enigmes),
+// puis Frédéric : « le mot énigme n'est pas exact » — ce sont des problèmes en
+// contexte, plus un piège et un défi. Nom provisoire « Problèmes à projeter »,
+// sous-titre « questions flash, avec un minuteur ». /enigmes et /enigmes-slide
+// redirigent ici. Pour Google, titres et descriptions reprennent les mots que
+// les profs cherchent : questions flash, problème du jour, défi maths,
+// diaporama à projeter.
 // ⭐ 19/11, Frédéric : « on peut pas rendre le hub plus joyeux » → fond clair,
-// une couleur par cycle, Ti Margo, barre de progression par classe ; seules les
-// énigmes elles-mêmes restent en ardoise (la lumière des salles).
-// ⭐ 19/11 : le nom reste « énigmes » (Frédéric : « j'aime le mot énigme »).
-// Données : lib/enigmes/registre.ts ; notions : listerToutesLesNotions().
+// une couleur par cycle, Ti Margo, barre de progression par classe ; seuls les
+// problèmes eux-mêmes restent en ardoise (la lumière des salles).
+// Données : lib/problemes/registre.ts ; notions : listerToutesLesNotions().
 // ⛔ Le français est en pause : maths seules. ⛔ Aucun prix ici.
 
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PROGRAMME_CLASSES, listerToutesLesNotions } from "@/lib/programme";
-import { enigmesHref, listerEnigmes } from "@/lib/enigmes/registre";
+import { problemesHref, listerProblemes } from "@/lib/problemes/registre";
 
 export const metadata: Metadata = {
-  title: "Énigmes mathématiques à projeter en classe, du CP à la terminale",
+  title: "Problèmes de maths à projeter en classe, du CP à la terminale : questions flash, défis, problème du jour",
   description:
-    "Énigmes mathématiques et questions flash à projeter au tableau, du CP à la terminale : six par notion, un dessin, un minuteur, la réponse expliquée quand on veut. Fond ardoise ou blanc, lignes pour écrire au feutre.",
-  alternates: { canonical: "https://www.eleveai.fr/enigmes" },
+    "Un diaporama à projeter pour chaque notion de maths, du CP à la terminale : six problèmes en contexte, dont un piège et un défi, avec dessin, minuteur de questions flash et correction expliquée. Fond ardoise ou blanc, lignes pour écrire au feutre.",
+  alternates: { canonical: "https://www.eleveai.fr/problemes" },
 };
 
 type Teinte = { puce: string; carte: string; barre: string; titre: string; pale: string };
@@ -40,7 +45,7 @@ const teinteDe = (slug: string): Teinte =>
 
 export default function Page() {
   const notions = listerToutesLesNotions().filter((n) => n.matiere === "maths");
-  const faites = listerEnigmes().length;
+  const faites = listerProblemes().length;
   const classes = PROGRAMME_CLASSES.filter((c) => notions.some((n) => n.classeSlug === c.slug));
 
   return (
@@ -50,12 +55,12 @@ export default function Page() {
           <div className="flex-1">
             <p className="text-sm font-black uppercase tracking-widest text-emerald-700">En classe avec EleveAI</p>
             <h1 className="mt-2 text-4xl font-black leading-tight sm:text-6xl">
-              🧩 Énigmes <span className="text-amber-500">à projeter</span>
+              🧩 Problèmes <span className="text-amber-500">à projeter</span>
             </h1>
-            {/* 19/11, Frédéric : « énigme à projeter et en dessous questions flash avec un minuteur ». */}
+            {/* 19/11, Frédéric : « problème à projeter et en dessous questions flash avec un minuteur ». */}
             <p className="mt-2 text-2xl font-black text-sky-700 sm:text-3xl">⏱ et questions flash, avec un minuteur</p>
             <p className="mt-4 max-w-2xl text-lg font-semibold leading-relaxed text-slate-700">
-              Six énigmes par notion, une par écran, avec un dessin. On projette, la classe cherche,
+              Six problèmes par notion, un par écran, avec un dessin. On projette, la classe cherche,
               on écrit au feutre, puis on montre la réponse expliquée.
             </p>
             <ul className="mt-4 flex flex-wrap gap-2 text-sm font-bold text-slate-700">
@@ -69,7 +74,7 @@ export default function Page() {
           <div className="relative shrink-0">
             <div className="grid h-44 w-56 place-items-center rounded-xl bg-[#2f3d3a] p-4 text-center shadow-xl ring-8 ring-[#6b4f2a]">
               <p className="font-black leading-snug text-amber-200">
-                Énigme 5 · Attention au piège
+                Problème 5 · Attention au piège
                 <span className="mt-2 block text-2xl text-white">1/8 &gt; 1/4&nbsp;?</span>
               </p>
             </div>
@@ -90,7 +95,7 @@ export default function Page() {
 
         <nav className="mt-5 flex flex-wrap gap-2" aria-label="Classes">
           {classes.map((c) => {
-            const nb = notions.filter((n) => n.classeSlug === c.slug && enigmesHref(c.slug, n.notionId)).length;
+            const nb = notions.filter((n) => n.classeSlug === c.slug && problemesHref(c.slug, n.notionId)).length;
             return (
               <a
                 key={c.slug}
@@ -107,7 +112,7 @@ export default function Page() {
         {classes.map((c) => {
           const t = teinteDe(c.slug);
           const liste = notions.filter((n) => n.classeSlug === c.slug);
-          const pretes = liste.filter((n) => enigmesHref(c.slug, n.notionId)).length;
+          const pretes = liste.filter((n) => problemesHref(c.slug, n.notionId)).length;
           return (
             <section key={c.slug} id={c.slug} className="mt-12 scroll-mt-24">
               <div className="flex flex-wrap items-end justify-between gap-2">
@@ -121,7 +126,7 @@ export default function Page() {
               </div>
               <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {liste.map((n) => {
-                  const href = enigmesHref(c.slug, n.notionId);
+                  const href = problemesHref(c.slug, n.notionId);
                   return (
                     <li key={n.notionId}>
                       {href ? (
@@ -137,7 +142,7 @@ export default function Page() {
                           </span>
                           <span>
                             <span className="block text-slate-900">{n.label}</span>
-                            <span className="block text-sm font-black text-emerald-700">6 énigmes · projeter →</span>
+                            <span className="block text-sm font-black text-emerald-700">6 problèmes · projeter →</span>
                           </span>
                         </Link>
                       ) : (
@@ -160,7 +165,7 @@ export default function Page() {
         })}
 
         <p className="mt-14 text-center text-sm font-semibold text-slate-500">
-          Une idée d&apos;énigme, une erreur dans un calcul&nbsp;? Écrivez-nous depuis la page{" "}
+          Une idée de problème, une erreur dans un calcul&nbsp;? Écrivez-nous depuis la page{" "}
           <Link href="/contact" className="font-bold text-emerald-700 underline">contact</Link>.
         </p>
       </div>

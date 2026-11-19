@@ -1,10 +1,10 @@
-// ÉNIGMES À PROJETER (19/11/2026, Frédéric : « fais-le du CP à la terminale,
+// PROBLÈMES À PROJETER (19/11/2026, Frédéric : « fais-le du CP à la terminale,
 // sur chaque notion »). UN SEUL MODÈLE : chaque notion du coach a son fichier
-// de données, `lib/enigmes/<classe>/<notionId>.ts`, rendu par UNE seule page,
-// `/enigmes/<classe>/<notion-slug>`. Le hub `/enigmes` les liste toutes.
+// de données, `lib/problemes/<classe>/<notionId>.ts`, rendu par UNE seule page,
+// `/problemes/<classe>/<notion-slug>`. Le hub `/problemes` les liste tous.
 //
-// ⛔ Règles d'écriture (voir aussi lib/enigmes/REGLES.md) :
-//  - 6 énigmes par notion, dont UNE « piège » et UNE « défi des curieux » ;
+// ⛔ Règles d'écriture (voir aussi lib/problemes/REGLES.md) :
+//  - 6 problèmes par notion, dont UNE « piège » et UNE « défi des curieux » ;
 //  - contextes de vie variés (les maths sont transversales), La Réunion ~4 % ;
 //  - 6e : phrases courtes ; division avec « ÷ », jamais 5/2 hors fractions ;
 //  - chaque calcul vérifié ; figure au bon rapport, sinon « pas à l'échelle » ;
@@ -39,7 +39,7 @@ export type Verification =
       type: "qcm";
       /** Trois choix, affichés A, B, C dans cet ordre. */
       choix: [string, string, string];
-      /** 0 = A, 1 = B, 2 = C — réparti au hasard d'une énigme à l'autre. */
+      /** 0 = A, 1 = B, 2 = C — réparti au hasard d'un problème à l'autre. */
       bonne: 0 | 1 | 2;
     }
   | {
@@ -50,8 +50,8 @@ export type Verification =
       unite?: string;
     };
 
-export type Enigme = {
-  /** « Énigme 2 · Le chemin de l'école » */
+export type Probleme = {
+  /** « Problème 2 · Le chemin de l'école » */
   tag: string;
   titre: string;
   /** HTML simple (<b>, <br>, <sup>) — c'est ce qu'on projette. */
@@ -67,13 +67,13 @@ export type Enigme = {
   sorte?: "piege" | "defi";
 };
 
-export type EnigmesNotion = {
+export type ProblemesNotion = {
   classe: string;
   /** L'identifiant du coach (underscores), cf. listerToutesLesNotions(). */
   notionId: string;
-  /** « Énigmes de Pythagore » : le titre de la page. */
+  /** « Problèmes de Pythagore » : le titre de la page. */
   titre: string;
   /** Une phrase pour le hub et la balise description. */
   description: string;
-  enigmes: Enigme[];
+  problemes: Probleme[];
 };

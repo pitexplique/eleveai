@@ -1,4 +1,4 @@
-// Petits outils pour écrire les énigmes : une fraction en étage (HTML ou SVG).
+// Petits outils pour écrire les problèmes : une fraction en étage (HTML ou SVG).
 // Les 6e lisent mal « 3/8 » sur une ligne : on l'écrit en étage, comme au tableau.
 
 import { COULEURS } from "./types";
