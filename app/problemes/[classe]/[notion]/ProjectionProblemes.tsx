@@ -1,12 +1,13 @@
 "use client";
 
-// LA PAGE DE PROJECTION DES PROBLÈMES (19/11/2026) — un problème par écran,
+// LA PAGE DE PROJECTION DES ÉNIGMES (19/11/2026, nom affiché « Énigmes à
+// projeter », code et adresse /problemes) — une énigme par écran,
 // dessin à côté de la question, flèches pour changer, Espace pour la réponse.
 // ⭐ Fond ARDOISE par défaut (Frédéric, 19/11 : « mets en fond ardoise, car
 // dans les classes il y a un pb de lumière ») ; le fond BLANC reste au choix
 // (touche T), pour écrire au feutre sur le tableau blanc. Les lignes
 // d'écriture en bas (touche L) reçoivent la réponse quand on la montre.
-// ⏱ 19/11, Frédéric : « problèmes à projeter et en dessous questions flash avec
+// ⏱ 19/11, Frédéric : « énigmes à projeter et en dessous questions flash avec
 // un minuteur » → un minuteur par problème (1, 2, 3 ou 5 min, touche M pour
 // lancer ou arrêter), grand, en haut à droite du tableau. Il s'arrête et se
 // remet à zéro quand on change de problème. Aucun son : l'écran clignote.
@@ -155,7 +156,7 @@ export default function ProjectionProblemes({
           </section>
         </main>
         <div className="bar">
-          <Link href={retourHref} className="retour">← Tous les problèmes</Link>
+          <Link href={retourHref} className="retour">← Toutes les énigmes</Link>
           <button type="button" onClick={() => aller(i - 1)}>◀ Précédente</button>
           <button type="button" className="reveal" onClick={() => setMontree((v) => !v)}>
             {montree ? "Cacher la réponse" : "Voir la réponse"}
@@ -186,7 +187,7 @@ export default function ProjectionProblemes({
               <button
                 key={k}
                 type="button"
-                aria-label={`Problème ${k + 1}`}
+                aria-label={`Énigme ${k + 1}`}
                 aria-current={k === i ? "true" : "false"}
                 onClick={() => aller(k)}
               />

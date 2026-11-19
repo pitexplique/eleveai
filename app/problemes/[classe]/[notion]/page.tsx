@@ -24,13 +24,13 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { classe, notion } = await params;
   const data = getProblemes(classe, notion);
   if (!data) return {};
-  // Schéma du titre (19/11) : « Théorème de Pythagore 4e : 6 problèmes à
+  // Schéma du titre (19/11) : « Théorème de Pythagore 4e : 6 énigmes à
   // projeter en classe (défis et questions flash corrigés) ».
   const sujet = getNotionProgramme(classe, "maths", notion)?.label ?? data.titre;
   const niveau = getNotionProgramme(classe, "maths", notion)?.classeLabel ?? data.classe;
   return {
-    title: `${sujet} ${niveau} : 6 problèmes à projeter en classe (défis et questions flash corrigés)`,
-    description: `Diaporama à projeter, ${niveau} : ${data.description} Six problèmes du jour en contexte, un piège et un défi maths, avec minuteur et correction expliquée.`,
+    title: `${sujet} ${niveau} : 6 énigmes à projeter en classe (défis et questions flash corrigés)`,
+    description: `Diaporama à projeter, ${niveau} : ${data.description} Six énigmes en contexte, comme un problème du jour, avec un piège et un défi maths, avec minuteur et correction expliquée.`,
     alternates: { canonical: `/problemes/${classe}/${notion}` },
   };
 }

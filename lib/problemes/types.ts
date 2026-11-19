@@ -51,7 +51,7 @@ export type Verification =
     };
 
 export type Probleme = {
-  /** « Problème 2 · Le chemin de l'école » */
+  /** « Énigme 2 · Le chemin de l'école » */
   tag: string;
   titre: string;
   /** HTML simple (<b>, <br>, <sup>) — c'est ce qu'on projette. */
@@ -71,7 +71,7 @@ export type ProblemesNotion = {
   classe: string;
   /** L'identifiant du coach (underscores), cf. listerToutesLesNotions(). */
   notionId: string;
-  /** « Problèmes de Pythagore » : le titre de la page. */
+  /** « Énigmes de Pythagore » : le titre de la page. */
   titre: string;
   /** Une phrase pour le hub et la balise description. */
   description: string;

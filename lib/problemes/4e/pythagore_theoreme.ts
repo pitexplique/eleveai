@@ -1,15 +1,15 @@
-// Problèmes à projeter — 4e, notion pythagore_theoreme. Migrées le 19/11/2026
+// Énigmes à projeter — 4e, notion pythagore_theoreme. Migrées le 19/11/2026
 // depuis public/enigmes/pythagore-4e.html (fond blanc, lignes d'écriture).
 import type { ProblemesNotion } from "../types";
 
 const problemes: ProblemesNotion = {
   classe: "4e",
   notionId: "pythagore_theoreme",
-  titre: "Problèmes de Pythagore",
+  titre: "Énigmes de Pythagore",
   description: "Corde à 13 nœuds, raccourci, échelle, puzzle des carrés, piège, diagonale du carré.",
   problemes: [
     {
-      tag: "Problème 1 · Une vieille histoire",
+      tag: "Énigme 1 · Une vieille histoire",
       titre: "La corde à 13 nœuds",
       question: `On raconte que les bâtisseurs égyptiens traçaient leurs angles droits avec une <b>corde à 13 nœuds</b> : 12 intervalles égaux, et le 13<sup>e</sup> nœud se pose sur le 1<sup>er</sup> pour fermer la corde.<br><br>Comment s'en servir pour fabriquer un <b>angle droit</b> parfait ?`,
       reponse: `On tend la corde en triangle de côtés <span class="big">3, 4 et 5</span> intervalles.<br>3² + 4² = 9 + 16 = 25 = 5², donc d'après la réciproque de Pythagore, le triangle est rectangle.`,
@@ -27,7 +27,7 @@ const problemes: ProblemesNotion = {
   </svg>`,
     },
     {
-      tag: "Problème 2 · Le chemin de l’école",
+      tag: "Énigme 2 · Le chemin de l’école",
       titre: "Le raccourci",
       question: `Pour aller au collège, Léa marche <b>300 m vers l'est</b>, puis <b>400 m vers le nord</b>.<br><br>Un jour, elle coupe à travers le parc, en ligne droite. <b>Combien de mètres</b> économise-t-elle ?`,
       reponse: `Le raccourci est l'hypoténuse : 300² + 400² = 90 000 + 160 000 = 250 000, et √250 000 = 500 m.<br>Elle marche 500 m au lieu de 700 m : elle économise <span class="big">200 m</span>.`,
@@ -47,7 +47,7 @@ const problemes: ProblemesNotion = {
   </svg>`,
     },
     {
-      tag: "Problème 3 · Sauvetage",
+      tag: "Énigme 3 · Sauvetage",
       titre: "Le chat dans l’arbre",
       question: `Un chat est coincé en haut d'un arbre. Les pompiers posent une <b>échelle de 13 m</b>, dont le pied est à <b>5 m de l'arbre</b>.<br><br>À <b>quelle hauteur</b> est le chat, si l'échelle touche juste le haut de l'arbre ?`,
       reponse: `L'échelle est l'hypoténuse : 13² = 5² + h², donc h² = 169 − 25 = 144.<br>h = √144 = <span class="big">12 m</span>.`,
@@ -66,7 +66,7 @@ const problemes: ProblemesNotion = {
   </svg>`,
     },
     {
-      tag: "Problème 4 · Compte les carreaux",
+      tag: "Énigme 4 · Compte les carreaux",
       titre: "Le puzzle des carrés",
       question: `Sur chaque côté du triangle rectangle, on a dessiné un carré.<br><br>Compte les petits carreaux dans le <b style="color:#1d4ed8">carré bleu</b>, puis dans le <b style="color:#d97706">carré jaune</b>, puis dans le <b style="color:#be123c">carré rose</b>. <b>Que remarques-tu ?</b>`,
       reponse: `Bleu : 9 carreaux. Jaune : 16 carreaux. Rose : 25 carreaux.<br><span class="big">9 + 16 = 25</span> : l'aire du grand carré est la somme des deux autres. C'est exactement le théorème de Pythagore !`,
@@ -83,7 +83,7 @@ const problemes: ProblemesNotion = {
   </svg>`,
     },
     {
-      tag: "Problème 5 · Attention au piège",
+      tag: "Énigme 5 · Attention au piège",
       titre: "Il a l’air droit…",
       sorte: "piege",
       question: `Ce triangle a pour côtés <b>6 cm</b>, <b>8 cm</b> et <b>11 cm</b>. Sur le dessin, il a l'air rectangle.<br><br><b>Est-il vraiment rectangle ?</b>`,
@@ -100,7 +100,7 @@ const problemes: ProblemesNotion = {
   </svg>`,
     },
     {
-      tag: "Problème 6 · Le défi des curieux",
+      tag: "Énigme 6 · Le défi des curieux",
       titre: "La diagonale du carré",
       sorte: "defi",
       question: `Un carré a des côtés de <b>1 m</b>.<br><br>Combien mesure sa <b>diagonale</b> ? Et peux-tu écrire ce nombre <b>exactement</b> avec des chiffres après la virgule ?`,

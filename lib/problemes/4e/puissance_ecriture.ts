@@ -1,15 +1,15 @@
-// Problèmes à projeter — 4e, notion puissance_ecriture. Migrées le 19/11/2026
+// Énigmes à projeter — 4e, notion puissance_ecriture. Migrées le 19/11/2026
 // depuis public/enigmes/puissances-4e.html (fond blanc, lignes d'écriture).
 import type { ProblemesNotion } from "../types";
 
 const problemes: ProblemesNotion = {
   classe: "4e",
   notionId: "puissance_ecriture",
-  titre: "Problèmes sur les puissances",
+  titre: "Énigmes sur les puissances",
   description: "Échiquier, vidéo partagée, (−2)⁴ et −2⁴, fourmi, lumière du Soleil, ranger 2¹⁰ 10³ 3⁶.",
   problemes: [
     {
-      tag: "Problème 1 · Une vieille légende",
+      tag: "Énigme 1 · Une vieille légende",
       titre: "Les grains de l’échiquier",
       question: `Un roi offre une récompense : <b>1 grain de riz</b> sur la 1<sup>re</sup> case, <b>2</b> sur la 2<sup>e</sup>, <b>4</b> sur la 3<sup>e</sup>… À chaque case, on <b>double</b>.<br><br>Combien de grains sur la <b>10<sup>e</sup> case</b> ? Écris-le avec une <b>puissance de 2</b>.`,
       reponse: `Case 1 : 2⁰ = 1. Case 2 : 2¹ = 2. Case 3 : 2² = 4… L'exposant a toujours 1 de moins que le numéro de la case.<br>Case 10 : <span class="big">2⁹ = 512 grains</span>.`,
@@ -22,7 +22,7 @@ const problemes: ProblemesNotion = {
   </svg>`,
     },
     {
-      tag: "Problème 2 · Sur les téléphones",
+      tag: "Énigme 2 · Sur les téléphones",
       titre: "La vidéo qui se partage",
       question: `Lundi, tu envoies une vidéo à <b>3 amis</b>. Le lendemain, chacun l'envoie à <b>3 nouveaux amis</b>. Et ainsi de suite, chaque jour.<br><br>Combien de personnes la <b>reçoivent le jeudi</b> ?`,
       reponse: `Lundi : 3. Mardi : 3 × 3 = 9. Mercredi : 3 × 3 × 3 = 27. Jeudi : 3 × 3 × 3 × 3.<br>Jeudi : <span class="big">3⁴ = 81 personnes</span>.`,
@@ -39,7 +39,7 @@ const problemes: ProblemesNotion = {
   </svg>`,
     },
     {
-      tag: "Problème 3 · Attention au piège",
+      tag: "Énigme 3 · Attention au piège",
       titre: "Les faux jumeaux",
       sorte: "piege",
       question: `Voici deux écritures : <b>(−2)⁴</b> et <b>−2⁴</b>. Elles se ressemblent beaucoup.<br><br><b>Sont-elles égales ?</b>`,
@@ -53,7 +53,7 @@ const problemes: ProblemesNotion = {
   </svg>`,
     },
     {
-      tag: "Problème 4 · Tout petit",
+      tag: "Énigme 4 · Tout petit",
       titre: "La fourmi",
       question: `Une fourmi mesure <b>3 × 10⁻³ m</b>.<br><br>Combien mesure-t-elle en <b>millimètres</b> ?`,
       reponse: `10⁻³ = 0,001. Donc 3 × 10⁻³ m = 0,003 m.<br>1 m = 1 000 mm, donc la fourmi mesure <span class="big">3 mm</span>.<br>Un exposant négatif ne donne pas un nombre négatif : il donne un nombre <b>très petit</b>.`,
@@ -73,7 +73,7 @@ const problemes: ProblemesNotion = {
   </svg>`,
     },
     {
-      tag: "Problème 5 · Dans l’espace",
+      tag: "Énigme 5 · Dans l’espace",
       titre: "La lumière du Soleil",
       question: `La lumière va à <b>3 × 10⁵ km par seconde</b>. Celle du Soleil met environ <b>500 secondes</b> pour arriver jusqu'à nous.<br><br>À quelle <b>distance</b> est le Soleil ? Donne la réponse en <b>notation scientifique</b>.`,
       reponse: `500 × 3 × 10⁵ = 1 500 × 10⁵ = 1,5 × 10³ × 10⁵.<br>Le Soleil est à environ <span class="big">1,5 × 10⁸ km</span>, soit 150 millions de kilomètres.`,
@@ -93,7 +93,7 @@ const problemes: ProblemesNotion = {
   </svg>`,
     },
     {
-      tag: "Problème 6 · Le défi des curieux",
+      tag: "Énigme 6 · Le défi des curieux",
       titre: "Le plus grand des trois",
       sorte: "defi",
       question: `Voici trois nombres : <b>2¹⁰</b>, <b>10³</b> et <b>3⁶</b>.<br><br>Sans calculatrice, <b>range-les</b> du plus petit au plus grand.`,

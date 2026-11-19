@@ -5,7 +5,10 @@
 // ⭐ LE NOM, 19/11 : d'abord « énigmes » (hub /enigmes-slide puis /enigmes),
 // puis Frédéric : « le mot énigme n'est pas exact » — ce sont des problèmes en
 // contexte, plus un piège et un défi. Nom provisoire « Problèmes à projeter »,
-// sous-titre « questions flash, avec un minuteur ». /enigmes et /enigmes-slide
+// puis le même jour Frédéric : « remplace le mot problème à projeter par
+// Énigmes à projeter ». NOM AFFICHÉ : « Énigmes à projeter » ; l'adresse et le
+// code restent /problemes et lib/problemes. Sous-titre « questions flash, avec
+// un minuteur ». /enigmes et /enigmes-slide
 // redirigent ici. Pour Google, titres et descriptions reprennent les mots que
 // les profs cherchent : questions flash, problème du jour, défi maths,
 // diaporama à projeter.
@@ -22,9 +25,9 @@ import { PROGRAMME_CLASSES, listerToutesLesNotions } from "@/lib/programme";
 import { problemesHref, listerProblemes } from "@/lib/problemes/registre";
 
 export const metadata: Metadata = {
-  title: "Problèmes de maths à projeter en classe, du CP à la terminale : questions flash, défis, problème du jour",
+  title: "Énigmes de maths à projeter en classe, du CP à la terminale : questions flash, défis, problème du jour",
   description:
-    "Un diaporama à projeter pour chaque notion de maths, du CP à la terminale : six problèmes en contexte, dont un piège et un défi, avec dessin, minuteur de questions flash et correction expliquée. Fond ardoise ou blanc, lignes pour écrire au feutre.",
+    "Un diaporama à projeter pour chaque notion de maths, du CP à la terminale : six énigmes en contexte, dont un piège et un défi, avec dessin, minuteur de questions flash et correction expliquée. Fond ardoise ou blanc, lignes pour écrire au feutre.",
   alternates: { canonical: "https://www.eleveai.fr/problemes" },
 };
 
@@ -55,12 +58,12 @@ export default function Page() {
           <div className="flex-1">
             <p className="text-sm font-black uppercase tracking-widest text-emerald-700">En classe avec EleveAI</p>
             <h1 className="mt-2 text-4xl font-black leading-tight sm:text-6xl">
-              🧩 Problèmes <span className="text-amber-500">à projeter</span>
+              🧩 Énigmes <span className="text-amber-500">à projeter</span>
             </h1>
-            {/* 19/11, Frédéric : « problème à projeter et en dessous questions flash avec un minuteur ». */}
+            {/* 19/11, Frédéric : « énigme à projeter et en dessous questions flash avec un minuteur ». */}
             <p className="mt-2 text-2xl font-black text-sky-700 sm:text-3xl">⏱ et questions flash, avec un minuteur</p>
             <p className="mt-4 max-w-2xl text-lg font-semibold leading-relaxed text-slate-700">
-              Six problèmes par notion, un par écran, avec un dessin. On projette, la classe cherche,
+              Six énigmes par notion, une par écran, avec un dessin. On projette, la classe cherche,
               on écrit au feutre, puis on montre la réponse expliquée.
             </p>
             <ul className="mt-4 flex flex-wrap gap-2 text-sm font-bold text-slate-700">
@@ -74,7 +77,7 @@ export default function Page() {
           <div className="relative shrink-0">
             <div className="grid h-44 w-56 place-items-center rounded-xl bg-[#2f3d3a] p-4 text-center shadow-xl ring-8 ring-[#6b4f2a]">
               <p className="font-black leading-snug text-amber-200">
-                Problème 5 · Attention au piège
+                Énigme 5 · Attention au piège
                 <span className="mt-2 block text-2xl text-white">1/8 &gt; 1/4&nbsp;?</span>
               </p>
             </div>
@@ -142,7 +145,7 @@ export default function Page() {
                           </span>
                           <span>
                             <span className="block text-slate-900">{n.label}</span>
-                            <span className="block text-sm font-black text-emerald-700">6 problèmes · projeter →</span>
+                            <span className="block text-sm font-black text-emerald-700">6 énigmes · projeter →</span>
                           </span>
                         </Link>
                       ) : (
@@ -165,7 +168,7 @@ export default function Page() {
         })}
 
         <p className="mt-14 text-center text-sm font-semibold text-slate-500">
-          Une idée de problème, une erreur dans un calcul&nbsp;? Écrivez-nous depuis la page{" "}
+          Une idée d&apos;énigme, une erreur dans un calcul&nbsp;? Écrivez-nous depuis la page{" "}
           <Link href="/contact" className="font-bold text-emerald-700 underline">contact</Link>.
         </p>
       </div>

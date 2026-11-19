@@ -15,14 +15,14 @@ export default function LongueursSixiemePage() {
   return (
     <>
       <FicheCoursClient fiche={ficheLongueurs6e} slides={slidesLongueurs6e} />
-      {/* 19/11/2026 (Frédéric) : les 6 problèmes au tableau noir, à projeter
+      {/* 19/11/2026 (Frédéric) : les 6 énigmes au tableau noir, à projeter
           (données lib/problemes/6e/aire_longueur.ts). */}
       <p className="mx-auto mb-10 max-w-3xl px-4 text-center print:hidden">
         <a
           href="/problemes/6e/aire-longueur"
           className="inline-block rounded-full bg-emerald-800 px-6 py-3 font-black text-white hover:bg-emerald-900"
         >
-          🧩 Projeter les 6 problèmes sur les longueurs
+          🧩 Projeter les 6 énigmes sur les longueurs
         </a>
       </p>
     </>
