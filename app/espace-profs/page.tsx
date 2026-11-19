@@ -146,7 +146,7 @@ export default function EnseignantsPage() {
               href="/problemes"
               className="ml-2 mt-2 inline-flex items-center gap-2 rounded-2xl bg-emerald-50 px-5 py-3 text-base font-black text-emerald-900 ring-2 ring-emerald-300 transition hover:bg-emerald-100"
             >
-              🧩 Problèmes à projeter au tableau →
+              🧩 Énigmes à projeter au tableau →
             </Link>
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">

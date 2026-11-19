@@ -491,7 +491,7 @@ export default function DashboardProfClient() {
                 </Link>
                 {/* 19/11 : le hub des problèmes à projeter au tableau. */}
                 <Link href="/problemes" className="rounded-2xl bg-emerald-100 px-4 py-2 text-emerald-900 ring-1 ring-emerald-300 hover:brightness-95">
-                  🧩 Projeter les problèmes
+                  🧩 Projeter les énigmes
                 </Link>
               </div>
             </div>

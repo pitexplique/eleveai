@@ -203,7 +203,7 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
             className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-slate-200 hover:ring-violet-400"
           >
             <Puzzle className="h-4 w-4 text-violet-700" aria-hidden="true" />
-            Problèmes à projeter
+            Énigmes à projeter
           </Link>
           <Link
             href="/seances"
