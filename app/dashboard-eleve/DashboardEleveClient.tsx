@@ -11,6 +11,8 @@ import CarteAvatar from "./CarteAvatar";
 import CartePseudo from "./CartePseudo";
 import BulletinDashboard from "@/components/bulletin/BulletinDashboard";
 import CarteCodeParent from "./CarteCodeParent";
+import CarteSuiviGratuit from "./CarteSuiviGratuit";
+import type { ResumeGratuit } from "@/lib/suivi/resumeGratuit";
 import CarteMaLigneBulletin from "./CarteMaLigneBulletin";
 import type { Bulletin } from "@/lib/bulletin/types";
 import { prenomFromNom } from "@/lib/prenom";
@@ -198,6 +200,10 @@ export default function DashboardEleveClient() {
   const [bulletin, setBulletin] = useState<Bulletin | null>(null);
   const [mesNotions, setMesNotions] = useState<NotionCompris[] | null>(null);
   const [titresNotions, setTitresNotions] = useState<Record<string, string>>({});
+  // 19/11/2026 : compte gratuit (tableau de bord minimum, progression floutée).
+  const [resumeGratuit, setResumeGratuit] = useState<ResumeGratuit | null>(null);
+  const [compteGratuit, setCompteGratuit] = useState(false);
+  const [nbNotionsFloutees, setNbNotionsFloutees] = useState<number | null>(null);
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -241,6 +247,8 @@ export default function DashboardEleveClient() {
         }
 
         const r = data.resultats ?? {};
+        setCompteGratuit(data.formule === "gratuit");
+        setResumeGratuit((data.resumeGratuit ?? null) as ResumeGratuit | null);
 
         // Toutes matières confondues, triées par date : resultatsParcours[0]
         // est bien le dernier parcours, quelle que soit la matière.
@@ -308,6 +316,10 @@ export default function DashboardEleveClient() {
       .then((r) => r.json())
       .then((d) => {
         setMesNotions(d?.ok ? (d.notions as NotionCompris[]) : []);
+        if (d?.floute) {
+          setCompteGratuit(true);
+          setNbNotionsFloutees(typeof d.nbNotions === "number" ? d.nbNotions : null);
+        }
         if (d?.ok && d.titres) setTitresNotions(d.titres as Record<string, string>);
       })
       .catch(() => setMesNotions([]));
@@ -453,7 +465,11 @@ export default function DashboardEleveClient() {
         {/* Sa ligne du bulletin de la classe, comme la voit son prof (17/11). */}
         <CarteMaLigneBulletin />
 
-        <CarteMesNotions notions={mesNotions} />
+        {compteGratuit ? (
+          <CarteSuiviGratuit resume={resumeGratuit} nbNotions={nbNotionsFloutees} />
+        ) : (
+          <CarteMesNotions notions={mesNotions} />
+        )}
 
         <CartePseudo />
         <CarteAvatar />

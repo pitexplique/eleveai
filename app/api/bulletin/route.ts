@@ -9,6 +9,7 @@ import { createClient } from "@supabase/supabase-js";
 import { verifySessionToken } from "@/lib/server/session";
 import { computeBulletin } from "@/lib/bulletin/computeBulletin";
 import type { Bulletin } from "@/lib/bulletin/types";
+import { tableauDeBordLimite } from "@/lib/server/droitsSuivi";
 
 export const dynamic = "force-dynamic";
 
@@ -27,6 +28,11 @@ export async function GET(req: Request) {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!
   );
+
+  // ⭐ 19/11/2026 — COMPTE GRATUIT : le bulletin complet fait partie du Suivi.
+  if (await tableauDeBordLimite(supabase, session)) {
+    return NextResponse.json({ ok: true, bulletin: null, floute: true });
+  }
 
   // LA CLASSE SE RELIT EN BASE, JAMAIS DANS LE JETON (12/08/2026).
   //

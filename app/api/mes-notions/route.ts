@@ -8,6 +8,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { verifySessionToken } from "@/lib/server/session";
 import { getMicroLabelMap, getNotionMicroMap, notionLabel } from "@/lib/tutor-v4/catalog";
+import { tableauDeBordLimite } from "@/lib/server/droitsSuivi";
 
 export const dynamic = "force-dynamic";
 
@@ -99,6 +100,13 @@ export async function GET(req: Request) {
       };
     })
     .filter((n) => n.micros.length > 0);
+
+  // ⭐ 19/11/2026 — COMPTE GRATUIT : la progression par chapitre est floutée.
+  // ⛔ Le vrai détail n'est pas envoyé : seulement le nombre de notions, pour
+  //    dessiner l'aperçu flou. Les titres restent (tuile « Dernier Coach »).
+  if (await tableauDeBordLimite(admin, session)) {
+    return NextResponse.json({ ok: true, notions: [], titres, floute: true, nbNotions: resultat.length });
+  }
 
   return NextResponse.json({ ok: true, notions: resultat, titres });
 }

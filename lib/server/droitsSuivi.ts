@@ -13,6 +13,7 @@
 import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { estAdresseAcademique, QUOTAS_IA, SUIVI } from "@/lib/tarifs";
+import { VENTE } from "@/lib/legal/editeur";
 import { accesEnCours, lireAbonnement } from "./abonnement";
 import { ETABLISSEMENT_INDEPENDANT } from "./session";
 
@@ -82,4 +83,31 @@ export function questionsIAParJour(d: Droits, maintenant: Date = new Date()): nu
     if (age >= 0 && age < b.jours * 86400000) return Math.max(b.questionsParJour, QUOTAS_IA.gratuitParJour);
   }
   return QUOTAS_IA.gratuitParJour;
+}
+
+/**
+ * ⭐ LES LIMITES DU COMPTE GRATUIT (tableau de bord minimum, 7 jours, flou)
+ * n'agissent que quand la vente est ouverte, ou en essai : `MODELE_SUIVI_TEST=1`
+ * (variable serveur, à mettre seulement en local ou sur une préversion).
+ * ⛔ Avant, aucun élève ne perd ce qu'il voit aujourd'hui pour une offre fermée.
+ */
+export function limitesGratuitActives(): boolean {
+  return VENTE.ouverte || process.env.MODELE_SUIVI_TEST === "1";
+}
+
+/**
+ * Le tableau de bord de cette session est-il limité ?
+ * ⛔ Seulement un compte courriel (INDEPENDANT) d'élève sans Suivi. Un élève de
+ *    classe garde son tableau de bord : son prof le suit (classe offerte), et
+ *    aucun bouton de vente ne doit apparaître dans un compte d'établissement.
+ */
+export async function tableauDeBordLimite(
+  admin: SupabaseClient,
+  session: { code_etablissement: string; code_utilisateur: string; type_utilisateur?: string | null },
+): Promise<boolean> {
+  if (!limitesGratuitActives()) return false;
+  if (session.code_etablissement !== ETABLISSEMENT_INDEPENDANT) return false;
+  if (session.type_utilisateur === "prof" || session.type_utilisateur === "principal") return false;
+  const d = await droitsDeLEleve(admin, session.code_etablissement, session.code_utilisateur);
+  return d.formule === "gratuit";
 }

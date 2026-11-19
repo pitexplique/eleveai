@@ -21,6 +21,9 @@ import {
 import { calculerPointsAvis } from "@/lib/points/feedbackPoints";
 import { pointsSignalementsDe } from "@/lib/points/signalementPoints";
 import { estProbablementIA } from "@/lib/detection-ia";
+import { tableauDeBordLimite } from "@/lib/server/droitsSuivi";
+import { derniersJours, resumeGratuit, type LigneResultat } from "@/lib/suivi/resumeGratuit";
+import { COMPTE_GRATUIT } from "@/lib/tarifs";
 
 // Colonnes par table : détaillées (dashboard élève, avec details) et
 // synthétiques (dashboards prof/principal, sans details — trop lourd à
@@ -171,29 +174,48 @@ export async function GET(req: Request) {
     );
   }
 
+  const resultats = {
+    parcours_maths: parcoursMathsRes.data ?? [],
+    parcours_english: parcoursEnglishRes.error
+      ? []
+      : parcoursEnglishRes.data ?? [],
+    parcours_espagnol: parcoursEspagnolRes.error
+      ? []
+      : parcoursEspagnolRes.data ?? [],
+    parcours_francais: parcoursFrancaisRes.error
+      ? []
+      : parcoursFrancaisRes.data ?? [],
+    calcul_rapide: calculRes.data ?? [],
+    defis_jour: defisRes.data ?? [],
+    english_maths: englishRes.data ?? [],
+    dictee: dicteeRes.error ? [] : dicteeRes.data ?? [],
+    // Table optionnelle (créée séparément) : une erreur ne bloque pas le dashboard.
+    langue_du_jour: langueRes.error ? [] : langueRes.data ?? [],
+    tutor: tutorRes.data ?? [],
+  } as Record<string, unknown[]>;
+
+  // ⭐ 19/11/2026 — COMPTE GRATUIT : le tableau de bord minimum (3 chiffres,
+  // calculés sur tout l'historique) et seulement les 7 derniers jours.
+  // ⛔ Côté serveur : l'ancien n'est pas envoyé, mais il reste en base — il
+  //    revient entier le jour où le Suivi est pris.
+  let limite = false;
+  let resume = null;
+  if (!etabScope && (await tableauDeBordLimite(supabaseAdmin, session))) {
+    limite = true;
+    resume = resumeGratuit(Object.values(resultats).flat() as LigneResultat[]);
+    for (const cle of Object.keys(resultats)) {
+      resultats[cle] = derniersJours(resultats[cle] as { created_at: string }[], COMPTE_GRATUIT.historiqueJours);
+    }
+  }
+
   return NextResponse.json({
     ok: true,
     role: session.type_utilisateur,
     comptes: comptesRes.data ?? [],
     pointsAvis,
-    resultats: {
-      parcours_maths: parcoursMathsRes.data ?? [],
-      parcours_english: parcoursEnglishRes.error
-        ? []
-        : parcoursEnglishRes.data ?? [],
-      parcours_espagnol: parcoursEspagnolRes.error
-        ? []
-        : parcoursEspagnolRes.data ?? [],
-      parcours_francais: parcoursFrancaisRes.error
-        ? []
-        : parcoursFrancaisRes.data ?? [],
-      calcul_rapide: calculRes.data ?? [],
-      defis_jour: defisRes.data ?? [],
-      english_maths: englishRes.data ?? [],
-      dictee: dicteeRes.error ? [] : dicteeRes.data ?? [],
-      // Table optionnelle (créée séparément) : une erreur ne bloque pas le dashboard.
-      langue_du_jour: langueRes.error ? [] : langueRes.data ?? [],
-      tutor: tutorRes.data ?? [],
-    },
+    formule: limite ? "gratuit" : "complet",
+    historiqueJours: limite ? COMPTE_GRATUIT.historiqueJours : null,
+    resumeGratuit: resume,
+    resultats,
   });
 }
