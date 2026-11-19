@@ -46,7 +46,6 @@ import {
   Puzzle,
   Save,
   Target,
-  Timer,
   Users,
   Zap,
 } from "lucide-react";
@@ -109,7 +108,7 @@ const ACCES_DIRECTS = [
   { href: "/video", label: "Vidéos", Icone: PlayCircle, couleur: "text-rose-600" },
   // 19/11/2026, Frédéric : « rajoute à côté de vidéo, calcul rapide, énigme ».
   { href: "/enigmes-maths", label: "Énigmes", Icone: Puzzle, couleur: "text-violet-700" },
-  { href: "/calcul-rapide", label: "Calcul rapide", Icone: Timer, couleur: "text-orange-600" },
+  // 19/11/2026, Frédéric : « enlève calcul rapide » (la page /calcul-rapide reste).
 ];
 
 const ETAPES = [
