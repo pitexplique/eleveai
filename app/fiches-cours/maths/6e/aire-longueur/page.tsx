@@ -19,7 +19,7 @@ export default function LongueursSixiemePage() {
           (données lib/problemes/6e/aire_longueur.ts). */}
       <p className="mx-auto mb-10 max-w-3xl px-4 text-center print:hidden">
         <a
-          href="/enigmes-mathematiques/6e/aire-longueur"
+          href="/enigmes-maths/6e/aire-longueur"
           className="inline-block rounded-full bg-emerald-800 px-6 py-3 font-black text-white hover:bg-emerald-900"
         >
           🧩 Projeter les 6 énigmes sur les longueurs

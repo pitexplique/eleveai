@@ -34,5 +34,5 @@ export function getProblemes(classe: string, notion: string): ProblemesNotion | 
 
 /** L'adresse de projection d'une notion, ou null si ses problèmes n'existent pas. */
 export function problemesHref(classe: string, notionId: string): string | null {
-  return getProblemes(classe, notionId) ? `/enigmes-mathematiques/${classe}/${notionId.replace(/_/g, "-")}` : null;
+  return getProblemes(classe, notionId) ? `/enigmes-maths/${classe}/${notionId.replace(/_/g, "-")}` : null;
 }

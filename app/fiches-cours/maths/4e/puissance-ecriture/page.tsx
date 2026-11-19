@@ -25,7 +25,7 @@ export default function PuissancesQuatriemePage() {
           (données lib/problemes/4e/puissance_ecriture.ts). */}
       <p className="mx-auto mb-10 max-w-3xl px-4 text-center print:hidden">
         <a
-          href="/enigmes-mathematiques/4e/puissance-ecriture"
+          href="/enigmes-maths/4e/puissance-ecriture"
           className="inline-block rounded-full bg-emerald-800 px-6 py-3 font-black text-white hover:bg-emerald-900"
         >
           🧩 Projeter les 6 énigmes sur les puissances

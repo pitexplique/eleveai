@@ -1,4 +1,4 @@
-// /enigmes-mathematiques/<classe>/<notion-slug> — les 6 problèmes d'une notion, à projeter.
+// /enigmes-maths/<classe>/<notion-slug> — les 6 problèmes d'une notion, à projeter.
 // Données : lib/problemes/<classe>/<notionId>.ts, via lib/problemes/registre.ts.
 // Sans l'habillage du site (components/MasqueSurEmbed.tsx) : c'est un écran
 // de classe, plein écran.
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return {
     title: `${sujet} ${niveau} : 6 énigmes à projeter en classe (défis et questions flash corrigés)`,
     description: `Diaporama à projeter, ${niveau} : ${data.description} Six énigmes en contexte, comme un problème du jour, avec un piège et un défi maths, avec minuteur et correction expliquée.`,
-    alternates: { canonical: `/enigmes-mathematiques/${classe}/${notion}` },
+    alternates: { canonical: `/enigmes-maths/${classe}/${notion}` },
   };
 }
 
@@ -42,7 +42,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   return (
     <ProjectionProblemes
       data={data}
-      retourHref={`/enigmes-mathematiques#${data.classe}`}
+      retourHref={`/enigmes-maths#${data.classe}`}
       fonts={`${kalam.variable} ${atkinson.variable}`}
     />
   );

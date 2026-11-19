@@ -22,7 +22,7 @@ export default function PythagoreQuatriemePage() {
           (données lib/problemes/4e/pythagore_theoreme.ts). */}
       <p className="mx-auto mb-10 max-w-3xl px-4 text-center print:hidden">
         <a
-          href="/enigmes-mathematiques/4e/pythagore-theoreme"
+          href="/enigmes-maths/4e/pythagore-theoreme"
           className="inline-block rounded-full bg-emerald-800 px-6 py-3 font-black text-white hover:bg-emerald-900"
         >
           🧩 Projeter les 6 énigmes de Pythagore

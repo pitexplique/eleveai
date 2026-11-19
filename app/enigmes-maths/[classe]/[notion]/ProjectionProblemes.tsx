@@ -1,7 +1,7 @@
 "use client";
 
 // LA PAGE DE PROJECTION DES ÉNIGMES (19/11/2026, nom affiché « Énigmes à
-// projeter », code et adresse /enigmes-mathematiques) — une énigme par écran,
+// projeter », code et adresse /enigmes-maths) — une énigme par écran,
 // dessin à côté de la question, flèches pour changer, Espace pour la réponse.
 // ⭐ Fond ARDOISE par défaut (Frédéric, 19/11 : « mets en fond ardoise, car
 // dans les classes il y a un pb de lumière ») ; le fond BLANC reste au choix

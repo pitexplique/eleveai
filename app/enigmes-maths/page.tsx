@@ -1,4 +1,4 @@
-// /enigmes-mathematiques — LE HUB DES PROBLÈMES À PROJETER (19/11/2026, Frédéric : « et
+// /enigmes-maths — LE HUB DES PROBLÈMES À PROJETER (19/11/2026, Frédéric : « et
 // crée un hub enigmes-slide »). Toutes les notions de maths du CP à la
 // terminale, classe par classe, et pour chacune : ses 6 problèmes s'ils sont
 // faits (lien de projection), sinon « bientôt ».
@@ -7,8 +7,9 @@
 // contexte, plus un piège et un défi. Nom provisoire « Problèmes à projeter »,
 // puis le même jour Frédéric : « remplace le mot problème à projeter par
 // Énigmes à projeter ». NOM AFFICHÉ : « Énigmes à projeter ». ADRESSE choisie
-// par Frédéric : « enigmes-mathématiques » → /enigmes-mathematiques (sans
-// accent) ; /problemes, /enigmes et /enigmes-slide y redirigent. Le code reste lib/problemes. Sous-titre « questions flash, avec
+// par Frédéric : « enigmes-mathématiques », puis « ou enigme-maths » → on
+// retient /enigmes-maths (court, pluriel) ; /enigmes-mathematiques, /problemes,
+// /enigmes et /enigmes-slide y redirigent. Le code reste lib/problemes. Sous-titre « questions flash, avec
 // un minuteur ». /enigmes et /enigmes-slide
 // redirigent ici. Pour Google, titres et descriptions reprennent les mots que
 // les profs cherchent : questions flash, problème du jour, défi maths,

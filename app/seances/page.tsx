@@ -303,8 +303,8 @@ const VOIT_LE_PROF = [
 const OUTILS = [
   { titre: "Créer ma classe", href: "/prof/classes", principal: true },
   { titre: "Les cartes mentales", href: "/cartes-mentales" },
-  // 19/11 : le hub des énigmes à projeter (adresse /enigmes-mathematiques).
-  { titre: "Les énigmes à projeter", href: "/enigmes-mathematiques" },
+  // 19/11 : le hub des énigmes à projeter (adresse /enigmes-maths).
+  { titre: "Les énigmes à projeter", href: "/enigmes-maths" },
   { titre: "Le coach", href: "/coach/serie" },
   { titre: "Les exercices interactifs", href: "/fiches-exercices" },
   { titre: "Les vidéos", href: "/video" },

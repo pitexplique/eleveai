@@ -1,7 +1,7 @@
 // PROBLÈMES À PROJETER (19/11/2026, Frédéric : « fais-le du CP à la terminale,
 // sur chaque notion »). UN SEUL MODÈLE : chaque notion du coach a son fichier
 // de données, `lib/problemes/<classe>/<notionId>.ts`, rendu par UNE seule page,
-// `/enigmes-mathematiques/<classe>/<notion-slug>`. Le hub `/enigmes-mathematiques` les liste tous.
+// `/enigmes-maths/<classe>/<notion-slug>`. Le hub `/enigmes-maths` les liste tous.
 //
 // ⛔ Règles d'écriture (voir aussi lib/problemes/REGLES.md) :
 //  - 6 problèmes par notion, dont UNE « piège » et UNE « défi des curieux » ;

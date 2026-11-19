@@ -41,18 +41,20 @@ const nextConfig = {
       // ─── 19/11/2026 — LES ÉNIGMES À PROJETER ONT UN SEUL MODÈLE ─────────────
       // Les trois premières pages HTML seules (public/enigmes/*.html) sont
       // devenues des données (lib/problemes/) rendues par
-      // /enigmes-mathematiques/<classe>/<notion>. Le même jour, l'adresse a été
-      // /enigmes-slide, /enigmes, /problemes, avant que Frédéric ne choisisse
-      // « enigmes-mathématiques » (sans accent dans l'URL). Toutes les
-      // anciennes adresses mènent au bon endroit, en 308.
-      { source: "/enigmes/pythagore-4e.html", destination: "/enigmes-mathematiques/4e/pythagore-theoreme", permanent: true },
-      { source: "/enigmes/puissances-4e.html", destination: "/enigmes-mathematiques/4e/puissance-ecriture", permanent: true },
-      { source: "/enigmes/longueurs-6e.html", destination: "/enigmes-mathematiques/6e/aire-longueur", permanent: true },
-      { source: "/enigmes-slide", destination: "/enigmes-mathematiques", permanent: true },
-      { source: "/enigmes", destination: "/enigmes-mathematiques", permanent: true },
-      { source: "/enigmes/:classe/:notion", destination: "/enigmes-mathematiques/:classe/:notion", permanent: true },
-      { source: "/problemes", destination: "/enigmes-mathematiques", permanent: true },
-      { source: "/problemes/:classe/:notion", destination: "/enigmes-mathematiques/:classe/:notion", permanent: true },
+      // /enigmes-maths/<classe>/<notion>. Le même jour, l'adresse a été
+      // /enigmes-slide, /enigmes, /problemes, /enigmes-mathematiques, avant que
+      // Frédéric ne retienne « enigme-maths » → /enigmes-maths (court, pluriel).
+      // Toutes les anciennes adresses mènent au bon endroit, en 308.
+      { source: "/enigmes/pythagore-4e.html", destination: "/enigmes-maths/4e/pythagore-theoreme", permanent: true },
+      { source: "/enigmes/puissances-4e.html", destination: "/enigmes-maths/4e/puissance-ecriture", permanent: true },
+      { source: "/enigmes/longueurs-6e.html", destination: "/enigmes-maths/6e/aire-longueur", permanent: true },
+      { source: "/enigmes-slide", destination: "/enigmes-maths", permanent: true },
+      { source: "/enigmes", destination: "/enigmes-maths", permanent: true },
+      { source: "/enigmes/:classe/:notion", destination: "/enigmes-maths/:classe/:notion", permanent: true },
+      { source: "/problemes", destination: "/enigmes-maths", permanent: true },
+      { source: "/problemes/:classe/:notion", destination: "/enigmes-maths/:classe/:notion", permanent: true },
+      { source: "/enigmes-mathematiques", destination: "/enigmes-maths", permanent: true },
+      { source: "/enigmes-mathematiques/:classe/:notion", destination: "/enigmes-maths/:classe/:notion", permanent: true },
       // ─── 23/09/2026 — « TUTOR V4 » DISPARAÎT DE CE QUE L'ÉLÈVE VOIT ────────
       // Frédéric a tranché le nom : un seul mot, « le coach », de la liste
       // jusqu'à la question. `/tutor-v4` cumulait trois défauts — de l'anglais

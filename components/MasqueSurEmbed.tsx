@@ -21,10 +21,10 @@ import { usePathname } from "next/navigation";
 // que le document essaie d'établir — et il partirait sur le papier.
 // 27/10/2026 : /prof/cartes rejoint la liste — les cartes de connexion des
 // élèves partent sur le papier, sans le menu du site.
-// 19/11/2026 : les problèmes /enigmes-mathematiques/<classe>/<notion> se projettent en plein
-// écran au tableau, sans le menu ; le hub /enigmes-mathematiques lui-même le garde.
+// 19/11/2026 : les problèmes /enigmes-maths/<classe>/<notion> se projettent en plein
+// écran au tableau, sans le menu ; le hub /enigmes-maths lui-même le garde.
 const SANS_HABILLAGE = ["/embed", "/ia", "/devis", "/prof/cartes"];
-const PREFIXES_SANS_HABILLAGE_ENFANTS = ["/enigmes-mathematiques/"];
+const PREFIXES_SANS_HABILLAGE_ENFANTS = ["/enigmes-maths/"];
 
 // Les générateurs d'audit forment une FAMILLE — /audit-commission aujourd'hui,
 // d'autres ensuite. On les masque par préfixe plutôt qu'un par un : sinon le
