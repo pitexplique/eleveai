@@ -149,12 +149,14 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
             « EleveAI simplifie ta vie de prof », « les élèves sont concentrés »,
             « donc je passe une heure tranquille », « et les notes sont
             exportables ». Avant (17/11) : « Une vidéo au tableau, puis chaque
-            élève s'entraîne à son niveau ». ⛔ Toujours sans prix. */}
+            élève s'entraîne à son niveau ». Puis (19/11, « il faut changer » la phrase de
+            l'heure tranquille, « et rajouter qu'il s'entraîne le soir ») : l'énergie
+            gardée pour ceux qui en ont besoin. ⛔ Toujours sans prix. */}
         <p className="mt-1 text-xl font-black leading-snug text-slate-900">
           EleveAI simplifie <span className="whitespace-nowrap">votre vie de prof</span>
         </p>
         <p className="mt-1 text-sm font-bold text-slate-700">
-          Vos élèves s&apos;entraînent à leur niveau et restent concentrés. Vous passez une heure tranquille.
+          Chacun travaille à son niveau, concentré, en classe et le soir. Vous gardez votre énergie pour ceux qui en ont besoin.
         </p>
         <ul className="mt-2 space-y-0.5 text-sm font-bold text-slate-700">
           {[
@@ -170,7 +172,8 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
             // autonomie : tu as les notes », « les notes sont exportables » →
             // le bulletin (/prof/classes/bulletin) : moyennes et appréciations
             // à copier dans Pronote, ou à imprimer.
-            "Le soir, ils s'entraînent seuls : vous avez leurs notes",
+            // 19/11 : le soir est passé dans la phrase du haut (« et rajouter qu'ils s'entraînent le soir »).
+            "Toutes leurs notes, en classe comme à la maison",
             // 19/11, Frédéric : « rajoute pour les profs bulletin et note
             // exportable pour Pronote ». ⚠️ Honnête : le bulletin se COPIE
             // dans Pronote (une ligne ou toute la colonne) ou s'imprime ; ce
