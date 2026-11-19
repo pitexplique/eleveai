@@ -1,10 +1,10 @@
-# Énigmes à projeter : les règles (code et adresse : /problemes) (19/11/2026)
+# Énigmes à projeter : les règles (code et adresse : /enigmes-mathematiques) (19/11/2026)
 
-Hub : `/problemes` (« Énigmes à projeter », sous-titre « questions flash, avec un minuteur »).
-Page : `/problemes/<classe>/<notion-slug>`. Données : `lib/problemes/<classe>/<notionId>.ts`, à déclarer dans `registre.ts`.
+Hub : `/enigmes-mathematiques` (« Énigmes à projeter », sous-titre « questions flash, avec un minuteur »).
+Page : `/enigmes-mathematiques/<classe>/<notion-slug>`. Données : `lib/problemes/<classe>/<notionId>.ts`, à déclarer dans `registre.ts`.
 
 ## Le nom
-- 19/11 : d'abord « énigmes », puis Frédéric : « le mot énigme n'est pas exact » (ce sont des problèmes en contexte, plus un piège et un défi). Nom provisoire « Problèmes à projeter », puis le même jour : « remplace le mot problème à projeter par Énigmes à projeter ». ⛔ NOM AFFICHÉ : « Énigmes à projeter », tags « Énigme 1 · … », boutons « Projeter les énigmes » ; adresse et code inchangés (/problemes, lib/problemes).
+- 19/11 : d'abord « énigmes », puis Frédéric : « le mot énigme n'est pas exact » (ce sont des problèmes en contexte, plus un piège et un défi). Nom provisoire « Problèmes à projeter », puis le même jour : « remplace le mot problème à projeter par Énigmes à projeter ». ⛔ NOM AFFICHÉ : « Énigmes à projeter », tags « Énigme 1 · … », boutons « Projeter les énigmes » ; adresse et code inchangés (/enigmes-mathematiques, lib/problemes).
 - Pour Google : titres et descriptions avec les mots que les profs cherchent (questions flash, problème du jour, défi maths, diaporama à projeter). Schéma : « Théorème de Pythagore 4e : 6 énigmes à projeter en classe (défis et questions flash corrigés) ».
 - Chaque page affiche « eleveai.fr » en haut à gauche, petit mais lisible du fond de la classe.
 
