@@ -170,7 +170,12 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
             // autonomie : tu as les notes », « les notes sont exportables » →
             // le bulletin (/prof/classes/bulletin) : moyennes et appréciations
             // à copier dans Pronote, ou à imprimer.
-            "Le soir, ils s'entraînent seuls : vous avez leurs notes, à copier dans Pronote",
+            "Le soir, ils s'entraînent seuls : vous avez leurs notes",
+            // 19/11, Frédéric : « rajoute pour les profs bulletin et note
+            // exportable pour Pronote ». ⚠️ Honnête : le bulletin se COPIE
+            // dans Pronote (une ligne ou toute la colonne) ou s'imprime ; ce
+            // n'est pas un fichier d'import.
+            "Le bulletin de la classe : notes et appréciations prêtes pour Pronote",
           ].map((t) => (
             <li key={t} className="flex gap-1.5">
               <span aria-hidden="true" className="text-violet-700">✔</span>
