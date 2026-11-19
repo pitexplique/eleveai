@@ -1,29 +1,32 @@
-// LE PLAFOND DES QUESTIONS À L'IA — côté serveur, AVANT tout appel (18/11/2026).
+// LE PLAFOND DES QUESTIONS À L'IA — côté serveur, AVANT tout appel (18/11/2026,
+// refait le 19/11 pour le modèle « contenu offert, on paie le suivi »).
 //
-// Frédéric, 18/11 : « comment je finance Ti Margo qui a un coût ». Réponse :
-// l'IA reste offerte pour apprendre, avec un plafond discret ; la Famille aura un
-// plafond plus haut (branché avec Stripe) ; Ti Margo premium au printemps 2027.
+// Les nombres viennent de lib/tarifs.ts (`QUOTAS_IA`) : 3 par jour pour un compte
+// gratuit, 30 pour le Suivi. ⛔ Rien en dur ici.
 //
 // ⛔ Ne compte QUE les questions posées à l'IA. Les exercices du coach, les
-// vidéos et les fiches ne passent pas par ici : ils restent sans limite.
-// ⛔ Le message de quota ne renvoie JAMAIS vers une offre (le coach sert en classe).
+// vidéos et les fiches ne passent pas par ici : ils restent ouverts sans compte.
+// ⛔ Le message de quota ne renvoie JAMAIS vers une offre ni un prix (le coach
+// sert en classe ; c'est le parent qui paie, pas l'élève).
 //
 // Échec ouvert : si Supabase ou la table `usage_ia` manque (supabase/usage_ia.sql
 // pas encore exécuté), la question passe. On ne casse pas le coach d'un élève
 // pour un compteur.
 
 import { createClient } from "@supabase/supabase-js";
+import { QUOTAS_IA } from "@/lib/tarifs";
+import { droitsDeLEleve, questionsIAParJour, type Formule } from "@/lib/server/droitsSuivi";
 
-/** Questions à l'IA par élève et par jour (heure de La Réunion). */
-export const QUESTIONS_IA_PAR_JOUR = 10;
-/** ⏳ Pour la Famille abonnée : à brancher avec Stripe (samedi 21/11). */
-export const QUESTIONS_IA_PAR_JOUR_FAMILLE = 30;
-/** Pour une adresse IP, sur les routes sans compte (une classe entière partage une IP). */
-export const QUESTIONS_IA_PAR_IP = 300;
-/** Ceinture de sécurité : toutes les questions du site en une journée (~0,1 centime chacune). */
-export const QUESTIONS_IA_TOTAL_PAR_JOUR = 5000;
+/** Gardés pour les anciens imports : ils lisent lib/tarifs.ts. */
+export const QUESTIONS_IA_PAR_JOUR = QUOTAS_IA.gratuitParJour;
+export const QUESTIONS_IA_PAR_JOUR_FAMILLE = QUOTAS_IA.suiviParJour;
+export const QUESTIONS_IA_PAR_IP = QUOTAS_IA.parIP;
+export const QUESTIONS_IA_TOTAL_PAR_JOUR = QUOTAS_IA.totalSiteParJour;
 
-export const MESSAGE_QUOTA_ELEVE = `Tu as posé tes ${QUESTIONS_IA_PAR_JOUR} questions à l'IA aujourd'hui. Reviens demain ! Les exercices et les vidéos, eux, restent ouverts.`;
+export const messageQuotaEleve = (max: number) =>
+  `Tu as posé tes ${max} question${max > 1 ? "s" : ""} à l'IA aujourd'hui. Reviens demain ! Les exercices et les vidéos, eux, restent ouverts.`;
+/** @deprecated Utiliser `messageQuotaEleve(max)`. */
+export const MESSAGE_QUOTA_ELEVE = messageQuotaEleve(QUOTAS_IA.gratuitParJour);
 export const MESSAGE_QUOTA_SITE = "L'IA se repose pour aujourd'hui. Reviens demain ! Les exercices et les vidéos restent ouverts.";
 
 const admin =
@@ -45,28 +48,41 @@ async function compter(cle: string, max: number): Promise<boolean> {
   }
 }
 
-export type Verdict = { ok: true } | { ok: false; message: string };
+export type Verdict =
+  | { ok: true; formule: Formule | "ip"; max: number }
+  | { ok: false; message: string; max: number };
 
 /**
- * À appeler juste avant l'appel à l'IA. `cle` = « eleve:<id> » pour un compte,
- * sinon on compte par adresse IP.
+ * À appeler juste avant l'appel à l'IA.
+ * - Un élève connecté : `cle` = « eleve:<id> » et ses codes ; le plafond dépend
+ *   de ses droits (gratuit 3, Suivi 30).
+ * - Sans compte (routes encore ouvertes) : compté par adresse IP.
  */
 export async function autoriserQuestionIA(
   req: Request,
-  compte?: { cle: string; max?: number },
+  compte?: { cle: string; codeEtablissement?: string; codeUtilisateur?: string; max?: number },
 ): Promise<Verdict> {
+  let formule: Formule | "ip" = "ip";
+  let max: number = QUOTAS_IA.parIP;
   if (compte) {
-    if (!(await compter(compte.cle, compte.max ?? QUESTIONS_IA_PAR_JOUR))) {
-      return { ok: false, message: MESSAGE_QUOTA_ELEVE };
+    formule = "gratuit";
+    max = compte.max ?? QUOTAS_IA.gratuitParJour;
+    if (compte.max === undefined && admin && compte.codeEtablissement && compte.codeUtilisateur) {
+      const droits = await droitsDeLEleve(admin, compte.codeEtablissement, compte.codeUtilisateur);
+      formule = droits.formule;
+      max = questionsIAParJour(droits);
+    }
+    if (!(await compter(compte.cle, max))) {
+      return { ok: false, message: messageQuotaEleve(max), max };
     }
   } else {
     const ip = (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || "inconnue";
-    if (!(await compter(`ip:${ip}`, QUESTIONS_IA_PAR_IP))) {
-      return { ok: false, message: MESSAGE_QUOTA_SITE };
+    if (!(await compter(`ip:${ip}`, max))) {
+      return { ok: false, message: MESSAGE_QUOTA_SITE, max };
     }
   }
-  if (!(await compter("total", QUESTIONS_IA_TOTAL_PAR_JOUR))) {
-    return { ok: false, message: MESSAGE_QUOTA_SITE };
+  if (!(await compter("total", QUOTAS_IA.totalSiteParJour))) {
+    return { ok: false, message: MESSAGE_QUOTA_SITE, max };
   }
-  return { ok: true };
+  return { ok: true, formule, max };
 }

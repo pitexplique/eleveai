@@ -9,6 +9,7 @@
 import { randomInt } from "node:crypto";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { verifySessionToken } from "@/lib/server/session";
+import { FREE_CLASSES_PER_TEACHER, LIMITE_CLASSES_ACTIVE } from "@/lib/tarifs";
 
 export const NIVEAUX_CLASSE = [
   "cp", "ce1", "ce2", "cm1", "cm2",
@@ -176,4 +177,39 @@ export async function classeDuProf(admin: SupabaseClient, profId: string, code: 
     .eq("code_etablissement", code)
     .maybeSingle();
   return data;
+}
+
+
+/**
+ * ⭐ 19/11/2026 — LES CLASSES OFFERTES PAR PROF (`FREE_CLASSES_PER_TEACHER`, lib/tarifs.ts).
+ * ⛔ N'agit que quand la vente est ouverte (`LIMITE_CLASSES_ACTIVE`).
+ * ⛔ Exception : les adresses de `PROFS_SANS_LIMITE_DE_CLASSES` (Vercel, séparées
+ *    par des virgules) — d'abord le compte de Frédéric, qui a des 6e ET des 4e.
+ * ⛔ Le message ne montre ni prix ni lien de vente : les classes supplémentaires
+ *    ne sont pas en vente.
+ */
+export function profSansLimiteDeClasses(email: string | null | undefined): boolean {
+  const e = (email ?? "").trim().toLowerCase();
+  if (!e) return false;
+  return (process.env.PROFS_SANS_LIMITE_DE_CLASSES ?? "")
+    .split(",")
+    .map((x) => x.trim().toLowerCase())
+    .filter(Boolean)
+    .includes(e);
+}
+
+export async function refusNouvelleClasse(
+  admin: SupabaseClient,
+  prof: ProfVerifie
+): Promise<string | null> {
+  if (!LIMITE_CLASSES_ACTIVE || profSansLimiteDeClasses(prof.email)) return null;
+  const { count, error } = await admin
+    .from("classes_prof")
+    .select("id", { count: "exact", head: true })
+    .eq("prof_id", prof.id)
+    .eq("archivee", false);
+  if (error) return null; // On ne bloque pas un prof pour un compteur.
+  if ((count ?? 0) < FREE_CLASSES_PER_TEACHER) return null;
+  const n = FREE_CLASSES_PER_TEACHER;
+  return `Tu as déjà ${n} classe${n > 1 ? "s" : ""} active${n > 1 ? "s" : ""}. Archive une classe pour en créer une autre.`;
 }

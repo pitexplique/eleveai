@@ -82,7 +82,11 @@ export async function POST(req: Request) {
     }
 
     // ⛔ 18/11/2026 : plafond des questions à l'IA, AVANT l'appel (lib/ia/plafond.ts).
-    const verdict = await autoriserQuestionIA(req, { cle: `eleve:${eleve.id}` });
+    const verdict = await autoriserQuestionIA(req, {
+      cle: `eleve:${eleve.id}`,
+      codeEtablissement,
+      codeUtilisateur,
+    });
     if (!verdict.ok) {
       return NextResponse.json({ error: verdict.message, quota: true }, { status: 429 });
     }

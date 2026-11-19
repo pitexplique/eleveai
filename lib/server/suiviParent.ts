@@ -8,8 +8,10 @@ import type { Bulletin } from "@/lib/bulletin/types";
 import { construireRapport, type SeanceCoach } from "@/lib/suivi/calcul";
 import type { RapportEnfant } from "@/lib/suivi/types";
 import { ETABLISSEMENT_INDEPENDANT } from "./session";
+import { SUIVI } from "@/lib/tarifs";
 
-export const ENFANTS_MAX = 6;
+/** 19/11/2026 : un abonnement Suivi couvre 3 enfants au plus (lib/tarifs.ts). Était 6. */
+export const ENFANTS_MAX = SUIVI.enfantsMax;
 export const peutEtreRelie = (codeEtablissement: string) => codeEtablissement === ETABLISSEMENT_INDEPENDANT;
 
 const FENETRE_JOURS = 120;

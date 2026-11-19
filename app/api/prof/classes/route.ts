@@ -13,6 +13,7 @@ import {
   motDePasseSimple,
   prefixeDeClasse,
   profDuJeton,
+  refusNouvelleClasse,
   supabaseAdmin,
 } from "@/lib/server/classesProf";
 
@@ -74,6 +75,10 @@ export async function POST(req: Request) {
   const admin = supabaseAdmin();
   const p = await profDuJeton(admin, req);
   if (!p.ok) return NextResponse.json({ ok: false, error: p.error }, { status: p.status });
+
+  // 19/11/2026 : classes offertes par prof (lib/tarifs.ts), exception pour Frédéric.
+  const refus = await refusNouvelleClasse(admin, p.prof);
+  if (refus) return NextResponse.json({ ok: false, error: refus, limiteClasses: true }, { status: 403 });
 
   const body = await req.json().catch(() => ({}));
   const etablissement = String(body.etablissement ?? "").trim().slice(0, 120);
