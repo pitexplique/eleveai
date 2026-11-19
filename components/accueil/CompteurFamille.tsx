@@ -22,7 +22,7 @@ import { ArrowRight, GraduationCap, Gift, PlayCircle, Puzzle, Users, Utensils } 
 import { CAP_VIDEOS, ECHEANCE_CAP, etatCompteurVideos } from "@/lib/videos/compteur";
 import { EXERCICES } from "@/lib/accueil/chiffres-semaine";
 import CompteurReponsesCoach from "@/components/coach/CompteurReponsesCoach";
-import { FREE_CLASSES_PER_TEACHER, PHRASE_OFFRE, QUOTAS_IA } from "@/lib/tarifs";
+import { FREE_CLASSES_PER_TEACHER, PRIX_ANNUEL, PRIX_MENSUEL, QUOTAS_IA, montant } from "@/lib/tarifs";
 
 export type VarianteCompteur = "barre" | "ligne";
 
@@ -75,32 +75,64 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
   );
   return (
     <div className="mx-auto mt-5 grid max-w-3xl items-stretch gap-3 text-left sm:grid-cols-2">
-      {/* À GAUCHE : LA FAMILLE (le coach + l'aide de Ti Margo). */}
-      <div className="rounded-2xl bg-white/90 p-4 shadow-sm ring-1 ring-sky-200">
+      {/* À GAUCHE : LA FAMILLE.
+          ⭐ 19/11/2026 — même construction que l'encart prof (titre = ce que le
+          parent y gagne, une phrase, 4 lignes, puis les boutons). Frédéric :
+          « propose autre encart pour les familles », puis « il faut mentionner
+          aux familles qu'ils ont accès aux stats » → les stats dites en mots de
+          parent : « vous savez où il en est ». Puis « pas il mais vos enfants » : tout au pluriel. Version B choisie en maquette.
+          Avant : « Le coach qui suit chaque élève, du CP à la Terminale » + le
+          paragraphe des aides (git show c4ddc752:components/accueil/CompteurFamille.tsx).
+          ⛔ Chaque ligne décrit ce qui EXISTE (SUIVI_DES_MAINTENANT, lib/tarifs.ts).
+          ⛔ Jamais « illimité » pour l'aide de l'IA. */}
+      <div className="flex flex-col rounded-2xl bg-white/90 p-4 shadow-sm ring-1 ring-sky-200">
         <p className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-sky-700">
           <Users className="h-5 w-5" aria-hidden="true" /> La famille
         </p>
-        <p className="mt-1 text-xl font-black leading-snug text-slate-900">Le coach qui suit chaque élève, du CP à la Terminale</p>
-        <p className="mt-1 flex items-center gap-2 text-sm font-bold text-orange-700">
+        <p className="mt-1 text-xl font-black leading-snug text-slate-900">
+          EleveAI simplifie <span className="whitespace-nowrap">vos soirées</span>
+        </p>
+        <p className="mt-1 flex items-center gap-2 text-sm font-bold text-slate-700">
           <Image src="/ti-margo/animations/encouragement.png" alt="" width={320} height={320} sizes="48px" className="h-12 w-12 shrink-0" />
-          Avec l&apos;aide de Ti Margo et de ses dessins animés.
+          <span>Vos enfants s&apos;entraînent seuls pendant que vous préparez le repas. Ti Margo les aide, vous gardez l&apos;œil.</span>
         </p>
         {LIENS_OFFRE ? (
           <>
-            {/* 19/11/2026 : le modèle en clair. ⛔ Jamais « illimité » pour l'aide IA. */}
-            <p className="mt-1 text-sm font-bold text-slate-600">
-              Le coach est illimité et ouvert à tous. Un compte gratuit donne {QUOTAS_IA.gratuitParJour} aides de Ti Margo par jour,
-              le Suivi en donne {QUOTAS_IA.suiviParJour}.
+            <ul className="mt-2 space-y-0.5 text-sm font-bold text-slate-700">
+              {[
+                "Exercices corrigés tout de suite, avec la vidéo s'ils bloquent",
+                "Avec le Suivi, vous savez où ils en sont : leurs jours de travail, ce qu'ils ont compris, les 3 choses à revoir",
+                "Une alerte s'ils décrochent, et un bilan chaque semaine par courriel",
+                `${QUOTAS_IA.suiviParJour} aides de Ti Margo par jour avec le Suivi, au lieu de ${QUOTAS_IA.gratuitParJour}`,
+              ].map((t) => (
+                <li key={t} className="flex gap-1.5">
+                  <span aria-hidden="true" className="text-sky-700">✔</span>
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-2 text-sm font-black text-slate-800">
+              Gratuit pour commencer. Le Suivi : {montant(PRIX_MENSUEL)}/mois ou {montant(PRIX_ANNUEL)}/an.
             </p>
-            <p className="mt-1 text-sm font-black text-slate-800">{PHRASE_OFFRE}</p>
-            <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm font-black">
-              <Link href="#familles" className="text-sky-800 underline">L&apos;offre famille</Link>
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <Link
+                href="/auth/signin?inscription=1&type=parent"
+                className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-sky-700 px-4 py-2 text-sm font-black text-white shadow-sm hover:bg-sky-800"
+              >
+                Créer un compte gratuit <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+              <Link
+                href="#familles"
+                className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-slate-200 hover:ring-sky-400"
+              >
+                L&apos;offre famille
+              </Link>
               {CARTE_CADEAU && (
-                <Link href="/carte-cadeau" className="inline-flex items-center gap-1 text-emerald-800 underline">
+                <Link href="/carte-cadeau" className="inline-flex items-center gap-1 text-sm font-black text-emerald-800 underline">
                   <Gift className="h-4 w-4" aria-hidden="true" /> La carte cadeau
                 </Link>
               )}
-            </p>
+            </div>
           </>
         ) : (
           <p className="mt-1 text-sm font-bold text-slate-600">Il trouve ce qui manque, l&apos;entraîne là-dessus et garde ses progrès.</p>
