@@ -43,6 +43,7 @@ import {
   MonitorPlay,
   Building2,
   PlayCircle,
+  Puzzle,
   Save,
   Target,
   Timer,
@@ -106,6 +107,8 @@ const ACCES_DIRECTS = [
   { href: "/automatismes-maths", label: "Automatismes", Icone: Zap, couleur: "text-amber-500" },
   { href: "/fiches-exercices", label: "Fiches d'exercices", Icone: FileText, couleur: "text-sky-600" },
   { href: "/video", label: "Vidéos", Icone: PlayCircle, couleur: "text-rose-600" },
+  // 19/11/2026, Frédéric : « rajoute à côté de vidéo, calcul rapide, énigme ».
+  { href: "/enigmes-maths", label: "Énigmes", Icone: Puzzle, couleur: "text-violet-700" },
   { href: "/calcul-rapide", label: "Calcul rapide", Icone: Timer, couleur: "text-orange-600" },
 ];
 
