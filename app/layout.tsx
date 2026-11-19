@@ -14,7 +14,6 @@ import { Analytics } from "@vercel/analytics/next";
 import DevBanner from "@/components/DevBanner";
 import Header from "@/components/Header";
 import BanniereCrpe from "@/components/accueil/BanniereCrpe";
-import BandeauJournal from "@/components/BandeauJournal";
 import Footer from "@/components/Footer";
 import MasqueSurEmbed from "@/components/MasqueSurEmbed";
 import { EleveProvider } from "@/context/EleveContext";
@@ -442,8 +441,9 @@ export default function RootLayout({
             <BanniereCrpe place="haut" />
             {/* 16/11/2026 : bandeau du Journal retiré (« ça les intéresse pas »).
                 ⭐ 18/11 : REMIS, Frédéric : « certains élèves regrettent le journal
-                en bandeau ». Il ne s'affiche que sur l'accueil (/ et /accueil). */}
-            <BandeauJournal />
+                en bandeau ». Il ne s'affiche que sur l'accueil (/ et /accueil).
+                ⛔ 19/11 : RETIRÉ à nouveau (Frédéric : « enlève le bandeau journal de
+                la page d'accueil »). Pour le remettre : <BandeauJournal />. */}
             <Header />
           </MasqueSurEmbed>
 
