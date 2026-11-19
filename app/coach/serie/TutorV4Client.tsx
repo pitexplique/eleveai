@@ -11,6 +11,7 @@ import {
 } from "react";
 
 import Link from "next/link";
+import { AIDE_IA } from "@/lib/tarifs";
 import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
 import { signalerActivite } from "@/lib/activite";
@@ -3017,7 +3018,8 @@ function CoachErrorHelp({
 
       {!canAsk ? (
         <p className="text-sm font-semibold text-white/80">
-          Connecte-toi pour demander une explication.
+          {/* 19/11/2026 : visiteur sans compte → pas d'aide de Ti Margo (texte validé). */}
+          <a href={AIDE_IA.lienInscription} className="underline">{AIDE_IA.messageVisiteur}</a>
         </p>
       ) : (
         <>

@@ -1,6 +1,7 @@
 // app/parcours/parcoursClient.tsx
 "use client";
 
+import { AIDE_IA } from "@/lib/tarifs";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 
@@ -1304,7 +1305,7 @@ function CorrectionChatBox({
           </div>
           <div className="flex flex-1 items-center bg-gradient-to-b from-cyan-50 via-white to-orange-50 px-3 text-center sm:px-6">
             <p className="text-xs font-black leading-5 text-slate-800 sm:text-base sm:leading-7">
-              Posez une question : connectez-vous / inscrivez-vous pour dialoguer avec le coach.
+              {AIDE_IA.messageVisiteur}
             </p>
           </div>
           <Link
@@ -1347,7 +1348,7 @@ function CorrectionChatBox({
             </div>
           ) : (
             <div className="rounded-2xl border border-amber-200 bg-amber-50 p-3 text-sm font-semibold text-amber-900">
-              Posez une question : connectez-vous pour dialoguer.
+              <a href={AIDE_IA.lienInscription} className="underline">{AIDE_IA.messageVisiteur}</a>
             </div>
           )
         ) : (

@@ -622,6 +622,28 @@ export const QUOTAS_IA = {
   totalSiteParJour: 5000,
 } as const;
 
+/**
+ * ⭐ 19/11/2026, Frédéric : « le coach est ouvert à tous, ils peuvent faire
+ * autant de questions qu'ils veulent. C'est demander à Ti Margo une aide via
+ * l'IA où on n'autorise que 3 questions par jour. » Chaque message à Ti Margo
+ * compte pour 1 ; une relance (« je n'ai pas compris ») compte pour 1 de plus.
+ */
+export const AIDE_IA = {
+  nom: "l'aide de Ti Margo",
+  /** Ce que voit un visiteur sans compte qui clique sur l'aide (validé le 19/11). */
+  messageVisiteur: `Inscris-toi gratuitement pour avoir ${QUOTAS_IA.gratuitParJour} aides par jour.`,
+  lienInscription: "/auth/signin?inscription=1",
+  /** Le coach lui-même : dit en clair partout. ⛔ Jamais « illimité » pour l'aide IA. */
+  coachOuvert: "Le coach est illimité et ouvert à tous, sans compte.",
+} as const;
+
+/** Les trois lignes de l'offre, en clair, pour les pages qui la présentent. */
+export const OFFRE_EN_CLAIR = [
+  AIDE_IA.coachOuvert,
+  `Un compte gratuit donne ${QUOTAS_IA.gratuitParJour} aides de Ti Margo par jour.`,
+  `Le Suivi en donne ${QUOTAS_IA.suiviParJour} par jour.`,
+] as const;
+
 /** Le compte gratuit : ce que son tableau de bord montre. */
 export const COMPTE_GRATUIT = {
   /** L'historique visible : les 7 derniers jours. L'ancien reste gardé en base. */

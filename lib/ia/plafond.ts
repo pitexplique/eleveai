@@ -24,10 +24,10 @@ export const QUESTIONS_IA_PAR_IP = QUOTAS_IA.parIP;
 export const QUESTIONS_IA_TOTAL_PAR_JOUR = QUOTAS_IA.totalSiteParJour;
 
 export const messageQuotaEleve = (max: number) =>
-  `Tu as posé tes ${max} question${max > 1 ? "s" : ""} à l'IA aujourd'hui. Reviens demain ! Les exercices et les vidéos, eux, restent ouverts.`;
+  `Tu as utilisé tes ${max} aide${max > 1 ? "s" : ""} de Ti Margo aujourd'hui. Reviens demain ! Le coach, lui, reste ouvert : fais autant d'exercices que tu veux.`;
 /** @deprecated Utiliser `messageQuotaEleve(max)`. */
 export const MESSAGE_QUOTA_ELEVE = messageQuotaEleve(QUOTAS_IA.gratuitParJour);
-export const MESSAGE_QUOTA_SITE = "L'IA se repose pour aujourd'hui. Reviens demain ! Les exercices et les vidéos restent ouverts.";
+export const MESSAGE_QUOTA_SITE = "Ti Margo se repose pour aujourd'hui. Reviens demain ! Le coach, les exercices et les vidéos restent ouverts.";
 
 const admin =
   process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY

@@ -1,5 +1,6 @@
 "use client";
 
+import { AIDE_IA } from "@/lib/tarifs";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useEleve } from "@/context/EleveContext";
@@ -144,7 +145,8 @@ export default function FloatingCoach({ enBas }: { enBas?: boolean } = {}) {
         ) : (
           <div className="flex h-full items-center text-center">
             <p className="text-sm font-semibold leading-relaxed text-white/70">
-              Connecte-toi pour dialoguer avec l&rsquo;IA.
+              {/* 19/11/2026 : visiteur sans compte → pas d'aide de Ti Margo (texte validé). */}
+              <a href={AIDE_IA.lienInscription} className="underline">{AIDE_IA.messageVisiteur}</a>
             </p>
           </div>
         )}
