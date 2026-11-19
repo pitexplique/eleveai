@@ -231,7 +231,7 @@ export default function MesClassesClient() {
                 <p className="mt-1 text-sm text-slate-600">20 min de cours, 25 min de coach et vidéos, 10 min de synthèse.</p>
                 <span className="mt-2 flex flex-wrap gap-x-3 text-sm font-bold">
                   <Link href="/seances" className="text-violet-800 underline">Exemples de séances</Link>
-                  <Link href="/problemes" className="text-violet-800 underline">Énigmes à projeter</Link>
+                  <Link href="/enigmes-maths" className="text-violet-800 underline">Énigmes à projeter</Link>
                 </span>
               </li>
               <li className="rounded-xl bg-white p-4 ring-1 ring-violet-100">

@@ -143,7 +143,7 @@ export default function EnseignantsPage() {
             </Link>
             {/* 19/11 : le hub des problèmes à projeter. */}
             <Link
-              href="/problemes"
+              href="/enigmes-maths"
               className="ml-2 mt-2 inline-flex items-center gap-2 rounded-2xl bg-emerald-50 px-5 py-3 text-base font-black text-emerald-900 ring-2 ring-emerald-300 transition hover:bg-emerald-100"
             >
               🧩 Énigmes à projeter au tableau →

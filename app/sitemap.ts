@@ -10,6 +10,7 @@ import { FICHES_REGISTRE } from "@/lib/fiches/registre";
 import { FICHES_EXERCICES_REGISTRE } from "@/lib/fiches-exercices/registre";
 import CARTES_MENTALES from "@/lib/videos/bilans-notions.json";
 import { PAYS, programmesDuPays } from "@/lib/programmes-pays/pays";
+import { listerProblemes } from "@/lib/problemes/registre";
 import {
   FAMILLES as FAMILLES_ECRITURE,
   FICHES as FICHES_ECRITURE,
@@ -398,7 +399,10 @@ const ROUTES: RouteConfig[] = [
   { path: "/espace-profs",     priority: 0.9,  changeFrequency: "monthly", lastMod: LASTMOD_TARIFS },
   // 17/11/2026 : le hub « En classe avec EleveAI » (séances vécues, 20 / 25 / 10).
   { path: "/seances",          priority: 0.85, changeFrequency: "monthly", lastMod: new Date("2026-11-17") },
-  { path: "/problemes",         priority: 0.8,  changeFrequency: "weekly",  lastMod: new Date("2026-11-19") },
+  // 19/11/2026, Frédéric : le hub des énigmes à projeter (« tu vas devoir
+  // l'inscrire sur le sitemap »), au nom choisi le soir même : « enigmes-maths »
+  // (était /problemes, puis /enigmes : redirigés). Ses notions : `enigmesRoutes`.
+  { path: "/enigmes-maths",     priority: 0.8,  changeFrequency: "weekly",  lastMod: new Date("2026-11-19") },
   // ⚠️ Entrée au sitemap le 12/08 — ce qui a OBLIGÉ à retirer le `noindex` de
   // la page. Annoncer une adresse à Google et lui interdire de l'indexer dans
   // la même journée, c'est se signaler une erreur à soi-même dans la Search
@@ -1388,6 +1392,16 @@ const paysRoutes: RouteConfig[] = PAYS.flatMap((info) => [
     })),
 ]);
 
+// ⭐ 19/11/2026 — LES ÉNIGMES À PROJETER, une page par notion faite. La liste
+// se lit dans le registre (lib/problemes/registre.ts) : une notion ajoutée là
+// entre ici toute seule. Adresse : /enigmes-maths/<classe>/<notion-avec-tirets>.
+const enigmesRoutes: RouteConfig[] = listerProblemes().map((n) => ({
+  path: `/enigmes-maths/${n.classe}/${n.notionId.replace(/_/g, "-")}`,
+  priority: 0.7,
+  changeFrequency: "monthly" as const,
+  lastMod: new Date("2026-11-19"),
+}));
+
 export default function sitemap(): MetadataRoute.Sitemap {
   // Routes statiques
   const staticRoutes = [
@@ -1402,6 +1416,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...niveauxHorsClasseRoutes,
     ...famillesEcritureRoutes,
     ...fichesEcritureRoutes,
+    ...enigmesRoutes,
   ].map((route) => {
     const videosFiche = VIDEOS_FICHES[route.path];
     const videos =
