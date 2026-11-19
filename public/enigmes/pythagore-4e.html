@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Énigmes de Pythagore</title>
+<meta name="description" content="Six énigmes de Pythagore (4e) à projeter en classe : corde à 13 nœuds, raccourci, échelle, puzzle des carrés, piège, diagonale du carré. EleveAI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Layout: one board per énigme, full screen, chalk drawing beside the question; arrows to move, space to reveal */
+:root {
+  --board: #20372c;
+  --board-edge: #5a3d24;
+  --chalk: #f2f0e6;
+  --chalk-dim: #b9c4bb;
+  --yellow: #f3d36b;
+  --pink: #f29fae;
+  --blue: #9fd0f2;
+  --display: 'Kalam', 'Comic Sans MS', cursive;
+  --body: 'Atkinson Hyperlegible', 'Segoe UI', Arial, sans-serif;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body {
+  background: var(--board-edge);
+  color: var(--chalk);
+  font-family: var(--body);
+  margin: 0;
+}
+.wrap {
+  box-sizing: border-box;
+  height: 100%;
+  padding-block: 14px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.board {
+  flex: 1;
+  min-height: 0;
+  background: radial-gradient(ellipse at 30% 20%, #2a4638 0%, var(--board) 60%);
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 3px #172a21;
+  padding: clamp(16px, 3vw, 44px);
+  overflow: auto;
+}
+.slide { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(16px, 3vw, 48px); align-items: center; min-height: 100%; }
+.slide > * { min-width: 0; }
+.tag { font-family: var(--display); color: var(--yellow); font-size: clamp(18px, 2vw, 26px); letter-spacing: .04em; }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(32px, 4.6vw, 64px); line-height: 1.05; margin: 4px 0 14px; text-wrap: balance; }
+.q { font-size: clamp(20px, 2.3vw, 32px); line-height: 1.4; max-width: 34ch; }
+.q b { color: var(--yellow); }
+.answer {
+  margin-top: 18px;
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1.4;
+  border-top: 2px dashed var(--chalk-dim);
+  padding-top: 12px;
+  max-width: 36ch;
+}
+.answer .big { font-family: var(--display); color: var(--pink); font-size: 1.35em; font-weight: 700; }
+.art svg { width: 100%; height: auto; max-height: 62vh; display: block; }
+.art text { font-family: var(--display); }
+.bar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.bar button {
+  font-family: var(--body); font-size: 16px; font-weight: 700;
+  background: #2b2016; color: var(--chalk); border: 2px solid #8a6a48; border-radius: 6px;
+  padding: 8px 14px; cursor: pointer;
+}
+.bar button:hover { background: #3a2b1e; }
+.bar button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+.bar .reveal { background: var(--yellow); color: #2b2016; border-color: var(--yellow); }
+.dots { display: flex; gap: 6px; margin-left: auto; }
+.dots button { width: 14px; height: 14px; padding: 0; border-radius: 50%; border: 2px solid var(--chalk-dim); background: transparent; }
+.dots button[aria-current="true"] { background: var(--chalk); border-color: var(--chalk); }
+.hint { font-size: 13px; color: var(--chalk-dim); }
+@media (max-width: 760px) {
+  .slide { grid-template-columns: 1fr; }
+  .art svg { max-height: 40vh; }
+  .hint { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .answer:not([hidden]) { animation: chalk .5s ease-out; }
+  @keyframes chalk { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+}
+</style>
+</head><body>
+
+
+<div class="wrap">
+  <main class="board" id="board" aria-live="polite"></main>
+  <div class="bar">
+    <button id="prev" type="button">◀ Précédente</button>
+    <button id="reveal" class="reveal" type="button">Voir la réponse</button>
+    <button id="next" type="button">Suivante ▶</button>
+    <button id="full" type="button">Plein écran</button>
+    <span class="hint">Flèches ← → pour changer · Espace pour la réponse</span>
+    <div class="dots" id="dots"></div>
+  </div>
+</div>
+
+<script>
+const C = { chalk: '#f2f0e6', dim: '#b9c4bb', y: '#f3d36b', p: '#f29fae', b: '#9fd0f2' };
+const S = `stroke="${C.chalk}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"`;
+
+function grid(x0, y0, n, size, color) {
+  let s = '';
+  for (let i = 0; i < n; i++) for (let j = 0; j < n; j++)
+    s += `<rect x="${x0 + i*size}" y="${y0 + j*size}" width="${size}" height="${size}" fill="${color}" fill-opacity=".18" stroke="${color}" stroke-width="2"/>`;
+  return s;
+}
+
+const ENIGMES = [
+  {
+    tag: 'Énigme 1 · Une vieille histoire',
+    title: 'La corde à 13 nœuds',
+    q: `On raconte que les bâtisseurs égyptiens traçaient leurs angles droits avec une <b>corde à 13 nœuds</b> : 12 intervalles égaux, et le 13<sup>e</sup> nœud se pose sur le 1<sup>er</sup> pour fermer la corde.<br><br>Comment s'en servir pour fabriquer un <b>angle droit</b> parfait ?`,
+    a: `On tend la corde en triangle de côtés <span class="big">3, 4 et 5</span> intervalles.<br>3² + 4² = 9 + 16 = 25 = 5², donc d'après la réciproque de Pythagore, le triangle est rectangle.`,
+    art: () => {
+      let knots = '';
+      const pts = [];
+      for (let i = 0; i <= 3; i++) pts.push([80, 340 - i*80]);
+      for (let i = 1; i <= 4; i++) pts.push([80 + i*80, 340]);
+      pts.forEach(([x,y]) => knots += `<circle cx="${x}" cy="${y}" r="9" fill="${C.y}"/>`);
+      for (let i = 1; i <= 4; i++) { const t = i/5; knots += `<circle cx="${80 + t*320}" cy="${100 + t*240}" r="9" fill="${C.y}"/>`; }
+      return `<svg viewBox="0 0 480 420" role="img" aria-label="Corde à 13 nœuds tendue en triangle 3-4-5">
+        <path d="M80 100 L80 340 L400 340 Z" ${S}/>
+        <rect x="80" y="310" width="30" height="30" ${S} stroke-width="3"/>
+        ${knots}
+        <text x="40" y="230" fill="${C.chalk}" font-size="30" text-anchor="middle">3</text>
+        <text x="240" y="385" fill="${C.chalk}" font-size="30" text-anchor="middle">4</text>
+        <text x="265" y="200" fill="${C.chalk}" font-size="30">5</text>
+        <text x="240" y="40" fill="${C.dim}" font-size="24" text-anchor="middle">12 intervalles = 3 + 4 + 5</text>
+        <text x="80" y="385" fill="${C.dim}" font-size="18" text-anchor="middle">1er = 13e</text>
+      </svg>`;
+    }
+  },
+  {
+    tag: 'Énigme 2 · Le chemin de l’école',
+    title: 'Le raccourci',
+    q: `Pour aller au collège, Léa marche <b>300 m vers l'est</b>, puis <b>400 m vers le nord</b>.<br><br>Un jour, elle coupe à travers le parc, en ligne droite. <b>Combien de mètres</b> économise-t-elle ?`,
+    a: `Le raccourci est l'hypoténuse : 300² + 400² = 90 000 + 160 000 = 250 000, et √250 000 = 500 m.<br>Elle marche 500 m au lieu de 700 m : elle économise <span class="big">200 m</span>.`,
+    art: () => `<svg viewBox="0 0 480 420" role="img" aria-label="Trajet en L de 300 m puis 400 m, et raccourci en diagonale">
+      <path d="M70 360 L270 360 L270 90" ${S}/>
+      <rect x="240" y="330" width="30" height="30" ${S} stroke-width="3"/>
+      <path d="M70 360 L270 90" stroke="${C.p}" stroke-width="5" stroke-dasharray="14 10" fill="none" stroke-linecap="round"/>
+      <circle cx="70" cy="360" r="10" fill="${C.b}"/><circle cx="270" cy="90" r="10" fill="${C.y}"/>
+      <text x="60" y="400" fill="${C.b}" font-size="26">Maison</text>
+      <text x="290" y="85" fill="${C.y}" font-size="26">Collège</text>
+      <text x="170" y="398" fill="${C.chalk}" font-size="28" text-anchor="middle">300 m</text>
+      <text x="290" y="235" fill="${C.chalk}" font-size="28">400 m</text>
+      <text x="110" y="210" fill="${C.p}" font-size="28">? m</text>
+      <text x="125" y="170" fill="${C.p}" font-size="22">le parc</text>
+    </svg>`
+  },
+  {
+    tag: 'Énigme 3 · Sauvetage',
+    title: 'Le chat dans l’arbre',
+    q: `Un chat est coincé en haut d'un arbre. Les pompiers posent une <b>échelle de 13 m</b>, dont le pied est à <b>5 m de l'arbre</b>.<br><br>À <b>quelle hauteur</b> est le chat, si l'échelle touche juste le haut de l'arbre ?`,
+    a: `L'échelle est l'hypoténuse : 13² = 5² + h², donc h² = 169 − 25 = 144.<br>h = √144 = <span class="big">12 m</span>.`,
+    art: () => `<svg viewBox="0 0 480 420" role="img" aria-label="Arbre, échelle de 13 m, pied à 5 m">
+      <path d="M330 380 L330 70" stroke="${C.chalk}" stroke-width="10" stroke-linecap="round"/>
+      <path d="M330 120 q-60 -10 -80 -50 M330 170 q60 -10 80 -50 M330 230 q-50 0 -70 -30" ${S} stroke-width="3"/>
+      <path d="M40 380 L440 380" ${S} stroke-width="3"/>
+      <path d="M201 380 L330 70" stroke="${C.y}" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <rect x="300" y="350" width="30" height="30" ${S} stroke-width="3"/>
+      <text x="345" y="62" fill="${C.p}" font-size="40">🐱</text>
+      <text x="250" y="220" fill="${C.y}" font-size="28" text-anchor="end">13 m</text>
+      <text x="265" y="410" fill="${C.chalk}" font-size="28" text-anchor="middle">5 m</text>
+      <text x="350" y="240" fill="${C.p}" font-size="28">? m</text>
+    </svg>`
+  },
+  {
+    tag: 'Énigme 4 · Compte les carreaux',
+    title: 'Le puzzle des carrés',
+    q: `Sur chaque côté du triangle rectangle, on a dessiné un carré.<br><br>Compte les petits carreaux dans le <b style="color:${'#9fd0f2'}">carré bleu</b>, puis dans le <b style="color:${'#f3d36b'}">carré jaune</b>, puis dans le <b style="color:${'#f29fae'}">carré rose</b>. <b>Que remarques-tu ?</b>`,
+    a: `Bleu : 9 carreaux. Jaune : 16 carreaux. Rose : 25 carreaux.<br><span class="big">9 + 16 = 25</span> : l'aire du grand carré est la somme des deux autres. C'est exactement le théorème de Pythagore !`,
+    art: () => {
+      const u = 34, ox = 150, oy = 254;
+      const A = [ox, oy], B = [ox + 4*u, oy], Cc = [ox, oy - 3*u];
+      // hypotenuse square: from B to C, outward
+      const dx = Cc[0]-B[0], dy = Cc[1]-B[1];
+      // 5x5 grid on hypotenuse square via transform
+      let g5 = '';
+      for (let i = 0; i < 5; i++) for (let j = 0; j < 5; j++) g5 += `<rect x="${i*u}" y="${j*u}" width="${u}" height="${u}" fill="${C.p}" fill-opacity=".18" stroke="${C.p}" stroke-width="2"/>`;
+      const ang = Math.atan2(dy, dx) * 180 / Math.PI;
+      return `<svg viewBox="0 0 480 420" role="img" aria-label="Triangle 3-4-5 avec un carré sur chaque côté">
+        ${grid(ox - 3*u, oy - 3*u, 3, u, C.b)}
+        ${grid(ox, oy, 4, u, C.y)}
+        <g transform="translate(${B[0]},${B[1]}) rotate(${ang})">${g5}</g>
+        <polygon points="${A} ${B} ${Cc}" fill="none" stroke="${C.chalk}" stroke-width="4" stroke-linejoin="round"/>
+        <text x="${ox - 1.5*u}" y="${oy - 1.5*u + 9}" fill="${C.b}" font-size="26" text-anchor="middle">?</text>
+        <text x="${ox + 2*u}" y="${oy + 2*u + 9}" fill="${C.y}" font-size="26" text-anchor="middle">?</text>
+        <text x="${(B[0]+Cc[0])/2 + 2.5*u*0.6}" y="${(B[1]+Cc[1])/2 - 2.5*u*0.8 + 9}" fill="${C.p}" font-size="26" text-anchor="middle">?</text>
+      </svg>`;
+    }
+  },
+  {
+    tag: 'Énigme 5 · Attention au piège',
+    title: 'Il a l’air droit…',
+    q: `Ce triangle a pour côtés <b>6 cm</b>, <b>8 cm</b> et <b>11 cm</b>. Sur le dessin, il a l'air rectangle.<br><br><b>Est-il vraiment rectangle ?</b>`,
+    a: `Plus grand côté : 11. D'une part 11² = 121. D'autre part 6² + 8² = 36 + 64 = 100.<br>121 ≠ 100 : <span class="big">il n'est pas rectangle</span>. On ne conclut jamais « à l'œil » !`,
+    art: () => `<svg viewBox="0 0 480 420" role="img" aria-label="Triangle 6-8-11 qui semble rectangle">
+      <path d="M100 340 L380 340 L89 130 Z" ${S}/>
+      <text x="78" y="245" fill="${C.chalk}" font-size="30" text-anchor="end">6</text>
+      <text x="240" y="385" fill="${C.chalk}" font-size="30" text-anchor="middle">8</text>
+      <text x="250" y="220" fill="${C.chalk}" font-size="30">11</text>
+      <text x="130" y="320" fill="${C.p}" font-size="44">?</text>
+      <text x="240" y="60" fill="${C.dim}" font-size="22" text-anchor="middle">figure pas en vraie grandeur</text>
+    </svg>`
+  },
+  {
+    tag: 'Énigme 6 · Le défi des curieux',
+    title: 'La diagonale du carré',
+    q: `Un carré a des côtés de <b>1 m</b>.<br><br>Combien mesure sa <b>diagonale</b> ? Et peux-tu écrire ce nombre <b>exactement</b> avec des chiffres après la virgule ?`,
+    a: `d² = 1² + 1² = 2, donc d = <span class="big">√2 ≈ 1,414 m</span>.<br>Ses chiffres après la virgule ne s'arrêtent jamais, et ils ne forment jamais un motif qui revient. Selon la légende, cette découverte a fait scandale chez les élèves de Pythagore !`,
+    art: () => `<svg viewBox="0 0 480 420" role="img" aria-label="Carré de côté 1 et sa diagonale">
+      <rect x="110" y="80" width="260" height="260" ${S}/>
+      <path d="M110 340 L370 80" stroke="${C.y}" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <rect x="110" y="310" width="30" height="30" ${S} stroke-width="3"/>
+      <text x="240" y="385" fill="${C.chalk}" font-size="30" text-anchor="middle">1 m</text>
+      <text x="85" y="215" fill="${C.chalk}" font-size="30" text-anchor="end">1 m</text>
+      <text x="255" y="190" fill="${C.y}" font-size="34">?</text>
+    </svg>`
+  },
+];
+
+let i = 0, shown = false;
+const board = document.getElementById('board');
+const dots = document.getElementById('dots');
+const revealBtn = document.getElementById('reveal');
+
+ENIGMES.forEach((_, k) => {
+  const d = document.createElement('button');
+  d.type = 'button';
+  d.setAttribute('aria-label', 'Énigme ' + (k + 1));
+  d.addEventListener('click', () => go(k));
+  dots.appendChild(d);
+});
+
+function render() {
+  const e = ENIGMES[i];
+  board.innerHTML = `<section class="slide">
+    <div>
+      <div class="tag">${e.tag}</div>
+      <h1>${e.title}</h1>
+      <div class="q">${e.q}</div>
+      <div class="answer" id="ans" ${shown ? '' : 'hidden'}>${e.a}</div>
+    </div>
+    <div class="art">${e.art()}</div>
+  </section>`;
+  revealBtn.textContent = shown ? 'Cacher la réponse' : 'Voir la réponse';
+  [...dots.children].forEach((d, k) => d.setAttribute('aria-current', k === i ? 'true' : 'false'));
+  try { localStorage.setItem('enigme-pythagore', String(i)); } catch (_) {}
+}
+function go(k) { i = (k + ENIGMES.length) % ENIGMES.length; shown = false; render(); }
+function toggle() { shown = !shown; render(); }
+
+document.getElementById('prev').addEventListener('click', () => go(i - 1));
+document.getElementById('next').addEventListener('click', () => go(i + 1));
+revealBtn.addEventListener('click', toggle);
+document.getElementById('full').addEventListener('click', () => {
+  const el = document.documentElement;
+  try {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+  } catch (_) {}
+});
+document.addEventListener('keydown', (ev) => {
+  if (ev.key === 'ArrowRight' || ev.key === 'PageDown') { go(i + 1); ev.preventDefault(); }
+  else if (ev.key === 'ArrowLeft' || ev.key === 'PageUp') { go(i - 1); ev.preventDefault(); }
+  else if (ev.key === ' ' || ev.key === 'Enter') { if (ev.target.tagName !== 'BUTTON') { toggle(); ev.preventDefault(); } }
+});
+
+try { const s = parseInt(localStorage.getItem('enigme-pythagore'), 10); if (s >= 0 && s < ENIGMES.length) i = s; } catch (_) {}
+render();
+</script>
+
+</body></html>
