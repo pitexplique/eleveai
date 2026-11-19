@@ -1,6 +1,7 @@
 // app/api/chat/route.ts
 import { NextResponse } from "next/server";
 import { autoriserQuestionIA } from "@/lib/ia/plafond";
+import { cleIP, noterCoutIA } from "@/lib/ia/cout";
 import OpenAI from "openai";
 
 const client = new OpenAI({
@@ -120,6 +121,9 @@ Si l'utilisateur demande du code (LaTeX, Manim, etc.), place-le dans des blocs d
       temperature: 0.3,
       max_tokens: 800, // limite raisonnable pour réduire coût et latence
     });
+
+    // 19/11/2026 : coût de l'IA par utilisateur et par jour (lib/ia/cout.ts).
+    await noterCoutIA(cleIP(req), "gpt-4.1-mini", completion.usage);
 
     const brut = completion.choices[0]?.message?.content || "";
 

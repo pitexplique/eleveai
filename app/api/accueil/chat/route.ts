@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { autoriserQuestionIA } from "@/lib/ia/plafond";
+import { noterCoutIA } from "@/lib/ia/cout";
 import { createClient } from "@supabase/supabase-js";
 import { openai } from "@/lib/openai";
 import { libellePassion, passionValide } from "@/lib/videos/centres-interet";
@@ -146,6 +147,9 @@ export async function POST(req: Request) {
         },
       ],
     });
+
+    // 19/11/2026 : coût de l'IA par utilisateur et par jour (lib/ia/cout.ts).
+    await noterCoutIA(`eleve:${eleve.id}`, OPENAI_MODEL, completion.usage);
 
     const answer = completion.choices[0]?.message?.content?.trim();
     const inputTokens = completion.usage?.prompt_tokens ?? null;

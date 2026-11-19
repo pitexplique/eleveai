@@ -1,6 +1,7 @@
 // app/api/agent-prof/route.ts
 import OpenAI from "openai";
 import { autoriserQuestionIA } from "@/lib/ia/plafond";
+import { cleIP, noterCoutIA } from "@/lib/ia/cout";
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -113,6 +114,9 @@ MISE EN FORME :
       temperature: 0.4,
       max_tokens: 2000,
     });
+
+    // 19/11/2026 : coût de l'IA par utilisateur et par jour (lib/ia/cout.ts).
+    await noterCoutIA(cleIP(req), "gpt-4.1-mini", completion.usage);
 
     const brut = completion.choices[0].message?.content || "";
     const output = latexMode ? brut : nettoyerLatex(brut);
