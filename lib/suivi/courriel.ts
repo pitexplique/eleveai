@@ -2,6 +2,7 @@
 // compose le courriel à partir des rapports, sans base ni envoi, donc elle se teste.
 // ⛔ Aucune offre ni prix dedans : ce courriel rend compte, il ne vend pas.
 import type { CompteSemaine, RapportEnfant } from "./types";
+import { MENTION_TVA, PRIX_ANNUEL, PRIX_MENSUEL, SUIVI, montant } from "@/lib/tarifs";
 
 const SITE = "https://www.eleveai.fr";
 
@@ -94,5 +95,44 @@ Voir tout le suivi : ${SITE}/suivi
 Seul le travail fait en étant connecté apparaît ici.
 Ne plus recevoir ce compte rendu : ${lienArret}`;
 
+  return { sujet, html, texte };
+}
+
+/**
+ * ⭐ 19/11/2026 — « VOIR MON VRAI SUIVI » : le courriel que l'ÉLÈVE fait partir
+ * vers son parent. Son bilan de la semaine, le code qui relie les deux comptes,
+ * le lien d'abonnement. ⛔ Le prix est dit au PARENT, jamais à l'élève.
+ */
+export function composerDemandeDuSuivi(r: RapportEnfant, code: string, expire: Date) {
+  const sujet = `${r.prenom} aimerait que vous voyiez son vrai suivi sur EleveAI`;
+  const jusquau = expire.toLocaleDateString("fr-FR", { timeZone: "Indian/Reunion", day: "numeric", month: "long" });
+  const prix = `${montant(PRIX_MENSUEL)} par mois sans engagement, ou ${montant(PRIX_ANNUEL)} par an (${SUIVI.moisOfferts} mois offerts)`;
+  const html = `<div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:560px;margin:0 auto;color:#0f172a;line-height:1.6;font-size:15px">
+<p style="margin:0">Bonjour,</p>
+<p style="margin:8px 0">${echap(r.prenom)} travaille les maths sur EleveAI et vous envoie son bilan de la semaine.</p>
+${blocHtml(r)}
+<p style="margin:24px 0 8px">Les vidéos, les fiches et les exercices restent offerts. <strong>${echap(SUIVI.nom)}</strong> vous montre tout son travail, depuis le premier jour, avec des conseils et un bilan chaque semaine par courriel (jusqu'à ${SUIVI.enfantsMax} enfants) : ${echap(prix)}.</p>
+<ol style="margin:8px 0;padding-left:20px">
+<li style="margin:4px 0"><a href="${SITE}/abonnement" style="color:#0369a1;font-weight:700">Prendre le suivi</a> avec votre propre adresse.</li>
+<li style="margin:4px 0">Sur <a href="${SITE}/suivi" style="color:#0369a1">eleveai.fr/suivi</a>, entrez le code de ${echap(r.prenom)} : <strong style="font-size:18px;letter-spacing:2px">${echap(code)}</strong> (valable jusqu'au ${echap(jusquau)}).</li>
+</ol>
+<p style="font-size:12px;color:#64748b">${echap(MENTION_TVA)}.</p>
+<hr style="margin:24px 0;border:none;border-top:1px solid #e2e8f0"/>
+<p style="font-size:12px;color:#64748b;line-height:1.5">Vous recevez ce courriel parce que ${echap(r.prenom)} l'a demandé depuis son compte EleveAI. Votre adresse n'est pas enregistrée. Si vous ne connaissez pas cet élève, ignorez ce message.</p>
+</div>`;
+  const texte = `Bonjour,
+
+${r.prenom} travaille les maths sur EleveAI et vous envoie son bilan de la semaine.
+
+${blocTexte(r)}
+
+Les vidéos, les fiches et les exercices restent offerts. ${SUIVI.nom} vous montre tout son travail, depuis le premier jour, avec des conseils et un bilan chaque semaine par courriel (jusqu'à ${SUIVI.enfantsMax} enfants) : ${prix}.
+
+1. Prendre le suivi avec votre propre adresse : ${SITE}/abonnement
+2. Sur ${SITE}/suivi, entrer le code de ${r.prenom} : ${code} (valable jusqu'au ${jusquau}).
+
+${MENTION_TVA}.
+
+Vous recevez ce courriel parce que ${r.prenom} l'a demandé depuis son compte EleveAI. Votre adresse n'est pas enregistrée.`;
   return { sujet, html, texte };
 }
