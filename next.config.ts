@@ -41,11 +41,11 @@ const nextConfig = {
       // ─── 19/11/2026 — LES ÉNIGMES À PROJETER ONT UN SEUL MODÈLE ─────────────
       // Les trois premières pages HTML seules (public/enigmes/*.html) sont
       // devenues des données (lib/enigmes/) rendues par /enigmes/<classe>/<notion>.
-      // Les favoris des profs gardent leur adresse. `/enigmes` seul mène au hub.
+      // Les favoris des profs gardent leur adresse. Le hub est `/enigmes` (`/enigmes-slide` y redirige).
       { source: "/enigmes/pythagore-4e.html", destination: "/enigmes/4e/pythagore-theoreme", permanent: true },
       { source: "/enigmes/puissances-4e.html", destination: "/enigmes/4e/puissance-ecriture", permanent: true },
       { source: "/enigmes/longueurs-6e.html", destination: "/enigmes/6e/aire-longueur", permanent: true },
-      { source: "/enigmes", destination: "/enigmes-slide", permanent: false },
+      { source: "/enigmes-slide", destination: "/enigmes", permanent: true },
       // ─── 23/09/2026 — « TUTOR V4 » DISPARAÎT DE CE QUE L'ÉLÈVE VOIT ────────
       // Frédéric a tranché le nom : un seul mot, « le coach », de la liste
       // jusqu'à la question. `/tutor-v4` cumulait trois défauts — de l'anglais

@@ -37,7 +37,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   return (
     <ProjectionEnigmes
       data={data}
-      retourHref={`/enigmes-slide#${data.classe}`}
+      retourHref={`/enigmes#${data.classe}`}
       fonts={`${kalam.variable} ${atkinson.variable}`}
     />
   );

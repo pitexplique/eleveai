@@ -1,7 +1,7 @@
 // ÉNIGMES À PROJETER (19/11/2026, Frédéric : « fais-le du CP à la terminale,
 // sur chaque notion »). UN SEUL MODÈLE : chaque notion du coach a son fichier
 // de données, `lib/enigmes/<classe>/<notionId>.ts`, rendu par UNE seule page,
-// `/enigmes/<classe>/<notion-slug>`. Le hub `/enigmes-slide` les liste toutes.
+// `/enigmes/<classe>/<notion-slug>`. Le hub `/enigmes` les liste toutes.
 //
 // ⛔ Règles d'écriture (voir aussi lib/enigmes/REGLES.md) :
 //  - 6 énigmes par notion, dont UNE « piège » et UNE « défi des curieux » ;

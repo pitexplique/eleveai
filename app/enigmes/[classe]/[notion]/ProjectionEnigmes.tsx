@@ -6,6 +6,10 @@
 // dans les classes il y a un pb de lumière ») ; le fond BLANC reste au choix
 // (touche T), pour écrire au feutre sur le tableau blanc. Les lignes
 // d'écriture en bas (touche L) reçoivent la réponse quand on la montre.
+// ⏱ 19/11, Frédéric : « énigmes à projeter et en dessous questions flash avec
+// un minuteur » → un minuteur par énigme (1, 2, 3 ou 5 min, touche M pour
+// lancer ou arrêter), grand, en haut à droite du tableau. Il s'arrête et se
+// remet à zéro quand on change d'énigme. Aucun son : l'écran clignote.
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
@@ -44,6 +48,9 @@ export default function ProjectionEnigmes({
   const [montree, setMontree] = useState(false);
   const [lignes, setLignes] = useState(true);
   const [ardoise, setArdoise] = useState(true);
+  const [duree, setDuree] = useState(120);
+  const [restant, setRestant] = useState<number | null>(null);
+  const [tourne, setTourne] = useState(false);
 
   // Reprendre là où le prof s'était arrêté, et son fond préféré.
   useEffect(() => {
@@ -57,7 +64,32 @@ export default function ProjectionEnigmes({
   const aller = useCallback((k: number) => {
     setI(((k % n) + n) % n);
     setMontree(false);
+    setTourne(false);
+    setRestant(null);
   }, [n]);
+
+  // Le minuteur : une seconde à la fois, arrêt à zéro.
+  useEffect(() => {
+    if (!tourne) return;
+    const t = setInterval(() => {
+      setRestant((r) => {
+        const s = (r ?? 0) - 1;
+        if (s <= 0) setTourne(false);
+        return Math.max(0, s);
+      });
+    }, 1000);
+    return () => clearInterval(t);
+  }, [tourne]);
+  const lancer = useCallback((d: number) => {
+    setDuree(d);
+    setRestant(d);
+    setTourne(true);
+  }, []);
+  const basculer = useCallback(() => {
+    if (tourne) setTourne(false);
+    else if (restant && restant > 0) setTourne(true);
+    else lancer(duree);
+  }, [tourne, restant, duree, lancer]);
 
   useEffect(() => {
     const onKey = (ev: KeyboardEvent) => {
@@ -66,13 +98,14 @@ export default function ProjectionEnigmes({
       else if (ev.key === "ArrowLeft" || ev.key === "PageUp") { aller(i - 1); ev.preventDefault(); }
       else if (ev.key === "l" || ev.key === "L") setLignes((v) => !v);
       else if (ev.key === "t" || ev.key === "T") setArdoise((v) => !v);
+      else if (ev.key === "m" || ev.key === "M") basculer();
       else if (ev.key === " " || ev.key === "Enter") {
         if (cible?.tagName !== "BUTTON" && cible?.tagName !== "A") { setMontree((v) => !v); ev.preventDefault(); }
       }
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [aller, i]);
+  }, [aller, i, basculer]);
 
   const e = data.enigmes[i];
   const question = useMemo(() => teinter(e.question, ardoise), [e, ardoise]);
@@ -94,6 +127,11 @@ export default function ProjectionEnigmes({
     <div className={`enigmes ${fonts} ${ardoise ? "ardoise" : ""}`}>
       <div className="wrap">
         <main className={`board ${lignes ? "avec-lignes" : ""}`} aria-live="polite">
+          {restant !== null ? (
+            <div className={`minuteur ${restant === 0 ? "fini" : ""}`} role="timer" aria-live="off">
+              {restant === 0 ? "⏱ Stylos levés !" : `⏱ ${Math.floor(restant / 60)}:${String(restant % 60).padStart(2, "0")}`}
+            </div>
+          ) : null}
           <section className="slide">
             <div>
               <div className="tag">{e.tag}</div>
@@ -122,9 +160,19 @@ export default function ProjectionEnigmes({
           <button type="button" onClick={() => setArdoise((v) => !v)}>
             {ardoise ? "Fond blanc" : "Fond ardoise"}
           </button>
+          <span className="chrono" aria-label="Minuteur">
+            {[60, 120, 180, 300].map((d) => (
+              <button key={d} type="button" aria-pressed={duree === d && restant !== null} onClick={() => lancer(d)}>
+                ⏱ {d / 60} min
+              </button>
+            ))}
+            {restant !== null ? (
+              <button type="button" onClick={basculer}>{tourne ? "Pause" : restant === 0 ? "Relancer" : "Reprendre"}</button>
+            ) : null}
+          </span>
           <button type="button" onClick={pleinEcran}>Plein écran</button>
           <span className="hint">
-            ← → pour changer · Espace : la réponse · L : les lignes · T : le fond
+            ← → pour changer · Espace : la réponse · M : le minuteur · L : les lignes · T : le fond
           </span>
           <div className="dots">
             {data.enigmes.map((_, k) => (
@@ -165,10 +213,24 @@ const CSS = `
   display: flex; flex-direction: column; gap: 10px;
 }
 .enigmes .board {
+  position: relative;
   flex: 1; min-height: 0; background: var(--board); border-radius: 6px;
   box-shadow: inset 0 0 0 2px #cbd5e1; padding: clamp(16px, 3vw, 44px); overflow: auto;
 }
 .enigmes.ardoise .board { box-shadow: inset 0 0 0 10px #6b4f2a, inset 0 0 0 12px #3b2a14; }
+.enigmes .minuteur {
+  position: absolute; top: 10px; right: 14px; z-index: 1;
+  font-family: var(--display); font-weight: 700; font-size: clamp(28px, 3.6vw, 52px);
+  color: var(--yellow); font-variant-numeric: tabular-nums; line-height: 1;
+}
+.enigmes .minuteur.fini { color: var(--pink); }
+@media (prefers-reduced-motion: no-preference) {
+  .enigmes .minuteur.fini { animation: enigme-clignote 1s steps(2, start) 6; }
+  @keyframes enigme-clignote { to { visibility: hidden; } }
+}
+.enigmes .chrono { display: inline-flex; gap: 4px; flex-wrap: wrap; }
+.enigmes .chrono button { padding: 8px 10px; }
+.enigmes .chrono button[aria-pressed="true"] { background: var(--yellow); color: #1e293b; }
 .enigmes .slide { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(16px, 3vw, 48px); align-items: center; min-height: 100%; }
 .enigmes .slide > * { min-width: 0; }
 .enigmes .tag { font-family: var(--display); color: var(--yellow); font-size: clamp(18px, 2vw, 26px); letter-spacing: .04em; }

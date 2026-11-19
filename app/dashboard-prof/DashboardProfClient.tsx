@@ -489,7 +489,7 @@ export default function DashboardProfClient() {
                   🍽️ Exemples de séances
                 </Link>
                 {/* 19/11 : le hub des énigmes à projeter au tableau. */}
-                <Link href="/enigmes-slide" className="rounded-2xl bg-emerald-100 px-4 py-2 text-emerald-900 ring-1 ring-emerald-300 hover:brightness-95">
+                <Link href="/enigmes" className="rounded-2xl bg-emerald-100 px-4 py-2 text-emerald-900 ring-1 ring-emerald-300 hover:brightness-95">
                   🧩 Projeter les énigmes
                 </Link>
               </div>
