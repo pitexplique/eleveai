@@ -15,6 +15,30 @@ const ADMIN_EMAIL = "eleveai974@gmail.com";
 
 type UserEmailType = "prof" | "eleve" | "parent" | "perso" | "admin";
 
+// ⭐ 19/11/2026 — LE TUNNEL DU PROF. Avant, la page ne parlait jamais d'adresse
+// académique : un prof inscrit avec son Gmail était REFUSÉ en créant sa classe
+// (lib/server/classesProf.ts, profDuJeton). On le dit maintenant AVANT.
+// ⚠️ Même règle que estAdresseAcademique de lib/server/classesProf.ts (fichier
+// serveur, non importable ici) : à garder identiques.
+const estAdresseAcademiqueProf = (email: string) => {
+  const e = email.trim().toLowerCase();
+  return /@ac-[a-z-]+\.fr$/.test(e) || e.endsWith("@education.gouv.fr");
+};
+
+function AideAdresseProf({ email }: { email: string }) {
+  const tapee = email.trim() !== "";
+  const ok = estAdresseAcademiqueProf(email);
+  return (
+    <p className={`rounded-lg px-3 py-2 text-xs font-semibold ${tapee && !ok ? "bg-amber-50 text-amber-900 ring-1 ring-amber-200" : "bg-violet-50 text-violet-900 ring-1 ring-violet-200"}`}>
+      {tapee && ok
+        ? "Adresse académique : vous pourrez créer vos classes tout de suite."
+        : tapee
+          ? "Pour créer vos classes, utilisez votre adresse académique (@ac-…fr). Sinon, écrivez-nous pour faire valider votre compte prof."
+          : "Professeur : utilisez votre adresse académique (@ac-…fr). C'est elle qui ouvre « Mes classes »."}
+    </p>
+  );
+}
+
 const PROFILE_OPTIONS: { value: Exclude<UserEmailType, "admin">; label: string }[] = [
   { value: "prof", label: "Professeur" },
   { value: "parent", label: "Parent" },
@@ -206,7 +230,7 @@ export default function SignInPage() {
   const getEmailUserCode = (profile: UserEmailProfile) =>
     `EMAIL-${profile.id}`;
 
-  const routeEmailProfile = (profile: UserEmailProfile, token?: string | null) => {
+  const routeEmailProfile = (profile: UserEmailProfile, token?: string | null, nouveauCompte = false) => {
     const type = profile.type_utilisateur ?? "perso";
 
     login({
@@ -232,7 +256,9 @@ export default function SignInPage() {
       // ⛔ PLUS DE DÉTOUR PAR /passions (02/11/2026, Frédéric : « il doit
       // aller à l'accueil »). Les centres d'intérêt se choisissent depuis
       // l'accueil, quand l'élève le veut.
-      router.push(destination ?? "/accueil");
+      // ⭐ 19/11/2026 — un PROF qui vient de créer son compte arrive sur
+      // « Mes classes » : c'est ce qu'il est venu faire (tunnel du prof).
+      router.push(destination ?? (nouveauCompte && type === "prof" ? "/prof/classes" : "/accueil"));
     }
   };
 
@@ -709,7 +735,7 @@ export default function SignInPage() {
       const sessionToken = await fetchEmailSessionToken(pendingAuth.accessToken);
 
       setFeedback("Compte créé. Bienvenue sur EleveAI !");
-      routeEmailProfile(profile as UserEmailProfile, sessionToken);
+      routeEmailProfile(profile as UserEmailProfile, sessionToken, true);
     } catch (err: any) {
       console.error("Unexpected profile submit error:", err);
       setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
@@ -879,6 +905,7 @@ export default function SignInPage() {
                     className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:bg-slate-100"
                   />
                 </div>
+                {typeUtilisateur === "prof" && <AideAdresseProf email={email} />}
 
                 {!modePin && !emailSent && (
                   <button
@@ -1155,6 +1182,7 @@ export default function SignInPage() {
                           );
                         })}
                       </div>
+                      {typeUtilisateur === "prof" && <AideAdresseProf email={pendingAuth?.email ?? email} />}
                     </div>
                   )}
 

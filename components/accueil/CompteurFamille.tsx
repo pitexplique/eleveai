@@ -18,7 +18,7 @@ const LIENS_OFFRE = true;
 const CARTE_CADEAU = false;
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, GraduationCap, Gift, PlayCircle, Users, Utensils } from "lucide-react";
+import { ArrowRight, GraduationCap, Gift, PlayCircle, Puzzle, Users, Utensils } from "lucide-react";
 import { CAP_VIDEOS, ECHEANCE_CAP, etatCompteurVideos } from "@/lib/videos/compteur";
 import { EXERCICES } from "@/lib/accueil/chiffres-semaine";
 import CompteurReponsesCoach from "@/components/coach/CompteurReponsesCoach";
@@ -113,10 +113,16 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
         <p className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-violet-700">
           <GraduationCap className="h-5 w-5" aria-hidden="true" /> Le prof
         </p>
-        {/* 17/11, Frédéric : « propose autre chose » que la citation « 100 % de
-            mes élèves accrochent » → titre simple, sans chiffre ni citation. */}
+        {/* ⭐ 19/11/2026, Frédéric : « le mot d'ordre : me simplifier ma vie »,
+            « EleveAI simplifie ta vie de prof », « les élèves sont concentrés »,
+            « donc je passe une heure tranquille », « et les notes sont
+            exportables ». Avant (17/11) : « Une vidéo au tableau, puis chaque
+            élève s'entraîne à son niveau ». ⛔ Toujours sans prix. */}
         <p className="mt-1 text-xl font-black leading-snug text-slate-900">
-          Une vidéo au tableau, puis chaque élève s&apos;entraîne à son niveau
+          EleveAI simplifie votre vie de prof
+        </p>
+        <p className="mt-1 text-sm font-bold text-slate-700">
+          Vos élèves s&apos;entraînent à leur niveau et restent concentrés. Vous passez une heure tranquille.
         </p>
         <ul className="mt-2 space-y-0.5 text-sm font-bold text-slate-700">
           {[
@@ -128,6 +134,11 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
             "En salle info, suivez vos élèves en direct",
             // U+2011 : trait d'union insécable, « micro‑compétence » ne se coupe pas.
             "Le bilan de chaque élève, par micro‑compétence",
+            // 19/11, Frédéric : « fais bosser les élèves, qui le font le soir en
+            // autonomie : tu as les notes », « les notes sont exportables » →
+            // le bulletin (/prof/classes/bulletin) : moyennes et appréciations
+            // à copier dans Pronote, ou à imprimer.
+            "Le soir, ils s'entraînent seuls : vous avez leurs notes, à copier dans Pronote",
           ].map((t) => (
             <li key={t} className="flex gap-1.5">
               <span aria-hidden="true" className="text-violet-700">✔</span>
@@ -146,6 +157,14 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
           >
             Créer ma classe <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
+          {/* 19/11 : les problèmes à projeter (fond ardoise, minuteur). */}
+          <Link
+            href="/problemes"
+            className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-slate-200 hover:ring-violet-400"
+          >
+            <Puzzle className="h-4 w-4 text-violet-700" aria-hidden="true" />
+            Problèmes à projeter
+          </Link>
           <Link
             href="/seances"
             className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-slate-200 hover:ring-violet-400"
@@ -154,7 +173,7 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
             Exemples de séances
           </Link>
         </div>
-        <p className="mt-1.5 text-xs font-bold text-slate-600"><span className="whitespace-nowrap">20 min de cours,</span> <span className="whitespace-nowrap">25 min de coach et vidéos,</span> <span className="whitespace-nowrap">10 min de synthèse</span></p>
+        <p className="mt-1.5 text-xs font-bold text-slate-600">La séance type : <span className="whitespace-nowrap">20 min de cours,</span> <span className="whitespace-nowrap">25 min de coach et vidéos,</span> <span className="whitespace-nowrap">10 min de synthèse</span></p>
       </div>
 
       {/* EN DESSOUS : LA BANDE DES CHIFFRES. Vidéos comptées (lib/videos/compteur.ts),

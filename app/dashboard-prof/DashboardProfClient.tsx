@@ -374,7 +374,8 @@ export default function DashboardProfClient() {
         <section className="mx-auto max-w-xl rounded-3xl bg-white p-6 text-slate-950 shadow-xl">
           <h1 className="text-2xl font-black">Dashboard professeur</h1>
           <p className="mt-3 font-semibold text-slate-700">Connecte-toi avec un compte professeur.</p>
-          <Link href="/auth/signin-eleve" className="mt-5 inline-flex rounded-2xl bg-blue-600 px-5 py-3 font-black text-white">Se connecter</Link>
+          {/* 19/11/2026 : menait à la connexion ÉLÈVE (/auth/signin-eleve). */}
+          <Link href="/auth/signin?type=prof&next=/dashboard-prof" className="mt-5 inline-flex rounded-2xl bg-blue-600 px-5 py-3 font-black text-white">Se connecter</Link>
         </section>
       </main>
     );

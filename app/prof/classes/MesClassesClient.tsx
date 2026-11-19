@@ -9,6 +9,7 @@ import Link from "next/link";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
 import AvatarRond from "@/components/AvatarRond";
+import { FREE_CLASSES_PER_TEACHER } from "@/lib/tarifs";
 
 type EleveClasse = {
   code_utilisateur: string;
@@ -157,18 +158,36 @@ export default function MesClassesClient() {
   if (!user) {
     return (
       <main className="min-h-screen bg-slate-50 px-4 py-12 text-slate-900">
+        {/* ⭐ 19/11/2026 — LA PORTE DU TUNNEL PROF (« Vous êtes prof ? » de
+            l'accueil arrive ici). Frédéric : « EleveAI simplifie ta vie de
+            prof ». ⛔ Aucun prix : les 2 classes offertes seulement. */}
         <div className="mx-auto max-w-2xl">
           <h1 className="text-3xl font-black text-slate-900">Mes classes</h1>
-          <p className="mt-4 text-slate-700">
-            Connecte-toi avec ton adresse académique (prenom.nom@ac-…fr) pour
-            créer tes classes.
+          <p className="mt-3 text-lg font-bold text-violet-800">
+            Tes {FREE_CLASSES_PER_TEACHER} classes sont offertes.
           </p>
-          <Link
-            href="/auth/signin?type=prof&next=/prof/classes"
-            className="mt-6 inline-block rounded-xl bg-emerald-600 px-5 py-3 font-bold text-white hover:bg-emerald-500"
-          >
-            Me connecter
-          </Link>
+          <ol className="mt-4 space-y-2 text-slate-700">
+            <li><span className="font-black text-violet-700">1.</span> Tu crées ta classe : chaque élève reçoit un code et un mot de passe simple.</li>
+            <li><span className="font-black text-violet-700">2.</span> En classe, tu projettes une vidéo ou un problème, puis chacun s&apos;entraîne à son niveau.</li>
+            <li><span className="font-black text-violet-700">3.</span> Tu suis tout en direct, et le soir aussi : tu as leurs notes, à copier dans Pronote.</li>
+          </ol>
+          <p className="mt-4 rounded-xl bg-violet-50 px-4 py-3 text-sm font-semibold text-violet-900 ring-1 ring-violet-200">
+            Utilise ton adresse académique (prenom.nom@ac-…fr) : c&apos;est elle qui ouvre « Mes classes ».
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              href="/auth/signin?type=prof&inscription=1&next=/prof/classes"
+              className="inline-block rounded-xl bg-violet-700 px-5 py-3 font-bold text-white hover:bg-violet-800"
+            >
+              Créer mon compte prof
+            </Link>
+            <Link
+              href="/auth/signin?type=prof&next=/prof/classes"
+              className="inline-block rounded-xl border border-slate-300 bg-white px-5 py-3 font-bold text-slate-800 hover:bg-slate-50"
+            >
+              J&apos;ai déjà un compte
+            </Link>
+          </div>
         </div>
       </main>
     );
@@ -182,6 +201,50 @@ export default function MesClassesClient() {
           Crée une classe : le site fabrique le code de la classe, un code par
           élève et un mot de passe simple. Imprime les cartes et distribue-les.
         </p>
+
+        {/* ⭐ 19/11/2026 : les classes offertes, dites en clair (sans prix).
+            La limite n'agit pas tant que la vente est fermée
+            (LIMITE_CLASSES_ACTIVE) : on ne parle que de ce qui reste. */}
+        {classes !== null && classes.length < FREE_CLASSES_PER_TEACHER && (
+          <p className="mt-3 inline-block rounded-full bg-violet-50 px-4 py-1.5 text-sm font-bold text-violet-900 ring-1 ring-violet-200">
+            {classes.length === 0
+              ? `Tes ${FREE_CLASSES_PER_TEACHER} classes sont offertes.`
+              : `Il te reste ${FREE_CLASSES_PER_TEACHER - classes.length} classe${FREE_CLASSES_PER_TEACHER - classes.length > 1 ? "s" : ""} offerte${FREE_CLASSES_PER_TEACHER - classes.length > 1 ? "s" : ""}.`}
+          </p>
+        )}
+
+        {/* ⭐ 19/11/2026 — « ET MAINTENANT ? » Une fois la classe créée, le prof
+            ne savait pas quoi faire. Trois étapes, vers les outils qui existent. */}
+        {classes && classes.length > 0 && (
+          <section className="mt-6 rounded-2xl border border-violet-200 bg-violet-50/60 p-5">
+            <h2 className="text-lg font-black text-slate-900">Et maintenant ?</h2>
+            <ol className="mt-3 grid gap-3 sm:grid-cols-3">
+              <li className="rounded-xl bg-white p-4 ring-1 ring-violet-100">
+                <p className="font-black text-violet-800">1. Imprimer les cartes</p>
+                <p className="mt-1 text-sm text-slate-600">Un code et un mot de passe par élève, à distribuer.</p>
+                <Link href={`/prof/cartes?code=${encodeURIComponent(classes[0].code_etablissement)}`} className="mt-2 inline-block text-sm font-bold text-violet-800 underline">
+                  Les cartes de {classes[0].nom_classe}
+                </Link>
+              </li>
+              <li className="rounded-xl bg-white p-4 ring-1 ring-violet-100">
+                <p className="font-black text-violet-800">2. Projeter, puis entraîner</p>
+                <p className="mt-1 text-sm text-slate-600">20 min de cours, 25 min de coach et vidéos, 10 min de synthèse.</p>
+                <span className="mt-2 flex flex-wrap gap-x-3 text-sm font-bold">
+                  <Link href="/seances" className="text-violet-800 underline">Exemples de séances</Link>
+                  <Link href="/problemes" className="text-violet-800 underline">Problèmes à projeter</Link>
+                </span>
+              </li>
+              <li className="rounded-xl bg-white p-4 ring-1 ring-violet-100">
+                <p className="font-black text-violet-800">3. Suivre, en classe et le soir</p>
+                <p className="mt-1 text-sm text-slate-600">En direct pendant la séance, puis le bulletin : les notes à copier dans Pronote.</p>
+                <span className="mt-2 flex flex-wrap gap-x-3 text-sm font-bold">
+                  <Link href={`/prof/classes/direct?code=${encodeURIComponent(classes[0].code_etablissement)}`} className="text-violet-800 underline">En direct</Link>
+                  <Link href={`/prof/classes/bulletin?code=${encodeURIComponent(classes[0].code_etablissement)}`} className="text-violet-800 underline">Bulletin</Link>
+                </span>
+              </li>
+            </ol>
+          </section>
+        )}
 
         {erreur && (
           <p className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">

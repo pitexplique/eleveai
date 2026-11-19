@@ -19,11 +19,9 @@ import type { Metadata } from "next";
 // page qui annonce un achat dont la caisse ne répond pas est pire que le
 // silence : c'est la leçon du llms.txt qui prétendait que le coach ne demandait
 // pas de compte.
-import { VENTE } from "@/lib/legal/editeur";
-import { ENSEIGNANT, PRIX_MENSUEL, PRIX_PUBLICS, montant } from "@/lib/tarifs";
-
-/** L'effectif d'une classe ordinaire — sert d'illustration, plus de calcul. */
-const CLASSE_EXEMPLE_ELEVES = 30;
+// ✅ 19/11/2026 : l'inscription prof par e-mail et « Mes classes » existent ;
+// la carte de prix a laissé place au chemin en 3 étapes (plus bas).
+import { ENSEIGNANT, FREE_CLASSES_PER_TEACHER } from "@/lib/tarifs";
 
 // ⚠️ LA CANONIQUE SUIT LA REDIRECTION, ELLE NE LA CONTREDIT PAS (10/08/2026).
 // Cette page a vécu à `/enseignants` ; depuis le 08/08 c'est l'inverse qui est
@@ -119,12 +117,15 @@ export default function EnseignantsPage() {
             🍎 Pour les enseignants
           </p>
           <h1 className="mt-4 text-3xl font-black leading-tight sm:text-5xl">
-            Voyez où en sont vos élèves.
-            <br className="hidden sm:block" /> Utilisez EleveAI <span className="text-emerald-600">en classe</span>.
+            {/* 19/11/2026, Frédéric : « EleveAI simplifie ta vie de prof ».
+                Avant : « Voyez où en sont vos élèves. Utilisez EleveAI en classe. » */}
+            EleveAI simplifie
+            <br className="hidden sm:block" /> votre <span className="text-emerald-600">vie de prof</span>
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base font-semibold leading-relaxed text-slate-600 sm:text-lg">
-            Un tableau de bord en temps réel et des outils à lancer en cours —
-            les résultats remontent, validés, sans saisie. Vous restez la référence.
+            Vos élèves s&apos;entraînent à leur niveau et restent concentrés : vous
+            passez une heure tranquille. Le soir, ils continuent seuls, et vous
+            avez leurs notes.
           </p>
           <p className="mt-3 text-sm font-bold text-slate-600">
             🌍 Professeur dans l’un de nos 8 pays francophones ?{" "}
@@ -149,17 +150,19 @@ export default function EnseignantsPage() {
             </Link>
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link
-              href="/dashboard-prof"
-              className="rounded-2xl bg-emerald-600 px-7 py-3.5 text-base font-black text-white shadow-lg transition hover:bg-emerald-500 hover:scale-105"
-            >
-              📊 Accéder à mon tableau de bord
-            </Link>
+            {/* 19/11/2026 : un seul bouton principal, « Mes classes » (avant,
+                le tableau de bord passait devant). */}
             <Link
               href="/prof/classes"
+              className="rounded-2xl bg-emerald-600 px-7 py-3.5 text-base font-black text-white shadow-lg transition hover:bg-emerald-500 hover:scale-105"
+            >
+              🏫 Créer mes {FREE_CLASSES_PER_TEACHER} classes offertes
+            </Link>
+            <Link
+              href="/dashboard-prof"
               className="rounded-2xl border-2 border-emerald-600 bg-white px-7 py-3.5 text-base font-black text-emerald-700 shadow-lg transition hover:bg-emerald-50 hover:scale-105"
             >
-              🏫 Créer mes classes
+              📊 Mon tableau de bord
             </Link>
             {/* ⛔⛔ « DÉPLOYER DANS MON COLLÈGE » RETIRÉ LE 29/08/2026 — on ne
                 vend plus aux établissements (Frédéric : « c'est du pénal »).
@@ -417,81 +420,46 @@ export default function EnseignantsPage() {
               de retirer. */}
           <div className="mt-6 grid gap-4">
             {/* Le chemin du prof seul — celui pour lequel le forfait existe. */}
-            <div className="rounded-2xl border-2 border-sky-200 bg-sky-50/60 p-5">
-              <p className="text-xs font-black uppercase tracking-wide text-sky-700">
-                Vous, pour votre ou vos classes
+            {/* ⭐ 19/11/2026 — LE CHEMIN EN 3 ÉTAPES. Frédéric : « le mot
+                d'ordre : me simplifier ma vie », « les élèves sont concentrés,
+                donc je passe une heure tranquille », « fais bosser les élèves,
+                qui le font le soir en autonomie : tu as les notes ».
+                ⚠️ Remplace la carte « Gratuit à titre personnel » de septembre
+                (« le tableau de bord se construit en ce moment », « les prix
+                ci-dessus sont fermes ») : elle ne disait plus le vrai depuis le
+                modèle du 19/11 (contenu offert à tous, 2 classes offertes par
+                prof). ⛔ Aucun prix ici. Ancienne carte : git show 6b1eaa2b:app/espace-profs/page.tsx */}
+            <div className="rounded-2xl border-2 border-violet-200 bg-violet-50/60 p-5">
+              <p className="text-xs font-black uppercase tracking-wide text-violet-700">
+                Vous, pour vos classes
               </p>
-              {/* ⭐ ZÉRO EURO DEPUIS LE 01/09/2026, ET C'EST CE BLOC QUI A
-                  DÉCLENCHÉ LE CHANGEMENT. Le prix s'affichait au mois et par
-                  élève, ce qui invitait le professeur à multiplier par son
-                  effectif : 30 € par mois pour une classe, 150 € s'il en a
-                  cinq — 1 800 € par an. C'est le calcul que Frédéric a fait ce
-                  jour-là, et il est le bon : aucun enseignant ne sort ça de sa
-                  poche. Il n'y a plus rien à multiplier. */}
               <p className="mt-2 text-3xl font-black text-slate-900">
-                Gratuit
-                <span className="ml-1 text-base font-black text-slate-500">
-                  à titre personnel
-                </span>
+                Vos {FREE_CLASSES_PER_TEACHER} classes sont offertes
               </p>
-              {/* ⛔ LES DEUX MOITIÉS NE SE SÉPARENT PAS. « Gratuit » seul se lit
-                  « gratuit pour ma classe », et c'est ce qu'un professeur
-                  annoncera de bonne foi à ses familles — qui découvriront le
-                  prix devant la caisse. La restriction est donc sur la ligne
-                  d'après le mot, pas en bas de page. */}
-              {/* ⛔ LE MONTANT PART LE 09/09/2026 (`PRIX_PUBLICS`), MAIS PAS LA
-                  RESTRICTION. Les deux moitiés ne se séparent toujours pas :
-                  supprimer « pas pour les familles de vos élèves » en même temps
-                  que le prix rendrait la phrase FAUSSE dans le sens exact que le
-                  commentaire ci-dessus interdit — un professeur lirait « gratuit »
-                  tout court et l'annoncerait à sa classe. */}
-              <p className="mt-1 text-sm font-black text-sky-800">
-                Ouvert sur {ENSEIGNANT.verification} — gratuit pour vous, pas
-                pour les familles de vos élèves
-                {PRIX_PUBLICS ? <>, qui restent à {montant(PRIX_MENSUEL)} par mois</> : null}
+              <p className="mt-1 text-sm font-black text-violet-800">
+                Ouvert sur {ENSEIGNANT.verification}.
               </p>
-              {/* ⛔ CETTE PHRASE DISAIT « LES FAMILLES DE VOTRE CLASSE NE PAIENT
-                  RIEN » — vrai du forfait professeur du 21/08, faux depuis le 22.
-                  Ce sont elles qui paient, moins cher, et c'est tout l'intérêt.
-                  Une constante ne protège que d'un chiffre : celle-ci était juste
-                  pendant que la phrase autour d'elle mentait.
-                  ⚠️ CE QUI RESTE VRAI ET QU'ON NE TOUCHE PAS : l'ÉLÈVE, lui, ne
-                  paie jamais. C'est la fenêtre du parent qui s'achète, et
-                  l'enfant dont la famille ne s'abonne pas travaille à
-                  l'identique — sans que vous sachiez lequel c'est. */}
-              <p className="mt-3 text-sm font-semibold leading-relaxed text-slate-600">
-                Vous n&apos;avancez rien et vous ne ramassez rien : les familles
-                qui s&apos;abonnent le font en direct, au tarif ordinaire. Vous ne
-                saurez pas qui a payé — votre tableau de bord affiche vos{" "}
-                {CLASSE_EXEMPLE_ELEVES} élèves sans distinction, et celui dont la
-                famille ne s&apos;abonne pas travaille exactement comme les
-                autres. Vos élèves, eux, n&apos;ont jamais rien à payer.
+              <ol className="mt-4 grid gap-3 sm:grid-cols-3">
+                {[
+                  { n: 1, titre: "Créez votre classe", texte: "Chaque élève reçoit un code et un mot de passe simple. Vous imprimez les cartes." },
+                  { n: 2, titre: "Projetez, puis entraînez", texte: "20 min de cours, 25 min de coach et vidéos, 10 min de synthèse. Ils restent concentrés : vous passez une heure tranquille." },
+                  { n: 3, titre: "Suivez, en classe et le soir", texte: "En direct pendant la séance. Le soir, ils s'entraînent seuls : vous avez leurs notes, à copier dans Pronote." },
+                ].map((e) => (
+                  <li key={e.n} className="rounded-xl bg-white p-4 ring-1 ring-violet-100">
+                    <p className="font-black text-violet-800">{e.n}. {e.titre}</p>
+                    <p className="mt-1 text-sm font-semibold leading-relaxed text-slate-600">{e.texte}</p>
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-4 text-sm font-semibold leading-relaxed text-slate-600">
+                Le coach, les vidéos et les fiches sont offerts à vos élèves, en classe comme à la maison.
               </p>
-              {/* ⛔ LES DEUX BRANCHES POINTAIENT VERS `/tarifs#classe`, ET
-                  L'ANCRE N'EXISTE PLUS depuis la suppression du tarif classe le
-                  01/09 — `/tarifs` n'a plus qu'un seul `id`, `#famille`. Un lien
-                  vers une ancre morte ne casse rien de visible : il ouvre la page
-                  en haut, et personne ne s'aperçoit qu'on a perdu le lecteur en
-                  route. ⚠️ Les libellés mentaient autant que la cible :
-                  « Équiper ma classe » et « voir l'offre classe » proposaient
-                  d'acheter à un professeur qui ne paie plus rien.
-                  ⚠️ LA TERNAIRE EST TOMBÉE AVEC EUX : ses deux branches ne
-                  différaient que par le libellé d'une offre disparue. Ce qui
-                  dépend encore de `VENTE.ouverte`, c'est la note — et elle
-                  seule. */}
               <Link
-                href="/tarifs"
-                className="mt-4 inline-flex items-center gap-2 rounded-full bg-sky-600 px-5 py-2.5 text-sm font-black text-white transition hover:bg-sky-500"
+                href="/prof/classes"
+                className="mt-4 inline-flex items-center gap-2 rounded-full bg-violet-700 px-5 py-2.5 text-sm font-black text-white transition hover:bg-violet-800"
               >
-                Voir la grille complète
+                Créer mes classes
               </Link>
-              {!VENTE.ouverte && (
-                <p className="mt-2 text-xs font-bold text-slate-500">
-                  Le tableau de bord professeur se construit en ce moment. Les
-                  prix ci-dessus sont fermes, et rien n&apos;est encaissé tant
-                  qu&apos;il n&apos;est pas prêt.
-                </p>
-              )}
             </div>
 
             {/* ⛔⛔ LA CARTE « OU TOUT VOTRE ÉTABLISSEMENT » EST RETIRÉE LE
@@ -513,14 +481,13 @@ export default function EnseignantsPage() {
             >
               Accéder à mon tableau de bord
             </Link>
+            {/* 19/11/2026 : « Les offres en détail » (/tarifs) retiré d'ici :
+                la page prof ne vend rien. */}
             <Link
-              href="/tarifs"
+              href="/seances"
               className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-5 py-2.5 text-sm font-black text-slate-800 transition hover:bg-slate-50"
             >
-              {/* ⚠️ « LES TROIS OFFRES » comptait la famille, la classe et
-                  l'établissement — il en reste deux depuis le 29/08. Un libellé
-                  qui compte se dément tout seul dès qu'on clique. */}
-              Les offres en détail
+              Exemples de séances
             </Link>
           </div>
         </section>
