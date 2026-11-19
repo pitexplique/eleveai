@@ -355,11 +355,9 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
             d'accueil ». Même menu que /seances (lib/seances/seances.ts). */}
         {MENU_RESTAURANT && (
           <section className="mt-12">
-            <h2 className="text-center text-2xl font-black sm:text-3xl">Le restaurant de maths, en classe</h2>
-            <p className="mx-auto mt-2 max-w-2xl text-center text-slate-600">
-              Un plat pour tous, puis chacun choisit sa façon d&apos;apprendre. Testé en 6e : les élèves ont adoré.
-            </p>
-            <div className="mx-auto mt-5 max-w-2xl">
+            {/* 19/11, Frédéric : titre « Le restaurant de maths, en classe » et sa
+                phrase retirés ; le menu parle de lui-même. */}
+            <div className="mx-auto max-w-2xl">
               <MenuDuJour menu={MENU_RESTAURANT} />
             </div>
             <p className="mt-4 text-center">
