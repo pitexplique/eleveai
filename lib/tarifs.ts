@@ -177,14 +177,14 @@ export const PRIX_MENSUEL = 4.95; // 02/11/2026 (était 2,50 €)
  * suivant, il s'arrête avec l'année scolaire. Le taire, c'est vendre onze mois
  * pour cinq — et c'est le genre de silence qui se retrouve en litige.
  */
-export const PRIX_ANNUEL = 39; // 02/11/2026 (était 19,90 €)
+export const PRIX_ANNUEL = 49; // 19/11/2026 : 49 € par an, « 2 mois offerts » (était 39 €, 19,90 € avant)
 
 /**
  * La période que couvre l'abonnement annuel. ⛔ MENTION OBLIGATOIRE : elle
  * s'affiche partout où `PRIX_ANNUEL` s'affiche, sans exception.
  */
 export const PERIODE_ANNUELLE =
-  "sur l'année scolaire, et non sur douze mois glissants";
+  "pour douze mois, résiliable à tout moment pour l'année suivante"; // 19/11/2026 : abonnement annuel Stripe (suivi_yearly)
 
 /** Ce que coûterait une année entière payée au mois : 30 €. Sert au calcul. */
 export const ANNUEL_AU_TARIF_MENSUEL = PRIX_MENSUEL * 12;
@@ -358,13 +358,16 @@ export type Formule = "mensuel" | "annee";
  * listes paie le prix français, jamais le plus bas.
  */
 export const ZONES_PAIEMENT: Record<CodeZone, { devise: string; mensuel: number; annee: number }> = {
-  europe: { devise: "eur", mensuel: 495, annee: 3900 },
-  suisse: { devise: "chf", mensuel: 500, annee: 3900 },
-  canada: { devise: "cad", mensuel: 695, annee: 5490 },
-  maghreb: { devise: "eur", mensuel: 250, annee: 1990 },
-  fcfa_ouest: { devise: "xof", mensuel: 1000, annee: 8000 },
-  fcfa_centre: { devise: "xaf", mensuel: 1000, annee: 8000 },
-  modeste: { devise: "eur", mensuel: 100, annee: 790 },
+  // 19/11/2026 : l'année = 10 mois (« 2 mois offerts »), dans toutes les zones.
+  // ⚠️ Hors France, les montants annuels ont suivi cette règle sans décision
+  // pays par pays (les pays sont gelés) : à revoir le jour où on les ouvre.
+  europe: { devise: "eur", mensuel: 495, annee: 4900 },
+  suisse: { devise: "chf", mensuel: 500, annee: 5000 },
+  canada: { devise: "cad", mensuel: 695, annee: 6950 },
+  maghreb: { devise: "eur", mensuel: 250, annee: 2500 },
+  fcfa_ouest: { devise: "xof", mensuel: 1000, annee: 10000 },
+  fcfa_centre: { devise: "xaf", mensuel: 1000, annee: 10000 },
+  modeste: { devise: "eur", mensuel: 100, annee: 1000 },
 };
 
 const PAYS_PAR_ZONE: Partial<Record<CodeZone, string[]>> = {
@@ -511,3 +514,127 @@ export const OFFRE_PAYS: Record<
     paiements: "Wave, Orange Money, MTN MoMo, Moov Money ou carte bancaire",
   },
 };
+
+// ═════════════════════════════════════════════════════════════════════════════
+// ⛔⛔ LE MODÈLE DU 19/11/2026 : LE CONTENU EST OFFERT À TOUS, ON PAIE LE SUIVI.
+//
+// Frédéric, nuit du 19/11 : « j'ai pris une décision cette nuit ».
+//   • Visiteur sans compte : vidéos, fiches, exercices (et les exercices du coach).
+//   • Compte gratuit : en plus, 3 questions à l'IA par jour, un tableau de bord
+//     minimum, l'historique des 7 derniers jours, la progression floutée.
+//   • EleveAI Suivi, 4,95 € par mois ou 49 € par an (« 2 mois offerts », jamais
+//     de pourcentage) : 30 questions à l'IA par jour, tout le tableau de bord,
+//     tout l'historique, des conseils, l'espace parent et le bilan par courriel
+//     (3 enfants au plus).
+// ⛔ Tout se règle ICI. Aucune autre page n'écrit un prix ou un quota en dur.
+// ⛔ Le nom est « Le Coach », jamais « Coach IA ». Les quotas ne comptent que les
+//    questions posées à l'IA ; les exercices du coach restent sans compte.
+// ⛔ Pas de TVA automatique : franchise en base, « TVA non applicable, art. 293 B ».
+// ⛔ Aucun « prix bloqué à vie ».
+// ⛔ Aucun prix ni lien de vente dans le coach, le mode classe ou un compte
+//    d'établissement : c'est le parent qui paie.
+// ═════════════════════════════════════════════════════════════════════════════
+
+/** Lit un entier dans les variables d'environnement (côté serveur), sinon le défaut. */
+function entierEnv(nom: string, defaut: number): number {
+  const brut = typeof process !== "undefined" ? process.env?.[nom] : undefined;
+  const n = brut === undefined || brut === "" ? NaN : Number(brut);
+  return Number.isFinite(n) && n >= 0 ? Math.floor(n) : defaut;
+}
+
+/** L'offre payante : un produit Stripe, deux tarifs. */
+export const SUIVI = {
+  /** Le nom du produit dans Stripe et sur la facture. */
+  nom: "EleveAI Suivi",
+  prixMensuel: PRIX_MENSUEL,
+  prixAnnuel: PRIX_ANNUEL,
+  /** « 2 mois offerts » : calculé (49 € ≈ 10 × 4,95 €), jamais un pourcentage. */
+  moisOfferts: MOIS_OFFERTS,
+  /** Les `lookup_key` des deux tarifs Stripe (créés par scripts/stripe-test-produit-suivi.ts). */
+  lookupMensuel: "suivi_monthly",
+  lookupAnnuel: "suivi_yearly",
+  /** Un abonnement couvre au plus 3 enfants (espace parent et bilan par courriel). */
+  enfantsMax: 3,
+  /** ⏳ À confirmer par Frédéric. Recommandé : 0 (pas d'essai, le compte gratuit en tient lieu). */
+  essaiJours: 0,
+} as const;
+
+/** La phrase principale de l'offre, écrite une fois. ⛔ Jamais « illimité » ni « sans limite ». */
+export const PHRASE_OFFRE = `Inscris-toi gratuitement. Pour le vrai suivi : ${montant(PRIX_MENSUEL)}/mois ou ${montant(PRIX_ANNUEL)}/an (${MOIS_OFFERTS} mois offerts).`;
+
+/** ⛔ Mention légale à côté de chaque prix et sur chaque facture (pas d'automatic_tax). */
+export const MENTION_TVA = "TVA non applicable, art. 293 B du CGI";
+
+/**
+ * ⭐ LES QUESTIONS À L'IA PAR JOUR — vérifiées côté serveur AVANT l'appel
+ * (lib/ia/plafond.ts). Jour = heure de La Réunion.
+ */
+export const QUOTAS_IA = {
+  /** Visiteur sans compte : pas d'aide de l'IA (les exercices du coach restent ouverts). */
+  visiteur: 0,
+  /** Compte gratuit (courriel, ou élève d'une classe). Était 10 le 18/11 (7006e17c). */
+  gratuitParJour: 3,
+  /** ⏳ À confirmer par Frédéric : 30 par jour pour le Suivi. */
+  suiviParJour: 30,
+  /** ⏳ Proposé, PAS validé : 20 questions par jour la première semaine du compte. */
+  bonusBienvenue: { actif: false, questionsParJour: 20, jours: 7 },
+  /** Routes sans compte encore ouvertes (/api/chat, /api/agent-prof) : par adresse IP. */
+  parIP: 300,
+  /** Ceinture de sécurité : toutes les questions du site en une journée. */
+  totalSiteParJour: 5000,
+} as const;
+
+/** Le compte gratuit : ce que son tableau de bord montre. */
+export const COMPTE_GRATUIT = {
+  /** L'historique visible : les 7 derniers jours. L'ancien reste gardé en base. */
+  historiqueJours: 7,
+} as const;
+
+/**
+ * ⭐ LES PROFS — les classes offertes par prof. Réglable sur Vercel
+ * (`FREE_CLASSES_PER_TEACHER`). ⛔ 19/11, Frédéric : « 2 classes gratuites »
+ * (le document disait 1) → 2 par défaut, à confirmer.
+ */
+export const FREE_CLASSES_PER_TEACHER = entierEnv("FREE_CLASSES_PER_TEACHER", 2);
+
+/**
+ * Le produit « classes supplémentaires » : préparé, ⛔ PAS EN VENTE. Prix et
+ * contenu à définir avec Frédéric. Tant que `enVente` est false, aucune page ne
+ * le montre et aucune route ne l'encaisse.
+ */
+export const CLASSES_SUPPLEMENTAIRES = {
+  enVente: false,
+  nom: "EleveAI Classes supplémentaires",
+  lookup: "classes_supplementaires",
+  prixParClasseAnnuel: null as number | null,
+} as const;
+
+/**
+ * ⛔ La limite de classes n'agit que quand la vente est ouverte : avant, aucun
+ * prof n'est bloqué pour une offre qui n'existe pas encore.
+ */
+export const LIMITE_CLASSES_ACTIVE = VENTE.ouverte;
+
+/**
+ * ⭐ LE COÛT DE L'IA — suivi par utilisateur et par jour (supabase/usage_ia_cout.sql).
+ * Prix publics d'OpenAI en dollars par million de tokens (⚠️ à revérifier sur
+ * openai.com/api/pricing ; un modèle absent est compté au prix de gpt-4.1-mini).
+ */
+export const COUT_IA = {
+  dollarsParMillionTokens: {
+    "gpt-4.1-mini": { entree: 0.4, sortie: 1.6 },
+    "gpt-4.1": { entree: 2, sortie: 8 },
+    "gpt-4o-mini": { entree: 0.15, sortie: 0.6 },
+    "gpt-4o": { entree: 2.5, sortie: 10 },
+  } as Record<string, { entree: number; sortie: number }>,
+  /** Conversion approximative dollar → euro. */
+  euroParDollar: 0.92,
+  /** Alerte par courriel quand le coût du mois dépasse ce budget (Vercel : BUDGET_IA_MENSUEL_EUROS). */
+  budgetMensuelEuros: entierEnv("BUDGET_IA_MENSUEL_EUROS", 50),
+} as const;
+
+/** Le coût estimé d'un appel, en euros. */
+export function coutEstimeEuros(modele: string, tokensEntree: number, tokensSortie: number): number {
+  const p = COUT_IA.dollarsParMillionTokens[modele] ?? COUT_IA.dollarsParMillionTokens["gpt-4.1-mini"];
+  return ((tokensEntree * p.entree + tokensSortie * p.sortie) / 1_000_000) * COUT_IA.euroParDollar;
+}
