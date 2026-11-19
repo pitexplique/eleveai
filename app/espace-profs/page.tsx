@@ -140,6 +140,13 @@ export default function EnseignantsPage() {
             >
               🍽️ Exemples de séances : 20 min de cours, 25 min de coach, 10 min de synthèse →
             </Link>
+            {/* 19/11 : le hub des énigmes à projeter. */}
+            <Link
+              href="/enigmes-slide"
+              className="ml-2 mt-2 inline-flex items-center gap-2 rounded-2xl bg-emerald-50 px-5 py-3 text-base font-black text-emerald-900 ring-2 ring-emerald-300 transition hover:bg-emerald-100"
+            >
+              🧩 Énigmes à projeter au tableau →
+            </Link>
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
