@@ -108,7 +108,12 @@ export default function ProjectionEnigmes({
   }, [aller, i, basculer]);
 
   const e = data.enigmes[i];
-  const question = useMemo(() => teinter(e.question, ardoise), [e, ardoise]);
+  // Avec les lignes, la question se resserre : un seul saut de ligne au lieu de
+  // deux (un sélecteur CSS « br + br » ignorait le texte entre deux <br>).
+  const question = useMemo(
+    () => teinter(lignes ? e.question.replace(/<br>\s*<br>/g, "<br>") : e.question, ardoise),
+    [e, ardoise, lignes]
+  );
   const dessin = useMemo(() => teinter(e.dessin, ardoise), [e, ardoise]);
   const reponse = (
     <div className="answer" hidden={!montree} dangerouslySetInnerHTML={{ __html: e.reponse }} />
@@ -228,6 +233,9 @@ const CSS = `
   .enigmes .minuteur.fini { animation: enigme-clignote 1s steps(2, start) 6; }
   @keyframes enigme-clignote { to { visibility: hidden; } }
 }
+.enigmes .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; line-height: 1.05; font-size: .9em; margin: 0 .12em; }
+.enigmes .frac > span:first-child { border-bottom: 2px solid currentColor; padding: 0 .18em; }
+.enigmes .ecrire .answer .frac { line-height: 1; font-size: 1em; vertical-align: -0.35em; }
 .enigmes .chrono { display: inline-flex; gap: 4px; flex-wrap: wrap; }
 .enigmes .chrono button { padding: 8px 10px; }
 .enigmes .chrono button[aria-pressed="true"] { background: var(--yellow); color: #1e293b; }
@@ -276,7 +284,6 @@ const CSS = `
 .enigmes.ardoise .ecrire .answer { color: #f1f5f9; }
 .enigmes.ardoise .ecrire .answer .big { color: #fda4af; }
 .enigmes .avec-lignes .art svg { max-height: 40vh; }
-.enigmes .avec-lignes .q br + br { display: none; }
 @media (max-width: 760px) {
   .enigmes .slide { grid-template-columns: 1fr; }
   .enigmes .art svg { max-height: 40vh; }

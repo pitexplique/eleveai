@@ -7,12 +7,16 @@ import type { EnigmesNotion } from "./types";
 
 import e4ePuissanceEcriture from "./4e/puissance_ecriture";
 import e4ePythagoreTheoreme from "./4e/pythagore_theoreme";
+import e4eRelatifOperation from "./4e/relatif_operation";
 import e6eAireLongueur from "./6e/aire_longueur";
+import e6eFractionNombre from "./6e/fraction_nombre";
 
 const TOUTES: EnigmesNotion[] = [
   // 6e
+  e6eFractionNombre,
   e6eAireLongueur,
   // 4e
+  e4eRelatifOperation,
   e4ePuissanceEcriture,
   e4ePythagoreTheoreme,
 ];
