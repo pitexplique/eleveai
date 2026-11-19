@@ -2,7 +2,7 @@
 // ⛔ sans signature valide, on ne croit rien.
 import { NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe/serveur";
-import { traiterEvenement } from "@/lib/stripe/webhook";
+import { traiterEvenementUneFois } from "@/lib/stripe/webhook";
 
 export async function POST(req: Request) {
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Signature invalide." }, { status: 400 });
   }
   try {
-    await traiterEvenement(evenement);
+    await traiterEvenementUneFois(evenement); // 19/11/2026 : une seule fois par événement
   } catch (err) {
     console.error("webhook Stripe :", evenement.type, err);
     return NextResponse.json({ error: "À renvoyer." }, { status: 500 });

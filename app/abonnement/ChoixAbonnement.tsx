@@ -3,11 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { SUIVI_A_VENIR, SUIVI_DES_MAINTENANT } from "@/lib/tarifs";
+import { MENTION_TVA, SUIVI, SUIVI_A_VENIR, SUIVI_DES_MAINTENANT } from "@/lib/tarifs";
 
-type Props = { ouvert: boolean; mensuel: string; annee: string; finAnnee: string; nbVideos: number };
+type Props = { ouvert: boolean; mensuel: string; annee: string };
 
-export default function ChoixAbonnement({ ouvert, mensuel, annee, finAnnee, nbVideos }: Props) {
+export default function ChoixAbonnement({ ouvert, mensuel, annee }: Props) {
   const [formule, setFormule] = useState<"mensuel" | "annee">("annee");
   const [cgv, setCgv] = useState(false);
   const [pasEleve, setPasEleve] = useState(false);
@@ -57,9 +57,9 @@ export default function ChoixAbonnement({ ouvert, mensuel, annee, finAnnee, nbVi
   return (
     <main className="min-h-screen bg-white px-4 py-10 text-slate-900 [color-scheme:light]">
       <div className="mx-auto max-w-2xl">
-        <h1 className="text-3xl font-black sm:text-4xl">Le suivi famille</h1>
+        <h1 className="text-3xl font-black sm:text-4xl">{SUIVI.nom}</h1>
         <p className="mt-3 text-slate-600">
-          Toute la vidéothèque, soit {nbVideos} vidéos à parcourir par classe, et la page de suivi de votre enfant.
+          Les vidéos, les fiches et les exercices restent offerts à tous. L&apos;abonnement paie le suivi de votre enfant.
         </p>
         <ul className="mt-3 list-disc space-y-1 pl-5 text-slate-700">
           {SUIVI_DES_MAINTENANT.map((t) => <li key={t}>{t}</li>)}
@@ -71,9 +71,10 @@ export default function ChoixAbonnement({ ouvert, mensuel, annee, finAnnee, nbVi
         </p>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          {carte("annee", "Année scolaire", annee, `jusqu'au ${finAnnee}`, "Un seul paiement, sans reconduction.")}
+          {carte("annee", "À l'année", annee, `par an, ${SUIVI.moisOfferts} mois offerts`, "Renouvelé chaque année, à arrêter quand vous voulez.")}
           {carte("mensuel", "Au mois", mensuel, "par mois", "Prélevé chaque mois, à arrêter quand vous voulez.")}
         </div>
+        <p className="mt-2 text-center text-xs text-slate-500">{MENTION_TVA}.</p>
 
         {!ouvert ? (
           <p className="mt-6 rounded-2xl bg-amber-50 p-4 font-bold text-amber-900 ring-1 ring-amber-200">
@@ -102,7 +103,7 @@ export default function ChoixAbonnement({ ouvert, mensuel, annee, finAnnee, nbVi
               disabled={!cgv || !pasEleve || enCours}
               className="mt-5 w-full rounded-full bg-sky-700 px-6 py-4 text-lg font-black text-white transition hover:bg-sky-800 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {enCours ? "Ouverture du paiement…" : `Commander avec obligation de paiement : ${formule === "annee" ? annee : `${mensuel} par mois`}`}
+              {enCours ? "Ouverture du paiement…" : `Commander avec obligation de paiement : ${formule === "annee" ? `${annee} par an` : `${mensuel} par mois`}`}
             </button>
             <p className="mt-3 text-center text-sm text-slate-500">
               14 jours pour changer d&apos;avis, remboursé sans motif. Paiement sécurisé par Stripe.

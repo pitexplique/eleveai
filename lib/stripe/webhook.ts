@@ -23,11 +23,16 @@ async function synchroniser(abonnementId: string) {
   const a = await stripe().subscriptions.retrieve(abonnementId);
   const clientId = idDe(a.customer);
   if (!clientId) return;
-  const finPeriode = a.items.data[0]?.current_period_end ?? null;
+  const item = a.items.data[0];
+  const finPeriode = item?.current_period_end ?? null;
   const vivant = ["active", "trialing", "past_due"].includes(a.status);
+  // 19/11/2026 : l'année est un abonnement annuel (suivi_yearly), plus un paiement unique.
+  const annuel = item?.price?.recurring?.interval === "year";
+  // ⭐ Fin d'abonnement : l'accès s'arrête, le compte redevient gratuit ; rien n'est effacé.
   await ecrire(clientId, {
     stripe_subscription_id: a.id,
-    formule: "mensuel",
+    formule: annuel ? "annee" : "mensuel",
+    tarif: item?.price?.lookup_key ?? null,
     statut: a.status,
     fin_programmee: a.cancel_at_period_end,
     acces_jusquau: vivant
@@ -36,6 +41,26 @@ async function synchroniser(abonnementId: string) {
         ? isoDepuis(a.ended_at ?? a.canceled_at)
         : new Date().toISOString(),
   });
+}
+
+/**
+ * ⭐ IDEMPOTENCE (19/11/2026) : un événement n'est traité qu'une fois
+ * (supabase/stripe_evenements.sql). Avant que la table existe, on traite quand
+ * même : relire l'abonnement chez Stripe rend le traitement sans danger à refaire.
+ */
+export async function traiterEvenementUneFois(e: Stripe.Event): Promise<"traite" | "deja_vu"> {
+  const admin = adminSupabase();
+  const { error } = await admin.from("stripe_evenements").insert({ id: e.id, type: e.type });
+  if (error?.code === "23505") return "deja_vu"; // clé déjà présente
+  const noteFaite = !error;
+  try {
+    await traiterEvenement(e);
+  } catch (err) {
+    // Échec : on retire la note, Stripe renverra l'événement.
+    if (noteFaite) await admin.from("stripe_evenements").delete().eq("id", e.id);
+    throw err;
+  }
+  return "traite";
 }
 
 export async function traiterEvenement(e: Stripe.Event) {
@@ -64,6 +89,17 @@ export async function traiterEvenement(e: Stripe.Event) {
     case "customer.subscription.deleted":
       await synchroniser(e.data.object.id);
       return;
+    case "invoice.paid":
+    case "invoice.payment_failed": {
+      // Carte refusée → past_due ; paiement repris → active. L'état vient de Stripe.
+      const f = e.data.object;
+      const sousId = idDe(
+        (f as unknown as { parent?: { subscription_details?: { subscription?: string | { id: string } } } }).parent
+          ?.subscription_details?.subscription ?? (f as unknown as { subscription?: string | { id: string } }).subscription,
+      );
+      if (sousId) await synchroniser(sousId);
+      return;
+    }
     case "charge.refunded": {
       // Remboursement complet (les 14 jours des CGV) : l'accès s'arrête, et le
       // prélèvement mensuel aussi. Un don n'a pas de client : rien à faire.

@@ -424,7 +424,10 @@ export const SUIVI_DES_MAINTENANT = [
   "La carte de toute sa classe en maths",
   "Le compte rendu envoyé chaque semaine par courriel",
   "Une alerte sur la page quand il décroche ou s'arrête de travailler",
-  "Un seul abonnement pour tous les enfants de la maison",
+  // 19/11/2026 : modèle « contenu offert, on paie le suivi » (QUOTAS_IA, SUIVI).
+  "30 questions à l'IA par jour pour votre enfant, au lieu de 3",
+  "Tout son historique, depuis le premier jour",
+  "Jusqu'à 3 enfants sur un seul abonnement",
 ];
 export const SUIVI_A_VENIR = [
   "10 minutes par jour choisies par le coach",

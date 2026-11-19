@@ -1,11 +1,9 @@
-// Ouvre le paiement Stripe de l'abonnement (05/11/2026).
+// Ouvre le paiement Stripe de l'abonnement (05/11/2026 ; « EleveAI Suivi » le 19/11/2026).
 // ⛔ Le prix vient du pays lu par l'hébergeur et de lib/tarifs.ts, jamais du navigateur.
 import { NextResponse } from "next/server";
 import { abonnementDisponible, PIED_FACTURE, stripe } from "@/lib/stripe/serveur";
 import { accesEnCours, adminSupabase, compteDeLaRequete, lireAbonnement } from "@/lib/server/abonnement";
-import { ZONES_PAIEMENT, finAnneeScolaire, zoneDuPays, type Formule } from "@/lib/tarifs";
-
-const NOM_PRODUIT = "EleveAI, le suivi famille";
+import { SUIVI, ZONES_PAIEMENT, zoneDuPays, type Formule } from "@/lib/tarifs";
 
 export async function POST(req: Request) {
   if (!abonnementDisponible()) {
@@ -53,53 +51,49 @@ export async function POST(req: Request) {
   }
 
   const origine = new URL(req.url).origin;
-  const fin = finAnneeScolaire();
   const metadata = { type: "abonnement", user_id: compte.id, formule, zone };
   const message =
     "En validant, vous commandez avec obligation de paiement. Vous avez 14 jours pour changer d'avis : tout vous est remboursé, sans motif.";
+
+  // ⭐ 19/11/2026 : un produit « EleveAI Suivi », deux tarifs d'abonnement
+  // (suivi_monthly, suivi_yearly), créés par scripts/stripe-test-produit-suivi.mjs.
+  // Hors zone europe, ou si les tarifs n'existent pas encore, le montant vient de
+  // ZONES_PAIEMENT (lib/tarifs.ts). ⛔ Pas d'automatic_tax (franchise, art. 293 B).
+  const intervalle = formule === "mensuel" ? ("month" as const) : ("year" as const);
+  const lookup = formule === "mensuel" ? SUIVI.lookupMensuel : SUIVI.lookupAnnuel;
+  let tarifId: string | null = null;
+  if (zone === "europe") {
+    const { data } = await s.prices.list({ lookup_keys: [lookup], active: true, limit: 1 }).catch(() => ({ data: [] }));
+    tarifId = data[0]?.id ?? null;
+  }
+  const ligneCommande = tarifId
+    ? { quantity: 1, price: tarifId }
+    : {
+        quantity: 1,
+        price_data: {
+          currency: prix.devise,
+          unit_amount: formule === "mensuel" ? prix.mensuel : prix.annee,
+          recurring: { interval: intervalle },
+          product_data: { name: formule === "mensuel" ? `${SUIVI.nom}, au mois` : `${SUIVI.nom}, à l'année` },
+        },
+      };
 
   const session = await s.checkout.sessions.create({
     customer: clientId,
     locale: "fr",
     metadata,
+    // Le compte qui paie est celui du PARENT (connecté par courriel) : jamais l'élève.
     client_reference_id: compte.id,
     success_url: `${origine}/abonnement/merci`,
     cancel_url: `${origine}/abonnement`,
     custom_text: { submit: { message } },
-    ...(formule === "mensuel"
-      ? {
-          mode: "subscription" as const,
-          subscription_data: { metadata },
-          line_items: [
-            {
-              quantity: 1,
-              price_data: {
-                currency: prix.devise,
-                unit_amount: prix.mensuel,
-                recurring: { interval: "month" as const },
-                product_data: { name: `${NOM_PRODUIT}, au mois` },
-              },
-            },
-          ],
-        }
-      : {
-          mode: "payment" as const,
-          invoice_creation: { enabled: true, invoice_data: { footer: PIED_FACTURE, metadata } },
-          payment_intent_data: { metadata },
-          line_items: [
-            {
-              quantity: 1,
-              price_data: {
-                currency: prix.devise,
-                unit_amount: prix.annee,
-                product_data: {
-                  name: `${NOM_PRODUIT}, année scolaire`,
-                  description: `Jusqu'au ${fin.toLocaleDateString("fr-FR", { timeZone: "UTC" })}, sans reconduction.`,
-                },
-              },
-            },
-          ],
-        }),
+    mode: "subscription",
+    allow_promotion_codes: true,
+    line_items: [ligneCommande],
+    subscription_data: {
+      metadata,
+      ...(SUIVI.essaiJours > 0 && formule === "mensuel" ? { trial_period_days: SUIVI.essaiJours } : {}),
+    },
   });
 
   return NextResponse.json({ url: session.url });
