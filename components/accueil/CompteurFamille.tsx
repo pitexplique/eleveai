@@ -119,7 +119,7 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
             exportables ». Avant (17/11) : « Une vidéo au tableau, puis chaque
             élève s'entraîne à son niveau ». ⛔ Toujours sans prix. */}
         <p className="mt-1 text-xl font-black leading-snug text-slate-900">
-          EleveAI simplifie votre vie de prof
+          EleveAI simplifie <span className="whitespace-nowrap">votre vie de prof</span>
         </p>
         <p className="mt-1 text-sm font-bold text-slate-700">
           Vos élèves s&apos;entraînent à leur niveau et restent concentrés. Vous passez une heure tranquille.
