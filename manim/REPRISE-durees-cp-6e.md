@@ -53,7 +53,7 @@ Notes et outils : `side-session-notes/local_9cbb7607-cba7-48c1-a984-bb5d28d2f97c
 - ✅ **LE CP EST FINI (5 épisodes, 10 vidéos).** Arrêt sur ordre de Frédéric (forfait hebdo), sans fille.
 
 ## ⏭ Reprise SAMEDI 21/11 : le CE1
-- Lire d’abord `manim/INVENTAIRE-durees-cp-6e.md` : 8 micros CE1 (lire_heure_demi, positionner_aiguilles, matin_apres_midi, unites_h_min, calculer_simple, ajouter, calendrier, defi) ; leurs 16 voix sont DÉJÀ écrites dans `manim/voix/ce1-duree-*.json` (WAV à générer, débit −6). Commencer par `ce1_duree_lire_heure_demi` ; marques : `python manim/scripts/cp/duree_marques.py ce1:<ep>`.
+- Lire d’abord `manim/INVENTAIRE-durees-cp-6e.md` : 8 micros CE1 (lire_heure_demi, positionner_aiguilles, matin_apres_midi, unites_h_min, calculer_simple, ajouter, calendrier, defi) ; leurs 16 voix sont écrites dans `manim/voix/ce1-duree-*.json` ; ✅ WAV GÉNÉRÉS le 19/11 (Julie, −6 : 8 × 14 + 8 × 7 clips dans `public/sons/ce1-duree-*`). Commencer par `ce1_duree_lire_heure_demi` ; marques : `python manim/scripts/cp/duree_marques.py ce1:<ep>`.
 - Modèles : `manim/scripts/cp/duree_defi.py` / `duree_ordonner.py` (paysage), `prototypes/ti-margo/films/cp-duree-defi.js` (short) ; scripts du manifeste à refaire sur le modèle de l'entrée CP (2 entrées, date = max `pas_avant` + 1 jour, relu juste avant).
 - Même chaîne et mêmes règles : un seul rendu HD (verrou `%TEMP%\eleveai-rendu-hd.lock`), ≥ 2,5 Go libres, compteur du short vérifié, commit PAR CHEMIN avec `read-tree HEAD` + `log -1` dans le même appel, jamais de push.
 - ⛔ Commit par chemin : `git read-tree HEAD` + vérifier `git log -1` DANS LE MÊME appel que `git commit` (le 96efd9fe, parti d'un vieux HEAD, avait effacé le CE1 04 des masses, rétabli en 74461264).
