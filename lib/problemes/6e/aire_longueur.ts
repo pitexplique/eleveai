@@ -2,11 +2,34 @@
 // depuis public/enigmes/longueurs-6e.html (fond blanc, lignes d'écriture).
 import type { ProblemesNotion } from "../types";
 
+// Une règle graduée jusqu'à 12 cm (début cassé, le « 1 » est perdu) : 1 cm = 32 px, 0 cm en x = 48.
+// La vis va de 3 cm (x = 144) à 11,5 cm (x = 416) : au bon rapport.
+const regle = () => {
+  let t = "";
+  for (let k = 2; k <= 25; k++) {
+    const x = 48 + 16 * k;
+    const cm = k % 2 === 0;
+    t += `<path d="M${x} 240 L${x} ${cm ? 268 : 256}" stroke="#1e293b" stroke-width="${cm ? 3 : 2}"/>`;
+    if (cm && k > 2) t += `<text x="${x}" y="296" fill="#1e293b" font-size="20" text-anchor="middle">${k / 2}</text>`;
+  }
+  return `<svg viewBox="0 0 480 420" role="img" aria-label="Une règle cassée au début, et une vis posée de 3 cm à 11,5 cm">
+  <path d="M74 240 L460 240 L460 310 L74 310 L82 292 L70 276 L82 260 Z" fill="#d97706" fill-opacity=".18" stroke="#1e293b" stroke-width="3" stroke-linejoin="round"/>
+  ${t}
+  <text x="440" y="334" fill="#64748b" font-size="20" text-anchor="end">cm</text>
+  <rect x="144" y="180" width="16" height="48" rx="3" fill="#1d4ed8" fill-opacity=".45" stroke="#1d4ed8" stroke-width="3"/>
+  <path d="M160 194 L392 194 L416 204 L392 214 L160 214 Z" fill="#1d4ed8" fill-opacity=".25" stroke="#1d4ed8" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M190 194 L200 214 M220 194 L230 214 M250 194 L260 214 M280 194 L290 214 M310 194 L320 214 M340 194 L350 214 M370 194 L380 214" stroke="#1d4ed8" stroke-width="2"/>
+  <path d="M144 228 L144 240 M416 204 L416 240" stroke="#be123c" stroke-width="2" stroke-dasharray="4 4"/>
+  <text x="280" y="160" fill="#be123c" font-size="30" text-anchor="middle">? cm</text>
+  <text x="240" y="390" fill="#64748b" font-size="22" text-anchor="middle">le début de la règle est cassé</text>
+  </svg>`;
+};
+
 const problemes: ProblemesNotion = {
   classe: "6e",
   notionId: "aire_longueur",
   titre: "Énigmes sur les longueurs",
-  description: "Fourmis et crayon, qui est le plus grand, grillage, tours de piste, piège de Tom, tour de roue.",
+  description: "Fourmis et crayon, qui est le plus grand, la vis et la règle cassée, tours de piste, piège de Tom, tour de roue.",
   problemes: [
     {
       tag: "Énigme 1 · Sur la table",
@@ -39,19 +62,13 @@ const problemes: ProblemesNotion = {
   </svg>`,
     },
     {
-      tag: "Énigme 3 · Au jardin",
-      titre: "Le grillage",
-      question: `Un jardin a la forme d'un rectangle de <b>12 m</b> sur <b>7 m</b>. Mamie veut mettre un grillage tout autour.<br><br>Elle a <b>35 m</b> de grillage. <b>Est-ce assez ?</b>`,
-      reponse: `Le tour du jardin : 12 + 7 + 12 + 7 = 38 m.<br>38 m, c'est plus que 35 m : <span class="big">non, il manque 3 m</span>.`,
-      consigne: "35 m de grillage, est-ce assez ?",
-      verification: {"type":"qcm","choix":["Non, il manque 3 m","Oui, c'est assez","Non, il manque 7 m"],"bonne":0},
-      dessin: `<svg viewBox="0 0 480 420" role="img" aria-label="Jardin rectangulaire de 12 m sur 7 m">
-  <rect x="30" y="100" width="380" height="222" fill="#1d4ed8" fill-opacity=".08" stroke="#1e293b" stroke-width="4" stroke-dasharray="4 8"/>
-  <circle cx="140" cy="200" r="28" fill="#1d4ed8" fill-opacity=".35"/><circle cx="330" cy="250" r="22" fill="#1d4ed8" fill-opacity=".35"/>
-  <text x="220" y="85" fill="#1e293b" font-size="30" text-anchor="middle">12 m</text>
-  <text x="420" y="222" fill="#1e293b" font-size="30">7 m</text>
-  <text x="240" y="385" fill="#be123c" font-size="28" text-anchor="middle">35 m de grillage : assez ?</text>
-  </svg>`,
+      tag: "Énigme 3 · À l'atelier",
+      titre: "La règle cassée",
+      question: `Le début de la règle de Malik est cassé.<br>Il pose une vis contre la règle.<br>La vis commence à <b>3 cm</b> et finit à <b>11,5 cm</b>.<br><br><b>Combien mesure la vis ?</b>`,
+      reponse: `On ne lit pas seulement le bout : on calcule l'écart.<br>11,5 − 3 = 8,5. La vis mesure <span class="big">8,5 cm</span>, soit 85 mm.`,
+      consigne: "Combien mesure la vis de Malik, en cm ?",
+      verification: { type: "courte", attendus: ["8,5", "8.5"], unite: "cm" },
+      dessin: regle(),
     },
     {
       tag: "Énigme 4 · Au stade",
@@ -92,8 +109,8 @@ const problemes: ProblemesNotion = {
       sorte: "defi",
       question: `La roue d'un vélo a un <b>diamètre de 70 cm</b>.<br><br>Quand la roue fait <b>un tour complet</b>, de combien le vélo avance-t-il ? (On prend <b>π ≈ 3,14</b>.)`,
       reponse: `Le vélo avance de la longueur du cercle : π × diamètre.<br>3,14 × 70 = 219,8. Il avance d'environ <span class="big">220 cm, soit 2,20 m</span>.`,
-      consigne: "De combien de centimètres le vélo avance-t-il, environ ?",
-      verification: {"type":"courte","attendus":["220","219,8","219.8"],"unite":"cm"},
+      consigne: "De combien le vélo avance-t-il quand la roue fait un tour ?",
+      verification: { type: "qcm", choix: ["Environ 70 cm", "Environ 2,20 m", "Environ 1,40 m"], bonne: 1 },
       dessin: `<svg viewBox="0 0 480 420" role="img" aria-label="Une roue de 70 cm de diamètre qui roule sur le sol">
   <circle cx="80" cy="200" r="50" stroke="#1e293b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   <path d="M80 150 L80 250 M30 200 L130 200 M45 165 L115 235 M115 165 L45 235" stroke="#64748b" stroke-width="2"/>
