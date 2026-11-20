@@ -115,6 +115,10 @@ import eCm2Contenance from "./cm2/contenance";
 import eCm2Duree from "./cm2/duree";
 import eCm2Perimetre from "./cm2/perimetre";
 import eCm2Aire from "./cm2/aire";
+import eCm2Angle from "./cm2/angle";
+import eCm2Reperage from "./cm2/reperage";
+import eCm2Droite from "./cm2/droite";
+import eCm2Symetrie from "./cm2/symetrie";
 
 const TOUTES: ProblemesNotion[] = [
   // CM2
@@ -138,6 +142,10 @@ const TOUTES: ProblemesNotion[] = [
   eCm2Duree,
   eCm2Perimetre,
   eCm2Aire,
+  eCm2Angle,
+  eCm2Reperage,
+  eCm2Droite,
+  eCm2Symetrie,
   // 6e
   e6eFractionNombre,
   e6eAireLongueur,
