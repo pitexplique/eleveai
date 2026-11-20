@@ -30,6 +30,10 @@ import e6eEntierNombre from "./6e/entier_nombre";
 import e6eStatDonnee from "./6e/stat_donnee";
 import e6eAireSurface from "./6e/aire_surface";
 import e6eEntierCalculMental from "./6e/entier_calcul_mental";
+import e6eCercleDisque from "./6e/cercle_disque";
+import e6eDecimalCalcul from "./6e/decimal_calcul";
+import e4eTrigoCosinus from "./4e/trigo_cosinus";
+import e4ePropRatio from "./4e/prop_ratio";
 
 const TOUTES: ProblemesNotion[] = [
   // 6e
@@ -45,6 +49,8 @@ const TOUTES: ProblemesNotion[] = [
   e6eStatDonnee,
   e6eAireSurface,
   e6eEntierCalculMental,
+  e6eCercleDisque,
+  e6eDecimalCalcul,
   // 4e
   e4eRelatifOperation,
   e4eEquationResolution,
@@ -57,6 +63,8 @@ const TOUTES: ProblemesNotion[] = [
   e4eNombrePremier,
   e4eGrandeurComposee,
   e4eThalesTheoreme,
+  e4eTrigoCosinus,
+  e4ePropRatio,
   e4ePuissanceEcriture,
   e4ePythagoreTheoreme,
 ];
