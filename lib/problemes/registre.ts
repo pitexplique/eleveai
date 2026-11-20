@@ -62,6 +62,9 @@ import e6eAireUnite from "./6e/aire_unite";
 import e6eDemiDroiteGraduee from "./6e/demi_droite_graduee";
 import e6eProbaFrequence from "./6e/proba_frequence";
 import e6eStatEnquete from "./6e/stat_enquete";
+import e6eAlgebreProbleme from "./6e/algebre_probleme";
+import e6eAlgoProgrammation from "./6e/algo_programmation";
+import e6eVisionEspace from "./6e/vision_espace";
 import e4ePropProportionnalite from "./4e/prop_proportionnalite";
 import e4eLitteralIdentiteRemarquable from "./4e/litteral_identite_remarquable";
 import e4eAireSurface from "./4e/aire_surface";
@@ -70,6 +73,7 @@ import e4eAirePerimetre from "./4e/aire_perimetre";
 import e4eFractionNombre from "./4e/fraction_nombre";
 import e4eOrdreGrandeur from "./4e/ordre_grandeur";
 import e4eVisionEspace from "./4e/vision_espace";
+import e4eAlgoProgrammation from "./4e/algo_programmation";
 
 const TOUTES: ProblemesNotion[] = [
   // 6e
@@ -105,6 +109,9 @@ const TOUTES: ProblemesNotion[] = [
   e6eDemiDroiteGraduee,
   e6eProbaFrequence,
   e6eStatEnquete,
+  e6eAlgebreProbleme,
+  e6eAlgoProgrammation,
+  e6eVisionEspace,
   // 4e
   e4eRelatifOperation,
   e4eEquationResolution,
@@ -137,6 +144,7 @@ const TOUTES: ProblemesNotion[] = [
   e4eFractionNombre,
   e4eOrdreGrandeur,
   e4eVisionEspace,
+  e4eAlgoProgrammation,
   e4ePuissanceEcriture,
   e4ePythagoreTheoreme,
 ];
