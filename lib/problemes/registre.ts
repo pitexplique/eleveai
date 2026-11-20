@@ -122,6 +122,10 @@ import eCm2Angle from "./cm2/angle";
 import eCm2Reperage from "./cm2/reperage";
 import eCm2Droite from "./cm2/droite";
 import eCm2Symetrie from "./cm2/symetrie";
+import eCm2FigurePlane from "./cm2/figure_plane";
+import eCm2Solide from "./cm2/solide";
+import eCm2Tableau from "./cm2/tableau";
+import eCm2Graphique from "./cm2/graphique";
 
 const TOUTES: ProblemesNotion[] = [
   // CM2
@@ -149,6 +153,10 @@ const TOUTES: ProblemesNotion[] = [
   eCm2Reperage,
   eCm2Droite,
   eCm2Symetrie,
+  eCm2FigurePlane,
+  eCm2Solide,
+  eCm2Tableau,
+  eCm2Graphique,
   // 6e
   e6eFractionNombre,
   e6eAireLongueur,
