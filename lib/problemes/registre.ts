@@ -56,8 +56,12 @@ import e4eQuadrilatereParallelogramme from "./4e/quadrilatere_parallelogramme";
 import e4eSymTransformation from "./4e/sym_transformation";
 import e6eMediatriceSegment from "./6e/mediatrice_segment";
 import e6eBissectriceAngle from "./6e/bissectrice_angle";
+import e6eCercleCirconscrit from "./6e/cercle_circonscrit";
+import e6ePropEchelle from "./6e/prop_echelle";
 import e4ePropProportionnalite from "./4e/prop_proportionnalite";
 import e4eLitteralIdentiteRemarquable from "./4e/litteral_identite_remarquable";
+import e4eAireSurface from "./4e/aire_surface";
+import e4eStatDonnee from "./4e/stat_donnee";
 
 const TOUTES: ProblemesNotion[] = [
   // 6e
@@ -87,6 +91,8 @@ const TOUTES: ProblemesNotion[] = [
   e6eDistanceSegment,
   e6eMediatriceSegment,
   e6eBissectriceAngle,
+  e6eCercleCirconscrit,
+  e6ePropEchelle,
   // 4e
   e4eRelatifOperation,
   e4eEquationResolution,
@@ -113,6 +119,8 @@ const TOUTES: ProblemesNotion[] = [
   e4eSymTransformation,
   e4ePropProportionnalite,
   e4eLitteralIdentiteRemarquable,
+  e4eAireSurface,
+  e4eStatDonnee,
   e4ePuissanceEcriture,
   e4ePythagoreTheoreme,
 ];
