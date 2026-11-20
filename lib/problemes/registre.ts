@@ -10,11 +10,15 @@ import e4ePythagoreTheoreme from "./4e/pythagore_theoreme";
 import e4eRelatifOperation from "./4e/relatif_operation";
 import e6eAireLongueur from "./6e/aire_longueur";
 import e6eFractionNombre from "./6e/fraction_nombre";
+import e6eAirePerimetre from "./6e/aire_perimetre";
+import e6eDecimalNombre from "./6e/decimal_nombre";
 
 const TOUTES: ProblemesNotion[] = [
   // 6e
   e6eFractionNombre,
   e6eAireLongueur,
+  e6eAirePerimetre,
+  e6eDecimalNombre,
   // 4e
   e4eRelatifOperation,
   e4ePuissanceEcriture,
