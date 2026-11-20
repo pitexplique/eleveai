@@ -87,6 +87,10 @@ import e5ePropProportionnalite from "./5e/prop_proportionnalite";
 import e5ePropRatioPourcentage from "./5e/prop_ratio_pourcentage";
 import e5eLitteralCalcul from "./5e/litteral_calcul";
 import e5eAlgoProgrammation from "./5e/algo_programmation";
+import e5eAlgoConstruire from "./5e/algo_construire";
+import e5eAngleMesure from "./5e/angle_mesure";
+import e5eTriangleFigure from "./5e/triangle_figure";
+import e5eSymCentrale from "./5e/sym_centrale";
 import eCm2NombreEntier from "./cm2/nombre_entier";
 import eCm2Suite from "./cm2/suite";
 import eCm2Multiplication from "./cm2/multiplication";
@@ -206,6 +210,10 @@ const TOUTES: ProblemesNotion[] = [
   e5ePropRatioPourcentage,
   e5eLitteralCalcul,
   e5eAlgoProgrammation,
+  e5eAlgoConstruire,
+  e5eAngleMesure,
+  e5eTriangleFigure,
+  e5eSymCentrale,
 ];
 
 const PAR_CLE = new Map(TOUTES.map((n) => [`${n.classe}/${n.notionId}`, n]));
