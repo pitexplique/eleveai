@@ -99,6 +99,10 @@ import eCm2Calcul from "./cm2/calcul";
 import eCm2Probleme from "./cm2/probleme";
 import eCm2Algebre from "./cm2/algebre";
 import eCm2Proportionnalite from "./cm2/proportionnalite";
+import eCm2Pourcentage from "./cm2/pourcentage";
+import eCm2Echelle from "./cm2/echelle";
+import eCm2Longueur from "./cm2/longueur";
+import eCm2Masse from "./cm2/masse";
 
 const TOUTES: ProblemesNotion[] = [
   // CM2
@@ -114,6 +118,10 @@ const TOUTES: ProblemesNotion[] = [
   eCm2Probleme,
   eCm2Algebre,
   eCm2Proportionnalite,
+  eCm2Pourcentage,
+  eCm2Echelle,
+  eCm2Longueur,
+  eCm2Masse,
   // 6e
   e6eFractionNombre,
   e6eAireLongueur,
