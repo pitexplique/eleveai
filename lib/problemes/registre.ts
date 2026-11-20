@@ -38,6 +38,10 @@ import e6eTriangleFigure from "./6e/triangle_figure";
 import e6eFractionCalcul from "./6e/fraction_calcul";
 import e4ePropEchelle from "./4e/prop_echelle";
 import e4eLitteralFactorisation from "./4e/litteral_factorisation";
+import e6eSymAxiale from "./6e/sym_axiale";
+import e6eVolumeSolide from "./6e/volume_solide";
+import e4eVolumeSolide from "./4e/volume_solide";
+import e4eDivisibilite from "./4e/divisibilite";
 
 const TOUTES: ProblemesNotion[] = [
   // 6e
@@ -57,6 +61,8 @@ const TOUTES: ProblemesNotion[] = [
   e6eDecimalCalcul,
   e6eTriangleFigure,
   e6eFractionCalcul,
+  e6eSymAxiale,
+  e6eVolumeSolide,
   // 4e
   e4eRelatifOperation,
   e4eEquationResolution,
@@ -73,6 +79,8 @@ const TOUTES: ProblemesNotion[] = [
   e4ePropRatio,
   e4ePropEchelle,
   e4eLitteralFactorisation,
+  e4eVolumeSolide,
+  e4eDivisibilite,
   e4ePuissanceEcriture,
   e4ePythagoreTheoreme,
 ];
