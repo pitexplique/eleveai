@@ -91,6 +91,10 @@ import e5eAlgoConstruire from "./5e/algo_construire";
 import e5eAngleMesure from "./5e/angle_mesure";
 import e5eTriangleFigure from "./5e/triangle_figure";
 import e5eSymCentrale from "./5e/sym_centrale";
+import e5eParallelogramme from "./5e/parallelogramme";
+import e5eAireSurface from "./5e/aire_surface";
+import e5eGrandeurConversion from "./5e/grandeur_conversion";
+import e5eVolumeSolide from "./5e/volume_solide";
 import eCm2NombreEntier from "./cm2/nombre_entier";
 import eCm2Suite from "./cm2/suite";
 import eCm2Multiplication from "./cm2/multiplication";
@@ -222,6 +226,10 @@ const TOUTES: ProblemesNotion[] = [
   e5eAngleMesure,
   e5eTriangleFigure,
   e5eSymCentrale,
+  e5eParallelogramme,
+  e5eAireSurface,
+  e5eGrandeurConversion,
+  e5eVolumeSolide,
 ];
 
 const PAR_CLE = new Map(TOUTES.map((n) => [`${n.classe}/${n.notionId}`, n]));
