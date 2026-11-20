@@ -14,6 +14,8 @@ import e4eFractionCalcul from "./4e/fraction_calcul";
 import e4eLitteralExpression from "./4e/litteral_expression";
 import e4eProbaExperience from "./4e/proba_experience";
 import e4eLitteralDistributivite from "./4e/litteral_distributivite";
+import e4eStatStatistique from "./4e/stat_statistique";
+import e4eNombrePremier from "./4e/nombre_premier";
 import e6eAireLongueur from "./6e/aire_longueur";
 import e6eFractionNombre from "./6e/fraction_nombre";
 import e6eAirePerimetre from "./6e/aire_perimetre";
@@ -22,6 +24,8 @@ import e6eAngleMesure from "./6e/angle_mesure";
 import e6ePropProportionnalite from "./6e/prop_proportionnalite";
 import e6ePourcentageNombre from "./6e/pourcentage_nombre";
 import e6eDureeTemps from "./6e/duree_temps";
+import e6eEntierNombre from "./6e/entier_nombre";
+import e6eStatDonnee from "./6e/stat_donnee";
 
 const TOUTES: ProblemesNotion[] = [
   // 6e
@@ -33,6 +37,8 @@ const TOUTES: ProblemesNotion[] = [
   e6ePropProportionnalite,
   e6ePourcentageNombre,
   e6eDureeTemps,
+  e6eEntierNombre,
+  e6eStatDonnee,
   // 4e
   e4eRelatifOperation,
   e4eEquationResolution,
@@ -41,6 +47,8 @@ const TOUTES: ProblemesNotion[] = [
   e4eLitteralExpression,
   e4eLitteralDistributivite,
   e4eProbaExperience,
+  e4eStatStatistique,
+  e4eNombrePremier,
   e4ePuissanceEcriture,
   e4ePythagoreTheoreme,
 ];
