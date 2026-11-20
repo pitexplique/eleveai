@@ -74,6 +74,11 @@ import e4eFractionNombre from "./4e/fraction_nombre";
 import e4eOrdreGrandeur from "./4e/ordre_grandeur";
 import e4eVisionEspace from "./4e/vision_espace";
 import e4eAlgoProgrammation from "./4e/algo_programmation";
+// 5e
+import e5eRelatifNombre from "./5e/relatif_nombre";
+import e5eRelatifOperation from "./5e/relatif_operation";
+import e5ePuissanceSimple from "./5e/puissance_simple";
+import e5eDivisibilite from "./5e/divisibilite";
 
 const TOUTES: ProblemesNotion[] = [
   // 6e
@@ -147,6 +152,11 @@ const TOUTES: ProblemesNotion[] = [
   e4eAlgoProgrammation,
   e4ePuissanceEcriture,
   e4ePythagoreTheoreme,
+  // 5e
+  e5eRelatifNombre,
+  e5eRelatifOperation,
+  e5ePuissanceSimple,
+  e5eDivisibilite,
 ];
 
 const PAR_CLE = new Map(TOUTES.map((n) => [`${n.classe}/${n.notionId}`, n]));
