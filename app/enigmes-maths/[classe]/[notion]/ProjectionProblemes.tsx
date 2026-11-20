@@ -280,18 +280,14 @@ const CSS = `
     repeating-linear-gradient(180deg, transparent 0, transparent 46px, #a9c6e8 46px, #a9c6e8 48px);
   border: 3px solid #94a3b8; border-radius: 8px;
 }
-.problemes.ardoise .ecrire {
-  background-color: #2f3d3a; border-color: #6b7f7a;
-  background-image:
-    linear-gradient(90deg, transparent 54px, #b97a7a 54px, #b97a7a 56px, transparent 56px),
-    repeating-linear-gradient(180deg, transparent 0, transparent 46px, #5d7a8c 46px, #5d7a8c 48px);
-}
+/* 20/11, Frédéric : « quand tu as le fond ardoise, les lignes de réponse sont
+   en blanc, que l'on puisse écrire » → la zone d'écriture reste une feuille
+   BLANCHE à lignes, même sur l'ardoise (on y écrit au feutre). */
+.problemes.ardoise .ecrire { border-color: #e2e8f0; }
 .problemes .avec-lignes .slide { min-height: 0; height: 100%; grid-template-rows: auto minmax(144px, 1fr); }
 .problemes .ecrire .answer { margin: 0; border: 0; max-width: none; padding: 0 18px 0 70px; line-height: 48px; color: #1d3557; font-size: clamp(18px, 1.9vw, 26px); }
 .problemes .ecrire .answer b { color: inherit; }
 .problemes .ecrire .answer .big { color: #c0392b; font-size: 1.2em; }
-.problemes.ardoise .ecrire .answer { color: #f1f5f9; }
-.problemes.ardoise .ecrire .answer .big { color: #fda4af; }
 .problemes .avec-lignes .art svg { max-height: 40vh; }
 @media (max-width: 760px) {
   .problemes .slide { grid-template-columns: 1fr; }
