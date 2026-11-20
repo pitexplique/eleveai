@@ -46,6 +46,10 @@ import e6eEntierCalculPose from "./6e/entier_calcul_pose";
 import e6eQuadrilatereFigure from "./6e/quadrilatere_figure";
 import e4eFonctionDependance from "./4e/fonction_dependance";
 import e4eReperage from "./4e/reperage";
+import e6eTrianglePropriete from "./6e/triangle_propriete";
+import e6eProbaExperience from "./6e/proba_experience";
+import e4eTriangleFigure from "./4e/triangle_figure";
+import e4eProbaFrequence from "./4e/proba_frequence";
 
 const TOUTES: ProblemesNotion[] = [
   // 6e
@@ -69,6 +73,8 @@ const TOUTES: ProblemesNotion[] = [
   e6eVolumeSolide,
   e6eEntierCalculPose,
   e6eQuadrilatereFigure,
+  e6eTrianglePropriete,
+  e6eProbaExperience,
   // 4e
   e4eRelatifOperation,
   e4eEquationResolution,
@@ -89,6 +95,8 @@ const TOUTES: ProblemesNotion[] = [
   e4eDivisibilite,
   e4eFonctionDependance,
   e4eReperage,
+  e4eTriangleFigure,
+  e4eProbaFrequence,
   e4ePuissanceEcriture,
   e4ePythagoreTheoreme,
 ];
