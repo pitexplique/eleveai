@@ -8,6 +8,8 @@ import type { ProblemesNotion } from "./types";
 import e4ePuissanceEcriture from "./4e/puissance_ecriture";
 import e4ePythagoreTheoreme from "./4e/pythagore_theoreme";
 import e4eRelatifOperation from "./4e/relatif_operation";
+import e4eEquationResolution from "./4e/equation_resolution";
+import e4ePropPourcentages from "./4e/prop_pourcentages";
 import e6eAireLongueur from "./6e/aire_longueur";
 import e6eFractionNombre from "./6e/fraction_nombre";
 import e6eAirePerimetre from "./6e/aire_perimetre";
@@ -21,6 +23,8 @@ const TOUTES: ProblemesNotion[] = [
   e6eDecimalNombre,
   // 4e
   e4eRelatifOperation,
+  e4eEquationResolution,
+  e4ePropPourcentages,
   e4ePuissanceEcriture,
   e4ePythagoreTheoreme,
 ];
