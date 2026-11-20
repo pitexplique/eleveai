@@ -158,9 +158,9 @@ const problemes: ProblemesNotion = {
     {
       tag: "Énigme 3 · Les dés",
       titre: "Le 6 de Rayan",
-      question: `Rayan lance un dé équilibré.<br>Il note la fréquence du 6.<br>Après 30 lancers : 10 %. Après 300 : 15 %. Après 3 000 : 16,5 %.<br><br>Il continue jusqu'à 30 000 lancers.<br>Quelle fréquence du 6 est la plus probable ?`,
+      question: `Rayan lance un dé équilibré.<br>Il note la fréquence du 6.<br>Après 30 lancers : 10 %. Après 300 : 15 %. Après 3 000 : 16,5 %.<br><br>Il continue jusqu'à 30 000 lancers.<br>Quelle fréquence du 6 est la plus plausible ?`,
       reponse: `Le dé est équilibré : la probabilité du 6 est ${frac(1, 6)}.<br>1 ÷ 6 ≈ 0,167, soit environ 16,7 % (arrondi au dixième).<br>Plus on lance, plus la fréquence se rapproche de la probabilité.<br>Après 30 000 lancers : <span class="big">environ 16,7 %</span>.<br>Elle ne va pas monter jusqu'à 25 %.<br>Le dé ne se « rattrape » pas : c'est la mesure qui devient fiable.`,
-      consigne: "Après 30 000 lancers, quelle fréquence du 6 est la plus probable ?",
+      consigne: "Après 30 000 lancers, quelle fréquence du 6 est la plus plausible ?",
       verification: { type: "qcm", choix: ["10 %", "environ 16,7 %", "25 %"], bonne: 1 },
       dessin: des(),
     },
