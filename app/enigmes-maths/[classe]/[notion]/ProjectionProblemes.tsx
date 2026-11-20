@@ -116,6 +116,15 @@ export default function ProjectionProblemes({
     [e, ardoise, lignes]
   );
   const dessin = useMemo(() => teinter(e.dessin, ardoise), [e, ardoise]);
+  // Quand on montre la réponse, le tableau défile jusqu'à elle (sur un écran
+  // étroit, elle est sous le dessin) ; quand on la cache, retour en haut.
+  useEffect(() => {
+    const tableau = document.querySelector<HTMLElement>(".problemes .board");
+    if (!tableau) return;
+    const r = montree ? tableau.querySelector<HTMLElement>(".answer") : null;
+    if (r) r.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    else tableau.scrollTo({ top: 0 });
+  }, [montree, i]);
   const reponse = (
     <div className="answer" hidden={!montree} dangerouslySetInnerHTML={{ __html: e.reponse }} />
   );
@@ -273,7 +282,7 @@ const CSS = `
 .problemes .dots button[aria-current="true"] { background: var(--chalk); border-color: var(--chalk); }
 .problemes .hint { font-size: 13px; color: var(--chalk-dim); }
 .problemes .ecrire {
-  grid-column: 1 / -1; align-self: stretch; min-height: 144px; overflow: hidden;
+  grid-column: 1 / -1; align-self: stretch; min-height: 144px;
   background-color: #ffffff;
   background-image:
     linear-gradient(90deg, transparent 54px, #e9a3a3 54px, #e9a3a3 56px, transparent 56px),
@@ -284,7 +293,10 @@ const CSS = `
    en blanc, que l'on puisse écrire » → la zone d'écriture reste une feuille
    BLANCHE à lignes, même sur l'ardoise (on y écrit au feutre). */
 .problemes.ardoise .ecrire { border-color: #e2e8f0; }
-.problemes .avec-lignes .slide { min-height: 0; height: 100%; grid-template-rows: auto minmax(144px, 1fr); }
+/* 20/11 : « les réponses ne sont pas affichées » → avec height: 100%, une
+   réponse longue était coupée en bas de la feuille (et le dessin chevauchait
+   la question sur un écran étroit). La feuille grandit avec la réponse. */
+.problemes .avec-lignes .slide { min-height: 100%; grid-template-rows: auto minmax(144px, 1fr); }
 .problemes .ecrire .answer { margin: 0; border: 0; max-width: none; padding: 0 18px 0 70px; line-height: 48px; color: #1d3557; font-size: clamp(18px, 1.9vw, 26px); }
 .problemes .ecrire .answer b { color: inherit; }
 .problemes .ecrire .answer .big { color: #c0392b; font-size: 1.2em; }
