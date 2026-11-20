@@ -95,6 +95,10 @@ import eCm2Fraction from "./cm2/fraction";
 import eCm2FractionMixte from "./cm2/fraction_mixte";
 import eCm2FractionCalcul from "./cm2/fraction_calcul";
 import eCm2NombreDecimal from "./cm2/nombre_decimal";
+import eCm2Calcul from "./cm2/calcul";
+import eCm2Probleme from "./cm2/probleme";
+import eCm2Algebre from "./cm2/algebre";
+import eCm2Proportionnalite from "./cm2/proportionnalite";
 
 const TOUTES: ProblemesNotion[] = [
   // CM2
@@ -106,6 +110,10 @@ const TOUTES: ProblemesNotion[] = [
   eCm2FractionMixte,
   eCm2FractionCalcul,
   eCm2NombreDecimal,
+  eCm2Calcul,
+  eCm2Probleme,
+  eCm2Algebre,
+  eCm2Proportionnalite,
   // 6e
   e6eFractionNombre,
   e6eAireLongueur,
