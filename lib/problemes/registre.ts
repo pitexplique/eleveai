@@ -79,8 +79,17 @@ import e5eRelatifNombre from "./5e/relatif_nombre";
 import e5eRelatifOperation from "./5e/relatif_operation";
 import e5ePuissanceSimple from "./5e/puissance_simple";
 import e5eDivisibilite from "./5e/divisibilite";
+import eCm2NombreEntier from "./cm2/nombre_entier";
+import eCm2Suite from "./cm2/suite";
+import eCm2Multiplication from "./cm2/multiplication";
+import eCm2Division from "./cm2/division";
 
 const TOUTES: ProblemesNotion[] = [
+  // CM2
+  eCm2NombreEntier,
+  eCm2Suite,
+  eCm2Multiplication,
+  eCm2Division,
   // 6e
   e6eFractionNombre,
   e6eAireLongueur,
