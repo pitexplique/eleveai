@@ -84,3 +84,13 @@ export const bande = (x: number, y: number, largeur: number, h: number, n: numbe
   for (let i = 0; i < n; i++) s += r(x + (largeur * i) / n, y, largeur / n, h, i < k ? c : C.craie, i < k ? 0.4 : 0, 3);
   return s;
 };
+
+/** Un disque partagé en parts égales, une couleur par part (« » = vide). */
+export const secteursCouleurs = (cx: number, cy: number, rayon: number, couleurs: string[]) => {
+  const n = couleurs.length;
+  return couleurs.map((c, i) => {
+    const a1 = (2 * Math.PI * i) / n - Math.PI / 2, a2 = (2 * Math.PI * (i + 1)) / n - Math.PI / 2;
+    const P = (a: number) => `${(cx + rayon * Math.cos(a)).toFixed(1)} ${(cy + rayon * Math.sin(a)).toFixed(1)}`;
+    return `<path d="M${cx} ${cy} L${P(a1)} A${rayon} ${rayon} 0 0 1 ${P(a2)} Z" fill="${c || "none"}" fill-opacity="${c ? 0.45 : 0}" stroke="${C.craie}" stroke-width="3" stroke-linejoin="round"/>`;
+  }).join("");
+};

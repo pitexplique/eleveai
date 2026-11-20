@@ -126,6 +126,9 @@ import eCm2FigurePlane from "./cm2/figure_plane";
 import eCm2Solide from "./cm2/solide";
 import eCm2Tableau from "./cm2/tableau";
 import eCm2Graphique from "./cm2/graphique";
+import eCm2CalculsCommerciaux from "./cm2/calculs_commerciaux";
+import eCm2Probabilite from "./cm2/probabilite";
+import eCm2Algorithmique from "./cm2/algorithmique";
 
 const TOUTES: ProblemesNotion[] = [
   // CM2
@@ -157,6 +160,9 @@ const TOUTES: ProblemesNotion[] = [
   eCm2Solide,
   eCm2Tableau,
   eCm2Graphique,
+  eCm2CalculsCommerciaux,
+  eCm2Probabilite,
+  eCm2Algorithmique,
   // 6e
   e6eFractionNombre,
   e6eAireLongueur,
