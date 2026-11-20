@@ -34,6 +34,10 @@ import e6eCercleDisque from "./6e/cercle_disque";
 import e6eDecimalCalcul from "./6e/decimal_calcul";
 import e4eTrigoCosinus from "./4e/trigo_cosinus";
 import e4ePropRatio from "./4e/prop_ratio";
+import e6eTriangleFigure from "./6e/triangle_figure";
+import e6eFractionCalcul from "./6e/fraction_calcul";
+import e4ePropEchelle from "./4e/prop_echelle";
+import e4eLitteralFactorisation from "./4e/litteral_factorisation";
 
 const TOUTES: ProblemesNotion[] = [
   // 6e
@@ -51,6 +55,8 @@ const TOUTES: ProblemesNotion[] = [
   e6eEntierCalculMental,
   e6eCercleDisque,
   e6eDecimalCalcul,
+  e6eTriangleFigure,
+  e6eFractionCalcul,
   // 4e
   e4eRelatifOperation,
   e4eEquationResolution,
@@ -65,6 +71,8 @@ const TOUTES: ProblemesNotion[] = [
   e4eThalesTheoreme,
   e4eTrigoCosinus,
   e4ePropRatio,
+  e4ePropEchelle,
+  e4eLitteralFactorisation,
   e4ePuissanceEcriture,
   e4ePythagoreTheoreme,
 ];
