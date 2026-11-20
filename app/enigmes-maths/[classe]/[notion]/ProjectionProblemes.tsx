@@ -282,7 +282,7 @@ const CSS = `
 .problemes .dots button[aria-current="true"] { background: var(--chalk); border-color: var(--chalk); }
 .problemes .hint { font-size: 13px; color: var(--chalk-dim); }
 .problemes .ecrire {
-  grid-column: 1 / -1; align-self: stretch; min-height: 144px;
+  grid-column: 1 / -1; align-self: stretch; min-height: 144px; box-sizing: content-box;
   background-color: #ffffff;
   background-image:
     linear-gradient(90deg, transparent 54px, #e9a3a3 54px, #e9a3a3 56px, transparent 56px),
