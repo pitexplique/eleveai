@@ -107,6 +107,10 @@ import eCm2Pourcentage from "./cm2/pourcentage";
 import eCm2Echelle from "./cm2/echelle";
 import eCm2Longueur from "./cm2/longueur";
 import eCm2Masse from "./cm2/masse";
+import eCm2Contenance from "./cm2/contenance";
+import eCm2Duree from "./cm2/duree";
+import eCm2Perimetre from "./cm2/perimetre";
+import eCm2Aire from "./cm2/aire";
 
 const TOUTES: ProblemesNotion[] = [
   // CM2
@@ -126,6 +130,10 @@ const TOUTES: ProblemesNotion[] = [
   eCm2Echelle,
   eCm2Longueur,
   eCm2Masse,
+  eCm2Contenance,
+  eCm2Duree,
+  eCm2Perimetre,
+  eCm2Aire,
   // 6e
   e6eFractionNombre,
   e6eAireLongueur,
