@@ -60,12 +60,16 @@ import e6eCercleCirconscrit from "./6e/cercle_circonscrit";
 import e6ePropEchelle from "./6e/prop_echelle";
 import e6eAireUnite from "./6e/aire_unite";
 import e6eDemiDroiteGraduee from "./6e/demi_droite_graduee";
+import e6eProbaFrequence from "./6e/proba_frequence";
+import e6eStatEnquete from "./6e/stat_enquete";
 import e4ePropProportionnalite from "./4e/prop_proportionnalite";
 import e4eLitteralIdentiteRemarquable from "./4e/litteral_identite_remarquable";
 import e4eAireSurface from "./4e/aire_surface";
 import e4eStatDonnee from "./4e/stat_donnee";
 import e4eAirePerimetre from "./4e/aire_perimetre";
 import e4eFractionNombre from "./4e/fraction_nombre";
+import e4eOrdreGrandeur from "./4e/ordre_grandeur";
+import e4eVisionEspace from "./4e/vision_espace";
 
 const TOUTES: ProblemesNotion[] = [
   // 6e
@@ -99,6 +103,8 @@ const TOUTES: ProblemesNotion[] = [
   e6ePropEchelle,
   e6eAireUnite,
   e6eDemiDroiteGraduee,
+  e6eProbaFrequence,
+  e6eStatEnquete,
   // 4e
   e4eRelatifOperation,
   e4eEquationResolution,
@@ -129,6 +135,8 @@ const TOUTES: ProblemesNotion[] = [
   e4eStatDonnee,
   e4eAirePerimetre,
   e4eFractionNombre,
+  e4eOrdreGrandeur,
+  e4eVisionEspace,
   e4ePuissanceEcriture,
   e4ePythagoreTheoreme,
 ];
