@@ -397,6 +397,10 @@ import eStmgSuiteRepresentation from "./stmg/suite_representation";
 import eStmgSuiteModeliser from "./stmg/suite_modeliser";
 import eStmgSuiteSeuil from "./stmg/suite_seuil";
 import eStmgSuiteTermeGeneral from "./stmg/suite_terme_general";
+import eStmgFctRepresentation from "./stmg/fct_representation";
+import eStmgFctTauxVariation from "./stmg/fct_taux_variation";
+import eStmgFctMonotonie from "./stmg/fct_monotonie";
+import eStmgFctDegre2Courbe from "./stmg/fct_degre2_courbe";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -810,6 +814,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgSuiteModeliser,
   eStmgSuiteSeuil,
   eStmgSuiteTermeGeneral,
+  eStmgFctRepresentation,
+  eStmgFctTauxVariation,
+  eStmgFctMonotonie,
+  eStmgFctDegre2Courbe,
   // fin STMG
 ];
 
