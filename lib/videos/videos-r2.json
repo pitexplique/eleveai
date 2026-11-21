@@ -17900,5 +17900,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_rang&display=simple"
+ },
+ "6e-entier-encadrer": {
+  "fichier": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer.mp4",
+  "poster": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer.png",
+  "vignette": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer.vignette.webp",
+  "titre": "Entre quelles centaines se trouve 582 ? — Encadrer un nombre entier — épisode 3 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_encadrer&display=simple"
+ },
+ "6e-entier-encadrer-short": {
+  "fichier": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer-short.mp4",
+  "poster": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer-short-miniature.png",
+  "vignette": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer-short-miniature.vignette.webp",
+  "titre": "752 entre deux dizaines : 750 ou 751 ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_encadrer&display=simple"
  }
 }

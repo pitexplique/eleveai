@@ -226,6 +226,36 @@ EP = [
       s_toi="dans 9 261, quel est le chiffre des unités de mille ?",
       s_tags=["nombres entiers", "rang d'un chiffre", "dizaines", "de droite à gauche"],
       s_centres=["transports", "jeux-defis"]),
+ # ⚠️ B2 `entier_comparer` saute son tour : sa voix `09b-correction` dit « 6 032 a 3 centaines »,
+ #    ce qui est FAUX (6 032 a 0 centaine et 3 dizaines, et c'est bien le rang des dizaines qui
+ #    décide entre 6 022, 6 023, 6 024 et 6 032). Un seul clip à refaire. La date **21/06/2027**
+ #    lui reste réservée : ⛔ ne pas la prendre pour un autre épisode.
+ dict(classe="6e", n=3, slug="encadrer", notion="entier_nombre", micro="entier_encadrer",
+      nom="Encadrer un nombre entier", date="2027-06-22", ceinture="verte",
+      titre="Entre quelles centaines se trouve 582 ?",
+      intro="Clara est guide de haute montagne. Avant de partir, elle situe chaque sommet entre "
+            "deux altitudes rondes : un sommet rangé entre deux repères ronds se lit d'un coup d'œil.",
+      points=["encadrer, c'est serrer le nombre entre les deux nombres ronds les plus proches",
+              "582 est entre 500 et 600 : on écrit l'encadrement 500 < 582 < 600",
+              "le RANG change l'encadrement : à la dizaine près, 9 614 est entre 9 610 et 9 620",
+              "les bornes d'une dizaine finissent par un zéro, celles d'un millier par trois",
+              "encadrer aide à arrondir : 47 est entre 40 et 50, et plus proche de 50"],
+      defi="un compteur affiche 26 896 kilomètres : l'encadrer entre deux dizaines consécutives.",
+      chap={"00-garde": "Entre quelles centaines ?", "01-situation": "Clara, guide de haute montagne",
+            "02-definition": "Encadrer, c'est serrer", "03-exemple": "582 entre 500 et 600",
+            "04-question": "Question 1", "05-rang": "Le rang change l'encadrement",
+            "06-question": "Question 2", "07-arrondi": "Encadrer aide à arrondir",
+            "08-question": "Question 3", "09-defi": "À toi de jouer",
+            "09b-correction": "Correction", "10-finale": "Ce que tu as appris"},
+      tags=["nombres entiers", "encadrer un nombre", "dizaine juste avant", "nombres ronds",
+            "droite graduée", "arrondir", "guide de haute montagne", "altitude"],
+      centres=["sport", "nature-ecologie"],
+      s_titre="752 entre deux dizaines : 750 ou 751 ?", s_ceinture="blanche",
+      s_accroche="Ma copine encadre 752 entre deux dizaines et écrit 751 et 761 : elle a pris les "
+                 "voisins du nombre. Une dizaine finit toujours par zéro : c'est 750 et 760.",
+      s_toi="encadre 7 755 entre deux centaines consécutives.",
+      s_tags=["nombres entiers", "encadrer", "dizaines", "nombres ronds"],
+      s_centres=["sport", "jeux-defis"]),
 ]
 
 COMMUNS = ["nombres entiers", "numération", "maths"]

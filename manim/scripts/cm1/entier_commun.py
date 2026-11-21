@@ -305,8 +305,10 @@ def clara(s=1.0):
                                   fill_color="#0f766e", fill_opacity=1, stroke_width=0).move_to(c + UP * r * 0.62),
                     Rectangle(width=r * 2.1, height=r * 0.22, fill_color="#115e59", fill_opacity=1, stroke_width=0)
                     .move_to(c + UP * r * 0.58),
+                    # ⚠️ -ql du 21/11 : à 1,55 r le pompon FLOTTAIT au-dessus du bonnet (dont le
+                    #    haut est à 1,16 r) — un point blanc tout seul. Il le touche maintenant.
                     Circle(radius=r * 0.17, fill_color="#f8fafc", fill_opacity=1, stroke_width=0)
-                    .move_to(c + UP * r * 1.55))
+                    .move_to(c + UP * r * 1.26))
     p.add(bonnet)
     return p
 

@@ -40,6 +40,8 @@ EP = [
     # ── Lot B : la 6e (notion `entier_nombre`, pas de `aussi`) ──
     ("6e", "rang", "01-rang", ["LES RANGS", "D'UN NOMBRE"], "Dans 5 482 : le chiffre des dizaines ?",
      "on compte depuis la droite !", True, "verte"),
+    ("6e", "encadrer", "03-encadrer", ["ENCADRER", "UN NOMBRE"], "582 est entre 500 et 600",
+     "les bornes finissent par 0 !", True, "verte"),
 ]
 
 # ⛔ Le badge garde la casse de la classe : « MATHS · 6e », jamais « MATHS · 6E »

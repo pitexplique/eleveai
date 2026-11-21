@@ -105104,6 +105104,165 @@
         "transports",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "6e-entier-encadrer",
+      "pas_avant": "2027-06-22",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_encadrer",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer.mp4",
+      "miniature": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer.png",
+      "titre": "Entre quelles centaines se trouve 582 ? — Encadrer un nombre entier — épisode 3 · Maths 6e",
+      "accroche": "Clara est guide de haute montagne. Avant de partir, elle situe chaque sommet entre deux altitudes rondes : un sommet rangé entre deux repères ronds se lit d'un coup d'œil.\n\nDans cette vidéo :\n• encadrer, c'est serrer le nombre entre les deux nombres ronds les plus proches\n• 582 est entre 500 et 600 : on écrit l'encadrement 500 < 582 < 600\n• le RANG change l'encadrement : à la dizaine près, 9 614 est entre 9 610 et 9 620\n• les bornes d'une dizaine finissent par un zéro, celles d'un millier par trois\n• encadrer aide à arrondir : 47 est entre 40 et 50, et plus proche de 50\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un compteur affiche 26 896 kilomètres : l'encadrer entre deux dizaines consécutives.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_encadrer&display=simple\n\n🔢 Épisode 3 de la série Nombres entiers d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Entre quelles centaines ?"
+        ],
+        [
+          "00:07",
+          "Clara, guide de haute montagne"
+        ],
+        [
+          "00:23",
+          "582 entre 500 et 600"
+        ],
+        [
+          "00:35",
+          "Question 1"
+        ],
+        [
+          "01:03",
+          "Le rang change l'encadrement"
+        ],
+        [
+          "01:13",
+          "Question 2"
+        ],
+        [
+          "02:00",
+          "Question 3"
+        ],
+        [
+          "02:32",
+          "À toi de jouer"
+        ],
+        [
+          "02:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "encadrer un nombre",
+        "dizaine juste avant",
+        "nombres ronds",
+        "droite graduée",
+        "arrondir",
+        "guide de haute montagne",
+        "altitude",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "Entre quelles dizaines consécutives se trouve 47 ?",
+          "choix": [
+            "47 et 48",
+            "40 et 50",
+            "30 et 40"
+          ],
+          "reponse": 1,
+          "explication": "40 est la dizaine juste avant, 50 la dizaine juste après."
+        },
+        {
+          "t": "01:13",
+          "question": "Encadre 9 614 entre deux dizaines consécutives.",
+          "choix": [
+            "9 610 et 9 620",
+            "9 611 et 9 621",
+            "9 600 et 9 610"
+          ],
+          "reponse": 0,
+          "explication": "Les dizaines finissent par zéro. Juste avant : 9 610. Juste après : 9 620."
+        },
+        {
+          "t": "02:00",
+          "question": "Entre quels milliers consécutifs se trouve 5 280 ?",
+          "choix": [
+            "5 200 et 5 300",
+            "5 000 et 6 000",
+            "4 000 et 5 000"
+          ],
+          "reponse": 1,
+          "explication": "Les milliers finissent par trois zéros. 5 280 est entre 5 000 et 6 000."
+        }
+      ],
+      "centres": [
+        "sport",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "6e-entier-encadrer-short",
+      "pas_avant": "2027-06-22",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_encadrer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-entier-encadrer",
+      "fichier": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer-short.mp4",
+      "miniature": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer-short-miniature.png",
+      "titre": "752 entre deux dizaines : 750 ou 751 ? #maths #6e",
+      "accroche": "Ma copine encadre 752 entre deux dizaines et écrit 751 et 761 : elle a pris les voisins du nombre. Une dizaine finit toujours par zéro : c'est 750 et 760.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : encadre 7 755 entre deux centaines consécutives. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_encadrer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #6e #collège",
+      "tags": [
+        "nombres entiers",
+        "encadrer",
+        "dizaines",
+        "nombres ronds",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Entre quelles dizaines se trouve 752 ?",
+          "choix": [
+            "750 et 760",
+            "751 et 761",
+            "700 et 800"
+          ],
+          "reponse": 0,
+          "explication": "Juste avant : 750. Juste après : 760. Les deux finissent par zéro."
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
+      ]
     }
   ]
 }
