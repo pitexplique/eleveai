@@ -10,7 +10,10 @@ part en validation, et rien ne démarre avant le « oui ».
 - Voix (source UNIQUE) : `manim/scripts/cm1/entier_voix.py` → `manim/VOIX-entiers-cm1-6e.md` (récap à valider)
   + `manim/scripts/cm1/entier_voix.json` (choix, bonne lettre, explications : lus par les scripts et pour le
   manifeste). Après le « oui » : `python manim/scripts/cm1/entier_voix.py --ecrire` → `manim/voix/<id>.json`.
-- Bonnes réponses : **graine 2111**, A 15 / B 15 / C 14 sur 44 questions, jamais deux fois la même lettre de
+- Bonnes réponses : ⛔ **deux graines** — **2111** pour les 44 questions des 11 premiers épisodes,
+  qui sont FIGÉES (leurs WAV existent, le paysage A1 est rendu en HD, et la lettre comme l'ordre
+  des choix sont DANS le texte dit : retirer tout le tirage les périmerait), **2211** pour les 4
+  questions de `cm2-entier-multiple`. Résultat : A 16 / B 16 / C 16 sur 48 questions, jamais deux fois la même lettre de
   suite dans une paysage ; ordre des leurres tiré au hasard aussi (graine 2027).
 - Plafonds de mots par phrase vérifiés par le script : **18 au CM1 et au CM2, 20 en 6e → 0 phrase au-dessus**.
 - Centres d'intérêt vérifiés par ÂGE dans le script lui-même (tranche **9-11** pour CM1-CM2-6e) :
@@ -23,7 +26,13 @@ part en validation, et rien ne démarre avant le « oui ».
 
 ## 1. Le découpage (tranché par Frédéric le 21/11 — ne pas rediscuter)
 
-**11 épisodes = 22 vidéos** (1 paysage + 1 short Ti Margo chacun).
+**12 épisodes = 24 vidéos** (1 paysage + 1 short Ti Margo chacun).
+
+> ⛔⛔ **2ᵉ décision de Frédéric, 21/11** — l'écran « Et au CM2 » est gardé PARTOUT **sauf sur
+> `entier_multiple`, qui se sépare en deux épisodes.** Sa raison, et c'est une règle pour la suite :
+> « des nombres plus grands, un élève de CM1 les suit — l'écran Et au CM2 est exactement le bon outil
+> pour ça. Mais les critères de divisibilité par 3 et par 9 sont une **méthode** que le CM1 n'a pas,
+> pas une magnitude de plus. **Une notion qui déborde est une notion neuve.** »
 
 | # | id de la vidéo | Classe | Notion | Micro | `aussi` | Métier | Centres | Ceintures (paysage / short) |
 |---|---|---|---|---|---|---|---|---|
@@ -31,7 +40,8 @@ part en validation, et rien ne démarre avant le « oui ».
 | A2 | `cm1-entier-comparer` | CM1 | `nombre_entier` | `entier_comparer` | cm2 `entier_comparer` | Malik, bibliothécaire | jeux-defis, histoire-geographie | verte / blanche |
 | A3 | `cm1-entier-decomposer` | CM1 | `nombre_entier` | `entier_decomposer` | cm2 `entier_decomposer` | Thomas, imprimeur | art-design, technologie-ia | verte / blanche |
 | A4 | `cm1-entier-arrondir` | CM1 | `nombre_entier` | `entier_arrondir` | cm2 `entier_arrondir` | Léna, météorologue | meteo-climat, sciences | verte / blanche |
-| A5 | `cm1-entier-multiple` | CM1 | `nombre_entier` | `entier_multiple` | cm2 `entier_multiple` | Awa, fleuriste | nature-ecologie, art-design | verte / blanche |
+| A5 | `cm1-entier-multiple` | **CM1 seul** | `nombre_entier` | `entier_multiple` | **—** | Awa, fleuriste | nature-ecologie, art-design | verte / blanche |
+| A5′ | `cm2-entier-multiple` | **CM2 seul** | `nombre_entier` | `entier_multiple` | **—** | Hugo, pâtissier | cuisine, jeux-defis | verte / blanche |
 | A6 | `cm1-entier-defi` | CM1 | `nombre_entier` | `entier_defi` | cm2 `entier_defi` | Sarah, factrice | transports, jeux-defis | **bleue** / blanche |
 | B1 | `6e-entier-rang` | 6e | `entier_nombre` | `entier_rang` | — | Inès, contrôleuse aérienne | transports, technologie-ia | verte / blanche |
 | B2 | `6e-entier-comparer` | 6e | `entier_nombre` | `entier_comparer` | — | Noé, astronome | espace, sciences | verte / blanche |
@@ -39,7 +49,13 @@ part en validation, et rien ne démarre avant le « oui ».
 | B4 | `6e-entier-decomposer` | 6e | `entier_nombre` | `entier_decomposer` | — | Ethan, game designer | jeux-video, technologie-ia | verte / blanche |
 | B5 | `6e-entier-defi` | 6e | `entier_nombre` | `entier_defi` | — | Maya, volcanologue (974) | nature-ecologie, sciences | **bleue** / blanche |
 
-- **Lot A** : une seule vidéo par micro, **propriétaire CM1**, branchée au CM2 par le mécanisme `aussi`
+- ⛔ **`entier_multiple` est l'exception** : deux vidéos, chacune sur sa classe, **sans `aussi`**.
+  `cm1-entier-multiple` perd son écran `07-cm2` (il passe à 15 écrans ; ⚠️ le numéro 07 reste
+  volontairement libre — renuméroter changerait les clés, donc les noms des WAV déjà produits).
+  `cm2-entier-multiple` est bâti sur ce que la banque CM2 demande en propre : critères de
+  divisibilité par 3 et par 9 (la somme des chiffres), multiples de 25/50/1 000 reconnus à la fin,
+  nombres à 6-7 chiffres.
+- **Lot A (les 5 autres micros)** : une seule vidéo par micro, **propriétaire CM1**, branchée au CM2 par le mécanisme `aussi`
   (2 lignes `notion_ressources`), comme `ce1_masse_soupeser` reçoit la vidéo du CP dans la série Masses.
   ⚠️ Particularité : les `microId` du CM1 et du CM2 sont **identiques** (`entier_lire`, `entier_comparer`,
   `entier_decomposer`, `entier_arrondir`, `entier_multiple`, `entier_defi`) sous la même notion
@@ -163,12 +179,15 @@ Leurres typiques : le complément à 10 près, un 0 placé devant, deux chiffres
 
 ## 3. Les deux écarts relevés
 
-### a) ✅ TRANCHÉ — le CM2 va plus loin que le CM1 sur **les six** micros du lot A
+### a) ✅ TRANCHÉ EN DEUX TEMPS — le CM2 va plus loin que le CM1 sur **les six** micros du lot A
 
-> ✅ **Décision de Frédéric, 21/11 : « Oui, garde-le ».** L'écran `07-cm2` reste dans les six paysages du
-> lot A, et les six micros restent **mutualisés CM1 + CM2** (une vidéo chacun, deux lignes
-> `notion_ressources`). ⛔ Ne pas rouvrir la question à la prochaine relève : ni supprimer cet écran, ni
-> séparer un micro en deux vidéos.
+> ✅ **Décision de Frédéric, 21/11, en deux temps.**
+> 1. « Oui, garde-le » : l'écran `07-cm2` reste et le micro reste **mutualisé CM1 + CM2** sur CINQ
+>    micros — `entier_lire`, `entier_comparer`, `entier_decomposer`, `entier_arrondir`, `entier_defi`.
+> 2. ⛔⛔ **SAUF `entier_multiple`**, qui se sépare : `cm1-entier-multiple` perd l'écran et redevient
+>    CM1 seul, `cm2-entier-multiple` est une vidéo à part. Pas de `aussi` sur ce micro.
+>
+> ⛔ Ne pas rouvrir la question pour les cinq autres à la prochaine relève.
 
 La mutualisation a été décidée parce que les deux banques se ressemblaient : « trois mille deux cent
 quarante » au CM1, « cinq mille deux cent quarante » au CM2, même énoncé, mêmes leurres, même explication.

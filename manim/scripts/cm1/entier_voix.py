@@ -20,13 +20,24 @@
 #   ajoutés le 14/11 montent aux millions et aux milliards sur les SIX micros. Chaque paysage du lot A porte
 #   donc un écran « 07-cm2 » qui ouvre la classe des millions (ou le critère de divisibilité pour les
 #   multiples).
-# ✅ TRANCHÉ PAR FRÉDÉRIC LE 21/11 : « Oui, garde-le ». L'écran « 07-cm2 » RESTE dans les six paysages du
-#   lot A, et les six micros restent MUTUALISÉS CM1 + CM2 (une vidéo, deux lignes `notion_ressources`).
-#   ⛔ Ne pas rouvrir la question : ni supprimer cet écran, ni séparer un micro en deux vidéos.
+# ✅ TRANCHÉ PAR FRÉDÉRIC LE 21/11, EN DEUX TEMPS :
+#   1. « Oui, garde-le » → l'écran « 07-cm2 » RESTE, et le micro reste MUTUALISÉ CM1 + CM2, sur CINQ
+#      micros : entier_lire, entier_comparer, entier_decomposer, entier_arrondir, entier_defi.
+#   2. ⛔⛔ SAUF `entier_multiple`, qui se SÉPARE en deux épisodes. Sa règle, qui vaut pour la suite :
+#      « des nombres plus grands, un CM1 les suit — l'écran Et au CM2 est fait pour ça. Mais les
+#      critères de divisibilité par 3 et par 9 sont une MÉTHODE que le CM1 n'a pas, pas une magnitude
+#      de plus. Une notion qui déborde est une notion NEUVE. »
+#      → `cm1-entier-multiple` perd son écran 07-cm2 et redevient CM1 SEUL ;
+#      → `cm2-entier-multiple` est un épisode à part (paysage + short), sur les critères de
+#        divisibilité et les grands multiples. ⛔ Pas de `aussi` sur ce micro : deux vidéos.
+#   ⛔ Ne pas rouvrir la question pour les cinq autres micros.
 #
-# Questions-pauses : la place de la bonne réponse (A, B ou C) et l'ordre des leurres sont tirés au hasard
-# (⛔ GRAINE 2111), jamais deux fois la même lettre de suite dans une paysage, ≈ un tiers de A, de B, de C
-# sur la série (REGLES.md, 09/11). Toute voix finit par la clé `…-abonne` (REGLES.md, en tête).
+# Questions-pauses : la place de la bonne réponse (A, B ou C) et l'ordre des leurres sont tirés au hasard,
+# jamais deux fois la même lettre de suite dans une paysage, un tiers de A, de B, de C sur la série
+# (REGLES.md, 09/11) : 48 questions, A 16 / B 16 / C 16.
+# ⛔ DEUX TIRAGES, ET C'EST VOULU : graine 2111 pour les 44 questions des 11 premiers épisodes (FIGÉES :
+# leurs WAV existent et le paysage A1 est rendu en HD), graine 2211 pour les 4 du nouvel épisode.
+# Toute voix finit par la clé `…-abonne` (REGLES.md, en tête).
 # Plafond de mots par phrase, vérifié ici, 0 phrase au-dessus : 18 au CM1 et au CM2, 20 en 6e.
 # Centres d'intérêt : liste FERMÉE lib/videos/centres-interet.ts, vérifiés par ÂGE (CM1-6e = tranche 9-11,
 # donc ⛔ pas de reseaux-sociaux, cinema-series ni argent-budget) — contrôle intégré ci-dessous.
@@ -195,7 +206,13 @@ SERIE = [
         ("03-fin", "Arrondir, ce n'est pas couper : c'est choisir le plus proche !"),
         ("04-commentaire", "À toi : arrondis 23 249 au millier près. Réponds en commentaire !"),
     ]),
-    ("cm1-entier-multiple", "cm1", "entier_multiple", "nombre_entier", ("cm2", "entier_multiple"),
+    # ⛔⛔ CM1 SEUL (Frédéric, 21/11, 2ᵉ décision) : ce micro ne se mutualise PAS. Les critères de
+    # divisibilité par 3 et par 9 que demande la banque du CM2 sont une MÉTHODE que le CM1 n'a pas,
+    # pas une magnitude de plus — « une notion qui déborde est une notion neuve ». L'écran 07-cm2 est
+    # donc retiré ici, et le CM2 a son propre épisode (`cm2-entier-multiple`, plus bas).
+    # ⚠️ Le numéro 07 reste VOLONTAIREMENT libre : renuméroter changerait les clés, donc les noms des
+    # WAV déjà produits pour les écrans qui, eux, n'ont pas bougé.
+    ("cm1-entier-multiple", "cm1", "entier_multiple", "nombre_entier", None,
      "verte", "blanche", "Awa, fleuriste", ["nature-ecologie", "art-design"], [
         ("00-garde", "Les multiples. 42 est-il un multiple de 6 ?"),
         ("01-situation", "Voici Awa. Elle est fleuriste. "
@@ -209,8 +226,6 @@ SERIE = [
                                "Un multiple de 10 finit par zéro."),
         ("06-question", Q("Lequel est un multiple de 10 ?", "4 960", ["4 925", "4 911"],
                           "Un multiple de 10 finit par zéro. Seul 4 960 finit par zéro.")),
-        ("07-cm2", "Et au CM2, une astuce pour 3 : on additionne les chiffres. "
-                   "Dans 51 408 : 5 plus 1 plus 4 plus 0 plus 8 donne 18."),
         ("08-question", Q("Quel nombre n'est pas un multiple de 7 ?", "24", ["28", "56"],
                           "7 fois 4 donne 28, 7 fois 8 donne 56. 24 n'est pas dans la table de 7.")),
         ("09-defi", "À toi de jouer ! Un chocolatier remplit des ballotins de 7. "
@@ -226,6 +241,45 @@ SERIE = [
                           "4 fois 8 donne 32. Ni 34 ni 35 n'est dans la table de 4.")),
         ("03-fin", "Un multiple, c'est quand il ne reste RIEN !"),
         ("04-commentaire", "À toi : combien de paquets de 6 avec 54 billes ? Réponds en commentaire !"),
+    ]),
+    # ═══ L'ÉPISODE NÉ DE LA 2ᵉ DÉCISION DE FRÉDÉRIC (21/11) : le CM2 a SA vidéo sur les multiples ═══
+    # ⛔ Pas de `aussi` : deux vidéos, chacune sur sa classe. Ce que la banque CM2 demande en propre :
+    # les critères de divisibilité par 3 et par 9 (la somme des chiffres), les multiples de 25, 50 et
+    # 1 000 reconnus à la fin du nombre, et des nombres à 6-7 chiffres.
+    ("cm2-entier-multiple", "cm2", "entier_multiple", "nombre_entier", None,
+     "verte", "blanche", "Hugo, pâtissier", ["cuisine", "jeux-defis"], [
+        ("00-garde", "Les critères de divisibilité. 51 408 est-il un multiple de 3, sans poser la division ?"),
+        ("01-situation", "Voici Hugo. Il est pâtissier. "
+                         "Il range ses macarons par boîtes, sans qu'il en reste un seul."),
+        ("02-rappel", "Un multiple de 3, c'est 3 fois un nombre entier. "
+                      "Mais sur un grand nombre, diviser est long."),
+        ("03-critere3", "L'astuce : on additionne les chiffres. "
+                        "Si la somme est un multiple de 3, le nombre l'est aussi."),
+        ("04-question", Q("Dans 51 408, quelle est la somme des chiffres ?", "18", ["17", "24"],
+                          "5 plus 1 plus 4 plus 0 plus 8 donne 18. Et 18 est un multiple de 3.")),
+        ("05-critere9", "Même astuce pour 9. "
+                        "Si la somme des chiffres est un multiple de 9, le nombre l'est aussi."),
+        ("06-question", Q("La somme des chiffres de 59 130 vaut 18. Est-ce un multiple de 9 ?",
+                          "oui", ["non", "on ne peut pas savoir"],
+                          "18 est un multiple de 9. Donc 59 130 est un multiple de 9.")),
+        ("07-fins", "D'autres multiples se lisent à la fin. "
+                    "Un multiple de 25 finit par 00, 25, 50 ou 75."),
+        ("08-question", Q("Lequel est un multiple de 25 ?", "858 250", ["858 152", "858 445"],
+                          "Un multiple de 25 finit par 00, 25, 50 ou 75. Seul 858 250 finit par 50.")),
+        ("09-defi", "À toi de jouer ! Hugo a 1 743 macarons, en boîtes de 5. "
+                    "Reste-t-il des macarons ? Mets pause, et cherche !"),
+        ("09b-correction", "Correction. Un multiple de 5 finit par 0 ou par 5. "
+                           "1 743 finit par 3 : il en reste."),
+        ("10-finale", "Ce que tu as appris. Pour 3 et pour 9, on additionne les chiffres. "
+                      "Pour 5, 25 et 100, on regarde la fin."),
+    ], [
+        ("00-accroche", "Salut ! Mon copain veut savoir si 57 651 est un multiple de 3. "
+                        "Il pose la division."),
+        ("01-astuce", "Ma copine, elle, additionne les chiffres… et elle a déjà fini !"),
+        ("02-question", Q("Lequel est un multiple de 3 ?", "57 651", ["57 658", "57 671"],
+                          "5 plus 7 plus 6 plus 5 plus 1 donne 24, un multiple de 3.")),
+        ("03-fin", "Pas besoin de diviser : on additionne les chiffres !"),
+        ("04-commentaire", "À toi : 742 950 est-il un multiple de 50 ? Réponds en commentaire !"),
     ]),
     ("cm1-entier-defi", "cm1", "entier_defi", "nombre_entier", ("cm2", "entier_defi"),
      "bleue", "blanche", "Sarah, factrice", ["transports", "jeux-defis"], [
@@ -447,27 +501,69 @@ SERIE = [
 ]
 
 
+# ⛔⛔ LES 11 PREMIERS ÉPISODES SONT FIGÉS — graine 2111, 44 questions, A 15 / B 15 / C 14.
+# Leurs WAV sont produits (253 fichiers) et le paysage A1 est RENDU EN HD. Or la lettre de la bonne
+# réponse et l'ordre des leurres sont DANS le texte dit (« Réponse A. », « A : 12 030. B : … »).
+# Retirer tout le tirage parce qu'on ajoute un épisode réécrirait ces textes, périmerait les 253 WAV
+# et le HD de A1. On FIGE donc les 11, dans leur ordre d'origine, et on tire à part les 4 questions
+# du nouvel épisode — ce que demande la consigne (« rester autour d'un tiers ») sans rien casser.
+ORDRE_FIGE = ["cm1-entier-lire", "cm1-entier-comparer", "cm1-entier-decomposer", "cm1-entier-arrondir",
+              "cm1-entier-multiple", "cm1-entier-defi", "6e-entier-rang", "6e-entier-comparer",
+              "6e-entier-encadrer", "6e-entier-decomposer", "6e-entier-defi"]
+GRAINE_FIGEE = 2111    # les 44 questions des 11 premiers épisodes
+GRAINE_LEURRES = 2027  # l'ordre des leurres de ces 11 épisodes
+GRAINE_AJOUT = 2211    # cm2-entier-multiple, ajouté le 21/11 (lettres ET leurres)
+# Le sac du nouvel épisode : 1 A, 1 B, 2 C → la série passe de 15/15/14 à 16/16/16 sur 48 questions.
+SAC_AJOUT = ["A", "B", "C", "C"]
+
+
+def _questions(ecrans):
+    return [v for _, v in ecrans if isinstance(v, dict)]
+
+
 def tirer_lettres():
-    """La place de la bonne réponse de chaque question, dans l'ordre de SERIE (paysage puis short).
+    """{id de l'épisode : {"paysage": [lettres], "short": [lettres]}}.
     Un tiers de A, de B, de C ; jamais deux fois la même lettre de suite dans une paysage."""
-    rng = random.Random(2111)
-    nq = sum(1 for e in SERIE for ecrans in (e[9], e[10]) for _, v in ecrans if isinstance(v, dict))
+    par_id = {e[0]: e for e in SERIE}
+    figes = [par_id[i] for i in ORDRE_FIGE if i in par_id]
+    # ── les 11 figés : l'algorithme d'origine, sur eux seuls, dans leur ordre d'origine ──
+    rng = random.Random(GRAINE_FIGEE)
+    nq = sum(len(_questions(e[9])) + len(_questions(e[10])) for e in figes)
     sac = list("ABC" * (nq // 3 + 1))[:nq]
     rng.shuffle(sac)
-    res, i = [], 0
-    for e in SERIE:
-        for ecrans, paysage in ((e[9], True), (e[10], False)):
-            prec = None
-            for _, v in ecrans:
-                if not isinstance(v, dict):
-                    continue
+    res, i = {}, 0
+    for e in figes:
+        res[e[0]] = {}
+        for cle, ecrans, paysage in (("paysage", e[9], True), ("short", e[10], False)):
+            prec, L = None, []
+            for _ in _questions(ecrans):
                 if paysage and sac[i] == prec:  # échanger avec la prochaine lettre différente
                     j = next(j for j in range(i + 1, len(sac)) if sac[j] != prec)
                     sac[i], sac[j] = sac[j], sac[i]
                 prec = sac[i]
-                res.append(sac[i])
+                L.append(sac[i])
                 i += 1
-    return res, random.Random(2027)
+            res[e[0]][cle] = L
+    # ── les épisodes ajoutés après coup : leur propre tirage, qui ne touche pas aux figés ──
+    rng2 = random.Random(GRAINE_AJOUT)
+    for e in SERIE:
+        if e[0] in res:
+            continue
+        n_p, n_s = len(_questions(e[9])), len(_questions(e[10]))
+        sac2 = SAC_AJOUT[:n_p + n_s]
+        for _ in range(200):  # on retire tant que deux lettres se suivent dans la paysage
+            rng2.shuffle(sac2)
+            if all(sac2[k] != sac2[k + 1] for k in range(n_p - 1)):
+                break
+        res[e[0]] = {"paysage": sac2[:n_p], "short": sac2[n_p:n_p + n_s]}
+    return res
+
+
+def rngs_leurres():
+    """L'ordre des leurres : un générateur pour les 11 figés (consommé dans LEUR ordre), un autre
+    pour les épisodes ajoutés. Sans cette séparation, insérer un épisode décalerait tous les
+    suivants et réécrirait leurs choix — donc leurs WAV."""
+    return random.Random(GRAINE_LEURRES), random.Random(GRAINE_AJOUT)
 
 
 def voix_de(ecrans, lettres, rng, short):
@@ -531,11 +627,22 @@ def centres_hors_tranche():
 
 
 def construire():
-    lettres, rng = tirer_lettres()
+    lettres = tirer_lettres()
+    rng_fige, rng_ajout = rngs_leurres()
+    # ⛔ Les leurres des 11 figés se tirent dans LEUR ordre d'origine, avant tout épisode ajouté.
+    rngs = {}
+    for vid in ORDRE_FIGE:
+        rngs[vid] = rng_fige
     tout = []
+    ordre = [e for i in ORDRE_FIGE for e in SERIE if e[0] == i] + [e for e in SERIE if e[0] not in ORDRE_FIGE]
+    prepare = {}
+    for e in ordre:
+        vid = e[0]
+        r = rngs.get(vid, rng_ajout)
+        prepare[vid] = (voix_de(e[9], list(lettres[vid]["paysage"]), r, False),
+                        voix_de(e[10], list(lettres[vid]["short"]), r, True))
     for (vid, classe, micro, notion, aussi, c_p, c_s, metier, centres, ecr_p, ecr_s) in SERIE:
-        vp, qp = voix_de(ecr_p, lettres, rng, False)
-        vs, qs = voix_de(ecr_s, lettres, rng, True)
+        (vp, qp), (vs, qs) = prepare[vid]
         tout.append(dict(id=vid, classe=classe, micro=micro, notion=notion,
                          aussi=(f"{aussi[0]}:{aussi[1]}" if aussi else None),
                          ceinture=c_p, ceinture_short=c_s, metier=metier, centres=centres,
@@ -554,17 +661,26 @@ def recap(tout):
          "Source unique : `manim/scripts/cm1/entier_voix.py` (on corrige LÀ, puis `--ecrire`). "
          "Inventaire des banques : `manim/INVENTAIRE-entiers-cm1-6e.md`.",
          "",
-         "**11 épisodes = 22 vidéos** (1 paysage + 1 short Ti Margo chacun).",
+         "**12 épisodes = 24 vidéos** (1 paysage + 1 short Ti Margo chacun).",
          "",
-         "- **Lot A — 6 épisodes servis au CM1 ET au CM2** (notion `nombre_entier`, mêmes `microId` dans "
-         "les deux banques). Une seule vidéo par micro, propriétaire CM1, branchée au CM2 par `aussi` "
+         "- **Lot A — 5 épisodes servis au CM1 ET au CM2** (notion `nombre_entier`, mêmes `microId` dans "
+         "les deux banques) : `entier_lire`, `entier_comparer`, `entier_decomposer`, `entier_arrondir`, "
+         "`entier_defi`. Une seule vidéo par micro, propriétaire CM1, branchée au CM2 par `aussi` "
          "(2 lignes `notion_ressources`).",
+         "- **`entier_multiple` fait exception : DEUX épisodes** (Frédéric, 21/11). `cm1-entier-multiple` "
+         "est CM1 seul, sans écran « Et au CM2 » ; `cm2-entier-multiple` est une vidéo à part, sur les "
+         "critères de divisibilité par 3 et par 9 et les grands multiples. ⛔ Pas de `aussi` sur ce micro. "
+         "Sa raison, qui vaut pour la suite : des nombres plus grands, un CM1 les suit ; une MÉTHODE "
+         "qu'il n'a pas, non. Une notion qui déborde est une notion neuve.",
          "- **Lot B — 5 épisodes en 6e** (notion `entier_nombre`). ⛔ `entier_lire_ecrire` n'est PAS "
          "produit : l'ancienne vidéo `6e-entier-nombre` est en ligne et la couvre.",
          "",
-         f"**Bonnes réponses tirées au hasard, graine 2111** : A {cpt['A']}, B {cpt['B']}, C {cpt['C']} "
-         f"sur {nq} questions (jamais deux fois la même lettre de suite dans une paysage ; "
-         "l'ordre des leurres est tiré au hasard aussi, graine 2027).",
+         f"**Bonnes réponses tirées au hasard** : A {cpt['A']}, B {cpt['B']}, C {cpt['C']} "
+         f"sur {nq} questions — un tiers chacune (jamais deux fois la même lettre de suite dans une "
+         "paysage ; l'ordre des leurres est tiré au hasard aussi). ⛔ **Deux graines, et c'est voulu** : "
+         "**2111** pour les 44 questions des 11 premiers épisodes, qui sont FIGÉES (leurs WAV existent "
+         "et le paysage A1 est déjà rendu en HD ; la lettre et l'ordre des choix sont DANS le texte dit, "
+         "les retirer périmerait tout), et **2211** pour les 4 questions du nouvel épisode.",
          "",
          f"**Plafond de mots par phrase** : 18 au CM1 et au CM2, 20 en 6e → "
          f"{'⚠️ ' + str(longues_total) + ' phrase(s) au-dessus' if longues_total else '0 phrase au-dessus'}.",
@@ -574,13 +690,12 @@ def recap(tout):
          "⛔ Aucun `reseaux-sociaux`, `cinema-series` ni `argent-budget` : ils n'ouvrent qu'à 12-14 ans.",
          "",
          "**Shorts** : Ti Margo en dessin animé (« mon copain », « ma copine »), 1 question-pause, "
-         "puis la question en commentaire. Un seul passage à La Réunion sur les 11 épisodes : "
+         "puis la question en commentaire. Un seul passage à La Réunion sur les 12 épisodes : "
          "Maya, volcanologue au Piton de la Fournaise (6e, défi).",
          "",
-         "✅ **L'écran `07-cm2` du lot A** ouvre la classe des millions (ou le critère de divisibilité pour "
-         "les multiples) : c'est l'écran qui couvre ce que la banque du CM2 demande en plus de celle du "
-         "CM1. **Gardé sur décision de Frédéric le 21/11** (« Oui, garde-le ») : les six micros restent "
-         "mutualisés CM1 + CM2, une seule vidéo chacun.",
+         "✅ **L'écran `07-cm2`** ouvre la classe des millions : c'est lui qui couvre ce que la banque du "
+         "CM2 demande en plus de celle du CM1. **Gardé sur décision de Frédéric le 21/11** sur les cinq "
+         "micros mutualisés — et **retiré de `cm1-entier-multiple`**, qui redevient CM1 seul.",
          "",
          "---",
          ""]

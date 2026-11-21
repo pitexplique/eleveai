@@ -2,20 +2,21 @@
 
 Source unique : `manim/scripts/cm1/entier_voix.py` (on corrige LÀ, puis `--ecrire`). Inventaire des banques : `manim/INVENTAIRE-entiers-cm1-6e.md`.
 
-**11 épisodes = 22 vidéos** (1 paysage + 1 short Ti Margo chacun).
+**12 épisodes = 24 vidéos** (1 paysage + 1 short Ti Margo chacun).
 
-- **Lot A — 6 épisodes servis au CM1 ET au CM2** (notion `nombre_entier`, mêmes `microId` dans les deux banques). Une seule vidéo par micro, propriétaire CM1, branchée au CM2 par `aussi` (2 lignes `notion_ressources`).
+- **Lot A — 5 épisodes servis au CM1 ET au CM2** (notion `nombre_entier`, mêmes `microId` dans les deux banques) : `entier_lire`, `entier_comparer`, `entier_decomposer`, `entier_arrondir`, `entier_defi`. Une seule vidéo par micro, propriétaire CM1, branchée au CM2 par `aussi` (2 lignes `notion_ressources`).
+- **`entier_multiple` fait exception : DEUX épisodes** (Frédéric, 21/11). `cm1-entier-multiple` est CM1 seul, sans écran « Et au CM2 » ; `cm2-entier-multiple` est une vidéo à part, sur les critères de divisibilité par 3 et par 9 et les grands multiples. ⛔ Pas de `aussi` sur ce micro. Sa raison, qui vaut pour la suite : des nombres plus grands, un CM1 les suit ; une MÉTHODE qu'il n'a pas, non. Une notion qui déborde est une notion neuve.
 - **Lot B — 5 épisodes en 6e** (notion `entier_nombre`). ⛔ `entier_lire_ecrire` n'est PAS produit : l'ancienne vidéo `6e-entier-nombre` est en ligne et la couvre.
 
-**Bonnes réponses tirées au hasard, graine 2111** : A 15, B 15, C 14 sur 44 questions (jamais deux fois la même lettre de suite dans une paysage ; l'ordre des leurres est tiré au hasard aussi, graine 2027).
+**Bonnes réponses tirées au hasard** : A 16, B 16, C 16 sur 48 questions — un tiers chacune (jamais deux fois la même lettre de suite dans une paysage ; l'ordre des leurres est tiré au hasard aussi). ⛔ **Deux graines, et c'est voulu** : **2111** pour les 44 questions des 11 premiers épisodes, qui sont FIGÉES (leurs WAV existent et le paysage A1 est déjà rendu en HD ; la lettre et l'ordre des choix sont DANS le texte dit, les retirer périmerait tout), et **2211** pour les 4 questions du nouvel épisode.
 
 **Plafond de mots par phrase** : 18 au CM1 et au CM2, 20 en 6e → 0 phrase au-dessus.
 
 **Centres d'intérêt** (liste fermée, vérifiés par âge, tranche 9-11 pour CM1-6e) : 0 centre hors tranche. ⛔ Aucun `reseaux-sociaux`, `cinema-series` ni `argent-budget` : ils n'ouvrent qu'à 12-14 ans.
 
-**Shorts** : Ti Margo en dessin animé (« mon copain », « ma copine »), 1 question-pause, puis la question en commentaire. Un seul passage à La Réunion sur les 11 épisodes : Maya, volcanologue au Piton de la Fournaise (6e, défi).
+**Shorts** : Ti Margo en dessin animé (« mon copain », « ma copine »), 1 question-pause, puis la question en commentaire. Un seul passage à La Réunion sur les 12 épisodes : Maya, volcanologue au Piton de la Fournaise (6e, défi).
 
-✅ **L'écran `07-cm2` du lot A** ouvre la classe des millions (ou le critère de divisibilité pour les multiples) : c'est l'écran qui couvre ce que la banque du CM2 demande en plus de celle du CM1. **Gardé sur décision de Frédéric le 21/11** (« Oui, garde-le ») : les six micros restent mutualisés CM1 + CM2, une seule vidéo chacun.
+✅ **L'écran `07-cm2`** ouvre la classe des millions : c'est lui qui couvre ce que la banque du CM2 demande en plus de celle du CM1. **Gardé sur décision de Frédéric le 21/11** sur les cinq micros mutualisés — et **retiré de `cm1-entier-multiple`**, qui redevient CM1 seul.
 
 ---
 
@@ -159,7 +160,7 @@ Bonnes lettres — paysage : 04 → **C** (5 000 + 60 + 4), 06 → **A** (5 870)
 
 Bonnes lettres — paysage : 04 → **C** (6 200), 06 → **A** (48 000), 08 → **C** (28 805) · short : **C** (4 700).
 
-## `cm1-entier-multiple` — CM1 (+ CM2 par `aussi`) · notion `nombre_entier` · micro `entier_multiple`
+## `cm1-entier-multiple` — CM1 · notion `nombre_entier` · micro `entier_multiple`
 
 **Métier :** Awa, fleuriste · **Centres :** nature-ecologie, art-design · **Ceintures :** paysage verte, short blanche
 
@@ -174,7 +175,6 @@ Bonnes lettres — paysage : 04 → **C** (6 200), 06 → **A** (48 000), 08 →
 - `05-dernier-chiffre` : Pour 2, 10 et 100, le dernier chiffre suffit. Un multiple de 10 finit par zéro.
 - `06-question` : Question ! Lequel est un multiple de 10 ? A : 4 925. B : 4 960. C : 4 911. Mets pause, et choisis !
 - `06b-reponse` : Réponse B. Un multiple de 10 finit par zéro. Seul 4 960 finit par zéro.
-- `07-cm2` : Et au CM2, une astuce pour 3 : on additionne les chiffres. Dans 51 408 : 5 plus 1 plus 4 plus 0 plus 8 donne 18.
 - `08-question` : Question ! Quel nombre n'est pas un multiple de 7 ? A : 24. B : 28. C : 56. Mets pause, et choisis !
 - `08b-reponse` : Réponse A. 7 fois 4 donne 28, 7 fois 8 donne 56. 24 n'est pas dans la table de 7.
 - `09-defi` : À toi de jouer ! Un chocolatier remplit des ballotins de 7. Quel total donne des ballotins pleins : 62, 63 ou 64 ? Mets pause, et cherche !
@@ -193,6 +193,41 @@ Bonnes lettres — paysage : 04 → **C** (6 200), 06 → **A** (48 000), 08 →
 - `05-abonne` : Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !
 
 Bonnes lettres — paysage : 04 → **A** (63), 06 → **B** (4 960), 08 → **A** (24) · short : **B** (32).
+
+## `cm2-entier-multiple` — CM2 · notion `nombre_entier` · micro `entier_multiple`
+
+**Métier :** Hugo, pâtissier · **Centres :** cuisine, jeux-defis · **Ceintures :** paysage verte, short blanche
+
+**Paysage**
+
+- `00-garde` : Les critères de divisibilité. 51 408 est-il un multiple de 3, sans poser la division ?
+- `01-situation` : Voici Hugo. Il est pâtissier. Il range ses macarons par boîtes, sans qu'il en reste un seul.
+- `02-rappel` : Un multiple de 3, c'est 3 fois un nombre entier. Mais sur un grand nombre, diviser est long.
+- `03-critere3` : L'astuce : on additionne les chiffres. Si la somme est un multiple de 3, le nombre l'est aussi.
+- `04-question` : Question ! Dans 51 408, quelle est la somme des chiffres ? A : 24. B : 17. C : 18. Mets pause, et choisis !
+- `04b-reponse` : Réponse C. 5 plus 1 plus 4 plus 0 plus 8 donne 18. Et 18 est un multiple de 3.
+- `05-critere9` : Même astuce pour 9. Si la somme des chiffres est un multiple de 9, le nombre l'est aussi.
+- `06-question` : Question ! La somme des chiffres de 59 130 vaut 18. Est-ce un multiple de 9 ? A : non. B : oui. C : on ne peut pas savoir. Mets pause, et choisis !
+- `06b-reponse` : Réponse B. 18 est un multiple de 9. Donc 59 130 est un multiple de 9.
+- `07-fins` : D'autres multiples se lisent à la fin. Un multiple de 25 finit par 00, 25, 50 ou 75.
+- `08-question` : Question ! Lequel est un multiple de 25 ? A : 858 445. B : 858 152. C : 858 250. Mets pause, et choisis !
+- `08b-reponse` : Réponse C. Un multiple de 25 finit par 00, 25, 50 ou 75. Seul 858 250 finit par 50.
+- `09-defi` : À toi de jouer ! Hugo a 1 743 macarons, en boîtes de 5. Reste-t-il des macarons ? Mets pause, et cherche !
+- `09b-correction` : Correction. Un multiple de 5 finit par 0 ou par 5. 1 743 finit par 3 : il en reste.
+- `10-finale` : Ce que tu as appris. Pour 3 et pour 9, on additionne les chiffres. Pour 5, 25 et 100, on regarde la fin.
+- `11-abonne` : Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !
+
+**Short**
+
+- `00-accroche` : Salut ! Mon copain veut savoir si 57 651 est un multiple de 3. Il pose la division.
+- `01-astuce` : Ma copine, elle, additionne les chiffres… et elle a déjà fini !
+- `02-question` : Question ! Lequel est un multiple de 3 ? A : 57 651. B : 57 658. C : 57 671. Mets pause, et choisis !
+- `02b-reponse` : Réponse A ! 5 plus 7 plus 6 plus 5 plus 1 donne 24, un multiple de 3.
+- `03-fin` : Pas besoin de diviser : on additionne les chiffres !
+- `04-commentaire` : À toi : 742 950 est-il un multiple de 50 ? Réponds en commentaire !
+- `05-abonne` : Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !
+
+Bonnes lettres — paysage : 04 → **C** (18), 06 → **B** (oui), 08 → **C** (858 250) · short : **A** (57 651).
 
 ## `cm1-entier-defi` — CM1 (+ CM2 par `aussi`) · notion `nombre_entier` · micro `entier_defi`
 

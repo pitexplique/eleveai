@@ -359,7 +359,7 @@
   "classe": "cm1",
   "micro": "entier_multiple",
   "notion": "nombre_entier",
-  "aussi": "cm2:entier_multiple",
+  "aussi": null,
   "ceinture": "verte",
   "ceinture_short": "blanche",
   "metier": "Awa, fleuriste",
@@ -377,7 +377,6 @@
    "05-dernier-chiffre": "Pour 2, 10 et 100, le dernier chiffre suffit. Un multiple de 10 finit par zéro.",
    "06-question": "Question ! Lequel est un multiple de 10 ? A : 4 925. B : 4 960. C : 4 911. Mets pause, et choisis !",
    "06b-reponse": "Réponse B. Un multiple de 10 finit par zéro. Seul 4 960 finit par zéro.",
-   "07-cm2": "Et au CM2, une astuce pour 3 : on additionne les chiffres. Dans 51 408 : 5 plus 1 plus 4 plus 0 plus 8 donne 18.",
    "08-question": "Question ! Quel nombre n'est pas un multiple de 7 ? A : 24. B : 28. C : 56. Mets pause, et choisis !",
    "08b-reponse": "Réponse A. 7 fois 4 donne 28, 7 fois 8 donne 56. 24 n'est pas dans la table de 7.",
    "09-defi": "À toi de jouer ! Un chocolatier remplit des ballotins de 7. Quel total donne des ballotins pleins : 62, 63 ou 64 ? Mets pause, et cherche !",
@@ -440,6 +439,95 @@
     ],
     "reponse": 1,
     "explication": "4 fois 8 donne 32. Ni 34 ni 35 n'est dans la table de 4."
+   }
+  ]
+ },
+ {
+  "id": "cm2-entier-multiple",
+  "classe": "cm2",
+  "micro": "entier_multiple",
+  "notion": "nombre_entier",
+  "aussi": null,
+  "ceinture": "verte",
+  "ceinture_short": "blanche",
+  "metier": "Hugo, pâtissier",
+  "centres": [
+   "cuisine",
+   "jeux-defis"
+  ],
+  "paysage": {
+   "00-garde": "Les critères de divisibilité. 51 408 est-il un multiple de 3, sans poser la division ?",
+   "01-situation": "Voici Hugo. Il est pâtissier. Il range ses macarons par boîtes, sans qu'il en reste un seul.",
+   "02-rappel": "Un multiple de 3, c'est 3 fois un nombre entier. Mais sur un grand nombre, diviser est long.",
+   "03-critere3": "L'astuce : on additionne les chiffres. Si la somme est un multiple de 3, le nombre l'est aussi.",
+   "04-question": "Question ! Dans 51 408, quelle est la somme des chiffres ? A : 24. B : 17. C : 18. Mets pause, et choisis !",
+   "04b-reponse": "Réponse C. 5 plus 1 plus 4 plus 0 plus 8 donne 18. Et 18 est un multiple de 3.",
+   "05-critere9": "Même astuce pour 9. Si la somme des chiffres est un multiple de 9, le nombre l'est aussi.",
+   "06-question": "Question ! La somme des chiffres de 59 130 vaut 18. Est-ce un multiple de 9 ? A : non. B : oui. C : on ne peut pas savoir. Mets pause, et choisis !",
+   "06b-reponse": "Réponse B. 18 est un multiple de 9. Donc 59 130 est un multiple de 9.",
+   "07-fins": "D'autres multiples se lisent à la fin. Un multiple de 25 finit par 00, 25, 50 ou 75.",
+   "08-question": "Question ! Lequel est un multiple de 25 ? A : 858 445. B : 858 152. C : 858 250. Mets pause, et choisis !",
+   "08b-reponse": "Réponse C. Un multiple de 25 finit par 00, 25, 50 ou 75. Seul 858 250 finit par 50.",
+   "09-defi": "À toi de jouer ! Hugo a 1 743 macarons, en boîtes de 5. Reste-t-il des macarons ? Mets pause, et cherche !",
+   "09b-correction": "Correction. Un multiple de 5 finit par 0 ou par 5. 1 743 finit par 3 : il en reste.",
+   "10-finale": "Ce que tu as appris. Pour 3 et pour 9, on additionne les chiffres. Pour 5, 25 et 100, on regarde la fin.",
+   "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+  },
+  "short": {
+   "00-accroche": "Salut ! Mon copain veut savoir si 57 651 est un multiple de 3. Il pose la division.",
+   "01-astuce": "Ma copine, elle, additionne les chiffres… et elle a déjà fini !",
+   "02-question": "Question ! Lequel est un multiple de 3 ? A : 57 651. B : 57 658. C : 57 671. Mets pause, et choisis !",
+   "02b-reponse": "Réponse A ! 5 plus 7 plus 6 plus 5 plus 1 donne 24, un multiple de 3.",
+   "03-fin": "Pas besoin de diviser : on additionne les chiffres !",
+   "04-commentaire": "À toi : 742 950 est-il un multiple de 50 ? Réponds en commentaire !",
+   "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+  },
+  "questions": [
+   {
+    "cle": "04-question",
+    "question": "Dans 51 408, quelle est la somme des chiffres ?",
+    "choix": [
+     "24",
+     "17",
+     "18"
+    ],
+    "reponse": 2,
+    "explication": "5 plus 1 plus 4 plus 0 plus 8 donne 18. Et 18 est un multiple de 3."
+   },
+   {
+    "cle": "06-question",
+    "question": "La somme des chiffres de 59 130 vaut 18. Est-ce un multiple de 9 ?",
+    "choix": [
+     "non",
+     "oui",
+     "on ne peut pas savoir"
+    ],
+    "reponse": 1,
+    "explication": "18 est un multiple de 9. Donc 59 130 est un multiple de 9."
+   },
+   {
+    "cle": "08-question",
+    "question": "Lequel est un multiple de 25 ?",
+    "choix": [
+     "858 445",
+     "858 152",
+     "858 250"
+    ],
+    "reponse": 2,
+    "explication": "Un multiple de 25 finit par 00, 25, 50 ou 75. Seul 858 250 finit par 50."
+   }
+  ],
+  "questions_short": [
+   {
+    "cle": "02-question",
+    "question": "Lequel est un multiple de 3 ?",
+    "choix": [
+     "57 651",
+     "57 658",
+     "57 671"
+    ],
+    "reponse": 0,
+    "explication": "5 plus 7 plus 6 plus 5 plus 1 donne 24, un multiple de 3."
    }
   ]
  },

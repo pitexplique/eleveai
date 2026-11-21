@@ -32,6 +32,10 @@ export const FAMILLES_METIERS = {
     M("cartographe", "écrit sur sa carte l'altitude de chaque sommet, sans oublier un zéro.", V),
     M("imprimeur", "compte ses affiches : des paquets de mille, de cent, de dix, puis à l'unité.", V),
     F("meteorologue", "annonce « environ 86 000 personnes » : elle arrondit au millier près.", V),
+    // 21/11 : 7ᵉ lien pour le 7ᵉ épisode du CM. Frédéric a séparé `entier_multiple` en deux vidéos
+    // (CM1 seul + CM2 à part) : les critères de divisibilité sont une méthode neuve, pas une
+    // magnitude de plus. Le CM2 a donc son propre métier.
+    M("patissier", "sait sans diviser si 51 408 macarons font des boîtes pleines : il additionne les chiffres.", V),
   ],
   P_addition: [
     M("vendeur", "additionne les achats d'un client à la caisse."),
