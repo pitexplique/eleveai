@@ -330,6 +330,9 @@ import e1reExpoSuiteGeometrique from "./premiere/expo_suite_geometrique";
 import e1reExpoSuiteTermeGeneral from "./premiere/expo_suite_terme_general";
 import e1reExpoFonction from "./premiere/expo_fonction";
 import e1reExpoFonctionLecture from "./premiere/expo_fonction_lecture";
+import e1reExpoTauxMoyen from "./premiere/expo_taux_moyen";
+import e1reExpoModeliser from "./premiere/expo_modeliser";
+import e1reExpoSeuil from "./premiere/expo_seuil";
 import eTleDenombrementCombinatoire from "./terminale-spe/denombrement_combinatoire";
 import eTleGeometrieEspace from "./terminale-spe/geometrie_espace";
 import eTleProduitScalaireEspace from "./terminale-spe/produit_scalaire_espace";
@@ -674,6 +677,9 @@ const TOUTES: ProblemesNotion[] = [
   e1reExpoSuiteTermeGeneral,
   e1reExpoFonction,
   e1reExpoFonctionLecture,
+  e1reExpoTauxMoyen,
+  e1reExpoModeliser,
+  e1reExpoSeuil,
   // fin Première
   // Terminale
   eTleDenombrementCombinatoire,
