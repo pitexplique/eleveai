@@ -314,6 +314,9 @@ import e1reAleaConditionnelleCalcul from "./premiere/alea_conditionnelle_calcul"
 import e1reAleaArbre from "./premiere/alea_arbre";
 import e1reAleaArbreCalcul from "./premiere/alea_arbre_calcul";
 import e1reAleaIndependance from "./premiere/alea_independance";
+import e1reAleaBernoulli from "./premiere/alea_bernoulli";
+import e1reAleaBernoulliCalcul from "./premiere/alea_bernoulli_calcul";
+import e1reLinSuiteArithmetique from "./premiere/lin_suite_arithmetique";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -638,6 +641,9 @@ const TOUTES: ProblemesNotion[] = [
   e1reAleaArbre,
   e1reAleaArbreCalcul,
   e1reAleaIndependance,
+  e1reAleaBernoulli,
+  e1reAleaBernoulliCalcul,
+  e1reLinSuiteArithmetique,
   // fin Première
 ];
 
