@@ -268,16 +268,25 @@ def sarah(s=1.0):
 
 
 def ines_ctrl(s=1.0):
-    """B1 rang — Inès, contrôleuse aérienne : chemise blanche, casque audio."""
+    """B1 rang — Inès, contrôleuse aérienne : chemise blanche, casque audio CLAIR.
+    ⛔ VU SEULEMENT À L'IMAGE (aperçu -ql du 21/11) : un casque anthracite (#334155) posé sur des
+    cheveux noirs faisait un CASQUE INTÉGRAL — arceau, oreillettes et calotte fondus en une seule
+    masse noire, dont ne sortait qu'un petit ovale de peau ; et le micro, qui finissait à
+    0,5 r du centre, passait EN TRAVERS du visage. Aucun instrument ne voit ça.
+    Remède : le casque est CLAIR (gris ardoise pâle), posé au-dessus de la calotte, les oreillettes
+    sont rejetées à 1,2 r (hors des mèches) et le micro descend À CÔTÉ du visage, jamais dessus."""
     p = personne(peau="#8d5524", tenue="#f8fafc", cheveux="#111827", longs=True, s=s)
     c, r = p.tete.get_center(), p.tete.width / 2
-    arceau = Arc(radius=r * 1.12, start_angle=0.2, angle=PI - 0.4, color="#334155", stroke_width=8).move_arc_center_to(c)
-    oreillettes = VGroup(*[RoundedRectangle(width=r * 0.24, height=r * 0.42, corner_radius=r * 0.1,
-                                            fill_color="#334155", fill_opacity=1, stroke_width=0)
-                           .move_to(c + P(sgn * r * 1.05, 0)) for sgn in (-1, 1)])
-    micro = VGroup(Line(c + P(-r * 1.0, -r * 0.1), c + P(-r * 0.55, -r * 0.55), color="#334155", stroke_width=5),
-                   Circle(radius=r * 0.1, fill_color="#334155", fill_opacity=1, stroke_width=0)
-                   .move_to(c + P(-r * 0.5, -r * 0.6)))
+    CAS = "#cbd5e1"
+    arceau = Arc(radius=r * 1.22, start_angle=0.15, angle=PI - 0.3, color=CAS,
+                 stroke_width=7).move_arc_center_to(c)
+    oreillettes = VGroup(*[RoundedRectangle(width=r * 0.3, height=r * 0.46, corner_radius=r * 0.12,
+                                            fill_color=CAS, fill_opacity=1, stroke_color="#64748b",
+                                            stroke_width=2).move_to(c + P(sgn * r * 1.2, r * 0.08))
+                           for sgn in (-1, 1)])
+    micro = VGroup(Line(c + P(-r * 1.2, -r * 0.12), c + P(-r * 1.0, -r * 0.8), color=CAS, stroke_width=4),
+                   Circle(radius=r * 0.1, fill_color=CAS, fill_opacity=1, stroke_width=0)
+                   .move_to(c + P(-r * 0.97, -r * 0.88)))
     p.add(arceau, oreillettes, micro)
     return p
 

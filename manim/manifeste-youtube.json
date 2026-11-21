@@ -104949,6 +104949,161 @@
           "microId": "entier_defi"
         }
       ]
+    },
+    {
+      "id": "6e-entier-rang",
+      "pas_avant": "2027-06-20",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_rang",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang.mp4",
+      "miniature": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang.png",
+      "titre": "Dans 5 482, quel est le chiffre des dizaines ? — Les rangs d'un nombre — épisode 1 · Maths 6e",
+      "accroche": "Inès est contrôleuse aérienne : sur son écran, chaque altitude doit être lue au bon rang. Un chiffre lu une colonne trop loin, et l'avion n'est plus à la même hauteur.\n\nDans cette vidéo :\n• les rangs se lisent de DROITE à gauche : unités, dizaines, centaines, unités de mille\n• donner le chiffre d'un rang, et donner le rang d'un chiffre\n• un zéro est un chiffre comme un autre : il occupe un rang, lui aussi\n• au-delà de mille, on continue : dizaines de mille, puis centaines de mille\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un avion vole à 5 102 mètres : donner le chiffre des dizaines, puis celui des centaines.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_rang&display=simple\n\n🔢 Épisode 1 de la série Nombres entiers d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Quel est le chiffre des dizaines ?"
+        ],
+        [
+          "00:24",
+          "Les quatre rangs de 5 482"
+        ],
+        [
+          "00:35",
+          "Question 1"
+        ],
+        [
+          "01:10",
+          "Question 2"
+        ],
+        [
+          "01:47",
+          "Question 3"
+        ],
+        [
+          "02:15",
+          "À toi de jouer"
+        ],
+        [
+          "02:29",
+          "Correction"
+        ],
+        [
+          "02:39",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "rang d'un chiffre",
+        "chiffre des dizaines",
+        "tableau de numération",
+        "unités dizaines centaines",
+        "de droite à gauche",
+        "contrôleuse aérienne",
+        "altitude",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "Dans 7 306, quel est le chiffre des centaines ?",
+          "choix": [
+            "7",
+            "0",
+            "3"
+          ],
+          "reponse": 2,
+          "explication": "De droite à gauche : 6 unités, 0 dizaine, 3 centaines, 7 milliers. Donc 3."
+        },
+        {
+          "t": "01:10",
+          "question": "Dans 85 676, à quel rang est le chiffre 7 ?",
+          "choix": [
+            "aux dizaines",
+            "aux unités",
+            "aux unités de mille"
+          ],
+          "reponse": 0,
+          "explication": "On part de la droite : 6 unités, puis 7 dizaines. Le 7 est au rang des dizaines."
+        },
+        {
+          "t": "01:47",
+          "question": "Dans 915 843, quel est le chiffre des centaines de mille ?",
+          "choix": [
+            "1",
+            "8",
+            "9"
+          ],
+          "reponse": 2,
+          "explication": "915 843 s'écrit 915 puis 843. Le 9 est au rang des centaines de mille."
+        }
+      ],
+      "centres": [
+        "transports",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "6e-entier-rang-short",
+      "pas_avant": "2027-06-20",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_rang",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-entier-rang",
+      "fichier": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang-short.mp4",
+      "miniature": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang-short-miniature.png",
+      "titre": "7 305 : le chiffre des dizaines, le 3 ou le 0 ? #maths #6e",
+      "accroche": "Mon copain cherche le chiffre des dizaines de 7 305 et pointe le 3 : il a compté de gauche à droite. Les rangs se comptent en partant de la droite : 5 unités, puis 0 dizaine.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : dans 9 261, quel est le chiffre des unités de mille ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_rang&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #6e #collège",
+      "tags": [
+        "nombres entiers",
+        "rang d'un chiffre",
+        "dizaines",
+        "de droite à gauche",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Dans 7 305, quel est le chiffre des dizaines ?",
+          "choix": [
+            "3",
+            "0",
+            "7"
+          ],
+          "reponse": 1,
+          "explication": "De droite à gauche : 5 unités, puis 0 dizaine. La réponse est 0."
+        }
+      ],
+      "centres": [
+        "transports",
+        "jeux-defis"
+      ]
     }
   ]
 }

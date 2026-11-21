@@ -37,7 +37,14 @@ EP = [
     # ⛔ ceinture BLEUE : le défi est le cran au-dessus de la paysage verte du niveau.
     ("cm1", "defi", "06-defi", ["LE DÉFI", "DES NOMBRES"], "Mystère entre 3 900 et 4 000",
      "les indices, un par un !", True, "bleue"),
+    # ── Lot B : la 6e (notion `entier_nombre`, pas de `aussi`) ──
+    ("6e", "rang", "01-rang", ["LES RANGS", "D'UN NOMBRE"], "Dans 5 482 : le chiffre des dizaines ?",
+     "on compte depuis la droite !", True, "verte"),
 ]
+
+# ⛔ Le badge garde la casse de la classe : « MATHS · 6e », jamais « MATHS · 6E »
+# (c'est la forme de tout le reste du registre, manim/miniature.py).
+BADGE = {"cm1": "CM1", "cm2": "CM2", "6e": "6e"}
 
 
 def accroche(haut, bas, vert, ceinture, y0=352):
@@ -63,7 +70,7 @@ def main():
             print("pas encore de vidéo :", nom)
             continue
         construire_paysage(nom, {
-            "badge": f"MATHS · {classe.upper()}", "duree": f"EN {minutes(mp4)} MIN",
+            "badge": f"MATHS · {BADGE.get(classe, classe.upper())}", "duree": f"EN {minutes(mp4)} MIN",
             "titre": tit, "accroche": accroche(haut, bas, vert, ceint), "dossier": rel,
         })
 

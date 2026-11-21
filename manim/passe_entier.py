@@ -196,6 +196,36 @@ EP = [
       s_toi="le plus petit nombre de quatre chiffres avec 0, 5, 3 et 8 ?",
       s_tags=["nombres entiers", "le plus grand nombre", "zéro devant", "défi"],
       s_centres=["jeux-defis", "technologie-ia"]),
+ # ── LOT B : la 6e, notion `entier_nombre`. ⛔ PAS de `aussi` : la 6e a sa propre notion, donc
+ #    2 lignes `notion_ressources` par épisode (la paysage et le short), en 6e seulement.
+ #    ⛔ `entier_lire_ecrire` n'est pas produit : l'ancienne vidéo `6e-entier-nombre` le couvre.
+ dict(classe="6e", n=1, slug="rang", notion="entier_nombre", micro="entier_rang",
+      nom="Les rangs d'un nombre", date="2027-06-20", ceinture="verte",
+      titre="Dans 5 482, quel est le chiffre des dizaines ?",
+      intro="Inès est contrôleuse aérienne : sur son écran, chaque altitude doit être lue au bon "
+            "rang. Un chiffre lu une colonne trop loin, et l'avion n'est plus à la même hauteur.",
+      points=["les rangs se lisent de DROITE à gauche : unités, dizaines, centaines, unités de mille",
+              "donner le chiffre d'un rang, et donner le rang d'un chiffre",
+              "un zéro est un chiffre comme un autre : il occupe un rang, lui aussi",
+              "au-delà de mille, on continue : dizaines de mille, puis centaines de mille"],
+      defi="un avion vole à 5 102 mètres : donner le chiffre des dizaines, puis celui des centaines.",
+      chap={"00-garde": "Quel est le chiffre des dizaines ?",
+            "01-situation": "Inès, contrôleuse aérienne",
+            "02-rangs": "Les rangs, de droite à gauche", "03-exemple": "Les quatre rangs de 5 482",
+            "04-question": "Question 1", "05-zero": "Un zéro occupe un rang",
+            "06-question": "Question 2", "07-grands": "Au-delà de mille", "08-question": "Question 3",
+            "09-defi": "À toi de jouer", "09b-correction": "Correction",
+            "10-finale": "Ce que tu as appris"},
+      tags=["nombres entiers", "rang d'un chiffre", "chiffre des dizaines", "tableau de numération",
+            "unités dizaines centaines", "de droite à gauche", "contrôleuse aérienne", "altitude"],
+      centres=["transports", "technologie-ia"],
+      s_titre="7 305 : le chiffre des dizaines, le 3 ou le 0 ?", s_ceinture="blanche",
+      s_accroche="Mon copain cherche le chiffre des dizaines de 7 305 et pointe le 3 : il a compté "
+                 "de gauche à droite. Les rangs se comptent en partant de la droite : 5 unités, "
+                 "puis 0 dizaine.",
+      s_toi="dans 9 261, quel est le chiffre des unités de mille ?",
+      s_tags=["nombres entiers", "rang d'un chiffre", "dizaines", "de droite à gauche"],
+      s_centres=["transports", "jeux-defis"]),
 ]
 
 COMMUNS = ["nombres entiers", "numération", "maths"]

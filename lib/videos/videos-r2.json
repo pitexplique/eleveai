@@ -17882,5 +17882,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_defi&display=simple"
+ },
+ "6e-entier-rang": {
+  "fichier": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang.mp4",
+  "poster": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang.png",
+  "vignette": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang.vignette.webp",
+  "titre": "Dans 5 482, quel est le chiffre des dizaines ? — Les rangs d'un nombre — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_rang&display=simple"
+ },
+ "6e-entier-rang-short": {
+  "fichier": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang-short.mp4",
+  "poster": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang-short-miniature.png",
+  "vignette": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang-short-miniature.vignette.webp",
+  "titre": "7 305 : le chiffre des dizaines, le 3 ou le 0 ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_rang&display=simple"
  }
 }

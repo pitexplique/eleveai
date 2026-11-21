@@ -917,5 +917,10 @@
     "question": ["Le plus grand avec", "7, 4, 1 et 0 ?"],
     "calcul": [["0 741 ?", "rouge", 190], ["7 410", "vert", 200]],
     "ceinture": "blanche"
+  },
+  "6e-entier-rang-short": {
+    "question": ["Dans 7 305, les dizaines :", "le 3 ou le 0 ?"],
+    "calcul": [["7 305", "blanc", 200], ["le 3 ?", "rouge", 170]],
+    "ceinture": "blanche"
   }
 }
