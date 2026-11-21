@@ -286,6 +286,10 @@ import e1reAutoComparer from "./premiere/auto_comparer";
 import e1reAutoFractionsPuissances from "./premiere/auto_fractions_puissances";
 import e1reAutoOrdresUnites from "./premiere/auto_ordres_unites";
 import e1reAutoDevelopperFactoriser from "./premiere/auto_developper_factoriser";
+import e1reAutoEquations from "./premiere/auto_equations";
+import e1reAutoSigneExpression from "./premiere/auto_signe_expression";
+import e1reAutoFormules from "./premiere/auto_formules";
+import e1reAutoProportion from "./premiere/auto_proportion";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -582,6 +586,10 @@ const TOUTES: ProblemesNotion[] = [
   e1reAutoFractionsPuissances,
   e1reAutoOrdresUnites,
   e1reAutoDevelopperFactoriser,
+  e1reAutoEquations,
+  e1reAutoSigneExpression,
+  e1reAutoFormules,
+  e1reAutoProportion,
   // fin Première
 ];
 
