@@ -324,8 +324,28 @@ def maya(s=1.0):
     return p
 
 
+# ── LA PLACE DE LA COCHE AU BOUT D'UNE CARTE DE CHOIX ───────────────────────────────────────────
+class _CocheAuBout:
+    """⛔ Le gabarit étire le libellé d'un choix jusqu'à 0,4 du bord de la carte, or le ✓ de la
+    bonne réponse se pose DANS la carte, à 0,4 du bord droit : sur un libellé long il touche la
+    dernière lettre. Vu à l'image sur l'écran 08 de A2 (« 3 045, 3 405, 3 450✓ », écart 1 px) ;
+    ⚠️ `BORDS=1` ne voit rien, rien ne sort du cadre. Même remède que dans `4e/3e_section_*.py`.
+    ⚠️ En paysage la carte vient de `_carte_choix`, PAS de `_carte` : surcharger `_carte` ne fait
+    RIEN du tout, et ça ne se voit qu'à l'image.
+    ⭐ Les libellés courts ne bougent pas : la ligne « COCHE-RESERVE » du rendu dit lesquels ont
+    été rétrécis — A1, rendu en HD avant cette surcharge, n'en affiche aucune (mesuré, pas supposé)."""
+
+    def _carte_choix(self, lettre, txt, largeur, fs):
+        c = super()._carte_choix(lettre, txt, largeur, fs)
+        cadre, ligne = c
+        if ligne.width > largeur - 1.0:
+            print(f"COCHE-RESERVE {txt if isinstance(txt, str) else '<figure>'}", flush=True)
+            ligne.scale_to_fit_width(largeur - 1.0).align_to(cadre.get_left() + RIGHT * 0.2, LEFT)
+        return c
+
+
 # ── LES DEUX BASES DE PAYSAGE ───────────────────────────────────────────────────────────────────
-class PaysageEntierCM1(PaysageContenanceCM1):
+class PaysageEntierCM1(_CocheAuBout, PaysageContenanceCM1):
     """Lot A : les 6 épisodes servis au CM1 ET au CM2 (notion `nombre_entier`, mécanisme `aussi`).
     ⚠️ Chaque épisode porte un écran `07-cm2` qui ouvre la classe des millions (ou le critère de
     divisibilité) : décision de Frédéric le 21/11, « Oui, garde-le » — ⛔ ne pas le retirer."""
@@ -333,7 +353,7 @@ class PaysageEntierCM1(PaysageContenanceCM1):
     ceinture = "verte"
 
 
-class PaysageEntier6e(PaysageContenanceCM1):
+class PaysageEntier6e(_CocheAuBout, PaysageContenanceCM1):
     """Lot B : les 5 épisodes de 6e (notion `entier_nombre`).
     ⛔ `entier_lire_ecrire` n'est PAS produit : l'ancienne vidéo `6e-entier-nombre` le couvre."""
     identite = "Maths 6e — EleveAI"

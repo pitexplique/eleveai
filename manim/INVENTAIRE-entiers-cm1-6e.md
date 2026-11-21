@@ -276,8 +276,30 @@ globalement.
 | **A1 — rendu HD** | ✅ `manim/sorties/cm1/maths/entiers/01-lire/`, 15,4 Mo, 3 min 11, **0 instant qui touche un bord**, planche HD relue (identique à celle du `-ql`), fraîcheur prouvée sur les 3 points |
 | A1 — short Ti Margo, miniatures, publication | ⏳ |
 | A2 `entier_comparer.py` — script + dry run | ✅ 0 AUDIT-AVANCE, 0 RETARD, 0 BORD ; durée 3 min 25 |
-| A2 — aperçu `-ql` relu | ⏳ |
+| A2 — aperçu `-ql` relu | ✅ |
+| **A2 — rendu HD** | ✅ `manim/sorties/cm1/maths/entiers/02-comparer/`, 3 min 36, **0 bord**, planche HD relue (13 écrans) |
+| Série Ti Margo `cm1-entier` (json, commun, cues) | ✅ `prototypes/ti-margo/films/cm1-entier*.js` |
+| A1 et A2 — shorts Ti Margo | ⏳ |
 | A3 → A6, B1 → B5 (9 épisodes) | ⏳ |
+
+### ⛔ UN 5ᵉ DÉFAUT, trouvé À L'IMAGE sur le HD de A2 : la coche touche le libellé
+
+Le premier HD de A2 était propre partout — sauf l'écran 08, où le ✓ de la bonne réponse touchait le
+dernier chiffre : « 3 045, 3 405, 3 450✓ », **écart 1 px** (mesuré par `verifier-coche-carte.py`,
+puis regardé à l'image). ⚠️ `BORDS=1` ne voit rien : rien ne sort du cadre. C'est le défaut connu de
+`manim/REGLES.md` (« La coche ✓ des questions-pauses »), qui n'était jamais arrivé dans cette série
+parce que A1 n'a que des libellés courts.
+
+Le remède est maintenant **dans le commun de la série** : `_CocheAuBout` (`entier_commun.py`), hérité
+par `PaysageEntierCM1` et `PaysageEntier6e` — les 9 épisodes suivants l'ont donc d'office.
+Il rétrécit le libellé à `largeur − 1.0` **seulement s'il dépasse**, et imprime une ligne
+`COCHE-RESERVE` à chaque fois.
+
+- ⭐ **A1 n'a pas été re-rendu, et c'est MESURÉ, pas supposé** : son dry run avec la surcharge affiche
+  **0 ligne `COCHE-RESERVE`** → aucun de ses libellés ne bouge, son MP4 de 15,4 Mo reste la bonne image.
+  (A2, lui, en affiche 4 : les trois listes de l'écran 08 et « les deux sont égaux » de l'écran 06.)
+- ⛔ Ne pas porter ce remède dans `contenance_cm1_commun.py` : il sert à la série CM1 contenance, finie
+  et rendue — on ne modifie pas le source d'un script déjà rendu.
 
 ⚠️ **A2 : trois défauts trouvés au dry run et corrigés** — (1) deux **AUDIT-AVANCE** dans la
 correction (« 38. » 1,05 s et « 6. » 0,41 s avant la voix) : la ligne entière arrivait sur le
