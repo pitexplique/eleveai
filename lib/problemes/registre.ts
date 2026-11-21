@@ -149,6 +149,10 @@ import eCm1Aire from "./cm1/aire";
 import eCm1Angle from "./cm1/angle";
 import eCm1Reperage from "./cm1/reperage";
 import eCm1Droite from "./cm1/droite";
+import eCm1Symetrie from "./cm1/symetrie";
+import eCm1FigurePlane from "./cm1/figure_plane";
+import eCm1Solide from "./cm1/solide";
+import eCm1Tableau from "./cm1/tableau";
 // 3e (imports)
 import e3eFractionRationnel from "./3e/fraction_rationnel";
 import e3eEntierPuissance from "./3e/entier_puissance";
@@ -189,6 +193,10 @@ const TOUTES: ProblemesNotion[] = [
   eCm1Angle,
   eCm1Reperage,
   eCm1Droite,
+  eCm1Symetrie,
+  eCm1FigurePlane,
+  eCm1Solide,
+  eCm1Tableau,
   // CM2
   eCm2NombreEntier,
   eCm2Suite,
