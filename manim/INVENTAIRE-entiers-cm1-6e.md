@@ -35,7 +35,7 @@ l'état de la production est au § 6bis.
 > pour ça. Mais les critères de divisibilité par 3 et par 9 sont une **méthode** que le CM1 n'a pas,
 > pas une magnitude de plus. **Une notion qui déborde est une notion neuve.** »
 
-> ✅✅ **3ª décision, 21/11 au soir — LA SÉPARATION EST CONFIRMÉE, par Frédéric en direct.**
+> ✅✅ **3ᵉ décision, 21/11 au soir — LA SÉPARATION EST CONFIRMÉE, par Frédéric en direct.**
 > Un relais du chef d'orchestre a demandé d'annuler la séparation et de revenir à 11 épisodes.
 > ⛔⛔ **Ne pas la rouvrir une quatrième fois.** Les trois faits qui ont fait trancher, tous mesurés :
 > (1) Frédéric avait validé LUI-MÊME les deux voix d'Hugo (« Oui, lance »), POSTÉRIEUREMENT au relais
