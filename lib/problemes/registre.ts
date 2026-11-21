@@ -368,6 +368,9 @@ import e1sProbabilitesConditionnelles from "./premiere-spe/probabilites_conditio
 import e1sVariablesAleatoires from "./premiere-spe/variables_aleatoires";
 import e1sAlgorithmique from "./premiere-spe/algorithmique";
 import e1sLogiqueEnsembles from "./premiere-spe/logique_ensembles";
+import e1sTrigoFormulesEquations from "./premiere-spe/trigo_formules_equations";
+import e1sTriangleQuelconque from "./premiere-spe/triangle_quelconque";
+import e1sAnglesOrientes from "./premiere-spe/angles_orientes";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -750,6 +753,9 @@ const TOUTES: ProblemesNotion[] = [
   e1sVariablesAleatoires,
   e1sAlgorithmique,
   e1sLogiqueEnsembles,
+  e1sTrigoFormulesEquations,
+  e1sTriangleQuelconque,
+  e1sAnglesOrientes,
   // fin Première spé
 ];
 
