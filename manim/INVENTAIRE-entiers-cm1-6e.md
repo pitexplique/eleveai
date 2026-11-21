@@ -4,8 +4,9 @@
 > optimum, même si on finit fin janvier »). Et ⛔ **le HD seulement quand on est CERTAIN** (21/11) : tout le
 > contrôle se fait sur l'aperçu `-ql` et sa planche.
 
-**Cette session s'arrête au récapitulatif des voix.** Aucun WAV, aucun rendu : `manim/VOIX-entiers-cm1-6e.md`
-part en validation, et rien ne démarre avant le « oui ».
+✅ **Les 24 voix sont validées** : les 22 premières le 21/11 (« Oui, lance la prod »), les 2 du 12ª épisode
+le même jour après la séparation de `entier_multiple` (« Oui, lance »). WAV et marques faits pour les douze ;
+l'état de la production est au § 6bis.
 
 - Voix (source UNIQUE) : `manim/scripts/cm1/entier_voix.py` → `manim/VOIX-entiers-cm1-6e.md` (récap à valider)
   + `manim/scripts/cm1/entier_voix.json` (choix, bonne lettre, explications : lus par les scripts et pour le
@@ -272,6 +273,7 @@ globalement.
 | Les 22 JSON de voix (`manim/voix/<id>.json`) | ✅ écrits (`--ecrire`) |
 | WAV Julie, débit −6 | ✅ **253 fichiers** dans `public/sons/<id>/` (16 par paysage, 7 par short) |
 | Marques mot à mot des 11 paysages | ✅ **2 860 marques**, 16 écrans chacun, 0 écran sans marque |
+| ⚠️ `cm1-entier-multiple` après la séparation | son JSON et ses marques ont été **refaits à 15 écrans** (`07-cm2` retiré). Son WAV `07-cm2.wav` reste sur le disque, inutilisé : ⛔ ne pas renuméroter, les 15 autres noms de WAV doivent rester les mêmes |
 | `manim/scripts/cm1/entier_commun.py` | ✅ le commun de la série (tableau par classes, droite graduée, 11 personnages, 2 bases) |
 | A1 `entier_lire.py` — script + dry run | ✅ 0 AUDIT-AVANCE, 0 RETARD, 0 BORD ; durée 3 min 00 |
 | A1 — aperçu `-ql` + planche des 12 écrans | ✅ relus, 3 défauts corrigés |
@@ -285,7 +287,10 @@ globalement.
 | A1 et A2 — chaîne de publication | ✅ complète (voir ci-dessous) |
 | **A3 `entier_decomposer`** | ✅ FINI : HD 3 min 14, 0 bord, short 62,2 s, publication complète |
 | **A4 `entier_arrondir`** | ✅ script, dry run propre, **`-ql` relu** (3 défauts corrigés) ; film du short écrit et ses images de contrôle relues. ⏳ **reste : le HD**, le film du short, la publication |
-| A5, A6, A5′, B1 → B5 (8 épisodes) | ⏳ |
+| **A5′ `cm2-entier-multiple` — ses 2 voix** | ✅ **validées par Frédéric le 21/11** (« Oui, lance ») : JSON écrits, **23 WAV** (16 + 7), marques du paysage faites (16 écrans, 0 sans marque) |
+| A5′ — durées brutes des clips | paysage **171,4 s** (≈ 2 min 51 avant les pauses), short **58,1 s** — dans la fourchette de la série |
+| A5′ — script Manim, HD, short, publication | ⏳ |
+| A5, A6, B1 → B5 (7 épisodes) | ⏳ |
 
 ### A4 : trois défauts, corrigés avant tout rendu HD
 
@@ -409,12 +414,18 @@ l'instant dans le WAV (`au_t(t)`) ou s'accrocher au mot d'à côté. Relevé aut
 | `cm1-entier-decomposer` | 1 | 02-valeur « 4 000 » |
 | `cm1-entier-arrondir` | 1 | 02-encadrer « 4 700 » |
 | `cm1-entier-multiple` | 0 | — |
+| `cm2-entier-multiple` | 0 | — |
 | `cm1-entier-defi` | 1 | 04-question « 6 100 » |
 | `6e-entier-rang` | 0 | — |
 | `6e-entier-comparer` | 11 | 08-question « 3 045 » ×2, « 3 405 » ×2, « 3 450 » ×2 ; 09-defi « 6 024 », « 6 023 », « 6 032 » ; 09b-correction « 6 023 », « 6 024 » |
 | `6e-entier-encadrer` | 5 | 05-rang « 9 620 » ; 06-question « 9 620 », « 9 621 », « 9 610 » ; 08-question « 5 300 » |
 | `6e-entier-decomposer` | 0 | — |
 | `6e-entier-defi` | 0 | — |
+
+✅ **Le 12ª épisode n'en ajoute aucun** : vérifié après la production de ses voix, chacun de ses dix
+nombres à espace (51 408, 59 130, 858 445/152/250, 1 743, 48 231, 57 651/658/671) porte une marque à son
+PROPRE offset de caractère — `au_mot()` tombe juste partout, aucun `au_t()` à prévoir. Le total de la
+série reste donc **29**, sur les onze premiers.
 
 Ce sont les écrans de QUESTION qui concentrent le problème : les trois choix reprennent les mêmes
 nombres, et WinRT ne pose qu'une marque pour toute la série. ⭐ Les choix d'une question sont posés par

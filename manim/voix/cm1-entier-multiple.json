@@ -8,7 +8,6 @@
   "05-dernier-chiffre": "Pour 2, 10 et 100, le dernier chiffre suffit. Un multiple de 10 finit par zéro.",
   "06-question": "Question ! Lequel est un multiple de 10 ? A : 4 925. B : 4 960. C : 4 911. Mets pause, et choisis !",
   "06b-reponse": "Réponse B. Un multiple de 10 finit par zéro. Seul 4 960 finit par zéro.",
-  "07-cm2": "Et au CM2, une astuce pour 3 : on additionne les chiffres. Dans 51 408 : 5 plus 1 plus 4 plus 0 plus 8 donne 18.",
   "08-question": "Question ! Quel nombre n'est pas un multiple de 7 ? A : 24. B : 28. C : 56. Mets pause, et choisis !",
   "08b-reponse": "Réponse A. 7 fois 4 donne 28, 7 fois 8 donne 56. 24 n'est pas dans la table de 7.",
   "09-defi": "À toi de jouer ! Un chocolatier remplit des ballotins de 7. Quel total donne des ballotins pleins : 62, 63 ou 64 ? Mets pause, et cherche !",
