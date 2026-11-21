@@ -74,6 +74,12 @@ import e4eFractionNombre from "./4e/fraction_nombre";
 import e4eOrdreGrandeur from "./4e/ordre_grandeur";
 import e4eVisionEspace from "./4e/vision_espace";
 import e4eAlgoProgrammation from "./4e/algo_programmation";
+import e4eDroiteMilieux from "./4e/droite_milieux";
+import e4eOrdreInequations from "./4e/ordre_inequations";
+import e4eDistanceDroite from "./4e/distance_droite";
+import e4eTangenteCercle from "./4e/tangente_cercle";
+import e4eArcsSecteurs from "./4e/arcs_secteurs";
+import e4eTrianglePointsRemarquables from "./4e/triangle_points_remarquables";
 // 5e
 import e5eRelatifNombre from "./5e/relatif_nombre";
 import e5eRelatifOperation from "./5e/relatif_operation";
@@ -442,6 +448,12 @@ const TOUTES: ProblemesNotion[] = [
   e4eAlgoProgrammation,
   e4ePuissanceEcriture,
   e4ePythagoreTheoreme,
+  e4eDroiteMilieux,
+  e4eOrdreInequations,
+  e4eDistanceDroite,
+  e4eTangenteCercle,
+  e4eArcsSecteurs,
+  e4eTrianglePointsRemarquables,
   // 5e
   e5eRelatifNombre,
   e5eRelatifOperation,
