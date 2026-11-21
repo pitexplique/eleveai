@@ -425,6 +425,10 @@ import eStmgProbaConditionnelleDistinguer from "./stmg/proba_conditionnelle_dist
 import eStmgProbaEpreuvesIndependantes from "./stmg/proba_epreuves_independantes";
 import eStmgProbaArbre from "./stmg/proba_arbre";
 import eStmgProbaArbreCalcul from "./stmg/proba_arbre_calcul";
+import eStmgProbaIndependance from "./stmg/proba_independance";
+import eStmgVaLoiProbabilite from "./stmg/va_loi_probabilite";
+import eStmgVaEsperance from "./stmg/va_esperance";
+import eStmgVaBernoulli from "./stmg/va_bernoulli";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -866,6 +870,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgProbaEpreuvesIndependantes,
   eStmgProbaArbre,
   eStmgProbaArbreCalcul,
+  eStmgProbaIndependance,
+  eStmgVaLoiProbabilite,
+  eStmgVaEsperance,
+  eStmgVaBernoulli,
   // fin STMG
 ];
 
