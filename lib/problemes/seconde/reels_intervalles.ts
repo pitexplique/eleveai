@@ -116,7 +116,7 @@ const problemes: ProblemesNotion = {
       tag: "Énigme 6 · Le défi des curieux",
       titre: "Le thermomètre de la piscine",
       sorte: "defi",
-      question: `Le thermomètre d'une piscine n'affiche que des <b>degrés entiers</b>. L'alarme reste éteinte tant que <b>|T − 27| < 3,5</b>.<br><br><b>Combien de valeurs affichées</b> gardent l'alarme éteinte ?`,
+      question: `Le thermomètre d'une piscine n'affiche que des <b>degrés entiers</b>. L'alarme reste éteinte tant que <b>|T − 27| &lt; 3,5</b>.<br><br><b>Combien de valeurs affichées</b> gardent l'alarme éteinte ?`,
       reponse: `T doit être à moins de 3,5 de 27 : T ∈ ]23,5 ; 30,5[.<br>Les entiers de cet intervalle : 24, 25, 26, 27, 28, 29, 30.<br><span class="big">7 valeurs</span>.`,
       consigne: "Combien d'entiers T vérifient |T − 27| < 3,5 ?",
       verification: { type: "courte", attendus: ["7"], unite: "valeurs" },

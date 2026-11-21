@@ -241,6 +241,10 @@ import e2deReelsIntervalles from "./seconde/reels_intervalles";
 import e2deArithmetiqueEntiers from "./seconde/arithmetique_entiers";
 import e2dePuissances2de from "./seconde/puissances_2de";
 import e2deRacineCarree2de from "./seconde/racine_carree_2de";
+import e2deDeveloppementFactorisation2de from "./seconde/developpement_factorisation_2de";
+import e2deIdentitesRemarquables2de from "./seconde/identites_remarquables_2de";
+import e2deExpressionsLitterales2de from "./seconde/expressions_litterales_2de";
+import e2deEquationsInequations1erDegre from "./seconde/equations_inequations_1er_degre";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -490,6 +494,10 @@ const TOUTES: ProblemesNotion[] = [
   e2deArithmetiqueEntiers,
   e2dePuissances2de,
   e2deRacineCarree2de,
+  e2deDeveloppementFactorisation2de,
+  e2deIdentitesRemarquables2de,
+  e2deExpressionsLitterales2de,
+  e2deEquationsInequations1erDegre,
   // fin Seconde
 ];
 

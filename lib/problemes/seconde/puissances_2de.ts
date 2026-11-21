@@ -56,7 +56,7 @@ const problemes: ProblemesNotion = {
       tag: "Énigme 1 · Le Soleil",
       titre: "150 millions de km",
       question: `La Terre est à environ <b>150 000 000 km</b> du Soleil.<br><br><b>Quelle est l'écriture scientifique</b> de cette distance ?`,
-      reponse: `Écriture scientifique : a × 10ⁿ avec 1 ≤ a < 10.<br>150 000 000 = 1,5 × 100 000 000 = <span class="big">1,5 × 10⁸ km</span>.<br>On a déplacé la virgule de 8 rangs.`,
+      reponse: `Écriture scientifique : a × 10ⁿ avec 1 ≤ a &lt; 10.<br>150 000 000 = 1,5 × 100 000 000 = <span class="big">1,5 × 10⁸ km</span>.<br>On a déplacé la virgule de 8 rangs.`,
       consigne: "Quelle est l'écriture scientifique de 150 000 000 ?",
       verification: { type: "qcm", choix: ["1,5 × 10⁸", "1,5 × 10⁷", "15 × 10⁸"], bonne: 0 },
       dessin: soleil,
