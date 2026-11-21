@@ -194,6 +194,9 @@ import eCe1Reperage from "./ce1/reperage";
 import eCe1DroitesSegments from "./ce1/droites_segments";
 import eCe1FiguresPlanes from "./ce1/figures_planes";
 import eCe1Solides from "./ce1/solides";
+import eCe1Donnees from "./ce1/donnees";
+import eCe1TrierClasser from "./ce1/trier_classer";
+import eCe1Algorithmique from "./ce1/algorithmique";
 import eCpNombreEntier from "./cp/nombre_entier";
 import eCpSuiteNombre from "./cp/suite_nombre";
 import eCpAdditionSoustraction from "./cp/addition_soustraction";
@@ -250,6 +253,9 @@ const TOUTES: ProblemesNotion[] = [
   eCe1DroitesSegments,
   eCe1FiguresPlanes,
   eCe1Solides,
+  eCe1Donnees,
+  eCe1TrierClasser,
+  eCe1Algorithmique,
   // fin CE1
   // CE2
   eCe2NombreEntier,
