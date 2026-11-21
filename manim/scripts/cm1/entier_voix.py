@@ -380,7 +380,11 @@ SERIE = [
                           "Croissant va du plus petit au plus grand : 3 045, puis 3 405, puis 3 450.")),
         ("09-defi", "À toi de jouer ! Quatre scores : 6 022, 6 024, 6 023 et 6 032. "
                     "Range-les du plus petit au plus grand. Mets pause, et cherche !"),
-        ("09b-correction", "Correction. 6 032 a 3 centaines : c'est le plus grand. "
+        # ⚠️ 21/11 — disait « 3 centaines » : FAUX. 6 032 = 6 milliers, 0 centaine, 3 DIZAINES,
+        #    2 unités. Et c'est bien le rang des dizaines qui décide ici : 6 022 / 6 023 / 6 024 en
+        #    ont 2, 6 032 en a 3. Erreur trouvée par la session de production, qui ne pouvait pas
+        #    écrire à l'écran ce que la voix disait.
+        ("09b-correction", "Correction. 6 032 a 3 dizaines : c'est le plus grand. "
                            "Dans l'ordre : 6 022, 6 023, 6 024, puis 6 032."),
         ("10-finale", "Ce que tu as appris. On compte les chiffres, puis on compare de gauche à droite. "
                       "Jamais par la fin."),
