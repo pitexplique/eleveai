@@ -363,9 +363,8 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
           <section className="mt-12">
             {/* 19/11, Frédéric : titre « Le restaurant de maths, en classe » et sa
                 phrase retirés ; le menu parle de lui-même. */}
-            {/* 21/11 : un seul menu ici ; la carte élève est sur la page à imprimer. */}
             <div className="mx-auto max-w-2xl">
-              <MenuDuJour menu={MENU_RESTAURANT} imprimerHref="/seances/menu/restaurant-6e-longueurs" />
+              <MenuDuJour menu={MENU_RESTAURANT} />
             </div>
             <p className="mt-4 text-center">
               <Link href="/seances#restaurant-6e-longueurs" className="inline-flex items-center gap-1.5 font-black text-amber-900 underline">

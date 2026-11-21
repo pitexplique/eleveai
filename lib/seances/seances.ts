@@ -90,8 +90,6 @@ export type Seance = {
     conseil: string;
     /** Sous le menu : les PDF du prof et la connexion des élèves (21/11, Frédéric). */
     ressources?: { label: string; href: string }[];
-    /** La carte de l'ÉLÈVE, à côté de celle du prof : l'entrée dite pour lui. */
-    entreeEleve?: string;
   };
   /** « Concrètement, clic par clic ». */
   clicParClic: EtapeClic[];
@@ -248,7 +246,6 @@ export const SEANCES: Seance[] = [
         { label: "La fiche d'exercices (PDF)", href: "/fiches-exercices/maths/6e/aire-longueur" },
         { label: "Les élèves se connectent : vous suivez leurs progrès", href: "/auth/signin-eleve" },
       ],
-      entreeEleve: "Au tableau, tous ensemble : une énigme, la vidéo ou des exercices.",
     },
     clicParClic: [
       {

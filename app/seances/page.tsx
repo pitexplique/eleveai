@@ -175,7 +175,7 @@ function TitreBloc({ n, children }: { n: number; children: ReactNode }) {
 
 /** Le « restaurant » : une vraie carte, plat IMPOSÉ, À LA CARTE, dessert. */
 function Menu({ seance }: { seance: Seance }) {
-  return seance.menu ? <MenuDuJour menu={seance.menu} imprimerHref={`/seances/menu/${seance.id}`} /> : null;
+  return seance.menu ? <MenuDuJour menu={seance.menu} /> : null;
 }
 
 /** UNE SÉANCE : titre · plan · descriptif · audio · compétences cochées. */
