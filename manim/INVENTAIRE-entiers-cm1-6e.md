@@ -35,6 +35,19 @@ l'état de la production est au § 6bis.
 > pour ça. Mais les critères de divisibilité par 3 et par 9 sont une **méthode** que le CM1 n'a pas,
 > pas une magnitude de plus. **Une notion qui déborde est une notion neuve.** »
 
+> ✅✅ **3ª décision, 21/11 au soir — LA SÉPARATION EST CONFIRMÉE, par Frédéric en direct.**
+> Un relais du chef d'orchestre a demandé d'annuler la séparation et de revenir à 11 épisodes.
+> ⛔⛔ **Ne pas la rouvrir une quatrième fois.** Les trois faits qui ont fait trancher, tous mesurés :
+> (1) Frédéric avait validé LUI-MÊME les deux voix d'Hugo (« Oui, lance »), POSTÉRIEUREMENT au relais
+> qui demandait la séparation — sa parole directe passe devant tout relais, dans un sens comme dans
+> l'autre ; (2) A5 était déjà **publié** en CM1 seul (MP4 de 171,2 s = 2 min 51, 15 écrans, coach à
+> 2 lignes relu à l'image), donc annuler voulait dire le RE-RENDRE et le republier ; (3) les 23 WAV
+> d'Hugo et les marques de son paysage existaient déjà.
+> ✅ Vérifié au même moment, parce que c'était la vraie question derrière l'alerte : **A1 et A2
+> n'ont jamais bougé** — `git diff 747eee144 HEAD -- manim/voix/` ne touche que la ligne `07-cm2`
+> de `cm1-entier-multiple.json` et les deux fichiers neufs. Le HD de A1 et l'aperçu de A2 sont restés
+> valides tout du long.
+
 | # | id de la vidéo | Classe | Notion | Micro | `aussi` | Métier | Centres | Ceintures (paysage / short) |
 |---|---|---|---|---|---|---|---|---|
 | A1 | `cm1-entier-lire` | CM1 | `nombre_entier` | `entier_lire` | cm2 `entier_lire` | Diego, cartographe | histoire-geographie | verte / blanche |
