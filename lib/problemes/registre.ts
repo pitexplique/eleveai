@@ -133,6 +133,11 @@ import eCm1NombreEntier from "./cm1/nombre_entier";
 import eCm1Suite from "./cm1/suite";
 import eCm1TablesMultiplication from "./cm1/tables_multiplication";
 import eCm1Multiplication from "./cm1/multiplication";
+// 3e (imports)
+import e3eFractionRationnel from "./3e/fraction_rationnel";
+import e3eEntierPuissance from "./3e/entier_puissance";
+import e3eEntierRacineCarree from "./3e/entier_racine_carree";
+import e3eEntierArithmetique from "./3e/entier_arithmetique";
 
 const TOUTES: ProblemesNotion[] = [
   // CM1
@@ -267,6 +272,11 @@ const TOUTES: ProblemesNotion[] = [
   e5eStatStatistique,
   e5eProbaExperience,
   e5ePolygonesReguliers,
+  // 3e
+  e3eFractionRationnel,
+  e3eEntierPuissance,
+  e3eEntierRacineCarree,
+  e3eEntierArithmetique,
 ];
 
 const PAR_CLE = new Map(TOUTES.map((n) => [`${n.classe}/${n.notionId}`, n]));
