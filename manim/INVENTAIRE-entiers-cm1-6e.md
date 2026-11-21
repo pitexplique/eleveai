@@ -55,8 +55,10 @@ part en validation, et rien ne démarre avant le « oui ».
   `cm2-entier-multiple` est bâti sur ce que la banque CM2 demande en propre : critères de
   divisibilité par 3 et par 9 (la somme des chiffres), multiples de 25/50/1 000 reconnus à la fin,
   nombres à 6-7 chiffres.
-- **Lot A (les 5 autres micros)** : une seule vidéo par micro, **propriétaire CM1**, branchée au CM2 par le mécanisme `aussi`
-  (2 lignes `notion_ressources`), comme `ce1_masse_soupeser` reçoit la vidéo du CP dans la série Masses.
+- **Lot A (les 5 autres micros)** : un seul épisode par micro (paysage + short), **propriétaire CM1**,
+  branché au CM2 par le mécanisme `aussi` — soit **4 lignes `notion_ressources` par épisode** :
+  2 vidéos × 2 classes (relu en base à l'image sur les épisodes publiés : 4 lignes chacun).
+  Comme `ce1_masse_soupeser` reçoit la vidéo du CP dans la série Masses.
   ⚠️ Particularité : les `microId` du CM1 et du CM2 sont **identiques** (`entier_lire`, `entier_comparer`,
   `entier_decomposer`, `entier_arrondir`, `entier_multiple`, `entier_defi`) sous la même notion
   `nombre_entier` ; seule la **classe** diffère. L'alias `aussi` doit donc porter la classe, pas seulement
@@ -433,7 +435,10 @@ Par épisode, dans l'ordre de `manim/REPRISE-masses-cp-cm2.md` :
    `cm1-commun.js` et `6e-commun.js` **déjà présents** ; compteur contrôlé AVANT chaque film.
 5. Miniatures (paysage + short « Dessin animé », gabarit A), manifeste (dates après la dernière de la file,
    ⛔ 3 shorts/jour au plus), fiche YouTube, vignettes, R2, `videos-r2`, coach + Supabase
-   `notion_ressources` (⚠️ lot A : **2 lignes par épisode**, cm1 + alias `aussi` cm2).
+   `notion_ressources` (⚠️ lot A : **4 lignes par épisode** — paysage et short, chacun au cm1 et
+   au cm2 par l'alias `aussi`). ⛔ **Exception `entier_multiple`** : `cm1-entier-multiple` fait
+   **2 lignes, toutes deux au CM1** (sa paysage et son short), et `cm2-entier-multiple` 2 lignes au CM2 —
+   aucun alias ni dans un sens ni dans l'autre.
 6. ⭐ **Le coach se vérifie à chaque épisode** (Frédéric, 21/11) : banque, `notionId`/`microId`, générateurs
    exécutés, ligne en base, vidéo visible sur la micro visée — en partant de l'accueil, pas d'une URL
    `?classe=` (qui ment sur la visibilité).
