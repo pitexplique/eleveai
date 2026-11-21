@@ -271,6 +271,10 @@ import e2deAlgorithmiquePython2de from "./seconde/algorithmique_python_2de";
 import e2deLogiqueEnsembles from "./seconde/logique_ensembles";
 import e2deDemiPlansSystemes from "./seconde/demi_plans_systemes";
 import e2deSystemesDeterminant from "./seconde/systemes_determinant";
+import e2deCourbesAssociees from "./seconde/courbes_associees";
+import e2dePolynomesDivision from "./seconde/polynomes_division";
+import e2deEncadrementsOperations from "./seconde/encadrements_operations";
+import e2deRacinesDenominateur from "./seconde/racines_denominateur";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -550,6 +554,10 @@ const TOUTES: ProblemesNotion[] = [
   e2deLogiqueEnsembles,
   e2deDemiPlansSystemes,
   e2deSystemesDeterminant,
+  e2deCourbesAssociees,
+  e2dePolynomesDivision,
+  e2deEncadrementsOperations,
+  e2deRacinesDenominateur,
   // fin Seconde
 ];
 
