@@ -253,9 +253,19 @@ globalement.
 | Marques mot à mot des 11 paysages | ✅ **2 860 marques**, 16 écrans chacun, 0 écran sans marque |
 | `manim/scripts/cm1/entier_commun.py` | ✅ le commun de la série (tableau par classes, droite graduée, 11 personnages, 2 bases) |
 | A1 `entier_lire.py` — script + dry run | ✅ 0 AUDIT-AVANCE, 0 RETARD, 0 BORD ; durée 3 min 00 |
-| A1 — aperçu `-ql` relu | ⏳ en cours |
-| A1 — HD, short Ti Margo, publication | ⏳ |
-| A2 → A6, B1 → B5 | ⏳ |
+| A1 — aperçu `-ql` + planche des 12 écrans | ✅ relus, 3 défauts corrigés |
+| **A1 — rendu HD** | ✅ `manim/sorties/cm1/maths/entiers/01-lire/`, 15,4 Mo, **0 instant qui touche un bord** |
+| A1 — short Ti Margo, miniatures, publication | ⏳ |
+| A2 `entier_comparer.py` — script + dry run | ✅ 0 AUDIT-AVANCE, 0 RETARD, 0 BORD ; durée 3 min 25 |
+| A2 — aperçu `-ql` relu | ⏳ |
+| A3 → A6, B1 → B5 (9 épisodes) | ⏳ |
+
+⚠️ **A2 : trois défauts trouvés au dry run et corrigés** — (1) deux **AUDIT-AVANCE** dans la
+correction (« 38. » 1,05 s et « 6. » 0,41 s avant la voix) : la ligne entière arrivait sur le
+PREMIER mot de l'extrait, chaque nombre attend maintenant SON mot ; (2) la ligne de question
+« 12 408 et 12 804 : » partait à x = −6,7 → coupée en trois lignes courtes, sans changer un mot ;
+(3) deux figures `duel()` débordaient (−6,69 et −6,85) → **mesurées** avant correction, pas estimées.
+⛔ `BOIS` n'existe PAS dans notre chaîne d'import (il vient du commun des Masses) : écrire la couleur.
 
 - **Outils neufs** : `entier_marques.py` (marques, prend la CLASSE en argument),
   `entier_commun.py` (le commun). ⛔ Tous deux sont des **COPIES** et non des imports de la série
