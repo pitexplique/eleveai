@@ -176,6 +176,12 @@ import eCe2DroitesAngles from "./ce2/droites_angles";
 import eCe2FiguresPlanes from "./ce2/figures_planes";
 import eCe2Solides from "./ce2/solides";
 import eCe2Symetrie from "./ce2/symetrie";
+import eCe2Donnees from "./ce2/donnees";
+import eCe2Algorithmique from "./ce2/algorithmique";
+import eCe1NombreEntier from "./ce1/nombre_entier";
+import eCe1SuiteNombre from "./ce1/suite_nombre";
+import eCe1AdditionSoustraction from "./ce1/addition_soustraction";
+import eCe1Multiplication from "./ce1/multiplication";
 // 3e (imports)
 import e3eFractionRationnel from "./3e/fraction_rationnel";
 import e3eEntierPuissance from "./3e/entier_puissance";
@@ -205,6 +211,12 @@ import e3eRelationsMetriques from "./3e/relations_metriques";
 import e3eAlgoProgrammation from "./3e/algo_programmation";
 
 const TOUTES: ProblemesNotion[] = [
+  // CE1
+  eCe1NombreEntier,
+  eCe1SuiteNombre,
+  eCe1AdditionSoustraction,
+  eCe1Multiplication,
+  // fin CE1
   // CE2
   eCe2NombreEntier,
   eCe2SuiteNombre,
@@ -225,6 +237,8 @@ const TOUTES: ProblemesNotion[] = [
   eCe2FiguresPlanes,
   eCe2Solides,
   eCe2Symetrie,
+  eCe2Donnees,
+  eCe2Algorithmique,
   // fin CE2
   // CM1
   eCm1NombreEntier,
