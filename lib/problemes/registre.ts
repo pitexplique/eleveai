@@ -377,6 +377,10 @@ import eStmgAutoProportion from "./stmg/auto_proportion";
 import eStmgAutoEvoCoefficient from "./stmg/auto_evo_coefficient";
 import eStmgAutoEvoTaux from "./stmg/auto_evo_taux";
 import eStmgAutoEvoEnchainees from "./stmg/auto_evo_enchainees";
+import eStmgAutoIndice from "./stmg/auto_indice";
+import eStmgAutoFractionsPuissances from "./stmg/auto_fractions_puissances";
+import eStmgAutoOrdresUnites from "./stmg/auto_ordres_unites";
+import eStmgAutoDevelopperFactoriser from "./stmg/auto_developper_factoriser";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -770,6 +774,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgAutoEvoCoefficient,
   eStmgAutoEvoTaux,
   eStmgAutoEvoEnchainees,
+  eStmgAutoIndice,
+  eStmgAutoFractionsPuissances,
+  eStmgAutoOrdresUnites,
+  eStmgAutoDevelopperFactoriser,
   // fin STMG
 ];
 
