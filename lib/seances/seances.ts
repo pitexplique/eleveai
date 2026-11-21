@@ -244,7 +244,7 @@ export const SEANCES: Seance[] = [
         "Le découpage, avec l'AESH",
         "Aller au tableau : corriger les exercices interactifs ou expliquer aux autres",
         "Préparer un concours",
-        { texte: "Un article à écrire, pour participer au Journal d'EleveAI", href: "/accueil-journal" },
+        { texte: "Un article à écrire", href: "/accueil-journal" },
       ],
       dessert: "Va trouver des maths dans ce que tu aimes.",
       signature: "Le chef cuisinier, Frédéric Lacoste",
