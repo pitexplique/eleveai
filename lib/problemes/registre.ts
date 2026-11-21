@@ -453,6 +453,10 @@ import eStmgExpoTauxMoyen from "./stmg/expo_taux_moyen";
 import eStmgExpoTauxEquivalent from "./stmg/expo_taux_equivalent";
 import eStmgLogDefinition from "./stmg/log_definition";
 import eStmgLogProprietes from "./stmg/log_proprietes";
+import eStmgLogEquations from "./stmg/log_equations";
+import eStmgLogApplications from "./stmg/log_applications";
+import eStmgStatChangementVariable from "./stmg/stat_changement_variable";
+import eStmgVaBinomialeReconnaitre from "./stmg/va_binomiale_reconnaitre";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -922,6 +926,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgExpoTauxEquivalent,
   eStmgLogDefinition,
   eStmgLogProprietes,
+  eStmgLogEquations,
+  eStmgLogApplications,
+  eStmgStatChangementVariable,
+  eStmgVaBinomialeReconnaitre,
   // fin STMG
 ];
 
