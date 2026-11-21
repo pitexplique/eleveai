@@ -910,5 +910,11 @@
     "calcul": [["3 500 g", "rouge", 190], ["ou 4 kg ?", "blanc", 190]],
     "margo": [320, 720, 640],
     "ceinture": "blanche"
+  },
+  "cm1-masse-mesurer-short": {
+    "question": ["Combien pèse", "la pastèque ?"],
+    "calcul": [["entre 2", "blanc", 190], ["et 3 kg ?", "rouge", 190]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
   }
 }

@@ -104695,6 +104695,151 @@
       "centres": [
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm1-masse-mesurer",
+      "pas_avant": "2027-06-18",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_mesurer",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/masse/02-mesurer/eleveai-maths-cm1-masse-mesurer.mp4",
+      "miniature": "cm1/maths/masse/02-mesurer/eleveai-maths-cm1-masse-mesurer.png",
+      "titre": "Où pointe l'aiguille de la balance ? — Lire une balance — épisode 2 · Maths CM1",
+      "accroche": "Kenza est herboriste : elle pèse ses plantes à tisane sur une balance à aiguille. Pour lire une balance, on cherche d'abord ce que vaut un petit trait ; sur une balance à plateaux, on additionne les masses marquées.\n\nDans cette vidéo :\n• la graduation : de 100 en 100 g, 5 intervalles, chacun vaut 20 g\n• 3 petits traits après 400 : 400 + 3 × 20 = 460 g\n• pile au milieu de 500 et 600 : 550 g\n• balance à plateaux : 500 g + 200 g + 50 g = 750 g\n• 2 kg, 200 g et 100 g : 2 000 + 200 + 100 = 2 300 g\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : sur le pèse-personne, de 10 en 10 kg, 10 petits traits : l'aiguille est 4 traits après 30. Quelle masse ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_mesurer&display=simple\n\n⚖️ Épisode 2 de la série Masses d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Où pointe l'aiguille ?"
+        ],
+        [
+          "00:15",
+          "La graduation"
+        ],
+        [
+          "00:35",
+          "Question 1"
+        ],
+        [
+          "01:08",
+          "Les masses marquées"
+        ],
+        [
+          "01:21",
+          "Question 2"
+        ],
+        [
+          "01:54",
+          "À toi de jouer"
+        ],
+        [
+          "02:12",
+          "Correction"
+        ],
+        [
+          "02:24",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "lire une balance",
+        "mesurer une masse",
+        "graduation",
+        "balance à aiguille",
+        "gramme",
+        "kilogramme",
+        "masses marquées",
+        "herboriste",
+        "plantes",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "Les nombres vont de 100 en 100 grammes. L'aiguille est pile au milieu de 500 et 600. Quelle masse ?",
+          "choix": [
+            "600 grammes",
+            "505 grammes",
+            "550 grammes"
+          ],
+          "reponse": 2,
+          "explication": "Au milieu de 500 et 600, c'est 550 grammes."
+        },
+        {
+          "t": "01:21",
+          "question": "Pour équilibrer un paquet, il faut 2 kilogrammes, 200 grammes et 100 grammes. Quelle masse ?",
+          "choix": [
+            "2 030 grammes",
+            "2 300 grammes",
+            "302 grammes"
+          ],
+          "reponse": 1,
+          "explication": "2 kilogrammes, c'est 2 000 grammes. 2 000 + 200 + 100 : 2 300 grammes."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "cm1-masse-mesurer-short",
+      "pas_avant": "2027-06-18",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_mesurer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-masse-mesurer",
+      "fichier": "cm1/maths/masse/02-mesurer/eleveai-maths-cm1-masse-mesurer-short.mp4",
+      "miniature": "cm1/maths/masse/02-mesurer/eleveai-maths-cm1-masse-mesurer-short-miniature.png",
+      "titre": "Combien pèse ma pastèque ? #maths #cm1",
+      "accroche": "Je pèse ma pastèque : l'aiguille s'arrête entre 2 et 3 kilogrammes, pile au milieu. Mon copain lit le nombre le plus proche : 3 kilogrammes !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : l'aiguille est au milieu de 1 et 2 kilogrammes : combien de grammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_mesurer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cm1 #primaire",
+      "tags": [
+        "masse",
+        "lire une balance",
+        "kilogramme",
+        "gramme",
+        "pastèque",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Combien pèse la pastèque ?",
+          "choix": [
+            "2 kilogrammes 500 grammes",
+            "3 kilogrammes",
+            "2 kilogrammes 300 grammes"
+          ],
+          "reponse": 0,
+          "explication": "Au milieu de 2 et 3 kilogrammes : 2 kilogrammes 500 grammes, soit 2 500 grammes."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
     }
   ]
 }

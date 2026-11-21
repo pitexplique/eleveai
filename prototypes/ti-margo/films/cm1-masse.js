@@ -273,3 +273,41 @@ function cartableCraie(c,x,yBas,s=1,z=1){ if(z<=0) return; const k=Math.min(1.15
   c.fillStyle='#3b5bdb'; c.lineWidth=4; c.beginPath(); c.roundRect(x-w/2,yBas-h,w,h,16*k); c.fill(); c.stroke();
   c.fillStyle='#364fc7'; c.beginPath(); c.roundRect(x-w/2,yBas-h,w,h*.5,16*k); c.fill(); c.stroke();
   c.fillStyle='#fab005'; for(const d of [-.28,.28]){ c.beginPath(); c.roundRect(x+d*w-11*k,yBas-h*.5-14*k,22*k,30*k,4*k); c.fill(); } }
+
+/* ---- CM1 02 (mesurer) : la balance de cuisine à cadran en kg, la pastèque, les tranches ---- */
+/* Balance de cuisine à aiguille, cadran ROND de 0 à 5 kg (un petit trait tous les 100 g, un moyen à 500 g) :
+   (x, yBas) = le milieu du bas, R = le rayon du cadran, v = la masse lue (kg), hl = [v0, v1] arc surligné.
+   Renvoie le dessus du plateau (pour y poser un fruit). */
+function balanceAiguilleM(c,x,yBas,R,v,z=1,hl=null){ if(z<=0) return yBas-2.6*R; const k=Math.min(1.15,z); R*=k;
+  const w=2.4*R, h=2.25*R, cy=yBas-h/2+4*k, ang=u=>-Math.PI/2+u/5*Math.PI*1.8;
+  c.lineJoin='round'; c.fillStyle='#e9ecef'; c.strokeStyle='#495057'; c.lineWidth=6;
+  c.beginPath(); c.roundRect(x-w/2,yBas-h,w,h,34*k); c.fill(); c.stroke();
+  c.fillStyle='#ffffff'; c.lineWidth=5; c.beginPath(); c.arc(x,cy,R,0,7); c.fill(); c.stroke();
+  if(hl){ c.strokeStyle=CRAIE.ret; c.lineWidth=16*k; c.beginPath(); c.arc(x,cy,R*.86,ang(hl[0]),ang(hl[1])); c.stroke(); }
+  for(let i=0;i<=50;i++){ const u=i/10, a=ang(u), gr=i%10===0, mo=i%5===0, L=gr?.2:(mo?.14:.08);
+    c.strokeStyle='#212529'; c.lineWidth=gr?5:(mo?4:2.5); c.beginPath();
+    c.moveTo(x+Math.cos(a)*R*.95,cy+Math.sin(a)*R*.95); c.lineTo(x+Math.cos(a)*R*(.95-L),cy+Math.sin(a)*R*(.95-L)); c.stroke(); }
+  c.fillStyle='#212529'; c.font=`800 ${Math.round(R*.26)}px "Segoe UI"`; c.textAlign='center'; c.textBaseline='middle';
+  for(let u=0;u<=5;u++){ const a=ang(u); c.fillText(String(u),x+Math.cos(a)*R*.6,cy+Math.sin(a)*R*.6); }
+  c.fillStyle='#868e96'; c.font=`700 ${Math.round(R*.18)}px "Segoe UI"`; c.fillText('kg',x,cy+R*.3);
+  const a=ang(v); c.strokeStyle='#e03131'; c.lineWidth=8*k; c.lineCap='round';
+  c.beginPath(); c.moveTo(x,cy); c.lineTo(x+Math.cos(a)*R*.86,cy+Math.sin(a)*R*.86); c.stroke();
+  c.fillStyle='#e03131'; c.beginPath(); c.arc(x,cy,11*k,0,7); c.fill();
+  const py=yBas-h-26*k; c.strokeStyle='#868e96'; c.lineWidth=16*k; c.beginPath(); c.moveTo(x,yBas-h); c.lineTo(x,py); c.stroke();
+  c.fillStyle='#dee2e6'; c.strokeStyle='#495057'; c.lineWidth=5; c.beginPath(); c.ellipse(x,py,w*.5,18*k,0,0,7); c.fill(); c.stroke();
+  return py-12*k; }
+/* Une pastèque entière, couchée : (x, yBas) = le bas, s = l'échelle (1 ≈ 260 px de long) */
+function pastequeM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const rx=130*s, ry=92*s, y=yBas-ry;
+  c.fillStyle='#2b8a3e'; c.strokeStyle='#1b4d24'; c.lineWidth=5; c.beginPath(); c.ellipse(x,y,rx,ry,0,0,7); c.fill(); c.stroke();
+  c.strokeStyle='#8ce99a'; c.lineWidth=7*s; for(const u of [-.66,-.33,0,.33,.66]){ c.beginPath();
+    for(let i=0;i<=20;i++){ const t=-Math.PI/2+i/20*Math.PI, px=x+u*rx*Math.cos(t)+Math.sin(i*1.3)*4*s, py=y+ry*.94*Math.sin(t); i?c.lineTo(px,py):c.moveTo(px,py); } c.stroke(); }
+  c.strokeStyle='#5c3d00'; c.lineWidth=7; c.beginPath(); c.moveTo(x-rx*.95,y); c.quadraticCurveTo(x-rx*1.12,y-22*s,x-rx*1.05,y-40*s); c.stroke(); }
+/* Une tranche de pastèque (un demi-disque rouge, l'écorce verte, des pépins) : (x, yBas) = le milieu du bas */
+function trancheM(c,x,yBas,s=1,z=1,ang=0){ if(z<=0) return; s*=Math.min(1.15,z); const r=90*s;
+  c.save(); c.translate(x,yBas); c.rotate(ang);
+  c.fillStyle='#2b8a3e'; c.beginPath(); c.arc(0,0,r,Math.PI,0); c.closePath(); c.fill();
+  c.fillStyle='#f8f9fa'; c.beginPath(); c.arc(0,-2,r*.9,Math.PI,0); c.closePath(); c.fill();
+  c.fillStyle='#fa5252'; c.beginPath(); c.arc(0,-4,r*.82,Math.PI,0); c.closePath(); c.fill();
+  c.fillStyle='#212529'; for(const [u,v] of [[-.45,.35],[-.15,.55],[.2,.5],[.48,.3],[0,.25],[-.3,.15],[.3,.12]]){
+    c.beginPath(); c.ellipse(u*r,-v*r,5*s,8*s,u,0,7); c.fill(); }
+  c.restore(); }

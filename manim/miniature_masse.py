@@ -56,6 +56,8 @@ EP = [
      "= 900 g", True, "orange"),
     ("cm1", "comparer", "01-comparer", ["2 kg 50 g", "OU 2 500 g ?"], "Tout en grammes :",
      "2 050 g < 2 500 g", True, "jaune"),
+    ("cm1", "mesurer", "02-mesurer", ["LIRE", "UNE BALANCE"], "3 petits traits après 400",
+     "= 460 g", True, "jaune"),
 ]
 
 
