@@ -54,6 +54,8 @@ EP = [
      "la valise passe !", True, "jaune"),
     ("ce2", "defi", "07-defi", ["COMBIEN PÈSE", "LE SAVON ?"], "500 g + 200 g + 200 g",
      "= 900 g", True, "orange"),
+    ("cm1", "comparer", "01-comparer", ["2 kg 50 g", "OU 2 500 g ?"], "Tout en grammes :",
+     "2 050 g < 2 500 g", True, "jaune"),
 ]
 
 

@@ -172,6 +172,10 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "ce2-masse-probleme-short": 4.15,
   "ce2-masse-defi": 8.2,
   "ce2-masse-defi-short": 4.15,
+  // Masses CM1 01 (21/11) : paysage = milieu du silence après « point f r. » (178,94 → 179,90 s, mp4 de
+  // 187,63 s) ; short = « Mets » (60,77 + 2,351 = 63,12 s) + 0,03 s, mp4 de 67,31 s.
+  "cm1-masse-comparer": 8.2,
+  "cm1-masse-comparer-short": 4.16,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {

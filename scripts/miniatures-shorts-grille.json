@@ -904,5 +904,11 @@
     "calcul": [["= 3 mangues", "jaune", 170], ["de 400 g", "blanc", 170]],
     "margo": [320, 720, 640],
     "ceinture": "jaune"
+  },
+  "cm1-masse-comparer-short": {
+    "question": ["Quel cartable", "est le plus lourd ?"],
+    "calcul": [["3 500 g", "rouge", 190], ["ou 4 kg ?", "blanc", 190]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
   }
 }

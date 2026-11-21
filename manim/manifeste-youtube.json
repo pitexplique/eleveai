@@ -104546,6 +104546,155 @@
         "cuisine",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm1-masse-comparer",
+      "pas_avant": "2027-06-17",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_comparer",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/masse/01-comparer/eleveai-maths-cm1-masse-comparer.mp4",
+      "miniature": "cm1/maths/masse/01-comparer/eleveai-maths-cm1-masse-comparer.png",
+      "titre": "2 kg 50 g ou 2 500 g : le plus lourd ? — Comparer des masses — épisode 1 · Maths CM1",
+      "accroche": "Ilyes est jockey : avant chaque course, on le pèse avec sa selle. Pour comparer des masses, on met d'abord la même unité, puis on compare les nombres, chiffre par chiffre.\n\nDans cette vidéo :\n• les signes : 54 kg < 56 kg\n• 2 kg 50 g = 2 050 g, et 2 050 < 2 500 : attention au piège !\n• 3 kg = 3 000 g, plus que 2 900 g\n• les très lourds : 3 t 500 kg = 3 500 kg, plus que 3 t = 3 000 kg\n• 1 kg 200 g, 1 020 g, 1 kg 2 g : en grammes 1 200, 1 020, 1 002\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : Ilyes 57 kg 300 g, Jules 57 030 g, Inaya 57 kg 3 g : range-les du plus léger au plus lourd.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_comparer&display=simple\n\n⚖️ Épisode 1 de la série Masses d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le plus lourd ?"
+        ],
+        [
+          "00:09",
+          "Ilyes, jockey"
+        ],
+        [
+          "00:30",
+          "Tout en grammes"
+        ],
+        [
+          "00:49",
+          "Question 1"
+        ],
+        [
+          "01:18",
+          "Les très lourds"
+        ],
+        [
+          "01:31",
+          "Question 2"
+        ],
+        [
+          "02:04",
+          "À toi de jouer"
+        ],
+        [
+          "02:27",
+          "Correction"
+        ],
+        [
+          "02:45",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "comparer des masses",
+        "plus lourd",
+        "plus léger",
+        "gramme",
+        "kilogramme",
+        "tonne",
+        "conversion",
+        "jockey",
+        "cheval",
+        "ranger",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:49",
+          "question": "Qu'est-ce qui est le plus lourd : 3 kilogrammes, ou 2 900 grammes ?",
+          "choix": [
+            "c'est pareil",
+            "3 kilogrammes",
+            "2 900 grammes"
+          ],
+          "reponse": 1,
+          "explication": "3 kilogrammes, c'est 3 000 grammes. 3 000 est plus grand que 2 900."
+        },
+        {
+          "t": "01:31",
+          "question": "La plus légère : 1 kilogramme 200 grammes, 1 020 grammes, ou 1 kilogramme 2 grammes ?",
+          "choix": [
+            "1 020 grammes",
+            "1 kilogramme 200 grammes",
+            "1 kilogramme 2 grammes"
+          ],
+          "reponse": 2,
+          "explication": "En grammes : 1 200, 1 020 et 1 002. La plus petite : 1 002 grammes."
+        }
+      ],
+      "centres": [
+        "sport",
+        "chevaux"
+      ]
+    },
+    {
+      "id": "cm1-masse-comparer-short",
+      "pas_avant": "2027-06-17",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_comparer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-masse-comparer",
+      "fichier": "cm1/maths/masse/01-comparer/eleveai-maths-cm1-masse-comparer-short.mp4",
+      "miniature": "cm1/maths/masse/01-comparer/eleveai-maths-cm1-masse-comparer-short-miniature.png",
+      "titre": "3 500 g ou 4 kg : quel cartable est le plus lourd ? #maths #cm1",
+      "accroche": "Mon copain se vante : mon cartable pèse 3 500 grammes, le tien seulement 4 kilogrammes ! 3 500, c'est bien plus que 4… vraiment ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : qui est le plus lourd, 2 tonnes ou 1 900 kilogrammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cm1 #primaire",
+      "tags": [
+        "masse",
+        "comparer",
+        "gramme",
+        "kilogramme",
+        "cartable",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Quel cartable est le plus lourd ?",
+          "choix": [
+            "celui de 4 kilogrammes",
+            "ils pèsent pareil",
+            "celui de 3 500 grammes"
+          ],
+          "reponse": 0,
+          "explication": "4 kilogrammes, c'est 4 000 grammes. 4 000 est plus grand que 3 500."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
     }
   ]
 }
