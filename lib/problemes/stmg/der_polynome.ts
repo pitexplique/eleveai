@@ -4,7 +4,7 @@
 import type { ProblemesNotion } from "../types";
 import { C, NB, svg, t, r } from "../dessins-ecole";
 
-const carte = (aria: string, f: string, aide: string, q: string, coul = C.bleu, taille = 30) =>
+const carte = (aria: string, f: string, aide: string, q: string, coul: string = C.bleu, taille = 30) =>
   svg(aria,
     r(30, 80, 420, 100, coul, 0.15, 3, 10) + t(240, 143, f, C.craie, taille) +
       t(240, 250, aide, C.pale, 22) + t(240, 340, q, C.rose, 30));

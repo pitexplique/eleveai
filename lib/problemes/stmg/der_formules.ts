@@ -5,7 +5,7 @@ import type { ProblemesNotion } from "../types";
 import { C, NB, svg, t, r } from "../dessins-ecole";
 
 /** Une carte : la fonction en grand, une ligne d'explication, la question en rose. */
-const carte = (aria: string, f: string, aide: string, q: string, coul = C.bleu, taille = 34) =>
+const carte = (aria: string, f: string, aide: string, q: string, coul: string = C.bleu, taille = 34) =>
   svg(aria,
     r(50, 80, 380, 100, coul, 0.15, 3, 10) + t(240, 145, f, C.craie, taille) +
       t(240, 250, aide, C.pale, 22) + t(240, 340, q, C.rose, 30));
