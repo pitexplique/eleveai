@@ -39,7 +39,7 @@ const piege = svg(
 
 const course = svg(
   "Ana part à 8 kilomètres par heure, Ben part 10 minutes plus tard à 12 kilomètres par heure",
-  l(40, 300, 440, 300, C.craie, 4) + o(150, 250, 18, C.jaune, 0.5, 3) + p("M150 268 l0 30", C.jaune, 4) + t(150, 210, "Ana 8 km/h", C.jaune, 22) +
+  l(40, 300, 440, 300, C.craie, 4) + o(240, 250, 18, C.jaune, 0.5, 3) + p("M240 268 l0 30", C.jaune, 4) + t(240, 210, "Ana 8 km/h", C.jaune, 22) +
     o(70, 250, 18, C.bleu, 0.5, 3) + p("M70 268 l0 30", C.bleu, 4) + t(70, 210, "Ben 12 km/h", C.bleu, 20) +
     t(240, 110, "Ben part 10 min après", C.craie, 24) + t(240, 370, `il la rattrape à quelle distance${NB}?`, C.rose, 22)
 );

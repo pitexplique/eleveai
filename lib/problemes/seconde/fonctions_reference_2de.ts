@@ -28,9 +28,9 @@ const racine = svg(
 );
 
 const inequation = (() => {
-  const R = repere(-6, 6, 0, 30, { gl: 360, gh: 300, gy: 30, gx: 60, pas: 1, pasE: 2, etiquettes: true });
+  const R = repere(-6, 6, 0, 30, { gl: 360, gh: 300, gy: 30, gx: 60, pas: 2, pasE: 4, etiquettes: true });
   return svg("La parabole de la fonction carré et la droite horizontale y égale 16",
-    R.fond.replace(/<text[^>]*>(10|20|30)<\/text>/g, "") + R.courbe((x) => x * x, -5.4, 5.4, C.bleu, 4) + l(R.X(-6), R.Y(16), R.X(6), R.Y(16), C.rose, 3, "10 6") +
+    R.fond.replace(/<text[^>]*>(16)<\/text>/g, "") + R.courbe((x) => x * x, -5.4, 5.4, C.bleu, 4) + l(R.X(-6), R.Y(16), R.X(6), R.Y(16), C.rose, 3, "10 6") +
       t(R.X(6) - 4, R.Y(16) - 10, "16", C.rose, 20, "end") + t(240, 400, `x² ≤ 16${NB}?`, C.rose, 26));
 })();
 
@@ -44,7 +44,7 @@ const defi = (() => {
   const R = repere(-0.5, 2, -0.5, 2.5, { gl: 330, gh: 300, gy: 30, gx: 90, pas: 0.5, pasE: 1 });
   return svg("La droite y égale x et la parabole y égale x au carré, qui se croisent en 0 et en 1",
     R.fond + R.courbe((x) => x, -0.5, 2, C.jaune, 4) + R.courbe((x) => x * x, -0.5, 1.58, C.bleu, 4) +
-      t(R.X(2) - 4, R.Y(2) - 12, "y = x", C.jaune, 20, "end") + t(R.X(1.55), R.Y(2.4) + 6, "y = x²", C.bleu, 20, "end") + t(240, 400, `x² &lt; x${NB}?`, C.rose, 26));
+      t(R.X(2) - 4, R.Y(2) - 12, "y = x", C.jaune, 20, "end") + t(R.X(1.2), R.Y(2.2), "y = x²", C.bleu, 20, "end") + t(240, 400, `x² &lt; x${NB}?`, C.rose, 26));
 })();
 
 const problemes: ProblemesNotion = {
