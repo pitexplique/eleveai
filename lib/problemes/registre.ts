@@ -298,6 +298,10 @@ import e1reAutoResolutionGraphique from "./premiere/auto_resolution_graphique";
 import e1reAutoDroites from "./premiere/auto_droites";
 import e1reAutoLireStatistiques from "./premiere/auto_lire_statistiques";
 import e1reAutoIndicateurs from "./premiere/auto_indicateurs";
+import e1reAutoProbaBase from "./premiere/auto_proba_base";
+import e1reAutoProbaLecture from "./premiere/auto_proba_lecture";
+import e1reInfoTableauCroise from "./premiere/info_tableau_croise";
+import e1reInfoFrequences from "./premiere/info_frequences";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -606,6 +610,10 @@ const TOUTES: ProblemesNotion[] = [
   e1reAutoDroites,
   e1reAutoLireStatistiques,
   e1reAutoIndicateurs,
+  e1reAutoProbaBase,
+  e1reAutoProbaLecture,
+  e1reInfoTableauCroise,
+  e1reInfoFrequences,
   // fin Première
 ];
 
