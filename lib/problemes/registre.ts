@@ -405,6 +405,10 @@ import eStmgFctDegre2Symetrie from "./stmg/fct_degre2_symetrie";
 import eStmgFctDegre2Factorisee from "./stmg/fct_degre2_factorisee";
 import eStmgFctDegre2Factoriser from "./stmg/fct_degre2_factoriser";
 import eStmgFctDegre3 from "./stmg/fct_degre3";
+import eStmgFctEquationsPuissance from "./stmg/fct_equations_puissance";
+import eStmgDerSecanteTangente from "./stmg/der_secante_tangente";
+import eStmgDerNombreDerive from "./stmg/der_nombre_derive";
+import eStmgDerTangenteEquation from "./stmg/der_tangente_equation";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -826,6 +830,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgFctDegre2Factorisee,
   eStmgFctDegre2Factoriser,
   eStmgFctDegre3,
+  eStmgFctEquationsPuissance,
+  eStmgDerSecanteTangente,
+  eStmgDerNombreDerive,
+  eStmgDerTangenteEquation,
   // fin STMG
 ];
 
