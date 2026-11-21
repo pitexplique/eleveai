@@ -162,6 +162,10 @@ import e3eAffineFonction from "./3e/affine_fonction";
 import e3eTriangleFigure from "./3e/triangle_figure";
 import e3ePythagoreTheoreme from "./3e/pythagore_theoreme";
 import e3eThalesTheoreme from "./3e/thales_theoreme";
+import e3eTrigoTrigonometrie from "./3e/trigo_trigonometrie";
+import e3eSymTransformation from "./3e/sym_transformation";
+import e3eVolumeGeometrieEspace from "./3e/volume_geometrie_espace";
+import e3eSectionsSolides from "./3e/sections_solides";
 
 const TOUTES: ProblemesNotion[] = [
   // CM1
@@ -325,6 +329,10 @@ const TOUTES: ProblemesNotion[] = [
   e3eTriangleFigure,
   e3ePythagoreTheoreme,
   e3eThalesTheoreme,
+  e3eTrigoTrigonometrie,
+  e3eSymTransformation,
+  e3eVolumeGeometrieEspace,
+  e3eSectionsSolides,
 ];
 
 const PAR_CLE = new Map(TOUTES.map((n) => [`${n.classe}/${n.notionId}`, n]));
