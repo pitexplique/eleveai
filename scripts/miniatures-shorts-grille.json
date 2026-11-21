@@ -940,5 +940,11 @@
     "calcul": [["1,5 kg", "blanc", 190], ["ou 1,25 kg ?", "rouge", 170]],
     "margo": [320, 720, 640],
     "ceinture": "blanche"
+  },
+  "cm2-masse-convertir-short": {
+    "question": ["0,5 kg de farine :", "combien de grammes ?"],
+    "calcul": [["0,5 kg", "blanc", 190], ["= ? g", "rouge", 190]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
   }
 }

@@ -419,3 +419,18 @@ function escalierM(c,x,yBas,w,h,n=5,z=1){ if(z<=0) return i=>[x,yBas]; const k=M
   for(let i=0;i<n;i++){ c.lineTo(x+i*pw,yBas-(i+1)*ph); c.lineTo(x+(i+1)*pw,yBas-(i+1)*ph); }
   c.lineTo(x+W,yBas); c.closePath(); c.stroke();
   return i=>[x+(i+.5)*pw,yBas-(i+1)*ph]; }
+
+/* ---- CM2 02 (convertir) : la farine du gâteau, la pincée, la fourmi ---- */
+/* Un tas de farine (demi-ellipse blanche, quelques grains) : (x, yBas) = le milieu du bas, w = la largeur */
+function tasFarineM(c,x,yBas,w,z=1){ if(z<=0) return; w*=Math.min(1.15,z); const h=w*.42;
+  c.fillStyle='#f8f9fa'; c.strokeStyle='#ced4da'; c.lineWidth=3; c.beginPath();
+  c.moveTo(x-w/2,yBas); c.quadraticCurveTo(x-w*.18,yBas-h*1.25,x,yBas-h); c.quadraticCurveTo(x+w*.18,yBas-h*1.25,x+w/2,yBas); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle='#dee2e6'; for(const [u,v] of [[-.2,.3],[.1,.5],[.25,.22],[-.05,.7]]){ c.beginPath(); c.arc(x+u*w,yBas-v*h,Math.max(2,w*.02),0,7); c.fill(); } }
+/* Une fourmi rouge de profil (visible sur l ardoise), tournée vers la gauche : (x, yBas) = le milieu, au sol ; s = 1 ≈ 130 px de long */
+function fourmiM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const y=yBas-26*s;
+  c.strokeStyle='#ff8787'; c.lineWidth=4*s; c.lineCap='round';
+  for(const u of [-14,2,18]){ c.beginPath(); c.moveTo(x+u*s,y); c.lineTo(x+(u-12)*s,yBas); c.stroke(); c.beginPath(); c.moveTo(x+u*s,y); c.lineTo(x+(u+12)*s,yBas); c.stroke(); }
+  c.fillStyle='#e03131'; for(const [u,rx,ry] of [[-42,17,15],[0,15,11],[44,26,19]]){ c.beginPath(); c.ellipse(x+u*s,y-(u<0?6:0)*s,rx*s,ry*s,0,0,7); c.fill(); }
+  c.beginPath(); c.moveTo(x-50*s,y-18*s); c.quadraticCurveTo(x-62*s,y-48*s,x-80*s,y-46*s); c.stroke();
+  c.beginPath(); c.moveTo(x-44*s,y-20*s); c.quadraticCurveTo(x-48*s,y-54*s,x-64*s,y-60*s); c.stroke();
+  c.fillStyle='#ffffff'; c.beginPath(); c.arc(x-48*s,y-10*s,4*s,0,7); c.fill(); }

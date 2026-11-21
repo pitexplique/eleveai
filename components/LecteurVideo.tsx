@@ -190,6 +190,8 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "cm1-masse-defi-short": 4.18,
   "cm2-masse-comparer": 8.2,
   "cm2-masse-comparer-short": 4.16,
+  "cm2-masse-convertir": 8.2,
+  "cm2-masse-convertir-short": 4.15,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {

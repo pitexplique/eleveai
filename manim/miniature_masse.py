@@ -66,6 +66,8 @@ EP = [
      "1 000 ÷ 25 = 40 sacs", True, "bleue"),
     ("cm2", "comparer", "01-comparer", ["1,25 kg", "OU 1 200 g ?"], "La même unité :",
      "1,25 kg = 1 250 g", True, "jaune"),
+    ("cm2", "convertir", "02-convertir", ["0,75 kg", "= ? g"], "Dans le tableau :",
+     "0,75 kg = 750 g", True, "verte"),
 ]
 
 
