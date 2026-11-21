@@ -153,6 +153,10 @@ import eCm1Symetrie from "./cm1/symetrie";
 import eCm1FigurePlane from "./cm1/figure_plane";
 import eCm1Solide from "./cm1/solide";
 import eCm1Tableau from "./cm1/tableau";
+import eCm1Graphique from "./cm1/graphique";
+import eCm1Probabilite from "./cm1/probabilite";
+import eCm1TrierClasser from "./cm1/trier_classer";
+import eCm1Algorithmique from "./cm1/algorithmique";
 // 3e (imports)
 import e3eFractionRationnel from "./3e/fraction_rationnel";
 import e3eEntierPuissance from "./3e/entier_puissance";
@@ -201,6 +205,10 @@ const TOUTES: ProblemesNotion[] = [
   eCm1FigurePlane,
   eCm1Solide,
   eCm1Tableau,
+  eCm1Graphique,
+  eCm1Probabilite,
+  eCm1TrierClasser,
+  eCm1Algorithmique,
   // CM2
   eCm2NombreEntier,
   eCm2Suite,
