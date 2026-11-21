@@ -345,6 +345,10 @@ import eTleConvexiteFonction from "./terminale-spe/convexite_fonction";
 import eTleFonctionsSinusCosinus from "./terminale-spe/fonctions_sinus_cosinus";
 import eTleFonctionExponentielle from "./terminale-spe/fonction_exponentielle";
 import eTleFonctionLogarithme from "./terminale-spe/fonction_logarithme";
+import eTlePrimitiveIntegrale from "./terminale-spe/primitive_integrale";
+import eTleEquationDifferentielle from "./terminale-spe/equation_differentielle";
+import eTleProbabiliteConditionnelle from "./terminale-spe/probabilite_conditionnelle";
+import eTleVariableAleatoire from "./terminale-spe/variable_aleatoire";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -702,6 +706,10 @@ const TOUTES: ProblemesNotion[] = [
   eTleFonctionsSinusCosinus,
   eTleFonctionExponentielle,
   eTleFonctionLogarithme,
+  eTlePrimitiveIntegrale,
+  eTleEquationDifferentielle,
+  eTleProbabiliteConditionnelle,
+  eTleVariableAleatoire,
   // fin Terminale
 ];
 
