@@ -226,10 +226,15 @@ EP = [
       s_toi="dans 9 261, quel est le chiffre des unités de mille ?",
       s_tags=["nombres entiers", "rang d'un chiffre", "dizaines", "de droite à gauche"],
       s_centres=["transports", "jeux-defis"]),
- # ⚠️ B2 `entier_comparer` saute son tour : sa voix `09b-correction` dit « 6 032 a 3 centaines »,
- #    ce qui est FAUX (6 032 a 0 centaine et 3 dizaines, et c'est bien le rang des dizaines qui
- #    décide entre 6 022, 6 023, 6 024 et 6 032). Un seul clip à refaire. La date **21/06/2027**
- #    lui reste réservée : ⛔ ne pas la prendre pour un autre épisode.
+ # ✅ B2 `entier_comparer` est FAISABLE (sa voix a été corrigée le 21/11, commit `f9c3a08bd`).
+ #    Son épisode n'est pas encore écrit, d'où son absence ici ; la date **21/06/2027** lui reste
+ #    réservée, ⛔ ne pas la prendre pour un autre épisode.
+ #    ⚠️ Ses 16 WAV ont été régénérés deux fois (13:56, puis 16:22 pour la correction des maths) :
+ #    **relire les durées sur les WAV**, ne reprendre aucun chiffre d'une note.
+ #    ⭐ L'erreur corrigée, pour mémoire : la voix disait « 6 032 a 3 centaines » (c'est 3 dizaines,
+ #    et c'est bien le rang des dizaines qui décide entre 6 022, 6 023, 6 024 et 6 032). Elle était
+ #    dans une phrase de CORRECTION, donc elle aurait été enseignée — d'où la passe maths
+ #    obligatoire sur chaque voix (manim/REPRISE-entiers-cm1-6e.md).
  dict(classe="6e", n=3, slug="encadrer", notion="entier_nombre", micro="entier_encadrer",
       nom="Encadrer un nombre entier", date="2027-06-22", ceinture="verte",
       titre="Entre quelles centaines se trouve 582 ?",

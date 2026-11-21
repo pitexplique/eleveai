@@ -148,6 +148,16 @@ Donc, pour chaque épisode, **une passe dédiée sur les maths seules**, indépe
   `diff <(git show HEAD:x) x` : il compare des LF à des CRLF et ment.
 - ⚠️ Toujours `PYTHONIOENCODING=utf-8 python -X utf8 -m manim …` : sinon l'audit plante sur l'espace
   fine insécable (`UnicodeEncodeError`, cp1252) et le rendu s'arrête.
+- ⭐⭐ **Les `au_mot()` survivent à une régénération de voix, les `au_t()` NON.** Un `au_mot()` est
+  résolu contre le fichier de marques, qui est refait en même temps que les WAV : il reste juste
+  tout seul. Un `au_t(7.53)` est un instant **relevé à la main sur l'énergie d'un WAV** : tout WAV
+  refait le périme **en silence**, aucun instrument ne le dit, et le défaut n'apparaît qu'à l'image.
+  ⭐ Le contrôle, à chaque régénération : la date du dernier WAV, celle du fichier de marques
+  (elles doivent être en phase), et `grep -n "self\.au_t(" <script>`.
+  État au 21/11 : `entier_rang.py` **0** `au_t()`, `entier_encadrer.py` **1** (le « 9 620 » de
+  l'écran 05, à 7,53 s), `entier_decomposer.py` **0** — et les WAV de B1 et B3 n'ont jamais été
+  régénérés, donc rien de publié n'est concerné. (⚠️ Compté à la commande : un relevé de mémoire
+  circulait avec « 1 et 2 ».)
 - ⚠️ **Quand une voix est refaite, elle est souvent RÉGÉNÉRÉE EN ENTIER** : les 16 WAV de
   `6e-entier-comparer` l'ont été pour corriger un seul clip, et **toutes les durées ont changé**.
   Relire les durées sur les WAV avant de caler quoi que ce soit — jamais les recopier d'un message.
