@@ -302,6 +302,10 @@ import e1reAutoProbaBase from "./premiere/auto_proba_base";
 import e1reAutoProbaLecture from "./premiere/auto_proba_lecture";
 import e1reInfoTableauCroise from "./premiere/info_tableau_croise";
 import e1reInfoFrequences from "./premiere/info_frequences";
+import e1reInfoRepresentationsCroisees from "./premiere/info_representations_croisees";
+import e1reInfoNuage from "./premiere/info_nuage";
+import e1reInfoPointMoyen from "./premiere/info_point_moyen";
+import e1reInfoAjustementAffine from "./premiere/info_ajustement_affine";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -614,6 +618,10 @@ const TOUTES: ProblemesNotion[] = [
   e1reAutoProbaLecture,
   e1reInfoTableauCroise,
   e1reInfoFrequences,
+  e1reInfoRepresentationsCroisees,
+  e1reInfoNuage,
+  e1reInfoPointMoyen,
+  e1reInfoAjustementAffine,
   // fin Première
 ];
 
