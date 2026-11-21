@@ -21,6 +21,10 @@
 #     Ti-Margo dans la bande basse (0,38, y = −3,45).
 #   · Chaque mot apparaît quand la voix le dit (0 s d'avance, REGLES.md 24/10) ;
 #     la poignée finit sur un Indicate (plus de Flash depuis le 11/11).
+#   · À QUI parle chaque fin (Frédéric, 21/11) : les élèves d'eleveai.fr ne
+#     regardent que les PAYSAGES → leur fin vise « Entraîne-toi sur eleveai.fr ».
+#     Les shorts vivent surtout sur YouTube → leur fin vise la question en
+#     commentaire et l'abonnement. La phrase et l'écran restent ceux de la règle.
 #   · La voix est la phrase de fin de REGLES.md (tête du fichier) : PHRASE_PAYSAGE
 #     ou PHRASE_SHORT, sous la clé `…-abonne`.
 #
