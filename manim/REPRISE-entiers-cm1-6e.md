@@ -10,6 +10,40 @@ L'inventaire de la série (découpage, banques, métiers, centres, état de prod
 
 ---
 
+## ✅✅✅ ÉTAT FINAL, 22/11/2026 — LA SÉRIE EST COMPLÈTE
+
+**12 épisodes, 24 vidéos, du CM1 à la 6e.** Toutes rendues en HD, toutes sur R2, toutes branchées
+au coach et vérifiées à l'image en partant de l'accueil. ⛔ **Il n'y a plus rien à produire.**
+
+| Lot | Épisodes | Lignes `notion_ressources` |
+|---|---|---|
+| A — CM1 | `lire`, `comparer`, `decomposer`, `arrondir`, `defi` (mutualisés CM1+CM2 par `aussi`) et `multiple` (CM1 SEUL) | 4 × 5 + 2 = **22** |
+| A5′ — CM2 | `cm2-entier-multiple` (CM2 SEUL, ⛔ pas de `aussi`) | **2** |
+| B — 6e | `rang`, `comparer`, `encadrer`, `decomposer`, `defi` | 2 × 5 = **10** |
+
+Contrôle de fin de série : `verifier-fraicheur-mp4.py` donne **tous les paysages prouvés à jour**
+sur les trois points ; les « douteux » restants sont les 12 shorts Ti Margo, qui n'ont pas de
+`.py` — c'est la limite de l'instrument, pas un défaut (voir § infrastructure).
+
+### ⏭ Ce qui reste, et qui n'est PAS de la production
+- **La mise en ligne YouTube des 24 vidéos** — c'est Frédéric qui la fait. Chaque dossier
+  d'épisode porte sa `fiche-youtube.md` (titre, description, chapitres, tags) et ses miniatures.
+- La programmation du manifeste s'étale du **13/06 au 24/06/2027**, 2 vidéos par jour.
+
+### ⛔⛔ LE PIÈGE DE LA BRANCHE `poste2` — à lire avant toute fusion
+La branche `poste2` a été poussée le 22/11 (`94681e05c`). Mesuré ce jour-là :
+- ✅ ce qu'elle **ajoute** à `main`, ce sont **uniquement les 40 commits de cette série** — aucun
+  fichier du poste 1 (`git log --name-only origin/main..poste2` : rien hors `manim/`,
+  `prototypes/ti-margo/films`, `lib/videos`, `lib/matrice`) ;
+- ⛔⛔ **mais elle a 97 commits de RETARD sur `main`**, et son arbre ignore donc **247 fichiers du
+  poste 1** — tout `lib/problemes` (les énigmes) et les `manim/scripts/ce2/masse_*`.
+  `git diff --stat origin/main origin/poste2` affiche **30 906 suppressions**.
+  → **Fusionner `poste2` dans `main` en l'état effacerait le travail du poste 1.** Il faut
+  d'abord rapatrier `main` dans `poste2` (ou repartir d'une branche coupée sur `main` et n'y
+  porter que les 40 commits de la série). ⚠️ Et sa preview Vercel montre un site amputé d'autant.
+
+---
+
 ## Les trois outils de contrôle, et le moment où on les lance
 
 | Outil | Quand | Ce qu'il attrape |
