@@ -256,14 +256,14 @@ Donc, pour chaque épisode, **une passe dédiée sur les maths seules**, indépe
   `manim/voix/*.json`, alors que les WAV de B1, B3, B4 et B5 dataient de 10:33 et leurs marques de
   10:39. Pris pour argent comptant, ce décalage fait croire que quatre épisodes ont une voix plus
   récente que leurs marques. ⭐ Le contrôle qui tranche est le CONTENU, pas la date :
-  `git diff --stat -- manim/voix/<id>.json` (vide = inchangé) et `git log -1 -- …` (il doit pointer
+  `git diff HEAD --stat -- manim/voix/<id>.json` (vide = inchangé) et `git log -1 -- …` (il doit pointer
   le commit des WAV). Vérifié ainsi avant B4 : seul `6e-entier-comparer` a bougé. C'est le même
   principe que « une métadonnée n'est jamais la chose » de REGLES.md.
 - ⚠️ **Quand une voix est refaite, elle est souvent RÉGÉNÉRÉE EN ENTIER** : les 16 WAV de
   `6e-entier-comparer` l'ont été pour corriger un seul clip, et **toutes les durées ont changé**.
   Relire les durées sur les WAV avant de caler quoi que ce soit — jamais les recopier d'un message.
 
-36. ⛔⛔ **`git diff` SANS `HEAD` compare à l'INDEX, pas à HEAD** — et cette note disait le
+41. ⛔⛔ **`git diff` SANS `HEAD` compare à l'INDEX, pas à HEAD** — et cette note disait le
     contraire jusqu'au 21/11 au soir, ce qui a fait croire à un texte perdu qui était déjà commité.
     Avec la recette de commit par index temporaire, **l'index principal reste périmé en
     permanence** : `git diff -- <chemin>` affiche alors un diff fantôme de dizaines de lignes sur
