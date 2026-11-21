@@ -175,6 +175,23 @@ Donc, pour chaque épisode, **une passe dédiée sur les maths seules**, indépe
     l'image sur B1 et B3, déjà publiés : leurs deux plages sont la garde et les écrans à 0,65, et
     Ti Margo y est parfaitement dégagé — **rien de publié n'est en cause**.
 
+35. ⛔ **VU SEULEMENT À L'IMAGE (B2) — une figure posée sous la question tombe SUR l'explication.**
+    Le 7ᵉ argument de `question_gauche` (`haut`, −0,75 partout dans la série) est le HAUT de la
+    phrase de réponse, posée à GAUCHE sous la figure. Une rangée de nombres posée à y = −0,6 s'est
+    donc écrite par-dessus : on lisait « 3 045 3 405 3 450 » sur « Croissant va du plus petit ».
+    ⭐ **Toute la figure d'un écran de question doit finir au-dessus de ce `haut`.**
+36. ⚠️ **La page du coach charge ses ressources CÔTÉ CLIENT : relue trop tôt, elle ne montre AUCUN
+    badge « Vidéo ».** Après le clic depuis l'accueil, 2,5 s d'attente donnaient zéro lien
+    `/video/…` — de quoi croire que le branchement avait échoué, voire le relancer. À 7 s, les
+    onze liens étaient là. ⭐ Toujours relire la liste une seconde fois avant de conclure : sur
+    cette page, « rien » n'est pas une réponse, c'est un chargement en cours.
+37. ✅ **La preuve qu'un script ne craint pas une régénération de voix n'est PAS une date.** Pour
+    A5′ `entier_multiple_cm2.py`, la bonne preuve est : `grep -c "self\.au_t(" ` donne **0**, donc
+    il n'y a aucun instant relevé à la main qui puisse se périmer — et ça ne dépend d'aucun
+    horodatage. (Compté aussi : `entier_rang` 0, `entier_comparer` 0, `entier_encadrer` **1**,
+    `entier_decomposer` 0, `entier_defi` 0. ⚠️ `grep -c "au_t("` compte les COMMENTAIRES : chaque
+    script en a un qui dit qu'aucun `au_t()` n'est nécessaire.)
+
 ## Pièges d'infrastructure (toute la série)
 
 - ⛔⛔ **`verifier-fraicheur-mp4.py` ne voyait AUCUN script de cette série** (corrigé le 21/11).

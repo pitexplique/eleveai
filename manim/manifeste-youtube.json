@@ -105569,6 +105569,161 @@
         "nature-ecologie",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "6e-entier-comparer",
+      "pas_avant": "2027-06-21",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_comparer",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer.mp4",
+      "miniature": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer.png",
+      "titre": "2 305 ou 2 350 : lequel est le plus grand ? — Comparer des nombres entiers — épisode 2 · Maths 6e",
+      "accroche": "Noé est astronome. Il range les planètes de la plus proche à la plus lointaine, et une distance mal lue, c'est une planète à la mauvaise place : comparer deux nombres se fait dans un ordre précis, jamais au hasard.\n\nDans cette vidéo :\n• première règle : on compte les chiffres — 6 767 est plus grand que 795\n• même longueur ? on compare de gauche à droite, jusqu'au premier chiffre différent\n• ⛔ le piège : s'arrêter au dernier chiffre — 1 408 finit par 8, et 1 480 est pourtant plus grand\n• le rang qui décide n'est pas toujours le premier : entre 12 647 et 13 547, c'est le deuxième chiffre\n• croissant, c'est du plus petit au plus grand ; décroissant, c'est l'inverse\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : quatre scores — 6 022, 6 024, 6 023 et 6 032 — à ranger du plus petit au plus grand.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_comparer&display=simple\n\n🔢 Épisode 2 de la série Nombres entiers d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "2 305 ou 2 350 ?"
+        ],
+        [
+          "00:33",
+          "Question 1"
+        ],
+        [
+          "01:08",
+          "Le piège du dernier chiffre"
+        ],
+        [
+          "01:18",
+          "Question 2"
+        ],
+        [
+          "02:02",
+          "Question 3"
+        ],
+        [
+          "02:44",
+          "À toi de jouer"
+        ],
+        [
+          "02:59",
+          "Correction"
+        ],
+        [
+          "03:13",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "comparer des nombres",
+        "plus grand plus petit",
+        "ordre croissant",
+        "ordre décroissant",
+        "compter les chiffres",
+        "astronome",
+        "planètes",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "Quel nombre est le plus grand : 2 305 ou 2 350 ?",
+          "choix": [
+            "les deux sont égaux",
+            "2 305",
+            "2 350"
+          ],
+          "reponse": 2,
+          "explication": "Même début : 2 et 3. Puis 5 dizaines bat 0 dizaine. Donc 2 350."
+        },
+        {
+          "t": "01:18",
+          "question": "Quel est le plus petit nombre : 12 647, 13 547 ou 13 647 ?",
+          "choix": [
+            "13 547",
+            "12 647",
+            "13 647"
+          ],
+          "reponse": 1,
+          "explication": "Le deuxième chiffre décide : 2 contre 3. Donc 12 647 est le plus petit."
+        },
+        {
+          "t": "02:02",
+          "question": "Quel rangement est croissant ?",
+          "choix": [
+            "3 405 ; 3 045 ; 3 450",
+            "3 450 ; 3 405 ; 3 045",
+            "3 045 ; 3 405 ; 3 450"
+          ],
+          "reponse": 2,
+          "explication": "Croissant va du plus petit au plus grand : 3 045, puis 3 405, puis 3 450."
+        }
+      ],
+      "centres": [
+        "espace",
+        "sciences"
+      ]
+    },
+    {
+      "id": "6e-entier-comparer-short",
+      "pas_avant": "2027-06-21",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_comparer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-entier-comparer",
+      "fichier": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer-short.mp4",
+      "miniature": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer-short-miniature.png",
+      "titre": "1 408 ou 1 480 : lequel est le plus grand ? #maths #6e",
+      "accroche": "Mon copain compare 1 408 et 1 480 en regardant le dernier chiffre, 8 contre 0, et il annonce 1 408. On compare par la gauche : même début 1 et 4, puis 8 dizaines battent 0 dizaine. C'est 1 480.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : range 17 350, 17 340 et 16 340 du plus grand au plus petit. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #6e #collège",
+      "tags": [
+        "nombres entiers",
+        "comparer",
+        "dernier chiffre",
+        "de gauche à droite",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Lequel est le plus grand : 1 408 ou 1 480 ?",
+          "choix": [
+            "1 480",
+            "1 408",
+            "c'est pareil"
+          ],
+          "reponse": 0,
+          "explication": "Même début : 1 et 4. Puis 8 dizaines bat 0 dizaine. Donc 1 480."
+        }
+      ],
+      "centres": [
+        "espace",
+        "jeux-defis"
+      ]
     }
   ]
 }

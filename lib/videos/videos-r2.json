@@ -17954,5 +17954,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_defi&display=simple"
+ },
+ "6e-entier-comparer": {
+  "fichier": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer.mp4",
+  "poster": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer.png",
+  "vignette": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer.vignette.webp",
+  "titre": "2 305 ou 2 350 : lequel est le plus grand ? — Comparer des nombres entiers — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_comparer&display=simple"
+ },
+ "6e-entier-comparer-short": {
+  "fichier": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer-short.mp4",
+  "poster": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer-short-miniature.png",
+  "vignette": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer-short-miniature.vignette.webp",
+  "titre": "1 408 ou 1 480 : lequel est le plus grand ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_comparer&display=simple"
  }
 }

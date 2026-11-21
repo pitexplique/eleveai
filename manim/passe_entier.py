@@ -226,15 +226,46 @@ EP = [
       s_toi="dans 9 261, quel est le chiffre des unités de mille ?",
       s_tags=["nombres entiers", "rang d'un chiffre", "dizaines", "de droite à gauche"],
       s_centres=["transports", "jeux-defis"]),
- # ✅ B2 `entier_comparer` est FAISABLE (sa voix a été corrigée le 21/11, commit `f9c3a08bd`).
- #    Son épisode n'est pas encore écrit, d'où son absence ici ; la date **21/06/2027** lui reste
- #    réservée, ⛔ ne pas la prendre pour un autre épisode.
+ # ✅ B2 `entier_comparer` est PRODUIT (22/11). Sa voix avait été corrigée le 21/11 (`f9c3a08bd`)
+ #    et sa date 21/06/2027 lui était réservée : elle est prise ici.
  #    ⚠️ Ses 16 WAV ont été régénérés deux fois (13:56, puis 16:22 pour la correction des maths) :
  #    **relire les durées sur les WAV**, ne reprendre aucun chiffre d'une note.
  #    ⭐ L'erreur corrigée, pour mémoire : la voix disait « 6 032 a 3 centaines » (c'est 3 dizaines,
  #    et c'est bien le rang des dizaines qui décide entre 6 022, 6 023, 6 024 et 6 032). Elle était
  #    dans une phrase de CORRECTION, donc elle aurait été enseignée — d'où la passe maths
  #    obligatoire sur chaque voix (manim/REPRISE-entiers-cm1-6e.md).
+ dict(classe="6e", n=2, slug="comparer", notion="entier_nombre", micro="entier_comparer",
+      nom="Comparer des nombres entiers", date="2027-06-21", ceinture="verte",
+      titre="2 305 ou 2 350 : lequel est le plus grand ?",
+      intro="Noé est astronome. Il range les planètes de la plus proche à la plus lointaine, et "
+            "une distance mal lue, c'est une planète à la mauvaise place : comparer deux nombres "
+            "se fait dans un ordre précis, jamais au hasard.",
+      points=["première règle : on compte les chiffres — 6 767 est plus grand que 795",
+              "même longueur ? on compare de gauche à droite, jusqu'au premier chiffre différent",
+              "⛔ le piège : s'arrêter au dernier chiffre — 1 408 finit par 8, et 1 480 est "
+              "pourtant plus grand",
+              "le rang qui décide n'est pas toujours le premier : entre 12 647 et 13 547, c'est "
+              "le deuxième chiffre",
+              "croissant, c'est du plus petit au plus grand ; décroissant, c'est l'inverse"],
+      defi="quatre scores — 6 022, 6 024, 6 023 et 6 032 — à ranger du plus petit au plus grand.",
+      chap={"00-garde": "2 305 ou 2 350 ?", "01-situation": "Noé, astronome",
+            "02-chiffres": "On compte d'abord les chiffres",
+            "03-gauche-droite": "De gauche à droite", "04-question": "Question 1",
+            "05-piege": "Le piège du dernier chiffre", "06-question": "Question 2",
+            "07-ordre": "Croissant et décroissant", "08-question": "Question 3",
+            "09-defi": "À toi de jouer", "09b-correction": "Correction",
+            "10-finale": "Ce que tu as appris"},
+      tags=["nombres entiers", "comparer des nombres", "plus grand plus petit",
+            "ordre croissant", "ordre décroissant", "compter les chiffres", "astronome",
+            "planètes"],
+      centres=["espace", "sciences"],
+      s_titre="1 408 ou 1 480 : lequel est le plus grand ?", s_ceinture="blanche",
+      s_accroche="Mon copain compare 1 408 et 1 480 en regardant le dernier chiffre, 8 contre 0, "
+                 "et il annonce 1 408. On compare par la gauche : même début 1 et 4, puis "
+                 "8 dizaines battent 0 dizaine. C'est 1 480.",
+      s_toi="range 17 350, 17 340 et 16 340 du plus grand au plus petit.",
+      s_tags=["nombres entiers", "comparer", "dernier chiffre", "de gauche à droite"],
+      s_centres=["espace", "jeux-defis"]),
  dict(classe="6e", n=3, slug="encadrer", notion="entier_nombre", micro="entier_encadrer",
       nom="Encadrer un nombre entier", date="2027-06-22", ceinture="verte",
       titre="Entre quelles centaines se trouve 582 ?",
