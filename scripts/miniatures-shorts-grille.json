@@ -916,5 +916,11 @@
     "calcul": [["entre 2", "blanc", 190], ["et 3 kg ?", "rouge", 190]],
     "margo": [320, 720, 640],
     "ceinture": "blanche"
+  },
+  "cm1-masse-convertir-short": {
+    "question": ["3 kg de pommes :", "combien de sachets ?"],
+    "calcul": [["3 kg", "blanc", 190], ["÷ 500 g ?", "rouge", 190]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
   }
 }

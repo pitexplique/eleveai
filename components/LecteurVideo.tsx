@@ -180,6 +180,10 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   // 167,60 s) ; short = « Mets » (57,74 + 2,351 = 60,09 s) + 0,03 s, mp4 de 64,30 s.
   "cm1-masse-mesurer": 8.2,
   "cm1-masse-mesurer-short": 4.18,
+  // Masses CM1 03 (21/11) : paysage = milieu du silence après « point f r. » (168,31 → 169,26 s, mp4 de
+  // 177,00 s) ; short = « Mets » (56,08 + 2,351 = 58,43 s) + 0,03 s, mp4 de 62,61 s.
+  "cm1-masse-convertir": 8.2,
+  "cm1-masse-convertir-short": 4.15,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {

@@ -58,6 +58,8 @@ EP = [
      "2 050 g < 2 500 g", True, "jaune"),
     ("cm1", "mesurer", "02-mesurer", ["LIRE", "UNE BALANCE"], "3 petits traits après 400",
      "= 460 g", True, "jaune"),
+    ("cm1", "convertir", "03-convertir", ["2 kg", "= ? g"], "On multiplie par 1 000",
+     "2 kg = 2 000 g", True, "verte"),
 ]
 
 

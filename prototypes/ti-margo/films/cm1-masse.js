@@ -311,3 +311,39 @@ function trancheM(c,x,yBas,s=1,z=1,ang=0){ if(z<=0) return; s*=Math.min(1.15,z);
   c.fillStyle='#212529'; for(const [u,v] of [[-.45,.35],[-.15,.55],[.2,.5],[.48,.3],[0,.25],[-.3,.15],[.3,.12]]){
     c.beginPath(); c.ellipse(u*r,-v*r,5*s,8*s,u,0,7); c.fill(); }
   c.restore(); }
+
+/* ---- CM1 03 (convertir) : les pommes, la cagette, les sachets de 500 g, le bol de compote ---- */
+/* Une pomme : (x, y) = le centre, r = le rayon ; queue et feuille */
+function pommeM(c,x,y,r,z=1,coul='#e03131'){ if(z<=0) return; r*=Math.min(1.15,z);
+  c.lineJoin='round'; c.fillStyle=coul; c.strokeStyle='#5c1a1a'; c.lineWidth=3;
+  c.beginPath(); c.ellipse(x,y,r,r*.92,0,0,7); c.fill(); c.stroke();
+  c.fillStyle='rgba(255,255,255,.45)'; c.beginPath(); c.ellipse(x-r*.4,y-r*.35,r*.2,r*.13,-.6,0,7); c.fill();
+  c.strokeStyle='#5c3d00'; c.lineWidth=Math.max(3,r*.12); c.beginPath(); c.moveTo(x,y-r*.8); c.lineTo(x+r*.12,y-r*1.25); c.stroke();
+  c.fillStyle='#2f9e44'; c.beginPath(); c.ellipse(x+r*.38,y-r*1.1,r*.3,r*.13,-.5,0,7); c.fill(); }
+/* La cagette pleine de pommes en pyramide : (x, yBas) = le milieu du bas, s = l'échelle (1 ≈ 360 px de large).
+   Renvoie le haut du tas. */
+function tasPommesM(c,x,yBas,s=1,z=1){ if(z<=0) return yBas; s*=Math.min(1.15,z); const w=360*s, h=100*s, r=34*s;
+  const cols=['#e03131','#f03e3e','#c92a2a','#e8590c','#e03131'];
+  for(let i=0;i<3;i++){ const n=5-i, y=yBas-h-r*.55-i*r*1.5;
+    for(let j=0;j<n;j++) pommeM(c,x+(j-(n-1)/2)*r*2.0,y,r,1,cols[(i+j)%5]); }
+  c.fillStyle='#d4a373'; c.strokeStyle='#7f5539'; c.lineWidth=5; c.beginPath(); c.roundRect(x-w/2,yBas-h,w,h,8*s); c.fill(); c.stroke();
+  c.lineWidth=3; for(const u of [.36,.68]){ c.beginPath(); c.moveTo(x-w/2,yBas-h*u); c.lineTo(x+w/2,yBas-h*u); c.stroke(); }
+  return yBas-h-r*.55-2*r*1.5-r; }
+/* Un sachet en papier kraft : (x, yBas) = le milieu du bas, s = l'échelle (1 ≈ 150 px de large) ;
+   plein = des pommes dépassent en haut ; texte = l'étiquette (« 500 g ») */
+function sachetM(c,x,yBas,s=1,z=1,plein=true,texte='500 g'){ if(z<=0) return; s*=Math.min(1.15,z); const w=150*s, h=160*s;
+  if(plein){ const r=30*s; pommeM(c,x-r*1.15,yBas-h+r*.15,r,1,'#e03131'); pommeM(c,x+r*1.15,yBas-h+r*.1,r,1,'#c92a2a');
+    pommeM(c,x,yBas-h-r*.35,r,1,'#f03e3e'); }
+  c.lineJoin='round'; c.fillStyle='#d4a373'; c.strokeStyle='#7f5539'; c.lineWidth=4;
+  c.beginPath(); c.moveTo(x-w*.5,yBas-h); c.lineTo(x+w*.5,yBas-h); c.lineTo(x+w*.44,yBas); c.lineTo(x-w*.44,yBas); c.closePath(); c.fill(); c.stroke();
+  c.beginPath(); c.moveTo(x-w*.5,yBas-h+16*s); c.lineTo(x+w*.5,yBas-h+16*s); c.stroke();
+  if(texte){ c.fillStyle='#ffffff'; c.beginPath(); c.roundRect(x-w*.36,yBas-h*.58,w*.72,h*.34,8*s); c.fill();
+    c.fillStyle='#212529'; c.font=`800 ${Math.round(34*s)}px "Segoe UI"`; c.textAlign='center'; c.textBaseline='middle';
+    c.fillText(texte,x,yBas-h*.41); } }
+/* Un bol de compote : (x, yBas) = le milieu du bas, s = l'échelle (1 ≈ 300 px de large), une cuillère */
+function compoteM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const w=300*s, h=130*s, yH=yBas-h;
+  c.strokeStyle='#adb5bd'; c.lineWidth=12*s; c.lineCap='round'; c.beginPath(); c.moveTo(x+w*.12,yH-6*s); c.lineTo(x+w*.42,yH-120*s); c.stroke();
+  c.fillStyle='#ffd8a8'; c.strokeStyle='#e8590c'; c.lineWidth=3; c.beginPath(); c.ellipse(x,yH,w*.46,22*s,0,0,7); c.fill(); c.stroke();
+  c.fillStyle='#4dabf7'; c.strokeStyle='#1864ab'; c.lineWidth=5; c.beginPath(); c.moveTo(x-w*.5,yH); c.quadraticCurveTo(x-w*.48,yBas,x,yBas);
+  c.quadraticCurveTo(x+w*.48,yBas,x+w*.5,yH); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle='#ffffff'; for(const u of [-.25,0,.25]){ c.beginPath(); c.arc(x+u*w,yH+h*.45,9*s,0,7); c.fill(); } }

@@ -104840,6 +104840,156 @@
         "cuisine",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm1-masse-convertir",
+      "pas_avant": "2027-06-19",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_convertir",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/masse/03-convertir/eleveai-maths-cm1-masse-convertir.mp4",
+      "miniature": "cm1/maths/masse/03-convertir/eleveai-maths-cm1-masse-convertir.png",
+      "titre": "2 kg, c'est combien de grammes ? — Convertir des masses — épisode 3 · Maths CM1",
+      "accroche": "Margaux est diététicienne : elle prépare les menus d'une cantine, avec les bonnes quantités. Des kilogrammes aux grammes, on multiplie par 1 000 ; des grammes aux kilogrammes, on divise par 1 000. Pareil entre tonnes et kilogrammes.\n\nDans cette vidéo :\n• 1 kg = 1 000 g : 2 kg de pâtes = 2 × 1 000 = 2 000 g\n• dans l'autre sens : 5 000 g de riz = 5 000 ÷ 1 000 = 5 kg\n• 3 kg = 3 × 1 000 = 3 000 g\n• la tonne : 1 t = 1 000 kg, 2 t de légumes = 2 000 kg\n• le tableau t, kg, hg, dag, g : 1 kg = 1 000 g\n• 4 000 g, c'est 4 kg, pas 40 kg !\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Margaux prévoit 120 g de poisson par élève. Il y a 50 élèves. Combien de kilogrammes commander ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_convertir&display=simple\n\n⚖️ Épisode 3 de la série Masses d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Convertir des masses"
+        ],
+        [
+          "00:11",
+          "Margaux, diététicienne"
+        ],
+        [
+          "00:22",
+          "Des kg aux g : × 1 000"
+        ],
+        [
+          "00:43",
+          "Question 1"
+        ],
+        [
+          "01:07",
+          "La tonne"
+        ],
+        [
+          "01:20",
+          "Le tableau des unités"
+        ],
+        [
+          "01:33",
+          "Question 2"
+        ],
+        [
+          "02:07",
+          "À toi de jouer"
+        ],
+        [
+          "02:32",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "convertir des masses",
+        "conversion",
+        "gramme",
+        "kilogramme",
+        "tonne",
+        "tableau de conversion",
+        "multiplier par 1000",
+        "diviser par 1000",
+        "diététicienne",
+        "cantine",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:43",
+          "question": "Combien de grammes dans 3 kilogrammes ?",
+          "choix": [
+            "300 grammes",
+            "3 000 grammes",
+            "30 grammes"
+          ],
+          "reponse": 1,
+          "explication": "3 × 1 000 : 3 000 grammes."
+        },
+        {
+          "t": "01:33",
+          "question": "Un élève écrit : 4 000 grammes, c'est 40 kilogrammes. A-t-il raison ?",
+          "choix": [
+            "non, c'est 400 kilogrammes",
+            "oui",
+            "non, c'est 4 kilogrammes"
+          ],
+          "reponse": 2,
+          "explication": "Des grammes aux kilogrammes, on divise par 1 000. 4 000 ÷ 1 000 : 4 kilogrammes."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "cm1-masse-convertir-short",
+      "pas_avant": "2027-06-19",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_convertir",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-masse-convertir",
+      "fichier": "cm1/maths/masse/03-convertir/eleveai-maths-cm1-masse-convertir-short.mp4",
+      "miniature": "cm1/maths/masse/03-convertir/eleveai-maths-cm1-masse-convertir-short-miniature.png",
+      "titre": "3 kg de pommes : combien de sachets de 500 g ? #maths #cm1",
+      "accroche": "Mon copain a 3 kilogrammes de pommes. Il veut des sachets de 500 grammes. Il calcule : 3 divisé par 500… zéro sachet !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien de grammes dans 7 kilogrammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_convertir&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cm1 #primaire",
+      "tags": [
+        "masse",
+        "convertir",
+        "kilogramme",
+        "gramme",
+        "pommes",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Combien de sachets de 500 grammes ?",
+          "choix": [
+            "15",
+            "6",
+            "0"
+          ],
+          "reponse": 1,
+          "explication": "3 kilogrammes, c'est 3 000 grammes. 3 000, c'est 6 × 500 : 6 sachets."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
     }
   ]
 }
