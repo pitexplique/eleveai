@@ -17792,5 +17792,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_choisir_unite&display=simple"
+ },
+ "ce2-masse-estimer": {
+  "fichier": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer.mp4",
+  "poster": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer.png",
+  "vignette": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer.vignette.webp",
+  "titre": "Un bébé pèse-t-il 3 g, 3 kg ou 30 kg ? — Estimer une masse — épisode 5 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_estimer&display=simple"
+ },
+ "ce2-masse-estimer-short": {
+  "fichier": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer-short.mp4",
+  "poster": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer-short-miniature.png",
+  "vignette": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer-short-miniature.vignette.webp",
+  "titre": "Mon chat pèse 400 kg ?! #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_estimer&display=simple"
  }
 }

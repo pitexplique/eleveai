@@ -48,6 +48,8 @@ EP = [
      "1 000 + 200 = 1 200 g", True, "jaune"),
     ("ce2", "choisir-unite", "04-choisir-unite", ["g, kg", "OU t ?"], "Un camion : 12 t",
      "un letchi : 20 g", True, "jaune"),
+    ("ce2", "estimer", "05-estimer", ["3 g, 3 kg", "OU 30 kg ?"], "Un bébé ≈ 3 briques",
+     "de lait : 3 kg", True, "jaune"),
 ]
 
 

@@ -162,6 +162,10 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   // après « point f r. » (145,63 → 146,58 s, mp4 de 154,32 s) ; short = « Mets » (52,29 s) + 0,03 s.
   "ce2-masse-choisir-unite": 8.2,
   "ce2-masse-choisir-unite-short": 4.22,
+  // Masses CE2 05 (21/11) : paysage = milieu du silence après « point f r. » (148,99 → 149,91 s, mp4 de
+  // 157,65 s) ; short = « Mets » (51,94 s) + 0,03 s, mp4 de 56,14 s.
+  "ce2-masse-estimer": 8.2,
+  "ce2-masse-estimer-short": 4.17,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {

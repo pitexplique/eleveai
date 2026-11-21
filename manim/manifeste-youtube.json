@@ -104103,6 +104103,155 @@
         "cuisine",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "ce2-masse-estimer",
+      "pas_avant": "2027-06-14",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_estimer",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer.mp4",
+      "miniature": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer.png",
+      "titre": "Un bébé pèse-t-il 3 g, 3 kg ou 30 kg ? — Estimer une masse — épisode 5 · Maths CE2",
+      "accroche": "Sarah est sage-femme : elle aide les bébés à naître, puis elle les pèse sur une petite balance. Pour estimer une masse, on la compare à un repère.\n\nDans cette vidéo :\n• trois repères : 1 g = un trombone, 1 kg = une brique de lait, 1 t = une petite voiture\n• un bébé qui vient de naître ≈ trois briques de lait : environ 3 kg\n• un élève de CE2 pèse environ 25 kg ; une mangue, plus légère qu'une brique : environ 400 g\n• 5 mangues ≈ 2 kg = 2 000 g, donc une mangue ≈ 400 g\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une pomme, un vélo, une voiture : 150 g, 12 kg ou 1 t ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_estimer&display=simple\n\n⚖️ Épisode 5 de la série Masses d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "3 g, 3 kg ou 30 kg ?"
+        ],
+        [
+          "00:09",
+          "Sarah, sage-femme"
+        ],
+        [
+          "00:19",
+          "Trois repères"
+        ],
+        [
+          "00:30",
+          "Le bébé : 3 kg"
+        ],
+        [
+          "00:41",
+          "Question 1"
+        ],
+        [
+          "01:17",
+          "Question 2"
+        ],
+        [
+          "01:50",
+          "À toi de jouer"
+        ],
+        [
+          "02:06",
+          "Correction"
+        ],
+        [
+          "02:16",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "estimer une masse",
+        "ordre de grandeur",
+        "gramme",
+        "kilogramme",
+        "tonne",
+        "repère",
+        "bébé",
+        "sage-femme",
+        "mangue",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:41",
+          "question": "Environ combien pèse un élève de CE2 ?",
+          "choix": [
+            "25 grammes",
+            "250 kilogrammes",
+            "25 kilogrammes"
+          ],
+          "reponse": 2,
+          "explication": "Un élève de CE2 pèse environ 25 kilogrammes. 250 kilogrammes, c'est un piano !"
+        },
+        {
+          "t": "01:17",
+          "question": "Au marché, 5 mangues pèsent environ 2 kilogrammes. Combien pèse une mangue ?",
+          "choix": [
+            "environ 2 kilogrammes",
+            "environ 400 grammes",
+            "environ 40 grammes"
+          ],
+          "reponse": 1,
+          "explication": "2 kilogrammes, c'est 2 000 grammes. Partagés en 5 : environ 400 grammes par mangue."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "ce2-masse-estimer-short",
+      "pas_avant": "2027-06-14",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_estimer",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-masse-estimer",
+      "fichier": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer-short.mp4",
+      "miniature": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer-short-miniature.png",
+      "titre": "Mon chat pèse 400 kg ?! #maths #ce2",
+      "accroche": "Ma copine dit que mon chat pèse 400 kilogrammes ! 400 kilogrammes ? C'est la masse d'un ours !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : combien pèse un chien, à ton avis, en kilogrammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce2 #primaire",
+      "tags": [
+        "masse",
+        "estimer",
+        "kilogramme",
+        "chat",
+        "ours",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:12",
+          "question": "Un chat pèse environ…",
+          "choix": [
+            "400 kilogrammes",
+            "4 grammes",
+            "4 kilogrammes"
+          ],
+          "reponse": 2,
+          "explication": "Un chat pèse environ 4 kilogrammes : quatre briques de lait."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
     }
   ]
 }

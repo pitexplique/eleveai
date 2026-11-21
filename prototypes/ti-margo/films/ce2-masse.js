@@ -144,3 +144,63 @@ function melonM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const r
 function gateauM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const w=170*s, h=80*s;
   c.fillStyle='#c48a3c'; c.strokeStyle='#5c3d00'; c.lineWidth=4; c.beginPath(); c.roundRect(x-w/2,yBas-h,w,h,14*s); c.fill(); c.stroke();
   c.fillStyle='#ffe066'; c.strokeStyle='#e67700'; c.lineWidth=2; for(const u of [-.32,0,.32]){ c.beginPath(); c.ellipse(x+u*w,yBas-h-2*s,18*s,9*s,0,0,7); c.fill(); c.stroke(); } }
+
+/* ---- Épisode 05 (estimer) : le chat de « 400 kg », l'ours, le canapé, le chien ---- */
+/* Un chat assis, de face (dos = true : de dos, il boude) ; (x, yBas) = le milieu, au sol ; s = 1 ≈ 170 px de haut */
+function chatM(c,x,yBas,s=1,z=1,coul='#adb5bd',dos=false){ if(z<=0) return; s*=Math.min(1.15,z);
+  const by=yBas-48*s, hy=yBas-108*s, bord='#343a40';
+  c.lineJoin='round'; c.strokeStyle=coul; c.lineWidth=12*s; c.lineCap='round'; c.beginPath(); c.moveTo(x+(dos?-46:46)*s,yBas-14*s);
+  c.quadraticCurveTo(x+(dos?-96:96)*s,yBas-20*s,x+(dos?-84:84)*s,yBas-78*s); c.stroke();
+  c.fillStyle=coul; c.strokeStyle=bord; c.lineWidth=3.5;
+  c.beginPath(); c.ellipse(x,by,50*s,50*s,0,0,7); c.fill(); c.stroke();
+  if(!dos) for(const u of [-1,1]){ c.beginPath(); c.ellipse(x+u*20*s,yBas-6*s,15*s,9*s,0,0,7); c.fill(); c.stroke(); }
+  for(const u of [-1,1]){ c.beginPath(); c.moveTo(x+u*12*s,hy-26*s); c.lineTo(x+u*30*s,hy-54*s); c.lineTo(x+u*34*s,hy-12*s); c.closePath(); c.fill(); c.stroke(); }
+  c.beginPath(); c.arc(x,hy,34*s,0,7); c.fill(); c.stroke();
+  if(dos){ c.strokeStyle='rgba(60,20,0,.35)'; c.lineWidth=5*s; c.beginPath(); c.moveTo(x,hy+30*s); c.lineTo(x,by+20*s); c.stroke(); return; }
+  c.fillStyle='#94d82d'; for(const u of [-1,1]){ c.beginPath(); c.ellipse(x+u*13*s,hy-4*s,7*s,8*s,0,0,7); c.fill(); }
+  c.fillStyle='#212529'; for(const u of [-1,1]){ c.beginPath(); c.ellipse(x+u*13*s,hy-4*s,2.5*s,6*s,0,0,7); c.fill(); }
+  c.fillStyle='#f783ac'; c.beginPath(); c.moveTo(x-6*s,hy+8*s); c.lineTo(x+6*s,hy+8*s); c.lineTo(x,hy+15*s); c.fill();
+  c.strokeStyle='#f8f9fa'; c.lineWidth=2; for(const u of [-1,1]) for(const v of [-1,1]){ c.beginPath(); c.moveTo(x+u*12*s,hy+12*s); c.lineTo(x+u*40*s,hy+(12+v*7)*s); c.stroke(); } }
+/* Un ours brun à quatre pattes, de profil, tête à droite ; (x, yBas) = le milieu, au sol ; s = 1 ≈ 380 × 230 px */
+function oursM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const B='#8b5a2b', D='#4a2c0f';
+  c.save(); c.translate(x,yBas); c.lineJoin='round'; c.fillStyle=B; c.strokeStyle=D; c.lineWidth=4;
+  for(const u of [-.62,-.3,.3,.6]){ c.beginPath(); c.roundRect(u*190*s-24*s,-95*s,48*s,95*s,14*s); c.fill(); c.stroke(); }
+  c.beginPath(); c.ellipse(-10*s,-130*s,170*s,82*s,0,0,7); c.fill(); c.stroke();
+  c.beginPath(); c.ellipse(-30*s,-200*s,70*s,22*s,0,0,7); c.fill();  /* la bosse du dos */
+  for(const [ex,ey] of [[150,-222],[196,-214]]){ c.beginPath(); c.arc(ex*s,ey*s,20*s,0,7); c.fill(); c.stroke(); }
+  c.beginPath(); c.arc(170*s,-170*s,58*s,0,7); c.fill(); c.stroke();
+  c.fillStyle='#c08552'; c.beginPath(); c.ellipse(220*s,-155*s,34*s,25*s,0,0,7); c.fill(); c.stroke();
+  c.fillStyle='#212529'; c.beginPath(); c.ellipse(248*s,-162*s,11*s,8*s,0,0,7); c.fill();
+  c.beginPath(); c.arc(182*s,-188*s,7*s,0,7); c.fill();
+  c.strokeStyle=D; c.lineWidth=3; for(const u of [-.62,-.3,.3,.6]) for(const v of [-10,0,10]){ c.beginPath(); c.moveTo(u*190*s+v*s,-4*s); c.lineTo(u*190*s+v*s,-14*s); c.stroke(); }
+  c.restore(); }
+/* Un canapé rouge ; (x, yBas) = le milieu, au sol ; s = 1 ≈ 420 px de large. Renvoie le dessus du coussin. */
+function canapeM(c,x,yBas,s=1,z=1){ const k=Math.min(1.15,Math.max(z,0))*s, w=420*k, D='#7b1e3a';
+  if(z<=0) return yBas-110*k; c.lineJoin='round'; c.fillStyle='#c2255c'; c.strokeStyle=D; c.lineWidth=4;
+  c.beginPath(); c.roundRect(x-w/2+30*k,yBas-230*k,w-60*k,130*k,22*k); c.fill(); c.stroke();          /* le dossier */
+  c.fillStyle='#e64980'; c.beginPath(); c.roundRect(x-w/2+30*k,yBas-120*k,w-60*k,70*k,14*k); c.fill(); c.stroke(); /* le coussin */
+  c.fillStyle='#c2255c'; for(const u of [-1,1]){ c.beginPath(); c.roundRect(x+u*(w/2-30*k)-30*k,yBas-160*k,60*k,130*k,22*k); c.fill(); c.stroke(); }
+  c.beginPath(); c.roundRect(x-w/2+20*k,yBas-55*k,w-40*k,40*k,10*k); c.fill(); c.stroke();
+  c.fillStyle='#5c3d00'; for(const u of [-1,1]){ c.fillRect(x+u*(w/2-50*k)-8*k,yBas-16*k,16*k,16*k); }
+  return yBas-120*k; }
+/* Un chien assis, de profil, tête à droite ; (x, yBas) = le milieu, au sol ; s = 1 ≈ 230 px de haut */
+function chienM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const B='#e8a660', D='#7c4a12';
+  c.save(); c.translate(x,yBas); c.lineJoin='round'; c.lineCap='round';
+  c.strokeStyle=B; c.lineWidth=16*s; c.beginPath(); c.moveTo(-70*s,-40*s); c.quadraticCurveTo(-120*s,-60*s,-110*s,-120*s); c.stroke();
+  c.fillStyle=B; c.strokeStyle=D; c.lineWidth=4;
+  c.beginPath(); c.ellipse(-20*s,-70*s,75*s,62*s,-.5,0,7); c.fill(); c.stroke();
+  for(const u of [20,55]){ c.beginPath(); c.roundRect(u*s-14*s,-120*s,28*s,120*s,10*s); c.fill(); c.stroke(); }
+  c.beginPath(); c.ellipse(-50*s,-14*s,45*s,16*s,0,0,7); c.fill(); c.stroke();
+  c.beginPath(); c.arc(60*s,-170*s,50*s,0,7); c.fill(); c.stroke();
+  c.beginPath(); c.ellipse(108*s,-152*s,34*s,24*s,0,0,7); c.fill(); c.stroke();
+  c.fillStyle='#212529'; c.beginPath(); c.arc(140*s,-160*s,9*s,0,7); c.fill(); c.beginPath(); c.arc(72*s,-186*s,7*s,0,7); c.fill();
+  c.fillStyle='#9c5a1a'; c.beginPath(); c.ellipse(28*s,-168*s,20*s,46*s,.35,0,7); c.fill(); c.stroke();
+  c.fillStyle='#e03131'; c.beginPath(); c.roundRect(20*s,-128*s,70*s,12*s,5*s); c.fill();
+  c.restore(); }
+/* Une brique de lait de 1 kg ; (x, yBas) = le milieu du bas */
+function briqueM(c,x,yBas,s=1,z=1){ if(z<=0) return; const k=Math.min(1.15,z)*s, w=110*k, h=170*k, t=42*k;
+  c.lineJoin='round'; c.fillStyle='#f8f9fa'; c.strokeStyle='#868e96'; c.lineWidth=4;
+  c.beginPath(); c.rect(x-w/2,yBas-h,w,h); c.fill(); c.stroke();
+  c.fillStyle='#dee2e6'; c.beginPath(); c.moveTo(x-w/2,yBas-h); c.lineTo(x,yBas-h-t); c.lineTo(x+w/2,yBas-h); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle='#1c7ed6'; c.fillRect(x-w/2+2,yBas-h*.62,w-4,h*.3);
+  c.fillStyle='#fff'; c.font=`800 ${Math.round(34*k)}px "Segoe UI"`; c.textAlign='center'; c.textBaseline='middle'; c.fillText('LAIT',x,yBas-h*.47); }

@@ -887,5 +887,10 @@
     "question": ["Mon lit : 2 km", "ou 2 m ?"],
     "calcul": [["mon lit", "blanc", 210], ["2 km ?", "rouge", 210]],
     "ceinture": "blanche"
+  },
+  "ce2-masse-estimer-short": {
+    "question": ["Mon chat pèse", "400 kg ?"],
+    "calcul": [["mon chat", "blanc", 210], ["400 kg ?", "rouge", 210]],
+    "ceinture": "jaune"
   }
 }
