@@ -226,7 +226,7 @@ export const SEANCES: Seance[] = [
       entree: [
         { texte: "Projeter une énigme sur les longueurs", href: "/enigmes-maths/6e/aire_longueur" },
         { texte: "Projeter la vidéo, puis en discuter" },
-        { texte: "Projeter les exercices interactifs" },
+        { texte: "Projeter les exercices interactifs, avec correction active" },
       ],
       impose: ["Colorier la carte mentale des longueurs et l'expliquer ensemble."],
       carte: [
