@@ -240,7 +240,7 @@ export const SEANCES: Seance[] = [
         "Les exercices interactifs",
         "Le cours écrit dans le cahier",
         "Le découpage (ULIS, avec l'AESH)",
-        "La vidéo, à revoir",
+        "Un article à écrire, pour participer au Journal d'EleveAI",
       ],
       dessert: "Va trouver des maths dans ce que tu aimes.",
       signature: "Le chef cuisinier, Frédéric Lacoste",
