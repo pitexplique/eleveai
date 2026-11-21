@@ -181,6 +181,9 @@ import e3eAireSolides from "./3e/aire_solides";
 import e3eStatStatistique from "./3e/stat_statistique";
 import e3eStatClasses from "./3e/stat_classes";
 import e3eProbaExperience from "./3e/proba_experience";
+import e3eAnglesCercle from "./3e/angles_cercle";
+import e3eRelationsMetriques from "./3e/relations_metriques";
+import e3eAlgoProgrammation from "./3e/algo_programmation";
 
 const TOUTES: ProblemesNotion[] = [
   // CM1
@@ -363,6 +366,9 @@ const TOUTES: ProblemesNotion[] = [
   e3eStatStatistique,
   e3eStatClasses,
   e3eProbaExperience,
+  e3eAnglesCercle,
+  e3eRelationsMetriques,
+  e3eAlgoProgrammation,
 ];
 
 const PAR_CLE = new Map(TOUTES.map((n) => [`${n.classe}/${n.notionId}`, n]));
