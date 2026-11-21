@@ -401,6 +401,10 @@ import eStmgFctRepresentation from "./stmg/fct_representation";
 import eStmgFctTauxVariation from "./stmg/fct_taux_variation";
 import eStmgFctMonotonie from "./stmg/fct_monotonie";
 import eStmgFctDegre2Courbe from "./stmg/fct_degre2_courbe";
+import eStmgFctDegre2Symetrie from "./stmg/fct_degre2_symetrie";
+import eStmgFctDegre2Factorisee from "./stmg/fct_degre2_factorisee";
+import eStmgFctDegre2Factoriser from "./stmg/fct_degre2_factoriser";
+import eStmgFctDegre3 from "./stmg/fct_degre3";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -818,6 +822,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgFctTauxVariation,
   eStmgFctMonotonie,
   eStmgFctDegre2Courbe,
+  eStmgFctDegre2Symetrie,
+  eStmgFctDegre2Factorisee,
+  eStmgFctDegre2Factoriser,
+  eStmgFctDegre3,
   // fin STMG
 ];
 
