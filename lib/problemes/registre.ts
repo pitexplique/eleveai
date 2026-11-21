@@ -393,6 +393,10 @@ import eStmgSuiteTermes from "./stmg/suite_termes";
 import eStmgSuiteArithmetique from "./stmg/suite_arithmetique";
 import eStmgSuiteGeometrique from "./stmg/suite_geometrique";
 import eStmgSuiteGeoEvolution from "./stmg/suite_geo_evolution";
+import eStmgSuiteRepresentation from "./stmg/suite_representation";
+import eStmgSuiteModeliser from "./stmg/suite_modeliser";
+import eStmgSuiteSeuil from "./stmg/suite_seuil";
+import eStmgSuiteTermeGeneral from "./stmg/suite_terme_general";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -802,6 +806,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgSuiteArithmetique,
   eStmgSuiteGeometrique,
   eStmgSuiteGeoEvolution,
+  eStmgSuiteRepresentation,
+  eStmgSuiteModeliser,
+  eStmgSuiteSeuil,
+  eStmgSuiteTermeGeneral,
   // fin STMG
 ];
 
