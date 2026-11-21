@@ -178,8 +178,6 @@ import eCe2Solides from "./ce2/solides";
 import eCe2Symetrie from "./ce2/symetrie";
 import eCe2Donnees from "./ce2/donnees";
 import eCe2Algorithmique from "./ce2/algorithmique";
-import eCe2Donnees from "./ce2/donnees";
-import eCe2Algorithmique from "./ce2/algorithmique";
 import eCe1NombreEntier from "./ce1/nombre_entier";
 import eCe1SuiteNombre from "./ce1/suite_nombre";
 import eCe1AdditionSoustraction from "./ce1/addition_soustraction";
@@ -239,8 +237,6 @@ const TOUTES: ProblemesNotion[] = [
   eCe2FiguresPlanes,
   eCe2Solides,
   eCe2Symetrie,
-  eCe2Donnees,
-  eCe2Algorithmique,
   eCe2Donnees,
   eCe2Algorithmique,
   // fin CE2
