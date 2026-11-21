@@ -279,6 +279,9 @@ import e2deValeurAbsolueEquations from "./seconde/valeur_absolue_equations";
 import e2deHomographiquePartieEntiere from "./seconde/homographique_partie_entiere";
 import e2deFonctionsParIntervalles from "./seconde/fonctions_par_intervalles";
 import e2deDroitesPerpendiculaires from "./seconde/droites_perpendiculaires";
+import e2deProjectionDroite from "./seconde/projection_droite";
+import e2deEspacePosition2de from "./seconde/espace_position_2de";
+import e2deComposeesTransformations from "./seconde/composees_transformations";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -566,6 +569,9 @@ const TOUTES: ProblemesNotion[] = [
   e2deHomographiquePartieEntiere,
   e2deFonctionsParIntervalles,
   e2deDroitesPerpendiculaires,
+  e2deProjectionDroite,
+  e2deEspacePosition2de,
+  e2deComposeesTransformations,
   // fin Seconde
 ];
 
