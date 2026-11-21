@@ -433,6 +433,10 @@ import eStmgVaEchantillonnage from "./stmg/va_echantillonnage";
 import eStmgAlgoVariables from "./stmg/algo_variables";
 import eStmgAlgoBoucles from "./stmg/algo_boucles";
 import eStmgAlgoListes from "./stmg/algo_listes";
+import eStmgAlgoFonctions from "./stmg/algo_fonctions";
+import eStmgTableurFormules from "./stmg/tableur_formules";
+import eStmgTableurRecopie from "./stmg/tableur_recopie";
+import eStmgLogiqueConnecteurs from "./stmg/logique_connecteurs";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -882,6 +886,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgAlgoVariables,
   eStmgAlgoBoucles,
   eStmgAlgoListes,
+  eStmgAlgoFonctions,
+  eStmgTableurFormules,
+  eStmgTableurRecopie,
+  eStmgLogiqueConnecteurs,
   // fin STMG
 ];
 
