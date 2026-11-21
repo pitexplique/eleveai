@@ -324,6 +324,8 @@ import e1reLinModeliser from "./premiere/lin_modeliser";
 import e1reLinSeuil from "./premiere/lin_seuil";
 import e1reQuadParabole from "./premiere/quad_parabole";
 import e1reQuadSommetAxe from "./premiere/quad_sommet_axe";
+import e1reQuadVariations from "./premiere/quad_variations";
+import e1reQuadRacinesSigne from "./premiere/quad_racines_signe";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -658,6 +660,8 @@ const TOUTES: ProblemesNotion[] = [
   e1reLinSeuil,
   e1reQuadParabole,
   e1reQuadSommetAxe,
+  e1reQuadVariations,
+  e1reQuadRacinesSigne,
   // fin Première
 ];
 
