@@ -91,6 +91,9 @@ export function CarteProf({ menu }: { menu: Menu }) {
           <p className={TITRE_PARTIE}>Le dessert 🍨</p>
           <p className="mt-1 text-center text-base font-bold text-slate-800 sm:text-lg">{menu.dessert}</p>
         </div>
+        {menu.signature && (
+          <p className="pr-2 text-right font-serif text-base italic text-amber-900 sm:text-lg">{menu.signature}</p>
+        )}
       </div>
       <p className="mt-4 rounded-xl bg-white/80 px-3 py-2 font-sans text-sm font-semibold leading-snug text-slate-700 ring-1 ring-amber-200">
         <span className="font-black text-slate-900">Le conseil : </span>

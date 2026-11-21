@@ -90,6 +90,8 @@ export type Seance = {
     conseil: string;
     /** Sous le menu : les PDF du prof et la connexion des élèves (21/11, Frédéric). */
     ressources?: { label: string; href: string }[];
+    /** Signature en bas du menu (21/11, Frédéric). */
+    signature?: string;
   };
   /** « Concrètement, clic par clic ». */
   clicParClic: EtapeClic[];
@@ -226,20 +228,22 @@ export const SEANCES: Seance[] = [
     },
     menu: {
       entree: [
-        { texte: "Projeter une énigme sur les longueurs", href: "/enigmes-maths/6e/aire_longueur" },
-        { texte: "Projeter la vidéo, puis en discuter" },
-        { texte: "Projeter les exercices interactifs, avec correction active" },
+        // 21/11, Frédéric : « supprime le mot longueurs », et ces trois entrées.
+        { texte: "Une énigme en slide", href: "/enigmes-maths" },
+        { texte: "Une notion en vidéo" },
+        { texte: "Des exercices interactifs" },
       ],
       // 21/11, Frédéric : « enlève le plat avec carte mentale » → plus de plat imposé.
       impose: [],
       carte: [
-        "Le coach, sur les longueurs",
+        "Le coach",
         "Les exercices interactifs",
         "Le cours écrit dans le cahier",
         "Le découpage (ULIS, avec l'AESH)",
         "La vidéo, à revoir",
       ],
-      dessert: "Va trouver des longueurs dans ce que tu aimes.",
+      dessert: "Va trouver des maths dans ce que tu aimes.",
+      signature: "Le chef cuisinier, Frédéric Lacoste",
       conseil:
         "L'entrée se fait tous ensemble, puis chacun choisit à la carte. Une classe qui a besoin de cadre : ajoutez un plat pour tous, par exemple « 5 questions du coach ».",
       ressources: [
