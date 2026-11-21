@@ -281,8 +281,23 @@ globalement.
 | Série Ti Margo `cm1-entier` (json, commun, cues) | ✅ `prototypes/ti-margo/films/cm1-entier*.js` |
 | A1 et A2 — shorts Ti Margo | ✅ 58,0 s et 62,7 s, planches relues, **compteurs contrôlés** |
 | A1 et A2 — chaîne de publication | ✅ complète (voir ci-dessous) |
-| **A3 `entier_decomposer`** | ✅ script, dry run propre, `-ql` relu (4 défauts corrigés), short 62,2 s relu |
-| A4 → A6, A5′, B1 → B5 (9 épisodes) | ⏳ |
+| **A3 `entier_decomposer`** | ✅ FINI : HD 3 min 14, 0 bord, short 62,2 s, publication complète |
+| **A4 `entier_arrondir`** | ✅ script, dry run propre, **`-ql` relu** (3 défauts corrigés) ; film du short écrit et ses images de contrôle relues. ⏳ **reste : le HD**, le film du short, la publication |
+| A5, A6, A5′, B1 → B5 (8 épisodes) | ⏳ |
+
+### A4 : trois défauts, corrigés avant tout rendu HD
+
+1. **RETARD de 0,34 s** (03-regle) : « juste à droite » suit « Puis on regarde le chiffre » de peu →
+   le premier fondu passe de 0,55 s à 0,3 s.
+2. **BORD mesuré** (10-finale) : l'échelle des chiffres faisait 4,2 unités et partait à x = −6,7
+   (marge −6,68) → (0,55 ; 20) au lieu de (0,82 ; 26).
+3. **Deux flèches illisibles, vues seulement à l'image** : en 03-regle une flèche en diagonale entre
+   deux chiffres voisins (remplacée par une flèche VERTICALE sous le chiffre) ; en 05-piege une
+   flèche à UP\*0,9 qui passait DERRIÈRE l'étiquette « 4 682 » du repère (remontée à UP\*1,5).
+
+⚠️ **« 4 700 » (02-encadrer) n'a pas de marque.** Les silences de 20 ms ne séparaient pas les mots :
+il a fallu descendre à une fenêtre de **10 ms, seuil 14 %**, pour lire les syllabes une à une —
+« entre » 4,65 · « 4 600 » 5,02 · « et » 6,34 · **« 4 700 » 6,57** → `au_t(6.57)`.
 
 ### ⛔ A3 : quatre défauts, et deux qui ne se voyaient QU'À L'IMAGE
 

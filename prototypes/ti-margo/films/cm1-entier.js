@@ -122,6 +122,46 @@ function sommeCraie(c, cx, y, items, T, { taille = 72, coulPlus = CRAIE.gris, ga
   return { x: (i) => pos[2 * i], gauche: cx - L / 2, droite: cx + L / 2 };
 }
 
+/* ── LA DROITE GRADUÉE À LA CRAIE (arrondir, encadrer) ─────────────────────────────────────────
+   De a à b, coupée en n parts, le milieu en pointillé si on le demande.
+   (cx, y) = le milieu de la droite. Rend .x(v) (le point d'une valeur) et .y. */
+function droiteCraie(c, cx, y, a, b, { n = 10, larg = 800, coul = CRAIE.blanc, milieu = false, u = 1 } = {}) {
+  if (u <= 0) return { x: () => cx, y };
+  larg *= Math.min(1, u);
+  const x0 = cx - larg / 2, x1 = cx + larg / 2;
+  c.strokeStyle = coul; c.lineWidth = 7; c.lineCap = 'round'; c.setLineDash([]);
+  c.beginPath(); c.moveTo(x0 - 24, y); c.lineTo(x1 + 24, y); c.stroke();
+  c.lineWidth = 5;
+  for (let i = 1; i < n; i++) { const x = x0 + larg * i / n; c.beginPath(); c.moveTo(x, y - 14); c.lineTo(x, y + 14); c.stroke(); }
+  c.lineWidth = 9;
+  for (const x of [x0, x1]) { c.beginPath(); c.moveTo(x, y - 26); c.lineTo(x, y + 26); c.stroke(); }
+  const X = (v) => x0 + larg * (v - a) / (b - a);
+  if (milieu) {
+    c.strokeStyle = CRAIE.gris; c.lineWidth = 5; c.setLineDash([12, 10]);
+    c.beginPath(); c.moveTo(X((a + b) / 2), y - 64); c.lineTo(X((a + b) / 2), y + 36); c.stroke(); c.setLineDash([]);
+  }
+  return { x: X, y };
+}
+
+/* Le repère d'un nombre sur la droite : un triangle, et le nombre écrit au-dessus */
+function repereCraie(c, d, v, s, coul = CRAIE.jaune, taille = 52, z = 1) {
+  if (z <= 0) return;
+  const x = d.x(v);
+  c.fillStyle = coul;
+  c.beginPath(); c.moveTo(x, d.y - 8); c.lineTo(x - 16 * z, d.y - 40 * z); c.lineTo(x + 16 * z, d.y - 40 * z); c.closePath(); c.fill();
+  ecrire(c, s, x, d.y - 74, taille * z, coul);
+}
+
+/* Une flèche horizontale : de la valeur v1 à la valeur v2, au-dessus de la droite */
+function flecheCraie(c, d, v1, v2, dy = 108, coul = CRAIE.ok, u = 1) {
+  if (u <= 0) return;
+  const x1 = d.x(v1), x2 = x1 + (d.x(v2) - d.x(v1)) * Math.min(1, u), y = d.y - dy, s = Math.sign(x2 - x1) || 1;
+  c.strokeStyle = coul; c.lineWidth = 8; c.lineCap = 'round';
+  c.beginPath(); c.moveTo(x1, y); c.lineTo(x2, y); c.stroke();
+  c.fillStyle = coul; c.beginPath();
+  c.moveTo(x2 + s * 18, y); c.lineTo(x2 - s * 6, y - 14); c.lineTo(x2 - s * 6, y + 14); c.closePath(); c.fill();
+}
+
 /* Une grande croix rouge (« ce n'est pas le même nombre ») */
 function croixCraie(c, x, y, r, u = 1) {
   if (u <= 0) return;
