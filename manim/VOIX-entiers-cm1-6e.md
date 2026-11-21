@@ -219,7 +219,7 @@ Bonnes lettres — paysage : 04 → **A** (63), 06 → **B** (4 960), 08 → **A
 
 **Short**
 
-- `00-accroche` : Salut ! Mon copain veut savoir si 57 651 est un multiple de 3. Il pose la division.
+- `00-accroche` : Salut ! Mon copain veut savoir si 48 231 est un multiple de 3. Il pose la division.
 - `01-astuce` : Ma copine, elle, additionne les chiffres… et elle a déjà fini !
 - `02-question` : Question ! Lequel est un multiple de 3 ? A : 57 651. B : 57 658. C : 57 671. Mets pause, et choisis !
 - `02b-reponse` : Réponse A ! 5 plus 7 plus 6 plus 5 plus 1 donne 24, un multiple de 3.

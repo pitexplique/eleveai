@@ -273,7 +273,10 @@ SERIE = [
         ("10-finale", "Ce que tu as appris. Pour 3 et pour 9, on additionne les chiffres. "
                       "Pour 5, 25 et 100, on regarde la fin."),
     ], [
-        ("00-accroche", "Salut ! Mon copain veut savoir si 57 651 est un multiple de 3. "
+        # ⚠️ 21/11 — l'accroche nommait 57 651, qui est AUSSI la bonne réponse de 02 : un élève
+        # qui ne connaît pas le critère choisissait A parce que c'est le nombre de l'histoire.
+        # L'accroche prend donc un autre nombre, et la question tient toute seule.
+        ("00-accroche", "Salut ! Mon copain veut savoir si 48 231 est un multiple de 3. "
                         "Il pose la division."),
         ("01-astuce", "Ma copine, elle, additionne les chiffres… et elle a déjà fini !"),
         ("02-question", Q("Lequel est un multiple de 3 ?", "57 651", ["57 658", "57 671"],
