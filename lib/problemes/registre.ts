@@ -356,6 +356,10 @@ import e1sSuites from "./premiere-spe/suites";
 import e1sSecondDegre from "./premiere-spe/second_degre";
 import e1sDerivationNombreDerive from "./premiere-spe/derivation_nombre_derive";
 import e1sDerivationTangente from "./premiere-spe/derivation_tangente";
+import e1sDerivationFormules from "./premiere-spe/derivation_formules";
+import e1sDerivationOperations from "./premiere-spe/derivation_operations";
+import e1sAnalyseGraphique1s from "./premiere-spe/analyse_graphique_1s";
+import e1sVariationsFonctions from "./premiere-spe/variations_fonctions";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -726,6 +730,10 @@ const TOUTES: ProblemesNotion[] = [
   e1sSecondDegre,
   e1sDerivationNombreDerive,
   e1sDerivationTangente,
+  e1sDerivationFormules,
+  e1sDerivationOperations,
+  e1sAnalyseGraphique1s,
+  e1sVariationsFonctions,
   // fin Première spé
 ];
 
