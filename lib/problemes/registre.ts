@@ -321,6 +321,9 @@ import e1reLinSuiteTermeGeneral from "./premiere/lin_suite_terme_general";
 import e1reLinAffine from "./premiere/lin_affine";
 import e1reLinAffineLecture from "./premiere/lin_affine_lecture";
 import e1reLinModeliser from "./premiere/lin_modeliser";
+import e1reLinSeuil from "./premiere/lin_seuil";
+import e1reQuadParabole from "./premiere/quad_parabole";
+import e1reQuadSommetAxe from "./premiere/quad_sommet_axe";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -652,6 +655,9 @@ const TOUTES: ProblemesNotion[] = [
   e1reLinAffine,
   e1reLinAffineLecture,
   e1reLinModeliser,
+  e1reLinSeuil,
+  e1reQuadParabole,
+  e1reQuadSommetAxe,
   // fin Première
 ];
 
