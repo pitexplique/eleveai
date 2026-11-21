@@ -201,6 +201,9 @@ import eCpNombreEntier from "./cp/nombre_entier";
 import eCpSuiteNombre from "./cp/suite_nombre";
 import eCpAdditionSoustraction from "./cp/addition_soustraction";
 import eCpCalculMental from "./cp/calcul_mental";
+import eCpProbleme from "./cp/probleme";
+import eCpLongueur from "./cp/longueur";
+import eCpMasseContenance from "./cp/masse_contenance";
 // 3e (imports)
 import e3eFractionRationnel from "./3e/fraction_rationnel";
 import e3eEntierPuissance from "./3e/entier_puissance";
@@ -235,6 +238,9 @@ const TOUTES: ProblemesNotion[] = [
   eCpSuiteNombre,
   eCpAdditionSoustraction,
   eCpCalculMental,
+  eCpProbleme,
+  eCpLongueur,
+  eCpMasseContenance,
   // fin CP
   // CE1
   eCe1NombreEntier,
