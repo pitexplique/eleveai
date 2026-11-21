@@ -417,6 +417,10 @@ import eStmgDonneesTableauCroise from "./stmg/donnees_tableau_croise";
 import eStmgDonneesFrequences from "./stmg/donnees_frequences";
 import eStmgDonneesFiltres from "./stmg/donnees_filtres";
 import eStmgStatNuage from "./stmg/stat_nuage";
+import eStmgStatAjustement from "./stmg/stat_ajustement";
+import eStmgStatInterpoler from "./stmg/stat_interpoler";
+import eStmgStatMoindresCarres from "./stmg/stat_moindres_carres";
+import eStmgProbaConditionnelleTableau from "./stmg/proba_conditionnelle_tableau";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -850,6 +854,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgDonneesFrequences,
   eStmgDonneesFiltres,
   eStmgStatNuage,
+  eStmgStatAjustement,
+  eStmgStatInterpoler,
+  eStmgStatMoindresCarres,
+  eStmgProbaConditionnelleTableau,
   // fin STMG
 ];
 
