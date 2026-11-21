@@ -449,6 +449,10 @@ import eStmgFctInverseDerivee from "./stmg/fct_inverse_derivee";
 import eStmgExpoDefinition from "./stmg/expo_definition";
 import eStmgExpoVariations from "./stmg/expo_variations";
 import eStmgExpoProprietes from "./stmg/expo_proprietes";
+import eStmgExpoTauxMoyen from "./stmg/expo_taux_moyen";
+import eStmgExpoTauxEquivalent from "./stmg/expo_taux_equivalent";
+import eStmgLogDefinition from "./stmg/log_definition";
+import eStmgLogProprietes from "./stmg/log_proprietes";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -914,6 +918,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgExpoDefinition,
   eStmgExpoVariations,
   eStmgExpoProprietes,
+  eStmgExpoTauxMoyen,
+  eStmgExpoTauxEquivalent,
+  eStmgLogDefinition,
+  eStmgLogProprietes,
   // fin STMG
 ];
 
