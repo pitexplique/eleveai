@@ -186,6 +186,10 @@ import eCe1DivisionPartage from "./ce1/division_partage";
 import eCe1CalculMental from "./ce1/calcul_mental";
 import eCe1Fraction from "./ce1/fraction";
 import eCe1Probleme from "./ce1/probleme";
+import eCe1Longueur from "./ce1/longueur";
+import eCe1Masse from "./ce1/masse";
+import eCe1Duree from "./ce1/duree";
+import eCe1Monnaie from "./ce1/monnaie";
 // 3e (imports)
 import e3eFractionRationnel from "./3e/fraction_rationnel";
 import e3eEntierPuissance from "./3e/entier_puissance";
@@ -224,6 +228,10 @@ const TOUTES: ProblemesNotion[] = [
   eCe1CalculMental,
   eCe1Fraction,
   eCe1Probleme,
+  eCe1Longueur,
+  eCe1Masse,
+  eCe1Duree,
+  eCe1Monnaie,
   // fin CE1
   // CE2
   eCe2NombreEntier,
