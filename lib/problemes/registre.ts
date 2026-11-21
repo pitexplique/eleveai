@@ -457,6 +457,9 @@ import eStmgLogEquations from "./stmg/log_equations";
 import eStmgLogApplications from "./stmg/log_applications";
 import eStmgStatChangementVariable from "./stmg/stat_changement_variable";
 import eStmgVaBinomialeReconnaitre from "./stmg/va_binomiale_reconnaitre";
+import eStmgVaBinomialeCoefficients from "./stmg/va_binomiale_coefficients";
+import eStmgVaBinomialeCalcul from "./stmg/va_binomiale_calcul";
+import eStmgStatCorrelation from "./stmg/stat_correlation";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -930,6 +933,9 @@ const TOUTES: ProblemesNotion[] = [
   eStmgLogApplications,
   eStmgStatChangementVariable,
   eStmgVaBinomialeReconnaitre,
+  eStmgVaBinomialeCoefficients,
+  eStmgVaBinomialeCalcul,
+  eStmgStatCorrelation,
   // fin STMG
 ];
 
