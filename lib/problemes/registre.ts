@@ -341,6 +341,10 @@ import eTleLimiteSuite from "./terminale-spe/limite_suite";
 import eTleLimiteFonction from "./terminale-spe/limite_fonction";
 import eTleContinuiteTvi from "./terminale-spe/continuite_tvi";
 import eTleDerivationFonction from "./terminale-spe/derivation_fonction";
+import eTleConvexiteFonction from "./terminale-spe/convexite_fonction";
+import eTleFonctionsSinusCosinus from "./terminale-spe/fonctions_sinus_cosinus";
+import eTleFonctionExponentielle from "./terminale-spe/fonction_exponentielle";
+import eTleFonctionLogarithme from "./terminale-spe/fonction_logarithme";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -694,6 +698,10 @@ const TOUTES: ProblemesNotion[] = [
   eTleLimiteFonction,
   eTleContinuiteTvi,
   eTleDerivationFonction,
+  eTleConvexiteFonction,
+  eTleFonctionsSinusCosinus,
+  eTleFonctionExponentielle,
+  eTleFonctionLogarithme,
   // fin Terminale
 ];
 
