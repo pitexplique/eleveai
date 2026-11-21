@@ -169,11 +169,18 @@ Donc, pour chaque épisode, **une passe dédiée sur les maths seules**, indépe
     ⭐⭐ **Et donc : lancer `verifier-zone-margo.py` sur le `-ql`, AVANT le HD.** Il a été lancé
     après, et il a coûté un second rendu HD.
 34. ⚠️ **L'étalon de `verifier-zone-margo.py` est la mascotte à scale 0,5.** Tout écran dont la
-    mascotte est plus grande — la page de garde (0,8) et les écrans défi / correction / finale
-    (0,65) — sort en « quelque chose recouvre Ti-Margo » sans que rien ne le recouvre. ⭐ Le signal
-    VRAI est une plage signalée sur un écran à 0,5, c'est-à-dire **une question-pause**. Vérifié à
-    l'image sur B1 et B3, déjà publiés : leurs deux plages sont la garde et les écrans à 0,65, et
-    Ti Margo y est parfaitement dégagé — **rien de publié n'est en cause**.
+    mascotte est plus grande — la page de garde (0,8) et les écrans défi / correction / finale /
+    abonnement (0,65) — sort en « quelque chose recouvre Ti-Margo » sans que rien ne le recouvre.
+    C'est son **faux positif structurel** : il signale TOUJOURS ces écrans-là, sur tous les
+    épisodes de la série.
+    ⭐⭐ **Donc le critère n'est PAS « 0 instant » — il est inatteignable.** Le critère est :
+    **aucune plage signalée ne tombe sur un écran de QUESTION.** La manœuvre, en deux commandes :
+    `… verifier-zone-margo.py <le -ql> | grep -oE '^   [0-9]{2}:[0-9]{2}' | sort -u` pour les
+    plages, et `grep ECRAN <le log>` pour savoir quel écran occupe chaque instant. Si une plage
+    tombe sur un `0Xb-reponse` ou un `0X-question`, c'est un VRAI défaut, et il faut l'image.
+    ✅ Vérifié ainsi sur les cinq épisodes du lot B : B1, B3, B4 et B2 n'ont que des plages à
+    grosse mascotte (et leurs questions font 3 lignes) ; **seul B5 avait une vraie plage sur un
+    écran de réponse**, corrigée. Rien de publié n'est en cause.
 
 35. ⛔ **VU SEULEMENT À L'IMAGE (B2) — une figure posée sous la question tombe SUR l'explication.**
     Le 7ᵉ argument de `question_gauche` (`haut`, −0,75 partout dans la série) est le HAUT de la
