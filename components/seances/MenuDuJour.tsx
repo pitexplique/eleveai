@@ -3,6 +3,7 @@
 // sur la page d'accueil » → sorti de app/seances/page.tsx pour servir aux deux :
 // la page /seances (descriptif de chaque séance) et l'accueil.
 import Image from "next/image";
+import Link from "next/link";
 import type { Seance } from "@/lib/seances/seances";
 
 export default function MenuDuJour({ menu }: { menu: NonNullable<Seance["menu"]> }) {
@@ -16,6 +17,30 @@ export default function MenuDuJour({ menu }: { menu: NonNullable<Seance["menu"]>
         </div>
       </div>
       <div className="mt-4 space-y-4 font-serif">
+        {menu.entree && menu.entree.length > 0 && (
+          <>
+            <div>
+              <p className="flex items-center justify-center gap-2 text-center text-sm font-black uppercase tracking-widest text-amber-900">
+                L&apos;entrée <span className="rounded-full bg-sky-600 px-2 py-0.5 font-sans text-xs tracking-normal text-white">au choix</span>
+                <span className="font-sans text-xs font-bold normal-case tracking-normal text-amber-800">· 5 min</span>
+              </p>
+              <ul className="mt-1 space-y-0.5 text-center text-base font-bold text-slate-800 sm:text-lg">
+                {menu.entree.map((e) => (
+                  <li key={e.texte}>
+                    {e.href ? (
+                      <Link href={e.href} className="underline decoration-amber-400 decoration-2 underline-offset-4 hover:text-amber-900">
+                        {e.texte}
+                      </Link>
+                    ) : (
+                      e.texte
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <p aria-hidden="true" className="text-center text-amber-700">· · ·</p>
+          </>
+        )}
         <div>
           <p className="flex items-center justify-center gap-2 text-center text-sm font-black uppercase tracking-widest text-amber-900">
             Le plat <span className="rounded-full bg-violet-700 px-2 py-0.5 font-sans text-xs tracking-normal text-white">imposé</span>

@@ -81,7 +81,14 @@ export type Seance = {
   };
   /** Le « restaurant » : un menu IMPOSÉ et une CARTE libre (17/11, Frédéric :
    *  « parfois dans un restaurant il y a des plats imposés et d'autres à la carte »). */
-  menu?: { impose: string[]; carte: string[]; dessert: string; conseil: string };
+  menu?: {
+    /** L'ENTRÉE, au choix, 5 min, projetée à toute la classe (21/11, Frédéric). */
+    entree?: { texte: string; href?: string }[];
+    impose: string[];
+    carte: string[];
+    dessert: string;
+    conseil: string;
+  };
   /** « Concrètement, clic par clic ». */
   clicParClic: EtapeClic[];
   /** La mission « va trouver… dans ce que tu aimes ». */
@@ -216,6 +223,11 @@ export const SEANCES: Seance[] = [
       citation: "Chacun a appris à sa façon.",
     },
     menu: {
+      entree: [
+        { texte: "Projeter une énigme sur les longueurs", href: "/enigmes-maths/6e/aire_longueur" },
+        { texte: "Projeter la vidéo, puis en discuter" },
+        { texte: "Projeter les exercices interactifs" },
+      ],
       impose: ["Colorier la carte mentale des longueurs et l'expliquer ensemble."],
       carte: [
         "Le coach, sur les longueurs",
