@@ -221,7 +221,7 @@ Donc, pour chaque épisode, **une passe dédiée sur les maths seules**, indépe
   des virgules (`6e-entier,cm2-entier`).
 - ⚠️ La recette de commit par index temporaire laisse de **fausses suppressions** dans l'index
   principal : `git status` affiche `D` sur des fichiers neufs parfaitement présents. Le contrôle qui
-  tranche est `git diff --stat -- <chemin>` (vide = identique à HEAD). ⛔ Jamais
+  tranche est **`git diff HEAD --stat -- <chemin>`** (vide = identique à HEAD). ⛔ Jamais
   `diff <(git show HEAD:x) x` : il compare des LF à des CRLF et ment.
 - ⚠️ Toujours `PYTHONIOENCODING=utf-8 python -X utf8 -m manim …` : sinon l'audit plante sur l'espace
   fine insécable (`UnicodeEncodeError`, cp1252) et le rendu s'arrête.
@@ -246,6 +246,20 @@ Donc, pour chaque épisode, **une passe dédiée sur les maths seules**, indépe
 - ⚠️ **Quand une voix est refaite, elle est souvent RÉGÉNÉRÉE EN ENTIER** : les 16 WAV de
   `6e-entier-comparer` l'ont été pour corriger un seul clip, et **toutes les durées ont changé**.
   Relire les durées sur les WAV avant de caler quoi que ce soit — jamais les recopier d'un message.
+
+36. ⛔⛔ **`git diff` SANS `HEAD` compare à l'INDEX, pas à HEAD** — et cette note disait le
+    contraire jusqu'au 21/11 au soir, ce qui a fait croire à un texte perdu qui était déjà commité.
+    Avec la recette de commit par index temporaire, **l'index principal reste périmé en
+    permanence** : `git diff -- <chemin>` affiche alors un diff fantôme de dizaines de lignes sur
+    un fichier rigoureusement identique à HEAD. Et dans un checkout partagé par plusieurs
+    sessions, il peut se re-salir **entre deux de tes commandes** : observé, vide puis 17 lignes à
+    une minute d'intervalle, sans que personne n'ait touché au fichier.
+    ⭐ Les trois commandes, et ce qu'elles comparent vraiment :
+    · `git diff -- <chemin>` → copie de travail **vs INDEX** (ment quand l'index est périmé) ;
+    · `git diff --cached -- <chemin>` → **index vs HEAD** ;
+    · **`git diff HEAD -- <chemin>`** → copie de travail **vs HEAD** — c'est celle-là, et elle
+      seule, qui répond à « mon fichier est-il bien celui qui est commité ? ».
+    ⚠️ Donc un `D` ou un `MM` dans `git status` ne se juge QU'avec `git diff HEAD`.
 
 ## Ce qui a coûté le plus cher, en une phrase
 
