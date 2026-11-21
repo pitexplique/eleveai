@@ -892,5 +892,11 @@
     "question": ["Mon chat pèse", "400 kg ?"],
     "calcul": [["mon chat", "blanc", 210], ["400 kg ?", "rouge", 210]],
     "ceinture": "jaune"
+  },
+  "ce2-masse-probleme-short": {
+    "question": ["Ma valise de", "24 kg passe ?"],
+    "calcul": [["24 kg", "rouge", 210], ["23 kg au plus", "blanc", 150]],
+    "margo": [320, 720, 640],
+    "ceinture": "jaune"
   }
 }

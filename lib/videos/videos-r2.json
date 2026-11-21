@@ -17810,5 +17810,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_estimer&display=simple"
+ },
+ "ce2-masse-probleme": {
+  "fichier": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme.mp4",
+  "poster": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme.png",
+  "vignette": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme.vignette.webp",
+  "titre": "Une valise de 23 kg au plus : passe-t-elle ? — Problèmes de masses — épisode 6 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_probleme&display=simple"
+ },
+ "ce2-masse-probleme-short": {
+  "fichier": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme-short.mp4",
+  "poster": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme-short-miniature.png",
+  "vignette": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme-short-miniature.vignette.webp",
+  "titre": "Ma valise de 24 kg passe-t-elle ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_probleme&display=simple"
  }
 }

@@ -204,3 +204,32 @@ function briqueM(c,x,yBas,s=1,z=1){ if(z<=0) return; const k=Math.min(1.15,z)*s,
   c.fillStyle='#dee2e6'; c.beginPath(); c.moveTo(x-w/2,yBas-h); c.lineTo(x,yBas-h-t); c.lineTo(x+w/2,yBas-h); c.closePath(); c.fill(); c.stroke();
   c.fillStyle='#1c7ed6'; c.fillRect(x-w/2+2,yBas-h*.62,w-4,h*.3);
   c.fillStyle='#fff'; c.font=`800 ${Math.round(34*k)}px "Segoe UI"`; c.textAlign='center'; c.textBaseline='middle'; c.fillText('LAIT',x,yBas-h*.47); }
+
+/* ---- Épisode 06 (probleme) : la valise à roulettes, les chaussettes, le gros livre, la pancarte « 23 kg au plus » ---- */
+/* Une valise à roulettes debout ; (x, yBas) = le milieu, au sol (sous les roues) ; s = 1 ≈ 210 × 300 px. Renvoie le haut. */
+function valiseM(c,x,yBas,s=1,z=1,coul='#7048e8'){ const k=Math.min(1.15,Math.max(z,0))*s, w=210*k, h=250*k, r=16*k;
+  if(z<=0) return yBas-300*k; const yb=yBas-2*r, D='#212529'; c.lineJoin='round'; c.lineCap='round';
+  c.strokeStyle='#868e96'; c.lineWidth=9*k; for(const u of [-.25,.25]){ c.beginPath(); c.moveTo(x+u*w,yb-h); c.lineTo(x+u*w,yb-h-55*k); c.stroke(); }
+  c.lineWidth=12*k; c.beginPath(); c.moveTo(x-.3*w,yb-h-55*k); c.lineTo(x+.3*w,yb-h-55*k); c.stroke();   /* la poignée tirée */
+  c.fillStyle=coul; c.strokeStyle=D; c.lineWidth=5; c.beginPath(); c.roundRect(x-w/2,yb-h,w,h,22*k); c.fill(); c.stroke();
+  c.strokeStyle='rgba(0,0,0,.35)'; c.lineWidth=8*k; for(const u of [-.22,0,.22]){ c.beginPath(); c.moveTo(x+u*w,yb-h+16*k); c.lineTo(x+u*w,yb-16*k); c.stroke(); }
+  c.fillStyle=D; for(const u of [-.32,.32]){ c.beginPath(); c.arc(x+u*w,yBas-r,r,0,7); c.fill(); }
+  return yb-h-55*k; }
+/* Une paire de chaussettes rayées ; (x, yBas) = le milieu, au sol ; s = 1 ≈ 170 px de large */
+function chaussettesM(c,x,yBas,s=1,z=1){ if(z<=0) return; const k=Math.min(1.15,z)*s; c.lineJoin='round';
+  for(const [dx,coul] of [[-38,'#f06595'],[38,'#4dabf7']]){ const X=x+dx*k;
+    c.fillStyle=coul; c.strokeStyle='#343a40'; c.lineWidth=4; c.beginPath();
+    c.moveTo(X-22*k,yBas-150*k); c.lineTo(X+22*k,yBas-150*k); c.lineTo(X+22*k,yBas-45*k); c.lineTo(X+62*k,yBas-40*k);
+    c.quadraticCurveTo(X+80*k,yBas-20*k,X+60*k,yBas); c.lineTo(X-12*k,yBas); c.quadraticCurveTo(X-24*k,yBas-10*k,X-22*k,yBas-40*k); c.closePath(); c.fill(); c.stroke();
+    c.fillStyle='#fff'; for(const yy of [130,100,70]) c.fillRect(X-20*k,yBas-yy*k,40*k,10*k); } }
+/* Un gros livre fermé, posé à plat ; (x, yBas) = le milieu du bas ; s = 1 ≈ 240 × 90 px */
+function livreM(c,x,yBas,s=1,z=1,texte=''){ if(z<=0) return; const k=Math.min(1.15,z)*s, w=240*k, h=90*k; c.lineJoin='round';
+  c.fillStyle='#f8f9fa'; c.strokeStyle='#868e96'; c.lineWidth=3; c.beginPath(); c.rect(x-w/2+12*k,yBas-h+10*k,w-14*k,h-20*k); c.fill(); c.stroke();
+  for(let u=1;u<5;u++){ c.beginPath(); c.moveTo(x+w/2-4*k,yBas-h+10*k+u*(h-20*k)/5); c.lineTo(x-w/2+20*k,yBas-h+10*k+u*(h-20*k)/5); c.stroke(); }
+  c.fillStyle='#c92a2a'; c.strokeStyle='#5c0011'; c.lineWidth=4; c.beginPath(); c.roundRect(x-w/2,yBas-h,w,14*k,4*k); c.fill(); c.stroke();
+  c.beginPath(); c.roundRect(x-w/2,yBas-14*k,w,14*k,4*k); c.fill(); c.stroke(); c.beginPath(); c.roundRect(x-w/2,yBas-h,26*k,h,6*k); c.fill(); c.stroke();
+  if(texte) ecrire(c,texte,x+12*k,yBas-h/2,46*k,'#c92a2a'); }
+/* La pancarte du comptoir « 23 kg / au plus » ; (x, y) = le centre ; s = 1 ≈ 300 × 180 px */
+function pancarteM(c,x,y,s=1,z=1,haut='23 kg',bas='au plus'){ if(z<=0) return; const k=Math.min(1.15,z)*s, w=300*k, h=180*k;
+  c.fillStyle='#f8f9fa'; c.strokeStyle='#e03131'; c.lineWidth=8*k; c.beginPath(); c.roundRect(x-w/2,y-h/2,w,h,16*k); c.fill(); c.stroke();
+  ecrire(c,haut,x,y-28*k,84*k,'#e03131'); ecrire(c,bas,x,y+50*k,52*k,'#343a40'); }

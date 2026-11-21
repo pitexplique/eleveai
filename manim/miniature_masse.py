@@ -50,6 +50,8 @@ EP = [
      "un letchi : 20 g", True, "jaune"),
     ("ce2", "estimer", "05-estimer", ["3 g, 3 kg", "OU 30 kg ?"], "Un bébé ≈ 3 briques",
      "de lait : 3 kg", True, "jaune"),
+    ("ce2", "probleme", "06-probleme", ["23 kg", "AU PLUS !"], "18 kg + 3 kg = 21 kg",
+     "la valise passe !", True, "jaune"),
 ]
 
 

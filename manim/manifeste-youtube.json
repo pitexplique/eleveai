@@ -104252,6 +104252,155 @@
         "animaux",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "ce2-masse-probleme",
+      "pas_avant": "2027-06-15",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_probleme",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme.mp4",
+      "miniature": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme.png",
+      "titre": "Une valise de 23 kg au plus : passe-t-elle ? — Problèmes de masses — épisode 6 · Maths CE2",
+      "accroche": "Adam travaille à l'aéroport, au comptoir d'enregistrement : il pèse chaque valise, 23 kg au plus ! Pour un problème de masses, on met tout dans la même unité, on calcule, puis on vérifie.\n\nDans cette vidéo :\n• ajouter : 18 kg + 3 kg = 21 kg, moins que 23 kg : la valise passe\n• enlever : 25 − 23 = 2 kg à retirer\n• 2 kg de livres et 750 g de jouets : 2 000 + 750 = 2 750 g\n• plein moins vide : 1 200 g − 300 g = 900 g de billes ; à l'équilibre : 500 + 200 + 200 = 900 g\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : la valise de Nina pèse 20 kg ; elle y met 4 paquets de 500 g, puis un sac de 2 kg. Passe-t-elle ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_probleme&display=simple\n\n⚖️ Épisode 6 de la série Masses d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "23 kg au plus"
+        ],
+        [
+          "00:09",
+          "Adam, à l'aéroport"
+        ],
+        [
+          "00:19",
+          "Ajouter"
+        ],
+        [
+          "00:42",
+          "Question 1"
+        ],
+        [
+          "01:18",
+          "Plein moins vide"
+        ],
+        [
+          "01:31",
+          "Question 2"
+        ],
+        [
+          "02:04",
+          "À toi de jouer"
+        ],
+        [
+          "02:20",
+          "Correction"
+        ],
+        [
+          "02:35",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "problème",
+        "problèmes de masses",
+        "kilogramme",
+        "gramme",
+        "addition",
+        "soustraction",
+        "valise",
+        "aéroport",
+        "balance",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:42",
+          "question": "Un sac : 2 kilogrammes de livres et 750 grammes de jouets. Combien de grammes en tout ?",
+          "choix": [
+            "950 grammes",
+            "2 750 grammes",
+            "752 grammes"
+          ],
+          "reponse": 1,
+          "explication": "2 kilogrammes, c'est 2 000 grammes. 2 000 + 750 : 2 750 grammes."
+        },
+        {
+          "t": "01:31",
+          "question": "Un paquet est en équilibre avec 500 grammes et deux masses de 200 grammes. Combien pèse-t-il ?",
+          "choix": [
+            "520 grammes",
+            "700 grammes",
+            "900 grammes"
+          ],
+          "reponse": 2,
+          "explication": "500 + 200 + 200 : 900 grammes. On compte bien les deux masses de 200 !"
+        }
+      ],
+      "centres": [
+        "transports",
+        "avions"
+      ]
+    },
+    {
+      "id": "ce2-masse-probleme-short",
+      "pas_avant": "2027-06-15",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_probleme",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-masse-probleme",
+      "fichier": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme-short.mp4",
+      "miniature": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme-short-miniature.png",
+      "titre": "Ma valise de 24 kg passe-t-elle ? #maths #ce2",
+      "accroche": "Ma copine part en vacances. Sa valise pèse 24 kilogrammes. Mais c'est 23 kilogrammes au plus ! Elle enlève… une paire de chaussettes.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : une valise de 27 kg, 23 au plus : combien de kilogrammes enlever ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce2 #primaire",
+      "tags": [
+        "masse",
+        "problème",
+        "kilogramme",
+        "valise",
+        "vacances",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Combien doit-elle enlever, au moins ?",
+          "choix": [
+            "1 kilogramme",
+            "100 grammes",
+            "24 kilogrammes"
+          ],
+          "reponse": 0,
+          "explication": "24 − 23 : il faut enlever 1 kilogramme. Les chaussettes ne suffisent pas !"
+        }
+      ],
+      "centres": [
+        "avions",
+        "jeux-defis"
+      ]
     }
   ]
 }
