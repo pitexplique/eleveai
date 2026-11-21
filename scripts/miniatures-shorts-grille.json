@@ -907,5 +907,10 @@
     "question": ["4 682 à la centaine :", "4 600 ou 4 700 ?"],
     "calcul": [["4 682", "blanc", 200], ["4 600 ?", "rouge", 170]],
     "ceinture": "blanche"
+  },
+  "cm1-entier-multiple-short": {
+    "question": ["35 billes, paquets de 4 :", "ça tombe juste ?"],
+    "calcul": [["35 billes", "blanc", 180], ["paquets de 4 ?", "rouge", 130]],
+    "ceinture": "blanche"
   }
 }

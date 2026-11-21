@@ -137,6 +137,36 @@ EP = [
       s_toi="arrondis 23 249 au millier près.",
       s_tags=["nombres entiers", "arrondir", "arrondi à la centaine", "le plus proche"],
       s_centres=["meteo-climat", "jeux-defis"]),
+ # ⛔⛔ CM1 SEUL : PAS de `aussi` (Frédéric, 21/11, commit d4c1606f2 — « une notion qui déborde est
+ #    une notion neuve »). Cet épisode fait donc 2 lignes `notion_ressources`, toutes deux au CM1,
+ #    et aucune au CM2 : le CM2 a son propre épisode, `cm2-entier-multiple`.
+ #    ⚠️ 15 écrans, et pas de chapitre `07-cm2` : le numéro 07 reste volontairement libre.
+ dict(classe="cm1", n=5, slug="multiple", notion="nombre_entier", micro="entier_multiple",
+      nom="Les multiples", date="2027-06-17", ceinture="verte",
+      titre="42 est-il un multiple de 6 ?",
+      intro="Awa est fleuriste. Elle compte ses roses par paquets de 10, sans qu'il en reste "
+            "un seul. Un multiple, c'est exactement ça : des paquets pleins.",
+      points=["un multiple de 6, c'est 6 fois un nombre entier : 6 fois 7 donne 42",
+              "c'est aussi des paquets pleins, sans le moindre reste",
+              "pour 2, 10 et 100, le dernier chiffre suffit",
+              "un multiple de 10 finit par zéro",
+              "un voisin du multiple (63, 65, 67) n'est pas un multiple"],
+      defi="trouver le total qui remplit des ballotins de 7 sans reste : 62, 63 ou 64.",
+      chap={"00-garde": "42, multiple de 6 ?", "01-situation": "Awa, fleuriste",
+            "02-definition": "6 fois un nombre entier", "03-sans-reste": "Des paquets pleins",
+            "04-question": "Question 1", "05-dernier-chiffre": "Le dernier chiffre suffit",
+            "06-question": "Question 2", "08-question": "Question 3",
+            "09-defi": "À toi de jouer", "09b-correction": "Correction",
+            "10-finale": "Ce que tu as appris"},
+      tags=["nombres entiers", "les multiples", "multiple de 10", "table de multiplication",
+            "paquets pleins", "sans reste", "fleuriste"],
+      centres=["nature-ecologie", "art-design"],
+      s_titre="35 billes, paquets de 4 : ça tombe juste ?", s_ceinture="blanche",
+      s_accroche="Ma copine range 35 billes par paquets de 4 et dit que ça tombe juste. On compte "
+                 "4, 8, 12… 32 : huit paquets pleins, et il en reste 3.",
+      s_toi="combien de paquets de 6 avec 54 billes ?",
+      s_tags=["nombres entiers", "multiples", "table de 4", "il reste combien"],
+      s_centres=["jeux-defis", "nature-ecologie"]),
 ]
 
 COMMUNS = ["nombres entiers", "numération", "maths"]

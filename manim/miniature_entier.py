@@ -32,6 +32,8 @@ EP = [
      "un rang vide ne s'écrit pas !", True, "verte"),
     ("cm1", "arrondir", "04-arrondir", ["ARRONDIR", "UN NOMBRE"], "4 682 : 4 600 ou 4 700 ?",
      "on regarde le chiffre d'après !", True, "verte"),
+    ("cm1", "multiple", "05-multiple", ["LES", "MULTIPLES"], "42, multiple de 6 ?",
+     "7 paquets pleins, sans reste !", True, "verte"),
 ]
 
 

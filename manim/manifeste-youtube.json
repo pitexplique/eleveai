@@ -104631,6 +104631,152 @@
           "microId": "entier_arrondir"
         }
       ]
+    },
+    {
+      "id": "cm1-entier-multiple",
+      "pas_avant": "2027-06-17",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_multiple",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/entiers/05-multiple/eleveai-maths-cm1-entier-multiple.mp4",
+      "miniature": "cm1/maths/entiers/05-multiple/eleveai-maths-cm1-entier-multiple.png",
+      "titre": "42 est-il un multiple de 6 ? — Les multiples — épisode 5 · Maths CM1",
+      "accroche": "Awa est fleuriste. Elle compte ses roses par paquets de 10, sans qu'il en reste un seul. Un multiple, c'est exactement ça : des paquets pleins.\n\nDans cette vidéo :\n• un multiple de 6, c'est 6 fois un nombre entier : 6 fois 7 donne 42\n• c'est aussi des paquets pleins, sans le moindre reste\n• pour 2, 10 et 100, le dernier chiffre suffit\n• un multiple de 10 finit par zéro\n• un voisin du multiple (63, 65, 67) n'est pas un multiple\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : trouver le total qui remplit des ballotins de 7 sans reste : 62, 63 ou 64.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_multiple&display=simple\n\n🔢 Épisode 5 de la série Nombres entiers d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "42, multiple de 6 ?"
+        ],
+        [
+          "00:31",
+          "Question 1"
+        ],
+        [
+          "01:06",
+          "Question 2"
+        ],
+        [
+          "01:37",
+          "Question 3"
+        ],
+        [
+          "02:05",
+          "À toi de jouer"
+        ],
+        [
+          "02:31",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "les multiples",
+        "multiple de 10",
+        "table de multiplication",
+        "paquets pleins",
+        "sans reste",
+        "fleuriste",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "Quel nombre est un multiple de 9 ?",
+          "choix": [
+            "63",
+            "67",
+            "65"
+          ],
+          "reponse": 0,
+          "explication": "9 × 7 donne 63. Ni 65 ni 67 n'est dans la table de 9."
+        },
+        {
+          "t": "01:06",
+          "question": "Lequel est un multiple de 10 ?",
+          "choix": [
+            "4 925",
+            "4 960",
+            "4 911"
+          ],
+          "reponse": 1,
+          "explication": "Un multiple de 10 finit par zéro. Seul 4 960 finit par zéro."
+        },
+        {
+          "t": "01:37",
+          "question": "Quel nombre n'est pas un multiple de 7 ?",
+          "choix": [
+            "24",
+            "28",
+            "56"
+          ],
+          "reponse": 0,
+          "explication": "7 × 4 donne 28, 7 × 8 donne 56. 24 n'est pas dans la table de 7."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "art-design"
+      ]
+    },
+    {
+      "id": "cm1-entier-multiple-short",
+      "pas_avant": "2027-06-17",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_multiple",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-entier-multiple",
+      "fichier": "cm1/maths/entiers/05-multiple/eleveai-maths-cm1-entier-multiple-short.mp4",
+      "miniature": "cm1/maths/entiers/05-multiple/eleveai-maths-cm1-entier-multiple-short-miniature.png",
+      "titre": "35 billes, paquets de 4 : ça tombe juste ? #maths #cm1",
+      "accroche": "Ma copine range 35 billes par paquets de 4 et dit que ça tombe juste. On compte 4, 8, 12… 32 : huit paquets pleins, et il en reste 3.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien de paquets de 6 avec 54 billes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_multiple&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #cm1 #primaire",
+      "tags": [
+        "nombres entiers",
+        "multiples",
+        "table de 4",
+        "il reste combien",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Lequel est un multiple de 4 ?",
+          "choix": [
+            "35",
+            "32",
+            "34"
+          ],
+          "reponse": 1,
+          "explication": "4 × 8 donne 32. Ni 34 ni 35 n'est dans la table de 4."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "nature-ecologie"
+      ]
     }
   ]
 }

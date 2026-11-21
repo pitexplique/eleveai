@@ -289,8 +289,40 @@ globalement.
 | **A4 `entier_arrondir`** | ✅ **FINI** : HD 3 min 14,5, **0 bord**, 0 ligne `COCHE-RESERVE`, planche HD relue (13 images pour 16 écrans — chaque question partage son image avec sa réponse) ; short 64,0 s, **compteur revérifié SUR LE FILM** ; publication complète, coach vérifié à l'image au CM1 **et** au CM2 |
 | **A5′ `cm2-entier-multiple` — ses 2 voix** | ✅ **validées par Frédéric le 21/11** (« Oui, lance ») : JSON écrits, **23 WAV** (16 + 7), marques du paysage faites (16 écrans, 0 sans marque) |
 | A5′ — durées brutes des clips | paysage **171,4 s** (≈ 2 min 51 avant les pauses), short **58,1 s** — dans la fourchette de la série |
-| A5′ — script Manim, HD, short, publication | ⏳ |
-| A5, A6, B1 → B5 (7 épisodes) | ⏳ |
+| **A5 `cm1-entier-multiple`** | ✅ **FINI** : HD 2 min 51, **0 bord**, 0 `COCHE-RESERVE`, 15 écrans (pas de `07-cm2`), planche HD relue ; short 61,3 s, compteur revérifié SUR LE FILM ; publication complète. ⭐ Coach : **2 lignes seulement, au CM1** — relu à l'image, le CM2 ne montre AUCUNE vidéo sur sa micro `entier_multiple`, comme décidé |
+| A5′ — script Manim, HD, short, publication | ⏳ (ses voix sont validées : `830810afc`) |
+| A6 `entier_defi`, B1 → B5 (6 épisodes) | ⏳ |
+
+### ⛔ A5 : six défauts, et QUATRE qui ne se voyaient qu'À L'IMAGE
+
+Le dry run était parfaitement propre après les deux premiers. Les quatre suivants rendaient trois
+écrans illisibles et aucun instrument ne les voyait.
+
+1. **AUDIT-AVANCE de 0,67 s** (09-defi) : la ligne entière arrivait sur son PREMIER mot, donc le
+   « 7 » des ballotins s'écrivait avant d'être dit. Chaque morceau attend SON mot (piège n° 4,
+   payé une troisième fois).
+2. **Onze BORD** : sept paquets de roses EN LIGNE font 7,4 unités (marge : x ≥ −6,68) → grille 4 × 2 ;
+   et les trois lignes du corrigé partaient à −6,9 → bâties ensemble à l'échelle 0,82, calées à −6,3.
+3. **RETARD de 0,59 s** (05-dernier-chiffre), et ⭐ **la cause n'était PAS la durée du fondu** :
+   raccourcir le `play` de 0,9 à 0,4 s n'a rien changé au chiffre. La synchro automatique retient
+   déjà « Un multiple de 10 » jusqu'à SON dernier mot (« 10 », 5,18 s) : un `au_mot()` posé ensuite
+   sur le mot suivant arrive toujours trop tard. Remède : ne pas en poser, la ligne suivante se cale
+   seule.
+4. ⛔⛔ **Un mobjet construit AVANT un `move_to()` du groupe ne suit pas le groupe** — deux fois.
+   Les valeurs de la bande des multiples, posées dans leurs cases à la construction, se sont
+   écrites **sous** la bande, par-dessus le texte et par-dessus les cartes de choix, sur TROIS
+   écrans ; et trois `SurroundingRectangle` sont restés loin de leurs nombres. Remède : `recaler()`
+   sur le groupe, appelé après chaque déplacement, et `cadre_ici()` qui construit le cadre à la
+   position du moment.
+5. **La page de garde montrait 3 paquets de 6 roses (18) pour une question qui porte sur 42** :
+   un enfant qui compte ne retrouvait pas le nombre de l'énoncé. Sept paquets.
+6. Côté short : le **titre débordait de sa carte** (33 caractères → deux lignes, la seconde coupée
+   par la carte des ceintures ; ~24 tiennent) ; les comptes 4, 8, 12 écrits sous CHAQUE boîte
+   tombaient sur la rangée du dessous et « 32 » touchait « il en reste 3 ! » (la suite passe sur UNE
+   ligne, à des places fixes) ; et ⭐ `marquesEntiers()` **sépare le nombre du mot collé** —
+   `mot('00-accroche','35 billes')` est introuvable (c'est « 35 »), la page ne démarre jamais et le
+   script meurt sur un TimeoutError de 120 s dont la vraie cause est en PREMIÈRE ligne de la sortie :
+   `ERREUR PAGE … mot introuvable`.
 
 ### A4 : trois défauts, corrigés avant tout rendu HD
 
