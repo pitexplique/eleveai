@@ -364,6 +364,10 @@ import e1sExponentielle from "./premiere-spe/exponentielle";
 import e1sTrigonometrie from "./premiere-spe/trigonometrie";
 import e1sProduitScalaire from "./premiere-spe/produit_scalaire";
 import e1sGeometrieReperee from "./premiere-spe/geometrie_reperee";
+import e1sProbabilitesConditionnelles from "./premiere-spe/probabilites_conditionnelles";
+import e1sVariablesAleatoires from "./premiere-spe/variables_aleatoires";
+import e1sAlgorithmique from "./premiere-spe/algorithmique";
+import e1sLogiqueEnsembles from "./premiere-spe/logique_ensembles";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -742,6 +746,10 @@ const TOUTES: ProblemesNotion[] = [
   e1sTrigonometrie,
   e1sProduitScalaire,
   e1sGeometrieReperee,
+  e1sProbabilitesConditionnelles,
+  e1sVariablesAleatoires,
+  e1sAlgorithmique,
+  e1sLogiqueEnsembles,
   // fin Première spé
 ];
 
