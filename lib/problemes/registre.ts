@@ -129,8 +129,17 @@ import eCm2Graphique from "./cm2/graphique";
 import eCm2CalculsCommerciaux from "./cm2/calculs_commerciaux";
 import eCm2Probabilite from "./cm2/probabilite";
 import eCm2Algorithmique from "./cm2/algorithmique";
+import eCm1NombreEntier from "./cm1/nombre_entier";
+import eCm1Suite from "./cm1/suite";
+import eCm1TablesMultiplication from "./cm1/tables_multiplication";
+import eCm1Multiplication from "./cm1/multiplication";
 
 const TOUTES: ProblemesNotion[] = [
+  // CM1
+  eCm1NombreEntier,
+  eCm1Suite,
+  eCm1TablesMultiplication,
+  eCm1Multiplication,
   // CM2
   eCm2NombreEntier,
   eCm2Suite,
