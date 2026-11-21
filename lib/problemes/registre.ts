@@ -352,6 +352,10 @@ import eTleVariableAleatoire from "./terminale-spe/variable_aleatoire";
 import eTleLoiBinomiale from "./terminale-spe/loi_binomiale";
 import eTleConcentrationEchantillonnage from "./terminale-spe/concentration_echantillonnage";
 import eTleAlgorithmiquePython from "./terminale-spe/algorithmique_python";
+import e1sSuites from "./premiere-spe/suites";
+import e1sSecondDegre from "./premiere-spe/second_degre";
+import e1sDerivationNombreDerive from "./premiere-spe/derivation_nombre_derive";
+import e1sDerivationTangente from "./premiere-spe/derivation_tangente";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -717,6 +721,12 @@ const TOUTES: ProblemesNotion[] = [
   eTleConcentrationEchantillonnage,
   eTleAlgorithmiquePython,
   // fin Terminale
+  // Première spé
+  e1sSuites,
+  e1sSecondDegre,
+  e1sDerivationNombreDerive,
+  e1sDerivationTangente,
+  // fin Première spé
 ];
 
 const PAR_CLE = new Map(TOUTES.map((n) => [`${n.classe}/${n.notionId}`, n]));
