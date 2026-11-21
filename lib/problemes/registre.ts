@@ -317,6 +317,10 @@ import e1reAleaIndependance from "./premiere/alea_independance";
 import e1reAleaBernoulli from "./premiere/alea_bernoulli";
 import e1reAleaBernoulliCalcul from "./premiere/alea_bernoulli_calcul";
 import e1reLinSuiteArithmetique from "./premiere/lin_suite_arithmetique";
+import e1reLinSuiteTermeGeneral from "./premiere/lin_suite_terme_general";
+import e1reLinAffine from "./premiere/lin_affine";
+import e1reLinAffineLecture from "./premiere/lin_affine_lecture";
+import e1reLinModeliser from "./premiere/lin_modeliser";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -644,6 +648,10 @@ const TOUTES: ProblemesNotion[] = [
   e1reAleaBernoulli,
   e1reAleaBernoulliCalcul,
   e1reLinSuiteArithmetique,
+  e1reLinSuiteTermeGeneral,
+  e1reLinAffine,
+  e1reLinAffineLecture,
+  e1reLinModeliser,
   // fin Première
 ];
 
