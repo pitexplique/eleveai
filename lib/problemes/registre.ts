@@ -389,6 +389,10 @@ import eStmgAutoResolutionGraphique from "./stmg/auto_resolution_graphique";
 import eStmgAutoDroites from "./stmg/auto_droites";
 import eStmgAutoDonneesGraphiques from "./stmg/auto_donnees_graphiques";
 import eStmgSuiteNotation from "./stmg/suite_notation";
+import eStmgSuiteTermes from "./stmg/suite_termes";
+import eStmgSuiteArithmetique from "./stmg/suite_arithmetique";
+import eStmgSuiteGeometrique from "./stmg/suite_geometrique";
+import eStmgSuiteGeoEvolution from "./stmg/suite_geo_evolution";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -794,6 +798,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgAutoDroites,
   eStmgAutoDonneesGraphiques,
   eStmgSuiteNotation,
+  eStmgSuiteTermes,
+  eStmgSuiteArithmetique,
+  eStmgSuiteGeometrique,
+  eStmgSuiteGeoEvolution,
   // fin STMG
 ];
 
