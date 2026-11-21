@@ -245,6 +245,10 @@ import e2deDeveloppementFactorisation2de from "./seconde/developpement_factorisa
 import e2deIdentitesRemarquables2de from "./seconde/identites_remarquables_2de";
 import e2deExpressionsLitterales2de from "./seconde/expressions_litterales_2de";
 import e2deEquationsInequations1erDegre from "./seconde/equations_inequations_1er_degre";
+import e2deVecteursPlan from "./seconde/vecteurs_plan";
+import e2deRepereCoordonnees from "./seconde/repere_coordonnees";
+import e2deDroitesPlan from "./seconde/droites_plan";
+import e2deGeometrieProblemesPlan from "./seconde/geometrie_problemes_plan";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -498,6 +502,10 @@ const TOUTES: ProblemesNotion[] = [
   e2deIdentitesRemarquables2de,
   e2deExpressionsLitterales2de,
   e2deEquationsInequations1erDegre,
+  e2deVecteursPlan,
+  e2deRepereCoordonnees,
+  e2deDroitesPlan,
+  e2deGeometrieProblemesPlan,
   // fin Seconde
 ];
 
