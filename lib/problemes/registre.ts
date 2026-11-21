@@ -263,6 +263,10 @@ import e2deFonctionsAffines2de from "./seconde/fonctions_affines_2de";
 import e2deFonctionsReference2de from "./seconde/fonctions_reference_2de";
 import e2deInformationChiffreeEvolutions from "./seconde/information_chiffree_evolutions";
 import e2deStatistiquesDescriptives from "./seconde/statistiques_descriptives";
+import e2deCroisementVariables2de from "./seconde/croisement_variables_2de";
+import e2deProbabilitesEnsembleFini from "./seconde/probabilites_ensemble_fini";
+import e2deProbabilitesConditionnelles2de from "./seconde/probabilites_conditionnelles_2de";
+import e2deEchantillonnageSimulation from "./seconde/echantillonnage_simulation";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -534,6 +538,10 @@ const TOUTES: ProblemesNotion[] = [
   e2deFonctionsReference2de,
   e2deInformationChiffreeEvolutions,
   e2deStatistiquesDescriptives,
+  e2deCroisementVariables2de,
+  e2deProbabilitesEnsembleFini,
+  e2deProbabilitesConditionnelles2de,
+  e2deEchantillonnageSimulation,
   // fin Seconde
 ];
 

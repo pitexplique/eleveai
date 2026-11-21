@@ -45,3 +45,48 @@ export const repere = (
   const point = (x: number, y: number, c: string = C.rose, rayon = 8) => `<circle cx="${X(x)}" cy="${Y(y)}" r="${rayon}" fill="${c}"/>`;
   return { X, Y, fond, courbe, point };
 };
+
+/** Un tableau : `cols` = largeurs des colonnes, `h` = hauteur d'une ligne.
+ *  `cellules[i][j]` = texte ; `couleur(i, j)` choisit sa couleur (craie par défaut). */
+export const tableau = (
+  x: number, y: number, cols: number[], h: number, cellules: (string | number)[][],
+  couleur: (i: number, j: number) => string = () => C.craie, taille = 22
+) => {
+  const L = cols.reduce((a, b) => a + b, 0), H = h * cellules.length;
+  let s = "";
+  for (let i = 0; i <= cellules.length; i++) s += l(x, y + i * h, x + L, y + i * h, C.craie, i === 0 || i === cellules.length ? 3 : 2);
+  let cx = x;
+  for (let j = 0; j <= cols.length; j++) {
+    s += l(cx, y, cx, y + H, C.craie, j === 0 || j === cols.length ? 3 : 2);
+    if (j < cols.length) cx += cols[j];
+  }
+  cellules.forEach((ligne, i) => {
+    let gx = x;
+    ligne.forEach((v, j) => {
+      if (v !== "") s += t(gx + cols[j] / 2, y + i * h + h / 2 + taille * 0.35, v, couleur(i, j), taille);
+      gx += cols[j];
+    });
+  });
+  return s;
+};
+
+/** Un arbre à deux niveaux, racine à gauche. `n1` = [nom, proba] ×2 ;
+ *  `n2[k]` = les deux branches issues du nœud k (nom, proba), écrites à droite de x2. */
+export const arbre2 = (
+  n1: [string, string][], n2: [string, string][][],
+  { x0 = 40, x1 = 200, x2 = 360, yh = 40, yb = 330, taille = 20, c = C.craie, cp = C.bleu } = {}
+) => {
+  const ym = (yh + yb) / 2, q = (yb - yh) / 4;
+  const y1 = [ym - q, ym + q];
+  const y2 = [yh, yh + q * 1.4, yb - q * 1.4, yb];
+  let s = "";
+  n1.forEach(([nom, pr], k) => {
+    const demi = nom.length * (taille + 2) * 0.3 + 8;
+    s += l(x0 + 10, ym, x1 - demi, y1[k], c, 2.5) + t(x1, y1[k] + 7, nom, c, taille + 2) + t((x0 + x1) / 2 - 14, (ym + y1[k]) / 2 + (k ? 28 : -14), pr, cp, taille);
+    n2[k].forEach(([nom2, pr2], m) => {
+      const yy = y2[2 * k + m];
+      s += l(x1 + demi, y1[k], x2 - 8, yy, c, 2.5) + t(x2, yy + 7, nom2, c, taille + 2, "start") + t((x1 + x2) / 2, (y1[k] + yy) / 2 + (m ? 24 : -10), pr2, cp, taille);
+    });
+  });
+  return s;
+};
