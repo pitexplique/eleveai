@@ -349,6 +349,9 @@ import eTlePrimitiveIntegrale from "./terminale-spe/primitive_integrale";
 import eTleEquationDifferentielle from "./terminale-spe/equation_differentielle";
 import eTleProbabiliteConditionnelle from "./terminale-spe/probabilite_conditionnelle";
 import eTleVariableAleatoire from "./terminale-spe/variable_aleatoire";
+import eTleLoiBinomiale from "./terminale-spe/loi_binomiale";
+import eTleConcentrationEchantillonnage from "./terminale-spe/concentration_echantillonnage";
+import eTleAlgorithmiquePython from "./terminale-spe/algorithmique_python";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -710,6 +713,9 @@ const TOUTES: ProblemesNotion[] = [
   eTleEquationDifferentielle,
   eTleProbabiliteConditionnelle,
   eTleVariableAleatoire,
+  eTleLoiBinomiale,
+  eTleConcentrationEchantillonnage,
+  eTleAlgorithmiquePython,
   // fin Terminale
 ];
 
