@@ -429,6 +429,10 @@ import eStmgProbaIndependance from "./stmg/proba_independance";
 import eStmgVaLoiProbabilite from "./stmg/va_loi_probabilite";
 import eStmgVaEsperance from "./stmg/va_esperance";
 import eStmgVaBernoulli from "./stmg/va_bernoulli";
+import eStmgVaEchantillonnage from "./stmg/va_echantillonnage";
+import eStmgAlgoVariables from "./stmg/algo_variables";
+import eStmgAlgoBoucles from "./stmg/algo_boucles";
+import eStmgAlgoListes from "./stmg/algo_listes";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -874,6 +878,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgVaLoiProbabilite,
   eStmgVaEsperance,
   eStmgVaBernoulli,
+  eStmgVaEchantillonnage,
+  eStmgAlgoVariables,
+  eStmgAlgoBoucles,
+  eStmgAlgoListes,
   // fin STMG
 ];
 
