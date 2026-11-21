@@ -373,6 +373,10 @@ import e1sTriangleQuelconque from "./premiere-spe/triangle_quelconque";
 import e1sAnglesOrientes from "./premiere-spe/angles_orientes";
 import e1sTangenteReel from "./premiere-spe/tangente_reel";
 import e1sBarycentre from "./premiere-spe/barycentre";
+import eStmgAutoProportion from "./stmg/auto_proportion";
+import eStmgAutoEvoCoefficient from "./stmg/auto_evo_coefficient";
+import eStmgAutoEvoTaux from "./stmg/auto_evo_taux";
+import eStmgAutoEvoEnchainees from "./stmg/auto_evo_enchainees";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -761,6 +765,12 @@ const TOUTES: ProblemesNotion[] = [
   e1sTangenteReel,
   e1sBarycentre,
   // fin Première spé
+  // STMG
+  eStmgAutoProportion,
+  eStmgAutoEvoCoefficient,
+  eStmgAutoEvoTaux,
+  eStmgAutoEvoEnchainees,
+  // fin STMG
 ];
 
 const PAR_CLE = new Map(TOUTES.map((n) => [`${n.classe}/${n.notionId}`, n]));
