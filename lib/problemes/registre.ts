@@ -194,6 +194,10 @@ import eCe1Reperage from "./ce1/reperage";
 import eCe1DroitesSegments from "./ce1/droites_segments";
 import eCe1FiguresPlanes from "./ce1/figures_planes";
 import eCe1Solides from "./ce1/solides";
+import eCpNombreEntier from "./cp/nombre_entier";
+import eCpSuiteNombre from "./cp/suite_nombre";
+import eCpAdditionSoustraction from "./cp/addition_soustraction";
+import eCpCalculMental from "./cp/calcul_mental";
 // 3e (imports)
 import e3eFractionRationnel from "./3e/fraction_rationnel";
 import e3eEntierPuissance from "./3e/entier_puissance";
@@ -223,6 +227,12 @@ import e3eRelationsMetriques from "./3e/relations_metriques";
 import e3eAlgoProgrammation from "./3e/algo_programmation";
 
 const TOUTES: ProblemesNotion[] = [
+  // CP
+  eCpNombreEntier,
+  eCpSuiteNombre,
+  eCpAdditionSoustraction,
+  eCpCalculMental,
+  // fin CP
   // CE1
   eCe1NombreEntier,
   eCe1SuiteNombre,
