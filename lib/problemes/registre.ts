@@ -161,6 +161,10 @@ import eCe2NombreEntier from "./ce2/nombre_entier";
 import eCe2SuiteNombre from "./ce2/suite_nombre";
 import eCe2AdditionSoustraction from "./ce2/addition_soustraction";
 import eCe2Multiplication from "./ce2/multiplication";
+import eCe2Division from "./ce2/division";
+import eCe2CalculMental from "./ce2/calcul_mental";
+import eCe2Fraction from "./ce2/fraction";
+import eCe2Probleme from "./ce2/probleme";
 // 3e (imports)
 import e3eFractionRationnel from "./3e/fraction_rationnel";
 import e3eEntierPuissance from "./3e/entier_puissance";
@@ -195,6 +199,10 @@ const TOUTES: ProblemesNotion[] = [
   eCe2SuiteNombre,
   eCe2AdditionSoustraction,
   eCe2Multiplication,
+  eCe2Division,
+  eCe2CalculMental,
+  eCe2Fraction,
+  eCe2Probleme,
   // fin CE2
   // CM1
   eCm1NombreEntier,
