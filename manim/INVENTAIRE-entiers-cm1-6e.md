@@ -281,6 +281,12 @@ globalement.
 
 ## 6bis. ✅ PRODUCTION LANCÉE (Frédéric, 21/11 : « Oui, lance la prod »)
 
+> ⛔⛔ **Cette section est un INSTANTANÉ du lancement, pas l'état du jour.** L'état vivant de la
+> production — ce qui est fini, ce qui reste, les pièges — est dans **`manim/REPRISE-entiers-cm1-6e.md`**,
+> et nulle part ailleurs. Ne recopiez pas l'état ici : deux documents qui décrivent le même état, c'est un
+> document qui mentira, et on ne saura pas lequel (21/11 : ce tableau annonçait « B1 → B5 : ⏳ » alors que
+> les cinq étaient publiés).
+
 | Étape | État |
 |---|---|
 | Les 22 JSON de voix (`manim/voix/<id>.json`) | ✅ écrits (`--ecrire`) |
@@ -308,7 +314,7 @@ globalement.
 | ✅✅ **LE LOT A EST FINI** | 6 épisodes = 12 vidéos en ligne. Lignes `notion_ressources` : 4 pour chacun de `lire`, `comparer`, `decomposer`, `arrondir`, `defi` (CM1 + CM2 par `aussi`) et **2 pour `multiple`, au CM1 seul** — soit **22 lignes**, vérifiées à l'image épisode par épisode |
 | ⛔⛔ **B2 : une erreur de MATHS dans une voix déjà validée** | `6e-entier-comparer`, clip `09b-correction`, disait « 6 032 a 3 **centaines** » : faux, 6 032 = 6 milliers, **0 centaine, 3 dizaines**, 2 unités — et c'est bien le rang des DIZAINES qui décide (6 022/023/024 en ont 2, 6 032 en a 3). ✅ Corrigé : source, JSON, **les 16 WAV régénérés** et les marques refaites. ⛔ Aucune vidéo n'utilisait cette voix. ⭐ Trouvée par la production au moment d'écrire l'écran : **la voix ne peut pas être recopiée si elle est fausse** — c'est le seul garde-fou qui voit une erreur de maths, aucun instrument ne la signale |
 | ✅ Les maths des 5 voix du lot B, relues ligne par ligne | B1 `rang`, B3 `encadrer`, B4 `decomposer`, B5 `defi` : **justes**. B2 était le seul écart, et B1 était déjà publiée — donc rien de publié n'est en cause |
-| B1 → B5 en 6e (5 épisodes) | ⏳ |
+| B1 → B5 en 6e (5 épisodes) | ✅ **les cinq PUBLIÉS le 21/11** — rang `a96bafe09`, encadrer `fdba03881`, decomposer `55d3c1da7`, defi `d3287c59f`, comparer `27476f511`. État à jour : voir `REPRISE-entiers-cm1-6e.md` |
 
 ### A5′ : cinq défauts, et DEUX qui ne se voyaient qu'À L'IMAGE
 
@@ -522,7 +528,8 @@ Par épisode, dans l'ordre de `manim/REPRISE-masses-cp-cm2.md` :
 3. Script Manim `manim/scripts/cm1/entier_<slug>.py` (et `manim/scripts/6e/` pour le lot B) sur le modèle de
    `masse_cp_defi.py` ; dry run AUDIT (0 RETARD, 0 AUDIT-AVANCE, BORDS sans alerte) ; aperçu `-ql` + planche ;
    **un seul** rendu HD sous verrou ; `verifier-bords-video.py` ; planche finale.
-4. Short Ti Margo : séries `cm1-entier` et `6e-entier` à créer (`prototypes/ti-margo/films/`), socles
+4. Short Ti Margo : ✅ séries `cm1-entier` et `6e-entier` **créées** le 21/11 ; ⏳ il reste **`cm2-entier`**
+   à créer pour A5′ (`prototypes/ti-margo/films/`), socles
    `cm1-commun.js` et `6e-commun.js` **déjà présents** ; compteur contrôlé AVANT chaque film.
 5. Miniatures (paysage + short « Dessin animé », gabarit A), manifeste (dates après la dernière de la file,
    ⛔ 3 shorts/jour au plus), fiche YouTube, vignettes, R2, `videos-r2`, coach + Supabase
