@@ -310,6 +310,10 @@ import e1reInfoInterpolerExtrapoler from "./premiere/info_interpoler_extrapoler"
 import e1reInfoTableur from "./premiere/info_tableur";
 import e1reInfoFiltreDonnees from "./premiere/info_filtre_donnees";
 import e1reAleaConditionnelle from "./premiere/alea_conditionnelle";
+import e1reAleaConditionnelleCalcul from "./premiere/alea_conditionnelle_calcul";
+import e1reAleaArbre from "./premiere/alea_arbre";
+import e1reAleaArbreCalcul from "./premiere/alea_arbre_calcul";
+import e1reAleaIndependance from "./premiere/alea_independance";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -630,6 +634,10 @@ const TOUTES: ProblemesNotion[] = [
   e1reInfoTableur,
   e1reInfoFiltreDonnees,
   e1reAleaConditionnelle,
+  e1reAleaConditionnelleCalcul,
+  e1reAleaArbre,
+  e1reAleaArbreCalcul,
+  e1reAleaIndependance,
   // fin Première
 ];
 
