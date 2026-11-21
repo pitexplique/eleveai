@@ -1,0 +1,18 @@
+{
+  "00-garde": "Lire et écrire les grands nombres. Comment écrit-on « douze mille trente » en chiffres ?",
+  "01-situation": "Voici Diego. Il est cartographe : il dessine les cartes. Sur chaque sommet, il écrit son altitude.",
+  "02-classes": "Un grand nombre se range par classes de trois chiffres. La classe des mille, puis celle des unités.",
+  "03-zero": "« Douze mille » donne 12 dans la classe des mille. « Trente » donne 030 dans les unités : le zéro garde la place vide.",
+  "04-question": "Question ! Comment écrit-on « douze mille trente » en chiffres ? A : 12 030. B : 12 300. C : 1 230. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. « Trente », c'est 030 dans la classe des unités. Le zéro garde la place des centaines.",
+  "05-chiffre-nombre": "Attention : le chiffre des dizaines n'est pas le nombre de dizaines. Le nombre, c'est tout ce qui est à gauche.",
+  "06-question": "Question ! Dans 29 404, combien de dizaines en tout ? A : 4. B : 2 940. C : 294. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. On cache le dernier chiffre et on lit 2 940. Le chiffre des dizaines, lui, est 0.",
+  "07-cm2": "Et au CM2, une classe de plus : les millions. 5 343 000 se lit « cinq millions trois cent quarante-trois mille ».",
+  "08-question": "Question ! « Soixante-dix millions neuf cent cinquante-sept » : quelle écriture est juste ? A : 70 000 957. B : 7 000 957. C : 70 957. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. Après la première classe, chaque classe prend trois chiffres : 70, puis 000, puis 957.",
+  "09-defi": "À toi de jouer ! Écris en chiffres « quarante mille huit ». Combien de zéros ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 40 008. Les centaines et les dizaines sont vides : trois zéros en tout.",
+  "10-finale": "Ce que tu as appris. Un grand nombre se range par classes de trois chiffres. Un zéro garde une place vide.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Mon copain compare 1 408 et 1 480. Il regarde le dernier chiffre : 8 contre 0.",
+  "01-oups": "Il annonce : 1 408 est le plus grand !",
+  "02-question": "Question ! Lequel est le plus grand : 1 408 ou 1 480 ? A : 1 480. B : 1 408. C : c'est pareil. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! Même début : 1 et 4. Puis 8 dizaines bat 0 dizaine. Donc 1 480.",
+  "03-fin": "On compare par la gauche, jamais par la fin !",
+  "04-commentaire": "À toi : range 17 350, 17 340 et 16 340 du plus grand au plus petit. Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

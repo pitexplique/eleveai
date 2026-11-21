@@ -1,0 +1,18 @@
+{
+  "00-garde": "Décomposer un nombre. Que vaut chaque chiffre de 7 306 ?",
+  "01-situation": "Voici Thomas. Il est imprimeur. Ses affiches arrivent par paquets : mille, cent, dix, ou à l'unité.",
+  "02-valeur": "Chaque chiffre vaut selon sa colonne. Dans 4 582 : 4 000, puis 500, puis 80, puis 2.",
+  "03-zero": "Un zéro ne s'écrit pas dans la décomposition. 7 306, c'est 7 000 plus 300 plus 6.",
+  "04-question": "Question ! Quelle est la bonne décomposition de 5 064 ? A : 5 000 + 6 + 4. B : 5 000 + 600 + 4. C : 5 000 + 60 + 4. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. Le 6 est aux dizaines : il vaut 60. Il n'y a aucune centaine.",
+  "05-composer": "On peut faire l'inverse : composer. 20 000 plus 400 plus 9 donne 20 409.",
+  "06-question": "Question ! Quel nombre fait 70 plus 5 000 plus 800 ? A : 5 870. B : 758. C : 5 807. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. L'ordre ne change rien : chaque nombre va dans sa colonne. 5 000, 800, 70.",
+  "07-cm2": "Et au CM2, on décompose des millions. 639 600, c'est 600 000 plus 30 000 plus 9 000 plus 600.",
+  "08-question": "Question ! Dans 405 210, combien vaut le chiffre 5 ? A : 50 000. B : 500. C : 5 000. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. Le 5 est dans la colonne des unités de mille : il vaut 5 000.",
+  "09-defi": "À toi de jouer ! Un élève écrit : 12 405 égale 10 000 plus 2 000 plus 400 plus 50. Où est l'erreur ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Le dernier chiffre est 5. Il vaut 5 unités, pas 50. Il n'y a aucune dizaine.",
+  "10-finale": "Ce que tu as appris. Chaque chiffre vaut selon sa colonne. Un rang vide ne s'écrit pas.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

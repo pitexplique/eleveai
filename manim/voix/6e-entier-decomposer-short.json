@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Mon copain décompose 507. Il écrit 500 plus 70.",
+  "01-oups": "Soixante-dix ? Le 7 est tout à droite : il vaut 7 !",
+  "02-question": "Question ! Quelle est la décomposition de 507 ? A : 500 + 70. B : 500 + 7. C : 50 + 7. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B ! Le 0 est aux dizaines : il n'y a aucune dizaine. Donc 500 plus 7.",
+  "03-fin": "Le zéro ne s'écrit pas, mais il garde la place !",
+  "04-commentaire": "À toi : décompose 2 340. Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

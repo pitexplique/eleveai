@@ -1,0 +1,18 @@
+{
+  "00-garde": "Les rangs d'un nombre. Dans 5 482, quel est le chiffre des dizaines ?",
+  "01-situation": "Voici Inès. Elle est contrôleuse aérienne. Sur son écran, chaque altitude doit être lue au bon rang.",
+  "02-rangs": "On lit les rangs de droite à gauche : unités, dizaines, centaines, puis unités de mille.",
+  "03-exemple": "Dans 5 482 : 2 unités, 8 dizaines, 4 centaines, 5 unités de mille. Le chiffre des dizaines est 8.",
+  "04-question": "Question ! Dans 7 306, quel est le chiffre des centaines ? A : 7. B : 0. C : 3. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. De droite à gauche : 6 unités, 0 dizaine, 3 centaines, 7 milliers. Donc 3.",
+  "05-zero": "Un zéro est un chiffre comme un autre. Dans 7 305, le chiffre des dizaines est 0.",
+  "06-question": "Question ! Dans 85 676, à quel rang est le chiffre 7 ? A : aux dizaines. B : aux unités. C : aux unités de mille. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. On part de la droite : 6 unités, puis 7 dizaines. Le 7 est au rang des dizaines.",
+  "07-grands": "Au-delà de mille, on continue : dizaines de mille, puis centaines de mille.",
+  "08-question": "Question ! Dans 915 843, quel est le chiffre des centaines de mille ? A : 1. B : 8. C : 9. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. 915 843 s'écrit 915 puis 843. Le 9 est au rang des centaines de mille.",
+  "09-defi": "À toi de jouer ! Un avion vole à 5 102 mètres. Donne le chiffre des dizaines, puis celui des centaines. Mets pause, et cherche !",
+  "09b-correction": "Correction. De droite à gauche : 2 unités, 0 dizaine, 1 centaine. Dizaines : 0. Centaines : 1.",
+  "10-finale": "Ce que tu as appris. Les rangs se lisent de droite à gauche. Un zéro occupe un rang, lui aussi.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
