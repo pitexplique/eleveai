@@ -291,7 +291,23 @@ globalement.
 | A5′ — durées brutes des clips | paysage **171,4 s** (≈ 2 min 51 avant les pauses), short **58,1 s** — dans la fourchette de la série |
 | **A5 `cm1-entier-multiple`** | ✅ **FINI** : HD 2 min 51, **0 bord**, 0 `COCHE-RESERVE`, 15 écrans (pas de `07-cm2`), planche HD relue ; short 61,3 s, compteur revérifié SUR LE FILM ; publication complète. ⭐ Coach : **2 lignes seulement, au CM1** — relu à l'image, le CM2 ne montre AUCUNE vidéo sur sa micro `entier_multiple`, comme décidé |
 | A5′ — script Manim, HD, short, publication | ⏳ (ses voix sont validées : `830810afc`) |
-| A6 `entier_defi`, B1 → B5 (6 épisodes) | ⏳ |
+| **A6 `cm1-entier-defi`** | ✅ script, dry run propre (0 AUDIT-AVANCE / 0 RETARD / 0 BORD), **`-ql` relu écran par écran** (4 défauts corrigés) ; film du short écrit et ses images de contrôle relues (compteur 30,35 → 33,35 s). ⏳ **reste : le HD**, le film du short, la publication |
+| B1 → B5 en 6e (5 épisodes) | ⏳ |
+
+### A6 : quatre défauts, corrigés avant tout rendu HD
+
+1. **AUDIT-AVANCE de 0,10 s** (03-dernier-indice) : la ligne entière partait sur « est », donc le
+   « 2 » commençait son fondu avant d'être dit. Chaque morceau attend SON mot (piège n° 4).
+2. **Deux RETARD** (0,66 s en 02-indices, 0,60 s en 09b-correction), tous deux le piège trouvé sur
+   A5 : la synchro automatique retient déjà une ligne jusqu'à SON dernier mot (« Multiple de 10 : »
+   jusqu'à « 10 », « il reste 3 » jusqu'à « 3 »), donc l'`au_mot` posé ensuite arrive toujours trop
+   tard. Remèdes : faire arriver les points AVEC la ligne, et ne plus poser d'`au_mot` après.
+3. ⛔ **Vu seulement À L'IMAGE** : sur la barre de l'écart (08-question), les deux étiquettes
+   « 49 493 » et « 50 000 » se touchaient presque et rien ne disait OÙ était le trou. L'une marque
+   maintenant la partie pleine, l'autre le bout de la barre, et un « ? » occupe le trou.
+4. ⛔ **Les trois questions écrites ne disaient pas ce que la voix dit** (« Entre 6 000 et 6 100 »
+   pour « Je suis entre 6 000 et 6 100 », etc.). REGLES : « voix = écrit ». Les trois sont réécrites
+   mot pour mot.
 
 ### ⛔ A5 : six défauts, et QUATRE qui ne se voyaient qu'À L'IMAGE
 
