@@ -294,6 +294,10 @@ import e1reAutoPartieTout from "./premiere/auto_partie_tout";
 import e1reAutoCoefficientMultiplicateur from "./premiere/auto_coefficient_multiplicateur";
 import e1reAutoTauxEvolution from "./premiere/auto_taux_evolution";
 import e1reAutoLectureGraphique from "./premiere/auto_lecture_graphique";
+import e1reAutoResolutionGraphique from "./premiere/auto_resolution_graphique";
+import e1reAutoDroites from "./premiere/auto_droites";
+import e1reAutoLireStatistiques from "./premiere/auto_lire_statistiques";
+import e1reAutoIndicateurs from "./premiere/auto_indicateurs";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -598,6 +602,10 @@ const TOUTES: ProblemesNotion[] = [
   e1reAutoCoefficientMultiplicateur,
   e1reAutoTauxEvolution,
   e1reAutoLectureGraphique,
+  e1reAutoResolutionGraphique,
+  e1reAutoDroites,
+  e1reAutoLireStatistiques,
+  e1reAutoIndicateurs,
   // fin Première
 ];
 
