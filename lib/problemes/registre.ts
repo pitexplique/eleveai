@@ -204,6 +204,9 @@ import eCpCalculMental from "./cp/calcul_mental";
 import eCpProbleme from "./cp/probleme";
 import eCpLongueur from "./cp/longueur";
 import eCpMasseContenance from "./cp/masse_contenance";
+import eCpDuree from "./cp/duree";
+import eCpMonnaie from "./cp/monnaie";
+import eCpReperage from "./cp/reperage";
 // 3e (imports)
 import e3eFractionRationnel from "./3e/fraction_rationnel";
 import e3eEntierPuissance from "./3e/entier_puissance";
@@ -241,6 +244,9 @@ const TOUTES: ProblemesNotion[] = [
   eCpProbleme,
   eCpLongueur,
   eCpMasseContenance,
+  eCpDuree,
+  eCpMonnaie,
+  eCpReperage,
   // fin CP
   // CE1
   eCe1NombreEntier,
