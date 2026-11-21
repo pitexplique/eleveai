@@ -290,10 +290,26 @@ globalement.
 | **A5′ `cm2-entier-multiple` — ses 2 voix** | ✅ **validées par Frédéric le 21/11** (« Oui, lance ») : JSON écrits, **23 WAV** (16 + 7), marques du paysage faites (16 écrans, 0 sans marque) |
 | A5′ — durées brutes des clips | paysage **171,4 s** (≈ 2 min 51 avant les pauses), short **58,1 s** — dans la fourchette de la série |
 | **A5 `cm1-entier-multiple`** | ✅ **FINI** : HD 2 min 51, **0 bord**, 0 `COCHE-RESERVE`, 15 écrans (pas de `07-cm2`), planche HD relue ; short 61,3 s, compteur revérifié SUR LE FILM ; publication complète. ⭐ Coach : **2 lignes seulement, au CM1** — relu à l'image, le CM2 ne montre AUCUNE vidéo sur sa micro `entier_multiple`, comme décidé |
-| A5′ — script Manim, HD, short, publication | ⏳ (ses voix sont validées : `830810afc`) |
+| **A5′ `cm2-entier-multiple`** | ✅ script, dry run propre (0 AUDIT-AVANCE / 0 RETARD / 0 BORD ; 1 `COCHE-RESERVE`, le choix « on ne peut pas savoir »), **`-ql` relu écran par écran** (5 défauts corrigés). ⏳ **reste : le HD**, le short (⛔ série Ti Margo `cm2-entier` à CRÉER), la publication |
 | **A6 `cm1-entier-defi`** | ✅ **FINI** : HD 3 min 19,5, **0 bord**, 0 `COCHE-RESERVE`, 16 écrans, ⛔ **ceinture BLEUE** (la première du lot A) ; short 63,8 s, compteur revérifié SUR LE FILM (30,35 → 33,35 s) ; publication complète, coach 4 lignes relues à l'image au CM1 et au CM2 |
 | ✅✅ **LE LOT A EST FINI** | 6 épisodes = 12 vidéos en ligne. Lignes `notion_ressources` : 4 pour chacun de `lire`, `comparer`, `decomposer`, `arrondir`, `defi` (CM1 + CM2 par `aussi`) et **2 pour `multiple`, au CM1 seul** — soit **22 lignes**, vérifiées à l'image épisode par épisode |
 | B1 → B5 en 6e (5 épisodes) | ⏳ |
+
+### A5′ : cinq défauts, et DEUX qui ne se voyaient qu'À L'IMAGE
+
+1. **AUDIT-AVANCE de 0,51 s** (09-defi) : le « 5 » des boîtes partait sur « en boîtes de ».
+2. **Un BORD** (02-rappel) : la table de 3 écrite en une ligne faisait 7,5 unités et partait à
+   x = −7,5 (marge : −6,68) → `scale_to_fit_width(5.2)`.
+3. **Trois RETARD** (0,39 / 0,39 / 0,58 s), tous le même piège déjà payé sur A5 et A6 : la synchro
+   automatique retient une ligne jusqu'à SON dernier mot, et quand ce dernier mot est AUSSI la
+   marque visée (« Un multiple de 25 » puis « 25 finit par »), l'`au_mot` suivant est toujours en
+   retard. Remède : ne pas en poser, la ligne suivante se cale seule.
+4. ⛔ **Un emoji dans un `Text` Manim ne se rend PAS** — REGLES.md le dit, et l'image l'a prouvé :
+   le `⏳` de l'écran 02 avait purement disparu, il ne restait que les trois points. Remplaçé par
+   un sablier DESSINÉ (deux triangles). ⚠️ Aucun instrument ne signale un emoji manquant.
+5. ⛔ **Vu seulement À L'IMAGE** : sur le défi, l'étiquette « une boîte de 5 », posée SOUS la
+   boîte, arrivait à la hauteur de la question et la touchait (« une boîte de 5Reste-t-il »).
+   Elle passe AU-DESSUS de la boîte.
 
 ### A6 : quatre défauts, corrigés avant tout rendu HD
 
