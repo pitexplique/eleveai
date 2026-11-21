@@ -12,9 +12,9 @@
 import exercicesJson from "./exercices.json";
 
 export const VISITEURS = {
-  nombre: 5262,
+  nombre: 4959,
   /** Date du relevé Vercel (Last 7 Days, Production). */
-  releveLe: "2026-11-18",
+  releveLe: "2026-11-21",
 };
 
 export const EXERCICES = exercicesJson as { exercices: number; gabarits: number; compteLe: string };

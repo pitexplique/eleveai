@@ -20,7 +20,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, GraduationCap, Gift, PlayCircle, Users } from "lucide-react";
 import { CAP_VIDEOS, ECHEANCE_CAP, etatCompteurVideos } from "@/lib/videos/compteur";
-import { EXERCICES } from "@/lib/accueil/chiffres-semaine";
+import { EXERCICES, visiteursDeLaSemaine } from "@/lib/accueil/chiffres-semaine";
 import CompteurReponsesCoach from "@/components/coach/CompteurReponsesCoach";
 import { FREE_CLASSES_PER_TEACHER, PRIX_ANNUEL, PRIX_MENSUEL, QUOTAS_IA, montant } from "@/lib/tarifs";
 
@@ -28,9 +28,11 @@ export type VarianteCompteur = "barre" | "ligne";
 
 // `micros` (17/11) : le nombre de micro-compétences du CP à la Terminale, que
 // donnait le nuage « Tout le programme », retiré ; affiché dans « En chiffres ».
-export default function CompteurFamille({ variante, micros }: { variante: VarianteCompteur; micros?: number }) {
+// 21/11 : `micros` n'est plus affiché (« micro-compétences », un mot de prof) ; la prop reste.
+export default function CompteurFamille({ variante }: { variante: VarianteCompteur; micros?: number }) {
   const c = etatCompteurVideos();
   const cap = CAP_VIDEOS.toLocaleString("fr-FR");
+  const visiteurs = visiteursDeLaSemaine();
 
   if (variante === "ligne") {
     return (
@@ -231,14 +233,28 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
             {/* 21/11, Frédéric : « En chiffres : enlève le nombre de vidéos » →
                 plus de nombre, de barre ni de « 5 000 fin janvier ». */}
           </div>
-          <dl className={`grid shrink-0 ${micros ? "grid-cols-3" : "grid-cols-2"} gap-3 border-t border-slate-100 pt-2`}>
-            {micros ? chiffre(micros.toLocaleString("fr-FR"), "micro-compétences") : null}
-            {chiffre(EXERCICES.exercices.toLocaleString("fr-FR"), "exercices de maths")}
+          <dl className="grid shrink-0 grid-cols-2 gap-3 border-t border-slate-100 pt-2 sm:grid-cols-4">
+            {/* 21/11, Frédéric : « tu peux rajouter le nombre de vidéos », puis
+                « si tu étais un CEO, quel chiffre tu mettrais ? » (+ sa capture
+                Vercel) → ce qui parle à un parent : vidéos, visiteurs de la
+                semaine (relevé à la main, périmé après 21 j), exercices, et les
+                questions répondues EN DIRECT. « Micro-compétences » retiré :
+                un mot de prof. */}
             {/* 18/11, Frédéric : « il fallait enlever le nombre de visiteurs » →
                 à sa place, le compteur EN DIRECT des questions répondues au coach
                 (le même que le pied de page, jamais un chiffre tapé). */}
+            {/* 21/11, Frédéric : « le chiffre questions répondues en premier ». */}
             <CompteurReponsesCoach chiffre />
+            {chiffre(c.capAtteint ? `+ ${cap}` : c.nombreTexte, "vidéos")}
+            {visiteurs !== null && chiffre(visiteurs.toLocaleString("fr-FR"), "visiteurs cette semaine")}
+            {chiffre(EXERCICES.exercices.toLocaleString("fr-FR"), "exercices de maths")}
           </dl>
+          {/* 21/11, Frédéric : « ce que j'aimerais rajouter, c'est que des élèves
+              s'entraînent le soir et parfois le matin ». ⛔ Sans pourcentage
+              (« 80 % le soir » était faux, 16/11). */}
+          <p className="text-sm font-bold text-slate-700">
+            🌙 Des élèves s&apos;entraînent le soir, et parfois même le matin avant l&apos;école.
+          </p>
         </div>
       </div>
       {/* 17/11, Frédéric : « enlève la ligne sur Tommy » → citation d'élève retirée. */}

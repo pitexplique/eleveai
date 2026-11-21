@@ -104,7 +104,8 @@ export default function CompteurReponsesCoach({
       <div ref={boite as React.RefObject<HTMLDivElement>} className={["flex min-h-10 flex-col-reverse items-center text-center sm:items-start sm:text-left", className].join(" ")}>
         {affiche ? (
           <>
-            <dt className="text-xs font-bold leading-tight text-slate-600">questions répondues au coach</dt>
+            {/* 21/11 : « questions répondues au coach » passait sur 2 lignes (4 chiffres dans la bande). */}
+            <dt className="text-xs font-bold leading-tight text-slate-600">questions répondues</dt>
             <dd className="text-lg font-black tabular-nums text-slate-900 sm:text-xl">{affiche.toLocaleString("fr-FR")}</dd>
           </>
         ) : null}
