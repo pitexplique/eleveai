@@ -409,6 +409,10 @@ import eStmgFctEquationsPuissance from "./stmg/fct_equations_puissance";
 import eStmgDerSecanteTangente from "./stmg/der_secante_tangente";
 import eStmgDerNombreDerive from "./stmg/der_nombre_derive";
 import eStmgDerTangenteEquation from "./stmg/der_tangente_equation";
+import eStmgDerFormules from "./stmg/der_formules";
+import eStmgDerPolynome from "./stmg/der_polynome";
+import eStmgDerVariations from "./stmg/der_variations";
+import eStmgDerOptimisation from "./stmg/der_optimisation";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -834,6 +838,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgDerSecanteTangente,
   eStmgDerNombreDerive,
   eStmgDerTangenteEquation,
+  eStmgDerFormules,
+  eStmgDerPolynome,
+  eStmgDerVariations,
+  eStmgDerOptimisation,
   // fin STMG
 ];
 
