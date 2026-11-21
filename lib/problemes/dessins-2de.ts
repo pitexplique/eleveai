@@ -90,3 +90,15 @@ export const arbre2 = (
   });
   return s;
 };
+
+/** Un bloc de code Python : `lignes` = [texte, retrait] ; écrire `&lt;` pour « < ». */
+export const code = (
+  lignes: [string, number][], { x = 30, y = 30, larg = 420, pas = 36, taille = 21, surligne = -1 } = {}
+) =>
+  `<rect x="${x}" y="${y}" width="${larg}" height="${pas * lignes.length + 26}" rx="10" fill="${C.craie}" fill-opacity="0.05" stroke="${C.craie}" stroke-width="3"/>` +
+  lignes.map(([s, i], k) => t(x + 22 + 30 * i, y + 38 + pas * k, s, k === surligne ? C.bleu : C.craie, taille, "start")).join("");
+
+/** Une accolade de système : deux lignes d'équations à droite de x. */
+export const systeme = (x: number, y: number, e1: string, e2: string, c: string = C.craie, taille = 28) =>
+  p(`M${x + 14} ${y - 40} q-12 0 -12 12 v18 q0 10 -10 10 q10 0 10 10 v18 q0 12 12 12`, c, 3) +
+  t(x + 26, y - 10, e1, c, taille, "start") + t(x + 26, y + 34, e2, c, taille, "start");

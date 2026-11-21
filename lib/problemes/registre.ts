@@ -267,6 +267,10 @@ import e2deCroisementVariables2de from "./seconde/croisement_variables_2de";
 import e2deProbabilitesEnsembleFini from "./seconde/probabilites_ensemble_fini";
 import e2deProbabilitesConditionnelles2de from "./seconde/probabilites_conditionnelles_2de";
 import e2deEchantillonnageSimulation from "./seconde/echantillonnage_simulation";
+import e2deAlgorithmiquePython2de from "./seconde/algorithmique_python_2de";
+import e2deLogiqueEnsembles from "./seconde/logique_ensembles";
+import e2deDemiPlansSystemes from "./seconde/demi_plans_systemes";
+import e2deSystemesDeterminant from "./seconde/systemes_determinant";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -542,6 +546,10 @@ const TOUTES: ProblemesNotion[] = [
   e2deProbabilitesEnsembleFini,
   e2deProbabilitesConditionnelles2de,
   e2deEchantillonnageSimulation,
+  e2deAlgorithmiquePython2de,
+  e2deLogiqueEnsembles,
+  e2deDemiPlansSystemes,
+  e2deSystemesDeterminant,
   // fin Seconde
 ];
 
