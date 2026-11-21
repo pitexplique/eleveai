@@ -105140,6 +105140,151 @@
         "animaux",
         "sciences"
       ]
+    },
+    {
+      "id": "cm1-masse-defi",
+      "pas_avant": "2027-06-21",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_defi",
+      "classe": "cm1",
+      "ceinture": "bleue",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi.mp4",
+      "miniature": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi.png",
+      "titre": "Monte-charge de 1 t : combien de sacs de ciment ? — Le défi des masses — épisode 5 · Maths CM1",
+      "accroche": "Alice est cheffe de chantier : elle fait monter les sacs de ciment au troisième étage avec un monte-charge. Dans un défi à étapes, on convertit d'abord, on calcule étape par étape, puis on vérifie.\n\nDans cette vidéo :\n• le monte-charge porte au plus 1 tonne, c'est-à-dire 1 000 kg\n• un sac de ciment pèse 25 kg : 1 000 ÷ 25 = 40 sacs à la fois\n• 30 sacs de 25 kg : 30 × 25 = 750 kg, moins que 1 tonne\n• étape par étape : 750 + 80 + 20 = 850 kg avec l'ouvrier et sa brouette\n• 8 sacs de plus : 850 + 200 = 1 050 kg, plus que 1 tonne : non !\n• on convertit d'abord, on calcule étape par étape, puis on vérifie\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : Il faut monter 3 t de carrelage en paquets de 20 kg. Le monte-charge porte 1 t. Combien de paquets, et combien de voyages ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_defi&display=simple\n\n⚖️ Épisode 5 de la série Masses d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le défi des masses"
+        ],
+        [
+          "00:08",
+          "Alice, cheffe de chantier"
+        ],
+        [
+          "00:36",
+          "Question 1"
+        ],
+        [
+          "01:08",
+          "Étape par étape"
+        ],
+        [
+          "01:22",
+          "Question 2"
+        ],
+        [
+          "01:58",
+          "À toi de jouer"
+        ],
+        [
+          "02:16",
+          "Correction"
+        ],
+        [
+          "02:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "problème de masses",
+        "tonne",
+        "kilogramme",
+        "convertir",
+        "division",
+        "multiplication",
+        "chantier",
+        "monte-charge",
+        "défi",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:36",
+          "question": "Alice charge 30 sacs de 25 kilogrammes. Quelle masse ?",
+          "choix": [
+            "55 kilogrammes",
+            "7 500 kilogrammes",
+            "750 kilogrammes"
+          ],
+          "reponse": 2,
+          "explication": "30 × 25 : 750 kilogrammes. C'est moins que 1 tonne : ça passe."
+        },
+        {
+          "t": "01:22",
+          "question": "Peut-elle encore ajouter 8 sacs de 25 kilogrammes ?",
+          "choix": [
+            "non, 1 050 kilogrammes, c'est trop",
+            "oui, 858 kilogrammes",
+            "oui, 1 000 kilogrammes tout juste"
+          ],
+          "reponse": 0,
+          "explication": "8 × 25 : 200 kilogrammes. 850 + 200 : 1 050 kilogrammes, plus que 1 tonne. Non !"
+        }
+      ],
+      "centres": [
+        "construction",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-masse-defi-short",
+      "pas_avant": "2027-06-21",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_defi",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-masse-defi",
+      "fichier": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi-short.mp4",
+      "miniature": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi-short-miniature.png",
+      "titre": "Le piano dans l'ascenseur : ça passe ? #maths #cm1",
+      "accroche": "Avec mes copains, on prend l'ascenseur : 300 kg au plus. Nous : 40, 45 et 35 kg. Et ma copine veut monter le piano de 200 kg !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien de kilogrammes en trop, avec le piano ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cm1 #primaire",
+      "tags": [
+        "masse",
+        "problème",
+        "kilogramme",
+        "ascenseur",
+        "piano",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Peut-on monter avec le piano ?",
+          "choix": [
+            "non, 320 kilogrammes, c'est trop",
+            "oui, il reste de la place",
+            "oui, 300 kilogrammes tout juste"
+          ],
+          "reponse": 0,
+          "explication": "40 + 45 + 35 : 120 kilogrammes. Plus 200 : 320, c'est plus que 300 !"
+        }
+      ],
+      "centres": [
+        "musique",
+        "jeux-defis"
+      ]
     }
   ]
 }

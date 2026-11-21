@@ -17918,5 +17918,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_estimer&display=simple"
+ },
+ "cm1-masse-defi": {
+  "fichier": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi.mp4",
+  "poster": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi.png",
+  "vignette": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi.vignette.webp",
+  "titre": "Monte-charge de 1 t : combien de sacs de ciment ? — Le défi des masses — épisode 5 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_defi&display=simple"
+ },
+ "cm1-masse-defi-short": {
+  "fichier": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi-short.mp4",
+  "poster": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi-short-miniature.png",
+  "vignette": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi-short-miniature.vignette.webp",
+  "titre": "Le piano dans l'ascenseur : ça passe ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_defi&display=simple"
  }
 }

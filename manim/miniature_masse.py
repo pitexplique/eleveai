@@ -62,6 +62,8 @@ EP = [
      "2 kg = 2 000 g", True, "verte"),
     ("cm1", "estimer", "04-estimer", ["3 g, 3 kg", "OU 3 t ?"], "1 g = un trombone",
      "un colibri : environ 3 g", True, "jaune"),
+    ("cm1", "defi", "05-defi", ["1 t AU PLUS :", "COMBIEN DE SACS ?"], "1 t = 1 000 kg",
+     "1 000 ÷ 25 = 40 sacs", True, "bleue"),
 ]
 
 

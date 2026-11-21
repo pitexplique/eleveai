@@ -928,5 +928,11 @@
     "calcul": [["plume", "blanc", 190], ["= 0 g ?", "rouge", 190]],
     "margo": [320, 720, 640],
     "ceinture": "blanche"
+  },
+  "cm1-masse-defi-short": {
+    "question": ["Le piano dans l'ascenseur :", "ça passe ?"],
+    "calcul": [["300 kg max", "rouge", 170], ["+ piano 200 kg", "blanc", 150]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
   }
 }

@@ -378,3 +378,43 @@ function oeufM(c,x,yBas,h,z=1){ if(z<=0) return; h*=Math.min(1.15,z);
   c.fillStyle='#ffe8cc'; c.strokeStyle='#d9480f'; c.lineWidth=4;
   c.beginPath(); c.ellipse(x,yBas-h/2,h*.38,h/2,0,0,7); c.fill(); c.stroke();
   c.fillStyle='rgba(255,255,255,.7)'; c.beginPath(); c.ellipse(x-h*.14,yBas-h*.68,h*.07,h*.13,-.3,0,7); c.fill(); }
+
+/* ---- CM1 05 (défi) : l'ascenseur de 300 kg, les copains, le piano, l'escalier ---- */
+/* Un ascenseur ouvert : cadre d'acier, cabine sombre, portes poussées sur les côtés, plaque « 300 kg max » au-dessus ;
+   (x, yBas) = le milieu du bas ; s = 1 ≈ 450 × 520 px. Rend {g, d, yH} : les bords de la cabine et son haut. */
+function ascenseurM(c,x,yBas,s=1,z=1,texte='300 kg max'){ const k=Math.min(1.15,Math.max(z,0))*s, w=400*k, h=420*k;
+  if(z<=0) return {g:x-w/2,d:x+w/2,yH:yBas-h}; c.lineJoin='round';
+  c.fillStyle='#868e96'; c.strokeStyle='#343a40'; c.lineWidth=5; c.beginPath(); c.rect(x-w/2-22*k,yBas-h-22*k,w+44*k,h+22*k); c.fill(); c.stroke();
+  c.fillStyle='#1c2a3a'; c.beginPath(); c.rect(x-w/2,yBas-h,w,h); c.fill();
+  c.fillStyle='#adb5bd'; for(const u of [-1,1]){ c.beginPath(); c.rect(u<0?x-w/2:x+w/2-28*k,yBas-h,28*k,h); c.fill(); }
+  c.strokeStyle='#495057'; c.lineWidth=3; c.beginPath(); c.moveTo(x-w/2,yBas); c.lineTo(x+w/2,yBas); c.stroke();
+  if(texte){ const pw=300*k, ph=72*k, py=yBas-h-22*k-ph/2-10*k;
+    c.fillStyle='#f8f9fa'; c.strokeStyle='#e03131'; c.lineWidth=6*k; c.beginPath(); c.roundRect(x-pw/2,py-ph/2,pw,ph,12*k); c.fill(); c.stroke();
+    ecrire(c,texte,x,py+2*k,48*k,'#e03131'); }
+  return {g:x-w/2+28*k,d:x+w/2-28*k,yH:yBas-h}; }
+/* Un enfant debout, de face : tête, cheveux, t-shirt coloré, jambes ; (x, yBas) = les pieds ; h = la hauteur */
+function enfantM(c,x,yBas,h,z=1,coul='#4dabf7',cheveux='#3b2314',peau='#c68642'){ if(z<=0) return; h*=Math.min(1.15,z);
+  const r=h*.13, yT=yBas-h+r; c.lineJoin='round'; c.lineCap='round';
+  c.strokeStyle='#343a40'; c.lineWidth=Math.max(4,h*.05); for(const u of [-1,1]){ c.beginPath(); c.moveTo(x+u*h*.06,yBas-h*.36); c.lineTo(x+u*h*.08,yBas); c.stroke(); }
+  c.fillStyle=coul; c.beginPath(); c.moveTo(x-h*.15,yBas-h*.34); c.lineTo(x+h*.15,yBas-h*.34); c.lineTo(x+h*.11,yT+r*1.05); c.lineTo(x-h*.11,yT+r*1.05); c.closePath(); c.fill();
+  c.strokeStyle=coul; c.lineWidth=Math.max(4,h*.05); for(const u of [-1,1]){ c.beginPath(); c.moveTo(x+u*h*.12,yT+r*1.4); c.lineTo(x+u*h*.2,yBas-h*.4); c.stroke(); }
+  c.fillStyle=peau; c.beginPath(); c.arc(x,yT,r,0,7); c.fill();
+  c.fillStyle=cheveux; c.beginPath(); c.arc(x,yT-r*.15,r*1.02,Math.PI*1.02,Math.PI*1.98); c.fill();
+  c.fillStyle='#212529'; for(const u of [-1,1]){ c.beginPath(); c.arc(x+u*r*.38,yT+r*.1,Math.max(2,r*.12),0,7); c.fill(); }
+  c.strokeStyle='#212529'; c.lineWidth=Math.max(2,r*.1); c.beginPath(); c.arc(x,yT+r*.3,r*.35,.3,Math.PI-.3); c.stroke(); }
+/* Un piano droit noir, clavier blanc ; (x, yBas) = le milieu du bas ; s = 1 ≈ 260 × 230 px */
+function pianoM(c,x,yBas,s=1,z=1){ if(z<=0) return yBas-230*s; const k=Math.min(1.15,z)*s, w=260*k, h=230*k; c.lineJoin='round';
+  const yC=yBas-h*.42;
+  c.fillStyle='#212529'; c.strokeStyle='#868e96'; c.lineWidth=4; c.beginPath(); c.roundRect(x-w/2,yBas-h,w,h*.58,10*k); c.fill(); c.stroke();
+  c.fillStyle='#f8f9fa'; c.strokeStyle='#495057'; c.lineWidth=2; c.beginPath(); c.rect(x-w/2-8*k,yC,w+16*k,30*k); c.fill(); c.stroke();
+  for(let i=1;i<14;i++){ const u=x-w/2-8*k+i*(w+16*k)/14; c.beginPath(); c.moveTo(u,yC); c.lineTo(u,yC+30*k); c.stroke(); }
+  c.fillStyle='#212529'; for(let i=1;i<14;i++) if(i%7!==3&&i%7!==0) c.fillRect(x-w/2-8*k+i*(w+16*k)/14-5*k,yC,10*k,17*k);
+  c.fillStyle='#212529'; c.strokeStyle='#868e96'; c.lineWidth=4; c.beginPath(); c.rect(x-w/2,yC+30*k,w,h*.42-30*k); c.fill(); c.stroke();
+  c.fillStyle='#fab005'; for(const u of [-.3,.3]){ c.beginPath(); c.arc(x+u*w,yBas-h*.82,7*k,0,7); c.fill(); }
+  return yBas-h; }
+/* Un escalier qui monte vers la droite : n marches ; (x, yBas) = le bas à gauche ; w × h. Rend la marche i : [x, y]. */
+function escalierM(c,x,yBas,w,h,n=5,z=1){ if(z<=0) return i=>[x,yBas]; const k=Math.min(1.15,z), W=w*k, H=h*k, pw=W/n, ph=H/n;
+  c.strokeStyle=CRAIE.blanc; c.lineWidth=6; c.lineJoin='round'; c.beginPath(); c.moveTo(x,yBas);
+  for(let i=0;i<n;i++){ c.lineTo(x+i*pw,yBas-(i+1)*ph); c.lineTo(x+(i+1)*pw,yBas-(i+1)*ph); }
+  c.lineTo(x+W,yBas); c.closePath(); c.stroke();
+  return i=>[x+(i+.5)*pw,yBas-(i+1)*ph]; }
