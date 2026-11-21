@@ -88,6 +88,7 @@ export type Seance = {
     /** Une ligne peut être un lien (21/11 : l'article mène au Journal). */
     carte: (string | { texte: string; href: string })[];
     dessert: string;
+    dessertHref?: string;
     conseil: string;
     /** Sous le menu : les PDF du prof et la connexion des élèves (21/11, Frédéric). */
     ressources?: { label: string; href: string }[];
@@ -231,22 +232,24 @@ export const SEANCES: Seance[] = [
       entree: [
         // 21/11, Frédéric : « supprime le mot longueurs », et ces trois entrées.
         { texte: "Une énigme en slide", href: "/enigmes-maths" },
-        { texte: "Une notion en vidéo" },
-        { texte: "Des exercices interactifs" },
+        { texte: "Une notion en vidéo", href: "/video" },
+        { texte: "Des exercices interactifs", href: "/fiches-exercices" },
       ],
       // 21/11, Frédéric : « enlève le plat avec carte mentale » → plus de plat imposé.
       impose: [],
       carte: [
-        "Le coach, seul ou à deux (connecte-toi)",
-        "Les exercices interactifs",
+        // 21/11, Frédéric : « si tu le fais, tu le fais pour tous » → chaque ligne est un lien.
+        { texte: "Le coach, seul ou à deux (connecte-toi)", href: "/coach" },
+        { texte: "Les exercices interactifs", href: "/fiches-exercices" },
         // 21/11, Frédéric : « remplacer le cours écrit dans le cahier par autre chose ».
         { texte: "La carte mentale, à colorier", href: "/cartes-mentales" },
-        "Le découpage, avec l'AESH",
-        "Aller au tableau : corriger les exercices interactifs ou expliquer aux autres",
-        "Préparer un concours",
+        { texte: "Le découpage, avec l'AESH", href: "/seances#restaurant-6e-longueurs" },
+        { texte: "Aller au tableau : corriger les exercices interactifs ou expliquer aux autres", href: "/fiches-exercices" },
+        { texte: "Préparer un concours", href: "/concours-general" },
         { texte: "Les maths et ta passion : un article !", href: "/accueil-journal" },
       ],
       dessert: "Va trouver des maths dans ce que tu aimes.",
+      dessertHref: "/passions",
       signature: "Le chef cuisinier, Frédéric Lacoste",
       conseil:
         "L'entrée se fait tous ensemble, puis chacun choisit à la carte. Une classe qui a besoin de cadre : ajoutez un plat pour tous, par exemple « 5 questions du coach ».",

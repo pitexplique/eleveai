@@ -13,6 +13,10 @@ const CADRE =
   "relative overflow-hidden rounded-2xl border-4 border-double border-amber-700/60 bg-[#fffaf0] px-5 py-5 shadow-inner sm:px-8 print:break-inside-avoid print:shadow-none";
 const TITRE_PARTIE =
   "flex flex-wrap items-center justify-center gap-2 text-center text-sm font-black uppercase tracking-widest text-amber-900";
+// 21/11, Frédéric : « pourquoi tu soulignes en jaune ? » puis « si tu le fais, tu
+// le fais pour tous » → toutes les lignes sont des liens, même allure qu'un menu,
+// soulignées seulement au survol.
+const LIEN = "decoration-amber-500 decoration-2 underline-offset-4 hover:text-amber-900 hover:underline";
 const LIGNES = "mt-1 space-y-0.5 text-center text-base font-bold text-slate-800 sm:text-lg";
 
 function Badge({ children, couleur }: { children: React.ReactNode; couleur: string }) {
@@ -52,7 +56,7 @@ export function CarteProf({ menu }: { menu: Menu }) {
                 {menu.entree.map((e) => (
                   <li key={e.texte}>
                     {e.href ? (
-                      <Link href={e.href} className="underline decoration-amber-400 decoration-2 underline-offset-4 hover:text-amber-900 print:no-underline">
+                      <Link href={e.href} className={LIEN}>
                         {e.texte}
                       </Link>
                     ) : (
@@ -88,7 +92,7 @@ export function CarteProf({ menu }: { menu: Menu }) {
                 <li key={t}>{t}</li>
               ) : (
                 <li key={t.texte}>
-                  <Link href={t.href} className="underline decoration-amber-400 decoration-2 underline-offset-4 hover:text-amber-900">
+                  <Link href={t.href} className={LIEN}>
                     {t.texte}
                   </Link>
                 </li>
@@ -99,7 +103,9 @@ export function CarteProf({ menu }: { menu: Menu }) {
         <Separateur />
         <div>
           <p className={TITRE_PARTIE}>Le dessert 🍨</p>
-          <p className="mt-1 text-center text-base font-bold text-slate-800 sm:text-lg">{menu.dessert}</p>
+          <p className="mt-1 text-center text-base font-bold text-slate-800 sm:text-lg">
+            {menu.dessertHref ? <Link href={menu.dessertHref} className={LIEN}>{menu.dessert}</Link> : menu.dessert}
+          </p>
         </div>
         {menu.signature && (
           <p className="pr-2 text-right font-serif text-base italic text-amber-900 sm:text-lg">{menu.signature}</p>
