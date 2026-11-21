@@ -441,6 +441,10 @@ import eStmgLogiqueRaisonnement from "./stmg/logique_raisonnement";
 import eStmgAutoTerminaleReconnaitre from "./stmg/auto_terminale_reconnaitre";
 import eStmgAutoTerminaleDerivee from "./stmg/auto_terminale_derivee";
 import eStmgSuiteMoyennes from "./stmg/suite_moyennes";
+import eStmgSuiteSomme from "./stmg/suite_somme";
+import eStmgSuiteSommeSituations from "./stmg/suite_somme_situations";
+import eStmgSuiteComparer from "./stmg/suite_comparer";
+import eStmgFctInverse from "./stmg/fct_inverse";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -898,6 +902,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgAutoTerminaleReconnaitre,
   eStmgAutoTerminaleDerivee,
   eStmgSuiteMoyennes,
+  eStmgSuiteSomme,
+  eStmgSuiteSommeSituations,
+  eStmgSuiteComparer,
+  eStmgFctInverse,
   // fin STMG
 ];
 
