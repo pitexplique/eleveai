@@ -145,6 +145,10 @@ import eCm1Masse from "./cm1/masse";
 import eCm1Contenance from "./cm1/contenance";
 import eCm1Duree from "./cm1/duree";
 import eCm1Perimetre from "./cm1/perimetre";
+import eCm1Aire from "./cm1/aire";
+import eCm1Angle from "./cm1/angle";
+import eCm1Reperage from "./cm1/reperage";
+import eCm1Droite from "./cm1/droite";
 // 3e (imports)
 import e3eFractionRationnel from "./3e/fraction_rationnel";
 import e3eEntierPuissance from "./3e/entier_puissance";
@@ -177,6 +181,10 @@ const TOUTES: ProblemesNotion[] = [
   eCm1Contenance,
   eCm1Duree,
   eCm1Perimetre,
+  eCm1Aire,
+  eCm1Angle,
+  eCm1Reperage,
+  eCm1Droite,
   // CM2
   eCm2NombreEntier,
   eCm2Suite,
