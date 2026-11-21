@@ -17972,5 +17972,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_comparer&display=simple"
+ },
+ "cm2-entier-multiple": {
+  "fichier": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple.mp4",
+  "poster": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple.png",
+  "vignette": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple.vignette.webp",
+  "titre": "51 408 : multiple de 3, sans diviser ? — Les critères de divisibilité — épisode 1 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=nombre_entier&microId=entier_multiple&display=simple"
+ },
+ "cm2-entier-multiple-short": {
+  "fichier": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple-short.mp4",
+  "poster": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple-short-miniature.png",
+  "vignette": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple-short-miniature.vignette.webp",
+  "titre": "48 231 est-il un multiple de 3 ? Sans poser la division #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=nombre_entier&microId=entier_multiple&display=simple"
  }
 }

@@ -37,6 +37,9 @@ EP = [
     # ⛔ ceinture BLEUE : le défi est le cran au-dessus de la paysage verte du niveau.
     ("cm1", "defi", "06-defi", ["LE DÉFI", "DES NOMBRES"], "Mystère entre 3 900 et 4 000",
      "les indices, un par un !", True, "bleue"),
+    # ── Le 12ᵉ épisode : le CM2 seul (⛔ `entier_multiple` est SÉPARÉ, pas de `aussi`) ──
+    ("cm2", "multiple", "01-multiple", ["LES CRITÈRES", "DE DIVISIBILITÉ"], "51 408, multiple de 3 ?",
+     "on additionne les chiffres !", True, "verte"),
     # ── Lot B : la 6e (notion `entier_nombre`, pas de `aussi`) ──
     ("6e", "rang", "01-rang", ["LES RANGS", "D'UN NOMBRE"], "Dans 5 482 : le chiffre des dizaines ?",
      "on compte depuis la droite !", True, "verte"),

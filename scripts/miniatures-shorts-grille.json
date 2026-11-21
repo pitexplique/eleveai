@@ -933,6 +933,11 @@
     "calcul": [["507", "blanc", 200], ["500 + 70 ?", "rouge", 150]],
     "ceinture": "blanche"
   },
+  "cm2-entier-multiple-short": {
+    "question": ["Multiple de 3 :", "sans poser la division ?"],
+    "calcul": [["48 231", "blanc", 190], ["÷ 3 ?", "rouge", 170]],
+    "ceinture": "blanche"
+  },
   "6e-entier-comparer-short": {
     "question": ["Lequel est le plus grand :", "1 408 ou 1 480 ?"],
     "calcul": [["1 408 ou 1 480", "blanc", 120], ["8 > 0 ?", "rouge", 170]],

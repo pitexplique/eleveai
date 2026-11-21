@@ -105724,6 +105724,161 @@
         "espace",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm2-entier-multiple",
+      "pas_avant": "2027-06-19",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_multiple",
+      "classe": "cm2",
+      "ceinture": "verte",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple.mp4",
+      "miniature": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple.png",
+      "titre": "51 408 : multiple de 3, sans diviser ? — Les critères de divisibilité — épisode 1 · Maths CM2",
+      "accroche": "Hugo est pâtissier. Il range ses macarons par boîtes, sans qu'il en reste un seul — et pour savoir si un grand nombre tombe juste, il ne pose pas la division : il additionne les chiffres.\n\nDans cette vidéo :\n• un multiple de 3, c'est 3 fois un nombre entier — mais sur un grand nombre, diviser est long\n• le critère de 3 : si la somme des chiffres est un multiple de 3, le nombre l'est aussi (51 408 → 5 + 1 + 4 + 0 + 8 = 18)\n• même astuce pour 9 : 59 130 → 18, donc 59 130 est un multiple de 9\n• d'autres multiples se lisent à la FIN : un multiple de 25 finit par 00, 25, 50 ou 75\n• un multiple de 5 finit par 0 ou par 5 — c'est la fin qui répond, pas la division\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Hugo a 1 743 macarons, en boîtes de 5 : reste-t-il des macarons ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=nombre_entier&microId=entier_multiple&display=simple\n\n🔢 Épisode 1 de la série Nombres entiers d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "51 408, multiple de 3 ?"
+        ],
+        [
+          "00:35",
+          "Question 1"
+        ],
+        [
+          "01:13",
+          "Question 2"
+        ],
+        [
+          "01:44",
+          "Les multiples qui se lisent à la fin"
+        ],
+        [
+          "01:54",
+          "Question 3"
+        ],
+        [
+          "02:32",
+          "À toi de jouer"
+        ],
+        [
+          "02:45",
+          "Correction"
+        ],
+        [
+          "02:56",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "critères de divisibilité",
+        "multiple de 3",
+        "multiple de 9",
+        "somme des chiffres",
+        "multiple de 25",
+        "pâtissier",
+        "macarons",
+        "numération",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "Dans 51 408, quelle est la somme des chiffres ?",
+          "choix": [
+            "24",
+            "17",
+            "18"
+          ],
+          "reponse": 2,
+          "explication": "5 + 1 plus 4 + 0 plus 8 donne 18. Et 18 est un multiple de 3."
+        },
+        {
+          "t": "01:13",
+          "question": "La somme des chiffres de 59 130 vaut 18. Est-ce un multiple de 9 ?",
+          "choix": [
+            "non",
+            "oui",
+            "on ne peut pas savoir"
+          ],
+          "reponse": 1,
+          "explication": "18 est un multiple de 9. Donc 59 130 est un multiple de 9."
+        },
+        {
+          "t": "01:54",
+          "question": "Lequel est un multiple de 25 ?",
+          "choix": [
+            "858 445",
+            "858 152",
+            "858 250"
+          ],
+          "reponse": 2,
+          "explication": "Un multiple de 25 finit par 00, 25, 50 ou 75. Seul 858 250 finit par 50."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm2-entier-multiple-short",
+      "pas_avant": "2027-06-19",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_multiple",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-entier-multiple",
+      "fichier": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple-short.mp4",
+      "miniature": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple-short-miniature.png",
+      "titre": "48 231 est-il un multiple de 3 ? Sans poser la division #maths #cm2",
+      "accroche": "Mon copain veut savoir si 48 231 est un multiple de 3 et il pose la division. Ma copine additionne les chiffres — 4 + 8 + 2 + 3 + 1 font 18 — et elle a déjà fini. Pas besoin de diviser.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : 742 950 est-il un multiple de 50 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=nombre_entier&microId=entier_multiple&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #cm2 #primaire",
+      "tags": [
+        "nombres entiers",
+        "critère de divisibilité",
+        "multiple de 3",
+        "somme des chiffres",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Lequel est un multiple de 3 ?",
+          "choix": [
+            "57 651",
+            "57 658",
+            "57 671"
+          ],
+          "reponse": 0,
+          "explication": "5 + 7 plus 6 + 5 plus 1 donne 24, un multiple de 3."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
     }
   ]
 }

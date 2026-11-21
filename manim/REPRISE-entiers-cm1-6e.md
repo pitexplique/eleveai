@@ -199,6 +199,22 @@ Donc, pour chaque épisode, **une passe dédiée sur les maths seules**, indépe
     `entier_decomposer` 0, `entier_defi` 0. ⚠️ `grep -c "au_t("` compte les COMMENTAIRES : chaque
     script en a un qui dit qu'aucun `au_t()` n'est nécessaire.)
 
+38. ⛔ **VU SEULEMENT À L'IMAGE (A5′, short) — une barre de rature sur un texte COURT le recouvre
+    au lieu de le rayer.** « ÷ 3 » fait ~90 px de large : la barre l'a avalé, on lisait une tache
+    rouge et plus la division. ⭐ On raye l'expression ENTIÈRE (« 48 231 ÷ 3 », ~320 px) et la
+    barre se mesure sur elle. C'est le corollaire du piège n° 29 : **une barre se calcule sur ce
+    qu'elle raye, et sous ~120 px il n'y a plus rien à lire dessous.**
+39. ⚠️ **Un dry run annoncé propre par une autre session se re-mesure.** La note d'A5′ disait
+    « dry run propre (0 AUDIT-AVANCE) » ; le mien a sorti **AUDIT-AVANCE 09b-correction « 3 »
+    0,07 s** — le « 3 » de « 1 743 finit par 3 : » posé avec toute sa ligne, donc avant d'être dit.
+    0,07 s est sous le seuil du regard, pas sous celui de la règle (la tolérance est **0 s**).
+    Corrigé par un `au_mot("par 3 :")`. ⭐ Le relevé d'une autre session est un fait à vérifier,
+    pas un contrôle déjà passé.
+40. ⛔ **Le nom des clips varie d'un épisode à l'autre, et la table des écarts est indexée dessus.**
+    Le 2ᵉ clip du short d'A5′ s'appelle `01-astuce`, pas `01-oups` : recopier
+    `{ '01-oups': 1.2, … }` d'un autre film aurait supprimé son silence de 1,2 s **sans un mot**,
+    et décalé tout le film. ⭐ Lire les clés du JSON de voix avant de recopier une table d'écarts.
+
 ## Pièges d'infrastructure (toute la série)
 
 - ⛔⛔ **`verifier-fraicheur-mp4.py` ne voyait AUCUN script de cette série** (corrigé le 21/11).

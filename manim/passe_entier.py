@@ -196,6 +196,41 @@ EP = [
       s_toi="le plus petit nombre de quatre chiffres avec 0, 5, 3 et 8 ?",
       s_tags=["nombres entiers", "le plus grand nombre", "zéro devant", "défi"],
       s_centres=["jeux-defis", "technologie-ia"]),
+ # ── LE 12ᵉ ÉPISODE : `entier_multiple` au CM2, SÉPARÉ de celui du CM1 (Frédéric, 21/11 :
+ #    « une notion qui déborde est une notion neuve » — les critères de divisibilité par 3 et 9
+ #    sont une MÉTHODE que le CM1 n'a pas). ⛔ PAS de `aussi`, ni dans un sens ni dans l'autre :
+ #    `cm1-entier-multiple` fait 2 lignes au CM1, celui-ci 2 lignes au CM2. ⛔ Ne pas rouvrir.
+ dict(classe="cm2", n=1, slug="multiple", notion="nombre_entier", micro="entier_multiple",
+      nom="Les critères de divisibilité", date="2027-06-19", ceinture="verte",
+      # ⚠️ 101 caractères avec le gabarit : raccourci (la limite YouTube est 100).
+      titre="51 408 : multiple de 3, sans diviser ?",
+      intro="Hugo est pâtissier. Il range ses macarons par boîtes, sans qu'il en reste un seul — "
+            "et pour savoir si un grand nombre tombe juste, il ne pose pas la division : il "
+            "additionne les chiffres.",
+      points=["un multiple de 3, c'est 3 fois un nombre entier — mais sur un grand nombre, "
+              "diviser est long",
+              "le critère de 3 : si la somme des chiffres est un multiple de 3, le nombre l'est "
+              "aussi (51 408 → 5 + 1 + 4 + 0 + 8 = 18)",
+              "même astuce pour 9 : 59 130 → 18, donc 59 130 est un multiple de 9",
+              "d'autres multiples se lisent à la FIN : un multiple de 25 finit par 00, 25, 50 ou 75",
+              "un multiple de 5 finit par 0 ou par 5 — c'est la fin qui répond, pas la division"],
+      defi="Hugo a 1 743 macarons, en boîtes de 5 : reste-t-il des macarons ?",
+      chap={"00-garde": "51 408, multiple de 3 ?", "01-situation": "Hugo, pâtissier",
+            "02-rappel": "Diviser est long", "03-critere3": "Le critère de 3",
+            "04-question": "Question 1", "05-critere9": "Le critère de 9",
+            "06-question": "Question 2", "07-fins": "Les multiples qui se lisent à la fin",
+            "08-question": "Question 3", "09-defi": "À toi de jouer",
+            "09b-correction": "Correction", "10-finale": "Ce que tu as appris"},
+      tags=["nombres entiers", "critères de divisibilité", "multiple de 3", "multiple de 9",
+            "somme des chiffres", "multiple de 25", "pâtissier", "macarons"],
+      centres=["cuisine", "jeux-defis"],
+      s_titre="48 231 est-il un multiple de 3 ? Sans poser la division", s_ceinture="blanche",
+      s_accroche="Mon copain veut savoir si 48 231 est un multiple de 3 et il pose la division. "
+                 "Ma copine additionne les chiffres — 4 + 8 + 2 + 3 + 1 font 18 — et elle a déjà "
+                 "fini. Pas besoin de diviser.",
+      s_toi="742 950 est-il un multiple de 50 ?",
+      s_tags=["nombres entiers", "critère de divisibilité", "multiple de 3", "somme des chiffres"],
+      s_centres=["cuisine", "jeux-defis"]),
  # ── LOT B : la 6e, notion `entier_nombre`. ⛔ PAS de `aussi` : la 6e a sa propre notion, donc
  #    2 lignes `notion_ressources` par épisode (la paysage et le short), en 6e seulement.
  #    ⛔ `entier_lire_ecrire` n'est pas produit : l'ancienne vidéo `6e-entier-nombre` le couvre.

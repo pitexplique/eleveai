@@ -1,0 +1,7 @@
+{
+  "voix": "cm2-entier-{ep}-short",
+  "sons": "public/sons/cm2-entier-{ep}-short",
+  "sortie": "manim/sorties/cm2/maths/entiers/{num}-{ep}",
+  "nom": "eleveai-maths-cm2-entier-{ep}-short",
+  "episodes": { "multiple": "01" }
+}

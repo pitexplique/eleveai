@@ -424,7 +424,14 @@ class EntierMultipleCM2Base(PaysageEntierCM1):
         self.au_mot("1 743 finit")
         l3 = self.ligne([(nb(1743), WHITE), ("finit par", WHITE), ("3 :", NON_C)], 34, buff=0.18)
         self.col(l3, -0.35, XP)
-        self.play(FadeIn(l3, shift=UP * 0.1), FadeIn(n, scale=1.08), run_time=0.6)
+        # ⛔ MESURÉ au dry run du 22/11 : poser la ligne ENTIÈRE ici écrivait le « 3 » 0,07 s avant
+        #    qu'il soit dit (AUDIT-AVANCE ; la tolérance est 0 s, Frédéric le 24/10). Le chiffre
+        #    attend donc son propre mot, « par 3 : » (7,62 s) — 1,93 s après « 1 743 », donc aucun
+        #    risque de RETARD, et la dernière ligne garde sa synchro automatique.
+        self.play(FadeIn(l3[0], shift=UP * 0.1), FadeIn(l3[1], shift=UP * 0.1),
+                  FadeIn(n, scale=1.08), run_time=0.6)
+        self.au_mot("par 3 :")
+        self.play(FadeIn(l3[2], scale=1.12), run_time=0.35)
         # ⚠️ idem : la ligne précédente est retenue jusqu'à son « 3 : », l'`au_mot` suivant serait
         #    en retard de 0,58 s. La dernière ligne se cale sur ses propres mots.
         l4 = self.t("il en reste.", 38, NON_C)
