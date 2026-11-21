@@ -437,6 +437,10 @@ import eStmgAlgoFonctions from "./stmg/algo_fonctions";
 import eStmgTableurFormules from "./stmg/tableur_formules";
 import eStmgTableurRecopie from "./stmg/tableur_recopie";
 import eStmgLogiqueConnecteurs from "./stmg/logique_connecteurs";
+import eStmgLogiqueRaisonnement from "./stmg/logique_raisonnement";
+import eStmgAutoTerminaleReconnaitre from "./stmg/auto_terminale_reconnaitre";
+import eStmgAutoTerminaleDerivee from "./stmg/auto_terminale_derivee";
+import eStmgSuiteMoyennes from "./stmg/suite_moyennes";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -890,6 +894,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgTableurFormules,
   eStmgTableurRecopie,
   eStmgLogiqueConnecteurs,
+  eStmgLogiqueRaisonnement,
+  eStmgAutoTerminaleReconnaitre,
+  eStmgAutoTerminaleDerivee,
+  eStmgSuiteMoyennes,
   // fin STMG
 ];
 
