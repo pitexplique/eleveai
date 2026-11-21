@@ -15,7 +15,7 @@ Source unique : `manim/scripts/cm1/entier_voix.py` (on corrige LÀ, puis `--ecri
 
 **Shorts** : Ti Margo en dessin animé (« mon copain », « ma copine »), 1 question-pause, puis la question en commentaire. Un seul passage à La Réunion sur les 11 épisodes : Maya, volcanologue au Piton de la Fournaise (6e, défi).
 
-⚠️ **L'écran `07-cm2` du lot A** ouvre la classe des millions (ou le critère de divisibilité pour les multiples) : c'est l'écran qui couvre ce que la banque du CM2 demande en plus de celle du CM1. C'est aussi le seul écran à supprimer si tu préfères séparer un micro.
+✅ **L'écran `07-cm2` du lot A** ouvre la classe des millions (ou le critère de divisibilité pour les multiples) : c'est l'écran qui couvre ce que la banque du CM2 demande en plus de celle du CM1. **Gardé sur décision de Frédéric le 21/11** (« Oui, garde-le ») : les six micros restent mutualisés CM1 + CM2, une seule vidéo chacun.
 
 ---
 

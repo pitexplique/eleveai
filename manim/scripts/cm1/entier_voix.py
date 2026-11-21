@@ -19,7 +19,10 @@
 #   les 3 items `fixed` de chaque micro du CM2 sont bien des quasi-copies du CM1, MAIS les 8 à 11 GABARITS
 #   ajoutés le 14/11 montent aux millions et aux milliards sur les SIX micros. Chaque paysage du lot A porte
 #   donc un écran « 07-cm2 » qui ouvre la classe des millions (ou le critère de divisibilité pour les
-#   multiples) : c'est l'écran à supprimer si Frédéric décide de séparer un micro.
+#   multiples).
+# ✅ TRANCHÉ PAR FRÉDÉRIC LE 21/11 : « Oui, garde-le ». L'écran « 07-cm2 » RESTE dans les six paysages du
+#   lot A, et les six micros restent MUTUALISÉS CM1 + CM2 (une vidéo, deux lignes `notion_ressources`).
+#   ⛔ Ne pas rouvrir la question : ni supprimer cet écran, ni séparer un micro en deux vidéos.
 #
 # Questions-pauses : la place de la bonne réponse (A, B ou C) et l'ordre des leurres sont tirés au hasard
 # (⛔ GRAINE 2111), jamais deux fois la même lettre de suite dans une paysage, ≈ un tiers de A, de B, de C
@@ -574,9 +577,10 @@ def recap(tout):
          "puis la question en commentaire. Un seul passage à La Réunion sur les 11 épisodes : "
          "Maya, volcanologue au Piton de la Fournaise (6e, défi).",
          "",
-         "⚠️ **L'écran `07-cm2` du lot A** ouvre la classe des millions (ou le critère de divisibilité pour "
+         "✅ **L'écran `07-cm2` du lot A** ouvre la classe des millions (ou le critère de divisibilité pour "
          "les multiples) : c'est l'écran qui couvre ce que la banque du CM2 demande en plus de celle du "
-         "CM1. C'est aussi le seul écran à supprimer si tu préfères séparer un micro.",
+         "CM1. **Gardé sur décision de Frédéric le 21/11** (« Oui, garde-le ») : les six micros restent "
+         "mutualisés CM1 + CM2, une seule vidéo chacun.",
          "",
          "---",
          ""]

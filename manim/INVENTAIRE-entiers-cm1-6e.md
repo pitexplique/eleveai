@@ -161,9 +161,14 @@ Leurres typiques : le complément à 10 près, un 0 placé devant, deux chiffres
 
 ---
 
-## 3. ⚠️ Les deux écarts relevés, à trancher par Frédéric
+## 3. Les deux écarts relevés
 
-### a) Le CM2 va plus loin que le CM1 sur **les six** micros du lot A
+### a) ✅ TRANCHÉ — le CM2 va plus loin que le CM1 sur **les six** micros du lot A
+
+> ✅ **Décision de Frédéric, 21/11 : « Oui, garde-le ».** L'écran `07-cm2` reste dans les six paysages du
+> lot A, et les six micros restent **mutualisés CM1 + CM2** (une vidéo chacun, deux lignes
+> `notion_ressources`). ⛔ Ne pas rouvrir la question à la prochaine relève : ni supprimer cet écran, ni
+> séparer un micro en deux vidéos.
 
 La mutualisation a été décidée parce que les deux banques se ressemblaient : « trois mille deux cent
 quarante » au CM1, « cinq mille deux cent quarante » au CM2, même énoncé, mêmes leurres, même explication.
@@ -171,11 +176,10 @@ quarante » au CM1, « cinq mille deux cent quarante » au CM2, même énoncé, 
 14/11 montent d'un cran partout : millions et milliards pour lire, comparer et décomposer ; arrondi au
 million ; critères de divisibilité par 3 et par 9 ; défis à 7 chiffres.
 
-Ce qui a été fait, en attendant la décision : **chaque paysage du lot A porte un écran `07-cm2`** qui ouvre
-ce cran de plus (la classe des millions, ou le critère de divisibilité pour les multiples), suivi d'une
-question-pause prise dans la banque du **CM2**. La vidéo couvre donc ce que les deux banques demandent, et
-reste utilisable telle quelle au CM1 — l'écran est annoncé (« Et au CM2… »).
-⭐ **C'est le seul écran à supprimer** si Frédéric préfère séparer un micro en deux vidéos.
+Ce qui a été fait, et **validé** : **chaque paysage du lot A porte un écran `07-cm2`** qui ouvre ce cran de
+plus (la classe des millions, ou le critère de divisibilité pour les multiples), suivi d'une question-pause
+prise dans la banque du **CM2**. La vidéo couvre donc ce que les deux banques demandent, et reste utilisable
+telle quelle au CM1 — l'écran est annoncé (« Et au CM2… »).
 
 ### b) La 6e demande des nombres **plus petits** que le CM, pas plus grands
 
