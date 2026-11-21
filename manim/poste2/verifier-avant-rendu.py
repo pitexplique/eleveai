@@ -37,6 +37,20 @@ from pathlib import Path
 RACINE = Path(__file__).resolve().parents[2]
 FIN = " "  # l'espace fine insécable des nombres à espace (nb() dans les communs)
 
+# ⭐ Le gabarit ÉCRIT un signe là où la voix DIT un mot : `voixDe` fait déjà la correspondance
+#    ({'+': 'plus', '−': 'moins', '×': 'fois'}), et « 500 + 90 » est la bonne écriture de
+#    « 500 plus 90 ». Sans cette table, le point 4 criait au faux écart sur tout écran de
+#    décomposition. ⚠️ Le sens inverse n'existe pas : on n'écrit pas « plus » pour un « + » dit.
+SIGNES = {"+": "plus", "−": "moins", "-": "moins", "×": "fois", "=": "égale"}
+
+
+def comme_dit(s):
+    """Le texte écrit, relu comme la voix le dit : signes → mots, espace fine → espace."""
+    s = s.replace(FIN, " ")
+    for signe, mot in SIGNES.items():
+        s = s.replace(signe, mot)
+    return re.sub(r"\s+", " ", s).strip()
+
 
 def charger(chemin, classe):
     """Importe le script d'épisode et rend sa classe de scène (sans rien rendre)."""
@@ -125,7 +139,7 @@ def voix_egale_ecrit(src, textes):
         if not (isinstance(n, ast.Call) and getattr(n.func, "attr", "") == "question_gauche"):
             continue
         cq, cr = n.args[0].value, n.args[1].value
-        vq, vr = textes[cq].replace(FIN, " "), textes[cr].replace(FIN, " ")
+        vq, vr = comme_dit(textes[cq]), comme_dit(textes[cr])
         for quoi, idx, voix, nomv in (("question", 2, vq, cq), ("explication", 5, vr, cr)):
             for el in n.args[idx].elts:
                 s = texte_de(el)
@@ -133,7 +147,7 @@ def voix_egale_ecrit(src, textes):
                     print(f"[?] [{nomv}] {quoi} : ligne non lisible par l'outil -> a relire a la main")
                     pb += 1
                     continue
-                net = s.replace(FIN, " ").strip().rstrip(" :.,?").strip()
+                net = comme_dit(s).rstrip(" :.,?").strip()
                 if net and net not in voix:
                     print(f"[X] [{nomv}] {quoi} << {s} >> n'est PAS dans la voix mot pour mot")
                     pb += 1
@@ -142,7 +156,7 @@ def voix_egale_ecrit(src, textes):
             if s is None:
                 print(f"[?] [{cq}] choix non lisible par l'outil -> a relire a la main")
                 pb += 1
-            elif s.replace(FIN, " ").strip().rstrip(" .") not in vq:
+            elif comme_dit(s).rstrip(" .") not in vq:
                 print(f"[X] [{cq}] choix << {s} >> n'est PAS dit par la voix")
                 pb += 1
     return pb
