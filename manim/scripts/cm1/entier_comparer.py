@@ -260,12 +260,16 @@ class EntierComparerBase(PaysageEntierCM1):
         self.play(FadeIn(tit[1], shift=UP * 0.1), run_time=0.3)
         g = tableau_classes(("millions", "mille", "unités"), larg=0.98, h=0.78, fs_ent=18, fs_ban=18)
         g.move_to(P(-0.1, 0.95))
+        # ⚠️ -ql du 21/11 : la 2ᵉ ligne de chiffres était simplement décalée vers le BAS, donc écrite
+        #    SOUS le tableau, hors des cases — elle ne se lisait plus comme une ligne du tableau.
+        #    On descend une COPIE des cases avec elle : deux vraies lignes, comparables colonne par colonne.
+        DY = DOWN * 1.05
+        rang2 = hors_audit(g.tab.cases.copy().shift(DY))
         self.play(FadeIn(g, scale=1.04), run_time=0.5)
-        # deux nombres très proches, posés l'un sous l'autre : on compare classe par classe
         h1 = g.poser("6502890")
-        h2 = VGroup(*[t.copy().shift(DOWN * 1.05) for t in g.poser("6502590")])
+        h2 = VGroup(*[t.copy().shift(DY) for t in g.poser("6502590")])
         self.play(FadeIn(h1, scale=1.1), run_time=0.4)
-        self.play(FadeIn(h2, scale=1.1), run_time=0.4)
+        self.play(FadeIn(rang2), FadeIn(h2, scale=1.1), run_time=0.45)
         self.au_mot("Classe par classe, de gauche à droite")
         l0 = self.t("Classe par classe, de gauche à droite :", 32, JAUNE_TITRE)
         l0.move_to(P(-0.1, -1.55))

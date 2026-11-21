@@ -266,6 +266,14 @@ PREMIER mot de l'extrait, chaque nombre attend maintenant SON mot ; (2) la ligne
 « 12 408 et 12 804 : » partait à x = −6,7 → coupée en trois lignes courtes, sans changer un mot ;
 (3) deux figures `duel()` débordaient (−6,69 et −6,85) → **mesurées** avant correction, pas estimées.
 ⛔ `BOIS` n'existe PAS dans notre chaîne d'import (il vient du commun des Masses) : écrire la couleur.
+⚠️ Un 4ᵉ défaut, vu seulement à l'image : sur l'écran `07-cm2`, la 2ᵉ ligne de chiffres était décalée
+vers le bas sans ses cases, donc écrite **sous** le tableau — on descend une COPIE des cases avec elle.
+
+✅ **Vérifié à la mesure, pas à l'œil : l'espace fine insécable n'est PAS un sous-mobjet.**
+`Text("8 706")` a 4 sous-mobjets pour 4 chiffres, `Text("386 378")` en a 6 pour 6 chiffres. Les
+encadrés posés par index (`t[0:2]`, `t[2]`) tombent donc sur les bons chiffres — les écrans 03 et 09b
+de A2 paraissaient douteux sur la planche, ils sont justes. ⭐ À retenir pour les 9 épisodes suivants :
+indexer un nombre à espace par position de chiffre fonctionne.
 
 - **Outils neufs** : `entier_marques.py` (marques, prend la CLASSE en argument),
   `entier_commun.py` (le commun). ⛔ Tous deux sont des **COPIES** et non des imports de la série
