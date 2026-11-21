@@ -169,6 +169,10 @@ import eCe2Longueur from "./ce2/longueur";
 import eCe2Masse from "./ce2/masse";
 import eCe2Contenance from "./ce2/contenance";
 import eCe2Duree from "./ce2/duree";
+import eCe2Monnaie from "./ce2/monnaie";
+import eCe2Perimetre from "./ce2/perimetre";
+import eCe2Reperage from "./ce2/reperage";
+import eCe2DroitesAngles from "./ce2/droites_angles";
 // 3e (imports)
 import e3eFractionRationnel from "./3e/fraction_rationnel";
 import e3eEntierPuissance from "./3e/entier_puissance";
@@ -211,6 +215,10 @@ const TOUTES: ProblemesNotion[] = [
   eCe2Masse,
   eCe2Contenance,
   eCe2Duree,
+  eCe2Monnaie,
+  eCe2Perimetre,
+  eCe2Reperage,
+  eCe2DroitesAngles,
   // fin CE2
   // CM1
   eCm1NombreEntier,
