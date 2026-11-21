@@ -922,5 +922,11 @@
     "calcul": [["3 kg", "blanc", 190], ["÷ 500 g ?", "rouge", 190]],
     "margo": [320, 720, 640],
     "ceinture": "blanche"
+  },
+  "cm1-masse-estimer-short": {
+    "question": ["La balance affiche 0 g :", "la plume ne pèse rien ?"],
+    "calcul": [["plume", "blanc", 190], ["= 0 g ?", "rouge", 190]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
   }
 }

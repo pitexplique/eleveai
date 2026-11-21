@@ -347,3 +347,34 @@ function compoteM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const
   c.fillStyle='#4dabf7'; c.strokeStyle='#1864ab'; c.lineWidth=5; c.beginPath(); c.moveTo(x-w*.5,yH); c.quadraticCurveTo(x-w*.48,yBas,x,yBas);
   c.quadraticCurveTo(x+w*.48,yBas,x+w*.5,yH); c.closePath(); c.fill(); c.stroke();
   c.fillStyle='#ffffff'; for(const u of [-.25,0,.25]){ c.beginPath(); c.arc(x+u*w,yH+h*.45,9*s,0,7); c.fill(); } }
+/* (CM1 04 estimer) Une balance électronique de cuisine : (x, yBas) = le milieu du bas, s = l'échelle (1 ≈ 420 px de large) ;
+   texte = l'afficheur (« 0 g ») ; vif ∈ [0, 1] : l'afficheur clignote en jaune. Renvoie le dessus du plateau. */
+function balanceNumM(c,x,yBas,s=1,texte='0 g',z=1,vif=0){ if(z<=0) return yBas-120*s; s*=Math.min(1.15,z); const w=420*s, h=95*s;
+  c.lineJoin='round'; c.fillStyle='#495057'; c.strokeStyle='#212529'; c.lineWidth=5;
+  c.beginPath(); c.roundRect(x-w/2,yBas-h,w,h,22*s); c.fill(); c.stroke();
+  const ew=190*s, eh=58*s, ex=x-w*.12;
+  c.fillStyle=vif>0?'#3d3d00':'#0b3d1f'; c.beginPath(); c.roundRect(ex-ew/2,yBas-h/2-eh/2,ew,eh,8*s); c.fill();
+  c.fillStyle=vif>0?'#ffd43b':'#69db7c'; c.font=`800 ${Math.round(46*s)}px "Segoe UI"`; c.textAlign='center'; c.textBaseline='middle';
+  c.fillText(texte,ex,yBas-h/2+2*s);
+  c.fillStyle='#f59f00'; c.beginPath(); c.arc(x+w*.3,yBas-h/2,17*s,0,7); c.fill();
+  const py=yBas-h-14*s; c.fillStyle='#dee2e6'; c.strokeStyle='#868e96'; c.lineWidth=4;
+  c.beginPath(); c.roundRect(x-w*.46,py-12*s,w*.92,24*s,10*s); c.fill(); c.stroke();
+  return py-12*s; }
+/* Une plume d oiseau couchée : (x, y) = le centre, L = la longueur ; a = l angle */
+function plumeM(c,x,y,L,z=1,a=-.25){ if(z<=0) return; L*=Math.min(1.15,z);
+  c.save(); c.translate(x,y); c.rotate(a); c.lineJoin='round';
+  c.fillStyle='#f8f9fa'; c.strokeStyle='#adb5bd'; c.lineWidth=3;
+  c.beginPath(); c.moveTo(-L*.42,0); c.quadraticCurveTo(-L*.05,-L*.34,L*.5,-L*.02); c.quadraticCurveTo(-L*.05,L*.28,-L*.42,0); c.fill(); c.stroke();
+  c.strokeStyle='#ced4da'; c.lineWidth=2; for(let i=1;i<7;i++){ const u=-L*.35+i*L*.11;
+    c.beginPath(); c.moveTo(u,0); c.lineTo(u+L*.08,-L*.14); c.moveTo(u,0); c.lineTo(u+L*.08,L*.12); c.stroke(); }
+  c.strokeStyle='#868e96'; c.lineWidth=Math.max(3,L*.02); c.beginPath(); c.moveTo(-L*.5,0); c.lineTo(L*.48,-.01*L); c.stroke();
+  c.restore(); }
+/* Un tas de plumes : (x, yBas) = le milieu du bas, w = la largeur */
+function tasPlumesM(c,x,yBas,w,z=1){ if(z<=0) return; const k=Math.min(1.15,z);
+  for(let i=0;i<5;i++) for(let j=0;j<7-i;j++){ const px=x+(j-(6-i)/2)*w*.15*k, py=yBas-14-i*w*.07*k;
+    plumeM(c,px,py,w*.3*k,1,-.2+((i*7+j)%5)*.12); } }
+/* Un oeuf de poule debout : (x, yBas) = le milieu du bas, h = la hauteur */
+function oeufM(c,x,yBas,h,z=1){ if(z<=0) return; h*=Math.min(1.15,z);
+  c.fillStyle='#ffe8cc'; c.strokeStyle='#d9480f'; c.lineWidth=4;
+  c.beginPath(); c.ellipse(x,yBas-h/2,h*.38,h/2,0,0,7); c.fill(); c.stroke();
+  c.fillStyle='rgba(255,255,255,.7)'; c.beginPath(); c.ellipse(x-h*.14,yBas-h*.68,h*.07,h*.13,-.3,0,7); c.fill(); }

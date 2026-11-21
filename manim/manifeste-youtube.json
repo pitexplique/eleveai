@@ -104990,6 +104990,156 @@
         "cuisine",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm1-masse-estimer",
+      "pas_avant": "2027-06-20",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_estimer",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/masse/04-estimer/eleveai-maths-cm1-masse-estimer.mp4",
+      "miniature": "cm1/maths/masse/04-estimer/eleveai-maths-cm1-masse-estimer.png",
+      "titre": "Un colibri pèse-t-il 3 g, 3 kg ou 3 t ? — Estimer une masse — épisode 4 · Maths CM1",
+      "accroche": "Enzo est ornithologue : il étudie les oiseaux, il les pèse doucement, puis il les relâche. Pour estimer une masse, on choisit d'abord la bonne unité, puis on compare à un repère connu.\n\nDans cette vidéo :\n• la bonne unité : un colibri, quelques grammes ; un aigle, quelques kilogrammes ; un avion, des tonnes\n• un repère : 1 g, c'est un trombone ; le colibri pèse environ 3 g\n• 1 kg, c'est une brique de lait ; un aigle pèse environ 5 kg\n• un œuf de poule pèse environ 60 g\n• attention à l'unité : 5 kg, c'est un chat ; un éléphant pèse environ 5 t\n• pour un éléphant, la tonne est l'unité adaptée\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : Un moineau, un chien, une baleine. 30 g, 30 kg, 30 t. Qui pèse quoi ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_estimer&display=simple\n\n⚖️ Épisode 4 de la série Masses d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Estimer une masse"
+        ],
+        [
+          "00:17",
+          "D'abord, la bonne unité"
+        ],
+        [
+          "00:29",
+          "Puis un repère"
+        ],
+        [
+          "00:42",
+          "Question 1"
+        ],
+        [
+          "01:11",
+          "Attention à l'unité !"
+        ],
+        [
+          "01:24",
+          "Question 2"
+        ],
+        [
+          "01:50",
+          "À toi de jouer"
+        ],
+        [
+          "02:05",
+          "Correction"
+        ],
+        [
+          "02:15",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "estimer une masse",
+        "ordre de grandeur",
+        "gramme",
+        "kilogramme",
+        "tonne",
+        "repère",
+        "oiseaux",
+        "ornithologue",
+        "éléphant",
+        "colibri",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:42",
+          "question": "Environ combien pèse un œuf de poule ?",
+          "choix": [
+            "600 grammes",
+            "6 grammes",
+            "60 grammes"
+          ],
+          "reponse": 2,
+          "explication": "Un œuf pèse environ 60 grammes. 600 grammes, c'est plus qu'une demi-brique de lait !"
+        },
+        {
+          "t": "01:24",
+          "question": "Quelle unité choisir pour la masse d'un éléphant ?",
+          "choix": [
+            "la tonne",
+            "le litre",
+            "le gramme"
+          ],
+          "reponse": 0,
+          "explication": "Un éléphant pèse environ 5 tonnes : la tonne est l'unité adaptée."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "cm1-masse-estimer-short",
+      "pas_avant": "2027-06-20",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_estimer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-masse-estimer",
+      "fichier": "cm1/maths/masse/04-estimer/eleveai-maths-cm1-masse-estimer-short.mp4",
+      "miniature": "cm1/maths/masse/04-estimer/eleveai-maths-cm1-masse-estimer-short-miniature.png",
+      "titre": "La balance affiche 0 g : la plume ne pèse rien ? #maths #cm1",
+      "accroche": "Mon copain pèse une plume d'oiseau. La balance affiche… zéro ! Pourtant, la plume a une masse.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien pèse un œuf, à ton avis, en grammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cm1 #primaire",
+      "tags": [
+        "masse",
+        "estimer",
+        "gramme",
+        "plume",
+        "balance",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Une plume pèse…",
+          "choix": [
+            "environ 1 kilogramme",
+            "environ 100 grammes",
+            "moins de 1 gramme"
+          ],
+          "reponse": 2,
+          "explication": "Une plume pèse moins de 1 gramme : moins qu'un trombone !"
+        }
+      ],
+      "centres": [
+        "animaux",
+        "sciences"
+      ]
     }
   ]
 }

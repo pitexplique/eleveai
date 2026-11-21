@@ -60,6 +60,8 @@ EP = [
      "= 460 g", True, "jaune"),
     ("cm1", "convertir", "03-convertir", ["2 kg", "= ? g"], "On multiplie par 1 000",
      "2 kg = 2 000 g", True, "verte"),
+    ("cm1", "estimer", "04-estimer", ["3 g, 3 kg", "OU 3 t ?"], "1 g = un trombone",
+     "un colibri : environ 3 g", True, "jaune"),
 ]
 
 

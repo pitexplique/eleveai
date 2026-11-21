@@ -184,6 +184,8 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   // 177,00 s) ; short = « Mets » (56,08 + 2,351 = 58,43 s) + 0,03 s, mp4 de 62,61 s.
   "cm1-masse-convertir": 8.2,
   "cm1-masse-convertir-short": 4.15,
+  "cm1-masse-estimer": 8.2,
+  "cm1-masse-estimer-short": 4.15,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {
