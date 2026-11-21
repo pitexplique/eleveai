@@ -282,6 +282,10 @@ import e2deDroitesPerpendiculaires from "./seconde/droites_perpendiculaires";
 import e2deProjectionDroite from "./seconde/projection_droite";
 import e2deEspacePosition2de from "./seconde/espace_position_2de";
 import e2deComposeesTransformations from "./seconde/composees_transformations";
+import e1reAutoComparer from "./premiere/auto_comparer";
+import e1reAutoFractionsPuissances from "./premiere/auto_fractions_puissances";
+import e1reAutoOrdresUnites from "./premiere/auto_ordres_unites";
+import e1reAutoDevelopperFactoriser from "./premiere/auto_developper_factoriser";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -573,6 +577,12 @@ const TOUTES: ProblemesNotion[] = [
   e2deEspacePosition2de,
   e2deComposeesTransformations,
   // fin Seconde
+  // Première
+  e1reAutoComparer,
+  e1reAutoFractionsPuissances,
+  e1reAutoOrdresUnites,
+  e1reAutoDevelopperFactoriser,
+  // fin Première
 ];
 
 const PAR_CLE = new Map(TOUTES.map((n) => [`${n.classe}/${n.notionId}`, n]));
