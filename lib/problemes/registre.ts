@@ -306,6 +306,10 @@ import e1reInfoRepresentationsCroisees from "./premiere/info_representations_cro
 import e1reInfoNuage from "./premiere/info_nuage";
 import e1reInfoPointMoyen from "./premiere/info_point_moyen";
 import e1reInfoAjustementAffine from "./premiere/info_ajustement_affine";
+import e1reInfoInterpolerExtrapoler from "./premiere/info_interpoler_extrapoler";
+import e1reInfoTableur from "./premiere/info_tableur";
+import e1reInfoFiltreDonnees from "./premiere/info_filtre_donnees";
+import e1reAleaConditionnelle from "./premiere/alea_conditionnelle";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -622,6 +626,10 @@ const TOUTES: ProblemesNotion[] = [
   e1reInfoNuage,
   e1reInfoPointMoyen,
   e1reInfoAjustementAffine,
+  e1reInfoInterpolerExtrapoler,
+  e1reInfoTableur,
+  e1reInfoFiltreDonnees,
+  e1reAleaConditionnelle,
   // fin Première
 ];
 
