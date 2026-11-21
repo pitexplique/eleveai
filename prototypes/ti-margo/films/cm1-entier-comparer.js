@@ -62,7 +62,9 @@ FILMS['comparer'] = function (outils) {
       nG: T >= tTrois ? zoom(T, tTrois, .35) : 0, nD: T >= tQuatre ? zoom(T, tQuatre, .35) : 0,
     });
     if (T >= tGrand && T < sur) ecrire(c, '>', 500, YN, 120 * zoom(T, tGrand, .3), CRAIE.faux);
-    if (T >= t9 && T < sur) { cercle(c, XG - 76, YN, 62, CRAIE.faux, entre(T, t9, t9 + .3)); ecrire(c, '9 !', XG - 76, 440, 68 * zoom(T, t9, .3), CRAIE.faux); }
+    /* le 9 du copain reste entouré pendant qu'on compte : c'est SON argument qu'on met à l'épreuve */
+    if (T >= t9 && T < tTrois) cercle(c, XG - 76, YN, 62, CRAIE.faux, entre(T, t9, t9 + .3));
+    if (T >= t9 && T < sur) ecrire(c, '9 !', XG - 76, 440, 68 * zoom(T, t9, .3), CRAIE.faux);
     if (T >= sur) ecrire(c, '?', 500, YN, 120, CRAIE.ret);
     tab.maj();
   }

@@ -17774,5 +17774,41 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_relations&display=simple"
+ },
+ "cm1-entier-comparer": {
+  "fichier": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer.mp4",
+  "poster": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer.png",
+  "vignette": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer.vignette.webp",
+  "titre": "9 876 ou 10 234 : lequel est le plus grand ? — Comparer des grands nombres — épisode 2 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_comparer&display=simple"
+ },
+ "cm1-entier-comparer-short": {
+  "fichier": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer-short.mp4",
+  "poster": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer-short-miniature.png",
+  "vignette": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer-short-miniature.vignette.webp",
+  "titre": "987 ou 1 002 : il commence par 9, donc il gagne ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_comparer&display=simple"
+ },
+ "cm1-entier-lire": {
+  "fichier": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire.mp4",
+  "poster": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire.png",
+  "vignette": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire.vignette.webp",
+  "titre": "« Douze mille trente » : combien de zéros ? — Lire les grands nombres — épisode 1 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_lire&display=simple"
+ },
+ "cm1-entier-lire-short": {
+  "fichier": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire-short.mp4",
+  "poster": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire-short-miniature.png",
+  "vignette": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire-short-miniature.vignette.webp",
+  "titre": "« Huit mille neuf » : où va le neuf ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_lire&display=simple"
  }
 }

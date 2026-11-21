@@ -103963,6 +103963,338 @@
       ],
       "pas_avant": "2026-11-25",
       "url": "https://youtube.com/shorts/QWuJ6Bmc_Y0"
+    },
+    {
+      "id": "cm1-entier-lire",
+      "pas_avant": "2027-06-13",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_lire",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire.mp4",
+      "miniature": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire.png",
+      "titre": "« Douze mille trente » : combien de zéros ? — Lire les grands nombres — épisode 1 · Maths CM1",
+      "accroche": "Diego est cartographe : il dessine les cartes et écrit l'altitude de chaque sommet. Pour ne pas se tromper d'un zéro, il range les chiffres par classes de trois.\n\nDans cette vidéo :\n• un grand nombre se range par classes de trois chiffres (mille, unités)\n• le zéro garde la place vide : « douze mille trente » s'écrit 12 030\n• le CHIFFRE des dizaines n'est pas le NOMBRE de dizaines (29 404 → 2 940 dizaines)\n• et au CM2 : une classe de plus, les millions\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : écrire « quarante mille huit » en chiffres : combien de zéros ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_lire&display=simple\n\n🔢 Épisode 1 de la série Nombres entiers d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de zéros ?"
+        ],
+        [
+          "00:35",
+          "Question 1"
+        ],
+        [
+          "01:12",
+          "Question 2"
+        ],
+        [
+          "01:43",
+          "Et au CM2 : les millions"
+        ],
+        [
+          "01:54",
+          "Question 3"
+        ],
+        [
+          "02:31",
+          "À toi de jouer"
+        ],
+        [
+          "02:51",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "lire un grand nombre",
+        "écrire en chiffres",
+        "classes de trois chiffres",
+        "tableau de numération",
+        "le zéro",
+        "cartographe",
+        "altitude",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "Comment écrit-on « douze mille trente » en chiffres ?",
+          "choix": [
+            "12 030",
+            "12 300",
+            "1 230"
+          ],
+          "reponse": 0,
+          "explication": "« Trente », c'est 030 dans la classe des unités. Le zéro garde la place des centaines."
+        },
+        {
+          "t": "01:12",
+          "question": "Dans 29 404, combien de dizaines en tout ?",
+          "choix": [
+            "4",
+            "2 940",
+            "294"
+          ],
+          "reponse": 1,
+          "explication": "On cache le dernier chiffre et on lit 2 940. Le chiffre des dizaines, lui, est 0."
+        },
+        {
+          "t": "01:54",
+          "question": "« Soixante-dix millions neuf cent cinquante-sept » : quelle écriture est juste ?",
+          "choix": [
+            "70 000 957",
+            "7 000 957",
+            "70 957"
+          ],
+          "reponse": 0,
+          "explication": "Après la première classe, chaque classe prend trois chiffres : 70, puis 000, puis 957."
+        }
+      ],
+      "centres": [
+        "histoire-geographie"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_lire"
+        }
+      ]
+    },
+    {
+      "id": "cm1-entier-lire-short",
+      "pas_avant": "2027-06-13",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_lire",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-entier-lire",
+      "fichier": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire-short.mp4",
+      "miniature": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire-short-miniature.png",
+      "titre": "« Huit mille neuf » : où va le neuf ? #maths #cm1",
+      "accroche": "Mon copain écrit « huit mille neuf » sur le tableau… et il pose 8 900. Son neuf est tombé dans les centaines ! Deux zéros gardent la place : 8 009.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : écris « soixante mille quarante » en chiffres. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_lire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #cm1 #primaire",
+      "tags": [
+        "nombres entiers",
+        "écrire en chiffres",
+        "le zéro",
+        "tableau de numération",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "« Huit mille neuf », ça s'écrit comment ?",
+          "choix": [
+            "8 009",
+            "8 090",
+            "8 900"
+          ],
+          "reponse": 0,
+          "explication": "Neuf unités : deux zéros gardent les centaines et les dizaines."
+        }
+      ],
+      "centres": [
+        "histoire-geographie",
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_lire"
+        }
+      ]
+    },
+    {
+      "id": "cm1-entier-comparer",
+      "pas_avant": "2027-06-14",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_comparer",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer.mp4",
+      "miniature": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer.png",
+      "titre": "9 876 ou 10 234 : lequel est le plus grand ? — Comparer des grands nombres — épisode 2 · Maths CM1",
+      "accroche": "Malik est bibliothécaire : il range les livres du plus petit numéro au plus grand. Pour comparer deux nombres, il compte d'abord les chiffres.\n\nDans cette vidéo :\n• d'abord on compte les chiffres : plus de chiffres, c'est plus grand\n• même nombre de chiffres : on compare de gauche à droite, jusqu'au premier qui diffère\n• le piège : 9 876 commence par 9, mais 10 234 a un chiffre de plus\n• et au CM2 : la même règle, classe par classe, jusqu'aux millions\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : trois classes ont ramassé 386 378, 389 358 et 389 378 bouchons : qui gagne ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_comparer&display=simple\n\n🔢 Épisode 2 de la série Nombres entiers d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Lequel est le plus grand ?"
+        ],
+        [
+          "00:31",
+          "Question 1"
+        ],
+        [
+          "01:00",
+          "Le piège"
+        ],
+        [
+          "01:11",
+          "Question 2"
+        ],
+        [
+          "01:54",
+          "Question 3"
+        ],
+        [
+          "02:41",
+          "À toi de jouer"
+        ],
+        [
+          "03:02",
+          "Correction"
+        ],
+        [
+          "03:16",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "comparer des nombres",
+        "ordre croissant",
+        "plus grand que",
+        "signes < et >",
+        "ranger des nombres",
+        "bibliothécaire",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "12 408 et 12 804 : quel signe faut-il ?",
+          "choix": [
+            "plus grand",
+            "plus petit",
+            "égal"
+          ],
+          "reponse": 1,
+          "explication": "Les deux commencent par 12. Ensuite 4 centaines est plus petit que 8 centaines."
+        },
+        {
+          "t": "01:11",
+          "question": "Quel nombre est le plus grand : 9 876 ou 10 234 ?",
+          "choix": [
+            "10 234",
+            "9 876",
+            "les deux sont égaux"
+          ],
+          "reponse": 0,
+          "explication": "10 234 a cinq chiffres, 9 876 n'en a que quatre. Plus de chiffres, plus grand."
+        },
+        {
+          "t": "01:54",
+          "question": "Range dans l'ordre croissant : 3 450, 3 045, 3 405.",
+          "choix": [
+            "3 405, 3 045, 3 450",
+            "3 045, 3 450, 3 405",
+            "3 045, 3 405, 3 450"
+          ],
+          "reponse": 2,
+          "explication": "Croissant, c'est du plus petit au plus grand : 3 045, puis 3 405, puis 3 450."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "histoire-geographie"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_comparer"
+        }
+      ]
+    },
+    {
+      "id": "cm1-entier-comparer-short",
+      "pas_avant": "2027-06-14",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_comparer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-entier-comparer",
+      "fichier": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer-short.mp4",
+      "miniature": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer-short-miniature.png",
+      "titre": "987 ou 1 002 : il commence par 9, donc il gagne ? #maths #cm1",
+      "accroche": "Mon copain dit que 987 est plus grand que 1 002, parce qu'il commence par 9. On compte les chiffres : trois contre quatre. Quatre chiffres battent trois chiffres.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : range 4 410, 4 140 et 4 190 du plus petit au plus grand. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #cm1 #primaire",
+      "tags": [
+        "nombres entiers",
+        "comparer",
+        "plus grand",
+        "compter les chiffres",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Lequel est le plus grand : 987 ou 1 002 ?",
+          "choix": [
+            "987",
+            "1 002",
+            "c'est pareil"
+          ],
+          "reponse": 1,
+          "explication": "Quatre chiffres battent trois chiffres. 1 002 gagne."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "histoire-geographie"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_comparer"
+        }
+      ]
     }
   ]
 }

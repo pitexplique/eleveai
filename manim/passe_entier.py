@@ -1,0 +1,204 @@
+# passe_entier.py
+# Passe finale de la série NOMBRES ENTIERS, du CM1 à la 6e (21/11/2026, poste 2) — copie de
+# passe_masse.py : temps des chapitres et des questions relevés dans l'AUDIO des mp4
+# (passe_relatifs.mesurer), questions lues dans les voix validées. Le manifeste a des modifications
+# non commitées d'autres sessions : on relit la copie de travail et on ajoute ou remplace SEULEMENT
+# nos entrées (<classe>-entier-<slug>[-short]).
+#
+# ⛔ LOT A (CM1) : une seule vidéo par micro, servie AUSSI au CM2 (mécanisme `aussi`). Les microId du
+#    CM1 et du CM2 sont IDENTIQUES sous la notion `nombre_entier` : l'alias porte donc la CLASSE.
+# ⛔ `6e-entier-lire-ecrire` n'est PAS produit : l'ancienne vidéo `6e-entier-nombre` le couvre.
+#
+#   python manim/passe_entier.py temps [id]   → manim/sorties/<classe>/maths/entiers/temps.json
+#   python manim/passe_entier.py voir         → affiche les entrées sans rien écrire
+#   python manim/passe_entier.py manifeste    → ajoute ou remplace les entrées
+import json
+import shutil
+import sys
+import tempfile
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from passe_relatifs import mesurer, mmss  # noqa: E402
+from passe_decimaux import question, chapitres  # noqa: E402
+
+RACINE = Path(__file__).resolve().parents[1]
+SORTIES = RACINE / "manim" / "sorties"
+VOIX = RACINE / "manim" / "voix"
+MANIFESTE = RACINE / "manim" / "manifeste-youtube.json"
+COACH = "https://www.eleveai.fr/coach/serie?classe={classe}&matiere=maths&notion={notion}&microId={micro}&display=simple"
+NOM_CEINT = {"blanche": "Ceinture blanche", "jaune": "Ceinture jaune", "orange": "Ceinture orange",
+             "verte": "Ceinture verte", "bleue": "Ceinture bleue", "marron": "Ceinture marron", "noire": "Ceinture noire"}
+CYCLE = {"cm1": "cycle 3", "cm2": "cycle 3", "6e": "cycle 3"}
+NIVEAU = {"cm1": "primaire", "cm2": "primaire", "6e": "collège"}
+
+# Dates : après la dernière de la file (12/06/2027 le 21/11) ; ⛔ 3 shorts par jour au plus,
+# relire la file (max `pas_avant` du manifeste) avant d'en ajouter.
+EP = [
+ dict(classe="cm1", n=1, slug="lire", notion="nombre_entier", micro="entier_lire",
+      nom="Lire les grands nombres", date="2027-06-13", ceinture="verte",
+      titre="« Douze mille trente » : combien de zéros ?",
+      intro="Diego est cartographe : il dessine les cartes et écrit l'altitude de chaque sommet. "
+            "Pour ne pas se tromper d'un zéro, il range les chiffres par classes de trois.",
+      points=["un grand nombre se range par classes de trois chiffres (mille, unités)",
+              "le zéro garde la place vide : « douze mille trente » s'écrit 12 030",
+              "le CHIFFRE des dizaines n'est pas le NOMBRE de dizaines (29 404 → 2 940 dizaines)",
+              "et au CM2 : une classe de plus, les millions"],
+      defi="écrire « quarante mille huit » en chiffres : combien de zéros ?",
+      chap={"00-garde": "Combien de zéros ?", "01-situation": "Diego, cartographe",
+            "02-classes": "Les classes de trois chiffres", "03-zero": "Le zéro garde la place",
+            "04-question": "Question 1", "05-chiffre-nombre": "Chiffre ou nombre de dizaines ?",
+            "06-question": "Question 2", "07-cm2": "Et au CM2 : les millions", "08-question": "Question 3",
+            "09-defi": "À toi de jouer", "09b-correction": "Correction", "10-finale": "Ce que tu as appris"},
+      tags=["nombres entiers", "lire un grand nombre", "écrire en chiffres", "classes de trois chiffres",
+            "tableau de numération", "le zéro", "cartographe", "altitude"],
+      centres=["histoire-geographie"],
+      aussi=[{"classe": "cm2", "notionId": "nombre_entier", "microId": "entier_lire"}],
+      s_titre="« Huit mille neuf » : où va le neuf ?", s_ceinture="blanche",
+      s_accroche="Mon copain écrit « huit mille neuf » sur le tableau… et il pose 8 900. Son neuf est "
+                 "tombé dans les centaines ! Deux zéros gardent la place : 8 009.",
+      s_toi="écris « soixante mille quarante » en chiffres.",
+      s_tags=["nombres entiers", "écrire en chiffres", "le zéro", "tableau de numération"],
+      s_centres=["histoire-geographie", "jeux-defis"]),
+ dict(classe="cm1", n=2, slug="comparer", notion="nombre_entier", micro="entier_comparer",
+      nom="Comparer des grands nombres", date="2027-06-14", ceinture="verte",
+      titre="9 876 ou 10 234 : lequel est le plus grand ?",
+      intro="Malik est bibliothécaire : il range les livres du plus petit numéro au plus grand. "
+            "Pour comparer deux nombres, il compte d'abord les chiffres.",
+      points=["d'abord on compte les chiffres : plus de chiffres, c'est plus grand",
+              "même nombre de chiffres : on compare de gauche à droite, jusqu'au premier qui diffère",
+              "le piège : 9 876 commence par 9, mais 10 234 a un chiffre de plus",
+              "et au CM2 : la même règle, classe par classe, jusqu'aux millions"],
+      defi="trois classes ont ramassé 386 378, 389 358 et 389 378 bouchons : qui gagne ?",
+      chap={"00-garde": "Lequel est le plus grand ?", "01-situation": "Malik, bibliothécaire",
+            "02-compter": "On compte les chiffres", "03-colonne": "De gauche à droite",
+            "04-question": "Question 1", "05-piege": "Le piège", "06-question": "Question 2",
+            "07-cm2": "Et au CM2 : les millions", "08-question": "Question 3",
+            "09-defi": "À toi de jouer", "09b-correction": "Correction", "10-finale": "Ce que tu as appris"},
+      tags=["nombres entiers", "comparer des nombres", "ordre croissant", "plus grand que",
+            "signes < et >", "ranger des nombres", "bibliothécaire"],
+      centres=["jeux-defis", "histoire-geographie"],
+      aussi=[{"classe": "cm2", "notionId": "nombre_entier", "microId": "entier_comparer"}],
+      s_titre="987 ou 1 002 : il commence par 9, donc il gagne ?", s_ceinture="blanche",
+      s_accroche="Mon copain dit que 987 est plus grand que 1 002, parce qu'il commence par 9. "
+                 "On compte les chiffres : trois contre quatre. Quatre chiffres battent trois chiffres.",
+      s_toi="range 4 410, 4 140 et 4 190 du plus petit au plus grand.",
+      s_tags=["nombres entiers", "comparer", "plus grand", "compter les chiffres"],
+      s_centres=["jeux-defis", "histoire-geographie"]),
+]
+
+COMMUNS = ["nombres entiers", "numération", "maths"]
+
+
+def dossier(e):
+    return f"{e['classe']}/maths/entiers/{e['n']:02d}-{e['slug']}"
+
+
+def temps_de(classe):
+    p = SORTIES / classe / "maths" / "entiers" / "temps.json"
+    return p, (json.loads(p.read_text(encoding="utf-8")) if p.exists() else {})
+
+
+def entrees():
+    out = []
+    for e in EP:
+        cl, n, slug = e["classe"], e["n"], e["slug"]
+        ident = f"{cl}-entier-{slug}"
+        _, temps = temps_de(cl)
+        if ident not in temps:
+            continue
+        CL = cl.upper() if cl != "6e" else "6e"
+        communs = COMMUNS + [CL, NIVEAU[cl], CYCLE[cl], "CRPE", "EleveAI"]
+        dos = dossier(e)
+        nom = f"eleveai-maths-{ident}"
+        notion = e["notion"]
+        coach = COACH.format(classe=cl, micro=e["micro"], notion=notion)
+        voix = json.loads((VOIX / f"{ident}.json").read_text(encoding="utf-8"))
+        t = temps[ident]
+        titre = f"{e['titre']} — {e['nom']} — épisode {n} · Maths {CL}"
+        acc = e["intro"] + "\n\nDans cette vidéo :\n" + "\n".join("• " + p for p in e["points"])
+        acc += (f"\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 {NOM_CEINT[e['ceinture']]}.\n"
+                f"Un défi en fin de vidéo, avec sa correction : {e['defi']}")
+        acc += f"\n\nPour s'entraîner :\n• la série du coach sur cette compétence : {coach}"
+        acc += f"\n\n🔢 Épisode {n} de la série Nombres entiers d'EleveAI, en {CL}."
+        qs = [dict(t=mmss(t["clips"][c]), **question(voix, c)) for c in voix if c.endswith("-question")]
+        out.append({
+            "id": ident, "pas_avant": e["date"], "prioritaire": True, "notionId": notion, "microId": e["micro"],
+            "classe": cl, "ceinture": e["ceinture"], "serie": f"Maths {CL}", "type": "longue",
+            "fichier": f"{dos}/{nom}.mp4", "miniature": f"{dos}/{nom}.png", "titre": titre, "accroche": acc,
+            "chapitres": chapitres(e["chap"], t["clips"], t["duree"]),
+            "tags": list(dict.fromkeys(e["tags"] + communs)), "questions": qs, "centres": e["centres"],
+        })
+        if e.get("aussi"):  # la même vidéo sert aussi la même micro au CM2
+            out[-1]["aussi"] = e["aussi"]
+        if f"{ident}-short" not in temps:
+            continue
+        sv = json.loads((VOIX / f"{ident}-short.json").read_text(encoding="utf-8"))
+        ts = temps[f"{ident}-short"]
+        stitre = f"{e['s_titre']} #maths #{cl}"
+        sc = e.get("s_ceinture", "blanche")
+        sacc = e["s_accroche"] + (f"\n\nDessin animé, voix de synthèse.\n🥋 {NOM_CEINT[sc]}"
+                                  + (" : pour découvrir." if sc == "blanche" else ".")
+                                  + f"\n👉 À toi : {e['s_toi']} Réponds en commentaire !")
+        sacc += (f"\n\n▶️ L'épisode complet : {{{{LONGUE}}}}\n🎯 Le coach : {coach}\n\n"
+                 f"Fait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #{cl} #{NIVEAU[cl]}")
+        out.append({
+            "id": f"{ident}-short", "pas_avant": e["date"], "prioritaire": True, "notionId": notion,
+            "microId": e["micro"], "classe": cl, "ceinture": sc, "serie": f"Maths {CL}", "type": "short",
+            "renvoie_vers": ident, "fichier": f"{dos}/{nom}-short.mp4",
+            "miniature": f"{dos}/{nom}-short-miniature.png", "titre": stitre, "accroche": sacc,
+            "tags": list(dict.fromkeys(e["s_tags"] + ["Ti Margo", "dessin animé", NOM_CEINT[sc].lower()]
+                                       + communs + ["Shorts"])),
+            "questions": [dict(t=mmss(ts["clips"][c]), **question(sv, c)) for c in sv if c.endswith("-question")],
+            "centres": e["s_centres"],
+        })
+        if e.get("aussi"):
+            out[-1]["aussi"] = e["aussi"]
+        for x in (titre, stitre):
+            if len(x) > 100:
+                print(f"TITRE TROP LONG ({len(x)}) : {x}", file=sys.stderr)
+    return out
+
+
+def main():
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    mode = sys.argv[1]
+    if mode == "temps":
+        filtre = sys.argv[2] if len(sys.argv) > 2 else ""
+        for e in EP:
+            ident = f"{e['classe']}-entier-{e['slug']}"
+            if filtre and filtre != ident:
+                continue
+            p, res = temps_de(e["classe"])
+            for suf in ("", "-short"):
+                nom = f"{ident}{suf}"
+                mp4 = SORTIES / dossier(e) / f"eleveai-maths-{nom}.mp4"
+                if not mp4.exists():
+                    print("pas encore :", nom)
+                    continue
+                clips, duree = mesurer(nom, mp4)
+                res[nom] = {"duree": duree, "clips": clips}
+                print(nom, duree, "fin", clips[list(clips)[-1]])
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
+    elif mode == "voir":
+        print(json.dumps(entrees(), ensure_ascii=False, indent=1))
+    elif mode == "manifeste":
+        sauve = Path(tempfile.gettempdir()) / "manifeste-youtube.avant-entier.json"
+        shutil.copy(MANIFESTE, sauve)
+        texte = MANIFESTE.read_text(encoding="utf-8")
+        data = json.loads(texte)
+        neuves = entrees()
+        ids = {n["id"] for n in neuves}
+        avant = len(data["videos"])
+        for v in data["videos"]:
+            if v["id"] in ids and v.get("url"):
+                raise SystemExit("déjà publiée : " + v["id"])
+        data["videos"] = [v for v in data["videos"] if v["id"] not in ids] + neuves
+        sortie = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+        MANIFESTE.write_text(sortie, encoding="utf-8", newline="\n" if "\r\n" not in texte else "\r\n")
+        print("manifeste :", avant, "→", len(data["videos"]), "sauvegarde", sauve)
+
+
+if __name__ == "__main__":
+    main()

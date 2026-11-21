@@ -1,891 +1,3467 @@
 {
-  "_lisez-moi": "Gabarit A des miniatures de shorts (18/11/2026). Clé = id du manifeste. question : 1 ou 2 lignes ; accroche : en orange (défaut « TU PARIES ? ») ; calcul : lignes [texte, couleur (blanc, jaune, bleu, rouge, vert, gris, rose), taille] ; figure : « triangles » à la place du calcul ; ceinture : blanche → noire ; mention : défaut « Dessin animé » (null = aucune) ; margo : [x, y, côté] pour cadrer Ti Margo dans l'ancienne miniature ; sans_decor / margo_2d : short Manim (fond clair, Ti Margo 2D). Lancer : python scripts/miniatures-shorts-grille.py [filtre] --planche",
-  "eq-balance": {
-    "question": ["2x + 3 = 11"], "accroche": "x = 7 ?",
-    "calcul": [["2 × 7 + 3", "blanc", 190], ["= 11 ?", "rouge", 190]],
-    "sans_decor": true, "margo_2d": true, "mention": "Vérifie !", "fond_mention": "#e8590c"
-  },
-  "6e-seance-restaurant-short": {
-    "question": ["Le restaurant", "de mathématiques"], "accroche": "TU PRENDS QUOI ?",
-    "calcul": [["Plat imposé", "blanc", 140], ["+ à la carte", "jaune", 140]],
-    "ceinture": "blanche"
-  },
-  "4e-relatif-multiplication-short": {
-    "question": ["Moins × moins = ?"],
-    "calcul": [["(−3) × (−2)", "blanc", 180], ["= −6 ?", "rouge", 190]],
-    "ceinture": "orange"
-  },
-  "4e-puissance-calcul-short": {
-    "margo": [40, 880, 450],
-    "question": ["10² × 10⁴ = ?"],
-    "calcul": [["10² × 10⁴", "blanc", 200], ["= 10⁸ ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "6e-decimal-comparer-short": {
-    "question": ["Le plus grand ?"],
-    "calcul": [["1,5 L", "jaune", 200], ["ou", "gris", 80], ["1,125 L", "bleu", 200]],
-    "ceinture": "jaune"
-  },
-  "6e-triangle-type-cote-short": {
-    "question": ["Un triangle avec", "9 bâtonnets ?"],
-    "calcul": [["5 + 2 + 2", "blanc", 200], ["ça ferme ?", "jaune", 130]],
-    "ceinture": "blanche"
-  },
-  "4e-puissance-comparer-short": {
-    "question": ["9 × 10⁵ contre 2 × 10⁶"], "accroche": "QUI GAGNE ?",
-    "calcul": [["9 × 10⁵", "jaune", 200], ["ou", "gris", 80], ["2 × 10⁶", "bleu", 200]],
-    "ceinture": "blanche"
-  },
-  "4e-div-critere-2-5-10-short": {
-    "question": ["Divisible par 5 ?"],
-    "calcul": [["7 384 615", "blanc", 190], ["÷ 5 ?", "jaune", 180]],
-    "ceinture": "jaune"
-  },
-  "4e-puissance-notation-scientifique-short": {
-    "margo": [40, 760, 450],
-    "question": ["8 milliards d’humains"], "accroche": "COMMENT L’ÉCRIRE ?",
-    "calcul": [["8 000 000 000", "blanc", 150], ["= 8 × 10⁸ ?", "rouge", 170]],
-    "ceinture": "blanche"
-  },
-  "6e-decimal-rang-short": {
-    "question": ["Le code du coffre :", "5, 7 ou 6 ?"],
-    "calcul": [["5,762", "jaune", 240]],
-    "ceinture": "blanche"
-  },
-  "4e-relatif-soustraction-short": {
-    "question": ["J’enlève un sac…", "je descends ?"],
-    "calcul": [["− (−1)", "blanc", 210], ["= ?", "jaune", 190]],
-    "ceinture": "orange"
-  },
-  "4e-puissance-zero-negatif-short": {
-    "margo": [420, 700, 480],
-    "question": ["2026⁰ = ?"], "accroche": "ÇA FAIT COMBIEN ?",
-    "calcul": [["2026⁰", "jaune", 240], ["0 ? 1 ? 2026 ?", "blanc", 120]],
-    "ceinture": "blanche"
-  },
-  "6e-triangle-sommet-cote-short": {
-    "question": ["Combien de triangles ?"], "figure": "triangles",
-    "ceinture": "blanche"
-  },
-  "4e-puissance-dix-short": {
-    "margo": [40, 740, 450],
-    "question": ["Un milliard de vues"], "accroche": "COMBIEN DE ZÉROS ?",
-    "calcul": [["1 000 000 000", "blanc", 150], ["= 10 puissance ?", "jaune", 120]],
-    "ceinture": "blanche"
-  },
-  "4e-div-multiple-short": {
-    "question": ["Multiple ou diviseur ?"],
-    "calcul": [["45 = 9 × 5", "blanc", 180], ["45 est … de 9 ?", "jaune", 120]],
-    "ceinture": "jaune"
-  },
-  "4e-puissance-calculer-short": {
-    "margo": [40, 800, 450],
-    "question": ["Ma calculatrice", "est cassée ?"],
-    "calcul": [["−2⁴", "blanc", 220], ["= −16 ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "6e-decimal-lire-ecrire-short": {
-    "question": ["3 unités et", "5 centièmes"],
-    "calcul": [["3,5 ?", "rouge", 260]],
-    "ceinture": "blanche"
-  },
-  "6e-triangle-nommer-short": {
-    "question": ["Combien de noms", "pour un triangle ?"],
-    "calcul": [["MRE ? REM ?", "blanc", 150], ["ERM ? …", "jaune", 150]],
-    "ceinture": "blanche"
-  },
-  "4e-relatif-addition-short": {
-    "question": ["L’ascenseur fou :", "je sors où ?"],
-    "calcul": [["−3 + 7", "blanc", 220], ["= ?", "jaune", 190]],
-    "ceinture": "jaune"
-  },
-  "4e-puissance-comprendre-short": {
-    "margo": [40, 920, 420],
-    "question": ["Plie 7 fois :", "combien de couches ?"],
-    "calcul": [["2 × 2 × 2 × …", "blanc", 150], ["= ?", "jaune", 190]],
-    "ceinture": "blanche"
-  },
-  "seconde-puissance-produit-quotient-short": {
-    "margo": [0, 820, 480],
-    "question": ["3 bits + 4 bits"], "accroche": "COMBIEN DE CLÉS ?",
-    "calcul": [["2³ × 2⁴", "blanc", 200], ["= 2¹² ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "seconde-puissance-enchainer-short": {
-    "margo": [40, 850, 450],
-    "question": ["Une expression géante"], "accroche": "ET AU BOUT ?",
-    "calcul": [["(2³)²", "blanc", 220], ["= 2⁵ ?", "rouge", 210]],
-    "ceinture": "blanche"
-  },
-  "4e-puissance-defi-short": {
-    "margo": [340, 830, 450],
-    "question": ["1 centime", "doublé 20 fois"],
-    "calcul": [["2²⁰ centimes", "blanc", 170], ["= 40 c ?", "rouge", 190]],
-    "ceinture": "blanche"
-  },
-  "3e-puissance-defi-short": {
-    "margo": [60, 800, 450],
-    "question": ["2³ × 3³ = 6⁶ ?"], "accroche": "ÇA A L’AIR FAUX ?",
-    "calcul": [["2³ × 3³", "blanc", 210], ["= 6⁶ ?", "rouge", 210]],
-    "ceinture": "blanche"
-  },
-  "premiere-puissance-cinq-regles-short": {
-    "margo": [80, 850, 450],
-    "question": ["2³ × 2⁴ = 4⁷ ?"], "accroche": "TU SIGNES ?",
-    "calcul": [["2³ × 2⁴", "blanc", 210], ["= 4⁷ ?", "rouge", 210]],
-    "ceinture": "blanche"
-  },
-  "4e-relatif-division-short": {
-    "margo": [20, 880, 450],
-    "question": ["Dans le coffre,", "il y a quoi ?"],
-    "calcul": [["(−20) ÷ (−5)", "blanc", 170], ["= −4 ?", "rouge", 200]],
-    "ceinture": "orange"
-  },
-  "4e-relatif-calcul-short": {
-    "margo": [300, 900, 450],
-    "question": ["−2 + 3 × (−4)", "Quelle porte ?"],
-    "calcul": [["−2 + 3 × (−4)", "blanc", 150], ["= −4 ?", "rouge", 200]],
-    "ceinture": "verte"
-  },
-  "4e-relatif-probleme-short": {
-    "margo": [80, 690, 480],
-    "question": ["Je tiens", "jusqu’au soir ?"],
-    "calcul": [["−6° puis + 9°", "blanc", 160], ["= −15° ?", "rouge", 200]],
-    "ceinture": "orange"
-  },
-  "4e-relatif-defi-short": {
-    "margo": [300, 980, 400],
-    "question": ["Moins 1,", "100 fois de suite"],
-    "calcul": [["(−1) × … × (−1)", "blanc", 140], ["100 fois", "gris", 90], ["= −100 ?", "rouge", 190]],
-    "ceinture": "orange"
-  },
-  "6e-triangle-type-angle-short": {
-    "question": ["Mon horloge cache", "des triangles !"],
-    "calcul": [["12 h, 1 h, 2 h", "blanc", 150], ["que des angles", "jaune", 110], ["aigus ?", "rouge", 160]],
-    "ceinture": "blanche"
-  },
-  "6e-triangle-defi-short": {
-    "question": ["Le secret du tangram"],
-    "calcul": [["grand triangle", "blanc", 160], ["grands angles ?", "rouge", 160]],
-    "ceinture": "jaune"
-  },
-  "6e-triangle-somme-angle-short": {
-    "question": ["Un tour de magie", "sur les angles"],
-    "calcul": [["a + b + c", "blanc", 200], ["= 360° ?", "rouge", 200]],
-    "ceinture": "jaune"
-  },
-  "6e-triangle-angle-manquant-short": {
-    "question": ["Quel coin", "j’ai mangé ?"],
-    "calcul": [["50° + 60° + ?", "blanc", 160], ["? = 90° ?", "rouge", 190]],
-    "ceinture": "jaune"
-  },
-  "6e-triangle-possible-ou-non-short": {
-    "margo": [160, 620, 480],
-    "question": ["Mon toit", "va-t-il tenir ?"],
-    "calcul": [["2 m, 3 m, 6 m", "blanc", 160], ["un triangle ?", "jaune", 140]],
-    "ceinture": "jaune"
-  },
-  "6e-triangle-propriete-defi-short": {
-    "question": ["Un copain ment :", "lequel ?"],
-    "calcul": [["2 angles droits", "blanc", 150], ["dans 1 triangle ?", "rouge", 130]],
-    "ceinture": "jaune"
-  },
-  "6e-decimal-arrondir-short": {
-    "question": ["Je l’arrondis", "en deux fois"],
-    "calcul": [["2,46 → 2,5 → 3", "blanc", 150], ["= 3 ?", "rouge", 200]],
-    "ceinture": "jaune"
-  },
-  "6e-decimal-encadrer-short": {
-    "question": ["Aucun nombre", "entre 4,7 et 4,8"],
-    "calcul": [["4,7 < ? < 4,8", "blanc", 160], ["rien ?", "rouge", 190]],
-    "ceinture": "blanche"
-  },
-  "6e-decimal-defi-short": {
-    "question": ["Le plus grand", "nombre ?"],
-    "calcul": [["3, 7 et 2", "blanc", 170], ["→ 2,37 ?", "rouge", 200]],
-    "ceinture": "jaune"
-  },
-  "6e-decimal-additionner-short": {
-    "question": ["J’ai 5 €.", "Bonbons : 2,75 €"],
-    "calcul": [["5 − 2,75", "blanc", 200], ["= 3,75 ?", "rouge", 200]],
-    "ceinture": "jaune"
-  },
-  "6e-decimal-multiplier-short": {
-    "question": ["4 glaces", "pour 60 € ?"],
-    "calcul": [["4 × 1,5 €", "blanc", 200], ["= 60 € ?", "rouge", 200]],
-    "ceinture": "jaune"
-  },
-  "6e-decimal-multiplier-decimaux-short": {
-    "question": ["0,5 × 0,5", "c’est plus grand ?"],
-    "calcul": [["0,5 × 0,5", "blanc", 200], ["= 2,5 ?", "rouge", 200]],
-    "ceinture": "jaune"
-  },
-  "6e-decimal-multiplier-par-01-short": {
-    "question": ["Fois 0,1 :", "un dinosaure géant ?"],
-    "calcul": [["40 cm × 0,1", "blanc", 180], ["= 400 cm ?", "rouge", 190]],
-    "ceinture": "jaune"
-  },
-  "6e-decimal-diviser-par-entier-short": {
-    "question": ["10 € entre", "4 copains"],
-    "calcul": [["10 € ÷ 4", "blanc", 200], ["= 2 € ?", "rouge", 200]],
-    "ceinture": "jaune"
-  },
-  "6e-decimal-calcul-defi-short": {
-    "question": ["Moins 25 %", "= moins 25 € ?"],
-    "calcul": [["40 € − 25 %", "blanc", 180], ["= 15 € ?", "rouge", 200]],
-    "ceinture": "jaune"
-  },
-  "4e-div-critere-3-9-short": {
-    "question": ["123 456 789", "divisible par 9 ?"],
-    "calcul": [["1 + 2 + … + 9", "blanc", 160], ["= 45", "jaune", 200]],
-    "ceinture": "orange"
-  },
-  "4e-div-euclidienne-short": {
-    "question": ["47 cookies : il en", "reste plus de 6 ?"],
-    "calcul": [["47 ÷ 6", "blanc", 200], ["reste 11 ?", "rouge", 190]],
-    "ceinture": "orange"
-  },
-  "4e-div-diviseurs-short": {
-    "question": ["24 tournesols,", "tous les rectangles"],
-    "calcul": [["2, 3, 4, 6…", "blanc", 190], ["c’est tout ?", "rouge", 160]],
-    "ceinture": "orange"
-  },
-  "4e-div-probleme-short": {
-    "question": ["Mes 2 phares :", "plus jamais ensemble"],
-    "calcul": [["6 s et 8 s", "blanc", 190], ["ensemble", "jaune", 130], ["à 48 s ?", "rouge", 180]],
-    "ceinture": "orange"
-  },
-  "4e-div-defi-short": {
-    "question": ["7 ? 5 : le code", "du premier coup"],
-    "calcul": [["7 ? 5", "blanc", 220], ["÷ 9 → 795 ?", "rouge", 170]],
-    "ceinture": "orange"
-  },
-  "4e-premier-definition-short": {
-    "margo": [320, 720, 420],
-    "question": ["13 musiciens", "en rectangle"],
-    "calcul": [["13 = ? × ?", "blanc", 210]],
-    "ceinture": "jaune"
-  },
-  "4e-premier-determiner-short": {
-    "margo": [300, 720, 420],
-    "question": ["Cigales de 17 ans :", "nombre premier ?"],
-    "calcul": [["91", "blanc", 220], ["premier ?", "rouge", 180]],
-    "ceinture": "orange"
-  },
-  "4e-premier-decomposer-short": {
-    "question": ["Je casse 84", "en briques"],
-    "calcul": [["84 = 2 × 42", "blanc", 180], ["fini ?", "rouge", 190]],
-    "ceinture": "orange"
-  },
-  "4e-premier-defi-short": {
-    "margo": [300, 720, 420],
-    "question": ["Les diviseurs de 60,", "sans les écrire"],
-    "calcul": [["60 = 2 × 2 × 3 × 5", "blanc", 130], ["combien ?", "jaune", 170]],
-    "ceinture": "verte"
-  },
-  "cm1-decimal-droite-short": {
-    "question": ["L’école est à", "0,7 km"],
-    "calcul": [["0,7 km", "blanc", 210], ["7 traits ?", "rouge", 180]],
-    "ceinture": "blanche"
-  },
-  "cm2-decimal-droite-short": {
-    "question": ["L’école est à", "0,7 km"],
-    "calcul": [["0,7 km", "blanc", 210], ["pile à l’école ?", "jaune", 140]],
-    "ceinture": "blanche"
-  },
-  "5e-puissance-notation-short": {
-    "margo": [40, 800, 380],
-    "question": ["3³ = 9 ?"],
-    "calcul": [["3³", "blanc", 240], ["= 9 ?", "rouge", 220]],
-    "ceinture": "blanche"
-  },
-  "5e-puissance-valeurs-short": {
-    "margo": [110, 780, 380],
-    "question": ["12² sans", "calculatrice ?"],
-    "calcul": [["12²", "blanc", 240], ["= 24 ?", "rouge", 220]],
-    "ceinture": "blanche"
-  },
-  "5e-puissance-ecrire-short": {
-    "margo": [0, 940, 340],
-    "question": ["64 lanternes :", "un carré ET un cube ?"],
-    "calcul": [["4³", "blanc", 240], ["= 12 ?", "rouge", 220]],
-    "ceinture": "jaune"
-  },
-  "5e-puissance-calculer-short": {
-    "margo": [100, 800, 380],
-    "question": ["2 + 3² = 25"],
-    "calcul": [["2 + 3²", "blanc", 220], ["= 25 ?", "rouge", 220]],
-    "ceinture": "jaune"
-  },
-  "5e-puissance-litteral-short": {
-    "margo": [20, 740, 400],
-    "question": ["x² + 1 avec x = 3 :", "elle sort 7 ?"],
-    "calcul": [["3² + 1", "blanc", 220], ["= 7 ?", "rouge", 220]],
-    "ceinture": "jaune"
-  },
-  "6e-calcul-pose-addition-short": {
-    "question": ["47 billes", "+ 38 billes"],
-    "calcul": [["47 + 38", "blanc", 210], ["= 75 ?", "rouge", 210]],
-    "ceinture": "jaune"
-  },
-  "6e-calcul-pose-soustraction-short": {
-    "question": ["52 coquillages", "− 17"],
-    "calcul": [["52 − 17", "blanc", 210], ["= 45 ?", "rouge", 210]],
-    "ceinture": "jaune"
-  },
-  "6e-calcul-pose-multiplication-short": {
-    "question": ["23 boîtes", "de 12 œufs"],
-    "calcul": [["23 × 12", "blanc", 210], ["= 69 ?", "rouge", 210]],
-    "ceinture": "jaune"
-  },
-  "6e-calcul-pose-division-short": {
-    "question": ["50 cartes", "pour 6 joueurs"],
-    "calcul": [["50 ÷ 6", "blanc", 190], ["= 7", "rouge", 170], ["reste 8 ?", "rouge", 170]],
-    "ceinture": "jaune"
-  },
-  "6e-calcul-pose-verifier-short": {
-    "question": ["615 − 278", "= 347 ?"],
-    "calcul": [["615 − 278", "blanc", 200], ["= 347 ?", "rouge", 210]],
-    "ceinture": "jaune"
-  },
-  "6e-mental-addition-short": {
-    "question": ["38 + 5", "= 313 ?"],
-    "calcul": [["38 + 5", "blanc", 220], ["= 313 ?", "rouge", 210]],
-    "ceinture": "jaune"
-  },
-  "6e-mental-soustraction-short": {
-    "question": ["100 − 36", "= 74 ?"],
-    "calcul": [["100 − 36", "blanc", 210], ["= 74 ?", "rouge", 210]],
-    "ceinture": "jaune"
-  },
-  "6e-mental-multiplication-short": {
-    "question": ["16 × 5", "= 160 ?"],
-    "calcul": [["16 × 5", "blanc", 220], ["= 160 ?", "rouge", 210]],
-    "ceinture": "jaune"
-  },
-  "6e-mental-division-short": {
-    "question": ["36 ÷ 4", "= 32 ?"],
-    "calcul": [["36 ÷ 4", "blanc", 220], ["= 32 ?", "rouge", 210]],
-    "ceinture": "jaune"
-  },
-  "6e-mental-astuces-short": {
-    "question": ["Le double de 125", "= 1 250 ?"],
-    "calcul": [["2 × 125 g", "blanc", 200], ["= 1 250 g ?", "rouge", 180]],
-    "ceinture": "jaune"
-  },
-  "6e-mental-defi-short": {
-    "question": ["49 + 52", "= 911 € ?"],
-    "calcul": [["49 € + 52 €", "blanc", 180], ["= 911 € ?", "rouge", 200]],
-    "ceinture": "jaune"
-  },
-  "cm1-aire-comprendre-short": {
-    "question": ["Ficelle", "ou carreaux ?"],
-    "calcul": [["10 m de ficelle", "blanc", 160], ["pour le sol ?", "jaune", 150]],
-    "ceinture": "blanche"
-  },
-  "cm1-aire-unite-short": {
-    "question": ["10 carrés", "contre 6 ?"],
-    "calcul": [["10 petits", "blanc", 190], ["ou 6 gros ?", "jaune", 180]],
-    "ceinture": "blanche"
-  },
-  "cm1-aire-carre-rectangle-short": {
-    "question": ["8 rangées de 5 :", "combien ?"],
-    "calcul": [["8 rangées de 5", "blanc", 160], ["= ? carreaux", "jaune", 160]],
-    "ceinture": "blanche"
-  },
-  "cm1-aire-composer-short": {
-    "question": ["Un gâteau en L :", "combien de parts ?"],
-    "calcul": [["un L", "blanc", 220], ["pas de calcul ?", "rouge", 160]],
-    "ceinture": "blanche"
-  },
-  "cm1-aire-defi-short": {
-    "question": ["Le plus grand jardin :", "lequel ?"],
-    "calcul": [["plus long", "blanc", 200], ["= plus grand ?", "rouge", 170]],
-    "ceinture": "blanche"
-  },
-  "cm1-perimetre-triangle-short": {
-    "question": ["Ma guirlande :", "assez longue ?"],
-    "calcul": [["40 + 40 + 30 cm", "blanc", 160], ["1 m suffit ?", "rouge", 170]],
-    "ceinture": "blanche"
-  },
-  "cm1-perimetre-polygone-short": {
-    "question": ["Mon étoile :", "5 côtés ou 10 ?"],
-    "calcul": [["5 pointes", "blanc", 200], ["= 5 côtés ?", "rouge", 180]],
-    "ceinture": "blanche"
-  },
-  "cm1-perimetre-quadrilatere-short": {
-    "question": ["Tout le tour :", "30 pas ?"],
-    "calcul": [["20 + 10", "blanc", 210], ["= 30 pas ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "cm1-perimetre-defi-short": {
-    "question": ["Le dernier côté :", "combien ?"],
-    "calcul": [["20 − 8 − 7", "blanc", 200], ["reste 15 m ?", "rouge", 180]],
-    "ceinture": "blanche"
-  },
-  "cm1-contenance-comparer-short": {
-    "question": ["1 L ou 75 cL :", "qui a le plus ?"],
-    "calcul": [["75 cL", "blanc", 210], ["plus que 1 L ?", "rouge", 160]],
-    "ceinture": "blanche"
-  },
-  "cm1-contenance-convertir-short": {
-    "question": ["10 mL de sirop", "= ? cuillères"],
-    "calcul": [["1 cL = 10 mL", "blanc", 170], ["= 10 cuillères ?", "rouge", 140]],
-    "ceinture": "blanche"
-  },
-  "cm1-contenance-estimer-short": {
-    "question": ["1000 L au verre :", "combien de verres ?"],
-    "calcul": [["1 000 L", "blanc", 200], ["verres de 25 cL", "jaune", 140]],
-    "ceinture": "blanche"
-  },
-  "cm1-contenance-defi-short": {
-    "question": ["2 L de jus", "pour 25 élèves ?"],
-    "calcul": [["25 × 10 cL", "blanc", 190], ["2 L, ça suffit ?", "jaune", 150]],
-    "ceinture": "blanche"
-  },
-  "ce2-perimetre-comprendre-short": {
-    "question": ["Le tour", "fait 9 m ?"],
-    "calcul": [["6 m + 3 m", "blanc", 200], ["= 9 m ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "ce2-perimetre-polygone-short": {
-    "question": ["Il me faut", "13 m ?"],
-    "calcul": [["4 + 3 + 3 + 3", "blanc", 170], ["= 13 m ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "ce2-perimetre-comparer-short": {
-    "question": ["La plus petite a", "le plus petit tour ?"],
-    "calcul": [["6 m sur 1 m", "blanc", 170], ["ou 3 m sur 3 m", "jaune", 150]],
-    "ceinture": "blanche"
-  },
-  "ce2-perimetre-rectangle-short": {
-    "question": ["Le tour", "= 10 × 2 ?"],
-    "calcul": [["10 × 2", "blanc", 220], ["= 20 m ?", "rouge", 200]],
-    "ceinture": "jaune"
-  },
-  "ce2-perimetre-defi-short": {
-    "question": ["16 m", "de scotch ?"],
-    "calcul": [["2 tapis de 2 m", "blanc", 160], ["16 m ?", "rouge", 200]],
-    "ceinture": "orange"
-  },
-  "ce2-solides-reconnaitre-short": {
-    "question": ["Quel solide", "dans le sac ?"],
-    "calcul": [["rond en bas", "blanc", 170], ["pointu en haut", "blanc", 160], ["pyramide ?", "rouge", 170]],
-    "ceinture": "blanche"
-  },
-  "ce2-solides-decrire-short": {
-    "question": ["4 coins,", "c’est fini ?"],
-    "calcul": [["un dé", "blanc", 200], ["4 coins ?", "rouge", 190]],
-    "ceinture": "blanche"
-  },
-  "ce2-solides-pyramide-short": {
-    "question": ["4 triangles,", "4 pots ?"],
-    "calcul": [["4 triangles", "blanc", 190], ["= 4 faces ?", "rouge", 180]],
-    "ceinture": "blanche"
-  },
-  "ce2-solides-patron-short": {
-    "question": ["6 carrés", "= un dé ?"],
-    "calcul": [["6 carrés en ligne", "blanc", 140], ["= un dé ?", "rouge", 190]],
-    "ceinture": "jaune"
-  },
-  "ce2-solides-defi-short": {
-    "question": ["8 spaghettis", "pour un cube ?"],
-    "calcul": [["un cube", "blanc", 200], ["8 spaghettis ?", "rouge", 160]],
-    "ceinture": "orange"
-  },
-  "ce2-contenance-unites-short": {
-    "question": ["20 cm", "de limonade ?"],
-    "calcul": [["20 cm", "blanc", 220], ["de limonade ?", "rouge", 160]],
-    "ceinture": "blanche"
-  },
-  "ce2-contenance-relations-short": {
-    "question": ["Un seul verre", "pour 1 litre ?"],
-    "calcul": [["1 L", "blanc", 220], ["= 1 dL ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "ce2-contenance-comparer-short": {
-    "question": ["Le jus a baissé :", "il en a perdu ?"],
-    "calcul": [["1 L de jus", "blanc", 190], ["moins de jus ?", "rouge", 160]],
-    "ceinture": "jaune"
-  },
-  "ce2-contenance-probleme-short": {
-    "question": ["2 L − 3 × 50 cL :", "il en reste ?"],
-    "calcul": [["2 L − 3 × 50 cL", "blanc", 150], ["« 2 − 50 » ?", "rouge", 180]],
-    "ceinture": "jaune"
-  },
-  "ce2-contenance-defi-short": {
-    "question": ["50 cL, 5 dL, ½ L :", "qui a raison ?"],
-    "calcul": [["50 cL", "bleu", 160], ["5 dL", "jaune", 160], ["½ L", "vert", 160]],
-    "ceinture": "orange"
-  },
-  "cm1-solides-prisme-short": {
-    "question": ["Pyramide", "ou prisme ?"],
-    "calcul": [["ma tente", "blanc", 200], ["une pyramide ?", "rouge", 160]],
-    "ceinture": "jaune"
-  },
-  "cm1-solides-patron-short": {
-    "question": ["1 à côté du 6 :", "un vrai dé ?"],
-    "calcul": [["le 1 à côté", "blanc", 170], ["du 6 ?", "rouge", 200]],
-    "ceinture": "jaune"
-  },
-  "cm1-solides-defi-short": {
-    "question": ["Combien", "de caisses ?"],
-    "calcul": [["d’en haut : 4", "blanc", 180], ["= 4 caisses ?", "rouge", 170]],
-    "ceinture": "orange"
-  },
-  "cm1-longueur-comparer-short": {
-    "question": ["150 cm ou 2 m :", "qui a gagné ?"],
-    "calcul": [["150 cm", "blanc", 200], ["ou 2 m ?", "jaune", 190]],
-    "ceinture": "blanche"
-  },
-  "cm1-longueur-mesurer-short": {
-    "question": ["Du 4 au 10 :", "combien de cm ?"],
-    "calcul": [["du 4 au 10", "blanc", 200], ["= 10 cm ?", "rouge", 190]],
-    "ceinture": "blanche"
-  },
-  "cm1-longueur-defi-short": {
-    "question": ["1 km, déjà 600 m :", "il reste combien ?"],
-    "calcul": [["1 km − 600 m", "blanc", 170], ["= ?", "jaune", 200]],
-    "ceinture": "blanche"
-  },
-  "cm1-longueur-convertir-short": {
-    "question": ["2 m de ficelle", "= ? cm"],
-    "calcul": [["2 m", "blanc", 220], ["= 2 cm ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "cm1-longueur-estimer-short": {
-    "question": ["15 m ou 15 cm :", "ma vraie taille ?"],
-    "calcul": [["je mesure", "blanc", 180], ["15 m ?", "rouge", 210]],
-    "ceinture": "blanche"
-  },
-  "cm2-perimetre-comprendre-short": {
-    "question": ["Quel enclos a", "le plus grand tour ?"],
-    "calcul": [["enclos long", "blanc", 200], ["plus grand tour ?", "rouge", 150]],
-    "ceinture": "blanche"
-  },
-  "cm2-perimetre-quadrilatere-short": {
-    "question": ["2 tours de basket :", "86 m ?"],
-    "calcul": [["2 × (28 + 15)", "blanc", 170], ["= 86 m ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "cm2-perimetre-polygone-short": {
-    "question": ["4 biscuits :", "160 cm de ruban ?"],
-    "calcul": [["4 carrés de 10", "blanc", 180], ["= 160 cm ?", "rouge", 190]],
-    "ceinture": "blanche"
-  },
-  "cm2-perimetre-defi-short": {
-    "question": ["36 m de grillage :", "chaque côté ?"],
-    "calcul": [["carré de 36 m", "blanc", 170], ["côté 18 m ?", "rouge", 180]],
-    "ceinture": "blanche"
-  },
-  "cm2-aire-convertir-unites-short": {
-    "question": ["1 dm² :", "combien de cm² ?"],
-    "calcul": [["1 dm²", "blanc", 220], ["= 10 cm² ?", "rouge", 190]],
-    "ceinture": "blanche"
-  },
-  "ce2-longueur-unites-short": {
-    "question": ["Ma queue :", "10 km ?"],
-    "calcul": [["une queue", "blanc", 190], ["de 10 km ?", "rouge", 190]],
-    "ceinture": "blanche"
-  },
-  "ce2-longueur-relations-short": {
-    "question": ["1 m ou 100 cm :", "trop long ?"],
-    "calcul": [["1 m", "jaune", 220], ["100 cm ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "ce2-longueur-mesurer-short": {
-    "question": ["Ma banane :", "12 cm ?"],
-    "calcul": [["du 2 au 12", "blanc", 200], ["= 12 cm ?", "rouge", 190]],
-    "ceinture": "blanche"
-  },
-  "ce2-longueur-comparer-short": {
-    "question": ["1 dm ou 9 cm :", "le plus long ?"],
-    "calcul": [["1 dm", "#b197fc", 220], ["ou 9 cm ?", "#69db7c", 200]],
-    "ceinture": "jaune"
-  },
-  "ce2-longueur-choisir-unite-short": {
-    "question": ["Chez Mamie :", "3 000 000 cm ?"],
-    "calcul": [["3 000 000", "rouge", 200], ["cm ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "ce2-longueur-estimer-short": {
-    "question": ["Un mur mesuré", "à la queue ?"],
-    "calcul": [["10 × 10 cm", "blanc", 200], ["= 20 cm ?", "rouge", 200]],
-    "ceinture": "jaune"
-  },
-  "ce2-longueur-probleme-short": {
-    "question": ["1 m + 50 cm", "= 51 ?"],
-    "calcul": [["1 m + 50 cm", "#ffc078", 180], ["= 51 ?", "rouge", 210]],
-    "ceinture": "jaune"
-  },
-  "ce2-longueur-defi-short": {
-    "question": ["6 dm ou 600 mm :", "qui a raison ?"],
-    "calcul": [["6 dm", "#b197fc", 160], ["60 cm", "bleu", 160], ["600 mm", "#ffc078", 160]],
-    "ceinture": "orange"
-  },
-  "cm2-perimetre-triangle-short": {
-    "question": ["Mon cerf-volant :", "121 cm ?"],
-    "calcul": [["60 + 60 + 1", "blanc", 190], ["= 121 cm ?", "rouge", 180]],
-    "ceinture": "blanche"
-  },
-  "cm2-aire-triangle-rectangle-short": {
-    "question": ["Le triangle est", "plus petit ?"],
-    "calcul": [["le triangle", "blanc", 200], ["plus petit ?", "rouge", 190]],
-    "ceinture": "blanche"
-  },
-  "cm2-aire-defi-short": {
-    "question": ["24 dalles :", "combien de long ?"],
-    "calcul": [["24 ÷ 4", "blanc", 220], ["= 20 m ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "cm2-aire-carre-rectangle-short": {
-    "question": ["3 m sur 2,5 m :", "quelle aire ?"],
-    "calcul": [["3 × 2,5", "blanc", 210], ["= 6 m² ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "cm2-aire-unites-short": {
-    "question": ["4 cm²", "ou 4 m² ?"],
-    "calcul": [["un tapis", "blanc", 190], ["de 4 cm² ?", "rouge", 190]],
-    "ceinture": "blanche"
-  },
-  "cm2-aire-comprendre-short": {
-    "question": ["Qui a la plus grande", "serviette ?"],
-    "calcul": [["2 × 6", "blanc", 220], ["ou 3 × 4 ?", "jaune", 200]],
-    "ceinture": "blanche"
-  },
-  "cm2-aire-composer-short": {
-    "question": ["Gazon autour", "du sable : combien ?"],
-    "calcul": [["6 × 5", "blanc", 220], ["= 30 ?", "rouge", 220]],
-    "ceinture": "blanche"
-  },
-  "6e-aire-rectangle-short": {
-    "question": ["Tapis de 3 m :", "quelle aire ?"],
-    "calcul": [["carré de 3 m", "blanc", 180], ["9 m² ou 12 m² ?", "jaune", 150]],
-    "ceinture": "blanche"
-  },
-  "6e-aire-probleme-short": {
-    "question": ["Mur de 12 m² :", "combien de pots ?"],
-    "calcul": [["pots de 5 m²", "blanc", 180], ["2 pots ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "6e-aire-perimetre-rectangle-short": {
-    "question": ["Carré de 1,2 m :", "quelle guirlande ?"],
-    "calcul": [["carré de 1,2 m", "blanc", 170], ["2,4 m ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "6e-aire-defi-short": {
-    "question": ["Pizza de 40 cm :", "combien de 20 cm ?"],
-    "calcul": [["40 cm : 16 €", "blanc", 180], ["20 cm : 8 €", "jaune", 180]],
-    "ceinture": "blanche"
-  },
-  "6e-aire-perimetre-defi-short": {
-    "question": ["20 cm de ruban :", "quelle boîte ?"],
-    "calcul": [["20 cm de ruban", "blanc", 170], ["quel tour ?", "jaune", 180]],
-    "ceinture": "blanche"
-  },
-  "6e-aire-comparer-short": {
-    "question": ["Quelle part est", "la plus grande ?"],
-    "calcul": [["3 parts", "blanc", 210], ["laquelle ?", "jaune", 190]],
-    "ceinture": "blanche"
-  },
-  "cm2-solides-reconnaitre-short": {
-    "question": ["2 disques :", "une boule ?"],
-    "calcul": [["il roule", "blanc", 190], ["2 disques", "blanc", 190], ["une boule ?", "rouge", 170]],
-    "ceinture": "blanche"
-  },
-  "cm2-solides-sommets-aretes-faces-short": {
-    "question": ["4 boules", "ou 5 ?"],
-    "calcul": [["ma pyramide", "blanc", 180], ["4 sommets ?", "rouge", 180]],
-    "ceinture": "blanche"
-  },
-  "cm2-solides-faces-short": {
-    "question": ["4 couleurs,", "c’est fini ?"],
-    "calcul": [["ma boîte", "blanc", 210], ["4 faces ?", "rouge", 210]],
-    "ceinture": "blanche"
-  },
-  "cm2-solides-patron-short": {
-    "question": ["Combien", "de triangles ?"],
-    "calcul": [["ma pyramide", "blanc", 180], ["3 triangles ?", "rouge", 180]],
-    "ceinture": "blanche"
-  },
-  "cm2-solides-patron-construire-short": {
-    "question": ["Combien", "de patrons ?"],
-    "calcul": [["2 rangées de 3", "blanc", 170], ["ça ferme ?", "rouge", 190]],
-    "ceinture": "blanche"
-  },
-  "cm2-solides-defi-short": {
-    "question": ["3 faces", "au chocolat ?"],
-    "calcul": [["27 morceaux", "blanc", 190], ["3 faces ?", "jaune", 200]],
-    "ceinture": "blanche"
-  },
-  "cm2-contenance-comparer-short": {
-    "question": ["33 cL ou 0,5 L :", "qui a le plus ?"],
-    "calcul": [["33 cL", "blanc", 210], ["ou 0,5 L ?", "jaune", 190]],
-    "ceinture": "blanche"
-  },
-  "cm2-contenance-convertir-short": {
-    "question": ["1,5 L :", "combien de cL ?"],
-    "calcul": [["1,5 L", "blanc", 220], ["= 15 cL ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "cm2-longueur-comparer-short": {
-    "question": ["3,8 m ou 3,15 m :", "qui a gagné ?"],
-    "calcul": [["3,8 m", "blanc", 210], ["ou 3,15 m ?", "jaune", 190]],
-    "ceinture": "blanche"
-  },
-  "5e-aire-comprendre-short": {
-    "question": ["Quelle pizza", "est la plus grande ?"],
-    "calcul": [["carrée", "blanc", 200], ["ou rectangle ?", "jaune", 170]],
-    "ceinture": "blanche"
-  },
-  "5e-aire-triangle-short": {
-    "question": ["12 m² de", "peinture ?"],
-    "calcul": [["mur triangle", "blanc", 180], ["12 m² ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "5e-aire-parallelogramme-short": {
-    "question": ["Un coup de", "ciseaux ?"],
-    "calcul": [["couper, coller", "blanc", 170], ["l’aire change ?", "rouge", 170]],
-    "ceinture": "blanche"
-  },
-  "5e-aire-composer-short": {
-    "question": ["Quelle aire", "pour ma pancarte ?"],
-    "calcul": [["carré + triangle", "blanc", 160], ["= ? m²", "jaune", 200]],
-    "ceinture": "blanche"
-  },
-  "5e-aire-defi-short": {
-    "question": ["Quelle largeur", "pour mon tapis ?"],
-    "calcul": [["12 m² ÷ 4 m", "blanc", 180], ["= ? m", "jaune", 200]],
-    "ceinture": "blanche"
-  },
-  "5e-patron-prisme-cylindre-short": {
-    "question": ["Mon étiquette", "est trop courte ?"],
-    "calcul": [["le tour", "blanc", 210], ["= ? cm", "jaune", 210]],
-    "ceinture": "blanche"
-  },
-  "5e-volume-comprendre-short": {
-    "question": ["Combien de boîtes", "dans ma valise ?"],
-    "calcul": [["ma valise", "blanc", 200], ["= ? boîtes", "jaune", 190]],
-    "ceinture": "blanche"
-  },
-  "5e-volume-pave-short": {
-    "question": ["Combien de litres", "dans mon aquarium ?"],
-    "calcul": [["L × l × h", "blanc", 200], ["12 litres ?", "jaune", 190]],
-    "ceinture": "blanche"
-  },
-  "5e-volume-prisme-short": {
-    "question": ["Combien de coups", "de pompe ?"],
-    "calcul": [["ma tente", "blanc", 210], ["= ? m³", "jaune", 210]],
-    "ceinture": "blanche"
-  },
-  "5e-volume-cylindre-short": {
-    "question": ["Plus ou moins", "de 200 cm³ ?"],
-    "calcul": [["π × r² × h", "blanc", 200], ["> 200 cm³ ?", "jaune", 180]],
-    "ceinture": "blanche"
-  },
-  "5e-volume-assemblage-short": {
-    "question": ["Quel volume", "pour mon château ?"],
-    "calcul": [["pavé + cube", "blanc", 190], ["= ? cm³", "jaune", 200]],
-    "ceinture": "blanche"
-  },
-  "5e-volume-unite-short": {
-    "question": ["1 litre, c’est", "combien de cm³ ?"],
-    "calcul": [["1 L", "blanc", 220], ["= ? cm³", "jaune", 200]],
-    "ceinture": "blanche"
-  },
-  "5e-volume-defi-short": {
-    "question": ["Combien de litres", "dans mon bidon ?"],
-    "calcul": [["mon bidon", "blanc", 200], ["assez ?", "jaune", 210]],
-    "ceinture": "blanche"
-  },
-  "5e-conversion-decimal-short": {
-    "question": ["Ma farine :", "15 g ou 1 500 g ?"],
-    "calcul": [["1,5 kg", "blanc", 220], ["= ? g", "jaune", 210]],
-    "ceinture": "blanche"
-  },
-  "5e-conversion-duree-short": {
-    "question": ["100 minutes,", "c’est 1 heure ?"],
-    "calcul": [["100 min", "blanc", 220], ["= 1 h ?", "rouge", 210]],
-    "ceinture": "blanche"
-  },
-  "5e-conversion-avant-calcul-short": {
-    "question": ["Combien reste-t-il", "de mon ruban ?"],
-    "calcul": [["1 − 30", "blanc", 220], ["= −29 ?", "rouge", 210]],
-    "ceinture": "blanche"
-  },
-  "5e-conversion-coherence-short": {
-    "question": ["Mon jus livré", "dans un bouchon ?"],
-    "calcul": [["1,5 L", "blanc", 220], ["un bouchon ?", "rouge", 180]],
-    "ceinture": "blanche"
-  },
-  "6e-volume-unite-short": {
-    "question": ["20 cm³ :", "combien de cubes ?"],
-    "calcul": [["20 cm³", "blanc", 220], ["= 60 cubes ?", "rouge", 180]],
-    "ceinture": "blanche"
-  },
-  "6e-volume-compter-short": {
-    "question": ["Combien", "de sucres ?"],
-    "calcul": [["mon bloc", "blanc", 200], ["9 sucres ?", "rouge", 190]],
-    "ceinture": "blanche"
-  },
-  "6e-volume-comparer-short": {
-    "question": ["Qui a le plus", "de cubes ?"],
-    "calcul": [["ma tour de 10", "blanc", 180], ["gagne ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "6e-volume-assemblage-short": {
-    "question": ["18 + 7 cubes :", "combien ?"],
-    "calcul": [["18 + 7", "blanc", 220], ["j’en perds ?", "rouge", 180]],
-    "ceinture": "blanche"
-  },
-  "6e-volume-defi-short": {
-    "question": ["48 glaçons :", "combien de bacs ?"],
-    "calcul": [["48 glaçons", "blanc", 200], ["24 bacs ?", "rouge", 200]],
-    "ceinture": "blanche"
-  },
-  "6e-vision-vues-short": {
-    "question": ["Vu d’en haut :", "combien de carrés ?"],
-    "calcul": [["10 cubes", "blanc", 210], ["tous vus ?", "rouge", 190]],
-    "ceinture": "blanche"
-  },
-  "6e-vision-representation-short": {
-    "question": ["Un carré…", "ou un cube ?"],
-    "calcul": [["mon cube", "blanc", 200], ["un carré ?", "rouge", 190]],
-    "ceinture": "blanche"
-  },
-  "6e-vision-patron-pave-short": {
-    "question": ["Le couvercle :", "quelles mesures ?"],
-    "calcul": [["6 × 4", "blanc", 220], ["ça ferme ?", "rouge", 190]],
-    "ceinture": "blanche"
-  },
-  "6e-vision-defi-short": {
-    "question": ["3 faces au chocolat :", "combien ?"],
-    "calcul": [["12 morceaux", "blanc", 190], ["tout chocolat ?", "rouge", 160]],
-    "ceinture": "blanche"
-  },
-  "cm2-contenance-estimer-short": {
-    "question": ["Un parfum de 50 :", "mL, cL ou L ?"],
-    "calcul": [["50 litres", "blanc", 200], ["de parfum ?", "rouge", 180]],
-    "ceinture": "blanche"
-  },
-  "cm2-contenance-defi-short": {
-    "question": ["Ça rentre", "dans 2 L ?"],
-    "calcul": [["le cocktail", "blanc", 190], ["≤ 2 L ?", "jaune", 210]],
-    "ceinture": "blanche"
-  },
-  "cm2-longueur-convertir-short": {
-    "question": ["2,5 m de ruban", "= ? cm"],
-    "calcul": [["2,5 m", "blanc", 220], ["= ? cm", "jaune", 210]],
-    "ceinture": "blanche"
-  },
-  "cm2-longueur-defi-short": {
-    "question": ["10 m de clôture :", "5 ballons ?"],
-    "calcul": [["10 ÷ 2", "blanc", 220], ["= 5 ballons ?", "rouge", 180]],
-    "ceinture": "blanche"
-  },
-  "cm2-longueur-estimer-short": {
-    "question": ["Mon lit : 2 km", "ou 2 m ?"],
-    "calcul": [["mon lit", "blanc", 210], ["2 km ?", "rouge", 210]],
-    "ceinture": "blanche"
-  }
+ "_lisez-moi": "Gabarit A des miniatures de shorts (18/11/2026). Clé = id du manifeste. question : 1 ou 2 lignes ; accroche : en orange (défaut « TU PARIES ? ») ; calcul : lignes [texte, couleur (blanc, jaune, bleu, rouge, vert, gris, rose), taille] ; figure : « triangles » à la place du calcul ; ceinture : blanche → noire ; mention : défaut « Dessin animé » (null = aucune) ; margo : [x, y, côté] pour cadrer Ti Margo dans l'ancienne miniature ; sans_decor / margo_2d : short Manim (fond clair, Ti Margo 2D). Lancer : python scripts/miniatures-shorts-grille.py [filtre] --planche",
+ "eq-balance": {
+  "question": [
+   "2x + 3 = 11"
+  ],
+  "accroche": "x = 7 ?",
+  "calcul": [
+   [
+    "2 × 7 + 3",
+    "blanc",
+    190
+   ],
+   [
+    "= 11 ?",
+    "rouge",
+    190
+   ]
+  ],
+  "sans_decor": true,
+  "margo_2d": true,
+  "mention": "Vérifie !",
+  "fond_mention": "#e8590c"
+ },
+ "6e-seance-restaurant-short": {
+  "question": [
+   "Le restaurant",
+   "de mathématiques"
+  ],
+  "accroche": "TU PRENDS QUOI ?",
+  "calcul": [
+   [
+    "Plat imposé",
+    "blanc",
+    140
+   ],
+   [
+    "+ à la carte",
+    "jaune",
+    140
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "4e-relatif-multiplication-short": {
+  "question": [
+   "Moins × moins = ?"
+  ],
+  "calcul": [
+   [
+    "(−3) × (−2)",
+    "blanc",
+    180
+   ],
+   [
+    "= −6 ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "orange"
+ },
+ "4e-puissance-calcul-short": {
+  "margo": [
+   40,
+   880,
+   450
+  ],
+  "question": [
+   "10² × 10⁴ = ?"
+  ],
+  "calcul": [
+   [
+    "10² × 10⁴",
+    "blanc",
+    200
+   ],
+   [
+    "= 10⁸ ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-decimal-comparer-short": {
+  "question": [
+   "Le plus grand ?"
+  ],
+  "calcul": [
+   [
+    "1,5 L",
+    "jaune",
+    200
+   ],
+   [
+    "ou",
+    "gris",
+    80
+   ],
+   [
+    "1,125 L",
+    "bleu",
+    200
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-triangle-type-cote-short": {
+  "question": [
+   "Un triangle avec",
+   "9 bâtonnets ?"
+  ],
+  "calcul": [
+   [
+    "5 + 2 + 2",
+    "blanc",
+    200
+   ],
+   [
+    "ça ferme ?",
+    "jaune",
+    130
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "4e-puissance-comparer-short": {
+  "question": [
+   "9 × 10⁵ contre 2 × 10⁶"
+  ],
+  "accroche": "QUI GAGNE ?",
+  "calcul": [
+   [
+    "9 × 10⁵",
+    "jaune",
+    200
+   ],
+   [
+    "ou",
+    "gris",
+    80
+   ],
+   [
+    "2 × 10⁶",
+    "bleu",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "4e-div-critere-2-5-10-short": {
+  "question": [
+   "Divisible par 5 ?"
+  ],
+  "calcul": [
+   [
+    "7 384 615",
+    "blanc",
+    190
+   ],
+   [
+    "÷ 5 ?",
+    "jaune",
+    180
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "4e-puissance-notation-scientifique-short": {
+  "margo": [
+   40,
+   760,
+   450
+  ],
+  "question": [
+   "8 milliards d’humains"
+  ],
+  "accroche": "COMMENT L’ÉCRIRE ?",
+  "calcul": [
+   [
+    "8 000 000 000",
+    "blanc",
+    150
+   ],
+   [
+    "= 8 × 10⁸ ?",
+    "rouge",
+    170
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-decimal-rang-short": {
+  "question": [
+   "Le code du coffre :",
+   "5, 7 ou 6 ?"
+  ],
+  "calcul": [
+   [
+    "5,762",
+    "jaune",
+    240
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "4e-relatif-soustraction-short": {
+  "question": [
+   "J’enlève un sac…",
+   "je descends ?"
+  ],
+  "calcul": [
+   [
+    "− (−1)",
+    "blanc",
+    210
+   ],
+   [
+    "= ?",
+    "jaune",
+    190
+   ]
+  ],
+  "ceinture": "orange"
+ },
+ "4e-puissance-zero-negatif-short": {
+  "margo": [
+   420,
+   700,
+   480
+  ],
+  "question": [
+   "2026⁰ = ?"
+  ],
+  "accroche": "ÇA FAIT COMBIEN ?",
+  "calcul": [
+   [
+    "2026⁰",
+    "jaune",
+    240
+   ],
+   [
+    "0 ? 1 ? 2026 ?",
+    "blanc",
+    120
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-triangle-sommet-cote-short": {
+  "question": [
+   "Combien de triangles ?"
+  ],
+  "figure": "triangles",
+  "ceinture": "blanche"
+ },
+ "4e-puissance-dix-short": {
+  "margo": [
+   40,
+   740,
+   450
+  ],
+  "question": [
+   "Un milliard de vues"
+  ],
+  "accroche": "COMBIEN DE ZÉROS ?",
+  "calcul": [
+   [
+    "1 000 000 000",
+    "blanc",
+    150
+   ],
+   [
+    "= 10 puissance ?",
+    "jaune",
+    120
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "4e-div-multiple-short": {
+  "question": [
+   "Multiple ou diviseur ?"
+  ],
+  "calcul": [
+   [
+    "45 = 9 × 5",
+    "blanc",
+    180
+   ],
+   [
+    "45 est … de 9 ?",
+    "jaune",
+    120
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "4e-puissance-calculer-short": {
+  "margo": [
+   40,
+   800,
+   450
+  ],
+  "question": [
+   "Ma calculatrice",
+   "est cassée ?"
+  ],
+  "calcul": [
+   [
+    "−2⁴",
+    "blanc",
+    220
+   ],
+   [
+    "= −16 ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-decimal-lire-ecrire-short": {
+  "question": [
+   "3 unités et",
+   "5 centièmes"
+  ],
+  "calcul": [
+   [
+    "3,5 ?",
+    "rouge",
+    260
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-triangle-nommer-short": {
+  "question": [
+   "Combien de noms",
+   "pour un triangle ?"
+  ],
+  "calcul": [
+   [
+    "MRE ? REM ?",
+    "blanc",
+    150
+   ],
+   [
+    "ERM ? …",
+    "jaune",
+    150
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "4e-relatif-addition-short": {
+  "question": [
+   "L’ascenseur fou :",
+   "je sors où ?"
+  ],
+  "calcul": [
+   [
+    "−3 + 7",
+    "blanc",
+    220
+   ],
+   [
+    "= ?",
+    "jaune",
+    190
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "4e-puissance-comprendre-short": {
+  "margo": [
+   40,
+   920,
+   420
+  ],
+  "question": [
+   "Plie 7 fois :",
+   "combien de couches ?"
+  ],
+  "calcul": [
+   [
+    "2 × 2 × 2 × …",
+    "blanc",
+    150
+   ],
+   [
+    "= ?",
+    "jaune",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "seconde-puissance-produit-quotient-short": {
+  "margo": [
+   0,
+   820,
+   480
+  ],
+  "question": [
+   "3 bits + 4 bits"
+  ],
+  "accroche": "COMBIEN DE CLÉS ?",
+  "calcul": [
+   [
+    "2³ × 2⁴",
+    "blanc",
+    200
+   ],
+   [
+    "= 2¹² ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "seconde-puissance-enchainer-short": {
+  "margo": [
+   40,
+   850,
+   450
+  ],
+  "question": [
+   "Une expression géante"
+  ],
+  "accroche": "ET AU BOUT ?",
+  "calcul": [
+   [
+    "(2³)²",
+    "blanc",
+    220
+   ],
+   [
+    "= 2⁵ ?",
+    "rouge",
+    210
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "4e-puissance-defi-short": {
+  "margo": [
+   340,
+   830,
+   450
+  ],
+  "question": [
+   "1 centime",
+   "doublé 20 fois"
+  ],
+  "calcul": [
+   [
+    "2²⁰ centimes",
+    "blanc",
+    170
+   ],
+   [
+    "= 40 c ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "3e-puissance-defi-short": {
+  "margo": [
+   60,
+   800,
+   450
+  ],
+  "question": [
+   "2³ × 3³ = 6⁶ ?"
+  ],
+  "accroche": "ÇA A L’AIR FAUX ?",
+  "calcul": [
+   [
+    "2³ × 3³",
+    "blanc",
+    210
+   ],
+   [
+    "= 6⁶ ?",
+    "rouge",
+    210
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "premiere-puissance-cinq-regles-short": {
+  "margo": [
+   80,
+   850,
+   450
+  ],
+  "question": [
+   "2³ × 2⁴ = 4⁷ ?"
+  ],
+  "accroche": "TU SIGNES ?",
+  "calcul": [
+   [
+    "2³ × 2⁴",
+    "blanc",
+    210
+   ],
+   [
+    "= 4⁷ ?",
+    "rouge",
+    210
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "4e-relatif-division-short": {
+  "margo": [
+   20,
+   880,
+   450
+  ],
+  "question": [
+   "Dans le coffre,",
+   "il y a quoi ?"
+  ],
+  "calcul": [
+   [
+    "(−20) ÷ (−5)",
+    "blanc",
+    170
+   ],
+   [
+    "= −4 ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "orange"
+ },
+ "4e-relatif-calcul-short": {
+  "margo": [
+   300,
+   900,
+   450
+  ],
+  "question": [
+   "−2 + 3 × (−4)",
+   "Quelle porte ?"
+  ],
+  "calcul": [
+   [
+    "−2 + 3 × (−4)",
+    "blanc",
+    150
+   ],
+   [
+    "= −4 ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "verte"
+ },
+ "4e-relatif-probleme-short": {
+  "margo": [
+   80,
+   690,
+   480
+  ],
+  "question": [
+   "Je tiens",
+   "jusqu’au soir ?"
+  ],
+  "calcul": [
+   [
+    "−6° puis + 9°",
+    "blanc",
+    160
+   ],
+   [
+    "= −15° ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "orange"
+ },
+ "4e-relatif-defi-short": {
+  "margo": [
+   300,
+   980,
+   400
+  ],
+  "question": [
+   "Moins 1,",
+   "100 fois de suite"
+  ],
+  "calcul": [
+   [
+    "(−1) × … × (−1)",
+    "blanc",
+    140
+   ],
+   [
+    "100 fois",
+    "gris",
+    90
+   ],
+   [
+    "= −100 ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "orange"
+ },
+ "6e-triangle-type-angle-short": {
+  "question": [
+   "Mon horloge cache",
+   "des triangles !"
+  ],
+  "calcul": [
+   [
+    "12 h, 1 h, 2 h",
+    "blanc",
+    150
+   ],
+   [
+    "que des angles",
+    "jaune",
+    110
+   ],
+   [
+    "aigus ?",
+    "rouge",
+    160
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-triangle-defi-short": {
+  "question": [
+   "Le secret du tangram"
+  ],
+  "calcul": [
+   [
+    "grand triangle",
+    "blanc",
+    160
+   ],
+   [
+    "grands angles ?",
+    "rouge",
+    160
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-triangle-somme-angle-short": {
+  "question": [
+   "Un tour de magie",
+   "sur les angles"
+  ],
+  "calcul": [
+   [
+    "a + b + c",
+    "blanc",
+    200
+   ],
+   [
+    "= 360° ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-triangle-angle-manquant-short": {
+  "question": [
+   "Quel coin",
+   "j’ai mangé ?"
+  ],
+  "calcul": [
+   [
+    "50° + 60° + ?",
+    "blanc",
+    160
+   ],
+   [
+    "? = 90° ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-triangle-possible-ou-non-short": {
+  "margo": [
+   160,
+   620,
+   480
+  ],
+  "question": [
+   "Mon toit",
+   "va-t-il tenir ?"
+  ],
+  "calcul": [
+   [
+    "2 m, 3 m, 6 m",
+    "blanc",
+    160
+   ],
+   [
+    "un triangle ?",
+    "jaune",
+    140
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-triangle-propriete-defi-short": {
+  "question": [
+   "Un copain ment :",
+   "lequel ?"
+  ],
+  "calcul": [
+   [
+    "2 angles droits",
+    "blanc",
+    150
+   ],
+   [
+    "dans 1 triangle ?",
+    "rouge",
+    130
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-decimal-arrondir-short": {
+  "question": [
+   "Je l’arrondis",
+   "en deux fois"
+  ],
+  "calcul": [
+   [
+    "2,46 → 2,5 → 3",
+    "blanc",
+    150
+   ],
+   [
+    "= 3 ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-decimal-encadrer-short": {
+  "question": [
+   "Aucun nombre",
+   "entre 4,7 et 4,8"
+  ],
+  "calcul": [
+   [
+    "4,7 < ? < 4,8",
+    "blanc",
+    160
+   ],
+   [
+    "rien ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-decimal-defi-short": {
+  "question": [
+   "Le plus grand",
+   "nombre ?"
+  ],
+  "calcul": [
+   [
+    "3, 7 et 2",
+    "blanc",
+    170
+   ],
+   [
+    "→ 2,37 ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-decimal-additionner-short": {
+  "question": [
+   "J’ai 5 €.",
+   "Bonbons : 2,75 €"
+  ],
+  "calcul": [
+   [
+    "5 − 2,75",
+    "blanc",
+    200
+   ],
+   [
+    "= 3,75 ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-decimal-multiplier-short": {
+  "question": [
+   "4 glaces",
+   "pour 60 € ?"
+  ],
+  "calcul": [
+   [
+    "4 × 1,5 €",
+    "blanc",
+    200
+   ],
+   [
+    "= 60 € ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-decimal-multiplier-decimaux-short": {
+  "question": [
+   "0,5 × 0,5",
+   "c’est plus grand ?"
+  ],
+  "calcul": [
+   [
+    "0,5 × 0,5",
+    "blanc",
+    200
+   ],
+   [
+    "= 2,5 ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-decimal-multiplier-par-01-short": {
+  "question": [
+   "Fois 0,1 :",
+   "un dinosaure géant ?"
+  ],
+  "calcul": [
+   [
+    "40 cm × 0,1",
+    "blanc",
+    180
+   ],
+   [
+    "= 400 cm ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-decimal-diviser-par-entier-short": {
+  "question": [
+   "10 € entre",
+   "4 copains"
+  ],
+  "calcul": [
+   [
+    "10 € ÷ 4",
+    "blanc",
+    200
+   ],
+   [
+    "= 2 € ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-decimal-calcul-defi-short": {
+  "question": [
+   "Moins 25 %",
+   "= moins 25 € ?"
+  ],
+  "calcul": [
+   [
+    "40 € − 25 %",
+    "blanc",
+    180
+   ],
+   [
+    "= 15 € ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "4e-div-critere-3-9-short": {
+  "question": [
+   "123 456 789",
+   "divisible par 9 ?"
+  ],
+  "calcul": [
+   [
+    "1 + 2 + … + 9",
+    "blanc",
+    160
+   ],
+   [
+    "= 45",
+    "jaune",
+    200
+   ]
+  ],
+  "ceinture": "orange"
+ },
+ "4e-div-euclidienne-short": {
+  "question": [
+   "47 cookies : il en",
+   "reste plus de 6 ?"
+  ],
+  "calcul": [
+   [
+    "47 ÷ 6",
+    "blanc",
+    200
+   ],
+   [
+    "reste 11 ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "orange"
+ },
+ "4e-div-diviseurs-short": {
+  "question": [
+   "24 tournesols,",
+   "tous les rectangles"
+  ],
+  "calcul": [
+   [
+    "2, 3, 4, 6…",
+    "blanc",
+    190
+   ],
+   [
+    "c’est tout ?",
+    "rouge",
+    160
+   ]
+  ],
+  "ceinture": "orange"
+ },
+ "4e-div-probleme-short": {
+  "question": [
+   "Mes 2 phares :",
+   "plus jamais ensemble"
+  ],
+  "calcul": [
+   [
+    "6 s et 8 s",
+    "blanc",
+    190
+   ],
+   [
+    "ensemble",
+    "jaune",
+    130
+   ],
+   [
+    "à 48 s ?",
+    "rouge",
+    180
+   ]
+  ],
+  "ceinture": "orange"
+ },
+ "4e-div-defi-short": {
+  "question": [
+   "7 ? 5 : le code",
+   "du premier coup"
+  ],
+  "calcul": [
+   [
+    "7 ? 5",
+    "blanc",
+    220
+   ],
+   [
+    "÷ 9 → 795 ?",
+    "rouge",
+    170
+   ]
+  ],
+  "ceinture": "orange"
+ },
+ "4e-premier-definition-short": {
+  "margo": [
+   320,
+   720,
+   420
+  ],
+  "question": [
+   "13 musiciens",
+   "en rectangle"
+  ],
+  "calcul": [
+   [
+    "13 = ? × ?",
+    "blanc",
+    210
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "4e-premier-determiner-short": {
+  "margo": [
+   300,
+   720,
+   420
+  ],
+  "question": [
+   "Cigales de 17 ans :",
+   "nombre premier ?"
+  ],
+  "calcul": [
+   [
+    "91",
+    "blanc",
+    220
+   ],
+   [
+    "premier ?",
+    "rouge",
+    180
+   ]
+  ],
+  "ceinture": "orange"
+ },
+ "4e-premier-decomposer-short": {
+  "question": [
+   "Je casse 84",
+   "en briques"
+  ],
+  "calcul": [
+   [
+    "84 = 2 × 42",
+    "blanc",
+    180
+   ],
+   [
+    "fini ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "orange"
+ },
+ "4e-premier-defi-short": {
+  "margo": [
+   300,
+   720,
+   420
+  ],
+  "question": [
+   "Les diviseurs de 60,",
+   "sans les écrire"
+  ],
+  "calcul": [
+   [
+    "60 = 2 × 2 × 3 × 5",
+    "blanc",
+    130
+   ],
+   [
+    "combien ?",
+    "jaune",
+    170
+   ]
+  ],
+  "ceinture": "verte"
+ },
+ "cm1-decimal-droite-short": {
+  "question": [
+   "L’école est à",
+   "0,7 km"
+  ],
+  "calcul": [
+   [
+    "0,7 km",
+    "blanc",
+    210
+   ],
+   [
+    "7 traits ?",
+    "rouge",
+    180
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-decimal-droite-short": {
+  "question": [
+   "L’école est à",
+   "0,7 km"
+  ],
+  "calcul": [
+   [
+    "0,7 km",
+    "blanc",
+    210
+   ],
+   [
+    "pile à l’école ?",
+    "jaune",
+    140
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-puissance-notation-short": {
+  "margo": [
+   40,
+   800,
+   380
+  ],
+  "question": [
+   "3³ = 9 ?"
+  ],
+  "calcul": [
+   [
+    "3³",
+    "blanc",
+    240
+   ],
+   [
+    "= 9 ?",
+    "rouge",
+    220
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-puissance-valeurs-short": {
+  "margo": [
+   110,
+   780,
+   380
+  ],
+  "question": [
+   "12² sans",
+   "calculatrice ?"
+  ],
+  "calcul": [
+   [
+    "12²",
+    "blanc",
+    240
+   ],
+   [
+    "= 24 ?",
+    "rouge",
+    220
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-puissance-ecrire-short": {
+  "margo": [
+   0,
+   940,
+   340
+  ],
+  "question": [
+   "64 lanternes :",
+   "un carré ET un cube ?"
+  ],
+  "calcul": [
+   [
+    "4³",
+    "blanc",
+    240
+   ],
+   [
+    "= 12 ?",
+    "rouge",
+    220
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "5e-puissance-calculer-short": {
+  "margo": [
+   100,
+   800,
+   380
+  ],
+  "question": [
+   "2 + 3² = 25"
+  ],
+  "calcul": [
+   [
+    "2 + 3²",
+    "blanc",
+    220
+   ],
+   [
+    "= 25 ?",
+    "rouge",
+    220
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "5e-puissance-litteral-short": {
+  "margo": [
+   20,
+   740,
+   400
+  ],
+  "question": [
+   "x² + 1 avec x = 3 :",
+   "elle sort 7 ?"
+  ],
+  "calcul": [
+   [
+    "3² + 1",
+    "blanc",
+    220
+   ],
+   [
+    "= 7 ?",
+    "rouge",
+    220
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-calcul-pose-addition-short": {
+  "question": [
+   "47 billes",
+   "+ 38 billes"
+  ],
+  "calcul": [
+   [
+    "47 + 38",
+    "blanc",
+    210
+   ],
+   [
+    "= 75 ?",
+    "rouge",
+    210
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-calcul-pose-soustraction-short": {
+  "question": [
+   "52 coquillages",
+   "− 17"
+  ],
+  "calcul": [
+   [
+    "52 − 17",
+    "blanc",
+    210
+   ],
+   [
+    "= 45 ?",
+    "rouge",
+    210
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-calcul-pose-multiplication-short": {
+  "question": [
+   "23 boîtes",
+   "de 12 œufs"
+  ],
+  "calcul": [
+   [
+    "23 × 12",
+    "blanc",
+    210
+   ],
+   [
+    "= 69 ?",
+    "rouge",
+    210
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-calcul-pose-division-short": {
+  "question": [
+   "50 cartes",
+   "pour 6 joueurs"
+  ],
+  "calcul": [
+   [
+    "50 ÷ 6",
+    "blanc",
+    190
+   ],
+   [
+    "= 7",
+    "rouge",
+    170
+   ],
+   [
+    "reste 8 ?",
+    "rouge",
+    170
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-calcul-pose-verifier-short": {
+  "question": [
+   "615 − 278",
+   "= 347 ?"
+  ],
+  "calcul": [
+   [
+    "615 − 278",
+    "blanc",
+    200
+   ],
+   [
+    "= 347 ?",
+    "rouge",
+    210
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-mental-addition-short": {
+  "question": [
+   "38 + 5",
+   "= 313 ?"
+  ],
+  "calcul": [
+   [
+    "38 + 5",
+    "blanc",
+    220
+   ],
+   [
+    "= 313 ?",
+    "rouge",
+    210
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-mental-soustraction-short": {
+  "question": [
+   "100 − 36",
+   "= 74 ?"
+  ],
+  "calcul": [
+   [
+    "100 − 36",
+    "blanc",
+    210
+   ],
+   [
+    "= 74 ?",
+    "rouge",
+    210
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-mental-multiplication-short": {
+  "question": [
+   "16 × 5",
+   "= 160 ?"
+  ],
+  "calcul": [
+   [
+    "16 × 5",
+    "blanc",
+    220
+   ],
+   [
+    "= 160 ?",
+    "rouge",
+    210
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-mental-division-short": {
+  "question": [
+   "36 ÷ 4",
+   "= 32 ?"
+  ],
+  "calcul": [
+   [
+    "36 ÷ 4",
+    "blanc",
+    220
+   ],
+   [
+    "= 32 ?",
+    "rouge",
+    210
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-mental-astuces-short": {
+  "question": [
+   "Le double de 125",
+   "= 1 250 ?"
+  ],
+  "calcul": [
+   [
+    "2 × 125 g",
+    "blanc",
+    200
+   ],
+   [
+    "= 1 250 g ?",
+    "rouge",
+    180
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "6e-mental-defi-short": {
+  "question": [
+   "49 + 52",
+   "= 911 € ?"
+  ],
+  "calcul": [
+   [
+    "49 € + 52 €",
+    "blanc",
+    180
+   ],
+   [
+    "= 911 € ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "cm1-aire-comprendre-short": {
+  "question": [
+   "Ficelle",
+   "ou carreaux ?"
+  ],
+  "calcul": [
+   [
+    "10 m de ficelle",
+    "blanc",
+    160
+   ],
+   [
+    "pour le sol ?",
+    "jaune",
+    150
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-aire-unite-short": {
+  "question": [
+   "10 carrés",
+   "contre 6 ?"
+  ],
+  "calcul": [
+   [
+    "10 petits",
+    "blanc",
+    190
+   ],
+   [
+    "ou 6 gros ?",
+    "jaune",
+    180
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-aire-carre-rectangle-short": {
+  "question": [
+   "8 rangées de 5 :",
+   "combien ?"
+  ],
+  "calcul": [
+   [
+    "8 rangées de 5",
+    "blanc",
+    160
+   ],
+   [
+    "= ? carreaux",
+    "jaune",
+    160
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-aire-composer-short": {
+  "question": [
+   "Un gâteau en L :",
+   "combien de parts ?"
+  ],
+  "calcul": [
+   [
+    "un L",
+    "blanc",
+    220
+   ],
+   [
+    "pas de calcul ?",
+    "rouge",
+    160
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-aire-defi-short": {
+  "question": [
+   "Le plus grand jardin :",
+   "lequel ?"
+  ],
+  "calcul": [
+   [
+    "plus long",
+    "blanc",
+    200
+   ],
+   [
+    "= plus grand ?",
+    "rouge",
+    170
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-perimetre-triangle-short": {
+  "question": [
+   "Ma guirlande :",
+   "assez longue ?"
+  ],
+  "calcul": [
+   [
+    "40 + 40 + 30 cm",
+    "blanc",
+    160
+   ],
+   [
+    "1 m suffit ?",
+    "rouge",
+    170
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-perimetre-polygone-short": {
+  "question": [
+   "Mon étoile :",
+   "5 côtés ou 10 ?"
+  ],
+  "calcul": [
+   [
+    "5 pointes",
+    "blanc",
+    200
+   ],
+   [
+    "= 5 côtés ?",
+    "rouge",
+    180
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-perimetre-quadrilatere-short": {
+  "question": [
+   "Tout le tour :",
+   "30 pas ?"
+  ],
+  "calcul": [
+   [
+    "20 + 10",
+    "blanc",
+    210
+   ],
+   [
+    "= 30 pas ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-perimetre-defi-short": {
+  "question": [
+   "Le dernier côté :",
+   "combien ?"
+  ],
+  "calcul": [
+   [
+    "20 − 8 − 7",
+    "blanc",
+    200
+   ],
+   [
+    "reste 15 m ?",
+    "rouge",
+    180
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-contenance-comparer-short": {
+  "question": [
+   "1 L ou 75 cL :",
+   "qui a le plus ?"
+  ],
+  "calcul": [
+   [
+    "75 cL",
+    "blanc",
+    210
+   ],
+   [
+    "plus que 1 L ?",
+    "rouge",
+    160
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-contenance-convertir-short": {
+  "question": [
+   "10 mL de sirop",
+   "= ? cuillères"
+  ],
+  "calcul": [
+   [
+    "1 cL = 10 mL",
+    "blanc",
+    170
+   ],
+   [
+    "= 10 cuillères ?",
+    "rouge",
+    140
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-contenance-estimer-short": {
+  "question": [
+   "1000 L au verre :",
+   "combien de verres ?"
+  ],
+  "calcul": [
+   [
+    "1 000 L",
+    "blanc",
+    200
+   ],
+   [
+    "verres de 25 cL",
+    "jaune",
+    140
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-contenance-defi-short": {
+  "question": [
+   "2 L de jus",
+   "pour 25 élèves ?"
+  ],
+  "calcul": [
+   [
+    "25 × 10 cL",
+    "blanc",
+    190
+   ],
+   [
+    "2 L, ça suffit ?",
+    "jaune",
+    150
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "ce2-perimetre-comprendre-short": {
+  "question": [
+   "Le tour",
+   "fait 9 m ?"
+  ],
+  "calcul": [
+   [
+    "6 m + 3 m",
+    "blanc",
+    200
+   ],
+   [
+    "= 9 m ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "ce2-perimetre-polygone-short": {
+  "question": [
+   "Il me faut",
+   "13 m ?"
+  ],
+  "calcul": [
+   [
+    "4 + 3 + 3 + 3",
+    "blanc",
+    170
+   ],
+   [
+    "= 13 m ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "ce2-perimetre-comparer-short": {
+  "question": [
+   "La plus petite a",
+   "le plus petit tour ?"
+  ],
+  "calcul": [
+   [
+    "6 m sur 1 m",
+    "blanc",
+    170
+   ],
+   [
+    "ou 3 m sur 3 m",
+    "jaune",
+    150
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "ce2-perimetre-rectangle-short": {
+  "question": [
+   "Le tour",
+   "= 10 × 2 ?"
+  ],
+  "calcul": [
+   [
+    "10 × 2",
+    "blanc",
+    220
+   ],
+   [
+    "= 20 m ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "ce2-perimetre-defi-short": {
+  "question": [
+   "16 m",
+   "de scotch ?"
+  ],
+  "calcul": [
+   [
+    "2 tapis de 2 m",
+    "blanc",
+    160
+   ],
+   [
+    "16 m ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "orange"
+ },
+ "ce2-solides-reconnaitre-short": {
+  "question": [
+   "Quel solide",
+   "dans le sac ?"
+  ],
+  "calcul": [
+   [
+    "rond en bas",
+    "blanc",
+    170
+   ],
+   [
+    "pointu en haut",
+    "blanc",
+    160
+   ],
+   [
+    "pyramide ?",
+    "rouge",
+    170
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "ce2-solides-decrire-short": {
+  "question": [
+   "4 coins,",
+   "c’est fini ?"
+  ],
+  "calcul": [
+   [
+    "un dé",
+    "blanc",
+    200
+   ],
+   [
+    "4 coins ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "ce2-solides-pyramide-short": {
+  "question": [
+   "4 triangles,",
+   "4 pots ?"
+  ],
+  "calcul": [
+   [
+    "4 triangles",
+    "blanc",
+    190
+   ],
+   [
+    "= 4 faces ?",
+    "rouge",
+    180
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "ce2-solides-patron-short": {
+  "question": [
+   "6 carrés",
+   "= un dé ?"
+  ],
+  "calcul": [
+   [
+    "6 carrés en ligne",
+    "blanc",
+    140
+   ],
+   [
+    "= un dé ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "ce2-solides-defi-short": {
+  "question": [
+   "8 spaghettis",
+   "pour un cube ?"
+  ],
+  "calcul": [
+   [
+    "un cube",
+    "blanc",
+    200
+   ],
+   [
+    "8 spaghettis ?",
+    "rouge",
+    160
+   ]
+  ],
+  "ceinture": "orange"
+ },
+ "ce2-contenance-unites-short": {
+  "question": [
+   "20 cm",
+   "de limonade ?"
+  ],
+  "calcul": [
+   [
+    "20 cm",
+    "blanc",
+    220
+   ],
+   [
+    "de limonade ?",
+    "rouge",
+    160
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "ce2-contenance-relations-short": {
+  "question": [
+   "Un seul verre",
+   "pour 1 litre ?"
+  ],
+  "calcul": [
+   [
+    "1 L",
+    "blanc",
+    220
+   ],
+   [
+    "= 1 dL ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "ce2-contenance-comparer-short": {
+  "question": [
+   "Le jus a baissé :",
+   "il en a perdu ?"
+  ],
+  "calcul": [
+   [
+    "1 L de jus",
+    "blanc",
+    190
+   ],
+   [
+    "moins de jus ?",
+    "rouge",
+    160
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "ce2-contenance-probleme-short": {
+  "question": [
+   "2 L − 3 × 50 cL :",
+   "il en reste ?"
+  ],
+  "calcul": [
+   [
+    "2 L − 3 × 50 cL",
+    "blanc",
+    150
+   ],
+   [
+    "« 2 − 50 » ?",
+    "rouge",
+    180
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "ce2-contenance-defi-short": {
+  "question": [
+   "50 cL, 5 dL, ½ L :",
+   "qui a raison ?"
+  ],
+  "calcul": [
+   [
+    "50 cL",
+    "bleu",
+    160
+   ],
+   [
+    "5 dL",
+    "jaune",
+    160
+   ],
+   [
+    "½ L",
+    "vert",
+    160
+   ]
+  ],
+  "ceinture": "orange"
+ },
+ "cm1-solides-prisme-short": {
+  "question": [
+   "Pyramide",
+   "ou prisme ?"
+  ],
+  "calcul": [
+   [
+    "ma tente",
+    "blanc",
+    200
+   ],
+   [
+    "une pyramide ?",
+    "rouge",
+    160
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "cm1-solides-patron-short": {
+  "question": [
+   "1 à côté du 6 :",
+   "un vrai dé ?"
+  ],
+  "calcul": [
+   [
+    "le 1 à côté",
+    "blanc",
+    170
+   ],
+   [
+    "du 6 ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "cm1-solides-defi-short": {
+  "question": [
+   "Combien",
+   "de caisses ?"
+  ],
+  "calcul": [
+   [
+    "d’en haut : 4",
+    "blanc",
+    180
+   ],
+   [
+    "= 4 caisses ?",
+    "rouge",
+    170
+   ]
+  ],
+  "ceinture": "orange"
+ },
+ "cm1-longueur-comparer-short": {
+  "question": [
+   "150 cm ou 2 m :",
+   "qui a gagné ?"
+  ],
+  "calcul": [
+   [
+    "150 cm",
+    "blanc",
+    200
+   ],
+   [
+    "ou 2 m ?",
+    "jaune",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-longueur-mesurer-short": {
+  "question": [
+   "Du 4 au 10 :",
+   "combien de cm ?"
+  ],
+  "calcul": [
+   [
+    "du 4 au 10",
+    "blanc",
+    200
+   ],
+   [
+    "= 10 cm ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-longueur-defi-short": {
+  "question": [
+   "1 km, déjà 600 m :",
+   "il reste combien ?"
+  ],
+  "calcul": [
+   [
+    "1 km − 600 m",
+    "blanc",
+    170
+   ],
+   [
+    "= ?",
+    "jaune",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-longueur-convertir-short": {
+  "question": [
+   "2 m de ficelle",
+   "= ? cm"
+  ],
+  "calcul": [
+   [
+    "2 m",
+    "blanc",
+    220
+   ],
+   [
+    "= 2 cm ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-longueur-estimer-short": {
+  "question": [
+   "15 m ou 15 cm :",
+   "ma vraie taille ?"
+  ],
+  "calcul": [
+   [
+    "je mesure",
+    "blanc",
+    180
+   ],
+   [
+    "15 m ?",
+    "rouge",
+    210
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-perimetre-comprendre-short": {
+  "question": [
+   "Quel enclos a",
+   "le plus grand tour ?"
+  ],
+  "calcul": [
+   [
+    "enclos long",
+    "blanc",
+    200
+   ],
+   [
+    "plus grand tour ?",
+    "rouge",
+    150
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-perimetre-quadrilatere-short": {
+  "question": [
+   "2 tours de basket :",
+   "86 m ?"
+  ],
+  "calcul": [
+   [
+    "2 × (28 + 15)",
+    "blanc",
+    170
+   ],
+   [
+    "= 86 m ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-perimetre-polygone-short": {
+  "question": [
+   "4 biscuits :",
+   "160 cm de ruban ?"
+  ],
+  "calcul": [
+   [
+    "4 carrés de 10",
+    "blanc",
+    180
+   ],
+   [
+    "= 160 cm ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-perimetre-defi-short": {
+  "question": [
+   "36 m de grillage :",
+   "chaque côté ?"
+  ],
+  "calcul": [
+   [
+    "carré de 36 m",
+    "blanc",
+    170
+   ],
+   [
+    "côté 18 m ?",
+    "rouge",
+    180
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-aire-convertir-unites-short": {
+  "question": [
+   "1 dm² :",
+   "combien de cm² ?"
+  ],
+  "calcul": [
+   [
+    "1 dm²",
+    "blanc",
+    220
+   ],
+   [
+    "= 10 cm² ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "ce2-longueur-unites-short": {
+  "question": [
+   "Ma queue :",
+   "10 km ?"
+  ],
+  "calcul": [
+   [
+    "une queue",
+    "blanc",
+    190
+   ],
+   [
+    "de 10 km ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "ce2-longueur-relations-short": {
+  "question": [
+   "1 m ou 100 cm :",
+   "trop long ?"
+  ],
+  "calcul": [
+   [
+    "1 m",
+    "jaune",
+    220
+   ],
+   [
+    "100 cm ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "ce2-longueur-mesurer-short": {
+  "question": [
+   "Ma banane :",
+   "12 cm ?"
+  ],
+  "calcul": [
+   [
+    "du 2 au 12",
+    "blanc",
+    200
+   ],
+   [
+    "= 12 cm ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "ce2-longueur-comparer-short": {
+  "question": [
+   "1 dm ou 9 cm :",
+   "le plus long ?"
+  ],
+  "calcul": [
+   [
+    "1 dm",
+    "#b197fc",
+    220
+   ],
+   [
+    "ou 9 cm ?",
+    "#69db7c",
+    200
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "ce2-longueur-choisir-unite-short": {
+  "question": [
+   "Chez Mamie :",
+   "3 000 000 cm ?"
+  ],
+  "calcul": [
+   [
+    "3 000 000",
+    "rouge",
+    200
+   ],
+   [
+    "cm ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "ce2-longueur-estimer-short": {
+  "question": [
+   "Un mur mesuré",
+   "à la queue ?"
+  ],
+  "calcul": [
+   [
+    "10 × 10 cm",
+    "blanc",
+    200
+   ],
+   [
+    "= 20 cm ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "ce2-longueur-probleme-short": {
+  "question": [
+   "1 m + 50 cm",
+   "= 51 ?"
+  ],
+  "calcul": [
+   [
+    "1 m + 50 cm",
+    "#ffc078",
+    180
+   ],
+   [
+    "= 51 ?",
+    "rouge",
+    210
+   ]
+  ],
+  "ceinture": "jaune"
+ },
+ "ce2-longueur-defi-short": {
+  "question": [
+   "6 dm ou 600 mm :",
+   "qui a raison ?"
+  ],
+  "calcul": [
+   [
+    "6 dm",
+    "#b197fc",
+    160
+   ],
+   [
+    "60 cm",
+    "bleu",
+    160
+   ],
+   [
+    "600 mm",
+    "#ffc078",
+    160
+   ]
+  ],
+  "ceinture": "orange"
+ },
+ "cm2-perimetre-triangle-short": {
+  "question": [
+   "Mon cerf-volant :",
+   "121 cm ?"
+  ],
+  "calcul": [
+   [
+    "60 + 60 + 1",
+    "blanc",
+    190
+   ],
+   [
+    "= 121 cm ?",
+    "rouge",
+    180
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-aire-triangle-rectangle-short": {
+  "question": [
+   "Le triangle est",
+   "plus petit ?"
+  ],
+  "calcul": [
+   [
+    "le triangle",
+    "blanc",
+    200
+   ],
+   [
+    "plus petit ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-aire-defi-short": {
+  "question": [
+   "24 dalles :",
+   "combien de long ?"
+  ],
+  "calcul": [
+   [
+    "24 ÷ 4",
+    "blanc",
+    220
+   ],
+   [
+    "= 20 m ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-aire-carre-rectangle-short": {
+  "question": [
+   "3 m sur 2,5 m :",
+   "quelle aire ?"
+  ],
+  "calcul": [
+   [
+    "3 × 2,5",
+    "blanc",
+    210
+   ],
+   [
+    "= 6 m² ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-aire-unites-short": {
+  "question": [
+   "4 cm²",
+   "ou 4 m² ?"
+  ],
+  "calcul": [
+   [
+    "un tapis",
+    "blanc",
+    190
+   ],
+   [
+    "de 4 cm² ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-aire-comprendre-short": {
+  "question": [
+   "Qui a la plus grande",
+   "serviette ?"
+  ],
+  "calcul": [
+   [
+    "2 × 6",
+    "blanc",
+    220
+   ],
+   [
+    "ou 3 × 4 ?",
+    "jaune",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-aire-composer-short": {
+  "question": [
+   "Gazon autour",
+   "du sable : combien ?"
+  ],
+  "calcul": [
+   [
+    "6 × 5",
+    "blanc",
+    220
+   ],
+   [
+    "= 30 ?",
+    "rouge",
+    220
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-aire-rectangle-short": {
+  "question": [
+   "Tapis de 3 m :",
+   "quelle aire ?"
+  ],
+  "calcul": [
+   [
+    "carré de 3 m",
+    "blanc",
+    180
+   ],
+   [
+    "9 m² ou 12 m² ?",
+    "jaune",
+    150
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-aire-probleme-short": {
+  "question": [
+   "Mur de 12 m² :",
+   "combien de pots ?"
+  ],
+  "calcul": [
+   [
+    "pots de 5 m²",
+    "blanc",
+    180
+   ],
+   [
+    "2 pots ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-aire-perimetre-rectangle-short": {
+  "question": [
+   "Carré de 1,2 m :",
+   "quelle guirlande ?"
+  ],
+  "calcul": [
+   [
+    "carré de 1,2 m",
+    "blanc",
+    170
+   ],
+   [
+    "2,4 m ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-aire-defi-short": {
+  "question": [
+   "Pizza de 40 cm :",
+   "combien de 20 cm ?"
+  ],
+  "calcul": [
+   [
+    "40 cm : 16 €",
+    "blanc",
+    180
+   ],
+   [
+    "20 cm : 8 €",
+    "jaune",
+    180
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-aire-perimetre-defi-short": {
+  "question": [
+   "20 cm de ruban :",
+   "quelle boîte ?"
+  ],
+  "calcul": [
+   [
+    "20 cm de ruban",
+    "blanc",
+    170
+   ],
+   [
+    "quel tour ?",
+    "jaune",
+    180
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-aire-comparer-short": {
+  "question": [
+   "Quelle part est",
+   "la plus grande ?"
+  ],
+  "calcul": [
+   [
+    "3 parts",
+    "blanc",
+    210
+   ],
+   [
+    "laquelle ?",
+    "jaune",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-solides-reconnaitre-short": {
+  "question": [
+   "2 disques :",
+   "une boule ?"
+  ],
+  "calcul": [
+   [
+    "il roule",
+    "blanc",
+    190
+   ],
+   [
+    "2 disques",
+    "blanc",
+    190
+   ],
+   [
+    "une boule ?",
+    "rouge",
+    170
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-solides-sommets-aretes-faces-short": {
+  "question": [
+   "4 boules",
+   "ou 5 ?"
+  ],
+  "calcul": [
+   [
+    "ma pyramide",
+    "blanc",
+    180
+   ],
+   [
+    "4 sommets ?",
+    "rouge",
+    180
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-solides-faces-short": {
+  "question": [
+   "4 couleurs,",
+   "c’est fini ?"
+  ],
+  "calcul": [
+   [
+    "ma boîte",
+    "blanc",
+    210
+   ],
+   [
+    "4 faces ?",
+    "rouge",
+    210
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-solides-patron-short": {
+  "question": [
+   "Combien",
+   "de triangles ?"
+  ],
+  "calcul": [
+   [
+    "ma pyramide",
+    "blanc",
+    180
+   ],
+   [
+    "3 triangles ?",
+    "rouge",
+    180
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-solides-patron-construire-short": {
+  "question": [
+   "Combien",
+   "de patrons ?"
+  ],
+  "calcul": [
+   [
+    "2 rangées de 3",
+    "blanc",
+    170
+   ],
+   [
+    "ça ferme ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-solides-defi-short": {
+  "question": [
+   "3 faces",
+   "au chocolat ?"
+  ],
+  "calcul": [
+   [
+    "27 morceaux",
+    "blanc",
+    190
+   ],
+   [
+    "3 faces ?",
+    "jaune",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-contenance-comparer-short": {
+  "question": [
+   "33 cL ou 0,5 L :",
+   "qui a le plus ?"
+  ],
+  "calcul": [
+   [
+    "33 cL",
+    "blanc",
+    210
+   ],
+   [
+    "ou 0,5 L ?",
+    "jaune",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-contenance-convertir-short": {
+  "question": [
+   "1,5 L :",
+   "combien de cL ?"
+  ],
+  "calcul": [
+   [
+    "1,5 L",
+    "blanc",
+    220
+   ],
+   [
+    "= 15 cL ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-longueur-comparer-short": {
+  "question": [
+   "3,8 m ou 3,15 m :",
+   "qui a gagné ?"
+  ],
+  "calcul": [
+   [
+    "3,8 m",
+    "blanc",
+    210
+   ],
+   [
+    "ou 3,15 m ?",
+    "jaune",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-aire-comprendre-short": {
+  "question": [
+   "Quelle pizza",
+   "est la plus grande ?"
+  ],
+  "calcul": [
+   [
+    "carrée",
+    "blanc",
+    200
+   ],
+   [
+    "ou rectangle ?",
+    "jaune",
+    170
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-aire-triangle-short": {
+  "question": [
+   "12 m² de",
+   "peinture ?"
+  ],
+  "calcul": [
+   [
+    "mur triangle",
+    "blanc",
+    180
+   ],
+   [
+    "12 m² ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-aire-parallelogramme-short": {
+  "question": [
+   "Un coup de",
+   "ciseaux ?"
+  ],
+  "calcul": [
+   [
+    "couper, coller",
+    "blanc",
+    170
+   ],
+   [
+    "l’aire change ?",
+    "rouge",
+    170
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-aire-composer-short": {
+  "question": [
+   "Quelle aire",
+   "pour ma pancarte ?"
+  ],
+  "calcul": [
+   [
+    "carré + triangle",
+    "blanc",
+    160
+   ],
+   [
+    "= ? m²",
+    "jaune",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-aire-defi-short": {
+  "question": [
+   "Quelle largeur",
+   "pour mon tapis ?"
+  ],
+  "calcul": [
+   [
+    "12 m² ÷ 4 m",
+    "blanc",
+    180
+   ],
+   [
+    "= ? m",
+    "jaune",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-patron-prisme-cylindre-short": {
+  "question": [
+   "Mon étiquette",
+   "est trop courte ?"
+  ],
+  "calcul": [
+   [
+    "le tour",
+    "blanc",
+    210
+   ],
+   [
+    "= ? cm",
+    "jaune",
+    210
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-volume-comprendre-short": {
+  "question": [
+   "Combien de boîtes",
+   "dans ma valise ?"
+  ],
+  "calcul": [
+   [
+    "ma valise",
+    "blanc",
+    200
+   ],
+   [
+    "= ? boîtes",
+    "jaune",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-volume-pave-short": {
+  "question": [
+   "Combien de litres",
+   "dans mon aquarium ?"
+  ],
+  "calcul": [
+   [
+    "L × l × h",
+    "blanc",
+    200
+   ],
+   [
+    "12 litres ?",
+    "jaune",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-volume-prisme-short": {
+  "question": [
+   "Combien de coups",
+   "de pompe ?"
+  ],
+  "calcul": [
+   [
+    "ma tente",
+    "blanc",
+    210
+   ],
+   [
+    "= ? m³",
+    "jaune",
+    210
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-volume-cylindre-short": {
+  "question": [
+   "Plus ou moins",
+   "de 200 cm³ ?"
+  ],
+  "calcul": [
+   [
+    "π × r² × h",
+    "blanc",
+    200
+   ],
+   [
+    "> 200 cm³ ?",
+    "jaune",
+    180
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-volume-assemblage-short": {
+  "question": [
+   "Quel volume",
+   "pour mon château ?"
+  ],
+  "calcul": [
+   [
+    "pavé + cube",
+    "blanc",
+    190
+   ],
+   [
+    "= ? cm³",
+    "jaune",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-volume-unite-short": {
+  "question": [
+   "1 litre, c’est",
+   "combien de cm³ ?"
+  ],
+  "calcul": [
+   [
+    "1 L",
+    "blanc",
+    220
+   ],
+   [
+    "= ? cm³",
+    "jaune",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-volume-defi-short": {
+  "question": [
+   "Combien de litres",
+   "dans mon bidon ?"
+  ],
+  "calcul": [
+   [
+    "mon bidon",
+    "blanc",
+    200
+   ],
+   [
+    "assez ?",
+    "jaune",
+    210
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-conversion-decimal-short": {
+  "question": [
+   "Ma farine :",
+   "15 g ou 1 500 g ?"
+  ],
+  "calcul": [
+   [
+    "1,5 kg",
+    "blanc",
+    220
+   ],
+   [
+    "= ? g",
+    "jaune",
+    210
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-conversion-duree-short": {
+  "question": [
+   "100 minutes,",
+   "c’est 1 heure ?"
+  ],
+  "calcul": [
+   [
+    "100 min",
+    "blanc",
+    220
+   ],
+   [
+    "= 1 h ?",
+    "rouge",
+    210
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-conversion-avant-calcul-short": {
+  "question": [
+   "Combien reste-t-il",
+   "de mon ruban ?"
+  ],
+  "calcul": [
+   [
+    "1 − 30",
+    "blanc",
+    220
+   ],
+   [
+    "= −29 ?",
+    "rouge",
+    210
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "5e-conversion-coherence-short": {
+  "question": [
+   "Mon jus livré",
+   "dans un bouchon ?"
+  ],
+  "calcul": [
+   [
+    "1,5 L",
+    "blanc",
+    220
+   ],
+   [
+    "un bouchon ?",
+    "rouge",
+    180
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-volume-unite-short": {
+  "question": [
+   "20 cm³ :",
+   "combien de cubes ?"
+  ],
+  "calcul": [
+   [
+    "20 cm³",
+    "blanc",
+    220
+   ],
+   [
+    "= 60 cubes ?",
+    "rouge",
+    180
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-volume-compter-short": {
+  "question": [
+   "Combien",
+   "de sucres ?"
+  ],
+  "calcul": [
+   [
+    "mon bloc",
+    "blanc",
+    200
+   ],
+   [
+    "9 sucres ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-volume-comparer-short": {
+  "question": [
+   "Qui a le plus",
+   "de cubes ?"
+  ],
+  "calcul": [
+   [
+    "ma tour de 10",
+    "blanc",
+    180
+   ],
+   [
+    "gagne ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-volume-assemblage-short": {
+  "question": [
+   "18 + 7 cubes :",
+   "combien ?"
+  ],
+  "calcul": [
+   [
+    "18 + 7",
+    "blanc",
+    220
+   ],
+   [
+    "j’en perds ?",
+    "rouge",
+    180
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-volume-defi-short": {
+  "question": [
+   "48 glaçons :",
+   "combien de bacs ?"
+  ],
+  "calcul": [
+   [
+    "48 glaçons",
+    "blanc",
+    200
+   ],
+   [
+    "24 bacs ?",
+    "rouge",
+    200
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-vision-vues-short": {
+  "question": [
+   "Vu d’en haut :",
+   "combien de carrés ?"
+  ],
+  "calcul": [
+   [
+    "10 cubes",
+    "blanc",
+    210
+   ],
+   [
+    "tous vus ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-vision-representation-short": {
+  "question": [
+   "Un carré…",
+   "ou un cube ?"
+  ],
+  "calcul": [
+   [
+    "mon cube",
+    "blanc",
+    200
+   ],
+   [
+    "un carré ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-vision-patron-pave-short": {
+  "question": [
+   "Le couvercle :",
+   "quelles mesures ?"
+  ],
+  "calcul": [
+   [
+    "6 × 4",
+    "blanc",
+    220
+   ],
+   [
+    "ça ferme ?",
+    "rouge",
+    190
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "6e-vision-defi-short": {
+  "question": [
+   "3 faces au chocolat :",
+   "combien ?"
+  ],
+  "calcul": [
+   [
+    "12 morceaux",
+    "blanc",
+    190
+   ],
+   [
+    "tout chocolat ?",
+    "rouge",
+    160
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-contenance-estimer-short": {
+  "question": [
+   "Un parfum de 50 :",
+   "mL, cL ou L ?"
+  ],
+  "calcul": [
+   [
+    "50 litres",
+    "blanc",
+    200
+   ],
+   [
+    "de parfum ?",
+    "rouge",
+    180
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-contenance-defi-short": {
+  "question": [
+   "Ça rentre",
+   "dans 2 L ?"
+  ],
+  "calcul": [
+   [
+    "le cocktail",
+    "blanc",
+    190
+   ],
+   [
+    "≤ 2 L ?",
+    "jaune",
+    210
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-longueur-convertir-short": {
+  "question": [
+   "2,5 m de ruban",
+   "= ? cm"
+  ],
+  "calcul": [
+   [
+    "2,5 m",
+    "blanc",
+    220
+   ],
+   [
+    "= ? cm",
+    "jaune",
+    210
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-longueur-defi-short": {
+  "question": [
+   "10 m de clôture :",
+   "5 ballons ?"
+  ],
+  "calcul": [
+   [
+    "10 ÷ 2",
+    "blanc",
+    220
+   ],
+   [
+    "= 5 ballons ?",
+    "rouge",
+    180
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm2-longueur-estimer-short": {
+  "question": [
+   "Mon lit : 2 km",
+   "ou 2 m ?"
+  ],
+  "calcul": [
+   [
+    "mon lit",
+    "blanc",
+    210
+   ],
+   [
+    "2 km ?",
+    "rouge",
+    210
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-entier-lire-short": {
+  "question": [
+   "« Huit mille neuf »",
+   "ça s'écrit comment ?"
+  ],
+  "calcul": [
+   [
+    "8 900 ?",
+    "rouge",
+    210
+   ],
+   [
+    "8 009",
+    "vert",
+    210
+   ]
+  ],
+  "ceinture": "blanche"
+ },
+ "cm1-entier-comparer-short": {
+  "question": [
+   "987 ou 1 002 :",
+   "lequel gagne ?"
+  ],
+  "calcul": [
+   [
+    "987  ou  1 002",
+    "blanc",
+    180
+   ],
+   [
+    "3 ou 4 chiffres ?",
+    "jaune",
+    150
+   ]
+  ],
+  "ceinture": "blanche"
+ }
 }

@@ -279,8 +279,33 @@ globalement.
 | A2 — aperçu `-ql` relu | ✅ |
 | **A2 — rendu HD** | ✅ `manim/sorties/cm1/maths/entiers/02-comparer/`, 3 min 36, **0 bord**, planche HD relue (13 écrans) |
 | Série Ti Margo `cm1-entier` (json, commun, cues) | ✅ `prototypes/ti-margo/films/cm1-entier*.js` |
-| A1 et A2 — shorts Ti Margo | ⏳ |
+| A1 et A2 — shorts Ti Margo | ✅ 58,0 s et 62,7 s, planches relues, **compteurs contrôlés** |
+| A1 et A2 — chaîne de publication | ✅ complète (voir ci-dessous) |
 | A3 → A6, B1 → B5 (9 épisodes) | ⏳ |
+
+### ✅ A1 et A2 sont FINIS, publication comprise (21/11, 12 h 30)
+
+- **Shorts Ti Margo** : série `cm1-entier` (`cm1-entier.json`, `cm1-entier.js`, `cm1-entier-cues.js`,
+  un fichier par film). A1 « Où va le neuf ? » 58,0 s, A2 « 987 ou 1 002 ? » 62,7 s, ceinture
+  BLANCHE toutes les deux. Planches des films relues image par image.
+- ✅ **Compteurs contrôlés sur le FILM rendu, pas sur le source** :
+  A1 absent à 28,2 s, plein à 28,4, 2/3 à 29,4, 1/3 à 30,4, presque vide à 31,2, disparu à 31,4 ;
+  A2 absent à 28,6, plein à 28,9, 2/3 à 29,9, 1/3 à 30,9, presque vide à 31,6, disparu à 31,9.
+  Dans la carte, au-dessus de « Mets pause », rien dessus, pas de saut.
+- **Registres neufs** : `manim/miniature_entier.py` (miniatures des paysages) et
+  `manim/passe_entier.py` (temps, questions, manifeste). Dates **13 et 14/06/2027** — la file
+  s'arrêtait au 12/06 ; 1 short par jour.
+- ⚠️ **Titre YouTube de A1 raccourci** : « Lire ET ÉCRIRE les grands nombres » faisait 103
+  caractères avec le reste du gabarit → « Lire les grands nombres » (93).
+- Miniatures : paysages (`miniature_entier.py`), shorts au **gabarit A**
+  (`scripts/miniatures-shorts-grille.json` + `miniatures-shorts-grille.py`, mention « Dessin animé »,
+  tout entre y = 215 et 1700). Fiche YouTube, vignettes, R2 (9 fichiers par épisode),
+  `videos-r2` + bilans (nos 4 clés seulement, via `outils-commit-cles.py`).
+- ✅ **Coach vérifié À L'IMAGE, en partant de l'accueil** (serveur `eleveai-4`, port 3400) :
+  **8 lignes `notion_ressources`** écrites et relues en base (4 au CM1 + 4 au CM2 par l'alias
+  `aussi`). ⭐ L'alias porte bien la CLASSE : le coach CM1 **et** le coach CM2 montrent « ▶ Vidéo »
+  et le short sur les micros 1 et 2, et sur aucune autre. La page `/video/cm1-entier-lire` lit bien
+  le MP4 sur R2 (1920 × 1080, 191,8 s, aucune erreur de lecture).
 
 ### ⛔ UN 5ᵉ DÉFAUT, trouvé À L'IMAGE sur le HD de A2 : la coche touche le libellé
 
