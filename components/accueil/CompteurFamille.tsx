@@ -18,7 +18,7 @@ const LIENS_OFFRE = true;
 const CARTE_CADEAU = false;
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, GraduationCap, Gift, PlayCircle, Puzzle, Users, Utensils } from "lucide-react";
+import { ArrowRight, GraduationCap, Gift, PlayCircle, Users } from "lucide-react";
 import { CAP_VIDEOS, ECHEANCE_CAP, etatCompteurVideos } from "@/lib/videos/compteur";
 import { EXERCICES } from "@/lib/accueil/chiffres-semaine";
 import CompteurReponsesCoach from "@/components/coach/CompteurReponsesCoach";
@@ -94,16 +94,27 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
         </p>
         <p className="mt-1 flex items-center gap-2 text-sm font-bold text-slate-700">
           <Image src="/ti-margo/animations/encouragement.png" alt="" width={320} height={320} sizes="48px" className="h-12 w-12 shrink-0" />
-          <span>Vos enfants s&apos;entraînent seuls pendant que vous préparez le repas. Ti Margo les aide, vous gardez l&apos;œil.</span>
+          {/* 21/11, Frédéric : « fais pareil avec famille » (comme l'encart prof,
+              « comme un CEO ») → le bénéfice d'abord : du temps pour vous. */}
+          <span>Plus de temps pour vous : vos enfants s&apos;entraînent seuls pendant que vous préparez le repas. Ti Margo les aide.</span>
         </p>
         {LIENS_OFFRE ? (
           <>
+            {/* 21/11 : ce qui est offert d'abord, puis ce que le Suivi ajoute, dit
+                clairement (⛔ jamais laisser croire que le Suivi est gratuit). */}
             <ul className="mt-2 space-y-0.5 text-sm font-bold text-slate-700">
+              <li className="flex gap-1.5">
+                <span aria-hidden="true" className="text-sky-700">✔</span>
+                <span>Corrigés tout de suite, la vidéo s&apos;ils bloquent</span>
+              </li>
+            </ul>
+            <p className="mt-1.5 text-sm font-black text-sky-800">Avec le Suivi, vous savez où ils en sont :</p>
+            <ul className="mt-0.5 space-y-0.5 text-sm font-bold text-slate-700">
               {[
-                "Exercices corrigés tout de suite, avec la vidéo s'ils bloquent",
-                "Avec le Suivi, vous savez où ils en sont : leurs jours de travail, ce qu'ils ont compris, les 3 choses à revoir",
-                "Une alerte s'ils décrochent, et un bilan chaque semaine par courriel",
-                `${QUOTAS_IA.suiviParJour} aides de Ti Margo par jour avec le Suivi, au lieu de ${QUOTAS_IA.gratuitParJour}`,
+                "Ce qu'ils ont compris, les 3 choses à revoir",
+                "Une alerte s'ils décrochent",
+                "Un bilan chaque semaine par courriel",
+                `${QUOTAS_IA.suiviParJour} aides de Ti Margo par jour, au lieu de ${QUOTAS_IA.gratuitParJour}`,
               ].map((t) => (
                 <li key={t} className="flex gap-1.5">
                   <span aria-hidden="true" className="text-sky-700">✔</span>
@@ -155,30 +166,24 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
         <p className="mt-1 text-xl font-black leading-snug text-slate-900">
           EleveAI simplifie <span className="whitespace-nowrap">votre vie de prof</span>
         </p>
+        {/* 21/11, Frédéric : « économiser du temps n'apparaît nulle part », puis
+            « refais l'encart comme un CEO » → le bénéfice d'abord (le temps
+            gagné), puis la preuve (correction, direct, bilan, Pronote), et la
+            gratuité près du bouton. ⛔ Toujours honnête : seuls les exercices
+            du site se corrigent seuls ; le bulletin se COPIE dans Pronote. */}
         <p className="mt-1 text-sm font-bold text-slate-700">
-          Chacun travaille à son niveau, concentré, en classe et le soir. Vous gardez votre énergie pour ceux qui en ont besoin.
+          Moins de corrections, plus de temps pour vos élèves. Chacun s&apos;entraîne à son niveau, en classe et le soir.
         </p>
         <ul className="mt-2 space-y-0.5 text-sm font-bold text-slate-700">
           {[
-            // 19/11/2026 : « 2 classes gratuites par prof », dit en clair, sans prix.
-            `${FREE_CLASSES_PER_TEACHER} classes gratuites, un code pour chaque élève`,
-            // 16/11, Frédéric : « et vous pouvez suivre vos élèves en direct en
-            // salle info » + « ils travaillent à leurs niveaux ».
-            // 17/11 : « à son niveau » est maintenant dans le titre de l'encart.
-            "En salle info, suivez vos élèves en direct",
+            "Du temps gagné : exercices corrigés tout seuls",
+            "Votre énergie, pour ceux qui en ont besoin",
+            // 16/11 : « suivre vos élèves en direct en salle info ».
+            "En salle info, vous voyez chaque élève en direct",
             // U+2011 : trait d'union insécable, « micro‑compétence » ne se coupe pas.
-            "Le bilan de chaque élève, par micro‑compétence",
-            // 19/11, Frédéric : « fais bosser les élèves, qui le font le soir en
-            // autonomie : tu as les notes », « les notes sont exportables » →
-            // le bulletin (/prof/classes/bulletin) : moyennes et appréciations
-            // à copier dans Pronote, ou à imprimer.
-            // 19/11 : le soir est passé dans la phrase du haut (« et rajouter qu'ils s'entraînent le soir »).
-            "Toutes leurs notes, en classe comme à la maison",
-            // 19/11, Frédéric : « rajoute pour les profs bulletin et note
-            // exportable pour Pronote ». ⚠️ Honnête : le bulletin se COPIE
-            // dans Pronote (une ligne ou toute la colonne) ou s'imprime ; ce
-            // n'est pas un fichier d'import.
-            "Le bulletin de la classe : notes et appréciations prêtes pour Pronote",
+            "Toutes les notes, par micro‑compétence",
+            // 19/11 : le bulletin (/prof/classes/bulletin) se copie dans Pronote.
+            "Le bulletin prêt à copier dans Pronote",
           ].map((t) => (
             <li key={t} className="flex gap-1.5">
               <span aria-hidden="true" className="text-violet-700">✔</span>
@@ -197,21 +202,12 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
           >
             Créer ma classe <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
-          {/* 19/11 : les problèmes à projeter (fond ardoise, minuteur). */}
-          <Link
-            href="/enigmes-maths"
-            className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-slate-200 hover:ring-violet-400"
-          >
-            <Puzzle className="h-4 w-4 text-violet-700" aria-hidden="true" />
-            Énigmes à projeter
-          </Link>
-          <Link
-            href="/seances"
-            className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-slate-200 hover:ring-violet-400"
-          >
-            <Utensils className="h-4 w-4 text-violet-700" aria-hidden="true" />
-            Exemples de séances
-          </Link>
+          {/* 21/11, Frédéric : « dans l'encart profs enlève énigmes à projeter »
+              et « exemples de séances » (le Menu du jour, juste dessous, mène
+              à la séance en entier). */}
+          <span className="text-sm font-bold text-violet-800">
+            {FREE_CLASSES_PER_TEACHER} classes gratuites, un code par élève
+          </span>
         </div>
         <p className="mt-1.5 text-xs font-bold text-slate-600">La séance type : <span className="whitespace-nowrap">20 min de cours,</span> <span className="whitespace-nowrap">25 min de coach et vidéos,</span> <span className="whitespace-nowrap">10 min de synthèse</span></p>
       </div>
@@ -221,40 +217,21 @@ export default function CompteurFamille({ variante, micros }: { variante: Varian
       <div className="rounded-2xl bg-white/90 px-4 py-3 shadow-sm ring-1 ring-teal-200 sm:col-span-2">
         {/* 17/11 : avec 3 nombres, la bande ne passe sur une ligne qu'à partir de
             lg (1024 px) ; en dessous, « En chiffres » + barre au-dessus, les
-            nombres dessous (sinon la barre et sa phrase s'écrasaient). */}
-        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-5">
+            nombres dessous (sinon la barre et sa phrase s'écrasaient).
+            21/11 : la bande est dans une colonne étroite (≈ 770 px) ; avec le
+            compteur en direct, « vidéos aujourd'hui » se coupait même en lg →
+            toujours les nombres SOUS la barre. */}
+        <div className="flex flex-col gap-3">
           <div className="min-w-0 flex-1">
             <p className="flex flex-wrap items-baseline gap-x-2">
               <span className="flex items-center gap-1.5 self-center text-sm font-black uppercase tracking-wide text-rose-700">
                 <PlayCircle className="h-5 w-5" aria-hidden="true" /> En chiffres
               </span>
-              {c.capAtteint ? (
-                <span className="text-xl font-black text-slate-900">Plus de {cap} vidéos</span>
-              ) : (
-                <span className="text-xl font-black text-slate-900">
-                  {c.nombreTexte} <span className="text-base font-bold text-slate-600">vidéos aujourd&apos;hui</span>
-                </span>
-              )}
             </p>
-            {!c.capAtteint && (
-              <>
-                <div
-                  className="mt-1.5 h-3 overflow-hidden rounded-full bg-slate-200"
-                  role="progressbar"
-                  aria-valuemin={0}
-                  aria-valuemax={CAP_VIDEOS}
-                  aria-valuenow={c.nombre}
-                  aria-label={c.phrase}
-                >
-                  <div className="h-full rounded-full bg-gradient-to-r from-teal-500 to-emerald-500" style={{ width: `${c.pourcent}%` }} />
-                </div>
-                <p className="mt-1 text-xs font-bold text-slate-600 sm:text-sm">
-                  <span className="text-teal-700">{cap} {ECHEANCE_CAP}</span> : toutes les micro-compétences du CP à la Terminale.
-                </p>
-              </>
-            )}
+            {/* 21/11, Frédéric : « En chiffres : enlève le nombre de vidéos » →
+                plus de nombre, de barre ni de « 5 000 fin janvier ». */}
           </div>
-          <dl className={`grid shrink-0 ${micros ? "grid-cols-3" : "grid-cols-2"} gap-3 border-t border-slate-100 pt-2 lg:border-l lg:border-t-0 lg:pl-5 lg:pt-0`}>
+          <dl className={`grid shrink-0 ${micros ? "grid-cols-3" : "grid-cols-2"} gap-3 border-t border-slate-100 pt-2`}>
             {micros ? chiffre(micros.toLocaleString("fr-FR"), "micro-compétences") : null}
             {chiffre(EXERCICES.exercices.toLocaleString("fr-FR"), "exercices de maths")}
             {/* 18/11, Frédéric : « il fallait enlever le nombre de visiteurs » →
