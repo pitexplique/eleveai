@@ -34,6 +34,9 @@ EP = [
      "on regarde le chiffre d'après !", True, "verte"),
     ("cm1", "multiple", "05-multiple", ["LES", "MULTIPLES"], "42, multiple de 6 ?",
      "7 paquets pleins, sans reste !", True, "verte"),
+    # ⛔ ceinture BLEUE : le défi est le cran au-dessus de la paysage verte du niveau.
+    ("cm1", "defi", "06-defi", ["LE DÉFI", "DES NOMBRES"], "Mystère entre 3 900 et 4 000",
+     "les indices, un par un !", True, "bleue"),
 ]
 
 

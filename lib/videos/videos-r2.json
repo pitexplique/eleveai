@@ -17864,5 +17864,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_multiple&display=simple"
+ },
+ "cm1-entier-defi": {
+  "fichier": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi.mp4",
+  "poster": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi.png",
+  "vignette": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi.vignette.webp",
+  "titre": "Qui se cache entre 3 900 et 4 000 ? — Le défi des nombres — épisode 6 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_defi&display=simple"
+ },
+ "cm1-entier-defi-short": {
+  "fichier": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi-short.mp4",
+  "poster": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi-short-miniature.png",
+  "vignette": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi-short-miniature.vignette.webp",
+  "titre": "Le plus grand nombre avec 7, 4, 1 et 0 ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_defi&display=simple"
  }
 }

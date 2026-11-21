@@ -291,7 +291,8 @@ globalement.
 | A5′ — durées brutes des clips | paysage **171,4 s** (≈ 2 min 51 avant les pauses), short **58,1 s** — dans la fourchette de la série |
 | **A5 `cm1-entier-multiple`** | ✅ **FINI** : HD 2 min 51, **0 bord**, 0 `COCHE-RESERVE`, 15 écrans (pas de `07-cm2`), planche HD relue ; short 61,3 s, compteur revérifié SUR LE FILM ; publication complète. ⭐ Coach : **2 lignes seulement, au CM1** — relu à l'image, le CM2 ne montre AUCUNE vidéo sur sa micro `entier_multiple`, comme décidé |
 | A5′ — script Manim, HD, short, publication | ⏳ (ses voix sont validées : `830810afc`) |
-| **A6 `cm1-entier-defi`** | ✅ script, dry run propre (0 AUDIT-AVANCE / 0 RETARD / 0 BORD), **`-ql` relu écran par écran** (4 défauts corrigés) ; film du short écrit et ses images de contrôle relues (compteur 30,35 → 33,35 s). ⏳ **reste : le HD**, le film du short, la publication |
+| **A6 `cm1-entier-defi`** | ✅ **FINI** : HD 3 min 19,5, **0 bord**, 0 `COCHE-RESERVE`, 16 écrans, ⛔ **ceinture BLEUE** (la première du lot A) ; short 63,8 s, compteur revérifié SUR LE FILM (30,35 → 33,35 s) ; publication complète, coach 4 lignes relues à l'image au CM1 et au CM2 |
+| ✅✅ **LE LOT A EST FINI** | 6 épisodes = 12 vidéos en ligne. Lignes `notion_ressources` : 4 pour chacun de `lire`, `comparer`, `decomposer`, `arrondir`, `defi` (CM1 + CM2 par `aussi`) et **2 pour `multiple`, au CM1 seul** — soit **22 lignes**, vérifiées à l'image épisode par épisode |
 | B1 → B5 en 6e (5 épisodes) | ⏳ |
 
 ### A6 : quatre défauts, corrigés avant tout rendu HD

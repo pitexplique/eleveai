@@ -167,6 +167,35 @@ EP = [
       s_toi="combien de paquets de 6 avec 54 billes ?",
       s_tags=["nombres entiers", "multiples", "table de 4", "il reste combien"],
       s_centres=["jeux-defis", "nature-ecologie"]),
+ # ⛔ CEINTURE BLEUE en paysage (la seule du lot A, avec B5 en 6e) ; le short reste BLANC.
+ dict(classe="cm1", n=6, slug="defi", notion="nombre_entier", micro="entier_defi",
+      nom="Le défi des nombres", date="2027-06-18", ceinture="bleue",
+      titre="Qui se cache entre 3 900 et 4 000 ?",
+      intro="Sarah est factrice. Sur sa tournée, le numéro d'une maison est effacé. Elle le "
+            "retrouve comme un détective : un indice après l'autre, jusqu'à ce qu'il n'en reste qu'un.",
+      points=["on applique les indices un par un, et on vérifie à la fin",
+              "un multiple de 10 finit par zéro",
+              "le chiffre d'un rang élimine tous les autres candidats",
+              "pour le plus grand nombre, on range du plus grand chiffre au plus petit",
+              "un nombre ne commence jamais par zéro : il perdrait un chiffre",
+              "et au CM2 : juste après 6 999 999 vient 7 000 000"],
+      defi="95 bandes dessinées rangées par 4 : combien en reste-t-il ?",
+      chap={"00-garde": "Qui se cache entre 3 900 et 4 000 ?", "01-situation": "Sarah, factrice",
+            "02-indices": "Les indices, un par un", "03-dernier-indice": "Le dernier indice tranche",
+            "04-question": "Question 1", "05-etiquettes": "Quatre étiquettes",
+            "06-question": "Question 2", "07-cm2": "Et au CM2", "08-question": "Question 3",
+            "09-defi": "À toi de jouer", "09b-correction": "Correction",
+            "10-finale": "Ce que tu as appris"},
+      tags=["nombres entiers", "nombre mystère", "défi de numération", "multiple de 10",
+            "le plus grand nombre", "jamais zéro devant", "factrice"],
+      centres=["transports", "jeux-defis"],
+      aussi=[{"classe": "cm2", "notionId": "nombre_entier", "microId": "entier_defi"}],
+      s_titre="Le plus grand nombre avec 7, 4, 1 et 0 ?", s_ceinture="blanche",
+      s_accroche="Mon copain cherche le plus grand code à quatre chiffres avec 7, 4, 1 et 0, et "
+                 "tape 0 741. Le zéro devant fait perdre un chiffre : il ne reste que 741.",
+      s_toi="le plus petit nombre de quatre chiffres avec 0, 5, 3 et 8 ?",
+      s_tags=["nombres entiers", "le plus grand nombre", "zéro devant", "défi"],
+      s_centres=["jeux-defis", "technologie-ia"]),
 ]
 
 COMMUNS = ["nombres entiers", "numération", "maths"]

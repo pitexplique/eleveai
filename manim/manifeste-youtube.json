@@ -104777,6 +104777,178 @@
         "jeux-defis",
         "nature-ecologie"
       ]
+    },
+    {
+      "id": "cm1-entier-defi",
+      "pas_avant": "2027-06-18",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_defi",
+      "classe": "cm1",
+      "ceinture": "bleue",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi.mp4",
+      "miniature": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi.png",
+      "titre": "Qui se cache entre 3 900 et 4 000 ? — Le défi des nombres — épisode 6 · Maths CM1",
+      "accroche": "Sarah est factrice. Sur sa tournée, le numéro d'une maison est effacé. Elle le retrouve comme un détective : un indice après l'autre, jusqu'à ce qu'il n'en reste qu'un.\n\nDans cette vidéo :\n• on applique les indices un par un, et on vérifie à la fin\n• un multiple de 10 finit par zéro\n• le chiffre d'un rang élimine tous les autres candidats\n• pour le plus grand nombre, on range du plus grand chiffre au plus petit\n• un nombre ne commence jamais par zéro : il perdrait un chiffre\n• et au CM2 : juste après 6 999 999 vient 7 000 000\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : 95 bandes dessinées rangées par 4 : combien en reste-t-il ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_defi&display=simple\n\n🔢 Épisode 6 de la série Nombres entiers d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Qui se cache entre 3 900 et 4 000 ?"
+        ],
+        [
+          "00:33",
+          "Question 1"
+        ],
+        [
+          "01:05",
+          "Quatre étiquettes"
+        ],
+        [
+          "01:15",
+          "Question 2"
+        ],
+        [
+          "01:48",
+          "Et au CM2"
+        ],
+        [
+          "01:59",
+          "Question 3"
+        ],
+        [
+          "02:35",
+          "À toi de jouer"
+        ],
+        [
+          "02:49",
+          "Correction"
+        ],
+        [
+          "02:59",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "nombre mystère",
+        "défi de numération",
+        "multiple de 10",
+        "le plus grand nombre",
+        "jamais zéro devant",
+        "factrice",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "Je suis entre 6 000 et 6 100, multiple de 10, et mes dizaines valent 9.",
+          "choix": [
+            "6 095",
+            "6 090",
+            "6 009"
+          ],
+          "reponse": 1,
+          "explication": "Multiple de 10 : il finit par zéro. Avec 9 dizaines, c'est 6 090."
+        },
+        {
+          "t": "01:15",
+          "question": "Avec 0, 6, 8 et 3, quel est le plus petit nombre de quatre chiffres ?",
+          "choix": [
+            "3 086",
+            "368",
+            "3 068"
+          ],
+          "reponse": 2,
+          "explication": "Un nombre ne commence pas par zéro. On met 3, puis 0, puis 6, puis 8."
+        },
+        {
+          "t": "01:59",
+          "question": "Une usine a fait 49 493 bouteilles. Combien en manque-t-il pour 50 000 ?",
+          "choix": [
+            "607",
+            "507",
+            "407"
+          ],
+          "reponse": 1,
+          "explication": "49 493 + 7 donne 49 500. Puis 500 de plus : 507 en tout."
+        }
+      ],
+      "centres": [
+        "transports",
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_defi"
+        }
+      ]
+    },
+    {
+      "id": "cm1-entier-defi-short",
+      "pas_avant": "2027-06-18",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_defi",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-entier-defi",
+      "fichier": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi-short.mp4",
+      "miniature": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi-short-miniature.png",
+      "titre": "Le plus grand nombre avec 7, 4, 1 et 0 ? #maths #cm1",
+      "accroche": "Mon copain cherche le plus grand code à quatre chiffres avec 7, 4, 1 et 0, et tape 0 741. Le zéro devant fait perdre un chiffre : il ne reste que 741.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : le plus petit nombre de quatre chiffres avec 0, 5, 3 et 8 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #cm1 #primaire",
+      "tags": [
+        "nombres entiers",
+        "le plus grand nombre",
+        "zéro devant",
+        "défi",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "Quel est le plus grand nombre avec 7, 4, 1 et 0 ?",
+          "choix": [
+            "7 410",
+            "1 047",
+            "4 710"
+          ],
+          "reponse": 0,
+          "explication": "Du plus grand chiffre au plus petit : 7, 4, 1, 0. Donc 7 410."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "technologie-ia"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_defi"
+        }
+      ]
     }
   ]
 }
