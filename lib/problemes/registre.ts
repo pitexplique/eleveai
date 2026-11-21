@@ -133,6 +133,10 @@ import eCm1NombreEntier from "./cm1/nombre_entier";
 import eCm1Suite from "./cm1/suite";
 import eCm1TablesMultiplication from "./cm1/tables_multiplication";
 import eCm1Multiplication from "./cm1/multiplication";
+import eCm1Division from "./cm1/division";
+import eCm1Fraction from "./cm1/fraction";
+import eCm1NombreDecimal from "./cm1/nombre_decimal";
+import eCm1Calcul from "./cm1/calcul";
 // 3e (imports)
 import e3eFractionRationnel from "./3e/fraction_rationnel";
 import e3eEntierPuissance from "./3e/entier_puissance";
@@ -145,6 +149,10 @@ const TOUTES: ProblemesNotion[] = [
   eCm1Suite,
   eCm1TablesMultiplication,
   eCm1Multiplication,
+  eCm1Division,
+  eCm1Fraction,
+  eCm1NombreDecimal,
+  eCm1Calcul,
   // CM2
   eCm2NombreEntier,
   eCm2Suite,
