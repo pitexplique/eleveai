@@ -259,6 +259,10 @@ import e2deSignesExpression2de from "./seconde/signes_expression_2de";
 import e2deFonctionVocabulaire2de from "./seconde/fonction_vocabulaire_2de";
 import e2deAnalyseGraphique2de from "./seconde/analyse_graphique_2de";
 import e2deFonctionVariationsExtremums from "./seconde/fonction_variations_extremums";
+import e2deFonctionsAffines2de from "./seconde/fonctions_affines_2de";
+import e2deFonctionsReference2de from "./seconde/fonctions_reference_2de";
+import e2deInformationChiffreeEvolutions from "./seconde/information_chiffree_evolutions";
+import e2deStatistiquesDescriptives from "./seconde/statistiques_descriptives";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -526,6 +530,10 @@ const TOUTES: ProblemesNotion[] = [
   e2deFonctionVocabulaire2de,
   e2deAnalyseGraphique2de,
   e2deFonctionVariationsExtremums,
+  e2deFonctionsAffines2de,
+  e2deFonctionsReference2de,
+  e2deInformationChiffreeEvolutions,
+  e2deStatistiquesDescriptives,
   // fin Seconde
 ];
 
