@@ -244,6 +244,59 @@ globalement.
 
 ---
 
+## 6bis. ✅ PRODUCTION LANCÉE (Frédéric, 21/11 : « Oui, lance la prod »)
+
+| Étape | État |
+|---|---|
+| Les 22 JSON de voix (`manim/voix/<id>.json`) | ✅ écrits (`--ecrire`) |
+| WAV Julie, débit −6 | ✅ **253 fichiers** dans `public/sons/<id>/` (16 par paysage, 7 par short) |
+| Marques mot à mot des 11 paysages | ✅ **2 860 marques**, 16 écrans chacun, 0 écran sans marque |
+| `manim/scripts/cm1/entier_commun.py` | ✅ le commun de la série (tableau par classes, droite graduée, 11 personnages, 2 bases) |
+| A1 `entier_lire.py` — script + dry run | ✅ 0 AUDIT-AVANCE, 0 RETARD, 0 BORD ; durée 3 min 00 |
+| A1 — aperçu `-ql` relu | ⏳ en cours |
+| A1 — HD, short Ti Margo, publication | ⏳ |
+| A2 → A6, B1 → B5 | ⏳ |
+
+- **Outils neufs** : `entier_marques.py` (marques, prend la CLASSE en argument),
+  `entier_commun.py` (le commun). ⛔ Tous deux sont des **COPIES** et non des imports de la série
+  Masses ou Périmètre : le poste 1 reprend les Masses ce week-end, et un commun partagé ferait bouger
+  nos rendus sous nos pieds (REGLES.md, « le SOURCE n'est pas le RÉSULTAT »).
+- ⚠️ **Le piège du lot, confirmé à l'usage** : les nombres à espace. Trois conséquences réelles —
+  (1) à l'écran il faut l'espace **fine insécable** (`ESP` / `nb()` dans `entier_commun.py`), sinon
+  Manim coupe le nombre en deux mots qui ne s'alignent plus ; (2) l'audit sort
+  « AUDIT-ABSENT 29404 » pour ces nombres et **ne les vérifie pas** → contrôle à l'image obligatoire ;
+  (3) WinRT pose **deux** frontières de mot sur un sigle lettres+chiffre (« CM2 ») — fausse alerte
+  « introuvable » corrigée dans `entier_marques.py`.
+- ⚠️ **Deux défauts réels trouvés au dry run de A1 et corrigés** : le tableau de l'écran final sortait
+  à x = −6,9 (marge de 3 % : −6,68) → `larg=0.58` ; et le tableau de l'écran 02 arrivait **0,58 s**
+  après son mot (toléré : 0,4 s) parce que deux `au_mot` se suivaient à 0,6 s d'intervalle → le bloc et
+  le tableau arrivent maintenant ensemble, au premier mot.
+
+### ⚠️ Les 29 nombres à espace SANS marque — à lire avant d'écrire chaque script
+
+Un nombre dit deux fois dans la même voix, ou repris dans une liste de choix, n'a pas toujours de marque
+sur son premier groupe de chiffres. `au_mot("3 045")` échoue alors silencieusement : il faut lire
+l'instant dans le WAV (`au_t(t)`) ou s'accrocher au mot d'à côté. Relevé automatiquement :
+
+| Voix | Sans marque | Lesquels |
+|---|---|---|
+| `cm1-entier-lire` | 0 | — |
+| `cm1-entier-comparer` | 10 | 04-question « 12 804 » ; 08-question « 3 045 » ×2, « 3 405 » ×3, « 3 450 » ×3 ; 09-defi « 389 378 » |
+| `cm1-entier-decomposer` | 1 | 02-valeur « 4 000 » |
+| `cm1-entier-arrondir` | 1 | 02-encadrer « 4 700 » |
+| `cm1-entier-multiple` | 0 | — |
+| `cm1-entier-defi` | 1 | 04-question « 6 100 » |
+| `6e-entier-rang` | 0 | — |
+| `6e-entier-comparer` | 11 | 08-question « 3 045 » ×2, « 3 405 » ×2, « 3 450 » ×2 ; 09-defi « 6 024 », « 6 023 », « 6 032 » ; 09b-correction « 6 023 », « 6 024 » |
+| `6e-entier-encadrer` | 5 | 05-rang « 9 620 » ; 06-question « 9 620 », « 9 621 », « 9 610 » ; 08-question « 5 300 » |
+| `6e-entier-decomposer` | 0 | — |
+| `6e-entier-defi` | 0 | — |
+
+Ce sont les écrans de QUESTION qui concentrent le problème : les trois choix reprennent les mêmes
+nombres, et WinRT ne pose qu'une marque pour toute la série. ⭐ Les choix d'une question sont posés par
+`question_gauche`, qui ne passe pas par `au_mot` : en pratique seuls `02-valeur`, `02-encadrer`,
+`05-rang` et les `09-defi` / `09b-correction` demandent un `au_t()`.
+
 ## 6. Ce qui reste à faire (après le « oui » de Frédéric)
 
 Par épisode, dans l'ordre de `manim/REPRISE-masses-cp-cm2.md` :
