@@ -207,6 +207,9 @@ import eCpMasseContenance from "./cp/masse_contenance";
 import eCpDuree from "./cp/duree";
 import eCpMonnaie from "./cp/monnaie";
 import eCpReperage from "./cp/reperage";
+import eCpFiguresSolides from "./cp/figures_solides";
+import eCpDonnees from "./cp/donnees";
+import eCpAlgorithmique from "./cp/algorithmique";
 // 3e (imports)
 import e3eFractionRationnel from "./3e/fraction_rationnel";
 import e3eEntierPuissance from "./3e/entier_puissance";
@@ -247,6 +250,9 @@ const TOUTES: ProblemesNotion[] = [
   eCpDuree,
   eCpMonnaie,
   eCpReperage,
+  eCpFiguresSolides,
+  eCpDonnees,
+  eCpAlgorithmique,
   // fin CP
   // CE1
   eCe1NombreEntier,
