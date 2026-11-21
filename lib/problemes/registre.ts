@@ -421,6 +421,10 @@ import eStmgStatAjustement from "./stmg/stat_ajustement";
 import eStmgStatInterpoler from "./stmg/stat_interpoler";
 import eStmgStatMoindresCarres from "./stmg/stat_moindres_carres";
 import eStmgProbaConditionnelleTableau from "./stmg/proba_conditionnelle_tableau";
+import eStmgProbaConditionnelleDistinguer from "./stmg/proba_conditionnelle_distinguer";
+import eStmgProbaEpreuvesIndependantes from "./stmg/proba_epreuves_independantes";
+import eStmgProbaArbre from "./stmg/proba_arbre";
+import eStmgProbaArbreCalcul from "./stmg/proba_arbre_calcul";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -858,6 +862,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgStatInterpoler,
   eStmgStatMoindresCarres,
   eStmgProbaConditionnelleTableau,
+  eStmgProbaConditionnelleDistinguer,
+  eStmgProbaEpreuvesIndependantes,
+  eStmgProbaArbre,
+  eStmgProbaArbreCalcul,
   // fin STMG
 ];
 
