@@ -14,6 +14,8 @@ Pas de « cœur » : sur YouTube, le spectateur ne peut pas en mettre, c'est le 
 
 L'écran de fin écrit ce que dit la voix : « Entraîne-toi sur » + « eleveai.fr » (encadré), « Abonne-toi ! » + « @eleveai974 », et les autres gestes écrits en plus (paysage : « Un pouce · Un commentaire · La cloche » ; short : « Un pouce · La cloche »), sans rien rogner. Plus de « va sur le coach » : l'accueil mène à tout (exercices, vidéos, coach). Les vidéos déjà rendues gardent leur fin (pas de re-rendu pour ça).
 
+**⛔⛔ UNE SEULE FIN POUR TOUS (Frédéric, 21/11/2026 : « un script commun à tous pour la fin des shorts et vidéos paysage… ce serait fait »).** Toute nouvelle vidéo appelle `ecran_fin` de `manim/fin_commune.py` : on ne réécrit plus la fin. Paysage : `ecran_fin(self, "paysage", voix="12-abonne")`. Short : `ecran_commentaire(self, ["Combien vaut", "u₅ ?"], voix="04-commentaire")` puis `ecran_fin(self, "short", voix="05-abonne")` (un short qui dessine sa propre question n'appelle que `appel_commentaire(self)` pour « Réponds en commentaire ! »). Le module fige le style « parfait » du 24/10 avec les gestes du 05/11 (tailles et places de `suites_commun.py`, 11/11), cale chaque mot sur la voix, met Ti-Margo à sa place et le retire de l'écran commentaire (17/11). Pour changer la fin, on change ce module, avec Frédéric. Les vidéos déjà rendues ne se re-rendent pas ; les scripts existants ne sont pas migrés en masse.
+
 ⚠️ Le lecteur du site coupe 3,6 s avant la fin (`COUPE_FIN`, `components/LecteurVideo.tsx`) pour que les élèves n'entendent pas « abonne-toi ». Cette fin est plus longue : à la première vidéo rendue avec elle, mesurer la durée de la phrase et faire couper le lecteur au bon endroit pour ces vidéos, sans changer la coupe des anciennes.
 
 ---
@@ -241,7 +243,7 @@ Dans toutes les vidéos (paysages et shorts), l'écran « Ce que tu as appris »
 
 ## ⛔ RIEN NE DOIT ÊTRE ROGNÉ (Frédéric, 24/10/2026 : « relis bien tes écrans pour ne pas rogner »)
 Marge d'au moins 3 % de la largeur sur les QUATRE côtés pour tout ce qui est dessiné : cartes des figures (leurs coins arrondis compris), textes, boutons des questions, Ti-Margo. Contrôle obligatoire après chaque rendu : `python scripts/verifier-bords-video.py <video.mp4>` doit afficher « 0 instants qui touchent un bord » (le fondu noir ne compte pas). Le premier épisode lycée avait la carte du graphique collée au bord gauche (coins coupés).
-L'écran de fin « Entraîne-toi sur eleveai.fr » est PARFAIT (24/10) : on garde son style, on y ajoute seulement les gestes de la phrase de fin du 05/11 (voir en tête de ce fichier).
+L'écran de fin « Entraîne-toi sur eleveai.fr » est PARFAIT (24/10) : on garde son style, on y ajoute seulement les gestes de la phrase de fin du 05/11 (voir en tête de ce fichier). Depuis le 21/11, il est dans `manim/fin_commune.py` (`ecran_fin`) : on l'appelle, on ne le recopie plus.
 
 ## ⛔ SYNCHRO VOIX / ÉCRIT : 0 s D'AVANCE (Frédéric, 24/10/2026 : « pour plus tard, ne dépasse pas 0 »)
 - Un nombre, une étiquette ou un mot n'apparaît JAMAIS avant que la voix le dise : avance tolérée = **0 s**. Les écarts relevés le 24/10 (étiquettes ~1 s en avance dans le lot J2) ne doivent plus exister.
