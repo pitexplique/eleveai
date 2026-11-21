@@ -281,7 +281,30 @@ globalement.
 | Série Ti Margo `cm1-entier` (json, commun, cues) | ✅ `prototypes/ti-margo/films/cm1-entier*.js` |
 | A1 et A2 — shorts Ti Margo | ✅ 58,0 s et 62,7 s, planches relues, **compteurs contrôlés** |
 | A1 et A2 — chaîne de publication | ✅ complète (voir ci-dessous) |
-| A3 → A6, B1 → B5 (9 épisodes) | ⏳ |
+| **A3 `entier_decomposer`** | ✅ script, dry run propre, `-ql` relu (4 défauts corrigés), short 62,2 s relu |
+| A4 → A6, A5′, B1 → B5 (9 épisodes) | ⏳ |
+
+### ⛔ A3 : quatre défauts, et deux qui ne se voyaient QU'À L'IMAGE
+
+1. **AUDIT-AVANCE de 0,96 s** (09b-correction) : la ligne entière arrivait sur son PREMIER mot, donc
+   le « 5 » s'écrivait avant d'être dit. Chaque morceau attend SON mot, et le second extrait commence
+   PAR le nombre (`au_mot("5. Il vaut")`). C'est le piège n° 4, payé une deuxième fois.
+2. ⛔⛔ **`col()` écrit dans la colonne de DROITE.** Les quatre tableaux étaient posés à x = +2,2,
+   donc DANS cette colonne : les phrases s'écrivaient par-dessus les cases, sur quatre écrans.
+   Le dry run était parfaitement propre. **Les figures vont à GAUCHE (x ≈ −3,4)**, comme dans A1 et A2.
+3. **BORD mesuré** : la somme corrigée partait à x = −7,1 (marge de 3 % : −6,68) → elle passe en bas,
+   sur toute la largeur.
+4. **Un libellé plus large que sa colonne touche son voisin** : « 4 000 » (5 caractères) collait à
+   « 500 » — « 4 000500 ». Les quatre valeurs sont posées **en QUINCONCE**, deux hauteurs qui
+   alternent : plus aucune ne peut toucher sa voisine, quelle que soit sa longueur.
+
+⭐ **Le commun gagne `au_t(t)`** : attendre un instant LU DANS LE WAV, pour les 29 nombres à espace de
+la série qui n'ont pas de marque. « 4 000 » de l'écran 02 est dit à **5,64 s**, relevé sur l'énergie
+du WAV (recette dans le prompt de relève). ⛔ A1 et A2, déjà rendus, ne l'appellent pas.
+
+⚠️ **La planche saute parfois un écran** : elle en a détecté 11 sur 12 (02-valeur manquait), et c'est
+justement celui qui portait deux des quatre défauts. Comparer son compte aux lignes `ECRAN` du log,
+et extraire à la main ceux qui manquent.
 
 ### ✅ A1 et A2 sont FINIS, publication comprise (21/11, 12 h 30)
 

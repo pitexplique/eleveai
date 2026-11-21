@@ -104295,6 +104295,178 @@
           "microId": "entier_comparer"
         }
       ]
+    },
+    {
+      "id": "cm1-entier-decomposer",
+      "pas_avant": "2027-06-15",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_decomposer",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer.mp4",
+      "miniature": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer.png",
+      "titre": "7 306 : que vaut chaque chiffre ? — Décomposer un nombre — épisode 3 · Maths CM1",
+      "accroche": "Thomas est imprimeur. Ses affiches arrivent par paquets : mille, cent, dix, ou à l'unité. Chaque chiffre d'un nombre marche pareil : il vaut selon sa colonne.\n\nDans cette vidéo :\n• chaque chiffre vaut selon sa colonne : dans 4 582, le 5 vaut 500\n• un rang vide ne s'écrit pas : 7 306 = 7 000 + 300 + 6\n• composer, c'est l'inverse : 20 000 + 400 + 9 = 20 409\n• l'ordre des termes ne change rien : chaque nombre va dans sa colonne\n• et au CM2 : on décompose des nombres bien plus grands\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : trouver l'erreur dans 12 405 = 10 000 + 2 000 + 400 + 50.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_decomposer&display=simple\n\n🔢 Épisode 3 de la série Nombres entiers d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Que vaut chaque chiffre ?"
+        ],
+        [
+          "00:17",
+          "Chaque chiffre vaut selon sa colonne"
+        ],
+        [
+          "00:37",
+          "Question 1"
+        ],
+        [
+          "01:18",
+          "Question 2"
+        ],
+        [
+          "01:51",
+          "Et au CM2"
+        ],
+        [
+          "02:02",
+          "Question 3"
+        ],
+        [
+          "02:29",
+          "À toi de jouer"
+        ],
+        [
+          "02:44",
+          "Correction"
+        ],
+        [
+          "02:55",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "décomposer un nombre",
+        "composer un nombre",
+        "valeur d'un chiffre",
+        "tableau de numération",
+        "unités dizaines centaines",
+        "imprimeur",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:37",
+          "question": "Quelle est la bonne décomposition de 5 064 ?",
+          "choix": [
+            "5 000 + 6 + 4",
+            "5 000 + 600 + 4",
+            "5 000 + 60 + 4"
+          ],
+          "reponse": 2,
+          "explication": "Le 6 est aux dizaines : il vaut 60. Il n'y a aucune centaine."
+        },
+        {
+          "t": "01:18",
+          "question": "Quel nombre fait 70 + 5 000 + 800 ?",
+          "choix": [
+            "5 870",
+            "758",
+            "5 807"
+          ],
+          "reponse": 0,
+          "explication": "L'ordre ne change rien : chaque nombre va dans sa colonne. 5 000, 800, 70."
+        },
+        {
+          "t": "02:02",
+          "question": "Dans 405 210, combien vaut le chiffre 5 ?",
+          "choix": [
+            "50 000",
+            "500",
+            "5 000"
+          ],
+          "reponse": 2,
+          "explication": "Le 5 est dans la colonne des unités de mille : il vaut 5 000."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "technologie-ia"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_decomposer"
+        }
+      ]
+    },
+    {
+      "id": "cm1-entier-decomposer-short",
+      "pas_avant": "2027-06-15",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_decomposer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-entier-decomposer",
+      "fichier": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer-short.mp4",
+      "miniature": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer-short-miniature.png",
+      "titre": "Le dernier chiffre de 12 405 vaut 50 ou 5 ? #maths #cm1",
+      "accroche": "Ma copine décompose 12 405 et écrit 10 000 + 2 000 + 400 + 50. Mais le dernier chiffre est tout à droite, dans les unités : il vaut 5, pas 50.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : décompose 70 804. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_decomposer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #cm1 #primaire",
+      "tags": [
+        "nombres entiers",
+        "décomposer",
+        "valeur d'un chiffre",
+        "unités",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Que vaut le dernier chiffre de 12 405 ?",
+          "choix": [
+            "5 unités",
+            "50",
+            "5 dizaines"
+          ],
+          "reponse": 0,
+          "explication": "Le 5 est tout à droite : il vaut 5 unités. Il n'y a aucune dizaine."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_decomposer"
+        }
+      ]
     }
   ]
 }

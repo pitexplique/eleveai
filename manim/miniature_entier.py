@@ -28,6 +28,8 @@ EP = [
      "= 12 030 : le zéro garde la place", True, "verte"),
     ("cm1", "comparer", "02-comparer", ["COMPARER DES", "GRANDS NOMBRES"], "9 876 ou 10 234 ?",
      "on compte d'abord les chiffres !", True, "verte"),
+    ("cm1", "decomposer", "03-decomposer", ["DÉCOMPOSER", "UN NOMBRE"], "7 306 = 7 000 + 300 + 6",
+     "un rang vide ne s'écrit pas !", True, "verte"),
 ]
 
 

@@ -85,6 +85,32 @@ EP = [
       s_toi="range 4 410, 4 140 et 4 190 du plus petit au plus grand.",
       s_tags=["nombres entiers", "comparer", "plus grand", "compter les chiffres"],
       s_centres=["jeux-defis", "histoire-geographie"]),
+ dict(classe="cm1", n=3, slug="decomposer", notion="nombre_entier", micro="entier_decomposer",
+      nom="Décomposer un nombre", date="2027-06-15", ceinture="verte",
+      titre="7 306 : que vaut chaque chiffre ?",
+      intro="Thomas est imprimeur. Ses affiches arrivent par paquets : mille, cent, dix, ou à "
+            "l'unité. Chaque chiffre d'un nombre marche pareil : il vaut selon sa colonne.",
+      points=["chaque chiffre vaut selon sa colonne : dans 4 582, le 5 vaut 500",
+              "un rang vide ne s'écrit pas : 7 306 = 7 000 + 300 + 6",
+              "composer, c'est l'inverse : 20 000 + 400 + 9 = 20 409",
+              "l'ordre des termes ne change rien : chaque nombre va dans sa colonne",
+              "et au CM2 : on décompose des nombres bien plus grands"],
+      defi="trouver l'erreur dans 12 405 = 10 000 + 2 000 + 400 + 50.",
+      chap={"00-garde": "Que vaut chaque chiffre ?", "01-situation": "Thomas, imprimeur",
+            "02-valeur": "Chaque chiffre vaut selon sa colonne", "03-zero": "Un rang vide ne s'écrit pas",
+            "04-question": "Question 1", "05-composer": "Composer, l'inverse",
+            "06-question": "Question 2", "07-cm2": "Et au CM2", "08-question": "Question 3",
+            "09-defi": "À toi de jouer", "09b-correction": "Correction", "10-finale": "Ce que tu as appris"},
+      tags=["nombres entiers", "décomposer un nombre", "composer un nombre", "valeur d'un chiffre",
+            "tableau de numération", "unités dizaines centaines", "imprimeur"],
+      centres=["art-design", "technologie-ia"],
+      aussi=[{"classe": "cm2", "notionId": "nombre_entier", "microId": "entier_decomposer"}],
+      s_titre="Le dernier chiffre de 12 405 vaut 50 ou 5 ?", s_ceinture="blanche",
+      s_accroche="Ma copine décompose 12 405 et écrit 10 000 + 2 000 + 400 + 50. Mais le dernier "
+                 "chiffre est tout à droite, dans les unités : il vaut 5, pas 50.",
+      s_toi="décompose 70 804.",
+      s_tags=["nombres entiers", "décomposer", "valeur d'un chiffre", "unités"],
+      s_centres=["art-design", "jeux-defis"]),
 ]
 
 COMMUNS = ["nombres entiers", "numération", "maths"]

@@ -17810,5 +17810,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_lire&display=simple"
+ },
+ "cm1-entier-decomposer": {
+  "fichier": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer.mp4",
+  "poster": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer.png",
+  "vignette": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer.vignette.webp",
+  "titre": "7 306 : que vaut chaque chiffre ? — Décomposer un nombre — épisode 3 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_decomposer&display=simple"
+ },
+ "cm1-entier-decomposer-short": {
+  "fichier": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer-short.mp4",
+  "poster": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer-short-miniature.png",
+  "vignette": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer-short-miniature.vignette.webp",
+  "titre": "Le dernier chiffre de 12 405 vaut 50 ou 5 ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_decomposer&display=simple"
  }
 }

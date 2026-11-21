@@ -897,5 +897,10 @@
     "question": ["987 ou 1 002 :", "lequel gagne ?"],
     "calcul": [["987  ou  1 002", "blanc", 180], ["3 ou 4 chiffres ?", "jaune", 150]],
     "ceinture": "blanche"
+  },
+  "cm1-entier-decomposer-short": {
+    "question": ["Le dernier chiffre", "vaut 50 ou 5 ?"],
+    "calcul": [["12 405", "blanc", 190], ["… + 400 + 50 ?", "rouge", 130]],
+    "ceinture": "blanche"
   }
 }
