@@ -5,21 +5,21 @@ import type { ProblemesNotion } from "../types";
 import { C, NB, svg, t, r, l, o } from "../dessins-ecole";
 
 const tirelire = svg(
-  "Une tirelire : 5 €, 10 €, 15 € ; chaque semaine 5 € de plus",
+  "Une tirelire : 5 €, 10 €, 15 € ; chaque semaine 5 € de plus",
   t(120, 220, "🐷", C.craie, 130) +
     ["5 €", "10 €", "15 €", "…"].map((s, i) => r(260, 70 + i * 62, 160, 48, C.jaune, i < 3 ? 0.25 : 0, 3, 10) + t(340, 104 + i * 62, s, C.craie, 26)).join("") +
     t(240, 390, `après 8 semaines${NB}?`, C.rose, 28)
 );
 
 const fusee = svg(
-  "Un compte à rebours : 200, 175, 150, puis 125, 100",
+  "Un compte à rebours : 200, 175, 150, puis 125, 100",
   t(400, 260, "🚀", C.craie, 110) +
     ["200", "175", "150", "125", "100", "?"].map((s, i) => t(60 + (i % 3) * 110, 130 + Math.floor(i / 3) * 90, s, i === 5 ? C.rose : C.craie, 38)).join("") +
     t(240, 360, "de 25 en 25", C.pale, 26)
 );
 
 const niveaux = svg(
-  "Les points des niveaux d'un jeu : 3, 7, 11, 15",
+  "Les points des niveaux d'un jeu : 3, 7, 11, 15",
   ["3", "7", "11", "15"].map((s, i) => o(80 + i * 106, 180, 40, C.bleu, 0.2, 4) + t(80 + i * 106, 192, s, C.craie, 32)).join("") +
     [0, 1, 2].map((i) => t(133 + i * 106, 130, "?", C.rose, 28)).join("") +
     t(240, 300, `Quelle est la règle${NB}?`, C.rose, 28)
@@ -28,7 +28,7 @@ const niveaux = svg(
 // Le collier : bleue, rouge, rouge, et on recommence.
 const motif = [C.bleu, C.rose, C.rose];
 const collier = svg(
-  "Un collier : une perle bleue, deux perles rouges, et on recommence",
+  "Un collier : une perle bleue, deux perles rouges, et on recommence",
   l(30, 170, 450, 170, C.pale, 2) +
     Array.from({ length: 9 }, (_, i) => o(55 + i * 46, 170, 18, motif[i % 3], 0.5, 3)).join("") +
     t(240, 110, "bleue, rouge, rouge, bleue…", C.craie, 24) + t(240, 290, `la 20e perle${NB}?`, C.rose, 32)
@@ -50,7 +50,7 @@ const carres = (x: number, y: number, n: number) => {
   return s;
 };
 const allumettes = svg(
-  "Des carrés d'allumettes : 1 carré = 4, 2 carrés = 7, 3 carrés = 10 allumettes",
+  "Des carrés d'allumettes : 1 carré = 4, 2 carrés = 7, 3 carrés = 10 allumettes",
   carres(40, 120, 1) + t(57, 200, "4", C.craie, 28) + carres(130, 120, 2) + t(164, 200, "7", C.craie, 28) + carres(260, 120, 3) + t(311, 200, "10", C.craie, 28) +
     t(240, 290, `6 carrés${NB}: ? allumettes`, C.rose, 28)
 );

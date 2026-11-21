@@ -5,14 +5,14 @@ import type { ProblemesNotion } from "../types";
 import { C, NB, svg, t, r, o, fleche } from "../dessins-ecole";
 
 const bouchons = svg(
-  "Une collecte de bouchons : 145 lundi, 98 mardi",
+  "Une collecte de bouchons : 145 lundi, 98 mardi",
   [0, 1].map((k) => r(60 + k * 210, 120, 150, 150, C.bleu, 0.15, 4, 12) +
     Array.from({ length: 9 }, (_, i) => o(95 + k * 210 + (i % 3) * 40, 155 + Math.floor(i / 3) * 40, 14, [C.rose, C.jaune, C.bleu][(i + k) % 3], 0.5, 2)).join("")).join("") +
     t(135, 100, "lundi 145", C.craie, 26) + t(345, 100, "mardi 98", C.craie, 26) + t(240, 350, `En tout${NB}?`, C.rose, 30)
 );
 
 const roman = svg(
-  "Un roman de 320 pages ; Inès a lu 185 pages",
+  "Un roman de 320 pages ; Inès a lu 185 pages",
   r(130, 60, 220, 260, C.rose, 0.15, 4, 8) + r(150, 60, 16, 260, C.rose, 0.35, 0) + t(250, 160, "320", C.craie, 52) + t(250, 210, "pages 📖", C.pale, 26) +
     t(240, 370, `lu${NB}: 185 · reste${NB}: ?`, C.rose, 26)
 );
@@ -26,20 +26,20 @@ function p2() {
 }
 
 const car = svg(
-  "Un car avec 52 passagers ; 18 descendent, 9 montent",
+  "Un car avec 52 passagers ; 18 descendent, 9 montent",
   r(60, 120, 360, 130, C.jaune, 0.25, 4, 18) + Array.from({ length: 5 }, (_, i) => r(85 + i * 66, 140, 50, 46, C.bleu, 0.3, 3, 6)).join("") +
     o(130, 255, 22, C.craie, 0.3, 4) + o(350, 255, 22, C.craie, 0.3, 4) + t(240, 225, "52 passagers", C.craie, 26) +
     fleche(110, 320, 50, 360, C.rose) + t(150, 360, "18 descendent", C.rose, 20, "start") + fleche(430, 360, 380, 320, C.bleu) + t(370, 395, "9 montent", C.bleu, 20, "end")
 );
 
 const lisa = svg(
-  "Lisa a 15 € ; c'est 3 € de plus que Tom",
+  "Lisa a 15 € ; c'est 3 € de plus que Tom",
   t(130, 160, "👧", C.craie, 90) + t(350, 160, "👦", C.craie, 90) + t(130, 240, "Lisa", C.craie, 26) + t(350, 240, "Tom", C.craie, 26) +
     t(130, 290, "15 €", C.bleu, 34) + t(350, 290, "? €", C.rose, 34) + t(240, 375, "Lisa a 3 € de plus que Tom", C.pale, 22)
 );
 
 const freres = svg(
-  "Deux frères ont 50 billes à eux deux ; le grand en a 10 de plus",
+  "Deux frères ont 50 billes à eux deux ; le grand en a 10 de plus",
   r(130, 110, 200, 50, C.bleu, 0.3, 3, 6) + r(330, 110, 90, 50, C.rose, 0.3, 3, 6) + t(375, 145, "10", C.craie, 24) + t(118, 145, "grand", C.craie, 22, "end") +
     r(130, 200, 200, 50, C.bleu, 0.3, 3, 6) + t(118, 235, "petit", C.craie, 22, "end") + t(240, 80, "50 billes en tout", C.craie, 26) +
     t(240, 330, `Combien pour le grand${NB}?`, C.rose, 26)

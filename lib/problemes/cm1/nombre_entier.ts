@@ -20,7 +20,7 @@ const village = svg(
 );
 
 const scores = svg(
-  "Trois scores à un jeu : Noa 40 950, Inès 49 050, Sami 45 900",
+  "Trois scores à un jeu : Noa 40 950, Inès 49 050, Sami 45 900",
   [["Noa", "40 950"], ["Inès", "49 050"], ["Sami", "45 900"]].map(([n, s], i) =>
     r(60, 70 + i * 90, 360, 70, C.bleu, 0.12, 3, 12) + t(90, 116 + i * 90, n, C.craie, 28, "start") + t(390, 116 + i * 90, s, C.craie, 30, "end")).join("") +
     t(240, 385, `Qui a le plus de points${NB}? 🎮`, C.rose, 26)
@@ -35,13 +35,13 @@ const briques = svg(
 );
 
 const panneau = svg(
-  "Un panneau de montagne : deux mille cinq mètres",
+  "Un panneau de montagne : deux mille cinq mètres",
   l(240, 230, 240, 380, C.pale, 8) + r(80, 110, 320, 120, C.jaune, 0.2, 4, 10) +
     t(240, 160, "deux mille cinq", C.craie, 32) + t(240, 205, "mètres ⛰️", C.craie, 26) + t(240, 70, `En chiffres${NB}?`, C.rose, 28)
 );
 
 const cartes = svg(
-  "Cinq cartes : 4, 0, 7, 2, 9",
+  "Cinq cartes : 4, 0, 7, 2, 9",
   ["4", "0", "7", "2", "9"].map((c, i) => r(45 + i * 82, 120, 66, 96, C.bleu, 0.15, 4, 10) + t(78 + i * 82, 186, c, C.craie, 46)).join("") +
     t(240, 290, "le plus petit nombre", C.craie, 26) + t(240, 330, "à 5 chiffres", C.craie, 26) + t(240, 385, `chaque carte une fois${NB}!`, C.pale, 22)
 );

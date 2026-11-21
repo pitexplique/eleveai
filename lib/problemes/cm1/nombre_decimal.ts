@@ -13,7 +13,7 @@ const jus = svg(
 
 // L'escargot : 1 m = 360 px, partagé en 10 ; il est à 7 dixièmes.
 const escargot = svg(
-  "Un mètre partagé en 10 ; l'escargot a avancé de 7 dixièmes de mètre",
+  "Un mètre partagé en 10 ; l'escargot a avancé de 7 dixièmes de mètre",
   r(60, 200, 360, 30, C.craie, 0.05, 3) + Array.from({ length: 9 }, (_, i) => `<path d="M${60 + (i + 1) * 36} 200 L${60 + (i + 1) * 36} 230" stroke="${C.pale}" stroke-width="2"/>`).join("") +
     r(60, 200, 252, 30, C.jaune, 0.4, 3) + t(312, 185, "🐌", C.craie, 40) + t(60, 270, "0 m", C.pale, 20) + t(420, 270, "1 m", C.pale, 20) +
     t(240, 350, `en nombre décimal${NB}?`, C.rose, 28)
@@ -21,27 +21,27 @@ const escargot = svg(
 
 // La pluie : 1 cm = 60 px, au bon rapport.
 const pluie = svg(
-  "La pluie tombée : lundi 2,8 cm, mardi 2,15 cm, mercredi 2,5 cm",
+  "La pluie tombée : lundi 2,8 cm, mardi 2,15 cm, mercredi 2,5 cm",
   [["lundi", 2.8, "2,8 cm"], ["mardi", 2.15, "2,15 cm"], ["mercredi", 2.5, "2,5 cm"]].map(([j, h, s], i) =>
     r(70 + i * 130, 300 - (h as number) * 60, 80, (h as number) * 60, C.bleu, 0.35, 3) + t(110 + i * 130, 290 - (h as number) * 60, s as string, C.craie, 22) + t(110 + i * 130, 335, j as string, C.pale, 22)).join("") +
     t(240, 60, "🌧️", C.craie, 40) + t(240, 390, `Le jour le plus pluvieux${NB}?`, C.rose, 26)
 );
 
 const droite = svg(
-  "Une droite graduée de 3 à 4 en dixièmes ; le point B",
+  "Une droite graduée de 3 à 4 en dixièmes ; le point B",
   droiteGraduee(200, 50, 430, 3, 4, 0.1, 1) + o(50 + 380 * 0.6, 200, 9, C.rose, 1, 2) + t(50 + 380 * 0.6, 160, "B", C.rose, 34) +
     t(240, 330, `B${NB}= ?`, C.rose, 34)
 );
 
 const bebes = svg(
-  "Deux bébés : Lou pèse 4,9 kg, Max pèse 4,12 kg",
+  "Deux bébés : Lou pèse 4,9 kg, Max pèse 4,12 kg",
   t(130, 180, "👶", C.craie, 100) + t(350, 180, "👶", C.craie, 100) + t(130, 260, "Lou", C.craie, 26) + t(350, 260, "Max", C.craie, 26) +
     t(130, 305, "4,9 kg", C.bleu, 30) + t(350, 305, "4,12 kg", C.bleu, 30) + t(240, 385, `Le plus lourd${NB}?`, C.rose, 28)
 );
 
 const cache = svg(
   "Un nombre caché entre 5 et 6",
-  r(150, 70, 180, 100, C.jaune, 0.2, 4, 12) + t(240, 140, "5, ? ?", C.craie, 50) +
+  r(150, 70, 180, 100, C.jaune, 0.2, 4, 12) + t(240, 140, "5, ? ?", C.craie, 50) +
     t(240, 230, `dixièmes${NB}: 3`, C.bleu, 26) + t(240, 280, `centièmes${NB}: double des dixièmes`, C.bleu, 22) + t(240, 360, `Qui suis-je${NB}?`, C.rose, 30)
 );
 

@@ -29,7 +29,7 @@ const cartons = svg(
 );
 
 const sacs = svg(
-  "Sacs de Lina : 6 sacs de 8 billes. Sacs de Nils : 8 sacs de 6 billes",
+  "Sacs de Lina : 6 sacs de 8 billes. Sacs de Nils : 8 sacs de 6 billes",
   Array.from({ length: 6 }, (_, i) => r(30 + (i % 3) * 66, 90 + Math.floor(i / 3) * 80, 54, 60, C.rose, 0.2, 3, 14) + t(57 + (i % 3) * 66, 130 + Math.floor(i / 3) * 80, "8", C.craie, 26)).join("") +
     Array.from({ length: 8 }, (_, i) => r(258 + (i % 4) * 54, 90 + Math.floor(i / 4) * 80, 44, 60, C.bleu, 0.2, 3, 12) + t(280 + (i % 4) * 54, 130 + Math.floor(i / 4) * 80, "6", C.craie, 24)).join("") +
     t(130, 300, "Lina", C.craie, 28) + t(360, 300, "Nils", C.craie, 28) + t(240, 380, `Qui a le plus de billes${NB}?`, C.rose, 26)

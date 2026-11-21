@@ -19,7 +19,7 @@ const tulipes = svg(
 );
 
 const album = svg(
-  "Un album : 5 photos par page, 37 photos",
+  "Un album : 5 photos par page, 37 photos",
   [0, 1].map((k) => r(70 + k * 170, 60, 170, 200, C.craie, 0.04, 4, 6) + [0, 1, 2, 3, 4].map((i) => r(85 + k * 170 + (i % 2) * 75, 75 + Math.floor(i / 2) * 60, 65, 48, C.bleu, 0.25, 2, 4)).join("")).join("") +
     t(240, 310, "37 photos · 5 par page", C.craie, 26) + t(240, 370, `Pages pleines${NB}? Photos en plus${NB}?`, C.rose, 22)
 );
@@ -38,7 +38,7 @@ const ficelle = svg(
 );
 
 const rangs = svg(
-  "Des élèves en rangs de 4 : il en reste 1 ; en rangs de 3 : il n'en reste aucun",
+  "Des élèves en rangs de 4 : il en reste 1 ; en rangs de 3 : il n'en reste aucun",
   Array.from({ length: 4 }, (_, i) => t(80 + i * 34, 100, "🧍", C.craie, 30)).join("") + t(250, 100, "rangs de 4 → reste 1", C.craie, 22, "start") +
     Array.from({ length: 3 }, (_, i) => t(80 + i * 34, 180, "🧍", C.craie, 30)).join("") + t(250, 180, "rangs de 3 → reste 0", C.craie, 22, "start") +
     t(240, 280, "entre 20 et 30 élèves", C.bleu, 28) + t(240, 350, `Combien d'élèves${NB}?`, C.rose, 28)

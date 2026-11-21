@@ -19,7 +19,7 @@ const araignees = svg(
 );
 
 const cahier = svg(
-  "Le cahier de Malo : 7 × 8 = 56, 6 × 9 = 54, 8 × 4 = 36",
+  "Le cahier de Malo : 7 × 8 = 56, 6 × 9 = 54, 8 × 4 = 36",
   r(80, 60, 320, 270, C.craie, 0.04, 3, 6) + [100, 160, 220, 280].map((y) => `<path d="M95 ${y + 46} L385 ${y + 46}" stroke="${C.bleu}" stroke-width="1.5" stroke-opacity=".5"/>`).join("") +
     t(240, 135, "7 × 8 = 56", C.craie, 34) + t(240, 195, "6 × 9 = 54", C.craie, 34) + t(240, 255, "8 × 4 = 36", C.craie, 34) +
     t(240, 385, `Quelle ligne est fausse${NB}?`, C.rose, 26)

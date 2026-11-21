@@ -137,6 +137,10 @@ import eCm1Division from "./cm1/division";
 import eCm1Fraction from "./cm1/fraction";
 import eCm1NombreDecimal from "./cm1/nombre_decimal";
 import eCm1Calcul from "./cm1/calcul";
+import eCm1Probleme from "./cm1/probleme";
+import eCm1Algebre from "./cm1/algebre";
+import eCm1Proportionnalite from "./cm1/proportionnalite";
+import eCm1Longueur from "./cm1/longueur";
 // 3e (imports)
 import e3eFractionRationnel from "./3e/fraction_rationnel";
 import e3eEntierPuissance from "./3e/entier_puissance";
@@ -157,6 +161,10 @@ const TOUTES: ProblemesNotion[] = [
   eCm1Fraction,
   eCm1NombreDecimal,
   eCm1Calcul,
+  eCm1Probleme,
+  eCm1Algebre,
+  eCm1Proportionnalite,
+  eCm1Longueur,
   // CM2
   eCm2NombreEntier,
   eCm2Suite,

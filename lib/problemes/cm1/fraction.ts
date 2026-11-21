@@ -7,21 +7,21 @@ import { C, NB, svg, t, r, o, bande, secteurs, droiteGraduee } from "../dessins-
 import { frac, svgFrac } from "../outils";
 
 const chocolat = svg(
-  "Une tablette de 8 carrés ; 3 carrés sont mangés",
+  "Une tablette de 8 carrés ; 3 carrés sont mangés",
   Array.from({ length: 8 }, (_, i) => r(100 + (i % 4) * 70, 90 + Math.floor(i / 4) * 70, 64, 64, C.jaune, i < 3 ? 0 : 0.45, 3, 6)).join("") +
     Array.from({ length: 3 }, (_, i) => t(132 + i * 70, 132, "✗", C.rose, 30)).join("") +
     t(240, 290, "Théo mange 3 carrés 🍫", C.craie, 26) + t(240, 360, `Quelle fraction${NB}?`, C.rose, 28)
 );
 
 const chorale = svg(
-  "20 élèves ; un quart va à la chorale",
+  "20 élèves ; un quart va à la chorale",
   Array.from({ length: 20 }, (_, i) => t(70 + (i % 10) * 38, 110 + Math.floor(i / 10) * 60, "🧒", C.craie, 32)).join("") +
     t(240, 230, "20 élèves", C.craie, 30) + t(240, 290, "🎵 un quart chante", C.bleu, 26) + t(240, 365, `Combien${NB}?`, C.rose, 30)
 );
 
 // Le chemin : maison 0, école 1, partagé en 4 ; le chat au 3e trait.
 const chemin = svg(
-  "Un chemin de la maison (0) à l'école (1), partagé en 4 parts égales ; le chat est au point A",
+  "Un chemin de la maison (0) à l'école (1), partagé en 4 parts égales ; le chat est au point A",
   droiteGraduee(220, 60, 420, 0, 1, 0.25, 1) + t(60, 170, "🏠", C.craie, 34) + t(420, 170, "🏫", C.craie, 34) +
     o(330, 220, 9, C.rose, 1, 2) + t(330, 190, "A 🐈", C.rose, 26) + t(240, 340, `A${NB}: quelle fraction du chemin${NB}?`, C.rose, 24)
 );
@@ -33,7 +33,7 @@ const pizzas = svg(
 );
 
 const tartes = svg(
-  "Deux tartes pareilles : l'une en 3 parts, l'autre en 5 parts",
+  "Deux tartes pareilles : l'une en 3 parts, l'autre en 5 parts",
   secteurs(130, 170, 95, 3, 1, C.bleu) + secteurs(350, 170, 95, 5, 1, C.rose) +
     svgFrac(130, 320, 1, 3, C.bleu, 30) + svgFrac(350, 320, 1, 5, C.rose, 30) + t(240, 60, `La plus grosse part${NB}?`, C.craie, 26)
 );
