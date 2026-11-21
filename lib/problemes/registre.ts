@@ -142,6 +142,10 @@ import e3eFractionRationnel from "./3e/fraction_rationnel";
 import e3eEntierPuissance from "./3e/entier_puissance";
 import e3eEntierRacineCarree from "./3e/entier_racine_carree";
 import e3eEntierArithmetique from "./3e/entier_arithmetique";
+import e3ePropProportionnalite from "./3e/prop_proportionnalite";
+import e3eLitteralCalcul from "./3e/litteral_calcul";
+import e3eEquationResolution from "./3e/equation_resolution";
+import e3eFonctionGeneralite from "./3e/fonction_generalite";
 
 const TOUTES: ProblemesNotion[] = [
   // CM1
@@ -285,6 +289,10 @@ const TOUTES: ProblemesNotion[] = [
   e3eEntierPuissance,
   e3eEntierRacineCarree,
   e3eEntierArithmetique,
+  e3ePropProportionnalite,
+  e3eLitteralCalcul,
+  e3eEquationResolution,
+  e3eFonctionGeneralite,
 ];
 
 const PAR_CLE = new Map(TOUTES.map((n) => [`${n.classe}/${n.notionId}`, n]));
