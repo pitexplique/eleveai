@@ -52,6 +52,8 @@ EP = [
      "de lait : 3 kg", True, "jaune"),
     ("ce2", "probleme", "06-probleme", ["23 kg", "AU PLUS !"], "18 kg + 3 kg = 21 kg",
      "la valise passe !", True, "jaune"),
+    ("ce2", "defi", "07-defi", ["COMBIEN PÈSE", "LE SAVON ?"], "500 g + 200 g + 200 g",
+     "= 900 g", True, "orange"),
 ]
 
 

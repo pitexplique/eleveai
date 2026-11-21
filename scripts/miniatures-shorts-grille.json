@@ -898,5 +898,11 @@
     "calcul": [["24 kg", "rouge", 210], ["23 kg au plus", "blanc", 150]],
     "margo": [320, 720, 640],
     "ceinture": "jaune"
+  },
+  "ce2-masse-defi-short": {
+    "question": ["Combien pèse", "mon ananas ?"],
+    "calcul": [["= 3 mangues", "jaune", 170], ["de 400 g", "blanc", 170]],
+    "margo": [320, 720, 640],
+    "ceinture": "jaune"
   }
 }

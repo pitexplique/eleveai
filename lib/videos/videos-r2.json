@@ -17828,5 +17828,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_probleme&display=simple"
+ },
+ "ce2-masse-defi": {
+  "fichier": "ce2/maths/masse/07-defi/eleveai-maths-ce2-masse-defi.mp4",
+  "poster": "ce2/maths/masse/07-defi/eleveai-maths-ce2-masse-defi.png",
+  "vignette": "ce2/maths/masse/07-defi/eleveai-maths-ce2-masse-defi.vignette.webp",
+  "titre": "En équilibre : combien pèse le savon ? — Le défi des masses — épisode 7 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_defi&display=simple"
+ },
+ "ce2-masse-defi-short": {
+  "fichier": "ce2/maths/masse/07-defi/eleveai-maths-ce2-masse-defi-short.mp4",
+  "poster": "ce2/maths/masse/07-defi/eleveai-maths-ce2-masse-defi-short-miniature.png",
+  "vignette": "ce2/maths/masse/07-defi/eleveai-maths-ce2-masse-defi-short-miniature.vignette.webp",
+  "titre": "Combien pèse mon ananas ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_defi&display=simple"
  }
 }

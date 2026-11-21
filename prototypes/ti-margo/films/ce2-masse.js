@@ -233,3 +233,33 @@ function livreM(c,x,yBas,s=1,z=1,texte=''){ if(z<=0) return; const k=Math.min(1.
 function pancarteM(c,x,y,s=1,z=1,haut='23 kg',bas='au plus'){ if(z<=0) return; const k=Math.min(1.15,z)*s, w=300*k, h=180*k;
   c.fillStyle='#f8f9fa'; c.strokeStyle='#e03131'; c.lineWidth=8*k; c.beginPath(); c.roundRect(x-w/2,y-h/2,w,h,16*k); c.fill(); c.stroke();
   ecrire(c,haut,x,y-28*k,84*k,'#e03131'); ecrire(c,bas,x,y+50*k,52*k,'#343a40'); }
+
+/* ---- Épisode 07 (défi) : l'ananas, les mangues de 400 g, la papaye, le verre de jus ---- */
+/* Un ananas : corps ovale doré quadrillé, couronne de feuilles ; (x, yBas) = le bas ; s = 1 ≈ 260 px de haut */
+function ananasM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const rx=62*s, ry=88*s, y=yBas-ry;
+  c.fillStyle='#2f9e44'; c.strokeStyle='#1b5e20'; c.lineWidth=3;
+  for(const [a,l] of [[-.55,70],[-.25,92],[0,105],[.25,92],[.55,70]]){ const bx=x, by=y-ry+6*s;
+    c.beginPath(); c.moveTo(bx-12*s,by); c.quadraticCurveTo(bx+Math.sin(a)*l*.5*s-8*s,by-l*.6*s,bx+Math.sin(a)*l*s,by-Math.cos(a)*l*s);
+    c.quadraticCurveTo(bx+Math.sin(a)*l*.5*s+8*s,by-l*.5*s,bx+12*s,by); c.closePath(); c.fill(); c.stroke(); }
+  c.fillStyle='#fab005'; c.strokeStyle='#a0522d'; c.lineWidth=4; c.beginPath(); c.ellipse(x,y,rx,ry,0,0,7); c.fill(); c.stroke();
+  c.save(); c.beginPath(); c.ellipse(x,y,rx,ry,0,0,7); c.clip(); c.strokeStyle='#c2410c'; c.lineWidth=3;
+  for(let u=-3;u<=3;u++){ c.beginPath(); c.moveTo(x+u*32*s-ry,y-ry); c.lineTo(x+u*32*s+ry,y+ry); c.stroke();
+    c.beginPath(); c.moveTo(x+u*32*s+ry,y-ry); c.lineTo(x+u*32*s-ry,y+ry); c.stroke(); }
+  c.restore(); }
+/* Une mangue : un ovale penché, du rouge au jaune, une petite feuille ; (x, yBas) = le bas ; s = 1 ≈ 95 × 70 px */
+function mangueM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const rx=48*s, ry=34*s, y=yBas-ry;
+  const g=c.createLinearGradient(x-rx,y-ry,x+rx,y+ry); g.addColorStop(0,'#e8590c'); g.addColorStop(.55,'#fcc419'); g.addColorStop(1,'#94d82d');
+  c.fillStyle=g; c.strokeStyle='#a0522d'; c.lineWidth=3; c.beginPath(); c.ellipse(x,y,rx,ry,-.25,0,7); c.fill(); c.stroke();
+  c.fillStyle='#2f9e44'; c.beginPath(); c.ellipse(x-rx*.55,y-ry*.95,16*s,7*s,-.5,0,7); c.fill(); }
+/* Une papaye couchée : longue, verte et orange ; (x, yBas) = le bas ; s = 1 ≈ 230 × 110 px */
+function papayeM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const rx=115*s, ry=55*s, y=yBas-ry;
+  const g=c.createLinearGradient(x-rx,y,x+rx,y); g.addColorStop(0,'#82c91e'); g.addColorStop(.6,'#fd7e14'); g.addColorStop(1,'#f76707');
+  c.fillStyle=g; c.strokeStyle='#5c3d00'; c.lineWidth=4; c.beginPath(); c.moveTo(x-rx,y);
+  c.bezierCurveTo(x-rx,y-ry*1.1,x+rx*.2,y-ry*1.2,x+rx,y-ry*.2); c.bezierCurveTo(x+rx*1.05,y+ry,x-rx*.2,y+ry*1.1,x-rx,y); c.fill(); c.stroke();
+  c.fillStyle='#5c3d00'; c.fillRect(x-rx-14*s,y-6*s,16*s,12*s); }
+/* Un verre de jus d'ananas avec une paille ; (x, yBas) = le bas ; s = 1 ≈ 190 px de haut */
+function verreJusM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const w=110*s, h=170*s;
+  c.strokeStyle='#e03131'; c.lineWidth=8*s; c.beginPath(); c.moveTo(x+18*s,yBas-h*.55); c.lineTo(x+48*s,yBas-h-38*s); c.stroke();
+  c.fillStyle='#ffd43b'; c.beginPath(); c.moveTo(x-w/2+6*s,yBas-h*.78); c.lineTo(x+w/2-6*s,yBas-h*.78); c.lineTo(x+w*.38,yBas); c.lineTo(x-w*.38,yBas); c.closePath(); c.fill();
+  c.strokeStyle='#dee2e6'; c.lineWidth=5; c.beginPath(); c.moveTo(x-w/2,yBas-h); c.lineTo(x-w*.38,yBas); c.lineTo(x+w*.38,yBas); c.lineTo(x+w/2,yBas-h); c.stroke();
+  c.fillStyle='#fab005'; c.beginPath(); c.arc(x-w/2+6*s,yBas-h,20*s,0,7); c.fill(); }
