@@ -333,7 +333,19 @@ class _CocheAuBout:
     ⚠️ En paysage la carte vient de `_carte_choix`, PAS de `_carte` : surcharger `_carte` ne fait
     RIEN du tout, et ça ne se voit qu'à l'image.
     ⭐ Les libellés courts ne bougent pas : la ligne « COCHE-RESERVE » du rendu dit lesquels ont
-    été rétrécis — A1, rendu en HD avant cette surcharge, n'en affiche aucune (mesuré, pas supposé)."""
+    été rétrécis — A1, rendu en HD avant cette surcharge, n'en affiche aucune (mesuré, pas supposé).
+
+    ⭐ `au_t(t)` : attendre un instant LU DANS LE WAV, pour les 29 nombres à espace de la série qui
+    n'ont pas de marque (liste par épisode dans manim/INVENTAIRE-entiers-cm1-6e.md § 6bis).
+    ⛔ A1 et A2, rendus avant que cette méthode existe, ne l'appellent pas : leur image est inchangée."""
+
+    def au_t(self, t):
+        """Attend l'instant t (s) DEPUIS LE DÉBUT de la voix de l'écran courant — relevé sur
+        l'énergie du WAV quand WinRT n'a pas posé de marque sur le mot (nombre à espace dit deux
+        fois, ou repris dans une liste de choix). Copié de cm2/longueur_estimer.py."""
+        reste = self._debut_voix + t - self.renderer.time
+        if reste > 0.02:
+            self.wait(reste)
 
     def _carte_choix(self, lettre, txt, largeur, fs):
         c = super()._carte_choix(lettre, txt, largeur, fs)

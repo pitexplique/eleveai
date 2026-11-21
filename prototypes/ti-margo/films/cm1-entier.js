@@ -105,6 +105,23 @@ function casesChiffres(c, cx, y, n, { vues = n, w = 58, h = 70, coul = CRAIE.jau
   return { x: (i) => x0 + i * (w + gap) + w / 2, yc: y + h / 2, bas: y + h };
 }
 
+/* ── UNE SOMME ÉCRITE TERME À TERME : 10 000 + 2 000 + 400 + 50 ────────────────────────────────
+   items = [[texte, instant, couleur], …] ; le « + » qui précède un terme paraît avec lui.
+   (cx, y) = le milieu de la ligne. Les places sont calculées sur la ligne ENTIÈRE : un terme qui
+   n'est pas encore dit laisse son trou, et rien ne bouge quand il arrive. */
+function sommeCraie(c, cx, y, items, T, { taille = 72, coulPlus = CRAIE.gris, gap = 18 } = {}) {
+  c.font = `800 ${taille}px "Segoe UI"`;
+  const bouts = [];
+  items.forEach(([s, t, coul], i) => { if (i) bouts.push(['+', t, coulPlus]); bouts.push([s, t, coul || CRAIE.blanc]); });
+  const larg = bouts.map((b) => c.measureText(b[0]).width);
+  const L = larg.reduce((a, b) => a + b, 0) + gap * (bouts.length - 1);
+  const pos = [];
+  let x = cx - L / 2;
+  bouts.forEach((b, i) => { pos.push(x + larg[i] / 2); x += larg[i] + gap; });
+  bouts.forEach((b, i) => { if (T >= b[1]) ecrire(c, b[0], pos[i], y, taille * zoom(T, b[1], 0.3), b[2]); });
+  return { x: (i) => pos[2 * i], gauche: cx - L / 2, droite: cx + L / 2 };
+}
+
 /* Une grande croix rouge (« ce n'est pas le même nombre ») */
 function croixCraie(c, x, y, r, u = 1) {
   if (u <= 0) return;
