@@ -286,7 +286,7 @@ globalement.
 | A1 et A2 — shorts Ti Margo | ✅ 58,0 s et 62,7 s, planches relues, **compteurs contrôlés** |
 | A1 et A2 — chaîne de publication | ✅ complète (voir ci-dessous) |
 | **A3 `entier_decomposer`** | ✅ FINI : HD 3 min 14, 0 bord, short 62,2 s, publication complète |
-| **A4 `entier_arrondir`** | ✅ script, dry run propre, **`-ql` relu** (3 défauts corrigés) ; film du short écrit et ses images de contrôle relues. ⏳ **reste : le HD**, le film du short, la publication |
+| **A4 `entier_arrondir`** | ✅ **FINI** : HD 3 min 14,5, **0 bord**, 0 ligne `COCHE-RESERVE`, planche HD relue (13 images pour 16 écrans — chaque question partage son image avec sa réponse) ; short 64,0 s, **compteur revérifié SUR LE FILM** ; publication complète, coach vérifié à l'image au CM1 **et** au CM2 |
 | **A5′ `cm2-entier-multiple` — ses 2 voix** | ✅ **validées par Frédéric le 21/11** (« Oui, lance ») : JSON écrits, **23 WAV** (16 + 7), marques du paysage faites (16 écrans, 0 sans marque) |
 | A5′ — durées brutes des clips | paysage **171,4 s** (≈ 2 min 51 avant les pauses), short **58,1 s** — dans la fourchette de la série |
 | A5′ — script Manim, HD, short, publication | ⏳ |

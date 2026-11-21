@@ -104467,6 +104467,170 @@
           "microId": "entier_decomposer"
         }
       ]
+    },
+    {
+      "id": "cm1-entier-arrondir",
+      "pas_avant": "2027-06-16",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_arrondir",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir.mp4",
+      "miniature": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir.png",
+      "titre": "4 682 à la centaine : 4 600 ou 4 700 ? — Arrondir un nombre — épisode 4 · Maths CM1",
+      "accroche": "Léna est météorologue. Pour annoncer la pluie, elle ne dit pas 4 682 millimètres : elle donne un nombre simple à retenir, le plus proche.\n\nDans cette vidéo :\n• on encadre d'abord : 4 682 est entre 4 600 et 4 700\n• puis on regarde le chiffre juste à droite du rang visé\n• de 0 à 4 on garde, de 5 à 9 on monte au rang suivant\n• arrondir, ce n'est pas couper : 4 682 à la centaine donne 4 700\n• et au CM2 : on arrondit jusqu'au million\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : arrondir 86 246 personnes au millier près.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_arrondir&display=simple\n\n🔢 Épisode 4 de la série Nombres entiers d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "4 600 ou 4 700 ?"
+        ],
+        [
+          "00:34",
+          "Question 1"
+        ],
+        [
+          "01:05",
+          "Arrondir n'est pas couper"
+        ],
+        [
+          "01:16",
+          "Question 2"
+        ],
+        [
+          "01:56",
+          "Question 3"
+        ],
+        [
+          "02:31",
+          "À toi de jouer"
+        ],
+        [
+          "02:53",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "arrondir un nombre",
+        "arrondi à la centaine",
+        "arrondi au millier",
+        "encadrer un nombre",
+        "chiffre des dizaines",
+        "météorologue",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Quel est l'arrondi de 6 241 à la centaine près ?",
+          "choix": [
+            "6 300",
+            "6 240",
+            "6 200"
+          ],
+          "reponse": 2,
+          "explication": "Le chiffre des dizaines est 4. Comme 4 est plus petit que 5, on garde 6 200."
+        },
+        {
+          "t": "01:16",
+          "question": "Arrondis 47 820 au millier près.",
+          "choix": [
+            "48 000",
+            "47 800",
+            "47 000"
+          ],
+          "reponse": 0,
+          "explication": "Le chiffre des centaines est 8. Comme 8 vaut au moins 5, on monte à 48 000."
+        },
+        {
+          "t": "01:56",
+          "question": "Au millier près, quel nombre devient 29 000 ?",
+          "choix": [
+            "29 982",
+            "28 050",
+            "28 805"
+          ],
+          "reponse": 2,
+          "explication": "Les nombres qui donnent 29 000 vont de 28 500 à 29 499. Seul 28 805 y est."
+        }
+      ],
+      "centres": [
+        "meteo-climat",
+        "sciences"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_arrondir"
+        }
+      ]
+    },
+    {
+      "id": "cm1-entier-arrondir-short",
+      "pas_avant": "2027-06-16",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_arrondir",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-entier-arrondir",
+      "fichier": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir-short.mp4",
+      "miniature": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir-short-miniature.png",
+      "titre": "4 682 à la centaine : 4 600 ou 4 700 ? #maths #cm1",
+      "accroche": "Ma copine arrondit 4 682 à la centaine et coupe la fin : 4 600. Mais 4 682 est tout près de 4 700 : arrondir, c'est choisir le plus proche, pas couper.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : arrondis 23 249 au millier près. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_arrondir&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #cm1 #primaire",
+      "tags": [
+        "nombres entiers",
+        "arrondir",
+        "arrondi à la centaine",
+        "le plus proche",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "4 682 arrondi à la centaine près, ça donne ?",
+          "choix": [
+            "4 600",
+            "4 680",
+            "4 700"
+          ],
+          "reponse": 2,
+          "explication": "Le chiffre des dizaines est 8 : on monte à 4 700."
+        }
+      ],
+      "centres": [
+        "meteo-climat",
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_arrondir"
+        }
+      ]
     }
   ]
 }

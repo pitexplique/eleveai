@@ -111,6 +111,32 @@ EP = [
       s_toi="décompose 70 804.",
       s_tags=["nombres entiers", "décomposer", "valeur d'un chiffre", "unités"],
       s_centres=["art-design", "jeux-defis"]),
+ dict(classe="cm1", n=4, slug="arrondir", notion="nombre_entier", micro="entier_arrondir",
+      nom="Arrondir un nombre", date="2027-06-16", ceinture="verte",
+      titre="4 682 à la centaine : 4 600 ou 4 700 ?",
+      intro="Léna est météorologue. Pour annoncer la pluie, elle ne dit pas 4 682 millimètres : "
+            "elle donne un nombre simple à retenir, le plus proche.",
+      points=["on encadre d'abord : 4 682 est entre 4 600 et 4 700",
+              "puis on regarde le chiffre juste à droite du rang visé",
+              "de 0 à 4 on garde, de 5 à 9 on monte au rang suivant",
+              "arrondir, ce n'est pas couper : 4 682 à la centaine donne 4 700",
+              "et au CM2 : on arrondit jusqu'au million"],
+      defi="arrondir 86 246 personnes au millier près.",
+      chap={"00-garde": "4 600 ou 4 700 ?", "01-situation": "Léna, météorologue",
+            "02-encadrer": "D'abord, on encadre", "03-regle": "Le chiffre juste à droite",
+            "04-question": "Question 1", "05-piege": "Arrondir n'est pas couper",
+            "06-question": "Question 2", "07-cm2": "Et au CM2", "08-question": "Question 3",
+            "09-defi": "À toi de jouer", "09b-correction": "Correction", "10-finale": "Ce que tu as appris"},
+      tags=["nombres entiers", "arrondir un nombre", "arrondi à la centaine", "arrondi au millier",
+            "encadrer un nombre", "chiffre des dizaines", "météorologue"],
+      centres=["meteo-climat", "sciences"],
+      aussi=[{"classe": "cm2", "notionId": "nombre_entier", "microId": "entier_arrondir"}],
+      s_titre="4 682 à la centaine : 4 600 ou 4 700 ?", s_ceinture="blanche",
+      s_accroche="Ma copine arrondit 4 682 à la centaine et coupe la fin : 4 600. Mais 4 682 est "
+                 "tout près de 4 700 : arrondir, c'est choisir le plus proche, pas couper.",
+      s_toi="arrondis 23 249 au millier près.",
+      s_tags=["nombres entiers", "arrondir", "arrondi à la centaine", "le plus proche"],
+      s_centres=["meteo-climat", "jeux-defis"]),
 ]
 
 COMMUNS = ["nombres entiers", "numération", "maths"]

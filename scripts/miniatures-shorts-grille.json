@@ -902,5 +902,10 @@
     "question": ["Le dernier chiffre", "vaut 50 ou 5 ?"],
     "calcul": [["12 405", "blanc", 190], ["… + 400 + 50 ?", "rouge", 130]],
     "ceinture": "blanche"
+  },
+  "cm1-entier-arrondir-short": {
+    "question": ["4 682 à la centaine :", "4 600 ou 4 700 ?"],
+    "calcul": [["4 682", "blanc", 200], ["4 600 ?", "rouge", 170]],
+    "ceinture": "blanche"
   }
 }

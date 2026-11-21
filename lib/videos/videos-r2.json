@@ -17828,5 +17828,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_decomposer&display=simple"
+ },
+ "cm1-entier-arrondir": {
+  "fichier": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir.mp4",
+  "poster": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir.png",
+  "vignette": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir.vignette.webp",
+  "titre": "4 682 à la centaine : 4 600 ou 4 700 ? — Arrondir un nombre — épisode 4 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_arrondir&display=simple"
+ },
+ "cm1-entier-arrondir-short": {
+  "fichier": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir-short.mp4",
+  "poster": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir-short-miniature.png",
+  "vignette": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir-short-miniature.vignette.webp",
+  "titre": "4 682 à la centaine : 4 600 ou 4 700 ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_arrondir&display=simple"
  }
 }

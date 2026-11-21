@@ -30,6 +30,8 @@ EP = [
      "on compte d'abord les chiffres !", True, "verte"),
     ("cm1", "decomposer", "03-decomposer", ["DÉCOMPOSER", "UN NOMBRE"], "7 306 = 7 000 + 300 + 6",
      "un rang vide ne s'écrit pas !", True, "verte"),
+    ("cm1", "arrondir", "04-arrondir", ["ARRONDIR", "UN NOMBRE"], "4 682 : 4 600 ou 4 700 ?",
+     "on regarde le chiffre d'après !", True, "verte"),
 ]
 
 
