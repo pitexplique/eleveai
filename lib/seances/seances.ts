@@ -236,7 +236,7 @@ export const SEANCES: Seance[] = [
       // 21/11, Frédéric : « enlève le plat avec carte mentale » → plus de plat imposé.
       impose: [],
       carte: [
-        "Le coach",
+        "Le coach, seul ou à deux (connecte-toi)",
         "Les exercices interactifs",
         "Le cours écrit dans le cahier",
         "Le découpage (ULIS, avec l'AESH)",
