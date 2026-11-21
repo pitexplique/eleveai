@@ -275,6 +275,10 @@ import e2deCourbesAssociees from "./seconde/courbes_associees";
 import e2dePolynomesDivision from "./seconde/polynomes_division";
 import e2deEncadrementsOperations from "./seconde/encadrements_operations";
 import e2deRacinesDenominateur from "./seconde/racines_denominateur";
+import e2deValeurAbsolueEquations from "./seconde/valeur_absolue_equations";
+import e2deHomographiquePartieEntiere from "./seconde/homographique_partie_entiere";
+import e2deFonctionsParIntervalles from "./seconde/fonctions_par_intervalles";
+import e2deDroitesPerpendiculaires from "./seconde/droites_perpendiculaires";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -558,6 +562,10 @@ const TOUTES: ProblemesNotion[] = [
   e2dePolynomesDivision,
   e2deEncadrementsOperations,
   e2deRacinesDenominateur,
+  e2deValeurAbsolueEquations,
+  e2deHomographiquePartieEntiere,
+  e2deFonctionsParIntervalles,
+  e2deDroitesPerpendiculaires,
   // fin Seconde
 ];
 
