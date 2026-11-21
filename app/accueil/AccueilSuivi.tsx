@@ -311,6 +311,26 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
       </section>
 
       <main className="mx-auto max-w-6xl px-4 pb-16">
+        {/* 1 ter. LE RESTAURANT DE MATHS — ⭐ 18/11, Frédéric : « les élèves ont
+            adoré » le menu du jour, puis « cette section doit être sur la page
+            d'accueil ». Même menu que /seances (lib/seances/seances.ts).
+            21/11, Frédéric : « mets-le en dessous des cartes » (Famille / Prof),
+            avant « Le projet EleveAI ». */}
+        {MENU_RESTAURANT && (
+          <section className="mt-10">
+            {/* 19/11, Frédéric : titre « Le restaurant de maths, en classe » et sa
+                phrase retirés ; le menu parle de lui-même. */}
+            <div className="mx-auto max-w-2xl">
+              <MenuDuJour menu={MENU_RESTAURANT} />
+            </div>
+            <p className="mt-4 text-center">
+              <Link href="/seances#restaurant-6e-longueurs" className="inline-flex items-center gap-1.5 font-black text-amber-900 underline">
+                Voir la séance en entier
+              </Link>
+            </p>
+          </section>
+        )}
+
         {/* 1 bis. LE PROJET EN QUATRE CASES — ⭐ 03/11, Frédéric : « il faut
             vraiment que les gens comprennent » : un coach, avec des vidéos,
             8 pays puis 40, gratuit pour l'élève, payé par les familles et les
@@ -355,24 +375,6 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
             ))}
           </div>
         </section>
-
-        {/* 1 ter. LE RESTAURANT DE MATHS — ⭐ 18/11, Frédéric : « les élèves ont
-            adoré » le menu du jour, puis « cette section doit être sur la page
-            d'accueil ». Même menu que /seances (lib/seances/seances.ts). */}
-        {MENU_RESTAURANT && (
-          <section className="mt-12">
-            {/* 19/11, Frédéric : titre « Le restaurant de maths, en classe » et sa
-                phrase retirés ; le menu parle de lui-même. */}
-            <div className="mx-auto max-w-2xl">
-              <MenuDuJour menu={MENU_RESTAURANT} />
-            </div>
-            <p className="mt-4 text-center">
-              <Link href="/seances#restaurant-6e-longueurs" className="inline-flex items-center gap-1.5 font-black text-amber-900 underline">
-                Voir la séance en entier
-              </Link>
-            </p>
-          </section>
-        )}
 
         {/* 2. CE QUE L'IA NE FAIT PAS */}
         <section className="mt-12">
