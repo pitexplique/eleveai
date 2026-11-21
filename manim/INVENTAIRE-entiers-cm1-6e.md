@@ -254,7 +254,7 @@ globalement.
 | `manim/scripts/cm1/entier_commun.py` | ✅ le commun de la série (tableau par classes, droite graduée, 11 personnages, 2 bases) |
 | A1 `entier_lire.py` — script + dry run | ✅ 0 AUDIT-AVANCE, 0 RETARD, 0 BORD ; durée 3 min 00 |
 | A1 — aperçu `-ql` + planche des 12 écrans | ✅ relus, 3 défauts corrigés |
-| **A1 — rendu HD** | ✅ `manim/sorties/cm1/maths/entiers/01-lire/`, 15,4 Mo, **0 instant qui touche un bord** |
+| **A1 — rendu HD** | ✅ `manim/sorties/cm1/maths/entiers/01-lire/`, 15,4 Mo, 3 min 11, **0 instant qui touche un bord**, planche HD relue (identique à celle du `-ql`), fraîcheur prouvée sur les 3 points |
 | A1 — short Ti Margo, miniatures, publication | ⏳ |
 | A2 `entier_comparer.py` — script + dry run | ✅ 0 AUDIT-AVANCE, 0 RETARD, 0 BORD ; durée 3 min 25 |
 | A2 — aperçu `-ql` relu | ⏳ |
