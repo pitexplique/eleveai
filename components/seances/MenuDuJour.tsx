@@ -65,15 +65,19 @@ export function CarteProf({ menu }: { menu: Menu }) {
             <Separateur />
           </>
         )}
-        <div>
-          <p className={TITRE_PARTIE}>
-            Le plat <Badge couleur="bg-violet-700">imposé</Badge>
-          </p>
-          <ul className={LIGNES}>
-            {menu.impose.map((t) => <li key={t}>{t}</li>)}
-          </ul>
-        </div>
-        <Separateur />
+        {menu.impose.length > 0 && (
+          <>
+            <div>
+              <p className={TITRE_PARTIE}>
+                Le plat <Badge couleur="bg-violet-700">imposé</Badge>
+              </p>
+              <ul className={LIGNES}>
+                {menu.impose.map((t) => <li key={t}>{t}</li>)}
+              </ul>
+            </div>
+            <Separateur />
+          </>
+        )}
         <div>
           <p className={TITRE_PARTIE}>
             À la carte <Badge couleur="bg-sky-600">au choix</Badge>

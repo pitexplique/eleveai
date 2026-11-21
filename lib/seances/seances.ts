@@ -230,7 +230,8 @@ export const SEANCES: Seance[] = [
         { texte: "Projeter la vidéo, puis en discuter" },
         { texte: "Projeter les exercices interactifs, avec correction active" },
       ],
-      impose: ["Colorier la carte mentale des longueurs et l'expliquer ensemble."],
+      // 21/11, Frédéric : « enlève le plat avec carte mentale » → plus de plat imposé.
+      impose: [],
       carte: [
         "Le coach, sur les longueurs",
         "Les exercices interactifs",
@@ -240,7 +241,7 @@ export const SEANCES: Seance[] = [
       ],
       dessert: "Va trouver des longueurs dans ce que tu aimes.",
       conseil:
-        "C'est vous qui réglez la part d'imposé. Une classe qui a besoin de cadre : ajoutez un plat pour tous, par exemple « 5 questions du coach ». Une classe autonome : la carte mentale suffit.",
+        "L'entrée se fait tous ensemble, puis chacun choisit à la carte. Une classe qui a besoin de cadre : ajoutez un plat pour tous, par exemple « 5 questions du coach ».",
       ressources: [
         { label: "La carte mentale (PDF)", href: "/cartes-mentales/maths/6e/aire_longueur" },
         { label: "La fiche d'exercices (PDF)", href: "/fiches-exercices/maths/6e/aire-longueur" },
