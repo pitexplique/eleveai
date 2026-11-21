@@ -129,6 +129,21 @@ Donc, pour chaque épisode, **une passe dédiée sur les maths seules**, indépe
     sont des substitutions de commande. Une note décrivant le verrou HD contenait
     `until mkdir …; do sleep 30; done` : bash l'a **exécuté**, en boucle infinie. Écrire le script
     Python dans un FICHIER, ou au minimum quoter le délimiteur (`<<'PYEOF'`).
+28. ⛔⛔ **VU SEULEMENT À L'IMAGE (B4) — une phrase dite, coupée entre les DEUX COLONNES, se lit en
+    morceaux.** Deux écrans de B4 mettaient le récit dans la colonne de droite et son calcul au bas
+    de celle de GAUCHE : on lisait « le 5 vaut / soit 50. » et « 507 égale / et rien pour les
+    dizaines. » — le « 5 × 10 » et le « 500 + 7 » étaient ailleurs. Le dry run était propre,
+    `verifier-avant-rendu.py` aussi (il ne contrôle que les questions). ⭐ La règle : **tous les
+    morceaux d'UNE phrase vont dans la MÊME colonne, dans l'ordre où la voix les dit** ; la colonne
+    de gauche porte la FIGURE, jamais un bout de la phrase. C'est le piège n° 22 d'un cran au-dessus :
+    là deux morceaux étaient trop loin, ici ils sont dans deux systèmes de lecture différents.
+29. ⛔ **VU SEULEMENT À L'IMAGE (B4) — une boîte de largeur FIXE coupe le texte le plus long.** Les
+    cinq jetons du défi faisaient tous 1,5 unité : « 30 000 » débordait des deux côtés (le 3 coupé
+    par le bord) et « 2 000 » touchait les bords. ⭐ Remède : **construire le Text D'ABORD**, puis la
+    boîte à `max(mini, txt.width + 0.5)`, et caler la rangée par son bord gauche pour ne pas revenir
+    sur la figure voisine. ⚠️ `BORDS=1` ne voit rien : rien ne sort du CADRE de l'écran.
+    ⭐ Même mesure pour une barre qui raye un terme (`barrerCraie`) : sa largeur se calcule sur le
+    TERME (~95 px pour « 70 » en taille 86), pas à vue — 150 px mordaient sur le « + » d'avant.
 
 ## Pièges d'infrastructure (toute la série)
 
@@ -158,6 +173,14 @@ Donc, pour chaque épisode, **une passe dédiée sur les maths seules**, indépe
   l'écran 05, à 7,53 s), `entier_decomposer.py` **0** — et les WAV de B1 et B3 n'ont jamais été
   régénérés, donc rien de publié n'est concerné. (⚠️ Compté à la commande : un relevé de mémoire
   circulait avec « 1 et 2 ».)
+- ⭐⭐ **La DATE d'un JSON de voix ne prouve rien : `entier_voix.py --ecrire` réécrit les 22 d'un
+  coup.** Le 21/11 à 16:22, la correction d'un seul clip de B2 a donné la même mtime aux 22 fichiers
+  `manim/voix/*.json`, alors que les WAV de B1, B3, B4 et B5 dataient de 10:33 et leurs marques de
+  10:39. Pris pour argent comptant, ce décalage fait croire que quatre épisodes ont une voix plus
+  récente que leurs marques. ⭐ Le contrôle qui tranche est le CONTENU, pas la date :
+  `git diff --stat -- manim/voix/<id>.json` (vide = inchangé) et `git log -1 -- …` (il doit pointer
+  le commit des WAV). Vérifié ainsi avant B4 : seul `6e-entier-comparer` a bougé. C'est le même
+  principe que « une métadonnée n'est jamais la chose » de REGLES.md.
 - ⚠️ **Quand une voix est refaite, elle est souvent RÉGÉNÉRÉE EN ENTIER** : les 16 WAV de
   `6e-entier-comparer` l'ont été pour corriger un seul clip, et **toutes les durées ont changé**.
   Relire les durées sur les WAV avant de caler quoi que ce soit — jamais les recopier d'un message.

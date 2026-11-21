@@ -42,6 +42,8 @@ EP = [
      "on compte depuis la droite !", True, "verte"),
     ("6e", "encadrer", "03-encadrer", ["ENCADRER", "UN NOMBRE"], "582 est entre 500 et 600",
      "les bornes finissent par 0 !", True, "verte"),
+    ("6e", "decomposer", "04-decomposer", ["DÉCOMPOSER", "UN NOMBRE"], "507 = 500 + 7 ou 500 + 70 ?",
+     "chaque chiffre vaut son rang !", True, "verte"),
 ]
 
 # ⛔ Le badge garde la casse de la classe : « MATHS · 6e », jamais « MATHS · 6E »

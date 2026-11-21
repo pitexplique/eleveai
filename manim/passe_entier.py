@@ -261,6 +261,35 @@ EP = [
       s_toi="encadre 7 755 entre deux centaines consécutives.",
       s_tags=["nombres entiers", "encadrer", "dizaines", "nombres ronds"],
       s_centres=["sport", "jeux-defis"]),
+ dict(classe="6e", n=4, slug="decomposer", notion="entier_nombre", micro="entier_decomposer",
+      nom="Décomposer un nombre entier", date="2027-06-23", ceinture="verte",
+      titre="Quelle est la bonne décomposition de 507 ?",
+      intro="Ethan est game designer. Il donne les points de son jeu par paquets — milliers, "
+            "centaines, dizaines — et chaque paquet doit tomber dans le bon rang, sinon le score "
+            "affiché n'est plus le bon.",
+      points=["chaque chiffre vaut son chiffre fois son rang : dans 352, le 5 vaut 5 × 10, soit 50",
+              "un rang vide ne s'écrit pas : 507 = 500 + 7, et rien pour les dizaines",
+              "composer, c'est l'inverse : on range chaque terme dans son rang, même en désordre",
+              "la méthode ne change pas avec des nombres plus longs : 10 000 + 100 + 20 + 4 = 10 124",
+              "deux chiffres identiques ne valent pas la même chose : dans 55 140, un 5 vaut "
+              "50 000 et l'autre 5 000"],
+      defi="au jeu, Rayan gagne 30 000, 2 000, 600, 50 et 9 points : quel est son total ?",
+      chap={"00-garde": "La bonne décomposition de 507 ?", "01-situation": "Ethan, game designer",
+            "02-valeur": "Chaque chiffre vaut son rang", "03-zero": "Un rang vide ne s'écrit pas",
+            "04-question": "Question 1", "05-composer": "Composer, c'est l'inverse",
+            "06-question": "Question 2", "07-grands": "Des nombres plus longs",
+            "08-question": "Question 3", "09-defi": "À toi de jouer",
+            "09b-correction": "Correction", "10-finale": "Ce que tu as appris"},
+      tags=["nombres entiers", "décomposer un nombre", "valeur d'un chiffre", "rang vide",
+            "écriture décomposée", "composer un nombre", "game designer", "points de jeu"],
+      centres=["jeux-video", "technologie-ia"],
+      s_titre="507 : la bonne décomposition, 500 + 70 ou 500 + 7 ?", s_ceinture="blanche",
+      s_accroche="Mon copain décompose 507 et écrit 500 + 70 : il a lu le 7 comme un 70. Le 7 est "
+                 "tout à droite, c'est le rang des unités : il vaut 7. Le zéro, lui, ne s'écrit "
+                 "pas dans la décomposition, mais il garde la place des dizaines.",
+      s_toi="décompose 2 340.",
+      s_tags=["nombres entiers", "décomposer", "valeur d'un chiffre", "rang vide"],
+      s_centres=["jeux-video", "jeux-defis"]),
 ]
 
 COMMUNS = ["nombres entiers", "numération", "maths"]

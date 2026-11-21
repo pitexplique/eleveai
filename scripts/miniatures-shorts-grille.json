@@ -927,5 +927,10 @@
     "question": ["752 entre deux dizaines :", "750 ou 751 ?"],
     "calcul": [["752", "blanc", 200], ["751 et 761 ?", "rouge", 140]],
     "ceinture": "blanche"
+  },
+  "6e-entier-decomposer-short": {
+    "question": ["507 se décompose en :", "500 + 70 ou 500 + 7 ?"],
+    "calcul": [["507", "blanc", 200], ["500 + 70 ?", "rouge", 150]],
+    "ceinture": "blanche"
   }
 }

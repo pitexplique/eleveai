@@ -155,28 +155,32 @@ class EntierDecomposerBase(PaysageEntier6e):
         tit = self.bloc(["Chaque chiffre vaut", "son chiffre fois son rang."], 36, JAUNE_TITRE)
         gauche(tit, -6.2, 2.85)
         self.play(FadeIn(tit, shift=UP * 0.1), run_time=0.5)
-        g = chiffres_en_cases("352", fs=72, larg=1.05, h=1.25,
+        # ⛔ VU SEULEMENT À L'IMAGE (aperçu du 21/11) : la phrase dite se lisait en DEUX morceaux,
+        #    « le 5 vaut » puis « soit 50. » dans la colonne de droite, et le « 5 × 10 » au bas de
+        #    la colonne de GAUCHE — « le 5 vaut soit 50. » Les quatre morceaux de la phrase se
+        #    suivent maintenant dans la MÊME colonne, dans l'ordre où la voix les dit.
+        g = chiffres_en_cases("352", fs=80, larg=1.2, h=1.4,
                               couleurs=[COUL_RANG["centaines"], COUL_RANG["dizaines"], COUL_RANG["unités"]])
-        g.move_to(P(-3.6, 0.5))
+        g.move_to(P(-3.5, 0.3))
         self.au_mot("Dans 352")
         l0 = self.ligne([("Dans", WHITE), (nb(352) + " :", JAUNE_TITRE)], 34, buff=0.2)
-        self.col(l0, 0.95, 0.35)
+        self.col(l0, 1.45, 0.35)
         self.play(FadeIn(l0, shift=UP * 0.1), FadeIn(g, scale=1.06), run_time=0.55)
         self.au_mot("le 5 vaut")
         l1 = self.t("le 5 vaut", 36, COUL_RANG["dizaines"])
-        self.col(l1, 0.05, 0.35)
+        self.col(l1, 0.55, 0.35)
         cad = cadre_ici(g.cases[1], COUL_RANG["dizaines"], buff=0.06)
         self.play(FadeIn(l1, shift=UP * 0.1), Create(cad), run_time=0.5)
         # ⛔ Pas d'`au_mot("5 fois 10")` ici : la ligne « le 5 vaut » est retenue par la synchro
         #    automatique jusqu'à SON dernier mot, donc un `au_mot` posé ensuite arrive toujours en
         #    retard (le piège n° 6, RETARD de 0,32 s au dry run). La ligne de calcul se cale seule.
-        calc = self.ligne([("5 × 10", WHITE), ("= 50", VERT_OK)], 44, buff=0.26)
-        calc.move_to(P(-3.6, -1.5))
-        self.play(FadeIn(calc[0], scale=1.1), run_time=0.45)
+        calc = self.t("5 × 10,", 46)
+        self.col(calc, -0.4, 0.35)
+        self.play(FadeIn(calc, scale=1.1), run_time=0.45)
         self.au_mot("soit 50")
-        l2 = self.t("soit 50.", 40, VERT_OK)
-        self.col(l2, -0.85, 0.35)
-        self.play(FadeIn(calc[1], scale=1.15), FadeIn(l2, shift=UP * 0.1),
+        l2 = self.t("soit 50.", 46, VERT_OK)
+        self.col(l2, -1.35, 0.35)
+        self.play(FadeIn(l2, shift=UP * 0.1),
                   Indicate(g.chiffres[1], color=VERT_OK, scale_factor=1.3), run_time=0.6)
         self.attendre_voix()
 
@@ -187,21 +191,25 @@ class EntierDecomposerBase(PaysageEntier6e):
         tit = self.ligne([("Un rang vide", ZERO_C), ("ne s'écrit pas.", WHITE)], 40, buff=0.22)
         gauche(tit, -6.2, 3.15)
         self.play(FadeIn(tit, shift=UP * 0.1), run_time=0.4)
-        g = chiffres_en_cases("507", fs=72, larg=1.05, h=1.25,
+        # ⛔ VU SEULEMENT À L'IMAGE (aperçu du 21/11), le même défaut qu'à l'écran 02 : la colonne
+        #    de droite se lisait « 507 égale / et rien pour les dizaines. », la somme « 500 + 7 »
+        #    étant seule au bas de la colonne de GAUCHE. Les trois morceaux se suivent maintenant
+        #    dans la même colonne, dans l'ordre dit.
+        g = chiffres_en_cases("507", fs=80, larg=1.2, h=1.4,
                               couleurs=[COUL_RANG["centaines"], ZERO_C, COUL_RANG["unités"]])
-        g.move_to(P(-3.6, 0.9))
+        g.move_to(P(-3.5, 0.3))
         self.au_mot("507 égale")
         l0 = self.ligne([(nb(507), JAUNE_TITRE), ("égale", WHITE)], 36, buff=0.22)
-        self.col(l0, 1.4, 0.35)
+        self.col(l0, 1.45, 0.35)
         self.play(FadeIn(l0, shift=UP * 0.1), FadeIn(g, scale=1.06), run_time=0.55)
         self.au_mot("500 plus 7")
         somme = self.ligne([("500", COUL_RANG["centaines"]), ("+", GRAY_B), ("7", COUL_RANG["unités"])],
-                           52, buff=0.26)
-        somme.move_to(P(-3.6, -1.3))
+                           50, buff=0.26)
+        self.col(somme, 0.4, 0.35)
         self.play(FadeIn(somme, scale=1.1), run_time=0.55)
         self.au_mot("et rien pour les dizaines")
         l1 = self.bloc(["et rien", "pour les dizaines."], 34, ZERO_C)
-        self.col(l1, 0.3, 0.35)
+        self.col(l1, -1.0, 0.35)
         cad = cadre_ici(g.cases[1], ZERO_C, buff=0.06)
         self.play(FadeIn(l1, shift=UP * 0.1), Create(cad),
                   Indicate(g.chiffres[1], color=ZERO_C, scale_factor=1.35), run_time=0.65)
@@ -357,13 +365,18 @@ class EntierDecomposerBase(PaysageEntier6e):
         ej = ecran_jeu(None, 0.72).move_to(P(-4.9, 0.3))
         self.play(FadeIn(l0, shift=UP * 0.1), FadeIn(ej, scale=1.05), run_time=0.5)
         # les cinq gains, chacun à SON mot ; les deux derniers sont dits ensemble (« 50 et 9 »)
+        # ⛔ VU SEULEMENT À L'IMAGE (aperçu du 21/11) : à largeur FIXE de 1,5 unité, « 30 000 »
+        #    DÉBORDAIT de son jeton — le 3 coupé par le bord gauche, le dernier 0 sur le bord
+        #    droit — et « 2 000 » touchait les deux bords. Chaque jeton est maintenant taillé sur
+        #    SON texte (⚠️ le texte d'abord, la boîte ensuite), et la rangée est calée à gauche
+        #    pour ne pas revenir sur l'écran de jeu (son bord droit est à x = −3,67).
         jetons = VGroup()
         for v, c in self.GAINS:
-            j = VGroup(RoundedRectangle(width=1.5, height=0.78, corner_radius=0.12, fill_color=CASE,
-                                        fill_opacity=0.55, stroke_color=c, stroke_width=4))
-            j.add(Text(nb(v), font_size=34, color=c, weight=BOLD).move_to(j[0]))
-            jetons.add(j)
-        jetons.arrange(RIGHT, buff=0.22).move_to(P(1.0, 0.75))
+            txt = Text(nb(v), font_size=34, color=c, weight=BOLD)
+            boite = RoundedRectangle(width=max(1.1, txt.width + 0.5), height=0.78, corner_radius=0.12,
+                                     fill_color=CASE, fill_opacity=0.55, stroke_color=c, stroke_width=4)
+            jetons.add(VGroup(boite, txt.move_to(boite)))
+        jetons.arrange(RIGHT, buff=0.22).move_to(P(0, 0.75)).align_to(P(-3.1, 0), LEFT)
         hors_audit(jetons)
         for extrait, i in (("30 000", 0), ("2 000", 1), ("600", 2), ("50 et 9", 3)):
             self.au_mot(extrait)

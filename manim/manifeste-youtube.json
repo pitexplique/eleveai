@@ -105263,6 +105263,161 @@
         "sport",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "6e-entier-decomposer",
+      "pas_avant": "2027-06-23",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_decomposer",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer.mp4",
+      "miniature": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer.png",
+      "titre": "Quelle est la bonne décomposition de 507 ? — Décomposer un nombre entier — épisode 4 · Maths 6e",
+      "accroche": "Ethan est game designer. Il donne les points de son jeu par paquets — milliers, centaines, dizaines — et chaque paquet doit tomber dans le bon rang, sinon le score affiché n'est plus le bon.\n\nDans cette vidéo :\n• chaque chiffre vaut son chiffre fois son rang : dans 352, le 5 vaut 5 × 10, soit 50\n• un rang vide ne s'écrit pas : 507 = 500 + 7, et rien pour les dizaines\n• composer, c'est l'inverse : on range chaque terme dans son rang, même en désordre\n• la méthode ne change pas avec des nombres plus longs : 10 000 + 100 + 20 + 4 = 10 124\n• deux chiffres identiques ne valent pas la même chose : dans 55 140, un 5 vaut 50 000 et l'autre 5 000\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : au jeu, Rayan gagne 30 000, 2 000, 600, 50 et 9 points : quel est son total ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_decomposer&display=simple\n\n🔢 Épisode 4 de la série Nombres entiers d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "La bonne décomposition de 507 ?"
+        ],
+        [
+          "00:07",
+          "Ethan, game designer"
+        ],
+        [
+          "00:34",
+          "Question 1"
+        ],
+        [
+          "01:11",
+          "Question 2"
+        ],
+        [
+          "01:55",
+          "Question 3"
+        ],
+        [
+          "02:31",
+          "À toi de jouer"
+        ],
+        [
+          "02:45",
+          "Correction"
+        ],
+        [
+          "02:55",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "décomposer un nombre",
+        "valeur d'un chiffre",
+        "rang vide",
+        "écriture décomposée",
+        "composer un nombre",
+        "game designer",
+        "points de jeu",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Quelle est la décomposition de 706 ?",
+          "choix": [
+            "700 + 60",
+            "70 + 6",
+            "700 + 6"
+          ],
+          "reponse": 2,
+          "explication": "Le 7 vaut 700, le 0 ne compte pas, le 6 vaut 6 unités."
+        },
+        {
+          "t": "01:11",
+          "question": "Quel nombre vaut 500 + 90 + 3 plus 8 000 ?",
+          "choix": [
+            "5 938",
+            "8 593",
+            "8 953"
+          ],
+          "reponse": 1,
+          "explication": "L'ordre ne compte pas : 8 000, puis 500, puis 90, puis 3. Donc 8 593."
+        },
+        {
+          "t": "01:55",
+          "question": "Quelle écriture est égale à 55 140 ?",
+          "choix": [
+            "50 000 + 5 000 + 100 + 40",
+            "500 000 + 5 000 + 100 + 40",
+            "50 000 + 500 + 100 + 40"
+          ],
+          "reponse": 0,
+          "explication": "Deux 5 : l'un vaut 50 000, l'autre 5 000. Puis 100 et 40."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "6e-entier-decomposer-short",
+      "pas_avant": "2027-06-23",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_decomposer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-entier-decomposer",
+      "fichier": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer-short.mp4",
+      "miniature": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer-short-miniature.png",
+      "titre": "507 : la bonne décomposition, 500 + 70 ou 500 + 7 ? #maths #6e",
+      "accroche": "Mon copain décompose 507 et écrit 500 + 70 : il a lu le 7 comme un 70. Le 7 est tout à droite, c'est le rang des unités : il vaut 7. Le zéro, lui, ne s'écrit pas dans la décomposition, mais il garde la place des dizaines.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : décompose 2 340. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_decomposer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #6e #collège",
+      "tags": [
+        "nombres entiers",
+        "décomposer",
+        "valeur d'un chiffre",
+        "rang vide",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Quelle est la décomposition de 507 ?",
+          "choix": [
+            "500 + 70",
+            "500 + 7",
+            "50 + 7"
+          ],
+          "reponse": 1,
+          "explication": "Le 0 est aux dizaines : il n'y a aucune dizaine. Donc 500 + 7."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "jeux-defis"
+      ]
     }
   ]
 }

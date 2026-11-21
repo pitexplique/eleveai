@@ -17918,5 +17918,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_encadrer&display=simple"
+ },
+ "6e-entier-decomposer": {
+  "fichier": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer.mp4",
+  "poster": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer.png",
+  "vignette": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer.vignette.webp",
+  "titre": "Quelle est la bonne décomposition de 507 ? — Décomposer un nombre entier — épisode 4 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_decomposer&display=simple"
+ },
+ "6e-entier-decomposer-short": {
+  "fichier": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer-short.mp4",
+  "poster": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer-short-miniature.png",
+  "vignette": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer-short-miniature.vignette.webp",
+  "titre": "507 : la bonne décomposition, 500 + 70 ou 500 + 7 ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_decomposer&display=simple"
  }
 }
