@@ -326,6 +326,10 @@ import e1reQuadParabole from "./premiere/quad_parabole";
 import e1reQuadSommetAxe from "./premiere/quad_sommet_axe";
 import e1reQuadVariations from "./premiere/quad_variations";
 import e1reQuadRacinesSigne from "./premiere/quad_racines_signe";
+import e1reExpoSuiteGeometrique from "./premiere/expo_suite_geometrique";
+import e1reExpoSuiteTermeGeneral from "./premiere/expo_suite_terme_general";
+import e1reExpoFonction from "./premiere/expo_fonction";
+import e1reExpoFonctionLecture from "./premiere/expo_fonction_lecture";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -662,6 +666,10 @@ const TOUTES: ProblemesNotion[] = [
   e1reQuadSommetAxe,
   e1reQuadVariations,
   e1reQuadRacinesSigne,
+  e1reExpoSuiteGeometrique,
+  e1reExpoSuiteTermeGeneral,
+  e1reExpoFonction,
+  e1reExpoFonctionLecture,
   // fin Première
 ];
 
