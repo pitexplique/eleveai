@@ -237,6 +237,10 @@ import e3eProbaExperience from "./3e/proba_experience";
 import e3eAnglesCercle from "./3e/angles_cercle";
 import e3eRelationsMetriques from "./3e/relations_metriques";
 import e3eAlgoProgrammation from "./3e/algo_programmation";
+import e2deReelsIntervalles from "./seconde/reels_intervalles";
+import e2deArithmetiqueEntiers from "./seconde/arithmetique_entiers";
+import e2dePuissances2de from "./seconde/puissances_2de";
+import e2deRacineCarree2de from "./seconde/racine_carree_2de";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -481,6 +485,12 @@ const TOUTES: ProblemesNotion[] = [
   e3eAnglesCercle,
   e3eRelationsMetriques,
   e3eAlgoProgrammation,
+  // Seconde
+  e2deReelsIntervalles,
+  e2deArithmetiqueEntiers,
+  e2dePuissances2de,
+  e2deRacineCarree2de,
+  // fin Seconde
 ];
 
 const PAR_CLE = new Map(TOUTES.map((n) => [`${n.classe}/${n.notionId}`, n]));
