@@ -105418,6 +105418,157 @@
         "jeux-video",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "6e-entier-defi",
+      "pas_avant": "2027-06-24",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_defi",
+      "classe": "6e",
+      "ceinture": "bleue",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi.mp4",
+      "miniature": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi.png",
+      "titre": "De 1 041 à 2 000 : combien manque-t-il ? — Le défi des nombres entiers — épisode 5 · Maths 6e",
+      "accroche": "Maya est volcanologue au Piton de la Fournaise. Elle compte les secousses jour après jour, et pour savoir ce qui manque avant un seuil, elle avance par étapes rondes plutôt que de poser une soustraction.\n\nDans cette vidéo :\n• le complément à un nombre rond se fait par étapes rondes : 1 041 + 9, puis + 50, puis + 900, en tout 959\n• 679 pour atteindre 700 : + 1 jusqu'à 680, puis + 20, en tout 21\n• former un nombre avec des chiffres donnés : ⛔ un nombre ne commence jamais par zéro\n• le plus petit nombre de quatre chiffres avec 3, 0, 6 et 5 est 3 056, pas 0 356\n• le nombre mystère : on place chaque indice à son rang, l'un après l'autre\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : avec 5, 0, 9 et 4, quel est le plus grand nombre de quatre chiffres ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_defi&display=simple\n\n🔢 Épisode 5 de la série Nombres entiers d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien manque-t-il à 1 041 ?"
+        ],
+        [
+          "00:27",
+          "Les deux étapes suivantes"
+        ],
+        [
+          "00:38",
+          "Question 1"
+        ],
+        [
+          "01:17",
+          "Question 2"
+        ],
+        [
+          "01:56",
+          "Question 3"
+        ],
+        [
+          "02:29",
+          "À toi de jouer"
+        ],
+        [
+          "02:51",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "défi",
+        "complément à un nombre rond",
+        "étapes rondes",
+        "le plus grand nombre",
+        "zéro devant",
+        "nombre mystère",
+        "volcanologue",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:38",
+          "question": "Combien manque-t-il à 679 pour atteindre 700 ?",
+          "choix": [
+            "31",
+            "19",
+            "21"
+          ],
+          "reponse": 2,
+          "explication": "679 + 1 donne 680. Puis 20 de plus : 700. En tout, 21."
+        },
+        {
+          "t": "01:17",
+          "question": "Le plus petit nombre de quatre chiffres avec 3, 0, 6 et 5 ?",
+          "choix": [
+            "0 356",
+            "3 056",
+            "3 065"
+          ],
+          "reponse": 1,
+          "explication": "On ne commence pas par zéro. On met 3, puis 0, puis 5, puis 6."
+        },
+        {
+          "t": "01:56",
+          "question": "Quatre chiffres : unités de mille 3, centaines le double de 3, dizaines 0, unités 1.",
+          "choix": [
+            "3 610",
+            "3 061",
+            "3 601"
+          ],
+          "reponse": 2,
+          "explication": "Unités de mille 3, centaines 6, dizaines 0, unités 1. Donc 3 601."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "6e-entier-defi-short",
+      "pas_avant": "2027-06-24",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_defi",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-entier-defi",
+      "fichier": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi-short.mp4",
+      "miniature": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi-short-miniature.png",
+      "titre": "De 569 à 600 : il manque 31 ou 41 ? #maths #6e",
+      "accroche": "Ma copine a 569 points, il en faut 600, et elle annonce 41 : elle a compté trop vite. On avance par étapes rondes — 569 + 1 donne 570, puis 30 de plus font 600 : en tout, 31.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : le plus petit nombre de quatre chiffres avec 3, 0, 6 et 5 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #6e #collège",
+      "tags": [
+        "nombres entiers",
+        "complément",
+        "étapes rondes",
+        "défi",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Combien manque-t-il à 569 pour atteindre 600 ?",
+          "choix": [
+            "29",
+            "31",
+            "41"
+          ],
+          "reponse": 1,
+          "explication": "569 + 1 donne 570. Puis 30 de plus : 600. En tout, 31."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "jeux-defis"
+      ]
     }
   ]
 }

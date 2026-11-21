@@ -932,5 +932,10 @@
     "question": ["507 se décompose en :", "500 + 70 ou 500 + 7 ?"],
     "calcul": [["507", "blanc", 200], ["500 + 70 ?", "rouge", 150]],
     "ceinture": "blanche"
+  },
+  "6e-entier-defi-short": {
+    "question": ["De 569 à 600, il manque :", "31 ou 41 ?"],
+    "calcul": [["569 → 600", "blanc", 150], ["41 ?", "rouge", 170]],
+    "ceinture": "blanche"
   }
 }

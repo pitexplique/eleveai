@@ -44,11 +44,18 @@ def script_de(mp4):
     morceaux = nom.split('-')
     classe = morceaux[0]
     base = f"{classe}_{'_'.join(morceaux[1:]).replace('-', '_')}"
-    # Les episodes de 3e de la serie perimetre/aire/volume vivent dans scripts/4e.
-    for dossier in (classe, '4e', '3e', '5e', '6e', 'cm2'):
-        chemin = os.path.join(RACINE, 'manim', 'scripts', dossier, base + '.py')
-        if os.path.exists(chemin):
-            return chemin
+    # ⚠️ Deux conventions coexistent : « 4e_solides_perspective.py » (la classe en tete) et, dans
+    #    la serie NOMBRES ENTIERS, « entier_decomposer.py » (SANS la classe, la classe est le
+    #    dossier). Sans la seconde, les 12 paysages de cette serie sortaient tous en « script
+    #    introuvable », donc « douteux » : le controle de fin de lot ne voyait RIEN.
+    #    ⛔ Les shorts Ti Margo (-short) n'ont pas de .py du tout : ils restent introuvables, c'est
+    #    normal, et c'est la limite de cet instrument sur les series a short en dessin anime.
+    sans_classe = '_'.join(morceaux[1:]).replace('-', '_')
+    for dossier in (classe, '4e', '3e', '5e', '6e', 'cm2', 'cm1'):
+        for nom_py in (base, sans_classe):
+            chemin = os.path.join(RACINE, 'manim', 'scripts', dossier, nom_py + '.py')
+            if os.path.exists(chemin):
+                return chemin
     return None
 
 

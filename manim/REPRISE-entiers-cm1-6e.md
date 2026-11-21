@@ -145,8 +145,46 @@ Donc, pour chaque épisode, **une passe dédiée sur les maths seules**, indépe
     ⭐ Même mesure pour une barre qui raye un terme (`barrerCraie`) : sa largeur se calcule sur le
     TERME (~95 px pour « 70 » en taille 86), pas à vue — 150 px mordaient sur le « + » d'avant.
 
+30. ⛔ **VU SEULEMENT À L'IMAGE (B5) — un schéma qui CALCULE ses étiquettes rend un nombre que la
+    leçon n'a jamais dit.** Le rappel de l'écran final reprenait les arrêts 1 041 · 1 050 · 2 000 :
+    `chemin_etapes` en a déduit « + 950 » — arithmétiquement juste, mais la leçon avait montré
+    9, 50 et 900. ⭐ Un RAPPEL garde les valeurs de la leçon, jamais un sous-ensemble qui en
+    fabrique une nouvelle. (Et le même écran : des noms de rang à 13 pt × 0,62 font 8 pt, illisibles.)
+31. ⚠️ **VU À L'IMAGE (B5) — un cadre posé « à côté » du personnage recouvre son étiquette de
+    métier.** Le sismographe, à (−2,9 ; −1,5), mangeait la fin de « volcanologue » écrit sous Maya
+    (on lisait « volcanolo▮▮▮ »). ⭐ Le métier est écrit SOUS le personnage : avant de poser une
+    figure dans ce coin, calculer son bord — l'étiquette s'arrête ici à x = −4,23.
+32. ✅ **Le seuil de 0,6 s de `verifier-avant-rendu.py` est un GARDE-FOU, pas la mesure.** Sur la
+    garde de B5, « atteindre » (5,24 s) et « 2 000 » (5,68 s) ne sont séparés que de 0,45 s : l'outil
+    annonce « RETARD probable », parce qu'il ne connaît pas le `run_time`. Avec un fondu de 0,28 s,
+    le dry run mesure **0 RETARD**. ⭐ On ne tait pas l'outil : on écrit dans le script POURQUOI
+    l'écart est tenu, et on laisse la mesure trancher.
+
+33. ⛔⛔ **VU SEULEMENT PAR `verifier-zone-margo.py` (B5) — une question de QUATRE lignes pousse les
+    cartes de choix SUR Ti Margo.** Le gabarit pose les cartes, puis les redescend sous le bas du
+    bloc de question : à quatre lignes leur bas tombe à y ≈ −2,25 alors que la boîte de Ti Margo
+    commence à −1,9, et la carte de la bonne réponse **coupait le haut de sa tête**. ⚠️ Ni
+    `BORDS=1` (rien ne sort du cadre), ni la planche, ni l'œil sur une vignette ne le voient.
+    ⭐ **Trois lignes de question au maximum** ; à trois, le bas des cartes remonte à −1,70.
+    ⭐⭐ **Et donc : lancer `verifier-zone-margo.py` sur le `-ql`, AVANT le HD.** Il a été lancé
+    après, et il a coûté un second rendu HD.
+34. ⚠️ **L'étalon de `verifier-zone-margo.py` est la mascotte à scale 0,5.** Tout écran dont la
+    mascotte est plus grande — la page de garde (0,8) et les écrans défi / correction / finale
+    (0,65) — sort en « quelque chose recouvre Ti-Margo » sans que rien ne le recouvre. ⭐ Le signal
+    VRAI est une plage signalée sur un écran à 0,5, c'est-à-dire **une question-pause**. Vérifié à
+    l'image sur B1 et B3, déjà publiés : leurs deux plages sont la garde et les écrans à 0,65, et
+    Ti Margo y est parfaitement dégagé — **rien de publié n'est en cause**.
+
 ## Pièges d'infrastructure (toute la série)
 
+- ⛔⛔ **`verifier-fraicheur-mp4.py` ne voyait AUCUN script de cette série** (corrigé le 21/11).
+  Il déduisait le script du nom du MP4 à la convention « classe en tête » (`6e_entier_rang.py`),
+  alors que la série nomme ses scripts **sans la classe** (`entier_rang.py`, la classe étant le
+  dossier) : les douze paysages sortaient en « script introuvable », donc « douteux », et le
+  contrôle de fin de lot ne regardait rien. Il essaie maintenant les deux conventions.
+  ⚠️ Il reste aveugle aux **shorts Ti Margo**, qui n'ont pas de `.py` du tout : sur une série à
+  short en dessin animé, « 0 douteux » est inatteignable — la cible est « tous les PAYSAGES
+  prouvés à jour », et les shorts se contrôlent sur le film (planche + compteur).
 - ⛔ **Ne nettoyer aucun dossier `manim/scripts/*/media-ent-*`** avant la fin de la série : ils ont
   l'air de déchets mais ils portent les `.hd.log` dont `verifier-fraicheur-mp4.py` a besoin comme
   étalon.

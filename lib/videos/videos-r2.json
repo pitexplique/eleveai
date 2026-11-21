@@ -17936,5 +17936,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_decomposer&display=simple"
+ },
+ "6e-entier-defi": {
+  "fichier": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi.mp4",
+  "poster": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi.png",
+  "vignette": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi.vignette.webp",
+  "titre": "De 1 041 à 2 000 : combien manque-t-il ? — Le défi des nombres entiers — épisode 5 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_defi&display=simple"
+ },
+ "6e-entier-defi-short": {
+  "fichier": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi-short.mp4",
+  "poster": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi-short-miniature.png",
+  "vignette": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi-short-miniature.vignette.webp",
+  "titre": "De 569 à 600 : il manque 31 ou 41 ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_defi&display=simple"
  }
 }

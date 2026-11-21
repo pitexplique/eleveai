@@ -44,6 +44,9 @@ EP = [
      "les bornes finissent par 0 !", True, "verte"),
     ("6e", "decomposer", "04-decomposer", ["DÉCOMPOSER", "UN NOMBRE"], "507 = 500 + 7 ou 500 + 70 ?",
      "chaque chiffre vaut son rang !", True, "verte"),
+    # ⛔ ceinture BLEUE : le défi est le cran au-dessus de la paysage verte du niveau.
+    ("6e", "defi", "05-defi", ["LE DÉFI", "DES NOMBRES"], "De 1 041 à 2 000, il manque ?",
+     "on avance par étapes rondes !", True, "bleue"),
 ]
 
 # ⛔ Le badge garde la casse de la classe : « MATHS · 6e », jamais « MATHS · 6E »

@@ -290,6 +290,37 @@ EP = [
       s_toi="décompose 2 340.",
       s_tags=["nombres entiers", "décomposer", "valeur d'un chiffre", "rang vide"],
       s_centres=["jeux-video", "jeux-defis"]),
+ # ⛔ Le défi est en ceinture BLEUE en paysage (le cran au-dessus), BLANCHE au short.
+ dict(classe="6e", n=5, slug="defi", notion="entier_nombre", micro="entier_defi",
+      nom="Le défi des nombres entiers", date="2027-06-24", ceinture="bleue",
+      # ⚠️ 103 caractères avec le gabarit (« — <nom> — épisode 5 · Maths 6e ») : raccourci.
+      titre="De 1 041 à 2 000 : combien manque-t-il ?",
+      intro="Maya est volcanologue au Piton de la Fournaise. Elle compte les secousses jour après "
+            "jour, et pour savoir ce qui manque avant un seuil, elle avance par étapes rondes "
+            "plutôt que de poser une soustraction.",
+      points=["le complément à un nombre rond se fait par étapes rondes : 1 041 + 9, puis + 50, "
+              "puis + 900, en tout 959",
+              "679 pour atteindre 700 : + 1 jusqu'à 680, puis + 20, en tout 21",
+              "former un nombre avec des chiffres donnés : ⛔ un nombre ne commence jamais par zéro",
+              "le plus petit nombre de quatre chiffres avec 3, 0, 6 et 5 est 3 056, pas 0 356",
+              "le nombre mystère : on place chaque indice à son rang, l'un après l'autre"],
+      defi="avec 5, 0, 9 et 4, quel est le plus grand nombre de quatre chiffres ?",
+      chap={"00-garde": "Combien manque-t-il à 1 041 ?", "01-situation": "Maya, volcanologue",
+            "02-complement": "Avancer par étapes rondes", "03-suite": "Les deux étapes suivantes",
+            "04-question": "Question 1", "05-etiquettes": "Former un nombre, jamais zéro devant",
+            "06-question": "Question 2", "07-mystere": "Le nombre mystère",
+            "08-question": "Question 3", "09-defi": "À toi de jouer",
+            "09b-correction": "Correction", "10-finale": "Ce que tu as appris"},
+      tags=["nombres entiers", "défi", "complément à un nombre rond", "étapes rondes",
+            "le plus grand nombre", "zéro devant", "nombre mystère", "volcanologue"],
+      centres=["nature-ecologie", "sciences"],
+      s_titre="De 569 à 600 : il manque 31 ou 41 ?", s_ceinture="blanche",
+      s_accroche="Ma copine a 569 points, il en faut 600, et elle annonce 41 : elle a compté trop "
+                 "vite. On avance par étapes rondes — 569 + 1 donne 570, puis 30 de plus font 600 : "
+                 "en tout, 31.",
+      s_toi="le plus petit nombre de quatre chiffres avec 3, 0, 6 et 5 ?",
+      s_tags=["nombres entiers", "complément", "étapes rondes", "défi"],
+      s_centres=["nature-ecologie", "jeux-defis"]),
 ]
 
 COMMUNS = ["nombres entiers", "numération", "maths"]
