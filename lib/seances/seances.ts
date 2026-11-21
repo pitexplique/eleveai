@@ -85,7 +85,8 @@ export type Seance = {
     /** L'ENTRÉE, au choix, 5 min, projetée à toute la classe (21/11, Frédéric). */
     entree?: { texte: string; href?: string }[];
     impose: string[];
-    carte: string[];
+    /** Une ligne peut être un lien (21/11 : l'article mène au Journal). */
+    carte: (string | { texte: string; href: string })[];
     dessert: string;
     conseil: string;
     /** Sous le menu : les PDF du prof et la connexion des élèves (21/11, Frédéric). */
@@ -240,7 +241,7 @@ export const SEANCES: Seance[] = [
         "Les exercices interactifs",
         "Le cours écrit dans le cahier",
         "Le découpage (ULIS, avec l'AESH)",
-        "Un article à écrire, pour participer au Journal d'EleveAI",
+        { texte: "Un article à écrire, pour participer au Journal d'EleveAI", href: "/accueil-journal" },
       ],
       dessert: "Va trouver des maths dans ce que tu aimes.",
       signature: "Le chef cuisinier, Frédéric Lacoste",

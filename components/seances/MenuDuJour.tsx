@@ -83,7 +83,17 @@ export function CarteProf({ menu }: { menu: Menu }) {
             À la carte <Badge couleur="bg-sky-600">au choix</Badge>
           </p>
           <ul className={LIGNES}>
-            {menu.carte.map((t) => <li key={t}>{t}</li>)}
+            {menu.carte.map((t) =>
+              typeof t === "string" ? (
+                <li key={t}>{t}</li>
+              ) : (
+                <li key={t.texte}>
+                  <Link href={t.href} className="underline decoration-amber-400 decoration-2 underline-offset-4 hover:text-amber-900">
+                    {t.texte}
+                  </Link>
+                </li>
+              ),
+            )}
           </ul>
         </div>
         <Separateur />
