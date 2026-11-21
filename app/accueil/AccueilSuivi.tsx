@@ -101,14 +101,16 @@ const SYMBOLE = ["·", "✗", "~", "✓"];
 
 /* « Comment ça marche » : le chemin d'un élève, en quatre images. */
 const ACCES_DIRECTS = [
-  // « Faire le point » du coach : l'évaluation qui situe l'élève.
-  { href: "/parcours", label: "Commencer par une évaluation", Icone: ClipboardList, couleur: "text-violet-700" },
-  { href: "/automatismes-maths", label: "Automatismes", Icone: Zap, couleur: "text-amber-500" },
-  { href: "/fiches-exercices", label: "Fiches d'exercices", Icone: FileText, couleur: "text-sky-600" },
+  // 21/11/2026, Frédéric : « changer l'ordre des chips » + « change énigme en
+  // slide énigme » + « Fiches d'exercices en exercices interactifs » → même ordre que l'entrée du Menu du jour (énigme, vidéo,
+  // exercices), puis automatismes et évaluation.
+  // 19/11 : « rajoute à côté de vidéo, calcul rapide, énigme » ; « enlève calcul rapide ».
+  { href: "/enigmes-maths", label: "Slide énigme", Icone: Puzzle, couleur: "text-violet-700" },
   { href: "/video", label: "Vidéos", Icone: PlayCircle, couleur: "text-rose-600" },
-  // 19/11/2026, Frédéric : « rajoute à côté de vidéo, calcul rapide, énigme ».
-  { href: "/enigmes-maths", label: "Énigmes", Icone: Puzzle, couleur: "text-violet-700" },
-  // 19/11/2026, Frédéric : « enlève calcul rapide » (la page /calcul-rapide reste).
+  { href: "/fiches-exercices", label: "Exercices interactifs", Icone: FileText, couleur: "text-sky-600" },
+  { href: "/automatismes-maths", label: "Automatismes", Icone: Zap, couleur: "text-amber-500" },
+  // « Faire le point » du coach : l'évaluation qui situe l'élève. 21/11 : « Évaluez-vous », en dernier.
+  { href: "/parcours", label: "Évaluez-vous", Icone: ClipboardList, couleur: "text-violet-700" },
 ];
 
 const ETAPES = [
@@ -275,7 +277,7 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
               17/11, Frédéric (« applique ») : remontés juste sous les deux
               boutons ; les trois nuages (redites) et le badge 8 pays (passé dans
               « Le projet EleveAI ») sont retirés d'ici. */}
-          <p className="mt-5 text-sm font-bold text-slate-500">Ou va directement à :</p>
+          <p className="mt-5 text-sm font-bold text-slate-500">Où va directement à :</p>
           <div className="mt-2 flex flex-wrap justify-center gap-2">
             {ACCES_DIRECTS.map(({ href, label, Icone, couleur }) => (
               <Link key={href} href={href} className="flex items-center gap-2 rounded-full bg-white px-4 py-2 font-bold text-slate-800 shadow-sm ring-1 ring-slate-200 hover:ring-teal-400">
