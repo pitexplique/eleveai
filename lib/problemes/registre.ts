@@ -371,6 +371,8 @@ import e1sLogiqueEnsembles from "./premiere-spe/logique_ensembles";
 import e1sTrigoFormulesEquations from "./premiere-spe/trigo_formules_equations";
 import e1sTriangleQuelconque from "./premiere-spe/triangle_quelconque";
 import e1sAnglesOrientes from "./premiere-spe/angles_orientes";
+import e1sTangenteReel from "./premiere-spe/tangente_reel";
+import e1sBarycentre from "./premiere-spe/barycentre";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -756,6 +758,8 @@ const TOUTES: ProblemesNotion[] = [
   e1sTrigoFormulesEquations,
   e1sTriangleQuelconque,
   e1sAnglesOrientes,
+  e1sTangenteReel,
+  e1sBarycentre,
   // fin Première spé
 ];
 
