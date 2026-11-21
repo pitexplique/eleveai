@@ -337,6 +337,10 @@ import eTleDenombrementCombinatoire from "./terminale-spe/denombrement_combinato
 import eTleGeometrieEspace from "./terminale-spe/geometrie_espace";
 import eTleProduitScalaireEspace from "./terminale-spe/produit_scalaire_espace";
 import eTleSuiteNumerique from "./terminale-spe/suite_numerique";
+import eTleLimiteSuite from "./terminale-spe/limite_suite";
+import eTleLimiteFonction from "./terminale-spe/limite_fonction";
+import eTleContinuiteTvi from "./terminale-spe/continuite_tvi";
+import eTleDerivationFonction from "./terminale-spe/derivation_fonction";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -686,6 +690,10 @@ const TOUTES: ProblemesNotion[] = [
   eTleGeometrieEspace,
   eTleProduitScalaireEspace,
   eTleSuiteNumerique,
+  eTleLimiteSuite,
+  eTleLimiteFonction,
+  eTleContinuiteTvi,
+  eTleDerivationFonction,
   // fin Terminale
 ];
 
