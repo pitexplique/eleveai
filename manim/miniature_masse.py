@@ -64,6 +64,8 @@ EP = [
      "un colibri : environ 3 g", True, "jaune"),
     ("cm1", "defi", "05-defi", ["1 t AU PLUS :", "COMBIEN DE SACS ?"], "1 t = 1 000 kg",
      "1 000 ÷ 25 = 40 sacs", True, "bleue"),
+    ("cm2", "comparer", "01-comparer", ["1,25 kg", "OU 1 200 g ?"], "La même unité :",
+     "1,25 kg = 1 250 g", True, "jaune"),
 ]
 
 

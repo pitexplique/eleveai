@@ -934,5 +934,11 @@
     "calcul": [["300 kg max", "rouge", 170], ["+ piano 200 kg", "blanc", 150]],
     "margo": [320, 720, 640],
     "ceinture": "blanche"
+  },
+  "cm2-masse-comparer-short": {
+    "question": ["Quel melon", "est le plus lourd ?"],
+    "calcul": [["1,5 kg", "blanc", 190], ["ou 1,25 kg ?", "rouge", 170]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
   }
 }

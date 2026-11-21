@@ -105285,6 +105285,159 @@
         "musique",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm2-masse-comparer",
+      "pas_avant": "2027-06-22",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_comparer",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer.mp4",
+      "miniature": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer.png",
+      "titre": "1,25 kg ou 1 200 g : lequel est le plus lourd ? — Comparer des masses — épisode 1 · Maths CM2",
+      "accroche": "Théa est ingénieure en aéronautique : dans un avion, chaque gramme compte. Pour comparer des masses, on met la même unité, la virgule bien placée, puis on compare chiffre par chiffre.\n\nDans cette vidéo :\n• 1,25 kg, c'est 1 250 g : 1 250 g est plus que 1 200 g\n• le piège de la virgule : 1,5 kg s'écrit aussi 1,50 kg\n• 50 centièmes, c'est plus que 25 centièmes : 1,5 kg est plus lourd que 1,25 kg\n• avec les tonnes : 8 500 kg = 8,5 t, et 42 t + 8,5 t = 50,5 t\n• pour ranger des masses, on les écrit toutes dans la même unité\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : Trois bagages : 23,5 kg, 23 050 g et 23,45 kg. Range-les du plus léger au plus lourd.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_comparer&display=simple\n\n⚖️ Épisode 1 de la série Masses d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comparer des masses"
+        ],
+        [
+          "00:09",
+          "Théa, ingénieure en aéronautique"
+        ],
+        [
+          "00:20",
+          "La même unité"
+        ],
+        [
+          "00:37",
+          "Le piège de la virgule"
+        ],
+        [
+          "00:55",
+          "Question 1"
+        ],
+        [
+          "01:24",
+          "Avec les tonnes"
+        ],
+        [
+          "01:41",
+          "Question 2"
+        ],
+        [
+          "02:19",
+          "À toi de jouer"
+        ],
+        [
+          "02:37",
+          "Correction"
+        ],
+        [
+          "02:56",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "comparer des masses",
+        "nombre décimal",
+        "virgule",
+        "kilogramme",
+        "gramme",
+        "tonne",
+        "convertir",
+        "avion",
+        "aéronautique",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:55",
+          "question": "1,5 kilogramme ou 1 500 grammes : lequel est le plus lourd ?",
+          "choix": [
+            "c'est pareil",
+            "1 500 grammes",
+            "1,5 kilogramme"
+          ],
+          "reponse": 0,
+          "explication": "1,5 kilogramme, c'est 1 500 grammes : même masse."
+        },
+        {
+          "t": "01:41",
+          "question": "La plus légère : 2,3 tonnes, 2 350 kilogrammes, ou 2,08 tonnes ?",
+          "choix": [
+            "2 350 kilogrammes",
+            "2,3 tonnes",
+            "2,08 tonnes"
+          ],
+          "reponse": 2,
+          "explication": "En kilogrammes : 2 300, 2 350 et 2 080. La plus légère : 2,08 tonnes."
+        }
+      ],
+      "centres": [
+        "avions",
+        "transports"
+      ]
+    },
+    {
+      "id": "cm2-masse-comparer-short",
+      "pas_avant": "2027-06-22",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_comparer",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-masse-comparer",
+      "fichier": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer-short.mp4",
+      "miniature": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer-short-miniature.png",
+      "titre": "1,5 kg ou 1,25 kg : quel melon est le plus lourd ? #maths #cm2",
+      "accroche": "Ma copine a un melon de 1,5 kg. Moi, un de 1,25 kg. 25, c'est plus que 5 : j'ai le plus gros !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : qui est le plus lourd, 2,8 kg ou 2 750 g ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cm2 #primaire",
+      "tags": [
+        "masse",
+        "comparer",
+        "nombre décimal",
+        "virgule",
+        "melon",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Quel melon est le plus lourd ?",
+          "choix": [
+            "celui de 1,5 kilogramme",
+            "celui de 1,25 kilogramme",
+            "ils pèsent pareil"
+          ],
+          "reponse": 0,
+          "explication": "1,5 kilogramme, c'est 1 500 grammes. 1,25 kilogramme, 1 250 grammes. 1 500 gagne !"
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
     }
   ]
 }

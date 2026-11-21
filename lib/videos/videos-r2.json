@@ -17936,5 +17936,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_defi&display=simple"
+ },
+ "cm2-masse-comparer": {
+  "fichier": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer.mp4",
+  "poster": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer.png",
+  "vignette": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer.vignette.webp",
+  "titre": "1,25 kg ou 1 200 g : lequel est le plus lourd ? — Comparer des masses — épisode 1 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_comparer&display=simple"
+ },
+ "cm2-masse-comparer-short": {
+  "fichier": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer-short.mp4",
+  "poster": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer-short-miniature.png",
+  "vignette": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer-short-miniature.vignette.webp",
+  "titre": "1,5 kg ou 1,25 kg : quel melon est le plus lourd ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_comparer&display=simple"
  }
 }
