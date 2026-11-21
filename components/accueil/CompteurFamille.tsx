@@ -246,7 +246,7 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
             {/* 21/11, Frédéric : « le chiffre questions répondues en premier ». */}
             <CompteurReponsesCoach chiffre />
             {chiffre(c.capAtteint ? `+ ${cap}` : c.nombreTexte, "vidéos")}
-            {visiteurs !== null && chiffre(visiteurs.toLocaleString("fr-FR"), "visiteurs cette semaine")}
+            {visiteurs !== null && chiffre(visiteurs.toLocaleString("fr-FR"), "visiteurs par semaine")}
             {chiffre(EXERCICES.exercices.toLocaleString("fr-FR"), "exercices de maths")}
           </dl>
           {/* 21/11, Frédéric : « ce que j'aimerais rajouter, c'est que des élèves
