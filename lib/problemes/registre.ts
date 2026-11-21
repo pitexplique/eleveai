@@ -255,6 +255,10 @@ import e2deVecteursPlan from "./seconde/vecteurs_plan";
 import e2deRepereCoordonnees from "./seconde/repere_coordonnees";
 import e2deDroitesPlan from "./seconde/droites_plan";
 import e2deGeometrieProblemesPlan from "./seconde/geometrie_problemes_plan";
+import e2deSignesExpression2de from "./seconde/signes_expression_2de";
+import e2deFonctionVocabulaire2de from "./seconde/fonction_vocabulaire_2de";
+import e2deAnalyseGraphique2de from "./seconde/analyse_graphique_2de";
+import e2deFonctionVariationsExtremums from "./seconde/fonction_variations_extremums";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -518,6 +522,10 @@ const TOUTES: ProblemesNotion[] = [
   e2deRepereCoordonnees,
   e2deDroitesPlan,
   e2deGeometrieProblemesPlan,
+  e2deSignesExpression2de,
+  e2deFonctionVocabulaire2de,
+  e2deAnalyseGraphique2de,
+  e2deFonctionVariationsExtremums,
   // fin Seconde
 ];
 
