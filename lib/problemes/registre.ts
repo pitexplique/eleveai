@@ -445,6 +445,10 @@ import eStmgSuiteSomme from "./stmg/suite_somme";
 import eStmgSuiteSommeSituations from "./stmg/suite_somme_situations";
 import eStmgSuiteComparer from "./stmg/suite_comparer";
 import eStmgFctInverse from "./stmg/fct_inverse";
+import eStmgFctInverseDerivee from "./stmg/fct_inverse_derivee";
+import eStmgExpoDefinition from "./stmg/expo_definition";
+import eStmgExpoVariations from "./stmg/expo_variations";
+import eStmgExpoProprietes from "./stmg/expo_proprietes";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -906,6 +910,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgSuiteSommeSituations,
   eStmgSuiteComparer,
   eStmgFctInverse,
+  eStmgFctInverseDerivee,
+  eStmgExpoDefinition,
+  eStmgExpoVariations,
+  eStmgExpoProprietes,
   // fin STMG
 ];
 
