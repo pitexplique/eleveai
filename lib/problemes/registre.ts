@@ -381,6 +381,10 @@ import eStmgAutoIndice from "./stmg/auto_indice";
 import eStmgAutoFractionsPuissances from "./stmg/auto_fractions_puissances";
 import eStmgAutoOrdresUnites from "./stmg/auto_ordres_unites";
 import eStmgAutoDevelopperFactoriser from "./stmg/auto_developper_factoriser";
+import eStmgAutoEquations from "./stmg/auto_equations";
+import eStmgAutoSignes from "./stmg/auto_signes";
+import eStmgAutoFormules from "./stmg/auto_formules";
+import eStmgAutoLectureGraphique from "./stmg/auto_lecture_graphique";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -778,6 +782,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgAutoFractionsPuissances,
   eStmgAutoOrdresUnites,
   eStmgAutoDevelopperFactoriser,
+  eStmgAutoEquations,
+  eStmgAutoSignes,
+  eStmgAutoFormules,
+  eStmgAutoLectureGraphique,
   // fin STMG
 ];
 
