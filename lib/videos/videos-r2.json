@@ -17774,5 +17774,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_relations&display=simple"
+ },
+ "ce2-masse-choisir-unite": {
+  "fichier": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite.mp4",
+  "poster": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite.png",
+  "vignette": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite.vignette.webp",
+  "titre": "Letchi, sac de riz, camion : g, kg ou t ? — Choisir la bonne unité — épisode 4 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_choisir_unite&display=simple"
+ },
+ "ce2-masse-choisir-unite-short": {
+  "fichier": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite-short.mp4",
+  "poster": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite-short-miniature.png",
+  "vignette": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite-short-miniature.vignette.webp",
+  "titre": "2 tonnes de bananes sur la liste des courses ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_choisir_unite&display=simple"
  }
 }

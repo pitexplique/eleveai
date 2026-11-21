@@ -104,3 +104,43 @@ function sacRizCraie(c,x,yBas,s=1,z=1,et=''){ if(z<=0) return; const k=Math.min(
   c.fillStyle='#ffe8cc'; for(const [u,v] of [[-.18,.82],[.05,.88],[.2,.8],[-.05,.76],[.12,.7]]){ c.beginPath(); c.ellipse(x+u*200*k,yBas-v*230*k,7*k,4*k,.5,0,7); c.fill(); }
   if(et){ c.font=`800 ${Math.round(52*k)}px "Segoe UI"`; const fs=52*k*Math.min(1,170*k/c.measureText(et).width);
     ecrire(c,et,x,yBas-100*k,fs,'#212529'); } }
+
+/* ---- Épisode 04 (choisir-unite) : la liste des courses, les bananes, le camion qui bouche la rue ---- */
+const BANANE_M='#ffe066';
+/* Une banane courbée : (x, y) = le milieu, w = la longueur ; ang = la rotation */
+function bananeM(c,x,y,w,z=1,ang=0){ if(z<=0) return; w*=Math.min(1.15,z); const h=Math.max(30,w*.34);
+  c.save(); c.translate(x,y); c.rotate(ang); c.fillStyle=BANANE_M; c.strokeStyle='#e67700'; c.lineWidth=4; c.beginPath();
+  c.moveTo(-w/2,-h*.4); c.quadraticCurveTo(0,h*1.0,w/2,-h*.4); c.quadraticCurveTo(0,h*.05,-w/2,-h*.4); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle='#5c3d00'; c.fillRect(-w/2-5,-h*.62,10,12); c.fillRect(w/2-5,-h*.62,10,12); c.restore(); }
+/* Un régime de bananes : n bananes en éventail, (x, yBas) = le bas */
+function regimeM(c,x,yBas,s=1,z=1,n=4){ if(z<=0) return; s*=Math.min(1.15,z);
+  /* une « main » de bananes : toutes partent de la tige (à gauche) et s'ouvrent en éventail vers la droite */
+  const w=200*s, sx=x-w*.45, sy=yBas-70*s;
+  for(let i=0;i<n;i++){ const a=-.75+i*(1.0/(Math.max(1,n-1))); 
+    bananeM(c,sx+Math.cos(a)*w*.5,sy+Math.sin(a)*w*.5,w,1,a); }
+  c.fillStyle='#5c3d00'; c.beginPath(); c.roundRect(sx-14*s,sy-26*s,24*s,48*s,6*s); c.fill(); }
+/* La liste des courses : une feuille blanche penchée, des lignes écrites (la dernière peut être en rouge) */
+function listeCraie(c,x,y,w,h,lignes,z=1){ if(z<=0) return; const k=Math.min(1.15,z); w*=k; h*=k;
+  c.save(); c.translate(x,y); c.rotate(-.04); c.fillStyle='#fffdf5'; c.strokeStyle='#adb5bd'; c.lineWidth=4;
+  c.beginPath(); c.rect(-w/2,-h/2,w,h); c.fill(); c.stroke();
+  c.strokeStyle='#a5d8ff'; c.lineWidth=2; for(let v=-h/2+70*k; v<h/2-10; v+=56*k){ c.beginPath(); c.moveTo(-w/2+14,v); c.lineTo(w/2-14,v); c.stroke(); }
+  c.restore();
+  lignes.forEach(([s,coul,fs],i)=>{ ecrire(c,s,x,y-h/2+52*k+i*56*k,(fs||46)*k,coul||'#343a40'); }); }
+/* Un gros camion de livraison (caisse jaune, cabine rouge) : (x, yBas) = le milieu, au sol ; s = 1 ≈ 460 px de long */
+function camionM(c,x,yBas,s=1,z=1,texte=''){ if(z<=0) return; s*=Math.min(1.15,z);
+  const L=330*s, H=190*s, cab=130*s, g=x-(L+cab)/2;
+  c.fillStyle='#ffd43b'; c.strokeStyle='#e67700'; c.lineWidth=5; c.beginPath(); c.roundRect(g,yBas-H-40*s,L,H,10*s); c.fill(); c.stroke();
+  c.fillStyle='#f03e3e'; c.strokeStyle='#a61e4d'; c.beginPath(); c.roundRect(g+L+6*s,yBas-150*s-40*s,cab,150*s,[30*s,30*s,8*s,8*s]); c.fill(); c.stroke();
+  c.fillStyle='#d0ebff'; c.beginPath(); c.roundRect(g+L+40*s,yBas-175*s,cab-55*s,60*s,8*s); c.fill();
+  c.fillStyle='#212529'; for(const u of [g+70*s,g+L-50*s,g+L+cab-45*s]){ c.beginPath(); c.arc(u,yBas-30*s,30*s,0,7); c.fill();
+    c.fillStyle='#adb5bd'; c.beginPath(); c.arc(u,yBas-30*s,11*s,0,7); c.fill(); c.fillStyle='#212529'; }
+  if(texte) ecrire(c,texte,g+L/2,yBas-40*s-H/2+28*s,90*s,'#212529'); }
+/* Un melon : une boule vert pâle rayée, (x, yBas) = le bas */
+function melonM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const r=80*s, y=yBas-r;
+  c.fillStyle='#c0eb75'; c.strokeStyle='#5c940d'; c.lineWidth=4; c.beginPath(); c.ellipse(x,y,r*1.1,r,0,0,7); c.fill(); c.stroke();
+  c.strokeStyle='#82c91e'; c.lineWidth=5; for(const u of [-.6,-.2,.2,.6]){ c.beginPath(); c.ellipse(x,y,r*1.1*Math.abs(u),r*.98,0,0,7); c.stroke(); }
+  c.strokeStyle='#5c3d00'; c.lineWidth=6; c.beginPath(); c.moveTo(x,y-r); c.lineTo(x+8*s,y-r-18*s); c.stroke(); }
+/* Un gâteau à la banane : un cake brun, des rondelles jaunes dessus, (x, yBas) = le bas */
+function gateauM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const w=170*s, h=80*s;
+  c.fillStyle='#c48a3c'; c.strokeStyle='#5c3d00'; c.lineWidth=4; c.beginPath(); c.roundRect(x-w/2,yBas-h,w,h,14*s); c.fill(); c.stroke();
+  c.fillStyle='#ffe066'; c.strokeStyle='#e67700'; c.lineWidth=2; for(const u of [-.32,0,.32]){ c.beginPath(); c.ellipse(x+u*w,yBas-h-2*s,18*s,9*s,0,0,7); c.fill(); c.stroke(); } }

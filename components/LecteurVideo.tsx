@@ -158,6 +158,10 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "5e-puissance-calculer-short": 4.17,
   "5e-puissance-litteral": 8.4,
   "5e-puissance-litteral-short": 4.18,
+  // Masses CE2 04 (21/11, 1re vidéo de la série avec manim/fin_commune.py) : paysage = milieu du silence
+  // après « point f r. » (145,63 → 146,58 s, mp4 de 154,32 s) ; short = « Mets » (52,29 s) + 0,03 s.
+  "ce2-masse-choisir-unite": 8.2,
+  "ce2-masse-choisir-unite-short": 4.22,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {

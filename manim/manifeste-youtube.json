@@ -103963,6 +103963,146 @@
       ],
       "pas_avant": "2026-11-25",
       "url": "https://youtube.com/shorts/QWuJ6Bmc_Y0"
+    },
+    {
+      "id": "ce2-masse-choisir-unite",
+      "pas_avant": "2027-06-13",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_choisir_unite",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite.mp4",
+      "miniature": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite.png",
+      "titre": "Letchi, sac de riz, camion : g, kg ou t ? — Choisir la bonne unité — épisode 4 · Maths CE2",
+      "accroche": "Tom est chauffeur routier : son gros camion livre des fruits et du riz aux magasins. Pour dire une masse, il faut choisir la bonne unité.\n\nDans cette vidéo :\n• un objet léger (un letchi : environ 20 g) se pèse en grammes\n• un objet qu'on porte (un sac de riz : 5 kg) se pèse en kilogrammes\n• un objet très lourd (un camion : 12 t) se pèse en tonnes\n• piège : un cartable de 3 t pèserait trois voitures ! Il pèse 3 kg\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : trouve l'unité : une banane pèse 150…, Tom pèse 80…, son camion chargé pèse 20…\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_choisir_unite&display=simple\n\n⚖️ Épisode 4 de la série Masses d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "g, kg ou t ?"
+        ],
+        [
+          "00:40",
+          "Question 1"
+        ],
+        [
+          "01:05",
+          "Le piège du cartable"
+        ],
+        [
+          "01:17",
+          "Question 2"
+        ],
+        [
+          "01:47",
+          "À toi de jouer"
+        ],
+        [
+          "02:02",
+          "Correction"
+        ],
+        [
+          "02:14",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "choisir l'unité",
+        "gramme",
+        "kilogramme",
+        "tonne",
+        "unité adaptée",
+        "camion",
+        "chauffeur routier",
+        "letchi",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:40",
+          "question": "Avec quelle unité pèse-t-on un camion ?",
+          "choix": [
+            "le gramme",
+            "la tonne",
+            "le kilogramme"
+          ],
+          "reponse": 1,
+          "explication": "Un camion est très lourd : on le pèse en tonnes."
+        },
+        {
+          "t": "01:17",
+          "question": "Un élève dit : ma gomme pèse 1 kilogramme. Qu'aurait-il dû dire ?",
+          "choix": [
+            "20 grammes",
+            "20 kilogrammes",
+            "1 tonne"
+          ],
+          "reponse": 0,
+          "explication": "Une gomme est légère : environ 20 grammes. 1 kilogramme, c'est une brique de lait !"
+        }
+      ],
+      "centres": [
+        "transports",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "ce2-masse-choisir-unite-short",
+      "pas_avant": "2027-06-13",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_choisir_unite",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-masse-choisir-unite",
+      "fichier": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite-short.mp4",
+      "miniature": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite-short-miniature.png",
+      "titre": "2 tonnes de bananes sur la liste des courses ? #maths #ce2",
+      "accroche": "Mon copain écrit la liste des courses : 2 tonnes de bananes ! Le camion de livraison arrive… et il bouche toute la rue !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : combien pèse un melon, à ton avis, en grammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_choisir_unite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce2 #primaire",
+      "tags": [
+        "masse",
+        "tonne",
+        "kilogramme",
+        "bananes",
+        "unités",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:12",
+          "question": "Il voulait écrire…",
+          "choix": [
+            "2 tonnes",
+            "2 kilogrammes",
+            "2 grammes"
+          ],
+          "reponse": 1,
+          "explication": "2 kilogrammes de bananes, ça tient dans un sac. 2 tonnes, il faut un camion !"
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
     }
   ]
 }
