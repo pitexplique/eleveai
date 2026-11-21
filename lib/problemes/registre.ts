@@ -330,6 +330,10 @@ import e1reExpoSuiteGeometrique from "./premiere/expo_suite_geometrique";
 import e1reExpoSuiteTermeGeneral from "./premiere/expo_suite_terme_general";
 import e1reExpoFonction from "./premiere/expo_fonction";
 import e1reExpoFonctionLecture from "./premiere/expo_fonction_lecture";
+import eTleDenombrementCombinatoire from "./terminale-spe/denombrement_combinatoire";
+import eTleGeometrieEspace from "./terminale-spe/geometrie_espace";
+import eTleProduitScalaireEspace from "./terminale-spe/produit_scalaire_espace";
+import eTleSuiteNumerique from "./terminale-spe/suite_numerique";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -671,6 +675,12 @@ const TOUTES: ProblemesNotion[] = [
   e1reExpoFonction,
   e1reExpoFonctionLecture,
   // fin Première
+  // Terminale
+  eTleDenombrementCombinatoire,
+  eTleGeometrieEspace,
+  eTleProduitScalaireEspace,
+  eTleSuiteNumerique,
+  // fin Terminale
 ];
 
 const PAR_CLE = new Map(TOUTES.map((n) => [`${n.classe}/${n.notionId}`, n]));
