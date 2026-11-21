@@ -157,6 +157,10 @@ import eCm1Graphique from "./cm1/graphique";
 import eCm1Probabilite from "./cm1/probabilite";
 import eCm1TrierClasser from "./cm1/trier_classer";
 import eCm1Algorithmique from "./cm1/algorithmique";
+import eCe2NombreEntier from "./ce2/nombre_entier";
+import eCe2SuiteNombre from "./ce2/suite_nombre";
+import eCe2AdditionSoustraction from "./ce2/addition_soustraction";
+import eCe2Multiplication from "./ce2/multiplication";
 // 3e (imports)
 import e3eFractionRationnel from "./3e/fraction_rationnel";
 import e3eEntierPuissance from "./3e/entier_puissance";
@@ -186,6 +190,12 @@ import e3eRelationsMetriques from "./3e/relations_metriques";
 import e3eAlgoProgrammation from "./3e/algo_programmation";
 
 const TOUTES: ProblemesNotion[] = [
+  // CE2
+  eCe2NombreEntier,
+  eCe2SuiteNombre,
+  eCe2AdditionSoustraction,
+  eCe2Multiplication,
+  // fin CE2
   // CM1
   eCm1NombreEntier,
   eCm1Suite,
