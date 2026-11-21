@@ -385,6 +385,10 @@ import eStmgAutoEquations from "./stmg/auto_equations";
 import eStmgAutoSignes from "./stmg/auto_signes";
 import eStmgAutoFormules from "./stmg/auto_formules";
 import eStmgAutoLectureGraphique from "./stmg/auto_lecture_graphique";
+import eStmgAutoResolutionGraphique from "./stmg/auto_resolution_graphique";
+import eStmgAutoDroites from "./stmg/auto_droites";
+import eStmgAutoDonneesGraphiques from "./stmg/auto_donnees_graphiques";
+import eStmgSuiteNotation from "./stmg/suite_notation";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -786,6 +790,10 @@ const TOUTES: ProblemesNotion[] = [
   eStmgAutoSignes,
   eStmgAutoFormules,
   eStmgAutoLectureGraphique,
+  eStmgAutoResolutionGraphique,
+  eStmgAutoDroites,
+  eStmgAutoDonneesGraphiques,
+  eStmgSuiteNotation,
   // fin STMG
 ];
 
