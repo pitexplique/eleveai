@@ -76,28 +76,33 @@ assert equation_plan(0, 1, 0, -1) == "y − 1 = 0"
 
 
 def jean_bernard(s=1.0):
-    """Le charpentier : casquette à visière, barbe courte, chemise à carreaux, équerre.
-    ⛔ Piège n° 17 de la série des entiers : un accessoire de la couleur des cheveux
-    disparaît dans les cheveux. La casquette est ROUGE et la barbe plus claire que les
-    cheveux, pour que les trois restent trois choses."""
+    """Le charpentier : casquette rouge à visière, chemise à carreaux, équerre.
+
+    ⛔⛔ TROIS DÉFAUTS VUS SEULEMENT AU GROS PLAN, sur la première version :
+    1. la visière partait de x = −0,10, c'est-à-dire DANS le visage (la tête est un
+       disque de rayon 0,32 centré en 0) : elle barrait la figure comme un bandeau.
+       Elle part maintenant du BORD de la tête et file vers l'extérieur ;
+    2. la barbe, en #8a6a4a sur une peau en #c68642, se lisait comme un second menton —
+       c'est le piège n° 17 de la série des entiers (un accessoire de la couleur de ce
+       qu'il touche disparaît dedans). Elle est SUPPRIMÉE : les deux autres personnages
+       de la série n'ont pas de traits de visage non plus ;
+    3. les carreaux (3 lignes × 2 colonnes, trait 3, en clair) faisaient une FENÊTRE.
+       Deux traits fins et sourds suffisent à dire « chemise à carreaux »."""
     tete = Circle(radius=0.32, fill_color=PEAU, fill_opacity=1, stroke_width=0).move_to(P(0, 1.05))
-    barbe = Arc(radius=0.33, start_angle=PI + 0.25, angle=PI - 0.5, stroke_color="#8a6a4a",
-                stroke_width=11)
-    barbe.move_to(tete.get_bottom() + UP * 0.06)
-    calotte = Arc(radius=0.36, start_angle=0.08, angle=PI - 0.16, stroke_color="#b91c1c",
+    calotte = Arc(radius=0.36, start_angle=0.12, angle=PI - 0.24, stroke_color="#b91c1c",
                   stroke_width=15)
-    calotte.move_to(tete.get_top() + DOWN * 0.04)
-    visiere = Polygon(P(-0.10, 1.26), P(-0.62, 1.20), P(-0.60, 1.11), P(-0.10, 1.15),
+    calotte.move_to(tete.get_top() + DOWN * 0.05)
+    # ⚠️ La visière commence à x = −0,31 : le bord gauche de la tête, pas son milieu.
+    visiere = Polygon(P(-0.31, 1.30), P(-0.78, 1.23), P(-0.77, 1.14), P(-0.31, 1.18),
                       fill_color="#b91c1c", fill_opacity=1, stroke_width=0)
     corps = RoundedRectangle(width=1.05, height=1.24, corner_radius=0.3, fill_color="#0f766e",
                              fill_opacity=1, stroke_width=0).move_to(P(0, 0.08))
-    carreaux = VGroup(*[Line(P(-0.5, y), P(0.5, y), stroke_width=3, color="#99f6e4")
-                        for y in (0.42, 0.06, -0.3)],
-                      *[Line(P(x, 0.62), P(x, -0.48), stroke_width=3, color="#99f6e4")
-                        for x in (-0.22, 0.22)])
+    carreaux = VGroup(Line(P(-0.5, 0.26), P(0.5, 0.26), stroke_width=2.5, color="#2dd4bf"),
+                      Line(P(-0.5, -0.16), P(0.5, -0.16), stroke_width=2.5, color="#2dd4bf"),
+                      Line(P(0.02, 0.62), P(0.02, -0.48), stroke_width=2.5, color="#2dd4bf"))
     equerre = VGroup(Line(P(0.52, -0.42), P(0.52, 0.32), stroke_width=7, color=GREY_B),
                      Line(P(0.52, -0.42), P(1.12, -0.42), stroke_width=7, color=GREY_B))
-    return VGroup(corps, carreaux, equerre, tete, barbe, calotte, visiere).scale(s)
+    return VGroup(corps, carreaux, equerre, tete, calotte, visiere).scale(s)
 
 
 def pan_toiture(s=1.0):
@@ -323,33 +328,38 @@ class EspacePlanEquationBase(EcransEspace):
         self.play(FadeIn(q, shift=RIGHT * 0.1), run_time=0.45)
         self.q_montrer_choix(cartes)
         self.q_pause(pause, rebours, "04", t0, "C")
-        self.mem_q1 = (r, plan, cartes, pause, rebours)
+        self.mem_q1 = (r, ax, plan, cartes, pause, rebours)
 
     def ecran_reponse1(self):
-        r, plan, cartes, pause, rebours = self.mem_q1
+        r, ax, plan, cartes, pause, rebours = self.mem_q1
         self.dire("04b-reponse")
         self.q_reponse(cartes, 2, pause, rebours)
         fs = 28
+        # ⛔⛔ VU AU GROS PLAN : posées sous l'équation, les trois lignes de calcul
+        # TRAVERSAIENT le repère et le plan — c'est le défaut n° 6 de l'épisode 1, que
+        # la planche ne montre pas (elle prend la dernière image, où tout se recouvre).
+        # ⭐ Ici la figure a fini son travail : elle a montré ce qu'est P sur l'écran de
+        # question. L'écran de réponse est algébrique, on lui rend la place.
+        self.play(FadeOut(ax), FadeOut(plan), run_time=0.3)
         # ⛔ xmax = 1,6 : rien n'entre dans la colonne des cartes, qui commence à 2,2.
         self.au_fin("1 plus 1 moins 1 moins 1 fait zéro")
         l1 = self.gauche(VGroup(self.trip(C04[2], fs, VERT_OK), self.t(":", fs, GREY_A),
                                 self.eq_zero("1 + 1 − 1 − 1", fs, VERT_OK))
-                         .arrange(RIGHT, buff=0.22), -0.35, xmax=1.6)
-        pc = Dot(r.pt(*C04[2]), radius=0.1, color=VERT_OK)
-        self.play(FadeIn(l1, shift=RIGHT * 0.12), FadeIn(pc, scale=2), run_time=0.55)
+                         .arrange(RIGHT, buff=0.3), 0.70, xmax=1.6)
+        self.play(FadeIn(l1, shift=RIGHT * 0.12), run_time=0.55)
         self.au_fin("1 plus 2 moins 3 moins 1 fait moins 1")
         l2 = self.gauche(VGroup(self.trip(C04[0], fs, C_PIEGE), self.t(":", fs, GREY_A),
                                 self.t("1 + 2 − 3 − 1 = −1", fs, C_PIEGE))
-                         .arrange(RIGHT, buff=0.22), -1.15, xmax=1.6)
+                         .arrange(RIGHT, buff=0.3), -0.05, xmax=1.6)
         self.play(FadeIn(l2, shift=RIGHT * 0.12), run_time=0.5)
         self.au_fin("2 plus 0 moins 0 moins 1 fait 1")
         l3 = self.gauche(VGroup(self.trip(C04[1], fs, C_PIEGE), self.t(":", fs, GREY_A),
                                 self.t("2 + 0 − 0 − 1 = 1", fs, C_PIEGE))
-                         .arrange(RIGHT, buff=0.22), -1.95, xmax=1.6)
+                         .arrange(RIGHT, buff=0.3), -0.80, xmax=1.6)
         self.play(FadeIn(l3, shift=RIGHT * 0.12), run_time=0.5)
         self.au_mot("Un résultat proche de zéro")
         chute = self.gauche(self.t("un résultat proche de zéro reste un refus", 30, C_REGARD),
-                            -2.95, xmax=1.6)
+                            -1.75, xmax=1.6)
         self.play(FadeIn(chute, shift=UP * 0.1), run_time=0.6)
         self.attendre_voix(marge=0.5)
 
@@ -445,9 +455,11 @@ class EspacePlanEquationBase(EcransEspace):
         self.play(Create(ax), run_time=0.4)
         self.au_mot("L'équation z égale zéro")
         sol = r.plan((0, 0, 1), d=0, centre=(2, 2, 0), demi=2.0, couleur=C_PLAN, op=0.26)
+        # ⚠️ Posée au coin le plus à DROITE du plan, l'étiquette s'appuyait sur son bord.
+        # Décalée en diagonale, elle s'en détache sans s'approcher de l'axe des x.
         z0 = self.sans_audit(self.t("z = 0", 28, C_PLAN)
                              .move_to(r.pt(*max(sol.coins, key=lambda k: float(r.pt(*k)[0])))
-                                      + RIGHT * 0.42))
+                                      + UR * 0.38))
         self.play(FadeIn(sol[0]), FadeIn(z0), run_time=0.7)
         self.au_fin("le sol tout entier")
         lsol = self.gauche(VGroup(self.t("le sol tout entier,", fs, WHITE),
@@ -541,15 +553,18 @@ class EspacePlanEquationBase(EcransEspace):
         self.play(FadeIn(para, shift=RIGHT * 0.1), run_time=0.5)
         # ⚠️ Court et étroit : sous y = −1,95, col() rétrécit tout ce qui dépasse x = 5,3
         # pour protéger Ti-Margo. « x et z sont libres » tient en 3,0.
+        # ⛔ VU AU GROS PLAN : posé à −1,55, ce bloc s'écrivait SUR la carte C. Les trois
+        # cartes de cet écran (une ligne chacune, question de trois lignes) descendent à
+        # y = −1,33 : il faut passer DESSOUS.
         self.au_mot("x et z sont totalement libres")
         libre = self.col(VGroup(self.t("x et z", 30, C_REGARD),
                                 self.t("sont libres", 30, C_REGARD))
-                         .arrange(DOWN, aligned_edge=LEFT, buff=0.08), -1.55)
+                         .arrange(DOWN, aligned_edge=LEFT, buff=0.08), -2.00)
         self.play(FadeIn(libre, shift=RIGHT * 0.1), run_time=0.5)
         self.au_mot("qui font une surface, pas une ligne")
         deux = self.col(VGroup(self.t("deux libertés,", 26, VERT_OK),
                                self.t("une surface", 26, VERT_OK))
-                        .arrange(DOWN, aligned_edge=LEFT, buff=0.08), -2.55)
+                        .arrange(DOWN, aligned_edge=LEFT, buff=0.08), -2.85)
         self.play(FadeIn(deux, shift=UP * 0.1), run_time=0.5)
         self.attendre_voix(marge=0.5)
 
@@ -620,11 +635,18 @@ class EspacePlanEquationBase(EcransEspace):
         tete = VGroup(pastille_pause(0.38), self.t("À toi de jouer !", 42, ORANGE_RETENUE))
         tete.arrange(RIGHT, buff=0.25).to_edge(UP, buff=0.5)
         self.play(FadeIn(tete, shift=DOWN * 0.12), run_time=0.5)
-        r, ax = self.repere(o=(-4.6, -1.5), u=0.62, portee=3)
+        # ⚠️ Repère remonté (mesuré au gros plan) : à y = −1,5 le morceau de plan
+        # descendait sur les deux lignes que la correction écrit en bas à gauche.
+        r, ax = self.repere(o=(-4.6, -0.9), u=0.62, portee=3)
         self.play(Create(ax), run_time=0.4)
         # ⛔ Le plan est la DONNÉE, les deux points sont la QUESTION : on ne les place
         # pas, sinon le dessin répond à la place de l'élève. Ils arrivent en 09b.
-        plan = r.plan(P09[:3], d=P09[3], centre=(1, 0, 2), demi=1.8, couleur=C_PLAN, op=0.22)
+        # ⚠️ Centré sur le MILIEU de [A B], et non sur un point pris au hasard : A et B
+        # sont alors à 1,22 du centre, bien à l'intérieur du morceau — vu au gros plan,
+        # centré en (1 ; 0 ; 2) B tombait pile sur le bord, et son étiquette avec.
+        plan = r.plan(P09[:3], d=P09[3],
+                      centre=tuple((A09[i] + B09[i]) / 2 for i in range(3)),
+                      demi=1.5, couleur=C_PLAN, op=0.22)
         self.au_fin("2 x moins 3 y plus z moins 4 égale zéro")
         eqP = self.col(VGroup(self.t("P :", 32, C_PLAN),
                               self.eq_plan(*P09, fs=32, color=C_PLAN)).arrange(RIGHT, buff=0.2), 2.40)
@@ -661,12 +683,12 @@ class EspacePlanEquationBase(EcransEspace):
         self.au_fin("2 fois 2, moins 3 fois 0, plus 0, moins 4")
         a1 = self.col(VGroup(self.t("A :", fs, C_REGARD),
                              self.t("2 × 2 − 3 × 0 + 0 − 4", fs, WHITE)).arrange(RIGHT, buff=0.22),
-                      -0.25)
+                      0.30)
         self.play(FadeIn(a1, shift=RIGHT * 0.12), run_time=0.55)
         self.au_fin("Donc 4 moins 4, égale zéro")
         a2 = self.col(VGroup(self.eq_zero("4 − 4", fs + 2, VERT_OK),
                              self.t(":  A est dans P", fs, VERT_OK)).arrange(RIGHT, buff=0.22),
-                      -0.95)
+                      -0.40)
         self.play(FadeIn(a2, scale=1.1), Flash(pa[0], color=VERT_OK, line_length=0.22),
                   run_time=0.6)
 
@@ -685,10 +707,13 @@ class EspacePlanEquationBase(EcransEspace):
         self.au_fin("Zéro plus 3 plus 1 moins 4 fait zéro")
         b1 = self.col(VGroup(self.t("B :", fs, C_VECTEUR2),
                              self.eq_zero("0 + 3 + 1 − 4", fs, VERT_OK)).arrange(RIGHT, buff=0.22),
-                      -1.70)
+                      -1.10)
         self.play(FadeIn(b1, shift=RIGHT * 0.12), run_time=0.55)
         self.au_mot("B est dans P aussi")
-        b2 = self.col(self.t("B est dans P aussi", 30, VERT_OK), -2.40)
+        # ⚠️ −1,75 et pas plus bas : sous y = −1,95, col() rétrécit à 3,1 de large tout
+        # ce qui dépasse x = 5,3, pour protéger Ti-Margo — et la CONCLUSION de l'écran
+        # deviendrait son plus petit texte (le défaut n° 4 de l'épisode 3).
+        b2 = self.col(self.t("B est dans P aussi", 30, VERT_OK), -1.75)
         self.play(FadeIn(b2, scale=1.1), Flash(pb[0], color=VERT_OK, line_length=0.22),
                   run_time=0.6)
         self.attendre_voix(marge=0.6)

@@ -155,7 +155,58 @@ lignes · 1:28 question 1 · 1:52 réponse · 2:17 tester un point · 2:48 le pi
 
 ---
 
-## E4 à E12 — ⏳ en attente de leur rendu HD
+## E4 · `terminale-espace-plan-equation` — ✅ rendu HD fait
+
+`manim/sorties/terminale/maths/geometrie/espace-plan-equation/eleveai-maths-terminale-espace-plan-equation.mp4`
+6 min 09 (369,1 s) · 23,5 Mo · **0 instant qui touche un bord** · planche HD regardée.
+⭐ Marques vérifiées inchangées depuis le correctif du « 0,5 » (`30bf5f3ff`) : 826 marques,
+fichier identique — le rendu est calé sur des marques à jour.
+⭐ `grep -c "self\.au_t("` → **0** : aucun instant relevé à la main, donc rien qui se
+périme si la voix est régénérée (piège n° 37 de la série des entiers).
+
+```json
+{
+  "id": "terminale-espace-plan-equation",
+  "notionId": "geometrie_espace",
+  "microId": "espace_plan_equation",
+  "classe": "terminale-spe",
+  "ceinture": "verte",
+  "serie": "Maths Tle spé",
+  "type": "longue",
+  "fichier": "terminale/maths/geometrie/espace-plan-equation/eleveai-maths-terminale-espace-plan-equation.mp4",
+  "miniature": "terminale/maths/geometrie/espace-plan-equation/eleveai-maths-terminale-espace-plan-equation.png",
+  "titre": "Une seule ligne décrit un plan entier — Équation cartésienne · Tle spé",
+  "centres": ["sciences"],
+  "tags": ["équation cartésienne", "plan", "espace", "coefficients", "terminale", "bac"]
+}
+```
+
+**Accroche** (à relire par Frédéric avant publication) :
+
+> Jean-Bernard est charpentier. Quand il pose un pan de toiture, il travaille sur une
+> surface parfaitement plate, ni horizontale ni verticale. Pour dire à la machine de découpe
+> où se trouve ce pan, il ne lui donne pas des milliers de points : il lui donne une
+> équation. Une seule ligne, et le plan entier est décrit.
+>
+> Dans cette vidéo :
+> • tout plan de l'espace a une équation de la forme a x + b y + c z + d = 0
+> • un point y appartient si et seulement si ses coordonnées ANNULENT l'équation —
+>   pas « presque zéro » : zéro
+> • on trouve le terme constant d en remplaçant par un point connu
+> • le piège, et il est énorme : dans l'espace, UNE équation donne un PLAN, jamais une
+>   droite — « z = 0 » n'est pas un point de hauteur nulle, c'est le sol tout entier
+> • la rédaction du bac en trois lignes, dont la vérification qui attrape les erreurs de signe
+>
+> Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
+
+**Chapitres**, relevés sur le rendu :
+0:00 garde · 0:11 Jean-Bernard · 0:34 une équation, un plan · 1:08 si et seulement si ·
+1:25 question 1 · 1:47 réponse · 2:12 trouver l'équation · 2:48 le piège · 3:26 question 2 ·
+3:45 réponse · 4:15 au bac · 4:39 à toi de jouer · 5:03 correction · 5:39 ce que tu as appris.
+
+---
+
+## E5 à E12 — ⏳ en attente de leur rendu HD
 
 Les identifiants sont fixés et doivent rester ceux-là (c'est sur eux que le coach
 branchera) :

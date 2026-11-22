@@ -32,7 +32,7 @@
 | E1 `espace_vecteurs` | ✅ **HD livré** (5 min 02, 0 bord, planche HD regardée) |
 | E2 `espace_repere_coordonnees` | ✅ **HD livré** (5 min 54, 0 bord, planche HD regardée) |
 | E3 `espace_droite_parametrique` | ✅ **HD livré** (5 min 56, 0 bord, planche HD regardée) |
-| E4 `espace_plan_equation` | ⏳ **script écrit, les DEUX contrôles d'avant-rendu passés — jamais rendu, jamais regardé à l'image** |
+| E4 `espace_plan_equation` | ✅ **HD livré** (6 min 09, 0 bord, planche HD regardée) |
 | les 8 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
 | les 12 shorts | ⏳ pas de voix encore |
 | les rendus HD, le branchement coach, les fiches YouTube | ⏳ |
@@ -56,27 +56,15 @@ ls manim/sorties/terminale/maths/geometrie/*/*.mp4   # les HD livrés
 python manim/poste2/verifier-voix-espace.py          # 12 voix, 15 clips, lettres A 8 B 8 C 8
 ```
 
-**Le prochain geste, sans réfléchir** : **RENDRE E4 en `-ql` et le regarder à l'image.**
-`manim/scripts/terminale/espace_plan_equation.py` est écrit et ses deux contrôles d'avant-rendu
-sont passés — `verifier-avant-rendu.py` « 0 problème », et le dry run `-qh` donne **0 BORD,
-0 AUDIT-AVANCE, 0 RETARD, 15 écrans, 1 seul AUDIT-ABSENT** (celui de `@eleveai974`). ⛔⛔ Mais
-**personne ne l'a encore regardé** : sur E1, E2 et E3, c'est exactement à ce stade que la
-moitié des défauts attendaient, et AUCUN outil ne les voit. Donc, dans l'ordre : rendu `-ql`,
-puis **planche ET gros plans** (clips `04b`, `07b`, `09b`), 2 à 4 tours de corrections, puis le
-HD sous le verrou, puis la fiche YouTube.
-⚠️ Les écrans à regarder en premier sur E4, parce qu'ils sont les plus chargés : `05-appliquer`
-(six lignes de calcul dans la colonne de droite), `06-piege` (deux plans dans le même repère,
-plus six textes), et `09b-correction` (qui hérite de l'écran de défi — piège de l'épisode 3).
-⚠️ Le dessin de Jean-Bernard (casquette, barbe, équerre) n'a jamais été vu non plus.
-
-*Et après E4* : écrire `espace_position_relative.py` (E5).
-Tout l'attend — sa voix, ses WAV, ses marques, le socle. Le modèle le plus propre est
-maintenant **`espace_droite_parametrique.py` (E3)** : il ne contient que ses 15 écrans, il
-emploie `au_fin` partout où un triplet s'affiche, et chaque `sans_audit` y porte sa raison
-écrite à côté. ⭐ E4 écrit lui aussi un **système** : `self.systeme(...)` et
-`ligne_param(...)` sont dans le socle, déjà payés.
-⛔ **Lire d'abord la section « Ce que l'épisode 3 a appris » plus bas** : ses six leçons
-valent pour les neuf épisodes qui restent, et quatre d'entre elles ne se voient qu'à l'image.
+**Le prochain geste, sans réfléchir** : écrire `espace_position_relative.py` (E5).
+Tout l'attend — sa voix dans `manim/poste2/VOIX-espace-terminale.md`, ses WAV, ses marques,
+et un socle qui a maintenant tout ce qu'il faut : `systeme`, `ligne_param`, `eq_plan`,
+`eq_zero`, `choix3`, `au_fin`, `trip(par=True)`.
+⭐ Le modèle le plus propre est **`espace_plan_equation.py` (E4)** : quinze écrans, chaque
+`sans_audit` porte sa raison écrite à côté, et chaque correction d'image est commentée à
+l'endroit où elle a été payée.
+⛔ Lire d'abord « Ce que l'épisode 3 a appris » et « Ce que l'épisode 4 a confirmé » plus
+bas : ensemble elles disent où regarder en premier, et ce qu'aucun outil ne voit.
 
 **L'ordre pour chaque épisode, sans en sauter un :**
 
@@ -309,6 +297,36 @@ DEUX lignes la carte la ramenait à 15 px (le défaut n° 4 de l'épisode 1). Su
    rétrécit à 3,1 tout ce qui descend sous y = −1,95 en dépassant x = 5,3 (il protège
    Ti-Margo). « B est bien sur la droite d » y est passé. ⭐ **Le bas de la colonne de droite
    est réservé aux lignes COURTES ; une conclusion va à gauche, sous le repère, en grand.**
+
+---
+
+## ⚠️ Ce que l'épisode 4 a confirmé (22/11/2026)
+
+Rien de neuf dans les causes : **les six défauts de E4 étaient tous des répétitions** de ce
+que les épisodes 1 et 3 avaient déjà payé. C'est en soi le résultat — la liste tient, il
+suffit de la relire AVANT d'écrire, et pas après le rendu.
+
+| Ce qui a été vu à l'image, sur E4 | Où c'était déjà écrit |
+|---|---|
+| trois lignes de calcul traversant le repère et le plan (écran 04b) | défaut n° 6 de E1 |
+| « x et z sont libres » posé SUR la carte C (écran 07b) | défaut n° 1 de E3 |
+| un garde-fou de bord appelé APRÈS le `play` qu'il devait protéger (écran 01) | défaut n° 7 de E1 |
+| un `SurroundingRectangle` dont le buff déborde la colonne que `col()` venait de borner | nouveau — **et il frappe des DEUX côtés** : `col()` comme `gauche()` bornent le TEXTE, pas le cadre. ⭐ On pose le GROUPE texte + cadre |
+| un morceau de plan centré sur un COIN : le point B tombait pile sur son bord, avec son étiquette | nouveau — ⭐ centrer le morceau sur le MILIEU des points qu'il doit contenir |
+| une casquette dont la visière partait du MILIEU du visage, et une barbe de la couleur de la peau | piège n° 17 des entiers, deux fois dans le même dessin |
+
+⭐⭐ **Et la seule leçon vraiment neuve : un personnage ne se juge qu'EN GRAND.** Sur la
+planche à trois colonnes, Jean-Bernard paraissait correct ; agrandi 2,4 fois, la visière
+lui barrait la figure, la barbe faisait un second menton et les carreaux de sa chemise
+faisaient une fenêtre. ⛔ **Chaque épisode a son personnage, et aucun n'avait jamais été
+regardé de près.** Le recadrage coûte trois lignes de PIL sur une image déjà extraite :
+
+```
+im.crop((0, h*0.08, w*0.34, h*0.72)).resize(…, Image.LANCZOS)
+```
+
+✅ Confirmé aussi, pour la troisième fois : un `AUDIT-AVANCE` de **0,07 s** en `-ql`
+disparaît en `-qh` — c'est la quantification à 15 images par seconde, pas un défaut.
 
 ---
 
