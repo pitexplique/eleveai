@@ -75,6 +75,12 @@ class IdentLierShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
             self.play(*[FadeIn(a) for a in atomes], *ex, run_time=max(d, 0.2) if ex else d)
         return e
 
+    def egales(self, specs):
+        """Des lignes à la même échelle : la plus large tient en 3,95, les autres prennent la même taille."""
+        es = [E(s, fs, c, lettres=lt) for s, y, fs, c, lt in specs]
+        k = min([1.0] + [3.95 / e.width for e in es])
+        return [e.scale(k).move_to(P(0, sp[1])) for e, sp in zip(es, specs)]
+
     monter_reponse = FactoSimpleShort4e.monter_reponse  # la bonne carte monte, la réponse grandit
 
     def construct(self):
@@ -86,7 +92,7 @@ class IdentLierShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
 
         # ── 00 : l'accroche : seulement 25 ? ──
         self.dire("00-accroche")
-        fig = Terrasse(1.55, 0.74, centre=P(0.2, 1.3))
+        fig = Terrasse(1.35, 0.65, centre=P(0.2, 1.28))  # 22/11 : plus bas, ne couvre plus « Ceinture jaune »
         hx = fig.accolade(DOWN, ("bx",), "x", 30)
         h5 = fig.accolade(DOWN, ("bb",), "5", 30)
         gx = fig.accolade(LEFT, ("xx",), "x", 30)
@@ -97,7 +103,7 @@ class IdentLierShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
         l1 = self.l("Un carré de côté x.", -0.85, 42, lettres="x")
         self.dit_avec(l1, "Un carré de côté x.", {idx(l1, "x"): lambda: [
             FadeIn(fig.p["xx"], scale=0.8), GrowFromCenter(gx[0]), FadeIn(gx[1])]})
-        l2 = self.l("On allonge chaque côté de 5.", -1.5, 38)
+        l2 = self.l("Chaque côté : + 5.", -1.5, 42)  # 22/11 : la phrase entière rétrécissait
         self.dit_avec(l2, "On allonge chaque côté de 5.", {idx(l2, "5"): lambda: [
             GrowFromEdge(fig.p["xb"], LEFT), GrowFromEdge(fig.p["bx"], UP), GrowFromEdge(fig.p["bb"], UP),
             GrowFromCenter(hx[0]), FadeIn(hx[1]), GrowFromCenter(h5[0]), FadeIn(h5[1]),
@@ -121,16 +127,15 @@ class IdentLierShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
         exx = fig.etiquette("xx", "x²", 44)
         e1 = fig.etiquette("xb", "5x", 28)
         e2 = fig.etiquette("bx", "5x", 28)
-        d1 = self.l("Le carré de départ : x².", -0.85, 40, lettres="x")
+        # 22/11 : les 4 lignes à la même taille (celle de la plus large).
+        d1, d2, d3, d4 = self.egales([("Le carré : x².", -0.85, 42, WHITE, "x"), ("Le coin : 5 × 5 = 25.", -1.5, 42, WHITE, ""),
+                                      ("Deux bandes de 5x,", -2.15, 42, WHITE, "x"), ("qu'on oublie souvent !", -2.8, 42, PIEGE, "")])
         self.dit_avec(d1, "Le carré de départ : x au carré.", {idx(d1, "²"): lambda: [
             fig.remplir("xx"), FadeIn(exx, scale=1.3)]})
-        d2 = self.l("Le coin : 5 × 5 = 25.", -1.5, 40)
         self.dit_avec(d2, "Le coin : 5 fois 5, 25.", {idx(d2, "25"): lambda: [
             fig.remplir("bb"), e25.animate.set_opacity(1)]})
-        d3 = self.l("Et deux bandes de 5x,", -2.15, 40, lettres="x")
         self.dit_avec(d3, "Et deux bandes de 5 x,", {idx(d3, "5"): lambda: [
             fig.remplir("xb"), fig.remplir("bx"), FadeIn(e1, scale=1.3), FadeIn(e2, scale=1.3)]})
-        d4 = self.l("qu'on oublie souvent !", -2.8, 42, PIEGE)
         self.dit(d4, "qu'on oublie souvent !")
         self.play(Wiggle(VGroup(fig.p["xb"], e1)), Wiggle(VGroup(fig.p["bx"], e2)), run_time=0.5)
         self.play(FadeOut(VGroup(d1, d2, d3, d4)), run_time=0.3)
@@ -159,12 +164,13 @@ class IdentLierShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
             sc.monter_reponse(0)
             sc.ph_eq(0, "Réponse A :", "Réponse A :", premier=True)
             sc.ph_eq(1, "x² + 2x + 1.", "x au carré plus 2 x plus 1.", lettres="x")
-            sc.ph_eq(2, "Deux bandes de x : 2x.", "Deux bandes de x : 2 x.", lettres="x")
+            sc.ph_eq(2, "Deux bandes", "Deux bandes", lettres="")
+            sc.ph_eq(3, "de x : 2x.", "de x : 2 x.", lettres="x")
             sc.rep_fini()
 
         self.question_pause("01q-question", "01r-reponse", ["(x + 1)²,", "ça fait combien ?"],
                             [Eq("x² + 2x + 1", 34), Eq("x² + 1", 34), Eq("x² + x + 1", 34)], 0,
-                            ["Réponse A :", "x² + 2x + 1.", "Deux bandes de x : 2x."],
+                            ["Réponse A :", "x² + 2x + 1.", "Deux bandes", "de x : 2x."],
                             avant_q=avant, autres_r=apres)
 
         # ── 02 : la question en commentaire (fin commune, sans Ti-Margo) ──

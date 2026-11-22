@@ -238,25 +238,33 @@ class IdentLier4e(PaysageRel):
         fig = Terrasse(2.3, 1.0, centre=P(-1.95, -0.6))
         hx, h4, gx, g4 = fig.cotes("x", "4", 34)
         tot = fig.accolade(DOWN, ("bx", "bb"), "x + 4", 36)
-        l1 = self.lg("Une cliente a une terrasse carrée,", 3.45, 2.9, 42, maxw=6.3)
-        self.dit(l1, "Une cliente a une terrasse carrée,", avec=[FadeIn(fig.p["xx"], scale=0.8)])
-        l2 = self.lg("de x mètres de côté.", 3.45, 2.3, 42, lettres="x", maxw=6.3)
+        # 22/11 : lignes courtes et aérées, en deux temps (les longues rétrécissaient sous maxw).
+        l1 = self.lg("Une cliente a", 3.55, 2.8, 42, maxw=6.6)
+        self.dit(l1, "Une cliente a")
+        l1b = self.lg("une terrasse carrée,", 3.55, 2.1, 42, maxw=6.6)
+        self.dit(l1b, "une terrasse carrée,", avec=[FadeIn(fig.p["xx"], scale=0.8)])
+        l2 = self.lg("de x mètres de côté.", 3.55, 1.4, 42, lettres="x", maxw=6.6)
         self.dit_avec(l2, "de x mètres de côté.", {1: lambda: [GrowFromCenter(hx[0]), FadeIn(hx[1]),
                                                                GrowFromCenter(gx[0]), FadeIn(gx[1])]})
-        l3 = self.lg("Elle veut l'agrandir :", 3.4, 1.45, 38, CIEL, maxw=6.0)
+        l3 = self.lg("Elle veut l'agrandir :", 3.55, 0.55, 42, CIEL, maxw=6.6)
         self.dit(l3, "Elle veut l'agrandir :")
-        l4 = self.lg("4 mètres de plus dans un sens,", 3.45, 0.85, 42, maxw=6.3)
-        self.dit_avec(l4, "4 mètres de plus dans un sens,",
+        self.play(FadeOut(VGroup(l1, l1b, l2, l3)), run_time=0.25)
+        l4 = self.lg("4 mètres de plus", 3.55, 2.8, 42, maxw=6.6)
+        self.dit_avec(l4, "4 mètres de plus",
                       {0: lambda: [GrowFromEdge(fig.p["xb"], LEFT), GrowFromCenter(h4[0]), FadeIn(h4[1])]})
-        l5 = self.lg("et 4 mètres de plus dans l'autre.", 3.45, 0.25, 42, maxw=6.3)
-        self.dit_avec(l5, "et 4 mètres de plus dans l'autre.",
+        l4b = self.lg("dans un sens,", 3.55, 2.1, 42, maxw=6.6)
+        self.dit(l4b, "dans un sens,")
+        l5 = self.lg("et 4 mètres de plus", 3.55, 1.3, 42, maxw=6.6)
+        self.dit_avec(l5, "et 4 mètres de plus",
                       {1: lambda: [GrowFromEdge(fig.p["bx"], UP), GrowFromEdge(fig.p["bb"], UP),
                                    GrowFromCenter(g4[0]), FadeIn(g4[1])]})
-        l6 = self.lg("La nouvelle terrasse", 3.45, -0.6, 42, maxw=6.3)
+        l5b = self.lg("dans l'autre.", 3.55, 0.6, 42, maxw=6.6)
+        self.dit(l5b, "dans l'autre.")
+        l6 = self.lg("La nouvelle terrasse", 3.55, -0.25, 42, maxw=6.6)
         self.dit(l6, "La nouvelle terrasse")
-        l7 = self.lg("est encore un carré,", 3.45, -1.15, 42, maxw=6.3)
+        l7 = self.lg("est encore un carré,", 3.55, -0.95, 42, maxw=6.6)
         self.dit(l7, "est encore un carré,", avec=[Create(fig.bord)])
-        l8 = self.lg("de côté x + 4.", 3.0, -1.85, 46, JAUNE_TITRE, lettres="x", maxw=4.6)
+        l8 = self.lg("de côté x + 4.", 3.55, -1.8, 48, JAUNE_TITRE, lettres="x", maxw=5.6)
         self.dit_avec(l8, "de côté x plus 4.", {idx(l8, "4"): lambda: [GrowFromCenter(tot[0]), FadeIn(tot[1])]})
         self.insister(l8, 1.1, 0.2)
         self.attendre_voix(marge=0.8)
@@ -323,14 +331,17 @@ class IdentLier4e(PaysageRel):
         tit = self.lg("Découpons la nouvelle terrasse.", 0, 3.05, 44, JAUNE_TITRE, maxw=12)
         self.dit(tit, "Découpons la nouvelle terrasse.", avec=[FadeIn(VGroup(fig, cotes))])
         self.play(Create(fig.coupes), *[r.animate.set_fill(opacity=0.22) for r in fig.p.values()], run_time=0.4)
+        # 22/11 : libellés courts, tous à la même taille (les longs rétrécissaient).
         rangs = [("L'ancienne terrasse :", "x × x = x²", "x fois x, x au carré.", "xx", "x²", 60, 5),
-                 ("Une bande le long d'un côté :", "x × 4 = 4x", "x fois 4, 4 x.", "xb", "4x", 40, 5),
-                 ("Une autre bande, de l'autre côté :", "encore 4x.", "encore 4 x.", "bx", "4x", 40, 2),
+                 ("Une bande d'un côté :", "x × 4 = 4x", "x fois 4, 4 x.", "xb", "4x", 40, 5),
+                 ("L'autre bande :", "encore 4x.", "encore 4 x.", "bx", "4x", 40, 2),
                  ("Et le coin :", "4 × 4 = 16", "4 fois 4, 16.", "bb", "16", 40, 4)]
+        dits = {"Une bande d'un côté :": "Une bande le long d'un côté :",
+                "L'autre bande :": "Une autre bande, le long de l'autre côté :"}
         for (texte, s, phrase, k, lab, fs, j), (y1, y2) in zip(rangs, ((2.1, 1.45), (0.75, 0.1), (-0.6, -1.25),
                                                                        (-1.95, -2.6))):
-            t = self.lg(texte, 2.55, y1, 40, CIEL, maxw=7.6)
-            self.dit(t, texte.replace("Une autre bande, de", "Une autre bande, le long de"), avec=[fig.remplir(k)])
+            t = self.lg(texte, 2.55, y1, 42, CIEL, maxw=7.6)
+            self.dit(t, dits.get(texte, texte), avec=[fig.remplir(k)])
             e = D(s, 46).move_to(P(2.55, y2))
             et = fig.etiquette(k, lab, fs)
             self.poser_avec(e, phrase, {j: lambda et=et: [FadeIn(et, scale=1.4)]})
@@ -385,17 +396,20 @@ class IdentLier4e(PaysageRel):
         r2 = self.lg("L'aire vaut x² + 8x + 16.", 2.4, 0.05, 46, VERT_OK, maxw=7.4)
         self.dit(r2, "L'aire vaut x au carré plus 8 x plus 16.")
         self.play(Create(self.cadre_ok(r2, 0.14)), run_time=0.25)
-        l3 = self.lg("Les deux bandes sont égales :", 2.4, -0.95, 38, maxw=7.4)
+        l3 = self.lg("Les deux bandes sont égales :", 2.4, -0.8, 40, maxw=7.6)
         self.dit_avec(l3, "Les deux bandes sont égales :",
                       {idx(l3, "égales"): lambda: [Indicate(VGroup(et["xb"], et["bx"]), color=JAUNE_TITRE)]})
-        l4 = self.lg("ensemble, elles font", 2.4, -1.6, 38, maxw=7.4)
+        l4 = self.lg("ensemble, elles font", 2.4, -1.4, 40, maxw=7.4)
         self.dit(l4, "ensemble, elles font")
-        l5 = self.lg("le double produit : 2 × x × 4.", 1.9, -2.3, 42, JAUNE_TITRE, lettres="x", maxw=6.4)
-        self.dit_avec(l5, "le double produit, 2 fois x fois 4.",
-                      {idx(l5, "2"): lambda: [Circumscribe(VGroup(r2.atomes[7], r2.atomes[8]), color=JAUNE_TITRE,
-                                                           buff=0.06)]})
+        # 22/11 : en deux lignes (sur une seule, elle rétrécissait).
+        l5 = self.lg("le double produit :", 2.2, -2.05, 44, JAUNE_TITRE, maxw=6.4)
+        self.dit(l5, "le double produit,")
+        l5b = self.lg("2 × x × 4", 1.6, -2.7, 46, JAUNE_TITRE, lettres="x", maxw=4.6)
+        self.dit_avec(l5b, "2 fois x fois 4.",
+                      {idx(l5b, "2"): lambda: [Circumscribe(VGroup(r2.atomes[7], r2.atomes[8]), color=JAUNE_TITRE,
+                                                            buff=0.06)]})
         self.clignoter([fig.p["xb"], fig.p["bx"], et["xb"], et["bx"]], 1.06, 1, 0.2)
-        self.insister(l5, 1.08, 0.2)
+        self.insister(VGroup(l5, l5b), 1.08, 0.2)
         self.attendre_voix(marge=0.8)
 
     # ── 05b : vérifier pour x = 1 ───────────────────────────────────────────
@@ -564,16 +578,18 @@ class IdentLier4e(PaysageRel):
         l3 = self.lg("de x mètres de côté :", -2.9, 0.7, 40, lettres="x", maxw=7)
         self.dit_avec(l3, "de x mètres de côté :", {1: lambda: [GrowFromCenter(hx[0]), FadeIn(hx[1]),
                                                                 GrowFromCenter(gx[0]), FadeIn(gx[1])]})
-        l4 = self.lg("6 mètres de plus dans chaque sens.", -2.9, 0.05, 40, maxw=7.4)
-        self.dit_avec(l4, "6 mètres de plus dans chaque sens.", {0: lambda: [
+        l4 = self.lg("6 mètres de plus", -2.9, 0.05, 40, maxw=7)
+        self.dit_avec(l4, "6 mètres de plus", {0: lambda: [
             Create(trous), GrowFromCenter(h6[0]), FadeIn(h6[1]), GrowFromCenter(g6[0]), FadeIn(g6[1])]})
-        q1 = self.lg("Quelle est sa nouvelle aire,", -2.9, -0.85, 44, JAUNE_TITRE, maxw=7)
+        l4b = self.lg("dans chaque sens.", -2.9, -0.55, 40, maxw=7)
+        self.dit(l4b, "dans chaque sens.")
+        q1 = self.lg("Quelle est sa nouvelle aire,", -2.9, -1.3, 44, JAUNE_TITRE, maxw=7)
         self.dit(q1, "Quelle est sa nouvelle aire,", avec=[Create(fig.bord)])
-        q2 = self.lg("développée ?", -2.9, -1.5, 44, JAUNE_TITRE, maxw=7)
+        q2 = self.lg("développée ?", -2.9, -1.9, 44, JAUNE_TITRE, maxw=7)
         self.dit(q2, "développée ?")
-        pz = T("Mets pause, et cherche !", 50, ORANGE_RETENUE).move_to(P(-1.0, -2.6))
+        pz = T("Mets pause, et cherche !", 50, ORANGE_RETENUE).move_to(P(-1.0, -2.75))
         self.au("Mets pause", Write(pz), rt=0.5)
-        self.defi = dict(tit=tit, textes=VGroup(l1, l2, l3, l4, q1, q2, pz), fig=fig, trous=trous)
+        self.defi = dict(tit=tit, textes=VGroup(l1, l2, l3, l4, l4b, q1, q2, pz), fig=fig, trous=trous)
         self.attendre_voix(marge=2.0)
 
     # ── 08b : la correction ─────────────────────────────────────────────────
@@ -644,10 +660,11 @@ class IdentLier4e(PaysageRel):
                      fig.etiquette("bb", "16", 28))
         carre = VGroup(fig, fig.coupes, cotes, ets).next_to(r, DOWN, buff=0.5)
         figure = VGroup(e, r, carre)
-        lignes = self.finale_gauche([["Un carré, c'est une expression", "multipliée par elle-même."],
+        # 22/11 : lignes plus courtes (elles rétrécissaient à la largeur).
+        lignes = self.finale_gauche([["Un carré : une expression", "multipliée par elle-même."],
                                      ["(x + 4)²", "se développe par", "la double distributivité."],
-                                     ["Le résultat a trois termes :", "les deux bandes forment", "le double produit."]],
-                                    figure)
+                                     ["Trois termes :", "les deux bandes", "font le double produit."]],
+                                    figure, fs=42)
         for lg in lignes:
             self.montrer_ligne(lg)
         self.attendre_voix(marge=1.2)

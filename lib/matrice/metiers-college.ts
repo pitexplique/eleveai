@@ -305,10 +305,13 @@ export const METIERS_4E: Record<string, LienMetier[]> = {
     F("maitre-nageur", "prépare 3 séries de x + 4 longueurs, plus 5 : 3(x + 4) + 5 = 3x + 17.", V),
     M("cuisinier", "prévoit x crêpes et 2 compotes par table pour 4 tables : 4(x + 2) = 4x + 8.", V),
   ],
+  // 22/11/2026 : les 5 métiers de la série vidéo IDENTITÉS REMARQUABLES 4e (un par épisode, tous en vidéo).
   litteral_identite_remarquable: [
-    F("architecte", "agrandit une terrasse carrée de 2 m sur chaque côté : son aire devient (a + 2)²."),
-    M("comptable", "calcule 49 × 51 de tête : 50² − 1 = 2 499."),
-    M("paysagiste", "calcule l'aire de l'allée qui entoure un bassin carré."),
+    F("architecte", "agrandit une terrasse carrée de 4 m dans chaque sens : son aire devient (x + 4)² = x² + 8x + 16.", V),
+    M("comptable", "calcule 49 × 51 de tête : (50 − 1)(50 + 1) = 50² − 1 = 2 499.", V),
+    F("paysagiste", "calcule l'aire de l'allée de 1 m autour d'un bassin carré : (x + 2)² − x² = 4x + 4.", V),
+    F("styliste", "découpe une nappe carrée de côté x + 5 : (x + 5)² = x² + 10x + 25.", V),
+    F("ingenieur-ia", "apprend à un correcteur automatique à repérer l'erreur (x + 5)² = x² + 25.", V),
   ],
   litteral_factorisation: [
     F("logisticien", "regroupe ce qui se répète dans chaque camion : 5x + 10 = 5(x + 2) palettes.", V),
