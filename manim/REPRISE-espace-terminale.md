@@ -34,8 +34,10 @@
 | E3 `espace_droite_parametrique` | ✅ **HD livré** (5 min 56, 0 bord, planche HD regardée) |
 | E4 `espace_plan_equation` | ✅ **HD livré** (6 min 09, 0 bord, planche HD regardée) |
 | E5 `espace_position_relative` | ✅ **HD livré** (6 min 34, 0 bord, planche HD regardée) |
-| E6 `espace_defi` | ✅ **HD livré** (6 min 49, 0 bord, planche HD regardée) |
-| les 6 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
+| E6 `espace_defi` | ✅ **HD livré** (6 min 49, 0 bord, planche HD regardée) — ⚠️ sans la notation fléchée |
+| E7 `ps_espace_calculer` | ✅ **HD livré** (6 min 33, 0 bord, planche HD regardée) — ⭐ le premier AVEC les flèches |
+| les 5 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
+| ⛔ E1, E2, E3 et E6 | ⏳ **à REPRENDRE** : 14 noms de vecteur nus (`auditer-fleches-vecteurs.py`) |
 | les 12 shorts | ⏳ pas de voix encore |
 | les rendus HD, le branchement coach, les fiches YouTube | ⏳ |
 
@@ -58,13 +60,25 @@ ls manim/sorties/terminale/maths/geometrie/*/*.mp4   # les HD livrés
 python manim/poste2/verifier-voix-espace.py          # 12 voix, 15 clips, lettres A 8 B 8 C 8
 ```
 
-**Le prochain geste, sans réfléchir** : écrire `ps_espace_calculer.py` (E7, le premier
-des six du produit scalaire). Tout l'attend — sa voix dans
+**Le prochain geste** : il y en a DEUX, et le second est le plus urgent.
+1. écrire `ps_espace_orthogonalite.py` (E8, Marc le maçon, centre `sciences`) ;
+2. ⛔ **reprendre E1, E2, E3 et E6 avec la notation vectorielle fléchée** — décision de
+   Frédéric, 22/11. Ces quatre-là écrivent « u · v » et « A G » à plat, ce qui à l'écran
+   d'une terminale désigne des NOMBRES. E4 et E5 sont déjà justes (ils ne nomment jamais
+   un vecteur). ⭐ L'opération est peu chère : **aucune des six n'est devant un élève**
+   (0 entrée `espace` au manifeste), donc on ne corrige rien en public, on repasse des
+   rendus. ⚠️ Et leurs MESURES sont à relancer d'abord : la flèche grandit les blocs.
+
+Pour écrire E8, tout l'attend — sa voix dans
 `manim/poste2/VOIX-espace-terminale.md`, ses WAV, ses marques, et un socle complet :
 `systeme`, `ligne_param`, `eq_plan`, `eq_zero`, `choix2`, `choix3`, `au_fin`,
 `trip(par=True)`, `q_tete(largeur, xl)`, et — dans `espace3d.py` — `platitude()`,
 `plan_dessine()` et le cube.
-⭐ Le modèle le plus propre est maintenant **`espace_defi.py` (E6)** : quinze écrans,
+⭐ Le modèle le plus propre est maintenant **`ps_espace_calculer.py` (E7)** : c'est le
+seul qui porte la notation fléchée (`self.vec`, `self.vexpr`) et sa mesure
+(`mesure-ps-espace-calculer.py`) est la seule qui signale une réduction PAR UN PLAFOND
+et qui compare la colonne de droite au TITRE. `espace_defi.py` (E6) reste bon pour tout
+le reste : quinze écrans,
 chaque `sans_audit` porte sa raison, chaque cote vient d'une COMMANDE
 (`manim/poste2/mesure-espace-defi.py`, à recopier pour E7), et chaque correction d'image
 est commentée à l'endroit où elle a été payée. `espace_position_relative.py` (E5) reste
@@ -596,6 +610,156 @@ qui clôt un membre de phrase se pose à `au_fin`, même s'il y en a deux dans l
   (paramètres 0,589 et 0,831 : deux points différents superposés). ⛔ Les paires choisies
   à vue ratent — (A G) et (B H) se coupent VRAIMENT, (A G) et (B D) ne se croisent même
   pas à l'écran. `se_croisent_a_lecran()` est dans `espace_defi.py`.
+
+---
+
+## ⛔⛔ Ce que l'épisode 7 a appris — à lire AVANT d'écrire l'épisode 8
+
+Neuf défauts. **Trois sont dans les OUTILS** et valent donc pour les cinq épisodes qui
+restent ; un quatrième est une faute de CONTENU que six épisodes livrés portent déjà.
+
+### ⛔⛔⛔ IL MANQUAIT LA FLÈCHE DES VECTEURS — dans les douze épisodes
+
+Frédéric, 22/11, en regardant la planche : « as-tu mis les flèches sur les vecteurs ? »
+Mesuré aussitôt : `grep` sur les douze scripts de la série → **aucune notation fléchée
+nulle part**. E1 à E6, déjà rendus en HD, écrivent « A G », « A Ω », « u · v » à plat.
+⛔ À l'écran d'une terminale, « u · v » se lit comme un produit de deux NOMBRES — et dans
+un épisode dont toute la leçon est « les facteurs sont des vecteurs, le résultat est un
+nombre », l'écran contredisait la voix.
+
+⭐⭐ **Le caractère combinant U+20D7 NE SE REND PAS.** Mesuré sur une image avant d'écrire
+quoi que ce soit : « u⃗ » sort en carré « tofu » avec « 20D7 » écrit dedans, exactement
+comme le ⚠ de l'épisode 1. La flèche d'un vecteur se **dessine**, comme le triangle du
+panneau d'avertissement.
+
+⭐ Deux outils neufs dans le socle `espace_ecrans.py`, à employer partout :
+- `self.vec("u", fs, couleur)` → un nom de vecteur et sa flèche (« u », « AB », « A G » :
+  un nom de deux lettres porte **une seule** flèche, et c'est la bonne notation) ;
+- `self.vexpr("u · v = ‖u‖ × ‖v‖ × cos θ", ("u", "v"), fs, couleur)` → l'expression
+  entière en UN `Text`, les flèches posées par-dessus.
+  ⛔ Le montage en morceaux (`VGroup(...).arrange(RIGHT)`) ne marche pas : les boîtes de
+  « u », de « · » et de « = » n'ont ni la même hauteur ni la même ligne de base, et
+  l'expression monte et descend à chaque signe.
+  ⚠️ **L'indexation des glyphes a été MESURÉE**, parce que c'est le seul point qui pouvait
+  trahir : Manim ne crée **aucun sous-mobjet pour un espace** et n'a pas de ligature ici
+  (« A G · A B » = 9 caractères, 5 sous-mobjets ; « ‖u‖ × ‖v‖ × cos θ » = 12 pour 12 non
+  blancs). L'indice d'un glyphe est donc le nombre de caractères non blancs qui le
+  précèdent.
+  ⛔ Un nom n'est reconnu que s'il est **isolé** : sans cette frontière, le « u » de
+  `vexpr` se pose sur le « u » de « nul ». Vérifié à l'image sur « aucun u dans "nul" ».
+
+⚠️ **Et la flèche change la HAUTEUR de tout ce qui la contient** (0,10 + l'épaisseur
+au-dessus du texte) : sur E7 le cadre « et pourtant v ≠ w » est passé de −3,55 à −3,59,
+donc **sous la marge de 3 %**, uniquement à cause des deux flèches. Toute cote d'un bloc
+qui gagne une notation vectorielle se remesure.
+
+⏳ **Décision de Frédéric, 22/11 : « il faut reprendre les vidéos ».** E1 à E6 sont à
+refaire avec la notation. ⭐ Ce qui rend l'opération peu chère : **ces six-là ne sont
+devant aucun élève** — 0 entrée `espace` dans `manim/manifeste-youtube.json`, et
+`brancher-videos-coach.mjs --classe terminale-spe` répond « Rien à brancher ». On ne
+corrige rien en public, on repasse six rendus HD.
+⭐⭐ **L'ÉTAT EXACT, MESURÉ PAR UN OUTIL QUI EST DANS LE DÉPÔT** :
+`python -X utf8 manim/poste2/auditer-fleches-vecteurs.py`. Il lit l'AST, pas un grep —
+chercher le glyphe « ⃗ » répond « non » même quand tout est juste, puisque la flèche est
+DESSINÉE. Résultat du 22/11 :
+
+| script | noms de vecteur **nus** |
+|---|---|
+| `espace_vecteurs` (E1) | **6** — et c'est l'épisode qui parle des vecteurs |
+| `espace_repere_coordonnees` (E2) | 2 |
+| `espace_droite_parametrique` (E3) | 3 |
+| `espace_plan_equation` (E4) | **0** ✅ |
+| `espace_position_relative` (E5) | **0** ✅ |
+| `espace_defi` (E6) | 3 |
+| `ps_espace_calculer` (E7) | **0** ✅ |
+
+⭐ Donc **QUATRE** épisodes à reprendre, pas six : E4 et E5 ne nomment jamais un vecteur.
+⚠️ Et l'audit a aussi attrapé un nu **chez E7** — le TITRE « Le cas u · u », sur l'écran
+dont toute la leçon est que ces deux u sont des vecteurs. Un texte d'écran sur 26 était
+passé entre les mailles d'une relecture à la main.
+
+✅ **ET LES ÉTIQUETTES DE FIGURE SONT RÉGLÉES À LA SOURCE** :
+`espace3d.Repere3D.vecteur(…, fleche_nom=True)` est maintenant le DÉFAUT, et la flèche
+vient de `espace3d.fleche_de_nom`, **une seule implémentation** dont `EcransEspace.vec`
+et `.vexpr` se servent aussi. Il y avait 8 étiquettes nues dans la série (6 dans E1).
+⚠️ Ce changement de défaut touche E1 à E6 dès qu'on les rendra : leurs blocs gagnent la
+hauteur de la flèche, donc **leurs mesures sont à relancer** avant tout rendu.
+⚠️ `g.nom` est désormais le GROUPE (texte + flèche) et non le seul texte : un
+`FadeIn(g.nom)` montre les deux, `g.texte_nom` garde le texte seul.
+
+### ⛔⛔ UNE ÉTIQUETTE DE VECTEUR SE POSE DU CÔTÉ OÙ LE VECTEUR NE VA PAS
+
+Dès que l'étiquette porte elle aussi une flèche, `decal=UR` (le défaut de
+`Repere3D.vecteur`) devient faux pour tout vecteur qui monte vers la droite : les DEUX
+flèches se croisent. Vu au gros plan sur deux écrans de E7 :
+- écran 05, u = (1 ; 2 ; 3) monte à droite → son étiquette était **sur le fût** ;
+- écran 06, w = (0 ; 0 ; 1) monte → `UP` posait l'étiquette sur le fût et sa flèche
+  percutait la **pointe** du vecteur.
+⭐ La règle : **l'étiquette va du côté où le vecteur ne va pas.** u horizontal → `DOWN` ;
+w vertical → `LEFT` ; u diagonal montant → `UL`.
+⚠️ Et un piège de plus, parce que `decal` s'applique au MILIEU du vecteur et non à sa
+pointe : v = (0 ; 1 ; 0) est **court** en cavalière (son projeté fait 0,41 ; 0,287), donc
+son milieu est près de l'origine et `DR` posait son étiquette exactement sur le fût de u,
+qui part de la même origine. Deux vecteurs courts issus du même point se gênent toujours :
+il faut les regarder.
+
+### ⛔⛔ LA MESURE VOYAIT LE TITRE, ET NE LE COMPARAIT À RIEN
+
+Le badge « repère ORTHONORMÉ / obligatoire » de l'écran 02, trois lignes encadrées posées
+à y = 2,45, monte à **3,25** — et le titre descend à **2,88**. Il s'écrivait dessus.
+⛔ Aucun instrument ne le disait : le titre est posé par `to_edge`, la colonne par
+`col()`, et `mesure-*.py` mesurait les deux **sans jamais les comparer**. Vu à la planche.
+⭐ Le haut de la colonne de droite est libre jusqu'à **2,78**, et non jusqu'à 3,15 : la
+tête « Question ! » y tient parce qu'elle fait UNE ligne. Le script de mesure compare
+maintenant explicitement les deux boîtes, et c'est à recopier dans les épisodes suivants.
+
+### ⛔⛔ UNE RÉDUCTION PAR UN PLAFOND NE SE SIGNALAIT JAMAIS
+
+`mesure-espace-defi.py` (E6) passait son plafond en `naturel=min(nat, plafond)` : un bloc
+réduit **par le plafond lui-même** ne sortait donc pas. Deux cas sur E7, tous deux graves :
+- le modèle de rédaction de l'écran 08, ramené à **19,8 px** par le plafond de la copie ;
+- la FINALE, réduite de **27 %** (30 px → 21,9) par son plafond de 10,60.
+⭐ `plafonne()` remplace les trois `if … scale_to_fit_width` du script de mesure et rend
+la réduction visible. ⚠️ À reporter dans les mesures de E8 à E12.
+
+### ⛔ L'ÉCRAN DE RÉPONSE HÉRITE — QUATRIÈME RÉCIDIVE, ET C'ÉTAIT LA DONNÉE
+
+L'écran 04 laisse u (2 ; 0 ; −1) à y = 1,50 et v (1 ; 5 ; 2) à 0,60 : ce sont les données
+de l'exercice, elles ne s'effacent pas. Les trois lignes de calcul de 04b, posées à
+1,55 / 0,75 / −0,05, s'écrivaient **exactement dessus** — trois textes empilés, illisibles.
+⭐ Elles sont devenues UN SEUL bloc de quatre lignes (la somme en est la dernière), posé
+SOUS les données : un calcul se lit d'un bloc, pas en quatre morceaux épars. Et la mesure
+vérifie désormais l'écart entre le haut du bloc et le bas de v.
+
+### ⛔⛔ DEUX DÉFAUTS DE PERSONNAGE QUE SEUL LE GROS PLAN A VUS — quatrième épisode d'affilée
+
+Kelly, kitesurfeuse, à ×2,8 :
+1. **l'aile était un BOL.** L'arc était tourné vers le bas (concavité vers le haut) : on
+   lisait un bol suspendu, pas une aile de kite. Une aile est **convexe vers le haut**,
+   bouts en bas — et c'est par ces bouts que partent les lignes ;
+2. **elle n'avait pas de jambes** : le torse posé directement sur la planche se lisait
+   comme un buste coupé à mi-corps. Les jambes font 0,50, soit la moitié du torse.
+3. (et le bras partait du MILIEU du buste, pas de l'épaule — le défaut n° 1 de
+   Jean-Bernard sur E4, à sa deuxième récidive.)
+⭐ Sur la vignette à trois colonnes, les trois étaient invisibles. **Quatre épisodes de
+suite** (E4 la visière, E5 le pont, E6 les axes, E7 l'aile) : le recadrage ×2,5 à ×3 sur
+la figure de l'épisode n'est pas une précaution, c'est une étape.
+
+### ⚠️ LES AUTRES, tous des récidives déjà écrites plus haut
+
+| vu sur E7 | où c'était déjà écrit |
+|---|---|
+| `AUDIT-AVANCE` de 1,04 s sur « La réponse A, 4 » posé à son premier mot | piège n° 6 des entiers, `au_fin` |
+| un `au_fin` qui remontait de 0,35 s dans le temps (l'arête et le repère en 09) | ordre de la VOIX, pas de l'écran (E6, 04b) |
+| six blocs rétrécis par `col()` / `gauche()` d'un à trois dixièmes | défaut n° 4 de E3 |
+| le bloc de 09b à deux centièmes de celui du dessous | « une cote se remesure », E5 |
+| la figure des trois vecteurs à 1,22 × 1,47 — trois traits d'un centimètre | « un personnage ne se juge qu'en grand », E4 |
+
+⭐ **Et un cas où la leçon de l'épisode 6 a servi tout de suite** : les trois vecteurs du
+contre-exemple de l'écran 06 sont u (1 ; 0 ; 0), v (0 ; 1 ; 0) et w (0 ; 0 ; 1) —
+c'est-à-dire **exactement les trois vecteurs de base**. Tracés dans un repère, ils se
+seraient superposés trait pour trait aux trois axes, et les noms u, v, w seraient tombés
+sur x, y, z. Ils sont dessinés **sans axes** : les trois flèches SONT le repère.
 
 ---
 

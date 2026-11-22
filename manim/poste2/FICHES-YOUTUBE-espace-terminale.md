@@ -328,6 +328,80 @@ outils · 1:28 question 1 · 1:56 réponse · 2:19 montrons un alignement · 2:5
 
 ---
 
+## E7 · `terminale-ps-espace-calculer` — ✅ rendu HD fait
+
+`manim/sorties/terminale/maths/geometrie/ps-espace-calculer/eleveai-maths-terminale-ps-espace-calculer.mp4`
+6 min 33 (393,7 s) · 24,9 Mo · **0 instant qui touche un bord** · planche HD regardée.
+⭐ Marques : **890**, contrôlées avec le convertisseur corrigé (celui qui perdait les
+décimales répétées) : 0 cue non placée, fichier identique à celui du dépôt. Le rendu est
+donc calé sur des marques à jour, et le contrôle par le CONTENU le prouve.
+⭐ `grep -c "self\.au_t("` → **0** : aucun instant relevé à la main, donc rien qui se
+périme si la voix est régénérée (piège n° 37 de la série des entiers).
+⚠️ `verifier-zone-margo --pas 1.0` : **38 instants**, qui font exactement les trois écrans
+à grosse mascotte — garde 10,8 s (00:00 → 00:10), finale 20,3 s (06:06 → 06:26),
+abonnement 6,1 s (06:27 → 06:32), soit 37,2 s pour 38 relevés au pas de 1 s — et dont le
+surplus est constant à l'intérieur de chacun (+440, +463, +80 pixels, à ±6 près).
+**Aucun écran de question touché** : c'est le critère.
+⭐⭐ **PREMIER ÉPISODE DE LA SÉRIE AVEC LA NOTATION VECTORIELLE FLÉCHÉE** (demandée par
+Frédéric le 22/11). E1 à E6 ne l'ont pas : ils sont à reprendre, et ils ne sont devant
+aucun élève (0 entrée `espace` au manifeste). Détail de l'outil : `self.vec` et
+`self.vexpr` dans `manim/poste2/espace_ecrans.py`, et « Ce que l'épisode 7 a appris »
+dans `manim/REPRISE-espace-terminale.md`.
+⚠️ Le personnage est **Kelly, kitesurfeuse à l'Hermitage**. Regardée au gros plan (×2,8),
+son aile était un BOL (arc retourné) et elle n'avait pas de jambes — deux défauts
+invisibles sur la vignette à trois colonnes.
+
+```json
+{
+  "id": "terminale-ps-espace-calculer",
+  "notionId": "produit_scalaire_espace",
+  "microId": "ps_espace_calculer",
+  "classe": "terminale-spe",
+  "ceinture": "verte",
+  "serie": "Maths Tle spé",
+  "type": "longue",
+  "fichier": "terminale/maths/geometrie/ps-espace-calculer/eleveai-maths-terminale-ps-espace-calculer.mp4",
+  "miniature": "terminale/maths/geometrie/ps-espace-calculer/eleveai-maths-terminale-ps-espace-calculer.png",
+  "titre": "Un produit scalaire est un NOMBRE, pas un vecteur · Le calculer en coordonnées dans l'espace · Tle spé",
+  "centres": ["sport"],
+  "tags": ["produit scalaire", "espace", "coordonnées", "repère orthonormé", "norme", "orthogonalité", "cube ABCDEFGH", "terminale", "bac"]
+}
+```
+
+**Accroche** (à relire par Frédéric avant publication) :
+
+> Kelly fait du kitesurf à l'Hermitage. Le vent pousse son aile, mais seule la partie du
+> vent qui va dans le bon sens la fait avancer : un vent de côté ne sert à rien. Ce
+> « combien ça pousse dans le bon sens », c'est exactement ce que mesure un produit
+> scalaire — un seul nombre qui résume l'accord entre deux directions.
+>
+> Dans cette vidéo :
+> • le calcul en coordonnées, dans un repère orthonormé (et cette condition est
+>   obligatoire) : on multiplie les x entre eux, les y entre eux, les z entre eux, puis
+>   on additionne les trois résultats
+> • le résultat est un NOMBRE, jamais un vecteur — c'est l'erreur de type qui coûte le
+>   plus cher au bac
+> • le cas particulier le plus utile de tous : u · u est le carré de la norme, donc deux
+>   lignes suffisent pour obtenir une longueur
+> • le piège : le produit scalaire ressemble à une multiplication, mais si u · v = u · w,
+>   on ne peut PAS conclure que v = w
+> • et le zéro qui n'est pas rien : un produit scalaire nul entre deux vecteurs non nuls,
+>   c'est la définition même de l'orthogonalité
+>
+> Deux questions-pauses et un défi corrigé dans le cube ABCDEFGH d'arête 1 : A G · A B et
+> A G · A C — avec la prudence qu'il faut garder, parce qu'on ne compare pas deux
+> produits scalaires pour comparer deux angles si les normes diffèrent.
+> Entraîne-toi sur eleveai.fr
+
+**Chapitres**, relevés sur le rendu :
+0:00 garde · 0:10 Kelly, la part du vent qui pousse · 0:39 le calcul en
+coordonnées · 1:12 trois choses à retenir · 1:35 question 1 · 2:00 réponse ·
+2:35 le cas u · u · 3:01 on ne simplifie jamais · 3:45 question 2 · 4:09 réponse ·
+4:38 deux lignes, mais écrites · 5:00 à toi de jouer · 5:20 correction ·
+6:06 ce que tu as appris.
+
+---
+
 ## E7 à E12 — ⏳ en attente de leur rendu HD
 
 Les identifiants sont fixés et doivent rester ceux-là (c'est sur eux que le coach
@@ -340,7 +414,6 @@ branchera) :
 | E4 | `terminale-espace-plan-equation` | `espace_plan_equation` | `sciences` |
 | E5 | `terminale-espace-position-relative` | `espace_position_relative` | `transports` |
 | E6 | `terminale-espace-defi` | `espace_defi` | `jeux-defis` |
-| E7 | `terminale-ps-espace-calculer` | `ps_espace_calculer` | `sport` |
 | E8 | `terminale-ps-espace-orthogonalite` | `ps_espace_orthogonalite` | `sciences` |
 | E9 | `terminale-ps-espace-norme-distance` | `ps_espace_norme_distance` | `sport` |
 | E10 | `terminale-ps-espace-angle` | `ps_espace_angle` | `nature-ecologie` |

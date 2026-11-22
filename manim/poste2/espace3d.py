@@ -88,6 +88,26 @@ C_PIEGE = "#dc2626"      # ce qui est faux
 C_FANTOME = "#cbd5e1"    # les traits de construction (pointillés)
 
 
+def fleche_de_nom(mob, couleur=C_VECTEUR, fs=26, ecart=0.10):
+    """LA FLÈCHE DESSINÉE AU-DESSUS D'UN NOM DE VECTEUR — « u⃗ », « AB⃗ ».
+
+    ⛔⛔ LE CARACTÈRE COMBINANT U+20D7 NE SE REND PAS. Mesuré le 22/11/2026 sur une
+    image avant d'écrire quoi que ce soit : « u⃗ » sort en carré « tofu » avec
+    « 20D7 » écrit dedans, exactement comme le glyphe ⚠ de l'épisode 1. La flèche d'un
+    vecteur se DESSINE, comme on dessine le triangle du panneau d'avertissement.
+
+    ⭐ UNE SEULE IMPLÉMENTATION POUR LES DEUX CÔTÉS : les étiquettes de FIGURE
+    (`Repere3D.vecteur`, ici) et les textes d'ÉCRAN (`EcransEspace.vec` et `.vexpr`,
+    dans `espace_ecrans.py`, qui délègue à celle-ci). Deux copies auraient divergé au
+    premier réglage d'épaisseur.
+    ⚠️ Elle déborde de `ecart` + son épaisseur au-dessus du texte : tout bloc qui en
+    contient une est plus HAUT qu'avant, et ses cotes se remesurent."""
+    return Arrow(mob.get_corner(UL) + UP * ecart + LEFT * 0.03,
+                 mob.get_corner(UR) + UP * ecart + RIGHT * 0.05,
+                 buff=0, stroke_width=max(2.0, fs / 14), color=couleur,
+                 max_tip_length_to_length_ratio=0.24, tip_length=0.09 + fs / 500)
+
+
 class Repere3D:
     """UN REPÈRE DE L'ESPACE EN CAVALIÈRE, et tout ce qu'on accroche dessus.
 
@@ -167,11 +187,19 @@ class Repere3D:
 
     # ── les vecteurs ─────────────────────────────────────────────────────────
     def vecteur(self, depart, arrivee, nom=None, couleur=C_VECTEUR, sw=6, fs=26,
-                decal=UR):
+                decal=UR, fleche_nom=True):
         """UNE VRAIE FLÈCHE de `depart` à `arrivee`, deux triplets (x, y, z).
         ⭐ C'est ce que le canvas du coach ne sait pas faire : là-bas un vecteur
         est un segment. Ici il a une pointe, donc un SENS — et le sens est la
-        moitié de la notion."""
+        moitié de la notion.
+
+        ⭐⭐ `fleche_nom=True` (le DÉFAUT depuis le 22/11/2026) : l'étiquette porte
+        elle aussi sa flèche de vecteur. Auparavant une figure montrait une flèche et
+        l'appelait « u » — une lettre nue, qui à l'écran d'une terminale désigne un
+        NOMBRE. Mesuré ce jour-là sur les sept scripts de la série : **8 étiquettes
+        nues**, dont 6 dans `espace_vecteurs`, l'épisode qui parle des vecteurs.
+        ⚠️ `g.nom` est donc maintenant le GROUPE (texte + flèche), pas le seul texte :
+        un `FadeIn(g.nom)` montre les deux, et un `next_to` se cale sur l'ensemble."""
         a, b = self.pt(*depart), self.pt(*arrivee)
         fleche = Arrow(a, b, buff=0, stroke_width=sw, color=couleur,
                        max_tip_length_to_length_ratio=0.12)
@@ -180,8 +208,9 @@ class Repere3D:
             t = Text(nom, font_size=fs, color=couleur, weight=BOLD)
             milieu = (a + b) / 2
             t.move_to(milieu + np.array([decal[0], decal[1], 0.0]) * 0.32)
-            g.add(t)
-            g.nom = t
+            etq = VGroup(t, fleche_de_nom(t, couleur, fs)) if fleche_nom else VGroup(t)
+            g.add(etq)
+            g.nom, g.texte_nom = etq, t
         g.fleche, g.a, g.b = fleche, a, b
         return g
 

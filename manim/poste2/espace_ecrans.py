@@ -43,7 +43,7 @@ from manim import *  # noqa: E402,F401,F403
 
 from canvas_proportion import AuditSynchro  # noqa: E402
 from charte import *  # noqa: E402,F401,F403
-from espace3d import Repere3D  # noqa: E402
+from espace3d import Repere3D, fleche_de_nom  # noqa: E402
 from gabarit_sixieme import Notion6e  # noqa: E402
 from mascotte import MascotteMargouillat  # noqa: E402
 from signes_expression_2de import echelle_ceintures  # noqa: E402
@@ -178,6 +178,77 @@ class EcransEspace(AuditSynchro, MotsCales, Notion6e):
         if par:
             g = VGroup(self.t("(", fs, color), g, self.t(")", fs, color)).arrange(RIGHT, buff=0.08)
         g.nb = nb
+        return g
+
+    # ── la notation vectorielle ─────────────────────────────────────────────
+
+    def _fleche_vecteur(self, mob, color, fs, ecart=0.10):
+        """La flèche dessinée au-dessus d'un nom de vecteur.
+
+        ⭐ UNE SEULE IMPLÉMENTATION, dans `espace3d.fleche_de_nom` : les étiquettes de
+        FIGURE s'en servent aussi (`Repere3D.vecteur`). Deux copies auraient divergé au
+        premier réglage d'épaisseur. ⛔ Le pourquoi du dessin — le caractère combinant
+        U+20D7 ne se rend pas — est écrit là-bas, à l'endroit de l'implémentation."""
+        g = fleche_de_nom(mob, color, fs, ecart)
+        g._pas_audit = True
+        return g
+
+    def vec(self, nom, fs=28, color=WHITE, ecart=0.10):
+        """UN NOM DE VECTEUR AVEC SA FLÈCHE : « u », « AB », « A G ».
+
+        ⭐⭐ AJOUTÉ POUR L'ÉPISODE 7, ET IL MANQUAIT AUX SIX PREMIERS. La série écrivait
+        « u · v » et « A G » sans flèche : à l'écran d'une terminale, ça se lit comme un
+        produit de deux NOMBRES, et c'est précisément la confusion que l'épisode 7 passe
+        son temps à combattre (« le résultat est un nombre, les facteurs sont des
+        vecteurs »). Le socle le fait une fois pour les douze épisodes.
+        ⚠️ `g.texte` reste adressable : un `SurroundingRectangle` ou un `Indicate` se
+        pose sur le GROUPE, jamais sur la flèche seule."""
+        t = self.t(nom, fs, color)
+        g = VGroup(t, self._fleche_vecteur(t, color, fs, ecart))
+        g.texte = t
+        return g
+
+    def vexpr(self, texte, noms, fs=28, color=WHITE, ecart=0.10):
+        """UNE EXPRESSION ENTIÈRE, avec une flèche sur chaque nom de vecteur :
+        `vexpr("u · v = v · u", ("u", "v"))`, `vexpr("‖u‖ × ‖v‖ × cos θ", ("u", "v"))`.
+
+        ⭐ UN SEUL `Text` pour toute l'expression, et les flèches par-dessus. ⛔ Le
+        montage en morceaux (`VGroup(...).arrange(RIGHT)`) ne marche PAS ici : les
+        boîtes de « u », de « · » et de « = » n'ont ni la même hauteur ni la même ligne
+        de base, et l'expression monte et descend à chaque signe.
+        ⚠️ MESURÉ, parce que l'indexation des glyphes est le seul point qui pouvait
+        trahir : Manim ne crée **aucun sous-mobjet pour un espace** et n'a pas de
+        ligature ici — « A G · A B » fait 9 caractères et 5 sous-mobjets, « ‖u‖ × ‖v‖ ×
+        cos θ » en fait 12 pour 12 non-blancs. L'indice d'un glyphe est donc le nombre
+        de caractères non blancs qui le précèdent, et c'est ce que `jeton` calcule.
+        ⛔ Un nom n'est reconnu que s'il est ISOLÉ : sans cette frontière, le « u » de
+        `vexpr` se poserait sur le « u » de « nul » (c'est le même piège que la
+        recherche en mot entier du convertisseur de marques)."""
+        t = self.t(texte, fs, color)
+        g = VGroup(t)
+        jeton = {}
+        k = 0
+        for i, c in enumerate(texte):
+            if not c.isspace():
+                jeton[i] = k
+                k += 1
+        for nom in noms:
+            depart = 0
+            while True:
+                i = texte.find(nom, depart)
+                if i < 0:
+                    break
+                depart = i + 1
+                avant = texte[i - 1] if i else ""
+                apres = texte[i + len(nom)] if i + len(nom) < len(texte) else ""
+                if avant.isalpha() or apres.isalpha():
+                    continue
+                indices = [jeton[j] for j in range(i, i + len(nom)) if j in jeton]
+                if not indices:
+                    continue
+                g.add(self._fleche_vecteur(VGroup(*[t[n] for n in indices]), color, fs,
+                                           ecart))
+        g.texte = t
         return g
 
     def systeme(self, lignes, fs=34, color=WHITE, c_acc=GREY_B, buff=0.22):
