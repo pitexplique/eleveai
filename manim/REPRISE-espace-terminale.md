@@ -37,8 +37,9 @@
 | E6 `espace_defi` | ✅ **HD livré** (6 min 49, 0 bord, planche HD regardée) — ⭐ REFAIT le 22/11 avec les flèches |
 | E7 `ps_espace_calculer` | ✅ **HD livré** (6 min 33, 0 bord, planche HD regardée) — ⭐ le premier AVEC les flèches |
 | E8 `ps_espace_orthogonalite` | ✅ **HD livré** (7 min 00, 0 bord, planche HD regardée) — ⭐ deux plans qui se projetteraient sur une LAME |
-| ✅ **la notation vectorielle** | **faite sur les 8 scripts** : `auditer-fleches-vecteurs.py` → 0 nu (voir « LA PASSE DES FLÈCHES ») |
-| les 4 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
+| E9 `ps_espace_norme_distance` | ✅ **HD livré** (6 min 08, 0 bord, planche HD regardée) — ⭐ le glyphe √ n'a PAS de barre |
+| ✅ **la notation vectorielle** | **faite sur les 9 scripts** : `auditer-fleches-vecteurs.py` → 0 nu (voir « LA PASSE DES FLÈCHES ») |
+| les 3 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
 | les 12 shorts | ⏳ pas de voix encore |
 | les rendus HD, le branchement coach, les fiches YouTube | ⏳ |
 
@@ -61,13 +62,19 @@ ls manim/sorties/terminale/maths/geometrie/*/*.mp4   # les HD livrés
 python manim/poste2/verifier-voix-espace.py          # 12 voix, 15 clips, lettres A 8 B 8 C 8
 ```
 
-**Le prochain geste** : écrire `ps_espace_norme_distance.py` (E9, la Diagonale des Fous,
-centre `sport`), puis E10 à E12. ⭐ Le modèle est maintenant
-**`ps_espace_orthogonalite.py` (E8)**, et sa mesure
-`manim/poste2/mesure-ps-espace-orthogonalite.py` porte DEUX contrôles que les
-précédentes n'avaient pas : les **étiquettes de figure comparées deux à deux** et la
-**pointe d'une flèche testée dans le polygone de son plan**. ⚠️ E9 parle de normes et de
-distances : il dessinera des escaliers de coordonnées, pas des plans.
+**Le prochain geste** : écrire `ps_espace_angle.py` (E10, Ravi et les panneaux solaires
+de Saint-Pierre, centre `nature-ecologie`), puis E11 et E12. ⭐ Le modèle est maintenant
+**`ps_espace_norme_distance.py` (E9)**, et sa mesure
+`manim/poste2/mesure-ps-espace-norme-distance.py` porte TROIS contrôles que les
+précédentes n'avaient pas : les **étiquettes comparées deux à deux** (E8), la **pointe
+d'une flèche testée dans le polygone de son plan** (E8), et surtout
+**`loin_des_fleches()`** — une étiquette comparée au FÛT de tout segment tracé, qui a
+trouvé deux noms de sommet barrés par la grande diagonale du cube.
+⭐⭐ **E10 écrit « 1 sur racine de 3 » et « racine de 2 » : il emploie
+`EcransEspace.racine()`, neuf dans le socle, et n'en réécrit pas une.** Le glyphe √ se
+rend mais **il n'a aucune barre** — détail dans « Ce que l'épisode 9 a appris ».
+⚠️ `ps_espace_angle` garde **2 cues non placées** (« 577 ») : c'est maintenant qu'il faut
+les regarder.
 ✅ **La reprise des flèches est FAITE** (22/11) : E1, E2, E3 et E6 portent la notation
 vectorielle et sont re-rendus en HD. `python -X utf8 manim/poste2/auditer-fleches-vecteurs.py`
 doit rester à **0 NU sur tous les scripts** — c'est le contrôle à relancer après chaque
@@ -75,7 +82,7 @@ doit rester à **0 NU sur tous les scripts** — c'est le contrôle à relancer 
 nomme un vecteur : la flèche grandit les blocs, et elle a cassé trois figures et un bloc
 de cartes sur des épisodes qui étaient propres.
 
-Pour écrire E8, tout l'attend — sa voix dans
+Pour écrire E10, tout l'attend — sa voix dans
 `manim/poste2/VOIX-espace-terminale.md`, ses WAV, ses marques, et un socle complet :
 `systeme`, `ligne_param`, `eq_plan`, `eq_zero`, `choix2`, `choix3`, `au_fin`,
 `trip(par=True)`, `q_tete(largeur, xl)`, et — dans `espace3d.py` — `platitude()`,
@@ -1118,6 +1125,174 @@ vecteur, ce sont des DIRECTIONS nommées en français — une flèche dessinée 
 mot « nord » serait une faute de notation, pas une correction. L'outil ne lit pas le
 français (il le dit lui-même), donc il les signale ; la raison est écrite dans le script,
 à l'endroit de l'appel. ⛔ Le compte qui fait foi reste **NUS : 0**.
+
+---
+
+## ⛔⛔ Ce que l'épisode 9 a appris — à lire AVANT d'écrire l'épisode 10
+
+Douze défauts. **Cinq n'ont été vus que par le GROS PLAN**, trois par le dry run relu à
+la main, deux par la mesure hors rendu, un par `verifier-avant-rendu.py` et un par une
+image d'essai avant le premier écran. ⭐ Et **trois contrôles neufs** sont entrés dans
+les outils : ils valent pour les trois épisodes qui restent.
+
+### ⭐⭐ LE GLYPHE √ SE REND — MAIS IL N'A AUCUNE BARRE
+
+Rendu dans une image d'essai AVANT d'écrire le premier écran, avec ‖, ², ≈, ≥, ⟹, ⟺ :
+tous se dessinent (⛔ contrairement au ⚠ de E1 et à la flèche combinante U+20D7 de E7).
+Mais **√ est un signe seul, sans vinculum** : « √x² + y² + z² » se lit
+« (√x²) + y² + z² », c'est-à-dire **la faute même que l'épisode combat**. L'écran aurait
+contredit la voix, dans l'épisode dont toute la leçon est « la racine ne se distribue
+pas ».
+⭐ `EcransEspace.racine(radicande, fs, color, coef)` est maintenant dans le socle : elle
+TRACE la barre, comme `fleche_de_nom` dessine la flèche d'un vecteur. Le remède existait
+déjà dans le dépôt — `radical()` de `manim/scripts/seconde/racine_carree_2de.py` — et il
+a fallu aller le chercher. ⚠️ **E10 (cosinus, 1/√3) et E12 écrivent aussi des racines :
+on réemploie `self.racine`, on n'en réécrit pas une.**
+⚠️ Un radical est plus HAUT qu'un texte de la même police (0,07 au-dessus du radicande) :
+toute cote d'un bloc qui en gagne un se remesure. C'est la même leçon que la flèche de
+vecteur sur E7.
+
+### ⛔⛔ « AB » EST UNE LONGUEUR, « A B⃗ » EST UN VECTEUR — et ici c'est le sujet
+
+L'écran 03 écrit les deux côte à côte : **AB = ‖A B⃗‖**. Si les deux notations se
+ressemblaient, il ne resterait rien à enseigner. Huit textes de cet épisode portent une
+longueur et n'ont donc PAS de flèche ; chacun est inscrit **avec sa raison** dans
+`PAS_DES_VECTEURS` (`auditer-fleches-vecteurs.py`), qui reste à **0 NU sur les neuf
+scripts**. ⭐ C'est le point d'extension prévu de l'outil, et la table garde la trace de
+chaque décision — exactement comme le `sans_audit` d'un épisode porte toujours sa raison.
+
+> ⚠️⚠️ **ET CETTE TABLE EST GLOBALE, PAS PROPRE À UN ÉPISODE.** Les huit clés ajoutées
+> sont des chaînes EXACTES (« AB », « AC = », « AG = », « la distance AB vaut »,
+> « Que vaut la distance AB ? », « calcule la longueur AC, », « puis la longueur AG »,
+> « « la distance AB vaut … » »). ⛔ Si E10, E11 ou E12 écrit l'une de ces chaînes pour
+> désigner un VECTEUR, l'audit l'excusera en silence. Dans cette série un vecteur passe
+> toujours par `self.vec` / `self.vexpr`, donc le cas ne devrait pas se produire — mais
+> c'est écrit ici parce qu'un instrument qu'on a soi-même élargi mérite qu'on dise où il
+> est devenu aveugle.
+
+### ⛔⛔ UN NOM DE SOMMET TRAVERSÉ PAR UN FÛT — et `etiquettes()` ne pouvait pas le voir
+
+Dans le cube ABCDEFGH, la grande diagonale A G passe à **0,00** du nom « D » et à
+**0,10** du nom « F » : en cavalière A G se projette sur (1,41 ; 1,287) et frôle le
+projeté de D (0,41 ; 0,287) comme celui de F (1 ; 1). Les deux lettres étaient barrées
+par la flèche.
+⛔ `etiquettes()` (épisode 8) compare les étiquettes **deux à deux** : une boîte contre
+une boîte. Il ne voit jamais une boîte contre un SEGMENT.
+⭐ `loin_des_fleches()` est le contrôle neuf : il échantillonne le segment (⛔ pas sa
+boîte — la boîte d'une flèche en diagonale est un grand rectangle presque vide, leçon de
+la passe des flèches) et mesure sa distance à chaque étiquette.
+⚠️⚠️ **ET E8 DESSINE LA MÊME DIAGONALE DANS LE MÊME CUBE** : son HD est livré et ne
+bouge pas, mais le défaut y est probablement aussi — à regarder si on le re-rend un jour.
+
+### ⛔⛔ FUIR UNE FLÈCHE POUR TOMBER SUR UNE ARÊTE
+
+Premier réflexe : écarter « D » vers la gauche et « F » vers la droite. Vu au gros plan
+×2,8, les deux s'étaient posés **pile sur deux arêtes du cube**. ⛔ Un contrôle qui ne
+connaît qu'une partie du dessin DÉPLACE le défaut au lieu de le corriger — et la première
+version de `loin_des_fleches` ne testait que les deux diagonales.
+⭐ Il teste maintenant **tout segment tracé** : les douze arêtes, les deux diagonales et
+[C G]. Et les deux positions viennent d'une **recherche en grille** (pas de 0,06 entre
+−0,9 et +0,9), qui garde ce qui est à plus de 0,11 de tout segment et à plus de 0,22 des
+sept autres noms, puis classe par distance au sommet : D en haut à gauche (0,14 / 0,77),
+F en bas à droite (0,17 / 0,55). ⚠️ `placer` donne la position **par rapport au SOMMET**,
+jamais par rapport à la place que `cube()` avait donnée : une cote relative à une autre
+cote se périme au premier changement de l'une des deux.
+
+### ⛔⛔ UN SCHÉMA PEUT PORTER LES BONS NOMBRES ET MENTIR SUR SA FORME
+
+Le triangle « 3-4-5 » de l'écran 06 avait un rapport de **1,50** au lieu de 1,333 : un
+triangle étiqueté 3, 4, 5 qui n'était pas un 3-4-5, faux de 13 %. ⛔ Aucun outil ne peut
+le dire — les trois nombres affichés sont exactement ceux que la voix prononce, le dessin
+est dans la marge, et il est simplement FAUX. Vu sur la planche des figures seules.
+⭐ Les cotes viennent maintenant d'une UNITÉ, et **deux assertions du module** les
+revérifient à l'import : le 3-4-5 et le profil « 10 km à plat / 1 km de dénivelé » (dont
+la hauteur doit faire exactement un dixième de la base, sinon l'image contredit la voix
+qui dit « presque rien à la distance »). ⚠️ À faire pour tout schéma qui annonce une
+proportion.
+
+### ⛔⛔ TROIS DÉFAUTS DE PERSONNAGE, SIXIÈME ÉPISODE D'AFFILÉE — et une décision
+
+La coureuse de la Diagonale des Fous, à ×3,2 :
+1. **l'épaule était au milieu du buste** (défaut n° 1 de Jean-Bernard, E4, troisième
+   récidive). Poussée sur le bord même du torse, le gros plan montrait alors un **trou
+   noir** entre le torse et chaque bras. ⭐ **La solution n'est pas une cote, c'est
+   l'ORDRE** : l'épaule rentre franchement dans le torse, et le torse est dessiné
+   PAR-DESSUS — l'articulation disparaît sous le vêtement, comme sur un vrai dessin ;
+2. **les deux bras étaient symétriques** : on lisait un haussement d'épaules, pas une
+   foulée. C'est l'OPPOSITION des deux (avant qui remonte, arrière qui descend) qui dit
+   le mouvement, et aucune cote ne la remplace ;
+3. **le mollet arrière remontait** — une vraie foulée, illisible à cette taille : les
+   deux pieds vont vers le bas.
+⭐⭐ **ET LA DÉCISION : plus d'accessoire de tête.** Une queue de cheval en `Arc` posé par
+`move_to` flottait détachée du crâne (`move_to` centre la BOÎTE d'un arc, pas son centre
+de courbure) ; réécrite en segments partant de l'intérieur de la tête, elle se lisait
+comme une **corne**. C'est le troisième épisode de suite où une coiffure coûte un tour —
+la visière de Jean-Bernard (E4), le casque de Marc (E8), ces cheveux. Aucun personnage de
+la série n'a de traits de visage ; **une tête nue est le gabarit de la maison**, et c'est
+le DOSSARD qui dit « course ».
+
+### ⛔ UN POINTILLÉ N'ATTEINT PAS SES EXTRÉMITÉS
+
+Le sol du profil était une `DashedLine` : mesuré au gros plan ×2,6, le premier tiret
+commençait **0,30 unité à droite du départ** et le triangle paraissait OUVERT à gauche.
+⚠️ Et il n'avait aucune raison d'être pointillé — les dix kilomètres à plat sont
+réellement parcourus, ce n'est pas un trait de construction. ⭐ Corollaire d'outil : une
+cote ne se lit jamais sur une `DashedLine` (la mesure déduit la base de la montée et du
+trajet, qui sont deux `Line` pleines).
+
+### ⛔ UN `arrange` QUI EN DÉFAIT UN AUTRE — et seule la mesure l'a vu
+
+`VGroup(croix, t1, t2)` puis `lA[1:].arrange(DOWN)` suivi de `lA.arrange(RIGHT)` : le
+second `arrange` reprend LES TROIS enfants et défait le premier. Le bloc sortait en UNE
+ligne de 10,34 de large au lieu de deux. ⛔ À la planche, deux lignes et une ligne se
+ressemblent trop pour qu'on le remarque ; c'est le script de mesure qui l'a dit, par sa
+hauteur. ⭐ On monte le groupe en DEUX ÉTAGES explicites, comme le fait E8.
+
+### ⛔ UN GROS `AUDIT-TARD` CACHAIT TROIS VRAIES AVANCES — huitième fois de la série
+
+Le contrôle de l'épisode 5 (relire à la main les plus gros TARD, triés par valeur) a servi
+une fois de plus, et il a rapporté **trois** défauts d'un coup :
+
+| signalement | la vraie mesure |
+|---|---|
+| `AUDIT-TARD 04b « 2 » (1 − 2 + 2 : les carrés…) **14,23 s**` | la voix finit « c'est la somme des coordonnées » à 21,67 s et ne dit « 1 moins 2 plus 2 » qu'à 23,56 s : **1,9 s d'AVANCE** |
+| `AUDIT-TARD 09b « 2 » (2) **13,28 s**` | « Retiens ces deux résultats » finit à 28,25 s, « la diagonale d'une face vaut racine de 2 » à 32,54 s : **4,3 s d'AVANCE** sur √2, et 6,8 s sur √3 |
+| `AUDIT-TARD 09b « 3 » (3) **10,07 s**` | même cause, dans le cadre final (« a racine de 2 » à 40,45 s, « et a racine de 3 » à 41,79 s) |
+
+⭐ La règle qui les résume toutes : **un bloc qui porte plusieurs nombres que la voix
+énumère ne se pose pas d'un coup** — il se remplit au rythme de la voix. Et l'extrait d'un
+`au_fin` doit CONTENIR le dernier nombre de la ligne : « La somme des carrés fait 1 plus 1
+plus zéro » s'arrête juste avant le total (« c'est-à-dire 2 »), et le total s'affichait
+en avance.
+
+### ⛔ L'ORDRE EST CELUI DE LA VOIX — et `verifier-avant-rendu.py` le dit AVANT le rendu
+
+Écran 06 : la conclusion « au bac, la valeur exacte » est dite à 25,88 s, et « une norme
+est toujours positive ou nulle » à 29,24 s. Écrite dans l'ordre de la PAGE — le bloc de
+droite d'abord, la conclusion du bas ensuite — elle serait arrivée **3,36 s en retard**.
+⭐ Le contrôle le signale en « RETARD probable » avec un écart NÉGATIF : deux ancres dans
+le désordre se lisent à ce signe-là. Même défaut qu'à l'écran 03 de E8 (9,07 s), et il
+tombait ici sur une consigne de bac.
+⚠️ Il a aussi trouvé deux endroits où la voix ne laisse que **0,34 s** et **0,45 s** entre
+deux phrases : remède du piège n° 6 des entiers — **on ne pose pas d'ancre, on enchaîne**,
+le `play` précédent cale la ligne tout seul.
+
+### ⭐ CE QUI A BIEN MARCHÉ, ET QU'IL FAUT REFAIRE
+
+- **Étalonner `verifier-avant-rendu.py` avant de croire son zéro** : une copie du script
+  avec UN `au_mot` faux, dans le répertoire temporaire. Il a crié — et dans la même sortie
+  il a trouvé les trois vrais défauts ci-dessus.
+- **La planche des FIGURES SEULES avant le premier rendu**, deuxième épisode de suite
+  qu'elle paie : elle a attrapé le 3-4-5 faux, la queue de cheval détachée et le [C G]
+  invisible. ⚠️ **Et la planche elle-même se mesure** : au premier jet ses figures se
+  chevauchaient, et une planche illisible ne prouve rien.
+- **Dessiner un escalier de coordonnées** (`Repere3D.point(..., escalier=True)`) : c'est
+  la figure de cette micro, et elle est lisible du premier coup. ⛔ Elle encombre : un
+  seul écran de l'épisode la demande.
+- ⛔ **Ne pas poser un pointillé sur un trait déjà tracé** : [C G] dessiné en pointillé
+  était INVISIBLE, parce que [C G] *est* une arête du cube. Un trait plein d'une autre
+  couleur par-dessus, lui, se voit — et il porte la leçon (A C G est rectangle en C, donc
+  A G² = A C² + C G²).
 
 ---
 

@@ -251,6 +251,38 @@ class EcransEspace(AuditSynchro, MotsCales, Notion6e):
         g.texte = t
         return g
 
+    def racine(self, radicande, fs=28, color=WHITE, coef=""):
+        """UN RADICAL — le signe √, le radicande, ET SA BARRE (le vinculum).
+
+        ⛔⛔ MESURÉ SUR UNE IMAGE D'ESSAI AVANT D'ÉCRIRE UN ÉCRAN (22/11, épisode 9) :
+        le glyphe √ (U+221A) SE REND — contrairement au ⚠ de l'épisode 1 et à la flèche
+        combinante U+20D7 de l'épisode 7 — **mais il n'a aucune barre**. « √x² + y² + z² »
+        s'écrit donc sans rien qui dise où s'arrête le radicande, et à l'écran on lit
+        « (√x²) + y² + z² » : exactement la faute que l'épisode 9 passe son temps à
+        combattre (« la racine ne se distribue pas »). L'écran contredirait la voix.
+        ⭐ La barre se TRACE, comme la flèche d'un nom de vecteur. C'est le remède que
+        `radical()` de `manim/scripts/seconde/racine_carree_2de.py` avait déjà trouvé ;
+        il est recopié ici parce que la seconde ne partage pas ce socle.
+        ⚠️ `g.nb` rend le radicande SEUL : une carte de choix qui porte un radical a
+        besoin de `.nb` pour ne pas s'afficher avant que la voix ait dit son nombre
+        (le piège de la carte B de l'épisode 8, 1,05 s d'avance).
+        ⚠️ Un radical est plus HAUT qu'un texte de la même police (la barre déborde de
+        0,07 au-dessus du radicande) : toute cote d'un bloc qui en gagne un se remesure."""
+        morceaux = []
+        if coef:
+            morceaux.append(self.t(coef, fs, color))
+        signe = self.t("√", int(round(fs * 1.15)), color)
+        corps = (radicande if isinstance(radicande, Mobject)
+                 else self.t(str(radicande), fs, color))
+        morceaux += [signe, corps]
+        g = VGroup(*morceaux).arrange(RIGHT, buff=0.06, aligned_edge=DOWN)
+        barre = Line(corps.get_corner(UL) + LEFT * 0.02 + UP * 0.07,
+                     corps.get_corner(UR) + RIGHT * 0.04 + UP * 0.07,
+                     stroke_width=max(2.0, fs / 16), color=color)
+        out = VGroup(g, barre)
+        out.nb, out.corps, out.signe = [corps], corps, signe
+        return out
+
     def systeme(self, lignes, fs=34, color=WHITE, c_acc=GREY_B, buff=0.22):
         """LES TROIS LIGNES D'UNE REPRÉSENTATION PARAMÉTRIQUE, avec leur accolade.
         Sert à `espace_droite_parametrique`, et aux épisodes « plan » et

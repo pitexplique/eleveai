@@ -80,6 +80,21 @@ PAS_DES_VECTEURS = {
     # ── des POINTS, et la lettre d'une réponse ──
     "la même norme : B et C sont": "B et C sont des points",
     # ── des choix de question dont une AUTRE ligne porte le mot « vecteurs » ──
+    #
+    # ── ⭐⭐ DES LONGUEURS (épisode 9, `ps_espace_norme_distance`) ──────────────────
+    # « AB » est la DISTANCE de A à B : un nombre positif, donc SANS flèche. « A B⃗ »
+    # est le vecteur. Dans les huit autres épisodes la question ne se pose pas ; ici
+    # elle EST la leçon — l'écran 03 écrit les deux côte à côte, « AB = ‖A B⃗‖ », et si
+    # les deux notations se ressemblaient il ne resterait rien à enseigner. Chacune de
+    # ces huit lignes a été relue à la main, et chacune porte une longueur.
+    "AB": "la LONGUEUR AB, en face de ‖A B⃗‖ : c'est la leçon de l'épisode 9",
+    "Que vaut la distance AB ?": "une distance est un nombre (question de l'écran 07)",
+    "la distance AB vaut": "une distance est un nombre (conclusion de l'écran 05)",
+    "« la distance AB vaut … »": "le gabarit de la phrase de conclusion au bac",
+    "calcule la longueur AC,": "une longueur est un nombre (consigne du défi)",
+    "puis la longueur AG": "une longueur est un nombre (consigne du défi)",
+    "AC =": "la longueur de la diagonale d'une face, qui vaut √2",
+    "AG =": "la longueur de la grande diagonale, qui vaut √3",
 }
 
 

@@ -493,7 +493,89 @@ l'orthogonalité · 1:04 le théorème du chapitre · 1:28 question 1 · 1:57 r�
 
 ---
 
-## E9 à E12 — ⏳ en attente de leur rendu HD
+## E9 · `terminale-ps-espace-norme-distance` — ✅ rendu HD fait
+
+`manim/sorties/terminale/maths/geometrie/ps-espace-norme-distance/eleveai-maths-terminale-ps-espace-norme-distance.mp4`
+6 min 08 (368,0 s) · 23,9 Mo · **0 instant qui touche un bord** · planche HD regardée.
+⭐ Marques : **831**, fichier identique à celui du dépôt (`git diff --stat` vide) : le rendu est calé sur des
+marques à jour, et le contrôle par le CONTENU le prouve.
+⭐ `grep -c "self\.au_t("` → **0** : aucun instant relevé à la main, donc rien qui se
+périme si la voix est régénérée (piège n° 37 de la série des entiers).
+⚠️ `verifier-zone-margo --pas 1.0` : **38 instants**, en DEUX plages seulement — 0 à 9 s
+et 340 à 367 s. La soustraction tranche : garde 10,05 s (mascotte à 0,8) + finale 21,66 s
+(0,65) + abonnement 6,70 s (0,9) = **38,41 s**, pour 38 relevés au pas de 1 s. Et le
+surplus est constant à l'intérieur de chaque plage (+440, +461, +80 pixels).
+**Aucun écran de question touché** (04 : 89 → 135 s ; 07 : 195 → 253 s) : c'est le critère.
+⭐⭐ **Le glyphe √ se rend, MAIS IL N'A AUCUNE BARRE.** Mesuré sur une image d'essai avant
+d'écrire le premier écran : « √x² + y² + z² » se lirait « (√x²) + y² + z² », c'est-à-dire
+la faute même que l'épisode combat. Le vinculum est TRACÉ — `EcransEspace.racine()`, neuf
+dans le socle, à réemployer en E10 et E12 qui écrivent aussi des racines.
+⛔⛔ **« AB » est une LONGUEUR, « A B⃗ » est un VECTEUR**, et ici la distinction EST la
+leçon : l'écran 03 écrit les deux côte à côte. Les huit textes de longueur sont inscrits
+avec leur raison dans `PAS_DES_VECTEURS` (`auditer-fleches-vecteurs.py`), qui reste à
+**0 NU** sur les neuf scripts.
+⚠️ Le personnage est **une coureuse de la Diagonale des Fous**. Regardée au gros plan
+AVANT le premier rendu, ses bras partaient du MILIEU du buste et sa queue de cheval
+flottait détachée du crâne — la visière de Jean-Bernard (E4) et le casque de Marc (E8) à
+leur troisième forme.
+⭐ Le profil « 10 km à plat / 1 km de dénivelé » est dessiné À L'ÉCHELLE, et le 3-4-5 du
+piège est aux VRAIES proportions 3-4-5 — il ne l'était pas au premier jet (1,50 au lieu
+de 1,333), et aucun outil ne pouvait le dire. Les deux sont maintenant vérifiés par une
+assertion du module.
+
+```json
+{
+  "id": "terminale-ps-espace-norme-distance",
+  "notionId": "produit_scalaire_espace",
+  "microId": "ps_espace_norme_distance",
+  "classe": "terminale-spe",
+  "ceinture": "verte",
+  "serie": "Maths Tle spé",
+  "type": "longue",
+  "fichier": "terminale/maths/geometrie/ps-espace-norme-distance/eleveai-maths-terminale-ps-espace-norme-distance.mp4",
+  "miniature": "terminale/maths/geometrie/ps-espace-norme-distance/eleveai-maths-terminale-ps-espace-norme-distance.png",
+  "titre": "Dix kilomètres à plat et un de dénivelé ne font pas onze · Calculer une norme ou une distance dans l'espace · Tle spé",
+  "centres": ["sport"],
+  "tags": ["norme", "distance", "espace", "racine carrée", "Pythagore", "valeur exacte", "cube ABCDEFGH", "diagonale", "terminale", "bac"]
+}
+```
+
+**Accroche** (à relire par Frédéric avant publication) :
+
+> Pense à la Diagonale des Fous. Un coureur enchaîne dix kilomètres à plat et un kilomètre
+> de dénivelé. Quelle distance a-t-il parcourue, vraiment ? Pas onze kilomètres : on
+> n'additionne pas une distance au sol et une hauteur, on passe par les carrés. Racine de
+> cent un, soit un peu plus de dix kilomètres. Le dénivelé change presque tout à l'effort,
+> et presque rien à la distance — c'est Pythagore, en trois dimensions.
+>
+> Dans cette vidéo :
+> • la norme d'un vecteur de coordonnées x, y, z : la racine de x² + y² + z², et
+>   l'escalier de coordonnées qui montre d'où sortent les trois carrés
+> • la distance entre deux points : arrivée moins départ, puis la racine de la somme des
+>   carrés — et le lien avec l'épisode précédent, le carré de la norme est le produit
+>   scalaire du vecteur par lui-même
+> • le piège qui coûte le plus cher : la racine NE SE DISTRIBUE PAS. Racine de 3² + 4² ne
+>   fait pas 3 + 4, elle fait racine de 25, c'est-à-dire 5
+> • la valeur exacte : racine de 14 est une réponse, 3,74 est un arrondi — et il ne vaut
+>   une réponse que si l'énoncé en demande un
+> • le modèle de rédaction en trois lignes, et la phrase de conclusion qu'on oublie quand
+>   l'énoncé parle de distance
+>
+> Deux questions-pauses et un défi corrigé dans le cube ABCDEFGH : les longueurs AC et AG.
+> Deux résultats à retenir par cœur — racine de 2 pour la diagonale d'une face, racine de
+> 3 pour la grande diagonale, et a racine de 2 / a racine de 3 si l'arête mesure a.
+> Entraîne-toi sur eleveai.fr
+
+**Chapitres**, relevés sur le rendu :
+0:00 garde · 0:10 la Diagonale des Fous · 0:44 la norme d'un vecteur ·
+1:11 une distance est une norme · 1:29 question 1 · 1:45 réponse ·
+2:14 d'un point à l'autre · 2:37 la racine ne se distribue pas · 3:15 question 2 ·
+3:40 réponse · 4:13 trois lignes, toujours dans cet ordre · 4:37 à toi de jouer ·
+4:56 correction · 5:39 ce que tu as appris.
+
+---
+
+## E10 à E12 — ⏳ en attente de leur rendu HD
 
 Les identifiants sont fixés et doivent rester ceux-là (c'est sur eux que le coach
 branchera) :
@@ -505,7 +587,6 @@ branchera) :
 | E4 | `terminale-espace-plan-equation` | `espace_plan_equation` | `sciences` |
 | E5 | `terminale-espace-position-relative` | `espace_position_relative` | `transports` |
 | E6 | `terminale-espace-defi` | `espace_defi` | `jeux-defis` |
-| E9 | `terminale-ps-espace-norme-distance` | `ps_espace_norme_distance` | `sport` |
 | E10 | `terminale-ps-espace-angle` | `ps_espace_angle` | `nature-ecologie` |
 | E11 | `terminale-ps-espace-plan-normal` | `ps_espace_plan_normal` | `sciences` |
 | E12 | `terminale-ps-espace-defi` | `ps_espace_defi` | `jeux-defis` |
