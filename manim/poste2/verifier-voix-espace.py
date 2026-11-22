@@ -16,7 +16,11 @@
 #      l'écran, et au-delà de trois lignes les cartes de choix descendent sur Ti Margo
 #      (piège n° 33 de `manim/REPRISE-entiers-cm1-6e.md`) ;
 #   4. ⛔ un texte identique dans deux épisodes : le signe d'un copier-coller non relu ;
-#   5. les questions sans leur réponse (`04` sans `04b`, `09-defi` sans `09b-correction`).
+#   5. les questions sans leur réponse (`04` sans `04b`) ;
+#   6. ⭐⭐ la PLACE de la bonne réponse : A, B ou C tirée au hasard, jamais deux fois
+#      la même lettre de suite dans un épisode, environ un tiers de chaque sur la série
+#      (manim/REGLES.md, Frédéric 09/11/2026) — et la cohérence entre la lettre annoncée
+#      et la proposition qui porte cette lettre.
 
 import json
 import re
@@ -93,6 +97,62 @@ for ident in EPISODES:
         if len(texte) > LONGUEUR_CLIP:
             alertes.append(f"{ident} / {clip} : {len(texte)} caractères")
         textes.setdefault(texte.strip(), []).append(f"{ident}/{clip}")
+
+# -------------------------------------------------------------------------------------
+# ⭐⭐ LA PLACE DE LA BONNE RÉPONSE (manim/REGLES.md, Frédéric 09/11/2026)
+# Le 09/11, sur 899 questions du manifeste, la bonne réponse était B 57 % du temps : un
+# élève qui répond toujours la même lettre gagnait trop souvent. Depuis : place tirée au
+# hasard, jamais deux fois la même lettre de suite dans une vidéo, ~1/3 de A, B et C sur
+# la série. ⛔ J'ai écrit ces 12 voix avec 24 bonnes réponses en A sans le voir : ce
+# contrôle existe pour que cela ne se reproduise pas en silence.
+OPTIONS = re.compile(r"A : (.+?)\. B : (.+?)\. C : (.+?)\. Mets pause")
+LETTRE = re.compile(r"^Réponse ([ABC])")
+
+lettres = {}
+for ident in EPISODES:
+    f = VOIX / f"{ident}.json"
+    if not f.exists():
+        continue
+    voix = json.loads(f.read_text(encoding="utf-8"))
+    suite = []
+    for q, r in (("04-question", "04b-reponse"), ("07-question", "07b-reponse")):
+        if q not in voix or r not in voix:
+            continue
+        choix = OPTIONS.search(voix[q])
+        if not choix:
+            erreurs.append(f"{ident} / {q} : les trois choix A, B, C ne se lisent pas "
+                           "(il faut « A : … . B : … . C : … . Mets pause »)")
+            continue
+        m = LETTRE.match(voix[r].strip())
+        if not m:
+            erreurs.append(f"{ident} / {r} : ne commence pas par « Réponse A/B/C »")
+            continue
+        lettre = m.group(1)
+        suite.append(lettre)
+        lettres[lettre] = lettres.get(lettre, 0) + 1
+        # ⭐ si la réponse cite sa valeur juste après la lettre, elle doit être CELLE de la
+        # proposition portant cette lettre : c'est ce qui attrape un déplacement de lettre
+        # fait à moitié (la question réordonnée, la réponse pas suivie).
+        cite = re.match(r"^Réponse [ABC], ([^.!]{1,40})", voix[r].strip())
+        if cite:
+            attendu = choix.group("ABC".index(lettre) + 1).strip().lower()
+            dit_ = cite.group(1).strip().lower()
+            if not attendu.startswith(dit_[: min(len(dit_), 12)]):
+                erreurs.append(f"{ident} / {r} : dit « {dit_} » pour la lettre {lettre}, "
+                               f"mais la proposition {lettre} est « {attendu[:40]} »")
+    if len(suite) == 2 and suite[0] == suite[1]:
+        erreurs.append(f"{ident} : les deux questions ont la bonne réponse en {suite[0]} "
+                       "— deux fois la même lettre de suite dans une vidéo")
+
+total = sum(lettres.values())
+if total:
+    print("   place de la bonne réponse : " + " · ".join(
+        f"{k} {lettres.get(k, 0)}" for k in "ABC") + f"  (sur {total} questions)")
+    for k in "ABC":
+        n = lettres.get(k, 0)
+        if not (total / 3 - 2 <= n <= total / 3 + 2):
+            erreurs.append(f"la lettre {k} porte la bonne réponse {n} fois sur {total} "
+                           f"— il en faut environ un tiers ({total // 3})")
 
 for texte, lieux in textes.items():
     autres = {l.split("/")[0] for l in lieux}

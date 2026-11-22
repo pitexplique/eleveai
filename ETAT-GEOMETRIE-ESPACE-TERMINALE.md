@@ -348,6 +348,15 @@ réponse à la voix validée qui disait « 6 032 a 3 centaines » dans un clip d
 ⛔ L'étalonnage a aussi trouvé deux de mes propres tests creux (`isclose(0, 1)`, un `True`
 en dur) : un instrument qui n'a jamais eu tort n'a peut-être jamais rien mesuré.
 
+⛔ **Un standard maison raté puis rattrapé, à noter** : les 24 questions-pauses ont
+d'abord été écrites avec la bonne réponse **toujours en A**. La règle
+(`manim/REGLES.md`, Frédéric 09/11/2026) veut la place tirée au hasard, jamais deux fois
+la même lettre de suite dans une vidéo, un tiers de chaque sur la série — elle est née
+d'un constat mesuré : 57 % de B sur 899 questions. Rattrapé (A 8 · B 8 · C 8), et
+`verifier-voix-espace.py` le contrôle maintenant, y compris le demi-déplacement où la
+question est réordonnée mais pas sa réponse. Trouvé en lisant le générateur de voix de
+la série des entiers, pas en me relisant.
+
 ### Ce qui n'est pas fait sur la série
 
 - ⏳ **Aucun rendu** : ni WAV, ni marques, ni script Manim, ni `-ql`, ni HD. Les 12 voix
