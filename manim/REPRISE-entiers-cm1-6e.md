@@ -30,17 +30,52 @@ sur les trois points ; les « douteux » restants sont les 12 shorts Ti Margo, q
   d'épisode porte sa `fiche-youtube.md` (titre, description, chapitres, tags) et ses miniatures.
 - La programmation du manifeste s'étale du **13/06 au 24/06/2027**, 2 vidéos par jour.
 
-### ⛔⛔ LE PIÈGE DE LA BRANCHE `poste2` — à lire avant toute fusion
-La branche `poste2` a été poussée le 22/11 (`94681e05c`). Mesuré ce jour-là :
-- ✅ ce qu'elle **ajoute** à `main`, ce sont **uniquement les 40 commits de cette série** — aucun
-  fichier du poste 1 (`git log --name-only origin/main..poste2` : rien hors `manim/`,
-  `prototypes/ti-margo/films`, `lib/videos`, `lib/matrice`) ;
-- ⛔⛔ **mais elle a 97 commits de RETARD sur `main`**, et son arbre ignore donc **247 fichiers du
-  poste 1** — tout `lib/problemes` (les énigmes) et les `manim/scripts/ce2/masse_*`.
-  `git diff --stat origin/main origin/poste2` affiche **30 906 suppressions**.
-  → **Fusionner `poste2` dans `main` en l'état effacerait le travail du poste 1.** Il faut
-  d'abord rapatrier `main` dans `poste2` (ou repartir d'une branche coupée sur `main` et n'y
-  porter que les 40 commits de la série). ⚠️ Et sa preview Vercel montre un site amputé d'autant.
+### ✅ LE PIÈGE DE LA BRANCHE `poste2` — RÉPARÉ le 22/11 (`c36b26ad8`)
+**Ce qui s'était passé** : la branche était à jour de la série mais avait **97 commits de retard
+sur `main`**. Son arbre ignorait donc **247 fichiers du poste 1** (tout `lib/problemes`, les
+`manim/scripts/ce2/masse_*`), et `git diff --stat origin/main origin/poste2` affichait **30 906
+suppressions** : la fusionner dans `main` en l'état **aurait effacé le travail du poste 1**.
+
+**Ce qu'on a fait** : `git merge origin/main` DANS `poste2` (jamais l'inverse en premier), sur
+place, sans changer de branche — le dossier est partagé. **Exactement 4 conflits**, tous des
+registres JSON partagés, **aucun fichier de code** : `lib/videos/videos-r2.json`,
+`lib/videos/bilans-videos.json`, `manim/manifeste-youtube.json`,
+`scripts/miniatures-shorts-grille.json`.
+
+⭐⭐ **Un registre partagé se résout par RÉUNION des clés, jamais en choisissant un côté.** L'outil :
+`python manim/poste2/fusionner-registres.py <chemin> [--ecrire]`, à lancer **en plein merge**. Il
+fait une fusion à **trois** côtés clé par clé (base = `:1:`, nous = `:2:`, main = `:3:`) : une clé
+touchée d'un seul côté prend ce côté, une clé touchée des **deux** est annoncée comme conflit réel
+et **rien n'est écrit**. Il reproduit le format d'origine au caractère près, ou il refuse.
+Résultat mesuré ici : **aucun conflit réel**, +24 clés de la série, +20 clés `masse` du poste 1,
+**0 clé perdue d'aucun côté**.
+
+⛔ **`scripts/miniatures-shorts-grille.json` se tient À LA MAIN** (piège 12) : l'outil refuse,
+et c'est voulu. Les deux côtés n'y ajoutent qu'en **fin** de fichier : fusion textuelle
+`préfixe commun + bloc de main + notre bloc + "
+}
+"`, puis contrôle des clés par `json.loads`.
+
+⭐⭐ **La preuve à produire avant de commiter une fusion comme celle-là** — le territoire de l'autre
+poste doit être **identique** au sien, pas « à peu près » :
+```
+git diff --stat origin/main..HEAD -- lib/problemes manim/scripts/ce2 'manim/REPRISE-masses*'
+```
+**VIDE.** Et dans l'autre sens, `git diff --stat HEAD..origin/main` ne doit lister **que** les
+fichiers de la série (94 ici, tous dans `manim/`, `prototypes/ti-margo`, `lib/videos`,
+`lib/matrice`) : c'est la preuve que `main` est entièrement contenu dans la branche.
+
+⚠️ **Et les registres de la copie de travail mentent.** Ils étaient modifiés sans être commités :
+`videos-r2.json` du worktree avait **353 clés en MOINS** que `HEAD` — un résidu de
+`scripts/generer-videos-r2.mjs`, qui régénère depuis le manifeste et perd tout ce qui n'y est pas.
+C'est pour ça qu'on commite ces fichiers par clés (`manim/outils-commit-cles.py`) et **jamais tels
+quels**. Avant la fusion : `git checkout HEAD -- <les registres>` (par chemin, jamais de `reset`).
+
+⏭️ **Ce qui reste, et c'est la décision de Frédéric** : fusionner `poste2` dans `main`. C'est ce
+merge-là qui déclenche le déploiement de production et fait passer les 24 pages `/video/<id>` de
+**404** à **200** — le coach affiche déjà « ▶ Vidéo » sur ces micros (34 lignes
+`notion_ressources` en base de production), mais `/video/<id>` lit `lib/videos/videos-r2.json`,
+un fichier du **dépôt**, que `main` ne connaît pas encore.
 
 ---
 
