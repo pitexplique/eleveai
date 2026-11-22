@@ -284,6 +284,35 @@ Donc, pour chaque épisode, **une passe dédiée sur les maths seules**, indépe
     `{ '01-oups': 1.2, … }` d'un autre film aurait supprimé son silence de 1,2 s **sans un mot**,
     et décalé tout le film. ⭐ Lire les clés du JSON de voix avant de recopier une table d'écarts.
 
+42. ⛔⛔ **`vercel.json` porte un `ignoreCommand`, et il décide si le site se reconstruit.**
+    Lu dans le fichier, pas déduit :
+    `[ "$VERCEL_GIT_COMMIT_REF" != "main" ] || { … git diff --quiet "$P" HEAD -- . ':(exclude)manim'
+    ':(exclude)scripts/*.py' ':(exclude)scripts/*.ps1'; }`
+    ⚠️ Chez Vercel, **0 = saute le build, non-zéro = construis** — l'inverse de l'intuition.
+    Deux conséquences, et les deux nous concernent :
+    - ⛔ **Sur toute branche AUTRE que `main`, le build est TOUJOURS sauté.** Pousser `poste2` ne
+      produit donc **aucune preview** — il ne faut pas en attendre une, ni croire qu'on « verra le
+      résultat sur la branche ». Seul `main` déploie.
+    - ⛔ **Sur `main`, un commit qui ne touche QUE `manim/`, `scripts/*.py` ou `scripts/*.ps1` ne
+      redéploie rien.** C'est exactement la forme d'une passe de production vidéo pure. ⭐ Ce qui
+      sauve le cas normal : `lib/videos/videos-r2.json`, `lib/videos/bilans-videos.json` et
+      `scripts/miniatures-shorts-grille.json` sont HORS des exclusions — une publication qui passe
+      par `generer-videos-r2.mjs` déclenche donc bien le build. Mais un simple re-rendu de MP4,
+      lui, ne déclenchera rien : si une page doit changer, vérifier qu'un fichier hors `manim/`
+      bouge, sinon le site restera sur l'ancien bundle **sans aucun signal**.
+43. ⭐⭐ **La table des vidéos est une donnée de BUILD, pas d'exécution.** `lib/videos/r2.ts` fait
+    `import table from "./videos-r2.json"` (import statique, compilé dans le bundle), et
+    `app/video/[id]/page.tsx` n'a ni `generateStaticParams`, ni `revalidate`, ni `dynamic` : rien
+    ne relit ce fichier après le build. Conséquence vécue le 22/11 : les 24 pages `/video/…`
+    rendaient **404 en production** alors que les lignes de coach étaient en base et les MP4 sur
+    R2 — la table en ligne ignorait les nouveaux identifiants. ⛔ Ni le temps, ni un cache qui
+    expire, ni une revalidation n'y changent quoi que ce soit : **seul un déploiement répare**.
+    ⚠️ Et sonder l'URL ne dira jamais rien d'autre que « le build en ligne est l'ancien » :
+    `X-Vercel-Cache: MISS` + `Age: 0` sur un 404 signifie « recalculé à chaque appel, à partir
+    d'une table périmée », pas « la page n'existe pas ».
+    ⏱️ Ordre de grandeur mesuré : sur ce site (1 600+ vidéos au manifeste), un build complet prend
+    **plusieurs minutes**. Un 404 à T+3 min n'est pas encore un symptôme.
+
 ## Pièges d'infrastructure (toute la série)
 
 - ⛔⛔ **`verifier-fraicheur-mp4.py` ne voyait AUCUN script de cette série** (corrigé le 21/11).
