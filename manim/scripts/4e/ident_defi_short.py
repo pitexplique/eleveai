@@ -123,6 +123,16 @@ class IdentDefiShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
         ph.arrange(DOWN, buff=0.08).next_to(cartes, DOWN, buff=0.1).set_x(0)
         return tete, q, cartes, pause, rebours, ph
 
+    def place_reponse(self):
+        """22/11 (modèle : ident_choisir_short.py) : après le ✓, les cartes s'effacent et la réponse,
+        en lignes courtes, prend leur place, plus grande."""
+        cartes, ph = self.cartes_q, self.ph_q
+        haut = cartes[0].get_top()[1] - 0.05
+        self.play(FadeOut(cartes), FadeOut(self.mobjects[-1]), run_time=0.25)
+        ph.arrange(DOWN, buff=0.16)
+        k = min(0.52 / max(l.height for l in ph), 3.8 / ph.width, (haut + 2.75) / ph.height)
+        ph.scale(k).next_to(P(0, haut), DOWN, buff=0).set_x(0)
+
     def eq_dans_q(self, i, s, phrase, n=1, fs=None, lettres="xytn", couleur=WHITE):
         """Comme le module commun, mais la ligne ne dépasse jamais 3,8 de large (marge de 3 %)."""
         ref = self.q_q[i]
@@ -166,32 +176,32 @@ class IdentDefiShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
 
         # ── 01 : vérifier : 100 et 68, il manque 32 ──
         self.dire("01-verifier")
-        h1 = self.l("À gauche :", 2.05, 34, CIEL)
+        h1 = self.l("À gauche :", 2.02, 34, CIEL)
         self.dit(h1, "À gauche :")
-        g1 = self.le("2 + 8 = 10, 10² = 100", 1.5, 44, lettres="")
-        self.dire_eq(g1, "2 plus 8, 10, et 10 au carré, 100.", echelle=1.15)
-        c = Carre(0.34, 1.36, (-1.75, -0.55), cotes=("2", "8"), fs_cote=24)
+        g1a = self.le("2 + 8 = 10,", 1.5, 46, lettres="", maxw=3.8)
+        self.dire_eq(g1a, "2 plus 8, 10,", echelle=1.15)
+        g1b = self.le("10² = 100", 0.94, 46, lettres="", maxw=3.8)
+        self.dire_eq(g1b, "et 10 au carré, 100.", echelle=1.15)
+        c = Carre(0.3, 1.2, (-1.78, -0.8), cotes=("2", "8"), fs_cote=26)
         self.play(Create(c.cases), FadeIn(c.haut), FadeIn(c.gauche), run_time=0.4)
-        h2 = self.l("À droite :", 0.92, 34, CIEL)
+        h2 = self.l("À droite :", 0.44, 34, CIEL)
         self.dit(h2, "À droite :")
-        g2 = self.le("4 + 64 = 68", 0.37, 48, lettres="")
-        i4 = c.dans(0, "4", 20, audit=True)
-        i64 = c.dans(3, "64", 30, audit=True)
+        g2 = self.le("4 + 64 = 68", -0.05, 46, lettres="", maxw=3.8)
+        i4 = c.dans(0, "4", 22, audit=True)
+        i64 = c.dans(3, "64", 32, audit=True)
         self.poser_avec(g2, "4 plus 64, 68.", {0: lambda: [c.remplir(0), FadeIn(i4)],
                                                2: lambda: [c.remplir(3), FadeIn(i64)]})
-        m1 = self.l("Il manque", -0.75, 30, JAUNE_TITRE)
-        if m1.width > 1.75:
-            m1.scale_to_fit_width(1.75)
-        m1.set_x(1.0)
-        m2 = self.le("32 :", -1.15, 40, JAUNE_TITRE, lettres="").set_x(1.0)
+        xc, lc = 0.93, 2.2  # la colonne à droite du carré : de -0,17 à 2,03
+        m1 = self.le("Il manque", -0.66, 32, JAUNE_TITRE, lettres="", maxw=lc).set_x(xc)
+        m2 = self.le("32 :", -1.12, 44, JAUNE_TITRE, lettres="", maxw=lc).set_x(xc)
         self.dit(m1, "Il manque")
         self.dit_avec(m2, "32 :", {0: lambda: [c.remplir(1), c.remplir(2)]})
-        d1 = self.l("le double", -1.57, 28, BANDE).set_x(1.0)
+        d1 = self.le("le double", -1.6, 32, BANDE, lettres="", maxw=lc).set_x(xc)
         self.dit(d1, "le double")
-        d2 = self.l("produit,", -1.93, 28, BANDE).set_x(1.0)
+        d2 = self.le("produit,", -2.08, 32, BANDE, lettres="", maxw=lc).set_x(xc)
         self.dit(d2, "produit,")
         self.play(Circumscribe(c.bandes(), color=BANDE, buff=0.04), run_time=0.45)
-        d3 = self.le("2 × 2 × 8", -2.38, 34, BANDE, lettres="", maxw=1.8).set_x(1.0)
+        d3 = self.le("2 × 2 × 8", -2.55, 34, BANDE, lettres="", maxw=lc).set_x(xc)
         self.dire_eq(d3, "2 fois 2 fois 8.", echelle=1.1)
         self.play(Wiggle(c.bandes()), run_time=0.5)
         self.vider(garder)
@@ -213,14 +223,16 @@ class IdentDefiShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
             sc.eq_dans_q(0, "(x + 8)² ?", "x plus 8, au carré ?", lettres="x", fs=34, couleur=JAUNE_TITRE)
 
         def apres(sc):
-            sc.ph_eq(0, "Réponse B : x² + 16x + 64.", "Réponse B : x au carré plus 16 x plus 64.", lettres="x",
-                     premier=True)
-            sc.ph_eq(1, "Double produit : 2 × x × 8.", "Le double produit : 2 fois x fois 8.", lettres="x")
+            sc.place_reponse()
+            sc.ph_eq(0, "Réponse B :", "Réponse B :", premier=True)
+            sc.ph_eq(1, "x² + 16x + 64.", "x au carré plus 16 x plus 64.", lettres="x")
+            sc.ph_eq(2, "Le double produit :", "Le double produit :")
+            sc.ph_eq(3, "2 × x × 8.", "2 fois x fois 8.", lettres="x")
             sc.rep_fini()
 
         self.question_pause("01q-question", "01r-reponse", ["Et avec x :", "(x + 8)² ?"],
                             [Eq("x² + 64", 34), Eq("x² + 16x + 64", 34), Eq("x² + 8x + 64", 34)], 1,
-                            ["Réponse B : x² + 16x + 64.", "Double produit : 2 × x × 8."],
+                            ["Réponse B :", "x² + 16x + 64.", "Le double produit :", "2 × x × 8."],
                             avant_q=avant, autres_r=apres)
         self.vider(garder)
 
@@ -232,9 +244,11 @@ class IdentDefiShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
         self.au("À toi.", FadeIn(tit, shift=DOWN * 0.1), rt=0.35)
         q1 = self.l("Combien vaut", 1.45, 44)
         self.dit(q1, "Combien vaut")
-        q2 = self.le("(1 + 9)² − 1² − 9² ?", 0.55, 48, lettres="", maxw=3.9)
-        self.dire_eq(q2, "1 plus 9, au carré, moins 1 au carré, moins 9 au carré ?", echelle=1.1)
-        appel_commentaire(self, y=-1.0)
+        q2 = self.le("(1 + 9)²", 0.55, 62, lettres="", maxw=3.8)
+        self.dire_eq(q2, "1 plus 9, au carré,", echelle=1.1)
+        q3 = self.le("− 1² − 9² ?", -0.4, 60, lettres="", maxw=3.8)
+        self.dire_eq(q3, "moins 1 au carré, moins 9 au carré ?", echelle=1.1)
+        appel_commentaire(self, y=-1.55)
         self.attendre_voix(marge=0.6)
 
         # ── 03 : la fin commune ──

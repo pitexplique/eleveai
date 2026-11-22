@@ -94,6 +94,17 @@ def tampon(s, couleur, fs=40, angle=0.18):
     return VGroup(c, t).rotate(angle)
 
 
+def sur_copie(copie, e, droite=0.25):
+    """22/11 : l'écrit reste DANS la copie, à droite de la marge rouge (il débordait à gauche)."""
+    g = copie.marge.get_x() + 0.18
+    d = copie.papier.get_right()[0] - droite
+    if e.width > d - g:
+        e.scale_to_fit_width(d - g)
+    if e.height > copie.papier.height * 0.72:
+        e.scale_to_fit_height(copie.papier.height * 0.72)
+    return e.move_to(P((g + d) / 2, copie.papier.get_y()))
+
+
 def ecran_ia(w=6.4, h=2.8, titre="Correcteur IA", fs=24):
     """L'écran du correcteur automatique : cadre, bandeau (trois points, titre, puce), pied."""
     cadre = RoundedRectangle(width=w, height=h, corner_radius=0.14, fill_color=ECRAN_F, fill_opacity=1,
@@ -170,6 +181,43 @@ class IdentDefi4e(PaysageRel):
         w = getattr(self, "_w_cartes", None)
         return super()._carte_choix(lettre, txt, w or largeur, fs)
 
+    def _disposer_q(self, question, choix, phrase):
+        """Comme ident_developper : la phrase de réponse à 36 pt. Avec self._cartes_bas (question 2),
+        les cartes passent sous l'écran du correcteur, sur toute la largeur."""
+        tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
+        self._h36 = T(phrase[0], 36, audit=False).height
+        bas = getattr(self, "_cartes_bas", None)
+        if bas is not None:
+            bas = min(bas, q.get_bottom()[1] - 0.22)
+            cartes.align_to(P(-6.25, 0), LEFT).align_to(P(0, bas), UP)
+            if cartes.width < 10.4:  # le module commun les borne à la colonne de droite : on les rend larges
+                cartes.scale(10.4 / cartes.width, about_point=cartes.get_corner(UL))
+            pause.next_to(cartes, DOWN, buff=0.25).align_to(P(-6.25, 0), LEFT)
+        if len(ph.submobjects):
+            ph.scale(self._h36 / ph[0].height)
+            ph.arrange(DOWN, aligned_edge=LEFT, buff=0.2)
+            ph.next_to(cartes, DOWN, buff=0.3).align_to(cartes, LEFT)
+        return tete, q, cartes, pause, rebours, ph
+
+    def monter_reponse(self, bonne, droite=6.3, bas=-3.15):
+        """Les deux mauvaises cartes s'effacent, la bonne monte à la place de A ; la phrase de réponse,
+        en lignes courtes, prend leur place à 36 pt (modèle : ident_developper.py)."""
+        cartes, ph = self.cartes_q, self.ph_q
+        b = cartes[bonne]
+        ok = self.mobjects[-1]  # la coche, posée juste avant autres_r
+        d = cartes[0].get_center() - b.get_center()
+        anims = [FadeOut(cartes[j]) for j in range(3) if j != bonne]
+        if bonne != 0:
+            anims.append(b.animate.shift(d))
+            if ok is not b and ok not in b.get_family():
+                anims.append(ok.animate.shift(d))
+        self.play(*anims, run_time=0.2)
+        haut = cartes[0].get_bottom()[1] - 0.3
+        gauche = cartes[0].get_left()[0]
+        ph.arrange(DOWN, aligned_edge=LEFT, buff=0.2)
+        k = min(self._h36 / ph[0].height, (droite - gauche) / ph.width, (haut - bas) / ph.height)
+        ph.scale(k).next_to(P(0, haut), DOWN, buff=0).align_to(P(gauche, 0), LEFT)
+
     def eq_dans_q(self, i, s, phrase, n=1, fs=None, lettres="xytn", couleur=WHITE):
         """Comme le module commun, mais en E (sans ligature)."""
         ref = self.q_q[i]
@@ -179,7 +227,7 @@ class IdentDefi4e(PaysageRel):
         self.dire_eq(e, phrase, n)
         return e
 
-    def finale_colonne(self, textes, fs=38, figure=None):
+    def finale_colonne(self, textes, fs=38, figure=None, hmax=4.3):
         """Celle de facto_defi : un interligne RÉGULIER, la coche centrée sur la première ligne."""
         tit = self.t("Ce que tu as appris", 46, JAUNE_TITRE).to_edge(UP, buff=0.45)
         if figure is not None:
@@ -200,8 +248,8 @@ class IdentDefi4e(PaysageRel):
         largeur = self.BORD_X - 0.05 - xl
         if lignes.width > largeur:
             lignes.scale_to_fit_width(largeur)
-        if lignes.height > 4.3:
-            lignes.scale_to_fit_height(4.3)
+        if lignes.height > hmax:
+            lignes.scale_to_fit_height(hmax)
         lignes.align_to(P(xl, 0), LEFT).align_to(P(0, 2.45), UP)
         return lignes
 
@@ -220,10 +268,10 @@ class IdentDefi4e(PaysageRel):
             m.sans_synchro = True
         ident._pas_audit = True
         self.au("Les erreurs", Write(tt), FadeIn(ident, shift=DOWN * 0.2), FadeIn(ech), rt=0.7)
-        copie = Feuille(5.4, 1.5).move_to(P(-3.5, 0.3))
-        e = encre("(x + 5)² = x² + 25", 44, lettres="x").move_to(copie.get_center() + RIGHT * 0.2)
+        copie = Feuille(6.3, 1.5).move_to(P(-3.05, 0.3))
+        e = sur_copie(copie, encre("(x + 5)² = x² + 25", 48, lettres="x"))
         self.dire_eq(e, "x plus 5, au carré, égale x au carré plus 25 ?", echelle=1.15, avec=[FadeIn(copie)])
-        tp = tampon("FAUX", PIEGE, 44).move_to(P(0.75, 0.35))
+        tp = tampon("FAUX", PIEGE, 44).move_to(P(0.45, 1.38))
         self.au("Faux !", FadeIn(tp, scale=1.6), rt=0.3)
         l = self.lg("Voici pourquoi.", 4.0, 0.3, 46, JAUNE_TITRE, maxw=4.6)
         self.dit(l, "Voici pourquoi.")
@@ -239,19 +287,21 @@ class IdentDefi4e(PaysageRel):
         self.au("Aya", FadeIn(m.perso, shift=UP * 0.3), FadeIn(m.nom[0], shift=UP * 0.1), rt=0.35)
         self.au("ingénieure", FadeIn(m.nom[1], shift=UP * 0.1), rt=0.3)
         ec = ecran_ia(6.6, 2.85).move_to(P(1.3, -0.2))
-        l1 = self.lg("Elle apprend à un correcteur automatique", 1.3, 2.95, 36, maxw=9.0)
+        l1 = self.lg("Elle apprend à un correcteur automatique", 1.35, 2.95, 37, maxw=10.5)
         self.dit(l1, "Elle apprend à un correcteur automatique", avec=[FadeIn(ec, shift=UP * 0.2)])
-        l2 = self.lg("à repérer les erreurs des élèves.", 1.3, 2.35, 36, CIEL, maxw=9.0)
+        l2 = self.lg("à repérer les erreurs des élèves.", 1.35, 2.33, 37, CIEL, maxw=10.5)
         self.dit(l2, "à repérer les erreurs des élèves.")
         zone_y = ec.bande.get_bottom()[1]
-        s = self.lg("Sur une copie :", 1.3, zone_y - 0.35, 30, maxw=5)
-        copie = Feuille(5.0, 1.15).move_to(P(1.1, zone_y - 1.3))
+        s = self.lg("Sur une copie :", 1.3, zone_y - 0.38, 36, maxw=5.5)
+        copie = Feuille(5.8, 1.2).move_to(P(1.3, zone_y - 1.38))
         self.dit(s, "Sur une copie :", avec=[FadeIn(copie, shift=UP * 0.15)])
-        e = encre("(x + 5)² = x² + 25", 40, lettres="x").move_to(copie.get_center() + RIGHT * 0.15)
+        e = sur_copie(copie, encre("(x + 5)² = x² + 25", 44, lettres="x"))
         self.dire_eq(e, "x plus 5, au carré, égale x au carré plus 25.", echelle=1.15)
-        q = self.lg("Comment le correcteur sait-il que c'est faux ?", 0.2, -2.72, 40, JAUNE_TITRE, maxw=9.4)
-        pt = T("?", 64, JAUNE_TITRE, gras=True, audit=False).move_to(P(4.2, copie.get_y()))
-        self.dit(q, "Comment le correcteur sait-il que c'est faux ?")
+        q1 = self.lg("Comment le correcteur sait-il", 0.3, -2.42, 42, JAUNE_TITRE, maxw=10)
+        q2 = self.lg("que c'est faux ?", 0.3, -3.08, 42, JAUNE_TITRE, maxw=10)
+        pt = T("?", 72, JAUNE_TITRE, gras=True, audit=False).move_to(P(5.0, copie.get_y()))
+        self.dit(q1, "Comment le correcteur sait-il")
+        self.dit(q2, "que c'est faux ?")
         self.play(FadeIn(pt, scale=1.4), run_time=0.25)
         self.insister(pt, 1.25, 0.18)
         self.attendre_voix(marge=0.8)
@@ -260,7 +310,7 @@ class IdentDefi4e(PaysageRel):
     def ecran_test(self):
         self.ecran("02-test")
         copie = Feuille(6.4, 1.05).move_to(P(-0.4, 1.95))
-        r = encre("(x + 5)² = x² + 25", 44, lettres="x").sans_audit().move_to(copie.get_center() + RIGHT * 0.15)
+        r = sur_copie(copie, encre("(x + 5)² = x² + 25", 46, lettres="x").sans_audit())
         l0 = self.lg("Il teste avec un nombre.", -3.0, 3.05, 40, CIEL, maxw=7.0)
         self.dit(l0, "Il teste avec un nombre.", avec=[FadeIn(copie), FadeIn(r)])
         px = self.lg("Pour x = 1.", 3.6, 3.05, 42, lettres="x", maxw=4.6)
@@ -289,7 +339,7 @@ class IdentDefi4e(PaysageRel):
         tp = tampon("FAUX", PIEGE, 38).move_to(P(4.45, 1.95))
         self.play(FadeIn(tp, scale=1.6), Indicate(g2.atomes[-1], color=PIEGE), Indicate(d1.atomes[-1], color=PIEGE),
                   run_time=0.4)
-        m = self.lg("Il manque 10 : le double produit, 10x.", -0.6, -2.6, 40, lettres="x", maxw=9.4)
+        m = self.lg("Il manque 10 : le double produit, 10x.", -0.4, -2.6, 40, lettres="x", maxw=11.0)
         dix = VGroup(m.atomes[8], m.atomes[9])
         dix.set_color(BANDE)
         self.dit(m, "Il manque 10 : le double produit, 10 x.")
@@ -323,9 +373,11 @@ class IdentDefi4e(PaysageRel):
         self.play(Circumscribe(VGroup(e.atomes[10], e.atomes[11]), color=BANDE, buff=0.08),
                   Circumscribe(c.bandes(), color=BANDE, buff=0.06), run_time=0.6)
         self.play(Wiggle(VGroup(in1, in2)), run_time=0.5)
-        l = self.lg("Le carré d'une somme n'est jamais la somme des carrés.", -0.3, -2.35, 40, JAUNE_TITRE, maxw=10.4)
-        self.dit(l, "Le carré d'une somme n'est jamais la somme des carrés.")
-        self.insister(l, 1.05, 0.2)
+        la = self.lg("Le carré d'une somme", -0.3, -2.05, 42, JAUNE_TITRE, maxw=10.4)
+        lb = self.lg("n'est jamais la somme des carrés.", -0.3, -2.75, 42, JAUNE_TITRE, maxw=10.4)
+        self.dit(la, "Le carré d'une somme")
+        self.dit(lb, "n'est jamais la somme des carrés.")
+        self.insister(VGroup(la, lb), 1.05, 0.2)
         self.attendre_voix(marge=0.8)
 
     # ── 03q : QUESTION 1 (réponse C) ────────────────────────────────────────
@@ -347,11 +399,14 @@ class IdentDefi4e(PaysageRel):
             sc.play(Create(c.cases), FadeIn(c.haut), FadeIn(c.gauche), run_time=0.5)
 
         def apres(sc):
-            sc.ph_eq(0, "Réponse C : le double produit,", "Réponse C : le double produit,", premier=True,
+            sc.monter_reponse(2)
+            sc.ph_eq(0, "Réponse C :", "Réponse C :", premier=True,
                      avec=[c.remplir(0), FadeIn(in_a), c.remplir(3), FadeIn(in_b)])
-            sc.ph_eq(1, "2 × x × 9 = 18x.", "2 fois x fois 9, 18 x.", lettres="x", avec=[c.remplir(1), c.remplir(2)])
+            sc.ph_eq(1, "le double produit,", "le double produit,")
+            sc.ph_eq(2, "2 × x × 9 = 18x.", "2 fois x fois 9, 18 x.", lettres="x", avec=[c.remplir(1), c.remplir(2)])
             sc.play(FadeIn(in1), FadeIn(in2), run_time=0.25)
-            sc.ph_eq(2, "Pas 9x : il y a deux bandes.", "Pas 9 x : il y a deux bandes.", lettres="x")
+            sc.ph_eq(3, "Pas 9x :", "Pas 9 x :", lettres="x")
+            sc.ph_eq(4, "il y a deux bandes.", "il y a deux bandes.")
             sc.play(Circumscribe(c.cases[1], color=BANDE, buff=0.05), Circumscribe(c.cases[2], color=BANDE, buff=0.05),
                     run_time=0.6)
             sc.rep_fini()
@@ -359,7 +414,7 @@ class IdentDefi4e(PaysageRel):
         self.question_pause("03q-question", "03r-reponse", ["Quelle égalité est juste ?"],
                             [Eq("(x + 9)² = x² + 81", 34), Eq("(x + 9)² = x² + 9x + 81", 34),
                              Eq("(x + 9)² = x² + 18x + 81", 34)], 2,
-                            ["Réponse C : le double produit,", "2 × x × 9 = 18x.", "Pas 9x : il y a deux bandes."],
+                            ["Réponse C :", "le double produit,", "2 × x × 9 = 18x.", "Pas 9x :", "il y a deux bandes."],
                             avant_q=avant, autres_q=montrer_carre, autres_r=apres)
         self.XL = type(self).XL
         self._w_cartes = None
@@ -374,26 +429,23 @@ class IdentDefi4e(PaysageRel):
         self.dit(t2, "le signe.")
         e1 = D("(x − 3)²", 72).move_to(P(-4.0, 1.75))
         self.dire_eq(e1, "x moins 3, au carré.", echelle=1.15)
-        l1 = self.lg("Le double produit est négatif :", 0, 0, 38, maxw=7.4)
+        l1 = self.lg("Le double produit est négatif :", 0, 0, 40, maxw=8.6)
         e2 = D("− 6x", 58, BANDE)
-        VGroup(l1, e2).arrange(RIGHT, buff=0.4).move_to(P(-0.8, 0.5))
+        VGroup(l1, e2).arrange(RIGHT, buff=0.4).move_to(P(-0.7, 0.45))
         self.dit(l1, "Le double produit est négatif :")
         self.dire_eq(e2, "moins 6 x.", echelle=1.2)
-        l2 = self.lg("Mais le dernier terme est positif :", 0, 0, 38, maxw=7.8)
+        l2 = self.lg("Mais le dernier terme est positif :", 0, 0, 40, maxw=9.2)
         e3 = D("+ 9", 58, VERT_OK)
-        VGroup(l2, e3).arrange(RIGHT, buff=0.4).move_to(P(-0.8, -0.5))
+        VGroup(l2, e3).arrange(RIGHT, buff=0.4).move_to(P(-0.7, -0.45))
         sg = VGroup(signe("−"), T("×", 44, WHITE, audit=False), signe("−"), T("=", 44, WHITE, audit=False), signe("+"))
         sg.arrange(RIGHT, buff=0.25).move_to(P(3.4, 1.75))
         self.dit(l2, "Mais le dernier terme est positif :")
         self.play(LaggedStart(*[FadeIn(s, scale=0.6) for s in sg], lag_ratio=0.2), run_time=0.5)
         self.dire_eq(e3, "plus 9.", echelle=1.2)
         self.play(Indicate(sg[-1], color=VERT_OK), run_time=0.4)
-        copie = Feuille(5.6, 0.95).move_to(P(-3.3, -1.55))
-        w = encre("(x − 3)² = x² − 6x − 9", 38, lettres="x").sans_audit()
-        if w.width > 5.0:
-            w.scale_to_fit_width(5.0)
-        w.move_to(copie.get_center() + RIGHT * 0.15)
-        l3 = self.lg("Écrire − 9, c'est faux.", 2.8, -1.55, 42, maxw=4.6)
+        copie = Feuille(6.2, 1.0).move_to(P(-3.45, -1.75))
+        w = sur_copie(copie, encre("(x − 3)² = x² − 6x − 9", 40, lettres="x").sans_audit())
+        l3 = self.lg("Écrire − 9, c'est faux.", 2.95, -1.75, 42, maxw=6.0)
         for a in l3.atomes[1:]:
             a.set_color(PIEGE)
         self.dit(l3, "Écrire moins 9, c'est faux.", avec=[FadeIn(copie), FadeIn(w)])
@@ -441,51 +493,55 @@ class IdentDefi4e(PaysageRel):
 
     # ── 05q : QUESTION 2 (réponse B) ────────────────────────────────────────
     def ecran_question2(self):
+        """22/11 : l'écran était trop dense. L'énoncé en 4 lignes courtes à droite du correcteur,
+        les cartes sur toute la largeur SOUS le correcteur ; après le ✓, la bonne carte reste seule
+        et la réponse s'écrit dessous, à 36 pt, « La bonne réponse » à droite."""
         self.clear()
         self.add_mascotte()
-        self.XL = -2.2
-        self._w_cartes = (self.BORD_X - self.XL - 0.1) / 1.08
-        ec = ecran_ia(3.9, 2.55, "Correcteur IA", 22).move_to(P(-4.45, 1.3))
+        self.XL = -1.7
+        self._w_cartes = 11.0
+        ec = ecran_ia(4.4, 2.6, "Correcteur IA", 24).move_to(P(-4.2, 1.75))
+        self._cartes_bas = ec.get_bottom()[1] - 0.22
         zy = ec.bande.get_bottom()[1]
-        copie = Feuille(3.5, 0.72).move_to(P(-4.45, zy - 0.5))
-        w = encre("(x − 2)² = x² − 4", 34, lettres="x").sans_audit()
-        if w.width > 3.1:
-            w.scale_to_fit_width(3.1)
-        w.move_to(copie.get_center() + RIGHT * 0.12)
-        xt = D("x = 5", 32, audit=False).move_to(P(-4.45, zy - 1.15))
-        hg = T("à gauche", 22, GAUCHE_C, audit=False).move_to(P(-5.4, zy - 1.6))
-        hd = T("à droite", 22, DROITE_C, audit=False).move_to(P(-3.5, zy - 1.6))
-        rg = T("9", 34, VERT_OK, gras=True).next_to(hg, RIGHT, buff=0.15)
-        rd = T("21", 34, PIEGE, gras=True).next_to(hd, RIGHT, buff=0.15)
-        tp = tampon("FAUX", PIEGE, 26).move_to(P(-3.2, zy - 1.12))
+        copie = Feuille(3.9, 0.78).move_to(P(-4.2, zy - 0.52))
+        w = sur_copie(copie, encre("(x − 2)² = x² − 4", 36, lettres="x").sans_audit(), droite=0.2)
+        xt = D("x = 5", 36, audit=False).move_to(P(-4.95, zy - 1.16))
+        hg = T("à gauche", 24, GAUCHE_C, audit=False).move_to(P(-5.62, zy - 1.72))
+        hd = T("à droite", 24, DROITE_C, audit=False).move_to(P(-3.58, zy - 1.72))
+        rg = T("9", 36, VERT_OK, gras=True).next_to(hg, RIGHT, buff=0.12)
+        rd = T("21", 36, PIEGE, gras=True).next_to(hd, RIGHT, buff=0.12)
+        tp = tampon("FAUX", PIEGE, 22).move_to(P(-3.3, zy - 1.18))
 
         def avant(sc):
-            sc.eq_dans_q(0, "Une copie dit : (x − 2)² = x² − 4.",
-                         "Une copie dit : x moins 2, au carré, égale x au carré moins 4.", lettres="x", fs=36)
+            sc.eq_dans_q(0, "Une copie dit :", "Une copie dit :", lettres="", fs=36)
+            sc.eq_dans_q(0, "(x − 2)² = x² − 4.", "x moins 2, au carré, égale x au carré moins 4.", lettres="x",
+                         fs=36)
             sc.play(FadeIn(ec), FadeIn(copie), FadeIn(w), run_time=0.3)
-            sc.eq_dans_q(0, "Le correcteur teste x = 5. Que trouve-t-il ?",
-                         "Le correcteur teste x égale 5. Que trouve-t-il ?", lettres="x", fs=36)
+            sc.eq_dans_q(0, "Le correcteur teste x = 5.", "Le correcteur teste x égale 5.", lettres="x", fs=36)
             sc.play(FadeIn(xt), FadeIn(hg), FadeIn(hd), run_time=0.25)
+            sc.eq_dans_q(0, "Que trouve-t-il ?", "Que trouve-t-il ?", lettres="", fs=36)
 
         def apres(sc):
+            sc.monter_reponse(1, droite=1.0)
             sc.ph_eq(0, "Réponse B : 5 − 2 = 3, 3² = 9,", "Réponse B : 5 moins 2, 3, et 3 au carré, 9.", premier=True)
             sc.play(FadeIn(rg, scale=1.4), run_time=0.2)
             sc.ph_eq(1, "mais 25 − 4 = 21 :", "Mais 25 moins 4, 21.")
             sc.play(FadeIn(rd, scale=1.4), run_time=0.2)
             sc.ph_eq(2, "c'est faux.", "C'est faux", couleur=PIEGE)
             sc.play(FadeIn(tp, scale=1.6), run_time=0.25)
-            lb1 = sc.lg("La bonne réponse :", -4.45, -1.0, 34, VERT_OK, maxw=3.9)
+            y0 = sc.ph_q.get_top()[1]
+            lb1 = sc.lg("La bonne réponse :", 3.6, y0 - 0.3, 36, VERT_OK, maxw=4.3)
             sc.dit(lb1, "la bonne réponse")
-            lb2 = D("x² − 4x + 4", 46, VERT_OK)
-            if lb2.width > 3.2:
-                lb2.scale_to_fit_width(3.2)
-            lb2.move_to(P(-4.4, -1.8))
+            lb2 = D("x² − 4x + 4", 50, VERT_OK)
+            if lb2.width > 3.4:
+                lb2.scale_to_fit_width(3.4)
+            lb2.move_to(P(3.35, y0 - 1.1))
             sc.dire_eq(lb2, "x au carré moins 4 x plus 4.", echelle=1.15)
             sc.play(Create(sc.cadre_ok(lb2, 0.14)), run_time=0.2)
             sc.rep_fini()
 
         self.question_pause("05q-question", "05r-reponse",
-                            ["Une copie dit : (x − 2)² = x² − 4.", "Le correcteur teste x = 5. Que trouve-t-il ?"],
+                            ["Une copie dit :", "(x − 2)² = x² − 4.", "Le correcteur teste x = 5.", "Que trouve-t-il ?"],
                             [Eq("9 à gauche, 9 à droite, c'est juste", 34, lettres=""),
                              Eq("9 à gauche, 21 à droite, c'est faux", 34, lettres=""),
                              Eq("21 à gauche, 9 à droite, c'est faux", 34, lettres="")], 1,
@@ -493,20 +549,21 @@ class IdentDefi4e(PaysageRel):
                             avant_q=avant, autres_r=apres)
         self.XL = type(self).XL
         self._w_cartes = None
+        self._cartes_bas = None
 
     # ── 06 : le défi ────────────────────────────────────────────────────────
     def ecran_defi(self):
         self.ecran("06-defi")
         tit = self.lg("Défi : trouve l'erreur.", 0, 2.95, 54, JAUNE_TITRE, maxw=10)
         self.dit(tit, "Défi : trouve l'erreur.")
-        copie = Feuille(8.0, 1.6).move_to(P(-0.4, 1.0))
+        copie = Feuille(9.4, 1.6).move_to(P(-0.6, 1.0))
         l = self.lg("Sur une copie :", -3.5, 2.1, 36, CIEL, maxw=5)
         self.dit(l, "Sur une copie :", avec=[FadeIn(copie, shift=UP * 0.15)])
-        w = encre("(2x + 1)² = 2x² + 4x + 1", 54, lettres="x").move_to(copie.get_center() + RIGHT * 0.2)
+        w = sur_copie(copie, encre("(2x + 1)² = 2x² + 4x + 1", 54, lettres="x"))
         self.dire_eq(w, "2 x plus 1, au carré, égale 2 x au carré plus 4 x plus 1.", echelle=1.15)
         loupe = VGroup(Circle(radius=0.55, color=JAUNE_TITRE, stroke_width=6),
                        Line(P(0.39, -0.39), P(0.75, -0.75), color=JAUNE_TITRE, stroke_width=10))
-        loupe.shift(P(4.6, 0.0) - loupe[0].get_center())
+        loupe.shift(P(5.1, 0.0) - loupe[0].get_center())
         q = self.lg("Où est l'erreur ?", -0.4, -0.75, 48, maxw=8)
         self.dit(q, "Où est l'erreur ?", avec=[Create(loupe)])
         self.play(loupe.animate.shift(LEFT * 1.6), run_time=0.4)
@@ -525,10 +582,13 @@ class IdentDefi4e(PaysageRel):
         papier = VGroup(d["copie"], w)
         self.au("Correction", ReplacementTransform(d["tit"], tit), FadeOut(d["pz"]), FadeOut(d["q"]), FadeOut(d["l"]),
                 FadeOut(d["loupe"]), papier.animate.scale(0.68).move_to(P(-2.75, 1.85)), rt=0.4)
-        l1 = self.lg("Le double produit est juste : 2 × 2x × 1 = 4x.", -1.7, 0.6, 36, lettres="x", maxw=8.6)
-        self.dit(l1, "Le double produit est juste : 2 fois 2 x fois 1, 4 x.")
+        g0 = P(-6.2, 0)
+        l1a = self.lg("Le double produit est juste :", -2.5, 0.72, 40, maxw=8.4).align_to(g0, LEFT)
+        l1b = self.lg("2 × 2x × 1 = 4x.", -2.5, 0.08, 42, lettres="x", maxw=8.4).align_to(g0, LEFT)
+        self.dit(l1a, "Le double produit est juste :")
+        self.dit(l1b, "2 fois 2 x fois 1, 4 x.")
         quatre = VGroup(w.atomes[12], w.atomes[13])
-        ok = tampon("JUSTE", VERT_OK, 30, angle=-0.15).move_to(P(1.2, 1.85))
+        ok = tampon("JUSTE", VERT_OK, 32, angle=-0.15).next_to(papier, RIGHT, buff=0.35).shift(UP * 0.05)
         self.play(Circumscribe(quatre, color=VERT_OK, buff=0.06), FadeIn(ok, scale=1.6), run_time=0.45)
         # le carré de 2x : quatre carrés x²
         cote, o = 2.3, P(4.75, 0.35)
@@ -540,16 +600,17 @@ class IdentDefi4e(PaysageRel):
         xs = VGroup(*[D("x²", 34, audit=False).move_to(s) for s in sq])
         faux = VGroup(*w.atomes[8:11])
         ba = self.barrer(faux)
-        l2 = self.lg("Mais le carré de 2x, c'est 2x × 2x : 4x².", -1.7, -0.45, 36, lettres="x", maxw=8.6)
-        self.dit_avec(l2, "Mais le carré de 2 x, c'est 2 x fois 2 x : 4 x au carré.", {
-            4: lambda: [Create(sq), FadeIn(th), FadeIn(tg)],
-            16: lambda: [*[s.animate.set_fill(CARRE_A, 0.75) for s in sq], FadeIn(xs), faux.animate.set_color(PIEGE),
-                         Create(ba)],
+        l2a = self.lg("Mais le carré de 2x,", -2.5, -0.66, 40, lettres="x", maxw=8.4).align_to(g0, LEFT)
+        l2b = self.lg("c'est 2x × 2x : 4x².", -2.5, -1.3, 42, lettres="x", maxw=8.4).align_to(g0, LEFT)
+        self.dit_avec(l2a, "Mais le carré de 2 x,", {4: lambda: [Create(sq), FadeIn(th), FadeIn(tg)]})
+        self.dit_avec(l2b, "c'est 2 x fois 2 x : 4 x au carré.", {
+            9: lambda: [*[s.animate.set_fill(CARRE_A, 0.75) for s in sq], FadeIn(xs), faux.animate.set_color(PIEGE),
+                        Create(ba)],
         })
         self.play(Circumscribe(sq, color=CIEL, buff=0.06), run_time=0.45)
         lb = self.lg("La bonne réponse :", 0, 0, 40, maxw=5)
         r = D("4x² + 4x + 1", 58, VERT_OK)
-        VGroup(lb, r).arrange(RIGHT, buff=0.5).move_to(P(-1.2, -1.65))
+        VGroup(lb, r).arrange(RIGHT, buff=0.5).move_to(P(-1.2, -2.4))
         self.dit(lb, "La bonne réponse :")
         self.dire_eq(r, "4 x au carré plus 4 x plus 1.", echelle=1.15)
         self.play(Create(self.cadre_ok(r, 0.15)), run_time=0.25)
@@ -565,12 +626,12 @@ class IdentDefi4e(PaysageRel):
         ins = VGroup(c.dans(0, "a²", 36, lettres=""), c.dans(1, "ab", 26, lettres=""), c.dans(2, "ab", 26, lettres=""),
                      c.dans(3, "b²", 26, lettres=""))
         c.add(ins)
-        self.XL = -2.6
+        self.XL = -3.0
         self.BORD_X = 6.35
-        lignes = self.finale_colonne([["Le carré d'une somme a trois termes :", "n'oublie pas le double produit."],
+        lignes = self.finale_colonne([["Le carré d'une somme a trois", "termes : n'oublie pas", "le double produit."],
                                       ["Dans (a − b)², le dernier", "terme reste positif."],
                                       ["Pour vérifier, teste", "avec un nombre."]],
-                                     fs=38, figure=c)
+                                     fs=40, figure=c, hmax=5.55)
         self.play(FadeIn(c), run_time=0.3)
         for lg in lignes:
             self.montrer_ligne(lg)
