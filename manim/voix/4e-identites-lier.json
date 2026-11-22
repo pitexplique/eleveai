@@ -1,0 +1,19 @@
+{
+  "00-garde": "Le carré d'une somme. D'où vient la formule ? Un carré découpé va te le montrer.",
+  "01-architecte": "Nadia est architecte. Une cliente a une terrasse carrée, de x mètres de côté. Elle veut l'agrandir : 4 mètres de plus dans un sens, et 4 mètres de plus dans l'autre. La nouvelle terrasse est encore un carré, de côté x plus 4.",
+  "02-carre": "Son aire, c'est côté fois côté : x plus 4, fois, x plus 4. On l'écrit plus court : x plus 4, au carré. Un carré, c'est une expression multipliée par elle-même.",
+  "02q-question": "Question ! Que veut dire x plus 5, au carré ? A : x plus 5, fois 2. B : x plus 5, fois x plus 5. C : x au carré plus 25. Mets pause, et choisis !",
+  "02r-reponse": "Réponse B : x plus 5, fois x plus 5. Le carré multiplie l'expression par elle-même.",
+  "03-decoupe": "Découpons la nouvelle terrasse. L'ancienne terrasse : x fois x, x au carré. Une bande le long d'un côté : x fois 4, 4 x. Une autre bande, le long de l'autre côté : encore 4 x. Et le coin : 4 fois 4, 16.",
+  "04-distributivite": "C'est exactement la double distributivité. x fois x : x au carré. x fois 4 : 4 x. 4 fois x : 4 x. 4 fois 4 : 16. Quatre produits, quatre morceaux du carré.",
+  "05-reduire": "On réduit : 4 x plus 4 x, 8 x. L'aire vaut x au carré plus 8 x plus 16. Les deux bandes sont égales : ensemble, elles font le double produit, 2 fois x fois 4.",
+  "05b-verifier": "Vérifions pour x égale 1. À gauche : 1 plus 4, 5, et 5 au carré, 25. À droite : 1 plus 8 plus 16, 25. Ça marche.",
+  "06-piege": "Le piège : oublier les bandes. x plus 4, au carré, ne fait pas x au carré plus 16. Il manquerait 8 x : les deux bandes de la terrasse !",
+  "06q-question": "Question ! Développe x plus 2, au carré. A : x au carré plus 4. B : x au carré plus 2 x plus 4. C : x au carré plus 4 x plus 4. Mets pause, et choisis !",
+  "06r-reponse": "Réponse C : x au carré plus 4 x plus 4. Les deux bandes valent 2 x chacune : 4 x en tout.",
+  "07-formule": "Avec des lettres : a plus b, au carré, égale a au carré, plus 2 a b, plus b au carré. Le carré de a, les deux rectangles a b, le carré de b. Rien de nouveau : c'est la double distributivité, déjà faite.",
+  "08-defi": "À toi de jouer. Nadia agrandit une autre terrasse carrée, de x mètres de côté : 6 mètres de plus dans chaque sens. Quelle est sa nouvelle aire, développée ? Mets pause, et cherche !",
+  "08b-correction": "Correction. x plus 6, au carré, c'est x plus 6, fois x plus 6. Le carré x au carré, deux bandes de 6 x, et un coin de 36. L'aire vaut x au carré plus 12 x plus 36.",
+  "09-finale": "Ce que tu as appris. Un carré, c'est une expression multipliée par elle-même. x plus 4, au carré, se développe par la double distributivité. Le résultat a trois termes : les deux bandes forment le double produit.",
+  "10-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

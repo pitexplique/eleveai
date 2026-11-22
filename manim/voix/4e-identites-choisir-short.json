@@ -1,0 +1,8 @@
+{
+  "00-accroche": "x plus 6, fois x moins 6. Tu sors les quatre produits ? Il y a plus rapide.",
+  "01-raccourci": "Les mêmes termes, x et 6, avec des signes contraires. L'identité donne tout de suite x au carré moins 36. Les quatre produits ? 6 x et moins 6 x s'annulent : même résultat, en plus long.",
+  "01q-question": "Question ! Et pour x plus 6, fois x moins 1 ? A : la double distributivité. B : l'identité a plus b, au carré. C : l'identité a plus b, fois a moins b. Mets pause, et choisis !",
+  "01r-reponse": "Réponse A : la double distributivité. 6 et 1 sont différents : pas d'identité.",
+  "02-question": "À toi. Développe x moins 10, fois x plus 10. Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
