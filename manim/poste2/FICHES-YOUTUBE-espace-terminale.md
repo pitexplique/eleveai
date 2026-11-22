@@ -56,6 +56,52 @@ relevés sur le rendu (lignes `ECRAN` du journal) :
 
 ---
 
+## E2 · `terminale-espace-repere-coordonnees` — ⏳ HD lancé le 22/11 à 08:51
+
+`manim/sorties/terminale/maths/geometrie/espace-repere-coordonnees/eleveai-maths-terminale-espace-repere-coordonnees.mp4`
+5 min 52 attendues · `-ql` regardé (planche + gros plans), 3 défauts corrigés.
+
+```json
+{
+  "id": "terminale-espace-repere-coordonnees",
+  "notionId": "geometrie_espace",
+  "microId": "espace_repere_coordonnees",
+  "classe": "terminale-spe",
+  "ceinture": "verte",
+  "serie": "Maths Tle spé",
+  "type": "longue",
+  "fichier": "terminale/maths/geometrie/espace-repere-coordonnees/eleveai-maths-terminale-espace-repere-coordonnees.mp4",
+  "miniature": "terminale/maths/geometrie/espace-repere-coordonnees/eleveai-maths-terminale-espace-repere-coordonnees.png",
+  "titre": "Le cube où tout vaut 0 ou 1 — Coordonnées dans l'espace · Tle spé",
+  "centres": ["transports"],
+  "tags": ["coordonnées", "repère", "milieu", "cube", "espace", "terminale", "bac"]
+}
+```
+
+**Accroche** (à relire par Frédéric) :
+
+> Lila est magasinière dans un entrepôt du Port. Chaque colis a une adresse à trois
+> nombres : l'allée, la profondeur, l'étage. Dans l'espace, un point, c'est exactement
+> cela — et quand on choisit bien son repère, toute la géométrie devient du calcul.
+>
+> Dans cette vidéo :
+> • trois coordonnées, toujours dans l'ordre x, y, z
+> • le milieu, c'est la moyenne — trois fois
+> • le repère du cube (A ; AB, AD, AE) : les huit sommets ne sont que des 0 et des 1
+> • les quatre grandes diagonales se coupent au centre
+> • le piège : dans un pavé droit, les coordonnées tiennent, les longueurs NON —
+>   distances et angles ne marchent que si le repère est orthonormé
+>
+> Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
+
+**Chapitres**, relevés sur le rendu :
+0:00 garde · 0:11 Lila · 0:34 le repère du cube · 1:09 le milieu · 1:29 question 1 ·
+1:54 réponse · 2:15 les diagonales · 2:54 le piège du pavé · 3:31 question 2 ·
+3:52 réponse · 4:12 la première ligne de la copie · 4:35 à toi de jouer ·
+4:53 correction · 5:29 ce que tu as appris.
+
+---
+
 ## E2 à E12 — ⏳ en attente de leur rendu HD
 
 Les identifiants sont fixés et doivent rester ceux-là (c'est sur eux que le coach
