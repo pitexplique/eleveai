@@ -71,6 +71,30 @@ def ligne_param(nom, a, c, var="t"):
     return f"{nom} = {a} {'−' if c < 0 else '+'} {coef}{var}"
 
 
+def equation_plan(a, b, c, d=None, var=("x", "y", "z")):
+    """L'ÉQUATION CARTÉSIENNE D'UN PLAN, écrite comme au tableau :
+    « 2x + y − z + 1 = 0 », « x + y − z − 1 = 0 », « y − 1 = 0 », « z = 0 ».
+    ⛔ Le coefficient 1 ne s'écrit pas, un coefficient NUL fait disparaître son terme,
+    le premier terme n'a pas de « + » devant, et le signe moins est le vrai − (U+2212).
+    ⭐ `d=None` laisse « + d » en lettre : c'est l'inconnue de l'écran « appliquer »,
+    où l'on cherche justement le terme constant."""
+    morceaux = []
+    for coef, v in zip((a, b, c), var):
+        if coef == 0:
+            continue
+        morceaux.append(("−" if coef < 0 else "+", v if abs(coef) == 1 else f"{abs(coef)}{v}"))
+    if d is None:
+        morceaux.append(("+", "d"))
+    elif d != 0:
+        morceaux.append(("−" if d < 0 else "+", str(abs(d))))
+    if not morceaux:
+        raise ValueError("equation_plan : a, b et c sont tous nuls — ce n'est pas un plan")
+    s = morceaux[0][1] if morceaux[0][0] == "+" else "− " + morceaux[0][1]
+    for signe, corps in morceaux[1:]:
+        s += f" {signe} {corps}"
+    return s + " = 0"
+
+
 class EcransEspace(AuditSynchro, MotsCales, Notion6e):
     """Les outils d'écran communs aux 12 épisodes. Un épisode en hérite et ajoute
     ses 15 écrans. ⛔ Une correction se fait ICI, pas dans un épisode."""
@@ -160,6 +184,25 @@ class EcransEspace(AuditSynchro, MotsCales, Notion6e):
         g = VGroup(acc, bloc)
         g.eq, g.acc, g.bloc = eq, acc, bloc
         return g
+
+    def eq_zero(self, gauche, fs=34, color=WHITE):
+        """« … = 0 », avec le ZÉRO du second membre HORS AUDIT.
+
+        ⛔⛔ Et il faut qu'il le soit, dans les douze épisodes : la voix dit « égale
+        ZÉRO » en toutes lettres, et l'écran écrit 0 — c'est la seule écriture juste
+        d'une équation. Sans ce découpage en deux morceaux, il faudrait sortir de
+        l'audit l'équation ENTIÈRE, et ses coefficients avec elle : on perdrait
+        justement le contrôle qui compte (« 2x » est-il dit quand il s'affiche ?).
+        ⭐ Les deux morceaux restent adressables : `g.membre` et `g.zero`."""
+        g1 = self.t(f"{gauche} =", fs, color)
+        g0 = self.sans_audit(self.t("0", fs, color))
+        g = VGroup(g1, g0).arrange(RIGHT, buff=0.16)
+        g.membre, g.zero = g1, g0
+        return g
+
+    def eq_plan(self, a, b, c, d=None, fs=34, color=WHITE, var=("x", "y", "z")):
+        """L'équation d'un plan, posée à l'écran, le « 0 » hors audit (voir `eq_zero`)."""
+        return self.eq_zero(equation_plan(a, b, c, d, var)[:-4], fs, color)
 
     def insister(self, mob, k=1.3, run_time=0.25):
         self.play(mob.animate.scale(k), run_time=run_time)

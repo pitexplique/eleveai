@@ -32,7 +32,8 @@
 | E1 `espace_vecteurs` | ✅ **HD livré** (5 min 02, 0 bord, planche HD regardée) |
 | E2 `espace_repere_coordonnees` | ✅ **HD livré** (5 min 54, 0 bord, planche HD regardée) |
 | E3 `espace_droite_parametrique` | ✅ **HD livré** (5 min 56, 0 bord, planche HD regardée) |
-| les 9 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
+| E4 `espace_plan_equation` | ⏳ **script écrit, les DEUX contrôles d'avant-rendu passés — jamais rendu, jamais regardé à l'image** |
+| les 8 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
 | les 12 shorts | ⏳ pas de voix encore |
 | les rendus HD, le branchement coach, les fiches YouTube | ⏳ |
 
@@ -55,7 +56,20 @@ ls manim/sorties/terminale/maths/geometrie/*/*.mp4   # les HD livrés
 python manim/poste2/verifier-voix-espace.py          # 12 voix, 15 clips, lettres A 8 B 8 C 8
 ```
 
-**Le prochain geste, sans réfléchir** : écrire `espace_plan_equation.py` (E4).
+**Le prochain geste, sans réfléchir** : **RENDRE E4 en `-ql` et le regarder à l'image.**
+`manim/scripts/terminale/espace_plan_equation.py` est écrit et ses deux contrôles d'avant-rendu
+sont passés — `verifier-avant-rendu.py` « 0 problème », et le dry run `-qh` donne **0 BORD,
+0 AUDIT-AVANCE, 0 RETARD, 15 écrans, 1 seul AUDIT-ABSENT** (celui de `@eleveai974`). ⛔⛔ Mais
+**personne ne l'a encore regardé** : sur E1, E2 et E3, c'est exactement à ce stade que la
+moitié des défauts attendaient, et AUCUN outil ne les voit. Donc, dans l'ordre : rendu `-ql`,
+puis **planche ET gros plans** (clips `04b`, `07b`, `09b`), 2 à 4 tours de corrections, puis le
+HD sous le verrou, puis la fiche YouTube.
+⚠️ Les écrans à regarder en premier sur E4, parce qu'ils sont les plus chargés : `05-appliquer`
+(six lignes de calcul dans la colonne de droite), `06-piege` (deux plans dans le même repère,
+plus six textes), et `09b-correction` (qui hérite de l'écran de défi — piège de l'épisode 3).
+⚠️ Le dessin de Jean-Bernard (casquette, barbe, équerre) n'a jamais été vu non plus.
+
+*Et après E4* : écrire `espace_position_relative.py` (E5).
 Tout l'attend — sa voix, ses WAV, ses marques, le socle. Le modèle le plus propre est
 maintenant **`espace_droite_parametrique.py` (E3)** : il ne contient que ses 15 écrans, il
 emploie `au_fin` partout où un triplet s'affiche, et chaque `sans_audit` y porte sa raison
