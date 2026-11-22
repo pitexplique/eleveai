@@ -15,7 +15,50 @@
 // Piège récurrent du concours : le vecteur normal « évident » n'est pas
 // toujours proposé — il faut reconnaître un de ses multiples.
 
+//
+// ⭐⭐ LES FIGURES (22/11/2026). Mesure du jour : les trois banques de l'espace
+// portaient 169 items et QUATRE figures. Sur le chapitre dont tout l'objet est
+// de voir dans l'espace, l'élève lisait des triplets de nombres. Les figures
+// viennent maintenant de `./espace-figures` (canvas `repere3d`, perspective
+// cavalière), et 29 items de cette banque en portent une.
+//
+// ⛔ LA RÈGLE QUI DÉCIDE QUELS ITEMS EN REÇOIVENT UNE — et pourquoi 20 n'en
+// ont pas :
+//   - on dessine les DONNÉES (les points, le solide, la droite, le morceau de
+//     plan) ;
+//   - on ne dessine JAMAIS la réponse. Deux vecteurs colinéaires se dessinent
+//     superposés : l'élève cocherait sans calculer, et la micro-compétence
+//     n'aurait pas travaillé. Même chose pour un milieu, un projeté, une
+//     position relative ou une appartenance qu'on demande de trouver ;
+//   - une question de pure définition (« quelle est la formule de la norme ? »)
+//     n'a pas de figure : un dessin décoratif est interdit.
+// Le cadre n'a ni graduation ni quadrillage : aucun nombre ne se LIT sur ces
+// dessins. Ils montrent la configuration, ils ne la mesurent pas.
+//
+// ⭐ Vérification : `node scripts/verifier-figures-espace-terminale.mjs`. Il
+// rend les figures et mesure quatre choses que la lecture ne voit pas — un
+// texte coupé par le bord du SVG, un texte sous 11 px dans le bloc du coach,
+// DEUX NOMS L'UN SUR L'AUTRE (le rendu pose toutes les étiquettes au même
+// décalage, sans réglage), et surtout que la figure dit la MÊME CHOSE que son
+// énoncé : les triplets écrits sont des points dessinés, les quatre coins d'un
+// morceau de plan vérifient l'équation, les points d'une droite vérifient la
+// représentation paramétrique.
+
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
+import {
+  figureCube,
+  figureDeuxDroites,
+  figureDeuxPoints,
+  figureDeuxVecteurs,
+  figureDroite,
+  figureDroiteEtPlan,
+  figurePlan,
+  figurePointEtDroite,
+  figurePointEtPlan,
+  figureTetraedre,
+  figureTriangle,
+  figureVecteur,
+} from "@/lib/tutor-v4/questionBank/terminale-spe/maths/espace-figures";
 
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
   return (
@@ -50,6 +93,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["$(3\\,;\\,4\\,;\\,0)$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxPoints("A", [1, 2, 3], "B", [4, 6, 3]),
     hint: "$\\overrightarrow{AB}$ se calcule par « arrivée moins départ ».",
     explanation: exp(
       "$\\overrightarrow{AB}\\left(x_B - x_A\\,;\\,y_B - y_A\\,;\\,z_B - z_A\\right)$.",
@@ -79,6 +123,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["$(1\\,;\\,2\\,;\\,1)$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxPoints("A", [2, 0, 4], "B", [0, 4, -2]),
     hint: "On fait la moyenne coordonnée par coordonnée.",
     explanation: exp(
       "Le milieu de $[AB]$ a pour coordonnées $\\left(\\dfrac{x_A+x_B}{2}\\,;\\,\\dfrac{y_A+y_B}{2}\\,;\\,\\dfrac{z_A+z_B}{2}\\right)$.",
@@ -103,6 +148,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     choices: ["$7$", "$11$", "$\\sqrt{41}$", "$49$"],
     expected: ["$7$"],
     comparator: "mcq_exact",
+    canvas: figureVecteur("u", [2, 3, 6]),
     hint: "$\\|\\vec{u}\\| = \\sqrt{x^2 + y^2 + z^2}$ — et $49$ est un carré parfait.",
     explanation: exp(
       "Dans un repère orthonormé, $\\|\\vec{u}\\| = \\sqrt{x^2+y^2+z^2}$.",
@@ -127,6 +173,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     choices: ["$5$", "$7$", "$\\sqrt{7}$", "$25$"],
     expected: ["$5$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxPoints("A", [1, 0, 0], "B", [4, 4, 0]),
     hint: "Calcule d'abord $\\overrightarrow{AB}$, puis sa norme.",
     explanation: exp(
       "$AB = \\sqrt{(x_B-x_A)^2 + (y_B-y_A)^2 + (z_B-z_A)^2}$.",
@@ -156,6 +203,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["$(2\\,;\\,-2\\,;\\,-8)$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxPoints("A", [5, 5, -1], "B", [7, 3, -9]),
     hint: "Attention aux signes sur la troisième coordonnée : $-9 - (-1)$.",
     explanation: exp(
       "$\\overrightarrow{AB}\\left(x_B - x_A\\,;\\,y_B - y_A\\,;\\,z_B - z_A\\right)$.",
@@ -304,6 +352,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["$x = 1 + 2t\\ ;\\ y = -t\\ ;\\ z = 2 + 3t$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxPoints("A", [1, 0, 2], "B", [3, -1, 5]),
     hint: "Le point $A$ donne les constantes, le vecteur $\\overrightarrow{AB}$ donne les coefficients de $t$.",
     explanation: exp(
       "Une droite passant par $A$ et de vecteur directeur $\\vec{u}$ a pour représentation $M = A + t\\vec{u}$.",
@@ -333,6 +382,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["$(-1\\,;\\,3\\,;\\,4)$"],
     comparator: "mcq_exact",
+    canvas: figureDroite([2, 1, 0], [-1, 3, 4]),
     hint: "Le vecteur directeur se lit sur les coefficients de $t$, pas sur les constantes.",
     explanation: exp(
       "Dans $M = A + t\\vec{u}$, les coefficients de $t$ donnent $\\vec{u}$ et les constantes donnent $A$.",
@@ -362,6 +412,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["oui, pour $t = 0$"],
     comparator: "mcq_exact",
+    canvas: figureDroite([2, 1, 0], [-1, 3, 4]),
     hint: "Cherche s'il existe une valeur de $t$ donnant les trois coordonnées à la fois.",
     explanation: exp(
       "Un point appartient à la droite s'il existe une valeur de $t$ vérifiant les trois équations.",
@@ -453,6 +504,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["$(4\\,;\\,-2\\,;\\,2)$"],
     comparator: "mcq_exact",
+    canvas: figurePlan([2, -1, 1, -3], { nom: "P" }),
     hint: "Le vecteur $(2\\,;\\,-1\\,;\\,1)$ n'est pas proposé : cherche un de ses multiples.",
     explanation: exp(
       "Le plan d'équation $ax + by + cz + d = 0$ admet $(a\\,;\\,b\\,;\\,c)$ pour vecteur normal, ainsi que tous ses multiples.",
@@ -482,6 +534,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["$x + y + z - 6 = 0$"],
     comparator: "mcq_exact",
+    canvas: figurePlan([1, 1, 1, -6], { nom: "P", point: { en: [1, 2, 3], label: "A" }, normale: true }),
     hint: "Écris $x + y + z + d = 0$, puis impose que $A$ appartienne au plan.",
     explanation: exp(
       "Le plan de vecteur normal $(a\\,;\\,b\\,;\\,c)$ a une équation de la forme $ax + by + cz + d = 0$.",
@@ -540,6 +593,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["$x + y - z = 0$"],
     comparator: "mcq_exact",
+    canvas: figurePlan([-1, -1, 1, 0], { nom: "P", point: { en: [1, 2, 3], label: "A" } }),
     hint: "Cherche $(a\\,;\\,b\\,;\\,c)$ orthogonal à la fois à $\\vec{u}$ et à $\\vec{v}$.",
     explanation: exp(
       "Un vecteur normal au plan est orthogonal aux deux vecteurs directeurs.",
@@ -650,6 +704,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\left(\\dfrac{7}{4}\\,;\\,\\dfrac{1}{4}\\,;\\,\\dfrac{3}{4}\\right)$"],
     comparator: "mcq_exact",
+    canvas: figureDroiteEtPlan([1, 1, 0], [1, -1, 1], [1, -1, 2, -3], { nomPlan: "P", nomDroite: "d" }),
     hint: "Remplace $x$, $y$ et $z$ par leurs expressions en $t$ dans l'équation du plan.",
     explanation: exp(
       "Le point d'intersection correspond à la valeur de $t$ vérifiant l'équation du plan.",
@@ -708,6 +763,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["n'ont aucun point commun et ne sont pas parallèles"],
     comparator: "mcq_exact",
+    canvas: figureDeuxDroites([0, 1, 2], [1, 0, 1], [1, 1, 1], [-1, 0, 1], { noms: ["d1", "d2"] }),
     hint: "Deux droites parallèles, comme deux droites sécantes, définissent toujours un plan.",
     explanation: exp(
       "Deux droites sont coplanaires si elles appartiennent à un même plan.",
@@ -736,6 +792,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     choices: ["$6$", "$9$", "$12$", "$18$"],
     expected: ["$6$"],
     comparator: "mcq_exact",
+    canvas: figureTetraedre(["O", "A", "B", "C"], [[0, 0, 0], [2, 0, 0], [0, 3, 0], [0, 0, 6]]),
     hint: "Prends $OAB$ comme base : c'est un triangle rectangle en $O$, et $[OC]$ est la hauteur.",
     explanation: exp(
       "Le volume d'un tétraèdre vaut $\\dfrac{1}{3} \\times \\mathcal{B} \\times h$.",
@@ -793,6 +850,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     choices: ["$4$", "$0$", "$2$", "$5$"],
     expected: ["$4$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxVecteurs("u", [1, 2, 0], "v", [2, 1, 0]),
     hint: "On multiplie les coordonnées deux à deux, puis on additionne.",
     explanation: exp(
       "En repère orthonormé, $\\vec{u}\\cdot\\vec{v} = xx' + yy' + zz'$.",
@@ -817,6 +875,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     choices: ["$4$", "$6$", "$2$", "$0$"],
     expected: ["$4$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxVecteurs("u", [1, -1, 2], "v", [3, 1, 1]),
     hint: "Attention au signe de la deuxième coordonnée.",
     explanation: exp(
       "En repère orthonormé, $\\vec{u}\\cdot\\vec{v} = xx' + yy' + zz'$.",
@@ -841,6 +900,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     choices: ["$49$", "$7$", "$11$", "$\\sqrt{49}$"],
     expected: ["$49$"],
     comparator: "mcq_exact",
+    canvas: figureVecteur("u", [2, 3, 6]),
     hint: "$\\vec{u}\\cdot\\vec{u} = \\|\\vec{u}\\|^{2}$ : c'est un carré, pas une norme.",
     explanation: exp(
       "$\\vec{u}\\cdot\\vec{u} = \\|\\vec{u}\\|^{2} = x^2 + y^2 + z^2$.",
@@ -917,6 +977,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     choices: ["orthogonaux", "colinéaires", "égaux", "ni orthogonaux ni colinéaires"],
     expected: ["orthogonaux"],
     comparator: "mcq_exact",
+    canvas: figureDeuxVecteurs("u", [1, 2, 3], "v", [3, 0, -1]),
     hint: "Calcule le produit scalaire : s'il est nul, la réponse est immédiate.",
     explanation: exp(
       "Deux vecteurs sont orthogonaux si et seulement si leur produit scalaire est nul.",
@@ -999,6 +1060,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["orthogonaux et de même norme"],
     comparator: "mcq_exact",
+    canvas: figureDeuxVecteurs("u", [1, 1, 0], "v", [1, -1, 0]),
     hint: "Calcule le produit scalaire, puis les deux normes.",
     explanation: exp(
       "On teste séparément l'orthogonalité (produit scalaire nul) et l'égalité des normes.",
@@ -1027,6 +1089,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     choices: ["$\\sqrt{3}$", "$1$", "$\\sqrt{2}$", "$0$"],
     expected: ["$\\sqrt{3}$"],
     comparator: "mcq_exact",
+    canvas: figurePointEtPlan([-3, 1, 1], [1, 1, -1, 0], { nomPoint: "A", nomPlan: "P" }),
     hint: "$d = \\dfrac{|ax_0 + by_0 + cz_0 + d|}{\\sqrt{a^2+b^2+c^2}}$.",
     explanation: exp(
       "La distance d'un point $M(x_0\\,;\\,y_0\\,;\\,z_0)$ au plan $ax+by+cz+d=0$ vaut $\\dfrac{|ax_0+by_0+cz_0+d|}{\\sqrt{a^2+b^2+c^2}}$.",
@@ -1056,6 +1119,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\dfrac{\\sqrt{6}}{2}$"],
     comparator: "mcq_exact",
+    canvas: figurePointEtPlan([2, 0, 2], [1, -1, 2, -3], { nomPoint: "M", nomPlan: "P" }),
     hint: "Pense à rendre le dénominateur rationnel après le calcul.",
     explanation: exp(
       "La distance d'un point au plan $ax+by+cz+d=0$ vaut $\\dfrac{|ax_0+by_0+cz_0+d|}{\\sqrt{a^2+b^2+c^2}}$.",
@@ -1111,6 +1175,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     choices: ["$3$", "$5$", "$\\sqrt{5}$", "$9$"],
     expected: ["$3$"],
     comparator: "mcq_exact",
+    canvas: figureVecteur("u", [1, 2, 2]),
     hint: "$1 + 4 + 4$ est un carré parfait.",
     explanation: exp(
       "En repère orthonormé, $\\|\\vec{u}\\| = \\sqrt{x^2+y^2+z^2}$.",
@@ -1140,6 +1205,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\dfrac{\\sqrt{6}}{3}$"],
     comparator: "mcq_exact",
+    canvas: figurePointEtDroite([2, 0, 2], [1, 1, 0], [1, -1, 1], { nomPoint: "M", nomDroite: "d" }),
     hint: "Cherche le point $P(t)$ de $d$ tel que $\\overrightarrow{MP}$ soit orthogonal au vecteur directeur.",
     explanation: exp(
       "La distance d'un point à une droite est atteinte au projeté orthogonal.",
@@ -1168,6 +1234,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     choices: ["$\\dfrac{4}{5}$", "$\\dfrac{1}{5}$", "$\\dfrac{3}{5}$", "$\\dfrac{2}{5}$"],
     expected: ["$\\dfrac{4}{5}$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxVecteurs("u", [1, 2, 0], "v", [2, 1, 0]),
     hint: "$\\cos\\theta = \\dfrac{\\vec{u}\\cdot\\vec{v}}{\\|\\vec{u}\\|\\,\\|\\vec{v}\\|}$, et les deux normes valent $\\sqrt{5}$.",
     explanation: exp(
       "$\\vec{u}\\cdot\\vec{v} = \\|\\vec{u}\\|\\,\\|\\vec{v}\\|\\cos\\theta$.",
@@ -1226,6 +1293,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\dfrac{\\pi}{4}$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxVecteurs("u", [1, 0, 0], "v", [1, 1, 0]),
     hint: "Calcule le cosinus : tu devrais reconnaître $\\dfrac{\\sqrt{2}}{2}$.",
     explanation: exp(
       "$\\cos\\theta = \\dfrac{\\vec{u}\\cdot\\vec{v}}{\\|\\vec{u}\\|\\,\\|\\vec{v}\\|}$.",
@@ -1288,6 +1356,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["$2x - y + 3z = 0$"],
     comparator: "mcq_exact",
+    canvas: figurePlan([2, -1, 3, 0], { nom: "P", normale: true }),
     hint: "Passer par l'origine impose que la constante soit nulle.",
     explanation: exp(
       "Le plan de vecteur normal $(a\\,;\\,b\\,;\\,c)$ a une équation $ax + by + cz + d = 0$.",
@@ -1317,6 +1386,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["$(-1\\,;\\,0\\,;\\,1)$"],
     comparator: "mcq_exact",
+    canvas: figurePointEtPlan([1, 2, 3], [1, 1, 1, 0], { nomPoint: "A", nomPlan: "P" }),
     hint: "$H = A + t\\,\\vec{n}$ avec $\\vec{n}(1\\,;\\,1\\,;\\,1)$ : trouve $t$ pour que $H$ soit dans le plan.",
     explanation: exp(
       "Le projeté orthogonal s'obtient en se déplaçant depuis $A$ selon la direction normale.",
@@ -1379,6 +1449,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\left(\\dfrac{1}{3}\\,;\\,\\dfrac{2}{3}\\,;\\,\\dfrac{1}{3}\\right)$"],
     comparator: "mcq_exact",
+    canvas: figurePointEtDroite([2, 2, 0], [1, 0, 1], [1, -1, 1], { nomPoint: "M", nomDroite: "d" }),
     hint: "Écris $\\overrightarrow{MP}\\cdot\\vec{u} = 0$ avec $P(1+t\\,;\\,-t\\,;\\,1+t)$.",
     explanation: exp(
       "Le projeté orthogonal $H$ est le point de la droite tel que $\\overrightarrow{MH}$ soit orthogonal au vecteur directeur.",
@@ -1408,6 +1479,7 @@ export const geometrieEspaceConcoursBank: TutorBankItemV4[] = [
     ],
     expected: ["rectangle et isocèle"],
     comparator: "mcq_exact",
+    canvas: figureTriangle(["A", "B", "C"], [[5, 5, -1], [7, 3, -9], [3, 1, -5]]),
     hint: "Calcule $\\overrightarrow{AB}$ et $\\overrightarrow{AC}$, puis leur produit scalaire et leurs normes.",
     explanation: exp(
       "On teste l'orthogonalité par le produit scalaire et l'isocélie par les normes.",

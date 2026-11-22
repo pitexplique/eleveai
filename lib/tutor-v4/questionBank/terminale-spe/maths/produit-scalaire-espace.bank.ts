@@ -14,33 +14,54 @@
 // - Produit scalaire analytique : $\vec{u}\cdot\vec{v} = xx' + yy' + zz'$.
 // - Normes/produits scalaires entiers → "short" ; angles/expressions → QCM.
 
+//
+// ⭐⭐ LES FIGURES (22/11/2026). Mesure du jour : les trois banques de l'espace
+// portaient 169 items et QUATRE figures. Sur le chapitre dont tout l'objet est
+// de voir dans l'espace, l'élève lisait des triplets de nombres. Les figures
+// viennent maintenant de `./espace-figures` (canvas `repere3d`, perspective
+// cavalière), et 33 items de cette banque en portent une.
+//
+// ⛔ LA RÈGLE QUI DÉCIDE QUELS ITEMS EN REÇOIVENT UNE — et pourquoi 27 n'en
+// ont pas :
+//   - on dessine les DONNÉES (les points, le solide, la droite, le morceau de
+//     plan) ;
+//   - on ne dessine JAMAIS la réponse. Deux vecteurs colinéaires se dessinent
+//     superposés : l'élève cocherait sans calculer, et la micro-compétence
+//     n'aurait pas travaillé. Même chose pour un milieu, un projeté, une
+//     position relative ou une appartenance qu'on demande de trouver ;
+//   - une question de pure définition (« quelle est la formule de la norme ? »)
+//     n'a pas de figure : un dessin décoratif est interdit.
+// Le cadre n'a ni graduation ni quadrillage : aucun nombre ne se LIT sur ces
+// dessins. Ils montrent la configuration, ils ne la mesurent pas.
+//
+// ⭐ Vérification : `node scripts/verifier-figures-espace-terminale.mjs`. Il
+// rend les figures et mesure quatre choses que la lecture ne voit pas — un
+// texte coupé par le bord du SVG, un texte sous 11 px dans le bloc du coach,
+// DEUX NOMS L'UN SUR L'AUTRE (le rendu pose toutes les étiquettes au même
+// décalage, sans réglage), et surtout que la figure dit la MÊME CHOSE que son
+// énoncé : les triplets écrits sont des points dessinés, les quatre coins d'un
+// morceau de plan vérifient l'équation, les points d'une droite vérifient la
+// représentation paramétrique.
+
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
+import {
+  figureCube,
+  figureDeuxDroites,
+  figureDeuxPoints,
+  figureDeuxVecteurs,
+  figureDroite,
+  figureDroiteEtPlan,
+  figurePlan,
+  figurePointEtDroite,
+  figurePointEtPlan,
+  figureTetraedre,
+  figureTriangle,
+  figureVecteur,
+} from "@/lib/tutor-v4/questionBank/terminale-spe/maths/espace-figures";
 
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-// Cube ABCDEFGH de côté 1 (mêmes coordonnées que la banque de géométrie).
-const cubeABCDEFGHCanvas: CanvasFigure = {
-  kind: "repere3d",
-  titre: "Cube ABCDEFGH (côté 1)",
-  afficherAxes: false,
-  points: [
-    { x: 0, y: 0, z: 0, label: "A", couleur: "#dc2626" },
-    { x: 1, y: 0, z: 0, label: "B", couleur: "#0f172a" },
-    { x: 1, y: 1, z: 0, label: "C", couleur: "#0f172a" },
-    { x: 0, y: 1, z: 0, label: "D", couleur: "#0f172a" },
-    { x: 0, y: 0, z: 1, label: "E", couleur: "#0f172a" },
-    { x: 1, y: 0, z: 1, label: "F", couleur: "#0f172a" },
-    { x: 1, y: 1, z: 1, label: "G", couleur: "#0f172a" },
-    { x: 0, y: 1, z: 1, label: "H", couleur: "#0f172a" },
-  ],
-  segments: [
-    { de: 0, a: 1 }, { de: 1, a: 2 }, { de: 2, a: 3 }, { de: 3, a: 0 },
-    { de: 4, a: 5 }, { de: 5, a: 6 }, { de: 6, a: 7 }, { de: 7, a: 4 },
-    { de: 0, a: 4 }, { de: 1, a: 5 }, { de: 2, a: 6 }, { de: 3, a: 7 },
-  ],
-};
 
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
   return (
@@ -98,6 +119,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["32"],
     comparator: "number_equal",
+    canvas: figureDeuxVecteurs("u", [1, 2, 3], "v", [4, 5, 6]),
     hint: "$1\\times4 + 2\\times5 + 3\\times6$.",
     explanation: exp(
       "On applique la formule analytique.",
@@ -121,6 +143,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["6"],
     comparator: "number_equal",
+    canvas: figureDeuxVecteurs("u", [2, 1, 3], "v", [1, 1, 1]),
     hint: "$2 + 1 + 3$.",
     explanation: exp(
       "On applique la formule analytique.",
@@ -144,6 +167,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["0"],
     comparator: "number_equal",
+    canvas: figureDeuxVecteurs("u", [1, 0, 0], "v", [0, 1, 0]),
     hint: "Multiplie les coordonnées deux à deux.",
     explanation: exp(
       "On applique la formule analytique.",
@@ -167,6 +191,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["3"],
     comparator: "number_equal",
+    canvas: figureDeuxVecteurs("u", [2, -1, 3], "v", [1, 2, 1]),
     hint: "$2 - 2 + 3$.",
     explanation: exp(
       "On applique la formule analytique, attention au signe.",
@@ -219,6 +244,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["0"],
     comparator: "number_equal",
+    canvas: figureDeuxVecteurs("u", [3, -2, 1], "v", [2, 1, -4]),
     hint: "$6 - 2 - 4$.",
     explanation: exp(
       "On applique la formule analytique.",
@@ -242,6 +268,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["9"],
     comparator: "number_equal",
+    canvas: figureDeuxVecteurs("u", [1, 1, 1], "v", [2, 3, 4]),
     hint: "$2 + 3 + 4$.",
     explanation: exp(
       "On applique la formule analytique.",
@@ -301,6 +328,9 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(res)],
         comparator: "number_equal",
+        // ⭐ La figure naît dans le tirage : ce sont les vecteurs tirés qu'on
+        // dessine, pas deux vecteurs d'exemple.
+        canvas: figureDeuxVecteurs("u", [x, y, z], "v", [a, b, c]),
         explanation: exp(
           "On applique la formule analytique.",
           `$\\vec{u}\\cdot\\vec{v} = ${x}\\times${a} + ${y}\\times${b} + ${z}\\times${c}$.`,
@@ -363,6 +393,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["Oui, car $\\vec{u} \\cdot \\vec{v} = 0$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxVecteurs("u", [1, 2, -1], "v", [2, -1, 0]),
     hint: "Calcule $2 - 2 + 0$.",
     explanation: exp(
       "On calcule le produit scalaire et on conclut.",
@@ -386,6 +417,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["0"],
     comparator: "number_equal",
+    canvas: figureDeuxVecteurs("u", [1, 1, 1], "v", [1, -1, 0]),
     hint: "$1 - 1 + 0$.",
     explanation: exp(
       "On calcule le produit scalaire.",
@@ -415,6 +447,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["Les vecteurs ne sont pas orthogonaux"],
     comparator: "mcq_exact",
+    canvas: figureDeuxVecteurs("u", [1, 2, 3], "v", [1, 1, 1]),
     hint: "Orthogonal ⇔ produit scalaire nul.",
     explanation: exp(
       "On utilise le critère d'orthogonalité.",
@@ -462,6 +495,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     choices: ["Oui", "Non", "Seulement si on les norme", "On ne peut pas savoir"],
     expected: ["Oui"],
     comparator: "mcq_exact",
+    canvas: figureDeuxVecteurs("i", [1, 0, 0], "k", [0, 0, 1]),
     hint: "$\\vec{i}\\cdot\\vec{k} = 0$ ?",
     explanation: exp(
       "On calcule le produit scalaire des deux vecteurs.",
@@ -491,6 +525,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$0$ : ils sont orthogonaux"],
     comparator: "mcq_exact",
+    canvas: figureDeuxVecteurs("u", [2, 0, -1], "v", [1, 5, 2]),
     hint: "$2 + 0 - 2$.",
     explanation: exp(
       "On calcule le produit scalaire puis on conclut.",
@@ -623,6 +658,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["7"],
     comparator: "number_equal",
+    canvas: figureVecteur("u", [2, 3, 6]),
     hint: "$\\sqrt{4 + 9 + 36} = \\sqrt{49}$.",
     explanation: exp(
       "On applique la formule de la norme.",
@@ -646,6 +682,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["3"],
     comparator: "number_equal",
+    canvas: figureVecteur("u", [1, 2, 2]),
     hint: "$\\sqrt{1 + 4 + 4} = \\sqrt{9}$.",
     explanation: exp(
       "On applique la formule de la norme.",
@@ -669,6 +706,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["5"],
     comparator: "number_equal",
+    canvas: figureVecteur("u", [0, 3, 4]),
     hint: "$\\sqrt{0 + 9 + 16} = \\sqrt{25}$.",
     explanation: exp(
       "On applique la formule de la norme.",
@@ -721,6 +759,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["5"],
     comparator: "number_equal",
+    canvas: figureDeuxPoints("A", [1, 0, 2], "B", [1, 4, 5]),
     hint: "$\\overrightarrow{AB}(0\\,;4\\,;3)$, puis $\\sqrt{0+16+9}$.",
     explanation: exp(
       "La distance est la norme du vecteur $\\overrightarrow{AB}$.",
@@ -745,6 +784,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     choices: ["$\\sqrt{3}$", "$3$", "$\\sqrt{2}$", "$1$"],
     expected: ["$\\sqrt{3}$"],
     comparator: "mcq_exact",
+    canvas: figureVecteur("u", [1, 1, 1]),
     hint: "$\\sqrt{1 + 1 + 1}$.",
     explanation: exp(
       "On applique la formule de la norme.",
@@ -768,6 +808,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["10"],
     comparator: "number_equal",
+    canvas: figureVecteur("u", [6, 0, 8]),
     hint: "$\\sqrt{36 + 0 + 64} = \\sqrt{100}$.",
     explanation: exp(
       "On applique la formule de la norme.",
@@ -827,6 +868,10 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
         format: "short",
         expected: [String(c.n)],
         comparator: "number_equal",
+        // ⭐ La figure naît dans le tirage. L'escalier pointillé montre les
+        // trois arêtes dont on va faire la somme des carrés : c'est Pythagore
+        // en deux temps, et c'est ce que la formule dit.
+        canvas: figureVecteur("u", [c.x, c.y, c.z]),
         explanation: exp(
           "On applique la formule de la norme.",
           `$\\|\\vec{u}\\| = \\sqrt{${c.x}^2 + ${c.y}^2 + ${c.z}^2} = \\sqrt{${c.x * c.x + c.y * c.y + c.z * c.z}}$.`,
@@ -937,6 +982,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     choices: ["$45°$", "$30°$", "$60°$", "$90°$"],
     expected: ["$45°$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxVecteurs("u", [1, 0, 0], "v", [1, 1, 0]),
     hint: "$\\cos 45° = \\dfrac{1}{\\sqrt{2}}$.",
     explanation: exp(
       "On reconnaît une valeur remarquable du cosinus.",
@@ -1031,6 +1077,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["0"],
     comparator: "number_equal",
+    canvas: figureDeuxVecteurs("u", [2, 0, 0], "v", [0, 0, 5]),
     hint: "$\\vec{u}\\cdot\\vec{v} = 0$.",
     explanation: exp(
       "On calcule $\\cos\\theta = \\dfrac{\\vec{u}\\cdot\\vec{v}}{\\|\\vec{u}\\|\\,\\|\\vec{v}\\|}$.",
@@ -1117,6 +1164,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["orthogonal à toutes les directions du plan"],
     comparator: "mcq_exact",
+    canvas: figurePlan([1, 1, 1, -2], { nom: "P", normale: true }),
     hint: "« Normal » = perpendiculaire.",
     explanation: exp(
       "Un vecteur normal caractérise la direction perpendiculaire au plan.",
@@ -1175,6 +1223,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\vec{n}(1\\,;2\\,;-2)$"],
     comparator: "mcq_exact",
+    canvas: figurePlan([1, 2, -2, 5], { nom: "P" }),
     hint: "Coefficients de $x$, $y$, $z$.",
     explanation: exp(
       "Le vecteur normal se lit sur les coefficients de l'équation.",
@@ -1204,6 +1253,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\vec{u}$ et $\\vec{n}$ sont colinéaires"],
     comparator: "mcq_exact",
+    canvas: figureDroiteEtPlan([1, 1, 0], [0, 0, 1], [0, 0, 1, 0], { nomPlan: "P", nomDroite: "d" }),
     hint: "La droite suit la direction normale.",
     explanation: exp(
       "Une droite perpendiculaire au plan a la direction de la normale.",
@@ -1280,6 +1330,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     choices: ["Oui", "Non", "Seulement si on le norme", "On ne peut pas savoir"],
     expected: ["Oui"],
     comparator: "mcq_exact",
+    canvas: figurePlan([1, 1, 1, -4], { nom: "P" }),
     hint: "Les coefficients de l'équation forment le vecteur normal.",
     explanation: exp(
       "On compare $\\vec{n}$ aux coefficients de l'équation.",
@@ -1338,6 +1389,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\vec{n}(0\\,;0\\,;1)$"],
     comparator: "mcq_exact",
+    canvas: figurePlan([0, 0, 1, -2], { nom: "P" }),
     hint: "$z = 2$ s'écrit $0x + 0y + z - 2 = 0$.",
     explanation: exp(
       "On met l'équation sous forme générale.",
@@ -1367,6 +1419,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$x + 2y + 3z = 0$"],
     comparator: "mcq_exact",
+    canvas: figurePlan([1, 2, 3, 0], { nom: "P", normale: true }),
     hint: "Coefficients = normale ; $O$ donne $d = 0$.",
     explanation: exp(
       "L'équation est $x + 2y + 3z + d = 0$, avec $d$ déterminé par $O$.",
@@ -1394,7 +1447,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["0"],
     comparator: "number_equal",
-    canvas: cubeABCDEFGHCanvas,
+    canvas: figureCube({ rouges: ["A", "B", "E"], traits: [["A", "B"], ["A", "E"]] }),
     hint: "$\\overrightarrow{AB}(1\\,;0\\,;0)$ et $\\overrightarrow{AE}(0\\,;0\\,;1)$.",
     explanation: exp(
       "On calcule le produit scalaire des deux arêtes.",
@@ -1447,6 +1500,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["1"],
     comparator: "number_equal",
+    canvas: figureTriangle(["A", "B", "C"], [[1, 0, 0], [0, 1, 0], [0, 0, 1]]),
     hint: "$\\overrightarrow{AB}(-1\\,;1\\,;0)$, $\\overrightarrow{AC}(-1\\,;0\\,;1)$.",
     explanation: exp(
       "On calcule les vecteurs puis leur produit scalaire.",
@@ -1499,7 +1553,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["3"],
     comparator: "number_equal",
-    canvas: cubeABCDEFGHCanvas,
+    canvas: figureCube({ rouges: ["A", "G"], traits: [["A", "G"]] }),
     hint: "$\\overrightarrow{AG}\\cdot\\overrightarrow{AG} = \\|\\overrightarrow{AG}\\|^2$.",
     explanation: exp(
       "Le produit scalaire d'un vecteur par lui-même est le carré de sa norme.",
@@ -1529,6 +1583,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["Oui, car $\\vec{u}\\cdot\\vec{v} = 0$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxVecteurs("u", [1, -1, 2], "v", [3, 1, -1]),
     hint: "$3 - 1 - 2$.",
     explanation: exp(
       "On calcule le produit scalaire.",
@@ -1552,6 +1607,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["3"],
     comparator: "number_equal",
+    canvas: figureDeuxPoints("A", [0, 0, 0], "B", [2, 1, 2]),
     hint: "$\\sqrt{4 + 1 + 4} = \\sqrt{9}$.",
     explanation: exp(
       "La distance est la norme de $\\overrightarrow{AB}$.",
@@ -1610,6 +1666,7 @@ export const produitScalaireEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$x + y + z - 3 = 0$"],
     comparator: "mcq_exact",
+    canvas: figurePlan([1, 1, 1, -3], { nom: "P", point: { en: [1, 1, 1], label: "A" }, normale: true }),
     hint: "On écrit $x + y + z + d = 0$ et on remplace $A$.",
     explanation: exp(
       "On part de l'équation $x + y + z + d = 0$ (coefficients = normale).",

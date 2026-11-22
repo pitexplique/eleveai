@@ -201,13 +201,122 @@ banques pleines et aucune vidéo.
 | fiches de cours | ⛔ **0 — aucune fiche de cours en terminale, toutes notions confondues** |
 | vidéos | ⛔ **0 sur les deux notions** (98 vidéos de terminale, aucune en géométrie) |
 
+---
+
+## Ce qui a été ouvert le 22/11/2026 : les figures du coach
+
+Frédéric a choisi cette pièce-là. Les banques ne manquaient pas d'items, elles
+manquaient de dessins.
+
+**96 items sur 169 portent maintenant une figure**, contre 4 le matin. Chaque
+micro-compétence en a au moins quatre, donc le `questionPairBuilder` peut
+servir une paire illustrée partout :
+
+```
+   5/14 espace_vecteurs           10/15 ps_espace_calculer
+  12/15 espace_repere_coordonnees  7/14 ps_espace_orthogonalite
+   9/15 espace_droite_parametrique 11/15 ps_espace_norme_distance
+   9/15 espace_plan_equation       4/14 ps_espace_angle
+   6/15 espace_position_relative   8/13 ps_espace_plan_normal
+   8/12 espace_defi                8/12 ps_espace_defi
+```
+
+Les figures viennent d'un module commun aux trois banques,
+`lib/tutor-v4/questionBank/terminale-spe/maths/espace-figures.ts` : un vecteur
+et ses trois coordonnées en escalier, deux vecteurs issus du même point, deux
+points et le segment, un triangle, le cube $ABCDEFGH$, un tétraèdre, une
+droite, un morceau de plan, une droite et un plan, deux plans, deux droites, un
+point et son plan (ou sa droite) avec la perpendiculaire amorcée. Toutes en
+canvas `repere3d`, donc en perspective cavalière, rendues par
+`lib/canvas/Repere3dCanvas.tsx` qui existait déjà.
+
+### Pourquoi 73 items n'en ont pas, et c'est volontaire
+
+- on dessine les **données** (points, solide, droite, morceau de plan) ;
+- on ne dessine **jamais la réponse**. Deux vecteurs colinéaires se dessinent
+  superposés : l'élève cocherait sans calculer. Même chose pour un milieu, un
+  projeté, une position relative ou une appartenance qu'on demande de trouver ;
+- une question de pure définition (« quelle est la formule de la norme ? ») n'a
+  pas de figure : un dessin décoratif est interdit.
+
+Un item a perdu sa figure en cours de route pour cette raison
+(`terminale_spe_geo_concours_17`, « le plan d'équation $z = 0$ est : ») : le
+dessin montrait que c'est le plan $(Oxy)$, c'est-à-dire la réponse. Trouvé en
+regardant la question dans le coach, pas en relisant le code.
+
+### L'instrument : `scripts/verifier-figures-espace-terminale.mjs`
+
+`scripts/apercu-canvas.mjs`, l'étalon du dépôt, est **hors service pour tous
+les canvas** : il charge `CanvasRenderer`, qui charge `TableauDonneesCanvas` →
+`TexteMath` → `katex/dist/katex.min.css`, et Node s'arrête sur le `.css`
+(`ERR_UNKNOWN_FILE_EXTENSION`). Je ne l'ai pas retouché (une autre session s'en
+sert peut-être) : le nouveau script ne charge que `Repere3dCanvas`.
+
+Il rend les 121 figures distinctes des trois banques (gabarits tirés douze
+fois) et mesure cinq choses :
+
+1. un texte coupé par le bord du SVG ;
+2. un texte sous 11 px dans le bloc du coach (280 px sur un téléphone — et non
+   250 px, qui est le cadre d'une carte de fiche) ;
+3. ⭐ **deux noms l'un sur l'autre** — le rendu pose toutes les étiquettes au
+   même décalage, sans réglage possible. Aucun outil du dépôt ne voyait ça ;
+4. la santé de la figure (coordonnée NaN, segment vers un point inexistant,
+   deux points de même nom, figure plate) ;
+5. ⭐⭐ **la figure dit-elle la même chose que son énoncé ?** Les triplets
+   écrits dans l'énoncé sont des points dessinés, les quatre coins d'un morceau
+   de plan vérifient l'équation, les points d'une droite vérifient la
+   représentation paramétrique.
+
+### Ce que l'instrument a trouvé, et que la lecture n'aurait pas vu
+
+- **Les coins des morceaux de plan n'étaient pas dans leur plan.** J'arrondissais
+  les coordonnées calculées à deux décimales (pour un JSON plus court) : sur
+  treize items portant une équation de plan, deux coins sur quatre seulement la
+  vérifiaient encore. Un dessin faux, parfaitement crédible à l'œil. Arrondi
+  supprimé.
+- **Un nom d'axe collé au nom d'un plan** : « y » et « P » à 10 px l'un de
+  l'autre. Le nom du plan se pose maintenant sur le coin le plus seul.
+
+### Et l'instrument, lui, a été étalonné
+
+Trois fautes ont été posées exprès dans les banques — un point transposé
+(`B(4 ; 6 ; 3)` dessiné en `(4 ; 3 ; 6)`), un plan dont on change le terme
+constant, une direction de droite fausse. **La première version n'en a vu que
+deux** : elle ne criait que si AUCUN triplet de l'énoncé n'était dessiné, et le
+point transposé passait parce que l'autre point, lui, était juste. La règle est
+devenue « chacun », avec une liste courte et explicite des deux seuls items où
+un triplet n'est volontairement pas dessiné. Les trois fautes sont alors
+attrapées, et une quatrième, réelle, est apparue.
+
+Deux fois, c'est l'instrument qui se trompait et non les figures : un lecteur
+d'équation qui avalait le « 2 » de « 2x + 3y − z + 1 = 0 » (22 figures accusées
+à tort), et un lecteur de représentation paramétrique qui lisait « 4t » comme
+« origine 4, direction 1 ». Les deux sont corrigés et commentés dans le script.
+
+### Ce qui n'est pas fait
+
+- ⛔ **Frédéric n'a pas encore validé l'affichage** : deux questions ont été
+  regardées dans le coach en `npm run dev` (une norme de vecteur, une équation
+  de plan), sur écran et à 375 px. Les 94 autres figures sont mesurées, pas
+  regardées une à une.
+- Les **questions `open`** (voulues en terminale pour préparer l'oral) restent à
+  zéro sur ces deux notions.
+- La **fiche de cours** (aucune en terminale) et la **vidéo** (aucune sur ces
+  deux notions) restent entières.
+
 ## Les commandes, pour refaire la mesure
 
 ```
+node scripts/verifier-figures-espace-terminale.mjs
 npx --yes tsx@4 scripts/verifier-notion-item.ts terminale
 npx --yes tsx@4 scripts/verifier-latex.ts terminale-spe
 node scripts/brancher-videos-coach.mjs --classe terminale-spe --tout
 ```
+
+État au 22/11/2026 après les figures : `96 items portent une figure · 121
+figures distinctes rendues · aucun débordement, aucun texte trop petit, aucun
+nom superposé`, `terminale-spe 1829 items — 0 anomalie de LaTeX`, `aucun item
+rangé hors de sa notion`.
 
 ⚠️ `scripts/auditer-banque-runtime.ts` ne connaît **que le français** (ses
 imports sont explicites et s'arrêtent à `francaisSecondeQuestionBank`) :
