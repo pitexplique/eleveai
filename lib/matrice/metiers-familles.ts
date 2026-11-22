@@ -19,6 +19,24 @@ export const FAMILLES_METIERS = {
     M("bibliothecaire", "range les livres du plus petit numéro au plus grand."),
     F("fleuriste", "compte ses roses par paquets de 10."),
   ],
+  // ⭐ 21/11/2026 — les nombres entiers du CM1 et du CM2 ont leur propre famille.
+  // Pourquoi : la série vidéo NOMBRES ENTIERS CM1 → 6e (11 épisodes) montre un métier par épisode, et il
+  // faut marquer `V` sur CES liens. Or `P_nombres` sert aussi au CP, au CE1, au CE2 et aux notions
+  // `suite*` : y poser `V` aurait annoncé « déjà en vidéo » à des classes qui n'ont aucune vidéo.
+  // Les trois premiers liens sont ceux de `P_nombres` (factrice, bibliothécaire, fleuriste), les trois
+  // suivants sont neufs. Six liens = six épisodes du lot CM1 + CM2 (la vidéo du CM1 sert au CM2 par `aussi`).
+  P_nombres_cm: [
+    F("facteur", "retrouve un numéro de maison effacé avec trois indices.", V),
+    M("bibliothecaire", "range les livres du plus petit numéro au plus grand.", V),
+    F("fleuriste", "compte ses roses par paquets de 10, sans qu'il en reste.", V),
+    M("cartographe", "écrit sur sa carte l'altitude de chaque sommet, sans oublier un zéro.", V),
+    M("imprimeur", "compte ses affiches : des paquets de mille, de cent, de dix, puis à l'unité.", V),
+    F("meteorologue", "annonce « environ 86 000 personnes » : elle arrondit au millier près.", V),
+    // 21/11 : 7ᵉ lien pour le 7ᵉ épisode du CM. Frédéric a séparé `entier_multiple` en deux vidéos
+    // (CM1 seul + CM2 à part) : les critères de divisibilité sont une méthode neuve, pas une
+    // magnitude de plus. Le CM2 a donc son propre métier.
+    M("patissier", "sait sans diviser si 51 408 macarons font des boîtes pleines : il additionne les chiffres.", V),
+  ],
   P_addition: [
     M("vendeur", "additionne les achats d'un client à la caisse."),
     F("arbitre", "ajoute les points marqués pendant le match."),
@@ -418,9 +436,12 @@ export const RENVOIS: Record<string, Record<string, Renvoi>> = {
   cp: PRIMAIRE_COMMUN,
   ce1: PRIMAIRE_COMMUN,
   ce2: PRIMAIRE_COMMUN,
-  cm1: PRIMAIRE_COMMUN,
+  // ⭐ 21/11/2026 : `nombre_entier` au CM1 et au CM2 a sa propre famille (voir P_nombres_cm) — la série
+  // vidéo CM1 → 6e y marque ses métiers `V` sans mentir au CP, au CE1, au CE2 ni aux notions `suite*`.
+  cm1: { ...PRIMAIRE_COMMUN, nombre_entier: "P_nombres_cm" },
   cm2: {
     ...PRIMAIRE_COMMUN,
+    nombre_entier: "P_nombres_cm",
     fraction_calcul: "6e:fraction_calcul",
     pourcentage: "6e:pourcentage_nombre",
     echelle: "6e:prop_echelle",

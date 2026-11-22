@@ -1,0 +1,18 @@
+{
+  "00-garde": "Décomposer un nombre entier. Quelle est la bonne décomposition de 507 ?",
+  "01-situation": "Voici Ethan. Il est game designer. Il donne les points de son jeu par paquets : milliers, centaines, dizaines.",
+  "02-valeur": "Chaque chiffre vaut son chiffre fois son rang. Dans 352, le 5 vaut 5 fois 10, soit 50.",
+  "03-zero": "Un rang vide ne s'écrit pas. 507 égale 500 plus 7, et rien pour les dizaines.",
+  "04-question": "Question ! Quelle est la décomposition de 706 ? A : 700 + 60. B : 70 + 6. C : 700 + 6. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. Le 7 vaut 700, le 0 ne compte pas, le 6 vaut 6 unités.",
+  "05-composer": "L'inverse s'appelle composer. On range chaque terme dans son rang, même en désordre.",
+  "06-question": "Question ! Quel nombre vaut 500 plus 90 plus 3 plus 8 000 ? A : 5 938. B : 8 593. C : 8 953. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. L'ordre ne compte pas : 8 000, puis 500, puis 90, puis 3. Donc 8 593.",
+  "07-grands": "Même méthode avec des nombres plus longs. 10 000 plus 100 plus 20 plus 4 donne 10 124.",
+  "08-question": "Question ! Quelle écriture est égale à 55 140 ? A : 50 000 + 5 000 + 100 + 40. B : 500 000 + 5 000 + 100 + 40. C : 50 000 + 500 + 100 + 40. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. Deux 5 : l'un vaut 50 000, l'autre 5 000. Puis 100 et 40.",
+  "09-defi": "À toi de jouer ! Au jeu, Rayan gagne 30 000, 2 000, 600, 50 et 9 points. Quel est son total ? Mets pause, et cherche !",
+  "09b-correction": "Correction. Chaque terme dans son rang : 3, 2, 6, 5, 9. Le total est 32 659.",
+  "10-finale": "Ce que tu as appris. Décomposer donne la valeur de chaque chiffre. Un rang vide ne s'écrit pas.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,17 @@
+{
+  "00-garde": "Les multiples. 42 est-il un multiple de 6 ?",
+  "01-situation": "Voici Awa. Elle est fleuriste. Elle compte ses roses par paquets de 10, sans qu'il en reste.",
+  "02-definition": "Un multiple de 6, c'est 6 fois un nombre entier. 6 fois 7 donne 42.",
+  "03-sans-reste": "Un multiple, c'est aussi des paquets pleins. 42 roses font 7 paquets de 6, sans reste.",
+  "04-question": "Question ! Quel nombre est un multiple de 9 ? A : 63. B : 67. C : 65. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. 9 fois 7 donne 63. Ni 65 ni 67 n'est dans la table de 9.",
+  "05-dernier-chiffre": "Pour 2, 10 et 100, le dernier chiffre suffit. Un multiple de 10 finit par zéro.",
+  "06-question": "Question ! Lequel est un multiple de 10 ? A : 4 925. B : 4 960. C : 4 911. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. Un multiple de 10 finit par zéro. Seul 4 960 finit par zéro.",
+  "08-question": "Question ! Quel nombre n'est pas un multiple de 7 ? A : 24. B : 28. C : 56. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. 7 fois 4 donne 28, 7 fois 8 donne 56. 24 n'est pas dans la table de 7.",
+  "09-defi": "À toi de jouer ! Un chocolatier remplit des ballotins de 7. Quel total donne des ballotins pleins : 62, 63 ou 64 ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 7 fois 9 donne 63. Avec 62 ou 64, il reste des chocolats.",
+  "10-finale": "Ce que tu as appris. Un multiple est un résultat de la table. Des paquets pleins, sans reste.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

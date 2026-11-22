@@ -958,5 +958,65 @@
     "calcul": [["0,4 t − 260 kg", "blanc", 130], ["= ? kg", "rouge", 190]],
     "margo": [320, 720, 640],
     "ceinture": "blanche"
+  },
+  "cm1-entier-lire-short": {
+    "question": ["« Huit mille neuf »", "ça s'écrit comment ?"],
+    "calcul": [["8 900 ?", "rouge", 210], ["8 009", "vert", 210]],
+    "ceinture": "blanche"
+  },
+  "cm1-entier-comparer-short": {
+    "question": ["987 ou 1 002 :", "lequel gagne ?"],
+    "calcul": [["987  ou  1 002", "blanc", 180], ["3 ou 4 chiffres ?", "jaune", 150]],
+    "ceinture": "blanche"
+  },
+  "cm1-entier-decomposer-short": {
+    "question": ["Le dernier chiffre", "vaut 50 ou 5 ?"],
+    "calcul": [["12 405", "blanc", 190], ["… + 400 + 50 ?", "rouge", 130]],
+    "ceinture": "blanche"
+  },
+  "cm1-entier-arrondir-short": {
+    "question": ["4 682 à la centaine :", "4 600 ou 4 700 ?"],
+    "calcul": [["4 682", "blanc", 200], ["4 600 ?", "rouge", 170]],
+    "ceinture": "blanche"
+  },
+  "cm1-entier-multiple-short": {
+    "question": ["35 billes, paquets de 4 :", "ça tombe juste ?"],
+    "calcul": [["35 billes", "blanc", 180], ["paquets de 4 ?", "rouge", 130]],
+    "ceinture": "blanche"
+  },
+  "cm1-entier-defi-short": {
+    "question": ["Le plus grand avec", "7, 4, 1 et 0 ?"],
+    "calcul": [["0 741 ?", "rouge", 190], ["7 410", "vert", 200]],
+    "ceinture": "blanche"
+  },
+  "6e-entier-rang-short": {
+    "question": ["Dans 7 305, les dizaines :", "le 3 ou le 0 ?"],
+    "calcul": [["7 305", "blanc", 200], ["le 3 ?", "rouge", 170]],
+    "ceinture": "blanche"
+  },
+  "6e-entier-encadrer-short": {
+    "question": ["752 entre deux dizaines :", "750 ou 751 ?"],
+    "calcul": [["752", "blanc", 200], ["751 et 761 ?", "rouge", 140]],
+    "ceinture": "blanche"
+  },
+  "6e-entier-decomposer-short": {
+    "question": ["507 se décompose en :", "500 + 70 ou 500 + 7 ?"],
+    "calcul": [["507", "blanc", 200], ["500 + 70 ?", "rouge", 150]],
+    "ceinture": "blanche"
+  },
+  "cm2-entier-multiple-short": {
+    "question": ["Multiple de 3 :", "sans poser la division ?"],
+    "calcul": [["48 231", "blanc", 190], ["÷ 3 ?", "rouge", 170]],
+    "ceinture": "blanche"
+  },
+  "6e-entier-comparer-short": {
+    "question": ["Lequel est le plus grand :", "1 408 ou 1 480 ?"],
+    "calcul": [["1 408 ou 1 480", "blanc", 120], ["8 > 0 ?", "rouge", 170]],
+    "ceinture": "blanche"
+  },
+  "6e-entier-defi-short": {
+    "question": ["De 569 à 600, il manque :", "31 ou 41 ?"],
+    "calcul": [["569 → 600", "blanc", 150], ["41 ?", "rouge", 170]],
+    "ceinture": "blanche"
   }
 }

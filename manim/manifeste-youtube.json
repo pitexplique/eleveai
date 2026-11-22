@@ -105897,6 +105897,1922 @@
         "sport",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm1-entier-lire",
+      "pas_avant": "2027-06-13",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_lire",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire.mp4",
+      "miniature": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire.png",
+      "titre": "« Douze mille trente » : combien de zéros ? — Lire les grands nombres — épisode 1 · Maths CM1",
+      "accroche": "Diego est cartographe : il dessine les cartes et écrit l'altitude de chaque sommet. Pour ne pas se tromper d'un zéro, il range les chiffres par classes de trois.\n\nDans cette vidéo :\n• un grand nombre se range par classes de trois chiffres (mille, unités)\n• le zéro garde la place vide : « douze mille trente » s'écrit 12 030\n• le CHIFFRE des dizaines n'est pas le NOMBRE de dizaines (29 404 → 2 940 dizaines)\n• et au CM2 : une classe de plus, les millions\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : écrire « quarante mille huit » en chiffres : combien de zéros ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_lire&display=simple\n\n🔢 Épisode 1 de la série Nombres entiers d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de zéros ?"
+        ],
+        [
+          "00:35",
+          "Question 1"
+        ],
+        [
+          "01:12",
+          "Question 2"
+        ],
+        [
+          "01:43",
+          "Et au CM2 : les millions"
+        ],
+        [
+          "01:54",
+          "Question 3"
+        ],
+        [
+          "02:31",
+          "À toi de jouer"
+        ],
+        [
+          "02:51",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "lire un grand nombre",
+        "écrire en chiffres",
+        "classes de trois chiffres",
+        "tableau de numération",
+        "le zéro",
+        "cartographe",
+        "altitude",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "Comment écrit-on « douze mille trente » en chiffres ?",
+          "choix": [
+            "12 030",
+            "12 300",
+            "1 230"
+          ],
+          "reponse": 0,
+          "explication": "« Trente », c'est 030 dans la classe des unités. Le zéro garde la place des centaines."
+        },
+        {
+          "t": "01:12",
+          "question": "Dans 29 404, combien de dizaines en tout ?",
+          "choix": [
+            "4",
+            "2 940",
+            "294"
+          ],
+          "reponse": 1,
+          "explication": "On cache le dernier chiffre et on lit 2 940. Le chiffre des dizaines, lui, est 0."
+        },
+        {
+          "t": "01:54",
+          "question": "« Soixante-dix millions neuf cent cinquante-sept » : quelle écriture est juste ?",
+          "choix": [
+            "70 000 957",
+            "7 000 957",
+            "70 957"
+          ],
+          "reponse": 0,
+          "explication": "Après la première classe, chaque classe prend trois chiffres : 70, puis 000, puis 957."
+        }
+      ],
+      "centres": [
+        "histoire-geographie"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_lire"
+        }
+      ]
+    },
+    {
+      "id": "cm1-entier-lire-short",
+      "pas_avant": "2027-06-13",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_lire",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-entier-lire",
+      "fichier": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire-short.mp4",
+      "miniature": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire-short-miniature.png",
+      "titre": "« Huit mille neuf » : où va le neuf ? #maths #cm1",
+      "accroche": "Mon copain écrit « huit mille neuf » sur le tableau… et il pose 8 900. Son neuf est tombé dans les centaines ! Deux zéros gardent la place : 8 009.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : écris « soixante mille quarante » en chiffres. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_lire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #cm1 #primaire",
+      "tags": [
+        "nombres entiers",
+        "écrire en chiffres",
+        "le zéro",
+        "tableau de numération",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "« Huit mille neuf », ça s'écrit comment ?",
+          "choix": [
+            "8 009",
+            "8 090",
+            "8 900"
+          ],
+          "reponse": 0,
+          "explication": "Neuf unités : deux zéros gardent les centaines et les dizaines."
+        }
+      ],
+      "centres": [
+        "histoire-geographie",
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_lire"
+        }
+      ]
+    },
+    {
+      "id": "cm1-entier-comparer",
+      "pas_avant": "2027-06-14",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_comparer",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer.mp4",
+      "miniature": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer.png",
+      "titre": "9 876 ou 10 234 : lequel est le plus grand ? — Comparer des grands nombres — épisode 2 · Maths CM1",
+      "accroche": "Malik est bibliothécaire : il range les livres du plus petit numéro au plus grand. Pour comparer deux nombres, il compte d'abord les chiffres.\n\nDans cette vidéo :\n• d'abord on compte les chiffres : plus de chiffres, c'est plus grand\n• même nombre de chiffres : on compare de gauche à droite, jusqu'au premier qui diffère\n• le piège : 9 876 commence par 9, mais 10 234 a un chiffre de plus\n• et au CM2 : la même règle, classe par classe, jusqu'aux millions\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : trois classes ont ramassé 386 378, 389 358 et 389 378 bouchons : qui gagne ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_comparer&display=simple\n\n🔢 Épisode 2 de la série Nombres entiers d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Lequel est le plus grand ?"
+        ],
+        [
+          "00:31",
+          "Question 1"
+        ],
+        [
+          "01:00",
+          "Le piège"
+        ],
+        [
+          "01:11",
+          "Question 2"
+        ],
+        [
+          "01:54",
+          "Question 3"
+        ],
+        [
+          "02:41",
+          "À toi de jouer"
+        ],
+        [
+          "03:02",
+          "Correction"
+        ],
+        [
+          "03:16",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "comparer des nombres",
+        "ordre croissant",
+        "plus grand que",
+        "signes < et >",
+        "ranger des nombres",
+        "bibliothécaire",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "12 408 et 12 804 : quel signe faut-il ?",
+          "choix": [
+            "plus grand",
+            "plus petit",
+            "égal"
+          ],
+          "reponse": 1,
+          "explication": "Les deux commencent par 12. Ensuite 4 centaines est plus petit que 8 centaines."
+        },
+        {
+          "t": "01:11",
+          "question": "Quel nombre est le plus grand : 9 876 ou 10 234 ?",
+          "choix": [
+            "10 234",
+            "9 876",
+            "les deux sont égaux"
+          ],
+          "reponse": 0,
+          "explication": "10 234 a cinq chiffres, 9 876 n'en a que quatre. Plus de chiffres, plus grand."
+        },
+        {
+          "t": "01:54",
+          "question": "Range dans l'ordre croissant : 3 450, 3 045, 3 405.",
+          "choix": [
+            "3 405, 3 045, 3 450",
+            "3 045, 3 450, 3 405",
+            "3 045, 3 405, 3 450"
+          ],
+          "reponse": 2,
+          "explication": "Croissant, c'est du plus petit au plus grand : 3 045, puis 3 405, puis 3 450."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "histoire-geographie"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_comparer"
+        }
+      ]
+    },
+    {
+      "id": "cm1-entier-comparer-short",
+      "pas_avant": "2027-06-14",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_comparer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-entier-comparer",
+      "fichier": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer-short.mp4",
+      "miniature": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer-short-miniature.png",
+      "titre": "987 ou 1 002 : il commence par 9, donc il gagne ? #maths #cm1",
+      "accroche": "Mon copain dit que 987 est plus grand que 1 002, parce qu'il commence par 9. On compte les chiffres : trois contre quatre. Quatre chiffres battent trois chiffres.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : range 4 410, 4 140 et 4 190 du plus petit au plus grand. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #cm1 #primaire",
+      "tags": [
+        "nombres entiers",
+        "comparer",
+        "plus grand",
+        "compter les chiffres",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Lequel est le plus grand : 987 ou 1 002 ?",
+          "choix": [
+            "987",
+            "1 002",
+            "c'est pareil"
+          ],
+          "reponse": 1,
+          "explication": "Quatre chiffres battent trois chiffres. 1 002 gagne."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "histoire-geographie"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_comparer"
+        }
+      ]
+    },
+    {
+      "id": "cm1-entier-decomposer",
+      "pas_avant": "2027-06-15",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_decomposer",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer.mp4",
+      "miniature": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer.png",
+      "titre": "7 306 : que vaut chaque chiffre ? — Décomposer un nombre — épisode 3 · Maths CM1",
+      "accroche": "Thomas est imprimeur. Ses affiches arrivent par paquets : mille, cent, dix, ou à l'unité. Chaque chiffre d'un nombre marche pareil : il vaut selon sa colonne.\n\nDans cette vidéo :\n• chaque chiffre vaut selon sa colonne : dans 4 582, le 5 vaut 500\n• un rang vide ne s'écrit pas : 7 306 = 7 000 + 300 + 6\n• composer, c'est l'inverse : 20 000 + 400 + 9 = 20 409\n• l'ordre des termes ne change rien : chaque nombre va dans sa colonne\n• et au CM2 : on décompose des nombres bien plus grands\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : trouver l'erreur dans 12 405 = 10 000 + 2 000 + 400 + 50.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_decomposer&display=simple\n\n🔢 Épisode 3 de la série Nombres entiers d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Que vaut chaque chiffre ?"
+        ],
+        [
+          "00:17",
+          "Chaque chiffre vaut selon sa colonne"
+        ],
+        [
+          "00:37",
+          "Question 1"
+        ],
+        [
+          "01:18",
+          "Question 2"
+        ],
+        [
+          "01:51",
+          "Et au CM2"
+        ],
+        [
+          "02:02",
+          "Question 3"
+        ],
+        [
+          "02:29",
+          "À toi de jouer"
+        ],
+        [
+          "02:44",
+          "Correction"
+        ],
+        [
+          "02:55",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "décomposer un nombre",
+        "composer un nombre",
+        "valeur d'un chiffre",
+        "tableau de numération",
+        "unités dizaines centaines",
+        "imprimeur",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:37",
+          "question": "Quelle est la bonne décomposition de 5 064 ?",
+          "choix": [
+            "5 000 + 6 + 4",
+            "5 000 + 600 + 4",
+            "5 000 + 60 + 4"
+          ],
+          "reponse": 2,
+          "explication": "Le 6 est aux dizaines : il vaut 60. Il n'y a aucune centaine."
+        },
+        {
+          "t": "01:18",
+          "question": "Quel nombre fait 70 + 5 000 + 800 ?",
+          "choix": [
+            "5 870",
+            "758",
+            "5 807"
+          ],
+          "reponse": 0,
+          "explication": "L'ordre ne change rien : chaque nombre va dans sa colonne. 5 000, 800, 70."
+        },
+        {
+          "t": "02:02",
+          "question": "Dans 405 210, combien vaut le chiffre 5 ?",
+          "choix": [
+            "50 000",
+            "500",
+            "5 000"
+          ],
+          "reponse": 2,
+          "explication": "Le 5 est dans la colonne des unités de mille : il vaut 5 000."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "technologie-ia"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_decomposer"
+        }
+      ]
+    },
+    {
+      "id": "cm1-entier-decomposer-short",
+      "pas_avant": "2027-06-15",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_decomposer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-entier-decomposer",
+      "fichier": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer-short.mp4",
+      "miniature": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer-short-miniature.png",
+      "titre": "Le dernier chiffre de 12 405 vaut 50 ou 5 ? #maths #cm1",
+      "accroche": "Ma copine décompose 12 405 et écrit 10 000 + 2 000 + 400 + 50. Mais le dernier chiffre est tout à droite, dans les unités : il vaut 5, pas 50.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : décompose 70 804. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_decomposer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #cm1 #primaire",
+      "tags": [
+        "nombres entiers",
+        "décomposer",
+        "valeur d'un chiffre",
+        "unités",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Que vaut le dernier chiffre de 12 405 ?",
+          "choix": [
+            "5 unités",
+            "50",
+            "5 dizaines"
+          ],
+          "reponse": 0,
+          "explication": "Le 5 est tout à droite : il vaut 5 unités. Il n'y a aucune dizaine."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_decomposer"
+        }
+      ]
+    },
+    {
+      "id": "cm1-entier-arrondir",
+      "pas_avant": "2027-06-16",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_arrondir",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir.mp4",
+      "miniature": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir.png",
+      "titre": "4 682 à la centaine : 4 600 ou 4 700 ? — Arrondir un nombre — épisode 4 · Maths CM1",
+      "accroche": "Léna est météorologue. Pour annoncer la pluie, elle ne dit pas 4 682 millimètres : elle donne un nombre simple à retenir, le plus proche.\n\nDans cette vidéo :\n• on encadre d'abord : 4 682 est entre 4 600 et 4 700\n• puis on regarde le chiffre juste à droite du rang visé\n• de 0 à 4 on garde, de 5 à 9 on monte au rang suivant\n• arrondir, ce n'est pas couper : 4 682 à la centaine donne 4 700\n• et au CM2 : on arrondit jusqu'au million\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : arrondir 86 246 personnes au millier près.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_arrondir&display=simple\n\n🔢 Épisode 4 de la série Nombres entiers d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "4 600 ou 4 700 ?"
+        ],
+        [
+          "00:34",
+          "Question 1"
+        ],
+        [
+          "01:05",
+          "Arrondir n'est pas couper"
+        ],
+        [
+          "01:16",
+          "Question 2"
+        ],
+        [
+          "01:56",
+          "Question 3"
+        ],
+        [
+          "02:31",
+          "À toi de jouer"
+        ],
+        [
+          "02:53",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "arrondir un nombre",
+        "arrondi à la centaine",
+        "arrondi au millier",
+        "encadrer un nombre",
+        "chiffre des dizaines",
+        "météorologue",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Quel est l'arrondi de 6 241 à la centaine près ?",
+          "choix": [
+            "6 300",
+            "6 240",
+            "6 200"
+          ],
+          "reponse": 2,
+          "explication": "Le chiffre des dizaines est 4. Comme 4 est plus petit que 5, on garde 6 200."
+        },
+        {
+          "t": "01:16",
+          "question": "Arrondis 47 820 au millier près.",
+          "choix": [
+            "48 000",
+            "47 800",
+            "47 000"
+          ],
+          "reponse": 0,
+          "explication": "Le chiffre des centaines est 8. Comme 8 vaut au moins 5, on monte à 48 000."
+        },
+        {
+          "t": "01:56",
+          "question": "Au millier près, quel nombre devient 29 000 ?",
+          "choix": [
+            "29 982",
+            "28 050",
+            "28 805"
+          ],
+          "reponse": 2,
+          "explication": "Les nombres qui donnent 29 000 vont de 28 500 à 29 499. Seul 28 805 y est."
+        }
+      ],
+      "centres": [
+        "meteo-climat",
+        "sciences"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_arrondir"
+        }
+      ]
+    },
+    {
+      "id": "cm1-entier-arrondir-short",
+      "pas_avant": "2027-06-16",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_arrondir",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-entier-arrondir",
+      "fichier": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir-short.mp4",
+      "miniature": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir-short-miniature.png",
+      "titre": "4 682 à la centaine : 4 600 ou 4 700 ? #maths #cm1",
+      "accroche": "Ma copine arrondit 4 682 à la centaine et coupe la fin : 4 600. Mais 4 682 est tout près de 4 700 : arrondir, c'est choisir le plus proche, pas couper.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : arrondis 23 249 au millier près. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_arrondir&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #cm1 #primaire",
+      "tags": [
+        "nombres entiers",
+        "arrondir",
+        "arrondi à la centaine",
+        "le plus proche",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "4 682 arrondi à la centaine près, ça donne ?",
+          "choix": [
+            "4 600",
+            "4 680",
+            "4 700"
+          ],
+          "reponse": 2,
+          "explication": "Le chiffre des dizaines est 8 : on monte à 4 700."
+        }
+      ],
+      "centres": [
+        "meteo-climat",
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_arrondir"
+        }
+      ]
+    },
+    {
+      "id": "cm1-entier-multiple",
+      "pas_avant": "2027-06-17",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_multiple",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/entiers/05-multiple/eleveai-maths-cm1-entier-multiple.mp4",
+      "miniature": "cm1/maths/entiers/05-multiple/eleveai-maths-cm1-entier-multiple.png",
+      "titre": "42 est-il un multiple de 6 ? — Les multiples — épisode 5 · Maths CM1",
+      "accroche": "Awa est fleuriste. Elle compte ses roses par paquets de 10, sans qu'il en reste un seul. Un multiple, c'est exactement ça : des paquets pleins.\n\nDans cette vidéo :\n• un multiple de 6, c'est 6 fois un nombre entier : 6 fois 7 donne 42\n• c'est aussi des paquets pleins, sans le moindre reste\n• pour 2, 10 et 100, le dernier chiffre suffit\n• un multiple de 10 finit par zéro\n• un voisin du multiple (63, 65, 67) n'est pas un multiple\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : trouver le total qui remplit des ballotins de 7 sans reste : 62, 63 ou 64.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_multiple&display=simple\n\n🔢 Épisode 5 de la série Nombres entiers d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "42, multiple de 6 ?"
+        ],
+        [
+          "00:31",
+          "Question 1"
+        ],
+        [
+          "01:06",
+          "Question 2"
+        ],
+        [
+          "01:37",
+          "Question 3"
+        ],
+        [
+          "02:05",
+          "À toi de jouer"
+        ],
+        [
+          "02:31",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "les multiples",
+        "multiple de 10",
+        "table de multiplication",
+        "paquets pleins",
+        "sans reste",
+        "fleuriste",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "Quel nombre est un multiple de 9 ?",
+          "choix": [
+            "63",
+            "67",
+            "65"
+          ],
+          "reponse": 0,
+          "explication": "9 × 7 donne 63. Ni 65 ni 67 n'est dans la table de 9."
+        },
+        {
+          "t": "01:06",
+          "question": "Lequel est un multiple de 10 ?",
+          "choix": [
+            "4 925",
+            "4 960",
+            "4 911"
+          ],
+          "reponse": 1,
+          "explication": "Un multiple de 10 finit par zéro. Seul 4 960 finit par zéro."
+        },
+        {
+          "t": "01:37",
+          "question": "Quel nombre n'est pas un multiple de 7 ?",
+          "choix": [
+            "24",
+            "28",
+            "56"
+          ],
+          "reponse": 0,
+          "explication": "7 × 4 donne 28, 7 × 8 donne 56. 24 n'est pas dans la table de 7."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "art-design"
+      ]
+    },
+    {
+      "id": "cm1-entier-multiple-short",
+      "pas_avant": "2027-06-17",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_multiple",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-entier-multiple",
+      "fichier": "cm1/maths/entiers/05-multiple/eleveai-maths-cm1-entier-multiple-short.mp4",
+      "miniature": "cm1/maths/entiers/05-multiple/eleveai-maths-cm1-entier-multiple-short-miniature.png",
+      "titre": "35 billes, paquets de 4 : ça tombe juste ? #maths #cm1",
+      "accroche": "Ma copine range 35 billes par paquets de 4 et dit que ça tombe juste. On compte 4, 8, 12… 32 : huit paquets pleins, et il en reste 3.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien de paquets de 6 avec 54 billes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_multiple&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #cm1 #primaire",
+      "tags": [
+        "nombres entiers",
+        "multiples",
+        "table de 4",
+        "il reste combien",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Lequel est un multiple de 4 ?",
+          "choix": [
+            "35",
+            "32",
+            "34"
+          ],
+          "reponse": 1,
+          "explication": "4 × 8 donne 32. Ni 34 ni 35 n'est dans la table de 4."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "cm1-entier-defi",
+      "pas_avant": "2027-06-18",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_defi",
+      "classe": "cm1",
+      "ceinture": "bleue",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi.mp4",
+      "miniature": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi.png",
+      "titre": "Qui se cache entre 3 900 et 4 000 ? — Le défi des nombres — épisode 6 · Maths CM1",
+      "accroche": "Sarah est factrice. Sur sa tournée, le numéro d'une maison est effacé. Elle le retrouve comme un détective : un indice après l'autre, jusqu'à ce qu'il n'en reste qu'un.\n\nDans cette vidéo :\n• on applique les indices un par un, et on vérifie à la fin\n• un multiple de 10 finit par zéro\n• le chiffre d'un rang élimine tous les autres candidats\n• pour le plus grand nombre, on range du plus grand chiffre au plus petit\n• un nombre ne commence jamais par zéro : il perdrait un chiffre\n• et au CM2 : juste après 6 999 999 vient 7 000 000\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : 95 bandes dessinées rangées par 4 : combien en reste-t-il ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_defi&display=simple\n\n🔢 Épisode 6 de la série Nombres entiers d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Qui se cache entre 3 900 et 4 000 ?"
+        ],
+        [
+          "00:33",
+          "Question 1"
+        ],
+        [
+          "01:05",
+          "Quatre étiquettes"
+        ],
+        [
+          "01:15",
+          "Question 2"
+        ],
+        [
+          "01:48",
+          "Et au CM2"
+        ],
+        [
+          "01:59",
+          "Question 3"
+        ],
+        [
+          "02:35",
+          "À toi de jouer"
+        ],
+        [
+          "02:49",
+          "Correction"
+        ],
+        [
+          "02:59",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "nombre mystère",
+        "défi de numération",
+        "multiple de 10",
+        "le plus grand nombre",
+        "jamais zéro devant",
+        "factrice",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "Je suis entre 6 000 et 6 100, multiple de 10, et mes dizaines valent 9.",
+          "choix": [
+            "6 095",
+            "6 090",
+            "6 009"
+          ],
+          "reponse": 1,
+          "explication": "Multiple de 10 : il finit par zéro. Avec 9 dizaines, c'est 6 090."
+        },
+        {
+          "t": "01:15",
+          "question": "Avec 0, 6, 8 et 3, quel est le plus petit nombre de quatre chiffres ?",
+          "choix": [
+            "3 086",
+            "368",
+            "3 068"
+          ],
+          "reponse": 2,
+          "explication": "Un nombre ne commence pas par zéro. On met 3, puis 0, puis 6, puis 8."
+        },
+        {
+          "t": "01:59",
+          "question": "Une usine a fait 49 493 bouteilles. Combien en manque-t-il pour 50 000 ?",
+          "choix": [
+            "607",
+            "507",
+            "407"
+          ],
+          "reponse": 1,
+          "explication": "49 493 + 7 donne 49 500. Puis 500 de plus : 507 en tout."
+        }
+      ],
+      "centres": [
+        "transports",
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_defi"
+        }
+      ]
+    },
+    {
+      "id": "cm1-entier-defi-short",
+      "pas_avant": "2027-06-18",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_defi",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-entier-defi",
+      "fichier": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi-short.mp4",
+      "miniature": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi-short-miniature.png",
+      "titre": "Le plus grand nombre avec 7, 4, 1 et 0 ? #maths #cm1",
+      "accroche": "Mon copain cherche le plus grand code à quatre chiffres avec 7, 4, 1 et 0, et tape 0 741. Le zéro devant fait perdre un chiffre : il ne reste que 741.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : le plus petit nombre de quatre chiffres avec 0, 5, 3 et 8 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #cm1 #primaire",
+      "tags": [
+        "nombres entiers",
+        "le plus grand nombre",
+        "zéro devant",
+        "défi",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "Quel est le plus grand nombre avec 7, 4, 1 et 0 ?",
+          "choix": [
+            "7 410",
+            "1 047",
+            "4 710"
+          ],
+          "reponse": 0,
+          "explication": "Du plus grand chiffre au plus petit : 7, 4, 1, 0. Donc 7 410."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "technologie-ia"
+      ],
+      "aussi": [
+        {
+          "classe": "cm2",
+          "notionId": "nombre_entier",
+          "microId": "entier_defi"
+        }
+      ]
+    },
+    {
+      "id": "6e-entier-rang",
+      "pas_avant": "2027-06-20",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_rang",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang.mp4",
+      "miniature": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang.png",
+      "titre": "Dans 5 482, quel est le chiffre des dizaines ? — Les rangs d'un nombre — épisode 1 · Maths 6e",
+      "accroche": "Inès est contrôleuse aérienne : sur son écran, chaque altitude doit être lue au bon rang. Un chiffre lu une colonne trop loin, et l'avion n'est plus à la même hauteur.\n\nDans cette vidéo :\n• les rangs se lisent de DROITE à gauche : unités, dizaines, centaines, unités de mille\n• donner le chiffre d'un rang, et donner le rang d'un chiffre\n• un zéro est un chiffre comme un autre : il occupe un rang, lui aussi\n• au-delà de mille, on continue : dizaines de mille, puis centaines de mille\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un avion vole à 5 102 mètres : donner le chiffre des dizaines, puis celui des centaines.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_rang&display=simple\n\n🔢 Épisode 1 de la série Nombres entiers d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Quel est le chiffre des dizaines ?"
+        ],
+        [
+          "00:24",
+          "Les quatre rangs de 5 482"
+        ],
+        [
+          "00:35",
+          "Question 1"
+        ],
+        [
+          "01:10",
+          "Question 2"
+        ],
+        [
+          "01:47",
+          "Question 3"
+        ],
+        [
+          "02:15",
+          "À toi de jouer"
+        ],
+        [
+          "02:29",
+          "Correction"
+        ],
+        [
+          "02:39",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "rang d'un chiffre",
+        "chiffre des dizaines",
+        "tableau de numération",
+        "unités dizaines centaines",
+        "de droite à gauche",
+        "contrôleuse aérienne",
+        "altitude",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "Dans 7 306, quel est le chiffre des centaines ?",
+          "choix": [
+            "7",
+            "0",
+            "3"
+          ],
+          "reponse": 2,
+          "explication": "De droite à gauche : 6 unités, 0 dizaine, 3 centaines, 7 milliers. Donc 3."
+        },
+        {
+          "t": "01:10",
+          "question": "Dans 85 676, à quel rang est le chiffre 7 ?",
+          "choix": [
+            "aux dizaines",
+            "aux unités",
+            "aux unités de mille"
+          ],
+          "reponse": 0,
+          "explication": "On part de la droite : 6 unités, puis 7 dizaines. Le 7 est au rang des dizaines."
+        },
+        {
+          "t": "01:47",
+          "question": "Dans 915 843, quel est le chiffre des centaines de mille ?",
+          "choix": [
+            "1",
+            "8",
+            "9"
+          ],
+          "reponse": 2,
+          "explication": "915 843 s'écrit 915 puis 843. Le 9 est au rang des centaines de mille."
+        }
+      ],
+      "centres": [
+        "transports",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "6e-entier-rang-short",
+      "pas_avant": "2027-06-20",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_rang",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-entier-rang",
+      "fichier": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang-short.mp4",
+      "miniature": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang-short-miniature.png",
+      "titre": "7 305 : le chiffre des dizaines, le 3 ou le 0 ? #maths #6e",
+      "accroche": "Mon copain cherche le chiffre des dizaines de 7 305 et pointe le 3 : il a compté de gauche à droite. Les rangs se comptent en partant de la droite : 5 unités, puis 0 dizaine.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : dans 9 261, quel est le chiffre des unités de mille ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_rang&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #6e #collège",
+      "tags": [
+        "nombres entiers",
+        "rang d'un chiffre",
+        "dizaines",
+        "de droite à gauche",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Dans 7 305, quel est le chiffre des dizaines ?",
+          "choix": [
+            "3",
+            "0",
+            "7"
+          ],
+          "reponse": 1,
+          "explication": "De droite à gauche : 5 unités, puis 0 dizaine. La réponse est 0."
+        }
+      ],
+      "centres": [
+        "transports",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-entier-encadrer",
+      "pas_avant": "2027-06-22",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_encadrer",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer.mp4",
+      "miniature": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer.png",
+      "titre": "Entre quelles centaines se trouve 582 ? — Encadrer un nombre entier — épisode 3 · Maths 6e",
+      "accroche": "Clara est guide de haute montagne. Avant de partir, elle situe chaque sommet entre deux altitudes rondes : un sommet rangé entre deux repères ronds se lit d'un coup d'œil.\n\nDans cette vidéo :\n• encadrer, c'est serrer le nombre entre les deux nombres ronds les plus proches\n• 582 est entre 500 et 600 : on écrit l'encadrement 500 < 582 < 600\n• le RANG change l'encadrement : à la dizaine près, 9 614 est entre 9 610 et 9 620\n• les bornes d'une dizaine finissent par un zéro, celles d'un millier par trois\n• encadrer aide à arrondir : 47 est entre 40 et 50, et plus proche de 50\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un compteur affiche 26 896 kilomètres : l'encadrer entre deux dizaines consécutives.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_encadrer&display=simple\n\n🔢 Épisode 3 de la série Nombres entiers d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Entre quelles centaines ?"
+        ],
+        [
+          "00:07",
+          "Clara, guide de haute montagne"
+        ],
+        [
+          "00:23",
+          "582 entre 500 et 600"
+        ],
+        [
+          "00:35",
+          "Question 1"
+        ],
+        [
+          "01:03",
+          "Le rang change l'encadrement"
+        ],
+        [
+          "01:13",
+          "Question 2"
+        ],
+        [
+          "02:00",
+          "Question 3"
+        ],
+        [
+          "02:32",
+          "À toi de jouer"
+        ],
+        [
+          "02:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "encadrer un nombre",
+        "dizaine juste avant",
+        "nombres ronds",
+        "droite graduée",
+        "arrondir",
+        "guide de haute montagne",
+        "altitude",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "Entre quelles dizaines consécutives se trouve 47 ?",
+          "choix": [
+            "47 et 48",
+            "40 et 50",
+            "30 et 40"
+          ],
+          "reponse": 1,
+          "explication": "40 est la dizaine juste avant, 50 la dizaine juste après."
+        },
+        {
+          "t": "01:13",
+          "question": "Encadre 9 614 entre deux dizaines consécutives.",
+          "choix": [
+            "9 610 et 9 620",
+            "9 611 et 9 621",
+            "9 600 et 9 610"
+          ],
+          "reponse": 0,
+          "explication": "Les dizaines finissent par zéro. Juste avant : 9 610. Juste après : 9 620."
+        },
+        {
+          "t": "02:00",
+          "question": "Entre quels milliers consécutifs se trouve 5 280 ?",
+          "choix": [
+            "5 200 et 5 300",
+            "5 000 et 6 000",
+            "4 000 et 5 000"
+          ],
+          "reponse": 1,
+          "explication": "Les milliers finissent par trois zéros. 5 280 est entre 5 000 et 6 000."
+        }
+      ],
+      "centres": [
+        "sport",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "6e-entier-encadrer-short",
+      "pas_avant": "2027-06-22",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_encadrer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-entier-encadrer",
+      "fichier": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer-short.mp4",
+      "miniature": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer-short-miniature.png",
+      "titre": "752 entre deux dizaines : 750 ou 751 ? #maths #6e",
+      "accroche": "Ma copine encadre 752 entre deux dizaines et écrit 751 et 761 : elle a pris les voisins du nombre. Une dizaine finit toujours par zéro : c'est 750 et 760.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : encadre 7 755 entre deux centaines consécutives. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_encadrer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #6e #collège",
+      "tags": [
+        "nombres entiers",
+        "encadrer",
+        "dizaines",
+        "nombres ronds",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Entre quelles dizaines se trouve 752 ?",
+          "choix": [
+            "750 et 760",
+            "751 et 761",
+            "700 et 800"
+          ],
+          "reponse": 0,
+          "explication": "Juste avant : 750. Juste après : 760. Les deux finissent par zéro."
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-entier-decomposer",
+      "pas_avant": "2027-06-23",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_decomposer",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer.mp4",
+      "miniature": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer.png",
+      "titre": "Quelle est la bonne décomposition de 507 ? — Décomposer un nombre entier — épisode 4 · Maths 6e",
+      "accroche": "Ethan est game designer. Il donne les points de son jeu par paquets — milliers, centaines, dizaines — et chaque paquet doit tomber dans le bon rang, sinon le score affiché n'est plus le bon.\n\nDans cette vidéo :\n• chaque chiffre vaut son chiffre fois son rang : dans 352, le 5 vaut 5 × 10, soit 50\n• un rang vide ne s'écrit pas : 507 = 500 + 7, et rien pour les dizaines\n• composer, c'est l'inverse : on range chaque terme dans son rang, même en désordre\n• la méthode ne change pas avec des nombres plus longs : 10 000 + 100 + 20 + 4 = 10 124\n• deux chiffres identiques ne valent pas la même chose : dans 55 140, un 5 vaut 50 000 et l'autre 5 000\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : au jeu, Rayan gagne 30 000, 2 000, 600, 50 et 9 points : quel est son total ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_decomposer&display=simple\n\n🔢 Épisode 4 de la série Nombres entiers d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "La bonne décomposition de 507 ?"
+        ],
+        [
+          "00:07",
+          "Ethan, game designer"
+        ],
+        [
+          "00:34",
+          "Question 1"
+        ],
+        [
+          "01:11",
+          "Question 2"
+        ],
+        [
+          "01:55",
+          "Question 3"
+        ],
+        [
+          "02:31",
+          "À toi de jouer"
+        ],
+        [
+          "02:45",
+          "Correction"
+        ],
+        [
+          "02:55",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "décomposer un nombre",
+        "valeur d'un chiffre",
+        "rang vide",
+        "écriture décomposée",
+        "composer un nombre",
+        "game designer",
+        "points de jeu",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Quelle est la décomposition de 706 ?",
+          "choix": [
+            "700 + 60",
+            "70 + 6",
+            "700 + 6"
+          ],
+          "reponse": 2,
+          "explication": "Le 7 vaut 700, le 0 ne compte pas, le 6 vaut 6 unités."
+        },
+        {
+          "t": "01:11",
+          "question": "Quel nombre vaut 500 + 90 + 3 plus 8 000 ?",
+          "choix": [
+            "5 938",
+            "8 593",
+            "8 953"
+          ],
+          "reponse": 1,
+          "explication": "L'ordre ne compte pas : 8 000, puis 500, puis 90, puis 3. Donc 8 593."
+        },
+        {
+          "t": "01:55",
+          "question": "Quelle écriture est égale à 55 140 ?",
+          "choix": [
+            "50 000 + 5 000 + 100 + 40",
+            "500 000 + 5 000 + 100 + 40",
+            "50 000 + 500 + 100 + 40"
+          ],
+          "reponse": 0,
+          "explication": "Deux 5 : l'un vaut 50 000, l'autre 5 000. Puis 100 et 40."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "6e-entier-decomposer-short",
+      "pas_avant": "2027-06-23",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_decomposer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-entier-decomposer",
+      "fichier": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer-short.mp4",
+      "miniature": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer-short-miniature.png",
+      "titre": "507 : la bonne décomposition, 500 + 70 ou 500 + 7 ? #maths #6e",
+      "accroche": "Mon copain décompose 507 et écrit 500 + 70 : il a lu le 7 comme un 70. Le 7 est tout à droite, c'est le rang des unités : il vaut 7. Le zéro, lui, ne s'écrit pas dans la décomposition, mais il garde la place des dizaines.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : décompose 2 340. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_decomposer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #6e #collège",
+      "tags": [
+        "nombres entiers",
+        "décomposer",
+        "valeur d'un chiffre",
+        "rang vide",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Quelle est la décomposition de 507 ?",
+          "choix": [
+            "500 + 70",
+            "500 + 7",
+            "50 + 7"
+          ],
+          "reponse": 1,
+          "explication": "Le 0 est aux dizaines : il n'y a aucune dizaine. Donc 500 + 7."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-entier-defi",
+      "pas_avant": "2027-06-24",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_defi",
+      "classe": "6e",
+      "ceinture": "bleue",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi.mp4",
+      "miniature": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi.png",
+      "titre": "De 1 041 à 2 000 : combien manque-t-il ? — Le défi des nombres entiers — épisode 5 · Maths 6e",
+      "accroche": "Maya est volcanologue au Piton de la Fournaise. Elle compte les secousses jour après jour, et pour savoir ce qui manque avant un seuil, elle avance par étapes rondes plutôt que de poser une soustraction.\n\nDans cette vidéo :\n• le complément à un nombre rond se fait par étapes rondes : 1 041 + 9, puis + 50, puis + 900, en tout 959\n• 679 pour atteindre 700 : + 1 jusqu'à 680, puis + 20, en tout 21\n• former un nombre avec des chiffres donnés : ⛔ un nombre ne commence jamais par zéro\n• le plus petit nombre de quatre chiffres avec 3, 0, 6 et 5 est 3 056, pas 0 356\n• le nombre mystère : on place chaque indice à son rang, l'un après l'autre\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : avec 5, 0, 9 et 4, quel est le plus grand nombre de quatre chiffres ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_defi&display=simple\n\n🔢 Épisode 5 de la série Nombres entiers d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien manque-t-il à 1 041 ?"
+        ],
+        [
+          "00:27",
+          "Les deux étapes suivantes"
+        ],
+        [
+          "00:38",
+          "Question 1"
+        ],
+        [
+          "01:17",
+          "Question 2"
+        ],
+        [
+          "01:56",
+          "Question 3"
+        ],
+        [
+          "02:29",
+          "À toi de jouer"
+        ],
+        [
+          "02:51",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "défi",
+        "complément à un nombre rond",
+        "étapes rondes",
+        "le plus grand nombre",
+        "zéro devant",
+        "nombre mystère",
+        "volcanologue",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:38",
+          "question": "Combien manque-t-il à 679 pour atteindre 700 ?",
+          "choix": [
+            "31",
+            "19",
+            "21"
+          ],
+          "reponse": 2,
+          "explication": "679 + 1 donne 680. Puis 20 de plus : 700. En tout, 21."
+        },
+        {
+          "t": "01:17",
+          "question": "Le plus petit nombre de quatre chiffres avec 3, 0, 6 et 5 ?",
+          "choix": [
+            "0 356",
+            "3 056",
+            "3 065"
+          ],
+          "reponse": 1,
+          "explication": "On ne commence pas par zéro. On met 3, puis 0, puis 5, puis 6."
+        },
+        {
+          "t": "01:56",
+          "question": "Quatre chiffres : unités de mille 3, centaines le double de 3, dizaines 0, unités 1.",
+          "choix": [
+            "3 610",
+            "3 061",
+            "3 601"
+          ],
+          "reponse": 2,
+          "explication": "Unités de mille 3, centaines 6, dizaines 0, unités 1. Donc 3 601."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "6e-entier-defi-short",
+      "pas_avant": "2027-06-24",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_defi",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-entier-defi",
+      "fichier": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi-short.mp4",
+      "miniature": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi-short-miniature.png",
+      "titre": "De 569 à 600 : il manque 31 ou 41 ? #maths #6e",
+      "accroche": "Ma copine a 569 points, il en faut 600, et elle annonce 41 : elle a compté trop vite. On avance par étapes rondes — 569 + 1 donne 570, puis 30 de plus font 600 : en tout, 31.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : le plus petit nombre de quatre chiffres avec 3, 0, 6 et 5 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #6e #collège",
+      "tags": [
+        "nombres entiers",
+        "complément",
+        "étapes rondes",
+        "défi",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Combien manque-t-il à 569 pour atteindre 600 ?",
+          "choix": [
+            "29",
+            "31",
+            "41"
+          ],
+          "reponse": 1,
+          "explication": "569 + 1 donne 570. Puis 30 de plus : 600. En tout, 31."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "6e-entier-comparer",
+      "pas_avant": "2027-06-21",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_comparer",
+      "classe": "6e",
+      "ceinture": "verte",
+      "serie": "Maths 6e",
+      "type": "longue",
+      "fichier": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer.mp4",
+      "miniature": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer.png",
+      "titre": "2 305 ou 2 350 : lequel est le plus grand ? — Comparer des nombres entiers — épisode 2 · Maths 6e",
+      "accroche": "Noé est astronome. Il range les planètes de la plus proche à la plus lointaine, et une distance mal lue, c'est une planète à la mauvaise place : comparer deux nombres se fait dans un ordre précis, jamais au hasard.\n\nDans cette vidéo :\n• première règle : on compte les chiffres — 6 767 est plus grand que 795\n• même longueur ? on compare de gauche à droite, jusqu'au premier chiffre différent\n• ⛔ le piège : s'arrêter au dernier chiffre — 1 408 finit par 8, et 1 480 est pourtant plus grand\n• le rang qui décide n'est pas toujours le premier : entre 12 647 et 13 547, c'est le deuxième chiffre\n• croissant, c'est du plus petit au plus grand ; décroissant, c'est l'inverse\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : quatre scores — 6 022, 6 024, 6 023 et 6 032 — à ranger du plus petit au plus grand.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_comparer&display=simple\n\n🔢 Épisode 2 de la série Nombres entiers d'EleveAI, en 6e.",
+      "chapitres": [
+        [
+          "00:00",
+          "2 305 ou 2 350 ?"
+        ],
+        [
+          "00:33",
+          "Question 1"
+        ],
+        [
+          "01:08",
+          "Le piège du dernier chiffre"
+        ],
+        [
+          "01:18",
+          "Question 2"
+        ],
+        [
+          "02:02",
+          "Question 3"
+        ],
+        [
+          "02:44",
+          "À toi de jouer"
+        ],
+        [
+          "02:59",
+          "Correction"
+        ],
+        [
+          "03:13",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "comparer des nombres",
+        "plus grand plus petit",
+        "ordre croissant",
+        "ordre décroissant",
+        "compter les chiffres",
+        "astronome",
+        "planètes",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "Quel nombre est le plus grand : 2 305 ou 2 350 ?",
+          "choix": [
+            "les deux sont égaux",
+            "2 305",
+            "2 350"
+          ],
+          "reponse": 2,
+          "explication": "Même début : 2 et 3. Puis 5 dizaines bat 0 dizaine. Donc 2 350."
+        },
+        {
+          "t": "01:18",
+          "question": "Quel est le plus petit nombre : 12 647, 13 547 ou 13 647 ?",
+          "choix": [
+            "13 547",
+            "12 647",
+            "13 647"
+          ],
+          "reponse": 1,
+          "explication": "Le deuxième chiffre décide : 2 contre 3. Donc 12 647 est le plus petit."
+        },
+        {
+          "t": "02:02",
+          "question": "Quel rangement est croissant ?",
+          "choix": [
+            "3 405 ; 3 045 ; 3 450",
+            "3 450 ; 3 405 ; 3 045",
+            "3 045 ; 3 405 ; 3 450"
+          ],
+          "reponse": 2,
+          "explication": "Croissant va du plus petit au plus grand : 3 045, puis 3 405, puis 3 450."
+        }
+      ],
+      "centres": [
+        "espace",
+        "sciences"
+      ]
+    },
+    {
+      "id": "6e-entier-comparer-short",
+      "pas_avant": "2027-06-21",
+      "prioritaire": true,
+      "notionId": "entier_nombre",
+      "microId": "entier_comparer",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "Maths 6e",
+      "type": "short",
+      "renvoie_vers": "6e-entier-comparer",
+      "fichier": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer-short.mp4",
+      "miniature": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer-short-miniature.png",
+      "titre": "1 408 ou 1 480 : lequel est le plus grand ? #maths #6e",
+      "accroche": "Mon copain compare 1 408 et 1 480 en regardant le dernier chiffre, 8 contre 0, et il annonce 1 408. On compare par la gauche : même début 1 et 4, puis 8 dizaines battent 0 dizaine. C'est 1 480.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : range 17 350, 17 340 et 16 340 du plus grand au plus petit. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #6e #collège",
+      "tags": [
+        "nombres entiers",
+        "comparer",
+        "dernier chiffre",
+        "de gauche à droite",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "6e",
+        "collège",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Lequel est le plus grand : 1 408 ou 1 480 ?",
+          "choix": [
+            "1 480",
+            "1 408",
+            "c'est pareil"
+          ],
+          "reponse": 0,
+          "explication": "Même début : 1 et 4. Puis 8 dizaines bat 0 dizaine. Donc 1 480."
+        }
+      ],
+      "centres": [
+        "espace",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm2-entier-multiple",
+      "pas_avant": "2027-06-19",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_multiple",
+      "classe": "cm2",
+      "ceinture": "verte",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple.mp4",
+      "miniature": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple.png",
+      "titre": "51 408 : multiple de 3, sans diviser ? — Les critères de divisibilité — épisode 1 · Maths CM2",
+      "accroche": "Hugo est pâtissier. Il range ses macarons par boîtes, sans qu'il en reste un seul — et pour savoir si un grand nombre tombe juste, il ne pose pas la division : il additionne les chiffres.\n\nDans cette vidéo :\n• un multiple de 3, c'est 3 fois un nombre entier — mais sur un grand nombre, diviser est long\n• le critère de 3 : si la somme des chiffres est un multiple de 3, le nombre l'est aussi (51 408 → 5 + 1 + 4 + 0 + 8 = 18)\n• même astuce pour 9 : 59 130 → 18, donc 59 130 est un multiple de 9\n• d'autres multiples se lisent à la FIN : un multiple de 25 finit par 00, 25, 50 ou 75\n• un multiple de 5 finit par 0 ou par 5 — c'est la fin qui répond, pas la division\n\n⏸ 3 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Hugo a 1 743 macarons, en boîtes de 5 : reste-t-il des macarons ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=nombre_entier&microId=entier_multiple&display=simple\n\n🔢 Épisode 1 de la série Nombres entiers d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "51 408, multiple de 3 ?"
+        ],
+        [
+          "00:35",
+          "Question 1"
+        ],
+        [
+          "01:13",
+          "Question 2"
+        ],
+        [
+          "01:44",
+          "Les multiples qui se lisent à la fin"
+        ],
+        [
+          "01:54",
+          "Question 3"
+        ],
+        [
+          "02:32",
+          "À toi de jouer"
+        ],
+        [
+          "02:45",
+          "Correction"
+        ],
+        [
+          "02:56",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres entiers",
+        "critères de divisibilité",
+        "multiple de 3",
+        "multiple de 9",
+        "somme des chiffres",
+        "multiple de 25",
+        "pâtissier",
+        "macarons",
+        "numération",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "Dans 51 408, quelle est la somme des chiffres ?",
+          "choix": [
+            "24",
+            "17",
+            "18"
+          ],
+          "reponse": 2,
+          "explication": "5 + 1 plus 4 + 0 plus 8 donne 18. Et 18 est un multiple de 3."
+        },
+        {
+          "t": "01:13",
+          "question": "La somme des chiffres de 59 130 vaut 18. Est-ce un multiple de 9 ?",
+          "choix": [
+            "non",
+            "oui",
+            "on ne peut pas savoir"
+          ],
+          "reponse": 1,
+          "explication": "18 est un multiple de 9. Donc 59 130 est un multiple de 9."
+        },
+        {
+          "t": "01:54",
+          "question": "Lequel est un multiple de 25 ?",
+          "choix": [
+            "858 445",
+            "858 152",
+            "858 250"
+          ],
+          "reponse": 2,
+          "explication": "Un multiple de 25 finit par 00, 25, 50 ou 75. Seul 858 250 finit par 50."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm2-entier-multiple-short",
+      "pas_avant": "2027-06-19",
+      "prioritaire": true,
+      "notionId": "nombre_entier",
+      "microId": "entier_multiple",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-entier-multiple",
+      "fichier": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple-short.mp4",
+      "miniature": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple-short-miniature.png",
+      "titre": "48 231 est-il un multiple de 3 ? Sans poser la division #maths #cm2",
+      "accroche": "Mon copain veut savoir si 48 231 est un multiple de 3 et il pose la division. Ma copine additionne les chiffres — 4 + 8 + 2 + 3 + 1 font 18 — et elle a déjà fini. Pas besoin de diviser.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : 742 950 est-il un multiple de 50 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=nombre_entier&microId=entier_multiple&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #nombres #cm2 #primaire",
+      "tags": [
+        "nombres entiers",
+        "critère de divisibilité",
+        "multiple de 3",
+        "somme des chiffres",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "numération",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Lequel est un multiple de 3 ?",
+          "choix": [
+            "57 651",
+            "57 658",
+            "57 671"
+          ],
+          "reponse": 0,
+          "explication": "5 + 7 plus 6 + 5 plus 1 donne 24, un multiple de 3."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
     }
   ]
 }

@@ -1,0 +1,18 @@
+{
+  "00-garde": "Comparer des nombres entiers. Lequel est le plus grand : 2 305 ou 2 350 ?",
+  "01-situation": "Voici Noé. Il est astronome. Il range les planètes de la plus proche à la plus lointaine.",
+  "02-chiffres": "Première règle : on compte les chiffres. 6 767 est plus grand que 795.",
+  "03-gauche-droite": "Même longueur ? On compare de gauche à droite, jusqu'au premier chiffre différent.",
+  "04-question": "Question ! Quel nombre est le plus grand : 2 305 ou 2 350 ? A : les deux sont égaux. B : 2 305. C : 2 350. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. Même début : 2 et 3. Puis 5 dizaines bat 0 dizaine. Donc 2 350.",
+  "05-piege": "Le piège : s'arrêter au dernier chiffre. 1 408 finit par 8, et pourtant 1 480 est plus grand.",
+  "06-question": "Question ! Quel est le plus petit nombre : 12 647, 13 547 ou 13 647 ? A : 13 547. B : 12 647. C : 13 647. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. Le deuxième chiffre décide : 2 contre 3. Donc 12 647 est le plus petit.",
+  "07-ordre": "Ordre croissant : du plus petit au plus grand. Décroissant : l'inverse.",
+  "08-question": "Question ! Quel rangement est croissant ? A : 3 405 ; 3 045 ; 3 450. B : 3 450 ; 3 405 ; 3 045. C : 3 045 ; 3 405 ; 3 450. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. Croissant va du plus petit au plus grand : 3 045, puis 3 405, puis 3 450.",
+  "09-defi": "À toi de jouer ! Quatre scores : 6 022, 6 024, 6 023 et 6 032. Range-les du plus petit au plus grand. Mets pause, et cherche !",
+  "09b-correction": "Correction. 6 032 a 3 dizaines : c'est le plus grand. Dans l'ordre : 6 022, 6 023, 6 024, puis 6 032.",
+  "10-finale": "Ce que tu as appris. On compte les chiffres, puis on compare de gauche à droite. Jamais par la fin.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

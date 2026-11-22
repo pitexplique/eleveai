@@ -1,0 +1,18 @@
+{
+  "00-garde": "Arrondir un nombre. Quel est l'arrondi de 4 682 à la centaine près ?",
+  "01-situation": "Voici Léna. Elle est météorologue. Pour annoncer la pluie, elle donne un nombre simple à retenir.",
+  "02-encadrer": "D'abord, on encadre. 4 682 est entre 4 600 et 4 700.",
+  "03-regle": "Puis on regarde le chiffre juste à droite. De 0 à 4 on garde, de 5 à 9 on monte.",
+  "04-question": "Question ! Quel est l'arrondi de 6 241 à la centaine près ? A : 6 300. B : 6 240. C : 6 200. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. Le chiffre des dizaines est 4. Comme 4 est plus petit que 5, on garde 6 200.",
+  "05-piege": "Le piège : arrondir, ce n'est pas couper. 4 682 à la centaine donne 4 700, pas 4 600.",
+  "06-question": "Question ! Arrondis 47 820 au millier près. A : 48 000. B : 47 800. C : 47 000. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. Le chiffre des centaines est 8. Comme 8 vaut au moins 5, on monte à 48 000.",
+  "07-cm2": "Et au CM2, on arrondit au million. 5 594 834 devient 6 000 000.",
+  "08-question": "Question ! Au millier près, quel nombre devient 29 000 ? A : 29 982. B : 28 050. C : 28 805. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. Les nombres qui donnent 29 000 vont de 28 500 à 29 499. Seul 28 805 y est.",
+  "09-defi": "À toi de jouer ! Un concert a réuni 86 246 personnes. Arrondis au millier près. Mets pause, et cherche !",
+  "09b-correction": "Correction. Le chiffre des centaines est 2. Plus petit que 5 : on garde 86 000.",
+  "10-finale": "Ce que tu as appris. On encadre, puis on regarde le chiffre juste à droite. De 5 à 9, on monte.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

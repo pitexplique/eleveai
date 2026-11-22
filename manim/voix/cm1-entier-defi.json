@@ -1,0 +1,18 @@
+{
+  "00-garde": "Le défi des nombres. Un nombre mystère se cache entre 3 900 et 4 000. Qui est-il ?",
+  "01-situation": "Voici Sarah. Elle est factrice. Un numéro de maison est effacé : elle doit le retrouver.",
+  "02-indices": "On garde les nombres entre 3 900 et 4 000. Multiple de 10 : il finit par zéro.",
+  "03-dernier-indice": "Son chiffre des dizaines est 2. Un seul nombre convient : 3 920.",
+  "04-question": "Question ! Je suis entre 6 000 et 6 100, multiple de 10, et mes dizaines valent 9. A : 6 095. B : 6 090. C : 6 009. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. Multiple de 10 : il finit par zéro. Avec 9 dizaines, c'est 6 090.",
+  "05-etiquettes": "Autre défi : quatre étiquettes, 6, 2, 7 et 9. Pour le plus grand nombre, on range du plus grand chiffre au plus petit.",
+  "06-question": "Question ! Avec 0, 6, 8 et 3, quel est le plus petit nombre de quatre chiffres ? A : 3 086. B : 368. C : 3 068. Mets pause, et choisis !",
+  "06b-reponse": "Réponse C. Un nombre ne commence pas par zéro. On met 3, puis 0, puis 6, puis 8.",
+  "07-cm2": "Et au CM2, les défis montent aux millions. Juste après 6 999 999 vient 7 000 000.",
+  "08-question": "Question ! Une usine a fait 49 493 bouteilles. Combien en manque-t-il pour 50 000 ? A : 607. B : 507. C : 407. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. 49 493 plus 7 donne 49 500. Puis 500 de plus : 507 en tout.",
+  "09-defi": "À toi de jouer ! Une bibliothécaire a 95 bandes dessinées, 4 par étagère. Combien en reste-t-il ? Mets pause, et cherche !",
+  "09b-correction": "Correction. 4 fois 23 donne 92. 95 moins 92 : il reste 3 bandes dessinées.",
+  "10-finale": "Ce que tu as appris. Dans un défi, on applique les indices un par un. Et on vérifie à la fin.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

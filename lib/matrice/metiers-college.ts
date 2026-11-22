@@ -18,7 +18,15 @@ export const METIERS_6E: Record<string, LienMetier[]> = {
     F("developpeur", "teste son programme pas à pas pour trouver l'instruction qui bloque."),
   ],
   entier_nombre: [
-    M("astronome", "range les planètes de la plus proche à la plus lointaine, à des millions de kilomètres."),
+    // `V` sur quatre liens : série vidéo NOMBRES ENTIERS CM1 → 6e, lot B (5 épisodes, 21/11/2026).
+    // ⛔ `entier_lire_ecrire` n'a PAS de nouvelle vidéo : l'ancienne `6e-entier-nombre` le couvre, et c'est
+    // elle que le lien « comptable » accompagne — il reste donc sans `V` jusqu'à un relevé du manifeste.
+    M("astronome", "range les planètes de la plus proche à la plus lointaine, à des millions de kilomètres.", V),
+    F("controleur-aerien", "lit l'altitude d'un avion sur son écran : chaque rang compte.", V),
+    F("guide-montagne", "situe un sommet entre deux altitudes rondes avant de choisir sa course.", V),
+    M("game-designer", "donne les points de son jeu par paquets : 30 000, 2 000, 600, 50 et 9.", V),
+    F("volcanologue", "compte les secousses du Piton de la Fournaise : 1 041, combien avant 2 000 ?",
+      { ...V, ...R }),
     F("journaliste", "compare deux villes : 2 145 906 ou 2 154 906 habitants, laquelle est la plus grande ?"),
     M("comptable", "écrit les montants d'une facture en chiffres et en lettres, sans oublier un zéro."),
   ],

@@ -6,7 +6,7 @@ Réponds en français. Lis et applique `manim/brief-agent-puissances.md` EN ENTI
 
 ## Rendu HD : 2 à la fois sur cette série, et jamais sous 2 Go libres
 Le verrou unique du brief puissances est REMPLACÉ par deux places propres à cette série. Avant chaque rendu HD :
-1. Prends une place : `mkdir "C:/Users/FRED/AppData/Local/Temp/eleveai-equations-hd-1.lock"`, sinon `…-hd-2.lock`. Si les deux sont prises, attends (boucle en arrière-plan, 30 s).
+1. Prends une place : `mkdir "$env:TEMP/eleveai-equations-hd-1.lock"`, sinon `…-hd-2.lock`. Si les deux sont prises, attends (boucle en arrière-plan, 30 s).
 2. Mesure la mémoire libre : `powershell -NoProfile -Command "[math]::Round((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory/1MB,1)"`. Sous 2 Go, attends en gardant ta place et remesure toutes les 60 s.
 3. Libère ta place (`rmdir`) dès la fin du rendu, même en cas d'échec. En cas de `MemoryError` : attends, relance une fois, et dis-le dans ton rapport.
 

@@ -1,0 +1,9 @@
+{
+  "00-accroche": "Salut ! Mon copain cherche un code à quatre chiffres avec 7, 4, 1 et 0.",
+  "01-essai": "Il veut le plus grand. Il tape 0 741 !",
+  "02-question": "Question ! Quel est le plus grand nombre avec 7, 4, 1 et 0 ? A : 7 410. B : 1 047. C : 4 710. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A ! Du plus grand chiffre au plus petit : 7, 4, 1, 0. Donc 7 410.",
+  "03-fin": "Un zéro devant, et le nombre perd un chiffre !",
+  "04-commentaire": "À toi : le plus petit nombre de quatre chiffres avec 0, 5, 3 et 8 ? Réponds en commentaire !",
+  "05-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

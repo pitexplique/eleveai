@@ -18008,5 +18008,221 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_defi&display=simple"
+ },
+ "cm1-entier-comparer": {
+  "fichier": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer.mp4",
+  "poster": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer.png",
+  "vignette": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer.vignette.webp",
+  "titre": "9 876 ou 10 234 : lequel est le plus grand ? — Comparer des grands nombres — épisode 2 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_comparer&display=simple"
+ },
+ "cm1-entier-comparer-short": {
+  "fichier": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer-short.mp4",
+  "poster": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer-short-miniature.png",
+  "vignette": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer-short-miniature.vignette.webp",
+  "titre": "987 ou 1 002 : il commence par 9, donc il gagne ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_comparer&display=simple"
+ },
+ "cm1-entier-lire": {
+  "fichier": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire.mp4",
+  "poster": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire.png",
+  "vignette": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire.vignette.webp",
+  "titre": "« Douze mille trente » : combien de zéros ? — Lire les grands nombres — épisode 1 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_lire&display=simple"
+ },
+ "cm1-entier-lire-short": {
+  "fichier": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire-short.mp4",
+  "poster": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire-short-miniature.png",
+  "vignette": "cm1/maths/entiers/01-lire/eleveai-maths-cm1-entier-lire-short-miniature.vignette.webp",
+  "titre": "« Huit mille neuf » : où va le neuf ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_lire&display=simple"
+ },
+ "cm1-entier-decomposer": {
+  "fichier": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer.mp4",
+  "poster": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer.png",
+  "vignette": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer.vignette.webp",
+  "titre": "7 306 : que vaut chaque chiffre ? — Décomposer un nombre — épisode 3 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_decomposer&display=simple"
+ },
+ "cm1-entier-decomposer-short": {
+  "fichier": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer-short.mp4",
+  "poster": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer-short-miniature.png",
+  "vignette": "cm1/maths/entiers/03-decomposer/eleveai-maths-cm1-entier-decomposer-short-miniature.vignette.webp",
+  "titre": "Le dernier chiffre de 12 405 vaut 50 ou 5 ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_decomposer&display=simple"
+ },
+ "cm1-entier-arrondir": {
+  "fichier": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir.mp4",
+  "poster": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir.png",
+  "vignette": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir.vignette.webp",
+  "titre": "4 682 à la centaine : 4 600 ou 4 700 ? — Arrondir un nombre — épisode 4 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_arrondir&display=simple"
+ },
+ "cm1-entier-arrondir-short": {
+  "fichier": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir-short.mp4",
+  "poster": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir-short-miniature.png",
+  "vignette": "cm1/maths/entiers/04-arrondir/eleveai-maths-cm1-entier-arrondir-short-miniature.vignette.webp",
+  "titre": "4 682 à la centaine : 4 600 ou 4 700 ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_arrondir&display=simple"
+ },
+ "cm1-entier-multiple": {
+  "fichier": "cm1/maths/entiers/05-multiple/eleveai-maths-cm1-entier-multiple.mp4",
+  "poster": "cm1/maths/entiers/05-multiple/eleveai-maths-cm1-entier-multiple.png",
+  "vignette": "cm1/maths/entiers/05-multiple/eleveai-maths-cm1-entier-multiple.vignette.webp",
+  "titre": "42 est-il un multiple de 6 ? — Les multiples — épisode 5 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_multiple&display=simple"
+ },
+ "cm1-entier-multiple-short": {
+  "fichier": "cm1/maths/entiers/05-multiple/eleveai-maths-cm1-entier-multiple-short.mp4",
+  "poster": "cm1/maths/entiers/05-multiple/eleveai-maths-cm1-entier-multiple-short-miniature.png",
+  "vignette": "cm1/maths/entiers/05-multiple/eleveai-maths-cm1-entier-multiple-short-miniature.vignette.webp",
+  "titre": "35 billes, paquets de 4 : ça tombe juste ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_multiple&display=simple"
+ },
+ "cm1-entier-defi": {
+  "fichier": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi.mp4",
+  "poster": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi.png",
+  "vignette": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi.vignette.webp",
+  "titre": "Qui se cache entre 3 900 et 4 000 ? — Le défi des nombres — épisode 6 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_defi&display=simple"
+ },
+ "cm1-entier-defi-short": {
+  "fichier": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi-short.mp4",
+  "poster": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi-short-miniature.png",
+  "vignette": "cm1/maths/entiers/06-defi/eleveai-maths-cm1-entier-defi-short-miniature.vignette.webp",
+  "titre": "Le plus grand nombre avec 7, 4, 1 et 0 ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=nombre_entier&microId=entier_defi&display=simple"
+ },
+ "6e-entier-rang": {
+  "fichier": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang.mp4",
+  "poster": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang.png",
+  "vignette": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang.vignette.webp",
+  "titre": "Dans 5 482, quel est le chiffre des dizaines ? — Les rangs d'un nombre — épisode 1 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_rang&display=simple"
+ },
+ "6e-entier-rang-short": {
+  "fichier": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang-short.mp4",
+  "poster": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang-short-miniature.png",
+  "vignette": "6e/maths/entiers/01-rang/eleveai-maths-6e-entier-rang-short-miniature.vignette.webp",
+  "titre": "7 305 : le chiffre des dizaines, le 3 ou le 0 ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_rang&display=simple"
+ },
+ "6e-entier-encadrer": {
+  "fichier": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer.mp4",
+  "poster": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer.png",
+  "vignette": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer.vignette.webp",
+  "titre": "Entre quelles centaines se trouve 582 ? — Encadrer un nombre entier — épisode 3 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_encadrer&display=simple"
+ },
+ "6e-entier-encadrer-short": {
+  "fichier": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer-short.mp4",
+  "poster": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer-short-miniature.png",
+  "vignette": "6e/maths/entiers/03-encadrer/eleveai-maths-6e-entier-encadrer-short-miniature.vignette.webp",
+  "titre": "752 entre deux dizaines : 750 ou 751 ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_encadrer&display=simple"
+ },
+ "6e-entier-decomposer": {
+  "fichier": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer.mp4",
+  "poster": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer.png",
+  "vignette": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer.vignette.webp",
+  "titre": "Quelle est la bonne décomposition de 507 ? — Décomposer un nombre entier — épisode 4 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_decomposer&display=simple"
+ },
+ "6e-entier-decomposer-short": {
+  "fichier": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer-short.mp4",
+  "poster": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer-short-miniature.png",
+  "vignette": "6e/maths/entiers/04-decomposer/eleveai-maths-6e-entier-decomposer-short-miniature.vignette.webp",
+  "titre": "507 : la bonne décomposition, 500 + 70 ou 500 + 7 ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_decomposer&display=simple"
+ },
+ "6e-entier-defi": {
+  "fichier": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi.mp4",
+  "poster": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi.png",
+  "vignette": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi.vignette.webp",
+  "titre": "De 1 041 à 2 000 : combien manque-t-il ? — Le défi des nombres entiers — épisode 5 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_defi&display=simple"
+ },
+ "6e-entier-defi-short": {
+  "fichier": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi-short.mp4",
+  "poster": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi-short-miniature.png",
+  "vignette": "6e/maths/entiers/05-defi/eleveai-maths-6e-entier-defi-short-miniature.vignette.webp",
+  "titre": "De 569 à 600 : il manque 31 ou 41 ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_defi&display=simple"
+ },
+ "6e-entier-comparer": {
+  "fichier": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer.mp4",
+  "poster": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer.png",
+  "vignette": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer.vignette.webp",
+  "titre": "2 305 ou 2 350 : lequel est le plus grand ? — Comparer des nombres entiers — épisode 2 · Maths 6e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_comparer&display=simple"
+ },
+ "6e-entier-comparer-short": {
+  "fichier": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer-short.mp4",
+  "poster": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer-short-miniature.png",
+  "vignette": "6e/maths/entiers/02-comparer/eleveai-maths-6e-entier-comparer-short-miniature.vignette.webp",
+  "titre": "1 408 ou 1 480 : lequel est le plus grand ? #maths #6e",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=6e&matiere=maths&notion=entier_nombre&microId=entier_comparer&display=simple"
+ },
+ "cm2-entier-multiple": {
+  "fichier": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple.mp4",
+  "poster": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple.png",
+  "vignette": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple.vignette.webp",
+  "titre": "51 408 : multiple de 3, sans diviser ? — Les critères de divisibilité — épisode 1 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=nombre_entier&microId=entier_multiple&display=simple"
+ },
+ "cm2-entier-multiple-short": {
+  "fichier": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple-short.mp4",
+  "poster": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple-short-miniature.png",
+  "vignette": "cm2/maths/entiers/01-multiple/eleveai-maths-cm2-entier-multiple-short-miniature.vignette.webp",
+  "titre": "48 231 est-il un multiple de 3 ? Sans poser la division #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=nombre_entier&microId=entier_multiple&display=simple"
  }
 }
