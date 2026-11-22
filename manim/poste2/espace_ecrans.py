@@ -46,6 +46,7 @@ from charte import *  # noqa: E402,F401,F403
 from espace3d import Repere3D  # noqa: E402
 from gabarit_sixieme import Notion6e  # noqa: E402
 from mascotte import MascotteMargouillat  # noqa: E402
+from signes_expression_2de import echelle_ceintures  # noqa: E402
 from stats_lycee_h2_commun import CompteARebours, pastille_pause  # noqa: E402
 
 import numpy as np  # noqa: E402
@@ -119,6 +120,20 @@ class EcransEspace(AuditSynchro, MotsCales, Notion6e):
         for f in mob.get_family():
             f._pas_audit = True
         return mob
+
+    def echelle(self):
+        """L'échelle des ceintures de la page de garde. ⚠️ Elle occupe y de −3,45 à
+        −2,6 une fois alignée en bas : rien d'autre ne tient dans cette bande."""
+        return echelle_ceintures(self.ceinture).move_to(P(-0.6, 0))
+
+    def croix(self, color="#dc2626", r=0.16, sw=6):
+        """La croix rouge, pendant de `coche()`."""
+        return VGroup(Line(P(-r, -r), P(r, r)), Line(P(-r, r), P(r, -r))).set_stroke(color, sw)
+
+    def rebours_sous(self, mob, n=5):
+        """Le compte à rebours posé SOUS un texte et aligné à gauche sur lui."""
+        c = CompteARebours(n, r=0.34, fs=32).next_to(mob, DOWN, buff=0.3)
+        return c.align_to(mob, LEFT)
 
     def add_mascotte(self, scale=0.5):
         m = MascotteMargouillat().scale(scale).to_corner(DOWN + RIGHT, buff=0.45)
