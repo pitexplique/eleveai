@@ -55,6 +55,22 @@ FOND_CARTE = "#0b1220"
 XL, BORD_X = 2.2, 6.6          # la colonne de droite (marge de 3 % : 0,43 du bord)
 
 
+def ligne_param(nom, a, c, var="t"):
+    """UNE LIGNE DE REPRÉSENTATION PARAMÉTRIQUE, écrite comme au tableau :
+    « x = 1 + 2t », « y = 2 − t », « z = 3t », « x = 2 ».
+    ⛔ Le coefficient 1 ne s'écrit PAS (« y = 2 − 1t » est une faute d'écriture), un
+    terme constant nul disparaît, et le signe moins est le vrai − (U+2212), pas le
+    trait d'union — c'est la même règle que `nombre()` du socle.
+    ⭐ Les coefficients se passent en NOMBRES, pas en chaînes recopiées : un épisode
+    qui réécrit ses nombres à la main en perd un au quatrième écran."""
+    if c == 0:
+        return f"{nom} = {a}"
+    coef = "" if abs(c) == 1 else str(abs(c))
+    if a == 0:
+        return f"{nom} = {'−' if c < 0 else ''}{coef}{var}"
+    return f"{nom} = {a} {'−' if c < 0 else '+'} {coef}{var}"
+
+
 class EcransEspace(AuditSynchro, MotsCales, Notion6e):
     """Les outils d'écran communs aux 12 épisodes. Un épisode en hérite et ajoute
     ses 15 écrans. ⛔ Une correction se fait ICI, pas dans un épisode."""
@@ -105,10 +121,15 @@ class EcransEspace(AuditSynchro, MotsCales, Notion6e):
         s = f"{v:g}" if isinstance(v, float) else str(v)
         return s.replace(".", ",").replace("-", "−")
 
-    def trip(self, t3, fs=36, color=WHITE):
+    def trip(self, t3, fs=36, color=WHITE, par=False):
         """Un triplet de coordonnées. ⭐ Les trois nombres sont des objets SÉPARÉS
         (g.nb[0..2]) : vu à la planche, un SurroundingRectangle posé sur `trip(...)[0]`
-        encadrait le premier GLYPHE — le signe moins — et pas la coordonnée."""
+        encadrait le premier GLYPHE — le signe moins — et pas la coordonnée.
+
+        ⛔ `par=True` met les PARENTHÈSES, et il les faut dès qu'un triplet est
+        MULTIPLIÉ : vu à la planche de l'épisode 3, « 4 ; −2 ; 6 = 2 × 2 ; −1 ; 3 » se
+        lit « 2 × 2 » et la ligne devient fausse. Aucun audit ne voit ça : les nombres
+        affichés sont exactement ceux que la voix dit."""
         nb = [self.t(self.nombre(v), fs, color) for v in t3]
         pieces = []
         for i, x in enumerate(nb):
@@ -116,7 +137,28 @@ class EcransEspace(AuditSynchro, MotsCales, Notion6e):
                 pieces.append(self.t(";", fs, color))
             pieces.append(x)
         g = VGroup(*pieces).arrange(RIGHT, buff=0.18)   # 0,12 collait : « 1;2;3 » illisible
+        if par:
+            g = VGroup(self.t("(", fs, color), g, self.t(")", fs, color)).arrange(RIGHT, buff=0.08)
         g.nb = nb
+        return g
+
+    def systeme(self, lignes, fs=34, color=WHITE, c_acc=GREY_B, buff=0.22):
+        """LES TROIS LIGNES D'UNE REPRÉSENTATION PARAMÉTRIQUE, avec leur accolade.
+        Sert à `espace_droite_parametrique`, et aux épisodes « plan » et
+        « position relative » qui écrivent le même objet.
+
+        ⭐ L'accolade est construite sur les TROIS lignes dès le départ, puis on
+        fait paraître les lignes une à une quand la voix les dit : montée ligne
+        par ligne, l'accolade changerait de taille à chaque fois — un sursaut
+        que rien n'attrape à part l'image.
+        ⚠️ Les lignes restent adressables (`g.eq[i]`), comme les trois nombres
+        de `trip` : c'est la même leçon, un `play` ne doit jamais porter sur un
+        glyphe pris au hasard dans un groupe."""
+        eq = [self.t(s, fs, color) for s in lignes]
+        bloc = VGroup(*eq).arrange(DOWN, aligned_edge=LEFT, buff=buff)
+        acc = Brace(bloc, LEFT, buff=0.12, color=c_acc)
+        g = VGroup(acc, bloc)
+        g.eq, g.acc, g.bloc = eq, acc, bloc
         return g
 
     def insister(self, mob, k=1.3, run_time=0.25):
@@ -186,6 +228,29 @@ class EcransEspace(AuditSynchro, MotsCales, Notion6e):
                 raise ValueError(f"« {extrait} » (n = {n}) absent de la voix")
         self.au_pos(i)
 
+    def au_fin(self, extrait, n=1):
+        """Attend que la voix ait FINI de dire `extrait`, et non qu'elle le COMMENCE.
+
+        ⭐⭐ C'est ce qu'il faut pour un TRIPLET de coordonnées et pour une ligne
+        d'équation, qui sont le pain quotidien de cette série : « 1, 2, 0 » se dit en
+        0,8 s et « x égale 1 plus 2 t » en 1,1 s. Posés au premier mot, leur dernier
+        nombre est à l'écran AVANT d'être dit. Mesuré sur l'épisode 3 : **40
+        `AUDIT-AVANCE`, dont 35 de cette seule cause** — et aucun ne dépassait 1,9 s,
+        donc aucun ne sautait aux yeux.
+        C'est le piège n° 6 de la série des entiers transposé au triplet : « une ligne
+        qui finit par un nombre se pose à l'instant de CE nombre ».
+        ⚠️ `verifier-avant-rendu.py` connaît `au_fin` et mesure son seuil de 0,6 s sur
+        la FIN de l'extrait, comme ici."""
+        i = -1
+        for _ in range(n):
+            i = self._texte_voix.find(extrait, i + 1)
+            if i < 0:
+                raise ValueError(f"« {extrait} » (n = {n}) absent de la voix")
+        j = i + len(extrait)
+        m = self._marques().get(self._cle_voix) or []
+        dedans = [p for p, _ in m if i <= p < j]
+        self.au_pos(max(dedans) if dedans else i)
+
     # ── le repère de l'espace, à gauche ─────────────────────────────────────
 
     def repere(self, o=(-4.35, -1.35), u=0.62, portee=4, noms=("x", "y", "z")):
@@ -237,14 +302,41 @@ class EcransEspace(AuditSynchro, MotsCales, Notion6e):
         g = VGroup(self.t(l1, fs), self.t(l2, fs)).arrange(DOWN, aligned_edge=LEFT, buff=0.06)
         return g
 
+    def choix3(self, l1, l2, l3, fs=28):
+        """Un choix en TROIS lignes. ⛔⛔ MESURÉ (épisode 3, hors rendu) : une carte de
+        4,1 de large n'offre que 2,95 à son texte, et « coordonnée ne suit pas » seule
+        fait 4,54 — sur DEUX lignes, `carte_choix` la ramenait à 15 px, le défaut n° 4 de
+        l'épisode 1. Sur trois lignes de 14 caractères au plus, le texte tient à ~20 px,
+        comme les choix de l'épisode 1 qui ont été acceptés à l'image.
+        ⚠️ Une carte à trois lignes est HAUTE : avec trois choix pareils, la question ne
+        doit pas dépasser DEUX lignes, sinon le bas des cartes descend sur Ti-Margo
+        (boîte x ∈ [5,54 ; 6,66], y ∈ [−3,55 ; −2,15] à scale 0,5)."""
+        g = VGroup(self.t(l1, fs), self.t(l2, fs), self.t(l3, fs))
+        return g.arrange(DOWN, aligned_edge=LEFT, buff=0.06)
+
     def q_montrer_choix(self, cartes):
         voix = self._texte_voix
-        for c, L in zip(cartes, "ABC"):
-            i = voix.find(f"{L} : ")
+        deb = [voix.find(f"{L} : ") for L in "ABC"]
+        fin_q = voix.find("Mets pause")
+        for k, (c, L) in enumerate(zip(cartes, "ABC")):
+            i = deb[k]
             self.au_pos(i)
             self.play(FadeIn(c[0]), FadeIn(c[1][0], shift=RIGHT * 0.15), run_time=0.2)
-            self.au_pos(i + 4)
-            self.play(FadeIn(c[1][1], shift=RIGHT * 0.15), run_time=0.2)
+            corps = c[1][1]
+            # ⭐⭐ UN TRIPLET s'affiche quand la voix a FINI de l'énoncer, une PHRASE dès
+            # son premier mot. Mesuré sur l'épisode 3 : « A : 1, 2, 0 » posé au premier
+            # chiffre met le « 0 » à l'écran 0,81 s avant qu'il soit dit (AUDIT-AVANCE).
+            # ⛔ Mais on ne fait PAS la même chose d'une phrase : un choix de trois lignes
+            # qui ne paraîtrait qu'à son dernier mot serait illisible à temps — l'élève
+            # doit pouvoir le LIRE pendant qu'il l'entend.
+            fin = deb[k + 1] if k + 1 < len(deb) and deb[k + 1] > i else fin_q
+            if getattr(corps, "nb", None) and fin > i:
+                m = self._marques().get(self._cle_voix) or []
+                dedans = [p for p, _ in m if i + 4 <= p < fin]
+                self.au_pos(max(dedans) if dedans else i + 4)
+            else:
+                self.au_pos(i + 4)
+            self.play(FadeIn(corps, shift=RIGHT * 0.15), run_time=0.2)
 
     def q_pause(self, pause, rebours, cle_q, t0, bonne):
         self.au_mot("Mets pause")

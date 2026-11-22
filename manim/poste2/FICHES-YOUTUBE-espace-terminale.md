@@ -103,7 +103,59 @@ relevés sur le rendu (lignes `ECRAN` du journal) :
 
 ---
 
-## E2 à E12 — ⏳ en attente de leur rendu HD
+## E3 · `terminale-espace-droite-parametrique` — ✅ rendu HD fait
+
+`manim/sorties/terminale/maths/geometrie/espace-droite-parametrique/eleveai-maths-terminale-espace-droite-parametrique.mp4`
+5 min 56 (355,7 s) · 25,0 Mo · **0 instant qui touche un bord** · planche HD regardée.
+⭐ Marques vérifiées inchangées depuis le correctif du « 0,5 » (`30bf5f3ff`) : 792 marques,
+fichier identique — le rendu est calé sur des marques à jour.
+⭐ `grep -c "self\.au_t("` → **0** : aucun instant relevé à la main, donc rien qui se
+périme si la voix est régénérée (piège n° 37 de la série des entiers).
+
+```json
+{
+  "id": "terminale-espace-droite-parametrique",
+  "notionId": "geometrie_espace",
+  "microId": "espace_droite_parametrique",
+  "classe": "terminale-spe",
+  "ceinture": "verte",
+  "serie": "Maths Tle spé",
+  "type": "longue",
+  "fichier": "terminale/maths/geometrie/espace-droite-parametrique/eleveai-maths-terminale-espace-droite-parametrique.mp4",
+  "miniature": "terminale/maths/geometrie/espace-droite-parametrique/eleveai-maths-terminale-espace-droite-parametrique.png",
+  "titre": "Un point, une direction, un curseur — Représentation paramétrique · Tle spé",
+  "centres": ["transports"],
+  "tags": ["représentation paramétrique", "droite", "vecteur directeur", "espace", "terminale", "bac"]
+}
+```
+
+**Accroche** (à relire par Frédéric avant publication) :
+
+> Soraya est contrôleuse aérienne. Sur son écran, un avion en montée suit une ligne droite :
+> chaque minute il avance de la même façon, tant vers l'est, tant vers le nord, tant en
+> altitude. Si elle connaît sa position maintenant et son avancée par minute, elle sait où il
+> sera dans sept minutes. Une représentation paramétrique, c'est exactement cela.
+>
+> Dans cette vidéo :
+> • une droite, c'est un point et une direction — et trois lignes suffisent à l'écrire
+> • les coefficients de t donnent le vecteur directeur, les nombres seuls donnent un point
+> • tester un point : la première équation donne t, et les deux autres doivent suivre avec
+>   LE MÊME t — deux lignes sur trois, cela ne compte pas
+> • le piège : une même droite a une infinité de représentations paramétriques, et deux
+>   systèmes différents ne veulent pas dire deux droites différentes
+> • la rédaction du bac, dans les deux sens : donner la droite, tester un point
+>
+> Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
+
+**Chapitres**, relevés sur le rendu :
+0:00 garde · 0:11 Soraya · 0:38 un point, une direction · 1:08 tout se lit dans les trois
+lignes · 1:28 question 1 · 1:52 réponse · 2:17 tester un point · 2:48 le piège ·
+3:27 question 2 · 3:52 réponse · 4:17 au bac · 4:42 à toi de jouer · 5:01 correction ·
+5:30 ce que tu as appris.
+
+---
+
+## E4 à E12 — ⏳ en attente de leur rendu HD
 
 Les identifiants sont fixés et doivent rester ceux-là (c'est sur eux que le coach
 branchera) :

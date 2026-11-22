@@ -9,6 +9,8 @@ Ce qu'il vérifie, et pourquoi chacun a déjà coûté un aller-retour (série N
    marque d'AVANT et tout l'écran glisse — c'est le piège n° 4 du lot A, payé trois fois (A2, A3, A5).
    Aucun autre instrument ne le voit : le dry run est propre, et le défaut est à l'image.
 3. Deux `au_mot` consécutifs séparés de moins de 0,6 s → RETARD probable (piège n° 5).
+   ⭐ `au_fin("…")` (socle de la série « espace ») est lu comme `au_mot`, mais son instant est la
+   DERNIÈRE marque DANS l'extrait : c'est ce qu'il attend vraiment.
 4. ⭐⭐ Chaque **ligne de question**, chaque **ligne d'explication** et chaque **libellé de choix**
    passés à `question_gauche` est dans la voix **MOT POUR MOT** — la règle de REGLES.md « chaque mot
    dit est écrit à l'écran ». C'est le piège n° 13bis : sur A6, trois questions paraphrasaient la
@@ -90,8 +92,12 @@ def synchro(src, textes, marques):
             jetons.append((i, "cle", m.group(1)))
         for m in re.finditer(r"self\.question_gauche\(\s*[\"']([^\"']+)[\"']", l):
             jetons.append((i, "cle", m.group(1)))
-        for m in re.finditer(r"self\.au_mot\(\s*[\"'](.+?)[\"']\s*(?:,\s*(\d+)\s*)?\)", l):
-            jetons.append((i, "mot", (m.group(1), int(m.group(2) or 1))))
+        # ⭐ `au_fin` (socle de la série « espace ») attend la FIN de l'extrait et non son
+        #   début : même contrôle, mais l'instant se mesure sur la dernière marque DANS
+        #   l'extrait. Sans ça, l'outil ne voyait pas du tout ces appels.
+        for m in re.finditer(r"self\.(au_mot|au_fin)\(\s*[\"'](.+?)[\"']\s*(?:,\s*(\d+)\s*)?\)", l):
+            jetons.append((i, "fin" if m.group(1) == "au_fin" else "mot",
+                           (m.group(2), int(m.group(3) or 1))))
 
     cle, pb, prec = None, 0, None
     for ligne, typ, val in jetons:
@@ -118,6 +124,10 @@ def synchro(src, textes, marques):
             continue
         M = marques.get(cle) or []
         avant = max([t for p, t in M if p <= i] or [0.0])
+        if typ == "fin":                      # l'instant réel d'un au_fin : la dernière
+            dedans = [t for p, t in M        # marque DANS l'extrait
+                      if i <= p < i + len(extrait)]
+            avant = max(dedans or [avant])
         if not [t for p, t in M if p == i]:
             suivante = min([p for p, _ in M if p > i] or [len(txt)])
             print(f"[!] l.{ligne} [{cle}] « {extrait} » : PAS de marque a l'offset {i} "

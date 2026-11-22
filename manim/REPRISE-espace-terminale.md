@@ -28,9 +28,11 @@
 | les 12 voix | ✅ écrites, validées par Frédéric, passe maths **exécutée** |
 | les 180 WAV + 12 fichiers de marques | ✅ faits (**10 278** marques mesurées, 71 min de voix) |
 | la boîte à outils de dessin | ✅ `manim/poste2/espace3d.py` + sa planche |
+| le socle d'écran | ✅ `manim/poste2/espace_ecrans.py` — + `systeme`, `ligne_param`, `choix3`, `au_fin`, `trip(par=True)` (épisode 3) |
 | E1 `espace_vecteurs` | ✅ **HD livré** (5 min 02, 0 bord, planche HD regardée) |
 | E2 `espace_repere_coordonnees` | ✅ **HD livré** (5 min 54, 0 bord, planche HD regardée) |
-| les 10 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
+| E3 `espace_droite_parametrique` | ✅ **HD livré** (5 min 56, 0 bord, planche HD regardée) |
+| les 9 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
 | les 12 shorts | ⏳ pas de voix encore |
 | les rendus HD, le branchement coach, les fiches YouTube | ⏳ |
 
@@ -42,8 +44,8 @@ marques est déjà dans `manim/scripts/terminale/<script>_marques.json`, sa voix
 
 ## 🔁 La relève — ce qu'il faut savoir pour reprendre la série
 
-*(écrit le 22/11/2026 à 60 % de contexte, par la session qui a produit E1 et E2 —
-règle de Frédéric : une seule productrice par série, relève à 65 %.)*
+*(écrit le 22/11/2026 par la session qui a produit E1 et E2, tenu à jour par celle qui a
+produit E3 — règle de Frédéric : une seule productrice par série, relève à 65 %.)*
 
 **L'état exact**, vérifiable en trois commandes :
 
@@ -53,11 +55,14 @@ ls manim/sorties/terminale/maths/geometrie/*/*.mp4   # les HD livrés
 python manim/poste2/verifier-voix-espace.py          # 12 voix, 15 clips, lettres A 8 B 8 C 8
 ```
 
-**Le prochain geste, sans réfléchir** : écrire `espace_droite_parametrique.py` (E3).
-Tout l'attend — sa voix, ses WAV, ses 792 marques, le socle. ⛔ E3 n'a PAS été
-commencé : la session précédente s'est arrêtée sur un bord propre plutôt que de
-laisser un script à moitié écrit. Le modèle le plus propre
-est `espace_repere_coordonnees.py` (E2) : il ne contient que ses 15 écrans.
+**Le prochain geste, sans réfléchir** : écrire `espace_plan_equation.py` (E4).
+Tout l'attend — sa voix, ses WAV, ses marques, le socle. Le modèle le plus propre est
+maintenant **`espace_droite_parametrique.py` (E3)** : il ne contient que ses 15 écrans, il
+emploie `au_fin` partout où un triplet s'affiche, et chaque `sans_audit` y porte sa raison
+écrite à côté. ⭐ E4 écrit lui aussi un **système** : `self.systeme(...)` et
+`ligne_param(...)` sont dans le socle, déjà payés.
+⛔ **Lire d'abord la section « Ce que l'épisode 3 a appris » plus bas** : ses six leçons
+valent pour les neuf épisodes qui restent, et quatre d'entre elles ne se voient qu'à l'image.
 
 **L'ordre pour chaque épisode, sans en sauter un :**
 
@@ -193,6 +198,103 @@ Sept défauts, tous trouvés **en regardant l'image**, aucun signalé par un out
 
 ⚠️ **Et un titre `to_edge(UP, buff=0.4)` atteint y = 3,6**, au-delà de la marge de 3 %
 (3,573). `buff=0.5`. Ça seul expliquait 24 des 28 lignes `BORD` du premier dry run.
+
+---
+
+## ⛔⛔ Ce que l'épisode 3 a appris — à lire AVANT d'écrire l'épisode 4
+
+### ⭐⭐ Un triplet posé à son PREMIER mot met son dernier nombre à l'écran avant qu'il soit dit
+
+Premier dry run de E3 : **40 `AUDIT-AVANCE`, dont 35 de cette seule cause**, et **aucun ne
+dépassait 1,9 s** — donc aucun ne sautait aux yeux. « 1, 2, 0 » se dit en 0,8 s, « x égale
+1 plus 2 t » en 1,1 s : posés à leur premier mot, le « 0 » et le « 2t » sont affichés avant
+d'être prononcés. C'est le piège n° 6 de la série des entiers (« une ligne qui finit par un
+nombre se pose à l'instant de CE nombre »), transposé au triplet.
+
+⭐ Le socle a maintenant **`self.au_fin("…")`** : il attend la **dernière marque DANS
+l'extrait**. `verifier-avant-rendu.py` le connaît et mesure son seuil de 0,6 s sur la fin.
+Après bascule : **1 `AUDIT-AVANCE`**, structurel (un choix de question en toutes lettres,
+affiché dès son premier mot pour qu'on puisse le LIRE en l'écoutant — `q_montrer_choix` ne
+retarde que les triplets, jamais les phrases).
+
+⚠️ Effet de bord : `au_fin` rapproche l'ancre suivante, et le garde-fou de 0,6 s crie. Deux
+fois sur E3 la voix ne laissait que 0,20 s et 0,35 s — remède du piège n° 6 : **ne pas
+appeler `au_mot` pour la ligne suivante, on enchaîne**, sa propre synchro la cale.
+
+### ⛔ L'audit travaille CLIP PAR CLIP : un RAPPEL lui est invisible
+
+Les écrans 03, 06 et 07 **relisent** le système écrit à l'écran 02. La voix de ces clips dit
+« dans ces trois lignes », « le système de tout à l'heure », sans redire un nombre : **12
+`AUDIT-ABSENT` légitimes de son point de vue, faux du nôtre**. Remède : `sans_audit` sur le
+rappel, **avec la raison écrite à côté**.
+⛔ Ce n'est PAS l'excuse des cinq vrais `ABSENT` de l'épisode 1 : là-bas, les nombres (les
+coordonnées d'un drone) n'étaient dits **nulle part** dans l'épisode.
+
+### ⛔⛔ `grep "^AUDIT-…"` SOUS-COMPTE : les signalements tombent sur les barres de progression
+
+Manim écrit ses `tqdm` sur la même ligne. Mesuré sur E3 : `grep -c "^AUDIT-ABSENT"` répond
+**9**, la vraie sortie en porte **13** ; `^AUDIT-AVANCE` répond **20**, il y en a **40**.
+Et l'`AUDIT-ABSENT` de `@eleveai974` — celui qu'on doit justement retrouver — était l'un des
+invisibles. ⭐ **Compter avec `grep -o "<motif>" <log> | wc -l`, jamais avec `^`.**
+C'est la même leçon que le `head` et le `tail -1` de la journée du 22 : un zéro se vérifie.
+
+### ⚠️ Un gros `AUDIT-TARD` peut CACHER un petit `AUDIT-AVANCE`
+
+L'audit ne compare l'avance qu'à la **première** occurrence du nombre dans le clip ; pour un
+chiffre répété, il rend un `TARD` mesuré sur l'occurrence **précédente**. Un `TARD` de 12 s
+sur « 4 » veut donc dire « l'audit a pris le 4 d'une autre phrase » — et il peut recouvrir
+un affichage réellement en avance sur SA propre occurrence. Cinq de ces cas ont été trouvés
+sur E3 en relisant à la main les plus gros `TARD` (jusqu'à 1,9 s d'avance réelle).
+
+### ⚠️ En `-ql` (15 ips), un `AVANCE` de 0,06 s est un artefact de quantification
+
+Une attente se cale sur une image, et une image dure 0,067 s à 15 ips. Le même script mesuré
+en `-qh` (60 ips) : l'`AVANCE` disparaît. ⭐ **Le dry run qui compte est celui de la
+résolution livrée** — et un dry run `-qh` ne coûte rien, il n'écrit aucune image.
+
+### ⭐⭐ La capacité RÉELLE de la colonne de droite, mesurée SANS rendre
+
+`q_tete` n'utilise pas le renderer : on peut l'appeler sur `EcransEspace.__new__(EcransEspace)`
+et lire les bords au centième. Fait avant d'écrire l'écran 07 ; voilà les chiffres.
+
+| mesure | valeur |
+|---|---|
+| boîte de Ti-Margo à `scale=0.5` | x ∈ [5,54 ; 6,66], y ∈ [−3,55 ; **−2,15**] |
+| largeur offerte au texte d'une carte (`largeur=4.1`) | **2,95** — soit ~14 caractères à 28 px |
+| cartes à 3 lignes + question à **3** lignes | bas des cartes **−2,27** ⛔ coupe la tête de Ti-Margo |
+| cartes à 3 lignes + question à **2** lignes, bloc LARGE (7,25) | bas des cartes **−1,73** ✅ |
+| cartes à 3 lignes + question à **2** lignes, bloc ÉTROIT (5,0) | bas des cartes **−2,07** ✅ de justesse |
+
+⛔⛔ **Et les deux dernières lignes sont la vraie leçon : RÉTRÉCIR la question DESCEND les
+cartes.** `col()` réduit le bloc à la largeur de sa plus longue ligne ; un bloc moins large
+est moins réduit, donc plus HAUT, et tout ce qui est accroché dessous descend d'autant. En
+corrigeant la question à 19 px (défaut n° 3 ci-dessous), le bas des cartes est passé de
+−1,73 à −2,07 — et le commentaire du script, lui, annonçait toujours −1,73. ⭐ **Toute
+mesure de cet écran se refait après CHAQUE changement de la question**, y compris quand on
+ne touche qu'à sa police ou à ses mots.
+
+⭐ D'où `choix3` dans le socle : « coordonnée ne suit pas » seule fait 4,54 de large, donc sur
+DEUX lignes la carte la ramenait à 15 px (le défaut n° 4 de l'épisode 1). Sur trois lignes de
+14 caractères, elle tient à ~20 px. ⛔ Et on ne raccourcit pas le texte : la voix le dit.
+
+### ⛔⛔ Les quatre défauts que SEULE la planche a vus (aucun outil, aucun dry run)
+
+1. **La correction s'écrivait par-dessus les données du défi.** `ecran_correction` effaçait la
+   consigne et la pause, mais pas les deux lignes `A 2 ; 0 ; 1` / `B 2 ; 3 ; −1` : trois textes
+   empilés au même endroit. ⭐ Elles ne doivent PAS s'effacer (ce sont les données de
+   l'exercice) — c'est la correction qui descend. ⚠️ **Tout écran de correction hérite de
+   l'écran de défi : lister ce qui reste avant de poser quoi que ce soit.**
+2. **`4 ; −2 ; 6 = 2 × 2 ; −1 ; 3` se lit « 2 × 2 ».** Un triplet MULTIPLIÉ veut ses
+   parenthèses : `trip(..., par=True)`. ⛔ Aucun audit ne peut le voir — les nombres affichés
+   sont exactement ceux que la voix dit.
+3. **Une question à 19 px.** `col()` réduit le bloc entier à la largeur de sa ligne la plus
+   longue : « Le point C de coordonnées » + le triplet font 7,25, donc tout tombait à 0,61.
+   Écrit **`C 7 ; −1 ; 10`** — la notation que l'épisode emploie déjà sur huit autres écrans —
+   c'est 5,0 de large, donc 28 px.
+4. **La CONCLUSION d'un écran devenue son plus petit texte.** Le second garde-fou de `col()`
+   rétrécit à 3,1 tout ce qui descend sous y = −1,95 en dépassant x = 5,3 (il protège
+   Ti-Margo). « B est bien sur la droite d » y est passé. ⭐ **Le bas de la colonne de droite
+   est réservé aux lignes COURTES ; une conclusion va à gauche, sous le repère, en grand.**
 
 ---
 
