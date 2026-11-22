@@ -56,10 +56,11 @@ relevés sur le rendu (lignes `ECRAN` du journal) :
 
 ---
 
-## E2 · `terminale-espace-repere-coordonnees` — ⏳ HD lancé le 22/11 à 08:51
+## E2 · `terminale-espace-repere-coordonnees` — ✅ rendu HD fait
 
 `manim/sorties/terminale/maths/geometrie/espace-repere-coordonnees/eleveai-maths-terminale-espace-repere-coordonnees.mp4`
-5 min 52 attendues · `-ql` regardé (planche + gros plans), 3 défauts corrigés.
+5 min 54 · 22,5 Mo · **0 instant qui touche un bord** · planche HD regardée.
+⭐ Marques vérifiées inchangées depuis le commit du rendu (le contrôle du correctif tardif).
 
 ```json
 {

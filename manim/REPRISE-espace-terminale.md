@@ -28,8 +28,9 @@
 | les 12 voix | ✅ écrites, validées par Frédéric, passe maths **exécutée** |
 | les 180 WAV + 12 fichiers de marques | ✅ faits (**10 278** marques mesurées, 71 min de voix) |
 | la boîte à outils de dessin | ✅ `manim/poste2/espace3d.py` + sa planche |
-| E1 `espace_vecteurs` | ✅ script écrit, `-ql` regardé, défauts corrigés |
-| les 11 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
+| E1 `espace_vecteurs` | ✅ **HD livré** (5 min 02, 0 bord, planche HD regardée) |
+| E2 `espace_repere_coordonnees` | ✅ **HD livré** (5 min 54, 0 bord, planche HD regardée) |
+| les 10 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
 | les 12 shorts | ⏳ pas de voix encore |
 | les rendus HD, le branchement coach, les fiches YouTube | ⏳ |
 
@@ -53,7 +54,9 @@ python manim/poste2/verifier-voix-espace.py          # 12 voix, 15 clips, lettre
 ```
 
 **Le prochain geste, sans réfléchir** : écrire `espace_droite_parametrique.py` (E3).
-Tout l'attend — sa voix, ses WAV, ses 792 marques, le socle. Le modèle le plus propre
+Tout l'attend — sa voix, ses WAV, ses 792 marques, le socle. ⛔ E3 n'a PAS été
+commencé : la session précédente s'est arrêtée sur un bord propre plutôt que de
+laisser un script à moitié écrit. Le modèle le plus propre
 est `espace_repere_coordonnees.py` (E2) : il ne contient que ses 15 écrans.
 
 **L'ordre pour chaque épisode, sans en sauter un :**
