@@ -36,8 +36,9 @@
 | E5 `espace_position_relative` | ✅ **HD livré** (6 min 34, 0 bord, planche HD regardée) — il ne nomme aucun vecteur |
 | E6 `espace_defi` | ✅ **HD livré** (6 min 49, 0 bord, planche HD regardée) — ⭐ REFAIT le 22/11 avec les flèches |
 | E7 `ps_espace_calculer` | ✅ **HD livré** (6 min 33, 0 bord, planche HD regardée) — ⭐ le premier AVEC les flèches |
-| ✅ **la notation vectorielle** | **faite sur les 7 scripts** : `auditer-fleches-vecteurs.py` → 0 nu (voir « LA PASSE DES FLÈCHES ») |
-| les 5 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
+| E8 `ps_espace_orthogonalite` | ✅ **HD livré** (7 min 00, 0 bord, planche HD regardée) — ⭐ deux plans qui se projetteraient sur une LAME |
+| ✅ **la notation vectorielle** | **faite sur les 8 scripts** : `auditer-fleches-vecteurs.py` → 0 nu (voir « LA PASSE DES FLÈCHES ») |
+| les 4 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
 | les 12 shorts | ⏳ pas de voix encore |
 | les rendus HD, le branchement coach, les fiches YouTube | ⏳ |
 
@@ -60,8 +61,13 @@ ls manim/sorties/terminale/maths/geometrie/*/*.mp4   # les HD livrés
 python manim/poste2/verifier-voix-espace.py          # 12 voix, 15 clips, lettres A 8 B 8 C 8
 ```
 
-**Le prochain geste** : écrire `ps_espace_orthogonalite.py` (E8, Marc le maçon, centre
-`sciences`), puis E9 à E12.
+**Le prochain geste** : écrire `ps_espace_norme_distance.py` (E9, la Diagonale des Fous,
+centre `sport`), puis E10 à E12. ⭐ Le modèle est maintenant
+**`ps_espace_orthogonalite.py` (E8)**, et sa mesure
+`manim/poste2/mesure-ps-espace-orthogonalite.py` porte DEUX contrôles que les
+précédentes n'avaient pas : les **étiquettes de figure comparées deux à deux** et la
+**pointe d'une flèche testée dans le polygone de son plan**. ⚠️ E9 parle de normes et de
+distances : il dessinera des escaliers de coordonnées, pas des plans.
 ✅ **La reprise des flèches est FAITE** (22/11) : E1, E2, E3 et E6 portent la notation
 vectorielle et sont re-rendus en HD. `python -X utf8 manim/poste2/auditer-fleches-vecteurs.py`
 doit rester à **0 NU sur tous les scripts** — c'est le contrôle à relancer après chaque

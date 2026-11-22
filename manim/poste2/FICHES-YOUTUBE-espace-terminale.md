@@ -419,7 +419,81 @@ coordonnées · 1:12 trois choses à retenir · 1:35 question 1 · 2:00 réponse
 
 ---
 
-## E7 à E12 — ⏳ en attente de leur rendu HD
+## E8 · `terminale-ps-espace-orthogonalite` — ✅ rendu HD fait
+
+`manim/sorties/terminale/maths/geometrie/ps-espace-orthogonalite/eleveai-maths-terminale-ps-espace-orthogonalite.mp4`
+7 min 00 (420,5 s) · 28,2 Mo · **0 instant qui touche un bord** · planche HD regardée.
+⭐ Marques : **987**, fichier identique à celui du dépôt (`git diff HEAD --stat` vide) :
+le rendu est calé sur des marques à jour, et le contrôle par le CONTENU le prouve.
+⭐ `grep -c "self\.au_t("` → **0** : aucun instant relevé à la main, donc rien qui se
+périme si la voix est régénérée (piège n° 37 de la série des entiers).
+⚠️ `verifier-zone-margo --pas 1.0` : **38 instants**, qui font exactement les trois écrans
+à grosse mascotte — garde 9,2 s (00:00 → 00:08), finale 22,7 s (06:31 → 06:53),
+abonnement 5,9 s (06:54 → 06:59), soit 37,8 s pour 38 relevés au pas de 1 s — et dont le
+surplus est constant à l'intérieur de chacun (+442, +463, +80 pixels, à ±5 près).
+**Aucun écran de question touché** : c'est le critère.
+⭐⭐ **Les deux plans de l'épisode se projetteraient sur une LAME** : `platitude((1;1;1))`
+= 9,0°, et c'est à la fois la normale du plan P de l'écran 05 et le vecteur A G du défi.
+L'écran 05 dessine donc son plan À PLAT (sans aucun axe), et le défi n'en dessine aucun —
+il montre les deux VECTEURS du plan. Détail dans « Ce que l'épisode 8 a appris »
+(`manim/REPRISE-espace-terminale.md`).
+⚠️ Le personnage est **Marc, maçon**. Regardé au gros plan ×2,6 AVANT le premier rendu de
+l'épisode, son casque de chantier flottait au-dessus du crâne et son bord lui barrait le
+visage — la visière de Jean-Bernard (E4) à sa deuxième récidive.
+⛔ Une droite s'écrit « (A G) », un plan « (BDE) », un vecteur porte sa flèche : dans cet
+épisode-là, c'est le sujet même de la leçon.
+
+```json
+{
+  "id": "terminale-ps-espace-orthogonalite",
+  "notionId": "produit_scalaire_espace",
+  "microId": "ps_espace_orthogonalite",
+  "classe": "terminale-spe",
+  "ceinture": "verte",
+  "serie": "Maths Tle spé",
+  "type": "longue",
+  "fichier": "terminale/maths/geometrie/ps-espace-orthogonalite/eleveai-maths-terminale-ps-espace-orthogonalite.mp4",
+  "miniature": "terminale/maths/geometrie/ps-espace-orthogonalite/eleveai-maths-terminale-ps-espace-orthogonalite.png",
+  "titre": "Un produit scalaire nul, et c'est prouvé — mais pour un plan, il en faut DEUX · Démontrer une orthogonalité dans l'espace · Tle spé",
+  "centres": ["sciences"],
+  "tags": ["orthogonalité", "produit scalaire", "espace", "vecteur normal", "plan", "droite orthogonale à un plan", "cube ABCDEFGH", "terminale", "bac"]
+}
+```
+
+**Accroche** (à relire par Frédéric avant publication) :
+
+> Marc est maçon. Il plante un poteau et veut qu'il soit bien perpendiculaire à la dalle.
+> Il vérifie au niveau dans un sens : c'est droit. Est-ce que ça suffit ? Non — un poteau
+> peut être droit vu de face et penché vu de côté. Il faut vérifier dans DEUX directions.
+> Ce geste de chantier, c'est exactement le théorème de ce chapitre.
+>
+> Dans cette vidéo :
+> • le test : deux vecteurs non nuls sont orthogonaux si et seulement si leur produit
+>   scalaire est nul — en coordonnées, c'est un calcul de trois secondes
+> • le théorème qui porte tout le chapitre : une droite est orthogonale à un plan si et
+>   seulement si son vecteur directeur est orthogonal à DEUX vecteurs non colinéaires de
+>   ce plan — et ce vecteur s'appelle alors un vecteur normal
+> • le piège le plus coûteux : un seul produit scalaire nul ne suffit pas. Au sol, le nord
+>   est orthogonal à l'est, et pourtant le nord est AU SOL : il n'est pas vertical
+> • le second piège : dans l'espace, deux droites peuvent être orthogonales sans se
+>   couper — dans le cube, les arêtes [A B] et [C G] ne se rencontrent jamais
+> • le modèle de rédaction en cinq lignes, dont la quatrième — « u et v ne sont pas
+>   colinéaires, car… » — est celle qu'on oublie, et c'est un point perdu à chaque fois
+>
+> Deux questions-pauses et un défi corrigé dans le cube ABCDEFGH : démontrer que la droite
+> (A G) est orthogonale au plan (BDE). Une figure qui revient tous les ans.
+> Entraîne-toi sur eleveai.fr
+
+**Chapitres**, relevés sur le rendu :
+0:00 garde · 0:09 Marc, le poteau vérifié dans un seul sens · 0:36 le test de
+l'orthogonalité · 1:04 le théorème du chapitre · 1:28 question 1 · 1:57 réponse ·
+2:29 le théorème du poteau · 3:08 un seul ne suffit pas · 3:51 question 2 ·
+4:19 réponse · 4:39 cinq lignes, et la quatrième compte · 5:12 à toi de jouer ·
+5:30 correction · 6:31 ce que tu as appris.
+
+---
+
+## E9 à E12 — ⏳ en attente de leur rendu HD
 
 Les identifiants sont fixés et doivent rester ceux-là (c'est sur eux que le coach
 branchera) :
@@ -431,7 +505,6 @@ branchera) :
 | E4 | `terminale-espace-plan-equation` | `espace_plan_equation` | `sciences` |
 | E5 | `terminale-espace-position-relative` | `espace_position_relative` | `transports` |
 | E6 | `terminale-espace-defi` | `espace_defi` | `jeux-defis` |
-| E8 | `terminale-ps-espace-orthogonalite` | `ps_espace_orthogonalite` | `sciences` |
 | E9 | `terminale-ps-espace-norme-distance` | `ps_espace_norme_distance` | `sport` |
 | E10 | `terminale-ps-espace-angle` | `ps_espace_angle` | `nature-ecologie` |
 | E11 | `terminale-ps-espace-plan-normal` | `ps_espace_plan_normal` | `sciences` |
