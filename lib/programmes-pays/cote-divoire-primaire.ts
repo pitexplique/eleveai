@@ -110,7 +110,7 @@ export const COTE_DIVOIRE_CM1 = base("cm1", "CM1", "cm1", [
   c("L12", GEO, "Le cercle : centre, rayon, diamètre, tracer.", "complete", m("cm1", "figure_cercle")),
   c("L13", GEO, "Le triangle et les triangles particuliers : reconnaître, construire.", "complete", m("cm1", "figure_triangle", "figure_construire")),
   c("L14", GEO, "Le développement du cube et du pavé droit : patrons.", "complete", m("cm1", "solide_patron", "solide_sommet_arete_face")),
-  c("L15", MES, "Les masses : unités, tableau, conversions.", "complete", m("cm1", "masse_convertir")),
+  c("L15", MES, "Les masses : unités, tableau, conversions.", "complete", m("cm1", "masse_comparer", "masse_convertir")),
   c("L16", MES, "Les capacités : unités, tableau, conversions.", "complete", m("cm1", "contenance_convertir")),
   c("L17", MES, "Les durées : unités, additionner des durées, multiplier une durée par un nombre.", "complete", [...m("cm1", "duree_convertir", "duree_calculer", "duree_probleme"), ...m("6e", "duree_probleme")]),
   c("L18", MES, "La monnaie : prix d'achat, de vente, de revient, frais, bénéfice, perte, facture.", "complete", m("cm2", "prix_revient_vente_benefice", "facture_tva")),
