@@ -39,7 +39,7 @@ lus en **production** par `node scripts/brancher-videos-coach.mjs --classe <c> -
 | Classe | Notion | Micros | Avec paysage | Sans |
 |---|---|---|---|---|
 | **6e** | `entier_nombre` | 6 | **6** | — (`entier_lire_ecrire` réparé le 22/11, voir plus bas) |
-| **CM1** | `nombre_entier` | 9 | 6 | 3 — `entier_droite`, `entier_diviseur`, `entier_encadrer` |
+| **CM1** | `nombre_entier` | 9 | 6 | 3 — `entier_droite`, `entier_diviseur`, `entier_encadrer` (banques PLEINES, voir plus bas) |
 | **CM2** | `nombre_entier` | 11 | 6 | 5 — `entier_droite`, `entier_diviseur`, `entier_diviseurs_tous`, `entier_diviseurs_communs`, `entier_multiples_communs` |
 
 Le CM2 reçoit ses six par l'alias `aussi` du CM1 (`cm1-entier-lire@entier_lire`…), sauf
@@ -83,39 +83,49 @@ rien ne change). **Aucun générateur de page ne le lit** : ni `generer-videos-r
 `app/sitemap.ts`, ni `/video/<id>`. Pas de page fantôme, pas d'entrée de sitemap, pas de date de
 programmation en plus — c'est pour ça qu'`aussi` est le bon outil et pas une seconde entrée.
 
-#### ⛔⛔ Les 8 trous du CM1 / CM2 NE SONT PAS un manque de vidéo : les banques sont VIDES
+#### ✅ Les 8 trous du CM1 / CM2 sont bien, et SEULEMENT, des trous de VIDÉO
 
-⭐⭐ **Mesuré le 22/11 — les deux banques `nombres-entiers.bank.ts` ne contiennent QUE les six micros
-déjà couverts.** Les 8 micros sans vidéo ont **zéro item**, littéral ou gabarit :
+⛔⛔ **J'ai d'abord conclu l'inverse — « les banques sont vides » — et c'était FAUX.** La correction
+est ici parce que l'erreur de méthode valait un aller-retour, et qu'elle peut se refaire demain.
 
-```
-grep -o 'microId: "[^"]*"' lib/tutor-v4/questionBank/cm1/maths/nombres-entiers.bank.ts | sort | uniq -c
-  → 10 × entier_lire, comparer, decomposer, arrondir, multiple, defi  — et RIEN d'autre
-     (CM2 : 4 × les mêmes, 5 × defi)
-```
-⚠ **Étalonné avant de conclure** (une mesure qui répond « 0 » à tout est suspecte) : le même grep
-trouve bien 10 items sur `entier_lire`, qu'on sait pleine. L'instrument voit. Il n'y a rien.
+**État réel, mesuré À L'EXÉCUTION le 22/11** (on charge les banques et on filtre sur `microId`) :
 
-⭐ Et elles ne sont **pas masquées** (`lib/tutor-v4/micros-masquees.ts` : les 6 ids absents) — donc
-le coach les **propose** à l'élève. Qui clique dessus tombe sur « Pas assez de questions
-disponibles » (`questionPairBuilder.ts:406`) : ⛔ **8 culs-de-sac en ligne**, et aucun instrument ne
-les signale. Produire une vidéo par-dessus n'y changerait rien.
-
-⭐⭐ **Le BO coupe les 8 en deux groupes, et il faut les traiter à l'opposé :**
-
-| | Micros | Le BO | Ce que ça demande |
+| Classe | Micro | Items | Notion |
 |---|---|---|---|
-| **CM1** | `entier_droite`, `entier_diviseur`, `entier_encadrer` | ⛔ **absents de `cm1/bo.ts`** — déclarés dans `microSkills.ts` **seulement** | → **masquer** (`hors_programme`), exactement le motif de `tri_criteres_successifs` |
-| **CM2** | `entier_droite`, `entier_diviseur`, `entier_diviseurs_tous`, `entier_diviseurs_communs`, `entier_multiples_communs` | ✅ **explicitement au programme** dans `cm2/bo-objectifs.ts` : « déterminer tous les diviseurs d'un entier ≤ 30 », « placer des nombres sur une demi-droite graduée », « comparer, encadrer, intercaler » | → **remplir les banques**, la vidéo APRÈS |
+| CM1 | `entier_droite` / `entier_diviseur` / `entier_encadrer` | **8 / 10 / 10** | `nombre_entier` ✓ |
+| CM2 | `entier_droite` / `entier_diviseur` / `entier_diviseurs_tous` | **8 / 8 / 9** | `nombre_entier` ✓ |
+| CM2 | `entier_diviseurs_communs` / `entier_multiples_communs` | **8 / 8** | `nombre_entier` ✓ |
 
-⚠⚠ Pire pour le CM2 : `bo-objectifs.ts` déclare `micros: ["entier_diviseur"]` en face d'un objectif
-du programme, et **cette micro n'a aucune question**. Le fichier qui dit ce qu'on doit enseigner
-pointe une banque vide — c'est le cas « un item mal rangé n'atteint jamais l'élève », en pire : il
-n'y a pas d'item du tout.
+`auditer-banque-runtime.ts` : **CM1 105/105, CM2 116/116, 100 %, aucune micro vide.** Tous ces items
+sont des `template`, tous rangés sous la bonne notion, tous au-dessus des 2 items qu'exige la paire.
+✅ **Rien à masquer, rien à remplir. Le contenu existe depuis le 05/11/2026**, dans
+`cm1/maths/nombres-entiers-trous.bank.ts` et `cm2/maths/entiers-diviseurs.bank.ts`, écrits exprès
+pour ces trous-là (leurs en-têtes nomment les objectifs du BO : `cm2-N-entiers-7, -9, -10, -11, -12`).
 
-⛔ **Donc l'ordre n'est pas celui qu'on croyait** : ce n'est pas « 8 vidéos à produire », c'est
-**3 micros à masquer au CM1** et **5 banques à écrire au CM2**. Les vidéos viennent après les
-banques, jamais avant. ⛔ Rien d'engagé, rien de promis, décision à Frédéric.
+⭐⭐ **CE QUI M'A FAIT CONCLURE DU VIDE, ET POURQUOI L'ÉTALONNAGE N'A PAS SUFFI**
+
+J'ai grepé `microId: "…"` dans **`nombres-entiers.bank.ts`** — un fichier sur les 70 du dossier. Il ne
+contient que les six micros historiques. J'ai bien étalonné l'instrument avant de conclure, sur
+`entier_lire`, qui a répondu 10. ⛔ **Mais l'étalon était dans le MÊME FICHIER que ce que je
+mesurais.** Un étalon qui partage le défaut de l'instrument ne prouve rien : il confirme que le grep
+sait lire ce fichier, pas que ce fichier contient la matière. **L'étalon doit être pris HORS du
+périmètre qu'on soupçonne** — ici, une micro dont on sait qu'elle est pleine et qui vit AILLEURS.
+
+⭐⭐ **Et la cause profonde : l'exception « les maths sont lisibles au grep » est MORTE.** La note
+`audit-banque-source-vs-runtime` disait que seul le français échappe au grep, à cause de sa fabrique
+à arguments positionnels, et que « les maths ne sont pas touchées (tableaux littéraux) ». C'était vrai
+de `nombres-entiers.bank.ts`. ⛔ **Ce n'est plus vrai depuis le 05/11/2026** : les banques « trous du
+programme » sont bâties sur `gabarits(…)` / `atelier(…)` — des fabriques positionnelles, **zéro
+`microId` littéral**. `grep -c 'microId'` y répond **0** sur 8 à 10 items bien présents.
+
+→ ⛔⛔ **Pour toute question de couverture de banque, en maths comme en français, l'instrument est
+`npx tsx scripts/auditer-banque-runtime.ts <classe>`, jamais un grep.** Un grep sur un dossier de
+banques ne répond plus à la question posée, et il répond « 0 » avec aplomb.
+
+✅ **Donc le rapport de départ avait raison, et moi pas** : 8 micros sans vidéo, jouables, au
+programme. Les regrouper reste utile — la **demi-droite graduée** et les **diviseurs** portent le
+même `microId` au CM1 et au CM2 et sont donc mutualisables par `aussi` : **6 épisodes** couvriraient
+les 8 micros, pas 8. ⛔ Rien d'engagé, rien de promis.
 
 ### ⏭ Ce qui reste, et qui n'est PAS de la production
 - **La mise en ligne YouTube des 24 vidéos** — c'est Frédéric qui la fait. Chaque dossier
