@@ -1,0 +1,16 @@
+{
+  "00-garde": "Factoriser avec une identité. Un carré troué peut-il devenir un rectangle ?",
+  "01-carreleuse": "Inès est carreleuse. Elle pose une terrasse carrée, de x mètres de côté. Dans un coin, elle laisse un carré de 3 mètres sur 3, pour planter un arbre. L'aire carrelée : x au carré moins 9. Son client veut savoir si cette forme peut devenir un rectangle.",
+  "02-decouper": "Inès coupe la partie carrelée en deux bandes. Une grande bande, de x sur x moins 3. Une petite bande, de 3 sur x moins 3. Elle tourne la petite, et la colle au bout de la grande. Un rectangle ! Largeur : x moins 3. Longueur : x plus 3.",
+  "03-identite": "Même aire, deux écritures. x au carré moins 9 égale x moins 3, fois x plus 3. C'est l'identité : a au carré moins b au carré égale a moins b, fois a plus b. Ici, a vaut x, et b vaut 3, car 9, c'est 3 au carré. Inès vérifie en développant : x au carré, plus 3 x, moins 3 x, moins 9. Les 3 x s'annulent : on retrouve x au carré moins 9.",
+  "03q-question": "Question ! Factorise x au carré moins 64. A : x moins 8, au carré. B : x moins 32, fois x plus 32. C : x moins 8, fois x plus 8. Mets pause, et choisis !",
+  "03r-reponse": "Réponse C : 64, c'est 8 au carré. Donc x moins 8, fois x plus 8. Pas 32 : 32 au carré ne fait pas 64.",
+  "04-carreaux": "Une autre commande. Un client a un grand carreau de x sur x, 6 bandes de x sur 1, et 9 petits carreaux de 1 sur 1. En tout : x au carré plus 6 x plus 9. Peut-on tout poser en un seul carré ? Inès met trois bandes à droite, trois en bas, et les 9 petits carreaux dans le coin. Un carré de côté x plus 3 !",
+  "05-reconnaitre": "Donc x au carré plus 6 x plus 9 égale x plus 3, au carré. Pour le reconnaître : deux carrés, x au carré et 9, le carré de 3. Et au milieu, le double produit : 2 fois x fois 3, 6 x. Avec un moins au milieu, ça marche aussi : x au carré moins 10 x plus 25 égale x moins 5, au carré.",
+  "05q-question": "Question ! Quelle expression est égale à x plus 4, au carré ? A : x au carré plus 8 x plus 16. B : x au carré plus 16. C : x au carré plus 4 x plus 16. Mets pause, et choisis !",
+  "05r-reponse": "Réponse A : le double produit, 2 fois x fois 4, donne 8 x. Et x au carré plus 16 n'a pas de double produit : aucune identité ne la factorise.",
+  "06-defi": "À toi de jouer. Factorise. Un : 4 x au carré moins 25. Deux : x au carré moins 14 x plus 49. Mets pause, et cherche !",
+  "06b-correction": "Correction. Un : 4 x au carré, c'est le carré de 2 x. Et 25, c'est 5 au carré. Donc 2 x moins 5, fois 2 x plus 5. Deux : 49, c'est 7 au carré. Et 14 x, c'est 2 fois x fois 7, avec un moins. Donc x moins 7, au carré.",
+  "07-finale": "Ce que tu as appris. Pour factoriser avec une identité, on cherche des carrés. Deux carrés séparés par un moins : a moins b, fois a plus b. Trois termes, avec le double produit au milieu : a plus b, ou a moins b, au carré. Et on vérifie toujours en développant.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

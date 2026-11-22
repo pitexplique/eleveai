@@ -1,0 +1,17 @@
+{
+  "00-garde": "Résoudre en factorisant. Pourquoi une équation peut-elle avoir deux solutions ?",
+  "01-photographe": "Tom est photographe. Il imprime des photos carrées pour une exposition. Une photo a une aire de 9 décimètres carrés. Quel est son côté ? J'appelle x le côté : x au carré égale 9.",
+  "02-factoriser": "On ramène tout à gauche : x au carré moins 9 égale 0. On reconnaît a au carré moins b au carré. Donc x moins 3, fois x plus 3, égale 0.",
+  "03-produit-nul": "Un produit est nul si l'un de ses facteurs est nul. Donc x moins 3 égale 0, ou x plus 3 égale 0. x égale 3, ou x égale moins 3. Deux solutions. Mais un côté n'est jamais négatif : la photo mesure 3 décimètres de côté.",
+  "03q-question": "Question ! Résous x au carré moins 49 égale 0. A : x égale 7 seulement. B : x égale 7, ou x égale moins 7. C : x égale 24,5, ou x égale moins 24,5. Mets pause, et choisis !",
+  "03r-reponse": "Réponse B : x moins 7, fois x plus 7, égale 0. Deux solutions : 7 et moins 7.",
+  "04-cadre": "Tom ajoute un cadre blanc de 1 décimètre tout autour d'une photo. Le grand carré, cadre compris, a un côté de x. La photo a donc un côté de x moins 2 : on enlève 1 à gauche, et 1 à droite. Il veut une photo de 25 décimètres carrés : x moins 2, au carré, égale 25.",
+  "05-factoriser": "On ramène tout à gauche : x moins 2, au carré, moins 25, égale 0. Encore a au carré moins b au carré, avec a égale x moins 2, et b égale 5. Donc x moins 2 moins 5, fois x moins 2 plus 5, égale 0. On réduit : x moins 7, fois x plus 3, égale 0.",
+  "06-solutions": "Produit nul : x moins 7 égale 0, ou x plus 3 égale 0. x égale 7, ou x égale moins 3. Pour le cadre, on garde 7 : le grand carré mesure 7 décimètres. On vérifie : 7 moins 2, 5. Et 5 au carré, 25. C'est juste.",
+  "06q-question": "Question ! À partir de x moins 2, au carré, égale 25, un élève écrit : x moins 2 égale 5, donc x égale 7. Qu'a-t-il oublié ? A : rien, c'est complet. B : de diviser par 2. C : la solution x égale moins 3. Mets pause, et choisis !",
+  "06r-reponse": "Réponse C : x moins 2 peut aussi valoir moins 5, car moins 5 au carré fait 25. Alors x égale moins 3.",
+  "07-defi": "À toi de jouer. Résous. Un : x au carré moins 16 égale 0. Deux : x plus 1, au carré, égale 36. Mets pause, et cherche !",
+  "07b-correction": "Correction. Un : x moins 4, fois x plus 4, égale 0. Solutions : 4 et moins 4. Deux : x plus 1, au carré, moins 36, égale 0. x plus 1 moins 6, fois x plus 1 plus 6 : x moins 5, fois x plus 7, égale 0. Solutions : 5 et moins 7.",
+  "08-finale": "Ce que tu as appris. Pour résoudre, on ramène tout à gauche, pour avoir 0 à droite. On factorise avec une identité. Le produit nul donne alors deux équations simples. Et dans un problème, on garde les solutions qui ont un sens.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

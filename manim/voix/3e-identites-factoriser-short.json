@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Un carré troué. Tu peux en faire un rectangle ?",
+  "01-image": "Un carré de côté x, moins un carré de 3 sur 3 : x au carré moins 9. Je coupe une bande, je la tourne, je la colle. Un rectangle de x moins 3 sur x plus 3. Donc x au carré moins 9 égale x moins 3, fois x plus 3.",
+  "01q-question": "Question ! Et x au carré moins 100 ? A : x moins 50, fois x plus 50. B : x moins 10, fois x plus 10. C : x moins 10, au carré. Mets pause, et choisis !",
+  "01r-reponse": "Réponse B : 100, c'est 10 au carré. Donc x moins 10, fois x plus 10.",
+  "02-question": "À toi. Factorise 9 x au carré moins 1. Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
