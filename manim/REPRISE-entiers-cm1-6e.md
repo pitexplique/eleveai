@@ -38,7 +38,7 @@ lus en **production** par `node scripts/brancher-videos-coach.mjs --classe <c> -
 
 | Classe | Notion | Micros | Avec paysage | Sans |
 |---|---|---|---|---|
-| **6e** | `entier_nombre` | 6 | 5 | **1** — `entier_lire_ecrire` |
+| **6e** | `entier_nombre` | 6 | **6** | — (`entier_lire_ecrire` réparé le 22/11, voir plus bas) |
 | **CM1** | `nombre_entier` | 9 | 6 | 3 — `entier_droite`, `entier_diviseur`, `entier_encadrer` |
 | **CM2** | `nombre_entier` | 11 | 6 | 5 — `entier_droite`, `entier_diviseur`, `entier_diviseurs_tous`, `entier_diviseurs_communs`, `entier_multiples_communs` |
 
@@ -58,10 +58,30 @@ pas sur la micro :
 ⭐ Donc la micro **a déjà son short** en production ; ce qui lui manque est la vidéo paysage. Ce
 n'est **pas un manque de production** : c'est un `microId` absent sur une entrée du manifeste.
 
-⚠ Et le réparer coûte quelque chose : `brancher-videos-coach.mjs` écrit **une ligne par entrée du
-manifeste**. Donner un `microId` à la longue la **déplace** de la notion vers la micro — on gagne le
-bouton et on **perd** le badge de notion, la fiche et le QR imprimé. Les garder tous les deux demande
-une **seconde entrée** dans le manifeste pour la même vidéo. ⛔ Décision non prise.
+✅ **RÉPARÉ le 22/11, Frédéric : « Oui, et garde le QR ».** La 6e est à **6 micros sur 6**.
+
+⛔ **Mais pas en donnant un `microId` à la longue** : `brancher-videos-coach.mjs` écrit **une ligne
+par entrée du manifeste**, donc un `microId` l'aurait **déplacée** de la notion vers la micro — bouton
+gagné, badge de notion, fiche et QR imprimé **perdus**.
+
+⭐⭐ **Le champ qui fait les deux existe déjà : `aussi`.** « La même vidéo branchée sur d'AUTRES micros,
+sans nouvelle entrée ni nouveau fichier » — c'est ce qui mutualise déjà les 5 épisodes du CM1 vers le
+CM2. Ajouté sur `6e-entier-nombre` :
+```json
+"aussi": [{ "classe": "6e", "notionId": "entier_nombre", "microId": "entier_lire_ecrire" }]
+```
+L'outil en tire l'alias `6e-entier-nombre@entier_lire_ecrire`, une **ligne de plus**, et laisse la
+ligne de notion intacte (il l'annonce : « micro déjà occupée — non touchée »). Vérifié en base après
+coup : la vidéo est listée sur **`micro entier_lire_ecrire` + `NOTION entier_nombre`**.
+
+⭐ **Et le bouton marche sans déploiement** : la ligne porte l'URL YouTube, publiée depuis longtemps.
+Le correctif est en base, pas dans le dépôt — rien à pousser pour que l'élève le voie.
+
+⚠ Effets de bord vérifiés avant d'écrire : `aussi` n'est lu que par `brancher-videos-coach.mjs` et
+par `publier-youtube.mjs` (il ajoute la playlist de la classe voisine — ici la **même** classe, donc
+rien ne change). **Aucun générateur de page ne le lit** : ni `generer-videos-r2.mjs`, ni
+`app/sitemap.ts`, ni `/video/<id>`. Pas de page fantôme, pas d'entrée de sitemap, pas de date de
+programmation en plus — c'est pour ça qu'`aussi` est le bon outil et pas une seconde entrée.
 
 #### ⏳ Les trous du CM1 et du CM2 sont, eux, de la production
 8 micros sans vidéo, et ils se regroupent : la **demi-droite graduée** (CM1 + CM2, mutualisable par
