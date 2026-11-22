@@ -62,6 +62,7 @@ INTERDITS = "$\\=×÷√≤≥≠²³°^_{}|<>[]⟹⟺→+*"
 
 LONGUEUR_QUESTION = 320   # au-delà, la question ne tient pas en trois lignes à l'écran
 LONGUEUR_CLIP = 900       # au-delà, le clip dure trop longtemps pour un seul écran
+PROSE_MAXI = 30           # mots de prose par phrase (lettres seules et nombres exclus)
 
 erreurs, alertes = [], []
 textes = {}
@@ -96,6 +97,16 @@ for ident in EPISODES:
                            "vérifier qu'elle tient en trois lignes à l'écran")
         if len(texte) > LONGUEUR_CLIP:
             alertes.append(f"{ident} / {clip} : {len(texte)} caractères")
+        # ⚠️ longueur de SOUFFLE : on compte les mots de PROSE, en retirant les lettres
+        # seules et les nombres — un décompte brut punirait « A B C D E F G H », qui ne
+        # coûte aucun souffle. Plafond de la série : 30 mots de prose par phrase.
+        for phrase in re.split(r"(?<=[.!?])\s+", texte):
+            prose = [m for m in phrase.split()
+                     if len(re.sub(r"[^A-Za-zÀ-ÿ]", "", m)) >= 2
+                     and not re.fullmatch(r"[\d,.]+", m)]
+            if len(prose) > PROSE_MAXI:
+                alertes.append(f"{ident} / {clip} : une phrase de {len(prose)} mots de prose "
+                               f"(plafond {PROSE_MAXI}) — « {phrase[:60]}… »")
         textes.setdefault(texte.strip(), []).append(f"{ident}/{clip}")
 
 # -------------------------------------------------------------------------------------

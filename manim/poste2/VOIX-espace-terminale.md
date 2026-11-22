@@ -22,6 +22,36 @@
 - ⛔ Chaque nombre dit dans une CORRECTION ou dans la FINALE est enseigné : c'est là qu'on
   relit en premier (voir la passe maths de chaque épisode, plus bas).
 
+## Les centres d'intérêt de la série, vérifiés par ÂGE
+
+⛔⛔ `metiers` **n'existe pas** : la liste de `lib/videos/centres-interet.ts` est FERMÉE
+(18 entrées) et chaque entrée porte ses `tranches`. La terminale est la tranche `15-18`,
+qui en ouvre 16 — `animaux` et `cuisine` s'y ferment. L'en-tête de E1 citait `metiers` :
+corrigé. ⚠️ Le contrôle du dépôt est `node scripts/verifier-centres-age.mjs <manifeste>`,
+et il doit afficher « 0 centre hors tranche ».
+
+| | E1 | E2 | E3 | E4 | E5 | E6 | E7 | E8 | E9 | E10 | E11 | E12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| centre | `technologie-ia` | `transports` | `transports` | `sciences` | `transports` | `jeux-defis` | `sport` | `sciences` | `sport` | `nature-ecologie` | `sciences` | `jeux-defis` |
+
+Les six centres utilisés sont tous ouverts à 15-18 ans. ⚠️ Ils ne sont écrits nulle part
+ailleurs pour l'instant : c'est au moment de la fiche YouTube qu'ils entrent dans
+`manim/manifeste-youtube.json`, et c'est là qu'il faut relancer le contrôle.
+
+## La longueur des phrases, mesurée
+
+Le plafond documenté (`manim/scripts/cm1/entier_voix.py`) est de 18 mots au CM1 et 20 en
+6ᵉ. ⛔ Il ne se transporte pas tel quel au lycée : ici, « Dans le cube A B C D E F G H
+avec le repère A, A B, A D, A E » pèse 17 mots et ne coûte pourtant aucun souffle. Un
+décompte brut punit l'épellation des coordonnées, pas la longueur réelle.
+
+Mesure utile : les **mots de prose**, en retirant les lettres seules et les nombres.
+Sur les 898 phrases des 12 voix : **médiane 8 mots, 9ᵉ décile 18, maximum 40**. Les cinq
+phrases au-dessus de 30 ont été coupées en deux (dont une à 40 mots, à trois branches,
+dans le piège de E5). Plafond retenu pour la série : **30 mots de prose**, contrôlé en
+alerte par `verifier-voix-espace.py` — en alerte et non en erreur, parce qu'un
+deux-points et un point-virgule sont des reprises de souffle.
+
 ## ⛔ La place de la bonne réponse, tirée au hasard
 
 `manim/REGLES.md` (Frédéric, 09/11/2026) : le 09/11, sur les 899 questions du manifeste,
@@ -51,7 +81,7 @@ aussi le demi-déplacement (la question réordonnée, la réponse pas suivie).
 # E1 · `terminale-espace-vecteurs`
 
 **Micro** : `espace_vecteurs` — Manipuler des vecteurs dans l'espace (notion `geometrie_espace`).
-**Métier / centre** : Nadia, pilote de drones de chantier — centres `technologie-ia`, `metiers`.
+**Métier / contexte** : Nadia, pilote de drones de chantier — centre `technologie-ia`.
 **Code couleur** : ambre = ce qu'on regarde, bleu = le vecteur u, rose = le vecteur v,
 vert = juste, rouge = le piège.
 
@@ -170,7 +200,7 @@ puis le script Manim, puis `-ql`, planche, zone Margo, HD, branchement au coach.
 - **04-question** : Question ! La droite d est donnée par x égale 1 plus 2 t, y égale 2 moins t, z égale 3 t. Quel est un vecteur directeur de d ? A : 1, 2, 0. B : 3, 1, 3. C : 2, moins 1, 3. Mets pause, et choisis !
 - **04b-reponse** : Réponse C. Le vecteur directeur, ce sont les coefficients de t avec leurs signes : 2, moins 1 et 3. Le triplet 1, 2, 0, ce sont les nombres sans t : c'est un point de la droite, pas une direction. Et 3, 1, 3, c'est le point obtenu pour t égal à 1 : encore un point. Un point n'est jamais une direction.
 - **05-appliquer** : Appliquons. Le point B de coordonnées 5, 0, 6 est-il sur la droite d ? On commence par la première ligne : 1 plus 2 t égale 5, donc t vaut 2. Maintenant on vérifie avec ce t, et seulement avec celui-là. Pour y : 2 moins 2 fait 0, c'est bon. Pour z : 3 fois 2 fait 6, c'est bon. Les trois lignes sont d'accord pour t égal à 2 : B est bien sur la droite d.
-- **06-piege** : Voilà le piège ! Une même droite a une infinité de représentations paramétriques. On peut partir d'un autre point, et multiplier le vecteur directeur par n'importe quel nombre non nul. Regarde : x égale 3 plus 4 s, y égale 1 moins 2 s, z égale 3 plus 6 s. Cela ne ressemble pas du tout au système de tout à l'heure, et c'est pourtant la même droite d : le point 3, 1, 3 est sur d, et le vecteur 4, moins 2, 6 est le double de 2, moins 1, 3. Deux systèmes différents ne veulent donc pas dire deux droites différentes.
+- **06-piege** : Voilà le piège ! Une même droite a une infinité de représentations paramétriques. On peut partir d'un autre point, et multiplier le vecteur directeur par n'importe quel nombre non nul. Regarde : x égale 3 plus 4 s, y égale 1 moins 2 s, z égale 3 plus 6 s. Cela ne ressemble pas du tout au système de tout à l'heure, et c'est pourtant la même droite d. Le point 3, 1, 3 est sur d, et le vecteur 4, moins 2, 6 est le double de 2, moins 1, 3. Deux systèmes différents ne veulent donc pas dire deux droites différentes.
 - **07-question** : Question ! Le point C de coordonnées 7, moins 1, 10 est-il sur la droite d ? A : non, la troisième coordonnée ne suit pas. B : oui, t égal à 3 convient. C : on ne peut pas le savoir avec un seul point. Mets pause, et choisis !
 - **07b-reponse** : Réponse A. La première ligne donne 1 plus 2 t égale 7, donc t vaut 3. La deuxième suit : 2 moins 3 fait bien moins 1. Mais la troisième donne 3 fois 3, c'est-à-dire 9, et on nous propose 10. Deux lignes sur trois, cela ne compte pas : C n'est pas sur d. Et c'est exactement le piège de la réponse B.
 - **08-rediger** : Au bac, deux rédactions à connaître. Pour donner la droite : d passe par le point A et a pour vecteur directeur u, donc une représentation paramétrique de d est, et on écrit les trois lignes, en précisant que t est réel. Pour tester un point : la première équation donne t égale tant, et pour cette valeur les deux autres équations sont vérifiées, ou ne le sont pas.
@@ -264,7 +294,7 @@ puis le script Manim, puis `-ql`, planche, zone Margo, HD, branchement au coach.
 - **04-question** : Question ! On remplace la droite dans l'équation du plan et on obtient 3 égale zéro. Que conclut-on ? A : la droite est parallèle au plan, sans aucun point commun. B : la droite est contenue dans le plan. C : la droite coupe le plan en un point. Mets pause, et choisis !
 - **04b-reponse** : Réponse A. L'égalité 3 égale zéro est fausse, et elle est fausse pour toutes les valeurs de t : aucun point de la droite n'est dans le plan. La droite est donc strictement parallèle au plan. Si on avait obtenu zéro égale zéro, l'égalité serait vraie pour tout t, et la droite serait entièrement dans le plan. Une seule ligne de calcul sépare ces deux conclusions opposées.
 - **05-appliquer** : Appliquons maintenant à deux plans. P : x plus y plus z moins 1 égale zéro, et P prime : 2 x plus 2 y plus 2 z plus 5 égale zéro. Les coefficients du second sont exactement le double de ceux du premier : les deux plans sont parallèles. Sont-ils confondus ? Divisons la seconde équation par 2 : x plus y plus z plus 2,5 égale zéro. Le terme constant vaut 2,5 et non moins 1 : ce n'est pas le même plan. Ils sont donc strictement parallèles.
-- **06-piege** : Voilà le piège ! Pour deux droites de l'espace, pas de point commun ne veut pas dire parallèles. La méthode est donc en deux temps. D'abord on regarde les vecteurs directeurs : s'ils sont colinéaires, les droites sont parallèles, et même confondues si elles ont un point commun. S'ils ne sont pas colinéaires, on cherche un point commun en résolvant le système : s'il y en a un, les droites sont sécantes ; s'il n'y en a pas, les droites ne sont pas coplanaires, et aucun plan ne les contient toutes les deux.
+- **06-piege** : Voilà le piège ! Pour deux droites de l'espace, pas de point commun ne veut pas dire parallèles. La méthode est donc en deux temps. D'abord on regarde les vecteurs directeurs : s'ils sont colinéaires, les droites sont parallèles, et même confondues si elles ont un point commun. S'ils ne sont pas colinéaires, on cherche un point commun en résolvant le système. S'il y en a un, les droites sont sécantes. Sinon, les droites ne sont pas coplanaires, et aucun plan ne les contient toutes les deux.
 - **07-question** : Question ! Deux droites de l'espace n'ont aucun point commun, et leurs vecteurs directeurs ne sont pas colinéaires. Que peut-on dire ? A : elles sont parallèles. B : c'est impossible. C : elles ne sont pas coplanaires. Mets pause, et choisis !
 - **07b-reponse** : Réponse C. Parallèles, cela voudrait dire des vecteurs directeurs colinéaires, et l'énoncé dit exactement le contraire. Quant à impossible, c'est tout l'inverse : c'est la route et le pont, le cas le plus courant dans l'espace. Deux droites non coplanaires, cela veut dire qu'aucun plan ne peut les contenir toutes les deux.
 - **08-rediger** : Au bac, annonce la méthode avant de calculer. Pour une droite et un plan : je remplace la représentation paramétrique dans l'équation du plan, puis je conclus selon le nombre de solutions en t. Pour deux plans : je compare les coefficients, puis je teste un point. Pour deux droites : je compare les vecteurs directeurs, puis je résous le système. Et on nomme la conclusion avec le mot exact : sécants, strictement parallèles, confondus, ou non coplanaires.
@@ -354,7 +384,7 @@ puis le script Manim, puis `-ql`, planche, zone Margo, HD, branchement au coach.
 
 - **00-garde** : Produit scalaire dans l'espace. Deux vecteurs, trois multiplications, une addition — et le résultat est un nombre, pas un vecteur.
 - **01-situation** : Voici Kelly. Elle fait du kitesurf à l'Hermitage. Le vent pousse son aile, mais seule la partie du vent qui va dans le bon sens la fait avancer : un vent de côté ne sert à rien. Ce combien ça pousse dans le bon sens, c'est exactement ce que mesure un produit scalaire. En physique, c'est le travail d'une force. En maths, c'est un seul nombre qui résume l'accord entre deux directions.
-- **02-idee** : Dans un repère orthonormé — et cette condition est obligatoire — le produit scalaire se calcule en coordonnées : on multiplie les x entre eux, les y entre eux, les z entre eux, et on additionne les trois résultats. Prenons u de coordonnées 1, 2, 3 et v de coordonnées 4, moins 1, 2. On obtient 1 fois 4, c'est 4 ; 2 fois moins 1, c'est moins 2 ; 3 fois 2, c'est 6. Total : 4 moins 2 plus 6, donc 8.
+- **02-idee** : Dans un repère orthonormé — et cette condition est obligatoire — le produit scalaire se calcule en coordonnées. On multiplie les x entre eux, les y entre eux, les z entre eux. Puis on additionne les trois résultats. Prenons u de coordonnées 1, 2, 3 et v de coordonnées 4, moins 1, 2. On obtient 1 fois 4, c'est 4 ; 2 fois moins 1, c'est moins 2 ; 3 fois 2, c'est 6. Total : 4 moins 2 plus 6, donc 8.
 - **03-theoreme** : Trois choses à retenir. Le résultat est un nombre réel, jamais un vecteur. Il existe une seconde formule : le produit scalaire de u et v est le produit des deux normes par le cosinus de l'angle entre eux. Et le cas particulier le plus utile de tous : le produit scalaire d'un vecteur par lui-même est le carré de sa norme.
 - **04-question** : Question ! u a pour coordonnées 2, 0, moins 1, et v a pour coordonnées 1, 5, 2. Que vaut le produit scalaire de u et v ? A : 4. B : zéro. C : le vecteur de coordonnées 2, 0, moins 2. Mets pause, et choisis !
 - **04b-reponse** : Réponse B, zéro. 2 fois 1 fait 2. Zéro fois 5 fait zéro. Et moins 1 fois 2 fait moins 2. Deux, plus zéro, moins deux : zéro. La réponse A, 4, c'est ce qu'on trouve en oubliant le signe moins. Et la réponse C n'est même pas du bon type : un produit scalaire est un nombre, pas un vecteur. Enfin, retiens ceci : ce zéro n'est pas rien. Il dit que les deux vecteurs sont orthogonaux, et c'est tout le sujet de l'épisode suivant.
@@ -546,14 +576,14 @@ puis le script Manim, puis `-ql`, planche, zone Margo, HD, branchement au coach.
 - **00-garde** : Vecteur normal à un plan. Les trois coefficients de l'équation sont les coordonnées d'un vecteur — et ce vecteur donne la direction perpendiculaire.
 - **01-situation** : Un clou planté bien droit dans une planche : le clou donne la direction perpendiculaire à la planche. En maths, ce clou s'appelle un vecteur normal. Et voici le plus beau résultat du chapitre : si tu as l'équation d'un plan, tu as déjà son vecteur normal sous les yeux, sans aucun calcul.
 - **02-idee** : Le plan d'équation 2 x moins y plus 3 z moins 5 égale zéro a pour vecteur normal le vecteur de coordonnées 2, moins 1, 3. On lit simplement les coefficients de x, de y et de z, avec leurs signes. Le terme constant, lui, ne fait pas partie du vecteur normal : il dit seulement où le plan se place, pas comment il est orienté.
-- **03-theoreme** : Et cela marche dans les deux sens. Si le plan passe par un point A et a pour vecteur normal n de coordonnées a, b, c, alors son équation est a x plus b y plus c z plus d égale zéro, et on trouve d en remplaçant par les coordonnées de A. La raison profonde : un point M est dans le plan si et seulement si le vecteur A M est orthogonal à n, c'est-à-dire si leur produit scalaire est nul.
+- **03-theoreme** : Et cela marche dans les deux sens. Si le plan passe par un point A et a pour vecteur normal n de coordonnées a, b, c, alors son équation est a x plus b y plus c z plus d égale zéro. Et on trouve d en remplaçant par les coordonnées de A. La raison profonde : un point M est dans le plan si et seulement si le vecteur A M est orthogonal à n, c'est-à-dire si leur produit scalaire est nul.
 - **04-question** : Question ! Quel est un vecteur normal au plan d'équation x moins 2 y plus 5 z plus 7 égale zéro ? A : 1, moins 2, 5. B : 1, 2, 5. C : zéro, zéro, 7. Mets pause, et choisis !
 - **04b-reponse** : Réponse A. On lit les coefficients avec leurs signes : 1, moins 2 et 5. La réponse B a perdu le signe moins, et ce n'est pas un détail : elle décrit une direction complètement différente. Et la réponse C a pris le terme constant, qui ne dit rien de la direction : deux plans parallèles ont le même vecteur normal et des termes constants différents.
 - **05-appliquer** : Appliquons dans l'autre sens. On cherche l'équation du plan qui passe par A, de coordonnées 1, 2, moins 1, et qui a pour vecteur normal n de coordonnées 3, zéro, 1. L'équation commence donc par 3 x plus zéro y plus z plus d égale zéro. On remplace par A : 3 fois 1, plus zéro, plus moins 1, plus d. Cela donne 2 plus d égale zéro, donc d vaut moins 2. L'équation du plan est 3 x plus z moins 2 égale zéro. Et le y absent n'est pas une erreur : son coefficient est nul, le plan est parallèle à l'axe des y.
 - **06-piege** : Voilà le piège ! Un vecteur normal n'est pas unique : tous ses multiples non nuls en sont aussi. Du coup, deux équations qui ne se ressemblent pas peuvent décrire le même plan. Regarde : 2 x plus 2 y plus 2 z moins 2 égale zéro et x plus y plus z moins 1 égale zéro sont deux écritures du même plan. Pour comparer deux plans, on procède donc en deux temps : les normales sont-elles colinéaires ? Si non, les plans sont sécants. Si oui, les plans sont parallèles, et on teste alors un point pour savoir s'ils sont confondus. Deuxième piège : ne confonds pas vecteur normal et vecteur directeur. Le vecteur normal d'un plan est le vecteur directeur de toute droite perpendiculaire à ce plan.
 - **07-question** : Question ! Les plans P, d'équation x plus y plus z moins 1 égale zéro, et P prime, d'équation 2 x plus 2 y plus 2 z plus 6 égale zéro, sont : A : sécants. B : strictement parallèles. C : confondus. Mets pause, et choisis !
 - **07b-reponse** : Réponse B. Les deux normales, 1, 1, 1 et 2, 2, 2, sont colinéaires : les plans sont donc parallèles, ils ne sont pas sécants. Sont-ils confondus ? Divisons la seconde équation par 2 : x plus y plus z plus 3 égale zéro. Le terme constant vaut plus 3, et celui de P vaut moins 1 : ce ne sont pas les mêmes plans. Ils sont donc strictement parallèles, sans aucun point commun.
-- **08-rediger** : Deux rédactions à connaître. Pour une équation : n de coordonnées tant est un vecteur normal à P, donc P a une équation de la forme a x plus b y plus c z plus d égale zéro, et on trouve d avec le point A. Pour un projeté orthogonal, voilà la méthode reine : on écrit la droite qui passe par le point et qui a le vecteur normal pour vecteur directeur, puis on cherche son intersection avec le plan. Le point trouvé est le projeté.
+- **08-rediger** : Deux rédactions à connaître. Pour une équation : n de coordonnées tant est un vecteur normal à P, donc P a une équation de la forme a x plus b y plus c z plus d égale zéro, et on trouve d avec le point A. Pour un projeté orthogonal, voilà la méthode reine. On écrit la droite qui passe par le point, et qui a le vecteur normal pour vecteur directeur. Puis on cherche son intersection avec le plan. Le point trouvé est le projeté.
 - **09-defi** : À toi de jouer ! Le plan P a pour équation x plus y plus z égale zéro, et le point A a pour coordonnées 1, 1, 1. Détermine les coordonnées du projeté orthogonal de A sur P. Mets pause, et cherche !
 - **09b-correction** : Correction. Le vecteur normal de P se lit dans l'équation : 1, 1, 1. La droite qui passe par A et qui suit cette direction a pour représentation paramétrique x égale 1 plus t, y égale 1 plus t, z égale 1 plus t. On remplace dans l'équation du plan : 1 plus t, plus 1 plus t, plus 1 plus t. Cela fait 3 plus 3 t. On résout 3 plus 3 t égale zéro : t vaut moins 1. On reporte : chaque coordonnée vaut 1 moins 1, donc zéro. Le projeté orthogonal de A sur P est l'origine du repère. Vérification : zéro plus zéro plus zéro fait bien zéro, l'origine est bien dans P.
 - **10-finale** : Ce que tu as appris. Les coefficients de l'équation d'un plan sont les coordonnées d'un vecteur normal. Un point et une normale suffisent pour écrire l'équation. Deux normales colinéaires annoncent deux plans parallèles. Et pour un projeté orthogonal, on suit la normale.
