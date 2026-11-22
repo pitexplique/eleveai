@@ -888,6 +888,59 @@
     "calcul": [["mon lit", "blanc", 210], ["2 km ?", "rouge", 210]],
     "ceinture": "blanche"
   },
+  "ce2-masse-estimer-short": {
+    "question": ["Mon chat pèse", "400 kg ?"],
+    "calcul": [["mon chat", "blanc", 210], ["400 kg ?", "rouge", 210]],
+    "ceinture": "jaune"
+  },
+  "ce2-masse-probleme-short": {
+    "question": ["Ma valise de", "24 kg passe ?"],
+    "calcul": [["24 kg", "rouge", 210], ["23 kg au plus", "blanc", 150]],
+    "margo": [320, 720, 640],
+    "ceinture": "jaune"
+  },
+  "ce2-masse-defi-short": {
+    "question": ["Combien pèse", "mon ananas ?"],
+    "calcul": [["= 3 mangues", "jaune", 170], ["de 400 g", "blanc", 170]],
+    "margo": [320, 720, 640],
+    "ceinture": "jaune"
+  },
+  "cm1-masse-comparer-short": {
+    "question": ["Quel cartable", "est le plus lourd ?"],
+    "calcul": [["3 500 g", "rouge", 190], ["ou 4 kg ?", "blanc", 190]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
+  },
+  "cm1-masse-mesurer-short": {
+    "question": ["Combien pèse", "la pastèque ?"],
+    "calcul": [["entre 2", "blanc", 190], ["et 3 kg ?", "rouge", 190]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
+  },
+  "cm1-masse-convertir-short": {
+    "question": ["3 kg de pommes :", "combien de sachets ?"],
+    "calcul": [["3 kg", "blanc", 190], ["÷ 500 g ?", "rouge", 190]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
+  },
+  "cm1-masse-estimer-short": {
+    "question": ["La balance affiche 0 g :", "la plume ne pèse rien ?"],
+    "calcul": [["plume", "blanc", 190], ["= 0 g ?", "rouge", 190]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
+  },
+  "cm1-masse-defi-short": {
+    "question": ["Le piano dans l'ascenseur :", "ça passe ?"],
+    "calcul": [["300 kg max", "rouge", 170], ["+ piano 200 kg", "blanc", 150]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
+  },
+  "cm2-masse-comparer-short": {
+    "question": ["Quel melon", "est le plus lourd ?"],
+    "calcul": [["1,5 kg", "blanc", 190], ["ou 1,25 kg ?", "rouge", 170]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
+  },
   "cm1-entier-lire-short": {
     "question": ["« Huit mille neuf »", "ça s'écrit comment ?"],
     "calcul": [["8 900 ?", "rouge", 210], ["8 009", "vert", 210]],

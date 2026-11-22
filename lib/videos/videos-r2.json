@@ -17775,6 +17775,186 @@
   "youtube": null,
   "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_relations&display=simple"
  },
+ "ce2-masse-choisir-unite": {
+  "fichier": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite.mp4",
+  "poster": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite.png",
+  "vignette": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite.vignette.webp",
+  "titre": "Letchi, sac de riz, camion : g, kg ou t ? — Choisir la bonne unité — épisode 4 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_choisir_unite&display=simple"
+ },
+ "ce2-masse-choisir-unite-short": {
+  "fichier": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite-short.mp4",
+  "poster": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite-short-miniature.png",
+  "vignette": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite-short-miniature.vignette.webp",
+  "titre": "2 tonnes de bananes sur la liste des courses ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_choisir_unite&display=simple"
+ },
+ "ce2-masse-estimer": {
+  "fichier": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer.mp4",
+  "poster": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer.png",
+  "vignette": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer.vignette.webp",
+  "titre": "Un bébé pèse-t-il 3 g, 3 kg ou 30 kg ? — Estimer une masse — épisode 5 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_estimer&display=simple"
+ },
+ "ce2-masse-estimer-short": {
+  "fichier": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer-short.mp4",
+  "poster": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer-short-miniature.png",
+  "vignette": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer-short-miniature.vignette.webp",
+  "titre": "Mon chat pèse 400 kg ?! #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_estimer&display=simple"
+ },
+ "ce2-masse-probleme": {
+  "fichier": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme.mp4",
+  "poster": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme.png",
+  "vignette": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme.vignette.webp",
+  "titre": "Une valise de 23 kg au plus : passe-t-elle ? — Problèmes de masses — épisode 6 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_probleme&display=simple"
+ },
+ "ce2-masse-probleme-short": {
+  "fichier": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme-short.mp4",
+  "poster": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme-short-miniature.png",
+  "vignette": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme-short-miniature.vignette.webp",
+  "titre": "Ma valise de 24 kg passe-t-elle ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_probleme&display=simple"
+ },
+ "ce2-masse-defi": {
+  "fichier": "ce2/maths/masse/07-defi/eleveai-maths-ce2-masse-defi.mp4",
+  "poster": "ce2/maths/masse/07-defi/eleveai-maths-ce2-masse-defi.png",
+  "vignette": "ce2/maths/masse/07-defi/eleveai-maths-ce2-masse-defi.vignette.webp",
+  "titre": "En équilibre : combien pèse le savon ? — Le défi des masses — épisode 7 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_defi&display=simple"
+ },
+ "ce2-masse-defi-short": {
+  "fichier": "ce2/maths/masse/07-defi/eleveai-maths-ce2-masse-defi-short.mp4",
+  "poster": "ce2/maths/masse/07-defi/eleveai-maths-ce2-masse-defi-short-miniature.png",
+  "vignette": "ce2/maths/masse/07-defi/eleveai-maths-ce2-masse-defi-short-miniature.vignette.webp",
+  "titre": "Combien pèse mon ananas ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_defi&display=simple"
+ },
+ "cm1-masse-comparer": {
+  "fichier": "cm1/maths/masse/01-comparer/eleveai-maths-cm1-masse-comparer.mp4",
+  "poster": "cm1/maths/masse/01-comparer/eleveai-maths-cm1-masse-comparer.png",
+  "vignette": "cm1/maths/masse/01-comparer/eleveai-maths-cm1-masse-comparer.vignette.webp",
+  "titre": "2 kg 50 g ou 2 500 g : le plus lourd ? — Comparer des masses — épisode 1 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_comparer&display=simple"
+ },
+ "cm1-masse-comparer-short": {
+  "fichier": "cm1/maths/masse/01-comparer/eleveai-maths-cm1-masse-comparer-short.mp4",
+  "poster": "cm1/maths/masse/01-comparer/eleveai-maths-cm1-masse-comparer-short-miniature.png",
+  "vignette": "cm1/maths/masse/01-comparer/eleveai-maths-cm1-masse-comparer-short-miniature.vignette.webp",
+  "titre": "3 500 g ou 4 kg : quel cartable est le plus lourd ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_comparer&display=simple"
+ },
+ "cm1-masse-mesurer": {
+  "fichier": "cm1/maths/masse/02-mesurer/eleveai-maths-cm1-masse-mesurer.mp4",
+  "poster": "cm1/maths/masse/02-mesurer/eleveai-maths-cm1-masse-mesurer.png",
+  "vignette": "cm1/maths/masse/02-mesurer/eleveai-maths-cm1-masse-mesurer.vignette.webp",
+  "titre": "Où pointe l'aiguille de la balance ? — Lire une balance — épisode 2 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&display=simple"
+ },
+ "cm1-masse-mesurer-short": {
+  "fichier": "cm1/maths/masse/02-mesurer/eleveai-maths-cm1-masse-mesurer-short.mp4",
+  "poster": "cm1/maths/masse/02-mesurer/eleveai-maths-cm1-masse-mesurer-short-miniature.png",
+  "vignette": "cm1/maths/masse/02-mesurer/eleveai-maths-cm1-masse-mesurer-short-miniature.vignette.webp",
+  "titre": "Combien pèse ma pastèque ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&display=simple"
+ },
+ "cm1-masse-convertir": {
+  "fichier": "cm1/maths/masse/03-convertir/eleveai-maths-cm1-masse-convertir.mp4",
+  "poster": "cm1/maths/masse/03-convertir/eleveai-maths-cm1-masse-convertir.png",
+  "vignette": "cm1/maths/masse/03-convertir/eleveai-maths-cm1-masse-convertir.vignette.webp",
+  "titre": "2 kg, c'est combien de grammes ? — Convertir des masses — épisode 3 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_convertir&display=simple"
+ },
+ "cm1-masse-convertir-short": {
+  "fichier": "cm1/maths/masse/03-convertir/eleveai-maths-cm1-masse-convertir-short.mp4",
+  "poster": "cm1/maths/masse/03-convertir/eleveai-maths-cm1-masse-convertir-short-miniature.png",
+  "vignette": "cm1/maths/masse/03-convertir/eleveai-maths-cm1-masse-convertir-short-miniature.vignette.webp",
+  "titre": "3 kg de pommes : combien de sachets de 500 g ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_convertir&display=simple"
+ },
+ "cm1-masse-estimer": {
+  "fichier": "cm1/maths/masse/04-estimer/eleveai-maths-cm1-masse-estimer.mp4",
+  "poster": "cm1/maths/masse/04-estimer/eleveai-maths-cm1-masse-estimer.png",
+  "vignette": "cm1/maths/masse/04-estimer/eleveai-maths-cm1-masse-estimer.vignette.webp",
+  "titre": "Un colibri pèse-t-il 3 g, 3 kg ou 3 t ? — Estimer une masse — épisode 4 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_estimer&display=simple"
+ },
+ "cm1-masse-estimer-short": {
+  "fichier": "cm1/maths/masse/04-estimer/eleveai-maths-cm1-masse-estimer-short.mp4",
+  "poster": "cm1/maths/masse/04-estimer/eleveai-maths-cm1-masse-estimer-short-miniature.png",
+  "vignette": "cm1/maths/masse/04-estimer/eleveai-maths-cm1-masse-estimer-short-miniature.vignette.webp",
+  "titre": "La balance affiche 0 g : la plume ne pèse rien ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_estimer&display=simple"
+ },
+ "cm1-masse-defi": {
+  "fichier": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi.mp4",
+  "poster": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi.png",
+  "vignette": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi.vignette.webp",
+  "titre": "Monte-charge de 1 t : combien de sacs de ciment ? — Le défi des masses — épisode 5 · Maths CM1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_defi&display=simple"
+ },
+ "cm1-masse-defi-short": {
+  "fichier": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi-short.mp4",
+  "poster": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi-short-miniature.png",
+  "vignette": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi-short-miniature.vignette.webp",
+  "titre": "Le piano dans l'ascenseur : ça passe ? #maths #cm1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_defi&display=simple"
+ },
+ "cm2-masse-comparer": {
+  "fichier": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer.mp4",
+  "poster": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer.png",
+  "vignette": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer.vignette.webp",
+  "titre": "1,25 kg ou 1 200 g : lequel est le plus lourd ? — Comparer des masses — épisode 1 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_comparer&display=simple"
+ },
+ "cm2-masse-comparer-short": {
+  "fichier": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer-short.mp4",
+  "poster": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer-short-miniature.png",
+  "vignette": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer-short-miniature.vignette.webp",
+  "titre": "1,5 kg ou 1,25 kg : quel melon est le plus lourd ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_comparer&display=simple"
+ },
  "cm1-entier-comparer": {
   "fichier": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer.mp4",
   "poster": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer.png",

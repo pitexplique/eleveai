@@ -104,3 +104,162 @@ function sacRizCraie(c,x,yBas,s=1,z=1,et=''){ if(z<=0) return; const k=Math.min(
   c.fillStyle='#ffe8cc'; for(const [u,v] of [[-.18,.82],[.05,.88],[.2,.8],[-.05,.76],[.12,.7]]){ c.beginPath(); c.ellipse(x+u*200*k,yBas-v*230*k,7*k,4*k,.5,0,7); c.fill(); }
   if(et){ c.font=`800 ${Math.round(52*k)}px "Segoe UI"`; const fs=52*k*Math.min(1,170*k/c.measureText(et).width);
     ecrire(c,et,x,yBas-100*k,fs,'#212529'); } }
+
+/* ---- Épisode 04 (choisir-unite) : la liste des courses, les bananes, le camion qui bouche la rue ---- */
+const BANANE_M='#ffe066';
+/* Une banane courbée : (x, y) = le milieu, w = la longueur ; ang = la rotation */
+function bananeM(c,x,y,w,z=1,ang=0){ if(z<=0) return; w*=Math.min(1.15,z); const h=Math.max(30,w*.34);
+  c.save(); c.translate(x,y); c.rotate(ang); c.fillStyle=BANANE_M; c.strokeStyle='#e67700'; c.lineWidth=4; c.beginPath();
+  c.moveTo(-w/2,-h*.4); c.quadraticCurveTo(0,h*1.0,w/2,-h*.4); c.quadraticCurveTo(0,h*.05,-w/2,-h*.4); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle='#5c3d00'; c.fillRect(-w/2-5,-h*.62,10,12); c.fillRect(w/2-5,-h*.62,10,12); c.restore(); }
+/* Un régime de bananes : n bananes en éventail, (x, yBas) = le bas */
+function regimeM(c,x,yBas,s=1,z=1,n=4){ if(z<=0) return; s*=Math.min(1.15,z);
+  /* une « main » de bananes : toutes partent de la tige (à gauche) et s'ouvrent en éventail vers la droite */
+  const w=200*s, sx=x-w*.45, sy=yBas-70*s;
+  for(let i=0;i<n;i++){ const a=-.75+i*(1.0/(Math.max(1,n-1))); 
+    bananeM(c,sx+Math.cos(a)*w*.5,sy+Math.sin(a)*w*.5,w,1,a); }
+  c.fillStyle='#5c3d00'; c.beginPath(); c.roundRect(sx-14*s,sy-26*s,24*s,48*s,6*s); c.fill(); }
+/* La liste des courses : une feuille blanche penchée, des lignes écrites (la dernière peut être en rouge) */
+function listeCraie(c,x,y,w,h,lignes,z=1){ if(z<=0) return; const k=Math.min(1.15,z); w*=k; h*=k;
+  c.save(); c.translate(x,y); c.rotate(-.04); c.fillStyle='#fffdf5'; c.strokeStyle='#adb5bd'; c.lineWidth=4;
+  c.beginPath(); c.rect(-w/2,-h/2,w,h); c.fill(); c.stroke();
+  c.strokeStyle='#a5d8ff'; c.lineWidth=2; for(let v=-h/2+70*k; v<h/2-10; v+=56*k){ c.beginPath(); c.moveTo(-w/2+14,v); c.lineTo(w/2-14,v); c.stroke(); }
+  c.restore();
+  lignes.forEach(([s,coul,fs],i)=>{ ecrire(c,s,x,y-h/2+52*k+i*56*k,(fs||46)*k,coul||'#343a40'); }); }
+/* Un gros camion de livraison (caisse jaune, cabine rouge) : (x, yBas) = le milieu, au sol ; s = 1 ≈ 460 px de long */
+function camionM(c,x,yBas,s=1,z=1,texte=''){ if(z<=0) return; s*=Math.min(1.15,z);
+  const L=330*s, H=190*s, cab=130*s, g=x-(L+cab)/2;
+  c.fillStyle='#ffd43b'; c.strokeStyle='#e67700'; c.lineWidth=5; c.beginPath(); c.roundRect(g,yBas-H-40*s,L,H,10*s); c.fill(); c.stroke();
+  c.fillStyle='#f03e3e'; c.strokeStyle='#a61e4d'; c.beginPath(); c.roundRect(g+L+6*s,yBas-150*s-40*s,cab,150*s,[30*s,30*s,8*s,8*s]); c.fill(); c.stroke();
+  c.fillStyle='#d0ebff'; c.beginPath(); c.roundRect(g+L+40*s,yBas-175*s,cab-55*s,60*s,8*s); c.fill();
+  c.fillStyle='#212529'; for(const u of [g+70*s,g+L-50*s,g+L+cab-45*s]){ c.beginPath(); c.arc(u,yBas-30*s,30*s,0,7); c.fill();
+    c.fillStyle='#adb5bd'; c.beginPath(); c.arc(u,yBas-30*s,11*s,0,7); c.fill(); c.fillStyle='#212529'; }
+  if(texte) ecrire(c,texte,g+L/2,yBas-40*s-H/2+28*s,90*s,'#212529'); }
+/* Un melon : une boule vert pâle rayée, (x, yBas) = le bas */
+function melonM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const r=80*s, y=yBas-r;
+  c.fillStyle='#c0eb75'; c.strokeStyle='#5c940d'; c.lineWidth=4; c.beginPath(); c.ellipse(x,y,r*1.1,r,0,0,7); c.fill(); c.stroke();
+  c.strokeStyle='#82c91e'; c.lineWidth=5; for(const u of [-.6,-.2,.2,.6]){ c.beginPath(); c.ellipse(x,y,r*1.1*Math.abs(u),r*.98,0,0,7); c.stroke(); }
+  c.strokeStyle='#5c3d00'; c.lineWidth=6; c.beginPath(); c.moveTo(x,y-r); c.lineTo(x+8*s,y-r-18*s); c.stroke(); }
+/* Un gâteau à la banane : un cake brun, des rondelles jaunes dessus, (x, yBas) = le bas */
+function gateauM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const w=170*s, h=80*s;
+  c.fillStyle='#c48a3c'; c.strokeStyle='#5c3d00'; c.lineWidth=4; c.beginPath(); c.roundRect(x-w/2,yBas-h,w,h,14*s); c.fill(); c.stroke();
+  c.fillStyle='#ffe066'; c.strokeStyle='#e67700'; c.lineWidth=2; for(const u of [-.32,0,.32]){ c.beginPath(); c.ellipse(x+u*w,yBas-h-2*s,18*s,9*s,0,0,7); c.fill(); c.stroke(); } }
+
+/* ---- Épisode 05 (estimer) : le chat de « 400 kg », l'ours, le canapé, le chien ---- */
+/* Un chat assis, de face (dos = true : de dos, il boude) ; (x, yBas) = le milieu, au sol ; s = 1 ≈ 170 px de haut */
+function chatM(c,x,yBas,s=1,z=1,coul='#adb5bd',dos=false){ if(z<=0) return; s*=Math.min(1.15,z);
+  const by=yBas-48*s, hy=yBas-108*s, bord='#343a40';
+  c.lineJoin='round'; c.strokeStyle=coul; c.lineWidth=12*s; c.lineCap='round'; c.beginPath(); c.moveTo(x+(dos?-46:46)*s,yBas-14*s);
+  c.quadraticCurveTo(x+(dos?-96:96)*s,yBas-20*s,x+(dos?-84:84)*s,yBas-78*s); c.stroke();
+  c.fillStyle=coul; c.strokeStyle=bord; c.lineWidth=3.5;
+  c.beginPath(); c.ellipse(x,by,50*s,50*s,0,0,7); c.fill(); c.stroke();
+  if(!dos) for(const u of [-1,1]){ c.beginPath(); c.ellipse(x+u*20*s,yBas-6*s,15*s,9*s,0,0,7); c.fill(); c.stroke(); }
+  for(const u of [-1,1]){ c.beginPath(); c.moveTo(x+u*12*s,hy-26*s); c.lineTo(x+u*30*s,hy-54*s); c.lineTo(x+u*34*s,hy-12*s); c.closePath(); c.fill(); c.stroke(); }
+  c.beginPath(); c.arc(x,hy,34*s,0,7); c.fill(); c.stroke();
+  if(dos){ c.strokeStyle='rgba(60,20,0,.35)'; c.lineWidth=5*s; c.beginPath(); c.moveTo(x,hy+30*s); c.lineTo(x,by+20*s); c.stroke(); return; }
+  c.fillStyle='#94d82d'; for(const u of [-1,1]){ c.beginPath(); c.ellipse(x+u*13*s,hy-4*s,7*s,8*s,0,0,7); c.fill(); }
+  c.fillStyle='#212529'; for(const u of [-1,1]){ c.beginPath(); c.ellipse(x+u*13*s,hy-4*s,2.5*s,6*s,0,0,7); c.fill(); }
+  c.fillStyle='#f783ac'; c.beginPath(); c.moveTo(x-6*s,hy+8*s); c.lineTo(x+6*s,hy+8*s); c.lineTo(x,hy+15*s); c.fill();
+  c.strokeStyle='#f8f9fa'; c.lineWidth=2; for(const u of [-1,1]) for(const v of [-1,1]){ c.beginPath(); c.moveTo(x+u*12*s,hy+12*s); c.lineTo(x+u*40*s,hy+(12+v*7)*s); c.stroke(); } }
+/* Un ours brun à quatre pattes, de profil, tête à droite ; (x, yBas) = le milieu, au sol ; s = 1 ≈ 380 × 230 px */
+function oursM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const B='#8b5a2b', D='#4a2c0f';
+  c.save(); c.translate(x,yBas); c.lineJoin='round'; c.fillStyle=B; c.strokeStyle=D; c.lineWidth=4;
+  for(const u of [-.62,-.3,.3,.6]){ c.beginPath(); c.roundRect(u*190*s-24*s,-95*s,48*s,95*s,14*s); c.fill(); c.stroke(); }
+  c.beginPath(); c.ellipse(-10*s,-130*s,170*s,82*s,0,0,7); c.fill(); c.stroke();
+  c.beginPath(); c.ellipse(-30*s,-200*s,70*s,22*s,0,0,7); c.fill();  /* la bosse du dos */
+  for(const [ex,ey] of [[150,-222],[196,-214]]){ c.beginPath(); c.arc(ex*s,ey*s,20*s,0,7); c.fill(); c.stroke(); }
+  c.beginPath(); c.arc(170*s,-170*s,58*s,0,7); c.fill(); c.stroke();
+  c.fillStyle='#c08552'; c.beginPath(); c.ellipse(220*s,-155*s,34*s,25*s,0,0,7); c.fill(); c.stroke();
+  c.fillStyle='#212529'; c.beginPath(); c.ellipse(248*s,-162*s,11*s,8*s,0,0,7); c.fill();
+  c.beginPath(); c.arc(182*s,-188*s,7*s,0,7); c.fill();
+  c.strokeStyle=D; c.lineWidth=3; for(const u of [-.62,-.3,.3,.6]) for(const v of [-10,0,10]){ c.beginPath(); c.moveTo(u*190*s+v*s,-4*s); c.lineTo(u*190*s+v*s,-14*s); c.stroke(); }
+  c.restore(); }
+/* Un canapé rouge ; (x, yBas) = le milieu, au sol ; s = 1 ≈ 420 px de large. Renvoie le dessus du coussin. */
+function canapeM(c,x,yBas,s=1,z=1){ const k=Math.min(1.15,Math.max(z,0))*s, w=420*k, D='#7b1e3a';
+  if(z<=0) return yBas-110*k; c.lineJoin='round'; c.fillStyle='#c2255c'; c.strokeStyle=D; c.lineWidth=4;
+  c.beginPath(); c.roundRect(x-w/2+30*k,yBas-230*k,w-60*k,130*k,22*k); c.fill(); c.stroke();          /* le dossier */
+  c.fillStyle='#e64980'; c.beginPath(); c.roundRect(x-w/2+30*k,yBas-120*k,w-60*k,70*k,14*k); c.fill(); c.stroke(); /* le coussin */
+  c.fillStyle='#c2255c'; for(const u of [-1,1]){ c.beginPath(); c.roundRect(x+u*(w/2-30*k)-30*k,yBas-160*k,60*k,130*k,22*k); c.fill(); c.stroke(); }
+  c.beginPath(); c.roundRect(x-w/2+20*k,yBas-55*k,w-40*k,40*k,10*k); c.fill(); c.stroke();
+  c.fillStyle='#5c3d00'; for(const u of [-1,1]){ c.fillRect(x+u*(w/2-50*k)-8*k,yBas-16*k,16*k,16*k); }
+  return yBas-120*k; }
+/* Un chien assis, de profil, tête à droite ; (x, yBas) = le milieu, au sol ; s = 1 ≈ 230 px de haut */
+function chienM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const B='#e8a660', D='#7c4a12';
+  c.save(); c.translate(x,yBas); c.lineJoin='round'; c.lineCap='round';
+  c.strokeStyle=B; c.lineWidth=16*s; c.beginPath(); c.moveTo(-70*s,-40*s); c.quadraticCurveTo(-120*s,-60*s,-110*s,-120*s); c.stroke();
+  c.fillStyle=B; c.strokeStyle=D; c.lineWidth=4;
+  c.beginPath(); c.ellipse(-20*s,-70*s,75*s,62*s,-.5,0,7); c.fill(); c.stroke();
+  for(const u of [20,55]){ c.beginPath(); c.roundRect(u*s-14*s,-120*s,28*s,120*s,10*s); c.fill(); c.stroke(); }
+  c.beginPath(); c.ellipse(-50*s,-14*s,45*s,16*s,0,0,7); c.fill(); c.stroke();
+  c.beginPath(); c.arc(60*s,-170*s,50*s,0,7); c.fill(); c.stroke();
+  c.beginPath(); c.ellipse(108*s,-152*s,34*s,24*s,0,0,7); c.fill(); c.stroke();
+  c.fillStyle='#212529'; c.beginPath(); c.arc(140*s,-160*s,9*s,0,7); c.fill(); c.beginPath(); c.arc(72*s,-186*s,7*s,0,7); c.fill();
+  c.fillStyle='#9c5a1a'; c.beginPath(); c.ellipse(28*s,-168*s,20*s,46*s,.35,0,7); c.fill(); c.stroke();
+  c.fillStyle='#e03131'; c.beginPath(); c.roundRect(20*s,-128*s,70*s,12*s,5*s); c.fill();
+  c.restore(); }
+/* Une brique de lait de 1 kg ; (x, yBas) = le milieu du bas */
+function briqueM(c,x,yBas,s=1,z=1){ if(z<=0) return; const k=Math.min(1.15,z)*s, w=110*k, h=170*k, t=42*k;
+  c.lineJoin='round'; c.fillStyle='#f8f9fa'; c.strokeStyle='#868e96'; c.lineWidth=4;
+  c.beginPath(); c.rect(x-w/2,yBas-h,w,h); c.fill(); c.stroke();
+  c.fillStyle='#dee2e6'; c.beginPath(); c.moveTo(x-w/2,yBas-h); c.lineTo(x,yBas-h-t); c.lineTo(x+w/2,yBas-h); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle='#1c7ed6'; c.fillRect(x-w/2+2,yBas-h*.62,w-4,h*.3);
+  c.fillStyle='#fff'; c.font=`800 ${Math.round(34*k)}px "Segoe UI"`; c.textAlign='center'; c.textBaseline='middle'; c.fillText('LAIT',x,yBas-h*.47); }
+
+/* ---- Épisode 06 (probleme) : la valise à roulettes, les chaussettes, le gros livre, la pancarte « 23 kg au plus » ---- */
+/* Une valise à roulettes debout ; (x, yBas) = le milieu, au sol (sous les roues) ; s = 1 ≈ 210 × 300 px. Renvoie le haut. */
+function valiseM(c,x,yBas,s=1,z=1,coul='#7048e8'){ const k=Math.min(1.15,Math.max(z,0))*s, w=210*k, h=250*k, r=16*k;
+  if(z<=0) return yBas-300*k; const yb=yBas-2*r, D='#212529'; c.lineJoin='round'; c.lineCap='round';
+  c.strokeStyle='#868e96'; c.lineWidth=9*k; for(const u of [-.25,.25]){ c.beginPath(); c.moveTo(x+u*w,yb-h); c.lineTo(x+u*w,yb-h-55*k); c.stroke(); }
+  c.lineWidth=12*k; c.beginPath(); c.moveTo(x-.3*w,yb-h-55*k); c.lineTo(x+.3*w,yb-h-55*k); c.stroke();   /* la poignée tirée */
+  c.fillStyle=coul; c.strokeStyle=D; c.lineWidth=5; c.beginPath(); c.roundRect(x-w/2,yb-h,w,h,22*k); c.fill(); c.stroke();
+  c.strokeStyle='rgba(0,0,0,.35)'; c.lineWidth=8*k; for(const u of [-.22,0,.22]){ c.beginPath(); c.moveTo(x+u*w,yb-h+16*k); c.lineTo(x+u*w,yb-16*k); c.stroke(); }
+  c.fillStyle=D; for(const u of [-.32,.32]){ c.beginPath(); c.arc(x+u*w,yBas-r,r,0,7); c.fill(); }
+  return yb-h-55*k; }
+/* Une paire de chaussettes rayées ; (x, yBas) = le milieu, au sol ; s = 1 ≈ 170 px de large */
+function chaussettesM(c,x,yBas,s=1,z=1){ if(z<=0) return; const k=Math.min(1.15,z)*s; c.lineJoin='round';
+  for(const [dx,coul] of [[-38,'#f06595'],[38,'#4dabf7']]){ const X=x+dx*k;
+    c.fillStyle=coul; c.strokeStyle='#343a40'; c.lineWidth=4; c.beginPath();
+    c.moveTo(X-22*k,yBas-150*k); c.lineTo(X+22*k,yBas-150*k); c.lineTo(X+22*k,yBas-45*k); c.lineTo(X+62*k,yBas-40*k);
+    c.quadraticCurveTo(X+80*k,yBas-20*k,X+60*k,yBas); c.lineTo(X-12*k,yBas); c.quadraticCurveTo(X-24*k,yBas-10*k,X-22*k,yBas-40*k); c.closePath(); c.fill(); c.stroke();
+    c.fillStyle='#fff'; for(const yy of [130,100,70]) c.fillRect(X-20*k,yBas-yy*k,40*k,10*k); } }
+/* Un gros livre fermé, posé à plat ; (x, yBas) = le milieu du bas ; s = 1 ≈ 240 × 90 px */
+function livreM(c,x,yBas,s=1,z=1,texte=''){ if(z<=0) return; const k=Math.min(1.15,z)*s, w=240*k, h=90*k; c.lineJoin='round';
+  c.fillStyle='#f8f9fa'; c.strokeStyle='#868e96'; c.lineWidth=3; c.beginPath(); c.rect(x-w/2+12*k,yBas-h+10*k,w-14*k,h-20*k); c.fill(); c.stroke();
+  for(let u=1;u<5;u++){ c.beginPath(); c.moveTo(x+w/2-4*k,yBas-h+10*k+u*(h-20*k)/5); c.lineTo(x-w/2+20*k,yBas-h+10*k+u*(h-20*k)/5); c.stroke(); }
+  c.fillStyle='#c92a2a'; c.strokeStyle='#5c0011'; c.lineWidth=4; c.beginPath(); c.roundRect(x-w/2,yBas-h,w,14*k,4*k); c.fill(); c.stroke();
+  c.beginPath(); c.roundRect(x-w/2,yBas-14*k,w,14*k,4*k); c.fill(); c.stroke(); c.beginPath(); c.roundRect(x-w/2,yBas-h,26*k,h,6*k); c.fill(); c.stroke();
+  if(texte) ecrire(c,texte,x+12*k,yBas-h/2,46*k,'#c92a2a'); }
+/* La pancarte du comptoir « 23 kg / au plus » ; (x, y) = le centre ; s = 1 ≈ 300 × 180 px */
+function pancarteM(c,x,y,s=1,z=1,haut='23 kg',bas='au plus'){ if(z<=0) return; const k=Math.min(1.15,z)*s, w=300*k, h=180*k;
+  c.fillStyle='#f8f9fa'; c.strokeStyle='#e03131'; c.lineWidth=8*k; c.beginPath(); c.roundRect(x-w/2,y-h/2,w,h,16*k); c.fill(); c.stroke();
+  ecrire(c,haut,x,y-28*k,84*k,'#e03131'); ecrire(c,bas,x,y+50*k,52*k,'#343a40'); }
+
+/* ---- Épisode 07 (défi) : l'ananas, les mangues de 400 g, la papaye, le verre de jus ---- */
+/* Un ananas : corps ovale doré quadrillé, couronne de feuilles ; (x, yBas) = le bas ; s = 1 ≈ 260 px de haut */
+function ananasM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const rx=62*s, ry=88*s, y=yBas-ry;
+  c.fillStyle='#2f9e44'; c.strokeStyle='#1b5e20'; c.lineWidth=3;
+  for(const [a,l] of [[-.55,70],[-.25,92],[0,105],[.25,92],[.55,70]]){ const bx=x, by=y-ry+6*s;
+    c.beginPath(); c.moveTo(bx-12*s,by); c.quadraticCurveTo(bx+Math.sin(a)*l*.5*s-8*s,by-l*.6*s,bx+Math.sin(a)*l*s,by-Math.cos(a)*l*s);
+    c.quadraticCurveTo(bx+Math.sin(a)*l*.5*s+8*s,by-l*.5*s,bx+12*s,by); c.closePath(); c.fill(); c.stroke(); }
+  c.fillStyle='#fab005'; c.strokeStyle='#a0522d'; c.lineWidth=4; c.beginPath(); c.ellipse(x,y,rx,ry,0,0,7); c.fill(); c.stroke();
+  c.save(); c.beginPath(); c.ellipse(x,y,rx,ry,0,0,7); c.clip(); c.strokeStyle='#c2410c'; c.lineWidth=3;
+  for(let u=-3;u<=3;u++){ c.beginPath(); c.moveTo(x+u*32*s-ry,y-ry); c.lineTo(x+u*32*s+ry,y+ry); c.stroke();
+    c.beginPath(); c.moveTo(x+u*32*s+ry,y-ry); c.lineTo(x+u*32*s-ry,y+ry); c.stroke(); }
+  c.restore(); }
+/* Une mangue : un ovale penché, du rouge au jaune, une petite feuille ; (x, yBas) = le bas ; s = 1 ≈ 95 × 70 px */
+function mangueM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const rx=48*s, ry=34*s, y=yBas-ry;
+  const g=c.createLinearGradient(x-rx,y-ry,x+rx,y+ry); g.addColorStop(0,'#e8590c'); g.addColorStop(.55,'#fcc419'); g.addColorStop(1,'#94d82d');
+  c.fillStyle=g; c.strokeStyle='#a0522d'; c.lineWidth=3; c.beginPath(); c.ellipse(x,y,rx,ry,-.25,0,7); c.fill(); c.stroke();
+  c.fillStyle='#2f9e44'; c.beginPath(); c.ellipse(x-rx*.55,y-ry*.95,16*s,7*s,-.5,0,7); c.fill(); }
+/* Une papaye couchée : longue, verte et orange ; (x, yBas) = le bas ; s = 1 ≈ 230 × 110 px */
+function papayeM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const rx=115*s, ry=55*s, y=yBas-ry;
+  const g=c.createLinearGradient(x-rx,y,x+rx,y); g.addColorStop(0,'#82c91e'); g.addColorStop(.6,'#fd7e14'); g.addColorStop(1,'#f76707');
+  c.fillStyle=g; c.strokeStyle='#5c3d00'; c.lineWidth=4; c.beginPath(); c.moveTo(x-rx,y);
+  c.bezierCurveTo(x-rx,y-ry*1.1,x+rx*.2,y-ry*1.2,x+rx,y-ry*.2); c.bezierCurveTo(x+rx*1.05,y+ry,x-rx*.2,y+ry*1.1,x-rx,y); c.fill(); c.stroke();
+  c.fillStyle='#5c3d00'; c.fillRect(x-rx-14*s,y-6*s,16*s,12*s); }
+/* Un verre de jus d'ananas avec une paille ; (x, yBas) = le bas ; s = 1 ≈ 190 px de haut */
+function verreJusM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const w=110*s, h=170*s;
+  c.strokeStyle='#e03131'; c.lineWidth=8*s; c.beginPath(); c.moveTo(x+18*s,yBas-h*.55); c.lineTo(x+48*s,yBas-h-38*s); c.stroke();
+  c.fillStyle='#ffd43b'; c.beginPath(); c.moveTo(x-w/2+6*s,yBas-h*.78); c.lineTo(x+w/2-6*s,yBas-h*.78); c.lineTo(x+w*.38,yBas); c.lineTo(x-w*.38,yBas); c.closePath(); c.fill();
+  c.strokeStyle='#dee2e6'; c.lineWidth=5; c.beginPath(); c.moveTo(x-w/2,yBas-h); c.lineTo(x-w*.38,yBas); c.lineTo(x+w*.38,yBas); c.lineTo(x+w/2,yBas-h); c.stroke();
+  c.fillStyle='#fab005'; c.beginPath(); c.arc(x-w/2+6*s,yBas-h,20*s,0,7); c.fill(); }

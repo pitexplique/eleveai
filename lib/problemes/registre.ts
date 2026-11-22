@@ -74,6 +74,12 @@ import e4eFractionNombre from "./4e/fraction_nombre";
 import e4eOrdreGrandeur from "./4e/ordre_grandeur";
 import e4eVisionEspace from "./4e/vision_espace";
 import e4eAlgoProgrammation from "./4e/algo_programmation";
+import e4eDroiteMilieux from "./4e/droite_milieux";
+import e4eOrdreInequations from "./4e/ordre_inequations";
+import e4eDistanceDroite from "./4e/distance_droite";
+import e4eTangenteCercle from "./4e/tangente_cercle";
+import e4eArcsSecteurs from "./4e/arcs_secteurs";
+import e4eTrianglePointsRemarquables from "./4e/triangle_points_remarquables";
 // 5e
 import e5eRelatifNombre from "./5e/relatif_nombre";
 import e5eRelatifOperation from "./5e/relatif_operation";
@@ -237,6 +243,223 @@ import e3eProbaExperience from "./3e/proba_experience";
 import e3eAnglesCercle from "./3e/angles_cercle";
 import e3eRelationsMetriques from "./3e/relations_metriques";
 import e3eAlgoProgrammation from "./3e/algo_programmation";
+import e2deReelsIntervalles from "./seconde/reels_intervalles";
+import e2deArithmetiqueEntiers from "./seconde/arithmetique_entiers";
+import e2dePuissances2de from "./seconde/puissances_2de";
+import e2deRacineCarree2de from "./seconde/racine_carree_2de";
+import e2deDeveloppementFactorisation2de from "./seconde/developpement_factorisation_2de";
+import e2deIdentitesRemarquables2de from "./seconde/identites_remarquables_2de";
+import e2deExpressionsLitterales2de from "./seconde/expressions_litterales_2de";
+import e2deEquationsInequations1erDegre from "./seconde/equations_inequations_1er_degre";
+import e2deVecteursPlan from "./seconde/vecteurs_plan";
+import e2deRepereCoordonnees from "./seconde/repere_coordonnees";
+import e2deDroitesPlan from "./seconde/droites_plan";
+import e2deGeometrieProblemesPlan from "./seconde/geometrie_problemes_plan";
+import e2deSignesExpression2de from "./seconde/signes_expression_2de";
+import e2deFonctionVocabulaire2de from "./seconde/fonction_vocabulaire_2de";
+import e2deAnalyseGraphique2de from "./seconde/analyse_graphique_2de";
+import e2deFonctionVariationsExtremums from "./seconde/fonction_variations_extremums";
+import e2deFonctionsAffines2de from "./seconde/fonctions_affines_2de";
+import e2deFonctionsReference2de from "./seconde/fonctions_reference_2de";
+import e2deInformationChiffreeEvolutions from "./seconde/information_chiffree_evolutions";
+import e2deStatistiquesDescriptives from "./seconde/statistiques_descriptives";
+import e2deCroisementVariables2de from "./seconde/croisement_variables_2de";
+import e2deProbabilitesEnsembleFini from "./seconde/probabilites_ensemble_fini";
+import e2deProbabilitesConditionnelles2de from "./seconde/probabilites_conditionnelles_2de";
+import e2deEchantillonnageSimulation from "./seconde/echantillonnage_simulation";
+import e2deAlgorithmiquePython2de from "./seconde/algorithmique_python_2de";
+import e2deLogiqueEnsembles from "./seconde/logique_ensembles";
+import e2deDemiPlansSystemes from "./seconde/demi_plans_systemes";
+import e2deSystemesDeterminant from "./seconde/systemes_determinant";
+import e2deCourbesAssociees from "./seconde/courbes_associees";
+import e2dePolynomesDivision from "./seconde/polynomes_division";
+import e2deEncadrementsOperations from "./seconde/encadrements_operations";
+import e2deRacinesDenominateur from "./seconde/racines_denominateur";
+import e2deValeurAbsolueEquations from "./seconde/valeur_absolue_equations";
+import e2deHomographiquePartieEntiere from "./seconde/homographique_partie_entiere";
+import e2deFonctionsParIntervalles from "./seconde/fonctions_par_intervalles";
+import e2deDroitesPerpendiculaires from "./seconde/droites_perpendiculaires";
+import e2deProjectionDroite from "./seconde/projection_droite";
+import e2deEspacePosition2de from "./seconde/espace_position_2de";
+import e2deComposeesTransformations from "./seconde/composees_transformations";
+import e1reAutoComparer from "./premiere/auto_comparer";
+import e1reAutoFractionsPuissances from "./premiere/auto_fractions_puissances";
+import e1reAutoOrdresUnites from "./premiere/auto_ordres_unites";
+import e1reAutoDevelopperFactoriser from "./premiere/auto_developper_factoriser";
+import e1reAutoEquations from "./premiere/auto_equations";
+import e1reAutoSigneExpression from "./premiere/auto_signe_expression";
+import e1reAutoFormules from "./premiere/auto_formules";
+import e1reAutoProportion from "./premiere/auto_proportion";
+import e1reAutoPartieTout from "./premiere/auto_partie_tout";
+import e1reAutoCoefficientMultiplicateur from "./premiere/auto_coefficient_multiplicateur";
+import e1reAutoTauxEvolution from "./premiere/auto_taux_evolution";
+import e1reAutoLectureGraphique from "./premiere/auto_lecture_graphique";
+import e1reAutoResolutionGraphique from "./premiere/auto_resolution_graphique";
+import e1reAutoDroites from "./premiere/auto_droites";
+import e1reAutoLireStatistiques from "./premiere/auto_lire_statistiques";
+import e1reAutoIndicateurs from "./premiere/auto_indicateurs";
+import e1reAutoProbaBase from "./premiere/auto_proba_base";
+import e1reAutoProbaLecture from "./premiere/auto_proba_lecture";
+import e1reInfoTableauCroise from "./premiere/info_tableau_croise";
+import e1reInfoFrequences from "./premiere/info_frequences";
+import e1reInfoRepresentationsCroisees from "./premiere/info_representations_croisees";
+import e1reInfoNuage from "./premiere/info_nuage";
+import e1reInfoPointMoyen from "./premiere/info_point_moyen";
+import e1reInfoAjustementAffine from "./premiere/info_ajustement_affine";
+import e1reInfoInterpolerExtrapoler from "./premiere/info_interpoler_extrapoler";
+import e1reInfoTableur from "./premiere/info_tableur";
+import e1reInfoFiltreDonnees from "./premiere/info_filtre_donnees";
+import e1reAleaConditionnelle from "./premiere/alea_conditionnelle";
+import e1reAleaConditionnelleCalcul from "./premiere/alea_conditionnelle_calcul";
+import e1reAleaArbre from "./premiere/alea_arbre";
+import e1reAleaArbreCalcul from "./premiere/alea_arbre_calcul";
+import e1reAleaIndependance from "./premiere/alea_independance";
+import e1reAleaBernoulli from "./premiere/alea_bernoulli";
+import e1reAleaBernoulliCalcul from "./premiere/alea_bernoulli_calcul";
+import e1reLinSuiteArithmetique from "./premiere/lin_suite_arithmetique";
+import e1reLinSuiteTermeGeneral from "./premiere/lin_suite_terme_general";
+import e1reLinAffine from "./premiere/lin_affine";
+import e1reLinAffineLecture from "./premiere/lin_affine_lecture";
+import e1reLinModeliser from "./premiere/lin_modeliser";
+import e1reLinSeuil from "./premiere/lin_seuil";
+import e1reQuadParabole from "./premiere/quad_parabole";
+import e1reQuadSommetAxe from "./premiere/quad_sommet_axe";
+import e1reQuadVariations from "./premiere/quad_variations";
+import e1reQuadRacinesSigne from "./premiere/quad_racines_signe";
+import e1reExpoSuiteGeometrique from "./premiere/expo_suite_geometrique";
+import e1reExpoSuiteTermeGeneral from "./premiere/expo_suite_terme_general";
+import e1reExpoFonction from "./premiere/expo_fonction";
+import e1reExpoFonctionLecture from "./premiere/expo_fonction_lecture";
+import e1reExpoTauxMoyen from "./premiere/expo_taux_moyen";
+import e1reExpoModeliser from "./premiere/expo_modeliser";
+import e1reExpoSeuil from "./premiere/expo_seuil";
+import eTleDenombrementCombinatoire from "./terminale-spe/denombrement_combinatoire";
+import eTleGeometrieEspace from "./terminale-spe/geometrie_espace";
+import eTleProduitScalaireEspace from "./terminale-spe/produit_scalaire_espace";
+import eTleSuiteNumerique from "./terminale-spe/suite_numerique";
+import eTleLimiteSuite from "./terminale-spe/limite_suite";
+import eTleLimiteFonction from "./terminale-spe/limite_fonction";
+import eTleContinuiteTvi from "./terminale-spe/continuite_tvi";
+import eTleDerivationFonction from "./terminale-spe/derivation_fonction";
+import eTleConvexiteFonction from "./terminale-spe/convexite_fonction";
+import eTleFonctionsSinusCosinus from "./terminale-spe/fonctions_sinus_cosinus";
+import eTleFonctionExponentielle from "./terminale-spe/fonction_exponentielle";
+import eTleFonctionLogarithme from "./terminale-spe/fonction_logarithme";
+import eTlePrimitiveIntegrale from "./terminale-spe/primitive_integrale";
+import eTleEquationDifferentielle from "./terminale-spe/equation_differentielle";
+import eTleProbabiliteConditionnelle from "./terminale-spe/probabilite_conditionnelle";
+import eTleVariableAleatoire from "./terminale-spe/variable_aleatoire";
+import eTleLoiBinomiale from "./terminale-spe/loi_binomiale";
+import eTleConcentrationEchantillonnage from "./terminale-spe/concentration_echantillonnage";
+import eTleAlgorithmiquePython from "./terminale-spe/algorithmique_python";
+import e1sSuites from "./premiere-spe/suites";
+import e1sSecondDegre from "./premiere-spe/second_degre";
+import e1sDerivationNombreDerive from "./premiere-spe/derivation_nombre_derive";
+import e1sDerivationTangente from "./premiere-spe/derivation_tangente";
+import e1sDerivationFormules from "./premiere-spe/derivation_formules";
+import e1sDerivationOperations from "./premiere-spe/derivation_operations";
+import e1sAnalyseGraphique1s from "./premiere-spe/analyse_graphique_1s";
+import e1sVariationsFonctions from "./premiere-spe/variations_fonctions";
+import e1sExponentielle from "./premiere-spe/exponentielle";
+import e1sTrigonometrie from "./premiere-spe/trigonometrie";
+import e1sProduitScalaire from "./premiere-spe/produit_scalaire";
+import e1sGeometrieReperee from "./premiere-spe/geometrie_reperee";
+import e1sProbabilitesConditionnelles from "./premiere-spe/probabilites_conditionnelles";
+import e1sVariablesAleatoires from "./premiere-spe/variables_aleatoires";
+import e1sAlgorithmique from "./premiere-spe/algorithmique";
+import e1sLogiqueEnsembles from "./premiere-spe/logique_ensembles";
+import e1sTrigoFormulesEquations from "./premiere-spe/trigo_formules_equations";
+import e1sTriangleQuelconque from "./premiere-spe/triangle_quelconque";
+import e1sAnglesOrientes from "./premiere-spe/angles_orientes";
+import e1sTangenteReel from "./premiere-spe/tangente_reel";
+import e1sBarycentre from "./premiere-spe/barycentre";
+import eStmgAutoProportion from "./stmg/auto_proportion";
+import eStmgAutoEvoCoefficient from "./stmg/auto_evo_coefficient";
+import eStmgAutoEvoTaux from "./stmg/auto_evo_taux";
+import eStmgAutoEvoEnchainees from "./stmg/auto_evo_enchainees";
+import eStmgAutoIndice from "./stmg/auto_indice";
+import eStmgAutoFractionsPuissances from "./stmg/auto_fractions_puissances";
+import eStmgAutoOrdresUnites from "./stmg/auto_ordres_unites";
+import eStmgAutoDevelopperFactoriser from "./stmg/auto_developper_factoriser";
+import eStmgAutoEquations from "./stmg/auto_equations";
+import eStmgAutoSignes from "./stmg/auto_signes";
+import eStmgAutoFormules from "./stmg/auto_formules";
+import eStmgAutoLectureGraphique from "./stmg/auto_lecture_graphique";
+import eStmgAutoResolutionGraphique from "./stmg/auto_resolution_graphique";
+import eStmgAutoDroites from "./stmg/auto_droites";
+import eStmgAutoDonneesGraphiques from "./stmg/auto_donnees_graphiques";
+import eStmgSuiteNotation from "./stmg/suite_notation";
+import eStmgSuiteTermes from "./stmg/suite_termes";
+import eStmgSuiteArithmetique from "./stmg/suite_arithmetique";
+import eStmgSuiteGeometrique from "./stmg/suite_geometrique";
+import eStmgSuiteGeoEvolution from "./stmg/suite_geo_evolution";
+import eStmgSuiteRepresentation from "./stmg/suite_representation";
+import eStmgSuiteModeliser from "./stmg/suite_modeliser";
+import eStmgSuiteSeuil from "./stmg/suite_seuil";
+import eStmgSuiteTermeGeneral from "./stmg/suite_terme_general";
+import eStmgFctRepresentation from "./stmg/fct_representation";
+import eStmgFctTauxVariation from "./stmg/fct_taux_variation";
+import eStmgFctMonotonie from "./stmg/fct_monotonie";
+import eStmgFctDegre2Courbe from "./stmg/fct_degre2_courbe";
+import eStmgFctDegre2Symetrie from "./stmg/fct_degre2_symetrie";
+import eStmgFctDegre2Factorisee from "./stmg/fct_degre2_factorisee";
+import eStmgFctDegre2Factoriser from "./stmg/fct_degre2_factoriser";
+import eStmgFctDegre3 from "./stmg/fct_degre3";
+import eStmgFctEquationsPuissance from "./stmg/fct_equations_puissance";
+import eStmgDerSecanteTangente from "./stmg/der_secante_tangente";
+import eStmgDerNombreDerive from "./stmg/der_nombre_derive";
+import eStmgDerTangenteEquation from "./stmg/der_tangente_equation";
+import eStmgDerFormules from "./stmg/der_formules";
+import eStmgDerPolynome from "./stmg/der_polynome";
+import eStmgDerVariations from "./stmg/der_variations";
+import eStmgDerOptimisation from "./stmg/der_optimisation";
+import eStmgDonneesTableauCroise from "./stmg/donnees_tableau_croise";
+import eStmgDonneesFrequences from "./stmg/donnees_frequences";
+import eStmgDonneesFiltres from "./stmg/donnees_filtres";
+import eStmgStatNuage from "./stmg/stat_nuage";
+import eStmgStatAjustement from "./stmg/stat_ajustement";
+import eStmgStatInterpoler from "./stmg/stat_interpoler";
+import eStmgStatMoindresCarres from "./stmg/stat_moindres_carres";
+import eStmgProbaConditionnelleTableau from "./stmg/proba_conditionnelle_tableau";
+import eStmgProbaConditionnelleDistinguer from "./stmg/proba_conditionnelle_distinguer";
+import eStmgProbaEpreuvesIndependantes from "./stmg/proba_epreuves_independantes";
+import eStmgProbaArbre from "./stmg/proba_arbre";
+import eStmgProbaArbreCalcul from "./stmg/proba_arbre_calcul";
+import eStmgProbaIndependance from "./stmg/proba_independance";
+import eStmgVaLoiProbabilite from "./stmg/va_loi_probabilite";
+import eStmgVaEsperance from "./stmg/va_esperance";
+import eStmgVaBernoulli from "./stmg/va_bernoulli";
+import eStmgVaEchantillonnage from "./stmg/va_echantillonnage";
+import eStmgAlgoVariables from "./stmg/algo_variables";
+import eStmgAlgoBoucles from "./stmg/algo_boucles";
+import eStmgAlgoListes from "./stmg/algo_listes";
+import eStmgAlgoFonctions from "./stmg/algo_fonctions";
+import eStmgTableurFormules from "./stmg/tableur_formules";
+import eStmgTableurRecopie from "./stmg/tableur_recopie";
+import eStmgLogiqueConnecteurs from "./stmg/logique_connecteurs";
+import eStmgLogiqueRaisonnement from "./stmg/logique_raisonnement";
+import eStmgAutoTerminaleReconnaitre from "./stmg/auto_terminale_reconnaitre";
+import eStmgAutoTerminaleDerivee from "./stmg/auto_terminale_derivee";
+import eStmgSuiteMoyennes from "./stmg/suite_moyennes";
+import eStmgSuiteSomme from "./stmg/suite_somme";
+import eStmgSuiteSommeSituations from "./stmg/suite_somme_situations";
+import eStmgSuiteComparer from "./stmg/suite_comparer";
+import eStmgFctInverse from "./stmg/fct_inverse";
+import eStmgFctInverseDerivee from "./stmg/fct_inverse_derivee";
+import eStmgExpoDefinition from "./stmg/expo_definition";
+import eStmgExpoVariations from "./stmg/expo_variations";
+import eStmgExpoProprietes from "./stmg/expo_proprietes";
+import eStmgExpoTauxMoyen from "./stmg/expo_taux_moyen";
+import eStmgExpoTauxEquivalent from "./stmg/expo_taux_equivalent";
+import eStmgLogDefinition from "./stmg/log_definition";
+import eStmgLogProprietes from "./stmg/log_proprietes";
+import eStmgLogEquations from "./stmg/log_equations";
+import eStmgLogApplications from "./stmg/log_applications";
+import eStmgStatChangementVariable from "./stmg/stat_changement_variable";
+import eStmgVaBinomialeReconnaitre from "./stmg/va_binomiale_reconnaitre";
+import eStmgVaBinomialeCoefficients from "./stmg/va_binomiale_coefficients";
+import eStmgVaBinomialeCalcul from "./stmg/va_binomiale_calcul";
+import eStmgStatCorrelation from "./stmg/stat_correlation";
 
 const TOUTES: ProblemesNotion[] = [
   // CP
@@ -430,6 +653,12 @@ const TOUTES: ProblemesNotion[] = [
   e4eAlgoProgrammation,
   e4ePuissanceEcriture,
   e4ePythagoreTheoreme,
+  e4eDroiteMilieux,
+  e4eOrdreInequations,
+  e4eDistanceDroite,
+  e4eTangenteCercle,
+  e4eArcsSecteurs,
+  e4eTrianglePointsRemarquables,
   // 5e
   e5eRelatifNombre,
   e5eRelatifOperation,
@@ -481,6 +710,233 @@ const TOUTES: ProblemesNotion[] = [
   e3eAnglesCercle,
   e3eRelationsMetriques,
   e3eAlgoProgrammation,
+  // Seconde
+  e2deReelsIntervalles,
+  e2deArithmetiqueEntiers,
+  e2dePuissances2de,
+  e2deRacineCarree2de,
+  e2deDeveloppementFactorisation2de,
+  e2deIdentitesRemarquables2de,
+  e2deExpressionsLitterales2de,
+  e2deEquationsInequations1erDegre,
+  e2deVecteursPlan,
+  e2deRepereCoordonnees,
+  e2deDroitesPlan,
+  e2deGeometrieProblemesPlan,
+  e2deSignesExpression2de,
+  e2deFonctionVocabulaire2de,
+  e2deAnalyseGraphique2de,
+  e2deFonctionVariationsExtremums,
+  e2deFonctionsAffines2de,
+  e2deFonctionsReference2de,
+  e2deInformationChiffreeEvolutions,
+  e2deStatistiquesDescriptives,
+  e2deCroisementVariables2de,
+  e2deProbabilitesEnsembleFini,
+  e2deProbabilitesConditionnelles2de,
+  e2deEchantillonnageSimulation,
+  e2deAlgorithmiquePython2de,
+  e2deLogiqueEnsembles,
+  e2deDemiPlansSystemes,
+  e2deSystemesDeterminant,
+  e2deCourbesAssociees,
+  e2dePolynomesDivision,
+  e2deEncadrementsOperations,
+  e2deRacinesDenominateur,
+  e2deValeurAbsolueEquations,
+  e2deHomographiquePartieEntiere,
+  e2deFonctionsParIntervalles,
+  e2deDroitesPerpendiculaires,
+  e2deProjectionDroite,
+  e2deEspacePosition2de,
+  e2deComposeesTransformations,
+  // fin Seconde
+  // Première
+  e1reAutoComparer,
+  e1reAutoFractionsPuissances,
+  e1reAutoOrdresUnites,
+  e1reAutoDevelopperFactoriser,
+  e1reAutoEquations,
+  e1reAutoSigneExpression,
+  e1reAutoFormules,
+  e1reAutoProportion,
+  e1reAutoPartieTout,
+  e1reAutoCoefficientMultiplicateur,
+  e1reAutoTauxEvolution,
+  e1reAutoLectureGraphique,
+  e1reAutoResolutionGraphique,
+  e1reAutoDroites,
+  e1reAutoLireStatistiques,
+  e1reAutoIndicateurs,
+  e1reAutoProbaBase,
+  e1reAutoProbaLecture,
+  e1reInfoTableauCroise,
+  e1reInfoFrequences,
+  e1reInfoRepresentationsCroisees,
+  e1reInfoNuage,
+  e1reInfoPointMoyen,
+  e1reInfoAjustementAffine,
+  e1reInfoInterpolerExtrapoler,
+  e1reInfoTableur,
+  e1reInfoFiltreDonnees,
+  e1reAleaConditionnelle,
+  e1reAleaConditionnelleCalcul,
+  e1reAleaArbre,
+  e1reAleaArbreCalcul,
+  e1reAleaIndependance,
+  e1reAleaBernoulli,
+  e1reAleaBernoulliCalcul,
+  e1reLinSuiteArithmetique,
+  e1reLinSuiteTermeGeneral,
+  e1reLinAffine,
+  e1reLinAffineLecture,
+  e1reLinModeliser,
+  e1reLinSeuil,
+  e1reQuadParabole,
+  e1reQuadSommetAxe,
+  e1reQuadVariations,
+  e1reQuadRacinesSigne,
+  e1reExpoSuiteGeometrique,
+  e1reExpoSuiteTermeGeneral,
+  e1reExpoFonction,
+  e1reExpoFonctionLecture,
+  e1reExpoTauxMoyen,
+  e1reExpoModeliser,
+  e1reExpoSeuil,
+  // fin Première
+  // Terminale
+  eTleDenombrementCombinatoire,
+  eTleGeometrieEspace,
+  eTleProduitScalaireEspace,
+  eTleSuiteNumerique,
+  eTleLimiteSuite,
+  eTleLimiteFonction,
+  eTleContinuiteTvi,
+  eTleDerivationFonction,
+  eTleConvexiteFonction,
+  eTleFonctionsSinusCosinus,
+  eTleFonctionExponentielle,
+  eTleFonctionLogarithme,
+  eTlePrimitiveIntegrale,
+  eTleEquationDifferentielle,
+  eTleProbabiliteConditionnelle,
+  eTleVariableAleatoire,
+  eTleLoiBinomiale,
+  eTleConcentrationEchantillonnage,
+  eTleAlgorithmiquePython,
+  // fin Terminale
+  // Première spé
+  e1sSuites,
+  e1sSecondDegre,
+  e1sDerivationNombreDerive,
+  e1sDerivationTangente,
+  e1sDerivationFormules,
+  e1sDerivationOperations,
+  e1sAnalyseGraphique1s,
+  e1sVariationsFonctions,
+  e1sExponentielle,
+  e1sTrigonometrie,
+  e1sProduitScalaire,
+  e1sGeometrieReperee,
+  e1sProbabilitesConditionnelles,
+  e1sVariablesAleatoires,
+  e1sAlgorithmique,
+  e1sLogiqueEnsembles,
+  e1sTrigoFormulesEquations,
+  e1sTriangleQuelconque,
+  e1sAnglesOrientes,
+  e1sTangenteReel,
+  e1sBarycentre,
+  // fin Première spé
+  // STMG
+  eStmgAutoProportion,
+  eStmgAutoEvoCoefficient,
+  eStmgAutoEvoTaux,
+  eStmgAutoEvoEnchainees,
+  eStmgAutoIndice,
+  eStmgAutoFractionsPuissances,
+  eStmgAutoOrdresUnites,
+  eStmgAutoDevelopperFactoriser,
+  eStmgAutoEquations,
+  eStmgAutoSignes,
+  eStmgAutoFormules,
+  eStmgAutoLectureGraphique,
+  eStmgAutoResolutionGraphique,
+  eStmgAutoDroites,
+  eStmgAutoDonneesGraphiques,
+  eStmgSuiteNotation,
+  eStmgSuiteTermes,
+  eStmgSuiteArithmetique,
+  eStmgSuiteGeometrique,
+  eStmgSuiteGeoEvolution,
+  eStmgSuiteRepresentation,
+  eStmgSuiteModeliser,
+  eStmgSuiteSeuil,
+  eStmgSuiteTermeGeneral,
+  eStmgFctRepresentation,
+  eStmgFctTauxVariation,
+  eStmgFctMonotonie,
+  eStmgFctDegre2Courbe,
+  eStmgFctDegre2Symetrie,
+  eStmgFctDegre2Factorisee,
+  eStmgFctDegre2Factoriser,
+  eStmgFctDegre3,
+  eStmgFctEquationsPuissance,
+  eStmgDerSecanteTangente,
+  eStmgDerNombreDerive,
+  eStmgDerTangenteEquation,
+  eStmgDerFormules,
+  eStmgDerPolynome,
+  eStmgDerVariations,
+  eStmgDerOptimisation,
+  eStmgDonneesTableauCroise,
+  eStmgDonneesFrequences,
+  eStmgDonneesFiltres,
+  eStmgStatNuage,
+  eStmgStatAjustement,
+  eStmgStatInterpoler,
+  eStmgStatMoindresCarres,
+  eStmgProbaConditionnelleTableau,
+  eStmgProbaConditionnelleDistinguer,
+  eStmgProbaEpreuvesIndependantes,
+  eStmgProbaArbre,
+  eStmgProbaArbreCalcul,
+  eStmgProbaIndependance,
+  eStmgVaLoiProbabilite,
+  eStmgVaEsperance,
+  eStmgVaBernoulli,
+  eStmgVaEchantillonnage,
+  eStmgAlgoVariables,
+  eStmgAlgoBoucles,
+  eStmgAlgoListes,
+  eStmgAlgoFonctions,
+  eStmgTableurFormules,
+  eStmgTableurRecopie,
+  eStmgLogiqueConnecteurs,
+  eStmgLogiqueRaisonnement,
+  eStmgAutoTerminaleReconnaitre,
+  eStmgAutoTerminaleDerivee,
+  eStmgSuiteMoyennes,
+  eStmgSuiteSomme,
+  eStmgSuiteSommeSituations,
+  eStmgSuiteComparer,
+  eStmgFctInverse,
+  eStmgFctInverseDerivee,
+  eStmgExpoDefinition,
+  eStmgExpoVariations,
+  eStmgExpoProprietes,
+  eStmgExpoTauxMoyen,
+  eStmgExpoTauxEquivalent,
+  eStmgLogDefinition,
+  eStmgLogProprietes,
+  eStmgLogEquations,
+  eStmgLogApplications,
+  eStmgStatChangementVariable,
+  eStmgVaBinomialeReconnaitre,
+  eStmgVaBinomialeCoefficients,
+  eStmgVaBinomialeCalcul,
+  eStmgStatCorrelation,
+  // fin STMG
 ];
 
 const PAR_CLE = new Map(TOUTES.map((n) => [`${n.classe}/${n.notionId}`, n]));

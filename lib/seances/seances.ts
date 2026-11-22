@@ -81,7 +81,20 @@ export type Seance = {
   };
   /** Le « restaurant » : un menu IMPOSÉ et une CARTE libre (17/11, Frédéric :
    *  « parfois dans un restaurant il y a des plats imposés et d'autres à la carte »). */
-  menu?: { impose: string[]; carte: string[]; dessert: string; conseil: string };
+  menu?: {
+    /** L'ENTRÉE, au choix, 5 min, projetée à toute la classe (21/11, Frédéric). */
+    entree?: { texte: string; href?: string }[];
+    impose: string[];
+    /** Une ligne peut être un lien (21/11 : l'article mène au Journal). */
+    carte: (string | { texte: string; href: string })[];
+    dessert: string;
+    dessertHref?: string;
+    conseil: string;
+    /** Sous le menu : les PDF du prof et la connexion des élèves (21/11, Frédéric). */
+    ressources?: { label: string; href: string }[];
+    /** Signature en bas du menu (21/11, Frédéric). */
+    signature?: string;
+  };
   /** « Concrètement, clic par clic ». */
   clicParClic: EtapeClic[];
   /** La mission « va trouver… dans ce que tu aimes ». */
@@ -216,17 +229,35 @@ export const SEANCES: Seance[] = [
       citation: "Chacun a appris à sa façon.",
     },
     menu: {
-      impose: ["Colorier la carte mentale des longueurs et l'expliquer ensemble."],
-      carte: [
-        "Le coach, sur les longueurs",
-        "Les exercices interactifs",
-        "Le cours écrit dans le cahier",
-        "Le découpage (ULIS, avec l'AESH)",
-        "La vidéo, à revoir",
+      entree: [
+        // 21/11, Frédéric : « supprime le mot longueurs », et ces trois entrées.
+        { texte: "Une énigme en slide", href: "/enigmes-maths" },
+        { texte: "Une notion en vidéo", href: "/video" },
+        { texte: "Des exercices interactifs", href: "/fiches-exercices" },
       ],
-      dessert: "Va trouver des longueurs dans ce que tu aimes.",
+      // 21/11, Frédéric : « enlève le plat avec carte mentale » → plus de plat imposé.
+      impose: [],
+      carte: [
+        // 21/11, Frédéric : « si tu le fais, tu le fais pour tous » → chaque ligne est un lien.
+        { texte: "Le coach, seul ou à deux (connecte-toi)", href: "/coach" },
+        { texte: "Les exercices interactifs", href: "/fiches-exercices" },
+        // 21/11, Frédéric : « remplacer le cours écrit dans le cahier par autre chose ».
+        { texte: "La carte mentale, à colorier", href: "/cartes-mentales" },
+        { texte: "Le découpage, avec l'AESH", href: "/seances#restaurant-6e-longueurs" },
+        { texte: "Aller au tableau : corriger les exercices interactifs ou expliquer aux autres", href: "/fiches-exercices" },
+        { texte: "Préparer un concours", href: "/concours-general" },
+        { texte: "Les maths et ta passion : un article !", href: "/accueil-journal" },
+      ],
+      dessert: "Va trouver des maths dans ce que tu aimes.",
+      dessertHref: "/passions",
+      signature: "Le chef cuisinier, Frédéric Lacoste",
       conseil:
-        "C'est vous qui réglez la part d'imposé. Une classe qui a besoin de cadre : ajoutez un plat pour tous, par exemple « 5 questions du coach ». Une classe autonome : la carte mentale suffit.",
+        "L'entrée se fait tous ensemble, puis chacun choisit à la carte. Une classe qui a besoin de cadre : ajoutez un plat pour tous, par exemple « 5 questions du coach ».",
+      ressources: [
+        { label: "La carte mentale (PDF)", href: "/cartes-mentales/maths/6e/aire_longueur" },
+        { label: "La fiche d'exercices (PDF)", href: "/fiches-exercices/maths/6e/aire-longueur" },
+        { label: "Les élèves se connectent : vous suivez leurs progrès", href: "/auth/signin-eleve" },
+      ],
     },
     clicParClic: [
       {

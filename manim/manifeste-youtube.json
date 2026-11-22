@@ -103965,6 +103965,1481 @@
       "url": "https://youtube.com/shorts/QWuJ6Bmc_Y0"
     },
     {
+      "id": "ce2-masse-choisir-unite",
+      "pas_avant": "2027-06-13",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_choisir_unite",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite.mp4",
+      "miniature": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite.png",
+      "titre": "Letchi, sac de riz, camion : g, kg ou t ? — Choisir la bonne unité — épisode 4 · Maths CE2",
+      "accroche": "Tom est chauffeur routier : son gros camion livre des fruits et du riz aux magasins. Pour dire une masse, il faut choisir la bonne unité.\n\nDans cette vidéo :\n• un objet léger (un letchi : environ 20 g) se pèse en grammes\n• un objet qu'on porte (un sac de riz : 5 kg) se pèse en kilogrammes\n• un objet très lourd (un camion : 12 t) se pèse en tonnes\n• piège : un cartable de 3 t pèserait trois voitures ! Il pèse 3 kg\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : trouve l'unité : une banane pèse 150…, Tom pèse 80…, son camion chargé pèse 20…\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_choisir_unite&display=simple\n\n⚖️ Épisode 4 de la série Masses d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "g, kg ou t ?"
+        ],
+        [
+          "00:40",
+          "Question 1"
+        ],
+        [
+          "01:05",
+          "Le piège du cartable"
+        ],
+        [
+          "01:17",
+          "Question 2"
+        ],
+        [
+          "01:47",
+          "À toi de jouer"
+        ],
+        [
+          "02:02",
+          "Correction"
+        ],
+        [
+          "02:14",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "choisir l'unité",
+        "gramme",
+        "kilogramme",
+        "tonne",
+        "unité adaptée",
+        "camion",
+        "chauffeur routier",
+        "letchi",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:40",
+          "question": "Avec quelle unité pèse-t-on un camion ?",
+          "choix": [
+            "le gramme",
+            "la tonne",
+            "le kilogramme"
+          ],
+          "reponse": 1,
+          "explication": "Un camion est très lourd : on le pèse en tonnes."
+        },
+        {
+          "t": "01:17",
+          "question": "Un élève dit : ma gomme pèse 1 kilogramme. Qu'aurait-il dû dire ?",
+          "choix": [
+            "20 grammes",
+            "20 kilogrammes",
+            "1 tonne"
+          ],
+          "reponse": 0,
+          "explication": "Une gomme est légère : environ 20 grammes. 1 kilogramme, c'est une brique de lait !"
+        }
+      ],
+      "centres": [
+        "transports",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "ce2-masse-choisir-unite-short",
+      "pas_avant": "2027-06-13",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_choisir_unite",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-masse-choisir-unite",
+      "fichier": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite-short.mp4",
+      "miniature": "ce2/maths/masse/04-choisir-unite/eleveai-maths-ce2-masse-choisir-unite-short-miniature.png",
+      "titre": "2 tonnes de bananes sur la liste des courses ? #maths #ce2",
+      "accroche": "Mon copain écrit la liste des courses : 2 tonnes de bananes ! Le camion de livraison arrive… et il bouche toute la rue !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : combien pèse un melon, à ton avis, en grammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_choisir_unite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce2 #primaire",
+      "tags": [
+        "masse",
+        "tonne",
+        "kilogramme",
+        "bananes",
+        "unités",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:12",
+          "question": "Il voulait écrire…",
+          "choix": [
+            "2 tonnes",
+            "2 kilogrammes",
+            "2 grammes"
+          ],
+          "reponse": 1,
+          "explication": "2 kilogrammes de bananes, ça tient dans un sac. 2 tonnes, il faut un camion !"
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce2-masse-estimer",
+      "pas_avant": "2027-06-14",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_estimer",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer.mp4",
+      "miniature": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer.png",
+      "titre": "Un bébé pèse-t-il 3 g, 3 kg ou 30 kg ? — Estimer une masse — épisode 5 · Maths CE2",
+      "accroche": "Sarah est sage-femme : elle aide les bébés à naître, puis elle les pèse sur une petite balance. Pour estimer une masse, on la compare à un repère.\n\nDans cette vidéo :\n• trois repères : 1 g = un trombone, 1 kg = une brique de lait, 1 t = une petite voiture\n• un bébé qui vient de naître ≈ trois briques de lait : environ 3 kg\n• un élève de CE2 pèse environ 25 kg ; une mangue, plus légère qu'une brique : environ 400 g\n• 5 mangues ≈ 2 kg = 2 000 g, donc une mangue ≈ 400 g\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une pomme, un vélo, une voiture : 150 g, 12 kg ou 1 t ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_estimer&display=simple\n\n⚖️ Épisode 5 de la série Masses d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "3 g, 3 kg ou 30 kg ?"
+        ],
+        [
+          "00:09",
+          "Sarah, sage-femme"
+        ],
+        [
+          "00:19",
+          "Trois repères"
+        ],
+        [
+          "00:30",
+          "Le bébé : 3 kg"
+        ],
+        [
+          "00:41",
+          "Question 1"
+        ],
+        [
+          "01:17",
+          "Question 2"
+        ],
+        [
+          "01:50",
+          "À toi de jouer"
+        ],
+        [
+          "02:06",
+          "Correction"
+        ],
+        [
+          "02:16",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "estimer une masse",
+        "ordre de grandeur",
+        "gramme",
+        "kilogramme",
+        "tonne",
+        "repère",
+        "bébé",
+        "sage-femme",
+        "mangue",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:41",
+          "question": "Environ combien pèse un élève de CE2 ?",
+          "choix": [
+            "25 grammes",
+            "250 kilogrammes",
+            "25 kilogrammes"
+          ],
+          "reponse": 2,
+          "explication": "Un élève de CE2 pèse environ 25 kilogrammes. 250 kilogrammes, c'est un piano !"
+        },
+        {
+          "t": "01:17",
+          "question": "Au marché, 5 mangues pèsent environ 2 kilogrammes. Combien pèse une mangue ?",
+          "choix": [
+            "environ 2 kilogrammes",
+            "environ 400 grammes",
+            "environ 40 grammes"
+          ],
+          "reponse": 1,
+          "explication": "2 kilogrammes, c'est 2 000 grammes. Partagés en 5 : environ 400 grammes par mangue."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "ce2-masse-estimer-short",
+      "pas_avant": "2027-06-14",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_estimer",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-masse-estimer",
+      "fichier": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer-short.mp4",
+      "miniature": "ce2/maths/masse/05-estimer/eleveai-maths-ce2-masse-estimer-short-miniature.png",
+      "titre": "Mon chat pèse 400 kg ?! #maths #ce2",
+      "accroche": "Ma copine dit que mon chat pèse 400 kilogrammes ! 400 kilogrammes ? C'est la masse d'un ours !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : combien pèse un chien, à ton avis, en kilogrammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce2 #primaire",
+      "tags": [
+        "masse",
+        "estimer",
+        "kilogramme",
+        "chat",
+        "ours",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:12",
+          "question": "Un chat pèse environ…",
+          "choix": [
+            "400 kilogrammes",
+            "4 grammes",
+            "4 kilogrammes"
+          ],
+          "reponse": 2,
+          "explication": "Un chat pèse environ 4 kilogrammes : quatre briques de lait."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce2-masse-probleme",
+      "pas_avant": "2027-06-15",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_probleme",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme.mp4",
+      "miniature": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme.png",
+      "titre": "Une valise de 23 kg au plus : passe-t-elle ? — Problèmes de masses — épisode 6 · Maths CE2",
+      "accroche": "Adam travaille à l'aéroport, au comptoir d'enregistrement : il pèse chaque valise, 23 kg au plus ! Pour un problème de masses, on met tout dans la même unité, on calcule, puis on vérifie.\n\nDans cette vidéo :\n• ajouter : 18 kg + 3 kg = 21 kg, moins que 23 kg : la valise passe\n• enlever : 25 − 23 = 2 kg à retirer\n• 2 kg de livres et 750 g de jouets : 2 000 + 750 = 2 750 g\n• plein moins vide : 1 200 g − 300 g = 900 g de billes ; à l'équilibre : 500 + 200 + 200 = 900 g\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : la valise de Nina pèse 20 kg ; elle y met 4 paquets de 500 g, puis un sac de 2 kg. Passe-t-elle ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_probleme&display=simple\n\n⚖️ Épisode 6 de la série Masses d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "23 kg au plus"
+        ],
+        [
+          "00:09",
+          "Adam, à l'aéroport"
+        ],
+        [
+          "00:19",
+          "Ajouter"
+        ],
+        [
+          "00:42",
+          "Question 1"
+        ],
+        [
+          "01:18",
+          "Plein moins vide"
+        ],
+        [
+          "01:31",
+          "Question 2"
+        ],
+        [
+          "02:04",
+          "À toi de jouer"
+        ],
+        [
+          "02:20",
+          "Correction"
+        ],
+        [
+          "02:35",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "problème",
+        "problèmes de masses",
+        "kilogramme",
+        "gramme",
+        "addition",
+        "soustraction",
+        "valise",
+        "aéroport",
+        "balance",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:42",
+          "question": "Un sac : 2 kilogrammes de livres et 750 grammes de jouets. Combien de grammes en tout ?",
+          "choix": [
+            "950 grammes",
+            "2 750 grammes",
+            "752 grammes"
+          ],
+          "reponse": 1,
+          "explication": "2 kilogrammes, c'est 2 000 grammes. 2 000 + 750 : 2 750 grammes."
+        },
+        {
+          "t": "01:31",
+          "question": "Un paquet est en équilibre avec 500 grammes et deux masses de 200 grammes. Combien pèse-t-il ?",
+          "choix": [
+            "520 grammes",
+            "700 grammes",
+            "900 grammes"
+          ],
+          "reponse": 2,
+          "explication": "500 + 200 + 200 : 900 grammes. On compte bien les deux masses de 200 !"
+        }
+      ],
+      "centres": [
+        "transports",
+        "avions"
+      ]
+    },
+    {
+      "id": "ce2-masse-probleme-short",
+      "pas_avant": "2027-06-15",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_probleme",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-masse-probleme",
+      "fichier": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme-short.mp4",
+      "miniature": "ce2/maths/masse/06-probleme/eleveai-maths-ce2-masse-probleme-short-miniature.png",
+      "titre": "Ma valise de 24 kg passe-t-elle ? #maths #ce2",
+      "accroche": "Ma copine part en vacances. Sa valise pèse 24 kilogrammes. Mais c'est 23 kilogrammes au plus ! Elle enlève… une paire de chaussettes.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : une valise de 27 kg, 23 au plus : combien de kilogrammes enlever ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce2 #primaire",
+      "tags": [
+        "masse",
+        "problème",
+        "kilogramme",
+        "valise",
+        "vacances",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Combien doit-elle enlever, au moins ?",
+          "choix": [
+            "1 kilogramme",
+            "100 grammes",
+            "24 kilogrammes"
+          ],
+          "reponse": 0,
+          "explication": "24 − 23 : il faut enlever 1 kilogramme. Les chaussettes ne suffisent pas !"
+        }
+      ],
+      "centres": [
+        "avions",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce2-masse-defi",
+      "pas_avant": "2027-06-16",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_defi",
+      "classe": "ce2",
+      "ceinture": "orange",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/masse/07-defi/eleveai-maths-ce2-masse-defi.mp4",
+      "miniature": "ce2/maths/masse/07-defi/eleveai-maths-ce2-masse-defi.png",
+      "titre": "En équilibre : combien pèse le savon ? — Le défi des masses — épisode 7 · Maths CE2",
+      "accroche": "Louise est savonnière : chaque savon doit peser 100 g. Sur une balance en équilibre, on additionne les masses ; et on met tout en grammes avant de calculer.\n\nDans cette vidéo :\n• équilibre : un pain de savon contre 500 g + 200 g + 200 g = 900 g\n• 900 g en savons de 100 g : 9 savons (9 × 100 = 900)\n• 10 savons (1 000 g) dans une boîte de 200 g : 1 200 g = 1 kg 200 g\n• 1 kg 200 g et 1 200 g : la même masse, deux écritures\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : une boîte vide pèse 300 g ; pleine de savons de 100 g, elle pèse 1 kg 500 g. Combien de savons ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_defi&display=simple\n\n⚖️ Épisode 7 de la série Masses d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le défi des masses"
+        ],
+        [
+          "00:16",
+          "L'équilibre"
+        ],
+        [
+          "00:34",
+          "Question 1"
+        ],
+        [
+          "01:01",
+          "La boîte de savons"
+        ],
+        [
+          "01:14",
+          "Question 2"
+        ],
+        [
+          "01:47",
+          "À toi de jouer"
+        ],
+        [
+          "02:04",
+          "Correction"
+        ],
+        [
+          "02:20",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "défi",
+        "balance",
+        "équilibre",
+        "gramme",
+        "kilogramme",
+        "conversion",
+        "savon",
+        "savonnière",
+        "addition",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Louise coupe ce pain de 900 grammes en savons de 100 grammes. Combien de savons ?",
+          "choix": [
+            "10",
+            "9",
+            "90"
+          ],
+          "reponse": 1,
+          "explication": "9 × 100 grammes : 900 grammes. Louise fait 9 savons."
+        },
+        {
+          "t": "01:14",
+          "question": "Trois élèves pèsent cette boîte. Léa écrit 1 kilogramme 200 grammes, Kevin 1 200 grammes, Malia 1 020 grammes. Qui a raison ?",
+          "choix": [
+            "Léa seulement",
+            "Malia",
+            "Léa et Kevin"
+          ],
+          "reponse": 2,
+          "explication": "1 kilogramme 200 grammes, c'est 1 200 grammes : Léa et Kevin ont raison."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "ce2-masse-defi-short",
+      "pas_avant": "2027-06-16",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_defi",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-masse-defi",
+      "fichier": "ce2/maths/masse/07-defi/eleveai-maths-ce2-masse-defi-short.mp4",
+      "miniature": "ce2/maths/masse/07-defi/eleveai-maths-ce2-masse-defi-short-miniature.png",
+      "titre": "Combien pèse mon ananas ? #maths #ce2",
+      "accroche": "Sur la balance, mon ananas fait équilibre avec trois mangues pareilles. Une mangue pèse 400 grammes.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : 4 bananes de 150 g font équilibre avec une papaye : combien pèse la papaye ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce2 #primaire",
+      "tags": [
+        "masse",
+        "équilibre",
+        "gramme",
+        "ananas",
+        "mangue",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "Combien pèse l'ananas ?",
+          "choix": [
+            "400 grammes",
+            "1 200 grammes",
+            "1 kilogramme"
+          ],
+          "reponse": 1,
+          "explication": "3 mangues de 400 grammes : 400, 800, 1 200. L'ananas pèse 1 200 grammes."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-masse-comparer",
+      "pas_avant": "2027-06-17",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_comparer",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/masse/01-comparer/eleveai-maths-cm1-masse-comparer.mp4",
+      "miniature": "cm1/maths/masse/01-comparer/eleveai-maths-cm1-masse-comparer.png",
+      "titre": "2 kg 50 g ou 2 500 g : le plus lourd ? — Comparer des masses — épisode 1 · Maths CM1",
+      "accroche": "Ilyes est jockey : avant chaque course, on le pèse avec sa selle. Pour comparer des masses, on met d'abord la même unité, puis on compare les nombres, chiffre par chiffre.\n\nDans cette vidéo :\n• les signes : 54 kg < 56 kg\n• 2 kg 50 g = 2 050 g, et 2 050 < 2 500 : attention au piège !\n• 3 kg = 3 000 g, plus que 2 900 g\n• les très lourds : 3 t 500 kg = 3 500 kg, plus que 3 t = 3 000 kg\n• 1 kg 200 g, 1 020 g, 1 kg 2 g : en grammes 1 200, 1 020, 1 002\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : Ilyes 57 kg 300 g, Jules 57 030 g, Inaya 57 kg 3 g : range-les du plus léger au plus lourd.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_comparer&display=simple\n\n⚖️ Épisode 1 de la série Masses d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le plus lourd ?"
+        ],
+        [
+          "00:09",
+          "Ilyes, jockey"
+        ],
+        [
+          "00:30",
+          "Tout en grammes"
+        ],
+        [
+          "00:49",
+          "Question 1"
+        ],
+        [
+          "01:18",
+          "Les très lourds"
+        ],
+        [
+          "01:31",
+          "Question 2"
+        ],
+        [
+          "02:04",
+          "À toi de jouer"
+        ],
+        [
+          "02:27",
+          "Correction"
+        ],
+        [
+          "02:45",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "comparer des masses",
+        "plus lourd",
+        "plus léger",
+        "gramme",
+        "kilogramme",
+        "tonne",
+        "conversion",
+        "jockey",
+        "cheval",
+        "ranger",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:49",
+          "question": "Qu'est-ce qui est le plus lourd : 3 kilogrammes, ou 2 900 grammes ?",
+          "choix": [
+            "c'est pareil",
+            "3 kilogrammes",
+            "2 900 grammes"
+          ],
+          "reponse": 1,
+          "explication": "3 kilogrammes, c'est 3 000 grammes. 3 000 est plus grand que 2 900."
+        },
+        {
+          "t": "01:31",
+          "question": "La plus légère : 1 kilogramme 200 grammes, 1 020 grammes, ou 1 kilogramme 2 grammes ?",
+          "choix": [
+            "1 020 grammes",
+            "1 kilogramme 200 grammes",
+            "1 kilogramme 2 grammes"
+          ],
+          "reponse": 2,
+          "explication": "En grammes : 1 200, 1 020 et 1 002. La plus petite : 1 002 grammes."
+        }
+      ],
+      "centres": [
+        "sport",
+        "chevaux"
+      ]
+    },
+    {
+      "id": "cm1-masse-comparer-short",
+      "pas_avant": "2027-06-17",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_comparer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-masse-comparer",
+      "fichier": "cm1/maths/masse/01-comparer/eleveai-maths-cm1-masse-comparer-short.mp4",
+      "miniature": "cm1/maths/masse/01-comparer/eleveai-maths-cm1-masse-comparer-short-miniature.png",
+      "titre": "3 500 g ou 4 kg : quel cartable est le plus lourd ? #maths #cm1",
+      "accroche": "Mon copain se vante : mon cartable pèse 3 500 grammes, le tien seulement 4 kilogrammes ! 3 500, c'est bien plus que 4… vraiment ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : qui est le plus lourd, 2 tonnes ou 1 900 kilogrammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cm1 #primaire",
+      "tags": [
+        "masse",
+        "comparer",
+        "gramme",
+        "kilogramme",
+        "cartable",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Quel cartable est le plus lourd ?",
+          "choix": [
+            "celui de 4 kilogrammes",
+            "ils pèsent pareil",
+            "celui de 3 500 grammes"
+          ],
+          "reponse": 0,
+          "explication": "4 kilogrammes, c'est 4 000 grammes. 4 000 est plus grand que 3 500."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-masse-mesurer",
+      "pas_avant": "2027-06-18",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_mesurer",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/masse/02-mesurer/eleveai-maths-cm1-masse-mesurer.mp4",
+      "miniature": "cm1/maths/masse/02-mesurer/eleveai-maths-cm1-masse-mesurer.png",
+      "titre": "Où pointe l'aiguille de la balance ? — Lire une balance — épisode 2 · Maths CM1",
+      "accroche": "Kenza est herboriste : elle pèse ses plantes à tisane sur une balance à aiguille. Pour lire une balance, on cherche d'abord ce que vaut un petit trait ; sur une balance à plateaux, on additionne les masses marquées.\n\nDans cette vidéo :\n• la graduation : de 100 en 100 g, 5 intervalles, chacun vaut 20 g\n• 3 petits traits après 400 : 400 + 3 × 20 = 460 g\n• pile au milieu de 500 et 600 : 550 g\n• balance à plateaux : 500 g + 200 g + 50 g = 750 g\n• 2 kg, 200 g et 100 g : 2 000 + 200 + 100 = 2 300 g\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : sur le pèse-personne, de 10 en 10 kg, 10 petits traits : l'aiguille est 4 traits après 30. Quelle masse ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_mesurer&display=simple\n\n⚖️ Épisode 2 de la série Masses d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Où pointe l'aiguille ?"
+        ],
+        [
+          "00:15",
+          "La graduation"
+        ],
+        [
+          "00:35",
+          "Question 1"
+        ],
+        [
+          "01:08",
+          "Les masses marquées"
+        ],
+        [
+          "01:21",
+          "Question 2"
+        ],
+        [
+          "01:54",
+          "À toi de jouer"
+        ],
+        [
+          "02:12",
+          "Correction"
+        ],
+        [
+          "02:24",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "lire une balance",
+        "mesurer une masse",
+        "graduation",
+        "balance à aiguille",
+        "gramme",
+        "kilogramme",
+        "masses marquées",
+        "herboriste",
+        "plantes",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "Les nombres vont de 100 en 100 grammes. L'aiguille est pile au milieu de 500 et 600. Quelle masse ?",
+          "choix": [
+            "600 grammes",
+            "505 grammes",
+            "550 grammes"
+          ],
+          "reponse": 2,
+          "explication": "Au milieu de 500 et 600, c'est 550 grammes."
+        },
+        {
+          "t": "01:21",
+          "question": "Pour équilibrer un paquet, il faut 2 kilogrammes, 200 grammes et 100 grammes. Quelle masse ?",
+          "choix": [
+            "2 030 grammes",
+            "2 300 grammes",
+            "302 grammes"
+          ],
+          "reponse": 1,
+          "explication": "2 kilogrammes, c'est 2 000 grammes. 2 000 + 200 + 100 : 2 300 grammes."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "cm1-masse-mesurer-short",
+      "pas_avant": "2027-06-18",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_mesurer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-masse-mesurer",
+      "fichier": "cm1/maths/masse/02-mesurer/eleveai-maths-cm1-masse-mesurer-short.mp4",
+      "miniature": "cm1/maths/masse/02-mesurer/eleveai-maths-cm1-masse-mesurer-short-miniature.png",
+      "titre": "Combien pèse ma pastèque ? #maths #cm1",
+      "accroche": "Je pèse ma pastèque : l'aiguille s'arrête entre 2 et 3 kilogrammes, pile au milieu. Mon copain lit le nombre le plus proche : 3 kilogrammes !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : l'aiguille est au milieu de 1 et 2 kilogrammes : combien de grammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_mesurer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cm1 #primaire",
+      "tags": [
+        "masse",
+        "lire une balance",
+        "kilogramme",
+        "gramme",
+        "pastèque",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Combien pèse la pastèque ?",
+          "choix": [
+            "2 kilogrammes 500 grammes",
+            "3 kilogrammes",
+            "2 kilogrammes 300 grammes"
+          ],
+          "reponse": 0,
+          "explication": "Au milieu de 2 et 3 kilogrammes : 2 kilogrammes 500 grammes, soit 2 500 grammes."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-masse-convertir",
+      "pas_avant": "2027-06-19",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_convertir",
+      "classe": "cm1",
+      "ceinture": "verte",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/masse/03-convertir/eleveai-maths-cm1-masse-convertir.mp4",
+      "miniature": "cm1/maths/masse/03-convertir/eleveai-maths-cm1-masse-convertir.png",
+      "titre": "2 kg, c'est combien de grammes ? — Convertir des masses — épisode 3 · Maths CM1",
+      "accroche": "Margaux est diététicienne : elle prépare les menus d'une cantine, avec les bonnes quantités. Des kilogrammes aux grammes, on multiplie par 1 000 ; des grammes aux kilogrammes, on divise par 1 000. Pareil entre tonnes et kilogrammes.\n\nDans cette vidéo :\n• 1 kg = 1 000 g : 2 kg de pâtes = 2 × 1 000 = 2 000 g\n• dans l'autre sens : 5 000 g de riz = 5 000 ÷ 1 000 = 5 kg\n• 3 kg = 3 × 1 000 = 3 000 g\n• la tonne : 1 t = 1 000 kg, 2 t de légumes = 2 000 kg\n• le tableau t, kg, hg, dag, g : 1 kg = 1 000 g\n• 4 000 g, c'est 4 kg, pas 40 kg !\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : Margaux prévoit 120 g de poisson par élève. Il y a 50 élèves. Combien de kilogrammes commander ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_convertir&display=simple\n\n⚖️ Épisode 3 de la série Masses d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Convertir des masses"
+        ],
+        [
+          "00:11",
+          "Margaux, diététicienne"
+        ],
+        [
+          "00:22",
+          "Des kg aux g : × 1 000"
+        ],
+        [
+          "00:43",
+          "Question 1"
+        ],
+        [
+          "01:07",
+          "La tonne"
+        ],
+        [
+          "01:20",
+          "Le tableau des unités"
+        ],
+        [
+          "01:33",
+          "Question 2"
+        ],
+        [
+          "02:07",
+          "À toi de jouer"
+        ],
+        [
+          "02:32",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "convertir des masses",
+        "conversion",
+        "gramme",
+        "kilogramme",
+        "tonne",
+        "tableau de conversion",
+        "multiplier par 1000",
+        "diviser par 1000",
+        "diététicienne",
+        "cantine",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:43",
+          "question": "Combien de grammes dans 3 kilogrammes ?",
+          "choix": [
+            "300 grammes",
+            "3 000 grammes",
+            "30 grammes"
+          ],
+          "reponse": 1,
+          "explication": "3 × 1 000 : 3 000 grammes."
+        },
+        {
+          "t": "01:33",
+          "question": "Un élève écrit : 4 000 grammes, c'est 40 kilogrammes. A-t-il raison ?",
+          "choix": [
+            "non, c'est 400 kilogrammes",
+            "oui",
+            "non, c'est 4 kilogrammes"
+          ],
+          "reponse": 2,
+          "explication": "Des grammes aux kilogrammes, on divise par 1 000. 4 000 ÷ 1 000 : 4 kilogrammes."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "cm1-masse-convertir-short",
+      "pas_avant": "2027-06-19",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_convertir",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-masse-convertir",
+      "fichier": "cm1/maths/masse/03-convertir/eleveai-maths-cm1-masse-convertir-short.mp4",
+      "miniature": "cm1/maths/masse/03-convertir/eleveai-maths-cm1-masse-convertir-short-miniature.png",
+      "titre": "3 kg de pommes : combien de sachets de 500 g ? #maths #cm1",
+      "accroche": "Mon copain a 3 kilogrammes de pommes. Il veut des sachets de 500 grammes. Il calcule : 3 divisé par 500… zéro sachet !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien de grammes dans 7 kilogrammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_convertir&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cm1 #primaire",
+      "tags": [
+        "masse",
+        "convertir",
+        "kilogramme",
+        "gramme",
+        "pommes",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Combien de sachets de 500 grammes ?",
+          "choix": [
+            "15",
+            "6",
+            "0"
+          ],
+          "reponse": 1,
+          "explication": "3 kilogrammes, c'est 3 000 grammes. 3 000, c'est 6 × 500 : 6 sachets."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-masse-estimer",
+      "pas_avant": "2027-06-20",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_estimer",
+      "classe": "cm1",
+      "ceinture": "jaune",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/masse/04-estimer/eleveai-maths-cm1-masse-estimer.mp4",
+      "miniature": "cm1/maths/masse/04-estimer/eleveai-maths-cm1-masse-estimer.png",
+      "titre": "Un colibri pèse-t-il 3 g, 3 kg ou 3 t ? — Estimer une masse — épisode 4 · Maths CM1",
+      "accroche": "Enzo est ornithologue : il étudie les oiseaux, il les pèse doucement, puis il les relâche. Pour estimer une masse, on choisit d'abord la bonne unité, puis on compare à un repère connu.\n\nDans cette vidéo :\n• la bonne unité : un colibri, quelques grammes ; un aigle, quelques kilogrammes ; un avion, des tonnes\n• un repère : 1 g, c'est un trombone ; le colibri pèse environ 3 g\n• 1 kg, c'est une brique de lait ; un aigle pèse environ 5 kg\n• un œuf de poule pèse environ 60 g\n• attention à l'unité : 5 kg, c'est un chat ; un éléphant pèse environ 5 t\n• pour un éléphant, la tonne est l'unité adaptée\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : Un moineau, un chien, une baleine. 30 g, 30 kg, 30 t. Qui pèse quoi ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_estimer&display=simple\n\n⚖️ Épisode 4 de la série Masses d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Estimer une masse"
+        ],
+        [
+          "00:17",
+          "D'abord, la bonne unité"
+        ],
+        [
+          "00:29",
+          "Puis un repère"
+        ],
+        [
+          "00:42",
+          "Question 1"
+        ],
+        [
+          "01:11",
+          "Attention à l'unité !"
+        ],
+        [
+          "01:24",
+          "Question 2"
+        ],
+        [
+          "01:50",
+          "À toi de jouer"
+        ],
+        [
+          "02:05",
+          "Correction"
+        ],
+        [
+          "02:15",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "estimer une masse",
+        "ordre de grandeur",
+        "gramme",
+        "kilogramme",
+        "tonne",
+        "repère",
+        "oiseaux",
+        "ornithologue",
+        "éléphant",
+        "colibri",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:42",
+          "question": "Environ combien pèse un œuf de poule ?",
+          "choix": [
+            "600 grammes",
+            "6 grammes",
+            "60 grammes"
+          ],
+          "reponse": 2,
+          "explication": "Un œuf pèse environ 60 grammes. 600 grammes, c'est plus qu'une demi-brique de lait !"
+        },
+        {
+          "t": "01:24",
+          "question": "Quelle unité choisir pour la masse d'un éléphant ?",
+          "choix": [
+            "la tonne",
+            "le litre",
+            "le gramme"
+          ],
+          "reponse": 0,
+          "explication": "Un éléphant pèse environ 5 tonnes : la tonne est l'unité adaptée."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "cm1-masse-estimer-short",
+      "pas_avant": "2027-06-20",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_estimer",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-masse-estimer",
+      "fichier": "cm1/maths/masse/04-estimer/eleveai-maths-cm1-masse-estimer-short.mp4",
+      "miniature": "cm1/maths/masse/04-estimer/eleveai-maths-cm1-masse-estimer-short-miniature.png",
+      "titre": "La balance affiche 0 g : la plume ne pèse rien ? #maths #cm1",
+      "accroche": "Mon copain pèse une plume d'oiseau. La balance affiche… zéro ! Pourtant, la plume a une masse.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien pèse un œuf, à ton avis, en grammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cm1 #primaire",
+      "tags": [
+        "masse",
+        "estimer",
+        "gramme",
+        "plume",
+        "balance",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Une plume pèse…",
+          "choix": [
+            "environ 1 kilogramme",
+            "environ 100 grammes",
+            "moins de 1 gramme"
+          ],
+          "reponse": 2,
+          "explication": "Une plume pèse moins de 1 gramme : moins qu'un trombone !"
+        }
+      ],
+      "centres": [
+        "animaux",
+        "sciences"
+      ]
+    },
+    {
+      "id": "cm1-masse-defi",
+      "pas_avant": "2027-06-21",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_defi",
+      "classe": "cm1",
+      "ceinture": "bleue",
+      "serie": "Maths CM1",
+      "type": "longue",
+      "fichier": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi.mp4",
+      "miniature": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi.png",
+      "titre": "Monte-charge de 1 t : combien de sacs de ciment ? — Le défi des masses — épisode 5 · Maths CM1",
+      "accroche": "Alice est cheffe de chantier : elle fait monter les sacs de ciment au troisième étage avec un monte-charge. Dans un défi à étapes, on convertit d'abord, on calcule étape par étape, puis on vérifie.\n\nDans cette vidéo :\n• le monte-charge porte au plus 1 tonne, c'est-à-dire 1 000 kg\n• un sac de ciment pèse 25 kg : 1 000 ÷ 25 = 40 sacs à la fois\n• 30 sacs de 25 kg : 30 × 25 = 750 kg, moins que 1 tonne\n• étape par étape : 750 + 80 + 20 = 850 kg avec l'ouvrier et sa brouette\n• 8 sacs de plus : 850 + 200 = 1 050 kg, plus que 1 tonne : non !\n• on convertit d'abord, on calcule étape par étape, puis on vérifie\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : Il faut monter 3 t de carrelage en paquets de 20 kg. Le monte-charge porte 1 t. Combien de paquets, et combien de voyages ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_defi&display=simple\n\n⚖️ Épisode 5 de la série Masses d'EleveAI, en CM1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le défi des masses"
+        ],
+        [
+          "00:08",
+          "Alice, cheffe de chantier"
+        ],
+        [
+          "00:36",
+          "Question 1"
+        ],
+        [
+          "01:08",
+          "Étape par étape"
+        ],
+        [
+          "01:22",
+          "Question 2"
+        ],
+        [
+          "01:58",
+          "À toi de jouer"
+        ],
+        [
+          "02:16",
+          "Correction"
+        ],
+        [
+          "02:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "problème de masses",
+        "tonne",
+        "kilogramme",
+        "convertir",
+        "division",
+        "multiplication",
+        "chantier",
+        "monte-charge",
+        "défi",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:36",
+          "question": "Alice charge 30 sacs de 25 kilogrammes. Quelle masse ?",
+          "choix": [
+            "55 kilogrammes",
+            "7 500 kilogrammes",
+            "750 kilogrammes"
+          ],
+          "reponse": 2,
+          "explication": "30 × 25 : 750 kilogrammes. C'est moins que 1 tonne : ça passe."
+        },
+        {
+          "t": "01:22",
+          "question": "Peut-elle encore ajouter 8 sacs de 25 kilogrammes ?",
+          "choix": [
+            "non, 1 050 kilogrammes, c'est trop",
+            "oui, 858 kilogrammes",
+            "oui, 1 000 kilogrammes tout juste"
+          ],
+          "reponse": 0,
+          "explication": "8 × 25 : 200 kilogrammes. 850 + 200 : 1 050 kilogrammes, plus que 1 tonne. Non !"
+        }
+      ],
+      "centres": [
+        "construction",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm1-masse-defi-short",
+      "pas_avant": "2027-06-21",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_defi",
+      "classe": "cm1",
+      "ceinture": "blanche",
+      "serie": "Maths CM1",
+      "type": "short",
+      "renvoie_vers": "cm1-masse-defi",
+      "fichier": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi-short.mp4",
+      "miniature": "cm1/maths/masse/05-defi/eleveai-maths-cm1-masse-defi-short-miniature.png",
+      "titre": "Le piano dans l'ascenseur : ça passe ? #maths #cm1",
+      "accroche": "Avec mes copains, on prend l'ascenseur : 300 kg au plus. Nous : 40, 45 et 35 kg. Et ma copine veut monter le piano de 200 kg !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien de kilogrammes en trop, avec le piano ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cm1 #primaire",
+      "tags": [
+        "masse",
+        "problème",
+        "kilogramme",
+        "ascenseur",
+        "piano",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM1",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Peut-on monter avec le piano ?",
+          "choix": [
+            "non, 320 kilogrammes, c'est trop",
+            "oui, il reste de la place",
+            "oui, 300 kilogrammes tout juste"
+          ],
+          "reponse": 0,
+          "explication": "40 + 45 + 35 : 120 kilogrammes. Plus 200 : 320, c'est plus que 300 !"
+        }
+      ],
+      "centres": [
+        "musique",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cm2-masse-comparer",
+      "pas_avant": "2027-06-22",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_comparer",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer.mp4",
+      "miniature": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer.png",
+      "titre": "1,25 kg ou 1 200 g : lequel est le plus lourd ? — Comparer des masses — épisode 1 · Maths CM2",
+      "accroche": "Théa est ingénieure en aéronautique : dans un avion, chaque gramme compte. Pour comparer des masses, on met la même unité, la virgule bien placée, puis on compare chiffre par chiffre.\n\nDans cette vidéo :\n• 1,25 kg, c'est 1 250 g : 1 250 g est plus que 1 200 g\n• le piège de la virgule : 1,5 kg s'écrit aussi 1,50 kg\n• 50 centièmes, c'est plus que 25 centièmes : 1,5 kg est plus lourd que 1,25 kg\n• avec les tonnes : 8 500 kg = 8,5 t, et 42 t + 8,5 t = 50,5 t\n• pour ranger des masses, on les écrit toutes dans la même unité\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : Trois bagages : 23,5 kg, 23 050 g et 23,45 kg. Range-les du plus léger au plus lourd.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_comparer&display=simple\n\n⚖️ Épisode 1 de la série Masses d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Comparer des masses"
+        ],
+        [
+          "00:09",
+          "Théa, ingénieure en aéronautique"
+        ],
+        [
+          "00:20",
+          "La même unité"
+        ],
+        [
+          "00:37",
+          "Le piège de la virgule"
+        ],
+        [
+          "00:55",
+          "Question 1"
+        ],
+        [
+          "01:24",
+          "Avec les tonnes"
+        ],
+        [
+          "01:41",
+          "Question 2"
+        ],
+        [
+          "02:19",
+          "À toi de jouer"
+        ],
+        [
+          "02:37",
+          "Correction"
+        ],
+        [
+          "02:56",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "comparer des masses",
+        "nombre décimal",
+        "virgule",
+        "kilogramme",
+        "gramme",
+        "tonne",
+        "convertir",
+        "avion",
+        "aéronautique",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:55",
+          "question": "1,5 kilogramme ou 1 500 grammes : lequel est le plus lourd ?",
+          "choix": [
+            "c'est pareil",
+            "1 500 grammes",
+            "1,5 kilogramme"
+          ],
+          "reponse": 0,
+          "explication": "1,5 kilogramme, c'est 1 500 grammes : même masse."
+        },
+        {
+          "t": "01:41",
+          "question": "La plus légère : 2,3 tonnes, 2 350 kilogrammes, ou 2,08 tonnes ?",
+          "choix": [
+            "2 350 kilogrammes",
+            "2,3 tonnes",
+            "2,08 tonnes"
+          ],
+          "reponse": 2,
+          "explication": "En kilogrammes : 2 300, 2 350 et 2 080. La plus légère : 2,08 tonnes."
+        }
+      ],
+      "centres": [
+        "avions",
+        "transports"
+      ]
+    },
+    {
+      "id": "cm2-masse-comparer-short",
+      "pas_avant": "2027-06-22",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_comparer",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-masse-comparer",
+      "fichier": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer-short.mp4",
+      "miniature": "cm2/maths/masse/01-comparer/eleveai-maths-cm2-masse-comparer-short-miniature.png",
+      "titre": "1,5 kg ou 1,25 kg : quel melon est le plus lourd ? #maths #cm2",
+      "accroche": "Ma copine a un melon de 1,5 kg. Moi, un de 1,25 kg. 25, c'est plus que 5 : j'ai le plus gros !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : qui est le plus lourd, 2,8 kg ou 2 750 g ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cm2 #primaire",
+      "tags": [
+        "masse",
+        "comparer",
+        "nombre décimal",
+        "virgule",
+        "melon",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "Quel melon est le plus lourd ?",
+          "choix": [
+            "celui de 1,5 kilogramme",
+            "celui de 1,25 kilogramme",
+            "ils pèsent pareil"
+          ],
+          "reponse": 0,
+          "explication": "1,5 kilogramme, c'est 1 500 grammes. 1,25 kilogramme, 1 250 grammes. 1 500 gagne !"
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
       "id": "cm1-entier-lire",
       "pas_avant": "2027-06-13",
       "prioritaire": true,

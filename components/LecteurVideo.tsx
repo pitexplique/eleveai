@@ -158,6 +158,38 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "5e-puissance-calculer-short": 4.17,
   "5e-puissance-litteral": 8.4,
   "5e-puissance-litteral-short": 4.18,
+  // Masses CE2 04 (21/11, 1re vidéo de la série avec manim/fin_commune.py) : paysage = milieu du silence
+  // après « point f r. » (145,63 → 146,58 s, mp4 de 154,32 s) ; short = « Mets » (52,29 s) + 0,03 s.
+  "ce2-masse-choisir-unite": 8.2,
+  "ce2-masse-choisir-unite-short": 4.22,
+  // Masses CE2 05 (21/11) : paysage = milieu du silence après « point f r. » (148,99 → 149,91 s, mp4 de
+  // 157,65 s) ; short = « Mets » (51,94 s) + 0,03 s, mp4 de 56,14 s.
+  "ce2-masse-estimer": 8.2,
+  "ce2-masse-estimer-short": 4.17,
+  // Masses CE2 06 (21/11) : paysage = milieu du silence après « point f r. » (168,08 → 169,03 s, mp4 de
+  // 176,77 s) ; short = « Mets » (62,62 s) + 0,03 s, mp4 de 66,80 s.
+  "ce2-masse-probleme": 8.2,
+  "ce2-masse-probleme-short": 4.15,
+  "ce2-masse-defi": 8.2,
+  "ce2-masse-defi-short": 4.15,
+  // Masses CM1 01 (21/11) : paysage = milieu du silence après « point f r. » (178,94 → 179,90 s, mp4 de
+  // 187,63 s) ; short = « Mets » (60,77 + 2,351 = 63,12 s) + 0,03 s, mp4 de 67,31 s.
+  "cm1-masse-comparer": 8.2,
+  "cm1-masse-comparer-short": 4.16,
+  // Masses CM1 02 (21/11) : paysage = milieu du silence après « point f r. » (158,91 → 159,86 s, mp4 de
+  // 167,60 s) ; short = « Mets » (57,74 + 2,351 = 60,09 s) + 0,03 s, mp4 de 64,30 s.
+  "cm1-masse-mesurer": 8.2,
+  "cm1-masse-mesurer-short": 4.18,
+  // Masses CM1 03 (21/11) : paysage = milieu du silence après « point f r. » (168,31 → 169,26 s, mp4 de
+  // 177,00 s) ; short = « Mets » (56,08 + 2,351 = 58,43 s) + 0,03 s, mp4 de 62,61 s.
+  "cm1-masse-convertir": 8.2,
+  "cm1-masse-convertir-short": 4.15,
+  "cm1-masse-estimer": 8.2,
+  "cm1-masse-estimer-short": 4.15,
+  "cm1-masse-defi": 8.2,
+  "cm1-masse-defi-short": 4.18,
+  "cm2-masse-comparer": 8.2,
+  "cm2-masse-comparer-short": 4.16,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {
