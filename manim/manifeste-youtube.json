@@ -108593,6 +108593,316 @@
       "centres": [
         "jeux-defis"
       ]
+    },
+    {
+      "id": "3e-identites-factoriser",
+      "pas_avant": "2027-06-30",
+      "prioritaire": true,
+      "notionId": "litteral_calcul",
+      "microId": "litteral_identite",
+      "classe": "3e",
+      "ceinture": "verte",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/expression-litterale/07-factoriser-identite/eleveai-maths-3e-identites-factoriser.mp4",
+      "miniature": "3e/maths/expression-litterale/07-factoriser-identite/eleveai-maths-3e-identites-factoriser.png",
+      "titre": "x² − 9 = (x − 3)(x + 3) : factoriser avec une identité — épisode 7 · Maths 3e",
+      "accroche": "Inès est carreleuse. Elle pose une terrasse carrée de x mètres de côté et laisse un carré de 3 mètres sur 3 pour un arbre. L'aire carrelée, x² − 9, peut-elle devenir un rectangle ? On découpe, on tourne, on colle.\n\nDans cette vidéo :\n• le carré troué devient un rectangle : x² − 9 = (x − 3)(x + 3)\n• l'identité a² − b² = (a − b)(a + b), avec a = x et b = 3\n• on vérifie en développant : les 3x s'annulent\n• les carreaux : x² + 6x + 9 se range en un carré de côté x + 3\n• reconnaître un carré : deux carrés et le double produit au milieu ; x² − 10x + 25 = (x − 5)²\n• le piège : x² + 16 ne se factorise pas\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : factorise 4x² − 25 et x² − 14x + 49.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/litteral-calcul\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=litteral_calcul&microId=litteral_identite&display=simple\n\n🔢 Épisode 7 de la série Expression littérale d'EleveAI, en 3e (identités remarquables).",
+      "chapitres": [
+        [
+          "00:00",
+          "Un carré troué"
+        ],
+        [
+          "00:08",
+          "Inès, carreleuse"
+        ],
+        [
+          "00:29",
+          "Découper, tourner, coller"
+        ],
+        [
+          "00:52",
+          "a² − b² = (a − b)(a + b)"
+        ],
+        [
+          "01:23",
+          "Question 1"
+        ],
+        [
+          "02:00",
+          "Les carreaux"
+        ],
+        [
+          "02:25",
+          "Reconnaître un carré"
+        ],
+        [
+          "02:51",
+          "Question 2"
+        ],
+        [
+          "03:27",
+          "À toi de jouer"
+        ],
+        [
+          "03:43",
+          "Correction"
+        ],
+        [
+          "04:09",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/litteral-calcul",
+      "tags": [
+        "identités remarquables",
+        "factoriser",
+        "différence de deux carrés",
+        "a² − b²",
+        "carré d'une somme",
+        "calcul littéral",
+        "carreleuse",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:23",
+          "question": "Factorise x² − 64.",
+          "choix": [
+            "(x − 8)²",
+            "(x − 32)(x + 32)",
+            "(x − 8)(x + 8)"
+          ],
+          "reponse": 2,
+          "explication": "64 = 8², donc x² − 64 = (x − 8)(x + 8)."
+        },
+        {
+          "t": "02:51",
+          "question": "Quelle expression est égale à (x + 4)² ?",
+          "choix": [
+            "x² + 8x + 16",
+            "x² + 16",
+            "x² + 4x + 16"
+          ],
+          "reponse": 0,
+          "explication": "Le double produit : 2 × x × 4 = 8x."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "3e-identites-factoriser-short",
+      "pas_avant": "2027-06-30",
+      "prioritaire": true,
+      "notionId": "litteral_calcul",
+      "microId": "litteral_identite",
+      "classe": "3e",
+      "ceinture": "orange",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-identites-factoriser",
+      "fichier": "3e/maths/expression-litterale/07-factoriser-identite/eleveai-maths-3e-identites-factoriser-short.mp4",
+      "miniature": "3e/maths/expression-litterale/07-factoriser-identite/eleveai-maths-3e-identites-factoriser-short.png",
+      "titre": "Un carré troué devient un rectangle ? x² − 9 🔍 — 3e #Shorts",
+      "accroche": "Un carré de côté x, moins un carré de 3 sur 3 : x² − 9. Je coupe une bande, je la tourne, je la colle : un rectangle de x − 3 sur x + 3.\nx² − 9 = (x − 3)(x + 3).\n\nVoix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : factorise 9x² − 1. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=litteral_calcul&microId=litteral_identite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #identitesremarquables #3e #brevet",
+      "tags": [
+        "différence de deux carrés",
+        "identités remarquables",
+        "factoriser",
+        "calcul littéral",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "Et x² − 100 ?",
+          "choix": [
+            "(x − 50)(x + 50)",
+            "(x − 10)(x + 10)",
+            "(x − 10)²"
+          ],
+          "reponse": 1,
+          "explication": "100 = 10², donc (x − 10)(x + 10)."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "3e-identites-resoudre",
+      "pas_avant": "2027-07-01",
+      "prioritaire": true,
+      "notionId": "equation_resolution",
+      "microId": "equation_carre_factoriser",
+      "classe": "3e",
+      "ceinture": "verte",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/expression-litterale/08-resoudre-identite/eleveai-maths-3e-identites-resoudre.mp4",
+      "miniature": "3e/maths/expression-litterale/08-resoudre-identite/eleveai-maths-3e-identites-resoudre.png",
+      "titre": "(x − 2)² = 25 : deux solutions ! Résoudre en factorisant — épisode 8 · Maths 3e",
+      "accroche": "Tom est photographe. Une photo carrée de 9 dm² : quel est son côté ? Puis une photo dans un cadre de 1 dm : (x − 2)² = 25. Pourquoi ces équations ont-elles deux solutions ?\n\nDans cette vidéo :\n• on ramène tout à gauche pour avoir 0 à droite\n• on factorise avec a² − b² : x² − 9 = (x − 3)(x + 3)\n• le produit nul : x − 3 = 0 ou x + 3 = 0, donc 3 ou −3\n• (x − 2)² − 25 = 0 devient (x − 7)(x + 3) = 0 : x = 7 ou x = −3\n• dans un problème, on garde les solutions qui ont un sens, et on vérifie\n• le piège : oublier la solution négative\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : résous x² − 16 = 0 et (x + 1)² = 36.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/equation-resolution\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=equation_resolution&microId=equation_carre_factoriser&display=simple\n\n🔢 Épisode 8 de la série Expression littérale d'EleveAI, en 3e (identités remarquables).",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux solutions ?"
+        ],
+        [
+          "00:07",
+          "Tom, photographe"
+        ],
+        [
+          "00:23",
+          "On factorise"
+        ],
+        [
+          "00:36",
+          "Le produit nul"
+        ],
+        [
+          "00:57",
+          "Question 1"
+        ],
+        [
+          "01:33",
+          "La photo dans son cadre"
+        ],
+        [
+          "01:55",
+          "(x − 2)² − 25 = 0"
+        ],
+        [
+          "02:19",
+          "Les solutions, et on vérifie"
+        ],
+        [
+          "02:42",
+          "Question 2"
+        ],
+        [
+          "03:21",
+          "À toi de jouer"
+        ],
+        [
+          "03:36",
+          "Correction"
+        ],
+        [
+          "04:04",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/equation-resolution",
+      "tags": [
+        "équation produit nul",
+        "résoudre une équation",
+        "identités remarquables",
+        "factoriser",
+        "x² = a",
+        "deux solutions",
+        "photographe",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:57",
+          "question": "Résous x² − 49 = 0.",
+          "choix": [
+            "x = 7 seulement",
+            "x = 7 ou x = −7",
+            "x = 24,5 ou x = −24,5"
+          ],
+          "reponse": 1,
+          "explication": "(x − 7)(x + 7) = 0 : deux solutions, 7 et −7."
+        },
+        {
+          "t": "02:42",
+          "question": "De (x − 2)² = 25, un élève écrit x − 2 = 5 donc x = 7. Qu'a-t-il oublié ?",
+          "choix": [
+            "rien, c'est complet",
+            "de diviser par 2",
+            "la solution x = −3"
+          ],
+          "reponse": 2,
+          "explication": "x − 2 peut aussi valoir −5, car (−5)² = 25 : x = −3."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux",
+        "art-design"
+      ]
+    },
+    {
+      "id": "3e-identites-resoudre-short",
+      "pas_avant": "2027-07-01",
+      "prioritaire": true,
+      "notionId": "equation_resolution",
+      "microId": "equation_carre_factoriser",
+      "classe": "3e",
+      "ceinture": "verte",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-identites-resoudre",
+      "fichier": "3e/maths/expression-litterale/08-resoudre-identite/eleveai-maths-3e-identites-resoudre-short.mp4",
+      "miniature": "3e/maths/expression-litterale/08-resoudre-identite/eleveai-maths-3e-identites-resoudre-short.png",
+      "titre": "(x − 2)² = 25 : tu trouves 7 ? Il en manque une 🔍 — 3e #Shorts",
+      "accroche": "(x − 2)² = 25. On ramène 25 à gauche, on factorise : (x − 7)(x + 3) = 0. Produit nul : x = 7 ou x = −3.\n\nVoix de synthèse.\n🥋 Ceinture verte.\n👉 À toi : résous (x + 3)² = 16. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=equation_resolution&microId=equation_carre_factoriser&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #identitesremarquables #3e #brevet",
+      "tags": [
+        "équation produit nul",
+        "identités remarquables",
+        "deux solutions",
+        "calcul littéral",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI",
+        "ceinture verte",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:27",
+          "question": "Combien de solutions a x² − 1 = 0 ?",
+          "choix": [
+            "deux, 1 et −1",
+            "une seule, 1",
+            "aucune"
+          ],
+          "reponse": 0,
+          "explication": "(x − 1)(x + 1) = 0 : 1 et −1."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
     }
   ]
 }

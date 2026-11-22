@@ -18314,5 +18314,41 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_reconnaitre&display=simple"
+ },
+ "3e-identites-factoriser": {
+  "fichier": "3e/maths/expression-litterale/07-factoriser-identite/eleveai-maths-3e-identites-factoriser.mp4",
+  "poster": "3e/maths/expression-litterale/07-factoriser-identite/eleveai-maths-3e-identites-factoriser.png",
+  "vignette": "3e/maths/expression-litterale/07-factoriser-identite/eleveai-maths-3e-identites-factoriser.vignette.webp",
+  "titre": "x² − 9 = (x − 3)(x + 3) : factoriser avec une identité — épisode 7 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=litteral_calcul&microId=litteral_identite&display=simple"
+ },
+ "3e-identites-factoriser-short": {
+  "fichier": "3e/maths/expression-litterale/07-factoriser-identite/eleveai-maths-3e-identites-factoriser-short.mp4",
+  "poster": "3e/maths/expression-litterale/07-factoriser-identite/eleveai-maths-3e-identites-factoriser-short.png",
+  "vignette": "3e/maths/expression-litterale/07-factoriser-identite/eleveai-maths-3e-identites-factoriser-short.vignette.webp",
+  "titre": "Un carré troué devient un rectangle ? x² − 9 🔍 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=litteral_calcul&microId=litteral_identite&display=simple"
+ },
+ "3e-identites-resoudre": {
+  "fichier": "3e/maths/expression-litterale/08-resoudre-identite/eleveai-maths-3e-identites-resoudre.mp4",
+  "poster": "3e/maths/expression-litterale/08-resoudre-identite/eleveai-maths-3e-identites-resoudre.png",
+  "vignette": "3e/maths/expression-litterale/08-resoudre-identite/eleveai-maths-3e-identites-resoudre.vignette.webp",
+  "titre": "(x − 2)² = 25 : deux solutions ! Résoudre en factorisant — épisode 8 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=equation_resolution&microId=equation_carre_factoriser&display=simple"
+ },
+ "3e-identites-resoudre-short": {
+  "fichier": "3e/maths/expression-litterale/08-resoudre-identite/eleveai-maths-3e-identites-resoudre-short.mp4",
+  "poster": "3e/maths/expression-litterale/08-resoudre-identite/eleveai-maths-3e-identites-resoudre-short.png",
+  "vignette": "3e/maths/expression-litterale/08-resoudre-identite/eleveai-maths-3e-identites-resoudre-short.vignette.webp",
+  "titre": "(x − 2)² = 25 : tu trouves 7 ? Il en manque une 🔍 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=equation_resolution&microId=equation_carre_factoriser&display=simple"
  }
 }

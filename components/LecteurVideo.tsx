@@ -207,6 +207,11 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "4e-identites-choisir-short": 4.68,
   "4e-identites-defi": 8.3,
   "4e-identites-defi-short": 4.68,
+  // Série IDENTITÉS 3e (22/11/2026), épisodes 07-08 : `python manim/passe_identites_3e.py coupes`.
+  "3e-identites-factoriser": 8.3,
+  "3e-identites-factoriser-short": 4.69,
+  "3e-identites-resoudre": 8.3,
+  "3e-identites-resoudre-short": 4.69,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {

@@ -1058,5 +1058,21 @@
     "mention": null,
     "sans_decor": true,
     "margo_2d": true
+  },
+  "3e-identites-factoriser-short": {
+    "question": ["Un carré troué", "devient un rectangle ?"],
+    "calcul": [["x² − 9", "blanc", 190], ["= (x − 3)(x + 3) ?", "jaune", 105]],
+    "ceinture": "orange",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "3e-identites-resoudre-short": {
+    "question": ["(x − 2)² = 25 :", "tu trouves 7 ?"],
+    "calcul": [["(x − 2)² = 25", "blanc", 130], ["x = 7 … et ?", "rouge", 150]],
+    "ceinture": "verte",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
   }
 }

@@ -320,12 +320,16 @@ export const METIERS_4E: Record<string, LienMetier[]> = {
     F("paysagiste", "trouve la largeur commune aux deux parties d'une terrasse : 2x² + 6x = 2x(x + 3).", V),
     M("comptable", "écrit le prix de 8 tenues d'un club de foot comme un produit : 8x + 96 = 8(x + 12).", V),
     M("jardinier", "compte les plants de 9 jardinières d'un coup : 9x + 45 = 9(x + 5).", V),
+    // 22/11/2026 : série IDENTITÉS 3e, épisode 07 (la 3e renvoie ici pour litteral_calcul).
+    F("carreleur", "change une terrasse carrée trouée pour un arbre en rectangle : x² − 9 = (x − 3)(x + 3).", V),
   ],
   equation_resolution: [
     F("monteur", "trouve combien de plans de 8 s tiennent dans une bande-annonce de 2 minutes.", V),
     M("veterinaire", "retrouve la masse d'un chien quand il a donné 30 mg d'un produit dosé à 2 mg par kilo.", V),
     F("dj", "cherche le tempo qui fait tenir son morceau dans le temps voulu.", V),
     M("garde-forestier", "calcule combien d'arbres planter par an pour reboiser une parcelle à temps.", V),
+    // 22/11/2026 : série IDENTITÉS 3e, épisode 08 (la 3e renvoie ici pour equation_resolution).
+    M("photographe", "retrouve le côté d'une photo carrée de 9 dm² : x² = 9, donc x = 3 (et pas −3).", V),
   ],
   pythagore_theoreme: [
     M("charpentier", "vérifie un angle droit avec la règle 3-4-5 : 3² + 4² = 5²."),
