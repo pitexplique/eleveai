@@ -97,11 +97,19 @@ class EcransEspace(AuditSynchro, MotsCales, Notion6e):
             mob.scale_to_fit_width(xmax - x0).align_to(P(x0, 0), LEFT)
         return mob
 
+    def nombre(self, v):
+        """Un nombre écrit à la française. ⛔ MESURÉ (AUDIT-ABSENT sur l'épisode 2) :
+        `str(0.5)` donne « 0.5 », avec un POINT. À l'écran d'un cours de maths
+        français, c'est une faute — et la voix, elle, dit « zéro virgule cinq ».
+        Le signe moins est le vrai − (U+2212), pas le trait d'union."""
+        s = f"{v:g}" if isinstance(v, float) else str(v)
+        return s.replace(".", ",").replace("-", "−")
+
     def trip(self, t3, fs=36, color=WHITE):
         """Un triplet de coordonnées. ⭐ Les trois nombres sont des objets SÉPARÉS
         (g.nb[0..2]) : vu à la planche, un SurroundingRectangle posé sur `trip(...)[0]`
         encadrait le premier GLYPHE — le signe moins — et pas la coordonnée."""
-        nb = [self.t(str(v).replace("-", "−"), fs, color) for v in t3]
+        nb = [self.t(self.nombre(v), fs, color) for v in t3]
         pieces = []
         for i, x in enumerate(nb):
             if i:

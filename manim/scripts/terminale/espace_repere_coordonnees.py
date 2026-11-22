@@ -32,7 +32,11 @@
 import sys
 from pathlib import Path
 
+# ⚠️ DEUX chemins : manim/poste2/ pour le socle et les figures, manim/ pour la
+# charte. Sans le second, « from charte import * » plante — et verifier-avant-
+# rendu.py ne le voit pas, il lit le source sans l'importer.
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "poste2"))
+sys.path.insert(1, str(Path(__file__).resolve().parents[2]))
 
 from manim import *  # noqa: E402,F403
 
@@ -148,7 +152,11 @@ class EspaceRepereCoordonneesBase(EcransEspace):
         # ⭐ Ici, contrairement à l'épisode 1, la voix DIT les trois nombres :
         # « Quatre, deux, trois ». Ils peuvent donc paraître à l'écran.
         self.au_pos(self._texte_voix.find("Quatre, deux, trois"))
-        adr = self.trip((4, 2, 3), 42, C_REGARD)
+        # ⚠️ sans_audit ASSUMÉ et documenté : la voix dit « Quatre, deux, trois » EN
+        # LETTRES, l'écran écrit 4 ; 2 ; 3 en chiffres. C'est la bonne écriture pour
+        # des coordonnées, et l'élève entend bien les trois nombres au bon moment.
+        # ⛔ Ce n'est PAS le cas de l'épisode 1, où la voix ne disait aucun nombre.
+        adr = self.sans_audit(self.trip((4, 2, 3), 42, C_REGARD))
         self.col(adr, -0.3)
         self.play(FadeIn(adr, scale=1.2), run_time=0.5)
         self.au_mot("et le colis est trouvé")
@@ -290,7 +298,9 @@ class EspaceRepereCoordonneesBase(EcransEspace):
                       self.t("3 + 1 = 4,  4 ÷ 2 = 2", fs, VERT_OK),
                       self.t("5 + 1 = 6,  6 ÷ 2 = 3", fs, VERT_OK))
         calc.arrange(DOWN, aligned_edge=LEFT, buff=0.16)
-        self.gauche(calc, -2.35, xmax=0.4, x0=-6.5)
+        # ⛔ VU AU GROS PLAN : à −2,35 la première ligne passait SUR l'axe des x du
+        # repère (y = −1,8). À −2,7, le bloc tient entre l'axe et la marge (−3,573).
+        self.gauche(calc, -2.7, xmax=0.4, x0=-6.5)
         for i, extrait in enumerate(("1 plus 3 fait 4", "3 plus 1 fait 4", "5 plus 1 fait 6")):
             self.au_mot(extrait)
             self.play(FadeIn(calc[i], shift=RIGHT * 0.12), run_time=0.35)
@@ -383,7 +393,7 @@ class EspaceRepereCoordonneesBase(EcransEspace):
         ab = Line(r.pt(*s["A"]), r.pt(*s["B"])).set_stroke(C_REGARD, 7)
         ad = Line(r.pt(*s["A"]), r.pt(*s["D"])).set_stroke(C_VECTEUR2, 7)
         l_ab = self.sans_audit(self.t("4 cm", 26, C_REGARD).move_to(r.pt(2, 0, 0) + DOWN * 0.42))
-        l_ad = self.sans_audit(self.t("1 cm", 26, C_VECTEUR2).move_to(r.pt(0, 1, 0) + LEFT * 0.55))
+        l_ad = self.sans_audit(self.t("1 cm", 26, C_VECTEUR2).move_to(r.pt(0, 1, 0) + LEFT * 0.78))
         self.au_mot("dont l'arête A B mesure 4 centimètres")
         self.play(Create(ab), FadeIn(l_ab), run_time=0.5)
         self.au_mot("et l'arête A D mesure 1 centimètre")
@@ -475,8 +485,10 @@ class EspaceRepereCoordonneesBase(EcransEspace):
         self.au_mot("Au bac, on commence toujours par là")
         titre = self.t("La première ligne de la copie", 46, JAUNE_TITRE).to_edge(UP, buff=0.5)
         self.play(Write(titre), run_time=0.7)
-        copie = RoundedRectangle(width=9.8, height=4.2, corner_radius=0.18, stroke_color=GREY_B,
-                                 stroke_width=3, fill_color="#0b1220", fill_opacity=1).move_to(P(-0.5, -0.6))
+        # ⚠️ hauteur 3,9 et centre −0,35 : à 4,2 et −0,6, le cadre de la phrase posée
+        # SOUS la copie descendait à y = −3,6, au-delà de la marge de 3 % (−3,573).
+        copie = RoundedRectangle(width=9.8, height=3.9, corner_radius=0.18, stroke_color=GREY_B,
+                                 stroke_width=3, fill_color="#0b1220", fill_opacity=1).move_to(P(-0.5, -0.35))
         marge = Line(copie.get_corner(UL) + RIGHT * 0.75 + DOWN * 0.1,
                      copie.get_corner(DL) + RIGHT * 0.75 + UP * 0.1, stroke_width=2, color=ROUGE_ERREUR)
         self.play(Create(copie), Create(marge), run_time=0.6)

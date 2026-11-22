@@ -124,6 +124,48 @@ Sept défauts, tous trouvés **en regardant l'image**, aucun signalé par un out
 
 ---
 
+## ⛔⛔ Les marques : « 0,5 » vaut TROIS marques
+
+WinRT émet une marque par mot **prononcé**, pas par mot écrit. Il lit « 0,5 » comme
+« zéro virgule cinq » : **trois marques sur le même texte source**. Sur
+« 0,5 ; 0,5 ; 0,5 », cela fait NEUF cues pour trois nombres.
+
+Mal traitées, les trois de trop se posent 155 caractères plus loin, sur le triplet
+suivant de la phrase — et **toutes les cues d'après deviennent introuvables** : 150
+caractères de leçon sans une seule marque, au milieu d'un écran. C'est
+`verifier-avant-rendu.py` qui l'a dit (« PAS de marque à l'offset … »), pas la relecture.
+
+`manim/poste2/cues2marques-espace.py` applique deux règles, et il a fallu trois
+tentatives fausses pour les trouver :
+
+1. **Une cue répétée qui porte autre chose que son premier jeton est une seconde
+   émission** — « 2 moins », « 4 égale », ou « 0,5 » suivi d'un blanc (le point-virgule
+   est rendu comme un espace). Une cue répétée **nue** (« 0 », « 1 ») est un vrai mot.
+2. ⭐⭐ **Une cue avance d'UN MOT.** Un jeton retrouvé plus de 60 caractères plus loin
+   est une marque en trop, pas un mot nouveau : on la saute **sans avancer**. C'est ce
+   garde-fou qui rend le reste robuste.
+
+Et la recherche se fait sur le premier jeton **en mot entier** : sans frontière, le
+jeton « a » se pose dans « coordonnées ».
+
+⚠️ Deux épisodes gardent des cues non placées, à regarder quand leur script s'écrira :
+`espace_defi` (13) et `ps_espace_angle` (2).
+
+## ⛔ Écrire un nombre à la française
+
+`str(0.5)` donne « 0.5 », avec un POINT. À l'écran d'un cours français c'est une faute,
+et la voix dit « zéro virgule cinq ». Le socle a `self.nombre(v)` pour ça (virgule, et le
+vrai signe − U+2212). ⚠️ L'audit l'attrape, mais sous une forme qui ne saute pas aux
+yeux : `AUDIT-ABSENT « 5 » (0.5)`.
+
+## ⛔ Un zéro se vérifie sur la sortie ENTIÈRE
+
+Trois fois dans la même journée, un `head` ou un `tail -1` m'a fait conclure « rien à
+signaler » alors que la sortie en portait des dizaines : 6 signalements d'audit au lieu
+de 64, « 0 perte » de cues au lieu de 100, et un script copié hors de `manim/poste2/`
+qui ne lisait **aucune** voix et annonçait « 0 alerte ». ⭐ Avant de croire un zéro :
+compter les lignes de la sortie complète, et vérifier que l'outil a lu quelque chose.
+
 ## ⚠️ Lire un journal d'audit sans se tromper de cible
 
 L'audit vérifie **chaque nombre de chaque texte** contre l'instant où la voix le prononce. Un
