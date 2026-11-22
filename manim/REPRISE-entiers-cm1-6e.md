@@ -13,7 +13,8 @@ L'inventaire de la série (découpage, banques, métiers, centres, état de prod
 ## ✅✅✅ ÉTAT FINAL, 22/11/2026 — LA SÉRIE EST COMPLÈTE
 
 **12 épisodes, 24 vidéos, du CM1 à la 6e.** Toutes rendues en HD, toutes sur R2, toutes branchées
-au coach et vérifiées à l'image en partant de l'accueil. ⛔ **Il n'y a plus rien à produire.**
+au coach et vérifiées à l'image en partant de l'accueil. ⛔ **Il n'y a plus rien à produire des 12 épisodes prévus** — mais ⚠ ça ne veut pas dire que
+toutes les micros du coach ont une vidéo : voir la section suivante, mesurée le 22/11.
 
 | Lot | Épisodes | Lignes `notion_ressources` |
 |---|---|---|
@@ -24,6 +25,49 @@ au coach et vérifiées à l'image en partant de l'accueil. ⛔ **Il n'y a plus 
 Contrôle de fin de série : `verifier-fraicheur-mp4.py` donne **tous les paysages prouvés à jour**
 sur les trois points ; les « douteux » restants sont les 12 shorts Ti Margo, qui n'ont pas de
 `.py` — c'est la limite de l'instrument, pas un défaut (voir § infrastructure).
+
+### ⚠⚠ « LA SÉRIE EST COMPLÈTE » veut dire LES 12 ÉPISODES, PAS LES MICROS DU COACH (22/11)
+
+⭐⭐ **Deux comptages différents, et c'est le second que l'élève voit.** La série couvre les
+**six micros communs** CM1→CM2→ 6e qu'on avait choisis. Les banques en ont davantage : ce qui n'est
+pas dans les six n'a **jamais** été produit, et rien ne le signale — ni le manifeste, ni
+`verifier-fraicheur-mp4.py`, ni `brancher-videos-coach.mjs`, qui tous ne connaissent que ce qui existe.
+
+État mesuré le 22/11 (micros de `lib/tutor-v4/knowledge/maths/<classe>/microSkills.ts`, branchements
+lus en **production** par `node scripts/brancher-videos-coach.mjs --classe <c> --notion <n> --tout`) :
+
+| Classe | Notion | Micros | Avec paysage | Sans |
+|---|---|---|---|---|
+| **6e** | `entier_nombre` | 6 | 5 | **1** — `entier_lire_ecrire` |
+| **CM1** | `nombre_entier` | 9 | 6 | 3 — `entier_droite`, `entier_diviseur`, `entier_encadrer` |
+| **CM2** | `nombre_entier` | 11 | 6 | 5 — `entier_droite`, `entier_diviseur`, `entier_diviseurs_tous`, `entier_diviseurs_communs`, `entier_multiples_communs` |
+
+Le CM2 reçoit ses six par l'alias `aussi` du CM1 (`cm1-entier-lire@entier_lire`…), sauf
+`entier_multiple` qui a sa propre vidéo `cm2-entier-multiple` — c'est bien ce qui était voulu.
+
+#### ⛔ Le trou de la 6e n'est pas « aucune vidéo » : il manque le BOUTON, pas la vidéo
+On avait décidé de ne pas produire `entier_lire_ecrire` parce que l'ancienne
+« Comprendre les nombres entiers en 4 minutes » la couvrait. Le manifeste dit pourquoi ça ne se voit
+pas sur la micro :
+
+| Entrée du manifeste | `notionId` | `microId` | Où elle atterrit |
+|---|---|---|---|
+| `6e-entier-nombre` (la longue, 4 min) | `entier_nombre` | **vide** | sur la **NOTION** : badge, fiche, QR — **aucun bouton « ▶ Vidéo » sur la micro** |
+| `6e-entier-nombre-short-zero` | `entier_nombre` | `entier_lire_ecrire` | sur la **micro** : la case verticale du short |
+
+⭐ Donc la micro **a déjà son short** en production ; ce qui lui manque est la vidéo paysage. Ce
+n'est **pas un manque de production** : c'est un `microId` absent sur une entrée du manifeste.
+
+⚠ Et le réparer coûte quelque chose : `brancher-videos-coach.mjs` écrit **une ligne par entrée du
+manifeste**. Donner un `microId` à la longue la **déplace** de la notion vers la micro — on gagne le
+bouton et on **perd** le badge de notion, la fiche et le QR imprimé. Les garder tous les deux demande
+une **seconde entrée** dans le manifeste pour la même vidéo. ⛔ Décision non prise.
+
+#### ⏳ Les trous du CM1 et du CM2 sont, eux, de la production
+8 micros sans vidéo, et ils se regroupent : la **demi-droite graduée** (CM1 + CM2, mutualisable par
+`aussi`), les **diviseurs** (1 micro au CM1, 3 au CM2), les **multiples communs** (CM2),
+**encadrer/intercaler** (CM1 — la 6e l'a déjà : `6e-entier-encadrer`, ⚠ banque 6e plus PETITE que
+celle du CM, cf. § 219). ⛔ Rien d'engagé, rien de promis.
 
 ### ⏭ Ce qui reste, et qui n'est PAS de la production
 - **La mise en ligne YouTube des 24 vidéos** — c'est Frédéric qui la fait. Chaque dossier
