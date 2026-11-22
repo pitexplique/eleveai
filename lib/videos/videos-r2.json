@@ -17990,5 +17990,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_estimer&display=simple"
+ },
+ "cm2-masse-defi": {
+  "fichier": "cm2/maths/masse/04-defi/eleveai-maths-cm2-masse-defi.mp4",
+  "poster": "cm2/maths/masse/04-defi/eleveai-maths-cm2-masse-defi.png",
+  "vignette": "cm2/maths/masse/04-defi/eleveai-maths-cm2-masse-defi.vignette.webp",
+  "titre": "Montgolfière : 450 kg au plus, combien de passagers ? — Le défi des masses — épisode 4 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_defi&display=simple"
+ },
+ "cm2-masse-defi-short": {
+  "fichier": "cm2/maths/masse/04-defi/eleveai-maths-cm2-masse-defi-short.mp4",
+  "poster": "cm2/maths/masse/04-defi/eleveai-maths-cm2-masse-defi-short-miniature.png",
+  "vignette": "cm2/maths/masse/04-defi/eleveai-maths-cm2-masse-defi-short-miniature.vignette.webp",
+  "titre": "Le téléphérique porte 0,4 t : combien de kg reste-t-il ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_defi&display=simple"
  }
 }

@@ -70,6 +70,8 @@ EP = [
      "0,75 kg = 750 g", True, "verte"),
     ("cm2", "estimer", "03-estimer", ["150 kg", "OU 150 t ?"], "Baleine bleue :",
      "environ 150 t", True, "jaune"),
+    ("cm2", "defi", "04-defi", ["450 kg AU PLUS :", "COMBIEN DE PASSAGERS ?"], "Il reste :",
+     "450 − 144,5 = 305,5 kg", True, "bleue"),
 ]
 
 

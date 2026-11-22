@@ -455,3 +455,34 @@ function casseroleM(c,x,yBas,s=1,z=1,T=0){ if(z<=0) return; s*=Math.min(1.15,z);
   c.strokeStyle='rgba(248,249,250,.75)'; c.lineWidth=7*s; c.lineCap='round';
   for(const u of [-.25,0,.25]){ c.beginPath(); const y0=yBas-h-36*s;
     for(let v=0;v<=1.001;v+=.1){ const px=x+u*w+Math.sin(v*7+T*3+u*9)*14*s, py=y0-v*120*s; v?c.lineTo(px,py):c.moveTo(px,py); } c.stroke(); } }
+
+/* ---- CM2 04 (defi) : le téléphérique de 0,4 t, la calculatrice, le panier de pique-nique ---- */
+/* Une cabine de téléphérique rouge, pendue à son câble : (x, yBas) = le milieu du plancher ; s = 1 ≈ 520 × 320 px.
+   texte = la pancarte (« 0,4 t max »). Rend l'intérieur {g, d, sol} pour y poser les passagers. */
+function telepheriqueM(c,x,yBas,s=1,z=1,texte=''){ const k=Math.min(1.15,Math.max(z,0))*s, w=520*k, h=320*k;
+  if(z<=0) return {g:x-w/2+30*k,d:x+w/2-30*k,sol:yBas-26*k}; c.lineJoin='round'; c.lineCap='round';
+  const yH=yBas-h, yC=yH-95*k;
+  c.strokeStyle='#adb5bd'; c.lineWidth=6*k; c.beginPath(); c.moveTo(x-w/2-40*k,yC+30*k); c.lineTo(x+w/2+40*k,yC-30*k); c.stroke();
+  c.strokeStyle='#495057'; c.lineWidth=10*k; c.beginPath(); c.moveTo(x,yC); c.lineTo(x,yH); c.stroke();
+  c.fillStyle='#343a40'; c.beginPath(); c.roundRect(x-50*k,yC-22*k,100*k,34*k,10*k); c.fill();
+  c.fillStyle='#e03131'; c.strokeStyle='#862e2e'; c.lineWidth=6*k; c.beginPath(); c.roundRect(x-w/2,yH,w,h,26*k); c.fill(); c.stroke();
+  c.fillStyle='#d0ebff'; c.beginPath(); c.roundRect(x-w/2+24*k,yH+26*k,w-48*k,h-70*k,14*k); c.fill();
+  c.fillStyle='#c92a2a'; c.fillRect(x-w/2+6*k,yBas-40*k,w-12*k,34*k);
+  if(texte){ const pw=250*k, ph=66*k, py=yH-6*k;
+    c.fillStyle='#f8f9fa'; c.strokeStyle='#e03131'; c.lineWidth=6*k; c.beginPath(); c.roundRect(x+w/2-pw-20*k,py-ph,pw,ph,12*k); c.fill(); c.stroke();
+    ecrire(c,texte,x+w/2-pw/2-20*k,py-ph/2+2*k,44*k,'#e03131'); }
+  return {g:x-w/2+30*k,d:x+w/2-30*k,sol:yBas-36*k}; }
+/* Une calculatrice : (x, y) = le centre ; s = 1 ≈ 230 × 320 px ; texte = l'écran */
+function calculatriceM(c,x,y,s=1,z=1,texte='?'){ if(z<=0) return; s*=Math.min(1.15,z); const w=230*s, h=320*s;
+  c.lineJoin='round'; c.fillStyle='#343a40'; c.strokeStyle='#868e96'; c.lineWidth=5; c.beginPath(); c.roundRect(x-w/2,y-h/2,w,h,22*s); c.fill(); c.stroke();
+  c.fillStyle='#c3fae8'; c.beginPath(); c.roundRect(x-w/2+20*s,y-h/2+22*s,w-40*s,70*s,8*s); c.fill();
+  ecrire(c,texte,x+40*s,y-h/2+58*s,52*s,'#087f5b');
+  for(let i=0;i<4;i++) for(let j=0;j<4;j++){ c.fillStyle=j===3?'#fd7e14':'#868e96'; c.beginPath();
+    c.roundRect(x-w/2+22*s+j*48*s,y-h/2+112*s+i*48*s,38*s,38*s,8*s); c.fill(); } }
+/* Un panier de pique-nique en osier, nappe à carreaux rouges : (x, yBas) = le milieu du bas ; s = 1 ≈ 260 px de large */
+function panierPiqueM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const w=260*s, h=150*s, yH=yBas-h;
+  c.lineJoin='round'; c.strokeStyle='#8f5a1d'; c.lineWidth=12*s; c.beginPath(); c.arc(x,yH,w*.36,Math.PI,0); c.stroke();
+  c.fillStyle='#d9a441'; c.strokeStyle='#8f5a1d'; c.lineWidth=5; c.beginPath();
+  c.moveTo(x-w/2,yH); c.lineTo(x+w/2,yH); c.lineTo(x+w*.4,yBas); c.lineTo(x-w*.4,yBas); c.closePath(); c.fill(); c.stroke();
+  c.lineWidth=3; for(const v of [.33,.66]){ c.beginPath(); c.moveTo(x-w/2+w*.1*v,yH+h*v); c.lineTo(x+w/2-w*.1*v,yH+h*v); c.stroke(); }
+  for(let i=0;i<8;i++){ c.fillStyle=i%2?'#f8f9fa':'#e03131'; c.fillRect(x-w/2+i*w/8,yH-18*s,w/8,22*s); } }

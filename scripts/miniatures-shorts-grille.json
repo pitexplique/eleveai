@@ -952,5 +952,11 @@
     "calcul": [["1 grain", "blanc", 190], ["= ? g", "rouge", 190]],
     "margo": [320, 720, 640],
     "ceinture": "blanche"
+  },
+  "cm2-masse-defi-short": {
+    "question": ["Le téléphérique porte 0,4 t :", "combien de kg reste-t-il ?"],
+    "calcul": [["0,4 t − 260 kg", "blanc", 130], ["= ? kg", "rouge", 190]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
   }
 }
