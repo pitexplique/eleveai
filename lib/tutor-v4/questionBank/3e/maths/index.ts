@@ -29,6 +29,9 @@ import { equationsCarreBank } from "./equations-carre.bank";
 import { fonctionsBank } from "./fonctions.bank";
 import { affineBank } from "./affine.bank";
 import { affineTracerBank } from "./affine-tracer.bank";
+import { affineRenfortABank } from "./affine-renfort-a.bank";
+import { affineRenfortBBank } from "./affine-renfort-b.bank";
+import { affineRenfortCBank } from "./affine-renfort-c.bank";
 
 import { pythagore3eBank } from "./pythagore.bank";
 import { pythagoreSolide3eBank } from "./pythagore-solide.bank";
@@ -72,6 +75,9 @@ export const maths3eQuestionBank: TutorBankItemV4[] = [
   ...fonctionsBank,
   ...affineBank,
   ...affineTracerBank,
+  ...affineRenfortABank,
+  ...affineRenfortBBank,
+  ...affineRenfortCBank,
 
   ...pythagore3eBank,
   ...pythagoreSolide3eBank,

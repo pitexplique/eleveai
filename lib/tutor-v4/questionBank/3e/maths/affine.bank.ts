@@ -122,7 +122,41 @@ function fonctionGraphiqueCanvas(params: {
   } as any;
 }
 
-export const affineBank: TutorBankItemV4[] = [
+/* =========================
+   ÉCRITURE PROPRE (22/11/2026)
+   Les anciens gabarits écrivaient « f(x) = 1x + 0 », « 0x + -2 », « -2x - 0 ».
+   On nettoie à la sortie : 1x → x, −1x → −x, 0x + b → b, « + 0 » retiré,
+   « + -2 » → « − 2 », vrai signe moins. Les choix devenus égaux sont fusionnés.
+   La réponse attendue garde aussi son ancienne écriture (saisie au clavier).
+========================= */
+
+function ecrirePropre(s: string): string {
+  return s
+    .replace(/\+ -(\d)/g, "− $1")
+    .replace(/(^|[^\d,.])0x ([+−-]) /g, (_m, p, sg) => `${p}${sg === "+" ? "" : "−"}`)
+    .replace(/(^|[^\d,.])1x/g, "$1x")
+    .replace(/(^|[\s=(])-1x/g, "$1−x")
+    .replace(/ [+−-] 0(?![\d,.])/g, "")
+    .replace(/ - (?=[\dx])/g, " − ")
+    .replace(/(^|[\s=(;])-(?=[\dx])/g, "$1−");
+}
+
+function nettoyerQuestion<Q extends Record<string, any>>(q: Q): Q {
+  const r: Record<string, any> = { ...q };
+  if (typeof r.text === "string") r.text = ecrirePropre(r.text);
+  if (Array.isArray(r.choices)) r.choices = Array.from(new Set(r.choices.map((c: any) => (typeof c === "string" ? ecrirePropre(c) : c))));
+  if (Array.isArray(r.expected))
+    r.expected = Array.from(new Set([...r.expected.map((e: any) => (typeof e === "string" ? ecrirePropre(e) : e)), ...r.expected]));
+  return r as Q;
+}
+
+function nettoyerItem(it: TutorBankItemV4): TutorBankItemV4 {
+  const x = it as any;
+  if (x.kind === "template") return { ...x, generate: (...args: any[]) => nettoyerQuestion(x.generate(...args)) };
+  return nettoyerQuestion(x);
+}
+
+const affineBankBrut: TutorBankItemV4[] = [
   /* =========================
      AFFINE_RECONNAITRE
   ========================= */
@@ -1594,7 +1628,7 @@ export const affineBank: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "affine_fonction",
     microId: "affine_probleme",
-    difficulty: 2,
+    difficulty: 3, // 22/11 : contexte → ★3 (★1-★2 sans contexte)
     theme: "reunion",
     text: "Un taxi à Saint-Pierre facture 4 € de prise en charge puis 2 € par kilomètre. Quelle fonction modélise le prix payé ?",
     format: "qcm",
@@ -1622,7 +1656,7 @@ export const affineBank: TutorBankItemV4[] = [
     matiere: "maths",
     notionId: "affine_fonction",
     microId: "affine_probleme",
-    difficulty: 2,
+    difficulty: 3, // 22/11 : contexte → ★3 (★1-★2 sans contexte)
     theme: "reunion",
     hint: "On remplace x par la valeur donnée.",
     tags: ["affine_fonction", "probleme", "calcul_image", "template"],
@@ -2252,3 +2286,5 @@ export const affineBank: TutorBankItemV4[] = [
     tags: ["affine_fonction", "probleme", "modelisation", "qcm"],
   },
 ];
+
+export const affineBank: TutorBankItemV4[] = affineBankBrut.map(nettoyerItem);
