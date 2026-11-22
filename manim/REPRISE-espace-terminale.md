@@ -27,6 +27,56 @@ marques est déjà dans `manim/scripts/terminale/<script>_marques.json`, sa voix
 
 ---
 
+## 🔁 La relève — ce qu'il faut savoir pour reprendre la série
+
+*(écrit le 22/11/2026 à 60 % de contexte, par la session qui a produit E1 et E2 —
+règle de Frédéric : une seule productrice par série, relève à 65 %.)*
+
+**L'état exact**, vérifiable en trois commandes :
+
+```
+git log --oneline poste2 | head -12                  # 12 commits de la série
+ls manim/sorties/terminale/maths/geometrie/*/*.mp4   # les HD livrés
+python manim/poste2/verifier-voix-espace.py          # 12 voix, 15 clips, lettres A 8 B 8 C 8
+```
+
+**Le prochain geste, sans réfléchir** : écrire `espace_droite_parametrique.py` (E3).
+Tout l'attend — sa voix, ses WAV, ses 792 marques, le socle. Le modèle le plus propre
+est `espace_repere_coordonnees.py` (E2) : il ne contient que ses 15 écrans.
+
+**L'ordre pour chaque épisode, sans en sauter un :**
+
+1. lire la voix du `.md` et poser un écran par clip ;
+2. `python manim/poste2/verifier-avant-rendu.py <script.py> <Scene>` → **0 problème**
+   (il attrape les `au_mot` sans marque, qui sont la moitié du travail) ;
+3. dry run `AUDIT=1 BORDS=1 … --dry_run` → **0 `BORD`**, et **un seul `AUDIT-ABSENT`**,
+   celui de `@eleveai974` que l'épisode publié porte aussi ;
+4. rendu `-ql`, **planche ET gros plans**, et on corrige jusqu'à ce que l'image soit
+   propre (compter 3 à 4 tours : j'en ai fait 4 sur E1, 2 sur E2) ;
+5. HD sous le verrou (`bash manim/poste2/4e_hd.sh <script.py> <Scene> <nom> <media_dir>
+   <dossier-sortie>`), puis planche du HD ;
+6. l'entrée de manifeste dans `manim/poste2/FICHES-YOUTUBE-espace-terminale.md`.
+
+**Ce qui n'est PAS fait et qu'on oublie facilement :**
+
+- les **miniatures** : aucune des 12 n'existe, et le manifeste en attend une ;
+- les **12 shorts** : pas de voix écrite, et leur gabarit se relit sur un short de
+  terminale existant **avant** d'en écrire douze ;
+- le **branchement au coach** vient APRÈS la publication — mesuré :
+  `brancher-videos-coach.mjs --classe terminale-spe` répond « Rien à brancher » tant que
+  la vidéo n'est pas en ligne ;
+- `espace_defi` garde **13** cues non placées et `ps_espace_angle` **2** (toutes dans des
+  clips de correction) : à regarder au moment d'écrire ces deux épisodes-là.
+
+**Ce qu'il ne faut pas refaire :**
+
+- ⛔ ne pas écrire les 11 scripts en parallèle. Le verrou HD est unique — on gagnerait
+  l'écriture, pas le rendu — et surtout personne ne regarderait onze épisodes à l'image.
+- ⛔ ne pas toucher `scripts/cues2marques.py` (le commun) : d'autres séries s'en servent.
+- ⛔ ne pas « corriger » les trois faux positifs de la section plus haut.
+
+---
+
 ## La chaîne, dans l'ordre, avec les pièges de chaque étape
 
 ### 1. La voix — ⛔ on ne touche QUE le `.md`
@@ -89,6 +139,13 @@ sa question doit retrouver le même dessin.
 | `manim/poste2/verifier-avant-rendu.py <script.py> <Scene>` | **avant le dry run** | un `au_mot` sans marque à son offset exact, une question qui n'est pas dans la voix mot pour mot |
 | `AUDIT=1 BORDS=1 … --dry_run` | **avant le `-ql`** | un nombre affiché que la voix ne dit pas, un objet hors de la marge de 3 % |
 | `scripts/planche-video.py` **+** `manim/poste2/apercu-instants.py` | **sur le `-ql`, avant le HD** | ce qui est réellement affiché — et **rien d'autre ne le voit** |
+
+⛔⛔ **PLANCHE *ET* GROS PLANS, jamais la planche seule.** `planche-video.py` prend la
+**dernière image** de chaque écran : tout ce qui est recouvert à la fin y est invisible.
+Deux colonnes de calcul traversaient les axes du repère sur E1 ; la planche était
+propre, et `apercu-instants.py` sur les écrans de réponse les a montrées tout de suite.
+⭐ Les instants à regarder, toujours : les clips `04b`, `07b` et `09b` (les explications
+arrivent par-dessus une figure déjà là).
 
 ---
 
@@ -158,7 +215,7 @@ et la voix dit « zéro virgule cinq ». Le socle a `self.nombre(v)` pour ça (v
 vrai signe − U+2212). ⚠️ L'audit l'attrape, mais sous une forme qui ne saute pas aux
 yeux : `AUDIT-ABSENT « 5 » (0.5)`.
 
-## ⛔ Un zéro se vérifie sur la sortie ENTIÈRE
+## ⛔ Un zéro se vérifie, un `head` se compte
 
 Trois fois dans la même journée, un `head` ou un `tail -1` m'a fait conclure « rien à
 signaler » alors que la sortie en portait des dizaines : 6 signalements d'audit au lieu
@@ -230,6 +287,21 @@ sa tête, après 20 rendus HD.
 ⚠️ **Le verrou est unique sur la machine** (`$env:TEMP/eleveai-rendu-hd.lock`, mutex
 `mkdir`/`rmdir`). Un verrou orphelin bloque tout le monde. ⭐⭐ **Le HD seulement quand on est
 certain** : tout se contrôle en `-ql`, et l'écran final se relit **avant** le HD.
+
+⛔⛔ **L'heure d'un verrou se LIT, elle ne s'écrit pas de mémoire.** J'ai noté dans un
+rapport « verrou pris à 09:05 » alors que `stat` disait 08:31 — un chiffre inventé, et
+pas un détail de forme : **l'âge du verrou est le seul moyen de distinguer un rendu
+vivant d'un orphelin**, et un orphelin bloque toute la machine. Un verrou daté d'une
+heure qui n'est pas encore arrivée aurait fait conclure « orphelin, je casse » à la
+session suivante — pendant un rendu.
+
+```
+stat -c '%n  cree %y' "$TEMP/eleveai-rendu-hd.lock"   # l'heure réelle
+date '+maintenant : %H:%M:%S'                          # et l'écart
+```
+
+Un verrou de quelques minutes avec un `.hd.log` qui grossit = un rendu vivant, on
+attend. Un verrou de plusieurs heures avec un log figé = un orphelin, on le retire.
 
 ```
 PYTHONIOENCODING=utf-8 python -X utf8 -m manim render -qh --disable_caching \
