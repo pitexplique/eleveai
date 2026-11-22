@@ -96,7 +96,13 @@ est ici parce que l'erreur de méthode valait un aller-retour, et qu'elle peut s
 | CM2 | `entier_droite` / `entier_diviseur` / `entier_diviseurs_tous` | **8 / 8 / 9** | `nombre_entier` ✓ |
 | CM2 | `entier_diviseurs_communs` / `entier_multiples_communs` | **8 / 8** | `nombre_entier` ✓ |
 
-`auditer-banque-runtime.ts` : **CM1 105/105, CM2 116/116, 100 %, aucune micro vide.** Tous ces items
+⛔⛔ **CORRECTION du 22/11, 05:50 — j'avais cité ici « `auditer-banque-runtime.ts` : CM1 105/105,
+CM2 116/116 » comme preuve. CES CHIFFRES NE PARLENT PAS DES MATHS.** Ce script est **FRANÇAIS
+SEULEMENT** : il n'importe que des `francais*QuestionBank` (lignes 31-53), et sa table s'arrête à
+`francaisSecondeQuestionBank`. Sur `cm1` et `cm2` il a donc mesuré la couverture du **français** et
+rendu un pourcentage parfaitement plausible pour une autre matière. ✅ **La conclusion tient quand
+même**, parce qu'elle ne reposait pas sur lui : elle repose sur le comptage ci-dessus, fait en
+important `mathsCm1QuestionBank` / `mathsCm2QuestionBank` et en filtrant sur `microId`. Tous ces items
 sont des `template`, tous rangés sous la bonne notion, tous au-dessus des 2 items qu'exige la paire.
 ✅ **Rien à masquer, rien à remplir. Le contenu existe depuis le 05/11/2026**, dans
 `cm1/maths/nombres-entiers-trous.bank.ts` et `cm2/maths/entiers-diviseurs.bank.ts`, écrits exprès
@@ -118,9 +124,18 @@ de `nombres-entiers.bank.ts`. ⛔ **Ce n'est plus vrai depuis le 05/11/2026** : 
 programme » sont bâties sur `gabarits(…)` / `atelier(…)` — des fabriques positionnelles, **zéro
 `microId` littéral**. `grep -c 'microId'` y répond **0** sur 8 à 10 items bien présents.
 
-→ ⛔⛔ **Pour toute question de couverture de banque, en maths comme en français, l'instrument est
-`npx tsx scripts/auditer-banque-runtime.ts <classe>`, jamais un grep.** Un grep sur un dossier de
-banques ne répond plus à la question posée, et il répond « 0 » avec aplomb.
+→ ⛔⛔ **Pour une couverture de banque de MATHS, il n'existe AUCUN instrument tout fait.** Ni un grep
+(il répond « 0 » avec aplomb sur les fabriques positionnelles), ni `auditer-banque-runtime.ts` (il ne
+connaît que le français, et répond un pourcentage d'une AUTRE matière sans le dire). La seule mesure
+valable tient en cinq lignes, à écrire sur le moment : importer `maths<Classe>QuestionBank`, filtrer
+sur `notionId`/`microId`, compter. C'est long d'une minute et ça ne ment pas.
+
+⭐⭐ **Et la leçon commune aux trois erreurs de la journée** (un grep sur un fichier au lieu de 70 ;
+un audit français pris pour un audit de maths ; `scripts/apercu-canvas.mjs` recommandé alors qu'il
+est **hors service** — `ERR_UNKNOWN_FILE_EXTENSION` sur `katex.min.css`, pour TOUS les canvas du
+dépôt, pas seulement ceux de l'espace) : **un instrument qui rend un chiffre plausible n'a pas prouvé
+qu'il mesurait la bonne chose.** Avant de citer un outil, vérifier ce qu'il IMPORTE, et le faire
+tourner une fois pour de vrai.
 
 ✅ **Donc le rapport de départ avait raison, et moi pas** : 8 micros sans vidéo, jouables, au
 programme. Les regrouper reste utile — la **demi-droite graduée** et les **diviseurs** portent le
