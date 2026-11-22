@@ -1,0 +1,15 @@
+{
+  "00-garde": "Le coefficient directeur. Que dit le nombre devant x ?",
+  "01-developpeuse": "Inès développe un jeu vidéo. Son héros commence avec 10 points d'énergie, et en gagne 3 par seconde. Après x secondes : f de x égale 3 x plus 10. Après 1 seconde : 13 points. Après 2 secondes : 16. Après 3 secondes : 19.",
+  "02-coefficient": "À chaque seconde de plus, l'énergie monte de 3. Ce 3, c'est a, le coefficient directeur. Sur la droite : un carreau vers la droite, trois carreaux vers le haut. Plus a est grand, plus la droite est raide.",
+  "03-negatif": "Mais le téléphone d'Inès chauffe. Sa batterie est à 80 %, et perd 2 % par minute de jeu. g de x égale moins 2 x plus 80. Ici, a vaut moins 2 : un pas vers la droite, deux vers le bas. La droite descend : la fonction est décroissante.",
+  "03q-question": "Question ! f de x égale moins 4 x plus 7. Quel est son coefficient directeur ? A : 7. B : moins 4. C : 4. Mets pause, et choisis !",
+  "03r-reponse": "Réponse B : a est le nombre devant x, avec son signe. Moins 4 : la droite descend.",
+  "04-deux-points": "Sans l'expression, deux points suffisent. Dans le jeu, à 2 secondes, une jauge vaut 16. À 5 secondes, elle vaut 25. En 3 secondes, elle a gagné 9 points. 9 divisé par 3 : a vaut 3 points par seconde. La règle : l'écart des images, divisé par l'écart des x.",
+  "05q-question": "Question ! Une droite passe par le point de coordonnées 1 et 3, et par le point de coordonnées 3 et 11. Combien vaut a ? A : 8. B : 0,25. C : 4. Mets pause, et choisis !",
+  "05r-reponse": "Réponse C : les images passent de 3 à 11, soit 8. Les x passent de 1 à 3, soit 2. 8 divisé par 2 : 4. Pas 8 : il faut diviser par l'écart des x.",
+  "06-defi": "À toi de jouer. Un : f de x égale 5 moins 3 x. Croissante ou décroissante ? Deux : une droite passe par le point de coordonnées moins 1 et 4, et par le point de coordonnées 2 et moins 5. Combien vaut a ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Un : 5 moins 3 x, c'est moins 3 x plus 5. a vaut moins 3 : il est négatif, f est décroissante. Deux : les images passent de 4 à moins 5, soit moins 9. Les x passent de moins 1 à 2, soit 3. Moins 9 divisé par 3 : a vaut moins 3.",
+  "07-finale": "Ce que tu as appris. Dans a x plus b, a est le coefficient directeur. Il dit de combien f augmente quand x augmente de 1. Si a est positif, la droite monte. S'il est négatif, elle descend. Avec deux points : l'écart des images, divisé par l'écart des x.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

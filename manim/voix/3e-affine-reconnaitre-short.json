@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Cette fonction a l'air compliquée. Et si elle était affine ?",
+  "01-image": "f de x égale x plus 1, au carré, moins x au carré. On développe : x au carré plus 2 x plus 1, moins x au carré. Les x au carré s'annulent. Il reste 2 x plus 1 : f est affine !",
+  "01q-question": "Question ! Laquelle est linéaire ? A : 5 x plus 1. B : 5 x. C : x au carré. Mets pause, et choisis !",
+  "01r-reponse": "Réponse B : 5 x, c'est 5 x plus 0. Sa droite passe par l'origine.",
+  "02-question": "À toi. f de x égale 3 fois la parenthèse x plus 2, moins 6. Linéaire ou affine ? Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

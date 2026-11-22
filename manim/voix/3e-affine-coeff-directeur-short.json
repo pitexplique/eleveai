@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Ta batterie perd 4 % par heure. Où se cache le coefficient directeur ?",
+  "01-image": "Batterie pleine : 100 %. Après x heures : f de x égale moins 4 x plus 100. Le coefficient directeur, c'est moins 4. Chaque heure, la droite descend de 4. Le signe moins, c'est la baisse.",
+  "01q-question": "Question ! Une plante mesure 5 centimètres, et grandit de 2 centimètres par semaine. Combien vaut a ? A : 2. B : 5. C : 7. Mets pause, et choisis !",
+  "01r-reponse": "Réponse A : a, c'est ce qui change chaque semaine : 2 centimètres. Le 5, c'est le départ.",
+  "02-question": "À toi. Au bout de combien d'heures la batterie est-elle vide ? Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
