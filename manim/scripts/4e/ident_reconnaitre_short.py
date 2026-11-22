@@ -118,35 +118,40 @@ class IdentReconnaitreShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
         aig.shift(cadran[0].get_center() - aig.get_start())
         self.dit(l2, "en 3 secondes.", avec=[FadeIn(cadran, scale=0.6), FadeIn(aig)])
         self.play(Rotate(aig, -TAU, about_point=cadran[0].get_center()), run_time=0.8, rate_func=linear)
-        l3 = self.l("Impossible ?", -1.85, 50, JAUNE_TITRE)
+        l3 = self.l("Impossible ?", -1.72, 50, JAUNE_TITRE)
         self.dit(l3, "Impossible ?")
-        l4 = self.l("Regarde bien ces deux nombres.", -2.45, 32)
-        self.dit(l4, "Regarde bien ces deux nombres.",
+        # 22/11 : en deux lignes (à 32 pt sur une seule, elle était minuscule).
+        l4a = self.l("Regarde bien", -2.3, 38)
+        self.dit(l4a, "Regarde bien")
+        l4 = self.l("ces deux nombres.", -2.78, 38)
+        self.dit(l4, "ces deux nombres.",
                  avec=[Circumscribe(e0.atomes[0], color=A_C, buff=0.08), Circumscribe(e0.atomes[2], color=A_C, buff=0.08)])
         self.attendre_voix(marge=0.3)
         self.vider(garder)
 
         # ── 01 : le secret ──
         self.dire("01-secret")
-        a = self.q("49 = 50 − 1", 1.85, 52)
+        a = self.q("49 = 50 − 1", 2.0, 52)
         self.dire_eq(a, "49, c'est 50 moins 1.")
-        b = self.q("51 = 50 + 1", 1.2, 52)
+        b = self.q("51 = 50 + 1", 1.35, 52)
         self.dire_eq(b, "51, c'est 50 plus 1.")
         b.shift(RIGHT * (a.egal.get_center()[0] - b.egal.get_center()[0]))
-        m1 = self.l("Les mêmes termes,", 0.4, 36)
+        m1 = self.l("Les mêmes termes,", 0.6, 40)
         self.dit(m1, "Les mêmes termes,", avec=[a.atomes[2].animate.set_color(A_C), b.atomes[2].animate.set_color(A_C),
                                                a.atomes[4].animate.set_color(B_C), b.atomes[4].animate.set_color(B_C)])
-        m2 = self.l("avec des signes contraires :", -0.12, 34)
-        self.dit(m2, "avec des signes contraires :", avec=[a.atomes[3].animate.set_color(MOINS_C), b.atomes[3].animate.set_color(PLUS_C)])
+        m2a = self.l("avec des signes", 0.08, 40)
+        self.dit(m2a, "avec des signes")
+        m2 = self.l("contraires :", -0.44, 40)
+        self.dit(m2, "contraires :", avec=[a.atomes[3].animate.set_color(MOINS_C), b.atomes[3].animate.set_color(PLUS_C)])
         self.play(Indicate(VGroup(a.atomes[3], b.atomes[3]), color=TROIS, scale_factor=1.4), run_time=0.4)
-        m3 = self.l("c'est la forme", -0.75, 36, TROIS)
+        m3 = self.l("c'est la forme", -1.0, 40, TROIS)
         self.dit(m3, "c'est la forme")
-        f = self.q("(a − b)(a + b)", -1.35, 52, lettres="")
+        f = self.q("(a − b)(a + b)", -1.75, 52, lettres="")
         f.atomes[2].set_color(MOINS_C)
         f.atomes[7].set_color(PLUS_C)
         self.dire_eq(f, "a moins b, fois a plus b.")
         self.play(Create(SurroundingRectangle(f, color=TROIS, buff=0.12, stroke_width=4, corner_radius=0.08)), run_time=0.25)
-        r = self.q("50² − 1 = 2 499", -2.25, 46, largeur=3.6)
+        r = self.q("50² − 1 = 2 499", -2.6, 46, largeur=3.6)
         self.dire_eq(r, "Elle donne 50 au carré moins 1 : 2 499.")
         fin = VGroup(*r.atomes[-3:])
         self.play(fin.animate.set_color(VERT_OK), run_time=0.2)
@@ -163,13 +168,14 @@ class IdentReconnaitreShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
             sc.monter_reponse(2)
             sc.ph_eq(0, "Réponse C :", "Réponse C :", premier=True)
             sc.ph_eq(1, "(x − 3)(x + 3).", "x moins 3, fois x plus 3.", lettres="x")
-            sc.ph_eq(2, "Les mêmes termes, avec", "Les mêmes termes, avec")
-            sc.ph_eq(3, "des signes contraires.", "des signes contraires.")
+            sc.ph_eq(2, "Les mêmes termes,", "Les mêmes termes,")
+            sc.ph_eq(3, "avec des signes", "avec des signes")
+            sc.ph_eq(4, "contraires.", "contraires.")
             sc.rep_fini()
 
         self.question_pause("01q-question", "01r-reponse", ["Laquelle a", "la même forme ?"],
                             [Eq("(x + 3)²", 34), Eq("(x − 3)²", 34), Eq("(x − 3)(x + 3)", 34)], 2,
-                            ["Réponse C :", "(x − 3)(x + 3).", "Les mêmes termes, avec", "des signes contraires."],
+                            ["Réponse C :", "(x − 3)(x + 3).", "Les mêmes termes,", "avec des signes", "contraires."],
                             avant_q=avant, autres_r=apres)
 
         # ── 02 : la question en commentaire (sans Ti-Margo, règle du 17/11) ──

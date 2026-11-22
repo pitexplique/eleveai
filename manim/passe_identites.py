@@ -9,6 +9,7 @@
 #   python manim/passe_identites.py temps     → manim/sorties/4e/maths/identites/temps.json
 #   python manim/passe_identites.py voir      → affiche les entrées sans rien écrire
 #   python manim/passe_identites.py manifeste → ajoute ou remplace les 10 entrées
+#   python manim/passe_identites.py coupes    → les valeurs de COUPE_PAR_VIDEO (LecteurVideo.tsx)
 import json
 import shutil
 import sys
@@ -210,6 +211,45 @@ def entrees():
     return out
 
 
+def coupes():
+    """COUPE_PAR_VIDEO (components/LecteurVideo.tsx) : secondes retirées à la fin du mp4.
+    Comme passe_distributivite.coupes (marques du clip de fin, recalées sur le mp4 par `temps`), mais
+    rapportées à la durée de la VIDÉO (ffprobe) : c'est elle que le navigateur donne à `v.duration`,
+    et la piste son finit ~1,3 s plus tôt.
+    Paysage : au milieu de la pause entre « point f r. » et « Et si ». Short : « Mets » − 0,03 s."""
+    import subprocess
+    temps = json.loads(TEMPS.read_text(encoding="utf-8"))
+    res = {}
+    for e in EPS:
+        for suf, scr in (("", f"ident_{e['slug']}"), ("-short", f"ident_{e['slug']}_short")):
+            nom = f"4e-identites-{e['slug']}{suf}"
+            if nom not in temps:
+                continue
+            voix = json.loads((RACINE / "manim" / "voix" / f"{nom}.json").read_text(encoding="utf-8"))
+            cle = [k for k in voix if k.endswith("abonne")][0]
+            texte = voix[cle]
+            marques = json.loads((RACINE / "manim" / "scripts" / "4e" / f"{scr}_marques.json").read_text(encoding="utf-8"))[cle]
+            debut = temps[nom]["clips"][cle]
+            mp4 = SERIE / f"{e['num']}-{e['slug']}" / f"eleveai-maths-{nom}.mp4"
+            duree = float(subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
+                                          "stream=duration", "-of", "csv=p=0", str(mp4)],
+                                         capture_output=True, text=True).stdout.strip())
+
+            def instant(mot):
+                return dict(marques)[texte.index(mot)]
+
+            if suf:
+                t = debut + instant("Mets")
+                res[nom] = round(duree - t + 0.03, 2)
+            else:
+                t_et = instant("Et si")
+                avant = [m for c, m in marques if m < t_et][-1]
+                t = debut + (avant + t_et) / 2
+                res[nom] = round(duree - t, 1)
+            print(nom, "durée vidéo", round(duree, 2), "fin", cle, debut, "coupe à", round(t, 2), "→", res[nom])
+    return res
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     mode = sys.argv[1]
@@ -226,6 +266,8 @@ def main():
                 res[nom] = {"duree": duree, "clips": clips}
                 print(nom, duree, "fin", clips[list(clips)[-1]])
         TEMPS.write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
+    elif mode == "coupes":
+        coupes()
     elif mode == "voir":
         print(json.dumps(entrees(), ensure_ascii=False, indent=1))
     elif mode == "manifeste":

@@ -241,23 +241,25 @@ class IdentReconnaitre4e(PaysageRel):
         m.perso.move_to(P(-5.2, 0.45))
         m.nom.next_to(m.perso, UP, buff=0.14).set_x(-5.2)
         v = velo(1.0).move_to(P(-4.7, -2.45))
-        l1 = self.lg("Karim est comptable dans un magasin de vélos.", 1.0, 2.95, 38, maxw=10.2)
-        self.poser_avec(l1, "Karim est comptable dans un magasin de vélos.",
+        # 22/11 : en deux lignes (sur une seule, elle rétrécissait).
+        l1 = self.lg("Karim est comptable", 1.0, 3.1, 42, maxw=10.2)
+        self.poser_avec(l1, "Karim est comptable",
                         {0: lambda: [FadeIn(m.perso, shift=UP * 0.3), FadeIn(m.nom[0], shift=UP * 0.1)],
-                         2: lambda: [FadeIn(m.nom[1], shift=UP * 0.1)],
-                         7: lambda: [FadeIn(v, shift=RIGHT * 0.5)]}, rt=0.12)
+                         2: lambda: [FadeIn(m.nom[1], shift=UP * 0.1)]}, rt=0.12)
+        l1b = self.lg("dans un magasin de vélos.", 1.0, 2.5, 42, maxw=10.2)
+        self.poser_avec(l1b, "dans un magasin de vélos.", {4: lambda: [FadeIn(v, shift=RIGHT * 0.5)]}, rt=0.12)
         feuille = RoundedRectangle(width=6.0, height=2.3, corner_radius=0.12, fill_color=PAPIER, fill_opacity=1,
                                    stroke_color="#cbd5e1", stroke_width=3).move_to(P(0.6, 0.15))
         lignes = VGroup(*[Line(P(-2.6, y), P(2.6, y), color="#cbd5e1", stroke_width=2) for y in (-0.55, 0.15, 0.85)])
         lignes.move_to(feuille)
-        l2 = self.lg("Il doit calculer", -0.9, 2.15, 38, maxw=4.6)
+        l2 = self.lg("Il doit calculer", -1.35, 1.75, 38, maxw=4.6)
         self.dit(l2, "Il doit calculer", avec=[FadeIn(feuille), FadeIn(lignes)])
         a = D("49 × 51", 66, ENCRE).move_to(P(-0.6, 0.5))
         self.dire_eq(a, "49 fois 51,", echelle=1.15)
         calc = calculatrice().move_to(P(5.0, 0.15))
         cx = VGroup(Line(P(-0.6, -0.75), P(0.6, 0.75)), Line(P(-0.6, 0.75), P(0.6, -0.75))).set_stroke(PIEGE, 9)
         cx.move_to(calc)
-        l3 = self.lg("sans calculatrice.", 3.3, 2.15, 38, maxw=4.6)
+        l3 = self.lg("sans calculatrice.", 3.75, 1.75, 38, maxw=5.2)
         self.dit(l3, "sans calculatrice.", avec=[FadeIn(calc, shift=UP * 0.2)])
         self.play(Create(cx), run_time=0.3)
         b = D("= 2 499", 66, "#15803d").next_to(a, DOWN, buff=0.3).align_to(a, LEFT).shift(RIGHT * 0.9)
@@ -277,12 +279,14 @@ class IdentReconnaitre4e(PaysageRel):
         tit = self.lg("Il y a trois formes à reconnaître.", 0, 3.0, 44, JAUNE_TITRE, maxw=11)
         self.dit(tit, "Il y a trois formes à reconnaître.")
         icones = [carre_plus(), carre_moins(), rect_produit()]
-        legendes = [[("Deux parenthèses", "Deux parenthèses", 1), ("identiques, avec un +.", "identiques, avec un plus.", 1)],
-                    [("Deux parenthèses", "Deux parenthèses", 2), ("identiques, avec un −.", "identiques, avec un moins.", 1)],
-                    [("Les mêmes termes,", "Les mêmes termes,", 1), ("avec des signes contraires.", "avec des signes contraires.", 1)]]
+        # 22/11 : légendes en 3 lignes courtes à 34 pt (à 28 pt, elles étaient illisibles projetées).
+        legendes = [[("Deux parenthèses", "Deux parenthèses", 1), ("identiques,", "identiques,", 1), ("avec un +.", "avec un plus.", 1)],
+                    [("Deux parenthèses", "Deux parenthèses", 2), ("identiques,", "identiques,", 2), ("avec un −.", "avec un moins.", 1)],
+                    [("Les mêmes termes,", "Les mêmes termes,", 1), ("avec des signes", "avec des signes", 1),
+                     ("contraires.", "contraires.", 1)]]
         dits = [("Un :", "a plus b, au carré."), ("Deux :", "a moins b, au carré."), ("Trois :", "a plus b, fois a moins b.")]
         for k, x in enumerate((-4.3, 0.0, 4.3)):
-            cadre = RoundedRectangle(width=3.95, height=4.3, corner_radius=0.16, stroke_color=FAM[k], stroke_width=5,
+            cadre = RoundedRectangle(width=4.15, height=4.3, corner_radius=0.16, stroke_color=FAM[k], stroke_width=5,
                                      fill_color=FOND_CARTE, fill_opacity=1).move_to(P(x, 0.25))
             rond = Circle(radius=0.26, fill_color=FAM[k], fill_opacity=1, stroke_width=0)
             num = T(str(k + 1), 30, "#0b1220", audit=False, gras=True).move_to(rond)
@@ -290,13 +294,13 @@ class IdentReconnaitre4e(PaysageRel):
             mot, ph = dits[k]
             self.au(mot, FadeIn(cadre, shift=UP * 0.2), FadeIn(badge, scale=1.3), rt=0.3)
             ex = forme(k, 48, audit=True)
-            if ex.width > 3.4:
-                ex.scale_to_fit_width(3.4)
-            ex.move_to(P(x, 1.4))
-            ic = icones[k].move_to(P(x, 0.0))
+            if ex.width > 3.2:
+                ex.scale_to_fit_width(3.2)
+            ex.move_to(P(x + 0.25, 1.6))  # 22/11 : à droite du numéro (le 3 touchait la parenthèse)
+            ic = icones[k].move_to(P(x, 0.4))
             self.dire_eq(ex, ph, echelle=1.15, avec=[FadeIn(ic, scale=0.8)])
             for j, (s, phr, n) in enumerate(legendes[k]):
-                lg = self.lg(s, x, -1.0 - 0.45 * j, 28, maxw=3.55)
+                lg = self.lg(s, x, -0.6 - 0.45 * j, 32, maxw=3.85)
                 self.dit(lg, phr, n=n)
             self.play(Circumscribe(ex, color=FAM[k], buff=0.1), run_time=0.4)
         self.attendre_voix(marge=0.8)
@@ -516,17 +520,17 @@ class IdentReconnaitre4e(PaysageRel):
             self.dit(mot, mot.s, avec=[Create(self.cadre(es[i], FAM[k], 0.14))])
             self.play(Indicate(bande[k], color=FAM[k], scale_factor=1.06), run_time=0.4)
 
-        m1 = self.lg("la première forme,", xs[0], 0.7, 32, FAM[0], maxw=4.0)
+        m1 = self.lg("la première forme,", xs[0], 0.7, 36, FAM[0], maxw=4.0)
         classer(0, 0, m1)
-        f1 = forme(0, 34, audit=True).move_to(P(xs[0], 0.15))
+        f1 = forme(0, 38, audit=True).move_to(P(xs[0], 0.1))
         self.dire_eq(f1, "a plus b au carré.", echelle=1.1)
-        m2 = self.lg("la troisième forme.", xs[1], 0.7, 32, FAM[2], maxw=4.0)
+        m2 = self.lg("la troisième forme.", xs[1], 0.7, 36, FAM[2], maxw=4.0)
         classer(1, 2, m2)
-        m3 = self.lg("la deuxième forme,", xs[2], 0.7, 32, FAM[1], maxw=4.0)
+        m3 = self.lg("la deuxième forme,", xs[2], 0.7, 36, FAM[1], maxw=4.0)
         classer(2, 1, m3)
-        f3 = forme(1, 34, audit=True).move_to(P(xs[2], 0.15))
+        f3 = forme(1, 38, audit=True).move_to(P(xs[2], 0.1))
         self.dire_eq(f3, "a moins b au carré,", echelle=1.1)
-        ab = self.lg("a = 10 et b = x.", xs[2], -0.45, 32, lettres="x", maxw=4.0)
+        ab = self.lg("a = 10 et b = x.", xs[2], -0.5, 36, lettres="x", maxw=4.0)
         ab.atomes[0].set_color(JAUNE_TITRE)
         ab.atomes[4].set_color(CIEL)
         self.dit(ab, "a égale 10 et b égale x.")
@@ -537,22 +541,22 @@ class IdentReconnaitre4e(PaysageRel):
     def ecran_finale(self):
         self.ecran("08-finale", 0.5)
         tit = self.t("Ce que tu as appris", 48, JAUNE_TITRE).to_edge(UP, buff=0.45)
-        fig = self.familles([P(-4.85, 1.45), P(-1.55, 1.45), P(-4.85, -0.6), P(-1.55, -0.6)])
+        fig = self.familles([P(-5.1, 1.45), P(-1.8, 1.45), P(-5.1, -0.6), P(-1.8, -0.6)])
         self.au("Ce que tu as appris", Write(tit), rt=0.6)
         self.play(FadeIn(fig), run_time=0.3)
-        X0 = 0.85
+        X0 = 0.45  # 22/11 : plus à gauche, à 36 pt : les lignes longues ne rétrécissent plus
         plan = [  # (texte, phrase, y, lettres, coche ?)
-            ("Deux parenthèses identiques", "Deux parenthèses identiques", 2.3, True),
+            ("2 parenthèses identiques", "Deux parenthèses identiques", 2.3, True),
             ("avec un + : (a + b)²", "avec un plus : a plus b, au carré.", 1.75, False),
             ("Avec un − : (a − b)²", "Avec un moins : a moins b, au carré.", 0.95, True),
-            ("Les mêmes termes avec des", "Les mêmes termes avec des", 0.15, True),
-            ("signes contraires :", "signes contraires :", -0.4, False),
+            ("Les mêmes termes, avec", "Les mêmes termes avec", 0.15, True),
+            ("des signes contraires :", "des signes contraires :", -0.4, False),
             ("(a + b)(a − b)", "a plus b, fois a moins b.", -0.95, False),
             ("Sinon, ce n'est pas", "Sinon, ce n'est pas", -1.75, True),
             ("une identité.", "une identité.", -2.3, False),
         ]
         for s, ph, y, coche in plan:
-            lg = self.lg(s, 0, y, 34, lettres="", maxw=5.6)
+            lg = self.lg(s, 0, y, 36, lettres="", maxw=6.0)
             lg.align_to(P(X0, 0), LEFT)
             for a in lg.atomes:
                 if a.original_text in "+−":
