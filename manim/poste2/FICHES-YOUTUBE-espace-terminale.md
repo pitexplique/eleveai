@@ -206,7 +206,64 @@ périme si la voix est régénérée (piège n° 37 de la série des entiers).
 
 ---
 
-## E5 à E12 — ⏳ en attente de leur rendu HD
+## E5 · `terminale-espace-position-relative` — ✅ rendu HD fait
+
+`manim/sorties/terminale/maths/geometrie/espace-position-relative/eleveai-maths-terminale-espace-position-relative.mp4`
+6 min 34 (394,3 s) · 26,2 Mo · **0 instant qui touche un bord** · planche HD regardée.
+⭐ Marques prouvées à jour : **877 marques**, fichier identique à HEAD, et le correctif
+du « 0,5 » (`30bf5f3ff`) n'a jamais touché ce fichier-là — ses marques sont celles de
+`4ce34fff5` et elles sont bonnes (contrôle par le CONTENU, pas par la date).
+⭐ `grep -c "self\.au_t("` → **0** : aucun instant relevé à la main, donc rien qui se
+périme si la voix est régénérée (piège n° 37 de la série des entiers).
+⚠️ `verifier-zone-margo` : 39 instants, qui font exactement les trois écrans à grosse
+mascotte (garde 11 s ≈ 10,8 · finale 21 s ≈ 20,8 · abonnement 7 s ≈ 6,4) et dont le
+surplus est constant dans chacun. **Aucun écran de question touché** — c'est le critère.
+
+```json
+{
+  "id": "terminale-espace-position-relative",
+  "notionId": "geometrie_espace",
+  "microId": "espace_position_relative",
+  "classe": "terminale-spe",
+  "ceinture": "verte",
+  "serie": "Maths Tle spé",
+  "type": "longue",
+  "fichier": "terminale/maths/geometrie/espace-position-relative/eleveai-maths-terminale-espace-position-relative.mp4",
+  "miniature": "terminale/maths/geometrie/espace-position-relative/eleveai-maths-terminale-espace-position-relative.png",
+  "titre": "Deux droites qui ne se croisent jamais, sans être parallèles — Positions relatives · Tle spé",
+  "centres": ["transports"],
+  "tags": ["positions relatives", "droite et plan", "deux plans", "non coplanaires", "espace", "terminale", "bac"]
+}
+```
+
+**Accroche** (à relire par Frédéric avant publication) :
+
+> Pense à une route qui passe sous un pont. Vue d'en haut, les deux tracés se croisent.
+> Dans l'espace, ils ne se rencontrent jamais — et ils ne sont pas parallèles non plus.
+> Dans le plan, cette situation n'existe pas. Dans l'espace, c'est la plus fréquente.
+>
+> Dans cette vidéo :
+> • droite et plan : on remplace x, y et z dans l'équation, et on lit l'équation en t —
+>   une solution (sécants), aucune (strictement parallèle), ou toutes (contenue)
+> • deux plans : on compare les coefficients, puis on teste un point ; 2x + 2y + 2z + 5 = 0
+>   est parallèle à x + y + z − 1 = 0, et il ne lui est PAS confondu
+> • le piège, et il coûte des points : pour deux droites, pas de point commun ne veut
+>   PAS dire parallèles — ça veut souvent dire non coplanaires, et aucun plan ne les
+>   contient toutes les deux
+> • la méthode annoncée au bac, et le mot exact : sécants, strictement parallèles,
+>   confondus, ou non coplanaires
+>
+> Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
+
+**Chapitres**, relevés sur le rendu :
+0:00 garde · 0:10 la route et le pont · 0:33 droite et plan · 1:16 trois cas ·
+1:39 question 1 · 2:06 réponse · 2:32 deux plans · 3:07 le piège · 3:42 question 2 ·
+4:07 réponse · 4:28 au bac · 5:01 à toi de jouer · 5:25 correction ·
+6:06 ce que tu as appris.
+
+---
+
+## E6 à E12 — ⏳ en attente de leur rendu HD
 
 Les identifiants sont fixés et doivent rester ceux-là (c'est sur eux que le coach
 branchera) :

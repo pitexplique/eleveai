@@ -347,6 +347,65 @@ class Repere3D:
         return DashedLine(self.pt(*a), self.pt(*b), dash_length=0.1).set_stroke(couleur, sw)
 
 
+# ⛔⛔ LE NOYAU DE LA CAVALIÈRE — UN PLAN PEUT SE PROJETER SUR UNE DROITE (22/11/2026)
+#
+# La projection envoie (x, y, z) sur (x + 0,41 y ; z + 0,287 y). Elle écrase donc
+# EXACTEMENT une direction, celle qui va sur (0 ; 0) :
+NOYAU = np.array([-FUITE[0], 1.0, -FUITE[1]])      # ≈ (−0,41 ; 1 ; −0,287)
+#
+# ⭐⭐ Tout plan qui CONTIENT cette direction se dessine comme une LAME, et un plan qui
+# la contient exactement se dessine comme un TRAIT. Mesuré sur l'épisode 5, où deux
+# écrans étaient touchés et où rien ne l'avait dit — ni l'audit, ni BORDS, ni
+# verifier-avant-rendu : la figure est dans le cadre, elle est simplement plate.
+#
+#   normale du plan   angle de la normale au noyau   épaisseur projetée   lisible ?
+#   (1 ; 1 ; −1)              26,9°                       0,40             ✅
+#   (0 ; 0 ; 1)               14,9°                       0,34             ✅
+#   (1 ; 1 ; 1)                9,0°                       0,13             ⛔ une lame
+#   (1 ; 1 ; 2)                0,4°                       0,01             ⛔⛔ un trait
+#
+# ⚠️ Et on ne choisit PAS l'équation : c'est la voix qui la dicte. Agrandir `demi`
+# n'arrange rien (l'épaisseur grandit comme la longueur, la lame reste une lame), et
+# le choix de u1/u2 n'y change rien non plus — la projection d'un plan ne dépend que
+# du plan. ⭐ Le remède est de ne pas projeter : on DESSINE le plan à plat
+# (`plan_dessine` ci-dessous), comme un manuel le fait.
+#
+# ⭐ À appeler AVANT de poser un morceau de plan dans un écran :
+def platitude(normale):
+    """L'angle, en degrés, entre la normale du plan et le noyau de la projection.
+    Au-dessus de ~12° le morceau se lit comme une surface ; en dessous, c'est une
+    lame, et il faut `plan_dessine` à la place."""
+    n = np.array(normale, dtype=float)
+    cos = abs(float(n @ NOYAU)) / (np.linalg.norm(n) * np.linalg.norm(NOYAU))
+    return math.degrees(math.asin(min(1.0, cos)))
+
+
+def plan_dessine(largeur=2.8, profondeur=1.05, cisaille=0.55, couleur=C_PLAN, nom=None,
+                 op=0.26, sw=4, fs=26, decal=UR):
+    """UN PLAN DESSINÉ À PLAT — un parallélogramme sur la page, PAS une projection.
+
+    ⭐ C'est la figure des manuels, et c'est le seul recours quand `platitude()` dit
+    que le vrai plan se projetterait sur une lame (voir le bloc ci-dessus). Elle ne
+    ment pas : elle ne prétend pas montrer OÙ est le plan dans le repère, elle montre
+    CE QU'EST un plan — et c'est précisément ce que demandent les écrans « deux plans
+    parallèles » et « droite parallèle à un plan ».
+    ⛔ Donc : jamais dans un repère. Un parallélogramme posé à côté d'axes se lirait
+    comme un morceau de plan DU repère, et il serait faux."""
+    l, p = largeur / 2.0, profondeur / 2.0
+    coins = [np.array([-l - cisaille, -p, 0.0]), np.array([l - cisaille, -p, 0.0]),
+             np.array([l + cisaille, p, 0.0]), np.array([-l + cisaille, p, 0.0])]
+    poly = Polygon(*coins, fill_color=couleur, fill_opacity=op, stroke_color=couleur,
+                   stroke_width=sw)
+    g = VGroup(poly)
+    if nom:
+        t = Text(nom, font_size=fs, color=couleur, weight=BOLD, slant=ITALIC)
+        t.move_to(coins[2] + np.array([decal[0], decal[1], 0.0]) * 0.28)
+        g.add(t)
+        g.nom = t
+    g.poly, g.coins = poly, coins
+    return g
+
+
 def mesure_cadre(*groupes):
     """Les bords (x_min, x_max, y_min, y_max) de ce qu'on vient de poser.
     ⭐ À appeler AVANT de rendre, sur toute figure large : la marge de 3 % est

@@ -55,6 +55,20 @@ FOND_CARTE = "#0b1220"
 XL, BORD_X = 2.2, 6.6          # la colonne de droite (marge de 3 % : 0,43 du bord)
 
 
+def fr(v):
+    """UN NOMBRE ÉCRIT À LA FRANÇAISE, hors de toute Scene : virgule, et le vrai − (U+2212).
+
+    ⛔⛔ AJOUTÉ POUR L'ÉPISODE 5, et c'est un piège qui attendait son premier décimal :
+    `ligne_param` et `equation_plan` écrivaient leurs nombres avec `str(...)`, donc
+    `str(2.5)` donnait « 2.5 », avec un POINT. Les épisodes 1 à 4 n'ont que des entiers,
+    le défaut était donc invisible — et l'épisode 5 écrit « x + y + z + 2,5 = 0 ».
+    ⭐ C'est le même piège que `self.nombre(v)` du socle a déjà payé sur l'épisode 2
+    (`AUDIT-ABSENT « 5 » (0.5)`), mais `nombre` est une MÉTHODE : ces deux fonctions-ci
+    sont au niveau du module et ne pouvaient pas s'en servir."""
+    s = f"{v:g}" if isinstance(v, float) else str(v)
+    return s.replace(".", ",").replace("-", "−")
+
+
 def ligne_param(nom, a, c, var="t"):
     """UNE LIGNE DE REPRÉSENTATION PARAMÉTRIQUE, écrite comme au tableau :
     « x = 1 + 2t », « y = 2 − t », « z = 3t », « x = 2 ».
@@ -64,11 +78,11 @@ def ligne_param(nom, a, c, var="t"):
     ⭐ Les coefficients se passent en NOMBRES, pas en chaînes recopiées : un épisode
     qui réécrit ses nombres à la main en perd un au quatrième écran."""
     if c == 0:
-        return f"{nom} = {a}"
-    coef = "" if abs(c) == 1 else str(abs(c))
+        return f"{nom} = {fr(a)}"
+    coef = "" if abs(c) == 1 else fr(abs(c))
     if a == 0:
         return f"{nom} = {'−' if c < 0 else ''}{coef}{var}"
-    return f"{nom} = {a} {'−' if c < 0 else '+'} {coef}{var}"
+    return f"{nom} = {fr(a)} {'−' if c < 0 else '+'} {coef}{var}"
 
 
 def equation_plan(a, b, c, d=None, var=("x", "y", "z")):
@@ -82,11 +96,11 @@ def equation_plan(a, b, c, d=None, var=("x", "y", "z")):
     for coef, v in zip((a, b, c), var):
         if coef == 0:
             continue
-        morceaux.append(("−" if coef < 0 else "+", v if abs(coef) == 1 else f"{abs(coef)}{v}"))
+        morceaux.append(("−" if coef < 0 else "+", v if abs(coef) == 1 else f"{fr(abs(coef))}{v}"))
     if d is None:
         morceaux.append(("+", "d"))
     elif d != 0:
-        morceaux.append(("−" if d < 0 else "+", str(abs(d))))
+        morceaux.append(("−" if d < 0 else "+", fr(abs(d))))
     if not morceaux:
         raise ValueError("equation_plan : a, b et c sont tous nuls — ce n'est pas un plan")
     s = morceaux[0][1] if morceaux[0][0] == "+" else "− " + morceaux[0][1]
@@ -319,7 +333,28 @@ class EcransEspace(AuditSynchro, MotsCales, Notion6e):
         ligne.move_to(cadre).align_to(cadre.get_left() + RIGHT * 0.2, LEFT)
         return VGroup(cadre, ligne)
 
-    def q_tete(self, question, choix):
+    def q_tete(self, question, choix, largeur=4.1, xl=XL):
+        """La question-pause : « Question ! », la question, les trois cartes, la pause.
+
+        ⭐⭐ `largeur` ET `xl` (ajoutés pour l'épisode 5, MESURÉS hors rendu) : une carte
+        de 4,1 posée à x = 2,2 n'offre que **2,20** à son texte, parce que
+        `carte_choix` réduit le GROUPE rond + lettre + corps, et que le rond, lui, ne
+        rétrécit pas de bon cœur. Conséquence chiffrée : un choix de quatre lignes
+        tombe à **14,6 px quelle que soit la police demandée** — la police d'entrée ne
+        change rien, c'est la réduction qui décide. C'est le défaut n° 4 de l'épisode 1
+        (« des cartes à 10 px ») sous une autre forme, et l'épisode 3 l'avait contourné
+        en coupant en trois lignes de 14 caractères.
+        ⛔ Mais on ne peut pas toujours couper : la voix de l'épisode 5 dit « la droite
+        est parallèle au plan, sans aucun point commun » — 56 caractères, et on ne
+        raccourcit pas un choix que la voix prononce mot pour mot.
+        ⭐ Le remède est la LARGEUR, pas la police : `largeur=6.0, xl=0.6` offre **4,10**
+        au texte, et le même choix tient à 26 px sans aucune réduction. La colonne de
+        cartes commence alors à x = 0,6 et finit à 6,6 — il faut donc que la donnée de
+        gauche s'arrête avant x = 0,4 (`gauche(..., xmax=0.2)`).
+        ⚠️ Les défauts par défaut sont ceux des épisodes 1 à 4 : rien ne change pour eux.
+        ⚠️ Et le bas de `pause` doit rester AU-DESSUS de −2,15, sinon il s'écrit sur la
+        tête de Ti-Margo (mesuré : des cartes qui descendent à −1,40 y mettent la pause
+        à −2,44). Le contrôle se fait hors rendu, en appelant cette fonction."""
         tete = VGroup(pastille_pause(0.38), self.t("Question !", 38, ORANGE_RETENUE)).arrange(RIGHT, buff=0.22)
         self.col(tete, 3.15)
         rebours = CompteARebours(5, r=0.34, fs=32).next_to(tete, RIGHT, buff=0.35)
@@ -327,16 +362,18 @@ class EcransEspace(AuditSynchro, MotsCales, Notion6e):
             rebours.shift(LEFT * (rebours.get_right()[0] - BORD_X))
         q = VGroup(*[x if isinstance(x, Mobject) else self.t(x, 32) for x in question])
         q.arrange(DOWN, aligned_edge=LEFT, buff=0.14)
-        self.col(q, 0)
+        self.col(q, 0, xl)
         q.align_to(P(0, tete.get_bottom()[1] - 0.25), UP)
-        cartes = VGroup(*[self.carte_choix(l, c) for l, c in zip("ABC", choix)]).arrange(DOWN, buff=0.16)
-        self.col(cartes, 0)
+        cartes = VGroup(*[self.carte_choix(l, c, largeur=largeur)
+                          for l, c in zip("ABC", choix)]).arrange(DOWN, buff=0.16)
+        self.col(cartes, 0, xl)
         cartes.align_to(P(0, q.get_bottom()[1] - 0.3), UP)
-        pause = self.col(self.t("Mets pause, et choisis !", 32, ORANGE_RETENUE), cartes.get_bottom()[1] - 0.45)
+        pause = self.col(self.t("Mets pause, et choisis !", 32, ORANGE_RETENUE),
+                         cartes.get_bottom()[1] - 0.45, xl)
         if pause.width < 3.5:
             pause = VGroup(self.t("Mets pause,", 32, ORANGE_RETENUE), self.t("et choisis !", 32, ORANGE_RETENUE))
             pause.arrange(DOWN, aligned_edge=LEFT, buff=0.08)
-            pause.move_to(P(0, cartes.get_bottom()[1] - 0.2), aligned_edge=UP).align_to(P(XL, 0), LEFT)
+            pause.move_to(P(0, cartes.get_bottom()[1] - 0.2), aligned_edge=UP).align_to(P(xl, 0), LEFT)
         return tete, q, cartes, pause, rebours
 
     def choix2(self, l1, l2, fs=28):
@@ -390,14 +427,29 @@ class EcransEspace(AuditSynchro, MotsCales, Notion6e):
               flush=True)
 
     def q_reponse(self, cartes, bonne, pause, rebours):
+        """La carte gagnante : vert, les deux autres estompées, la coche, un battement.
+
+        ⛔⛔ MESURÉ AU DRY RUN DE L'ÉPISODE 5 — le BATTEMENT peut faire SORTIR la carte
+        du cadre. `scale(1.12)` autour du centre pousse le bord droit à
+        cx + 1,12 × demi : pour une carte de 6,0 centrée en x = 3,6, cela fait **6,96**,
+        au-delà de la marge de 3 % (6,68), et le dry run l'a signalé deux fois (une par
+        question). Les cartes de 4,1 des épisodes 1 à 4 y échappaient de justesse
+        (6,55) — c'est donc un défaut qui dormait, et que la carte large a réveillé.
+        ⭐ On borne le facteur sur les DEUX bords, et s'il ne reste plus de place on ne
+        bat pas : la couleur, l'estompage des deux autres et la coche disent déjà tout."""
         b = cartes[bonne]
         anims = [b[0].animate.set_stroke(VERT_OK, width=7).set_fill("#052e16", 1),
                  b[1][0][0].animate.set_fill(VERT_OK)]
         anims += [cartes[j].animate.set_opacity(0.3) for j in range(len(cartes)) if j != bonne]
         self.play(*anims, FadeOut(rebours), FadeOut(pause), run_time=0.25)
         ok = self.coche(VERT_OK, 0.2).move_to(b[0].get_right() + LEFT * 0.35)
-        self.play(b.animate.scale(1.12), Create(ok), run_time=0.25)
-        self.play(b.animate.scale(1 / 1.12), ok.animate.scale(1 / 1.12, about_point=b.get_center()),
+        demi, cx = max(1e-6, b.width / 2), float(b.get_center()[0])
+        k = min(1.12, (6.68 - cx) / demi, (6.68 + cx) / demi)
+        if k <= 1.005:
+            self.play(Create(ok), run_time=0.3)
+            return ok
+        self.play(b.animate.scale(k), Create(ok), run_time=0.25)
+        self.play(b.animate.scale(1 / k), ok.animate.scale(1 / k, about_point=b.get_center()),
                   run_time=0.25)
         return ok
 

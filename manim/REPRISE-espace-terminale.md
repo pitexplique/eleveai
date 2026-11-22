@@ -33,7 +33,8 @@
 | E2 `espace_repere_coordonnees` | ✅ **HD livré** (5 min 54, 0 bord, planche HD regardée) |
 | E3 `espace_droite_parametrique` | ✅ **HD livré** (5 min 56, 0 bord, planche HD regardée) |
 | E4 `espace_plan_equation` | ✅ **HD livré** (6 min 09, 0 bord, planche HD regardée) |
-| les 8 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
+| E5 `espace_position_relative` | ✅ **HD livré** (6 min 34, 0 bord, planche HD regardée) |
+| les 7 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
 | les 12 shorts | ⏳ pas de voix encore |
 | les rendus HD, le branchement coach, les fiches YouTube | ⏳ |
 
@@ -56,15 +57,20 @@ ls manim/sorties/terminale/maths/geometrie/*/*.mp4   # les HD livrés
 python manim/poste2/verifier-voix-espace.py          # 12 voix, 15 clips, lettres A 8 B 8 C 8
 ```
 
-**Le prochain geste, sans réfléchir** : écrire `espace_position_relative.py` (E5).
+**Le prochain geste, sans réfléchir** : écrire `espace_defi.py` (E6).
 Tout l'attend — sa voix dans `manim/poste2/VOIX-espace-terminale.md`, ses WAV, ses marques,
 et un socle qui a maintenant tout ce qu'il faut : `systeme`, `ligne_param`, `eq_plan`,
-`eq_zero`, `choix3`, `au_fin`, `trip(par=True)`.
-⭐ Le modèle le plus propre est **`espace_plan_equation.py` (E4)** : quinze écrans, chaque
-`sans_audit` porte sa raison écrite à côté, et chaque correction d'image est commentée à
-l'endroit où elle a été payée.
-⛔ Lire d'abord « Ce que l'épisode 3 a appris » et « Ce que l'épisode 4 a confirmé » plus
-bas : ensemble elles disent où regarder en premier, et ce qu'aucun outil ne voit.
+`eq_zero`, `choix3`, `au_fin`, `trip(par=True)`, `q_tete(largeur, xl)`, et — dans
+`espace3d.py` — `platitude()` et `plan_dessine()`.
+⚠️ **E6 garde 13 cues non placées**, toutes dans des clips de correction : les regarder
+AVANT d'écrire ses écrans, pas après (`manim/poste2/cues2marques-espace.py`).
+⭐ Le modèle le plus propre est **`espace_position_relative.py` (E5)** : quinze écrans,
+chaque `sans_audit` porte sa raison écrite à côté, chaque cote est MESURÉE hors rendu, et
+chaque correction d'image est commentée à l'endroit où elle a été payée.
+⛔ Lire d'abord « Ce que l'épisode 3 a appris », « Ce que l'épisode 4 a confirmé » et
+« Ce que l'épisode 5 a appris » plus bas : ensemble elles disent où regarder en premier,
+et ce qu'aucun outil ne voit. ⭐ Celle de E5 est la plus utile des trois, parce que deux
+de ses défauts étaient dans les OUTILS et touchent donc les sept épisodes qui restent.
 
 **L'ordre pour chaque épisode, sans en sauter un :**
 
@@ -88,7 +94,8 @@ bas : ensemble elles disent où regarder en premier, et ce qu'aucun outil ne voi
   `brancher-videos-coach.mjs --classe terminale-spe` répond « Rien à brancher » tant que
   la vidéo n'est pas en ligne ;
 - `espace_defi` garde **13** cues non placées et `ps_espace_angle` **2** (toutes dans des
-  clips de correction) : à regarder au moment d'écrire ces deux épisodes-là.
+  clips de correction) : à regarder au moment d'écrire ces deux épisodes-là — et
+  `espace_defi`, c'est **le prochain**.
 
 **Ce qu'il ne faut pas refaire :**
 
@@ -161,6 +168,7 @@ sa question doit retrouver le même dessin.
 | `manim/poste2/verifier-avant-rendu.py <script.py> <Scene>` | **avant le dry run** | un `au_mot` sans marque à son offset exact, une question qui n'est pas dans la voix mot pour mot |
 | `AUDIT=1 BORDS=1 … --dry_run` | **avant le `-ql`** | un nombre affiché que la voix ne dit pas, un objet hors de la marge de 3 % |
 | `scripts/planche-video.py` **+** `manim/poste2/apercu-instants.py` | **sur le `-ql`, avant le HD** | ce qui est réellement affiché — et **rien d'autre ne le voit** |
+| un **recadrage PIL ×2,5 à ×3** sur la figure de l'épisode | **sur le `-ql`, après la planche** | ce qu'une vignette à trois colonnes ne montre pas : sur E5, deux défauts de la figure du pont, dont « la route ne passe sous le pont nulle part » |
 
 ⛔⛔ **PLANCHE *ET* GROS PLANS, jamais la planche seule.** `planche-video.py` prend la
 **dernière image** de chaque écran : tout ce qui est recouvert à la fin y est invisible.
@@ -327,6 +335,117 @@ im.crop((0, h*0.08, w*0.34, h*0.72)).resize(…, Image.LANCZOS)
 
 ✅ Confirmé aussi, pour la troisième fois : un `AUDIT-AVANCE` de **0,07 s** en `-ql`
 disparaît en `-qh` — c'est la quantification à 15 images par seconde, pas un défaut.
+
+---
+
+## ⛔⛔ Ce que l'épisode 5 a appris — à lire AVANT d'écrire l'épisode 6
+
+Cinq des huit défauts étaient **neufs**, et deux d'entre eux étaient dans les OUTILS, pas
+dans l'épisode : ils attendaient simplement qu'un épisode les réveille.
+
+### ⭐⭐ UN PLAN PEUT SE PROJETER SUR UNE DROITE — et rien ne le dit
+
+La cavalière envoie (x ; y ; z) sur (x + 0,41 y ; z + 0,287 y). Elle écrase donc
+**exactement une direction**, celle qui part sur (0 ; 0) :
+
+> `NOYAU = (−0,41 ; 1 ; −0,287)` — c'est maintenant dans `espace3d.py`.
+
+Tout plan qui CONTIENT cette direction se dessine comme une lame, et un plan qui la
+contient exactement se dessine comme un **trait**. Mesuré sur les quatre plans de E5 :
+
+| normale | angle au noyau | épaisseur projetée | à l'écran |
+|---|---|---|---|
+| (1 ; 1 ; −1) | 26,9° | 0,40 | ✅ un morceau de plan |
+| (0 ; 0 ; 1) | 14,9° | 0,34 | ✅ le sol |
+| (1 ; 1 ; 1) | **9,0°** | 0,13 | ⛔ deux lames qu'on prend pour du papier de champ |
+| (1 ; 1 ; 2) | **0,4°** | **0,01** | ⛔⛔ un trait qu'on prend pour une seconde droite |
+
+⛔ Et on ne choisit PAS l'équation : c'est la voix qui la dicte. Agrandir `demi` n'arrange
+rien (l'épaisseur grandit comme la longueur), et le choix de u1/u2 non plus — la
+projection d'un plan ne dépend que du plan.
+⭐ Deux outils neufs dans `espace3d.py` : **`platitude(normale)`** rend l'angle, à
+appeler AVANT de poser un morceau de plan ; **`plan_dessine()`** rend un plan à plat,
+en parallélogramme, comme un manuel. ⛔ `plan_dessine` ne va JAMAIS dans un repère :
+posé à côté d'axes, il se lirait comme un morceau de plan DU repère, et il serait faux.
+⭐ Sur E5, les écrans 05 (deux plans parallèles) et 09b (droite parallèle à un plan) ont
+donc perdu leur repère et gagné un schéma — et ils sont devenus les plus lisibles de
+l'épisode.
+
+### ⭐⭐ Une carte de choix plafonne à 14,6 px : c'est la LARGEUR qui décide, pas la police
+
+`carte_choix` réduit le GROUPE rond + lettre + corps pour le faire tenir dans
+`largeur − 1,15`. Le rond, lui, ne rétrécit pas de bon cœur : une carte de 4,1 n'offre
+donc que **2,20** à son texte. Mesuré hors rendu, pour un choix de quatre lignes :
+
+| police demandée | 24 | 26 | 28 | 30 |
+|---|---|---|---|---|
+| police OBTENUE | 14,6 | 14,9 | 15,1 | 15,3 |
+
+⛔ Augmenter la police ne change **rien** — et c'est le défaut n° 4 de l'épisode 1
+(« des cartes à 10 px ») sous une autre forme. L'épisode 3 l'avait contourné en coupant
+en trois lignes de 14 caractères ; E5 ne pouvait pas : sa voix dit « la droite est
+parallèle au plan, sans aucun point commun », 56 caractères qu'on ne raccourcit pas.
+⭐ `q_tete(question, choix, largeur=6.0, xl=0.6)` : la colonne de cartes va de x = 0,6 à
+6,6, offre **4,10** au texte, et les trois choix tiennent à **26 px sans aucune
+réduction** — le plus lisible des cinq épisodes. ⚠️ La donnée de gauche doit alors
+s'arrêter avant x = 0,4 (`gauche(..., xmax=0.2)`), et la place de l'écran de RÉPONSE se
+recompte en entier, du bas vers le haut.
+
+### ⛔ Le battement de la carte gagnante SORT du cadre dès que la carte est large
+
+`q_reponse` faisait `scale(1.12)` autour du centre. Pour une carte de 6,0 centrée en
+x = 3,6, le bord droit part à **6,96** — au-delà de la marge (6,68), et le dry run l'a
+signalé deux fois. Les cartes de 4,1 des épisodes 1 à 4 y échappaient de justesse
+(6,55) : un défaut qui dormait depuis quatre épisodes. ⭐ Le facteur est maintenant
+borné sur les deux bords, et s'il ne reste plus de place, on ne bat pas.
+
+### ⛔ L'ÉCHELLE DES CEINTURES MONTE À −1,98, ET CETTE NOTE DISAIT −2,6
+
+La page de garde de E5 a posé deux lignes à y = −1,55 (bas : −1,95) en se fiant à
+« la bande libre est y ≈ −2,0 » écrit plus haut. À l'image, **les ceintures s'écrivaient
+par-dessus**. Mesuré : `echelle()` alignée en bas occupe **y de −3,45 à −1,98**. La ligne
+unique de l'épisode 4, à −1,6, passait de 0,18 ; un bloc de DEUX lignes ne passe pas.
+⭐ La leçon n'est pas le chiffre, c'est que **ce chiffre-là était dans cette note et il
+était faux** : une cote se remesure sur l'objet, elle ne se recopie pas.
+
+### ⛔ Un gros AUDIT-TARD cachait une vraie avance — cinquième fois de la série
+
+`AUDIT-TARD 05-appliquer « 1 » (2,5 ≠ −1) **24,46 s**`. L'audit avait rattaché le « 1 »
+de `2,5 ≠ −1` au « moins 1 » de l'équation de P, dite 24 secondes plus tôt. Sur SA propre
+occurrence (« et non moins 1 », à la fin du clip), l'affichage était en **avance de
+0,8 s**. ⭐ Les 27 autres TARD de E5 étaient tous légitimes ; celui-là ne se trouvait
+qu'en relisant à la main le plus gros. Le contrôle coûte deux minutes :
+`grep -o "AUDIT-TARD.*" <log>`, trié par valeur décroissante, et on lit les premiers.
+
+### ⛔ Dessiner un pont : ce qui doit paraître HORIZONTAL se dessine selon x
+
+Trois versions de la même figure, et seul le **gros plan** (recadrage ×3) a montré les
+deux premières erreurs — la leçon de l'épisode 4, confirmée sur un objet qui n'est pas
+un personnage :
+1. le tablier filait en PROFONDEUR : comme toute direction de fuite monte à 35°, on
+   lisait une **rampe de skate**, et les piles étaient plantées dans la chaussée ;
+2. corrigé, le tablier était à z = 1,3 et la route s'arrêtait à y = 2,6 : **les deux
+   rubans ne se chevauchaient NULLE PART**, alors que « vue d'en haut, les deux tracés
+   se croisent » est la phrase que l'écran doit montrer. Tablier descendu à z = 0,58,
+   route allongée à y = 3,6 : elle entre sous le pont, disparaît, et ressort.
+⭐ La règle : **dans cette cavalière, ce qui doit paraître horizontal se dessine selon x,
+ce qui doit s'éloigner se dessine selon y.** Un pont est horizontal, une route s'éloigne.
+⚠️ Et une droite qui porte le vecteur (1 ; 0 ; 0) depuis l'ORIGINE se confond trait pour
+trait avec l'axe des x : on la décale (ici en y = 0,7), même direction, même leçon.
+
+### ⛔ L'écran de correction hérite — et l'héritage descend plus bas qu'on ne croit
+
+Déjà payé sur l'épisode 3, repayé ici : « les termes en t » s'écrivait **par-dessus
+l'équation de P**, parce que le bloc de l'écran de défi est posé à y = 0,85 et fait DEUX
+lignes, donc descend à 0,45. ⭐ Avant de poser le premier bloc d'une correction, on lit
+le `get_bottom()` de ce qui reste, on ne regarde pas le `y` qu'on avait écrit.
+
+### ⛔ `str(2,5)` écrit « 2.5 » — dans le SOCLE, pas dans l'épisode
+
+`ligne_param` et `equation_plan` écrivaient leurs nombres avec `str(...)`. Les épisodes 1
+à 4 n'ont que des entiers : le défaut était invisible. E5 écrit « x + y + z + 2,5 = 0 »,
+et il est sorti. ⭐ `fr(v)` est maintenant au niveau du module (`self.nombre` est une
+méthode, ces deux fonctions ne pouvaient pas s'en servir).
 
 ---
 
