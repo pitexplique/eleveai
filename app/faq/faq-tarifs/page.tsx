@@ -10,13 +10,10 @@ import FAQTarifs from "./FAQTarifs";
 // tarif établissement et son plafond six jours après le retrait de l'offre, sur
 // la page dont les réponses partent en plus dans un `FAQPage`. Retirer la carte
 // n'éteint rien tant que la description dit le contraire.
-import { PERIODE_ANNUELLE, PRIX_ANNUEL, PRIX_MENSUEL, montant } from "@/lib/tarifs";
+// 22/11/2026 : au modèle du 22/11 (note modele-tarifaire-22-11).
+import { PHRASE_ESSAI, PHRASE_FAMILLE, PHRASE_PROF } from "@/lib/tarifs";
 
-const resume =
-  `L'élève ne paie jamais : le coach, les exercices, les parcours et les évaluations ne se paient pas. ` +
-  `Ce qui se paie, c'est la fenêtre du parent — ${montant(PRIX_MENSUEL)} par mois sans engagement, ou ${montant(PRIX_ANNUEL)} ${PERIODE_ANNUELLE}, ` +
-  `sur une seule adresse courriel et quel que soit le nombre d'enfants. ` +
-  `Les enseignants, eux, ont un compte gratuit à titre personnel, ouvert sur leur adresse académique.`;
+const resume = `${PHRASE_ESSAI} Famille : ${PHRASE_FAMILLE}. Prof : ${PHRASE_PROF}.`;
 
 export const metadata: Metadata = {
   title: "FAQ Tarifs",

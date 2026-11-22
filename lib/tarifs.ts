@@ -617,6 +617,13 @@ export const OFFRE = {
   comptes: ["le coach", "les exercices interactifs", "le calcul rapide", "les automatismes", "les questions des vidéos", "les QCM"],
 } as const;
 
+/** ⭐ 22/11/2026 — les phrases du modèle, écrites une fois pour toutes les pages. */
+export const PHRASE_ESSAI = `${OFFRE.questionsGratuitesParJour} questions offertes chaque jour, sans compte. Les fiches de cours, les énigmes à projeter et les PDF restent libres.`;
+export const PHRASE_FAMILLE = `${montant(OFFRE.famille)} par mois, autant d'enfants que vous voulez, du CP à la Terminale, sans engagement`;
+export const PHRASE_PROF = `${montant(OFFRE.prof)} par mois, toutes vos classes, sans engagement`;
+/** ⏳ Non validé le 22/11 : l'année, l'essai prof, le Premium, les pays, les établissements. */
+export const PHRASE_A_VENIR = "La formule à l'année et les prix des autres pays seront fixés avant l'ouverture.";
+
 /** La phrase principale de l'offre, écrite une fois. ⛔ Jamais « illimité » ni « sans limite ». */
 export const PHRASE_OFFRE = `Inscris-toi gratuitement. Pour le vrai suivi : ${montant(PRIX_MENSUEL)}/mois ou ${montant(PRIX_ANNUEL)}/an (${MOIS_OFFERTS} mois offerts).`;
 /** La ligne du prix de lancement, à côté de la phrase principale. */

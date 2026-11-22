@@ -21,7 +21,8 @@ import Link from "next/link";
 // qualité »). Cette page est le seul endroit où la réponse tient au long.
 // ⛔ Elle ne répète pas /tarifs : là-bas on dit COMBIEN, ici on dit POURQUOI.
 // Aucun montant n'est écrit à la main — voir `lib/tarifs.ts`.
-import { ENSEIGNANT, PRIX_ANNUEL, PRIX_MENSUEL, montant } from "@/lib/tarifs";
+// 22/11/2026 : au modèle du 22/11 (note modele-tarifaire-22-11).
+import { OFFRE, montant } from "@/lib/tarifs";
 
 export default function TarifsJustesClient() {
   return (
@@ -43,7 +44,7 @@ export default function TarifsJustesClient() {
             </p>
 
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-50">
-              Pourquoi {montant(PRIX_ANNUEL)} par an, et pas dix fois plus
+              Pourquoi {montant(OFFRE.famille)} par mois, et pas dix fois plus
             </h1>
 
             <p className="max-w-3xl text-slate-300">
@@ -57,10 +58,10 @@ export default function TarifsJustesClient() {
             <div className="rounded-2xl border border-emerald-500/30 bg-slate-900/60 p-4 sm:p-5">
               <p className="text-sm font-semibold text-emerald-300">À retenir</p>
               <ul className="mt-2 text-sm text-slate-200 space-y-1">
-                <li>• L&apos;élève ne paie jamais. Ce qui se paie, c&apos;est de VOIR et de GARDER.</li>
+                <li>• {OFFRE.questionsGratuitesParJour} questions offertes chaque jour. Puis {montant(OFFRE.famille)} par mois pour toute la famille.</li>
                 <li>• Aucun investisseur à rémunérer, aucun commercial à payer.</li>
                 <li>• L&apos;IA démultiplie le travail, l&apos;enseignant vérifie. Jamais l&apos;un sans l&apos;autre.</li>
-                <li>• Aucun quota, aucun dépassement, aucune facture surprise.</li>
+                <li>• Un prix rond, sans dépassement ni facture surprise.</li>
               </ul>
             </div>
           </header>
@@ -97,7 +98,7 @@ export default function TarifsJustesClient() {
             Les exercices, les corrections et les explications sont produits avec
             l&apos;aide de l&apos;intelligence artificielle. C&apos;est ce qui
             permet d&apos;écrire en un mois ce qui prenait des années, et donc de
-            demander {montant(PRIX_MENSUEL)} par mois.
+            demander {montant(OFFRE.famille)} par mois.
           </p>
           <p className="text-sm text-slate-200">
             Mais les deux moitiés de cette phrase ne se séparent jamais. Un
@@ -136,9 +137,9 @@ export default function TarifsJustesClient() {
             quoi faire ensuite.
           </p>
           <p className="text-xs text-slate-400">
-            Et si l&apos;enfant d&apos;à côté ne paie pas, il apprend exactement la
-            même chose. Une famille qui ne peut pas payer ne paie pas, et personne
-            ne le saura.
+            Et un enfant dont la famille ne s&apos;abonne pas garde ses
+            {" "}{OFFRE.questionsGratuitesParJour} questions chaque jour, les fiches de cours,
+            les énigmes et les PDF. En classe, avec le code du prof, il n&apos;est jamais compté.
           </p>
         </div>
 
@@ -182,12 +183,10 @@ export default function TarifsJustesClient() {
                 remplace, parce qu'un livre ne se multiplie pas — il se pose sur
                 une liste. */}
             <p className="text-sm text-slate-100">
-              C&apos;est aussi pour ça que le professeur ne paie rien du tout :
-              son compte est gratuit, à titre personnel, ouvert sur{" "}
-              {ENSEIGNANT.verification} — et il n&apos;a besoin de
-              l&apos;autorisation de personne pour s&apos;en servir. Sa gratuité
-              s&apos;arrête à lui : les familles de ses élèves s&apos;abonnent au
-              tarif ordinaire.
+              C&apos;est aussi pour ça que le professeur paie le même prix :
+              {" "}{montant(OFFRE.prof)} par mois, toutes ses classes. Son compte
+              ne couvre pas les familles de ses élèves : le code de classe et le
+              compte Famille sont deux accès séparés.
             </p>
           </div>
         </div>
@@ -213,7 +212,7 @@ export default function TarifsJustesClient() {
               </h2>
               <p className="text-sm text-slate-300 max-w-2xl">
                 Une famille, ou une classe que son professeur organise — et pas
-                un élève à compter. L&apos;élève, lui, ne paie jamais.
+                un élève à compter. Le même prix rond pour les deux.
               </p>
             </div>
 

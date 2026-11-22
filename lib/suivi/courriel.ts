@@ -2,7 +2,7 @@
 // compose le courriel à partir des rapports, sans base ni envoi, donc elle se teste.
 // ⛔ Aucune offre ni prix dedans : ce courriel rend compte, il ne vend pas.
 import type { CompteSemaine, RapportEnfant } from "./types";
-import { MENTION_TVA, PRIX_ANNUEL, PRIX_LANCEMENT, PRIX_MENSUEL, SUIVI, montant, prixDeLancementEnCours } from "@/lib/tarifs";
+import { MENTION_TVA, OFFRE, montant } from "@/lib/tarifs";
 
 const SITE = "https://www.eleveai.fr";
 
@@ -106,15 +106,14 @@ Ne plus recevoir ce compte rendu : ${lienArret}`;
 export function composerDemandeDuSuivi(r: RapportEnfant, code: string, expire: Date) {
   const sujet = `${r.prenom} aimerait que vous voyiez son vrai suivi sur EleveAI`;
   const jusquau = expire.toLocaleDateString("fr-FR", { timeZone: "Indian/Reunion", day: "numeric", month: "long" });
-  // 19/11/2026 : le prix que Checkout encaissera vraiment (lancement 4,95 € / 49 € tant qu'il court).
-  const prix = prixDeLancementEnCours()
-    ? `${montant(PRIX_LANCEMENT.mensuel)} par mois sans engagement, ou ${montant(PRIX_LANCEMENT.annuel)} par an (${SUIVI.moisOfferts} mois offerts) : c'est le ${PRIX_LANCEMENT.nom.toLowerCase()}, au lieu de ${montant(PRIX_MENSUEL)} ou ${montant(PRIX_ANNUEL)}, garanti jusqu'au ${PRIX_LANCEMENT.garantiJusquauTexte} tant que l'abonnement continue`
-    : `${montant(PRIX_MENSUEL)} par mois sans engagement, ou ${montant(PRIX_ANNUEL)} par an (${SUIVI.moisOfferts} mois offerts)`;
+  // ⭐ 22/11/2026 : le modèle du 22/11 (note modele-tarifaire-22-11) — au mois
+  // seulement, l'année n'est pas validée ; le prix de lancement est retiré.
+  const prix = `${montant(OFFRE.famille)} par mois sans engagement, autant d'enfants que vous voulez`;
   const html = `<div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:560px;margin:0 auto;color:#0f172a;line-height:1.6;font-size:15px">
 <p style="margin:0">Bonjour,</p>
 <p style="margin:8px 0">${echap(r.prenom)} travaille les maths sur EleveAI et vous envoie son bilan de la semaine.</p>
 ${blocHtml(r)}
-<p style="margin:24px 0 8px">Les vidéos, les fiches et les exercices restent offerts. <strong>${echap(SUIVI.nom)}</strong> vous montre tout son travail, depuis le premier jour, avec des conseils et un bilan chaque semaine par courriel (jusqu'à ${SUIVI.enfantsMax} enfants) : ${echap(prix)}.</p>
+<p style="margin:24px 0 8px">Les fiches de cours, les énigmes à projeter et les PDF restent libres. <strong>Le compte Famille</strong> vous montre tout son travail, depuis le premier jour, avec des conseils et un bilan chaque semaine par courriel : ${echap(prix)}.</p>
 <ol style="margin:8px 0;padding-left:20px">
 <li style="margin:4px 0"><a href="${SITE}/abonnement" style="color:#0369a1;font-weight:700">Prendre le suivi</a> avec votre propre adresse.</li>
 <li style="margin:4px 0">Sur <a href="${SITE}/suivi" style="color:#0369a1">eleveai.fr/suivi</a>, entrez le code de ${echap(r.prenom)} : <strong style="font-size:18px;letter-spacing:2px">${echap(code)}</strong> (valable jusqu'au ${echap(jusquau)}).</li>
@@ -129,7 +128,7 @@ ${r.prenom} travaille les maths sur EleveAI et vous envoie son bilan de la semai
 
 ${blocTexte(r)}
 
-Les vidéos, les fiches et les exercices restent offerts. ${SUIVI.nom} vous montre tout son travail, depuis le premier jour, avec des conseils et un bilan chaque semaine par courriel (jusqu'à ${SUIVI.enfantsMax} enfants) : ${prix}.
+Les fiches de cours, les énigmes à projeter et les PDF restent libres. Le compte Famille vous montre tout son travail, depuis le premier jour, avec des conseils et un bilan chaque semaine par courriel : ${prix}.
 
 1. Prendre le suivi avec votre propre adresse : ${SITE}/abonnement
 2. Sur ${SITE}/suivi, entrer le code de ${r.prenom} : ${code} (valable jusqu'au ${jusquau}).

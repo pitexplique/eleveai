@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import { VENTE } from "@/lib/legal/editeur";
-import { PRIX_ANNUEL, PRIX_PUBLICS, montant } from "@/lib/tarifs";
+import { OFFRE, PRIX_MENSUEL, PRIX_PUBLICS, montant } from "@/lib/tarifs"; // 22/11/2026 : au mois (l'année n'est pas validée)
 
 // ─────────────────────────────────────────────────────────────────────────────
 // LA FENÊTRE DU PARENT, REFAITE LE 21/08/2026.
@@ -178,8 +178,8 @@ export default function EspaceParentsClient() {
           </h1>
 
           <p className="mx-auto mt-4 max-w-2xl text-base font-bold leading-relaxed text-slate-600">
-            Cinq coachs, des exercices corrigés, un rituel chaque jour — du CP à la
-            Terminale, et gratuits. Vous, vous suivez ce qu&apos;il travaille et ce qui
+            Le coach, des exercices corrigés, un rituel chaque jour — du CP à la
+            Terminale, à essayer chaque jour. Vous, vous suivez ce qu&apos;il travaille et ce qui
             coince.
           </p>
 
@@ -267,7 +267,7 @@ export default function EspaceParentsClient() {
               </h2>
 
               <p className="mt-3 text-base font-bold leading-relaxed text-slate-700">
-                Tout ce qui est au-dessus reste gratuit, et votre enfant garde ses
+                Tout ce qui est au-dessus s&apos;essaie chaque jour, et votre enfant garde ses
                 résultats.
                 <br />
                 <strong className="text-slate-950">
@@ -289,18 +289,18 @@ export default function EspaceParentsClient() {
                 <>
                   <p className="mt-4">
                     <span className="bg-gradient-to-r from-emerald-500 to-green-600 bg-clip-text text-4xl font-black text-transparent">
-                      {montant(PRIX_ANNUEL)}
+                      {montant(PRIX_MENSUEL)}
                     </span>{" "}
                     {/* ⛔ « PAR AN » SEUL ÉTAIT INSUFFISANT DEPUIS LE 01/09 :
                         l'abonnement annuel couvre l'ANNÉE SCOLAIRE, pas douze
                         mois glissants, et c'est une mention obligatoire. Elle se
                         colle au prix, elle ne se renvoie pas aux CGV. */}
                     <span className="text-lg font-black text-slate-900">
-                      par an (2 mois offerts)
+                      par mois, sans engagement
                     </span>
                   </p>
                   <p className="mt-1 text-sm font-black text-emerald-700">
-                    Une adresse courriel, tous les enfants de la maison
+                    Une adresse courriel, autant d&apos;enfants que vous voulez
                   </p>
 
                   {venteOuverte ? (
@@ -308,7 +308,7 @@ export default function EspaceParentsClient() {
                       href="/abonnement"
                       className="mt-5 inline-flex rounded-2xl bg-gradient-to-r from-emerald-400 to-green-500 px-8 py-4 text-base font-black text-white shadow-lg transition hover:-translate-y-0.5"
                     >
-                      S&apos;abonner — {montant(PRIX_ANNUEL)} pour l&apos;année
+                      S&apos;abonner — {montant(PRIX_MENSUEL)} par mois
                     </Link>
                   ) : (
                     <>
@@ -329,7 +329,7 @@ export default function EspaceParentsClient() {
               ) : (
                 <>
                   <p className="mt-4 text-sm font-black text-emerald-700">
-                    Une adresse courriel, tous les enfants de la maison
+                    Une adresse courriel, autant d&apos;enfants que vous voulez
                   </p>
                   <p className="mt-3 text-xs font-bold text-slate-500">
                     Cette vue se construit en ce moment, et sa formule est en
@@ -366,14 +366,14 @@ export default function EspaceParentsClient() {
         <section className="rounded-[2rem] border border-white bg-gradient-to-br from-sky-50 via-white to-cyan-50 p-8 text-center shadow-xl ring-1 ring-sky-100">
           <p className="text-4xl">🎒</p>
           <h2 className="mt-2 text-2xl font-black text-slate-950">
-            Votre enfant ne paie jamais
+            {/* 22/11/2026 : au modèle du 22/11 (note modele-tarifaire-22-11). */}
+            Votre enfant essaie chaque jour
           </h2>
           <p className="mx-auto mt-2 max-w-2xl text-sm font-bold text-slate-600">
-            Le coach, les exercices, les parcours, les cahiers et les évaluations
-            lui sont ouverts sans compte et sans limite de temps. Ce que
-            l&apos;abonnement ouvre, c&apos;est votre vue à vous. Et si vous
-            enseignez, votre compte à vous ne se paie pas — à titre personnel,
-            pas pour les familles de vos élèves.
+            {OFFRE.questionsGratuitesParJour} questions offertes chaque jour, sans compte. Les fiches de
+            cours, les énigmes à projeter et les PDF restent libres. En classe, avec le
+            code de son professeur, il n&apos;est jamais compté. Le compte Famille ajoute
+            les questions sans limite et votre vue à vous.
           </p>
           <div className="mt-5 flex flex-wrap justify-center gap-3">
             <Link
