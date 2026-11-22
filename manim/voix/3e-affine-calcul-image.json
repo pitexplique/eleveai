@@ -1,0 +1,15 @@
+{
+  "00-garde": "Calculer une image. Que donne une fonction affine pour un nombre précis ?",
+  "01-plongee": "Samir est moniteur de plongée. Sous l'eau, la pression augmente avec la profondeur. À x mètres, elle vaut p de x égale 0,1 x plus 1, en bars. À la surface, x vaut 0 : la pression vaut 1 bar.",
+  "02-calcul": "Et à 20 mètres ? On remplace x par 20. 0,1 fois 20, c'est 2. Plus 1 : 3 bars. On écrit : p de 20 égale 3. 3 est l'image de 20. D'abord la multiplication, ensuite l'addition.",
+  "03-tableau": "Samir prépare un tableau pour ses élèves. À 10 mètres : 1, plus 1, 2 bars. À 30 mètres : 3, plus 1, 4 bars. À 35 mètres : 3,5, plus 1, 4,5 bars.",
+  "03q-question": "Question ! f de x égale 4 x moins 7. Combien vaut f de 5 ? A : 27. B : moins 8. C : 13. Mets pause, et choisis !",
+  "03r-reponse": "Réponse C : 4 fois 5, c'est 20. 20 moins 7 : 13. Pas moins 8 : on multiplie d'abord, on ne calcule pas 5 moins 7.",
+  "04-negatif": "Avec un nombre négatif, on met des parenthèses. f de x égale moins 3 x plus 5. Pour f de moins 2 : moins 3 fois, parenthèse, moins 2, plus 5. Moins par moins donne plus : 6. Et 6 plus 5 : 11.",
+  "05q-question": "Question ! f de x égale moins 2 x plus 3. Combien vaut f de moins 4 ? A : moins 5. B : 11. C : moins 11. Mets pause, et choisis !",
+  "05r-reponse": "Réponse B : moins 2 fois moins 4, c'est plus 8. 8 plus 3 : 11. Moins 5, c'est l'erreur de signe.",
+  "06-defi": "À toi de jouer. f de x égale 3 x moins 4. Calcule f de moins 1, puis f de 0,5. Mets pause, et cherche !",
+  "06b-correction": "Correction. f de moins 1 : 3 fois moins 1, c'est moins 3. Moins 3 moins 4 : moins 7. f de 0,5 : 3 fois 0,5, c'est 1,5. 1,5 moins 4 : moins 2,5.",
+  "07-finale": "Ce que tu as appris. Pour calculer l'image d'un nombre, on remplace x par ce nombre. On multiplie d'abord, puis on ajoute b. Un nombre négatif se met entre parenthèses. Et on écrit : p de 20 égale 3. L'image de 20 est 3.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

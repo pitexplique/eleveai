@@ -1,0 +1,15 @@
+{
+  "00-garde": "Lire une fonction affine sur un graphique. Que nous dit une droite ?",
+  "01-community": "Clara est community manager. Elle lance le compte d'un club de basket. Au départ, 200 abonnés. Puis 50 de plus chaque jour. Elle trace la droite : le nombre de jours en bas, les abonnés à gauche.",
+  "02-image": "Combien d'abonnés après 4 jours ? On part de 4, sur l'axe horizontal. On monte jusqu'à la droite. Puis on va à gauche : 400. L'image de 4 est 400.",
+  "03-antecedent": "Et quand le compte atteindra-t-il 600 abonnés ? Cette fois, on part de 600, sur l'axe vertical. On va jusqu'à la droite, puis on descend : 8 jours. 8 est l'antécédent de 600.",
+  "03q-question": "Question ! Sur ce graphique, la droite passe par le point de coordonnées 0 et 1, et par le point de coordonnées 2 et 5. Combien vaut f de 3 ? A : 6. B : 7. C : 3. Mets pause, et choisis !",
+  "03r-reponse": "Réponse B : à chaque pas vers la droite, la droite monte de 2. À 3, elle est à 1, plus 3 fois 2 : 7.",
+  "04-expression": "La droite donne aussi l'expression. Elle coupe l'axe vertical à 200 : b vaut 200. Un jour de plus, 50 abonnés de plus : a vaut 50. Donc f de x égale 50 x plus 200. On le lit, sans calculer.",
+  "05q-question": "Question ! Cette droite coupe l'axe vertical à 4, et descend d'un carreau à chaque pas vers la droite. Quelle est son expression ? A : moins x plus 4. B : x plus 4. C : 4 x moins 1. Mets pause, et choisis !",
+  "05r-reponse": "Réponse A : b vaut 4, l'ordonnée à l'origine. La droite descend de 1 à chaque pas : a vaut moins 1. Donc moins x plus 4.",
+  "06-defi": "À toi de jouer. Sur ce graphique, lis deux choses. Un : l'antécédent de 0. Deux : l'expression de la droite. Mets pause, et cherche !",
+  "06b-correction": "Correction. Un : la droite coupe l'axe horizontal à 3. L'antécédent de 0 est 3. Deux : elle coupe l'axe vertical à 6, donc b vaut 6. Un pas à droite, deux vers le bas : a vaut moins 2. f de x égale moins 2 x plus 6.",
+  "07-finale": "Ce que tu as appris. Pour lire une image, on part de l'axe horizontal. Pour lire un antécédent, on part de l'axe vertical. La droite donne aussi l'expression : b, là où elle coupe l'axe vertical ; a, ce qu'elle monte pour un pas vers la droite.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

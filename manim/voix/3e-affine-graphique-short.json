@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Ce graphique sait quand ton forfait internet sera vide.",
+  "01-image": "Ton forfait : 20 gigas. Tu en utilises 2 par jour. La droite part de 20, et descend de 2 chaque jour. Elle touche l'axe horizontal à 10 : ton forfait est vide au bout de 10 jours.",
+  "01q-question": "Question ! Lis sur la droite : combien reste-t-il après 4 jours ? A : 8 gigas. B : 16 gigas. C : 12 gigas. Mets pause, et choisis !",
+  "01r-reponse": "Réponse C : 4 jours, 2 gigas par jour, 8 gigas utilisés. 20 moins 8 : 12 gigas.",
+  "02-question": "À toi. Avec 30 gigas, et 2 gigas par jour, au bout de combien de jours le forfait est-il vide ? Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

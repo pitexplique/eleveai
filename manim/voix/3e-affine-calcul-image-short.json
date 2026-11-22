@@ -1,0 +1,8 @@
+{
+  "00-accroche": "À 40 mètres sous l'eau, la pression est-elle 4 fois plus forte qu'à 10 mètres ?",
+  "01-image": "La pression : p de x égale 0,1 x plus 1. À 10 mètres : 1, plus 1 : 2 bars. À 40 mètres : 4, plus 1 : 5 bars. Pas 8 ! Une fonction affine n'est pas proportionnelle.",
+  "01q-question": "Question ! Avec p de x égale 0,1 x plus 1, combien vaut p de 50 ? A : 6. B : 5. C : 51. Mets pause, et choisis !",
+  "01r-reponse": "Réponse A : 0,1 fois 50, c'est 5. Plus 1 : 6 bars.",
+  "02-question": "À toi. À quelle profondeur la pression vaut-elle 3,5 bars ? Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
