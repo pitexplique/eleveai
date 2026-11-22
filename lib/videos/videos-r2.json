@@ -17972,5 +17972,23 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_convertir&display=simple"
+ },
+ "cm2-masse-estimer": {
+  "fichier": "cm2/maths/masse/03-estimer/eleveai-maths-cm2-masse-estimer.mp4",
+  "poster": "cm2/maths/masse/03-estimer/eleveai-maths-cm2-masse-estimer.png",
+  "vignette": "cm2/maths/masse/03-estimer/eleveai-maths-cm2-masse-estimer.vignette.webp",
+  "titre": "Une baleine bleue pèse-t-elle 150 kg ou 150 t ? — Estimer une masse — épisode 3 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_estimer&display=simple"
+ },
+ "cm2-masse-estimer-short": {
+  "fichier": "cm2/maths/masse/03-estimer/eleveai-maths-cm2-masse-estimer-short.mp4",
+  "poster": "cm2/maths/masse/03-estimer/eleveai-maths-cm2-masse-estimer-short-miniature.png",
+  "vignette": "cm2/maths/masse/03-estimer/eleveai-maths-cm2-masse-estimer-short-miniature.vignette.webp",
+  "titre": "Un grain de riz pèse-t-il 1 gramme ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_estimer&display=simple"
  }
 }

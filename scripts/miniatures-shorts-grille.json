@@ -946,5 +946,11 @@
     "calcul": [["0,5 kg", "blanc", 190], ["= ? g", "rouge", 190]],
     "margo": [320, 720, 640],
     "ceinture": "blanche"
+  },
+  "cm2-masse-estimer-short": {
+    "question": ["Un grain de riz :", "combien de grammes ?"],
+    "calcul": [["1 grain", "blanc", 190], ["= ? g", "rouge", 190]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
   }
 }

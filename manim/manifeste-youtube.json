@@ -105597,6 +105597,156 @@
         "cuisine",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "cm2-masse-estimer",
+      "pas_avant": "2027-06-24",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_estimer",
+      "classe": "cm2",
+      "ceinture": "jaune",
+      "serie": "Maths CM2",
+      "type": "longue",
+      "fichier": "cm2/maths/masse/03-estimer/eleveai-maths-cm2-masse-estimer.mp4",
+      "miniature": "cm2/maths/masse/03-estimer/eleveai-maths-cm2-masse-estimer.png",
+      "titre": "Une baleine bleue pèse-t-elle 150 kg ou 150 t ? — Estimer une masse — épisode 3 · Maths CM2",
+      "accroche": "Juliette est océanographe : elle étudie la mer et ses animaux, et elle estime la masse des baleines sans pouvoir les peser. Pour estimer une masse, on choisit l'unité adaptée et on compare à un repère. Attention à la virgule !\n\nDans cette vidéo :\n• une baleine bleue pèse environ 150 t, soit 150 000 kg : autant qu'environ 150 voitures\n• un repère : un poisson de 1,2 kg, c'est un peu plus qu'une brique de lait\n• une tortue de mer de 150 kg pèse comme deux adultes\n• un dauphin pèse environ 200 kg : moins qu'une voiture, plus que deux adultes\n• attention à l'unité et à la virgule : un crabe pèse 0,5 kg, pas 0,5 t (0,5 t = 500 kg)\n• un cartable de 4 500 g = 4,5 kg ; 4 500 kg, c'est un camion\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : Une crevette, un requin, une orque. 8 g, 300 kg, 5 t. Qui pèse quoi ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_estimer&display=simple\n\n⚖️ Épisode 3 de la série Masses d'EleveAI, en CM2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Estimer une masse"
+        ],
+        [
+          "00:08",
+          "Juliette, océanographe"
+        ],
+        [
+          "00:29",
+          "On prend un repère"
+        ],
+        [
+          "00:42",
+          "Question 1"
+        ],
+        [
+          "01:10",
+          "Attention à l'unité et à la virgule !"
+        ],
+        [
+          "01:24",
+          "Question 2"
+        ],
+        [
+          "02:01",
+          "À toi de jouer"
+        ],
+        [
+          "02:16",
+          "Correction"
+        ],
+        [
+          "02:26",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "estimer une masse",
+        "ordre de grandeur",
+        "gramme",
+        "kilogramme",
+        "tonne",
+        "repère",
+        "nombre décimal",
+        "baleine",
+        "océanographe",
+        "mer",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:42",
+          "question": "La masse la plus vraisemblable d'un dauphin ?",
+          "choix": [
+            "200 kilogrammes",
+            "2 kilogrammes",
+            "20 tonnes"
+          ],
+          "reponse": 0,
+          "explication": "Un dauphin pèse environ 200 kilogrammes : moins qu'une voiture, plus que deux adultes."
+        },
+        {
+          "t": "01:24",
+          "question": "Un élève écrit : mon cartable pèse 4 500 kilogrammes. Que voulait-il écrire ?",
+          "choix": [
+            "45 kilogrammes",
+            "4 500 grammes",
+            "4,5 tonnes"
+          ],
+          "reponse": 1,
+          "explication": "4 500 grammes, c'est 4,5 kilogrammes : un vrai cartable. 4 500 kilogrammes, c'est un camion !"
+        }
+      ],
+      "centres": [
+        "animaux",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "cm2-masse-estimer-short",
+      "pas_avant": "2027-06-24",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "masse_estimer",
+      "classe": "cm2",
+      "ceinture": "blanche",
+      "serie": "Maths CM2",
+      "type": "short",
+      "renvoie_vers": "cm2-masse-estimer",
+      "fichier": "cm2/maths/masse/03-estimer/eleveai-maths-cm2-masse-estimer-short.mp4",
+      "miniature": "cm2/maths/masse/03-estimer/eleveai-maths-cm2-masse-estimer-short-miniature.png",
+      "titre": "Un grain de riz pèse-t-il 1 gramme ? #maths #cm2",
+      "accroche": "Mon copain dit qu'un grain de riz pèse 1 gramme. Alors un paquet de 1 kg, c'est 1 000 grains ? On compte… il en reste encore !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : environ combien de grains dans un paquet de 1 kg ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cm2 #primaire",
+      "tags": [
+        "masse",
+        "estimer",
+        "gramme",
+        "riz",
+        "nombre décimal",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CM2",
+        "primaire",
+        "cycle 3",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Un grain de riz pèse environ…",
+          "choix": [
+            "0,02 gramme",
+            "2 grammes",
+            "1 gramme"
+          ],
+          "reponse": 0,
+          "explication": "Il faut environ 50 grains pour 1 gramme. Un grain pèse environ 0,02 gramme."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "sciences"
+      ]
     }
   ]
 }

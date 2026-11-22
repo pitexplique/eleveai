@@ -68,6 +68,8 @@ EP = [
      "1,25 kg = 1 250 g", True, "jaune"),
     ("cm2", "convertir", "02-convertir", ["0,75 kg", "= ? g"], "Dans le tableau :",
      "0,75 kg = 750 g", True, "verte"),
+    ("cm2", "estimer", "03-estimer", ["150 kg", "OU 150 t ?"], "Baleine bleue :",
+     "environ 150 t", True, "jaune"),
 ]
 
 

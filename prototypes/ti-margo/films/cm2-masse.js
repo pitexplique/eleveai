@@ -434,3 +434,24 @@ function fourmiM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const 
   c.beginPath(); c.moveTo(x-50*s,y-18*s); c.quadraticCurveTo(x-62*s,y-48*s,x-80*s,y-46*s); c.stroke();
   c.beginPath(); c.moveTo(x-44*s,y-20*s); c.quadraticCurveTo(x-48*s,y-54*s,x-64*s,y-60*s); c.stroke();
   c.fillStyle='#ffffff'; c.beginPath(); c.arc(x-48*s,y-10*s,4*s,0,7); c.fill(); }
+
+/* ---- CM2 03 (estimer) : le grain de riz, le tas de riz, la casserole qui fume ---- */
+/* Un grain de riz couché : (x, y) = le centre, L = la longueur ; ang = la rotation */
+function grainRizM(c,x,y,L,z=1,ang=0){ if(z<=0) return; L*=Math.min(1.15,z);
+  c.save(); c.translate(x,y); c.rotate(ang); c.fillStyle='#fff9db'; c.strokeStyle='#ced4da'; c.lineWidth=Math.max(2,L*.03);
+  c.beginPath(); c.ellipse(0,0,L/2,L*.21,0,0,7); c.fill(); c.stroke();
+  c.fillStyle='#ffffff'; c.beginPath(); c.ellipse(-L*.12,-L*.07,L*.18,L*.05,0,0,7); c.fill(); c.restore(); }
+/* Un petit tas de grains de riz : (x, yBas) = le milieu du bas, w = la largeur, n = le nombre de rangs */
+function tasRizM(c,x,yBas,w,z=1,n=4){ if(z<=0) return; const k=Math.min(1.15,z), g=w*.16*k;
+  for(let i=0;i<n;i++) for(let j=0;j<n*2-1-i*2;j++){ const px=x+(j-(n*2-2-i*2)/2)*g*.62, py=yBas-g*.25-i*g*.32;
+    grainRizM(c,px,py,g,1,((i*5+j*3)%7-3)*.35); } }
+/* Une casserole de riz qui cuit, vue de face : (x, yBas) = le milieu du bas ; s = 1 ≈ 300 px de large */
+function casseroleM(c,x,yBas,s=1,z=1,T=0){ if(z<=0) return; s*=Math.min(1.15,z); const w=300*s, h=170*s;
+  c.lineJoin='round'; c.fillStyle='#868e96'; c.strokeStyle='#343a40'; c.lineWidth=5;
+  c.beginPath(); c.roundRect(x-w/2,yBas-h,w,h,[0,0,30*s,30*s]); c.fill(); c.stroke();
+  c.fillStyle='#495057'; for(const u of [-1,1]){ c.beginPath(); c.roundRect(u<0?x-w/2-70*s:x+w/2,yBas-h+18*s,70*s,26*s,10*s); c.fill(); c.stroke(); }
+  c.fillStyle='#fff9db'; c.beginPath(); c.ellipse(x,yBas-h,w/2-6,24*s,0,0,7); c.fill();
+  for(let j=0;j<11;j++) grainRizM(c,x-w*.38+j*w*.076,yBas-h-4*s+((j*7)%3-1)*7*s,26*s,1,((j*3)%5-2)*.4);
+  c.strokeStyle='rgba(248,249,250,.75)'; c.lineWidth=7*s; c.lineCap='round';
+  for(const u of [-.25,0,.25]){ c.beginPath(); const y0=yBas-h-36*s;
+    for(let v=0;v<=1.001;v+=.1){ const px=x+u*w+Math.sin(v*7+T*3+u*9)*14*s, py=y0-v*120*s; v?c.lineTo(px,py):c.moveTo(px,py); } c.stroke(); } }
