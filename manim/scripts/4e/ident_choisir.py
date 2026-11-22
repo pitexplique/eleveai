@@ -244,27 +244,29 @@ class IdentChoisir4e(PaysageRel):
         m.nom.next_to(m.perso, UP, buff=0.14).set_x(-5.3)
         self.au("Emma", FadeIn(m.perso, shift=UP * 0.3), FadeIn(m.nom[0], shift=UP * 0.1), rt=0.35)
         self.au("styliste", FadeIn(m.nom[1], shift=UP * 0.1), rt=0.3)
-        l1 = self.lg("Pour un défilé, elle découpe deux pièces de tissu.", 0.9, 2.95, 36, maxw=8.8)
-        self.dit(l1, "Pour un défilé, elle découpe deux pièces de tissu.")
+        l1 = self.lg("Pour un défilé, elle découpe", 1.0, 3.0, 40, maxw=10.4)
+        self.dit(l1, "Pour un défilé, elle découpe")
+        l1b = self.lg("deux pièces de tissu.", 1.0, 2.45, 40, maxw=10.4)
+        self.dit(l1b, "deux pièces de tissu.")
         # la nappe carrée et le foulard : même largeur x + 5
-        nappe = tissu(2.2, 2.2, NAPPE, P(-1.4, -0.4))
-        foul = tissu(2.2, 1.3, FOULARD, P(2.4, -0.4), frange=True)
+        nappe = tissu(1.6, 1.6, NAPPE, P(-1.4, -1.0))
+        foul = tissu(2.1, 1.2, FOULARD, P(2.4, -1.0), frange=True)
         nh = D("x + 5", 32, audit=False).next_to(nappe, UP, buff=0.12)
         ng = D("x + 5", 32, audit=False).next_to(nappe, LEFT, buff=0.15)
         fh = D("x + 5", 32, audit=False).next_to(foul.fond, UP, buff=0.12)
         fd = D("x − 2", 32, audit=False).next_to(foul, RIGHT, buff=0.15)
         tn = T("nappe", 30, "#f9a8d4", audit=False).next_to(nappe, DOWN, buff=0.15)
         tf = T("foulard", 30, "#5eead4", audit=False).next_to(foul.fond, DOWN, buff=0.15)
-        l2 = self.lg("Une nappe carrée, de côté x + 5.", 0.9, 2.35, 36, lettres="x", maxw=8.8)
+        l2 = self.lg("Une nappe carrée, de côté x + 5.", 1.0, 1.85, 38, lettres="x", maxw=10.4)
         self.dit_avec(l2, "Une nappe carrée, de côté x plus 5.",
                       {0: lambda: [FadeIn(nappe, shift=UP * 0.2), FadeIn(tn)],
                        idx(l2, "5"): lambda: [FadeIn(nh), FadeIn(ng)]})
-        l3 = self.lg("Et un foulard rectangulaire, de x + 5 sur x − 2.", 0.9, 1.75, 36, lettres="x", maxw=8.8)
-        self.dit_avec(l3, "Et un foulard rectangulaire, de x plus 5 sur x moins 2.",
-                      {0: lambda: [FadeIn(foul, shift=UP * 0.2), FadeIn(tf)],
-                       idx(l3, "5"): lambda: [FadeIn(fh)],
-                       idx(l3, "2"): lambda: [FadeIn(fd)]})
-        l4 = self.lg("Quelle est l'aire de chaque pièce ?", 0.4, -2.55, 42, JAUNE_TITRE, maxw=8.6)
+        l3 = self.lg("Et un foulard rectangulaire,", 1.0, 1.25, 38, maxw=10.4)
+        self.dit_avec(l3, "Et un foulard rectangulaire,", {0: lambda: [FadeIn(foul, shift=UP * 0.2), FadeIn(tf)]})
+        l3b = self.lg("de x + 5 sur x − 2.", 1.0, 0.68, 38, lettres="x", maxw=10.4)
+        self.dit_avec(l3b, "de x plus 5 sur x moins 2.",
+                      {idx(l3b, "5"): lambda: [FadeIn(fh)], idx(l3b, "2"): lambda: [FadeIn(fd)]})
+        l4 = self.lg("Quelle est l'aire de chaque pièce ?", 0.4, -2.8, 42, JAUNE_TITRE, maxw=8.6)
         self.dit(l4, "Quelle est l'aire de chaque pièce ?",
                  avec=[Indicate(nappe, color=JAUNE_TITRE, scale_factor=1.04)])
         self.play(Indicate(foul, color=JAUNE_TITRE, scale_factor=1.04), run_time=0.4)
@@ -274,12 +276,14 @@ class IdentChoisir4e(PaysageRel):
     # ── 02 : la nappe : un carré ────────────────────────────────────────────
     def ecran_nappe(self):
         self.ecran("02-nappe")
-        l0 = self.lg("Avant de calculer, on regarde les deux parenthèses.", 0, 3.05, 40, CIEL, maxw=12.4)
-        self.dit(l0, "Avant de calculer, on regarde les deux parenthèses.")
+        l0 = self.lg("Avant de calculer, on regarde", 0, 3.1, 42, CIEL, maxw=12.4)
+        self.dit(l0, "Avant de calculer, on regarde")
+        l0b = self.lg("les deux parenthèses.", 0, 2.55, 42, CIEL, maxw=12.4)
+        self.dit(l0b, "les deux parenthèses.")
         c = CarreDecoupe(1.9, 1.0, "x", "5", ("x²", "5x", "5x", "25"), fs=40, fs_cote=34)
         c.move_to(P(-3.85, -0.55))
         nappe = tissu(2.9, 2.9, NAPPE, c.bord.get_center())
-        l1 = self.lg("Pour la nappe :", 2.2, 1.95, 40, maxw=6.4)
+        l1 = self.lg("Pour la nappe :", 2.2, 1.83, 40, maxw=6.4)
         self.dit(l1, "Pour la nappe :", avec=[FadeIn(nappe, shift=UP * 0.2)])
         e = D("(x + 5)(x + 5)", 66).move_to(P(2.2, 1.15))
         self.poser_avec(e, "x plus 5, fois x plus 5.",
@@ -351,9 +355,9 @@ class IdentChoisir4e(PaysageRel):
         self.clear()
         self.add_mascotte()
         self.XL = 0.6
-        self.ph_haut = -0.45
+        self.ph_haut = -0.3
         e = D("(x − 7)(x + 7)", 60, audit=False).move_to(P(-3.35, 2.1))
-        r = D("= x² − 49", 60, VERT_OK, audit=False).move_to(P(-3.5, 0.75))
+        r = D("= x² − 49", 60, VERT_OK).move_to(P(-3.5, 0.75))
         r.atomes[1].set_color(INCONNUE)
         memes = VGroup(e.atomes[1], e.atomes[3], e.atomes[6], e.atomes[8])
         signes = VGroup(e.atomes[2], e.atomes[7])
@@ -361,24 +365,23 @@ class IdentChoisir4e(PaysageRel):
         def avant(sc):
             sc.eq_dans_q(0, "Pour (x − 7)(x + 7),", "Pour x moins 7, fois x plus 7,", lettres="x", fs=36)
             sc.play(FadeIn(e, shift=UP * 0.2), run_time=0.3)
-            sc.eq_dans_q(0, "quelle méthode est la plus rapide ?", "quelle méthode est la plus rapide ?", lettres="",
-                         fs=36)
+            sc.eq_dans_q(0, "quelle méthode", "quelle méthode", lettres="", fs=36)
+            sc.eq_dans_q(0, "est la plus rapide ?", "est la plus rapide ?", lettres="", fs=36)
 
         def apres(sc):
-            sc.ph_eq(0, "Réponse A : les mêmes termes,", "Réponse A : les mêmes termes,", premier=True,
-                     avec=[Circumscribe(memes, color=JAUNE_TITRE, buff=0.08)])
-            sc.ph_eq(1, "avec des signes contraires.", "avec des signes contraires.",
+            sc.ph_eq(0, "Réponse A :", "Réponse A :", premier=True)
+            sc.ph_eq(1, "les mêmes termes,", "les mêmes termes,", avec=[Circumscribe(memes, color=JAUNE_TITRE, buff=0.08)])
+            sc.ph_eq(2, "avec des signes contraires.", "avec des signes contraires.",
                      avec=[e.atomes[2].animate.set_color(PIEGE), e.atomes[7].animate.set_color(VERT_OK)])
             sc.play(Indicate(signes, scale_factor=1.4), run_time=0.4)
-            sc.ph_eq(2, "On écrit tout de suite x² − 49.", "On écrit tout de suite x au carré moins 49.", lettres="x")
-            sc.play(FadeIn(r, shift=DOWN * 0.2), run_time=0.25)
+            sc.ph_eq(3, "On écrit tout de suite", "On écrit tout de suite")
+            sc.dit(r, "x au carré moins 49.")
             sc.rep_fini()
 
-        self.question_pause("03q-question", "03r-reponse", ["Pour (x − 7)(x + 7),", "quelle méthode est la plus rapide ?"],
+        self.question_pause("03q-question", "03r-reponse", ["Pour (x − 7)(x + 7),", "quelle méthode", "est la plus rapide ?"],
                             [Eq("(a − b)(a + b)", 34, lettres=""), Eq("(a − b)²", 34, lettres=""),
                              Eq("aucune identité ne marche", 34, lettres="")], 0,
-                            ["Réponse A : les mêmes termes,", "avec des signes contraires.",
-                             "On écrit tout de suite x² − 49."],
+                            ["Réponse A :", "les mêmes termes,", "avec des signes contraires.", "On écrit tout de suite"],
                             avant_q=avant, autres_r=apres)
         self.XL = type(self).XL
 
@@ -387,14 +390,14 @@ class IdentChoisir4e(PaysageRel):
         self.ecran("04-methode")
         tit = self.lg("La méthode, en trois questions.", 0, 3.05, 46, JAUNE_TITRE, maxw=12)
         self.dit(tit, "La méthode, en trois questions.")
-        xq, xr, wq, wr = -3.0, 2.6, 5.0, 4.4
+        xq, xr, wq, wr = -3.3, 2.45, 5.6, 4.5
         ys = (1.75, 0.05, -1.65)
-        q1 = carte_arbre(["Les deux parenthèses", "sont identiques ?"], wq, CIEL).move_to(P(xq, ys[0]))
-        q2 = carte_arbre(["Les mêmes termes, avec", "des signes contraires ?"], wq, CIEL).move_to(P(xq, ys[1]))
-        q3 = carte_arbre(["Ni l'un ni l'autre ?"], wq, CIEL).move_to(P(xq, ys[2]))
-        r1 = carte_arbre(["C'est un carré :", "trois termes."], wr, CARRE_X, fond="#0c1a3d").move_to(P(xr, ys[0]))
-        r2 = carte_arbre(["Différence de deux", "carrés : deux termes."], wr, VERT_OK, fond="#052e16").move_to(P(xr, ys[1]))
-        r3 = carte_arbre(["Double distributivité :", "quatre produits."], wr, BANDE, fond="#3b1d06").move_to(P(xr, ys[2]))
+        q1 = carte_arbre(["Les deux parenthèses", "sont identiques ?"], wq, CIEL, fs=34).move_to(P(xq, ys[0]))
+        q2 = carte_arbre(["Les mêmes termes, avec", "des signes contraires ?"], wq, CIEL, fs=34).move_to(P(xq, ys[1]))
+        q3 = carte_arbre(["Ni l'un ni l'autre ?"], wq, CIEL, fs=34).move_to(P(xq, ys[2]))
+        r1 = carte_arbre(["C'est un carré :", "trois termes."], wr, CARRE_X, fs=34, fond="#0c1a3d").move_to(P(xr, ys[0]))
+        r2 = carte_arbre(["Différence de deux", "carrés : deux termes."], wr, VERT_OK, fs=34, fond="#052e16").move_to(P(xr, ys[1]))
+        r3 = carte_arbre(["Double distributivité :", "quatre produits."], wr, BANDE, fs=34, fond="#3b1d06").move_to(P(xr, ys[2]))
         # les flèches « oui » vers la droite, « non » vers le bas
         def oui(q, r):
             f = Arrow(q.get_right(), r.get_left(), buff=0.08, color=VERT_OK, stroke_width=5,
@@ -478,24 +481,26 @@ class IdentChoisir4e(PaysageRel):
         self.clear()
         self.add_mascotte()
         self.XL = 0.6
-        self.ph_haut = -0.55
+        self.ph_haut = -0.7
         e = D("(4 + x)(x + 4)", 58, audit=False).move_to(P(-3.35, 2.3))
         e2 = D("(x + 4)²", 60, VERT_OK, audit=False).move_to(P(-4.7, 0.6))
         e2.atomes[1].set_color(INCONNUE)
-        c = CarreDecoupe(1.05, 0.55, "x", "4", ("x²", "4x", "4x", "16"), fs=28, fs_cote=26)
-        c.move_to(P(-1.85, 0.55))
+        c = CarreDecoupe(1.3, 0.7, "x", "4", ("x²", "4x", "4x", "16"), fs=32, fs_cote=30)
+        c.move_to(P(-1.6, 0.5))
 
         def avant(sc):
-            sc.eq_dans_q(0, "Développe (4 + x)(x + 4).", "Développe 4 plus x, fois x plus 4.", lettres="x", fs=36)
+            sc.eq_dans_q(0, "Développe", "Développe", lettres="", fs=36)
+            sc.eq_dans_q(0, "(4 + x)(x + 4).", "4 plus x, fois x plus 4.", lettres="x", fs=36)
             sc.play(FadeIn(e, shift=UP * 0.2), run_time=0.3)
 
         def apres(sc):
-            sc.ph_eq(0, "Réponse C : 4 + x, c'est x + 4.", "Réponse C : 4 plus x, c'est x plus 4.", lettres="x",
-                     premier=True, avec=[Circumscribe(VGroup(*e.atomes[0:5]), color=JAUNE_TITRE, buff=0.06)])
-            sc.ph_eq(1, "C'est donc (x + 4)² :", "C'est donc x plus 4, au carré :", lettres="x",
+            sc.ph_eq(0, "Réponse C :", "Réponse C :", premier=True)
+            sc.ph_eq(1, "4 + x, c'est x + 4.", "4 plus x, c'est x plus 4.", lettres="x",
+                     avec=[Circumscribe(VGroup(*e.atomes[0:5]), color=JAUNE_TITRE, buff=0.06)])
+            sc.ph_eq(2, "C'est donc (x + 4)² :", "C'est donc x plus 4, au carré :", lettres="x",
                      avec=[FadeIn(e2, shift=DOWN * 0.2), FadeIn(c.pieces), FadeIn(c.bord), Create(c.coupes),
                            FadeIn(c.haut), FadeIn(c.gauche)])
-            ph = sc.ph_q[2]
+            ph = sc.ph_q[3]
             r = E("x² + 8x + 16.", 30, VERT_OK, lettres="x")
             r.scale_to_fit_width(ph.width).move_to(ph).align_to(ph, LEFT)
             sc.dit_avec(r, "x au carré plus 8 x plus 16.",
@@ -503,9 +508,9 @@ class IdentChoisir4e(PaysageRel):
                          idx(r, "16"): lambda: [FadeIn(c.ins[3])]})
             sc.rep_fini()
 
-        self.question_pause("05q-question", "05r-reponse", ["Développe (4 + x)(x + 4)."],
+        self.question_pause("05q-question", "05r-reponse", ["Développe", "(4 + x)(x + 4)."],
                             [Eq("x² + 16", 34), Eq("x² + 4x + 16", 34), Eq("x² + 8x + 16", 34)], 2,
-                            ["Réponse C : 4 + x, c'est x + 4.", "C'est donc (x + 4)² :", "x² + 8x + 16."],
+                            ["Réponse C :", "4 + x, c'est x + 4.", "C'est donc (x + 4)² :", "x² + 8x + 16."],
                             avant_q=avant, autres_r=apres)
         self.XL = type(self).XL
 
@@ -539,16 +544,17 @@ class IdentChoisir4e(PaysageRel):
         self.dire("06b-correction")
         tit = T("Correction", 50, JAUNE_TITRE).move_to(P(0, 2.9))
         e1, e2, b1, b2 = d["e1"], d["e2"], d["b1"], d["b2"]
+        w1, w2 = e1.width * 0.8, e2.width * 0.8
         self.au("Correction", ReplacementTransform(d["tit"], tit), FadeOut(d["pz"]), FadeOut(d["l"]),
                 e1.animate.scale(0.8).move_to(P(-2.95, 1.75)), e2.animate.scale(0.8).move_to(P(3.65, 1.75)),
-                b1.animate.move_to(P(-5.6, 1.75)), b2.animate.move_to(P(1.05, 1.75)), rt=0.45)
+                b1.animate.move_to(P(-2.95 - w1 / 2 - 0.5, 1.75)), b2.animate.move_to(P(3.65 - w2 / 2 - 0.5, 1.75)), rt=0.45)
         # Un : double distributivité
         self.au("Un :", Indicate(b1, color=CIEL, scale_factor=1.3), rt=0.3)
-        a1 = self.lg("les nombres sont différents,", -3.3, 0.8, 34, maxw=6.0)
+        a1 = self.lg("les nombres sont différents,", -3.3, 0.8, 36, maxw=6.2)
         self.dit(a1, "les nombres sont différents,",
                  avec=[Circumscribe(e1.atomes[3], color=JAUNE_TITRE, buff=0.06)])
         self.play(Circumscribe(e1.atomes[8], color=JAUNE_TITRE, buff=0.06), run_time=0.35)
-        a2 = self.lg("double distributivité.", -3.3, 0.25, 36, BANDE, maxw=6.0)
+        a2 = self.lg("double distributivité.", -3.3, 0.2, 38, BANDE, maxw=6.2)
         self.dit(a2, "double distributivité.")
         p = D("x² + 8x − 3x − 24", 46).move_to(P(-3.3, -0.65))
         self.dire_eq(p, "x au carré plus 8 x moins 3 x moins 24 :", echelle=1.1)
@@ -559,10 +565,10 @@ class IdentChoisir4e(PaysageRel):
         self.play(Create(self.cadre_ok(r1, 0.14)), run_time=0.25)
         # Deux : l'identité
         self.au("Deux :", Indicate(b2, color=CIEL, scale_factor=1.3), rt=0.3)
-        c1 = self.lg("signes contraires,", 3.3, 0.8, 34, maxw=5.6)
+        c1 = self.lg("signes contraires,", 3.3, 0.8, 36, maxw=5.6)
         self.dit(c1, "signes contraires,", avec=[e2.atomes[2].animate.set_color(PIEGE),
                                                  e2.atomes[7].animate.set_color(VERT_OK)])
-        c2 = self.lg("identité.", 3.3, 0.25, 36, VERT_OK, maxw=5.6)
+        c2 = self.lg("identité.", 3.3, 0.2, 38, VERT_OK, maxw=5.6)
         self.dit(c2, "identité.")
         r2 = D("= x² − 9", 56, VERT_OK).move_to(P(3.3, -0.65))
         for a in r2.x:
@@ -591,7 +597,7 @@ class IdentChoisir4e(PaysageRel):
             lignes.add(VGroup(c, VGroup(*ts)))
         lignes.arrange(DOWN, aligned_edge=LEFT, buff=0.32)
         xl = figure.get_right()[0] + 0.6
-        largeur = 5.1 - xl
+        largeur = 6.4 - xl
         if lignes.width > largeur:
             lignes.scale_to_fit_width(largeur)
         haut = tit.get_bottom()[1] - 0.35

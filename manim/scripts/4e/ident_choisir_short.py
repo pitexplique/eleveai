@@ -62,9 +62,30 @@ class IdentChoisirShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
         for c in cartes:
             c[0].stretch_to_fit_width(3.7)
             c[1].align_to(c[0].get_left() + RIGHT * 0.2, LEFT)
+        # 22/11 : « double distributivité » rétrécissait à 20 pt sur une ligne : deux lignes, plus grandes.
+        a = cartes[0]
+        cadre, lettre, corps = a[0], a[1][0], a[1][1]
+        if len(corps.atomes) == 2:
+            corps.atomes[1].next_to(corps.atomes[0], DOWN, aligned_edge=LEFT, buff=0.08)
+            corps.scale(2.45 / corps.width)
+            cadre.stretch_to_fit_height(corps.height + 0.28)
+            lettre.set_y(cadre.get_y())
+            corps.next_to(lettre, RIGHT, buff=0.18).set_y(cadre.get_y())
+            cartes.arrange(DOWN, buff=0.1).next_to(q, DOWN, buff=0.14).set_x(0)
+            pause.next_to(cartes, DOWN, buff=0.14).set_x(0)
         return tete, q, cartes, pause, rebours, ph
 
     monter_reponse = FactoVerifierShort4e.monter_reponse
+
+    def place_reponse(self):
+        """22/11 : six lignes sous trois cartes tombaient à 20 pt. Après le ✓, les cartes s'effacent
+        (la phrase redit « Réponse A : la double distributivité ») et la réponse prend leur place."""
+        cartes, ph = self.cartes_q, self.ph_q
+        haut = cartes[0].get_top()[1] - 0.05
+        self.play(FadeOut(cartes), FadeOut(self.mobjects[-1]), run_time=0.25)
+        ph.arrange(DOWN, buff=0.14)
+        k = min(0.52 / max(l.height for l in ph), 3.8 / ph.width, (haut + 2.75) / ph.height)
+        ph.scale(k).next_to(P(0, haut), DOWN, buff=0).set_x(0)
     eq_dans_q = FactoVerifierShort4e.eq_dans_q
     q = FactoVerifierShort4e.q
 
@@ -97,19 +118,23 @@ class IdentChoisirShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
         self.dire("01-raccourci")
         e = self.q("(x + 6)(x − 6)", 1.85, 52, largeur=3.4).sans_audit()
         self.play(FadeIn(e, shift=UP * 0.15), run_time=0.3)
-        m1 = self.l("Les mêmes termes, x et 6,", 1.1, 36, lettres="x")
-        self.dit_avec(m1, "Les mêmes termes, x et 6,",
+        m1a = self.l("Les mêmes termes,", 1.15, 38)
+        self.dit(m1a, "Les mêmes termes,")
+        m1 = self.l("x et 6,", 0.6, 38, lettres="x")
+        self.dit_avec(m1, "x et 6,",
                       {idx(m1, "x"): [Circumscribe(VGroup(e.atomes[1], e.atomes[6]), color=JAUNE_TITRE, buff=0.06)],
                        idx(m1, "6"): [Circumscribe(VGroup(e.atomes[3], e.atomes[8]), color=JAUNE_TITRE, buff=0.06)]})
-        m2 = self.l("avec des signes contraires.", 0.55, 36)
-        self.dit(m2, "avec des signes contraires.",
+        m2a = self.l("avec des signes", 0.05, 38)
+        self.dit(m2a, "avec des signes")
+        m2 = self.l("contraires.", -0.5, 38)
+        self.dit(m2, "contraires.",
                  avec=[e.atomes[2].animate.set_color(VERT_OK), e.atomes[7].animate.set_color(PIEGE)])
         self.play(Indicate(VGroup(e.atomes[2], e.atomes[7]), scale_factor=1.5), run_time=0.4)
-        m3 = self.l("L'identité donne", -0.1, 40, CIEL)
+        m3 = self.l("L'identité donne", -1.05, 40, CIEL)
         self.dit(m3, "L'identité donne")
-        m3b = self.l("tout de suite", -0.6, 40, CIEL)
+        m3b = self.l("tout de suite", -1.55, 40, CIEL)
         self.dit(m3b, "tout de suite")
-        r = self.q("x² − 36", -1.45, 66, VERT_OK)
+        r = self.q("x² − 36", -2.2, 58, VERT_OK)
         r.atomes[0].set_color(INCONNUE)
         self.dire_eq(r, "x au carré moins 36.", echelle=1.15)
         cr = self.cadre_ok(r, 0.16)
@@ -120,7 +145,7 @@ class IdentChoisirShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
         l4 = self.l("Les quatre produits ?", 0.2, 40, CIEL)
         f = quatre_fleches(e)
         self.dit(l4, "Les quatre produits ?", rt=0.3,
-                 avec=[FadeOut(VGroup(m1, m2, m3, m3b)), bloc.animate.scale(0.75).move_to(P(0, 0.9))])
+                 avec=[FadeOut(VGroup(m1a, m1, m2a, m2, m3, m3b)), bloc.animate.scale(0.75).move_to(P(0, 0.9))])
         self.play(LaggedStart(*[Create(x) for x in f], lag_ratio=0.2), run_time=0.5)
         p1 = Eq("x²", 46, audit=False)
         p2 = Eq("+ 6x", 46)
@@ -145,21 +170,24 @@ class IdentChoisirShort4e(_OutilsProbleme, _OutilsDefi, ShortEq):
 
         # ── 01q : la question-pause (3 s) ──
         def avant(sc):
-            sc.eq_dans_q(0, "Et pour (x + 6)(x − 1) ?", "Et pour x plus 6, fois x moins 1 ?", lettres="x", fs=34,
+            sc.eq_dans_q(0, "Et pour", "Et pour", lettres="", fs=40, couleur=JAUNE_TITRE)
+            sc.eq_dans_q(0, "(x + 6)(x − 1) ?", "x plus 6, fois x moins 1 ?", lettres="x", fs=40,
                          couleur=JAUNE_TITRE)
 
         def apres(sc):
-            sc.monter_reponse(0)
-            sc.ph_eq(0, "Réponse A : la double", "Réponse A : la double", premier=True)
-            sc.ph_eq(1, "distributivité.", "distributivité.")
-            sc.ph_eq(2, "6 et 1 sont différents :", "6 et 1 sont différents :")
-            sc.ph_eq(3, "pas d'identité.", "pas d'identité.")
+            sc.place_reponse()
+            sc.ph_eq(0, "Réponse A :", "Réponse A :", premier=True)
+            sc.ph_eq(1, "la double", "la double")
+            sc.ph_eq(2, "distributivité.", "distributivité.")
+            sc.ph_eq(3, "6 et 1 sont", "6 et 1 sont")
+            sc.ph_eq(4, "différents :", "différents :")
+            sc.ph_eq(5, "pas d'identité.", "pas d'identité.")
             sc.rep_fini()
 
-        self.question_pause("01q-question", "01r-reponse", ["Et pour (x + 6)(x − 1) ?"],
+        self.question_pause("01q-question", "01r-reponse", ["Et pour", "(x + 6)(x − 1) ?"],
                             [Eq("double distributivité", 34, lettres=""), Eq("(a + b)²", 34, lettres=""),
                              Eq("(a + b)(a − b)", 34, lettres="")], 0,
-                            ["Réponse A : la double", "distributivité.", "6 et 1 sont différents :", "pas d'identité."],
+                            ["Réponse A :", "la double", "distributivité.", "6 et 1 sont", "différents :", "pas d'identité."],
                             avant_q=avant, autres_r=apres)
 
         # ── 02 : la question en commentaire, puis la fin commune ──
