@@ -83,11 +83,39 @@ rien ne change). **Aucun générateur de page ne le lit** : ni `generer-videos-r
 `app/sitemap.ts`, ni `/video/<id>`. Pas de page fantôme, pas d'entrée de sitemap, pas de date de
 programmation en plus — c'est pour ça qu'`aussi` est le bon outil et pas une seconde entrée.
 
-#### ⏳ Les trous du CM1 et du CM2 sont, eux, de la production
-8 micros sans vidéo, et ils se regroupent : la **demi-droite graduée** (CM1 + CM2, mutualisable par
-`aussi`), les **diviseurs** (1 micro au CM1, 3 au CM2), les **multiples communs** (CM2),
-**encadrer/intercaler** (CM1 — la 6e l'a déjà : `6e-entier-encadrer`, ⚠ banque 6e plus PETITE que
-celle du CM, cf. § 219). ⛔ Rien d'engagé, rien de promis.
+#### ⛔⛔ Les 8 trous du CM1 / CM2 NE SONT PAS un manque de vidéo : les banques sont VIDES
+
+⭐⭐ **Mesuré le 22/11 — les deux banques `nombres-entiers.bank.ts` ne contiennent QUE les six micros
+déjà couverts.** Les 8 micros sans vidéo ont **zéro item**, littéral ou gabarit :
+
+```
+grep -o 'microId: "[^"]*"' lib/tutor-v4/questionBank/cm1/maths/nombres-entiers.bank.ts | sort | uniq -c
+  → 10 × entier_lire, comparer, decomposer, arrondir, multiple, defi  — et RIEN d'autre
+     (CM2 : 4 × les mêmes, 5 × defi)
+```
+⚠ **Étalonné avant de conclure** (une mesure qui répond « 0 » à tout est suspecte) : le même grep
+trouve bien 10 items sur `entier_lire`, qu'on sait pleine. L'instrument voit. Il n'y a rien.
+
+⭐ Et elles ne sont **pas masquées** (`lib/tutor-v4/micros-masquees.ts` : les 6 ids absents) — donc
+le coach les **propose** à l'élève. Qui clique dessus tombe sur « Pas assez de questions
+disponibles » (`questionPairBuilder.ts:406`) : ⛔ **8 culs-de-sac en ligne**, et aucun instrument ne
+les signale. Produire une vidéo par-dessus n'y changerait rien.
+
+⭐⭐ **Le BO coupe les 8 en deux groupes, et il faut les traiter à l'opposé :**
+
+| | Micros | Le BO | Ce que ça demande |
+|---|---|---|---|
+| **CM1** | `entier_droite`, `entier_diviseur`, `entier_encadrer` | ⛔ **absents de `cm1/bo.ts`** — déclarés dans `microSkills.ts` **seulement** | → **masquer** (`hors_programme`), exactement le motif de `tri_criteres_successifs` |
+| **CM2** | `entier_droite`, `entier_diviseur`, `entier_diviseurs_tous`, `entier_diviseurs_communs`, `entier_multiples_communs` | ✅ **explicitement au programme** dans `cm2/bo-objectifs.ts` : « déterminer tous les diviseurs d'un entier ≤ 30 », « placer des nombres sur une demi-droite graduée », « comparer, encadrer, intercaler » | → **remplir les banques**, la vidéo APRÈS |
+
+⚠⚠ Pire pour le CM2 : `bo-objectifs.ts` déclare `micros: ["entier_diviseur"]` en face d'un objectif
+du programme, et **cette micro n'a aucune question**. Le fichier qui dit ce qu'on doit enseigner
+pointe une banque vide — c'est le cas « un item mal rangé n'atteint jamais l'élève », en pire : il
+n'y a pas d'item du tout.
+
+⛔ **Donc l'ordre n'est pas celui qu'on croyait** : ce n'est pas « 8 vidéos à produire », c'est
+**3 micros à masquer au CM1** et **5 banques à écrire au CM2**. Les vidéos viennent après les
+banques, jamais avant. ⛔ Rien d'engagé, rien de promis, décision à Frédéric.
 
 ### ⏭ Ce qui reste, et qui n'est PAS de la production
 - **La mise en ligne YouTube des 24 vidéos** — c'est Frédéric qui la fait. Chaque dossier
