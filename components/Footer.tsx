@@ -16,7 +16,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { cgvEnVigueur } from "@/lib/legal/editeur";
 import CompteurReponsesCoach from "@/components/coach/CompteurReponsesCoach";
-import { CAP_VIDEOS, ECHEANCE_CAP, etatCompteurVideos } from "@/lib/videos/compteur";
+import { CAP_VIDEOS, etatCompteurVideos } from "@/lib/videos/compteur";
 import {
   IconeInstagram,
   IconeYoutube,
@@ -263,7 +263,7 @@ const francaisClasses = [
   { label: "3e", slug: "3e" },
 ];
 
-/** « 1 875 vidéos de maths, 5 000 fin janvier 2027 » — même style que les questions. */
+/** « 2 036 vidéos de maths ! » — même style que les questions. */
 function CompteurVideosPied() {
   const c = etatCompteurVideos();
   return (
@@ -274,8 +274,8 @@ function CompteurVideosPied() {
         </>
       ) : (
         <>
-          <strong className="font-bold tabular-nums text-white">{c.nombreTexte}</strong> vidéos de maths,{" "}
-          <strong className="font-bold tabular-nums text-white">{CAP_VIDEOS.toLocaleString("fr-FR")}</strong> {ECHEANCE_CAP}&nbsp;!
+          {/* 22/11/2026, Frédéric : « enlève 5000 pied de page » → le nombre seul. */}
+          <strong className="font-bold tabular-nums text-white">{c.nombreTexte}</strong> vidéos de maths&nbsp;!
         </>
       )}
     </p>
