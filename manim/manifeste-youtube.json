@@ -108910,6 +108910,1295 @@
       "centres": [
         "jeux-defis"
       ]
+    },
+    {
+      "id": "3e-affine-reconnaitre",
+      "pas_avant": "2027-07-02",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_reconnaitre",
+      "classe": "3e",
+      "ceinture": "jaune",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/fonctions-affines/01-reconnaitre/eleveai-maths-3e-affine-reconnaitre.mp4",
+      "miniature": "3e/maths/fonctions-affines/01-reconnaitre/eleveai-maths-3e-affine-reconnaitre.png",
+      "titre": "f(x) = 3 − 2x est-elle affine ? Reconnaître une fonction affine — épisode 1 · Maths 3e",
+      "accroche": "Maya est monteuse vidéo. Un client la paie 20 € la minute, un autre 50 € le projet plus 15 € la minute, un troisième veut des miniatures carrées de x cm de côté. f(x) = 20x, g(x) = 15x + 50, h(x) = x² : lesquelles sont affines ?\n\nDans cette vidéo :\n• une fonction affine s'écrit ax + b : pour g(x) = 15x + 50, a = 15 et b = 50\n• si b = 0, elle est linéaire : f(x) = 20x, le prix est proportionnel à la durée\n• x², c'est x × x : h n'est pas affine, sa courbe n'est pas une droite\n• sur le graphique : des droites pour f et g, f passe par l'origine\n• les fonctions déguisées : 5(x + 10) = 5x + 50 ; on développe et on réduit avant de décider\n• un tarif fixe, 0 × x + 100 : a = 0, la fonction est constante, sa droite est horizontale\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : f(x) = 2(x + 3) et g(x) = x(x + 1) − x² sont-elles affines ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_reconnaitre&display=simple\n\n🔢 Épisode 1 de la série Fonctions affines d'EleveAI, en 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Affine ou pas ?"
+        ],
+        [
+          "00:38",
+          "La forme ax + b"
+        ],
+        [
+          "01:05",
+          "Des droites et une courbe"
+        ],
+        [
+          "01:22",
+          "Question 1"
+        ],
+        [
+          "01:53",
+          "Les fonctions déguisées"
+        ],
+        [
+          "02:23",
+          "Question 2"
+        ],
+        [
+          "02:58",
+          "À toi de jouer"
+        ],
+        [
+          "03:17",
+          "Correction"
+        ],
+        [
+          "03:39",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction",
+      "tags": [
+        "fonction affine",
+        "fonction linéaire",
+        "reconnaître une fonction affine",
+        "ax + b",
+        "fonction constante",
+        "monteuse vidéo",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:22",
+          "question": "Laquelle de ces fonctions est affine ?",
+          "choix": [
+            "x² + 3",
+            "3 ÷ x",
+            "3 − 2x"
+          ],
+          "reponse": 2,
+          "explication": "3 − 2x = −2x + 3 : a = −2 et b = 3. L'ordre des termes ne change rien."
+        },
+        {
+          "t": "02:23",
+          "question": "f(x) = 4x. Comment l'appeler ?",
+          "choix": [
+            "linéaire, et aussi affine",
+            "linéaire, mais pas affine",
+            "ni l'une ni l'autre"
+          ],
+          "reponse": 0,
+          "explication": "4x = 4x + 0 : b = 0, donc f est linéaire. Une fonction linéaire est une fonction affine particulière."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "3e-affine-reconnaitre-short",
+      "pas_avant": "2027-07-02",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_reconnaitre",
+      "classe": "3e",
+      "ceinture": "jaune",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-affine-reconnaitre",
+      "fichier": "3e/maths/fonctions-affines/01-reconnaitre/eleveai-maths-3e-affine-reconnaitre-short.mp4",
+      "miniature": "3e/maths/fonctions-affines/01-reconnaitre/eleveai-maths-3e-affine-reconnaitre-short.png",
+      "titre": "(x + 1)² − x² a l'air compliquée… et si elle était affine ? 🔍 — 3e #Shorts",
+      "accroche": "f(x) = (x + 1)² − x². On développe : x² + 2x + 1 − x². Les x² s'annulent.\nIl reste 2x + 1 : f est affine !\n\nVoix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : f(x) = 3(x + 2) − 6. Linéaire ou affine ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fonctionaffine #3e #brevet",
+      "tags": [
+        "fonction affine",
+        "fonction linéaire",
+        "développer",
+        "fonctions affines",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:24",
+          "question": "Laquelle est linéaire ?",
+          "choix": [
+            "5x + 1",
+            "5x",
+            "x²"
+          ],
+          "reponse": 1,
+          "explication": "5x = 5x + 0 : sa droite passe par l'origine."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "3e-affine-coeff-directeur",
+      "pas_avant": "2027-07-03",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_coeff_directeur",
+      "classe": "3e",
+      "ceinture": "orange",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/fonctions-affines/02-coeff-directeur/eleveai-maths-3e-affine-coeff-directeur.mp4",
+      "miniature": "3e/maths/fonctions-affines/02-coeff-directeur/eleveai-maths-3e-affine-coeff-directeur.png",
+      "titre": "f(x) = 3x + 10 : que dit le 3 ? Le coefficient directeur — épisode 2 · Maths 3e",
+      "accroche": "Inès développe un jeu vidéo. Son héros commence avec 10 points d'énergie et en gagne 3 par seconde : f(x) = 3x + 10. Que dit ce 3 ? Et quand la batterie de son téléphone perd 2 % par minute ?\n\nDans cette vidéo :\n• a, le coefficient directeur : de combien f augmente quand x augmente de 1\n• sur la droite : un carreau vers la droite, a carreaux vers le haut ; plus a est grand, plus elle est raide\n• a négatif : g(x) = −2x + 80, la droite descend, la fonction est décroissante\n• a est le nombre devant x, avec son signe\n• avec deux points : a = écart des images ÷ écart des x\n• le piège : oublier de diviser par l'écart des x\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : f(x) = 5 − 3x est-elle croissante ou décroissante ? Et combien vaut a pour la droite qui passe par (−1 ; 4) et (2 ; −5) ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_coeff_directeur&display=simple\n\n🔢 Épisode 2 de la série Fonctions affines d'EleveAI, en 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le nombre devant x"
+        ],
+        [
+          "00:28",
+          "Le coefficient directeur"
+        ],
+        [
+          "00:45",
+          "a négatif : la droite descend"
+        ],
+        [
+          "01:06",
+          "Question 1"
+        ],
+        [
+          "01:33",
+          "a avec deux points"
+        ],
+        [
+          "01:57",
+          "Question 2"
+        ],
+        [
+          "02:34",
+          "À toi de jouer"
+        ],
+        [
+          "02:55",
+          "Correction"
+        ],
+        [
+          "03:19",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction",
+      "tags": [
+        "fonction affine",
+        "coefficient directeur",
+        "croissante",
+        "décroissante",
+        "ax + b",
+        "jeu vidéo",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:06",
+          "question": "f(x) = −4x + 7. Quel est son coefficient directeur ?",
+          "choix": [
+            "7",
+            "−4",
+            "4"
+          ],
+          "reponse": 1,
+          "explication": "a est le nombre devant x, avec son signe : −4, la droite descend."
+        },
+        {
+          "t": "01:57",
+          "question": "Une droite passe par (1 ; 3) et (3 ; 11). Combien vaut a ?",
+          "choix": [
+            "8",
+            "0,25",
+            "4"
+          ],
+          "reponse": 2,
+          "explication": "Les images gagnent 8, les x gagnent 2 : 8 ÷ 2 = 4. Pas 8 : il faut diviser par l'écart des x."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "3e-affine-coeff-directeur-short",
+      "pas_avant": "2027-07-03",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_coeff_directeur",
+      "classe": "3e",
+      "ceinture": "orange",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-affine-coeff-directeur",
+      "fichier": "3e/maths/fonctions-affines/02-coeff-directeur/eleveai-maths-3e-affine-coeff-directeur-short.mp4",
+      "miniature": "3e/maths/fonctions-affines/02-coeff-directeur/eleveai-maths-3e-affine-coeff-directeur-short.png",
+      "titre": "Ta batterie perd 4 % par heure : où est le coefficient directeur ? 🔍 — 3e #Shorts",
+      "accroche": "Batterie pleine : 100 %. Après x heures : f(x) = −4x + 100.\nLe coefficient directeur, c'est −4 : chaque heure, la droite descend de 4. Le signe moins, c'est la baisse.\n\nVoix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : au bout de combien d'heures la batterie est-elle vide ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_coeff_directeur&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fonctionaffine #3e #brevet",
+      "tags": [
+        "coefficient directeur",
+        "fonction affine",
+        "batterie",
+        "fonctions affines",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "Une plante mesure 5 cm et grandit de 2 cm par semaine. Combien vaut a ?",
+          "choix": [
+            "2",
+            "5",
+            "7"
+          ],
+          "reponse": 0,
+          "explication": "a, c'est ce qui change chaque semaine : 2 cm. Le 5, c'est le départ."
+        }
+      ],
+      "centres": [
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "3e-affine-ordonnee-origine",
+      "pas_avant": "2027-07-04",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_ordonnee_origine",
+      "classe": "3e",
+      "ceinture": "orange",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/fonctions-affines/03-ordonnee-origine/eleveai-maths-3e-affine-ordonnee-origine.mp4",
+      "miniature": "3e/maths/fonctions-affines/03-ordonnee-origine/eleveai-maths-3e-affine-ordonnee-origine.png",
+      "titre": "f(0) = 300 € : l'ordonnée à l'origine, la valeur de départ — épisode 3 · Maths 3e",
+      "accroche": "Léo est moniteur d'auto-école. L'inscription coûte 300 €, puis chaque heure de conduite 45 € : f(x) = 45x + 300. Que vaut f avant la première heure ? Et comment retrouver un prix d'inscription caché ?\n\nDans cette vidéo :\n• b, l'ordonnée à l'origine : f(0) = 45 × 0 + 300 = 300, la valeur de départ\n• sur le graphique, la droite coupe l'axe vertical en b\n• b est le nombre seul, avec son signe : pour 7x − 5, b = −5\n• retrouver b avec un point connu : 50 × 20 + b = 1 400, donc b = 400\n• le piège : on enlève, on n'ajoute pas\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : trouve b si f(x) = −2x + b et f(4) = 1 ; puis si a = 0,5 et la droite passe par (6 ; 5).\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_ordonnee_origine&display=simple\n\n🔢 Épisode 3 de la série Fonctions affines d'EleveAI, en 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Quand x vaut 0"
+        ],
+        [
+          "00:22",
+          "f(0), la valeur de départ"
+        ],
+        [
+          "00:48",
+          "Question 1"
+        ],
+        [
+          "01:18",
+          "Retrouver b"
+        ],
+        [
+          "01:43",
+          "Question 2"
+        ],
+        [
+          "02:14",
+          "À toi de jouer"
+        ],
+        [
+          "02:33",
+          "Correction"
+        ],
+        [
+          "02:51",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction",
+      "tags": [
+        "fonction affine",
+        "ordonnée à l'origine",
+        "f(0)",
+        "ax + b",
+        "auto-école",
+        "permis de conduire",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:48",
+          "question": "f(x) = 7x − 5. Quelle est son ordonnée à l'origine ?",
+          "choix": [
+            "−5",
+            "7",
+            "5"
+          ],
+          "reponse": 0,
+          "explication": "b, c'est le nombre seul, avec son signe : f(0) = −5."
+        },
+        {
+          "t": "01:43",
+          "question": "f(x) = 3x + b et f(2) = 10. Combien vaut b ?",
+          "choix": [
+            "16",
+            "4",
+            "7"
+          ],
+          "reponse": 1,
+          "explication": "3 × 2 = 6, et 6 + b = 10 : b = 4. Pas 16 : on enlève 6, on ne l'ajoute pas."
+        }
+      ],
+      "centres": [
+        "transports",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "3e-affine-ordonnee-origine-short",
+      "pas_avant": "2027-07-04",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_ordonnee_origine",
+      "classe": "3e",
+      "ceinture": "jaune",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-affine-ordonnee-origine",
+      "fichier": "3e/maths/fonctions-affines/03-ordonnee-origine/eleveai-maths-3e-affine-ordonnee-origine-short.mp4",
+      "miniature": "3e/maths/fonctions-affines/03-ordonnee-origine/eleveai-maths-3e-affine-ordonnee-origine-short.png",
+      "titre": "20 € par mois : pourquoi la droite ne part pas de zéro ? 🔍 — 3e #Shorts",
+      "accroche": "Salle de sport : 20 € par mois, et 30 € de frais d'inscription. Après x mois : f(x) = 20x + 30.\nf(0) = 30 : la droite coupe l'axe vertical à 30, c'est l'ordonnée à l'origine.\n\nVoix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : une droite coupe l'axe vertical à −2 et monte de 3 à chaque pas. Quelle est sa fonction ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_ordonnee_origine&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fonctionaffine #3e #brevet",
+      "tags": [
+        "ordonnée à l'origine",
+        "fonction affine",
+        "salle de sport",
+        "fonctions affines",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "f(x) = 20x + 30. Combien vaut f(0) ?",
+          "choix": [
+            "20",
+            "50",
+            "30"
+          ],
+          "reponse": 2,
+          "explication": "20 × 0 = 0 : il reste 30, l'ordonnée à l'origine."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "3e-affine-calcul-image",
+      "pas_avant": "2027-07-05",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_calcul_image",
+      "classe": "3e",
+      "ceinture": "jaune",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/fonctions-affines/04-calcul-image/eleveai-maths-3e-affine-calcul-image.mp4",
+      "miniature": "3e/maths/fonctions-affines/04-calcul-image/eleveai-maths-3e-affine-calcul-image.png",
+      "titre": "f(−2) = ? Calculer l'image d'un nombre par une fonction affine — épisode 4 · Maths 3e",
+      "accroche": "Samir est moniteur de plongée. Sous l'eau, la pression augmente avec la profondeur : à x mètres, p(x) = 0,1x + 1 bars. Quelle pression à 20 mètres ? On remplace x, et on calcule dans le bon ordre.\n\nDans cette vidéo :\n• calculer une image : on remplace x par le nombre ; p(20) = 0,1 × 20 + 1 = 3\n• on écrit p(20) = 3 : 3 est l'image de 20\n• d'abord la multiplication, ensuite l'addition\n• le tableau de Samir : 2 bars à 10 m, 4 bars à 30 m, 4,5 bars à 35 m\n• un nombre négatif se met entre parenthèses : f(−2) = −3 × (−2) + 5 = 11\n• le piège : l'erreur de signe\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : f(x) = 3x − 4 : calcule f(−1), puis f(0,5).\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_calcul_image&display=simple\n\n🔢 Épisode 4 de la série Fonctions affines d'EleveAI, en 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un nombre précis"
+        ],
+        [
+          "00:25",
+          "p(20) = 3"
+        ],
+        [
+          "00:44",
+          "Le tableau de Samir"
+        ],
+        [
+          "01:02",
+          "Question 1"
+        ],
+        [
+          "01:35",
+          "Avec un nombre négatif"
+        ],
+        [
+          "01:55",
+          "Question 2"
+        ],
+        [
+          "02:27",
+          "À toi de jouer"
+        ],
+        [
+          "02:41",
+          "Correction"
+        ],
+        [
+          "03:01",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction",
+      "tags": [
+        "fonction affine",
+        "calculer une image",
+        "image d'un nombre",
+        "nombres relatifs",
+        "plongée",
+        "pression",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:02",
+          "question": "f(x) = 4x − 7. Combien vaut f(5) ?",
+          "choix": [
+            "27",
+            "−8",
+            "13"
+          ],
+          "reponse": 2,
+          "explication": "4 × 5 = 20, et 20 − 7 = 13. Pas −8 : on multiplie d'abord, on ne calcule pas 5 − 7."
+        },
+        {
+          "t": "01:55",
+          "question": "f(x) = −2x + 3. Combien vaut f(−4) ?",
+          "choix": [
+            "−5",
+            "11",
+            "−11"
+          ],
+          "reponse": 1,
+          "explication": "−2 × (−4) = +8, et 8 + 3 = 11. −5, c'est l'erreur de signe."
+        }
+      ],
+      "centres": [
+        "sport",
+        "sciences"
+      ]
+    },
+    {
+      "id": "3e-affine-calcul-image-short",
+      "pas_avant": "2027-07-05",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_calcul_image",
+      "classe": "3e",
+      "ceinture": "jaune",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-affine-calcul-image",
+      "fichier": "3e/maths/fonctions-affines/04-calcul-image/eleveai-maths-3e-affine-calcul-image-short.mp4",
+      "miniature": "3e/maths/fonctions-affines/04-calcul-image/eleveai-maths-3e-affine-calcul-image-short.png",
+      "titre": "40 m sous l'eau : la pression 4 fois plus forte qu'à 10 m ? 🔍 — 3e #Shorts",
+      "accroche": "La pression sous l'eau : p(x) = 0,1x + 1. À 10 mètres : 2 bars. À 40 mètres : 5 bars. Pas 8 !\nUne fonction affine n'est pas proportionnelle.\n\nVoix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : à quelle profondeur la pression vaut-elle 3,5 bars ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_calcul_image&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fonctionaffine #3e #brevet",
+      "tags": [
+        "calculer une image",
+        "fonction affine",
+        "plongée",
+        "fonctions affines",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "Avec p(x) = 0,1x + 1, combien vaut p(50) ?",
+          "choix": [
+            "6",
+            "5",
+            "51"
+          ],
+          "reponse": 0,
+          "explication": "0,1 × 50 = 5, plus 1 : 6 bars."
+        }
+      ],
+      "centres": [
+        "sciences"
+      ]
+    },
+    {
+      "id": "3e-affine-expression",
+      "pas_avant": "2027-07-06",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_expression",
+      "classe": "3e",
+      "ceinture": "verte",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/fonctions-affines/05-expression/eleveai-maths-3e-affine-expression.mp4",
+      "miniature": "3e/maths/fonctions-affines/05-expression/eleveai-maths-3e-affine-expression.png",
+      "titre": "Deux mesures, une fonction : trouver l'expression f(x) = ax + b — épisode 5 · Maths 3e",
+      "accroche": "Awa est technicienne en environnement. Un jeune baobab mesure 70 cm à 2 ans et 160 cm à 5 ans. Sa croissance est régulière : sa hauteur est une fonction affine de son âge. Mais laquelle ?\n\nDans cette vidéo :\n• d'abord a : écart des images ÷ écart des x ; 90 ÷ 3 = 30 cm par an\n• puis b : on remplace un point connu ; 30 × 2 + b = 70, donc b = 10\n• f(x) = 30x + 10, et on vérifie avec l'autre point : 150 + 10 = 160\n• a = 2 et f(0) = −3 : f(x) = 2x − 3\n• parfois une phrase suffit : 500 litres, 20 litres de moins par jour, f(x) = −20x + 500\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : trouve f si f(−1) = 7 et f(2) = −2 ; puis si f est linéaire et f(4) = 10.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_expression&display=simple\n\n🔢 Épisode 5 de la série Fonctions affines d'EleveAI, en 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux mesures suffisent ?"
+        ],
+        [
+          "00:28",
+          "D'abord a"
+        ],
+        [
+          "00:47",
+          "Puis b, et on vérifie"
+        ],
+        [
+          "01:13",
+          "Question 1"
+        ],
+        [
+          "01:47",
+          "Une phrase suffit"
+        ],
+        [
+          "02:10",
+          "Question 2"
+        ],
+        [
+          "02:50",
+          "À toi de jouer"
+        ],
+        [
+          "03:08",
+          "Correction"
+        ],
+        [
+          "03:41",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction",
+      "tags": [
+        "fonction affine",
+        "expression d'une fonction affine",
+        "coefficient directeur",
+        "ordonnée à l'origine",
+        "baobab",
+        "environnement",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:13",
+          "question": "Une fonction affine a pour coefficient directeur 2, et f(0) = −3. Quelle est son expression ?",
+          "choix": [
+            "2x − 3",
+            "−3x + 2",
+            "2x + 3"
+          ],
+          "reponse": 0,
+          "explication": "a = 2, et f(0), c'est b : −3. Donc 2x − 3."
+        },
+        {
+          "t": "02:10",
+          "question": "f(1) = 5 et f(3) = 11. Quelle est l'expression de f ?",
+          "choix": [
+            "6x − 1",
+            "3x + 5",
+            "3x + 2"
+          ],
+          "reponse": 2,
+          "explication": "Les images gagnent 6, les x gagnent 2 : a = 3. Puis 3 × 1 + b = 5 : b = 2. On vérifie : 3 × 3 + 2 = 11."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "sciences"
+      ]
+    },
+    {
+      "id": "3e-affine-expression-short",
+      "pas_avant": "2027-07-06",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_expression",
+      "classe": "3e",
+      "ceinture": "verte",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-affine-expression",
+      "fichier": "3e/maths/fonctions-affines/05-expression/eleveai-maths-3e-affine-expression-short.mp4",
+      "miniature": "3e/maths/fonctions-affines/05-expression/eleveai-maths-3e-affine-expression-short.png",
+      "titre": "Deux nombres, et tu retrouves toute une fonction affine 🔍 — 3e #Shorts",
+      "accroche": "f(2) = 9 et f(5) = 18. Les images gagnent 9, les x gagnent 3 : a = 3. Puis 3 × 2 + b = 9 : b = 3.\nf(x) = 3x + 3. On vérifie : 15 + 3 = 18 !\n\nVoix de synthèse.\n🥋 Ceinture verte.\n👉 À toi : f(1) = 2 et f(4) = −7. Quelle est l'expression de f ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_expression&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fonctionaffine #3e #brevet",
+      "tags": [
+        "expression d'une fonction affine",
+        "fonction affine",
+        "deux points",
+        "fonctions affines",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI",
+        "ceinture verte",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:28",
+          "question": "f(0) = 4 et f(1) = 6. Quelle est l'expression de f ?",
+          "choix": [
+            "4x + 6",
+            "2x + 4",
+            "6x + 4"
+          ],
+          "reponse": 1,
+          "explication": "f(0), c'est b : 4. De 0 à 1, f gagne 2 : a = 2."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "3e-affine-graphique",
+      "pas_avant": "2027-07-07",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_graphique",
+      "classe": "3e",
+      "ceinture": "verte",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/fonctions-affines/06-graphique/eleveai-maths-3e-affine-graphique.mp4",
+      "miniature": "3e/maths/fonctions-affines/06-graphique/eleveai-maths-3e-affine-graphique.png",
+      "titre": "Que nous dit une droite ? Lire une fonction affine sur un graphique — épisode 6 · Maths 3e",
+      "accroche": "Clara est community manager. Elle lance le compte d'un club de basket : 200 abonnés au départ, puis 50 de plus chaque jour. Elle trace la droite. Combien d'abonnés après 4 jours ? Quand atteindra-t-on 600 ?\n\nDans cette vidéo :\n• lire une image : on part de l'axe horizontal, on monte à la droite, on va à gauche ; l'image de 4 est 400\n• lire un antécédent : on part de l'axe vertical ; 8 est l'antécédent de 600\n• lire b : là où la droite coupe l'axe vertical\n• lire a : ce que la droite monte pour un pas vers la droite\n• la droite donne l'expression sans calculer : f(x) = 50x + 200\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : sur le graphique, lis l'antécédent de 0, puis l'expression de la droite.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_graphique&display=simple\n\n🔢 Épisode 6 de la série Fonctions affines d'EleveAI, en 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Que dit une droite ?"
+        ],
+        [
+          "00:24",
+          "Lire une image"
+        ],
+        [
+          "00:40",
+          "Lire un antécédent"
+        ],
+        [
+          "00:56",
+          "Question 1"
+        ],
+        [
+          "01:27",
+          "Lire l'expression"
+        ],
+        [
+          "01:45",
+          "Question 2"
+        ],
+        [
+          "02:22",
+          "À toi de jouer"
+        ],
+        [
+          "02:37",
+          "Correction"
+        ],
+        [
+          "02:58",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction",
+      "tags": [
+        "fonction affine",
+        "lecture graphique",
+        "image",
+        "antécédent",
+        "droite",
+        "community manager",
+        "basket",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:56",
+          "question": "La droite passe par (0 ; 1) et par (2 ; 5). Combien vaut f(3) ?",
+          "choix": [
+            "6",
+            "7",
+            "3"
+          ],
+          "reponse": 1,
+          "explication": "À chaque pas vers la droite, elle monte de 2. À 3 : 1 + 3 × 2 = 7."
+        },
+        {
+          "t": "01:45",
+          "question": "Une droite coupe l'axe vertical à 4 et descend d'un carreau à chaque pas vers la droite. Quelle est son expression ?",
+          "choix": [
+            "−x + 4",
+            "x + 4",
+            "4x − 1"
+          ],
+          "reponse": 0,
+          "explication": "b = 4, et elle descend de 1 à chaque pas : a = −1. Donc −x + 4."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux",
+        "sport"
+      ]
+    },
+    {
+      "id": "3e-affine-graphique-short",
+      "pas_avant": "2027-07-07",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_graphique",
+      "classe": "3e",
+      "ceinture": "orange",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-affine-graphique",
+      "fichier": "3e/maths/fonctions-affines/06-graphique/eleveai-maths-3e-affine-graphique-short.mp4",
+      "miniature": "3e/maths/fonctions-affines/06-graphique/eleveai-maths-3e-affine-graphique-short.png",
+      "titre": "Ce graphique sait quand ton forfait internet sera vide 🔍 — 3e #Shorts",
+      "accroche": "Ton forfait : 20 gigas, et tu en utilises 2 par jour. La droite part de 20 et descend de 2 chaque jour.\nElle touche l'axe horizontal à 10 : ton forfait est vide au bout de 10 jours.\n\nVoix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : avec 30 gigas, et 2 gigas par jour, au bout de combien de jours le forfait est-il vide ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_graphique&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fonctionaffine #3e #brevet",
+      "tags": [
+        "lecture graphique",
+        "fonction affine",
+        "forfait internet",
+        "fonctions affines",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "Lis sur la droite : combien reste-t-il après 4 jours ?",
+          "choix": [
+            "8 gigas",
+            "16 gigas",
+            "12 gigas"
+          ],
+          "reponse": 2,
+          "explication": "4 jours à 2 gigas par jour : 8 gigas utilisés. 20 − 8 = 12 gigas."
+        }
+      ],
+      "centres": [
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "3e-affine-tracer",
+      "pas_avant": "2027-07-08",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_tracer",
+      "classe": "3e",
+      "ceinture": "orange",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/fonctions-affines/07-tracer/eleveai-maths-3e-affine-tracer.mp4",
+      "miniature": "3e/maths/fonctions-affines/07-tracer/eleveai-maths-3e-affine-tracer.png",
+      "titre": "Deux points suffisent : tracer la droite de f(x) = 20x + 30 — épisode 7 · Maths 3e",
+      "accroche": "Yanis est boulanger. À 4 heures du matin, il allume son four : 30 degrés, et il chauffe de 20 degrés par minute. f(x) = 20x + 30. Combien de points faut-il pour tracer sa montée ?\n\nDans cette vidéo :\n• une fonction affine se représente par une droite : deux points suffisent\n• on choisit deux x faciles : f(0) = 30 et f(5) = 130, on place (0 ; 30) et (5 ; 130)\n• on relie à la règle et on prolonge\n• un troisième point sert à vérifier : (10 ; 230) est bien sur la droite\n• si a est négatif, la droite descend : g(x) = −2x + 3 passe par (0 ; 3) et (2 ; −1)\n• un point n'est pas sur la droite si son image ne correspond pas\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : dans un même repère, trace f(x) = −x + 4 et g(x) = 0,5x.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_tracer&display=simple\n\n🔢 Épisode 7 de la série Fonctions affines d'EleveAI, en 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien de points ?"
+        ],
+        [
+          "00:27",
+          "Deux points suffisent"
+        ],
+        [
+          "00:52",
+          "On relie, on vérifie"
+        ],
+        [
+          "01:11",
+          "Question 1"
+        ],
+        [
+          "01:43",
+          "a négatif : la droite descend"
+        ],
+        [
+          "02:04",
+          "Question 2"
+        ],
+        [
+          "02:32",
+          "À toi de jouer"
+        ],
+        [
+          "02:48",
+          "Correction"
+        ],
+        [
+          "03:12",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction",
+      "tags": [
+        "fonction affine",
+        "tracer une droite",
+        "représentation graphique",
+        "repère",
+        "boulanger",
+        "four",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:11",
+          "question": "Quelle droite représente f(x) = 2x − 1 ?",
+          "choix": [
+            "elle passe par (0 ; 2) et (1 ; 1)",
+            "par (0 ; 1) et (1 ; 3)",
+            "par (0 ; −1) et (1 ; 1)"
+          ],
+          "reponse": 2,
+          "explication": "f(0) = −1 et f(1) = 2 − 1 = 1 : la droite passe par (0 ; −1) et (1 ; 1)."
+        },
+        {
+          "t": "02:04",
+          "question": "Quel point n'est PAS sur la droite de f(x) = x + 2 ?",
+          "choix": [
+            "(3 ; 4)",
+            "(0 ; 2)",
+            "(2 ; 4)"
+          ],
+          "reponse": 0,
+          "explication": "f(3) = 3 + 2 = 5, pas 4 : le point (3 ; 4) est en dessous de la droite."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "sciences"
+      ]
+    },
+    {
+      "id": "3e-affine-tracer-short",
+      "pas_avant": "2027-07-08",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_tracer",
+      "classe": "3e",
+      "ceinture": "jaune",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-affine-tracer",
+      "fichier": "3e/maths/fonctions-affines/07-tracer/eleveai-maths-3e-affine-tracer-short.mp4",
+      "miniature": "3e/maths/fonctions-affines/07-tracer/eleveai-maths-3e-affine-tracer-short.png",
+      "titre": "Une droite sur toute ta feuille : combien de calculs ? Deux ! 🔍 — 3e #Shorts",
+      "accroche": "f(x) = 3x − 2. f(0) = −2. f(2) = 6 − 2 = 4. Deux points, une règle : la droite est tracée.\nUn troisième point ? Seulement pour vérifier.\n\nVoix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : quels deux points choisis-tu pour tracer f(x) = −x + 5 ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_tracer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fonctionaffine #3e #brevet",
+      "tags": [
+        "tracer une droite",
+        "fonction affine",
+        "représentation graphique",
+        "fonctions affines",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:27",
+          "question": "Pour tracer f(x) = 2x + 1, quels deux points places-tu ?",
+          "choix": [
+            "(0 ; 1) et (1 ; 3)",
+            "(0 ; 2) et (1 ; 1)",
+            "(1 ; 1) et (2 ; 2)"
+          ],
+          "reponse": 0,
+          "explication": "f(0) = 1, et f(1) = 2 + 1 = 3."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "3e-affine-probleme",
+      "pas_avant": "2027-07-09",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_probleme",
+      "classe": "3e",
+      "ceinture": "verte",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/fonctions-affines/08-probleme/eleveai-maths-3e-affine-probleme.mp4",
+      "miniature": "3e/maths/fonctions-affines/08-probleme/eleveai-maths-3e-affine-probleme.png",
+      "titre": "9 € la place ou une carte à 24 € ? Quel tarif choisir — épisode 8 · Maths 3e",
+      "accroche": "Manon dirige un cinéma. Tarif A : 9 € la place. Tarif B : une carte à 24 €, puis 5 € la place. Un client lui demande lequel est le moins cher. Ça dépend… du nombre de séances !\n\nDans cette vidéo :\n• modéliser : on nomme x, puis f(x) = 9x et g(x) = 5x + 24\n• comparer en calculant des images : 4 séances, le tarif A gagne ; 10 séances, le tarif B\n• quand les prix sont égaux : 9x = 5x + 24, donc x = 6\n• sur le graphique, les deux droites se croisent en 6\n• au-delà de 6 séances, la carte est plus avantageuse\n• on vérifie : même prix des deux côtés\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : un plombier facture 40 € de déplacement plus 30 € de l'heure, un autre 50 € de l'heure : lequel est le moins cher pour 3 heures, et pour quelle durée paie-t-on pareil ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_probleme&display=simple\n\n🔢 Épisode 8 de la série Fonctions affines d'EleveAI, en 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Quel tarif choisir ?"
+        ],
+        [
+          "00:24",
+          "Deux fonctions"
+        ],
+        [
+          "00:41",
+          "On compare"
+        ],
+        [
+          "01:01",
+          "Question 1"
+        ],
+        [
+          "01:33",
+          "Quand les prix sont égaux"
+        ],
+        [
+          "02:00",
+          "Question 2"
+        ],
+        [
+          "02:40",
+          "À toi de jouer"
+        ],
+        [
+          "03:03",
+          "Correction"
+        ],
+        [
+          "03:34",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction",
+      "tags": [
+        "fonction affine",
+        "problème",
+        "comparer deux tarifs",
+        "équation",
+        "droites qui se croisent",
+        "cinéma",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:01",
+          "question": "Pour 3 séances, combien paie-t-on avec le tarif B ?",
+          "choix": [
+            "39 €",
+            "27 €",
+            "32 €"
+          ],
+          "reponse": 0,
+          "explication": "5 × 3 = 15, et 15 + 24 = 39 €. Pas 27 : ça, c'est le tarif A."
+        },
+        {
+          "t": "02:00",
+          "question": "Une appli de musique coûte 4 € par mois. Une autre coûte 10 € à l'inscription, plus 2 € par mois. Au bout de combien de mois coûtent-elles pareil ?",
+          "choix": [
+            "2 mois",
+            "5 mois",
+            "10 mois"
+          ],
+          "reponse": 1,
+          "explication": "4x = 2x + 10, donc 2x = 10 et x = 5. On vérifie : 20 € des deux côtés."
+        }
+      ],
+      "centres": [
+        "cinema-series",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "3e-affine-probleme-short",
+      "pas_avant": "2027-07-09",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_probleme",
+      "classe": "3e",
+      "ceinture": "verte",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-affine-probleme",
+      "fichier": "3e/maths/fonctions-affines/08-probleme/eleveai-maths-3e-affine-probleme-short.mp4",
+      "miniature": "3e/maths/fonctions-affines/08-probleme/eleveai-maths-3e-affine-probleme-short.png",
+      "titre": "Trottinette : quelle appli est la moins chère ? Ça dépend de ton trajet ! 🔍 — 3e #Shorts",
+      "accroche": "Appli A : 1 € pour débloquer, puis 20 centimes la minute. Appli B : 30 centimes la minute, sans frais.\n5 minutes : B gagne. 20 minutes : A gagne ! Les deux droites se croisent.\n\nVoix de synthèse.\n🥋 Ceinture verte.\n👉 À toi : pour un trajet de 30 minutes, quelle appli choisis-tu, et combien paies-tu ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fonctionaffine #3e #brevet",
+      "tags": [
+        "comparer deux tarifs",
+        "fonction affine",
+        "trottinette",
+        "fonctions affines",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI",
+        "ceinture verte",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "Au bout de combien de minutes les deux applis coûtent-elles pareil ?",
+          "choix": [
+            "5 minutes",
+            "20 minutes",
+            "10 minutes"
+          ],
+          "reponse": 2,
+          "explication": "0,2x + 1 = 0,3x, donc 0,1x = 1 : x = 10. Pour 10 minutes, 3 € des deux côtés."
+        }
+      ],
+      "centres": [
+        "transports"
+      ]
+    },
+    {
+      "id": "3e-affine-defi",
+      "pas_avant": "2027-07-10",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_defi",
+      "classe": "3e",
+      "ceinture": "bleue",
+      "serie": "Maths 3e",
+      "type": "longue",
+      "fichier": "3e/maths/fonctions-affines/09-defi/eleveai-maths-3e-affine-defi.mp4",
+      "miniature": "3e/maths/fonctions-affines/09-defi/eleveai-maths-3e-affine-defi.png",
+      "titre": "Deux cuves, une équation : défis fonctions affines, niveau brevet — épisode 9 · Maths 3e",
+      "accroche": "Jade est cheffe de chantier. La cuve A contient 1 200 litres et se vide de 40 litres par minute ; la cuve B est vide et se remplit de 20 litres par minute. Quand auront-elles le même volume ? Des défis niveau brevet.\n\nDans cette vidéo :\n• traduire en fonctions : f(x) = −40x + 1 200 et g(x) = 20x\n• même volume : f(x) = g(x), donc 1 200 = 60x et x = 20 ; 400 litres chacune\n• la cuve est vide quand f(x) = 0 : 30 minutes\n• un programme de calcul cache une fonction affine : 3x + 6 − 2x = x + 6\n• le point où deux droites se croisent : on résout f(x) = g(x), puis on calcule l'image\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : f(x) = 2x + 1 et g(x) = −x + 7 : pour quelle valeur de x a-t-on f(x) = g(x), et où les droites se croisent-elles ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_defi&display=simple\n\n🔢 Épisode 9 de la série Fonctions affines d'EleveAI, en 3e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Niveau brevet"
+        ],
+        [
+          "00:27",
+          "f(x) = g(x)"
+        ],
+        [
+          "00:58",
+          "Question 1"
+        ],
+        [
+          "01:34",
+          "Un programme de calcul"
+        ],
+        [
+          "01:58",
+          "Question 2"
+        ],
+        [
+          "02:35",
+          "Défi final"
+        ],
+        [
+          "02:56",
+          "Correction"
+        ],
+        [
+          "03:23",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/3e/affine-fonction",
+      "tags": [
+        "fonction affine",
+        "brevet",
+        "programme de calcul",
+        "équation",
+        "droites qui se croisent",
+        "chantier",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:58",
+          "question": "Au bout de combien de minutes la cuve A sera-t-elle vide ?",
+          "choix": [
+            "40 minutes",
+            "30 minutes",
+            "1 200 minutes"
+          ],
+          "reponse": 1,
+          "explication": "La cuve est vide quand f(x) = 0 : −40x + 1 200 = 0, donc 40x = 1 200 et 1 200 ÷ 40 = 30."
+        },
+        {
+          "t": "01:58",
+          "question": "Programme : choisis un nombre, ajoute 2, multiplie par 5, puis enlève 10. Quelle fonction obtient-on ?",
+          "choix": [
+            "5x + 2",
+            "5x − 10",
+            "5x"
+          ],
+          "reponse": 2,
+          "explication": "5(x + 2) = 5x + 10, et − 10 : il reste 5x. Une fonction linéaire !"
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "sciences"
+      ]
+    },
+    {
+      "id": "3e-affine-defi-short",
+      "pas_avant": "2027-07-10",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_defi",
+      "classe": "3e",
+      "ceinture": "bleue",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-affine-defi",
+      "fichier": "3e/maths/fonctions-affines/09-defi/eleveai-maths-3e-affine-defi-short.mp4",
+      "miniature": "3e/maths/fonctions-affines/09-defi/eleveai-maths-3e-affine-defi-short.png",
+      "titre": "Pense à un nombre : je vais deviner ton résultat 🔍 — 3e #Shorts",
+      "accroche": "Pense à un nombre. Multiplie-le par 4, ajoute 12, divise par 4, enlève ton nombre de départ : tu trouves 3 !\n(4x + 12) ÷ 4 = x + 3, moins x : il reste 3. Une fonction affine avec a = 0 : une fonction constante.\n\nVoix de synthèse.\n🥋 Ceinture bleue.\n👉 À toi : invente un programme de calcul qui donne toujours 7. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fonctionaffine #3e #brevet",
+      "tags": [
+        "programme de calcul",
+        "fonction constante",
+        "tour de magie",
+        "fonctions affines",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI",
+        "ceinture bleue",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "Programme : multiplie par 2, ajoute 10, divise par 2, enlève ton nombre. Que trouves-tu toujours ?",
+          "choix": [
+            "10",
+            "5",
+            "ton nombre"
+          ],
+          "reponse": 1,
+          "explication": "(2x + 10) ÷ 2 = x + 5. Moins x : il reste 5."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
     }
   ]
 }

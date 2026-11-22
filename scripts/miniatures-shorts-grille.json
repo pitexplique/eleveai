@@ -1074,5 +1074,77 @@
     "mention": null,
     "sans_decor": true,
     "margo_2d": true
+  },
+  "3e-affine-reconnaitre-short": {
+    "question": ["Elle a l'air", "compliquée…"],
+    "calcul": [["(x + 1)² − x²", "blanc", 120], ["affine ?", "jaune", 160]],
+    "ceinture": "jaune",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "3e-affine-coeff-directeur-short": {
+    "question": ["Ta batterie perd", "4 % par heure"],
+    "calcul": [["f(x) = −4x + 100", "blanc", 105], ["a = ?", "jaune", 170]],
+    "ceinture": "orange",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "3e-affine-ordonnee-origine-short": {
+    "question": ["20 € par mois :", "pourquoi pas zéro ?"],
+    "calcul": [["f(x) = 20x + 30", "blanc", 115], ["f(0) = ?", "jaune", 160]],
+    "ceinture": "jaune",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "3e-affine-calcul-image-short": {
+    "question": ["40 m sous l'eau :", "4 fois plus ?"],
+    "calcul": [["p(x) = 0,1x + 1", "blanc", 115], ["p(40) = ?", "jaune", 160]],
+    "ceinture": "jaune",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "3e-affine-expression-short": {
+    "question": ["Deux nombres", "suffisent ?"],
+    "calcul": [["f(0) = 4 ; f(1) = 6", "blanc", 100], ["f(x) = ?", "jaune", 160]],
+    "ceinture": "verte",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "3e-affine-graphique-short": {
+    "question": ["Ton forfait sera", "vide quand ?"],
+    "calcul": [["20 gigas", "blanc", 150], ["− 2 par jour", "jaune", 130]],
+    "ceinture": "orange",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "3e-affine-tracer-short": {
+    "question": ["Toute une droite :", "combien de calculs ?"],
+    "calcul": [["f(x) = 2x + 1", "blanc", 130], ["? points", "jaune", 160]],
+    "ceinture": "jaune",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "3e-affine-probleme-short": {
+    "question": ["Quelle appli est", "la moins chère ?"],
+    "calcul": [["A : 1 € + 0,20 €/min", "bleu", 90], ["B : 0,30 €/min", "rouge", 110]],
+    "ceinture": "verte",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "3e-affine-defi-short": {
+    "question": ["Pense à un nombre…", "je devine !"],
+    "calcul": [["× 2, + 10, ÷ 2, − x", "blanc", 95], ["= ?", "jaune", 170]],
+    "ceinture": "bleue",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
   }
 }

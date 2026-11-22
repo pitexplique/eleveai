@@ -207,6 +207,10 @@ export const FAMILLES_METIERS = {
     F("comptable", "compare deux abonnements : 10 € par mois ou 2 € par séance."),
     M("electricien", "calcule un devis : 50 € de déplacement plus 40 € de l'heure."),
     F("conseiller-bancaire", "calcule une épargne qui grandit de 20 € chaque mois."),
+    // 22/11/2026 : série FONCTIONS AFFINES 3e (épisodes 01, 06, 07), métiers montrés dans les vidéos.
+    F("monteur", "facture un montage 50 € le projet plus 15 € la minute de film : g(x) = 15x + 50.", V),
+    F("community-manager", "prévoit les abonnés d'un compte : 200 au départ, puis 50 de plus chaque jour.", V),
+    M("boulanger", "suit la chauffe de son four : 30 degrés au départ, puis 20 de plus chaque minute.", V),
   ],
   C_espace: [
     M("manip-radio", "règle le scanner qui découpe le corps en tranches, comme des sections de solide."),

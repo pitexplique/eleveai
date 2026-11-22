@@ -212,6 +212,25 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "3e-identites-factoriser-short": 4.69,
   "3e-identites-resoudre": 8.3,
   "3e-identites-resoudre-short": 4.69,
+  // Série FONCTIONS AFFINES 3e (22/11/2026), 9 épisodes : `python manim/passe_affines_3e.py coupes`.
+  "3e-affine-reconnaitre": 8.3,
+  "3e-affine-reconnaitre-short": 4.68,
+  "3e-affine-coeff-directeur": 8.3,
+  "3e-affine-coeff-directeur-short": 4.69,
+  "3e-affine-ordonnee-origine": 8.3,
+  "3e-affine-ordonnee-origine-short": 4.68,
+  "3e-affine-calcul-image": 8.3,
+  "3e-affine-calcul-image-short": 4.69,
+  "3e-affine-expression": 8.3,
+  "3e-affine-expression-short": 4.68,
+  "3e-affine-graphique": 8.3,
+  "3e-affine-graphique-short": 4.68,
+  "3e-affine-tracer": 8.3,
+  "3e-affine-tracer-short": 4.68,
+  "3e-affine-probleme": 8.3,
+  "3e-affine-probleme-short": 4.68,
+  "3e-affine-defi": 8.3,
+  "3e-affine-defi-short": 4.68,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {
