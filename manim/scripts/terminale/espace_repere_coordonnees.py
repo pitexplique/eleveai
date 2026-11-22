@@ -494,7 +494,8 @@ class EspaceRepereCoordonneesBase(EcransEspace):
         self.play(Create(copie), Create(marge), run_time=0.6)
         fs = 32
         un = VGroup(self.pastille(1), VGroup(
-            self.t("on se place dans le repère A, A B, A D, A E,", fs),
+            self.vexpr("on se place dans le repère A, A B, A D, A E,",
+                       ("A B", "A D", "A E"), fs),
             self.t("qui est orthonormé", fs, C_VECTEUR)).arrange(DOWN, aligned_edge=LEFT, buff=0.1))
         un.arrange(RIGHT, buff=0.3, aligned_edge=UP)
         deux = VGroup(self.pastille(2), VGroup(
@@ -547,7 +548,7 @@ class EspaceRepereCoordonneesBase(EcransEspace):
         self.play(Create(gh), FadeIn(pj, scale=2), FadeIn(tj), run_time=0.7)
         self.au_mot("Donne les coordonnées de I et de J")
         cons = VGroup(self.t("les coordonnées de I et de J,", fs, WHITE),
-                      self.t("puis celles du vecteur I J", fs, ORANGE_RETENUE))
+                      self.vexpr("puis celles du vecteur I J", ("I J",), fs, ORANGE_RETENUE))
         cons.arrange(DOWN, aligned_edge=LEFT, buff=0.12)
         self.col(cons, 0.9)
         self.play(FadeIn(cons, shift=RIGHT * 0.1), run_time=0.5)
@@ -576,14 +577,22 @@ class EspaceRepereCoordonneesBase(EcransEspace):
                     max_tip_length_to_length_ratio=0.18)
         self.play(GrowArrow(vij), run_time=0.6)
         self.au_pos(self._texte_voix.find("0, 1, 0"))
-        L3 = self.ligne(self.t("I J", fs + 2, VERT_OK), self.trip(IJ, fs + 2, VERT_OK), y=0.3)
+        L3 = self.ligne(self.vec("I J", fs + 2, VERT_OK), self.trip(IJ, fs + 2, VERT_OK), y=0.3)
         self.play(FadeIn(L3, scale=1.15), run_time=0.5)
         self.au_mot("est exactement celui")
         vad = Arrow(r.pt(*CUBE["A"]), r.pt(*CUBE["D"]), buff=0, stroke_width=7, color=C_VECTEUR2,
                     max_tip_length_to_length_ratio=0.18)
-        L4 = self.ligne(self.t("A D", fs + 2, C_VECTEUR2), self.trip(AD_, fs + 2, C_VECTEUR2), y=-0.5)
+        L4 = self.ligne(self.vec("A D", fs + 2, C_VECTEUR2), self.trip(AD_, fs + 2, C_VECTEUR2), y=-0.5)
         self.play(GrowArrow(vad), FadeIn(L4, scale=1.1), run_time=0.7)
         self.au_mot("sont donc parallèles")
+        # ⛔⛔ PAS DE FLÈCHE ICI, ET C'EST LE CŒUR DE LA LEÇON DE CET ÉCRAN. Les deux
+        # lignes au-dessus (`I J` et `A D`, fléchées) sont des VECTEURS — la voix dit
+        # « le vecteur I J » puis « le vecteur A D ». Celle-ci parle des DROITES : la
+        # voix dit « les droites I J et A D sont donc parallèles ». Une droite s'écrit
+        # (A D), entre parenthèses, et ne porte jamais de flèche. ⭐ Tout l'écran
+        # démontre justement qu'on passe de l'égalité de deux VECTEURS au parallélisme
+        # de deux DROITES : si les quatre notations se ressemblaient, il ne resterait
+        # rien à démontrer. (Décidé le 22/11 en relisant la voix, clip 09b.)
         concl = VGroup(self.t("(I J) et (A D)", 34, VERT_OK), self.t("sont parallèles", 34, VERT_OK))
         concl.arrange(DOWN, aligned_edge=LEFT, buff=0.1)
         self.col(concl, -1.6)

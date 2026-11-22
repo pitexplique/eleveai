@@ -259,7 +259,7 @@ class EspaceDroiteParametriqueBase(EcransEspace):
         self.sans_audit(vu)
         self.play(GrowArrow(vu[0]), FadeIn(vu.nom), run_time=0.6)
         self.au_fin("2, moins 1, 3")
-        lu = self.ligne(self.t("u", 34, C_VECTEUR2), self.trip(U_D, 34), y=1.90)
+        lu = self.ligne(self.vec("u", 34, C_VECTEUR2), self.trip(U_D, 34), y=1.90)
         self.play(FadeIn(lu, shift=RIGHT * 0.12), run_time=0.45)
 
         self.au_mot("Un point de la droite s'écrit alors")
@@ -683,7 +683,8 @@ class EspaceDroiteParametriqueBase(EcransEspace):
         g1 = self.gauche(self.t("d passe par le point A", fs, WHITE), 1.60, xmax=0.4)
         self.play(FadeIn(g1, shift=RIGHT * 0.12), run_time=0.4)
         self.au_mot("et a pour vecteur directeur u")
-        g2 = self.gauche(self.t("et a pour vecteur directeur u,", fs, WHITE), 1.10, xmax=0.4)
+        g2 = self.gauche(self.vexpr("et a pour vecteur directeur u,", ("u",), fs, WHITE),
+                         1.10, xmax=0.4)
         self.play(FadeIn(g2, shift=RIGHT * 0.12), run_time=0.4)
         self.au_mot("une représentation paramétrique de d est")
         g3 = self.gauche(VGroup(self.t("donc une représentation", fs, WHITE),
@@ -773,9 +774,14 @@ class EspaceDroiteParametriqueBase(EcransEspace):
         lB = self.ligne(self.t("B", 34, C_VECTEUR2), self.trip(B_DEFI, 34), y=1.70)
         self.play(FadeIn(lB, shift=RIGHT * 0.12), run_time=0.45)
         self.au_mot("Écris une représentation paramétrique")
+        # ⛔⛔ « (A B) » ET NON « A B » : ici c'est la DROITE, pas le vecteur. La voix dit
+        # « une représentation paramétrique de la droite A B », et l'écran de correction,
+        # lui, écrit le VECTEUR A B avec sa flèche. Les deux ne doivent pas se ressembler :
+        # une droite s'écrit entre parenthèses, un vecteur porte une flèche. ⭐ C'est la
+        # même décision qu'à l'écran 09b de l'épisode 2, prise le 22/11.
         cons = self.col(VGroup(self.t("écris une représentation", 30, WHITE),
                                self.t("paramétrique de la droite", 30, WHITE),
-                               self.t("A B", 30, ORANGE_RETENUE))
+                               self.t("(A B)", 30, ORANGE_RETENUE))
                         .arrange(DOWN, aligned_edge=LEFT, buff=0.12), 0.55)
         self.play(FadeIn(cons, shift=RIGHT * 0.1), run_time=0.6)
         self.au_mot("Mets pause, et cherche")
@@ -805,7 +811,7 @@ class EspaceDroiteParametriqueBase(EcransEspace):
         vab = r.vecteur(A_DEFI, B_DEFI, None, couleur=VERT_OK, sw=7)
         self.play(GrowArrow(vab[0]), run_time=0.6)
         self.au_fin("donc 0, 3, moins 2")
-        lab = self.ligne(self.t("A B", 34, VERT_OK), self.trip(AB_DEFI, 34, VERT_OK), y=0.95)
+        lab = self.ligne(self.vec("A B", 34, VERT_OK), self.trip(AB_DEFI, 34, VERT_OK), y=0.95)
         self.play(FadeIn(lab, scale=1.12), run_time=0.5)
         self.au_mot("Ensuite on part du point A")
         part = self.col(self.t("on part de A", fs, C_REGARD), 0.25)

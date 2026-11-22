@@ -574,11 +574,11 @@ class EspaceDefiBase(EcransEspace):
 
         fs = 28
         self.au_fin("A oméga a pour coordonnées 0,5 ; 0,5 ; 0,5")
-        b1 = self.col(VGroup(self.t("A Ω", fs, VERT_OK), self.trip(OMEGA, fs, WHITE))
+        b1 = self.col(VGroup(self.vec("A Ω", fs, VERT_OK), self.trip(OMEGA, fs, WHITE))
                       .arrange(RIGHT, buff=0.24), 2.45)
         self.play(FadeIn(b1, shift=RIGHT * 0.12), run_time=0.55)
         self.au_fin("A G a pour coordonnées 1, 1, 1")
-        b2 = self.col(VGroup(self.t("A G", fs, C_REGARD), self.trip(S["G"], fs, WHITE))
+        b2 = self.col(VGroup(self.vec("A G", fs, C_REGARD), self.trip(S["G"], fs, WHITE))
                       .arrange(RIGHT, buff=0.24), 1.60)
         self.play(FadeIn(b2, shift=RIGHT * 0.12), run_time=0.55)
         # ⛔⛔ `par=True` : un triplet MULTIPLIÉ veut ses parenthèses. Sans elles,
@@ -600,7 +600,7 @@ class EspaceDefiBase(EcransEspace):
                       .arrange(DOWN, aligned_edge=LEFT, buff=0.10), 0.70)
         self.play(FadeIn(b3, shift=RIGHT * 0.12), run_time=0.6)
         self.au_mot("est donc égal à deux fois le vecteur A oméga")
-        eg = self.sans_audit(self.t("A G = 2 A Ω", 34, VERT_OK))
+        eg = self.sans_audit(self.vexpr("A G = 2 A Ω", ("A G", "A Ω"), 34, VERT_OK))
         cad = SurroundingRectangle(eg, color=VERT_OK, buff=0.14, stroke_width=3)
         self.col(VGroup(eg, cad), -0.20)
         self.play(FadeIn(eg, scale=1.1), Create(cad), run_time=0.6)
@@ -764,9 +764,25 @@ class EspaceDefiBase(EcransEspace):
         self.gauche(intro, 1.70, xmax=-0.1)
         tete, q, cartes, pause, rebours = self.q_tete(
             ["que fait-on ?"],
-            [self.choix2("on montre que A B et", "A C ont la même norme", fs=26),
-             self.choix3("on montre que les", "vecteurs A B et A C", "sont colinéaires", fs=26),
-             self.choix2("on montre qu'ils sont", "dans un même plan", fs=26)],
+            # ⛔⛔ DEUX COTES CHANGÉES LE 22/11 POUR UNE SEULE CAUSE : LES FLÈCHES.
+            # Chaque ligne qui porte un nom de vecteur gagne 0,10 + l'épaisseur du trait,
+            # et il y en avait TROIS ici (deux dans le choix A, une dans le choix B) :
+            # le bloc des cartes grandissait de 0,28 de haut. Mesuré : à 26 px il descend
+            # alors à −2,19, c'est-à-dire sur la tête de Ti-Margo (boîte y ≥ −2,15), et
+            # `col()` le rétrécissait — les trois choix tombaient de 25,8 px à **20,4**.
+            # ⭐ Deux remèdes, mesurés ensemble, et aucun ne touche un mot de la voix :
+            #   · le choix A se coupe après « A C » et non après « et », donc UNE seule
+            #     de ses deux lignes porte des noms : 0,14 de haut récupéré ;
+            #   · 24 px demandés au lieu de 26.
+            # Résultat : **23,8 px** obtenus (contre 20,4), bas des cartes à −1,87, soit
+            # 0,28 au-dessus de Ti-Margo. ⛔ 25 px ne passe PAS : le bas tombe à −1,94,
+            # à un centième du seuil de `col()` — et cet épisode a déjà payé qu'un
+            # centième décide.
+            [self.choix2("on montre que A B et A C", "ont la même norme", fs=24,
+                         noms=("A B", "A C")),
+             self.choix3("on montre que les", "vecteurs A B et A C", "sont colinéaires",
+                         fs=24, noms=("A B", "A C")),
+             self.choix2("on montre qu'ils sont", "dans un même plan", fs=24)],
             largeur=6.3, xl=0.35)
         self.play(FadeIn(tete, shift=DOWN * 0.1), run_time=0.4)
         self.au_mot("Pour démontrer que trois points A, B et C de l'espace sont alignés")
@@ -791,7 +807,7 @@ class EspaceDefiBase(EcransEspace):
         # −3,54 à −2,86, sous la marge de −3,573 de 0,03.
         self.au_mot("on cherche un nombre k")
         l1 = VGroup(self.t("on cherche un nombre k tel que", fs, WHITE),
-                    self.sans_audit(self.t("A C = k × A B", 34, VERT_OK)))
+                    self.sans_audit(self.vexpr("A C = k × A B", ("A C", "A B"), 34, VERT_OK)))
         l1.arrange(DOWN, aligned_edge=LEFT, buff=0.14)
         self.gauche(l1, -0.35, xmax=-0.1)
         self.play(FadeIn(l1[0], shift=RIGHT * 0.12), run_time=0.5)
@@ -815,7 +831,10 @@ class EspaceDefiBase(EcransEspace):
                     self.t("à la même distance de A —", 24, C_PIEGE),
                     self.t("rien à voir avec l'alignement", 24, C_PIEGE))
         l2.arrange(DOWN, aligned_edge=LEFT, buff=0.08)
-        self.gauche(l2, -1.45, xmax=-0.1)
+        # ⚠️ −1,53 et non −1,45, MESURÉ le 22/11 : la flèche de « A C = k × A B » a
+        # grandi le bloc du dessus de 0,09, et l'écart entre les deux est tombé de 0,14 à
+        # **0,05**. Deux textes à cinq centièmes l'un de l'autre se lisent collés.
+        self.gauche(l2, -1.53, xmax=-0.1)
         self.play(FadeIn(l2[0], shift=RIGHT * 0.12), run_time=0.5)
         # ⛔⛔ `l2[1:]` ET NON `l2[1]` : en passant ce bloc de deux lignes à TROIS, la
         # troisième (« rien à voir avec l'alignement ») n'était plus jamais jouée. À
@@ -994,14 +1013,20 @@ class EspaceDefiBase(EcransEspace):
         diag = self.diagonale(r)
         # ⚠️ DEUX lignes : d'un seul tenant ce bloc fait 4,53 et la colonne n'offre que
         # 4,40 — `col()` le rétrécissait. Coupé, les deux morceaux font 2,24 et 1,63.
-        vAG = self.col(VGroup(VGroup(self.t("A G", fs, C_REGARD), self.trip(S["G"], fs, WHITE))
+        vAG = self.col(VGroup(VGroup(self.vec("A G", fs, C_REGARD), self.trip(S["G"], fs, WHITE))
                               .arrange(RIGHT, buff=0.18),
                               self.t("A = origine", fs, GREY_A))
                        .arrange(DOWN, aligned_edge=LEFT, buff=0.10), -0.35)
         self.play(Create(diag), FadeIn(vAG, shift=RIGHT * 0.12), run_time=0.6)
         syst = self.systeme([ligne_param(n, S["A"][i], S["G"][i]) for i, n in enumerate("xyz")],
                             30, c_acc=C_DROITE)
-        self.col(syst, -1.30)
+        # ⚠️ −1,64 et non −1,30, MESURÉ le 22/11. Le bloc « A G (1 ; 1 ; 1) / A = origine »
+        # gagne la hauteur de sa flèche : son bas passe de −0,73 à −0,82, et l'accolade du
+        # système, dont le haut est à −0,60, lui rentrait dedans de 0,22. ⚠️ Et elle
+        # mordait DÉJÀ de 0,13 dans l'épisode publié — vu au gros plan sur le HD du matin,
+        # jamais signalé par un outil. Le système descend donc, il occupe maintenant
+        # −2,34 à −0,94, et l'écart au bloc du dessus est de 0,12.
+        self.col(syst, -1.64)
         # ⭐ DEUX ancres pour trois lignes, et c'est le remède du piège n° 6 des entiers :
         # « x égale t, y égale t, z égale t » se dit en 1,3 s, donc trois au_mot d'affilée
         # tomberaient à 0,3 s l'un de l'autre et sortiraient en RETARD. On pose l'accolade
@@ -1060,7 +1085,8 @@ class EspaceDefiBase(EcransEspace):
         concl.arrange(DOWN, aligned_edge=LEFT, buff=0.10)
         cad = SurroundingRectangle(concl, color=VERT_OK, buff=0.14, stroke_width=3)
         # ⚠️ −2,30 et xmax = 1,6 : le système de (A G) occupe la colonne de droite de
-        # −2,00 à −0,60, donc ce cadre (qui monte à −1,71) doit rester à gauche de 2,0.
+        # −2,34 à −0,94 (descendu le 22/11, voir plus haut), donc ce cadre (qui monte à
+        # −1,71) doit rester à gauche de 2,0.
         self.gauche(VGroup(concl, cad), -2.32, xmax=1.6)
         self.play(FadeIn(om, scale=1.5), run_time=0.4)
         self.au_mot("le point d'intersection est le centre du cube")

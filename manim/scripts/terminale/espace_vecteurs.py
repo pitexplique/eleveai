@@ -296,7 +296,7 @@ class EspaceVecteursBase(EcransEspace):
         calc = VGroup(self.t("4 − 1", fs, WHITE), self.t("6 − 2", fs, WHITE), self.t("3 − 3", fs, WHITE))
         calc.arrange(DOWN, aligned_edge=LEFT, buff=0.16)
         self.col(calc, 0.1)
-        res = self.ligne(self.t("A B", fs + 4, C_VECTEUR), self.trip((3, 4, 0), fs + 4, VERT_OK), y=-1.15)
+        res = self.ligne(self.vec("A B", fs + 4, C_VECTEUR), self.trip((3, 4, 0), fs + 4, VERT_OK), y=-1.15)
         # la soustraction paraît sur le DERNIER chiffre de B : les six nombres qu'elle
         # réécrit viennent d'être dits, et ils sont déjà à l'écran en L1 et L2.
         self.au_pos(self._texte_voix.find("3, alors"))
@@ -324,17 +324,32 @@ class EspaceVecteursBase(EcransEspace):
         self.play(Write(titre), run_time=0.7)
         r, ax = self.repere(o=(-4.6, -1.5), u=0.52, portee=5)
         self.play(Create(ax), run_time=0.4)
-        u = r.vecteur((0, 0, 0), U05, "u", couleur=C_VECTEUR, sw=7, decal=UL)
-        v = r.vecteur((0, 0, 0), V05, "v", couleur=C_VECTEUR2, sw=7, decal=DR)
+        # ⛔⛔ LES DÉCALAGES D'ÉTIQUETTE SONT MESURÉS, PAS CHOISIS À VUE (22/11, passe des
+        # flèches). Depuis que l'étiquette porte sa propre flèche, elle est plus haute de
+        # 0,10 + l'épaisseur du trait et plus large de 0,08 : `UL` et `DR`, qui passaient
+        # de justesse, ne passent plus. Vu AU GROS PLAN (et invisible sur la planche) :
+        # « u » s'écrivait sur l'axe des z et « v » flottait entre les deux vecteurs.
+        # ⭐ La recherche est une GRILLE sur (dx, dy) au pas de 0,25, qui garde les
+        # positions à plus de 0,08 de TOUT ce qui est tracé — et le contrôle porte sur
+        # les POINTS tracés, pas sur les boîtes : la boîte d'une flèche en diagonale est
+        # un grand rectangle presque vide, et testée ainsi elle interdit tout un quadrant.
+        # 03 : u sous son propre fût aux deux tiers (jeu 0,30) ; v au-delà de sa pointe
+        # (jeu 0,27), du côté où ni l'axe des y ni le double de u ne passent.
+        u = r.vecteur((0, 0, 0), U05, "u", couleur=C_VECTEUR, sw=7,
+                      decal=np.array([0.25, -1.25, 0.0]))
+        v = r.vecteur((0, 0, 0), V05, "v", couleur=C_VECTEUR2, sw=7,
+                      decal=np.array([2.25, 2.25, 0.0]))
         self.sans_audit(u)
         self.sans_audit(v)
         fs = 34
         # ⚠️ VU À LA PLANCHE : sur une seule ligne, `col()` rétrécissait « u + v :
         # coordonnée par coordonnée » jusqu'à l'illisible. Deux lignes, taille gardée.
-        L1 = VGroup(self.t("u + v :", fs, WHITE), self.t("coordonnée par coordonnée", fs - 6, GREY_A))
+        L1 = VGroup(self.vexpr("u + v :", ("u", "v"), fs, WHITE),
+                    self.t("coordonnée par coordonnée", fs - 6, GREY_A))
         L1.arrange(DOWN, aligned_edge=LEFT, buff=0.08)
         self.col(L1, 1.9)
-        L2 = VGroup(self.t("k u :", fs, WHITE), self.t("les trois à la fois", fs - 6, GREY_A))
+        L2 = VGroup(self.vexpr("k u :", ("u",), fs, WHITE),
+                    self.t("les trois à la fois", fs - 6, GREY_A))
         L2.arrange(DOWN, aligned_edge=LEFT, buff=0.08)
         self.col(L2, 0.75)
         L3 = VGroup(self.t("colinéaires :", fs, VERT_OK), self.t("l'un est un multiple de l'autre", fs - 4, WHITE))
@@ -429,12 +444,25 @@ class EspaceVecteursBase(EcransEspace):
         fs = 34
         # ⚠️ deux vecteurs partis du MÊME point : leurs noms se posent au bout, et
         # il faut deux décalages opposés, sinon ils se touchent (vu à la planche).
-        u = r.vecteur((0, 0, 0), U05, "u", couleur=C_VECTEUR, sw=7, decal=UL)
-        v = r.vecteur((0, 0, 0), V05, "v", couleur=C_VECTEUR2, sw=7, decal=DR)
+        # ⛔⛔ LES DÉCALAGES D'ÉTIQUETTE SONT MESURÉS, PAS CHOISIS À VUE (22/11, passe des
+        # flèches). Depuis que l'étiquette porte sa propre flèche, elle est plus haute de
+        # 0,10 + l'épaisseur du trait et plus large de 0,08 : `UL` et `DR`, qui passaient
+        # de justesse, ne passent plus. Vu AU GROS PLAN (et invisible sur la planche) :
+        # « u » s'écrivait sur l'axe des z et « v » flottait entre les deux vecteurs.
+        # ⭐ La recherche est une GRILLE sur (dx, dy) au pas de 0,25, qui garde les
+        # positions à plus de 0,08 de TOUT ce qui est tracé — et le contrôle porte sur
+        # les POINTS tracés, pas sur les boîtes : la boîte d'une flèche en diagonale est
+        # un grand rectangle presque vide, et testée ainsi elle interdit tout un quadrant.
+        # 05 est l'écran le plus chargé de l'épisode (u, v, la somme, le translaté et le
+        # double) : u à 32 % de son fût et 0,30 dessous, v au-delà de sa pointe (0,29).
+        u = r.vecteur((0, 0, 0), U05, "u", couleur=C_VECTEUR, sw=7,
+                      decal=np.array([-0.75, -1.00, 0.0]))
+        v = r.vecteur((0, 0, 0), V05, "v", couleur=C_VECTEUR2, sw=7,
+                      decal=np.array([2.25, 2.25, 0.0]))
         self.sans_audit(u)
         self.sans_audit(v)
-        L1 = self.ligne(self.t("u", fs, C_VECTEUR), self.trip(U05, fs, GREY_A), y=2.0)
-        L2 = self.ligne(self.t("v", fs, C_VECTEUR2), self.trip(V05, fs, GREY_A), y=1.3)
+        L1 = self.ligne(self.vec("u", fs, C_VECTEUR), self.trip(U05, fs, GREY_A), y=2.0)
+        L2 = self.ligne(self.vec("v", fs, C_VECTEUR2), self.trip(V05, fs, GREY_A), y=1.3)
         # ⭐ Le nom du vecteur au début de la phrase, le TRIPLET à l'instant où la voix
         # le dit : mesuré, sinon « 2, 4, moins 2 » s'affichait 1,44 s trop tôt.
         self.au_mot("Le vecteur u a pour coordonnées")
@@ -451,7 +479,8 @@ class EspaceVecteursBase(EcransEspace):
         # le parallélogramme : u translaté au bout de v, pour qu'on VOIE la somme
         tr = r.vecteur(V05, s, None, couleur=C_VECTEUR, sw=4)
         tr[0].set_opacity(0.5)
-        L3 = self.ligne(self.t("u + v", fs + 4, VERT_OK), self.trip(s, fs + 4, VERT_OK), y=0.3)
+        L3 = self.ligne(self.vexpr("u + v", ("u", "v"), fs + 4, VERT_OK),
+                        self.trip(s, fs + 4, VERT_OK), y=0.3)
         self.play(GrowArrow(tr[0]), run_time=0.4)
         self.play(GrowArrow(som[0]), FadeIn(L3[0], scale=1.15), run_time=0.6)
         self.au_pos(self._texte_voix.find("4, 2, 1"))
@@ -459,7 +488,8 @@ class EspaceVecteursBase(EcransEspace):
         self.au_mot("Et le double de u")
         d = tuple(2 * a for a in U05)
         dou = r.vecteur((0, 0, 0), d, None, couleur=C_REGARD, sw=6)
-        L4 = self.ligne(self.t("2 u", fs + 4, C_REGARD), self.trip(d, fs + 4, C_REGARD), y=-0.65)
+        L4 = self.ligne(self.vexpr("2 u", ("u",), fs + 4, C_REGARD),
+                        self.trip(d, fs + 4, C_REGARD), y=-0.65)
         self.play(GrowArrow(dou[0]), FadeIn(L4[0], scale=1.15), run_time=0.5)
         self.au_pos(self._texte_voix.find("2, 4, moins 2"))
         self.play(FadeIn(L4[1], scale=1.15), run_time=0.35)
@@ -532,9 +562,11 @@ class EspaceVecteursBase(EcransEspace):
         # ⛔ On ne dessine PAS les deux vecteurs : superposés, ils DONNENT la réponse.
         # Le repère seul tient le décor ; les coordonnées sont dans la question.
         self.au_mot("Question !")
-        lu = VGroup(self.t("Le vecteur u a pour coordonnées", 32), self.t("1 ; 2 ; 3,", 32))
+        lu = VGroup(self.vexpr("Le vecteur u a pour coordonnées", ("u",), 32),
+                    self.t("1 ; 2 ; 3,", 32))
         lu.arrange(RIGHT, buff=0.18)
-        lv = VGroup(self.t("et le vecteur v a pour coordonnées", 32), self.t("2 ; 4 ; 6.", 32))
+        lv = VGroup(self.vexpr("et le vecteur v a pour coordonnées", ("v",), 32),
+                    self.t("2 ; 4 ; 6.", 32))
         lv.arrange(RIGHT, buff=0.18)
         tete, q, cartes, pause, rebours = self.q_tete(
             [lu, lv, "Que peut-on dire ?"],
@@ -570,8 +602,18 @@ class EspaceVecteursBase(EcransEspace):
             self.play(FadeIn(calc[i], shift=RIGHT * 0.12), run_time=0.35)
         # maintenant seulement, la figure peut montrer la colinéarité : c'est la réponse
         # decal=DR : en UL, le nom « u » tombait sur la colonne de calcul (vu au gros plan)
-        u = r.vecteur((0, 0, 0), (1, 2, 3), "u", couleur=C_VECTEUR, sw=8, decal=DR)
-        v = r.vecteur((0, 0, 0), (2, 4, 6), "v", couleur=VERT_OK, sw=5, decal=DR)
+        # ⛔⛔ ET DR NE TIENT PLUS DEPUIS LA FLÈCHE : « u » se posait pile sur l'axe des
+        # y, dont la direction de fuite passe juste là. Vu au gros plan, invisible sur la
+        # planche — et c'est bien la flèche qui l'a causé : sur le rendu HD publié,
+        # le « u » nu passait à côté de l'axe.
+        # ⭐ u et v sont COLINÉAIRES (v = 2 u) : leurs deux étiquettes sont sur la MÊME
+        # droite, donc on les met de part et d'autre du fût — u à gauche (76 % du fût,
+        # jeu 0,31), v à droite (63 %, jeu 0,23). Mesuré contre les axes, la colonne de
+        # calcul ET la phrase « le même facteur partout », qui borde la figure en bas.
+        u = r.vecteur((0, 0, 0), (1, 2, 3), "u", couleur=C_VECTEUR, sw=8,
+                      decal=np.array([-0.25, 1.50, 0.0]))
+        v = r.vecteur((0, 0, 0), (2, 4, 6), "v", couleur=VERT_OK, sw=5,
+                      decal=np.array([1.25, 0.75, 0.0]))
         self.sans_audit(u)
         self.sans_audit(v)
         self.au_mot("Le même facteur 2")
@@ -661,7 +703,7 @@ class EspaceVecteursBase(EcransEspace):
             self.play(FadeIn(L[1], shift=RIGHT * 0.12), run_time=0.3)
             pts.append((p, L))
         self.au_mot("Calcule les coordonnées")
-        cons = VGroup(self.t("les coordonnées de A B et A C,", 32, WHITE),
+        cons = VGroup(self.vexpr("les coordonnées de A B et A C,", ("A B", "A C"), 32, WHITE),
                       self.t("puis : sont-ils colinéaires ?", 32, ORANGE_RETENUE))
         cons.arrange(DOWN, aligned_edge=LEFT, buff=0.12)
         self.col(cons, -0.8)
@@ -683,8 +725,8 @@ class EspaceVecteursBase(EcransEspace):
         fs = 34
         vab = r.vecteur(AD, BD, None, couleur=C_VECTEUR, sw=7)
         vac = r.vecteur(AD, CD, None, couleur=C_VECTEUR2, sw=7)
-        L1 = self.ligne(self.t("A B", fs, C_VECTEUR), self.trip(AB_D, fs, VERT_OK), y=-0.75)
-        L2 = self.ligne(self.t("A C", fs, C_VECTEUR2), self.trip(AC_D, fs, VERT_OK), y=-1.5)
+        L1 = self.ligne(self.vec("A B", fs, C_VECTEUR), self.trip(AB_D, fs, VERT_OK), y=-0.75)
+        L2 = self.ligne(self.vec("A C", fs, C_VECTEUR2), self.trip(AC_D, fs, VERT_OK), y=-1.5)
         self.au_mot("Le vecteur A B a pour coordonnées")
         self.play(GrowArrow(vab[0]), run_time=0.5)
         self.au_pos(self._texte_voix.find("moins 1, 1, 0"))
@@ -729,7 +771,8 @@ class EspaceVecteursBase(EcransEspace):
         self.play(Write(tit), run_time=0.7)
         fs = 42
         b1 = VGroup(self.t("un vecteur de l'espace :", fs), self.t("trois coordonnées", fs, C_REGARD))
-        b2 = VGroup(self.t("A B :", fs, C_VECTEUR), self.t("arrivée moins départ", fs, C_REGARD))
+        b2 = VGroup(self.vexpr("A B :", ("A B",), fs, C_VECTEUR),
+                    self.t("arrivée moins départ", fs, C_REGARD))
         b3 = VGroup(self.t("colinéaires :", fs, VERT_OK),
                     self.t("un seul et même nombre", fs), self.t("pour les trois", fs, C_REGARD))
         for b in (b1, b2):

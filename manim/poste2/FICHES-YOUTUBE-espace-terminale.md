@@ -11,10 +11,13 @@ brancher » — mesuré le 22/11 sur `--classe terminale-spe`.
 
 ---
 
-## E1 · `terminale-espace-vecteurs` — ✅ rendu HD fait
+## E1 · `terminale-espace-vecteurs` — ✅ rendu HD fait (REFAIT le 22/11 : notation fléchée)
 
 `manim/sorties/terminale/maths/geometrie/espace-vecteurs/eleveai-maths-terminale-espace-vecteurs.mp4`
-5 min 02 · 19,8 Mo · 0 instant qui touche un bord · planche HD regardée.
+5 min 02 (302,4 s) · 19,0 Mo · 0 instant qui touche un bord · planche HD regardée.
+⭐ **Rendu refait le 22/11** avec la notation vectorielle fléchée : 13 textes passés à
+`vec` / `vexpr` et 6 étiquettes de figure fléchées (défaut de `Repere3D.vecteur`).
+Durée inchangée — rien de la voix n'a bougé, seul l'écran.
 
 ```json
 {
@@ -56,10 +59,15 @@ relevés sur le rendu (lignes `ECRAN` du journal) :
 
 ---
 
-## E2 · `terminale-espace-repere-coordonnees` — ✅ rendu HD fait
+## E2 · `terminale-espace-repere-coordonnees` — ✅ rendu HD fait (REFAIT le 22/11 : notation fléchée)
 
 `manim/sorties/terminale/maths/geometrie/espace-repere-coordonnees/eleveai-maths-terminale-espace-repere-coordonnees.mp4`
-5 min 54 · 22,5 Mo · **0 instant qui touche un bord** · planche HD regardée.
+5 min 54 (354,0 s) · 21,4 Mo · **0 instant qui touche un bord** · planche HD regardée.
+⭐ **Rendu refait le 22/11** avec la notation vectorielle fléchée : 4 textes passés à
+`vec` / `vexpr` (aucune étiquette de figure nommée dans cet épisode). ⭐ Son écran 09b
+est le cas d'école de la série : « I J » et « A D » FLÉCHÉS (les vecteurs), puis
+« (I J) et (A D) sont parallèles » entre parenthèses (les droites) — c'est exactement ce
+que l'écran démontre. Durée inchangée, rien de la voix n'a bougé.
 ⭐ Marques vérifiées inchangées depuis le commit du rendu (le contrôle du correctif tardif).
 
 ```json
@@ -103,10 +111,14 @@ relevés sur le rendu (lignes `ECRAN` du journal) :
 
 ---
 
-## E3 · `terminale-espace-droite-parametrique` — ✅ rendu HD fait
+## E3 · `terminale-espace-droite-parametrique` — ✅ rendu HD fait (REFAIT le 22/11 : notation fléchée)
 
 `manim/sorties/terminale/maths/geometrie/espace-droite-parametrique/eleveai-maths-terminale-espace-droite-parametrique.mp4`
 5 min 56 (355,7 s) · 25,0 Mo · **0 instant qui touche un bord** · planche HD regardée.
+⭐ **Rendu refait le 22/11** avec la notation vectorielle fléchée : 3 textes passés à
+`vec` / `vexpr` + son étiquette de figure. ⚠️ Et un changement de CONTENU : la consigne du
+défi écrit maintenant « (A B) », la DROITE — la voix dit « la droite A B », alors que la
+correction, elle, parle du VECTEUR A B et le flèche. Durée inchangée.
 ⭐ Marques vérifiées inchangées depuis le correctif du « 0,5 » (`30bf5f3ff`) : 792 marques,
 fichier identique — le rendu est calé sur des marques à jour.
 ⭐ `grep -c "self\.au_t("` → **0** : aucun instant relevé à la main, donc rien qui se
@@ -263,10 +275,15 @@ surplus est constant dans chacun. **Aucun écran de question touché** — c'est
 
 ---
 
-## E6 · `terminale-espace-defi` — ✅ rendu HD fait
+## E6 · `terminale-espace-defi` — ✅ rendu HD fait (REFAIT le 22/11 : notation fléchée)
 
 `manim/sorties/terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi.mp4`
-6 min 49 (409.4 s) · 29.4 Mo · **0 instant qui touche un bord** · planche HD regardée.
+6 min 49 (409,4 s) · 28,1 Mo · **0 instant qui touche un bord** · planche HD regardée.
+⭐ **Rendu refait le 22/11** avec la notation vectorielle fléchée : 6 textes passés à
+`vec` / `vexpr`, **dont deux cartes de choix** (c'est pour elles que `choix2` / `choix3`
+acceptent désormais `noms=`). ⚠️ Trois cotes ont dû bouger avec : les cartes de l'écran 07
+(recoupées et à 24 px, sinon les flèches les faisaient tomber de 25,8 à 20,4 px), le bloc
+« la même norme » de 07b et le système de 09b. Durée inchangée.
 ⭐ Marques : **923**, et elles ont été RÉÉCRITES avant ce rendu — le convertisseur
 de la série perdait les décimales répétées, et huit marques de cette voix tombaient sur le
 mauvais mot (jusqu'à 4,3 s d'avance sur un choix de question). Détail, chiffres et effet

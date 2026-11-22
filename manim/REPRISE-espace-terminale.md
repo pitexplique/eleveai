@@ -29,15 +29,15 @@
 | les 180 WAV + 12 fichiers de marques | ✅ faits (**10 278** marques mesurées, 71 min de voix) |
 | la boîte à outils de dessin | ✅ `manim/poste2/espace3d.py` + sa planche |
 | le socle d'écran | ✅ `manim/poste2/espace_ecrans.py` — + `systeme`, `ligne_param`, `choix3`, `au_fin`, `trip(par=True)` (épisode 3) |
-| E1 `espace_vecteurs` | ✅ **HD livré** (5 min 02, 0 bord, planche HD regardée) |
-| E2 `espace_repere_coordonnees` | ✅ **HD livré** (5 min 54, 0 bord, planche HD regardée) |
-| E3 `espace_droite_parametrique` | ✅ **HD livré** (5 min 56, 0 bord, planche HD regardée) |
-| E4 `espace_plan_equation` | ✅ **HD livré** (6 min 09, 0 bord, planche HD regardée) |
-| E5 `espace_position_relative` | ✅ **HD livré** (6 min 34, 0 bord, planche HD regardée) |
-| E6 `espace_defi` | ✅ **HD livré** (6 min 49, 0 bord, planche HD regardée) — ⚠️ sans la notation fléchée |
+| E1 `espace_vecteurs` | ✅ **HD livré** (5 min 02, 0 bord, planche HD regardée) — ⭐ REFAIT le 22/11 avec les flèches |
+| E2 `espace_repere_coordonnees` | ✅ **HD livré** (5 min 54, 0 bord, planche HD regardée) — ⭐ REFAIT le 22/11 avec les flèches |
+| E3 `espace_droite_parametrique` | ✅ **HD livré** (5 min 56, 0 bord, planche HD regardée) — ⭐ REFAIT le 22/11 avec les flèches |
+| E4 `espace_plan_equation` | ✅ **HD livré** (6 min 09, 0 bord, planche HD regardée) — il ne nomme aucun vecteur |
+| E5 `espace_position_relative` | ✅ **HD livré** (6 min 34, 0 bord, planche HD regardée) — il ne nomme aucun vecteur |
+| E6 `espace_defi` | ✅ **HD livré** (6 min 49, 0 bord, planche HD regardée) — ⭐ REFAIT le 22/11 avec les flèches |
 | E7 `ps_espace_calculer` | ✅ **HD livré** (6 min 33, 0 bord, planche HD regardée) — ⭐ le premier AVEC les flèches |
+| ✅ **la notation vectorielle** | **faite sur les 7 scripts** : `auditer-fleches-vecteurs.py` → 0 nu (voir « LA PASSE DES FLÈCHES ») |
 | les 5 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
-| ⛔ E1, E2, E3 et E6 | ⏳ **à REPRENDRE** : 14 noms de vecteur nus (`auditer-fleches-vecteurs.py`) |
 | les 12 shorts | ⏳ pas de voix encore |
 | les rendus HD, le branchement coach, les fiches YouTube | ⏳ |
 
@@ -60,14 +60,14 @@ ls manim/sorties/terminale/maths/geometrie/*/*.mp4   # les HD livrés
 python manim/poste2/verifier-voix-espace.py          # 12 voix, 15 clips, lettres A 8 B 8 C 8
 ```
 
-**Le prochain geste** : il y en a DEUX, et le second est le plus urgent.
-1. écrire `ps_espace_orthogonalite.py` (E8, Marc le maçon, centre `sciences`) ;
-2. ⛔ **reprendre E1, E2, E3 et E6 avec la notation vectorielle fléchée** — décision de
-   Frédéric, 22/11. Ces quatre-là écrivent « u · v » et « A G » à plat, ce qui à l'écran
-   d'une terminale désigne des NOMBRES. E4 et E5 sont déjà justes (ils ne nomment jamais
-   un vecteur). ⭐ L'opération est peu chère : **aucune des six n'est devant un élève**
-   (0 entrée `espace` au manifeste), donc on ne corrige rien en public, on repasse des
-   rendus. ⚠️ Et leurs MESURES sont à relancer d'abord : la flèche grandit les blocs.
+**Le prochain geste** : écrire `ps_espace_orthogonalite.py` (E8, Marc le maçon, centre
+`sciences`), puis E9 à E12.
+✅ **La reprise des flèches est FAITE** (22/11) : E1, E2, E3 et E6 portent la notation
+vectorielle et sont re-rendus en HD. `python -X utf8 manim/poste2/auditer-fleches-vecteurs.py`
+doit rester à **0 NU sur tous les scripts** — c'est le contrôle à relancer après chaque
+épisode écrit. ⛔ Lire « LA PASSE DES FLÈCHES » plus bas AVANT d'écrire un écran qui
+nomme un vecteur : la flèche grandit les blocs, et elle a cassé trois figures et un bloc
+de cartes sur des épisodes qui étaient propres.
 
 Pour écrire E8, tout l'attend — sa voix dans
 `manim/poste2/VOIX-espace-terminale.md`, ses WAV, ses marques, et un socle complet :
@@ -94,7 +94,9 @@ cet épisode-là. Les 13 de `espace_defi` sont résolues, à la source (voir plu
 
 **L'ordre pour chaque épisode, sans en sauter un :**
 
-1. lire la voix du `.md` et poser un écran par clip ;
+1. lire la voix du `.md` et poser un écran par clip — ⭐ et **tout nom de vecteur passe
+   par `self.vec` / `self.vexpr` dès l'écriture** : `auditer-fleches-vecteurs.py` doit
+   rester à 0 NU, et reprendre un épisode après coup coûte un rendu HD de plus ;
 2. `python manim/poste2/verifier-avant-rendu.py <script.py> <Scene>` → **0 problème**
    (il attrape les `au_mot` sans marque, qui sont la moitié du travail) ;
 3. dry run `AUDIT=1 BORDS=1 … --dry_run` → **0 `BORD`**, et **un seul `AUDIT-ABSENT`**,
@@ -182,7 +184,7 @@ from espace3d import Repere3D, C_VECTEUR, C_PLAN, …
 la même projection** (`lib/canvas/Repere3dCanvas.tsx`). Un élève qui voit la vidéo puis ouvre
 sa question doit retrouver le même dessin.
 
-### 4. Les trois contrôles, et leur moment
+### 4. Les contrôles, et leur moment
 
 | Outil | Quand | Ce qu'il attrape |
 |---|---|---|
@@ -190,6 +192,8 @@ sa question doit retrouver le même dessin.
 | `AUDIT=1 BORDS=1 … --dry_run` | **avant le `-ql`** | un nombre affiché que la voix ne dit pas, un objet hors de la marge de 3 % |
 | `scripts/planche-video.py` **+** `manim/poste2/apercu-instants.py` | **sur le `-ql`, avant le HD** | ce qui est réellement affiché — et **rien d'autre ne le voit** |
 | un **recadrage PIL ×2,5 à ×3** sur la figure de l'épisode | **sur le `-ql`, après la planche** | ce qu'une vignette à trois colonnes ne montre pas : sur E5, deux défauts de la figure du pont, dont « la route ne passe sous le pont nulle part » ; sur E6, les trois axes couchés sur les arêtes du cube et le « y » planté dedans |
+| `python -X utf8 manim/poste2/auditer-fleches-vecteurs.py` | **après chaque écran écrit** | un nom de vecteur écrit à plat (« u · v », « A G »), dans les textes d'écran comme dans les cartes de choix. ⛔ Il lit l'AST : un `grep` du glyphe « ⃗ » répond « non » même quand tout est juste, la flèche étant DESSINÉE. Le détail de ce qu'il ne voit pas est en tête du fichier |
+| `mesure-espace-vecteurs.py`, `-repere-coordonnees.py`, `-droite-parametrique.py`, `-defi-fleches.py` | **avant tout re-rendu** | les cotes des blocs qui portent une notation vectorielle, **comparées à un TÉMOIN** (`--sans-fleches`) : sans cette comparaison on lit l'état et on croit lire un diff |
 | `manim/poste2/mesure-espace-defi.py` (à recopier par épisode) | **avant même le premier dry run** | un bloc RÉTRÉCI par `col()` ou `gauche()`, ou posé hors de la marge de 3 % — onze sur E6, dont le tableau des huit sommets tombé à 21 px. ⛔ Rien d'autre ne le voit : le dry run est propre, et à la planche un texte deux fois trop petit ne « saute » pas aux yeux |
 
 ⛔⛔ **PLANCHE *ET* GROS PLANS, jamais la planche seule.** `planche-video.py` prend la
@@ -760,6 +764,354 @@ contre-exemple de l'écran 06 sont u (1 ; 0 ; 0), v (0 ; 1 ; 0) et w (0 ; 0 ; 1)
 c'est-à-dire **exactement les trois vecteurs de base**. Tracés dans un repère, ils se
 seraient superposés trait pour trait aux trois axes, et les noms u, v, w seraient tombés
 sur x, y, z. Ils sont dessinés **sans axes** : les trois flèches SONT le repère.
+
+---
+
+## ⛔⛔ LA PASSE DES FLÈCHES (22/11/2026) — E1, E2, E3 et E6 repris et re-rendus
+
+Frédéric, devant la planche de l'épisode 7 : « as-tu mis les flèches sur les vecteurs ? »
+puis « il faut reprendre les vidéos désolé ou pas de flèche ». Cette section raconte ce
+que la reprise a coûté, parce que **rien de ce qui suit n'était prévisible** : la flèche
+n'ajoute pas un dessin, elle change la HAUTEUR de tout ce qui la contient.
+
+### ⭐⭐ LE MODE TÉMOIN : sans lui, cette passe se serait trompée de dix défauts sur dix
+
+Les quatre `mesure-*.py` de cette passe acceptent **`--sans-fleches`** : ils rebâtissent
+exactement les mêmes blocs sans la notation (et sans les flèches d'étiquette), et on
+compare les deux sorties. ⛔ Sans ce mode, l'outil liste l'ÉTAT, pas le DIFF — et sur
+l'épisode 1 il a sorti **dix** « RÉTRÉCI » dont **dix** étaient déjà dans l'épisode
+publié, regardé et accepté le matin même (sa question de l'écran 07 est à 14,4 px depuis
+le premier rendu). Les traiter comme des dégâts de la passe, c'était refaire la faute que
+la note des entiers appelle « un diff a DEUX colonnes ».
+
+> ⭐ **Le critère de cette passe n'est pas l'état, c'est le delta.** Ce qui doit être à
+> zéro, c'est ce que la flèche a changé — pas ce que l'épisode portait déjà.
+
+Le même raisonnement a servi sur le dry run : les **21 `AUDIT-AVANCE`** de l'épisode 1
+font peur, et ils sont **rigoureusement identiques** à ceux de la version publiée (vérifié
+en rendant `git show HEAD:…` dans un fichier témoin, même Scene, même dry run, puis
+`diff` des deux listes triées). E1 et E2 ont été écrits **avant** que `au_fin` existe :
+c'est leur dette, pas celle des flèches.
+
+| épisode | AUDIT-AVANCE au dry run `-qh` | d'où ils viennent |
+|---|---|---|
+| E1 | **21** | écrit avant `au_fin` (triplets posés au premier mot) |
+| E2 | **14** | idem |
+| E3 | **1** | le seul structurel, déjà documenté plus haut |
+| E6 | **0** | écrit après `au_fin` |
+
+### ⭐⭐ CE QUE LA FLÈCHE COÛTE, EN CHIFFRES
+
+Une flèche de nom déborde de **0,10 + son épaisseur** au-dessus du texte et de **0,08**
+en largeur (`espace3d.fleche_de_nom` va de `UL + LEFT*0.03` à `UR + RIGHT*0.05`). Donc :
+
+- **tout bloc qui en porte une grandit d'environ 0,09 en hauteur** — mesuré sur les
+  quatre épisodes, aucun n'a franchi une marge pour autant ;
+- **un bloc de CARTES en porte une par ligne nommée**, et là ça casse (voir plus bas) ;
+- ⛔ **les étiquettes de figure ne concernent que DEUX des quatre épisodes.** Compté à
+  l'AST, et non supposé : `espace_vecteurs` **6**, `espace_droite_parametrique` **1**,
+  `espace_repere_coordonnees` **0**, `espace_defi` **0** (et E4, E5 : **0** — c'est
+  pourquoi le changement de défaut de `Repere3D.vecteur` ne peut pas les abîmer).
+
+### ⛔⛔ TROIS ÉTIQUETTES DE FIGURE SUR SIX ÉTAIENT DEVENUES FAUSSES — vu AU GROS PLAN
+
+Sur l'épisode 1, les écrans 03, 05 et 07b portent chacun deux vecteurs nommés. Avec la
+flèche, **les trois paires de décalages héritées (`UL` / `DR`) sont devenues fausses** :
+
+| écran | ce qu'on voyait au gros plan | ce que la planche montrait |
+|---|---|---|
+| 03 | « u » écrit **sur l'axe des z** ; « v » flottant entre les deux vecteurs | rien |
+| 05 | idem, et « v » plus près du vecteur VERT que du sien | rien |
+| 07b | « u » **traversé par l'axe des y** | rien |
+
+⭐ Et c'est bien la flèche qui l'a causé : sur le HD publié le matin, le « u » NU passait
+à côté de l'axe. La flèche occupe précisément la bande qui restait libre au-dessus.
+
+### ⭐⭐ ON NE CHOISIT PLUS UN `decal` À VUE : ON LE CHERCHE EN GRILLE
+
+La recette, écrite pour cette passe et valable pour les cinq épisodes qui restent : on
+balaie (dx, dy) **au pas de 0,25 entre −2,5 et +2,5**, on garde les positions dont la
+boîte de l'étiquette est à plus de **0,08** de tout ce qui est tracé, et on classe par
+distance au fût du vecteur qu'elle nomme — la plus proche gagne, pour qu'on sache **à qui
+elle appartient**.
+
+⛔⛔ **ET LE CONTRÔLE DOIT PORTER SUR LES POINTS TRACÉS, PAS SUR LES BOÎTES.** Premier jet :
+« aucun décalage libre » sur l'écran 07b, pour les deux étiquettes. La cause : la boîte
+d'une flèche en diagonale est un grand rectangle **presque vide**, et testée ainsi elle
+interdit tout un quadrant. En échantillonnant les points des chemins, la même recherche
+rend une dizaine de positions libres.
+
+⚠️ Et la grille ne connaît que ce qu'on lui donne : il faut lui passer aussi les COLONNES
+DE TEXTE de l'écran. Sur 07b, trois des positions « libres » tombaient dans la colonne de
+calcul, qui n'était pas dans la liste au premier essai.
+
+Résultat, écrit dans les scripts avec son jeu mesuré : 03 → u `(0,25 ; −1,25)`, v
+`(2,25 ; 2,25)` ; 05 → u `(−0,75 ; −1,00)`, v `(2,25 ; 2,25)` ; 07b → u `(−0,25 ; 1,50)`,
+v `(1,25 ; 0,75)`.
+
+### ⛔⛔ LE PIRE DÉGÂT : TROIS FLÈCHES ONT FAIT TOMBER TROIS CARTES DE 25,8 À 20,4 px
+
+Épisode 6, écran 07. Ses trois choix nomment des vecteurs (« on montre que A B et / A C
+ont la même norme », « vecteurs A B et A C »). Fléchées, **trois lignes** gagnent 0,09 :
+le bloc des cartes grandit de 0,28 de haut, descend à **−2,19**, donc sur la tête de
+Ti-Margo — et `col()` le rétrécit. Les trois choix passent de **25,8 px à 20,4 px**.
+
+⛔ C'est le piège le plus traître de l'épisode 6, déjà écrit plus haut sous une autre
+forme (« c'est AJOUTER une ligne à un choix qui rapetisse les trois cartes »), et la
+flèche en est une troisième forme : **on ajoute une notation, on perd 5 px de lisibilité
+à l'autre bout de l'écran.**
+
+⭐⭐ **Et le remède n'est PAS dans le socle — j'ai cru le contraire et je me suis trompé.**
+Première idée : « `col()` juge les cartes CENTRÉES en y = 0, alors qu'elles seront
+remontées sous la question ; son garde-fou se déclenche sur une position qu'elles
+n'occuperont jamais ». C'était vrai de la description, et **faux de la conclusion** :
+mesuré en désactivant le garde-fou, leur vrai bas tombe à −2,19, c'est-à-dire bel et bien
+sur Ti-Margo. **Le garde-fou se vérifie lui-même.** Le paramètre que j'avais ajouté au
+socle a été retiré ; il ne reste que le commentaire, pour que personne ne refasse le
+détour.
+
+Le remède est dans l'ÉPISODE, en deux cotes mesurées ensemble, et **aucune ne touche un
+mot de la voix** :
+1. **couper le choix A après « A C » et non après « et »**, pour qu'une seule de ses deux
+   lignes porte des noms → 0,14 de haut récupéré ;
+2. **24 px demandés au lieu de 26**.
+
+→ **23,8 px obtenus**, bas des cartes à −1,87, soit 0,28 au-dessus de Ti-Margo.
+⛔ **25 px ne passe pas** : le bas tombe à −1,94, à **un centième** du seuil de `col()`.
+
+### ⚠️ DEUX COTES DE L'ÉPISODE 6 QUI MORDAIENT, DONT UNE DÉJÀ DANS LE HD PUBLIÉ
+
+- 07b : l'écart entre « A C = k × A B » et le bloc « la même norme » est tombé de 0,14 à
+  **0,05**. Bloc du dessous descendu à −1,53 → 0,13.
+- 09b : l'accolade du système rentrait de **0,22** dans « A = origine ». ⚠️ Et elle
+  mordait **déjà de 0,13 dans l'épisode publié** — vu au gros plan sur le HD du matin,
+  signalé par aucun outil, parce qu'aucun outil ne comparait ces deux blocs-là. Système
+  descendu de −1,30 à −1,64 → 0,12.
+
+### ⛔ UNE DROITE ET UN VECTEUR NE S'ÉCRIVENT PAS PAREIL — et c'est le vrai sujet
+
+La question que la passe a dû trancher six fois, en relisant la VOIX et non l'écran :
+
+| écran | ce qui est écrit | ce que la voix dit | verdict |
+|---|---|---|---|
+| E2 09b | « I J », « A D » en face d'un triplet | « le vecteur I J », « le vecteur A D » | **vecteurs → flèche** |
+| E2 09b | « (I J) et (A D) sont parallèles » | « les droites I J et A D » | **droites → rien** |
+| E2 08 | « le repère A, A B, A D, A E » | la base du repère | **vecteurs → flèche** |
+| E3 09 | « A B » sous « paramétrique de la droite » | « la droite A B » | **droite → écrit « (A B) »** |
+| E3 09b | « A B » en face d'un triplet | « le vecteur A B » | **vecteur → flèche** |
+| E6 04 | « la grande diagonale A G » | un segment | **segment → rien** |
+
+⭐ L'épisode 2 est le cas d'école : ses deux lignes fléchées démontrent l'égalité de deux
+VECTEURS, et sa conclusion parle du parallélisme de deux DROITES. **Si les quatre
+notations se ressemblaient, il ne resterait rien à démontrer.**
+
+### ⛔⛔ L'AUDIT DES FLÈCHES A DÛ ÊTRE REFAIT, ET SON ANCIENNE VERSION MENTAIT
+
+`auditer-fleches-vecteurs.py`, première version : un nom TOUT SEUL, ou un texte portant un
+« · ». Elle voyait **14** noms nus. En relisant à la main les ~300 textes des sept
+scripts, il y en avait **26** : « u + v : », « k u : », « 2 u », « A G = 2 A Ω »,
+« A C = k × A B », « Le vecteur u a pour coordonnées », « les coordonnées de A B et A C »,
+« vecteurs A B et A C »… ⛔ **Un ✅ de cette version-là aurait fait croire la série réglée.**
+
+⭐⭐ La règle est maintenant **inversée** : tout nom isolé est SUSPECT, et ce qui n'est pas
+un vecteur doit le DIRE, avec sa raison, dans la table `PAS_DES_VECTEURS` — le même
+principe que le `sans_audit` des épisodes, qui porte toujours sa raison à côté. Deux cas
+se décident sans table, parce que la notation tranche : **« (A B) » est une droite,
+« [A G] » un segment**.
+
+⚠️ Deux faux positifs ont dû être mesurés avant d'y croire :
+- **l'apostrophe est une frontière** — sans elle, le « n » de « n'est », « n'ont »,
+  « n'existe » sortait en nom de vecteur : quatre faux positifs sur le seul épisode 5,
+  qui est pourtant juste ;
+- **deux majuscules collées, c'est aussi un petit mot français en capitales** — « c'est
+  LA définition » (épisode 7). D'où `MOTS_CAPS`.
+
+⭐ Son ÉTALON est pris **hors** du périmètre soupçonné : E4, E5 et E7 sont relus à la main
+et justes. Tant qu'ils restent à ✅, la règle élargie ne fabrique pas de faux positifs.
+C'est exactement la leçon des entiers (« un étalon qui partage le défaut de l'instrument
+ne prouve rien »).
+
+⭐ Et il lit maintenant les cartes de choix : `choix2` / `choix3` acceptent `noms=(…)` et
+passent chaque ligne par `vexpr` (socle, `_ligne_choix`). Sans cette lecture, l'outil
+signalerait comme nues des cartes parfaitement fléchées.
+
+### ⚠️ CE QUE CETTE PASSE A VU ET N'A PAS CORRIGÉ — trois constats pour Frédéric
+
+Rien de ce qui suit ne vient des flèches : les trois défauts sont dans les épisodes
+publiés le matin. Ils sont écrits ici parce qu'ils se décident avec lui, pas tout seul.
+
+1. ⛔ **La flèche ne se voit pas sur la question de l'écran 07 de E1.** Mesuré en pixels
+   HD : la pointe y fait **4,8 × 4,8 px**, contre 12 à 16 px partout ailleurs — à l'écran
+   on lit une **barre**, pas une flèche. La cause n'est pas la flèche : c'est que cette
+   question est réduite à **14,4 px** par `col()` (elle fait 9,8 de large pour 4,40 de
+   place). Même chose pour l'écran 04. ⭐ Le remède connu existe — `q_tete(largeur=6,3,
+   xl=0,35)`, comme E5 et E6 — mais il déplace les cartes, la pause et toute la colonne
+   de gauche des deux écrans : c'est une reprise de mise en page, pas un réglage.
+2. ⚠️ **Sur les écrans 03 et 05 de E1, le vecteur v (3 ; 0 ; 2) se dessine PAR-DESSUS
+   l'axe des y.** Mesuré : son projeté part à 33,7°, l'axe des y à 35,0° — ils sont
+   confondus, et la pointe rose recouvre la lettre « y ». Un vecteur dont la deuxième
+   coordonnée est NULLE, dessiné le long de l'axe des y : c'est la même famille que « les
+   trois axes sont trois arêtes du cube » (E6) et que la droite de E5 confondue avec
+   l'axe des x. ⛔ On ne peut pas changer le triplet, la voix le dit.
+3. ⚠️ **Sur l'écran 05 de E1, le vecteur u est invisible** : le double 2 u, orange et
+   tracé par-dessus la même demi-droite, le recouvre entièrement. L'étiquette « u »
+   fléchée désigne donc une flèche ORANGE. (L'écran 03 ne l'a pas : son double y est à
+   55 % d'opacité.)
+
+---
+
+## ⛔⛔ Ce que l'épisode 8 a appris — à lire AVANT d'écrire l'épisode 9
+
+Onze défauts. **Cinq n'ont été vus que par le GROS PLAN**, trois par le dry run, trois par
+la mesure hors rendu. Et deux contrôles neufs sont entrés dans l'outil de mesure : ils
+valent pour les quatre épisodes qui restent.
+
+### ⭐⭐ DEUX PLANS DE CET ÉPISODE SE PROJETTENT SUR UNE LAME — et c'est la MÊME normale
+
+`platitude((1 ; 1 ; 1))` = **9,0°**, sous le seuil de 12° (voir le NOYAU dans
+`espace3d.py`). Or (1 ; 1 ; 1) est à la fois la normale du plan P de l'écran 05 **et**
+le vecteur A G du défi, dont le plan (B D E) a exactement cette normale. Les deux écrans
+qui portent la leçon de l'épisode étaient donc les deux écrans impossibles à dessiner en
+cavalière. Mesuré sur le triangle B D E :
+
+| mesure | valeur |
+|---|---|
+| aire projetée / aire réelle | **17,5 %** |
+| distance de D à la droite (B E), projetée | **0,214** unité de repère |
+| angle entre B D et B E à l'écran | **19°** |
+
+⭐ Deux remèdes différents, et c'est l'écran qui décide :
+- **écran 05** : le plan est DESSINÉ À PLAT (`plan_poteau` dans l'épisode, sur le modèle
+  de `plan_dessine`), sans aucun axe. Il ne prétend pas montrer OÙ est le plan, il montre
+  CE QU'EST un plan — et c'est exactement ce que l'écran doit dire ;
+- **écran 09b** : **aucun morceau de plan**. On montre les deux VECTEURS du plan (B D et
+  B E), qui sont ce que la démonstration manipule. Un triangle B D E rempli se serait lu
+  comme une lame.
+⭐ Et le sol de l'écran 06, lui, se projette très bien : `platitude((0 ; 0 ; 1))` = 14,9°.
+Un épisode peut donc porter les deux conventions, à condition que chacune ait sa raison.
+
+### ⭐⭐ LES ÉTIQUETTES DE FIGURE SE CHERCHENT EN GRILLE — et parfois il n'y a pas de place
+
+Les **512** combinaisons de `decal` des trois vecteurs du défi ont été essayées hors
+rendu : la MEILLEURE ne laisse que **0,14** entre deux noms, et la paire « A G » / « B E »
+se touche franchement dans la plupart. La cause est la platitude ci-dessus — 19° entre
+B D et B E à l'écran.
+⛔ **Quand la grille ne trouve rien, on n'étiquette pas.** Les trois flèches sont
+anonymes, et c'est la COULEUR qui les relie à la colonne de droite (ambre = A G, bleu =
+B D, rose = B E) — exactement ce que fait déjà l'écran 09b de l'épisode 7.
+⭐ **`etiquettes()` est maintenant dans le script de mesure** : il compare les étiquettes
+DEUX À DEUX, y compris contre les huit noms de sommet du cube, et il dit « se touchent »
+sous 0,10 et « serré » sous 0,22. ⚠️ À recopier dans les mesures de E9 à E12.
+
+### ⛔⛔ UNE FLÈCHE QUI SORT DE SON PLAN CONTREDIT LA LÉGENDE QUI EST JUSTE DESSOUS
+
+Écran 06, vu au gros plan ×3 : la pointe de « nord » passait **au-dessus** du bord haut
+du morceau de sol et celle d'« est » **à droite** de son bord droit — dans l'écran dont
+la légende dit « le nord est AU SOL ». Le dry run était propre (rien ne sort du cadre),
+la mesure aussi (les bords de la figure sont dans la marge).
+⭐ **Un contrôle neuf, dans le script de mesure** : la pointe de chaque flèche est testée
+par un point-dans-polygone contre les quatre coins du morceau de plan. ⚠️ À recopier.
+⚠️ Et le réglage qui marche est COMPTÉ : avec `demi = 1,15` centré en (0,6 ; 0,6), le sol
+projeté va de (−0,78 ; −0,16) à (2,47 ; 0,50) ; (0 ; 1,5 ; 0) se projette en
+(0,615 ; 0,431) et (1,45 ; 0 ; 0) en (1,45 ; 0) — les deux sont dedans.
+
+### ⛔⛔ CINQ MORCEAUX CONSTRUITS, QUATRE JOUÉS — et aucun instrument ne le voit
+
+`plan_poteau` rend `(plan, u, v, n, angles)`. L'écran 05 jouait le plan et les trois
+flèches… et **jamais les deux carrés d'angle droit**. Ils étaient construits, bien
+placés, dans la marge, et invisibles. C'est le défaut de l'épisode 6 (l. 07b, « une
+ligne qui existe et n'est jamais jouée »), à sa deuxième récidive.
+⭐ Vu au gros plan ×2,6, par rien d'autre. **Quand une fonction de figure rend N morceaux,
+compter les `play` qui les montrent.**
+⭐ Et le remède est meilleur que l'original : chaque carré paraît **avec son produit
+scalaire**, c'est-à-dire quand on vient de PROUVER que l'angle est droit.
+
+### ⛔⛔ UN `au_fin` NE PLACE RIEN — IL ATTEND. Il va donc contre son `play`.
+
+L'écran 04 avait ses deux `au_fin` groupés en tête de méthode (recopié tel quel de
+l'épisode 7), et les `play` plus bas. Résultat au dry run : le « 1 » de u s'affichait
+**4,93 s après** avoir été prononcé, parce que la méthode attendait d'abord la fin du
+triplet de v. ⭐ La règle : **un `au_fin` (ou un `au_mot`) se colle au `play` qu'il
+règle**, jamais en tête de bloc. ⚠️ `ps_espace_calculer.py` porte encore cette forme à
+son écran 04 : son HD est livré et ne bouge pas, mais on ne la recopie plus.
+
+### ⛔ L'ORDRE EST CELUI DE LA VOIX, MÊME QUAND L'ÉCRAN EST UN TABLEAU
+
+Écran 03 : trois rangées jouées à la suite, puis deux blocs d'insistance. Or la voix dit
+« Deux vecteurs, pas un. Et non colinéaires… » **avant** « on dit que ce vecteur est
+normal au plan ». Les deux blocs sortaient donc à **9,07 s et 5,97 s de RETARD**.
+⭐ Le tableau se construit d'un bloc ; seule la RÉVÉLATION suit la voix, et la troisième
+rangée se montre après les deux blocs. (Même défaut qu'à l'écran 04b de E6 et qu'à
+l'écran 09 de E7.)
+
+### ⛔ UNE CARTE DE CHOIX QUI PORTE UN NOMBRE S'AFFICHE QUAND IL EST DIT
+
+« B : non, il vaut −8 » paraissait **1,05 s avant** que « moins 8 » soit prononcé.
+`q_montrer_choix` ne retarde que les corps qui portent un `.nb` (prévu pour les
+triplets). ⭐ `cB.nb = [cB]` suffit : le socle attend alors la dernière marque DANS le
+choix. ⚠️ C'est le piège n° 6 des entiers, dans sa troisième forme de la série.
+
+### ⛔⛔ TROIS DÉFAUTS DE PERSONNAGE ET DE FIGURE, VUS AU GROS PLAN — cinquième épisode d'affilée
+
+⭐⭐ **Et cette fois ils ont été vus AVANT le premier rendu de l'épisode**, sur une planche
+de figures seules (`marc()`, `poteau_vue()`, `plan_poteau()` posés en grand dans une Scene
+à part, rendue en `-qh -s`). Ça coûte quinze secondes et ça a évité deux tours complets.
+
+1. **le casque de chantier flottait au-dessus du crâne**, et son bord barrait le visage à
+   hauteur des yeux : on lisait un sombrero. C'est la visière de Jean-Bernard (E4) à sa
+   deuxième récidive. ⭐ Un dôme en `Arc` laisse du NOIR entre le crâne et le trait :
+   c'est un `AnnularSector` plein qu'il faut, et le bord se pose à 1,44 quand le haut de
+   la tête est à 1,45 — pas à 1,30, qui est DANS la tête ;
+2. **la coche verte posée sur le haut du poteau** le faisait lire comme un poteau TORDU.
+   Une marque de validation se pose À CÔTÉ de ce qu'elle valide ;
+3. **v pointait hors du plan**, dans l'écran qui enseigne que u et v sont DANS le plan ;
+   et le second carré d'angle droit était posé du côté où **aucun vecteur n'allait**.
+
+### ⚠️ LES COTES QUI ONT COÛTÉ UN TOUR, toutes mesurées hors rendu
+
+| ce que la mesure a dit | la décision |
+|---|---|
+| tableau de l'écran 03 : 11,20 pour un plafond de 10,60 | police 30 → 28 |
+| carte C de l'écran 04 à **22,5 px** sur deux lignes | trois lignes, et **une seule des trois** (remède de E6) |
+| cartes de l'écran 07 : fs 28 → 27,8 / 25,2 / 24,9 px ; fs 24 → **23,8 partout** | fs 24. Trois lignes à 28 px feraient descendre les cartes à −2,52, c'est-à-dire DANS la boîte de Ti-Margo |
+| pause des écrans 04 **et** 07 posée sous −2,15 par `q_tete` | déplacée en bas à GAUCHE — les cartes, elles, restent au-dessus |
+| modèle de rédaction (08) : 8,89 pour les 8,60 de la copie | première ligne raccourcie |
+| finale (10) : 10,73 pour 10,60 | « dans l'espace : » → « attention : » |
+| leurre C de 04b : bas du cadre à **−3,570** pour une marge à −3,573 | police 26 → 24 |
+
+⭐⭐ **Les deux dernières lignes sont la vraie leçon** : trois MILLIÈMES d'unité et 1,2 %
+de réduction. Aucune relecture ne voit ça, et les deux auraient abîmé l'écran que l'élève
+relit le plus.
+
+### ⭐ CE QUI A BIEN MARCHÉ, ET QU'IL FAUT REFAIRE
+
+- **Étalonner `verifier-avant-rendu.py` avant de croire son zéro** : une copie du script
+  avec UN `au_mot` faux, dans le répertoire temporaire, et on vérifie qu'il crie. Il ne
+  dit rien quand tout va bien — un silence n'est pas une preuve tant qu'on n'a pas vu
+  l'outil parler (leçon « un zéro se vérifie » des entiers).
+- **Rendre les GLYPHES avant de les employer** : ⊥ (U+22A5), ⟺ (U+27FA), ⟹ (U+27F9),
+  ⊂ (U+2282) et ∠ (U+2220) ont été rendus dans une image d'essai. Tous se dessinent, et
+  ⟺ se distingue bien de ⟹. ⛔ Deux caractères de cette série sont déjà sortis en carré
+  « tofu » (le ⚠ de E1, la flèche combinante U+20D7 de E7) : on ne tape plus un symbole
+  mathématique sans l'avoir vu.
+- **La planche des FIGURES SEULES, en grand, avant le premier rendu de l'épisode.**
+
+### ⛔ UNE DROITE, UN PLAN ET UN VECTEUR : trois notations, et c'est le sujet de l'épisode
+
+Cet épisode écrit « (A G) » pour la droite, « (BDE) » pour le plan, « A G » fléché pour
+le vecteur. ⭐ C'est la convention tranchée par la passe des flèches, et ici elle n'est
+pas cosmétique : **toute la leçon est que le VECTEUR A G est orthogonal au PLAN (BDE)**.
+⚠️ Détail d'outil : `auditer-fleches-vecteurs.py` laisse passer « (A G) » (deux
+majuscules entre parenthèses) mais signalerait « (B D E) » — trois lettres espacées. On
+écrit donc le plan **collé**, « (BDE) », qui est aussi la notation la plus courante.
+
+⚠️⚠️ **ET DEUX LIGNES `[figure]` DE CET AUDIT SONT LÉGITIMES, QU'ON NE « CORRIGE » PAS.**
+Sur `ps_espace_orthogonalite.py`, l'outil liste deux étiquettes « nues » : **« nord » et
+« est »**, posées avec `fleche_nom=False` à l'écran 06. Ce ne sont pas des NOMS de
+vecteur, ce sont des DIRECTIONS nommées en français — une flèche dessinée au-dessus du
+mot « nord » serait une faute de notation, pas une correction. L'outil ne lit pas le
+français (il le dit lui-même), donc il les signale ; la raison est écrite dans le script,
+à l'endroit de l'appel. ⛔ Le compte qui fait foi reste **NUS : 0**.
 
 ---
 

@@ -437,6 +437,14 @@ class EcransEspace(AuditSynchro, MotsCales, Notion6e):
         q.align_to(P(0, tete.get_bottom()[1] - 0.25), UP)
         cartes = VGroup(*[self.carte_choix(l, c, largeur=largeur)
                           for l, c in zip("ABC", choix)]).arrange(DOWN, buff=0.16)
+        # ⚠️ `col()` juge les cartes CENTRÉES en y = 0, alors que la ligne suivante les
+        # remonte sous la question : son garde-fou Ti-Margo se déclenche donc sur une
+        # position qu'elles n'occuperont pas. MESURÉ le 22/11 (épisode 6, cartes
+        # fléchées) : il n'y a pourtant rien à corriger ici — sans la réduction, leur
+        # vrai bas tombe à −2,19, c'est-à-dire bel et bien SUR Ti-Margo. Le garde-fou se
+        # vérifie lui-même. ⛔ Ce qu'il faut lire à la place : un bloc de cartes trop
+        # haut ne se rattrape pas dans le socle, il se recoupe dans l'épisode (voir
+        # l'écran 07 de `espace_defi.py`).
         self.col(cartes, 0, xl)
         cartes.align_to(P(0, q.get_bottom()[1] - 0.3), UP)
         pause = self.col(self.t("Mets pause, et choisis !", 32, ORANGE_RETENUE),
@@ -447,13 +455,27 @@ class EcransEspace(AuditSynchro, MotsCales, Notion6e):
             pause.move_to(P(0, cartes.get_bottom()[1] - 0.2), aligned_edge=UP).align_to(P(xl, 0), LEFT)
         return tete, q, cartes, pause, rebours
 
-    def choix2(self, l1, l2, fs=28):
-        """Un choix en DEUX lignes : vu à la planche, une phrase longue dans une carte
-        de 4,1 de large tombait à ~10 px, illisible sur un téléphone."""
-        g = VGroup(self.t(l1, fs), self.t(l2, fs)).arrange(DOWN, aligned_edge=LEFT, buff=0.06)
-        return g
+    def _ligne_choix(self, s, fs, noms):
+        """Une ligne de carte de choix, fléchée si elle nomme un vecteur.
 
-    def choix3(self, l1, l2, l3, fs=28):
+        ⭐⭐ AJOUTÉ LE 22/11 EN REPRENANT L'ÉPISODE 6 : ses trois cartes disaient
+        « on montre que A B et / A C ont la même norme » et « vecteurs A B et A C », donc
+        des vecteurs écrits à plat au cœur d'une question — exactement ce que Frédéric a
+        signalé sur l'épisode 7. ⛔ `vexpr` ne pouvait pas être appelé de l'épisode :
+        `choix2` et `choix3` construisaient leurs lignes avec `self.t`, et un choix ne se
+        monte pas à la main sans perdre la mesure de largeur de `carte_choix`.
+        ⚠️ `noms` ne s'applique qu'aux lignes où le nom est ISOLÉ : `vexpr` le vérifie
+        lui-même, donc passer ("A B", "A C") sur les trois lignes est sans risque."""
+        return self.vexpr(s, noms, fs) if noms else self.t(s, fs)
+
+    def choix2(self, l1, l2, fs=28, noms=()):
+        """Un choix en DEUX lignes : vu à la planche, une phrase longue dans une carte
+        de 4,1 de large tombait à ~10 px, illisible sur un téléphone.
+        ⭐ `noms` : les vecteurs à flécher dans ces deux lignes (voir `_ligne_choix`)."""
+        g = VGroup(self._ligne_choix(l1, fs, noms), self._ligne_choix(l2, fs, noms))
+        return g.arrange(DOWN, aligned_edge=LEFT, buff=0.06)
+
+    def choix3(self, l1, l2, l3, fs=28, noms=()):
         """Un choix en TROIS lignes. ⛔⛔ MESURÉ (épisode 3, hors rendu) : une carte de
         4,1 de large n'offre que 2,95 à son texte, et « coordonnée ne suit pas » seule
         fait 4,54 — sur DEUX lignes, `carte_choix` la ramenait à 15 px, le défaut n° 4 de
@@ -462,7 +484,8 @@ class EcransEspace(AuditSynchro, MotsCales, Notion6e):
         ⚠️ Une carte à trois lignes est HAUTE : avec trois choix pareils, la question ne
         doit pas dépasser DEUX lignes, sinon le bas des cartes descend sur Ti-Margo
         (boîte x ∈ [5,54 ; 6,66], y ∈ [−3,55 ; −2,15] à scale 0,5)."""
-        g = VGroup(self.t(l1, fs), self.t(l2, fs), self.t(l3, fs))
+        g = VGroup(self._ligne_choix(l1, fs, noms), self._ligne_choix(l2, fs, noms),
+                   self._ligne_choix(l3, fs, noms))
         return g.arrange(DOWN, aligned_edge=LEFT, buff=0.06)
 
     def q_montrer_choix(self, cartes):
