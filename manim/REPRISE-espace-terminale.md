@@ -232,6 +232,22 @@ yeux : `AUDIT-ABSENT « 5 » (0.5)`.
 
 ## ⛔ Un zéro se vérifie, un `head` se compte
 
+⭐⭐ **Un diff a DEUX colonnes.** Le cas le plus discret de la journée, parce que le
+chiffre faux était *plausible* : j'ai annoncé que le correctif des marques en avait
+ajouté **279**. Vrai — mais il en avait aussi **retiré 202**, celles que le bug posait
+155 caractères plus loin. Le net est **+77**, et le total réel **10 278**, pas 10 480.
+Reconstruit depuis git, fichier par fichier :
+
+```
+4ce34fff5 (avant le correctif) : 10 201
+30bf5f3ff (le correctif)       : 10 278      → net +77, et non +279
+```
+
+J'avais lu la colonne des ajouts sans lire celle des retraits. ⚠️ Et 202 marques
+fantômes, c'est exactement le genre de chiffre qu'on recopie dans une note de reprise et
+qui devient vrai pour tout le monde. ⭐ **Le contrôle qui tranche n'est jamais le
+delta : c'est le TOTAL, recompté sur l'état final.**
+
 ⭐ **Et un total s'additionne sur la sortie, pas dans la tête.** J'ai annoncé « 10 480
 marques » : c'était 10 201 + 279 calculé de mémoire, jamais mesuré. Le compte réel est
 **10 278**, parce que deux fichiers avaient été réécrits entre-temps. Un chiffre qu'on
