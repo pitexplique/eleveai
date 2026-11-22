@@ -31,6 +31,7 @@
 #   · le texte de la voix porte bien le mot de la cue à la position écrite.
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -49,9 +50,31 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 # à 0,16 s d'écart, parce que la deuxième émission marque le MOT et la première le NOMBRE.
 # Cette version-là perdait 74 marques au lieu de 20 — une cue mal placée fait échouer en
 # cascade toutes les suivantes du clip.
+SAUT_MAXI = 60   # un mot fait ~10 caractères ; au-delà, on resynchronise à tort
+
+
+def MOT_ENTIER(tok):
+    """Le jeton, en mot entier : ni dans un autre mot, ni dans un nombre."""
+    return re.compile(r"(?<![0-9A-Za-zÀ-ÿ'])" + re.escape(tok)
+                      + r"(?![0-9A-Za-zÀ-ÿ])")
+
+
 def doublon_groupe(mot):
-    """Vrai si cette cue répétée est la seconde émission d'une cue « nombre + mot »."""
-    return " " in mot
+    """Vrai si cette cue répétée est une SECONDE ÉMISSION de WinRT, et non un vrai mot
+    de plus. ⭐⭐ Le critère, trouvé en traçant les cues et pas en les lisant : la cue
+    porte-t-elle autre chose que son premier jeton ?
+
+      · « 2 moins », « 4 égale »  → le cas « nombre + mot », émis deux fois : à jeter ;
+      · « 0,5 » suivi d'un blanc  → le point-virgule de « 0,5 ; 0,5 ; 0,5 » est rendu
+        comme un espace, et la cue arrive DEUX fois : à jeter aussi ;
+      · « 0 », « 1 » nus          → une vraie répétition de chiffre : à GARDER.
+
+    ⛔ Deux versions fausses avant celle-ci, et chacune cassait un épisode différent :
+    « même instant » (un doublon groupé arrive 0,16 s plus tard, pas au même instant)
+    et « contient une espace » (qui gardait les « 0,5  » et faisait dérailler le clip).
+    La seconde a coûté 100 cues perdues en cascade sur l'épisode 2 — et c'est
+    `verifier-avant-rendu.py` qui l'a dit, pas la relecture."""
+    return mot != mot.split()[0]
 
 
 def lire_cues(tsv):
@@ -79,18 +102,40 @@ def convertir(textes, cues, garder_repetitions=True):
         prec[cle] = (mot, t)
         raw = textes[cle]
         p = pos.get(cle, 0)
-        i = raw.find(mot, p)
+        # ⛔⛔ On cherche le PREMIER JETON de la cue, jamais la cue brute, et sur un MOT
+        # ENTIER. La cue de WinRT porte les blancs de la ponctuation : « 0,5 ; » arrive
+        # comme `'0,5 '`. Chercher la cue brute dans « 0,5 ; 0,5 ; 0,5. » place les deux
+        # premières, puis saute 160 caractères plus loin pour la troisième — qui est
+        # suivie d'un point, pas d'un espace. Tout le reste du clip part avec elle :
+        # 12 cues « introuvables » en cascade, et un au_mot muet au milieu de la leçon.
+        # ⚠️ Et sans la frontière de mot, le jeton « a » se poserait dans « coordonnées ».
+        cible = mot.split()[0]
+        m = MOT_ENTIER(cible).search(raw, p)
+        i = m.start() if m else -1
         if i < 0:
-            i = raw.find(mot.split()[0], p)
-            if i < 0:
+            i = raw.find(cible, p)
+        # ⭐⭐ LE GARDE-FOU QUI TIENT TOUT : une cue avance d'UN MOT. Si son jeton n'est
+        # retrouvé que bien plus loin, c'est que cette cue était une marque de PLUS sur
+        # le mot courant, pas un mot nouveau — et la placer là-bas désynchronise tout le
+        # reste du clip. On la saute SANS avancer.
+        # ⚠️ Le cas qui l'a imposé : WinRT lit « 0,5 » comme TROIS mots (« zéro »,
+        # « virgule », « cinq ») et émet trois marques sur le même texte source. Sur
+        # « 0,5 ; 0,5 ; 0,5 », cela fait neuf cues pour trois nombres. La troisième de
+        # trop allait se poser 155 caractères plus loin, sur le triplet SUIVANT, et les
+        # 49 cues d'après devenaient introuvables : 150 caractères de leçon sans une
+        # seule marque, en plein milieu de l'écran.
+        if i < 0 or (L_prec := res.get(cle)) is not None and i - p > SAUT_MAXI:
+            if i >= 0:
+                pertes.append((cle, mot, f"saut de {i - p} caractères : marque en trop"))
+            else:
                 pertes.append((cle, mot, "introuvable dans le texte"))
-                continue
+            continue
         L = res.setdefault(cle, [])
         if L and L[-1][0] == i:
             pertes.append((cle, mot, f"deux cues sur la même position {i}"))
             continue
         L.append([i, round(t, 3)])
-        pos[cle] = i + len(mot.split()[0])
+        pos[cle] = i + len(cible)
     return res, pertes
 
 
