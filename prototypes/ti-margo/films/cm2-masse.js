@@ -419,3 +419,70 @@ function escalierM(c,x,yBas,w,h,n=5,z=1){ if(z<=0) return i=>[x,yBas]; const k=M
   for(let i=0;i<n;i++){ c.lineTo(x+i*pw,yBas-(i+1)*ph); c.lineTo(x+(i+1)*pw,yBas-(i+1)*ph); }
   c.lineTo(x+W,yBas); c.closePath(); c.stroke();
   return i=>[x+(i+.5)*pw,yBas-(i+1)*ph]; }
+
+/* ---- CM2 02 (convertir) : la farine du gâteau, la pincée, la fourmi ---- */
+/* Un tas de farine (demi-ellipse blanche, quelques grains) : (x, yBas) = le milieu du bas, w = la largeur */
+function tasFarineM(c,x,yBas,w,z=1){ if(z<=0) return; w*=Math.min(1.15,z); const h=w*.42;
+  c.fillStyle='#f8f9fa'; c.strokeStyle='#ced4da'; c.lineWidth=3; c.beginPath();
+  c.moveTo(x-w/2,yBas); c.quadraticCurveTo(x-w*.18,yBas-h*1.25,x,yBas-h); c.quadraticCurveTo(x+w*.18,yBas-h*1.25,x+w/2,yBas); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle='#dee2e6'; for(const [u,v] of [[-.2,.3],[.1,.5],[.25,.22],[-.05,.7]]){ c.beginPath(); c.arc(x+u*w,yBas-v*h,Math.max(2,w*.02),0,7); c.fill(); } }
+/* Une fourmi rouge de profil (visible sur l ardoise), tournée vers la gauche : (x, yBas) = le milieu, au sol ; s = 1 ≈ 130 px de long */
+function fourmiM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const y=yBas-26*s;
+  c.strokeStyle='#ff8787'; c.lineWidth=4*s; c.lineCap='round';
+  for(const u of [-14,2,18]){ c.beginPath(); c.moveTo(x+u*s,y); c.lineTo(x+(u-12)*s,yBas); c.stroke(); c.beginPath(); c.moveTo(x+u*s,y); c.lineTo(x+(u+12)*s,yBas); c.stroke(); }
+  c.fillStyle='#e03131'; for(const [u,rx,ry] of [[-42,17,15],[0,15,11],[44,26,19]]){ c.beginPath(); c.ellipse(x+u*s,y-(u<0?6:0)*s,rx*s,ry*s,0,0,7); c.fill(); }
+  c.beginPath(); c.moveTo(x-50*s,y-18*s); c.quadraticCurveTo(x-62*s,y-48*s,x-80*s,y-46*s); c.stroke();
+  c.beginPath(); c.moveTo(x-44*s,y-20*s); c.quadraticCurveTo(x-48*s,y-54*s,x-64*s,y-60*s); c.stroke();
+  c.fillStyle='#ffffff'; c.beginPath(); c.arc(x-48*s,y-10*s,4*s,0,7); c.fill(); }
+
+/* ---- CM2 03 (estimer) : le grain de riz, le tas de riz, la casserole qui fume ---- */
+/* Un grain de riz couché : (x, y) = le centre, L = la longueur ; ang = la rotation */
+function grainRizM(c,x,y,L,z=1,ang=0){ if(z<=0) return; L*=Math.min(1.15,z);
+  c.save(); c.translate(x,y); c.rotate(ang); c.fillStyle='#fff9db'; c.strokeStyle='#ced4da'; c.lineWidth=Math.max(2,L*.03);
+  c.beginPath(); c.ellipse(0,0,L/2,L*.21,0,0,7); c.fill(); c.stroke();
+  c.fillStyle='#ffffff'; c.beginPath(); c.ellipse(-L*.12,-L*.07,L*.18,L*.05,0,0,7); c.fill(); c.restore(); }
+/* Un petit tas de grains de riz : (x, yBas) = le milieu du bas, w = la largeur, n = le nombre de rangs */
+function tasRizM(c,x,yBas,w,z=1,n=4){ if(z<=0) return; const k=Math.min(1.15,z), g=w*.16*k;
+  for(let i=0;i<n;i++) for(let j=0;j<n*2-1-i*2;j++){ const px=x+(j-(n*2-2-i*2)/2)*g*.62, py=yBas-g*.25-i*g*.32;
+    grainRizM(c,px,py,g,1,((i*5+j*3)%7-3)*.35); } }
+/* Une casserole de riz qui cuit, vue de face : (x, yBas) = le milieu du bas ; s = 1 ≈ 300 px de large */
+function casseroleM(c,x,yBas,s=1,z=1,T=0){ if(z<=0) return; s*=Math.min(1.15,z); const w=300*s, h=170*s;
+  c.lineJoin='round'; c.fillStyle='#868e96'; c.strokeStyle='#343a40'; c.lineWidth=5;
+  c.beginPath(); c.roundRect(x-w/2,yBas-h,w,h,[0,0,30*s,30*s]); c.fill(); c.stroke();
+  c.fillStyle='#495057'; for(const u of [-1,1]){ c.beginPath(); c.roundRect(u<0?x-w/2-70*s:x+w/2,yBas-h+18*s,70*s,26*s,10*s); c.fill(); c.stroke(); }
+  c.fillStyle='#fff9db'; c.beginPath(); c.ellipse(x,yBas-h,w/2-6,24*s,0,0,7); c.fill();
+  for(let j=0;j<11;j++) grainRizM(c,x-w*.38+j*w*.076,yBas-h-4*s+((j*7)%3-1)*7*s,26*s,1,((j*3)%5-2)*.4);
+  c.strokeStyle='rgba(248,249,250,.75)'; c.lineWidth=7*s; c.lineCap='round';
+  for(const u of [-.25,0,.25]){ c.beginPath(); const y0=yBas-h-36*s;
+    for(let v=0;v<=1.001;v+=.1){ const px=x+u*w+Math.sin(v*7+T*3+u*9)*14*s, py=y0-v*120*s; v?c.lineTo(px,py):c.moveTo(px,py); } c.stroke(); } }
+
+/* ---- CM2 04 (defi) : le téléphérique de 0,4 t, la calculatrice, le panier de pique-nique ---- */
+/* Une cabine de téléphérique rouge, pendue à son câble : (x, yBas) = le milieu du plancher ; s = 1 ≈ 520 × 320 px.
+   texte = la pancarte (« 0,4 t max »). Rend l'intérieur {g, d, sol} pour y poser les passagers. */
+function telepheriqueM(c,x,yBas,s=1,z=1,texte=''){ const k=Math.min(1.15,Math.max(z,0))*s, w=520*k, h=320*k;
+  if(z<=0) return {g:x-w/2+30*k,d:x+w/2-30*k,sol:yBas-26*k}; c.lineJoin='round'; c.lineCap='round';
+  const yH=yBas-h, yC=yH-95*k;
+  c.strokeStyle='#adb5bd'; c.lineWidth=6*k; c.beginPath(); c.moveTo(x-w/2-40*k,yC+30*k); c.lineTo(x+w/2+40*k,yC-30*k); c.stroke();
+  c.strokeStyle='#495057'; c.lineWidth=10*k; c.beginPath(); c.moveTo(x,yC); c.lineTo(x,yH); c.stroke();
+  c.fillStyle='#343a40'; c.beginPath(); c.roundRect(x-50*k,yC-22*k,100*k,34*k,10*k); c.fill();
+  c.fillStyle='#e03131'; c.strokeStyle='#862e2e'; c.lineWidth=6*k; c.beginPath(); c.roundRect(x-w/2,yH,w,h,26*k); c.fill(); c.stroke();
+  c.fillStyle='#d0ebff'; c.beginPath(); c.roundRect(x-w/2+24*k,yH+26*k,w-48*k,h-70*k,14*k); c.fill();
+  c.fillStyle='#c92a2a'; c.fillRect(x-w/2+6*k,yBas-40*k,w-12*k,34*k);
+  if(texte){ const pw=250*k, ph=66*k, py=yH-6*k;
+    c.fillStyle='#f8f9fa'; c.strokeStyle='#e03131'; c.lineWidth=6*k; c.beginPath(); c.roundRect(x+w/2-pw-20*k,py-ph,pw,ph,12*k); c.fill(); c.stroke();
+    ecrire(c,texte,x+w/2-pw/2-20*k,py-ph/2+2*k,44*k,'#e03131'); }
+  return {g:x-w/2+30*k,d:x+w/2-30*k,sol:yBas-36*k}; }
+/* Une calculatrice : (x, y) = le centre ; s = 1 ≈ 230 × 320 px ; texte = l'écran */
+function calculatriceM(c,x,y,s=1,z=1,texte='?'){ if(z<=0) return; s*=Math.min(1.15,z); const w=230*s, h=320*s;
+  c.lineJoin='round'; c.fillStyle='#343a40'; c.strokeStyle='#868e96'; c.lineWidth=5; c.beginPath(); c.roundRect(x-w/2,y-h/2,w,h,22*s); c.fill(); c.stroke();
+  c.fillStyle='#c3fae8'; c.beginPath(); c.roundRect(x-w/2+20*s,y-h/2+22*s,w-40*s,70*s,8*s); c.fill();
+  ecrire(c,texte,x+40*s,y-h/2+58*s,52*s,'#087f5b');
+  for(let i=0;i<4;i++) for(let j=0;j<4;j++){ c.fillStyle=j===3?'#fd7e14':'#868e96'; c.beginPath();
+    c.roundRect(x-w/2+22*s+j*48*s,y-h/2+112*s+i*48*s,38*s,38*s,8*s); c.fill(); } }
+/* Un panier de pique-nique en osier, nappe à carreaux rouges : (x, yBas) = le milieu du bas ; s = 1 ≈ 260 px de large */
+function panierPiqueM(c,x,yBas,s=1,z=1){ if(z<=0) return; s*=Math.min(1.15,z); const w=260*s, h=150*s, yH=yBas-h;
+  c.lineJoin='round'; c.strokeStyle='#8f5a1d'; c.lineWidth=12*s; c.beginPath(); c.arc(x,yH,w*.36,Math.PI,0); c.stroke();
+  c.fillStyle='#d9a441'; c.strokeStyle='#8f5a1d'; c.lineWidth=5; c.beginPath();
+  c.moveTo(x-w/2,yH); c.lineTo(x+w/2,yH); c.lineTo(x+w*.4,yBas); c.lineTo(x-w*.4,yBas); c.closePath(); c.fill(); c.stroke();
+  c.lineWidth=3; for(const v of [.33,.66]){ c.beginPath(); c.moveTo(x-w/2+w*.1*v,yH+h*v); c.lineTo(x+w/2-w*.1*v,yH+h*v); c.stroke(); }
+  for(let i=0;i<8;i++){ c.fillStyle=i%2?'#f8f9fa':'#e03131'; c.fillRect(x-w/2+i*w/8,yH-18*s,w/8,22*s); } }

@@ -17955,6 +17955,60 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_comparer&display=simple"
  },
+ "cm2-masse-convertir": {
+  "fichier": "cm2/maths/masse/02-convertir/eleveai-maths-cm2-masse-convertir.mp4",
+  "poster": "cm2/maths/masse/02-convertir/eleveai-maths-cm2-masse-convertir.png",
+  "vignette": "cm2/maths/masse/02-convertir/eleveai-maths-cm2-masse-convertir.vignette.webp",
+  "titre": "0,75 kg, c'est combien de grammes ? — Convertir des masses — épisode 2 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_convertir&display=simple"
+ },
+ "cm2-masse-convertir-short": {
+  "fichier": "cm2/maths/masse/02-convertir/eleveai-maths-cm2-masse-convertir-short.mp4",
+  "poster": "cm2/maths/masse/02-convertir/eleveai-maths-cm2-masse-convertir-short-miniature.png",
+  "vignette": "cm2/maths/masse/02-convertir/eleveai-maths-cm2-masse-convertir-short-miniature.vignette.webp",
+  "titre": "0,5 kg de farine : combien de grammes ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_convertir&display=simple"
+ },
+ "cm2-masse-estimer": {
+  "fichier": "cm2/maths/masse/03-estimer/eleveai-maths-cm2-masse-estimer.mp4",
+  "poster": "cm2/maths/masse/03-estimer/eleveai-maths-cm2-masse-estimer.png",
+  "vignette": "cm2/maths/masse/03-estimer/eleveai-maths-cm2-masse-estimer.vignette.webp",
+  "titre": "Une baleine bleue pèse-t-elle 150 kg ou 150 t ? — Estimer une masse — épisode 3 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_estimer&display=simple"
+ },
+ "cm2-masse-estimer-short": {
+  "fichier": "cm2/maths/masse/03-estimer/eleveai-maths-cm2-masse-estimer-short.mp4",
+  "poster": "cm2/maths/masse/03-estimer/eleveai-maths-cm2-masse-estimer-short-miniature.png",
+  "vignette": "cm2/maths/masse/03-estimer/eleveai-maths-cm2-masse-estimer-short-miniature.vignette.webp",
+  "titre": "Un grain de riz pèse-t-il 1 gramme ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_estimer&display=simple"
+ },
+ "cm2-masse-defi": {
+  "fichier": "cm2/maths/masse/04-defi/eleveai-maths-cm2-masse-defi.mp4",
+  "poster": "cm2/maths/masse/04-defi/eleveai-maths-cm2-masse-defi.png",
+  "vignette": "cm2/maths/masse/04-defi/eleveai-maths-cm2-masse-defi.vignette.webp",
+  "titre": "Montgolfière : 450 kg au plus, combien de passagers ? — Le défi des masses — épisode 4 · Maths CM2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_defi&display=simple"
+ },
+ "cm2-masse-defi-short": {
+  "fichier": "cm2/maths/masse/04-defi/eleveai-maths-cm2-masse-defi-short.mp4",
+  "poster": "cm2/maths/masse/04-defi/eleveai-maths-cm2-masse-defi-short-miniature.png",
+  "vignette": "cm2/maths/masse/04-defi/eleveai-maths-cm2-masse-defi-short-miniature.vignette.webp",
+  "titre": "Le téléphérique porte 0,4 t : combien de kg reste-t-il ? #maths #cm2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cm2&matiere=maths&notion=masse&microId=masse_defi&display=simple"
+ },
  "cm1-entier-comparer": {
   "fichier": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer.mp4",
   "poster": "cm1/maths/entiers/02-comparer/eleveai-maths-cm1-entier-comparer.png",

@@ -941,6 +941,24 @@
     "margo": [320, 720, 640],
     "ceinture": "blanche"
   },
+  "cm2-masse-convertir-short": {
+    "question": ["0,5 kg de farine :", "combien de grammes ?"],
+    "calcul": [["0,5 kg", "blanc", 190], ["= ? g", "rouge", 190]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
+  },
+  "cm2-masse-estimer-short": {
+    "question": ["Un grain de riz :", "combien de grammes ?"],
+    "calcul": [["1 grain", "blanc", 190], ["= ? g", "rouge", 190]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
+  },
+  "cm2-masse-defi-short": {
+    "question": ["Le téléphérique porte 0,4 t :", "combien de kg reste-t-il ?"],
+    "calcul": [["0,4 t − 260 kg", "blanc", 130], ["= ? kg", "rouge", 190]],
+    "margo": [320, 720, 640],
+    "ceinture": "blanche"
+  },
   "cm1-entier-lire-short": {
     "question": ["« Huit mille neuf »", "ça s'écrit comment ?"],
     "calcul": [["8 900 ?", "rouge", 210], ["8 009", "vert", 210]],
