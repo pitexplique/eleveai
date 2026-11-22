@@ -196,6 +196,17 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "cm2-masse-estimer-short": 4.17,
   "cm2-masse-defi": 8.2,
   "cm2-masse-defi-short": 4.17,
+  // Série IDENTITÉS REMARQUABLES 4e (22/11/2026) : fin commune, mesurée par `python manim/passe_identites.py coupes`.
+  "4e-identites-lier": 8.3,
+  "4e-identites-lier-short": 4.69,
+  "4e-identites-reconnaitre": 8.3,
+  "4e-identites-reconnaitre-short": 4.68,
+  "4e-identites-developper": 8.3,
+  "4e-identites-developper-short": 4.69,
+  "4e-identites-choisir": 8.3,
+  "4e-identites-choisir-short": 4.68,
+  "4e-identites-defi": 8.3,
+  "4e-identites-defi-short": 4.68,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {

@@ -1018,5 +1018,45 @@
     "question": ["De 569 à 600, il manque :", "31 ou 41 ?"],
     "calcul": [["569 → 600", "blanc", 150], ["41 ?", "rouge", 170]],
     "ceinture": "blanche"
+  },
+  "4e-identites-lier-short": {
+    "question": ["(x + 5)², c'est", "seulement x² + 25 ?"],
+    "calcul": [["(x + 5)²", "blanc", 170], ["= x² + 25 ?", "rouge", 150]],
+    "ceinture": "jaune",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "4e-identites-reconnaitre-short": {
+    "question": ["49 × 51", "de tête en 3 secondes ?"],
+    "calcul": [["49 × 51", "blanc", 190], ["= (50 − 1)(50 + 1)", "jaune", 95], ["= ?", "rouge", 170]],
+    "ceinture": "jaune",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "4e-identites-developper-short": {
+    "question": ["Le carré piégé :", "ça commence par 2x² ?"],
+    "calcul": [["(2x + 3)²", "blanc", 170], ["= 2x² + … ?", "rouge", 150]],
+    "ceinture": "orange",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "4e-identites-choisir-short": {
+    "question": ["4 produits ?", "Il y a plus rapide !"],
+    "calcul": [["(x + 6)(x − 6)", "blanc", 130], ["= ?", "rouge", 190]],
+    "ceinture": "orange",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "4e-identites-defi-short": {
+    "question": ["(2 + 8)² est-il égal", "à 2² + 8² ?"],
+    "calcul": [["(2 + 8)²", "blanc", 170], ["= 2² + 8² ?", "rouge", 150]],
+    "ceinture": "orange",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
   }
 }

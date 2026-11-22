@@ -107813,6 +107813,786 @@
         "cuisine",
         "jeux-defis"
       ]
+    },
+    {
+      "id": "4e-identites-lier",
+      "pas_avant": "2027-06-25",
+      "prioritaire": true,
+      "notionId": "litteral_identite_remarquable",
+      "microId": "litteral_identite_lier_distributivite",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/identites/01-lier/eleveai-maths-4e-identites-lier.mp4",
+      "miniature": "4e/maths/identites/01-lier/eleveai-maths-4e-identites-lier.png",
+      "titre": "(x + 4)² : d'où vient la formule ? — Identités remarquables — épisode 1 · Maths 4e",
+      "accroche": "Nadia est architecte. Une cliente a une terrasse carrée de x mètres de côté, et veut l'agrandir de 4 mètres dans chaque sens. Quelle est la nouvelle aire ? Un carré découpé va nous montrer d'où vient la formule.\n\nDans cette vidéo :\n• (x + 4)², c'est (x + 4) × (x + 4) : une expression multipliée par elle-même\n• la terrasse découpée : le carré x², deux bandes de 4x, le coin 16\n• c'est exactement la double distributivité : 4 produits, 4 morceaux\n• on réduit : (x + 4)² = x² + 8x + 16, les deux bandes forment le double produit\n• le piège : (x + 4)² ≠ x² + 16, on a oublié les bandes\n• avec des lettres : (a + b)² = a² + 2ab + b²\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : développe (x + 6)².\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-identite-remarquable\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-identite-remarquable\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_lier_distributivite&display=simple\n\n🔢 Épisode 1 sur 5 de la série Identités remarquables d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le carré d'une somme"
+        ],
+        [
+          "00:08",
+          "Nadia, architecte"
+        ],
+        [
+          "00:27",
+          "Côté fois côté"
+        ],
+        [
+          "00:42",
+          "Question 1"
+        ],
+        [
+          "01:14",
+          "La terrasse découpée"
+        ],
+        [
+          "01:34",
+          "La double distributivité"
+        ],
+        [
+          "01:51",
+          "Réduire : le double produit"
+        ],
+        [
+          "02:06",
+          "On vérifie pour x = 1"
+        ],
+        [
+          "02:21",
+          "Le piège"
+        ],
+        [
+          "02:33",
+          "Question 2"
+        ],
+        [
+          "03:06",
+          "Avec des lettres : (a + b)²"
+        ],
+        [
+          "03:22",
+          "À toi de jouer"
+        ],
+        [
+          "03:39",
+          "Correction"
+        ],
+        [
+          "03:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-identite-remarquable",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-identite-remarquable",
+      "tags": [
+        "identités remarquables",
+        "carré d'une somme",
+        "double distributivité",
+        "double produit",
+        "développer",
+        "calcul littéral",
+        "architecte",
+        "aire d'un carré",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:42",
+          "question": "Que veut dire (x + 5)² ?",
+          "choix": [
+            "(x + 5) × 2",
+            "(x + 5) × (x + 5)",
+            "x² + 25"
+          ],
+          "reponse": 1,
+          "explication": "Le carré, c'est l'expression multipliée par elle-même."
+        },
+        {
+          "t": "02:33",
+          "question": "Développe (x + 2)².",
+          "choix": [
+            "x² + 4",
+            "x² + 2x + 4",
+            "x² + 4x + 4"
+          ],
+          "reponse": 2,
+          "explication": "Les deux bandes valent 2x chacune : 4x en tout."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "histoire-geographie"
+      ]
+    },
+    {
+      "id": "4e-identites-lier-short",
+      "pas_avant": "2027-06-25",
+      "prioritaire": true,
+      "notionId": "litteral_identite_remarquable",
+      "microId": "litteral_identite_lier_distributivite",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-identites-lier",
+      "fichier": "4e/maths/identites/01-lier/eleveai-maths-4e-identites-lier-short.mp4",
+      "miniature": "4e/maths/identites/01-lier/eleveai-maths-4e-identites-lier-short.png",
+      "titre": "(x + 5)² = x² + 25 ? Faux ! Il manque deux bandes 🔍 — 4e #Shorts",
+      "accroche": "Un carré de côté x. On allonge chaque côté de 5. Son aire gagne seulement 25 ? Non : il y a aussi deux bandes de 5x, qu'on oublie souvent.\n(x + 5)² = x² + 10x + 25.\n\nVoix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : développe (x + 7)². Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_lier_distributivite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #identitesremarquables #4e #collège",
+      "tags": [
+        "carré d'une somme",
+        "identités remarquables",
+        "double produit",
+        "calcul littéral",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:30",
+          "question": "(x + 1)², ça fait combien ?",
+          "choix": [
+            "x² + 2x + 1",
+            "x² + 1",
+            "x² + x + 1"
+          ],
+          "reponse": 0,
+          "explication": "Deux bandes de x : 2x."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-identites-reconnaitre",
+      "pas_avant": "2027-06-26",
+      "prioritaire": true,
+      "notionId": "litteral_identite_remarquable",
+      "microId": "litteral_identite_reconnaitre",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/identites/02-reconnaitre/eleveai-maths-4e-identites-reconnaitre.mp4",
+      "miniature": "4e/maths/identites/02-reconnaitre/eleveai-maths-4e-identites-reconnaitre.png",
+      "titre": "49 × 51 de tête : les 3 formes — Identités remarquables — épisode 2 · Maths 4e",
+      "accroche": "Karim est comptable dans un magasin de vélos. Il doit calculer 49 × 51, sans calculatrice. Il trouve tout de suite : 2 499. Son secret ? Il a reconnu une forme.\n\nDans cette vidéo :\n• les trois formes : (a + b)², (a − b)², (a + b)(a − b)\n• deux parenthèses identiques avec un plus : (a + b)²\n• avec un moins : (a − b)²\n• les mêmes termes avec des signes contraires : (a + b)(a − b) ; 49 × 51 = (50 − 1)(50 + 1) = 2 499\n• le piège : (x + 3)(x + 5) n'est aucune des trois formes, on fait la double distributivité\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : donne la forme de (3x + 1)², (y − 5)(y + 5) et (10 − x)².\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-identite-remarquable\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-identite-remarquable\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_reconnaitre&display=simple\n\n🔢 Épisode 2 sur 5 de la série Identités remarquables d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les trois formes"
+        ],
+        [
+          "00:07",
+          "Karim, comptable"
+        ],
+        [
+          "00:25",
+          "Trois formes à reconnaître"
+        ],
+        [
+          "00:48",
+          "Le carré d'une somme"
+        ],
+        [
+          "01:00",
+          "Le carré d'une différence"
+        ],
+        [
+          "01:17",
+          "Question 1"
+        ],
+        [
+          "01:46",
+          "Somme fois différence"
+        ],
+        [
+          "02:14",
+          "Le piège"
+        ],
+        [
+          "02:32",
+          "Question 2"
+        ],
+        [
+          "03:08",
+          "À toi de jouer"
+        ],
+        [
+          "03:26",
+          "Correction"
+        ],
+        [
+          "03:47",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-identite-remarquable",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-identite-remarquable",
+      "tags": [
+        "identités remarquables",
+        "reconnaître une identité",
+        "calcul mental",
+        "49 × 51",
+        "calcul littéral",
+        "comptable",
+        "vélos",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:17",
+          "question": "Quelle est la forme de (x − 6)² ?",
+          "choix": [
+            "(a − b)²",
+            "(a + b)²",
+            "(a + b)(a − b)"
+          ],
+          "reponse": 0,
+          "explication": "Deux parenthèses identiques avec un moins."
+        },
+        {
+          "t": "02:32",
+          "question": "Laquelle est une identité remarquable ?",
+          "choix": [
+            "(x + 4)(x + 2)",
+            "(x + 4)(2x − 4)",
+            "(x − 4)(x + 4)"
+          ],
+          "reponse": 2,
+          "explication": "Les mêmes termes, x et 4, avec des signes contraires."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "transports"
+      ]
+    },
+    {
+      "id": "4e-identites-reconnaitre-short",
+      "pas_avant": "2027-06-26",
+      "prioritaire": true,
+      "notionId": "litteral_identite_remarquable",
+      "microId": "litteral_identite_reconnaitre",
+      "classe": "4e",
+      "ceinture": "jaune",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-identites-reconnaitre",
+      "fichier": "4e/maths/identites/02-reconnaitre/eleveai-maths-4e-identites-reconnaitre-short.mp4",
+      "miniature": "4e/maths/identites/02-reconnaitre/eleveai-maths-4e-identites-reconnaitre-short.png",
+      "titre": "49 × 51 de tête en 3 secondes ? Vrai ! Le secret 🧠 — 4e #Shorts",
+      "accroche": "49 × 51 de tête, en 3 secondes ? 49 = 50 − 1, 51 = 50 + 1 : les mêmes termes avec des signes contraires. C'est la forme (a − b)(a + b) : 50² − 1 = 2 499.\n\nVoix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : écris 29 × 31 avec la même forme. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #identitesremarquables #4e #collège",
+      "tags": [
+        "calcul mental",
+        "identités remarquables",
+        "astuce de calcul",
+        "calcul littéral",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "ceinture jaune",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:30",
+          "question": "Laquelle a la même forme que 49 × 51 ?",
+          "choix": [
+            "(x + 3)²",
+            "(x − 3)²",
+            "(x − 3)(x + 3)"
+          ],
+          "reponse": 2,
+          "explication": "Les mêmes termes, avec des signes contraires."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-identites-developper",
+      "pas_avant": "2027-06-27",
+      "prioritaire": true,
+      "notionId": "litteral_identite_remarquable",
+      "microId": "litteral_identite_developper",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/identites/03-developper/eleveai-maths-4e-identites-developper.mp4",
+      "miniature": "4e/maths/identites/03-developper/eleveai-maths-4e-identites-developper.png",
+      "titre": "Développer (a + b)² en une ligne — Identités remarquables — épisode 3 · Maths 4e",
+      "accroche": "Lina est paysagiste. Dans un jardin public, elle construit un bassin carré de x mètres de côté, entouré d'une allée de 1 mètre. Le grand carré a pour côté x + 2. Quelle est l'aire de l'allée ?\n\nDans cette vidéo :\n• on repère a et b, puis on écrit les trois termes : a², 2ab, b²\n• (x + 2)² − x² : l'aire de l'allée vaut 4x + 4\n• (a − b)² : le double produit est négatif, le dernier terme positif\n• avec un coefficient : (2x + 3)², le carré de 2x, c'est 4x²\n• (a + b)(a − b) = a² − b² ne garde que deux termes\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : l'allée fait 2 m de large : quelle est son aire ?\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-identite-remarquable\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-identite-remarquable\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_developper&display=simple\n\n🔢 Épisode 3 sur 5 de la série Identités remarquables d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Développer avec une identité"
+        ],
+        [
+          "00:07",
+          "Lina, paysagiste"
+        ],
+        [
+          "00:27",
+          "a², 2ab, b²"
+        ],
+        [
+          "00:48",
+          "L'aire de l'allée"
+        ],
+        [
+          "01:01",
+          "Question 1"
+        ],
+        [
+          "01:33",
+          "Le carré d'une différence"
+        ],
+        [
+          "01:55",
+          "Avec un coefficient"
+        ],
+        [
+          "02:17",
+          "Somme fois différence"
+        ],
+        [
+          "02:33",
+          "Question 2"
+        ],
+        [
+          "03:06",
+          "À toi de jouer"
+        ],
+        [
+          "03:22",
+          "Correction"
+        ],
+        [
+          "03:36",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-identite-remarquable",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-identite-remarquable",
+      "tags": [
+        "identités remarquables",
+        "développer",
+        "carré d'une différence",
+        "double produit",
+        "calcul littéral",
+        "paysagiste",
+        "aire d'une allée",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:01",
+          "question": "Développe (x + 10)².",
+          "choix": [
+            "x² + 100",
+            "x² + 10x + 100",
+            "x² + 20x + 100"
+          ],
+          "reponse": 2,
+          "explication": "Le double produit : 2 × x × 10 = 20x."
+        },
+        {
+          "t": "02:33",
+          "question": "Développe (x + 9)(x − 9).",
+          "choix": [
+            "x² − 18x − 81",
+            "x² − 81",
+            "x² + 81"
+          ],
+          "reponse": 1,
+          "explication": "(a + b)(a − b) = a² − b² : x² − 81."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-identites-developper-short",
+      "pas_avant": "2027-06-27",
+      "prioritaire": true,
+      "notionId": "litteral_identite_remarquable",
+      "microId": "litteral_identite_developper",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-identites-developper",
+      "fichier": "4e/maths/identites/03-developper/eleveai-maths-4e-identites-developper-short.mp4",
+      "miniature": "4e/maths/identites/03-developper/eleveai-maths-4e-identites-developper-short.png",
+      "titre": "(2x + 3)² = 2x² + … ? Faux ! Le carré piégé 🔍 — 4e #Shorts",
+      "accroche": "(2x + 3)². Ça commence par 2x² ? Attention au piège ! a vaut 2x : a² = 2x × 2x = 4x². 2ab = 2 × 2x × 3 = 12x. b² = 9.\n(2x + 3)² = 4x² + 12x + 9.\n\nVoix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : développe (3x − 2)². Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_developper&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #identitesremarquables #4e #collège",
+      "tags": [
+        "carré d'une somme",
+        "identités remarquables",
+        "piège",
+        "calcul littéral",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "(5x)², ça fait combien ?",
+          "choix": [
+            "5x²",
+            "25x²",
+            "10x"
+          ],
+          "reponse": 1,
+          "explication": "5x × 5x : 5 × 5, et x × x."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-identites-choisir",
+      "pas_avant": "2027-06-28",
+      "prioritaire": true,
+      "notionId": "litteral_identite_remarquable",
+      "microId": "litteral_identite_choisir",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/identites/04-choisir/eleveai-maths-4e-identites-choisir.mp4",
+      "miniature": "4e/maths/identites/04-choisir/eleveai-maths-4e-identites-choisir.png",
+      "titre": "Identité ou double distributivité ? — Identités remarquables — épisode 4 · Maths 4e",
+      "accroche": "Emma est styliste. Pour un défilé, elle découpe une nappe carrée de côté x + 5 et un foulard rectangulaire de x + 5 sur x − 2. Quelle est l'aire de chaque pièce ? Pas la même méthode pour les deux !\n\nDans cette vidéo :\n• avant de développer, on regarde les parenthèses\n• identiques : un carré, (x + 5)² = x² + 10x + 25\n• les mêmes termes avec des signes contraires : a² − b²\n• sinon : la double distributivité, qui marche toujours\n• le piège : forcer une identité ; mais (x + 3)(3 + x), c'est bien un carré\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : choisis la méthode, puis développe (x − 3)(x + 8) et (x − 3)(x + 3).\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-identite-remarquable\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-identite-remarquable\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_choisir&display=simple\n\n🔢 Épisode 4 sur 5 de la série Identités remarquables d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Choisir la bonne méthode"
+        ],
+        [
+          "00:07",
+          "Emma, styliste"
+        ],
+        [
+          "00:24",
+          "La nappe : un carré"
+        ],
+        [
+          "00:42",
+          "Le foulard : la double distributivité"
+        ],
+        [
+          "01:03",
+          "Question 1"
+        ],
+        [
+          "01:38",
+          "La méthode"
+        ],
+        [
+          "02:00",
+          "Le piège"
+        ],
+        [
+          "02:19",
+          "Question 2"
+        ],
+        [
+          "02:54",
+          "À toi de jouer"
+        ],
+        [
+          "03:11",
+          "Correction"
+        ],
+        [
+          "03:31",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-identite-remarquable",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-identite-remarquable",
+      "tags": [
+        "identités remarquables",
+        "double distributivité",
+        "choisir une méthode",
+        "développer",
+        "calcul littéral",
+        "styliste",
+        "couture",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:03",
+          "question": "Pour (x − 7)(x + 7), quelle méthode est la plus rapide ?",
+          "choix": [
+            "l'identité (a − b)(a + b)",
+            "l'identité (a − b)²",
+            "aucune identité ne marche"
+          ],
+          "reponse": 0,
+          "explication": "Les mêmes termes, avec des signes contraires : x² − 49."
+        },
+        {
+          "t": "02:19",
+          "question": "Développe (4 + x)(x + 4).",
+          "choix": [
+            "x² + 16",
+            "x² + 4x + 16",
+            "x² + 8x + 16"
+          ],
+          "reponse": 2,
+          "explication": "4 + x et x + 4, c'est pareil : c'est (x + 4)²."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "4e-identites-choisir-short",
+      "pas_avant": "2027-06-28",
+      "prioritaire": true,
+      "notionId": "litteral_identite_remarquable",
+      "microId": "litteral_identite_choisir",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-identites-choisir",
+      "fichier": "4e/maths/identites/04-choisir/eleveai-maths-4e-identites-choisir-short.mp4",
+      "miniature": "4e/maths/identites/04-choisir/eleveai-maths-4e-identites-choisir-short.png",
+      "titre": "(x + 6)(x − 6) : 4 produits ? Il y a plus rapide ⚡ — 4e #Shorts",
+      "accroche": "(x + 6)(x − 6). Tu sors les quatre produits ? Les mêmes termes avec des signes contraires : l'identité donne tout de suite x² − 36. Avec les quatre produits, 6x et −6x s'annulent : même résultat, en plus long.\n\nVoix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : développe (x − 10)(x + 10). Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_choisir&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #identitesremarquables #4e #collège",
+      "tags": [
+        "identités remarquables",
+        "astuce",
+        "double distributivité",
+        "calcul littéral",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:26",
+          "question": "Et pour (x + 6)(x − 1) ?",
+          "choix": [
+            "la double distributivité",
+            "l'identité (a + b)²",
+            "l'identité (a + b)(a − b)"
+          ],
+          "reponse": 0,
+          "explication": "6 et 1 sont différents : pas d'identité."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "4e-identites-defi",
+      "pas_avant": "2027-06-29",
+      "prioritaire": true,
+      "notionId": "litteral_identite_remarquable",
+      "microId": "litteral_identite_defi",
+      "classe": "4e",
+      "ceinture": "verte",
+      "serie": "Maths 4e",
+      "type": "longue",
+      "fichier": "4e/maths/identites/05-defi/eleveai-maths-4e-identites-defi.mp4",
+      "miniature": "4e/maths/identites/05-defi/eleveai-maths-4e-identites-defi.png",
+      "titre": "(x + 5)² = x² + 25 ? Faux ! — Identités remarquables — épisode 5 · Maths 4e",
+      "accroche": "Aya est ingénieure en intelligence artificielle. Elle apprend à un correcteur automatique à repérer les erreurs des élèves. Sur une copie : (x + 5)² = x² + 25. Comment le correcteur sait-il que c'est faux ?\n\nDans cette vidéo :\n• tester avec un nombre : si les deux côtés diffèrent, l'égalité est fausse\n• l'erreur n° 1 : oublier le double produit\n• l'erreur n° 2 : dans (a − b)², le dernier terme reste positif\n• l'erreur n° 3 : (x − 2)² n'est pas x² − 4\n• le carré de 2x, c'est 4x²\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : trouve l'erreur dans (2x + 1)² = 2x² + 4x + 1.\n\nPour s'entraîner :\n• la fiche de cours : https://www.eleveai.fr/fiches-cours/maths/4e/litteral-identite-remarquable\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-identite-remarquable\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_defi&display=simple\n\n🔢 Épisode 5 sur 5 de la série Identités remarquables d'EleveAI, en 4e.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les erreurs des identités"
+        ],
+        [
+          "00:12",
+          "Aya, ingénieure en IA"
+        ],
+        [
+          "00:31",
+          "Tester avec un nombre"
+        ],
+        [
+          "00:52",
+          "Erreur 1 : le double produit"
+        ],
+        [
+          "01:06",
+          "Question 1"
+        ],
+        [
+          "01:46",
+          "Erreur 2 : le signe"
+        ],
+        [
+          "02:03",
+          "Erreur 3"
+        ],
+        [
+          "02:24",
+          "Question 2"
+        ],
+        [
+          "03:10",
+          "Défi : trouve l'erreur"
+        ],
+        [
+          "03:25",
+          "Correction"
+        ],
+        [
+          "03:44",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/4e/litteral-identite-remarquable",
+      "fiche_exercices": "https://www.eleveai.fr/fiches-exercices/maths/4e/litteral-identite-remarquable",
+      "tags": [
+        "identités remarquables",
+        "erreurs fréquentes",
+        "vérifier un calcul",
+        "double produit",
+        "calcul littéral",
+        "ingénieure",
+        "intelligence artificielle",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:06",
+          "question": "Quelle égalité est juste ?",
+          "choix": [
+            "(x + 9)² = x² + 81",
+            "(x + 9)² = x² + 9x + 81",
+            "(x + 9)² = x² + 18x + 81"
+          ],
+          "reponse": 2,
+          "explication": "Le double produit : 2 × x × 9 = 18x."
+        },
+        {
+          "t": "02:24",
+          "question": "Une copie dit : (x − 2)² = x² − 4. Le correcteur teste x = 5. Que trouve-t-il ?",
+          "choix": [
+            "9 à gauche, 9 à droite : c'est juste",
+            "9 à gauche, 21 à droite : c'est faux",
+            "21 à gauche, 9 à droite : c'est faux"
+          ],
+          "reponse": 1,
+          "explication": "(5 − 2)² = 9 et 5² − 4 = 21 : c'est faux."
+        }
+      ],
+      "centres": [
+        "technologie-ia",
+        "sciences"
+      ]
+    },
+    {
+      "id": "4e-identites-defi-short",
+      "pas_avant": "2027-06-29",
+      "prioritaire": true,
+      "notionId": "litteral_identite_remarquable",
+      "microId": "litteral_identite_defi",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-identites-defi",
+      "fichier": "4e/maths/identites/05-defi/eleveai-maths-4e-identites-defi-short.mp4",
+      "miniature": "4e/maths/identites/05-defi/eleveai-maths-4e-identites-defi-short.png",
+      "titre": "(2 + 8)² = 2² + 8² ? Faux ! Vérifions 🔍 — 4e #Shorts",
+      "accroche": "(2 + 8)², est-ce égal à 2² + 8² ? À gauche : 10² = 100. À droite : 4 + 64 = 68. Il manque 32 : le double produit, 2 × 2 × 8.\n(a + b)², ce n'est pas a² + b² !\n\nVoix de synthèse.\n🥋 Ceinture orange.\n👉 À toi : combien vaut (1 + 9)² − 1² − 9² ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #identitesremarquables #4e #collège",
+      "tags": [
+        "erreur fréquente",
+        "identités remarquables",
+        "double produit",
+        "calcul littéral",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "EleveAI",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:29",
+          "question": "Et avec x : (x + 8)² ?",
+          "choix": [
+            "x² + 64",
+            "x² + 16x + 64",
+            "x² + 8x + 64"
+          ],
+          "reponse": 1,
+          "explication": "Le double produit : 2 × x × 8."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
     }
   ]
 }

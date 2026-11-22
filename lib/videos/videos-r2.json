@@ -18224,5 +18224,95 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=nombre_entier&microId=entier_multiple&display=simple"
+ },
+ "4e-identites-choisir": {
+  "fichier": "4e/maths/identites/04-choisir/eleveai-maths-4e-identites-choisir.mp4",
+  "poster": "4e/maths/identites/04-choisir/eleveai-maths-4e-identites-choisir.png",
+  "vignette": "4e/maths/identites/04-choisir/eleveai-maths-4e-identites-choisir.vignette.webp",
+  "titre": "Identité ou double distributivité ? — Identités remarquables — épisode 4 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_choisir&display=simple"
+ },
+ "4e-identites-choisir-short": {
+  "fichier": "4e/maths/identites/04-choisir/eleveai-maths-4e-identites-choisir-short.mp4",
+  "poster": "4e/maths/identites/04-choisir/eleveai-maths-4e-identites-choisir-short.png",
+  "vignette": "4e/maths/identites/04-choisir/eleveai-maths-4e-identites-choisir-short.vignette.webp",
+  "titre": "(x + 6)(x − 6) : 4 produits ? Il y a plus rapide ⚡ — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_choisir&display=simple"
+ },
+ "4e-identites-defi": {
+  "fichier": "4e/maths/identites/05-defi/eleveai-maths-4e-identites-defi.mp4",
+  "poster": "4e/maths/identites/05-defi/eleveai-maths-4e-identites-defi.png",
+  "vignette": "4e/maths/identites/05-defi/eleveai-maths-4e-identites-defi.vignette.webp",
+  "titre": "(x + 5)² = x² + 25 ? Faux ! — Identités remarquables — épisode 5 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_defi&display=simple"
+ },
+ "4e-identites-defi-short": {
+  "fichier": "4e/maths/identites/05-defi/eleveai-maths-4e-identites-defi-short.mp4",
+  "poster": "4e/maths/identites/05-defi/eleveai-maths-4e-identites-defi-short.png",
+  "vignette": "4e/maths/identites/05-defi/eleveai-maths-4e-identites-defi-short.vignette.webp",
+  "titre": "(2 + 8)² = 2² + 8² ? Faux ! Vérifions 🔍 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_defi&display=simple"
+ },
+ "4e-identites-developper": {
+  "fichier": "4e/maths/identites/03-developper/eleveai-maths-4e-identites-developper.mp4",
+  "poster": "4e/maths/identites/03-developper/eleveai-maths-4e-identites-developper.png",
+  "vignette": "4e/maths/identites/03-developper/eleveai-maths-4e-identites-developper.vignette.webp",
+  "titre": "Développer (a + b)² en une ligne — Identités remarquables — épisode 3 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_developper&display=simple"
+ },
+ "4e-identites-developper-short": {
+  "fichier": "4e/maths/identites/03-developper/eleveai-maths-4e-identites-developper-short.mp4",
+  "poster": "4e/maths/identites/03-developper/eleveai-maths-4e-identites-developper-short.png",
+  "vignette": "4e/maths/identites/03-developper/eleveai-maths-4e-identites-developper-short.vignette.webp",
+  "titre": "(2x + 3)² = 2x² + … ? Faux ! Le carré piégé 🔍 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_developper&display=simple"
+ },
+ "4e-identites-lier": {
+  "fichier": "4e/maths/identites/01-lier/eleveai-maths-4e-identites-lier.mp4",
+  "poster": "4e/maths/identites/01-lier/eleveai-maths-4e-identites-lier.png",
+  "vignette": "4e/maths/identites/01-lier/eleveai-maths-4e-identites-lier.vignette.webp",
+  "titre": "(x + 4)² : d'où vient la formule ? — Identités remarquables — épisode 1 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_lier_distributivite&display=simple"
+ },
+ "4e-identites-lier-short": {
+  "fichier": "4e/maths/identites/01-lier/eleveai-maths-4e-identites-lier-short.mp4",
+  "poster": "4e/maths/identites/01-lier/eleveai-maths-4e-identites-lier-short.png",
+  "vignette": "4e/maths/identites/01-lier/eleveai-maths-4e-identites-lier-short.vignette.webp",
+  "titre": "(x + 5)² = x² + 25 ? Faux ! Il manque deux bandes 🔍 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_lier_distributivite&display=simple"
+ },
+ "4e-identites-reconnaitre": {
+  "fichier": "4e/maths/identites/02-reconnaitre/eleveai-maths-4e-identites-reconnaitre.mp4",
+  "poster": "4e/maths/identites/02-reconnaitre/eleveai-maths-4e-identites-reconnaitre.png",
+  "vignette": "4e/maths/identites/02-reconnaitre/eleveai-maths-4e-identites-reconnaitre.vignette.webp",
+  "titre": "49 × 51 de tête : les 3 formes — Identités remarquables — épisode 2 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_reconnaitre&display=simple"
+ },
+ "4e-identites-reconnaitre-short": {
+  "fichier": "4e/maths/identites/02-reconnaitre/eleveai-maths-4e-identites-reconnaitre-short.mp4",
+  "poster": "4e/maths/identites/02-reconnaitre/eleveai-maths-4e-identites-reconnaitre-short.png",
+  "vignette": "4e/maths/identites/02-reconnaitre/eleveai-maths-4e-identites-reconnaitre-short.vignette.webp",
+  "titre": "49 × 51 de tête en 3 secondes ? Vrai ! Le secret 🧠 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_reconnaitre&display=simple"
  }
 }
