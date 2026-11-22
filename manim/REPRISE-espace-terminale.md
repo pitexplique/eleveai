@@ -3,6 +3,18 @@
 **12 épisodes = les 12 micro-compétences du coach**, 6 pour `geometrie_espace` et 6 pour
 `produit_scalaire_espace`. Chacun : une vidéo paysage + un short. 24 vidéos.
 
+> ⛔⛔ **LES 12 ENTRÉES DE MANIFESTE N'EXISTENT QUE DANS
+> `manim/poste2/FICHES-YOUTUBE-espace-terminale.md`, ET NULLE PART AILLEURS.**
+> Mesuré le 22/11 : **0 entrée `espace` dans `manim/manifeste-youtube.json`**, et
+> `brancher-videos-coach.mjs --classe terminale-spe` répond « Rien à brancher ».
+> Tant que personne ne reporte ces entrées dans le registre au moment de la
+> publication, **E1 est une vidéo qu'aucun élève ne peut atteindre** : elle existe en
+> HD, et le coach ne la propose à personne.
+> ⚠️ Une liste tenue à la main à côté d'un registre, c'est l'accident qui est déjà
+> arrivé trois fois dans ce dépôt — des pages en ligne que rien ne déclarait. Le
+> registre est partagé et se commit **par clés** (`manim/outils-commit-cles.py`) :
+> c'est pour ça que la liste est à part, pas pour l'oublier.
+
 > ⭐ Cette note est **vivante** : on y ajoute ce qui a coûté cher, pas ce qui a marché.
 > Elle est à la série « espace » ce que `manim/REPRISE-entiers-cm1-6e.md` est aux entiers.
 > ⛔ Lire celle des entiers AUSSI : ses 43 pièges valent ici, cette note ne les répète pas.
@@ -14,7 +26,7 @@
 | pièce | état |
 |---|---|
 | les 12 voix | ✅ écrites, validées par Frédéric, passe maths **exécutée** |
-| les 180 WAV + 12 fichiers de marques | ✅ faits (10 201 marques, 71 min de voix) |
+| les 180 WAV + 12 fichiers de marques | ✅ faits (**10 278** marques mesurées, 71 min de voix) |
 | la boîte à outils de dessin | ✅ `manim/poste2/espace3d.py` + sa planche |
 | E1 `espace_vecteurs` | ✅ script écrit, `-ql` regardé, défauts corrigés |
 | les 11 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
@@ -217,6 +229,11 @@ yeux : `AUDIT-ABSENT « 5 » (0.5)`.
 
 ## ⛔ Un zéro se vérifie, un `head` se compte
 
+⭐ **Et un total s'additionne sur la sortie, pas dans la tête.** J'ai annoncé « 10 480
+marques » : c'était 10 201 + 279 calculé de mémoire, jamais mesuré. Le compte réel est
+**10 278**, parce que deux fichiers avaient été réécrits entre-temps. Un chiffre qu'on
+n'a pas produit par une commande n'est pas une mesure, c'est un souvenir.
+
 Trois fois dans la même journée, un `head` ou un `tail -1` m'a fait conclure « rien à
 signaler » alors que la sortie en portait des dizaines : 6 signalements d'audit au lieu
 de 64, « 0 perte » de cues au lieu de 100, et un script copié hors de `manim/poste2/`
@@ -287,6 +304,21 @@ sa tête, après 20 rendus HD.
 ⚠️ **Le verrou est unique sur la machine** (`$env:TEMP/eleveai-rendu-hd.lock`, mutex
 `mkdir`/`rmdir`). Un verrou orphelin bloque tout le monde. ⭐⭐ **Le HD seulement quand on est
 certain** : tout se contrôle en `-ql`, et l'écran final se relit **avant** le HD.
+
+⛔⛔ **Un correctif de marques POSTÉRIEUR à un rendu rend ce rendu suspect.** Le HD de
+E1 est daté 08:36 ; le correctif « 0,5 vaut trois marques » a réécrit les douze fichiers
+à 08:44, huit minutes après. Le rendu avait-il été calé sur des marques périmées ? La
+question ne se tranche pas à la date, elle se tranche sur le CONTENU :
+
+```
+git show <commit-du-rendu>:manim/scripts/terminale/<script>_marques.json > /tmp/avant.json
+diff /tmp/avant.json manim/scripts/terminale/<script>_marques.json && echo "rendu valide"
+```
+
+Vérifié ainsi pour E1 : **fichier identique, 642 marques des deux côtés** — le bug du
+« 0,5 » ne touchait pas cette voix-là, et son HD tient. ⭐ Deux commandes, et elles
+valent une heure de rendu. ⚠️ C'est le même contrôle que la série des entiers avait
+appris sur les dates de WAV : **la date ne prouve rien, le contenu tranche**.
 
 ⛔⛔ **L'heure d'un verrou se LIT, elle ne s'écrit pas de mémoire.** J'ai noté dans un
 rapport « verrou pris à 09:05 » alors que `stat` disait 08:31 — un chiffre inventé, et
