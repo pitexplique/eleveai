@@ -23,6 +23,24 @@ import { toutesLesVideos } from "@/lib/videos/r2";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
 import { PHRASE_ESSAI } from "@/lib/tarifs";
 import { BandeChiffres, EncartsFamilleProf } from "@/components/accueil/CompteurFamille";
+import { listerProblemes } from "@/lib/problemes/registre";
+import { FICHES_EXERCICES_REGISTRE } from "@/lib/fiches-exercices/registre";
+
+/* ⭐ 22/11/2026, Frédéric : « compléter Choisis ta classe avec le nombre
+   d'exercices interactifs et énigmes ». Exercices : le nombre écrit dans le
+   titre de chaque feuille (« … : 20 exercices corrigés », « 20 problèmes
+   corrigés ») ; énigmes : les problèmes à projeter de /enigmes-maths. */
+function compterParClasse() {
+  const exercices: Record<string, number> = {};
+  for (const [cle, v] of Object.entries(FICHES_EXERCICES_REGISTRE)) {
+    const [matiere, classe] = cle.split("/");
+    const n = matiere === "maths" ? v.titre.match(/(\d+)\s+(?:exercices|problèmes)/) : null;
+    if (n) exercices[classe] = (exercices[classe] ?? 0) + Number(n[1]);
+  }
+  const enigmes: Record<string, number> = {};
+  for (const p of listerProblemes()) enigmes[p.classe] = (enigmes[p.classe] ?? 0) + p.problemes.length;
+  return { exercices, enigmes };
+}
 
 const slab = Roboto_Slab({ subsets: ["latin"], weight: ["300", "700"], display: "swap" });
 
@@ -61,6 +79,7 @@ export default function AccueilCeo() {
   const videos = toutesLesVideos().filter((v) => v.vignette);
   const nbVideos = (dossier: string) => videos.filter((v) => v.fichier.split("/")[0] === dossier).length;
 
+  const comptes = compterParClasse();
   const cartes = PROGRAMME_CLASSES.map((c) => {
     const siennes = notions.filter((n) => n.classeSlug === c.slug);
     return {
@@ -69,6 +88,8 @@ export default function AccueilCeo() {
       micros: siennes.reduce((s, n) => s + n.micros.length, 0),
       videos: nbVideos(DOSSIER_VIDEO[c.slug] ?? c.slug),
       apercu: [...new Set(siennes.map((n) => n.label.toLowerCase()))].slice(0, 4),
+      exercices: comptes.exercices[c.slug] ?? 0,
+      enigmes: comptes.enigmes[c.slug] ?? 0,
     };
   }).filter((c) => c.micros > 0);
 
@@ -141,6 +162,16 @@ export default function AccueilCeo() {
 
         {/* 4. CHOISIS TA CLASSE */}
         <section id="classes" className="mt-14 scroll-mt-24">
+          {/* 22/11, Frédéric : « mets les chips avant Choisis ta classe ». */}
+          <p className="text-center text-sm font-bold text-slate-500">Va directement à :</p>
+          <div className="mb-10 mt-2 flex flex-wrap justify-center gap-2">
+            {ACCES_DIRECTS.map(({ href, label, Icone, couleur }) => (
+              <Link key={href} href={href} className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-slate-200 hover:ring-teal-400">
+                <Icone className={`h-4 w-4 ${couleur}`} aria-hidden />
+                {label}
+              </Link>
+            ))}
+          </div>
           <h2 className="text-center text-3xl font-black sm:text-4xl">Choisis ta classe</h2>
           <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {cartes.map((c) => {
@@ -156,15 +187,28 @@ export default function AccueilCeo() {
                     </Link>
                   </div>
                   <p className="mt-3 min-h-[3rem] text-slate-700">{c.apercu.join(", ")}, et plus.</p>
-                  <div className="mt-3 flex flex-wrap items-center gap-x-2 border-t border-slate-200 pt-3 text-sm font-bold">
+                  <div className="mt-3 grid grid-cols-[auto_auto] justify-between gap-x-3 gap-y-1 whitespace-nowrap border-t border-slate-200 pt-3 text-sm font-bold">
                     <Link href={`/coach-ia/maths?classe=${c.slug}`} className="text-sky-700 hover:underline">
                       S&apos;entraîner ›
                     </Link>
                     {c.videos > 0 && (
                       <>
-                        <span className="text-slate-300" aria-hidden="true">|</span>
                         <Link href={`/video?classe=${DOSSIER_VIDEO[c.slug] ?? c.slug}`} className="text-sky-700 hover:underline">
                           {c.videos} vidéos ›
+                        </Link>
+                      </>
+                    )}
+                    {c.exercices > 0 && (
+                      <>
+                        <Link href={`/fiches-exercices?classe=maths-${c.slug}`} className="text-sky-700 hover:underline">
+                          {c.exercices.toLocaleString("fr-FR")} exercices interactifs ›
+                        </Link>
+                      </>
+                    )}
+                    {c.enigmes > 0 && (
+                      <>
+                        <Link href={`/enigmes-maths/${c.slug}`} className="text-sky-700 hover:underline">
+                          {c.enigmes} énigmes ›
                         </Link>
                       </>
                     )}
@@ -174,15 +218,6 @@ export default function AccueilCeo() {
             })}
           </div>
 
-          <p className="mt-6 text-center text-sm font-bold text-slate-500">Ou directement :</p>
-          <div className="mt-2 flex flex-wrap justify-center gap-2">
-            {ACCES_DIRECTS.map(({ href, label, Icone, couleur }) => (
-              <Link key={href} href={href} className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-slate-200 hover:ring-teal-400">
-                <Icone className={`h-4 w-4 ${couleur}`} aria-hidden />
-                {label}
-              </Link>
-            ))}
-          </div>
         </section>
 
         {/* 5. QUI EST DERRIÈRE — une ligne, sans promesse qu'on ne tient pas. */}
