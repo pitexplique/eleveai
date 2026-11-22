@@ -34,7 +34,8 @@
 | E3 `espace_droite_parametrique` | ✅ **HD livré** (5 min 56, 0 bord, planche HD regardée) |
 | E4 `espace_plan_equation` | ✅ **HD livré** (6 min 09, 0 bord, planche HD regardée) |
 | E5 `espace_position_relative` | ✅ **HD livré** (6 min 34, 0 bord, planche HD regardée) |
-| les 7 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
+| E6 `espace_defi` | ✅ **HD livré** (6 min 49, 0 bord, planche HD regardée) |
+| les 6 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
 | les 12 shorts | ⏳ pas de voix encore |
 | les rendus HD, le branchement coach, les fiches YouTube | ⏳ |
 
@@ -46,8 +47,8 @@ marques est déjà dans `manim/scripts/terminale/<script>_marques.json`, sa voix
 
 ## 🔁 La relève — ce qu'il faut savoir pour reprendre la série
 
-*(écrit le 22/11/2026 par la session qui a produit E1 et E2, tenu à jour par celle qui a
-produit E3 — règle de Frédéric : une seule productrice par série, relève à 65 %.)*
+*(écrit le 22/11/2026 par la session qui a produit E1 et E2, tenu à jour par celles de E3
+puis de E6 — règle de Frédéric : une seule productrice par série, relève à 65 %.)*
 
 **L'état exact**, vérifiable en trois commandes :
 
@@ -57,20 +58,25 @@ ls manim/sorties/terminale/maths/geometrie/*/*.mp4   # les HD livrés
 python manim/poste2/verifier-voix-espace.py          # 12 voix, 15 clips, lettres A 8 B 8 C 8
 ```
 
-**Le prochain geste, sans réfléchir** : écrire `espace_defi.py` (E6).
-Tout l'attend — sa voix dans `manim/poste2/VOIX-espace-terminale.md`, ses WAV, ses marques,
-et un socle qui a maintenant tout ce qu'il faut : `systeme`, `ligne_param`, `eq_plan`,
-`eq_zero`, `choix3`, `au_fin`, `trip(par=True)`, `q_tete(largeur, xl)`, et — dans
-`espace3d.py` — `platitude()` et `plan_dessine()`.
-⚠️ **E6 garde 13 cues non placées**, toutes dans des clips de correction : les regarder
-AVANT d'écrire ses écrans, pas après (`manim/poste2/cues2marques-espace.py`).
-⭐ Le modèle le plus propre est **`espace_position_relative.py` (E5)** : quinze écrans,
-chaque `sans_audit` porte sa raison écrite à côté, chaque cote est MESURÉE hors rendu, et
-chaque correction d'image est commentée à l'endroit où elle a été payée.
-⛔ Lire d'abord « Ce que l'épisode 3 a appris », « Ce que l'épisode 4 a confirmé » et
-« Ce que l'épisode 5 a appris » plus bas : ensemble elles disent où regarder en premier,
-et ce qu'aucun outil ne voit. ⭐ Celle de E5 est la plus utile des trois, parce que deux
-de ses défauts étaient dans les OUTILS et touchent donc les sept épisodes qui restent.
+**Le prochain geste, sans réfléchir** : écrire `ps_espace_calculer.py` (E7, le premier
+des six du produit scalaire). Tout l'attend — sa voix dans
+`manim/poste2/VOIX-espace-terminale.md`, ses WAV, ses marques, et un socle complet :
+`systeme`, `ligne_param`, `eq_plan`, `eq_zero`, `choix2`, `choix3`, `au_fin`,
+`trip(par=True)`, `q_tete(largeur, xl)`, et — dans `espace3d.py` — `platitude()`,
+`plan_dessine()` et le cube.
+⭐ Le modèle le plus propre est maintenant **`espace_defi.py` (E6)** : quinze écrans,
+chaque `sans_audit` porte sa raison, chaque cote vient d'une COMMANDE
+(`manim/poste2/mesure-espace-defi.py`, à recopier pour E7), et chaque correction d'image
+est commentée à l'endroit où elle a été payée. `espace_position_relative.py` (E5) reste
+le modèle pour tout ce qui touche aux plans.
+⛔ Lire d'abord « Ce que l'épisode 5 a appris » et « Ce que l'épisode 6 a appris » plus
+bas (puis celles de E3 et E4) : ensemble elles disent où regarder en premier, et ce
+qu'aucun outil ne voit. ⭐ Celle de E6 est la plus utile, parce que **deux de ses défauts
+sont dans les OUTILS** et touchent donc les six épisodes qui restent : le convertisseur de
+marques perdait les décimales répétées, et `col()` rapetisse un bloc pour une raison qui
+n'a rien à voir avec sa largeur.
+⚠️ `ps_espace_angle` (E10) garde **2 cues non placées** : les regarder au moment d'écrire
+cet épisode-là. Les 13 de `espace_defi` sont résolues, à la source (voir plus bas).
 
 **L'ordre pour chaque épisode, sans en sauter un :**
 
@@ -93,9 +99,10 @@ de ses défauts étaient dans les OUTILS et touchent donc les sept épisodes qui
 - le **branchement au coach** vient APRÈS la publication — mesuré :
   `brancher-videos-coach.mjs --classe terminale-spe` répond « Rien à brancher » tant que
   la vidéo n'est pas en ligne ;
-- `espace_defi` garde **13** cues non placées et `ps_espace_angle` **2** (toutes dans des
-  clips de correction) : à regarder au moment d'écrire ces deux épisodes-là — et
-  `espace_defi`, c'est **le prochain**.
+- `ps_espace_angle` garde **2** cues non placées (« 577 », dans le clip de correction) :
+  à regarder au moment d'écrire E10. ✅ Les **13** de `espace_defi` ne sont plus un
+  problème : elles venaient d'un défaut du convertisseur, corrigé le 22/11 (voir « Ce que
+  l'épisode 6 a appris »).
 
 **Ce qu'il ne faut pas refaire :**
 
@@ -168,7 +175,8 @@ sa question doit retrouver le même dessin.
 | `manim/poste2/verifier-avant-rendu.py <script.py> <Scene>` | **avant le dry run** | un `au_mot` sans marque à son offset exact, une question qui n'est pas dans la voix mot pour mot |
 | `AUDIT=1 BORDS=1 … --dry_run` | **avant le `-ql`** | un nombre affiché que la voix ne dit pas, un objet hors de la marge de 3 % |
 | `scripts/planche-video.py` **+** `manim/poste2/apercu-instants.py` | **sur le `-ql`, avant le HD** | ce qui est réellement affiché — et **rien d'autre ne le voit** |
-| un **recadrage PIL ×2,5 à ×3** sur la figure de l'épisode | **sur le `-ql`, après la planche** | ce qu'une vignette à trois colonnes ne montre pas : sur E5, deux défauts de la figure du pont, dont « la route ne passe sous le pont nulle part » |
+| un **recadrage PIL ×2,5 à ×3** sur la figure de l'épisode | **sur le `-ql`, après la planche** | ce qu'une vignette à trois colonnes ne montre pas : sur E5, deux défauts de la figure du pont, dont « la route ne passe sous le pont nulle part » ; sur E6, les trois axes couchés sur les arêtes du cube et le « y » planté dedans |
+| `manim/poste2/mesure-espace-defi.py` (à recopier par épisode) | **avant même le premier dry run** | un bloc RÉTRÉCI par `col()` ou `gauche()`, ou posé hors de la marge de 3 % — onze sur E6, dont le tableau des huit sommets tombé à 21 px. ⛔ Rien d'autre ne le voit : le dry run est propre, et à la planche un texte deux fois trop petit ne « saute » pas aux yeux |
 
 ⛔⛔ **PLANCHE *ET* GROS PLANS, jamais la planche seule.** `planche-video.py` prend la
 **dernière image** de chaque écran : tout ce qui est recouvert à la fin y est invisible.
@@ -449,6 +457,148 @@ méthode, ces deux fonctions ne pouvaient pas s'en servir).
 
 ---
 
+## ⛔⛔ Ce que l'épisode 6 a appris — à lire AVANT d'écrire l'épisode 7
+
+Huit défauts, et **deux d'entre eux sont dans les OUTILS**, donc ils attendent les six
+épisodes qui restent. Les six autres sont des récidives — mais trois ont pris une forme
+que la liste ne prévoyait pas, et c'est ça qu'il faut lire.
+
+### ⭐⭐ LE CONVERTISSEUR DE MARQUES PERDAIT LES DÉCIMALES RÉPÉTÉES — et il mentait
+
+La note annonçait « E6 garde **13 cues non placées** ». Mesuré, c'était pire que « non
+placées » : **huit marques tombaient sur le MAUVAIS mot**, et celles-là ne se signalent
+nulle part.
+
+| ce que la marque disait | ce que la voix dit | écart |
+|---|---|---|
+| le « 0,5 » du choix C de `04-question` à 14,12 s | 17,32 s | **3,2 s d'avance** |
+| le « 1 » du choix C à 15,96 s | 20,23 s | **4,3 s d'avance** |
+| le « 0,5 » final de `09b-correction` à 36,69 s | 39,93 s | **3,24 s d'avance** |
+
+⛔ Conséquence si on n'avait rien vu : `q_montrer_choix` aurait affiché les cartes B et C
+**trois et quatre secondes avant** que la voix les dise. Et `verifier-avant-rendu.py` ne
+dit RIEN de ce cas : il vérifie qu'une marque EXISTE à l'offset, pas qu'elle est juste.
+
+**La cause** (dans `manim/poste2/cues2marques-espace.py`) : WinRT lit « 0,5 » comme trois
+mots, donc **3 cues par occurrence**. Mais le JETON de la cue dépend de la PONCTUATION qui
+suit, pas du nombre d'émissions : « 0,5 ; » arrive comme `'0,5 '` (le point-virgule est
+rendu comme un blanc), « 0,5. » comme `'0,5'` nu. Or `doublon_groupe` tranchait sur ce
+blanc. Donc, dans les deux sens :
+- `'0,5 '` répété **6** fois (= DEUX occurrences) ne gardait qu'UNE marque ;
+- `'0,5'` NU répété **3** fois (= UNE occurrence) les gardait toutes les TROIS, posées sur
+  trois positions différentes — donc sur les coordonnées suivantes.
+
+⭐ **La règle neuve est COMPTÉE, pas devinée** : sur les 15 runs de cues décimales des 12
+voix de la série, **toutes les longueurs sont des multiples de 3**, et n/3 est exactement
+le nombre d'occurrences du jeton dans cette portion de texte. D'où : dans un run de cues
+identiques dont le jeton est une décimale, on garde la PREMIÈRE de chaque groupe de 3.
+
+✅ **Effet mesuré, les 12 voix régénérées dans un dossier temporaire et comparées au
+fichier commité** : `espace_defi` passe de 912 à **923 marques, 0 cue non placée** ; les
+dix autres voix sont **identiques au diff** — y compris `espace_position_relative` (E5),
+qui n'a que des runs de 3 à une occurrence.
+
+> ⛔⛔ **SAUF `espace_repere_coordonnees` (E2), ET SON HD EST LIVRÉ.** La règle neuve
+> change **4 marques** de son clip `05-appliquer` (positions 151, 157, 318 et 324). Son
+> fichier **n'a PAS été régénéré**, exprès : le rendu HD d'E2 a été calé dessus.
+> ⭐ Et il n'y a rien à rattraper : les 4 marques fautives sont toutes **EN RETARD** de
+> 0,31 s à 1,50 s (13,04 au lieu de 11,55 ; 13,35 au lieu de 13,04 ; 29,46 au lieu de
+> 27,96 ; 29,77 au lieu de 29,46), jamais en avance. Un affichage tardif ne montre rien
+> avant l'heure : **E2 n'est pas en cause**, elle pose seulement deux triplets jusqu'à
+> 1,5 s trop tard.
+> ⚠️ Donc : si quelqu'un relance `voix-espace-tous-les-wav.sh` ou le convertisseur sur
+> E2, **son fichier de marques changera** et son HD deviendra suspect au sens du contrôle
+> par le CONTENU (plus bas). Décision à prendre à ce moment-là, pas avant.
+
+### ⭐⭐ `col()` RAPETISSE UN BLOC POUR UNE RAISON QUI N'A RIEN À VOIR AVEC SA LARGEUR
+
+Le second garde-fou de `col()` (« bas sous −1,95 ET droite au-delà de 5,3 → réduire à
+3,1 ») protège Ti-Margo. Il a frappé **trois fois** sur cet épisode, et à chaque fois le
+texte rapetissé était celui qui portait la leçon :
+
+| le bloc | ce qui s'est passé | la mesure |
+|---|---|---|
+| la chaîne des quatre maillons (01) | posée à y = **−1,15**, son bas tombe à **−1,96** | réduite de 3,45 à 2,50, soit **18,8 px** |
+| « A, Ω et G alignés » (05) | posé à −1,85, bas à −2,01 | réduit de 4,30 à 3,10 |
+| les trois cartes de la question 2 | `q_tete` les mesure **centrées en y = 0** : à trois lignes chacune, leur bas y est à −2,10 | les trois choix à **20,4 px** |
+
+⛔⛔ **Et le troisième est le plus traître de toute la série : c'est AJOUTER une ligne à un
+choix qui rapetisse les trois cartes.** On croit gagner de la place, on perd 6 px. Le
+remède mesuré : *une seule* des trois cartes sur trois lignes (la plus longue), les deux
+autres sur deux → 25,8 px.
+⭐ Et la règle générale : **un écart d'un centième de unité décide**. −1,15 passe, −1,05
+passe, et entre les deux il y a un seuil qu'aucune relecture ne voit.
+
+### ⛔⛔ LES TROIS AXES D'UN REPÈRE (A ; AB, AD, AE) SONT TROIS ARÊTES DU CUBE
+
+Le cube ABCDEFGH revient dans **9 épisodes sur 12**, donc ce défaut-là vaut pour eux tous.
+Dessiné avec `self.repere(...)` et `portee=2`, les axes se superposent exactement aux
+arêtes A B, A D et A E sur leur première moitié — on ne voit pas des axes, on voit des
+arêtes grises doublées. Et surtout : **le bout de l'axe des y tombe À L'INTÉRIEUR du
+cube**. Le projeté de (0 ; 2 ; 0) est (0,82 ; 0,57) et la silhouette du cube va jusqu'à
+(1,41 ; 1,29) : à l'image, une flèche grise plantée dans le solide et un « y » italique
+collé sous le F. ⛔ Allonger la portée n'arrange rien avant 4, où les axes feraient quatre
+fois le cube.
+⭐ Le remède est celui des manuels : **pas d'axes**. `cube_repere()` ne dessine que le
+cube, et l'écran 02 montre le repère avec `base_repere()` — trois flèches posées sur les
+trois arêtes qui partent de A, sans lettres.
+⚠️ Deuxième cote du même défaut : **`u = 0,95 est trop petit pour un cube unité**. Une
+étiquette de sommet est posée à 0,26 du sommet ; quand l'arête fait 0,95 à l'écran, les
+noms se touchent et le « F » se lit dans le cube. Cet épisode est à **1,25 → 1,6**.
+
+### ⛔ UN BLOC PASSÉ DE DEUX À TROIS LIGNES, ET `l2[1]` N'EN MONTRE PLUS QUE DEUX
+
+Vu à la planche : l'écran 07b affichait « à la même distance de A — » puis plus rien, un
+tiret dans le vide au milieu de l'explication. La troisième ligne existait, elle était
+bien placée, elle n'était **jamais jouée** — `self.play(FadeIn(l2[1], …))` au lieu de
+`l2[1:]`. ⛔ Aucun outil ne peut le dire : le mobjet est construit, il est dans la marge,
+aucun nombre n'est en avance. ⭐ **Quand un bloc change de nombre de lignes, relire les
+index de TOUS ses `play`.**
+
+### ⛔ ET LE MÊME CHANGEMENT A FAIT ÉCRIRE UN BLOC SUR UNE CARTE
+
+Toujours 07b : en passant le choix B de deux à trois lignes, le bas des cartes est
+descendu de −1,23 à **−1,70**, et le bloc « la même norme… », mesuré pour l'ancienne
+hauteur, s'écrivait **par-dessus la carte C**. C'est le défaut n° 1 de l'épisode 3, à sa
+troisième récidive. ⭐ **Changer la hauteur des cartes oblige à recompter TOUS les blocs de
+l'écran de réponse**, pas seulement ceux qu'on vient d'écrire.
+
+### ⛔ UN GROS `AUDIT-TARD` CACHAIT DEUX VRAIES AVANCES — sixième et septième fois
+
+Le contrôle de l'épisode 5 (relire à la main les plus gros TARD, triés par valeur) a servi
+deux fois de plus :
+
+| signalement | la vraie mesure |
+|---|---|
+| `AUDIT-TARD 09b « 1 » (t + t − 1 =) **10,94 s**` | « t + t − 1 = 0 » était posé avec « on remplace », à 28,8 s, et la voix ne dit « moins 1 » qu'à 32,0 s : **2,7 s d'AVANCE** |
+| `AUDIT-TARD 04b « 1 » (la hauteur 1) **3,25 s**` | la ligne posée à son premier mot mettait son « 1 » à l'écran **0,13 s** avant qu'il soit dit |
+
+L'audit avait rattaché ces « 1 » à d'autres « 1 » dits bien plus tôt — il y en a neuf dans
+`09b`. ⭐ Le contrôle coûte deux minutes et il a trouvé quelque chose sur **trois épisodes
+d'affilée** : `grep -o "AUDIT-TARD.*" <log>`, trié par valeur décroissante, et on lit les
+premiers. ⚠️ Les deux `AUDIT-AVANCE` francs du premier dry run (06, « 1 » et « 6 cm »,
+1,12 s et 1,39 s) étaient le piège n° 6 des entiers sous sa forme habituelle : **un nombre
+qui clôt un membre de phrase se pose à `au_fin`, même s'il y en a deux dans la ligne**.
+
+### ⭐ CE QUI A BIEN MARCHÉ, ET QU'IL FAUT REFAIRE
+
+- **Mesurer toutes les cotes AVANT de rendre**, dans un script à part
+  (`manim/poste2/mesure-espace-defi.py`) qui rend un code de sortie : il a attrapé onze
+  blocs rétrécis ou hors marge que la planche n'aurait montrés qu'après un rendu.
+  ⭐ Il est écrit pour être recopié d'un épisode à l'autre.
+- **Dessiner la section d'un plan comme une SECTION DU SOLIDE** : le plan P : x + z − 1 = 0
+  coupe le cube selon le rectangle B C H E, dont les quatre coins SONT des sommets. Un
+  `r.plan(...)` carré centré sur Ω n'aurait coïncidé avec aucun d'eux, et l'écran devait
+  justement montrer que B, C, H et E sont dessus. (`platitude((1 ; 0 ; 1))` = 26,1° :
+  ce plan-là se projette très bien, et l'aire projetée garde **49 %** de l'aire réelle.)
+- **Choisir une figure par la MESURE et non à vue** : l'écran 06 a besoin de deux droites
+  du cube qui SEMBLENT se croiser sans être coplanaires. (A C) et (E B) le font
+  (paramètres 0,589 et 0,831 : deux points différents superposés). ⛔ Les paires choisies
+  à vue ratent — (A G) et (B H) se coupent VRAIMENT, (A G) et (B D) ne se croisent même
+  pas à l'écran. `se_croisent_a_lecran()` est dans `espace_defi.py`.
+
+---
+
 ## ⛔⛔ Les marques : « 0,5 » vaut TROIS marques
 
 WinRT émet une marque par mot **prononcé**, pas par mot écrit. Il lit « 0,5 » comme
@@ -473,8 +623,13 @@ tentatives fausses pour les trouver :
 Et la recherche se fait sur le premier jeton **en mot entier** : sans frontière, le
 jeton « a » se pose dans « coordonnées ».
 
-⚠️ Deux épisodes gardent des cues non placées, à regarder quand leur script s'écrira :
-`espace_defi` (13) et `ps_espace_angle` (2).
+⛔⛔ **CES DEUX RÈGLES NE SUFFISAIENT PAS, ET IL A FALLU UNE TROISIÈME (22/11, E6).**
+Elles tranchaient sur le BLANC que la ponctuation colle au jeton, et une décimale répétée
+les met en défaut **dans les deux sens** — six cues gardées pour une, ou une pour deux.
+La règle qui manquait est comptée, pas devinée : **une décimale vaut exactement 3 cues par
+occurrence**, donc on garde la première de chaque groupe de 3. Détail, chiffres et effet
+sur E2 : « Ce que l'épisode 6 a appris ».
+⚠️ Il reste `ps_espace_angle` (2 cues non placées, « 577 ») — à regarder en écrivant E10.
 
 ## ⛔ Écrire un nombre à la française
 

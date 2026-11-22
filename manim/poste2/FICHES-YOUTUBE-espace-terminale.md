@@ -263,7 +263,72 @@ surplus est constant dans chacun. **Aucun écran de question touché** — c'est
 
 ---
 
-## E6 à E12 — ⏳ en attente de leur rendu HD
+## E6 · `terminale-espace-defi` — ✅ rendu HD fait
+
+`manim/sorties/terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi.mp4`
+6 min 49 (409.4 s) · 29.4 Mo · **0 instant qui touche un bord** · planche HD regardée.
+⭐ Marques : **923**, et elles ont été RÉÉCRITES avant ce rendu — le convertisseur
+de la série perdait les décimales répétées, et huit marques de cette voix tombaient sur le
+mauvais mot (jusqu'à 4,3 s d'avance sur un choix de question). Détail, chiffres et effet
+sur les autres voix : `manim/REPRISE-espace-terminale.md`, « Ce que l'épisode 6 a appris ».
+⭐ `grep -c "self\.au_t("` → **0** : aucun instant relevé à la main, donc rien qui se
+périme si la voix est régénérée (piège n° 37 de la série des entiers).
+⚠️ `verifier-zone-margo --pas 1.0` : **41 instants**, qui font exactement les trois écrans
+à grosse mascotte — garde 11 s (00:00 → 00:10), finale 23 s (06:19 → 06:41), abonnement
+7 s (06:42 → 06:48) — et dont le surplus est constant à l'intérieur de chacun (≈ +440,
++462, +82 pixels). **Aucun écran de question touché** : c'est le critère.
+⚠️ Cet épisode n'a **pas de personnage** : sa voix ne nomme personne, son contexte est
+l'exercice du bac lui-même. La figure regardée au gros plan (×2,8) est donc LE CUBE, sur
+les quatre écrans où il porte quelque chose.
+
+```json
+{
+  "id": "terminale-espace-defi",
+  "notionId": "geometrie_espace",
+  "microId": "espace_defi",
+  "classe": "terminale-spe",
+  "ceinture": "verte",
+  "serie": "Maths Tle spé",
+  "type": "longue",
+  "fichier": "terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi.mp4",
+  "miniature": "terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi.png",
+  "titre": "Trois points sont toujours dans un même plan — et ça ne démontre rien · Exercice type bac dans l'espace · Tle spé",
+  "centres": ["jeux-defis"],
+  "tags": ["exercice type bac", "cube ABCDEFGH", "repère de l'espace", "alignement", "colinéarité", "intersection droite plan", "espace", "terminale", "bac"]
+}
+```
+
+**Accroche** (à relire par Frédéric avant publication) :
+
+> Au bac, l'exercice de géométrie dans l'espace a presque toujours la même forme : un
+> solide, un repère donné par l'énoncé, puis une suite de questions qui montent — des
+> coordonnées, puis une droite, puis un plan, puis une intersection. Chaque question
+> prépare la suivante. Celui qui connaît le fil ne se perd pas.
+>
+> Dans cette vidéo :
+> • le cube ABCDEFGH et le repère (A ; AB, AD, AE) : les huit sommets ne contiennent que
+>   des zéros et des uns — et l'arête vaut 1, même si ton brouillon dit 6 cm
+> • la boîte à outils en quatre objets : coordonnées et milieux, colinéarité,
+>   représentation paramétrique, équation cartésienne — et le geste qui relie tout
+> • A, le centre du cube et G alignés en deux lignes : AG = 2 AΩ
+> • le piège qui coûte des points : sur une figure en perspective, (AC) et (EB) semblent
+>   se croiser alors qu'elles ne sont pas coplanaires
+> • et le plus beau leurre de la série : « trois points sont dans un même plan » est une
+>   phrase vraie, et elle ne démontre jamais rien
+>
+> Deux questions-pauses et un défi corrigé : le plan P : x + z − 1 = 0, la droite (AG), et
+> leur point d'intersection — qui est le centre du cube, et ce n'est pas un hasard.
+> Entraîne-toi sur eleveai.fr
+
+**Chapitres**, relevés sur le rendu :
+0:00 garde · 0:10 toujours la même forme · 0:37 avant tout calcul · 1:01 la boîte à
+outils · 1:28 question 1 · 1:56 réponse · 2:19 montrons un alignement · 2:58 le piège ·
+3:38 question 2 · 4:05 réponse · 4:30 le squelette d'une copie · 4:54 à toi de jouer ·
+5:22 correction · 6:19 ce que tu as appris.
+
+---
+
+## E7 à E12 — ⏳ en attente de leur rendu HD
 
 Les identifiants sont fixés et doivent rester ceux-là (c'est sur eux que le coach
 branchera) :

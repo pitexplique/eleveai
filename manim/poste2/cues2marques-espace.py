@@ -52,6 +52,36 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 # cascade toutes les suivantes du clip.
 SAUT_MAXI = 60   # un mot fait ~10 caractères ; au-delà, on resynchronise à tort
 
+# ⛔⛔ AJOUTÉ POUR L'ÉPISODE 6 (22/11/2026) — LA RÈGLE DE `doublon_groupe` NE SAIT PAS
+# COMPTER, ET UNE DÉCIMALE RÉPÉTÉE LA MET EN DÉFAUT DANS LES DEUX SENS.
+#
+# WinRT lit « 0,5 » comme TROIS mots (« zéro virgule cinq ») : **3 cues par occurrence**.
+# Mais le JETON de la cue dépend de la PONCTUATION qui suit, pas du nombre d'émissions :
+#   · « 0,5 ; » → le point-virgule est rendu comme un blanc, donc le jeton est `'0,5 '` ;
+#   · « 0,5. »  → le jeton est `'0,5'`, nu.
+# `doublon_groupe` tranche sur ce blanc, donc :
+#   · `'0,5 '` répété 6 fois (= DEUX occurrences) ne garde qu'UNE marque — la deuxième
+#     coordonnée n'a plus de marque du tout, et un `au_mot` dessus prend celle d'avant ;
+#   · `'0,5'` NU répété 3 fois (= UNE occurrence) garde les TROIS — elles se posent sur
+#     trois positions différentes, donc sur les coordonnées SUIVANTES, et tout glisse.
+#
+# ⭐⭐ MESURÉ sur les 15 runs de cues décimales des 12 voix de la série (E2, E5, E6) :
+# **toutes les longueurs de run sont des multiples de 3**, et n/3 est exactement le
+# nombre d'occurrences du jeton dans cette portion de texte. 6 → 2 occurrences,
+# 3 → 1. Aucune exception. D'où la règle, comptée et non devinée : dans un run de cues
+# IDENTIQUES dont le jeton est une décimale, on garde la PREMIÈRE de chaque groupe de 3.
+#
+# Effet mesuré sur `espace_defi` (E6) : les 13 cues « introuvables » sont toutes placées,
+# et 8 marques qui tombaient sur le mauvais mot retrouvent le leur — dont le « 0,5 » du
+# choix C de `04-question`, affiché 3,2 s avant d'être dit, et le « 0,5 » final de
+# `09b-correction`, 3,24 s avant.
+# ⚠️⚠️ `espace_repere_coordonnees` (E2) porte les mêmes runs et son HD est LIVRÉ : son
+# fichier de marques n'est donc PAS régénéré ici (voir `manim/REPRISE-espace-terminale.md`).
+# `espace_position_relative` (E5) n'a que des runs de 3 à une occurrence : la règle neuve
+# lui donne exactement les mêmes marques, vérifié par diff.
+DECIMALE = re.compile(r"^\d+,\d+$")
+EMISSIONS_DECIMALE = 3
+
 
 def MOT_ENTIER(tok):
     """Le jeton, en mot entier : ni dans un autre mot, ni dans un nombre."""
@@ -90,15 +120,22 @@ def lire_cues(tsv):
 
 def convertir(textes, cues, garder_repetitions=True):
     """Renvoie (marques, pertes). `garder_repetitions=False` reproduit le script commun."""
-    res, pos, prec = {}, {}, {}
+    res, pos, prec, run = {}, {}, {}, {}
     pertes = []
     for cle, t, mot in cues:
         pt = prec.get(cle)
         if pt and pt[0] == mot:
+            run[cle] = k = run.get(cle, 1) + 1       # le rang de cette cue dans le run
             if not garder_repetitions:
                 continue                            # la règle du script commun
-            if doublon_groupe(mot):                 # la seconde émission d'un « nombre + mot »
+            if DECIMALE.match(mot.split()[0]):
+                # une décimale est LUE en trois mots : 3 cues par occurrence (mesuré).
+                if k % EMISSIONS_DECIMALE != 1:
+                    continue
+            elif doublon_groupe(mot):               # la seconde émission d'un « nombre + mot »
                 continue
+        else:
+            run[cle] = 1
         prec[cle] = (mot, t)
         raw = textes[cle]
         p = pos.get(cle, 0)
