@@ -304,6 +304,59 @@ d'équation qui avalait le « 2 » de « 2x + 3y − z + 1 = 0 » (22 figures ac
 - La **fiche de cours** (aucune en terminale) et la **vidéo** (aucune sur ces
   deux notions) restent entières.
 
+## Ce qui a été ouvert ensuite, le 22/11/2026 : la série vidéo
+
+Les 12 micros de l'espace sont les seules micros de terminale à avoir des banques pleines
+et **zéro vidéo**. La série est donc 12 épisodes, un par micro, chacun en paysage + short.
+
+### La décision technique, et pourquoi
+
+**Pas de scène 3D Manim : de la cavalière 2D.** Mesuré : il n'existe aucune
+`ThreeDScene` dans le dépôt. Mais la maison dessine des solides en cavalière depuis la
+5ᵉ (`manim/scripts/5e/aire_volume_5e_commun.py`, repris en 4ᵉ et en 3ᵉ). Ce qui tranche
+n'est pas le temps de rendu : **le coach montre la même projection**
+(`lib/canvas/Repere3dCanvas.tsx`, cavalière à 30°). Un élève qui regarde la vidéo puis
+ouvre sa question retrouve exactement le même dessin.
+
+`manim/poste2/espace3d.py` donne aux 12 épisodes : le repère, un point avec son escalier
+de coordonnées, un vecteur (une vraie flèche — le canvas du coach n'a que des segments),
+une droite paramétrée, un morceau de plan teinté, le cube `ABCDEFGH`, un tétraèdre, la
+marque d'angle droit, la perpendiculaire amorcée. Plus `PlancheEspace3D`, la planche de
+contrôle 4 × 2 qu'on REGARDE.
+
+⭐⭐ **Trois défauts trouvés à l'image, aucun à la lecture** : les arêtes étaient de la
+couleur du fond (cube et tétraèdre invisibles — aucun audit ne le dit, rien ne sort du
+cadre) ; le nom d'un plan tombait sur le nom de l'axe `y` ; un sommet du cube tombait à
+l'intérieur du cube.
+
+### Les voix : 12/12 écrites, et leur passe maths exécutée
+
+`manim/poste2/VOIX-espace-terminale.md` est la **source de vérité** des 12 voix
+(15 clips chacune, 180 répliques) ; les JSON de `manim/voix/` en sont extraits par
+`manim/poste2/voix-espace-depuis-md.py`. ⛔ On corrige le `.md`, jamais les JSON.
+
+Deux contrôles, tous deux **étalonnés avec des fautes posées exprès** (3/3 et 3/3) :
+
+```
+python manim/poste2/verifier-voix-espace.py          → 12 épisodes, 15 clips, 0 symbole
+                                                       non prononçable, 0 copier-coller
+python manim/poste2/controler-maths-voix-espace.py   → 0 affirmation fausse sur 180 répliques
+```
+
+Le second réécrit **en calcul** chaque nombre dit par les voix, et le compare : c'est la
+réponse à la voix validée qui disait « 6 032 a 3 centaines » dans un clip de correction.
+⛔ L'étalonnage a aussi trouvé deux de mes propres tests creux (`isclose(0, 1)`, un `True`
+en dur) : un instrument qui n'a jamais eu tort n'a peut-être jamais rien mesuré.
+
+### Ce qui n'est pas fait sur la série
+
+- ⏳ **Aucun rendu** : ni WAV, ni marques, ni script Manim, ni `-ql`, ni HD. Les 12 voix
+  attendent leur fabrication, épisode par épisode.
+- ⏳ Les **12 shorts** n'ont pas de voix : leur gabarit se relit sur un short de terminale
+  existant avant d'être écrit.
+- ⭐ Le cube `ABCDEFGH` dans le repère (A ; AB, AD, AE) revient dans **9 épisodes sur 12** :
+  c'est un décor à dessiner une fois (fait) et à réutiliser.
+
 ## Les commandes, pour refaire la mesure
 
 ```
