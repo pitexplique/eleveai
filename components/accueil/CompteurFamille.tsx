@@ -26,6 +26,113 @@ import { OFFRE, OUVERTURE_SUIVI, montant } from "@/lib/tarifs";
 
 export type VarianteCompteur = "barre" | "ligne";
 
+// ⭐⭐ 22/11/2026 — L'ACCUEIL « COMME UN CEO » (Frédéric : « refais la page
+// d'accueil comme un CEO ») : le bénéfice d'abord, la preuve ensuite, un appel
+// clair, peu de texte, aucun mot de prof. Deux pièces courtes, montées par
+// app/accueil/AccueilCeo.tsx : la bande des chiffres (la preuve) et les deux
+// encarts (Famille à gauche, Prof à droite), trois lignes chacun.
+// ⛔ Prix : seulement OFFRE de lib/tarifs.ts (validés le 22/11). Rien sur l'année,
+// le Premium, les pays, les établissements, ni sur les vidéos (libres ou comptées ?).
+
+function Ligne({ children, couleur }: { children: React.ReactNode; couleur: string }) {
+  return (
+    <li className="flex gap-1.5">
+      <span aria-hidden="true" className={couleur}>✔</span>
+      <span>{children}</span>
+    </li>
+  );
+}
+
+/** La preuve : questions en direct, animations, visiteurs, exercices. */
+export function BandeChiffres() {
+  const c = etatCompteurVideos();
+  const cap = CAP_VIDEOS.toLocaleString("fr-FR");
+  const visiteurs = visiteursDeLaSemaine();
+  const chiffre = (valeur: string, libelle: string) => (
+    <div className="flex flex-col-reverse items-center text-center">
+      <dt className="text-xs font-bold leading-tight text-slate-600 sm:text-sm">{libelle}</dt>
+      <dd className="text-2xl font-black tabular-nums text-slate-900 sm:text-3xl">{valeur}</dd>
+    </div>
+  );
+  return (
+    <div className="mx-auto max-w-4xl rounded-2xl bg-white px-4 py-4 shadow-md ring-1 ring-teal-200">
+      <p className="sr-only">En chiffres</p>
+      <dl className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <CompteurReponsesCoach chiffre className="sm:!items-center sm:!text-center [&>dd]:!text-2xl sm:[&>dd]:!text-3xl sm:[&>dt]:!text-sm" />
+        {chiffre(c.capAtteint ? `+ ${cap}` : c.nombreTexte, "animations")}
+        {visiteurs !== null && chiffre(visiteurs.toLocaleString("fr-FR"), "visiteurs par semaine")}
+        {chiffre(EXERCICES.exercices.toLocaleString("fr-FR"), "exercices de maths")}
+      </dl>
+      <p className="mt-3 border-t border-slate-100 pt-2 text-center text-sm font-bold text-slate-700">
+        🌙 Des élèves s&apos;entraînent le soir, et parfois même le matin avant l&apos;école.
+      </p>
+    </div>
+  );
+}
+
+/** Famille à gauche, Prof à droite : un titre (le bénéfice), trois lignes, le prix, un bouton. */
+export function EncartsFamilleProf() {
+  return (
+    <div className="mx-auto grid max-w-4xl items-stretch gap-4 text-left sm:grid-cols-2">
+      <div className="flex flex-col rounded-2xl bg-white p-5 shadow-sm ring-1 ring-sky-200">
+        <p className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-sky-700">
+          <Users className="h-5 w-5" aria-hidden="true" /> La famille
+        </p>
+        <p className="mt-1 text-2xl font-black leading-snug text-slate-900">Des soirées plus simples</p>
+        <p className="mt-1 flex items-center gap-2 font-bold text-slate-700">
+          <Image src="/ti-margo/animations/encouragement.png" alt="" width={320} height={320} sizes="48px" className="h-12 w-12 shrink-0" />
+          <span>Vos enfants s&apos;entraînent seuls. Vous savez où ils en sont.</span>
+        </p>
+        <ul className="mt-3 space-y-1 text-sm font-bold text-slate-700">
+          <Ligne couleur="text-sky-700">Corrigés tout de suite, la vidéo s&apos;ils bloquent</Ligne>
+          <Ligne couleur="text-sky-700">Ce qu&apos;ils ont compris, ce qu&apos;il faut revoir</Ligne>
+          <Ligne couleur="text-sky-700">Un bilan chaque semaine par courriel</Ligne>
+        </ul>
+        {/* Le prix et le bouton, calés en bas : alignés d'un encart à l'autre. */}
+        <div className="mt-auto pt-4">
+          <p className="text-lg font-black text-slate-900">
+            {montant(OFFRE.famille)} par mois, <span className="whitespace-nowrap">tous vos enfants</span>
+          </p>
+          <Link
+            href="/tarifs"
+            className="mt-3 inline-flex items-center justify-center gap-1.5 rounded-xl bg-sky-700 px-5 py-2.5 font-black text-white shadow-sm hover:bg-sky-800"
+          >
+            Voir les tarifs <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
+
+      <div className="flex flex-col rounded-2xl bg-white p-5 shadow-sm ring-1 ring-violet-200">
+        <p className="flex items-center gap-2 text-sm font-black uppercase tracking-wide text-violet-700">
+          <GraduationCap className="h-5 w-5" aria-hidden="true" /> Le prof
+        </p>
+        <p className="mt-1 text-2xl font-black leading-snug text-slate-900">Moins de corrections</p>
+        <p className="mt-1 font-bold text-slate-700">Plus de temps pour vos élèves. Chacun s&apos;entraîne à son niveau.</p>
+        <ul className="mt-3 space-y-1 text-sm font-bold text-slate-700">
+          <Ligne couleur="text-violet-700">Les exercices se corrigent tout seuls</Ligne>
+          <Ligne couleur="text-violet-700">En salle info, chaque élève en direct</Ligne>
+          <Ligne couleur="text-violet-700">Le bulletin prêt à copier dans Pronote</Ligne>
+        </ul>
+        {/* 22/11 : le Menu du jour a quitté l'accueil pour le tableau de bord du prof ; ici, la séance type. */}
+        <Link href="/seances" className="mt-2 inline-flex items-center gap-1 self-start text-sm font-black text-violet-800 underline">
+          Voir une séance en classe
+        </Link>
+        <div className="mt-auto pt-4">
+          <p className="text-lg font-black text-slate-900">
+            {montant(OFFRE.prof)} par mois, <span className="whitespace-nowrap">toutes vos classes</span>
+          </p>
+          <Link
+            href="/prof/classes"
+            className="mt-3 inline-flex items-center justify-center gap-1.5 rounded-xl bg-violet-700 px-5 py-2.5 font-black text-white shadow-sm hover:bg-violet-800"
+          >
+            Créer ma classe <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // `micros` (17/11) : le nombre de micro-compétences du CP à la Terminale, que
 // donnait le nuage « Tout le programme », retiré ; affiché dans « En chiffres ».
 // 21/11 : `micros` n'est plus affiché (« micro-compétences », un mot de prof) ; la prop reste.

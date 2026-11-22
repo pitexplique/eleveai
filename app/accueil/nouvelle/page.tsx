@@ -1,16 +1,16 @@
-// /accueil/nouvelle — MAQUETTE de l'accueil « suivi d'élève » AVEC les offres
-// pour les familles « en préparation » (suivi famille, cours en visio). noindex.
-// Le contenu vit dans ../AccueilSuivi.tsx, que /accueil monte SANS les offres
-// tant que le rectorat n'a pas donné son feu vert.
+// /accueil/nouvelle — MAQUETTE de l'accueil « comme un CEO » (22/11/2026). noindex.
+// Le contenu vit dans ../AccueilCeo.tsx. Sur le oui de Frédéric, /accueil le monte.
 
 import type { Metadata } from "next";
-import AccueilSuivi from "../AccueilSuivi";
+import AccueilCeo from "../AccueilCeo";
 
 export const metadata: Metadata = {
-  title: { absolute: "EleveAI — le suivi de chaque élève (maquette)" },
+  title: { absolute: "EleveAI — accueil (maquette)" },
   robots: { index: false, follow: false },
 };
 
+export const revalidate = 3600;
+
 export default function AccueilNouvellePage() {
-  return <AccueilSuivi offresFamille />;
+  return <AccueilCeo />;
 }
