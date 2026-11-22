@@ -77,6 +77,10 @@ export default async function OffrePays({ params }: { params: Promise<{ pays: st
             Le coach de maths qui suit votre enfant, micro-compétence par micro-compétence, avec les vidéos d&apos;un
             professeur. Pour les familles et les écoles, à {o.villes} et partout dans le pays.
           </p>
+          {/* ⏳ 22/11/2026 : la grille par pays n'est pas validée (note modele-tarifaire-22-11). */}
+          <p className="mx-auto mt-3 inline-flex rounded-full bg-amber-50 px-4 py-1.5 text-sm font-black text-amber-800 ring-1 ring-amber-200">
+            Prix à confirmer : ils seront fixés avant l&apos;ouverture.
+          </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link href="/coach-ia/maths" className="rounded-full bg-emerald-600 px-7 py-3.5 font-black text-white shadow hover:bg-emerald-700">
               Essayer le coach

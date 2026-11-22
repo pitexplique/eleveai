@@ -10,24 +10,19 @@ import TarifsClient from "./TarifsClient";
 // encore. C'est exactement la leçon de `retirer-du-sitemap-ne-ferme-rien` :
 // retirer une carte n'éteint pas une page, il faut éteindre les quatre
 // endroits — la carte, la description, le JSON-LD et le llms.txt.
-import { ETABLISSEMENT_ETRANGER, OUVERTURE_SUIVI, PRIX_MENSUEL, montant } from "@/lib/tarifs";
-import { etatCompteurVideos } from "@/lib/videos/compteur";
-
-// ⛔ 18/11/2026 : le VRAI nombre de vidéos, compté au build (fini les « 3 500 »).
-const VIDEOS_DU_JOUR = etatCompteurVideos().nombreTexte;
+import { OFFRE, montant } from "@/lib/tarifs";
 
 const url = "https://www.eleveai.fr/tarifs";
 
-// ⭐ 02/11/2026 — LA PAGE SE RALLUME, refaite autour de la grille 2026
-// (lib/tarifs.ts). Le rectorat n'exige aucune autorisation pour être
-// indépendant ; ouverture fin décembre. ⚠️ Ce texte est ce que Google affiche :
-// il suit le texte visible, et ses prix viennent des constantes.
+// ⭐ 22/11/2026 — LES TARIFS DU 22/11 (note modele-tarifaire-22-11). ⚠️ Ce texte
+// est ce que Google affiche : il suit le texte visible, ses prix viennent de
+// lib/tarifs.ts. ⛔ Aucun prix non validé (année, Premium, pays, établissements).
 const resume =
-  `Le coach de maths est illimité et ouvert à tous, avec ${VIDEOS_DU_JOUR} vidéos offertes. Le suivi de votre enfant (${montant(PRIX_MENSUEL)} par mois en France, un prix adapté à chaque pays) ouvre ${OUVERTURE_SUIVI} : ` +
-  `tout son historique, un bilan chaque semaine, et les visios « Maths réelles ». Offre aux établissements hors de France : ${ETABLISSEMENT_ETRANGER.parEleveEtParAn} par élève et par an.`;
+  `${OFFRE.questionsGratuitesParJour} questions offertes chaque jour pour essayer. Famille : ${montant(OFFRE.famille)} par mois, autant d'enfants que vous voulez, du CP à la Terminale. ` +
+  `Prof : ${montant(OFFRE.prof)} par mois, toutes vos classes. Les fiches de cours, les énigmes à projeter et les PDF restent libres.`;
 
 export const metadata: Metadata = {
-  title: "Offres — le suivi de votre enfant, la visio, les établissements hors de France",
+  title: `Tarifs — ${montant(OFFRE.famille)} par mois pour la famille ou le prof`,
   description: resume,
   alternates: { canonical: url },
   /* ✅ 02/11/2026 : `noindex` levé (il datait du 09/09, « je veux plus voir des
@@ -35,13 +30,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url,
-    title: "Les offres d'EleveAI",
+    title: "Les tarifs d'EleveAI",
     description: resume,
     siteName: "EleveAI",
     locale: "fr_FR",
-    images: [{ url: "/preview.jpg", width: 1200, height: 630, alt: "EleveAI — les offres" }],
+    images: [{ url: "/preview.jpg", width: 1200, height: 630, alt: "EleveAI — les tarifs" }],
   },
-  twitter: { card: "summary_large_image", title: "Les offres d'EleveAI", description: resume, images: ["/preview.jpg"] },
+  twitter: { card: "summary_large_image", title: "Les tarifs d'EleveAI", description: resume, images: ["/preview.jpg"] },
 };
 
 export default function Page() {

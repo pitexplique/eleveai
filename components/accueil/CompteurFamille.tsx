@@ -22,7 +22,7 @@ import { ArrowRight, GraduationCap, Gift, PlayCircle, Users } from "lucide-react
 import { CAP_VIDEOS, ECHEANCE_CAP, etatCompteurVideos } from "@/lib/videos/compteur";
 import { EXERCICES, visiteursDeLaSemaine } from "@/lib/accueil/chiffres-semaine";
 import CompteurReponsesCoach from "@/components/coach/CompteurReponsesCoach";
-import { FREE_CLASSES_PER_TEACHER, PRIX_ANNUEL, PRIX_MENSUEL, QUOTAS_IA, montant } from "@/lib/tarifs";
+import { OFFRE, OUVERTURE_SUIVI, montant } from "@/lib/tarifs";
 
 export type VarianteCompteur = "barre" | "ligne";
 
@@ -57,7 +57,7 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
         </p>
         {LIENS_OFFRE && (
           <p className="mt-1.5 flex flex-wrap justify-center gap-x-4 text-sm font-bold">
-            <Link href="#familles" className="text-sky-800 underline">L&apos;offre famille</Link>
+            <Link href="/tarifs" className="text-sky-800 underline">Les tarifs</Link>
             {CARTE_CADEAU && <Link href="/carte-cadeau" className="text-emerald-800 underline">Offrir la carte cadeau de Noël</Link>}
           </p>
         )}
@@ -110,13 +110,16 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
                 <span>Corrigés tout de suite, la vidéo s&apos;ils bloquent</span>
               </li>
             </ul>
-            <p className="mt-1.5 text-sm font-black text-sky-800">Avec le Suivi, vous savez où ils en sont :</p>
+            {/* ⭐ 22/11/2026 — LE MODÈLE DU 22/11 (note modele-tarifaire-22-11) :
+                Famille 10 €/mois, autant d'enfants qu'on veut, toutes les classes,
+                sans IA. Fini le « Suivi » à 7,95 €, les aides de Ti Margo comptées
+                et le « gratuit pour commencer ». ⛔ Prix venus de lib/tarifs.ts. */}
+            <p className="mt-1.5 text-sm font-black text-sky-800">Vous savez où ils en sont :</p>
             <ul className="mt-0.5 space-y-0.5 text-sm font-bold text-slate-700">
               {[
                 "Ce qu'ils ont compris, les 3 choses à revoir",
                 "Une alerte s'ils décrochent",
                 "Un bilan chaque semaine par courriel",
-                `${QUOTAS_IA.suiviParJour} aides de Ti Margo par jour, au lieu de ${QUOTAS_IA.gratuitParJour}`,
               ].map((t) => (
                 <li key={t} className="flex gap-1.5">
                   <span aria-hidden="true" className="text-sky-700">✔</span>
@@ -124,21 +127,18 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
                 </li>
               ))}
             </ul>
-            <p className="mt-2 text-sm font-black text-slate-800">
-              Gratuit pour commencer. Le Suivi : {montant(PRIX_MENSUEL)}/mois ou {montant(PRIX_ANNUEL)}/an.
+            <p className="mt-2 text-base font-black text-slate-900">
+              {montant(OFFRE.famille)} par mois, <span className="whitespace-nowrap">tous vos enfants</span>
+            </p>
+            <p className="text-xs font-bold text-slate-600">
+              Du CP à la Terminale, un seul compte. Ouverture {OUVERTURE_SUIVI}.
             </p>
             <div className="mt-3 flex flex-wrap items-center gap-2">
               <Link
-                href="/auth/signin?inscription=1&type=parent"
+                href="/tarifs"
                 className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-sky-700 px-4 py-2 text-sm font-black text-white shadow-sm hover:bg-sky-800"
               >
-                Créer un compte gratuit <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-              <Link
-                href="#familles"
-                className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-800 shadow-sm ring-1 ring-slate-200 hover:ring-sky-400"
-              >
-                L&apos;offre famille
+                Voir les tarifs <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
               {CARTE_CADEAU && (
                 <Link href="/carte-cadeau" className="inline-flex items-center gap-1 text-sm font-black text-emerald-800 underline">
@@ -186,6 +186,8 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
             "Toutes les notes, par micro‑compétence",
             // 19/11 : le bulletin (/prof/classes/bulletin) se copie dans Pronote.
             "Le bulletin prêt à copier dans Pronote",
+            // 22/11 : les codes élèves marchent quand le prof est connecté.
+            "Vos élèves entrent avec votre code pendant votre cours",
           ].map((t) => (
             <li key={t} className="flex gap-1.5">
               <span aria-hidden="true" className="text-violet-700">✔</span>
@@ -197,6 +199,11 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
             mieux », puis « rajoute une chips sur l'accueil à côté de créer ma
             classe » → une CHIP (même style que « Ou va directement à : »
             d'AccueilSuivi) juste après le bouton, vers le hub /seances. */}
+        {/* 22/11/2026 : Prof 10 €/mois, toutes ses classes, sans IA (remplace « 2 classes gratuites »). */}
+        <p className="mt-2 text-base font-black text-slate-900">
+          {montant(OFFRE.prof)} par mois, <span className="whitespace-nowrap">toutes vos classes</span>
+        </p>
+        <p className="text-xs font-bold text-slate-600">Sans engagement. Ouverture {OUVERTURE_SUIVI}.</p>
         <div className="mt-3 flex flex-wrap items-center gap-2">
           <Link
             href="/prof/classes"
@@ -207,12 +214,20 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
           {/* 21/11, Frédéric : « dans l'encart profs enlève énigmes à projeter »
               et « exemples de séances » (le Menu du jour, juste dessous, mène
               à la séance en entier). */}
-          <span className="text-sm font-bold text-violet-800">
-            {FREE_CLASSES_PER_TEACHER} classes gratuites, un code par élève
-          </span>
+
         </div>
         <p className="mt-1.5 text-xs font-bold text-slate-600">La séance type : <span className="whitespace-nowrap">20 min de cours,</span> <span className="whitespace-nowrap">25 min de coach et vidéos,</span> <span className="whitespace-nowrap">10 min de synthèse</span></p>
       </div>
+
+      {/* ⭐ 22/11/2026 — LA LIGNE DES 10 QUESTIONS, sous les deux cartes.
+          ⛔ Le compteur n'est pas codé : on l'annonce pour l'ouverture, on ne
+          dit pas qu'il bloque aujourd'hui. Les vidéos ne sont pas tranchées :
+          elles ne sont ni dans « libres » ni dans « comptées ». */}
+      <p className="rounded-2xl bg-emerald-50 px-4 py-2.5 text-center text-sm font-bold leading-relaxed text-slate-800 ring-1 ring-emerald-200 sm:col-span-2">
+        <span className="font-black text-emerald-800">{OFFRE.questionsGratuitesParJour} questions offertes chaque jour</span>, sans compte.{" "}
+        Les fiches de cours, les énigmes à projeter et les PDF restent libres.{" "}
+        <Link href="/tarifs" className="whitespace-nowrap font-black text-sky-800 underline">Voir les tarifs</Link>
+      </p>
 
       {/* EN DESSOUS : LA BANDE DES CHIFFRES. Vidéos comptées (lib/videos/compteur.ts),
           exercices et visiteurs de la semaine (lib/accueil/chiffres-semaine.ts). */}
