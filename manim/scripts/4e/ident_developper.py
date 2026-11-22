@@ -250,6 +250,40 @@ class IdentDevelopper4e(_Gestes, PaysageRel):
     fichier_marques = "ident_developper_marques.json"
     ceinture = "orange"
 
+    def _disposer_q(self, question, choix, phrase):
+        """La phrase de réponse sous les cartes, à 36 pt (relecture -ql du 22/11 : elle sortait à 24 pt)."""
+        tete, q, cartes, pause, rebours, ph = super()._disposer_q(question, choix, phrase)
+        if len(ph.submobjects):
+            self._h36 = T(phrase[0], 36, audit=False).height
+            ph.scale(self._h36 / ph[0].height)
+            ph.arrange(DOWN, aligned_edge=LEFT, buff=0.2)
+            ph.next_to(cartes, DOWN, buff=0.3).align_to(P(self.XL, 0), LEFT)
+            if ph.get_right()[0] > 6.3:
+                ph.scale_to_fit_width(6.3 - self.XL).align_to(P(self.XL, 0), LEFT)
+            haut = ph.get_top()[1]
+            if ph.get_bottom()[1] < -3.15:
+                ph.scale((haut + 3.15) / ph.height, about_point=P(self.XL, haut))
+        return tete, q, cartes, pause, rebours, ph
+
+    def monter_reponse(self, bonne):
+        """Les deux mauvaises cartes s'effacent, la bonne monte à la place de A : la phrase de réponse
+        a la place d'être à 36 pt sous elle (sous les trois cartes, elle tombait à 24 pt)."""
+        cartes, ph = self.cartes_q, self.ph_q
+        b = cartes[bonne]
+        ok = self.mobjects[-1]  # la coche, posée juste avant autres_r
+        d = cartes[0].get_center() - b.get_center()
+        anims = [FadeOut(cartes[j]) for j in range(3) if j != bonne]
+        if bonne != 0:
+            anims.append(b.animate.shift(d))
+            if ok is not b and ok not in b.get_family():
+                anims.append(ok.animate.shift(d))
+        self.play(*anims, run_time=0.2)
+        haut = cartes[0].get_bottom()[1] - 0.3
+        ph.arrange(DOWN, aligned_edge=LEFT, buff=0.2)
+        ref = ph[0]
+        k = min(self._h36 / ref.height, (6.3 - self.XL) / ph.width, (haut + 3.15) / ph.height)
+        ph.scale(k).next_to(P(0, haut), DOWN, buff=0).align_to(P(self.XL, 0), LEFT)
+
     def ld(self, s, y, fs=34, c=WHITE, x0=0.25, maxw=6.2, lettres="x"):
         """Une ligne de la colonne de droite, calée à gauche en x0."""
         e = E(s, fs, c, lettres=lettres)
@@ -276,7 +310,7 @@ class IdentDevelopper4e(_Gestes, PaysageRel):
         e = X(s, fs, audit=False)
         x0 = [a for a in e.atomes if a.original_text == "x"][0]
         e.shift(UP * (v1.atomes[0].get_bottom()[1] - x0.get_bottom()[1]))
-        e.shift(RIGHT * (v1.get_left()[0] - 0.3 - e.get_right()[0]))
+        e.shift(RIGHT * (v1.get_left()[0] - 0.45 - e.get_right()[0]))
         return e
 
     # ── 00 : page de garde ──────────────────────────────────────────────────
@@ -317,20 +351,23 @@ class IdentDevelopper4e(_Gestes, PaysageRel):
         fx, lx = j.cote_x()
         fa, la = j.cote_a()
         fn, ln = j.cote_n("x + 2")
-        l1 = self.ld("Un bassin carré,", 2.55, 36)
+        l1 = self.ld("Un bassin carré,", 2.55, 38, x0=0.0, maxw=6.6)
         self.poser_gestes(l1, "un bassin carré,", {1: lambda: [FadeIn(j.bassin, scale=0.8)]})
-        l2 = self.ld("de x mètres de côté.", 1.95, 36)
+        l2 = self.ld("de x mètres de côté.", 1.95, 38, x0=0.0, maxw=6.6)
         self.poser_gestes(l2, "de x mètres de côté.", {1: lambda: [GrowFromCenter(fx), FadeIn(lx)]})
-        l3 = self.ld("Tout autour, une allée", 1.0, 36)
+        l3 = self.ld("Tout autour, une allée", 1.0, 38, x0=0.0, maxw=6.6)
         self.poser_gestes(l3, "Tout autour, une allée", {4: lambda: [FadeIn(j.allee), FadeIn(j.joints)]})
-        l4 = self.ld("de 1 mètre de large.", 0.4, 36)
+        l4 = self.ld("de 1 mètre de large.", 0.4, 38, x0=0.0, maxw=6.6)
         self.poser_gestes(l4, "de 1 mètre de large.", {1: lambda: [GrowFromCenter(fa), FadeIn(la)]})
-        l5 = self.ld("Grand carré : côté x + 2.", -0.55, 36)
+        l5 = self.ld("Grand carré : côté x + 2.", -0.55, 38, x0=0.0, maxw=6.6)
         self.poser_gestes(l5, "Le grand carré, bassin et allée, a pour côté x plus 2.",
                           {4: lambda: [GrowFromCenter(fn), FadeIn(ln.atomes[0])], 5: lambda: [FadeIn(ln.atomes[1])],
                            6: lambda: [FadeIn(ln.atomes[2])]})
-        l6 = self.ld("Quelle est l'aire de l'allée ?", -1.55, 40, JAUNE_TITRE, maxw=5.7)
-        self.dit(l6, "Quelle est l'aire de l'allée ?")
+        l6a = self.ld("Quelle est l'aire", -1.45, 42, JAUNE_TITRE, x0=0.0, maxw=6.6)
+        self.dit(l6a, "Quelle est l'aire")
+        l6b = self.ld("de l'allée ?", -2.1, 42, JAUNE_TITRE, x0=0.0, maxw=6.6)
+        self.dit(l6b, "de l'allée ?")
+        l6 = VGroup(l6a, l6b)
         self.play(*[b.animate.set_fill(JAUNE_TITRE, opacity=0.7) for b in [*j.bandes, *j.coins]], run_time=0.35)
         self.play(*[b.animate.set_fill(opacity=0) for b in [*j.bandes, *j.coins]], run_time=0.35)
         self.insister(l6, 1.08, 0.2)
@@ -339,19 +376,19 @@ class IdentDevelopper4e(_Gestes, PaysageRel):
     # ── 02 : (x + 2)², le gabarit qui se remplit ─────────────────────────────
     def ecran_somme(self):
         self.ecran("02-somme")
-        C = Carre(2.6, 1.0, fs=36)
-        C.shift(P(-3.9, -0.5) - C.cases.get_center())
-        l0 = self.ld("L'aire du grand carré :", 2.95, 32, x0=-1.6)
-        self.dit(l0, "l'aire du grand carré :")
+        C = Carre(2.3, 0.9, fs=36)
+        C.shift(P(-4.6, -0.5) - C.cases.get_center())
+        l0 = self.ld("L'aire du grand carré :", 2.95, 38, x0=-2.3, maxw=6.2)
+        self.poser_gestes(l0, "l'aire du grand carré :", {0: lambda: [FadeIn(C.cases)]})
         e0 = X("(x + 2)²", 44).next_to(l0, RIGHT, buff=0.3)
         e0.shift(UP * (l0.atomes[0].get_bottom()[1] - e0.atomes[1].get_bottom()[1]))
         self.dire_eq(e0, "x plus 2, au carré.", echelle=1.15)
-        l1 = self.ld("C'est la forme (a + b)²,", 2.2, 34, x0=-1.3)
+        l1 = self.ld("C'est la forme (a + b)²,", 2.2, 38, x0=-1.3)
         self.poser_gestes(l1, "C'est la forme a plus b au carré,",
-                          {0: lambda: [FadeIn(C.cases), FadeIn(C.noms)],
+                          {0: lambda: [FadeIn(C.noms)],
                            6: lambda: [FadeIn(C.haut[0]), FadeIn(C.gauche[0])],
                            8: lambda: [FadeIn(C.haut[1]), FadeIn(C.gauche[1])]})
-        l2 = self.ld("avec a = x, et b = 2.", 1.5, 34, x0=-1.3)
+        l2 = self.ld("avec a = x, et b = 2.", 1.5, 38, x0=-1.3)
         self.poser_gestes(l2, "avec a égale x, et b égale 2.", {3: lambda: C.changer_entetes(0, "x"),
                                                                     8: lambda: C.changer_entetes(1, "2")})
         xs = [1.65, 3.4, 5.15]
@@ -365,14 +402,14 @@ class IdentDevelopper4e(_Gestes, PaysageRel):
         self.poser_gestes(v1, "a au carré : x au carré.", {0: lambda: [FadeIn(rap), *C.changer_nom(0, "x²")]})
         self.au("2 a b", FadeIn(sg[0]), FadeIn(bx[1], scale=1.2),
                 Indicate(VGroup(C.cases[1], C.cases[2]), color=AB, scale_factor=1.05), rt=0.3)
-        d = X("2 × x × 2", 30, "#e2e8f0").move_to(P(xs[1], -0.25))
+        d = X("2 × x × 2", 36, "#e2e8f0").move_to(P(xs[1], -0.27))
         self.poser_gestes(d, "2 fois x fois 2,", {4: lambda: [*C.changer_nom(1, "2x"), *C.changer_nom(2, "2x")]})
         self.dire_eq(v2, "2, 4 x.", echelle=1.2)
         self.au("b au carré :", FadeIn(sg[1]), FadeIn(bx[2], scale=1.2), Indicate(C.cases[3], scale_factor=1.05), rt=0.3)
         self.poser_gestes(v3, "b au carré : 4.", {1: lambda: C.changer_nom(3, "4")}, echelle=1.2)
         res = VGroup(rap, v1, v2, v3)
         cr = self.cadre_ok(res, 0.16)
-        self.au("Le grand carré vaut", Create(cr), Circumscribe(C.cases, color=VERT_OK, buff=0.05), rt=0.5)
+        self.au("Le grand carré vaut", FadeOut(d), Create(cr), Circumscribe(C.cases, color=VERT_OK, buff=0.05), rt=0.5)
         self.insister(VGroup(v1, v2, v3), 1.1, 0.2)
         self.attendre_voix(marge=0.8)
 
@@ -445,33 +482,35 @@ class IdentDevelopper4e(_Gestes, PaysageRel):
                         4: lambda: [FadeIn(C.haut[1]), FadeIn(C.gauche[1])]})
 
         def apres(sc):
-            sc.ph_gestes(0, "Réponse C : x² + 20x + 100.", "Réponse C : x au carré plus 20 x plus 100.",
-                         {3: lambda: [*C.remplir(0), FadeIn(C.nom(0, "x²"))],
-                          9: lambda: [*C.remplir(3), FadeIn(C.nom(3, "100"))]}, premier=True)
-            sc.ph_gestes(1, "Le double produit :", "Le double produit :", {0: lambda: C.remplir(1, 2)})
-            sc.ph_gestes(2, "2 × x × 10 = 20x.", "2 fois x fois 10, 20 x.",
+            sc.monter_reponse(2)
+            sc.ph_gestes(0, "Réponse C :", "Réponse C :", {}, premier=True)
+            sc.ph_gestes(1, "x² + 20x + 100.", "x au carré plus 20 x plus 100.",
+                         {0: lambda: [*C.remplir(0), FadeIn(C.nom(0, "x²"))],
+                          6: lambda: [*C.remplir(3), FadeIn(C.nom(3, "100"))]})
+            sc.ph_gestes(2, "Le double produit :", "Le double produit :", {0: lambda: C.remplir(1, 2)})
+            sc.ph_gestes(3, "2 × x × 10 = 20x.", "2 fois x fois 10, 20 x.",
                          {4: lambda: [FadeIn(C.nom(1, "10x")), FadeIn(C.nom(2, "10x"))],
                           6: lambda: [Circumscribe(VGroup(C.cases[1], C.cases[2]), color=AB, buff=0.04)]})
             sc.rep_fini()
 
         self.question_pause("03q-question", "03r-reponse", ["Développe (x + 10)²."],
                             [X("x² + 100", 34), X("x² + 10x + 100", 34), X("x² + 20x + 100", 34)], 2,
-                            ["Réponse C : x² + 20x + 100.", "Le double produit :", "2 × x × 10 = 20x."],
+                            ["Réponse C :", "x² + 20x + 100.", "Le double produit :", "2 × x × 10 = 20x."],
                             avant_q=avant, autres_r=apres)
         self.XL = type(self).XL
 
     # ── 04 : (x − 4)² ────────────────────────────────────────────────────────
     def ecran_difference(self):
         self.ecran("04-difference")
-        C = Carre(2.4, 1.2, fs=36)
-        C.shift(P(-4.15, -0.55) - C.cases.get_center())
+        C = Carre(2.3, 1.1, fs=36)
+        C.shift(P(-4.5, -0.55) - C.cases.get_center())
         x0 = -1.6
-        l0 = self.ld("La deuxième forme : (x − 4)².", 2.95, 36, x0=x0, maxw=8.0)
+        l0 = self.ld("La deuxième forme : (x − 4)².", 2.95, 40, x0=-2.1, maxw=8.6)
         self.poser_gestes(l0, "La deuxième forme : x moins 4, au carré.", {0: lambda: [FadeIn(C)]})
-        l1 = self.ld("a = x, b = 4.", 2.2, 36, x0=x0)
+        l1 = self.ld("a = x, b = 4.", 2.2, 40, x0=-2.1)
         self.poser_gestes(l1, "a vaut x, b vaut 4.", {2: lambda: C.changer_entetes(0, "x"),
                                                          6: lambda: C.changer_entetes(1, "4")})
-        xs = [1.35, 3.2, 5.05]
+        xs = [1.6, 3.4, 5.2]
         bx, sg = self.rangee([("a²", A2), ("2ab", AB), ("b²", B2)], xs, 1.2, ["−", "+"])
         sg[0].set_color(PIEGE)
         yb = 0.2
@@ -489,7 +528,7 @@ class IdentDevelopper4e(_Gestes, PaysageRel):
         self.dire_eq(v2, "moins 8 x.", echelle=1.2)
         self.au("Plus b au carré", FadeIn(sg[1], scale=1.4), FadeIn(bx[2], scale=1.2), FadeIn(p3, scale=1.4), rt=0.3)
         self.dire_eq(v3, "plus 16.", echelle=1.2)
-        l2 = self.ld("Le dernier terme reste positif :", -0.85, 34, x0=x0)
+        l2 = self.ld("Le dernier terme reste positif :", -0.85, 38, x0=x0, maxw=8.0)
         self.dit(l2, "Le dernier terme reste positif :")
         l3 = self.ld("(−4) × (−4) = +16", -1.65, 44, VERT_OK, x0=x0)
         self.poser_gestes(l3, "moins 4 fois moins 4, plus 16.",
@@ -500,17 +539,17 @@ class IdentDevelopper4e(_Gestes, PaysageRel):
     # ── 05 : (3x + 1)², le piège 3x² ─────────────────────────────────────────
     def ecran_coefficient(self):
         self.ecran("05-coefficient")
-        C = Carre(2.4, 1.0, fs=36)
-        C.shift(P(-4.15, -0.55) - C.cases.get_center())
+        C = Carre(2.2, 0.9, fs=36)
+        C.shift(P(-4.2, -0.55) - C.cases.get_center())
         x0 = -1.6
-        l0 = self.ld("Et si a contient un nombre ?", 2.95, 36, x0=x0, maxw=8.0)
+        l0 = self.ld("Et si a contient un nombre ?", 2.95, 40, x0=x0, maxw=8.0)
         self.poser_gestes(l0, "Et si a contient un nombre ?", {0: lambda: [FadeIn(C)]})
         e1 = X("(3x + 1)²", 46).move_to(P(0, 2.15)).align_to(P(x0, 0), LEFT)
         self.dire_eq(e1, "3 x plus 1, au carré.", echelle=1.15)
         e2 = X("a = 3x.", 40).next_to(e1, RIGHT, buff=0.9)
         e2.shift(UP * (e1.atomes[1].get_bottom()[1] - e2.atomes[2].get_bottom()[1]))
         self.poser_gestes(e2, "a vaut 3 x.", {2: lambda: C.changer_entetes(0, "3x")})
-        xs = [1.35, 3.2, 5.05]
+        xs = [2.0, 3.65, 5.3]
         bx, sg = self.rangee([("a²", A2), ("2ab", AB), ("b²", B2)], xs, -0.3, ["+", "+"])
         yb = -1.85
         v1 = self.valeur("9x²", xs[0], yb)
@@ -526,21 +565,21 @@ class IdentDevelopper4e(_Gestes, PaysageRel):
         self.play(Create(croix(VGroup(*l4.atomes[2:5]), k=0.32)), run_time=0.25)
         self.au("2 a b", FadeIn(sg[0]), FadeIn(bx[1], scale=1.2),
                 Indicate(VGroup(C.cases[1], C.cases[2]), color=AB, scale_factor=1.05), rt=0.3)
-        d = X("2 × 3x × 1", 30, "#e2e8f0").move_to(P(xs[1], -1.05))
+        d = X("2 × 3x × 1", 36, "#e2e8f0").move_to(P(xs[1], -1.07))
         self.poser_gestes(d, "2 fois 3 x fois 1,", {3: lambda: [*C.changer_nom(1, "3x"), *C.changer_nom(2, "3x")]})
         self.dire_eq(v2, "6 x.", echelle=1.2)
         self.au("b au carré :", FadeIn(sg[1]), FadeIn(bx[2], scale=1.2), Indicate(C.cases[3], scale_factor=1.05), rt=0.3)
         self.poser_gestes(v3, "b au carré : 1.", {1: lambda: [*C.changer_nom(3, "1"), *C.changer_entetes(1, "1")]},
                           echelle=1.2)
-        self.au("Résultat", Create(self.cadre_ok(VGroup(rap, v1, v2, v3), 0.16)), rt=0.3)
+        self.au("Résultat", FadeOut(d), Create(self.cadre_ok(VGroup(rap, v1, v2, v3), 0.16)), rt=0.3)
         self.insister(VGroup(v1, v2, v3), 1.1, 0.2)
         self.attendre_voix(marge=0.8)
 
     # ── 05b : (2x + 5)(2x − 5) ───────────────────────────────────────────────
     def ecran_produit(self):
         self.ecran("05b-produit")
-        C = Carre(2.4, 1.0, gauche=("a", "−b"), noms=("a²", "ab", "−ab", "−b²"), fs=36)
-        C.shift(P(-4.15, -0.55) - C.cases.get_center())
+        C = Carre(2.2, 0.9, gauche=("a", "−b"), noms=("a²", "ab", "−ab", "−b²"), fs=36)
+        C.shift(P(-4.25, -0.55) - C.cases.get_center())
         x0 = -1.6
         l0 = self.ld("La troisième forme :", 2.95, 36, x0=x0)
         self.poser_gestes(l0, "La troisième forme :", {0: lambda: [FadeIn(C)]})
@@ -552,7 +591,7 @@ class IdentDevelopper4e(_Gestes, PaysageRel):
         self.poser_gestes(e1, "2 x plus 5, fois 2 x moins 5.",
                           {1: lambda: ent("haut", 0, "2x"), 4: lambda: ent("haut", 1, "5"),
                            7: lambda: ent("gauche", 0, "2x"), 10: lambda: ent("gauche", 1, "−5")}, echelle=1.15)
-        xs = [2.1, 4.1]
+        xs = [3.6, 5.4]
         bx, sg = self.rangee([("a²", A2), ("b²", B2)], xs, 1.15, ["−"])
         yb = 0.15
         v1 = self.valeur("4x²", xs[0], yb)
@@ -563,9 +602,9 @@ class IdentDevelopper4e(_Gestes, PaysageRel):
                 Indicate(C.cases[3], scale_factor=1.05), rt=0.3)
         self.poser_gestes(v1, "4 x au carré moins 25.", {0: lambda: [FadeIn(rap), *C.changer_nom(0, "4x²")]}, echelle=1.2)
         self.poser_gestes(v2, "moins 25.", {1: lambda: C.changer_nom(3, "−25")}, echelle=1.2)
-        l2 = self.ld("Il ne reste que deux termes :", -0.85, 36, x0=x0)
+        l2 = self.ld("Il ne reste que deux termes :", -0.85, 40, x0=x0, maxw=8.2)
         self.dit(l2, "Il ne reste que deux termes :")
-        l3 = self.ld("+10x et −10x s'annulent.", -1.65, 40, x0=x0)
+        l3 = self.ld("+10x et −10x s'annulent.", -1.65, 40, x0=x0, maxw=8.2)
         c1, c2 = croix(C.cases[1], k=0.3), croix(C.cases[2], k=0.3)
         self.poser_gestes(l3, "plus 10 x et moins 10 x s'annulent.",
                           {1: lambda: C.changer_nom(1, "10x"), 5: lambda: C.changer_nom(2, "−10x"),
@@ -588,6 +627,7 @@ class IdentDevelopper4e(_Gestes, PaysageRel):
                         7: lambda: [FadeIn(C.gauche[0])], 9: lambda: [FadeIn(C.gauche[1])]})
 
         def apres(sc):
+            sc.monter_reponse(1)
             sc.ph_gestes(0, "Réponse B : x² − 81.", "Réponse B : x au carré moins 81.",
                          {3: lambda: [*C.remplir(0), FadeIn(C.nom(0, "x²"))],
                           6: lambda: [*C.remplir(3), FadeIn(C.nom(3, "−81"))]}, premier=True)
@@ -606,30 +646,33 @@ class IdentDevelopper4e(_Gestes, PaysageRel):
     # ── 06 : le défi ────────────────────────────────────────────────────────
     def ecran_defi(self):
         self.ecran("06-defi")
-        j1 = Jardin(5, 1, 3.4).move_to(P(-3.95, -0.45))
+        j1 = Jardin(5, 1, 3.4).move_to(P(-4.2, -0.45))
         fx1, lx1 = j1.cote_x()
         self.add(j1, fx1, lx1)
-        j2 = Jardin(5, 2, 3.4).move_to(P(-3.95, -0.45))
+        j2 = Jardin(5, 2, 3.4).move_to(P(-4.2, -0.45))
         fx2, lx2 = j2.cote_x()
         fa, la = j2.cote_a()
         fn, ln = j2.cote_n("x + 4")
         x0 = -0.9
         tit = T("À toi de jouer !", 52, JAUNE_TITRE).move_to(P(0, 2.95)).align_to(P(x0, 0), LEFT)
         self.au("À toi", Write(tit), rt=0.5)
-        l1 = self.ld("Lina élargit l'allée :", 1.95, 38, x0=x0, maxw=7.0)
+        l1 = self.ld("Lina élargit l'allée :", 2.05, 40, x0=-1.5, maxw=8.0)
         self.poser_gestes(l1, "Lina élargit l'allée :",
                           {1: lambda: [FadeOut(VGroup(j1, fx1, lx1)), FadeIn(VGroup(j2, fx2, lx2))]}, rt=0.3)
-        l2 = self.ld("2 mètres de large, tout autour.", 1.3, 38, x0=x0, maxw=7.0)
-        self.poser_gestes(l2, "2 mètres de large, tout autour.", {0: lambda: [GrowFromCenter(fa), FadeIn(la)]})
-        l3 = self.ld("Grand carré : côté x + 4.", 0.35, 38, x0=x0, maxw=7.0)
+        l2a = self.ld("2 mètres de large,", 1.4, 40, x0=-1.5, maxw=8.0)
+        self.poser_gestes(l2a, "2 mètres de large,", {0: lambda: [GrowFromCenter(fa), FadeIn(la)]})
+        l2b = self.ld("tout autour.", 0.85, 40, x0=-1.5, maxw=8.0)
+        self.dit(l2b, "tout autour.")
+        l2 = VGroup(l2a, l2b)
+        l3 = self.ld("Grand carré : côté x + 4.", 0.1, 40, x0=-1.5, maxw=8.0)
         self.poser_gestes(l3, "Le grand carré a pour côté x plus 4.",
                           {4: lambda: [GrowFromCenter(fn), FadeIn(ln.atomes[0])], 5: lambda: [FadeIn(ln.atomes[1])],
                            6: lambda: [FadeIn(ln.atomes[2])]})
-        l4 = self.ld("Quelle est l'aire de l'allée ?", -0.6, 42, JAUNE_TITRE, x0=x0, maxw=7.0)
+        l4 = self.ld("Quelle est l'aire de l'allée ?", -0.75, 42, JAUNE_TITRE, x0=-1.5, maxw=8.0)
         self.dit(l4, "Quelle est l'aire de l'allée ?")
         q = T("?", 60, JAUNE_TITRE, audit=False).move_to(j2.bandes[0]).set_z_index(7)
         self.play(FadeIn(q, scale=1.4), run_time=0.25)
-        pz = T("Mets pause, et cherche !", 44, ORANGE_RETENUE).move_to(P(0, -1.65)).align_to(P(x0, 0), LEFT)
+        pz = T("Mets pause, et cherche !", 44, ORANGE_RETENUE).move_to(P(0, -1.7)).align_to(P(-1.5, 0), LEFT)
         self.au("Mets pause", Write(pz), rt=0.5)
         self.defi = dict(j=j2, tit=tit, autres=VGroup(l1, l2, l3, l4, pz, q))
         self.attendre_voix(marge=2.0)
@@ -641,7 +684,7 @@ class IdentDevelopper4e(_Gestes, PaysageRel):
         self.dire("06b-correction")
         x0 = -0.9
         tit = T("Correction", 50, JAUNE_TITRE).move_to(P(0, 2.95)).align_to(P(x0, 0), LEFT)
-        xs = [1.45, 3.25, 5.05]
+        xs = [2.0, 3.7, 5.4]
         bx, sg = self.rangee([("a²", A2), ("2ab", AB), ("b²", B2)], xs, 2.0, ["+", "+"], audit=False)
         self.au("Correction", ReplacementTransform(d["tit"], tit), FadeOut(d["autres"]), rt=0.35)
         self.play(*[FadeIn(m, shift=DOWN * 0.1) for m in [*bx, *sg]], run_time=0.3)
@@ -660,11 +703,11 @@ class IdentDevelopper4e(_Gestes, PaysageRel):
         self.dire_eq(v2, "plus 8 x plus 16.", echelle=1.2)
         self.dire_eq(v3, "plus 16.", echelle=1.2)
         moins = X("− x²", 40, PIEGE, audit=False).move_to(j.eau).shift(DOWN * 0.2).set_z_index(6)
-        l1 = self.ld("On enlève le bassin, x².", -0.05, 38, x0=x0, maxw=7.0)
+        l1 = self.ld("On enlève le bassin, x².", -0.05, 38, x0=-1.5, maxw=8.0)
         self.poser_gestes(l1, "On enlève le bassin, x au carré.",
                           {3: lambda: [j.eau.animate.set_fill(opacity=0.25), j.vagues.animate.set_stroke(opacity=0.2)],
                            5: lambda: [FadeIn(moins, scale=1.3)]})
-        l2 = self.ld("L'allée vaut 8x + 16.", -1.0, 46, VERT_OK, x0=x0, maxw=7.0)
+        l2 = self.ld("L'allée vaut 8x + 16.", -1.0, 46, VERT_OK, x0=-1.5, maxw=8.0)
         self.poser_gestes(l2, "L'allée vaut 8 x plus 16.",
                           {4: lambda: [b.animate.set_fill(AB, opacity=0.8) for b in j.bandes],
                            7: lambda: [c.animate.set_fill(B2, opacity=0.85) for c in j.coins]}, echelle=1.15)
@@ -679,7 +722,7 @@ class IdentDevelopper4e(_Gestes, PaysageRel):
         fig = Carre(1.9, 0.9, fs=32)
         fig.shift(P(-4.7, -0.5) - fig.cases.get_center())
         self.play(Write(tit), FadeIn(fig), run_time=0.6)
-        x0 = -1.75
+        x0 = -2.6
         lignes = [("On repère a et b, puis on écrit", "On repère a et b, puis on écrit", 2.25, None),
                   ("les trois termes : a², 2ab, b².", "les trois termes : a au carré, 2 a b, b au carré.", 1.7,
                    {7: lambda: [Indicate(VGroup(fig.cases[1], fig.cases[2]), color=AB, scale_factor=1.05)]}),
@@ -688,7 +731,7 @@ class IdentDevelopper4e(_Gestes, PaysageRel):
                   ("(a + b)(a − b) ne garde", "a plus b, fois a moins b, ne garde", -0.85, None),
                   ("que deux termes.", "que deux termes.", -1.4, None)]
         for k, (s, ph, y, g) in enumerate(lignes):
-            e = self.ld(s, y, 34, x0=x0 + 0.6, maxw=7.5)
+            e = self.ld(s, y, 38, x0=x0 + 0.6, maxw=8.5)
             g = dict(g or {})
             if k % 2 == 0:
                 ok = self.coche(VERT_OK, 0.22).move_to(P(x0 + 0.2, e.get_y()))

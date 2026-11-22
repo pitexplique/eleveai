@@ -60,7 +60,7 @@ class IdentDevelopperShort4e(_Gestes, _OutilsProbleme, _OutilsDefi, ShortEq):
     def valeur(self, s, x, yb, fs=36, couleur=WHITE):
         e = X(s, fs, couleur)
         corps = [a for a in e.atomes if a.original_text not in "+−"]
-        e.shift(RIGHT * (x - VGroup(*corps).get_center()[0]))
+        e.shift(RIGHT * (x - e.get_center()[0]))  # le terme ENTIER (signe compris) : « 4x² + » ne colle plus
         e.shift(UP * (yb - corps[0].get_bottom()[1]))
         return e
 
@@ -93,37 +93,37 @@ class IdentDevelopperShort4e(_Gestes, _OutilsProbleme, _OutilsDefi, ShortEq):
 
         # ── 01 : a = 2x, a² = 4x², puis le gabarit a², 2ab, b² ──
         self.dire("01-calcul")
-        rap = X("(2x + 3)²", 36, audit=False)
-        la = X("a = 2x.", 36)
+        rap = X("(2x + 3)²", 42, audit=False)
+        la = X("a = 2x.", 42)
         haut_l = VGroup(rap, la).arrange(RIGHT, buff=0.45)
-        haut_l.scale_to_fit_width(min(haut_l.width, 3.7)).move_to(P(0, 1.95))
+        haut_l.scale_to_fit_width(min(haut_l.width, 3.9)).move_to(P(0, 2.05))
         la.shift(UP * (rap.atomes[2].get_bottom()[1] - la.atomes[3].get_bottom()[1]))
         self.play(FadeIn(rap), run_time=0.1)
         self.dire_eq(la, "a vaut 2 x.", echelle=1.15)
         # le carré de côté 2x : 4 carrés x²
-        c = 0.5
+        c = 0.68
         cases = VGroup(*[Square(c, stroke_color=WHITE, stroke_width=3, fill_color=A2, fill_opacity=0)
                          .move_to(P((i - 0.5) * c, (0.5 - k) * c)) for k in range(2) for i in range(2)])
-        cases.move_to(P(0.15, 0.1))
-        haut = X("2x", 28, CIEL).next_to(cases, UP, buff=0.08)
-        gauche = X("2x", 28, CIEL).next_to(cases, LEFT, buff=0.1)
-        noms = VGroup(*[X("x²", 22).move_to(q) for q in cases])
-        xs = [-1.35, 0.0, 1.35]
-        bx = [boite(s, cl, 30).move_to(P(x, -1.4)) for (s, cl), x in zip((("a²", A2), ("2ab", AB), ("b²", B2)), xs)]
+        cases.move_to(P(0.2, -0.05))
+        haut = X("2x", 32, CIEL).next_to(cases, UP, buff=0.08)
+        gauche = X("2x", 32, CIEL).next_to(cases, LEFT, buff=0.12)
+        noms = VGroup(*[X("x²", 28).move_to(q) for q in cases])
+        xs = [-1.5, 0.0, 1.5]
+        bx = [boite(s, cl, 30).move_to(P(x, -1.78)) for (s, cl), x in zip((("a²", A2), ("2ab", AB), ("b²", B2)), xs)]
         for b in bx:
             b[0].stretch_to_fit_height(0.58)
-        sg = [T("+", 32, WHITE, audit=False).move_to(P((xs[i] + xs[i + 1]) / 2, -1.4)) for i in range(2)]
-        yb = -2.15
+        sg = [T("+", 32, WHITE, audit=False).move_to(P((xs[i] + xs[i + 1]) / 2, -1.78)) for i in range(2)]
+        yb = -2.5
         v1 = self.valeur("4x²", xs[0], yb)
         v2 = self.valeur("+ 12x", xs[1], yb)
         v3 = self.valeur("+ 9", xs[2], yb)
-        l2 = self.lx("a² = 2x × 2x = 4x²", 1.25, 40)
+        l2 = self.lx("a² = 2x × 2x = 4x²", 1.4, 40)
         self.poser_gestes(l2, "a au carré, c'est 2 x fois 2 x : 4 x au carré.",
                           {0: lambda: [FadeIn(bx[0], scale=1.2)],
                            3: lambda: [Create(cases), FadeIn(haut)], 6: lambda: [FadeIn(gauche)],
                            9: lambda: [*[q.animate.set_fill(opacity=0.6) for q in cases], FadeIn(noms), FadeIn(v1)]})
         self.au("2 a b", FadeIn(sg[0]), FadeIn(bx[1], scale=1.2), rt=0.25)
-        d = X("2 × 2x × 3", 32, "#e2e8f0").move_to(P(0, -0.72))
+        d = X("2 × 2x × 3", 36, "#e2e8f0").move_to(P(0, -1.07))
         self.dire_eq(d, "2 fois 2 x fois 3,", echelle=1.1)
         self.dire_eq(v2, "12 x.", echelle=1.2)
         self.au("b au carré", FadeIn(sg[1]), FadeIn(bx[2], scale=1.2), rt=0.25)
