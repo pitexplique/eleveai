@@ -145,6 +145,28 @@ non.
 
 ---
 
+## ⚠️ `verifier-zone-margo.py` crie sur tout épisode où Ti-Margo change de taille
+
+Sur E1, l'outil annonce **88 instants où quelque chose recouvre Ti-Margo**. C'est un
+faux positif, et il faut savoir le reconnaître sans rendre le HD pour rien.
+
+Son étalon est la vidéo elle-même : « Ti-Margo seul » = le **minimum** de pixels allumés
+dans son rectangle sur toute la vidéo. Or le gabarit maison le pose à des tailles
+différentes selon l'écran — `add_mascotte(scale=0.8)` en page de garde, `0.65` à la
+finale, `0.9` à l'abonnement, `0.5` partout ailleurs. Les écrans où il est plus GRAND
+dépassent donc forcément le minimum.
+
+⭐ **Le contrôle qui tranche, en une soustraction** : les 88 instants font 35,2 s à
+0,4 s de pas, et les trois écrans à grande mascotte durent 12,4 + 16,3 + 6,5 = 35,2 s.
+Exactement. Et le surplus est **constant** (~443 pixels) à l'intérieur d'un écran : un
+texte qui tomberait sur lui ferait varier ce nombre d'une image à l'autre.
+
+⛔ Ne pas « corriger » en uniformisant la taille de la mascotte : c'est le gabarit de la
+maison. Lire la liste, vérifier que les instants coïncident avec les écrans à mascotte
+agrandie, et passer. ⭐ L'outil garde tout son sens sur les écrans à `scale=0.5`, qui
+sont la grande majorité — et c'est là qu'il a attrapé la poignée `@eleveai974` posée sur
+sa tête, après 20 rendus HD.
+
 ## Les règles de contenu propres à cette série
 
 - ⛔⛔ **Le dessin porte la DONNÉE, jamais la RÉPONSE.** Sur un écran de question, on place
