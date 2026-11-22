@@ -3293,6 +3293,13 @@
         "collège",
         "EleveAI"
       ],
+      "aussi": [
+        {
+          "classe": "6e",
+          "notionId": "entier_nombre",
+          "microId": "entier_lire_ecrire"
+        }
+      ],
       "url": "https://youtu.be/Zx0Ow1AWVI4"
     },
     {

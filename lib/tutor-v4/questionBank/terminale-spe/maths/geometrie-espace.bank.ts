@@ -15,8 +15,51 @@
 //   composantes, paramètres) → "short" (number_equal).
 // - Vecteurs notés en colonnes via $\vec{u}(a\,;b\,;c)$ ; équations en LaTeX.
 
+//
+// ⭐⭐ LES FIGURES (22/11/2026). Mesure du jour : les trois banques de l'espace
+// portaient 169 items et QUATRE figures. Sur le chapitre dont tout l'objet est
+// de voir dans l'espace, l'élève lisait des triplets de nombres. Les figures
+// viennent maintenant de `./espace-figures` (canvas `repere3d`, perspective
+// cavalière), et 34 items de cette banque en portent une.
+//
+// ⛔ LA RÈGLE QUI DÉCIDE QUELS ITEMS EN REÇOIVENT UNE — et pourquoi 26 n'en
+// ont pas :
+//   - on dessine les DONNÉES (les points, le solide, la droite, le morceau de
+//     plan) ;
+//   - on ne dessine JAMAIS la réponse. Deux vecteurs colinéaires se dessinent
+//     superposés : l'élève cocherait sans calculer, et la micro-compétence
+//     n'aurait pas travaillé. Même chose pour un milieu, un projeté, une
+//     position relative ou une appartenance qu'on demande de trouver ;
+//   - une question de pure définition (« quelle est la formule de la norme ? »)
+//     n'a pas de figure : un dessin décoratif est interdit.
+// Le cadre n'a ni graduation ni quadrillage : aucun nombre ne se LIT sur ces
+// dessins. Ils montrent la configuration, ils ne la mesurent pas.
+//
+// ⭐ Vérification : `node scripts/verifier-figures-espace-terminale.mjs`. Il
+// rend les figures et mesure quatre choses que la lecture ne voit pas — un
+// texte coupé par le bord du SVG, un texte sous 11 px dans le bloc du coach,
+// DEUX NOMS L'UN SUR L'AUTRE (le rendu pose toutes les étiquettes au même
+// décalage, sans réglage), et surtout que la figure dit la MÊME CHOSE que son
+// énoncé : les triplets écrits sont des points dessinés, les quatre coins d'un
+// morceau de plan vérifient l'équation, les points d'une droite vérifient la
+// représentation paramétrique.
+
 import type { TutorBankItemV4, CanvasFigure } from "@/lib/tutor-v4/types";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
+import {
+  figureCube,
+  figureDeuxDroites,
+  figureDeuxPoints,
+  figureDeuxVecteurs,
+  figureDroite,
+  figureDroiteEtPlan,
+  figurePlan,
+  figurePointEtDroite,
+  figurePointEtPlan,
+  figureTetraedre,
+  figureTriangle,
+  figureVecteur,
+} from "@/lib/tutor-v4/questionBank/terminale-spe/maths/espace-figures";
 
 function shuffle<T>(arr: readonly T[]): T[] {
   return melangeEnPlace([...arr]);
@@ -38,29 +81,6 @@ function makeChoices(correct: string, wrongs: readonly string[]) {
 function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-// Cube ABCDEFGH de côté 1 : ABCD base, EFGH sommet (E au-dessus de A, etc.).
-//   A(0;0;0) B(1;0;0) C(1;1;0) D(0;1;0) E(0;0;1) F(1;0;1) G(1;1;1) H(0;1;1).
-const cubeABCDEFGHCanvas: CanvasFigure = {
-  kind: "repere3d",
-  titre: "Cube ABCDEFGH (côté 1)",
-  afficherAxes: false,
-  points: [
-    { x: 0, y: 0, z: 0, label: "A", couleur: "#0f172a" },
-    { x: 1, y: 0, z: 0, label: "B", couleur: "#0f172a" },
-    { x: 1, y: 1, z: 0, label: "C", couleur: "#0f172a" },
-    { x: 0, y: 1, z: 0, label: "D", couleur: "#0f172a" },
-    { x: 0, y: 0, z: 1, label: "E", couleur: "#0f172a" },
-    { x: 1, y: 0, z: 1, label: "F", couleur: "#0f172a" },
-    { x: 1, y: 1, z: 1, label: "G", couleur: "#dc2626" },
-    { x: 0, y: 1, z: 1, label: "H", couleur: "#0f172a" },
-  ],
-  segments: [
-    { de: 0, a: 1 }, { de: 1, a: 2 }, { de: 2, a: 3 }, { de: 3, a: 0 },
-    { de: 4, a: 5 }, { de: 5, a: 6 }, { de: 6, a: 7 }, { de: 7, a: 4 },
-    { de: 0, a: 4 }, { de: 1, a: 5 }, { de: 2, a: 6 }, { de: 3, a: 7 },
-  ],
-};
 
 function exp(definition: string, methode: string, calcul: string, conclusion: string) {
   return (
@@ -147,6 +167,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$(3\\,;4\\,;0)$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxPoints("A", [1, 2, 3], "B", [4, 6, 3]),
     hint: "$\\overrightarrow{AB} = (x_B - x_A\\,;y_B - y_A\\,;z_B - z_A)$.",
     explanation: exp(
       "On soustrait les coordonnées de $A$ à celles de $B$.",
@@ -176,6 +197,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$(4\\,;2\\,;1)$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxVecteurs("u", [1, 2, -1], "v", [3, 0, 2]),
     hint: "On additionne coordonnée par coordonnée.",
     explanation: exp(
       "La somme de deux vecteurs se fait coordonnée par coordonnée.",
@@ -205,6 +227,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$(4\\,;-2\\,;6)$"],
     comparator: "mcq_exact",
+    canvas: figureVecteur("u", [2, -1, 3]),
     hint: "On multiplie chaque coordonnée par $2$.",
     explanation: exp(
       "Multiplier un vecteur par un réel multiplie chaque coordonnée.",
@@ -321,6 +344,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$(0\\,;0\\,;5)$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxPoints("A", [2, 1, 0], "B", [2, 1, 5]),
     hint: "$\\overrightarrow{AB} = B - A$.",
     explanation: exp(
       "On soustrait les coordonnées de $A$ à celles de $B$.",
@@ -362,6 +386,12 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
         choices: makeChoices(correct, distracteurs),
         expected: [correct],
         comparator: "mcq_exact",
+        // ⭐ LA FIGURE NAÎT ICI, dans le tirage, avec les points tirés : un
+        // dessin écrit à côté montrerait d'autres points que ceux de l'énoncé.
+        // L'escalier pointillé est exactement le calcul demandé — on avance en
+        // $x$, puis en $y$, puis en $z$ — mais rien ne s'y LIT : le cadre n'a
+        // pas de graduation.
+        canvas: figureDeuxPoints("A", [ax, ay, az], "B", [bx, by, bz]),
         explanation: exp(
           "On soustrait les coordonnées de $A$ à celles de $B$.",
           `$(${bx} - ${ax}\\,;${by} - ${ay}\\,;${bz} - ${az})$.`,
@@ -424,6 +454,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$(2\\,;3\\,;4)$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxPoints("A", [1, 2, 3], "B", [3, 4, 5]),
     hint: "Moyenne coordonnée par coordonnée.",
     explanation: exp(
       "On calcule la moyenne des coordonnées de $A$ et $B$.",
@@ -476,6 +507,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["7"],
     comparator: "number_equal",
+    canvas: figureDeuxPoints("A", [0, 0, 0], "B", [2, 3, 6]),
     hint: "$AB = \\sqrt{2^2 + 3^2 + 6^2} = \\sqrt{49}$.",
     explanation: exp(
       "On applique la formule de la distance.",
@@ -499,6 +531,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["3"],
     comparator: "number_equal",
+    canvas: figureDeuxPoints("A", [0, 0, 0], "B", [1, 2, 2]),
     hint: "$AB = \\sqrt{1 + 4 + 4} = \\sqrt{9}$.",
     explanation: exp(
       "On applique la formule de la distance.",
@@ -522,6 +555,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["4"],
     comparator: "number_equal",
+    canvas: figureDeuxPoints("A", [0, 0, 0], "B", [0, 0, 4]),
     hint: "Seule la coordonnée $z$ change.",
     explanation: exp(
       "On applique la formule de la distance.",
@@ -545,6 +579,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["5"],
     comparator: "number_equal",
+    canvas: figureDeuxPoints("A", [1, 0, 2], "B", [1, 4, 5]),
     hint: "$AB = \\sqrt{0 + 4^2 + 3^2} = \\sqrt{25}$.",
     explanation: exp(
       "On applique la formule de la distance.",
@@ -574,6 +609,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$(3\\,;1\\,;2)$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxPoints("A", [2, 0, 1], "B", [4, 2, 3]),
     hint: "Moyenne des coordonnées.",
     explanation: exp(
       "On calcule la moyenne des coordonnées.",
@@ -597,6 +633,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["3"],
     comparator: "number_equal",
+    canvas: figureDeuxPoints("A", [1, 1, 1], "B", [3, 3, 2]),
     hint: "$AB = \\sqrt{2^2 + 2^2 + 1^2} = \\sqrt{9}$.",
     explanation: exp(
       "On applique la formule de la distance.",
@@ -682,6 +719,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\vec{u}(2\\,;1\\,;3)$"],
     comparator: "mcq_exact",
+    canvas: figureDroite([1, 0, 2], [2, 1, 3], { marques: [{ t: 0, label: "A", rouge: true }] }),
     hint: "Ce sont les coefficients de $t$.",
     explanation: exp(
       "Le vecteur directeur se lit sur les coefficients du paramètre $t$.",
@@ -711,6 +749,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$(1\\,;0\\,;2)$"],
     comparator: "mcq_exact",
+    canvas: figureDroite([1, 0, 2], [2, 1, 3]),
     hint: "On remplace $t$ par $0$.",
     explanation: exp(
       "On obtient un point en donnant une valeur au paramètre.",
@@ -740,6 +779,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$(3\\,;1\\,;5)$"],
     comparator: "mcq_exact",
+    canvas: figureDroite([1, 0, 2], [2, 1, 3], { marques: [{ t: 0, label: "A", rouge: true }] }),
     hint: "On remplace $t$ par $1$.",
     explanation: exp(
       "On obtient un point en donnant une valeur au paramètre.",
@@ -798,6 +838,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["Oui, pour $t = 2$"],
     comparator: "mcq_exact",
+    canvas: figureDroite([1, 0, 2], [2, 1, 3], { marques: [{ t: 0, label: "A", rouge: true }] }),
     hint: "Cherche $t$ avec $y = t = 2$, puis vérifie $x$ et $z$.",
     explanation: exp(
       "Un point appartient à la droite s'il existe un $t$ qui donne ses coordonnées.",
@@ -851,6 +892,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\vec{u}(-1\\,;4\\,;-1)$"],
     comparator: "mcq_exact",
+    canvas: figureDroite([3, 2, 0], [-1, 4, -1], { marques: [{ t: 0, label: "A", rouge: true }] }),
     hint: "Coefficients de $t$ : $-1$, $4$, $-1$.",
     explanation: exp(
       "Le vecteur directeur se lit sur les coefficients de $t$.",
@@ -880,6 +922,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\begin{cases} x = 1 + 2t \\\\ y = t \\\\ z = 2 + 3t \\end{cases}$"],
     comparator: "mcq_exact",
+    canvas: figureDroite([1, 0, 2], [2, 1, 3], { marques: [{ t: 0, label: "A", rouge: true }] }),
     hint: "$x = x_A + a t$, etc., avec $A$ et $\\vec{u}(a\\,;b\\,;c)$.",
     explanation: exp(
       "On combine le point $A$ et le vecteur directeur $\\vec{u}$.",
@@ -971,6 +1014,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\vec{n}(2\\,;3\\,;-1)$"],
     comparator: "mcq_exact",
+    canvas: figurePlan([2, 3, -1, 1], { nom: "P" }),
     hint: "Les coefficients de $x$, $y$, $z$.",
     explanation: exp(
       "Un vecteur normal au plan se lit sur les coefficients de l'équation.",
@@ -995,6 +1039,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     choices: ["Oui", "Non", "Seulement si $z = 0$", "On ne peut pas savoir"],
     expected: ["Oui"],
     comparator: "mcq_exact",
+    canvas: figurePlan([2, 3, -1, 1], { nom: "P" }),
     hint: "On remplace $(x\\,;y\\,;z)$ dans l'équation.",
     explanation: exp(
       "Un point appartient au plan si ses coordonnées vérifient l'équation.",
@@ -1019,6 +1064,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     choices: ["Non", "Oui", "Seulement si $x = 5$", "On ne peut pas savoir"],
     expected: ["Non"],
     comparator: "mcq_exact",
+    canvas: figurePlan([1, 1, 1, -5], { nom: "P" }),
     hint: "On remplace et on regarde si on obtient $0$.",
     explanation: exp(
       "Un point appartient au plan si l'équation est vérifiée.",
@@ -1077,6 +1123,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\vec{n}(0\\,;0\\,;1)$"],
     comparator: "mcq_exact",
+    canvas: figurePlan([0, 0, 1, 0], { nom: "P" }),
     hint: "$z = 0$ s'écrit $0x + 0y + 1z = 0$.",
     explanation: exp(
       "On écrit l'équation sous la forme générale.",
@@ -1101,6 +1148,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     choices: ["Oui", "Non", "Seulement si $y = 1$", "On ne peut pas savoir"],
     expected: ["Oui"],
     comparator: "mcq_exact",
+    canvas: figurePlan([2, 1, -1, 0], { nom: "P" }),
     hint: "On remplace $x = 1$, $y = 0$, $z = 2$.",
     explanation: exp(
       "On teste l'appartenance en remplaçant les coordonnées.",
@@ -1210,6 +1258,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\vec{u}$ et $\\vec{n}$ sont orthogonaux ($\\vec{u} \\cdot \\vec{n} = 0$)"],
     comparator: "mcq_exact",
+    canvas: figureDroiteEtPlan([0, 0, 1], [1, 1, 0], [0, 0, 1, 0], { nomPlan: "P", nomDroite: "d" }),
     hint: "Direction de la droite ⊥ normale du plan.",
     explanation: exp(
       "Le parallélisme droite/plan se traduit sur $\\vec{u}$ et $\\vec{n}$.",
@@ -1239,6 +1288,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\vec{u}$ et $\\vec{n}$ sont colinéaires"],
     comparator: "mcq_exact",
+    canvas: figureDroiteEtPlan([1, 1, 0], [0, 0, 1], [0, 0, 1, 0], { nomPlan: "P", nomDroite: "d" }),
     hint: "La droite suit alors exactement la direction normale.",
     explanation: exp(
       "Une droite perpendiculaire au plan a la direction de la normale.",
@@ -1297,6 +1347,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["ne sont pas parallèles"],
     comparator: "mcq_exact",
+    canvas: figureDeuxDroites([0, 1, 2], [1, 0, 1], [1, 1, 1], [-1, 0, 1], { noms: ["d1", "d2"] }),
     hint: "Parallèles ⇔ directions colinéaires.",
     explanation: exp(
       "Le parallélisme exige des directions colinéaires.",
@@ -1321,6 +1372,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     choices: ["non coplanaires", "confondues", "perpendiculaires", "colinéaires"],
     expected: ["non coplanaires"],
     comparator: "mcq_exact",
+    canvas: figureDeuxDroites([0, 1, 2], [1, 0, 1], [1, 1, 1], [-1, 0, 1], { noms: ["d1", "d2"] }),
     hint: "Elles ne sont pas dans un même plan.",
     explanation: exp(
       "Dans l'espace, deux droites peuvent ne pas être dans un même plan.",
@@ -1499,7 +1551,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$(1\\,;1\\,;1)$"],
     comparator: "mcq_exact",
-    canvas: cubeABCDEFGHCanvas,
+    canvas: figureCube({ rouges: ["A", "B", "D", "E"] }),
     hint: "$G$ est le sommet diamétralement opposé à $A(0;0;0)$.",
     explanation: exp(
       "Dans ce repère, le cube a ses sommets aux coordonnées $0$ ou $1$.",
@@ -1529,7 +1581,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$\\sqrt{3}$"],
     comparator: "mcq_exact",
-    canvas: cubeABCDEFGHCanvas,
+    canvas: figureCube({ rouges: ["A", "G"], traits: [["A", "G"]] }),
     hint: "$AG = \\sqrt{1^2 + 1^2 + 1^2}$.",
     explanation: exp(
       "On applique la formule de la distance.",
@@ -1559,6 +1611,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$(-1\\,;1\\,;0)$"],
     comparator: "mcq_exact",
+    canvas: figureTriangle(["A", "B", "C"], [[1, 0, 0], [0, 1, 0], [0, 0, 1]]),
     hint: "$\\overrightarrow{AB} = B - A$.",
     explanation: exp(
       "On soustrait les coordonnées de $A$ à celles de $B$.",
@@ -1582,6 +1635,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["2"],
     comparator: "number_equal",
+    canvas: figureDroiteEtPlan([0, 1, 2], [1, 1, -1], [0, 0, 1, 0], { nomPlan: "P", nomDroite: "d" }),
     hint: "On résout $z = 2 - t = 0$.",
     explanation: exp(
       "Le point d'intersection vérifie l'équation du plan.",
@@ -1605,6 +1659,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     format: "short",
     expected: ["2"],
     comparator: "number_equal",
+    canvas: figureDroiteEtPlan([0, 1, 2], [1, 1, -1], [0, 0, 1, 0], { nomPlan: "P", nomDroite: "d" }),
     hint: "On remplace $t = 2$ dans $x = t$.",
     explanation: exp(
       "On calcule les coordonnées du point d'intersection.",
@@ -1682,6 +1737,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     choices: ["$\\sqrt{2}$", "$\\sqrt{3}$", "$2$", "$1$"],
     expected: ["$\\sqrt{2}$"],
     comparator: "mcq_exact",
+    canvas: figureCube({ rouges: ["A", "F"], traits: [["A", "F"]] }),
     hint: "$AF = \\sqrt{1^2 + 0 + 1^2}$.",
     explanation: exp(
       "On applique la formule de la distance.",
@@ -1711,6 +1767,7 @@ export const geometrieEspaceBank: TutorBankItemV4[] = [
     ],
     expected: ["$(3\\,;4\\,;3)$"],
     comparator: "mcq_exact",
+    canvas: figureDeuxPoints("A", [1, 2, 3], "B", [5, 6, 3]),
     hint: "Moyenne des coordonnées.",
     explanation: exp(
       "On calcule la moyenne des coordonnées de $A$ et $B$.",

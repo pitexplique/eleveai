@@ -13,7 +13,8 @@ L'inventaire de la série (découpage, banques, métiers, centres, état de prod
 ## ✅✅✅ ÉTAT FINAL, 22/11/2026 — LA SÉRIE EST COMPLÈTE
 
 **12 épisodes, 24 vidéos, du CM1 à la 6e.** Toutes rendues en HD, toutes sur R2, toutes branchées
-au coach et vérifiées à l'image en partant de l'accueil. ⛔ **Il n'y a plus rien à produire.**
+au coach et vérifiées à l'image en partant de l'accueil. ⛔ **Il n'y a plus rien à produire des 12 épisodes prévus** — mais ⚠ ça ne veut pas dire que
+toutes les micros du coach ont une vidéo : voir la section suivante, mesurée le 22/11.
 
 | Lot | Épisodes | Lignes `notion_ressources` |
 |---|---|---|
@@ -24,6 +25,122 @@ au coach et vérifiées à l'image en partant de l'accueil. ⛔ **Il n'y a plus 
 Contrôle de fin de série : `verifier-fraicheur-mp4.py` donne **tous les paysages prouvés à jour**
 sur les trois points ; les « douteux » restants sont les 12 shorts Ti Margo, qui n'ont pas de
 `.py` — c'est la limite de l'instrument, pas un défaut (voir § infrastructure).
+
+### ⚠⚠ « LA SÉRIE EST COMPLÈTE » veut dire LES 12 ÉPISODES, PAS LES MICROS DU COACH (22/11)
+
+⭐⭐ **Deux comptages différents, et c'est le second que l'élève voit.** La série couvre les
+**six micros communs** CM1→CM2→ 6e qu'on avait choisis. Les banques en ont davantage : ce qui n'est
+pas dans les six n'a **jamais** été produit, et rien ne le signale — ni le manifeste, ni
+`verifier-fraicheur-mp4.py`, ni `brancher-videos-coach.mjs`, qui tous ne connaissent que ce qui existe.
+
+État mesuré le 22/11 (micros de `lib/tutor-v4/knowledge/maths/<classe>/microSkills.ts`, branchements
+lus en **production** par `node scripts/brancher-videos-coach.mjs --classe <c> --notion <n> --tout`) :
+
+| Classe | Notion | Micros | Avec paysage | Sans |
+|---|---|---|---|---|
+| **6e** | `entier_nombre` | 6 | **6** | — (`entier_lire_ecrire` réparé le 22/11, voir plus bas) |
+| **CM1** | `nombre_entier` | 9 | 6 | 3 — `entier_droite`, `entier_diviseur`, `entier_encadrer` (banques PLEINES, voir plus bas) |
+| **CM2** | `nombre_entier` | 11 | 6 | 5 — `entier_droite`, `entier_diviseur`, `entier_diviseurs_tous`, `entier_diviseurs_communs`, `entier_multiples_communs` |
+
+Le CM2 reçoit ses six par l'alias `aussi` du CM1 (`cm1-entier-lire@entier_lire`…), sauf
+`entier_multiple` qui a sa propre vidéo `cm2-entier-multiple` — c'est bien ce qui était voulu.
+
+#### ⛔ Le trou de la 6e n'est pas « aucune vidéo » : il manque le BOUTON, pas la vidéo
+On avait décidé de ne pas produire `entier_lire_ecrire` parce que l'ancienne
+« Comprendre les nombres entiers en 4 minutes » la couvrait. Le manifeste dit pourquoi ça ne se voit
+pas sur la micro :
+
+| Entrée du manifeste | `notionId` | `microId` | Où elle atterrit |
+|---|---|---|---|
+| `6e-entier-nombre` (la longue, 4 min) | `entier_nombre` | **vide** | sur la **NOTION** : badge, fiche, QR — **aucun bouton « ▶ Vidéo » sur la micro** |
+| `6e-entier-nombre-short-zero` | `entier_nombre` | `entier_lire_ecrire` | sur la **micro** : la case verticale du short |
+
+⭐ Donc la micro **a déjà son short** en production ; ce qui lui manque est la vidéo paysage. Ce
+n'est **pas un manque de production** : c'est un `microId` absent sur une entrée du manifeste.
+
+✅ **RÉPARÉ le 22/11, Frédéric : « Oui, et garde le QR ».** La 6e est à **6 micros sur 6**.
+
+⛔ **Mais pas en donnant un `microId` à la longue** : `brancher-videos-coach.mjs` écrit **une ligne
+par entrée du manifeste**, donc un `microId` l'aurait **déplacée** de la notion vers la micro — bouton
+gagné, badge de notion, fiche et QR imprimé **perdus**.
+
+⭐⭐ **Le champ qui fait les deux existe déjà : `aussi`.** « La même vidéo branchée sur d'AUTRES micros,
+sans nouvelle entrée ni nouveau fichier » — c'est ce qui mutualise déjà les 5 épisodes du CM1 vers le
+CM2. Ajouté sur `6e-entier-nombre` :
+```json
+"aussi": [{ "classe": "6e", "notionId": "entier_nombre", "microId": "entier_lire_ecrire" }]
+```
+L'outil en tire l'alias `6e-entier-nombre@entier_lire_ecrire`, une **ligne de plus**, et laisse la
+ligne de notion intacte (il l'annonce : « micro déjà occupée — non touchée »). Vérifié en base après
+coup : la vidéo est listée sur **`micro entier_lire_ecrire` + `NOTION entier_nombre`**.
+
+⭐ **Et le bouton marche sans déploiement** : la ligne porte l'URL YouTube, publiée depuis longtemps.
+Le correctif est en base, pas dans le dépôt — rien à pousser pour que l'élève le voie.
+
+⚠ Effets de bord vérifiés avant d'écrire : `aussi` n'est lu que par `brancher-videos-coach.mjs` et
+par `publier-youtube.mjs` (il ajoute la playlist de la classe voisine — ici la **même** classe, donc
+rien ne change). **Aucun générateur de page ne le lit** : ni `generer-videos-r2.mjs`, ni
+`app/sitemap.ts`, ni `/video/<id>`. Pas de page fantôme, pas d'entrée de sitemap, pas de date de
+programmation en plus — c'est pour ça qu'`aussi` est le bon outil et pas une seconde entrée.
+
+#### ✅ Les 8 trous du CM1 / CM2 sont bien, et SEULEMENT, des trous de VIDÉO
+
+⛔⛔ **J'ai d'abord conclu l'inverse — « les banques sont vides » — et c'était FAUX.** La correction
+est ici parce que l'erreur de méthode valait un aller-retour, et qu'elle peut se refaire demain.
+
+**État réel, mesuré À L'EXÉCUTION le 22/11** (on charge les banques et on filtre sur `microId`) :
+
+| Classe | Micro | Items | Notion |
+|---|---|---|---|
+| CM1 | `entier_droite` / `entier_diviseur` / `entier_encadrer` | **8 / 10 / 10** | `nombre_entier` ✓ |
+| CM2 | `entier_droite` / `entier_diviseur` / `entier_diviseurs_tous` | **8 / 8 / 9** | `nombre_entier` ✓ |
+| CM2 | `entier_diviseurs_communs` / `entier_multiples_communs` | **8 / 8** | `nombre_entier` ✓ |
+
+⛔⛔ **CORRECTION du 22/11, 05:50 — j'avais cité ici « `auditer-banque-runtime.ts` : CM1 105/105,
+CM2 116/116 » comme preuve. CES CHIFFRES NE PARLENT PAS DES MATHS.** Ce script est **FRANÇAIS
+SEULEMENT** : il n'importe que des `francais*QuestionBank` (lignes 31-53), et sa table s'arrête à
+`francaisSecondeQuestionBank`. Sur `cm1` et `cm2` il a donc mesuré la couverture du **français** et
+rendu un pourcentage parfaitement plausible pour une autre matière. ✅ **La conclusion tient quand
+même**, parce qu'elle ne reposait pas sur lui : elle repose sur le comptage ci-dessus, fait en
+important `mathsCm1QuestionBank` / `mathsCm2QuestionBank` et en filtrant sur `microId`. Tous ces items
+sont des `template`, tous rangés sous la bonne notion, tous au-dessus des 2 items qu'exige la paire.
+✅ **Rien à masquer, rien à remplir. Le contenu existe depuis le 05/11/2026**, dans
+`cm1/maths/nombres-entiers-trous.bank.ts` et `cm2/maths/entiers-diviseurs.bank.ts`, écrits exprès
+pour ces trous-là (leurs en-têtes nomment les objectifs du BO : `cm2-N-entiers-7, -9, -10, -11, -12`).
+
+⭐⭐ **CE QUI M'A FAIT CONCLURE DU VIDE, ET POURQUOI L'ÉTALONNAGE N'A PAS SUFFI**
+
+J'ai grepé `microId: "…"` dans **`nombres-entiers.bank.ts`** — un fichier sur les 70 du dossier. Il ne
+contient que les six micros historiques. J'ai bien étalonné l'instrument avant de conclure, sur
+`entier_lire`, qui a répondu 10. ⛔ **Mais l'étalon était dans le MÊME FICHIER que ce que je
+mesurais.** Un étalon qui partage le défaut de l'instrument ne prouve rien : il confirme que le grep
+sait lire ce fichier, pas que ce fichier contient la matière. **L'étalon doit être pris HORS du
+périmètre qu'on soupçonne** — ici, une micro dont on sait qu'elle est pleine et qui vit AILLEURS.
+
+⭐⭐ **Et la cause profonde : l'exception « les maths sont lisibles au grep » est MORTE.** La note
+`audit-banque-source-vs-runtime` disait que seul le français échappe au grep, à cause de sa fabrique
+à arguments positionnels, et que « les maths ne sont pas touchées (tableaux littéraux) ». C'était vrai
+de `nombres-entiers.bank.ts`. ⛔ **Ce n'est plus vrai depuis le 05/11/2026** : les banques « trous du
+programme » sont bâties sur `gabarits(…)` / `atelier(…)` — des fabriques positionnelles, **zéro
+`microId` littéral**. `grep -c 'microId'` y répond **0** sur 8 à 10 items bien présents.
+
+→ ⛔⛔ **Pour une couverture de banque de MATHS, il n'existe AUCUN instrument tout fait.** Ni un grep
+(il répond « 0 » avec aplomb sur les fabriques positionnelles), ni `auditer-banque-runtime.ts` (il ne
+connaît que le français, et répond un pourcentage d'une AUTRE matière sans le dire). La seule mesure
+valable tient en cinq lignes, à écrire sur le moment : importer `maths<Classe>QuestionBank`, filtrer
+sur `notionId`/`microId`, compter. C'est long d'une minute et ça ne ment pas.
+
+⭐⭐ **Et la leçon commune aux trois erreurs de la journée** (un grep sur un fichier au lieu de 70 ;
+un audit français pris pour un audit de maths ; `scripts/apercu-canvas.mjs` recommandé alors qu'il
+est **hors service** — `ERR_UNKNOWN_FILE_EXTENSION` sur `katex.min.css`, pour TOUS les canvas du
+dépôt, pas seulement ceux de l'espace) : **un instrument qui rend un chiffre plausible n'a pas prouvé
+qu'il mesurait la bonne chose.** Avant de citer un outil, vérifier ce qu'il IMPORTE, et le faire
+tourner une fois pour de vrai.
+
+✅ **Donc le rapport de départ avait raison, et moi pas** : 8 micros sans vidéo, jouables, au
+programme. Les regrouper reste utile — la **demi-droite graduée** et les **diviseurs** portent le
+même `microId` au CM1 et au CM2 et sont donc mutualisables par `aussi` : **6 épisodes** couvriraient
+les 8 micros, pas 8. ⛔ Rien d'engagé, rien de promis.
 
 ### ⏭ Ce qui reste, et qui n'est PAS de la production
 - **La mise en ligne YouTube des 24 vidéos** — c'est Frédéric qui la fait. Chaque dossier
