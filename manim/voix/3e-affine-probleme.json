@@ -1,0 +1,15 @@
+{
+  "00-garde": "Résoudre un problème avec une fonction affine. Quel tarif choisir ?",
+  "01-cinema": "Manon dirige un cinéma. Elle propose deux tarifs. Tarif A : 9 euros la place. Tarif B : une carte à 24 euros, puis 5 euros la place. Un client lui demande : lequel est le moins cher ?",
+  "02-modeliser": "On appelle x le nombre de séances. Avec le tarif A, on paie f de x égale 9 x. Avec le tarif B, on paie g de x égale 5 x plus 24. f est linéaire, g est affine.",
+  "03-comparer": "On compare. Pour 4 séances : f de 4 égale 36 euros, g de 4 égale 44 euros. Le tarif A gagne. Pour 10 séances : f de 10 égale 90 euros, g de 10 égale 74 euros. Cette fois, c'est le tarif B !",
+  "03q-question": "Question ! Pour 3 séances, combien paie-t-on avec le tarif B ? A : 39 euros. B : 27 euros. C : 32 euros. Mets pause, et choisis !",
+  "03r-reponse": "Réponse A : 5 fois 3, c'est 15. 15 plus 24 : 39 euros. Pas 27 : ça, c'est le tarif A.",
+  "04-egalite": "À partir de combien de séances le tarif B devient-il meilleur ? On cherche quand les deux prix sont égaux. 9 x égale 5 x plus 24. On enlève 5 x : 4 x égale 24. Donc x vaut 6. Sur le graphique, les deux droites se croisent en 6. Au-delà de 6 séances, la carte est plus avantageuse.",
+  "05q-question": "Question ! Une appli de musique coûte 4 euros par mois. Une autre coûte 10 euros à l'inscription, plus 2 euros par mois. Au bout de combien de mois coûtent-elles pareil ? A : 2 mois. B : 5 mois. C : 10 mois. Mets pause, et choisis !",
+  "05r-reponse": "Réponse B : 4 x égale 2 x plus 10. On enlève 2 x : 2 x égale 10, donc x vaut 5. On vérifie : 20 euros des deux côtés.",
+  "06-defi": "À toi de jouer. Un plombier facture 40 euros de déplacement, plus 30 euros de l'heure. Un autre facture 50 euros de l'heure, sans déplacement. Un : pour 3 heures, lequel est le moins cher ? Deux : pour quelle durée paie-t-on pareil ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Premier plombier : f de x égale 30 x plus 40. Second : g de x égale 50 x. Un : f de 3 égale 130 euros, g de 3 égale 150 euros. Le premier est moins cher. Deux : 30 x plus 40 égale 50 x. On enlève 30 x : 40 égale 20 x, donc x vaut 2. Pour 2 heures, on paie 100 euros des deux côtés.",
+  "07-finale": "Ce que tu as appris. Pour résoudre un problème, on nomme x, et on écrit chaque tarif comme une fonction. On calcule des images pour comparer. Pour savoir quand deux tarifs sont égaux, on résout une équation : c'est là que les droites se croisent.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

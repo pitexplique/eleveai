@@ -1,0 +1,14 @@
+{
+  "00-garde": "Défis sur les fonctions affines. Prêt pour le niveau du brevet ?",
+  "01-chantier": "Jade est cheffe de chantier. Sur son chantier, deux cuves. La cuve A contient 1 200 litres, et se vide de 40 litres par minute. La cuve B est vide, et se remplit de 20 litres par minute. Jade se demande : quand les deux cuves auront-elles le même volume ?",
+  "02-fonctions": "Après x minutes, la cuve A contient f de x égale moins 40 x plus 1 200. La cuve B contient g de x égale 20 x. On cherche x tel que f de x égale g de x. Moins 40 x plus 1 200 égale 20 x. On ajoute 40 x : 1 200 égale 60 x. 1 200 divisé par 60 : x vaut 20. Après 20 minutes, chaque cuve contient 400 litres.",
+  "03q-question": "Question ! Au bout de combien de minutes la cuve A sera-t-elle vide ? A : 40 minutes. B : 30 minutes. C : 1 200 minutes. Mets pause, et choisis !",
+  "03r-reponse": "Réponse B : la cuve est vide quand f de x égale 0. Moins 40 x plus 1 200 égale 0 : 40 x égale 1 200. 1 200 divisé par 40 : 30 minutes.",
+  "04-programme": "Défi suivant : un programme de calcul. Choisis un nombre x. Multiplie par 3. Ajoute 6. Puis enlève le double du nombre de départ. On obtient 3 x plus 6, moins 2 x. On réduit : x plus 6. C'est une fonction affine : a vaut 1, b vaut 6.",
+  "05q-question": "Question ! Programme : choisis un nombre, ajoute 2, multiplie par 5, puis enlève 10. Quelle fonction obtient-on ? A : 5 x plus 2. B : 5 x moins 10. C : 5 x. Mets pause, et choisis !",
+  "05r-reponse": "Réponse C : 5 fois, parenthèse, x plus 2, c'est 5 x plus 10. Moins 10 : il reste 5 x. Une fonction linéaire !",
+  "06-defi": "Défi final. f de x égale 2 x plus 1, et g de x égale moins x plus 7. Un : pour quelle valeur de x a-t-on f de x égale g de x ? Deux : quelles sont les coordonnées du point où les deux droites se croisent ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Un : 2 x plus 1 égale moins x plus 7. On ajoute x : 3 x plus 1 égale 7. On enlève 1 : 3 x égale 6, donc x vaut 2. Deux : f de 2 égale 4 plus 1 : 5. On vérifie : g de 2 égale moins 2 plus 7 : 5. Les droites se croisent au point 2 ; 5.",
+  "07-finale": "Ce que tu as appris. Une quantité qui change régulièrement s'écrit a x plus b. Deux fonctions sont égales là où leurs droites se croisent : on le trouve avec une équation. Et un programme de calcul peut cacher une fonction affine : on réduit l'expression.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

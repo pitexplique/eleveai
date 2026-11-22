@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Deux applis de trottinette. Laquelle est la moins chère ? Ça dépend de ton trajet !",
+  "01-image": "Appli A : 1 euro pour débloquer, puis 20 centimes la minute. Appli B : 30 centimes la minute, sans frais. Pour 5 minutes : A coûte 2 euros, B coûte 1 euro 50. B gagne. Pour 20 minutes : A coûte 5 euros, B coûte 6 euros. A gagne ! Les deux droites se croisent.",
+  "01q-question": "Question ! Au bout de combien de minutes les deux applis coûtent-elles pareil ? A : 5 minutes. B : 20 minutes. C : 10 minutes. Mets pause, et choisis !",
+  "01r-reponse": "Réponse C : 0,2 x plus 1 égale 0,3 x. Donc 0,1 x égale 1 : x vaut 10. Pour 10 minutes, 3 euros des deux côtés.",
+  "02-question": "À toi. Pour un trajet de 30 minutes, quelle appli choisis-tu, et combien paies-tu ? Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Une droite qui traverse toute ta feuille. Combien de calculs pour la tracer ? Deux seulement.",
+  "01-image": "f de x égale 3 x moins 2. f de 0 égale moins 2. f de 2 égale 6 moins 2 : 4. Deux points, une règle : la droite est tracée. Un troisième point ? Seulement pour vérifier.",
+  "01q-question": "Question ! Pour tracer f de x égale 2 x plus 1, quels deux points places-tu ? A : 0 ; 1 et 1 ; 3. B : 0 ; 2 et 1 ; 1. C : 1 ; 1 et 2 ; 2. Mets pause, et choisis !",
+  "01r-reponse": "Réponse A : f de 0 égale 1, et f de 1 égale 2 plus 1 : 3.",
+  "02-question": "À toi. Quels deux points choisis-tu pour tracer f de x égale moins x plus 5 ? Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}
