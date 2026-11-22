@@ -95,6 +95,14 @@
 // (AccueilCoach.tsx, AccueilMatieres.tsx et le journal restent sur le disque).
 // ⚠️ Les liens ne portent plus `?from=accueil` : la mesure des départs depuis
 // l'accueil s'arrête avec cette version (à remettre si on veut la suivre).
+// ⭐⭐⭐⭐⭐ REFONTE DU 22/11/2026 — « REFAIS LA PAGE D'ACCUEIL COMME UN CEO ».
+// Le bénéfice d'abord, la preuve ensuite, un appel clair, peu de texte, aucun mot
+// de prof. Maquette sur /accueil/nouvelle, puis Frédéric : « Oui, bascule ».
+// 👉 LE CONTENU VIT DANS ./AccueilCeo.tsx. Le Menu du jour est parti dans
+// /dashboard-prof. RETOUR ARRIÈRE = UNE LIGNE : `<AccueilSuivi offresFamille
+// compteur="barre" />` (le fichier reste sur le disque, avec son import).
+import AccueilCeo from "./AccueilCeo";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import AccueilSuivi from "./AccueilSuivi";
 
 // ⭐ LES MÉTADONNÉES VIVENT DANS ./metadata.ts, ET NULLE PART AILLEURS.
@@ -108,5 +116,5 @@ export default function AccueilPage() {
   // comptées (lib/videos/compteur.ts) + « le coach qui suit et aide votre
   // enfant », avec les exercices et les visiteurs de la semaine
   // (lib/accueil/chiffres-semaine.ts, à mettre à jour chaque semaine).
-  return <AccueilSuivi offresFamille compteur="barre" />;
+  return <AccueilCeo />;
 }
