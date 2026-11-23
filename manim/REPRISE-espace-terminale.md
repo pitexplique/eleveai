@@ -2636,6 +2636,22 @@ sur une arête » (épisode 9) dans sa forme la plus bête.
 (A C) et (E B) tracées, la grille garde 541 et 625 positions libres au lieu de 562 et
 647, et **les écarts retenus sont les mêmes**. Il n'y a donc qu'UNE table.
 
+### ⛔⛔ UN NOM DE FIGURE ÉTAIT COMPARÉ À SA FIGURE, ET À RIEN DE CE QU'ON POSE DESSUS
+
+Troisième récidive dans la même journée de « un instrument qui ne reçoit qu'une partie
+de la figure mesure une figure qui n'existe pas » (épisode 11). Chaque bloc était mesuré
+contre ses PROPRES traits : une arête repassée en couleur, un point d'intersection, une
+droite tracée par-dessus échappaient à tout. Vu à la planche du short du défi : le nom
+« F » du cube est à **0,063** de la diagonale (A G), qui vit dans le bloc « + (A G) » et
+pas dans le bloc « cube ». ⭐ Les blocs marqués « + » (posés SUR la figure) entrent
+maintenant dans la mesure de tous les autres.
+
+⭐⭐ **Et pour ce « F »-là il n'y avait PAS de réglage** : la grille rend **0 position
+libre sur 441 essayées**, parce que le cube porte déjà ses deux diagonales. C'est le cas
+que l'épisode 8 avait nommé — « quand la grille ne trouve rien, on n'étiquette pas ».
+L'écran ne nomme plus que les quatre sommets dont la question parle (A, B, G, H), et la
+figure y gagne. ⚠️ `cube_place(..., noms=(…))` existe pour ça.
+
 ### ⛔ UN VECTEUR DIRECTEUR EST TOUJOURS PORTÉ PAR SA DROITE — donc il la recouvre
 
 Vu à la planche de E3 : la droite, tracée de t = −0,12 à t = 0,75, était intégralement
