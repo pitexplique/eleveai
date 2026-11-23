@@ -157,6 +157,39 @@ def controler(shorts, faux_expres=False):
         elif m.group(1) not in lettres:
             erreurs.append(f"{ident} : la réponse annonce {m.group(1)}, "
                            f"qui n'est pas proposée")
+        else:
+            devinabilite(ident, segment, m.group(1))
+
+
+# ---- 6. la devinabilité : la bonne réponse est-elle la plus longue ? ----
+#
+# ⭐⭐ ET CE CONTRÔLE REND UNE MARGE, JAMAIS UN VERDICT SEUL.
+# La règle de la maison est « la bonne réponse ne doit pas être SEULE la plus longue ».
+# Écrite telle quelle, elle est BINAIRE : elle met dans le même sac un écart de 2
+# caractères et un écart de 6, qui ne sont pas le même défaut. Mesuré sur les 12 shorts :
+#   · E3 géométrie — bonne « 3, moins 1, 4 » (13) contre 7 et 7 : **86 % de plus**, réel ;
+#   · E6 géométrie — bonne « rien du tout » (12) contre « parallèles » (10) : **20 %**,
+#     et deux caractères sur une locution courte ne se devinent pas.
+# ⛔ Un seuil sans marge est un seuil qui CRIE TROP, et crier trop fait corriger des
+# textes qui allaient bien — ce qui a failli arriver trois fois dans la soirée du 23/11.
+# ⭐ Donc cet outil ne tranche pas : il sort une ALERTE qui porte l'écart en caractères
+# ET en pourcentage, et c'est un humain qui décide. Le signaler en ERREUR rendrait le
+# critère « 0 erreur » inatteignable, la leçon de `verifier-zone-margo.py`.
+def devinabilite(ident, segment, bonne):
+    props = [p.strip().rstrip(". ").strip()
+             for p in re.split(r"\s*[A-H]\s:\s", segment)[1:]]
+    if len(props) != 3:
+        return
+    L = [len(p) for p in props]
+    i = "ABC".index(bonne)
+    autres = sorted(L[:i] + L[i + 1:], reverse=True)
+    if L[i] <= autres[0]:
+        return                      # ni seule la plus longue, ni ex æquo au-dessus
+    ecart = L[i] - autres[0]
+    pour_cent = 100 * ecart / autres[0] if autres[0] else 999
+    alertes.append(f"{ident} : la bonne réponse ({bonne}, {L[i]} car.) est SEULE la plus "
+                   f"longue — {ecart} car. de plus que la 2ᵉ ({autres[0]}), soit "
+                   f"{pour_cent:.0f} %. À juger à l'œil : l'outil ne tranche pas.")
 
 
 def lire_choix(question):
@@ -177,6 +210,19 @@ def etalonner_choix():
     ok.append(("question simple", lire_choix(propre) == ["A", "B", "C"]))
     ok.append(("deux SOMMETS cités avant les choix", lire_choix(piege) == ["A", "B", "C"]))
     ok.append(("ordre A C B cassé", lire_choix(casse) != ["A", "B", "C"]))
+    # ⭐ Les témoins de la devinabilité : elle doit crier quand la bonne dépasse SEULE,
+    # et se taire quand elle est ex æquo ou plus courte. Sans le second, un outil qui
+    # crierait toujours passerait pour vigilant.
+    avant = len(alertes)
+    devinabilite("témoin-trop-longue", " A : oui. B : non. C : oui mais pas toujours.", "C")
+    crie = len(alertes) > avant
+    avant = len(alertes)
+    devinabilite("témoin-ex-aequo", " A : rouge. B : vert. C : jaune.", "B")
+    devinabilite("témoin-plus-courte", " A : oui vraiment. B : non. C : peut-être bien.", "B")
+    muet = len(alertes) == avant
+    del alertes[:]                       # les témoins ne polluent pas le rapport
+    ok.append(("devinabilité : crie sur une bonne SEULE la plus longue", crie))
+    ok.append(("devinabilité : muette sur ex æquo et sur plus courte", muet))
     for nom, bon in ok:
         print(f"   {'✅' if bon else '⛔'} témoin : {nom}")
     return all(b for _, b in ok)
@@ -202,7 +248,7 @@ def main():
     print(f"{len(erreurs)} erreur(s), {len(alertes)} alerte(s)")
     if etalon:
         ok = any("manquant" in e for e in erreurs) and temoins
-        print("✅ étalonné : la faute plantée a bien été vue, et les trois témoins passent."
+        print("✅ étalonné : la faute plantée a bien été vue, et les témoins passent tous."
               if ok else "⛔ ÉTALONNAGE RATÉ : la faute plantée ou un témoin n'a pas tenu.")
         return 0 if ok else 1
     if not erreurs:

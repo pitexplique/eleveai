@@ -53,7 +53,9 @@
 | ✅ **la notation vectorielle** | **faite sur les 9 scripts** : `auditer-fleches-vecteurs.py` → 0 nu (voir « LA PASSE DES FLÈCHES ») |
 | E12 `ps_espace_defi` | ✅ **script écrit, mesure ✅, dry run `-qh` 0 bord / 0 avance / 0 retard, planches `-ql` faites** — ⏳ **PAS DE HD** : Frédéric regarde les planches d'abord |
 | les scripts restants | ⏳ **E11 seul** (E12 est écrit) |
-| les 12 shorts | ⏳ pas de voix encore |
+| les 6 shorts de la GÉOMÉTRIE (E1–E6) | ✅ **voix, 36 WAV, marques, scripts, mesure hors rendu, dry run `-qh` 0 bord / 0 avance / 0 retard, planches `-ql` faites** — ⏳ **PAS DE HD** : Frédéric regarde les planches d'abord. Socle : `espace_commun_short.py`, mesure : `espace_mesure_short.py`. Voir « Ce que les SHORTS ont appris » |
+| les 6 shorts du PRODUIT SCALAIRE (E7–E12) | ⏳ pas de voix encore — ⚠️ leurs lettres de bonne réponse doivent **compléter** le tirage des six premiers (B C A C A B) pour retomber sur A 4 · B 4 · C 4 |
+| les 12 miniatures de short | ⛔ **0 sur 12, et là c'est un VERROU** : `publier-youtube.mjs` l. 802 retient tout short sans miniature (règle de Frédéric du 01/11) |
 | les 10 entrées de registre | ✅ **écrites le 23/11** dans `manim/manifeste-youtube.json` (1 717 vidéos), chacune avec ses 14 chapitres et ses 2 questions-pauses, par `manim/poste2/fiches-espace-vers-registre.py` |
 | les 12 miniatures | ⛔ **0 sur 12** — c'est ce qui bloque la publication, et donc le coach |
 | les rendus HD, le branchement coach, les fiches YouTube | ⏳ |
@@ -1903,6 +1905,50 @@ Appliqué ici : `se_coupent()` est aussi lancé sur (AB) et (AD), **qui se coupe
 disent la faute que nomme le leurre sans jamais la comparer à la vérité. Corrigées en
 « le leurre vaut ceci **et** il diffère de la bonne réponse ».
 
+### ⛔⛔ QUATRE INSTRUMENTS À MOI ONT FABRIQUÉ DES DÉFAUTS DANS LA MÊME SOIRÉE
+
+Aucun n'était en panne : les quatre rendaient un chiffre, et le chiffre était plausible.
+
+| l'instrument | ce qu'il a dit | la vraie cause |
+|---|---|---|
+| ma passe maths des shorts | « (AB) et (CG) ne se coupent jamais » : **vrai quoi qu'il arrive** | un test CREUX, `not any(isclose(0, 1) …)` — celui que cette note nomme déjà |
+| ma mesure de longueur | **3 shorts sur 6** condamnés | il comptait le point final sur A et B et pas sur C ; sur « 5 », un point DOUBLE la longueur |
+| mon vérificateur de gabarit | **23 signalements, 23 faux** | le clip d'abonnement exempté par sa LONGUEUR (« moins de 40 ») ; il en fait 49 |
+| mon critère de devinabilité | deux « défauts » de même rang | il est BINAIRE : 2 caractères et 6 caractères y sont le même verdict |
+
+⭐⭐ **LE QUATRIÈME EST LE PLUS INSTRUCTIF, parce qu'il ne parle pas d'un bug mais d'un
+CRITÈRE.** La règle de la maison — « la bonne réponse ne doit pas être seule la plus
+longue » — est juste, et écrite telle quelle elle est **sans marge**. Mesuré sur les 12
+shorts : E3 de la géométrie dépasse de **6 caractères sur 7, soit 86 %** (réel, ça se
+devine) ; E6 dépasse de **2 caractères sur 10, soit 20 %** (deux caractères sur une
+locution courte ne se devinent pas). Le même verdict pour les deux, et ce ne sont pas
+les mêmes défauts.
+
+⛔ **Un seuil sans marge est un seuil qui crie trop — et crier trop fait corriger des
+textes qui allaient bien.** C'est le coût réel : un WAV refait pour rien, et une voix
+juste abîmée.
+
+⭐ **D'où la forme que prend désormais ce contrôle dans
+`verifier-voix-shorts-espace.py`** : il ne tranche pas, il sort une **ALERTE qui porte
+l'écart en caractères ET en pourcentage**, et c'est un humain qui décide. Le mettre en
+ERREUR rendrait « 0 erreur » inatteignable — la leçon de `verifier-zone-margo.py`.
+⭐ **Et un rapport qui cite cette règle donne l'écart, jamais le verdict seul.**
+
+### ⭐⭐ CE QUI A MANQUÉ AUX QUATRE : UN TÉMOIN NÉGATIF
+
+Les quatre avaient un étalonnage, ou auraient pu l'avoir, et il ne les aurait pas
+attrapés : **un étalonnage plante UNE faute, à UN endroit.** Il prouve que cette
+assertion-là peut crier, jamais que les autres le peuvent, ni qu'elles savent **se
+taire**.
+
+⭐ Ce qu'il faut en plus, et qui a tenu : **un témoin NÉGATIF** — un cas voisin où la
+chose est vraie et où l'outil ne doit RIEN dire. `verifier-voix-shorts-espace.py` en
+porte cinq : une question simple, une question qui cite **deux sommets avant ses choix**
+(muet), un ordre « A C B » cassé (crie), une devinabilité franche (crie), un ex æquo et
+une bonne plus courte (muet).
+⛔ **Une exemption jamais mise à l'épreuve n'est pas une exemption**, et un instrument
+qui n'a jamais eu tort n'a peut-être jamais rien mesuré.
+
 ### ⭐⭐ TROIS DÉSACCORDS DANS LA SOIRÉE, ET AUCUN NE PORTAIT SUR UN NOMBRE
 
 La règle la plus transférable de la journée, et elle a été payée trois fois entre deux
@@ -2209,6 +2255,204 @@ sa tête, après 20 rendus HD.
   A(0;0;0), B(1;0;0), C(1;1;0), D(0;1;0), E(0;0;1), F(1;0;1), G(1;1;1), H(0;1;1).
 
 ---
+
+## ⛔⛔ Ce que les SHORTS ont appris (23/11/2026) — les six de la géométrie, E1 à E6
+
+*(écrit par la session qui a produit les six shorts de `geometrie_espace`. Les six
+paysages étaient livrés en HD ; il n'y avait **aucune voix de short** dans la série.
+⛔ Aucun rendu HD de ces six-là : tout a été contrôlé en `-ql`, et Frédéric regarde les
+planches d'abord — chemins absolus dans mon rapport au chef.)*
+
+État à la fin : **6 voix, 36 WAV, 1 006 marques, 0 cue non placée, 6 scripts, 0 BORD,
+0 AUDIT-AVANCE, 0 RETARD, 1 AUDIT-ABSENT par short** (`@eleveai974`, celui que les
+épisodes publiés portent aussi), **0 NU** à l'audit des flèches sur les 20 scripts.
+
+### ⭐⭐ LE 9:16 N'EST PAS UN 16:9 PLUS ÉTROIT : C'EST UNE COLONNE PLEINE
+
+Toutes les cotes de la série sont celles du paysage, et **aucune ne se transporte**.
+Mesuré avant d'écrire un écran :
+
+| ce qu'on croyait savoir | en paysage | dans un short |
+|---|---|---|
+| la marge de 3 % | x ±6,68 · y ±3,573 | **x ±2,115 · y ±3,865** |
+| la boîte de Ti-Margo | x ∈ [5,54 ; 6,66], **haut à −2,15** | centrée en bas, **haut à −2,92** |
+| la largeur offerte à un texte | 4,40 dans la colonne de droite | **3,90**, et c'est toute la page |
+| le nombre de colonnes | deux (figure à gauche, texte à droite) | **une** |
+
+⛔⛔ **Et la conséquence est structurelle, pas cosmétique : en 9:16 il n'y a PAS de
+« sous les cartes ».** Sous le bloc de cartes d'une question-pause, il ne reste que
+« Mets pause, et choisis ! » et Ti-Margo. Toute correction, toute explication, tout
+leurre commenté doit tenir **au-dessus** des cartes, dans la place que la tête de
+question et la question libèrent en s'effaçant — mesuré : 1,68 d'unité, pas plus.
+⭐ Le défaut « l'écran de réponse hérite », qui a cinq récidives dans les paysages, prend
+donc ici une forme neuve : il ne s'agit plus de lister ce qui reste, il s'agit de savoir
+qu'on n'a qu'un seul endroit où écrire.
+
+### ⭐⭐ LA PLACE N'EST PAS UN RÉGLAGE : TROIS FOIS, IL A FALLU CHANGER DE MOYEN
+
+Trois écrans n'avaient **aucune cote** qui passe, et le balayage de polices (de 30 à
+22 px pour la question × de 30 à 22 pour les cartes, hors rendu) l'a montré avant tout
+rendu. Les trois remèdes ne sont pas des cotes :
+
+| l'écran | ce qui ne passait pas | le moyen qui a remplacé la cote |
+|---|---|---|
+| E5 01, les trois cas | reste + flèche + conclusion sur une ligne : **5,30 de large pour 3,90**, les trois conclusions à **16,5 px** | la rangée est **empilée** (reste au-dessus, conclusion dessous), la flèche a disparu, **la couleur relie** |
+| E2 02b, la correction | deux blocs de texte au-dessus des cartes : 1,82 demandé pour **1,68 de libre** — 0,22 de chevauchement et 0,09 sur les cartes | « un pas vers D, un pas vers le haut » se **montre sur les arêtes [A D] et [D H]** |
+| E6 02, le cube | le cube prend 2,18 de haut ; « Mets pause » tombait à **−3,25** | ⭐ en cherchant la cote, j'ai vu que **la question n'a pas besoin du cube** : elle est générale |
+
+⭐⭐ **La leçon, et c'est la plus utile de la journée : quand un balayage de polices ne
+rend AUCUN couple qui passe, ce n'est pas une cote qui manque, c'est le moyen qui est
+mauvais.** La série a beaucoup de défauts corrigés d'un centième ; ces trois-là ne
+l'étaient pas, et les chercher d'un centième aurait coûté trois tours de rendu.
+
+### ⛔⛔ UNE RÈGLE DE POUCE SUR LA LARGEUR D'UNE LIGNE EST UN DÉFAUT QUI DORT
+
+Premier jet : les lignes coupées à la main, « à peu près 18 caractères ». Mesuré sur les
+six shorts, cinq blocs tombaient de 36 px à **26,6**, de 28 à **20,2**, de 28 à **18,7**
+— et rien ne le dit à l'image tant qu'on ne l'a pas mesuré.
+⭐ `ShortEspace.lignes()` coupe une phrase **en mesurant** : on ajoute un mot tant que le
+`Text` reste sous 3,90. Depuis, zéro réduction sur la prose des six shorts.
+⚠️ Et deux textes gardent une coupe à la main, chacun pour sa raison écrite à côté :
+« arrivée moins départ » (il doit être GRAND) et « Réponds en commentaire ! » (5,23 de
+large à 28 px, donc 20,9 px obtenus d'une seule ligne).
+
+### ⭐⭐ UN `au_fin` QUI CHERCHE SON EXTRAIT PEUT VISER LA MAUVAISE OCCURRENCE
+
+`au_fin("…")` fait un `find`, donc la **première** occurrence. Une ligne dont le texte se
+répète dans le clip — et « 0 moins 0 fait 0 » se répète — serait attendue sur
+l'occurrence d'avant, et s'afficherait **en avance sur la sienne**. C'est le mécanisme
+exact de « un gros AUDIT-TARD cachait une vraie avance », huit fois dans cette série, et
+il était ici **à l'état latent**.
+⭐ Deux remèdes, et il faut les deux :
+1. **`au_fin_pos(décalage, longueur)`** : le découpage d'une phrase connaît déjà le
+   décalage de chaque ligne, on ne cherche plus rien ;
+2. **un garde-fou d'EXÉCUTION** (`_ambigu`) qui crie `AMBIGU` dans le journal du dry run
+   dès qu'un extrait n'est pas unique dans son clip. ⛔ Le contrôle statique
+   (`espace_mesure_short.py --ancres`) ne voit que les appels LITTÉRAUX, et quatre des
+   six shorts posent leurs ancres dans une boucle : invisibles pour lui.
+   ✅ Mesuré sur les six : **0 AMBIGU**.
+
+👉 **L'invariant qui en sort**, et c'est lui qui permet de ne plus relire les TARD un par
+un : tout objet qui porte un nombre est montré par `au_fin_pos`, par un `au_fin` littéral
+unique, ou par `q_montrer_choix` — donc **aucun nombre ne peut être à l'écran avant
+d'être dit**, et les `AUDIT-TARD` restants sont le prix connu de `au_fin`. Le dry run le
+confirme : 0 `AUDIT-AVANCE` sur les six.
+⚠️ Mon premier critère pour trier les TARD comptait les occurrences du NOMBRE : dans une
+série de coordonnées, « 0 » et « 1 » reviennent dix fois par clip, et il signalait **18
+lignes sur 21**. Un instrument qui crie sur tout ne mesure rien.
+
+### ⛔⛔ L'AUDIT DES FLÈCHES RÉPONDAIT « 0 NU » SANS AVOIR REGARDÉ
+
+`auditer-fleches-vecteurs.py` lit six appels : `self.t`, `vec`, `vexpr`, `choix2`,
+`choix3`, `nomme`. Les shorts, eux, passent la plus grande part de leur texte par
+`blocs_phrase`, `lignes`, `eq_mots` et `appel_blocs` — quatre outils qui n'existaient pas
+quand il a été écrit. Son ✅ sur les six shorts ne valait donc rien.
+⭐ `espace_mesure_short.py --fleches` lit ces quatre appels, **avec la règle LUE dans
+l'outil partagé** (son regex, ses `MOTS_CAPS`, sa table `PAS_DES_VECTEURS` et leurs
+raisons, extraits par AST) : pas une copie, qui se serait périmée au premier
+élargissement. Résultat au premier jet : **deux noms nus**, « A G » et « B H » dans la
+question du commentaire de E6 — deux DROITES, qu'un élève de terminale aurait lues comme
+des vecteurs, dans le short dont toute la leçon est de distinguer ce qu'on voit de ce
+qu'on démontre. Écrites **(A G)** et **(B H)**, la convention de l'épisode 8.
+⏳ **Le vrai remède est d'élargir l'outil partagé à ces quatre appels.** Il vit dans
+`manim/poste2/`, que la session du produit scalaire partage : ⛔ ça se décide avec le
+chef, pas tout seul — exactement comme `frac()` dans le socle à l'épisode 12.
+
+### ⚠️ « D » ET « F » SONT POSÉS SUR UNE ARÊTE DU CUBE À TOUTES LES ÉCHELLES
+
+L'épisode 12 l'avait noté « constat, pas correctif », mesuré à u = 1,35. Remesuré sur
+trois échelles, avant d'écrire un écran :
+
+| u | « D » de l'arête la plus proche | « F » de l'arête la plus proche |
+|---|---|---|
+| 1,45 | 0,025 | 0,013 |
+| 1,10 | 0,025 | 0,013 |
+| 1,00 | 0,010 | **0,001** |
+
+⭐ **Ce n'est donc pas une question d'échelle, c'est le décalage par défaut de
+`cube()`.** Les écarts viennent d'une recherche en grille (pas de 0,04 entre −0,5 et
++0,5, à plus de 0,12 de tout segment tracé et à plus de 0,30 des sept autres noms, classé
+par distance au sommet) et vivent dans `ShortEspace.ECARTE_CUBE`.
+⚠️ Et **l'écart dépend de la FIGURE, pas seulement de l'échelle** : avec les deux
+diagonales (A C) et (E B) tracées, la grille ne laisse plus que **6** positions libres à
+« D » et la plus proche s'éloigne à 0,538 du sommet. D'où une seconde table,
+`ECARTE_CUBE_DIAG`. Un écart mesuré sur une autre figure ne vaut pas ici.
+⛔ Et l'instrument a dû être refait : son premier jet ne retrouvait que **9 segments sur
+12** dans les sous-mobjets du cube, parce que les trois arêtes cachées sont des
+`DashedLine`, donc des groupes de tirets. Il reçoit maintenant les douze arêtes
+**calculées**. C'est « un instrument qui ne reçoit qu'une partie de la figure mesure une
+figure qui n'existe pas » (épisode 11), à sa deuxième récidive.
+⏳ **Les cubes de E2, E6, E7, E8 et E9 sont livrés en HD avec le décalage par défaut** :
+constat, et il se décide avec Frédéric devant l'image.
+
+### ⛔ UN CUBE RECENTRÉ PAR `move_to` N'EST PLUS OÙ `r.pt(...)` LE DIT
+
+Bâti autour de l'origine du repère puis recentré, le cube se dessine au bon endroit — et
+toute arête, tout point, toute diagonale qu'un écran ajoute **ensuite** se pose à côté,
+en silence. ⭐ `cube_place` calcule donc l'ORIGINE pour que le cube tombe où on veut
+(le centre projeté du cube unité est à u × (0,705 ; 0,6435)), et ne déplace rien après.
+⚠️ Le symptôme aurait été une arête de couleur décalée de la moitié d'un cube — visible,
+mais seulement à l'image, et après un rendu.
+
+### ⛔ UN BUDGET DE SECONDES SE MESURE, IL NE S'ESTIME PAS
+
+Trois `RETARD` au dry run, et aucun n'était une faute de synchro : c'étaient des
+**animations trop longues avant la phrase suivante**. Un `play` de figure glissé entre
+deux phrases coûte son `run_time` au budget du clip.
+⭐ Deux remèdes mesurés : `jouer_phrase(..., avec=[…])` fait paraître la figure **avec**
+sa légende au lieu de les mettre en file ; et un titre écrit par `Write` pendant la voix
+met la première ligne du clip **0,50 s en retard sur son propre mot** — le titre
+s'AJOUTE avant la voix (le gabarit de `convexite_defi_short.py`, et c'est le bon).
+
+### ⛔ UNE LISTE DE BLOCS SE PREND PAR SON NOM, PAS PAR SON INDEX
+
+En ajoutant « titre » et « badge » en tête de la liste d'un écran, `p["02b"][2][1]` est
+passé de la correction aux cartes, et `jouer_phrase` a cassé sur un VGroup. ⭐ Le dry run
+l'a attrapé en criant fort (`AttributeError`), ce qui est le bon comportement — mais si
+les deux blocs avaient été du même type, il aurait animé le mauvais **en silence**.
+`ShortEspace.par_nom()` existe pour ça.
+
+### ⭐ CE QUI A BIEN MARCHÉ, ET QU'IL FAUT REFAIRE POUR LES SIX SHORTS DU PRODUIT SCALAIRE
+
+- **`pieces(e)` BÂTIT et POSITIONNE, `construct()` ANIME.** L'instrument mesure alors
+  les objets mêmes qui seront rendus — c'est le remède de la cote de Ravi (épisode 10),
+  appliqué à l'architecture et pas à une constante. Rien à synchroniser entre l'écran et
+  sa mesure, parce qu'il n'y a qu'un seul objet.
+- **Mesurer AVANT d'écrire un écran** : l'échelle des ceintures (y de 2,48 à 3,08), la
+  boîte de Ti-Margo (−3,98 à −2,92), la largeur d'une ligne police par police, la place
+  d'un cube selon `u`, la platitude des plans employés. Une demi-heure, et aucun rendu
+  pour rien.
+- **Un balayage de polices hors rendu** (fsq × fsc, de 30 à 22) qui rend le plus GRAND
+  couple tenant les deux contraintes (toute police ≥ 22 px, « Mets pause » au-dessus de
+  −2,87). ⛔ Et il faut se méfier du flottant : `>= 22` refusait 21,99999 et annonçait
+  « aucun couple ne passe » sur deux shorts qui passaient.
+- **Étalonner `verifier-avant-rendu.py` avant de croire son zéro** : une copie du script
+  avec UN `au_mot` faux, puis supprimée. Il a crié ; sur les six vrais, il se tait, et ce
+  silence-là est une preuve.
+- **Les assertions d'import, et elles ont trouvé une figure fausse** : la droite de
+  l'écran 00 de E5 coupait le sol à t = 1,43, hors du segment tracé — l'écran aurait
+  montré une droite qui ne coupe rien sous une légende qui dit le contraire.
+- **Choisir une figure par la MESURE** : (A C) et (E B) se coupent à l'écran aux
+  paramètres **0,589** et **0,831**, tous deux dans ]0 ; 1[, et leur déterminant vaut
+  −1 — elles se croisent pour l'œil et jamais dans l'espace. ⛔ Les paires choisies à vue
+  ratent : (A G) et (B H) se coupent vraiment, au centre du cube.
+- **`eq_mots`, pour ne pas exempter plus que nécessaire** : la voix dit « zéro » en
+  lettres, l'écran écrit le chiffre, donc l'audit crie `AUDIT-ABSENT « 0 »`. Un
+  `sans_audit` sur toute l'équation aurait aussi exempté le « 2 » de « 2t = 0 », le seul
+  nombre qu'il fallait surveiller. ⚠️ Et la règle a dû être élargie : « 0y » et « 0z »
+  n'étaient pas reconnus par « le zéro nu ».
+
+### ⏳ CE QUI RESTE SUR CES SIX SHORTS, ET QUI N'EST PAS DE LA PRODUCTION
+
+- **Les planches `-ql` sont à REGARDER** — c'est la condition de Frédéric, redite le
+  matin du 23/11. ⛔ Rien n'est rendu en HD, et la mesure hors rendu ne prouve pas
+  l'image : « une assertion mesure le modèle, des pixels mesurent l'image — les deux ».
+- **Les gros plans** sur les figures (cube, repères, morceaux de plan) : six épisodes
+  d'affilée ont payé un défaut que seul un recadrage ×2,5 à ×3 montrait.
+- **Les miniatures des shorts sont OBLIGATOIRES** : `publier-youtube.mjs` l. 802 retient
+  tout short sans miniature (règle de Frédéric du 01/11). ⛔ Pour les paysages c'est une
+  perte de qualité ; pour un short, c'est un verrou.
+- **Les entrées de registre** des 12 shorts, et leur `microId` — aucune n'existe.
 
 ## Le rendu HD
 
