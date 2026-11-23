@@ -69,18 +69,31 @@ function dateCourte(t: number) {
   return new Date(t).toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
 }
 
-type Mesures = { moyenne: number | null; seances: number; questions: number; jours: number; notes: number[] };
+type Mesures = {
+  moyenne: number | null;
+  seances: number;
+  questions: number;
+  jours: number;
+  /** Séances qui comptent (hors entraînement) : bonnes réponses et questions. */
+  justesComptees: number;
+  questionsComptees: number;
+};
 
+// ⚖️ MOYENNE PONDÉRÉE (23/11/2026, Frédéric : « si tu pondères il faut
+// expliquer à l'élève ») : toutes les bonnes réponses ÷ toutes les questions
+// × 20. Une séance d'une seule question ne pèse plus autant qu'une de 30.
+// Même calcul que lib/server/bulletinClasse.ts (« Ce que voit ton prof »).
 function mesurer(liste: SeanceCockpit[]): Mesures {
-  const notes = liste
-    .filter((s) => !estEntrainement(s.details) && typeof s.score_sur_20 === "number")
-    .map((s) => s.score_sur_20 as number);
+  const comptent = liste.filter((s) => !estEntrainement(s.details) && (s.nb_tentatives || 0) > 0);
+  const justesComptees = comptent.reduce((a, s) => a + (s.bonnes_reponses || 0), 0);
+  const questionsComptees = comptent.reduce((a, s) => a + (s.nb_tentatives || 0), 0);
   return {
-    moyenne: notes.length ? Math.round((notes.reduce((a, b) => a + b, 0) / notes.length) * 10) / 10 : null,
+    moyenne: questionsComptees > 0 ? Math.round((justesComptees / questionsComptees) * 200) / 10 : null,
     seances: liste.length,
     questions: liste.reduce((a, s) => a + (s.nb_tentatives || 0), 0),
     jours: new Set(liste.map((s) => jourCle(new Date(s.created_at).getTime()))).size,
-    notes,
+    justesComptees,
+    questionsComptees,
   };
 }
 
@@ -201,13 +214,7 @@ export default function CarteCockpit({
   const reperes = [0, Math.floor((periode - 1) / 2), periode - 1];
 
   const lignes = toutVoir ? dansPeriode : dansPeriode.slice(0, 8);
-  const comptees = m.notes;
   const nbEntrainement = dansPeriode.filter((s) => estEntrainement(s.details)).length;
-  const somme = comptees.reduce((a, b) => a + b, 0);
-  const detailSomme =
-    comptees.length <= 6
-      ? comptees.map(virgule).join(" + ")
-      : `${comptees.slice(0, 4).map(virgule).join(" + ")} + … (${comptees.length} notes)`;
 
   return (
     <section className="mt-6 overflow-hidden rounded-2xl border border-slate-800 bg-black text-white shadow-2xl md:flex">
@@ -485,19 +492,23 @@ export default function CarteCockpit({
         </div>
       </div>
 
-      {/* ── La moyenne, expliquée avec ses nombres ── */}
+      {/* ── La moyenne, expliquée avec ses nombres (phrases courtes : les 6e lisent mal) ── */}
       <div className="mx-3 mb-4 rounded-xl border border-slate-800 bg-slate-950 p-4 text-sm sm:mx-4">
         <div className="font-semibold text-white">🧮 Comment on calcule ta moyenne</div>
-        <p className="mt-1 text-slate-300">Une séance = une note : tes réponses justes ÷ tes questions × 20.</p>
-        <p className="mt-1 text-slate-300">Exemple : 6 justes sur 8 questions → 6 ÷ 8 × 20 = 15/20.</p>
-        {comptees.length > 0 ? (
-          <p className="mt-2 font-semibold tabular-nums text-slate-100">
-            Ta moyenne = ({detailSomme}) ÷ {comptees.length} = {virgule(somme)} ÷ {comptees.length} ={" "}
+        <p className="mt-1 text-slate-300">On compte toutes tes questions. Puis toutes tes bonnes réponses.</p>
+        {m.questionsComptees > 0 ? (
+          <p className="mt-2 text-base font-semibold tabular-nums text-slate-100">
+            {m.justesComptees} bonnes réponses sur {m.questionsComptees} questions :<br />
+            {m.justesComptees} ÷ {m.questionsComptees} × 20 ={" "}
             <span className="text-blue-400">{virgule(m.moyenne ?? 0)}/20</span>
           </p>
         ) : (
           <p className="mt-2 font-semibold text-slate-100">Aucune séance notée sur cette période.</p>
         )}
+        <p className="mt-2 text-slate-300">
+          ⚖️ Une séance de 30 questions compte plus qu’une séance d’une seule question.
+        </p>
+        <p className="mt-1 text-slate-300">Une seule erreur ne fait donc pas chuter ta moyenne.</p>
         {nbEntrainement > 0 && (
           <p className="mt-1 text-slate-400">
             🏋️ {nbEntrainement} séance{nbEntrainement > 1 ? "s" : ""} d’entraînement : elle

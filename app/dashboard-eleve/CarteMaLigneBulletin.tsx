@@ -63,7 +63,7 @@ export default function CarteMaLigneBulletin() {
     <section className="mt-6 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
       <h2 className="text-xl font-black text-slate-900">👩‍🏫 Ce que voit ton prof</h2>
       <p className="text-sm text-slate-500">
-        Ta ligne dans le bulletin de la classe{d.classe ? ` ${d.classe}` : ""} · 3 derniers mois · calculé sur ton travail au coach
+        Ta ligne dans le bulletin de la classe{d.classe ? ` ${d.classe}` : ""} · 3 derniers mois · moyenne = tes bonnes réponses ÷ tes questions × 20
       </p>
 
       {recompenses.length > 0 && (
