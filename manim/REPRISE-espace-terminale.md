@@ -1638,6 +1638,18 @@ et la forme arrive en 07b par une figure PLANE dont l'équilatéralité est vér
 assertion du module — c'est la règle de `plan_dessine` (E8) et des `coin()` (E10),
 appliquée ici à la RÉPONSE d'une question et non plus à un décor.
 
+> ⚠️⚠️ **ET CETTE ASSERTION NE PROUVE PAS L'IMAGE — correction de ma propre phrase.**
+> Elle mesure les trois `Line` telles que le module les CONSTRUIT : c'est l'arithmétique
+> de la figure, pas ses pixels. Entre les deux il y a `scale`, `move_to`, le `stroke_width`
+> et l'anticrénelage — exactement l'écart que la série appelle « un instrument ne prouve
+> rien tant qu'on n'a pas regardé l'image ». ⭐ Le contrôle qui ferme vraiment la question
+> se fait **sur le rendu** : on extrait les pixels de la couleur du triangle et on mesure
+> les trois côtés. Fait sur le `-ql` de cet épisode : **87,0 / 83,4 / 84,9 px**, écart max
+> **2,2 %** à la moyenne, angles **59,7° / 58,0° / 62,3°** — du bruit d'anticrénelage, et
+> non une déformation (le 3-4-5 faux de E9 sortait à **13 %**). ⛔ Donc : pour toute figure
+> qui annonce une proportion, l'assertion du module est le garde-fou de l'écriture, et la
+> MESURE EN PIXELS est la preuve. Les deux, pas l'une des deux.
+
 ### ⛔⛔ UNE FIGURE JUSTE QUI MENT, DEUXIÈME FORME : LA COULEUR
 
 Le triangle plan a d'abord été dessiné avec un côté par couleur de la charte — bleu, rose,
