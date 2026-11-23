@@ -3,17 +3,27 @@
 **12 épisodes = les 12 micro-compétences du coach**, 6 pour `geometrie_espace` et 6 pour
 `produit_scalaire_espace`. Chacun : une vidéo paysage + un short. 24 vidéos.
 
-> ⛔⛔ **LES 12 ENTRÉES DE MANIFESTE N'EXISTENT QUE DANS
-> `manim/poste2/FICHES-YOUTUBE-espace-terminale.md`, ET NULLE PART AILLEURS.**
-> Mesuré le 22/11 : **0 entrée `espace` dans `manim/manifeste-youtube.json`**, et
-> `brancher-videos-coach.mjs --classe terminale-spe` répond « Rien à brancher ».
-> Tant que personne ne reporte ces entrées dans le registre au moment de la
-> publication, **E1 est une vidéo qu'aucun élève ne peut atteindre** : elle existe en
-> HD, et le coach ne la propose à personne.
-> ⚠️ Une liste tenue à la main à côté d'un registre, c'est l'accident qui est déjà
-> arrivé trois fois dans ce dépôt — des pages en ligne que rien ne déclarait. Le
-> registre est partagé et se commit **par clés** (`manim/outils-commit-cles.py`) :
-> c'est pour ça que la liste est à part, pas pour l'oublier.
+> ✅ **LES NEUF ÉPISODES RENDUS SONT DANS LE REGISTRE DEPUIS LE 23/11/2026.**
+> Ils n'y étaient pas : mesuré le 22/11, **0 entrée `espace` dans
+> `manim/manifeste-youtube.json`** sur 1 707 vidéos. Neuf vidéos existaient en HD et
+> n'atteignaient personne — et rien nulle part ne le signalait.
+> ⛔ **On ne recopie plus une entrée à la main** :
+> `python -X utf8 manim/poste2/fiches-espace-vers-registre.py --ecrire` fait le report
+> depuis `FICHES-YOUTUBE-espace-terminale.md`, qui reste la source RÉDIGÉE (titre,
+> accroche, chapitres). Il va chercher la lettre et l'instant de chaque question-pause
+> dans le JOURNAL DU RENDU HD et le texte des questions dans la VOIX, et il **refuse
+> d'écrire** si la voix, l'écran rendu et la table du `.md` ne disent pas la même lettre
+> (contrôlé : les 18 questions des neuf épisodes sont d'accord).
+> ⚠️ Une liste tenue à la main à côté d'un registre, c'est l'accident déjà arrivé trois
+> fois dans ce dépôt — des pages en ligne que rien ne déclarait. Le registre est partagé
+> et se commit **par clés** (`manim/outils-commit-cles.py`).
+>
+> ⛔⛔ **CE QUI BLOQUE ENCORE LA PUBLICATION : LES MINIATURES.** Zéro sur douze. Le
+> chemin `…/<slug>.png` est déclaré dans chaque entrée, et le fichier n'existe pas.
+> Tant qu'elles manquent, `publier-youtube.mjs` ne peut pas publier, donc
+> `brancher-videos-coach.mjs` continue de répondre « Rien à brancher » : **les neuf
+> vidéos n'atteignent toujours aucun élève.** Le goulot a changé de nature, il n'a pas
+> disparu — et il ne se décide pas tout seul (une miniature est une image à faire).
 
 > ⭐ Cette note est **vivante** : on y ajoute ce qui a coûté cher, pas ce qui a marché.
 > Elle est à la série « espace » ce que `manim/REPRISE-entiers-cm1-6e.md` est aux entiers.
@@ -41,6 +51,8 @@
 | ✅ **la notation vectorielle** | **faite sur les 9 scripts** : `auditer-fleches-vecteurs.py` → 0 nu (voir « LA PASSE DES FLÈCHES ») |
 | les 3 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
 | les 12 shorts | ⏳ pas de voix encore |
+| les 9 entrées de registre | ✅ **écrites le 23/11** dans `manim/manifeste-youtube.json` (1 716 vidéos), chacune avec ses 14 chapitres et ses 2 questions-pauses |
+| les 12 miniatures | ⛔ **0 sur 12** — c'est ce qui bloque la publication, et donc le coach |
 | les rendus HD, le branchement coach, les fiches YouTube | ⏳ |
 
 **Ce qui débloque tout** : un épisode ne dépend plus que de son script Manim. Son fichier de

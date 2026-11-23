@@ -1,11 +1,21 @@
 # Fiches YouTube — série « GÉOMÉTRIE DANS L'ESPACE », terminale spé
 
-⛔ **Rien n'est écrit dans `manim/manifeste-youtube.json` par cette session.** Ce registre
-est partagé, et une copie de travail ment : il se commit **par clés**
-(`manim/outils-commit-cles.py`). Les entrées prêtes sont ici, à reporter au moment de la
-publication, quand la miniature existe.
+✅ **LES NEUF ÉPISODES RENDUS SONT DANS `manim/manifeste-youtube.json` (23/11/2026).**
+Ils n'y étaient pas : mesuré le 22/11, le registre portait 1 707 vidéos et **zéro**
+entrée « espace ». Neuf vidéos existaient en HD et n'atteignaient personne.
 
-⚠️ Il manque la **miniature** de chaque épisode (`…/<slug>.png`) : aucun des douze n'en a.
+⛔ **Ce fichier-ci n'est plus la source du registre : il en est la source RÉDIGÉE.**
+Le report est fait par `python -X utf8 manim/poste2/fiches-espace-vers-registre.py`
+(`--ecrire` pour toucher le registre), qui relit les blocs JSON, l'accroche et les
+chapitres d'ici, va chercher la lettre et l'instant de chaque question dans le JOURNAL
+DU RENDU HD, le texte des questions dans la VOIX, et **refuse d'écrire** si les trois
+sources ne disent pas la même lettre. ⛔ Ne plus recopier une entrée à la main : une
+liste tenue à la main à côté d'un registre est l'accident déjà arrivé trois fois ici.
+Le registre est partagé : le commit se fait **par clés** (`manim/outils-commit-cles.py`).
+
+⚠️ **Il manque la miniature de chaque épisode** (`…/<slug>.png`) : aucun des douze n'en
+a, et le chemin est déclaré dans l'entrée. ⛔ **`publier-youtube.mjs` ne peut donc pas
+publier** — c'est le seul verrou qui reste entre ces neuf vidéos et un élève.
 ⚠️ Et tant qu'une vidéo n'est pas publiée, `brancher-videos-coach.mjs` répond « Rien à
 brancher » — mesuré le 22/11 sur `--classe terminale-spe`.
 

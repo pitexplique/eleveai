@@ -27,7 +27,14 @@ const TRANCHE_PAR_CLASSE = {
   cp: "6-8", ce1: "6-8", ce2: "6-8",
   cm1: "9-11", cm2: "9-11", "6e": "9-11",
   "5e": "12-14", "4e": "12-14", "3e": "12-14",
-  seconde: "15-18", premiere: "15-18", "premiere-spe": "15-18", terminale: "15-18", stmg: "15-18",
+  // ⚠️ `terminale-spe` MANQUAIT (23/11/2026), alors que `premiere-spe` y était : les
+  // vidéos de terminale spé sortaient toutes en « classe inconnue — centres non
+  // vérifiables », c'est-à-dire SAUTÉES sans écart. Mesuré en versant les neuf vidéos de
+  // la série « géométrie dans l'espace » : les 185 écarts n'ont pas bougé et les
+  // « classe inconnue » sont passées de 28 à 37, soit exactement nos neuf. Un contrôle
+  // qui saute en silence ce qu'on vient d'écrire ne prouve rien.
+  seconde: "15-18", premiere: "15-18", "premiere-spe": "15-18", terminale: "15-18",
+  "terminale-spe": "15-18", stmg: "15-18",
   crpe: "adultes", adultes: "adultes",
 };
 
