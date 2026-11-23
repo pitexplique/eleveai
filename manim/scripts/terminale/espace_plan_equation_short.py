@@ -156,8 +156,19 @@ class EspacePlanEquationShort(ShortEspace):
         r1, r2 = p["02b-reponse"][3][1], p["02b-reponse"][4][1]
         ok = self.q_reponse(cartes, BONNE, pause, rebours)
         self.play(FadeOut(VGroup(tete, q)), run_time=0.25)
-        self.au_fin("moins 2, égale zéro")
-        self.play(FadeIn(r1, shift=UP * 0.08), run_time=0.4)
+        # ⛔⛔ L'ÉQUATION SE REMPLIT AU RYTHME DE LA VOIX, elle ne se pose pas d'un bloc.
+        # Mesuré au dry run : posée entière à `au_fin("moins 2, égale zéro")`, son
+        # « 1x » arrivait **5,11 s** après que la voix l'ait dit — le plus gros écart
+        # des six shorts. C'est la règle de l'épisode 9 : « un bloc qui porte plusieurs
+        # nombres que la voix énumère ne se pose pas d'un coup ».
+        # ⚠️ Les ancres sont choisies UNIQUES dans le clip : « égale zéro » y est deux
+        # fois (la seconde dans « plus d égale zéro »), donc on ancre sur
+        # « 2, égale zéro ». Le garde-fou `AMBIGU` l'aurait dit, mais autant l'écrire.
+        for bout, extrait in ((r1[0:1], "1 fois x"), (r1[1:3], "plus zéro fois y"),
+                              (r1[3:5], "plus zéro fois z"), (r1[5:7], "moins 2"),
+                              (r1[7:9], "2, égale zéro")):
+            self.au_fin(extrait)
+            self.play(FadeIn(bout, shift=UP * 0.08), run_time=0.22)
         self.jouer_phrase(r2, "Ici y et z sont libres.")
         self.attendre_voix(marge=0.3)
 
