@@ -1,36 +1,4 @@
 {
- "0-premier-essai-trois-quarts": {
-  "fichier": "atelier-video-essais/0-premier-essai-trois-quarts.mp4",
-  "poster": null,
-  "vignette": "atelier-video-essais/0-premier-essai-trois-quarts.vignette.webp",
-  "titre": "0 premier essai trois quarts",
-  "short": false,
-  "youtube": null
- },
- "1-exemple-trois-quarts-sans-voix": {
-  "fichier": "atelier-video-essais/1-exemple-trois-quarts-sans-voix.mp4",
-  "poster": null,
-  "vignette": "atelier-video-essais/1-exemple-trois-quarts-sans-voix.vignette.webp",
-  "titre": "1 exemple trois quarts sans voix",
-  "short": false,
-  "youtube": null
- },
- "2-exemple-12-billes-sans-voix": {
-  "fichier": "atelier-video-essais/2-exemple-12-billes-sans-voix.mp4",
-  "poster": null,
-  "vignette": "atelier-video-essais/2-exemple-12-billes-sans-voix.vignette.webp",
-  "titre": "2 exemple 12 billes sans voix",
-  "short": false,
-  "youtube": null
- },
- "3-exemple-droite-graduee-sans-voix": {
-  "fichier": "atelier-video-essais/3-exemple-droite-graduee-sans-voix.mp4",
-  "poster": null,
-  "vignette": "atelier-video-essais/3-exemple-droite-graduee-sans-voix.vignette.webp",
-  "titre": "3 exemple droite graduee sans voix",
-  "short": false,
-  "youtube": null
- },
  "3e-equation-resolution": {
   "fichier": "3e/maths/paysage/fr/equation-resolution/eleveai-maths-3e-equation-resolution.mp4",
   "poster": "3e/maths/paysage/fr/equation-resolution/eleveai-maths-3e-equation-resolution.png",
@@ -678,14 +646,6 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=3e&matiere=maths&notion=volume_solide&microId=volume_pyramide_cone_reduction&display=simple"
- },
- "4-essai-avec-voix-gtts": {
-  "fichier": "atelier-video-essais/4-essai-avec-voix-gtts.mp4",
-  "poster": null,
-  "vignette": "atelier-video-essais/4-essai-avec-voix-gtts.vignette.webp",
-  "titre": "4 essai avec voix gtts",
-  "short": false,
-  "youtube": null
  },
  "4e-aire-defi": {
   "fichier": "4e/maths/aire/30-aire-defi/eleveai-maths-4e-aire-defi.mp4",
@@ -3350,14 +3310,6 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_pyramide&display=simple"
- },
- "5-version2-voix-eleve-puis-voix-generee": {
-  "fichier": "atelier-video-essais/5-version2-voix-eleve-puis-voix-generee.mp4",
-  "poster": null,
-  "vignette": "atelier-video-essais/5-version2-voix-eleve-puis-voix-generee.vignette.webp",
-  "titre": "5 version2 voix eleve puis voix generee",
-  "short": false,
-  "youtube": null
  },
  "5e-aire-composer": {
   "fichier": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer.mp4",
