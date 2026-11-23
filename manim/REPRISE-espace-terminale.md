@@ -1852,6 +1852,126 @@ occurrence, le contrôle qui a payé sur E5, E6, E9 et E10).
 
 ---
 
+## 🔁 PASSATION — les six shorts du produit scalaire (23/11/2026, 19 h 20)
+
+Écrite à **66 % de contexte** et non à 90, exprès : une passation se rédige au large.
+⛔ Les six scripts Manim ne sont PAS écrits, et c'est une décision, pas un abandon —
+la note recense 3 à 5 tours de `-ql` par épisode (planche, gros plans, script de mesure
+à chaque tour) : six scripts depuis 66 % finiraient en compaction au milieu d'une figure.
+
+### ✅ CE QUI EST FAIT ET COMMITÉ — onze commits, rien en suspens
+
+| la pièce | où | commit |
+|---|---|---|
+| les 6 voix de short | `manim/voix/terminale-ps-espace-*-short.json` | `d42941132` (E12 repris en `24632d090`) |
+| leurs marques — **1 144**, puis 1 145 après la reprise de E12 | `manim/scripts/terminale/ps_espace_*_short_marques.json` | `d42941132`, `24632d090` |
+| le tirage des lettres **A C B C B A** (graine 2311) | table en tête de `VOIX-espace-terminale.md` | `d42941132` |
+| le lanceur de WAV, dédoublé à dessein | `manim/poste2/voix-ps-espace-shorts-wav.sh` | `d42941132` |
+| la passe maths des 6 shorts, étalonnée | `manim/poste2/controler-maths-shorts-ps-espace.py` | `d42941132` |
+| le gabarit des **12** shorts, étalonné, 5 témoins | `manim/poste2/verifier-voix-shorts-espace.py` | `00646ac0b` → `cba55130d` |
+| le découpage des 6 + la cartographie sur le socle | `manim/poste2/DECOUPAGE-shorts-ps-espace.md` | `a5e9a2804` → `1e6b8fb04` |
+| les 3 schémas PLANS dans la boîte commune + leur contrôle d'import | `manim/poste2/espace3d.py` | `452fcc339`, `b5523a629` |
+
+⛔ **Rien n'est poussé, aucun rendu HD n'a été lancé.**
+
+### ⏳ CE QUI RESTE, DANS L'ORDRE — et le premier point n'est pas de la production
+
+1. **Le SHA du socle des shorts.** `manim/scripts/terminale/espace_commun_short.py` était
+   écrit à 18:42 et **non commité** (dernier état commité : `13e3d209c`, 18:10).
+   ⛔ On n'écrit pas six scripts contre un fichier qui bouge : si une signature change, on
+   ne sait plus contre quoi on a écrit. La cartographie, elle, se refait en quelques
+   minutes — c'est un travail peu cher à perdre, contrairement aux scripts.
+2. **`racine = EcransEspace.racine`** dans le bloc des emprunts du socle des shorts — une
+   ligne, demandée et pas encore faite. ⛔ Sans elle, la question du short de E9 s'écrit
+   « (√3²) + 4² » : le glyphe √ se rend mais n'a **aucune barre**, donc l'écran porterait
+   la faute même que ce short combat. Critère d'emprunt vérifié : la méthode n'utilise que
+   `self.t`, ni `super()`, ni `col()`, ni `gauche()`.
+3. **Les 6 scripts**, un par un, jamais en parallèle. Pour chacun, l'ordre de la série :
+   `verifier-avant-rendu.py` → dry run (**0 BORD, 0 AUDIT-AVANCE**) → `espace_mesure_short.py`
+   → `-ql` + **planche ET gros plans** → `verifier-zone-margo.py` sur le `-ql` →
+   `auditer-fleches-vecteurs.py` à **0 NU**. ⛔ Aucun HD avant que l'image soit regardée.
+4. Les entrées de registre, puis la publication — et c'est un geste de Frédéric.
+
+⭐ **Tout ce qu'il faut pour le point 3 est déjà écrit** : `DECOUPAGE-shorts-ps-espace.md`
+donne, pour chacun des six, l'idée unique, le texte exact de chaque écran, les trois
+propositions, ce que montre la pause **et ce qu'elle ne doit PAS montrer**, puis la
+cartographie écran → pièce du socle avec ses arguments.
+
+### ✅ CE QUI EST VÉRIFIÉ, ET PAR QUELLE COMMANDE — à ne pas refaire, ni à croire sur parole
+
+| ce qui est vérifié | la commande |
+|---|---|
+| les 6 voix : 0 faute de calcul sur 50 contrôles, après étalonnage | `python -X utf8 manim/poste2/controler-maths-shorts-ps-espace.py [--etalonner]` |
+| les 12 shorts : gabarit, symboles, copier-collers, lettres — 0 erreur, 2 alertes de devinabilité (20 % et 86 %, arbitrées) | `python -X utf8 manim/poste2/verifier-voix-shorts-espace.py [--etalonner]` |
+| les 3 figures planes se construisent et tiennent leur promesse | à l'import de `espace3d` (`_controler_figures_planes()`) |
+| le cube a bien ses 12 arêtes | à l'import de `espace3d` (`_controler_aretes_du_cube()`) |
+| 6 paysages LIVRÉS s'importent encore après mon ajout | import de `ps_espace_*` et `espace_*`, leurs assertions de module tournent |
+| les flèches : 162 fléchés, **0 NU** sur 12 scripts | `python -X utf8 manim/poste2/auditer-fleches-vecteurs.py` |
+| les 6 voix de short de la GÉOMÉTRIE : **aucune faute de calcul** | relecture du 23/11, chaque affirmation refaite par commande, les non-évidentes par une SECONDE route |
+
+### ⚠⚠ CE QUI N'EST PAS VÉRIFIÉ, ET QUI NE PEUT PAS L'ÊTRE PAR UN OUTIL
+
+- ⛔⛔ **L'EXCLUSION MUTUELLE DES PROPOSITIONS SE LIT À L'ŒIL.** Aucun outil ne la produit
+  et aucun ne la produira : il faudrait comprendre le français et la mathématique en même
+  temps. Les six sont lues et justifiées **une par une** dans `DECOUPAGE-shorts-ps-espace.md` ;
+  toute réécriture d'une question oblige à refaire cette lecture à la main.
+- La passe maths des **six shorts de la GÉOMÉTRIE** n'existe toujours pas comme instrument
+  (ils ont été relus, ce qui n'est pas la même chose qu'un script qui refait les calculs).
+- Ce qui s'AFFICHE : rien de ce qui précède ne regarde une image. Planche + gros plans
+  restent obligatoires, et **avant** le HD.
+
+### ⛔⛔ `write_text` OUVRE AVANT D'ENCODER : une faute de frappe a VIDÉ CETTE NOTE
+
+Arrivé en écrivant cette passation même, et c'est le plus brutal de la soirée.
+
+Le script d'insertion contenait une paire de substituts mal échappée (`\ud83d\udd01` écrit
+dans une chaîne Python au lieu de `\U0001F501`). À l'écriture :
+
+```
+UnicodeEncodeError: 'utf-8' codec can't encode characters ... : surrogates not allowed
+```
+
+⛔⛔ **Et le fichier était déjà vide.** `Path.write_text` ouvre le fichier en mode
+écriture — ce qui le **TRONQUE** — **puis** encode. L'encodage a échoué après la
+troncature : **2 605 lignes à zéro**, dont les 243 lignes de la session géométrie et tout
+ce que cette note a coûté. Une exception qui ressemble à « rien ne s'est passé » avait
+déjà tout détruit.
+
+✅ **Réparé sans perte, parce que tout était commité** :
+`git checkout HEAD -- manim/REPRISE-espace-terminale.md` → 2 605 lignes, identiques à
+HEAD, section voisine intacte. ⛔ Par CHEMIN, jamais un `reset` : le dépôt est partagé.
+
+⭐⭐ **LA PARADE, en une ligne : on ENCODE AVANT D'OUVRIR.**
+
+```python
+octets = texte.encode("utf-8")      # si ça casse, rien n'est ouvert, rien n'est perdu
+chemin.write_bytes(octets)
+```
+
+⭐ Et la leçon générale, qui dépasse Python : **un écrivain qui tronque d'abord et
+valide ensuite transforme une faute de frappe en perte de données.** Partout où l'on
+réécrit un fichier en place, la validation vient AVANT l'ouverture — ou l'on écrit à
+côté puis on remplace.
+⚠️ Corollaire pour ce dépôt partagé : **ne jamais réécrire un document partagé qui porte
+du travail non commité.** Ici tout l'était, et c'est la seule raison pour laquelle cet
+incident coûte zéro.
+
+### ⛔ LES PIÈGES PAYÉS CE SOIR — détaillés plus bas, résumés ici
+
+Quatre instruments à moi ont **fabriqué des défauts** dans la même soirée, et aucun
+n'était en panne : un test creux `isclose(0, 1)` ; un comptage qui incluait le point final
+et condamnait 3 shorts sur 6 ; 23 faux positifs parce qu'un clip commun était exempté par
+sa LONGUEUR et non par son NOM ; un critère BINAIRE qui mettait 2 et 6 caractères dans le
+même verdict. ⭐ Ce qui leur manquait à tous : un **témoin négatif**.
+
+Et trois autres, qui ne sont pas des instruments :
+- une **docstring qui promet ce que le code ne porte pas** (le garde-fou de `coin` est
+  resté dans son épisode) — pire qu'un silence, parce qu'une promesse dispense de vérifier ;
+- un **`--stat` lancé et non lu** : +246 lignes pour un ajout de 45, chiffre vu et non
+  interrogé. D'où la parade : **on liste les TITRES ajoutés**, pas les lignes ;
+- une **dette justifiée par un danger imaginaire** (un cycle d'import qui n'existe pas) :
+  elle ne se rembourse jamais, parce que personne n'ose y toucher.
+
 ## ⭐⭐ Les SIX SHORTS du produit scalaire (E7 à E12) — les voix (23/11/2026)
 
 État à la fin de cette passe : **les 6 voix écrites, leurs 6 fichiers de marques faits**
