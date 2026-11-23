@@ -54,7 +54,8 @@ def dans_plan(p, eq):               # eq = (a, b, c, d) pour ax + by + cz + d = 
 def angle(u, v):                    # en degrés
     return degrees(acos(ps(u, v) / (norme(u) * norme(v))))
 
-# le cube ABCDEFGH dans le repère (A ; AB, AD, AE) — neuf épisodes sur douze s'en servent
+# le cube ABCDEFGH dans le repère (A ; AB, AD, AE) — SEPT voix en parlent, SIX scripts
+# le dessinent (recompté le 23/11 ; « neuf » était un chiffre de tête)
 A, B, C, D = (0, 0, 0), (1, 0, 0), (1, 1, 0), (0, 1, 0)
 E, F, G, H = (0, 0, 1), (1, 0, 1), (1, 1, 1), (0, 1, 1)
 

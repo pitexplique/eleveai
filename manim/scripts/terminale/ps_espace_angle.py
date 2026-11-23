@@ -102,7 +102,9 @@ INCL01 = 30                           # 01 : le panneau incliné de trente degr�
 # forme que « la fiche et le registre ont divergé » du même jour : deux copies
 # d'une seule vérité divergent dès qu'on en touche une.
 POS_RAVI, ECH_RAVI = (-5.72, 0.85), 0.66
-# ⭐ Le cube de 9 épisodes sur 12, dans le repère (A ; AB, AD, AE).
+# ⭐ Le cube des SIX scripts qui le dessinent, dans le repère (A ; AB, AD, AE).
+# ⚠️ La note annonçait « 9 épisodes sur 12 » : c'était une intention de conception,
+# jamais comptée sur le code. Recompté le 23/11 : six scripts, sept voix.
 S = {"A": (0, 0, 0), "B": (1, 0, 0), "C": (1, 1, 0), "D": (0, 1, 0),
      "E": (0, 0, 1), "F": (1, 0, 1), "G": (1, 1, 1), "H": (0, 1, 1)}
 AG, AB = S["G"], S["B"]               # 09b : cos = 1/√3 → 54,7°, donc 55°

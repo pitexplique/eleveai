@@ -1338,7 +1338,10 @@ c'est le sujet principal de cet épisode.
 
 Frédéric, devant une planche de figures : « vérifie le segment EH ». Mesuré :
 `Repere3D.cube()` traçait `AB BC CD AD AE BF CG DH EF FG GH` — **onze**. Le haut du cube
-était **OUVERT entre E et H**, dans la figure que NEUF épisodes sur douze emploient.
+était **OUVERT entre E et H**, dans la figure que **SIX** scripts sur dix dessinent
+(recompté : espace_repere_coordonnees, espace_defi, ps_espace_calculer,
+ps_espace_orthogonalite, ps_espace_norme_distance, ps_espace_angle — et SEPT voix en
+parlent, ce qui est l'origine du « neuf » que je répétais sans l'avoir compté).
 
 ⛔⛔ **AUCUN instrument du dépôt ne pouvait le dire, et c'est la leçon.** Le dry run ne
 regarde que les bords du cadre ; les scripts de mesure ne regardent que les cotes des
