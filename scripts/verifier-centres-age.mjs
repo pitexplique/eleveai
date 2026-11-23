@@ -27,6 +27,11 @@ const TRANCHE_PAR_CLASSE = {
   cp: "6-8", ce1: "6-8", ce2: "6-8",
   cm1: "9-11", cm2: "9-11", "6e": "9-11",
   "5e": "12-14", "4e": "12-14", "3e": "12-14",
+  // ⛔⛔ LES ÉCARTS QUE CETTE LIGNE FAIT APPARAÎTRE EN TERMINALE SPÉ NE SONT PAS DES
+  // DÉFAUTS — Frédéric, 23/11/2026 : « laisse tranquille les centres d'intérêt, pas un
+  // vrai défaut ». Il s'agit des centres « chevaux », « avions », « mode », « velo »,
+  // « voitures-motos », « construction » et « cuisine » des séries convexité, suites et
+  // dénombrement. ⛔ Ne pas les « corriger », ne pas les resignaler.
   // ⚠️ `terminale-spe` MANQUAIT (23/11/2026), alors que `premiere-spe` y était : les
   // vidéos de terminale spé sortaient toutes en « classe inconnue — centres non
   // vérifiables », c'est-à-dire SAUTÉES sans écart. Mesuré en versant les neuf vidéos de

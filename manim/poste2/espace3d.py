@@ -298,7 +298,18 @@ class Repere3D:
             "G": (ox + k, oy + k, oz + k), "H": (ox, oy + k, oz + k),
         }
         nom_de = dict(zip("ABCDEFGH", noms))
-        vues = [("A", "B"), ("B", "C"), ("E", "F"), ("F", "G"), ("G", "H"),
+        # ⛔⛔ [E H] MANQUAIT, ET IL A MANQUÉ DEPUIS LE PREMIER ÉPISODE (trouvé par
+        # Frédéric le 23/11/2026, à l'œil, sur une planche de figures — par AUCUN outil).
+        # Le cube ne portait que ONZE arêtes sur douze : le haut était OUVERT à gauche,
+        # entre E et H. ⚠️ Et rien ne pouvait le dire — le dry run ne regarde que les
+        # bords du cadre, la mesure ne regarde que les cotes des blocs, et à la planche
+        # une arête absente ne « saute » pas aux yeux puisqu'il n'y a rien à voir. C'est
+        # la forme la plus pure du défaut de l'épisode 8 (« cinq morceaux construits,
+        # quatre joués ») : ici le morceau n'était même pas construit.
+        # ⭐ Le contrôle qui le prouve est en bas de ce fichier, et il tourne à l'import :
+        # les douze arêtes d'un cube sont les paires de sommets qui diffèrent d'UNE
+        # coordonnée, et on les compte.
+        vues = [("A", "B"), ("B", "C"), ("E", "F"), ("F", "G"), ("G", "H"), ("E", "H"),
                 ("A", "E"), ("B", "F"), ("C", "G")]
         cachees = [("A", "D"), ("D", "C"), ("D", "H")]
         g = VGroup()
@@ -531,3 +542,36 @@ class PlancheEspace3D(Scene):
                  etiquette("droite : un point, un sens", 3, 1))
 
         self.wait(0.1)
+
+
+# ⛔⛔ LE CUBE A-T-IL SES DOUZE ARÊTES ? — contrôle exécuté à l'IMPORT (23/11/2026)
+#
+# Il a manqué [E H] depuis le premier épisode de la série, dans la figure que NEUF
+# épisodes sur douze emploient. Frédéric l'a vu à l'œil sur une planche ; aucun
+# instrument du dépôt ne pouvait le dire, parce qu'ils mesurent tous ce qui EST dessiné
+# (ses bords, ses cotes, ses chevauchements) et jamais ce qui MANQUE.
+# ⭐ Le contrôle ne lit pas la liste `vues` — ce serait se relire soi-même. Il relève les
+# segments RÉELLEMENT construits, retrouve leurs extrémités parmi les huit sommets, et
+# compare aux douze paires qui diffèrent d'exactement UNE coordonnée. C'est la leçon
+# « un étalon qui partage le défaut de l'instrument ne prouve rien ».
+def _controler_aretes_du_cube():
+    r = Repere3D(o=np.array([0.0, 0.0, 0.0]), u=1.0, portee=2)
+    g = r.cube(cote=1)
+    pos = {s: tuple(np.round(r.pt(*v)[:2], 3)) for s, v in g.P3.items()}
+    inv = {v: k for k, v in pos.items()}
+    traces = set()
+    for m in g.submobjects:
+        if isinstance(m, Line):          # DashedLine hérite de Line : les deux comptent
+            a = inv.get(tuple(np.round(m.get_start()[:2], 3)))
+            b = inv.get(tuple(np.round(m.get_end()[:2], 3)))
+            if a and b:
+                traces.add("".join(sorted((a, b))))
+    attendues = {"".join(sorted((s1, s2))) for s1 in g.P3 for s2 in g.P3
+                 if s1 < s2 and sum(1 for k in range(3)
+                                    if g.P3[s1][k] != g.P3[s2][k]) == 1}
+    manque = attendues - traces
+    assert not manque, f"cube() ne trace pas les arêtes {sorted(manque)}"
+    assert len(traces) == 12, f"cube() trace {len(traces)} arêtes au lieu de 12"
+
+
+_controler_aretes_du_cube()
