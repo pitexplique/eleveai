@@ -593,6 +593,40 @@ tête, la faute la plus fréquente de cette série. Les scripts qui appellent `.
 `espace_position_relative`) n'ont jamais dessiné de cube — l'arête manquante ne les a
 pas touchés, et les re-rendre aurait pris le verrou deux heures pour rien.
 ⭐ La commande : `grep -c "\.cube(" manim/scripts/terminale/*espace*.py`
+
+## ⛔⛔ Les noms des axes n'étaient comparés à RIEN
+
+Même famille que l'arête manquante, et trouvé de la même façon — à l'image, sur un
+premier `-ql`. Les mesures d'écartement (`etiquettes()`, `loin_des_fleches()`) ne voient
+que ce qu'on leur **donne**, et personne ne leur donnait les « x », « y », « z » que
+`r.axes()` dessine **sur tous les écrans à repère**. Trois défauts d'un coup sur E11,
+aucun visible à la planche :
+
+- deux étiquettes fondues en une (`n̄y` à l'écran 02) ;
+- la pointe d'un vecteur normal posée sur la pointe de l'axe des x (écran 05) ;
+- le **disque** d'un point collé au « y » (écran 09b) : A (1 ; 1 ; 1) se projette à **8°**
+  de cet axe, donc son nom était dégagé mais pas son point.
+
+⭐ `noms_axes()` est prêt à recopier dans
+`manim/poste2/mesure-ps-espace-plan-normal.py`. ⏳ **À extraire dans le socle quand le
+gel sera levé** — il vaudrait pour les six épisodes à cube, si on les re-rend un jour.
+
+⭐⭐ La leçon, et elle dépasse les axes : **un instrument qui ne reçoit qu'une partie de
+la figure mesure une figure qui n'existe pas.** Avant de croire un écartement, demande-toi
+ce que tu lui as donné — et ce que le repère dessine tout seul.
+
+## ⚠️ `portee` est tronqué à l'entier, sans un mot
+
+`Repere3D.__init__` fait `self.portee = int(portee)`. Donc `portee=1.8` donne des axes de
+longueur **1**, et `portee=2.9` des axes de longueur **2**. Vérifié :
+
+```
+portee=1.8 -> axes jusqu'à 1      portee=2.9 -> axes jusqu'à 2
+```
+
+Rien ne le signale : on balaie des valeurs et elles rendent toutes la même image. ⭐ Si un
+axe est trop court d'un cheveu, ce n'est pas `portee` qu'il faut ajuster finement, c'est
+`u` (la longueur d'une unité), qui est un flottant, lui.
 Dessiné avec `self.repere(...)` et `portee=2`, les axes se superposent exactement aux
 arêtes A B, A D et A E sur leur première moitié — on ne voit pas des axes, on voit des
 arêtes grises doublées. Et surtout : **le bout de l'axe des y tombe À L'INTÉRIEUR du
