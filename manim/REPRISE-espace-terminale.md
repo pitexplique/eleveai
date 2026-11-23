@@ -594,6 +594,40 @@ tête, la faute la plus fréquente de cette série. Les scripts qui appellent `.
 pas touchés, et les re-rendre aurait pris le verrou deux heures pour rien.
 ⭐ La commande : `grep -c "\.cube(" manim/scripts/terminale/*espace*.py`
 
+## ⛔⛔ Celui qui rend est celui qui a REGARDÉ
+
+Un « j'ai regardé, c'est bon » transmis d'une session à l'autre **n'est pas un regard**.
+C'est un chiffre non mesuré dans sa version la plus chère, puisqu'il se paie en rendu HD.
+
+Le 23/11, j'ai arbitré qu'une session rende le HD de E12 « quand l'autre aura dit que ses
+images sont regardées ». Faux, et c'est le défaut que cette série combat depuis deux
+jours : E1 a demandé 4 tours de `-ql`, E11 en a demandé 5, et les trois défauts de figure
+de la journée — l'arête manquante, les noms d'axes, la platitude de (BDE) — ont tous été
+trouvés par un œil, aucun par un outil.
+
+⭐ **Deux sorties, jamais une troisième.** Soit celle qui a regardé enchaîne son HD
+elle-même ; soit celle qui rend ouvre le `-ql`, la planche **et** les gros plans de ses
+propres yeux avant de lancer. ⛔ Rendre parce qu'une autre l'a dit n'est pas une option.
+
+⭐⭐ **Et quand deux sessions se partagent un épisode : regarder est à l'une, corriger
+est à l'autre.** Celle qui voit un défaut dans la figure d'autrui le DÉCRIT — l'écran,
+l'instant, ce qui se recouvre — et attend. C'est ce qui a manqué le matin du 23/11 sur
+`ps_espace_angle.py`, où deux sessions ont corrigé les deux mêmes défauts chacune de son
+côté, sans le savoir.
+
+## ⭐⭐ Le réflexe qui a tenu quand les territoires n'ont pas suffi
+
+Trois collisions de fichiers en deux jours, et **ce qui en a évité deux n'est pas le
+découpage des territoires : c'est qu'une session s'est arrêtée et a demandé.** Les
+territoires aident, mais ils ne couvrent que ce qu'on a prévu — et le 23/11, une session
+**hors de la famille** écrivait E12 sans que personne l'ait prévu. Aucun territoire ne
+l'aurait attrapée ; le réflexe, si.
+
+👉 La règle qui en sort, pour toute session de cette série : **si tu trouves un fichier
+de la série modifié il y a quelques minutes et que ce n'est pas toi, tu t'arrêtes et tu
+demandes avant d'écrire une ligne.** `stat -c '%y' <fichier>` et `list_sessions` (sans
+`linked`, pour voir hors famille) suffisent à savoir.
+
 ## ⛔⛔ Les noms des axes n'étaient comparés à RIEN
 
 Même famille que l'arête manquante, et trouvé de la même façon — à l'image, sur un
