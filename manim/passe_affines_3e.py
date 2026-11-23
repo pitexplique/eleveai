@@ -20,7 +20,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from passe_distributivite import mesurer, mmss  # noqa: E402
-from passe_decimaux import chapitres  # noqa: E402
+from passe_decimaux import chapitres, chap0  # noqa: E402  (chap0 : maintenant dans chapitres, gardé idempotent)
 
 RACINE = Path(__file__).resolve().parents[1]
 SERIE = RACINE / "manim" / "sorties" / "3e" / "maths" / "fonctions-affines"
@@ -289,18 +289,6 @@ def lire_temps():
         raise SystemExit(f"Fichier des temps absent : {TEMPS}\n"
                          "Rends d'abord les mp4, puis lance : python manim/passe_affines_3e.py temps")
     return json.loads(TEMPS.read_text(encoding="utf-8"))
-
-
-def chap0(ch):
-    """passe_decimaux.chapitres ne fond jamais le PREMIER chapitre : « 00:00 accroche » puis « 00:07 métier »
-    faisait un chapitre de 7 s, et YouTube refuse alors TOUS les chapitres. Le 2e est fondu dans le 1er."""
-    def sec(m):
-        mm, ss = m.split(":")
-        return int(mm) * 60 + int(ss)
-    if len(ch) > 1 and sec(ch[1][0]) < 10:
-        print("  chapitre fondu (début) :", ch[1][1], file=sys.stderr)
-        ch = [ch[0]] + ch[2:]
-    return ch
 
 
 def entrees():
