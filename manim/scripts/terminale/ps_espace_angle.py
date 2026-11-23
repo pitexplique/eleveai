@@ -191,10 +191,14 @@ def ravi(s=1.0):
     pantalon = RoundedRectangle(width=0.70, height=0.34, corner_radius=0.10,
                                 fill_color=PANTALON, fill_opacity=1,
                                 stroke_width=0).move_to(P(0, -0.36))
+    # ⛔ LES DEUX SEGMENTS SONT DU PANTALON, ET C'EST LE GROS PLAN QUI L'A DIT : la
+    # cuisse sombre et le mollet couleur PEAU se lisaient comme un short avec des
+    # jambes nues — sur un installateur en gilet de chantier. Un vêtement de travail
+    # est d'une seule pièce, et la jambe garde ses deux segments pour son genou.
     jambe_g = VGroup(Line(P(-0.17, -0.52), P(-0.22, -0.90), stroke_width=13, color=PANTALON),
-                     Line(P(-0.22, -0.90), P(-0.20, -1.24), stroke_width=13, color=PEAU))
+                     Line(P(-0.22, -0.90), P(-0.20, -1.24), stroke_width=13, color=PANTALON))
     jambe_d = VGroup(Line(P(0.17, -0.52), P(0.24, -0.90), stroke_width=13, color=PANTALON),
-                     Line(P(0.24, -0.90), P(0.22, -1.24), stroke_width=13, color=PEAU))
+                     Line(P(0.24, -0.90), P(0.22, -1.24), stroke_width=13, color=PANTALON))
     # ⚠️ Épaules à ±0,32 : DANS le torse (demi-largeur 0,43), et le torse passe dessus.
     bras_leve = VGroup(Line(P(-0.32, 0.58), P(-0.70, 0.74), stroke_width=11, color=PEAU),
                        Line(P(-0.70, 0.74), P(-0.86, 1.14), stroke_width=11, color=PEAU))
@@ -508,7 +512,15 @@ class PsEspaceAngleBase(EcransEspace):
         self.clear()
         self.add_mascotte()
         self.dire("01-situation")
-        c = ravi(0.66).move_to(P(-5.72, 0.35))
+        # ⛔⛔ 0,85 ET NON 0,35 : vu au gros plan au second tour, le bord HAUT du cadre
+        # de conclusion (y = −1,44) barrait « Saint-Pierre » (bas à −1,57). Le tour
+        # précédent avait écarté « Ravi » de « Saint-Pierre » en passant le buff de 0,08
+        # à 0,18 — et ce faisant il a poussé « Saint-Pierre » SUR le cadre. ⭐ C'est la
+        # leçon de E9 (« fuir une flèche pour tomber sur une arête ») : une correction
+        # qui ne connaît qu'une partie de l'écran DÉPLACE le défaut.
+        # ⚠️ Et la place est en HAUT : Ravi monte à 1,33 pour une marge à 3,573, et la
+        # colonne du panneau commence à x = −4,13, donc il ne la rencontre jamais.
+        c = ravi(0.66).move_to(P(-5.72, 0.85))
         self.au_mot("Voici Ravi")
         nom = self.t("Ravi", 28, JAUNE_TITRE).next_to(c, DOWN, buff=0.22)
         # ⛔ Le garde-fou AVANT le play, et pas après (défaut n° 7 de l'épisode 1, refait
@@ -1013,8 +1025,13 @@ class PsEspaceAngleBase(EcransEspace):
         # ⛔ LA FLÈCHE NE COIFFE QUE LE NOM, PAS LE SIGNE : `vec("−v")` dessinait la
         # flèche au-dessus de « −v » tout entier, et au gros plan on lisait un double
         # trait. Un vecteur opposé s'écrit « − » suivi de « v⃗ ».
-        nw = VGroup(self.t("−", 26, C_VECTEUR2), self.vec("v", 26, C_VECTEUR2))
-        nw.arrange(RIGHT, buff=0.06, aligned_edge=DOWN)
+        # ⚠️ ET LE SIGNE S'ALIGNE SUR LE CENTRE DU « v », PAS SUR LA LIGNE DE BASE :
+        # `aligned_edge=DOWN` posait le moins au niveau du pied de la lettre, et au gros
+        # plan on lisait « _v⃗ ». Un signe moins se centre à mi-hauteur.
+        vv = self.vec("v", 26, C_VECTEUR2)
+        mo = self.t("−", 26, C_VECTEUR2).next_to(vv.texte, LEFT, buff=0.06)
+        mo.set_y(float(vv.texte.get_center()[1]))
+        nw = VGroup(mo, vv)
         nw.move_to(o + g.p3 * 0.78 + ecart(g.p3, -1, 0.52))
         nw.set_opacity(0.75)
         self.au_mot("Si tu retournes un vecteur")
@@ -1325,11 +1342,19 @@ class PsEspaceAngleBase(EcransEspace):
         # « ‖A B⃗‖ » se lisaient comme un PRODUIT. Deux normes sont deux résultats, pas
         # une multiplication — et l'écran 06 passe son temps à dire que le produit des
         # normes est au DÉNOMINATEUR.
+        # ⛔⛔ UNE LIGNE, AVEC UN POINT-VIRGULE — et deux défauts corrigés d'un coup.
+        # Côte à côte sans séparateur, « √3 » et « ‖A B⃗‖ » se lisaient comme un PRODUIT
+        # (vu au gros plan). Mais sur DEUX lignes, le bloc gagnait 0,5 de haut et sa
+        # première ligne venait TOUCHER le calcul du dessus — la flèche de « ‖A G⃗‖ »
+        # montait dans « 1 × 1 ». ⚠️ Et ma mesure ne comparait pas ces deux blocs-là :
+        # c'est le trou d'instrument de l'épisode 6 (« l'accolade mordait de 0,13, et
+        # aucun outil ne comparait ces deux blocs »), refait ici. Le contrôle manquant
+        # est ajouté dans `mesure-ps-espace-angle.py`.
         lig1 = VGroup(self.sans_audit(self.vexpr("‖A G‖ =", ("A G",), fs, WHITE)),
                       self.racine(norme2(AG), fs, WHITE))
         lig1.arrange(RIGHT, buff=0.14, aligned_edge=DOWN)
-        lno = VGroup(lig1, self.sans_audit(self.vexpr("‖A B‖ = 1", ("A B",), fs, WHITE)))
-        lno.arrange(DOWN, aligned_edge=LEFT, buff=0.10)
+        lno = VGroup(lig1, self.sans_audit(self.vexpr("; ‖A B‖ = 1", ("A B",), fs, WHITE)))
+        lno.arrange(RIGHT, buff=0.20, aligned_edge=DOWN)
         self.col(lno, 0.15)
         self.play(FadeIn(lno, shift=RIGHT * 0.12), run_time=0.55)
         # ⚠️ Une fraction dont le dénominateur est un RADICAL : le bloc est haut, et sa

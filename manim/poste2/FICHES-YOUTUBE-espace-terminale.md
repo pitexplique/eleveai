@@ -594,6 +594,78 @@ d'abord · 2:14 D'un point à l'autre · 2:37 La racine ne se distribue pas · 3
 ordre · 4:37 À toi de jouer · 4:56 Correction · 5:39 Ce que tu as appris.
 ---
 
+## E10 · `terminale-ps-espace-angle` — ⏳ HD en cours, chiffres à relever au rendu
+
+`manim/sorties/terminale/maths/geometrie/ps-espace-angle/eleveai-maths-terminale-ps-espace-angle.mp4`
+⭐ Dry run `-qh` : **15 écrans, 0 BORD, 0 AUDIT-AVANCE, 0 RETARD**, et un seul
+`AUDIT-ABSENT`, celui de `@eleveai974` que les épisodes publiés portent aussi. Les 9
+`AUDIT-TARD` sont tous ≤ 1,75 s et relus à la main : c'est la durée des animations.
+⭐⭐ **Les 2 cues « 577 » ne sont pas un défaut.** « 577 » n'apparaît qu'une fois dans le
+texte du clip ; WinRT en a émis TROIS (25,50 / 25,82 / 26,09 s), parce qu'il le lit
+« cinq cent soixante-dix-sept ». Le convertisseur place la première à l'offset 326 et
+saute les deux autres SANS avancer : la marque est au bon endroit et les 41 suivantes du
+clip sont justes. ⚠️ Ce n'est pas la règle « une décimale vaut 3 cues » (E6) — « 577 »
+est un ENTIER lu en trois mots, et c'est le garde-fou `SAUT_MAXI` qui fait le travail.
+**Un entier long (577, 101, 180) se comporte comme une décimale** : à savoir pour E11/E12.
+⛔⛔ **Aucune figure d'angle n'est en cavalière**, et c'est mesuré : la projection de la
+série n'en conserve aucun. u(1 ; 1 ; 0) y tombe à **11,5°** de l'axe des x, et l'angle du
+défi s'y lit **42,4°** pour 54,7° réels — douze degrés de mensonge. Les figures d'angle
+sont donc PLANES (`coin()`), leur angle dessiné est vérifié par une assertion du module,
+et l'arc du cube ne porte **aucune valeur** (c'est une convention, comme `angle_droit`).
+
+```json
+{
+  "id": "terminale-ps-espace-angle",
+  "notionId": "produit_scalaire_espace",
+  "microId": "ps_espace_angle",
+  "classe": "terminale-spe",
+  "ceinture": "verte",
+  "serie": "Maths Tle spé",
+  "type": "longue",
+  "fichier": "terminale/maths/geometrie/ps-espace-angle/eleveai-maths-terminale-ps-espace-angle.mp4",
+  "miniature": "terminale/maths/geometrie/ps-espace-angle/eleveai-maths-terminale-ps-espace-angle.png",
+  "titre": "La grande diagonale d'un cube ne fait pas 45° · Calculer un angle dans l'espace · Tle spé",
+  "centres": ["nature-ecologie"],
+  "tags": ["angle", "produit scalaire", "cosinus", "arccos", "espace", "cube ABCDEFGH", "grande diagonale", "terminale", "bac"]
+}
+```
+
+**Accroche** (à relire par Frédéric avant publication) :
+
+> Ravi installe des panneaux solaires sur les toits de Saint-Pierre. Un panneau face au
+> soleil produit à plein ; incliné de trente degrés, il perd un peu ; à quatre-vingt-dix
+> degrés, il ne produit plus rien. Ce qui décide du rendement, c'est l'angle entre la
+> direction du soleil et celle du panneau — et cet angle se calcule avec un produit
+> scalaire.
+>
+> Dans cette vidéo :
+> • la seconde formule du produit scalaire, et le cosinus qu'on en isole : le produit
+>   scalaire divisé par le PRODUIT des deux normes
+> • le signe du produit scalaire donne la nature de l'angle avant tout calcul : positif
+>   aigu, nul droit, négatif obtus — parce que les deux normes sont toujours positives
+> • un exemple mené jusqu'au bout sans calculatrice : un cosinus qui vaut un demi, c'est
+>   soixante degrés
+> • les trois pièges : on divise par le produit et jamais par la somme ; un cosinus reste
+>   entre moins 1 et 1, donc 1,25 est une erreur de calcul ; et l'angle de deux VECTEURS
+>   n'est pas l'angle de deux DROITES — pour des droites on prend la valeur absolue
+> • les quatre lignes de la copie, et l'unité qu'on oublie : un angle sans degrés ni
+>   radians, c'est le point perdu
+>
+> Deux questions-pauses et un défi corrigé dans le cube ABCDEFGH d'arête 1 : l'angle
+> entre la grande diagonale et une arête. Il vaut 55 degrés environ, et surtout pas 45 —
+> beaucoup de copies écrivent 45 sans calculer. Entraîne-toi sur eleveai.fr
+
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Un produit scalaire, deux normes, une division · 0:10 Ravi et les panneaux solaires
+de Saint-Pierre · 0:36 Du produit scalaire à l'angle · 1:13 Le signe décide avant le
+calcul · 1:41 Question 1 · 2:05 Réponse : obtus, parce que le produit scalaire est
+négatif · 2:29 Jusqu'au bout, sans calculatrice · 2:57 Les trois pièges · 3:37 Question 2
+· 4:04 Réponse : un cosinus ne dépasse jamais 1 · 4:31 Quatre lignes, dans cet ordre ·
+4:57 À toi de jouer · 5:17 Correction : 55 degrés, et pas 45 · 6:07 Ce que tu as appris.
+
+---
+
 ## E10 à E12 — ⏳ en attente de leur rendu HD
 
 Les identifiants sont fixés et doivent rester ceux-là (c'est sur eux que le coach

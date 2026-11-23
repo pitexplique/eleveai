@@ -242,7 +242,7 @@ if fin00[2] < ech[3]:
     ennuis.append("00 : la ligne finale touche l'échelle des ceintures")
 
 print("\n── 01 : Ravi, le panneau, les trois cas ──")
-c = ravi(0.66).move_to(P(-5.72, 0.35))
+c = ravi(0.66).move_to(P(-5.72, 0.85))
 rx0, rx1, ry0, ry1 = cadre("Ravi (s = 0,66)", c)
 nom = T("Ravi", 28).next_to(c, DOWN, buff=0.22)
 if nom.get_left()[0] < -6.5:
@@ -251,6 +251,13 @@ lieu = T("Saint-Pierre", 24).next_to(nom, DOWN, buff=0.18)
 if lieu.get_left()[0] < -6.5:
     lieu.shift(RIGHT * (-6.5 - lieu.get_left()[0]))
 cadre("« Ravi / Saint-Pierre » (après garde-fou)", nom, lieu)
+# ⛔⛔ « SAINT-PIERRE » SEUL, PARCE QU'IL EST LE BAS DE LA COLONNE DE GAUCHE et que
+# le cadre de conclusion arrive juste dessous. Mesuré en paire, ce bas-là disparaît
+# dans la boîte commune avec « Ravi ». C'est la faute de l'épisode 7 (« la mesure
+# voyait le titre et ne le comparait à rien ») sous sa forme de gauche — et elle a
+# coûté un tour de plus : la correction précédente avait écarté « Ravi » de
+# « Saint-Pierre » et poussé « Saint-Pierre » SUR le cadre, sans que rien le dise.
+sp01 = cadre("« Saint-Pierre » seul", lieu)
 tp1 = toit_panneau(INCL01, 1.0).move_to(P(-2.45, 0.88))
 sol = soleil(1.0).move_to(tp1.get_center() + tp1.d_sol * 2.30)
 px0, px1, py0, py1 = cadre("le panneau + le soleil", tp1, sol)
@@ -279,6 +286,7 @@ b01 = bloc("conclusion (2 lignes) + cadre",
            VGroup(fil, SurroundingRectangle(fil, buff=0.16, stroke_width=3)), -2.00, 1.9)
 p01 = bloc("« et cet angle se calcule… »",
            T("et cet angle se calcule avec un produit scalaire", 28), -3.10, 4.6)
+dessous("01", "le cadre de conclusion recouvre « Saint-Pierre »", sp01, b01)
 dessous("01", "la dernière ligne recouvre la conclusion", b01, p01)
 
 print("\n── 02 : la formule, le cosinus isolé, l'exemple ──")
@@ -471,8 +479,10 @@ dessous("06", "p4 recouvre p3", p3, p4)
 g06 = coin(60, r=1.15, r_arc=0.40, oppose=True).move_to(P(-4.25, 1.25))
 o06 = g06.sommet()
 nv6 = VEC("v", 26, C_VECTEUR2).move_to(o06 + g06.p2 * 0.78 + ecart(g06.p2, +1))
-nw6 = VGroup(T("−", 26), VEC("v", 26, C_VECTEUR2))
-nw6.arrange(RIGHT, buff=0.06, aligned_edge=DOWN)
+_vv = VEC("v", 26, C_VECTEUR2)
+_mo = T("−", 26).next_to(_vv.texte, LEFT, buff=0.06)
+_mo.set_y(float(_vv.texte.get_center()[1]))
+nw6 = VGroup(_mo, _vv)
 nw6.move_to(o06 + g06.p3 * 0.78 + ecart(g06.p3, -1, 0.52))
 gf6 = cadre("la figure du supplémentaire + ses noms", g06, nv6, nw6)
 etiquettes("06", ("v", nv6), ("−v", nw6))
@@ -604,21 +614,32 @@ reb9 = CompteARebours(5, r=0.34, fs=32).next_to(pause9 and T("x", 1), RIGHT)
 dessous("09", "la pause recouvre la consigne", bc, pause9)
 # ── 09b, la colonne de droite ──
 q1 = droite_("A⃗G (1 ; 1 ; 1)", NOMME("A G", AG, C_REGARD, 28), 2.40)
-droite_("A⃗B (1 ; 0 ; 0)", NOMME("A B", AB, C_VECTEUR, 28), 1.70)
+q2 = droite_("A⃗B (1 ; 0 ; 0)", NOMME("A B", AB, C_VECTEUR, 28), 1.70)
 suite9 = VGroup(T("1 × 1", 24), T("+ 1 × 0", 24), T("+ 1 × 0", 24),
                 T(f"= {ps(AG, AB)}", 24)).arrange(RIGHT, buff=0.14, aligned_edge=DOWN)
 calc = VGroup(VX("A G · A B =", ("A G", "A B"), 26), suite9)
 calc.arrange(DOWN, aligned_edge=LEFT, buff=0.10)
-droite_("le produit scalaire, terme à terme", calc, 0.95)
+bcalc = droite_("le produit scalaire, terme à terme", calc, 0.95)
 _lig1 = VGroup(VX("‖A G‖ =", ("A G",), 26), RAC(norme2(AG), 26))
 _lig1.arrange(RIGHT, buff=0.14, aligned_edge=DOWN)
-lno9 = VGroup(_lig1, VX("‖A B‖ = 1", ("A B",), 26))
-lno9.arrange(DOWN, aligned_edge=LEFT, buff=0.10)
-droite_("‖A⃗G‖ = √3   ‖A⃗B‖ = 1", lno9, 0.15)
+lno9 = VGroup(_lig1, VX("; ‖A B‖ = 1", ("A B",), 26))
+lno9.arrange(RIGHT, buff=0.20, aligned_edge=DOWN)
+bno9 = droite_("‖A⃗G‖ = √3 ; ‖A⃗B‖ = 1", lno9, 0.15)
+# ⛔⛔ LA COLONNE DE DROITE DE 09b N'ÉTAIT COMPARÉE À RIEN — six blocs mesurés un par
+# un, et pas une seule paire. C'est ce trou qui a laissé passer le bloc des deux
+# normes PAR-DESSUS la ligne de calcul : en passant les deux normes de UNE à DEUX
+# lignes (correction du tour précédent), le bloc a grandi de 0,68 autour de son
+# centre, donc il est MONTÉ de 0,34 — et personne ne recomptait la colonne.
+# ⭐ La leçon de E6 à sa énième forme : changer la hauteur d'un bloc oblige à
+# recompter TOUS ceux qui l'entourent, pas seulement celui qu'on vient d'écrire.
+dessous("09b", "A⃗B recouvre A⃗G", q1, q2)
+dessous("09b", "le calcul recouvre A⃗B", q2, bcalc)
+dessous("09b", "les deux normes recouvrent le calcul", bcalc, bno9)
 lc9 = VGroup(T("cos θ =", 28), FRAC(T("1", 28), RAC(norme2(AG), 28), 28))
 lc9.arrange(RIGHT, buff=0.16)
 dc9 = droite_("cos θ = 1/√3 (fraction + radical)", lc9, -0.95)
 print(f"    ⚠️ hauteur du bloc : {dc9[3] - dc9[2]:.2f}")
+dessous("09b", "le cosinus recouvre les deux normes", bno9, dc9)
 da9 = droite_("≈ 0,577", ENV(round(1 / math.sqrt(3), 3)), -1.80)
 dessous("09b", "« ≈ 0,577 » recouvre le cosinus", dc9, da9)
 ang = VGroup(T("θ ≈", 30), DEG(54.7, 30), T("→", 30), DEG(55, 34))
