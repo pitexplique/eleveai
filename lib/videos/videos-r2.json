@@ -18405,6 +18405,15 @@
   "youtube": null,
   "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_defi&display=simple"
  },
+ "3e-affine-defi-short-dessin-anime": {
+  "fichier": "3e/maths/fonctions-affines/dessin-anime/09-defi/eleveai-maths-3e-affine-defi-short-dessin-anime.mp4",
+  "poster": "3e/maths/fonctions-affines/dessin-anime/09-defi/eleveai-maths-3e-affine-defi-short-dessin-anime-miniature.png",
+  "vignette": "3e/maths/fonctions-affines/dessin-anime/09-defi/eleveai-maths-3e-affine-defi-short-dessin-anime-miniature.vignette.webp",
+  "titre": "Pense à un nombre : je devine ton résultat 🎩 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_defi&display=simple"
+ },
  "3e-affine-expression": {
   "fichier": "3e/maths/fonctions-affines/05-expression/eleveai-maths-3e-affine-expression.mp4",
   "poster": "3e/maths/fonctions-affines/05-expression/eleveai-maths-3e-affine-expression.png",

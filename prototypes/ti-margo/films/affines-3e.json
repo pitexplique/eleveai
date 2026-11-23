@@ -1,0 +1,7 @@
+{
+  "voix": "3e-affine-{ep}-short-da",
+  "sons": "public/sons/3e-affine-{ep}-short-da",
+  "sortie": "manim/sorties/3e/maths/fonctions-affines/dessin-anime/{num}-{ep}",
+  "nom": "eleveai-maths-3e-affine-{ep}-short-dessin-anime",
+  "episodes": { "defi": "09" }
+}

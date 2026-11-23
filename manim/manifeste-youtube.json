@@ -109292,6 +109292,8 @@
     {
       "id": "3e-affine-defi-short",
       "pas_avant": "2027-07-10",
+      "heure_reunion": "08:00",
+      "note": "TEST dessin animé vs Manim : même heure, comparer les vues à 3 semaines (le short dessin animé 3e-affine-defi-short-dessin-anime sort une semaine après, le samedi 17/07/2027 à 8 h).",
       "prioritaire": true,
       "notionId": "affine_fonction",
       "microId": "affine_defi",
@@ -109329,6 +109331,56 @@
             "ton nombre"
           ],
           "reponse": 1,
+          "explication": "(2x + 10) ÷ 2 = x + 5. Moins x : il reste 5."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "3e-affine-defi-short-dessin-anime",
+      "pas_avant": "2027-07-17",
+      "heure_reunion": "08:00",
+      "note": "TEST dessin animé vs Manim : même heure, comparer les vues à 3 semaines (le short Manim 3e-affine-defi-short sort le samedi 10/07/2027 à 8 h, celui-ci le samedi 17/07/2027 à 8 h ; publier avec --creneau 08:00 --jour). Pas branché au coach : le coach garde le short Manim.",
+      "prioritaire": true,
+      "notionId": "affine_fonction",
+      "microId": "affine_defi",
+      "classe": "3e",
+      "ceinture": "bleue",
+      "serie": "Maths 3e",
+      "type": "short",
+      "renvoie_vers": "3e-affine-defi",
+      "fichier": "3e/maths/fonctions-affines/dessin-anime/09-defi/eleveai-maths-3e-affine-defi-short-dessin-anime.mp4",
+      "miniature": "3e/maths/fonctions-affines/dessin-anime/09-defi/eleveai-maths-3e-affine-defi-short-dessin-anime-miniature.png",
+      "titre": "Pense à un nombre : je devine ton résultat 🎩 — 3e #Shorts",
+      "accroche": "Tu paries ? Pense à un nombre : ton âge, ta pointure, l'argent de ta tirelire. Multiplie-le par 4, ajoute 12, divise par 4, enlève ton nombre de départ : tu trouves 3 !\nLéa (25 €) et Tom (pointure 38) trouvent 3 aussi. Pourquoi ? (4x + 12) ÷ 4 = x + 3, moins x : il reste 3. Une fonction affine avec a = 0 : une fonction constante.\n\nVoix de synthèse.\n🥋 Ceinture bleue.\n👉 À toi : invente un programme de calcul qui donne toujours 7. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fonctionaffine #3e #brevet",
+      "tags": [
+        "programme de calcul",
+        "fonction constante",
+        "tour de magie",
+        "dessin animé",
+        "fonctions affines",
+        "maths",
+        "3e",
+        "collège",
+        "cycle 4",
+        "brevet",
+        "CRPE",
+        "EleveAI",
+        "ceinture bleue",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "01:01",
+          "question": "Programme : multiplie par 2, ajoute 10, divise par 2, enlève ton nombre. Que trouves-tu toujours ?",
+          "choix": [
+            "5",
+            "10",
+            "ton nombre"
+          ],
+          "reponse": 0,
           "explication": "(2x + 10) ÷ 2 = x + 5. Moins x : il reste 5."
         }
       ],

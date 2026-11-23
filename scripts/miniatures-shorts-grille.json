@@ -1146,5 +1146,10 @@
     "mention": null,
     "sans_decor": true,
     "margo_2d": true
+  },
+  "3e-affine-defi-short-dessin-anime": {
+    "question": ["Pense à un nombre…", "je devine !"],
+    "calcul": [["× 2, + 10, ÷ 2, − x", "blanc", 95], ["= ?", "jaune", 170]],
+    "ceinture": "bleue"
   }
 }
