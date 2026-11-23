@@ -2609,6 +2609,45 @@ figure qui n'existe pas » (épisode 11), à sa deuxième récidive.
 ⏳ **Les cubes de E2, E6, E7, E8 et E9 sont livrés en HD avec le décalage par défaut** :
 constat, et il se décide avec Frédéric devant l'image.
 
+### ⛔⛔⛔ ET MES DEUX ÉCARTS ONT POSÉ « D » SUR « F » — vu à la PLANCHE, par rien d'autre
+
+Premiers écarts mesurés en grille : F (−0,50 ; −0,28) et D (+0,54 ; +0,28). Les deux
+noms sont à plus de 0,12 de toute arête, la mesure disait ✅ — et à la planche du `-ql`,
+**les deux lettres se lisaient comme un seul glyphe au milieu du cube**.
+
+La cause tient en une phrase : **la grille classait par distance au sommet**, donc elle
+prenait la place libre la plus PROCHE, et pour « D » comme pour « F » la plus proche
+était vers l'INTÉRIEUR du cube. Chacun fuyait son arête, et ils se rencontraient.
+⛔ Et ce que la grille ne savait pas : les autres noms n'y étaient comparés qu'à leur
+place **par défaut**. Un contrôle qui ne compare une correction qu'à l'état d'AVANT ne
+voit jamais ce que la correction elle-même a créé. C'est « fuir une flèche pour tomber
+sur une arête » (épisode 9) dans sa forme la plus bête.
+
+⭐ Deux remèdes, et il faut les deux :
+1. la grille cherche **un écart à la fois** — « F » d'abord, puis « D » avec « F » à sa
+   place NOUVELLE — et exige 0,34 entre deux centres de nom en plus de 0,11 de tout
+   segment. Résultat : **F (−0,04 ; −0,20)** et **D (−0,44 ; 0,00)**, tous deux vers
+   l'EXTÉRIEUR ;
+2. `espace_mesure_short.py` compare désormais les mots d'une figure **deux à deux** —
+   c'est `etiquettes()` de l'épisode 8, qui n'existait que dans les mesures des paysages
+   et manquait aux shorts.
+
+⭐ Et la mesure a rendu un second fait, utile pour la suite : avec les deux diagonales
+(A C) et (E B) tracées, la grille garde 541 et 625 positions libres au lieu de 562 et
+647, et **les écarts retenus sont les mêmes**. Il n'y a donc qu'UNE table.
+
+### ⛔ UN VECTEUR DIRECTEUR EST TOUJOURS PORTÉ PAR SA DROITE — donc il la recouvre
+
+Vu à la planche de E3 : la droite, tracée de t = −0,12 à t = 0,75, était intégralement
+sous la flèche rose du vecteur directeur, qui va de t = 0 à t = 1. On ne voyait qu'un
+moignon orange au départ, et l'écran annonçait « un point, et une direction » en n'en
+montrant qu'une. ⛔ Aucun instrument ne peut le dire : les deux objets sont dans la
+marge, aucun nombre n'est en avance, et ils ne « se touchent » pas — ils se SUPERPOSENT,
+ce qui est l'inverse de ce qu'une mesure d'écartement cherche.
+⭐ La droite va maintenant jusqu'à t = 1,45, donc au-delà de la pointe. C'est le constat
+n° 3 de la passe des flèches (« le vecteur u est invisible sous son double ») dans sa
+forme la plus prévisible, et il faudra y penser à chaque figure « droite + directeur ».
+
 ### ⛔ UN CUBE RECENTRÉ PAR `move_to` N'EST PLUS OÙ `r.pt(...)` LE DIT
 
 Bâti autour de l'origine du repère puis recentré, le cube se dessine au bon endroit — et
