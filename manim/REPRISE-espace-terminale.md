@@ -1903,6 +1903,36 @@ Appliqué ici : `se_coupent()` est aussi lancé sur (AB) et (AD), **qui se coupe
 disent la faute que nomme le leurre sans jamais la comparer à la vérité. Corrigées en
 « le leurre vaut ceci **et** il diffère de la bonne réponse ».
 
+### ✅ LES DOUZE SHORTS ONT ENFIN UN CONTRÔLE DE GABARIT — et il a crie 23 fois pour rien
+
+`verifier-voix-espace.py` ne lit que les 12 PAYSAGES : les douze SHORTS n'avaient aucun
+contrôle de gabarit, de symboles ni de copier-coller. D'où
+`manim/poste2/verifier-voix-shorts-espace.py`, écrit pour **les douze** et pas pour mes
+six — un contrôle qui ne regarderait que la moitié qu'on a écrite soi-même, c'est
+l'étalon pris DANS le périmètre soupçonné. Résultat : **0 erreur, 0 alerte sur 12**,
+après étalonnage (on retire un clip, l'outil crie).
+
+⛔⛔ **Mais son premier jet a rendu 23 signalements, et LES 23 ÉTAIENT FAUX.** Tous sur
+le clip `04-abonne` — « Entraîne-toi sur éleveai point f r. Et abonne-toi ! » —,
+identique dans les 24 voix de la série **par construction** : c'est la signature de la
+maison, pas un copier-coller non relu.
+
+La cause est un choix de ma part qui paraît anodin : j'avais exempté ce clip par sa
+**LONGUEUR** (« moins de 40 caractères »). Il en fait **49**. ⭐⭐ **Un seuil de
+caractères est une coïncidence ; un nom de clip est une propriété.** L'exemption se fait
+donc désormais sur le NOM (`-abonne`), avec la raison écrite à côté — le même principe
+que le `sans_audit` d'un épisode, qui porte toujours sa raison.
+
+⭐ Et la conséquence est celle de `verifier-zone-margo.py`, sous une autre forme : un
+faux positif **STRUCTUREL** rend le critère « 0 erreur » inatteignable, donc inutile —
+et surtout, dans 23 lignes de bruit, une vraie récidive passe inaperçue. ⛔ Un outil qui
+crie toujours ne protège personne.
+
+⚠️ Troisième fois de la journée qu'un instrument À MOI fabrique des défauts : le test
+creux `isclose(0, 1)`, le comptage du point final qui condamnait trois shorts sur six, et
+ces 23 faux positifs. Les trois ont été vus parce qu'on a regardé CE QUE L'OUTIL DIT,
+pas seulement son chiffre final.
+
 ### ⛔⛔ UN FILTRE DE DIFF QUI CACHE EXACTEMENT LES LIGNES QU'ON CHERCHE
 
 Trouvé en corrigeant le `02-question` du short de E12. Pour ne garder que les lignes
