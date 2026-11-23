@@ -845,6 +845,45 @@ triangle BDE est équilatéral · 4:30 Le squelette d'une copie · 5:00 À toi d
 
 ---
 
+## ⚠️ LES 5 PREMIÈRES SONT SUR YOUTUBE, EN PRIVÉ — et leur `url` a été RETIRÉE du registre
+
+23/11/2026. Elles ont été envoyées (visibilité `private`), puis leur `url` a été ôtée de
+`manim/manifeste-youtube.json` **sur décision de Frédéric**, et voici pourquoi — c'est un
+mécanisme qui n'était écrit nulle part et qui décide où vont les élèves.
+
+⛔⛔ **LE COACH NE PREND L'ADRESSE DU SITE QUE S'IL N'Y A PAS D'URL YOUTUBE.**
+`scripts/brancher-videos-coach.mjs`, l. 123 :
+
+```js
+if (!v.url && R2[v.id]) v.url = `https://www.eleveai.fr/video/${v.id}`;
+```
+
+Donc publier une vidéo sur YouTube **lui fait perdre son lien R2** dans le coach. Et tant
+qu'elle est en `private`, l'élève qui clique ne voit rien. Mesuré au branchement en
+lecture seule : les 7 non publiées pointaient sur `eleveai.fr/video/…` ✅, les 5 publiées
+sur `youtu.be/…` ⛔. Sans l'url, les douze repointent sur le site, servi depuis R2.
+
+⭐ **LES IDENTIFIANTS YOUTUBE SONT ICI PARCE QUE LEUR JOURNAL N'EST PAS DANS GIT.**
+`manim/sorties/.publiees.json` les retient, mais `manim/sorties/` est ignoré en entier
+(.gitignore l. 105) : si cette machine disparaît, la trace disparaît avec elle. Les
+vidéos, elles, existent toujours sur la chaîne.
+
+| épisode | id YouTube | visibilité |
+|---|---|---|
+| `terminale-espace-vecteurs` | `HSWJPC9hEnU` | private |
+| `terminale-espace-repere-coordonnees` | `E3Lhg5Nx5Hw` | private |
+| `terminale-espace-droite-parametrique` | `DfvqKivFpLw` | private |
+| `terminale-espace-plan-equation` | `_oGj9PSrqzI` | private |
+| `terminale-espace-position-relative` | `fPcUu7aTfQc` | private |
+
+⚠️ Elles ne repartiront PAS en double : `publier-youtube.mjs` saute toute vidéo présente
+dans `.publiees.json` (l. 791), et c'est le journal, pas l'`url`, qui fait foi.
+⭐ Le jour où elles passent en public, remettre leur `url` (`https://youtu.be/<id>`) rend
+le lien YouTube au coach ; la laisser absente le laisse sur R2. C'est un choix, pas un
+oubli — et c'est à Frédéric.
+
+---
+
 ## E10 à E12 — ⏳ en attente de leur rendu HD
 
 Les identifiants sont fixés et doivent rester ceux-là (c'est sur eux que le coach
