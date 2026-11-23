@@ -136,7 +136,11 @@ def pieces(e):
     # 0,064 d'une arête — mesuré par `espace_mesure_short.py`. Une cote d'écart est
     # relative à son u (leçon de l'épisode 12), et la plus simple des réponses est de
     # ne pas changer de u.
-    r3, cube3, _v3, cube3g = e.cube_place(U_CUBE, 1.55, ecarte=e.ECARTE_CUBE_DIAG)
+    # ⛔ SEULS A, B, G, H SONT NOMMÉS : ce sont les quatre sommets dont la question
+    # parle, et avec les deux diagonales tracées la grille ne laisse AUCUNE position
+    # libre à « F » (0 sur 441 essayées — il restait à 0,063 de (A G)).
+    r3, cube3, _v3, cube3g = e.cube_place(U_CUBE, 1.55, ecarte=e.ECARTE_CUBE_DIAG,
+                                          noms=("A", "B", "G", "H"))
     ag = e.arete(r3, "A", "G", couleur=C_REGARD, sw=5)
     bh = e.arete(r3, "B", "H", couleur=C_VECTEUR2, sw=5)
     # ⛔⛔ « (A G) » ET « (B H) », AVEC LEURS PARENTHÈSES, et ce n'est pas cosmétique.

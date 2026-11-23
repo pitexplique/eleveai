@@ -240,8 +240,19 @@ def etiquettes(nom, ecran, blocs, seuil=0.08, serre=0.12):
     bloc. ⛔ C'est volontairement limité au bloc : un texte de la colonne contre une
     figure, c'est le contrôle de chevauchement plus haut, qui travaille sur les boîtes."""
     import numpy as np
-    from manim import Text
+    from manim import Text, VGroup as _VG0
     pb = 0
+    # ⭐⭐ LES OBJETS POSÉS SUR LA FIGURE COMPTENT AUSSI. Trouvé à la planche de E6 :
+    # le nom « F » du cube est à **0,063** de la diagonale (A G), qui n'est pas dans le
+    # bloc « cube » mais dans le bloc « + (A G) ». Chaque bloc était mesuré contre ses
+    # PROPRES traits, et une arête repassée en couleur, un point d'intersection ou une
+    # droite tracée par-dessus échappaient à tout. C'est, mot pour mot, « un instrument
+    # qui ne reçoit qu'une partie de la figure mesure une figure qui n'existe pas »
+    # (épisode 11), à sa troisième récidive dans cette seule journée.
+    sur_figure = []
+    for n_, m_ in blocs:
+        if n_.startswith("+") and m_ is not None and m_.get_family():
+            sur_figure += _traits(m_)
     for b_nom, m in blocs:
         # ⛔⛔ SEULEMENT LES FIGURES, et c'est une limite assumée. Lâché sur tous les
         # blocs, ce contrôle signale 30 lignes par short dont AUCUNE n'est un défaut :
@@ -287,7 +298,8 @@ def etiquettes(nom, ecran, blocs, seuil=0.08, serre=0.12):
             if not segs_utiles:
                 segs_utiles = [(x, y) for x, y in segs
                                if not (_dedans(x, t) and _dedans(y, t))]
-            d = min((_dist_pt_seg(p, a, b) for p in pts for a, b in segs_utiles), default=9.9)
+            tout = segs_utiles + (sur_figure if not b_nom.startswith("+") else [])
+            d = min((_dist_pt_seg(p, a, b) for p in pts for a, b in tout), default=9.9)
             if d < seuil:
                 pb += 1
                 dit("⛔", f"{nom} {ecran} « {b_nom} » : le mot « {t.original_text} » est à "

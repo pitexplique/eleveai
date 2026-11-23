@@ -88,7 +88,13 @@ def pieces(e):
     # par distance à la place d'origine : 226 positions libres, la plus proche à 0,14 en
     # (−0,10 ; +0,10) — 0,167 du trait le plus proche.
     axes[3].shift(np.array([-0.10, 0.10, 0.0]))        # axes[3] : le nom « y »
-    dte = r.droite(POINT_1, DIR_1, t0=-0.12, t1=0.75, couleur=C_DROITE, sw=5)
+    # ⛔⛔ LA DROITE VA PLUS LOIN QUE LE VECTEUR, et c'est vu à la PLANCHE : à
+    # t1 = 0,75 elle était intégralement RECOUVERTE par la flèche rose du vecteur
+    # directeur, qui porte la même direction et va de t = 0 à t = 1. On ne voyait qu'un
+    # moignon orange au départ. C'est le défaut « le vecteur u est invisible sous son
+    # double » (constat n° 3 de la passe des flèches, épisode 1) dans sa forme la plus
+    # prévisible : un vecteur directeur est TOUJOURS porté par sa droite.
+    dte = r.droite(POINT_1, DIR_1, t0=-0.12, t1=1.45, couleur=C_DROITE, sw=5)
     # ⚠️ Le nom du point est poussé plus loin que le `decal` par défaut (0,26) : à sa
     # place habituelle il est à 0,016 du fût de la droite, qui part justement de lui.
     pA = r.point(*POINT_1, nom="A", couleur=C_REGARD, decal=(-1.9, -1.9), fs=24)
@@ -101,7 +107,7 @@ def pieces(e):
     vu = r.vecteur(POINT_1, tuple(a + b for a, b in zip(POINT_1, DIR_1)),
                    couleur=C_VECTEUR2, sw=6)
     fig = VGroup(axes, dte, pA, vu)
-    fig.move_to(P(-0.10, -0.08))
+    fig.move_to(P(-0.10, -0.22))
     a2 = e.blocs_phrase("Et tout y est écrit : un point, et une direction.", -2.20, 26, C_REGARD)
     p["00-accroche"] = [("titre", titre), ("badge", badge), ("accroche", a1),
                         ("figure", fig), ("un point, une direction", a2)]

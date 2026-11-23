@@ -377,7 +377,7 @@ class ShortEspace(AuditSynchro, MotsCales, Short6e):
     ECARTE_CUBE = {"F": (-0.04, -0.20), "D": (-0.44, 0.00)}
     ECARTE_CUBE_DIAG = ECARTE_CUBE
 
-    def cube_place(self, u, y, x=0.0, fs=24, ecarte=None, base=False):
+    def cube_place(self, u, y, x=0.0, fs=24, ecarte=None, base=False, noms=None):
         """Le cube ABCDEFGH posé par son GROUPE, ses deux noms écartés.
 
         ⭐⭐ L'ORIGINE EST CALCULÉE POUR QUE LE CUBE TOMBE EN (x ; y), et on ne le
@@ -393,9 +393,19 @@ class ShortEspace(AuditSynchro, MotsCales, Short6e):
         cx, cy = 0.5 + FUITE[0] * 0.5, 0.5 + FUITE[1] * 0.5
         r = Repere3D(o=np.array([x - u * cx, y - u * cy, 0.0]), u=u, portee=3)
         c = r.cube(cote=1, fs=fs)
-        noms = {s: c[len(c) - 8 + i] for i, s in enumerate("ABCDEFGH")}
+        etiq = {s: c[len(c) - 8 + i] for i, s in enumerate("ABCDEFGH")}
         for s, (dx, dy) in (ecarte or {}).items():
-            noms[s].shift(np.array([dx, dy, 0.0]))
+            etiq[s].shift(np.array([dx, dy, 0.0]))
+        # ⛔⛔ `noms` : les SEULS sommets à nommer. Quand une figure porte en plus deux
+        # diagonales, la grille ne trouve PLUS AUCUNE position libre pour « F » —
+        # mesuré sur l'écran 03 du short du défi : 0 position sur 441 essayées, et le
+        # nom restait à 0,063 de la diagonale (A G). ⭐ « Quand la grille ne trouve
+        # rien, on n'étiquette pas » (épisode 8) : on ne garde que les sommets dont la
+        # question parle, et la figure y gagne.
+        if noms is not None:
+            for s, t_ in etiq.items():
+                if s not in noms:
+                    c.remove(t_)
         self.sans_audit(c)        # les huit noms sont des LETTRES, pas des nombres dits
         g = VGroup(c)
         vs = None
