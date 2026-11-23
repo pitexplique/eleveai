@@ -325,7 +325,7 @@ les quatre écrans où il porte quelque chose.
   "type": "longue",
   "fichier": "terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi.mp4",
   "miniature": "terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi.png",
-  "titre": "Trois points sont toujours dans un même plan — et ça ne démontre rien · Exercice type bac dans l'espace · Tle spé",
+  "titre": "Trois points sont toujours coplanaires : ça ne prouve rien · Exercice type bac · Tle spé",
   "centres": ["jeux-defis"],
   "tags": ["exercice type bac", "cube ABCDEFGH", "repère de l'espace", "alignement", "colinéarité", "intersection droite plan", "espace", "terminale", "bac"]
 }
@@ -396,7 +396,7 @@ invisibles sur la vignette à trois colonnes.
   "type": "longue",
   "fichier": "terminale/maths/geometrie/ps-espace-calculer/eleveai-maths-terminale-ps-espace-calculer.mp4",
   "miniature": "terminale/maths/geometrie/ps-espace-calculer/eleveai-maths-terminale-ps-espace-calculer.png",
-  "titre": "Un produit scalaire est un NOMBRE, pas un vecteur · Le calculer en coordonnées dans l'espace · Tle spé",
+  "titre": "Un produit scalaire est un NOMBRE, pas un vecteur · Le calculer dans l'espace · Tle spé",
   "centres": ["sport"],
   "tags": ["produit scalaire", "espace", "coordonnées", "repère orthonormé", "norme", "orthogonalité", "cube ABCDEFGH", "terminale", "bac"]
 }
@@ -472,7 +472,7 @@ visage — la visière de Jean-Bernard (E4) à sa deuxième récidive.
   "type": "longue",
   "fichier": "terminale/maths/geometrie/ps-espace-orthogonalite/eleveai-maths-terminale-ps-espace-orthogonalite.mp4",
   "miniature": "terminale/maths/geometrie/ps-espace-orthogonalite/eleveai-maths-terminale-ps-espace-orthogonalite.png",
-  "titre": "Un produit scalaire nul, et c'est prouvé — mais pour un plan, il en faut DEUX · Démontrer une orthogonalité dans l'espace · Tle spé",
+  "titre": "Pour un plan, il en faut DEUX · Démontrer une orthogonalité dans l'espace · Tle spé",
   "centres": ["sciences"],
   "tags": ["orthogonalité", "produit scalaire", "espace", "vecteur normal", "plan", "droite orthogonale à un plan", "cube ABCDEFGH", "terminale", "bac"]
 }
@@ -553,7 +553,7 @@ assertion du module.
   "type": "longue",
   "fichier": "terminale/maths/geometrie/ps-espace-norme-distance/eleveai-maths-terminale-ps-espace-norme-distance.mp4",
   "miniature": "terminale/maths/geometrie/ps-espace-norme-distance/eleveai-maths-terminale-ps-espace-norme-distance.png",
-  "titre": "Dix kilomètres à plat et un de dénivelé ne font pas onze · Calculer une norme ou une distance dans l'espace · Tle spé",
+  "titre": "10 km à plat et 1 de dénivelé ne font pas 11 · Norme et distance dans l'espace · Tle spé",
   "centres": ["sport"],
   "tags": ["norme", "distance", "espace", "racine carrée", "Pythagore", "valeur exacte", "cube ABCDEFGH", "diagonale", "terminale", "bac"]
 }

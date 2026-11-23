@@ -108363,7 +108363,7 @@
       "type": "longue",
       "fichier": "terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi.mp4",
       "miniature": "terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi.png",
-      "titre": "Trois points sont toujours dans un même plan — et ça ne démontre rien · Exercice type bac dans l'espace · Tle spé",
+      "titre": "Trois points sont toujours coplanaires : ça ne prouve rien · Exercice type bac · Tle spé",
       "centres": [
         "jeux-defis"
       ],
@@ -108472,7 +108472,7 @@
       "type": "longue",
       "fichier": "terminale/maths/geometrie/ps-espace-calculer/eleveai-maths-terminale-ps-espace-calculer.mp4",
       "miniature": "terminale/maths/geometrie/ps-espace-calculer/eleveai-maths-terminale-ps-espace-calculer.png",
-      "titre": "Un produit scalaire est un NOMBRE, pas un vecteur · Le calculer en coordonnées dans l'espace · Tle spé",
+      "titre": "Un produit scalaire est un NOMBRE, pas un vecteur · Le calculer dans l'espace · Tle spé",
       "centres": [
         "sport"
       ],
@@ -108581,7 +108581,7 @@
       "type": "longue",
       "fichier": "terminale/maths/geometrie/ps-espace-orthogonalite/eleveai-maths-terminale-ps-espace-orthogonalite.mp4",
       "miniature": "terminale/maths/geometrie/ps-espace-orthogonalite/eleveai-maths-terminale-ps-espace-orthogonalite.png",
-      "titre": "Un produit scalaire nul, et c'est prouvé — mais pour un plan, il en faut DEUX · Démontrer une orthogonalité dans l'espace · Tle spé",
+      "titre": "Pour un plan, il en faut DEUX · Démontrer une orthogonalité dans l'espace · Tle spé",
       "centres": [
         "sciences"
       ],
@@ -108690,7 +108690,7 @@
       "type": "longue",
       "fichier": "terminale/maths/geometrie/ps-espace-norme-distance/eleveai-maths-terminale-ps-espace-norme-distance.mp4",
       "miniature": "terminale/maths/geometrie/ps-espace-norme-distance/eleveai-maths-terminale-ps-espace-norme-distance.png",
-      "titre": "Dix kilomètres à plat et un de dénivelé ne font pas onze · Calculer une norme ou une distance dans l'espace · Tle spé",
+      "titre": "10 km à plat et 1 de dénivelé ne font pas 11 · Norme et distance dans l'espace · Tle spé",
       "centres": [
         "sport"
       ],
