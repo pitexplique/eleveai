@@ -6,6 +6,7 @@
 #   python -X utf8 manim/scripts/terminale/espace_mesure_short.py E3 --cotes  # + les boîtes
 #   python -X utf8 manim/scripts/terminale/espace_mesure_short.py --ancres    # la synchro
 #   python -X utf8 manim/scripts/terminale/espace_mesure_short.py --tard <log> # les TARD triés
+#   python -X utf8 manim/scripts/terminale/espace_mesure_short.py --fleches  # les noms de vecteur
 #
 # Code de retour 1 dès un ⛔ : utilisable dans un enchaînement.
 #
@@ -143,7 +144,12 @@ def mesurer(nom, ecran, blocs):
                 dit(niveau, f"{nom} {ecran} « {b_nom} » RÉTRÉCI : « {court} » "
                             f"{dem:.0f} px demandés → {obt:.1f} px obtenus")
     # 4. les paires, proche en proche
-    utiles = [(n, m) for n, m in blocs if m is not None and m.get_family()]
+    # ⭐ Un nom qui commence par « + » est POSÉ SUR la figure : une arête repassée en
+    # couleur, un point d'intersection, un vecteur dans le repère. Son chevauchement est
+    # voulu, et il est exclu de la comparaison deux à deux — mais pas des contrôles de
+    # marge et de Ti-Margo, qui valent pour lui comme pour les autres.
+    utiles = [(n, m) for n, m in blocs
+              if m is not None and m.get_family() and not n.startswith("+")]
     for i in range(len(utiles)):
         for j in range(i + 1, len(utiles)):
             (n1, m1), (n2, m2) = utiles[i], utiles[j]
@@ -170,8 +176,148 @@ def une(cle):
     # 5. le titre contre l'échelle des ceintures, explicitement comparés
     for ecran, blocs in pieces.items():
         mesurer(cle, ecran, blocs)
+        etiquettes(cle, ecran, blocs)
     print(f"    Ti-Margo : y de {margo()[2]:.2f} à {margo()[3]:.2f} ; "
           f"marge x ±{BORD_X:.3f}, y ±{BORD_Y:.3f} ; largeur offerte {LARG}")
+
+
+def _dist_pt_seg(p, a, b):
+    import numpy as np
+    ab = b - a
+    L = float(ab @ ab)
+    t = 0.0 if L < 1e-12 else max(0.0, min(1.0, float((p - a) @ ab) / L))
+    return float(np.linalg.norm(p - (a + t * ab)))
+
+
+def _traits(mob):
+    """Les chemins RÉELLEMENT tracés d'une figure, échantillonnés en points.
+
+    ⛔ On échantillonne le chemin, PAS sa boîte : la boîte d'une flèche en diagonale est
+    un grand rectangle presque vide, et testée ainsi elle interdit tout un quadrant
+    (leçon de la passe des flèches). ⛔ Et on prend TOUT ce qui est tracé, y compris les
+    tirets d'un pointillé : le premier jet de la grille du cube ne retrouvait que 9
+    arêtes sur 12 parce que les trois arêtes cachées sont des groupes de tirets.
+    ⚠️ Les glyphes d'un `Text` sont eux aussi des VMobject tracés : on les exclut, sinon
+    chaque lettre se mesurerait contre les autres lettres de son propre mot."""
+    import numpy as np
+    from manim import Text, VMobject
+    dedans = set()
+    for f in mob.get_family():
+        if isinstance(f, Text):
+            dedans.update(id(g) for g in f.get_family())
+    out = []
+    for f in mob.get_family():
+        if id(f) in dedans or not isinstance(f, VMobject) or not f.has_points():
+            continue
+        if f.get_stroke_opacity() < 0.05 and f.get_fill_opacity() < 0.05:
+            continue
+        try:
+            pts = [np.array(f.point_from_proportion(k / 16.0))[:2] for k in range(17)]
+        except Exception:
+            continue
+        out += [(pts[i], pts[i + 1]) for i in range(len(pts) - 1)]
+    return out
+
+
+def _dedans(p, t):
+    import numpy as np
+    g, d = np.array(t.get_left())[:2], np.array(t.get_right())[:2]
+    b, h = float(t.get_bottom()[1]), float(t.get_top()[1])
+    return g[0] - 0.02 <= p[0] <= d[0] + 0.02 and b - 0.02 <= p[1] <= h + 0.02
+
+
+def etiquettes(nom, ecran, blocs, seuil=0.08, serre=0.12):
+    """⭐⭐ LE CONTRÔLE QUI MANQUAIT À LA SÉRIE : chaque mot d'une figure contre tout ce
+    que CETTE figure trace.
+
+    La note de la série le dit deux fois, et les deux fois ça a coûté un rendu :
+      · « les noms des axes n'étaient comparés à RIEN » (épisode 11) — `etiquettes()`
+        compare des étiquettes ENTRE ELLES, jamais à un segment, et personne ne lui
+        donnait les « x », « y », « z » que `r.axes()` dessine tout seul ;
+      · « un nom de sommet traversé par un fût » (épisode 9) — la grande diagonale passe
+        à 0,00 du nom « D » et à 0,10 de « F ».
+    Ici, pour chaque bloc, on mesure chaque `Text` contre CHAQUE chemin tracé du même
+    bloc. ⛔ C'est volontairement limité au bloc : un texte de la colonne contre une
+    figure, c'est le contrôle de chevauchement plus haut, qui travaille sur les boîtes."""
+    import numpy as np
+    from manim import Text
+    pb = 0
+    for b_nom, m in blocs:
+        # ⛔⛔ SEULEMENT LES FIGURES, et c'est une limite assumée. Lâché sur tous les
+        # blocs, ce contrôle signale 30 lignes par short dont AUCUNE n'est un défaut :
+        # la lettre d'une carte de choix est DANS son rond, le chiffre du compte à
+        # rebours est DANS son anneau, un `SurroundingRectangle` serre son texte de
+        # 0,14 par construction. Un instrument qui crie sur tout ne mesure rien — c'est
+        # la même faute que mon premier critère de tri des `AUDIT-TARD`.
+        # ⭐ Ce qui a coûté des rendus à cette série, ce sont les mots d'une FIGURE :
+        # les « x », « y », « z » des axes (épisode 11), les noms de sommet du cube
+        # (épisode 9), l'étiquette d'un vecteur (épisode 7). C'est ça qu'on mesure.
+        if not (b_nom.startswith("+") or any(k in b_nom for k in ("figure", "cube"))):
+            continue
+        if m is None or not m.get_family():
+            continue
+        textes = [f for f in m.get_family()
+                  if isinstance(f, Text) and getattr(f, "original_text", "").strip()]
+        if not textes:
+            continue
+        segs = _traits(m)
+        if not segs:
+            continue
+        # ⭐ Le PARENT immédiat d'un mot est exclu : l'étiquette d'un vecteur est un
+        # VGroup(texte, flèche de nom), et la flèche est dessinée 0,10 au-dessus du mot
+        # EXPRÈS. Sans cette exclusion, toute notation vectorielle correcte sortirait en
+        # défaut — l'outil condamnerait précisément ce que la passe des flèches a mis
+        # en place.
+        parents = {}
+        for f in m.get_family():
+            for enfant in getattr(f, "submobjects", []):
+                parents[id(enfant)] = f
+        for t in textes:
+            voisinage = parents.get(id(t), t)
+            siens = {id(g) for g in voisinage.get_family()}
+            pts = [np.array(t.get_corner(c))[:2] for c in
+                   ([-1, -1, 0], [1, -1, 0], [1, 1, 0], [-1, 1, 0])] + [np.array(t.get_center())[:2]]
+            # ⚠️ `_traits` sur CHAQUE membre de la famille recompte les mêmes chemins
+            # autant de fois qu'ils ont d'ancêtres : le résultat reste juste (un
+            # minimum ne change pas si on répète les termes) mais la recherche en
+            # grille qui s'en servait mettait plus de dix minutes par étiquette. On
+            # écarte le voisinage une fois, et on échantillonne une fois.
+            from manim import VGroup as _VG
+            segs_utiles = _traits(_VG(*[f for f in m.submobjects if id(f) not in siens]))                 if any(id(f) not in siens for f in m.submobjects) else []
+            if not segs_utiles:
+                segs_utiles = [(x, y) for x, y in segs
+                               if not (_dedans(x, t) and _dedans(y, t))]
+            d = min((_dist_pt_seg(p, a, b) for p in pts for a, b in segs_utiles), default=9.9)
+            if d < seuil:
+                pb += 1
+                dit("⛔", f"{nom} {ecran} « {b_nom} » : le mot « {t.original_text} » est à "
+                          f"{d:.3f} d'un trait de sa propre figure")
+            elif d < serre:
+                dit("⚠️", f"{nom} {ecran} « {b_nom} » : le mot « {t.original_text} » est "
+                          f"serré — {d:.3f} d'un trait")
+        # ⭐⭐ ET LES MOTS DEUX À DEUX, ce qui manquait ici et a coûté une planche : les
+        # écarts de « D » et de « F » du cube avaient été cherchés CHACUN contre la
+        # place par DÉFAUT de l'autre, et les deux lettres se sont posées l'une sur
+        # l'autre au milieu du cube. Un contrôle qui ne compare un objet qu'à l'état
+        # d'avant ne voit pas ce que la correction elle-même a créé.
+        # ⛔ C'est `etiquettes()` de l'épisode 8, qui n'existait que dans les mesures
+        # des paysages — il manquait aux shorts.
+        for i in range(len(textes)):
+            for j in range(i + 1, len(textes)):
+                t1, t2 = textes[i], textes[j]
+                dc = float(np.linalg.norm(np.array(t1.get_center())[:2]
+                                          - np.array(t2.get_center())[:2]))
+                chx = min(t1.get_right()[0], t2.get_right()[0]) - max(t1.get_left()[0], t2.get_left()[0])
+                chy = min(t1.get_top()[1], t2.get_top()[1]) - max(t1.get_bottom()[1], t2.get_bottom()[1])
+                if chx > 0 and chy > 0:
+                    pb += 1
+                    dit("⛔", f"{nom} {ecran} « {b_nom} » : « {t1.original_text} » et "
+                              f"« {t2.original_text} » SE RECOUVRENT "
+                              f"({chx:.3f} × {chy:.3f})")
+                elif dc < 0.30:
+                    dit("⚠️", f"{nom} {ecran} « {b_nom} » : « {t1.original_text} » et "
+                              f"« {t2.original_text} » à {dc:.3f} l'un de l'autre")
+    return pb
 
 
 def _voix_des_shorts():
@@ -237,6 +383,99 @@ def ancres():
     return pb
 
 
+def fleches():
+    """`--fleches` : ⛔⛔ LE TROU QUE LES SHORTS ONT OUVERT DANS L'AUDIT DES FLÈCHES.
+
+    `manim/poste2/auditer-fleches-vecteurs.py` lit l'AST et ne regarde que six appels :
+    `self.t`, `self.vec`, `self.vexpr`, `self.choix2`, `self.choix3`, `self.nomme`. Il
+    répond donc **0 NUS** sur les six shorts — et c'est en partie parce qu'il ne regarde
+    pas : la plus grande part de leur texte passe par `blocs_phrase`, `lignes`, `eq_mots`
+    et `appel_blocs`, qui sont des outils du socle des shorts et n'existaient pas quand
+    il a été écrit. ⭐ « Un instrument qui rend un chiffre plausible n'a pas prouvé qu'il
+    mesurait la bonne chose » : un ✅ de sa part, sur ces six scripts, ne vaut rien tant
+    que personne ne lit ces quatre appels-là.
+
+    ⭐⭐ ET IL NE RECOPIE RIEN. La règle (le regex d'un nom de vecteur, les petits mots
+    en capitales, la table `PAS_DES_VECTEURS` avec ses raisons) est LUE dans le fichier
+    de l'outil partagé, par son AST. Recopier le regex aurait fait deux copies d'une
+    seule vérité, et la seconde se serait périmée au premier élargissement de la règle —
+    c'est exactement ce que la cote de Ravi a coûté à l'épisode 10.
+    ⏳ Le vrai remède est d'élargir l'outil partagé à ces quatre appels. ⛔ Il vit dans
+    `manim/poste2/`, que la session du produit scalaire partage : ça se décide avec le
+    chef, pas tout seul."""
+    import ast
+    import re
+    outil = _RACINE / "manim" / "poste2" / "auditer-fleches-vecteurs.py"
+    arbre = ast.parse(outil.read_text(encoding="utf-8"))
+    regle = {}
+    for n in arbre.body:
+        if not isinstance(n, ast.Assign) or not isinstance(n.targets[0], ast.Name):
+            continue
+        nom = n.targets[0].id
+        if nom == "NOM" and isinstance(n.value, ast.Call):
+            regle["NOM"] = n.value.args[0].value
+        elif nom in ("MOTS_CAPS", "PAS_DES_VECTEURS", "SIGNES"):
+            regle[nom] = ast.literal_eval(n.value)
+    for cle in ("NOM", "MOTS_CAPS", "PAS_DES_VECTEURS", "SIGNES"):
+        if cle not in regle:
+            print(f"⛔ {cle} introuvable dans {outil.name} — l'outil a changé de forme, "
+                  f"ce contrôle ne mesure plus rien")
+            return 1
+    NOM = re.compile(regle["NOM"])
+    print(f"règle LUE dans {outil.name} : {len(regle['PAS_DES_VECTEURS'])} entrées "
+          f"dans PAS_DES_VECTEURS, {len(regle['MOTS_CAPS'])} mots en capitales\n")
+
+    def nus(txt):
+        t = txt.strip()
+        if not t or any(s in t for s in regle["SIGNES"]) or t in regle["PAS_DES_VECTEURS"]:
+            return []
+        out = []
+        for m in NOM.finditer(t):
+            a, b = m.start(), m.end()
+            g = t[a - 1] if a else ""
+            d = t[b] if b < len(t) else ""
+            if (g, d) in (("(", ")"), ("[", "]")) or m.group(0) in regle["MOTS_CAPS"]:
+                continue
+            out.append(m.group(0))
+        return out
+
+    # ⭐ Les appels que l'outil partagé ne lit pas, et qui portent le texte des shorts.
+    VUS = ("blocs_phrase", "lignes", "eq_mots", "appel_blocs", "jouer_phrase")
+    pb = 0
+    for cle, (module, _c) in SHORTS.items():
+        f = _ICI / f"{module}.py"
+        if not f.exists():
+            print(f"= {cle} {module}.py : pas encore écrit")
+            continue
+        src = f.read_text(encoding="utf-8")
+        trouves, lus = [], 0
+        for n in ast.walk(ast.parse(src)):
+            if not (isinstance(n, ast.Call) and getattr(n.func, "attr", "") in VUS):
+                continue
+            # un texte peut être écrit en morceaux concaténés : « "a " "b" »
+            morceaux, arg = [], n.args[0] if n.args else None
+            pile = [arg]
+            while pile:
+                x = pile.pop()
+                if isinstance(x, ast.Constant) and isinstance(x.value, str):
+                    morceaux.append(x.value)
+                elif isinstance(x, ast.BinOp) and isinstance(x.op, ast.Add):
+                    pile += [x.left, x.right]
+            if not morceaux:
+                continue
+            lus += 1
+            txt = "".join(reversed(morceaux))
+            for v in nus(txt):
+                trouves.append((n.lineno, v, txt))
+        etat = "✅" if not trouves else "⛔"
+        print(f"{etat} {cle} {module}.py : {lus} textes lus par ces 5 appels, "
+              f"{len(trouves)} nom(s) nu(s)")
+        for ligne, v, txt in trouves:
+            pb += 1
+            print(f"      l.{ligne:<5} « {v} » dans « {txt[:52]} »")
+    return pb
+
+
 def tard(chemin):
     """`--tard <journal de dry run>` : les `AUDIT-TARD` triés, du plus gros au plus petit.
 
@@ -267,6 +506,8 @@ def main():
         sys.exit(1 if tard(sys.argv[sys.argv.index("--tard") + 1]) else 0)
     if "--ancres" in sys.argv:
         sys.exit(1 if ancres() else 0)
+    if "--fleches" in sys.argv:
+        sys.exit(1 if fleches() else 0)
     cles = [a for a in sys.argv[1:] if a in SHORTS] or list(SHORTS)
     for c in cles:
         une(c)

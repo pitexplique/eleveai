@@ -53,7 +53,9 @@ from manim import *  # noqa: E402,F401,F403
 
 from canvas_proportion import AuditSynchro  # noqa: E402
 from charte import *  # noqa: E402,F401,F403
-from espace3d import Repere3D  # noqa: E402,F401
+from espace3d import (C_FANTOME, C_NORMALE, C_PIEGE, C_PLAN, C_POINT, C_REGARD,  # noqa: E402,F401
+                      C_DROITE, C_VECTEUR, C_VECTEUR2, FUITE, Repere3D, platitude,
+                      plan_dessine)
 from espace_ecrans import EcransEspace  # noqa: E402  (⭐ pour EMPRUNTER ses outils, pas pour en hériter)
 from gabarit_sixieme import Short6e  # noqa: E402
 from signes_expression_2de import echelle_ceintures  # noqa: E402
@@ -170,7 +172,15 @@ class ShortEspace(AuditSynchro, MotsCales, Short6e):
         g = VGroup(*mobs).arrange(DOWN, buff=buff)
         return self.pose(g, y, larg)
 
-    def jouer_phrase(self, g, texte, rt=0.28):
+    @staticmethod
+    def par_nom(pieces):
+        """Les blocs d'un écran, par leur NOM. ⛔ L'index a déjà menti une fois : en
+        ajoutant « titre » et « badge » en tête de la liste d'un écran, `[2][1]` est
+        passé de la correction aux cartes, et `jouer_phrase` a cassé sur un VGroup. Un
+        nom ne glisse pas quand on insère un bloc."""
+        return {ecran: dict(blocs) for ecran, blocs in pieces.items()}
+
+    def jouer_phrase(self, g, texte, rt=0.28, avec=()):
         """Anime un bloc déjà bâti par `blocs_phrase`, ligne par ligne, à son instant.
 
         ⭐⭐ UNE LIGNE QUI PORTE UN CHIFFRE EST POSÉE À `au_fin`, les autres à leur
@@ -187,7 +197,12 @@ class ShortEspace(AuditSynchro, MotsCales, Short6e):
         if base < 0:
             raise ValueError(f"« {texte[:40]}… » n'est pas dans la voix du clip "
                              f"{getattr(self, '_cle_voix', '?')}")
-        k = 0
+        # ⭐ `avec` : les animations à jouer EN MÊME TEMPS que la première ligne. Ce
+        # n'est pas un confort — mesuré au dry run, un `play` de figure glissé entre deux
+        # phrases coûte son `run_time` au budget du clip, et la phrase suivante arrive en
+        # RETARD (0,83 s sur E4, 0,59 s sur E6). On fait paraître la figure AVEC sa
+        # légende au lieu de les mettre en file.
+        k, premiere = 0, True
         for m in g:
             p = texte.find(m.original_text, k)
             k = p + len(m.original_text)
@@ -195,7 +210,8 @@ class ShortEspace(AuditSynchro, MotsCales, Short6e):
                 self.au_fin_pos(base + p, len(m.original_text))
             else:
                 self.au_pos(base + p)
-            self.play(FadeIn(m, shift=UP * 0.08), run_time=rt)
+            self.play(FadeIn(m, shift=UP * 0.08), *(avec if premiere else ()), run_time=rt)
+            premiere = False
         return g
 
     def au_fin_pos(self, i, longueur):
@@ -219,6 +235,28 @@ class ShortEspace(AuditSynchro, MotsCales, Short6e):
         self.play(mob.animate.scale(k), run_time=run_time)
         self.play(mob.animate.scale(1 / k), run_time=run_time)
 
+    def eq_mots(self, jetons, fs=28, color=WHITE, buff=0.12):
+        """Une petite équation montée JETON PAR JETON, dont les « 0 » sont hors audit.
+
+        ⛔⛔ POURQUOI JETON PAR JETON ET PAS EN UN SEUL `Text` : la voix de cette série
+        dit « zéro » en lettres (« il reste zéro égale zéro »), et l'écran écrit le
+        CHIFFRE — c'est la bonne écriture au tableau. L'audit, lui, cherche « 0 » dans
+        la voix et ne le trouve pas : `AUDIT-ABSENT « 0 »`. Un `sans_audit` sur toute
+        l'équation réglerait le signalement, mais il exempterait AUSSI le « 2 » de
+        « 2t = 0 » — c'est-à-dire le seul nombre que l'audit doit vraiment surveiller
+        ici. En montant l'équation jeton par jeton, on n'exempte que les zéros.
+        ⭐ C'est la même précaution que `g.nb[i]` de `trip()` : on rend adressable ce
+        qu'on doit traiter séparément."""
+        g = VGroup(*[self.t(j, fs, color, larg=None) for j in jetons])
+        g.arrange(RIGHT, buff=buff)
+        for j, m in zip(jetons, g):
+            # ⚠️ TOUT jeton qui COMMENCE par un zéro, et pas seulement « 0 » : mesuré au
+            # dry run de E4, « 0y » et « 0z » sortaient en AUDIT-ABSENT parce que la
+            # règle ne reconnaissait que le zéro nu. La voix dit « plus zéro fois y ».
+            if j.strip().startswith(("0", "zéro")):
+                self.sans_audit(m)   # la voix le dit EN LETTRES, l'écran l'écrit en chiffre
+        return g
+
     def croix(self, color="#dc2626", r=0.14, sw=5):
         return VGroup(Line(P(-r, -r), P(r, r)), Line(P(-r, r), P(r, -r))).set_stroke(color, sw)
 
@@ -228,11 +266,28 @@ class ShortEspace(AuditSynchro, MotsCales, Short6e):
             print(f"ECRAN {nom} t={self.renderer.time:.2f}", flush=True)
         return super().dire(nom, dossier)
 
+    def _ambigu(self, extrait, n):
+        """⭐⭐ LE GARDE-FOU D'EXÉCUTION QUI COUVRE CE QUE L'AST NE VOIT PAS.
+
+        `au_mot` et `au_fin` cherchent leur extrait avec `find` : si le clip le contient
+        DEUX fois et qu'on ne précise pas `n`, l'ancre vise la première occurrence et
+        l'objet s'affiche en avance sur la sienne. C'est le mécanisme de « un gros
+        AUDIT-TARD cachait une vraie avance », huit fois dans cette série.
+        ⛔ `espace_mesure_short.py --ancres` ne contrôle que les appels LITTÉRAUX : un
+        `au_fin(extrait)` dans une boucle (il y en a dans quatre des six shorts) lui est
+        invisible. Ce contrôle-ci, lui, passe par tous les appels — et il parle dans le
+        journal du dry run, là où on le lira."""
+        if n == 1 and (self._texte_voix or "").count(extrait) > 1:
+            print(f"AMBIGU {getattr(self, '_cle_voix', '?')} « {extrait[:40]} » : "
+                  f"{self._texte_voix.count(extrait)} occurrences — `find` vise la 1re",
+                  flush=True)
+
     def au_mot(self, extrait, n=1):
         """⚠️ RÉÉCRIT ICI, et c'est le seul outil du socle paysage qui ne s'emprunte pas :
         `EcransEspace.au_mot` appelle `super().au_mot(...)` à zéro argument, donc il exige
         que `self` soit une instance de `EcransEspace`. Mesuré : l'emprunt lève
         `TypeError: super(type, obj): obj must be an instance or subtype of type`."""
+        self._ambigu(extrait, n)
         if n == 1:
             return super().au_mot(extrait)
         i = -1
@@ -247,7 +302,12 @@ class ShortEspace(AuditSynchro, MotsCales, Short6e):
     # géométrie 16:9 — et AUCUN n'appelle `super()`. Vérifié un par un avant d'emprunter.
     t_pos = EcransEspace.t_pos
     au_pos = EcransEspace.au_pos
-    au_fin = EcransEspace.au_fin
+    _au_fin_socle = EcransEspace.au_fin
+
+    def au_fin(self, extrait, n=1):
+        """`au_fin` du socle paysage, plus le garde-fou d'ambiguïté (voir `_ambigu`)."""
+        self._ambigu(extrait, n)
+        return self._au_fin_socle(extrait, n)
     nombre = EcransEspace.nombre
     trip = EcransEspace.trip
     sans_audit = EcransEspace.sans_audit
@@ -270,6 +330,88 @@ class ShortEspace(AuditSynchro, MotsCales, Short6e):
         self.sans_audit(badge)               # les ceintures ne portent aucun nombre dit
         t = self.pose(self.t(titre, fs, JAUNE_TITRE, larg=None), self.Y_TITRE)
         return t, badge
+
+    # ── le cube ABCDEFGH, et les deux noms qu'il faut écarter ───────────────
+    #
+    # ⛔⛔ AU DÉCALAGE PAR DÉFAUT DE `espace3d.Repere3D.cube()`, DEUX NOMS SONT POSÉS
+    # SUR UNE ARÊTE. Mesuré à trois échelles, avant d'écrire un écran :
+    #
+    #   u      « D » de l'arête la plus proche   « F » de l'arête la plus proche
+    #   1,45   0,025                             0,013
+    #   1,10   0,025                             0,013
+    #   1,00   0,010                             0,001
+    #
+    # ⭐ Ce n'est donc PAS une question d'échelle — le défaut est dans le décalage, et
+    # la note de la série le signalait comme « constat, pas correctif » (épisode 12,
+    # mesuré à u = 1,35 sur les cubes déjà livrés en HD). Les shorts, eux, ne sont pas
+    # rendus : on le corrige ici.
+    # ⚠️ Les deux écarts viennent d'une RECHERCHE EN GRILLE (pas de 0,04 entre −0,5 et
+    # +0,5), qui garde les positions à plus de 0,12 de tout segment tracé et à plus de
+    # 0,30 des sept autres noms, puis classe par distance au SOMMET — la plus proche
+    # gagne, pour qu'on sache à qui le nom appartient (recette de l'épisode 9).
+    # ⛔ Et l'instrument a dû être refait : son premier jet ne retrouvait que 9 segments
+    # sur 12 dans les sous-mobjets, parce que les trois arêtes cachées sont des
+    # `DashedLine`, donc des groupes de tirets. Il reçoit maintenant les douze arêtes
+    # CALCULÉES — « un instrument qui ne reçoit qu'une partie de la figure mesure une
+    # figure qui n'existe pas » (épisode 11).
+    CUBE_SOMMETS = {"A": (0, 0, 0), "B": (1, 0, 0), "C": (1, 1, 0), "D": (0, 1, 0),
+                    "E": (0, 0, 1), "F": (1, 0, 1), "G": (1, 1, 1), "H": (0, 1, 1)}
+    #
+    # ⛔⛔⛔ ET LA PREMIÈRE VERSION DE CES DEUX ÉCARTS A POSÉ « D » SUR « F ».
+    # Vu à la PLANCHE du `-ql`, pas par un instrument : les deux lettres se lisaient
+    # comme un seul glyphe au milieu du cube. La cause tient en une phrase — la grille
+    # classait par distance au sommet, donc elle prenait la place libre la plus proche,
+    # et la plus proche était VERS L'INTÉRIEUR du cube pour les deux. Chacun fuyait son
+    # arête, et ils se rencontraient.
+    # ⭐⭐ Ce qui manquait à la grille : les autres noms N'ÉTAIENT COMPARÉS QU'À LEUR
+    # PLACE PAR DÉFAUT. On cherche maintenant un écart À LA FOIS — « F » d'abord, puis
+    # « D » avec « F » à sa place NOUVELLE — et on exige 0,34 entre deux centres de nom
+    # en plus de 0,11 de tout segment. C'est « fuir une flèche pour tomber sur une
+    # arête » (épisode 9) dans sa forme la plus bête : fuir une arête pour tomber sur
+    # l'autre nom qu'on vient de déplacer.
+    # ⭐ Et la mesure a rendu un second fait : avec les deux diagonales (A C) et (E B)
+    # tracées, la grille garde 541 et 625 positions libres au lieu de 562 et 647, et
+    # **les écarts retenus sont les mêmes**. Il n'y a donc qu'UNE table, et la seconde
+    # (`ECARTE_CUBE_DIAG`) n'existe que pour que les épisodes qui la nomment continuent
+    # de dire ce qu'ils dessinent.
+    ECARTE_CUBE = {"F": (-0.04, -0.20), "D": (-0.44, 0.00)}
+    ECARTE_CUBE_DIAG = ECARTE_CUBE
+
+    def cube_place(self, u, y, x=0.0, fs=24, ecarte=None, base=False):
+        """Le cube ABCDEFGH posé par son GROUPE, ses deux noms écartés.
+
+        ⭐⭐ L'ORIGINE EST CALCULÉE POUR QUE LE CUBE TOMBE EN (x ; y), et on ne le
+        déplace PAS après coup. ⛔ C'est une leçon à part : un cube bâti puis recentré
+        par `move_to` n'est plus à l'endroit que `r.pt(...)` indique, donc toute arête,
+        tout point et toute diagonale qu'un écran voudrait ajouter ensuite se poserait
+        à côté — en silence. Le centre projeté du cube unité est à
+        u × (0,5 + 0,41 × 0,5 ; 0,5 + 0,287 × 0,5), c'est-à-dire u × (0,705 ; 0,6435).
+        `base=True` ajoute les trois directions du repère depuis A — ⭐ ANONYMES :
+        trois étiquettes de plus dans un cube dont les huit noms sont déjà à 0,14 de
+        leur arête, et la grille ne trouve rien. « Quand la grille ne trouve rien, on
+        n'étiquette pas » (épisode 8) : c'est la VOIX qui les nomme."""
+        cx, cy = 0.5 + FUITE[0] * 0.5, 0.5 + FUITE[1] * 0.5
+        r = Repere3D(o=np.array([x - u * cx, y - u * cy, 0.0]), u=u, portee=3)
+        c = r.cube(cote=1, fs=fs)
+        noms = {s: c[len(c) - 8 + i] for i, s in enumerate("ABCDEFGH")}
+        for s, (dx, dy) in (ecarte or {}).items():
+            noms[s].shift(np.array([dx, dy, 0.0]))
+        self.sans_audit(c)        # les huit noms sont des LETTRES, pas des nombres dits
+        g = VGroup(c)
+        vs = None
+        if base:
+            vs = VGroup(*[r.vecteur((0, 0, 0), self.CUBE_SOMMETS[s], couleur=C_VECTEUR, sw=5)
+                          for s in ("B", "D", "E")])
+            g.add(vs)
+        return r, c, vs, g
+
+    def arete(self, r, s1, s2, couleur=VERT_OK, sw=7):
+        """Un segment du cube repassé en couleur, posé PAR-DESSUS l'arête.
+        ⛔ Jamais en pointillé sur un trait déjà tracé : [C G] dessiné en pointillé était
+        INVISIBLE à l'épisode 9, puisque [C G] *est* une arête. Un trait plein d'une
+        autre couleur, lui, se voit — et il porte la leçon."""
+        a, b = self.CUBE_SOMMETS[s1], self.CUBE_SOMMETS[s2]
+        return Line(r.pt(*a), r.pt(*b)).set_stroke(couleur, sw)
 
     # ── la figure : le repère cavalière, dans la moitié haute ───────────────
     def repere(self, o=(0.0, 0.55), u=0.60, portee=3, noms=("x", "y", "z")):
@@ -328,7 +470,10 @@ class ShortEspace(AuditSynchro, MotsCales, Short6e):
         self.pose(q, 0)
         q.align_to(P(0, tete.get_bottom()[1] - 0.22), UP)
         cartes = VGroup(*[self.carte_choix(l, c, largeur=largeur, fs=fs_c)
-                          for l, c in zip("ABC", choix)]).arrange(DOWN, buff=0.12)
+                          for l, c in zip("ABC", choix)]).arrange(DOWN, buff=0.10)
+        # ⚠️ 0,10 et non 0,12 entre deux cartes : mesuré sur E2, les 0,04 gagnés sont
+        # exactement ce qui sépare « Mets pause » de la boîte de Ti-Margo. Un écart d'un
+        # centième décide, et aucune relecture ne le voit (leçon de l'épisode 6).
         cartes.move_to(P(0, 0))
         cartes.align_to(P(0, q.get_bottom()[1] - 0.26), UP)
         # ⚠️ 24 px et pas 26 : « Mets pause, et choisis ! » fait 4,06 de large à 26 px

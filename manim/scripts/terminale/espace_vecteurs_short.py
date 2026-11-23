@@ -69,9 +69,17 @@ def pieces(e):
     pB = r.point(*B1, nom="B", couleur=C_POINT, decal=UR, fs=26)
     e.sans_audit(pA)                 # « A » et « B » sont des NOMS, pas des nombres
     e.sans_audit(pB)
-    # ⭐ L'étiquette va du côté où le vecteur NE VA PAS (leçon de l'épisode 7) : A B est
-    # VERTICAL, donc son nom part à GAUCHE — sinon sa propre flèche percute la pointe.
-    vAB = r.vecteur(A1, B1, "A B", couleur=C_VECTEUR, fs=26, decal=LEFT)
+    # ⛔⛔ LE VECTEUR N'EST PAS ÉTIQUETÉ SUR LA FIGURE, et c'est mesuré, pas choisi.
+    # Premier jet : « A B⃗ » posé à gauche du milieu (le côté où le vecteur ne va pas,
+    # recette de l'épisode 7). Vu au GROS PLAN ×2 sur le `-ql`, et confirmé au centième
+    # par `espace_mesure_short.py` : le mot est à **0,010** du fût du vecteur, et sa
+    # propre flèche de notation le croise. En 9:16 le repère fait 1,9 de haut : entre
+    # l'axe des z à gauche (0,46) et l'axe des y à droite, il n'y a aucune bande libre
+    # de 0,75 pour ce mot-là.
+    # ⭐ Le remède est celui de l'écran 09b de l'épisode 8 : quand la grille ne trouve
+    # rien, ON N'ÉTIQUETTE PAS — c'est la COULEUR qui relie. La flèche est bleue, et le
+    # « A B⃗ 0 ; 0 ; 2 » du bas de l'écran est bleu lui aussi.
+    vAB = r.vecteur(A1, B1, couleur=C_VECTEUR, sw=6)
     fig = VGroup(axes, pA, pB, vAB)
     # ⛔ LA FIGURE SE POSE PAR SON GROUPE, APRÈS COUP. Bâtie autour de l'origine du
     # repère, elle montait à 2,70 et CHEVAUCHAIT l'échelle des ceintures de 0,22 — vu
@@ -175,7 +183,7 @@ class EspaceVecteursShort(ShortEspace):
         self.au_fin("B a pour coordonnées 1, 0, 2")
         self.play(FadeIn(pB, scale=1.3), FadeIn(cB), run_time=0.35)
         self.au_mot("on soustrait")
-        self.play(GrowArrow(vAB[0]), FadeIn(vAB[1]), run_time=0.45)
+        self.play(GrowArrow(vAB[0]), run_time=0.45)
         self.jouer_phrase(calc, "1 moins 1 fait 0, 0 moins 0 fait 0, et 2 moins 0 fait 2.")
         self.au_fin("Donc A B a pour coordonnées 0, 0, 2")
         self.play(FadeIn(resg[0], shift=UP * 0.1), Create(resg[1]), run_time=0.4)
