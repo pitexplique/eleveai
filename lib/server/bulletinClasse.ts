@@ -83,6 +83,8 @@ type LigneTutor = {
   classe: string | null;
   matiere: string | null;
   score_sur_20: number | null;
+  bonnes_reponses?: number | null;
+  nb_tentatives?: number | null;
   details: any;
   created_at: string;
 };
@@ -221,7 +223,7 @@ export async function calculerBulletinClasse(admin: SupabaseClient, code: string
     toutLire<LigneTutor>((de, a) =>
       db
         .from("resultats_tutor")
-        .select("code_utilisateur, classe, matiere, score_sur_20, details, created_at")
+        .select("code_utilisateur, classe, matiere, score_sur_20, bonnes_reponses, nb_tentatives, details, created_at")
         .eq("code_etablissement", code)
         .gte("created_at", depuis)
         .order("created_at", { ascending: true })
@@ -277,14 +279,23 @@ export async function calculerBulletinClasse(admin: SupabaseClient, code: string
     const creneaux: Creneaux = { matin: 0, apresMidi: 0, soir: 0, weekend: 0 };
     const jours = new Set<string>();
     const micros: Record<string, { j: number; t: number }> = {};
-    const notes: number[] = [];
+    // Moyenne PONDÉRÉE (23/11/2026) : toutes les bonnes réponses ÷ toutes les
+    // questions × 20. Une séance d'une question ne pèse plus autant qu'une de 30.
+    let justes = 0;
+    let questions = 0;
     for (const s of siennes) {
       const c = creneau(s.created_at);
       creneaux[c.cle]++;
       jours.add(c.jour);
       // 🏋️ Une séance d'entraînement (choix de l'élève au coach, 23/11/2026)
       // compte comme travail, pas dans la moyenne.
-      if (typeof s.score_sur_20 === "number" && s.details?.entrainement !== true) notes.push(s.score_sur_20);
+      if (s.details?.entrainement !== true) {
+        const q = Number(s.nb_tentatives) || 0;
+        if (q > 0) {
+          questions += q;
+          justes += Number(s.bonnes_reponses) || 0;
+        }
+      }
       for (const [id, sc] of Object.entries((s.details?.microScores ?? {}) as Record<string, any>)) {
         const t = Number(sc?.attempts) || 0;
         if (!t) continue;
@@ -309,9 +320,7 @@ export async function calculerBulletinClasse(admin: SupabaseClient, code: string
       if (r >= 0.8) compris.push(nom(id));
       else if (r < 0.5) aRevoir.push(nom(id));
     }
-    const moyenne = notes.length
-      ? Math.round((notes.reduce((a, b) => a + b, 0) / notes.length) * 10) / 10
-      : null;
+    const moyenne = questions > 0 ? Math.round((justes / questions) * 200) / 10 : null;
 
     return {
       code_utilisateur: e.code_utilisateur,
