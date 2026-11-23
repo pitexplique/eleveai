@@ -268,6 +268,22 @@ def toit_panneau(ecart_deg, s=1.0, long_pan=1.70, long_fl=1.15, r_arc=0.52):
     return g.scale(s)
 
 
+def ecart(p, signe=1.0, d=0.42):
+    """LE DÉCALAGE D'UNE ÉTIQUETTE : PERPENDICULAIRE AU FÛT QU'ELLE NOMME.
+
+    ⛔⛔ Mesuré le 23/11 : posée à `p * 0,80 + UP * 0,16`, l'étiquette « v » restait à
+    **0,00** de son propre fût dans les trois figures. La cause n'est pas la distance,
+    c'est la DIRECTION : un décalage vertical sur un fût à 45° ne gagne que
+    0,16 × cos 45° = 0,11 de distance réelle, et la boîte de l'étiquette est plus large
+    que ça. Pour « u », qui est horizontal, le même `DOWN` marchait — d'où le piège :
+    une cote qui marche sur un vecteur et pas sur l'autre se lit comme un réglage à
+    affiner, alors que c'est la méthode qui est fausse.
+    ⭐ `signe` choisit le côté : +1 tourne dans le sens direct, −1 dans l'autre. On met
+    l'étiquette du côté où le vecteur ne va PAS, et loin de l'arc."""
+    n = np.array([-float(p[1]), float(p[0]), 0.0])
+    return signe * d * n / max(1e-9, float(np.linalg.norm(n)))
+
+
 def coin(deg, r=1.30, sw=7, c1=C_VECTEUR, c2=C_VECTEUR2, r_arc=0.46, c_arc=C_REGARD,
          oppose=False, s=1.0):
     """DEUX VECTEURS ET LEUR ANGLE, DESSINÉS À PLAT — l'angle vu DANS leur plan.
@@ -292,6 +308,14 @@ def coin(deg, r=1.30, sw=7, c1=C_VECTEUR, c2=C_VECTEUR2, r_arc=0.46, c_arc=C_REG
     arc = Arc(radius=r_arc, start_angle=0, angle=th, color=c_arc, stroke_width=5)
     g = VGroup(f1, f2, arc)
     g.f1, g.f2, g.arc, g.p1, g.p2 = f1, f2, arc, p1, p2
+    # ⛔⛔ `g.sommet()` REND LE POINT D'OÙ PARTENT LES DEUX FLÈCHES, et c'est par rapport
+    # à LUI qu'on place une étiquette — jamais par rapport à `g.get_center()`, qui est le
+    # centre de la BOÎTE du groupe et tombe au milieu du secteur (à ~0,5 ; 0,37 du sommet
+    # pour un coin de rayon 1). Mesuré : posées depuis le centre de boîte, « u » tombait
+    # à 0,02 de son propre fût. ⚠️ Il se lit APRÈS les `move_to` et les `scale`, sinon il
+    # rend la position d'avant — c'est la leçon de `placer` sur le cube de E9 : une cote
+    # relative à une autre cote se périme au premier changement de l'une des deux.
+    g.sommet = lambda: f1.get_start()
     if oppose:
         f3 = Arrow(ORIGIN, -p2, buff=0, stroke_width=sw - 2, color=c2,
                    max_tip_length_to_length_ratio=0.16).set_opacity(0.55)
@@ -499,7 +523,10 @@ class PsEspaceAngleBase(EcransEspace):
         self.play(FadeIn(lieu), run_time=0.3)
 
         # ── le schéma : le soleil, le panneau, et l'angle ──────────────────
-        tp = toit_panneau(INCL01, 1.0).move_to(P(-2.45, 1.05))
+        # ⚠️ 0,88 ET NON 1,05 : à 1,05 le bout des rayons du soleil montait à 3,68 pour une
+        # marge à 3,573. Mesuré, pas estimé — un soleil est plus haut que sa boîte ne le
+        # laisse croire, ses rayons dépassent du disque de 2 fois son rayon.
+        tp = toit_panneau(INCL01, 1.0).move_to(P(-2.45, 0.88))
         sol = soleil(1.0).move_to(tp.get_center() + tp.d_sol * 2.30)
         self.au_mot("sur les toits de Saint-Pierre")
         self.play(Create(tp.panneau), FadeIn(sol, scale=0.7), run_time=0.7)
@@ -592,9 +619,19 @@ class PsEspaceAngleBase(EcransEspace):
         # v(1;1;0) se dessineraient à 11,5° l'un de l'autre alors que leur angle vaut
         # 45°. Ici la figure ne dit pas OÙ ils sont, elle dit leur ANGLE — et elle le dit
         # juste (assertion du module).
+        # ⛔⛔ LES TROIS COTES D'ÉTIQUETTE VIENNENT DE LA MESURE, et les trois premières
+        # étaient fausses : « u » touchait « 45° » (0,00) ET était TRAVERSÉE par son
+        # propre fût (0,00), et « 45° », posé par `next_to(arc, RIGHT)`, tombait pile sur
+        # le fût de u — le point le plus à droite d'un arc qui part de 0° EST sur ce
+        # fût. ⭐ `loin_des_fleches()` les a toutes les trois ; `etiquettes()` seul n'en
+        # voyait qu'une (il compare des boîtes, jamais une boîte à un segment).
+        # ⭐ La valeur se pose sur la BISSECTRICE, au-DELÀ des deux pointes : à 1,35 elle
+        # est à 1,35 × sin(22,5°) = 0,52 de chaque fût, et elle désigne sans ambiguïté
+        # l'angle qu'elle mesure.
         g = coin(round(angle(U02, V02)), r=1.05, s=1.0).move_to(P(-4.55, -2.10))
-        nu = self.vec("u", 26, C_VECTEUR).move_to(g.get_center() + g.p1 * 0.62 + DOWN * 0.34)
-        nv = self.vec("v", 26, C_VECTEUR2).move_to(g.get_center() + g.p2 * 0.78 + UP * 0.12)
+        o = g.sommet()
+        nu = self.vec("u", 26, C_VECTEUR).move_to(o + g.p1 * 0.62 + ecart(g.p1, -1))
+        nv = self.vec("v", 26, C_VECTEUR2).move_to(o + g.p2 * 0.74 + ecart(g.p2, +1))
         leg = self.sans_audit(self.t("vus dans leur plan", 22, C_FANTOME))
         leg.next_to(VGroup(g, nu, nv), DOWN, buff=0.14)
         self.au_mot("Exemple")
@@ -622,13 +659,21 @@ class PsEspaceAngleBase(EcransEspace):
         # ⛔ UNE SEULE LIGNE POUR LES DEUX NORMES, parce que la voix les dit d'un trait
         # (« La norme de u vaut 1, celle de v vaut racine de 2 ») — mais elle se pose à
         # la FIN, sinon √2 est à l'écran avant d'être dit.
-        self.au_fin("celle de v vaut racine de 2")
-        lno = VGroup(self.vexpr(f"‖u‖ = {norme2(U02)}", ("u",), fs, WHITE),
-                     self.vexpr("‖v‖ =", ("v",), fs, WHITE),
+        # ⛔ DEUX INSTANTS, ET C'EST UN `AUDIT-TARD` DE 1,86 s QUI L'A DIT : la voix
+        # énonce « La norme de u vaut 1 » puis « celle de v vaut racine de 2 » à près de
+        # deux secondes d'écart. Posée d'un bloc à la fin, la première moitié arrivait
+        # en retard — c'est la règle « un bloc qui porte ce que la voix énumère se
+        # remplit au rythme de la voix », dans son autre sens.
+        nu0 = self.vexpr(f"‖u‖ = {norme2(U02)}", ("u",), fs, WHITE)
+        nv0 = VGroup(self.vexpr("‖v‖ =", ("v",), fs, WHITE),
                      self.racine(norme2(V02), fs, WHITE))
-        lno.arrange(RIGHT, buff=0.16, aligned_edge=DOWN)
+        nv0.arrange(RIGHT, buff=0.16, aligned_edge=DOWN)
+        lno = VGroup(nu0, nv0).arrange(RIGHT, buff=0.34, aligned_edge=DOWN)
         self.col(lno, 0.20)
-        self.play(FadeIn(lno, shift=RIGHT * 0.12), run_time=0.55)
+        self.au_fin("La norme de u vaut 1")
+        self.play(FadeIn(nu0, shift=RIGHT * 0.12), run_time=0.45)
+        self.au_fin("celle de v vaut racine de 2")
+        self.play(FadeIn(nv0, shift=RIGHT * 0.12), run_time=0.45)
         # ⚠️ « 1 sur racine de 2 » : une fraction dont le dénominateur est un RADICAL.
         # Elle est donc plus haute encore — mesurée, pas estimée.
         self.au_fin("1 sur racine de 2")
@@ -645,7 +690,9 @@ class PsEspaceAngleBase(EcransEspace):
         # ── et SON angle, en dernier : c'est la conclusion de la voix ─────
         self.au_fin("L'angle vaut 45 degrés")
         val = self.deg(round(angle(U02, V02)), 30, C_REGARD)
-        val.next_to(g.arc, RIGHT, buff=0.14)
+        bis = math.radians(angle(U02, V02) / 2)
+        val.move_to(g.sommet()
+                    + np.array([math.cos(bis), math.sin(bis), 0.0]) * 1.42)
         self.play(Create(g.arc), FadeIn(val, scale=1.15), run_time=0.6)
         self.attendre_voix(marge=0.5)
 
@@ -667,9 +714,13 @@ class PsEspaceAngleBase(EcransEspace):
                   ("la division", C_REGARD, "puis la division"))
         rangs = []
         for k, (txt, coul, _) in enumerate(etapes, start=1):
-            rangs.append(VGroup(self.pastille(k), self.t(txt, fs, coul))
-                         .arrange(RIGHT, buff=0.20))
-        meth = VGroup(*rangs).arrange(RIGHT, buff=0.55)
+            rangs.append(VGroup(self.pastille(k), self.t(txt, 24, coul))
+                         .arrange(RIGHT, buff=0.18))
+        # ⛔ 24 px ET UN BUFF DE 0,42, ET C'EST UNE MESURE : à 28 px avec 0,55 la ligne
+        # faisait 11,88 pour un plafond de 10,60, donc `scale_to_fit_width` réduisait
+        # TOUTE la méthode de 10,8 % en silence. ⚠️ Les pastilles, elles, ne rétrécissent
+        # pas avec la police (rayon fixe) : elles pèsent 2,04 à elles seules.
+        meth = VGroup(*rangs).arrange(RIGHT, buff=0.42)
         # ⚠️ Le plafond de la bande centrale est 10,60 (mesuré depuis E7) : au-delà,
         # `scale_to_fit_width` réduit TOUT en silence. La mesure le revérifie.
         if meth.width > 10.6:
@@ -742,16 +793,25 @@ class PsEspaceAngleBase(EcransEspace):
         # premier mot, « 90 » serait à l'écran avant d'être prononcé (carte B de
         # l'épisode 8, 1,05 s d'avance). ⚠️ Les cartes A et B sont des mots sans chiffre :
         # on ne les retarde pas, l'élève doit pouvoir les LIRE pendant qu'il les entend.
-        cA = self.t("aigu", 32, WHITE)
-        cB = self.t("droit", 32, WHITE)
-        cC = self.choix2("obtus, donc plus grand", "que 90°", fs=28)
+        # ⛔ 28 px ET NON 32, ET LARGEUR 6,2 ET NON 6,3 : mesuré, une carte de 6,3 posée
+        # à x = 0,35 finit à 6,65 et `col()` la réduit de 1 % (6,60 est le bord) ; et la
+        # question sur TROIS lignes à 28 px poussait le bas des cartes à −1,79, donc la
+        # pause à −2,44 — c'est-à-dire SUR la tête de Ti-Margo (seuil −2,15).
+        cA = self.t("aigu", 28, WHITE)
+        cB = self.t("droit", 28, WHITE)
+        cC = self.choix2("obtus, donc plus grand", "que 90°", fs=26)
         cC.nb = [cC]
         tete, q, cartes, pause, rebours = self.q_tete(
             [self.sans_audit(self.vexpr("Le produit scalaire de u et v vaut −6,",
-                                        ("u", "v"), 28)),
-             self.sans_audit(self.t("et aucun des deux vecteurs n'est nul.", 28)),
-             self.sans_audit(self.vexpr("L'angle entre u et v est :", ("u", "v"), 28))],
-            [cA, cB, cC], largeur=6.3, xl=0.35)
+                                        ("u", "v"), 26)),
+             self.sans_audit(self.t("et aucun des deux vecteurs n'est nul.", 26)),
+             self.sans_audit(self.vexpr("L'angle entre u et v est :", ("u", "v"), 26))],
+            [cA, cB, cC], largeur=6.2, xl=0.35)
+        # ⛔⛔ LA PAUSE EST DÉPLACÉE EN BAS À GAUCHE, ET C'EST LE REMÈDE MESURÉ DE
+        # L'ÉPISODE 8 : posée par `q_tete` sous des cartes qui descendent à −1,81, elle
+        # tombe à −2,46, c'est-à-dire SUR la tête de Ti-Margo (boîte y ∈ [−3,55 ; −2,15],
+        # x ∈ [5,54 ; 6,66]). Les CARTES, elles, restent où `q_tete` les met.
+        self.gauche(pause, -2.95, xmax=0.15)
         self.play(FadeIn(tete, shift=DOWN * 0.1), run_time=0.4)
         # ⛔⛔ L'ATTENTE EST COLLÉE À SON `play` (défaut de l'écran 04 de E8, 4,93 s de
         # retard) : un `au_fin` ne place rien, il ATTEND.
@@ -782,8 +842,10 @@ class PsEspaceAngleBase(EcransEspace):
         self.gauche(l1, 0.70, xmax=0.15)
         self.play(FadeIn(l1, shift=RIGHT * 0.12), run_time=0.5)
         self.au_fin("divise par deux normes qui sont positives")
+        # ⚠️ 24 ET NON 26 : à 26 cette ligne fait 6,90 pour les 6,65 offerts à gauche,
+        # et `gauche()` rétrécissait la phrase qui EXPLIQUE le signe.
         l2 = self.sans_audit(self.vexpr("on divise par ‖u‖ × ‖v‖, qui est positif",
-                                        ("u", "v"), 26, GREY_A))
+                                        ("u", "v"), 24, GREY_A))
         self.gauche(l2, 0.05, xmax=0.15)
         self.play(FadeIn(l2, shift=RIGHT * 0.12), run_time=0.5)
         self.au_fin("donne donc un cosinus négatif")
@@ -870,8 +932,9 @@ class PsEspaceAngleBase(EcransEspace):
         # famille de défauts de E1 et de E6). Et l'angle de 60° s'y lirait 60,8°, ce qui
         # n'est juste que par chance.
         g = coin(round(angle(U05, V05)), r=1.35).move_to(P(-4.35, 0.75))
-        nu = self.vec("u", 28, C_VECTEUR).move_to(g.get_center() + g.p1 * 0.66 + DOWN * 0.36)
-        nv = self.vec("v", 28, C_VECTEUR2).move_to(g.get_center() + g.p2 * 0.80 + UP * 0.14)
+        o = g.sommet()
+        nu = self.vec("u", 28, C_VECTEUR).move_to(o + g.p1 * 0.66 + ecart(g.p1, -1, 0.46))
+        nv = self.vec("v", 28, C_VECTEUR2).move_to(o + g.p2 * 0.76 + ecart(g.p2, +1, 0.46))
         leg = self.sans_audit(self.t("vus dans leur plan", 22, C_FANTOME))
         leg.next_to(VGroup(g, nu, nv), DOWN, buff=0.16)
         self.au_mot("Et un cosinus qui vaut un demi")
@@ -942,8 +1005,9 @@ class PsEspaceAngleBase(EcransEspace):
         # touchent au sommet commun et on lit un seul angle.
         g = coin(round(angle(U05, V05)), r=1.15, r_arc=0.40, oppose=True)
         g.move_to(P(-4.25, 1.25))
-        nv = self.vec("v", 26, C_VECTEUR2).move_to(g.get_center() + g.p2 * 0.86 + UP * 0.12)
-        nw = self.vec("−v", 26, C_VECTEUR2).move_to(g.get_center() + g.p3 * 0.86 + DOWN * 0.14)
+        o = g.sommet()
+        nv = self.vec("v", 26, C_VECTEUR2).move_to(o + g.p2 * 0.78 + ecart(g.p2, +1))
+        nw = self.vec("−v", 26, C_VECTEUR2).move_to(o + g.p3 * 0.78 + ecart(g.p3, -1, 0.52))
         nw.set_opacity(0.75)
         self.au_mot("Si tu retournes un vecteur")
         self.play(GrowArrow(g.f1), GrowArrow(g.f2), Create(g.arc), FadeIn(nv),
@@ -988,15 +1052,28 @@ class PsEspaceAngleBase(EcransEspace):
         # mesuré : sans `.nb`, ses deux nombres sont à l'écran 2,4 s avant d'être dits
         # (défaut de la carte B de l'épisode 8). Les cartes A et C, qui ne portent aucun
         # chiffre, paraissent dès leur premier mot et restent lisibles à temps.
-        cA = self.t("l'angle est très petit", 28, WHITE)
-        cB = self.choix2("il y a une erreur, un cosinus", "reste entre −1 et 1", fs=26)
+        # ⛔ Mêmes cotes mesurées qu'à l'écran 04, et pour la même raison.
+        # ⛔⛔ MESURÉ : une carte de 6,2 n'offre que 5,05 à son texte, soit ~30 caractères
+        # à 26 px. « les deux vecteurs sont colinéaires » en fait 34 et retombait à
+        # **18,8 px** — le défaut n° 4 de l'épisode 1. Les deux choix longs passent donc
+        # sur DEUX lignes, à la même police que le premier : trois cartes de tailles
+        # inégales se lisent plus mal qu'une carte de deux lignes.
+        cA = self.t("l'angle est très petit", 26, WHITE)
+        # ⛔ TROIS LIGNES POUR LA SEULE CARTE B : « il y a une erreur, un cosinus » fait
+        # 29 caractères et retombait à 22,5 px (une carte de 6,2 n'offre que 5,05, soit
+        # ~30 caractères à 26 px — mesuré). ⚠️ UNE SEULE des trois sur trois lignes,
+        # jamais les trois : c'est le remède de l'épisode 6, puis de l'épisode 8.
+        cB = self.choix3("il y a une erreur,", "un cosinus reste",
+                         "entre −1 et 1", fs=26)
         cB.nb = [cB]
-        cC = self.t("les deux vecteurs sont colinéaires", 26, WHITE)
+        cC = self.choix2("les deux vecteurs", "sont colinéaires", fs=26)
         tete, q, cartes, pause, rebours = self.q_tete(
-            [self.sans_audit(self.t("On calcule le cosinus de l'angle entre", 28)),
-             self.lettres(self.t(f"deux vecteurs et on trouve {self.nombre(COS07)}.", 28)),
-             self.sans_audit(self.t("Que peut-on dire ?", 28))],
-            [cA, cB, cC], largeur=6.3, xl=0.35)
+            [self.sans_audit(self.t("On calcule le cosinus de l'angle entre", 26)),
+             self.lettres(self.t(f"deux vecteurs et on trouve {self.nombre(COS07)}.", 26)),
+             self.sans_audit(self.t("Que peut-on dire ?", 26))],
+            [cA, cB, cC], largeur=6.2, xl=0.35)
+        # ⛔ Même remède qu'à l'écran 04, et pour la même raison mesurée.
+        self.gauche(pause, -2.95, xmax=0.15)
         self.play(FadeIn(tete, shift=DOWN * 0.1), run_time=0.4)
         self.au_fin("on trouve 1 virgule 25")
         self.play(FadeIn(don, shift=RIGHT * 0.12), run_time=0.45)
@@ -1029,7 +1106,7 @@ class PsEspaceAngleBase(EcransEspace):
         self.play(FadeIn(l2, shift=RIGHT * 0.12), run_time=0.6)
         self.au_fin("oublié une racine dans une norme")
         l3 = VGroup(self.croix(r=0.12),
-                    self.t("une racine oubliée dans une norme", fs, C_PIEGE))
+                    self.t("une racine oubliée dans une norme", 25, C_PIEGE))
         l3.arrange(RIGHT, buff=0.18)
         self.gauche(l3, -1.45, xmax=0.15)
         self.play(FadeIn(l3, shift=RIGHT * 0.12), run_time=0.55)
@@ -1210,11 +1287,16 @@ class PsEspaceAngleBase(EcransEspace):
         t2 = self.lettres(self.t("+ 1 × 0", fs, WHITE))
         t3 = self.lettres(self.t("+ 1 × 0", fs, WHITE))
         t4 = self.t(f"= {ps(AG, AB)}", fs, VERT_OK)
-        calc = VGroup(self.sans_audit(self.vexpr("A G · A B =", ("A G", "A B"), fs, GREY_A)),
-                      t1, t2, t3, t4).arrange(RIGHT, buff=0.12, aligned_edge=DOWN)
+        # ⛔⛔ DEUX ÉTAGES, ET C'EST UNE MESURE : d'un seul tenant cette ligne fait 6,69
+        # pour les 4,40 qu'offre la colonne de droite, donc `col()` la réduisait de 34 %
+        # — le calcul du défi serait devenu le plus petit texte de l'épisode.
+        entete = self.sans_audit(self.vexpr("A G · A B =", ("A G", "A B"), fs, GREY_A))
+        # ⚠️ buff 0,06 et non 0,12 : à 0,12 la ligne fait 4,51 pour les 4,40 offerts.
+        suite = VGroup(t1, t2, t3, t4).arrange(RIGHT, buff=0.06, aligned_edge=DOWN)
+        calc = VGroup(entete, suite).arrange(DOWN, aligned_edge=LEFT, buff=0.10)
         self.col(calc, 0.95)
         self.au_fin("1 fois 1")
-        self.play(FadeIn(calc[0], shift=RIGHT * 0.12), FadeIn(t1), run_time=0.5)
+        self.play(FadeIn(entete, shift=RIGHT * 0.12), FadeIn(t1), run_time=0.5)
         self.au_fin("plus 1 fois zéro", 1)
         self.play(FadeIn(t2), run_time=0.35)
         self.au_fin("plus 1 fois zéro", 2)
@@ -1250,8 +1332,11 @@ class PsEspaceAngleBase(EcransEspace):
         # ── ④ l'angle, à gauche sous le cube ──────────────────────────────
         # ⚠️ xmax = 1,9 : la colonne de droite descend sous −1,9.
         self.au_fin("environ 54 virgule 7 degrés")
+        # ⚠️ « 54,7 » HORS AUDIT : la voix dit « 54 virgule 7 degrés », donc la chaîne
+        # « 54,7 » n'existe nulle part dans son texte et sortait en AUDIT-ABSENT. Le
+        # « 55 » voisin, lui, RESTE dans l'audit — la voix le dit en chiffres.
         ang = VGroup(self.t("θ ≈", 30, VERT_OK),
-                     self.deg(54.7, 30, VERT_OK),
+                     self.lettres(self.deg(54.7, 30, VERT_OK)),
                      self.t("→", 30, VERT_OK),
                      self.deg(round(angle(AG, AB)), 34, VERT_OK))
         ang.arrange(RIGHT, buff=0.18, aligned_edge=DOWN)
@@ -1296,8 +1381,13 @@ class PsEspaceAngleBase(EcransEspace):
         # elle a été réduite de 27 % (30 px → 21,9) par son plafond de 10,60 sans que
         # rien ne le dise.
         fs = 26
+        # ⛔⛔ LA PREMIÈRE RANGÉE EST ÉCRITE EN SYMBOLES, ET C'EST UNE MESURE : en toutes
+        # lettres (« le produit scalaire divisé par le produit des normes ») les QUATRE
+        # rangées faisaient 12,32 pour un plafond de 10,60, donc la FINALE — l'écran que
+        # l'élève relit le plus — était réduite de 13,9 % sans que rien ne le dise.
+        # ⭐ Et la formule est ce qu'il doit retenir, pas sa paraphrase.
         faits = (("le cosinus :", C_REGARD,
-                  "le produit scalaire divisé par le produit des normes", None,
+                  "u · v divisé par ‖u‖ × ‖v‖", ("u", "v"),
                   "c'est le produit scalaire divisé par le produit des normes"),
                  ("le signe :", C_VECTEUR, "aigu, droit ou obtus — tout de suite", None,
                   "dit tout de suite aigu, droit ou obtus"),
