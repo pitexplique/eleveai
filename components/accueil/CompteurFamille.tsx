@@ -70,6 +70,10 @@ export function BandeChiffres() {
   );
 }
 
+/** ⏸ 23/11/2026, Frédéric : « enlève 10 euros par mois de la page d'accueil, on
+ *  la remettra plus tard » (famille ET prof). Passer à true pour les rallumer. */
+const PRIX_SUR_ACCUEIL = false;
+
 /** Famille à gauche, Prof à droite : un titre (le bénéfice), trois lignes, un bouton (sans prix depuis le 23/11). */
 export function EncartsFamilleProf() {
   return (
@@ -93,6 +97,11 @@ export function EncartsFamilleProf() {
             et remplace par s'inscrire plutôt que voir tarifs » → aucun prix
             dans les encarts ; les prix restent sur /tarifs. */}
         <div className="mt-auto pt-4">
+          {PRIX_SUR_ACCUEIL && (
+            <p className="mb-3 text-lg font-black text-slate-900">
+              {montant(OFFRE.famille)} par mois, <span className="whitespace-nowrap">tous vos enfants</span>
+            </p>
+          )}
           <Link
             href="/auth/signin?inscription=1"
             className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-sky-700 px-5 py-2.5 font-black text-white shadow-sm hover:bg-sky-800"
@@ -118,6 +127,11 @@ export function EncartsFamilleProf() {
           Voir une séance en classe
         </Link>
         <div className="mt-auto pt-4">
+          {PRIX_SUR_ACCUEIL && (
+            <p className="mb-3 text-lg font-black text-slate-900">
+              {montant(OFFRE.prof)} par mois, <span className="whitespace-nowrap">toutes vos classes</span>
+            </p>
+          )}
           <Link
             href="/prof/classes"
             className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-violet-700 px-5 py-2.5 font-black text-white shadow-sm hover:bg-violet-800"
