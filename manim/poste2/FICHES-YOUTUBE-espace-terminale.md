@@ -674,6 +674,86 @@ négatif · 2:29 Jusqu'au bout, sans calculatrice · 2:57 Les trois pièges · 3
 
 ---
 
+## E11 · `terminale-ps-espace-plan-normal` — ✅ rendu HD fait
+
+`manim/sorties/terminale/maths/geometrie/ps-espace-plan-normal/eleveai-maths-terminale-ps-espace-plan-normal.mp4`
+6 min 38.8 (398.77 s) · 24.1 Mo · **0 instant qui touche un bord** · planche HD regardée.
+⭐ Marques : **913**, fichier identique à celui du dépôt (`git diff` vide) : le rendu est calé
+sur des marques à jour, et le contrôle par le CONTENU le prouve.
+⭐ `grep -c "self\.au_t("` → **0** : aucun instant relevé à la main.
+⭐ Dry run `-qh` : **15 écrans, 0 BORD, 0 AUDIT-AVANCE**, et un seul `AUDIT-ABSENT`,
+celui de `@eleveai974` que les épisodes publiés portent aussi. Les 33 `AUDIT-TARD` sont
+tous ≤ 2,96 s et relus à la main : c'est le prix de poser une équation quand elle est
+ENTIÈREMENT lue, et l'inverse serait une AVANCE — on préfère 2,96 s de retard sur le
+premier chiffre à une seconde d'avance sur le dernier.
+⛔⛔ **Deux des plans de cet épisode ne sont PAS dessinés, et c'est mesuré** :
+`platitude((1 ; 1 ; 1))` = **9,02°**, sous le seuil de 12°. Or c'est la normale du plan
+de la question 07 ET celle du plan du défi — les deux écrans qui portent la leçon sont
+les deux qu'on ne peut pas dessiner en cavalière. L'écran 07b est donc algébrique (la
+place manquait de toute façon : six blocs dans la colonne de gauche), et le défi montre
+le POINT et l'escalier de ses coordonnées, jamais un morceau de plan qui se lirait
+comme un trait. Les trois autres plans se projettent bien : (0 ; 0 ; 1) = 14,9°,
+(2 ; −1 ; 3) = 39,8°, (3 ; 0 ; 1) = 25,4°.
+⚠️ **Les NOMS D'AXES sont des étiquettes, et rien ne les mesurait.** Trois défauts d'un
+coup sur le premier −ql : « n̄y » à l'écran 02, la pointe de n⃗ sur celle de l'axe des x
+à l'écran 05, et le DISQUE du point A collé au « y » à l'écran 09b — A (1 ; 1 ; 1) se
+projette à **8°** de cet axe. D'où `noms_axes()` dans la mesure, à recopier pour E12.
+
+```json
+{
+  "id": "terminale-ps-espace-plan-normal",
+  "notionId": "produit_scalaire_espace",
+  "microId": "ps_espace_plan_normal",
+  "classe": "terminale-spe",
+  "ceinture": "verte",
+  "serie": "Maths Tle spé",
+  "type": "longue",
+  "fichier": "terminale/maths/geometrie/ps-espace-plan-normal/eleveai-maths-terminale-ps-espace-plan-normal.mp4",
+  "miniature": "terminale/maths/geometrie/ps-espace-plan-normal/eleveai-maths-terminale-ps-espace-plan-normal.png",
+  "titre": "La perpendiculaire à un plan est écrite dans son équation · Vecteur normal · Tle spé",
+  "centres": ["sciences"],
+  "tags": ["vecteur normal", "équation de plan", "plan", "espace", "projeté orthogonal", "plans parallèles", "produit scalaire", "terminale", "bac"]
+}
+```
+
+**Accroche** (à relire par Frédéric avant publication) :
+
+> Un clou planté bien droit dans une planche : le clou donne la direction
+> perpendiculaire à la planche. En maths, ce clou s'appelle un vecteur normal. Et voici
+> le plus beau résultat du chapitre : si tu as l'équation d'un plan, tu as déjà son
+> vecteur normal sous les yeux, sans aucun calcul.
+>
+> Dans cette vidéo :
+> • les trois coefficients de x, de y et de z SONT les coordonnées d'un vecteur normal,
+>   avec leurs signes — et le terme constant n'en fait pas partie : il dit seulement où
+>   le plan se place, pas comment il est orienté
+> • le théorème dans l'autre sens : un point et une normale suffisent pour écrire
+>   l'équation, et le terme constant se trouve en remplaçant par le point
+> • la raison profonde, en une ligne : M est dans le plan si et seulement si le produit
+>   scalaire de A M et de la normale est nul
+> • le piège : une normale n'est pas unique, donc deux équations qui ne se ressemblent
+>   pas peuvent décrire le même plan — on compare deux plans en deux temps, les normales
+>   d'abord, un point ensuite
+> • et le second piège : un vecteur normal n'est pas un vecteur directeur
+> • la méthode reine du projeté orthogonal : on écrit la droite qui suit la normale,
+>   puis on cherche son intersection avec le plan
+>
+> Deux questions-pauses et un défi corrigé : le projeté orthogonal du point de
+> coordonnées 1, 1, 1 sur le plan d'équation x plus y plus z égale zéro. C'est l'origine
+> du repère. Entraîne-toi sur eleveai.fr
+
+**Chapitres**, relevés sur le rendu (⛔ ils partent VERBATIM dans la description
+YouTube : descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Les coefficients de l'équation sont un vecteur · 0:10 Le clou planté droit dans une
+planche · 0:31 On lit la normale dans l'équation · 0:56 Et dans l'autre sens : un point
+et une normale · 1:23 Question 1 · 1:45 Réponse : on lit les coefficients avec leurs
+signes · 2:09 Trouver l'équation à partir d'un point et d'une normale · 2:49 Le piège :
+une normale n'est pas unique · 3:38 Question 2 · 4:04 Réponse : strictement parallèles ·
+4:33 Les deux rédactions à connaître · 5:06 À toi de jouer · 5:26 Correction : le projeté
+de A est l'origine · 6:11 Ce que tu as appris.
+
+---
+
 ## E10 à E12 — ⏳ en attente de leur rendu HD
 
 Les identifiants sont fixés et doivent rester ceux-là (c'est sur eux que le coach

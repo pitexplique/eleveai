@@ -108898,6 +108898,115 @@
           "explication": "Un cosinus ne dépasse jamais 1, jamais. Les deux erreurs les plus fréquentes : avoir divisé par la somme des normes au lieu de leur produit, ou avoir oublié une racine dans une norme."
         }
       ]
+    },
+    {
+      "id": "terminale-ps-espace-plan-normal",
+      "notionId": "produit_scalaire_espace",
+      "microId": "ps_espace_plan_normal",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/geometrie/ps-espace-plan-normal/eleveai-maths-terminale-ps-espace-plan-normal.mp4",
+      "miniature": "terminale/maths/geometrie/ps-espace-plan-normal/eleveai-maths-terminale-ps-espace-plan-normal.png",
+      "titre": "La perpendiculaire à un plan est écrite dans son équation · Vecteur normal · Tle spé",
+      "centres": [
+        "sciences"
+      ],
+      "tags": [
+        "vecteur normal",
+        "équation de plan",
+        "plan",
+        "espace",
+        "projeté orthogonal",
+        "plans parallèles",
+        "produit scalaire",
+        "terminale",
+        "bac"
+      ],
+      "accroche": "Un clou planté bien droit dans une planche : le clou donne la direction perpendiculaire à la planche. En maths, ce clou s'appelle un vecteur normal. Et voici le plus beau résultat du chapitre : si tu as l'équation d'un plan, tu as déjà son vecteur normal sous les yeux, sans aucun calcul.\n\nDans cette vidéo :\n• les trois coefficients de x, de y et de z SONT les coordonnées d'un vecteur normal, avec leurs signes — et le terme constant n'en fait pas partie : il dit seulement où le plan se place, pas comment il est orienté\n• le théorème dans l'autre sens : un point et une normale suffisent pour écrire l'équation, et le terme constant se trouve en remplaçant par le point\n• la raison profonde, en une ligne : M est dans le plan si et seulement si le produit scalaire de A M et de la normale est nul\n• le piège : une normale n'est pas unique, donc deux équations qui ne se ressemblent pas peuvent décrire le même plan — on compare deux plans en deux temps, les normales d'abord, un point ensuite\n• et le second piège : un vecteur normal n'est pas un vecteur directeur\n• la méthode reine du projeté orthogonal : on écrit la droite qui suit la normale, puis on cherche son intersection avec le plan\n\nDeux questions-pauses et un défi corrigé : le projeté orthogonal du point de coordonnées 1, 1, 1 sur le plan d'équation x plus y plus z égale zéro. C'est l'origine du repère. Entraîne-toi sur eleveai.fr\n\n🎯 La série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_plan_normal&display=simple\n\n📈 Épisode 11 sur 12 de la série « Géométrie dans l'espace » d'EleveAI · Maths Tle spé.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les coefficients de l'équation sont un vecteur"
+        ],
+        [
+          "00:10",
+          "Le clou planté droit dans une planche"
+        ],
+        [
+          "00:31",
+          "On lit la normale dans l'équation"
+        ],
+        [
+          "00:56",
+          "Et dans l'autre sens : un point et une normale"
+        ],
+        [
+          "01:23",
+          "Question 1"
+        ],
+        [
+          "01:45",
+          "Réponse : on lit les coefficients avec leurs signes"
+        ],
+        [
+          "02:09",
+          "Trouver l'équation à partir d'un point et d'une normale"
+        ],
+        [
+          "02:49",
+          "Le piège : une normale n'est pas unique"
+        ],
+        [
+          "03:38",
+          "Question 2"
+        ],
+        [
+          "04:04",
+          "Réponse : strictement parallèles"
+        ],
+        [
+          "04:33",
+          "Les deux rédactions à connaître"
+        ],
+        [
+          "05:06",
+          "À toi de jouer"
+        ],
+        [
+          "05:26",
+          "Correction : le projeté de A est l'origine"
+        ],
+        [
+          "06:11",
+          "Ce que tu as appris"
+        ]
+      ],
+      "questions": [
+        {
+          "t": "01:23",
+          "question": "Quel est un vecteur normal au plan d'équation x moins 2 y plus 5 z plus 7 égale zéro ?",
+          "choix": [
+            "1, moins 2, 5",
+            "1, 2, 5",
+            "zéro, zéro, 7"
+          ],
+          "reponse": 0,
+          "explication": "On lit les coefficients avec leurs signes : 1, moins 2 et 5. La réponse B a perdu le signe moins, et ce n'est pas un détail : elle décrit une direction complètement différente."
+        },
+        {
+          "t": "03:38",
+          "question": "Les plans P, d'équation x plus y plus z moins 1 égale zéro, et P prime, d'équation 2 x plus 2 y plus 2 z plus 6 égale zéro, sont :",
+          "choix": [
+            "sécants",
+            "strictement parallèles",
+            "confondus"
+          ],
+          "reponse": 1,
+          "explication": "Les deux normales, 1, 1, 1 et 2, 2, 2, sont colinéaires : les plans sont donc parallèles, ils ne sont pas sécants. Sont-ils confondus ?"
+        }
+      ]
     }
   ]
 }
