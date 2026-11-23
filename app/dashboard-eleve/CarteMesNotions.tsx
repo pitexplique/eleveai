@@ -159,8 +159,8 @@ function EtoileNotions({ notions }: { notions: Notion[] }) {
   // deviennent illisibles).
   const barres = (classe: string) => (
         <ul className={`mt-3 space-y-2 ${classe}`}>
-          {points.map((p) => (
-            <li key={p.titre}>
+          {points.map((p, i) => (
+            <li key={`${p.titre}-${i}`}>
               <div className="flex justify-between text-xs font-bold text-slate-600">
                 <span>{p.titre}</span>
                 <span>{p.pct} %</span>

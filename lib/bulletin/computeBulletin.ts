@@ -127,6 +127,8 @@ async function fetchEvenements(
     SOURCES.map(async (src) => {
       const cols = ["created_at"];
       if (src.note20Field) cols.push(src.note20Field);
+      // 🏋️ Séances d'entraînement du coach (23/11/2026) : hors moyenne.
+      if (src.table === "resultats_tutor") cols.push("entrainement:details->entrainement");
       else cols.push("score", "total");
       if (src.matiereField) cols.push(src.matiereField);
 
@@ -143,6 +145,7 @@ async function fetchEvenements(
       for (const r of data as Record<string, unknown>[]) {
         const matiere = src.matiere ?? String(r[src.matiereField as string] ?? "").trim();
         if (!matiere) continue;
+        if (r.entrainement === true) continue;
         let note20: number | null = null;
         if (src.note20Field) {
           const v = Number(r[src.note20Field]);

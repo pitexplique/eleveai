@@ -626,6 +626,11 @@ export default function TutorV4Page() {
 
   const [etatAuto, setEtatAuto] = useState<EtatAuto>(null);
   const [reprise, setReprise] = useState<{ nbReponses: number; ok: boolean } | null>(null);
+  // 🏋️ ENTRAÎNEMENT OU SÉANCE QUI COMPTE (23/11/2026, Frédéric : « mode
+  // entraînement, et mode on enregistre ma séance pour améliorer mes notes »).
+  // La séance s'enregistre toujours (le prof voit le travail, les notions
+  // avancent) ; en entraînement, sa note ne compte pas dans la moyenne.
+  const [entrainement, setEntrainement] = useState(false);
 
   const [classe, setClasse] = useState<Classe>("6e");
 
@@ -1877,6 +1882,7 @@ function handleInputKeyDown(
       temps_sec: elapsedSeconds,
       details: {
         seance_id: seanceIdRef.current,
+        entrainement,
         notionLabel: notionLabel(notion, classe, matiere),
         microStatuses,
         microScores,
@@ -1915,6 +1921,15 @@ function handleInputKeyDown(
   useEffect(() => {
     if (nbTentatives > 0 && nbTentatives % 5 === 0) enregistrerEnSilenceRef.current();
   }, [nbTentatives]);
+
+  // Après un changement « entraînement / ça compte », le rendu suivant porte
+  // la nouvelle valeur : c'est lui qu'on envoie.
+  const aRenvoyerRef = useRef(false);
+  useEffect(() => {
+    if (!aRenvoyerRef.current) return;
+    aRenvoyerRef.current = false;
+    enregistrerEnSilenceRef.current();
+  }, [entrainement]);
 
   useEffect(() => {
     const quitter = () => enregistrerEnSilenceRef.current();
@@ -1971,6 +1986,13 @@ function handleInputKeyDown(
       nbReponses={nbTentatives}
       etatAuto={etatAuto}
       reprise={reprise}
+      entrainement={entrainement}
+      onEntrainement={(v) => {
+        setEntrainement(v);
+        // La séance en cours change de nature : on la renvoie tout de suite.
+        dernierEnregistreRef.current = 0;
+        aRenvoyerRef.current = true;
+      }}
       lienConnexion={`/auth/signin?mode=eleve&next=${encodeURIComponent(
         `${pathname}?${searchParams.toString()}`
       )}`}

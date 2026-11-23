@@ -136,7 +136,10 @@ function classement(
     }).length;
     const justes = g.filter((x) => x.juste === true).length;
     const taux = g.length ? justes / g.length : 0;
-    const notes = s.map((x) => x.score_sur_20).filter((n): n is number => typeof n === "number");
+    const notes = s
+      .filter((x) => x.details?.entrainement !== true)
+      .map((x) => x.score_sur_20)
+      .filter((n): n is number => typeof n === "number");
     let progression = 0;
     if (notes.length >= 2) {
       const mi = Math.floor(notes.length / 2);
@@ -279,7 +282,9 @@ export async function calculerBulletinClasse(admin: SupabaseClient, code: string
       const c = creneau(s.created_at);
       creneaux[c.cle]++;
       jours.add(c.jour);
-      if (typeof s.score_sur_20 === "number") notes.push(s.score_sur_20);
+      // 🏋️ Une séance d'entraînement (choix de l'élève au coach, 23/11/2026)
+      // compte comme travail, pas dans la moyenne.
+      if (typeof s.score_sur_20 === "number" && s.details?.entrainement !== true) notes.push(s.score_sur_20);
       for (const [id, sc] of Object.entries((s.details?.microScores ?? {}) as Record<string, any>)) {
         const t = Number(sc?.attempts) || 0;
         if (!t) continue;
