@@ -670,6 +670,37 @@ l'instant, ce qui se recouvre — et attend. C'est ce qui a manqué le matin du 
 `ps_espace_angle.py`, où deux sessions ont corrigé les deux mêmes défauts chacune de son
 côté, sans le savoir.
 
+## ⭐⭐ Une assertion mesure le MODÈLE, des pixels mesurent l'IMAGE — les deux
+
+Sur E12, le module affirmait l'équilatéralité du triangle « vérifiée par une assertion ».
+C'est vrai, et **insuffisant** : une assertion mesure les segments tels que le module les
+**construit**, avant le `scale`, le `move_to`, l'épaisseur de trait et l'anticrénelage.
+Entre la construction et l'image, il y a exactement l'écart que cette série paie depuis
+deux jours — l'arête manquante, les noms d'axes, les colonnes qui traversent un repère.
+
+👉 L'assertion est le **garde-fou de l'écriture** ; la mesure en pixels sur le rendu est
+la **preuve**. ⛔ Ni l'une à la place de l'autre.
+
+### ⭐ Un contrôle se pose comme une PRÉDICTION RÉFUTABLE
+
+La mesure de platitude se refait **sur le HD**, jamais reportée du `-ql` : à 1080p les
+côtés portent environ quatre fois plus de pixels, donc le bruit d'anticrénelage (2,2 % en
+`-ql`) **doit** tomber nettement. S'il ne tombe pas, ce n'est plus du bruit, et il faut
+chercher pourquoi.
+
+C'est la bonne forme d'un contrôle : il annonce à l'avance ce qu'il devrait trouver, et
+il a tort de façon visible. Un contrôle qui ne peut pas échouer ne mesure rien — c'est le
+`isclose(0, 1)` du premier jour, et le `True` écrit en dur.
+
+### ⭐⭐ L'empreinte, jamais l'horodatage
+
+Avant et pendant un rendu, on vérifie que le fichier rendu est bien celui qu'on a
+regardé — par son **empreinte** (`git diff HEAD` vide, ou le hash des fichiers), pas par
+sa date. Un horodatage ne prouve rien : un fichier qui se tait depuis quatre minutes peut
+être posé comme il peut être en cours d'écriture. ⛔ C'est l'erreur qui m'a fait annoncer
+« verrou pris à 09:05 » un matin, et « attendre que son empreinte se stabilise » le
+lendemain. La date est un indice, l'empreinte est une preuve.
+
 ## ⭐⭐ Le réflexe qui a tenu quand les territoires n'ont pas suffi
 
 Trois collisions de fichiers en deux jours, et **ce qui en a évité deux n'est pas le
