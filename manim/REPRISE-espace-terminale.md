@@ -1675,11 +1675,30 @@ appliquée ici à la RÉPONSE d'une question et non plus à un décor.
 > et l'anticrénelage — exactement l'écart que la série appelle « un instrument ne prouve
 > rien tant qu'on n'a pas regardé l'image ». ⭐ Le contrôle qui ferme vraiment la question
 > se fait **sur le rendu** : on extrait les pixels de la couleur du triangle et on mesure
-> les trois côtés. Fait sur le `-ql` de cet épisode : **87,0 / 83,4 / 84,9 px**, écart max
-> **2,2 %** à la moyenne, angles **59,7° / 58,0° / 62,3°** — du bruit d'anticrénelage, et
-> non une déformation (le 3-4-5 faux de E9 sortait à **13 %**). ⛔ Donc : pour toute figure
-> qui annonce une proportion, l'assertion du module est le garde-fou de l'écriture, et la
-> MESURE EN PIXELS est la preuve. Les deux, pas l'une des deux.
+> les trois côtés. ⛔ Donc : pour toute figure qui annonce une proportion, l'assertion du
+> module est le garde-fou de l'écriture, et la MESURE EN PIXELS est la preuve. Les deux,
+> pas l'une des deux.
+>
+> ⛔⛔ **ET CETTE MESURE-LÀ A SON PROPRE PIÈGE — correction du 23/11, après le HD.**
+> Premier relevé, sur le `-ql` : 87,0 / 83,4 / 84,9 px, écart max **2,2 %**, mis au compte
+> du bruit d'anticrénelage. **C'était faux.** Prédiction faite avant de vérifier : à 1080p
+> les côtés font quatre fois plus de pixels, donc un bruit d'anticrénelage doit TOMBER ;
+> s'il ne tombe pas, ce n'est pas du bruit. Mesuré sur le HD par la session qui l'a rendu :
+> **2,10 %**, il n'est pas tombé. La cause n'était ni la figure ni l'anticrénelage, c'était
+> la MÉTHODE — les sommets étaient extraits des **pixels extrêmes** du trait, or un trait
+> épais déborde vers l'extérieur et il déborde **différemment selon l'angle de chaque
+> coin** : un biais qui grandit avec la résolution, exactement comme le trait. Il ne
+> POUVAIT pas disparaître.
+> ⭐ En ajustant les trois côtés sur leur partie CENTRALE, loin des coins :
+> **194,46 / 195,29 / 194,51 px**, écart **0,27 %**, angles **59,88° / 60,27° / 59,85°**,
+> somme 180,00°. ⭐⭐ **La règle, et elle vaut pour toute mesure de forme sur une image :
+> on n'extrait jamais une forme par les pixels EXTRÊMES d'un trait épais.**
+> ⚠️ Et deux chiffres FAUX et parfaitement plausibles sont sortis avant le bon — une
+> fenêtre de recadrage mal convertie annonçant **67,74 %** d'écart (de quoi faire refaire
+> une figure juste), puis des côtés de **762 px** dans une boîte de 208. Aucun des deux ne
+> s'est vu à sa plausibilité : les deux se sont vus par un **INVARIANT** qui ne collait pas
+> (un compte de pixels quatre fois trop petit, un côté 3,8 fois plus grand que sa propre
+> boîte). ⭐ Une mesure d'image se vérifie par un invariant, jamais par « ça semble juste ».
 
 ### ⛔⛔ UNE FIGURE JUSTE QUI MENT, DEUXIÈME FORME : LA COULEUR
 
