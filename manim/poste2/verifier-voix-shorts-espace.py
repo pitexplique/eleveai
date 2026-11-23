@@ -130,19 +130,56 @@ def controler(shorts, faux_expres=False):
                     alertes.append(f"{ident} / {clip} : {n} mots de prose (plafond 30)")
 
     # ---- 5. la question et sa lettre ----
+    #
+    # ⛔⛔ DANS CETTE SÉRIE, A À H NOMMENT LES SOMMETS AUTANT QUE LES RÉPONSES, et la
+    # forme « D : 0, 1, 0 » est celle d'un sommet du cube comme celle d'un choix.
+    # Mesuré sur les 12 voix de short : SIX occurrences de « <lettre> : » ne sont pas des
+    # choix — quatre dans le clip `01-idee` de E2 (« B : 1, 0, 0. D : 0, 1, 0. E : 0, 0,
+    # 1 », et « à l'opposé de A : 1, 1, 1 »), et deux dans des clips de réponse
+    # (« De A à H : aucun pas vers B », « Réponse B : rien du tout »).
+    # Aucune n'est aujourd'hui dans un clip de QUESTION, mais rien ne l'empêche : il
+    # suffirait qu'une question nomme un sommet.
+    # ⭐ On ne s'en sort donc PAS en excluant la lettre D, qui n'est qu'un symptôme. On
+    # s'appuie sur la STRUCTURE : les trois choix forment la fin de la question, après son
+    # dernier « ? » et avant « Mets pause », et ils arrivent dans l'ordre A puis B puis C.
+    # Un sommet cité plus tôt dans la phrase tombe hors de ce segment.
     for ident, clips in shorts.items():
         q = clips.get("02-question", "")
         r = clips.get("02b-reponse", "")
-        lettres = re.findall(r"\s([A-D])\s:\s", q)
-        if sorted(lettres) != ["A", "B", "C"]:
-            erreurs.append(f"{ident} : la question propose {lettres or 'rien'}, "
-                           f"attendu A, B et C")
+        segment = q.rsplit("?", 1)[-1].split("Mets pause")[0]
+        lettres = re.findall(r"\s*([A-H])\s:\s", segment)
+        if lettres != ["A", "B", "C"]:
+            erreurs.append(f"{ident} : les choix de la question se lisent {lettres or 'rien'}, "
+                           f"attendu A puis B puis C")
         m = re.match(r"R[ée]ponse ([A-C])", r)
         if not m:
             erreurs.append(f"{ident} : la réponse n'annonce aucune lettre")
         elif m.group(1) not in lettres:
             erreurs.append(f"{ident} : la réponse annonce {m.group(1)}, "
                            f"qui n'est pas proposée")
+
+
+def lire_choix(question):
+    """La lecture structurelle des trois choix, isolée pour pouvoir être ÉTALONNÉE."""
+    segment = question.rsplit("?", 1)[-1].split("Mets pause")[0]
+    return re.findall(r"\s*([A-H])\s:\s", segment)
+
+
+def etalonner_choix():
+    """⭐ Le témoin du durcissement : un SOMMET cité dans la question ne doit pas être
+    pris pour un choix, et un ordre cassé doit l'être. Sans ces deux cas, « 0 erreur »
+    ne prouverait pas que la lecture structurelle sert à quelque chose."""
+    propre = "Coordonnées du sommet H ? A : 1, 1, 0. B : 0, 0, 1. C : 0, 1, 1. Mets pause, et choisis !"
+    piege = ("Dans le cube, D : 0, 1, 0 et E : 0, 0, 1. Lequel est le plus haut ? "
+             "A : D. B : E. C : ni l'un ni l'autre. Mets pause, et choisis !")
+    casse = "Que vaut ceci ? A : un. C : deux. B : trois. Mets pause, et choisis !"
+    ok = []
+    ok.append(("question simple", lire_choix(propre) == ["A", "B", "C"]))
+    ok.append(("deux SOMMETS cités avant les choix", lire_choix(piege) == ["A", "B", "C"]))
+    ok.append(("ordre A C B cassé", lire_choix(casse) != ["A", "B", "C"]))
+    for nom, bon in ok:
+        print(f"   {'✅' if bon else '⛔'} témoin : {nom}")
+    return all(b for _, b in ok)
 
 
 def main():
@@ -153,8 +190,10 @@ def main():
     if not shorts:
         print("⛔ AUCUNE voix lue : l'outil n'a rien mesuré. Un zéro ne vaut rien ici.")
         return 1
+    temoins = True
     if etalon:
         print("⚙️  ÉTALONNAGE : un clip est retiré exprès, l'outil DOIT crier.")
+        temoins = etalonner_choix()
     controler(shorts, faux_expres=etalon)
     for e in erreurs:
         print("  ⛔", e)
@@ -162,9 +201,9 @@ def main():
         print("  ⚠️ ", a)
     print(f"{len(erreurs)} erreur(s), {len(alertes)} alerte(s)")
     if etalon:
-        ok = any("manquant" in e for e in erreurs)
-        print("✅ étalonné : la faute plantée a bien été vue." if ok
-              else "⛔ ÉTALONNAGE RATÉ : le clip retiré n'a pas été signalé.")
+        ok = any("manquant" in e for e in erreurs) and temoins
+        print("✅ étalonné : la faute plantée a bien été vue, et les trois témoins passent."
+              if ok else "⛔ ÉTALONNAGE RATÉ : la faute plantée ou un témoin n'a pas tenu.")
         return 0 if ok else 1
     if not erreurs:
         print("✅ gabarit complet, aucun symbole non prononçable, aucun copier-coller")

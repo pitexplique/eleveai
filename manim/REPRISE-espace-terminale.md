@@ -1903,6 +1903,40 @@ Appliqué ici : `se_coupent()` est aussi lancé sur (AB) et (AD), **qui se coupe
 disent la faute que nomme le leurre sans jamais la comparer à la vérité. Corrigées en
 « le leurre vaut ceci **et** il diffère de la bonne réponse ».
 
+### ⛔⛔ DANS CETTE SÉRIE, A À H NOMMENT LES SOMMETS AUTANT QUE LES RÉPONSES
+
+Le chef d'orchestre m'a repris sur une phrase que j'avais écrite sans son périmètre :
+« les 12 voix de short rendent A B C, **aucune n'a de D** ». Mon comptage portait sur le
+seul clip `02-question` ; le sien balayait la voix entière, et il y a trouvé un « D ».
+Nous avions tous les deux raison sur ce que nous mesurions, et ma phrase était fausse au
+pied de la lettre parce qu'elle ne disait pas sur quoi elle portait.
+
+⭐ **Remesuré, clip par clip, et c'est plus fort que ce qu'il avait vu** : il y a **six**
+occurrences de « <lettre> : » qui ne sont pas des choix dans les 12 voix de short.
+
+| short | clip | ce qu'on lit | ce que c'est |
+|---|---|---|---|
+| E2 | `01-idee` | « B : 1, 0, 0. D : 0, 1, 0. E : 0, 0, 1 » | **trois sommets du cube** |
+| E2 | `01-idee` | « à l'opposé de A : 1, 1, 1 » | un sommet |
+| E2 | `02b-reponse` | « De A à H : aucun pas vers B » | deux sommets |
+| E6 | `02b-reponse` | « Réponse B : rien du tout » | une lettre de choix, hors question |
+
+⛔ **Aucun comptage automatique de lettres n'est fiable dans cette série.** Et on ne s'en
+sort PAS en excluant la lettre D : elle n'est qu'un symptôme, les sommets vont de A à H.
+Aujourd'hui aucune de ces occurrences n'est dans un clip de QUESTION — mais rien ne
+l'empêche, il suffirait qu'une question nomme un sommet.
+
+⭐⭐ **Le remède est STRUCTUREL, pas lexical.** Les trois choix forment la fin de la
+question : ils viennent après son dernier « ? », avant « Mets pause », et dans l'ordre
+A puis B puis C. Un sommet cité plus tôt tombe hors de ce segment. C'est la même famille
+que l'exemption par le NOM du clip et non par sa longueur : **on s'appuie sur une
+propriété, jamais sur une coïncidence.**
+
+⭐ Et le durcissement porte ses **témoins**, parce qu'une exemption jamais mise à
+l'épreuve n'est pas une exemption : `--etalonner` passe trois cas construits — une
+question simple, une question qui cite **deux sommets avant ses choix** (qui ne doit rien
+déclencher), et un ordre « A C B » cassé (qui doit crier).
+
 ### ✅ LES DOUZE SHORTS ONT ENFIN UN CONTRÔLE DE GABARIT — et il a crie 23 fois pour rien
 
 `verifier-voix-espace.py` ne lit que les 12 PAYSAGES : les douze SHORTS n'avaient aucun
