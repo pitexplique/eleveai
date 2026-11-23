@@ -1905,6 +1905,52 @@ Appliqué ici : `se_coupent()` est aussi lancé sur (AB) et (AD), **qui se coupe
 disent la faute que nomme le leurre sans jamais la comparer à la vérité. Corrigées en
 « le leurre vaut ceci **et** il diffère de la bonne réponse ».
 
+### ⛔⛔ UN CONTRÔLE QU'ON LANCE SANS LIRE SON RÉSULTAT NE PROTÈGE DE RIEN
+
+Deux fois dans la soirée du 23/11, un commit à moi a emporté le travail NON COMMITÉ de
+la session voisine dans un document partagé : trois mots la première fois (une question
+de E2 raccourcie), **243 lignes la seconde** (toute sa section « Ce que les SHORTS ont
+appris »). ⚠️ Rien n'a été perdu — c'est son dernier état qui est dans l'historique,
+sous mon message — et l'historique ne se réécrit pas sur une branche partagée pour si
+peu. Ce n'est pas le dégât qui compte ici, c'est la cause.
+
+⛔⛔ **La seconde fois, j'avais l'avertissement sous les yeux.** J'avais bien lancé
+`git diff HEAD --stat` avant de commiter, comme la règle le demande. Il affichait
+**+246 lignes** pour un ajout que je venais d'écrire et qui en faisait **quarante-cinq**.
+J'ai lu le chiffre, je ne l'ai pas INTERROGÉ, et j'ai commité.
+
+⭐⭐ **La faute n'est pas le commit, c'est d'avoir exécuté un contrôle sans lire son
+résultat.** Un contrôle lancé et non lu ne protège de rien : il donne seulement la
+conscience tranquille de l'avoir lancé. C'est la même famille que « avant de croire un
+zéro, vérifier que l'outil a lu quelque chose ».
+
+⭐⭐ **Et un ordre de grandeur faux EST une mesure qui parle.** +246 pour 45, c'est un
+facteur cinq. Quand un chiffre dément ce qu'on attendait d'un facteur cinq, il n'est pas
+du bruit : **c'est la trouvaille**. Exactement comme les côtés de 762 px mesurés dans une
+boîte de 208 (épisode 12), ou les 67,74 % d'écart d'une fenêtre de recadrage mal
+convertie — les deux ont été vus par un INVARIANT qui ne collait pas, jamais par leur
+invraisemblance.
+
+### ⭐ LA PARADE, GÉNÉRALE AUX DEUX SESSIONS : ON LISTE LES TITRES, PAS LES LIGNES
+
+Avant tout `git add` sur un document partagé (`VOIX-espace-terminale.md`,
+`REPRISE-espace-terminale.md`) :
+
+```
+git diff HEAD -- <fichier> | grep "^+#"
+```
+
+et **tous les titres ajoutés doivent être de soi**.
+
+⭐ Pourquoi celui-là et pas `--stat` : **un nombre de lignes se confond avec celui du
+voisin, un titre de section non.** Le `--stat` dit « il se passe quelque chose » et laisse
+à la lecture le soin de dire QUOI ; la liste des titres répond directement à la seule
+question qui compte, « est-ce que ce commit emporte le travail de quelqu'un d'autre ? ».
+⚠️ Le `--stat` reste utile, mais comme second regard : si son volume ne correspond pas
+à ce qu'on vient d'écrire, on s'arrête.
+✅ Vérifié au commit suivant (la cartographie, `1e6b8fb04`) : deux titres ajoutés, les
+deux de moi, +63 lignes pour à peu près autant d'écrites. Rien d'autre emporté.
+
 ### ⛔⛔ QUATRE INSTRUMENTS À MOI ONT FABRIQUÉ DES DÉFAUTS DANS LA MÊME SOIRÉE
 
 Aucun n'était en panne : les quatre rendaient un chiffre, et le chiffre était plausible.
