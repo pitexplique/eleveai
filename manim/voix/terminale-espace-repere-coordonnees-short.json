@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Dans un cube, les coordonnées des huit sommets ne contiennent que des zéros et des uns. À une seule condition : bien choisir le repère.",
+  "01-idee": "Prends le cube A B C D E F G H. On choisit A comme origine, et les vecteurs A B, A D et A E comme directions. Alors A a pour coordonnées 0, 0, 0. B : 1, 0, 0. D : 0, 1, 0. E : 0, 0, 1. Et G, tout à l'opposé de A : 1, 1, 1.",
+  "02-question": "Question ! Dans ce cube et ce repère, coordonnées du sommet H ? A : 1, 1, 0. B : 0, 0, 1. C : 0, 1, 1. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C. De A à H : aucun pas vers B, un pas vers D, un pas vers le haut. Donc 0, 1, 1. Le triplet 1, 1, 0, c'est le sommet C. Et 0, 0, 1, c'est le sommet E.",
+  "03-commentaire": "À toi ! Dans le même cube et le même repère, quelles sont les coordonnées du sommet F ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

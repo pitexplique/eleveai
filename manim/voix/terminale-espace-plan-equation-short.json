@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Dans le plan, une équation donne une droite. Dans l'espace, elle donne un plan tout entier. C'est le piège le plus coûteux du chapitre.",
+  "01-idee": "Prends l'équation z égale zéro. Dans l'espace, ce n'est pas un point de hauteur nulle, et ce n'est pas une droite : c'est le sol tout entier, le plan x O y. Pourquoi ? Parce que x et y restent libres, et deux libertés font une surface.",
+  "02-question": "Question ! Dans l'espace, les points tels que x égale 2, c'est : A : une droite. B : un point. C : un plan. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C, un plan. Réécrivons l'équation en entier : 1 fois x, plus zéro fois y, plus zéro fois z, moins 2, égale zéro. C'est bien la forme a x plus b y plus c z plus d égale zéro. Ici y et z sont libres.",
+  "03-commentaire": "À toi ! Dans l'espace, l'ensemble des points qui vérifient y égale moins 3, c'est quoi ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

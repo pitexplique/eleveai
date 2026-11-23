@@ -71,6 +71,20 @@ lisant `manim/scripts/cm1/entier_voix.py`, pas en relisant mon travail. Corrigé
 
 Soit **A 8 · B 8 · C 8** sur 24 questions, et dans chaque épisode deux lettres différentes.
 
+### Et les SHORTS ont leur propre tirage (23/11/2026)
+
+Un short ne porte qu'**une** question-pause. Les lettres des six shorts de la géométrie
+(E1 à E6) sont donc tirées à part, sous la même règle : un tiers de chaque, et jamais
+deux fois la même lettre sur deux shorts consécutifs de la série.
+
+| | E1 | E2 | E3 | E4 | E5 | E6 |
+|---|---|---|---|---|---|---|
+| `02` du short | **B** | **C** | **A** | **C** | **A** | **B** |
+
+Soit **A 2 · B 2 · C 2** sur 6 questions. ⚠️ Les six shorts du produit scalaire (E7 à
+E12) restent à tirer : **ils doivent compléter cette suite**, sans répéter le B de E6 sur
+E7, et de façon à retomber sur A 4 · B 4 · C 4 pour les douze shorts.
+
 ⚠️ Ces lettres sont désormais **la référence** : l'écran Manim (la lettre qui s'allume) et
 le champ `reponse` du manifeste (0 = A, 1 = B, 2 = C) doivent dire la même lettre que la
 voix. `python manim/poste2/verifier-voix-espace.py` le vérifie sur les voix, et attrape
@@ -136,6 +150,31 @@ Chaque ligne ci-dessous a été recalculée, pas relue.
 ⏳ **Reste à faire sur E1** : validation de la voix par Frédéric, puis WAV + marques,
 puis le script Manim, puis `-ql`, planche, zone Margo, HD, branchement au coach.
 
+### Short — « arrivée moins départ »
+
+**Une seule idée**, celle de l'épisode : le vecteur A B se calcule en une soustraction, coordonnée par coordonnée.
+⛔ Un short ne RÉSUME pas son épisode — il en prend une idée et la rend en une minute.
+**Bonne réponse : B** (tirage des shorts, table en tête de fichier).
+
+- **00-accroche** : Un vecteur dans l'espace, c'est trois nombres. Et pour les trouver, un seul geste : arrivée moins départ.
+- **01-idee** : A a pour coordonnées 1, 0, 0 et B a pour coordonnées 1, 0, 2. Pour le vecteur A B, on soustrait coordonnée par coordonnée : 1 moins 1 fait 0, 0 moins 0 fait 0, et 2 moins 0 fait 2. Donc A B a pour coordonnées 0, 0, 2.
+- **02-question** : Question ! A a pour coordonnées 3, 1, 0. B a pour coordonnées 5, 1, 0. Coordonnées du vecteur A B ? A : 8, 2, 0. B : 2, 0, 0. C : moins 2, 0, 0. Mets pause, et choisis !
+- **02b-reponse** : Réponse B. 5 moins 3 fait 2, 1 moins 1 fait 0, 0 moins 0 fait 0. La réponse A, c'est la somme. Et moins 2, 0, 0, c'est le vecteur B A, le même dans l'autre sens.
+- **03-commentaire** : À toi ! A a pour coordonnées 2, 1, 4 et B a pour coordonnées 2, 5, 4. Que vaut le vecteur A B ? Réponds en commentaire !
+- **04-abonne** : Entraîne-toi sur éleveai point f r. Et abonne-toi !
+
+#### ✅ Passe MATHS du short de E1 — recalculée, pas relue
+
+| Clip | Ce que la voix affirme | Recalcul |
+|---|---|---|
+| `01` | A(1;0;0), B(1;0;2) ⟹ A B = (0;0;2) | (1−1 ; 0−0 ; 2−0) |
+| `02` | bonne réponse (2;0;0) | (5−3 ; 1−1 ; 0−0) |
+| `02b` | leurre A = (8;2;0) | c'est A + B, la SOMME : 3+5, 1+1, 0+0 |
+| `02b` | leurre C = (−2;0;0) | c'est départ − arrivée, donc le vecteur B A |
+| `03` | défi A(2;1;4), B(2;5;4) | A B = (0;4;0) — ⛔ non dit, non affiché |
+
+⛔ **Exclusion deux à deux des trois propositions ?** (8;2;0), (2;0;0), (−2;0;0) — trois triplets distincts, et un seul est B − A ✅.
+
 ---
 
 # E2 · `terminale-espace-repere-coordonnees`
@@ -185,6 +224,31 @@ puis le script Manim, puis `-ql`, planche, zone Margo, HD, branchement au coach.
 `04` : (2;2;3), (4;4;6), (1;−1;−2) — trois triplets distincts, une seule bonne ✅.
 `07` : (1;1;1), (1;1;0), (0;1;1) — trois sommets distincts du cube, une seule bonne ✅.
 
+### Short — « que des zéros et des uns »
+
+**Une seule idée**, celle de l'épisode : choisir le repère du cube remplace un dessin difficile par des zéros et des uns.
+⛔ Un short ne RÉSUME pas son épisode — il en prend une idée et la rend en une minute.
+**Bonne réponse : C** (tirage des shorts, table en tête de fichier).
+
+- **00-accroche** : Dans un cube, les coordonnées des huit sommets ne contiennent que des zéros et des uns. À une seule condition : bien choisir le repère.
+- **01-idee** : Prends le cube A B C D E F G H. On choisit A comme origine, et les vecteurs A B, A D et A E comme directions. Alors A a pour coordonnées 0, 0, 0. B : 1, 0, 0. D : 0, 1, 0. E : 0, 0, 1. Et G, tout à l'opposé de A : 1, 1, 1.
+- **02-question** : Question ! Dans ce cube et ce repère, coordonnées du sommet H ? A : 1, 1, 0. B : 0, 0, 1. C : 0, 1, 1. Mets pause, et choisis !
+- **02b-reponse** : Réponse C. De A à H : aucun pas vers B, un pas vers D, un pas vers le haut. Donc 0, 1, 1. Le triplet 1, 1, 0, c'est le sommet C. Et 0, 0, 1, c'est le sommet E.
+- **03-commentaire** : À toi ! Dans le même cube et le même repère, quelles sont les coordonnées du sommet F ? Réponds en commentaire !
+- **04-abonne** : Entraîne-toi sur éleveai point f r. Et abonne-toi !
+
+#### ✅ Passe MATHS du short de E2 — recalculée, pas relue
+
+| Clip | Ce que la voix affirme | Recalcul |
+|---|---|---|
+| `01` | A(0;0;0), B(1;0;0), D(0;1;0), E(0;0;1), G(1;1;1) | repère (A ; A B, A D, A E) : un pas par direction |
+| `02` | bonne réponse H = (0;1;1) | H = D + A E : 0 pas vers B, 1 vers D, 1 vers le haut |
+| `02b` | leurre A = (1;1;0) | c'est C, le sommet opposé à A DANS le sol |
+| `02b` | leurre B = (0;0;1) | c'est E : il manque le pas vers D |
+| `03` | défi : le sommet F | F = (1;0;1) — ⛔ non dit, non affiché |
+
+⛔ **Exclusion deux à deux des trois propositions ?** (1;1;0), (0;0;1), (0;1;1) — trois sommets distincts du cube, un seul est H ✅.
+
 ---
 
 # E3 · `terminale-espace-droite-parametrique`
@@ -231,6 +295,32 @@ puis le script Manim, puis `-ql`, planche, zone Margo, HD, branchement au coach.
 ⛔ **Exclusion deux à deux des propositions ?**
 `04` : trois triplets distincts, et un seul est colinéaire au vecteur directeur ✅.
 `07` : « non » / « oui » / « on ne peut pas savoir » s'excluent, et la troisième est fausse puisque le système suffit à décider ✅.
+
+### Short — « les coefficients de t sont la direction »
+
+**Une seule idée**, celle de l'épisode : dans les trois lignes, les nombres sans t donnent un point et les coefficients de t donnent la direction.
+⛔ Un short ne RÉSUME pas son épisode — il en prend une idée et la rend en une minute.
+**Bonne réponse : A** (tirage des shorts, table en tête de fichier).
+
+- **00-accroche** : Une représentation paramétrique, c'est trois lignes. Et tout y est écrit : un point, et une direction.
+- **01-idee** : Regarde : x égale 1 plus 2 t, y égale 2 moins t, z égale 3 t. Les nombres sans t donnent un point de la droite : 1, 2, 0. Les coefficients de t, avec leurs signes, donnent le vecteur directeur : 2, moins 1, 3.
+- **02-question** : Question ! La droite d : x égale 2 plus 3 t, y égale moins t, z égale 1 plus 4 t. Vecteur directeur de d ? A : 3, moins 1, 4. B : 2, 0, 1. C : 3, 1, 4. Mets pause, et choisis !
+- **02b-reponse** : Réponse A. On lit les coefficients de t avec leurs signes : 3, moins 1 et 4. Le triplet 2, 0, 1, ce sont les nombres sans t : un point, pas une direction. Et 3, 1, 4 oublie le signe.
+- **03-commentaire** : À toi ! La droite d prime est donnée par x égale 4 moins 2 t, y égale 3 t, z égale moins 1 plus t. Quel est un vecteur directeur ? Réponds en commentaire !
+- **04-abonne** : Entraîne-toi sur éleveai point f r. Et abonne-toi !
+
+#### ✅ Passe MATHS du short de E3 — recalculée, pas relue
+
+| Clip | Ce que la voix affirme | Recalcul |
+|---|---|---|
+| `01` | x = 1 + 2t, y = 2 − t, z = 3t ⟹ point (1;2;0) | les termes SANS t, dans l'ordre x, y, z |
+| `01` | ⟹ vecteur directeur (2;−1;3) | les coefficients DE t, avec leurs signes |
+| `02` | x = 2 + 3t, y = −t, z = 1 + 4t ⟹ bonne réponse (3;−1;4) | coefficients de t : 3, −1, 4 |
+| `02b` | leurre B = (2;0;1) | les termes sans t : c'est un POINT de d |
+| `02b` | leurre C = (3;1;4) | le signe de la 2ᵉ ligne oublié : −t donne −1, pas +1 |
+| `03` | défi x = 4 − 2t, y = 3t, z = −1 + t | directeur (−2;3;1) — ⛔ non dit, non affiché |
+
+⛔ **Exclusion deux à deux des trois propositions ?** (3;−1;4), (2;0;1), (3;1;4) — trois triplets distincts, et un seul est colinéaire à la direction de d ✅ (⚠️ (3;1;4) n'est PAS colinéaire à (3;−1;4) : 3/3 = 1 mais 1/(−1) = −1).
 
 ---
 
@@ -279,6 +369,32 @@ puis le script Manim, puis `-ql`, planche, zone Margo, HD, branchement au coach.
 `04` : trois points distincts, un seul annule l'équation (les deux autres donnent −1 et 1) ✅.
 `07` : « un plan » / « une droite » / « un point » s'excluent par dimension ✅.
 
+### Short — « une équation, c'est un plan »
+
+**Une seule idée**, celle de l'épisode : dans l'espace une seule équation à trois inconnues décrit un plan, jamais une droite.
+⛔ Un short ne RÉSUME pas son épisode — il en prend une idée et la rend en une minute.
+**Bonne réponse : C** (tirage des shorts, table en tête de fichier).
+
+- **00-accroche** : Dans le plan, une équation donne une droite. Dans l'espace, elle donne un plan tout entier. C'est le piège le plus coûteux du chapitre.
+- **01-idee** : Prends l'équation z égale zéro. Dans l'espace, ce n'est pas un point de hauteur nulle, et ce n'est pas une droite : c'est le sol tout entier, le plan x O y. Pourquoi ? Parce que x et y restent libres, et deux libertés font une surface.
+- **02-question** : Question ! Dans l'espace, les points tels que x égale 2, c'est : A : une droite. B : un point. C : un plan. Mets pause, et choisis !
+- **02b-reponse** : Réponse C, un plan. Réécrivons l'équation en entier : 1 fois x, plus zéro fois y, plus zéro fois z, moins 2, égale zéro. C'est bien la forme a x plus b y plus c z plus d égale zéro. Ici y et z sont libres.
+- **03-commentaire** : À toi ! Dans l'espace, l'ensemble des points qui vérifient y égale moins 3, c'est quoi ? Réponds en commentaire !
+- **04-abonne** : Entraîne-toi sur éleveai point f r. Et abonne-toi !
+
+#### ✅ Passe MATHS du short de E4 — recalculée, pas relue
+
+| Clip | Ce que la voix affirme | Recalcul |
+|---|---|---|
+| `01` | z = 0 est le plan xOy, pas un point | 0x + 0y + 1z + 0 = 0 : a, b, c non tous nuls ⟹ un plan |
+| `01` | « x et y restent libres » | l'équation ne contraint que z ⟹ 2 degrés de liberté ⟹ une surface |
+| `02` | x = 2 ⟹ bonne réponse : un plan | 1x + 0y + 0z − 2 = 0 : la forme d'un plan |
+| `02b` | « parallèle au plan yOz » | normale (1;0;0) ⟹ normale de yOz ; et 2 ≠ 0 ⟹ pas confondus |
+| `02b` | leurres « une droite » / « un point » | ⛔ faux dans l'espace : une seule équation NE descend PAS en dimension 1 |
+| `03` | défi y = −3 | un plan parallèle à xOz — ⛔ non dit, non affiché |
+
+⛔ **Exclusion deux à deux des trois propositions ?** « une droite » / « un point » / « un plan » s'excluent par dimension ✅.
+
 ---
 
 # E5 · `terminale-espace-position-relative`
@@ -324,6 +440,32 @@ puis le script Manim, puis `-ql`, planche, zone Margo, HD, branchement au coach.
 ⛔ **Exclusion deux à deux des propositions ?**
 `04` : parallèle sans point commun / contenue / sécante — trois positions exclusives ✅.
 `07` : non coplanaires / parallèles / impossible — s'excluent, et « parallèles » est exclu par l'énoncé lui-même ✅.
+
+### Short — « une solution, aucune, ou toutes »
+
+**Une seule idée**, celle de l'épisode : droite et plan : on remplace, et c'est l'équation en t qui donne la position.
+⛔ Un short ne RÉSUME pas son épisode — il en prend une idée et la rend en une minute.
+**Bonne réponse : A** (tirage des shorts, table en tête de fichier).
+
+- **00-accroche** : Une droite et un plan dans l'espace : trois positions, et une seule ligne de calcul.
+- **01-idee** : Le geste est le même : on remplace x, y et z de la droite dans l'équation du plan, et on lit ce qu'il reste. Une solution, comme 2 t égale zéro : la droite coupe le plan. Aucune, comme 3 égale zéro : strictement parallèle. Toutes, zéro égale zéro : contenue dans le plan.
+- **02-question** : Question ! Après substitution, il reste zéro égale zéro. La droite est : A : contenue dans le plan. B : sécante au plan. C : strictement parallèle. Mets pause, et choisis !
+- **02b-reponse** : Réponse A. Zéro égale zéro est vrai pour tout t : tous les points de la droite sont dans le plan. Avec 3 égale zéro, c'était faux, donc strictement parallèle.
+- **03-commentaire** : À toi ! La droite d : x égale 1 plus t, y égale t, z égale 2 t. Le plan P : x plus y moins z moins 1 égale zéro. Position relative ? Réponds en commentaire !
+- **04-abonne** : Entraîne-toi sur éleveai point f r. Et abonne-toi !
+
+#### ✅ Passe MATHS du short de E5 — recalculée, pas relue
+
+| Clip | Ce que la voix affirme | Recalcul |
+|---|---|---|
+| `01` | « 2t = 0 ⟹ la droite coupe le plan » | une seule racine t = 0 ⟹ un seul point commun |
+| `01` | « 3 = 0 ⟹ strictement parallèle » | aucune racine ⟹ aucun point commun, et la direction reste celle du plan |
+| `01` | « 0 = 0 ⟹ contenue » | vrai pour tout t ⟹ tout point de d est dans P |
+| `02` | bonne réponse : contenue dans le plan | 0 = 0 est vrai pour tout t |
+| `02b` | leurres « sécante » / « strictement parallèle » | ⛔ ils correspondent à UNE racine et à ZÉRO racine : exclusifs |
+| `03` | défi d : x = t + 1, y = t, z = 2t ; P : x + y − z − 1 = 0 | (1+t) + t − 2t − 1 = 0 pour tout t ⟹ d est CONTENUE dans P — ⛔ non dit, non affiché |
+
+⛔ **Exclusion deux à deux des trois propositions ?** « contenue » / « sécante » / « strictement parallèle » : une racine, zéro racine, toutes — trois cas exclusifs, et « strictement » exclut bien « contenue » ✅.
 
 ---
 
@@ -373,6 +515,41 @@ puis le script Manim, puis `-ql`, planche, zone Margo, HD, branchement au coach.
 ⛔ **Exclusion deux à deux des propositions ?**
 `04` : trois triplets distincts, un seul est le centre ✅.
 `07` : colinéarité / même norme / coplanarité — trois critères différents, un seul caractérise l'alignement ✅.
+
+### Short — « ne conclus jamais sur le dessin »
+
+**Une seule idée**, celle de l'épisode : deux droites peuvent se couper sur la figure et ne jamais se rencontrer dans l'espace.
+⛔ Un short ne RÉSUME pas son épisode — il en prend une idée et la rend en une minute.
+**Bonne réponse : B** (tirage des shorts, table en tête de fichier).
+
+- **00-accroche** : Deux droites qui se croisent sur le dessin, et qui ne se rencontrent jamais. Ne conclus jamais sur une figure.
+- **01-idee** : Dans le cube A B C D E F G H, trace la droite A C, puis la droite E B. Sur la figure, les deux traits se coupent. Pourtant A C reste au sol et E B descend du haut du cube au sol : aucun point commun, et aucun plan ne les contient toutes les deux.
+- **02-question** : Question ! Deux droites semblent se croiser en perspective. Que conclure ? A : sécantes. B : rien du tout. C : parallèles. Mets pause, et choisis !
+- **02b-reponse** : Réponse B : rien du tout. Une perspective écrase une direction : deux droites qui ne se rencontrent pas peuvent se superposer à l'écran. On écrit les coordonnées, et c'est le calcul qui conclut.
+- **03-commentaire** : À toi ! Dans le même cube, les droites A G et B H ont-elles un point commun ? Réponds en commentaire !
+- **04-abonne** : Entraîne-toi sur éleveai point f r. Et abonne-toi !
+
+#### ✅ Passe MATHS du short de E6 — recalculée, pas relue
+
+| Clip | Ce que la voix affirme | Recalcul |
+|---|---|---|
+| `01` | (A C) et (E B) se COUPENT à l'écran | cavalière : t = 0,589 sur (A C) et s = 0,831 sur (E B), tous deux dans ]0;1[ |
+| `01` | « aucun point commun » | (t;t;0) = (s;0;1−s) ⟹ t = 0 ET s = 1 : impossible |
+| `01` | « aucun plan ne les contient » | det[(1;1;0),(1;0;−1),(0;0;1)] = −1 ≠ 0 ⟹ non coplanaires |
+| `01` | « A C reste au sol » | A et C ont z = 0 ; E B va de z = 1 à z = 0 |
+| `02` | bonne réponse : rien du tout | la projection cavalière a un NOYAU : elle écrase une direction |
+| `03` | défi (A G) et (B H) | (t;t;t) = (1−s;s;s) ⟹ t = s = 0,5 : elles se coupent au CENTRE du cube — ⛔ non dit |
+
+⛔ **Exclusion deux à deux des trois propositions ?** « sécantes » / « rien du tout » / « parallèles » — « rien » exclut les deux affirmations, et sécantes exclut parallèles ✅.
+
+⚠️ **Les trois choix de ce short sont écrits en UN mot, et c'est une cote, pas un style.**
+Mesuré hors rendu : avec « qu'elles sont sécantes » sur deux lignes, le bloc des trois
+cartes descend à −2,28 et « Mets pause, et choisis ! » tombe à **−3,20**, c'est-à-dire
+DANS la boîte de Ti-Margo (qui monte à −2,92 en 9:16). En un mot, les trois cartes
+tiennent sur une ligne à 26 px et la pause s'arrête à −2,85. ⛔ C'est le piège de
+l'épisode 6 (« ajouter une ligne à un choix rapetisse les trois cartes ») dans un cadre
+deux fois plus étroit : en 9:16, il ne rapetisse pas les cartes, il les fait **sortir par
+le bas**.
 
 ---
 
