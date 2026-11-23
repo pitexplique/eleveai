@@ -99,7 +99,7 @@ se devine sans rien calculer. Mesuré sur les six, ponctuation finale retirée p
 | `norme-distance` | B | 1 | **1** | 2 | ✅ |
 | `angle` | C | 9 | 9 | **9** | ✅ ex æquo, aucun tell |
 | `plan-normal` | B | 7 | **13** | 13 | ✅ ex æquo, aucun tell |
-| `defi` | A | **28** | 13 | 25 | ⛔ **seule la plus longue** |
+| `defi` | A | ~~28~~ **15** | ~~13~~ 16 | ~~25~~ 21 | ✅ **corrigé** (voir ci-dessous) |
 
 ⚠️⚠️ **Et mon premier instrument condamnait TROIS shorts sur six.** Il comptait le point
 final sur A et B (qui le portent) et pas sur C (dont je coupais la fin avant « Mets
@@ -108,11 +108,15 @@ longueur mesurée. Deux innocents allaient être « corrigés ». ⭐ La leçon 
 mais elle vient de resservir : *un instrument qui rend un chiffre plausible n'a pas prouvé
 qu'il mesurait la bonne chose* — ici, il mesurait de la ponctuation.
 
-### Le correctif de E12, prêt à appliquer
+### ✅ Le correctif de E12 — APPLIQUÉ le 23/11/2026
 
-⛔ Je ne l'applique pas moi-même : la source des voix est
-`manim/poste2/VOIX-espace-terminale.md`, que le chef d'orchestre a repris en main. Voici
-le texte exact, à remplacer dans le clip `02-question` du short de E12.
+Arbitrage du chef d'orchestre : les sections E7 à E12 de `VOIX-espace-terminale.md` sont
+les miennes, E1 à E6 sont celles de la session voisine ; une ligne de mon propre épisode
+ne demande l'autorisation de personne. Le correctif est donc appliqué à la source, et la
+voix de E12 a été réextraite, resynthétisée et remarquée (**217 marques**, une de plus
+que les 216 d'avant — le nouveau libellé porte un jeton de plus).
+⭐ Mesuré après coup : l'édition touche **exactement une ligne**, et elle est dans la
+section E12 (`git diff HEAD --stat` → `1 insertion(+), 1 deletion(-)`).
 
 **Avant** (bonne réponse A = 28 caractères, la plus longue) :
 
@@ -124,10 +128,22 @@ même forme) :
 > A : au tiers de A G. B : au milieu de A G. C : aux deux tiers de A G.
 
 ⚠️ Le clip `02b-reponse` nomme les leurres (« Le milieu, ce serait un demi partout, et les
-deux tiers, deux tiers partout ») : il reste **juste tel quel**, aucun mot à y changer.
-⚠️ Après le remplacement : relancer `bash manim/poste2/voix-ps-espace-shorts-wav.sh
---refaire` (il refera les 6, c'est 2 minutes) puis
-`controler-maths-shorts-ps-espace.py`, dont la table des lettres ne bouge pas.
+deux tiers, deux tiers partout ») : il est resté **juste tel quel**, aucun mot changé.
+
+⭐ **Et la régénération s'est faite SANS toucher aux 23 autres voix**, ce qui comptait
+puisque 18 d'entre elles ne sont pas à moi. `voix-espace-depuis-md.py --tout` les aurait
+toutes réécrites ; la manœuvre est de **supprimer le seul fichier à refaire** et de
+lancer l'extracteur sans option, qui n'écrit que ce qui manque :
+« 1 fichier écrit, 23 déjà présents ». Même principe pour les WAV, dont le lanceur saute
+ce qui existe : « 5 déjà fait », un seul refait.
+
+**Après correctif, les trois contrôles repassés :**
+
+| contrôle | résultat |
+|---|---|
+| longueurs des six | **6 / 6 ok** — `defi` à 15 / 16 / 21, la plus longue est un leurre |
+| exclusion deux à deux de `defi` | le tiers, le milieu, les deux tiers : trois points distincts d'une même diagonale, et les deux leurres sont réfutés par l'équation du plan (3 × 1/2 − 1 = 1/2 ≠ 0 ; 3 × 2/3 − 1 = 1 ≠ 0) ✅ |
+| passe maths | **0 faute sur 50**, après étalonnage |
 
 ---
 
@@ -250,7 +266,7 @@ résultat est une surprise géométrique. **Ceinture** : verte. **Bonne réponse
 |---|---|
 | `00-accroche` | entête « Type bac : le projeté » + échelle. « Le plan (BDE) coupe la grande diagonale. » / « En son milieu ? » / en rouge : « Non. » |
 | `01-idee` | le cube avec **B, D, E en ambre** (ce sont les données) et la diagonale **[A G]**. ⛔ **Pas de triangle (BDE) rempli** : il se projette sur une lame (platitude 9,02°, aire projetée 17,5 %) et se lirait « quelconque ». La colonne : « (BDE) : x + y + z − 1 = 0 », « n⃗ (1 ; 1 ; 1) », « x = y = z = t », « 3t − 1 = 0 », « t = 1/3 ». |
-| `02-question` | `q_tete` : « Ce point est situé où » / « sur la diagonale A G ? » Cartes (⚠️ **après le correctif de longueur** ci-dessus) : **A : au tiers de A G** · **B : au milieu de A G** · **C : aux deux tiers de A G**. |
+| `02-question` | `q_tete` : « Ce point est situé où » / « sur la diagonale A G ? » Cartes : **A : au tiers de A G** · **B : au milieu de A G** · **C : aux deux tiers de A G**. ⭐ Les trois gardent la **même forme** — c'est ce qui compte plus encore que leur longueur : trois tournures parallèles ne laissent aucune prise au devineur. |
 | `02b-reponse` | la carte A s'allume, et **le point K apparaît sur [A G]**, au tiers. ⛔ K ne porte pas d'étiquette : la grille ne rend aucune position à moins de 0,82 du point, plus près d'autre chose que de lui. ⭐ C'est la **couleur** qui relie — K en vert, et le bloc « K (1/3 ; 1/3 ; 1/3) » encadré en vert. |
 | `03-commentaire` | « La distance de A au plan (BDE) ? » ⛔ la réponse (√3/3 ≈ 0,58) n'est ni dite ni affichée. |
 | `04-abonne` | `fin_short`. |
@@ -266,8 +282,8 @@ calculées — mais **pas** le point K sur la diagonale : le poser, c'est montre
 1. ⏳ le gel de `espace_commun_short.py`, **et son SHA** : on écrit contre un commit,
    jamais contre un fichier qui bouge ;
 2. les deux pièces ci-dessus (`racine` en une ligne, `coin()` à extraire) ;
-3. le correctif de longueur du `02-question` de E12, dans le document partagé des voix,
-   puis `voix-ps-espace-shorts-wav.sh --refaire` ;
+3. ✅ ~~le correctif de longueur du `02-question` de E12~~ — **fait le 23/11**, voix
+   réextraite et 217 marques refaites ;
 4. les 6 scripts, un par un — et pour chacun : `verifier-avant-rendu.py`, dry run
    (**0 BORD, 0 AUDIT-AVANCE**), `espace_mesure_short.py`, `-ql` + planche **et** gros
    plans, `verifier-zone-margo.py` sur le `-ql`, `auditer-fleches-vecteurs.py` à **0 NU** ;

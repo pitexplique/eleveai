@@ -1903,6 +1903,49 @@ Appliqué ici : `se_coupent()` est aussi lancé sur (AB) et (AD), **qui se coupe
 disent la faute que nomme le leurre sans jamais la comparer à la vérité. Corrigées en
 « le leurre vaut ceci **et** il diffère de la bonne réponse ».
 
+### ⛔⛔ UN FILTRE DE DIFF QUI CACHE EXACTEMENT LES LIGNES QU'ON CHERCHE
+
+Trouvé en corrigeant le `02-question` du short de E12. Pour ne garder que les lignes
+changées d'un diff, j'avais écrit le filtre qui semble évident :
+
+```
+git diff HEAD -- <fichier> | grep -E "^[+-]" | grep -v "^[+-][+-]"
+```
+
+Le second `grep` est là pour jeter les en-têtes `---` et `+++`. ⛔ Mais dans un fichier
+**markdown**, une ligne de liste commence par un tiret : une puce modifiée sort donc en
+`-- **02-question** : …` et `+- **02-question** : …`, c'est-à-dire exactement la forme
+`^[+-][+-]`. **Le filtre supprimait toutes les lignes qu'il devait montrer**, et rendait
+un diff VIDE sur une édition parfaitement réelle.
+
+⭐⭐ Ce qui l'a démentie n'est pas un doute, c'est une **contradiction entre trois
+mesures** : `git show HEAD:<fichier>` portait l'ancien texte, `grep` sur le fichier
+portait le nouveau, et le diff était vide. Les trois ne peuvent pas avoir raison
+ensemble. ⭐ `git diff HEAD --stat` a tranché en une ligne : **1 insertion, 1 deletion**.
+
+⚠️ Et le piège a eu deux étages ce jour-là : le premier `git diff` (sans `HEAD`) était
+déjà vide, pour la raison du piège n° 41 des entiers — il compare à l'INDEX, qui reste
+périmé avec la recette de commit par index temporaire. J'ai donc lu **deux zéros faux
+d'affilée, de deux causes différentes**, et le second ressemblait à une confirmation du
+premier.
+
+⭐ La règle : **un diff se compte avec `--stat` avant d'être lu avec un filtre.** Le
+`--stat` ne passe par aucun `grep` à soi, et c'est lui qui dit si l'on cherche quelque
+chose qui existe. C'est la même leçon que « compter avec `grep -o`, jamais avec `^` »
+sur les journaux d'audit : le filtre qu'on écrit pour lire une sortie fait partie de
+l'instrument, et il n'est pas étalonné.
+
+### ✅ LE 02-QUESTION DE E12 EST CORRIGÉ — la bonne réponse était SEULE la plus longue
+
+Mesuré sur les six, ponctuation finale retirée partout : `defi` sortait à **28 / 13 / 25**
+avec la bonne en A, donc devinable sans calculer. Réécrit en **15 / 16 / 21**, la plus
+longue devenant un leurre, et surtout **les trois tournures rendues parallèles** (« au
+tiers de A G », « au milieu de A G », « aux deux tiers de A G ») — la forme commune
+compte plus que la longueur.
+⭐ Régénération **sans toucher aux 23 autres voix**, dont 18 ne sont pas à moi : on
+SUPPRIME le seul fichier à refaire et on lance l'extracteur **sans `--tout`**, qui n'écrit
+que ce qui manque (« 1 fichier écrit, 23 déjà présents »). 217 marques au lieu de 216.
+
 ### ⭐ LE TIRAGE DES LETTRES DES SHORTS EST COMPLET
 
 E1–E6 étaient tirées (B C A C A B). Les six du produit scalaire : **A C B C B A**,
