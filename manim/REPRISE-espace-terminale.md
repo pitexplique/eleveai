@@ -1903,6 +1903,33 @@ Appliqué ici : `se_coupent()` est aussi lancé sur (AB) et (AD), **qui se coupe
 disent la faute que nomme le leurre sans jamais la comparer à la vérité. Corrigées en
 « le leurre vaut ceci **et** il diffère de la bonne réponse ».
 
+### ⭐⭐ TROIS DÉSACCORDS DANS LA SOIRÉE, ET AUCUN NE PORTAIT SUR UN NOMBRE
+
+La règle la plus transférable de la journée, et elle a été payée trois fois entre deux
+sessions qui avaient **toutes les deux raison** :
+
+| ce qui paraît être un désaccord | ce que chacun mesurait |
+|---|---|
+| « 12 sur 12 rendent A B C, aucune n'a de D » contre « j'ai trouvé un D » | le clip `02-question` seul, contre la voix ENTIÈRE |
+| « ton “un D” est un sous-comptage, il y en a six » | les occurrences de la LETTRE D (il y en a bien **une**), contre les citations de lettres HORS CHOIX (il y en a bien **six**) |
+| « 0 faute » des contrôleurs de la série | les 12 PAYSAGES, quand on croyait lire les shorts |
+
+⛔⛔ **Dans les trois cas, les nombres étaient exacts des deux côtés, et l'ENSEMBLE MESURÉ
+était différent.** Aucun des deux ensembles ne contenait l'autre, donc aucun des deux
+chiffres ne corrigeait l'autre — et le mot « sous-comptage », que j'ai employé, affirmait
+une inclusion qui n'existait pas.
+
+⭐ **La règle : un chiffre se donne toujours avec son PÉRIMÈTRE**, et deux chiffres ne se
+comparent que si l'on a dit qu'ils portent sur le même ensemble. « Six » et « un » ne
+se contredisent pas quand l'un compte des citations et l'autre une lettre.
+⚠️ Et le coût n'est pas théorique : une séance entière peut se passer à se disputer sur
+un chiffre au lieu de regarder la ligne — alors que personne ne s'est trompe.
+
+Les comptages exacts, pour qu'on ne les refasse pas : sur les 12 voix de short,
+**42** occurrences de « <lettre> : », dont **36 choix** (3 par short) et **6 hors
+choix** ; répartition **B 14 · A 13 · C 12 · D 1 · E 1 · H 1**. Les deux shorts qui
+dépassent 3 sont E2 (**8**) et E6 (**4**).
+
 ### ⛔⛔ DANS CETTE SÉRIE, A À H NOMMENT LES SOMMETS AUTANT QUE LES RÉPONSES
 
 Le chef d'orchestre m'a repris sur une phrase que j'avais écrite sans son périmètre :
