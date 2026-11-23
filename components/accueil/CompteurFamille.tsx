@@ -70,7 +70,7 @@ export function BandeChiffres() {
   );
 }
 
-/** Famille à gauche, Prof à droite : un titre (le bénéfice), trois lignes, le prix, un bouton. */
+/** Famille à gauche, Prof à droite : un titre (le bénéfice), trois lignes, un bouton (sans prix depuis le 23/11). */
 export function EncartsFamilleProf() {
   return (
     <div className="mx-auto grid max-w-4xl items-stretch gap-4 text-left sm:grid-cols-2">
@@ -88,16 +88,16 @@ export function EncartsFamilleProf() {
           <Ligne couleur="text-sky-700">Ce qu&apos;ils ont compris, ce qu&apos;il faut revoir</Ligne>
           <Ligne couleur="text-sky-700">Un bilan chaque semaine par courriel</Ligne>
         </ul>
-        {/* Le prix et le bouton, calés en bas : alignés d'un encart à l'autre. */}
+        {/* Le bouton, calé en bas : aligné d'un encart à l'autre.
+            23/11, Frédéric : « enlève tarifs de 10 euros sur la page d'accueil
+            et remplace par s'inscrire plutôt que voir tarifs » → aucun prix
+            dans les encarts ; les prix restent sur /tarifs. */}
         <div className="mt-auto pt-4">
-          <p className="text-lg font-black text-slate-900">
-            {montant(OFFRE.famille)} par mois, <span className="whitespace-nowrap">tous vos enfants</span>
-          </p>
           <Link
-            href="/tarifs"
-            className="mt-3 inline-flex items-center justify-center gap-1.5 rounded-xl bg-sky-700 px-5 py-2.5 font-black text-white shadow-sm hover:bg-sky-800"
+            href="/auth/signin?inscription=1"
+            className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-sky-700 px-5 py-2.5 font-black text-white shadow-sm hover:bg-sky-800"
           >
-            Voir les tarifs <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            S&apos;inscrire <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
       </div>
@@ -118,12 +118,9 @@ export function EncartsFamilleProf() {
           Voir une séance en classe
         </Link>
         <div className="mt-auto pt-4">
-          <p className="text-lg font-black text-slate-900">
-            {montant(OFFRE.prof)} par mois, <span className="whitespace-nowrap">toutes vos classes</span>
-          </p>
           <Link
             href="/prof/classes"
-            className="mt-3 inline-flex items-center justify-center gap-1.5 rounded-xl bg-violet-700 px-5 py-2.5 font-black text-white shadow-sm hover:bg-violet-800"
+            className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-violet-700 px-5 py-2.5 font-black text-white shadow-sm hover:bg-violet-800"
           >
             Créer ma classe <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
