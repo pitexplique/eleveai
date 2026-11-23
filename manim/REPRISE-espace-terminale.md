@@ -574,7 +574,16 @@ passe, et entre les deux il y a un seuil qu'aucune relecture ne voit.
 
 ### ⛔⛔ LES TROIS AXES D'UN REPÈRE (A ; AB, AD, AE) SONT TROIS ARÊTES DU CUBE
 
-Le cube ABCDEFGH revient dans **9 épisodes sur 12**, donc ce défaut-là vaut pour eux tous.
+⛔ **Le cube ne revient PAS dans 9 épisodes : mesuré, 7 voix en parlent et 6 scripts le
+dessinent.** Le « 9 » était une intention de conception, jamais comptée — un chiffre de
+tête, la faute la plus fréquente de cette série. Les scripts qui appellent `.cube()` :
+`espace_repere_coordonnees` (4 fois), `espace_defi`, `ps_espace_angle`, `ps_espace_calculer`,
+`ps_espace_norme_distance`, `ps_espace_orthogonalite`. ⭐ `ps_espace_defi` (E12) en parle
+5 fois et son script reste à écrire : il en dessinera un. Les quatre autres épisodes
+(`espace_vecteurs`, `espace_droite_parametrique`, `espace_plan_equation`,
+`espace_position_relative`) n'ont jamais dessiné de cube — l'arête manquante ne les a
+pas touchés, et les re-rendre aurait pris le verrou deux heures pour rien.
+⭐ La commande : `grep -c "\.cube(" manim/scripts/terminale/*espace*.py`
 Dessiné avec `self.repere(...)` et `portee=2`, les axes se superposent exactement aux
 arêtes A B, A D et A E sur leur première moitié — on ne voit pas des axes, on voit des
 arêtes grises doublées. Et surtout : **le bout de l'axe des y tombe À L'INTÉRIEUR du
@@ -1430,7 +1439,8 @@ sa tête, après 20 rendus HD.
 - ⚠️ **Les centres d'intérêt sont une liste FERMÉE** (`lib/videos/centres-interet.ts`, 18
   entrées, chacune avec ses tranches d'âge). ⛔ `metiers` **n'existe pas**. La terminale est
   la tranche `15-18`, qui en ouvre 16. Contrôle : `node scripts/verifier-centres-age.mjs`.
-- ⭐ Le cube `ABCDEFGH` dans le repère (A ; AB, AD, AE) revient dans **9 épisodes sur 12** :
+- ⭐ Le cube `ABCDEFGH` dans le repère (A ; AB, AD, AE) — **7 voix sur 12 en parlent,
+  6 scripts le dessinent** (mesuré, voir plus haut) :
   A(0;0;0), B(1;0;0), C(1;1;0), D(0;1;0), E(0;0;1), F(1;0;1), G(1;1;1), H(0;1;1).
 
 ---
