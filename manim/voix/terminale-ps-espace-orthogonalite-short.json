@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Un produit scalaire nul prouve que deux vecteurs sont orthogonaux. Mais face à un plan, un seul ne suffit pas.",
+  "01-idee": "Marc plante un poteau et le vérifie au niveau dans un seul sens : c'est droit. Cela ne suffit pas, car un poteau peut être droit vu de face et penché vu de côté. Pour une droite et un plan, il faut deux directions, et deux vecteurs non colinéaires.",
+  "02-question": "Question ! Au sol, la direction du nord est orthogonale à la direction de l'est. Le nord est-il pour autant orthogonal au sol ? A : oui, il est orthogonal à une direction du sol. B : on ne peut pas le savoir sans calcul. C : non, le nord est dans le sol. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C. Le nord est au sol, il n'est pas vertical, et il est pourtant orthogonal à l'est. Une seule direction ne suffit donc jamais, même bien choisie. Il faut deux vecteurs du plan, non colinéaires, et il faut écrire les deux produits scalaires.",
+  "03-commentaire": "À toi ! Dans le cube A B C D E F G H, l'arête A B et l'arête C G sont orthogonales. Se coupent-elles ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

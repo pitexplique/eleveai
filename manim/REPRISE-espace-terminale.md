@@ -1850,6 +1850,104 @@ occurrence, le contrôle qui a payé sur E5, E6, E9 et E10).
 
 ---
 
+## ⭐⭐ Les SIX SHORTS du produit scalaire (E7 à E12) — les voix (23/11/2026)
+
+État à la fin de cette passe : **les 6 voix écrites, leurs 6 fichiers de marques faits**
+(189 · 200 · 153 · 183 · 203 · 216 = **1 144 marques**, comptées à la sortie du
+convertisseur, pas additionnées de tête). ⏳ Les 6 scripts Manim restent à écrire.
+
+### ⛔⛔ LES DEUX CONTRÔLES DE LA SÉRIE NE LISENT QUE LES DOUZE PAYSAGES
+
+C'est un TROU D'INSTRUMENT, mesuré et non supposé :
+
+```
+python -X utf8 manim/poste2/verifier-voix-espace.py
+  -> « 12 épisodes · 15 clips attendus chacun », « A 8 · B 8 · C 8 sur 24 questions »
+python -X utf8 manim/poste2/controler-maths-voix-espace.py
+  -> « 0 affirmation fausse sur les voix des 12 épisodes »
+grep -i short manim/poste2/verifier-voix-espace.py   -> AUCUNE ligne
+```
+
+Les deux rendent donc un zéro **parfaitement plausible sur un périmètre qui n'est pas
+celui qu'on croit** — la faute que la note des entiers appelle « un audit français pris
+pour un audit de maths ». ⛔ **Un « 0 faute » de ces deux outils ne dit RIEN des shorts.**
+
+⭐ D'où `manim/poste2/controler-maths-shorts-ps-espace.py`, qui refait en Python chaque
+nombre dit par mes six voix : **0 faute sur 50 contrôlées**, après étalonnage
+(`--etalonner` plante une faute, l'instrument crie).
+⚠️ **Les six shorts de la géométrie (E1 à E6) n'ont, eux, aucune passe maths exécutée.**
+Ce n'est pas mon territoire : c'est signalé, pas corrigé.
+
+### ⭐⭐ UN ÉTALONNAGE EST PAR ASSERTION, PAS GLOBAL — j'ai écrit un test CREUX
+
+Le plus cher de cette passe, et il est dans MON instrument. J'avais écrit, pour
+« (AB) et (CG) ne se coupent jamais » :
+
+```python
+not any(isclose(0, 1) for _ in (0,))     # == not False == True, QUOI QU'IL ARRIVE
+```
+
+C'est **mot pour mot** le test creux que cette note nomme déjà (« l'étalonnage a trouvé
+deux de mes propres tests CREUX », section des voix). Et il est passé à travers
+l'étalonnage **qui venait de réussir** : `--etalonner` plante UNE faute, à UN endroit, et
+prouve que cette assertion-là peut crier. Il ne prouve rien des 49 autres.
+
+⭐⭐ **La règle qui en sort : un étalonnage global ne valide pas une assertion
+particulière. Toute assertion qui affirme une ABSENCE (« elles ne se coupent pas »,
+« il n'est pas colinéaire », « ce n'est pas dans le plan ») veut son TÉMOIN** : un cas
+voisin où la chose EST vraie, et que l'instrument doit voir. Sans témoin, une fonction
+qui répondrait « non » à tout ferait passer le contrôle pour la mauvaise raison.
+Appliqué ici : `se_coupent()` est aussi lancé sur (AB) et (AD), **qui se coupent en A**.
+
+⚠️ Trois autres assertions du même fichier étaient des tautologies (`3 + 4 == 7`) : elles
+disent la faute que nomme le leurre sans jamais la comparer à la vérité. Corrigées en
+« le leurre vaut ceci **et** il diffère de la bonne réponse ».
+
+### ⭐ LE TIRAGE DES LETTRES DES SHORTS EST COMPLET
+
+E1–E6 étaient tirées (B C A C A B). Les six du produit scalaire : **A C B C B A**,
+graine **2311**, 4ᵉ essai, sous les trois contraintes du `.md` (pas le B de E6 sur E7,
+jamais deux fois la même de suite, et retomber sur A 4 · B 4 · C 4 sur les douze).
+⛔ Pas choisies à la main : la commande se rejoue et redonne la même suite. La table en
+tête de `VOIX-espace-terminale.md` est à jour, et
+`controler-maths-shorts-ps-espace.py` vérifie que chaque voix annonce bien SA lettre.
+
+### ⚠️ LE LANCEUR DE WAV A DÛ ÊTRE DÉDOUBLÉ, ET C'EST VOULU
+
+`voix-espace-tous-les-wav.sh` ne porte que les 12 PAYSAGES, et il est partagé. Pendant
+que j'écrivais, la session des shorts de la géométrie travaillait dans le même dossier.
+⭐ Chaque moitié a donc son lanceur — `manim/poste2/voix-ps-espace-shorts-wav.sh` pour
+les six du produit scalaire — et les deux appellent **exactement la même chaîne**, avec
+`-Debit -6` aux DEUX étapes. ⛔ Deux écrivains ne touchent jamais le même fichier.
+
+### ✅ LE « 577 » DU SHORT DE E10 N'EST PAS UN DÉFAUT — remesuré, pas reconnu
+
+Le convertisseur signale deux fois « 01-idee / « 577 » : introuvable dans le texte ».
+La note dit déjà que ce symptome est bénin **sur le paysage** de E10 ; ce n'est pas une
+raison d'y croire ici. Mesuré sur CE fichier :
+
+| mesure | valeur |
+|---|---|
+| occurrences de « 577 » dans le texte du clip | **1** |
+| offset réel de « 577 » | **333** (le texte en fait 337) |
+| marque posée à cet offset | **oui, 333** |
+| offsets des 65 marques du clip | **strictement croissants** |
+
+WinRT lit « 577 » « cinq cent soixante-dix-sept » et émet donc TROIS cues pour une
+occurrence ; le convertisseur garde la bonne et saute les deux autres **sans avancer**.
+⭐ Et ici c'est plus sûr encore que sur le paysage : « 577 » est le **dernier mot du
+clip**, donc même un mauvais saut ne pourrait déplacer aucune marque en aval.
+
+### ⏳ CE QUI RESTE SUR CES SIX SHORTS, ET LA QUESTION OUVERTE
+
+Les 6 scripts Manim. ⚠️ **Le modèle a changé sous le brief** : il annonçait
+`manim/scripts/terminale/suite_*_short.py`, mais la session des shorts de la géométrie a
+écrit entre-temps un socle propre à cette série, `espace_commun_short.py` (29 ko) et
+`espace_mesure_short.py`, **modifiés pendant que je mesurais**. Mes six shorts doivent
+donc s'asseoir sur CE socle, pas sur celui des suites — mais il bouge, et il n'est pas
+à moi. ⛔ Je n'ai pas écrit les scripts sur une cible mobile : la question est posée au
+chef d'orchestre.
+
 ## ⛔⛔ Les marques : « 0,5 » vaut TROIS marques
 
 WinRT émet une marque par mot **prononcé**, pas par mot écrit. Il lit « 0,5 » comme

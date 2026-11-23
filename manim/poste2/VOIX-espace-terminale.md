@@ -77,13 +77,19 @@ Un short ne porte qu'**une** question-pause. Les lettres des six shorts de la g�
 (E1 à E6) sont donc tirées à part, sous la même règle : un tiers de chaque, et jamais
 deux fois la même lettre sur deux shorts consécutifs de la série.
 
-| | E1 | E2 | E3 | E4 | E5 | E6 |
-|---|---|---|---|---|---|---|
-| `02` du short | **B** | **C** | **A** | **C** | **A** | **B** |
+| | E1 | E2 | E3 | E4 | E5 | E6 | E7 | E8 | E9 | E10 | E11 | E12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| `02` du short | **B** | **C** | **A** | **C** | **A** | **B** | **A** | **C** | **B** | **C** | **B** | **A** |
 
-Soit **A 2 · B 2 · C 2** sur 6 questions. ⚠️ Les six shorts du produit scalaire (E7 à
-E12) restent à tirer : **ils doivent compléter cette suite**, sans répéter le B de E6 sur
-E7, et de façon à retomber sur A 4 · B 4 · C 4 pour les douze shorts.
+Soit **A 4 · B 4 · C 4** sur les douze shorts, et jamais deux fois la même lettre sur deux
+shorts consécutifs de la série.
+
+✅ **Les six du produit scalaire (E7 à E12) sont tirés** (23/11/2026). ⛔ Pas choisis à la
+main : tirage à la **graine 2311**, 4ᵉ essai, sur les six lettres qui restaient à placer
+(A 2 · B 2 · C 2), en rejetant tout tirage qui répète le B de E6 sur E7 ou qui met deux
+fois la même lettre de suite. La commande se rejoue et redonne **A C B C B A**.
+⚠️ Comme pour les paysages, ces lettres sont **la référence** : l'écran Manim et le champ
+`reponse` du manifeste (0 = A, 1 = B, 2 = C) doivent dire la même lettre que la voix.
 
 ⚠️ Ces lettres sont désormais **la référence** : l'écran Manim (la lettre qui s'allume) et
 le champ `reponse` du manifeste (0 = A, 1 = B, 2 = C) doivent dire la même lettre que la
@@ -232,7 +238,7 @@ puis le script Manim, puis `-ql`, planche, zone Margo, HD, branchement au coach.
 
 - **00-accroche** : Dans un cube, les coordonnées des huit sommets ne contiennent que des zéros et des uns. À une seule condition : bien choisir le repère.
 - **01-idee** : Prends le cube A B C D E F G H. On choisit A comme origine, et les vecteurs A B, A D et A E comme directions. Alors A a pour coordonnées 0, 0, 0. B : 1, 0, 0. D : 0, 1, 0. E : 0, 0, 1. Et G, tout à l'opposé de A : 1, 1, 1.
-- **02-question** : Question ! Dans ce cube et ce repère, coordonnées du sommet H ? A : 1, 1, 0. B : 0, 0, 1. C : 0, 1, 1. Mets pause, et choisis !
+- **02-question** : Question ! Dans ce cube, coordonnées du sommet H ? A : 1, 1, 0. B : 0, 0, 1. C : 0, 1, 1. Mets pause, et choisis !
 - **02b-reponse** : Réponse C. De A à H : aucun pas vers B, un pas vers D, un pas vers le haut. Donc 0, 1, 1. Le triplet 1, 1, 0, c'est le sommet C. Et 0, 0, 1, c'est le sommet E.
 - **03-commentaire** : À toi ! Dans le même cube et le même repère, quelles sont les coordonnées du sommet F ? Réponds en commentaire !
 - **04-abonne** : Entraîne-toi sur éleveai point f r. Et abonne-toi !
@@ -597,6 +603,31 @@ le bas**.
 `04` : 0, 4 et un vecteur — exclusives, et la troisième n'est même pas du bon type ✅.
 `07` : orthogonaux / colinéaires / l'un est nul — exclusives, et la troisième est niée par l'énoncé ✅.
 
+### Short — « trois multiplications, une addition, et un NOMBRE »
+
+**Une seule idée**, celle de l'épisode : le produit scalaire se calcule en coordonnées, et ce qui en sort est un nombre, jamais un vecteur.
+⛔ Un short ne RÉSUME pas son épisode — il en prend une idée et la rend en une minute.
+**Bonne réponse : A** (tirage des shorts, table en tête de fichier).
+
+- **00-accroche** : Deux vecteurs, trois multiplications, une addition. Et ce qui sort n'est pas un vecteur : c'est un nombre.
+- **01-idee** : Dans un repère orthonormé, on multiplie les x entre eux, les y entre eux, les z entre eux, puis on additionne les trois résultats. Prenons u de coordonnées 1, 2, 3 et v de coordonnées 4, moins 1, 2. Cela fait 4, puis moins 2, puis 6. Total : 8.
+- **02-question** : Question ! u a pour coordonnées 3, zéro, 1, et v a pour coordonnées 2, 1, moins 1. Que vaut le produit scalaire de u et v ? A : 5. B : 7. C : le vecteur de coordonnées 6, zéro, moins 1. Mets pause, et choisis !
+- **02b-reponse** : Réponse A, 5. 3 fois 2 fait 6. Zéro fois 1 fait zéro. Et 1 fois moins 1 fait moins 1. Six, plus zéro, moins un : 5. La réponse B oublie le signe moins. Et la réponse C n'est même pas du bon type : un produit scalaire est un nombre, pas un vecteur.
+- **03-commentaire** : À toi ! u a pour coordonnées 2, moins 1, 1 et v a pour coordonnées 3, 1, 5. Que vaut leur produit scalaire ? Réponds en commentaire !
+- **04-abonne** : Entraîne-toi sur éleveai point f r. Et abonne-toi !
+
+#### ✅ Passe MATHS du short de E7 — recalculée, pas relue
+
+| Clip | Ce que la voix affirme | Recalcul |
+|---|---|---|
+| `01` | u(1;2;3) · v(4;−1;2) = 8 | 4 − 2 + 6 |
+| `02` | bonne réponse 5 | 3×2 + 0×1 + 1×(−1) = 6 + 0 − 1 |
+| `02b` | leurre B = 7 | 6 + 0 + 1 : le signe moins oublié |
+| `02b` | leurre C = un vecteur | erreur de TYPE, nommée dans la réponse |
+| `03` | défi u(2;−1;1) · v(3;1;5) | 6 − 1 + 5 = 10 — ⛔ non dit, non affiché |
+
+⛔ **Exclusion deux à deux des trois propositions ?** 5, 7 et un vecteur — deux nombres distincts et un objet qui n'est même pas du bon type ✅.
+
 ---
 
 # E8 · `terminale-ps-espace-orthogonalite`
@@ -645,6 +676,30 @@ le bas**.
 `04` : « oui, 0 » / « non, −8 » / « non, pas proportionnelles » — une seule valeur juste, et le troisième motif est d'une autre nature ✅.
 `07` : « non » / « oui » / « oui si u non nul » — les deux dernières diffèrent par leur condition, aucune ne peut être vraie avec la première ✅.
 
+### Short — « orthogonal à une direction, et pourtant dedans »
+
+**Une seule idée**, celle de l'épisode : un seul produit scalaire nul ne prouve rien sur un PLAN.
+⛔ Un short ne RÉSUME pas son épisode — il en prend une idée et la rend en une minute.
+**Bonne réponse : C** (tirage des shorts, table en tête de fichier).
+
+- **00-accroche** : Un produit scalaire nul prouve que deux vecteurs sont orthogonaux. Mais face à un plan, un seul ne suffit pas.
+- **01-idee** : Marc plante un poteau et le vérifie au niveau dans un seul sens : c'est droit. Cela ne suffit pas, car un poteau peut être droit vu de face et penché vu de côté. Pour une droite et un plan, il faut deux directions, et deux vecteurs non colinéaires.
+- **02-question** : Question ! Au sol, la direction du nord est orthogonale à la direction de l'est. Le nord est-il pour autant orthogonal au sol ? A : oui, il est orthogonal à une direction du sol. B : on ne peut pas le savoir sans calcul. C : non, le nord est dans le sol. Mets pause, et choisis !
+- **02b-reponse** : Réponse C. Le nord est au sol, il n'est pas vertical, et il est pourtant orthogonal à l'est. Une seule direction ne suffit donc jamais, même bien choisie. Il faut deux vecteurs du plan, non colinéaires, et il faut écrire les deux produits scalaires.
+- **03-commentaire** : À toi ! Dans le cube A B C D E F G H, l'arête A B et l'arête C G sont orthogonales. Se coupent-elles ? Réponds en commentaire !
+- **04-abonne** : Entraîne-toi sur éleveai point f r. Et abonne-toi !
+
+#### ✅ Passe MATHS du short de E8 — recalculée, pas relue
+
+| Clip | Ce que la voix affirme | Recalcul |
+|---|---|---|
+| `01` | il faut DEUX vecteurs non colinéaires du plan | le théorème du chapitre, clip `03` du paysage |
+| `02` | nord ⊥ est | (0;1;0)·(1;0;0) = 0 + 0 + 0 = 0 |
+| `02b` | et pourtant le nord est DANS le sol | les deux vecteurs ont leur troisième coordonnée nulle : tous deux dans le plan z = 0 |
+| `03` | défi : (AB) et (CG) orthogonales et non sécantes | AB = (1;0;0), CG = (0;0;1) ⟹ produit 0 ; (AB) : y = z = 0 et (CG) : x = y = 1 n'ont aucun point commun — ⛔ réponse non dite |
+
+⛔ **Exclusion deux à deux des trois propositions ?** « oui » / « on ne peut pas savoir » / « non » — trois positions exclusives, et le contre-exemple du clip tranche ✅.
+
 ---
 
 # E9 · `terminale-ps-espace-norme-distance`
@@ -692,6 +747,31 @@ le bas**.
 ⛔ **Exclusion deux à deux des propositions ?**
 `04` : 3, 1 et 9 — trois nombres distincts, un seul juste ✅.
 `07` : 5, √5 ≈ 2,24 et 0 — trois valeurs distinctes ✅.
+
+### Short — « la racine ne se distribue pas »
+
+**Une seule idée**, celle de l'épisode : on n'additionne pas deux longueurs perpendiculaires, on passe par les carrés.
+⛔ Un short ne RÉSUME pas son épisode — il en prend une idée et la rend en une minute.
+**Bonne réponse : B** (tirage des shorts, table en tête de fichier).
+
+- **00-accroche** : Dix kilomètres à plat et un kilomètre de dénivelé. Onze kilomètres parcourus ? Non.
+- **01-idee** : On n'additionne pas une distance au sol et une hauteur : on passe par les carrés. Cent plus un fait cent un, et racine de cent un fait un peu plus de dix. Le dénivelé change presque tout à l'effort, et presque rien à la distance.
+- **02-question** : Question ! Que vaut racine de 3 au carré plus 4 au carré ? A : 7. B : 5. C : 25. Mets pause, et choisis !
+- **02b-reponse** : Réponse B, 5. Les carrés font 9 et 16, leur somme fait 25, et racine de 25 fait 5. La réponse A distribue la racine sur les deux termes, et c'est exactement ce qu'une racine ne fait jamais. Et 25, c'est la somme des carrés : on a oublié de prendre la racine.
+- **03-commentaire** : À toi ! u a pour coordonnées 2, 3, 6. Que vaut sa norme ? Réponds en commentaire !
+- **04-abonne** : Entraîne-toi sur éleveai point f r. Et abonne-toi !
+
+#### ✅ Passe MATHS du short de E9 — recalculée, pas relue
+
+| Clip | Ce que la voix affirme | Recalcul |
+|---|---|---|
+| `01` | 10 km à plat + 1 km de dénivelé ⟹ un peu plus de 10 km | √(10² + 1²) = √101 = 10,0498… — ✅ « pas onze » est exact |
+| `02` | bonne réponse 5 | 9 + 16 = 25, √25 = 5 |
+| `02b` | leurre A = 7 | 3 + 4 : la racine distribuée sur les deux termes |
+| `02b` | leurre C = 25 | la somme des carrés, racine oubliée |
+| `03` | défi u(2;3;6) | 4 + 9 + 36 = 49, √49 = 7 — ⛔ non dit, non affiché |
+
+⛔ **Exclusion deux à deux des trois propositions ?** 5, 7 et 25 — trois nombres distincts, et chacun nomme une faute précise ✅.
 
 ---
 
@@ -742,6 +822,33 @@ le bas**.
 `04` : obtus / aigu / droit — les trois natures d'angle s'excluent ✅.
 `07` : erreur de calcul / angle très petit / colinéaires — s'excluent, et seules les deux dernières supposent le résultat valide ✅.
 
+### Short — « la grande diagonale ne fait pas 45 degrés »
+
+**Une seule idée**, celle de l'épisode : le cosinus vient du produit scalaire divisé par le produit des normes — et le dessin, lui, trompe.
+⛔ Un short ne RÉSUME pas son épisode — il en prend une idée et la rend en une minute.
+**Bonne réponse : C** (tirage des shorts, table en tête de fichier).
+
+- **00-accroche** : La grande diagonale d'un cube et une arête : 45 degrés ? Beaucoup de copies l'écrivent, et c'est faux.
+- **01-idee** : Le cosinus de l'angle, c'est le produit scalaire divisé par le produit des deux normes. Dans le cube d'arête 1, le vecteur A G a pour coordonnées 1, 1, 1 et le vecteur A B a pour coordonnées 1, zéro, zéro. Leur produit scalaire vaut 1. Les normes valent racine de 3 et 1. Le cosinus vaut donc 1 sur racine de 3, environ zéro virgule 577.
+- **02-question** : Question ! Que vaut alors l'angle entre la grande diagonale et l'arête, arrondi au degré ? A : 45 degrés. B : 60 degrés. C : 55 degrés. Mets pause, et choisis !
+- **02b-reponse** : Réponse C. L'arccosinus de zéro virgule 577 donne environ 54 virgule 7 degrés, donc 55 degrés arrondi au degré. 45 degrés correspondrait à un cosinus de zéro virgule 71, et 60 degrés à un cosinus de zéro virgule 5 : ni l'un ni l'autre n'est la valeur trouvée. Le dessin trompe, le calcul tranche.
+- **03-commentaire** : À toi ! Le produit scalaire de deux vecteurs non nuls vaut moins 6. Leur angle est-il aigu, droit ou obtus ? Réponds en commentaire !
+- **04-abonne** : Entraîne-toi sur éleveai point f r. Et abonne-toi !
+
+#### ✅ Passe MATHS du short de E10 — recalculée, pas relue
+
+| Clip | Ce que la voix affirme | Recalcul |
+|---|---|---|
+| `01` | AG · AB = 1 | (1;1;1)·(1;0;0) = 1 + 0 + 0 |
+| `01` | ‖AG‖ = √3 et ‖AB‖ = 1 | √(1+1+1) et √(1+0+0) |
+| `01` | cos ≈ 0,577 | 1 / 1,73205 = 0,57735 |
+| `02b` | bonne réponse ≈ 54,7°, donc 55° | arccos(0,57735) = 54,7356° |
+| `02b` | leurre A : 45° ⟹ cos 0,71 | cos 45° = 0,70711 ≠ 0,577 |
+| `02b` | leurre B : 60° ⟹ cos 0,5 | cos 60° = 0,5 ≠ 0,577 |
+| `03` | défi : u · v = −6 ⟹ obtus | ‖u‖‖v‖ > 0 donc cos < 0 donc θ entre 90° et 180° — ⛔ non dit, non affiché |
+
+⛔ **Exclusion deux à deux des trois propositions ?** 45, 55 et 60 degrés — trois valeurs distinctes, et une seule est compatible avec le cosinus calculé juste avant à l'écran ✅.
+
 ---
 
 # E11 · `terminale-ps-espace-plan-normal`
@@ -791,6 +898,32 @@ le bas**.
 `04` : trois triplets, aucun colinéaire à un autre, un seul est la normale ✅.
 `07` : strictement parallèles / confondus / sécants — trois positions exclusives ✅.
 
+### Short — « la normale est déjà écrite dans l'équation »
+
+**Une seule idée**, celle de l'épisode : les trois coefficients de l'équation SONT les coordonnées d'un vecteur normal.
+⛔ Un short ne RÉSUME pas son épisode — il en prend une idée et la rend en une minute.
+**Bonne réponse : B** (tirage des shorts, table en tête de fichier).
+
+- **00-accroche** : Tu as l'équation d'un plan ? Alors tu as déjà son vecteur normal sous les yeux, sans aucun calcul.
+- **01-idee** : Les coefficients de x, de y et de z sont les coordonnées d'un vecteur normal, avec leurs signes. Le plan d'équation 2 x moins y plus 3 z moins 5 égale zéro a donc pour vecteur normal 2, moins 1, 3. Le terme constant, lui, n'en fait pas partie : il dit seulement où le plan se place, pas comment il est orienté.
+- **02-question** : Question ! Quel est un vecteur normal au plan d'équation 3 x moins y plus 2 z plus 4 égale zéro ? A : 3, 1, 2. B : 3, moins 1, 2. C : zéro, zéro, 4. Mets pause, et choisis !
+- **02b-reponse** : Réponse B. On lit les trois coefficients avec leurs signes : 3, moins 1 et 2. La réponse A a perdu le signe moins, et ce n'est pas un détail : elle décrit une tout autre direction. Et la réponse C a pris le terme constant, qui ne dit rien de l'orientation du plan : deux plans parallèles ont la même normale et des termes constants différents.
+- **03-commentaire** : À toi ! Quel est un vecteur normal au plan d'équation x moins 4 y plus z moins 9 égale zéro ? Réponds en commentaire !
+- **04-abonne** : Entraîne-toi sur éleveai point f r. Et abonne-toi !
+
+#### ✅ Passe MATHS du short de E11 — recalculée, pas relue
+
+| Clip | Ce que la voix affirme | Recalcul |
+|---|---|---|
+| `01` | 2x − y + 3z − 5 = 0 ⟹ n(2;−1;3) | lecture des coefficients de x, y, z |
+| `02` | bonne réponse (3;−1;2) | coefficients de 3x − y + 2z + 4 = 0, avec leurs signes |
+| `02b` | leurre A = (3;1;2) | signe perdu ; colinéaire à (3;−1;2) ? k = 1 sur x, puis 1 ≠ −1 : non |
+| `02b` | leurre C = (0;0;4) | le terme constant ; colinéaire à (3;−1;2) ? première coordonnée 0 ≠ 3 : non |
+| `02b` | « deux plans parallèles ont la même normale » | ils ne diffèrent que par d |
+| `03` | défi x − 4y + z − 9 = 0 | n = (1;−4;1) — ⛔ non dit, non affiché |
+
+⛔ **Exclusion deux à deux des trois propositions ?** Trois triplets, aucun colinéaire à un autre (vérifié ci-dessus), et un seul est la normale ✅.
+
 ---
 
 # E12 · `terminale-ps-espace-defi`
@@ -838,6 +971,33 @@ le bas**.
 ⛔ **Exclusion deux à deux des propositions ?**
 `04` : les deux produits + non-colinéarité / un seul produit / colinéaire à BD — exclusives, et la dernière est l'opposé du but ✅.
 `07` : équilatéral / rectangle en B / quelconque — exclusives : équilatéral exclut rectangle (60° ≠ 90°) et exclut quelconque ✅.
+
+### Short — « le plan B D E coupe la diagonale à son premier tiers »
+
+**Une seule idée**, celle de l'épisode : on atteint un projeté orthogonal en suivant la normale, et le résultat est une surprise géométrique.
+⛔ Un short ne RÉSUME pas son épisode — il en prend une idée et la rend en une minute.
+**Bonne réponse : A** (tirage des shorts, table en tête de fichier).
+
+- **00-accroche** : Dans le cube, le plan B D E coupe la grande diagonale. En son milieu ? Non.
+- **01-idee** : Le plan B D E a pour équation x plus y plus z moins 1 égale zéro, donc pour vecteur normal 1, 1, 1. La droite qui part de A et suit cette normale a pour représentation paramétrique x égale t, y égale t, z égale t. On remplace dans l'équation : trois t moins 1 égale zéro, donc t vaut un tiers. Le projeté de A a pour coordonnées un tiers, un tiers, un tiers.
+- **02-question** : Question ! Ce point est donc situé où, sur la grande diagonale A G ? A : à son premier tiers depuis A. B : en son milieu. C : à ses deux tiers depuis A. Mets pause, et choisis !
+- **02b-reponse** : Réponse A. Le vecteur A G a pour coordonnées 1, 1, 1, et le projeté a pour coordonnées un tiers, un tiers, un tiers : c'est exactement un tiers du vecteur A G. Le milieu, ce serait un demi partout, et les deux tiers, deux tiers partout — et ni l'un ni l'autre ne vérifie l'équation du plan. Le plan coupe bien la diagonale à son premier tiers.
+- **03-commentaire** : À toi ! Quelle est alors la distance du point A au plan B D E ? Réponds en commentaire !
+- **04-abonne** : Entraîne-toi sur éleveai point f r. Et abonne-toi !
+
+#### ✅ Passe MATHS du short de E12 — recalculée, pas relue
+
+| Clip | Ce que la voix affirme | Recalcul |
+|---|---|---|
+| `01` | (BDE) : x + y + z − 1 = 0, normale (1;1;1) | coefficients ; et B(1;0;0) donne 1 + d = 0, d = −1 |
+| `01` | substitution ⟹ 3t − 1 = 0, t = 1/3 | t + t + t − 1 = 0 |
+| `01` | K = (1/3 ; 1/3 ; 1/3) | t = 1/3 reporté sur x = y = z = t |
+| `02b` | K est au tiers de AG | AK = (1/3 ; 1/3 ; 1/3) = (1/3)·(1;1;1) = (1/3)·AG |
+| `02b` | leurre B, le milieu | (1/2 ; 1/2 ; 1/2) : 3 × 1/2 − 1 = 1/2 ≠ 0, le point n'est PAS dans le plan |
+| `02b` | leurre C, les deux tiers | (2/3 ; 2/3 ; 2/3) : 3 × 2/3 − 1 = 1 ≠ 0, le point n'est PAS dans le plan |
+| `03` | défi : distance de A au plan | ‖AK‖ = √(3 × 1/9) = √(1/3) = √3/3 ≈ 0,577 — ⛔ non dit, non affiché |
+
+⛔ **Exclusion deux à deux des trois propositions ?** Le tiers, le milieu, les deux tiers — trois points distincts de la diagonale, et les deux leurres sont réfutés par l'équation elle-même ✅.
 
 ---
 
