@@ -107925,7 +107925,8 @@
           "reponse": 2,
           "explication": "2 égale 2 fois 1, 4 égale 2 fois 2, et 6 égale 2 fois 3. Le même facteur 2 pour les trois coordonnées : le vecteur v égale 2 fois le vecteur u."
         }
-      ]
+      ],
+      "url": "https://youtu.be/HSWJPC9hEnU"
     },
     {
       "id": "terminale-espace-repere-coordonnees",
@@ -108032,7 +108033,8 @@
           "reponse": 0,
           "explication": "Pour aller de A à G, on fait un pas dans chacune des trois directions : un vers B, un vers D, un vers le haut. Le triplet 1, 1, 0, c'est le sommet C, resté au sol."
         }
-      ]
+      ],
+      "url": "https://youtu.be/E3Lhg5Nx5Hw"
     },
     {
       "id": "terminale-espace-droite-parametrique",
@@ -108138,7 +108140,8 @@
           "reponse": 0,
           "explication": "La première ligne donne 1 plus 2 t égale 7, donc t vaut 3. La deuxième suit : 2 moins 3 fait bien moins 1. Mais la troisième donne 3 fois 3, c'est-à-dire 9, et on nous propose 10."
         }
-      ]
+      ],
+      "url": "https://youtu.be/DfvqKivFpLw"
     },
     {
       "id": "terminale-espace-plan-equation",
@@ -108244,7 +108247,8 @@
           "reponse": 1,
           "explication": "Réécrivons l'équation sous sa forme complète : zéro fois x, plus 1 fois y, plus zéro fois z, moins 1, égale zéro. C'est bien une équation de plan, avec les coefficients zéro, 1 et zéro, qui ne sont pas tous nuls."
         }
-      ]
+      ],
+      "url": "https://youtu.be/_oGj9PSrqzI"
     },
     {
       "id": "terminale-espace-position-relative",
@@ -108351,7 +108355,8 @@
           "reponse": 2,
           "explication": "Parallèles, cela voudrait dire des vecteurs directeurs colinéaires, et l'énoncé dit exactement le contraire. Quant à impossible, c'est tout l'inverse : c'est la route et le pont, le cas le plus courant dans l'espace."
         }
-      ]
+      ],
+      "url": "https://youtu.be/fPcUu7aTfQc"
     },
     {
       "id": "terminale-espace-defi",
