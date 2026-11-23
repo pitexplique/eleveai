@@ -51,7 +51,8 @@
 | E10 `ps_espace_angle` | ✅ **HD livré** (6 min 35, 0 bord, planche HD regardée) — ⭐⭐ aucune figure d'angle en cavalière |
 | ⭐⭐ **le cube** | **RE-RENDU des 5 épisodes livrés qui le dessinent** (E2, E6, E7, E8, E9) : il lui manquait l'arête [E H] |
 | ✅ **la notation vectorielle** | **faite sur les 9 scripts** : `auditer-fleches-vecteurs.py` → 0 nu (voir « LA PASSE DES FLÈCHES ») |
-| les 2 autres scripts | ⏳ **E11 et E12, à écrire — ils ne dépendent plus de rien** |
+| E12 `ps_espace_defi` | ✅ **script écrit, mesure ✅, dry run `-qh` 0 bord / 0 avance / 0 retard, planches `-ql` faites** — ⏳ **PAS DE HD** : Frédéric regarde les planches d'abord |
+| les scripts restants | ⏳ **E11 seul** (E12 est écrit) |
 | les 12 shorts | ⏳ pas de voix encore |
 | les 10 entrées de registre | ✅ **écrites le 23/11** dans `manim/manifeste-youtube.json` (1 717 vidéos), chacune avec ses 14 chapitres et ses 2 questions-pauses, par `manim/poste2/fiches-espace-vers-registre.py` |
 | les 12 miniatures | ⛔ **0 sur 12** — c'est ce qui bloque la publication, et donc le coach |
@@ -1607,6 +1608,183 @@ touche une.**
   et dans la même sortie il a trouvé les deux vrais défauts.
 - **Les durées AVANT/APRÈS comme témoin d'un re-rendu** : identiques à la centiseconde
   sur les cinq, c'est ce qui prouve qu'une correction de figure n'a rien déplacé d'autre.
+
+---
+
+## ⛔⛔ Ce que l'épisode 12 a appris — le DERNIER script de la série (23/11/2026)
+
+Dix-sept cotes fausses trouvées par la mesure, cinq signalements par le dry run, **cinq
+défauts d'IMAGE que rien d'autre n'a vus**, et un TROU D'INSTRUMENT. ⭐ Mais le plus cher
+n'est aucun de ceux-là : c'est qu'une figure peut être géométriquement JUSTE et dire le
+CONTRAIRE de la voix. Trois fois dans cet épisode, sous trois formes différentes.
+
+### ⛔⛔⛔ LE TRIANGLE (BDE) AURAIT DESSINÉ LA MAUVAISE RÉPONSE
+
+La question-pause n° 2 demande la nature du triangle B D E, et la réponse est
+**équilatéral**. Mesuré avant d'écrire l'écran :
+
+| ce que la cavalière fait du triangle B D E | valeur |
+|---|---|
+| ses trois côtés, tous égaux à √2, projetés | **0,656 · 1,414 · 0,822** (rapport 1 à 2,2) |
+| l'angle en B, qui vaut 60° | **19,1°** à l'écran |
+| l'aire projetée / l'aire réelle | **17,5 %** (c'est le chiffre de E8) |
+| `platitude((1 ; 1 ; 1))` | **9,02°** — sous le seuil de 12°, donc une LAME |
+
+⛔ Dessiné dans le cube, ce triangle montre trois côtés visiblement inégaux et un angle
+aigu très fermé : un élève qui le regarde répond « quelconque ». **La figure n'aurait pas
+été imprécise, elle aurait enseigné la mauvaise réponse.** ⭐ L'écran 07 ne montre donc
+que les trois POINTS en ambre (c'est la donnée : « on considère les points B, D et E »),
+et la forme arrive en 07b par une figure PLANE dont l'équilatéralité est vérifiée par une
+assertion du module — c'est la règle de `plan_dessine` (E8) et des `coin()` (E10),
+appliquée ici à la RÉPONSE d'une question et non plus à un décor.
+
+### ⛔⛔ UNE FIGURE JUSTE QUI MENT, DEUXIÈME FORME : LA COULEUR
+
+Le triangle plan a d'abord été dessiné avec un côté par couleur de la charte — bleu, rose,
+ambre. **Vu sur la planche des figures seules**, en grand : on lit trois objets DIFFÉRENTS,
+sur l'écran dont toute la leçon est que les trois côtés sont ÉGAUX. ⛔ Aucune mesure ne
+peut voir ça : la figure est dans la marge, ses longueurs sont exactes, son angle est
+vérifié par une assertion. ⭐ Trois côtés égaux, une seule couleur ; c'est l'ARC qui est
+vert, parce que lui dit autre chose.
+
+### ⛔⛔ UNE FIGURE JUSTE QUI MENT, TROISIÈME FORME : LE MÊME VECTEUR EN DEUX COULEURS
+
+Vu au gros plan ×2,6 : l'écran 05 peignait en AMBRE les trois points B, D, E **et** la
+flèche A⃗G — c'est-à-dire les deux objets de la phrase « A⃗G est normal au PLAN (BDE) », de
+la même couleur. ⭐ Dans toute la série, C_NORMALE (vert) est la couleur d'un vecteur
+normal. A⃗G est donc VERT à l'écran 05 et AMBRE à l'écran 09b, et ce n'est pas une
+incohérence : en 09b ce n'est plus un vecteur, c'est le SEGMENT [A G], la grande diagonale
+— « ce que la question regarde ». ⚠️ Une couleur par RÔLE, pas par objet.
+
+### ⛔⛔ LE TROU D'INSTRUMENT : AUCUN CONTRÔLE NE CONNAÎT UN POINT
+
+Le point K de la correction est AU TIERS de la grande diagonale, donc à 0,36 du nom « D »
+du cube. Au gros plan ×2,6, **la lettre ambre et le POINT VERT se lisaient comme un seul
+objet**. Or :
+
+- `etiquettes()` (E8) compare des étiquettes **entre elles** ;
+- `loin_des_fleches()` (E9) compare une étiquette à un **SEGMENT** ;
+- **ni l'un ni l'autre ne connaît un POINT.**
+
+⭐ Le remède coûte une ligne : un point se passe à `loin_des_fleches` comme un **segment
+de longueur nulle**, et le contrôle existant fait le reste. ⚠️ À recopier : les épisodes
+de cette série dessinent des `Dot` (milieux, projetés, intersections) sur presque tous
+leurs cubes.
+
+### ⛔⛔ QUAND LA GRILLE NE TROUVE RIEN, ON N'ÉTIQUETTE PAS — et on le MESURE
+
+K ne porte pas de nom sur la figure, et ce n'est pas un renoncement : c'est une recherche
+en grille (pas de 0,04 entre −0,9 et +0,9, à plus de 0,11 de tout segment tracé et à plus
+de 0,22 des huit noms de sommet). Elle rend **110 positions libres**, et **la plus proche
+est à 0,82 du point** — plus d'une demi-arête, au milieu du cube, plus près d'autre chose
+que de K. Une étiquette qui n'appartient plus visiblement à son point ne nomme rien.
+⭐ C'est le remède de l'écran 09b de E8 : le point est VERT, le bloc
+« K (1/3 ; 1/3 ; 1/3) » de la colonne est encadré en VERT, et c'est la couleur qui relie.
+
+### ⚠️⚠️ UNE COTE D'ÉCART EST RELATIVE À SON `u`, ET LE CUBE PAR DÉFAUT EST DÉJÀ SERRÉ
+
+Deux constats comptés, et le second concerne les épisodes DÉJÀ LIVRÉS :
+
+1. **Le même écart ne vaut pas à deux échelles.** `{"D": (−0,26 ; +0,30)}` laisse 0,13 à
+   u = 1,30 et remet « D » à **0,07 de l'arête [A E]** à u = 1,18 : entre [A E] et [D H]
+   il ne reste que 0,48 de largeur pour un nom qui en fait 0,27. ⭐ D'où **un seul `u`
+   pour les trois écrans de cet épisode qui dessinent le cube**, et une seule cote
+   (`U_CUBE`, `ECARTE_CUBE`, constantes du module, importées par la mesure — la leçon de
+   la cote de Ravi, E10).
+2. ⚠️ **Au décalage PAR DÉFAUT de `cube()`, le nom « D » est à moins de 0,08 de l'arête
+   [A D] et « F » à moins de 0,08 de [F G]** — mesuré à u = 1,35, sans aucune diagonale
+   tracée. Ce n'est donc pas la diagonale qui crée le défaut de E9, elle l'aggrave. ⛔ Les
+   cubes de E2, E6, E7, E8 et E9 sont livrés en HD avec ce décalage : **constat, pas
+   correctif** — il se décide avec Frédéric, devant l'image.
+
+### ⛔⛔ DES CHOIX MOT POUR MOT À 18 PIXELS — et la mesure du nombre de caractères
+
+Premier jet de l'écran 04, les trois choix écrits mot pour mot comme la voix (« que n est
+orthogonal à B D et à B E, et que ces deux vecteurs ne sont pas colinéaires ») : polices
+obtenues **23,2 / 18,0 / 23,9 px** pour 26 demandées. ⭐ La cote qui manquait à la série
+est maintenant comptée : **une carte de 6,2 n'offre que 5,05 à son texte, soit 23
+caractères à 26 px** (0,218 d'unité par caractère). Le choix B en fait 86, donc QUATRE
+lignes — et à quatre lignes le bloc de cartes descend à −2,6, c'est-à-dire DANS la boîte
+de Ti-Margo. ⛔ Il n'y avait pas de réglage : il fallait écrire les trois choix en
+SYMBOLES (« n⃗ ⊥ B⃗D »), ce que l'écran fait déjà dans sa donnée.
+⚠️ C'est la seule fois de la série où « on ne raccourcit pas, la voix le dit » a dû
+céder — et la décision est écrite dans le script, à l'endroit où elle a été prise.
+
+### ⛔ LE PIÈGE DE `vexpr` : L'APOSTROPHE N'EST PAS UNE LETTRE
+
+`EcransEspace.vexpr` teste l'isolement d'un nom avec `avant.isalpha() or apres.isalpha()`.
+L'apostrophe n'étant pas une lettre, **passer `("n",)` sur un texte qui contient « n'est »,
+« n'a » ou « n'existe » dessine une flèche de vecteur sur ce « n »-là**. ⛔ Et personne ne
+le dit : `auditer-fleches-vecteurs.py`, lui, EXCLUT l'apostrophe par son regex (c'était son
+correctif de E7), donc il se tait. Seule l'image le montrerait.
+⭐ Règle tenue dans cet épisode : aucun texte passé avec `("n",)` ne contient « n' ».
+⚠️ Le correctif appartient au socle, et il n'a pas été fait — à décider avec le chef.
+
+### ⛔ LE PLAFOND DE 10,60 A MORDU QUATRE FOIS, DONT LA FINALE DE 22,6 %
+
+`plafonne()` (correction d'outil de E7) a payé quatre fois sur le seul épisode 12 :
+
+| l'écran | largeur naturelle | réduction silencieuse |
+|---|---|---|
+| 01, les trois étapes du chemin | 10,97 | 3,4 % |
+| 03, la boîte à outils (CINQ objets) | 11,17 | 5,1 % |
+| 06, les cinq pièges | > 10,60 | — |
+| **10, la FINALE** | **13,69** | **22,6 %** |
+
+⭐ C'est la pire amplitude de la série (E7 était à 27 % sur sa finale, mais sur un seul
+écran). ⚠️ Et la cause est structurelle : cet épisode est une SYNTHÈSE, donc ses écrans
+sont des listes — cinq outils, cinq pièges, quatre lignes de copie, quatre rangées de
+finale. **Les pastilles ne rétrécissent pas avec la police** (rayon fixe) : à cinq rangs
+elles pèsent 2,40 à elles seules, et c'est toujours la POLICE du texte qui cède.
+
+### ⛔ LE SOCLE N'A PAS DE FRACTION, ET JE N'AI PAS LE DROIT D'EN AJOUTER UNE
+
+`frac()` vit dans `ps_espace_angle.py` (E10), pas dans le socle. Cet épisode écrit
+« un tiers » et « un neuvième ». ⭐ Décision, écrite dans le script : **barre oblique**
+(« 1/3 », « 3 × 1/9 = 1/3 », « √3 / 3 »), parce que le piège de E10 était
+« cos θ = u⃗ · v⃗ / ‖u⃗‖ × ‖v⃗‖ », où le dénominateur est un PRODUIT — il n'y a aucune
+ambiguïté à lever sur une fraction dont les deux étages sont d'un seul terme.
+⛔ Recopier `frac` dans l'épisode aurait fait **deux copies d'une seule vérité**, et c'est
+exactement ce que la cote de Ravi a coûté à E10. ⏳ **Le vrai remède est dans le socle, et
+il reste à faire** : `frac()` et `tiers()` y ont leur place, comme `racine()` y est entrée
+à l'épisode 9.
+
+### ⭐ CE QUI A BIEN MARCHÉ, ET QU'IL FAUT REFAIRE
+
+- **Les assertions d'import ont trouvé une figure fausse AVANT le premier rendu** :
+  « la normale du schéma 02 n'est pas orthogonale à v ». Elle avait raison, et le remède
+  n'était pas une cote : sur un plan dessiné en perspective, **aucune direction de la page
+  n'est perpendiculaire aux DEUX côtés du parallélogramme**. La normale verticale fait
+  90,0° avec le côté horizontal et **46,6°** avec le côté de fuite — un « carré » de 46,6°
+  se lit comme un dessin bâclé, pas comme une convention. ⭐ Donc **un seul carré d'angle
+  droit**, là où l'angle de la page est vraiment droit ; l'autre orthogonalité est portée
+  par le « n⃗ · v⃗ = 0 » qui paraît au même instant. Dans une figure dont tout l'argument est
+  « à plat, donc rien n'y ment », un demi-mensonge est pire que pas de carré du tout.
+- **Le contrôle point-dans-polygone de E8 au niveau du MODULE, pas du script de mesure** :
+  les deux pointes des vecteurs du plan DANS le polygone, celle de la normale DEHORS. Au
+  premier jet, v⃗ sortait du plan par le bord haut de **0,02** — le défaut n° 3 de E8, et
+  une figure fausse doit casser à l'import, pas à la planche.
+- **La planche des FIGURES SEULES avant le premier rendu**, quatrième épisode de suite
+  qu'elle paie : elle a attrapé les trois couleurs du triangle.
+- **Étalonner `verifier-avant-rendu.py` avant de croire son zéro** : une copie du script
+  avec UN `au_mot` faux, dans le répertoire temporaire. Il a crié ; sur le vrai, il se
+  tait, et ce silence-là est une preuve.
+- **Compter avec `grep -o`, jamais avec `^`** : la sortie du dry run est écrite sur les
+  mêmes lignes que les barres de progression de `tqdm`.
+
+### ⚠️ LES TROIS `AUDIT-TARD` QUI RESTENT SONT STRUCTURELS — relus à la main
+
+| signalement | la vraie mesure |
+|---|---|
+| `05 « 1 » (1) **0,92 s**` | le « 1 » de B (1 ; 0 ; 0), posé par `au_fin("de coordonnées 1, zéro, zéro")` : il paraît quand le TRIPLET est fini, donc 0,92 s après son propre mot |
+| `05 « 1 » (x + y + z − 1 =) **0,56 s**` | idem, `au_fin("x plus y plus z moins 1 égale zéro")` |
+| `09 « 1 » (x + y + z − 1 =) **0,54 s**` | idem, la même équation à l'écran du défi |
+
+⭐ Les trois sont le PRIX de `au_fin` : il évite l'avance sur le dernier nombre d'une ligne
+au prix d'un retard sur le premier. Aucun ne cache une avance (vérifié occurrence par
+occurrence, le contrôle qui a payé sur E5, E6, E9 et E10).
+✅ **Le dry run `-qh` : 0 BORD, 0 AUDIT-AVANCE, 0 RETARD, 1 AUDIT-ABSENT** — celui de
+`@eleveai974`, que les onze épisodes publiés portent aussi.
 
 ---
 
