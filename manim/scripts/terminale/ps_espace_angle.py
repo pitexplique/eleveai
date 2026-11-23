@@ -94,6 +94,14 @@ PS04 = -6                             # 04 : la question-pause n° 1 → obtus (
 U05, V05 = (1, 1, 0), (0, 1, 1)       # 05 : cos = 1/2 → 60°
 COS07 = 1.25                          # 07 : la question-pause n° 2 → erreur (réponse B)
 INCL01 = 30                           # 01 : le panneau incliné de trente degrés
+# ⛔⛔ LA PLACE DE RAVI EST ÉCRITE UNE SEULE FOIS, ET LA MESURE L'IMPORTE.
+# Elle était recopiée dans `mesure-ps-espace-angle.py` : corrigée d'un côté
+# (0,35 → 0,85, pour que « Saint-Pierre » cesse de tomber sur le cadre de
+# conclusion) et pas de l'autre, l'instrument a mesuré pendant un tour un écran
+# QUI N'EXISTAIT PAS, et il a crié sur un défaut déjà corrigé. C'est la même
+# forme que « la fiche et le registre ont divergé » du même jour : deux copies
+# d'une seule vérité divergent dès qu'on en touche une.
+POS_RAVI, ECH_RAVI = (-5.72, 0.85), 0.66
 # ⭐ Le cube de 9 épisodes sur 12, dans le repère (A ; AB, AD, AE).
 S = {"A": (0, 0, 0), "B": (1, 0, 0), "C": (1, 1, 0), "D": (0, 1, 0),
      "E": (0, 0, 1), "F": (1, 0, 1), "G": (1, 1, 1), "H": (0, 1, 1)}
@@ -520,7 +528,7 @@ class PsEspaceAngleBase(EcransEspace):
         # qui ne connaît qu'une partie de l'écran DÉPLACE le défaut.
         # ⚠️ Et la place est en HAUT : Ravi monte à 1,33 pour une marge à 3,573, et la
         # colonne du panneau commence à x = −4,13, donc il ne la rencontre jamais.
-        c = ravi(0.66).move_to(P(-5.72, 0.85))
+        c = ravi(ECH_RAVI).move_to(P(*POS_RAVI))
         self.au_mot("Voici Ravi")
         nom = self.t("Ravi", 28, JAUNE_TITRE).next_to(c, DOWN, buff=0.22)
         # ⛔ Le garde-fou AVANT le play, et pas après (défaut n° 7 de l'épisode 1, refait

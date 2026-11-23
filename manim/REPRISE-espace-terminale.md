@@ -48,10 +48,12 @@
 | E7 `ps_espace_calculer` | ✅ **HD livré** (6 min 33, 0 bord, planche HD regardée) — ⭐ le premier AVEC les flèches |
 | E8 `ps_espace_orthogonalite` | ✅ **HD livré** (7 min 00, 0 bord, planche HD regardée) — ⭐ deux plans qui se projetteraient sur une LAME |
 | E9 `ps_espace_norme_distance` | ✅ **HD livré** (6 min 08, 0 bord, planche HD regardée) — ⭐ le glyphe √ n'a PAS de barre |
+| E10 `ps_espace_angle` | ✅ **HD livré** (6 min 35, 0 bord, planche HD regardée) — ⭐⭐ aucune figure d'angle en cavalière |
+| ⭐⭐ **le cube** | **RE-RENDU des 5 épisodes livrés qui le dessinent** (E2, E6, E7, E8, E9) : il lui manquait l'arête [E H] |
 | ✅ **la notation vectorielle** | **faite sur les 9 scripts** : `auditer-fleches-vecteurs.py` → 0 nu (voir « LA PASSE DES FLÈCHES ») |
-| les 3 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
+| les 2 autres scripts | ⏳ **E11 et E12, à écrire — ils ne dépendent plus de rien** |
 | les 12 shorts | ⏳ pas de voix encore |
-| les 9 entrées de registre | ✅ **écrites le 23/11** dans `manim/manifeste-youtube.json` (1 716 vidéos), chacune avec ses 14 chapitres et ses 2 questions-pauses |
+| les 10 entrées de registre | ✅ **écrites le 23/11** dans `manim/manifeste-youtube.json` (1 717 vidéos), chacune avec ses 14 chapitres et ses 2 questions-pauses, par `manim/poste2/fiches-espace-vers-registre.py` |
 | les 12 miniatures | ⛔ **0 sur 12** — c'est ce qui bloque la publication, et donc le coach |
 | les rendus HD, le branchement coach, les fiches YouTube | ⏳ |
 
@@ -74,8 +76,10 @@ ls manim/sorties/terminale/maths/geometrie/*/*.mp4   # les HD livrés
 python manim/poste2/verifier-voix-espace.py          # 12 voix, 15 clips, lettres A 8 B 8 C 8
 ```
 
-**Le prochain geste** : écrire `ps_espace_angle.py` (E10, Ravi et les panneaux solaires
-de Saint-Pierre, centre `nature-ecologie`), puis E11 et E12. ⭐ Le modèle est maintenant
+**Le prochain geste** : écrire `ps_espace_plan_normal.py` (E11), puis `ps_espace_defi.py`
+(E12). ⭐ Le modèle est maintenant **`ps_espace_angle.py` (E10)** et sa mesure
+`manim/poste2/mesure-ps-espace-angle.py`, qui porte la chaîne complète de `dessous()`
+sur toute une colonne — le contrôle qui manquait à tous les précédents. ⭐ Le modèle est maintenant
 **`ps_espace_norme_distance.py` (E9)**, et sa mesure
 `manim/poste2/mesure-ps-espace-norme-distance.py` porte TROIS contrôles que les
 précédentes n'avaient pas : les **étiquettes comparées deux à deux** (E8), la **pointe
@@ -85,8 +89,10 @@ trouvé deux noms de sommet barrés par la grande diagonale du cube.
 ⭐⭐ **E10 écrit « 1 sur racine de 3 » et « racine de 2 » : il emploie
 `EcransEspace.racine()`, neuf dans le socle, et n'en réécrit pas une.** Le glyphe √ se
 rend mais **il n'a aucune barre** — détail dans « Ce que l'épisode 9 a appris ».
-⚠️ `ps_espace_angle` garde **2 cues non placées** (« 577 ») : c'est maintenant qu'il faut
-les regarder.
+✅ Les 2 cues « 577 » de `ps_espace_angle` sont RÉGLÉES (23/11) : ce n'était pas
+un défaut. « 577 » n'apparaît qu'une fois dans le texte, WinRT en a émis trois, et le
+convertisseur garde la bonne en sautant les deux autres sans avancer. Détail et
+conséquence pour E11/E12 : « Ce que l'épisode 10 a appris ».
 ✅ **La reprise des flèches est FAITE** (22/11) : E1, E2, E3 et E6 portent la notation
 vectorielle et sont re-rendus en HD. `python -X utf8 manim/poste2/auditer-fleches-vecteurs.py`
 doit rester à **0 NU sur tous les scripts** — c'est le contrôle à relancer après chaque
@@ -114,8 +120,11 @@ qu'aucun outil ne voit. ⭐ Celle de E6 est la plus utile, parce que **deux de s
 sont dans les OUTILS** et touchent donc les six épisodes qui restent : le convertisseur de
 marques perdait les décimales répétées, et `col()` rapetisse un bloc pour une raison qui
 n'a rien à voir avec sa largeur.
-⚠️ `ps_espace_angle` (E10) garde **2 cues non placées** : les regarder au moment d'écrire
-cet épisode-là. Les 13 de `espace_defi` sont résolues, à la source (voir plus bas).
+✅ Les 2 cues « 577 » de `ps_espace_angle` sont RÉGLÉES (23/11) : ce n'était pas
+un défaut. « 577 » n'apparaît qu'une fois dans le texte, WinRT en a émis trois, et le
+convertisseur garde la bonne en sautant les deux autres sans avancer. Détail et
+conséquence pour E11/E12 : « Ce que l'épisode 10 a appris ».
+✅ Les 13 de `espace_defi` l'étaient déjà, à la source.
 
 **L'ordre pour chaque épisode, sans en sauter un :**
 
@@ -140,8 +149,8 @@ cet épisode-là. Les 13 de `espace_defi` sont résolues, à la source (voir plu
 - le **branchement au coach** vient APRÈS la publication — mesuré :
   `brancher-videos-coach.mjs --classe terminale-spe` répond « Rien à brancher » tant que
   la vidéo n'est pas en ligne ;
-- `ps_espace_angle` garde **2** cues non placées (« 577 », dans le clip de correction) :
-  à regarder au moment d'écrire E10. ✅ Les **13** de `espace_defi` ne sont plus un
+- ✅ les 2 cues « 577 » de `ps_espace_angle` sont réglées : ce n'était pas un défaut
+  (voir « Ce que l'épisode 10 a appris »). ✅ Les **13** de `espace_defi` ne sont plus un
   problème : elles venaient d'un défaut du convertisseur, corrigé le 22/11 (voir « Ce que
   l'épisode 6 a appris »).
 
@@ -1317,6 +1326,165 @@ le `play` précédent cale la ligne tout seul.
 
 ---
 
+## ⛔⛔ Ce que l'épisode 10 a appris — à lire AVANT d'écrire l'épisode 11
+
+Quinze défauts. **Un seul a été vu par Frédéric, à l'œil, et il valait les quatorze
+autres.** Six n'ont été vus qu'au GROS PLAN, trois par `verifier-avant-rendu.py`, deux
+par la mesure, deux étaient des TROUS D'INSTRUMENT, et un était une collision entre deux
+sessions. ⭐ Et **deux des corrections ont DÉPLACÉ le défaut au lieu de le supprimer** :
+c'est le sujet principal de cet épisode.
+
+### ⛔⛔⛔ LE CUBE N'AVAIT QUE ONZE ARÊTES SUR DOUZE — depuis le premier épisode
+
+Frédéric, devant une planche de figures : « vérifie le segment EH ». Mesuré :
+`Repere3D.cube()` traçait `AB BC CD AD AE BF CG DH EF FG GH` — **onze**. Le haut du cube
+était **OUVERT entre E et H**, dans la figure que NEUF épisodes sur douze emploient.
+
+⛔⛔ **AUCUN instrument du dépôt ne pouvait le dire, et c'est la leçon.** Le dry run ne
+regarde que les bords du cadre ; les scripts de mesure ne regardent que les cotes des
+blocs ; `loin_des_fleches` et `etiquettes` comparent ce qui EST dessiné. Tous mesurent
+**ce qui est là**. Aucun ne compte **ce qui manque** — et à la planche, une arête absente
+ne saute pas aux yeux, puisqu'il n'y a rien à voir. C'est le défaut de l'épisode 8
+(« cinq morceaux construits, quatre joués ») dans sa forme la plus pure : ici le morceau
+n'était même pas construit.
+
+⭐ Le contrôle est maintenant **exécuté à l'import** de `espace3d.py`, et il ne relit pas
+la liste `vues` — ce serait se relire soi-même. Il relève les segments RÉELLEMENT
+construits, retrouve leurs extrémités parmi les huit sommets, et compare aux douze paires
+qui diffèrent d'exactement UNE coordonnée. Si une arête repart, l'import casse.
+⭐⭐ **La règle générale** : pour une figure fermée (cube, tétraèdre, polygone), compter
+les morceaux et les comparer à un compte CALCULÉ, jamais à la liste qui les produit.
+✅ Les cinq épisodes livrés qui dessinent le cube ont été re-rendus (E2, E6, E7, E8, E9) :
+0 échec, 0 bord, **durées identiques à la centiseconde**, les cinq cubes regardés à
+l'image. L'arête ajoutée ne déplace rien — elle relie deux sommets déjà tracés.
+
+### ⛔⛔ CORRIGER UN DÉFAUT PEUT LE DÉPLACER — deux fois dans le même épisode
+
+C'est « fuir une flèche pour tomber sur une arête » (E9), et ça s'est produit deux fois :
+
+| la correction | ce qu'elle a cassé |
+|---|---|
+| les deux normes de 09b passées à DEUX lignes, pour qu'on ne les lise plus comme un produit | le bloc a grandi de 0,68 **autour de son centre**, donc il est MONTÉ de 0,34 et la flèche de « ‖A G⃗‖ » entrait dans « 1 × 1 » |
+| « Saint-Pierre » écarté de « Ravi » (buff 0,08 → 0,18) | « Saint-Pierre » s'est posé **sur le bord haut du cadre de conclusion**, 0,13 de recouvrement, le texte rayé d'un trait orange |
+
+⭐⭐ **La règle** : changer la HAUTEUR d'un bloc oblige à recompter TOUS ses voisins, pas
+seulement celui qu'on vient de corriger. Un `col()` ou un `gauche()` pose un bloc par son
+CENTRE : le grandir le fait déborder des deux côtés à la fois.
+⭐ Les deux remèdes qui ont tenu : une seule ligne avec un **point-virgule** (« ‖A G⃗‖ = √3
+**;** ‖A B⃗‖ = 1 »), qui lève l'ambiguïté sans grandir le bloc ; et déplacer le
+PERSONNAGE vers le haut plutôt que son étiquette vers le bas.
+
+### ⛔⛔ DEUX TROUS D'INSTRUMENT, ET CE SONT EUX QUI ONT LAISSÉ PASSER LES DEUX
+
+- **la colonne de droite de 09b n'était comparée à RIEN** : six blocs mesurés un par un,
+  pas une seule paire. La mesure disait ✅ pendant que deux blocs se chevauchaient.
+- **« Saint-Pierre » n'était mesuré qu'EN PAIRE avec « Ravi »** : son bas disparaissait
+  dans la boîte commune, et le cadre qui le barrait n'était comparé à rien.
+
+⭐⭐ **La règle, et elle vaut pour E11 et E12** : dans une colonne, on compare les blocs
+**proche en proche** (`dessous()` sur chaque paire consécutive), et tout bloc qui a un
+voisin au-dessus ou au-dessous est mesuré SEUL en plus de son groupe. La mesure de E10
+porte la chaîne complète — c'est elle qu'on recopie, plus celle de E9.
+
+### ⛔⛔ UNE ÉTIQUETTE SE PLACE DEPUIS LE SOMMET, ET SON ÉCART EST PERPENDICULAIRE AU FÛT
+
+Trois étiquettes étaient TRAVERSÉES par leur propre fût, et la cause n'était pas la
+distance mais la MÉTHODE, à deux étages :
+
+1. je les posais par rapport à `g.get_center()`, **le centre de la BOÎTE du groupe**, qui
+   pour un secteur de rayon 1 tombe à (0,5 ; 0,37) du sommet d'où partent les flèches.
+   ⭐ `coin().sommet()` rend le point réel, lu APRÈS les `move_to` et les `scale` ;
+2. je décalais vers le BAS ou le HAUT. Sur un fût à 45°, un `UP * 0,16` ne gagne que
+   0,11 de distance réelle. ⭐ `ecart(p, signe, d)` décale **perpendiculairement** au fût.
+   ⚠️ Le piège : avec `DOWN`, « u » (horizontal) passait et « v » (en diagonale) non — un
+   réglage qui marche sur un objet et pas sur l'autre se lit comme une cote à affiner,
+   alors que c'est la méthode qui est fausse.
+
+### ⛔⛔ LA CAVALIÈRE NE CONSERVE AUCUN ANGLE — et cet épisode ne parle que d'angles
+
+Mesuré avant d'écrire un écran :
+
+| ce qu'on dessinerait | à l'écran | en vrai |
+|---|---|---|
+| u(1 ; 1 ; 0) par rapport à l'axe des x | **11,5°** | 45° |
+| l'angle de u(1 ; 1 ; 0) et v(0 ; 1 ; 1) | 60,8° | 60° — juste **par chance** |
+| l'angle de A⃗G et A⃗B (le défi) | **42,4°** | 54,7° — **douze degrés de mensonge** |
+
+⭐ Les figures d'angle sont donc **PLANES** (`coin()`), comme `plan_dessine` de E8 : elles
+ne prétendent pas montrer OÙ sont les vecteurs, elles montrent leur ANGLE — et il est
+vérifié par une assertion du module. ⛔ Et dans le cube, l'arc ne porte **aucune valeur** :
+c'est une convention, exactement comme le petit carré de `angle_droit`, qui n'est pas
+droit à l'écran non plus. La valeur est dans la colonne, jamais sur la figure.
+⛔⛔ **Un arc peut aussi porter la bonne valeur sur le MAUVAIS angle** : l'arc du
+supplémentaire, écrit `start_angle=θ, angle=π−θ`, balayait bien 120°… du côté OPPOSÉ à
+−v⃗. Il ne touchait NI u⃗ NI −v⃗. L'assertion du module ne portait que sur les FLÈCHES, et
+120° est 120° : seule la planche des figures seules l'a vu.
+
+### ⛔ L'ORDRE EST CELUI DE LA VOIX — 17,07 s, le plus gros écart de la série
+
+`verifier-avant-rendu.py`, par un écart NÉGATIF entre deux ancres : la figure de l'écran
+02, écrite dans l'ordre de la PAGE (la colonne de droite d'abord), arrivait **17,07 s en
+retard**. La voix dit « Exemple : » à 15,43 s et la colonne court jusqu'à 32,50 s.
+⭐ C'est le même contrôle qui a trouvé 3,36 s sur E9 et 9,07 s sur E8. Il paie à chaque
+épisode. ⚠️ Et il a aussi attrapé un `au_fin("fois zéro, donc 1")` dont l'offset (168)
+**n'a pas de marque** : il aurait pris silencieusement celle d'avant.
+
+### ⭐⭐ LES 2 CUES « 577 » N'ÉTAIENT PAS UN DÉFAUT
+
+Annoncées depuis E1 comme « à regarder en écrivant E10 ». Mesuré : « 577 » n'apparaît
+**qu'une fois** dans le texte du clip, et WinRT en a émis **TROIS** (25,50 / 25,82 /
+26,09 s) parce qu'il le lit « cinq cent soixante-dix-sept ». Le convertisseur place la
+première à l'offset 326 — le début du nombre — et saute les deux autres **sans avancer** :
+la marque est au bon endroit, et les 41 marques suivantes du clip sont justes.
+⛔ Ce n'est PAS la règle « une décimale vaut 3 cues » (E6) : « 577 » est un ENTIER, et
+`DECIMALE` ne l'attrape pas. C'est le garde-fou `SAUT_MAXI` qui fait le travail.
+⭐⭐ **Un entier long (577, 101, 180) se comporte comme une décimale** — à savoir pour E11
+et E12, qui en portent.
+
+### ⛔⛔ DEUX SESSIONS ONT ÉCRIT DANS LE MÊME FICHIER, EN MÊME TEMPS
+
+Une seconde session a été lancée sur E10 pendant que celle-ci y travaillait, sur une
+information fausse (« E10 est écrit, son HD tourne » — le verrou tenait en fait le rendu
+de E8). Les deux ont écrit dans `ps_espace_angle.py` et `mesure-ps-espace-angle.py`.
+⭐ **Ce qui l'a révélé n'est pas une alerte, c'est un `assert`** : deux modifications ont
+échoué parce que le texte avait changé sous elles. Sans ces `assert`, l'une aurait écrasé
+l'autre en silence. ⚠️ `ListAgents` donne la réponse en une commande — à faire au moindre
+doute, et non à supposer. ⭐ La collision s'est réglée entre les deux sessions, et le
+travail de l'autre a été gardé : ses deux contrôles manquants sont ceux décrits plus haut.
+⛔⛔ **Et la cote de Ravi était recopiée dans DEUX fichiers** : corrigée dans l'épisode et
+pas dans la mesure, l'instrument a mesuré pendant un tour **un écran qui n'existait pas**
+et a crié sur un défaut déjà corrigé. ⭐ Elle est maintenant une constante du module
+(`POS_RAVI`), importée par la mesure. C'est la même forme que « la fiche et le registre
+ont divergé » du même jour : **deux copies d'une seule vérité divergent dès qu'on en
+touche une.**
+
+### ⛔ LES AUTRES, vus au gros plan et par rien d'autre
+
+- la flèche de « −v⃗ » coiffait **aussi le signe moins** : on lisait un double trait. Un
+  vecteur opposé s'écrit « − » suivi de « v⃗ » — et le signe se centre à mi-hauteur, pas
+  sur la ligne de base (`aligned_edge=DOWN` le posait au pied de la lettre) ;
+- « 1 × 1+ 1 × 0+ 1 × 0= 1 » : à `buff` 0,06 les « + » collent au terme de gauche et se
+  détachent de celui de droite. Quand la ligne doit tenir dans une largeur, c'est la
+  POLICE qui cède, jamais l'espacement ;
+- les mollets couleur PEAU sous un pantalon sombre se lisaient comme des **jambes nues**
+  sur un installateur en gilet de chantier : un vêtement de travail est d'une pièce ;
+- le bras bas de Ravi ne dépassait du torse que de **0,17** et se lisait comme un moignon.
+
+### ⭐ CE QUI A BIEN MARCHÉ, ET QU'IL FAUT REFAIRE
+
+- **Rendre une image d'essai des glyphes AVANT d'écrire un écran** : °, θ, ≤, |…|, ∈, ⟹,
+  ⟺ — tous se dessinent. Dix secondes, et deux caractères de cette série sont déjà sortis
+  en « tofu ».
+- **La planche des FIGURES SEULES avant le premier rendu**, troisième épisode de suite
+  qu'elle paie : elle a attrapé l'arc du supplémentaire posé du mauvais côté, le bras
+  moignon, et la flèche combinante U+20D7 dans ses propres légendes.
+- **Étalonner `verifier-avant-rendu.py`** sur une copie avec UN `au_mot` faux : il a crié,
+  et dans la même sortie il a trouvé les deux vrais défauts.
+- **Les durées AVANT/APRÈS comme témoin d'un re-rendu** : identiques à la centiseconde
+  sur les cinq, c'est ce qui prouve qu'une correction de figure n'a rien déplacé d'autre.
+
+---
+
 ## ⛔⛔ Les marques : « 0,5 » vaut TROIS marques
 
 WinRT émet une marque par mot **prononcé**, pas par mot écrit. Il lit « 0,5 » comme
@@ -1347,7 +1515,7 @@ les met en défaut **dans les deux sens** — six cues gardées pour une, ou une
 La règle qui manquait est comptée, pas devinée : **une décimale vaut exactement 3 cues par
 occurrence**, donc on garde la première de chaque groupe de 3. Détail, chiffres et effet
 sur E2 : « Ce que l'épisode 6 a appris ».
-⚠️ Il reste `ps_espace_angle` (2 cues non placées, « 577 ») — à regarder en écrivant E10.
+✅ `ps_espace_angle` : ses 2 cues « 577 » ne sont pas un défaut (voir E10).
 
 ## ⛔ Écrire un nombre à la française
 

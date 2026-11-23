@@ -38,7 +38,8 @@ from espace3d import (C_FANTOME, C_PIEGE, C_REGARD, C_VECTEUR,  # noqa: E402
                       C_VECTEUR2, Repere3D)
 from charte import VERT_OK  # noqa: E402
 from espace_ecrans import CompteARebours, P, EcransEspace  # noqa: E402
-from ps_espace_angle import (AB, AG, COS07, INCL01, PS04, S, U02, U05,  # noqa: E402
+from ps_espace_angle import (AB, AG, COS07, ECH_RAVI, INCL01, POS_RAVI,  # noqa: E402
+                             PS04, S, U02, U05,
                              V02, V05, PsEspaceAngleBase, angle, coin, ecart,
                              norme2, ps, ravi, soleil, toit_panneau)
 
@@ -242,7 +243,7 @@ if fin00[2] < ech[3]:
     ennuis.append("00 : la ligne finale touche l'échelle des ceintures")
 
 print("\n── 01 : Ravi, le panneau, les trois cas ──")
-c = ravi(0.66).move_to(P(-5.72, 0.85))
+c = ravi(ECH_RAVI).move_to(P(*POS_RAVI))   # ⭐ importée, plus recopiée
 rx0, rx1, ry0, ry1 = cadre("Ravi (s = 0,66)", c)
 nom = T("Ravi", 28).next_to(c, DOWN, buff=0.22)
 if nom.get_left()[0] < -6.5:

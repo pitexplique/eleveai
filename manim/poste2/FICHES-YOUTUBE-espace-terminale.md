@@ -594,9 +594,17 @@ d'abord · 2:14 D'un point à l'autre · 2:37 La racine ne se distribue pas · 3
 ordre · 4:37 À toi de jouer · 4:56 Correction · 5:39 Ce que tu as appris.
 ---
 
-## E10 · `terminale-ps-espace-angle` — ⏳ HD en cours, chiffres à relever au rendu
+## E10 · `terminale-ps-espace-angle` — ✅ rendu HD fait
 
 `manim/sorties/terminale/maths/geometrie/ps-espace-angle/eleveai-maths-terminale-ps-espace-angle.mp4`
+6 min 35 (394,98 s) · 24,8 Mo · **0 instant qui touche un bord** · planche HD regardée.
+⭐ Marques : **861**, fichier identique à celui du dépôt (`git diff --stat` vide) : le rendu est calé
+sur des marques à jour, et le contrôle par le CONTENU le prouve.
+⭐ `grep -c "self\.au_t("` → **0** : aucun instant relevé à la main.
+⚠️ `verifier-zone-margo --pas 1.0` : **37 instants**, en DEUX plages seulement — 0 à 9 s et 368 à
+394 s. La soustraction tranche : garde 10,33 s (mascotte à 0,8) + finale 20,31 s (0,65) +
+abonnement 6,70 s (0,9) = **37,34 s**, pour 37 relevés au pas de 1 s.
+**Aucun écran de question touché** (04 : 101 → 125 s ; 07 : 217 → 244 s) : c'est le critère.
 ⭐ Dry run `-qh` : **15 écrans, 0 BORD, 0 AUDIT-AVANCE, 0 RETARD**, et un seul
 `AUDIT-ABSENT`, celui de `@eleveai974` que les épisodes publiés portent aussi. Les 9
 `AUDIT-TARD` sont tous ≤ 1,75 s et relus à la main : c'est la durée des animations.

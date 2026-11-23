@@ -108789,6 +108789,115 @@
           "explication": "Le vecteur A B a pour coordonnées zéro, zéro, 5. Sa norme : racine de zéro plus zéro plus 25, c'est-à-dire racine de 25, donc 5."
         }
       ]
+    },
+    {
+      "id": "terminale-ps-espace-angle",
+      "notionId": "produit_scalaire_espace",
+      "microId": "ps_espace_angle",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/geometrie/ps-espace-angle/eleveai-maths-terminale-ps-espace-angle.mp4",
+      "miniature": "terminale/maths/geometrie/ps-espace-angle/eleveai-maths-terminale-ps-espace-angle.png",
+      "titre": "La grande diagonale d'un cube ne fait pas 45° · Calculer un angle dans l'espace · Tle spé",
+      "centres": [
+        "nature-ecologie"
+      ],
+      "tags": [
+        "angle",
+        "produit scalaire",
+        "cosinus",
+        "arccos",
+        "espace",
+        "cube ABCDEFGH",
+        "grande diagonale",
+        "terminale",
+        "bac"
+      ],
+      "accroche": "Ravi installe des panneaux solaires sur les toits de Saint-Pierre. Un panneau face au soleil produit à plein ; incliné de trente degrés, il perd un peu ; à quatre-vingt-dix degrés, il ne produit plus rien. Ce qui décide du rendement, c'est l'angle entre la direction du soleil et celle du panneau — et cet angle se calcule avec un produit scalaire.\n\nDans cette vidéo :\n• la seconde formule du produit scalaire, et le cosinus qu'on en isole : le produit scalaire divisé par le PRODUIT des deux normes\n• le signe du produit scalaire donne la nature de l'angle avant tout calcul : positif aigu, nul droit, négatif obtus — parce que les deux normes sont toujours positives\n• un exemple mené jusqu'au bout sans calculatrice : un cosinus qui vaut un demi, c'est soixante degrés\n• les trois pièges : on divise par le produit et jamais par la somme ; un cosinus reste entre moins 1 et 1, donc 1,25 est une erreur de calcul ; et l'angle de deux VECTEURS n'est pas l'angle de deux DROITES — pour des droites on prend la valeur absolue\n• les quatre lignes de la copie, et l'unité qu'on oublie : un angle sans degrés ni radians, c'est le point perdu\n\nDeux questions-pauses et un défi corrigé dans le cube ABCDEFGH d'arête 1 : l'angle entre la grande diagonale et une arête. Il vaut 55 degrés environ, et surtout pas 45 — beaucoup de copies écrivent 45 sans calculer. Entraîne-toi sur eleveai.fr\n\n🎯 La série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_angle&display=simple\n\n📈 Épisode 10 sur 12 de la série « Géométrie dans l'espace » d'EleveAI · Maths Tle spé.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un produit scalaire, deux normes, une division"
+        ],
+        [
+          "00:10",
+          "Ravi et les panneaux solaires de Saint-Pierre"
+        ],
+        [
+          "00:36",
+          "Du produit scalaire à l'angle"
+        ],
+        [
+          "01:13",
+          "Le signe décide avant le calcul"
+        ],
+        [
+          "01:41",
+          "Question 1"
+        ],
+        [
+          "02:05",
+          "Réponse : obtus, parce que le produit scalaire est négatif"
+        ],
+        [
+          "02:29",
+          "Jusqu'au bout, sans calculatrice"
+        ],
+        [
+          "02:57",
+          "Les trois pièges"
+        ],
+        [
+          "03:37",
+          "Question 2"
+        ],
+        [
+          "04:04",
+          "Réponse : un cosinus ne dépasse jamais 1"
+        ],
+        [
+          "04:31",
+          "Quatre lignes, dans cet ordre"
+        ],
+        [
+          "04:57",
+          "À toi de jouer"
+        ],
+        [
+          "05:17",
+          "Correction : 55 degrés, et pas 45"
+        ],
+        [
+          "06:07",
+          "Ce que tu as appris"
+        ]
+      ],
+      "questions": [
+        {
+          "t": "01:41",
+          "question": "Le produit scalaire de u et v vaut moins 6, et aucun des deux vecteurs n'est nul. L'angle entre u et v est :",
+          "choix": [
+            "aigu",
+            "droit",
+            "obtus, donc plus grand que 90 degrés"
+          ],
+          "reponse": 2,
+          "explication": "Le cosinus de l'angle a le même signe que le produit scalaire, puisqu'on divise par deux normes qui sont positives. Un produit scalaire négatif donne donc un cosinus négatif, et un cosinus négatif donne un angle compris entre 90 et 180 degrés : un angle obtus."
+        },
+        {
+          "t": "03:37",
+          "question": "On calcule le cosinus de l'angle entre deux vecteurs et on trouve 1 virgule 25. Que peut-on dire ?",
+          "choix": [
+            "l'angle est très petit",
+            "il y a une erreur, un cosinus reste entre moins 1 et 1",
+            "les deux vecteurs sont colinéaires"
+          ],
+          "reponse": 1,
+          "explication": "Un cosinus ne dépasse jamais 1, jamais. Les deux erreurs les plus fréquentes : avoir divisé par la somme des normes au lieu de leur produit, ou avoir oublié une racine dans une norme."
+        }
+      ]
     }
   ]
 }
