@@ -61,12 +61,13 @@ Durée inchangée — rien de la voix n'a bougé, seul l'écran.
 >
 > Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
 
-⚠️ **Chapitres** : le champ `chapitres` du manifeste attend des horodatages. Ceux de E1,
-relevés sur le rendu (lignes `ECRAN` du journal) :
-0:00 garde · 0:12 Nadia · 0:33 arrivée moins départ · 0:57 les règles · 1:15 question 1 ·
-1:39 réponse · 1:55 somme et multiple · 2:14 le piège · 2:36 question 2 · 3:03 réponse ·
-3:22 au bac · 3:43 à toi de jouer · 4:10 correction · 4:39 ce que tu as appris.
-
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Trois nombres au lieu de deux · 0:12 Nadia place ses drones avec trois nombres · 0:33
+Arrivée moins départ · 0:57 Les règles · 1:15 Question 1 · 1:39 Réponse : un vecteur
+vertical · 1:55 Somme et multiple · 2:14 Le piège · 2:36 Question 2 · 3:03 Réponse : le même
+facteur pour les trois coordonnées · 3:22 Au bac · 3:43 À toi de jouer · 4:10 Correction ·
+4:39 Ce que tu as appris.
 ---
 
 ## E2 · `terminale-espace-repere-coordonnees` — ✅ rendu HD fait (REFAIT le 22/11 : notation fléchée)
@@ -113,12 +114,13 @@ que l'écran démontre. Durée inchangée, rien de la voix n'a bougé.
 >
 > Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
 
-**Chapitres**, relevés sur le rendu :
-0:00 garde · 0:11 Lila · 0:34 le repère du cube · 1:09 le milieu · 1:29 question 1 ·
-1:54 réponse · 2:15 les diagonales · 2:54 le piège du pavé · 3:31 question 2 ·
-3:52 réponse · 4:12 la première ligne de la copie · 4:35 à toi de jouer ·
-4:53 correction · 5:29 ce que tu as appris.
-
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Trois nombres, une moyenne, un repère · 0:11 Lila et les adresses à trois nombres de
+l'entrepôt · 0:34 Le repère du cube · 1:09 Le milieu · 1:29 Question 1 · 1:54 Réponse : le
+milieu, moyenne par moyenne · 2:15 Les diagonales · 2:54 Le piège du pavé · 3:31 Question 2
+· 3:52 Réponse : un pas dans chacune des trois directions · 4:12 La première ligne de la
+copie · 4:35 À toi de jouer · 4:53 Correction · 5:29 Ce que tu as appris.
 ---
 
 ## E3 · `terminale-espace-droite-parametrique` — ✅ rendu HD fait (REFAIT le 22/11 : notation fléchée)
@@ -169,12 +171,13 @@ périme si la voix est régénérée (piège n° 37 de la série des entiers).
 >
 > Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
 
-**Chapitres**, relevés sur le rendu :
-0:00 garde · 0:11 Soraya · 0:38 un point, une direction · 1:08 tout se lit dans les trois
-lignes · 1:28 question 1 · 1:52 réponse · 2:17 tester un point · 2:48 le piège ·
-3:27 question 2 · 3:52 réponse · 4:17 au bac · 4:42 à toi de jouer · 5:01 correction ·
-5:30 ce que tu as appris.
-
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Un point de départ, une direction, un curseur · 0:11 Soraya suit un avion en montée sur
+son écran · 0:38 Un point, une direction · 1:08 Tout se lit dans les trois lignes · 1:28
+Question 1 · 1:52 Réponse : le vecteur directeur se lit sur les coefficients de t · 2:17
+Tester un point · 2:48 Le piège · 3:27 Question 2 · 3:52 Réponse : on teste t sur les trois
+lignes · 4:17 Au bac · 4:42 À toi de jouer · 5:01 Correction · 5:30 Ce que tu as appris.
 ---
 
 ## E4 · `terminale-espace-plan-equation` — ✅ rendu HD fait
@@ -221,11 +224,13 @@ périme si la voix est régénérée (piège n° 37 de la série des entiers).
 >
 > Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
 
-**Chapitres**, relevés sur le rendu :
-0:00 garde · 0:11 Jean-Bernard · 0:34 une équation, un plan · 1:08 si et seulement si ·
-1:25 question 1 · 1:47 réponse · 2:12 trouver l'équation · 2:48 le piège · 3:26 question 2 ·
-3:45 réponse · 4:15 au bac · 4:39 à toi de jouer · 5:03 correction · 5:39 ce que tu as appris.
-
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Une seule équation, trois inconnues · 0:11 Jean-Bernard pose un pan de toiture · 0:34
+Une équation, un plan · 1:08 Si et seulement si · 1:25 Question 1 · 1:47 Réponse : le point
+qui annule l'équation · 2:12 Trouver l'équation · 2:48 Le piège · 3:26 Question 2 · 3:45
+Réponse : « y égale 1 » est un plan, pas une droite · 4:15 Au bac · 4:39 À toi de jouer ·
+5:03 Correction · 5:39 Ce que tu as appris.
 ---
 
 ## E5 · `terminale-espace-position-relative` — ✅ rendu HD fait
@@ -277,12 +282,13 @@ surplus est constant dans chacun. **Aucun écran de question touché** — c'est
 >
 > Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
 
-**Chapitres**, relevés sur le rendu :
-0:00 garde · 0:10 la route et le pont · 0:33 droite et plan · 1:16 trois cas ·
-1:39 question 1 · 2:06 réponse · 2:32 deux plans · 3:07 le piège · 3:42 question 2 ·
-4:07 réponse · 4:28 au bac · 5:01 à toi de jouer · 5:25 correction ·
-6:06 ce que tu as appris.
-
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Ne jamais se rencontrer sans être parallèles · 0:10 La route et le pont · 0:33 Droite
+et plan · 1:16 Trois cas · 1:39 Question 1 · 2:06 Réponse : « 3 égale zéro » est faux pour
+tout t · 2:32 Deux plans · 3:07 Le piège · 3:42 Question 2 · 4:07 Réponse : aucun point
+commun ne veut pas dire parallèles · 4:28 Au bac · 5:01 À toi de jouer · 5:25 Correction ·
+6:06 Ce que tu as appris.
 ---
 
 ## E6 · `terminale-espace-defi` — ✅ rendu HD fait (REFAIT le 22/11 : notation fléchée)
@@ -347,12 +353,13 @@ les quatre écrans où il porte quelque chose.
 > leur point d'intersection — qui est le centre du cube, et ce n'est pas un hasard.
 > Entraîne-toi sur eleveai.fr
 
-**Chapitres**, relevés sur le rendu :
-0:00 garde · 0:10 toujours la même forme · 0:37 avant tout calcul · 1:01 la boîte à
-outils · 1:28 question 1 · 1:56 réponse · 2:19 montrons un alignement · 2:58 le piège ·
-3:38 question 2 · 4:05 réponse · 4:30 le squelette d'une copie · 4:54 à toi de jouer ·
-5:22 correction · 6:19 ce que tu as appris.
-
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Un cube, un repère, quatre questions · 0:10 Toujours la même forme · 0:37 Avant tout
+calcul · 1:01 La boîte à outils · 1:28 Question 1 · 1:56 Réponse : le centre du cube est le
+milieu de [AG] · 2:19 Montrons un alignement · 2:58 Le piège · 3:38 Question 2 · 4:05
+Réponse : chercher k tel que AC = k AB · 4:30 Le squelette d'une copie · 4:54 À toi de jouer
+· 5:22 Correction · 6:19 Ce que tu as appris.
 ---
 
 ## E7 · `terminale-ps-espace-calculer` — ✅ rendu HD fait
@@ -420,13 +427,14 @@ invisibles sur la vignette à trois colonnes.
 > produits scalaires pour comparer deux angles si les normes diffèrent.
 > Entraîne-toi sur eleveai.fr
 
-**Chapitres**, relevés sur le rendu :
-0:00 garde · 0:10 Kelly, la part du vent qui pousse · 0:39 le calcul en
-coordonnées · 1:12 trois choses à retenir · 1:35 question 1 · 2:00 réponse ·
-2:35 le cas u · u · 3:01 on ne simplifie jamais · 3:45 question 2 · 4:09 réponse ·
-4:38 deux lignes, mais écrites · 5:00 à toi de jouer · 5:20 correction ·
-6:06 ce que tu as appris.
-
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Deux vecteurs, trois multiplications, une addition · 0:10 Kelly, la part du vent qui
+pousse · 0:39 Le calcul en coordonnées · 1:12 Trois choses à retenir · 1:35 Question 1 ·
+2:00 Réponse : zéro, et ce zéro veut dire quelque chose · 2:35 Le cas u · u · 3:01 On ne
+simplifie jamais · 3:45 Question 2 · 4:09 Réponse : un produit scalaire nul entre deux
+vecteurs non nuls · 4:38 Deux lignes, mais écrites · 5:00 À toi de jouer · 5:20 Correction ·
+6:06 Ce que tu as appris.
 ---
 
 ## E8 · `terminale-ps-espace-orthogonalite` — ✅ rendu HD fait
@@ -494,13 +502,14 @@ visage — la visière de Jean-Bernard (E4) à sa deuxième récidive.
 > (A G) est orthogonale au plan (BDE). Une figure qui revient tous les ans.
 > Entraîne-toi sur eleveai.fr
 
-**Chapitres**, relevés sur le rendu :
-0:00 garde · 0:09 Marc, le poteau vérifié dans un seul sens · 0:36 le test de
-l'orthogonalité · 1:04 le théorème du chapitre · 1:28 question 1 · 1:57 réponse ·
-2:29 le théorème du poteau · 3:08 un seul ne suffit pas · 3:51 question 2 ·
-4:19 réponse · 4:39 cinq lignes, et la quatrième compte · 5:12 à toi de jouer ·
-5:30 correction · 6:31 ce que tu as appris.
-
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Un produit scalaire nul, et c'est prouvé · 0:09 Marc, le poteau vérifié dans un seul
+sens · 0:36 Le test de l'orthogonalité · 1:04 Le théorème du chapitre · 1:28 Question 1 ·
+1:57 Réponse : la somme des trois produits est nulle · 2:29 Le théorème du poteau · 3:08 Un
+seul ne suffit pas · 3:51 Question 2 · 4:19 Réponse : une seule direction ne suffit jamais ·
+4:39 Cinq lignes, et la quatrième compte · 5:12 À toi de jouer · 5:30 Correction · 6:31 Ce
+que tu as appris.
 ---
 
 ## E9 · `terminale-ps-espace-norme-distance` — ✅ rendu HD fait
@@ -576,13 +585,13 @@ assertion du module.
 > 3 pour la grande diagonale, et a racine de 2 / a racine de 3 si l'arête mesure a.
 > Entraîne-toi sur eleveai.fr
 
-**Chapitres**, relevés sur le rendu :
-0:00 garde · 0:10 la Diagonale des Fous · 0:44 la norme d'un vecteur ·
-1:11 une distance est une norme · 1:29 question 1 · 1:45 réponse ·
-2:14 d'un point à l'autre · 2:37 la racine ne se distribue pas · 3:15 question 2 ·
-3:40 réponse · 4:13 trois lignes, toujours dans cet ordre · 4:37 à toi de jouer ·
-4:56 correction · 5:39 ce que tu as appris.
-
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Trois carrés, une racine · 0:10 La Diagonale des Fous · 0:44 La norme d'un vecteur ·
+1:11 Une distance est une norme · 1:29 Question 1 · 1:45 Réponse : 3, en élevant au carré
+d'abord · 2:14 D'un point à l'autre · 2:37 La racine ne se distribue pas · 3:15 Question 2 ·
+3:40 Réponse : 5, la norme d'un vecteur vertical · 4:13 Trois lignes, toujours dans cet
+ordre · 4:37 À toi de jouer · 4:56 Correction · 5:39 Ce que tu as appris.
 ---
 
 ## E10 à E12 — ⏳ en attente de leur rendu HD

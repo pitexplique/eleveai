@@ -3,6 +3,7 @@
 #
 #   python -X utf8 manim/poste2/fiches-espace-vers-registre.py            # contrôle seul
 #   python -X utf8 manim/poste2/fiches-espace-vers-registre.py --ecrire   # écrit le registre
+#   … --ecrire --forcer   # ET écrase un champ que quelqu'un a changé dans le registre
 #
 # ⭐⭐ POURQUOI CET OUTIL EXISTE (23/11/2026)
 # Les douze entrées de la série étaient tenues À LA MAIN dans
@@ -221,7 +222,7 @@ def table_lettres():
     return out
 
 
-def main(ecrire):
+def main(ecrire, forcer=False):
     fiches, tbl = lire_fiches(), table_lettres()
     print(f"{len(fiches)} fiche(s) avec un bloc JSON\n")
     entrees = []
@@ -270,6 +271,41 @@ def main(ecrire):
               f"{len(acc_complete):4d} car. de description"
               f"{'   ⚠️ miniature absente' if manque_png else ''}")
 
+    # ⛔⛔ LE GARDE-FOU QUI MANQUAIT, ET IL A FAILLI COÛTER LE TRAVAIL D'UNE AUTRE
+    # SESSION (23/11/2026). Le chef d'orchestre a réécrit les 126 libellés de chapitre
+    # des neuf épisodes DANS LE REGISTRE (commit e1b93bcdb) — ils partent verbatim dans
+    # la description YouTube, et la série affichait des noms de clips internes
+    # (« garde », « réponse », un prénom nu). Cet outil, lui, relit la FICHE : relancé
+    # avec --ecrire, il aurait ramené les 124 anciens libellés sans un mot.
+    # ⭐ Un outil de report ne doit jamais écraser en silence ce qu'il n'a pas écrit. Il
+    # compare donc, clé par clé et champ par champ, ce qu'il s'apprête à écrire avec ce
+    # qui est DÉJÀ dans le registre, et il s'arrête sur tout écart. ⛔ `--forcer` ne se
+    # passe qu'après avoir regardé la liste et décidé que la fiche a raison.
+    # ⚠️ La vraie leçon reste la même qu'au premier jour : la fiche et le registre sont
+    # deux copies de la même chose, et deux copies divergent toujours. Le jour où le
+    # registre se tient tout seul, cette fiche redevient ce qu'elle doit être — un
+    # brouillon rédigé, et rien d'autre.
+    if ecrire and not forcer:
+        reg0 = {v["id"]: v for v in json.loads(REGISTRE.read_text(encoding="utf-8"))["videos"]}
+        ecarts = []
+        for e in entrees:
+            ancien = reg0.get(e["id"])
+            if not ancien:
+                continue
+            for champ in sorted(set(ancien) | set(e)):
+                if ancien.get(champ) != e.get(champ):
+                    ecarts.append((e["id"], champ, ancien.get(champ), e.get(champ)))
+        if ecarts:
+            print(f"\n⛔ RIEN ÉCRIT : {len(ecarts)} champ(s) du registre seraient écrasés "
+                  "par la fiche.\n   Quelqu'un a modifié le registre directement — "
+                  "regarder, décider, puis --forcer.")
+            for vid, champ, av, ap in ecarts[:12]:
+                r = lambda x: (json.dumps(x, ensure_ascii=False)[:90] if x is not None else "—")
+                print(f"   · {vid} / {champ}\n       registre : {r(av)}\n       fiche    : {r(ap)}")
+            if len(ecarts) > 12:
+                print(f"   … et {len(ecarts) - 12} autre(s)")
+            return 1
+
     if ennuis:
         print("\n⛔ rien écrit :")
         for x in ennuis:
@@ -281,7 +317,15 @@ def main(ecrire):
         print("   (contrôle seul — relancer avec --ecrire pour toucher le registre)")
         return 0
 
-    txt = REGISTRE.read_text(encoding="utf-8")
+    # ⛔⛔ ON ÉCRIT DANS LA CONVENTION DE FIN DE LIGNE DU FICHIER QU'ON A LU, et on ne la
+    # choisit pas. Ce dépôt a `core.autocrlf=true` : la copie de travail est en CRLF, et
+    # une écriture en LF laissait un fichier que `git status` dit modifié alors que
+    # `git diff` ne montre RIEN — 108 794 lignes réécrites pour zéro changement de
+    # contenu. ⭐ Le critère qui tranche est simple et il se teste : une relance à vide
+    # doit laisser le registre identique AU BIT PRÈS.
+    brut = REGISTRE.read_bytes()
+    saut = "\r\n" if b"\r\n" in brut[:4096] else "\n"
+    txt = brut.decode("utf-8").replace("\r\n", "\n")
     reg = json.loads(txt)
     par_id = {v["id"]: i for i, v in enumerate(reg["videos"])}
     neuves = remplacees = 0
@@ -295,26 +339,29 @@ def main(ecrire):
     # ⚠️ Le format d'écriture se DÉDUIT du fichier, il ne se choisit pas : le registre est
     # partagé, et le réécrire dans un autre format ferait un diff de 1 700 lignes dans
     # lequel personne ne verrait nos neuf clés (et `outils-commit-cles.py` refuserait).
+    # ⛔ LE FORMAT SE DÉTECTE SUR LE TEXTE D'ORIGINE, ET SUR RIEN D'AUTRE. Ma première
+    # version ajoutait la condition « et la sortie diffère du fichier » : quand il n'y
+    # avait RIEN à changer (le cas d'une relance à vide, qui est le cas normal), aucun
+    # format ne passait et l'outil annonçait « format du registre non reconnu ». Un
+    # outil qui échoue quand tout va bien finit par être cru quand il échoue vraiment.
     for ind in (None, 1, 2):
         for sep in ((",", ":"), (",", ": ")):
             for fin in ("", "\n"):
-                if json.dumps(reg, indent=ind, separators=sep, ensure_ascii=False) != txt.rstrip("\n") \
-                        and json.dumps(json.loads(txt), indent=ind, separators=sep,
-                                       ensure_ascii=False) + fin == txt:
+                if json.dumps(json.loads(txt), indent=ind, separators=sep,
+                              ensure_ascii=False) + fin == txt:
                     # ⚠️ `newline=""` ET NON `write_text` — pour être COMPARABLE, pas
                     # pour être juste. Mesuré le 23/11, et ma première conclusion était
                     # fausse : ce dépôt a `core.autocrlf=true`, donc la copie de travail
                     # est en CRLF (vérifié sur le fichier d'origine) et git normalise en
                     # LF dans l'index — le commit est le même dans les deux cas, et
                     # `git diff --cached --stat` dit bien « 969 insertions, 0 deletions ».
-                    # ⛔ Mais `manim/outils-commit-cles.py` écrit, lui, en `newline=""`
-                    # quoi qu'il arrive. Le seul contrôle qui prouve qu'on n'emporte pas
-                    # le travail d'une autre session est `cmp` entre sa sortie et ce
-                    # fichier — et un `cmp` entre un CRLF et un LF échoue sur 108 794
-                    # lignes sans qu'aucune donnée ne diffère. On écrit donc comme lui.
-                    with open(REGISTRE, "w", encoding="utf-8", newline="") as f:
-                        f.write(json.dumps(reg, indent=ind, separators=sep,
-                                           ensure_ascii=False) + fin)
+                    # ⚠️ `manim/outils-commit-cles.py` écrit, lui, en `newline=""` quoi
+                    # qu'il arrive : un `cmp` entre sa sortie et ce fichier échoue donc
+                    # sur 108 794 lignes sans qu'aucune donnée ne diffère. ⭐ Ce contrôle
+                    # se fait sur le CONTENU JSON, pas sur les octets.
+                    sortie = json.dumps(reg, indent=ind, separators=sep,
+                                        ensure_ascii=False) + fin
+                    REGISTRE.write_bytes(sortie.replace("\n", saut).encode("utf-8"))
                     print(f"✅ {neuves} clé(s) ajoutée(s), {remplacees} remplacée(s) "
                           f"→ {len(reg['videos'])} vidéos au registre")
                     return 0
@@ -323,4 +370,4 @@ def main(ecrire):
 
 
 if __name__ == "__main__":
-    sys.exit(main("--ecrire" in sys.argv))
+    sys.exit(main("--ecrire" in sys.argv, "--forcer" in sys.argv))
