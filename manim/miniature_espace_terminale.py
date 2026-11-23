@@ -63,7 +63,7 @@ CEINTURE = "verte"
 EP = [
     ("espace-vecteurs",
      ["COMPRENDRE LES VECTEURS", "DANS L'ESPACE"],
-     "A B (3 ; 4 ; 0)", "+ arrivée moins départ"),
+     "~{AB} (3 ; 4 ; 0)", "+ arrivée moins départ"),
     ("espace-repere-coordonnees",
      ["COMPRENDRE LES COORDONNÉES", "DANS L'ESPACE"],
      "M (x ; y ; z)", "+ le milieu, c'est une moyenne"),
@@ -84,7 +84,7 @@ EP = [
      "x x' + y y' + z z'", "+ le résultat est un NOMBRE"),
     ("ps-espace-orthogonalite",
      ["DÉMONTRER UNE", "ORTHOGONALITÉ"],
-     "u · v = 0", "pour un plan, il en faut DEUX"),
+     "~{u} · ~{v} = 0", "pour un plan, il en faut DEUX"),
     ("ps-espace-norme-distance",
      ["COMPRENDRE LES NORMES", "ET LES DISTANCES"],
      "√(x^{2} + y^{2} + z^{2})", "la racine ne se distribue pas"),
@@ -93,7 +93,7 @@ EP = [
      "cos θ = 1 / √3", "la diagonale ne fait pas 45°"),
     ("ps-espace-plan-normal",
      ["COMPRENDRE LE VECTEUR", "NORMAL À UN PLAN"],
-     "2x − y + 3z − 5 = 0", "+ la normale : (2 ; −1 ; 3)"),
+     "2x − y + 3z − 5 = 0", "+ la normale ~{n} : (2 ; −1 ; 3)"),
     ("ps-espace-defi",
      ["L'EXERCICE TYPE BAC", "AVEC PRODUIT SCALAIRE"],
      "une normale, une équation", "+ puis une distance"),
@@ -101,7 +101,21 @@ EP = [
 
 # ⚠️ Arial Black n'a ni indices ni exposants Unicode : on écrit « x^{2} » et « u_{n} »,
 # dessinés plus petits et montés (ou abaissés), dans la couleur de la ligne.
-JETON = re.compile(r"([_^])\{([^}]*)\}")
+#
+# ⭐⭐ ET « ~{u} » : LA FLÈCHE DES VECTEURS (Frédéric, 23/11). Ces miniatures parlent de
+# vecteurs, et un « u » nu n'est pas un vecteur. Ce n'était pas une remarque de forme :
+# la planche de l'orthogonalité annonçait « u · v = 0 », qui se lit comme un produit de
+# deux NOMBRES — donc l'un des deux est nul. C'est exactement la confusion que l'épisode
+# combat, écrite sur sa propre couverture.
+# ⛔ La flèche ne peut pas venir d'une notation : ici on dessine avec PIL, sans LaTeX. Et
+# surtout pas du caractère combinant U+20D7 — `ariblk.ttf` ne le compose pas, il
+# disparaîtrait SANS TRACE, comme les dollars du LaTeX avalé. Elle est donc TRACÉE :
+# barre + pointe, posées sur le sommet RÉEL de l'encre (`textbbox`), pour que la flèche
+# de `~{n}` et celle de `~{AB}` tombent à la même hauteur quelle que soit la lettre.
+# ⛔ Les accolades portent le groupe ENTIER : « ~{AB} » met UNE flèche sur les deux
+# lettres, comme on l'écrit au tableau — pas une flèche par lettre.
+# ⛔ Et un POINT n'est pas un vecteur : « M (x ; y ; z) » reste sans flèche.
+JETON = re.compile(r"([_^~])\{([^}]*)\}")
 
 
 def morceaux(txt):
@@ -116,16 +130,46 @@ def morceaux(txt):
     return out
 
 
+def _ep(t):
+    """L'épaisseur de la flèche, et la marge qu'elle prend de chaque côté de la lettre."""
+    return max(3, round(t * 0.06))
+
+
 def largeur(d, txt, t):
     f, fe = police("ariblk.ttf", t), police("ariblk.ttf", int(t * 0.6))
-    return sum(d.textlength(s, font=fe if e else f) + (int(t * 0.04) if e else 0)
-               for s, e in morceaux(txt))
+    total = 0
+    for s, e in morceaux(txt):
+        if e == "~":
+            # ⚠️ la flèche déborde de la lettre : sa marge compte dans la largeur, sinon
+            # `ajuste` croirait la ligne plus courte qu'elle n'est et la laisserait
+            # passer sous Ti-Margo.
+            total += d.textlength(s, font=f) + 2 * _ep(t)
+        elif e:
+            total += d.textlength(s, font=fe) + int(t * 0.04)
+        else:
+            total += d.textlength(s, font=f)
+    return total
 
 
 def ecrire(d, x, y, txt, t, c):
     f, fe = police("ariblk.ttf", t), police("ariblk.ttf", int(t * 0.6))
     for s, e in morceaux(txt):
-        if e:
+        if e == "~":
+            ep = _ep(t)
+            x += ep
+            d.text((x, y), s, font=f, fill=c)
+            w = d.textlength(s, font=f)
+            if s.strip():
+                sommet = d.textbbox((x, y), s, font=f)[1]   # le haut réel de l'encre
+                yf = sommet - max(8, round(t * 0.17))
+                x0, x1 = x - ep, x + w + ep
+                p = max(9, round(t * 0.18))
+                d.line([(x0, yf), (x1 - p * 0.5, yf)], fill=c, width=ep)
+                d.polygon([(x1, yf),
+                           (x1 - p * 0.7, yf - p * 0.45),
+                           (x1 - p * 0.7, yf + p * 0.45)], fill=c)
+            x += w + ep
+        elif e:
             x += int(t * 0.02)
             d.text((x, y + (int(t * 0.5) if e == "_" else -int(t * 0.12))), s, font=fe, fill=c)
             x += d.textlength(s, font=fe) + int(t * 0.02)
