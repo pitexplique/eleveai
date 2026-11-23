@@ -75,7 +75,6 @@ import {
 } from "@/lib/tutor-v4/catalog";
 import {
   defaultDisplayModeForClasse,
-  displayParamForClasse,
   type TutorDisplayMode,
 } from "@/lib/tutor-v4/displayMode";
 
@@ -1191,7 +1190,14 @@ useEffect(() => {
   if (autoActivatedPairRef.current === pair.pairId) return;
 
   autoActivatedPairRef.current = pair.pairId;
-  void activateQuestion(sessionId, selectSimpleOption(pair));
+  /* Une erreur réseau ne reste plus muette (promesse rejetée sans personne pour
+     l'attraper) : on le dit, et la paire pourra être redemandée. */
+  activateQuestion(sessionId, selectSimpleOption(pair)).catch((error) => {
+    autoActivatedPairRef.current = null;
+    setFeedback(
+      error instanceof Error ? error.message : "Erreur pendant le choix de la question."
+    );
+  });
 }, [displayMode, sessionId, pair, currentQuestion, busy, wrongAnswerPanelOpen]);
 
   function resetMicroStatusesForNotion(notionId: string) {
@@ -1985,11 +1991,7 @@ function handleInputKeyDown(
         ];
         return ordered.slice(0, 3).map((mId) => ({
           label: microLabel(mId, classe, matiere),
-          href: `/coach/serie?classe=${encodeURIComponent(
-            classe
-          )}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(
-            nId
-          )}&microId=${encodeURIComponent(mId)}&${displayParamForClasse(classe)}`,
+          microId: mId,
         }));
       })()
     : [];
@@ -2005,6 +2007,10 @@ function handleInputKeyDown(
       ? notionLabel(currentQuestion.notionId, classe, matiere)
       : "",
     suggestions: coachSuggestions,
+    onReviser: (microId) => {
+      void jumpToMicro(microId);
+      scrollToQuestions();
+    },
   };
 
   const questionListenButton = currentQuestion ? (
@@ -2893,7 +2899,13 @@ type CoachContext = {
   classe: string;
   notionLabel: string;
   // Ressources internes proposées après la réponse de l'IA (entraînements ciblés).
-  suggestions: { label: string; href: string }[];
+  suggestions: { label: string; microId: string }[];
+  /* ⛔ 23/11/2026 — RÉVISER SANS QUITTER LA SÉANCE. Les pastilles « 🎯 » étaient
+     des liens <a href> vers /coach/serie?…&microId=… : un clic rechargeait la
+     page, la séance repartait de zéro sur « Prêt pour une question ? », score et
+     série perdus. Les élèves de Frédéric : « après une réponse fausse, on est
+     sorti du coach ». Elles sautent désormais vers la micro DANS la séance. */
+  onReviser: (microId: string) => void;
 };
 
 // « Demande une explication » : à la demande, l'IA explique l'erreur précise
@@ -3019,7 +3031,8 @@ function CoachErrorHelp({
       {!canAsk ? (
         <p className="text-sm font-semibold text-white/80">
           {/* 19/11/2026 : visiteur sans compte → pas d'aide de Ti Margo (texte validé). */}
-          <a href={AIDE_IA.lienInscription} className="underline">{AIDE_IA.messageVisiteur}</a>
+          {/* Nouvel onglet : l'inscription ne doit pas faire perdre la séance en cours. */}
+          <a href={AIDE_IA.lienInscription} target="_blank" rel="noopener" className="underline">{AIDE_IA.messageVisiteur}</a>
         </p>
       ) : (
         <>
@@ -3057,13 +3070,14 @@ function CoachErrorHelp({
               </p>
               <div className="flex flex-wrap gap-2">
                 {coach.suggestions.map((s) => (
-                  <a
-                    key={s.href}
-                    href={s.href}
+                  <button
+                    type="button"
+                    key={s.microId}
+                    onClick={() => coach.onReviser(s.microId)}
                     className="rounded-full bg-emerald-500/20 px-3 py-1.5 text-xs font-bold text-emerald-100 transition hover:bg-emerald-500/30"
                   >
                     🎯 {s.label}
-                  </a>
+                  </button>
                 ))}
               </div>
             </div>
