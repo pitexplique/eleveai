@@ -2721,6 +2721,41 @@ les deux blocs avaient été du même type, il aurait animé le mauvais **en sil
   nombre qu'il fallait surveiller. ⚠️ Et la règle a dû être élargie : « 0y » et « 0z »
   n'étaient pas reconnus par « le zéro nu ».
 
+### ⭐⭐ LA PASSE MATHS DE CES SIX VOIX EST DANS LES SCRIPTS, PAS DANS UN SCRIPT À PART
+
+⚠️ On a cru qu'elle manquait, parce qu'on la cherchait sous la forme d'un
+`controler-maths-*.py`. Elle est ailleurs, et sous une forme plus solide : **28
+assertions au niveau du MODULE**, exécutées à l'import de chaque short — donc à chaque
+`verifier-avant-rendu`, à chaque dry run et à chaque rendu, pas une fois dans une
+journée (E1 4 · E2 5 · E3 4 · E4 3 · E5 5 · E6 7). Elles ne relisent pas une phrase,
+elles **refont le calcul** : le vecteur A B et ses deux leurres (la somme, le vecteur
+opposé), H = D + A E, le vecteur directeur lu dans les coefficients de t et la
+non-colinéarité du leurre « signe oublié », la substitution nulle pour tout t, le
+déterminant (A⃗C, E⃗B, A⃗E) = −1, les deux paramètres du croisement apparent.
+⭐ **Et l'instrument a été étalonné** : une copie avec `ABQ == (9, 9, 9)` lève bien
+`AssertionError` ; le silence des six vrais est donc une preuve.
+⛔ Les tableaux de `VOIX-espace-terminale.md` (« Passe MATHS du short de E<n> ») sont la
+relecture, pas la mesure. C'est le même partage que pour les paysages : le tableau dit
+ce qu'on affirme, l'assertion le recalcule.
+⚠️ Ce que ça NE couvre pas : ce qu'aucune assertion ne peut dire, c'est-à-dire la
+pédagogie d'un leurre. Une relecture indépendante reste utile — elle a confirmé les six.
+
+### ⚠️ LA DEVINABILITÉ SE MESURE SUR L'ÉCRAN, PAS SUR LA VOIX
+
+Signalé sur E3 : la bonne réponse « 3, moins 1, 4 » fait **13 caractères** contre 7 et 7
+pour les deux leurres, soit 86 % de plus — la règle maison dit qu'une bonne réponse
+seule plus longue se devine sans calculer.
+⭐ **Mesuré sur ce que l'élève VOIT** : les trois cartes affichent « 3 ; −1 ; 4 »,
+« 2 ; 0 ; 1 » et « 3 ; 1 ; 4 », soit **6, 5 et 5 caractères** et **1,61 · 1,30 · 1,32**
+d'unité de large. L'écart est d'UN glyphe — le signe moins — et de 0,31 d'unité.
+⛔ **Décision : on ne touche pas.** Le signe moins EST la leçon : le leurre C est « le
+signe oublié », et le leurre B est le POINT de la droite, c'est-à-dire une donnée qu'on
+ne choisit pas. Supprimer la coordonnée négative de la bonne réponse supprimerait ce que
+le short enseigne, pour un écart d'un caractère à l'écran.
+⭐⭐ La leçon générale : **un comptage de caractères sur la VOIX ne mesure pas la
+devinabilité d'une carte.** La voix écrit « moins 1 » en lettres, l'écran écrit « −1 ».
+Six caractères d'écart dans un fichier, un glyphe à l'image.
+
 ### ⏳ CE QUI RESTE SUR CES SIX SHORTS, ET QUI N'EST PAS DE LA PRODUCTION
 
 - **Les planches `-ql` sont à REGARDER** — c'est la condition de Frédéric, redite le
@@ -2732,6 +2767,30 @@ les deux blocs avaient été du même type, il aurait animé le mauvais **en sil
   tout short sans miniature (règle de Frédéric du 01/11). ⛔ Pour les paysages c'est une
   perte de qualité ; pour un short, c'est un verrou.
 - **Les entrées de registre** des 12 shorts, et leur `microId` — aucune n'existe.
+- ⛔ **Les six rendus HD** : ils sont autorisés (Frédéric a regardé les six planches le
+  23/11 à 18:57) et ils n'ont PAS été lancés ici. Le verrou n'a jamais été pris.
+
+### 📌 POUR CELLE QUI REPREND LE SOCLE DES SHORTS — trois choses, et rien d'autre
+
+1. ⏳ **`racine = EcransEspace.racine` MANQUE au bloc des emprunts** de
+   `espace_commun_short.py`. Elle remplit le critère (elle n'utilise que `self.t`, pas
+   de `super()`, rien du 16:9) et elle est nécessaire dès qu'un short écrit une racine :
+   le glyphe √ se rend **sans aucune barre**, donc « √3² + 4² » se lirait « (√3²) + 4² »
+   — la faute même que ce genre d'épisode combat. ⚠️ Deux pièges que son en-tête
+   signale : `.nb` rend le radicande SEUL (sans quoi une carte affiche son nombre avant
+   que la voix le dise), et un radical est plus HAUT qu'un texte de même police (0,07),
+   donc toute cote d'un bloc qui en gagne un se remesure.
+2. ⚠️ **L'API du socle a bougé APRÈS le point fixe `b69199f81`** : `cube_place` a gagné
+   le mot-clé **`noms=None`** (ne nommer que certains sommets). C'est un AJOUT à valeur
+   par défaut, donc rien de ce qui est écrit contre `b69199f81` ne casse. ⛔ Et les
+   valeurs de `ECARTE_CUBE` ont changé, elles : voir la section sur « D » posé sur « F ».
+3. ⭐⭐ **Comment `--fleches` reste juste sans recopier la règle, et c'est ça qu'il faut
+   transmettre, pas le code.** Il ne duplique ni le regex d'un nom de vecteur, ni
+   `MOTS_CAPS`, ni la table `PAS_DES_VECTEURS` : il les **lit dans l'AST** de
+   `manim/poste2/auditer-fleches-vecteurs.py`, par `ast.literal_eval` de ses
+   affectations. Une règle recopiée à deux endroits se périme à un seul — et celle-ci a
+   déjà été élargie deux fois. ⛔ Si l'outil partagé change de forme (un nom
+   d'affectation qui disparaît), le contrôle le DIT et rend 1 au lieu de se taire.
 
 ## Le rendu HD
 
