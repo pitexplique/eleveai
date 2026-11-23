@@ -617,6 +617,33 @@ c'est **le geste de publication, que Frédéric lance lui-même**. La décision 
 sienne : publier maintenant avec les vignettes automatiques, ou fabriquer les 12
 miniatures d'abord. ⛔ Ce n'est pas à trancher entre sessions.
 
+### Le détail du code, lu ligne à ligne (et la ligne vraie qui trompe)
+
+- `poserMiniature` : `if (!fichier) return "absente";` — on continue.
+- l. **802**, le seul filtre « miniature » du chemin des vidéos :
+  `.filter((v) => v.type !== "short" || !MINIATURE_SHORTS || cheminMiniature(v.miniature))`
+  avec, juste au-dessus, la raison : Frédéric, 01/11, « fais attention de bien mettre les
+  miniatures dans les shorts ». ⭐⭐ **Il ne porte QUE sur les shorts.** Les 11 entrées
+  « espace » sont toutes de `type: "longue"` (compté) : aucune n'est retenue.
+- ⚠️ **LA LIGNE VRAIE QUI TROMPE** : l. **563**, `freinDuFilm` contient bien
+  `if (!cheminMiniature(v.miniature)) return "miniature absente";` — une vraie barrière,
+  mais sur les `films`, **une autre source**, pas sur les vidéos du registre. On trouve
+  une ligne exacte et on conclut sur le mauvais chemin. ⭐ Quand une ligne confirme ce
+  qu'on croyait, vérifier d'abord **qui l'appelle**.
+
+### Ce qui reste vraiment entre ces vidéos et les élèves
+
+`brancher-videos-coach.mjs` part de la `url` de chaque entrée, et **les 11 en ont zéro**.
+La chaîne est donc : **publication → `url` → branchement**, et le premier maillon est un
+geste de Frédéric. Rien d'autre ne bloque.
+
+⚠️⚠️ **Mais les miniatures redeviennent obligatoires aux SHORTS.** Les 12 shorts de la
+série restent à produire, et un short sans miniature n'est jamais envoyé — c'est la règle
+de Frédéric du 01/11, codée l. 802. Donc l'arbitrage de ce soir n'est pas « qualité contre
+délai une fois pour toutes » : les 12 miniatures seront nécessaires de toute façon dès
+qu'on passera aux shorts. La seule question est de savoir si les 11 paysages partent
+avant elles.
+
 ⭐ La leçon de méthode, la énième de la série : une chaîne de conséquences
 (« pas de miniature → pas de publication → rien à brancher ») se vérifie **maillon par
 maillon, dans le code**. Les deux bouts étaient justes et le milieu était faux.
