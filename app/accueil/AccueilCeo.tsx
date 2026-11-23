@@ -134,7 +134,9 @@ export default function AccueilCeo() {
               href="/coach-ia/maths"
               className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-teal-700 px-9 py-4 text-xl font-black text-white shadow-lg hover:bg-teal-800 sm:w-auto"
             >
-              Essayer gratuitement <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              {/* 23/11, Frédéric : « remplace essayer gratuitement par Accéder aux coachs
+                  ou trouve une autre formule ». */}
+              Accéder au coach <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </Link>
             <Link
               href="#classes"
