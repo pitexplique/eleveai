@@ -277,6 +277,69 @@ calculées — mais **pas** le point K sur la diagonale : le poser, c'est montre
 
 ---
 
+## 🗺️ CARTOGRAPHIE SUR LE SOCLE — quelle pièce porte quel écran (lecture seule, 23/11)
+
+Relevé sur `espace_commun_short.py` **tel qu'il est** (non commité, dernière écriture
+18:42), pour faire remonter une pièce manquante pendant qu'il est encore ouvert. ⚠️ Si
+une signature change au gel, cette table se refait en quelques minutes : c'est un travail
+peu cher à perdre, contrairement à six scripts.
+
+| l'écran, dans les six shorts | la pièce du socle | les arguments |
+|---|---|---|
+| `00-accroche`, le titre + l'échelle | `entete_blocs(titre, fs=38)` | bâti et positionné, **pas joué** — c'est `construct()` qui anime, pour que la mesure voie les objets rendus |
+| la phrase choc | `para(lignes, y, fs, buff, larg)` ou `blocs_phrase` + `jouer_phrase` | `blocs_phrase` quand la ligne doit sortir **à son mot** |
+| une équation jeton par jeton (E7, E11, E12) | `eq_mots(jetons, fs=28)` | ⭐ ses « 0 » sont **hors audit** : utile aux triplets à coordonnée nulle |
+| un vecteur nommé, avec sa flèche | `vec` / `vexpr` (empruntés) | la flèche est **tracée**, jamais le combinant U+20D7 |
+| un triplet (E7, E11) | `trip` (emprunté) | `g.nb[i]` donne les trois nombres séparés |
+| le cube (E10, E12) | `cube_place(u, y, x, fs, ecarte, base)` | ⛔ l'origine est **calculée** pour que le cube tombe en (x ; y) : on ne le recentre pas après coup, sinon `r.pt(...)` ment |
+| une arête ou une diagonale en couleur | `arete(r, s1, s2, couleur, sw)` | posée **par-dessus** l'arête existante |
+| le sol à plat (E8) | `plan_dessine` | ✅ déjà importé par le socle depuis `espace3d` |
+| la question et ses 3 cartes | `q_tete(question, choix, largeur=3.95, fs_q=28, fs_c=26, y_tete=2.18, duree=3)` | la pause de 3 s est l'argument `duree` |
+| un choix sur deux lignes | `choix2(l1, l2, fs=24, noms=())` | `noms=` fait passer la ligne par `vexpr` : une carte fléchée |
+| la carte gagnante | `q_reponse(cartes, bonne, pause, rebours)` | ⛔ on lui passe **pause et rebours** : c'est elle qui les efface (défaut n° 1 de E1) |
+| l'appel au commentaire | `appel_blocs(y, fs=30)` + `jouer_appel(g)` | coupé en deux lignes, et c'est une mesure |
+| la page d'abonnement | `fin_short(voix, a_effacer=())` | identique aux six |
+| caler un affichage sur la voix | `au_mot`, `au_fin`, `au_fin_pos(i, longueur)` | ⭐ `au_fin_pos` évite le `find` depuis le début, donc l'occurrence ambiguë |
+
+✅ **Deux besoins que je croyais manquants sont couverts** : le socle importe déjà
+`Repere3D`, `plan_dessine` **et** `platitude` depuis `espace3d`. Donc le sol de E8 et les
+vecteurs nommés d'une figure sont servis, et je peux vérifier qu'une figure ne se
+projette pas sur une lame avant de la poser.
+
+### ⛔⛔ LA TROISIÈME PIÈCE MANQUANTE N'EST PAS UNE FONCTION, C'EST UNE FAMILLE
+
+Chaque épisode paysage porte ses figures comme fonctions de module, **dans son propre
+fichier livré** : E7 `kelly()`, `poussee()` · E8 `marc()`, `poteau_vue()`,
+`plan_poteau()` · E9 `coureur()`, `pente()` · E10 `coin()`. Or un short **prend une idée
+de son épisode** — donc il veut la figure qui porte cette idée.
+
+Trois d'entre elles me sont nécessaires, et elles ont toutes **la même raison d'exister** :
+
+| la figure | l'épisode | mon short | pourquoi elle est PLANE |
+|---|---|---|---|
+| `poteau_vue(penche=False)` | E8 | `01-idee` : droit de face, penché de côté | « un morceau de plan en cavalière aurait fait croire à une figure de l'espace, dans un épisode dont les deux plans se projettent sur une lame » |
+| `pente()` | E9 | `01-idee` : 10 km à plat, 1 de dénivelé | la hauteur fait **exactement un dixième** de la base ; « en cavalière, un angle de 5,7° serait illisible ET faux » |
+| `coin(deg, …)` | E10 | `02b-reponse` : l'angle enfin montré | la cavalière ne conserve **aucun** angle : 42° au lieu de 55° |
+
+⭐ Et `plan_dessine`, qui est **exactement de la même famille**, vit déjà dans
+`espace3d.py`. Les trois autres sont restées dans leur épisode par accident d'écriture,
+pas par décision.
+
+👉 **La demande** : recopier `poteau_vue`, `pente` et `coin` dans `espace3d.py` — la
+boîte à figures commune, que le socle des shorts importe déjà — avec leur provenance en
+commentaire. ⛔ Je ne les importe pas depuis les épisodes livrés : importer un module de
+Scene pour une fonction, c'est exécuter ses assertions de figure et se lier à un fichier
+qui n'a aucune raison de rester stable.
+
+**Ce que ça coûte si elles manquent** — et ce n'est pas une précaution, c'est le poste de
+dépense le mieux documenté de la série : je les redessine, et la note recense SIX
+épisodes d'affilée où une figure redessinée a coûté un tour de `-ql`, vue au gros plan et
+par rien d'autre — la visière de Jean-Bernard, le casque de Marc, l'aile en bol de Kelly,
+la queue de cheval détachée, le triangle « 3-4-5 » faux de 13 %, l'arc posé du mauvais
+côté. ⚠️ `pente()` est précisément celle dont un redessin raterait le plus cher : son
+échelle **est** la leçon, et un schéma exagéré ferait dire à l'écran le contraire de la
+voix.
+
 ## ⏭ Ce qui reste, dans l'ordre
 
 1. ⏳ le gel de `espace_commun_short.py`, **et son SHA** : on écrit contre un commit,
