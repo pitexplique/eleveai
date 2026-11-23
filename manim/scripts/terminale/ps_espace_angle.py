@@ -515,7 +515,10 @@ class PsEspaceAngleBase(EcransEspace):
         # sur E4) : un nom centré sous un personnage posé à gauche part hors marge.
         if nom.get_left()[0] < -6.5:
             nom.shift(RIGHT * (-6.5 - nom.get_left()[0]))
-        lieu = self.t("Saint-Pierre", 24, GREY_A).next_to(nom, DOWN, buff=0.08)
+        # ⚠️ 0,18 ET NON 0,08 : vu au gros plan, le bas de « Ravi » touchait le haut de
+        # « Saint-Pierre ». La mesure ne le voyait pas — elle compare la BOÎTE des deux
+        # pris ensemble à la marge, pas les deux entre eux.
+        lieu = self.t("Saint-Pierre", 24, GREY_A).next_to(nom, DOWN, buff=0.18)
         if lieu.get_left()[0] < -6.5:
             lieu.shift(RIGHT * (-6.5 - lieu.get_left()[0]))
         self.play(FadeIn(c, shift=UP * 0.2), FadeIn(nom), run_time=0.7)
@@ -1007,7 +1010,12 @@ class PsEspaceAngleBase(EcransEspace):
         g.move_to(P(-4.25, 1.25))
         o = g.sommet()
         nv = self.vec("v", 26, C_VECTEUR2).move_to(o + g.p2 * 0.78 + ecart(g.p2, +1))
-        nw = self.vec("−v", 26, C_VECTEUR2).move_to(o + g.p3 * 0.78 + ecart(g.p3, -1, 0.52))
+        # ⛔ LA FLÈCHE NE COIFFE QUE LE NOM, PAS LE SIGNE : `vec("−v")` dessinait la
+        # flèche au-dessus de « −v » tout entier, et au gros plan on lisait un double
+        # trait. Un vecteur opposé s'écrit « − » suivi de « v⃗ ».
+        nw = VGroup(self.t("−", 26, C_VECTEUR2), self.vec("v", 26, C_VECTEUR2))
+        nw.arrange(RIGHT, buff=0.06, aligned_edge=DOWN)
+        nw.move_to(o + g.p3 * 0.78 + ecart(g.p3, -1, 0.52))
         nw.set_opacity(0.75)
         self.au_mot("Si tu retournes un vecteur")
         self.play(GrowArrow(g.f1), GrowArrow(g.f2), Create(g.arc), FadeIn(nv),
@@ -1283,16 +1291,19 @@ class PsEspaceAngleBase(EcransEspace):
         # AUDIT-TARD) : « 1 fois 1, plus 1 fois zéro, plus 1 fois zéro, donc 1 » dure
         # plus de quatre secondes. Posée d'un bloc, la ligne mettrait son total à l'écran
         # bien avant qu'il soit dit.
-        t1 = self.t("1 × 1", fs, WHITE)
-        t2 = self.lettres(self.t("+ 1 × 0", fs, WHITE))
-        t3 = self.lettres(self.t("+ 1 × 0", fs, WHITE))
-        t4 = self.t(f"= {ps(AG, AB)}", fs, VERT_OK)
+        t1 = self.t("1 × 1", 24, WHITE)
+        t2 = self.lettres(self.t("+ 1 × 0", 24, WHITE))
+        t3 = self.lettres(self.t("+ 1 × 0", 24, WHITE))
+        t4 = self.t(f"= {ps(AG, AB)}", 24, VERT_OK)
         # ⛔⛔ DEUX ÉTAGES, ET C'EST UNE MESURE : d'un seul tenant cette ligne fait 6,69
         # pour les 4,40 qu'offre la colonne de droite, donc `col()` la réduisait de 34 %
         # — le calcul du défi serait devenu le plus petit texte de l'épisode.
         entete = self.sans_audit(self.vexpr("A G · A B =", ("A G", "A B"), fs, GREY_A))
-        # ⚠️ buff 0,06 et non 0,12 : à 0,12 la ligne fait 4,51 pour les 4,40 offerts.
-        suite = VGroup(t1, t2, t3, t4).arrange(RIGHT, buff=0.06, aligned_edge=DOWN)
+        # ⛔⛔ VU AU GROS PLAN : à buff 0,06 on lisait « 1 × 1+ 1 × 0+ 1 × 0= 1 » — les
+        # « + » et le « = » collés au terme de gauche et détachés de celui de droite.
+        # La ligne doit tenir dans les 4,40 de la colonne, alors c'est la POLICE qui
+        # cède, pas l'espacement : 24 px et buff 0,14 font 4,25.
+        suite = VGroup(t1, t2, t3, t4).arrange(RIGHT, buff=0.14, aligned_edge=DOWN)
         calc = VGroup(entete, suite).arrange(DOWN, aligned_edge=LEFT, buff=0.10)
         self.col(calc, 0.95)
         self.au_fin("1 fois 1")
@@ -1310,10 +1321,15 @@ class PsEspaceAngleBase(EcransEspace):
 
         # ── ③ les deux normes, puis le cosinus ────────────────────────────
         self.au_fin("celle de A B vaut 1")
-        lno = VGroup(self.sans_audit(self.vexpr("‖A G‖ =", ("A G",), fs, WHITE)),
-                     self.racine(norme2(AG), fs, WHITE),
-                     self.sans_audit(self.vexpr("‖A B‖ = 1", ("A B",), fs, WHITE)))
-        lno.arrange(RIGHT, buff=0.20, aligned_edge=DOWN)
+        # ⛔ DEUX LIGNES, ET C'EST LE GROS PLAN QUI L'A DIT : côte à côte, « √3 » et
+        # « ‖A B⃗‖ » se lisaient comme un PRODUIT. Deux normes sont deux résultats, pas
+        # une multiplication — et l'écran 06 passe son temps à dire que le produit des
+        # normes est au DÉNOMINATEUR.
+        lig1 = VGroup(self.sans_audit(self.vexpr("‖A G‖ =", ("A G",), fs, WHITE)),
+                      self.racine(norme2(AG), fs, WHITE))
+        lig1.arrange(RIGHT, buff=0.14, aligned_edge=DOWN)
+        lno = VGroup(lig1, self.sans_audit(self.vexpr("‖A B‖ = 1", ("A B",), fs, WHITE)))
+        lno.arrange(DOWN, aligned_edge=LEFT, buff=0.10)
         self.col(lno, 0.15)
         self.play(FadeIn(lno, shift=RIGHT * 0.12), run_time=0.55)
         # ⚠️ Une fraction dont le dénominateur est un RADICAL : le bloc est haut, et sa
