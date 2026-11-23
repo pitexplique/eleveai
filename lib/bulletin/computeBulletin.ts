@@ -42,11 +42,7 @@ const LABELS_MATIERE: Record<string, string> = {
   brevet: "brevet",
 };
 
-// `poids` = nombre de questions (23/11/2026, Frédéric : « si tu pondères il
-// faut expliquer à l'élève »). Une séance de 30 questions pèse 30 fois plus
-// qu'une séance d'une seule question : la moyenne vaut alors
-// (toutes les bonnes réponses ÷ toutes les questions) × 20.
-type Evenement = { matiere: string; note20: number; t: number; poids: number };
+type Evenement = { matiere: string; note20: number; t: number };
 
 export type { Bulletin, PeriodeBulletin, MatiereStat } from "./types";
 
@@ -60,12 +56,6 @@ function moyenne(notes: number[]): number | null {
   if (notes.length === 0) return null;
   return round1(notes.reduce((s, n) => s + n, 0) / notes.length);
 }
-// Moyenne pondérée par le nombre de questions de chaque résultat.
-function moyennePonderee(evts: Evenement[]): number | null {
-  const poids = evts.reduce((s, e) => s + e.poids, 0);
-  if (evts.length === 0 || poids <= 0) return null;
-  return round1(evts.reduce((s, e) => s + e.note20 * e.poids, 0) / poids);
-}
 
 // Progression = moyenne(2e moitié) − moyenne(1re moitié), triée par date.
 // Demande un minimum de résultats pour avoir du sens.
@@ -73,8 +63,8 @@ function progression(evts: Evenement[]): number | null {
   if (evts.length < 6) return null;
   const tries = [...evts].sort((a, b) => a.t - b.t);
   const milieu = Math.floor(tries.length / 2);
-  const m1 = moyennePonderee(tries.slice(0, milieu));
-  const m2 = moyennePonderee(tries.slice(milieu));
+  const m1 = moyenne(tries.slice(0, milieu).map((e) => e.note20));
+  const m2 = moyenne(tries.slice(milieu).map((e) => e.note20));
   if (m1 === null || m2 === null) return null;
   return round1(m2 - m1);
 }
@@ -138,7 +128,7 @@ async function fetchEvenements(
       const cols = ["created_at"];
       if (src.note20Field) cols.push(src.note20Field);
       // 🏋️ Séances d'entraînement du coach (23/11/2026) : hors moyenne.
-      if (src.table === "resultats_tutor") cols.push("entrainement:details->entrainement", "nb_tentatives");
+      if (src.table === "resultats_tutor") cols.push("entrainement:details->entrainement");
       else cols.push("score", "total");
       if (src.matiereField) cols.push(src.matiereField);
 
@@ -157,10 +147,7 @@ async function fetchEvenements(
         if (!matiere) continue;
         if (r.entrainement === true) continue;
         let note20: number | null = null;
-        let poids = 1;
         if (src.note20Field) {
-          const n = Number(r.nb_tentatives);
-          if (Number.isFinite(n) && n > 0) poids = n;
           const v = Number(r[src.note20Field]);
           note20 = Number.isFinite(v) ? clamp20(v) : null;
         } else {
@@ -168,13 +155,12 @@ async function fetchEvenements(
           const t = Number(r.total);
           if (Number.isFinite(s) && Number.isFinite(t) && t > 0) {
             note20 = clamp20((s / t) * 20);
-            poids = t;
           }
         }
         if (note20 === null) continue;
         const t = new Date(r.created_at as string).getTime();
         if (!Number.isFinite(t)) continue;
-        out.push({ matiere, note20, t, poids });
+        out.push({ matiere, note20, t });
       }
       return out;
     })
@@ -221,7 +207,7 @@ function calculerPeriode(
   const matieres: MatiereStat[] = [...parMatiere.entries()]
     .map(([matiere, list]) => ({
       matiere,
-      note: moyennePonderee(list),
+      note: moyenne(list.map((e) => e.note20)),
       nb: list.length,
       progression: progression(list),
     }))

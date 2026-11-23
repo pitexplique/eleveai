@@ -236,7 +236,7 @@ export default function BulletinClient() {
         )}
 
         <p className="mt-4 text-xs text-slate-500">
-          Moyenne = bonnes réponses ÷ questions × 20, sur toutes les séances du coach (une séance pèse son nombre de questions ; les séances « entraînement » choisies par l’élève ne comptent pas). Acquis : 80 % de justes ou plus, sur 3 réponses au
+          Moyenne = moyenne des notes /20 des séances du coach. Acquis : 80 % de justes ou plus, sur 3 réponses au
           moins ; à revoir : moins de 50 %. Matin 6 h-12 h, après-midi 12 h-18 h, soir après 18 h, heure de La Réunion.
           Seuls les élèves connectés avec leur code laissent une trace. Les appréciations modifiées ne sont pas
           enregistrées : copiez-les dans Pronote avant de quitter la page.
