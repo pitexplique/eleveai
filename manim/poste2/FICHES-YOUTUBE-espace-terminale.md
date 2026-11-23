@@ -754,6 +754,97 @@ de A est l'origine · 6:11 Ce que tu as appris.
 
 ---
 
+## E12 · `terminale-ps-espace-defi` — ✅ rendu HD fait
+
+`manim/sorties/terminale/maths/geometrie/ps-espace-defi/eleveai-maths-terminale-ps-espace-defi.mp4`
+6 min 48.9 (408.85 s) · 27.4 Mo · **0 instant qui touche un bord** · planche HD regardée.
+⭐ **DOUZIÈME ET DERNIER DE LA SÉRIE.** Script et planches écrits par une autre session
+(commit `bdead4cc1`), HD rendu ici — la frontière a été tenue des deux côtés : regarder
+d'un côté, corriger de l'autre, et aucun fichier touché à deux mains.
+⭐ Marques : **935**. Le script était FIGÉ pendant le rendu, vérifié au caractère près
+avant et après (`621f00d3…` et `159fc7a4…`, `git diff HEAD` vide) : le HD rend bien la
+version qui a été regardée. ⛔ C'est l'inverse de l'âge d'un fichier, qui ne prouve rien.
+⭐ Dry run `-qh` : **0 BORD · 0 AUDIT-AVANCE · 0 RETARD**, un seul `AUDIT-ABSENT`
+(`@eleveai974`). Mesure : 0 ennui. Flèches : 0 NU.
+
+⛔⛔ **CE QUE LA CAVALIÈRE AURAIT FAIT DE LA QUESTION 2, ET POURQUOI LE TRIANGLE EST À
+PLAT.** `platitude((1 ; 1 ; 1))` = **9,02°**, sous le seuil de 12° : le plan (BDE) se
+projette sur une lame. Mesuré sur le triangle lui-même, dont la bonne réponse est
+« équilatéral » :
+
+| | réel | en cavalière |
+|---|---|---|
+| côté B D | 1,414 | **0,656** |
+| côté B E | 1,414 | **1,414** |
+| côté D E | 1,414 | **0,822** |
+| angle en B | 60,0° | **19,1°** |
+| aire | 100 % | **17,5 %** |
+
+Un élève y aurait lu « quelconque » — c'est-à-dire le **leurre C de sa propre question**.
+C'est le 3-4-5 faux de l'épisode 9 en plus grave : là-bas le schéma était faux de 13 %,
+ici il aurait plaidé pour une mauvaise réponse. ⭐ L'écran 07 ne porte donc que les trois
+POINTS (la donnée) et la forme arrive en 07b par une figure PLANE, vue dans son plan.
+
+⭐⭐ **ET L'ÉQUILATÉRALITÉ EST VÉRIFIÉE SUR L'IMAGE RENDUE, PAS SEULEMENT À LA
+CONSTRUCTION.** Une assertion de module mesure les `Line` telles qu'on les bâtit — avant
+`scale`, `move_to`, l'épaisseur de trait et l'anticrénelage. Les pixels oranges du rendu
+ont donc été extraits et les trois côtés mesurés. ⛔ Les deux contrôles, pas l'un des deux.
+
+⚠️ **Les douze arêtes du cube ont été COMPTÉES une par une** sur un recadrage ×4,6, et pas
+déduites d'une assertion : `[E H]` a manqué pendant six épisodes sans qu'aucun instrument
+le voie. Une absence ne se mesure pas, elle se compte.
+
+```json
+{
+  "id": "terminale-ps-espace-defi",
+  "notionId": "produit_scalaire_espace",
+  "microId": "ps_espace_defi",
+  "classe": "terminale-spe",
+  "ceinture": "verte",
+  "serie": "Maths Tle spé",
+  "type": "longue",
+  "fichier": "terminale/maths/geometrie/ps-espace-defi/eleveai-maths-terminale-ps-espace-defi.mp4",
+  "miniature": "terminale/maths/geometrie/ps-espace-defi/eleveai-maths-terminale-ps-espace-defi.png",
+  "titre": "Le plan (BDE) coupe la diagonale du cube à son premier tiers · Exercice type bac · Tle spé",
+  "centres": ["jeux-defis"],
+  "tags": ["exercice type bac", "produit scalaire", "vecteur normal", "équation de plan", "projeté orthogonal", "distance à un plan", "cube ABCDEFGH", "espace", "terminale", "bac"]
+}
+```
+
+**Accroche** (à relire par Frédéric avant publication) :
+
+> Regarde les sujets des années passées : l'exercice de l'espace suit presque toujours le
+> même chemin. On démontre qu'un vecteur est normal à un plan, on en déduit l'équation de
+> ce plan, puis on calcule une distance, un projeté ou un angle. Si tu reconnais le
+> chemin, tu ne cherches plus quoi faire : tu avances.
+>
+> Dans cette vidéo :
+> • le fil en trois étapes : deux produits scalaires nuls prouvent qu'un vecteur est
+>   normal au plan, ce vecteur donne les coefficients de l'équation, et un point du plan
+>   donne le terme constant
+> • la boîte à outils complète, cinq objets — et ils suffisent pour tout l'exercice
+> • les cinq pièges de la copie, qui coûtent plus cher que les erreurs de calcul :
+>   prouver l'orthogonalité sur une seule direction, oublier d'écrire la non-colinéarité,
+>   donner un arrondi quand l'énoncé veut l'exact, annoncer une distance négative, et
+>   s'appuyer sur le dessin pour affirmer — dans l'espace, la preuve est toujours un calcul
+> • le squelette d'une copie complète, qui fonctionne sur n'importe quel sujet de l'espace
+>
+> Deux questions-pauses et un défi corrigé dans le cube d'arête 1 : le projeté orthogonal
+> de A sur le plan B D E, et la distance de A à ce plan. Elle vaut racine de 3 sur 3,
+> environ zéro virgule 58 — et le point trouvé est au premier tiers de la grande
+> diagonale. Entraîne-toi sur eleveai.fr
+
+**Chapitres**, relevés sur le rendu (⛔ ils partent VERBATIM dans la description
+YouTube : descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Une normale, une équation, une distance · 0:12 Toujours le même chemin · 0:35 Le
+fil, en trois étapes · 1:00 Cinq objets, et ils suffisent · 1:24 Question 1 · 1:50
+Réponse : les deux produits scalaires, et la phrase · 2:17 Dans le cube : la normale,
+puis l'équation · 3:03 Cinq pièges de copie · 3:38 Question 2 · 4:00 Réponse : le
+triangle BDE est équilatéral · 4:30 Le squelette d'une copie · 5:00 À toi de jouer ·
+5:22 Correction : K au premier tiers de la diagonale · 6:19 Ce que tu as appris.
+
+---
+
 ## E10 à E12 — ⏳ en attente de leur rendu HD
 
 Les identifiants sont fixés et doivent rester ceux-là (c'est sur eux que le coach

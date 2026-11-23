@@ -109007,6 +109007,116 @@
           "explication": "Les deux normales, 1, 1, 1 et 2, 2, 2, sont colinéaires : les plans sont donc parallèles, ils ne sont pas sécants. Sont-ils confondus ?"
         }
       ]
+    },
+    {
+      "id": "terminale-ps-espace-defi",
+      "notionId": "produit_scalaire_espace",
+      "microId": "ps_espace_defi",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/geometrie/ps-espace-defi/eleveai-maths-terminale-ps-espace-defi.mp4",
+      "miniature": "terminale/maths/geometrie/ps-espace-defi/eleveai-maths-terminale-ps-espace-defi.png",
+      "titre": "Le plan (BDE) coupe la diagonale du cube à son premier tiers · Exercice type bac · Tle spé",
+      "centres": [
+        "jeux-defis"
+      ],
+      "tags": [
+        "exercice type bac",
+        "produit scalaire",
+        "vecteur normal",
+        "équation de plan",
+        "projeté orthogonal",
+        "distance à un plan",
+        "cube ABCDEFGH",
+        "espace",
+        "terminale",
+        "bac"
+      ],
+      "accroche": "Regarde les sujets des années passées : l'exercice de l'espace suit presque toujours le même chemin. On démontre qu'un vecteur est normal à un plan, on en déduit l'équation de ce plan, puis on calcule une distance, un projeté ou un angle. Si tu reconnais le chemin, tu ne cherches plus quoi faire : tu avances.\n\nDans cette vidéo :\n• le fil en trois étapes : deux produits scalaires nuls prouvent qu'un vecteur est normal au plan, ce vecteur donne les coefficients de l'équation, et un point du plan donne le terme constant\n• la boîte à outils complète, cinq objets — et ils suffisent pour tout l'exercice\n• les cinq pièges de la copie, qui coûtent plus cher que les erreurs de calcul : prouver l'orthogonalité sur une seule direction, oublier d'écrire la non-colinéarité, donner un arrondi quand l'énoncé veut l'exact, annoncer une distance négative, et s'appuyer sur le dessin pour affirmer — dans l'espace, la preuve est toujours un calcul\n• le squelette d'une copie complète, qui fonctionne sur n'importe quel sujet de l'espace\n\nDeux questions-pauses et un défi corrigé dans le cube d'arête 1 : le projeté orthogonal de A sur le plan B D E, et la distance de A à ce plan. Elle vaut racine de 3 sur 3, environ zéro virgule 58 — et le point trouvé est au premier tiers de la grande diagonale. Entraîne-toi sur eleveai.fr\n\n🎯 La série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_defi&display=simple\n\n📈 Épisode 12 sur 12 de la série « Géométrie dans l'espace » d'EleveAI · Maths Tle spé.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une normale, une équation, une distance"
+        ],
+        [
+          "00:12",
+          "Toujours le même chemin"
+        ],
+        [
+          "00:35",
+          "Le fil, en trois étapes"
+        ],
+        [
+          "01:00",
+          "Cinq objets, et ils suffisent"
+        ],
+        [
+          "01:24",
+          "Question 1"
+        ],
+        [
+          "01:50",
+          "Réponse : les deux produits scalaires, et la phrase"
+        ],
+        [
+          "02:17",
+          "Dans le cube : la normale, puis l'équation"
+        ],
+        [
+          "03:03",
+          "Cinq pièges de copie"
+        ],
+        [
+          "03:38",
+          "Question 2"
+        ],
+        [
+          "04:00",
+          "Réponse : le triangle BDE est équilatéral"
+        ],
+        [
+          "04:30",
+          "Le squelette d'une copie"
+        ],
+        [
+          "05:00",
+          "À toi de jouer"
+        ],
+        [
+          "05:22",
+          "Correction : K au premier tiers de la diagonale"
+        ],
+        [
+          "06:19",
+          "Ce que tu as appris"
+        ]
+      ],
+      "questions": [
+        {
+          "t": "01:24",
+          "question": "Pour démontrer qu'un vecteur n est normal au plan B D E, que faut-il vérifier ?",
+          "choix": [
+            "que n est orthogonal à B D",
+            "que n est orthogonal à B D et à B E, et que ces deux vecteurs ne sont pas colinéaires",
+            "que n est colinéaire à B D"
+          ],
+          "reponse": 1,
+          "explication": "Il faut les deux produits scalaires, et il faut la phrase sur la non-colinéarité : sans elle, la démonstration est incomplète et le point est perdu."
+        },
+        {
+          "t": "03:38",
+          "question": "Dans le cube d'arête 1, on considère les points B, D et E. Le triangle B D E est :",
+          "choix": [
+            "équilatéral",
+            "rectangle en B",
+            "quelconque"
+          ],
+          "reponse": 0,
+          "explication": "Chacun de ses trois côtés est la diagonale d'une face du cube : B D, B E et D E ont tous pour longueur racine de 2. Rectangle en B ?"
+        }
+      ]
     }
   ]
 }
