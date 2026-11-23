@@ -32,7 +32,15 @@ import { loadKnowledgeV4 } from "@/lib/tutor-v4/loaders/loadKnowledgeV4";
 const CLASSES_MATHS = [
   "cp", "ce1", "ce2", "cm1", "cm2",
   "6e", "5e", "4e", "3e",
-  "seconde", "premiere-spe", "terminale-spe", "stmg", "adulte",
+  /* ⛔⛔ `premiere` MANQUAIT ICI JUSQU'AU 23/11/2026, et c'est le genre de trou
+     que ce script existe justement pour fermer : la classe est au catalogue,
+     dans le selecteur du coach depuis le 14/08, et ce verificateur ne l'a
+     JAMAIS regardee. Quatre items de derivee y etaient ranges sous
+     `der_graphique` alors que la connaissance range leur micro sous
+     `der_nombre_derive` : ecrits, comptes par les cinq verificateurs de
+     banque, et introuvables par le moteur. Une liste a la main a cote d'un
+     registre, pour la troisieme fois dans ce depot. */
+  "seconde", "premiere", "premiere-spe", "terminale-spe", "stmg", "adulte",
 ] as const;
 
 type Ecart = {

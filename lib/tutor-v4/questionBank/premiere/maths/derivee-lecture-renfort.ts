@@ -925,10 +925,17 @@ const LIGNES: Ligne[] = [
   [G, "der_comparer_vitesses", 4, genComparerCalcul, H_COMP],
   [G, "der_comparer_vitesses", 4, genComparerTableau, H_COMP],
 
-  [G, "der_nombre_derive_sens", 5, genSensFouFp, H_SENS5],
-  [G, "der_nombre_derive_sens", 5, genSensAnnule, H_SENS5],
-  [G, "der_nombre_derive_sens", 5, genSensFpExtremum, H_SENS5],
-  [G, "der_nombre_derive_sens", 5, genSensVitesseGraphe, H_SENS],
+  /* ⛔⛔ CES QUATRE-LA ETAIENT SOUS `G` (der_graphique) ET N'ATTEIGNAIENT
+     PERSONNE (23/11/2026). Le moteur cherche ses items avec les DEUX cles a la
+     fois (`questionPairBuilder.ts:349`), et il prend le `notionId` de la
+     CONNAISSANCE, qui range `der_nombre_derive_sens` sous `der_nombre_derive`.
+     Range sous une autre notion, un item est ecrit, compte, et invisible.
+     Les quatre ★5 de cette micro etaient donc perdus depuis leur ecriture.
+     ⛔ L'item suit la connaissance, jamais l'inverse. */
+  [ND, "der_nombre_derive_sens", 5, genSensFouFp, H_SENS5],
+  [ND, "der_nombre_derive_sens", 5, genSensAnnule, H_SENS5],
+  [ND, "der_nombre_derive_sens", 5, genSensFpExtremum, H_SENS5],
+  [ND, "der_nombre_derive_sens", 5, genSensVitesseGraphe, H_SENS],
 
   [ND, "der_nombre_derive_sens", 2, genSensInterpret, H_SENS],
   [ND, "der_nombre_derive_sens", 2, genSensUnite, H_MOD],
