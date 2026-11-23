@@ -809,7 +809,8 @@ const anciens: TutorBankItemV4[] = [
         choices: makeChoices(`$${fr(ht)}$ €`, [
           `$${fr(ttc * (1 - t / 100))}$ €`,
           `$${fr(ttc - t)}$ €`,
-          `$${fr(ttc / (1 - t / 100))}$ €`,
+          // ⛔ 23/11 : ttc ÷ (1 − t/100) affichait « 1222,2222 € » : arrondi au centime.
+          `$${fr(Math.round((ttc / (1 - t / 100)) * 100) / 100)}$ €`,
           `$${fr(ttc * coef)}$ €`,
           `$${fr((ttc * t) / 100)}$ €`,
           `$${fr(ht + t)}$ €`,
@@ -1962,10 +1963,9 @@ const anciens: TutorBankItemV4[] = [
 // à nombreuses tournures) ; leurs anciens gabarits et leurs « open » sont retirés.
 // ⛔ 05/11 : sauf ceux-ci, qui posent un geste que le renfort n'a pas : le geste simple de
 // valeur initiale, TTC → HT, le calcul d'un indice, le taux entre deux indices quelconques.
+// ⛔ 23/11 (audit) : stmg_evo_initiale_tpl_1, _tpl_2 et _tpl_apres_hausse n'avaient qu'une phrase
+// (7,5 répétitions sur 20) ; le renfort (genValeurInitiale : remise, hausse, baisse, TTC en QCM) les remplace.
 const GABARITS_GARDES = [
-  "stmg_evo_initiale_tpl_1",
-  "stmg_evo_initiale_tpl_2",
-  "stmg_evo_initiale_tpl_apres_hausse",
   "stmg_indice_interpreter_tpl_1",
   "stmg_indice_interpreter_tpl_2",
   "stmg_indice_calculer_tpl_1",
