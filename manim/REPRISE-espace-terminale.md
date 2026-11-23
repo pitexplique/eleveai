@@ -594,6 +594,33 @@ tête, la faute la plus fréquente de cette série. Les scripts qui appellent `.
 pas touchés, et les re-rendre aurait pris le verrou deux heures pour rien.
 ⭐ La commande : `grep -c "\.cube(" manim/scripts/terminale/*espace*.py`
 
+## ⚠️ Les miniatures ne BLOQUENT pas la publication — mesuré dans le code
+
+État au 23/11 : **11 paysages livrés, 11 entrées au registre, 0 miniature sur 12.** Les
+11 entrées déclarent un chemin `…/<slug>.png` qui n'existe pas, et `manim/miniatures/`
+est vide pour cette série.
+
+On en a d'abord conclu que la publication était bloquée, donc le coach aussi. ⛔ **Faux**,
+et c'est le code qui tranche (`scripts/publier-youtube.mjs`) :
+
+```js
+const fichier = cheminMiniature(relatif);
+if (!fichier) return "absente";          // ⭐ on continue, on ne lève pas
+```
+
+`cheminMiniature` cherche dans `manim/miniatures/<relatif>` **puis** dans
+`manim/sorties/<relatif>`, et si rien n'existe la vidéo part quand même : elle reçoit la
+vignette que YouTube fabrique tout seul. C'est une perte de qualité, pas un verrou.
+
+👉 Donc ce qui reste entre ces 11 vidéos et les élèves n'est pas une image manquante,
+c'est **le geste de publication, que Frédéric lance lui-même**. La décision est la
+sienne : publier maintenant avec les vignettes automatiques, ou fabriquer les 12
+miniatures d'abord. ⛔ Ce n'est pas à trancher entre sessions.
+
+⭐ La leçon de méthode, la énième de la série : une chaîne de conséquences
+(« pas de miniature → pas de publication → rien à brancher ») se vérifie **maillon par
+maillon, dans le code**. Les deux bouts étaient justes et le milieu était faux.
+
 ## ⛔⛔ Celui qui rend est celui qui a REGARDÉ
 
 Un « j'ai regardé, c'est bon » transmis d'une session à l'autre **n'est pas un regard**.
