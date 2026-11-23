@@ -1905,6 +1905,64 @@ Appliqué ici : `se_coupent()` est aussi lancé sur (AB) et (AD), **qui se coupe
 disent la faute que nomme le leurre sans jamais la comparer à la vérité. Corrigées en
 « le leurre vaut ceci **et** il diffère de la bonne réponse ».
 
+### ⛔⛔ UNE DOCSTRING QUI PROMET CE QUE LE CODE NE PORTE PAS EST PIRE QU'UN SILENCE
+
+Trouvé en recopiant `coin()` de son épisode vers `espace3d.py` (23/11). Sa docstring
+annonce : « l'angle dessiné est vérifié par une assertion du module ».
+
+C'était **vrai dans son épisode** : les assertions de `ps_espace_angle.py` (l. 129-135)
+portent sur les vecteurs U02, V02, U05, V05 de cet épisode-là. ⛔ Elles ne portent PAS
+sur la fonction. Recopiée ailleurs, elle a donc gardé la promesse et perdu le garde-fou.
+
+⭐⭐ **Et c'est pire qu'un silence, parce qu'une promesse DISPENSE DE VÉRIFIER.** Le
+suivant lit « vérifié par une assertion » et passe. Une fonction sans docstring, il
+l'aurait contrôlée. ⚠️ Aucun outil ne voit ça : le code est juste, la docstring est
+bien écrite, et c'est leur RAPPORT qui est faux.
+⭐ La règle : **quand on déplace du code, on déplace aussi ce qui le garantit** — ou on
+le réécrit sur place. Une garantie ne voyage pas toute seule.
+
+⭐ Remède ici : `_controler_figures_planes()`, exécuté À L'IMPORT comme
+`_controler_aretes_du_cube()`, et chaque assertion porte la promesse PROPRE de sa figure
+— `coin(deg)` dessine bien `deg` ; la hauteur de `pente()` fait exactement un dixième de
+sa base ; `poteau_vue()` est droit de face et penché de côté.
+⭐⭐ **Étalonné avant d'être cru**, les trois mises à l'épreuve sur une attente FAUSSE :
+`coin` décalé de 3° → lève ; `pente` étirée au rapport 5 → lève ; poteau qui ne penche
+jamais → lève. **Un contrôle qui ne peut pas échouer ne mesure rien.**
+
+### ⛔⛔ UNE DETTE JUSTIFIÉE PAR UN DANGER IMAGINAIRE NE SE REMBOURSE JAMAIS
+
+Dans le même ajout, j'ai dû redéfinir `P` et `VERT_OK` sur place pour que la copie reste
+verbatim. J'ai justifié le cas de `P` par un **CYCLE D'IMPORT**. ⛔ Il n'existe pas.
+
+J'avais raisonné sur la **ROUTE** par laquelle les épisodes atteignent `P` — via
+`espace_ecrans`, qui importe bien `espace3d` — et non sur l'endroit où `P` est **DÉFINI** :
+`proba_bin_defi.py`, qui n'importe ni l'un ni l'autre. Vérifié depuis **jusqu'aux imports
+INDIRECTS** : la fermeture transitive de `proba_bin_defi` atteint huit modules du dépôt,
+et ni `espace3d` ni `espace_ecrans` n'en font partie.
+
+⭐ La vraie raison était celle que j'avais donnée pour `VERT_OK`, et elle vaut pour les
+deux : une affaire de **`sys.path`**. `espace3d.py` est dans `manim/poste2/` ; ni
+`manim/scripts/terminale/` ni `manim/` n'y sont, sauf par la grâce de l'appelant.
+
+⭐⭐ **Et la leçon n'est pas l'erreur, c'est son coût à terme** : une dette assumée avec
+la BONNE raison se rembourse un jour ; une dette justifiée par un danger IMAGINAIRE ne se
+rembourse jamais, parce que personne n'ose y toucher. ⚠️ Un commentaire faux dans un
+fichier partagé ne se trompe pas tout seul : il trompe le suivant. Corrigé sur place.
+
+### ⭐⭐ UN BRIEF SE PÉRIME, ET IL NE LE SAIT PAS
+
+Mon brief initial m'interdisait `espace3d.py` en toutes lettres. Le chef d'orchestre m'y a
+ensuite envoyé, avec cinq limites écrites. J'ai suivi la seconde consigne **sans
+remarquer qu'elle contredisait la première, et sans le dire**.
+
+⭐ Deux règles en sortent, et aucune n'est à la charge d'un seul :
+1. **« J'ai prévenu » n'est vrai que pour celui qu'on a prévenu.** J'avais décrit,
+   demandé et attendu — mais auprès du chef seulement. De là où était l'autre session,
+   ça ne se distinguait pas d'une écriture en silence.
+2. **Une consigne écrite une fois ne sait pas qu'on l'a remplacée.** Quand une
+   autorisation contredit un brief, c'est à celui qui reçoit les deux de le SIGNALER
+   avant d'agir — pas de choisir laquelle vaut.
+
 ### ⛔⛔ UN CONTRÔLE QU'ON LANCE SANS LIRE SON RÉSULTAT NE PROTÈGE DE RIEN
 
 Deux fois dans la soirée du 23/11, un commit à moi a emporté le travail NON COMMITÉ de

@@ -597,13 +597,27 @@ _controler_aretes_du_cube()
 # La duplication est ASSUMÉE et bornée à ces fichiers-là.
 #
 # ⚠️ DEUX NOMS ONT DÛ ÊTRE DÉFINIS ICI POUR QUE LA COPIE RESTE VERBATIM, et c'est une
-# dette, pas une élégance. Les trois fonctions emploient `P(x, y)` et `VERT_OK` :
-#   · `P` vient de `proba_bin_defi`, que les épisodes atteignent via `espace_ecrans` ;
-#     ⛔ or `espace_ecrans` IMPORTE ce fichier (l. 46). L'importer d'ici fabriquerait un
-#     CYCLE et casserait les douze paysages livrés. Mesuré, pas supposé.
-#   · `VERT_OK` vient de `manim/charte.py`, que ce fichier n'importe pas et qui n'est sur
-#     le `sys.path` que si l'appelant l'y a mis : un import d'ici marcherait depuis un
-#     épisode et échouerait ailleurs.
+# dette, pas une élégance. Les trois fonctions emploient `P(x, y)` et `VERT_OK`, et
+# AUCUN des deux ne peut être importé d'ici — pour la MÊME raison, qui est une affaire
+# de `sys.path` et non de dépendances :
+#   · ce fichier vit dans `manim/poste2/`. `P` est défini dans
+#     `manim/scripts/terminale/proba_bin_defi.py` (l. 61) et `VERT_OK` dans
+#     `manim/charte.py` (l. 5) ;
+#   · ni `manim/scripts/terminale/` ni `manim/` ne sont sur le `sys.path` de ce
+#     fichier autrement que par la grâce de l'APPELANT. Un import d'ici marcherait
+#     depuis un épisode, qui pose ces chemins lui-même, et échouerait partout ailleurs.
+#
+# ⛔⛔ CORRECTION DU 23/11, et elle est écrite ici parce qu'un commentaire faux trompe
+# le suivant : j'avais d'abord justifié le cas de `P` par un CYCLE D'IMPORT. Il n'existe
+# pas. J'avais raisonné sur la ROUTE par laquelle les épisodes atteignent `P` — via
+# `espace_ecrans`, qui importe bien ce fichier — et non sur l'endroit où `P` est
+# DÉFINI. Vérifié depuis, et jusqu'aux imports INDIRECTS : la fermeture transitive de
+# `proba_bin_defi` atteint huit modules du dépôt (charte, gabarit_bases,
+# gabarit_seconde, gabarit_sixieme, mascotte, proba_bin_defi, proba_pc_conditionnelle,
+# signes_expression_2de) et **ni `espace3d` ni `espace_ecrans` n'en font partie**.
+# ⭐ La leçon de méthode : **une dette assumée avec la bonne raison se rembourse un
+# jour ; une dette justifiée par un danger imaginaire ne se rembourse jamais**, parce
+# que personne n'ose y toucher.
 # ⭐ Les deux sont donc recopiés à l'identique, avec leur provenance. ⚠️ Deux copies d'une
 # seule vérité divergent dès qu'on en touche une : si `VERT_OK` change dans la charte, il
 # change ici. (Vérifié : personne ne fait `from espace3d import *`, donc ces deux noms
