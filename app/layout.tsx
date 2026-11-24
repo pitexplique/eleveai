@@ -17,6 +17,7 @@ import BanniereCrpe from "@/components/accueil/BanniereCrpe";
 import Footer from "@/components/Footer";
 import MasqueSurEmbed from "@/components/MasqueSurEmbed";
 import { EleveProvider } from "@/context/EleveContext";
+import BienvenueEleve from "@/components/BienvenueEleve";
 import MasqueSurGuide from "@/components/MasqueSurGuide";
 import EcrireAuProf from "@/components/EcrireAuProf";
 import PageViewTracker from "@/components/PageViewTracker";
@@ -421,6 +422,8 @@ export default function RootLayout({
               <Footer />
             </MasqueSurGuide>
             <EcrireAuProf />
+            {/* ⭐ 24/11/2026 : la fenêtre « Que veux-tu faire ? » après la connexion d'un élève. */}
+            <BienvenueEleve />
           </MasqueSurEmbed>
         </EleveProvider>
 
