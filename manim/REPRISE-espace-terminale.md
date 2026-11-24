@@ -3,21 +3,33 @@
 **12 épisodes = les 12 micro-compétences du coach**, 6 pour `geometrie_espace` et 6 pour
 `produit_scalaire_espace`. Chacun : une vidéo paysage + un short. 24 vidéos.
 
-> ⛔⛔ **AVANT TOUTE FUSION DE `poste2` DANS `main` : LE REGISTRE DES VIDÉOS SE FUSIONNE
-> PAR UNION DE CLÉS, JAMAIS EN PRENANT UNE VERSION.** Remesuré le 24/11 à 17 h :
+> ⛔⛔ **AVANT TOUTE FUSION DE `poste2` DANS `main` : IL Y A DEUX REGISTRES, ET ILS SE
+> FUSIONNENT PAR UNION DE CLÉS — JAMAIS EN PRENANT UNE VERSION, JAMAIS EN RÉGÉNÉRANT.**
+> Mesuré le 24/11 à 17 h, les deux fichiers divergent chacun de leur côté :
 >
-> | `lib/videos/videos-r2.json` | clés |
-> |---|---|
-> | `origin/main` | 2 129 |
-> | `origin/poste2` | 2 064 |
-> | **seulement sur `main`** | **77** |
-> | seulement sur `poste2` | 12 (les douze paysages « espace ») |
-> | union, si la fusion est bien faite | 2 141 |
+> | fichier | `main` | `poste2` | seulement sur `main` | seulement sur `poste2` | union |
+> |---|---|---|---|---|---|
+> | `manim/manifeste-youtube.json` (liste `videos`, par `id`) | 1 778 | 1 719 | **71** | 12 | 1 790 |
+> | `lib/videos/videos-r2.json` (la table servie) | 2 129 | 2 064 | **77** | 12 | 2 141 |
 >
-> Une fusion qui retiendrait la version de `poste2` **effacerait 77 vidéos** qui
-> n'existent que sur `main`, et `generer-videos-r2.mjs` retire du service toute clé non
-> déclarée. ⭐ Le bon geste :
-> `python manim/poste2/fusionner-registres.py lib/videos/videos-r2.json --ecrire`.
+> Les 12 de `poste2` sont les douze paysages « espace ». ⚠️ **Les deux passages, pas un**,
+> et le rapport d'abord (sans `--ecrire`) : l'outil fait une vraie fusion à trois côtés et
+> affiche un conflit réel sans rien écrire.
+>
+> ```
+> python manim/poste2/fusionner-registres.py manim/manifeste-youtube.json
+> python manim/poste2/fusionner-registres.py lib/videos/videos-r2.json
+> ```
+>
+> ⛔⛔ **ET SURTOUT : NE PAS RÉGÉNÉRER `videos-r2.json` POUR RATTRAPER UNE FUSION RATÉE —
+> ça l'aggrave.** `scripts/generer-videos-r2.mjs` l. 21 :
+> `const existe = (rel) => rel && fs.existsSync(...)` — une vidéo n'entre dans la table
+> **que si son MP4 est présent sur CE disque**. Sur une machine qui n'a pas tous les
+> fichiers, régénérer sort du service toutes les vidéos absentes localement. Le seul bon
+> geste est la fusion par réunion.
+>
+> ⚠️ `fusionner-registres.py` ne vaut que pour un JSON que `json.dumps` reproduit :
+> `scripts/miniatures-shorts-grille.json` se tient à la main et se fusionne textuellement.
 >
 > ⚠️ `origin/poste2` est en avance de **53 commits**, et `main` ne contient **aucune** des
 > 12 clés « espace » : tant que la fusion n'a pas eu lieu, les douze paysages sont en
