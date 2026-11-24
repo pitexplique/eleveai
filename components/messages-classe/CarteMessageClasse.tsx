@@ -76,7 +76,7 @@ export default function CarteMessageClasse({ variante }: { variante: "cockpit" |
                 onClick={() => {
                   if (!m.lu) marquerLu(m.id);
                 }}
-                className={`mt-3 inline-flex items-center gap-2 rounded-2xl px-6 py-3 text-lg font-black shadow-lg ${
+                className={`mr-3 mt-3 inline-flex items-center gap-2 rounded-2xl px-6 py-3 text-lg font-black shadow-lg ${
                   jardin ? "bg-amber-400 text-slate-900 hover:bg-amber-300" : "bg-emerald-400 text-slate-950 hover:bg-emerald-300"
                 }`}
               >
