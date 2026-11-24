@@ -112,7 +112,7 @@ export default function BlocMessageClasse({ token }: { token: string | null }) {
             >
               {classes.map((c) => (
                 <option key={c.code_etablissement} value={c.code_etablissement}>
-                  {c.nom_classe} ({c.nb_eleves} élèves)
+                  {c.nom_classe} ({c.nb_eleves} élève{c.nb_eleves > 1 ? "s" : ""})
                 </option>
               ))}
             </select>
