@@ -4,7 +4,7 @@
   "02-question-du-jour": "Comment dire de quelle façon une courbe monte ?",
   "03-methode": "On compare les hausses, pas à pas, sur des intervalles de même largeur : ici, un mois.",
   "04-constant": "Inès gagne 100 abonnés chaque mois : 100, 200, 300, 400. Même hausse à chaque pas : la courbe est une droite. La croissance est constante.",
-  "05-accelere": "Tom : 10, 20, 40, 80. Le nombre double chaque mois. Les hausses grandissent : 10, 20, 40, 80, 160. La courbe se redresse : la croissance accélère.",
+  "05-accelere": "Tom : 10, 20, 40, 80, 160, 320. Le nombre double chaque mois. Les hausses grandissent : 10, 20, 40, 80, 160. La courbe se redresse : la croissance accélère.",
   "06-question": "Question ! Chez Sarah, les hausses sont 300, 150, 80, 40. Sa croissance : A : ralentit. B : accélère. C : est constante. Mets pause, et choisis !",
   "06b-reponse": "Réponse A. Sarah gagne des abonnés chaque mois, mais de moins en moins. La courbe monte, puis s'aplatit : la croissance ralentit.",
   "07-piege": "Attention au piège ! Une courbe qui s'aplatit monte encore. Ralentir, ce n'est pas diminuer. Sarah ne perd aucun abonné : elle en gagne moins vite.",
