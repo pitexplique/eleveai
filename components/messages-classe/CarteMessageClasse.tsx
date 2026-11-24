@@ -8,7 +8,9 @@
 import { useEffect, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
 
-type Message = { id: string; created_at: string; texte: string; lu: boolean };
+// 📤 24/11 : « lien » = séance envoyée par le prof (chemin du coach, revérifié
+// par le serveur) → gros bouton « ▶ Commencer la séance ».
+type Message = { id: string; created_at: string; texte: string; lu: boolean; lien?: string | null };
 
 const dateCourte = (iso: string) =>
   new Date(iso).toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
@@ -68,6 +70,19 @@ export default function CarteMessageClasse({ variante }: { variante: "cockpit" |
               <span className={`text-xs font-bold ${jardin ? "text-slate-500" : "text-slate-300"}`}>{dateCourte(m.created_at)}</span>
             </div>
             <p className="mt-2 whitespace-pre-wrap break-words text-lg font-bold leading-snug">{m.texte}</p>
+            {m.lien && m.lien.startsWith("/coach") && !m.lien.includes("//") && (
+              <a
+                href={m.lien}
+                onClick={() => {
+                  if (!m.lu) marquerLu(m.id);
+                }}
+                className={`mt-3 inline-flex items-center gap-2 rounded-2xl px-6 py-3 text-lg font-black shadow-lg ${
+                  jardin ? "bg-amber-400 text-slate-900 hover:bg-amber-300" : "bg-emerald-400 text-slate-950 hover:bg-emerald-300"
+                }`}
+              >
+                ▶ Commencer la séance
+              </a>
+            )}
             {!m.lu && (
               <button
                 type="button"

@@ -7,7 +7,7 @@
 import { NextResponse } from "next/server";
 import { verifySessionToken } from "@/lib/server/session";
 import { supabaseAdmin } from "@/lib/server/classesProf";
-import { purgerVieuxMessages, VISIBLE_ELEVE_MS } from "@/lib/server/messagesClasse";
+import { nettoyerLienSeance, purgerVieuxMessages, VISIBLE_ELEVE_MS } from "@/lib/server/messagesClasse";
 
 export const dynamic = "force-dynamic";
 
@@ -34,13 +34,19 @@ export async function GET(req: Request) {
     .maybeSingle();
   if (!classe) return NextResponse.json({ ok: true, messages: [] });
 
-  const { data: messages, error } = await admin
-    .from("messages_classe")
-    .select("id, created_at, texte")
-    .eq("code_etablissement", s.code_etablissement)
-    .gte("created_at", new Date(Date.now() - DUREE_MS).toISOString())
-    .order("created_at", { ascending: false })
-    .limit(5);
+  // 📤 24/11 : « lien » (séance envoyée) existe après supabase/messages_classe_seance.sql.
+  const lire = (colonnes: string) =>
+    admin
+      .from("messages_classe")
+      .select(colonnes)
+      .eq("code_etablissement", s.code_etablissement)
+      .gte("created_at", new Date(Date.now() - DUREE_MS).toISOString())
+      .order("created_at", { ascending: false })
+      .limit(5);
+  let lu = await lire("id, created_at, texte, lien");
+  if (lu.error) lu = await lire("id, created_at, texte");
+  const { error } = lu;
+  const messages = (lu.data ?? []) as unknown as { id: string; created_at: string; texte: string; lien?: string | null }[];
   if (error || !messages?.length) return NextResponse.json({ ok: true, messages: [] });
 
   const { data: lus } = await admin
@@ -53,7 +59,8 @@ export async function GET(req: Request) {
   return NextResponse.json({
     ok: true,
     classe: classe.nom_classe,
-    messages: messages.map((m) => ({ ...m, lu: dejaLus.has(m.id) })),
+    // Le lien est revérifié à la lecture : jamais autre chose qu'un chemin du coach.
+    messages: messages.map((m) => ({ ...m, lien: nettoyerLienSeance(m.lien), lu: dejaLus.has(m.id) })),
   });
 }
 

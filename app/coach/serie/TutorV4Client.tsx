@@ -2836,6 +2836,21 @@ function handleInputKeyDown(
                   {lienCopie ? "✓ Lien copié" : "🔗 Lien élèves"}
                 </button>
               </div>
+              {/* 📤 24/11 — le prof envoie CETTE séance (micros cochées) à sa
+                  classe : « Mes classes » s'ouvre avec la séance prête. */}
+              {eleve?.type_utilisateur === "prof" && (
+                <button
+                  type="button"
+                  onClick={() =>
+                    router.push(
+                      `/prof/classes?seance=${encodeURIComponent(adresseAvecMicros("simple"))}&titre=${encodeURIComponent(notion ? notionLabel(notion, classe, matiere) : "exercices du coach")}`
+                    )
+                  }
+                  className="mt-2 block w-full rounded-xl bg-violet-700 px-2 py-2 text-center text-xs font-black text-white shadow hover:bg-violet-800"
+                >
+                  📤 Envoyer à ma classe
+                </button>
+              )}
             </div>
 
             <div className="space-y-2">
