@@ -1207,14 +1207,16 @@ export default function SignInPage() {
                   )}
 
                   <div className="space-y-1.5">
+                    {/* 24/11/2026 : un élève donne son PRÉNOM — le site n'affiche
+                        jamais le nom de famille d'un élève. */}
                     <label className="text-sm font-medium text-slate-800">
-                      Nom
+                      {typeUtilisateur === "eleve" ? "Ton prénom" : "Nom"}
                     </label>
                     <input
                       type="text"
                       value={nom}
                       onChange={(e) => setNom(e.target.value)}
-                      placeholder="Votre nom"
+                      placeholder={typeUtilisateur === "eleve" ? "Ton prénom (pas ton nom de famille)" : "Votre nom"}
                       disabled={loading}
                       className="w-full rounded-lg border border-emerald-300 px-3 py-2 text-sm outline-none focus:border-emerald-500 focus:ring disabled:bg-slate-100"
                     />
