@@ -18521,5 +18521,347 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_tracer&display=simple"
+ },
+ "premiere-prop-evo-additif": {
+  "fichier": "premiere/maths/proportionnalite/07-evo-additif/eleveai-maths-premiere-prop-evo-additif.mp4",
+  "poster": "premiere/maths/proportionnalite/07-evo-additif/eleveai-maths-premiere-prop-evo-additif.png",
+  "vignette": "premiere/maths/proportionnalite/07-evo-additif/eleveai-maths-premiere-prop-evo-additif.vignette.webp",
+  "titre": "Plus 2 %, c'est fois combien ? Le coefficient multiplicateur d'une hausse — épisode 7 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_additif_multiplicatif&display=simple"
+ },
+ "premiere-prop-evo-additif-short": {
+  "fichier": "premiere/maths/proportionnalite/07-evo-additif/eleveai-maths-premiere-prop-evo-additif-short.mp4",
+  "poster": "premiere/maths/proportionnalite/07-evo-additif/eleveai-maths-premiere-prop-evo-additif-short.png",
+  "vignette": "premiere/maths/proportionnalite/07-evo-additif/eleveai-maths-premiere-prop-evo-additif-short.vignette.webp",
+  "titre": "Plus 5 %, c'est fois 1,5 ? Le piège du coefficient multiplicateur 🔍 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_additif_multiplicatif&display=simple"
+ },
+ "premiere-prop-evo-calculer-taux": {
+  "fichier": "premiere/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-premiere-prop-evo-calculer-taux.mp4",
+  "poster": "premiere/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-premiere-prop-evo-calculer-taux.png",
+  "vignette": "premiere/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-premiere-prop-evo-calculer-taux.vignette.webp",
+  "titre": "Livret A : de 3 % à 2,4 %, c'est − 0,6 % ? Calculer un taux d'évolution — épisode 11 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_calculer_taux&display=simple"
+ },
+ "premiere-prop-evo-calculer-taux-short": {
+  "fichier": "premiere/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-premiere-prop-evo-calculer-taux-short.mp4",
+  "poster": "premiere/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-premiere-prop-evo-calculer-taux-short.png",
+  "vignette": "premiere/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-premiere-prop-evo-calculer-taux-short.vignette.webp",
+  "titre": "De 20 € à 25 € : le prix augmente de 5 % ? 🔍 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_calculer_taux&display=simple"
+ },
+ "premiere-prop-evo-compensation": {
+  "fichier": "premiere/maths/proportionnalite/14-evo-compensation/eleveai-maths-premiere-prop-evo-compensation.mp4",
+  "poster": "premiere/maths/proportionnalite/14-evo-compensation/eleveai-maths-premiere-prop-evo-compensation.png",
+  "vignette": "premiere/maths/proportionnalite/14-evo-compensation/eleveai-maths-premiere-prop-evo-compensation.vignette.webp",
+  "titre": "+ 20 % puis − 20 % : retour au prix ? Le piège de la compensation — épisode 14 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_piege_compensation&display=simple"
+ },
+ "premiere-prop-evo-compensation-short": {
+  "fichier": "premiere/maths/proportionnalite/14-evo-compensation/eleveai-maths-premiere-prop-evo-compensation-short.mp4",
+  "poster": "premiere/maths/proportionnalite/14-evo-compensation/eleveai-maths-premiere-prop-evo-compensation-short.png",
+  "vignette": "premiere/maths/proportionnalite/14-evo-compensation/eleveai-maths-premiere-prop-evo-compensation-short.vignette.webp",
+  "titre": "+ 50 %, puis − 50 % : on revient au départ ? 🔍 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_piege_compensation&display=simple"
+ },
+ "premiere-prop-evo-diminution": {
+  "fichier": "premiere/maths/proportionnalite/08-evo-diminution/eleveai-maths-premiere-prop-evo-diminution.mp4",
+  "poster": "premiere/maths/proportionnalite/08-evo-diminution/eleveai-maths-premiere-prop-evo-diminution.png",
+  "vignette": "premiere/maths/proportionnalite/08-evo-diminution/eleveai-maths-premiere-prop-evo-diminution.vignette.webp",
+  "titre": "Moins 30 %, c'est fois 0,3 ? Le coefficient d'une baisse — épisode 8 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_diminution&display=simple"
+ },
+ "premiere-prop-evo-diminution-short": {
+  "fichier": "premiere/maths/proportionnalite/08-evo-diminution/eleveai-maths-premiere-prop-evo-diminution-short.mp4",
+  "poster": "premiere/maths/proportionnalite/08-evo-diminution/eleveai-maths-premiere-prop-evo-diminution-short.png",
+  "vignette": "premiere/maths/proportionnalite/08-evo-diminution/eleveai-maths-premiere-prop-evo-diminution-short.vignette.webp",
+  "titre": "Moins 30 % sur un jean à 50 € : on fait fois 0,3 ? 🔍 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_diminution&display=simple"
+ },
+ "premiere-prop-evo-reciproque": {
+  "fichier": "premiere/maths/proportionnalite/13-evo-reciproque/eleveai-maths-premiere-prop-evo-reciproque.mp4",
+  "poster": "premiere/maths/proportionnalite/13-evo-reciproque/eleveai-maths-premiere-prop-evo-reciproque.png",
+  "vignette": "premiere/maths/proportionnalite/13-evo-reciproque/eleveai-maths-premiere-prop-evo-reciproque.vignette.webp",
+  "titre": "Après − 20 %, + 20 % suffit-il ? L'évolution réciproque — épisode 13 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_reciproque&display=simple"
+ },
+ "premiere-prop-evo-reciproque-short": {
+  "fichier": "premiere/maths/proportionnalite/13-evo-reciproque/eleveai-maths-premiere-prop-evo-reciproque-short.mp4",
+  "poster": "premiere/maths/proportionnalite/13-evo-reciproque/eleveai-maths-premiere-prop-evo-reciproque-short.png",
+  "vignette": "premiere/maths/proportionnalite/13-evo-reciproque/eleveai-maths-premiere-prop-evo-reciproque-short.vignette.webp",
+  "titre": "Ton score baisse de 20 % : + 20 % pour revenir ? 🔍 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_reciproque&display=simple"
+ },
+ "premiere-prop-evo-successives": {
+  "fichier": "premiere/maths/proportionnalite/12-evo-successives/eleveai-maths-premiere-prop-evo-successives.mp4",
+  "poster": "premiere/maths/proportionnalite/12-evo-successives/eleveai-maths-premiere-prop-evo-successives.png",
+  "vignette": "premiere/maths/proportionnalite/12-evo-successives/eleveai-maths-premiere-prop-evo-successives.vignette.webp",
+  "titre": "− 30 % puis − 20 % : − 50 % ? Les évolutions successives — épisode 12 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_successives&display=simple"
+ },
+ "premiere-prop-evo-successives-short": {
+  "fichier": "premiere/maths/proportionnalite/12-evo-successives/eleveai-maths-premiere-prop-evo-successives-short.mp4",
+  "poster": "premiere/maths/proportionnalite/12-evo-successives/eleveai-maths-premiere-prop-evo-successives-short.png",
+  "vignette": "premiere/maths/proportionnalite/12-evo-successives/eleveai-maths-premiere-prop-evo-successives-short.vignette.webp",
+  "titre": "− 50 %, puis encore − 50 % : c'est gratuit ? 🔍 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_successives&display=simple"
+ },
+ "premiere-prop-evo-valeur-finale": {
+  "fichier": "premiere/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-premiere-prop-evo-valeur-finale.mp4",
+  "poster": "premiere/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-premiere-prop-evo-valeur-finale.png",
+  "vignette": "premiere/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-premiere-prop-evo-valeur-finale.vignette.webp",
+  "titre": "12 000 abonnés, + 15 % : combien ? Calculer une valeur d'arrivée — épisode 9 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_valeur_finale&display=simple"
+ },
+ "premiere-prop-evo-valeur-finale-short": {
+  "fichier": "premiere/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-premiere-prop-evo-valeur-finale-short.mp4",
+  "poster": "premiere/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-premiere-prop-evo-valeur-finale-short.png",
+  "vignette": "premiere/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-premiere-prop-evo-valeur-finale-short.vignette.webp",
+  "titre": "Un billet à 40 €, + 25 % : il coûte 65 € ? 🔍 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_valeur_finale&display=simple"
+ },
+ "premiere-prop-evo-valeur-initiale": {
+  "fichier": "premiere/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-premiere-prop-evo-valeur-initiale.mp4",
+  "poster": "premiere/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-premiere-prop-evo-valeur-initiale.png",
+  "vignette": "premiere/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-premiere-prop-evo-valeur-initiale.vignette.webp",
+  "titre": "60 € TTC : le prix hors taxe est 48 € ? Retrouver une valeur de départ — épisode 10 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_valeur_initiale&display=simple"
+ },
+ "premiere-prop-evo-valeur-initiale-short": {
+  "fichier": "premiere/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-premiere-prop-evo-valeur-initiale-short.mp4",
+  "poster": "premiere/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-premiere-prop-evo-valeur-initiale-short.png",
+  "vignette": "premiere/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-premiere-prop-evo-valeur-initiale-short.vignette.webp",
+  "titre": "Avec 20 % de TVA, 120 € TTC : hors taxe, 96 € ? 🔍 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_valeur_initiale&display=simple"
+ },
+ "seconde-prop-evo-calculer-taux": {
+  "fichier": "seconde/maths/proportionnalite/03-evo-calculer-taux/eleveai-maths-seconde-prop-evo-calculer-taux.mp4",
+  "poster": "seconde/maths/proportionnalite/03-evo-calculer-taux/eleveai-maths-seconde-prop-evo-calculer-taux.png",
+  "vignette": "seconde/maths/proportionnalite/03-evo-calculer-taux/eleveai-maths-seconde-prop-evo-calculer-taux.vignette.webp",
+  "titre": "Livret A : de 3 % à 2,4 %, c'est − 0,6 % ? Calculer un taux d'évolution — épisode 3 · Maths 2de",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_taux_evolution&display=simple"
+ },
+ "seconde-prop-evo-calculer-taux-short": {
+  "fichier": "seconde/maths/proportionnalite/03-evo-calculer-taux/eleveai-maths-seconde-prop-evo-calculer-taux-short.mp4",
+  "poster": "seconde/maths/proportionnalite/03-evo-calculer-taux/eleveai-maths-seconde-prop-evo-calculer-taux-short.png",
+  "vignette": "seconde/maths/proportionnalite/03-evo-calculer-taux/eleveai-maths-seconde-prop-evo-calculer-taux-short.vignette.webp",
+  "titre": "De 20 € à 25 € : le prix augmente de 5 % ? 🔍 — 2de #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_taux_evolution&display=simple"
+ },
+ "seconde-prop-evo-reciproque": {
+  "fichier": "seconde/maths/proportionnalite/05-evo-reciproque/eleveai-maths-seconde-prop-evo-reciproque.mp4",
+  "poster": "seconde/maths/proportionnalite/05-evo-reciproque/eleveai-maths-seconde-prop-evo-reciproque.png",
+  "vignette": "seconde/maths/proportionnalite/05-evo-reciproque/eleveai-maths-seconde-prop-evo-reciproque.vignette.webp",
+  "titre": "Après − 20 %, + 20 % suffit-il ? L'évolution réciproque — épisode 5 · Maths 2de",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_evolution_reciproque&display=simple"
+ },
+ "seconde-prop-evo-reciproque-short": {
+  "fichier": "seconde/maths/proportionnalite/05-evo-reciproque/eleveai-maths-seconde-prop-evo-reciproque-short.mp4",
+  "poster": "seconde/maths/proportionnalite/05-evo-reciproque/eleveai-maths-seconde-prop-evo-reciproque-short.png",
+  "vignette": "seconde/maths/proportionnalite/05-evo-reciproque/eleveai-maths-seconde-prop-evo-reciproque-short.vignette.webp",
+  "titre": "Ton score baisse de 20 % : + 20 % pour revenir ? 🔍 — 2de #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_evolution_reciproque&display=simple"
+ },
+ "seconde-prop-evo-successives": {
+  "fichier": "seconde/maths/proportionnalite/04-evo-successives/eleveai-maths-seconde-prop-evo-successives.mp4",
+  "poster": "seconde/maths/proportionnalite/04-evo-successives/eleveai-maths-seconde-prop-evo-successives.png",
+  "vignette": "seconde/maths/proportionnalite/04-evo-successives/eleveai-maths-seconde-prop-evo-successives.vignette.webp",
+  "titre": "− 30 % puis − 20 % : − 50 % ? Les évolutions successives — épisode 4 · Maths 2de",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_evolutions_successives&display=simple"
+ },
+ "seconde-prop-evo-successives-short": {
+  "fichier": "seconde/maths/proportionnalite/04-evo-successives/eleveai-maths-seconde-prop-evo-successives-short.mp4",
+  "poster": "seconde/maths/proportionnalite/04-evo-successives/eleveai-maths-seconde-prop-evo-successives-short.png",
+  "vignette": "seconde/maths/proportionnalite/04-evo-successives/eleveai-maths-seconde-prop-evo-successives-short.vignette.webp",
+  "titre": "− 50 %, puis encore − 50 % : c'est gratuit ? 🔍 — 2de #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_evolutions_successives&display=simple"
+ },
+ "stmg-prop-evo-additif": {
+  "fichier": "stmg/maths/proportionnalite/07-evo-additif/eleveai-maths-stmg-prop-evo-additif.mp4",
+  "poster": "stmg/maths/proportionnalite/07-evo-additif/eleveai-maths-stmg-prop-evo-additif.png",
+  "vignette": "stmg/maths/proportionnalite/07-evo-additif/eleveai-maths-stmg-prop-evo-additif.vignette.webp",
+  "titre": "Plus 2 %, c'est fois combien ? Le coefficient multiplicateur d'une hausse — épisode 7 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_additif_multiplicatif&display=simple"
+ },
+ "stmg-prop-evo-additif-short": {
+  "fichier": "stmg/maths/proportionnalite/07-evo-additif/eleveai-maths-stmg-prop-evo-additif-short.mp4",
+  "poster": "stmg/maths/proportionnalite/07-evo-additif/eleveai-maths-stmg-prop-evo-additif-short.png",
+  "vignette": "stmg/maths/proportionnalite/07-evo-additif/eleveai-maths-stmg-prop-evo-additif-short.vignette.webp",
+  "titre": "Plus 5 %, c'est fois 1,5 ? Le piège du coefficient multiplicateur 🔍 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_additif_multiplicatif&display=simple"
+ },
+ "stmg-prop-evo-calculer-taux": {
+  "fichier": "stmg/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-stmg-prop-evo-calculer-taux.mp4",
+  "poster": "stmg/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-stmg-prop-evo-calculer-taux.png",
+  "vignette": "stmg/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-stmg-prop-evo-calculer-taux.vignette.webp",
+  "titre": "Livret A : de 3 % à 2,4 %, c'est − 0,6 % ? Calculer un taux d'évolution — épisode 11 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_taux&microId=auto_evo_calculer_taux&display=simple"
+ },
+ "stmg-prop-evo-calculer-taux-short": {
+  "fichier": "stmg/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-stmg-prop-evo-calculer-taux-short.mp4",
+  "poster": "stmg/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-stmg-prop-evo-calculer-taux-short.png",
+  "vignette": "stmg/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-stmg-prop-evo-calculer-taux-short.vignette.webp",
+  "titre": "De 20 € à 25 € : le prix augmente de 5 % ? 🔍 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_taux&microId=auto_evo_calculer_taux&display=simple"
+ },
+ "stmg-prop-evo-compensation": {
+  "fichier": "stmg/maths/proportionnalite/14-evo-compensation/eleveai-maths-stmg-prop-evo-compensation.mp4",
+  "poster": "stmg/maths/proportionnalite/14-evo-compensation/eleveai-maths-stmg-prop-evo-compensation.png",
+  "vignette": "stmg/maths/proportionnalite/14-evo-compensation/eleveai-maths-stmg-prop-evo-compensation.vignette.webp",
+  "titre": "+ 20 % puis − 20 % : retour au prix ? Le piège de la compensation — épisode 14 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_piege_compensation&display=simple"
+ },
+ "stmg-prop-evo-compensation-short": {
+  "fichier": "stmg/maths/proportionnalite/14-evo-compensation/eleveai-maths-stmg-prop-evo-compensation-short.mp4",
+  "poster": "stmg/maths/proportionnalite/14-evo-compensation/eleveai-maths-stmg-prop-evo-compensation-short.png",
+  "vignette": "stmg/maths/proportionnalite/14-evo-compensation/eleveai-maths-stmg-prop-evo-compensation-short.vignette.webp",
+  "titre": "+ 50 %, puis − 50 % : on revient au départ ? 🔍 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_piege_compensation&display=simple"
+ },
+ "stmg-prop-evo-diminution": {
+  "fichier": "stmg/maths/proportionnalite/08-evo-diminution/eleveai-maths-stmg-prop-evo-diminution.mp4",
+  "poster": "stmg/maths/proportionnalite/08-evo-diminution/eleveai-maths-stmg-prop-evo-diminution.png",
+  "vignette": "stmg/maths/proportionnalite/08-evo-diminution/eleveai-maths-stmg-prop-evo-diminution.vignette.webp",
+  "titre": "Moins 30 %, c'est fois 0,3 ? Le coefficient d'une baisse — épisode 8 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_diminution&display=simple"
+ },
+ "stmg-prop-evo-diminution-short": {
+  "fichier": "stmg/maths/proportionnalite/08-evo-diminution/eleveai-maths-stmg-prop-evo-diminution-short.mp4",
+  "poster": "stmg/maths/proportionnalite/08-evo-diminution/eleveai-maths-stmg-prop-evo-diminution-short.png",
+  "vignette": "stmg/maths/proportionnalite/08-evo-diminution/eleveai-maths-stmg-prop-evo-diminution-short.vignette.webp",
+  "titre": "Moins 30 % sur un jean à 50 € : on fait fois 0,3 ? 🔍 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_diminution&display=simple"
+ },
+ "stmg-prop-evo-reciproque": {
+  "fichier": "stmg/maths/proportionnalite/13-evo-reciproque/eleveai-maths-stmg-prop-evo-reciproque.mp4",
+  "poster": "stmg/maths/proportionnalite/13-evo-reciproque/eleveai-maths-stmg-prop-evo-reciproque.png",
+  "vignette": "stmg/maths/proportionnalite/13-evo-reciproque/eleveai-maths-stmg-prop-evo-reciproque.vignette.webp",
+  "titre": "Après − 20 %, + 20 % suffit-il ? L'évolution réciproque — épisode 13 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_reciproque&display=simple"
+ },
+ "stmg-prop-evo-reciproque-short": {
+  "fichier": "stmg/maths/proportionnalite/13-evo-reciproque/eleveai-maths-stmg-prop-evo-reciproque-short.mp4",
+  "poster": "stmg/maths/proportionnalite/13-evo-reciproque/eleveai-maths-stmg-prop-evo-reciproque-short.png",
+  "vignette": "stmg/maths/proportionnalite/13-evo-reciproque/eleveai-maths-stmg-prop-evo-reciproque-short.vignette.webp",
+  "titre": "Ton score baisse de 20 % : + 20 % pour revenir ? 🔍 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_reciproque&display=simple"
+ },
+ "stmg-prop-evo-successives": {
+  "fichier": "stmg/maths/proportionnalite/12-evo-successives/eleveai-maths-stmg-prop-evo-successives.mp4",
+  "poster": "stmg/maths/proportionnalite/12-evo-successives/eleveai-maths-stmg-prop-evo-successives.png",
+  "vignette": "stmg/maths/proportionnalite/12-evo-successives/eleveai-maths-stmg-prop-evo-successives.vignette.webp",
+  "titre": "− 30 % puis − 20 % : − 50 % ? Les évolutions successives — épisode 12 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_successives&display=simple"
+ },
+ "stmg-prop-evo-successives-short": {
+  "fichier": "stmg/maths/proportionnalite/12-evo-successives/eleveai-maths-stmg-prop-evo-successives-short.mp4",
+  "poster": "stmg/maths/proportionnalite/12-evo-successives/eleveai-maths-stmg-prop-evo-successives-short.png",
+  "vignette": "stmg/maths/proportionnalite/12-evo-successives/eleveai-maths-stmg-prop-evo-successives-short.vignette.webp",
+  "titre": "− 50 %, puis encore − 50 % : c'est gratuit ? 🔍 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_successives&display=simple"
+ },
+ "stmg-prop-evo-valeur-finale": {
+  "fichier": "stmg/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-stmg-prop-evo-valeur-finale.mp4",
+  "poster": "stmg/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-stmg-prop-evo-valeur-finale.png",
+  "vignette": "stmg/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-stmg-prop-evo-valeur-finale.vignette.webp",
+  "titre": "12 000 abonnés, + 15 % : combien ? Calculer une valeur d'arrivée — épisode 9 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_valeur_finale&display=simple"
+ },
+ "stmg-prop-evo-valeur-finale-short": {
+  "fichier": "stmg/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-stmg-prop-evo-valeur-finale-short.mp4",
+  "poster": "stmg/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-stmg-prop-evo-valeur-finale-short.png",
+  "vignette": "stmg/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-stmg-prop-evo-valeur-finale-short.vignette.webp",
+  "titre": "Un billet à 40 €, + 25 % : il coûte 65 € ? 🔍 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_valeur_finale&display=simple"
+ },
+ "stmg-prop-evo-valeur-initiale": {
+  "fichier": "stmg/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-stmg-prop-evo-valeur-initiale.mp4",
+  "poster": "stmg/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-stmg-prop-evo-valeur-initiale.png",
+  "vignette": "stmg/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-stmg-prop-evo-valeur-initiale.vignette.webp",
+  "titre": "60 € TTC : le prix hors taxe est 48 € ? Retrouver une valeur de départ — épisode 10 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_valeur_initiale&display=simple"
+ },
+ "stmg-prop-evo-valeur-initiale-short": {
+  "fichier": "stmg/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-stmg-prop-evo-valeur-initiale-short.mp4",
+  "poster": "stmg/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-stmg-prop-evo-valeur-initiale-short.png",
+  "vignette": "stmg/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-stmg-prop-evo-valeur-initiale-short.vignette.webp",
+  "titre": "Avec 20 % de TVA, 120 € TTC : hors taxe, 96 € ? 🔍 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_valeur_initiale&display=simple"
  }
 }

@@ -109387,6 +109387,2725 @@
       "centres": [
         "jeux-defis"
       ]
+    },
+    {
+      "id": "premiere-prop-evo-additif",
+      "pas_avant": "2027-07-11",
+      "prioritaire": true,
+      "notionId": "auto_coefficient_multiplicateur",
+      "microId": "auto_evo_additif_multiplicatif",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/proportionnalite/07-evo-additif/eleveai-maths-premiere-prop-evo-additif.mp4",
+      "miniature": "premiere/maths/proportionnalite/07-evo-additif/eleveai-maths-premiere-prop-evo-additif.png",
+      "titre": "Plus 2 %, c'est fois combien ? Le coefficient multiplicateur d'une hausse — épisode 7 · Maths 1re",
+      "accroche": "Le 1er novembre 2024, le Smic horaire brut passe de 11,65 € à 11,88 € : + 2 %. Comment passer de l'un à l'autre en un seul calcul ? La gestionnaire de paie le fait pour chaque salaire, le commerçant pour chaque prix, l'économiste pour chaque indice.\n\nDans cette vidéo :\n• une barre de 100 %, plus 2 % au bout : 102 %\n• 102 % = 1,02 : augmenter de 2 %, c'est multiplier par 1,02 ; 11,65 × 1,02 ≈ 11,88 €\n• la règle : + t %, c'est × (1 + t ÷ 100) ; + 5 % : × 1,05 ; + 30 % : × 1,3 ; + 100 % : × 2\n• le piège : + 5 %, ce n'est pas × 1,5 (ça, c'est + 50 %)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : par combien multiplie-t-on pour augmenter de 12 % ? et de 0,5 % ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-coefficient-multiplicateur\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_additif_multiplicatif&display=simple\n\nSource : Smic horaire brut au 1er novembre 2024 (service-public.fr).\n\n📈 Épisode 7 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le Smic augmente de 2 %"
+        ],
+        [
+          "00:34",
+          "Une barre de 100 %"
+        ],
+        [
+          "00:48",
+          "102 % = 1,02"
+        ],
+        [
+          "01:04",
+          "La règle : × (1 + t ÷ 100)"
+        ],
+        [
+          "01:21",
+          "Question 1"
+        ],
+        [
+          "01:53",
+          "Le piège : × 1,5 ?"
+        ],
+        [
+          "02:11",
+          "Question 2"
+        ],
+        [
+          "02:49",
+          "À toi de jouer"
+        ],
+        [
+          "03:02",
+          "Correction"
+        ],
+        [
+          "03:15",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-coefficient-multiplicateur",
+      "tags": [
+        "coefficient multiplicateur",
+        "augmentation en pourcentage",
+        "hausse de 2 %",
+        "Smic",
+        "salaire",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "1re",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:21",
+          "question": "Augmenter de 7 %, c'est multiplier par :",
+          "choix": [
+            "7",
+            "0,07",
+            "1,07"
+          ],
+          "reponse": 2,
+          "explication": "100 % + 7 % = 107 % = 1,07. A rend le prix 7 fois plus grand ; B ne calcule que la hausse."
+        },
+        {
+          "t": "02:11",
+          "question": "Un loyer de 600 € augmente de 3 %. Quel calcul donne le nouveau loyer ?",
+          "choix": [
+            "600 × 1,03",
+            "600 × 1,3",
+            "600 + 3"
+          ],
+          "reponse": 0,
+          "explication": "+ 3 % : × 1,03, soit 618 €. B augmente de 30 % ; C n'ajoute que 3 €."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "premiere-prop-evo-additif-short",
+      "pas_avant": "2027-07-11",
+      "prioritaire": true,
+      "notionId": "auto_coefficient_multiplicateur",
+      "microId": "auto_evo_additif_multiplicatif",
+      "classe": "premiere",
+      "ceinture": "blanche",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-prop-evo-additif",
+      "fichier": "premiere/maths/proportionnalite/07-evo-additif/eleveai-maths-premiere-prop-evo-additif-short.mp4",
+      "miniature": "premiere/maths/proportionnalite/07-evo-additif/eleveai-maths-premiere-prop-evo-additif-short.png",
+      "titre": "Plus 5 %, c'est fois 1,5 ? Le piège du coefficient multiplicateur 🔍 — 1re #Shorts",
+      "accroche": "Un prix augmente de 5 %. On le multiplie par 1,5 ? Non ! 1,5, c'est 150 % : + 50 %.\nPlus 5 %, c'est 105 % : × 1,05.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : plus 8 %, c'est fois combien ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_additif_multiplicatif&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #1re #automatismes",
+      "tags": [
+        "coefficient multiplicateur",
+        "augmentation",
+        "pourcentage",
+        "évolutions en pourcentage",
+        "maths",
+        "1re",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Plus 20 %, c'est fois :",
+          "choix": [
+            "1,02",
+            "1,2",
+            "20"
+          ],
+          "reponse": 1,
+          "explication": "100 % + 20 % = 120 % = 1,2."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "stmg-prop-evo-additif",
+      "notionId": "auto_evo_coefficient",
+      "microId": "auto_evo_additif_multiplicatif",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/proportionnalite/07-evo-additif/eleveai-maths-stmg-prop-evo-additif.mp4",
+      "miniature": "stmg/maths/proportionnalite/07-evo-additif/eleveai-maths-stmg-prop-evo-additif.png",
+      "titre": "Plus 2 %, c'est fois combien ? Le coefficient multiplicateur d'une hausse — épisode 7 · Maths STMG",
+      "accroche": "Le 1er novembre 2024, le Smic horaire brut passe de 11,65 € à 11,88 € : + 2 %. Comment passer de l'un à l'autre en un seul calcul ? La gestionnaire de paie le fait pour chaque salaire, le commerçant pour chaque prix, l'économiste pour chaque indice.\n\nDans cette vidéo :\n• une barre de 100 %, plus 2 % au bout : 102 %\n• 102 % = 1,02 : augmenter de 2 %, c'est multiplier par 1,02 ; 11,65 × 1,02 ≈ 11,88 €\n• la règle : + t %, c'est × (1 + t ÷ 100) ; + 5 % : × 1,05 ; + 30 % : × 1,3 ; + 100 % : × 2\n• le piège : + 5 %, ce n'est pas × 1,5 (ça, c'est + 50 %)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : par combien multiplie-t-on pour augmenter de 12 % ? et de 0,5 % ?\n\nPour s'entraîner :\n• les exercices corrigés (automatismes de 1re) : https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-evo-coefficient\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_additif_multiplicatif&display=simple\n\nSource : Smic horaire brut au 1er novembre 2024 (service-public.fr).\n\n📈 Épisode 7 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le Smic augmente de 2 %"
+        ],
+        [
+          "00:34",
+          "Une barre de 100 %"
+        ],
+        [
+          "00:48",
+          "102 % = 1,02"
+        ],
+        [
+          "01:04",
+          "La règle : × (1 + t ÷ 100)"
+        ],
+        [
+          "01:21",
+          "Question 1"
+        ],
+        [
+          "01:53",
+          "Le piège : × 1,5 ?"
+        ],
+        [
+          "02:11",
+          "Question 2"
+        ],
+        [
+          "02:49",
+          "À toi de jouer"
+        ],
+        [
+          "03:02",
+          "Correction"
+        ],
+        [
+          "03:15",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-evo-coefficient",
+      "tags": [
+        "coefficient multiplicateur",
+        "augmentation en pourcentage",
+        "hausse de 2 %",
+        "Smic",
+        "salaire",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "STMG",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:21",
+          "question": "Augmenter de 7 %, c'est multiplier par :",
+          "choix": [
+            "7",
+            "0,07",
+            "1,07"
+          ],
+          "reponse": 2,
+          "explication": "100 % + 7 % = 107 % = 1,07. A rend le prix 7 fois plus grand ; B ne calcule que la hausse."
+        },
+        {
+          "t": "02:11",
+          "question": "Un loyer de 600 € augmente de 3 %. Quel calcul donne le nouveau loyer ?",
+          "choix": [
+            "600 × 1,03",
+            "600 × 1,3",
+            "600 + 3"
+          ],
+          "reponse": 0,
+          "explication": "+ 3 % : × 1,03, soit 618 €. B augmente de 30 % ; C n'ajoute que 3 €."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "stmg-prop-evo-additif-short",
+      "notionId": "auto_evo_coefficient",
+      "microId": "auto_evo_additif_multiplicatif",
+      "classe": "stmg",
+      "ceinture": "blanche",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-prop-evo-additif",
+      "fichier": "stmg/maths/proportionnalite/07-evo-additif/eleveai-maths-stmg-prop-evo-additif-short.mp4",
+      "miniature": "stmg/maths/proportionnalite/07-evo-additif/eleveai-maths-stmg-prop-evo-additif-short.png",
+      "titre": "Plus 5 %, c'est fois 1,5 ? Le piège du coefficient multiplicateur 🔍 — STMG #Shorts",
+      "accroche": "Un prix augmente de 5 %. On le multiplie par 1,5 ? Non ! 1,5, c'est 150 % : + 50 %.\nPlus 5 %, c'est 105 % : × 1,05.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : plus 8 %, c'est fois combien ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_additif_multiplicatif&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #stmg #lycee",
+      "tags": [
+        "coefficient multiplicateur",
+        "augmentation",
+        "pourcentage",
+        "évolutions en pourcentage",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:20",
+          "question": "Plus 20 %, c'est fois :",
+          "choix": [
+            "1,02",
+            "1,2",
+            "20"
+          ],
+          "reponse": 1,
+          "explication": "100 % + 20 % = 120 % = 1,2."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "premiere-prop-evo-diminution",
+      "pas_avant": "2027-07-12",
+      "prioritaire": true,
+      "notionId": "auto_coefficient_multiplicateur",
+      "microId": "auto_evo_diminution",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/proportionnalite/08-evo-diminution/eleveai-maths-premiere-prop-evo-diminution.mp4",
+      "miniature": "premiere/maths/proportionnalite/08-evo-diminution/eleveai-maths-premiere-prop-evo-diminution.png",
+      "titre": "Moins 30 %, c'est fois 0,3 ? Le coefficient d'une baisse — épisode 8 · Maths 1re",
+      "accroche": "Les soldes commencent : un manteau à 80 € est soldé à − 30 %. Le vendeur change l'étiquette, la cliente veut savoir ce qu'elle paiera. La même baisse sert ailleurs : une ingénieure réduit de 15 % la consommation d'un bâtiment, un agriculteur voit sa récolte baisser de 10 %.\n\nDans cette vidéo :\n• une barre de 100 %, on retire 30 % : il reste 70 %\n• 70 % = 0,7 : baisser de 30 %, c'est multiplier par 0,7 ; 80 × 0,7 = 56 €\n• la règle : − t %, c'est × (1 − t ÷ 100) ; − 15 % : × 0,85 ; − 10 % : × 0,9\n• le coefficient d'une baisse est plus petit que 1, celui d'une hausse plus grand que 1\n• le piège : × 0,3, on ne garde que 30 % (une baisse de 70 %)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : par combien multiplie-t-on pour baisser de 18 % ? et un coefficient de 0,92, quelle évolution est-ce ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-coefficient-multiplicateur\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_diminution&display=simple\n\nSource : Exemples de la vie courante (soldes, consommation d'énergie, récolte).\n\n📈 Épisode 8 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les soldes : − 30 %"
+        ],
+        [
+          "00:34",
+          "Ce qui reste : 70 %"
+        ],
+        [
+          "00:46",
+          "70 % = 0,7"
+        ],
+        [
+          "01:01",
+          "La règle : × (1 − t ÷ 100)"
+        ],
+        [
+          "01:19",
+          "Question 1"
+        ],
+        [
+          "01:54",
+          "Le piège : × 0,3 ?"
+        ],
+        [
+          "02:11",
+          "Question 2"
+        ],
+        [
+          "02:50",
+          "À toi de jouer"
+        ],
+        [
+          "03:06",
+          "Correction"
+        ],
+        [
+          "03:20",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-coefficient-multiplicateur",
+      "tags": [
+        "coefficient multiplicateur",
+        "baisse en pourcentage",
+        "diminution",
+        "soldes",
+        "remise",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "1re",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:19",
+          "question": "Baisser de 4 %, c'est multiplier par :",
+          "choix": [
+            "0,4",
+            "0,96",
+            "0,6"
+          ],
+          "reponse": 1,
+          "explication": "100 % − 4 % = 96 % = 0,96. A et C ne gardent que 40 % ou 60 %."
+        },
+        {
+          "t": "02:11",
+          "question": "Un abonnement à 40 € baisse de 25 %. Combien coûte-t-il ?",
+          "choix": [
+            "10 €",
+            "15 €",
+            "30 €"
+          ],
+          "reponse": 2,
+          "explication": "− 25 % : × 0,75 ; 40 × 0,75 = 30 €. A, c'est 25 % du prix ; B retire 25 €."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "premiere-prop-evo-diminution-short",
+      "pas_avant": "2027-07-12",
+      "prioritaire": true,
+      "notionId": "auto_coefficient_multiplicateur",
+      "microId": "auto_evo_diminution",
+      "classe": "premiere",
+      "ceinture": "blanche",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-prop-evo-diminution",
+      "fichier": "premiere/maths/proportionnalite/08-evo-diminution/eleveai-maths-premiere-prop-evo-diminution-short.mp4",
+      "miniature": "premiere/maths/proportionnalite/08-evo-diminution/eleveai-maths-premiere-prop-evo-diminution-short.png",
+      "titre": "Moins 30 % sur un jean à 50 € : on fait fois 0,3 ? 🔍 — 1re #Shorts",
+      "accroche": "Moins 30 % sur un jean à 50 €. Fois 0,3 ? Il ne resterait que 15 € !\nMoins 30 %, il reste 70 % : 50 × 0,7 = 35 €.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : moins 45 %, c'est fois combien ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_diminution&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #1re #automatismes",
+      "tags": [
+        "soldes",
+        "baisse",
+        "coefficient multiplicateur",
+        "évolutions en pourcentage",
+        "maths",
+        "1re",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "Moins 10 %, c'est fois :",
+          "choix": [
+            "0,9",
+            "0,1",
+            "1,1"
+          ],
+          "reponse": 0,
+          "explication": "Il reste 90 %, soit 0,9."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "stmg-prop-evo-diminution",
+      "notionId": "auto_evo_coefficient",
+      "microId": "auto_evo_diminution",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/proportionnalite/08-evo-diminution/eleveai-maths-stmg-prop-evo-diminution.mp4",
+      "miniature": "stmg/maths/proportionnalite/08-evo-diminution/eleveai-maths-stmg-prop-evo-diminution.png",
+      "titre": "Moins 30 %, c'est fois 0,3 ? Le coefficient d'une baisse — épisode 8 · Maths STMG",
+      "accroche": "Les soldes commencent : un manteau à 80 € est soldé à − 30 %. Le vendeur change l'étiquette, la cliente veut savoir ce qu'elle paiera. La même baisse sert ailleurs : une ingénieure réduit de 15 % la consommation d'un bâtiment, un agriculteur voit sa récolte baisser de 10 %.\n\nDans cette vidéo :\n• une barre de 100 %, on retire 30 % : il reste 70 %\n• 70 % = 0,7 : baisser de 30 %, c'est multiplier par 0,7 ; 80 × 0,7 = 56 €\n• la règle : − t %, c'est × (1 − t ÷ 100) ; − 15 % : × 0,85 ; − 10 % : × 0,9\n• le coefficient d'une baisse est plus petit que 1, celui d'une hausse plus grand que 1\n• le piège : × 0,3, on ne garde que 30 % (une baisse de 70 %)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : par combien multiplie-t-on pour baisser de 18 % ? et un coefficient de 0,92, quelle évolution est-ce ?\n\nPour s'entraîner :\n• les exercices corrigés (automatismes de 1re) : https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-evo-coefficient\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_diminution&display=simple\n\nSource : Exemples de la vie courante (soldes, consommation d'énergie, récolte).\n\n📈 Épisode 8 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les soldes : − 30 %"
+        ],
+        [
+          "00:34",
+          "Ce qui reste : 70 %"
+        ],
+        [
+          "00:46",
+          "70 % = 0,7"
+        ],
+        [
+          "01:01",
+          "La règle : × (1 − t ÷ 100)"
+        ],
+        [
+          "01:19",
+          "Question 1"
+        ],
+        [
+          "01:54",
+          "Le piège : × 0,3 ?"
+        ],
+        [
+          "02:11",
+          "Question 2"
+        ],
+        [
+          "02:50",
+          "À toi de jouer"
+        ],
+        [
+          "03:06",
+          "Correction"
+        ],
+        [
+          "03:20",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-evo-coefficient",
+      "tags": [
+        "coefficient multiplicateur",
+        "baisse en pourcentage",
+        "diminution",
+        "soldes",
+        "remise",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "STMG",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:19",
+          "question": "Baisser de 4 %, c'est multiplier par :",
+          "choix": [
+            "0,4",
+            "0,96",
+            "0,6"
+          ],
+          "reponse": 1,
+          "explication": "100 % − 4 % = 96 % = 0,96. A et C ne gardent que 40 % ou 60 %."
+        },
+        {
+          "t": "02:11",
+          "question": "Un abonnement à 40 € baisse de 25 %. Combien coûte-t-il ?",
+          "choix": [
+            "10 €",
+            "15 €",
+            "30 €"
+          ],
+          "reponse": 2,
+          "explication": "− 25 % : × 0,75 ; 40 × 0,75 = 30 €. A, c'est 25 % du prix ; B retire 25 €."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "nature-ecologie"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "stmg-prop-evo-diminution-short",
+      "notionId": "auto_evo_coefficient",
+      "microId": "auto_evo_diminution",
+      "classe": "stmg",
+      "ceinture": "blanche",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-prop-evo-diminution",
+      "fichier": "stmg/maths/proportionnalite/08-evo-diminution/eleveai-maths-stmg-prop-evo-diminution-short.mp4",
+      "miniature": "stmg/maths/proportionnalite/08-evo-diminution/eleveai-maths-stmg-prop-evo-diminution-short.png",
+      "titre": "Moins 30 % sur un jean à 50 € : on fait fois 0,3 ? 🔍 — STMG #Shorts",
+      "accroche": "Moins 30 % sur un jean à 50 €. Fois 0,3 ? Il ne resterait que 15 € !\nMoins 30 %, il reste 70 % : 50 × 0,7 = 35 €.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : moins 45 %, c'est fois combien ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_diminution&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #stmg #lycee",
+      "tags": [
+        "soldes",
+        "baisse",
+        "coefficient multiplicateur",
+        "évolutions en pourcentage",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "Moins 10 %, c'est fois :",
+          "choix": [
+            "0,9",
+            "0,1",
+            "1,1"
+          ],
+          "reponse": 0,
+          "explication": "Il reste 90 %, soit 0,9."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "premiere-prop-evo-valeur-finale",
+      "pas_avant": "2027-07-13",
+      "prioritaire": true,
+      "notionId": "auto_coefficient_multiplicateur",
+      "microId": "auto_evo_valeur_finale",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-premiere-prop-evo-valeur-finale.mp4",
+      "miniature": "premiere/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-premiere-prop-evo-valeur-finale.png",
+      "titre": "12 000 abonnés, + 15 % : combien ? Calculer une valeur d'arrivée — épisode 9 · Maths 1re",
+      "accroche": "Une créatrice de vidéos compte 12 000 abonnés, et sa chaîne progresse de 15 % ce mois-ci. Dans une usine, une ingénieure prévoyait une facture d'énergie de 45 000 €, mais elle baisse de 8 %. Deux métiers, une même question : combien à l'arrivée ?\n\nDans cette vidéo :\n• deux temps : traduire le taux en coefficient, puis multiplier la valeur de départ\n• 12 000 × 1,15 = 13 800 abonnés ; 45 000 × 0,92 = 41 400 €\n• sans calculatrice : 10 % de 12 000 = 1 200, 5 % = 600, donc 15 % = 1 800\n• le piège : 1 800 n'est que la hausse, on n'oublie pas les 12 000 du départ\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un vélo à 350 € est soldé à − 20 %, un salaire de 1 800 € augmente de 5 % : calcule les deux valeurs d'arrivée.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-coefficient-multiplicateur\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_valeur_finale&display=simple\n\nSource : Exemples de la vie courante (abonnés, facture d'énergie).\n\n📈 Épisode 9 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "12 000 abonnés, + 15 %"
+        ],
+        [
+          "00:32",
+          "La méthode en deux temps"
+        ],
+        [
+          "00:50",
+          "Avec une baisse : − 8 %"
+        ],
+        [
+          "01:04",
+          "De tête : 10 % + 5 %"
+        ],
+        [
+          "01:22",
+          "Question 1"
+        ],
+        [
+          "01:53",
+          "Le piège : la hausse seule"
+        ],
+        [
+          "02:06",
+          "Question 2"
+        ],
+        [
+          "02:43",
+          "À toi de jouer"
+        ],
+        [
+          "03:01",
+          "Correction"
+        ],
+        [
+          "03:13",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-coefficient-multiplicateur",
+      "tags": [
+        "valeur finale",
+        "appliquer un taux d'évolution",
+        "coefficient multiplicateur",
+        "abonnés",
+        "facture d'énergie",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "1re",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:22",
+          "question": "200 € augmentent de 15 %. On obtient :",
+          "choix": [
+            "230 €",
+            "215 €",
+            "30 €"
+          ],
+          "reponse": 0,
+          "explication": "200 × 1,15 = 230 €. B ajoute 15 € au lieu de 15 % ; C, c'est la hausse seule."
+        },
+        {
+          "t": "02:06",
+          "question": "Une ville de 50 000 habitants perd 2 %. Combien en reste-t-il ?",
+          "choix": [
+            "1 000",
+            "49 000",
+            "49 998"
+          ],
+          "reponse": 1,
+          "explication": "50 000 × 0,98 = 49 000. A, c'est la baisse seule ; C retire 2 habitants."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux",
+        "sciences"
+      ]
+    },
+    {
+      "id": "premiere-prop-evo-valeur-finale-short",
+      "pas_avant": "2027-07-13",
+      "prioritaire": true,
+      "notionId": "auto_coefficient_multiplicateur",
+      "microId": "auto_evo_valeur_finale",
+      "classe": "premiere",
+      "ceinture": "blanche",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-prop-evo-valeur-finale",
+      "fichier": "premiere/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-premiere-prop-evo-valeur-finale-short.mp4",
+      "miniature": "premiere/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-premiere-prop-evo-valeur-finale-short.png",
+      "titre": "Un billet à 40 €, + 25 % : il coûte 65 € ? 🔍 — 1re #Shorts",
+      "accroche": "Un billet de concert à 40 € augmente de 25 %. 65 € ? Non ! On ajoute 25 % de 40, pas 25 €.\n40 × 1,25 = 50 €.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 80 € baissent de 25 %. Combien ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_valeur_finale&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #1re #automatismes",
+      "tags": [
+        "valeur finale",
+        "concert",
+        "pourcentage",
+        "évolutions en pourcentage",
+        "maths",
+        "1re",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "60 € augmentent de 50 %. Combien ?",
+          "choix": [
+            "110 €",
+            "30 €",
+            "90 €"
+          ],
+          "reponse": 2,
+          "explication": "60 × 1,5 = 90 €."
+        }
+      ],
+      "centres": [
+        "musique"
+      ]
+    },
+    {
+      "id": "stmg-prop-evo-valeur-finale",
+      "notionId": "auto_evo_coefficient",
+      "microId": "auto_evo_valeur_finale",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-stmg-prop-evo-valeur-finale.mp4",
+      "miniature": "stmg/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-stmg-prop-evo-valeur-finale.png",
+      "titre": "12 000 abonnés, + 15 % : combien ? Calculer une valeur d'arrivée — épisode 9 · Maths STMG",
+      "accroche": "Une créatrice de vidéos compte 12 000 abonnés, et sa chaîne progresse de 15 % ce mois-ci. Dans une usine, une ingénieure prévoyait une facture d'énergie de 45 000 €, mais elle baisse de 8 %. Deux métiers, une même question : combien à l'arrivée ?\n\nDans cette vidéo :\n• deux temps : traduire le taux en coefficient, puis multiplier la valeur de départ\n• 12 000 × 1,15 = 13 800 abonnés ; 45 000 × 0,92 = 41 400 €\n• sans calculatrice : 10 % de 12 000 = 1 200, 5 % = 600, donc 15 % = 1 800\n• le piège : 1 800 n'est que la hausse, on n'oublie pas les 12 000 du départ\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : un vélo à 350 € est soldé à − 20 %, un salaire de 1 800 € augmente de 5 % : calcule les deux valeurs d'arrivée.\n\nPour s'entraîner :\n• les exercices corrigés (automatismes de 1re) : https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-evo-coefficient\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_valeur_finale&display=simple\n\nSource : Exemples de la vie courante (abonnés, facture d'énergie).\n\n📈 Épisode 9 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "12 000 abonnés, + 15 %"
+        ],
+        [
+          "00:32",
+          "La méthode en deux temps"
+        ],
+        [
+          "00:50",
+          "Avec une baisse : − 8 %"
+        ],
+        [
+          "01:04",
+          "De tête : 10 % + 5 %"
+        ],
+        [
+          "01:22",
+          "Question 1"
+        ],
+        [
+          "01:53",
+          "Le piège : la hausse seule"
+        ],
+        [
+          "02:06",
+          "Question 2"
+        ],
+        [
+          "02:43",
+          "À toi de jouer"
+        ],
+        [
+          "03:01",
+          "Correction"
+        ],
+        [
+          "03:13",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-evo-coefficient",
+      "tags": [
+        "valeur finale",
+        "appliquer un taux d'évolution",
+        "coefficient multiplicateur",
+        "abonnés",
+        "facture d'énergie",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "STMG",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:22",
+          "question": "200 € augmentent de 15 %. On obtient :",
+          "choix": [
+            "230 €",
+            "215 €",
+            "30 €"
+          ],
+          "reponse": 0,
+          "explication": "200 × 1,15 = 230 €. B ajoute 15 € au lieu de 15 % ; C, c'est la hausse seule."
+        },
+        {
+          "t": "02:06",
+          "question": "Une ville de 50 000 habitants perd 2 %. Combien en reste-t-il ?",
+          "choix": [
+            "1 000",
+            "49 000",
+            "49 998"
+          ],
+          "reponse": 1,
+          "explication": "50 000 × 0,98 = 49 000. A, c'est la baisse seule ; C retire 2 habitants."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux",
+        "sciences"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "stmg-prop-evo-valeur-finale-short",
+      "notionId": "auto_evo_coefficient",
+      "microId": "auto_evo_valeur_finale",
+      "classe": "stmg",
+      "ceinture": "blanche",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-prop-evo-valeur-finale",
+      "fichier": "stmg/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-stmg-prop-evo-valeur-finale-short.mp4",
+      "miniature": "stmg/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-stmg-prop-evo-valeur-finale-short.png",
+      "titre": "Un billet à 40 €, + 25 % : il coûte 65 € ? 🔍 — STMG #Shorts",
+      "accroche": "Un billet de concert à 40 € augmente de 25 %. 65 € ? Non ! On ajoute 25 % de 40, pas 25 €.\n40 × 1,25 = 50 €.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 80 € baissent de 25 %. Combien ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_valeur_finale&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #stmg #lycee",
+      "tags": [
+        "valeur finale",
+        "concert",
+        "pourcentage",
+        "évolutions en pourcentage",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:18",
+          "question": "60 € augmentent de 50 %. Combien ?",
+          "choix": [
+            "110 €",
+            "30 €",
+            "90 €"
+          ],
+          "reponse": 2,
+          "explication": "60 × 1,5 = 90 €."
+        }
+      ],
+      "centres": [
+        "musique"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "premiere-prop-evo-valeur-initiale",
+      "pas_avant": "2027-07-14",
+      "prioritaire": true,
+      "notionId": "auto_coefficient_multiplicateur",
+      "microId": "auto_evo_valeur_initiale",
+      "classe": "premiere",
+      "ceinture": "orange",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-premiere-prop-evo-valeur-initiale.mp4",
+      "miniature": "premiere/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-premiere-prop-evo-valeur-initiale.png",
+      "titre": "60 € TTC : le prix hors taxe est 48 € ? Retrouver une valeur de départ — épisode 10 · Maths 1re",
+      "accroche": "Sur un ticket de caisse, un casque coûte 60 € TTC, avec une TVA de 20 %. Le comptable doit retrouver le prix hors taxe. 60 − 20 %, soit 48 € ? Même problème pour une biologiste qui connaît une population après sa croissance, ou pour un vendeur qui retrouve son prix d'avant les soldes.\n\nDans cette vidéo :\n• le schéma : prix HT × 1,2 = 60 ; pour revenir en arrière, on divise par 1,2\n• 60 ÷ 1,2 = 50 € ; on vérifie : 50 × 1,2 = 60\n• le piège : 60 − 20 % = 48 €, faux ; 48 × 1,2 = 57,60 €, pas 60\n• après une baisse, pareil : un pull à − 40 % coûte 30 € ; 30 ÷ 0,6 = 50 €\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : un prix TTC de 84 € avec 20 % de TVA : quel prix hors taxe ? un salaire augmenté de 5 % vaut 2 100 € : combien valait-il avant ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-coefficient-multiplicateur\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_valeur_initiale&display=simple\n\nSource : TVA au taux normal de 20 % (service-public.fr).\n\n📈 Épisode 10 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un casque à 60 € TTC"
+        ],
+        [
+          "00:37",
+          "Le schéma : × 1,2"
+        ],
+        [
+          "00:50",
+          "On divise : 60 ÷ 1,2"
+        ],
+        [
+          "01:04",
+          "Le piège : 60 − 20 % ?"
+        ],
+        [
+          "01:24",
+          "Question 1"
+        ],
+        [
+          "02:04",
+          "Après une baisse"
+        ],
+        [
+          "02:21",
+          "Question 2"
+        ],
+        [
+          "02:53",
+          "À toi de jouer"
+        ],
+        [
+          "03:14",
+          "Correction"
+        ],
+        [
+          "03:25",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-coefficient-multiplicateur",
+      "tags": [
+        "valeur initiale",
+        "retrouver une valeur de départ",
+        "prix hors taxe",
+        "TVA",
+        "coefficient multiplicateur",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "1re",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:24",
+          "question": "Après une hausse de 25 %, un prix vaut 100 €. Prix de départ ?",
+          "choix": [
+            "75 €",
+            "125 €",
+            "80 €"
+          ],
+          "reponse": 2,
+          "explication": "100 ÷ 1,25 = 80 €. On vérifie : 80 × 1,25 = 100. A retire 25 % à l'arrivée."
+        },
+        {
+          "t": "02:21",
+          "question": "Après une baisse de 50 %, un jeu vaut 20 €. Son prix avant ?",
+          "choix": [
+            "30 €",
+            "40 €",
+            "10 €"
+          ],
+          "reponse": 1,
+          "explication": "20 ÷ 0,5 = 40 €. On vérifie : la moitié de 40, c'est 20."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "technologie-ia"
+      ]
+    },
+    {
+      "id": "premiere-prop-evo-valeur-initiale-short",
+      "pas_avant": "2027-07-14",
+      "prioritaire": true,
+      "notionId": "auto_coefficient_multiplicateur",
+      "microId": "auto_evo_valeur_initiale",
+      "classe": "premiere",
+      "ceinture": "blanche",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-prop-evo-valeur-initiale",
+      "fichier": "premiere/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-premiere-prop-evo-valeur-initiale-short.mp4",
+      "miniature": "premiere/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-premiere-prop-evo-valeur-initiale-short.png",
+      "titre": "Avec 20 % de TVA, 120 € TTC : hors taxe, 96 € ? 🔍 — 1re #Shorts",
+      "accroche": "Avec 20 % de TVA, un objet coûte 120 €. Hors taxe : 96 € ? Non ! 96 × 1,2 = 115,20 €.\nOn divise : 120 ÷ 1,2 = 100 €.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : avec 20 % de TVA, un objet coûte 36 € TTC. Combien hors taxe ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_valeur_initiale&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #1re #automatismes",
+      "tags": [
+        "TVA",
+        "prix hors taxe",
+        "valeur initiale",
+        "évolutions en pourcentage",
+        "maths",
+        "1re",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "Après + 10 %, un prix vaut 110 €. Avant ?",
+          "choix": [
+            "100 €",
+            "99 €",
+            "121 €"
+          ],
+          "reponse": 0,
+          "explication": "110 ÷ 1,1 = 100 €."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "stmg-prop-evo-valeur-initiale",
+      "notionId": "auto_evo_coefficient",
+      "microId": "auto_evo_valeur_initiale",
+      "classe": "stmg",
+      "ceinture": "orange",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-stmg-prop-evo-valeur-initiale.mp4",
+      "miniature": "stmg/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-stmg-prop-evo-valeur-initiale.png",
+      "titre": "60 € TTC : le prix hors taxe est 48 € ? Retrouver une valeur de départ — épisode 10 · Maths STMG",
+      "accroche": "Sur un ticket de caisse, un casque coûte 60 € TTC, avec une TVA de 20 %. Le comptable doit retrouver le prix hors taxe. 60 − 20 %, soit 48 € ? Même problème pour une biologiste qui connaît une population après sa croissance, ou pour un vendeur qui retrouve son prix d'avant les soldes.\n\nDans cette vidéo :\n• le schéma : prix HT × 1,2 = 60 ; pour revenir en arrière, on divise par 1,2\n• 60 ÷ 1,2 = 50 € ; on vérifie : 50 × 1,2 = 60\n• le piège : 60 − 20 % = 48 €, faux ; 48 × 1,2 = 57,60 €, pas 60\n• après une baisse, pareil : un pull à − 40 % coûte 30 € ; 30 ÷ 0,6 = 50 €\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : un prix TTC de 84 € avec 20 % de TVA : quel prix hors taxe ? un salaire augmenté de 5 % vaut 2 100 € : combien valait-il avant ?\n\nPour s'entraîner :\n• les exercices corrigés (automatismes de 1re) : https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-evo-coefficient\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_valeur_initiale&display=simple\n\nSource : TVA au taux normal de 20 % (service-public.fr).\n\n📈 Épisode 10 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un casque à 60 € TTC"
+        ],
+        [
+          "00:37",
+          "Le schéma : × 1,2"
+        ],
+        [
+          "00:50",
+          "On divise : 60 ÷ 1,2"
+        ],
+        [
+          "01:04",
+          "Le piège : 60 − 20 % ?"
+        ],
+        [
+          "01:24",
+          "Question 1"
+        ],
+        [
+          "02:04",
+          "Après une baisse"
+        ],
+        [
+          "02:21",
+          "Question 2"
+        ],
+        [
+          "02:53",
+          "À toi de jouer"
+        ],
+        [
+          "03:14",
+          "Correction"
+        ],
+        [
+          "03:25",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-evo-coefficient",
+      "tags": [
+        "valeur initiale",
+        "retrouver une valeur de départ",
+        "prix hors taxe",
+        "TVA",
+        "coefficient multiplicateur",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "STMG",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:24",
+          "question": "Après une hausse de 25 %, un prix vaut 100 €. Prix de départ ?",
+          "choix": [
+            "75 €",
+            "125 €",
+            "80 €"
+          ],
+          "reponse": 2,
+          "explication": "100 ÷ 1,25 = 80 €. On vérifie : 80 × 1,25 = 100. A retire 25 % à l'arrivée."
+        },
+        {
+          "t": "02:21",
+          "question": "Après une baisse de 50 %, un jeu vaut 20 €. Son prix avant ?",
+          "choix": [
+            "30 €",
+            "40 €",
+            "10 €"
+          ],
+          "reponse": 1,
+          "explication": "20 ÷ 0,5 = 40 €. On vérifie : la moitié de 40, c'est 20."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "technologie-ia"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "stmg-prop-evo-valeur-initiale-short",
+      "notionId": "auto_evo_coefficient",
+      "microId": "auto_evo_valeur_initiale",
+      "classe": "stmg",
+      "ceinture": "blanche",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-prop-evo-valeur-initiale",
+      "fichier": "stmg/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-stmg-prop-evo-valeur-initiale-short.mp4",
+      "miniature": "stmg/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-stmg-prop-evo-valeur-initiale-short.png",
+      "titre": "Avec 20 % de TVA, 120 € TTC : hors taxe, 96 € ? 🔍 — STMG #Shorts",
+      "accroche": "Avec 20 % de TVA, un objet coûte 120 €. Hors taxe : 96 € ? Non ! 96 × 1,2 = 115,20 €.\nOn divise : 120 ÷ 1,2 = 100 €.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : avec 20 % de TVA, un objet coûte 36 € TTC. Combien hors taxe ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_valeur_initiale&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #stmg #lycee",
+      "tags": [
+        "TVA",
+        "prix hors taxe",
+        "valeur initiale",
+        "évolutions en pourcentage",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "Après + 10 %, un prix vaut 110 €. Avant ?",
+          "choix": [
+            "100 €",
+            "99 €",
+            "121 €"
+          ],
+          "reponse": 0,
+          "explication": "110 ÷ 1,1 = 100 €."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "premiere-prop-evo-calculer-taux",
+      "pas_avant": "2027-07-15",
+      "prioritaire": true,
+      "notionId": "auto_taux_evolution",
+      "microId": "auto_evo_calculer_taux",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-premiere-prop-evo-calculer-taux.mp4",
+      "miniature": "premiere/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-premiere-prop-evo-calculer-taux.png",
+      "titre": "Livret A : de 3 % à 2,4 %, c'est − 0,6 % ? Calculer un taux d'évolution — épisode 11 · Maths 1re",
+      "accroche": "Le taux du Livret A était de 3 %. Le 1er février 2025, il passe à 2,4 % : il perd 0,6 point. Mais en pourcentage ? Une conseillère bancaire, un journaliste, une économiste doivent le dire en une phrase.\n\nDans cette vidéo :\n• la formule : (arrivée − départ) ÷ départ ; (2,4 − 3) ÷ 3 = − 0,2, soit − 20 %\n• l'autre chemin : le coefficient, arrivée ÷ départ ; 2,4 ÷ 3 = 0,8, il manque 20 %\n• avec une hausse : de 400 à 460 baguettes, 60 ÷ 400 = 0,15, soit + 15 %\n• le piège : on divise toujours par la valeur de départ\n• − 0,6 point, ce n'est pas − 0,6 % : c'est − 20 %\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une salle de sport passe de 250 à 300 inscrits, un forfait de 40 € à 30 € : calcule les deux taux d'évolution.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-taux-evolution\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_calculer_taux&display=simple\n\nSource : Livret A : 3 % jusqu'au 31 janvier 2025, 2,4 % au 1er février 2025 (Banque de France).\n\n📈 Épisode 11 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le Livret A : de 3 % à 2,4 %"
+        ],
+        [
+          "00:32",
+          "La formule"
+        ],
+        [
+          "00:50",
+          "Le coefficient : arrivée ÷ départ"
+        ],
+        [
+          "01:07",
+          "Avec une hausse"
+        ],
+        [
+          "01:26",
+          "Question 1"
+        ],
+        [
+          "02:05",
+          "Le piège : points ou pourcentage"
+        ],
+        [
+          "02:21",
+          "Question 2"
+        ],
+        [
+          "03:01",
+          "À toi de jouer"
+        ],
+        [
+          "03:18",
+          "Correction"
+        ],
+        [
+          "03:32",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-taux-evolution",
+      "tags": [
+        "taux d'évolution",
+        "calculer un taux d'évolution",
+        "variation relative",
+        "Livret A",
+        "point de pourcentage",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "1re",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:26",
+          "question": "Un prix passe de 50 € à 60 €. Taux d'évolution ?",
+          "choix": [
+            "+ 10 %",
+            "+ 20 %",
+            "≈ + 17 %"
+          ],
+          "reponse": 1,
+          "explication": "60 − 50 = 10 ; 10 ÷ 50 = 0,2, soit + 20 %. C divise par 60, l'arrivée."
+        },
+        {
+          "t": "02:21",
+          "question": "Une ville passe de 80 000 à 60 000 habitants. Taux d'évolution ?",
+          "choix": [
+            "− 25 %",
+            "− 20 %",
+            "≈ − 33 %"
+          ],
+          "reponse": 0,
+          "explication": "− 20 000 ÷ 80 000 = − 0,25, soit − 25 %. C divise par 60 000, l'arrivée."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "sport"
+      ]
+    },
+    {
+      "id": "premiere-prop-evo-calculer-taux-short",
+      "pas_avant": "2027-07-15",
+      "prioritaire": true,
+      "notionId": "auto_taux_evolution",
+      "microId": "auto_evo_calculer_taux",
+      "classe": "premiere",
+      "ceinture": "blanche",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-prop-evo-calculer-taux",
+      "fichier": "premiere/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-premiere-prop-evo-calculer-taux-short.mp4",
+      "miniature": "premiere/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-premiere-prop-evo-calculer-taux-short.png",
+      "titre": "De 20 € à 25 € : le prix augmente de 5 % ? 🔍 — 1re #Shorts",
+      "accroche": "Un prix passe de 20 € à 25 €. + 5 % ? Non ! 5 € de plus, sur 20 €.\n5 ÷ 20 = 0,25 : + 25 %.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : de 50 à 40, quel taux d'évolution ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_calculer_taux&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #1re #automatismes",
+      "tags": [
+        "taux d'évolution",
+        "pourcentage",
+        "abonnés",
+        "évolutions en pourcentage",
+        "maths",
+        "1re",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "De 40 à 50 abonnés : quel taux ?",
+          "choix": [
+            "+ 10 %",
+            "+ 20 %",
+            "+ 25 %"
+          ],
+          "reponse": 2,
+          "explication": "10 ÷ 40 = 0,25, soit + 25 %."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux"
+      ]
+    },
+    {
+      "id": "stmg-prop-evo-calculer-taux",
+      "notionId": "auto_evo_taux",
+      "microId": "auto_evo_calculer_taux",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-stmg-prop-evo-calculer-taux.mp4",
+      "miniature": "stmg/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-stmg-prop-evo-calculer-taux.png",
+      "titre": "Livret A : de 3 % à 2,4 %, c'est − 0,6 % ? Calculer un taux d'évolution — épisode 11 · Maths STMG",
+      "accroche": "Le taux du Livret A était de 3 %. Le 1er février 2025, il passe à 2,4 % : il perd 0,6 point. Mais en pourcentage ? Une conseillère bancaire, un journaliste, une économiste doivent le dire en une phrase.\n\nDans cette vidéo :\n• la formule : (arrivée − départ) ÷ départ ; (2,4 − 3) ÷ 3 = − 0,2, soit − 20 %\n• l'autre chemin : le coefficient, arrivée ÷ départ ; 2,4 ÷ 3 = 0,8, il manque 20 %\n• avec une hausse : de 400 à 460 baguettes, 60 ÷ 400 = 0,15, soit + 15 %\n• le piège : on divise toujours par la valeur de départ\n• − 0,6 point, ce n'est pas − 0,6 % : c'est − 20 %\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une salle de sport passe de 250 à 300 inscrits, un forfait de 40 € à 30 € : calcule les deux taux d'évolution.\n\nPour s'entraîner :\n• les exercices corrigés (automatismes de 1re) : https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-evo-taux\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_taux&microId=auto_evo_calculer_taux&display=simple\n\nSource : Livret A : 3 % jusqu'au 31 janvier 2025, 2,4 % au 1er février 2025 (Banque de France).\n\n📈 Épisode 11 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le Livret A : de 3 % à 2,4 %"
+        ],
+        [
+          "00:32",
+          "La formule"
+        ],
+        [
+          "00:50",
+          "Le coefficient : arrivée ÷ départ"
+        ],
+        [
+          "01:07",
+          "Avec une hausse"
+        ],
+        [
+          "01:26",
+          "Question 1"
+        ],
+        [
+          "02:05",
+          "Le piège : points ou pourcentage"
+        ],
+        [
+          "02:21",
+          "Question 2"
+        ],
+        [
+          "03:01",
+          "À toi de jouer"
+        ],
+        [
+          "03:18",
+          "Correction"
+        ],
+        [
+          "03:32",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-evo-taux",
+      "tags": [
+        "taux d'évolution",
+        "calculer un taux d'évolution",
+        "variation relative",
+        "Livret A",
+        "point de pourcentage",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "STMG",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:26",
+          "question": "Un prix passe de 50 € à 60 €. Taux d'évolution ?",
+          "choix": [
+            "+ 10 %",
+            "+ 20 %",
+            "≈ + 17 %"
+          ],
+          "reponse": 1,
+          "explication": "60 − 50 = 10 ; 10 ÷ 50 = 0,2, soit + 20 %. C divise par 60, l'arrivée."
+        },
+        {
+          "t": "02:21",
+          "question": "Une ville passe de 80 000 à 60 000 habitants. Taux d'évolution ?",
+          "choix": [
+            "− 25 %",
+            "− 20 %",
+            "≈ − 33 %"
+          ],
+          "reponse": 0,
+          "explication": "− 20 000 ÷ 80 000 = − 0,25, soit − 25 %. C divise par 60 000, l'arrivée."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "sport"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "stmg-prop-evo-calculer-taux-short",
+      "notionId": "auto_evo_taux",
+      "microId": "auto_evo_calculer_taux",
+      "classe": "stmg",
+      "ceinture": "blanche",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-prop-evo-calculer-taux",
+      "fichier": "stmg/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-stmg-prop-evo-calculer-taux-short.mp4",
+      "miniature": "stmg/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-stmg-prop-evo-calculer-taux-short.png",
+      "titre": "De 20 € à 25 € : le prix augmente de 5 % ? 🔍 — STMG #Shorts",
+      "accroche": "Un prix passe de 20 € à 25 €. + 5 % ? Non ! 5 € de plus, sur 20 €.\n5 ÷ 20 = 0,25 : + 25 %.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : de 50 à 40, quel taux d'évolution ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_taux&microId=auto_evo_calculer_taux&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #stmg #lycee",
+      "tags": [
+        "taux d'évolution",
+        "pourcentage",
+        "abonnés",
+        "évolutions en pourcentage",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "De 40 à 50 abonnés : quel taux ?",
+          "choix": [
+            "+ 10 %",
+            "+ 20 %",
+            "+ 25 %"
+          ],
+          "reponse": 2,
+          "explication": "10 ÷ 40 = 0,25, soit + 25 %."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "seconde-prop-evo-calculer-taux",
+      "notionId": "information_chiffree_evolutions",
+      "microId": "info_taux_evolution",
+      "classe": "seconde",
+      "ceinture": "jaune",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/proportionnalite/03-evo-calculer-taux/eleveai-maths-seconde-prop-evo-calculer-taux.mp4",
+      "miniature": "seconde/maths/proportionnalite/03-evo-calculer-taux/eleveai-maths-seconde-prop-evo-calculer-taux.png",
+      "titre": "Livret A : de 3 % à 2,4 %, c'est − 0,6 % ? Calculer un taux d'évolution — épisode 3 · Maths 2de",
+      "accroche": "Le taux du Livret A était de 3 %. Le 1er février 2025, il passe à 2,4 % : il perd 0,6 point. Mais en pourcentage ? Une conseillère bancaire, un journaliste, une économiste doivent le dire en une phrase.\n\nDans cette vidéo :\n• la formule : (arrivée − départ) ÷ départ ; (2,4 − 3) ÷ 3 = − 0,2, soit − 20 %\n• l'autre chemin : le coefficient, arrivée ÷ départ ; 2,4 ÷ 3 = 0,8, il manque 20 %\n• avec une hausse : de 400 à 460 baguettes, 60 ÷ 400 = 0,15, soit + 15 %\n• le piège : on divise toujours par la valeur de départ\n• − 0,6 point, ce n'est pas − 0,6 % : c'est − 20 %\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une salle de sport passe de 250 à 300 inscrits, un forfait de 40 € à 30 € : calcule les deux taux d'évolution.\n\nPour s'entraîner :\n• la fiche de cours et ses exercices : https://www.eleveai.fr/fiches-cours/maths/seconde/information-chiffree-evolutions\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_taux_evolution&display=simple\n\nSource : Livret A : 3 % jusqu'au 31 janvier 2025, 2,4 % au 1er février 2025 (Banque de France).\n\n📈 Épisode 3 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le Livret A : de 3 % à 2,4 %"
+        ],
+        [
+          "00:32",
+          "La formule"
+        ],
+        [
+          "00:50",
+          "Le coefficient : arrivée ÷ départ"
+        ],
+        [
+          "01:07",
+          "Avec une hausse"
+        ],
+        [
+          "01:26",
+          "Question 1"
+        ],
+        [
+          "02:05",
+          "Le piège : points ou pourcentage"
+        ],
+        [
+          "02:21",
+          "Question 2"
+        ],
+        [
+          "03:01",
+          "À toi de jouer"
+        ],
+        [
+          "03:18",
+          "Correction"
+        ],
+        [
+          "03:32",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/information-chiffree-evolutions",
+      "tags": [
+        "taux d'évolution",
+        "calculer un taux d'évolution",
+        "variation relative",
+        "Livret A",
+        "point de pourcentage",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "2de",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:26",
+          "question": "Un prix passe de 50 € à 60 €. Taux d'évolution ?",
+          "choix": [
+            "+ 10 %",
+            "+ 20 %",
+            "≈ + 17 %"
+          ],
+          "reponse": 1,
+          "explication": "60 − 50 = 10 ; 10 ÷ 50 = 0,2, soit + 20 %. C divise par 60, l'arrivée."
+        },
+        {
+          "t": "02:21",
+          "question": "Une ville passe de 80 000 à 60 000 habitants. Taux d'évolution ?",
+          "choix": [
+            "− 25 %",
+            "− 20 %",
+            "≈ − 33 %"
+          ],
+          "reponse": 0,
+          "explication": "− 20 000 ÷ 80 000 = − 0,25, soit − 25 %. C divise par 60 000, l'arrivée."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "sport"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "seconde-prop-evo-calculer-taux-short",
+      "notionId": "information_chiffree_evolutions",
+      "microId": "info_taux_evolution",
+      "classe": "seconde",
+      "ceinture": "blanche",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-prop-evo-calculer-taux",
+      "fichier": "seconde/maths/proportionnalite/03-evo-calculer-taux/eleveai-maths-seconde-prop-evo-calculer-taux-short.mp4",
+      "miniature": "seconde/maths/proportionnalite/03-evo-calculer-taux/eleveai-maths-seconde-prop-evo-calculer-taux-short.png",
+      "titre": "De 20 € à 25 € : le prix augmente de 5 % ? 🔍 — 2de #Shorts",
+      "accroche": "Un prix passe de 20 € à 25 €. + 5 % ? Non ! 5 € de plus, sur 20 €.\n5 ÷ 20 = 0,25 : + 25 %.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : de 50 à 40, quel taux d'évolution ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_taux_evolution&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #2de #lycee",
+      "tags": [
+        "taux d'évolution",
+        "pourcentage",
+        "abonnés",
+        "évolutions en pourcentage",
+        "maths",
+        "2de",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "De 40 à 50 abonnés : quel taux ?",
+          "choix": [
+            "+ 10 %",
+            "+ 20 %",
+            "+ 25 %"
+          ],
+          "reponse": 2,
+          "explication": "10 ÷ 40 = 0,25, soit + 25 %."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "premiere-prop-evo-successives",
+      "pas_avant": "2027-07-16",
+      "prioritaire": true,
+      "notionId": "auto_taux_evolution",
+      "microId": "auto_evo_successives",
+      "classe": "premiere",
+      "ceinture": "orange",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/proportionnalite/12-evo-successives/eleveai-maths-premiere-prop-evo-successives.mp4",
+      "miniature": "premiere/maths/proportionnalite/12-evo-successives/eleveai-maths-premiere-prop-evo-successives.png",
+      "titre": "− 30 % puis − 20 % : − 50 % ? Les évolutions successives — épisode 12 · Maths 1re",
+      "accroche": "En janvier, un magasin solde un blouson à − 30 %. Fin janvier, deuxième démarque : − 20 % sur le prix soldé. L'affiche promet « jusqu'à − 50 % ». Et les prix de la vie courante s'enchaînent aussi : en France, + 5,2 % en 2022, puis + 4,9 % en 2023.\n\nDans cette vidéo :\n• on enchaîne les coefficients : − 30 %, × 0,7 ; puis − 20 %, × 0,8\n• 0,7 × 0,8 = 0,56 : il reste 56 %, une baisse de 44 %, pas de 50 %\n• le piège : on n'additionne pas les taux, la 2e baisse porte sur un prix déjà baissé\n• les prix en France : 1,052 × 1,049 ≈ 1,104, soit + 10,4 % en deux ans\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : un loyer augmente de 5 % deux années de suite : quel taux au total ? un prix baisse de 50 %, puis encore de 50 % ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-taux-evolution\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_successives&display=simple\n\nSource : Prix à la consommation en France : + 5,2 % en 2022, + 4,9 % en 2023, moyennes annuelles (Insee).\n\n📈 Épisode 12 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux démarques sur un blouson"
+        ],
+        [
+          "00:40",
+          "On enchaîne les coefficients"
+        ],
+        [
+          "00:57",
+          "0,7 × 0,8 = 0,56"
+        ],
+        [
+          "01:16",
+          "Le piège : additionner"
+        ],
+        [
+          "01:30",
+          "Question 1"
+        ],
+        [
+          "02:03",
+          "Les prix en France"
+        ],
+        [
+          "02:24",
+          "Question 2"
+        ],
+        [
+          "02:59",
+          "À toi de jouer"
+        ],
+        [
+          "03:17",
+          "Correction"
+        ],
+        [
+          "03:37",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-taux-evolution",
+      "tags": [
+        "évolutions successives",
+        "taux global",
+        "multiplier les coefficients",
+        "soldes",
+        "inflation",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "1re",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:30",
+          "question": "+ 10 %, puis + 10 % : au total ?",
+          "choix": [
+            "+ 21 %",
+            "+ 20 %",
+            "+ 100 %"
+          ],
+          "reponse": 0,
+          "explication": "1,1 × 1,1 = 1,21, soit + 21 %. B additionne les taux."
+        },
+        {
+          "t": "02:24",
+          "question": "Une action : + 20 %, puis − 10 %. Au total ?",
+          "choix": [
+            "+ 10 %",
+            "+ 2 %",
+            "+ 8 %"
+          ],
+          "reponse": 2,
+          "explication": "1,2 × 0,9 = 1,08, soit + 8 %. A additionne les taux."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "premiere-prop-evo-successives-short",
+      "pas_avant": "2027-07-16",
+      "prioritaire": true,
+      "notionId": "auto_taux_evolution",
+      "microId": "auto_evo_successives",
+      "classe": "premiere",
+      "ceinture": "blanche",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-prop-evo-successives",
+      "fichier": "premiere/maths/proportionnalite/12-evo-successives/eleveai-maths-premiere-prop-evo-successives-short.mp4",
+      "miniature": "premiere/maths/proportionnalite/12-evo-successives/eleveai-maths-premiere-prop-evo-successives-short.png",
+      "titre": "− 50 %, puis encore − 50 % : c'est gratuit ? 🔍 — 1re #Shorts",
+      "accroche": "Moins 50 %, puis encore moins 50 %. Gratuit ? Non ! 0,5 × 0,5 = 0,25.\nIl reste un quart du prix : − 75 %.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : plus 50 %, puis plus 50 %. Quel taux au total ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_successives&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #1re #automatismes",
+      "tags": [
+        "évolutions successives",
+        "soldes",
+        "pourcentage",
+        "évolutions en pourcentage",
+        "maths",
+        "1re",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "− 20 %, puis − 20 % : au total ?",
+          "choix": [
+            "− 40 %",
+            "− 36 %",
+            "− 4 %"
+          ],
+          "reponse": 1,
+          "explication": "0,8 × 0,8 = 0,64, soit − 36 %."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ]
+    },
+    {
+      "id": "stmg-prop-evo-successives",
+      "notionId": "auto_evo_enchainees",
+      "microId": "auto_evo_successives",
+      "classe": "stmg",
+      "ceinture": "orange",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/proportionnalite/12-evo-successives/eleveai-maths-stmg-prop-evo-successives.mp4",
+      "miniature": "stmg/maths/proportionnalite/12-evo-successives/eleveai-maths-stmg-prop-evo-successives.png",
+      "titre": "− 30 % puis − 20 % : − 50 % ? Les évolutions successives — épisode 12 · Maths STMG",
+      "accroche": "En janvier, un magasin solde un blouson à − 30 %. Fin janvier, deuxième démarque : − 20 % sur le prix soldé. L'affiche promet « jusqu'à − 50 % ». Et les prix de la vie courante s'enchaînent aussi : en France, + 5,2 % en 2022, puis + 4,9 % en 2023.\n\nDans cette vidéo :\n• on enchaîne les coefficients : − 30 %, × 0,7 ; puis − 20 %, × 0,8\n• 0,7 × 0,8 = 0,56 : il reste 56 %, une baisse de 44 %, pas de 50 %\n• le piège : on n'additionne pas les taux, la 2e baisse porte sur un prix déjà baissé\n• les prix en France : 1,052 × 1,049 ≈ 1,104, soit + 10,4 % en deux ans\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : un loyer augmente de 5 % deux années de suite : quel taux au total ? un prix baisse de 50 %, puis encore de 50 % ?\n\nPour s'entraîner :\n• les exercices corrigés (automatismes de 1re) : https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-evo-enchainees\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_successives&display=simple\n\nSource : Prix à la consommation en France : + 5,2 % en 2022, + 4,9 % en 2023, moyennes annuelles (Insee).\n\n📈 Épisode 12 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux démarques sur un blouson"
+        ],
+        [
+          "00:40",
+          "On enchaîne les coefficients"
+        ],
+        [
+          "00:57",
+          "0,7 × 0,8 = 0,56"
+        ],
+        [
+          "01:16",
+          "Le piège : additionner"
+        ],
+        [
+          "01:30",
+          "Question 1"
+        ],
+        [
+          "02:03",
+          "Les prix en France"
+        ],
+        [
+          "02:24",
+          "Question 2"
+        ],
+        [
+          "02:59",
+          "À toi de jouer"
+        ],
+        [
+          "03:17",
+          "Correction"
+        ],
+        [
+          "03:37",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-evo-enchainees",
+      "tags": [
+        "évolutions successives",
+        "taux global",
+        "multiplier les coefficients",
+        "soldes",
+        "inflation",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "STMG",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:30",
+          "question": "+ 10 %, puis + 10 % : au total ?",
+          "choix": [
+            "+ 21 %",
+            "+ 20 %",
+            "+ 100 %"
+          ],
+          "reponse": 0,
+          "explication": "1,1 × 1,1 = 1,21, soit + 21 %. B additionne les taux."
+        },
+        {
+          "t": "02:24",
+          "question": "Une action : + 20 %, puis − 10 %. Au total ?",
+          "choix": [
+            "+ 10 %",
+            "+ 2 %",
+            "+ 8 %"
+          ],
+          "reponse": 2,
+          "explication": "1,2 × 0,9 = 1,08, soit + 8 %. A additionne les taux."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "argent-budget"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "stmg-prop-evo-successives-short",
+      "notionId": "auto_evo_enchainees",
+      "microId": "auto_evo_successives",
+      "classe": "stmg",
+      "ceinture": "blanche",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-prop-evo-successives",
+      "fichier": "stmg/maths/proportionnalite/12-evo-successives/eleveai-maths-stmg-prop-evo-successives-short.mp4",
+      "miniature": "stmg/maths/proportionnalite/12-evo-successives/eleveai-maths-stmg-prop-evo-successives-short.png",
+      "titre": "− 50 %, puis encore − 50 % : c'est gratuit ? 🔍 — STMG #Shorts",
+      "accroche": "Moins 50 %, puis encore moins 50 %. Gratuit ? Non ! 0,5 × 0,5 = 0,25.\nIl reste un quart du prix : − 75 %.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : plus 50 %, puis plus 50 %. Quel taux au total ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_successives&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #stmg #lycee",
+      "tags": [
+        "évolutions successives",
+        "soldes",
+        "pourcentage",
+        "évolutions en pourcentage",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "− 20 %, puis − 20 % : au total ?",
+          "choix": [
+            "− 40 %",
+            "− 36 %",
+            "− 4 %"
+          ],
+          "reponse": 1,
+          "explication": "0,8 × 0,8 = 0,64, soit − 36 %."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "seconde-prop-evo-successives",
+      "notionId": "information_chiffree_evolutions",
+      "microId": "info_evolutions_successives",
+      "classe": "seconde",
+      "ceinture": "orange",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/proportionnalite/04-evo-successives/eleveai-maths-seconde-prop-evo-successives.mp4",
+      "miniature": "seconde/maths/proportionnalite/04-evo-successives/eleveai-maths-seconde-prop-evo-successives.png",
+      "titre": "− 30 % puis − 20 % : − 50 % ? Les évolutions successives — épisode 4 · Maths 2de",
+      "accroche": "En janvier, un magasin solde un blouson à − 30 %. Fin janvier, deuxième démarque : − 20 % sur le prix soldé. L'affiche promet « jusqu'à − 50 % ». Et les prix de la vie courante s'enchaînent aussi : en France, + 5,2 % en 2022, puis + 4,9 % en 2023.\n\nDans cette vidéo :\n• on enchaîne les coefficients : − 30 %, × 0,7 ; puis − 20 %, × 0,8\n• 0,7 × 0,8 = 0,56 : il reste 56 %, une baisse de 44 %, pas de 50 %\n• le piège : on n'additionne pas les taux, la 2e baisse porte sur un prix déjà baissé\n• les prix en France : 1,052 × 1,049 ≈ 1,104, soit + 10,4 % en deux ans\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : un loyer augmente de 5 % deux années de suite : quel taux au total ? un prix baisse de 50 %, puis encore de 50 % ?\n\nPour s'entraîner :\n• la fiche de cours et ses exercices : https://www.eleveai.fr/fiches-cours/maths/seconde/information-chiffree-evolutions\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_evolutions_successives&display=simple\n\nSource : Prix à la consommation en France : + 5,2 % en 2022, + 4,9 % en 2023, moyennes annuelles (Insee).\n\n📈 Épisode 4 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux démarques sur un blouson"
+        ],
+        [
+          "00:40",
+          "On enchaîne les coefficients"
+        ],
+        [
+          "00:57",
+          "0,7 × 0,8 = 0,56"
+        ],
+        [
+          "01:16",
+          "Le piège : additionner"
+        ],
+        [
+          "01:30",
+          "Question 1"
+        ],
+        [
+          "02:03",
+          "Les prix en France"
+        ],
+        [
+          "02:24",
+          "Question 2"
+        ],
+        [
+          "02:59",
+          "À toi de jouer"
+        ],
+        [
+          "03:17",
+          "Correction"
+        ],
+        [
+          "03:37",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/information-chiffree-evolutions",
+      "tags": [
+        "évolutions successives",
+        "taux global",
+        "multiplier les coefficients",
+        "soldes",
+        "inflation",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "2de",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:30",
+          "question": "+ 10 %, puis + 10 % : au total ?",
+          "choix": [
+            "+ 21 %",
+            "+ 20 %",
+            "+ 100 %"
+          ],
+          "reponse": 0,
+          "explication": "1,1 × 1,1 = 1,21, soit + 21 %. B additionne les taux."
+        },
+        {
+          "t": "02:24",
+          "question": "Une action : + 20 %, puis − 10 %. Au total ?",
+          "choix": [
+            "+ 10 %",
+            "+ 2 %",
+            "+ 8 %"
+          ],
+          "reponse": 2,
+          "explication": "1,2 × 0,9 = 1,08, soit + 8 %. A additionne les taux."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "argent-budget"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "seconde-prop-evo-successives-short",
+      "notionId": "information_chiffree_evolutions",
+      "microId": "info_evolutions_successives",
+      "classe": "seconde",
+      "ceinture": "blanche",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-prop-evo-successives",
+      "fichier": "seconde/maths/proportionnalite/04-evo-successives/eleveai-maths-seconde-prop-evo-successives-short.mp4",
+      "miniature": "seconde/maths/proportionnalite/04-evo-successives/eleveai-maths-seconde-prop-evo-successives-short.png",
+      "titre": "− 50 %, puis encore − 50 % : c'est gratuit ? 🔍 — 2de #Shorts",
+      "accroche": "Moins 50 %, puis encore moins 50 %. Gratuit ? Non ! 0,5 × 0,5 = 0,25.\nIl reste un quart du prix : − 75 %.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : plus 50 %, puis plus 50 %. Quel taux au total ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_evolutions_successives&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #2de #lycee",
+      "tags": [
+        "évolutions successives",
+        "soldes",
+        "pourcentage",
+        "évolutions en pourcentage",
+        "maths",
+        "2de",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:19",
+          "question": "− 20 %, puis − 20 % : au total ?",
+          "choix": [
+            "− 40 %",
+            "− 36 %",
+            "− 4 %"
+          ],
+          "reponse": 1,
+          "explication": "0,8 × 0,8 = 0,64, soit − 36 %."
+        }
+      ],
+      "centres": [
+        "art-design"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "premiere-prop-evo-reciproque",
+      "pas_avant": "2027-07-17",
+      "prioritaire": true,
+      "notionId": "auto_taux_evolution",
+      "microId": "auto_evo_reciproque",
+      "classe": "premiere",
+      "ceinture": "bleue",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/proportionnalite/13-evo-reciproque/eleveai-maths-premiere-prop-evo-reciproque.mp4",
+      "miniature": "premiere/maths/proportionnalite/13-evo-reciproque/eleveai-maths-premiere-prop-evo-reciproque.png",
+      "titre": "Après − 20 %, + 20 % suffit-il ? L'évolution réciproque — épisode 13 · Maths 1re",
+      "accroche": "Le Livret A est passé de 3 % à 2,4 % : − 20 %. Pour retrouver 3 %, faudrait-il une hausse de 20 % ? Même question pour une kinésithérapeute dont le patient a perdu 20 % de sa force après une blessure, ou pour un commerçant qui veut revenir à son prix d'avant les soldes.\n\nDans cette vidéo :\n• on teste : 2,4 × 1,2 = 2,88, pas 3 : + 20 % ne suffit pas\n• le coefficient réciproque : 1 ÷ 0,8 = 1,25, soit + 25 % ; 2,4 × 1,25 = 3\n• la règle : si une évolution a pour coefficient c, sa réciproque a pour coefficient 1 ÷ c\n• le piège : après une baisse, la hausse pour revenir est toujours plus grande\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : une action perd 60 % : quelle hausse pour revenir ? et après une hausse de 100 %, quelle baisse ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-taux-evolution\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_reciproque&display=simple\n\nSource : Livret A : 3 % → 2,4 % au 1er février 2025 (Banque de France).\n\n📈 Épisode 13 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Livret A : − 20 %, et pour revenir ?"
+        ],
+        [
+          "00:35",
+          "On teste : + 20 %"
+        ],
+        [
+          "00:51",
+          "Le coefficient réciproque"
+        ],
+        [
+          "01:23",
+          "Question 1"
+        ],
+        [
+          "01:59",
+          "Le piège : le même taux"
+        ],
+        [
+          "02:15",
+          "Question 2"
+        ],
+        [
+          "02:52",
+          "À toi de jouer"
+        ],
+        [
+          "03:08",
+          "Correction"
+        ],
+        [
+          "03:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-taux-evolution",
+      "tags": [
+        "évolution réciproque",
+        "taux réciproque",
+        "coefficient réciproque",
+        "Livret A",
+        "revenir au prix de départ",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "1re",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:23",
+          "question": "Un prix baisse de 50 %. Pour revenir au départ, il faut :",
+          "choix": [
+            "+ 50 %",
+            "+ 150 %",
+            "+ 100 %"
+          ],
+          "reponse": 2,
+          "explication": "1 ÷ 0,5 = 2 : il faut doubler, + 100 %."
+        },
+        {
+          "t": "02:15",
+          "question": "Un loyer augmente de 25 %. Pour revenir au départ, il faut :",
+          "choix": [
+            "− 20 %",
+            "− 25 %",
+            "− 125 %"
+          ],
+          "reponse": 0,
+          "explication": "1 ÷ 1,25 = 0,8 : − 20 %."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "corps-sante"
+      ]
+    },
+    {
+      "id": "premiere-prop-evo-reciproque-short",
+      "pas_avant": "2027-07-17",
+      "prioritaire": true,
+      "notionId": "auto_taux_evolution",
+      "microId": "auto_evo_reciproque",
+      "classe": "premiere",
+      "ceinture": "blanche",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-prop-evo-reciproque",
+      "fichier": "premiere/maths/proportionnalite/13-evo-reciproque/eleveai-maths-premiere-prop-evo-reciproque-short.mp4",
+      "miniature": "premiere/maths/proportionnalite/13-evo-reciproque/eleveai-maths-premiere-prop-evo-reciproque-short.png",
+      "titre": "Ton score baisse de 20 % : + 20 % pour revenir ? 🔍 — 1re #Shorts",
+      "accroche": "Ton score baisse de 20 %. + 20 % pour revenir ? Non ! 100 − 20 % = 80, et 80 + 20 % = 96.\nIl faut + 25 % : 80 × 1,25 = 100.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : après moins 75 %, quelle hausse pour revenir ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_reciproque&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #1re #automatismes",
+      "tags": [
+        "évolution réciproque",
+        "score",
+        "pourcentage",
+        "évolutions en pourcentage",
+        "maths",
+        "1re",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "Après − 10 %, pour revenir, il faut environ :",
+          "choix": [
+            "+ 10 %",
+            "≈ + 11,1 %",
+            "+ 90 %"
+          ],
+          "reponse": 1,
+          "explication": "1 ÷ 0,9 ≈ 1,111, soit + 11,1 %."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ]
+    },
+    {
+      "id": "stmg-prop-evo-reciproque",
+      "notionId": "auto_evo_enchainees",
+      "microId": "auto_evo_reciproque",
+      "classe": "stmg",
+      "ceinture": "bleue",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/proportionnalite/13-evo-reciproque/eleveai-maths-stmg-prop-evo-reciproque.mp4",
+      "miniature": "stmg/maths/proportionnalite/13-evo-reciproque/eleveai-maths-stmg-prop-evo-reciproque.png",
+      "titre": "Après − 20 %, + 20 % suffit-il ? L'évolution réciproque — épisode 13 · Maths STMG",
+      "accroche": "Le Livret A est passé de 3 % à 2,4 % : − 20 %. Pour retrouver 3 %, faudrait-il une hausse de 20 % ? Même question pour une kinésithérapeute dont le patient a perdu 20 % de sa force après une blessure, ou pour un commerçant qui veut revenir à son prix d'avant les soldes.\n\nDans cette vidéo :\n• on teste : 2,4 × 1,2 = 2,88, pas 3 : + 20 % ne suffit pas\n• le coefficient réciproque : 1 ÷ 0,8 = 1,25, soit + 25 % ; 2,4 × 1,25 = 3\n• la règle : si une évolution a pour coefficient c, sa réciproque a pour coefficient 1 ÷ c\n• le piège : après une baisse, la hausse pour revenir est toujours plus grande\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : une action perd 60 % : quelle hausse pour revenir ? et après une hausse de 100 %, quelle baisse ?\n\nPour s'entraîner :\n• les exercices corrigés (automatismes de 1re) : https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-evo-enchainees\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_reciproque&display=simple\n\nSource : Livret A : 3 % → 2,4 % au 1er février 2025 (Banque de France).\n\n📈 Épisode 13 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Livret A : − 20 %, et pour revenir ?"
+        ],
+        [
+          "00:35",
+          "On teste : + 20 %"
+        ],
+        [
+          "00:51",
+          "Le coefficient réciproque"
+        ],
+        [
+          "01:23",
+          "Question 1"
+        ],
+        [
+          "01:59",
+          "Le piège : le même taux"
+        ],
+        [
+          "02:15",
+          "Question 2"
+        ],
+        [
+          "02:52",
+          "À toi de jouer"
+        ],
+        [
+          "03:08",
+          "Correction"
+        ],
+        [
+          "03:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-evo-enchainees",
+      "tags": [
+        "évolution réciproque",
+        "taux réciproque",
+        "coefficient réciproque",
+        "Livret A",
+        "revenir au prix de départ",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "STMG",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:23",
+          "question": "Un prix baisse de 50 %. Pour revenir au départ, il faut :",
+          "choix": [
+            "+ 50 %",
+            "+ 150 %",
+            "+ 100 %"
+          ],
+          "reponse": 2,
+          "explication": "1 ÷ 0,5 = 2 : il faut doubler, + 100 %."
+        },
+        {
+          "t": "02:15",
+          "question": "Un loyer augmente de 25 %. Pour revenir au départ, il faut :",
+          "choix": [
+            "− 20 %",
+            "− 25 %",
+            "− 125 %"
+          ],
+          "reponse": 0,
+          "explication": "1 ÷ 1,25 = 0,8 : − 20 %."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "corps-sante"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "stmg-prop-evo-reciproque-short",
+      "notionId": "auto_evo_enchainees",
+      "microId": "auto_evo_reciproque",
+      "classe": "stmg",
+      "ceinture": "blanche",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-prop-evo-reciproque",
+      "fichier": "stmg/maths/proportionnalite/13-evo-reciproque/eleveai-maths-stmg-prop-evo-reciproque-short.mp4",
+      "miniature": "stmg/maths/proportionnalite/13-evo-reciproque/eleveai-maths-stmg-prop-evo-reciproque-short.png",
+      "titre": "Ton score baisse de 20 % : + 20 % pour revenir ? 🔍 — STMG #Shorts",
+      "accroche": "Ton score baisse de 20 %. + 20 % pour revenir ? Non ! 100 − 20 % = 80, et 80 + 20 % = 96.\nIl faut + 25 % : 80 × 1,25 = 100.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : après moins 75 %, quelle hausse pour revenir ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_reciproque&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #stmg #lycee",
+      "tags": [
+        "évolution réciproque",
+        "score",
+        "pourcentage",
+        "évolutions en pourcentage",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "Après − 10 %, pour revenir, il faut environ :",
+          "choix": [
+            "+ 10 %",
+            "≈ + 11,1 %",
+            "+ 90 %"
+          ],
+          "reponse": 1,
+          "explication": "1 ÷ 0,9 ≈ 1,111, soit + 11,1 %."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "seconde-prop-evo-reciproque",
+      "notionId": "information_chiffree_evolutions",
+      "microId": "info_evolution_reciproque",
+      "classe": "seconde",
+      "ceinture": "bleue",
+      "serie": "Maths 2de",
+      "type": "longue",
+      "fichier": "seconde/maths/proportionnalite/05-evo-reciproque/eleveai-maths-seconde-prop-evo-reciproque.mp4",
+      "miniature": "seconde/maths/proportionnalite/05-evo-reciproque/eleveai-maths-seconde-prop-evo-reciproque.png",
+      "titre": "Après − 20 %, + 20 % suffit-il ? L'évolution réciproque — épisode 5 · Maths 2de",
+      "accroche": "Le Livret A est passé de 3 % à 2,4 % : − 20 %. Pour retrouver 3 %, faudrait-il une hausse de 20 % ? Même question pour une kinésithérapeute dont le patient a perdu 20 % de sa force après une blessure, ou pour un commerçant qui veut revenir à son prix d'avant les soldes.\n\nDans cette vidéo :\n• on teste : 2,4 × 1,2 = 2,88, pas 3 : + 20 % ne suffit pas\n• le coefficient réciproque : 1 ÷ 0,8 = 1,25, soit + 25 % ; 2,4 × 1,25 = 3\n• la règle : si une évolution a pour coefficient c, sa réciproque a pour coefficient 1 ÷ c\n• le piège : après une baisse, la hausse pour revenir est toujours plus grande\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : une action perd 60 % : quelle hausse pour revenir ? et après une hausse de 100 %, quelle baisse ?\n\nPour s'entraîner :\n• la fiche de cours et ses exercices : https://www.eleveai.fr/fiches-cours/maths/seconde/information-chiffree-evolutions\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_evolution_reciproque&display=simple\n\nSource : Livret A : 3 % → 2,4 % au 1er février 2025 (Banque de France).\n\n📈 Épisode 5 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "Livret A : − 20 %, et pour revenir ?"
+        ],
+        [
+          "00:35",
+          "On teste : + 20 %"
+        ],
+        [
+          "00:51",
+          "Le coefficient réciproque"
+        ],
+        [
+          "01:23",
+          "Question 1"
+        ],
+        [
+          "01:59",
+          "Le piège : le même taux"
+        ],
+        [
+          "02:15",
+          "Question 2"
+        ],
+        [
+          "02:52",
+          "À toi de jouer"
+        ],
+        [
+          "03:08",
+          "Correction"
+        ],
+        [
+          "03:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-cours/maths/seconde/information-chiffree-evolutions",
+      "tags": [
+        "évolution réciproque",
+        "taux réciproque",
+        "coefficient réciproque",
+        "Livret A",
+        "revenir au prix de départ",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "2de",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:23",
+          "question": "Un prix baisse de 50 %. Pour revenir au départ, il faut :",
+          "choix": [
+            "+ 50 %",
+            "+ 150 %",
+            "+ 100 %"
+          ],
+          "reponse": 2,
+          "explication": "1 ÷ 0,5 = 2 : il faut doubler, + 100 %."
+        },
+        {
+          "t": "02:15",
+          "question": "Un loyer augmente de 25 %. Pour revenir au départ, il faut :",
+          "choix": [
+            "− 20 %",
+            "− 25 %",
+            "− 125 %"
+          ],
+          "reponse": 0,
+          "explication": "1 ÷ 1,25 = 0,8 : − 20 %."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "corps-sante"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "seconde-prop-evo-reciproque-short",
+      "notionId": "information_chiffree_evolutions",
+      "microId": "info_evolution_reciproque",
+      "classe": "seconde",
+      "ceinture": "blanche",
+      "serie": "Maths 2de",
+      "type": "short",
+      "renvoie_vers": "seconde-prop-evo-reciproque",
+      "fichier": "seconde/maths/proportionnalite/05-evo-reciproque/eleveai-maths-seconde-prop-evo-reciproque-short.mp4",
+      "miniature": "seconde/maths/proportionnalite/05-evo-reciproque/eleveai-maths-seconde-prop-evo-reciproque-short.png",
+      "titre": "Ton score baisse de 20 % : + 20 % pour revenir ? 🔍 — 2de #Shorts",
+      "accroche": "Ton score baisse de 20 %. + 20 % pour revenir ? Non ! 100 − 20 % = 80, et 80 + 20 % = 96.\nIl faut + 25 % : 80 × 1,25 = 100.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : après moins 75 %, quelle hausse pour revenir ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_evolution_reciproque&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #2de #lycee",
+      "tags": [
+        "évolution réciproque",
+        "score",
+        "pourcentage",
+        "évolutions en pourcentage",
+        "maths",
+        "2de",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:22",
+          "question": "Après − 10 %, pour revenir, il faut environ :",
+          "choix": [
+            "+ 10 %",
+            "≈ + 11,1 %",
+            "+ 90 %"
+          ],
+          "reponse": 1,
+          "explication": "1 ÷ 0,9 ≈ 1,111, soit + 11,1 %."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "premiere-prop-evo-compensation",
+      "pas_avant": "2027-07-18",
+      "prioritaire": true,
+      "notionId": "auto_taux_evolution",
+      "microId": "auto_evo_piege_compensation",
+      "classe": "premiere",
+      "ceinture": "orange",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/proportionnalite/14-evo-compensation/eleveai-maths-premiere-prop-evo-compensation.mp4",
+      "miniature": "premiere/maths/proportionnalite/14-evo-compensation/eleveai-maths-premiere-prop-evo-compensation.png",
+      "titre": "+ 20 % puis − 20 % : retour au prix ? Le piège de la compensation — épisode 14 · Maths 1re",
+      "accroche": "Un jeu vidéo coûte 50 €. Le jour de sa sortie, son prix monte de 20 %. Un mois plus tard, il baisse de 20 %. Le joueur pense qu'il est revenu à 50 €. Le trader, l'agente immobilière, le gérant d'un magasin connaissent ce piège par cœur.\n\nDans cette vidéo :\n• on suit le prix : 50 × 1,2 = 60 €, puis 60 × 0,8 = 48 € ; il manque 2 €\n• pourquoi : la baisse porte sur 60 €, elle retire 12 €, la hausse n'avait ajouté que 10 €\n• avec les coefficients : 1,2 × 0,8 = 0,96, soit − 4 %\n• plus le taux est grand, plus le piège est grand : 1,5 × 0,5 = 0,75, on perd un quart\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : un prix augmente de 40 %, puis baisse de 40 % : quel taux au total ? et quelle baisse ramènerait exactement au départ ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-taux-evolution\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_piege_compensation&display=simple\n\nSource : Exemples de la vie courante (prix fictif d'un jeu vidéo, cours d'une action).\n\n📈 Épisode 14 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "+ 20 %, puis − 20 % sur un jeu vidéo"
+        ],
+        [
+          "00:34",
+          "On suit le prix"
+        ],
+        [
+          "00:48",
+          "Pourquoi il manque 2 €"
+        ],
+        [
+          "01:00",
+          "Avec les coefficients"
+        ],
+        [
+          "01:15",
+          "Question 1"
+        ],
+        [
+          "01:49",
+          "Plus le taux est grand…"
+        ],
+        [
+          "02:05",
+          "Question 2"
+        ],
+        [
+          "02:39",
+          "À toi de jouer"
+        ],
+        [
+          "02:58",
+          "Correction"
+        ],
+        [
+          "03:16",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-taux-evolution",
+      "tags": [
+        "compensation",
+        "hausse puis baisse",
+        "évolutions successives",
+        "jeu vidéo",
+        "bourse",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "1re",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:15",
+          "question": "Un prix : − 10 %, puis + 10 %. Au total :",
+          "choix": [
+            "il revient au départ",
+            "− 1 %",
+            "+ 1 %"
+          ],
+          "reponse": 1,
+          "explication": "0,9 × 1,1 = 0,99, soit − 1 %. Une baisse et une hausse de même taux ne se compensent pas."
+        },
+        {
+          "t": "02:05",
+          "question": "Une action : + 30 %, puis − 30 %. Au total :",
+          "choix": [
+            "0 %",
+            "− 30 %",
+            "− 9 %"
+          ],
+          "reponse": 2,
+          "explication": "1,3 × 0,7 = 0,91, soit − 9 %."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "premiere-prop-evo-compensation-short",
+      "pas_avant": "2027-07-18",
+      "prioritaire": true,
+      "notionId": "auto_taux_evolution",
+      "microId": "auto_evo_piege_compensation",
+      "classe": "premiere",
+      "ceinture": "blanche",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-prop-evo-compensation",
+      "fichier": "premiere/maths/proportionnalite/14-evo-compensation/eleveai-maths-premiere-prop-evo-compensation-short.mp4",
+      "miniature": "premiere/maths/proportionnalite/14-evo-compensation/eleveai-maths-premiere-prop-evo-compensation-short.png",
+      "titre": "+ 50 %, puis − 50 % : on revient au départ ? 🔍 — 1re #Shorts",
+      "accroche": "Plus 50 %, puis moins 50 %. On revient au départ ? Non ! 100 €, puis 150 €, puis 75 €.\n× 1,5, puis × 0,5 : au total, × 0,75.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : moins 20 %, puis plus 20 %, sur 50 €. Combien à la fin ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_piege_compensation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #1re #automatismes",
+      "tags": [
+        "compensation",
+        "hausse puis baisse",
+        "pourcentage",
+        "évolutions en pourcentage",
+        "maths",
+        "1re",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "+ 10 %, puis − 10 %, sur 200 € :",
+          "choix": [
+            "198 €",
+            "200 €",
+            "202 €"
+          ],
+          "reponse": 0,
+          "explication": "220 €, puis 220 − 22 = 198 €."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "stmg-prop-evo-compensation",
+      "notionId": "auto_evo_enchainees",
+      "microId": "auto_evo_piege_compensation",
+      "classe": "stmg",
+      "ceinture": "orange",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/proportionnalite/14-evo-compensation/eleveai-maths-stmg-prop-evo-compensation.mp4",
+      "miniature": "stmg/maths/proportionnalite/14-evo-compensation/eleveai-maths-stmg-prop-evo-compensation.png",
+      "titre": "+ 20 % puis − 20 % : retour au prix ? Le piège de la compensation — épisode 14 · Maths STMG",
+      "accroche": "Un jeu vidéo coûte 50 €. Le jour de sa sortie, son prix monte de 20 %. Un mois plus tard, il baisse de 20 %. Le joueur pense qu'il est revenu à 50 €. Le trader, l'agente immobilière, le gérant d'un magasin connaissent ce piège par cœur.\n\nDans cette vidéo :\n• on suit le prix : 50 × 1,2 = 60 €, puis 60 × 0,8 = 48 € ; il manque 2 €\n• pourquoi : la baisse porte sur 60 €, elle retire 12 €, la hausse n'avait ajouté que 10 €\n• avec les coefficients : 1,2 × 0,8 = 0,96, soit − 4 %\n• plus le taux est grand, plus le piège est grand : 1,5 × 0,5 = 0,75, on perd un quart\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : un prix augmente de 40 %, puis baisse de 40 % : quel taux au total ? et quelle baisse ramènerait exactement au départ ?\n\nPour s'entraîner :\n• les exercices corrigés (automatismes de 1re) : https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-evo-enchainees\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_piege_compensation&display=simple\n\nSource : Exemples de la vie courante (prix fictif d'un jeu vidéo, cours d'une action).\n\n📈 Épisode 14 : les évolutions en pourcentage, automatismes de l'épreuve anticipée de maths.\n⚖️ Cette vidéo fait partie de la série Proportionnalité d'EleveAI, du CM1 à la terminale.",
+      "chapitres": [
+        [
+          "00:00",
+          "+ 20 %, puis − 20 % sur un jeu vidéo"
+        ],
+        [
+          "00:34",
+          "On suit le prix"
+        ],
+        [
+          "00:48",
+          "Pourquoi il manque 2 €"
+        ],
+        [
+          "01:00",
+          "Avec les coefficients"
+        ],
+        [
+          "01:15",
+          "Question 1"
+        ],
+        [
+          "01:49",
+          "Plus le taux est grand…"
+        ],
+        [
+          "02:05",
+          "Question 2"
+        ],
+        [
+          "02:39",
+          "À toi de jouer"
+        ],
+        [
+          "02:58",
+          "Correction"
+        ],
+        [
+          "03:16",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-evo-enchainees",
+      "tags": [
+        "compensation",
+        "hausse puis baisse",
+        "évolutions successives",
+        "jeu vidéo",
+        "bourse",
+        "évolutions en pourcentage",
+        "pourcentages",
+        "proportionnalité",
+        "automatismes",
+        "STMG",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:15",
+          "question": "Un prix : − 10 %, puis + 10 %. Au total :",
+          "choix": [
+            "il revient au départ",
+            "− 1 %",
+            "+ 1 %"
+          ],
+          "reponse": 1,
+          "explication": "0,9 × 1,1 = 0,99, soit − 1 %. Une baisse et une hausse de même taux ne se compensent pas."
+        },
+        {
+          "t": "02:05",
+          "question": "Une action : + 30 %, puis − 30 %. Au total :",
+          "choix": [
+            "0 %",
+            "− 30 %",
+            "− 9 %"
+          ],
+          "reponse": 2,
+          "explication": "1,3 × 0,7 = 0,91, soit − 9 %."
+        }
+      ],
+      "centres": [
+        "jeux-video",
+        "argent-budget"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "stmg-prop-evo-compensation-short",
+      "notionId": "auto_evo_enchainees",
+      "microId": "auto_evo_piege_compensation",
+      "classe": "stmg",
+      "ceinture": "blanche",
+      "serie": "Maths STMG",
+      "type": "short",
+      "renvoie_vers": "stmg-prop-evo-compensation",
+      "fichier": "stmg/maths/proportionnalite/14-evo-compensation/eleveai-maths-stmg-prop-evo-compensation-short.mp4",
+      "miniature": "stmg/maths/proportionnalite/14-evo-compensation/eleveai-maths-stmg-prop-evo-compensation-short.png",
+      "titre": "+ 50 %, puis − 50 % : on revient au départ ? 🔍 — STMG #Shorts",
+      "accroche": "Plus 50 %, puis moins 50 %. On revient au départ ? Non ! 100 €, puis 150 €, puis 75 €.\n× 1,5, puis × 0,5 : au total, × 0,75.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : moins 20 %, puis plus 20 %, sur 50 €. Combien à la fin ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_piege_compensation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #pourcentages #stmg #lycee",
+      "tags": [
+        "compensation",
+        "hausse puis baisse",
+        "pourcentage",
+        "évolutions en pourcentage",
+        "maths",
+        "STMG",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:21",
+          "question": "+ 10 %, puis − 10 %, sur 200 € :",
+          "choix": [
+            "198 €",
+            "200 €",
+            "202 €"
+          ],
+          "reponse": 0,
+          "explication": "220 €, puis 220 − 22 = 198 €."
+        }
+      ],
+      "centres": [
+        "argent-budget"
+      ],
+      "plus_tard": true
     }
   ]
 }
