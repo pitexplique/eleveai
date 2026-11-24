@@ -6,7 +6,7 @@
 
 import { NextResponse } from "next/server";
 import { classeDuProf, profDuJeton, supabaseAdmin } from "@/lib/server/classesProf";
-import { LONGUEUR_MAX_MESSAGE, nettoyerMessage } from "@/lib/server/messagesClasse";
+import { LONGUEUR_MAX_MESSAGE, nettoyerMessage, purgerVieuxMessages } from "@/lib/server/messagesClasse";
 
 export const dynamic = "force-dynamic";
 
@@ -16,6 +16,7 @@ export async function GET(req: Request) {
   const admin = supabaseAdmin();
   const v = await profDuJeton(admin, req);
   if (!v.ok) return NextResponse.json({ ok: false, error: v.error }, { status: v.status });
+  await purgerVieuxMessages(admin);
 
   const [{ data: classes }, { data: messages, error }] = await Promise.all([
     admin
@@ -57,6 +58,7 @@ export async function POST(req: Request) {
   const admin = supabaseAdmin();
   const v = await profDuJeton(admin, req);
   if (!v.ok) return NextResponse.json({ ok: false, error: v.error }, { status: v.status });
+  await purgerVieuxMessages(admin);
 
   const body = await req.json().catch(() => ({}));
   const code = typeof body?.code === "string" ? body.code.trim() : "";

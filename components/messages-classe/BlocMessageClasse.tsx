@@ -13,6 +13,8 @@ type Classe = { code_etablissement: string; nom_classe: string; nb_eleves: numbe
 type Message = { id: string; created_at: string; code_etablissement: string; texte: string; lus: number };
 
 const MAX = 500;
+// Même durée que VISIBLE_ELEVE_MS (lib/server/messagesClasse.ts) : 7 jours.
+const SEPT_JOURS_MS = 7 * 24 * 3600 * 1000;
 
 const dateCourte = (iso: string) =>
   new Date(iso).toLocaleString("fr-FR", {
@@ -160,6 +162,9 @@ export default function BlocMessageClasse({ token }: { token: string | null }) {
                   <p className="text-xs font-bold text-slate-500">
                     {dateCourte(m.created_at)} · <span className="text-sky-700">{nomDe(m.code_etablissement)}</span> · lu par{" "}
                     {m.lus} élève{m.lus > 1 ? "s" : ""}
+                    {Date.now() - new Date(m.created_at).getTime() > SEPT_JOURS_MS && (
+                      <span className="text-amber-700"> · plus visible par les élèves</span>
+                    )}
                   </p>
                   <p className="mt-1 whitespace-pre-wrap break-words text-sm font-medium text-slate-800">{m.texte}</p>
                 </div>
@@ -175,6 +180,11 @@ export default function BlocMessageClasse({ token }: { token: string | null }) {
           </ul>
         </div>
       )}
+
+      {/* ⭐ 24/11/2026 — Frédéric : « 7 j, effacé à 30 j ». */}
+      <p className="mt-4 text-xs font-semibold text-slate-400">
+        Visible 7 jours par les élèves, effacé au bout de 30 jours.
+      </p>
     </section>
   );
 }

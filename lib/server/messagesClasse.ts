@@ -2,7 +2,32 @@
 // /api/prof/messages-classe et /api/eleve/messages-classe.
 // Voir supabase/messages_classe.sql pour le pourquoi (sens unique, RLS).
 
+import type { SupabaseClient } from "@supabase/supabase-js";
+
 export const LONGUEUR_MAX_MESSAGE = 500;
+
+// ⭐ 24/11/2026 — Frédéric : « 7 j, effacé à 30 j ».
+const JOUR_MS = 24 * 3600 * 1000;
+/** L'élève ne voit que les messages des 7 derniers jours. */
+export const VISIBLE_ELEVE_MS = 7 * JOUR_MS;
+/** Au-delà de 30 jours, le message est effacé (les « lu » suivent : cascade). */
+export const EFFACE_APRES_MS = 30 * JOUR_MS;
+
+/**
+ * Efface les messages de plus de 30 jours, toutes classes confondues. Sans
+ * pg_cron : appelé par les routes (prof GET/POST, élève GET). Une erreur ici
+ * ne bloque jamais la route.
+ */
+export async function purgerVieuxMessages(admin: SupabaseClient): Promise<void> {
+  try {
+    await admin
+      .from("messages_classe")
+      .delete()
+      .lt("created_at", new Date(Date.now() - EFFACE_APRES_MS).toISOString());
+  } catch {
+    /* rien : la purge se refera au prochain appel */
+  }
+}
 
 /**
  * Texte simple : on enlève les caractères de contrôle (sauf le retour à la
