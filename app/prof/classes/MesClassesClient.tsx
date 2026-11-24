@@ -9,6 +9,7 @@ import Link from "next/link";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
 import AvatarRond from "@/components/AvatarRond";
+import BlocMessageClasse from "@/components/messages-classe/BlocMessageClasse";
 import { FREE_CLASSES_PER_TEACHER } from "@/lib/tarifs";
 
 type EleveClasse = {
@@ -352,6 +353,13 @@ export default function MesClassesClient() {
             )}
           </div>
         </form>
+
+        {/* ✉️ Message à la classe (24/11/2026) ; key : se recharge après une création. */}
+        {!!classes?.length && (
+          <div className="mt-8">
+            <BlocMessageClasse key={classes.length} token={token} />
+          </div>
+        )}
 
         <section className="mt-8 space-y-4">
           {classes === null && <p className="text-slate-500">Chargement…</p>}
