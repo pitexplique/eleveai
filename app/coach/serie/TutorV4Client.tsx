@@ -2332,7 +2332,8 @@ function handleInputKeyDown(
                     MODE MISSION
                   </div>
                   <h1 className="text-xl font-black tracking-tight sm:text-2xl">
-                    Tutor {matiere === "francais" ? "Français" : "Maths"} V4
+                    {/* 24/11/2026 : plus « Tutor … V4 » (nom de version, vu par les élèves). */}
+                    Le Coach · {matiere === "francais" ? "Français" : "Maths"}
                   </h1>
                   <div className="hidden flex-wrap items-center gap-2 sm:flex">
                     <GamePill>

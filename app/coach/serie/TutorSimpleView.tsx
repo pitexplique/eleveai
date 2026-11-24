@@ -359,7 +359,8 @@ export default function TutorSimpleView({
             MODE MISSION
           </span>
           <span className="text-lg font-black tracking-tight">
-            Tutor {matiereLabel(matiere)} V4
+            {/* 24/11/2026 : « Tutor Maths V4 » était un nom de version, vu par les élèves. */}
+            Le Coach · {matiereLabel(matiere)}
           </span>
           <div className="hidden flex-wrap items-center gap-2 sm:flex">
             <SimplePill>
