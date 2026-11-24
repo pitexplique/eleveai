@@ -183,6 +183,29 @@ export default function EnDirectClient() {
           </p>
         </div>
 
+        {/* ⭐ 24/11 — personne n'a encore commencé : on dit au prof quoi
+            projeter, au lieu d'une grille de tuiles grises. */}
+        {tuiles.length > 0 && tuiles.every((t) => t.etat === "rien") && (
+          <section className="mt-6 rounded-2xl border-2 border-violet-200 bg-white p-5">
+            <p className="text-lg font-black">Personne n&apos;a encore commencé. Pour lancer la séance :</p>
+            <ol className="mt-2 space-y-1 font-semibold text-slate-700">
+              <li>
+                1. Les élèves vont sur <span className="font-mono font-bold">eleveai.fr</span> → Connexion → «
+                Connexion établissement », avec le code de la classe{" "}
+                <span className="rounded-lg bg-slate-900 px-2 py-0.5 font-mono text-xl font-black tracking-wider text-white">
+                  {donnees.classe.code_etablissement}
+                </span>{" "}
+                et leur carte.
+              </li>
+              <li>
+                2. Ils ouvrent le coach sur la notion du jour (dans le coach, tu peux cocher les séries puis copier
+                le « 🔗 Lien élèves »).
+              </li>
+              <li>3. Leurs tuiles passent au vert ici, toutes les 15 secondes.</li>
+            </ol>
+          </section>
+        )}
+
         <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {tuiles.map((t) => {
             const ouverte = ouvertes.has(t.code) && !!t.question;

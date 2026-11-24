@@ -104,7 +104,7 @@ export default function PodiumClient() {
   }));
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-indigo-950 to-slate-900 text-white">
+    <main id="podium-projete" className="relative min-h-screen overflow-hidden bg-gradient-to-b from-indigo-950 to-slate-900 text-white">
       <link rel="stylesheet" href="/ti-margo/animations/ti-margo-animations.css" />
       <style>{`
         @keyframes podium-confetti { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(110vh) rotate(540deg); opacity: 0.7; } }
@@ -112,6 +112,7 @@ export default function PodiumClient() {
         @keyframes podium-apparait { 0% { transform: translateY(30px) scale(0.6); opacity: 0; } 70% { transform: translateY(-6px) scale(1.08); opacity: 1; } 100% { transform: none; opacity: 1; } }
         @keyframes podium-balance { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
         @keyframes podium-brille { 0%, 100% { box-shadow: 0 0 0 rgba(252, 211, 77, 0); } 50% { box-shadow: 0 0 28px rgba(252, 211, 77, 0.45); } }
+        #podium-projete:fullscreen { overflow-y: auto; }
         .podium-confetti { position: absolute; top: 0; font-size: 1.6rem; opacity: 0; animation: podium-confetti linear infinite backwards; pointer-events: none; }
         .podium-marche { transform-origin: bottom; animation: podium-monte 0.9s cubic-bezier(.2,.9,.3,1.2) both; }
         .podium-apparait { animation: podium-apparait 0.8s ease-out both; }
@@ -138,6 +139,19 @@ export default function PodiumClient() {
             ← Bulletin de la classe
           </Link>
           <div className="flex gap-2">
+            {/* ⭐ 24/11 — projeté, l'en-tête du site mangeait le haut de l'écran :
+                le podium seul, en plein écran (Échap pour sortir). */}
+            <button
+              type="button"
+              onClick={() => {
+                const el = document.getElementById("podium-projete");
+                if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+                else el?.requestFullscreen?.().catch(() => {});
+              }}
+              className="rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-white hover:bg-white/20"
+            >
+              ⛶ Plein écran
+            </button>
             {(["semaine", "mois"] as const).map((v) => (
               <button
                 key={v}
