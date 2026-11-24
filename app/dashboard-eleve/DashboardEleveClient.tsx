@@ -18,6 +18,7 @@ import CarteCockpit from "./CarteCockpit";
 import CarteMonJardin from "./CarteMonJardin";
 import CarteSimulateurs from "./CarteSimulateurs";
 import CarteMesRecompenses from "./CarteMesRecompenses";
+import CarteMessageClasse from "@/components/messages-classe/CarteMessageClasse";
 import type { Bulletin } from "@/lib/bulletin/types";
 import { prenomFromNom } from "@/lib/prenom";
 import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
@@ -506,12 +507,14 @@ export default function DashboardEleveClient() {
 
         {vue === "jardin" ? (
           <>
+            <CarteMessageClasse variante="jardin" />
             <CarteMesRecompenses variante="jardin" />
             {compteGratuit ? null : <CarteMonJardin notions={mesNotions} />}
             <CarteSimulateurs variante="jardin" />
           </>
         ) : (
           <>
+            <CarteMessageClasse variante="cockpit" />
             <CarteMesRecompenses variante="cockpit" />
             <CarteCockpit
               seances={resultatsTutor}

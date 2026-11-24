@@ -7,6 +7,7 @@ import { useEleve } from "@/context/EleveContext";
 import { hrefFiche, titreFiche } from "@/lib/fiches/registre";
 import { prenomFromNom } from "@/lib/prenom";
 import ArticlesARelire from "./ArticlesARelire";
+import BlocMessageClasse from "@/components/messages-classe/BlocMessageClasse";
 import MenuDuJour from "@/components/seances/MenuDuJour";
 import { SEANCES } from "@/lib/seances/seances";
 
@@ -501,6 +502,9 @@ export default function DashboardProfClient() {
                 </Link>
               </div>
             </div>
+
+            {/* ✉️ Message à la classe (24/11/2026). */}
+            {user?.token && <BlocMessageClasse token={user.token} />}
 
             {/* LE MENU DU JOUR (séance restaurant, 6e longueurs), venu de l'accueil le 22/11. */}
             {MENU_RESTAURANT && (
