@@ -102,11 +102,16 @@ function appreciation(p: {
   const lbl = (m: string) => LABELS_MATIERE[m] ?? m;
 
   const phrases: string[] = [];
-  phrases.push(
-    `Beau travail en ${lbl(best.matiere)} (${(best.note ?? 0)
-      .toString()
-      .replace(".", ",")}/20) !`
-  );
+  // ⭐ 24/11/2026 — « Beau travail en maths (4,8/20) ! » : l'élève voit
+  // bien que ça ne colle pas. Le bravo seulement à partir de 12/20.
+  const noteBest = (best.note ?? 0).toString().replace(".", ",");
+  if ((best.note ?? 0) >= 12) {
+    phrases.push(`Beau travail en ${lbl(best.matiere)} (${noteBest}/20) !`);
+  } else if ((best.note ?? 0) >= 8) {
+    phrases.push(`En ${lbl(best.matiere)} (${noteBest}/20), tu es sur la bonne voie.`);
+  } else {
+    phrases.push(`En ${lbl(best.matiere)} (${noteBest}/20), on s'accroche : chaque exercice compte.`);
+  }
   if (p.progression !== null && p.progression >= 0.5) {
     phrases.push(
       `Belle progression d'ensemble (+${p.progression
