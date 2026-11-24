@@ -22,7 +22,8 @@ function Apercu({ saisie }: { saisie: string }) {
     // 24/11/2026 — un nombre ou des mots tapés tels quels (« 3608 », « mille »)
     // se répétaient à l'identique sous la case : l'aperçu ne sert qu'aux
     // écritures mathématiques (fraction, puissance, ×, ÷, π…).
-    if (/^[\p{L}\d\s.,'’-]*$/u.test(saisie)) return null;
+    // Aussi une liste séparée par des points-virgules (« 121 ; 0,36 ; 1,44 »).
+    if (/^[\p{L}\d\s.,;'’-]*$/u.test(saisie)) return null;
     const ligne = saisieEnLatex(saisie)[0];
     if (!ligne) return null;
     try {
