@@ -5,9 +5,9 @@
 // aller voir (trois erreurs de suite sur le même micro).
 // Les gestes viennent de /api/activite (supabase/activite_eleve.sql).
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
+import { OngletsClasse, ChoisirUneClasse, ConnecteToiProf, ErreurProf, useCodeClasse } from "@/components/prof/OutilsClasse";
 import { MarkdownMath } from "@/components/MarkdownMath";
 
 type Geste = {
@@ -112,6 +112,7 @@ const COULEURS = {
 
 export default function EnDirectClient() {
   const { eleve: user, pret } = useEleve();
+  const codeUrl = useCodeClasse();
   const token = user?.token ?? null;
   const [donnees, setDonnees] = useState<Donnees | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
@@ -154,8 +155,9 @@ export default function EnDirectClient() {
 
   if (!pret) return <p className="p-8 text-slate-500">Chargement…</p>;
 
-  if (!user) return <p className="p-8">Connecte-toi pour suivre ta classe.</p>;
-  if (erreur) return <p className="p-8 text-red-700">{erreur}</p>;
+  if (!user) return <ConnecteToiProf texte="Connecte-toi pour suivre ta classe." />;
+  if (codeUrl === "") return <ChoisirUneClasse page="direct" token={token} />;
+  if (erreur) return <ErreurProf message={erreur} />;
   if (!donnees) return <p className="p-8 text-slate-500">Chargement…</p>;
 
   const maintenant = new Date(donnees.maintenant).getTime();
@@ -170,12 +172,7 @@ export default function EnDirectClient() {
       <div className="mx-auto max-w-6xl px-4 py-8">
         <div className="flex flex-wrap items-end gap-3">
           <div className="flex-1">
-            <Link
-              href="/prof/classes"
-              className="text-sm font-semibold text-slate-600 hover:underline"
-            >
-              ← Mes classes
-            </Link>
+            <OngletsClasse code={codeUrl ?? ""} actif="direct" />
             <h1 className="text-3xl font-black text-slate-900">
               {donnees.classe.nom_classe} — en direct
             </h1>

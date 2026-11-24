@@ -55,6 +55,20 @@ export default function MesClassesClient() {
   const [erreur, setErreur] = useState<string | null>(null);
   const [ouverte, setOuverte] = useState<string | null>(null);
   const [envoi, setEnvoi] = useState(false);
+  // ⭐ 24/11 — compte e-mail qui n'est pas (encore) un compte prof : on le dit
+  // tout de suite, au lieu de laisser remplir le formulaire pour un refus.
+  const [refusProf, setRefusProf] = useState(false);
+  // ⭐ 24/11 — le prof de chaque semaine vient pour SES classes : le
+  // formulaire « Nouvelle classe » se replie dès qu'il en a une.
+  const [formOuvert, setFormOuvert] = useState(false);
+  useEffect(() => {
+    const lire = () => {
+      if (window.location.hash === "#nouvelle-classe") setFormOuvert(true);
+    };
+    lire();
+    window.addEventListener("hashchange", lire);
+    return () => window.removeEventListener("hashchange", lire);
+  }, []);
 
   const [etablissement, setEtablissement] = useState("");
   // ⭐ 27/10/2026 — Frédéric : « l'élève devrait taper 3 lettres max », « on peut
@@ -89,10 +103,12 @@ export default function MesClassesClient() {
     });
     const d = await res.json().catch(() => ({}));
     if (!res.ok || !d?.ok) {
+      setRefusProf(res.status === 403);
       setErreur(d?.error ?? "Impossible de charger tes classes.");
       setClasses([]);
       return;
     }
+    setRefusProf(false);
     setErreur(null);
     setClasses(d.classes ?? []);
     if (d.classes?.[0] && !etablissement)
@@ -134,6 +150,7 @@ export default function MesClassesClient() {
         return;
       }
       setNomClasse("");
+      setFormOuvert(false);
       setOuverte(d.code_etablissement);
       await charger();
     } catch {
@@ -216,156 +233,37 @@ export default function MesClassesClient() {
           </p>
         )}
 
-        {/* ⭐ 19/11/2026 — « ET MAINTENANT ? » Une fois la classe créée, le prof
-            ne savait pas quoi faire. Trois étapes, vers les outils qui existent. */}
-        {classes && classes.length > 0 && (
-          <section className="mt-6 rounded-2xl border border-violet-200 bg-violet-50/60 p-5">
-            <h2 className="text-lg font-black text-slate-900">Et maintenant ?</h2>
-            <ol className="mt-3 grid gap-3 sm:grid-cols-3">
-              <li className="rounded-xl bg-white p-4 ring-1 ring-violet-100">
-                <p className="font-black text-violet-800">1. Imprimer les cartes</p>
-                <p className="mt-1 text-sm text-slate-600">Un code et un mot de passe par élève, à distribuer.</p>
-                <Link href={`/prof/cartes?code=${encodeURIComponent(classes[0].code_etablissement)}`} className="mt-2 inline-block text-sm font-bold text-violet-800 underline">
-                  Les cartes de {classes[0].nom_classe}
-                </Link>
-              </li>
-              <li className="rounded-xl bg-white p-4 ring-1 ring-violet-100">
-                <p className="font-black text-violet-800">2. Projeter, puis entraîner</p>
-                <p className="mt-1 text-sm text-slate-600">20 min de cours, 25 min de coach et vidéos, 10 min de synthèse.</p>
-                <span className="mt-2 flex flex-wrap gap-x-3 text-sm font-bold">
-                  <Link href="/seances" className="text-violet-800 underline">Exemples de séances</Link>
-                  <Link href="/enigmes-maths" className="text-violet-800 underline">Énigmes à projeter</Link>
-                </span>
-              </li>
-              <li className="rounded-xl bg-white p-4 ring-1 ring-violet-100">
-                <p className="font-black text-violet-800">3. Suivre, en classe et le soir</p>
-                <p className="mt-1 text-sm text-slate-600">En direct pendant la séance, puis le bulletin : les notes à copier dans Pronote.</p>
-                <span className="mt-2 flex flex-wrap gap-x-3 text-sm font-bold">
-                  <Link href={`/prof/classes/direct?code=${encodeURIComponent(classes[0].code_etablissement)}`} className="text-violet-800 underline">En direct</Link>
-                  <Link href={`/prof/classes/bulletin?code=${encodeURIComponent(classes[0].code_etablissement)}`} className="text-violet-800 underline">Bulletin</Link>
-                </span>
-              </li>
-            </ol>
-          </section>
-        )}
 
-        {erreur && (
+        {erreur && !refusProf && (
           <p className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
             {erreur}
           </p>
         )}
 
-        <form
-          id="nouvelle-classe"
-          onSubmit={creer}
-          className="mt-6 scroll-mt-24 grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:grid-cols-2"
-        >
-          <h2 className="text-lg font-black text-slate-900 sm:col-span-2">
-            Nouvelle classe
-          </h2>
-          <label className="space-y-1 text-sm font-semibold text-slate-800">
-            Établissement
-            <input
-              required
-              value={etablissement}
-              onChange={(e) => setEtablissement(e.target.value)}
-              placeholder="Collège Saint-Joseph"
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 font-normal"
-            />
-          </label>
-          <label className="space-y-1 text-sm font-semibold text-slate-800">
-            Sigle (5 lettres au plus)
-            <input
-              value={sigle}
-              onChange={(e) => setSigle(e.target.value.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 5))}
-              placeholder="CSJ"
-              maxLength={5}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 font-mono font-normal uppercase"
-            />
-            <span className="block text-xs font-normal text-slate-500">
-              Le code que tapent les élèves commence par lui : {(sigle || "CSJ") + "6A"}. Vide : les initiales de
-              l&apos;établissement.
-            </span>
-          </label>
-          <label className="space-y-1 text-sm font-semibold text-slate-800">
-            Nom de la classe
-            <input
-              required
-              value={nomClasse}
-              onChange={(e) => setNomClasse(e.target.value)}
-              placeholder="6e A"
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 font-normal"
-            />
-          </label>
-          <label className="space-y-1 text-sm font-semibold text-slate-800">
-            Niveau
-            <select
-              value={niveau}
-              onChange={(e) => setNiveau(e.target.value)}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 font-normal"
-            >
-              {NIVEAUX.map((n) => (
-                <option key={n.v} value={n.v}>
-                  {n.l}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="space-y-1 text-sm font-semibold text-slate-800">
-            Nombre d&apos;élèves
-            <input
-              type="number"
-              min={1}
-              max={40}
-              required
-              value={nbEleves}
-              onChange={(e) => setNbEleves(Number(e.target.value))}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 font-normal"
-            />
-          </label>
-          <div className="flex flex-col justify-end gap-1.5">
-            {/* 28/10 (Frédéric) : gris tant qu'il manque un champ, en
-                surbrillance quand tout est rempli, roue pendant la création. */}
-            <button
-              type="submit"
-              disabled={!complet || envoi}
-              aria-busy={envoi}
-              className={`flex w-full items-center justify-center gap-2 rounded-xl px-5 py-2.5 font-bold transition ${
-                envoi
-                  ? "cursor-wait bg-emerald-600 text-white"
-                  : complet
-                    ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/30 ring-4 ring-emerald-200 hover:bg-emerald-500"
-                    : "cursor-not-allowed bg-slate-200 text-slate-500"
-              }`}
-            >
-              {envoi && (
-                <svg className="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.3" strokeWidth="4" />
-                  <path d="M22 12a10 10 0 0 0-10-10" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
-                </svg>
-              )}
-              {envoi ? "Création de la classe…" : "Créer la classe"}
-            </button>
-            {!complet && !envoi && (
-              <span className="text-center text-xs text-slate-500">
-                Remplis l&apos;établissement, le nom de la classe et le nombre d&apos;élèves (1 à 40).
-              </span>
-            )}
-          </div>
-        </form>
-
-        {/* ✉️ Message à la classe (24/11/2026) ; key : se recharge après une création. */}
-        {!!classes?.length && (
-          <div className="mt-8">
-            <BlocMessageClasse key={classes.length} token={token} />
-          </div>
+        {refusProf && (
+          <section className="mt-6 rounded-2xl border border-amber-300 bg-amber-50 p-5 text-amber-950">
+            <h2 className="text-lg font-black">Ton compte n&apos;est pas encore un compte prof</h2>
+            <p className="mt-2 text-sm">{erreur}</p>
+            <div className="mt-4 flex flex-wrap gap-3 text-sm font-bold">
+              <Link href="/contact" className="rounded-xl bg-amber-600 px-4 py-2 text-white hover:bg-amber-500">
+                Faire valider mon compte prof
+              </Link>
+              <Link
+                href="/auth/signin?type=prof&inscription=1&next=/prof/classes"
+                className="rounded-xl border border-amber-400 bg-white px-4 py-2 text-amber-900 hover:bg-amber-100"
+              >
+                Utiliser mon adresse académique
+              </Link>
+            </div>
+          </section>
         )}
+
 
         <section className="mt-8 space-y-4">
           {classes === null && <p className="text-slate-500">Chargement…</p>}
           {classes?.length === 0 && !erreur && (
             <p className="text-slate-500">
-              Pas encore de classe. Crée la première ci-dessus.
+              Pas encore de classe. Crée la première ci-dessous.
             </p>
           )}
           {classes?.map((c) => (
@@ -391,6 +289,14 @@ export default function MesClassesClient() {
                   className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-500"
                 >
                   🟢 En direct
+                </Link>
+                {/* ⭐ 24/11 — choisir (cocher) les exercices du coach pour CE niveau. */}
+                <Link
+                  href={`/coach-ia/maths?classe=${encodeURIComponent(c.niveau)}`}
+                  className="rounded-xl border border-violet-300 bg-violet-50 px-4 py-2 text-sm font-bold text-violet-900 hover:bg-violet-100"
+                  title="Dans le coach, déplie une notion et coche les séries de la séance, puis « Lien élèves »"
+                >
+                  🎯 Exercices du coach
                 </Link>
                 <Link
                   href={`/prof/classes/bilan?code=${encodeURIComponent(c.code_etablissement)}`}
@@ -507,6 +413,160 @@ export default function MesClassesClient() {
             </article>
           ))}
         </section>
+
+        {/* ⭐ 19/11/2026 — « ET MAINTENANT ? » Une fois la classe créée, le prof
+            ne savait pas quoi faire. Trois étapes, vers les outils qui existent. */}
+        {classes && classes.length > 0 && (
+          <section className="mt-6 rounded-2xl border border-violet-200 bg-violet-50/60 p-5">
+            <h2 className="text-lg font-black text-slate-900">Et maintenant ?</h2>
+            <ol className="mt-3 grid gap-3 sm:grid-cols-3">
+              <li className="rounded-xl bg-white p-4 ring-1 ring-violet-100">
+                <p className="font-black text-violet-800">1. Imprimer les cartes</p>
+                <p className="mt-1 text-sm text-slate-600">Un code et un mot de passe par élève, à distribuer.</p>
+                <Link href={`/prof/cartes?code=${encodeURIComponent(classes[0].code_etablissement)}`} className="mt-2 inline-block text-sm font-bold text-violet-800 underline">
+                  Les cartes de {classes[0].nom_classe}
+                </Link>
+              </li>
+              <li className="rounded-xl bg-white p-4 ring-1 ring-violet-100">
+                <p className="font-black text-violet-800">2. Projeter, puis entraîner</p>
+                <p className="mt-1 text-sm text-slate-600">20 min de cours, 25 min de coach et vidéos, 10 min de synthèse.</p>
+                <span className="mt-2 flex flex-wrap gap-x-3 text-sm font-bold">
+                  <Link href="/seances" className="text-violet-800 underline">Exemples de séances</Link>
+                  <Link href="/enigmes-maths" className="text-violet-800 underline">Énigmes à projeter</Link>
+                </span>
+              </li>
+              <li className="rounded-xl bg-white p-4 ring-1 ring-violet-100">
+                <p className="font-black text-violet-800">3. Suivre, en classe et le soir</p>
+                <p className="mt-1 text-sm text-slate-600">En direct pendant la séance, puis le bulletin : les notes à copier dans Pronote.</p>
+                <span className="mt-2 flex flex-wrap gap-x-3 text-sm font-bold">
+                  <Link href={`/prof/classes/direct?code=${encodeURIComponent(classes[0].code_etablissement)}`} className="text-violet-800 underline">En direct</Link>
+                  <Link href={`/prof/classes/bulletin?code=${encodeURIComponent(classes[0].code_etablissement)}`} className="text-violet-800 underline">Bulletin</Link>
+                </span>
+              </li>
+            </ol>
+          </section>
+        )}
+
+        {/* ✉️ Message à la classe (24/11/2026) ; key : se recharge après une création. */}
+        {!!classes?.length && (
+          <div className="mt-8">
+            <BlocMessageClasse key={classes.length} token={token} />
+          </div>
+        )}
+
+
+        {/* Nouvelle classe : ouvert d'office tant qu'il n'y a pas de classe. */}
+        {!refusProf && classes !== null && (
+          <div id="nouvelle-classe" className="mt-6 scroll-mt-24">
+            {classes && classes.length > 0 && !formOuvert ? (
+              <button
+                type="button"
+                onClick={() => setFormOuvert(true)}
+                className="rounded-xl border-2 border-dashed border-violet-300 bg-white px-5 py-3 font-bold text-violet-800 hover:bg-violet-50"
+              >
+                + Créer une autre classe
+              </button>
+            ) : (
+            <form
+              onSubmit={creer}
+              className="grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:grid-cols-2"
+            >
+              <h2 className="text-lg font-black text-slate-900 sm:col-span-2">
+                Nouvelle classe
+              </h2>
+              <label className="space-y-1 text-sm font-semibold text-slate-800">
+                Établissement
+                <input
+                  required
+                  value={etablissement}
+                  onChange={(e) => setEtablissement(e.target.value)}
+                  placeholder="Collège Saint-Joseph"
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 font-normal"
+                />
+              </label>
+              <label className="space-y-1 text-sm font-semibold text-slate-800">
+                Sigle (5 lettres au plus)
+                <input
+                  value={sigle}
+                  onChange={(e) => setSigle(e.target.value.toUpperCase().replace(/[^A-Z]/g, "").slice(0, 5))}
+                  placeholder="CSJ"
+                  maxLength={5}
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 font-mono font-normal uppercase"
+                />
+                <span className="block text-xs font-normal text-slate-500">
+                  Le code que tapent les élèves commence par lui : {(sigle || "CSJ") + "6A"}. Vide : les initiales de
+                  l&apos;établissement.
+                </span>
+              </label>
+              <label className="space-y-1 text-sm font-semibold text-slate-800">
+                Nom de la classe
+                <input
+                  required
+                  value={nomClasse}
+                  onChange={(e) => setNomClasse(e.target.value)}
+                  placeholder="6e A"
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 font-normal"
+                />
+              </label>
+              <label className="space-y-1 text-sm font-semibold text-slate-800">
+                Niveau
+                <select
+                  value={niveau}
+                  onChange={(e) => setNiveau(e.target.value)}
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 font-normal"
+                >
+                  {NIVEAUX.map((n) => (
+                    <option key={n.v} value={n.v}>
+                      {n.l}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="space-y-1 text-sm font-semibold text-slate-800">
+                Nombre d&apos;élèves
+                <input
+                  type="number"
+                  min={1}
+                  max={40}
+                  required
+                  value={nbEleves}
+                  onChange={(e) => setNbEleves(Number(e.target.value))}
+                  className="w-full rounded-lg border border-slate-300 px-3 py-2 font-normal"
+                />
+              </label>
+              <div className="flex flex-col justify-end gap-1.5">
+                {/* 28/10 (Frédéric) : gris tant qu'il manque un champ, en
+                    surbrillance quand tout est rempli, roue pendant la création. */}
+                <button
+                  type="submit"
+                  disabled={!complet || envoi}
+                  aria-busy={envoi}
+                  className={`flex w-full items-center justify-center gap-2 rounded-xl px-5 py-2.5 font-bold transition ${
+                    envoi
+                      ? "cursor-wait bg-emerald-600 text-white"
+                      : complet
+                        ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/30 ring-4 ring-emerald-200 hover:bg-emerald-500"
+                        : "cursor-not-allowed bg-slate-200 text-slate-500"
+                  }`}
+                >
+                  {envoi && (
+                    <svg className="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.3" strokeWidth="4" />
+                      <path d="M22 12a10 10 0 0 0-10-10" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+                    </svg>
+                  )}
+                  {envoi ? "Création de la classe…" : "Créer la classe"}
+                </button>
+                {!complet && !envoi && (
+                  <span className="text-center text-xs text-slate-500">
+                    Remplis l&apos;établissement, le nom de la classe et le nombre d&apos;élèves (1 à 40).
+                  </span>
+                )}
+              </div>
+            </form>
+            )}
+          </div>
+        )}
       </div>
     </main>
   );

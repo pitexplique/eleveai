@@ -9,6 +9,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
+import { ChoisirUneClasse, ConnecteToiProf, ErreurProf, useCodeClasse } from "@/components/prof/OutilsClasse";
 
 type Place = { code_utilisateur: string; nom: string; raisons: string[] };
 type Medaille = { id: string; emoji: string; titre: string; code_utilisateur: string; nom: string; texte: string };
@@ -43,6 +44,7 @@ const court = (nom: string) => nom.trim().split(/\s+/).slice(0, 2).join(" ");
 
 export default function PodiumClient() {
   const { eleve: user, pret } = useEleve();
+  const codeUrl = useCodeClasse();
   const token = user?.token ?? null;
   const [donnees, setDonnees] = useState<Donnees | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
@@ -87,8 +89,9 @@ export default function PodiumClient() {
 
   if (!pret) return <p className="p-8 text-slate-500">Chargement…</p>;
 
-  if (!user) return <p className="p-8">Connecte-toi pour afficher le podium de ta classe.</p>;
-  if (erreur) return <p className="p-8 text-red-700">{erreur}</p>;
+  if (!user) return <ConnecteToiProf texte="Connecte-toi pour afficher le podium de ta classe." />;
+  if (codeUrl === "") return <ChoisirUneClasse page="podium" token={token} />;
+  if (erreur) return <ErreurProf message={erreur} />;
   if (!donnees) return <p className="p-8 text-slate-500">Chargement…</p>;
 
   const c = donnees[vue];

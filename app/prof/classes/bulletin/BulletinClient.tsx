@@ -10,6 +10,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
+import { OngletsClasse, ChoisirUneClasse, ConnecteToiProf, ErreurProf, useCodeClasse } from "@/components/prof/OutilsClasse";
 
 type Creneaux = { matin: number; apresMidi: number; soir: number; weekend: number };
 type Ligne = {
@@ -59,6 +60,7 @@ async function copier(texte: string) {
 
 export default function BulletinClient() {
   const { eleve: user, pret } = useEleve();
+  const codeUrl = useCodeClasse();
   const token = user?.token ?? null;
   const [periode, setPeriode] = useState("trim");
   const [donnees, setDonnees] = useState<Donnees | null>(null);
@@ -89,8 +91,9 @@ export default function BulletinClient() {
 
   if (!pret) return <p className="p-8 text-slate-500">Chargement…</p>;
 
-  if (!user) return <p className="p-8">Connecte-toi pour voir le bulletin de ta classe.</p>;
-  if (erreur) return <p className="p-8 text-red-700">{erreur}</p>;
+  if (!user) return <ConnecteToiProf texte="Connecte-toi pour voir le bulletin de ta classe." />;
+  if (codeUrl === "") return <ChoisirUneClasse page="bulletin" token={token} />;
+  if (erreur) return <ErreurProf message={erreur} />;
 
   const nomDe = (e: Ligne) => e.nom || e.pseudo || e.code_utilisateur;
   const eleves = donnees?.eleves ?? [];
@@ -124,9 +127,7 @@ export default function BulletinClient() {
     <main className="min-h-screen bg-slate-50 text-slate-900 print:bg-white">
       <style>{`@media print { @page { size: A4 landscape; margin: 10mm; } header, footer, nav { display: none !important; } }`}</style>
       <div className="mx-auto max-w-7xl px-4 py-8 print:max-w-none print:p-0">
-        <Link href="/prof/classes" className="text-sm font-semibold text-slate-600 hover:underline print:hidden">
-          ← Mes classes
-        </Link>
+        <OngletsClasse code={codeUrl ?? ""} actif="bulletin" />
         <h1 className="text-3xl font-black print:text-xl">
           {donnees ? `${donnees.classe.nom_classe} — bulletin de la classe` : "Bulletin de la classe"}
         </h1>
