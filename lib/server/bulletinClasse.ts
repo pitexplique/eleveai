@@ -112,7 +112,7 @@ type Stat = {
 const MEDAILLES: { id: string; emoji: string; titre: string; valeur: (s: Stat) => number; texte: (s: Stat) => string; mini?: (s: Stat) => boolean }[] = [
   { id: "regularite", emoji: "📅", titre: "Régularité", valeur: (s) => s.jours, texte: (s) => `${s.jours} jour${s.jours > 1 ? "s" : ""} de travail` },
   { id: "perseverance", emoji: "💪", titre: "Persévérance", valeur: (s) => s.questions, texte: (s) => `${s.questions} questions` },
-  { id: "precision", emoji: "🎯", titre: "Précision", valeur: (s) => s.taux, texte: (s) => `${Math.round(s.taux * 100)} % de justes`, mini: (s) => s.questions >= 20 },
+  { id: "precision", emoji: "🎯", titre: "Précision", valeur: (s) => s.taux, texte: (s) => `${Math.round(s.taux * 100)} % de justes`, mini: (s) => s.questions >= 20 && s.taux >= 0.5 /* 24/11 : plus de médaille à 24 % */ },
   { id: "progression", emoji: "📈", titre: "Progression", valeur: (s) => s.progression, texte: (s) => `+${virgule(s.progression)} points`, mini: (s) => s.progression >= 1 },
   { id: "micros", emoji: "🧩", titre: "Compétences acquises", valeur: (s) => s.acquises, texte: (s) => `${s.acquises} micro${s.acquises > 1 ? "s" : ""} acquise${s.acquises > 1 ? "s" : ""}`, mini: (s) => s.acquises >= 1 },
   { id: "maison", emoji: "🏠", titre: "Travail à la maison", valeur: (s) => s.maison, texte: (s) => `${s.maison} exercices le soir ou le week-end`, mini: (s) => s.maison >= 5 },
@@ -134,7 +134,11 @@ function classement(
     );
     if (g.length < 10 && s.length < 2) continue;
     const jours = new Set([...s, ...g].map((x) => creneau(x.created_at).jour)).size;
-    const maison = [...s, ...g].filter((x) => {
+    // ⭐ 24/11/2026 — On comptait les séances ET les questions ensemble
+    // (« 24 exercices » pour 21 questions + 3 séances) : les questions
+    // seulement, ou les séances quand il n'y a pas de questions.
+    const sourceMaison: { created_at: string }[] = g.length ? g : s;
+    const maison = sourceMaison.filter((x) => {
       const c = creneau(x.created_at).cle;
       return c === "soir" || c === "weekend";
     }).length;
