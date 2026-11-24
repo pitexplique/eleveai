@@ -11,9 +11,13 @@ export default function SignUpRedirect() {
   const router = useRouter();
 
   useEffect(() => {
-    const qs =
-      typeof window !== "undefined" ? window.location.search : "";
-    router.replace(`/auth/signin${qs}`);
+    // « signup » = une inscription : on garde ?type= et on ajoute
+    // inscription=1 (email seul, pas de bloc établissement).
+    const params = new URLSearchParams(
+      typeof window !== "undefined" ? window.location.search : ""
+    );
+    if (!params.has("inscription")) params.set("inscription", "1");
+    router.replace(`/auth/signin?${params.toString()}`);
   }, [router]);
 
   return (

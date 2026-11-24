@@ -2,9 +2,9 @@
 "use client";
 
 import ClavierCode, { PointsCode } from "./ClavierCode";
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useEleve } from "@/context/EleveContext";
@@ -199,6 +199,8 @@ export default function SignInPage() {
     const codeU = params.get("code");
     if (etab) setCodeEtablissement(normalizeCode(etab));
     if (codeU) setCodeUtilisateur(normalizeCode(codeU));
+    // Le QR des cartes = une CONNEXION : le bloc établissement doit se voir.
+    if (etab || codeU) setModeInscription(false);
     if (etab && codeU) {
       setTimeout(() => {
         document.getElementById("connexion-etablissement")?.scrollIntoView({ block: "center" });
@@ -834,9 +836,38 @@ export default function SignInPage() {
                 est le même : un email, un code. Mais quelqu'un qui a cliqué
                 « Inscription » et qui lit « Connexion » en arrivant croit
                 s'être trompé de porte. On lui renvoie son mot. */}
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1 text-[11px] font-medium text-emerald-800">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              {modeInscription ? "Inscription" : "Connexion"}
+            {/* 24/11, Frédéric : « quand on s'inscrit, on ne voit […] que
+                l'email. Les codes établissement que lors du mode connexion. »
+                Deux onglets : Inscription (email seul) / Connexion (email +
+                bloc établissement). */}
+            <Suspense fallback={null}>
+              <SuivreModeDansLUrl onChange={setModeInscription} />
+            </Suspense>
+            <div
+              role="tablist"
+              aria-label="Inscription ou connexion"
+              className="mb-4 inline-flex self-start rounded-full bg-slate-100 p-1 text-sm font-semibold"
+            >
+              {([
+                [true, "Inscription"],
+                [false, "Connexion"],
+              ] as const).map(([inscr, libelle]) => (
+                <button
+                  key={libelle}
+                  type="button"
+                  role="tab"
+                  aria-selected={modeInscription === inscr}
+                  onClick={() => setModeInscription(inscr)}
+                  className={
+                    "rounded-full px-4 py-1.5 transition " +
+                    (modeInscription === inscr
+                      ? "bg-emerald-600 text-white shadow"
+                      : "text-slate-600 hover:text-slate-900")
+                  }
+                >
+                  {libelle}
+                </button>
+              ))}
             </div>
 
             <div className="rounded-2xl bg-white p-6 shadow-lg shadow-slate-200/80 border border-slate-200">
@@ -856,18 +887,32 @@ export default function SignInPage() {
 
               {/* ✅ Flux unifié : inscription ET connexion par le même email */}
               <div className="mb-5 rounded-xl border-2 border-emerald-200 bg-emerald-50 p-4">
-                <p className="text-sm font-bold text-slate-900">
-                  Inscription et connexion, au même endroit 👇
-                </p>
-                <p className="mt-0.5 text-xs text-slate-600">
-                  Déjà un compte : votre email, puis votre code à 6 chiffres.
-                  Première fois : vous choisissez votre code à 6 chiffres, sans
-                  attendre de mail.
-                </p>
+                {modeInscription ? (
+                  <>
+                    <p className="text-sm font-bold text-slate-900">
+                      Pour vous inscrire, votre email suffit 👇
+                    </p>
+                    <p className="mt-0.5 text-xs text-slate-600">
+                      Puis vous choisissez votre code à 6 chiffres, sans
+                      attendre de mail.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-sm font-bold text-slate-900">
+                      Inscription et connexion, au même endroit 👇
+                    </p>
+                    <p className="mt-0.5 text-xs text-slate-600">
+                      Déjà un compte : votre email, puis votre code à 6 chiffres.
+                      Première fois : vous choisissez votre code à 6 chiffres, sans
+                      attendre de mail.
+                    </p>
+                  </>
+                )}
               </div>
 
               <h1 id="connexion-existante" className="text-lg font-semibold text-slate-900">
-                Accéder à mon espace
+                {modeInscription ? "Créer mon compte" : "Accéder à mon espace"}
               </h1>
 
               <p className="mt-1 text-sm text-slate-600">
@@ -1267,7 +1312,21 @@ export default function SignInPage() {
                 </form>
               )}
 
-              {/* ✅ AJOUT : CONNEXION ÉTABLISSEMENT (sous la partie email) */}
+              {/* ✅ CONNEXION ÉTABLISSEMENT (sous la partie email) — en mode
+                  CONNEXION seulement ; à l'inscription, un simple renvoi. */}
+              {modeInscription ? (
+                <p className="mt-5 border-t border-slate-200 pt-4 text-xs text-slate-600">
+                  Élève d’un établissement, avec des codes donnés par votre
+                  professeur ?{" "}
+                  <button
+                    type="button"
+                    onClick={() => setModeInscription(false)}
+                    className="font-semibold text-emerald-700 underline"
+                  >
+                    Connexion établissement
+                  </button>
+                </p>
+              ) : (
               <div id="connexion-etablissement" className="mt-5 border-t border-slate-200 pt-5">
                 <h2 className="text-sm font-semibold text-slate-900">
                   Connexion établissement
@@ -1347,6 +1406,7 @@ export default function SignInPage() {
                   {feedbackEtab && <p className="text-xs text-emerald-600">{feedbackEtab}</p>}
                 </form>
               </div>
+              )}
 
               {/* TESTER SANS COMPTE */}
               <div className="mt-4">
@@ -1532,4 +1592,20 @@ export default function SignInPage() {
       </div>
     </main>
   );
+}
+
+/**
+ * Les boutons « Inscription » / « Connexion » du header changent l'URL SANS
+ * recharger la page (?inscription=1 ou non) : on suit l'URL pour que l'onglet
+ * suive. Le QR des cartes (?etab=…&code=…) est toujours une connexion.
+ * Dans un <Suspense> : useSearchParams sans lui casse le build Vercel.
+ */
+function SuivreModeDansLUrl({ onChange }: { onChange: (v: boolean) => void }) {
+  const params = useSearchParams();
+  const inscription =
+    params.get("inscription") === "1" && !params.get("etab") && !params.get("code");
+  useEffect(() => {
+    onChange(inscription);
+  }, [inscription, onChange]);
+  return null;
 }
