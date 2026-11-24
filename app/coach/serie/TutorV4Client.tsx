@@ -134,7 +134,7 @@ import AQuoiCaSert from "./AQuoiCaSert";
 import Image from "next/image";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import EtatEnregistrementSeance, { ChoixSeance, type EtatAuto } from "./EtatEnregistrementSeance";
+import EtatEnregistrementSeance, { ChoixSeance, REPONSES_AVANT_INVITATION, type EtatAuto } from "./EtatEnregistrementSeance";
 
 type StartResponse = StartTutorV4Response;
 type AnswerResponse = AnswerTutorV4Response;
@@ -1659,6 +1659,17 @@ function continueAfterExplanation() {
           return;
         }
 
+        /* ⭐ 24/11/2026 — Séance perdue côté serveur : le serveur répond
+           404 « Session introuvable » (on passe ici, pas dans le catch).
+           On relance une séance sur la même micro. */
+        if (/Session introuvable/i.test(message)) {
+          setSelectedOptionId(null);
+          setAnswer("");
+          await startSession(activeMicroId ?? undefined);
+          setFeedback("Le coach a fait une pause. On repart avec une nouvelle question !");
+          return;
+        }
+
         setFeedback(data?.error ?? "Erreur pendant la correction.");
         return;
       }
@@ -2179,6 +2190,7 @@ function handleInputKeyDown(
           onInputKeyDown={handleInputKeyDown}
           etatEnregistrement={etatEnregistrement()}
           choixSeance={choixSeance(true)}
+          bravoResultats={!!eleve && etatAuto === "ok" && nbTentatives >= REPONSES_AVANT_INVITATION}
         />
         {/* ⭐ 27/10/2026 — Frédéric : « la calculatrice à gauche », « Question
             suivante » là où était « Demande à l'IA » (en bas à droite, les élèves

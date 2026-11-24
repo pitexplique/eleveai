@@ -8,6 +8,7 @@ import {
   type KeyboardEvent,
   type ReactNode,
 } from "react";
+import Link from "next/link";
 import AudioBoost from "@/components/AudioBoost";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import {
@@ -72,6 +73,8 @@ type TutorSimpleViewProps = {
   etatEnregistrement: ReactNode;
   /** 📝 / 🏋️ en haut, dans la barre de mission (24/11/2026). */
   choixSeance?: ReactNode;
+  /** 🎉 à 10 réponses enregistrées (élève connecté) : rappel sous les scores, sur PC. */
+  bravoResultats?: boolean;
 };
 
 const CYCLE_2_COACH = new Set(["cp", "ce1", "ce2"]);
@@ -133,6 +136,7 @@ export default function TutorSimpleView({
   onInputKeyDown,
   etatEnregistrement,
   choixSeance,
+  bravoResultats = false,
 }: TutorSimpleViewProps) {
 
   // Tailles agrandies en « affichage classe » (projection sans zoom).
@@ -643,6 +647,18 @@ export default function TutorSimpleView({
               <SimpleStat title="Temps" value={elapsedTime} tone="blue" />
               <SimpleStat title="Score" value={`${score}/20`} tone="orange" />
               <SimpleStat title="Points ⭐" value={`${points}`} tone="amber" />
+              {/* ⭐ 24/11/2026 — Sur PC, le « Bravo, 10 questions » du bas
+                  tombait sous la ligne de flottaison : rappel ici, sous les
+                  scores, où l'œil regarde. Sur téléphone, le bas suffit. */}
+              {bravoResultats ? (
+                <Link
+                  href="/dashboard-eleve"
+                  className="mt-2 hidden rounded-md bg-emerald-600 px-2 py-3 text-center text-sm font-black leading-tight text-white shadow-sm hover:bg-emerald-700 lg:block"
+                >
+                  🎉 Bravo !
+                  <span className="mt-1 block text-xs font-bold underline">Voir mes résultats</span>
+                </Link>
+              ) : null}
             </aside>
           ) : null}
         </div>
