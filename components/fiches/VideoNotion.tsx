@@ -1,6 +1,8 @@
 "use client";
 
 // ─── Le pont fiche → vidéo ─────────────────────────────────────────────────────
+// ⚠️ 24/11/2026 : sur téléphone, pas de QR (« scanne avec ton téléphone » sur un
+// téléphone…) : le lien suffit. Il reste sur ordinateur et à l'impression.
 // QR code vers la vidéo de la notion (table notion_ressources, la même que le
 // badge ▶ du coach). Le QR s'imprime avec la fiche : l'élève qui a la fiche
 // papier (ou projetée en classe) scanne et regarde.
@@ -85,12 +87,13 @@ export default function VideoNotion({
           Les vidéos de cette notion
         </p>
         <p className="mt-1 text-sm leading-6 text-slate-600 print:text-xs">
-          Scanne un QR code avec ton téléphone pour voir le cours en vidéo.
+          <span className="sm:hidden print:hidden">Touche le lien pour voir le cours en vidéo.</span>
+          <span className="hidden sm:inline print:inline">Scanne un QR code avec ton téléphone pour voir le cours en vidéo.</span>
         </p>
         <ul className="mt-3 grid gap-3 sm:grid-cols-2 print:grid-cols-2 print:gap-2">
           {videos.map((v) => (
             <li key={v.url} className="flex items-center gap-3">
-              <div className="shrink-0 rounded-xl border border-rose-200 bg-white p-1.5">
+              <div className="hidden shrink-0 sm:block print:block rounded-xl border border-rose-200 bg-white p-1.5">
                 <QRCodeSVG value={v.url} size={64} aria-label="QR code vers la vidéo" />
               </div>
               <div className="min-w-0">
@@ -117,7 +120,7 @@ export default function VideoNotion({
 
   return (
     <div className="mt-5 flex items-center gap-4 rounded-2xl border border-rose-200 bg-rose-50 p-4 print:mt-3 print:gap-3 print:p-3">
-      <div className="shrink-0 rounded-xl border border-rose-200 bg-white p-2">
+      <div className="hidden shrink-0 sm:block print:block rounded-xl border border-rose-200 bg-white p-2">
         <QRCodeSVG value={url} size={84} aria-label="QR code vers la vidéo" />
       </div>
       <div className="min-w-0">
@@ -126,7 +129,8 @@ export default function VideoNotion({
           La vidéo de cette notion
         </p>
         <p className="mt-1 text-sm leading-6 text-slate-600 print:text-xs">
-          Scanne le QR code avec ton téléphone pour voir le cours en vidéo.
+          <span className="sm:hidden print:hidden">Touche le lien pour voir le cours en vidéo.</span>
+          <span className="hidden sm:inline print:inline">Scanne le QR code avec ton téléphone pour voir le cours en vidéo.</span>
         </p>
         <a
           href={url}

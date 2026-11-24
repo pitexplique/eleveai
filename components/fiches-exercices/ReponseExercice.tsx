@@ -19,6 +19,10 @@ import { saisieJuste, selonLaClasse, type ReponseAttendue } from "@/lib/fiches-e
 
 function Apercu({ saisie }: { saisie: string }) {
   const html = useMemo(() => {
+    // 24/11/2026 — un nombre ou des mots tapés tels quels (« 3608 », « mille »)
+    // se répétaient à l'identique sous la case : l'aperçu ne sert qu'aux
+    // écritures mathématiques (fraction, puissance, ×, ÷, π…).
+    if (/^[\p{L}\d\s.,'’-]*$/u.test(saisie)) return null;
     const ligne = saisieEnLatex(saisie)[0];
     if (!ligne) return null;
     try {

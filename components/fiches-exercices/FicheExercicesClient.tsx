@@ -377,7 +377,7 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
             />
           ) : null}
 
-          <footer className="mt-8 flex items-center justify-between border-t border-slate-200 pt-5 text-xs text-slate-500 print:mt-6">
+          <footer className="mt-8 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-slate-200 pt-5 text-xs text-slate-500 print:mt-6">
             <span>eleveai.fr - Fiche d&apos;exercices</span>
             <span>
               {fiche.titre} - {classe}
