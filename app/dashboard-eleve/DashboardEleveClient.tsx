@@ -16,6 +16,7 @@ import type { ResumeGratuit } from "@/lib/suivi/resumeGratuit";
 import CarteMaLigneBulletin from "./CarteMaLigneBulletin";
 import CarteCockpit from "./CarteCockpit";
 import CarteMonJardin from "./CarteMonJardin";
+import CarteSimulateurs from "./CarteSimulateurs";
 import type { Bulletin } from "@/lib/bulletin/types";
 import { prenomFromNom } from "@/lib/prenom";
 import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
@@ -496,7 +497,10 @@ export default function DashboardEleveClient() {
         </div>
 
         {vue === "jardin" ? (
-          compteGratuit ? null : <CarteMonJardin notions={mesNotions} />
+          <>
+            {compteGratuit ? null : <CarteMonJardin notions={mesNotions} />}
+            <CarteSimulateurs variante="jardin" />
+          </>
         ) : (
           <>
             <CarteCockpit
@@ -505,6 +509,7 @@ export default function DashboardEleveClient() {
               titreNotion={titreNotion}
               septJoursSeulement={compteGratuit}
             />
+            <CarteSimulateurs variante="cockpit" />
 
         {/* ⭐ EN HAUT (09/11/2026, Frédéric : « il faut mettre la moyenne
             générale et en dessous les notions » ; « les parents doivent voir

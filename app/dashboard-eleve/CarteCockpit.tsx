@@ -54,6 +54,11 @@ export function estEntrainement(details: unknown): boolean {
   return !!(details && typeof details === "object" && (details as { entrainement?: unknown }).entrainement === true);
 }
 
+// 24/11/2026 : les séances des fiches d'exercices interactives (details.source).
+export function estExercices(details: unknown): boolean {
+  return !!(details && typeof details === "object" && (details as { source?: unknown }).source === "exercices");
+}
+
 function libelleNotion(s: SeanceCockpit, titreNotion: (classe: string, id: string) => string) {
   const d = s.details as { notionLabel?: unknown } | null;
   if (d && typeof d.notionLabel === "string" && d.notionLabel.trim()) return d.notionLabel;
@@ -427,7 +432,8 @@ export default function CarteCockpit({
                         <span className="block truncate font-semibold text-slate-100">{libelleNotion(s, titreNotion)}</span>
                         <span className="block text-xs text-slate-500">
                           {dateCourte(new Date(s.created_at).getTime())} · {s.classe.toUpperCase()} ·{" "}
-                          {s.bonnes_reponses}/{s.nb_tentatives} justes{entr && " · 🏋️ entraînement"}
+                          {s.bonnes_reponses}/{s.nb_tentatives} justes · {estExercices(s.details) ? "📄 exercices" : "🎯 coach"}
+                          {entr && " · 🏋️ entraînement"}
                         </span>
                       </span>
                       <span
@@ -498,7 +504,8 @@ export default function CarteCockpit({
         <p className="mt-1 text-slate-300">On compte toutes tes questions. Puis toutes tes bonnes réponses.</p>
         {m.questionsComptees > 0 ? (
           <p className="mt-2 text-base font-semibold tabular-nums text-slate-100">
-            {m.justesComptees} bonnes réponses sur {m.questionsComptees} questions :<br />
+            {m.justesComptees} bonne{m.justesComptees > 1 ? "s" : ""} réponse{m.justesComptees > 1 ? "s" : ""} sur{" "}
+            {m.questionsComptees} question{m.questionsComptees > 1 ? "s" : ""} :<br />
             {m.justesComptees} ÷ {m.questionsComptees} × 20 ={" "}
             <span className="text-blue-400">{virgule(m.moyenne ?? 0)}/20</span>
           </p>

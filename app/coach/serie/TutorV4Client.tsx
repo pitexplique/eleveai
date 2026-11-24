@@ -132,7 +132,7 @@ import AQuoiCaSert from "./AQuoiCaSert";
 import Image from "next/image";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import EtatEnregistrementSeance, { type EtatAuto } from "./EtatEnregistrementSeance";
+import EtatEnregistrementSeance, { ChoixSeance, type EtatAuto } from "./EtatEnregistrementSeance";
 
 type StartResponse = StartTutorV4Response;
 type AnswerResponse = AnswerTutorV4Response;
@@ -1987,12 +1987,6 @@ function handleInputKeyDown(
       etatAuto={etatAuto}
       reprise={reprise}
       entrainement={entrainement}
-      onEntrainement={(v) => {
-        setEntrainement(v);
-        // La séance en cours change de nature : on la renvoie tout de suite.
-        dernierEnregistreRef.current = 0;
-        aRenvoyerRef.current = true;
-      }}
       lienConnexion={`/auth/signin?mode=eleve&next=${encodeURIComponent(
         `${pathname}?${searchParams.toString()}`
       )}`}
@@ -2003,6 +1997,21 @@ function handleInputKeyDown(
 
   // Ressources internes proposées après la réponse de l'IA : on entraîne sur le
   // micro raté + quelques voisins de la même notion (liens vers le tutor ciblé).
+  const choixSeance = (surFondSombre = false) => (
+    <ChoixSeance
+      connecte={!!eleve}
+      sessionARenouveler={!!eleve && !eleve.token}
+      entrainement={entrainement}
+      onEntrainement={(v) => {
+        setEntrainement(v);
+        // La séance en cours change de nature : on la renvoie tout de suite.
+        dernierEnregistreRef.current = 0;
+        aRenvoyerRef.current = true;
+      }}
+      surFondSombre={surFondSombre}
+    />
+  );
+
   const coachSuggestions = currentQuestion
     ? (() => {
         const nId = currentQuestion.notionId;
@@ -2134,6 +2143,7 @@ function handleInputKeyDown(
           onQcmClick={(choice) => void handleQcmClick(choice)}
           onInputKeyDown={handleInputKeyDown}
           etatEnregistrement={etatEnregistrement()}
+          choixSeance={choixSeance(true)}
         />
         {/* ⭐ 27/10/2026 — Frédéric : « la calculatrice à gauche », « Question
             suivante » là où était « Demande à l'IA » (en bas à droite, les élèves
@@ -2323,6 +2333,7 @@ function handleInputKeyDown(
                     {busy ? "Chargement..." : "Démarrer une mission"}
                   </button>
 
+                  {choixSeance(true)}
                   {etatEnregistrement(true)}
                 </div>
               </div>
@@ -2357,6 +2368,7 @@ function handleInputKeyDown(
               {busy ? "Chargement..." : "Démarrer une mission"}
             </button>
 
+            <div className="flex justify-center">{choixSeance()}</div>
             {etatEnregistrement()}
           </section>
 

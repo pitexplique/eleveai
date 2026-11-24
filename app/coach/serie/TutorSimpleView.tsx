@@ -70,6 +70,8 @@ type TutorSimpleViewProps = {
   onInputKeyDown: (event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   // Ligne discrète sur l'enregistrement automatique (comme en mode complet).
   etatEnregistrement: ReactNode;
+  /** 📝 / 🏋️ en haut, dans la barre de mission (24/11/2026). */
+  choixSeance?: ReactNode;
 };
 
 const CYCLE_2_COACH = new Set(["cp", "ce1", "ce2"]);
@@ -130,6 +132,7 @@ export default function TutorSimpleView({
   onQcmClick,
   onInputKeyDown,
   etatEnregistrement,
+  choixSeance,
 }: TutorSimpleViewProps) {
 
   // Tailles agrandies en « affichage classe » (projection sans zoom).
@@ -365,6 +368,7 @@ export default function TutorSimpleView({
             <SimplePill>⭐ {starsLabel(currentStar)}</SimplePill>
             <SimplePill>🔥 Série {streak}</SimplePill>
           </div>
+          {choixSeance ? <div className="ml-auto">{choixSeance}</div> : null}
         </div>
 
         {remediationBanner}

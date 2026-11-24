@@ -31,6 +31,8 @@ function Apercu({ saisie }: { saisie: string }) {
   return <div className="overflow-x-auto px-1 text-sm text-slate-700" dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
+export const EVENEMENT_REPONSE_EXERCICE = "eleveai:reponse-exercice";
+
 export default function ReponseExercice({
   reponses,
   idBase,
@@ -70,7 +72,18 @@ export default function ReponseExercice({
   }
 
   function valider() {
-    setVerdicts(reponses.map((r, k) => saisieJuste(saisies[k], selonLaClasse(r, classe))));
+    const v = reponses.map((r, k) => saisieJuste(saisies[k], selonLaClasse(r, classe)));
+    setVerdicts(v);
+    // ⭐ 24/11/2026 : la fiche compte les réponses pour « Enregistrer ma
+    // séance » (EnregistrerSeanceExercices). Un exercice = une question,
+    // juste si toutes ses cases le sont.
+    try {
+      window.dispatchEvent(
+        new CustomEvent(EVENEMENT_REPONSE_EXERCICE, { detail: { id: idBase, juste: v.every(Boolean) } })
+      );
+    } catch {
+      /* navigateur sans CustomEvent : la fiche ne compte pas, rien d'autre ne casse. */
+    }
   }
 
   const rempli = saisies.some((s) => s.trim());

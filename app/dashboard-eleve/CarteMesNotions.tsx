@@ -243,7 +243,7 @@ export default function CarteMesNotions({ notions }: { notions: Notion[] | null 
     <div className="mt-6 rounded-[2rem] border border-emerald-200 bg-white p-6 shadow-xl">
       <h2 className="text-2xl font-black text-slate-900">🧠 Mes notions et micros compris</h2>
       <p className="mt-1 text-sm font-semibold text-slate-600">
-        Toutes tes séances du Coach de maths, cumulées. Compris = 80 % de bonnes réponses ou plus,
+        Toutes tes séances du Coach de maths et des fiches d&apos;exercices, cumulées. Compris = 80 % de bonnes réponses ou plus,
         sur 3 réponses au moins.
       </p>
 

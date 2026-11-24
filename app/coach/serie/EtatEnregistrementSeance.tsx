@@ -40,7 +40,6 @@ export default function EtatEnregistrementSeance({
   onAvantConnexion,
   surFondSombre = false,
   entrainement = false,
-  onEntrainement,
 }: Props) {
   const discret = surFondSombre ? "text-white/80" : "text-slate-500";
   const alerte = surFondSombre ? "text-amber-200" : "text-amber-700";
@@ -94,52 +93,66 @@ export default function EtatEnregistrementSeance({
     );
   }
 
-  // ⭐ 23/11/2026 — Frédéric : « mode entraînement, et mode on enregistre ma
-  // séance pour améliorer mes notes ». Deux boutons, l'élève choisit.
-  const choix =
-    connecte && !sessionARenouveler && onEntrainement ? (
-      <div
-        role="radiogroup"
-        aria-label="Ma séance compte-t-elle pour ma note ?"
-        className={`mx-auto flex w-fit flex-wrap justify-center gap-1 rounded-full p-1 text-xs font-black ${
-          surFondSombre ? "bg-white/10" : "bg-slate-100"
-        }`}
-      >
-        {[
-          { v: false, label: "📝 Ma séance compte" },
-          { v: true, label: "🏋️ Entraînement" },
-        ].map((o) => {
-          const actif = entrainement === o.v;
-          return (
-            <button
-              key={o.label}
-              type="button"
-              role="radio"
-              aria-checked={actif}
-              onClick={() => onEntrainement(o.v)}
-              className={`rounded-full px-3 py-1.5 transition ${
-                actif
-                  ? o.v
-                    ? "bg-amber-400 text-amber-950 shadow"
-                    : "bg-emerald-600 text-white shadow"
-                  : surFondSombre
-                    ? "text-white/80 hover:bg-white/10"
-                    : "text-slate-600 hover:bg-white"
-              }`}
-            >
-              {o.label}
-            </button>
-          );
-        })}
-      </div>
-    ) : null;
+  if (!contenu) return null;
 
-  if (!contenu && !choix) return null;
+  return <p className="text-center text-xs font-semibold leading-snug">{contenu}</p>;
+}
 
+/**
+ * ⭐ 24/11/2026 — LE CHOIX MONTE EN HAUT DU COACH. Frédéric, après le test en
+ * classe : en bas de la vue simple, sous les scores, « personne ne le voit » —
+ * « oui, remonte-le ». Il vit maintenant dans la barre du haut (vue simple) et
+ * à côté de « Démarrer une mission » (mode complet). La ligne « ✓ Séance
+ * enregistrée » reste en bas, dans EtatEnregistrementSeance.
+ */
+export function ChoixSeance({
+  connecte,
+  sessionARenouveler,
+  entrainement,
+  onEntrainement,
+  surFondSombre = false,
+}: {
+  connecte: boolean;
+  sessionARenouveler: boolean;
+  entrainement: boolean;
+  onEntrainement: (v: boolean) => void;
+  surFondSombre?: boolean;
+}) {
+  if (!connecte || sessionARenouveler) return null;
   return (
-    <div className="space-y-1.5">
-      {choix}
-      {contenu && <p className="text-center text-xs font-semibold leading-snug">{contenu}</p>}
+    <div
+      role="radiogroup"
+      aria-label="Ma séance compte-t-elle pour ma note ?"
+      className={`flex w-fit flex-wrap justify-center gap-1 rounded-full p-1 text-xs font-black ${
+        surFondSombre ? "bg-white/15" : "bg-slate-100"
+      }`}
+    >
+      {[
+        { v: false, label: "📝 Ma séance compte" },
+        { v: true, label: "🏋️ Entraînement" },
+      ].map((o) => {
+        const actif = entrainement === o.v;
+        return (
+          <button
+            key={o.label}
+            type="button"
+            role="radio"
+            aria-checked={actif}
+            onClick={() => onEntrainement(o.v)}
+            className={`rounded-full px-3 py-1.5 transition ${
+              actif
+                ? o.v
+                  ? "bg-amber-400 text-amber-950 shadow"
+                  : "bg-emerald-600 text-white shadow"
+                : surFondSombre
+                  ? "text-white hover:bg-white/15"
+                  : "text-slate-600 hover:bg-white"
+            }`}
+          >
+            {o.label}
+          </button>
+        );
+      })}
     </div>
   );
 }
