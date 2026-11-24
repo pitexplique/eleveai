@@ -6,11 +6,37 @@
 // dessous : ses messages envoyés (date, classe, lu par N élèves), avec
 // « Supprimer ». Sens unique : les élèves ne répondent pas.
 // Posé dans /dashboard-prof et dans « Mes classes » (/prof/classes).
+//
+// 📤 24/11 — « ENVOYER LA SÉANCE À LA CLASSE » (Frédéric : « go »). Le message
+// peut porter un LIEN vers le coach sur les micros cochées (le « 🔗 Lien
+// élèves » du coach, ou son bouton « 📤 Envoyer à ma classe » qui revient sur
+// Mes classes avec ?seance=). Chez l'élève : gros bouton « ▶ Commencer la
+// séance ». Mêmes règles : 7 jours visibles, effacé à 30 jours, texte simple.
 
 import { useCallback, useEffect, useState } from "react";
 
 type Classe = { code_etablissement: string; nom_classe: string; nb_eleves: number };
-type Message = { id: string; created_at: string; code_etablissement: string; texte: string; lus: number };
+type Message = { id: string; created_at: string; code_etablissement: string; texte: string; lus: number; lien?: string | null };
+export type SeanceAEnvoyer = { lien: string; titre: string };
+
+/** Un « 🔗 Lien élèves » collé (adresse complète ou chemin) → chemin du coach, ou null. */
+function cheminDeSeance(brut: string): string | null {
+  let s = brut.trim();
+  if (!s) return null;
+  if (/^https?:\/\//i.test(s)) {
+    try {
+      const u = new URL(s);
+      if (u.origin !== window.location.origin && !/(^|\.)eleveai\.fr$/i.test(u.hostname)) return null;
+      s = u.pathname + u.search;
+    } catch {
+      return null;
+    }
+  }
+  return s.startsWith("/coach") && !s.includes("//") ? s : null;
+}
+
+const texteDeSeance = (titre: string) =>
+  `Séance du jour : ${titre}. Appuie sur « Commencer la séance » et fais les exercices.`;
 
 const MAX = 500;
 // Même durée que VISIBLE_ELEVE_MS (lib/server/messagesClasse.ts) : 7 jours.
@@ -25,7 +51,14 @@ const dateCourte = (iso: string) =>
     minute: "2-digit",
   });
 
-export default function BlocMessageClasse({ token }: { token: string | null }) {
+export default function BlocMessageClasse({
+  token,
+  seance: seanceRecue = null,
+}: {
+  token: string | null;
+  /** Séance préparée dans le coach (Mes classes ?seance=…&titre=…). */
+  seance?: SeanceAEnvoyer | null;
+}) {
   const [classes, setClasses] = useState<Classe[] | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [code, setCode] = useState("");
@@ -33,6 +66,13 @@ export default function BlocMessageClasse({ token }: { token: string | null }) {
   const [envoi, setEnvoi] = useState(false);
   const [erreur, setErreur] = useState<string | null>(null);
   const [succes, setSucces] = useState<string | null>(null);
+  const [seance, setSeance] = useState<SeanceAEnvoyer | null>(seanceRecue);
+  const [lienColle, setLienColle] = useState("");
+  useEffect(() => {
+    if (!seanceRecue) return;
+    setSeance(seanceRecue);
+    setTexte((t) => t || texteDeSeance(seanceRecue.titre));
+  }, [seanceRecue]);
 
   const charger = useCallback(async () => {
     if (!token) return;
@@ -68,7 +108,7 @@ export default function BlocMessageClasse({ token }: { token: string | null }) {
       const r = await fetch("/api/prof/messages-classe", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ code, texte }),
+        body: JSON.stringify({ code, texte, ...(seance ? { lien: seance.lien } : {}) }),
       });
       const d = await r.json().catch(() => ({}));
       if (!r.ok || !d?.ok) {
@@ -77,7 +117,8 @@ export default function BlocMessageClasse({ token }: { token: string | null }) {
       }
       setMessages((m) => [d.message, ...m]);
       setTexte("");
-      setSucces(`Envoyé à la ${nomDe(code)} ✅`);
+      setSucces(seance ? `Séance envoyée à la ${nomDe(code)} ✅` : `Envoyé à la ${nomDe(code)} ✅`);
+      setSeance(null);
     } finally {
       setEnvoi(false);
     }
@@ -105,6 +146,55 @@ export default function BlocMessageClasse({ token }: { token: string | null }) {
 
       {classes && classes.length > 0 && (
         <div className="mt-4 space-y-3">
+          {/* 📤 La séance à envoyer : venue du coach, ou lien collé ici. */}
+          {seance ? (
+            <div className="rounded-2xl border-2 border-violet-300 bg-violet-50 p-4">
+              <p className="text-sm font-black text-violet-900">📤 Séance prête : {seance.titre}</p>
+              <p className="mt-1 text-xs font-semibold text-slate-600">
+                Chaque élève de la classe verra un bouton « ▶ Commencer la séance » en haut de son tableau de bord.
+              </p>
+              <button
+                type="button"
+                onClick={() => setSeance(null)}
+                className="mt-2 text-xs font-bold text-slate-500 underline hover:text-slate-700"
+              >
+                Retirer la séance (message simple)
+              </button>
+            </div>
+          ) : (
+            <details className="rounded-2xl border border-dashed border-violet-300 bg-white p-3 text-sm">
+              <summary className="cursor-pointer font-black text-violet-800">📤 Envoyer une séance du coach</summary>
+              <p className="mt-2 text-xs font-semibold text-slate-600">
+                Dans le coach : déplie la notion, coche les séries, GO, puis « 📤 Envoyer à ma classe ». Ou colle ici
+                le « 🔗 Lien élèves » :
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                <input
+                  value={lienColle}
+                  onChange={(e) => setLienColle(e.target.value)}
+                  placeholder="https://eleveai.fr/coach/serie?…"
+                  className="min-w-0 flex-1 rounded-xl border border-slate-300 px-3 py-2 text-sm"
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    const lien = cheminDeSeance(lienColle);
+                    if (!lien) {
+                      setErreur("Ce lien n'est pas une séance du coach d'EleveAI.");
+                      return;
+                    }
+                    setErreur(null);
+                    setSeance({ lien, titre: "exercices du coach" });
+                    setTexte((t) => t || texteDeSeance("exercices du coach"));
+                    setLienColle("");
+                  }}
+                  className="rounded-xl bg-violet-700 px-4 py-2 text-sm font-black text-white hover:bg-violet-800"
+                >
+                  Utiliser ce lien
+                </button>
+              </div>
+            </details>
+          )}
           <label className="block text-sm font-black text-slate-700">
             Classe
             <select
@@ -140,7 +230,7 @@ export default function BlocMessageClasse({ token }: { token: string | null }) {
               disabled={!texte.trim() || !code || envoi}
               className="rounded-2xl bg-sky-600 px-5 py-2.5 text-sm font-black text-white shadow hover:bg-sky-500 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {envoi ? "Envoi…" : `Envoyer à la ${nomDe(code)}`}
+              {envoi ? "Envoi…" : seance ? `📤 Envoyer la séance à la ${nomDe(code)}` : `Envoyer à la ${nomDe(code)}`}
             </button>
             <span className={`text-xs font-bold ${reste < 50 ? "text-amber-600" : "text-slate-400"}`}>
               {reste} signes restants
@@ -167,6 +257,11 @@ export default function BlocMessageClasse({ token }: { token: string | null }) {
                     )}
                   </p>
                   <p className="mt-1 whitespace-pre-wrap break-words text-sm font-medium text-slate-800">{m.texte}</p>
+                  {m.lien && (
+                    <a href={m.lien} target="_blank" rel="noopener" className="mt-1 inline-block text-xs font-black text-violet-800 underline">
+                      ▶ Séance jointe (ouvrir)
+                    </a>
+                  )}
                 </div>
                 <button
                   type="button"

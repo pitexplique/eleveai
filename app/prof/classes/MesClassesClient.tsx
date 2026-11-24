@@ -9,7 +9,7 @@ import Link from "next/link";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
 import AvatarRond from "@/components/AvatarRond";
-import BlocMessageClasse from "@/components/messages-classe/BlocMessageClasse";
+import BlocMessageClasse, { type SeanceAEnvoyer } from "@/components/messages-classe/BlocMessageClasse";
 import { FREE_CLASSES_PER_TEACHER } from "@/lib/tarifs";
 
 type EleveClasse = {
@@ -61,6 +61,16 @@ export default function MesClassesClient() {
   // ⭐ 24/11 — le prof de chaque semaine vient pour SES classes : le
   // formulaire « Nouvelle classe » se replie dès qu'il en a une.
   const [formOuvert, setFormOuvert] = useState(false);
+  // 📤 24/11 — séance préparée dans le coach (« 📤 Envoyer à ma classe ») :
+  // ?seance=<chemin du coach>&titre=<notion>. Le bloc message monte en haut.
+  const [seance, setSeance] = useState<SeanceAEnvoyer | null>(null);
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    const lien = q.get("seance") ?? "";
+    if (lien.startsWith("/coach") && !lien.includes("//")) {
+      setSeance({ lien, titre: (q.get("titre") ?? "").slice(0, 120) || "exercices du coach" });
+    }
+  }, []);
   useEffect(() => {
     const lire = () => {
       if (window.location.hash === "#nouvelle-classe") setFormOuvert(true);
@@ -269,6 +279,13 @@ export default function MesClassesClient() {
         )}
 
 
+        {/* 📤 Une séance arrive du coach : on l'envoie d'abord, en haut. */}
+        {!!classes?.length && seance && (
+          <div className="mt-6">
+            <BlocMessageClasse token={token} seance={seance} />
+          </div>
+        )}
+
         <section className="mt-8 space-y-4">
           {classes === null && <p className="text-slate-500">Chargement…</p>}
           {classes?.length === 0 && !erreur && (
@@ -468,7 +485,7 @@ export default function MesClassesClient() {
         )}
 
         {/* ✉️ Message à la classe (24/11/2026) ; key : se recharge après une création. */}
-        {!!classes?.length && (
+        {!!classes?.length && !seance && (
           <div className="mt-8">
             <BlocMessageClasse key={classes.length} token={token} />
           </div>

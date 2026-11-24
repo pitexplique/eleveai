@@ -1,12 +1,13 @@
 // ✉️ MESSAGE À LA CLASSE — côté PROF (24/11/2026).
 // GET    : ses classes actives + ses messages envoyés (avec « lu par N »).
-// POST   : { code, texte } → message à UNE de SES classes.
+// POST   : { code, texte, lien? } → message à UNE de SES classes ; « lien » =
+//          séance du coach (chemin interne, 24/11), bouton « Commencer » chez l'élève.
 // DELETE : ?id=… → supprime UN de SES messages.
 // ⛔ Le prof ne touche qu'à ses classes : classeDuProf / prof_id à chaque fois.
 
 import { NextResponse } from "next/server";
 import { classeDuProf, profDuJeton, supabaseAdmin } from "@/lib/server/classesProf";
-import { LONGUEUR_MAX_MESSAGE, nettoyerMessage, purgerVieuxMessages } from "@/lib/server/messagesClasse";
+import { LONGUEUR_MAX_MESSAGE, nettoyerLienSeance, nettoyerMessage, purgerVieuxMessages } from "@/lib/server/messagesClasse";
 
 export const dynamic = "force-dynamic";
 
@@ -18,6 +19,24 @@ export async function GET(req: Request) {
   if (!v.ok) return NextResponse.json({ ok: false, error: v.error }, { status: v.status });
   await purgerVieuxMessages(admin);
 
+  // 📤 24/11 : la colonne « lien » (séance envoyée) vient de
+  // supabase/messages_classe_seance.sql ; sans elle, on relit sans lien.
+  const lireMessages = async () => {
+    const avec = await admin
+      .from("messages_classe")
+      .select("id, created_at, code_etablissement, texte, lien")
+      .eq("prof_id", v.prof.id)
+      .order("created_at", { ascending: false })
+      .limit(50);
+    if (!avec.error) return avec;
+    return admin
+      .from("messages_classe")
+      .select("id, created_at, code_etablissement, texte")
+      .eq("prof_id", v.prof.id)
+      .order("created_at", { ascending: false })
+      .limit(50);
+  };
+
   const [{ data: classes }, { data: messages, error }] = await Promise.all([
     admin
       .from("classes_prof")
@@ -25,12 +44,7 @@ export async function GET(req: Request) {
       .eq("prof_id", v.prof.id)
       .eq("archivee", false)
       .order("created_at", { ascending: true }),
-    admin
-      .from("messages_classe")
-      .select("id, created_at, code_etablissement, texte")
-      .eq("prof_id", v.prof.id)
-      .order("created_at", { ascending: false })
-      .limit(50),
+    lireMessages(),
   ]);
   if (error) {
     return NextResponse.json(
@@ -63,6 +77,12 @@ export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}));
   const code = typeof body?.code === "string" ? body.code.trim() : "";
   const texte = nettoyerMessage(body?.texte);
+  // 📤 Séance envoyée : un chemin interne vers le coach, sinon refus.
+  const lienDemande = typeof body?.lien === "string" && body.lien.trim() !== "";
+  const lien = lienDemande ? nettoyerLienSeance(body.lien) : null;
+  if (lienDemande && !lien) {
+    return NextResponse.json({ ok: false, error: "Ce lien n'est pas une séance du coach d'EleveAI." }, { status: 400 });
+  }
   if (!texte) return NextResponse.json({ ok: false, error: "Le message est vide." }, { status: 400 });
   if (texte.length > LONGUEUR_MAX_MESSAGE) {
     return NextResponse.json(
@@ -87,10 +107,20 @@ export async function POST(req: Request) {
 
   const { data, error } = await admin
     .from("messages_classe")
-    .insert({ prof_id: v.prof.id, code_etablissement: classe.code_etablissement, texte })
-    .select("id, created_at, code_etablissement, texte")
+    .insert({ prof_id: v.prof.id, code_etablissement: classe.code_etablissement, texte, ...(lien ? { lien } : {}) })
+    .select(lien ? "id, created_at, code_etablissement, texte, lien" : "id, created_at, code_etablissement, texte")
     .single();
-  if (error) return NextResponse.json({ ok: false, error: "Envoi impossible pour l'instant." }, { status: 500 });
+  if (error) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: lien
+          ? "Envoi de la séance impossible : exécuter supabase/messages_classe_seance.sql dans Supabase."
+          : "Envoi impossible pour l'instant.",
+      },
+      { status: 500 }
+    );
+  }
   return NextResponse.json({ ok: true, message: { ...data, lus: 0 } });
 }
 

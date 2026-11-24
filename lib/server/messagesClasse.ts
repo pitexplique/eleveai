@@ -43,3 +43,32 @@ export function nettoyerMessage(brut: unknown): string {
     .replace(/\n{3,}/g, "\n\n")
     .trim();
 }
+
+/**
+ * 📤 SÉANCE ENVOYÉE À LA CLASSE (24/11/2026) — le lien d'un message.
+ * ⛔ Seulement un CHEMIN INTERNE vers le coach (« /coach/serie?… »,
+ * « /coach-ia/… »). Une URL complète du site (copiée du « 🔗 Lien élèves »)
+ * est ramenée à son chemin si son hôte est eleveai.fr ou localhost ; tout le
+ * reste (autre site, « // », « \ », javascript:…) est refusé → null.
+ */
+export function nettoyerLienSeance(brut: unknown): string | null {
+  if (typeof brut !== "string") return null;
+  let s = brut.trim();
+  if (!s) return null;
+  if (/^https?:\/\//i.test(s)) {
+    try {
+      const u = new URL(s);
+      const hote = u.hostname.toLowerCase();
+      const interne = hote === "eleveai.fr" || hote.endsWith(".eleveai.fr") || hote === "localhost" || hote === "127.0.0.1";
+      if (!interne) return null;
+      s = u.pathname + u.search;
+    } catch {
+      return null;
+    }
+  }
+  if (!s.startsWith("/coach")) return null;
+  if (s.includes("//") || s.includes("\\") || s.length > 1000) return null;
+  // eslint-disable-next-line no-control-regex
+  if (/[\u0000-\u001F\u007F\s]/.test(s)) return null;
+  return s;
+}
