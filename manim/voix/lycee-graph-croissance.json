@@ -1,0 +1,18 @@
+{
+  "00-garde": "Lire une croissance. Ça monte, mais comment ?",
+  "01-situation": "Trois créateurs lancent leur chaîne vidéo le même jour. Six mois plus tard, les trois courbes d'abonnés montent. Pourtant, elles ne racontent pas la même histoire. Le community manager, la data analyst, l'épidémiologiste lisent ces courbes : elles annoncent la suite.",
+  "02-question-du-jour": "Comment dire de quelle façon une courbe monte ?",
+  "03-methode": "On compare les hausses, pas à pas, sur des intervalles de même largeur : ici, un mois.",
+  "04-constant": "Inès gagne 100 abonnés chaque mois : 100, 200, 300, 400. Même hausse à chaque pas : la courbe est une droite. La croissance est constante.",
+  "05-accelere": "Tom : 10, 20, 40, 80. Le nombre double chaque mois. Les hausses grandissent : 10, 20, 40, 80, 160. La courbe se redresse : la croissance accélère.",
+  "06-question": "Question ! Chez Sarah, les hausses sont 300, 150, 80, 40. Sa croissance : A : ralentit. B : accélère. C : est constante. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. Sarah gagne des abonnés chaque mois, mais de moins en moins. La courbe monte, puis s'aplatit : la croissance ralentit.",
+  "07-piege": "Attention au piège ! Une courbe qui s'aplatit monte encore. Ralentir, ce n'est pas diminuer. Sarah ne perd aucun abonné : elle en gagne moins vite.",
+  "08-doublement": "Sur la courbe de Tom, on lit le temps pour doubler. De 40 à 80 : un mois. De 160 à 320 : un mois aussi. Le temps de doublement reste le même, alors que les hausses s'envolent.",
+  "09-question": "Question ! Des bactéries passent de 1 000 à 2 000 en 3 heures, et doublent à ce rythme. Combien sont-elles après 9 heures ? A : 4 000. B : 6 000. C : 8 000. Mets pause, et choisis !",
+  "09b-reponse": "Réponse C. En 9 heures, il y a 3 doublements : 1 000, 2 000, 4 000, 8 000. A ajoute 1 000 à chaque fois, et B multiplie 2 000 par 3.",
+  "10-defi": "À toi de jouer ! Une vidéo a 500 vues après 1 heure, 1 000 après 2 heures, 2 000 après 3 heures. Au même rythme, combien après 5 heures ? Et sa croissance accélère-t-elle ? Mets pause, et cherche !",
+  "10b-correction": "Elle double chaque heure : 4 000 après 4 heures, 8 000 après 5 heures. Les hausses grandissent : 500, 1 000, 2 000, 4 000. La croissance accélère.",
+  "11-finale": "Ce que tu as appris. On compare les hausses sur des intervalles de même largeur. Hausses égales : croissance constante, une droite. Hausses qui grandissent : ça accélère. Hausses qui rétrécissent : ça ralentit, mais ça monte encore.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

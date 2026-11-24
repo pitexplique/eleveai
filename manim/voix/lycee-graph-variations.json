@@ -1,0 +1,17 @@
+{
+  "00-garde": "Le tableau de variations. Comment le lire sur une courbe ?",
+  "01-situation": "Une coureuse de trail enregistre son altitude avec sa montre. Sur 10 kilomètres, la courbe monte, descend, puis remonte. L'entraîneur, la géomètre, le data analyst du sport lisent ce genre de courbe chaque jour.",
+  "02-question-du-jour": "Comment résumer cette courbe en un seul tableau ?",
+  "03-parcourir": "On parcourt la courbe de gauche à droite, comme la coureuse. De 0 à 4 kilomètres, elle monte : la fonction est croissante. De 4 à 7, elle descend : décroissante. De 7 à 10, elle remonte : croissante.",
+  "04-tableau": "Le tableau de variations. Première ligne : les bornes, et les x où la courbe change de sens : 0, 4, 7, 10. Deuxième ligne : une flèche qui monte, une qui descend, une qui monte. Au bout des flèches, les altitudes : 200, 800, 300, 500.",
+  "05-extremums": "Le tableau donne aussi le plus haut et le plus bas. Le maximum, 800 mètres, est atteint en 4. Le minimum, 200 mètres, est atteint en 0, au départ, et non en 7.",
+  "06-question": "Question ! Sur quel intervalle la fonction est-elle décroissante ? A : de 0 à 4. B : de 300 à 800. C : de 4 à 7. Mets pause, et choisis !",
+  "06b-reponse": "Réponse C. Entre 4 et 7 kilomètres, la courbe descend. A, c'est la montée, et B donne des altitudes : les intervalles se lisent sur les x.",
+  "07-piege": "Attention au piège ! On ne dit pas croissante de 200 à 800. On dit croissante sur l'intervalle de 0 à 4. L'intervalle se lit sur les x, les valeurs sur les y.",
+  "08-question": "Question ! Dans ce tableau, f vaut 2 en moins 3, monte jusqu'à 6 en 1, puis descend jusqu'à moins 1 en 4. Quel est le maximum ? A : 4, atteint en moins 1. B : 6, atteint en 1. C : 1, atteint en 6. Mets pause, et choisis !",
+  "08b-reponse": "Réponse B. Le maximum se lit sur la ligne du bas, en haut des flèches : 6. Il est atteint en 1, juste au-dessus. A lit la dernière colonne, et C inverse les deux lignes.",
+  "09-defi": "À toi de jouer ! Une courbe part de 3 en x égale 0, descend jusqu'à moins 2 en x égale 2, puis monte jusqu'à 4 en x égale 5. Dresse son tableau de variations. Mets pause, et cherche !",
+  "09b-correction": "Première ligne : 0, 2, 5. Deuxième ligne : 3, une flèche qui descend vers moins 2, puis une flèche qui monte vers 4. Décroissante sur l'intervalle de 0 à 2, croissante sur l'intervalle de 2 à 5.",
+  "10-finale": "Ce que tu as appris. On parcourt la courbe de gauche à droite. Première ligne : les x où elle change de sens. Deuxième ligne : des flèches, et les valeurs au bout. Les intervalles se lisent toujours sur les x.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

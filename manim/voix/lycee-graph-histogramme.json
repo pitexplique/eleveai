@@ -1,0 +1,18 @@
+{
+  "00-garde": "L'histogramme. Que dit chaque barre ?",
+  "01-situation": "Un lycée veut décaler l'heure d'entrée en cours. Il demande à 50 élèves leur temps de trajet. L'urbaniste, la responsable des transports, le statisticien lisent les réponses sur un histogramme.",
+  "02-question-du-jour": "Combien d'élèves mettent au moins une demi-heure ?",
+  "03-classes": "En bas, les temps sont rangés par classes : de 0 à 10 minutes, de 10 à 20, et ainsi de suite. Une barre par classe. Les barres se touchent : les temps se suivent, sans trou.",
+  "04-effectif": "La hauteur d'une barre, c'est l'effectif de la classe. La barre de 10 à 20 minutes monte jusqu'à 17 : 17 élèves mettent entre 10 et 20 minutes.",
+  "05-bornes": "La classe de 10 à 20 : 10 compris, 20 non compris. Un élève qui met pile 20 minutes compte dans la barre suivante.",
+  "06-question": "Question ! Combien d'élèves mettent moins de 20 minutes ? A : 17. B : 25. C : 20. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. Moins de 20 minutes : les deux premières barres. 8 plus 17, égale 25. A ne prend qu'une barre, et C lit la borne 20, pas un effectif.",
+  "07-frequence": "Une fréquence, c'est l'effectif de la classe divisé par l'effectif total. 17 divisé par 50, égale 0,34 : 34 % des élèves.",
+  "08-piege": "Attention au piège ! L'effectif total, ce n'est pas le nombre de barres. Il y a 5 barres, mais 50 élèves : on additionne toutes les hauteurs. 8, 17, 12, 9 et 4 : 50.",
+  "09-question": "Question ! Quelle part des élèves met au moins 30 minutes ? A : 26 %. B : 13 %. C : 9 %. Mets pause, et choisis !",
+  "09b-reponse": "Réponse A. Les deux dernières barres : 9 plus 4, égale 13 élèves. 13 divisé par 50, égale 0,26 : 26 %. B oublie de diviser par 50, et C ne prend qu'une barre.",
+  "10-defi": "À toi de jouer ! Quelle est la classe la plus représentée ? Et quelle part des élèves met entre 20 et 30 minutes ? Mets pause, et cherche !",
+  "10b-correction": "La barre la plus haute : de 10 à 20 minutes, 17 élèves. Entre 20 et 30 minutes : 12 élèves. 12 divisé par 50, égale 0,24 : 24 %.",
+  "11-finale": "Ce que tu as appris. Une barre par classe, et sa hauteur donne l'effectif. Pour l'effectif total, on additionne toutes les barres. La fréquence : l'effectif de la classe divisé par l'effectif total.",
+  "12-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}
