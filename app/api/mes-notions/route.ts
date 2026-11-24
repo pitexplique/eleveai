@@ -55,6 +55,32 @@ export async function GET(req: Request) {
     }
   }
 
+  // ⭐ 24/11/2026 — « CONTINUER » DE LA FENÊTRE DE BIENVENUE : la série où
+  // l'élève en était à sa dernière séance (la « current », sinon la première
+  // « à retravailler » de la notion, sinon la dernière travaillée). Sans elle,
+  // le coach repartait de la série 1, niveau 1, après un clic « Commencer ».
+  let reprise: { cle: string; microId: string } | null = null;
+  const derniereSeance = (data ?? []).find((s) => s.notion_id && (s.matiere ?? "maths") === "maths");
+  if (derniereSeance) {
+    const det = (derniereSeance.details ?? {}) as {
+      microStatuses?: Record<string, string>;
+      microScores?: Record<string, Score>;
+    };
+    let ordreNotion: string[] = [];
+    try {
+      ordreNotion = getNotionMicroMap(derniereSeance.classe as never, "maths")[derniereSeance.notion_id] ?? [];
+    } catch {
+      /* classe inconnue du catalogue */
+    }
+    const statut = det.microStatuses ?? {};
+    const tentes = ordreNotion.filter((m) => Number(det.microScores?.[m]?.attempts) > 0);
+    const microId =
+      ordreNotion.find((m) => statut[m] === "current") ??
+      ordreNotion.find((m) => statut[m] === "retry") ??
+      tentes[tentes.length - 1];
+    if (microId) reprise = { cle: `${derniereSeance.classe}|${derniereSeance.notion_id}`, microId };
+  }
+
   const notions = new Map<
     string,
     { classe: string; notion: string; derniere: string; scores: Record<string, { j: number; t: number }> }
@@ -121,8 +147,8 @@ export async function GET(req: Request) {
   // ⛔ Le vrai détail n'est pas envoyé : seulement le nombre de notions, pour
   //    dessiner l'aperçu flou. Les titres restent (tuile « Dernier Coach »).
   if (await tableauDeBordLimite(admin, session)) {
-    return NextResponse.json({ ok: true, notions: [], titres, floute: true, nbNotions: resultat.length });
+    return NextResponse.json({ ok: true, notions: [], titres, reprise, floute: true, nbNotions: resultat.length });
   }
 
-  return NextResponse.json({ ok: true, notions: resultat, titres });
+  return NextResponse.json({ ok: true, notions: resultat, titres, reprise });
 }
