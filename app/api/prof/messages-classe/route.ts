@@ -121,7 +121,7 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
-  return NextResponse.json({ ok: true, message: { ...data, lus: 0 } });
+  return NextResponse.json({ ok: true, message: { ...(data as unknown as Record<string, unknown>), lus: 0 } });
 }
 
 export async function DELETE(req: Request) {
