@@ -1,0 +1,17 @@
+{
+  "00-garde": "Calculer un taux d'évolution. De combien de pour cent une valeur a-t-elle changé ?",
+  "01-situation": "Le taux du Livret A était de 3 %. Le 1er février 2025, il passe à 2,4 %. Il perd 0,6 point. Mais en pourcentage ? Une conseillère bancaire, un journaliste, une économiste doivent le dire en une phrase.",
+  "02-question-du-jour": "De combien de pour cent le taux a-t-il baissé ?",
+  "03-formule": "La formule : arrivée moins départ, divisé par départ. 2,4 moins 3, égale moins 0,6. Moins 0,6 divisé par 3, égale moins 0,2. Soit moins 20 %.",
+  "04-coefficient": "Autre chemin : le coefficient. Arrivée divisée par départ : 2,4 divisé par 3, égale 0,8. Fois 0,8, c'est 80 % : il manque 20 %. Moins 20 %.",
+  "05-hausse": "Avec une hausse. Une boulangerie vend 400 baguettes par jour, puis 460. 460 moins 400, égale 60. 60 divisé par 400, égale 0,15 : plus 15 %.",
+  "06-question": "Question ! Un prix passe de 50 € à 60 €. Le taux d'évolution est : A : plus 10 %. B : plus 20 %. C : environ plus 17 %. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 60 moins 50, égale 10. 10 divisé par 50, égale 0,2 : plus 20 %. A confond 10 € et 10 %, et C divise par l'arrivée, 60.",
+  "07-piege": "Attention au piège ! On divise toujours par la valeur de départ. Et un taux d'évolution n'est pas un écart en points : de 3 % à 2,4 %, c'est moins 0,6 point, mais moins 20 %.",
+  "08-question": "Question ! Une ville passe de 80 000 à 60 000 habitants. Le taux d'évolution est : A : moins 25 %. B : moins 20 %. C : environ moins 33 %. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. 60 000 moins 80 000, égale moins 20 000. Divisé par 80 000 : moins 0,25, soit moins 25 %. B confond 20 000 et 20 %, et C divise par l'arrivée.",
+  "09-defi": "À toi de jouer ! Une salle de sport passe de 250 à 300 inscrits. Un forfait passe de 40 € à 30 €. Calcule les deux taux d'évolution. Mets pause, et cherche !",
+  "09b-correction": "50 divisé par 250, égale 0,2 : plus 20 %. Moins 10 divisé par 40, égale moins 0,25 : moins 25 %.",
+  "10-finale": "Ce que tu as appris. Le taux d'évolution, c'est arrivée moins départ, divisé par départ. Ou bien le coefficient, arrivée divisée par départ, moins 1. Positif, c'est une hausse ; négatif, une baisse.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

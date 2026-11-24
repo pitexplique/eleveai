@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Deux nombres, et tu retrouves toute une fonction affine. Tu me crois ?",
+  "01-image": "f de 2 égale 9, et f de 5 égale 18. Les images gagnent 9, les x gagnent 3 : a vaut 3. Puis 3 fois 2, plus b, égale 9 : b vaut 3. f de x égale 3 x plus 3. On vérifie : 15 plus 3, 18 !",
+  "01q-question": "Question ! f de 0 égale 4, et f de 1 égale 6. Quelle est l'expression de f ? A : 4 x plus 6. B : 2 x plus 4. C : 6 x plus 4. Mets pause, et choisis !",
+  "01r-reponse": "Réponse B : f de 0, c'est b : 4. De 0 à 1, f gagne 2 : a vaut 2.",
+  "02-question": "À toi. f de 1 égale 2, et f de 4 égale moins 7. Quelle est l'expression de f ? Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

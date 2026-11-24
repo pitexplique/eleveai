@@ -14,6 +14,8 @@ export const dynamic = "force-dynamic";
 
 type Score = { attempts?: number; success?: number };
 
+const MICRO_EXERCICES = "_fiches_exercices";
+
 export async function GET(req: Request) {
   const auth = req.headers.get("authorization") ?? "";
   const token = auth.startsWith("Bearer ") ? auth.slice(7) : "";
@@ -29,7 +31,7 @@ export async function GET(req: Request) {
 
   const { data, error } = await admin
     .from("resultats_tutor")
-    .select("classe, matiere, notion_id, details, created_at")
+    .select("classe, matiere, notion_id, bonnes_reponses, nb_tentatives, details, created_at")
     .eq("code_etablissement", session.code_etablissement)
     .eq("code_utilisateur", session.code_utilisateur)
     .order("created_at", { ascending: false })
@@ -73,6 +75,16 @@ export async function GET(req: Request) {
       cumul.t += t;
       cumul.j += Number(sc?.success) || 0;
     }
+    // ⭐ 24/11/2026 — LES FICHES D'EXERCICES INTERACTIVES n'ont pas de micros :
+    // leurs réponses font pousser la plante sous une ligne à part.
+    if ((s.details as { source?: unknown } | null)?.source === "exercices") {
+      const t = Number(s.nb_tentatives) || 0;
+      if (t) {
+        const cumul = (n.scores[MICRO_EXERCICES] ??= { j: 0, t: 0 });
+        cumul.t += t;
+        cumul.j += Number(s.bonnes_reponses) || 0;
+      }
+    }
   }
 
   const resultat = [...notions.values()]
@@ -96,7 +108,11 @@ export async function GET(req: Request) {
         notionId: n.notion,
         derniere: n.derniere,
         nbMicrosNotion: micros.length,
-        micros: ordre.map((id) => ({ id, libelle: libelles[id] ?? id, ...n.scores[id] })),
+        micros: ordre.map((id) => ({
+          id,
+          libelle: id === MICRO_EXERCICES ? "📄 Fiches d’exercices" : (libelles[id] ?? id),
+          ...n.scores[id],
+        })),
       };
     })
     .filter((n) => n.micros.length > 0);

@@ -7,6 +7,12 @@ import { useEleve } from "@/context/EleveContext";
 import { hrefFiche, titreFiche } from "@/lib/fiches/registre";
 import { prenomFromNom } from "@/lib/prenom";
 import ArticlesARelire from "./ArticlesARelire";
+import MenuDuJour from "@/components/seances/MenuDuJour";
+import { SEANCES } from "@/lib/seances/seances";
+
+// 22/11/2026, Frédéric : « le menu du jour peut aller autre part, dashboard prof »
+// → il quitte l'accueil (refonte « comme un CEO ») et vit ici.
+const MENU_RESTAURANT = SEANCES.find((s) => s.id === "restaurant-6e-longueurs")?.menu;
 
 type CompositionFiche = {
   matiere: string;
@@ -495,6 +501,20 @@ export default function DashboardProfClient() {
                 </Link>
               </div>
             </div>
+
+            {/* LE MENU DU JOUR (séance restaurant, 6e longueurs), venu de l'accueil le 22/11. */}
+            {MENU_RESTAURANT && (
+              <div className="rounded-[2rem] bg-white p-6 text-slate-950 shadow-xl">
+                <div className="mx-auto max-w-2xl">
+                  <MenuDuJour menu={MENU_RESTAURANT} />
+                </div>
+                <p className="mt-4 text-center">
+                  <Link href="/seances#restaurant-6e-longueurs" className="font-black text-amber-900 underline">
+                    Voir la séance en entier
+                  </Link>
+                </p>
+              </div>
+            )}
 
             {/* L'ÉVALUATION NATIONALE — même raison que sur le tableau de bord
                 principal (11/08) : un professeur connecté atterrit ici, pas sur

@@ -1,4 +1,36 @@
 {
+ "0-premier-essai-trois-quarts": {
+  "fichier": "atelier-video-essais/0-premier-essai-trois-quarts.mp4",
+  "poster": null,
+  "vignette": "atelier-video-essais/0-premier-essai-trois-quarts.vignette.webp",
+  "titre": "0 premier essai trois quarts",
+  "short": false,
+  "youtube": null
+ },
+ "1-exemple-trois-quarts-sans-voix": {
+  "fichier": "atelier-video-essais/1-exemple-trois-quarts-sans-voix.mp4",
+  "poster": null,
+  "vignette": "atelier-video-essais/1-exemple-trois-quarts-sans-voix.vignette.webp",
+  "titre": "1 exemple trois quarts sans voix",
+  "short": false,
+  "youtube": null
+ },
+ "2-exemple-12-billes-sans-voix": {
+  "fichier": "atelier-video-essais/2-exemple-12-billes-sans-voix.mp4",
+  "poster": null,
+  "vignette": "atelier-video-essais/2-exemple-12-billes-sans-voix.vignette.webp",
+  "titre": "2 exemple 12 billes sans voix",
+  "short": false,
+  "youtube": null
+ },
+ "3-exemple-droite-graduee-sans-voix": {
+  "fichier": "atelier-video-essais/3-exemple-droite-graduee-sans-voix.mp4",
+  "poster": null,
+  "vignette": "atelier-video-essais/3-exemple-droite-graduee-sans-voix.vignette.webp",
+  "titre": "3 exemple droite graduee sans voix",
+  "short": false,
+  "youtube": null
+ },
  "3e-equation-resolution": {
   "fichier": "3e/maths/paysage/fr/equation-resolution/eleveai-maths-3e-equation-resolution.mp4",
   "poster": "3e/maths/paysage/fr/equation-resolution/eleveai-maths-3e-equation-resolution.png",
@@ -646,6 +678,14 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=3e&matiere=maths&notion=volume_solide&microId=volume_pyramide_cone_reduction&display=simple"
+ },
+ "4-essai-avec-voix-gtts": {
+  "fichier": "atelier-video-essais/4-essai-avec-voix-gtts.mp4",
+  "poster": null,
+  "vignette": "atelier-video-essais/4-essai-avec-voix-gtts.vignette.webp",
+  "titre": "4 essai avec voix gtts",
+  "short": false,
+  "youtube": null
  },
  "4e-aire-defi": {
   "fichier": "4e/maths/aire/30-aire-defi/eleveai-maths-4e-aire-defi.mp4",
@@ -3310,6 +3350,14 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=volume_solide&microId=volume_pyramide&display=simple"
+ },
+ "5-version2-voix-eleve-puis-voix-generee": {
+  "fichier": "atelier-video-essais/5-version2-voix-eleve-puis-voix-generee.mp4",
+  "poster": null,
+  "vignette": "atelier-video-essais/5-version2-voix-eleve-puis-voix-generee.vignette.webp",
+  "titre": "5 version2 voix eleve puis voix generee",
+  "short": false,
+  "youtube": null
  },
  "5e-aire-composer": {
   "fichier": "5e/maths/aire/04-composer/eleveai-maths-5e-aire-composer.mp4",
@@ -18176,6 +18224,645 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=nombre_entier&microId=entier_multiple&display=simple"
+ },
+ "4e-identites-choisir": {
+  "fichier": "4e/maths/identites/04-choisir/eleveai-maths-4e-identites-choisir.mp4",
+  "poster": "4e/maths/identites/04-choisir/eleveai-maths-4e-identites-choisir.png",
+  "vignette": "4e/maths/identites/04-choisir/eleveai-maths-4e-identites-choisir.vignette.webp",
+  "titre": "Identité ou double distributivité ? — Identités remarquables — épisode 4 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_choisir&display=simple"
+ },
+ "4e-identites-choisir-short": {
+  "fichier": "4e/maths/identites/04-choisir/eleveai-maths-4e-identites-choisir-short.mp4",
+  "poster": "4e/maths/identites/04-choisir/eleveai-maths-4e-identites-choisir-short.png",
+  "vignette": "4e/maths/identites/04-choisir/eleveai-maths-4e-identites-choisir-short.vignette.webp",
+  "titre": "(x + 6)(x − 6) : 4 produits ? Il y a plus rapide ⚡ — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_choisir&display=simple"
+ },
+ "4e-identites-defi": {
+  "fichier": "4e/maths/identites/05-defi/eleveai-maths-4e-identites-defi.mp4",
+  "poster": "4e/maths/identites/05-defi/eleveai-maths-4e-identites-defi.png",
+  "vignette": "4e/maths/identites/05-defi/eleveai-maths-4e-identites-defi.vignette.webp",
+  "titre": "(x + 5)² = x² + 25 ? Faux ! — Identités remarquables — épisode 5 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_defi&display=simple"
+ },
+ "4e-identites-defi-short": {
+  "fichier": "4e/maths/identites/05-defi/eleveai-maths-4e-identites-defi-short.mp4",
+  "poster": "4e/maths/identites/05-defi/eleveai-maths-4e-identites-defi-short.png",
+  "vignette": "4e/maths/identites/05-defi/eleveai-maths-4e-identites-defi-short.vignette.webp",
+  "titre": "(2 + 8)² = 2² + 8² ? Faux ! Vérifions 🔍 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_defi&display=simple"
+ },
+ "4e-identites-developper": {
+  "fichier": "4e/maths/identites/03-developper/eleveai-maths-4e-identites-developper.mp4",
+  "poster": "4e/maths/identites/03-developper/eleveai-maths-4e-identites-developper.png",
+  "vignette": "4e/maths/identites/03-developper/eleveai-maths-4e-identites-developper.vignette.webp",
+  "titre": "Développer (a + b)² en une ligne — Identités remarquables — épisode 3 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_developper&display=simple"
+ },
+ "4e-identites-developper-short": {
+  "fichier": "4e/maths/identites/03-developper/eleveai-maths-4e-identites-developper-short.mp4",
+  "poster": "4e/maths/identites/03-developper/eleveai-maths-4e-identites-developper-short.png",
+  "vignette": "4e/maths/identites/03-developper/eleveai-maths-4e-identites-developper-short.vignette.webp",
+  "titre": "(2x + 3)² = 2x² + … ? Faux ! Le carré piégé 🔍 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_developper&display=simple"
+ },
+ "4e-identites-lier": {
+  "fichier": "4e/maths/identites/01-lier/eleveai-maths-4e-identites-lier.mp4",
+  "poster": "4e/maths/identites/01-lier/eleveai-maths-4e-identites-lier.png",
+  "vignette": "4e/maths/identites/01-lier/eleveai-maths-4e-identites-lier.vignette.webp",
+  "titre": "(x + 4)² : d'où vient la formule ? — Identités remarquables — épisode 1 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_lier_distributivite&display=simple"
+ },
+ "4e-identites-lier-short": {
+  "fichier": "4e/maths/identites/01-lier/eleveai-maths-4e-identites-lier-short.mp4",
+  "poster": "4e/maths/identites/01-lier/eleveai-maths-4e-identites-lier-short.png",
+  "vignette": "4e/maths/identites/01-lier/eleveai-maths-4e-identites-lier-short.vignette.webp",
+  "titre": "(x + 5)² = x² + 25 ? Faux ! Il manque deux bandes 🔍 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_lier_distributivite&display=simple"
+ },
+ "4e-identites-reconnaitre": {
+  "fichier": "4e/maths/identites/02-reconnaitre/eleveai-maths-4e-identites-reconnaitre.mp4",
+  "poster": "4e/maths/identites/02-reconnaitre/eleveai-maths-4e-identites-reconnaitre.png",
+  "vignette": "4e/maths/identites/02-reconnaitre/eleveai-maths-4e-identites-reconnaitre.vignette.webp",
+  "titre": "49 × 51 de tête : les 3 formes — Identités remarquables — épisode 2 · Maths 4e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_reconnaitre&display=simple"
+ },
+ "4e-identites-reconnaitre-short": {
+  "fichier": "4e/maths/identites/02-reconnaitre/eleveai-maths-4e-identites-reconnaitre-short.mp4",
+  "poster": "4e/maths/identites/02-reconnaitre/eleveai-maths-4e-identites-reconnaitre-short.png",
+  "vignette": "4e/maths/identites/02-reconnaitre/eleveai-maths-4e-identites-reconnaitre-short.vignette.webp",
+  "titre": "49 × 51 de tête en 3 secondes ? Vrai ! Le secret 🧠 — 4e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=4e&matiere=maths&notion=litteral_identite_remarquable&microId=litteral_identite_reconnaitre&display=simple"
+ },
+ "3e-identites-factoriser": {
+  "fichier": "3e/maths/expression-litterale/07-factoriser-identite/eleveai-maths-3e-identites-factoriser.mp4",
+  "poster": "3e/maths/expression-litterale/07-factoriser-identite/eleveai-maths-3e-identites-factoriser.png",
+  "vignette": "3e/maths/expression-litterale/07-factoriser-identite/eleveai-maths-3e-identites-factoriser.vignette.webp",
+  "titre": "x² − 9 = (x − 3)(x + 3) : factoriser avec une identité — épisode 7 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=litteral_calcul&microId=litteral_identite&display=simple"
+ },
+ "3e-identites-factoriser-short": {
+  "fichier": "3e/maths/expression-litterale/07-factoriser-identite/eleveai-maths-3e-identites-factoriser-short.mp4",
+  "poster": "3e/maths/expression-litterale/07-factoriser-identite/eleveai-maths-3e-identites-factoriser-short.png",
+  "vignette": "3e/maths/expression-litterale/07-factoriser-identite/eleveai-maths-3e-identites-factoriser-short.vignette.webp",
+  "titre": "Un carré troué devient un rectangle ? x² − 9 🔍 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=litteral_calcul&microId=litteral_identite&display=simple"
+ },
+ "3e-identites-resoudre": {
+  "fichier": "3e/maths/expression-litterale/08-resoudre-identite/eleveai-maths-3e-identites-resoudre.mp4",
+  "poster": "3e/maths/expression-litterale/08-resoudre-identite/eleveai-maths-3e-identites-resoudre.png",
+  "vignette": "3e/maths/expression-litterale/08-resoudre-identite/eleveai-maths-3e-identites-resoudre.vignette.webp",
+  "titre": "(x − 2)² = 25 : deux solutions ! Résoudre en factorisant — épisode 8 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=equation_resolution&microId=equation_carre_factoriser&display=simple"
+ },
+ "3e-identites-resoudre-short": {
+  "fichier": "3e/maths/expression-litterale/08-resoudre-identite/eleveai-maths-3e-identites-resoudre-short.mp4",
+  "poster": "3e/maths/expression-litterale/08-resoudre-identite/eleveai-maths-3e-identites-resoudre-short.png",
+  "vignette": "3e/maths/expression-litterale/08-resoudre-identite/eleveai-maths-3e-identites-resoudre-short.vignette.webp",
+  "titre": "(x − 2)² = 25 : tu trouves 7 ? Il en manque une 🔍 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=equation_resolution&microId=equation_carre_factoriser&display=simple"
+ },
+ "3e-affine-calcul-image": {
+  "fichier": "3e/maths/fonctions-affines/04-calcul-image/eleveai-maths-3e-affine-calcul-image.mp4",
+  "poster": "3e/maths/fonctions-affines/04-calcul-image/eleveai-maths-3e-affine-calcul-image.png",
+  "vignette": "3e/maths/fonctions-affines/04-calcul-image/eleveai-maths-3e-affine-calcul-image.vignette.webp",
+  "titre": "f(−2) = ? Calculer l'image d'un nombre par une fonction affine — épisode 4 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_calcul_image&display=simple"
+ },
+ "3e-affine-calcul-image-short": {
+  "fichier": "3e/maths/fonctions-affines/04-calcul-image/eleveai-maths-3e-affine-calcul-image-short.mp4",
+  "poster": "3e/maths/fonctions-affines/04-calcul-image/eleveai-maths-3e-affine-calcul-image-short.png",
+  "vignette": "3e/maths/fonctions-affines/04-calcul-image/eleveai-maths-3e-affine-calcul-image-short.vignette.webp",
+  "titre": "40 m sous l'eau : la pression 4 fois plus forte qu'à 10 m ? 🔍 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_calcul_image&display=simple"
+ },
+ "3e-affine-coeff-directeur": {
+  "fichier": "3e/maths/fonctions-affines/02-coeff-directeur/eleveai-maths-3e-affine-coeff-directeur.mp4",
+  "poster": "3e/maths/fonctions-affines/02-coeff-directeur/eleveai-maths-3e-affine-coeff-directeur.png",
+  "vignette": "3e/maths/fonctions-affines/02-coeff-directeur/eleveai-maths-3e-affine-coeff-directeur.vignette.webp",
+  "titre": "f(x) = 3x + 10 : que dit le 3 ? Le coefficient directeur — épisode 2 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_coeff_directeur&display=simple"
+ },
+ "3e-affine-coeff-directeur-short": {
+  "fichier": "3e/maths/fonctions-affines/02-coeff-directeur/eleveai-maths-3e-affine-coeff-directeur-short.mp4",
+  "poster": "3e/maths/fonctions-affines/02-coeff-directeur/eleveai-maths-3e-affine-coeff-directeur-short.png",
+  "vignette": "3e/maths/fonctions-affines/02-coeff-directeur/eleveai-maths-3e-affine-coeff-directeur-short.vignette.webp",
+  "titre": "Ta batterie perd 4 % par heure : où est le coefficient directeur ? 🔍 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_coeff_directeur&display=simple"
+ },
+ "3e-affine-defi": {
+  "fichier": "3e/maths/fonctions-affines/09-defi/eleveai-maths-3e-affine-defi.mp4",
+  "poster": "3e/maths/fonctions-affines/09-defi/eleveai-maths-3e-affine-defi.png",
+  "vignette": "3e/maths/fonctions-affines/09-defi/eleveai-maths-3e-affine-defi.vignette.webp",
+  "titre": "Deux cuves, une équation : défis fonctions affines, niveau brevet — épisode 9 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_defi&display=simple"
+ },
+ "3e-affine-defi-short": {
+  "fichier": "3e/maths/fonctions-affines/09-defi/eleveai-maths-3e-affine-defi-short.mp4",
+  "poster": "3e/maths/fonctions-affines/09-defi/eleveai-maths-3e-affine-defi-short.png",
+  "vignette": "3e/maths/fonctions-affines/09-defi/eleveai-maths-3e-affine-defi-short.vignette.webp",
+  "titre": "Pense à un nombre : je vais deviner ton résultat 🔍 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_defi&display=simple"
+ },
+ "3e-affine-defi-short-dessin-anime": {
+  "fichier": "3e/maths/fonctions-affines/dessin-anime/09-defi/eleveai-maths-3e-affine-defi-short-dessin-anime.mp4",
+  "poster": "3e/maths/fonctions-affines/dessin-anime/09-defi/eleveai-maths-3e-affine-defi-short-dessin-anime-miniature.png",
+  "vignette": "3e/maths/fonctions-affines/dessin-anime/09-defi/eleveai-maths-3e-affine-defi-short-dessin-anime-miniature.vignette.webp",
+  "titre": "Pense à un nombre : je devine ton résultat 🎩 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_defi&display=simple"
+ },
+ "3e-affine-expression": {
+  "fichier": "3e/maths/fonctions-affines/05-expression/eleveai-maths-3e-affine-expression.mp4",
+  "poster": "3e/maths/fonctions-affines/05-expression/eleveai-maths-3e-affine-expression.png",
+  "vignette": "3e/maths/fonctions-affines/05-expression/eleveai-maths-3e-affine-expression.vignette.webp",
+  "titre": "Deux mesures, une fonction : trouver l'expression f(x) = ax + b — épisode 5 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_expression&display=simple"
+ },
+ "3e-affine-expression-short": {
+  "fichier": "3e/maths/fonctions-affines/05-expression/eleveai-maths-3e-affine-expression-short.mp4",
+  "poster": "3e/maths/fonctions-affines/05-expression/eleveai-maths-3e-affine-expression-short.png",
+  "vignette": "3e/maths/fonctions-affines/05-expression/eleveai-maths-3e-affine-expression-short.vignette.webp",
+  "titre": "Deux nombres, et tu retrouves toute une fonction affine 🔍 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_expression&display=simple"
+ },
+ "3e-affine-graphique": {
+  "fichier": "3e/maths/fonctions-affines/06-graphique/eleveai-maths-3e-affine-graphique.mp4",
+  "poster": "3e/maths/fonctions-affines/06-graphique/eleveai-maths-3e-affine-graphique.png",
+  "vignette": "3e/maths/fonctions-affines/06-graphique/eleveai-maths-3e-affine-graphique.vignette.webp",
+  "titre": "Que nous dit une droite ? Lire une fonction affine sur un graphique — épisode 6 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_graphique&display=simple"
+ },
+ "3e-affine-graphique-short": {
+  "fichier": "3e/maths/fonctions-affines/06-graphique/eleveai-maths-3e-affine-graphique-short.mp4",
+  "poster": "3e/maths/fonctions-affines/06-graphique/eleveai-maths-3e-affine-graphique-short.png",
+  "vignette": "3e/maths/fonctions-affines/06-graphique/eleveai-maths-3e-affine-graphique-short.vignette.webp",
+  "titre": "Ce graphique sait quand ton forfait internet sera vide 🔍 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_graphique&display=simple"
+ },
+ "3e-affine-ordonnee-origine": {
+  "fichier": "3e/maths/fonctions-affines/03-ordonnee-origine/eleveai-maths-3e-affine-ordonnee-origine.mp4",
+  "poster": "3e/maths/fonctions-affines/03-ordonnee-origine/eleveai-maths-3e-affine-ordonnee-origine.png",
+  "vignette": "3e/maths/fonctions-affines/03-ordonnee-origine/eleveai-maths-3e-affine-ordonnee-origine.vignette.webp",
+  "titre": "f(0) = 300 € : l'ordonnée à l'origine, la valeur de départ — épisode 3 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_ordonnee_origine&display=simple"
+ },
+ "3e-affine-ordonnee-origine-short": {
+  "fichier": "3e/maths/fonctions-affines/03-ordonnee-origine/eleveai-maths-3e-affine-ordonnee-origine-short.mp4",
+  "poster": "3e/maths/fonctions-affines/03-ordonnee-origine/eleveai-maths-3e-affine-ordonnee-origine-short.png",
+  "vignette": "3e/maths/fonctions-affines/03-ordonnee-origine/eleveai-maths-3e-affine-ordonnee-origine-short.vignette.webp",
+  "titre": "20 € par mois : pourquoi la droite ne part pas de zéro ? 🔍 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_ordonnee_origine&display=simple"
+ },
+ "3e-affine-probleme": {
+  "fichier": "3e/maths/fonctions-affines/08-probleme/eleveai-maths-3e-affine-probleme.mp4",
+  "poster": "3e/maths/fonctions-affines/08-probleme/eleveai-maths-3e-affine-probleme.png",
+  "vignette": "3e/maths/fonctions-affines/08-probleme/eleveai-maths-3e-affine-probleme.vignette.webp",
+  "titre": "9 € la place ou une carte à 24 € ? Quel tarif choisir — épisode 8 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_probleme&display=simple"
+ },
+ "3e-affine-probleme-short": {
+  "fichier": "3e/maths/fonctions-affines/08-probleme/eleveai-maths-3e-affine-probleme-short.mp4",
+  "poster": "3e/maths/fonctions-affines/08-probleme/eleveai-maths-3e-affine-probleme-short.png",
+  "vignette": "3e/maths/fonctions-affines/08-probleme/eleveai-maths-3e-affine-probleme-short.vignette.webp",
+  "titre": "Trottinette : quelle appli est la moins chère ? Ça dépend de ton trajet ! 🔍 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_probleme&display=simple"
+ },
+ "3e-affine-reconnaitre": {
+  "fichier": "3e/maths/fonctions-affines/01-reconnaitre/eleveai-maths-3e-affine-reconnaitre.mp4",
+  "poster": "3e/maths/fonctions-affines/01-reconnaitre/eleveai-maths-3e-affine-reconnaitre.png",
+  "vignette": "3e/maths/fonctions-affines/01-reconnaitre/eleveai-maths-3e-affine-reconnaitre.vignette.webp",
+  "titre": "f(x) = 3 − 2x est-elle affine ? Reconnaître une fonction affine — épisode 1 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_reconnaitre&display=simple"
+ },
+ "3e-affine-reconnaitre-short": {
+  "fichier": "3e/maths/fonctions-affines/01-reconnaitre/eleveai-maths-3e-affine-reconnaitre-short.mp4",
+  "poster": "3e/maths/fonctions-affines/01-reconnaitre/eleveai-maths-3e-affine-reconnaitre-short.png",
+  "vignette": "3e/maths/fonctions-affines/01-reconnaitre/eleveai-maths-3e-affine-reconnaitre-short.vignette.webp",
+  "titre": "(x + 1)² − x² a l'air compliquée… et si elle était affine ? 🔍 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_reconnaitre&display=simple"
+ },
+ "3e-affine-tracer": {
+  "fichier": "3e/maths/fonctions-affines/07-tracer/eleveai-maths-3e-affine-tracer.mp4",
+  "poster": "3e/maths/fonctions-affines/07-tracer/eleveai-maths-3e-affine-tracer.png",
+  "vignette": "3e/maths/fonctions-affines/07-tracer/eleveai-maths-3e-affine-tracer.vignette.webp",
+  "titre": "Deux points suffisent : tracer la droite de f(x) = 20x + 30 — épisode 7 · Maths 3e",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_tracer&display=simple"
+ },
+ "3e-affine-tracer-short": {
+  "fichier": "3e/maths/fonctions-affines/07-tracer/eleveai-maths-3e-affine-tracer-short.mp4",
+  "poster": "3e/maths/fonctions-affines/07-tracer/eleveai-maths-3e-affine-tracer-short.png",
+  "vignette": "3e/maths/fonctions-affines/07-tracer/eleveai-maths-3e-affine-tracer-short.vignette.webp",
+  "titre": "Une droite sur toute ta feuille : combien de calculs ? Deux ! 🔍 — 3e #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_tracer&display=simple"
+ },
+ "premiere-prop-evo-additif": {
+  "fichier": "premiere/maths/proportionnalite/07-evo-additif/eleveai-maths-premiere-prop-evo-additif.mp4",
+  "poster": "premiere/maths/proportionnalite/07-evo-additif/eleveai-maths-premiere-prop-evo-additif.png",
+  "vignette": "premiere/maths/proportionnalite/07-evo-additif/eleveai-maths-premiere-prop-evo-additif.vignette.webp",
+  "titre": "Plus 2 %, c'est fois combien ? Le coefficient multiplicateur d'une hausse — épisode 7 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_additif_multiplicatif&display=simple"
+ },
+ "premiere-prop-evo-additif-short": {
+  "fichier": "premiere/maths/proportionnalite/07-evo-additif/eleveai-maths-premiere-prop-evo-additif-short.mp4",
+  "poster": "premiere/maths/proportionnalite/07-evo-additif/eleveai-maths-premiere-prop-evo-additif-short.png",
+  "vignette": "premiere/maths/proportionnalite/07-evo-additif/eleveai-maths-premiere-prop-evo-additif-short.vignette.webp",
+  "titre": "Plus 5 %, c'est fois 1,5 ? Le piège du coefficient multiplicateur 🔍 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_additif_multiplicatif&display=simple"
+ },
+ "premiere-prop-evo-calculer-taux": {
+  "fichier": "premiere/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-premiere-prop-evo-calculer-taux.mp4",
+  "poster": "premiere/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-premiere-prop-evo-calculer-taux.png",
+  "vignette": "premiere/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-premiere-prop-evo-calculer-taux.vignette.webp",
+  "titre": "Livret A : de 3 % à 2,4 %, c'est − 0,6 % ? Calculer un taux d'évolution — épisode 11 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_calculer_taux&display=simple"
+ },
+ "premiere-prop-evo-calculer-taux-short": {
+  "fichier": "premiere/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-premiere-prop-evo-calculer-taux-short.mp4",
+  "poster": "premiere/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-premiere-prop-evo-calculer-taux-short.png",
+  "vignette": "premiere/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-premiere-prop-evo-calculer-taux-short.vignette.webp",
+  "titre": "De 20 € à 25 € : le prix augmente de 5 % ? 🔍 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_calculer_taux&display=simple"
+ },
+ "premiere-prop-evo-compensation": {
+  "fichier": "premiere/maths/proportionnalite/14-evo-compensation/eleveai-maths-premiere-prop-evo-compensation.mp4",
+  "poster": "premiere/maths/proportionnalite/14-evo-compensation/eleveai-maths-premiere-prop-evo-compensation.png",
+  "vignette": "premiere/maths/proportionnalite/14-evo-compensation/eleveai-maths-premiere-prop-evo-compensation.vignette.webp",
+  "titre": "+ 20 % puis − 20 % : retour au prix ? Le piège de la compensation — épisode 14 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_piege_compensation&display=simple"
+ },
+ "premiere-prop-evo-compensation-short": {
+  "fichier": "premiere/maths/proportionnalite/14-evo-compensation/eleveai-maths-premiere-prop-evo-compensation-short.mp4",
+  "poster": "premiere/maths/proportionnalite/14-evo-compensation/eleveai-maths-premiere-prop-evo-compensation-short.png",
+  "vignette": "premiere/maths/proportionnalite/14-evo-compensation/eleveai-maths-premiere-prop-evo-compensation-short.vignette.webp",
+  "titre": "+ 50 %, puis − 50 % : on revient au départ ? 🔍 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_piege_compensation&display=simple"
+ },
+ "premiere-prop-evo-diminution": {
+  "fichier": "premiere/maths/proportionnalite/08-evo-diminution/eleveai-maths-premiere-prop-evo-diminution.mp4",
+  "poster": "premiere/maths/proportionnalite/08-evo-diminution/eleveai-maths-premiere-prop-evo-diminution.png",
+  "vignette": "premiere/maths/proportionnalite/08-evo-diminution/eleveai-maths-premiere-prop-evo-diminution.vignette.webp",
+  "titre": "Moins 30 %, c'est fois 0,3 ? Le coefficient d'une baisse — épisode 8 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_diminution&display=simple"
+ },
+ "premiere-prop-evo-diminution-short": {
+  "fichier": "premiere/maths/proportionnalite/08-evo-diminution/eleveai-maths-premiere-prop-evo-diminution-short.mp4",
+  "poster": "premiere/maths/proportionnalite/08-evo-diminution/eleveai-maths-premiere-prop-evo-diminution-short.png",
+  "vignette": "premiere/maths/proportionnalite/08-evo-diminution/eleveai-maths-premiere-prop-evo-diminution-short.vignette.webp",
+  "titre": "Moins 30 % sur un jean à 50 € : on fait fois 0,3 ? 🔍 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_diminution&display=simple"
+ },
+ "premiere-prop-evo-reciproque": {
+  "fichier": "premiere/maths/proportionnalite/13-evo-reciproque/eleveai-maths-premiere-prop-evo-reciproque.mp4",
+  "poster": "premiere/maths/proportionnalite/13-evo-reciproque/eleveai-maths-premiere-prop-evo-reciproque.png",
+  "vignette": "premiere/maths/proportionnalite/13-evo-reciproque/eleveai-maths-premiere-prop-evo-reciproque.vignette.webp",
+  "titre": "Après − 20 %, + 20 % suffit-il ? L'évolution réciproque — épisode 13 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_reciproque&display=simple"
+ },
+ "premiere-prop-evo-reciproque-short": {
+  "fichier": "premiere/maths/proportionnalite/13-evo-reciproque/eleveai-maths-premiere-prop-evo-reciproque-short.mp4",
+  "poster": "premiere/maths/proportionnalite/13-evo-reciproque/eleveai-maths-premiere-prop-evo-reciproque-short.png",
+  "vignette": "premiere/maths/proportionnalite/13-evo-reciproque/eleveai-maths-premiere-prop-evo-reciproque-short.vignette.webp",
+  "titre": "Ton score baisse de 20 % : + 20 % pour revenir ? 🔍 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_reciproque&display=simple"
+ },
+ "premiere-prop-evo-successives": {
+  "fichier": "premiere/maths/proportionnalite/12-evo-successives/eleveai-maths-premiere-prop-evo-successives.mp4",
+  "poster": "premiere/maths/proportionnalite/12-evo-successives/eleveai-maths-premiere-prop-evo-successives.png",
+  "vignette": "premiere/maths/proportionnalite/12-evo-successives/eleveai-maths-premiere-prop-evo-successives.vignette.webp",
+  "titre": "− 30 % puis − 20 % : − 50 % ? Les évolutions successives — épisode 12 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_successives&display=simple"
+ },
+ "premiere-prop-evo-successives-short": {
+  "fichier": "premiere/maths/proportionnalite/12-evo-successives/eleveai-maths-premiere-prop-evo-successives-short.mp4",
+  "poster": "premiere/maths/proportionnalite/12-evo-successives/eleveai-maths-premiere-prop-evo-successives-short.png",
+  "vignette": "premiere/maths/proportionnalite/12-evo-successives/eleveai-maths-premiere-prop-evo-successives-short.vignette.webp",
+  "titre": "− 50 %, puis encore − 50 % : c'est gratuit ? 🔍 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_taux_evolution&microId=auto_evo_successives&display=simple"
+ },
+ "premiere-prop-evo-valeur-finale": {
+  "fichier": "premiere/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-premiere-prop-evo-valeur-finale.mp4",
+  "poster": "premiere/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-premiere-prop-evo-valeur-finale.png",
+  "vignette": "premiere/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-premiere-prop-evo-valeur-finale.vignette.webp",
+  "titre": "12 000 abonnés, + 15 % : combien ? Calculer une valeur d'arrivée — épisode 9 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_valeur_finale&display=simple"
+ },
+ "premiere-prop-evo-valeur-finale-short": {
+  "fichier": "premiere/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-premiere-prop-evo-valeur-finale-short.mp4",
+  "poster": "premiere/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-premiere-prop-evo-valeur-finale-short.png",
+  "vignette": "premiere/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-premiere-prop-evo-valeur-finale-short.vignette.webp",
+  "titre": "Un billet à 40 €, + 25 % : il coûte 65 € ? 🔍 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_valeur_finale&display=simple"
+ },
+ "premiere-prop-evo-valeur-initiale": {
+  "fichier": "premiere/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-premiere-prop-evo-valeur-initiale.mp4",
+  "poster": "premiere/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-premiere-prop-evo-valeur-initiale.png",
+  "vignette": "premiere/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-premiere-prop-evo-valeur-initiale.vignette.webp",
+  "titre": "60 € TTC : le prix hors taxe est 48 € ? Retrouver une valeur de départ — épisode 10 · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_valeur_initiale&display=simple"
+ },
+ "premiere-prop-evo-valeur-initiale-short": {
+  "fichier": "premiere/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-premiere-prop-evo-valeur-initiale-short.mp4",
+  "poster": "premiere/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-premiere-prop-evo-valeur-initiale-short.png",
+  "vignette": "premiere/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-premiere-prop-evo-valeur-initiale-short.vignette.webp",
+  "titre": "Avec 20 % de TVA, 120 € TTC : hors taxe, 96 € ? 🔍 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_coefficient_multiplicateur&microId=auto_evo_valeur_initiale&display=simple"
+ },
+ "seconde-prop-evo-calculer-taux": {
+  "fichier": "seconde/maths/proportionnalite/03-evo-calculer-taux/eleveai-maths-seconde-prop-evo-calculer-taux.mp4",
+  "poster": "seconde/maths/proportionnalite/03-evo-calculer-taux/eleveai-maths-seconde-prop-evo-calculer-taux.png",
+  "vignette": "seconde/maths/proportionnalite/03-evo-calculer-taux/eleveai-maths-seconde-prop-evo-calculer-taux.vignette.webp",
+  "titre": "Livret A : de 3 % à 2,4 %, c'est − 0,6 % ? Calculer un taux d'évolution — épisode 3 · Maths 2de",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_taux_evolution&display=simple"
+ },
+ "seconde-prop-evo-calculer-taux-short": {
+  "fichier": "seconde/maths/proportionnalite/03-evo-calculer-taux/eleveai-maths-seconde-prop-evo-calculer-taux-short.mp4",
+  "poster": "seconde/maths/proportionnalite/03-evo-calculer-taux/eleveai-maths-seconde-prop-evo-calculer-taux-short.png",
+  "vignette": "seconde/maths/proportionnalite/03-evo-calculer-taux/eleveai-maths-seconde-prop-evo-calculer-taux-short.vignette.webp",
+  "titre": "De 20 € à 25 € : le prix augmente de 5 % ? 🔍 — 2de #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_taux_evolution&display=simple"
+ },
+ "seconde-prop-evo-reciproque": {
+  "fichier": "seconde/maths/proportionnalite/05-evo-reciproque/eleveai-maths-seconde-prop-evo-reciproque.mp4",
+  "poster": "seconde/maths/proportionnalite/05-evo-reciproque/eleveai-maths-seconde-prop-evo-reciproque.png",
+  "vignette": "seconde/maths/proportionnalite/05-evo-reciproque/eleveai-maths-seconde-prop-evo-reciproque.vignette.webp",
+  "titre": "Après − 20 %, + 20 % suffit-il ? L'évolution réciproque — épisode 5 · Maths 2de",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_evolution_reciproque&display=simple"
+ },
+ "seconde-prop-evo-reciproque-short": {
+  "fichier": "seconde/maths/proportionnalite/05-evo-reciproque/eleveai-maths-seconde-prop-evo-reciproque-short.mp4",
+  "poster": "seconde/maths/proportionnalite/05-evo-reciproque/eleveai-maths-seconde-prop-evo-reciproque-short.png",
+  "vignette": "seconde/maths/proportionnalite/05-evo-reciproque/eleveai-maths-seconde-prop-evo-reciproque-short.vignette.webp",
+  "titre": "Ton score baisse de 20 % : + 20 % pour revenir ? 🔍 — 2de #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_evolution_reciproque&display=simple"
+ },
+ "seconde-prop-evo-successives": {
+  "fichier": "seconde/maths/proportionnalite/04-evo-successives/eleveai-maths-seconde-prop-evo-successives.mp4",
+  "poster": "seconde/maths/proportionnalite/04-evo-successives/eleveai-maths-seconde-prop-evo-successives.png",
+  "vignette": "seconde/maths/proportionnalite/04-evo-successives/eleveai-maths-seconde-prop-evo-successives.vignette.webp",
+  "titre": "− 30 % puis − 20 % : − 50 % ? Les évolutions successives — épisode 4 · Maths 2de",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_evolutions_successives&display=simple"
+ },
+ "seconde-prop-evo-successives-short": {
+  "fichier": "seconde/maths/proportionnalite/04-evo-successives/eleveai-maths-seconde-prop-evo-successives-short.mp4",
+  "poster": "seconde/maths/proportionnalite/04-evo-successives/eleveai-maths-seconde-prop-evo-successives-short.png",
+  "vignette": "seconde/maths/proportionnalite/04-evo-successives/eleveai-maths-seconde-prop-evo-successives-short.vignette.webp",
+  "titre": "− 50 %, puis encore − 50 % : c'est gratuit ? 🔍 — 2de #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=seconde&matiere=maths&notion=information_chiffree_evolutions&microId=info_evolutions_successives&display=simple"
+ },
+ "stmg-prop-evo-additif": {
+  "fichier": "stmg/maths/proportionnalite/07-evo-additif/eleveai-maths-stmg-prop-evo-additif.mp4",
+  "poster": "stmg/maths/proportionnalite/07-evo-additif/eleveai-maths-stmg-prop-evo-additif.png",
+  "vignette": "stmg/maths/proportionnalite/07-evo-additif/eleveai-maths-stmg-prop-evo-additif.vignette.webp",
+  "titre": "Plus 2 %, c'est fois combien ? Le coefficient multiplicateur d'une hausse — épisode 7 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_additif_multiplicatif&display=simple"
+ },
+ "stmg-prop-evo-additif-short": {
+  "fichier": "stmg/maths/proportionnalite/07-evo-additif/eleveai-maths-stmg-prop-evo-additif-short.mp4",
+  "poster": "stmg/maths/proportionnalite/07-evo-additif/eleveai-maths-stmg-prop-evo-additif-short.png",
+  "vignette": "stmg/maths/proportionnalite/07-evo-additif/eleveai-maths-stmg-prop-evo-additif-short.vignette.webp",
+  "titre": "Plus 5 %, c'est fois 1,5 ? Le piège du coefficient multiplicateur 🔍 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_additif_multiplicatif&display=simple"
+ },
+ "stmg-prop-evo-calculer-taux": {
+  "fichier": "stmg/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-stmg-prop-evo-calculer-taux.mp4",
+  "poster": "stmg/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-stmg-prop-evo-calculer-taux.png",
+  "vignette": "stmg/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-stmg-prop-evo-calculer-taux.vignette.webp",
+  "titre": "Livret A : de 3 % à 2,4 %, c'est − 0,6 % ? Calculer un taux d'évolution — épisode 11 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_taux&microId=auto_evo_calculer_taux&display=simple"
+ },
+ "stmg-prop-evo-calculer-taux-short": {
+  "fichier": "stmg/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-stmg-prop-evo-calculer-taux-short.mp4",
+  "poster": "stmg/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-stmg-prop-evo-calculer-taux-short.png",
+  "vignette": "stmg/maths/proportionnalite/11-evo-calculer-taux/eleveai-maths-stmg-prop-evo-calculer-taux-short.vignette.webp",
+  "titre": "De 20 € à 25 € : le prix augmente de 5 % ? 🔍 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_taux&microId=auto_evo_calculer_taux&display=simple"
+ },
+ "stmg-prop-evo-compensation": {
+  "fichier": "stmg/maths/proportionnalite/14-evo-compensation/eleveai-maths-stmg-prop-evo-compensation.mp4",
+  "poster": "stmg/maths/proportionnalite/14-evo-compensation/eleveai-maths-stmg-prop-evo-compensation.png",
+  "vignette": "stmg/maths/proportionnalite/14-evo-compensation/eleveai-maths-stmg-prop-evo-compensation.vignette.webp",
+  "titre": "+ 20 % puis − 20 % : retour au prix ? Le piège de la compensation — épisode 14 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_piege_compensation&display=simple"
+ },
+ "stmg-prop-evo-compensation-short": {
+  "fichier": "stmg/maths/proportionnalite/14-evo-compensation/eleveai-maths-stmg-prop-evo-compensation-short.mp4",
+  "poster": "stmg/maths/proportionnalite/14-evo-compensation/eleveai-maths-stmg-prop-evo-compensation-short.png",
+  "vignette": "stmg/maths/proportionnalite/14-evo-compensation/eleveai-maths-stmg-prop-evo-compensation-short.vignette.webp",
+  "titre": "+ 50 %, puis − 50 % : on revient au départ ? 🔍 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_piege_compensation&display=simple"
+ },
+ "stmg-prop-evo-diminution": {
+  "fichier": "stmg/maths/proportionnalite/08-evo-diminution/eleveai-maths-stmg-prop-evo-diminution.mp4",
+  "poster": "stmg/maths/proportionnalite/08-evo-diminution/eleveai-maths-stmg-prop-evo-diminution.png",
+  "vignette": "stmg/maths/proportionnalite/08-evo-diminution/eleveai-maths-stmg-prop-evo-diminution.vignette.webp",
+  "titre": "Moins 30 %, c'est fois 0,3 ? Le coefficient d'une baisse — épisode 8 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_diminution&display=simple"
+ },
+ "stmg-prop-evo-diminution-short": {
+  "fichier": "stmg/maths/proportionnalite/08-evo-diminution/eleveai-maths-stmg-prop-evo-diminution-short.mp4",
+  "poster": "stmg/maths/proportionnalite/08-evo-diminution/eleveai-maths-stmg-prop-evo-diminution-short.png",
+  "vignette": "stmg/maths/proportionnalite/08-evo-diminution/eleveai-maths-stmg-prop-evo-diminution-short.vignette.webp",
+  "titre": "Moins 30 % sur un jean à 50 € : on fait fois 0,3 ? 🔍 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_diminution&display=simple"
+ },
+ "stmg-prop-evo-reciproque": {
+  "fichier": "stmg/maths/proportionnalite/13-evo-reciproque/eleveai-maths-stmg-prop-evo-reciproque.mp4",
+  "poster": "stmg/maths/proportionnalite/13-evo-reciproque/eleveai-maths-stmg-prop-evo-reciproque.png",
+  "vignette": "stmg/maths/proportionnalite/13-evo-reciproque/eleveai-maths-stmg-prop-evo-reciproque.vignette.webp",
+  "titre": "Après − 20 %, + 20 % suffit-il ? L'évolution réciproque — épisode 13 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_reciproque&display=simple"
+ },
+ "stmg-prop-evo-reciproque-short": {
+  "fichier": "stmg/maths/proportionnalite/13-evo-reciproque/eleveai-maths-stmg-prop-evo-reciproque-short.mp4",
+  "poster": "stmg/maths/proportionnalite/13-evo-reciproque/eleveai-maths-stmg-prop-evo-reciproque-short.png",
+  "vignette": "stmg/maths/proportionnalite/13-evo-reciproque/eleveai-maths-stmg-prop-evo-reciproque-short.vignette.webp",
+  "titre": "Ton score baisse de 20 % : + 20 % pour revenir ? 🔍 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_reciproque&display=simple"
+ },
+ "stmg-prop-evo-successives": {
+  "fichier": "stmg/maths/proportionnalite/12-evo-successives/eleveai-maths-stmg-prop-evo-successives.mp4",
+  "poster": "stmg/maths/proportionnalite/12-evo-successives/eleveai-maths-stmg-prop-evo-successives.png",
+  "vignette": "stmg/maths/proportionnalite/12-evo-successives/eleveai-maths-stmg-prop-evo-successives.vignette.webp",
+  "titre": "− 30 % puis − 20 % : − 50 % ? Les évolutions successives — épisode 12 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_successives&display=simple"
+ },
+ "stmg-prop-evo-successives-short": {
+  "fichier": "stmg/maths/proportionnalite/12-evo-successives/eleveai-maths-stmg-prop-evo-successives-short.mp4",
+  "poster": "stmg/maths/proportionnalite/12-evo-successives/eleveai-maths-stmg-prop-evo-successives-short.png",
+  "vignette": "stmg/maths/proportionnalite/12-evo-successives/eleveai-maths-stmg-prop-evo-successives-short.vignette.webp",
+  "titre": "− 50 %, puis encore − 50 % : c'est gratuit ? 🔍 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_enchainees&microId=auto_evo_successives&display=simple"
+ },
+ "stmg-prop-evo-valeur-finale": {
+  "fichier": "stmg/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-stmg-prop-evo-valeur-finale.mp4",
+  "poster": "stmg/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-stmg-prop-evo-valeur-finale.png",
+  "vignette": "stmg/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-stmg-prop-evo-valeur-finale.vignette.webp",
+  "titre": "12 000 abonnés, + 15 % : combien ? Calculer une valeur d'arrivée — épisode 9 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_valeur_finale&display=simple"
+ },
+ "stmg-prop-evo-valeur-finale-short": {
+  "fichier": "stmg/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-stmg-prop-evo-valeur-finale-short.mp4",
+  "poster": "stmg/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-stmg-prop-evo-valeur-finale-short.png",
+  "vignette": "stmg/maths/proportionnalite/09-evo-valeur-finale/eleveai-maths-stmg-prop-evo-valeur-finale-short.vignette.webp",
+  "titre": "Un billet à 40 €, + 25 % : il coûte 65 € ? 🔍 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_valeur_finale&display=simple"
+ },
+ "stmg-prop-evo-valeur-initiale": {
+  "fichier": "stmg/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-stmg-prop-evo-valeur-initiale.mp4",
+  "poster": "stmg/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-stmg-prop-evo-valeur-initiale.png",
+  "vignette": "stmg/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-stmg-prop-evo-valeur-initiale.vignette.webp",
+  "titre": "60 € TTC : le prix hors taxe est 48 € ? Retrouver une valeur de départ — épisode 10 · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_valeur_initiale&display=simple"
+ },
+ "stmg-prop-evo-valeur-initiale-short": {
+  "fichier": "stmg/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-stmg-prop-evo-valeur-initiale-short.mp4",
+  "poster": "stmg/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-stmg-prop-evo-valeur-initiale-short.png",
+  "vignette": "stmg/maths/proportionnalite/10-evo-valeur-initiale/eleveai-maths-stmg-prop-evo-valeur-initiale-short.vignette.webp",
+  "titre": "Avec 20 % de TVA, 120 € TTC : hors taxe, 96 € ? 🔍 — STMG #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_valeur_initiale&display=simple"
  },
  "terminale-espace-vecteurs": {
   "fichier": "terminale/maths/geometrie/espace-vecteurs/eleveai-maths-terminale-espace-vecteurs.mp4",

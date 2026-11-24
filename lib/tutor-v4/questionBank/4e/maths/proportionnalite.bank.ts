@@ -1252,16 +1252,21 @@ export function genTauxGlobal() {
           : `En deux temps, ${s.nom} subit une ${w1.nomEvol} de ${a} % puis une ${w2.nomEvol} de ${b} %. Au total, de combien a-t-${s.genre === "m" ? "il" : "elle"} évolué ?`;
     const correct = libelleEvol(g);
     const cg = (100 + g) / 100;
+    // ⛔ 23/11 : plus de « baisse de 50 % » ni d'« aucune évolution » après deux hausses.
+    // Les pièges sont des erreurs d'élève : SOMMER les taux, MULTIPLIER les taux,
+    // lire le coefficient global comme un taux ; le sens contraire seulement si les
+    // deux évolutions vont en sens contraires, « aucune » seulement si elles se « compensent ».
+    const sA = h1 ? a : -a;
+    const sB = h2 ? b : -b;
+    const produitTaux = (sA * sB) / 100;
+    const leurres = [libelleEvol(somme), libelleEvol(produitTaux === 0 ? somme + 10 : produitTaux), libelleEvol(g > 0 ? 100 + g : -(100 + g))];
+    if (h1 !== h2) leurres.push(libelleEvol(-g));
+    if (h1 !== h2 && a === b) leurres.push(libelleEvol(0));
+    leurres.push(libelleEvol(g + (g > 0 ? 10 : -10)));
     return {
       text,
       format: "qcm" as const,
-      choices: makeChoices(correct, [
-        libelleEvol(somme),
-        libelleEvol(-g),
-        libelleEvol(-somme),
-        libelleEvol(0),
-        libelleEvol(g + (g > 0 ? 10 : -10)),
-      ]),
+      choices: makeChoices(correct, leurres),
       expected: [correct],
       comparator: "mcq_exact" as const,
       explanation: expl(
@@ -1276,18 +1281,28 @@ export function genTauxGlobal() {
 }
 
 /** Après une évolution, quelle évolution fait revenir à la valeur de départ ? */
+// ⛔ 23/11 : plus de + 300 % ni de + 400 % (une forêt, une facture, des hérissons
+// ne quadruplent pas) ; au plus un doublement, ou une baisse de moitié.
 const RETOURS: { h: boolean; a: number; b: number }[] = [
   { h: true, a: 25, b: 20 },
   { h: true, a: 100, b: 50 },
-  { h: true, a: 300, b: 75 },
-  { h: true, a: 150, b: 60 },
-  { h: true, a: 400, b: 80 },
+  { h: true, a: 60, b: 37.5 },
   { h: false, a: 20, b: 25 },
   { h: false, a: 50, b: 100 },
-  { h: false, a: 75, b: 300 },
-  { h: false, a: 60, b: 150 },
-  { h: false, a: 80, b: 400 },
+  { h: false, a: 37.5, b: 60 },
 ];
+
+/** 1200 → « 1 200 » (espace insécable des milliers), pour le texte des défis. */
+function milliers(n: number) {
+  const [ent, dec] = String(Math.round(n * 100) / 100).split(".");
+  const e = ent.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return dec ? `${e},${dec}` : e;
+}
+
+/** La phrase d'état, avec les milliers espacés : « Un village compte 1 200 habitants ». */
+function etatM(s: SituationEvol, v: number) {
+  return s.etat(v).replace(String(v), milliers(v));
+}
 
 export function genRetour() {
   for (let essai = 0; essai < 300; essai++) {
@@ -1299,23 +1314,29 @@ export function genRetour() {
     const mid = (v * c1) / 100;
     const w1 = mots(r.h);
     const w2 = mots(!r.h);
-    const t = randomInt(0, 2);
+    const t = randomInt(0, 4);
+    const pron = s.genre === "m" ? "il" : "elle";
+    const [A, B, V, M] = [fr(r.a), fr(r.b), milliers(v), milliers(mid)];
     const text =
       t === 0
-        ? `${s.etat(v)}. ${cap(s.ce)} ${w1.verbe} de ${r.a} % et passe à ${mid} ${s.u}. De quel pourcentage doit-${s.genre === "m" ? "il" : "elle"} ${r.h ? "baisser" : "augmenter"} pour revenir à ${v} ${s.u} ?`
+        ? `${etatM(s, v)}. ${cap(s.ce)} ${w1.verbe} de ${A} % et passe à ${M} ${s.u}. De quel pourcentage doit-${pron} ${r.h ? "baisser" : "augmenter"} pour revenir à ${V} ${s.u} ?`
         : t === 1
-          ? `${s.etat(v)}. Après une ${w1.nomEvol} de ${r.a} %, quelle ${w2.nomEvol}, en pourcentage, ramène ${s.ce} à sa valeur de départ ?`
-          : `${s.etat(v)}, puis ${s.ce} ${w1.verbe} de ${r.a} %. Quel pourcentage ${w2.taux} faut-il ensuite pour retrouver exactement ${v} ${s.u} ?`;
+          ? `${etatM(s, v)}. Après une ${w1.nomEvol} de ${A} %, quelle ${w2.nomEvol}, en pourcentage, ramène ${s.ce} à sa valeur de départ ?`
+          : t === 2
+            ? `${etatM(s, v)}, puis ${s.ce} ${w1.verbe} de ${A} %. Quel pourcentage ${w2.taux} faut-il ensuite pour retrouver exactement ${V} ${s.u} ?`
+            : t === 3
+              ? `${cap(s.nom)} passe de ${V} à ${M} ${s.u}, soit une ${w1.nomEvol} de ${A} %. Quelle ${w2.nomEvol}, en %, ${s.genre === "m" ? "le" : "la"} ferait revenir à ${V} ${s.u} ?`
+              : `Après une ${w1.nomEvol} de ${A} %, ${s.nom} vaut ${M} ${s.u}. Pour retrouver sa valeur d’avant, de combien de % doit-${pron} ${r.h ? "baisser" : "augmenter"} ?`;
     return {
       text,
       format: "short" as const,
       expected: attendu(r.b, "%"),
       comparator: "number_equal" as const,
       explanation: expl(
-        `la ${w2.nomEvol} s’applique à la NOUVELLE valeur (${mid} ${s.u}), pas à ${v} ${s.u} : ce n’est donc pas ${r.a} %.`,
-        `on cherche le pourcentage ${w2.taux} entre ${mid} et ${v} : (variation ÷ ${mid}) × 100.`,
-        `variation = ${r.h ? `${mid} − ${v}` : `${v} − ${mid}`} = ${Math.abs(mid - v)} ; (${Math.abs(mid - v)} ÷ ${mid}) × 100 = ${r.b}. Vérification : ${fr(c1 / 100)} × ${fr((r.h ? 100 - r.b : 100 + r.b) / 100)} = 1.`,
-        `il faut une ${w2.nomEvol} de ${r.b} %.`,
+        `la ${w2.nomEvol} s’applique à la NOUVELLE valeur (${M} ${s.u}), pas à ${V} ${s.u} : ce n’est donc pas ${A} %.`,
+        `on cherche le pourcentage ${w2.taux} entre ${M} et ${V} : (variation ÷ ${M}) × 100.`,
+        `variation = ${r.h ? `${M} − ${V}` : `${V} − ${M}`} = ${milliers(Math.abs(mid - v))} ; (${milliers(Math.abs(mid - v))} ÷ ${M}) × 100 = ${B}. Vérification : ${frMillieme(c1 / 100)} × ${frMillieme((r.h ? 100 - r.b : 100 + r.b) / 100)} = 1.`,
+        `il faut une ${w2.nomEvol} de ${B} %.`,
       ),
     };
   }
@@ -1339,10 +1360,17 @@ export function genDepart() {
     const cg = (c1 * c2) / 10000;
     const w1 = mots(h1);
     const w2 = mots(h2);
+    const F = milliers(fin);
+    const pronD = s.genre === "m" ? "il" : "elle";
+    const tD = randomInt(0, 3);
     const text =
-      Math.random() < 0.5
-        ? `Après une ${w1.nomEvol} de ${a} % puis une ${w2.nomEvol} de ${b} %, ${s.nom} vaut ${fin} ${s.u}. Quelle était sa valeur de départ ?`
-        : `${cap(s.nom)} a d’abord ${w1.participe} de ${a} %, puis ${w2.participe} de ${b} %. ${s.genre === "m" ? "Il" : "Elle"} vaut maintenant ${fin} ${s.u}. Combien valait-${s.genre === "m" ? "il" : "elle"} au départ ?`;
+      tD === 2
+        ? `${cap(s.nom)} vaut ${F} ${s.u} après deux évolutions : une ${w1.nomEvol} de ${a} %, puis une ${w2.nomEvol} de ${b} %. Combien valait-${pronD} avant ?`
+        : tD === 3
+          ? `Une ${w1.nomEvol} de ${a} %, suivie d’une ${w2.nomEvol} de ${b} %, amène ${s.nom} à ${F} ${s.u}. Retrouve sa valeur initiale.`
+          : tD === 0
+        ? `Après une ${w1.nomEvol} de ${a} % puis une ${w2.nomEvol} de ${b} %, ${s.nom} vaut ${F} ${s.u}. Quelle était sa valeur de départ ?`
+        : `${cap(s.nom)} a d’abord ${w1.participe} de ${a} %, puis ${w2.participe} de ${b} %. ${s.genre === "m" ? "Il" : "Elle"} vaut maintenant ${F} ${s.u}. Combien valait-${s.genre === "m" ? "il" : "elle"} au départ ?`;
     return {
       text,
       format: "short" as const,
@@ -1351,8 +1379,8 @@ export function genDepart() {
       explanation: expl(
         "départ × coefficient global = arrivée ; pour remonter, on DIVISE par le coefficient global (enlever les pourcentages ne marche pas).",
         `coefficient global = ${fr(c1 / 100)} × ${fr(c2 / 100)} = ${frMillieme(cg)}.`,
-        `${fin} ÷ ${frMillieme(cg)} = ${v}. Vérification : ${v} × ${fr(c1 / 100)} = ${fr((v * c1) / 100)}, puis × ${fr(c2 / 100)} = ${fin}.`,
-        `la valeur de départ était ${v} ${s.u}.`,
+        `${F} ÷ ${frMillieme(cg)} = ${milliers(v)}. Vérification : ${milliers(v)} × ${fr(c1 / 100)} = ${milliers((v * c1) / 100)}, puis × ${fr(c2 / 100)} = ${F}.`,
+        `la valeur de départ était ${milliers(v)} ${s.u}.`,
       ),
     };
   }

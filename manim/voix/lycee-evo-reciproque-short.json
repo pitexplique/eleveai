@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Ton score baisse de 20 %. Pour revenir, il faut plus 20 % ?",
+  "01-image": "Non ! 100 moins 20 %, égale 80. 80 plus 20 %, égale 96. Il faut plus 25 % : 80 fois 1,25, égale 100.",
+  "02-question": "Question ! Après moins 10 %, pour revenir, il faut environ : A : plus 10 %. B : plus 11,1 %. C : plus 90 %. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B. 1 divisé par 0,9, égale environ 1,111 : plus 11,1 %.",
+  "03-commentaire": "À toi : après moins 75 %, quelle hausse pour revenir ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

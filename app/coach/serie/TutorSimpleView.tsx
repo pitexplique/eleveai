@@ -1,6 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type ReactNode,
+} from "react";
 import AudioBoost from "@/components/AudioBoost";
 import { MarkdownMath } from "@/components/MarkdownMath";
 import {
@@ -63,6 +70,8 @@ type TutorSimpleViewProps = {
   onInputKeyDown: (event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   // Ligne discrète sur l'enregistrement automatique (comme en mode complet).
   etatEnregistrement: ReactNode;
+  /** 📝 / 🏋️ en haut, dans la barre de mission (24/11/2026). */
+  choixSeance?: ReactNode;
 };
 
 const CYCLE_2_COACH = new Set(["cp", "ce1", "ce2"]);
@@ -123,6 +132,7 @@ export default function TutorSimpleView({
   onQcmClick,
   onInputKeyDown,
   etatEnregistrement,
+  choixSeance,
 }: TutorSimpleViewProps) {
 
   // Tailles agrandies en « affichage classe » (projection sans zoom).
@@ -153,6 +163,64 @@ export default function TutorSimpleView({
   useEffect(() => {
     setSpeechOk(typeof window !== "undefined" && "speechSynthesis" in window);
   }, []);
+
+  /* ⛔ 23/11/2026 — LES MOTS NE DÉBORDENT PLUS DES CHOIX DU QCM.
+     Frédéric, capture à l'appui : « le périmètre » sortait de sa case, « ce
+     type d'affichage, les mots débordent souvent », du CP au collège. La règle
+     d'avant comptait les lettres (≤ 14 → 4 par ligne) : elle ignorait la
+     place réelle (lettre A, marges, 🔊 à côté, police Andika plus large au
+     cycle 2, affichage classe en très gros). Désormais on MESURE : on pose le
+     maximum de colonnes, et tant qu'un mot dépasse de sa case on passe à 2,
+     puis à 1. On remesure quand la largeur change, quand la police arrive et
+     quand les 🔊 apparaissent. En une colonne seulement, un mot trop long
+     pour l'écran se coupe (avec un tiret) plutôt que de sortir. */
+  const choixQcm =
+    currentQuestion?.format === "qcm" ? (currentQuestion.choices ?? []) : [];
+  const cleChoix = choixQcm.join("");
+  const colonnesMax = !choixQcm.every((c) => c.length <= 14)
+    ? 1
+    : choixQcm.length >= 4
+      ? 4
+      : Math.max(1, choixQcm.length);
+  const grilleChoixRef = useRef<HTMLDivElement | null>(null);
+  const [colonnesChoix, setColonnesChoix] = useState(colonnesMax);
+  useLayoutEffect(() => {
+    const grille = grilleChoixRef.current;
+    if (!grille) return;
+    const deborde = () =>
+      Array.from(grille.querySelectorAll<HTMLElement>("[data-choix], [data-choix-texte]")).some(
+        (el) => el.scrollWidth > el.clientWidth + 1,
+      );
+    const poser = (n: number) => {
+      grille.style.gridTemplateColumns = `repeat(${n}, minmax(0, 1fr))`;
+      grille.dataset.colonnes = String(n);
+    };
+    const ajuster = () => {
+      let n = colonnesMax;
+      poser(n);
+      while (n > 1 && deborde()) {
+        n = n > 2 ? 2 : 1;
+        poser(n);
+      }
+      setColonnesChoix(n);
+    };
+    ajuster();
+    let largeur = grille.clientWidth;
+    const observateur = new ResizeObserver(() => {
+      if (grille.clientWidth === largeur) return;
+      largeur = grille.clientWidth;
+      ajuster();
+    });
+    observateur.observe(grille);
+    let vivant = true;
+    document.fonts?.ready.then(() => {
+      if (vivant) ajuster();
+    });
+    return () => {
+      vivant = false;
+      observateur.disconnect();
+    };
+  }, [cleChoix, colonnesMax, classBoard, speechOk, wrongAnswerPanelOpen]);
 
   return (
     <main
@@ -300,6 +368,7 @@ export default function TutorSimpleView({
             <SimplePill>⭐ {starsLabel(currentStar)}</SimplePill>
             <SimplePill>🔥 Série {streak}</SimplePill>
           </div>
+          {choixSeance ? <div className="ml-auto">{choixSeance}</div> : null}
         </div>
 
         {remediationBanner}
@@ -402,17 +471,10 @@ export default function TutorSimpleView({
                        courts (un nombre, « 12 € », « un cube ») se posent côte à
                        côte : 2 par ligne au téléphone, tous sur une ligne dès
                        qu'il y a la place. Une phrase longue garde sa ligne. */
-                    className={
-                      currentQuestion.choices.every((c) => c.length <= 14)
-                        ? `grid grid-cols-2 gap-3 ${
-                            currentQuestion.choices.length === 3
-                              ? "sm:grid-cols-3"
-                              : currentQuestion.choices.length >= 4
-                                ? "sm:grid-cols-4"
-                                : ""
-                          }`
-                        : "grid gap-3"
-                    }
+                    ref={grilleChoixRef}
+                    className="group/choix grid gap-3"
+                    data-colonnes={colonnesChoix}
+                    style={{ gridTemplateColumns: `repeat(${colonnesChoix}, minmax(0, 1fr))` }}
                     role="group"
                     aria-label="Réponses possibles : utilise Tab pour les parcourir, Entrée pour choisir"
                   >
@@ -433,9 +495,10 @@ export default function TutorSimpleView({
                          Et chaque choix s'écoute seul (🔊 à sa droite), pour
                          réentendre une réponse sans relancer toute la question. */
                       return (
-                        <div key={`${choice}-${index}`} className="flex items-stretch gap-2">
+                        <div key={`${choice}-${index}`} className="flex min-w-0 items-stretch gap-2">
                           <button
                             type="button"
+                            data-choix=""
                             onClick={() => onQcmClick(choice)}
                             disabled={busy}
                             aria-label={`Réponse ${lettre} : ${choice}`}
@@ -453,7 +516,12 @@ export default function TutorSimpleView({
                               >
                                 {lettre}
                               </span>
-                              <MarkdownMath inline>{choice}</MarkdownMath>
+                              <span
+                                data-choix-texte=""
+                                className="min-w-0 group-data-[colonnes=1]/choix:hyphens-auto group-data-[colonnes=1]/choix:[overflow-wrap:anywhere]"
+                              >
+                                <MarkdownMath inline>{choice}</MarkdownMath>
+                              </span>
                             </span>
                             {enCours ? (
                               <span

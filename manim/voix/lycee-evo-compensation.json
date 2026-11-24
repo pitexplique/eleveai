@@ -1,0 +1,17 @@
+{
+  "00-garde": "Le piège de la compensation. Plus 20 %, puis moins 20 % : revient-on au départ ?",
+  "01-situation": "Un jeu vidéo coûte 50 €. Le jour de sa sortie, son prix monte de 20 %. Un mois plus tard, il baisse de 20 %. Le joueur pense qu'il est revenu à 50 €. Le trader, l'agente immobilière, le gérant d'un magasin connaissent ce piège par cœur.",
+  "02-question-du-jour": "Le jeu coûte-t-il de nouveau 50 € ?",
+  "03-calcul": "Suivons le prix. 50 fois 1,2, égale 60 €. Puis 60 fois 0,8, égale 48 €. Il manque 2 €.",
+  "04-pourquoi": "Pourquoi ? La baisse de 20 % porte sur 60 €, un prix plus grand que 50. Elle retire 12 €, alors que la hausse n'avait ajouté que 10 €.",
+  "05-coefficient": "Avec les coefficients : 1,2 fois 0,8, égale 0,96. Au total, moins 4 %. Une hausse et une baisse de même taux donnent toujours une baisse.",
+  "06-question": "Question ! Un prix baisse de 10 %, puis augmente de 10 %. Au total : A : il revient au départ. B : moins 1 %. C : plus 1 %. Mets pause, et choisis !",
+  "06b-reponse": "Réponse B. 0,9 fois 1,1, égale 0,99 : moins 1 %. L'ordre ne change rien : on perd toujours un peu.",
+  "07-grand": "Plus le taux est grand, plus le piège est grand. Plus 50 %, puis moins 50 % : 1,5 fois 0,5, égale 0,75. On perd un quart.",
+  "08-question": "Question ! Une action monte de 30 %, puis baisse de 30 %. Au total : A : 0 %. B : moins 30 %. C : moins 9 %. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. 1,3 fois 0,7, égale 0,91 : moins 9 %. A croit à la compensation, et B oublie la hausse.",
+  "09-defi": "À toi de jouer ! Un prix augmente de 40 %, puis baisse de 40 %. Quel taux au total ? Et après plus 40 %, quelle baisse ramènerait exactement au départ ? Mets pause, et cherche !",
+  "09b-correction": "1,4 fois 0,6, égale 0,84 : moins 16 %. Pour revenir : 1 divisé par 1,4, égale environ 0,714, soit environ moins 28,6 %.",
+  "10-finale": "Ce que tu as appris. Une hausse puis une baisse de même taux ne ramènent jamais au départ : on perd toujours. On multiplie les coefficients : plus t %, puis moins t %, c'est une baisse au total.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

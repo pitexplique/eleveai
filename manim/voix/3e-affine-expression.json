@@ -1,0 +1,15 @@
+{
+  "00-garde": "Trouver l'expression d'une fonction affine. Deux mesures suffisent-elles ?",
+  "01-technicienne": "Awa est technicienne en environnement. Elle suit la croissance d'un jeune baobab. À 2 ans, il mesure 70 centimètres. À 5 ans, 160 centimètres. Sa croissance est régulière : sa hauteur est une fonction affine de son âge. Mais laquelle ?",
+  "02-coefficient": "D'abord a. Entre 2 ans et 5 ans, 3 ans passent. Le baobab gagne 160 moins 70 : 90 centimètres. 90 divisé par 3 : a vaut 30. Il grandit de 30 centimètres par an.",
+  "03-ordonnee": "Puis b. f de x égale 30 x plus b. À 2 ans, il mesure 70 : 30 fois 2, plus b, égale 70. 60 plus b égale 70 : b vaut 10. Donc f de x égale 30 x plus 10. On vérifie à 5 ans : 150 plus 10, 160. C'est juste !",
+  "03q-question": "Question ! Une fonction affine a pour coefficient directeur 2, et f de 0 égale moins 3. Quelle est son expression ? A : 2 x moins 3. B : moins 3 x plus 2. C : 2 x plus 3. Mets pause, et choisis !",
+  "03r-reponse": "Réponse A : a vaut 2. Et f de 0, c'est b : moins 3. Donc 2 x moins 3.",
+  "04-phrase": "Parfois, une phrase suffit. Awa contrôle une citerne d'eau de pluie. Elle contient 500 litres, et en perd 20 par jour. a, c'est ce qui change chaque jour : moins 20. b, c'est le départ : 500. Après x jours : f de x égale moins 20 x plus 500.",
+  "05q-question": "Question ! f de 1 égale 5, et f de 3 égale 11. Quelle est l'expression de f ? A : 6 x moins 1. B : 3 x plus 5. C : 3 x plus 2. Mets pause, et choisis !",
+  "05r-reponse": "Réponse C : les images gagnent 6, les x gagnent 2. 6 divisé par 2 : a vaut 3. Puis 3 fois 1, plus b, égale 5 : b vaut 2. On vérifie : 3 fois 3, plus 2, 11.",
+  "06-defi": "À toi de jouer. Trouve l'expression de f. Un : f de moins 1 égale 7, et f de 2 égale moins 2. Deux : f est linéaire, et f de 4 égale 10. Mets pause, et cherche !",
+  "06b-correction": "Correction. Un : les images passent de 7 à moins 2, soit moins 9. Les x passent de moins 1 à 2, soit 3. a vaut moins 3. Puis moins 3 fois moins 1, plus b, égale 7 : 3 plus b égale 7, b vaut 4. f de x égale moins 3 x plus 4. Deux : linéaire, donc b vaut 0. 4 a égale 10 : a vaut 2,5. f de x égale 2,5 x.",
+  "07-finale": "Ce que tu as appris. Pour trouver a x plus b avec deux images : a, c'est l'écart des images, divisé par l'écart des x. Puis on remplace un point connu pour trouver b. Et on vérifie avec l'autre point.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

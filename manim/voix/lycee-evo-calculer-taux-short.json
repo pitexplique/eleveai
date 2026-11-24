@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Un prix passe de 20 € à 25 €. Il augmente de 5 % ?",
+  "01-image": "Non ! 5 € de plus, sur 20 €. 5 divisé par 20, égale 0,25 : plus 25 %.",
+  "02-question": "Question ! De 40 à 50 abonnés, c'est : A : plus 10 %. B : plus 20 %. C : plus 25 %. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C. 10 divisé par 40, égale 0,25 : plus 25 %.",
+  "03-commentaire": "À toi : de 50 à 40, quel taux d'évolution ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

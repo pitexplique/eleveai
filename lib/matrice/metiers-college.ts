@@ -305,10 +305,13 @@ export const METIERS_4E: Record<string, LienMetier[]> = {
     F("maitre-nageur", "prépare 3 séries de x + 4 longueurs, plus 5 : 3(x + 4) + 5 = 3x + 17.", V),
     M("cuisinier", "prévoit x crêpes et 2 compotes par table pour 4 tables : 4(x + 2) = 4x + 8.", V),
   ],
+  // 22/11/2026 : les 5 métiers de la série vidéo IDENTITÉS REMARQUABLES 4e (un par épisode, tous en vidéo).
   litteral_identite_remarquable: [
-    F("architecte", "agrandit une terrasse carrée de 2 m sur chaque côté : son aire devient (a + 2)²."),
-    M("comptable", "calcule 49 × 51 de tête : 50² − 1 = 2 499."),
-    M("paysagiste", "calcule l'aire de l'allée qui entoure un bassin carré."),
+    F("architecte", "agrandit une terrasse carrée de 4 m dans chaque sens : son aire devient (x + 4)² = x² + 8x + 16.", V),
+    M("comptable", "calcule 49 × 51 de tête : (50 − 1)(50 + 1) = 50² − 1 = 2 499.", V),
+    F("paysagiste", "calcule l'aire de l'allée de 1 m autour d'un bassin carré : (x + 2)² − x² = 4x + 4.", V),
+    F("styliste", "découpe une nappe carrée de côté x + 5 : (x + 5)² = x² + 10x + 25.", V),
+    F("ingenieur-ia", "apprend à un correcteur automatique à repérer l'erreur (x + 5)² = x² + 25.", V),
   ],
   litteral_factorisation: [
     F("logisticien", "regroupe ce qui se répète dans chaque camion : 5x + 10 = 5(x + 2) palettes.", V),
@@ -317,12 +320,16 @@ export const METIERS_4E: Record<string, LienMetier[]> = {
     F("paysagiste", "trouve la largeur commune aux deux parties d'une terrasse : 2x² + 6x = 2x(x + 3).", V),
     M("comptable", "écrit le prix de 8 tenues d'un club de foot comme un produit : 8x + 96 = 8(x + 12).", V),
     M("jardinier", "compte les plants de 9 jardinières d'un coup : 9x + 45 = 9(x + 5).", V),
+    // 22/11/2026 : série IDENTITÉS 3e, épisode 07 (la 3e renvoie ici pour litteral_calcul).
+    F("carreleur", "change une terrasse carrée trouée pour un arbre en rectangle : x² − 9 = (x − 3)(x + 3).", V),
   ],
   equation_resolution: [
     F("monteur", "trouve combien de plans de 8 s tiennent dans une bande-annonce de 2 minutes.", V),
     M("veterinaire", "retrouve la masse d'un chien quand il a donné 30 mg d'un produit dosé à 2 mg par kilo.", V),
     F("dj", "cherche le tempo qui fait tenir son morceau dans le temps voulu.", V),
     M("garde-forestier", "calcule combien d'arbres planter par an pour reboiser une parcelle à temps.", V),
+    // 22/11/2026 : série IDENTITÉS 3e, épisode 08 (la 3e renvoie ici pour equation_resolution).
+    M("photographe", "retrouve le côté d'une photo carrée de 9 dm² : x² = 9, donc x = 3 (et pas −3).", V),
   ],
   pythagore_theoreme: [
     M("charpentier", "vérifie un angle droit avec la règle 3-4-5 : 3² + 4² = 5²."),

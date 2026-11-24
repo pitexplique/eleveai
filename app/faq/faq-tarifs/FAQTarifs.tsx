@@ -25,15 +25,9 @@ import { VENTE } from "@/lib/legal/editeur";
 // contrat qu'il est interdit de signer — six jours après la décision du 29/08.
 // C'est pour ça qu'on la SUPPRIME au lieu de la réécrire en « non » : une
 // réponse qui reste ici reste dans le JSON-LD.
-import {
-  ANNUEL_AU_TARIF_MENSUEL,
-  ENSEIGNANT,
-  MOIS_OFFERTS,
-  PERIODE_ANNUELLE,
-  PRIX_ANNUEL,
-  PRIX_MENSUEL,
-  montant,
-} from "@/lib/tarifs";
+// ⭐ 22/11/2026 — RÉÉCRITE AU MODÈLE DU 22/11 (note modele-tarifaire-22-11).
+// Ancienne FAQ (« l'élève ne paie jamais », prof gratuit) : git show 664275b6:app/faq/faq-tarifs/FAQTarifs.tsx
+import { MENTION_TVA, OFFRE, OUVERTURE_SUIVI, PHRASE_A_VENIR, PHRASE_ESSAI, PHRASE_FAMILLE, PHRASE_PROF, montant } from "@/lib/tarifs";
 
 export default function FAQTarifs() {
   // La même phrase que sur /tarifs et dans le llms.txt : tant que Stripe
@@ -41,74 +35,48 @@ export default function FAQTarifs() {
   // offre achetable dont le paiement ne répond pas est pire que le silence.
   const etatVente = VENTE.ouverte
     ? "L'abonnement est ouvert."
-    : "L'abonnement n'ouvre pas encore : la vue du parent se construit en ce moment, et rien n'est encaissé tant qu'elle n'est pas prête. Le prix, lui, est ferme.";
+    : `Les abonnements ouvrent ${OUVERTURE_SUIVI}. Rien n'est encaissé avant.`;
 
   const faq = [
     {
-      q: "Mon enfant peut-il travailler sur EleveAI sans que je paie ?",
-      a: "Oui, entièrement et sans limite de temps. Le coach dans les cinq matières, les exercices corrigés, les parcours, le calcul rapide, les défis, les cahiers, les fiches de cours et les évaluations blanches ne se paient pas, et il n'y a aucune publicité. Il garde ses résultats. Rien de tout cela ne deviendra payant.",
+      q: "Mon enfant peut-il essayer sans que je paie ?",
+      a: `Oui. ${PHRASE_ESSAI}`,
     },
     {
-      q: "Alors qu'est-ce qui se paie ?",
-      a: "La fenêtre du parent. Votre enfant voit déjà sa progression ; ce que l'abonnement ouvre, c'est votre vue à vous — son bulletin, ce qu'il a travaillé cette semaine, son historique, et des recommandations qui vous disent quoi reprendre maintenant, notion par notion. Elles sont calculées sur des règles explicites et non par une IA opaque : chacune s'explique devant un professeur.",
+      q: `Qu'est-ce qui compte dans les ${OFFRE.questionsGratuitesParJour} questions ?`,
+      a: "Chaque réponse donnée au coach, aux exercices interactifs, au calcul rapide, aux automatismes ou à un QCM. C'est un seul compteur pour tout le site, chaque jour.",
+    },
+    {
+      q: "Combien coûte le compte Famille ?",
+      a: `${PHRASE_FAMILLE}. Un seul compte par courriel. Il ne contient pas d'aide par l'IA. ${MENTION_TVA}.`,
     },
     {
       q: "Par enfant ou par famille ?",
-      a: `Par famille, quel que soit le nombre d'enfants, sur une seule adresse courriel. Le frère ou la sœur d'à côté n'a pas à apprendre moins parce qu'il est le deuxième. Cela fait ${montant(
-        PRIX_MENSUEL,
-      )} par mois pour toute la maison.`,
-    },
-    /* ⛔ LE NOMBRE DE MOIS OFFERTS SE CALCULE. La grille du 01/09 annonçait
-       « deux mois offerts » ; deux mois de 2,50 € font 25 € par an, pas 19,90 €.
-       L'offre est plus généreuse que sa propre formule — voir `MOIS_OFFERTS`. */
-    {
-      q: "Mensuel ou annuel ?",
-      a: `Au mois, c'est ${montant(
-        PRIX_MENSUEL,
-      )}, sans engagement, résiliable quand vous voulez. À l'année, c'est ${montant(
-        PRIX_ANNUEL,
-      )} au lieu de ${montant(
-        ANNUEL_AU_TARIF_MENSUEL,
-      )} : ${MOIS_OFFERTS} mois offerts. L'abonnement annuel se renouvelle chaque année ; vous l'arrêtez quand vous voulez pour l'année suivante.`, // 19/11/2026 : jamais de pourcentage
+      a: `Par famille, quel que soit le nombre d'enfants. Le frère ou la sœur d'à côté ne coûte rien de plus : ${montant(OFFRE.famille)} par mois pour toute la maison.`,
     },
     {
       q: "Et si je suis professeur ?",
-      a: `Vous ne payez rien : le compte enseignant est gratuit, à titre personnel, et s'ouvre sur ${ENSEIGNANT.verification}. Tableau de bord de classe compris, sans demander l'autorisation de personne.`,
+      a: `${PHRASE_PROF}. Vos élèves entrent avec votre code quand vous êtes connecté, et pour un devoir daté. Le compte Prof n'utilise pas l'IA.`,
     },
-    /* ⭐ LA QUESTION QUI ÉVITE UN MALENTENDU EN SALLE DES PROFS, AJOUTÉE LE
-       01/09. « Gratuit pour les enseignants » se comprend spontanément
-       « gratuit pour ma classe » : un professeur de bonne foi l'annoncera à ses
-       familles, et ce sont elles qui découvriront le prix. Cette FAQ part dans
-       les résultats de Google, c'est-à-dire à l'endroit exact où la question se
-       pose — la réponse doit être celle qu'on donnerait en face. */
     {
       q: "Mon professeur a EleveAI : est-ce gratuit pour ma classe ?",
-      a: "Votre enfant l'a déjà gratuitement, et tous les élèves : le coach, les exercices, les parcours et les évaluations ne se paient pas, avec ou sans professeur. Ce que le compte gratuit de l'enseignant ne débloque pas, c'est l'abonnement des parents — votre fenêtre à vous, celle qui montre le bulletin et dit quoi reprendre. Elle reste au tarif normal.",
+      a: "En classe, oui : avec le code de son professeur, votre enfant n'est jamais compté, et il ne voit ni compteur ni offre. À la maison, il passe par le compte Famille : ce sont deux accès séparés.",
     },
     {
-      q: "Pourquoi est-ce à ce point moins cher qu'ailleurs ?",
-      a: "Parce que la structure n'est pas la même : aucun investisseur à rémunérer, aucun commercial, des exercices écrits ici plutôt qu'achetés, et un élève de plus qui ne coûte presque rien. L'IA démultiplie le travail, et l'enseignant vérifie — les deux moitiés ne se séparent jamais. C'est un professeur en exercice qui relit ses propres exercices.",
+      q: "Et l'aide de Ti Margo, par l'IA ?",
+      a: "Elle viendra dans une option Premium : Ti Margo donne un indice, puis un autre, sans donner la réponse. Pour les moins de 15 ans, c'est le parent qui l'active. Son prix sera annoncé plus tard.",
     },
     {
-      // ⛔ CETTE RÉPONSE PROMETTAIT « SI SON ÉTABLISSEMENT PARTICIPE, LA
-      // FAMILLE N'A RIEN À PAYER DU TOUT ». Aucun établissement ne participe et
-      // aucun ne le peut : la vente à un établissement est interdite depuis le
-      // 31/08 (contractuel en CDI). La phrase donnait au parent une raison
-      // d'attendre au lieu d'essayer — la pire des deux issues.
-      q: "Comment mon enfant se connecte-t-il ?",
-      a: "Il n'a même pas besoin de compte : le coach, les exercices, les parcours et les évaluations sont ouverts tout de suite, sans adresse e-mail à donner. Créer un compte élève ne se paie pas non plus — ça sert à garder sa progression d'une fois sur l'autre.",
+      q: "Une formule à l'année ? D'autres pays ?",
+      a: PHRASE_A_VENIR,
     },
     {
       q: "Puis-je arrêter quand je veux ?",
-      a: "Oui. Sans engagement, résiliable à tout moment depuis votre espace, et vous avez quatorze jours pour changer d'avis, remboursés, même si votre enfant a déjà tout utilisé. C'est écrit dans les conditions de vente.",
-    },
-    {
-      q: "Et si je ne peux pas payer ?",
-      a: "Alors vous ne payez pas, et personne ne le saura. Si l'enfant d'à côté ne paie pas, il apprend exactement la même chose : aucun élève n'a jamais eu à demander quoi que ce soit pour travailler ici.",
+      a: "Oui. Sans engagement, résiliable à tout moment depuis votre espace, et vous avez quatorze jours pour changer d'avis. C'est écrit dans les conditions de vente.",
     },
     {
       q: "Les données de mon enfant sont-elles protégées ?",
-      a: "Oui. On ne collecte que le strict nécessaire — de quoi l'identifier dans sa classe et suivre ses résultats. Aucune donnée sensible n'est stockée, et les recommandations sont calculées chez nous, sans appel à un service externe. Le détail est dans la politique de confidentialité.",
+      a: "Oui. On ne collecte que le strict nécessaire : de quoi l'identifier dans sa classe et suivre ses résultats. Aucune donnée sensible n'est stockée. Le détail est dans la politique de confidentialité.",
     },
   ];
 
@@ -154,9 +122,8 @@ export default function FAQTarifs() {
             citait le bon montant à côté du mauvais payeur, et c'est ce qui l'a
             rendue invisible à toutes les relectures. */}
         <p className="text-slate-300 text-sm leading-relaxed">
-          La vue du parent, c&apos;est {montant(PRIX_MENSUEL)} par mois pour toute
-          la maison, ou {montant(PRIX_ANNUEL)} {PERIODE_ANNUELLE}. Le professeur,
-          lui, ne paie rien. Et l&apos;élève ne paie jamais. {etatVente}
+          {OFFRE.questionsGratuitesParJour} questions offertes chaque jour. Puis {montant(OFFRE.famille)} par mois
+          pour toute la famille, ou {montant(OFFRE.prof)} par mois pour toutes vos classes. {etatVente}
         </p>
 
         <section className="space-y-4">

@@ -1,0 +1,17 @@
+{
+  "00-garde": "Les évolutions successives. Moins 30 %, puis moins 20 % : est-ce moins 50 % ?",
+  "01-situation": "En janvier, un magasin solde un blouson à moins 30 %. Fin janvier, deuxième démarque : moins 20 % sur le prix soldé. L'affiche promet : jusqu'à moins 50 %. Et les prix de la vie courante s'enchaînent aussi : en France, plus 5,2 % en 2022, puis plus 4,9 % en 2023.",
+  "02-question-du-jour": "Au total, le blouson a-t-il baissé de 50 % ?",
+  "03-chaine": "On enchaîne les coefficients. Moins 30 % : fois 0,7. Puis moins 20 % : fois 0,8. Deux baisses à la suite, c'est fois 0,7, puis fois 0,8.",
+  "04-calcul": "0,7 fois 0,8, égale 0,56. Il reste 56 % du prix : une baisse de 44 %, pas de 50 %. Pour un blouson à 100 € : 70 €, puis 56 €.",
+  "05-piege": "Attention au piège ! On n'additionne pas les taux. La deuxième baisse se calcule sur un prix déjà baissé, pas sur le prix de départ. Les coefficients se multiplient.",
+  "06-question": "Question ! Plus 10 %, puis plus 10 %. Au total : A : plus 21 %. B : plus 20 %. C : plus 100 %. Mets pause, et choisis !",
+  "06b-reponse": "Réponse A. 1,1 fois 1,1, égale 1,21 : plus 21 %. B additionne les taux, et C multiplie 10 par 10.",
+  "07-prix": "Les prix en France : plus 5,2 %, puis plus 4,9 %. 1,052 fois 1,049, égale environ 1,104. Plus 10,4 % en deux ans, un peu plus que 5,2 plus 4,9.",
+  "08-question": "Question ! Une action gagne 20 %, puis perd 10 %. Au total : A : plus 10 %. B : plus 2 %. C : plus 8 %. Mets pause, et choisis !",
+  "08b-reponse": "Réponse C. 1,2 fois 0,9, égale 1,08 : plus 8 %. A additionne les taux, et B multiplie les taux au lieu des coefficients.",
+  "09-defi": "À toi de jouer ! Un loyer augmente de 5 % deux années de suite : quel taux au total ? Et un prix baisse de 50 %, puis encore de 50 % : quel taux au total ? Mets pause, et cherche !",
+  "09b-correction": "1,05 fois 1,05, égale 1,1025 : plus 10,25 %. 0,5 fois 0,5, égale 0,25 : il reste 25 %, une baisse de 75 %.",
+  "10-finale": "Ce que tu as appris. Pour des évolutions successives, on multiplie les coefficients. Le coefficient total donne le taux total. On n'additionne jamais les taux.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

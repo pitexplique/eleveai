@@ -8,7 +8,7 @@ import Link from "next/link";
 // offre retirée le 29/08 et déclarée interdite le 31/08. ⚠️ Un prix cité dans
 // un article ne se corrige plus jamais — c'est la leçon du « autour de 5 € »
 // corrigé ici le 22/08, et elle vient de se répéter à l'identique.
-import { PERIODE_ANNUELLE, PRIX_ANNUEL, PRIX_MENSUEL, PRIX_PUBLICS, montant } from "@/lib/tarifs";
+import { OFFRE, montant } from "@/lib/tarifs";
 
 export default function PressePage() {
   return (
@@ -122,30 +122,14 @@ export default function PressePage() {
                       `lib/tarifs.ts`, comme sur /tarifs et dans le llms.txt. */}
                   <p className="text-sm font-semibold">“Quel est le modèle économique ?”</p>
                   <p className="mt-1 text-sm text-slate-200">
-                    L’élève ne paie jamais : le coach, les exercices, les parcours et
-                    les évaluations restent ouverts, sans publicité. Les
-                    enseignants non plus — leur compte est gratuit, à titre
-                    personnel, ouvert sur une adresse académique. Ce qui se paie,
-                    c’est de VOIR et de GARDER : la fenêtre du parent, par foyer,
-                    sur une seule adresse courriel, quel que soit le nombre
-                    d’enfants.{" "}
-                    {/* ⛔ LE MONTANT EST DÉBRANCHÉ LE 09/09/2026 (`PRIX_PUBLICS`).
-                        ⚠️ C'est une page de PRESSE : un journaliste recopie ce
-                        qu'il lit, et un tarif cité dans un article survit des
-                        années à la grille qui l'a produit. C'est le pire endroit
-                        du site où laisser un prix en cours de réexamen. */}
-                    {PRIX_PUBLICS ? (
-                      <>
-                        Elle est à {montant(PRIX_MENSUEL)} par mois sans
-                        engagement ou {montant(PRIX_ANNUEL)} {PERIODE_ANNUELLE}.{" "}
-                      </>
-                    ) : (
-                      <>
-                        La formule d’abonnement est en cours de réexamen : aucun
-                        tarif n’est publié à ce jour, et aucun montant trouvé
-                        ailleurs ne fait foi.{" "}
-                      </>
-                    )}
+                    {/* 22/11/2026 : au modèle du 22/11 (note modele-tarifaire-22-11). */}
+                    {OFFRE.questionsGratuitesParJour} questions offertes chaque jour pour
+                    essayer, sans publicité. Les fiches de cours, les énigmes à projeter
+                    et les PDF restent libres. Puis un abonnement : {montant(OFFRE.famille)} par
+                    mois pour une famille, quel que soit le nombre d’enfants, ou{" "}
+                    {montant(OFFRE.prof)} par mois pour un professeur et toutes ses
+                    classes. En classe, avec le code du professeur, les élèves ne
+                    sont jamais comptés.{" "}
                     Rien n’est vendu à un établissement ni à une collectivité.
                   </p>
                 </div>

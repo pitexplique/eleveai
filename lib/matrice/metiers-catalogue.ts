@@ -116,6 +116,7 @@ export const METIERS = {
   cyber: { f: "ingénieure en cybersécurité", m: "ingénieur en cybersécurité", centres: ["technologie-ia"], etudes: "bac+5", ligne: "protège les ordinateurs et les données contre les pirates." },
   roboticien: { f: "ingénieure en robotique", m: "ingénieur en robotique", centres: ["technologie-ia", "sciences"], etudes: "bac+5", ligne: "conçoit et programme des robots." },
   microelec: { f: "ingénieure en microélectronique", m: "ingénieur en microélectronique", centres: ["technologie-ia", "sciences"], etudes: "bac+5", ligne: "dessine les puces des téléphones et des ordinateurs." },
+  "ingenieur-ia": { f: "ingénieure en intelligence artificielle", m: "ingénieur en intelligence artificielle", centres: ["technologie-ia", "sciences"], etudes: "bac+5", ligne: "apprend aux ordinateurs à reconnaître, trier et corriger." },
   "chercheur-ia": { f: "chercheuse en intelligence artificielle", m: "chercheur en intelligence artificielle", centres: ["technologie-ia"], etudes: "bac+8", ligne: "invente les IA de demain." },
   "ingenieur-telecom": { f: "ingénieure télécoms", m: "ingénieur télécoms", centres: ["technologie-ia", "reseaux-sociaux"], etudes: "bac+5", ligne: "installe les antennes et les réseaux de téléphone." },
   "technicien-maintenance": { f: "technicienne de maintenance", m: "technicien de maintenance", centres: ["technologie-ia", "transports"], etudes: "bac+2", ligne: "répare et entretient les machines." },

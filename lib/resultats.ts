@@ -18,7 +18,9 @@ export type ActiviteResultat =
   // donc pris du retard sans que rien ne le signale (01/08).
   | "dictee"
   | "langue_du_jour"
-  | "tutor";
+  | "tutor"
+  // Exercices interactifs des fiches (24/11/2026) : même table que le coach.
+  | "exercices";
 
 export async function saveResultat(
   eleve: { token?: string | null } | null,

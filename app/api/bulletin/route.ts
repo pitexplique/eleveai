@@ -7,7 +7,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { verifySessionToken } from "@/lib/server/session";
-import { computeBulletin } from "@/lib/bulletin/computeBulletin";
+import { computeBulletin, REGLE_BULLETIN } from "@/lib/bulletin/computeBulletin";
 import type { Bulletin } from "@/lib/bulletin/types";
 import { tableauDeBordLimite } from "@/lib/server/droitsSuivi";
 
@@ -65,7 +65,9 @@ export async function GET(req: Request) {
       .eq("code_etablissement", session.code_etablissement)
       .eq("code_utilisateur", session.code_utilisateur)
       .maybeSingle();
-    if (data?.data) {
+    // Un snapshot calculé avant la règle de classe (24/11/2026) compterait
+    // encore les séances faites dans une autre classe : on le recalcule.
+    if (data?.data && (data.data as Bulletin).regle === REGLE_BULLETIN) {
       // ⚠️ LE SNAPSHOT FIGE LA CLASSE DU JOUR OÙ IL A ÉTÉ CALCULÉ.
       // Il n'est réécrit qu'à la sauvegarde d'un résultat : un élève passé en
       // 5e à la rentrée garderait donc « 6e » en tête de son bulletin jusqu'à

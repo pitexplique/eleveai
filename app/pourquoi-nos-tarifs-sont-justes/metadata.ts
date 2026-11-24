@@ -6,15 +6,15 @@ import type { Metadata } from "next";
 // défensive, là où la page répond maintenant au vrai doute : pourquoi c'est
 // moins cher SANS être moins bon.
 // ⛔ La description suit le texte visible, sinon Google en fabrique une autre.
-import { PRIX_ANNUEL, montant } from "@/lib/tarifs";
+import { OFFRE, montant } from "@/lib/tarifs";
 
 const url = "https://www.eleveai.fr/pourquoi-nos-tarifs-sont-justes";
 
 const resume =
   `Un prix dix fois plus bas que les autres se lit « dix fois moins bon » tant que personne n'explique l'écart. ` +
   `Voici d'où il vient : aucun investisseur à rémunérer, aucun commercial, des exercices écrits ici et non achetés. ` +
-  `L'IA démultiplie le travail, l'enseignant vérifie. L'élève ne paie jamais — ce qui se paie, ` +
-  `c'est la fenêtre du parent, ${montant(PRIX_ANNUEL)} par an et par famille.`;
+  `L'IA démultiplie le travail, l'enseignant vérifie. ${OFFRE.questionsGratuitesParJour} questions offertes chaque jour, ` +
+  `puis ${montant(OFFRE.famille)} par mois pour toute la famille, ou pour toutes les classes d'un prof.`;
 
 export const metadata: Metadata = {
   title: "Pourquoi nos tarifs sont justes",

@@ -1,105 +1,74 @@
-// app/tarifs/TarifsClient.tsx — LES OFFRES DE L'OUVERTURE (refaite le 02/11/2026).
+// app/tarifs/TarifsClient.tsx — LES TARIFS DU 22/11/2026.
 //
-// ⭐ Frédéric, 02/11 : « aligne /tarifs et /parents et fais une offre
-// établissement étranger ». La page d'avant (962 lignes, grille 2,50 € /
-// 19,90 €, comparatif IXL, échelle des payeurs) est entière dans l'historique :
-//     git show 6bc34dc5:app/tarifs/TarifsClient.tsx
+// ⭐ Frédéric, 22/11, après en avoir parlé avec sa compagne et regardé IXL :
+// 10 questions offertes par jour sur tout le site, puis l'inscription PAYANTE ;
+// Famille 10 €/mois (autant d'enfants qu'on veut, sans IA) ; Prof 10 €/mois
+// (toutes ses classes, sans IA) ; une option Premium avec l'aide de Ti Margo ;
+// des prix RONDS partout. Note mémoire : modele-tarifaire-22-11.
+// La page d'avant (modèle du 19/11 : contenu offert, Suivi 7,95 €, prix de
+// lancement, établissements, visio) est entière dans l'historique :
+//     git show 32927aab:app/tarifs/TarifsClient.tsx
 //
-// ⭐ LA LOGIQUE, la même que l'accueil (app/accueil/AccueilSuivi.tsx) : l'IA
-// explique tout sans rien demander, on ne vend donc pas l'explication. On vend
-// ce qu'elle ne fait pas — le SUIVI, la VIDÉOTHÈQUE (3 500 vidéos, 500 sur
-// YouTube), un PROFESSEUR en visio. Le coach reste ouvert à tous.
-// ⛔ Aucun prix écrit à la main : tout vient de lib/tarifs.ts (« GRILLE 2026 »).
+// ⛔ Aucun prix écrit à la main : tout vient de lib/tarifs.ts (`OFFRE`).
+// ⛔ Ce qui n'est PAS validé (l'année, l'essai prof, le prix du Premium, les
+//    pays, les établissements) est dit « à venir », SANS chiffre.
+// ⛔ Les vidéos ne sont pas tranchées (libres ou comptées) : on n'en dit rien.
 // ⛔ Aucun bouton de paiement avant l'ouverture (`VENTE.ouverte`).
-// ⛔ Les établissements : HORS DE FRANCE seulement.
 // ⛔ Jamais aux élèves actuels ou anciens de Frédéric.
 
 import Link from "next/link";
-import { ArrowRight, Building2, Check, Eye, Globe2, Heart, MonitorPlay, Sparkles } from "lucide-react";
+import { ArrowRight, Check, Clock, GraduationCap, Heart, ShieldCheck, Sparkles, Users } from "lucide-react";
 import { DONS, VENTE } from "@/lib/legal/editeur";
-import { etatCompteurVideos } from "@/lib/videos/compteur";
-import {
-  ETABLISSEMENT_ETRANGER,
-  OUVERTURE_SUIVI,
-  OUVERTURE_VISIO,
-  PERIODE_ANNUELLE,
-  PRIX_ANNUEL,
-  PRIX_MENSUEL,
-  PRIX_PAR_PAYS,
-  PRIX_VISIO,
-  SUIVI_A_VENIR,
-  SUIVI_DES_MAINTENANT,
-  NOM_VISIO,
-  VISIO_MATHS_REELLES,
-  montant,
-  AIDE_IA,
-  COMPTE_GRATUIT,
-  FREE_CLASSES_PER_TEACHER,
-  MENTION_TVA,
-  MOIS_OFFERTS,
-  PHRASE_LANCEMENT,
-  PHRASE_OFFRE,
-  QUOTAS_IA,
-  SUIVI as OFFRE_SUIVI,
-} from "@/lib/tarifs";
+import { MENTION_TVA, OFFRE, OUVERTURE_SUIVI, montant } from "@/lib/tarifs";
 
-// ⭐ 19/11/2026 — LE MODÈLE : le contenu est offert à tous, on paie le suivi.
-// ⛔ Jamais « illimité » pour l'aide IA, jamais de pourcentage, jamais « Coach IA ».
-const OUVERT = [
-  `${AIDE_IA.coachOuvert.replace(/\.$/, "")}, sur tout le programme, micro-compétence par micro-compétence`,
-  `Toute la vidéothèque (${etatCompteurVideos().nombreTexte} vidéos aujourd'hui) et les feuilles d'exercices corrigées, sans compte`,
-  `Avec un compte gratuit : ${QUOTAS_IA.gratuitParJour} aides de Ti Margo par jour, sa semaine et ses ${COMPTE_GRATUIT.historiqueJours} derniers jours`,
-  `Pour le prof : ${FREE_CLASSES_PER_TEACHER} classes gratuites, la séance en direct, le bilan par micro`,
+const n = OFFRE.questionsGratuitesParJour;
+const libres = OFFRE.libres.join(", ").replace(/, ([^,]*)$/, " et $1");
+
+const SANS_COMPTE = [
+  `${n} questions par jour, sur tout le site`,
+  "Un seul compteur : coach, exercices interactifs, calcul rapide, automatismes, QCM",
+  `Toujours libres : ${libres}`,
 ];
 
-// ⛔ 05/11/2026 : on écrit le nombre réel de vidéos le jour de l'ouverture, et
-// ce qui n'existe pas encore est annoncé comme « à venir ».
-// 19/11/2026 : la vidéothèque est offerte à tous (liste OUVERT), elle n'est plus dans le Suivi.
-const SUIVI = VENTE.ouverte
-  ? [...SUIVI_DES_MAINTENANT, ...SUIVI_A_VENIR.map((t) => `À venir, en exclusivité : ${t.charAt(0).toLowerCase()}${t.slice(1)}`)]
-  : [...SUIVI_DES_MAINTENANT, ...SUIVI_A_VENIR.map((t) => `À venir : ${t.charAt(0).toLowerCase()}${t.slice(1)}`)]; // ⛔ 18/11 : rien de promis qui n'existe pas
+const FAMILLE = [
+  "Autant d'enfants que vous voulez",
+  "Toutes les classes, du CP à la Terminale",
+  "Ce qu'ils ont compris, les 3 choses à revoir",
+  "Un bilan chaque semaine par courriel",
+  "Un compte par courriel, sans aide de l'IA",
+];
 
-// ⭐ 03/11 : « Maths réelles », la liste vit dans lib/tarifs.ts.
-const VISIO = VISIO_MATHS_REELLES;
+const PROF = [
+  "Toutes vos classes",
+  "Vos élèves entrent avec votre code quand vous êtes connecté",
+  "Un devoir daté pour la maison, sur les micros choisies",
+  "La séance en direct, le bilan, le bulletin à copier dans Pronote",
+  "Sans aide de l'IA",
+];
 
-const ETABLISSEMENT = [
-  "Un compte pour chaque professeur et chaque élève, avec « Mes classes » et le bilan par micro-compétence",
-  `La vidéothèque entière pour tous les élèves : ${etatCompteurVideos().nombreTexte} vidéos aujourd'hui`,
-  `${OFFRE_SUIVI.nom} ouvert aux parents de vos élèves, sans rien de plus à payer`,
-  "Une formation de vos professeurs en visio (1 h 30) au démarrage",
-  "Le programme français, et celui de votre pays dès qu'il est prêt sur le site",
+const A_VENIR = [
+  "Une formule à l'année",
+  "Un essai pour les professeurs",
+  "Les prix des autres pays",
+  "Une offre pour les établissements",
 ];
 
 const faq = [
   {
     q: "Pourquoi payer, alors qu'une IA explique tout ?",
-    a: "Une IA explique, mais elle ne sait pas où en est votre enfant dans son programme, elle ne garde pas ses résultats d'une semaine à l'autre et elle ne vous dit pas quoi revoir. C'est cela que vous achetez : le suivi. Les vidéos, les fiches et les exercices restent offerts à tous.",
+    a: "Une IA explique, mais elle ne sait pas où en est votre enfant dans son programme. Elle ne garde pas ses résultats d'une semaine à l'autre. EleveAI le suit, micro-compétence par micro-compétence, et vous dit quoi revoir.",
   },
   {
-    q: "Sans abonnement, mon enfant est-il bridé ?",
-    a: `Non. Le coach est illimité et ouvert à tous, avec toutes les vidéos et les fiches. Avec un compte gratuit, il a aussi ${QUOTAS_IA.gratuitParJour} aides de Ti Margo par jour et ses ${COMPTE_GRATUIT.historiqueJours} derniers jours. Le Suivi ajoute votre vue à vous, tout son historique, des conseils et ${QUOTAS_IA.suiviParJour} aides de Ti Margo par jour.`,
+    q: `Qu'est-ce qui compte dans les ${n} questions ?`,
+    a: `Chaque réponse donnée au coach, aux exercices interactifs, au calcul rapide, aux automatismes ou à un QCM. C'est un seul compteur pour tout le site, chaque jour. Les fiches de cours, les énigmes à projeter et les PDF ne comptent pas.`,
   },
   {
-    q: "Quand est-ce que ça ouvre ?",
-    a: VENTE.ouverte
-      ? `${OFFRE_SUIVI.nom} est ouvert. Les visios « ${NOM_VISIO} » arrivent en ${OUVERTURE_VISIO}.`
-      : `${OFFRE_SUIVI.nom} ouvre ${OUVERTURE_SUIVI}, les visios « ${NOM_VISIO} » en ${OUVERTURE_VISIO}. Rien n'est encaissé avant l'ouverture.`,
+    q: "Mon enfant utilise EleveAI en classe : est-il bloqué ?",
+    a: "Non. Avec le code de son professeur, il n'est jamais compté. Pendant le cours, il ne voit ni compteur ni offre. Le code de classe et le compte Famille sont deux accès séparés : à la maison, il passe par le compte Famille.",
   },
   {
-    q: "Le prix est-il le même dans tous les pays ?",
-    a: `Non : il suit le niveau de vie. ${montant(PRIX_MENSUEL)} par mois en France, ${PRIX_PAR_PAYS.find((p) => p.suivi.includes("FCFA"))?.suivi} en Afrique de l'Ouest et centrale. Le tableau des pays est sur cette page.`,
-  },
-  {
-    q: "Puis-je arrêter quand je veux ?",
-    a: `Oui. La formule au mois est sans engagement. La formule à l'année (${montant(PRIX_ANNUEL)}, ${MOIS_OFFERTS} mois offerts) se renouvelle chaque année : vous l'arrêtez quand vous voulez pour l'année suivante. À la fin de l'abonnement, le compte redevient gratuit et garde son historique.`,
-  },
-  {
-    q: "Et pour les professeurs ?",
-    a: `Chaque professeur a ${FREE_CLASSES_PER_TEACHER} classes gratuites, avec la séance en direct et le bilan par micro-compétence. Le coach reste illimité pour ses élèves.`,
-  },
-  {
-    q: "Notre école est en France, pouvons-nous prendre l'offre établissement ?",
-    a: "Non : l'offre établissement ne concerne que les écoles, collèges et lycées situés hors de France. En France, les professeurs ont leur compte à titre personnel, et les familles peuvent prendre le suivi.",
+    q: "Et l'aide de Ti Margo, par l'IA ?",
+    a: "Les comptes Famille et Prof n'utilisent pas l'IA. L'aide de Ti Margo viendra dans une option Premium : il donne un indice, puis un autre, sans donner la réponse. Son prix sera annoncé plus tard.",
   },
 ];
 
@@ -117,113 +86,95 @@ export default function TarifsClient() {
         {/* 1. LA PROMESSE */}
         <section className="text-center">
           <p className="inline-flex rounded-full bg-sky-100 px-4 py-1.5 text-xs font-black uppercase tracking-wide text-sky-800 ring-1 ring-sky-200">
-            {VENTE.ouverte ? `${OFFRE_SUIVI.nom} est ouvert` : `Ouverture ${OUVERTURE_SUIVI}`}
+            {VENTE.ouverte ? "Les abonnements sont ouverts" : `Ouverture ${OUVERTURE_SUIVI}`}
           </p>
-          <h1 className="mt-4 text-3xl font-black leading-tight sm:text-5xl">Les offres d&apos;EleveAI</h1>
+          <h1 className="mt-4 text-3xl font-black leading-tight sm:text-5xl">
+            Des prix simples : <span className="whitespace-nowrap text-sky-700">{montant(OFFRE.famille)} par mois</span>
+          </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
-            Tout le contenu est offert à tous. Ce qui s&apos;achète, c&apos;est le suivi de votre enfant dans son programme.
+            {n} questions offertes chaque jour pour essayer. Ensuite, un abonnement pour toute la famille, ou pour toutes vos classes.
           </p>
-          <p className="mx-auto mt-3 max-w-2xl text-lg font-black text-slate-900">{PHRASE_OFFRE}</p>
-          <p className="mx-auto mt-1 max-w-2xl text-sm font-bold text-emerald-800">{PHRASE_LANCEMENT}</p>
         </section>
 
-        {/* 2. LES QUATRE CARTES */}
-        <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          <div className="flex flex-col rounded-3xl border-2 border-emerald-300 bg-emerald-50/50 p-6">
-            <p className="text-sm font-black uppercase tracking-wide text-emerald-700">Pour toujours</p>
-            <h2 className="mt-1 text-2xl font-black">Ouvert à tous</h2>
-            <p className="mt-1 text-slate-600">Élèves et professeurs, sans abonnement.</p>
-            <ul className="mt-4 flex-1 space-y-2 text-sm text-slate-800">
-              {OUVERT.map((t) => <Puce key={t} couleur="text-emerald-600">{t}</Puce>)}
-            </ul>
+        {/* 2. LES TROIS CARTES */}
+        <section className="grid gap-5 md:grid-cols-3">
+          <Carte
+            etiquette="Pour essayer"
+            titre="Sans compte"
+            prix="Offert"
+            sousPrix="chaque jour"
+            Icone={Clock}
+            couleurs={{ bord: "border-emerald-300", fond: "bg-emerald-50/50", texte: "text-emerald-700", puce: "text-emerald-600" }}
+            lignes={SANS_COMPTE}
+          >
             <Link href="/coach-ia/maths" className="mt-6 block rounded-full bg-emerald-600 px-5 py-3 text-center font-black text-white hover:bg-emerald-700">
-              Commencer avec le coach
+              Essayer le coach
             </Link>
-          </div>
+          </Carte>
 
-          <div className="flex flex-col rounded-3xl border-2 border-sky-300 p-6 shadow-lg">
-            <p className="text-sm font-black uppercase tracking-wide text-sky-700">{VENTE.ouverte ? "Pour les familles" : `Ouverture ${OUVERTURE_SUIVI}`}</p>
-            <h2 className="mt-1 flex items-center gap-2 text-2xl font-black">
-              <Eye className="h-6 w-6 text-sky-700" aria-hidden="true" /> {OFFRE_SUIVI.nom}
-            </h2>
-            <Link href="/suivi/exemple" className="mt-1 text-sm font-black text-sky-700 underline">Voir un exemple</Link>
-            <p className="mt-3 text-3xl font-black">
-              {montant(PRIX_MENSUEL)} <span className="text-base font-bold text-slate-500">par mois</span>
-            </p>
-            <p className="text-sm text-slate-500">
-              Sans engagement, ou {montant(PRIX_ANNUEL)} {PERIODE_ANNUELLE}. Prix de la France. {MENTION_TVA}.
-            </p>
-            <p className="mt-1 text-sm font-bold text-emerald-800">{PHRASE_LANCEMENT}</p>
-            <ul className="mt-4 flex-1 space-y-2 text-sm text-slate-800">
-              {SUIVI.map((t) => <Puce key={t} couleur="text-sky-600">{t}</Puce>)}
-            </ul>
-            {VENTE.ouverte ? (
-              <Link href="/abonnement" className="mt-6 block rounded-full bg-sky-700 px-5 py-3 text-center font-black text-white hover:bg-sky-800">
-                S&apos;abonner
-              </Link>
-            ) : (
-              <a href="#pays" className="mt-6 block rounded-full bg-sky-700 px-5 py-3 text-center font-black text-white hover:bg-sky-800">
-                Le prix dans mon pays
-              </a>
-            )}
-          </div>
+          <Carte
+            id="famille"
+            etiquette="La famille"
+            titre="Famille"
+            prix={montant(OFFRE.famille)}
+            sousPrix="par mois"
+            Icone={Users}
+            couleurs={{ bord: "border-sky-400", fond: "bg-white shadow-lg", texte: "text-sky-700", puce: "text-sky-600" }}
+            lignes={FAMILLE}
+          >
+            <BoutonOuverture href="/abonnement" couleur="bg-sky-700 hover:bg-sky-800 text-white" />
+          </Carte>
 
-          <div className="flex flex-col rounded-3xl border border-slate-200 p-6">
-            <p className="text-sm font-black uppercase tracking-wide text-violet-700">À partir de {OUVERTURE_VISIO}</p>
-            <h2 className="mt-1 flex items-center gap-2 text-2xl font-black">
-              <MonitorPlay className="h-6 w-6 text-violet-700" aria-hidden="true" /> Les visios « {NOM_VISIO} »
-            </h2>
-            <p className="mt-3 text-3xl font-black">
-              {montant(PRIX_VISIO)} <span className="text-base font-bold text-slate-500">la séance</span>
-            </p>
-            <p className="text-sm text-slate-500">À quoi servent les maths, pour de vrai. Prix de la France.</p>
-            <ul className="mt-4 flex-1 space-y-2 text-sm text-slate-800">
-              {VISIO.map((t) => <Puce key={t} couleur="text-violet-600">{t}</Puce>)}
-            </ul>
-          </div>
-
-          <div className="flex flex-col rounded-3xl border border-amber-300 bg-amber-50/40 p-6">
-            <p className="text-sm font-black uppercase tracking-wide text-amber-700">Hors de France</p>
-            <h2 className="mt-1 flex items-center gap-2 text-2xl font-black">
-              <Building2 className="h-6 w-6 text-amber-700" aria-hidden="true" /> Les établissements
-            </h2>
-            <p className="mt-3 text-3xl font-black">
-              {ETABLISSEMENT_ETRANGER.parEleveEtParAn} <span className="text-base font-bold text-slate-500">par élève et par an</span>
-            </p>
-            <p className="text-sm text-slate-500">
-              {ETABLISSEMENT_ETRANGER.parEleveEtParAnAfrique} en zone FCFA. Professeurs inclus.
-            </p>
-            <ul className="mt-4 flex-1 space-y-2 text-sm text-slate-800">
-              {ETABLISSEMENT.slice(0, 3).map((t) => <Puce key={t} couleur="text-amber-600">{t}</Puce>)}
-            </ul>
-            <a href="#etablissements" className="mt-6 block rounded-full bg-amber-500 px-5 py-3 text-center font-black text-slate-900 hover:bg-amber-400">
-              L&apos;offre en détail
-            </a>
-          </div>
+          <Carte
+            id="prof"
+            etiquette="Le prof"
+            titre="Prof"
+            prix={montant(OFFRE.prof)}
+            sousPrix="par mois"
+            Icone={GraduationCap}
+            couleurs={{ bord: "border-violet-300", fond: "bg-violet-50/40", texte: "text-violet-700", puce: "text-violet-600" }}
+            lignes={PROF}
+          >
+            <Link href="/prof/classes" className="mt-6 block rounded-full bg-violet-700 px-5 py-3 text-center font-black text-white hover:bg-violet-800">
+              Créer ma classe
+            </Link>
+          </Carte>
         </section>
         <p className="-mt-8 text-center text-sm text-slate-500">
-          {!VENTE.ouverte && <>Rien n&apos;est encaissé avant l&apos;ouverture. </>}Ces offres ne s&apos;adressent pas aux élèves de l&apos;auteur du site.
+          Sans engagement. Prix en France. {MENTION_TVA}.{" "}
+          {!VENTE.ouverte && <>Rien n&apos;est encaissé avant l&apos;ouverture. </>}
+          Ces offres ne s&apos;adressent pas aux élèves de l&apos;auteur du site.
         </p>
-        {DONS.ouverts && (
-          <p className="-mt-8 text-center">
-            <Link href="/soutenir" className="inline-flex items-center gap-2 font-black text-rose-700 hover:underline">
-              <Heart className="h-5 w-5" aria-hidden="true" /> Vous préférez simplement encourager le site ? Faire un don
-            </Link>
-          </p>
-        )}
 
-        {/* 3. POURQUOI, À L'HEURE DE L'IA */}
-        <section className="rounded-3xl bg-slate-50 p-6 sm:p-8">
+        {/* 3. L'OPTION PREMIUM — ⏳ idée du 22/11, prix NON validé : aucun chiffre. */}
+        <section className="rounded-3xl border-2 border-dashed border-amber-300 bg-amber-50/60 p-6 sm:p-8">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/ti-margo/animations/encouragement.png" alt="Ti Margo" width={96} height={96} className="h-24 w-24 shrink-0 self-center" />
+            <div>
+              <p className="text-sm font-black uppercase tracking-wide text-amber-700">Bientôt · prix à venir</p>
+              <h2 className="mt-1 flex items-center gap-2 text-2xl font-black sm:text-3xl">
+                <Sparkles className="h-7 w-7 text-amber-600" aria-hidden="true" /> L&apos;option Premium : l&apos;aide de Ti Margo
+              </h2>
+              <p className="mt-2 max-w-3xl text-slate-700">
+                Ti Margo guide votre enfant avec l&apos;IA. Il donne un indice, puis un autre, mais jamais la réponse. Pour les moins de 15 ans, c&apos;est le parent qui l&apos;active.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* 4. EN CLASSE — la déontologie du 02/11 : aucune offre dans le coach en classe. */}
+        <section className="rounded-3xl bg-teal-50 p-6 sm:p-8">
           <h2 className="flex items-center gap-2 text-2xl font-black sm:text-3xl">
-            <Sparkles className="h-7 w-7 text-teal-700" aria-hidden="true" /> Une IA explique. EleveAI suit.
+            <ShieldCheck className="h-7 w-7 text-teal-700" aria-hidden="true" /> En classe, aucune publicité
           </h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-3">
             {[
-              { titre: "Le programme de son pays", texte: "Chaque exercice et chaque vidéo est rangé dans le programme officiel, micro-compétence par micro-compétence. Une IA répond à la question posée ; elle ne sait pas ce qui vient ensuite." },
-              { titre: "Des résultats qui restent", texte: "Chaque réponse est gardée. Vous voyez ce qui est acquis, ce qui coince, et le coach fait revoir ce qui n'est pas solide." },
-              { titre: "Un professeur derrière", texte: "Les vidéos sont écrites par un professeur de maths, à partir des erreurs réelles des élèves, et il les corrige chaque semaine." },
+              { titre: "Le code du prof", texte: "Avec le code de leur professeur, les élèves ne sont jamais comptés. Le code marche quand le professeur est connecté." },
+              { titre: "Ni compteur, ni offre", texte: "Pendant le cours, le coach ne montre aucun compteur et ne propose aucun abonnement. L'offre se lit ici, et sur l'accueil." },
+              { titre: "Deux accès séparés", texte: "Le code de classe sert en classe et pour le devoir daté. À la maison, l'élève passe par le compte Famille." },
             ].map((b) => (
-              <div key={b.titre} className="rounded-2xl bg-white p-5 ring-1 ring-slate-200">
+              <div key={b.titre} className="rounded-2xl bg-white p-5 ring-1 ring-teal-100">
                 <h3 className="font-black">{b.titre}</h3>
                 <p className="mt-1 text-sm text-slate-600">{b.texte}</p>
               </div>
@@ -231,68 +182,29 @@ export default function TarifsClient() {
           </div>
         </section>
 
-        {/* 4. UN PRIX PAR PAYS */}
-        <section id="pays" className="scroll-mt-20">
-          <h2 className="flex items-center gap-2 text-2xl font-black sm:text-3xl">
-            <Globe2 className="h-7 w-7 text-sky-700" aria-hidden="true" /> Un prix adapté à chaque pays
-          </h2>
-          <p className="mt-2 max-w-3xl text-slate-600">
-            Le même suivi partout, à un prix qui suit le niveau de vie. Paiement par carte bancaire.
-          </p>
-          <div className="mt-5 overflow-x-auto rounded-2xl ring-1 ring-slate-200">
-            <table className="w-full min-w-[560px] text-left text-sm">
-              <thead className="bg-slate-50 text-slate-600">
-                <tr>
-                  <th className="p-3 font-black">Zone</th>
-                  <th className="p-3 font-black">Suivi famille, par mois</th>
-                  <th className="p-3 font-black">Visio, la séance</th>
-                </tr>
-              </thead>
-              <tbody>
-                {PRIX_PAR_PAYS.map((p) => (
-                  <tr key={p.zone} className="border-t border-slate-100">
-                    <td className="p-3">
-                      <p className="font-black">{p.zone}</p>
-                      <p className="text-xs text-slate-500">{p.pays}</p>
-                    </td>
-                    <td className="p-3 font-black">{p.suivi}</td>
-                    <td className="p-3 font-black">{p.visio}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+        {/* 5. À VENIR — ⏳ non validé le 22/11 : aucun chiffre. */}
+        <section className="rounded-3xl bg-slate-50 p-6 sm:p-8">
+          <h2 className="text-2xl font-black sm:text-3xl">Bientôt</h2>
+          <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+            {A_VENIR.map((t) => (
+              <li key={t} className="flex gap-2 text-slate-800">
+                <Clock className="mt-0.5 h-5 w-5 shrink-0 text-slate-500" aria-hidden="true" />
+                <span>{t}</span>
+              </li>
+            ))}
+          </ul>
+          <Link href="/contact" className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 font-black text-slate-900 ring-1 ring-slate-300 hover:ring-sky-400">
+            Un établissement, un autre pays ? Écrivez-nous <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </section>
 
-        {/* 5. L'OFFRE AUX ÉTABLISSEMENTS HORS DE FRANCE */}
-        <section id="etablissements" className="scroll-mt-20 grid gap-6 rounded-3xl border border-amber-200 bg-amber-50/50 p-6 sm:p-8 lg:grid-cols-2">
-          <div>
-            <p className="text-sm font-black uppercase tracking-wide text-amber-700">Écoles, collèges et lycées hors de France</p>
-            <h2 className="mt-1 text-2xl font-black sm:text-3xl">Tout EleveAI pour votre établissement</h2>
-            <p className="mt-3 text-slate-700">
-              Pour les établissements privés, bilingues ou confessionnels qui enseignent en français, du CP à la Terminale.
-              Vos professeurs voient les erreurs de leurs classes micro-compétence par micro-compétence ; vos élèves ont
-              toute la vidéothèque ; leurs parents suivent leurs progrès.
-            </p>
-            <p className="mt-4 text-3xl font-black">
-              {ETABLISSEMENT_ETRANGER.parEleveEtParAn} <span className="text-base font-bold text-slate-500">par élève et par an</span>
-            </p>
-            <p className="text-sm text-slate-600">
-              {ETABLISSEMENT_ETRANGER.parEleveEtParAnAfrique} en zone FCFA · à partir de {ETABLISSEMENT_ETRANGER.minimumEleves} élèves · les comptes des professeurs sont inclus.
-            </p>
-            <Link href="/contact" className="mt-6 inline-flex items-center gap-2 rounded-full bg-amber-500 px-6 py-3 font-black text-slate-900 hover:bg-amber-400">
-              Écrire pour votre établissement <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        {DONS.ouverts && (
+          <p className="text-center">
+            <Link href="/soutenir" className="inline-flex items-center gap-2 font-black text-rose-700 hover:underline">
+              <Heart className="h-5 w-5" aria-hidden="true" /> Vous préférez simplement encourager le site ? Faire un don
             </Link>
-            <p className="mt-2 text-xs text-slate-500">Réponse sous {ETABLISSEMENT_ETRANGER.delaiReponse}, avec le prix pour votre nombre d&apos;élèves.</p>
-          </div>
-          <ul className="space-y-3 self-center text-slate-800">
-            {ETABLISSEMENT.map((t) => <Puce key={t} couleur="text-amber-600">{t}</Puce>)}
-            <li className="rounded-2xl bg-white p-4 text-sm text-slate-600 ring-1 ring-amber-200">
-              Cette offre ne concerne pas les établissements situés en France : là, les professeurs gardent leur compte à
-              titre personnel et les familles peuvent prendre le suivi.
-            </li>
-          </ul>
-        </section>
+          </p>
+        )}
 
         {/* 6. FAQ */}
         <section>
@@ -311,11 +223,61 @@ export default function TarifsClient() {
   );
 }
 
-function Puce({ children, couleur }: { children: React.ReactNode; couleur: string }) {
+function Carte({
+  id,
+  etiquette,
+  titre,
+  prix,
+  sousPrix,
+  Icone,
+  couleurs,
+  lignes,
+  children,
+}: {
+  id?: string;
+  etiquette: string;
+  titre: string;
+  prix: string;
+  sousPrix: string;
+  Icone: typeof Users;
+  couleurs: { bord: string; fond: string; texte: string; puce: string };
+  lignes: readonly string[];
+  children: React.ReactNode;
+}) {
   return (
-    <li className="flex gap-2">
-      <Check className={`mt-0.5 h-5 w-5 shrink-0 ${couleur}`} aria-hidden="true" />
-      <span>{children}</span>
-    </li>
+    <div id={id} className={`flex scroll-mt-24 flex-col rounded-3xl border-2 p-6 ${couleurs.bord} ${couleurs.fond}`}>
+      <p className={`flex items-center gap-2 text-sm font-black uppercase tracking-wide ${couleurs.texte}`}>
+        <Icone className="h-5 w-5" aria-hidden="true" /> {etiquette}
+      </p>
+      <h2 className="mt-1 text-2xl font-black">{titre}</h2>
+      <p className="mt-3 text-4xl font-black">
+        {prix} <span className="text-base font-bold text-slate-500">{sousPrix}</span>
+      </p>
+      <ul className="mt-4 flex-1 space-y-2 text-sm text-slate-800">
+        {lignes.map((t) => (
+          <li key={t} className="flex gap-2">
+            <Check className={`mt-0.5 h-5 w-5 shrink-0 ${couleurs.puce}`} aria-hidden="true" />
+            <span>{t}</span>
+          </li>
+        ))}
+      </ul>
+      {children}
+    </div>
+  );
+}
+
+/** ⛔ Avant l'ouverture, aucun bouton de paiement : la date, à la place. */
+function BoutonOuverture({ href, couleur }: { href: string; couleur: string }) {
+  if (VENTE.ouverte) {
+    return (
+      <Link href={href} className={`mt-6 block rounded-full px-5 py-3 text-center font-black ${couleur}`}>
+        S&apos;abonner
+      </Link>
+    );
+  }
+  return (
+    <p className="mt-6 rounded-full bg-slate-100 px-5 py-3 text-center font-black text-slate-600">
+      Ouverture {OUVERTURE_SUIVI}
+    </p>
   );
 }

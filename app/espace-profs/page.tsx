@@ -21,7 +21,7 @@ import type { Metadata } from "next";
 // pas de compte.
 // ✅ 19/11/2026 : l'inscription prof par e-mail et « Mes classes » existent ;
 // la carte de prix a laissé place au chemin en 3 étapes (plus bas).
-import { ENSEIGNANT, FREE_CLASSES_PER_TEACHER } from "@/lib/tarifs";
+import { OFFRE, OUVERTURE_SUIVI, montant } from "@/lib/tarifs";
 
 // ⚠️ LA CANONIQUE SUIT LA REDIRECTION, ELLE NE LA CONTREDIT PAS (10/08/2026).
 // Cette page a vécu à `/enseignants` ; depuis le 08/08 c'est l'inverse qui est
@@ -156,7 +156,7 @@ export default function EnseignantsPage() {
               href="/prof/classes"
               className="rounded-2xl bg-emerald-600 px-7 py-3.5 text-base font-black text-white shadow-lg transition hover:bg-emerald-500 hover:scale-105"
             >
-              🏫 Créer mes {FREE_CLASSES_PER_TEACHER} classes offertes
+              🏫 Créer ma classe
             </Link>
             <Link
               href="/dashboard-prof"
@@ -434,10 +434,11 @@ export default function EnseignantsPage() {
                 Vous, pour vos classes
               </p>
               <p className="mt-2 text-3xl font-black text-slate-900">
-                Vos {FREE_CLASSES_PER_TEACHER} classes sont offertes
+                {/* 22/11/2026 : Prof 10 €/mois, toutes ses classes (remplace « 2 classes offertes »). */}
+                {montant(OFFRE.prof)} par mois, toutes vos classes
               </p>
               <p className="mt-1 text-sm font-black text-violet-800">
-                Ouvert sur {ENSEIGNANT.verification}.
+                Sans engagement. Ouverture {OUVERTURE_SUIVI}.
               </p>
               <ol className="mt-4 grid gap-3 sm:grid-cols-3">
                 {[
@@ -452,7 +453,7 @@ export default function EnseignantsPage() {
                 ))}
               </ol>
               <p className="mt-4 text-sm font-semibold leading-relaxed text-slate-600">
-                Le coach, les vidéos et les fiches sont offerts à vos élèves, en classe comme à la maison.
+                En classe, avec votre code, vos élèves ne sont jamais comptés et ne voient aucune publicité.
               </p>
               <Link
                 href="/prof/classes"

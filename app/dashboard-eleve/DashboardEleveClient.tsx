@@ -14,6 +14,10 @@ import CarteCodeParent from "./CarteCodeParent";
 import CarteSuiviGratuit from "./CarteSuiviGratuit";
 import type { ResumeGratuit } from "@/lib/suivi/resumeGratuit";
 import CarteMaLigneBulletin from "./CarteMaLigneBulletin";
+import CarteCockpit from "./CarteCockpit";
+import CarteMonJardin from "./CarteMonJardin";
+import CarteSimulateurs from "./CarteSimulateurs";
+import CarteMesRecompenses from "./CarteMesRecompenses";
 import type { Bulletin } from "@/lib/bulletin/types";
 import { prenomFromNom } from "@/lib/prenom";
 import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
@@ -206,6 +210,26 @@ export default function DashboardEleveClient() {
   const [nbNotionsFloutees, setNbNotionsFloutees] = useState<number | null>(null);
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  // ✈️ / 🌿 LES DEUX VUES (23/11/2026, Frédéric : « des chips en haut » — un
+  // tableau de bord de commandant de bord, et un autre « plus poétique, plus
+  // nature »). Le choix reste dans ce navigateur, rien de plus.
+  const [vue, setVue] = useState<"cockpit" | "jardin">("cockpit");
+  useEffect(() => {
+    try {
+      if (localStorage.getItem("eleveai:dashboard-vue") === "jardin") setVue("jardin");
+    } catch {
+      /* stockage refusé : on reste sur le cockpit. */
+    }
+  }, []);
+  const choisirVue = (v: "cockpit" | "jardin") => {
+    setVue(v);
+    try {
+      localStorage.setItem("eleveai:dashboard-vue", v);
+    } catch {
+      /* stockage refusé : le choix vaut pour cette visite. */
+    }
+  };
 
   const codeEtablissement = eleve?.code_etablissement?.trim() ?? "";
   const codeUtilisateur =
@@ -450,6 +474,46 @@ export default function DashboardEleveClient() {
               fin de composant. */}
         </div>
 
+        {/* ✈️ / 🌿 Les chips des deux vues (23/11/2026). */}
+        <div className="mt-6 flex justify-center">
+          <div role="tablist" aria-label="Choisis ta vue" className="inline-flex gap-1 rounded-full bg-white/90 p-1.5 shadow-lg ring-1 ring-slate-200">
+            {([
+              { id: "cockpit", label: "✈️ Cockpit", actif: "bg-slate-900 text-white" },
+              { id: "jardin", label: "🌿 Mon jardin", actif: "bg-emerald-600 text-white" },
+            ] as const).map((c) => (
+              <button
+                key={c.id}
+                type="button"
+                role="tab"
+                aria-selected={vue === c.id}
+                onClick={() => choisirVue(c.id)}
+                className={`rounded-full px-5 py-2.5 text-base font-black transition ${
+                  vue === c.id ? `${c.actif} shadow` : "text-slate-700 hover:bg-slate-100"
+                }`}
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {vue === "jardin" ? (
+          <>
+            <CarteMesRecompenses variante="jardin" />
+            {compteGratuit ? null : <CarteMonJardin notions={mesNotions} />}
+            <CarteSimulateurs variante="jardin" />
+          </>
+        ) : (
+          <>
+            <CarteMesRecompenses variante="cockpit" />
+            <CarteCockpit
+              seances={resultatsTutor}
+              notions={compteGratuit ? null : mesNotions}
+              titreNotion={titreNotion}
+              septJoursSeulement={compteGratuit}
+            />
+            <CarteSimulateurs variante="cockpit" />
+
         {/* ⭐ EN HAUT (09/11/2026, Frédéric : « il faut mettre la moyenne
             générale et en dessous les notions » ; « les parents doivent voir
             du premier coup ce qui va et ce qui va pas »). */}
@@ -464,6 +528,8 @@ export default function DashboardEleveClient() {
 
         {/* Sa ligne du bulletin de la classe, comme la voit son prof (17/11). */}
         <CarteMaLigneBulletin />
+          </>
+        )}
 
         {compteGratuit ? (
           <CarteSuiviGratuit resume={resumeGratuit} nbNotions={nbNotionsFloutees} />

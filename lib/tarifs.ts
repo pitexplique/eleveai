@@ -167,7 +167,7 @@ export const PRIX_PUBLICS = VENTE.ouverte; // 05/11/2026 : un seul interrupteur,
  * ⚠️ Il se dit toujours AU MOIS. « 30 € par an » est le même montant et le
  * mauvais nombre — c'est celui qui fait renoncer.
  */
-export const PRIX_MENSUEL = 7.95; // 19/11/2026, Frédéric : « mets les prix à 7,95 € » (était 4,95 €, 2,50 € avant)
+export const PRIX_MENSUEL = 10; // ✅ 22/11/2026, Frédéric : Famille 10 €/mois, prix ronds (« ma femme ne veut pas 9,95 € mais 10 € »). Avant : 7,95 € le 19/11, Frédéric : « mets les prix à 7,95 € » (était 4,95 €, 2,50 € avant)
 
 /**
  * ⭐ 19,90 € POUR L'ANNÉE SCOLAIRE — la formule à recommander.
@@ -177,7 +177,7 @@ export const PRIX_MENSUEL = 7.95; // 19/11/2026, Frédéric : « mets les prix �
  * suivant, il s'arrête avec l'année scolaire. Le taire, c'est vendre onze mois
  * pour cinq — et c'est le genre de silence qui se retrouve en litige.
  */
-export const PRIX_ANNUEL = 79; // 19/11/2026 : 79 € par an = 10 mois, « 2 mois offerts » (était 49 €, 39 € avant)
+export const PRIX_ANNUEL = 100; // ⏳ 22/11/2026 : 100 €/an PROPOSÉ, PAS VALIDÉ — ni l'accueil ni /tarifs ne l'affichent. Avant : 79 € le 19/11 : 79 € par an = 10 mois, « 2 mois offerts » (était 49 €, 39 € avant)
 
 /**
  * La période que couvre l'abonnement annuel. ⛔ MENTION OBLIGATOIRE : elle
@@ -554,7 +554,8 @@ function entierEnv(nom: string, defaut: number): number {
  * ⛔ Aucun « bloqué à vie » n'est écrit nulle part.
  */
 export const PRIX_LANCEMENT = {
-  actif: true,
+  /** ⛔ 22/11/2026 : RETIRÉ (session tarifs : « à retirer », personne n'a payé). */
+  actif: false,
   nom: "Prix de lancement",
   mensuel: 4.95,
   annuel: 49,
@@ -595,10 +596,38 @@ export const SUIVI = {
   essaiJours: 0,
 } as const;
 
+/**
+ * ⭐⭐ L'OFFRE DU 22/11/2026 (note mémoire modele-tarifaire-22-11), affichée sur
+ * l'accueil et /tarifs. ⛔ Seul ce qui est VALIDÉ par Frédéric a un nombre ici.
+ * Restent à valider, et donc jamais affichés comme définitifs : l'année (100 €
+ * proposé), l'essai prof (30 j proposé), le Premium (20 € proposé), la grille
+ * par pays, l'offre établissement, les vidéos libres ou non.
+ * ⚠️ Rien n'est codé : ni le compteur des 10 questions, ni le paiement prof.
+ */
+export const OFFRE = {
+  /** UN compteur pour tout le site, par navigateur, sans compte. */
+  questionsGratuitesParJour: 10,
+  /** Famille : autant d'enfants qu'on veut, toutes les classes, sans IA. */
+  famille: PRIX_MENSUEL,
+  /** Prof : toutes ses classes, sans IA ; ses codes élèves marchent quand il est connecté. */
+  prof: 10,
+  /** Ce qui reste libre, sans compte et sans compteur. */
+  libres: ["les fiches de cours", "les énigmes à projeter", "les PDF"],
+  /** Ce que compte le compteur. */
+  comptes: ["le coach", "les exercices interactifs", "le calcul rapide", "les automatismes", "les questions des vidéos", "les QCM"],
+} as const;
+
+/** ⭐ 22/11/2026 — les phrases du modèle, écrites une fois pour toutes les pages. */
+export const PHRASE_ESSAI = `${OFFRE.questionsGratuitesParJour} questions offertes chaque jour, sans compte. Les fiches de cours, les énigmes à projeter et les PDF restent libres.`;
+export const PHRASE_FAMILLE = `${montant(OFFRE.famille)} par mois, autant d'enfants que vous voulez, du CP à la Terminale, sans engagement`;
+export const PHRASE_PROF = `${montant(OFFRE.prof)} par mois, toutes vos classes, sans engagement`;
+/** ⏳ Non validé le 22/11 : l'année, l'essai prof, le Premium, les pays, les établissements. */
+export const PHRASE_A_VENIR = "La formule à l'année et les prix des autres pays seront fixés avant l'ouverture.";
+
 /** La phrase principale de l'offre, écrite une fois. ⛔ Jamais « illimité » ni « sans limite ». */
 export const PHRASE_OFFRE = `Inscris-toi gratuitement. Pour le vrai suivi : ${montant(PRIX_MENSUEL)}/mois ou ${montant(PRIX_ANNUEL)}/an (${MOIS_OFFERTS} mois offerts).`;
 /** La ligne du prix de lancement, à côté de la phrase principale. */
-export const PHRASE_LANCEMENT = `${PRIX_LANCEMENT.nom} : ${montant(PRIX_LANCEMENT.mensuel)}/mois ou ${montant(PRIX_LANCEMENT.annuel)}/an, garanti jusqu'au ${PRIX_LANCEMENT.garantiJusquauTexte} tant que l'abonnement continue.`;
+export const PHRASE_LANCEMENT = !PRIX_LANCEMENT.actif ? "" : `${PRIX_LANCEMENT.nom} : ${montant(PRIX_LANCEMENT.mensuel)}/mois ou ${montant(PRIX_LANCEMENT.annuel)}/an, garanti jusqu'au ${PRIX_LANCEMENT.garantiJusquauTexte} tant que l'abonnement continue.`;
 
 /** ⛔ Mention légale à côté de chaque prix et sur chaque facture (pas d'automatic_tax). */
 export const MENTION_TVA = "TVA non applicable, art. 293 B du CGI";

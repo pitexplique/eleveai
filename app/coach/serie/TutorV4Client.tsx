@@ -14,6 +14,7 @@ import Link from "next/link";
 import { AIDE_IA } from "@/lib/tarifs";
 import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
+import { horsClasse, niveauClasse } from "@/lib/moyenne/compteDansLaMoyenne";
 import { signalerActivite } from "@/lib/activite";
 
 type EleveSession = {
@@ -24,6 +25,7 @@ type EleveSession = {
   nom?: string | null;
   type_utilisateur?: string | null;
   token?: string | null;
+  classe?: string | null;
 };
 
 import {
@@ -75,7 +77,6 @@ import {
 } from "@/lib/tutor-v4/catalog";
 import {
   defaultDisplayModeForClasse,
-  displayParamForClasse,
   type TutorDisplayMode,
 } from "@/lib/tutor-v4/displayMode";
 
@@ -133,7 +134,7 @@ import AQuoiCaSert from "./AQuoiCaSert";
 import Image from "next/image";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import EtatEnregistrementSeance, { type EtatAuto } from "./EtatEnregistrementSeance";
+import EtatEnregistrementSeance, { ChoixSeance, type EtatAuto } from "./EtatEnregistrementSeance";
 
 type StartResponse = StartTutorV4Response;
 type AnswerResponse = AnswerTutorV4Response;
@@ -627,8 +628,17 @@ export default function TutorV4Page() {
 
   const [etatAuto, setEtatAuto] = useState<EtatAuto>(null);
   const [reprise, setReprise] = useState<{ nbReponses: number; ok: boolean } | null>(null);
+  // 🏋️ ENTRAÎNEMENT OU SÉANCE QUI COMPTE (23/11/2026, Frédéric : « mode
+  // entraînement, et mode on enregistre ma séance pour améliorer mes notes »).
+  // La séance s'enregistre toujours (le prof voit le travail, les notions
+  // avancent) ; en entraînement, sa note ne compte pas dans la moyenne.
+  const [entrainement, setEntrainement] = useState(false);
 
   const [classe, setClasse] = useState<Classe>("6e");
+  // ⭐ 24/11/2026 — RÈGLE DE CLASSE : un 6e qui teste le coach de 4e
+  // s'entraîne. Sa séance s'enregistre, hors moyenne (calcul serveur :
+  // lib/moyenne/compteDansLaMoyenne.ts). Classe inconnue : tout compte.
+  const classeHors = horsClasse(classe, eleve?.classe) ? niveauClasse(classe) : null;
 
   const [matiere, setMatiere] = useState<Matiere>("maths");
 
@@ -1191,7 +1201,14 @@ useEffect(() => {
   if (autoActivatedPairRef.current === pair.pairId) return;
 
   autoActivatedPairRef.current = pair.pairId;
-  void activateQuestion(sessionId, selectSimpleOption(pair));
+  /* Une erreur réseau ne reste plus muette (promesse rejetée sans personne pour
+     l'attraper) : on le dit, et la paire pourra être redemandée. */
+  activateQuestion(sessionId, selectSimpleOption(pair)).catch((error) => {
+    autoActivatedPairRef.current = null;
+    setFeedback(
+      error instanceof Error ? error.message : "Erreur pendant le choix de la question."
+    );
+  });
 }, [displayMode, sessionId, pair, currentQuestion, busy, wrongAnswerPanelOpen]);
 
   function resetMicroStatusesForNotion(notionId: string) {
@@ -1871,6 +1888,7 @@ function handleInputKeyDown(
       temps_sec: elapsedSeconds,
       details: {
         seance_id: seanceIdRef.current,
+        entrainement,
         notionLabel: notionLabel(notion, classe, matiere),
         microStatuses,
         microScores,
@@ -1909,6 +1927,15 @@ function handleInputKeyDown(
   useEffect(() => {
     if (nbTentatives > 0 && nbTentatives % 5 === 0) enregistrerEnSilenceRef.current();
   }, [nbTentatives]);
+
+  // Après un changement « entraînement / ça compte », le rendu suivant porte
+  // la nouvelle valeur : c'est lui qu'on envoie.
+  const aRenvoyerRef = useRef(false);
+  useEffect(() => {
+    if (!aRenvoyerRef.current) return;
+    aRenvoyerRef.current = false;
+    enregistrerEnSilenceRef.current();
+  }, [entrainement]);
 
   useEffect(() => {
     const quitter = () => enregistrerEnSilenceRef.current();
@@ -1965,6 +1992,7 @@ function handleInputKeyDown(
       nbReponses={nbTentatives}
       etatAuto={etatAuto}
       reprise={reprise}
+      entrainement={entrainement || !!classeHors}
       lienConnexion={`/auth/signin?mode=eleve&next=${encodeURIComponent(
         `${pathname}?${searchParams.toString()}`
       )}`}
@@ -1975,6 +2003,22 @@ function handleInputKeyDown(
 
   // Ressources internes proposées après la réponse de l'IA : on entraîne sur le
   // micro raté + quelques voisins de la même notion (liens vers le tutor ciblé).
+  const choixSeance = (surFondSombre = false) => (
+    <ChoixSeance
+      connecte={!!eleve}
+      sessionARenouveler={!!eleve && !eleve.token}
+      entrainement={entrainement}
+      onEntrainement={(v) => {
+        setEntrainement(v);
+        // La séance en cours change de nature : on la renvoie tout de suite.
+        dernierEnregistreRef.current = 0;
+        aRenvoyerRef.current = true;
+      }}
+      surFondSombre={surFondSombre}
+      classeHors={classeHors}
+    />
+  );
+
   const coachSuggestions = currentQuestion
     ? (() => {
         const nId = currentQuestion.notionId;
@@ -1985,11 +2029,7 @@ function handleInputKeyDown(
         ];
         return ordered.slice(0, 3).map((mId) => ({
           label: microLabel(mId, classe, matiere),
-          href: `/coach/serie?classe=${encodeURIComponent(
-            classe
-          )}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(
-            nId
-          )}&microId=${encodeURIComponent(mId)}&${displayParamForClasse(classe)}`,
+          microId: mId,
         }));
       })()
     : [];
@@ -2005,6 +2045,10 @@ function handleInputKeyDown(
       ? notionLabel(currentQuestion.notionId, classe, matiere)
       : "",
     suggestions: coachSuggestions,
+    onReviser: (microId) => {
+      void jumpToMicro(microId);
+      scrollToQuestions();
+    },
   };
 
   const questionListenButton = currentQuestion ? (
@@ -2106,6 +2150,7 @@ function handleInputKeyDown(
           onQcmClick={(choice) => void handleQcmClick(choice)}
           onInputKeyDown={handleInputKeyDown}
           etatEnregistrement={etatEnregistrement()}
+          choixSeance={choixSeance(true)}
         />
         {/* ⭐ 27/10/2026 — Frédéric : « la calculatrice à gauche », « Question
             suivante » là où était « Demande à l'IA » (en bas à droite, les élèves
@@ -2295,6 +2340,7 @@ function handleInputKeyDown(
                     {busy ? "Chargement..." : "Démarrer une mission"}
                   </button>
 
+                  {choixSeance(true)}
                   {etatEnregistrement(true)}
                 </div>
               </div>
@@ -2329,6 +2375,7 @@ function handleInputKeyDown(
               {busy ? "Chargement..." : "Démarrer une mission"}
             </button>
 
+            <div className="flex justify-center">{choixSeance()}</div>
             {etatEnregistrement()}
           </section>
 
@@ -2893,7 +2940,13 @@ type CoachContext = {
   classe: string;
   notionLabel: string;
   // Ressources internes proposées après la réponse de l'IA (entraînements ciblés).
-  suggestions: { label: string; href: string }[];
+  suggestions: { label: string; microId: string }[];
+  /* ⛔ 23/11/2026 — RÉVISER SANS QUITTER LA SÉANCE. Les pastilles « 🎯 » étaient
+     des liens <a href> vers /coach/serie?…&microId=… : un clic rechargeait la
+     page, la séance repartait de zéro sur « Prêt pour une question ? », score et
+     série perdus. Les élèves de Frédéric : « après une réponse fausse, on est
+     sorti du coach ». Elles sautent désormais vers la micro DANS la séance. */
+  onReviser: (microId: string) => void;
 };
 
 // « Demande une explication » : à la demande, l'IA explique l'erreur précise
@@ -3019,7 +3072,8 @@ function CoachErrorHelp({
       {!canAsk ? (
         <p className="text-sm font-semibold text-white/80">
           {/* 19/11/2026 : visiteur sans compte → pas d'aide de Ti Margo (texte validé). */}
-          <a href={AIDE_IA.lienInscription} className="underline">{AIDE_IA.messageVisiteur}</a>
+          {/* Nouvel onglet : l'inscription ne doit pas faire perdre la séance en cours. */}
+          <a href={AIDE_IA.lienInscription} target="_blank" rel="noopener" className="underline">{AIDE_IA.messageVisiteur}</a>
         </p>
       ) : (
         <>
@@ -3057,13 +3111,14 @@ function CoachErrorHelp({
               </p>
               <div className="flex flex-wrap gap-2">
                 {coach.suggestions.map((s) => (
-                  <a
-                    key={s.href}
-                    href={s.href}
+                  <button
+                    type="button"
+                    key={s.microId}
+                    onClick={() => coach.onReviser(s.microId)}
                     className="rounded-full bg-emerald-500/20 px-3 py-1.5 text-xs font-bold text-emerald-100 transition hover:bg-emerald-500/30"
                   >
                     🎯 {s.label}
-                  </a>
+                  </button>
                 ))}
               </div>
             </div>

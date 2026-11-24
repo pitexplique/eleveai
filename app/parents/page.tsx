@@ -32,20 +32,18 @@ import type { Metadata } from "next";
 // ⭐ 02/11/2026 — ALIGNÉE SUR LA GRILLE 2026 (lib/tarifs.ts) et sur /tarifs :
 // le suivi famille ouvre fin décembre, prix par pays, vidéothèque entière
 // (3 500 vidéos, 500 sur YouTube). L'enfant garde le coach sans abonnement.
+// ⭐ 22/11/2026 — ALIGNÉE SUR LE MODÈLE DU 22/11 (note modele-tarifaire-22-11) :
+// 10 questions par jour, Famille 10 €/mois (enfants illimités), Prof 10 €/mois.
 import {
-  ENSEIGNANT,
+  OFFRE,
   OUVERTURE_SUIVI,
-  PERIODE_ANNUELLE,
-  PRIX_ANNUEL,
   PRIX_MENSUEL,
-  PRIX_PAR_PAYS,
   montant,
-  COMPTE_GRATUIT,
-  FREE_CLASSES_PER_TEACHER,
   MENTION_TVA,
-  PHRASE_LANCEMENT,
-  QUOTAS_IA,
-  SUIVI,
+  PHRASE_A_VENIR,
+  PHRASE_ESSAI,
+  PHRASE_FAMILLE,
+  PHRASE_PROF,
 } from "@/lib/tarifs";
 import { etatCompteurVideos } from "@/lib/videos/compteur";
 
@@ -53,7 +51,6 @@ import { etatCompteurVideos } from "@/lib/videos/compteur";
 const VIDEOS_DU_JOUR = etatCompteurVideos().nombreTexte;
 
 const nombre = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-const PRIX_FCFA = PRIX_PAR_PAYS.find((p) => p.suivi.includes("FCFA"))?.suivi;
 
 export const metadata: Metadata = {
   title: "Parents",
@@ -61,7 +58,7 @@ export const metadata: Metadata = {
      la SERP : ce texte est ce que Google affiche sous le lien, et il s'y
      périme plus lentement que la page — une grille annoncée ici survit des
      semaines à la carte qui l'a produite (« 4,90 €/mois », voir lib/tarifs.ts). */
-  description: `Le coach est illimité et ouvert à tous, avec ${VIDEOS_DU_JOUR} vidéos offertes. ${SUIVI.nom} — tout son historique, un bilan chaque semaine — ouvre ${OUVERTURE_SUIVI} : ${montant(PRIX_MENSUEL)} par mois en France, un prix adapté à chaque pays.`,
+  description: `${PHRASE_ESSAI} Le compte Famille ouvre ${OUVERTURE_SUIVI} : ${PHRASE_FAMILLE}.`,
   alternates: { canonical: "https://www.eleveai.fr/parents" },
 };
 
@@ -117,7 +114,8 @@ const faq = [
        ⚠️ Ne pas supprimer la question : une FAQ de page parents sans ligne sur
        le coût donne à croire qu'on l'esquive. */
     q: "Combien ça coûte, pour moi ?",
-    a: `Rien pour essayer : votre enfant s'entraîne sur tout le programme sans abonnement. ${SUIVI.nom} ouvre ${OUVERTURE_SUIVI} : ${montant(PRIX_MENSUEL)} par mois en France sans engagement, ou ${montant(PRIX_ANNUEL)} ${PERIODE_ANNUELLE}, jusqu'à ${SUIVI.enfantsMax} enfants. ${PHRASE_LANCEMENT} ${MENTION_TVA}. Hors de France, le prix suit le niveau de vie du pays.`,
+    // 22/11/2026 : le modèle du 22/11 (note modele-tarifaire-22-11).
+    a: `Rien pour essayer : ${PHRASE_ESSAI} Le compte Famille ouvre ${OUVERTURE_SUIVI} : ${PHRASE_FAMILLE}. ${MENTION_TVA}. ${PHRASE_A_VENIR}`,
   },
   {
     // ⭐ LA QUESTION QUE POSE LA COMPARAISON AVEC LES CONCURRENTS, et la seule
@@ -127,15 +125,16 @@ const faq = [
     // c'est CETTE réponse qui devient un mensonge — la relire avant.
     q: "Si je ne m'abonne pas, mon enfant est-il limité ?",
     // ⛔ 19/11/2026 : il y a maintenant deux limites, dites ici en clair : l'aide de Ti Margo par l'IA et l'historique visible.
-    a: `Pour s'entraîner, non : le coach est illimité et ouvert à tous, avec les exercices, les parcours, les évaluations et les ${VIDEOS_DU_JOUR} vidéos. Avec un compte gratuit, il a ${QUOTAS_IA.gratuitParJour} aides de Ti Margo par jour et voit ses ${COMPTE_GRATUIT.historiqueJours} derniers jours. L'abonnement ajoute votre vue à vous (bilan, compte rendu, alertes), tout son historique, des conseils et ${QUOTAS_IA.suiviParJour} aides de Ti Margo par jour.`,
+    // ⛔ 22/11/2026 : la réponse change avec le modèle : à l'ouverture, 10 questions par jour sans abonnement.
+    a: `À l'ouverture, sans abonnement, il a ${OFFRE.questionsGratuitesParJour} questions par jour sur tout le site. Les fiches de cours, les énigmes à projeter et les PDF restent libres. En classe, avec le code de son professeur, il n'est jamais compté. Le compte Famille ajoute les questions sans limite, votre vue à vous (bilan, compte rendu, alertes) et tout son historique.`,
   },
   {
     q: "Je suis enseignant — est-ce que ça change quelque chose ?",
-    a: `Votre compte à vous ne se paie pas, sur une adresse académique en ${ENSEIGNANT.verification}, avec ${FREE_CLASSES_PER_TEACHER} classes gratuites. ⚠️ Pour vous, à titre personnel : cela ne couvre pas les familles de vos élèves, qui s'abonnent comme les autres.`,
+    a: `Le compte Prof : ${PHRASE_PROF}. Vos élèves entrent avec votre code pendant votre cours. Il ne couvre pas leurs familles : le code de classe et le compte Famille sont deux accès séparés.`,
   },
   {
     q: "Nous vivons hors de France : le prix est-il le même ?",
-    a: `Non, il suit le niveau de vie du pays : par exemple ${PRIX_FCFA} par mois au Sénégal ou en Côte d'Ivoire. Le tableau complet est sur la page des offres.`,
+    a: "Il suivra le niveau de vie du pays. Les prix des autres pays seront fixés avant l'ouverture.",
   },
 ];
 
@@ -346,11 +345,11 @@ export default function ParentsPage() {
             différence avec les concurrents se voit d'un coup d'œil. */}
         <section>
           <h2 className="text-center text-2xl font-black sm:text-3xl">
-            Votre enfant s&apos;entraîne sans abonnement. Vous, vous choisissez de le suivre.
+            Votre enfant essaie chaque jour. Vous choisissez de le suivre.
           </h2>
           <p className="mx-auto mt-2 max-w-2xl text-center text-sm font-semibold text-slate-500">
-            Sans abonnement, il garde le coach illimité et toutes les vidéos.
-            {SUIVI.nom} ajoute votre vue à vous et tout son historique.
+            Sans abonnement, il a {OFFRE.questionsGratuitesParJour} questions par jour.
+            Le compte Famille ajoute les questions sans limite, votre vue à vous et tout son historique.
           </p>
 
           <div className="mt-8 grid gap-4 lg:grid-cols-2">
@@ -372,18 +371,18 @@ export default function ParentsPage() {
                   deux éléments distincts. Les deux colonnes suivent maintenant
                   la même structure — un titre, une précision dessous. */}
               <p className="mt-2 text-3xl font-black leading-tight text-emerald-600">
-                Ouvert à tous
+                Pour essayer
               </p>
               <p className="mt-1 text-base font-black text-slate-500">
-                sans abonnement
+                {OFFRE.questionsGratuitesParJour} questions par jour
               </p>
               <ul className="mt-4 space-y-2.5">
                 {[
-                  ["🧭", "Le coach illimité, sur tout le programme, sans compte"],
-                  ["🎬", `Toutes les vidéos : ${VIDEOS_DU_JOUR} aujourd'hui`],
-                  ["✏️", "Tous les exercices, les parcours et les évaluations"],
-                  ["🦎", `Avec un compte gratuit : ${QUOTAS_IA.gratuitParJour} aides de Ti Margo par jour`],
-                  ["📋", `Sa semaine et ses ${COMPTE_GRATUIT.historiqueJours} derniers jours`],
+                  // 22/11/2026 : le modèle du 22/11 (un seul compteur, 10 questions par jour).
+                  ["🧭", `${OFFRE.questionsGratuitesParJour} questions par jour sur tout le site, sans compte`],
+                  ["✏️", "Le coach, les exercices, le calcul rapide, les automatismes"],
+                  ["📄", "Toujours libres : les fiches de cours, les énigmes à projeter, les PDF"],
+                  ["🏫", "En classe, avec le code du prof : jamais compté"],
                 ].map(([emoji, texte]) => (
                   <li key={texte} className="flex gap-2.5 text-sm font-semibold leading-relaxed text-slate-700">
                     <span aria-hidden="true">{emoji}</span>
@@ -392,7 +391,7 @@ export default function ParentsPage() {
                 ))}
               </ul>
               <p className="mt-4 rounded-2xl bg-emerald-50 px-4 py-3 text-sm font-black leading-relaxed text-emerald-800">
-                Sans abonnement, il s&apos;entraîne sur tout son programme.
+                Chaque jour, il peut essayer.
               </p>
             </div>
 
@@ -428,18 +427,16 @@ export default function ParentsPage() {
                 </span>
               </p>
               <p className="mt-1 text-sm font-bold text-slate-500">
-                En France, sans engagement, ou {montant(PRIX_ANNUEL)} {PERIODE_ANNUELLE}.
-                Un prix adapté à chaque pays. {MENTION_TVA}.
+                En France, sans engagement. {MENTION_TVA}.
               </p>
-              <p className="mt-1 text-sm font-black text-emerald-800">{PHRASE_LANCEMENT}</p>
               <ul className="mt-4 space-y-2.5">
                 {[
                   ["📚", "Tout son historique, depuis le premier jour"],
-                  ["🦎", `${QUOTAS_IA.suiviParJour} aides de Ti Margo par jour, au lieu de ${QUOTAS_IA.gratuitParJour}`],
+                  ["🧭", "Les questions sans limite, sur tout le site"],
                   ["📊", "Un bilan de départ, puis un compte rendu chaque semaine"],
                   ["📌", "Les erreurs qui reviennent, et les 3 choses à revoir"],
                   ["🔔", "Une alerte quand il décroche sur une notion"],
-                  ["👪", `Une seule adresse courriel, jusqu'à ${SUIVI.enfantsMax} enfants`],
+                  ["👪", "Autant d'enfants que vous voulez, une seule adresse courriel"],
                 ].map(([emoji, texte]) => (
                   <li key={texte} className="flex gap-2.5 text-sm font-semibold leading-relaxed text-slate-700">
                     <span aria-hidden="true">{emoji}</span>
@@ -451,7 +448,7 @@ export default function ParentsPage() {
                 href="/tarifs"
                 className="mt-5 inline-flex rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-black text-white transition hover:bg-slate-700"
               >
-                Voir les offres et les prix par pays →
+                Voir les tarifs →
               </Link>
               <p className="mt-2 text-xs font-bold text-slate-500">
                 Ouverture {OUVERTURE_SUIVI}. Rien n&apos;est encaissé avant.
@@ -466,9 +463,9 @@ export default function ParentsPage() {
               dans la MÊME phrase, pas en bas de page. */}
           <p className="mx-auto mt-6 max-w-3xl rounded-2xl border border-sky-200 bg-sky-50 px-5 py-4 text-center text-sm font-semibold leading-relaxed text-sky-900">
             🧑‍🏫 <strong className="font-black">Vous êtes enseignant&nbsp;?</strong>{" "}
-            Votre compte ne se paie pas, sur {ENSEIGNANT.verification} — pour
-            vous, à titre personnel, et pas pour les familles de vos élèves, qui
-            s&apos;abonnent comme les autres.
+            Le compte Prof est à {montant(OFFRE.prof)} par mois, toutes vos classes.
+            Il ne couvre pas les familles de vos élèves : le code de classe et le
+            compte Famille sont deux accès séparés.
           </p>
         </section>
 

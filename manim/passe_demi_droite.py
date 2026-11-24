@@ -23,6 +23,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from passe_relatifs import mesurer, mmss  # noqa: E402
+from passe_decimaux import chap0  # noqa: E402
 
 RACINE = Path(__file__).resolve().parents[1]
 SORTIES = RACINE / "manim" / "sorties"
@@ -164,7 +165,7 @@ def chapitres(chap, t, duree):
             print("  chapitre fondu :", c, chap[c], file=sys.stderr)
             continue
         res.append((debuts[i], chap[c]))
-    return [[mmss(d), lib] for d, lib in res]
+    return chap0([[mmss(d), lib] for d, lib in res])  # le 1er chapitre aussi (23/11)
 
 
 def mp4s():

@@ -1,0 +1,8 @@
+{
+  "00-accroche": "x moins 2, au carré, égale 25. Tu trouves 7 ? Il en manque une.",
+  "01-image": "On ramène 25 à gauche : x moins 2, au carré, moins 25, égale 0. C'est a au carré moins b au carré : x moins 7, fois x plus 3, égale 0. Produit nul : x égale 7, ou x égale moins 3.",
+  "01q-question": "Question ! Combien de solutions a x au carré moins 1 égale 0 ? A : deux, 1 et moins 1. B : une seule, 1. C : aucune. Mets pause, et choisis !",
+  "01r-reponse": "Réponse A : x moins 1, fois x plus 1, égale 0. Donc 1 et moins 1.",
+  "02-question": "À toi. Résous x plus 3, au carré, égale 16. Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

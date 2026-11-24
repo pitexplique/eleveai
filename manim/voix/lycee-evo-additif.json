@@ -1,0 +1,17 @@
+{
+  "00-garde": "Le coefficient multiplicateur. Augmenter de 5 %, c'est multiplier par combien ?",
+  "01-situation": "Le 1er novembre 2024, le Smic horaire brut passe de 11,65 € à 11,88 €. Une hausse de 2 %. Ce calcul, la gestionnaire de paie le fait pour chaque salaire, le commerçant pour chaque prix, l'économiste pour chaque indice.",
+  "02-question-du-jour": "Comment passer de 11,65 € au nouveau Smic, en un seul calcul ?",
+  "03-barre": "Dessinons 11,65 € : une barre de 100 %. La hausse ajoute 2 % au bout. La nouvelle barre fait 100 % plus 2 %, soit 102 %.",
+  "04-coefficient": "Et 102 %, c'est 1,02. Augmenter de 2 %, c'est multiplier par 1,02. 11,65 fois 1,02, égale environ 11,88 €.",
+  "05-regle": "La règle : augmenter de t %, c'est multiplier par 1 plus t sur 100. Plus 5 % : fois 1,05. Plus 30 % : fois 1,3. Plus 100 % : fois 2.",
+  "06-question": "Question ! Augmenter de 7 %, c'est multiplier par : A : 7. B : 0,07. C : 1,07. Mets pause, et choisis !",
+  "06b-reponse": "Réponse C. 100 % plus 7 %, égale 107 %, soit 1,07. A rend le prix 7 fois plus grand, et B ne calcule que la hausse.",
+  "07-piege": "Attention au piège ! Plus 5 %, ce n'est pas fois 1,5. 1,5, c'est 150 % : plus 50 %. Plus 5 %, c'est 105 % : fois 1,05.",
+  "08-question": "Question ! Un loyer de 600 € augmente de 3 %. Quel calcul donne le nouveau loyer ? A : 600 fois 1,03. B : 600 fois 1,3. C : 600 plus 3. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. Plus 3 %, c'est fois 1,03 : 618 €. B augmente de 30 %, et C n'ajoute que 3 €.",
+  "09-defi": "À toi de jouer ! Par combien multiplie-t-on pour augmenter de 12 % ? Et de 0,5 % ? Mets pause, et cherche !",
+  "09b-correction": "Plus 12 % : 112 %, fois 1,12. Plus 0,5 % : 100,5 %, fois 1,005.",
+  "10-finale": "Ce que tu as appris. Augmenter de t %, c'est multiplier par 1 plus t sur 100. Plus 2 % : fois 1,02. Plus 50 % : fois 1,5. Un seul calcul, sans calculer la hausse à part.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

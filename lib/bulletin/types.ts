@@ -23,5 +23,8 @@ export type Bulletin = {
   prenom: string;
   classe: string | null;
   computed_at: string;
+  /** Version de la règle de calcul (2 = règle de classe du 24/11/2026). Un
+   *  snapshot plus ancien se recalcule à la lecture. */
+  regle?: number;
   periodes: Record<PeriodeCle, PeriodeBulletin>;
 };

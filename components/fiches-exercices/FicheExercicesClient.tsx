@@ -33,6 +33,11 @@ import {
 } from "lucide-react";
 import ModeClasse from "@/components/fiches/ModeClasse";
 import ReponseExercice from "@/components/fiches-exercices/ReponseExercice";
+import {
+  ChoixSeanceExercices,
+  EnregistrerSeanceExercices,
+  useSeanceExercices,
+} from "@/components/fiches-exercices/SeanceExercices";
 import TexteMath from "@/components/fiches/TexteMath";
 import VideoNotion from "@/components/fiches/VideoNotion";
 import { slidesDepuisExercices } from "@/lib/fiches-exercices/slides";
@@ -82,6 +87,9 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
   const hrefPdf = `${DOSSIER_PDF}/${fichierPdf}`;
   const classe = libelleClasse(fiche.classe);
   const slides = slidesDepuisExercices(fiche);
+  // ⭐ 24/11/2026 : la séance d'exercices s'enregistre (maths seulement).
+  const seance = useSeanceExercices();
+  const enMaths = fiche.matiere === "maths";
 
   // La numérotation court d'un niveau à l'autre : 1 à 20, pas trois fois 1 à 8.
   let compteur = 0;
@@ -111,6 +119,8 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
                 Toutes les fiches d&apos;exercices
               </Link>
             </nav>
+            {/* 📝 / 🏋️ EN HAUT, comme au coach (Frédéric, 24/11/2026). */}
+            {enMaths ? <ChoixSeanceExercices seance={seance} classe={fiche.classe} /> : null}
             <div className="mb-4 flex flex-wrap items-center gap-x-2 gap-y-1">
               <span className="flex items-center gap-2 text-lg font-black tracking-tight text-sky-600">
                 <Sparkles className="h-5 w-5" />
@@ -357,6 +367,15 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
               )}
             </ol>
           </section>
+
+          {enMaths ? (
+            <EnregistrerSeanceExercices
+              seance={seance}
+              classe={fiche.classe}
+              notion={fiche.notion}
+              titre={fiche.titre}
+            />
+          ) : null}
 
           <footer className="mt-8 flex items-center justify-between border-t border-slate-200 pt-5 text-xs text-slate-500 print:mt-6">
             <span>eleveai.fr - Fiche d&apos;exercices</span>

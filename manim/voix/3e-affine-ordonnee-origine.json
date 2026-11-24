@@ -1,0 +1,15 @@
+{
+  "00-garde": "L'ordonnée à l'origine. Que vaut une fonction affine quand x vaut 0 ?",
+  "01-moniteur": "Léo est moniteur d'auto-école. L'inscription coûte 300 euros. Puis chaque heure de conduite coûte 45 euros. Pour x heures : f de x égale 45 x plus 300.",
+  "02-depart": "Avant la première heure, x vaut 0. f de 0 égale 45 fois 0, plus 300 : 300 euros. Ce 300, c'est b, l'ordonnée à l'origine. C'est la valeur de départ.",
+  "03-axe": "Sur le graphique, la droite coupe l'axe vertical à 300. C'est là qu'on lit b : l'ordonnée du point où x vaut 0.",
+  "03q-question": "Question ! f de x égale 7 x moins 5. Quelle est son ordonnée à l'origine ? A : moins 5. B : 7. C : 5. Mets pause, et choisis !",
+  "03r-reponse": "Réponse A : b, c'est le nombre seul, avec son signe. f de 0 égale moins 5 : la droite coupe l'axe vertical sous l'origine.",
+  "04-retrouver": "Une autre auto-école cache son prix d'inscription. On sait seulement : 50 euros l'heure, et 20 heures coûtent 1 400 euros. f de x égale 50 x plus b. Donc 50 fois 20, plus b, égale 1 400. 1 000 plus b égale 1 400 : b vaut 400. L'inscription coûte 400 euros.",
+  "05q-question": "Question ! f de x égale 3 x plus b, et f de 2 égale 10. Combien vaut b ? A : 16. B : 4. C : 7. Mets pause, et choisis !",
+  "05r-reponse": "Réponse B : 3 fois 2 égale 6. 6 plus b égale 10, donc b vaut 4. Pas 16 : on enlève 6, on ne l'ajoute pas.",
+  "06-defi": "À toi de jouer. Trouve b. Un : f de x égale moins 2 x plus b, et f de 4 égale 1. Deux : a vaut 0,5, et la droite passe par le point de coordonnées 6 et 5. Mets pause, et cherche !",
+  "06b-correction": "Correction. Un : moins 2 fois 4, c'est moins 8. Moins 8 plus b égale 1, donc b vaut 9. Deux : 0,5 fois 6, c'est 3. 3 plus b égale 5, donc b vaut 2.",
+  "07-finale": "Ce que tu as appris. Dans a x plus b, b est l'ordonnée à l'origine. C'est f de 0, la valeur de départ. Sur le graphique, la droite coupe l'axe vertical en b. Pour retrouver b, on remplace x et f de x par un point connu, puis on résout.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

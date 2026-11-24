@@ -33,15 +33,11 @@ import { CollinesAccueil, MontgolfiereAccueil, SoleilAccueil } from "@/component
 import {
   ArrowRight,
   BarChart3,
-  CalendarCheck,
   Check,
   ClipboardList,
-  Eye,
   FileText,
   Globe2,
   GraduationCap,
-  MonitorPlay,
-  Building2,
   PlayCircle,
   Puzzle,
   Save,
@@ -52,15 +48,13 @@ import {
 import { PROGRAMME_CLASSES, listerToutesLesNotions } from "@/lib/programme";
 import { toutesLesVideos } from "@/lib/videos/r2";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
-import { DONS, VENTE } from "@/lib/legal/editeur";
-import { AIDE_IA, COMPTE_GRATUIT, ETABLISSEMENT_ETRANGER, FREE_CLASSES_PER_TEACHER, MENTION_TVA, MOIS_OFFERTS, NOM_VISIO, OUVERTURE_SUIVI, OUVERTURE_VISIO, PHRASE_LANCEMENT, PRIX_ANNUEL, PRIX_ETABLISSEMENT_PAR_PAYS, PRIX_MENSUEL, PRIX_VISIO, QUOTAS_IA, SUIVI, SUIVI_A_VENIR, SUIVI_DES_MAINTENANT, montant } from "@/lib/tarifs";
+import { OFFRE, montant } from "@/lib/tarifs";
 import { PAYS_AVENTURE } from "@/lib/aventure/pays";
 import CompteurFamille, { type VarianteCompteur } from "@/components/accueil/CompteurFamille";
 import MenuDuJour from "@/components/seances/MenuDuJour";
 import { SEANCES } from "@/lib/seances/seances";
 
 const MENU_RESTAURANT = SEANCES.find((s) => s.id === "restaurant-6e-longueurs")?.menu;
-import { CAP_VIDEOS, ECHEANCE_CAP, etatCompteurVideos } from "@/lib/videos/compteur";
 
 /** La classe du coach → son dossier de vidéos sur R2 (et la clé de /video). */
 const DOSSIER_VIDEO: Record<string, string> = {
@@ -120,38 +114,6 @@ const ETAPES = [
   { Icone: BarChart3, titre: "Je vois mes progrès", texte: "Mes résultats sont gardés : je reprends demain là où je me suis arrêté." },
 ];
 
-/* Ce qui reste ouvert à tous, pour toujours.
-   ⭐ 02/11 : le coach garde la vidéo de chaque micro (avis de déontologie : le
-   coach utilisé en classe ne renvoie jamais vers une offre). Ce qui se vend en
-   plus, c'est la vidéothèque entière.
-   ⛔ 16/11 : la ligne « 3 500 vidéos, dont 3 000 hors YouTube » était écrite à
-   la main et fausse (1 915 sur R2) : la vidéothèque se compte dans le composant. */
-/* ⭐ 19/11/2026 — LE MODÈLE : le contenu est offert à tous, on paie le suivi.
-   Le coach est illimité et ouvert à tous ; l'aide de Ti Margo par l'IA est
-   comptée (lib/tarifs.ts, QUOTAS_IA). ⛔ Jamais « illimité » pour l'aide IA. */
-const GRATUIT = [
-  `${AIDE_IA.coachOuvert.replace(/\.$/, "")}, sur tout le programme, micro-compétence par micro-compétence`,
-  "Toutes les vidéos et les feuilles d'exercices corrigées, sans compte",
-  `Avec un compte gratuit : ${QUOTAS_IA.gratuitParJour} aides de Ti Margo par jour, ma semaine et mes ${COMPTE_GRATUIT.historiqueJours} derniers jours`,
-  `Pour le prof : ${FREE_CLASSES_PER_TEACHER} classes gratuites, la séance en direct, le bilan par micro`,
-];
-
-/* ⛔ 18/11/2026 : la famille ne reçoit que ce qui EXISTE (SUIVI_DES_MAINTENANT),
-   le reste est dit « à venir » (SUIVI_A_VENIR). Plus jamais « l aide de l IA sans
-   limite » : la Famille ne vend pas d IA (Ti Margo viendra au printemps 2027). */
-/* ⭐ 03/11 — Frédéric : « enlève les cours en visio et remplace par une offre
-   établissement », « suivant les pays ». ⛔ Hors de France seulement. */
-const ETABLISSEMENT = [
-  "Tous les élèves et tous les professeurs de l'établissement",
-  `${SUIVI.nom} pour chaque élève`,
-  "Le bilan par micro-compétence, classe par classe",
-  "Vos professeurs signalent ce qui ne va pas : le coach est corrigé chaque semaine",
-];
-const PRIX_ETABLISSEMENT = PRIX_ETABLISSEMENT_PAR_PAYS.map((e) => ({
-  ...e,
-  nom: PAYS_AVENTURE.find((p) => p.slug === e.slug)?.nom ?? e.slug,
-}));
-
 // Le titre et les nuages en lettres à empattements fines, plus douces que le gras.
 const slab = Roboto_Slab({ subsets: ["latin"], weight: ["300", "700"], display: "swap" });
 
@@ -194,19 +156,6 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
   }).filter((c) => c.micros > 0);
 
   const totalMicros = cartes.reduce((s, c) => s + c.micros, 0);
-  // ⭐ 16/11 : le même compteur que l'argument de vente (lib/videos/compteur.ts).
-  const compteurVideos = etatCompteurVideos();
-  const videotheque = compteurVideos.capAtteint
-    ? `Toute la vidéothèque : plus de ${CAP_VIDEOS.toLocaleString("fr-FR")} vidéos du CP à la Terminale`
-    : `Toute la vidéothèque : ${compteurVideos.nombreTexte} vidéos du CP à la Terminale aujourd'hui (objectif : ${CAP_VIDEOS.toLocaleString("fr-FR")} ${ECHEANCE_CAP})`;
-  // 19/11/2026 : la vidéothèque est offerte à tous (liste « Ouvert à tous ») ;
-  // le Suivi ne vend que le suivi.
-  const gratuit = [GRATUIT[0], videotheque, ...GRATUIT.slice(1)];
-  const suiviFamille = [
-    ...SUIVI_DES_MAINTENANT.map((texte) => ({ Icone: ClipboardList, texte })),
-    ...SUIVI_A_VENIR.map((t) => ({ Icone: CalendarCheck, texte: `À venir : ${t.charAt(0).toLowerCase()}${t.slice(1)}` })),
-  ];
-
   return (
     <div className="min-h-screen bg-white text-slate-900 [color-scheme:light]">
       {/* ⛔ LA RECHERCHE DES TÉLÉPHONES (Frédéric, 23/10 : « tu as enlevé la barre
@@ -367,7 +316,8 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
               { Icone: Target, titre: "Un coach de maths", texte: "Il trouve ce qui manque à chaque élève et l'entraîne là-dessus, du CP à la Terminale." },
               { Icone: PlayCircle, titre: "Avec ses vidéos", texte: "Chaque micro-compétence a sa vidéo, avec des questions-pauses, pour comprendre avant de s'entraîner." },
               { Icone: Globe2, titre: "8 pays, puis 40", texte: "Adapté au programme de 8 pays francophones aujourd'hui, et demain de 40." },
-              { Icone: Users, titre: "Offert à chaque élève", texte: "Le coach, les vidéos et les fiches sont offerts à tous. Les familles qui veulent le suivi s'abonnent." },
+              // 22/11/2026 : « Offert à chaque élève » contredit le modèle du 22/11 (10 questions par jour, puis l'abonnement).
+              { Icone: Users, titre: "10 questions par jour", texte: `${OFFRE.questionsGratuitesParJour} questions offertes chaque jour pour essayer. Puis ${montant(OFFRE.famille)} par mois pour toute la famille.` },
             ].map(({ Icone, titre, texte }) => (
               <div key={titre} className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-teal-100">
                 <Icone className="h-7 w-7 text-teal-700" aria-hidden="true" />
@@ -468,121 +418,11 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
           </figure>
         </section>
 
-        {/* 5. GRATUIT / POUR LES FAMILLES
-            ✅ 02/11 : le rectorat n'exige aucune autorisation ; les offres
-            ouvrent fin décembre, quand les vidéos seront faites. Prix adapté à
-            chaque pays. Toujours aucun bouton de paiement avant l'ouverture. */}
-        <section id="familles" className="mt-12 scroll-mt-24">
-          <h2 className="text-2xl font-black sm:text-3xl">
-            {offresFamille ? (VENTE.ouverte ? "Ce qui est ouvert à tous, et ce qui est proposé aux familles" : `Ce qui est ouvert à tous, et ce qui s'ouvre aux familles ${OUVERTURE_SUIVI}`) : "Pour les élèves et les professeurs"}
-          </h2>
-          <div className={`mt-6 grid gap-5 ${offresFamille ? "lg:grid-cols-3" : ""}`}>
-            <div className="rounded-3xl border-2 border-emerald-300 bg-emerald-50/50 p-6">
-              <p className="text-sm font-black uppercase tracking-wide text-emerald-700">Pour toujours</p>
-              <h3 className="mt-1 text-2xl font-black">Ouvert à tous</h3>
-              <p className="mt-1 text-slate-600">Élèves et professeurs, sans abonnement.</p>
-              <ul className="mt-4 space-y-2 text-slate-800">
-                {gratuit.map((g) => <Puce key={g}>{g}</Puce>)}
-              </ul>
-              <Link href="/coach-ia/maths" className="mt-6 block rounded-full bg-emerald-600 px-5 py-3 text-center font-black text-white hover:bg-emerald-700">
-                Commencer avec le coach de maths
-              </Link>
-            </div>
-
-            {offresFamille && (
-              <>
-            <div className="rounded-3xl border border-slate-200 p-6">
-              <p className="text-sm font-black uppercase tracking-wide text-sky-700">{VENTE.ouverte ? "Pour les familles" : `Ouverture ${OUVERTURE_SUIVI}`}</p>
-              <h3 className="mt-1 flex items-center gap-2 text-2xl font-black">
-                <Eye className="h-6 w-6 text-sky-700" aria-hidden="true" /> {SUIVI.nom}
-              </h3>
-              <p className="mt-1 text-slate-600">Pour les parents qui veulent savoir où en est leur enfant, sans faire à sa place.</p>
-              <ul className="mt-4 space-y-2 text-slate-800">
-                {suiviFamille.map(({ Icone, texte }) => (
-                  <li key={texte} className="flex gap-2">
-                    <Icone className="mt-0.5 h-5 w-5 shrink-0 text-sky-600" aria-hidden="true" />
-                    <span>{texte}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-5 text-lg font-black">
-                {montant(PRIX_MENSUEL)} par mois ou {montant(PRIX_ANNUEL)} par an ({MOIS_OFFERTS} mois offerts)
-              </p>
-              <p className="mt-1 text-sm font-bold text-emerald-800">{PHRASE_LANCEMENT}</p>
-              <p className="mt-1 text-sm text-slate-500">
-                Au mois, sans engagement. Prix en France, adapté à chaque pays. {MENTION_TVA}.
-              </p>
-              {VENTE.ouverte && (
-                <Link href="/abonnement" className="mt-3 inline-flex rounded-full bg-sky-700 px-5 py-2.5 font-black text-white hover:bg-sky-800">
-                  S&apos;abonner
-                </Link>
-              )}
-            </div>
-
-            <div className="rounded-3xl border border-slate-200 p-6">
-              <p className="text-sm font-black uppercase tracking-wide text-amber-700">Écoles, collèges et lycées hors de France</p>
-              <h3 className="mt-1 flex items-center gap-2 text-2xl font-black">
-                <Building2 className="h-6 w-6 text-amber-700" aria-hidden="true" /> L&apos;offre établissement
-              </h3>
-              <p className="mt-1 text-slate-600">Pour les établissements qui enseignent en français, du CP à la Terminale.</p>
-              <ul className="mt-4 space-y-2 text-slate-800">
-                {ETABLISSEMENT.map((t) => <Puce key={t}>{t}</Puce>)}
-              </ul>
-              <p className="mt-5 font-black">Par élève et par an, selon le pays :</p>
-              <ul className="mt-2 divide-y divide-slate-100 text-sm">
-                {PRIX_ETABLISSEMENT.map((p) => (
-                  <li key={p.slug} className="flex items-center justify-between gap-2 py-1">
-                    <span className="flex items-center gap-2">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={`/drapeaux/${p.slug}.svg`} alt="" width={20} height={15} className="h-[15px] w-5 rounded-[3px] object-cover ring-1 ring-black/10" />
-                      {p.nom}
-                    </span>
-                    <span className="font-black">{p.prix}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-2 text-sm text-slate-500">
-                À partir de {ETABLISSEMENT_ETRANGER.minimumEleves} élèves, professeurs inclus.
-              </p>
-              <Link href="/tarifs#etablissements" className="mt-3 inline-flex items-center gap-2 font-black text-amber-800 hover:underline">
-                Écrire pour votre établissement <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-            </div>
-              </>
-            )}
-          </div>
-          {/* ⭐ 03/11 : les visios reviennent, mais plus comme des cours :
-              « Maths réelles », à quoi servent les maths (lib/tarifs.ts,
-              docs/visio-maths-reelles.md). Une bande, pas une 4e carte. */}
-          {offresFamille && (
-            <div className="mt-5 flex flex-col gap-4 rounded-3xl border border-violet-200 bg-violet-50/60 p-6 sm:flex-row sm:items-center">
-              <MonitorPlay className="h-10 w-10 shrink-0 text-violet-700" aria-hidden="true" />
-              <div className="flex-1">
-                <p className="text-sm font-black uppercase tracking-wide text-violet-700">Les visios, à partir de {OUVERTURE_VISIO}</p>
-                <h3 className="mt-1 text-2xl font-black">« {NOM_VISIO} » : vrai ou faux ?</h3>
-                <p className="mt-1 text-slate-700">
-                  Une phrase entendue à la télé ou sur les réseaux. On vote, puis on vérifie avec les maths : pourcentages,
-                  sondages, graphiques qui trompent, hasard. Pour ne plus se faire avoir. 1 heure en direct, du collège au
-                  lycée, avec des élèves de 8 pays.
-                </p>
-              </div>
-              <p className="shrink-0 text-lg font-black">{montant(PRIX_VISIO)} la séance en France</p>
-            </div>
-          )}
-          {offresFamille && (
-            <p className="mt-4 text-sm text-slate-500">
-            {!VENTE.ouverte && <>{SUIVI.nom} et l&apos;offre établissement ouvrent {OUVERTURE_SUIVI}, les visios en {OUVERTURE_VISIO}. </>}Ces offres ne s&apos;adressent ni aux établissements situés en France, ni aux élèves de l&apos;auteur du site.
-          </p>
-          )}
-        </section>
-
-        {DONS.ouverts && (
-          <p className="mt-6 text-center">
-            <Link href="/soutenir" className="font-black text-rose-700 hover:underline">
-              Vous voulez simplement encourager le site ? Faire un don ❤️
-            </Link>
-          </p>
-        )}
+        {/* 5. LES OFFRES — ⭐ 22/11/2026 : la grande section (Suivi 7,95 €, prix de
+            lancement, établissements, visio) est RETIRÉE de l'accueil. Les prix
+            vivent sur /tarifs ; l'accueil n'en garde que les deux cartes du haut
+            (Famille / Prof) et la ligne des 10 questions (CompteurFamille).
+            Ancienne section : git show 32927aab:app/accueil/AccueilSuivi.tsx */}
 
         {/* 6. QUI EST DERRIÈRE — la confiance, sans promesse qu'on ne tient pas
             (pas de « tout est vérifié » : c'est le reproche de l'inspecteur). */}

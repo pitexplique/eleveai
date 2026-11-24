@@ -1,0 +1,17 @@
+{
+  "00-garde": "Les trois formes. Comment reconnaître une identité remarquable au premier coup d'œil ?",
+  "01-comptable": "Karim est comptable dans un magasin de vélos. Il doit calculer 49 fois 51, sans calculatrice. Il trouve tout de suite : 2 499. Son secret ? Il a reconnu une forme.",
+  "02-trois": "Il y a trois formes à reconnaître. Un : a plus b, au carré. Deux parenthèses identiques, avec un plus. Deux : a moins b, au carré. Deux parenthèses identiques, avec un moins. Trois : a plus b, fois a moins b. Les mêmes termes, avec des signes contraires.",
+  "03-somme": "Regarde : x plus 7, fois x plus 7. Les deux parenthèses sont identiques : c'est x plus 7, au carré. C'est la première forme.",
+  "04-difference": "Et 2 x moins 3, au carré ? C'est 2 x moins 3, fois 2 x moins 3. Deux parenthèses identiques, avec un moins : la deuxième forme. Ici, a vaut 2 x, et b vaut 3.",
+  "04q-question": "Question ! Quelle est la forme de x moins 6, au carré ? A : a moins b, au carré. B : a plus b, au carré. C : a plus b, fois a moins b. Mets pause, et choisis !",
+  "04r-reponse": "Réponse A : a moins b, au carré. Les deux parenthèses x moins 6 sont identiques, avec un moins.",
+  "05-produit": "Maintenant : x plus 8, fois x moins 8. Les mêmes termes, x et 8, mais un plus d'un côté, et un moins de l'autre : la troisième forme. Le secret de Karim, c'est elle : 49 fois 51, c'est 50 moins 1, fois 50 plus 1. Elle donne 50 au carré moins 1 au carré : 2 500 moins 1, 2 499.",
+  "06-piege": "Le piège : des parenthèses qui se ressemblent, sans être une identité. x plus 3, fois x plus 5 : les nombres sont différents. Ce n'est aucune des trois formes. On développe alors par la double distributivité, tout simplement.",
+  "06q-question": "Question ! Laquelle est une identité remarquable ? A : x plus 4, fois x plus 2. B : x plus 4, fois 2 x moins 4. C : x moins 4, fois x plus 4. Mets pause, et choisis !",
+  "06r-reponse": "Réponse C : x moins 4, fois x plus 4. Les mêmes termes, x et 4, avec des signes contraires : la troisième forme.",
+  "07-defi": "À toi de jouer. Donne la forme de ces trois expressions. 3 x plus 1, au carré. y moins 5, fois y plus 5. Et 10 moins x, au carré. Mets pause, et cherche !",
+  "07b-correction": "Correction. 3 x plus 1, au carré : la première forme, a plus b au carré. y moins 5, fois y plus 5 : la troisième forme. 10 moins x, au carré : la deuxième forme, a moins b au carré, avec a égale 10 et b égale x.",
+  "08-finale": "Ce que tu as appris. Deux parenthèses identiques avec un plus : a plus b, au carré. Avec un moins : a moins b, au carré. Les mêmes termes avec des signes contraires : a plus b, fois a moins b. Sinon, ce n'est pas une identité.",
+  "09-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

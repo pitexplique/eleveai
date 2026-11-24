@@ -1,0 +1,16 @@
+{
+  "00-garde": "Les erreurs des identités. x plus 5, au carré, égale x au carré plus 25 ? Faux ! Voici pourquoi.",
+  "01-ingenieure": "Aya est ingénieure en intelligence artificielle. Elle apprend à un correcteur automatique à repérer les erreurs des élèves. Sur une copie : x plus 5, au carré, égale x au carré plus 25. Comment le correcteur sait-il que c'est faux ?",
+  "02-test": "Il teste avec un nombre. Pour x égale 1. À gauche : 1 plus 5, 6, et 6 au carré, 36. À droite : 1 plus 25, 26. 36 n'est pas 26 : c'est faux. Il manque 10 : le double produit, 10 x.",
+  "03-erreur1": "Erreur numéro un : oublier le double produit. x plus 5, au carré, égale x au carré plus 10 x plus 25. Le carré d'une somme n'est jamais la somme des carrés.",
+  "03q-question": "Question ! Quelle égalité est juste ? A : x plus 9, au carré, égale x au carré plus 81. B : x plus 9, au carré, égale x au carré plus 9 x plus 81. C : x plus 9, au carré, égale x au carré plus 18 x plus 81. Mets pause, et choisis !",
+  "03r-reponse": "Réponse C : le double produit, c'est 2 fois x fois 9, 18 x. Pas 9 x : il y a deux bandes.",
+  "04-erreur2": "Erreur numéro deux : le signe. x moins 3, au carré. Le double produit est négatif : moins 6 x. Mais le dernier terme est positif : plus 9. Écrire moins 9, c'est faux.",
+  "05-erreur3": "Erreur numéro trois : confondre deux formes. x moins 3, au carré, donne x au carré moins 6 x plus 9. Mais x moins 3, fois x plus 3, donne x au carré moins 9. Deux parenthèses identiques, ou des signes contraires : ce n'est pas la même chose.",
+  "05q-question": "Question ! Une copie dit : x moins 2, au carré, égale x au carré moins 4. Le correcteur teste x égale 5. Que trouve-t-il ? A : 9 à gauche, 9 à droite, c'est juste. B : 9 à gauche, 21 à droite, c'est faux. C : 21 à gauche, 9 à droite, c'est faux. Mets pause, et choisis !",
+  "05r-reponse": "Réponse B : 5 moins 2, 3, et 3 au carré, 9. Mais 25 moins 4, 21. C'est faux : la bonne réponse est x au carré moins 4 x plus 4.",
+  "06-defi": "Défi : trouve l'erreur. Sur une copie : 2 x plus 1, au carré, égale 2 x au carré plus 4 x plus 1. Où est l'erreur ? Mets pause, et cherche !",
+  "06b-correction": "Correction. Le double produit est juste : 2 fois 2 x fois 1, 4 x. Mais le carré de 2 x, c'est 2 x fois 2 x : 4 x au carré. La bonne réponse : 4 x au carré plus 4 x plus 1.",
+  "07-finale": "Ce que tu as appris. Le carré d'une somme a trois termes : n'oublie pas le double produit. Dans a moins b au carré, le dernier terme reste positif. Et pour vérifier, teste avec un nombre.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

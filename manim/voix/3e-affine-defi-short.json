@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Pense à un nombre. Je vais deviner ton résultat.",
+  "01-image": "Multiplie-le par 4. Ajoute 12. Divise par 4. Enlève ton nombre de départ. Tu trouves 3 ! Pourquoi ? 4 x plus 12, divisé par 4, c'est x plus 3. Moins x : il reste 3. C'est une fonction affine avec a égale 0 : une fonction constante.",
+  "01q-question": "Question ! Programme : multiplie par 2, ajoute 10, divise par 2, enlève ton nombre. Que trouves-tu toujours ? A : 10. B : 5. C : ton nombre. Mets pause, et choisis !",
+  "01r-reponse": "Réponse B : 2 x plus 10, divisé par 2, c'est x plus 5. Moins x : il reste 5.",
+  "02-question": "À toi. Invente un programme de calcul qui donne toujours 7. Réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

@@ -12,6 +12,7 @@ import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { pseudosDeLaClasse } from "@/lib/server/pseudos";
 import { getMicroLabelMap } from "@/lib/tutor-v4/catalog";
+import { compteDansLaMoyenne } from "@/lib/moyenne/compteDansLaMoyenne";
 
 const JOUR = 24 * 60 * 60 * 1000;
 export const PERIODES: Record<string, number | null> = { "30j": 30, trim: 90, debut: null };
@@ -83,6 +84,8 @@ type LigneTutor = {
   classe: string | null;
   matiere: string | null;
   score_sur_20: number | null;
+  bonnes_reponses?: number | null;
+  nb_tentatives?: number | null;
   details: any;
   created_at: string;
 };
@@ -107,7 +110,7 @@ type Stat = {
 };
 
 const MEDAILLES: { id: string; emoji: string; titre: string; valeur: (s: Stat) => number; texte: (s: Stat) => string; mini?: (s: Stat) => boolean }[] = [
-  { id: "regularite", emoji: "📅", titre: "Régularité", valeur: (s) => s.jours, texte: (s) => `${s.jours} jours de travail` },
+  { id: "regularite", emoji: "📅", titre: "Régularité", valeur: (s) => s.jours, texte: (s) => `${s.jours} jour${s.jours > 1 ? "s" : ""} de travail` },
   { id: "perseverance", emoji: "💪", titre: "Persévérance", valeur: (s) => s.questions, texte: (s) => `${s.questions} questions` },
   { id: "precision", emoji: "🎯", titre: "Précision", valeur: (s) => s.taux, texte: (s) => `${Math.round(s.taux * 100)} % de justes`, mini: (s) => s.questions >= 20 },
   { id: "progression", emoji: "📈", titre: "Progression", valeur: (s) => s.progression, texte: (s) => `+${virgule(s.progression)} points`, mini: (s) => s.progression >= 1 },
@@ -116,10 +119,11 @@ const MEDAILLES: { id: string; emoji: string; titre: string; valeur: (s: Stat) =
 ];
 
 function classement(
-  eleves: { code_utilisateur: string; nom: string | null; pseudo: string | null }[],
+  eleves: { code_utilisateur: string; nom: string | null; pseudo: string | null; classeEleve?: string | null }[],
   seances: LigneTutor[],
   activites: LigneActivite[],
-  nbJours: number
+  nbJours: number,
+  pourEleve?: string
 ) {
   const depuis = Date.now() - nbJours * JOUR;
   const stats: Stat[] = [];
@@ -136,7 +140,10 @@ function classement(
     }).length;
     const justes = g.filter((x) => x.juste === true).length;
     const taux = g.length ? justes / g.length : 0;
-    const notes = s.map((x) => x.score_sur_20).filter((n): n is number => typeof n === "number");
+    const notes = s
+      .filter((x) => compteDansLaMoyenne(x, e.classeEleve))
+      .map((x) => x.score_sur_20)
+      .filter((n): n is number => typeof n === "number");
     let progression = 0;
     if (notes.length >= 2) {
       const mi = Math.floor(notes.length / 2);
@@ -197,12 +204,61 @@ function classement(
     return [{ id: m.id, emoji: m.emoji, titre: m.titre, code_utilisateur: choisi.code, nom: choisi.nom, texte: m.texte(choisi) }];
   });
 
-  return { podium, medailles, participants: stats.length };
+  // 🎖️ POUR L'ÉLÈVE SEUL (24/11/2026, tableau de bord) : ce qui lui manque
+  // pour viser une médaille. Jamais renvoyé au prof ni projeté.
+  let moi: ObjectifMedaille | null = null;
+  if (pourEleve) {
+    const s = stats.find((x) => x.code === pourEleve);
+    if (!s) {
+      const q = activites.filter(
+        (x) => x.code_utilisateur === pourEleve && x.type === "coach" && new Date(x.created_at).getTime() >= depuis
+      ).length;
+      moi = { enCourse: false, manque: Math.max(1, 10 - q), unite: "questions", medaille: null };
+    } else if (!medailles.some((m) => m.code_utilisateur === pourEleve)) {
+      // La médaille la plus proche, en proportion de ce qui manque.
+      const pistes = (
+        [
+          ["regularite", "jours", "📅 Régularité", (x: Stat) => x.jours],
+          ["perseverance", "questions", "💪 Persévérance", (x: Stat) => x.questions],
+          ["micros", "micros", "🧩 Compétences acquises", (x: Stat) => x.acquises],
+        ] as const
+      ).flatMap(([id, unite, nom, v]) => {
+        const m = medailles.find((x) => x.id === id);
+        const tenant = m && stats.find((x) => x.code === m.code_utilisateur);
+        if (!tenant) return [];
+        const manque = Math.max(1, v(tenant) - v(s) + 1);
+        if (unite === "jours" && s.jours + manque > nbJours) return [];
+        return [{ manque, unite, medaille: nom, part: manque / Math.max(1, v(tenant)) }];
+      });
+      pistes.sort((x, y) => x.part - y.part);
+      const p = pistes[0];
+      // Trop loin (plus de la moitié du chemin) : un objectif doux, sans chiffre qui décourage.
+      moi =
+        p && p.part <= 0.5 && !(p.unite === "questions" && p.manque > 50)
+          ? { enCourse: true, manque: p.manque, unite: p.unite, medaille: p.medaille }
+          : { enCourse: true, manque: 1, unite: "jours", medaille: null };
+    }
+  }
+
+  return { podium, medailles, participants: stats.length, ...(pourEleve ? { moi } : {}) };
 }
+
+export type ObjectifMedaille = {
+  enCourse: boolean;
+  manque: number;
+  unite: "questions" | "jours" | "micros";
+  medaille: string | null;
+};
 
 export type LigneBulletin = Awaited<ReturnType<typeof calculerBulletinClasse>>["eleves"][number];
 
-export async function calculerBulletinClasse(admin: SupabaseClient, code: string, niveau: string, periode: string) {
+export async function calculerBulletinClasse(
+  admin: SupabaseClient,
+  code: string,
+  niveau: string,
+  periode: string,
+  pourEleve?: string
+) {
   const nbJours = PERIODES[periode] === undefined ? 90 : PERIODES[periode];
   const depuis = nbJours ? new Date(Date.now() - nbJours * JOUR).toISOString() : "2000-01-01T00:00:00Z";
   const depuisActivite = new Date(Date.now() - Math.min(nbJours ?? 30, 30) * JOUR).toISOString();
@@ -211,14 +267,14 @@ export async function calculerBulletinClasse(admin: SupabaseClient, code: string
   const [eleves, seances, activites, pseudos] = await Promise.all([
     db
       .from("acces_etablissement")
-      .select("code_utilisateur, nom")
+      .select("code_utilisateur, nom, classe")
       .eq("code_etablissement", code)
       .eq("type_utilisateur", "eleve")
       .order("code_utilisateur"),
     toutLire<LigneTutor>((de, a) =>
       db
         .from("resultats_tutor")
-        .select("code_utilisateur, classe, matiere, score_sur_20, details, created_at")
+        .select("code_utilisateur, classe, matiere, score_sur_20, bonnes_reponses, nb_tentatives, details, created_at")
         .eq("code_etablissement", code)
         .gte("created_at", depuis)
         .order("created_at", { ascending: true })
@@ -274,12 +330,25 @@ export async function calculerBulletinClasse(admin: SupabaseClient, code: string
     const creneaux: Creneaux = { matin: 0, apresMidi: 0, soir: 0, weekend: 0 };
     const jours = new Set<string>();
     const micros: Record<string, { j: number; t: number }> = {};
-    const notes: number[] = [];
+    // Moyenne PONDÉRÉE (23/11/2026) : toutes les bonnes réponses ÷ toutes les
+    // questions × 20. Une séance d'une question ne pèse plus autant qu'une de 30.
+    let justes = 0;
+    let questions = 0;
     for (const s of siennes) {
       const c = creneau(s.created_at);
       creneaux[c.cle]++;
       jours.add(c.jour);
-      if (typeof s.score_sur_20 === "number") notes.push(s.score_sur_20);
+      // 🏋️ Une séance d'entraînement (choix de l'élève au coach, 23/11/2026)
+      // ou faite dans une AUTRE classe que la sienne (24/11/2026) compte comme
+      // travail, pas dans la moyenne. La classe de l'élève : celle de son
+      // compte, sinon le niveau de la classe du prof.
+      if (compteDansLaMoyenne(s, e.classe || niveau)) {
+        const q = Number(s.nb_tentatives) || 0;
+        if (q > 0) {
+          questions += q;
+          justes += Number(s.bonnes_reponses) || 0;
+        }
+      }
       for (const [id, sc] of Object.entries((s.details?.microScores ?? {}) as Record<string, any>)) {
         const t = Number(sc?.attempts) || 0;
         if (!t) continue;
@@ -304,14 +373,13 @@ export async function calculerBulletinClasse(admin: SupabaseClient, code: string
       if (r >= 0.8) compris.push(nom(id));
       else if (r < 0.5) aRevoir.push(nom(id));
     }
-    const moyenne = notes.length
-      ? Math.round((notes.reduce((a, b) => a + b, 0) / notes.length) * 10) / 10
-      : null;
+    const moyenne = questions > 0 ? Math.round((justes / questions) * 200) / 10 : null;
 
     return {
       code_utilisateur: e.code_utilisateur,
       nom: e.nom,
       pseudo: pseudos.get(e.code_utilisateur) ?? null,
+      classeEleve: (e.classe as string | null) || niveau,
       moyenne,
       seances: siennes.length,
       questions: gestes.filter((g) => g.type === "coach").length,
@@ -335,8 +403,8 @@ export async function calculerBulletinClasse(admin: SupabaseClient, code: string
   return {
     periode,
     joursActivite: Math.min(nbJours ?? 30, 30),
-    semaine: classement(lignes, seances, activites, 7),
-    mois: classement(lignes, seances, activites, 30),
+    semaine: classement(lignes, seances, activites, 7, pourEleve),
+    mois: classement(lignes, seances, activites, 30, pourEleve),
     eleves: lignes,
   };
 }

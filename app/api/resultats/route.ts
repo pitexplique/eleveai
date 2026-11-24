@@ -81,6 +81,19 @@ const ACTIVITES: Record<string, { table: string; colonnes: string[] }> = {
       "temps_sec", "details",
     ],
   },
+  // ⭐ 24/11/2026 — LES EXERCICES INTERACTIFS (/fiches-exercices). Frédéric :
+  // « un bouton enregistrement de séance s'ils veulent conserver », « et le
+  // mettre dans la moyenne et le tableau de bord ». Même table que le coach :
+  // la moyenne pondérée, le cockpit, la ligne du prof et les bulletins les
+  // comptent sans rien changer d'autre. On les reconnaît à mode = "exercices"
+  // et details.source = "exercices" (forcés plus bas, jamais pris du client).
+  exercices: {
+    table: "resultats_tutor",
+    colonnes: [
+      "classe", "matiere", "notion_id", "score_sur_20",
+      "bonnes_reponses", "nb_tentatives", "temps_sec", "details",
+    ],
+  },
 };
 
 const MAX_BODY_BYTES = 200_000; // garde-fou sur la taille du champ details
@@ -133,6 +146,14 @@ export async function POST(req: Request) {
       if (resultat[col] !== undefined) row[col] = resultat[col];
     }
 
+    if (String(body.type) === "exercices") {
+      row.mode = "exercices";
+      const d = row.details && typeof row.details === "object" ? (row.details as Record<string, unknown>) : {};
+      row.details = { ...d, source: "exercices" };
+      row.earned_points = 0;
+      row.possible_points = 0;
+    }
+
     // Garde-fous numériques sur les scores.
     for (const col of [
       "score", "total", "score_sur_20", "earned_points", "possible_points",
@@ -162,7 +183,7 @@ export async function POST(req: Request) {
     // la version précédente avant d'écrire la nouvelle — sinon le bilan du
     // prof, le bulletin et le profil compteraient la même séance deux fois.
     const seanceId =
-      String(body.type) === "tutor" &&
+      (String(body.type) === "tutor" || String(body.type) === "exercices") &&
       typeof (resultat.details as any)?.seance_id === "string"
         ? String((resultat.details as any).seance_id).slice(0, 64)
         : null;

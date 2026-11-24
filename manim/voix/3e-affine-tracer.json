@@ -1,0 +1,15 @@
+{
+  "00-garde": "Représenter une fonction affine. Combien de points faut-il pour tracer sa droite ?",
+  "01-boulanger": "Yanis est boulanger. À 4 heures du matin, il allume son four. Le four est à 30 degrés, et il chauffe de 20 degrés par minute. Sa température, c'est f de x égale 20 x plus 30. Yanis veut voir sa montée sur un graphique.",
+  "02-points": "Une fonction affine se représente par une droite. Et pour une droite, deux points suffisent. On choisit deux valeurs de x faciles. f de 0 égale 30 : on place le point 0 ; 30. f de 5 égale 20 fois 5, plus 30 : 130. On place le point 5 ; 130.",
+  "03-droite": "On relie les deux points à la règle, et on prolonge. C'est la droite de f. Un troisième point sert à vérifier : f de 10 égale 230. Le point 10 ; 230 est bien sur la droite. Le four atteint 230 degrés en 10 minutes.",
+  "03q-question": "Question ! Quelle droite représente f de x égale 2 x moins 1 ? A : elle passe par 0 ; 2 et 1 ; 1. B : par 0 ; 1 et 1 ; 3. C : par 0 ; moins 1 et 1 ; 1. Mets pause, et choisis !",
+  "03r-reponse": "Réponse C : f de 0, c'est moins 1. Et f de 1, c'est 2 moins 1 : 1. La droite passe par 0 ; moins 1 et 1 ; 1.",
+  "04-descend": "Si a est négatif, la droite descend. g de x égale moins 2 x plus 3. g de 0 égale 3. g de 2 égale moins 4 plus 3 : moins 1. On place 0 ; 3 et 2 ; moins 1. La droite descend de 2 à chaque pas vers la droite.",
+  "05q-question": "Question ! Quel point n'est PAS sur la droite de f de x égale x plus 2 ? A : 3 ; 4. B : 0 ; 2. C : 2 ; 4. Mets pause, et choisis !",
+  "05r-reponse": "Réponse A : f de 3, c'est 3 plus 2 : 5, pas 4. Le point 3 ; 4 est en dessous de la droite.",
+  "06-defi": "À toi de jouer. Dans un même repère, trace deux droites. Un : f de x égale moins x plus 4. Deux : g de x égale 0,5 x. Mets pause, et trace !",
+  "06b-correction": "Correction. Un : f de 0 égale 4, et f de 4 égale 0. La droite passe par 0 ; 4 et 4 ; 0. Elle descend. Deux : g est linéaire, sa droite passe par l'origine. g de 4 égale 2 : elle passe par 0 ; 0 et 4 ; 2. Elle monte doucement.",
+  "07-finale": "Ce que tu as appris. Une fonction affine se représente par une droite. Pour la tracer, on calcule deux images, on place deux points, et on les relie. Un troisième point sert à vérifier. Si a est positif, la droite monte ; si a est négatif, elle descend.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

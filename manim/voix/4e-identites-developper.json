@@ -1,0 +1,17 @@
+{
+  "00-garde": "Développer avec une identité. Comment écrire le résultat en une seule ligne ?",
+  "01-paysagiste": "Lina est paysagiste. Dans un jardin public, elle construit un bassin carré, de x mètres de côté. Tout autour, une allée de 1 mètre de large. Le grand carré, bassin et allée, a pour côté x plus 2. Quelle est l'aire de l'allée ?",
+  "02-somme": "D'abord, l'aire du grand carré : x plus 2, au carré. C'est la forme a plus b au carré, avec a égale x, et b égale 2. a au carré : x au carré. 2 a b : 2 fois x fois 2, 4 x. b au carré : 4. Le grand carré vaut x au carré plus 4 x plus 4.",
+  "03-allee": "On enlève le bassin, x au carré. L'allée vaut 4 x plus 4. Pour un bassin de 5 mètres : 20 plus 4, 24 mètres carrés de dalles.",
+  "03q-question": "Question ! Développe x plus 10, au carré. A : x au carré plus 100. B : x au carré plus 10 x plus 100. C : x au carré plus 20 x plus 100. Mets pause, et choisis !",
+  "03r-reponse": "Réponse C : x au carré plus 20 x plus 100. Le double produit : 2 fois x fois 10, 20 x.",
+  "04-difference": "La deuxième forme : x moins 4, au carré. a vaut x, b vaut 4. a au carré : x au carré. Moins 2 a b : moins 8 x. Plus b au carré : plus 16. Le dernier terme reste positif : moins 4 fois moins 4, plus 16.",
+  "05-coefficient": "Et si a contient un nombre ? 3 x plus 1, au carré. a vaut 3 x. a au carré, c'est 3 x fois 3 x : 9 x au carré, et pas 3 x au carré ! 2 a b : 2 fois 3 x fois 1, 6 x. b au carré : 1. Résultat : 9 x au carré plus 6 x plus 1.",
+  "05b-produit": "La troisième forme : 2 x plus 5, fois 2 x moins 5. a au carré moins b au carré : 4 x au carré moins 25. Il ne reste que deux termes : plus 10 x et moins 10 x s'annulent.",
+  "05q-question": "Question ! Développe x plus 9, fois x moins 9. A : x au carré moins 18 x moins 81. B : x au carré moins 81. C : x au carré plus 81. Mets pause, et choisis !",
+  "05r-reponse": "Réponse B : x au carré moins 81. Les termes du milieu, 9 x et moins 9 x, s'annulent.",
+  "06-defi": "À toi de jouer. Lina élargit l'allée : 2 mètres de large, tout autour. Le grand carré a pour côté x plus 4. Quelle est l'aire de l'allée ? Mets pause, et cherche !",
+  "06b-correction": "Correction. x plus 4, au carré : x au carré plus 8 x plus 16. On enlève le bassin, x au carré. L'allée vaut 8 x plus 16.",
+  "07-finale": "Ce que tu as appris. On repère a et b, puis on écrit les trois termes : a au carré, 2 a b, b au carré. Dans a moins b au carré, le double produit est négatif, et le dernier terme positif. a plus b, fois a moins b, ne garde que deux termes.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

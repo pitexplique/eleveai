@@ -1,0 +1,15 @@
+{
+  "00-garde": "Reconnaître une fonction affine. Comment savoir si une fonction est affine ?",
+  "01-monteuse": "Maya est monteuse vidéo. Trois clients la paient. Le premier : 20 euros par minute de vidéo montée. Le deuxième : 50 euros pour le projet, plus 15 euros par minute. Le troisième veut des miniatures carrées, de x centimètres de côté. Pour x minutes : f de x égale 20 x. g de x égale 15 x plus 50. Et l'aire de la miniature : h de x égale x au carré.",
+  "02-forme": "f et g ont la même forme : un nombre fois x, plus un nombre. C'est une fonction affine : a x plus b. Pour g, a vaut 15 et b vaut 50. Pour f, b vaut 0 : f est linéaire, le prix est proportionnel à la durée. Et h ? x au carré, c'est x fois x. Ce n'est pas un nombre fois x : h n'est pas affine.",
+  "03-droites": "Sur un graphique, ça se voit. f et g donnent des droites. f passe par l'origine : elle est linéaire. g coupe l'axe vertical à 50. Et h donne une courbe, qui monte de plus en plus vite.",
+  "03q-question": "Question ! Laquelle de ces fonctions est affine ? A : x au carré plus 3. B : 3 divisé par x. C : 3 moins 2 x. Mets pause, et choisis !",
+  "03r-reponse": "Réponse C : 3 moins 2 x, c'est moins 2 x plus 3. a vaut moins 2, et b vaut 3. L'ordre des termes ne change rien.",
+  "04-deguisee": "Attention aux fonctions déguisées. Le deuxième client change de formule : 5 fois la parenthèse x plus 10. On développe : 5 x plus 50. Elle est affine, cachée derrière une parenthèse. Et un tarif fixe, 100 euros quelle que soit la durée ? C'est 0 fois x plus 100 : a vaut 0. C'est encore une fonction affine. Sa droite est horizontale.",
+  "05q-question": "Question ! f de x égale 4 x. Comment l'appeler ? A : linéaire, et aussi affine. B : linéaire, mais pas affine. C : ni l'une ni l'autre. Mets pause, et choisis !",
+  "05r-reponse": "Réponse A : 4 x, c'est 4 x plus 0. b vaut 0, donc f est linéaire. Et une fonction linéaire est une fonction affine particulière.",
+  "06-defi": "À toi de jouer. Ces fonctions sont-elles affines ? Un : f de x égale 2 fois la parenthèse x plus 3. Deux : g de x égale x fois la parenthèse x plus 1, moins x au carré. Mets pause, et cherche !",
+  "06b-correction": "Correction. Un : on développe. 2 x plus 6 : a vaut 2, b vaut 6. f est affine. Deux : x fois la parenthèse x plus 1, c'est x au carré plus x. On enlève x au carré : il reste x. g est linéaire, donc affine aussi.",
+  "07-finale": "Ce que tu as appris. Une fonction affine s'écrit a x plus b, et sa courbe est une droite. Si b vaut 0, elle est linéaire : sa droite passe par l'origine. Si a vaut 0, elle est constante. Avant de décider, on développe et on réduit.",
+  "08-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

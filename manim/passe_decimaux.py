@@ -282,7 +282,21 @@ def chapitres(chap, t, duree):
             print("  chapitre fondu :", c, chap[c], file=sys.stderr)
             continue
         res.append((debuts[i], chap[c]))
-    return [[mmss(d), lib] for d, lib in res]
+    return chap0([[mmss(d), lib] for d, lib in res])
+
+
+def chap0(ch):
+    """La boucle ci-dessus ne fond jamais le PREMIER chapitre (res est vide) : « 00:00 accroche » puis
+    « 00:07 métier » faisait un chapitre de 7 s, et YouTube refuse alors TOUS les chapitres
+    (216 entrées du manifeste le 23/11). Tant que le 2e commence avant 10 s, il est fondu dans le 1er.
+    Venu de passe_affines_3e.py ; s'applique aussi à des chapitres déjà écrits [[mm:ss, libellé]]."""
+    def sec(m):
+        mm, ss = m.split(":")
+        return int(mm) * 60 + int(ss)
+    while len(ch) > 1 and sec(ch[1][0]) < 10:
+        print("  chapitre fondu (début) :", ch[1][1], file=sys.stderr)
+        ch = [ch[0]] + ch[2:]
+    return ch
 
 
 def entrees():

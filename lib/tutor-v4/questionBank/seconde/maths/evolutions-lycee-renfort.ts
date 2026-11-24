@@ -217,15 +217,19 @@ export function genPctDePct(niveau: 2 | 3 | 4) {
 
 // ⛔ La Réunion ≈ 4 % des contextes : ces réservoirs servent à toute la filière.
 // Toutes les valeurs sont des multiples de 100 : un effectif reste entier avec un taux entier.
-const GRANDEURS = [
-  { quoi: "le nombre d’habitants d’une ville", u: "habitants", v: [80000, 84000, 85000, 90000] },
-  { quoi: "le chiffre d’affaires d’une pâtissière", u: "€", v: [40000, 50000, 60000, 80000] },
-  { quoi: "le nombre d’abonnés d’une vidéaste", u: "abonnés", v: [2000, 4000, 5000, 8000] },
-  { quoi: "le loyer d’un studio", u: "€", v: [400, 500, 600, 800] },
-  { quoi: "le nombre de visiteurs d’un parc naturel", u: "visiteurs", v: [20000, 25000, 40000] },
-  { quoi: "le salaire mensuel d’un technicien", u: "€", v: [1500, 2000, 2500] },
-  { quoi: "la récolte de pommes d’un verger", u: "kg", v: [1200, 1500, 2000] },
-  { quoi: "le nombre de passagers d’une compagnie aérienne", u: "passagers", v: [10000, 20000, 50000] },
+type Grandeur = { quoi: string; g: "m" | "f"; u: string; v: number[] };
+const GRANDEURS: Grandeur[] = [
+  { quoi: "le nombre d’habitants d’une ville", g: "m", u: "habitants", v: [80000, 84000, 85000, 90000] },
+  { quoi: "le chiffre d’affaires d’une pâtissière", g: "m", u: "€", v: [40000, 50000, 60000, 80000] },
+  { quoi: "le nombre d’abonnés d’une vidéaste", g: "m", u: "abonnés", v: [2000, 4000, 5000, 8000] },
+  { quoi: "le loyer d’un studio", g: "m", u: "€", v: [400, 500, 600, 800] },
+  { quoi: "le nombre de visiteurs d’un parc naturel", g: "m", u: "visiteurs", v: [20000, 25000, 40000] },
+  { quoi: "le salaire mensuel d’un technicien", g: "m", u: "€", v: [1500, 2000, 2500] },
+  { quoi: "la récolte de pommes d’un verger", g: "f", u: "kg", v: [1200, 1500, 2000] },
+  { quoi: "le nombre de passagers d’une compagnie aérienne", g: "m", u: "passagers", v: [10000, 20000, 50000] },
+  { quoi: "la facture d’électricité d’une entreprise", g: "f", u: "€", v: [1200, 2000, 2400, 4000] },
+  { quoi: "la fréquentation d’une piscine", g: "f", u: "entrées", v: [8000, 10000, 12000, 20000] },
+  { quoi: "le prix d’un abonnement de téléphone", g: "m", u: "€", v: [200, 300, 400] },
 ];
 
 export function genAbsRel(niveau: 2 | 3 | 4) {
@@ -272,37 +276,207 @@ export function genAbsRel(niveau: 2 | 3 | 4) {
 
 /* ---------- Piège de compensation ---------- */
 
-export function genCompensation(niveau: 2 | 3 | 4) {
+/** « baisse de 4 % », « hausse de 21 % », « aucune évolution ». */
+function evolTexte(g: number) {
+  if (Math.abs(g) < 1e-9) return "aucune évolution";
+  return g > 0 ? `hausse de ${fr(g)} %` : `baisse de ${fr(-g)} %`;
+}
+
+/** L'unité n'est écrite que pour € et kg (un effectif n'en a pas). */
+function uniteDe(g: Grandeur) {
+  const unite = g.u === "€" || g.u === "kg" ? g.u : "";
+  return { unite, suffixe: unite ? " " + unite : "" };
+}
+
+/** Une valeur de départ telle que v × (1 − t²/10 000) reste entière pour un effectif. */
+function departCompensation(g: Grandeur, t: number) {
+  const { unite } = uniteDe(g);
+  const possibles = g.v.filter((v) => unite === "€" || (v * t * t) % 10000 === 0);
+  return randomChoice(possibles.length ? possibles : g.v);
+}
+
+/**
+ * Piège de compensation : + t % puis − t % (ou l'inverse) ne ramène pas au départ.
+ * ⛔ 23/11 (audit) : la bonne réponse n'est plus toujours le même texte, « il / elle »
+ * s'accorde au sujet (« le salaire… il a baissé »), le « Vrai ou faux ? » a des choix
+ * vrai / faux, et la question varie : sens, valeur finale chiffrée, taux global, rôle de l'ordre.
+ * `forme` impose une famille : deux gabarits d'une même étoile ne se ressemblent plus.
+ */
+export function genCompensation(niveau: 2 | 3 | 4, forme?: "sens" | "chiffre") {
   const g = randomChoice(GRANDEURS);
-  const t = randomChoice([10, 20, 25, 30, 40, 50]);
+  const t = randomChoice(niveau === 2 ? [10, 20, 50] : [10, 20, 25, 30, 40, 50]);
   const hausseDabord = Math.random() < 0.5;
   const global = -(t * t) / 100;
+  const k = 1 + global / 100;
   const ordre = hausseDabord ? `augmente de ${t} %, puis baisse de ${t} %` : `baisse de ${t} %, puis augmente de ${t} %`;
+  const deuxTemps = hausseDabord ? `une hausse de ${t} %, puis une baisse de ${t} %` : `une baisse de ${t} %, puis une hausse de ${t} %`;
+  const pron = g.g === "m" ? "il" : "elle";
+  const e = g.g === "m" ? "" : "e";
+  const def = "des évolutions successives se composent en MULTIPLIANT les coefficients.";
+  const methode = `coefficient global : ${fr(1 + t / 100)} × ${fr(1 - t / 100)}.`;
+  const calcul = `${fr(1 + t / 100)} × ${fr(1 - t / 100)} = ${fr(k)} < 1.`;
+  const conclusion = `la valeur finale vaut ${fr(100 + global)} % de la valeur de départ, soit une baisse de ${fr(-global)} %, quel que soit l’ordre : le second pourcentage ne porte pas sur la même valeur, les ${t} % ne se compensent pas.`;
   if (niveau <= 3) {
-    const bon = "elle a baissé";
+    const familles = forme === "sens" ? ["sens", "vraiFaux", "ordre"] : forme === "chiffre" ? ["valeur", "taux"] : ["sens", "vraiFaux", "ordre", "valeur", "taux"];
+    const f = randomChoice(familles);
+    if (f === "sens") {
+      // Trois jeux de libellés : la bonne réponse change de texte d'un tirage à l'autre.
+      const jeu = randomInt(1, 3);
+      if (jeu === 1) {
+        const bon = `${pron} a baissé`;
+        return {
+          text: randomChoice([
+            `${cap(g.quoi)} ${ordre}. Par rapport au départ, ${pron} :`,
+            `On remarque que ${g.quoi} ${ordre}. Au bout du compte, ${pron} :`,
+            `Sur deux ans, ${g.quoi} ${ordre}. Par rapport à la première année, ${pron} :`,
+          ]),
+          format: "qcm" as const,
+          choices: makeChoices(bon, [`${pron} est revenu${e} à sa valeur de départ`, `${pron} a augmenté`, "on ne peut pas savoir"]),
+          expected: [bon],
+          comparator: "mcq_exact" as const,
+          explanation: expl(def, methode, calcul, conclusion),
+        };
+      }
+      if (jeu === 2) {
+        const bon = "elle est plus basse qu’au départ";
+        return {
+          text: randomChoice([
+            `${cap(g.quoi)} ${ordre}. Que peut-on dire de sa valeur finale ?`,
+            `Une grandeur (${g.quoi}) subit ${deuxTemps}. Comment est sa valeur finale ?`,
+          ]),
+          format: "qcm" as const,
+          choices: makeChoices(bon, ["elle est égale à celle du départ", "elle est plus haute qu’au départ", "cela dépend de la valeur de départ"]),
+          expected: [bon],
+          comparator: "mcq_exact" as const,
+          explanation: expl(def, methode, calcul, conclusion),
+        };
+      }
+      const bon = "inférieure à celle du départ";
+      return {
+        text: randomChoice([
+          `${cap(g.quoi)} ${ordre}. Sa valeur finale est :`,
+          `D’une année sur l’autre, ${g.quoi} subit ${deuxTemps}. La valeur obtenue est :`,
+        ]),
+        format: "qcm" as const,
+        choices: makeChoices(bon, ["égale à celle du départ", "supérieure à celle du départ", "impossible à dire sans la valeur de départ"]),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: expl(def, methode, calcul, conclusion),
+      };
+    }
+    if (f === "vraiFaux") {
+      const bon = "Faux : on finit plus bas qu’au départ";
+      return {
+        text: randomChoice([
+          `Vrai ou faux ? « ${cap(g.quoi)} ${ordre} : ${pron} revient à sa valeur de départ. »`,
+          `Un élève affirme : « si ${g.quoi} ${ordre}, ${pron} n’a pas changé. » Vrai ou faux ?`,
+          `Vrai ou faux ? « Une hausse de ${t} % et une baisse de ${t} % s’annulent. »`,
+        ]),
+        format: "qcm" as const,
+        choices: makeChoices(bon, ["Vrai : les deux évolutions s’annulent", "Faux : on finit plus haut qu’au départ", "Vrai, mais seulement si la hausse vient en premier"]),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: expl(def, methode, calcul, conclusion),
+      };
+    }
+    if (f === "ordre") {
+      const bon = `non : dans les deux cas, baisse de ${fr(-global)} %`;
+      return {
+        text: randomChoice([
+          `${cap(g.quoi)} peut subir une hausse de ${t} % puis une baisse de ${t} %, ou l’inverse. L’ordre change-t-il le résultat ?`,
+          `Vaut-il mieux une baisse de ${t} % suivie d’une hausse de ${t} %, ou une hausse de ${t} % suivie d’une baisse de ${t} % ?`,
+          `Deux scénarios pour ${g.quoi} : « + ${t} % puis − ${t} % » ou « − ${t} % puis + ${t} % ». L’un des deux donne-t-il plus ?`,
+        ]),
+        format: "qcm" as const,
+        choices: makeChoices(bon, [
+          "oui : la hausse d’abord fait gagner",
+          "oui : la baisse d’abord fait perdre davantage",
+          "non : dans les deux cas, on revient au départ",
+          `non : dans les deux cas, baisse de ${2 * t} %`,
+        ]),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: expl(def, `les deux scénarios ont le même coefficient global : ${fr(1 + t / 100)} × ${fr(1 - t / 100)} = ${fr(1 - t / 100)} × ${fr(1 + t / 100)}.`, calcul, `l’ordre ne change rien : ${conclusion}`),
+      };
+    }
+    if (f === "valeur") {
+      const { suffixe } = uniteDe(g);
+      const v0 = departCompensation(g, t);
+      const v1 = Math.round(v0 * k * 100) / 100;
+      const vMid = Math.round(v0 * (hausseDabord ? 1 + t / 100 : 1 - t / 100) * 100) / 100;
+      const bon = `${fr(v1)}${suffixe}`;
+      return {
+        text: randomChoice([
+          `${cap(g.quoi)} vaut ${fr(v0)}${suffixe}. Ensuite, ${pron} ${ordre}. Quelle est sa valeur finale ?`,
+          `Départ : ${fr(v0)}${suffixe} (${g.quoi}). On applique ${deuxTemps}. Valeur d’arrivée ?`,
+          `Au départ, ${g.quoi} vaut ${fr(v0)}${suffixe}, puis ${pron} ${ordre}. Combien vaut-${pron} maintenant ?`,
+        ]),
+        format: "qcm" as const,
+        choices: makeChoices(bon, [
+          `${fr(v0)}${suffixe}`,
+          `${fr(Math.round(v0 * (1 + (t * t) / 10000) * 100) / 100)}${suffixe}`,
+          `${fr(Math.round(v0 * (1 - (2 * t) / 100) * 100) / 100)}${suffixe}`,
+          `${fr(vMid)}${suffixe}`,
+        ]),
+        expected: [bon],
+        comparator: "mcq_exact" as const,
+        explanation: expl(def, methode, `${fr(v0)} × ${fr(k)} = ${fr(v1)}.`, `la valeur finale est ${bon}, et non ${fr(v0)}${suffixe} : ${conclusion}`),
+      };
+    }
+    const bon = evolTexte(global);
     return {
       text: randomChoice([
-        `${cap(g.quoi)} ${ordre}. Par rapport au départ, la valeur :`,
-        `Une grandeur (${g.quoi}) ${ordre}. Que peut-on dire de sa valeur finale ?`,
-        `On remarque que ${g.quoi} ${ordre}. Par rapport au départ, sa valeur :`,
-        `Vrai ou faux ? « ${cap(g.quoi)} ${ordre} : on revient au point de départ. » Que se passe-t-il vraiment ?`,
+        `${cap(g.quoi)} ${ordre}. Quelle est l’évolution globale ?`,
+        `Une ${hausseDabord ? "hausse" : "baisse"} de ${t} % est suivie d’une ${hausseDabord ? "baisse" : "hausse"} de ${t} %. Quelle évolution unique cela représente-t-il ?`,
+        `Au total, quand ${g.quoi} ${ordre}, quelle évolution globale obtient-on ?`,
       ]),
       format: "qcm" as const,
-      choices: makeChoices(bon, ["elle est revenue au départ", "elle a augmenté", "on ne peut pas savoir"]),
+      choices: makeChoices(bon, ["aucune évolution", evolTexte(-global), `baisse de ${t} %`, `baisse de ${2 * t} %`]),
       expected: [bon],
       comparator: "mcq_exact" as const,
-      explanation: expl("des évolutions successives se composent en MULTIPLIANT les coefficients.", `coefficient global : ${fr(1 + t / 100)} × ${fr(1 - t / 100)}.`, `= ${fr(1 + global / 100)} < 1.`, `la valeur a baissé de ${fr(-global)} % : les ${t} % ne se compensent pas.`),
+      explanation: expl(def, methode, calcul, conclusion),
+    };
+  }
+  const f = forme === "sens" ? "coeff" : forme === "chiffre" ? "valeur" : randomChoice(["taux", "taux", "coeff", "valeur"]);
+  if (f === "coeff")
+    return {
+      text: randomChoice([
+        `${cap(g.quoi)} ${ordre}. Quel est le coefficient multiplicateur global ?`,
+        `Par quel nombre unique ${g.quoi} est-${pron} multiplié${e} quand ${pron} ${ordre} ?`,
+        `${cap(g.quoi)} subit ${deuxTemps}. Donne le coefficient global.`,
+      ]),
+      format: "short" as const,
+      expected: [fr(k)],
+      comparator: "number_equal" as const,
+      explanation: expl(def, methode, `${fr(1 + t / 100)} × ${fr(1 - t / 100)} = ${fr(k)}.`, `le coefficient global est ${fr(k)}, inférieur à 1 : ${conclusion}`),
+    };
+  if (f === "valeur") {
+    const { unite, suffixe } = uniteDe(g);
+    const v0 = departCompensation(g, t);
+    const v1 = Math.round(v0 * k * 100) / 100;
+    return {
+      text: randomChoice([
+        `${cap(g.quoi)} vaut ${fr(v0)}${suffixe}. Ensuite, ${pron} ${ordre}. Calcule sa valeur finale.`,
+        `Départ : ${fr(v0)}${suffixe} pour ${g.quoi}, qui subit ${deuxTemps}. Combien obtient-on à la fin ?`,
+        `On applique ${deuxTemps} ${aGn(g.quoi)}, qui valait ${fr(v0)}${suffixe}. Quelle valeur obtient-on ?`,
+      ]),
+      format: "short" as const,
+      expected: attendu(v1, unite),
+      comparator: "number_equal" as const,
+      explanation: expl(def, methode, `${fr(v0)} × ${fr(k)} = ${fr(v1)}.`, `la valeur finale est ${fr(v1)}${suffixe} : ${conclusion}`),
     };
   }
   return {
     text: randomChoice([
-      `${cap(g.quoi)} ${ordre}. Quel est le taux d’évolution global, en % ?`,
-      `Une grandeur ${ordre}. Donne le taux d’évolution global, en %.`,
+      `${cap(g.quoi)} ${ordre}. Quel est le taux d’évolution global, en % ? (négatif pour une baisse)`,
+      `Une grandeur ${ordre}. Donne le taux d’évolution global, en %. (négatif pour une baisse)`,
+      `Sur deux ans, ${g.quoi} ${ordre}. De combien de % a-t-${pron} évolué au total ? (négatif pour une baisse)`,
+      `Taux global, en %, quand ${g.quoi} subit ${deuxTemps} ? (négatif pour une baisse)`,
     ]),
     format: "short" as const,
     expected: attendu(global, "%"),
     comparator: "number_equal" as const,
-    explanation: expl("taux global = coefficient global − 1.", `${fr(1 + t / 100)} × ${fr(1 - t / 100)} = ${fr(1 + global / 100)}.`, `${fr(1 + global / 100)} − 1 = ${fr(global / 100)}.`, `le taux global est ${fr(global)} %.`),
+    explanation: expl("taux global = coefficient global − 1.", `${fr(1 + t / 100)} × ${fr(1 - t / 100)} = ${fr(k)}.`, `${fr(k)} − 1 = ${fr(global / 100)}.`, `le taux global est ${fr(global)} % : ${conclusion}`),
   };
 }
 
@@ -310,7 +484,9 @@ export function genCompensation(niveau: 2 | 3 | 4) {
 
 /** ⛔ `sens: "baisse"` pour la micro « diminution » : sans lui, le niveau 2 ou 3 peut tirer une hausse. */
 export function genAddMult(niveau: 1 | 2 | 3, sens?: "baisse") {
-  const t = randomChoice([5, 10, 20, 25, 30, 50]);
+  // ⛔ 23/11 : les taux de l'épreuve anticipée (15 %, 12 %, 3 %, 7 %, 0,5 %) en plus des taux ronds.
+  const t = randomChoice([3, 5, 7, 10, 12, 15, 20, 25, 30, 50, 0.5]);
+  const T = fr(t);
   const baisse = sens === "baisse" || (niveau > 1 && Math.random() < 0.5);
   const c = fr(baisse ? 1 - t / 100 : 1 + t / 100);
   const g = randomChoice(GRANDEURS);
@@ -318,17 +494,212 @@ export function genAddMult(niveau: 1 | 2 | 3, sens?: "baisse") {
   const bon = `multiplier par ${c}`;
   return {
     text: randomChoice([
-      `${verbe} une valeur de ${t} %, cela revient à :`,
-      `${cap(g.quoi)} va ${baisse ? "diminuer" : "augmenter"} de ${t} %. Cela revient à :`,
-      `Pour ${baisse ? "baisser" : "augmenter"} ${g.quoi} de ${t} %, on doit :`,
-      `Un gestionnaire veut appliquer ${baisse ? "une baisse" : "une hausse"} de ${t} % ${aGn(g.quoi)}. Quelle opération ?`,
-      `Dans un tableur, pour ${baisse ? "diminuer" : "augmenter"} une cellule de ${t} %, quelle opération faut-il faire ?`,
+      `${verbe} une valeur de ${T} %, cela revient à :`,
+      `${cap(g.quoi)} va ${baisse ? "diminuer" : "augmenter"} de ${T} %. Cela revient à :`,
+      `Pour ${baisse ? "baisser" : "augmenter"} ${g.quoi} de ${T} %, on doit :`,
+      `Un gestionnaire veut appliquer ${baisse ? "une baisse" : "une hausse"} de ${T} % ${aGn(g.quoi)}. Quelle opération ?`,
+      `Dans un tableur, pour ${baisse ? "diminuer" : "augmenter"} une cellule de ${T} %, quelle opération faut-il faire ?`,
     ]),
     format: "qcm" as const,
-    choices: makeChoices(bon, [`${baisse ? "soustraire" : "ajouter"} ${t}`, `multiplier par ${fr(t / 100)}`, `multiplier par ${t}`, `multiplier par ${fr(baisse ? 1 + t / 100 : 1 - t / 100)}`]),
+    choices: makeChoices(bon, [`${baisse ? "soustraire" : "ajouter"} ${T}`, `multiplier par ${fr(t / 100)}`, `multiplier par ${T}`, `multiplier par ${fr(baisse ? 1 + t / 100 : 1 - t / 100)}`]),
     expected: [bon],
     comparator: "mcq_exact" as const,
-    explanation: expl("une évolution en pourcentage est MULTIPLICATIVE.", `${baisse ? "baisser" : "augmenter"} de ${t} %, c’est multiplier par 1 ${baisse ? "−" : "+"} ${fr(t / 100)}.`, `1 ${baisse ? "−" : "+"} ${fr(t / 100)} = ${c}.`, `on multiplie par ${c}.`),
+    explanation: expl("une évolution en pourcentage est MULTIPLICATIVE.", `${baisse ? "baisser" : "augmenter"} de ${T} %, c’est multiplier par 1 ${baisse ? "−" : "+"} ${fr(t / 100)}.`, `1 ${baisse ? "−" : "+"} ${fr(t / 100)} = ${c}.`, `on multiplie par ${c}.`),
+  };
+}
+
+/* ---------- Évolution réciproque : le coefficient 1 ÷ k ---------- */
+
+// ⛔ 23/11 (audit) : la micro « réciproque » recevait genDepart (valeur de départ après
+// DEUX évolutions) ou genCompensation : le geste « coefficient réciproque = 1 ÷ k »
+// avait disparu. Couples exacts (de tête) : − 20 % ↔ + 25 %, − 50 % ↔ + 100 %, …
+const RECIPROQUES: Array<{ h: boolean; a: number; b: number; niveau: number }> = [
+  { h: true, a: 25, b: 20, niveau: 2 },
+  { h: false, a: 20, b: 25, niveau: 2 },
+  { h: true, a: 100, b: 50, niveau: 2 },
+  { h: false, a: 50, b: 100, niveau: 2 },
+  { h: true, a: 60, b: 37.5, niveau: 3 },
+  { h: false, a: 37.5, b: 60, niveau: 3 },
+  { h: true, a: 150, b: 60, niveau: 4 },
+  { h: false, a: 60, b: 150, niveau: 4 },
+  { h: false, a: 75, b: 300, niveau: 4 },
+];
+
+const SUJETS_RECIPROQUE: Array<{ quoi: string; g: "m" | "f" }> = [
+  { quoi: "le prix d’un article", g: "m" },
+  { quoi: "le cours d’une action", g: "m" },
+  { quoi: "le loyer d’un local commercial", g: "m" },
+  { quoi: "le nombre d’abonnés d’une vidéaste", g: "m" },
+  { quoi: "la fréquentation d’un site web", g: "f" },
+  { quoi: "la valeur d’une collection de cartes", g: "f" },
+  { quoi: "le prix d’un billet de train", g: "m" },
+  { quoi: "la production d’une usine", g: "f" },
+  { quoi: "le chiffre d’affaires d’une boutique", g: "m" },
+  { quoi: "le tarif d’une salle de sport", g: "m" },
+  { quoi: "la consommation d’eau d’un hôtel", g: "f" },
+  { quoi: "le prix du kilo de café", g: "m" },
+];
+
+/** « un vélo » → « d’un vélo » ; « la guitare » → « de la guitare ». */
+function dObjet(o: string) {
+  if (/^une? /.test(o)) return "d’" + o;
+  if (o.startsWith("des ")) return o;
+  return de(o);
+}
+
+export function genReciproque(niveau: 2 | 3 | 4) {
+  const r = randomChoice(RECIPROQUES.filter((x) => x.niveau <= niveau));
+  const s = randomChoice(SUJETS_RECIPROQUE);
+  const pron = s.g === "m" ? "il" : "elle";
+  const e = s.g === "m" ? "" : "e";
+  const sens1 = r.h ? "hausse" : "baisse";
+  const sens2 = r.h ? "baisse" : "hausse";
+  const verbe2 = r.h ? "baisser" : "augmenter";
+  const k = (r.h ? 100 + r.a : 100 - r.a) / 100;
+  const kr = (r.h ? 100 - r.b : 100 + r.b) / 100;
+  const A = fr(r.a);
+  const B = fr(r.b);
+  const explanation = expl(
+    "l’évolution réciproque ramène à la valeur de départ : son coefficient est l’INVERSE 1 ÷ k du premier.",
+    `${sens1} de ${A} % : k = ${fr(k)} ; on calcule 1 ÷ ${fr(k)}.`,
+    `1 ÷ ${fr(k)} = ${fr(kr)}, et ${fr(k)} × ${fr(kr)} = 1.`,
+    `multiplier par ${fr(kr)}, c’est une ${sens2} de ${B} % ⚠️ et non de ${A} % : la seconde évolution porte sur la NOUVELLE valeur.`,
+  );
+  const formes = niveau === 2 ? ["qcmTaux", "taux"] : niveau === 3 ? ["qcmTaux", "taux", "coeff", "valeurs"] : ["qcmTaux", "taux", "coeffQcm", "coeff", "valeurs"];
+  const f = randomChoice(formes);
+  if (f === "qcmTaux") {
+    const bon = `une ${sens2} de ${B} %`;
+    return {
+      text: randomChoice([
+        `Après une ${sens1} de ${A} %, quelle évolution ramène ${s.quoi} à sa valeur de départ ?`,
+        `${cap(s.quoi)} a subi une ${sens1} de ${A} %. Pour revenir à sa valeur initiale, il faut :`,
+        `${cap(s.quoi)} ${r.h ? "augmente" : "baisse"} de ${A} %. Quelle évolution annule exactement cette ${sens1} ?`,
+        `Une ${sens1} de ${A} % est suivie d’une seconde évolution qui ramène au point de départ. Cette seconde évolution est :`,
+        `On veut annuler une ${sens1} de ${A} % ${aGn(s.quoi)}. Quelle évolution appliquer ?`,
+      ]),
+      format: "qcm" as const,
+      choices: makeChoices(bon, [
+        `une ${sens2} de ${A} %`,
+        `une ${sens1} de ${B} %`,
+        r.h ? `une baisse de ${fr(100 + r.a)} %` : `une hausse de ${fr(100 - r.a)} %`,
+        `une ${sens2} de ${fr(r.a * 2)} %`,
+      ]),
+      expected: [bon],
+      comparator: "mcq_exact" as const,
+      explanation,
+    };
+  }
+  if (f === "taux")
+    return {
+      text: randomChoice([
+        `${cap(s.quoi)} a ${r.h ? "augmenté" : "baissé"} de ${A} %. De quel pourcentage doit-${pron} ${verbe2} pour revenir à sa valeur de départ ?`,
+        `Après une ${sens1} de ${A} %, quelle ${sens2}, en %, ramène ${s.quoi} à sa valeur initiale ?`,
+        `${cap(s.quoi)} vient de subir une ${sens1} de ${A} %. Quel pourcentage de ${sens2} l’annule exactement ?`,
+        `Pour effacer une ${sens1} de ${A} % ${aGn(s.quoi)}, de combien de % faut-il ${r.h ? (s.g === "m" ? "le baisser" : "la baisser") : "l’augmenter"} ensuite ?`,
+      ]),
+      format: "short" as const,
+      expected: attendu(r.b, "%"),
+      comparator: "number_equal" as const,
+      explanation,
+    };
+  if (f === "coeff" || f === "coeffQcm") {
+    const donneK = Math.random() < 0.5;
+    const text = donneK
+      ? randomChoice([
+          `${cap(s.quoi)} a été multiplié${e} par ${fr(k)}. Par quel nombre faut-il ${s.g === "m" ? "le" : "la"} multiplier pour revenir à sa valeur de départ ?`,
+          `Un coefficient multiplicateur vaut ${fr(k)}. Quel est le coefficient de l’évolution réciproque ?`,
+          `Dans un tableur, une cellule a été multipliée par ${fr(k)}. Par quel nombre la multiplier pour retrouver la valeur d’origine ?`,
+        ])
+      : randomChoice([
+          `Après une ${sens1} de ${A} %, par quel nombre faut-il multiplier pour revenir à la valeur de départ ?`,
+          `${cap(s.quoi)} a subi une ${sens1} de ${A} %. Quel coefficient multiplicateur ${s.g === "m" ? "le" : "la"} ramène à sa valeur initiale ?`,
+          `Quel est le coefficient multiplicateur de l’évolution réciproque d’une ${sens1} de ${A} % ?`,
+        ]);
+    if (f === "coeffQcm")
+      return {
+        text,
+        format: "qcm" as const,
+        choices: makeChoices(fr(kr), [fr(2 - k), fr(k), fr(Math.round(Math.abs(k - 1) * 10000) / 10000), fr(r.b / 100)]),
+        expected: [fr(kr)],
+        comparator: "mcq_exact" as const,
+        explanation,
+      };
+    return { text, format: "short" as const, expected: [fr(kr)], comparator: "number_equal" as const, explanation };
+  }
+  const objet = randomChoice(ARTICLES_PRIX);
+  const v0 = randomChoice([40, 80, 120, 160, 200, 400, 800]);
+  const v1 = Math.round(v0 * k * 100) / 100;
+  return {
+    text: randomChoice([
+      `Le prix ${dObjet(objet)} passe de ${fr(v0)} € à ${fr(v1)} €. De quel pourcentage doit-il ${verbe2} pour revenir à ${fr(v0)} € ?`,
+      `${cap(objet)} coûtait ${fr(v0)} € ; après une ${sens1} de ${A} %, ${objet.startsWith("une") ? "elle" : "il"} coûte ${fr(v1)} €. Quelle ${sens2}, en %, ramène le prix à ${fr(v0)} € ?`,
+      `Un magasin fait passer le prix ${dObjet(objet)} de ${fr(v0)} € à ${fr(v1)} €, puis veut revenir à l’ancien prix. Quelle ${sens2} doit-il appliquer, en % ?`,
+    ]),
+    format: "short" as const,
+    expected: attendu(r.b, "%"),
+    comparator: "number_equal" as const,
+    explanation: expl(
+      "l’évolution réciproque ramène à la valeur de départ : son coefficient est l’INVERSE 1 ÷ k du premier.",
+      `on part de ${fr(v1)} € et on veut ${fr(v0)} € : coefficient ${fr(v0)} ÷ ${fr(v1)}.`,
+      `${fr(v0)} ÷ ${fr(v1)} = ${fr(kr)} = 1 ÷ ${fr(k)}.`,
+      `multiplier par ${fr(kr)}, c’est une ${sens2} de ${B} % ⚠️ et non de ${A} %.`,
+    ),
+  };
+}
+
+/* ---------- Coefficient en QCM, façon épreuve anticipée ---------- */
+
+// ⛔ 23/11 : l'exercice type de l'épreuve (sujet Asie 2026) — « pour augmenter un prix de
+// 15 %, je dois multiplier par » 1,15 / 1,5 / 0,15 / 15. Les pièges : le taux seul, le taux
+// brut, la virgule mal placée (1,5 pour 15 % ; 1,3 pour 3 %), le sens contraire.
+const PCT_EPREUVE = [3, 5, 7, 10, 12, 15, 20, 25, 30, 40, 50, 0.5];
+
+/** La virgule mal placée : 15 % → 1,5 ; 3 % → 1,3 ; 0,5 % → 1,05 ; 25 % → 1,025. */
+function virguleFausse(t: number) {
+  if (t < 10) return t / 10;
+  if (t < 20 && t !== 10) return (t - 10) / 10;
+  return t / 1000;
+}
+
+export function genCoeffQcm(sens: "hausse" | "mixte") {
+  const t = randomChoice(PCT_EPREUVE);
+  const hausse = sens === "hausse" || Math.random() < 0.6;
+  const g = randomChoice(GRANDEURS);
+  const c = hausse ? 1 + t / 100 : 1 - t / 100;
+  const bon = fr(c);
+  const T = fr(t);
+  const text = hausse
+    ? randomChoice([
+        `Pour augmenter un prix de ${T} %, je dois le multiplier par :`,
+        `Augmenter une quantité de ${T} %, c’est la multiplier par :`,
+        `${cap(g.quoi)} augmente de ${T} %. On obtient la nouvelle valeur en multipliant l’ancienne par :`,
+        `Le coefficient multiplicateur associé à une hausse de ${T} % est :`,
+        `Un commerçant augmente tous ses prix de ${T} %. Il multiplie chaque prix par :`,
+        `Une hausse de ${T} % ${aGn(g.quoi)} revient à multiplier par :`,
+        `Dans un tableur, on veut augmenter la cellule B2 de ${T} % avec la formule « =B2*… ». Quel nombre écrit-on ?`,
+        `Sans calculatrice : ${g.quoi} est augmenté${g.g === "m" ? "" : "e"} de ${T} %. Par quel nombre est-${g.g === "m" ? "il" : "elle"} multiplié${g.g === "m" ? "" : "e"} ?`,
+      ])
+    : randomChoice([
+        `Pour diminuer un prix de ${T} %, je dois le multiplier par :`,
+        `Baisser une quantité de ${T} %, c’est la multiplier par :`,
+        `${cap(g.quoi)} baisse de ${T} %. On obtient la nouvelle valeur en multipliant l’ancienne par :`,
+        `Le coefficient multiplicateur associé à une baisse de ${T} % est :`,
+        `Pendant les soldes, une boutique fait une remise de ${T} % sur tous ses prix. Elle multiplie chaque prix par :`,
+        `Dans un tableur, on veut diminuer la cellule B2 de ${T} % avec la formule « =B2*… ». Quel nombre écrit-on ?`,
+      ]);
+  const vf = virguleFausse(t);
+  return {
+    text,
+    format: "qcm" as const,
+    choices: makeChoices(bon, [fr(t / 100), T, fr(hausse ? 1 + vf : 1 - vf), fr(hausse ? 1 - t / 100 : 1 + t / 100)]),
+    expected: [bon],
+    comparator: "mcq_exact" as const,
+    explanation: expl(
+      `${hausse ? "augmenter" : "diminuer"} de t %, c’est multiplier par 1 ${hausse ? "+" : "−"} t/100.`,
+      `${T} % = ${T} ÷ 100 = ${fr(t / 100)}.`,
+      `1 ${hausse ? "+" : "−"} ${fr(t / 100)} = ${bon}.`,
+      `on multiplie par ${bon} ⚠️ et non par ${fr(hausse ? 1 + vf : 1 - vf)} : ${T} %, c’est ${fr(t / 100)}.`,
+    ),
   };
 }
 
@@ -357,26 +728,49 @@ export function genApresBaisse(taux: number[]) {
   };
 }
 
-const ARTICLES_PRIX = ["un vélo", "une tablette", "un casque audio", "une paire de baskets", "un sac de sport", "une guitare", "un billet de concert", "une montre connectée"];
+const ARTICLES_PRIX = ["un vélo", "une tablette", "un casque audio", "une paire de baskets", "un sac de sport", "une guitare", "un billet de concert", "une montre connectée", "un manteau", "un lave-linge", "un smartphone", "une trottinette"];
+
+/** Services et achats soumis à la TVA : [libellé, taux possibles]. */
+const ACHATS_TVA: Array<[string, number[]]> = [
+  ["un ordinateur portable", [20]],
+  ["une réparation chez le garagiste", [20]],
+  ["un repas au restaurant", [10]],
+  ["des travaux de rénovation", [10]],
+  ["un abonnement internet", [20]],
+  ["un séjour à l’hôtel", [10]],
+  ["un téléviseur", [20]],
+  ["un billet de transport en commun", [10]],
+];
+
+const round2 = (n: number) => Math.round(n * 100) / 100;
 
 /**
  * Valeur initiale en UN geste : on divise par un seul coefficient.
- * « remise » : prix avant une remise ; « hausse » : valeur avant une hausse ; « ttc » : du TTC vers le HT.
+ * « remise » : prix avant une remise ou des soldes ; « hausse » : valeur avant une hausse
+ * (salaire, population, abonnés…) ; « baisse » : valeur avant une baisse ; « ttc » : du TTC vers le HT.
  * ⛔ genDepart enchaîne deux évolutions : trop haut pour découvrir la micro.
+ * ⛔ 23/11 (audit) : 4,2 à 4,7 répétitions sur 20 → 6 à 8 tournures par type, plus de contextes,
+ * et une forme QCM du HT dont les pièges restent propres (jamais « 1222,2222 € »).
  */
-export function genValeurInitiale(type: "remise" | "hausse" | "ttc") {
+export function genValeurInitiale(type: "remise" | "hausse" | "baisse" | "ttc", tauxImposes?: number[]) {
   if (type === "remise") {
     const objet = randomChoice(ARTICLES_PRIX);
-    const t = randomChoice([10, 20, 25, 50]);
-    const v0 = randomChoice([40, 60, 80, 100, 120, 200, 300, 400]);
+    const il = objet.startsWith("une") ? "elle" : "il";
+    const dObj = "d’" + objet;
+    const t = randomChoice(tauxImposes ?? [10, 20, 25, 50]);
+    const v0 = randomChoice([40, 60, 80, 100, 120, 200, 300, 400, 500, 800]);
     const c = (100 - t) / 100;
-    const v1 = (v0 * (100 - t)) / 100;
+    const v1 = round2(v0 * c);
     return {
       text: randomChoice([
         `Après une remise de ${t} %, ${objet} coûte ${fr(v1)} €. Quel était son prix avant la remise ?`,
         `On paie ${objet} ${fr(v1)} € après une remise de ${t} %. Quel était le prix avant la remise ?`,
-        `Pendant les soldes, le prix ${de(objet).replace(/^de un/, "d’un")} est de ${fr(v1)} €, soit ${t} % de moins qu’avant. Quel était ce prix avant les soldes ?`,
+        `Pendant les soldes, le prix ${dObj} est de ${fr(v1)} €, soit ${t} % de moins qu’avant. Quel était ce prix avant les soldes ?`,
         `Prix après une remise de ${t} % : ${fr(v1)} €. Quel était le prix de départ ?`,
+        `Avec sa carte de fidélité, Inès a ${t} % de réduction : elle paie ${objet} ${fr(v1)} €. Quel est le prix sans réduction ?`,
+        `L’étiquette ${dObj} indique « − ${t} % : ${fr(v1)} € ». Quel est le prix barré ?`,
+        `Une promotion fait baisser de ${t} % le prix ${dObj}, qui passe à ${fr(v1)} €. Combien coûtait-${il} avant ?`,
+        `Le jour du « Black Friday », ${objet} est vendu${il === "elle" ? "e" : ""} ${fr(v1)} € après ${t} % de rabais. Quel était son prix normal ?`,
       ]),
       format: "short" as const,
       expected: attendu(v0, "€"),
@@ -384,42 +778,74 @@ export function genValeurInitiale(type: "remise" | "hausse" | "ttc") {
       explanation: expl("prix de départ × coefficient = prix final.", `une remise de ${t} %, c’est × ${fr(c)} ; pour remonter, on DIVISE par ${fr(c)}.`, `${fr(v1)} ÷ ${fr(c)} = ${fr(v0)}.`, `le prix de départ était ${fr(v0)} € ⚠️ ajouter ${t} % à ${fr(v1)} € ne redonne pas ce prix, car la remise porte sur l’ancien prix.`),
     };
   }
-  if (type === "hausse") {
+  if (type === "hausse" || type === "baisse") {
+    const hausse = type === "hausse";
     const g = randomChoice(GRANDEURS);
-    const t = randomChoice([10, 20, 25, 50]);
+    const t = randomChoice(tauxImposes ?? [10, 20, 25, 50]);
+    const pron = g.g === "m" ? "il" : "elle";
     const v0 = randomChoice(g.v);
-    const c = (100 + t) / 100;
-    const v1 = (v0 * (100 + t)) / 100;
+    const c = (hausse ? 100 + t : 100 - t) / 100;
+    const v1 = round2(v0 * c);
     const unite = g.u === "€" || g.u === "kg" ? g.u : "";
     const suffixe = unite ? " " + unite : "";
+    const nom = hausse ? "hausse" : "baisse";
+    const text = hausse
+      ? randomChoice([
+          `Après une hausse de ${t} %, ${g.quoi} vaut ${fr(v1)}${suffixe}. Quelle était sa valeur avant la hausse ?`,
+          `${cap(g.quoi)} a gagné ${t} % et atteint ${fr(v1)}${suffixe}. Quelle était sa valeur de départ ?`,
+          `Valeur après une hausse de ${t} % : ${fr(v1)}${suffixe} (${g.quoi}). Quelle était la valeur de départ ?`,
+          `En un an, ${g.quoi} a augmenté de ${t} % : ${pron} vaut maintenant ${fr(v1)}${suffixe}. Combien valait-${pron} l’an dernier ?`,
+          `${cap(g.quoi)} est en hausse de ${t} % et s’établit à ${fr(v1)}${suffixe}. Retrouve sa valeur d’avant.`,
+          `Une augmentation de ${t} % a porté ${g.quoi} à ${fr(v1)}${suffixe}. Quelle était sa valeur initiale ?`,
+          `Un journal titre : « + ${t} % ! » ; ${g.quoi} atteint ${fr(v1)}${suffixe}. Quelle était sa valeur avant ?`,
+        ])
+      : randomChoice([
+          `Après une baisse de ${t} %, ${g.quoi} vaut ${fr(v1)}${suffixe}. Quelle était sa valeur avant la baisse ?`,
+          `${cap(g.quoi)} a perdu ${t} % et n’est plus que de ${fr(v1)}${suffixe}. Quelle était sa valeur de départ ?`,
+          `En un an, ${g.quoi} a diminué de ${t} % : ${pron} vaut maintenant ${fr(v1)}${suffixe}. Combien valait-${pron} l’an dernier ?`,
+          `${cap(g.quoi)} est en recul de ${t} % et s’établit à ${fr(v1)}${suffixe}. Retrouve sa valeur d’avant.`,
+          `Une baisse de ${t} % a ramené ${g.quoi} à ${fr(v1)}${suffixe}. Quelle était sa valeur initiale ?`,
+          `Valeur après une baisse de ${t} % : ${fr(v1)}${suffixe} (${g.quoi}). Quelle était la valeur de départ ?`,
+        ]);
     return {
-      text: randomChoice([
-        `Après une hausse de ${t} %, ${g.quoi} vaut ${fr(v1)}${suffixe}. Quelle était sa valeur avant la hausse ?`,
-        `${cap(g.quoi)} a gagné ${t} % et atteint ${fr(v1)}${suffixe}. Quelle était sa valeur de départ ?`,
-        `Valeur après une hausse de ${t} % : ${fr(v1)}${suffixe} (${g.quoi}). Quelle était la valeur de départ ?`,
-      ]),
+      text,
       format: "short" as const,
       expected: attendu(v0, unite),
       comparator: "number_equal" as const,
-      explanation: expl("valeur de départ × coefficient = valeur finale.", `une hausse de ${t} %, c’est × ${fr(c)} ; pour remonter, on DIVISE par ${fr(c)}.`, `${fr(v1)} ÷ ${fr(c)} = ${fr(v0)}.`, `la valeur de départ était ${fr(v0)}${suffixe}.`),
+      explanation: expl(
+        "valeur de départ × coefficient = valeur finale.",
+        `une ${nom} de ${t} %, c’est × ${fr(c)} ; pour remonter, on DIVISE par ${fr(c)}.`,
+        `${fr(v1)} ÷ ${fr(c)} = ${fr(v0)}.`,
+        `${g.quoi} valait ${fr(v0)}${suffixe} au départ ⚠️ ${hausse ? "retirer" : "ajouter"} ${t} % à ${fr(v1)} ne redonne pas cette valeur : le pourcentage porte sur l’ancienne valeur.`,
+      ),
     };
   }
-  const objet = randomChoice(ARTICLES_PRIX);
-  const t = randomChoice([10, 20]);
-  const ht = randomChoice([50, 100, 150, 200, 300, 500, 1000]);
+  const [achat, tauxTva] = Math.random() < 0.5 ? randomChoice(ACHATS_TVA) : [randomChoice(ARTICLES_PRIX), [10, 20]];
+  const t = randomChoice(tauxTva);
+  const ht = randomChoice([50, 100, 150, 200, 300, 500, 1000, 1200]);
   const c = (100 + t) / 100;
-  const ttc = (ht * (100 + t)) / 100;
-  return {
-    text: randomChoice([
-      `${cap(objet)} coûte ${fr(ttc)} € TTC, avec une TVA de ${t} %. Quel est son prix hors taxes (HT), en € ?`,
-      `Une facture indique ${fr(ttc)} € TTC, avec une TVA à ${t} %. Quel est le montant HT, en € ?`,
-      `Prix TTC : ${fr(ttc)} €. Taux de TVA : ${t} %. Calcule le prix HT, en €.`,
-    ]),
-    format: "short" as const,
-    expected: attendu(ht, "€"),
-    comparator: "number_equal" as const,
-    explanation: expl("prix TTC = prix HT × (1 + taux de TVA).", `une TVA de ${t} %, c’est × ${fr(c)} ; pour revenir au HT, on DIVISE par ${fr(c)}.`, `${fr(ttc)} ÷ ${fr(c)} = ${fr(ht)}.`, `le prix HT est ${fr(ht)} € ⚠️ retirer ${t} % du TTC ne donne pas le HT.`),
-  };
+  const ttc = round2(ht * c);
+  const text = randomChoice([
+    `${cap(achat)} coûte ${fr(ttc)} € TTC, avec une TVA de ${t} %. Quel est le prix hors taxes (HT), en € ?`,
+    `Une facture indique ${fr(ttc)} € TTC pour ${achat}, avec une TVA à ${t} %. Quel est le montant HT, en € ?`,
+    `Prix TTC : ${fr(ttc)} €. Taux de TVA : ${t} %. Calcule le prix HT, en €.`,
+    `Pour ${achat}, on paie ${fr(ttc)} € toutes taxes comprises (TVA ${t} %). Quel est le montant hors taxes ?`,
+    `Un comptable doit retrouver le montant HT ${dObjet(achat)} payé ${fr(ttc)} € TTC (TVA à ${t} %). Quel montant inscrit-il ?`,
+    `La TVA de ${t} % est comprise dans les ${fr(ttc)} € payés pour ${achat}. Quel est le prix HT ?`,
+  ]);
+  const explanation = expl("prix TTC = prix HT × (1 + taux de TVA).", `une TVA de ${t} %, c’est × ${fr(c)} ; pour revenir au HT, on DIVISE par ${fr(c)}.`, `${fr(ttc)} ÷ ${fr(c)} = ${fr(ht)}.`, `le prix HT est ${fr(ht)} € ⚠️ retirer ${t} % du TTC ne donne pas le HT.`);
+  if (Math.random() < 0.35) {
+    const bon = `${fr(ht)} €`;
+    return {
+      text,
+      format: "qcm" as const,
+      choices: makeChoices(bon, [`${fr(round2(ttc * (1 - t / 100)))} €`, `${fr(round2(ttc - t))} €`, `${fr(round2(ttc * c))} €`, `${fr(round2((ttc * t) / 100))} €`]),
+      expected: [bon],
+      comparator: "mcq_exact" as const,
+      explanation,
+    };
+  }
+  return { text, format: "short" as const, expected: attendu(ht, "€"), comparator: "number_equal" as const, explanation };
 }
 
 /** Deux évolutions enchaînées : le coefficient global, produit des deux coefficients. */
@@ -606,7 +1032,11 @@ const H_IND_CALC = "Indice = 100 × valeur ÷ valeur de l’année de base.";
 const H_IND_TAUX = "Entre deux indices qui ne partent pas de 100 : taux = (arrivée − départ) ÷ départ. L’écart seul n’est pas un pourcentage.";
 const H_IND_COMP = "Deux indices de même base se comparent directement.";
 
+const H_REC = "Le coefficient de l’évolution réciproque est l’INVERSE : 1 ÷ k.";
+
 const PCT_SIMPLES = [5, 10, 20, 25, 30, 40, 50, 75];
+// Taux entiers de l'épreuve anticipée (genCoeffMult arrondit au centième : pas de 0,5 % ici).
+const PCT_EPREUVE_ENTIERS = [3, 5, 7, 10, 12, 15, 20, 25, 30, 50];
 const PCT_DIFF = [5, 12, 15, 35, 45, 60];
 
 type Ligne = [string, string, number, () => any, string];
@@ -649,12 +1079,13 @@ export const renfortSeconde = construire("seconde", [
   // ⛔ genCoeffMillieme n'a qu'un seul coefficient : rangé dans « taux d'évolution ».
   [N2, "info_evolutions_successives", 5, () => genCoeffGlobal(), H_EVO],
   [N2, "info_evolutions_successives", 5, () => genTauxGlobal(), H_EVO],
-  [N2, "info_evolution_reciproque", 3, () => genRetour(), H_EVO],
-  [N2, "info_evolution_reciproque", 3, () => genCompensation(3), H_EVO],
-  [N2, "info_evolution_reciproque", 4, () => genDepart(), H_EVO],
-  [N2, "info_evolution_reciproque", 4, () => genRetour(), H_EVO],
-  [N2, "info_evolution_reciproque", 5, () => genDepart(), H_EVO],
-  [N2, "info_evolution_reciproque", 5, () => genRetour(), H_EVO],
+  // ⛔ 23/11 : la réciproque reçoit SON générateur (1 ÷ k), plus genCompensation ni genDepart.
+  [N2, "info_evolution_reciproque", 3, () => genRetour(), H_REC],
+  [N2, "info_evolution_reciproque", 3, () => genReciproque(3), H_REC],
+  [N2, "info_evolution_reciproque", 4, () => genReciproque(4), H_REC],
+  [N2, "info_evolution_reciproque", 4, () => genRetour(), H_REC],
+  [N2, "info_evolution_reciproque", 5, () => genReciproque(4), H_REC],
+  [N2, "info_evolution_reciproque", 5, () => genRetour(), H_REC],
 ]);
 
 const AP = "auto_proportion";
@@ -674,10 +1105,13 @@ export const renfortPremiere = construire("premiere", [
   [PT, "auto_prop_tout_connaissant_partie", 4, () => genPartieTout("total"), H_PROP],
   [PT, "auto_prop_pourcentage_de_pourcentage", 4, () => genPctDePct(3), H_PROP],
   [PT, "auto_prop_pourcentage_de_pourcentage", 4, () => genPctDePct(4), H_PROP],
+  // ⛔ 23/11 : l'exercice type de l'épreuve (« augmenter de 15 %, je multiplie par ? ») en QCM.
   [CM, "auto_evo_additif_multiplicatif", 1, () => genAddMult(1), H_EVO],
-  [CM, "auto_evo_additif_multiplicatif", 1, () => genCoeffMult("short", "hausse", PCT_SIMPLES), H_EVO],
+  [CM, "auto_evo_additif_multiplicatif", 1, () => genCoeffMult("short", "hausse", PCT_EPREUVE_ENTIERS), H_EVO],
+  [CM, "auto_evo_additif_multiplicatif", 1, () => genCoeffQcm("hausse"), H_EVO],
   [CM, "auto_evo_additif_multiplicatif", 2, () => genAddMult(2), H_EVO],
-  [CM, "auto_evo_additif_multiplicatif", 2, () => genCoeffMult("short", "mixte", PCT_SIMPLES), H_EVO],
+  [CM, "auto_evo_additif_multiplicatif", 2, () => genCoeffMult("short", "mixte", PCT_EPREUVE_ENTIERS), H_EVO],
+  [CM, "auto_evo_additif_multiplicatif", 2, () => genCoeffQcm("mixte"), H_EVO],
   [CM, "auto_evo_diminution", 1, () => genCoeffMult("short", "baisse", PCT_SIMPLES), H_EVO],
   [CM, "auto_evo_diminution", 1, () => genAddMult(2, "baisse"), H_EVO],
   [CM, "auto_evo_diminution", 2, () => genCoeffMult("short", "baisse", PCT_SIMPLES), H_EVO],
@@ -688,10 +1122,11 @@ export const renfortPremiere = construire("premiere", [
   [CM, "auto_evo_valeur_finale", 2, () => genAppliquerCoeff([10, 20, 25, 30, 40, 50]), H_EVO],
   [CM, "auto_evo_valeur_finale", 3, () => genNouvelleValeur(PCT_DIFF), H_EVO],
   [CM, "auto_evo_valeur_finale", 3, () => genAppliquerCoeff([10, 20, 25, 30, 40, 50]), H_EVO],
-  [CM, "auto_evo_valeur_initiale", 2, () => genValeurInitiale("remise"), H_VI],
+  [CM, "auto_evo_valeur_initiale", 2, () => genValeurInitiale(randomChoice(["remise", "baisse"] as const)), H_VI],
   [CM, "auto_evo_valeur_initiale", 2, () => genValeurInitiale("hausse"), H_VI],
   [CM, "auto_evo_valeur_initiale", 3, () => genDepart(), H_VI],
   [CM, "auto_evo_valeur_initiale", 3, () => genValeurInitiale("ttc"), H_VI],
+  [CM, "auto_evo_valeur_initiale", 3, () => genValeurInitiale(randomChoice(["remise", "hausse", "baisse"] as const), [5, 10, 20, 25, 40, 50]), H_VI],
   [TE, "auto_evo_calculer_taux", 2, () => genTauxEvolution(PCT_SIMPLES), H_EVO],
   [TE, "auto_evo_calculer_taux", 2, () => genCoeffVersTaux(PCT_SIMPLES), H_EVO],
   [TE, "auto_evo_calculer_taux", 3, () => genTauxEvolution(PCT_DIFF), H_EVO],
@@ -701,10 +1136,15 @@ export const renfortPremiere = construire("premiere", [
   [TE, "auto_evo_successives", 3, () => genSuccessives(false), H_EVO],
   [TE, "auto_evo_successives", 4, () => genTauxGlobal(), H_EVO],
   [TE, "auto_evo_successives", 4, () => genCoeffGlobal(), H_EVO],
-  [TE, "auto_evo_reciproque", 4, () => genRetour(), H_EVO],
-  [TE, "auto_evo_reciproque", 4, () => genDepart(), H_EVO],
-  [TE, "auto_evo_piege_compensation", 3, () => genCompensation(3), H_EVO],
-  [TE, "auto_evo_piege_compensation", 3, () => genCompensation(3), H_EVO],
+  // ⛔ 23/11 : le geste « 1 ÷ k » revient (genDepart n'est pas une réciproque), étoiles 2 à 4.
+  [TE, "auto_evo_reciproque", 2, () => genReciproque(2), H_REC],
+  [TE, "auto_evo_reciproque", 3, () => genReciproque(3), H_REC],
+  [TE, "auto_evo_reciproque", 3, () => genRetour(), H_REC],
+  [TE, "auto_evo_reciproque", 4, () => genRetour(), H_REC],
+  [TE, "auto_evo_reciproque", 4, () => genReciproque(4), H_REC],
+  // ⛔ 23/11 : deux gabarits ★3 DIFFÉRENTS (le sens, puis le chiffre).
+  [TE, "auto_evo_piege_compensation", 3, () => genCompensation(3, "sens"), H_EVO],
+  [TE, "auto_evo_piege_compensation", 3, () => genCompensation(3, "chiffre"), H_EVO],
   [TE, "auto_evo_piege_compensation", 4, () => genCompensation(4), H_EVO],
   [TE, "auto_evo_piege_compensation", 4, () => genTauxGlobal(), H_EVO],
 ]);
@@ -751,22 +1191,25 @@ export const renfortStmg = construire("stmg", [
   [EC, "auto_evo_valeur_finale", 3, () => genAppliquerCoeff([10, 20, 25, 30, 40, 50]), H_EVO],
   // ⛔ Le geste simple d'abord : une remise, une hausse, puis TTC → HT. Les deux évolutions (genDepart) viennent à ★3 ;
   // la réciproque (genRetour) a sa micro. Les gabarits de la banque STMG restent servis : voir `garder`.
-  [EC, "auto_evo_valeur_initiale", 2, () => genValeurInitiale("remise"), H_VI],
+  // ⛔ 23/11 : les trois gabarits de la banque STMG (une seule phrase chacun) ne sont plus gardés.
+  [EC, "auto_evo_valeur_initiale", 2, () => genValeurInitiale(randomChoice(["remise", "baisse"] as const)), H_VI],
   [EC, "auto_evo_valeur_initiale", 2, () => genValeurInitiale("hausse"), H_VI],
+  [EC, "auto_evo_valeur_initiale", 2, () => genValeurInitiale("ttc"), H_VI],
   [EC, "auto_evo_valeur_initiale", 3, () => genDepart(), H_VI],
   [EC, "auto_evo_valeur_initiale", 3, () => genValeurInitiale("ttc"), H_VI],
+  [EC, "auto_evo_valeur_initiale", 3, () => genValeurInitiale(randomChoice(["remise", "hausse", "baisse"] as const), [4, 5, 15, 30, 40]), H_VI],
   [EE, "auto_evo_chaine_coefficients", 2, () => genSuccessives(true), H_EVO],
   [EE, "auto_evo_chaine_coefficients", 2, () => genSuccessives(false), H_EVO],
   [EE, "auto_evo_chaine_coefficients", 3, () => genTauxGlobal(), H_EVO],
   [EE, "auto_evo_chaine_coefficients", 3, () => genCoeffGlobal(), H_EVO],
   [EE, "auto_evo_successives", 3, () => genSuccessives(false), H_EVO],
   [EE, "auto_evo_successives", 3, () => genTauxGlobal(), H_EVO],
-  [EE, "auto_evo_reciproque", 2, () => genRetour(), H_EVO],
-  [EE, "auto_evo_reciproque", 2, () => genDepart(), H_EVO],
-  [EE, "auto_evo_reciproque", 3, () => genRetour(), H_EVO],
-  [EE, "auto_evo_reciproque", 3, () => genDepart(), H_EVO],
-  [EE, "auto_evo_piege_compensation", 2, () => genCompensation(2), H_EVO],
-  [EE, "auto_evo_piege_compensation", 2, () => genCompensation(3), H_EVO],
+  [EE, "auto_evo_reciproque", 2, () => genRetour(), H_REC],
+  [EE, "auto_evo_reciproque", 2, () => genReciproque(2), H_REC],
+  [EE, "auto_evo_reciproque", 3, () => genRetour(), H_REC],
+  [EE, "auto_evo_reciproque", 3, () => genReciproque(3), H_REC],
+  [EE, "auto_evo_piege_compensation", 2, () => genCompensation(2, "sens"), H_EVO],
+  [EE, "auto_evo_piege_compensation", 2, () => genCompensation(3, "chiffre"), H_EVO],
   [EE, "auto_evo_piege_compensation", 3, () => genCompensation(4), H_EVO],
   [EE, "auto_evo_piege_compensation", 3, () => genTauxGlobal(), H_EVO],
   [ET, "auto_evo_absolue_relative", 2, () => genAbsRel(2), H_ABS],

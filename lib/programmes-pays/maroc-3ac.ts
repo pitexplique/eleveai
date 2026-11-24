@@ -61,7 +61,8 @@ export const MAROC_3AC: ProgrammePays = {
       couverture: "complete",
       micros: [
         ...m("3e", "litteral_developper", "litteral_factoriser", "litteral_identite"),
-        ...m("4e", "litteral_identite_developper", "litteral_facteur_commun"),
+        ...m("4e", "litteral_identite_developper", "litteral_identite_reconnaitre", "litteral_identite_choisir", "litteral_identite_defi", "litteral_facteur_commun"),
+        ...m("3e", "equation_carre_factoriser"),
         ...m("seconde", "ir_application", "ir_difference_carres", "devfac_factoriser_identite"),
       ],
     },
@@ -130,7 +131,7 @@ export const MAROC_3AC: ProgrammePays = {
       texte: "Équations et inéquations du premier degré à une inconnue, et équations qui s'y ramènent ; solutions d'une inéquation sur une droite ; problèmes. Paramètres hors programme.",
       couverture: "complete",
       micros: [
-        ...m("3e", "equation_resoudre_developper", "equation_produit_nul", "equation_probleme"),
+        ...m("3e", "equation_resoudre_developper", "equation_produit_nul", "equation_carre_factoriser", "equation_probleme"),
         ...m("seconde", "inequation_resoudre", "inequation_intervalle"),
       ],
       note: "Les inéquations sont en seconde chez nous.",
