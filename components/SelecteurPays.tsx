@@ -24,12 +24,15 @@ export default function SelecteurPays({ paysActuel }: { paysActuel: string }) {
   }
 
   return (
-    <label className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white py-1 pl-4 pr-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+    // ⚠️ 24/11 : la liste a des noms de pays longs ; sans largeur maximale, le
+    // <select> prenait la largeur du plus long et débordait sur téléphone
+    // (page large de 418 px pour 375).
+    <label className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-slate-300 bg-white py-1 pl-4 pr-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
       Programme
       <select
         value={pays}
         onChange={(e) => choisir(e.target.value)}
-        className="cursor-pointer rounded-full bg-transparent py-1 font-bold text-teal-700 outline-none"
+        className="min-w-0 max-w-[11rem] cursor-pointer truncate rounded-full bg-transparent py-1 font-bold text-teal-700 outline-none"
       >
         <option value="france">France</option>
         {PAYS.map((p) => (
