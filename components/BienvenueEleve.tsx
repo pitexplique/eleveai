@@ -13,11 +13,23 @@
 // la dernière notion travaillée (/api/mes-notions), un message du prof pas
 // encore lu (/api/eleve/messages-classe), sa classe.
 // Phrases courtes, gros boutons, un dessin par bouton : les 6e lisent mal.
+//
+// ☁️ 24/11/2026 (soir) — Frédéric, vu chez une prof de graphisme : « un petit
+// nuage avec au centre Ti Margo et des petites flèches » vers le tableau de
+// bord, le coach, les vidéos… ; Ti Margo dit « Je te suis et je
+// t'accompagne ! ». Dans l'ordre, de haut en bas :
+//   1. ✉️ le message du prof pas encore lu (« J'ai lu », « ▶ Commencer la séance ») ;
+//   2. 💬 le mot PERSONNEL de Ti Margo : ce que CET élève doit faire
+//      maintenant (lib/conseilTiMargo.ts, sans IA) ;
+//   3. ☁️ le nuage et ses flèches (sur téléphone : le nuage, puis la liste).
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
 import { prenomAffichable } from "@/lib/prenom";
+import { conseilTiMargo, notionARetravailler, type NotionEleve, type Reprise } from "@/lib/conseilTiMargo";
+import { CENTRE_PAR_ID, EMOJI_CENTRE } from "@/lib/videos/centres-interet";
 
 const CLE = "eleveai_bienvenue";
 
@@ -31,15 +43,47 @@ export function marquerBienvenue(type: string | null | undefined) {
   }
 }
 
-type Choix = { href: string; emoji: string; titre: string; detail?: string; fort?: boolean };
+type Choix = { href: string; emoji: string; titre: string; detail?: string };
+type MessageProf = { id: string; texte: string; lu?: boolean; lien?: string | null };
+type Notions = { notions: NotionEleve[]; titres: Record<string, string>; reprise: Reprise };
+
+// Six places autour du nuage, dans un repère 600 × 420 : le cadre garde ces
+// proportions, les flèches tombent donc juste à toutes les largeurs.
+const W = 600;
+const H = 420;
+const PLACES: { x: number; y: number; de: [number, number]; vers: [number, number] }[] = [
+  { x: 100, y: 52, de: [215, 120], vers: [150, 82] },
+  { x: 500, y: 52, de: [385, 120], vers: [450, 82] },
+  { x: 86, y: 210, de: [184, 210], vers: [168, 210] },
+  { x: 514, y: 210, de: [416, 210], vers: [432, 210] },
+  { x: 100, y: 368, de: [215, 300], vers: [150, 338] },
+  { x: 500, y: 368, de: [385, 300], vers: [450, 338] },
+];
+
+// Même garde que la carte du tableau de bord : seulement un chemin du coach.
+const lienSur = (l?: string | null) => (l && l.startsWith("/coach") && !l.includes("//") ? l : null);
+
+// Ses passions → une bulle à lui. Certaines ont leur simulateur (Frédéric,
+// 24/11 : « certains veulent voir les cyclones »).
+const SIMULATEUR_PASSION: Record<string, { titre: string; href: string }> = {
+  "meteo-climat": { titre: "Les cyclones", href: "/simulateur-cyclone" },
+  "nature-ecologie": { titre: "Le volcan", href: "/simulateur-volcan" },
+};
+
+const IMAGE_HUMEUR = {
+  bravo: "/ti-margo/animations/bravo.png",
+  encouragement: "/ti-margo/animations/encouragement.png",
+  salut: "/ti-margo/animations/salut.png",
+} as const;
 
 export default function BienvenueEleve() {
   const { eleve, pret } = useEleve();
   const [ouvert, setOuvert] = useState(false);
   const [prenom, setPrenom] = useState<string | null>(null);
   const [classe, setClasse] = useState<string | null>(null);
-  const [derniere, setDerniere] = useState<{ titre: string; href: string } | null>(null);
-  const [messageNonLu, setMessageNonLu] = useState(false);
+  const [notions, setNotions] = useState<Notions | null>(null);
+  const [messages, setMessages] = useState<MessageProf[]>([]);
+  const [passions, setPassions] = useState<string[]>([]);
 
   useEffect(() => {
     if (!pret || !eleve || eleve.type_utilisateur !== "eleve") return;
@@ -63,6 +107,7 @@ export default function BienvenueEleve() {
       .then((d) => {
         const p = typeof d?.pseudo === "string" ? d.pseudo.trim() : "";
         if (p) setPrenom(p);
+        if (Array.isArray(d?.passions)) setPassions(d.passions.filter((x: unknown) => typeof x === "string"));
       })
       .catch(() => null);
 
@@ -75,26 +120,15 @@ export default function BienvenueEleve() {
         .catch(() => null);
     }
 
-    // Les titres arrivent du plus récent au plus ancien : le premier est la
-    // dernière notion travaillée.
+    // Ses notions, ses scores et la série où il en était (24/11 : « reprise »).
     fetch("/api/mes-notions", { headers: h })
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => {
-        const premiere = Object.entries((d?.titres ?? {}) as Record<string, string>)[0];
-        if (!premiere) return;
-        const [cle, titre] = premiere;
-        const [c, notion] = cle.split("|");
-        if (!c || !notion) return;
-        // ⭐ 24/11/2026 — On reprend à la série où il en était, et le coach
-        // démarre seul (microId + display=simple, comme le bouton GO).
-        const reprise = d?.reprise as { cle?: string; microId?: string } | null | undefined;
-        const suite =
-          reprise?.cle === cle && reprise.microId
-            ? `&microId=${encodeURIComponent(reprise.microId)}&display=simple`
-            : "";
-        setDerniere({
-          titre,
-          href: `/coach/serie?classe=${encodeURIComponent(c)}&matiere=maths&notion=${encodeURIComponent(notion)}${suite}`,
+        if (!d?.ok) return;
+        setNotions({
+          notions: Array.isArray(d.notions) ? d.notions : [],
+          titres: (d.titres ?? {}) as Record<string, string>,
+          reprise: (d.reprise ?? null) as Reprise,
         });
       })
       .catch(() => null);
@@ -102,8 +136,8 @@ export default function BienvenueEleve() {
     fetch("/api/eleve/messages-classe", { headers: h })
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => {
-        const msgs = (d?.messages ?? []) as { lu?: boolean }[];
-        if (msgs.some((m) => !m.lu)) setMessageNonLu(true);
+        const msgs = (d?.messages ?? []) as MessageProf[];
+        setMessages(msgs.filter((m) => !m.lu && typeof m.texte === "string"));
       })
       .catch(() => null);
   }, [pret, eleve]);
@@ -120,29 +154,104 @@ export default function BienvenueEleve() {
 
   if (!ouvert) return null;
 
-  const choix: Choix[] = [];
-  if (messageNonLu) {
-    choix.push({ href: "/dashboard-eleve", emoji: "✉️", titre: "Ton prof t'a écrit", detail: "Lis son message.", fort: true });
+  const message = messages[0] ?? null;
+  function marquerLu(id: string) {
+    setMessages((m) => m.filter((x) => x.id !== id));
+    if (!eleve?.token) return;
+    fetch("/api/eleve/messages-classe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${eleve.token}` },
+      body: JSON.stringify({ id }),
+    }).catch(() => null);
   }
-  if (derniere) {
-    choix.push({ href: derniere.href, emoji: "▶️", titre: "Continuer", detail: derniere.titre, fort: !messageNonLu });
-  }
+
+  // Le mot personnel attend les notions (sinon il dirait « Bienvenue ! » à
+  // un élève qui a déjà travaillé).
+  const conseil = notions ? conseilTiMargo({ ...notions, classe }) : null;
+
+  // Les bulles autour du nuage, dans l'ordre des places (haut gauche, haut
+  // droite, gauche, droite, bas gauche, bas droite).
+  const choix: Choix[] = [
+    { href: "/dashboard-eleve", emoji: "✈️", titre: "Où j'en suis", detail: "Mon tableau de bord." },
+    {
+      href: classe ? `/coach-ia/maths?classe=${encodeURIComponent(classe)}` : "/coach-ia/maths",
+      emoji: "🎯",
+      titre: "Le coach",
+      detail: "Je m'entraîne.",
+    },
+  ];
+  const faible = notions ? notionARetravailler(notions.notions) : null;
+  if (faible) choix.push({ href: faible.href, emoji: "🔁", titre: "À retravailler", detail: faible.titre });
   choix.push({
-    href: classe ? `/coach-ia/maths?classe=${encodeURIComponent(classe)}` : "/coach-ia/maths",
-    emoji: "🎯",
-    titre: derniere ? "Une autre notion" : "Le coach",
-    detail: classe ? `Les exercices de ${classe}.` : "Des exercices corrigés.",
-    fort: !derniere && !messageNonLu,
+    href: classe ? `/video?classe=${encodeURIComponent(classe.toLowerCase())}` : "/video",
+    emoji: "🎬",
+    titre: "Les vidéos",
+    detail: "Je regarde.",
   });
+  const passion = passions[0];
+  const simu = passion ? SIMULATEUR_PASSION[passion] : undefined;
+  if (simu) {
+    choix.push({ href: simu.href, emoji: EMOJI_CENTRE[passion] ?? "💛", titre: simu.titre, detail: "Ma passion." });
+  } else if (passion && CENTRE_PAR_ID.get(passion)) {
+    choix.push({ href: "/passions", emoji: EMOJI_CENTRE[passion] ?? "💛", titre: CENTRE_PAR_ID.get(passion)!.nom, detail: "Ma passion." });
+  } else {
+    choix.push({ href: "/passions", emoji: "💛", titre: "Mes passions", detail: "Je les choisis." });
+  }
   if (classe && /^(cp|ce1|ce2|cm1|cm2|6e|5e|4e|3e)$/i.test(classe)) {
     choix.push({
       href: `/fiches-exercices?classe=${encodeURIComponent(classe.toLowerCase())}`,
       emoji: "📝",
-      titre: "Une fiche d'exercices",
-      detail: "À faire à l'écran.",
+      titre: "Une fiche",
+      detail: "Des exercices.",
     });
   }
-  choix.push({ href: "/dashboard-eleve", emoji: "✈️", titre: "Mes résultats", detail: "Ma moyenne et mes notions." });
+  choix.push({ href: "/simulateurs", emoji: "🧪", titre: "Les simulateurs", detail: "J'expérimente." });
+  const places = choix.slice(0, PLACES.length);
+
+  const bouton = (c: Choix, classes = "") => (
+    <Link
+      href={c.href}
+      onClick={() => setOuvert(false)}
+      className={`flex items-center gap-2 rounded-2xl bg-white px-3 py-2 text-slate-900 shadow-md ring-2 ring-sky-200 transition hover:scale-105 hover:ring-sky-400 ${classes}`}
+    >
+      <span className="text-2xl" aria-hidden>
+        {c.emoji}
+      </span>
+      <span className="min-w-0 text-left">
+        <span className="block text-base font-black leading-tight">{c.titre}</span>
+        {c.detail ? <span className="block truncate text-xs font-bold text-slate-500">{c.detail}</span> : null}
+      </span>
+    </Link>
+  );
+
+  // Le nuage : des ronds blancs qui se chevauchent, Ti Margo au milieu.
+  const nuage = (petit: boolean) => (
+    <div className={`relative mx-auto ${petit ? "h-44 w-72" : "h-full w-full"}`}>
+      <div className="absolute inset-x-[6%] inset-y-[24%] rounded-[50%] bg-white" />
+      <div className="absolute left-[10%] top-[10%] h-[52%] w-[34%] rounded-full bg-white" />
+      <div className="absolute left-[33%] top-0 h-[60%] w-[36%] rounded-full bg-white" />
+      <div className="absolute right-[8%] top-[12%] h-[50%] w-[32%] rounded-full bg-white" />
+      <div className="absolute bottom-[2%] left-[14%] h-[46%] w-[38%] rounded-full bg-white" />
+      <div className="absolute bottom-0 left-[34%] h-[50%] w-[34%] rounded-full bg-white" />
+      <div className="absolute bottom-[2%] right-[12%] h-[48%] w-[38%] rounded-full bg-white" />
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+        <Image
+          src={IMAGE_HUMEUR[conseil?.humeur ?? "salut"]}
+          alt="Ti Margo"
+          width={320}
+          height={320}
+          sizes="112px"
+          className={petit ? "h-20 w-20" : "h-28 w-28"}
+          priority
+        />
+        <p className={`font-black leading-tight text-sky-900 ${petit ? "text-base" : "text-lg"}`}>
+          Je te suis
+          <br />
+          et je t&apos;accompagne !
+        </p>
+      </div>
+    </div>
+  );
 
   return (
     <div
@@ -154,7 +263,7 @@ export default function BienvenueEleve() {
         aria-modal="true"
         aria-labelledby="bienvenue-titre"
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-md rounded-3xl bg-white p-5 shadow-2xl"
+        className="max-h-[95vh] w-full max-w-md overflow-y-auto rounded-3xl bg-white p-5 shadow-2xl sm:max-w-2xl"
       >
         <div className="flex items-start justify-between gap-3">
           <h2 id="bienvenue-titre" className="text-2xl font-black text-slate-900">
@@ -169,35 +278,112 @@ export default function BienvenueEleve() {
             ×
           </button>
         </div>
-        <p className="mt-1 text-lg font-bold text-slate-600">Que veux-tu faire ?</p>
 
-        <ul className="mt-4 space-y-2.5">
-          {choix.map((c) => (
-            <li key={c.titre}>
-              <Link
-                href={c.href}
-                onClick={() => setOuvert(false)}
-                className={`flex items-center gap-3 rounded-2xl px-4 py-3 transition ${
-                  c.fort
-                    ? "bg-emerald-600 text-white shadow-lg hover:bg-emerald-500"
-                    : "bg-slate-50 text-slate-900 ring-1 ring-slate-200 hover:bg-slate-100"
-                }`}
+        {/* 1. Le message du prof, en premier. */}
+        {message ? (
+          <div className="mt-3 rounded-2xl bg-amber-100 p-4 ring-2 ring-amber-300">
+            <p className="text-sm font-black uppercase text-amber-800">✉️ Ton prof t&apos;a écrit</p>
+            <p className="mt-1 whitespace-pre-wrap break-words text-lg font-bold leading-snug text-slate-900">{message.texte}</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {lienSur(message.lien) ? (
+                <a
+                  href={lienSur(message.lien)!}
+                  onClick={() => marquerLu(message.id)}
+                  className="rounded-2xl bg-emerald-600 px-5 py-3 text-lg font-black text-white shadow-lg hover:bg-emerald-500"
+                >
+                  ▶ Commencer la séance
+                </a>
+              ) : null}
+              <button
+                type="button"
+                onClick={() => marquerLu(message.id)}
+                className="rounded-2xl bg-white px-5 py-3 text-lg font-black text-slate-900 shadow ring-1 ring-amber-300 hover:bg-amber-50"
               >
-                <span className="text-3xl" aria-hidden>
-                  {c.emoji}
-                </span>
-                <span className="min-w-0">
-                  <span className="block text-lg font-black leading-tight">{c.titre}</span>
-                  {c.detail ? (
-                    <span className={`block truncate text-sm font-semibold ${c.fort ? "text-emerald-50" : "text-slate-600"}`}>
-                      {c.detail}
-                    </span>
-                  ) : null}
-                </span>
+                ✓ J&apos;ai lu
+              </button>
+            </div>
+            {messages.length > 1 ? (
+              <Link
+                href="/dashboard-eleve"
+                onClick={() => setOuvert(false)}
+                className="mt-2 block text-sm font-bold text-amber-900 underline"
+              >
+                + {messages.length - 1} autre{messages.length > 2 ? "s" : ""} message{messages.length > 2 ? "s" : ""}
               </Link>
-            </li>
-          ))}
-        </ul>
+            ) : null}
+          </div>
+        ) : null}
+
+        {/* 2. Le mot personnel de Ti Margo : quoi faire maintenant. */}
+        {conseil ? (
+          <div className="mt-3 flex flex-col gap-3 rounded-2xl bg-emerald-50 p-4 ring-2 ring-emerald-300 sm:flex-row sm:items-center">
+            <p className="flex-1 text-lg font-bold leading-snug text-slate-900">
+              <span className="font-black text-emerald-800">💬 Ti Margo : </span>
+              {conseil.texte}
+            </p>
+            <Link
+              href={conseil.href}
+              onClick={() => setOuvert(false)}
+              className={`shrink-0 rounded-2xl px-5 py-3 text-center text-lg font-black shadow-lg ${
+                message ? "bg-white text-emerald-800 ring-2 ring-emerald-500 hover:bg-emerald-100" : "bg-emerald-600 text-white hover:bg-emerald-500"
+              }`}
+            >
+              ▶ {conseil.bouton}
+            </Link>
+          </div>
+        ) : null}
+
+        {/* 3a. Téléphone : le nuage, puis les choix en grosse liste. */}
+        <div className="mt-4 sm:hidden">
+          <div className="rounded-3xl bg-sky-100 py-3">{nuage(true)}</div>
+          <ul className="mt-3 grid grid-cols-2 gap-2">
+            {places.map((c) => (
+              <li key={c.titre}>{bouton(c, "h-full")}</li>
+            ))}
+          </ul>
+        </div>
+
+        {/* 3b. PC et tablette : le nuage au centre, les flèches, les choix autour. */}
+        <div className="relative mt-4 hidden w-full rounded-3xl bg-sky-100 sm:block" style={{ aspectRatio: `${W} / ${H}` }}>
+          <div className="absolute" style={{ left: "28%", top: "18%", width: "44%", height: "64%" }}>
+            {nuage(false)}
+          </div>
+          <svg viewBox={`0 0 ${W} ${H}`} className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden>
+            <defs>
+              <marker id="bienvenue-fleche" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#0369a1" />
+              </marker>
+            </defs>
+            {places.map((c, i) => {
+              const p = PLACES[i];
+              return (
+                <line
+                  key={c.titre}
+                  x1={p.de[0]}
+                  y1={p.de[1]}
+                  x2={p.vers[0]}
+                  y2={p.vers[1]}
+                  stroke="#0369a1"
+                  strokeWidth={3}
+                  strokeLinecap="round"
+                  markerEnd="url(#bienvenue-fleche)"
+                />
+              );
+            })}
+          </svg>
+          {places.map((c, i) => {
+            const p = PLACES[i];
+            return (
+              <div
+                key={c.titre}
+                className="absolute -translate-x-1/2 -translate-y-1/2"
+                style={{ left: `${(p.x / W) * 100}%`, top: `${(p.y / H) * 100}%`, width: "31%" }}
+              >
+                {bouton(c, "w-full")}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
