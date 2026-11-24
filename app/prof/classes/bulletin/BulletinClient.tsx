@@ -58,7 +58,7 @@ async function copier(texte: string) {
 }
 
 export default function BulletinClient() {
-  const { eleve: user } = useEleve();
+  const { eleve: user, pret } = useEleve();
   const token = user?.token ?? null;
   const [periode, setPeriode] = useState("trim");
   const [donnees, setDonnees] = useState<Donnees | null>(null);
@@ -86,6 +86,8 @@ export default function BulletinClient() {
     setCopie(cle);
     setTimeout(() => setCopie((c) => (c === cle ? null : c)), 1500);
   };
+
+  if (!pret) return <p className="p-8 text-slate-500">Chargement…</p>;
 
   if (!user) return <p className="p-8">Connecte-toi pour voir le bulletin de ta classe.</p>;
   if (erreur) return <p className="p-8 text-red-700">{erreur}</p>;
@@ -236,7 +238,7 @@ export default function BulletinClient() {
         )}
 
         <p className="mt-4 text-xs text-slate-500">
-          Moyenne = bonnes réponses ÷ questions × 20, sur toutes les séances du coach (une séance pèse son nombre de questions ; les séances « entraînement » choisies par l’élève ne comptent pas). Acquis : 80 % de justes ou plus, sur 3 réponses au
+          Moyenne = bonnes réponses ÷ questions × 20, sur les séances du coach et des fiches d’exercices (une séance pèse son nombre de questions ; ne comptent pas : les séances « entraînement » choisies par l’élève, ni celles faites dans une autre classe que la sienne, comme un 6e qui essaie la 4e). Acquis : 80 % de justes ou plus, sur 3 réponses au
           moins ; à revoir : moins de 50 %. Matin 6 h-12 h, après-midi 12 h-18 h, soir après 18 h, heure de La Réunion.
           Seuls les élèves connectés avec leur code laissent une trace. Les appréciations modifiées ne sont pas
           enregistrées : copiez-les dans Pronote avant de quitter la page.

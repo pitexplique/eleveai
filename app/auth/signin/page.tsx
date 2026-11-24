@@ -81,6 +81,21 @@ type PendingAuth = {
 
 export default function SignInPage() {
   const router = useRouter();
+  // 24/11/2026 — l'onglet écrit aussi l'URL (?inscription=1 ou non) : sinon,
+  // après un clic sur « Connexion », le bouton « Inscription » du bandeau
+  // pointait vers l'URL déjà affichée et ne changeait plus rien.
+  const choisirMode = (inscr: boolean) => {
+    setModeInscription(inscr);
+    try {
+      const q = new URLSearchParams(window.location.search);
+      if (inscr) q.set("inscription", "1");
+      else q.delete("inscription");
+      const s = q.toString();
+      router.replace(`${window.location.pathname}${s ? `?${s}` : ""}`, { scroll: false });
+    } catch {
+      /* l'onglet a changé, l'URL suivra au prochain clic */
+    }
+  };
   const { login } = useEleve();
   const supabase = useMemo(() => createClient(), []);
 
@@ -857,7 +872,7 @@ export default function SignInPage() {
                   type="button"
                   role="tab"
                   aria-selected={modeInscription === inscr}
-                  onClick={() => setModeInscription(inscr)}
+                  onClick={() => choisirMode(inscr)}
                   className={
                     "rounded-full px-4 py-1.5 transition " +
                     (modeInscription === inscr
@@ -1320,7 +1335,7 @@ export default function SignInPage() {
                   professeur ?{" "}
                   <button
                     type="button"
-                    onClick={() => setModeInscription(false)}
+                    onClick={() => choisirMode(false)}
                     className="font-semibold text-emerald-700 underline"
                   >
                     Connexion établissement

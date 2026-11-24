@@ -178,7 +178,10 @@ export default function DashboardEleveClient() {
     eleve?: EleveSession | null;
     currentUser?: EleveSession | null;
     user?: EleveSession | null;
+    pret?: boolean;
   };
+  // ⭐ 24/11/2026 — session pas encore lue : on attend, sans « Tu dois être connecté ».
+  const sessionLue = eleveContext.pret !== false;
 
   const eleve =
     eleveContext.eleve ?? eleveContext.currentUser ?? eleveContext.user ?? null;
@@ -409,6 +412,10 @@ export default function DashboardEleveClient() {
     resultatsCalculRapide.length +
     resultatsDefisJour.length +
     resultatsTutor.length;
+
+  if (!eleve && !sessionLue) {
+    return <main className="min-h-screen bg-slate-950" aria-busy="true" />;
+  }
 
   if (!eleve) {
     return (

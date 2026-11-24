@@ -47,7 +47,7 @@ const NIVEAUX: { v: string; l: string }[] = [
 ];
 
 export default function MesClassesClient() {
-  const { eleve: user } = useEleve();
+  const { eleve: user, pret } = useEleve();
   const token = user?.token ?? null;
 
   const [classes, setClasses] = useState<Classe[] | null>(null);
@@ -76,6 +76,8 @@ export default function MesClassesClient() {
     nbEleves <= 40;
 
   const charger = useCallback(async () => {
+    // Session pas encore lue (premier rendu) : on attend, sans message d'erreur.
+    if (!pret) return;
     if (!token) {
       setErreur(SANS_JETON);
       setClasses([]);
@@ -94,12 +96,12 @@ export default function MesClassesClient() {
     setClasses(d.classes ?? []);
     if (d.classes?.[0] && !etablissement)
       setEtablissement(d.classes[0].etablissement);
-  }, [token, etablissement]);
+  }, [token, etablissement, pret]);
 
   useEffect(() => {
     charger();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+  }, [token, pret]);
 
   async function creer(e: FormEvent) {
     e.preventDefault();
