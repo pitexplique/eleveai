@@ -85,9 +85,16 @@ export default function BienvenueEleve() {
         const [cle, titre] = premiere;
         const [c, notion] = cle.split("|");
         if (!c || !notion) return;
+        // ⭐ 24/11/2026 — On reprend à la série où il en était, et le coach
+        // démarre seul (microId + display=simple, comme le bouton GO).
+        const reprise = d?.reprise as { cle?: string; microId?: string } | null | undefined;
+        const suite =
+          reprise?.cle === cle && reprise.microId
+            ? `&microId=${encodeURIComponent(reprise.microId)}&display=simple`
+            : "";
         setDerniere({
           titre,
-          href: `/coach/serie?classe=${encodeURIComponent(c)}&matiere=maths&notion=${encodeURIComponent(notion)}`,
+          href: `/coach/serie?classe=${encodeURIComponent(c)}&matiere=maths&notion=${encodeURIComponent(notion)}${suite}`,
         });
       })
       .catch(() => null);
