@@ -101,7 +101,10 @@
 // 👉 LE CONTENU VIT DANS ./AccueilCeo.tsx. Le Menu du jour est parti dans
 // /dashboard-prof. RETOUR ARRIÈRE = UNE LIGNE : `<AccueilSuivi offresFamille
 // compteur="barre" />` (le fichier reste sur le disque, avec son import).
-import AccueilCeo from "./AccueilCeo";
+// ☁️ 24/11/2026 — BASCULE vers l'accueil en NUAGE (Frédéric : « Oui, bascule »).
+// RETOUR ARRIÈRE : `import AccueilCeo from "./AccueilCeo";` et
+// `return <AccueilCeo />;` plus bas (l'accueil CEO reste sur /accueil/nouvelle).
+import AccueilNuage from "./AccueilNuage";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import AccueilSuivi from "./AccueilSuivi";
 
@@ -116,5 +119,5 @@ export default function AccueilPage() {
   // comptées (lib/videos/compteur.ts) + « le coach qui suit et aide votre
   // enfant », avec les exercices et les visiteurs de la semaine
   // (lib/accueil/chiffres-semaine.ts, à mettre à jour chaque semaine).
-  return <AccueilCeo />;
+  return <AccueilNuage />;
 }
