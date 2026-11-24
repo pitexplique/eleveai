@@ -175,6 +175,16 @@ export default function MesClassesClient() {
     await charger();
   }
 
+  // ⭐ 24/11 : avant, un prof connecté voyait une seconde la page
+  // « Créer mon compte prof » (session pas encore lue).
+  if (!pret) {
+    return (
+      <main className="min-h-screen bg-slate-50 px-4 py-12 text-slate-500">
+        <p className="mx-auto max-w-4xl">Chargement…</p>
+      </main>
+    );
+  }
+
   if (!user) {
     return (
       <main className="min-h-screen bg-slate-50 px-4 py-12 text-slate-900">
@@ -225,7 +235,7 @@ export default function MesClassesClient() {
         {/* ⭐ 19/11/2026 : les classes offertes, dites en clair (sans prix).
             La limite n'agit pas tant que la vente est fermée
             (LIMITE_CLASSES_ACTIVE) : on ne parle que de ce qui reste. */}
-        {classes !== null && classes.length < FREE_CLASSES_PER_TEACHER && (
+        {!refusProf && classes !== null && classes.length < FREE_CLASSES_PER_TEACHER && (
           <p className="mt-3 inline-block rounded-full bg-violet-50 px-4 py-1.5 text-sm font-bold text-violet-900 ring-1 ring-violet-200">
             {classes.length === 0
               ? `Tes ${FREE_CLASSES_PER_TEACHER} classes sont offertes.`
@@ -272,15 +282,25 @@ export default function MesClassesClient() {
               className="rounded-2xl border border-slate-200 bg-white shadow-sm"
             >
               <header className="flex flex-wrap items-center gap-3 p-5">
-                <div className="flex-1">
-                  <h2 className="text-xl font-black text-slate-900">
-                    {c.nom_classe}
-                  </h2>
-                  <p className="text-sm text-slate-600">
-                    {c.etablissement} · {c.eleves.length} élèves · code de la
-                    classe{" "}
-                    <span className="font-mono font-black text-slate-900">
+                {/* ⭐ 24/11 : le code de la classe est ce que les élèves tapent :
+                    il se lit de loin (projeté), sur sa propre ligne. */}
+                <div className="flex w-full flex-wrap items-end justify-between gap-3">
+                  <div>
+                    <h2 className="text-xl font-black text-slate-900">
+                      {c.nom_classe}
+                    </h2>
+                    <p className="text-sm text-slate-600">
+                      {c.etablissement} · {c.eleves.length} élèves
+                    </p>
+                  </div>
+                  <p className="text-right text-xs font-semibold text-slate-500">
+                    Code de la classe
+                    <span className="ml-2 inline-block rounded-lg bg-slate-900 px-3 py-1 align-middle font-mono text-xl font-black tracking-wider text-white">
                       {c.code_etablissement}
+                    </span>
+                    <span className="mt-1 block">
+                      Les élèves se connectent sur <span className="font-mono font-bold text-slate-700">eleveai.fr</span> →
+                      Connexion → « Connexion établissement »
                     </span>
                   </p>
                 </div>
