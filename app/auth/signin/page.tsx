@@ -5,6 +5,7 @@ import ClavierCode, { PointsCode } from "./ClavierCode";
 import { FormEvent, Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { marquerBienvenue } from "@/components/BienvenueEleve";
 import { Eye, EyeOff } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useEleve } from "@/context/EleveContext";
@@ -275,6 +276,7 @@ export default function SignInPage() {
       // l'accueil, quand l'élève le veut.
       // ⭐ 19/11/2026 — un PROF qui vient de créer son compte arrive sur
       // « Mes classes » : c'est ce qu'il est venu faire (tunnel du prof).
+      if (!destination) marquerBienvenue(type);
       router.push(destination ?? (nouveauCompte && type === "prof" ? "/prof/classes" : "/accueil"));
     }
   };
@@ -821,6 +823,7 @@ export default function SignInPage() {
       // si la personne s'était connectée POUR quelque chose de précis.
       // Le tableau de bord — élève, prof ou principal — reste à un clic depuis
       // « Mon espace » et le menu du compte.
+      if (!destination) marquerBienvenue(session.role);
       router.push(destination ?? "/accueil");
     } catch (err: any) {
       console.error("Unexpected etablissement login error:", err);
