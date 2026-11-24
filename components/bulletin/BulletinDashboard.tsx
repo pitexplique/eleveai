@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Bulletin, PeriodeCle } from "@/lib/bulletin/types";
+import { prenomAffichable } from "@/lib/prenom";
 
 // Affichage « tableau de bord » d'un bulletin (compteurs à aiguille, notes /20).
 // Réutilisable : aperçu accueil (données de démo) ET dashboard élève.
@@ -73,15 +74,18 @@ export default function BulletinDashboard({ bulletin }: { bulletin: Bulletin }) 
     p.assiduite.niveau === "Assidu" ? "#1D9E75" : p.assiduite.niveau === "Régulier" ? "#EF9F27" : "#94a3b8";
   const progColor = p.progression === null ? "#64748b" : p.progression >= 0 ? "#1D9E75" : "#E24B4A";
 
+  const prenom = prenomAffichable(bulletin.prenom);
+
   return (
     <div className="rounded-3xl border border-slate-200 bg-white p-5 text-slate-900 shadow-xl sm:p-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-sky-100 font-black text-sky-700">
-            {(bulletin.prenom || "É").charAt(0).toUpperCase()}
+            {(prenom || "É").charAt(0).toUpperCase()}
           </div>
           <div>
-            <p className="text-base font-black leading-tight">Bulletin de {bulletin.prenom || "—"}</p>
+            {/* 24/11/2026 : plus « Bulletin de Élève 01 » (nom par défaut d'une classe). */}
+            <p className="text-base font-black leading-tight">{prenom ? `Bulletin de ${prenom}` : "Mon bulletin"}</p>
             <p className="text-xs font-semibold text-slate-500">{bulletin.classe ?? "—"}</p>
           </div>
         </div>
@@ -118,7 +122,7 @@ export default function BulletinDashboard({ bulletin }: { bulletin: Bulletin }) 
               <div className="h-full rounded-full" style={{ width: `${assPct}%`, background: assColor }} />
             </div>
             <p className="mt-1.5 text-sm">
-              <span className="font-bold">{p.assiduite.jours} jours</span> d&apos;activité ·{" "}
+              <span className="font-bold">{p.assiduite.jours} jour{p.assiduite.jours > 1 ? "s" : ""}</span> d&apos;activité ·{" "}
               <span className="text-slate-500">{p.assiduite.niveau}</span>
             </p>
           </div>
