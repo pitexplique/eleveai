@@ -68,9 +68,12 @@ export default function BoutonVideoCompetence({
       url={video.url}
       titre={video.titre ?? "Regarder la vidéo de cette compétence"}
       ariaLabel="Regarder la vidéo de cette compétence"
-      className={`inline-flex h-10 w-10 items-center justify-center rounded-full bg-sky-600 text-white shadow-sm hover:bg-sky-500 ${className}`}
+      className={`inline-flex h-10 items-center justify-center gap-1.5 rounded-full bg-sky-600 px-4 text-sm font-black text-white shadow-sm hover:bg-sky-500 ${className}`}
     >
+      {/* 24/11/2026 : le mot « Vidéo » à côté de la caméra — seule, l'icône
+          ne se lisait pas comme un bouton pour un élève de 6e. */}
       <Video aria-hidden="true" size={18} strokeWidth={2.5} />
+      Vidéo
     </LienVideoModal>
   );
 }

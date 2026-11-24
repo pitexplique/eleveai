@@ -64,8 +64,22 @@ export default function EtatEnregistrementSeance({
         </span>
       );
     } else if (nbReponses > 0 && etatAuto === "ok") {
+      // ⭐ 24/11/2026 — À 10 réponses, rien ne disait à l'élève qu'il avait
+      // fini une séance, ni où voir sa note : un bravo, et le chemin vers
+      // son tableau de bord. Il peut aussi continuer, la séance continue.
       contenu = (
         <span className={discret}>
+          {nbReponses >= REPONSES_AVANT_INVITATION ? (
+            <>
+              <span className={`block text-sm font-black ${surFondSombre ? "text-emerald-200" : "text-emerald-700"}`}>
+                🎉 Bravo, {nbReponses} questions !
+              </span>
+              <Link href="/dashboard-eleve" className={`font-bold underline ${lien}`}>
+                Voir mes résultats
+              </Link>
+              {" · "}
+            </>
+          ) : null}
           {entrainement
             ? "✓ Entraînement enregistré (ne compte pas dans ta moyenne)"
             : "✓ Séance enregistrée automatiquement"}
