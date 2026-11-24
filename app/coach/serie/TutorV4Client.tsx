@@ -735,6 +735,19 @@ function scrollToPageTop() {
       }
     }
 
+    /* ⭐ 24/11/2026 — LE MODE SIMPLE N'A PAS DE BANDEAU. Remonter à 0 y
+       cachait la question suivante sur téléphone : à 375×812, l'énoncé
+       arrivait vers 590 px et « Valider » sous l'écran, l'élève devait
+       redescendre à chaque question. On cale donc la carte de la question
+       (où s'écrit « Bonne réponse : … ») en haut de l'écran, sur téléphone
+       seulement (moins de 640 px de large) ; sur ordinateur, le haut de page
+       montre déjà la question. */
+    const carte = document.querySelector<HTMLElement>("[data-carte-question]");
+    if (!bandeau && carte && window.innerWidth < 640) {
+      carte.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, 80);
 }
@@ -2110,6 +2123,7 @@ function handleInputKeyDown(
                 explanation={explanationText}
                 onContinue={continueAfterExplanation}
                 coach={coachContext}
+                boutonFlottant
               />
             ) : null
           }
@@ -2929,7 +2943,15 @@ function extractConclusion(explanation: string): {
   const full = (explanation || "").trim();
   const m = full.match(/Conclusion\s*:\s*([\s\S]*)$/i);
   // Les banques écrivent « Conclusion : c'est 5. » : seule, la phrase garde sa majuscule.
-  const conclusion = m ? m[1].trim() : full;
+  let conclusion = m ? m[1].trim() : full;
+  /* ⚠️ 24/11/2026 — ~500 explications de 6e finissent par « Conclusion : on
+     garde la réponse obtenue. » : seule, la phrase ne dit rien à l'élève qui
+     s'est trompé. On montre alors le paragraphe « Calcul : … », qui contient
+     le vrai raisonnement (« Cent vingt-trois signifie 100 + 20 + 3… »). */
+  if (/^on garde la réponse obtenue\.?$/i.test(conclusion)) {
+    const calcul = full.match(/Calcul\s*:\s*([\s\S]*?)\n\s*\n\s*Conclusion/i);
+    if (calcul && calcul[1].trim()) conclusion = calcul[1].trim();
+  }
   const brief = conclusion.charAt(0).toUpperCase() + conclusion.slice(1);
   return { brief, full, hasMore: full.length > 0 && conclusion !== full };
 }
@@ -3159,12 +3181,15 @@ function WrongAnswerPanel({
   explanation,
   onContinue,
   coach,
+  boutonFlottant = false,
 }: {
   question: TutorQuestionOption;
   userAnswer: string;
   explanation: string;
   onContinue: () => void;
   coach?: CoachContext;
+  /** Mode simple : « Question suivante → » flotte déjà en bas à droite. */
+  boutonFlottant?: boolean;
 }) {
   const [showDetail, setShowDetail] = useState(false);
 
@@ -3298,7 +3323,10 @@ function WrongAnswerPanel({
         />
       ) : null}
 
-      <div className="flex justify-center">
+      {/* ⚠️ 24/11/2026 — en mode simple, le bouton flottant suffit : sur
+          téléphone, les deux « Question suivante » se chevauchaient en bas
+          de l'écran. Sur ordinateur, celui-ci reste (le flottant est loin). */}
+      <div className={boutonFlottant ? "hidden justify-center sm:flex" : "flex justify-center"}>
         <ContinueButton onClick={onContinue} />
       </div>
     </div>
