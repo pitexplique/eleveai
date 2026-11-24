@@ -3,17 +3,27 @@
 **12 épisodes = les 12 micro-compétences du coach**, 6 pour `geometrie_espace` et 6 pour
 `produit_scalaire_espace`. Chacun : une vidéo paysage + un short. 24 vidéos.
 
-> ⛔⛔ **LES 12 ENTRÉES DE MANIFESTE N'EXISTENT QUE DANS
-> `manim/poste2/FICHES-YOUTUBE-espace-terminale.md`, ET NULLE PART AILLEURS.**
-> Mesuré le 22/11 : **0 entrée `espace` dans `manim/manifeste-youtube.json`**, et
-> `brancher-videos-coach.mjs --classe terminale-spe` répond « Rien à brancher ».
-> Tant que personne ne reporte ces entrées dans le registre au moment de la
-> publication, **E1 est une vidéo qu'aucun élève ne peut atteindre** : elle existe en
-> HD, et le coach ne la propose à personne.
-> ⚠️ Une liste tenue à la main à côté d'un registre, c'est l'accident qui est déjà
-> arrivé trois fois dans ce dépôt — des pages en ligne que rien ne déclarait. Le
-> registre est partagé et se commit **par clés** (`manim/outils-commit-cles.py`) :
-> c'est pour ça que la liste est à part, pas pour l'oublier.
+> ✅ **LES NEUF ÉPISODES RENDUS SONT DANS LE REGISTRE DEPUIS LE 23/11/2026.**
+> Ils n'y étaient pas : mesuré le 22/11, **0 entrée `espace` dans
+> `manim/manifeste-youtube.json`** sur 1 707 vidéos. Neuf vidéos existaient en HD et
+> n'atteignaient personne — et rien nulle part ne le signalait.
+> ⛔ **On ne recopie plus une entrée à la main** :
+> `python -X utf8 manim/poste2/fiches-espace-vers-registre.py --ecrire` fait le report
+> depuis `FICHES-YOUTUBE-espace-terminale.md`, qui reste la source RÉDIGÉE (titre,
+> accroche, chapitres). Il va chercher la lettre et l'instant de chaque question-pause
+> dans le JOURNAL DU RENDU HD et le texte des questions dans la VOIX, et il **refuse
+> d'écrire** si la voix, l'écran rendu et la table du `.md` ne disent pas la même lettre
+> (contrôlé : les 18 questions des neuf épisodes sont d'accord).
+> ⚠️ Une liste tenue à la main à côté d'un registre, c'est l'accident déjà arrivé trois
+> fois dans ce dépôt — des pages en ligne que rien ne déclarait. Le registre est partagé
+> et se commit **par clés** (`manim/outils-commit-cles.py`).
+>
+> ⛔⛔ **CE QUI BLOQUE ENCORE LA PUBLICATION : LES MINIATURES.** Zéro sur douze. Le
+> chemin `…/<slug>.png` est déclaré dans chaque entrée, et le fichier n'existe pas.
+> Tant qu'elles manquent, `publier-youtube.mjs` ne peut pas publier, donc
+> `brancher-videos-coach.mjs` continue de répondre « Rien à brancher » : **les neuf
+> vidéos n'atteignent toujours aucun élève.** Le goulot a changé de nature, il n'a pas
+> disparu — et il ne se décide pas tout seul (une miniature est une image à faire).
 
 > ⭐ Cette note est **vivante** : on y ajoute ce qui a coûté cher, pas ce qui a marché.
 > Elle est à la série « espace » ce que `manim/REPRISE-entiers-cm1-6e.md` est aux entiers.
@@ -38,9 +48,16 @@
 | E7 `ps_espace_calculer` | ✅ **HD livré** (6 min 33, 0 bord, planche HD regardée) — ⭐ le premier AVEC les flèches |
 | E8 `ps_espace_orthogonalite` | ✅ **HD livré** (7 min 00, 0 bord, planche HD regardée) — ⭐ deux plans qui se projetteraient sur une LAME |
 | E9 `ps_espace_norme_distance` | ✅ **HD livré** (6 min 08, 0 bord, planche HD regardée) — ⭐ le glyphe √ n'a PAS de barre |
+| E10 `ps_espace_angle` | ✅ **HD livré** (6 min 35, 0 bord, planche HD regardée) — ⭐⭐ aucune figure d'angle en cavalière |
+| ⭐⭐ **le cube** | **RE-RENDU des 5 épisodes livrés qui le dessinent** (E2, E6, E7, E8, E9) : il lui manquait l'arête [E H] |
 | ✅ **la notation vectorielle** | **faite sur les 9 scripts** : `auditer-fleches-vecteurs.py` → 0 nu (voir « LA PASSE DES FLÈCHES ») |
-| les 3 autres scripts | ⏳ **à écrire — ils ne dépendent plus de rien** |
-| les 12 shorts | ⏳ pas de voix encore |
+| E12 `ps_espace_defi` | ✅ **script écrit, mesure ✅, dry run `-qh` 0 bord / 0 avance / 0 retard, planches `-ql` faites** — ⏳ **PAS DE HD** : Frédéric regarde les planches d'abord |
+| les scripts restants | ⏳ **E11 seul** (E12 est écrit) |
+| les 6 shorts de la GÉOMÉTRIE (E1–E6) | ✅ **voix, 36 WAV, marques, scripts, mesure hors rendu, dry run `-qh` 0 bord / 0 avance / 0 retard, planches `-ql` faites** — ⏳ **PAS DE HD** : Frédéric regarde les planches d'abord. Socle : `espace_commun_short.py`, mesure : `espace_mesure_short.py`. Voir « Ce que les SHORTS ont appris » |
+| les 6 shorts du PRODUIT SCALAIRE (E7–E12) | ✅ **voix (6 clips chacune), 36 WAV et marques : mesuré le 24/11** — ⏳ il reste les 6 SCRIPTS, puis la mesure, le dry run, les planches. ⚠️ Leurs lettres de bonne réponse doivent **compléter** le tirage des six premiers (B C A C A B) pour retomber sur A 4 · B 4 · C 4 |
+| les 12 miniatures de short | ⛔ **0 sur 12, et là c'est un VERROU** : `publier-youtube.mjs` l. 802 retient tout short sans miniature (règle de Frédéric du 01/11) |
+| les 10 entrées de registre | ✅ **écrites le 23/11** dans `manim/manifeste-youtube.json` (1 717 vidéos), chacune avec ses 14 chapitres et ses 2 questions-pauses, par `manim/poste2/fiches-espace-vers-registre.py` |
+| les 12 miniatures | ⛔ **0 sur 12** — c'est ce qui bloque la publication, et donc le coach |
 | les rendus HD, le branchement coach, les fiches YouTube | ⏳ |
 
 **Ce qui débloque tout** : un épisode ne dépend plus que de son script Manim. Son fichier de
@@ -62,8 +79,10 @@ ls manim/sorties/terminale/maths/geometrie/*/*.mp4   # les HD livrés
 python manim/poste2/verifier-voix-espace.py          # 12 voix, 15 clips, lettres A 8 B 8 C 8
 ```
 
-**Le prochain geste** : écrire `ps_espace_angle.py` (E10, Ravi et les panneaux solaires
-de Saint-Pierre, centre `nature-ecologie`), puis E11 et E12. ⭐ Le modèle est maintenant
+**Le prochain geste** : écrire `ps_espace_plan_normal.py` (E11), puis `ps_espace_defi.py`
+(E12). ⭐ Le modèle est maintenant **`ps_espace_angle.py` (E10)** et sa mesure
+`manim/poste2/mesure-ps-espace-angle.py`, qui porte la chaîne complète de `dessous()`
+sur toute une colonne — le contrôle qui manquait à tous les précédents. ⭐ Le modèle est maintenant
 **`ps_espace_norme_distance.py` (E9)**, et sa mesure
 `manim/poste2/mesure-ps-espace-norme-distance.py` porte TROIS contrôles que les
 précédentes n'avaient pas : les **étiquettes comparées deux à deux** (E8), la **pointe
@@ -73,8 +92,10 @@ trouvé deux noms de sommet barrés par la grande diagonale du cube.
 ⭐⭐ **E10 écrit « 1 sur racine de 3 » et « racine de 2 » : il emploie
 `EcransEspace.racine()`, neuf dans le socle, et n'en réécrit pas une.** Le glyphe √ se
 rend mais **il n'a aucune barre** — détail dans « Ce que l'épisode 9 a appris ».
-⚠️ `ps_espace_angle` garde **2 cues non placées** (« 577 ») : c'est maintenant qu'il faut
-les regarder.
+✅ Les 2 cues « 577 » de `ps_espace_angle` sont RÉGLÉES (23/11) : ce n'était pas
+un défaut. « 577 » n'apparaît qu'une fois dans le texte, WinRT en a émis trois, et le
+convertisseur garde la bonne en sautant les deux autres sans avancer. Détail et
+conséquence pour E11/E12 : « Ce que l'épisode 10 a appris ».
 ✅ **La reprise des flèches est FAITE** (22/11) : E1, E2, E3 et E6 portent la notation
 vectorielle et sont re-rendus en HD. `python -X utf8 manim/poste2/auditer-fleches-vecteurs.py`
 doit rester à **0 NU sur tous les scripts** — c'est le contrôle à relancer après chaque
@@ -102,8 +123,11 @@ qu'aucun outil ne voit. ⭐ Celle de E6 est la plus utile, parce que **deux de s
 sont dans les OUTILS** et touchent donc les six épisodes qui restent : le convertisseur de
 marques perdait les décimales répétées, et `col()` rapetisse un bloc pour une raison qui
 n'a rien à voir avec sa largeur.
-⚠️ `ps_espace_angle` (E10) garde **2 cues non placées** : les regarder au moment d'écrire
-cet épisode-là. Les 13 de `espace_defi` sont résolues, à la source (voir plus bas).
+✅ Les 2 cues « 577 » de `ps_espace_angle` sont RÉGLÉES (23/11) : ce n'était pas
+un défaut. « 577 » n'apparaît qu'une fois dans le texte, WinRT en a émis trois, et le
+convertisseur garde la bonne en sautant les deux autres sans avancer. Détail et
+conséquence pour E11/E12 : « Ce que l'épisode 10 a appris ».
+✅ Les 13 de `espace_defi` l'étaient déjà, à la source.
 
 **L'ordre pour chaque épisode, sans en sauter un :**
 
@@ -123,13 +147,13 @@ cet épisode-là. Les 13 de `espace_defi` sont résolues, à la source (voir plu
 **Ce qui n'est PAS fait et qu'on oublie facilement :**
 
 - les **miniatures** : aucune des 12 n'existe, et le manifeste en attend une ;
-- les **12 shorts** : pas de voix écrite, et leur gabarit se relit sur un short de
+- les **12 shorts** : ⚠️ cette ligne disait « pas de voix écrite » — **c'est périmé**. Mesuré le 24/11 : les **12 voix de short existent** (6 clips chacune), avec leurs 72 WAV et leurs marques. Il reste les **6 scripts du produit scalaire** et aucun rendu HD de short.
   terminale existant **avant** d'en écrire douze ;
 - le **branchement au coach** vient APRÈS la publication — mesuré :
   `brancher-videos-coach.mjs --classe terminale-spe` répond « Rien à brancher » tant que
   la vidéo n'est pas en ligne ;
-- `ps_espace_angle` garde **2** cues non placées (« 577 », dans le clip de correction) :
-  à regarder au moment d'écrire E10. ✅ Les **13** de `espace_defi` ne sont plus un
+- ✅ les 2 cues « 577 » de `ps_espace_angle` sont réglées : ce n'était pas un défaut
+  (voir « Ce que l'épisode 10 a appris »). ✅ Les **13** de `espace_defi` ne sont plus un
   problème : elles venaient d'un défaut du convertisseur, corrigé le 22/11 (voir « Ce que
   l'épisode 6 a appris »).
 
@@ -562,7 +586,169 @@ passe, et entre les deux il y a un seuil qu'aucune relecture ne voit.
 
 ### ⛔⛔ LES TROIS AXES D'UN REPÈRE (A ; AB, AD, AE) SONT TROIS ARÊTES DU CUBE
 
-Le cube ABCDEFGH revient dans **9 épisodes sur 12**, donc ce défaut-là vaut pour eux tous.
+⛔ **Le cube ne revient PAS dans 9 épisodes : mesuré, 7 voix en parlent et 6 scripts le
+dessinent.** Le « 9 » était une intention de conception, jamais comptée — un chiffre de
+tête, la faute la plus fréquente de cette série. Les scripts qui appellent `.cube()` :
+`espace_repere_coordonnees` (4 fois), `espace_defi`, `ps_espace_angle`, `ps_espace_calculer`,
+`ps_espace_norme_distance`, `ps_espace_orthogonalite`. ⭐ `ps_espace_defi` (E12) en parle
+5 fois et son script reste à écrire : il en dessinera un. Les quatre autres épisodes
+(`espace_vecteurs`, `espace_droite_parametrique`, `espace_plan_equation`,
+`espace_position_relative`) n'ont jamais dessiné de cube — l'arête manquante ne les a
+pas touchés, et les re-rendre aurait pris le verrou deux heures pour rien.
+⭐ La commande : `grep -c "\.cube(" manim/scripts/terminale/*espace*.py`
+
+## ⚠️ Les miniatures ne BLOQUENT pas la publication — mesuré dans le code
+
+État au 23/11 : **11 paysages livrés, 11 entrées au registre, 0 miniature sur 12.** Les
+11 entrées déclarent un chemin `…/<slug>.png` qui n'existe pas, et `manim/miniatures/`
+est vide pour cette série.
+
+On en a d'abord conclu que la publication était bloquée, donc le coach aussi. ⛔ **Faux**,
+et c'est le code qui tranche (`scripts/publier-youtube.mjs`) :
+
+```js
+const fichier = cheminMiniature(relatif);
+if (!fichier) return "absente";          // ⭐ on continue, on ne lève pas
+```
+
+`cheminMiniature` cherche dans `manim/miniatures/<relatif>` **puis** dans
+`manim/sorties/<relatif>`, et si rien n'existe la vidéo part quand même : elle reçoit la
+vignette que YouTube fabrique tout seul. C'est une perte de qualité, pas un verrou.
+
+👉 Donc ce qui reste entre ces 11 vidéos et les élèves n'est pas une image manquante,
+c'est **le geste de publication, que Frédéric lance lui-même**. La décision est la
+sienne : publier maintenant avec les vignettes automatiques, ou fabriquer les 12
+miniatures d'abord. ⛔ Ce n'est pas à trancher entre sessions.
+
+### Le détail du code, lu ligne à ligne (et la ligne vraie qui trompe)
+
+- `poserMiniature` : `if (!fichier) return "absente";` — on continue.
+- l. **802**, le seul filtre « miniature » du chemin des vidéos :
+  `.filter((v) => v.type !== "short" || !MINIATURE_SHORTS || cheminMiniature(v.miniature))`
+  avec, juste au-dessus, la raison : Frédéric, 01/11, « fais attention de bien mettre les
+  miniatures dans les shorts ». ⭐⭐ **Il ne porte QUE sur les shorts.** Les 11 entrées
+  « espace » sont toutes de `type: "longue"` (compté) : aucune n'est retenue.
+- ⚠️ **LA LIGNE VRAIE QUI TROMPE** : l. **563**, `freinDuFilm` contient bien
+  `if (!cheminMiniature(v.miniature)) return "miniature absente";` — une vraie barrière,
+  mais sur les `films`, **une autre source**, pas sur les vidéos du registre. On trouve
+  une ligne exacte et on conclut sur le mauvais chemin. ⭐ Quand une ligne confirme ce
+  qu'on croyait, vérifier d'abord **qui l'appelle**.
+
+### Ce qui reste vraiment entre ces vidéos et les élèves
+
+`brancher-videos-coach.mjs` part de la `url` de chaque entrée, et **les 11 en ont zéro**.
+La chaîne est donc : **publication → `url` → branchement**, et le premier maillon est un
+geste de Frédéric. Rien d'autre ne bloque.
+
+⚠️⚠️ **Mais les miniatures redeviennent obligatoires aux SHORTS.** Les 12 shorts de la
+série restent à produire, et un short sans miniature n'est jamais envoyé — c'est la règle
+de Frédéric du 01/11, codée l. 802. Donc l'arbitrage de ce soir n'est pas « qualité contre
+délai une fois pour toutes » : les 12 miniatures seront nécessaires de toute façon dès
+qu'on passera aux shorts. La seule question est de savoir si les 11 paysages partent
+avant elles.
+
+⭐ La leçon de méthode, la énième de la série : une chaîne de conséquences
+(« pas de miniature → pas de publication → rien à brancher ») se vérifie **maillon par
+maillon, dans le code**. Les deux bouts étaient justes et le milieu était faux.
+
+## ⛔⛔ Celui qui rend est celui qui a REGARDÉ
+
+Un « j'ai regardé, c'est bon » transmis d'une session à l'autre **n'est pas un regard**.
+C'est un chiffre non mesuré dans sa version la plus chère, puisqu'il se paie en rendu HD.
+
+Le 23/11, j'ai arbitré qu'une session rende le HD de E12 « quand l'autre aura dit que ses
+images sont regardées ». Faux, et c'est le défaut que cette série combat depuis deux
+jours : E1 a demandé 4 tours de `-ql`, E11 en a demandé 5, et les trois défauts de figure
+de la journée — l'arête manquante, les noms d'axes, la platitude de (BDE) — ont tous été
+trouvés par un œil, aucun par un outil.
+
+⭐ **Deux sorties, jamais une troisième.** Soit celle qui a regardé enchaîne son HD
+elle-même ; soit celle qui rend ouvre le `-ql`, la planche **et** les gros plans de ses
+propres yeux avant de lancer. ⛔ Rendre parce qu'une autre l'a dit n'est pas une option.
+
+⭐⭐ **Et quand deux sessions se partagent un épisode : regarder est à l'une, corriger
+est à l'autre.** Celle qui voit un défaut dans la figure d'autrui le DÉCRIT — l'écran,
+l'instant, ce qui se recouvre — et attend. C'est ce qui a manqué le matin du 23/11 sur
+`ps_espace_angle.py`, où deux sessions ont corrigé les deux mêmes défauts chacune de son
+côté, sans le savoir.
+
+## ⭐⭐ Une assertion mesure le MODÈLE, des pixels mesurent l'IMAGE — les deux
+
+Sur E12, le module affirmait l'équilatéralité du triangle « vérifiée par une assertion ».
+C'est vrai, et **insuffisant** : une assertion mesure les segments tels que le module les
+**construit**, avant le `scale`, le `move_to`, l'épaisseur de trait et l'anticrénelage.
+Entre la construction et l'image, il y a exactement l'écart que cette série paie depuis
+deux jours — l'arête manquante, les noms d'axes, les colonnes qui traversent un repère.
+
+👉 L'assertion est le **garde-fou de l'écriture** ; la mesure en pixels sur le rendu est
+la **preuve**. ⛔ Ni l'une à la place de l'autre.
+
+### ⭐ Un contrôle se pose comme une PRÉDICTION RÉFUTABLE
+
+La mesure de platitude se refait **sur le HD**, jamais reportée du `-ql` : à 1080p les
+côtés portent environ quatre fois plus de pixels, donc le bruit d'anticrénelage (2,2 % en
+`-ql`) **doit** tomber nettement. S'il ne tombe pas, ce n'est plus du bruit, et il faut
+chercher pourquoi.
+
+C'est la bonne forme d'un contrôle : il annonce à l'avance ce qu'il devrait trouver, et
+il a tort de façon visible. Un contrôle qui ne peut pas échouer ne mesure rien — c'est le
+`isclose(0, 1)` du premier jour, et le `True` écrit en dur.
+
+### ⭐⭐ L'empreinte, jamais l'horodatage
+
+Avant et pendant un rendu, on vérifie que le fichier rendu est bien celui qu'on a
+regardé — par son **empreinte** (`git diff HEAD` vide, ou le hash des fichiers), pas par
+sa date. Un horodatage ne prouve rien : un fichier qui se tait depuis quatre minutes peut
+être posé comme il peut être en cours d'écriture. ⛔ C'est l'erreur qui m'a fait annoncer
+« verrou pris à 09:05 » un matin, et « attendre que son empreinte se stabilise » le
+lendemain. La date est un indice, l'empreinte est une preuve.
+
+## ⭐⭐ Le réflexe qui a tenu quand les territoires n'ont pas suffi
+
+Trois collisions de fichiers en deux jours, et **ce qui en a évité deux n'est pas le
+découpage des territoires : c'est qu'une session s'est arrêtée et a demandé.** Les
+territoires aident, mais ils ne couvrent que ce qu'on a prévu — et le 23/11, une session
+**hors de la famille** écrivait E12 sans que personne l'ait prévu. Aucun territoire ne
+l'aurait attrapée ; le réflexe, si.
+
+👉 La règle qui en sort, pour toute session de cette série : **si tu trouves un fichier
+de la série modifié il y a quelques minutes et que ce n'est pas toi, tu t'arrêtes et tu
+demandes avant d'écrire une ligne.** `stat -c '%y' <fichier>` et `list_sessions` (sans
+`linked`, pour voir hors famille) suffisent à savoir.
+
+## ⛔⛔ Les noms des axes n'étaient comparés à RIEN
+
+Même famille que l'arête manquante, et trouvé de la même façon — à l'image, sur un
+premier `-ql`. Les mesures d'écartement (`etiquettes()`, `loin_des_fleches()`) ne voient
+que ce qu'on leur **donne**, et personne ne leur donnait les « x », « y », « z » que
+`r.axes()` dessine **sur tous les écrans à repère**. Trois défauts d'un coup sur E11,
+aucun visible à la planche :
+
+- deux étiquettes fondues en une (`n̄y` à l'écran 02) ;
+- la pointe d'un vecteur normal posée sur la pointe de l'axe des x (écran 05) ;
+- le **disque** d'un point collé au « y » (écran 09b) : A (1 ; 1 ; 1) se projette à **8°**
+  de cet axe, donc son nom était dégagé mais pas son point.
+
+⭐ `noms_axes()` est prêt à recopier dans
+`manim/poste2/mesure-ps-espace-plan-normal.py`. ⏳ **À extraire dans le socle quand le
+gel sera levé** — il vaudrait pour les six épisodes à cube, si on les re-rend un jour.
+
+⭐⭐ La leçon, et elle dépasse les axes : **un instrument qui ne reçoit qu'une partie de
+la figure mesure une figure qui n'existe pas.** Avant de croire un écartement, demande-toi
+ce que tu lui as donné — et ce que le repère dessine tout seul.
+
+## ⚠️ `portee` est tronqué à l'entier, sans un mot
+
+`Repere3D.__init__` fait `self.portee = int(portee)`. Donc `portee=1.8` donne des axes de
+longueur **1**, et `portee=2.9` des axes de longueur **2**. Vérifié :
+
+```
+portee=1.8 -> axes jusqu'à 1      portee=2.9 -> axes jusqu'à 2
+```
+
+Rien ne le signale : on balaie des valeurs et elles rendent toutes la même image. ⭐ Si un
+axe est trop court d'un cheveu, ce n'est pas `portee` qu'il faut ajuster finement, c'est
+`u` (la longueur d'une unité), qui est un flottant, lui.
 Dessiné avec `self.repere(...)` et `portee=2`, les axes se superposent exactement aux
 arêtes A B, A D et A E sur leur première moitié — on ne voit pas des axes, on voit des
 arêtes grises doublées. Et surtout : **le bout de l'axe des y tombe À L'INTÉRIEUR du
@@ -1296,6 +1482,876 @@ le `play` précédent cale la ligne tout seul.
 
 ---
 
+## ⛔⛔ Ce que l'épisode 10 a appris — à lire AVANT d'écrire l'épisode 11
+
+Quinze défauts. **Un seul a été vu par Frédéric, à l'œil, et il valait les quatorze
+autres.** Six n'ont été vus qu'au GROS PLAN, trois par `verifier-avant-rendu.py`, deux
+par la mesure, deux étaient des TROUS D'INSTRUMENT, et un était une collision entre deux
+sessions. ⭐ Et **deux des corrections ont DÉPLACÉ le défaut au lieu de le supprimer** :
+c'est le sujet principal de cet épisode.
+
+### ⛔⛔⛔ LE CUBE N'AVAIT QUE ONZE ARÊTES SUR DOUZE — depuis le premier épisode
+
+Frédéric, devant une planche de figures : « vérifie le segment EH ». Mesuré :
+`Repere3D.cube()` traçait `AB BC CD AD AE BF CG DH EF FG GH` — **onze**. Le haut du cube
+était **OUVERT entre E et H**, dans la figure que **SIX** scripts sur dix dessinent
+(recompté : espace_repere_coordonnees, espace_defi, ps_espace_calculer,
+ps_espace_orthogonalite, ps_espace_norme_distance, ps_espace_angle — et SEPT voix en
+parlent, ce qui est l'origine du « neuf » que je répétais sans l'avoir compté).
+
+⛔⛔ **AUCUN instrument du dépôt ne pouvait le dire, et c'est la leçon.** Le dry run ne
+regarde que les bords du cadre ; les scripts de mesure ne regardent que les cotes des
+blocs ; `loin_des_fleches` et `etiquettes` comparent ce qui EST dessiné. Tous mesurent
+**ce qui est là**. Aucun ne compte **ce qui manque** — et à la planche, une arête absente
+ne saute pas aux yeux, puisqu'il n'y a rien à voir. C'est le défaut de l'épisode 8
+(« cinq morceaux construits, quatre joués ») dans sa forme la plus pure : ici le morceau
+n'était même pas construit.
+
+⭐ Le contrôle est maintenant **exécuté à l'import** de `espace3d.py`, et il ne relit pas
+la liste `vues` — ce serait se relire soi-même. Il relève les segments RÉELLEMENT
+construits, retrouve leurs extrémités parmi les huit sommets, et compare aux douze paires
+qui diffèrent d'exactement UNE coordonnée. Si une arête repart, l'import casse.
+⭐⭐ **La règle générale** : pour une figure fermée (cube, tétraèdre, polygone), compter
+les morceaux et les comparer à un compte CALCULÉ, jamais à la liste qui les produit.
+✅ Les cinq épisodes livrés qui dessinent le cube ont été re-rendus (E2, E6, E7, E8, E9) :
+0 échec, 0 bord, **durées identiques à la centiseconde**, les cinq cubes regardés à
+l'image. L'arête ajoutée ne déplace rien — elle relie deux sommets déjà tracés.
+
+### ⛔⛔ CORRIGER UN DÉFAUT PEUT LE DÉPLACER — deux fois dans le même épisode
+
+C'est « fuir une flèche pour tomber sur une arête » (E9), et ça s'est produit deux fois :
+
+| la correction | ce qu'elle a cassé |
+|---|---|
+| les deux normes de 09b passées à DEUX lignes, pour qu'on ne les lise plus comme un produit | le bloc a grandi de 0,68 **autour de son centre**, donc il est MONTÉ de 0,34 et la flèche de « ‖A G⃗‖ » entrait dans « 1 × 1 » |
+| « Saint-Pierre » écarté de « Ravi » (buff 0,08 → 0,18) | « Saint-Pierre » s'est posé **sur le bord haut du cadre de conclusion**, 0,13 de recouvrement, le texte rayé d'un trait orange |
+
+⭐⭐ **La règle** : changer la HAUTEUR d'un bloc oblige à recompter TOUS ses voisins, pas
+seulement celui qu'on vient de corriger. Un `col()` ou un `gauche()` pose un bloc par son
+CENTRE : le grandir le fait déborder des deux côtés à la fois.
+⭐ Les deux remèdes qui ont tenu : une seule ligne avec un **point-virgule** (« ‖A G⃗‖ = √3
+**;** ‖A B⃗‖ = 1 »), qui lève l'ambiguïté sans grandir le bloc ; et déplacer le
+PERSONNAGE vers le haut plutôt que son étiquette vers le bas.
+
+### ⛔⛔ DEUX TROUS D'INSTRUMENT, ET CE SONT EUX QUI ONT LAISSÉ PASSER LES DEUX
+
+- **la colonne de droite de 09b n'était comparée à RIEN** : six blocs mesurés un par un,
+  pas une seule paire. La mesure disait ✅ pendant que deux blocs se chevauchaient.
+- **« Saint-Pierre » n'était mesuré qu'EN PAIRE avec « Ravi »** : son bas disparaissait
+  dans la boîte commune, et le cadre qui le barrait n'était comparé à rien.
+
+⭐⭐ **La règle, et elle vaut pour E11 et E12** : dans une colonne, on compare les blocs
+**proche en proche** (`dessous()` sur chaque paire consécutive), et tout bloc qui a un
+voisin au-dessus ou au-dessous est mesuré SEUL en plus de son groupe. La mesure de E10
+porte la chaîne complète — c'est elle qu'on recopie, plus celle de E9.
+
+### ⛔⛔ UNE ÉTIQUETTE SE PLACE DEPUIS LE SOMMET, ET SON ÉCART EST PERPENDICULAIRE AU FÛT
+
+Trois étiquettes étaient TRAVERSÉES par leur propre fût, et la cause n'était pas la
+distance mais la MÉTHODE, à deux étages :
+
+1. je les posais par rapport à `g.get_center()`, **le centre de la BOÎTE du groupe**, qui
+   pour un secteur de rayon 1 tombe à (0,5 ; 0,37) du sommet d'où partent les flèches.
+   ⭐ `coin().sommet()` rend le point réel, lu APRÈS les `move_to` et les `scale` ;
+2. je décalais vers le BAS ou le HAUT. Sur un fût à 45°, un `UP * 0,16` ne gagne que
+   0,11 de distance réelle. ⭐ `ecart(p, signe, d)` décale **perpendiculairement** au fût.
+   ⚠️ Le piège : avec `DOWN`, « u » (horizontal) passait et « v » (en diagonale) non — un
+   réglage qui marche sur un objet et pas sur l'autre se lit comme une cote à affiner,
+   alors que c'est la méthode qui est fausse.
+
+### ⛔⛔ LA CAVALIÈRE NE CONSERVE AUCUN ANGLE — et cet épisode ne parle que d'angles
+
+Mesuré avant d'écrire un écran :
+
+| ce qu'on dessinerait | à l'écran | en vrai |
+|---|---|---|
+| u(1 ; 1 ; 0) par rapport à l'axe des x | **11,5°** | 45° |
+| l'angle de u(1 ; 1 ; 0) et v(0 ; 1 ; 1) | 60,8° | 60° — juste **par chance** |
+| l'angle de A⃗G et A⃗B (le défi) | **42,4°** | 54,7° — **douze degrés de mensonge** |
+
+⭐ Les figures d'angle sont donc **PLANES** (`coin()`), comme `plan_dessine` de E8 : elles
+ne prétendent pas montrer OÙ sont les vecteurs, elles montrent leur ANGLE — et il est
+vérifié par une assertion du module. ⛔ Et dans le cube, l'arc ne porte **aucune valeur** :
+c'est une convention, exactement comme le petit carré de `angle_droit`, qui n'est pas
+droit à l'écran non plus. La valeur est dans la colonne, jamais sur la figure.
+⛔⛔ **Un arc peut aussi porter la bonne valeur sur le MAUVAIS angle** : l'arc du
+supplémentaire, écrit `start_angle=θ, angle=π−θ`, balayait bien 120°… du côté OPPOSÉ à
+−v⃗. Il ne touchait NI u⃗ NI −v⃗. L'assertion du module ne portait que sur les FLÈCHES, et
+120° est 120° : seule la planche des figures seules l'a vu.
+
+### ⛔ L'ORDRE EST CELUI DE LA VOIX — 17,07 s, le plus gros écart de la série
+
+`verifier-avant-rendu.py`, par un écart NÉGATIF entre deux ancres : la figure de l'écran
+02, écrite dans l'ordre de la PAGE (la colonne de droite d'abord), arrivait **17,07 s en
+retard**. La voix dit « Exemple : » à 15,43 s et la colonne court jusqu'à 32,50 s.
+⭐ C'est le même contrôle qui a trouvé 3,36 s sur E9 et 9,07 s sur E8. Il paie à chaque
+épisode. ⚠️ Et il a aussi attrapé un `au_fin("fois zéro, donc 1")` dont l'offset (168)
+**n'a pas de marque** : il aurait pris silencieusement celle d'avant.
+
+### ⭐⭐ LES 2 CUES « 577 » N'ÉTAIENT PAS UN DÉFAUT
+
+Annoncées depuis E1 comme « à regarder en écrivant E10 ». Mesuré : « 577 » n'apparaît
+**qu'une fois** dans le texte du clip, et WinRT en a émis **TROIS** (25,50 / 25,82 /
+26,09 s) parce qu'il le lit « cinq cent soixante-dix-sept ». Le convertisseur place la
+première à l'offset 326 — le début du nombre — et saute les deux autres **sans avancer** :
+la marque est au bon endroit, et les 41 marques suivantes du clip sont justes.
+⛔ Ce n'est PAS la règle « une décimale vaut 3 cues » (E6) : « 577 » est un ENTIER, et
+`DECIMALE` ne l'attrape pas. C'est le garde-fou `SAUT_MAXI` qui fait le travail.
+⭐⭐ **Un entier long (577, 101, 180) se comporte comme une décimale** — à savoir pour E11
+et E12, qui en portent.
+
+### ⛔⛔ DEUX SESSIONS ONT ÉCRIT DANS LE MÊME FICHIER, EN MÊME TEMPS
+
+Une seconde session a été lancée sur E10 pendant que celle-ci y travaillait, sur une
+information fausse (« E10 est écrit, son HD tourne » — le verrou tenait en fait le rendu
+de E8). Les deux ont écrit dans `ps_espace_angle.py` et `mesure-ps-espace-angle.py`.
+⭐ **Ce qui l'a révélé n'est pas une alerte, c'est un `assert`** : deux modifications ont
+échoué parce que le texte avait changé sous elles. Sans ces `assert`, l'une aurait écrasé
+l'autre en silence. ⚠️ `ListAgents` donne la réponse en une commande — à faire au moindre
+doute, et non à supposer. ⭐ La collision s'est réglée entre les deux sessions, et le
+travail de l'autre a été gardé : ses deux contrôles manquants sont ceux décrits plus haut.
+⛔⛔ **Et la cote de Ravi était recopiée dans DEUX fichiers** : corrigée dans l'épisode et
+pas dans la mesure, l'instrument a mesuré pendant un tour **un écran qui n'existait pas**
+et a crié sur un défaut déjà corrigé. ⭐ Elle est maintenant une constante du module
+(`POS_RAVI`), importée par la mesure. C'est la même forme que « la fiche et le registre
+ont divergé » du même jour : **deux copies d'une seule vérité divergent dès qu'on en
+touche une.**
+
+### ⛔ LES AUTRES, vus au gros plan et par rien d'autre
+
+- la flèche de « −v⃗ » coiffait **aussi le signe moins** : on lisait un double trait. Un
+  vecteur opposé s'écrit « − » suivi de « v⃗ » — et le signe se centre à mi-hauteur, pas
+  sur la ligne de base (`aligned_edge=DOWN` le posait au pied de la lettre) ;
+- « 1 × 1+ 1 × 0+ 1 × 0= 1 » : à `buff` 0,06 les « + » collent au terme de gauche et se
+  détachent de celui de droite. Quand la ligne doit tenir dans une largeur, c'est la
+  POLICE qui cède, jamais l'espacement ;
+- les mollets couleur PEAU sous un pantalon sombre se lisaient comme des **jambes nues**
+  sur un installateur en gilet de chantier : un vêtement de travail est d'une pièce ;
+- le bras bas de Ravi ne dépassait du torse que de **0,17** et se lisait comme un moignon.
+
+### ⭐ CE QUI A BIEN MARCHÉ, ET QU'IL FAUT REFAIRE
+
+- **Rendre une image d'essai des glyphes AVANT d'écrire un écran** : °, θ, ≤, |…|, ∈, ⟹,
+  ⟺ — tous se dessinent. Dix secondes, et deux caractères de cette série sont déjà sortis
+  en « tofu ».
+- **La planche des FIGURES SEULES avant le premier rendu**, troisième épisode de suite
+  qu'elle paie : elle a attrapé l'arc du supplémentaire posé du mauvais côté, le bras
+  moignon, et la flèche combinante U+20D7 dans ses propres légendes.
+- **Étalonner `verifier-avant-rendu.py`** sur une copie avec UN `au_mot` faux : il a crié,
+  et dans la même sortie il a trouvé les deux vrais défauts.
+- **Les durées AVANT/APRÈS comme témoin d'un re-rendu** : identiques à la centiseconde
+  sur les cinq, c'est ce qui prouve qu'une correction de figure n'a rien déplacé d'autre.
+
+---
+
+## ⛔⛔ Ce que l'épisode 12 a appris — le DERNIER script de la série (23/11/2026)
+
+Dix-sept cotes fausses trouvées par la mesure, cinq signalements par le dry run, **cinq
+défauts d'IMAGE que rien d'autre n'a vus**, et un TROU D'INSTRUMENT. ⭐ Mais le plus cher
+n'est aucun de ceux-là : c'est qu'une figure peut être géométriquement JUSTE et dire le
+CONTRAIRE de la voix. Trois fois dans cet épisode, sous trois formes différentes.
+
+### ⛔⛔⛔ LE TRIANGLE (BDE) AURAIT DESSINÉ LA MAUVAISE RÉPONSE
+
+La question-pause n° 2 demande la nature du triangle B D E, et la réponse est
+**équilatéral**. Mesuré avant d'écrire l'écran :
+
+| ce que la cavalière fait du triangle B D E | valeur |
+|---|---|
+| ses trois côtés, tous égaux à √2, projetés | **0,656 · 1,414 · 0,822** (rapport 1 à 2,2) |
+| l'angle en B, qui vaut 60° | **19,1°** à l'écran |
+| l'aire projetée / l'aire réelle | **17,5 %** (c'est le chiffre de E8) |
+| `platitude((1 ; 1 ; 1))` | **9,02°** — sous le seuil de 12°, donc une LAME |
+
+⛔ Dessiné dans le cube, ce triangle montre trois côtés visiblement inégaux et un angle
+aigu très fermé : un élève qui le regarde répond « quelconque ». **La figure n'aurait pas
+été imprécise, elle aurait enseigné la mauvaise réponse.** ⭐ L'écran 07 ne montre donc
+que les trois POINTS en ambre (c'est la donnée : « on considère les points B, D et E »),
+et la forme arrive en 07b par une figure PLANE dont l'équilatéralité est vérifiée par une
+assertion du module — c'est la règle de `plan_dessine` (E8) et des `coin()` (E10),
+appliquée ici à la RÉPONSE d'une question et non plus à un décor.
+
+> ⚠️⚠️ **ET CETTE ASSERTION NE PROUVE PAS L'IMAGE — correction de ma propre phrase.**
+> Elle mesure les trois `Line` telles que le module les CONSTRUIT : c'est l'arithmétique
+> de la figure, pas ses pixels. Entre les deux il y a `scale`, `move_to`, le `stroke_width`
+> et l'anticrénelage — exactement l'écart que la série appelle « un instrument ne prouve
+> rien tant qu'on n'a pas regardé l'image ». ⭐ Le contrôle qui ferme vraiment la question
+> se fait **sur le rendu** : on extrait les pixels de la couleur du triangle et on mesure
+> les trois côtés. ⛔ Donc : pour toute figure qui annonce une proportion, l'assertion du
+> module est le garde-fou de l'écriture, et la MESURE EN PIXELS est la preuve. Les deux,
+> pas l'une des deux.
+>
+> ⛔⛔ **ET CETTE MESURE-LÀ A SON PROPRE PIÈGE — correction du 23/11, après le HD.**
+> Premier relevé, sur le `-ql` : 87,0 / 83,4 / 84,9 px, écart max **2,2 %**, mis au compte
+> du bruit d'anticrénelage. **C'était faux.** Prédiction faite avant de vérifier : à 1080p
+> les côtés font quatre fois plus de pixels, donc un bruit d'anticrénelage doit TOMBER ;
+> s'il ne tombe pas, ce n'est pas du bruit. Mesuré sur le HD par la session qui l'a rendu :
+> **2,10 %**, il n'est pas tombé. La cause n'était ni la figure ni l'anticrénelage, c'était
+> la MÉTHODE — les sommets étaient extraits des **pixels extrêmes** du trait, or un trait
+> épais déborde vers l'extérieur et il déborde **différemment selon l'angle de chaque
+> coin** : un biais qui grandit avec la résolution, exactement comme le trait. Il ne
+> POUVAIT pas disparaître.
+> ⭐ En ajustant les trois côtés sur leur partie CENTRALE, loin des coins :
+> **194,46 / 195,29 / 194,51 px**, écart **0,27 %**, angles **59,88° / 60,27° / 59,85°**,
+> somme 180,00°. ⭐⭐ **La règle, et elle vaut pour toute mesure de forme sur une image :
+> on n'extrait jamais une forme par les pixels EXTRÊMES d'un trait épais.**
+> ⚠️ Et deux chiffres FAUX et parfaitement plausibles sont sortis avant le bon — une
+> fenêtre de recadrage mal convertie annonçant **67,74 %** d'écart (de quoi faire refaire
+> une figure juste), puis des côtés de **762 px** dans une boîte de 208. Aucun des deux ne
+> s'est vu à sa plausibilité : les deux se sont vus par un **INVARIANT** qui ne collait pas
+> (un compte de pixels quatre fois trop petit, un côté 3,8 fois plus grand que sa propre
+> boîte). ⭐ Une mesure d'image se vérifie par un invariant, jamais par « ça semble juste ».
+
+### ⛔⛔ UNE FIGURE JUSTE QUI MENT, DEUXIÈME FORME : LA COULEUR
+
+Le triangle plan a d'abord été dessiné avec un côté par couleur de la charte — bleu, rose,
+ambre. **Vu sur la planche des figures seules**, en grand : on lit trois objets DIFFÉRENTS,
+sur l'écran dont toute la leçon est que les trois côtés sont ÉGAUX. ⛔ Aucune mesure ne
+peut voir ça : la figure est dans la marge, ses longueurs sont exactes, son angle est
+vérifié par une assertion. ⭐ Trois côtés égaux, une seule couleur ; c'est l'ARC qui est
+vert, parce que lui dit autre chose.
+
+### ⛔⛔ UNE FIGURE JUSTE QUI MENT, TROISIÈME FORME : LE MÊME VECTEUR EN DEUX COULEURS
+
+Vu au gros plan ×2,6 : l'écran 05 peignait en AMBRE les trois points B, D, E **et** la
+flèche A⃗G — c'est-à-dire les deux objets de la phrase « A⃗G est normal au PLAN (BDE) », de
+la même couleur. ⭐ Dans toute la série, C_NORMALE (vert) est la couleur d'un vecteur
+normal. A⃗G est donc VERT à l'écran 05 et AMBRE à l'écran 09b, et ce n'est pas une
+incohérence : en 09b ce n'est plus un vecteur, c'est le SEGMENT [A G], la grande diagonale
+— « ce que la question regarde ». ⚠️ Une couleur par RÔLE, pas par objet.
+
+### ⛔⛔ LE TROU D'INSTRUMENT : AUCUN CONTRÔLE NE CONNAÎT UN POINT
+
+Le point K de la correction est AU TIERS de la grande diagonale, donc à 0,36 du nom « D »
+du cube. Au gros plan ×2,6, **la lettre ambre et le POINT VERT se lisaient comme un seul
+objet**. Or :
+
+- `etiquettes()` (E8) compare des étiquettes **entre elles** ;
+- `loin_des_fleches()` (E9) compare une étiquette à un **SEGMENT** ;
+- **ni l'un ni l'autre ne connaît un POINT.**
+
+⭐ Le remède coûte une ligne : un point se passe à `loin_des_fleches` comme un **segment
+de longueur nulle**, et le contrôle existant fait le reste. ⚠️ À recopier : les épisodes
+de cette série dessinent des `Dot` (milieux, projetés, intersections) sur presque tous
+leurs cubes.
+
+### ⛔⛔ QUAND LA GRILLE NE TROUVE RIEN, ON N'ÉTIQUETTE PAS — et on le MESURE
+
+K ne porte pas de nom sur la figure, et ce n'est pas un renoncement : c'est une recherche
+en grille (pas de 0,04 entre −0,9 et +0,9, à plus de 0,11 de tout segment tracé et à plus
+de 0,22 des huit noms de sommet). Elle rend **110 positions libres**, et **la plus proche
+est à 0,82 du point** — plus d'une demi-arête, au milieu du cube, plus près d'autre chose
+que de K. Une étiquette qui n'appartient plus visiblement à son point ne nomme rien.
+⭐ C'est le remède de l'écran 09b de E8 : le point est VERT, le bloc
+« K (1/3 ; 1/3 ; 1/3) » de la colonne est encadré en VERT, et c'est la couleur qui relie.
+
+### ⚠️⚠️ UNE COTE D'ÉCART EST RELATIVE À SON `u`, ET LE CUBE PAR DÉFAUT EST DÉJÀ SERRÉ
+
+Deux constats comptés, et le second concerne les épisodes DÉJÀ LIVRÉS :
+
+1. **Le même écart ne vaut pas à deux échelles.** `{"D": (−0,26 ; +0,30)}` laisse 0,13 à
+   u = 1,30 et remet « D » à **0,07 de l'arête [A E]** à u = 1,18 : entre [A E] et [D H]
+   il ne reste que 0,48 de largeur pour un nom qui en fait 0,27. ⭐ D'où **un seul `u`
+   pour les trois écrans de cet épisode qui dessinent le cube**, et une seule cote
+   (`U_CUBE`, `ECARTE_CUBE`, constantes du module, importées par la mesure — la leçon de
+   la cote de Ravi, E10).
+2. ⚠️ **Au décalage PAR DÉFAUT de `cube()`, le nom « D » est à moins de 0,08 de l'arête
+   [A D] et « F » à moins de 0,08 de [F G]** — mesuré à u = 1,35, sans aucune diagonale
+   tracée. Ce n'est donc pas la diagonale qui crée le défaut de E9, elle l'aggrave. ⛔ Les
+   cubes de E2, E6, E7, E8 et E9 sont livrés en HD avec ce décalage : **constat, pas
+   correctif** — il se décide avec Frédéric, devant l'image.
+
+### ⛔⛔ DES CHOIX MOT POUR MOT À 18 PIXELS — et la mesure du nombre de caractères
+
+Premier jet de l'écran 04, les trois choix écrits mot pour mot comme la voix (« que n est
+orthogonal à B D et à B E, et que ces deux vecteurs ne sont pas colinéaires ») : polices
+obtenues **23,2 / 18,0 / 23,9 px** pour 26 demandées. ⭐ La cote qui manquait à la série
+est maintenant comptée : **une carte de 6,2 n'offre que 5,05 à son texte, soit 23
+caractères à 26 px** (0,218 d'unité par caractère). Le choix B en fait 86, donc QUATRE
+lignes — et à quatre lignes le bloc de cartes descend à −2,6, c'est-à-dire DANS la boîte
+de Ti-Margo. ⛔ Il n'y avait pas de réglage : il fallait écrire les trois choix en
+SYMBOLES (« n⃗ ⊥ B⃗D »), ce que l'écran fait déjà dans sa donnée.
+⚠️ C'est la seule fois de la série où « on ne raccourcit pas, la voix le dit » a dû
+céder — et la décision est écrite dans le script, à l'endroit où elle a été prise.
+
+### ⛔ LE PIÈGE DE `vexpr` : L'APOSTROPHE N'EST PAS UNE LETTRE
+
+`EcransEspace.vexpr` teste l'isolement d'un nom avec `avant.isalpha() or apres.isalpha()`.
+L'apostrophe n'étant pas une lettre, **passer `("n",)` sur un texte qui contient « n'est »,
+« n'a » ou « n'existe » dessine une flèche de vecteur sur ce « n »-là**. ⛔ Et personne ne
+le dit : `auditer-fleches-vecteurs.py`, lui, EXCLUT l'apostrophe par son regex (c'était son
+correctif de E7), donc il se tait. Seule l'image le montrerait.
+⭐ Règle tenue dans cet épisode : aucun texte passé avec `("n",)` ne contient « n' ».
+⚠️ Le correctif appartient au socle, et il n'a pas été fait — à décider avec le chef.
+
+### ⛔ LE PLAFOND DE 10,60 A MORDU QUATRE FOIS, DONT LA FINALE DE 22,6 %
+
+`plafonne()` (correction d'outil de E7) a payé quatre fois sur le seul épisode 12 :
+
+| l'écran | largeur naturelle | réduction silencieuse |
+|---|---|---|
+| 01, les trois étapes du chemin | 10,97 | 3,4 % |
+| 03, la boîte à outils (CINQ objets) | 11,17 | 5,1 % |
+| 06, les cinq pièges | > 10,60 | — |
+| **10, la FINALE** | **13,69** | **22,6 %** |
+
+⭐ C'est la pire amplitude de la série (E7 était à 27 % sur sa finale, mais sur un seul
+écran). ⚠️ Et la cause est structurelle : cet épisode est une SYNTHÈSE, donc ses écrans
+sont des listes — cinq outils, cinq pièges, quatre lignes de copie, quatre rangées de
+finale. **Les pastilles ne rétrécissent pas avec la police** (rayon fixe) : à cinq rangs
+elles pèsent 2,40 à elles seules, et c'est toujours la POLICE du texte qui cède.
+
+### ⛔ LE SOCLE N'A PAS DE FRACTION, ET JE N'AI PAS LE DROIT D'EN AJOUTER UNE
+
+`frac()` vit dans `ps_espace_angle.py` (E10), pas dans le socle. Cet épisode écrit
+« un tiers » et « un neuvième ». ⭐ Décision, écrite dans le script : **barre oblique**
+(« 1/3 », « 3 × 1/9 = 1/3 », « √3 / 3 »), parce que le piège de E10 était
+« cos θ = u⃗ · v⃗ / ‖u⃗‖ × ‖v⃗‖ », où le dénominateur est un PRODUIT — il n'y a aucune
+ambiguïté à lever sur une fraction dont les deux étages sont d'un seul terme.
+⛔ Recopier `frac` dans l'épisode aurait fait **deux copies d'une seule vérité**, et c'est
+exactement ce que la cote de Ravi a coûté à E10. ⏳ **Le vrai remède est dans le socle, et
+il reste à faire** : `frac()` et `tiers()` y ont leur place, comme `racine()` y est entrée
+à l'épisode 9.
+
+### ⭐ CE QUI A BIEN MARCHÉ, ET QU'IL FAUT REFAIRE
+
+- **Les assertions d'import ont trouvé une figure fausse AVANT le premier rendu** :
+  « la normale du schéma 02 n'est pas orthogonale à v ». Elle avait raison, et le remède
+  n'était pas une cote : sur un plan dessiné en perspective, **aucune direction de la page
+  n'est perpendiculaire aux DEUX côtés du parallélogramme**. La normale verticale fait
+  90,0° avec le côté horizontal et **46,6°** avec le côté de fuite — un « carré » de 46,6°
+  se lit comme un dessin bâclé, pas comme une convention. ⭐ Donc **un seul carré d'angle
+  droit**, là où l'angle de la page est vraiment droit ; l'autre orthogonalité est portée
+  par le « n⃗ · v⃗ = 0 » qui paraît au même instant. Dans une figure dont tout l'argument est
+  « à plat, donc rien n'y ment », un demi-mensonge est pire que pas de carré du tout.
+- **Le contrôle point-dans-polygone de E8 au niveau du MODULE, pas du script de mesure** :
+  les deux pointes des vecteurs du plan DANS le polygone, celle de la normale DEHORS. Au
+  premier jet, v⃗ sortait du plan par le bord haut de **0,02** — le défaut n° 3 de E8, et
+  une figure fausse doit casser à l'import, pas à la planche.
+- **La planche des FIGURES SEULES avant le premier rendu**, quatrième épisode de suite
+  qu'elle paie : elle a attrapé les trois couleurs du triangle.
+- **Étalonner `verifier-avant-rendu.py` avant de croire son zéro** : une copie du script
+  avec UN `au_mot` faux, dans le répertoire temporaire. Il a crié ; sur le vrai, il se
+  tait, et ce silence-là est une preuve.
+- **Compter avec `grep -o`, jamais avec `^`** : la sortie du dry run est écrite sur les
+  mêmes lignes que les barres de progression de `tqdm`.
+
+### ⚠️ LES TROIS `AUDIT-TARD` QUI RESTENT SONT STRUCTURELS — relus à la main
+
+| signalement | la vraie mesure |
+|---|---|
+| `05 « 1 » (1) **0,92 s**` | le « 1 » de B (1 ; 0 ; 0), posé par `au_fin("de coordonnées 1, zéro, zéro")` : il paraît quand le TRIPLET est fini, donc 0,92 s après son propre mot |
+| `05 « 1 » (x + y + z − 1 =) **0,56 s**` | idem, `au_fin("x plus y plus z moins 1 égale zéro")` |
+| `09 « 1 » (x + y + z − 1 =) **0,54 s**` | idem, la même équation à l'écran du défi |
+
+⭐ Les trois sont le PRIX de `au_fin` : il évite l'avance sur le dernier nombre d'une ligne
+au prix d'un retard sur le premier. Aucun ne cache une avance (vérifié occurrence par
+occurrence, le contrôle qui a payé sur E5, E6, E9 et E10).
+✅ **Le dry run `-qh` : 0 BORD, 0 AUDIT-AVANCE, 0 RETARD, 1 AUDIT-ABSENT** — celui de
+`@eleveai974`, que les onze épisodes publiés portent aussi.
+
+---
+
+## 🔁 PASSATION — les six shorts du produit scalaire (23/11/2026, 19 h 20)
+
+Écrite à **66 % de contexte** et non à 90, exprès : une passation se rédige au large.
+⛔ Les six scripts Manim ne sont PAS écrits, et c'est une décision, pas un abandon —
+la note recense 3 à 5 tours de `-ql` par épisode (planche, gros plans, script de mesure
+à chaque tour) : six scripts depuis 66 % finiraient en compaction au milieu d'une figure.
+
+### ✅ CE QUI EST FAIT ET COMMITÉ — onze commits, rien en suspens
+
+| la pièce | où | commit |
+|---|---|---|
+| les 6 voix de short | `manim/voix/terminale-ps-espace-*-short.json` | `d42941132` (E12 repris en `24632d090`) |
+| leurs marques — **1 144**, puis 1 145 après la reprise de E12 | `manim/scripts/terminale/ps_espace_*_short_marques.json` | `d42941132`, `24632d090` |
+| le tirage des lettres **A C B C B A** (graine 2311) | table en tête de `VOIX-espace-terminale.md` | `d42941132` |
+| le lanceur de WAV, dédoublé à dessein | `manim/poste2/voix-ps-espace-shorts-wav.sh` | `d42941132` |
+| la passe maths des 6 shorts, étalonnée | `manim/poste2/controler-maths-shorts-ps-espace.py` | `d42941132` |
+| le gabarit des **12** shorts, étalonné, 5 témoins | `manim/poste2/verifier-voix-shorts-espace.py` | `00646ac0b` → `cba55130d` |
+| le découpage des 6 + la cartographie sur le socle | `manim/poste2/DECOUPAGE-shorts-ps-espace.md` | `a5e9a2804` → `1e6b8fb04` |
+| les 3 schémas PLANS dans la boîte commune + leur contrôle d'import | `manim/poste2/espace3d.py` | `452fcc339`, `b5523a629` |
+
+⛔ **Rien n'est poussé, aucun rendu HD n'a été lancé.**
+
+### ⏳ CE QUI RESTE, DANS L'ORDRE — et le premier point n'est pas de la production
+
+1. **Le SHA du socle des shorts.** `manim/scripts/terminale/espace_commun_short.py` était
+   écrit à 18:42 et **non commité** (dernier état commité : `13e3d209c`, 18:10).
+   ⛔ On n'écrit pas six scripts contre un fichier qui bouge : si une signature change, on
+   ne sait plus contre quoi on a écrit. La cartographie, elle, se refait en quelques
+   minutes — c'est un travail peu cher à perdre, contrairement aux scripts.
+2. **`racine = EcransEspace.racine`** dans le bloc des emprunts du socle des shorts — une
+   ligne, demandée et pas encore faite. ⛔ Sans elle, la question du short de E9 s'écrit
+   « (√3²) + 4² » : le glyphe √ se rend mais n'a **aucune barre**, donc l'écran porterait
+   la faute même que ce short combat. Critère d'emprunt vérifié : la méthode n'utilise que
+   `self.t`, ni `super()`, ni `col()`, ni `gauche()`.
+3. **Les 6 scripts**, un par un, jamais en parallèle. Pour chacun, l'ordre de la série :
+   `verifier-avant-rendu.py` → dry run (**0 BORD, 0 AUDIT-AVANCE**) → `espace_mesure_short.py`
+   → `-ql` + **planche ET gros plans** → `verifier-zone-margo.py` sur le `-ql` →
+   `auditer-fleches-vecteurs.py` à **0 NU**. ⛔ Aucun HD avant que l'image soit regardée.
+4. Les entrées de registre, puis la publication — et c'est un geste de Frédéric.
+
+⭐ **Tout ce qu'il faut pour le point 3 est déjà écrit** : `DECOUPAGE-shorts-ps-espace.md`
+donne, pour chacun des six, l'idée unique, le texte exact de chaque écran, les trois
+propositions, ce que montre la pause **et ce qu'elle ne doit PAS montrer**, puis la
+cartographie écran → pièce du socle avec ses arguments.
+
+### ✅ CE QUI EST VÉRIFIÉ, ET PAR QUELLE COMMANDE — à ne pas refaire, ni à croire sur parole
+
+| ce qui est vérifié | la commande |
+|---|---|
+| les 6 voix : 0 faute de calcul sur 50 contrôles, après étalonnage | `python -X utf8 manim/poste2/controler-maths-shorts-ps-espace.py [--etalonner]` |
+| les 12 shorts : gabarit, symboles, copier-collers, lettres — 0 erreur, 2 alertes de devinabilité (20 % et 86 %, arbitrées) | `python -X utf8 manim/poste2/verifier-voix-shorts-espace.py [--etalonner]` |
+| les 3 figures planes se construisent et tiennent leur promesse | à l'import de `espace3d` (`_controler_figures_planes()`) |
+| le cube a bien ses 12 arêtes | à l'import de `espace3d` (`_controler_aretes_du_cube()`) |
+| 6 paysages LIVRÉS s'importent encore après mon ajout | import de `ps_espace_*` et `espace_*`, leurs assertions de module tournent |
+| les flèches : 162 fléchés, **0 NU** sur 12 scripts | `python -X utf8 manim/poste2/auditer-fleches-vecteurs.py` |
+| les 6 voix de short de la GÉOMÉTRIE : **aucune faute de calcul** | relecture du 23/11, chaque affirmation refaite par commande, les non-évidentes par une SECONDE route |
+
+### ⚠⚠ CE QUI N'EST PAS VÉRIFIÉ, ET QUI NE PEUT PAS L'ÊTRE PAR UN OUTIL
+
+- ⛔⛔ **L'EXCLUSION MUTUELLE DES PROPOSITIONS SE LIT À L'ŒIL.** Aucun outil ne la produit
+  et aucun ne la produira : il faudrait comprendre le français et la mathématique en même
+  temps. Les six sont lues et justifiées **une par une** dans `DECOUPAGE-shorts-ps-espace.md` ;
+  toute réécriture d'une question oblige à refaire cette lecture à la main.
+- La passe maths des **six shorts de la GÉOMÉTRIE** n'existe toujours pas comme instrument
+  (ils ont été relus, ce qui n'est pas la même chose qu'un script qui refait les calculs).
+- Ce qui s'AFFICHE : rien de ce qui précède ne regarde une image. Planche + gros plans
+  restent obligatoires, et **avant** le HD.
+
+### ⛔⛔ `write_text` OUVRE AVANT D'ENCODER : une faute de frappe a VIDÉ CETTE NOTE
+
+Arrivé en écrivant cette passation même, et c'est le plus brutal de la soirée.
+
+Le script d'insertion contenait une paire de substituts mal échappée (`\ud83d\udd01` écrit
+dans une chaîne Python au lieu de `\U0001F501`). À l'écriture :
+
+```
+UnicodeEncodeError: 'utf-8' codec can't encode characters ... : surrogates not allowed
+```
+
+⛔⛔ **Et le fichier était déjà vide.** `Path.write_text` ouvre le fichier en mode
+écriture — ce qui le **TRONQUE** — **puis** encode. L'encodage a échoué après la
+troncature : **2 605 lignes à zéro**, dont les 243 lignes de la session géométrie et tout
+ce que cette note a coûté. Une exception qui ressemble à « rien ne s'est passé » avait
+déjà tout détruit.
+
+✅ **Réparé sans perte, parce que tout était commité** :
+`git checkout HEAD -- manim/REPRISE-espace-terminale.md` → 2 605 lignes, identiques à
+HEAD, section voisine intacte. ⛔ Par CHEMIN, jamais un `reset` : le dépôt est partagé.
+
+⭐⭐ **LA PARADE, en une ligne : on ENCODE AVANT D'OUVRIR.**
+
+```python
+octets = texte.encode("utf-8")      # si ça casse, rien n'est ouvert, rien n'est perdu
+chemin.write_bytes(octets)
+```
+
+⭐ Et la leçon générale, qui dépasse Python : **un écrivain qui tronque d'abord et
+valide ensuite transforme une faute de frappe en perte de données.** Partout où l'on
+réécrit un fichier en place, la validation vient AVANT l'ouverture — ou l'on écrit à
+côté puis on remplace.
+⚠️ Corollaire pour ce dépôt partagé : **ne jamais réécrire un document partagé qui porte
+du travail non commité.** Ici tout l'était, et c'est la seule raison pour laquelle cet
+incident coûte zéro.
+
+### ⛔ LES PIÈGES PAYÉS CE SOIR — détaillés plus bas, résumés ici
+
+Quatre instruments à moi ont **fabriqué des défauts** dans la même soirée, et aucun
+n'était en panne : un test creux `isclose(0, 1)` ; un comptage qui incluait le point final
+et condamnait 3 shorts sur 6 ; 23 faux positifs parce qu'un clip commun était exempté par
+sa LONGUEUR et non par son NOM ; un critère BINAIRE qui mettait 2 et 6 caractères dans le
+même verdict. ⭐ Ce qui leur manquait à tous : un **témoin négatif**.
+
+Et trois autres, qui ne sont pas des instruments :
+- une **docstring qui promet ce que le code ne porte pas** (le garde-fou de `coin` est
+  resté dans son épisode) — pire qu'un silence, parce qu'une promesse dispense de vérifier ;
+- un **`--stat` lancé et non lu** : +246 lignes pour un ajout de 45, chiffre vu et non
+  interrogé. D'où la parade : **on liste les TITRES ajoutés**, pas les lignes ;
+- une **dette justifiée par un danger imaginaire** (un cycle d'import qui n'existe pas) :
+  elle ne se rembourse jamais, parce que personne n'ose y toucher.
+
+## ⭐⭐ Les SIX SHORTS du produit scalaire (E7 à E12) — les voix (23/11/2026)
+
+État à la fin de cette passe : **les 6 voix écrites, leurs 6 fichiers de marques faits**
+(189 · 200 · 153 · 183 · 203 · 216 = **1 144 marques**, comptées à la sortie du
+convertisseur, pas additionnées de tête). ⏳ Les 6 scripts Manim restent à écrire.
+
+### ⛔⛔ LES DEUX CONTRÔLES DE LA SÉRIE NE LISENT QUE LES DOUZE PAYSAGES
+
+C'est un TROU D'INSTRUMENT, mesuré et non supposé :
+
+```
+python -X utf8 manim/poste2/verifier-voix-espace.py
+  -> « 12 épisodes · 15 clips attendus chacun », « A 8 · B 8 · C 8 sur 24 questions »
+python -X utf8 manim/poste2/controler-maths-voix-espace.py
+  -> « 0 affirmation fausse sur les voix des 12 épisodes »
+grep -i short manim/poste2/verifier-voix-espace.py   -> AUCUNE ligne
+```
+
+Les deux rendent donc un zéro **parfaitement plausible sur un périmètre qui n'est pas
+celui qu'on croit** — la faute que la note des entiers appelle « un audit français pris
+pour un audit de maths ». ⛔ **Un « 0 faute » de ces deux outils ne dit RIEN des shorts.**
+
+⭐ D'où `manim/poste2/controler-maths-shorts-ps-espace.py`, qui refait en Python chaque
+nombre dit par mes six voix : **0 faute sur 50 contrôlées**, après étalonnage
+(`--etalonner` plante une faute, l'instrument crie).
+⚠️ **Les six shorts de la géométrie (E1 à E6) n'ont, eux, aucune passe maths exécutée.**
+Ce n'est pas mon territoire : c'est signalé, pas corrigé.
+
+### ⭐⭐ UN ÉTALONNAGE EST PAR ASSERTION, PAS GLOBAL — j'ai écrit un test CREUX
+
+Le plus cher de cette passe, et il est dans MON instrument. J'avais écrit, pour
+« (AB) et (CG) ne se coupent jamais » :
+
+```python
+not any(isclose(0, 1) for _ in (0,))     # == not False == True, QUOI QU'IL ARRIVE
+```
+
+C'est **mot pour mot** le test creux que cette note nomme déjà (« l'étalonnage a trouvé
+deux de mes propres tests CREUX », section des voix). Et il est passé à travers
+l'étalonnage **qui venait de réussir** : `--etalonner` plante UNE faute, à UN endroit, et
+prouve que cette assertion-là peut crier. Il ne prouve rien des 49 autres.
+
+⭐⭐ **La règle qui en sort : un étalonnage global ne valide pas une assertion
+particulière. Toute assertion qui affirme une ABSENCE (« elles ne se coupent pas »,
+« il n'est pas colinéaire », « ce n'est pas dans le plan ») veut son TÉMOIN** : un cas
+voisin où la chose EST vraie, et que l'instrument doit voir. Sans témoin, une fonction
+qui répondrait « non » à tout ferait passer le contrôle pour la mauvaise raison.
+Appliqué ici : `se_coupent()` est aussi lancé sur (AB) et (AD), **qui se coupent en A**.
+
+⚠️ Trois autres assertions du même fichier étaient des tautologies (`3 + 4 == 7`) : elles
+disent la faute que nomme le leurre sans jamais la comparer à la vérité. Corrigées en
+« le leurre vaut ceci **et** il diffère de la bonne réponse ».
+
+### ⛔⛔ UNE DOCSTRING QUI PROMET CE QUE LE CODE NE PORTE PAS EST PIRE QU'UN SILENCE
+
+Trouvé en recopiant `coin()` de son épisode vers `espace3d.py` (23/11). Sa docstring
+annonce : « l'angle dessiné est vérifié par une assertion du module ».
+
+C'était **vrai dans son épisode** : les assertions de `ps_espace_angle.py` (l. 129-135)
+portent sur les vecteurs U02, V02, U05, V05 de cet épisode-là. ⛔ Elles ne portent PAS
+sur la fonction. Recopiée ailleurs, elle a donc gardé la promesse et perdu le garde-fou.
+
+⭐⭐ **Et c'est pire qu'un silence, parce qu'une promesse DISPENSE DE VÉRIFIER.** Le
+suivant lit « vérifié par une assertion » et passe. Une fonction sans docstring, il
+l'aurait contrôlée. ⚠️ Aucun outil ne voit ça : le code est juste, la docstring est
+bien écrite, et c'est leur RAPPORT qui est faux.
+⭐ La règle : **quand on déplace du code, on déplace aussi ce qui le garantit** — ou on
+le réécrit sur place. Une garantie ne voyage pas toute seule.
+
+⭐ Remède ici : `_controler_figures_planes()`, exécuté À L'IMPORT comme
+`_controler_aretes_du_cube()`, et chaque assertion porte la promesse PROPRE de sa figure
+— `coin(deg)` dessine bien `deg` ; la hauteur de `pente()` fait exactement un dixième de
+sa base ; `poteau_vue()` est droit de face et penché de côté.
+⭐⭐ **Étalonné avant d'être cru**, les trois mises à l'épreuve sur une attente FAUSSE :
+`coin` décalé de 3° → lève ; `pente` étirée au rapport 5 → lève ; poteau qui ne penche
+jamais → lève. **Un contrôle qui ne peut pas échouer ne mesure rien.**
+
+### ⛔⛔ UNE DETTE JUSTIFIÉE PAR UN DANGER IMAGINAIRE NE SE REMBOURSE JAMAIS
+
+Dans le même ajout, j'ai dû redéfinir `P` et `VERT_OK` sur place pour que la copie reste
+verbatim. J'ai justifié le cas de `P` par un **CYCLE D'IMPORT**. ⛔ Il n'existe pas.
+
+J'avais raisonné sur la **ROUTE** par laquelle les épisodes atteignent `P` — via
+`espace_ecrans`, qui importe bien `espace3d` — et non sur l'endroit où `P` est **DÉFINI** :
+`proba_bin_defi.py`, qui n'importe ni l'un ni l'autre. Vérifié depuis **jusqu'aux imports
+INDIRECTS** : la fermeture transitive de `proba_bin_defi` atteint huit modules du dépôt,
+et ni `espace3d` ni `espace_ecrans` n'en font partie.
+
+⭐ La vraie raison était celle que j'avais donnée pour `VERT_OK`, et elle vaut pour les
+deux : une affaire de **`sys.path`**. `espace3d.py` est dans `manim/poste2/` ; ni
+`manim/scripts/terminale/` ni `manim/` n'y sont, sauf par la grâce de l'appelant.
+
+⭐⭐ **Et la leçon n'est pas l'erreur, c'est son coût à terme** : une dette assumée avec
+la BONNE raison se rembourse un jour ; une dette justifiée par un danger IMAGINAIRE ne se
+rembourse jamais, parce que personne n'ose y toucher. ⚠️ Un commentaire faux dans un
+fichier partagé ne se trompe pas tout seul : il trompe le suivant. Corrigé sur place.
+
+### ⭐⭐ UN BRIEF SE PÉRIME, ET IL NE LE SAIT PAS
+
+Mon brief initial m'interdisait `espace3d.py` en toutes lettres. Le chef d'orchestre m'y a
+ensuite envoyé, avec cinq limites écrites. J'ai suivi la seconde consigne **sans
+remarquer qu'elle contredisait la première, et sans le dire**.
+
+⭐ Deux règles en sortent, et aucune n'est à la charge d'un seul :
+1. **« J'ai prévenu » n'est vrai que pour celui qu'on a prévenu.** J'avais décrit,
+   demandé et attendu — mais auprès du chef seulement. De là où était l'autre session,
+   ça ne se distinguait pas d'une écriture en silence.
+2. **Une consigne écrite une fois ne sait pas qu'on l'a remplacée.** Quand une
+   autorisation contredit un brief, c'est à celui qui reçoit les deux de le SIGNALER
+   avant d'agir — pas de choisir laquelle vaut.
+
+### ⛔⛔ UN CONTRÔLE QU'ON LANCE SANS LIRE SON RÉSULTAT NE PROTÈGE DE RIEN
+
+Deux fois dans la soirée du 23/11, un commit à moi a emporté le travail NON COMMITÉ de
+la session voisine dans un document partagé : trois mots la première fois (une question
+de E2 raccourcie), **243 lignes la seconde** (toute sa section « Ce que les SHORTS ont
+appris »). ⚠️ Rien n'a été perdu — c'est son dernier état qui est dans l'historique,
+sous mon message — et l'historique ne se réécrit pas sur une branche partagée pour si
+peu. Ce n'est pas le dégât qui compte ici, c'est la cause.
+
+⛔⛔ **La seconde fois, j'avais l'avertissement sous les yeux.** J'avais bien lancé
+`git diff HEAD --stat` avant de commiter, comme la règle le demande. Il affichait
+**+246 lignes** pour un ajout que je venais d'écrire et qui en faisait **quarante-cinq**.
+J'ai lu le chiffre, je ne l'ai pas INTERROGÉ, et j'ai commité.
+
+⭐⭐ **La faute n'est pas le commit, c'est d'avoir exécuté un contrôle sans lire son
+résultat.** Un contrôle lancé et non lu ne protège de rien : il donne seulement la
+conscience tranquille de l'avoir lancé. C'est la même famille que « avant de croire un
+zéro, vérifier que l'outil a lu quelque chose ».
+
+⭐⭐ **Et un ordre de grandeur faux EST une mesure qui parle.** +246 pour 45, c'est un
+facteur cinq. Quand un chiffre dément ce qu'on attendait d'un facteur cinq, il n'est pas
+du bruit : **c'est la trouvaille**. Exactement comme les côtés de 762 px mesurés dans une
+boîte de 208 (épisode 12), ou les 67,74 % d'écart d'une fenêtre de recadrage mal
+convertie — les deux ont été vus par un INVARIANT qui ne collait pas, jamais par leur
+invraisemblance.
+
+### ⭐ LA PARADE, GÉNÉRALE AUX DEUX SESSIONS : ON LISTE LES TITRES, PAS LES LIGNES
+
+Avant tout `git add` sur un document partagé (`VOIX-espace-terminale.md`,
+`REPRISE-espace-terminale.md`) :
+
+```
+git diff HEAD -- <fichier> | grep "^+#"
+```
+
+et **tous les titres ajoutés doivent être de soi**.
+
+⭐ Pourquoi celui-là et pas `--stat` : **un nombre de lignes se confond avec celui du
+voisin, un titre de section non.** Le `--stat` dit « il se passe quelque chose » et laisse
+à la lecture le soin de dire QUOI ; la liste des titres répond directement à la seule
+question qui compte, « est-ce que ce commit emporte le travail de quelqu'un d'autre ? ».
+⚠️ Le `--stat` reste utile, mais comme second regard : si son volume ne correspond pas
+à ce qu'on vient d'écrire, on s'arrête.
+✅ Vérifié au commit suivant (la cartographie, `1e6b8fb04`) : deux titres ajoutés, les
+deux de moi, +63 lignes pour à peu près autant d'écrites. Rien d'autre emporté.
+
+### ⛔⛔ QUATRE INSTRUMENTS À MOI ONT FABRIQUÉ DES DÉFAUTS DANS LA MÊME SOIRÉE
+
+Aucun n'était en panne : les quatre rendaient un chiffre, et le chiffre était plausible.
+
+| l'instrument | ce qu'il a dit | la vraie cause |
+|---|---|---|
+| ma passe maths des shorts | « (AB) et (CG) ne se coupent jamais » : **vrai quoi qu'il arrive** | un test CREUX, `not any(isclose(0, 1) …)` — celui que cette note nomme déjà |
+| ma mesure de longueur | **3 shorts sur 6** condamnés | il comptait le point final sur A et B et pas sur C ; sur « 5 », un point DOUBLE la longueur |
+| mon vérificateur de gabarit | **23 signalements, 23 faux** | le clip d'abonnement exempté par sa LONGUEUR (« moins de 40 ») ; il en fait 49 |
+| mon critère de devinabilité | deux « défauts » de même rang | il est BINAIRE : 2 caractères et 6 caractères y sont le même verdict |
+
+⭐⭐ **LE QUATRIÈME EST LE PLUS INSTRUCTIF, parce qu'il ne parle pas d'un bug mais d'un
+CRITÈRE.** La règle de la maison — « la bonne réponse ne doit pas être seule la plus
+longue » — est juste, et écrite telle quelle elle est **sans marge**. Mesuré sur les 12
+shorts : E3 de la géométrie dépasse de **6 caractères sur 7, soit 86 %** (réel, ça se
+devine) ; E6 dépasse de **2 caractères sur 10, soit 20 %** (deux caractères sur une
+locution courte ne se devinent pas). Le même verdict pour les deux, et ce ne sont pas
+les mêmes défauts.
+
+⛔ **Un seuil sans marge est un seuil qui crie trop — et crier trop fait corriger des
+textes qui allaient bien.** C'est le coût réel : un WAV refait pour rien, et une voix
+juste abîmée.
+
+⭐ **D'où la forme que prend désormais ce contrôle dans
+`verifier-voix-shorts-espace.py`** : il ne tranche pas, il sort une **ALERTE qui porte
+l'écart en caractères ET en pourcentage**, et c'est un humain qui décide. Le mettre en
+ERREUR rendrait « 0 erreur » inatteignable — la leçon de `verifier-zone-margo.py`.
+⭐ **Et un rapport qui cite cette règle donne l'écart, jamais le verdict seul.**
+
+### ⭐⭐ CE QUI A MANQUÉ AUX QUATRE : UN TÉMOIN NÉGATIF
+
+Les quatre avaient un étalonnage, ou auraient pu l'avoir, et il ne les aurait pas
+attrapés : **un étalonnage plante UNE faute, à UN endroit.** Il prouve que cette
+assertion-là peut crier, jamais que les autres le peuvent, ni qu'elles savent **se
+taire**.
+
+⭐ Ce qu'il faut en plus, et qui a tenu : **un témoin NÉGATIF** — un cas voisin où la
+chose est vraie et où l'outil ne doit RIEN dire. `verifier-voix-shorts-espace.py` en
+porte cinq : une question simple, une question qui cite **deux sommets avant ses choix**
+(muet), un ordre « A C B » cassé (crie), une devinabilité franche (crie), un ex æquo et
+une bonne plus courte (muet).
+⛔ **Une exemption jamais mise à l'épreuve n'est pas une exemption**, et un instrument
+qui n'a jamais eu tort n'a peut-être jamais rien mesuré.
+
+### ⭐⭐ TROIS DÉSACCORDS DANS LA SOIRÉE, ET AUCUN NE PORTAIT SUR UN NOMBRE
+
+La règle la plus transférable de la journée, et elle a été payée trois fois entre deux
+sessions qui avaient **toutes les deux raison** :
+
+| ce qui paraît être un désaccord | ce que chacun mesurait |
+|---|---|
+| « 12 sur 12 rendent A B C, aucune n'a de D » contre « j'ai trouvé un D » | le clip `02-question` seul, contre la voix ENTIÈRE |
+| « ton “un D” est un sous-comptage, il y en a six » | les occurrences de la LETTRE D (il y en a bien **une**), contre les citations de lettres HORS CHOIX (il y en a bien **six**) |
+| « 0 faute » des contrôleurs de la série | les 12 PAYSAGES, quand on croyait lire les shorts |
+
+⛔⛔ **Dans les trois cas, les nombres étaient exacts des deux côtés, et l'ENSEMBLE MESURÉ
+était différent.** Aucun des deux ensembles ne contenait l'autre, donc aucun des deux
+chiffres ne corrigeait l'autre — et le mot « sous-comptage », que j'ai employé, affirmait
+une inclusion qui n'existait pas.
+
+⭐ **La règle : un chiffre se donne toujours avec son PÉRIMÈTRE**, et deux chiffres ne se
+comparent que si l'on a dit qu'ils portent sur le même ensemble. « Six » et « un » ne
+se contredisent pas quand l'un compte des citations et l'autre une lettre.
+⚠️ Et le coût n'est pas théorique : une séance entière peut se passer à se disputer sur
+un chiffre au lieu de regarder la ligne — alors que personne ne s'est trompe.
+
+Les comptages exacts, pour qu'on ne les refasse pas : sur les 12 voix de short,
+**42** occurrences de « <lettre> : », dont **36 choix** (3 par short) et **6 hors
+choix** ; répartition **B 14 · A 13 · C 12 · D 1 · E 1 · H 1**. Les deux shorts qui
+dépassent 3 sont E2 (**8**) et E6 (**4**).
+
+### ⛔⛔ DANS CETTE SÉRIE, A À H NOMMENT LES SOMMETS AUTANT QUE LES RÉPONSES
+
+Le chef d'orchestre m'a repris sur une phrase que j'avais écrite sans son périmètre :
+« les 12 voix de short rendent A B C, **aucune n'a de D** ». Mon comptage portait sur le
+seul clip `02-question` ; le sien balayait la voix entière, et il y a trouvé un « D ».
+Nous avions tous les deux raison sur ce que nous mesurions, et ma phrase était fausse au
+pied de la lettre parce qu'elle ne disait pas sur quoi elle portait.
+
+⭐ **Remesuré, clip par clip, et c'est plus fort que ce qu'il avait vu** : il y a **six**
+occurrences de « <lettre> : » qui ne sont pas des choix dans les 12 voix de short.
+
+| short | clip | ce qu'on lit | ce que c'est |
+|---|---|---|---|
+| E2 | `01-idee` | « B : 1, 0, 0. D : 0, 1, 0. E : 0, 0, 1 » | **trois sommets du cube** |
+| E2 | `01-idee` | « à l'opposé de A : 1, 1, 1 » | un sommet |
+| E2 | `02b-reponse` | « De A à H : aucun pas vers B » | deux sommets |
+| E6 | `02b-reponse` | « Réponse B : rien du tout » | une lettre de choix, hors question |
+
+⛔ **Aucun comptage automatique de lettres n'est fiable dans cette série.** Et on ne s'en
+sort PAS en excluant la lettre D : elle n'est qu'un symptôme, les sommets vont de A à H.
+Aujourd'hui aucune de ces occurrences n'est dans un clip de QUESTION — mais rien ne
+l'empêche, il suffirait qu'une question nomme un sommet.
+
+⭐⭐ **Le remède est STRUCTUREL, pas lexical.** Les trois choix forment la fin de la
+question : ils viennent après son dernier « ? », avant « Mets pause », et dans l'ordre
+A puis B puis C. Un sommet cité plus tôt tombe hors de ce segment. C'est la même famille
+que l'exemption par le NOM du clip et non par sa longueur : **on s'appuie sur une
+propriété, jamais sur une coïncidence.**
+
+⭐ Et le durcissement porte ses **témoins**, parce qu'une exemption jamais mise à
+l'épreuve n'est pas une exemption : `--etalonner` passe trois cas construits — une
+question simple, une question qui cite **deux sommets avant ses choix** (qui ne doit rien
+déclencher), et un ordre « A C B » cassé (qui doit crier).
+
+### ✅ LES DOUZE SHORTS ONT ENFIN UN CONTRÔLE DE GABARIT — et il a crie 23 fois pour rien
+
+`verifier-voix-espace.py` ne lit que les 12 PAYSAGES : les douze SHORTS n'avaient aucun
+contrôle de gabarit, de symboles ni de copier-coller. D'où
+`manim/poste2/verifier-voix-shorts-espace.py`, écrit pour **les douze** et pas pour mes
+six — un contrôle qui ne regarderait que la moitié qu'on a écrite soi-même, c'est
+l'étalon pris DANS le périmètre soupçonné. Résultat : **0 erreur, 0 alerte sur 12**,
+après étalonnage (on retire un clip, l'outil crie).
+
+⛔⛔ **Mais son premier jet a rendu 23 signalements, et LES 23 ÉTAIENT FAUX.** Tous sur
+le clip `04-abonne` — « Entraîne-toi sur éleveai point f r. Et abonne-toi ! » —,
+identique dans les 24 voix de la série **par construction** : c'est la signature de la
+maison, pas un copier-coller non relu.
+
+La cause est un choix de ma part qui paraît anodin : j'avais exempté ce clip par sa
+**LONGUEUR** (« moins de 40 caractères »). Il en fait **49**. ⭐⭐ **Un seuil de
+caractères est une coïncidence ; un nom de clip est une propriété.** L'exemption se fait
+donc désormais sur le NOM (`-abonne`), avec la raison écrite à côté — le même principe
+que le `sans_audit` d'un épisode, qui porte toujours sa raison.
+
+⭐ Et la conséquence est celle de `verifier-zone-margo.py`, sous une autre forme : un
+faux positif **STRUCTUREL** rend le critère « 0 erreur » inatteignable, donc inutile —
+et surtout, dans 23 lignes de bruit, une vraie récidive passe inaperçue. ⛔ Un outil qui
+crie toujours ne protège personne.
+
+⚠️ Troisième fois de la journée qu'un instrument À MOI fabrique des défauts : le test
+creux `isclose(0, 1)`, le comptage du point final qui condamnait trois shorts sur six, et
+ces 23 faux positifs. Les trois ont été vus parce qu'on a regardé CE QUE L'OUTIL DIT,
+pas seulement son chiffre final.
+
+### ⛔⛔ UN FILTRE DE DIFF QUI CACHE EXACTEMENT LES LIGNES QU'ON CHERCHE
+
+Trouvé en corrigeant le `02-question` du short de E12. Pour ne garder que les lignes
+changées d'un diff, j'avais écrit le filtre qui semble évident :
+
+```
+git diff HEAD -- <fichier> | grep -E "^[+-]" | grep -v "^[+-][+-]"
+```
+
+Le second `grep` est là pour jeter les en-têtes `---` et `+++`. ⛔ Mais dans un fichier
+**markdown**, une ligne de liste commence par un tiret : une puce modifiée sort donc en
+`-- **02-question** : …` et `+- **02-question** : …`, c'est-à-dire exactement la forme
+`^[+-][+-]`. **Le filtre supprimait toutes les lignes qu'il devait montrer**, et rendait
+un diff VIDE sur une édition parfaitement réelle.
+
+⭐⭐ Ce qui l'a démentie n'est pas un doute, c'est une **contradiction entre trois
+mesures** : `git show HEAD:<fichier>` portait l'ancien texte, `grep` sur le fichier
+portait le nouveau, et le diff était vide. Les trois ne peuvent pas avoir raison
+ensemble. ⭐ `git diff HEAD --stat` a tranché en une ligne : **1 insertion, 1 deletion**.
+
+⚠️ Et le piège a eu deux étages ce jour-là : le premier `git diff` (sans `HEAD`) était
+déjà vide, pour la raison du piège n° 41 des entiers — il compare à l'INDEX, qui reste
+périmé avec la recette de commit par index temporaire. J'ai donc lu **deux zéros faux
+d'affilée, de deux causes différentes**, et le second ressemblait à une confirmation du
+premier.
+
+⭐ La règle : **un diff se compte avec `--stat` avant d'être lu avec un filtre.** Le
+`--stat` ne passe par aucun `grep` à soi, et c'est lui qui dit si l'on cherche quelque
+chose qui existe. C'est la même leçon que « compter avec `grep -o`, jamais avec `^` »
+sur les journaux d'audit : le filtre qu'on écrit pour lire une sortie fait partie de
+l'instrument, et il n'est pas étalonné.
+
+### ✅ LE 02-QUESTION DE E12 EST CORRIGÉ — la bonne réponse était SEULE la plus longue
+
+Mesuré sur les six, ponctuation finale retirée partout : `defi` sortait à **28 / 13 / 25**
+avec la bonne en A, donc devinable sans calculer. Réécrit en **15 / 16 / 21**, la plus
+longue devenant un leurre, et surtout **les trois tournures rendues parallèles** (« au
+tiers de A G », « au milieu de A G », « aux deux tiers de A G ») — la forme commune
+compte plus que la longueur.
+⭐ Régénération **sans toucher aux 23 autres voix**, dont 18 ne sont pas à moi : on
+SUPPRIME le seul fichier à refaire et on lance l'extracteur **sans `--tout`**, qui n'écrit
+que ce qui manque (« 1 fichier écrit, 23 déjà présents »). 217 marques au lieu de 216.
+
+### ⭐ LE TIRAGE DES LETTRES DES SHORTS EST COMPLET
+
+E1–E6 étaient tirées (B C A C A B). Les six du produit scalaire : **A C B C B A**,
+graine **2311**, 4ᵉ essai, sous les trois contraintes du `.md` (pas le B de E6 sur E7,
+jamais deux fois la même de suite, et retomber sur A 4 · B 4 · C 4 sur les douze).
+⛔ Pas choisies à la main : la commande se rejoue et redonne la même suite. La table en
+tête de `VOIX-espace-terminale.md` est à jour, et
+`controler-maths-shorts-ps-espace.py` vérifie que chaque voix annonce bien SA lettre.
+
+### ⚠️ LE LANCEUR DE WAV A DÛ ÊTRE DÉDOUBLÉ, ET C'EST VOULU
+
+`voix-espace-tous-les-wav.sh` ne porte que les 12 PAYSAGES, et il est partagé. Pendant
+que j'écrivais, la session des shorts de la géométrie travaillait dans le même dossier.
+⭐ Chaque moitié a donc son lanceur — `manim/poste2/voix-ps-espace-shorts-wav.sh` pour
+les six du produit scalaire — et les deux appellent **exactement la même chaîne**, avec
+`-Debit -6` aux DEUX étapes. ⛔ Deux écrivains ne touchent jamais le même fichier.
+
+### ✅ LE « 577 » DU SHORT DE E10 N'EST PAS UN DÉFAUT — remesuré, pas reconnu
+
+Le convertisseur signale deux fois « 01-idee / « 577 » : introuvable dans le texte ».
+La note dit déjà que ce symptome est bénin **sur le paysage** de E10 ; ce n'est pas une
+raison d'y croire ici. Mesuré sur CE fichier :
+
+| mesure | valeur |
+|---|---|
+| occurrences de « 577 » dans le texte du clip | **1** |
+| offset réel de « 577 » | **333** (le texte en fait 337) |
+| marque posée à cet offset | **oui, 333** |
+| offsets des 65 marques du clip | **strictement croissants** |
+
+WinRT lit « 577 » « cinq cent soixante-dix-sept » et émet donc TROIS cues pour une
+occurrence ; le convertisseur garde la bonne et saute les deux autres **sans avancer**.
+⭐ Et ici c'est plus sûr encore que sur le paysage : « 577 » est le **dernier mot du
+clip**, donc même un mauvais saut ne pourrait déplacer aucune marque en aval.
+
+### ⏳ CE QUI RESTE SUR CES SIX SHORTS, ET LA QUESTION OUVERTE
+
+Les 6 scripts Manim. ⚠️ **Le modèle a changé sous le brief** : il annonçait
+`manim/scripts/terminale/suite_*_short.py`, mais la session des shorts de la géométrie a
+écrit entre-temps un socle propre à cette série, `espace_commun_short.py` (29 ko) et
+`espace_mesure_short.py`, **modifiés pendant que je mesurais**. Mes six shorts doivent
+donc s'asseoir sur CE socle, pas sur celui des suites — mais il bouge, et il n'est pas
+à moi. ⛔ Je n'ai pas écrit les scripts sur une cible mobile : la question est posée au
+chef d'orchestre.
+
 ## ⛔⛔ Les marques : « 0,5 » vaut TROIS marques
 
 WinRT émet une marque par mot **prononcé**, pas par mot écrit. Il lit « 0,5 » comme
@@ -1326,7 +2382,7 @@ les met en défaut **dans les deux sens** — six cues gardées pour une, ou une
 La règle qui manquait est comptée, pas devinée : **une décimale vaut exactement 3 cues par
 occurrence**, donc on garde la première de chaque groupe de 3. Détail, chiffres et effet
 sur E2 : « Ce que l'épisode 6 a appris ».
-⚠️ Il reste `ps_espace_angle` (2 cues non placées, « 577 ») — à regarder en écrivant E10.
+✅ `ps_espace_angle` : ses 2 cues « 577 » ne sont pas un défaut (voir E10).
 
 ## ⛔ Écrire un nombre à la française
 
@@ -1418,10 +2474,323 @@ sa tête, après 20 rendus HD.
 - ⚠️ **Les centres d'intérêt sont une liste FERMÉE** (`lib/videos/centres-interet.ts`, 18
   entrées, chacune avec ses tranches d'âge). ⛔ `metiers` **n'existe pas**. La terminale est
   la tranche `15-18`, qui en ouvre 16. Contrôle : `node scripts/verifier-centres-age.mjs`.
-- ⭐ Le cube `ABCDEFGH` dans le repère (A ; AB, AD, AE) revient dans **9 épisodes sur 12** :
+- ⭐ Le cube `ABCDEFGH` dans le repère (A ; AB, AD, AE) — **7 voix sur 12 en parlent,
+  6 scripts le dessinent** (mesuré, voir plus haut) :
   A(0;0;0), B(1;0;0), C(1;1;0), D(0;1;0), E(0;0;1), F(1;0;1), G(1;1;1), H(0;1;1).
 
 ---
+
+## ⛔⛔ Ce que les SHORTS ont appris (23/11/2026) — les six de la géométrie, E1 à E6
+
+*(écrit par la session qui a produit les six shorts de `geometrie_espace`. Les six
+paysages étaient livrés en HD ; il n'y avait **aucune voix de short** dans la série.
+⛔ Aucun rendu HD de ces six-là : tout a été contrôlé en `-ql`, et Frédéric regarde les
+planches d'abord — chemins absolus dans mon rapport au chef.)*
+
+État à la fin : **6 voix, 36 WAV, 1 006 marques, 0 cue non placée, 6 scripts, 0 BORD,
+0 AUDIT-AVANCE, 0 RETARD, 1 AUDIT-ABSENT par short** (`@eleveai974`, celui que les
+épisodes publiés portent aussi), **0 NU** à l'audit des flèches sur les 20 scripts.
+
+### ⭐⭐ LE 9:16 N'EST PAS UN 16:9 PLUS ÉTROIT : C'EST UNE COLONNE PLEINE
+
+Toutes les cotes de la série sont celles du paysage, et **aucune ne se transporte**.
+Mesuré avant d'écrire un écran :
+
+| ce qu'on croyait savoir | en paysage | dans un short |
+|---|---|---|
+| la marge de 3 % | x ±6,68 · y ±3,573 | **x ±2,115 · y ±3,865** |
+| la boîte de Ti-Margo | x ∈ [5,54 ; 6,66], **haut à −2,15** | centrée en bas, **haut à −2,92** |
+| la largeur offerte à un texte | 4,40 dans la colonne de droite | **3,90**, et c'est toute la page |
+| le nombre de colonnes | deux (figure à gauche, texte à droite) | **une** |
+
+⛔⛔ **Et la conséquence est structurelle, pas cosmétique : en 9:16 il n'y a PAS de
+« sous les cartes ».** Sous le bloc de cartes d'une question-pause, il ne reste que
+« Mets pause, et choisis ! » et Ti-Margo. Toute correction, toute explication, tout
+leurre commenté doit tenir **au-dessus** des cartes, dans la place que la tête de
+question et la question libèrent en s'effaçant — mesuré : 1,68 d'unité, pas plus.
+⭐ Le défaut « l'écran de réponse hérite », qui a cinq récidives dans les paysages, prend
+donc ici une forme neuve : il ne s'agit plus de lister ce qui reste, il s'agit de savoir
+qu'on n'a qu'un seul endroit où écrire.
+
+### ⭐⭐ LA PLACE N'EST PAS UN RÉGLAGE : TROIS FOIS, IL A FALLU CHANGER DE MOYEN
+
+Trois écrans n'avaient **aucune cote** qui passe, et le balayage de polices (de 30 à
+22 px pour la question × de 30 à 22 pour les cartes, hors rendu) l'a montré avant tout
+rendu. Les trois remèdes ne sont pas des cotes :
+
+| l'écran | ce qui ne passait pas | le moyen qui a remplacé la cote |
+|---|---|---|
+| E5 01, les trois cas | reste + flèche + conclusion sur une ligne : **5,30 de large pour 3,90**, les trois conclusions à **16,5 px** | la rangée est **empilée** (reste au-dessus, conclusion dessous), la flèche a disparu, **la couleur relie** |
+| E2 02b, la correction | deux blocs de texte au-dessus des cartes : 1,82 demandé pour **1,68 de libre** — 0,22 de chevauchement et 0,09 sur les cartes | « un pas vers D, un pas vers le haut » se **montre sur les arêtes [A D] et [D H]** |
+| E6 02, le cube | le cube prend 2,18 de haut ; « Mets pause » tombait à **−3,25** | ⭐ en cherchant la cote, j'ai vu que **la question n'a pas besoin du cube** : elle est générale |
+
+⭐⭐ **La leçon, et c'est la plus utile de la journée : quand un balayage de polices ne
+rend AUCUN couple qui passe, ce n'est pas une cote qui manque, c'est le moyen qui est
+mauvais.** La série a beaucoup de défauts corrigés d'un centième ; ces trois-là ne
+l'étaient pas, et les chercher d'un centième aurait coûté trois tours de rendu.
+
+### ⛔⛔ UNE RÈGLE DE POUCE SUR LA LARGEUR D'UNE LIGNE EST UN DÉFAUT QUI DORT
+
+Premier jet : les lignes coupées à la main, « à peu près 18 caractères ». Mesuré sur les
+six shorts, cinq blocs tombaient de 36 px à **26,6**, de 28 à **20,2**, de 28 à **18,7**
+— et rien ne le dit à l'image tant qu'on ne l'a pas mesuré.
+⭐ `ShortEspace.lignes()` coupe une phrase **en mesurant** : on ajoute un mot tant que le
+`Text` reste sous 3,90. Depuis, zéro réduction sur la prose des six shorts.
+⚠️ Et deux textes gardent une coupe à la main, chacun pour sa raison écrite à côté :
+« arrivée moins départ » (il doit être GRAND) et « Réponds en commentaire ! » (5,23 de
+large à 28 px, donc 20,9 px obtenus d'une seule ligne).
+
+### ⭐⭐ UN `au_fin` QUI CHERCHE SON EXTRAIT PEUT VISER LA MAUVAISE OCCURRENCE
+
+`au_fin("…")` fait un `find`, donc la **première** occurrence. Une ligne dont le texte se
+répète dans le clip — et « 0 moins 0 fait 0 » se répète — serait attendue sur
+l'occurrence d'avant, et s'afficherait **en avance sur la sienne**. C'est le mécanisme
+exact de « un gros AUDIT-TARD cachait une vraie avance », huit fois dans cette série, et
+il était ici **à l'état latent**.
+⭐ Deux remèdes, et il faut les deux :
+1. **`au_fin_pos(décalage, longueur)`** : le découpage d'une phrase connaît déjà le
+   décalage de chaque ligne, on ne cherche plus rien ;
+2. **un garde-fou d'EXÉCUTION** (`_ambigu`) qui crie `AMBIGU` dans le journal du dry run
+   dès qu'un extrait n'est pas unique dans son clip. ⛔ Le contrôle statique
+   (`espace_mesure_short.py --ancres`) ne voit que les appels LITTÉRAUX, et quatre des
+   six shorts posent leurs ancres dans une boucle : invisibles pour lui.
+   ✅ Mesuré sur les six : **0 AMBIGU**.
+
+👉 **L'invariant qui en sort**, et c'est lui qui permet de ne plus relire les TARD un par
+un : tout objet qui porte un nombre est montré par `au_fin_pos`, par un `au_fin` littéral
+unique, ou par `q_montrer_choix` — donc **aucun nombre ne peut être à l'écran avant
+d'être dit**, et les `AUDIT-TARD` restants sont le prix connu de `au_fin`. Le dry run le
+confirme : 0 `AUDIT-AVANCE` sur les six.
+⚠️ Mon premier critère pour trier les TARD comptait les occurrences du NOMBRE : dans une
+série de coordonnées, « 0 » et « 1 » reviennent dix fois par clip, et il signalait **18
+lignes sur 21**. Un instrument qui crie sur tout ne mesure rien.
+
+### ⛔⛔ L'AUDIT DES FLÈCHES RÉPONDAIT « 0 NU » SANS AVOIR REGARDÉ
+
+`auditer-fleches-vecteurs.py` lit six appels : `self.t`, `vec`, `vexpr`, `choix2`,
+`choix3`, `nomme`. Les shorts, eux, passent la plus grande part de leur texte par
+`blocs_phrase`, `lignes`, `eq_mots` et `appel_blocs` — quatre outils qui n'existaient pas
+quand il a été écrit. Son ✅ sur les six shorts ne valait donc rien.
+⭐ `espace_mesure_short.py --fleches` lit ces quatre appels, **avec la règle LUE dans
+l'outil partagé** (son regex, ses `MOTS_CAPS`, sa table `PAS_DES_VECTEURS` et leurs
+raisons, extraits par AST) : pas une copie, qui se serait périmée au premier
+élargissement. Résultat au premier jet : **deux noms nus**, « A G » et « B H » dans la
+question du commentaire de E6 — deux DROITES, qu'un élève de terminale aurait lues comme
+des vecteurs, dans le short dont toute la leçon est de distinguer ce qu'on voit de ce
+qu'on démontre. Écrites **(A G)** et **(B H)**, la convention de l'épisode 8.
+⏳ **Le vrai remède est d'élargir l'outil partagé à ces quatre appels.** Il vit dans
+`manim/poste2/`, que la session du produit scalaire partage : ⛔ ça se décide avec le
+chef, pas tout seul — exactement comme `frac()` dans le socle à l'épisode 12.
+
+### ⚠️ « D » ET « F » SONT POSÉS SUR UNE ARÊTE DU CUBE À TOUTES LES ÉCHELLES
+
+L'épisode 12 l'avait noté « constat, pas correctif », mesuré à u = 1,35. Remesuré sur
+trois échelles, avant d'écrire un écran :
+
+| u | « D » de l'arête la plus proche | « F » de l'arête la plus proche |
+|---|---|---|
+| 1,45 | 0,025 | 0,013 |
+| 1,10 | 0,025 | 0,013 |
+| 1,00 | 0,010 | **0,001** |
+
+⭐ **Ce n'est donc pas une question d'échelle, c'est le décalage par défaut de
+`cube()`.** Les écarts viennent d'une recherche en grille (pas de 0,04 entre −0,5 et
++0,5, à plus de 0,12 de tout segment tracé et à plus de 0,30 des sept autres noms, classé
+par distance au sommet) et vivent dans `ShortEspace.ECARTE_CUBE`.
+⚠️ Et **l'écart dépend de la FIGURE, pas seulement de l'échelle** : avec les deux
+diagonales (A C) et (E B) tracées, la grille ne laisse plus que **6** positions libres à
+« D » et la plus proche s'éloigne à 0,538 du sommet. D'où une seconde table,
+`ECARTE_CUBE_DIAG`. Un écart mesuré sur une autre figure ne vaut pas ici.
+⛔ Et l'instrument a dû être refait : son premier jet ne retrouvait que **9 segments sur
+12** dans les sous-mobjets du cube, parce que les trois arêtes cachées sont des
+`DashedLine`, donc des groupes de tirets. Il reçoit maintenant les douze arêtes
+**calculées**. C'est « un instrument qui ne reçoit qu'une partie de la figure mesure une
+figure qui n'existe pas » (épisode 11), à sa deuxième récidive.
+⏳ **Les cubes de E2, E6, E7, E8 et E9 sont livrés en HD avec le décalage par défaut** :
+constat, et il se décide avec Frédéric devant l'image.
+
+### ⛔⛔⛔ ET MES DEUX ÉCARTS ONT POSÉ « D » SUR « F » — vu à la PLANCHE, par rien d'autre
+
+Premiers écarts mesurés en grille : F (−0,50 ; −0,28) et D (+0,54 ; +0,28). Les deux
+noms sont à plus de 0,12 de toute arête, la mesure disait ✅ — et à la planche du `-ql`,
+**les deux lettres se lisaient comme un seul glyphe au milieu du cube**.
+
+La cause tient en une phrase : **la grille classait par distance au sommet**, donc elle
+prenait la place libre la plus PROCHE, et pour « D » comme pour « F » la plus proche
+était vers l'INTÉRIEUR du cube. Chacun fuyait son arête, et ils se rencontraient.
+⛔ Et ce que la grille ne savait pas : les autres noms n'y étaient comparés qu'à leur
+place **par défaut**. Un contrôle qui ne compare une correction qu'à l'état d'AVANT ne
+voit jamais ce que la correction elle-même a créé. C'est « fuir une flèche pour tomber
+sur une arête » (épisode 9) dans sa forme la plus bête.
+
+⭐ Deux remèdes, et il faut les deux :
+1. la grille cherche **un écart à la fois** — « F » d'abord, puis « D » avec « F » à sa
+   place NOUVELLE — et exige 0,34 entre deux centres de nom en plus de 0,11 de tout
+   segment. Résultat : **F (−0,04 ; −0,20)** et **D (−0,44 ; 0,00)**, tous deux vers
+   l'EXTÉRIEUR ;
+2. `espace_mesure_short.py` compare désormais les mots d'une figure **deux à deux** —
+   c'est `etiquettes()` de l'épisode 8, qui n'existait que dans les mesures des paysages
+   et manquait aux shorts.
+
+⭐ Et la mesure a rendu un second fait, utile pour la suite : avec les deux diagonales
+(A C) et (E B) tracées, la grille garde 541 et 625 positions libres au lieu de 562 et
+647, et **les écarts retenus sont les mêmes**. Il n'y a donc qu'UNE table.
+
+### ⛔⛔ UN NOM DE FIGURE ÉTAIT COMPARÉ À SA FIGURE, ET À RIEN DE CE QU'ON POSE DESSUS
+
+Troisième récidive dans la même journée de « un instrument qui ne reçoit qu'une partie
+de la figure mesure une figure qui n'existe pas » (épisode 11). Chaque bloc était mesuré
+contre ses PROPRES traits : une arête repassée en couleur, un point d'intersection, une
+droite tracée par-dessus échappaient à tout. Vu à la planche du short du défi : le nom
+« F » du cube est à **0,063** de la diagonale (A G), qui vit dans le bloc « + (A G) » et
+pas dans le bloc « cube ». ⭐ Les blocs marqués « + » (posés SUR la figure) entrent
+maintenant dans la mesure de tous les autres.
+
+⭐⭐ **Et pour ce « F »-là il n'y avait PAS de réglage** : la grille rend **0 position
+libre sur 441 essayées**, parce que le cube porte déjà ses deux diagonales. C'est le cas
+que l'épisode 8 avait nommé — « quand la grille ne trouve rien, on n'étiquette pas ».
+L'écran ne nomme plus que les quatre sommets dont la question parle (A, B, G, H), et la
+figure y gagne. ⚠️ `cube_place(..., noms=(…))` existe pour ça.
+
+### ⛔ UN VECTEUR DIRECTEUR EST TOUJOURS PORTÉ PAR SA DROITE — donc il la recouvre
+
+Vu à la planche de E3 : la droite, tracée de t = −0,12 à t = 0,75, était intégralement
+sous la flèche rose du vecteur directeur, qui va de t = 0 à t = 1. On ne voyait qu'un
+moignon orange au départ, et l'écran annonçait « un point, et une direction » en n'en
+montrant qu'une. ⛔ Aucun instrument ne peut le dire : les deux objets sont dans la
+marge, aucun nombre n'est en avance, et ils ne « se touchent » pas — ils se SUPERPOSENT,
+ce qui est l'inverse de ce qu'une mesure d'écartement cherche.
+⭐ La droite va maintenant jusqu'à t = 1,45, donc au-delà de la pointe. C'est le constat
+n° 3 de la passe des flèches (« le vecteur u est invisible sous son double ») dans sa
+forme la plus prévisible, et il faudra y penser à chaque figure « droite + directeur ».
+
+### ⛔ UN CUBE RECENTRÉ PAR `move_to` N'EST PLUS OÙ `r.pt(...)` LE DIT
+
+Bâti autour de l'origine du repère puis recentré, le cube se dessine au bon endroit — et
+toute arête, tout point, toute diagonale qu'un écran ajoute **ensuite** se pose à côté,
+en silence. ⭐ `cube_place` calcule donc l'ORIGINE pour que le cube tombe où on veut
+(le centre projeté du cube unité est à u × (0,705 ; 0,6435)), et ne déplace rien après.
+⚠️ Le symptôme aurait été une arête de couleur décalée de la moitié d'un cube — visible,
+mais seulement à l'image, et après un rendu.
+
+### ⛔ UN BUDGET DE SECONDES SE MESURE, IL NE S'ESTIME PAS
+
+Trois `RETARD` au dry run, et aucun n'était une faute de synchro : c'étaient des
+**animations trop longues avant la phrase suivante**. Un `play` de figure glissé entre
+deux phrases coûte son `run_time` au budget du clip.
+⭐ Deux remèdes mesurés : `jouer_phrase(..., avec=[…])` fait paraître la figure **avec**
+sa légende au lieu de les mettre en file ; et un titre écrit par `Write` pendant la voix
+met la première ligne du clip **0,50 s en retard sur son propre mot** — le titre
+s'AJOUTE avant la voix (le gabarit de `convexite_defi_short.py`, et c'est le bon).
+
+### ⛔ UNE LISTE DE BLOCS SE PREND PAR SON NOM, PAS PAR SON INDEX
+
+En ajoutant « titre » et « badge » en tête de la liste d'un écran, `p["02b"][2][1]` est
+passé de la correction aux cartes, et `jouer_phrase` a cassé sur un VGroup. ⭐ Le dry run
+l'a attrapé en criant fort (`AttributeError`), ce qui est le bon comportement — mais si
+les deux blocs avaient été du même type, il aurait animé le mauvais **en silence**.
+`ShortEspace.par_nom()` existe pour ça.
+
+### ⭐ CE QUI A BIEN MARCHÉ, ET QU'IL FAUT REFAIRE POUR LES SIX SHORTS DU PRODUIT SCALAIRE
+
+- **`pieces(e)` BÂTIT et POSITIONNE, `construct()` ANIME.** L'instrument mesure alors
+  les objets mêmes qui seront rendus — c'est le remède de la cote de Ravi (épisode 10),
+  appliqué à l'architecture et pas à une constante. Rien à synchroniser entre l'écran et
+  sa mesure, parce qu'il n'y a qu'un seul objet.
+- **Mesurer AVANT d'écrire un écran** : l'échelle des ceintures (y de 2,48 à 3,08), la
+  boîte de Ti-Margo (−3,98 à −2,92), la largeur d'une ligne police par police, la place
+  d'un cube selon `u`, la platitude des plans employés. Une demi-heure, et aucun rendu
+  pour rien.
+- **Un balayage de polices hors rendu** (fsq × fsc, de 30 à 22) qui rend le plus GRAND
+  couple tenant les deux contraintes (toute police ≥ 22 px, « Mets pause » au-dessus de
+  −2,87). ⛔ Et il faut se méfier du flottant : `>= 22` refusait 21,99999 et annonçait
+  « aucun couple ne passe » sur deux shorts qui passaient.
+- **Étalonner `verifier-avant-rendu.py` avant de croire son zéro** : une copie du script
+  avec UN `au_mot` faux, puis supprimée. Il a crié ; sur les six vrais, il se tait, et ce
+  silence-là est une preuve.
+- **Les assertions d'import, et elles ont trouvé une figure fausse** : la droite de
+  l'écran 00 de E5 coupait le sol à t = 1,43, hors du segment tracé — l'écran aurait
+  montré une droite qui ne coupe rien sous une légende qui dit le contraire.
+- **Choisir une figure par la MESURE** : (A C) et (E B) se coupent à l'écran aux
+  paramètres **0,589** et **0,831**, tous deux dans ]0 ; 1[, et leur déterminant vaut
+  −1 — elles se croisent pour l'œil et jamais dans l'espace. ⛔ Les paires choisies à vue
+  ratent : (A G) et (B H) se coupent vraiment, au centre du cube.
+- **`eq_mots`, pour ne pas exempter plus que nécessaire** : la voix dit « zéro » en
+  lettres, l'écran écrit le chiffre, donc l'audit crie `AUDIT-ABSENT « 0 »`. Un
+  `sans_audit` sur toute l'équation aurait aussi exempté le « 2 » de « 2t = 0 », le seul
+  nombre qu'il fallait surveiller. ⚠️ Et la règle a dû être élargie : « 0y » et « 0z »
+  n'étaient pas reconnus par « le zéro nu ».
+
+### ⭐⭐ LA PASSE MATHS DE CES SIX VOIX EST DANS LES SCRIPTS, PAS DANS UN SCRIPT À PART
+
+⚠️ On a cru qu'elle manquait, parce qu'on la cherchait sous la forme d'un
+`controler-maths-*.py`. Elle est ailleurs, et sous une forme plus solide : **28
+assertions au niveau du MODULE**, exécutées à l'import de chaque short — donc à chaque
+`verifier-avant-rendu`, à chaque dry run et à chaque rendu, pas une fois dans une
+journée (E1 4 · E2 5 · E3 4 · E4 3 · E5 5 · E6 7). Elles ne relisent pas une phrase,
+elles **refont le calcul** : le vecteur A B et ses deux leurres (la somme, le vecteur
+opposé), H = D + A E, le vecteur directeur lu dans les coefficients de t et la
+non-colinéarité du leurre « signe oublié », la substitution nulle pour tout t, le
+déterminant (A⃗C, E⃗B, A⃗E) = −1, les deux paramètres du croisement apparent.
+⭐ **Et l'instrument a été étalonné** : une copie avec `ABQ == (9, 9, 9)` lève bien
+`AssertionError` ; le silence des six vrais est donc une preuve.
+⛔ Les tableaux de `VOIX-espace-terminale.md` (« Passe MATHS du short de E<n> ») sont la
+relecture, pas la mesure. C'est le même partage que pour les paysages : le tableau dit
+ce qu'on affirme, l'assertion le recalcule.
+⚠️ Ce que ça NE couvre pas : ce qu'aucune assertion ne peut dire, c'est-à-dire la
+pédagogie d'un leurre. Une relecture indépendante reste utile — elle a confirmé les six.
+
+### ⚠️ LA DEVINABILITÉ SE MESURE SUR L'ÉCRAN, PAS SUR LA VOIX
+
+Signalé sur E3 : la bonne réponse « 3, moins 1, 4 » fait **13 caractères** contre 7 et 7
+pour les deux leurres, soit 86 % de plus — la règle maison dit qu'une bonne réponse
+seule plus longue se devine sans calculer.
+⭐ **Mesuré sur ce que l'élève VOIT** : les trois cartes affichent « 3 ; −1 ; 4 »,
+« 2 ; 0 ; 1 » et « 3 ; 1 ; 4 », soit **6, 5 et 5 caractères** et **1,61 · 1,30 · 1,32**
+d'unité de large. L'écart est d'UN glyphe — le signe moins — et de 0,31 d'unité.
+⛔ **Décision : on ne touche pas.** Le signe moins EST la leçon : le leurre C est « le
+signe oublié », et le leurre B est le POINT de la droite, c'est-à-dire une donnée qu'on
+ne choisit pas. Supprimer la coordonnée négative de la bonne réponse supprimerait ce que
+le short enseigne, pour un écart d'un caractère à l'écran.
+⭐⭐ La leçon générale : **un comptage de caractères sur la VOIX ne mesure pas la
+devinabilité d'une carte.** La voix écrit « moins 1 » en lettres, l'écran écrit « −1 ».
+Six caractères d'écart dans un fichier, un glyphe à l'image.
+
+### ⏳ CE QUI RESTE SUR CES SIX SHORTS, ET QUI N'EST PAS DE LA PRODUCTION
+
+- **Les planches `-ql` sont à REGARDER** — c'est la condition de Frédéric, redite le
+  matin du 23/11. ⛔ Rien n'est rendu en HD, et la mesure hors rendu ne prouve pas
+  l'image : « une assertion mesure le modèle, des pixels mesurent l'image — les deux ».
+- **Les gros plans** sur les figures (cube, repères, morceaux de plan) : six épisodes
+  d'affilée ont payé un défaut que seul un recadrage ×2,5 à ×3 montrait.
+- **Les miniatures des shorts sont OBLIGATOIRES** : `publier-youtube.mjs` l. 802 retient
+  tout short sans miniature (règle de Frédéric du 01/11). ⛔ Pour les paysages c'est une
+  perte de qualité ; pour un short, c'est un verrou.
+- **Les entrées de registre** des 12 shorts, et leur `microId` — aucune n'existe.
+- ⛔ **Les six rendus HD** : ils sont autorisés (Frédéric a regardé les six planches le
+  23/11 à 18:57) et ils n'ont PAS été lancés ici. Le verrou n'a jamais été pris.
+
+### 📌 POUR CELLE QUI REPREND LE SOCLE DES SHORTS — trois choses, et rien d'autre
+
+1. ⏳ **`racine = EcransEspace.racine` MANQUE au bloc des emprunts** de
+   `espace_commun_short.py`. Elle remplit le critère (elle n'utilise que `self.t`, pas
+   de `super()`, rien du 16:9) et elle est nécessaire dès qu'un short écrit une racine :
+   le glyphe √ se rend **sans aucune barre**, donc « √3² + 4² » se lirait « (√3²) + 4² »
+   — la faute même que ce genre d'épisode combat. ⚠️ Deux pièges que son en-tête
+   signale : `.nb` rend le radicande SEUL (sans quoi une carte affiche son nombre avant
+   que la voix le dise), et un radical est plus HAUT qu'un texte de même police (0,07),
+   donc toute cote d'un bloc qui en gagne un se remesure.
+2. ⚠️ **L'API du socle a bougé APRÈS le point fixe `b69199f81`** : `cube_place` a gagné
+   le mot-clé **`noms=None`** (ne nommer que certains sommets). C'est un AJOUT à valeur
+   par défaut, donc rien de ce qui est écrit contre `b69199f81` ne casse. ⛔ Et les
+   valeurs de `ECARTE_CUBE` ont changé, elles : voir la section sur « D » posé sur « F ».
+3. ⭐⭐ **Comment `--fleches` reste juste sans recopier la règle, et c'est ça qu'il faut
+   transmettre, pas le code.** Il ne duplique ni le regex d'un nom de vecteur, ni
+   `MOTS_CAPS`, ni la table `PAS_DES_VECTEURS` : il les **lit dans l'AST** de
+   `manim/poste2/auditer-fleches-vecteurs.py`, par `ast.literal_eval` de ses
+   affectations. Une règle recopiée à deux endroits se périme à un seul — et celle-ci a
+   déjà été élargie deux fois. ⛔ Si l'outil partagé change de forme (un nom
+   d'affectation qui disparaît), le contrôle le DIT et rend 1 au lieu de se taire.
 
 ## Le rendu HD
 

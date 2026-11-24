@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Dans le cube, le plan B D E coupe la grande diagonale. En son milieu ? Non.",
+  "01-idee": "Le plan B D E a pour équation x plus y plus z moins 1 égale zéro, donc pour vecteur normal 1, 1, 1. La droite qui part de A et suit cette normale a pour représentation paramétrique x égale t, y égale t, z égale t. On remplace dans l'équation : trois t moins 1 égale zéro, donc t vaut un tiers. Le projeté de A a pour coordonnées un tiers, un tiers, un tiers.",
+  "02-question": "Question ! Ce point est donc situé où, sur la grande diagonale A G ? A : au tiers de A G. B : au milieu de A G. C : aux deux tiers de A G. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A. Le vecteur A G a pour coordonnées 1, 1, 1, et le projeté a pour coordonnées un tiers, un tiers, un tiers : c'est exactement un tiers du vecteur A G. Le milieu, ce serait un demi partout, et les deux tiers, deux tiers partout — et ni l'un ni l'autre ne vérifie l'équation du plan. Le plan coupe bien la diagonale à son premier tiers.",
+  "03-commentaire": "À toi ! Quelle est alors la distance du point A au plan B D E ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

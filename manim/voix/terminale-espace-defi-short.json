@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Deux droites qui se croisent sur le dessin, et qui ne se rencontrent jamais. Ne conclus jamais sur une figure.",
+  "01-idee": "Dans le cube A B C D E F G H, trace la droite A C, puis la droite E B. Sur la figure, les deux traits se coupent. Pourtant A C reste au sol et E B descend du haut du cube au sol : aucun point commun, et aucun plan ne les contient toutes les deux.",
+  "02-question": "Question ! Deux droites semblent se croiser en perspective. Que conclure ? A : sécantes. B : rien du tout. C : parallèles. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B : rien du tout. Une perspective écrase une direction : deux droites qui ne se rencontrent pas peuvent se superposer à l'écran. On écrit les coordonnées, et c'est le calcul qui conclut.",
+  "03-commentaire": "À toi ! Dans le même cube, les droites A G et B H ont-elles un point commun ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

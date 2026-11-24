@@ -1,11 +1,21 @@
 # Fiches YouTube — série « GÉOMÉTRIE DANS L'ESPACE », terminale spé
 
-⛔ **Rien n'est écrit dans `manim/manifeste-youtube.json` par cette session.** Ce registre
-est partagé, et une copie de travail ment : il se commit **par clés**
-(`manim/outils-commit-cles.py`). Les entrées prêtes sont ici, à reporter au moment de la
-publication, quand la miniature existe.
+✅ **LES NEUF ÉPISODES RENDUS SONT DANS `manim/manifeste-youtube.json` (23/11/2026).**
+Ils n'y étaient pas : mesuré le 22/11, le registre portait 1 707 vidéos et **zéro**
+entrée « espace ». Neuf vidéos existaient en HD et n'atteignaient personne.
 
-⚠️ Il manque la **miniature** de chaque épisode (`…/<slug>.png`) : aucun des douze n'en a.
+⛔ **Ce fichier-ci n'est plus la source du registre : il en est la source RÉDIGÉE.**
+Le report est fait par `python -X utf8 manim/poste2/fiches-espace-vers-registre.py`
+(`--ecrire` pour toucher le registre), qui relit les blocs JSON, l'accroche et les
+chapitres d'ici, va chercher la lettre et l'instant de chaque question dans le JOURNAL
+DU RENDU HD, le texte des questions dans la VOIX, et **refuse d'écrire** si les trois
+sources ne disent pas la même lettre. ⛔ Ne plus recopier une entrée à la main : une
+liste tenue à la main à côté d'un registre est l'accident déjà arrivé trois fois ici.
+Le registre est partagé : le commit se fait **par clés** (`manim/outils-commit-cles.py`).
+
+⚠️ **Il manque la miniature de chaque épisode** (`…/<slug>.png`) : aucun des douze n'en
+a, et le chemin est déclaré dans l'entrée. ⛔ **`publier-youtube.mjs` ne peut donc pas
+publier** — c'est le seul verrou qui reste entre ces neuf vidéos et un élève.
 ⚠️ Et tant qu'une vidéo n'est pas publiée, `brancher-videos-coach.mjs` répond « Rien à
 brancher » — mesuré le 22/11 sur `--classe terminale-spe`.
 
@@ -51,12 +61,13 @@ Durée inchangée — rien de la voix n'a bougé, seul l'écran.
 >
 > Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
 
-⚠️ **Chapitres** : le champ `chapitres` du manifeste attend des horodatages. Ceux de E1,
-relevés sur le rendu (lignes `ECRAN` du journal) :
-0:00 garde · 0:12 Nadia · 0:33 arrivée moins départ · 0:57 les règles · 1:15 question 1 ·
-1:39 réponse · 1:55 somme et multiple · 2:14 le piège · 2:36 question 2 · 3:03 réponse ·
-3:22 au bac · 3:43 à toi de jouer · 4:10 correction · 4:39 ce que tu as appris.
-
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Trois nombres au lieu de deux · 0:12 Nadia place ses drones avec trois nombres · 0:33
+Arrivée moins départ · 0:57 Les règles · 1:15 Question 1 · 1:39 Réponse : un vecteur
+vertical · 1:55 Somme et multiple · 2:14 Le piège · 2:36 Question 2 · 3:03 Réponse : le même
+facteur pour les trois coordonnées · 3:22 Au bac · 3:43 À toi de jouer · 4:10 Correction ·
+4:39 Ce que tu as appris.
 ---
 
 ## E2 · `terminale-espace-repere-coordonnees` — ✅ rendu HD fait (REFAIT le 22/11 : notation fléchée)
@@ -103,12 +114,13 @@ que l'écran démontre. Durée inchangée, rien de la voix n'a bougé.
 >
 > Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
 
-**Chapitres**, relevés sur le rendu :
-0:00 garde · 0:11 Lila · 0:34 le repère du cube · 1:09 le milieu · 1:29 question 1 ·
-1:54 réponse · 2:15 les diagonales · 2:54 le piège du pavé · 3:31 question 2 ·
-3:52 réponse · 4:12 la première ligne de la copie · 4:35 à toi de jouer ·
-4:53 correction · 5:29 ce que tu as appris.
-
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Trois nombres, une moyenne, un repère · 0:11 Lila et les adresses à trois nombres de
+l'entrepôt · 0:34 Le repère du cube · 1:09 Le milieu · 1:29 Question 1 · 1:54 Réponse : le
+milieu, moyenne par moyenne · 2:15 Les diagonales · 2:54 Le piège du pavé · 3:31 Question 2
+· 3:52 Réponse : un pas dans chacune des trois directions · 4:12 La première ligne de la
+copie · 4:35 À toi de jouer · 4:53 Correction · 5:29 Ce que tu as appris.
 ---
 
 ## E3 · `terminale-espace-droite-parametrique` — ✅ rendu HD fait (REFAIT le 22/11 : notation fléchée)
@@ -159,12 +171,13 @@ périme si la voix est régénérée (piège n° 37 de la série des entiers).
 >
 > Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
 
-**Chapitres**, relevés sur le rendu :
-0:00 garde · 0:11 Soraya · 0:38 un point, une direction · 1:08 tout se lit dans les trois
-lignes · 1:28 question 1 · 1:52 réponse · 2:17 tester un point · 2:48 le piège ·
-3:27 question 2 · 3:52 réponse · 4:17 au bac · 4:42 à toi de jouer · 5:01 correction ·
-5:30 ce que tu as appris.
-
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Un point de départ, une direction, un curseur · 0:11 Soraya suit un avion en montée sur
+son écran · 0:38 Un point, une direction · 1:08 Tout se lit dans les trois lignes · 1:28
+Question 1 · 1:52 Réponse : le vecteur directeur se lit sur les coefficients de t · 2:17
+Tester un point · 2:48 Le piège · 3:27 Question 2 · 3:52 Réponse : on teste t sur les trois
+lignes · 4:17 Au bac · 4:42 À toi de jouer · 5:01 Correction · 5:30 Ce que tu as appris.
 ---
 
 ## E4 · `terminale-espace-plan-equation` — ✅ rendu HD fait
@@ -211,11 +224,13 @@ périme si la voix est régénérée (piège n° 37 de la série des entiers).
 >
 > Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
 
-**Chapitres**, relevés sur le rendu :
-0:00 garde · 0:11 Jean-Bernard · 0:34 une équation, un plan · 1:08 si et seulement si ·
-1:25 question 1 · 1:47 réponse · 2:12 trouver l'équation · 2:48 le piège · 3:26 question 2 ·
-3:45 réponse · 4:15 au bac · 4:39 à toi de jouer · 5:03 correction · 5:39 ce que tu as appris.
-
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Une seule équation, trois inconnues · 0:11 Jean-Bernard pose un pan de toiture · 0:34
+Une équation, un plan · 1:08 Si et seulement si · 1:25 Question 1 · 1:47 Réponse : le point
+qui annule l'équation · 2:12 Trouver l'équation · 2:48 Le piège · 3:26 Question 2 · 3:45
+Réponse : « y égale 1 » est un plan, pas une droite · 4:15 Au bac · 4:39 À toi de jouer ·
+5:03 Correction · 5:39 Ce que tu as appris.
 ---
 
 ## E5 · `terminale-espace-position-relative` — ✅ rendu HD fait
@@ -267,12 +282,13 @@ surplus est constant dans chacun. **Aucun écran de question touché** — c'est
 >
 > Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
 
-**Chapitres**, relevés sur le rendu :
-0:00 garde · 0:10 la route et le pont · 0:33 droite et plan · 1:16 trois cas ·
-1:39 question 1 · 2:06 réponse · 2:32 deux plans · 3:07 le piège · 3:42 question 2 ·
-4:07 réponse · 4:28 au bac · 5:01 à toi de jouer · 5:25 correction ·
-6:06 ce que tu as appris.
-
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Ne jamais se rencontrer sans être parallèles · 0:10 La route et le pont · 0:33 Droite
+et plan · 1:16 Trois cas · 1:39 Question 1 · 2:06 Réponse : « 3 égale zéro » est faux pour
+tout t · 2:32 Deux plans · 3:07 Le piège · 3:42 Question 2 · 4:07 Réponse : aucun point
+commun ne veut pas dire parallèles · 4:28 Au bac · 5:01 À toi de jouer · 5:25 Correction ·
+6:06 Ce que tu as appris.
 ---
 
 ## E6 · `terminale-espace-defi` — ✅ rendu HD fait (REFAIT le 22/11 : notation fléchée)
@@ -309,7 +325,7 @@ les quatre écrans où il porte quelque chose.
   "type": "longue",
   "fichier": "terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi.mp4",
   "miniature": "terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi.png",
-  "titre": "Trois points sont toujours dans un même plan — et ça ne démontre rien · Exercice type bac dans l'espace · Tle spé",
+  "titre": "Trois points sont toujours coplanaires : ça ne prouve rien · Exercice type bac · Tle spé",
   "centres": ["jeux-defis"],
   "tags": ["exercice type bac", "cube ABCDEFGH", "repère de l'espace", "alignement", "colinéarité", "intersection droite plan", "espace", "terminale", "bac"]
 }
@@ -337,12 +353,13 @@ les quatre écrans où il porte quelque chose.
 > leur point d'intersection — qui est le centre du cube, et ce n'est pas un hasard.
 > Entraîne-toi sur eleveai.fr
 
-**Chapitres**, relevés sur le rendu :
-0:00 garde · 0:10 toujours la même forme · 0:37 avant tout calcul · 1:01 la boîte à
-outils · 1:28 question 1 · 1:56 réponse · 2:19 montrons un alignement · 2:58 le piège ·
-3:38 question 2 · 4:05 réponse · 4:30 le squelette d'une copie · 4:54 à toi de jouer ·
-5:22 correction · 6:19 ce que tu as appris.
-
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Un cube, un repère, quatre questions · 0:10 Toujours la même forme · 0:37 Avant tout
+calcul · 1:01 La boîte à outils · 1:28 Question 1 · 1:56 Réponse : le centre du cube est le
+milieu de [AG] · 2:19 Montrons un alignement · 2:58 Le piège · 3:38 Question 2 · 4:05
+Réponse : chercher k tel que AC = k AB · 4:30 Le squelette d'une copie · 4:54 À toi de jouer
+· 5:22 Correction · 6:19 Ce que tu as appris.
 ---
 
 ## E7 · `terminale-ps-espace-calculer` — ✅ rendu HD fait
@@ -379,7 +396,7 @@ invisibles sur la vignette à trois colonnes.
   "type": "longue",
   "fichier": "terminale/maths/geometrie/ps-espace-calculer/eleveai-maths-terminale-ps-espace-calculer.mp4",
   "miniature": "terminale/maths/geometrie/ps-espace-calculer/eleveai-maths-terminale-ps-espace-calculer.png",
-  "titre": "Un produit scalaire est un NOMBRE, pas un vecteur · Le calculer en coordonnées dans l'espace · Tle spé",
+  "titre": "Un produit scalaire est un NOMBRE, pas un vecteur · Le calculer dans l'espace · Tle spé",
   "centres": ["sport"],
   "tags": ["produit scalaire", "espace", "coordonnées", "repère orthonormé", "norme", "orthogonalité", "cube ABCDEFGH", "terminale", "bac"]
 }
@@ -410,13 +427,14 @@ invisibles sur la vignette à trois colonnes.
 > produits scalaires pour comparer deux angles si les normes diffèrent.
 > Entraîne-toi sur eleveai.fr
 
-**Chapitres**, relevés sur le rendu :
-0:00 garde · 0:10 Kelly, la part du vent qui pousse · 0:39 le calcul en
-coordonnées · 1:12 trois choses à retenir · 1:35 question 1 · 2:00 réponse ·
-2:35 le cas u · u · 3:01 on ne simplifie jamais · 3:45 question 2 · 4:09 réponse ·
-4:38 deux lignes, mais écrites · 5:00 à toi de jouer · 5:20 correction ·
-6:06 ce que tu as appris.
-
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Deux vecteurs, trois multiplications, une addition · 0:10 Kelly, la part du vent qui
+pousse · 0:39 Le calcul en coordonnées · 1:12 Trois choses à retenir · 1:35 Question 1 ·
+2:00 Réponse : zéro, et ce zéro veut dire quelque chose · 2:35 Le cas u · u · 3:01 On ne
+simplifie jamais · 3:45 Question 2 · 4:09 Réponse : un produit scalaire nul entre deux
+vecteurs non nuls · 4:38 Deux lignes, mais écrites · 5:00 À toi de jouer · 5:20 Correction ·
+6:06 Ce que tu as appris.
 ---
 
 ## E8 · `terminale-ps-espace-orthogonalite` — ✅ rendu HD fait
@@ -454,7 +472,7 @@ visage — la visière de Jean-Bernard (E4) à sa deuxième récidive.
   "type": "longue",
   "fichier": "terminale/maths/geometrie/ps-espace-orthogonalite/eleveai-maths-terminale-ps-espace-orthogonalite.mp4",
   "miniature": "terminale/maths/geometrie/ps-espace-orthogonalite/eleveai-maths-terminale-ps-espace-orthogonalite.png",
-  "titre": "Un produit scalaire nul, et c'est prouvé — mais pour un plan, il en faut DEUX · Démontrer une orthogonalité dans l'espace · Tle spé",
+  "titre": "Pour un plan, il en faut DEUX · Démontrer une orthogonalité dans l'espace · Tle spé",
   "centres": ["sciences"],
   "tags": ["orthogonalité", "produit scalaire", "espace", "vecteur normal", "plan", "droite orthogonale à un plan", "cube ABCDEFGH", "terminale", "bac"]
 }
@@ -484,13 +502,14 @@ visage — la visière de Jean-Bernard (E4) à sa deuxième récidive.
 > (A G) est orthogonale au plan (BDE). Une figure qui revient tous les ans.
 > Entraîne-toi sur eleveai.fr
 
-**Chapitres**, relevés sur le rendu :
-0:00 garde · 0:09 Marc, le poteau vérifié dans un seul sens · 0:36 le test de
-l'orthogonalité · 1:04 le théorème du chapitre · 1:28 question 1 · 1:57 réponse ·
-2:29 le théorème du poteau · 3:08 un seul ne suffit pas · 3:51 question 2 ·
-4:19 réponse · 4:39 cinq lignes, et la quatrième compte · 5:12 à toi de jouer ·
-5:30 correction · 6:31 ce que tu as appris.
-
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Un produit scalaire nul, et c'est prouvé · 0:09 Marc, le poteau vérifié dans un seul
+sens · 0:36 Le test de l'orthogonalité · 1:04 Le théorème du chapitre · 1:28 Question 1 ·
+1:57 Réponse : la somme des trois produits est nulle · 2:29 Le théorème du poteau · 3:08 Un
+seul ne suffit pas · 3:51 Question 2 · 4:19 Réponse : une seule direction ne suffit jamais ·
+4:39 Cinq lignes, et la quatrième compte · 5:12 À toi de jouer · 5:30 Correction · 6:31 Ce
+que tu as appris.
 ---
 
 ## E9 · `terminale-ps-espace-norme-distance` — ✅ rendu HD fait
@@ -534,7 +553,7 @@ assertion du module.
   "type": "longue",
   "fichier": "terminale/maths/geometrie/ps-espace-norme-distance/eleveai-maths-terminale-ps-espace-norme-distance.mp4",
   "miniature": "terminale/maths/geometrie/ps-espace-norme-distance/eleveai-maths-terminale-ps-espace-norme-distance.png",
-  "titre": "Dix kilomètres à plat et un de dénivelé ne font pas onze · Calculer une norme ou une distance dans l'espace · Tle spé",
+  "titre": "10 km à plat et 1 de dénivelé ne font pas 11 · Norme et distance dans l'espace · Tle spé",
   "centres": ["sport"],
   "tags": ["norme", "distance", "espace", "racine carrée", "Pythagore", "valeur exacte", "cube ABCDEFGH", "diagonale", "terminale", "bac"]
 }
@@ -566,12 +585,302 @@ assertion du module.
 > 3 pour la grande diagonale, et a racine de 2 / a racine de 3 si l'arête mesure a.
 > Entraîne-toi sur eleveai.fr
 
-**Chapitres**, relevés sur le rendu :
-0:00 garde · 0:10 la Diagonale des Fous · 0:44 la norme d'un vecteur ·
-1:11 une distance est une norme · 1:29 question 1 · 1:45 réponse ·
-2:14 d'un point à l'autre · 2:37 la racine ne se distribue pas · 3:15 question 2 ·
-3:40 réponse · 4:13 trois lignes, toujours dans cet ordre · 4:37 à toi de jouer ·
-4:56 correction · 5:39 ce que tu as appris.
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Trois carrés, une racine · 0:10 La Diagonale des Fous · 0:44 La norme d'un vecteur ·
+1:11 Une distance est une norme · 1:29 Question 1 · 1:45 Réponse : 3, en élevant au carré
+d'abord · 2:14 D'un point à l'autre · 2:37 La racine ne se distribue pas · 3:15 Question 2 ·
+3:40 Réponse : 5, la norme d'un vecteur vertical · 4:13 Trois lignes, toujours dans cet
+ordre · 4:37 À toi de jouer · 4:56 Correction · 5:39 Ce que tu as appris.
+---
+
+## E10 · `terminale-ps-espace-angle` — ✅ rendu HD fait
+
+`manim/sorties/terminale/maths/geometrie/ps-espace-angle/eleveai-maths-terminale-ps-espace-angle.mp4`
+6 min 35 (394,98 s) · 24,8 Mo · **0 instant qui touche un bord** · planche HD regardée.
+⭐ Marques : **861**, fichier identique à celui du dépôt (`git diff --stat` vide) : le rendu est calé
+sur des marques à jour, et le contrôle par le CONTENU le prouve.
+⭐ `grep -c "self\.au_t("` → **0** : aucun instant relevé à la main.
+⚠️ `verifier-zone-margo --pas 1.0` : **37 instants**, en DEUX plages seulement — 0 à 9 s et 368 à
+394 s. La soustraction tranche : garde 10,33 s (mascotte à 0,8) + finale 20,31 s (0,65) +
+abonnement 6,70 s (0,9) = **37,34 s**, pour 37 relevés au pas de 1 s.
+**Aucun écran de question touché** (04 : 101 → 125 s ; 07 : 217 → 244 s) : c'est le critère.
+⭐ Dry run `-qh` : **15 écrans, 0 BORD, 0 AUDIT-AVANCE, 0 RETARD**, et un seul
+`AUDIT-ABSENT`, celui de `@eleveai974` que les épisodes publiés portent aussi. Les 9
+`AUDIT-TARD` sont tous ≤ 1,75 s et relus à la main : c'est la durée des animations.
+⭐⭐ **Les 2 cues « 577 » ne sont pas un défaut.** « 577 » n'apparaît qu'une fois dans le
+texte du clip ; WinRT en a émis TROIS (25,50 / 25,82 / 26,09 s), parce qu'il le lit
+« cinq cent soixante-dix-sept ». Le convertisseur place la première à l'offset 326 et
+saute les deux autres SANS avancer : la marque est au bon endroit et les 41 suivantes du
+clip sont justes. ⚠️ Ce n'est pas la règle « une décimale vaut 3 cues » (E6) — « 577 »
+est un ENTIER lu en trois mots, et c'est le garde-fou `SAUT_MAXI` qui fait le travail.
+**Un entier long (577, 101, 180) se comporte comme une décimale** : à savoir pour E11/E12.
+⛔⛔ **Aucune figure d'angle n'est en cavalière**, et c'est mesuré : la projection de la
+série n'en conserve aucun. u(1 ; 1 ; 0) y tombe à **11,5°** de l'axe des x, et l'angle du
+défi s'y lit **42,4°** pour 54,7° réels — douze degrés de mensonge. Les figures d'angle
+sont donc PLANES (`coin()`), leur angle dessiné est vérifié par une assertion du module,
+et l'arc du cube ne porte **aucune valeur** (c'est une convention, comme `angle_droit`).
+
+```json
+{
+  "id": "terminale-ps-espace-angle",
+  "notionId": "produit_scalaire_espace",
+  "microId": "ps_espace_angle",
+  "classe": "terminale-spe",
+  "ceinture": "verte",
+  "serie": "Maths Tle spé",
+  "type": "longue",
+  "fichier": "terminale/maths/geometrie/ps-espace-angle/eleveai-maths-terminale-ps-espace-angle.mp4",
+  "miniature": "terminale/maths/geometrie/ps-espace-angle/eleveai-maths-terminale-ps-espace-angle.png",
+  "titre": "La grande diagonale d'un cube ne fait pas 45° · Calculer un angle dans l'espace · Tle spé",
+  "centres": ["nature-ecologie"],
+  "tags": ["angle", "produit scalaire", "cosinus", "arccos", "espace", "cube ABCDEFGH", "grande diagonale", "terminale", "bac"]
+}
+```
+
+**Accroche** (à relire par Frédéric avant publication) :
+
+> Ravi installe des panneaux solaires sur les toits de Saint-Pierre. Un panneau face au
+> soleil produit à plein ; incliné de trente degrés, il perd un peu ; à quatre-vingt-dix
+> degrés, il ne produit plus rien. Ce qui décide du rendement, c'est l'angle entre la
+> direction du soleil et celle du panneau — et cet angle se calcule avec un produit
+> scalaire.
+>
+> Dans cette vidéo :
+> • la seconde formule du produit scalaire, et le cosinus qu'on en isole : le produit
+>   scalaire divisé par le PRODUIT des deux normes
+> • le signe du produit scalaire donne la nature de l'angle avant tout calcul : positif
+>   aigu, nul droit, négatif obtus — parce que les deux normes sont toujours positives
+> • un exemple mené jusqu'au bout sans calculatrice : un cosinus qui vaut un demi, c'est
+>   soixante degrés
+> • les trois pièges : on divise par le produit et jamais par la somme ; un cosinus reste
+>   entre moins 1 et 1, donc 1,25 est une erreur de calcul ; et l'angle de deux VECTEURS
+>   n'est pas l'angle de deux DROITES — pour des droites on prend la valeur absolue
+> • les quatre lignes de la copie, et l'unité qu'on oublie : un angle sans degrés ni
+>   radians, c'est le point perdu
+>
+> Deux questions-pauses et un défi corrigé dans le cube ABCDEFGH d'arête 1 : l'angle
+> entre la grande diagonale et une arête. Il vaut 55 degrés environ, et surtout pas 45 —
+> beaucoup de copies écrivent 45 sans calculer. Entraîne-toi sur eleveai.fr
+
+**Chapitres** (⛔ ils partent VERBATIM dans la description YouTube :
+descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Un produit scalaire, deux normes, une division · 0:10 Ravi et les panneaux solaires
+de Saint-Pierre · 0:36 Du produit scalaire à l'angle · 1:13 Le signe décide avant le
+calcul · 1:41 Question 1 · 2:05 Réponse : obtus, parce que le produit scalaire est
+négatif · 2:29 Jusqu'au bout, sans calculatrice · 2:57 Les trois pièges · 3:37 Question 2
+· 4:04 Réponse : un cosinus ne dépasse jamais 1 · 4:31 Quatre lignes, dans cet ordre ·
+4:57 À toi de jouer · 5:17 Correction : 55 degrés, et pas 45 · 6:07 Ce que tu as appris.
+
+---
+
+## E11 · `terminale-ps-espace-plan-normal` — ✅ rendu HD fait
+
+`manim/sorties/terminale/maths/geometrie/ps-espace-plan-normal/eleveai-maths-terminale-ps-espace-plan-normal.mp4`
+6 min 38.8 (398.77 s) · 24.1 Mo · **0 instant qui touche un bord** · planche HD regardée.
+⭐ Marques : **913**, fichier identique à celui du dépôt (`git diff` vide) : le rendu est calé
+sur des marques à jour, et le contrôle par le CONTENU le prouve.
+⭐ `grep -c "self\.au_t("` → **0** : aucun instant relevé à la main.
+⭐ Dry run `-qh` : **15 écrans, 0 BORD, 0 AUDIT-AVANCE**, et un seul `AUDIT-ABSENT`,
+celui de `@eleveai974` que les épisodes publiés portent aussi. Les 33 `AUDIT-TARD` sont
+tous ≤ 2,96 s et relus à la main : c'est le prix de poser une équation quand elle est
+ENTIÈREMENT lue, et l'inverse serait une AVANCE — on préfère 2,96 s de retard sur le
+premier chiffre à une seconde d'avance sur le dernier.
+⛔⛔ **Deux des plans de cet épisode ne sont PAS dessinés, et c'est mesuré** :
+`platitude((1 ; 1 ; 1))` = **9,02°**, sous le seuil de 12°. Or c'est la normale du plan
+de la question 07 ET celle du plan du défi — les deux écrans qui portent la leçon sont
+les deux qu'on ne peut pas dessiner en cavalière. L'écran 07b est donc algébrique (la
+place manquait de toute façon : six blocs dans la colonne de gauche), et le défi montre
+le POINT et l'escalier de ses coordonnées, jamais un morceau de plan qui se lirait
+comme un trait. Les trois autres plans se projettent bien : (0 ; 0 ; 1) = 14,9°,
+(2 ; −1 ; 3) = 39,8°, (3 ; 0 ; 1) = 25,4°.
+⚠️ **Les NOMS D'AXES sont des étiquettes, et rien ne les mesurait.** Trois défauts d'un
+coup sur le premier −ql : « n̄y » à l'écran 02, la pointe de n⃗ sur celle de l'axe des x
+à l'écran 05, et le DISQUE du point A collé au « y » à l'écran 09b — A (1 ; 1 ; 1) se
+projette à **8°** de cet axe. D'où `noms_axes()` dans la mesure, à recopier pour E12.
+
+```json
+{
+  "id": "terminale-ps-espace-plan-normal",
+  "notionId": "produit_scalaire_espace",
+  "microId": "ps_espace_plan_normal",
+  "classe": "terminale-spe",
+  "ceinture": "verte",
+  "serie": "Maths Tle spé",
+  "type": "longue",
+  "fichier": "terminale/maths/geometrie/ps-espace-plan-normal/eleveai-maths-terminale-ps-espace-plan-normal.mp4",
+  "miniature": "terminale/maths/geometrie/ps-espace-plan-normal/eleveai-maths-terminale-ps-espace-plan-normal.png",
+  "titre": "La perpendiculaire à un plan est écrite dans son équation · Vecteur normal · Tle spé",
+  "centres": ["sciences"],
+  "tags": ["vecteur normal", "équation de plan", "plan", "espace", "projeté orthogonal", "plans parallèles", "produit scalaire", "terminale", "bac"]
+}
+```
+
+**Accroche** (à relire par Frédéric avant publication) :
+
+> Un clou planté bien droit dans une planche : le clou donne la direction
+> perpendiculaire à la planche. En maths, ce clou s'appelle un vecteur normal. Et voici
+> le plus beau résultat du chapitre : si tu as l'équation d'un plan, tu as déjà son
+> vecteur normal sous les yeux, sans aucun calcul.
+>
+> Dans cette vidéo :
+> • les trois coefficients de x, de y et de z SONT les coordonnées d'un vecteur normal,
+>   avec leurs signes — et le terme constant n'en fait pas partie : il dit seulement où
+>   le plan se place, pas comment il est orienté
+> • le théorème dans l'autre sens : un point et une normale suffisent pour écrire
+>   l'équation, et le terme constant se trouve en remplaçant par le point
+> • la raison profonde, en une ligne : M est dans le plan si et seulement si le produit
+>   scalaire de A M et de la normale est nul
+> • le piège : une normale n'est pas unique, donc deux équations qui ne se ressemblent
+>   pas peuvent décrire le même plan — on compare deux plans en deux temps, les normales
+>   d'abord, un point ensuite
+> • et le second piège : un vecteur normal n'est pas un vecteur directeur
+> • la méthode reine du projeté orthogonal : on écrit la droite qui suit la normale,
+>   puis on cherche son intersection avec le plan
+>
+> Deux questions-pauses et un défi corrigé : le projeté orthogonal du point de
+> coordonnées 1, 1, 1 sur le plan d'équation x plus y plus z égale zéro. C'est l'origine
+> du repère. Entraîne-toi sur eleveai.fr
+
+**Chapitres**, relevés sur le rendu (⛔ ils partent VERBATIM dans la description
+YouTube : descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Les coefficients de l'équation sont un vecteur · 0:10 Le clou planté droit dans une
+planche · 0:31 On lit la normale dans l'équation · 0:56 Et dans l'autre sens : un point
+et une normale · 1:23 Question 1 · 1:45 Réponse : on lit les coefficients avec leurs
+signes · 2:09 Trouver l'équation à partir d'un point et d'une normale · 2:49 Le piège :
+une normale n'est pas unique · 3:38 Question 2 · 4:04 Réponse : strictement parallèles ·
+4:33 Les deux rédactions à connaître · 5:06 À toi de jouer · 5:26 Correction : le projeté
+de A est l'origine · 6:11 Ce que tu as appris.
+
+---
+
+## E12 · `terminale-ps-espace-defi` — ✅ rendu HD fait
+
+`manim/sorties/terminale/maths/geometrie/ps-espace-defi/eleveai-maths-terminale-ps-espace-defi.mp4`
+6 min 48.9 (408.85 s) · 27.4 Mo · **0 instant qui touche un bord** · planche HD regardée.
+⭐ **DOUZIÈME ET DERNIER DE LA SÉRIE.** Script et planches écrits par une autre session
+(commit `bdead4cc1`), HD rendu ici — la frontière a été tenue des deux côtés : regarder
+d'un côté, corriger de l'autre, et aucun fichier touché à deux mains.
+⭐ Marques : **935**. Le script était FIGÉ pendant le rendu, vérifié au caractère près
+avant et après (`621f00d3…` et `159fc7a4…`, `git diff HEAD` vide) : le HD rend bien la
+version qui a été regardée. ⛔ C'est l'inverse de l'âge d'un fichier, qui ne prouve rien.
+⭐ Dry run `-qh` : **0 BORD · 0 AUDIT-AVANCE · 0 RETARD**, un seul `AUDIT-ABSENT`
+(`@eleveai974`). Mesure : 0 ennui. Flèches : 0 NU.
+
+⛔⛔ **CE QUE LA CAVALIÈRE AURAIT FAIT DE LA QUESTION 2, ET POURQUOI LE TRIANGLE EST À
+PLAT.** `platitude((1 ; 1 ; 1))` = **9,02°**, sous le seuil de 12° : le plan (BDE) se
+projette sur une lame. Mesuré sur le triangle lui-même, dont la bonne réponse est
+« équilatéral » :
+
+| | réel | en cavalière |
+|---|---|---|
+| côté B D | 1,414 | **0,656** |
+| côté B E | 1,414 | **1,414** |
+| côté D E | 1,414 | **0,822** |
+| angle en B | 60,0° | **19,1°** |
+| aire | 100 % | **17,5 %** |
+
+Un élève y aurait lu « quelconque » — c'est-à-dire le **leurre C de sa propre question**.
+C'est le 3-4-5 faux de l'épisode 9 en plus grave : là-bas le schéma était faux de 13 %,
+ici il aurait plaidé pour une mauvaise réponse. ⭐ L'écran 07 ne porte donc que les trois
+POINTS (la donnée) et la forme arrive en 07b par une figure PLANE, vue dans son plan.
+
+⭐⭐ **ET L'ÉQUILATÉRALITÉ EST VÉRIFIÉE SUR L'IMAGE RENDUE, PAS SEULEMENT À LA
+CONSTRUCTION.** Une assertion de module mesure les `Line` telles qu'on les bâtit — avant
+`scale`, `move_to`, l'épaisseur de trait et l'anticrénelage. Les pixels oranges du rendu
+ont donc été extraits et les trois côtés mesurés. ⛔ Les deux contrôles, pas l'un des deux.
+
+⚠️ **Les douze arêtes du cube ont été COMPTÉES une par une** sur un recadrage ×4,6, et pas
+déduites d'une assertion : `[E H]` a manqué pendant six épisodes sans qu'aucun instrument
+le voie. Une absence ne se mesure pas, elle se compte.
+
+```json
+{
+  "id": "terminale-ps-espace-defi",
+  "notionId": "produit_scalaire_espace",
+  "microId": "ps_espace_defi",
+  "classe": "terminale-spe",
+  "ceinture": "verte",
+  "serie": "Maths Tle spé",
+  "type": "longue",
+  "fichier": "terminale/maths/geometrie/ps-espace-defi/eleveai-maths-terminale-ps-espace-defi.mp4",
+  "miniature": "terminale/maths/geometrie/ps-espace-defi/eleveai-maths-terminale-ps-espace-defi.png",
+  "titre": "Le plan (BDE) coupe la diagonale du cube à son premier tiers · Exercice type bac · Tle spé",
+  "centres": ["jeux-defis"],
+  "tags": ["exercice type bac", "produit scalaire", "vecteur normal", "équation de plan", "projeté orthogonal", "distance à un plan", "cube ABCDEFGH", "espace", "terminale", "bac"]
+}
+```
+
+**Accroche** (à relire par Frédéric avant publication) :
+
+> Regarde les sujets des années passées : l'exercice de l'espace suit presque toujours le
+> même chemin. On démontre qu'un vecteur est normal à un plan, on en déduit l'équation de
+> ce plan, puis on calcule une distance, un projeté ou un angle. Si tu reconnais le
+> chemin, tu ne cherches plus quoi faire : tu avances.
+>
+> Dans cette vidéo :
+> • le fil en trois étapes : deux produits scalaires nuls prouvent qu'un vecteur est
+>   normal au plan, ce vecteur donne les coefficients de l'équation, et un point du plan
+>   donne le terme constant
+> • la boîte à outils complète, cinq objets — et ils suffisent pour tout l'exercice
+> • les cinq pièges de la copie, qui coûtent plus cher que les erreurs de calcul :
+>   prouver l'orthogonalité sur une seule direction, oublier d'écrire la non-colinéarité,
+>   donner un arrondi quand l'énoncé veut l'exact, annoncer une distance négative, et
+>   s'appuyer sur le dessin pour affirmer — dans l'espace, la preuve est toujours un calcul
+> • le squelette d'une copie complète, qui fonctionne sur n'importe quel sujet de l'espace
+>
+> Deux questions-pauses et un défi corrigé dans le cube d'arête 1 : le projeté orthogonal
+> de A sur le plan B D E, et la distance de A à ce plan. Elle vaut racine de 3 sur 3,
+> environ zéro virgule 58 — et le point trouvé est au premier tiers de la grande
+> diagonale. Entraîne-toi sur eleveai.fr
+
+**Chapitres**, relevés sur le rendu (⛔ ils partent VERBATIM dans la description
+YouTube : descriptifs, avec une majuscule, jamais un nom de clip interne) :
+0:00 Une normale, une équation, une distance · 0:12 Toujours le même chemin · 0:35 Le
+fil, en trois étapes · 1:00 Cinq objets, et ils suffisent · 1:24 Question 1 · 1:50
+Réponse : les deux produits scalaires, et la phrase · 2:17 Dans le cube : la normale,
+puis l'équation · 3:03 Cinq pièges de copie · 3:38 Question 2 · 4:00 Réponse : le
+triangle BDE est équilatéral · 4:30 Le squelette d'une copie · 5:00 À toi de jouer ·
+5:22 Correction : K au premier tiers de la diagonale · 6:19 Ce que tu as appris.
+
+---
+
+## ⚠️ LES 5 PREMIÈRES SONT SUR YOUTUBE, EN PRIVÉ — et leur `url` a été RETIRÉE du registre
+
+23/11/2026. Elles ont été envoyées (visibilité `private`), puis leur `url` a été ôtée de
+`manim/manifeste-youtube.json` **sur décision de Frédéric**, et voici pourquoi — c'est un
+mécanisme qui n'était écrit nulle part et qui décide où vont les élèves.
+
+⛔⛔ **LE COACH NE PREND L'ADRESSE DU SITE QUE S'IL N'Y A PAS D'URL YOUTUBE.**
+`scripts/brancher-videos-coach.mjs`, l. 123 :
+
+```js
+if (!v.url && R2[v.id]) v.url = `https://www.eleveai.fr/video/${v.id}`;
+```
+
+Donc publier une vidéo sur YouTube **lui fait perdre son lien R2** dans le coach. Et tant
+qu'elle est en `private`, l'élève qui clique ne voit rien. Mesuré au branchement en
+lecture seule : les 7 non publiées pointaient sur `eleveai.fr/video/…` ✅, les 5 publiées
+sur `youtu.be/…` ⛔. Sans l'url, les douze repointent sur le site, servi depuis R2.
+
+⭐ **LES IDENTIFIANTS YOUTUBE SONT ICI PARCE QUE LEUR JOURNAL N'EST PAS DANS GIT.**
+`manim/sorties/.publiees.json` les retient, mais `manim/sorties/` est ignoré en entier
+(.gitignore l. 105) : si cette machine disparaît, la trace disparaît avec elle. Les
+vidéos, elles, existent toujours sur la chaîne.
+
+| épisode | id YouTube | visibilité |
+|---|---|---|
+| `terminale-espace-vecteurs` | `HSWJPC9hEnU` | private |
+| `terminale-espace-repere-coordonnees` | `E3Lhg5Nx5Hw` | private |
+| `terminale-espace-droite-parametrique` | `DfvqKivFpLw` | private |
+| `terminale-espace-plan-equation` | `_oGj9PSrqzI` | private |
+| `terminale-espace-position-relative` | `fPcUu7aTfQc` | private |
+
+⚠️ Elles ne repartiront PAS en double : `publier-youtube.mjs` saute toute vidéo présente
+dans `.publiees.json` (l. 791), et c'est le journal, pas l'`url`, qui fait foi.
+⭐ Le jour où elles passent en public, remettre leur `url` (`https://youtu.be/<id>`) rend
+le lien YouTube au coach ; la laisser absente le laisse sur R2. C'est un choix, pas un
+oubli — et c'est à Frédéric.
 
 ---
 

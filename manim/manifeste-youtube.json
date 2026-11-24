@@ -112106,6 +112106,1303 @@
         "argent-budget"
       ],
       "plus_tard": true
+    },
+    {
+      "id": "terminale-espace-vecteurs",
+      "notionId": "geometrie_espace",
+      "microId": "espace_vecteurs",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/geometrie/espace-vecteurs/eleveai-maths-terminale-espace-vecteurs.mp4",
+      "miniature": "terminale/maths/geometrie/espace-vecteurs/eleveai-maths-terminale-espace-vecteurs.png",
+      "titre": "Trois nombres au lieu de deux — Vecteurs dans l'espace · Tle spé",
+      "centres": [
+        "technologie-ia"
+      ],
+      "tags": [
+        "vecteurs",
+        "espace",
+        "colinéaires",
+        "coordonnées",
+        "terminale",
+        "bac"
+      ],
+      "accroche": "Nadia pilote des drones de chantier. Pour placer un drone, elle donne trois nombres : combien vers la droite, combien en profondeur, combien en hauteur. Dans l'espace, un point, c'est exactement cela — et un vecteur aussi.\n\nDans cette vidéo :\n• un vecteur de l'espace a trois coordonnées, et A B, c'est arrivée moins départ\n• on additionne coordonnée par coordonnée, on multiplie les trois à la fois\n• colinéaires : un seul et même nombre multiplie les TROIS coordonnées\n• le piège : deux vecteurs non colinéaires n'engendrent qu'un plan — dans l'espace, trois vecteurs peuvent être deux à deux non colinéaires et rester coplanaires\n\nDeux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr\n\n🎯 La série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_vecteurs&display=simple\n\n📈 Épisode 1 sur 12 de la série « Géométrie dans l'espace » d'EleveAI · Maths Tle spé.",
+      "chapitres": [
+        [
+          "00:00",
+          "Trois nombres au lieu de deux"
+        ],
+        [
+          "00:12",
+          "Nadia place ses drones avec trois nombres"
+        ],
+        [
+          "00:33",
+          "Arrivée moins départ"
+        ],
+        [
+          "00:57",
+          "Les règles"
+        ],
+        [
+          "01:15",
+          "Question 1"
+        ],
+        [
+          "01:39",
+          "Réponse : un vecteur vertical"
+        ],
+        [
+          "01:55",
+          "Somme et multiple"
+        ],
+        [
+          "02:14",
+          "Le piège"
+        ],
+        [
+          "02:36",
+          "Question 2"
+        ],
+        [
+          "03:03",
+          "Réponse : le même facteur pour les trois coordonnées"
+        ],
+        [
+          "03:22",
+          "Au bac"
+        ],
+        [
+          "03:43",
+          "À toi de jouer"
+        ],
+        [
+          "04:10",
+          "Correction"
+        ],
+        [
+          "04:39",
+          "Ce que tu as appris"
+        ]
+      ],
+      "questions": [
+        {
+          "t": "01:15",
+          "question": "A a pour coordonnées 2, 1, 0, et B a pour coordonnées 2, 1, 5. Que valent les coordonnées du vecteur A B ?",
+          "choix": [
+            "4, 2, 5",
+            "0, 0, 5",
+            "0, 0, 1"
+          ],
+          "reponse": 1,
+          "explication": "2 moins 2 fait 0, 1 moins 1 fait 0, et 5 moins 0 fait 5. Le vecteur A B est vertical : A et B sont l'un au-dessus de l'autre."
+        },
+        {
+          "t": "02:36",
+          "question": "Le vecteur u a pour coordonnées 1, 2, 3, et le vecteur v a pour coordonnées 2, 4, 6. Que peut-on dire ?",
+          "choix": [
+            "ils ne sont pas colinéaires",
+            "on ne peut pas savoir",
+            "ils sont colinéaires"
+          ],
+          "reponse": 2,
+          "explication": "2 égale 2 fois 1, 4 égale 2 fois 2, et 6 égale 2 fois 3. Le même facteur 2 pour les trois coordonnées : le vecteur v égale 2 fois le vecteur u."
+        }
+      ]
+    },
+    {
+      "id": "terminale-espace-repere-coordonnees",
+      "notionId": "geometrie_espace",
+      "microId": "espace_repere_coordonnees",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/geometrie/espace-repere-coordonnees/eleveai-maths-terminale-espace-repere-coordonnees.mp4",
+      "miniature": "terminale/maths/geometrie/espace-repere-coordonnees/eleveai-maths-terminale-espace-repere-coordonnees.png",
+      "titre": "Le cube où tout vaut 0 ou 1 — Coordonnées dans l'espace · Tle spé",
+      "centres": [
+        "transports"
+      ],
+      "tags": [
+        "coordonnées",
+        "repère",
+        "milieu",
+        "cube",
+        "espace",
+        "terminale",
+        "bac"
+      ],
+      "accroche": "Lila est magasinière dans un entrepôt du Port. Chaque colis a une adresse à trois nombres : l'allée, la profondeur, l'étage. Dans l'espace, un point, c'est exactement cela — et quand on choisit bien son repère, toute la géométrie devient du calcul.\n\nDans cette vidéo :\n• trois coordonnées, toujours dans l'ordre x, y, z\n• le milieu, c'est la moyenne — trois fois\n• le repère du cube (A ; AB, AD, AE) : les huit sommets ne sont que des 0 et des 1\n• les quatre grandes diagonales se coupent au centre\n• le piège : dans un pavé droit, les coordonnées tiennent, les longueurs NON — distances et angles ne marchent que si le repère est orthonormé\n\nDeux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr\n\n🎯 La série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_repere_coordonnees&display=simple\n\n📈 Épisode 2 sur 12 de la série « Géométrie dans l'espace » d'EleveAI · Maths Tle spé.",
+      "chapitres": [
+        [
+          "00:00",
+          "Trois nombres, une moyenne, un repère"
+        ],
+        [
+          "00:11",
+          "Lila et les adresses à trois nombres de l'entrepôt"
+        ],
+        [
+          "00:34",
+          "Le repère du cube"
+        ],
+        [
+          "01:09",
+          "Le milieu"
+        ],
+        [
+          "01:29",
+          "Question 1"
+        ],
+        [
+          "01:54",
+          "Réponse : le milieu, moyenne par moyenne"
+        ],
+        [
+          "02:15",
+          "Les diagonales"
+        ],
+        [
+          "02:54",
+          "Le piège du pavé"
+        ],
+        [
+          "03:31",
+          "Question 2"
+        ],
+        [
+          "03:52",
+          "Réponse : un pas dans chacune des trois directions"
+        ],
+        [
+          "04:12",
+          "La première ligne de la copie"
+        ],
+        [
+          "04:35",
+          "À toi de jouer"
+        ],
+        [
+          "04:53",
+          "Correction"
+        ],
+        [
+          "05:29",
+          "Ce que tu as appris"
+        ]
+      ],
+      "questions": [
+        {
+          "t": "01:29",
+          "question": "A a pour coordonnées 1, 3, 5, et B a pour coordonnées 3, 1, 1. Quelles sont les coordonnées du milieu du segment A B ?",
+          "choix": [
+            "4, 4, 6",
+            "1, moins 1, moins 2",
+            "2, 2, 3"
+          ],
+          "reponse": 2,
+          "explication": "1 plus 3 fait 4, divisé par deux : 2. 3 plus 1 fait 4, divisé par deux : 2. 5 plus 1 fait 6, divisé par deux : 3. La réponse A, c'est la somme : on a oublié de diviser."
+        },
+        {
+          "t": "03:31",
+          "question": "Dans le cube A B C D E F G H muni du repère A, A B, A D, A E, quelles sont les coordonnées du sommet G ?",
+          "choix": [
+            "1, 1, 1",
+            "1, 1, 0",
+            "0, 1, 1"
+          ],
+          "reponse": 0,
+          "explication": "Pour aller de A à G, on fait un pas dans chacune des trois directions : un vers B, un vers D, un vers le haut. Le triplet 1, 1, 0, c'est le sommet C, resté au sol."
+        }
+      ]
+    },
+    {
+      "id": "terminale-espace-droite-parametrique",
+      "notionId": "geometrie_espace",
+      "microId": "espace_droite_parametrique",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/geometrie/espace-droite-parametrique/eleveai-maths-terminale-espace-droite-parametrique.mp4",
+      "miniature": "terminale/maths/geometrie/espace-droite-parametrique/eleveai-maths-terminale-espace-droite-parametrique.png",
+      "titre": "Un point, une direction, un curseur — Représentation paramétrique · Tle spé",
+      "centres": [
+        "transports"
+      ],
+      "tags": [
+        "représentation paramétrique",
+        "droite",
+        "vecteur directeur",
+        "espace",
+        "terminale",
+        "bac"
+      ],
+      "accroche": "Soraya est contrôleuse aérienne. Sur son écran, un avion en montée suit une ligne droite : chaque minute il avance de la même façon, tant vers l'est, tant vers le nord, tant en altitude. Si elle connaît sa position maintenant et son avancée par minute, elle sait où il sera dans sept minutes. Une représentation paramétrique, c'est exactement cela.\n\nDans cette vidéo :\n• une droite, c'est un point et une direction — et trois lignes suffisent à l'écrire\n• les coefficients de t donnent le vecteur directeur, les nombres seuls donnent un point\n• tester un point : la première équation donne t, et les deux autres doivent suivre avec LE MÊME t — deux lignes sur trois, cela ne compte pas\n• le piège : une même droite a une infinité de représentations paramétriques, et deux systèmes différents ne veulent pas dire deux droites différentes\n• la rédaction du bac, dans les deux sens : donner la droite, tester un point\n\nDeux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr\n\n🎯 La série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_droite_parametrique&display=simple\n\n📈 Épisode 3 sur 12 de la série « Géométrie dans l'espace » d'EleveAI · Maths Tle spé.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un point de départ, une direction, un curseur"
+        ],
+        [
+          "00:11",
+          "Soraya suit un avion en montée sur son écran"
+        ],
+        [
+          "00:38",
+          "Un point, une direction"
+        ],
+        [
+          "01:08",
+          "Tout se lit dans les trois lignes"
+        ],
+        [
+          "01:28",
+          "Question 1"
+        ],
+        [
+          "01:52",
+          "Réponse : le vecteur directeur se lit sur les coefficients de t"
+        ],
+        [
+          "02:17",
+          "Tester un point"
+        ],
+        [
+          "02:48",
+          "Le piège"
+        ],
+        [
+          "03:27",
+          "Question 2"
+        ],
+        [
+          "03:52",
+          "Réponse : on teste t sur les trois lignes"
+        ],
+        [
+          "04:17",
+          "Au bac"
+        ],
+        [
+          "04:42",
+          "À toi de jouer"
+        ],
+        [
+          "05:01",
+          "Correction"
+        ],
+        [
+          "05:30",
+          "Ce que tu as appris"
+        ]
+      ],
+      "questions": [
+        {
+          "t": "01:28",
+          "question": "La droite d est donnée par x égale 1 plus 2 t, y égale 2 moins t, z égale 3 t. Quel est un vecteur directeur de d ?",
+          "choix": [
+            "1, 2, 0",
+            "3, 1, 3",
+            "2, moins 1, 3"
+          ],
+          "reponse": 2,
+          "explication": "Le vecteur directeur, ce sont les coefficients de t avec leurs signes : 2, moins 1 et 3. Le triplet 1, 2, 0, ce sont les nombres sans t : c'est un point de la droite, pas une direction."
+        },
+        {
+          "t": "03:27",
+          "question": "Le point C de coordonnées 7, moins 1, 10 est-il sur la droite d ?",
+          "choix": [
+            "non, la troisième coordonnée ne suit pas",
+            "oui, t égal à 3 convient",
+            "on ne peut pas le savoir avec un seul point"
+          ],
+          "reponse": 0,
+          "explication": "La première ligne donne 1 plus 2 t égale 7, donc t vaut 3. La deuxième suit : 2 moins 3 fait bien moins 1. Mais la troisième donne 3 fois 3, c'est-à-dire 9, et on nous propose 10."
+        }
+      ]
+    },
+    {
+      "id": "terminale-espace-plan-equation",
+      "notionId": "geometrie_espace",
+      "microId": "espace_plan_equation",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/geometrie/espace-plan-equation/eleveai-maths-terminale-espace-plan-equation.mp4",
+      "miniature": "terminale/maths/geometrie/espace-plan-equation/eleveai-maths-terminale-espace-plan-equation.png",
+      "titre": "Une seule ligne décrit un plan entier — Équation cartésienne · Tle spé",
+      "centres": [
+        "sciences"
+      ],
+      "tags": [
+        "équation cartésienne",
+        "plan",
+        "espace",
+        "coefficients",
+        "terminale",
+        "bac"
+      ],
+      "accroche": "Jean-Bernard est charpentier. Quand il pose un pan de toiture, il travaille sur une surface parfaitement plate, ni horizontale ni verticale. Pour dire à la machine de découpe où se trouve ce pan, il ne lui donne pas des milliers de points : il lui donne une équation. Une seule ligne, et le plan entier est décrit.\n\nDans cette vidéo :\n• tout plan de l'espace a une équation de la forme a x + b y + c z + d = 0\n• un point y appartient si et seulement si ses coordonnées ANNULENT l'équation — pas « presque zéro » : zéro\n• on trouve le terme constant d en remplaçant par un point connu\n• le piège, et il est énorme : dans l'espace, UNE équation donne un PLAN, jamais une droite — « z = 0 » n'est pas un point de hauteur nulle, c'est le sol tout entier\n• la rédaction du bac en trois lignes, dont la vérification qui attrape les erreurs de signe\n\nDeux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr\n\n🎯 La série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_plan_equation&display=simple\n\n📈 Épisode 4 sur 12 de la série « Géométrie dans l'espace » d'EleveAI · Maths Tle spé.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une seule équation, trois inconnues"
+        ],
+        [
+          "00:11",
+          "Jean-Bernard pose un pan de toiture"
+        ],
+        [
+          "00:34",
+          "Une équation, un plan"
+        ],
+        [
+          "01:08",
+          "Si et seulement si"
+        ],
+        [
+          "01:25",
+          "Question 1"
+        ],
+        [
+          "01:47",
+          "Réponse : le point qui annule l'équation"
+        ],
+        [
+          "02:12",
+          "Trouver l'équation"
+        ],
+        [
+          "02:48",
+          "Le piège"
+        ],
+        [
+          "03:26",
+          "Question 2"
+        ],
+        [
+          "03:45",
+          "Réponse : « y égale 1 » est un plan, pas une droite"
+        ],
+        [
+          "04:15",
+          "Au bac"
+        ],
+        [
+          "04:39",
+          "À toi de jouer"
+        ],
+        [
+          "05:03",
+          "Correction"
+        ],
+        [
+          "05:39",
+          "Ce que tu as appris"
+        ]
+      ],
+      "questions": [
+        {
+          "t": "01:25",
+          "question": "Le plan P a pour équation x plus y moins z moins 1 égale zéro. Lequel de ces trois points est dans P ?",
+          "choix": [
+            "1, 2, 3",
+            "2, 0, 0",
+            "1, 1, 1"
+          ],
+          "reponse": 2,
+          "explication": "Pour le point 1, 1, 1 : 1 plus 1 moins 1 moins 1 fait zéro, il est dans le plan. Pour 1, 2, 3 : 1 plus 2 moins 3 moins 1 fait moins 1, ce n'est pas zéro, donc il n'y est pas."
+        },
+        {
+          "t": "03:26",
+          "question": "Dans l'espace, l'ensemble des points qui vérifient y égale 1, c'est :",
+          "choix": [
+            "une droite",
+            "un plan",
+            "un point"
+          ],
+          "reponse": 1,
+          "explication": "Réécrivons l'équation sous sa forme complète : zéro fois x, plus 1 fois y, plus zéro fois z, moins 1, égale zéro. C'est bien une équation de plan, avec les coefficients zéro, 1 et zéro, qui ne sont pas tous nuls."
+        }
+      ]
+    },
+    {
+      "id": "terminale-espace-position-relative",
+      "notionId": "geometrie_espace",
+      "microId": "espace_position_relative",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/geometrie/espace-position-relative/eleveai-maths-terminale-espace-position-relative.mp4",
+      "miniature": "terminale/maths/geometrie/espace-position-relative/eleveai-maths-terminale-espace-position-relative.png",
+      "titre": "Deux droites qui ne se croisent jamais, sans être parallèles — Positions relatives · Tle spé",
+      "centres": [
+        "transports"
+      ],
+      "tags": [
+        "positions relatives",
+        "droite et plan",
+        "deux plans",
+        "non coplanaires",
+        "espace",
+        "terminale",
+        "bac"
+      ],
+      "accroche": "Pense à une route qui passe sous un pont. Vue d'en haut, les deux tracés se croisent. Dans l'espace, ils ne se rencontrent jamais — et ils ne sont pas parallèles non plus. Dans le plan, cette situation n'existe pas. Dans l'espace, c'est la plus fréquente.\n\nDans cette vidéo :\n• droite et plan : on remplace x, y et z dans l'équation, et on lit l'équation en t — une solution (sécants), aucune (strictement parallèle), ou toutes (contenue)\n• deux plans : on compare les coefficients, puis on teste un point ; 2x + 2y + 2z + 5 = 0 est parallèle à x + y + z − 1 = 0, et il ne lui est PAS confondu\n• le piège, et il coûte des points : pour deux droites, pas de point commun ne veut PAS dire parallèles — ça veut souvent dire non coplanaires, et aucun plan ne les contient toutes les deux\n• la méthode annoncée au bac, et le mot exact : sécants, strictement parallèles, confondus, ou non coplanaires\n\nDeux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr\n\n🎯 La série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_position_relative&display=simple\n\n📈 Épisode 5 sur 12 de la série « Géométrie dans l'espace » d'EleveAI · Maths Tle spé.",
+      "chapitres": [
+        [
+          "00:00",
+          "Ne jamais se rencontrer sans être parallèles"
+        ],
+        [
+          "00:10",
+          "La route et le pont"
+        ],
+        [
+          "00:33",
+          "Droite et plan"
+        ],
+        [
+          "01:16",
+          "Trois cas"
+        ],
+        [
+          "01:39",
+          "Question 1"
+        ],
+        [
+          "02:06",
+          "Réponse : « 3 égale zéro » est faux pour tout t"
+        ],
+        [
+          "02:32",
+          "Deux plans"
+        ],
+        [
+          "03:07",
+          "Le piège"
+        ],
+        [
+          "03:42",
+          "Question 2"
+        ],
+        [
+          "04:07",
+          "Réponse : aucun point commun ne veut pas dire parallèles"
+        ],
+        [
+          "04:28",
+          "Au bac"
+        ],
+        [
+          "05:01",
+          "À toi de jouer"
+        ],
+        [
+          "05:25",
+          "Correction"
+        ],
+        [
+          "06:06",
+          "Ce que tu as appris"
+        ]
+      ],
+      "questions": [
+        {
+          "t": "01:39",
+          "question": "On remplace la droite dans l'équation du plan et on obtient 3 égale zéro. Que conclut-on ?",
+          "choix": [
+            "la droite est parallèle au plan, sans aucun point commun",
+            "la droite est contenue dans le plan",
+            "la droite coupe le plan en un point"
+          ],
+          "reponse": 0,
+          "explication": "L'égalité 3 égale zéro est fausse, et elle est fausse pour toutes les valeurs de t : aucun point de la droite n'est dans le plan."
+        },
+        {
+          "t": "03:42",
+          "question": "Deux droites de l'espace n'ont aucun point commun, et leurs vecteurs directeurs ne sont pas colinéaires. Que peut-on dire ?",
+          "choix": [
+            "elles sont parallèles",
+            "c'est impossible",
+            "elles ne sont pas coplanaires"
+          ],
+          "reponse": 2,
+          "explication": "Parallèles, cela voudrait dire des vecteurs directeurs colinéaires, et l'énoncé dit exactement le contraire. Quant à impossible, c'est tout l'inverse : c'est la route et le pont, le cas le plus courant dans l'espace."
+        }
+      ]
+    },
+    {
+      "id": "terminale-espace-defi",
+      "notionId": "geometrie_espace",
+      "microId": "espace_defi",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi.mp4",
+      "miniature": "terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi.png",
+      "titre": "Trois points sont toujours coplanaires : ça ne prouve rien · Exercice type bac · Tle spé",
+      "centres": [
+        "jeux-defis"
+      ],
+      "tags": [
+        "exercice type bac",
+        "cube ABCDEFGH",
+        "repère de l'espace",
+        "alignement",
+        "colinéarité",
+        "intersection droite plan",
+        "espace",
+        "terminale",
+        "bac"
+      ],
+      "accroche": "Au bac, l'exercice de géométrie dans l'espace a presque toujours la même forme : un solide, un repère donné par l'énoncé, puis une suite de questions qui montent — des coordonnées, puis une droite, puis un plan, puis une intersection. Chaque question prépare la suivante. Celui qui connaît le fil ne se perd pas.\n\nDans cette vidéo :\n• le cube ABCDEFGH et le repère (A ; AB, AD, AE) : les huit sommets ne contiennent que des zéros et des uns — et l'arête vaut 1, même si ton brouillon dit 6 cm\n• la boîte à outils en quatre objets : coordonnées et milieux, colinéarité, représentation paramétrique, équation cartésienne — et le geste qui relie tout\n• A, le centre du cube et G alignés en deux lignes : AG = 2 AΩ\n• le piège qui coûte des points : sur une figure en perspective, (AC) et (EB) semblent se croiser alors qu'elles ne sont pas coplanaires\n• et le plus beau leurre de la série : « trois points sont dans un même plan » est une phrase vraie, et elle ne démontre jamais rien\n\nDeux questions-pauses et un défi corrigé : le plan P : x + z − 1 = 0, la droite (AG), et leur point d'intersection — qui est le centre du cube, et ce n'est pas un hasard. Entraîne-toi sur eleveai.fr\n\n🎯 La série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_defi&display=simple\n\n📈 Épisode 6 sur 12 de la série « Géométrie dans l'espace » d'EleveAI · Maths Tle spé.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un cube, un repère, quatre questions"
+        ],
+        [
+          "00:10",
+          "Toujours la même forme"
+        ],
+        [
+          "00:37",
+          "Avant tout calcul"
+        ],
+        [
+          "01:01",
+          "La boîte à outils"
+        ],
+        [
+          "01:28",
+          "Question 1"
+        ],
+        [
+          "01:56",
+          "Réponse : le centre du cube est le milieu de [AG]"
+        ],
+        [
+          "02:19",
+          "Montrons un alignement"
+        ],
+        [
+          "02:58",
+          "Le piège"
+        ],
+        [
+          "03:38",
+          "Question 2"
+        ],
+        [
+          "04:05",
+          "Réponse : chercher k tel que AC = k AB"
+        ],
+        [
+          "04:30",
+          "Le squelette d'une copie"
+        ],
+        [
+          "04:54",
+          "À toi de jouer"
+        ],
+        [
+          "05:22",
+          "Correction"
+        ],
+        [
+          "06:19",
+          "Ce que tu as appris"
+        ]
+      ],
+      "questions": [
+        {
+          "t": "01:28",
+          "question": "Dans le cube A B C D E F G H muni du repère A, A B, A D, A E, quelles sont les coordonnées du centre du cube ?",
+          "choix": [
+            "0,5 ; 0,5 ; 0,5",
+            "1, 1, 1",
+            "0,5 ; 0,5 ; 1"
+          ],
+          "reponse": 0,
+          "explication": "Le centre du cube est le milieu de la grande diagonale A G : on fait la moyenne de 0, 0, 0 et de 1, 1, 1. Le triplet 1, 1, 1, c'est le sommet G lui-même."
+        },
+        {
+          "t": "03:38",
+          "question": "Pour démontrer que trois points A, B et C de l'espace sont alignés, que fait-on ?",
+          "choix": [
+            "on montre que A B et A C ont la même norme",
+            "on montre que les vecteurs A B et A C sont colinéaires",
+            "on montre qu'ils sont dans un même plan"
+          ],
+          "reponse": 1,
+          "explication": "La même norme, cela dit seulement que B et C sont à la même distance de A, ce qui n'a rien à voir avec l'alignement. Et la réponse C est un piège magnifique : trois points de l'espace sont toujours dans un même plan."
+        }
+      ]
+    },
+    {
+      "id": "terminale-ps-espace-calculer",
+      "notionId": "produit_scalaire_espace",
+      "microId": "ps_espace_calculer",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/geometrie/ps-espace-calculer/eleveai-maths-terminale-ps-espace-calculer.mp4",
+      "miniature": "terminale/maths/geometrie/ps-espace-calculer/eleveai-maths-terminale-ps-espace-calculer.png",
+      "titre": "Un produit scalaire est un NOMBRE, pas un vecteur · Le calculer dans l'espace · Tle spé",
+      "centres": [
+        "sport"
+      ],
+      "tags": [
+        "produit scalaire",
+        "espace",
+        "coordonnées",
+        "repère orthonormé",
+        "norme",
+        "orthogonalité",
+        "cube ABCDEFGH",
+        "terminale",
+        "bac"
+      ],
+      "accroche": "Kelly fait du kitesurf à l'Hermitage. Le vent pousse son aile, mais seule la partie du vent qui va dans le bon sens la fait avancer : un vent de côté ne sert à rien. Ce « combien ça pousse dans le bon sens », c'est exactement ce que mesure un produit scalaire — un seul nombre qui résume l'accord entre deux directions.\n\nDans cette vidéo :\n• le calcul en coordonnées, dans un repère orthonormé (et cette condition est obligatoire) : on multiplie les x entre eux, les y entre eux, les z entre eux, puis on additionne les trois résultats\n• le résultat est un NOMBRE, jamais un vecteur — c'est l'erreur de type qui coûte le plus cher au bac\n• le cas particulier le plus utile de tous : u · u est le carré de la norme, donc deux lignes suffisent pour obtenir une longueur\n• le piège : le produit scalaire ressemble à une multiplication, mais si u · v = u · w, on ne peut PAS conclure que v = w\n• et le zéro qui n'est pas rien : un produit scalaire nul entre deux vecteurs non nuls, c'est la définition même de l'orthogonalité\n\nDeux questions-pauses et un défi corrigé dans le cube ABCDEFGH d'arête 1 : A G · A B et A G · A C — avec la prudence qu'il faut garder, parce qu'on ne compare pas deux produits scalaires pour comparer deux angles si les normes diffèrent. Entraîne-toi sur eleveai.fr\n\n🎯 La série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_calculer&display=simple\n\n📈 Épisode 7 sur 12 de la série « Géométrie dans l'espace » d'EleveAI · Maths Tle spé.",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux vecteurs, trois multiplications, une addition"
+        ],
+        [
+          "00:10",
+          "Kelly, la part du vent qui pousse"
+        ],
+        [
+          "00:39",
+          "Le calcul en coordonnées"
+        ],
+        [
+          "01:12",
+          "Trois choses à retenir"
+        ],
+        [
+          "01:35",
+          "Question 1"
+        ],
+        [
+          "02:00",
+          "Réponse : zéro, et ce zéro veut dire quelque chose"
+        ],
+        [
+          "02:35",
+          "Le cas u · u"
+        ],
+        [
+          "03:01",
+          "On ne simplifie jamais"
+        ],
+        [
+          "03:45",
+          "Question 2"
+        ],
+        [
+          "04:09",
+          "Réponse : un produit scalaire nul entre deux vecteurs non nuls"
+        ],
+        [
+          "04:38",
+          "Deux lignes, mais écrites"
+        ],
+        [
+          "05:00",
+          "À toi de jouer"
+        ],
+        [
+          "05:20",
+          "Correction"
+        ],
+        [
+          "06:06",
+          "Ce que tu as appris"
+        ]
+      ],
+      "questions": [
+        {
+          "t": "01:35",
+          "question": "u a pour coordonnées 2, 0, moins 1, et v a pour coordonnées 1, 5, 2. Que vaut le produit scalaire de u et v ?",
+          "choix": [
+            "4",
+            "zéro",
+            "le vecteur de coordonnées 2, 0, moins 2"
+          ],
+          "reponse": 1,
+          "explication": "2 fois 1 fait 2. Zéro fois 5 fait zéro. Et moins 1 fois 2 fait moins 2. Deux, plus zéro, moins deux : zéro."
+        },
+        {
+          "t": "03:45",
+          "question": "Le produit scalaire de u et v est nul, et ni u ni v n'est le vecteur nul. Que peut-on dire ?",
+          "choix": [
+            "ils sont orthogonaux",
+            "ils sont colinéaires",
+            "l'un des deux est le vecteur nul"
+          ],
+          "reponse": 0,
+          "explication": "Un produit scalaire nul entre deux vecteurs non nuls, c'est la définition même de l'orthogonalité. Colinéaires, c'est au contraire le cas extrême opposé : le produit scalaire y est le plus grand possible en valeur absolue, il vaut le produit des normes."
+        }
+      ]
+    },
+    {
+      "id": "terminale-ps-espace-orthogonalite",
+      "notionId": "produit_scalaire_espace",
+      "microId": "ps_espace_orthogonalite",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/geometrie/ps-espace-orthogonalite/eleveai-maths-terminale-ps-espace-orthogonalite.mp4",
+      "miniature": "terminale/maths/geometrie/ps-espace-orthogonalite/eleveai-maths-terminale-ps-espace-orthogonalite.png",
+      "titre": "Pour un plan, il en faut DEUX · Démontrer une orthogonalité dans l'espace · Tle spé",
+      "centres": [
+        "sciences"
+      ],
+      "tags": [
+        "orthogonalité",
+        "produit scalaire",
+        "espace",
+        "vecteur normal",
+        "plan",
+        "droite orthogonale à un plan",
+        "cube ABCDEFGH",
+        "terminale",
+        "bac"
+      ],
+      "accroche": "Marc est maçon. Il plante un poteau et veut qu'il soit bien perpendiculaire à la dalle. Il vérifie au niveau dans un sens : c'est droit. Est-ce que ça suffit ? Non — un poteau peut être droit vu de face et penché vu de côté. Il faut vérifier dans DEUX directions. Ce geste de chantier, c'est exactement le théorème de ce chapitre.\n\nDans cette vidéo :\n• le test : deux vecteurs non nuls sont orthogonaux si et seulement si leur produit scalaire est nul — en coordonnées, c'est un calcul de trois secondes\n• le théorème qui porte tout le chapitre : une droite est orthogonale à un plan si et seulement si son vecteur directeur est orthogonal à DEUX vecteurs non colinéaires de ce plan — et ce vecteur s'appelle alors un vecteur normal\n• le piège le plus coûteux : un seul produit scalaire nul ne suffit pas. Au sol, le nord est orthogonal à l'est, et pourtant le nord est AU SOL : il n'est pas vertical\n• le second piège : dans l'espace, deux droites peuvent être orthogonales sans se couper — dans le cube, les arêtes [A B] et [C G] ne se rencontrent jamais\n• le modèle de rédaction en cinq lignes, dont la quatrième — « u et v ne sont pas colinéaires, car… » — est celle qu'on oublie, et c'est un point perdu à chaque fois\n\nDeux questions-pauses et un défi corrigé dans le cube ABCDEFGH : démontrer que la droite (A G) est orthogonale au plan (BDE). Une figure qui revient tous les ans. Entraîne-toi sur eleveai.fr\n\n🎯 La série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_orthogonalite&display=simple\n\n📈 Épisode 8 sur 12 de la série « Géométrie dans l'espace » d'EleveAI · Maths Tle spé.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un produit scalaire nul, et c'est prouvé"
+        ],
+        [
+          "00:09",
+          "Marc, le poteau vérifié dans un seul sens"
+        ],
+        [
+          "00:36",
+          "Le test de l'orthogonalité"
+        ],
+        [
+          "01:04",
+          "Le théorème du chapitre"
+        ],
+        [
+          "01:28",
+          "Question 1"
+        ],
+        [
+          "01:57",
+          "Réponse : la somme des trois produits est nulle"
+        ],
+        [
+          "02:29",
+          "Le théorème du poteau"
+        ],
+        [
+          "03:08",
+          "Un seul ne suffit pas"
+        ],
+        [
+          "03:51",
+          "Question 2"
+        ],
+        [
+          "04:19",
+          "Réponse : une seule direction ne suffit jamais"
+        ],
+        [
+          "04:39",
+          "Cinq lignes, et la quatrième compte"
+        ],
+        [
+          "05:12",
+          "À toi de jouer"
+        ],
+        [
+          "05:30",
+          "Correction"
+        ],
+        [
+          "06:31",
+          "Ce que tu as appris"
+        ]
+      ],
+      "questions": [
+        {
+          "t": "01:28",
+          "question": "u a pour coordonnées 1, 2, moins 2, et v a pour coordonnées 2, moins 3, moins 2. Sont-ils orthogonaux ?",
+          "choix": [
+            "oui, le produit scalaire vaut zéro",
+            "non, il vaut moins 8",
+            "non, car leurs coordonnées ne sont pas proportionnelles"
+          ],
+          "reponse": 0,
+          "explication": "1 fois 2 fait 2. 2 fois moins 3 fait moins 6. Et moins 2 fois moins 2 fait plus 4 : moins par moins fait plus. Deux, moins six, plus quatre : zéro."
+        },
+        {
+          "t": "03:51",
+          "question": "Le vecteur n est orthogonal à un vecteur u du plan P. Peut-on en conclure que n est orthogonal au plan P ?",
+          "choix": [
+            "oui, un vecteur suffit",
+            "oui, à condition que u ne soit pas le vecteur nul",
+            "non, il faut deux vecteurs non colinéaires du plan"
+          ],
+          "reponse": 2,
+          "explication": "Une seule direction ne suffit jamais, même bien choisie, même si u n'est pas nul. La preuve : le vecteur n pourrait être lui-même dans le plan P, comme le nord est au sol."
+        }
+      ]
+    },
+    {
+      "id": "terminale-ps-espace-norme-distance",
+      "notionId": "produit_scalaire_espace",
+      "microId": "ps_espace_norme_distance",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/geometrie/ps-espace-norme-distance/eleveai-maths-terminale-ps-espace-norme-distance.mp4",
+      "miniature": "terminale/maths/geometrie/ps-espace-norme-distance/eleveai-maths-terminale-ps-espace-norme-distance.png",
+      "titre": "10 km à plat et 1 de dénivelé ne font pas 11 · Norme et distance dans l'espace · Tle spé",
+      "centres": [
+        "sport"
+      ],
+      "tags": [
+        "norme",
+        "distance",
+        "espace",
+        "racine carrée",
+        "Pythagore",
+        "valeur exacte",
+        "cube ABCDEFGH",
+        "diagonale",
+        "terminale",
+        "bac"
+      ],
+      "accroche": "Pense à la Diagonale des Fous. Un coureur enchaîne dix kilomètres à plat et un kilomètre de dénivelé. Quelle distance a-t-il parcourue, vraiment ? Pas onze kilomètres : on n'additionne pas une distance au sol et une hauteur, on passe par les carrés. Racine de cent un, soit un peu plus de dix kilomètres. Le dénivelé change presque tout à l'effort, et presque rien à la distance — c'est Pythagore, en trois dimensions.\n\nDans cette vidéo :\n• la norme d'un vecteur de coordonnées x, y, z : la racine de x² + y² + z², et l'escalier de coordonnées qui montre d'où sortent les trois carrés\n• la distance entre deux points : arrivée moins départ, puis la racine de la somme des carrés — et le lien avec l'épisode précédent, le carré de la norme est le produit scalaire du vecteur par lui-même\n• le piège qui coûte le plus cher : la racine NE SE DISTRIBUE PAS. Racine de 3² + 4² ne fait pas 3 + 4, elle fait racine de 25, c'est-à-dire 5\n• la valeur exacte : racine de 14 est une réponse, 3,74 est un arrondi — et il ne vaut une réponse que si l'énoncé en demande un\n• le modèle de rédaction en trois lignes, et la phrase de conclusion qu'on oublie quand l'énoncé parle de distance\n\nDeux questions-pauses et un défi corrigé dans le cube ABCDEFGH : les longueurs AC et AG. Deux résultats à retenir par cœur — racine de 2 pour la diagonale d'une face, racine de 3 pour la grande diagonale, et a racine de 2 / a racine de 3 si l'arête mesure a. Entraîne-toi sur eleveai.fr\n\n🎯 La série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_norme_distance&display=simple\n\n📈 Épisode 9 sur 12 de la série « Géométrie dans l'espace » d'EleveAI · Maths Tle spé.",
+      "chapitres": [
+        [
+          "00:00",
+          "Trois carrés, une racine"
+        ],
+        [
+          "00:10",
+          "La Diagonale des Fous"
+        ],
+        [
+          "00:44",
+          "La norme d'un vecteur"
+        ],
+        [
+          "01:11",
+          "Une distance est une norme"
+        ],
+        [
+          "01:29",
+          "Question 1"
+        ],
+        [
+          "01:45",
+          "Réponse : 3, en élevant au carré d'abord"
+        ],
+        [
+          "02:14",
+          "D'un point à l'autre"
+        ],
+        [
+          "02:37",
+          "La racine ne se distribue pas"
+        ],
+        [
+          "03:15",
+          "Question 2"
+        ],
+        [
+          "03:40",
+          "Réponse : 5, la norme d'un vecteur vertical"
+        ],
+        [
+          "04:13",
+          "Trois lignes, toujours dans cet ordre"
+        ],
+        [
+          "04:37",
+          "À toi de jouer"
+        ],
+        [
+          "04:56",
+          "Correction"
+        ],
+        [
+          "05:39",
+          "Ce que tu as appris"
+        ]
+      ],
+      "questions": [
+        {
+          "t": "01:29",
+          "question": "u a pour coordonnées 1, moins 2, 2. Que vaut la norme de u ?",
+          "choix": [
+            "9",
+            "3",
+            "1"
+          ],
+          "reponse": 1,
+          "explication": "On élève au carré d'abord : 1 au carré fait 1 ; moins 2 au carré fait plus 4 ; 2 au carré fait 4. La somme fait 9, et racine de 9 fait 3."
+        },
+        {
+          "t": "03:15",
+          "question": "A a pour coordonnées 2, 1, zéro, et B a pour coordonnées 2, 1, 5. Que vaut la distance A B ?",
+          "choix": [
+            "racine de 5",
+            "zéro, puisque les deux premières coordonnées sont égales",
+            "5"
+          ],
+          "reponse": 2,
+          "explication": "Le vecteur A B a pour coordonnées zéro, zéro, 5. Sa norme : racine de zéro plus zéro plus 25, c'est-à-dire racine de 25, donc 5."
+        }
+      ]
+    },
+    {
+      "id": "terminale-ps-espace-angle",
+      "notionId": "produit_scalaire_espace",
+      "microId": "ps_espace_angle",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/geometrie/ps-espace-angle/eleveai-maths-terminale-ps-espace-angle.mp4",
+      "miniature": "terminale/maths/geometrie/ps-espace-angle/eleveai-maths-terminale-ps-espace-angle.png",
+      "titre": "La grande diagonale d'un cube ne fait pas 45° · Calculer un angle dans l'espace · Tle spé",
+      "centres": [
+        "nature-ecologie"
+      ],
+      "tags": [
+        "angle",
+        "produit scalaire",
+        "cosinus",
+        "arccos",
+        "espace",
+        "cube ABCDEFGH",
+        "grande diagonale",
+        "terminale",
+        "bac"
+      ],
+      "accroche": "Ravi installe des panneaux solaires sur les toits de Saint-Pierre. Un panneau face au soleil produit à plein ; incliné de trente degrés, il perd un peu ; à quatre-vingt-dix degrés, il ne produit plus rien. Ce qui décide du rendement, c'est l'angle entre la direction du soleil et celle du panneau — et cet angle se calcule avec un produit scalaire.\n\nDans cette vidéo :\n• la seconde formule du produit scalaire, et le cosinus qu'on en isole : le produit scalaire divisé par le PRODUIT des deux normes\n• le signe du produit scalaire donne la nature de l'angle avant tout calcul : positif aigu, nul droit, négatif obtus — parce que les deux normes sont toujours positives\n• un exemple mené jusqu'au bout sans calculatrice : un cosinus qui vaut un demi, c'est soixante degrés\n• les trois pièges : on divise par le produit et jamais par la somme ; un cosinus reste entre moins 1 et 1, donc 1,25 est une erreur de calcul ; et l'angle de deux VECTEURS n'est pas l'angle de deux DROITES — pour des droites on prend la valeur absolue\n• les quatre lignes de la copie, et l'unité qu'on oublie : un angle sans degrés ni radians, c'est le point perdu\n\nDeux questions-pauses et un défi corrigé dans le cube ABCDEFGH d'arête 1 : l'angle entre la grande diagonale et une arête. Il vaut 55 degrés environ, et surtout pas 45 — beaucoup de copies écrivent 45 sans calculer. Entraîne-toi sur eleveai.fr\n\n🎯 La série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_angle&display=simple\n\n📈 Épisode 10 sur 12 de la série « Géométrie dans l'espace » d'EleveAI · Maths Tle spé.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un produit scalaire, deux normes, une division"
+        ],
+        [
+          "00:10",
+          "Ravi et les panneaux solaires de Saint-Pierre"
+        ],
+        [
+          "00:36",
+          "Du produit scalaire à l'angle"
+        ],
+        [
+          "01:13",
+          "Le signe décide avant le calcul"
+        ],
+        [
+          "01:41",
+          "Question 1"
+        ],
+        [
+          "02:05",
+          "Réponse : obtus, parce que le produit scalaire est négatif"
+        ],
+        [
+          "02:29",
+          "Jusqu'au bout, sans calculatrice"
+        ],
+        [
+          "02:57",
+          "Les trois pièges"
+        ],
+        [
+          "03:37",
+          "Question 2"
+        ],
+        [
+          "04:04",
+          "Réponse : un cosinus ne dépasse jamais 1"
+        ],
+        [
+          "04:31",
+          "Quatre lignes, dans cet ordre"
+        ],
+        [
+          "04:57",
+          "À toi de jouer"
+        ],
+        [
+          "05:17",
+          "Correction : 55 degrés, et pas 45"
+        ],
+        [
+          "06:07",
+          "Ce que tu as appris"
+        ]
+      ],
+      "questions": [
+        {
+          "t": "01:41",
+          "question": "Le produit scalaire de u et v vaut moins 6, et aucun des deux vecteurs n'est nul. L'angle entre u et v est :",
+          "choix": [
+            "aigu",
+            "droit",
+            "obtus, donc plus grand que 90 degrés"
+          ],
+          "reponse": 2,
+          "explication": "Le cosinus de l'angle a le même signe que le produit scalaire, puisqu'on divise par deux normes qui sont positives. Un produit scalaire négatif donne donc un cosinus négatif, et un cosinus négatif donne un angle compris entre 90 et 180 degrés : un angle obtus."
+        },
+        {
+          "t": "03:37",
+          "question": "On calcule le cosinus de l'angle entre deux vecteurs et on trouve 1 virgule 25. Que peut-on dire ?",
+          "choix": [
+            "l'angle est très petit",
+            "il y a une erreur, un cosinus reste entre moins 1 et 1",
+            "les deux vecteurs sont colinéaires"
+          ],
+          "reponse": 1,
+          "explication": "Un cosinus ne dépasse jamais 1, jamais. Les deux erreurs les plus fréquentes : avoir divisé par la somme des normes au lieu de leur produit, ou avoir oublié une racine dans une norme."
+        }
+      ]
+    },
+    {
+      "id": "terminale-ps-espace-plan-normal",
+      "notionId": "produit_scalaire_espace",
+      "microId": "ps_espace_plan_normal",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/geometrie/ps-espace-plan-normal/eleveai-maths-terminale-ps-espace-plan-normal.mp4",
+      "miniature": "terminale/maths/geometrie/ps-espace-plan-normal/eleveai-maths-terminale-ps-espace-plan-normal.png",
+      "titre": "La perpendiculaire à un plan est écrite dans son équation · Vecteur normal · Tle spé",
+      "centres": [
+        "sciences"
+      ],
+      "tags": [
+        "vecteur normal",
+        "équation de plan",
+        "plan",
+        "espace",
+        "projeté orthogonal",
+        "plans parallèles",
+        "produit scalaire",
+        "terminale",
+        "bac"
+      ],
+      "accroche": "Un clou planté bien droit dans une planche : le clou donne la direction perpendiculaire à la planche. En maths, ce clou s'appelle un vecteur normal. Et voici le plus beau résultat du chapitre : si tu as l'équation d'un plan, tu as déjà son vecteur normal sous les yeux, sans aucun calcul.\n\nDans cette vidéo :\n• les trois coefficients de x, de y et de z SONT les coordonnées d'un vecteur normal, avec leurs signes — et le terme constant n'en fait pas partie : il dit seulement où le plan se place, pas comment il est orienté\n• le théorème dans l'autre sens : un point et une normale suffisent pour écrire l'équation, et le terme constant se trouve en remplaçant par le point\n• la raison profonde, en une ligne : M est dans le plan si et seulement si le produit scalaire de A M et de la normale est nul\n• le piège : une normale n'est pas unique, donc deux équations qui ne se ressemblent pas peuvent décrire le même plan — on compare deux plans en deux temps, les normales d'abord, un point ensuite\n• et le second piège : un vecteur normal n'est pas un vecteur directeur\n• la méthode reine du projeté orthogonal : on écrit la droite qui suit la normale, puis on cherche son intersection avec le plan\n\nDeux questions-pauses et un défi corrigé : le projeté orthogonal du point de coordonnées 1, 1, 1 sur le plan d'équation x plus y plus z égale zéro. C'est l'origine du repère. Entraîne-toi sur eleveai.fr\n\n🎯 La série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_plan_normal&display=simple\n\n📈 Épisode 11 sur 12 de la série « Géométrie dans l'espace » d'EleveAI · Maths Tle spé.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les coefficients de l'équation sont un vecteur"
+        ],
+        [
+          "00:10",
+          "Le clou planté droit dans une planche"
+        ],
+        [
+          "00:31",
+          "On lit la normale dans l'équation"
+        ],
+        [
+          "00:56",
+          "Et dans l'autre sens : un point et une normale"
+        ],
+        [
+          "01:23",
+          "Question 1"
+        ],
+        [
+          "01:45",
+          "Réponse : on lit les coefficients avec leurs signes"
+        ],
+        [
+          "02:09",
+          "Trouver l'équation à partir d'un point et d'une normale"
+        ],
+        [
+          "02:49",
+          "Le piège : une normale n'est pas unique"
+        ],
+        [
+          "03:38",
+          "Question 2"
+        ],
+        [
+          "04:04",
+          "Réponse : strictement parallèles"
+        ],
+        [
+          "04:33",
+          "Les deux rédactions à connaître"
+        ],
+        [
+          "05:06",
+          "À toi de jouer"
+        ],
+        [
+          "05:26",
+          "Correction : le projeté de A est l'origine"
+        ],
+        [
+          "06:11",
+          "Ce que tu as appris"
+        ]
+      ],
+      "questions": [
+        {
+          "t": "01:23",
+          "question": "Quel est un vecteur normal au plan d'équation x moins 2 y plus 5 z plus 7 égale zéro ?",
+          "choix": [
+            "1, moins 2, 5",
+            "1, 2, 5",
+            "zéro, zéro, 7"
+          ],
+          "reponse": 0,
+          "explication": "On lit les coefficients avec leurs signes : 1, moins 2 et 5. La réponse B a perdu le signe moins, et ce n'est pas un détail : elle décrit une direction complètement différente."
+        },
+        {
+          "t": "03:38",
+          "question": "Les plans P, d'équation x plus y plus z moins 1 égale zéro, et P prime, d'équation 2 x plus 2 y plus 2 z plus 6 égale zéro, sont :",
+          "choix": [
+            "sécants",
+            "strictement parallèles",
+            "confondus"
+          ],
+          "reponse": 1,
+          "explication": "Les deux normales, 1, 1, 1 et 2, 2, 2, sont colinéaires : les plans sont donc parallèles, ils ne sont pas sécants. Sont-ils confondus ?"
+        }
+      ]
+    },
+    {
+      "id": "terminale-ps-espace-defi",
+      "notionId": "produit_scalaire_espace",
+      "microId": "ps_espace_defi",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/geometrie/ps-espace-defi/eleveai-maths-terminale-ps-espace-defi.mp4",
+      "miniature": "terminale/maths/geometrie/ps-espace-defi/eleveai-maths-terminale-ps-espace-defi.png",
+      "titre": "Le plan (BDE) coupe la diagonale du cube à son premier tiers · Exercice type bac · Tle spé",
+      "centres": [
+        "jeux-defis"
+      ],
+      "tags": [
+        "exercice type bac",
+        "produit scalaire",
+        "vecteur normal",
+        "équation de plan",
+        "projeté orthogonal",
+        "distance à un plan",
+        "cube ABCDEFGH",
+        "espace",
+        "terminale",
+        "bac"
+      ],
+      "accroche": "Regarde les sujets des années passées : l'exercice de l'espace suit presque toujours le même chemin. On démontre qu'un vecteur est normal à un plan, on en déduit l'équation de ce plan, puis on calcule une distance, un projeté ou un angle. Si tu reconnais le chemin, tu ne cherches plus quoi faire : tu avances.\n\nDans cette vidéo :\n• le fil en trois étapes : deux produits scalaires nuls prouvent qu'un vecteur est normal au plan, ce vecteur donne les coefficients de l'équation, et un point du plan donne le terme constant\n• la boîte à outils complète, cinq objets — et ils suffisent pour tout l'exercice\n• les cinq pièges de la copie, qui coûtent plus cher que les erreurs de calcul : prouver l'orthogonalité sur une seule direction, oublier d'écrire la non-colinéarité, donner un arrondi quand l'énoncé veut l'exact, annoncer une distance négative, et s'appuyer sur le dessin pour affirmer — dans l'espace, la preuve est toujours un calcul\n• le squelette d'une copie complète, qui fonctionne sur n'importe quel sujet de l'espace\n\nDeux questions-pauses et un défi corrigé dans le cube d'arête 1 : le projeté orthogonal de A sur le plan B D E, et la distance de A à ce plan. Elle vaut racine de 3 sur 3, environ zéro virgule 58 — et le point trouvé est au premier tiers de la grande diagonale. Entraîne-toi sur eleveai.fr\n\n🎯 La série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_defi&display=simple\n\n📈 Épisode 12 sur 12 de la série « Géométrie dans l'espace » d'EleveAI · Maths Tle spé.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une normale, une équation, une distance"
+        ],
+        [
+          "00:12",
+          "Toujours le même chemin"
+        ],
+        [
+          "00:35",
+          "Le fil, en trois étapes"
+        ],
+        [
+          "01:00",
+          "Cinq objets, et ils suffisent"
+        ],
+        [
+          "01:24",
+          "Question 1"
+        ],
+        [
+          "01:50",
+          "Réponse : les deux produits scalaires, et la phrase"
+        ],
+        [
+          "02:17",
+          "Dans le cube : la normale, puis l'équation"
+        ],
+        [
+          "03:03",
+          "Cinq pièges de copie"
+        ],
+        [
+          "03:38",
+          "Question 2"
+        ],
+        [
+          "04:00",
+          "Réponse : le triangle BDE est équilatéral"
+        ],
+        [
+          "04:30",
+          "Le squelette d'une copie"
+        ],
+        [
+          "05:00",
+          "À toi de jouer"
+        ],
+        [
+          "05:22",
+          "Correction : K au premier tiers de la diagonale"
+        ],
+        [
+          "06:19",
+          "Ce que tu as appris"
+        ]
+      ],
+      "questions": [
+        {
+          "t": "01:24",
+          "question": "Pour démontrer qu'un vecteur n est normal au plan B D E, que faut-il vérifier ?",
+          "choix": [
+            "que n est orthogonal à B D",
+            "que n est orthogonal à B D et à B E, et que ces deux vecteurs ne sont pas colinéaires",
+            "que n est colinéaire à B D"
+          ],
+          "reponse": 1,
+          "explication": "Il faut les deux produits scalaires, et il faut la phrase sur la non-colinéarité : sans elle, la démonstration est incomplète et le point est perdu."
+        },
+        {
+          "t": "03:38",
+          "question": "Dans le cube d'arête 1, on considère les points B, D et E. Le triangle B D E est :",
+          "choix": [
+            "équilatéral",
+            "rectangle en B",
+            "quelconque"
+          ],
+          "reponse": 0,
+          "explication": "Chacun de ses trois côtés est la diagonale d'une face du cube : B D, B E et D E ont tous pour longueur racine de 2. Rectangle en B ?"
+        }
+      ]
     }
   ]
 }

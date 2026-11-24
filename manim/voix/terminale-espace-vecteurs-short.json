@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Un vecteur dans l'espace, c'est trois nombres. Et pour les trouver, un seul geste : arrivée moins départ.",
+  "01-idee": "A a pour coordonnées 1, 0, 0 et B a pour coordonnées 1, 0, 2. Pour le vecteur A B, on soustrait coordonnée par coordonnée : 1 moins 1 fait 0, 0 moins 0 fait 0, et 2 moins 0 fait 2. Donc A B a pour coordonnées 0, 0, 2.",
+  "02-question": "Question ! A a pour coordonnées 3, 1, 0. B a pour coordonnées 5, 1, 0. Coordonnées du vecteur A B ? A : 8, 2, 0. B : 2, 0, 0. C : moins 2, 0, 0. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B. 5 moins 3 fait 2, 1 moins 1 fait 0, 0 moins 0 fait 0. La réponse A, c'est la somme. Et moins 2, 0, 0, c'est le vecteur B A, le même dans l'autre sens.",
+  "03-commentaire": "À toi ! A a pour coordonnées 2, 1, 4 et B a pour coordonnées 2, 5, 4. Que vaut le vecteur A B ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

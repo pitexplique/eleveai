@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Tu as l'équation d'un plan ? Alors tu as déjà son vecteur normal sous les yeux, sans aucun calcul.",
+  "01-idee": "Les coefficients de x, de y et de z sont les coordonnées d'un vecteur normal, avec leurs signes. Le plan d'équation 2 x moins y plus 3 z moins 5 égale zéro a donc pour vecteur normal 2, moins 1, 3. Le terme constant, lui, n'en fait pas partie : il dit seulement où le plan se place, pas comment il est orienté.",
+  "02-question": "Question ! Quel est un vecteur normal au plan d'équation 3 x moins y plus 2 z plus 4 égale zéro ? A : 3, 1, 2. B : 3, moins 1, 2. C : zéro, zéro, 4. Mets pause, et choisis !",
+  "02b-reponse": "Réponse B. On lit les trois coefficients avec leurs signes : 3, moins 1 et 2. La réponse A a perdu le signe moins, et ce n'est pas un détail : elle décrit une tout autre direction. Et la réponse C a pris le terme constant, qui ne dit rien de l'orientation du plan : deux plans parallèles ont la même normale et des termes constants différents.",
+  "03-commentaire": "À toi ! Quel est un vecteur normal au plan d'équation x moins 4 y plus z moins 9 égale zéro ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Et abonne-toi !"
+}

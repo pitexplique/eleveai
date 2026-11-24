@@ -18863,5 +18863,113 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_evo_coefficient&microId=auto_evo_valeur_initiale&display=simple"
+ },
+ "terminale-espace-vecteurs": {
+  "fichier": "terminale/maths/geometrie/espace-vecteurs/eleveai-maths-terminale-espace-vecteurs.mp4",
+  "poster": "terminale/maths/geometrie/espace-vecteurs/eleveai-maths-terminale-espace-vecteurs.png",
+  "vignette": null,
+  "titre": "Trois nombres au lieu de deux — Vecteurs dans l'espace · Tle spé",
+  "short": false,
+  "youtube": "HSWJPC9hEnU",
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_vecteurs&display=simple"
+ },
+ "terminale-espace-repere-coordonnees": {
+  "fichier": "terminale/maths/geometrie/espace-repere-coordonnees/eleveai-maths-terminale-espace-repere-coordonnees.mp4",
+  "poster": "terminale/maths/geometrie/espace-repere-coordonnees/eleveai-maths-terminale-espace-repere-coordonnees.png",
+  "vignette": null,
+  "titre": "Le cube où tout vaut 0 ou 1 — Coordonnées dans l'espace · Tle spé",
+  "short": false,
+  "youtube": "E3Lhg5Nx5Hw",
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_repere_coordonnees&display=simple"
+ },
+ "terminale-espace-droite-parametrique": {
+  "fichier": "terminale/maths/geometrie/espace-droite-parametrique/eleveai-maths-terminale-espace-droite-parametrique.mp4",
+  "poster": "terminale/maths/geometrie/espace-droite-parametrique/eleveai-maths-terminale-espace-droite-parametrique.png",
+  "vignette": null,
+  "titre": "Un point, une direction, un curseur — Représentation paramétrique · Tle spé",
+  "short": false,
+  "youtube": "DfvqKivFpLw",
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_droite_parametrique&display=simple"
+ },
+ "terminale-espace-plan-equation": {
+  "fichier": "terminale/maths/geometrie/espace-plan-equation/eleveai-maths-terminale-espace-plan-equation.mp4",
+  "poster": "terminale/maths/geometrie/espace-plan-equation/eleveai-maths-terminale-espace-plan-equation.png",
+  "vignette": null,
+  "titre": "Une seule ligne décrit un plan entier — Équation cartésienne · Tle spé",
+  "short": false,
+  "youtube": "_oGj9PSrqzI",
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_plan_equation&display=simple"
+ },
+ "terminale-espace-position-relative": {
+  "fichier": "terminale/maths/geometrie/espace-position-relative/eleveai-maths-terminale-espace-position-relative.mp4",
+  "poster": "terminale/maths/geometrie/espace-position-relative/eleveai-maths-terminale-espace-position-relative.png",
+  "vignette": null,
+  "titre": "Deux droites qui ne se croisent jamais, sans être parallèles — Positions relatives · Tle spé",
+  "short": false,
+  "youtube": "fPcUu7aTfQc",
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_position_relative&display=simple"
+ },
+ "terminale-espace-defi": {
+  "fichier": "terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi.mp4",
+  "poster": "terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi.png",
+  "vignette": null,
+  "titre": "Trois points sont toujours coplanaires : ça ne prouve rien · Exercice type bac · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_defi&display=simple"
+ },
+ "terminale-ps-espace-calculer": {
+  "fichier": "terminale/maths/geometrie/ps-espace-calculer/eleveai-maths-terminale-ps-espace-calculer.mp4",
+  "poster": "terminale/maths/geometrie/ps-espace-calculer/eleveai-maths-terminale-ps-espace-calculer.png",
+  "vignette": null,
+  "titre": "Un produit scalaire est un NOMBRE, pas un vecteur · Le calculer dans l'espace · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_calculer&display=simple"
+ },
+ "terminale-ps-espace-orthogonalite": {
+  "fichier": "terminale/maths/geometrie/ps-espace-orthogonalite/eleveai-maths-terminale-ps-espace-orthogonalite.mp4",
+  "poster": "terminale/maths/geometrie/ps-espace-orthogonalite/eleveai-maths-terminale-ps-espace-orthogonalite.png",
+  "vignette": null,
+  "titre": "Pour un plan, il en faut DEUX · Démontrer une orthogonalité dans l'espace · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_orthogonalite&display=simple"
+ },
+ "terminale-ps-espace-norme-distance": {
+  "fichier": "terminale/maths/geometrie/ps-espace-norme-distance/eleveai-maths-terminale-ps-espace-norme-distance.mp4",
+  "poster": "terminale/maths/geometrie/ps-espace-norme-distance/eleveai-maths-terminale-ps-espace-norme-distance.png",
+  "vignette": null,
+  "titre": "10 km à plat et 1 de dénivelé ne font pas 11 · Norme et distance dans l'espace · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_norme_distance&display=simple"
+ },
+ "terminale-ps-espace-angle": {
+  "fichier": "terminale/maths/geometrie/ps-espace-angle/eleveai-maths-terminale-ps-espace-angle.mp4",
+  "poster": "terminale/maths/geometrie/ps-espace-angle/eleveai-maths-terminale-ps-espace-angle.png",
+  "vignette": null,
+  "titre": "La grande diagonale d'un cube ne fait pas 45° · Calculer un angle dans l'espace · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_angle&display=simple"
+ },
+ "terminale-ps-espace-plan-normal": {
+  "fichier": "terminale/maths/geometrie/ps-espace-plan-normal/eleveai-maths-terminale-ps-espace-plan-normal.mp4",
+  "poster": "terminale/maths/geometrie/ps-espace-plan-normal/eleveai-maths-terminale-ps-espace-plan-normal.png",
+  "vignette": null,
+  "titre": "La perpendiculaire à un plan est écrite dans son équation · Vecteur normal · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_plan_normal&display=simple"
+ },
+ "terminale-ps-espace-defi": {
+  "fichier": "terminale/maths/geometrie/ps-espace-defi/eleveai-maths-terminale-ps-espace-defi.mp4",
+  "poster": "terminale/maths/geometrie/ps-espace-defi/eleveai-maths-terminale-ps-espace-defi.png",
+  "vignette": null,
+  "titre": "Le plan (BDE) coupe la diagonale du cube à son premier tiers · Exercice type bac · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_defi&display=simple"
  }
 }

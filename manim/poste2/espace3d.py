@@ -298,7 +298,18 @@ class Repere3D:
             "G": (ox + k, oy + k, oz + k), "H": (ox, oy + k, oz + k),
         }
         nom_de = dict(zip("ABCDEFGH", noms))
-        vues = [("A", "B"), ("B", "C"), ("E", "F"), ("F", "G"), ("G", "H"),
+        # ⛔⛔ [E H] MANQUAIT, ET IL A MANQUÉ DEPUIS LE PREMIER ÉPISODE (trouvé par
+        # Frédéric le 23/11/2026, à l'œil, sur une planche de figures — par AUCUN outil).
+        # Le cube ne portait que ONZE arêtes sur douze : le haut était OUVERT à gauche,
+        # entre E et H. ⚠️ Et rien ne pouvait le dire — le dry run ne regarde que les
+        # bords du cadre, la mesure ne regarde que les cotes des blocs, et à la planche
+        # une arête absente ne « saute » pas aux yeux puisqu'il n'y a rien à voir. C'est
+        # la forme la plus pure du défaut de l'épisode 8 (« cinq morceaux construits,
+        # quatre joués ») : ici le morceau n'était même pas construit.
+        # ⭐ Le contrôle qui le prouve est en bas de ce fichier, et il tourne à l'import :
+        # les douze arêtes d'un cube sont les paires de sommets qui diffèrent d'UNE
+        # coordonnée, et on les compte.
+        vues = [("A", "B"), ("B", "C"), ("E", "F"), ("F", "G"), ("G", "H"), ("E", "H"),
                 ("A", "E"), ("B", "F"), ("C", "G")]
         cachees = [("A", "D"), ("D", "C"), ("D", "H")]
         g = VGroup()
@@ -531,3 +542,268 @@ class PlancheEspace3D(Scene):
                  etiquette("droite : un point, un sens", 3, 1))
 
         self.wait(0.1)
+
+
+# ⛔⛔ LE CUBE A-T-IL SES DOUZE ARÊTES ? — contrôle exécuté à l'IMPORT (23/11/2026)
+#
+# Il a manqué [E H] depuis le premier épisode de la série, dans la figure que NEUF
+# épisodes sur douze emploient. Frédéric l'a vu à l'œil sur une planche ; aucun
+# instrument du dépôt ne pouvait le dire, parce qu'ils mesurent tous ce qui EST dessiné
+# (ses bords, ses cotes, ses chevauchements) et jamais ce qui MANQUE.
+# ⭐ Le contrôle ne lit pas la liste `vues` — ce serait se relire soi-même. Il relève les
+# segments RÉELLEMENT construits, retrouve leurs extrémités parmi les huit sommets, et
+# compare aux douze paires qui diffèrent d'exactement UNE coordonnée. C'est la leçon
+# « un étalon qui partage le défaut de l'instrument ne prouve rien ».
+def _controler_aretes_du_cube():
+    r = Repere3D(o=np.array([0.0, 0.0, 0.0]), u=1.0, portee=2)
+    g = r.cube(cote=1)
+    pos = {s: tuple(np.round(r.pt(*v)[:2], 3)) for s, v in g.P3.items()}
+    inv = {v: k for k, v in pos.items()}
+    traces = set()
+    for m in g.submobjects:
+        if isinstance(m, Line):          # DashedLine hérite de Line : les deux comptent
+            a = inv.get(tuple(np.round(m.get_start()[:2], 3)))
+            b = inv.get(tuple(np.round(m.get_end()[:2], 3)))
+            if a and b:
+                traces.add("".join(sorted((a, b))))
+    attendues = {"".join(sorted((s1, s2))) for s1 in g.P3 for s2 in g.P3
+                 if s1 < s2 and sum(1 for k in range(3)
+                                    if g.P3[s1][k] != g.P3[s2][k]) == 1}
+    manque = attendues - traces
+    assert not manque, f"cube() ne trace pas les arêtes {sorted(manque)}"
+    assert len(traces) == 12, f"cube() trace {len(traces)} arêtes au lieu de 12"
+
+
+_controler_aretes_du_cube()
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# ⭐⭐ LES SCHÉMAS PLANS DE LA SÉRIE — recopiés ici le 23/11/2026
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# POURQUOI ILS SONT ICI, et pourquoi ils forment une FAMILLE.
+# Chaque épisode paysage portait ses figures comme fonctions de module, dans son propre
+# fichier. Or un SHORT prend UNE IDÉE de son épisode — donc il veut la figure qui porte
+# cette idée. Les trois ci-dessous sont exactement celles dont les shorts du produit
+# scalaire ont besoin, et elles ont toutes la MÊME raison d'exister :
+#
+#   ⛔⛔ ELLES SONT PLANES PARCE QUE LA CAVALIÈRE MENT.
+#   Rien n'y est projeté, donc rien n'y ment. C'est la règle déjà portée ici par
+#   `plan_dessine` (épisode 8) — qui est de la même famille et qui vit dans ce fichier
+#   depuis le début. Les trois autres y étaient restées étrangères par accident
+#   d'écriture, pas par décision.
+#
+# ⛔ LES ÉPISODES LIVRÉS GARDENT LEURS COPIES : ils sont gelés et ne sont pas touchés.
+# La duplication est ASSUMÉE et bornée à ces fichiers-là.
+#
+# ⚠️ DEUX NOMS ONT DÛ ÊTRE DÉFINIS ICI POUR QUE LA COPIE RESTE VERBATIM, et c'est une
+# dette, pas une élégance. Les trois fonctions emploient `P(x, y)` et `VERT_OK`, et
+# AUCUN des deux ne peut être importé d'ici — pour la MÊME raison, qui est une affaire
+# de `sys.path` et non de dépendances :
+#   · ce fichier vit dans `manim/poste2/`. `P` est défini dans
+#     `manim/scripts/terminale/proba_bin_defi.py` (l. 61) et `VERT_OK` dans
+#     `manim/charte.py` (l. 5) ;
+#   · ni `manim/scripts/terminale/` ni `manim/` ne sont sur le `sys.path` de ce
+#     fichier autrement que par la grâce de l'APPELANT. Un import d'ici marcherait
+#     depuis un épisode, qui pose ces chemins lui-même, et échouerait partout ailleurs.
+#
+# ⛔⛔ CORRECTION DU 23/11, et elle est écrite ici parce qu'un commentaire faux trompe
+# le suivant : j'avais d'abord justifié le cas de `P` par un CYCLE D'IMPORT. Il n'existe
+# pas. J'avais raisonné sur la ROUTE par laquelle les épisodes atteignent `P` — via
+# `espace_ecrans`, qui importe bien ce fichier — et non sur l'endroit où `P` est
+# DÉFINI. Vérifié depuis, et jusqu'aux imports INDIRECTS : la fermeture transitive de
+# `proba_bin_defi` atteint huit modules du dépôt (charte, gabarit_bases,
+# gabarit_seconde, gabarit_sixieme, mascotte, proba_bin_defi, proba_pc_conditionnelle,
+# signes_expression_2de) et **ni `espace3d` ni `espace_ecrans` n'en font partie**.
+# ⭐ La leçon de méthode : **une dette assumée avec la bonne raison se rembourse un
+# jour ; une dette justifiée par un danger imaginaire ne se rembourse jamais**, parce
+# que personne n'ose y toucher.
+# ⭐ Les deux sont donc recopiés à l'identique, avec leur provenance. ⚠️ Deux copies d'une
+# seule vérité divergent dès qu'on en touche une : si `VERT_OK` change dans la charte, il
+# change ici. (Vérifié : personne ne fait `from espace3d import *`, donc ces deux noms
+# n'arrivent chez personne par surprise.)
+
+VERT_OK = "#00FF7F"          # recopié de manim/charte.py : « résultats justes »
+
+
+def P(x, y):                 # recopié de manim/scripts/terminale/proba_bin_defi.py
+    return np.array([x, y, 0.0])
+
+
+# ── `poteau_vue` — vient de E8 `ps_espace_orthogonalite` ──
+def poteau_vue(penche=False, s=1.0):
+    """UNE VUE DU POTEAU SUR SA DALLE — droite si `penche` est faux, penchée sinon.
+
+    ⭐⭐ C'EST LE SCHÉMA QUI PORTE TOUT L'ÉPISODE, et c'est un schéma PLAN : rien n'y est
+    projeté, donc rien n'y ment. Les deux vues côte à côte disent exactement ce que dit
+    la voix — « un poteau peut être droit vu de face et penché vu de côté » — et c'est
+    la raison pour laquelle un seul produit scalaire ne suffit pas.
+    ⛔ Un morceau de plan en cavalière à cet endroit aurait fait croire à une figure de
+    l'espace, dans un épisode dont les deux plans se projettent justement sur une lame.
+    ⚠️ La dalle est HORIZONTALE et le poteau MONTE : dans un schéma plan comme dans la
+    cavalière, ce qui doit paraître horizontal se dessine selon x (leçon du pont, E5)."""
+    dalle = RoundedRectangle(width=1.50, height=0.17, corner_radius=0.04,
+                             fill_color=C_PLAN, fill_opacity=0.35,
+                             stroke_color=C_PLAN, stroke_width=3).move_to(P(0, -0.09))
+    haut = P(0.46, 1.18) if penche else P(0, 1.18)
+    poteau = Line(P(0, 0), haut, stroke_width=13, color=C_POINT)
+    g = VGroup(dalle, poteau)
+    if penche:
+        # ⭐ La VERTICALE en pointillé à côté du poteau penché : sans elle, « penché » ne
+        # se voit pas — il n'y a rien par rapport à quoi juger. Avec elle, l'écart saute
+        # aux yeux (c'est la leçon « la route doit passer SOUS le pont quelque part », E5).
+        g.add(DashedLine(P(0, 0), P(0, 1.18), dash_length=0.09).set_stroke(C_FANTOME, 3))
+        g.add(VGroup(Line(P(-0.14, -0.14), P(0.14, 0.14)),
+                     Line(P(-0.14, 0.14), P(0.14, -0.14)))
+              .set_stroke(C_PIEGE, 6).move_to(P(0.62, 1.28)))
+    else:
+        g.add(VGroup(Line(P(0.02, 0.26), P(0.26, 0.26)),
+                     Line(P(0.26, 0.26), P(0.26, 0.02))).set_stroke(VERT_OK, 4))
+        # ⛔ VU AU GROS PLAN : posée sur le haut du poteau, la coche se lisait comme un
+        # poteau TORDU à son sommet. Elle est à côté, dans le vide, comme la croix de
+        # l'autre vue.
+        g.add(VGroup(Line(P(0.28, 1.26), P(0.37, 1.16)),
+                     Line(P(0.37, 1.16), P(0.54, 1.40))).set_stroke(VERT_OK, 6))
+    return g.scale(s)
+
+
+# ── `pente` — vient de E9 `ps_espace_norme_distance` ──
+def pente(s=1.0):
+    """LE PROFIL DE LA COURSE : le plat, le dénivelé, et la distance réellement parcourue.
+
+    ⭐⭐ DESSINÉ À L'ÉCHELLE, ET C'EST TOUTE LA LEÇON : la hauteur fait exactement un
+    DIXIÈME de la base, donc l'hypoténuse se superpose presque au sol — « le dénivelé
+    change presque tout à l'effort, et presque rien à la distance ». Un schéma exagéré
+    aurait fait croire le contraire, et l'écran aurait contredit la voix.
+    ⛔ Schéma PLAN : rien n'y est projeté, donc rien n'y ment. C'est la règle du poteau
+    de l'épisode 8 — en cavalière, un angle de 5,7° serait illisible ET faux.
+    ⚠️ Ce qui doit paraître horizontal se dessine selon x (leçon du pont, E5) : le plat
+    est l'axe des x, le dénivelé monte.
+
+    Rend (sol, montee, trajet, angle) : quatre morceaux, et les QUATRE sont joués —
+    `plan_poteau` de l'épisode 8 en rendait cinq et l'écran n'en montrait que quatre."""
+    base, haut = 4.0, 0.40
+    a, b, c = P(-base / 2, -haut / 2), P(base / 2, -haut / 2), P(base / 2, haut / 2)
+    # ⛔ LE SOL EST UN TRAIT PLEIN, ET C'EST LE GROS PLAN QUI L'A DIT : en `DashedLine`,
+    # le premier et le dernier tiret ne vont pas jusqu'aux extrémités — mesuré à ×2,6,
+    # le pointillé commençait 0,30 unité à droite du départ, et le triangle paraissait
+    # OUVERT à gauche. ⚠️ Et il n'a aucune raison d'être pointillé : les dix kilomètres à
+    # plat sont réellement parcourus, ce n'est pas un trait de construction.
+    sol = Line(a, b, stroke_width=7, color=C_FANTOME)
+    montee = Line(b, c, stroke_width=9, color=C_REGARD)
+    trajet = Line(a, c, stroke_width=9, color=C_VECTEUR)
+    # Le petit carré de l'angle droit, au pied de la montée. ⚠️ 0,11 et non 0,20 : la
+    # montée ne fait que 0,40 de haut, un carré de 0,20 en occuperait la moitié.
+    k = 0.11
+    angle = VGroup(Line(b + LEFT * k, b + LEFT * k + UP * k),
+                   Line(b + LEFT * k + UP * k, b + UP * k)).set_stroke(VERT_OK, 3)
+    return VGroup(sol, montee, trajet, angle).scale(s)
+
+
+# ── `coin` — vient de E10 `ps_espace_angle` ──
+def coin(deg, r=1.30, sw=7, c1=C_VECTEUR, c2=C_VECTEUR2, r_arc=0.46, c_arc=C_REGARD,
+         oppose=False, s=1.0):
+    """DEUX VECTEURS ET LEUR ANGLE, DESSINÉS À PLAT — l'angle vu DANS leur plan.
+
+    ⭐⭐ C'est la figure de cet épisode, et elle est PLANE pour la raison écrite en tête
+    du fichier : la cavalière de la série ne conserve aucun angle (u(1;1;0) y tombe à
+    11,5° de l'axe des x, et l'angle du défi se lit 42° au lieu de 55°). Comme le
+    `plan_dessine` de l'épisode 8, cette figure ne prétend pas dire OÙ sont les
+    vecteurs : elle dit ce qu'est leur angle, et elle le dit JUSTE.
+    ⚠️ L'angle dessiné est vérifié par une assertion du module.
+
+    `oppose=True` ajoute −v⃗ et l'arc du supplémentaire : c'est le piège n° 3 (l'angle de
+    deux DROITES), et les deux arcs doivent avoir des RAYONS différents, sinon ils se
+    touchent au point de départ commun."""
+    th = math.radians(deg)
+    p1 = np.array([r, 0.0, 0.0])
+    p2 = np.array([r * math.cos(th), r * math.sin(th), 0.0])
+    f1 = Arrow(ORIGIN, p1, buff=0, stroke_width=sw, color=c1,
+               max_tip_length_to_length_ratio=0.14)
+    f2 = Arrow(ORIGIN, p2, buff=0, stroke_width=sw, color=c2,
+               max_tip_length_to_length_ratio=0.14)
+    arc = Arc(radius=r_arc, start_angle=0, angle=th, color=c_arc, stroke_width=5)
+    g = VGroup(f1, f2, arc)
+    g.f1, g.f2, g.arc, g.p1, g.p2 = f1, f2, arc, p1, p2
+    # ⛔⛔ `g.sommet()` REND LE POINT D'OÙ PARTENT LES DEUX FLÈCHES, et c'est par rapport
+    # à LUI qu'on place une étiquette — jamais par rapport à `g.get_center()`, qui est le
+    # centre de la BOÎTE du groupe et tombe au milieu du secteur (à ~0,5 ; 0,37 du sommet
+    # pour un coin de rayon 1). Mesuré : posées depuis le centre de boîte, « u » tombait
+    # à 0,02 de son propre fût. ⚠️ Il se lit APRÈS les `move_to` et les `scale`, sinon il
+    # rend la position d'avant — c'est la leçon de `placer` sur le cube de E9 : une cote
+    # relative à une autre cote se périme au premier changement de l'une des deux.
+    g.sommet = lambda: f1.get_start()
+    if oppose:
+        f3 = Arrow(ORIGIN, -p2, buff=0, stroke_width=sw - 2, color=c2,
+                   max_tip_length_to_length_ratio=0.16).set_opacity(0.55)
+        # ⛔⛔ L'ARC DU SUPPLÉMENTAIRE VA DE −v⃗ À u⃗, ET PAS DE v⃗ À LA GAUCHE DE L'ÉCRAN.
+        # Vu sur la planche des figures seules : écrit `start_angle=th, angle=π−th`, il
+        # partait bien de v⃗ et balayait bien 120°… du côté OPPOSÉ à −v⃗. Il ne touchait
+        # donc NI u⃗ NI −v⃗, et il mesurait l'angle de v⃗ avec la demi-droite opposée à u⃗ :
+        # la bonne valeur, posée sur le mauvais angle. ⛔ Aucun outil ne pouvait le dire
+        # — 120° est 120°, la figure est dans la marge, et l'assertion du module ne
+        # portait que sur les FLÈCHES. C'est le défaut « un schéma porte les bons nombres
+        # et ment sur sa forme » de E9, dans sa version la plus discrète.
+        arc2 = Arc(radius=r_arc * 1.55, start_angle=th + math.pi, angle=math.pi - th,
+                   color=C_PIEGE, stroke_width=5)
+        g.add(f3, arc2)
+        g.f3, g.arc2, g.p3 = f3, arc2, -p2
+    return g.scale(s)
+
+
+# ⭐⭐ LE CONTRÔLE DES TROIS SCHÉMAS PLANS, exécuté À L'IMPORT comme celui du cube.
+#
+# POURQUOI IL EXISTE. La docstring de `coin` annonce « l'angle dessiné est vérifié par une
+# assertion du module ». C'était vrai DANS SON ÉPISODE : les assertions de
+# `ps_espace_angle.py` (l. 129-135) portent sur les vecteurs U02, V02, U05, V05 de cet
+# épisode-là. ⛔ Recopiée ici, la fonction a gardé sa promesse et perdu son garde-fou —
+# une docstring qui promet ce que le code ne porte pas est pire qu'un silence.
+#
+# ⭐ Chaque contrôle ci-dessous est une PRÉDICTION RÉFUTABLE, et c'est la promesse propre
+# de la figure qu'il mesure — pas un invariant décoratif :
+#   · `coin(deg)` doit DESSINER deg, puisque toute sa raison d'être est que la cavalière
+#     ne conserve aucun angle (42° pour un angle de 55°) ;
+#   · `pente()` doit avoir une hauteur qui fait exactement un DIXIÈME de sa base : son
+#     échelle EST la leçon, et un schéma exagéré ferait dire à l'écran le contraire de la
+#     voix (« presque rien à la distance ») ;
+#   · `poteau_vue()` doit être DROIT de face et PENCHÉ de côté : les deux vues côte à côte
+#     sont exactement ce que dit la voix, et c'est pourquoi un produit scalaire ne suffit
+#     pas.
+# ⛔ Un contrôle qui ne peut pas échouer ne mesure rien : les trois ont été étalonnés sur
+# une attente fausse avant d'être crus, et les trois ont levé.
+def _controler_figures_planes():
+    import math as _m
+
+    def _dir(fleche):
+        v = fleche.get_end() - fleche.get_start()
+        return _m.degrees(_m.atan2(v[1], v[0]))
+
+    # 1. `coin` dessine l'angle qu'on lui demande, au millionième de degré.
+    for deg in (30, 45, 55, 60, 120):
+        f = [m for m in coin(deg) if isinstance(m, Arrow)][:2]
+        assert len(f) == 2, f"coin({deg}) ne trace pas deux flèches"
+        vu = abs(_dir(f[1]) - _dir(f[0]))
+        assert abs(vu - deg) < 1e-6, f"coin({deg}) dessine {vu:.3f}°"
+
+    # 2. `pente` : la hauteur fait EXACTEMENT un dixième de la base.
+    sol, montee = list(pente())[:2]
+    base = abs(sol.get_end()[0] - sol.get_start()[0])
+    haut = abs(montee.get_end()[1] - montee.get_start()[1])
+    assert abs(haut * 10 - base) < 1e-9, (
+        f"pente() : base {base:.3f} et hauteur {haut:.3f} — le rapport n'est pas 10")
+
+    # 3. `poteau_vue` : droit de face, penché de côté. Le poteau est le plus long segment.
+    def _poteau(penche):
+        traits = [m for m in poteau_vue(penche=penche) if isinstance(m, Line)]
+        return max(traits, key=lambda m: abs(m.get_end()[1] - m.get_start()[1]))
+
+    droit = _poteau(False)
+    penche = _poteau(True)
+    dx_droit = abs(droit.get_end()[0] - droit.get_start()[0])
+    dx_penche = abs(penche.get_end()[0] - penche.get_start()[0])
+    assert dx_droit < 1e-9, f"poteau_vue() : le poteau droit s'écarte de {dx_droit:.3f}"
+    assert dx_penche > 0.1, (
+        f"poteau_vue(penche=True) : le poteau ne penche que de {dx_penche:.3f}")
+
+
+_controler_figures_planes()
