@@ -1847,9 +1847,23 @@ function continueAfterExplanation() {
         }
       }
     } catch (error) {
-      setFeedback(
-        error instanceof Error ? error.message : "Erreur pendant la correction."
-      );
+      const message = error instanceof Error ? error.message : "";
+      /* ⭐ 24/11/2026 — SÉANCE PERDUE CÔTÉ SERVEUR (expirée après 30 min sans
+         réponse, ou serveur redémarré). L'élève restait devant « Session
+         introuvable » et une réponse qui tournait sans fin : rien à cliquer.
+         On relance une séance sur la même micro, avec une phrase qu'un élève
+         de 6e comprend. */
+      if (/Session introuvable/i.test(message)) {
+        setSelectedOptionId(null);
+        setAnswer("");
+        submitInFlightRef.current = false;
+        setBusy(false);
+        void startSession(activeMicroId ?? undefined).then(() =>
+          setFeedback("Le coach a fait une pause. On repart avec une nouvelle question !")
+        );
+        return;
+      }
+      setFeedback(message || "Erreur pendant la correction.");
     } finally {
       setBusy(false);
       submitInFlightRef.current = false;
