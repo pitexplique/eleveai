@@ -129,7 +129,7 @@ export default function BienvenueEleve() {
   });
   if (classe && /^(cp|ce1|ce2|cm1|cm2|6e|5e|4e|3e)$/i.test(classe)) {
     choix.push({
-      href: `/fiches-exercices/maths/${classe.toLowerCase()}`,
+      href: `/fiches-exercices?classe=${encodeURIComponent(classe.toLowerCase())}`,
       emoji: "📝",
       titre: "Une fiche d'exercices",
       detail: "À faire à l'écran.",
