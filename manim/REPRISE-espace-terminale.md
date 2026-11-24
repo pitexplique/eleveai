@@ -54,7 +54,7 @@
 | E12 `ps_espace_defi` | ✅ **script écrit, mesure ✅, dry run `-qh` 0 bord / 0 avance / 0 retard, planches `-ql` faites** — ⏳ **PAS DE HD** : Frédéric regarde les planches d'abord |
 | les scripts restants | ⏳ **E11 seul** (E12 est écrit) |
 | les 6 shorts de la GÉOMÉTRIE (E1–E6) | ✅ **voix, 36 WAV, marques, scripts, mesure hors rendu, dry run `-qh` 0 bord / 0 avance / 0 retard, planches `-ql` faites** — ⏳ **PAS DE HD** : Frédéric regarde les planches d'abord. Socle : `espace_commun_short.py`, mesure : `espace_mesure_short.py`. Voir « Ce que les SHORTS ont appris » |
-| les 6 shorts du PRODUIT SCALAIRE (E7–E12) | ⏳ pas de voix encore — ⚠️ leurs lettres de bonne réponse doivent **compléter** le tirage des six premiers (B C A C A B) pour retomber sur A 4 · B 4 · C 4 |
+| les 6 shorts du PRODUIT SCALAIRE (E7–E12) | ✅ **voix (6 clips chacune), 36 WAV et marques : mesuré le 24/11** — ⏳ il reste les 6 SCRIPTS, puis la mesure, le dry run, les planches. ⚠️ Leurs lettres de bonne réponse doivent **compléter** le tirage des six premiers (B C A C A B) pour retomber sur A 4 · B 4 · C 4 |
 | les 12 miniatures de short | ⛔ **0 sur 12, et là c'est un VERROU** : `publier-youtube.mjs` l. 802 retient tout short sans miniature (règle de Frédéric du 01/11) |
 | les 10 entrées de registre | ✅ **écrites le 23/11** dans `manim/manifeste-youtube.json` (1 717 vidéos), chacune avec ses 14 chapitres et ses 2 questions-pauses, par `manim/poste2/fiches-espace-vers-registre.py` |
 | les 12 miniatures | ⛔ **0 sur 12** — c'est ce qui bloque la publication, et donc le coach |
@@ -147,7 +147,7 @@ conséquence pour E11/E12 : « Ce que l'épisode 10 a appris ».
 **Ce qui n'est PAS fait et qu'on oublie facilement :**
 
 - les **miniatures** : aucune des 12 n'existe, et le manifeste en attend une ;
-- les **12 shorts** : pas de voix écrite, et leur gabarit se relit sur un short de
+- les **12 shorts** : ⚠️ cette ligne disait « pas de voix écrite » — **c'est périmé**. Mesuré le 24/11 : les **12 voix de short existent** (6 clips chacune), avec leurs 72 WAV et leurs marques. Il reste les **6 scripts du produit scalaire** et aucun rendu HD de short.
   terminale existant **avant** d'en écrire douze ;
 - le **branchement au coach** vient APRÈS la publication — mesuré :
   `brancher-videos-coach.mjs --classe terminale-spe` répond « Rien à brancher » tant que
