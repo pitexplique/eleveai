@@ -75,24 +75,6 @@ const ACCES_DIRECTS = [
 ];
 
 export default function AccueilCeo() {
-  const notions = listerToutesLesNotions().filter((n) => n.matiere === "maths");
-  const videos = toutesLesVideos().filter((v) => v.vignette);
-  const nbVideos = (dossier: string) => videos.filter((v) => v.fichier.split("/")[0] === dossier).length;
-
-  const comptes = compterParClasse();
-  const cartes = PROGRAMME_CLASSES.map((c) => {
-    const siennes = notions.filter((n) => n.classeSlug === c.slug);
-    return {
-      slug: c.slug,
-      label: c.label,
-      micros: siennes.reduce((s, n) => s + n.micros.length, 0),
-      videos: nbVideos(DOSSIER_VIDEO[c.slug] ?? c.slug),
-      apercu: [...new Set(siennes.map((n) => n.label.toLowerCase()))].slice(0, 4),
-      exercices: comptes.exercices[c.slug] ?? 0,
-      enigmes: comptes.enigmes[c.slug] ?? 0,
-    };
-  }).filter((c) => c.micros > 0);
-
   // PHRASE_ESSAI = « 10 questions offertes chaque jour, sans compte. Les fiches… »
   const [essai, ...libres] = PHRASE_ESSAI.split(". ");
 
@@ -176,52 +158,7 @@ export default function AccueilCeo() {
               </Link>
             ))}
           </div>
-          <h2 className="text-center text-3xl font-black sm:text-4xl">Choisis ta classe</h2>
-          <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {cartes.map((c) => {
-              const t = CYCLE[cycleDe(c.slug)];
-              return (
-                <div key={c.slug} className={`relative rounded-lg border ${t.bord} bg-white px-5 pb-4 pt-5`}>
-                  <div className="flex items-center gap-3">
-                    <span className={`flex h-11 min-w-11 items-center justify-center rounded-full px-2 text-sm font-black ${t.pastille}`}>
-                      {PASTILLE[c.slug] ?? c.label}
-                    </span>
-                    <Link href={`/coach-ia/maths?classe=${c.slug}`} className={`text-2xl font-black hover:underline ${t.titre}`}>
-                      {c.label}
-                    </Link>
-                  </div>
-                  <p className="mt-3 min-h-[3rem] text-slate-700">{c.apercu.join(", ")}, et plus.</p>
-                  <div className="mt-3 grid grid-cols-[auto_auto] justify-between gap-x-3 gap-y-1 whitespace-nowrap border-t border-slate-200 pt-3 text-sm font-bold">
-                    <Link href={`/coach-ia/maths?classe=${c.slug}`} className="text-sky-700 hover:underline">
-                      S&apos;entraîner ›
-                    </Link>
-                    {c.videos > 0 && (
-                      <>
-                        <Link href={`/video?classe=${DOSSIER_VIDEO[c.slug] ?? c.slug}`} className="text-sky-700 hover:underline">
-                          {c.videos} vidéos ›
-                        </Link>
-                      </>
-                    )}
-                    {c.exercices > 0 && (
-                      <>
-                        <Link href={`/fiches-exercices?classe=maths-${c.slug}`} className="text-sky-700 hover:underline">
-                          {c.exercices.toLocaleString("fr-FR")} exercices interactifs ›
-                        </Link>
-                      </>
-                    )}
-                    {c.enigmes > 0 && (
-                      <>
-                        <Link href={`/enigmes-maths/${c.slug}`} className="text-sky-700 hover:underline">
-                          {c.enigmes} énigmes ›
-                        </Link>
-                      </>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
+          <ChoisisTaClasse />
         </section>
 
         {/* 5. QUI EST DERRIÈRE — une ligne, sans promesse qu'on ne tient pas. */}
@@ -239,5 +176,76 @@ export default function AccueilCeo() {
         </section>
       </main>
     </div>
+  );
+}
+
+/** « Choisis ta classe » : le titre et les cartes (aussi montés par /accueil-2). */
+export function ChoisisTaClasse() {
+  const notions = listerToutesLesNotions().filter((n) => n.matiere === "maths");
+  const videos = toutesLesVideos().filter((v) => v.vignette);
+  const nbVideos = (dossier: string) => videos.filter((v) => v.fichier.split("/")[0] === dossier).length;
+
+  const comptes = compterParClasse();
+  const cartes = PROGRAMME_CLASSES.map((c) => {
+    const siennes = notions.filter((n) => n.classeSlug === c.slug);
+    return {
+      slug: c.slug,
+      label: c.label,
+      micros: siennes.reduce((s, n) => s + n.micros.length, 0),
+      videos: nbVideos(DOSSIER_VIDEO[c.slug] ?? c.slug),
+      apercu: [...new Set(siennes.map((n) => n.label.toLowerCase()))].slice(0, 4),
+      exercices: comptes.exercices[c.slug] ?? 0,
+      enigmes: comptes.enigmes[c.slug] ?? 0,
+    };
+  }).filter((c) => c.micros > 0);
+
+  return (
+    <>
+    <h2 className="text-center text-3xl font-black sm:text-4xl">Choisis ta classe</h2>
+    <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {cartes.map((c) => {
+        const t = CYCLE[cycleDe(c.slug)];
+        return (
+          <div key={c.slug} className={`relative rounded-lg border ${t.bord} bg-white px-5 pb-4 pt-5`}>
+            <div className="flex items-center gap-3">
+              <span className={`flex h-11 min-w-11 items-center justify-center rounded-full px-2 text-sm font-black ${t.pastille}`}>
+                {PASTILLE[c.slug] ?? c.label}
+              </span>
+              <Link href={`/coach-ia/maths?classe=${c.slug}`} className={`text-2xl font-black hover:underline ${t.titre}`}>
+                {c.label}
+              </Link>
+            </div>
+            <p className="mt-3 min-h-[3rem] text-slate-700">{c.apercu.join(", ")}, et plus.</p>
+            <div className="mt-3 grid grid-cols-[auto_auto] justify-between gap-x-3 gap-y-1 whitespace-nowrap border-t border-slate-200 pt-3 text-sm font-bold">
+              <Link href={`/coach-ia/maths?classe=${c.slug}`} className="text-sky-700 hover:underline">
+                S&apos;entraîner ›
+              </Link>
+              {c.videos > 0 && (
+                <>
+                  <Link href={`/video?classe=${DOSSIER_VIDEO[c.slug] ?? c.slug}`} className="text-sky-700 hover:underline">
+                    {c.videos} vidéos ›
+                  </Link>
+                </>
+              )}
+              {c.exercices > 0 && (
+                <>
+                  <Link href={`/fiches-exercices?classe=maths-${c.slug}`} className="text-sky-700 hover:underline">
+                    {c.exercices.toLocaleString("fr-FR")} exercices interactifs ›
+                  </Link>
+                </>
+              )}
+              {c.enigmes > 0 && (
+                <>
+                  <Link href={`/enigmes-maths/${c.slug}`} className="text-sky-700 hover:underline">
+                    {c.enigmes} énigmes ›
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+    </>
   );
 }
