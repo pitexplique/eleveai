@@ -5,10 +5,10 @@
 // passe et un QR qui ouvre /auth/signin déjà rempli — il ne reste que le mot
 // de passe à taper. Page sans habillage (components/MasqueSurEmbed.tsx).
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { useEleve } from "@/context/EleveContext";
+import { OngletsClasse, ChoisirUneClasse, ConnecteToiProf, ErreurProf, useCodeClasse } from "@/components/prof/OutilsClasse";
 
 type Carte = { code_utilisateur: string; nom: string | null; mot_de_passe: string | null };
 export type Classe = {
@@ -20,6 +20,7 @@ export type Classe = {
 
 export default function CartesClient() {
   const { eleve: user, pret } = useEleve();
+  const codeUrl = useCodeClasse();
   const [classe, setClasse] = useState<Classe | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
   const [origine, setOrigine] = useState("https://eleveai.fr");
@@ -67,10 +68,9 @@ export default function CartesClient() {
 
   if (!pret) return <p className="p-8 text-slate-500">Chargement…</p>;
 
-  if (!user) {
-    return <p className="p-8">Connecte-toi pour imprimer les cartes de ta classe.</p>;
-  }
-  if (erreur) return <p className="p-8 text-red-700">{erreur}</p>;
+  if (!user) return <ConnecteToiProf texte="Connecte-toi pour imprimer les cartes de ta classe." />;
+  if (codeUrl === "") return <ChoisirUneClasse page="cartes" token={user?.token ?? null} />;
+  if (erreur) return <ErreurProf message={erreur} />;
   if (!classe) return <p className="p-8 text-slate-500">Chargement…</p>;
 
   return (
@@ -80,9 +80,7 @@ export default function CartesClient() {
           prenaient la couleur claire du site (fond sombre) : invisibles sur le
           papier blanc. Tout est forcé en noir ici. */}
       <div className="mb-4 flex items-center gap-3 print:hidden">
-        <Link href="/prof/classes" className="text-sm font-semibold text-slate-600 hover:underline">
-          ← Mes classes
-        </Link>
+        <OngletsClasse code={codeUrl ?? ""} actif="cartes" />
         {/* ⭐ 28/10 « Télécharger en PDF » (Frédéric : « plus simple que
             imprimer en PDF ») : un clic, le fichier arrive. Le PDF est
             fabriqué par le serveur (lib/server/cartesPdf.ts). */}

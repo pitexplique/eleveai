@@ -5,9 +5,9 @@
 // 🟩 compris · 🟧 en cours · 🟥 pas compris · vide = pas travaillé.
 // Données : /api/prof/classes/bilan (resultats_tutor, cumul de toutes les séances).
 
-import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
+import { OngletsClasse, ChoisirUneClasse, ConnecteToiProf, ErreurProf, useCodeClasse } from "@/components/prof/OutilsClasse";
 
 type Cumul = { j: number; t: number };
 type Notion = {
@@ -40,6 +40,7 @@ const CASE = {
 
 export default function BilanClient() {
   const { eleve: user, pret } = useEleve();
+  const codeUrl = useCodeClasse();
   const token = user?.token ?? null;
   const [donnees, setDonnees] = useState<Donnees | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
@@ -67,16 +68,15 @@ export default function BilanClient() {
 
   if (!pret) return <p className="p-8 text-slate-500">Chargement…</p>;
 
-  if (!user) return <p className="p-8">Connecte-toi pour voir le bilan de ta classe.</p>;
-  if (erreur) return <p className="p-8 text-red-700">{erreur}</p>;
+  if (!user) return <ConnecteToiProf texte="Connecte-toi pour voir le bilan de ta classe." />;
+  if (codeUrl === "") return <ChoisirUneClasse page="bilan" token={token} />;
+  if (erreur) return <ErreurProf message={erreur} />;
   if (!donnees) return <p className="p-8 text-slate-500">Chargement…</p>;
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <div className="mx-auto max-w-6xl px-4 py-8">
-        <Link href="/prof/classes" className="text-sm font-semibold text-slate-600 hover:underline">
-          ← Mes classes
-        </Link>
+        <OngletsClasse code={codeUrl ?? ""} actif="bilan" />
         <h1 className="text-3xl font-black">{donnees.classe.nom_classe} — bilan par micro</h1>
 
         {donnees.notions.length === 0 ? (
