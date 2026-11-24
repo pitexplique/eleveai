@@ -17,6 +17,7 @@ import CarteMaLigneBulletin from "./CarteMaLigneBulletin";
 import CarteCockpit from "./CarteCockpit";
 import CarteMonJardin from "./CarteMonJardin";
 import CarteSimulateurs from "./CarteSimulateurs";
+import CarteMesRecompenses from "./CarteMesRecompenses";
 import type { Bulletin } from "@/lib/bulletin/types";
 import { prenomFromNom } from "@/lib/prenom";
 import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
@@ -498,11 +499,13 @@ export default function DashboardEleveClient() {
 
         {vue === "jardin" ? (
           <>
+            <CarteMesRecompenses variante="jardin" />
             {compteGratuit ? null : <CarteMonJardin notions={mesNotions} />}
             <CarteSimulateurs variante="jardin" />
           </>
         ) : (
           <>
+            <CarteMesRecompenses variante="cockpit" />
             <CarteCockpit
               seances={resultatsTutor}
               notions={compteGratuit ? null : mesNotions}

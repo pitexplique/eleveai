@@ -110,7 +110,7 @@ type Stat = {
 };
 
 const MEDAILLES: { id: string; emoji: string; titre: string; valeur: (s: Stat) => number; texte: (s: Stat) => string; mini?: (s: Stat) => boolean }[] = [
-  { id: "regularite", emoji: "📅", titre: "Régularité", valeur: (s) => s.jours, texte: (s) => `${s.jours} jours de travail` },
+  { id: "regularite", emoji: "📅", titre: "Régularité", valeur: (s) => s.jours, texte: (s) => `${s.jours} jour${s.jours > 1 ? "s" : ""} de travail` },
   { id: "perseverance", emoji: "💪", titre: "Persévérance", valeur: (s) => s.questions, texte: (s) => `${s.questions} questions` },
   { id: "precision", emoji: "🎯", titre: "Précision", valeur: (s) => s.taux, texte: (s) => `${Math.round(s.taux * 100)} % de justes`, mini: (s) => s.questions >= 20 },
   { id: "progression", emoji: "📈", titre: "Progression", valeur: (s) => s.progression, texte: (s) => `+${virgule(s.progression)} points`, mini: (s) => s.progression >= 1 },
@@ -122,7 +122,8 @@ function classement(
   eleves: { code_utilisateur: string; nom: string | null; pseudo: string | null; classeEleve?: string | null }[],
   seances: LigneTutor[],
   activites: LigneActivite[],
-  nbJours: number
+  nbJours: number,
+  pourEleve?: string
 ) {
   const depuis = Date.now() - nbJours * JOUR;
   const stats: Stat[] = [];
@@ -203,12 +204,61 @@ function classement(
     return [{ id: m.id, emoji: m.emoji, titre: m.titre, code_utilisateur: choisi.code, nom: choisi.nom, texte: m.texte(choisi) }];
   });
 
-  return { podium, medailles, participants: stats.length };
+  // 🎖️ POUR L'ÉLÈVE SEUL (24/11/2026, tableau de bord) : ce qui lui manque
+  // pour viser une médaille. Jamais renvoyé au prof ni projeté.
+  let moi: ObjectifMedaille | null = null;
+  if (pourEleve) {
+    const s = stats.find((x) => x.code === pourEleve);
+    if (!s) {
+      const q = activites.filter(
+        (x) => x.code_utilisateur === pourEleve && x.type === "coach" && new Date(x.created_at).getTime() >= depuis
+      ).length;
+      moi = { enCourse: false, manque: Math.max(1, 10 - q), unite: "questions", medaille: null };
+    } else if (!medailles.some((m) => m.code_utilisateur === pourEleve)) {
+      // La médaille la plus proche, en proportion de ce qui manque.
+      const pistes = (
+        [
+          ["regularite", "jours", "📅 Régularité", (x: Stat) => x.jours],
+          ["perseverance", "questions", "💪 Persévérance", (x: Stat) => x.questions],
+          ["micros", "micros", "🧩 Compétences acquises", (x: Stat) => x.acquises],
+        ] as const
+      ).flatMap(([id, unite, nom, v]) => {
+        const m = medailles.find((x) => x.id === id);
+        const tenant = m && stats.find((x) => x.code === m.code_utilisateur);
+        if (!tenant) return [];
+        const manque = Math.max(1, v(tenant) - v(s) + 1);
+        if (unite === "jours" && s.jours + manque > nbJours) return [];
+        return [{ manque, unite, medaille: nom, part: manque / Math.max(1, v(tenant)) }];
+      });
+      pistes.sort((x, y) => x.part - y.part);
+      const p = pistes[0];
+      // Trop loin (plus de la moitié du chemin) : un objectif doux, sans chiffre qui décourage.
+      moi =
+        p && p.part <= 0.5 && !(p.unite === "questions" && p.manque > 50)
+          ? { enCourse: true, manque: p.manque, unite: p.unite, medaille: p.medaille }
+          : { enCourse: true, manque: 1, unite: "jours", medaille: null };
+    }
+  }
+
+  return { podium, medailles, participants: stats.length, ...(pourEleve ? { moi } : {}) };
 }
+
+export type ObjectifMedaille = {
+  enCourse: boolean;
+  manque: number;
+  unite: "questions" | "jours" | "micros";
+  medaille: string | null;
+};
 
 export type LigneBulletin = Awaited<ReturnType<typeof calculerBulletinClasse>>["eleves"][number];
 
-export async function calculerBulletinClasse(admin: SupabaseClient, code: string, niveau: string, periode: string) {
+export async function calculerBulletinClasse(
+  admin: SupabaseClient,
+  code: string,
+  niveau: string,
+  periode: string,
+  pourEleve?: string
+) {
   const nbJours = PERIODES[periode] === undefined ? 90 : PERIODES[periode];
   const depuis = nbJours ? new Date(Date.now() - nbJours * JOUR).toISOString() : "2000-01-01T00:00:00Z";
   const depuisActivite = new Date(Date.now() - Math.min(nbJours ?? 30, 30) * JOUR).toISOString();
@@ -353,8 +403,8 @@ export async function calculerBulletinClasse(admin: SupabaseClient, code: string
   return {
     periode,
     joursActivite: Math.min(nbJours ?? 30, 30),
-    semaine: classement(lignes, seances, activites, 7),
-    mois: classement(lignes, seances, activites, 30),
+    semaine: classement(lignes, seances, activites, 7, pourEleve),
+    mois: classement(lignes, seances, activites, 30, pourEleve),
     eleves: lignes,
   };
 }

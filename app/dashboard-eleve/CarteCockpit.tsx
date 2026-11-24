@@ -114,11 +114,13 @@ function mesurer(liste: SeanceCockpit[]): Mesures {
   };
 }
 
-const CADRANS: { id: Cadran; label: string; couleur: string; trait: string; lueur: string }[] = [
+// « Jours de vol » : les élèves ne comprenaient pas (Frédéric, 24/11/2026) →
+// une phrase courte sous le chiffre.
+const CADRANS: { id: Cadran; label: string; couleur: string; trait: string; lueur: string; aide?: string }[] = [
   { id: "moyenne", label: "Moyenne générale", couleur: "text-emerald-300", trait: "#34d399", lueur: "shadow-emerald-500/30" },
   { id: "seances", label: "Séances", couleur: "text-cyan-300", trait: "#22d3ee", lueur: "shadow-cyan-500/30" },
   { id: "questions", label: "Questions", couleur: "text-amber-300", trait: "#fbbf24", lueur: "shadow-amber-500/30" },
-  { id: "jours", label: "Jours de vol", couleur: "text-violet-300", trait: "#a78bfa", lueur: "shadow-violet-500/30" },
+  { id: "jours", label: "Jours de vol", couleur: "text-violet-300", trait: "#a78bfa", lueur: "shadow-violet-500/30", aide: "1 jour de vol = 1 jour où tu as fait au moins une séance. 3 séances le même jour = 1 seul jour." },
 ];
 
 export default function CarteCockpit({
@@ -350,6 +352,7 @@ export default function CarteCockpit({
                     </span>
                   )}
                 </div>
+                {c.aide && <div className="mt-1 text-xs font-semibold leading-snug text-violet-200/80">{c.aide}</div>}
                 {choisi && <span className="absolute inset-x-0 bottom-0 h-0.5 bg-white" />}
               </button>
             );
