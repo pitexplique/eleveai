@@ -51,11 +51,12 @@ type Notions = { notions: NotionEleve[]; titres: Record<string, string>; reprise
 // proportions, les flèches tombent donc juste à toutes les largeurs.
 const W = 600;
 const H = 420;
-const PLACES: { x: number; y: number; de: [number, number]; vers: [number, number] }[] = [
+const PLACES: { x: number; y: number; de: [number, number]; vers: [number, number]; l?: number }[] = [
   { x: 100, y: 52, de: [215, 120], vers: [150, 82] },
   { x: 500, y: 52, de: [385, 120], vers: [450, 82] },
-  { x: 86, y: 210, de: [184, 210], vers: [168, 210] },
-  { x: 514, y: 210, de: [416, 210], vers: [432, 210] },
+  // Les bulles du milieu, plus étroites : leurs flèches se voient.
+  { x: 78, y: 210, de: [188, 210], vers: [160, 210], l: 26 },
+  { x: 522, y: 210, de: [412, 210], vers: [440, 210], l: 26 },
   { x: 100, y: 368, de: [215, 300], vers: [150, 338] },
   { x: 500, y: 368, de: [385, 300], vers: [450, 338] },
 ];
@@ -84,6 +85,9 @@ export default function BienvenueEleve() {
   const [notions, setNotions] = useState<Notions | null>(null);
   const [messages, setMessages] = useState<MessageProf[]>([]);
   const [passions, setPassions] = useState<string[]>([]);
+  // Les bulles attendent ses notions et ses passions : sinon elles changent
+  // sous ses yeux (« Mes passions » devient « Les cyclones »…).
+  const [donneesPretes, setDonneesPretes] = useState(false);
 
   useEffect(() => {
     if (!pret || !eleve || eleve.type_utilisateur !== "eleve") return;
@@ -98,11 +102,14 @@ export default function BienvenueEleve() {
     setOuvert(true);
     setPrenom(prenomAffichable(eleve.nom));
     setClasse(eleve.classe ?? null);
-    if (!eleve.token) return;
+    if (!eleve.token) {
+      setDonneesPretes(true);
+      return;
+    }
     const h = { Authorization: `Bearer ${eleve.token}` };
 
     // Le pseudo choisi par l'élève passe avant le nom de la base.
-    fetch("/api/passions", { headers: h })
+    const passionsLues = fetch("/api/passions", { headers: h })
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => {
         const p = typeof d?.pseudo === "string" ? d.pseudo.trim() : "";
@@ -121,7 +128,7 @@ export default function BienvenueEleve() {
     }
 
     // Ses notions, ses scores et la série où il en était (24/11 : « reprise »).
-    fetch("/api/mes-notions", { headers: h })
+    const notionsLues = fetch("/api/mes-notions", { headers: h })
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => {
         if (!d?.ok) return;
@@ -132,6 +139,9 @@ export default function BienvenueEleve() {
         });
       })
       .catch(() => null);
+    const fin = () => setDonneesPretes(true);
+    Promise.allSettled([passionsLues, notionsLues]).then(fin);
+    const secours = setTimeout(fin, 4000);
 
     fetch("/api/eleve/messages-classe", { headers: h })
       .then((r) => (r.ok ? r.json() : null))
@@ -140,6 +150,7 @@ export default function BienvenueEleve() {
         setMessages(msgs.filter((m) => !m.lu && typeof m.texte === "string"));
       })
       .catch(() => null);
+    return () => clearTimeout(secours);
   }, [pret, eleve]);
 
   // Échap ferme la fenêtre.
@@ -167,7 +178,7 @@ export default function BienvenueEleve() {
 
   // Le mot personnel attend les notions (sinon il dirait « Bienvenue ! » à
   // un élève qui a déjà travaillé).
-  const conseil = notions ? conseilTiMargo({ ...notions, classe }) : null;
+  const conseil = notions && donneesPretes ? conseilTiMargo({ ...notions, classe }) : null;
 
   // Les bulles autour du nuage, dans l'ordre des places (haut gauche, haut
   // droite, gauche, droite, bas gauche, bas droite).
@@ -181,7 +192,7 @@ export default function BienvenueEleve() {
     },
   ];
   const faible = notions ? notionARetravailler(notions.notions) : null;
-  if (faible) choix.push({ href: faible.href, emoji: "🔁", titre: "À retravailler", detail: faible.titre });
+  if (faible) choix.push({ href: faible.href, emoji: "🔁", titre: "À revoir", detail: faible.titre });
   choix.push({
     href: classe ? `/video?classe=${encodeURIComponent(classe.toLowerCase())}` : "/video",
     emoji: "🎬",
@@ -206,27 +217,27 @@ export default function BienvenueEleve() {
     });
   }
   choix.push({ href: "/simulateurs", emoji: "🧪", titre: "Les simulateurs", detail: "J'expérimente." });
-  const places = choix.slice(0, PLACES.length);
+  const places = donneesPretes ? choix.slice(0, PLACES.length) : [];
 
   const bouton = (c: Choix, classes = "") => (
     <Link
       href={c.href}
       onClick={() => setOuvert(false)}
-      className={`flex items-center gap-2 rounded-2xl bg-white px-3 py-2 text-slate-900 shadow-md ring-2 ring-sky-200 transition hover:scale-105 hover:ring-sky-400 ${classes}`}
+      className={`flex items-center gap-2 rounded-2xl bg-white px-2.5 py-2 text-slate-900 shadow-md ring-2 ring-sky-200 transition hover:scale-105 hover:ring-sky-400 ${classes}`}
     >
       <span className="text-2xl" aria-hidden>
         {c.emoji}
       </span>
       <span className="min-w-0 text-left">
-        <span className="block text-base font-black leading-tight">{c.titre}</span>
-        {c.detail ? <span className="block truncate text-xs font-bold text-slate-500">{c.detail}</span> : null}
+        <span className="block text-sm font-black leading-tight sm:text-base">{c.titre}</span>
+        {c.detail ? <span className="block text-xs font-bold leading-tight text-slate-500 sm:truncate">{c.detail}</span> : null}
       </span>
     </Link>
   );
 
   // Le nuage : des ronds blancs qui se chevauchent, Ti Margo au milieu.
   const nuage = (petit: boolean) => (
-    <div className={`relative mx-auto ${petit ? "h-44 w-72" : "h-full w-full"}`}>
+    <div className={`relative mx-auto ${petit ? "h-32 w-60" : "h-full w-full"}`}>
       <div className="absolute inset-x-[6%] inset-y-[24%] rounded-[50%] bg-white" />
       <div className="absolute left-[10%] top-[10%] h-[52%] w-[34%] rounded-full bg-white" />
       <div className="absolute left-[33%] top-0 h-[60%] w-[36%] rounded-full bg-white" />
@@ -241,10 +252,10 @@ export default function BienvenueEleve() {
           width={320}
           height={320}
           sizes="112px"
-          className={petit ? "h-20 w-20" : "h-28 w-28"}
+          className={petit ? "h-14 w-14" : "h-28 w-28"}
           priority
         />
-        <p className={`font-black leading-tight text-sky-900 ${petit ? "text-base" : "text-lg"}`}>
+        <p className={`font-black leading-tight text-sky-900 ${petit ? "text-sm" : "text-lg"}`}>
           Je te suis
           <br />
           et je t&apos;accompagne !
@@ -281,15 +292,15 @@ export default function BienvenueEleve() {
 
         {/* 1. Le message du prof, en premier. */}
         {message ? (
-          <div className="mt-3 rounded-2xl bg-amber-100 p-4 ring-2 ring-amber-300">
+          <div className="mt-3 rounded-2xl bg-amber-100 p-3 ring-2 ring-amber-300 sm:p-4">
             <p className="text-sm font-black uppercase text-amber-800">✉️ Ton prof t&apos;a écrit</p>
-            <p className="mt-1 whitespace-pre-wrap break-words text-lg font-bold leading-snug text-slate-900">{message.texte}</p>
+            <p className="mt-1 whitespace-pre-wrap break-words text-base font-bold leading-snug text-slate-900 sm:text-lg">{message.texte}</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {lienSur(message.lien) ? (
                 <a
                   href={lienSur(message.lien)!}
                   onClick={() => marquerLu(message.id)}
-                  className="rounded-2xl bg-emerald-600 px-5 py-3 text-lg font-black text-white shadow-lg hover:bg-emerald-500"
+                  className="rounded-2xl bg-emerald-600 px-4 py-2.5 text-base font-black text-white shadow-lg hover:bg-emerald-500 sm:px-5 sm:py-3 sm:text-lg"
                 >
                   ▶ Commencer la séance
                 </a>
@@ -297,7 +308,7 @@ export default function BienvenueEleve() {
               <button
                 type="button"
                 onClick={() => marquerLu(message.id)}
-                className="rounded-2xl bg-white px-5 py-3 text-lg font-black text-slate-900 shadow ring-1 ring-amber-300 hover:bg-amber-50"
+                className="rounded-2xl bg-white px-4 py-2.5 text-base font-black text-slate-900 shadow ring-1 ring-amber-300 hover:bg-amber-50 sm:px-5 sm:py-3 sm:text-lg"
               >
                 ✓ J&apos;ai lu
               </button>
@@ -316,15 +327,15 @@ export default function BienvenueEleve() {
 
         {/* 2. Le mot personnel de Ti Margo : quoi faire maintenant. */}
         {conseil ? (
-          <div className="mt-3 flex flex-col gap-3 rounded-2xl bg-emerald-50 p-4 ring-2 ring-emerald-300 sm:flex-row sm:items-center">
-            <p className="flex-1 text-lg font-bold leading-snug text-slate-900">
+          <div className="mt-3 flex flex-col gap-2 rounded-2xl bg-emerald-50 p-3 ring-2 ring-emerald-300 sm:flex-row sm:items-center sm:gap-3 sm:p-4">
+            <p className="flex-1 text-base font-bold leading-snug text-slate-900 sm:text-lg">
               <span className="font-black text-emerald-800">💬 Ti Margo : </span>
               {conseil.texte}
             </p>
             <Link
               href={conseil.href}
               onClick={() => setOuvert(false)}
-              className={`shrink-0 rounded-2xl px-5 py-3 text-center text-lg font-black shadow-lg ${
+              className={`shrink-0 rounded-2xl px-4 py-2.5 text-center text-base font-black shadow-lg sm:px-5 sm:py-3 sm:text-lg ${
                 message ? "bg-white text-emerald-800 ring-2 ring-emerald-500 hover:bg-emerald-100" : "bg-emerald-600 text-white hover:bg-emerald-500"
               }`}
             >
@@ -335,7 +346,7 @@ export default function BienvenueEleve() {
 
         {/* 3a. Téléphone : le nuage, puis les choix en grosse liste. */}
         <div className="mt-4 sm:hidden">
-          <div className="rounded-3xl bg-sky-100 py-3">{nuage(true)}</div>
+          <div className="rounded-3xl bg-sky-100 py-2">{nuage(true)}</div>
           <ul className="mt-3 grid grid-cols-2 gap-2">
             {places.map((c) => (
               <li key={c.titre}>{bouton(c, "h-full")}</li>
@@ -377,7 +388,7 @@ export default function BienvenueEleve() {
               <div
                 key={c.titre}
                 className="absolute -translate-x-1/2 -translate-y-1/2"
-                style={{ left: `${(p.x / W) * 100}%`, top: `${(p.y / H) * 100}%`, width: "31%" }}
+                style={{ left: `${(p.x / W) * 100}%`, top: `${(p.y / H) * 100}%`, width: `${p.l ?? 31}%` }}
               >
                 {bouton(c, "w-full")}
               </div>
