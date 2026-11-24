@@ -7,11 +7,12 @@
 import { NextResponse } from "next/server";
 import { verifySessionToken } from "@/lib/server/session";
 import { supabaseAdmin } from "@/lib/server/classesProf";
+import { purgerVieuxMessages, VISIBLE_ELEVE_MS } from "@/lib/server/messagesClasse";
 
 export const dynamic = "force-dynamic";
 
-// Un message de plus de 30 jours ne s'affiche plus.
-const DUREE_MS = 30 * 24 * 3600 * 1000;
+// ⭐ 24/11 — Frédéric : « 7 j, effacé à 30 j ». L'élève voit 7 jours.
+const DUREE_MS = VISIBLE_ELEVE_MS;
 
 function eleveDuJeton(req: Request) {
   const auth = req.headers.get("authorization") ?? "";
@@ -25,6 +26,7 @@ export async function GET(req: Request) {
   if (!s) return NextResponse.json({ ok: true, messages: [] });
 
   const admin = supabaseAdmin();
+  await purgerVieuxMessages(admin);
   const { data: classe } = await admin
     .from("classes_prof")
     .select("nom_classe")
