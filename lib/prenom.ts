@@ -54,3 +54,18 @@ export function prenomCourt(nomComplet: string | null | undefined): string {
   const reste = tokensPrenom(nomComplet ?? "");
   return reste.length > 0 ? reste.join(" ") : "Élève";
 }
+
+// ⭐ 24/11/2026 — Le prénom à afficher dans « Bonjour … » : le pseudo choisi par
+// l'élève d'abord, sinon le prénom du nom en base. « Élève 01 » (nom donné par
+// défaut à la création d'une classe) et un code (« UX601 ») ne sont pas des
+// prénoms : null, et la page dit simplement « Bonjour ».
+export function prenomAffichable(
+  nom: string | null | undefined,
+  pseudo?: string | null
+): string | null {
+  const p = (pseudo ?? "").trim();
+  if (p) return p;
+  const prenom = prenomFromNom(nom);
+  if (!prenom || /^Élève\s*\d*$/i.test(prenom)) return null;
+  return prenom;
+}

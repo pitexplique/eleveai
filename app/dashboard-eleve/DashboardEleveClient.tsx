@@ -20,7 +20,7 @@ import CarteSimulateurs from "./CarteSimulateurs";
 import CarteMesRecompenses from "./CarteMesRecompenses";
 import CarteMessageClasse from "@/components/messages-classe/CarteMessageClasse";
 import type { Bulletin } from "@/lib/bulletin/types";
-import { prenomFromNom } from "@/lib/prenom";
+import { prenomAffichable } from "@/lib/prenom";
 import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
 
 type EleveSession = {
@@ -219,6 +219,19 @@ export default function DashboardEleveClient() {
   // tableau de bord de commandant de bord, et un autre « plus poétique, plus
   // nature »). Le choix reste dans ce navigateur, rien de plus.
   const [vue, setVue] = useState<"cockpit" | "jardin">("cockpit");
+
+  // ⭐ 24/11/2026 — « Bonjour élève » quand le nom en base est un code ou
+  // « Élève 01 ». Le pseudo choisi (carte « Ton prénom ou ton pseudo ») passe
+  // d'abord ; sans prénom connu, la page dit simplement « Bonjour ! ».
+  const [pseudo, setPseudo] = useState<string | null>(null);
+  useEffect(() => {
+    if (!eleve?.token) return;
+    fetch("/api/passions", { headers: { Authorization: `Bearer ${eleve.token}` } })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => setPseudo(typeof d?.pseudo === "string" ? d.pseudo : null))
+      .catch(() => null);
+  }, [eleve?.token]);
+  const prenomAffiche = prenomAffichable(eleve?.nom, pseudo);
   useEffect(() => {
     try {
       if (localStorage.getItem("eleveai:dashboard-vue") === "jardin") setVue("jardin");
@@ -442,33 +455,36 @@ export default function DashboardEleveClient() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-emerald-50 via-sky-50 to-yellow-50 px-4 py-8 text-slate-950">
       <section className="mx-auto max-w-7xl">
-        <div className="rounded-[2rem] border border-white/70 bg-white/85 p-6 shadow-2xl backdrop-blur-xl">
-          <div className="inline-flex rounded-full bg-emerald-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-800">
+        {/* 24/11/2026 — sur téléphone, ce bloc prenait tout le premier écran :
+            le Cockpit (ce que l'élève vient voir) commençait sous la ligne de
+            flottaison. Plus serré sur petit écran ; rien ne change sur PC. */}
+        <div className="rounded-[2rem] border border-white/70 bg-white/85 p-4 shadow-2xl backdrop-blur-xl sm:p-6">
+          <div className="hidden rounded-full bg-emerald-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-800 sm:inline-flex">
             Tableau de bord élève
           </div>
 
-          <h1 className="mt-4 text-3xl font-black md:text-5xl">
-            Bonjour {prenomFromNom(eleve.nom) ?? "élève"} 👋
+          <h1 className="text-3xl font-black sm:mt-4 md:text-5xl">
+            {prenomAffiche ? `Bonjour ${prenomAffiche} !` : "Bonjour !"} 👋
           </h1>
 
-          <p className="mt-3 font-semibold text-slate-700">
+          <p className="mt-3 hidden font-semibold text-slate-700 sm:block">
             Ici, tu retrouves tes résultats enregistrés dans EleveAI.
           </p>
 
-          <div className="mt-5 rounded-3xl bg-slate-50 p-4 text-sm font-black text-slate-700 ring-1 ring-slate-200">
+          <div className="mt-3 rounded-2xl bg-slate-50 px-3 py-2 text-xs font-black text-slate-700 ring-1 ring-slate-200 sm:mt-5 sm:rounded-3xl sm:p-4 sm:text-sm">
             {isIndependentAccount
               ? "Compte indépendant"
               : `Code établissement : ${codeEtablissement} · Code élève : ${codeUtilisateur}`}
           </div>
 
-          <div className="mt-5 flex flex-wrap items-center gap-3">
+          <div className="mt-3 flex flex-wrap items-center gap-3 sm:mt-5">
             <Link
               href="/coach-ia/maths"
               className="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-5 py-3 text-sm font-black text-white shadow-lg transition hover:bg-indigo-500"
             >
               🎯 Faire des exercices
             </Link>
-            <p className="text-sm font-semibold text-slate-600">
+            <p className="hidden text-sm font-semibold text-slate-600 sm:block">
               Le Coach, ce sont des milliers d&apos;exercices corrigés, notion par notion.
             </p>
           </div>

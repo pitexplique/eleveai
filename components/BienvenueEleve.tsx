@@ -17,7 +17,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useEleve } from "@/context/EleveContext";
-import { prenomFromNom } from "@/lib/prenom";
+import { prenomAffichable } from "@/lib/prenom";
 
 const CLE = "eleveai_bienvenue";
 
@@ -32,13 +32,6 @@ export function marquerBienvenue(type: string | null | undefined) {
 }
 
 type Choix = { href: string; emoji: string; titre: string; detail?: string; fort?: boolean };
-
-/** « Élève 01 » (nom donné par défaut à la création de la classe) n'est pas un prénom. */
-function prenomAffichable(nom: string | null | undefined): string | null {
-  const p = prenomFromNom(nom);
-  if (!p || /^Élève\s*\d*$/i.test(p)) return null;
-  return p;
-}
 
 export default function BienvenueEleve() {
   const { eleve, pret } = useEleve();
