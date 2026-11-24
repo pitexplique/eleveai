@@ -3,6 +3,27 @@
 **12 épisodes = les 12 micro-compétences du coach**, 6 pour `geometrie_espace` et 6 pour
 `produit_scalaire_espace`. Chacun : une vidéo paysage + un short. 24 vidéos.
 
+> ⛔⛔ **AVANT TOUTE FUSION DE `poste2` DANS `main` : LE REGISTRE DES VIDÉOS SE FUSIONNE
+> PAR UNION DE CLÉS, JAMAIS EN PRENANT UNE VERSION.** Remesuré le 24/11 à 17 h :
+>
+> | `lib/videos/videos-r2.json` | clés |
+> |---|---|
+> | `origin/main` | 2 129 |
+> | `origin/poste2` | 2 064 |
+> | **seulement sur `main`** | **77** |
+> | seulement sur `poste2` | 12 (les douze paysages « espace ») |
+> | union, si la fusion est bien faite | 2 141 |
+>
+> Une fusion qui retiendrait la version de `poste2` **effacerait 77 vidéos** qui
+> n'existent que sur `main`, et `generer-videos-r2.mjs` retire du service toute clé non
+> déclarée. ⭐ Le bon geste :
+> `python manim/poste2/fusionner-registres.py lib/videos/videos-r2.json --ecrire`.
+>
+> ⚠️ `origin/poste2` est en avance de **53 commits**, et `main` ne contient **aucune** des
+> 12 clés « espace » : tant que la fusion n'a pas eu lieu, les douze paysages sont en
+> **404** pour les élèves — branchés au coach, et introuvables. ⛔ La fusion est à
+> poste 1 ; personne d'autre ne touche à `main`.
+
 > ✅ **LES NEUF ÉPISODES RENDUS SONT DANS LE REGISTRE DEPUIS LE 23/11/2026.**
 > Ils n'y étaient pas : mesuré le 22/11, **0 entrée `espace` dans
 > `manim/manifeste-youtube.json`** sur 1 707 vidéos. Neuf vidéos existaient en HD et
