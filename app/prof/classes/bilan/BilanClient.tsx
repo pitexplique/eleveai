@@ -39,7 +39,7 @@ const CASE = {
 };
 
 export default function BilanClient() {
-  const { eleve: user } = useEleve();
+  const { eleve: user, pret } = useEleve();
   const token = user?.token ?? null;
   const [donnees, setDonnees] = useState<Donnees | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
@@ -64,6 +64,8 @@ export default function BilanClient() {
     () => donnees?.notions.find((n) => n.cle === choix) ?? null,
     [donnees, choix]
   );
+
+  if (!pret) return <p className="p-8 text-slate-500">Chargement…</p>;
 
   if (!user) return <p className="p-8">Connecte-toi pour voir le bilan de ta classe.</p>;
   if (erreur) return <p className="p-8 text-red-700">{erreur}</p>;

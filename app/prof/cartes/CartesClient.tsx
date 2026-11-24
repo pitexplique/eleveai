@@ -19,7 +19,7 @@ export type Classe = {
 };
 
 export default function CartesClient() {
-  const { eleve: user } = useEleve();
+  const { eleve: user, pret } = useEleve();
   const [classe, setClasse] = useState<Classe | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
   const [origine, setOrigine] = useState("https://eleveai.fr");
@@ -64,6 +64,8 @@ export default function CartesClient() {
       setPdfEnCours(false);
     }
   }
+
+  if (!pret) return <p className="p-8 text-slate-500">Chargement…</p>;
 
   if (!user) {
     return <p className="p-8">Connecte-toi pour imprimer les cartes de ta classe.</p>;

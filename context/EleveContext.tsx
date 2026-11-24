@@ -16,6 +16,11 @@ export type Eleve = {
 
 type EleveContextType = {
   eleve: Eleve | null;
+  /** ⭐ 24/11/2026 — false tant que la session n'est pas lue dans le
+   *  navigateur (premier rendu). Une page ne dit « Tu dois être connecté »
+   *  que quand pret est vrai : avant, le message s'affichait une seconde à
+   *  chaque chargement, même pour un élève connecté. */
+  pret: boolean;
   login: (eleve: Eleve) => void;
   logout: () => void;
 };
@@ -38,6 +43,7 @@ const EleveContext = createContext<EleveContextType | null>(null);
 
 export function EleveProvider({ children }: { children: React.ReactNode }) {
   const [eleve, setEleve] = useState<Eleve | null>(null);
+  const [pret, setPret] = useState(false);
 
   useEffect(() => {
     let stored: Eleve | null = null;
@@ -48,10 +54,17 @@ export function EleveProvider({ children }: { children: React.ReactNode }) {
         setEleve(stored);
       }
     } catch {
-      localStorage.removeItem("eleveai_eleve");
+      try {
+        localStorage.removeItem("eleveai_eleve");
+      } catch {
+        /* stockage refusé */
+      }
       setEleve(null);
+      setPret(true);
       return;
     }
+    // Même rendu que setEleve(stored) : jamais « prêt » avec un élève manquant.
+    setPret(true);
 
     // ON RELIT LA CLASSE EN BASE, ON NE LA DEVINE PLUS (12/08/2026).
     //
@@ -96,7 +109,7 @@ export function EleveProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <EleveContext.Provider value={{ eleve, login, logout }}>
+    <EleveContext.Provider value={{ eleve, pret, login, logout }}>
       {children}
     </EleveContext.Provider>
   );

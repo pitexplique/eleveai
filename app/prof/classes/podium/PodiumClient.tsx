@@ -42,7 +42,7 @@ const MARCHES = [
 const court = (nom: string) => nom.trim().split(/\s+/).slice(0, 2).join(" ");
 
 export default function PodiumClient() {
-  const { eleve: user } = useEleve();
+  const { eleve: user, pret } = useEleve();
   const token = user?.token ?? null;
   const [donnees, setDonnees] = useState<Donnees | null>(null);
   const [erreur, setErreur] = useState<string | null>(null);
@@ -84,6 +84,8 @@ export default function PodiumClient() {
       .then((d) => (d?.ok ? setDonnees(d) : setErreur(d?.error ?? "Impossible de charger le podium.")))
       .catch(() => setErreur("Impossible de charger le podium."));
   }, [token]);
+
+  if (!pret) return <p className="p-8 text-slate-500">Chargement…</p>;
 
   if (!user) return <p className="p-8">Connecte-toi pour afficher le podium de ta classe.</p>;
   if (erreur) return <p className="p-8 text-red-700">{erreur}</p>;
