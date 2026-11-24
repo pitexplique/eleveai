@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Un billet de concert à 40 € augmente de 25 %. Il coûte 65 € ?",
+  "01-image": "Non ! On ajoute 25 % de 40, pas 25 €. 40 fois 1,25, égale 50 €.",
+  "02-question": "Question ! 60 € augmentent de 50 %. Combien ? A : 110 €. B : 30 €. C : 90 €. Mets pause, et choisis !",
+  "02b-reponse": "Réponse C. 60 fois 1,5, égale 90 €.",
+  "03-commentaire": "À toi : 80 € baissent de 25 %. Combien ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

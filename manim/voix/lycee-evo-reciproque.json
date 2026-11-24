@@ -1,0 +1,17 @@
+{
+  "00-garde": "L'évolution réciproque. Après une baisse de 20 %, quelle hausse pour revenir ?",
+  "01-situation": "Le Livret A est passé de 3 % à 2,4 % : moins 20 %. Pour retrouver 3 %, faudrait-il une hausse de 20 % ? Même question pour une kinésithérapeute dont le patient a perdu 20 % de sa force après une blessure, ou pour un commerçant qui veut revenir à son prix d'avant les soldes.",
+  "02-question-du-jour": "2,4 plus 20 %, cela fait-il 3 ?",
+  "03-test": "Testons. 2,4 fois 1,2, égale 2,88. Pas 3. Plus 20 % ne suffit pas : la hausse porte sur 2,4, une valeur plus petite.",
+  "04-coefficient": "La bonne méthode : le coefficient réciproque. Pour défaire fois 0,8, on divise par 0,8 : c'est multiplier par 1 divisé par 0,8, égale 1,25. Plus 25 %. Vérification : 2,4 fois 1,25, égale 3.",
+  "05-regle": "La règle : si une évolution a pour coefficient c, l'évolution réciproque a pour coefficient 1 divisé par c.",
+  "06-question": "Question ! Un prix baisse de 50 %. Pour revenir au prix de départ, il faut : A : plus 50 %. B : plus 150 %. C : plus 100 %. Mets pause, et choisis !",
+  "06b-reponse": "Réponse C. 1 divisé par 0,5, égale 2 : il faut doubler, plus 100 %. A ne ramène qu'aux trois quarts du prix, et B multiplie par 2,5.",
+  "07-piege": "Attention au piège ! Une hausse et une baisse de même taux ne se compensent pas. Après une baisse, la hausse pour revenir est toujours plus grande. Après une hausse, la baisse pour revenir est plus petite.",
+  "08-question": "Question ! Un loyer augmente de 25 %. Quelle baisse le ramènerait à son prix d'avant ? A : moins 20 %. B : moins 25 %. C : moins 125 %. Mets pause, et choisis !",
+  "08b-reponse": "Réponse A. 1 divisé par 1,25, égale 0,8 : moins 20 %. B reprend le même taux, et C est impossible : on ne peut pas baisser de plus de 100 %.",
+  "09-defi": "À toi de jouer ! Une action perd 60 %. Quelle hausse faut-il pour revenir à son prix ? Et après une hausse de 100 %, quelle baisse ? Mets pause, et cherche !",
+  "09b-correction": "Moins 60 %, c'est fois 0,4. 1 divisé par 0,4, égale 2,5 : plus 150 %. Plus 100 %, c'est fois 2. 1 divisé par 2, égale 0,5 : moins 50 %.",
+  "10-finale": "Ce que tu as appris. Le coefficient réciproque, c'est 1 divisé par le coefficient. Après une baisse de 20 %, il faut plus 25 % pour revenir. Jamais le même taux.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

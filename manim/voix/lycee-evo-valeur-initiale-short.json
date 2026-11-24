@@ -1,0 +1,8 @@
+{
+  "00-accroche": "Avec 20 % de TVA, un objet coûte 120 €. Hors taxe : 96 € ?",
+  "01-image": "Non ! 96 fois 1,2, égale 115,20 €. On divise : 120 divisé par 1,2, égale 100 €.",
+  "02-question": "Question ! Après plus 10 %, un prix vaut 110 €. Avant ? A : 100 €. B : 99 €. C : 121 €. Mets pause, et choisis !",
+  "02b-reponse": "Réponse A. 110 divisé par 1,1, égale 100 €.",
+  "03-commentaire": "À toi : avec 20 % de TVA, un objet coûte 36 € toutes taxes comprises. Combien hors taxe ? Réponds en commentaire !",
+  "04-abonne": "Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche !"
+}

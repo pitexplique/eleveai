@@ -1151,5 +1151,69 @@
     "question": ["Pense à un nombre…", "je devine !"],
     "calcul": [["× 2, + 10, ÷ 2, − x", "blanc", 95], ["= ?", "jaune", 170]],
     "ceinture": "bleue"
+  },
+  "premiere-prop-evo-additif-short": {
+    "question": ["Plus 5 %,", "c'est fois 1,5 ?"],
+    "calcul": [["+ 5 %", "blanc", 150], ["× 1,5 ?", "jaune", 170]],
+    "ceinture": "blanche",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "premiere-prop-evo-diminution-short": {
+    "question": ["Moins 30 %", "sur un jean à 50 €"],
+    "calcul": [["− 30 %", "blanc", 150], ["× 0,3 ?", "jaune", 170]],
+    "ceinture": "blanche",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "premiere-prop-evo-valeur-finale-short": {
+    "question": ["Un billet à 40 €", "augmente de 25 %"],
+    "calcul": [["40 € + 25 %", "blanc", 120], ["= 65 € ?", "jaune", 160]],
+    "ceinture": "blanche",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "premiere-prop-evo-valeur-initiale-short": {
+    "question": ["120 € TTC,", "TVA 20 %"],
+    "calcul": [["hors taxe :", "blanc", 110], ["96 € ?", "jaune", 170]],
+    "ceinture": "blanche",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "premiere-prop-evo-calculer-taux-short": {
+    "question": ["De 20 € à 25 € :", "quel taux ?"],
+    "calcul": [["20 € → 25 €", "blanc", 120], ["+ 5 % ?", "jaune", 170]],
+    "ceinture": "blanche",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "premiere-prop-evo-successives-short": {
+    "question": ["− 50 %, puis", "encore − 50 %"],
+    "calcul": [["− 50 % − 50 %", "blanc", 110], ["gratuit ?", "jaune", 160]],
+    "ceinture": "blanche",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "premiere-prop-evo-reciproque-short": {
+    "question": ["Ton score", "baisse de 20 %"],
+    "calcul": [["pour revenir :", "blanc", 110], ["+ 20 % ?", "jaune", 170]],
+    "ceinture": "blanche",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "premiere-prop-evo-compensation-short": {
+    "question": ["+ 50 %, puis − 50 % :", "retour au départ ?"],
+    "calcul": [["× 1,5 × 0,5", "blanc", 120], ["= 1 ?", "jaune", 170]],
+    "ceinture": "blanche",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
   }
 }
