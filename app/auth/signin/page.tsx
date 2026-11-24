@@ -1408,15 +1408,6 @@ export default function SignInPage() {
               </div>
               )}
 
-              {/* TESTER SANS COMPTE */}
-              <div className="mt-4">
-                <Link
-                  href="/accueil"
-                  className="block w-full rounded-lg border border-emerald-500 bg-emerald-50 py-2.5 text-center text-sm font-semibold text-emerald-700 hover:bg-emerald-100 transition"
-                >
-                  ✨ Tester EleveAI sans compte
-                </Link>
-              </div>
             </div>
 
             {/* BADGES */}
