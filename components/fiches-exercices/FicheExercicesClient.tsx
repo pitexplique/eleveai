@@ -120,7 +120,7 @@ export default function FicheExercicesClient({ fiche }: { fiche: FicheExercicesD
               </Link>
             </nav>
             {/* 📝 / 🏋️ EN HAUT, comme au coach (Frédéric, 24/11/2026). */}
-            {enMaths ? <ChoixSeanceExercices seance={seance} /> : null}
+            {enMaths ? <ChoixSeanceExercices seance={seance} classe={fiche.classe} /> : null}
             <div className="mb-4 flex flex-wrap items-center gap-x-2 gap-y-1">
               <span className="flex items-center gap-2 text-lg font-black tracking-tight text-sky-600">
                 <Sparkles className="h-5 w-5" />

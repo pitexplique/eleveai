@@ -5,6 +5,7 @@ import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { prenomCourt } from "@/lib/prenom";
 import type { Bulletin } from "@/lib/bulletin/types";
+import { computeBulletin, REGLE_BULLETIN } from "@/lib/bulletin/computeBulletin";
 import { construireRapport, type SeanceCoach } from "@/lib/suivi/calcul";
 import type { RapportEnfant } from "@/lib/suivi/types";
 import { ETABLISSEMENT_INDEPENDANT } from "./session";
@@ -40,10 +41,29 @@ export async function rapportDeLEnfant(
       .eq("code_utilisateur", codeUtilisateur)
       .maybeSingle(),
   ]);
+  // Snapshot d'avant la règle de classe (24/11/2026) : recalculé, pour que le
+  // parent voie la même moyenne que l'élève et le prof.
+  let snapshot = (bulletin.data?.data as Bulletin | null) ?? null;
+  if (snapshot && snapshot.regle !== REGLE_BULLETIN) {
+    const args = {
+      codeEtablissement,
+      codeUtilisateur,
+      nom: (profil.data?.nom as string | null) ?? null,
+      classe: (profil.data?.classe as string | null) ?? null,
+    };
+    const neuf = await computeBulletin(args);
+    if (neuf) {
+      snapshot = neuf;
+      await admin
+        .from("bulletins")
+        .upsert({ code_etablissement: codeEtablissement, code_utilisateur: codeUtilisateur, data: neuf, updated_at: new Date().toISOString() })
+        .then(() => undefined, () => undefined);
+    }
+  }
   return construireRapport({
     prenom: prenomCourt(profil.data?.nom ?? null) || "Votre enfant",
     classe: (profil.data?.classe as string | null) ?? null,
     seances: (seances.data ?? []) as SeanceCoach[],
-    bulletin: (bulletin.data?.data as Bulletin | null) ?? null,
+    bulletin: snapshot,
   });
 }

@@ -12,6 +12,7 @@ import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { pseudosDeLaClasse } from "@/lib/server/pseudos";
 import { getMicroLabelMap } from "@/lib/tutor-v4/catalog";
+import { compteDansLaMoyenne } from "@/lib/moyenne/compteDansLaMoyenne";
 
 const JOUR = 24 * 60 * 60 * 1000;
 export const PERIODES: Record<string, number | null> = { "30j": 30, trim: 90, debut: null };
@@ -118,7 +119,7 @@ const MEDAILLES: { id: string; emoji: string; titre: string; valeur: (s: Stat) =
 ];
 
 function classement(
-  eleves: { code_utilisateur: string; nom: string | null; pseudo: string | null }[],
+  eleves: { code_utilisateur: string; nom: string | null; pseudo: string | null; classeEleve?: string | null }[],
   seances: LigneTutor[],
   activites: LigneActivite[],
   nbJours: number
@@ -139,7 +140,7 @@ function classement(
     const justes = g.filter((x) => x.juste === true).length;
     const taux = g.length ? justes / g.length : 0;
     const notes = s
-      .filter((x) => x.details?.entrainement !== true)
+      .filter((x) => compteDansLaMoyenne(x, e.classeEleve))
       .map((x) => x.score_sur_20)
       .filter((n): n is number => typeof n === "number");
     let progression = 0;
@@ -216,7 +217,7 @@ export async function calculerBulletinClasse(admin: SupabaseClient, code: string
   const [eleves, seances, activites, pseudos] = await Promise.all([
     db
       .from("acces_etablissement")
-      .select("code_utilisateur, nom")
+      .select("code_utilisateur, nom, classe")
       .eq("code_etablissement", code)
       .eq("type_utilisateur", "eleve")
       .order("code_utilisateur"),
@@ -288,8 +289,10 @@ export async function calculerBulletinClasse(admin: SupabaseClient, code: string
       creneaux[c.cle]++;
       jours.add(c.jour);
       // 🏋️ Une séance d'entraînement (choix de l'élève au coach, 23/11/2026)
-      // compte comme travail, pas dans la moyenne.
-      if (s.details?.entrainement !== true) {
+      // ou faite dans une AUTRE classe que la sienne (24/11/2026) compte comme
+      // travail, pas dans la moyenne. La classe de l'élève : celle de son
+      // compte, sinon le niveau de la classe du prof.
+      if (compteDansLaMoyenne(s, e.classe || niveau)) {
         const q = Number(s.nb_tentatives) || 0;
         if (q > 0) {
           questions += q;
@@ -326,6 +329,7 @@ export async function calculerBulletinClasse(admin: SupabaseClient, code: string
       code_utilisateur: e.code_utilisateur,
       nom: e.nom,
       pseudo: pseudos.get(e.code_utilisateur) ?? null,
+      classeEleve: (e.classe as string | null) || niveau,
       moyenne,
       seances: siennes.length,
       questions: gestes.filter((g) => g.type === "coach").length,

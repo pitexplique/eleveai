@@ -11,6 +11,8 @@ import "server-only";
 import { createClient } from "@supabase/supabase-js";
 import { prenomCourt } from "@/lib/prenom";
 import type { Bulletin, PeriodeBulletin, MatiereStat } from "./types";
+import { compteDansLaMoyenne } from "@/lib/moyenne/compteDansLaMoyenne";
+import { classeDeLEleve } from "@/lib/server/classeEleve";
 
 const JOUR = 24 * 60 * 60 * 1000;
 
@@ -131,14 +133,16 @@ async function fetchEvenements(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   supabase: any,
   codeEtablissement: string,
-  codeUtilisateur: string
+  codeUtilisateur: string,
+  classeEleve: string | null
 ): Promise<Evenement[]> {
   const lots = await Promise.all(
     SOURCES.map(async (src) => {
       const cols = ["created_at"];
       if (src.note20Field) cols.push(src.note20Field);
-      // 🏋️ Séances d'entraînement du coach (23/11/2026) : hors moyenne.
-      if (src.table === "resultats_tutor") cols.push("entrainement:details->entrainement", "nb_tentatives");
+      // 🏋️ Séances d'entraînement du coach (23/11/2026) et séances faites
+      // dans une AUTRE classe que celle de l'élève (24/11/2026) : hors moyenne.
+      if (src.table === "resultats_tutor") cols.push("entrainement:details->entrainement", "nb_tentatives", "classe");
       else cols.push("score", "total");
       if (src.matiereField) cols.push(src.matiereField);
 
@@ -155,7 +159,14 @@ async function fetchEvenements(
       for (const r of data as Record<string, unknown>[]) {
         const matiere = src.matiere ?? String(r[src.matiereField as string] ?? "").trim();
         if (!matiere) continue;
-        if (r.entrainement === true) continue;
+        if (
+          src.table === "resultats_tutor" &&
+          !compteDansLaMoyenne(
+            { classe: r.classe as string | null, details: { entrainement: r.entrainement } },
+            classeEleve
+          )
+        )
+          continue;
         let note20: number | null = null;
         let poids = 1;
         if (src.note20Field) {
@@ -261,6 +272,11 @@ function calculerPeriode(
   };
 }
 
+// Version de la règle : 2 = seules les séances de la classe de l'élève
+// comptent (24/11/2026). Un snapshot `bulletins` d'une version plus ancienne
+// est recalculé à la lecture (/api/bulletin, suivi parent).
+export const REGLE_BULLETIN = 2;
+
 // Calcule le bulletin complet d'un élève (3 périodes).
 export async function computeBulletin(args: {
   codeEtablissement: string;
@@ -275,8 +291,16 @@ export async function computeBulletin(args: {
   const supabase = createClient(url, key);
   const now = Date.now();
 
+  // La classe d'AUJOURD'HUI (compte, puis classe du prof, puis l'appelant) :
+  // seules les séances de cette classe comptent dans la moyenne.
+  const classeEleve = await classeDeLEleve(
+    supabase,
+    args.codeEtablissement,
+    args.codeUtilisateur,
+    args.classe ?? null
+  );
   const [evts, jours30, jours90, joursAll] = await Promise.all([
-    fetchEvenements(supabase, args.codeEtablissement, args.codeUtilisateur),
+    fetchEvenements(supabase, args.codeEtablissement, args.codeUtilisateur, classeEleve),
     joursConnexion(supabase, args.codeEtablissement, args.codeUtilisateur, now - 30 * JOUR),
     joursConnexion(supabase, args.codeEtablissement, args.codeUtilisateur, now - 90 * JOUR),
     joursConnexion(supabase, args.codeEtablissement, args.codeUtilisateur, 0),
@@ -293,6 +317,7 @@ export async function computeBulletin(args: {
     prenom,
     classe: args.classe ?? null,
     computed_at: new Date(now).toISOString(),
+    regle: REGLE_BULLETIN,
     periodes: {
       "30j": calculerPeriode(dans(now - 30 * JOUR), jours30, 30),
       trim: calculerPeriode(dans(now - 90 * JOUR), jours90, 90),

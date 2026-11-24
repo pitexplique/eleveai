@@ -14,6 +14,7 @@ import Link from "next/link";
 import { AIDE_IA } from "@/lib/tarifs";
 import { saveResultat } from "@/lib/resultats";
 import { useEleve } from "@/context/EleveContext";
+import { horsClasse, niveauClasse } from "@/lib/moyenne/compteDansLaMoyenne";
 import { signalerActivite } from "@/lib/activite";
 
 type EleveSession = {
@@ -24,6 +25,7 @@ type EleveSession = {
   nom?: string | null;
   type_utilisateur?: string | null;
   token?: string | null;
+  classe?: string | null;
 };
 
 import {
@@ -633,6 +635,10 @@ export default function TutorV4Page() {
   const [entrainement, setEntrainement] = useState(false);
 
   const [classe, setClasse] = useState<Classe>("6e");
+  // ⭐ 24/11/2026 — RÈGLE DE CLASSE : un 6e qui teste le coach de 4e
+  // s'entraîne. Sa séance s'enregistre, hors moyenne (calcul serveur :
+  // lib/moyenne/compteDansLaMoyenne.ts). Classe inconnue : tout compte.
+  const classeHors = horsClasse(classe, eleve?.classe) ? niveauClasse(classe) : null;
 
   const [matiere, setMatiere] = useState<Matiere>("maths");
 
@@ -1986,7 +1992,7 @@ function handleInputKeyDown(
       nbReponses={nbTentatives}
       etatAuto={etatAuto}
       reprise={reprise}
-      entrainement={entrainement}
+      entrainement={entrainement || !!classeHors}
       lienConnexion={`/auth/signin?mode=eleve&next=${encodeURIComponent(
         `${pathname}?${searchParams.toString()}`
       )}`}
@@ -2009,6 +2015,7 @@ function handleInputKeyDown(
         aRenvoyerRef.current = true;
       }}
       surFondSombre={surFondSombre}
+      classeHors={classeHors}
     />
   );
 

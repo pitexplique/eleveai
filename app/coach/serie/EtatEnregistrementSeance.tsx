@@ -111,15 +111,20 @@ export function ChoixSeance({
   entrainement,
   onEntrainement,
   surFondSombre = false,
+  classeHors = null,
 }: {
   connecte: boolean;
   sessionARenouveler: boolean;
   entrainement: boolean;
   onEntrainement: (v: boolean) => void;
   surFondSombre?: boolean;
+  /** ⭐ 24/11/2026 — la classe choisie n'est pas celle de l'élève (son
+   *  niveau, ex. « 4e ») : « Ma séance compte » est grisé. Voir
+   *  lib/moyenne/compteDansLaMoyenne.ts. */
+  classeHors?: string | null;
 }) {
   if (!connecte || sessionARenouveler) return null;
-  return (
+  const choix = (
     <div
       role="radiogroup"
       aria-label="Ma séance compte-t-elle pour ma note ?"
@@ -131,16 +136,22 @@ export function ChoixSeance({
         { v: false, label: "📝 Ma séance compte" },
         { v: true, label: "🏋️ Entraînement" },
       ].map((o) => {
-        const actif = entrainement === o.v;
+        const actif = (classeHors ? true : entrainement) === o.v;
+        const grise = !!classeHors && !o.v;
         return (
           <button
             key={o.label}
             type="button"
             role="radio"
             aria-checked={actif}
+            aria-disabled={grise || undefined}
+            disabled={grise}
+            title={grise ? "Ce n'est pas ta classe : ta séance est un entraînement" : undefined}
             onClick={() => onEntrainement(o.v)}
             className={`rounded-full px-3 py-1.5 transition ${
-              actif
+              grise
+                ? `cursor-not-allowed opacity-40 ${surFondSombre ? "text-white" : "text-slate-500"}`
+                : actif
                 ? o.v
                   ? "bg-amber-400 text-amber-950 shadow"
                   : "bg-emerald-600 text-white shadow"
@@ -153,6 +164,15 @@ export function ChoixSeance({
           </button>
         );
       })}
+    </div>
+  );
+  if (!classeHors) return choix;
+  return (
+    <div className="flex flex-col items-start gap-1">
+      {choix}
+      <p className={`pl-2 text-xs font-bold ${surFondSombre ? "text-amber-200" : "text-amber-700"}`}>
+        Ce n’est pas ta classe : ta séance est un entraînement.
+      </p>
     </div>
   );
 }

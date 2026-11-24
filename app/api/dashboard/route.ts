@@ -24,6 +24,8 @@ import { estProbablementIA } from "@/lib/detection-ia";
 import { tableauDeBordLimite } from "@/lib/server/droitsSuivi";
 import { derniersJours, resumeGratuit, type LigneResultat } from "@/lib/suivi/resumeGratuit";
 import { COMPTE_GRATUIT } from "@/lib/tarifs";
+import { compteDansLaMoyenne, horsClasse, niveauClasse } from "@/lib/moyenne/compteDansLaMoyenne";
+import { classeDeLEleve } from "@/lib/server/classeEleve";
 
 // Colonnes par table : détaillées (dashboard élève, avec details) et
 // synthétiques (dashboards prof/principal, sans details — trop lourd à
@@ -174,6 +176,36 @@ export async function GET(req: Request) {
     );
   }
 
+  // ⭐ 24/11/2026 — RÈGLE DE CLASSE, CALCULÉE ICI (pas dans le navigateur).
+  // Chaque séance du coach / des exercices porte `compte_moyenne` et, si elle
+  // est faite dans une autre classe que celle de l'élève, `hors_classe` (son
+  // niveau, ex. « 4e »). Le Cockpit et les tableaux du prof les lisent.
+  const classeDesEleves = new Map<string, string | null>();
+  if (etabScope) {
+    const niveauClasseProf = await supabaseAdmin
+      .from("classes_prof")
+      .select("niveau")
+      .eq("code_etablissement", session.code_etablissement)
+      .maybeSingle()
+      .then((r) => (r.data?.niveau as string | null) ?? null, () => null);
+    for (const c of (comptesRes.data ?? []) as { code_utilisateur: string; classe: string | null }[])
+      classeDesEleves.set(c.code_utilisateur, c.classe || niveauClasseProf);
+  } else {
+    classeDesEleves.set(
+      session.code_utilisateur,
+      await classeDeLEleve(supabaseAdmin, session.code_etablissement, session.code_utilisateur, session.classe ?? null)
+    );
+  }
+  const tutorAnnote = ((tutorRes.data ?? []) as unknown as Record<string, unknown>[]).map((r) => {
+    const classeEleve = classeDesEleves.get(String(r.code_utilisateur)) ?? null;
+    const seance = { classe: (r.classe as string | null) ?? null, details: r.details };
+    return {
+      ...r,
+      compte_moyenne: compteDansLaMoyenne(seance, classeEleve),
+      hors_classe: horsClasse(seance.classe, classeEleve) ? niveauClasse(seance.classe) : null,
+    };
+  });
+
   const resultats = {
     parcours_maths: parcoursMathsRes.data ?? [],
     parcours_english: parcoursEnglishRes.error
@@ -191,7 +223,7 @@ export async function GET(req: Request) {
     dictee: dicteeRes.error ? [] : dicteeRes.data ?? [],
     // Table optionnelle (créée séparément) : une erreur ne bloque pas le dashboard.
     langue_du_jour: langueRes.error ? [] : langueRes.data ?? [],
-    tutor: tutorRes.data ?? [],
+    tutor: tutorAnnote,
   } as Record<string, unknown[]>;
 
   // ⭐ 19/11/2026 — COMPTE GRATUIT : le tableau de bord minimum (3 chiffres,

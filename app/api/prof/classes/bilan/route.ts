@@ -8,6 +8,7 @@ import { NextResponse } from "next/server";
 import { classeDuProf, profDuJeton, supabaseAdmin } from "@/lib/server/classesProf";
 import { pseudosDeLaClasse } from "@/lib/server/pseudos";
 import { getMicroLabelMap, getNotionMicroMap, notionLabel } from "@/lib/tutor-v4/catalog";
+import { horsClasse } from "@/lib/moyenne/compteDansLaMoyenne";
 
 export const dynamic = "force-dynamic";
 
@@ -25,7 +26,7 @@ export async function GET(req: Request) {
   const [eleves, seances, pseudos] = await Promise.all([
     admin
       .from("acces_etablissement")
-      .select("code_utilisateur, nom")
+      .select("code_utilisateur, nom, classe")
       .eq("code_etablissement", code)
       .eq("type_utilisateur", "eleve")
       .order("code_utilisateur"),
@@ -43,8 +44,15 @@ export async function GET(req: Request) {
     string,
     { classe: string; matiere: string; notion: string; derniere: string; scores: Record<string, Record<string, { j: number; t: number }>> }
   >();
+  // ⭐ 24/11/2026 — RÈGLE DE CLASSE : une séance faite dans une AUTRE classe
+  // que celle de l'élève (un 6e qui teste la 4e) n'entre pas dans le bilan de
+  // sa classe. Classe de l'élève : son compte, sinon le niveau de la classe.
+  const classeDe = new Map<string, string | null>(
+    (eleves.data ?? []).map((e) => [e.code_utilisateur, ((e as { classe?: string | null }).classe || classe.niveau) ?? null])
+  );
   for (const s of seances.data ?? []) {
     if (!s.notion_id) continue;
+    if (horsClasse(s.classe, classeDe.get(s.code_utilisateur) ?? classe.niveau)) continue;
     const cle = `${s.classe}|${s.matiere ?? "maths"}|${s.notion_id}`;
     let n = notions.get(cle);
     if (!n) {

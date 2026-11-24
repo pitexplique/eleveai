@@ -18,11 +18,18 @@ import { useEleve } from "@/context/EleveContext";
 import { saveResultat } from "@/lib/resultats";
 import { ChoixSeance } from "@/app/coach/serie/EtatEnregistrementSeance";
 import { EVENEMENT_REPONSE_EXERCICE } from "@/components/fiches-exercices/ReponseExercice";
+import { horsClasse, niveauClasse } from "@/lib/moyenne/compteDansLaMoyenne";
+
+/** ⭐ 24/11/2026 — RÈGLE DE CLASSE : la fiche n'est pas de la classe de l'élève
+ *  → son niveau (« 4e »), sinon null. Classe de l'élève inconnue : null. */
+function classeHorsDe(classeFiche: string, classeEleve: string | null | undefined) {
+  return horsClasse(classeFiche, classeEleve) ? niveauClasse(classeFiche) : null;
+}
 
 type Etat = "rien" | "envoi" | "ok" | "erreur";
 
 export function useSeanceExercices() {
-  const { eleve } = useEleve() as unknown as { eleve?: { token?: string | null } | null };
+  const { eleve } = useEleve() as unknown as { eleve?: { token?: string | null; classe?: string | null } | null };
   const [entrainement, setEntrainement] = useState(false);
   const [reponses, setReponses] = useState<Record<string, boolean>>({});
   const [etat, setEtat] = useState<Etat>("rien");
@@ -66,9 +73,10 @@ export function useSeanceExercices() {
 export type SeanceExercices = ReturnType<typeof useSeanceExercices>;
 
 /** En haut de la fiche : le même choix qu'au coach. */
-export function ChoixSeanceExercices({ seance }: { seance: SeanceExercices }) {
+export function ChoixSeanceExercices({ seance, classe }: { seance: SeanceExercices; classe: string }) {
   const { eleve } = seance;
   if (!eleve) return null;
+  const classeHors = classeHorsDe(classe, eleve.classe);
   return (
     <div className="screen-only mt-4 flex flex-wrap items-center gap-2">
       <ChoixSeance
@@ -76,12 +84,15 @@ export function ChoixSeanceExercices({ seance }: { seance: SeanceExercices }) {
         sessionARenouveler={!eleve.token}
         entrainement={seance.entrainement}
         onEntrainement={seance.setEntrainement}
+        classeHors={classeHors}
       />
-      <span className="text-xs font-semibold text-slate-500">
-        {seance.entrainement
-          ? "Entraînement : ta séance ne compte pas dans ta moyenne."
-          : "Ta séance compte dans ta moyenne si tu l’enregistres à la fin."}
-      </span>
+      {classeHors ? null : (
+        <span className="text-xs font-semibold text-slate-500">
+          {seance.entrainement
+            ? "Entraînement : ta séance ne compte pas dans ta moyenne."
+            : "Ta séance compte dans ta moyenne si tu l’enregistres à la fin."}
+        </span>
+      )}
     </div>
   );
 }
@@ -99,7 +110,10 @@ export function EnregistrerSeanceExercices({
   titre: string;
 }) {
   const pathname = usePathname();
-  const { eleve, questions, bonnes, etat, entrainement } = seance;
+  const { eleve, questions, bonnes, etat } = seance;
+  const classeHors = eleve ? classeHorsDe(classe, eleve.classe) : null;
+  // Le choix de l'élève part tel quel ; la classe se juge au serveur.
+  const entrainement = seance.entrainement;
 
   async function enregistrer() {
     if (!eleve || questions === 0) return;
@@ -137,7 +151,9 @@ export function EnregistrerSeanceExercices({
       {questions > 0 && (
         <p className="mt-1 text-sm font-semibold text-emerald-800">
           {bonnes} ÷ {questions} × 20 = {((bonnes / questions) * 20).toFixed(1).replace(".", ",")}/20
-          {entrainement && " · 🏋️ entraînement, ne compte pas"}
+          {classeHors
+            ? ` · ${classeHors} · hors moyenne`
+            : entrainement && " · 🏋️ entraînement, ne compte pas"}
         </p>
       )}
       <p className="mt-1 text-xs text-emerald-700">C’est ta première réponse à chaque exercice qui compte.</p>

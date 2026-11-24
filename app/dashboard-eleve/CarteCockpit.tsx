@@ -32,6 +32,10 @@ export type SeanceCockpit = {
   nb_tentatives: number;
   details: unknown;
   created_at: string;
+  /** Calculé par /api/dashboard (règle de classe, 24/11/2026). */
+  compte_moyenne?: boolean;
+  /** Niveau de la séance quand elle est faite hors de la classe de l'élève (« 4e »). */
+  hors_classe?: string | null;
 };
 
 type Cadran = "moyenne" | "seances" | "questions" | "jours";
@@ -52,6 +56,14 @@ const virgule = (n: number) => (Math.round(n * 10) / 10).toString().replace(".",
 
 export function estEntrainement(details: unknown): boolean {
   return !!(details && typeof details === "object" && (details as { entrainement?: unknown }).entrainement === true);
+}
+
+// ⭐ 24/11/2026 — RÈGLE DE CLASSE : la séance compte-t-elle dans la moyenne ?
+// Le serveur le dit (compte_moyenne) ; sans lui (ancienne réponse), on
+// retombe sur le seul choix « Entraînement ».
+export function horsMoyenne(s: SeanceCockpit): boolean {
+  if (typeof s.compte_moyenne === "boolean") return !s.compte_moyenne;
+  return estEntrainement(s.details);
 }
 
 // 24/11/2026 : les séances des fiches d'exercices interactives (details.source).
@@ -89,7 +101,7 @@ type Mesures = {
 // × 20. Une séance d'une seule question ne pèse plus autant qu'une de 30.
 // Même calcul que lib/server/bulletinClasse.ts (« Ce que voit ton prof »).
 function mesurer(liste: SeanceCockpit[]): Mesures {
-  const comptent = liste.filter((s) => !estEntrainement(s.details) && (s.nb_tentatives || 0) > 0);
+  const comptent = liste.filter((s) => !horsMoyenne(s) && (s.nb_tentatives || 0) > 0);
   const justesComptees = comptent.reduce((a, s) => a + (s.bonnes_reponses || 0), 0);
   const questionsComptees = comptent.reduce((a, s) => a + (s.nb_tentatives || 0), 0);
   return {
@@ -219,7 +231,8 @@ export default function CarteCockpit({
   const reperes = [0, Math.floor((periode - 1) / 2), periode - 1];
 
   const lignes = toutVoir ? dansPeriode : dansPeriode.slice(0, 8);
-  const nbEntrainement = dansPeriode.filter((s) => estEntrainement(s.details)).length;
+  const nbEntrainement = dansPeriode.filter((s) => horsMoyenne(s) && !s.hors_classe).length;
+  const nbHorsClasse = dansPeriode.filter((s) => !!s.hors_classe).length;
 
   return (
     <section className="mt-6 overflow-hidden rounded-2xl border border-slate-800 bg-black text-white shadow-2xl md:flex">
@@ -417,7 +430,7 @@ export default function CarteCockpit({
           ) : (
             <ul className="space-y-1 p-2">
               {lignes.map((s) => {
-                const entr = estEntrainement(s.details);
+                const entr = horsMoyenne(s);
                 const note = s.score_sur_20;
                 const largeur = note === null ? 0 : Math.max(2, (note / 20) * 100);
                 return (
@@ -433,7 +446,12 @@ export default function CarteCockpit({
                         <span className="block text-xs text-slate-500">
                           {dateCourte(new Date(s.created_at).getTime())} · {s.classe.toUpperCase()} ·{" "}
                           {s.bonnes_reponses}/{s.nb_tentatives} justes · {estExercices(s.details) ? "📄 exercices" : "🎯 coach"}
-                          {entr && " · 🏋️ entraînement"}
+                          {!s.hors_classe && entr && " · 🏋️ entraînement"}
+                          {s.hors_classe && (
+                            <span className="ml-1.5 rounded bg-amber-400/15 px-1.5 py-0.5 font-semibold text-amber-300">
+                              {s.hors_classe} · hors moyenne
+                            </span>
+                          )}
                         </span>
                       </span>
                       <span
@@ -520,6 +538,12 @@ export default function CarteCockpit({
           <p className="mt-1 text-slate-400">
             🏋️ {nbEntrainement} séance{nbEntrainement > 1 ? "s" : ""} d’entraînement : elle
             {nbEntrainement > 1 ? "s ne comptent" : " ne compte"} pas dans la moyenne.
+          </p>
+        )}
+        {nbHorsClasse > 0 && (
+          <p className="mt-1 text-slate-400">
+            🧭 {nbHorsClasse} séance{nbHorsClasse > 1 ? "s" : ""} dans une autre classe que la tienne : elle
+            {nbHorsClasse > 1 ? "s ne comptent" : " ne compte"} pas dans la moyenne.
           </p>
         )}
       </div>
