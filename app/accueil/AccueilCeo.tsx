@@ -120,7 +120,9 @@ export default function AccueilCeo() {
             />
             <div className="min-w-0 text-left">
               <h1 className={`${slab.className} text-[1.7rem] font-bold leading-tight text-teal-800 sm:text-5xl lg:text-6xl`}>
-                Votre enfant progresse en maths, <span className="whitespace-nowrap text-sky-700">chaque jour.</span>
+                {/* 24/11, Frédéric : « On va progresser ensemble en mathématiques chaque jour ? »
+                    → « Progressons ensemble » (il a choisi). */}
+                Progressons ensemble en maths, <span className="whitespace-nowrap text-sky-700">chaque jour.</span>
               </h1>
               <p className="mt-3 text-base font-bold text-slate-700 sm:text-xl">
                 Le coach trouve ce qui lui manque et l&apos;entraîne là-dessus, avec les{" "}
