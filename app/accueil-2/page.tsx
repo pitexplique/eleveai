@@ -45,11 +45,9 @@ export default function Accueil2Page() {
             Progressons ensemble en maths, <span className="whitespace-nowrap text-sky-700">chaque jour.</span>
           </h1>
           <div className="mt-5">
-            <NuageAccueil />
+            {/* La ligne des 10 questions : seulement pour le visiteur (NuageAccueil la place). */}
+            <NuageAccueil essai={essai} libres={libres.join(". ")} />
           </div>
-          <p className="mt-4 text-center text-sm font-bold text-slate-600">
-            <span className="font-black text-emerald-800">{essai}.</span> {libres.join(". ")}
-          </p>
           <p className="mt-3 text-center">
             <Link
               href="#parents-profs"

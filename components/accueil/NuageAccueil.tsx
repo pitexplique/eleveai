@@ -95,7 +95,7 @@ const CHOIX_AUTRE: Choix[] = [
   { href: "/enigmes-maths", emoji: "🧩", titre: "Les énigmes", detail: "Chercher." },
 ];
 
-export default function NuageAccueil() {
+export default function NuageAccueil({ essai, libres }: { essai?: string; libres?: string }) {
   const { eleve, pret } = useEleve();
   const cas: "attente" | "visiteur" | "eleve" | "prof" | "autre" = !pret
     ? "attente"
@@ -383,6 +383,11 @@ export default function NuageAccueil() {
       </div>
 
       {/* Visiteur : ce qu'un compte ajoute, juste dessous. */}
+      {cas === "visiteur" && essai ? (
+        <p className="mt-4 text-center text-sm font-bold text-slate-600">
+          <span className="font-black text-emerald-800">{essai}.</span> {libres}
+        </p>
+      ) : null}
       {cas === "visiteur" ? (
         <div className="mt-5 rounded-3xl bg-white p-4 shadow-md ring-1 ring-teal-200 sm:p-5">
           <p className="text-center text-lg font-black text-teal-800 sm:text-xl">🔓 Avec ton compte, en plus :</p>
