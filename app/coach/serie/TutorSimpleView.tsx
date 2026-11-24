@@ -386,7 +386,7 @@ export default function TutorSimpleView({
               : "grid gap-4"
           }
         >
-          <section className="min-h-[520px] rounded-2xl bg-white px-5 py-6 shadow-sm ring-1 ring-slate-200 sm:px-8 lg:px-12">
+          <section data-carte-question="" className="min-h-[520px] scroll-mt-20 rounded-2xl bg-white px-5 py-6 shadow-sm ring-1 ring-slate-200 sm:px-8 lg:px-12">
             {/* La leçon écrite est retirée le temps d'en revoir le principe :
                 elle se construisait sur les items `fixed`. Reste la vidéo, et
                 l’explication IA quand l'élève se trompe. */}
