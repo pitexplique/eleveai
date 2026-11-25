@@ -64,7 +64,7 @@ export default function AccueilNuage() {
             className="h-14 w-14 shrink-0 rounded-full object-cover ring-2 ring-teal-200"
           />
           <p className="font-bold text-slate-700">
-            Fait par Frédéric, professeur de maths à La Réunion. Il le corrige chaque semaine avec ses élèves.
+            Fait par Frédéric, professeur de maths à La Réunion. Epsilon engendre l’infini : un détail peut tout changer.
           </p>
         </section>
       </main>
