@@ -17,7 +17,8 @@ import BanniereCrpe from "@/components/accueil/BanniereCrpe";
 import Footer from "@/components/Footer";
 import MasqueSurEmbed from "@/components/MasqueSurEmbed";
 import { EleveProvider } from "@/context/EleveContext";
-import BienvenueEleve from "@/components/BienvenueEleve";
+// ⛔ 25/11/2026 — fenêtre de bienvenue DÉBRANCHÉE (voir plus bas, après <EcrireAuProf />).
+// import BienvenueEleve from "@/components/BienvenueEleve";
 import MasqueSurGuide from "@/components/MasqueSurGuide";
 import EcrireAuProf from "@/components/EcrireAuProf";
 import PageViewTracker from "@/components/PageViewTracker";
@@ -422,8 +423,16 @@ export default function RootLayout({
               <Footer />
             </MasqueSurGuide>
             <EcrireAuProf />
-            {/* ⭐ 24/11/2026 : la fenêtre « Que veux-tu faire ? » après la connexion d'un élève. */}
-            <BienvenueEleve />
+            {/* ⛔ 25/11/2026 — Frédéric : « on peut enlever la fenêtre de bienvenue,
+                ça fait doublon » : l'accueil est en nuage depuis le 24/11 au soir
+                (components/accueil/NuageAccueil.tsx), l'élève voyait un nuage
+                PAR-DESSUS l'autre. Le message du prof reste en haut de l'accueil
+                et dans /dashboard-eleve (Cockpit et Jardin).
+                Pour la remettre : décommenter l'import en haut du fichier et
+                la ligne ci-dessous (components/BienvenueEleve.tsx et
+                lib/conseilTiMargo.ts sont gardés ; la page de connexion pose
+                toujours la marque `marquerBienvenue`).
+            <BienvenueEleve /> */}
           </MasqueSurEmbed>
         </EleveProvider>
 

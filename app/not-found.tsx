@@ -20,18 +20,22 @@ const PORTES = [
   { href: "/carte", emoji: "🗺️", titre: "Les maths en vrai · 974", sous: "Le tour de l'île" },
 ];
 
+// ⭐ 25/11/2026 — Le titre « Cette page a pris la clé des champs » était en
+// text-slate-100, presque invisible sur un fond clair. Le fond du site change
+// selon le thème (clair ou sombre) : la page a donc SON fond clair, et des
+// textes foncés, lisibles dans les deux cas.
 export default function NotFound() {
   return (
-    <main className="flex min-h-[70vh] flex-col items-center justify-center px-6 py-16 text-center">
-      <p className="bg-gradient-to-r from-violet-400 via-sky-400 to-emerald-400 bg-clip-text text-7xl font-black tracking-tight text-transparent sm:text-8xl">
+    <main className="flex min-h-[70vh] flex-col items-center justify-center bg-gradient-to-b from-sky-50 to-white px-6 py-16 text-center">
+      <p className="bg-gradient-to-r from-violet-600 via-sky-600 to-emerald-600 bg-clip-text text-7xl font-black tracking-tight text-transparent sm:text-8xl">
         404
       </p>
 
-      <h1 className="mt-4 text-2xl font-bold text-slate-100 sm:text-3xl">
+      <h1 className="mt-4 text-2xl font-black text-slate-900 sm:text-3xl">
         Cette page a pris la clé des champs
       </h1>
 
-      <p className="mt-3 max-w-md text-slate-400">
+      <p className="mt-3 max-w-md font-medium text-slate-600">
         La page que tu cherches n'existe pas ou a été déplacée. Pas de panique —
         toutes les portes d'EleveAI sont juste ici.
       </p>
@@ -48,14 +52,14 @@ export default function NotFound() {
           <Link
             key={p.href}
             href={p.href}
-            className="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-900/60 px-4 py-3 text-left transition hover:border-slate-600 hover:bg-slate-900"
+            className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-left shadow-sm transition hover:border-slate-400 hover:bg-slate-50"
           >
             <span className="text-2xl" aria-hidden>
               {p.emoji}
             </span>
             <span>
-              <span className="block font-semibold text-slate-100">{p.titre}</span>
-              <span className="block text-sm text-slate-400">{p.sous}</span>
+              <span className="block font-semibold text-slate-900">{p.titre}</span>
+              <span className="block text-sm text-slate-600">{p.sous}</span>
             </span>
           </Link>
         ))}
