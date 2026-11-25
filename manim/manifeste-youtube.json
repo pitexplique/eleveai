@@ -545,7 +545,8 @@
         "méthode",
         "2de",
         "Shorts"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/M977_FnuQ6g"
     },
     {
       "id": "eq-probleme",
@@ -566,7 +567,8 @@
         "méthode",
         "2de",
         "Shorts"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/F7foaFh6c3w"
     },
     {
       "id": "fonction-vocabulaire",
@@ -1133,7 +1135,8 @@
         "nombre décimal",
         "révisions",
         "Shorts"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/tXhwXdW2-Ck"
     },
     {
       "id": "bases-fractions-multiplier",
@@ -1151,7 +1154,8 @@
         "multiplier des fractions",
         "révisions",
         "Shorts"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/o_ax5OoSQOc"
     },
     {
       "id": "bases-fractions-additionner",
@@ -1509,7 +1513,8 @@
         "esprit critique",
         "statistiques",
         "Shorts"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/5YEg5CsCq0I"
     },
     {
       "id": "sondages-avis",
@@ -3071,7 +3076,8 @@
         "racine carrée",
         "valeur absolue",
         "Shorts"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/cFQkfQ2WlzY"
     },
     {
       "id": "geometrie-plane",
@@ -3180,7 +3186,8 @@
         "perpendiculaire",
         "Pythagore",
         "Shorts"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/x9tSDZeBA78"
     },
     {
       "id": "geo-enclos",
@@ -8093,8 +8100,8 @@
           "explication": "La génératrice est l'hypoténuse : 10² − 6² = 64 ; √64 = 8 cm."
         }
       ],
-      "url": "https://youtu.be/Y3UpOJA9gDI",
-      "a_remplacer": true
+      "url": "https://youtu.be/3IKyiAHMYy0",
+      "ancienne_url": "https://youtu.be/Y3UpOJA9gDI"
     },
     {
       "id": "3e-pythagore-solide-short",
@@ -8137,8 +8144,8 @@
           "explication": "[OD], le bord du cône, est en face de l'angle droit."
         }
       ],
-      "url": "https://youtube.com/shorts/db8qvhoqW-M",
-      "a_remplacer": true
+      "url": "https://youtube.com/shorts/1tvJ4wZW6wY",
+      "ancienne_url": "https://youtube.com/shorts/db8qvhoqW-M"
     },
     {
       "id": "4e-expression-comprendre",
@@ -11182,7 +11189,8 @@
         "école",
         "cycle 3",
         "EleveAI"
-      ]
+      ],
+      "url": "https://youtu.be/UARL7sjB0ow"
     },
     {
       "id": "cm1-proba-vocabulaire-short",
@@ -60267,7 +60275,8 @@
         "espace"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-17"
+      "pas_avant": "2026-11-17",
+      "url": "https://youtu.be/SDUIYxubL9I"
     },
     {
       "id": "3e-puissance-calcul",
@@ -60426,7 +60435,8 @@
         }
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-17"
+      "pas_avant": "2026-11-17",
+      "url": "https://youtube.com/shorts/0Yr14ykCzTw"
     },
     {
       "id": "seconde-puissance-produit-quotient",
@@ -60959,7 +60969,8 @@
         "cinema-series"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-21"
+      "pas_avant": "2026-11-21",
+      "url": "https://youtu.be/Im3tL5Tr9a8"
     },
     {
       "id": "4e-puissance-defi-short",
@@ -61009,7 +61020,8 @@
         "jeux-defis"
       ],
       "prioritaire": true,
-      "pas_avant": "2026-11-21"
+      "pas_avant": "2026-11-21",
+      "url": "https://youtube.com/shorts/rlXamo9mTMI"
     },
     {
       "id": "3e-puissance-defi",
@@ -62430,7 +62442,8 @@
       "centres": [
         "jeux-defis"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/XOUqr9sQc2o"
     },
     {
       "id": "4e-equation-reconnaitre-short",
@@ -62478,7 +62491,8 @@
       "centres": [
         "jeux-defis"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtube.com/shorts/ScxgILFgIMg"
     },
     {
       "id": "4e-equation-traduire",
@@ -62580,7 +62594,8 @@
       "centres": [
         "cinema-series"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/DLU1mr7HnwI"
     },
     {
       "id": "4e-equation-traduire-short",
@@ -62628,7 +62643,8 @@
       "centres": [
         "cinema-series"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtube.com/shorts/RjcFuVCqqSM"
     },
     {
       "id": "4e-equation-resoudre-simple",
@@ -62738,7 +62754,8 @@
         "animaux",
         "chiens-chats"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/7acnWVXV7Qg"
     },
     {
       "id": "4e-equation-resoudre-simple-short",
@@ -62785,7 +62802,8 @@
       "centres": [
         "jeux-defis"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtube.com/shorts/EAlWcUNNk_U"
     },
     {
       "id": "4e-equation-resoudre-reduction",
@@ -63980,7 +63998,8 @@
         "nature-ecologie",
         "sciences"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/FyxYjap4fTg"
     },
     {
       "id": "4e-relatif-multiplication-short",
@@ -64029,7 +64048,8 @@
         "nature-ecologie",
         "sciences"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtube.com/shorts/eQycYesqZVE"
     },
     {
       "id": "4e-relatif-division",
@@ -64138,7 +64158,8 @@
       "centres": [
         "animaux"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/Bgogc4OyFUU"
     },
     {
       "id": "4e-relatif-division-short",
@@ -64186,7 +64207,8 @@
       "centres": [
         "animaux"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtube.com/shorts/RoA8g1CCuR0"
     },
     {
       "id": "4e-relatif-calcul",
@@ -64295,7 +64317,8 @@
       "centres": [
         "technologie-ia"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/81J8txka7mM"
     },
     {
       "id": "4e-relatif-calcul-short",
@@ -64343,7 +64366,8 @@
       "centres": [
         "technologie-ia"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtube.com/shorts/kgWabXUagQA"
     },
     {
       "id": "4e-relatif-probleme",
@@ -65217,7 +65241,8 @@
       "centres": [
         "sport"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/012wpBHD9-c"
     },
     {
       "id": "6e-triangle-type-angle-short",
@@ -65266,7 +65291,8 @@
       "centres": [
         "jeux-defis"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtube.com/shorts/XwPVPUY63R4"
     },
     {
       "id": "6e-triangle-defi",
@@ -65367,7 +65393,8 @@
         "cuisine",
         "jeux-defis"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/QUhbvAIhFFo"
     },
     {
       "id": "6e-triangle-defi-short",
@@ -65415,7 +65442,8 @@
       "centres": [
         "jeux-defis"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtube.com/shorts/3JiJDEQdn-k"
     },
     {
       "id": "6e-triangle-somme-angle",
@@ -66440,7 +66468,8 @@
       "centres": [
         "animaux-marins"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/7E0qyncduu8"
     },
     {
       "id": "6e-decimal-comparer-short",
@@ -66488,7 +66517,8 @@
       "centres": [
         "cuisine"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtube.com/shorts/0Ktg1wuQ_I4"
     },
     {
       "id": "6e-decimal-arrondir",
@@ -66589,7 +66619,8 @@
       "centres": [
         "meteo-climat"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/-LhC0qHKYt8"
     },
     {
       "id": "6e-decimal-arrondir-short",
@@ -66637,7 +66668,8 @@
       "centres": [
         "cuisine"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtube.com/shorts/Sho3BrwbVK0"
     },
     {
       "id": "6e-decimal-encadrer",
@@ -66738,7 +66770,8 @@
       "centres": [
         "espace"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/MW62Z7b6-9I"
     },
     {
       "id": "6e-decimal-encadrer-short",
@@ -68254,7 +68287,8 @@
       "centres": [
         "transports"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/1px7VmkuEK4"
     },
     {
       "id": "4e-div-critere-3-9-short",
@@ -68303,7 +68337,8 @@
       "centres": [
         "transports"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtube.com/shorts/1Wb92VKs3f8"
     },
     {
       "id": "4e-div-euclidienne",
@@ -68405,7 +68440,8 @@
       "centres": [
         "corps-sante"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtu.be/0tJGbzcOXuA"
     },
     {
       "id": "4e-div-euclidienne-short",
@@ -68454,7 +68490,8 @@
       "centres": [
         "corps-sante"
       ],
-      "prioritaire": true
+      "prioritaire": true,
+      "url": "https://youtube.com/shorts/wQJffoP0lzE"
     },
     {
       "id": "4e-div-diviseurs",
@@ -71284,7 +71321,8 @@
       "centres": [
         "photo",
         "art-design"
-      ]
+      ],
+      "url": "https://youtu.be/xr_p8pWxUQc"
     },
     {
       "id": "4e-distrib-double-short",
@@ -71332,7 +71370,8 @@
       "centres": [
         "nature-ecologie",
         "jeux-defis"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/c7ENe0X2b_Q"
     },
     {
       "id": "4e-distrib-reduire",
@@ -71437,7 +71476,8 @@
       "centres": [
         "natation",
         "sport"
-      ]
+      ],
+      "url": "https://youtu.be/PFXFy-cNx3U"
     },
     {
       "id": "4e-distrib-reduire-short",
@@ -71485,7 +71525,8 @@
       "centres": [
         "jeux-defis",
         "mode"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/J6wjLHG0R2A"
     },
     {
       "id": "4e-distrib-reconnaitre",
@@ -71590,7 +71631,8 @@
       ],
       "centres": [
         "cuisine"
-      ]
+      ],
+      "url": "https://youtu.be/9XpKUivli80"
     },
     {
       "id": "4e-distrib-reconnaitre-short",
@@ -71638,7 +71680,8 @@
       "centres": [
         "cinema-series",
         "argent-budget"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/WcWBv89TZs0"
     },
     {
       "id": "4e-distrib-defi",
@@ -71744,7 +71787,8 @@
       "centres": [
         "argent-budget",
         "cuisine"
-      ]
+      ],
+      "url": "https://youtu.be/Nepw5_NZNoQ"
     },
     {
       "id": "4e-distrib-defi-short",
@@ -71792,7 +71836,8 @@
       "centres": [
         "jeux-video",
         "argent-budget"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/G8Pc7_6mz1E"
     },
     {
       "id": "6e-calcul-pose-addition",
@@ -71892,7 +71937,8 @@
       ],
       "centres": [
         "argent-budget"
-      ]
+      ],
+      "url": "https://youtu.be/RWKo_cOqJEo"
     },
     {
       "id": "6e-calcul-pose-addition-short",
@@ -71940,7 +71986,8 @@
       ],
       "centres": [
         "jeux-defis"
-      ]
+      ],
+      "url": "https://youtube.com/shorts/2P-DLKa_pA0"
     },
     {
       "id": "6e-calcul-pose-soustraction",
@@ -96832,1388 +96879,6 @@
       ]
     },
     {
-      "id": "ce2-masse-comparer",
-      "pas_avant": "2027-04-29",
-      "prioritaire": true,
-      "notionId": "masse",
-      "microId": "ce2_masse_comparer",
-      "classe": "ce2",
-      "ceinture": "jaune",
-      "serie": "Maths CE2",
-      "type": "longue",
-      "fichier": "ce2/maths/masse/03-comparer/eleveai-maths-ce2-masse-comparer.mp4",
-      "miniature": "ce2/maths/masse/03-comparer/eleveai-maths-ce2-masse-comparer.png",
-      "titre": "1 kg ou 900 g : lequel est le plus lourd ? — Comparer des masses — épisode 3 · Maths CE2",
-      "accroche": "Anaïs est fromagère. Elle coupe des parts de fromage et les pèse. Un client veut le plus gros morceau : 1 kilogramme, ou 900 grammes ?\n\nDans cette vidéo :\n• même unité : on compare les nombres (450 g > 300 g)\n• deux unités : d'abord la même unité, 1 kg = 1 000 g\n• le piège : 900 est plus grand que 1, mais 1 kg = 1 000 g\n• 1 kg de plumes ou 1 kg de cailloux : la même masse\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : ranger 2 kg, 1 500 g et 800 g du plus léger au plus lourd.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_comparer&display=simple\n\n⚖️ Épisode 3 de la série Masses d'EleveAI, en CE2.",
-      "chapitres": [
-        [
-          "00:00",
-          "Le plus lourd ?"
-        ],
-        [
-          "00:20",
-          "La même unité"
-        ],
-        [
-          "00:37",
-          "Deux unités"
-        ],
-        [
-          "00:51",
-          "Question 1"
-        ],
-        [
-          "01:23",
-          "Le piège"
-        ],
-        [
-          "01:34",
-          "Question 2"
-        ],
-        [
-          "02:04",
-          "À toi de jouer"
-        ],
-        [
-          "02:20",
-          "Correction"
-        ],
-        [
-          "02:34",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "masse",
-        "comparer des masses",
-        "kilogramme",
-        "gramme",
-        "balance",
-        "fromagère",
-        "fromage",
-        "maths",
-        "CE2",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "00:51",
-          "question": "Balance à deux plateaux : 1 kilogramme d'un côté, 1 000 grammes de l'autre. Que se passe-t-il ?",
-          "choix": [
-            "les grammes descendent",
-            "rien ne bouge",
-            "le kilogramme descend"
-          ],
-          "reponse": 1,
-          "explication": "1 kilogramme, c'est 1 000 grammes. Même masse : les plateaux restent au même niveau."
-        },
-        {
-          "t": "01:34",
-          "question": "Qu'est-ce qui est le plus lourd : 1 kilogramme de plumes, ou 1 kilogramme de cailloux ?",
-          "choix": [
-            "les plumes",
-            "les cailloux",
-            "c'est pareil"
-          ],
-          "reponse": 2,
-          "explication": "1 kilogramme, c'est 1 kilogramme ! Les plumes prennent plus de place, mais elles ont la même masse."
-        }
-      ],
-      "centres": [
-        "cuisine"
-      ],
-      "aussi": [
-        {
-          "classe": "ce1",
-          "notionId": "masse",
-          "microId": "ce1_masse_comparer"
-        }
-      ]
-    },
-    {
-      "id": "ce2-masse-comparer-short",
-      "pas_avant": "2027-04-29",
-      "prioritaire": true,
-      "notionId": "masse",
-      "microId": "ce2_masse_comparer",
-      "classe": "ce2",
-      "ceinture": "jaune",
-      "serie": "Maths CE2",
-      "type": "short",
-      "renvoie_vers": "ce2-masse-comparer",
-      "fichier": "ce2/maths/masse/03-comparer/eleveai-maths-ce2-masse-comparer-short.mp4",
-      "miniature": "ce2/maths/masse/03-comparer/eleveai-maths-ce2-masse-comparer-short-miniature.png",
-      "titre": "900 g ou 1 kg : 900 est plus grand, donc plus lourd ? #maths #ce2",
-      "accroche": "Ma copine a un fromage de 900 grammes. Moi, un morceau de 1 kilogramme. Elle dit : 900, c'est plus que 1 ! On pose les deux sur la balance…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : qui est le plus lourd, 2 kilogrammes ou 1 800 grammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce2 #primaire",
-      "tags": [
-        "masse",
-        "comparer",
-        "balance",
-        "fromage",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture jaune",
-        "maths",
-        "CE2",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:17",
-          "question": "Quel plateau descend ?",
-          "choix": [
-            "celui de 900 grammes",
-            "celui de 1 kilogramme",
-            "aucun, c'est l'équilibre"
-          ],
-          "reponse": 1,
-          "explication": "1 kilogramme, c'est 1 000 grammes. 1 000 est plus grand que 900 !"
-        }
-      ],
-      "centres": [
-        "cuisine",
-        "jeux-defis"
-      ],
-      "aussi": [
-        {
-          "classe": "ce1",
-          "notionId": "masse",
-          "microId": "ce1_masse_comparer"
-        }
-      ]
-    },
-    {
-      "id": "cp-masse-lexique",
-      "pas_avant": "2027-04-30",
-      "prioritaire": true,
-      "notionId": "masse_contenance",
-      "microId": "cp_masse_lexique",
-      "classe": "cp",
-      "ceinture": "blanche",
-      "serie": "Maths CP",
-      "type": "longue",
-      "fichier": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique.mp4",
-      "miniature": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique.png",
-      "titre": "Carton de livres ou oreiller : lequel est le plus lourd ? — Lourd ou léger — épisode 1 · Maths CP",
-      "accroche": "Awa est déménageuse. Toute la journée, elle porte des cartons. Certains sont lourds. D'autres sont légers.\n\nDans cette vidéo :\n• lourd, léger : un carton de livres, un oreiller\n• on soupèse : un objet dans chaque main, la main qui descend tient le plus lourd\n• le piège : gros ne veut pas dire lourd (le ballon de plage, la bille en fer)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : trouver le plus léger : un oreiller, un carton de livres, une chaise.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_lexique&display=simple\n\n⚖️ Épisode 1 de la série Masses d'EleveAI, en CP.",
-      "chapitres": [
-        [
-          "00:00",
-          "Lourd ou léger ?"
-        ],
-        [
-          "00:19",
-          "Lourd, léger"
-        ],
-        [
-          "00:38",
-          "Question 1"
-        ],
-        [
-          "01:14",
-          "Question 2"
-        ],
-        [
-          "01:45",
-          "À toi de jouer"
-        ],
-        [
-          "02:05",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "masse",
-        "lourd",
-        "léger",
-        "soupeser",
-        "comparer des masses",
-        "déménageuse",
-        "maths",
-        "CP",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "00:38",
-          "question": "Qu'est-ce qui est le plus léger : une plume, ou un dictionnaire ?",
-          "choix": [
-            "la plume",
-            "c'est pareil",
-            "le dictionnaire"
-          ],
-          "reponse": 0,
-          "explication": "La plume est légère : on la sent à peine dans la main."
-        },
-        {
-          "t": "01:14",
-          "question": "Un gros ballon de plage, une petite bille en fer. Lequel est le plus lourd ?",
-          "choix": [
-            "le ballon de plage",
-            "la bille en fer",
-            "c'est pareil"
-          ],
-          "reponse": 1,
-          "explication": "La bille est petite, mais elle est en fer. Elle est plus lourde que le ballon."
-        }
-      ],
-      "centres": [
-        "construction"
-      ]
-    },
-    {
-      "id": "cp-masse-lexique-short",
-      "pas_avant": "2027-04-30",
-      "prioritaire": true,
-      "notionId": "masse_contenance",
-      "microId": "cp_masse_lexique",
-      "classe": "cp",
-      "ceinture": "blanche",
-      "serie": "Maths CP",
-      "type": "short",
-      "renvoie_vers": "cp-masse-lexique",
-      "fichier": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique-short.mp4",
-      "miniature": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique-short-miniature.png",
-      "titre": "Un gros ballon de plage, c'est lourd ? #maths #cp",
-      "accroche": "Mon copain veut porter le gros ballon de plage. Il prend son élan… et il le soulève d'un doigt !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : une pomme, une plume, une pastèque : range-les du plus léger au plus lourd. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_lexique&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cp #primaire",
-      "tags": [
-        "masse",
-        "lourd",
-        "léger",
-        "ballon",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "maths",
-        "CP",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:14",
-          "question": "Le gros ballon, ou la petite bille en fer : qui est le plus lourd ?",
-          "choix": [
-            "la bille en fer",
-            "c'est pareil",
-            "le gros ballon"
-          ],
-          "reponse": 0,
-          "explication": "Petite, mais en fer : la bille est plus lourde."
-        }
-      ],
-      "centres": [
-        "sport",
-        "jeux-defis"
-      ]
-    },
-    {
-      "id": "cp-masse-comparer",
-      "pas_avant": "2027-05-01",
-      "prioritaire": true,
-      "notionId": "masse_contenance",
-      "microId": "cp_masse_comparer",
-      "classe": "cp",
-      "ceinture": "blanche",
-      "serie": "Maths CP",
-      "type": "longue",
-      "fichier": "cp/maths/masse/02-comparer/eleveai-maths-cp-masse-comparer.mp4",
-      "miniature": "cp/maths/masse/02-comparer/eleveai-maths-cp-masse-comparer.png",
-      "titre": "Un melon ou un ananas : lequel est le plus lourd ? — Comparer des masses — épisode 2 · Maths CP",
-      "accroche": "Hugo est primeur : il vend des fruits et des légumes. Il a un melon et un ananas. Lequel est le plus lourd ? Il sort sa balance à deux plateaux.\n\nDans cette vidéo :\n• la balance à deux plateaux : un objet de chaque côté\n• le plateau qui descend porte le plus lourd\n• même niveau : même masse (deux pommes)\n• deux boîtes pareilles : à l'œil on ne sait pas, la balance le dit\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : une orange à gauche, un citron à droite, le plateau de droite monte : qui est le plus lourd ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_comparer&display=simple\n\n⚖️ Épisode 2 de la série Masses d'EleveAI, en CP.",
-      "chapitres": [
-        [
-          "00:00",
-          "Le plus lourd ?"
-        ],
-        [
-          "00:34",
-          "Question 1"
-        ],
-        [
-          "01:12",
-          "Question 2"
-        ],
-        [
-          "01:43",
-          "À toi de jouer"
-        ],
-        [
-          "02:06",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "masse",
-        "comparer des masses",
-        "balance",
-        "balance à deux plateaux",
-        "plus lourd",
-        "primeur",
-        "fruits",
-        "maths",
-        "CP",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "00:34",
-          "question": "Sur la balance, le plateau de gauche descend. Que peut-on dire ?",
-          "choix": [
-            "les deux sont pareils",
-            "à gauche, c'est le plus lourd",
-            "à droite, c'est le plus lourd"
-          ],
-          "reponse": 1,
-          "explication": "Le plateau qui descend porte l'objet le plus lourd."
-        },
-        {
-          "t": "01:12",
-          "question": "Deux boîtes fermées sont pareilles. Comment savoir laquelle est la plus lourde ?",
-          "choix": [
-            "on prend la plus jolie",
-            "on choisit au hasard",
-            "on les pèse sur la balance"
-          ],
-          "reponse": 2,
-          "explication": "À l'œil, elles sont pareilles. La balance, elle, sait le dire."
-        }
-      ],
-      "centres": [
-        "cuisine"
-      ],
-      "aussi": [
-        {
-          "classe": "ce1",
-          "notionId": "masse",
-          "microId": "ce1_masse_soupeser"
-        }
-      ]
-    },
-    {
-      "id": "cp-masse-comparer-short",
-      "pas_avant": "2027-05-01",
-      "prioritaire": true,
-      "notionId": "masse_contenance",
-      "microId": "cp_masse_comparer",
-      "classe": "cp",
-      "ceinture": "blanche",
-      "serie": "Maths CP",
-      "type": "short",
-      "renvoie_vers": "cp-masse-comparer",
-      "fichier": "cp/maths/masse/02-comparer/eleveai-maths-cp-masse-comparer-short.mp4",
-      "miniature": "cp/maths/masse/02-comparer/eleveai-maths-cp-masse-comparer-short-miniature.png",
-      "titre": "Mon gros doudou monte sur la balance : il est léger ? #maths #cp",
-      "accroche": "Je mets mon doudou sur la balance. Mon copain met sa petite voiture en fer. Mon doudou monte tout en haut !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : 2 pommes sur un plateau. Combien de pommes pareilles de l'autre côté, pour l'équilibre ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cp #primaire",
-      "tags": [
-        "masse",
-        "balance",
-        "plus lourd",
-        "doudou",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "maths",
-        "CP",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:15",
-          "question": "Le plateau du doudou monte. Qui est le plus lourd ?",
-          "choix": [
-            "le doudou",
-            "la voiture",
-            "personne"
-          ],
-          "reponse": 1,
-          "explication": "Le plateau qui descend porte le plus lourd : la voiture."
-        }
-      ],
-      "centres": [
-        "jeux-defis"
-      ],
-      "aussi": [
-        {
-          "classe": "ce1",
-          "notionId": "masse",
-          "microId": "ce1_masse_soupeser"
-        }
-      ]
-    },
-    {
-      "id": "cp-masse-estimer",
-      "pas_avant": "2027-05-02",
-      "prioritaire": true,
-      "notionId": "masse_contenance",
-      "microId": "cp_masse_contenance_estimer",
-      "classe": "cp",
-      "ceinture": "blanche",
-      "serie": "Maths CP",
-      "type": "longue",
-      "fichier": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer.mp4",
-      "miniature": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer.png",
-      "titre": "Trois chiens : lequel est le plus léger ? — Ranger des masses — épisode 3 · Maths CP",
-      "accroche": "Zoé est toiletteuse : elle lave et coiffe les chiens. Aujourd'hui : un chiot, un chien moyen et un gros chien. Comment les ranger du plus léger au plus lourd ?\n\nDans cette vidéo :\n• pour ranger, on compare deux par deux\n• du plus léger au plus lourd : le chiot, le chien moyen, le gros chien\n• A pèse plus que B, et B plus que C : donc A est la plus lourde\n• sans balance, on peut deviner : une souris, un chat, un cheval\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : ranger du plus léger au plus lourd : une pastèque, une fraise, une pomme.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_contenance_estimer&display=simple\n\n⚖️ Épisode 3 de la série Masses d'EleveAI, en CP.",
-      "chapitres": [
-        [
-          "00:00",
-          "Le plus léger ?"
-        ],
-        [
-          "00:16",
-          "Deux par deux"
-        ],
-        [
-          "00:33",
-          "Question 1"
-        ],
-        [
-          "01:12",
-          "Question 2"
-        ],
-        [
-          "01:38",
-          "À toi de jouer"
-        ],
-        [
-          "01:56",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "masse",
-        "ranger des masses",
-        "plus léger",
-        "plus lourd",
-        "comparer des masses",
-        "toiletteuse",
-        "chiens",
-        "maths",
-        "CP",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "00:33",
-          "question": "La boîte A pèse plus que la B. La B pèse plus que la C. Laquelle est la plus lourde ?",
-          "choix": [
-            "la boîte C",
-            "la boîte A",
-            "la boîte B"
-          ],
-          "reponse": 1,
-          "explication": "A pèse plus que B, et B plus que C. Donc A est la plus lourde."
-        },
-        {
-          "t": "01:12",
-          "question": "Une souris, un chat, un cheval. Qui est le plus lourd ?",
-          "choix": [
-            "la souris",
-            "le chat",
-            "le cheval"
-          ],
-          "reponse": 2,
-          "explication": "Le cheval est bien plus lourd que le chat et la souris."
-        }
-      ],
-      "centres": [
-        "animaux"
-      ]
-    },
-    {
-      "id": "cp-masse-estimer-short",
-      "pas_avant": "2027-05-02",
-      "prioritaire": true,
-      "notionId": "masse_contenance",
-      "microId": "cp_masse_contenance_estimer",
-      "classe": "cp",
-      "ceinture": "blanche",
-      "serie": "Maths CP",
-      "type": "short",
-      "renvoie_vers": "cp-masse-estimer",
-      "fichier": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer-short.mp4",
-      "miniature": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer-short-miniature.png",
-      "titre": "Trois chats sur ma branche : qui monte en premier ? #maths #cp",
-      "accroche": "Trois chats montent sur ma branche : un chaton, un chat, un gros matou. La branche craque !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : un éléphant, une fourmi, un lapin : range-les du plus léger au plus lourd. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_contenance_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cp #primaire",
-      "tags": [
-        "masse",
-        "plus léger",
-        "ranger",
-        "chats",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "maths",
-        "CP",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:15",
-          "question": "Qui monte en premier, le plus léger ?",
-          "choix": [
-            "le chaton",
-            "le gros matou",
-            "le chat"
-          ],
-          "reponse": 0,
-          "explication": "Le chaton est le plus léger. Puis le chat, puis le gros matou."
-        }
-      ],
-      "centres": [
-        "animaux",
-        "jeux-defis"
-      ]
-    },
-    {
-      "id": "cp-masse-defi",
-      "pas_avant": "2027-05-03",
-      "prioritaire": true,
-      "notionId": "masse_contenance",
-      "microId": "cp_masse_contenance_defi",
-      "classe": "cp",
-      "ceinture": "blanche",
-      "serie": "Maths CP",
-      "type": "longue",
-      "fichier": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi.mp4",
-      "miniature": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi.png",
-      "titre": "Trois colis : lequel est le plus lourd ? — Le défi des masses — épisode 4 · Maths CP",
-      "accroche": "Noé est livreur à vélo. Il a trois colis : le rouge, le bleu et le vert. Lequel est le plus lourd ? Deux pesées suffisent.\n\nDans cette vidéo :\n• première pesée : le rouge descend, il est plus lourd que le bleu\n• deuxième pesée : le bleu descend, il est plus lourd que le vert\n• du plus lourd au plus léger : le rouge, le bleu, le vert\n• la taille ne dit pas la masse : un sac de plumes, un sac de billes\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : la pomme est plus lourde que la prune, la prune plus lourde que la cerise : quel fruit est le plus léger ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_contenance_defi&display=simple\n\n⚖️ Épisode 4 de la série Masses d'EleveAI, en CP.",
-      "chapitres": [
-        [
-          "00:00",
-          "Le plus lourd ?"
-        ],
-        [
-          "00:17",
-          "Deux pesées"
-        ],
-        [
-          "00:33",
-          "Question 1"
-        ],
-        [
-          "01:06",
-          "Question 2"
-        ],
-        [
-          "01:39",
-          "À toi de jouer"
-        ],
-        [
-          "02:03",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "masse",
-        "défi",
-        "balance",
-        "pesée",
-        "plus lourd",
-        "plus léger",
-        "livreur",
-        "vélo",
-        "maths",
-        "CP",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "00:33",
-          "question": "Quel colis est le plus léger ?",
-          "choix": [
-            "le vert",
-            "le rouge",
-            "le bleu"
-          ],
-          "reponse": 0,
-          "explication": "Le rouge bat le bleu, le bleu bat le vert. Le vert est le plus léger."
-        },
-        {
-          "t": "01:06",
-          "question": "Un sac de plumes, un sac de billes. Même taille. Pèsent-ils pareil ?",
-          "choix": [
-            "non, les plumes sont plus lourdes",
-            "oui, c'est la même taille",
-            "non, les billes sont plus lourdes"
-          ],
-          "reponse": 2,
-          "explication": "Même taille, mais pas même masse. Les billes sont bien plus lourdes."
-        }
-      ],
-      "centres": [
-        "transports",
-        "sport"
-      ]
-    },
-    {
-      "id": "cp-masse-defi-short",
-      "pas_avant": "2027-05-03",
-      "prioritaire": true,
-      "notionId": "masse_contenance",
-      "microId": "cp_masse_contenance_defi",
-      "classe": "cp",
-      "ceinture": "blanche",
-      "serie": "Maths CP",
-      "type": "short",
-      "renvoie_vers": "cp-masse-defi",
-      "fichier": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi-short.mp4",
-      "miniature": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi-short-miniature.png",
-      "titre": "Trois cadeaux de la même taille : lequel est le plus lourd ? #maths #cp",
-      "accroche": "J'ai trois cadeaux de la même taille. Ma copine veut le plus lourd. Deux pesées… et une surprise dedans !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : le chat pèse plus que le lapin, le lapin plus que la souris : qui est le plus léger ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_contenance_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cp #primaire",
-      "tags": [
-        "masse",
-        "balance",
-        "cadeau",
-        "plus lourd",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "maths",
-        "CP",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:15",
-          "question": "Quel cadeau est le plus lourd ?",
-          "choix": [
-            "le rose",
-            "le bleu",
-            "le jaune"
-          ],
-          "reponse": 2,
-          "explication": "Le jaune bat le rose, et le rose bat le bleu. Le jaune est le plus lourd !"
-        }
-      ],
-      "centres": [
-        "jeux-defis",
-        "animaux"
-      ]
-    },
-    {
-      "id": "ce1-masse-kg-g",
-      "pas_avant": "2027-05-04",
-      "prioritaire": true,
-      "notionId": "masse",
-      "microId": "ce1_masse_kg_g",
-      "classe": "ce1",
-      "ceinture": "blanche",
-      "serie": "Maths CE1",
-      "type": "longue",
-      "fichier": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g.mp4",
-      "miniature": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g.png",
-      "titre": "Un colis, une lettre : kilogramme ou gramme ? — Le kilogramme et le gramme — épisode 1 · Maths CE1",
-      "accroche": "Jade est postière. Elle pèse chaque colis et chaque lettre : le prix de l'envoi dépend de la masse. Avec quelle unité ?\n\nDans cette vidéo :\n• le kilogramme (kg) pour les objets lourds : le gros colis pèse 3 kg\n• le gramme (g) pour les objets légers : la lettre pèse 20 g\n• kilogramme s'écrit kg : le k de kilo, le g de gramme\n• lire une balance : le paquet pèse 2 kg, la carte postale 5 g\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : un vélo et une clé : lequel pèse 12 kg, lequel pèse 12 g ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_kg_g&display=simple\n\n⚖️ Épisode 1 de la série Masses d'EleveAI, en CE1.",
-      "chapitres": [
-        [
-          "00:00",
-          "Kilogramme ou gramme ?"
-        ],
-        [
-          "00:36",
-          "Question 1"
-        ],
-        [
-          "01:08",
-          "Question 2"
-        ],
-        [
-          "01:36",
-          "À toi de jouer"
-        ],
-        [
-          "01:57",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "masse",
-        "kilogramme",
-        "gramme",
-        "kg",
-        "g",
-        "unités de masse",
-        "balance",
-        "postière",
-        "maths",
-        "CE1",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "00:36",
-          "question": "Comment écrit-on « kilogramme » en abrégé ?",
-          "choix": [
-            "k g",
-            "k l",
-            "g k"
-          ],
-          "reponse": 0,
-          "explication": "Kilogramme s'écrit k g : le k de kilo, le g de gramme."
-        },
-        {
-          "t": "01:08",
-          "question": "La lettre de Jade pèse 20… quoi ?",
-          "choix": [
-            "20 litres",
-            "20 kilogrammes",
-            "20 grammes"
-          ],
-          "reponse": 2,
-          "explication": "Une lettre est légère : 20 grammes. Le litre, lui, mesure une contenance."
-        }
-      ],
-      "centres": [
-        "transports",
-        "argent-budget"
-      ]
-    },
-    {
-      "id": "ce1-masse-kg-g-short",
-      "pas_avant": "2027-05-04",
-      "prioritaire": true,
-      "notionId": "masse",
-      "microId": "ce1_masse_kg_g",
-      "classe": "ce1",
-      "ceinture": "blanche",
-      "serie": "Maths CE1",
-      "type": "short",
-      "renvoie_vers": "ce1-masse-kg-g",
-      "fichier": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g-short.mp4",
-      "miniature": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g-short-miniature.png",
-      "titre": "Un chaton de 1 gramme ? Vraiment ? #maths #ce1",
-      "accroche": "Sur l'étiquette du chaton, mon copain écrit : 1 gramme. Mais 1 gramme, c'est la masse d'un trombone !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : un trombone pèse 1 gramme : combien pèsent 10 trombones ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_kg_g&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce1 #primaire",
-      "tags": [
-        "masse",
-        "kilogramme",
-        "gramme",
-        "chaton",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "maths",
-        "CE1",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:14",
-          "question": "Le chaton pèse environ…",
-          "choix": [
-            "1 gramme",
-            "100 kilogrammes",
-            "1 kilogramme"
-          ],
-          "reponse": 2,
-          "explication": "Un chaton pèse environ 1 kilogramme. 1 gramme, c'est un trombone !"
-        }
-      ],
-      "centres": [
-        "animaux",
-        "jeux-defis"
-      ]
-    },
-    {
-      "id": "ce1-masse-relation",
-      "pas_avant": "2027-05-05",
-      "prioritaire": true,
-      "notionId": "masse",
-      "microId": "ce1_masse_relation_kg_g",
-      "classe": "ce1",
-      "ceinture": "blanche",
-      "serie": "Maths CE1",
-      "type": "longue",
-      "fichier": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation.mp4",
-      "miniature": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation.png",
-      "titre": "1 kg, c'est combien de grammes ? — 1 kilogramme = 1 000 grammes — épisode 2 · Maths CE1",
-      "accroche": "Liam vend du riz, des lentilles et des graines en vrac. Un client veut 1 kilogramme de lentilles : Liam remplit deux sacs de 500 grammes. Est-ce bien 1 kilogramme ?\n\nDans cette vidéo :\n• sur la balance, 1 kg d'un côté et 1 000 g de l'autre : équilibre\n• 1 kg = 1 000 g\n• 500 g + 500 g = 1 000 g = 1 kg\n• 4 sacs de 250 g font 1 kg\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : Liam a 600 g de riz sur la balance : combien de grammes ajouter pour avoir 1 kg ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_relation_kg_g&display=simple\n\n⚖️ Épisode 2 de la série Masses d'EleveAI, en CE1.",
-      "chapitres": [
-        [
-          "00:00",
-          "1 kg, combien de grammes ?"
-        ],
-        [
-          "00:18",
-          "L'équilibre"
-        ],
-        [
-          "00:29",
-          "Deux sacs de 500 g"
-        ],
-        [
-          "00:41",
-          "Question 1"
-        ],
-        [
-          "01:09",
-          "Quatre sacs de 250 g"
-        ],
-        [
-          "01:20",
-          "Question 2"
-        ],
-        [
-          "01:45",
-          "À toi de jouer"
-        ],
-        [
-          "01:59",
-          "Correction"
-        ],
-        [
-          "02:10",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "masse",
-        "kilogramme",
-        "gramme",
-        "1 kg = 1 000 g",
-        "convertir",
-        "balance",
-        "vrac",
-        "maths",
-        "CE1",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "00:41",
-          "question": "Un élève écrit : 1 kilogramme égale 100 grammes. A-t-il raison ?",
-          "choix": [
-            "non, c'est 1 000 grammes",
-            "oui",
-            "non, c'est 10 grammes"
-          ],
-          "reponse": 0,
-          "explication": "1 kilogramme, c'est 1 000 grammes. Pas 100 !"
-        },
-        {
-          "t": "01:20",
-          "question": "Combien de paquets de 500 grammes pour faire 1 kilogramme ?",
-          "choix": [
-            "10",
-            "5",
-            "2"
-          ],
-          "reponse": 2,
-          "explication": "500 + 500 : 1 000 grammes, 1 kilogramme. Il en faut 2."
-        }
-      ],
-      "centres": [
-        "cuisine",
-        "argent-budget"
-      ]
-    },
-    {
-      "id": "ce1-masse-relation-short",
-      "pas_avant": "2027-05-05",
-      "prioritaire": true,
-      "notionId": "masse",
-      "microId": "ce1_masse_relation_kg_g",
-      "classe": "ce1",
-      "ceinture": "blanche",
-      "serie": "Maths CE1",
-      "type": "short",
-      "renvoie_vers": "ce1-masse-relation",
-      "fichier": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation-short.mp4",
-      "miniature": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation-short-miniature.png",
-      "titre": "1 000 grammes contre 1 kilogramme : qui gagne ? #maths #ce1",
-      "accroche": "Ma copine a un sac de 1 kilogramme de billes. Moi, j'ai 1 000 grammes. 1 000, c'est plus que 1 : j'ai gagné ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien de sacs de 250 grammes pour faire 1 kilogramme ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_relation_kg_g&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce1 #primaire",
-      "tags": [
-        "masse",
-        "kilogramme",
-        "gramme",
-        "billes",
-        "balance",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "maths",
-        "CE1",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:15",
-          "question": "Que fait la balance ?",
-          "choix": [
-            "elle reste en équilibre",
-            "mon sac descend",
-            "son sac descend"
-          ],
-          "reponse": 0,
-          "explication": "1 kilogramme, c'est 1 000 grammes. Même masse : équilibre !"
-        }
-      ],
-      "centres": [
-        "jeux-defis"
-      ]
-    },
-    {
-      "id": "ce1-masse-estimer",
-      "pas_avant": "2027-05-07",
-      "prioritaire": true,
-      "notionId": "masse",
-      "microId": "ce1_masse_estimer",
-      "classe": "ce1",
-      "ceinture": "blanche",
-      "serie": "Maths CE1",
-      "type": "longue",
-      "fichier": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer.mp4",
-      "miniature": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer.png",
-      "titre": "Une trousse peut-elle peser 3 kg ? — Estimer une masse — épisode 3 · Maths CE1",
-      "accroche": "Chloé est bibliothécaire : elle range des livres, des gros et des petits. Elle doit savoir ce qu'elle peut porter. Pour estimer une masse, on la compare à un repère.\n\nDans cette vidéo :\n• deux repères : un trombone pèse environ 1 g, une brique de lait pleine environ 1 kg\n• un gros dictionnaire : environ 1 kg ; un petit livre : environ 200 g\n• 3 kg, c'est trois briques de lait : une trousse pèse environ 300 g\n• le cartable : 3 g (trop léger), 300 kg (trop lourd), environ 3 kg\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : Le cartable de Chloé pèse-t-il 3 g, 3 kg ou 300 kg ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_estimer&display=simple\n\n⚖️ Épisode 3 de la série Masses d'EleveAI, en CE1.",
-      "chapitres": [
-        [
-          "00:00",
-          "Estimer une masse"
-        ],
-        [
-          "00:35",
-          "Question 1"
-        ],
-        [
-          "01:01",
-          "Les nombres impossibles"
-        ],
-        [
-          "01:11",
-          "Question 2"
-        ],
-        [
-          "01:42",
-          "À toi de jouer"
-        ],
-        [
-          "01:54",
-          "Correction"
-        ],
-        [
-          "02:08",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "masse",
-        "estimer",
-        "kilogramme",
-        "gramme",
-        "repère",
-        "ordre de grandeur",
-        "bibliothèque",
-        "maths",
-        "CE1",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "00:35",
-          "question": "Environ combien pèse une brique de lait pleine ?",
-          "choix": [
-            "1 gramme",
-            "1 kilogramme",
-            "10 kilogrammes"
-          ],
-          "reponse": 1,
-          "explication": "Une brique de lait de 1 litre pèse environ 1 kilogramme."
-        },
-        {
-          "t": "01:11",
-          "question": "Un élève écrit : ma trousse pèse 3 kilogrammes. Est-ce possible ?",
-          "choix": [
-            "non, c'est trop lourd",
-            "oui, c'est normal",
-            "non, c'est trop léger"
-          ],
-          "reponse": 0,
-          "explication": "3 kilogrammes, c'est trois briques de lait. Une trousse pèse environ 300 grammes."
-        }
-      ],
-      "centres": [
-        "histoire-geographie",
-        "art-design"
-      ]
-    },
-    {
-      "id": "ce1-masse-estimer-short",
-      "pas_avant": "2027-05-07",
-      "prioritaire": true,
-      "notionId": "masse",
-      "microId": "ce1_masse_estimer",
-      "classe": "ce1",
-      "ceinture": "blanche",
-      "serie": "Maths CE1",
-      "type": "short",
-      "renvoie_vers": "ce1-masse-estimer",
-      "fichier": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer-short.mp4",
-      "miniature": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer-short-miniature.png",
-      "titre": "Une gomme de 1 kilogramme ? Vraiment ? #maths #ce1",
-      "accroche": "Mon copain dit : ma gomme pèse 1 kilogramme ! Je lui donne une brique de lait. Ça, c'est 1 kilogramme.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien pèse ton cartable, en kilogrammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce1 #primaire",
-      "tags": [
-        "masse",
-        "estimer",
-        "gramme",
-        "kilogramme",
-        "gomme",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "maths",
-        "CE1",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:17",
-          "question": "Une gomme pèse environ…",
-          "choix": [
-            "20 kilogrammes",
-            "20 grammes",
-            "1 kilogramme"
-          ],
-          "reponse": 1,
-          "explication": "Une gomme pèse environ 20 grammes : comme 20 trombones."
-        }
-      ],
-      "centres": [
-        "jeux-defis"
-      ]
-    },
-    {
-      "id": "ce1-masse-probleme",
-      "pas_avant": "2027-05-08",
-      "prioritaire": true,
-      "notionId": "masse",
-      "microId": "ce1_masse_probleme",
-      "classe": "ce1",
-      "ceinture": "blanche",
-      "serie": "Maths CE1",
-      "type": "longue",
-      "fichier": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme.mp4",
-      "miniature": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme.png",
-      "titre": "Le panier pèse 1 kg : et les poissons ? — Problèmes de masses — épisode 4 · Maths CE1",
-      "accroche": "Malo est pêcheur au port de Saint-Pierre, à La Réunion. Il pèse sa pêche pour la vendre. Pour résoudre un problème de masses, on calcule avec la même unité.\n\nDans cette vidéo :\n• le panier plein pèse 1 kg = 1 000 g, vide 300 g : les poissons, c'est le plein moins le vide, 700 g\n• 1 kg de farine, on en prend 400 g : 1 000 − 400, il reste 600 g\n• 3 kg de thon et 2 kg de dorade : 3 + 2 = 5 kg en tout\n• 750 g sur le plateau : de 750 à 1 000, il manque 250 g pour faire 1 kg\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : Malo a 2 kg de crevettes et en vend 500 g : combien de grammes lui reste-t-il ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_probleme&display=simple\n\n⚖️ Épisode 4 de la série Masses d'EleveAI, en CE1.",
-      "chapitres": [
-        [
-          "00:00",
-          "Problèmes de masses"
-        ],
-        [
-          "00:38",
-          "Question 1"
-        ],
-        [
-          "01:19",
-          "Question 2"
-        ],
-        [
-          "01:53",
-          "À toi de jouer"
-        ],
-        [
-          "02:07",
-          "Correction"
-        ],
-        [
-          "02:19",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "masse",
-        "problème",
-        "kilogramme",
-        "gramme",
-        "soustraction",
-        "addition",
-        "pêcheur",
-        "La Réunion",
-        "maths",
-        "CE1",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "00:38",
-          "question": "Un sac de 1 kilogramme de farine. On en prend 400 grammes. Combien reste-t-il ?",
-          "choix": [
-            "400 grammes",
-            "600 grammes",
-            "1 400 grammes"
-          ],
-          "reponse": 1,
-          "explication": "1 kilogramme, c'est 1 000 grammes. 1 000 − 400 : il reste 600 grammes."
-        },
-        {
-          "t": "01:19",
-          "question": "Sur le plateau, 750 grammes de poisson. Combien ajouter pour faire 1 kilogramme ?",
-          "choix": [
-            "250 grammes",
-            "350 grammes",
-            "1 750 grammes"
-          ],
-          "reponse": 0,
-          "explication": "1 kilogramme, c'est 1 000 grammes. De 750 à 1 000, il manque 250 grammes."
-        }
-      ],
-      "centres": [
-        "nature-ecologie",
-        "cuisine"
-      ]
-    },
-    {
-      "id": "ce1-masse-probleme-short",
-      "pas_avant": "2027-05-08",
-      "prioritaire": true,
-      "notionId": "masse",
-      "microId": "ce1_masse_probleme",
-      "classe": "ce1",
-      "ceinture": "blanche",
-      "serie": "Maths CE1",
-      "type": "short",
-      "renvoie_vers": "ce1-masse-probleme",
-      "fichier": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme-short.mp4",
-      "miniature": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme-short-miniature.png",
-      "titre": "1 kg de coquillages ? Et le seau, alors ? #maths #ce1",
-      "accroche": "Mon seau plein de coquillages pèse 1 kilogramme. Mon copain dit : 1 kilogramme de coquillages !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : un panier plein pèse 900 grammes, vide 100 grammes : combien pèsent les fruits ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce1 #primaire",
-      "tags": [
-        "masse",
-        "problème",
-        "gramme",
-        "kilogramme",
-        "coquillages",
-        "plage",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "maths",
-        "CE1",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:16",
-          "question": "Combien pèsent les coquillages ?",
-          "choix": [
-            "800 grammes",
-            "1 kilogramme",
-            "1 200 grammes"
-          ],
-          "reponse": 0,
-          "explication": "1 000 grammes moins 200 grammes de seau : 800 grammes de coquillages."
-        }
-      ],
-      "centres": [
-        "jeux-defis"
-      ]
-    },
-    {
-      "id": "ce1-masse-defi",
-      "pas_avant": "2027-05-11",
-      "prioritaire": true,
-      "notionId": "masse",
-      "microId": "ce1_masse_defi",
-      "classe": "ce1",
-      "ceinture": "jaune",
-      "serie": "Maths CE1",
-      "type": "longue",
-      "fichier": "ce1/maths/masse/05-defi/eleveai-maths-ce1-masse-defi.mp4",
-      "miniature": "ce1/maths/masse/05-defi/eleveai-maths-ce1-masse-defi.png",
-      "titre": "5 quilles de 200 g : plus lourd que 1 kg ? — Le défi des masses — épisode 5 · Maths CE1",
-      "accroche": "Lina est jongleuse dans un cirque. Dans sa valise, elle range ses quilles et ses balles : la valise doit rester légère. Pour additionner des masses, on les met dans la même unité.\n\nDans cette vidéo :\n• 5 quilles de 200 g : 200, 400, 600, 800, 1 000 g\n• 1 000 g, c'est 1 kg : la balance reste à niveau, ni plus, ni moins\n• avec 3 balles de 100 g : 1 000 + 300 = 1 300 g, plus que 1 kg\n• 1 kg de plumes et 1 kg de cailloux : c'est pareil, les plumes prennent juste plus de place\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : La valise vide pèse 2 kg ; Lina y met 5 quilles de 200 g et 2 balles de 500 g : combien pèse la valise ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_defi&display=simple\n\n⚖️ Épisode 5 de la série Masses d'EleveAI, en CE1.",
-      "chapitres": [
-        [
-          "00:00",
-          "Le défi des masses"
-        ],
-        [
-          "00:19",
-          "5 quilles de 200 g"
-        ],
-        [
-          "00:39",
-          "Question 1"
-        ],
-        [
-          "01:17",
-          "Question 2"
-        ],
-        [
-          "01:45",
-          "À toi de jouer"
-        ],
-        [
-          "02:01",
-          "Correction"
-        ],
-        [
-          "02:15",
-          "Ce que tu as appris"
-        ]
-      ],
-      "tags": [
-        "masse",
-        "défi",
-        "kilogramme",
-        "gramme",
-        "1 kg = 1 000 g",
-        "addition",
-        "cirque",
-        "jongleuse",
-        "maths",
-        "CE1",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI"
-      ],
-      "questions": [
-        {
-          "t": "00:39",
-          "question": "Le même sac : Léa écrit 1 kilogramme, Kevin écrit 1 000 grammes. Qui a raison ?",
-          "choix": [
-            "les deux",
-            "Kevin seulement",
-            "Léa seulement"
-          ],
-          "reponse": 0,
-          "explication": "1 kilogramme, c'est 1 000 grammes : les deux ont raison."
-        },
-        {
-          "t": "01:17",
-          "question": "Qu'est-ce qui est le plus lourd : 1 kilogramme de plumes, ou 1 kilogramme de cailloux ?",
-          "choix": [
-            "les cailloux",
-            "les plumes",
-            "c'est pareil"
-          ],
-          "reponse": 2,
-          "explication": "1 kilogramme, c'est 1 kilogramme ! Les plumes prennent juste plus de place."
-        }
-      ],
-      "centres": [
-        "art-design",
-        "jeux-defis"
-      ]
-    },
-    {
-      "id": "ce1-masse-defi-short",
-      "pas_avant": "2027-05-11",
-      "prioritaire": true,
-      "notionId": "masse",
-      "microId": "ce1_masse_defi",
-      "classe": "ce1",
-      "ceinture": "blanche",
-      "serie": "Maths CE1",
-      "type": "short",
-      "renvoie_vers": "ce1-masse-defi",
-      "fichier": "ce1/maths/masse/05-defi/eleveai-maths-ce1-masse-defi-short.mp4",
-      "miniature": "ce1/maths/masse/05-defi/eleveai-maths-ce1-masse-defi-short-miniature.png",
-      "titre": "1 kg de plumes ou 1 kg de cailloux : le plus lourd ? #maths #ce1",
-      "accroche": "Ma copine et moi, on fait un pari. Le plus lourd : 1 kilogramme de plumes, ou 1 kilogramme de cailloux ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien de grammes dans 2 kilogrammes de plumes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce1 #primaire",
-      "tags": [
-        "masse",
-        "kilogramme",
-        "plumes",
-        "cailloux",
-        "balance",
-        "pari",
-        "Ti Margo",
-        "dessin animé",
-        "ceinture blanche",
-        "maths",
-        "CE1",
-        "primaire",
-        "cycle 2",
-        "CRPE",
-        "EleveAI",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:17",
-          "question": "Que fait la balance ?",
-          "choix": [
-            "elle reste en équilibre",
-            "les cailloux descendent",
-            "les plumes descendent"
-          ],
-          "reponse": 0,
-          "explication": "1 kilogramme, c'est 1 kilogramme ! Le sac de plumes est juste plus gros."
-        }
-      ],
-      "centres": [
-        "jeux-defis"
-      ]
-    },
-    {
       "id": "cp-duree-ordonner",
       "pas_avant": "2027-05-12",
       "notionId": "duree",
@@ -102747,6 +101412,1533 @@
       ]
     },
     {
+      "id": "6e-seance-restaurant",
+      "notionId": "seance",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "En classe avec EleveAI",
+      "type": "longue",
+      "fichier": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-mathematiques-paysage.mp4",
+      "miniature": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-mathematiques-paysage-miniature.png",
+      "titre": "Le restaurant de mathématiques, en classe ou à la maison · En classe avec EleveAI",
+      "accroche": "Ce matin, un prof doit choisir pour 25 élèves. Qu'est-ce qu'il leur prend ?\n\nLe restaurant de mathématiques, en classe ou à la maison : une séance vécue en 6e, racontée par Ti Margo.\n\n• d'abord en classe entière, un plat imposé pour tous : la carte mentale à colorier ;\n• ensuite en groupes, à la carte : le coach, les exercices interactifs, le cours au cahier, le découpage, la vidéo ;\n• pas de bonne réponse : chacun apprend à sa façon, et chacun a son objectif ;\n• le dessert : va trouver des longueurs dans ce que tu aimes.\n\nDessin animé, voix de synthèse.\n\n👩‍🏫 La séance en détail, clic par clic : https://www.eleveai.fr/seances\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=aire_longueur&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste",
+      "chapitres": [
+        [
+          "00:00",
+          "Le prof doit choisir"
+        ],
+        [
+          "00:15",
+          "Classe entière, puis en groupes"
+        ],
+        [
+          "00:36",
+          "Au choix !"
+        ],
+        [
+          "00:51",
+          "Chacun sa façon"
+        ],
+        [
+          "01:06",
+          "Et toi ?"
+        ]
+      ],
+      "tags": [
+        "séance",
+        "enseignant",
+        "prof",
+        "différenciation",
+        "pédagogie",
+        "carte mentale",
+        "travail en groupes",
+        "classe entière",
+        "autonomie",
+        "coach",
+        "maths",
+        "6e",
+        "collège",
+        "CRPE",
+        "Ti Margo",
+        "dessin animé",
+        "EleveAI",
+        "restaurant de mathématiques",
+        "à la maison"
+      ],
+      "brouillon_prive": "https://youtu.be/aCes5qsfHs0",
+      "url": "https://youtu.be/va9nMf8ozHU"
+    },
+    {
+      "id": "6e-seance-restaurant-short",
+      "notionId": "seance",
+      "classe": "6e",
+      "ceinture": "blanche",
+      "serie": "En classe avec EleveAI",
+      "type": "short",
+      "renvoie_vers": "6e-seance-restaurant",
+      "fichier": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-mathematiques-short.mp4",
+      "miniature": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-mathematiques-short-miniature.png",
+      "titre": "Le restaurant de mathématiques : et toi, tu prends quoi ? #prof #maths",
+      "accroche": "Ce matin, un prof doit choisir pour 25 élèves. Qu'est-ce qu'il leur prend ? Un plat imposé pour tous, puis chacun à la carte.\n\nDessin animé, voix de synthèse.\n👉 Et toi, au restaurant de mathématiques, tu prends quoi ? Réponds en commentaire !\n\n▶️ La vidéo complète : {{LONGUE}}\n👩‍🏫 La séance, clic par clic : https://www.eleveai.fr/seances\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #prof #maths #6e #pedagogie",
+      "tags": [
+        "séance",
+        "prof",
+        "enseignant",
+        "différenciation",
+        "pédagogie",
+        "carte mentale",
+        "groupes",
+        "maths",
+        "6e",
+        "CRPE",
+        "Ti Margo",
+        "dessin animé",
+        "EleveAI",
+        "Shorts",
+        "restaurant de mathématiques"
+      ],
+      "brouillon_prive": "https://youtube.com/shorts/-2Fq5VurmGw",
+      "url": "https://youtube.com/shorts/zcLYy1Lnb2A"
+    },
+    {
+      "id": "4e-puissance-plier-deplier-short",
+      "notionId": "puissance_ecriture",
+      "microId": "puissance_exposant_negatif",
+      "classe": "4e",
+      "ceinture": "orange",
+      "serie": "Maths 4e",
+      "type": "short",
+      "renvoie_vers": "4e-puissance-zero-negatif",
+      "fichier": "4e/maths/puissances/14-plier-deplier/eleveai-maths-4e-puissance-plier-deplier-short.mp4",
+      "miniature": "4e/maths/puissances/14-plier-deplier/eleveai-maths-4e-puissance-plier-deplier-short.png",
+      "titre": "Plie une feuille : 2 puissance −1, c'est quoi ? 📄 — 4e #Shorts",
+      "accroche": "Défi ! Je plie une feuille 3 fois : 2, 4, 8 parts, 2³. Je déplie : 8 → 4 → 2, on divise par 2. Plus de pli : la feuille entière, 2⁰ = 1. Et 2⁻³ ? Une part après 3 pliages : 1/8 de la feuille.\n\n🥋 Ceinture orange : le défi.\n👉 À toi : 2⁻⁵, quelle part de la feuille ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_exposant_negatif&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
+      "tags": [
+        "exposant négatif",
+        "puissance zéro",
+        "pliage",
+        "feuille",
+        "défi",
+        "puissances",
+        "maths",
+        "4e",
+        "collège",
+        "cycle 4",
+        "CRPE",
+        "eleveai",
+        "ceinture orange",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:37",
+          "question": "On divise encore par 2. 2⁻¹, c'est quoi ?",
+          "choix": [
+            "−2",
+            "0",
+            "la moitié"
+          ],
+          "reponse": 2,
+          "explication": "La moitié : c'est une part après 1 pliage."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "art-design"
+      ],
+      "aussi": [
+        {
+          "classe": "seconde",
+          "notionId": "puissances_2de",
+          "microId": "puiss_exposant_negatif"
+        }
+      ],
+      "pas_avant": "2026-11-25",
+      "url": "https://youtube.com/shorts/QWuJ6Bmc_Y0"
+    },
+    {
+      "id": "ce2-masse-comparer",
+      "pas_avant": "2027-04-29",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_comparer",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "longue",
+      "fichier": "ce2/maths/masse/03-comparer/eleveai-maths-ce2-masse-comparer.mp4",
+      "miniature": "ce2/maths/masse/03-comparer/eleveai-maths-ce2-masse-comparer.png",
+      "titre": "1 kg ou 900 g : lequel est le plus lourd ? — Comparer des masses — épisode 3 · Maths CE2",
+      "accroche": "Anaïs est fromagère. Elle coupe des parts de fromage et les pèse. Un client veut le plus gros morceau : 1 kilogramme, ou 900 grammes ?\n\nDans cette vidéo :\n• même unité : on compare les nombres (450 g > 300 g)\n• deux unités : d'abord la même unité, 1 kg = 1 000 g\n• le piège : 900 est plus grand que 1, mais 1 kg = 1 000 g\n• 1 kg de plumes ou 1 kg de cailloux : la même masse\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : ranger 2 kg, 1 500 g et 800 g du plus léger au plus lourd.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_comparer&display=simple\n\n⚖️ Épisode 3 de la série Masses d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le plus lourd ?"
+        ],
+        [
+          "00:20",
+          "La même unité"
+        ],
+        [
+          "00:37",
+          "Deux unités"
+        ],
+        [
+          "00:51",
+          "Question 1"
+        ],
+        [
+          "01:23",
+          "Le piège"
+        ],
+        [
+          "01:34",
+          "Question 2"
+        ],
+        [
+          "02:04",
+          "À toi de jouer"
+        ],
+        [
+          "02:20",
+          "Correction"
+        ],
+        [
+          "02:34",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "comparer des masses",
+        "kilogramme",
+        "gramme",
+        "balance",
+        "fromagère",
+        "fromage",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:51",
+          "question": "Balance à deux plateaux : 1 kilogramme d'un côté, 1 000 grammes de l'autre. Que se passe-t-il ?",
+          "choix": [
+            "les grammes descendent",
+            "rien ne bouge",
+            "le kilogramme descend"
+          ],
+          "reponse": 1,
+          "explication": "1 kilogramme, c'est 1 000 grammes. Même masse : les plateaux restent au même niveau."
+        },
+        {
+          "t": "01:34",
+          "question": "Qu'est-ce qui est le plus lourd : 1 kilogramme de plumes, ou 1 kilogramme de cailloux ?",
+          "choix": [
+            "les plumes",
+            "les cailloux",
+            "c'est pareil"
+          ],
+          "reponse": 2,
+          "explication": "1 kilogramme, c'est 1 kilogramme ! Les plumes prennent plus de place, mais elles ont la même masse."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ],
+      "aussi": [
+        {
+          "classe": "ce1",
+          "notionId": "masse",
+          "microId": "ce1_masse_comparer"
+        }
+      ]
+    },
+    {
+      "id": "ce2-masse-comparer-short",
+      "pas_avant": "2027-04-29",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce2_masse_comparer",
+      "classe": "ce2",
+      "ceinture": "jaune",
+      "serie": "Maths CE2",
+      "type": "short",
+      "renvoie_vers": "ce2-masse-comparer",
+      "fichier": "ce2/maths/masse/03-comparer/eleveai-maths-ce2-masse-comparer-short.mp4",
+      "miniature": "ce2/maths/masse/03-comparer/eleveai-maths-ce2-masse-comparer-short-miniature.png",
+      "titre": "900 g ou 1 kg : 900 est plus grand, donc plus lourd ? #maths #ce2",
+      "accroche": "Ma copine a un fromage de 900 grammes. Moi, un morceau de 1 kilogramme. Elle dit : 900, c'est plus que 1 ! On pose les deux sur la balance…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture jaune.\n👉 À toi : qui est le plus lourd, 2 kilogrammes ou 1 800 grammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=masse&microId=ce2_masse_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce2 #primaire",
+      "tags": [
+        "masse",
+        "comparer",
+        "balance",
+        "fromage",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture jaune",
+        "maths",
+        "CE2",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Quel plateau descend ?",
+          "choix": [
+            "celui de 900 grammes",
+            "celui de 1 kilogramme",
+            "aucun, c'est l'équilibre"
+          ],
+          "reponse": 1,
+          "explication": "1 kilogramme, c'est 1 000 grammes. 1 000 est plus grand que 900 !"
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "ce1",
+          "notionId": "masse",
+          "microId": "ce1_masse_comparer"
+        }
+      ]
+    },
+    {
+      "id": "cp-masse-lexique",
+      "pas_avant": "2027-04-30",
+      "prioritaire": true,
+      "notionId": "masse_contenance",
+      "microId": "cp_masse_lexique",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique.mp4",
+      "miniature": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique.png",
+      "titre": "Carton de livres ou oreiller : lequel est le plus lourd ? — Lourd ou léger — épisode 1 · Maths CP",
+      "accroche": "Awa est déménageuse. Toute la journée, elle porte des cartons. Certains sont lourds. D'autres sont légers.\n\nDans cette vidéo :\n• lourd, léger : un carton de livres, un oreiller\n• on soupèse : un objet dans chaque main, la main qui descend tient le plus lourd\n• le piège : gros ne veut pas dire lourd (le ballon de plage, la bille en fer)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : trouver le plus léger : un oreiller, un carton de livres, une chaise.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_lexique&display=simple\n\n⚖️ Épisode 1 de la série Masses d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Lourd ou léger ?"
+        ],
+        [
+          "00:19",
+          "Lourd, léger"
+        ],
+        [
+          "00:38",
+          "Question 1"
+        ],
+        [
+          "01:14",
+          "Question 2"
+        ],
+        [
+          "01:45",
+          "À toi de jouer"
+        ],
+        [
+          "02:05",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "lourd",
+        "léger",
+        "soupeser",
+        "comparer des masses",
+        "déménageuse",
+        "maths",
+        "CP",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:38",
+          "question": "Qu'est-ce qui est le plus léger : une plume, ou un dictionnaire ?",
+          "choix": [
+            "la plume",
+            "c'est pareil",
+            "le dictionnaire"
+          ],
+          "reponse": 0,
+          "explication": "La plume est légère : on la sent à peine dans la main."
+        },
+        {
+          "t": "01:14",
+          "question": "Un gros ballon de plage, une petite bille en fer. Lequel est le plus lourd ?",
+          "choix": [
+            "le ballon de plage",
+            "la bille en fer",
+            "c'est pareil"
+          ],
+          "reponse": 1,
+          "explication": "La bille est petite, mais elle est en fer. Elle est plus lourde que le ballon."
+        }
+      ],
+      "centres": [
+        "construction"
+      ]
+    },
+    {
+      "id": "cp-masse-lexique-short",
+      "pas_avant": "2027-04-30",
+      "prioritaire": true,
+      "notionId": "masse_contenance",
+      "microId": "cp_masse_lexique",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "short",
+      "renvoie_vers": "cp-masse-lexique",
+      "fichier": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique-short.mp4",
+      "miniature": "cp/maths/masse/01-lexique/eleveai-maths-cp-masse-lexique-short-miniature.png",
+      "titre": "Un gros ballon de plage, c'est lourd ? #maths #cp",
+      "accroche": "Mon copain veut porter le gros ballon de plage. Il prend son élan… et il le soulève d'un doigt !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : une pomme, une plume, une pastèque : range-les du plus léger au plus lourd. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_lexique&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cp #primaire",
+      "tags": [
+        "masse",
+        "lourd",
+        "léger",
+        "ballon",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "Le gros ballon, ou la petite bille en fer : qui est le plus lourd ?",
+          "choix": [
+            "la bille en fer",
+            "c'est pareil",
+            "le gros ballon"
+          ],
+          "reponse": 0,
+          "explication": "Petite, mais en fer : la bille est plus lourde."
+        }
+      ],
+      "centres": [
+        "sport",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-masse-comparer",
+      "pas_avant": "2027-05-01",
+      "prioritaire": true,
+      "notionId": "masse_contenance",
+      "microId": "cp_masse_comparer",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/masse/02-comparer/eleveai-maths-cp-masse-comparer.mp4",
+      "miniature": "cp/maths/masse/02-comparer/eleveai-maths-cp-masse-comparer.png",
+      "titre": "Un melon ou un ananas : lequel est le plus lourd ? — Comparer des masses — épisode 2 · Maths CP",
+      "accroche": "Hugo est primeur : il vend des fruits et des légumes. Il a un melon et un ananas. Lequel est le plus lourd ? Il sort sa balance à deux plateaux.\n\nDans cette vidéo :\n• la balance à deux plateaux : un objet de chaque côté\n• le plateau qui descend porte le plus lourd\n• même niveau : même masse (deux pommes)\n• deux boîtes pareilles : à l'œil on ne sait pas, la balance le dit\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : une orange à gauche, un citron à droite, le plateau de droite monte : qui est le plus lourd ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_comparer&display=simple\n\n⚖️ Épisode 2 de la série Masses d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le plus lourd ?"
+        ],
+        [
+          "00:34",
+          "Question 1"
+        ],
+        [
+          "01:12",
+          "Question 2"
+        ],
+        [
+          "01:43",
+          "À toi de jouer"
+        ],
+        [
+          "02:06",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "comparer des masses",
+        "balance",
+        "balance à deux plateaux",
+        "plus lourd",
+        "primeur",
+        "fruits",
+        "maths",
+        "CP",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Sur la balance, le plateau de gauche descend. Que peut-on dire ?",
+          "choix": [
+            "les deux sont pareils",
+            "à gauche, c'est le plus lourd",
+            "à droite, c'est le plus lourd"
+          ],
+          "reponse": 1,
+          "explication": "Le plateau qui descend porte l'objet le plus lourd."
+        },
+        {
+          "t": "01:12",
+          "question": "Deux boîtes fermées sont pareilles. Comment savoir laquelle est la plus lourde ?",
+          "choix": [
+            "on prend la plus jolie",
+            "on choisit au hasard",
+            "on les pèse sur la balance"
+          ],
+          "reponse": 2,
+          "explication": "À l'œil, elles sont pareilles. La balance, elle, sait le dire."
+        }
+      ],
+      "centres": [
+        "cuisine"
+      ],
+      "aussi": [
+        {
+          "classe": "ce1",
+          "notionId": "masse",
+          "microId": "ce1_masse_soupeser"
+        }
+      ]
+    },
+    {
+      "id": "cp-masse-comparer-short",
+      "pas_avant": "2027-05-01",
+      "prioritaire": true,
+      "notionId": "masse_contenance",
+      "microId": "cp_masse_comparer",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "short",
+      "renvoie_vers": "cp-masse-comparer",
+      "fichier": "cp/maths/masse/02-comparer/eleveai-maths-cp-masse-comparer-short.mp4",
+      "miniature": "cp/maths/masse/02-comparer/eleveai-maths-cp-masse-comparer-short-miniature.png",
+      "titre": "Mon gros doudou monte sur la balance : il est léger ? #maths #cp",
+      "accroche": "Je mets mon doudou sur la balance. Mon copain met sa petite voiture en fer. Mon doudou monte tout en haut !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : 2 pommes sur un plateau. Combien de pommes pareilles de l'autre côté, pour l'équilibre ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cp #primaire",
+      "tags": [
+        "masse",
+        "balance",
+        "plus lourd",
+        "doudou",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Le plateau du doudou monte. Qui est le plus lourd ?",
+          "choix": [
+            "le doudou",
+            "la voiture",
+            "personne"
+          ],
+          "reponse": 1,
+          "explication": "Le plateau qui descend porte le plus lourd : la voiture."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ],
+      "aussi": [
+        {
+          "classe": "ce1",
+          "notionId": "masse",
+          "microId": "ce1_masse_soupeser"
+        }
+      ]
+    },
+    {
+      "id": "cp-masse-estimer",
+      "pas_avant": "2027-05-02",
+      "prioritaire": true,
+      "notionId": "masse_contenance",
+      "microId": "cp_masse_contenance_estimer",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer.mp4",
+      "miniature": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer.png",
+      "titre": "Trois chiens : lequel est le plus léger ? — Ranger des masses — épisode 3 · Maths CP",
+      "accroche": "Zoé est toiletteuse : elle lave et coiffe les chiens. Aujourd'hui : un chiot, un chien moyen et un gros chien. Comment les ranger du plus léger au plus lourd ?\n\nDans cette vidéo :\n• pour ranger, on compare deux par deux\n• du plus léger au plus lourd : le chiot, le chien moyen, le gros chien\n• A pèse plus que B, et B plus que C : donc A est la plus lourde\n• sans balance, on peut deviner : une souris, un chat, un cheval\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : ranger du plus léger au plus lourd : une pastèque, une fraise, une pomme.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_contenance_estimer&display=simple\n\n⚖️ Épisode 3 de la série Masses d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le plus léger ?"
+        ],
+        [
+          "00:16",
+          "Deux par deux"
+        ],
+        [
+          "00:33",
+          "Question 1"
+        ],
+        [
+          "01:12",
+          "Question 2"
+        ],
+        [
+          "01:38",
+          "À toi de jouer"
+        ],
+        [
+          "01:56",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "ranger des masses",
+        "plus léger",
+        "plus lourd",
+        "comparer des masses",
+        "toiletteuse",
+        "chiens",
+        "maths",
+        "CP",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "La boîte A pèse plus que la B. La B pèse plus que la C. Laquelle est la plus lourde ?",
+          "choix": [
+            "la boîte C",
+            "la boîte A",
+            "la boîte B"
+          ],
+          "reponse": 1,
+          "explication": "A pèse plus que B, et B plus que C. Donc A est la plus lourde."
+        },
+        {
+          "t": "01:12",
+          "question": "Une souris, un chat, un cheval. Qui est le plus lourd ?",
+          "choix": [
+            "la souris",
+            "le chat",
+            "le cheval"
+          ],
+          "reponse": 2,
+          "explication": "Le cheval est bien plus lourd que le chat et la souris."
+        }
+      ],
+      "centres": [
+        "animaux"
+      ]
+    },
+    {
+      "id": "cp-masse-estimer-short",
+      "pas_avant": "2027-05-02",
+      "prioritaire": true,
+      "notionId": "masse_contenance",
+      "microId": "cp_masse_contenance_estimer",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "short",
+      "renvoie_vers": "cp-masse-estimer",
+      "fichier": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer-short.mp4",
+      "miniature": "cp/maths/masse/03-estimer/eleveai-maths-cp-masse-estimer-short-miniature.png",
+      "titre": "Trois chats sur ma branche : qui monte en premier ? #maths #cp",
+      "accroche": "Trois chats montent sur ma branche : un chaton, un chat, un gros matou. La branche craque !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : un éléphant, une fourmi, un lapin : range-les du plus léger au plus lourd. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_contenance_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cp #primaire",
+      "tags": [
+        "masse",
+        "plus léger",
+        "ranger",
+        "chats",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Qui monte en premier, le plus léger ?",
+          "choix": [
+            "le chaton",
+            "le gros matou",
+            "le chat"
+          ],
+          "reponse": 0,
+          "explication": "Le chaton est le plus léger. Puis le chat, puis le gros matou."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-masse-defi",
+      "pas_avant": "2027-05-03",
+      "prioritaire": true,
+      "notionId": "masse_contenance",
+      "microId": "cp_masse_contenance_defi",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi.mp4",
+      "miniature": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi.png",
+      "titre": "Trois colis : lequel est le plus lourd ? — Le défi des masses — épisode 4 · Maths CP",
+      "accroche": "Noé est livreur à vélo. Il a trois colis : le rouge, le bleu et le vert. Lequel est le plus lourd ? Deux pesées suffisent.\n\nDans cette vidéo :\n• première pesée : le rouge descend, il est plus lourd que le bleu\n• deuxième pesée : le bleu descend, il est plus lourd que le vert\n• du plus lourd au plus léger : le rouge, le bleu, le vert\n• la taille ne dit pas la masse : un sac de plumes, un sac de billes\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : la pomme est plus lourde que la prune, la prune plus lourde que la cerise : quel fruit est le plus léger ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_contenance_defi&display=simple\n\n⚖️ Épisode 4 de la série Masses d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le plus lourd ?"
+        ],
+        [
+          "00:17",
+          "Deux pesées"
+        ],
+        [
+          "00:33",
+          "Question 1"
+        ],
+        [
+          "01:06",
+          "Question 2"
+        ],
+        [
+          "01:39",
+          "À toi de jouer"
+        ],
+        [
+          "02:03",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "défi",
+        "balance",
+        "pesée",
+        "plus lourd",
+        "plus léger",
+        "livreur",
+        "vélo",
+        "maths",
+        "CP",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "Quel colis est le plus léger ?",
+          "choix": [
+            "le vert",
+            "le rouge",
+            "le bleu"
+          ],
+          "reponse": 0,
+          "explication": "Le rouge bat le bleu, le bleu bat le vert. Le vert est le plus léger."
+        },
+        {
+          "t": "01:06",
+          "question": "Un sac de plumes, un sac de billes. Même taille. Pèsent-ils pareil ?",
+          "choix": [
+            "non, les plumes sont plus lourdes",
+            "oui, c'est la même taille",
+            "non, les billes sont plus lourdes"
+          ],
+          "reponse": 2,
+          "explication": "Même taille, mais pas même masse. Les billes sont bien plus lourdes."
+        }
+      ],
+      "centres": [
+        "transports",
+        "sport"
+      ]
+    },
+    {
+      "id": "cp-masse-defi-short",
+      "pas_avant": "2027-05-03",
+      "prioritaire": true,
+      "notionId": "masse_contenance",
+      "microId": "cp_masse_contenance_defi",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "short",
+      "renvoie_vers": "cp-masse-defi",
+      "fichier": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi-short.mp4",
+      "miniature": "cp/maths/masse/04-defi/eleveai-maths-cp-masse-defi-short-miniature.png",
+      "titre": "Trois cadeaux de la même taille : lequel est le plus lourd ? #maths #cp",
+      "accroche": "J'ai trois cadeaux de la même taille. Ma copine veut le plus lourd. Deux pesées… et une surprise dedans !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : le chat pèse plus que le lapin, le lapin plus que la souris : qui est le plus léger ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=masse_contenance&microId=cp_masse_contenance_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #cp #primaire",
+      "tags": [
+        "masse",
+        "balance",
+        "cadeau",
+        "plus lourd",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Quel cadeau est le plus lourd ?",
+          "choix": [
+            "le rose",
+            "le bleu",
+            "le jaune"
+          ],
+          "reponse": 2,
+          "explication": "Le jaune bat le rose, et le rose bat le bleu. Le jaune est le plus lourd !"
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "animaux"
+      ]
+    },
+    {
+      "id": "ce1-masse-kg-g",
+      "pas_avant": "2027-05-04",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_kg_g",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "type": "longue",
+      "fichier": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g.mp4",
+      "miniature": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g.png",
+      "titre": "Un colis, une lettre : kilogramme ou gramme ? — Le kilogramme et le gramme — épisode 1 · Maths CE1",
+      "accroche": "Jade est postière. Elle pèse chaque colis et chaque lettre : le prix de l'envoi dépend de la masse. Avec quelle unité ?\n\nDans cette vidéo :\n• le kilogramme (kg) pour les objets lourds : le gros colis pèse 3 kg\n• le gramme (g) pour les objets légers : la lettre pèse 20 g\n• kilogramme s'écrit kg : le k de kilo, le g de gramme\n• lire une balance : le paquet pèse 2 kg, la carte postale 5 g\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : un vélo et une clé : lequel pèse 12 kg, lequel pèse 12 g ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_kg_g&display=simple\n\n⚖️ Épisode 1 de la série Masses d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Kilogramme ou gramme ?"
+        ],
+        [
+          "00:36",
+          "Question 1"
+        ],
+        [
+          "01:08",
+          "Question 2"
+        ],
+        [
+          "01:36",
+          "À toi de jouer"
+        ],
+        [
+          "01:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "kilogramme",
+        "gramme",
+        "kg",
+        "g",
+        "unités de masse",
+        "balance",
+        "postière",
+        "maths",
+        "CE1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:36",
+          "question": "Comment écrit-on « kilogramme » en abrégé ?",
+          "choix": [
+            "k g",
+            "k l",
+            "g k"
+          ],
+          "reponse": 0,
+          "explication": "Kilogramme s'écrit k g : le k de kilo, le g de gramme."
+        },
+        {
+          "t": "01:08",
+          "question": "La lettre de Jade pèse 20… quoi ?",
+          "choix": [
+            "20 litres",
+            "20 kilogrammes",
+            "20 grammes"
+          ],
+          "reponse": 2,
+          "explication": "Une lettre est légère : 20 grammes. Le litre, lui, mesure une contenance."
+        }
+      ],
+      "centres": [
+        "transports",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "ce1-masse-kg-g-short",
+      "pas_avant": "2027-05-04",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_kg_g",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "type": "short",
+      "renvoie_vers": "ce1-masse-kg-g",
+      "fichier": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g-short.mp4",
+      "miniature": "ce1/maths/masse/01-kg-g/eleveai-maths-ce1-masse-kg-g-short-miniature.png",
+      "titre": "Un chaton de 1 gramme ? Vraiment ? #maths #ce1",
+      "accroche": "Sur l'étiquette du chaton, mon copain écrit : 1 gramme. Mais 1 gramme, c'est la masse d'un trombone !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : un trombone pèse 1 gramme : combien pèsent 10 trombones ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_kg_g&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce1 #primaire",
+      "tags": [
+        "masse",
+        "kilogramme",
+        "gramme",
+        "chaton",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "Le chaton pèse environ…",
+          "choix": [
+            "1 gramme",
+            "100 kilogrammes",
+            "1 kilogramme"
+          ],
+          "reponse": 2,
+          "explication": "Un chaton pèse environ 1 kilogramme. 1 gramme, c'est un trombone !"
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce1-masse-relation",
+      "pas_avant": "2027-05-05",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_relation_kg_g",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "type": "longue",
+      "fichier": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation.mp4",
+      "miniature": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation.png",
+      "titre": "1 kg, c'est combien de grammes ? — 1 kilogramme = 1 000 grammes — épisode 2 · Maths CE1",
+      "accroche": "Liam vend du riz, des lentilles et des graines en vrac. Un client veut 1 kilogramme de lentilles : Liam remplit deux sacs de 500 grammes. Est-ce bien 1 kilogramme ?\n\nDans cette vidéo :\n• sur la balance, 1 kg d'un côté et 1 000 g de l'autre : équilibre\n• 1 kg = 1 000 g\n• 500 g + 500 g = 1 000 g = 1 kg\n• 4 sacs de 250 g font 1 kg\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : Liam a 600 g de riz sur la balance : combien de grammes ajouter pour avoir 1 kg ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_relation_kg_g&display=simple\n\n⚖️ Épisode 2 de la série Masses d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "1 kg, combien de grammes ?"
+        ],
+        [
+          "00:18",
+          "L'équilibre"
+        ],
+        [
+          "00:29",
+          "Deux sacs de 500 g"
+        ],
+        [
+          "00:41",
+          "Question 1"
+        ],
+        [
+          "01:09",
+          "Quatre sacs de 250 g"
+        ],
+        [
+          "01:20",
+          "Question 2"
+        ],
+        [
+          "01:45",
+          "À toi de jouer"
+        ],
+        [
+          "01:59",
+          "Correction"
+        ],
+        [
+          "02:10",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "kilogramme",
+        "gramme",
+        "1 kg = 1 000 g",
+        "convertir",
+        "balance",
+        "vrac",
+        "maths",
+        "CE1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:41",
+          "question": "Un élève écrit : 1 kilogramme égale 100 grammes. A-t-il raison ?",
+          "choix": [
+            "non, c'est 1 000 grammes",
+            "oui",
+            "non, c'est 10 grammes"
+          ],
+          "reponse": 0,
+          "explication": "1 kilogramme, c'est 1 000 grammes. Pas 100 !"
+        },
+        {
+          "t": "01:20",
+          "question": "Combien de paquets de 500 grammes pour faire 1 kilogramme ?",
+          "choix": [
+            "10",
+            "5",
+            "2"
+          ],
+          "reponse": 2,
+          "explication": "500 + 500 : 1 000 grammes, 1 kilogramme. Il en faut 2."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "argent-budget"
+      ]
+    },
+    {
+      "id": "ce1-masse-relation-short",
+      "pas_avant": "2027-05-05",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_relation_kg_g",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "type": "short",
+      "renvoie_vers": "ce1-masse-relation",
+      "fichier": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation-short.mp4",
+      "miniature": "ce1/maths/masse/02-relation/eleveai-maths-ce1-masse-relation-short-miniature.png",
+      "titre": "1 000 grammes contre 1 kilogramme : qui gagne ? #maths #ce1",
+      "accroche": "Ma copine a un sac de 1 kilogramme de billes. Moi, j'ai 1 000 grammes. 1 000, c'est plus que 1 : j'ai gagné ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien de sacs de 250 grammes pour faire 1 kilogramme ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_relation_kg_g&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce1 #primaire",
+      "tags": [
+        "masse",
+        "kilogramme",
+        "gramme",
+        "billes",
+        "balance",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:15",
+          "question": "Que fait la balance ?",
+          "choix": [
+            "elle reste en équilibre",
+            "mon sac descend",
+            "son sac descend"
+          ],
+          "reponse": 0,
+          "explication": "1 kilogramme, c'est 1 000 grammes. Même masse : équilibre !"
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce1-masse-estimer",
+      "pas_avant": "2027-05-07",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_estimer",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "type": "longue",
+      "fichier": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer.mp4",
+      "miniature": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer.png",
+      "titre": "Une trousse peut-elle peser 3 kg ? — Estimer une masse — épisode 3 · Maths CE1",
+      "accroche": "Chloé est bibliothécaire : elle range des livres, des gros et des petits. Elle doit savoir ce qu'elle peut porter. Pour estimer une masse, on la compare à un repère.\n\nDans cette vidéo :\n• deux repères : un trombone pèse environ 1 g, une brique de lait pleine environ 1 kg\n• un gros dictionnaire : environ 1 kg ; un petit livre : environ 200 g\n• 3 kg, c'est trois briques de lait : une trousse pèse environ 300 g\n• le cartable : 3 g (trop léger), 300 kg (trop lourd), environ 3 kg\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : Le cartable de Chloé pèse-t-il 3 g, 3 kg ou 300 kg ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_estimer&display=simple\n\n⚖️ Épisode 3 de la série Masses d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Estimer une masse"
+        ],
+        [
+          "00:35",
+          "Question 1"
+        ],
+        [
+          "01:01",
+          "Les nombres impossibles"
+        ],
+        [
+          "01:11",
+          "Question 2"
+        ],
+        [
+          "01:42",
+          "À toi de jouer"
+        ],
+        [
+          "01:54",
+          "Correction"
+        ],
+        [
+          "02:08",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "estimer",
+        "kilogramme",
+        "gramme",
+        "repère",
+        "ordre de grandeur",
+        "bibliothèque",
+        "maths",
+        "CE1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "Environ combien pèse une brique de lait pleine ?",
+          "choix": [
+            "1 gramme",
+            "1 kilogramme",
+            "10 kilogrammes"
+          ],
+          "reponse": 1,
+          "explication": "Une brique de lait de 1 litre pèse environ 1 kilogramme."
+        },
+        {
+          "t": "01:11",
+          "question": "Un élève écrit : ma trousse pèse 3 kilogrammes. Est-ce possible ?",
+          "choix": [
+            "non, c'est trop lourd",
+            "oui, c'est normal",
+            "non, c'est trop léger"
+          ],
+          "reponse": 0,
+          "explication": "3 kilogrammes, c'est trois briques de lait. Une trousse pèse environ 300 grammes."
+        }
+      ],
+      "centres": [
+        "histoire-geographie",
+        "art-design"
+      ]
+    },
+    {
+      "id": "ce1-masse-estimer-short",
+      "pas_avant": "2027-05-07",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_estimer",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "type": "short",
+      "renvoie_vers": "ce1-masse-estimer",
+      "fichier": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer-short.mp4",
+      "miniature": "ce1/maths/masse/03-estimer/eleveai-maths-ce1-masse-estimer-short-miniature.png",
+      "titre": "Une gomme de 1 kilogramme ? Vraiment ? #maths #ce1",
+      "accroche": "Mon copain dit : ma gomme pèse 1 kilogramme ! Je lui donne une brique de lait. Ça, c'est 1 kilogramme.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien pèse ton cartable, en kilogrammes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_estimer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce1 #primaire",
+      "tags": [
+        "masse",
+        "estimer",
+        "gramme",
+        "kilogramme",
+        "gomme",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Une gomme pèse environ…",
+          "choix": [
+            "20 kilogrammes",
+            "20 grammes",
+            "1 kilogramme"
+          ],
+          "reponse": 1,
+          "explication": "Une gomme pèse environ 20 grammes : comme 20 trombones."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce1-masse-probleme",
+      "pas_avant": "2027-05-08",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_probleme",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "type": "longue",
+      "fichier": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme.mp4",
+      "miniature": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme.png",
+      "titre": "Le panier pèse 1 kg : et les poissons ? — Problèmes de masses — épisode 4 · Maths CE1",
+      "accroche": "Malo est pêcheur au port de Saint-Pierre, à La Réunion. Il pèse sa pêche pour la vendre. Pour résoudre un problème de masses, on calcule avec la même unité.\n\nDans cette vidéo :\n• le panier plein pèse 1 kg = 1 000 g, vide 300 g : les poissons, c'est le plein moins le vide, 700 g\n• 1 kg de farine, on en prend 400 g : 1 000 − 400, il reste 600 g\n• 3 kg de thon et 2 kg de dorade : 3 + 2 = 5 kg en tout\n• 750 g sur le plateau : de 750 à 1 000, il manque 250 g pour faire 1 kg\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture blanche.\nUn défi en fin de vidéo, avec sa correction : Malo a 2 kg de crevettes et en vend 500 g : combien de grammes lui reste-t-il ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_probleme&display=simple\n\n⚖️ Épisode 4 de la série Masses d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Problèmes de masses"
+        ],
+        [
+          "00:38",
+          "Question 1"
+        ],
+        [
+          "01:19",
+          "Question 2"
+        ],
+        [
+          "01:53",
+          "À toi de jouer"
+        ],
+        [
+          "02:07",
+          "Correction"
+        ],
+        [
+          "02:19",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "problème",
+        "kilogramme",
+        "gramme",
+        "soustraction",
+        "addition",
+        "pêcheur",
+        "La Réunion",
+        "maths",
+        "CE1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:38",
+          "question": "Un sac de 1 kilogramme de farine. On en prend 400 grammes. Combien reste-t-il ?",
+          "choix": [
+            "400 grammes",
+            "600 grammes",
+            "1 400 grammes"
+          ],
+          "reponse": 1,
+          "explication": "1 kilogramme, c'est 1 000 grammes. 1 000 − 400 : il reste 600 grammes."
+        },
+        {
+          "t": "01:19",
+          "question": "Sur le plateau, 750 grammes de poisson. Combien ajouter pour faire 1 kilogramme ?",
+          "choix": [
+            "250 grammes",
+            "350 grammes",
+            "1 750 grammes"
+          ],
+          "reponse": 0,
+          "explication": "1 kilogramme, c'est 1 000 grammes. De 750 à 1 000, il manque 250 grammes."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "ce1-masse-probleme-short",
+      "pas_avant": "2027-05-08",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_probleme",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "type": "short",
+      "renvoie_vers": "ce1-masse-probleme",
+      "fichier": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme-short.mp4",
+      "miniature": "ce1/maths/masse/04-probleme/eleveai-maths-ce1-masse-probleme-short-miniature.png",
+      "titre": "1 kg de coquillages ? Et le seau, alors ? #maths #ce1",
+      "accroche": "Mon seau plein de coquillages pèse 1 kilogramme. Mon copain dit : 1 kilogramme de coquillages !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : un panier plein pèse 900 grammes, vide 100 grammes : combien pèsent les fruits ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce1 #primaire",
+      "tags": [
+        "masse",
+        "problème",
+        "gramme",
+        "kilogramme",
+        "coquillages",
+        "plage",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:16",
+          "question": "Combien pèsent les coquillages ?",
+          "choix": [
+            "800 grammes",
+            "1 kilogramme",
+            "1 200 grammes"
+          ],
+          "reponse": 0,
+          "explication": "1 000 grammes moins 200 grammes de seau : 800 grammes de coquillages."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce1-masse-defi",
+      "pas_avant": "2027-05-11",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_defi",
+      "classe": "ce1",
+      "ceinture": "jaune",
+      "serie": "Maths CE1",
+      "type": "longue",
+      "fichier": "ce1/maths/masse/05-defi/eleveai-maths-ce1-masse-defi.mp4",
+      "miniature": "ce1/maths/masse/05-defi/eleveai-maths-ce1-masse-defi.png",
+      "titre": "5 quilles de 200 g : plus lourd que 1 kg ? — Le défi des masses — épisode 5 · Maths CE1",
+      "accroche": "Lina est jongleuse dans un cirque. Dans sa valise, elle range ses quilles et ses balles : la valise doit rester légère. Pour additionner des masses, on les met dans la même unité.\n\nDans cette vidéo :\n• 5 quilles de 200 g : 200, 400, 600, 800, 1 000 g\n• 1 000 g, c'est 1 kg : la balance reste à niveau, ni plus, ni moins\n• avec 3 balles de 100 g : 1 000 + 300 = 1 300 g, plus que 1 kg\n• 1 kg de plumes et 1 kg de cailloux : c'est pareil, les plumes prennent juste plus de place\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : La valise vide pèse 2 kg ; Lina y met 5 quilles de 200 g et 2 balles de 500 g : combien pèse la valise ?\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_defi&display=simple\n\n⚖️ Épisode 5 de la série Masses d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le défi des masses"
+        ],
+        [
+          "00:19",
+          "5 quilles de 200 g"
+        ],
+        [
+          "00:39",
+          "Question 1"
+        ],
+        [
+          "01:17",
+          "Question 2"
+        ],
+        [
+          "01:45",
+          "À toi de jouer"
+        ],
+        [
+          "02:01",
+          "Correction"
+        ],
+        [
+          "02:15",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "masse",
+        "défi",
+        "kilogramme",
+        "gramme",
+        "1 kg = 1 000 g",
+        "addition",
+        "cirque",
+        "jongleuse",
+        "maths",
+        "CE1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:39",
+          "question": "Le même sac : Léa écrit 1 kilogramme, Kevin écrit 1 000 grammes. Qui a raison ?",
+          "choix": [
+            "les deux",
+            "Kevin seulement",
+            "Léa seulement"
+          ],
+          "reponse": 0,
+          "explication": "1 kilogramme, c'est 1 000 grammes : les deux ont raison."
+        },
+        {
+          "t": "01:17",
+          "question": "Qu'est-ce qui est le plus lourd : 1 kilogramme de plumes, ou 1 kilogramme de cailloux ?",
+          "choix": [
+            "les cailloux",
+            "les plumes",
+            "c'est pareil"
+          ],
+          "reponse": 2,
+          "explication": "1 kilogramme, c'est 1 kilogramme ! Les plumes prennent juste plus de place."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "ce1-masse-defi-short",
+      "pas_avant": "2027-05-11",
+      "prioritaire": true,
+      "notionId": "masse",
+      "microId": "ce1_masse_defi",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "type": "short",
+      "renvoie_vers": "ce1-masse-defi",
+      "fichier": "ce1/maths/masse/05-defi/eleveai-maths-ce1-masse-defi-short.mp4",
+      "miniature": "ce1/maths/masse/05-defi/eleveai-maths-ce1-masse-defi-short-miniature.png",
+      "titre": "1 kg de plumes ou 1 kg de cailloux : le plus lourd ? #maths #ce1",
+      "accroche": "Ma copine et moi, on fait un pari. Le plus lourd : 1 kilogramme de plumes, ou 1 kilogramme de cailloux ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : pour découvrir.\n👉 À toi : combien de grammes dans 2 kilogrammes de plumes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=masse&microId=ce1_masse_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #masse #ce1 #primaire",
+      "tags": [
+        "masse",
+        "kilogramme",
+        "plumes",
+        "cailloux",
+        "balance",
+        "pari",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "primaire",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Que fait la balance ?",
+          "choix": [
+            "elle reste en équilibre",
+            "les cailloux descendent",
+            "les plumes descendent"
+          ],
+          "reponse": 0,
+          "explication": "1 kilogramme, c'est 1 kilogramme ! Le sac de plumes est juste plus gros."
+        }
+      ],
+      "centres": [
+        "jeux-defis"
+      ]
+    },
+    {
       "id": "ce2-masse-unites",
       "pas_avant": "2027-06-11",
       "prioritaire": true,
@@ -103025,151 +103217,6 @@
         "cuisine",
         "jeux-defis"
       ]
-    },
-    {
-      "id": "6e-seance-restaurant",
-      "notionId": "seance",
-      "classe": "6e",
-      "ceinture": "blanche",
-      "serie": "En classe avec EleveAI",
-      "type": "longue",
-      "fichier": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-mathematiques-paysage.mp4",
-      "miniature": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-mathematiques-paysage-miniature.png",
-      "titre": "Le restaurant de mathématiques, en classe ou à la maison · En classe avec EleveAI",
-      "accroche": "Ce matin, un prof doit choisir pour 25 élèves. Qu'est-ce qu'il leur prend ?\n\nLe restaurant de mathématiques, en classe ou à la maison : une séance vécue en 6e, racontée par Ti Margo.\n\n• d'abord en classe entière, un plat imposé pour tous : la carte mentale à colorier ;\n• ensuite en groupes, à la carte : le coach, les exercices interactifs, le cours au cahier, le découpage, la vidéo ;\n• pas de bonne réponse : chacun apprend à sa façon, et chacun a son objectif ;\n• le dessert : va trouver des longueurs dans ce que tu aimes.\n\nDessin animé, voix de synthèse.\n\n👩‍🏫 La séance en détail, clic par clic : https://www.eleveai.fr/seances\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=6e&matiere=maths&notion=aire_longueur&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste",
-      "chapitres": [
-        [
-          "00:00",
-          "Le prof doit choisir"
-        ],
-        [
-          "00:15",
-          "Classe entière, puis en groupes"
-        ],
-        [
-          "00:36",
-          "Au choix !"
-        ],
-        [
-          "00:51",
-          "Chacun sa façon"
-        ],
-        [
-          "01:06",
-          "Et toi ?"
-        ]
-      ],
-      "tags": [
-        "séance",
-        "enseignant",
-        "prof",
-        "différenciation",
-        "pédagogie",
-        "carte mentale",
-        "travail en groupes",
-        "classe entière",
-        "autonomie",
-        "coach",
-        "maths",
-        "6e",
-        "collège",
-        "CRPE",
-        "Ti Margo",
-        "dessin animé",
-        "EleveAI",
-        "restaurant de mathématiques",
-        "à la maison"
-      ],
-      "brouillon_prive": "https://youtu.be/aCes5qsfHs0",
-      "url": "https://youtu.be/va9nMf8ozHU"
-    },
-    {
-      "id": "6e-seance-restaurant-short",
-      "notionId": "seance",
-      "classe": "6e",
-      "ceinture": "blanche",
-      "serie": "En classe avec EleveAI",
-      "type": "short",
-      "renvoie_vers": "6e-seance-restaurant",
-      "fichier": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-mathematiques-short.mp4",
-      "miniature": "6e/seances/01-restaurant/eleveai-seance-6e-restaurant-mathematiques-short-miniature.png",
-      "titre": "Le restaurant de mathématiques : et toi, tu prends quoi ? #prof #maths",
-      "accroche": "Ce matin, un prof doit choisir pour 25 élèves. Qu'est-ce qu'il leur prend ? Un plat imposé pour tous, puis chacun à la carte.\n\nDessin animé, voix de synthèse.\n👉 Et toi, au restaurant de mathématiques, tu prends quoi ? Réponds en commentaire !\n\n▶️ La vidéo complète : {{LONGUE}}\n👩‍🏫 La séance, clic par clic : https://www.eleveai.fr/seances\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #prof #maths #6e #pedagogie",
-      "tags": [
-        "séance",
-        "prof",
-        "enseignant",
-        "différenciation",
-        "pédagogie",
-        "carte mentale",
-        "groupes",
-        "maths",
-        "6e",
-        "CRPE",
-        "Ti Margo",
-        "dessin animé",
-        "EleveAI",
-        "Shorts",
-        "restaurant de mathématiques"
-      ],
-      "brouillon_prive": "https://youtube.com/shorts/-2Fq5VurmGw",
-      "url": "https://youtube.com/shorts/zcLYy1Lnb2A"
-    },
-    {
-      "id": "4e-puissance-plier-deplier-short",
-      "notionId": "puissance_ecriture",
-      "microId": "puissance_exposant_negatif",
-      "classe": "4e",
-      "ceinture": "orange",
-      "serie": "Maths 4e",
-      "type": "short",
-      "renvoie_vers": "4e-puissance-zero-negatif",
-      "fichier": "4e/maths/puissances/14-plier-deplier/eleveai-maths-4e-puissance-plier-deplier-short.mp4",
-      "miniature": "4e/maths/puissances/14-plier-deplier/eleveai-maths-4e-puissance-plier-deplier-short.png",
-      "titre": "Plie une feuille : 2 puissance −1, c'est quoi ? 📄 — 4e #Shorts",
-      "accroche": "Défi ! Je plie une feuille 3 fois : 2, 4, 8 parts, 2³. Je déplie : 8 → 4 → 2, on divise par 2. Plus de pli : la feuille entière, 2⁰ = 1. Et 2⁻³ ? Une part après 3 pliages : 1/8 de la feuille.\n\n🥋 Ceinture orange : le défi.\n👉 À toi : 2⁻⁵, quelle part de la feuille ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=4e&matiere=maths&notion=puissance_ecriture&microId=puissance_exposant_negatif&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #puissances #4e #collège",
-      "tags": [
-        "exposant négatif",
-        "puissance zéro",
-        "pliage",
-        "feuille",
-        "défi",
-        "puissances",
-        "maths",
-        "4e",
-        "collège",
-        "cycle 4",
-        "CRPE",
-        "eleveai",
-        "ceinture orange",
-        "Shorts"
-      ],
-      "questions": [
-        {
-          "t": "00:37",
-          "question": "On divise encore par 2. 2⁻¹, c'est quoi ?",
-          "choix": [
-            "−2",
-            "0",
-            "la moitié"
-          ],
-          "reponse": 2,
-          "explication": "La moitié : c'est une part après 1 pliage."
-        }
-      ],
-      "centres": [
-        "jeux-defis",
-        "art-design"
-      ],
-      "aussi": [
-        {
-          "classe": "seconde",
-          "notionId": "puissances_2de",
-          "microId": "puiss_exposant_negatif"
-        }
-      ],
-      "pas_avant": "2026-11-25",
-      "url": "https://youtube.com/shorts/QWuJ6Bmc_Y0"
     },
     {
       "id": "ce2-masse-choisir-unite",
@@ -114057,6 +114104,106 @@
       "centres": [
         "transports"
       ]
+    },
+    {
+      "id": "annonce-crpe-stage",
+      "serie": "Annonces",
+      "classe": "crpe",
+      "type": "longue",
+      "ceinture": "aucune",
+      "fichier": "annonce/crpe-stage/eleveai-annonce-crpe-stage.mp4",
+      "miniature": "annonce/crpe-stage/eleveai-annonce-crpe-stage.png",
+      "titre": "CRPE 2027 : les maths du concours en 1 semaine (stage intensif en janvier)",
+      "accroche": "Bonne résolution 2027 : réussir l'écrit de maths du CRPE. 🎉\nVous enseignerez jusqu'au CM2… mais l'épreuve, elle, va jusqu'en 3e : Thalès, Pythagore, PGCD, équations, probabilités. Peur des maths ? C'est normal, et ça se prépare.\n\n🧭 Ma philosophie, en 4 temps : se présenter, se sentir bien, savoir ce qui bloque, résoudre.\n\n🗓️ Une semaine intensive, du lundi au vendredi, 14 h – 18 h (heure de La Réunion)\n➡️ Session 1 : 4 → 8 janvier 2027 · Session 2 : 11 → 15 janvier 2027\n📍 Hôtel Terre-Sainte, Saint-Pierre : 300 € la semaine\n💻 À distance, en direct (11 h – 15 h heure de Paris) : 250 €\n👥 10 places par session, après deux tests en ligne (maths et orthographe)\n✍️ Écrits du concours : 30 et 31 mars 2027\n\n🎯 Le test d'entrée (15 min) : https://www.eleveai.fr/formation-crpe/test\n📄 Tout le programme de la semaine : https://www.eleveai.fr/formation-crpe\n📞 Frédéric : 06 92 74 29 58\n\n💬 Et vous, quel chapitre du collège vous fait le plus peur ?\n\nFrédéric Lacoste, professeur de maths — La Réunion 🌋\n#CRPE #CRPE2027 #professeurdesecoles",
+      "chapitres": [
+        [
+          "00:00",
+          "Bonne résolution 2027"
+        ],
+        [
+          "00:06",
+          "Vous enseignerez jusqu'au CM2, l'épreuve va jusqu'en 3e"
+        ],
+        [
+          "00:20",
+          "Question : l'hypoténuse"
+        ],
+        [
+          "00:48",
+          "Peur des maths ?"
+        ],
+        [
+          "00:54",
+          "Ma philosophie, en 4 temps"
+        ],
+        [
+          "01:06",
+          "La semaine, jour par jour"
+        ],
+        [
+          "01:28",
+          "Les deux sessions de janvier"
+        ],
+        [
+          "01:35",
+          "En salle ou à distance"
+        ],
+        [
+          "01:47",
+          "10 places, les tests, les écrits"
+        ],
+        [
+          "02:02",
+          "Votre question en commentaire"
+        ],
+        [
+          "02:09",
+          "Faire le test"
+        ]
+      ],
+      "tags": [
+        "CRPE",
+        "CRPE 2027",
+        "concours professeur des écoles",
+        "professeur des écoles",
+        "prépa CRPE",
+        "maths CRPE",
+        "stage CRPE",
+        "épreuve de maths CRPE",
+        "Pythagore",
+        "Thalès",
+        "peur des maths",
+        "La Réunion",
+        "Saint-Pierre",
+        "INSPE",
+        "EleveAI"
+      ],
+      "url": "https://youtu.be/ZXczUKs52k4"
+    },
+    {
+      "id": "annonce-crpe-stage-short",
+      "serie": "Annonces",
+      "classe": "crpe",
+      "type": "short",
+      "ceinture": "aucune",
+      "renvoie_vers": "annonce-crpe-stage",
+      "fichier": "annonce/crpe-stage/eleveai-annonce-crpe-stage-short.mp4",
+      "miniature": "annonce/crpe-stage/eleveai-annonce-crpe-stage-short.png",
+      "titre": "CRPE : l'hypoténuse d'un triangle 6 cm × 8 cm ? 🤔 Les maths du concours en 1 semaine #Shorts",
+      "accroche": "Vous enseignerez jusqu'au CM2… mais l'épreuve du CRPE va jusqu'en 3e. 📐\nLes côtés de l'angle droit mesurent 6 cm et 8 cm : combien mesure l'hypoténuse ?\n\nBonne résolution 2027 : une semaine intensive en janvier, 14 h – 18 h.\n4 → 8 ou 11 → 15 janvier · Saint-Pierre 300 € · à distance 250 € · 10 places.\n\n🎯 Le test d'entrée : https://www.eleveai.fr/formation-crpe/test\n📞 Frédéric : 06 92 74 29 58\n▶️ La vidéo complète : {{LONGUE}}\n\n💬 Quel chapitre du collège vous fait le plus peur ?\n\nFrédéric Lacoste — La Réunion 🌋\n#CRPE #CRPE2027 #Shorts",
+      "tags": [
+        "CRPE",
+        "CRPE 2027",
+        "professeur des écoles",
+        "maths CRPE",
+        "stage CRPE",
+        "Pythagore",
+        "hypoténuse",
+        "La Réunion",
+        "EleveAI",
+        "Shorts"
+      ],
+      "url": "https://youtube.com/shorts/qbR-Z8l0fzU"
     }
   ]
 }
