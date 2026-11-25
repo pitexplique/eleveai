@@ -13,6 +13,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { createClient } from "@supabase/supabase-js";
+import { Resend } from "resend";
 import { verifyAdminCookieValue } from "@/lib/server/adminAuth";
 import { estAdresseAcademique } from "@/lib/server/classesProf";
 
@@ -61,15 +62,68 @@ export async function POST(req: Request) {
   }
 
   const db = supabase();
+  // État d'avant : l'e-mail « compte validé » ne part que sur un vrai passage non validé → validé.
+  const { data: avant } = await db
+    .from("users_email")
+    .select("prof_valide")
+    .eq("id", id)
+    .eq("type_utilisateur", "prof")
+    .maybeSingle();
   const { data, error } = await db
     .from("users_email")
     .update({ prof_valide: valide })
     .eq("id", id)
     .eq("type_utilisateur", "prof")
-    .select("id, email, prof_valide");
+    .select("id, email, nom, prof_valide");
   if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
   if (!data?.length) {
     return NextResponse.json({ ok: false, error: "Ce compte n'est pas un compte prof." }, { status: 404 });
   }
-  return NextResponse.json({ ok: true, prof: data[0] });
+  const prof = data[0] as { id: string; email: string | null; nom: string | null; prof_valide: boolean | null };
+  const emailEnvoye = valide && !avant?.prof_valide ? await prevenirProfValide(prof) : false;
+  return NextResponse.json({ ok: true, prof, emailEnvoye });
+}
+
+// ✉️ 25/11/2026, Frédéric : « il faut lui envoyer un email » quand il est validé.
+// Seule exception à « aucun mail à l'utilisateur » : un seul e-mail, à la validation
+// (pas au retrait). Un échec n'annule pas la validation.
+// Domaines réservés aux tests (.invalid, .test…) : pas d'envoi (rebond assuré).
+async function prevenirProfValide(p: { email: string | null; nom: string | null }): Promise<boolean> {
+  const email = (p.email ?? "").trim();
+  const cle = process.env.RESEND_API_KEY;
+  if (!email || !cle) return false;
+  if (/\.(invalid|test|example|localhost)$/i.test(email)) {
+    console.log("profs : e-mail de validation non envoyé (adresse de test)", email);
+    return false;
+  }
+  const lignes = [
+    `Bonjour${p.nom ? " " + p.nom : ""},`,
+    "",
+    "Votre compte professeur EleveAI est validé.",
+    "Vous pouvez maintenant créer vos classes : le site fabrique le code de la classe,",
+    "un code par élève et un mot de passe simple, à imprimer et distribuer.",
+    "",
+    "Mes classes : https://www.eleveai.fr/prof/classes",
+    "Connexion : votre adresse e-mail, puis votre code à 6 chiffres.",
+    "",
+    "Bonne classe !",
+    "Frédéric, EleveAI",
+  ];
+  try {
+    const { error } = await new Resend(cle).emails.send({
+      from: process.env.NEWSLETTER_FROM || "EleveAI <contact@eleveai.fr>",
+      to: email,
+      replyTo: process.env.CONTACT_TO || undefined,
+      subject: "✅ Votre compte prof EleveAI est validé",
+      text: lignes.join("\n"),
+    });
+    if (error) {
+      console.error("profs : e-mail de validation refusé :", error.message);
+      return false;
+    }
+    return true;
+  } catch (e) {
+    console.error("profs : e-mail de validation impossible :", e);
+    return false;
+  }
 }

@@ -751,6 +751,17 @@ export default function SignInPage() {
         return;
       }
 
+      // 👩‍🏫 Prof non académique : un e-mail à l'admin pour le valider
+      // (jamais au prof). Le serveur décide ; un échec ne bloque rien.
+      if (profile.type_utilisateur === "prof") {
+        fetch("/api/prof-a-valider", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ access_token: pendingAuth.accessToken }),
+          keepalive: true,
+        }).catch(() => {});
+      }
+
       const sessionToken = await fetchEmailSessionToken(pendingAuth.accessToken);
 
       setFeedback("Compte créé. Bienvenue sur EleveAI !");

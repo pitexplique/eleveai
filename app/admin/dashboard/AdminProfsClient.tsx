@@ -53,7 +53,8 @@ export default function AdminProfsClient() {
       setMessage({
         ok: true,
         texte: valide
-          ? `${qui} est validé : il peut créer ses classes dans « Mes classes ».`
+          ? `${qui} est validé : il peut créer ses classes dans « Mes classes ».` +
+            (d.emailEnvoye ? " E-mail de confirmation envoyé." : " (Aucun e-mail envoyé.)")
           : `Validation retirée pour ${qui}.`,
       });
       await charger();
