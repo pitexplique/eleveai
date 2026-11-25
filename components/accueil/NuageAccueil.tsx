@@ -470,6 +470,32 @@ export default function NuageAccueil() {
         })}
       </div>
 
+      {/* 25/11 soir (Frédéric) : « il manque une partie parent-prof […] une petite
+          bulle qui dit Créer ma classe, et quelque chose pour les parents ».
+          Visiteur seulement, juste sous le nuage. */}
+      {cas === "visiteur" ? (
+        <div className="mt-4 grid grid-cols-2 gap-2 sm:mx-auto sm:max-w-2xl sm:gap-3">
+          <Link
+            href="/prof/classes"
+            className="flex flex-col items-center justify-center gap-1 rounded-3xl bg-violet-700 px-2 py-2.5 text-center text-base font-black leading-tight text-white shadow-lg transition hover:scale-105 hover:bg-violet-800 sm:flex-row sm:gap-2 sm:whitespace-nowrap sm:rounded-full sm:px-4 sm:py-3 sm:text-lg"
+          >
+            <span className="text-2xl leading-none" aria-hidden>👩‍🏫</span>
+            <span>
+              Prof : créer ma classe
+            </span>
+          </Link>
+          <Link
+            href="/auth/signin?type=parent&inscription=1"
+            className="flex flex-col items-center justify-center gap-1 rounded-3xl bg-sky-700 px-2 py-2.5 text-center text-base font-black leading-tight text-white shadow-lg transition hover:scale-105 hover:bg-sky-800 sm:flex-row sm:gap-2 sm:whitespace-nowrap sm:rounded-full sm:px-4 sm:py-3 sm:text-lg"
+          >
+            <span className="text-2xl leading-none" aria-hidden>👨‍👩‍👧</span>
+            <span>
+              Parent : suivre mon enfant
+            </span>
+          </Link>
+        </div>
+      ) : null}
+
       {/* Visiteur : ce qu'un compte ajoute, juste dessous. */}
       {/* 25/11 : la ligne « 10 questions offertes, sans compte » est retirée (Frédéric : « enlève »). */}
       {cas === "visiteur" ? (
@@ -505,9 +531,10 @@ export default function NuageAccueil() {
         </div>
       ) : null}
 
-      {/* 25/11 : « Parent ou prof ? » seulement pour le visiteur et le parent ;
-          un élève ou un prof connecté ne le voit plus (venu d'AccueilNuage). */}
-      {cas === "visiteur" || cas === "autre" ? (
+      {/* 25/11 : « Parent ou prof ? » seulement pour le parent connecté ; le
+          visiteur a les deux bulles Prof / Parent sous le nuage, un élève ou un
+          prof connecté ne le voit pas (venu d'AccueilNuage). */}
+      {cas === "autre" ? (
         <p className="mt-3 text-center">
           <Link
             href="#parents-profs"
