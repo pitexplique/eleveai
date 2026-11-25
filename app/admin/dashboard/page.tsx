@@ -13,6 +13,7 @@ import AdminContactMessagesClient from "./AdminContactMessagesClient";
 import MaintenanceChecklist from "./MaintenanceChecklist";
 import PhotoCoursClient from "./PhotoCoursClient";
 import AdminCodeOublieClient from "./AdminCodeOublieClient";
+import AdminProfsClient from "./AdminProfsClient";
 
 export default async function AdminDashboardPage() {
   const cookieStore = await cookies();
@@ -198,6 +199,9 @@ export default async function AdminDashboardPage() {
             en badge « ▶ Vidéo » à côté de la fiche.
           </p>
         </Link>
+
+        {/* 25/11 : valider un prof inscrit avec une adresse non académique. */}
+        <AdminProfsClient />
 
         <AdminCodeOublieClient />
 
