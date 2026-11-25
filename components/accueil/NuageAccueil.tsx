@@ -246,13 +246,9 @@ export default function NuageAccueil() {
   const lienCoachEleve = classe ? `/coach-ia/maths?classe=${encodeURIComponent(classe)}` : "/coach-ia/maths";
 
   const bulleCentre =
-    cas === "eleve" ? (
-      <>
-        Je te suis
-        <br />
-        et je t&apos;accompagne !
-      </>
-    ) : cas === "prof" ? (
+    // 25/11 (Frédéric) : « Je te suis et je t'accompagne » trop long →
+    // l'élève a aussi « Que veux-tu faire ? », sous « Mon univers ».
+    cas === "prof" ? (
       <>
         Que fait-on
         <br />
