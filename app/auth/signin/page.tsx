@@ -159,6 +159,13 @@ export default function SignInPage() {
   const [classe, setClasse] = useState("");
   const [accepteCgv, setAccepteCgv] = useState(false);
   const [accepteNewsletter, setAccepteNewsletter] = useState(false);
+  // 25/11/2026 — UN SEUL REGISTRE PAR PARCOURS (parcours élève du 24/11 :
+  // « vous » et « tu » mélangés sur le même écran). Un élève lit « tu »
+  // partout ; un prof, un parent, un adulte lit « vous » partout. Avant
+  // l'étape profil, le type vient de l'adresse (?type=eleve, ?mode=eleve) ;
+  // à l'étape profil, tout bascule dès qu'on clique « Élève ».
+  const tu = typeUtilisateur === "eleve";
+  const T = (formeTu: string, formeVous: string) => (tu ? formeTu : formeVous);
 
   // ---------------------------
   // UI feedback
@@ -196,6 +203,9 @@ export default function SignInPage() {
     if (t === "prof" || t === "parent" || t === "eleve" || t === "perso") {
       setTypeUtilisateur(t);
     }
+    // Les boutons « Se connecter » des pages élèves (tableau de bord élève,
+    // espace parents, atelier vidéo) envoient ?mode=eleve : on parle au « tu ».
+    if (!t && params.get("mode") === "eleve") setTypeUtilisateur("eleve");
     if (params.get("from") === "kit") {
       setFromKit(true);
       // Le kit de survie s'adresse aux lycéens : profil élève pré-sélectionné.
@@ -356,7 +366,7 @@ export default function SignInPage() {
 
     const emailToUse = normalizeEmail(email);
     if (!emailToUse) {
-      setErrorMsg("Merci de renseigner votre email.");
+      setErrorMsg(T("Écris ton adresse email.", "Merci de renseigner votre email."));
       return;
     }
 
@@ -382,14 +392,14 @@ export default function SignInPage() {
         setErrorMsg(
           process.env.NODE_ENV === "development"
             ? `Erreur Supabase: ${error.message}`
-            : "Impossible d'envoyer le code. Vérifiez votre adresse email."
+            : T("Impossible d'envoyer le code. Vérifie ton adresse email.", "Impossible d'envoyer le code. Vérifiez votre adresse email.")
         );
         return;
       }
 
       setEmailSent(true);
       setSentEmail(emailToUse);
-      setFeedback("Un code vient d’être envoyé. Entrez-le ci-dessous.");
+      setFeedback(T("Un code vient d’être envoyé. Tape-le ci-dessous.", "Un code vient d’être envoyé. Entrez-le ci-dessous."));
       setCooldown(RESEND_COOLDOWN_SECONDS);
     } catch (err: any) {
       console.error("Unexpected sign-in error:", err);
@@ -426,16 +436,16 @@ export default function SignInPage() {
         setErrorMsg(
           process.env.NODE_ENV === "development"
             ? `Erreur Supabase: ${error.message}`
-            : "Impossible de renvoyer le code. Réessayez."
+            : T("Impossible de renvoyer le code. Réessaie.", "Impossible de renvoyer le code. Réessayez.")
         );
         return;
       }
 
-      setFeedback("Code renvoyé. Vérifiez votre boîte mail (et le spam).");
+      setFeedback(T("Code renvoyé. Regarde ta boîte mail (et les spams).", "Code renvoyé. Vérifiez votre boîte mail (et le spam)."));
       setCooldown(RESEND_COOLDOWN_SECONDS);
     } catch (err: any) {
       console.error("Unexpected resend error:", err);
-      setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
+      setErrorMsg(err?.message || T("Erreur inattendue. Réessaie.", "Erreur inattendue. Réessayez."));
     } finally {
       setLoading(false);
     }
@@ -450,7 +460,7 @@ export default function SignInPage() {
     setErrorMsg(null);
 
     if (!emailSent || !sentEmail) {
-      setErrorMsg("Envoyez d’abord un code à votre email.");
+      setErrorMsg(T("Demande d’abord un code.", "Envoyez d’abord un code à votre email."));
       return;
     }
 
@@ -471,7 +481,7 @@ export default function SignInPage() {
       if (error || !data?.session) {
         logSupabaseError("verifyOtp error:", error);
         setErrorMsg(
-          error?.message || "Code invalide ou expiré. Demandez un nouveau code."
+          error?.message || T("Code faux ou trop vieux. Demande un nouveau code.", "Code invalide ou expiré. Demandez un nouveau code.")
         );
         return;
       }
@@ -485,7 +495,7 @@ export default function SignInPage() {
 
       if (profileError) {
         logSupabaseError("users_email lookup error:", profileError);
-        setErrorMsg("Erreur de lecture du profil. Réessayez.");
+        setErrorMsg(T("Erreur de lecture du profil. Réessaie.", "Erreur de lecture du profil. Réessayez."));
         return;
       }
 
@@ -501,7 +511,7 @@ export default function SignInPage() {
         });
         if (verifiedEmail === ADMIN_EMAIL) setTypeUtilisateur("admin");
         setNeedsProfile(true);
-        setFeedback("Dernière étape : complète ton profil.");
+        setFeedback(T("Dernière étape : complète ton profil.", "Dernière étape : complétez votre profil."));
         return;
       }
 
@@ -516,7 +526,7 @@ export default function SignInPage() {
       );
     } catch (err: any) {
       console.error("Unexpected OTP verify error:", err);
-      setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
+      setErrorMsg(err?.message || T("Erreur inattendue. Réessaie.", "Erreur inattendue. Réessayez."));
     } finally {
       setLoading(false);
     }
@@ -539,7 +549,7 @@ export default function SignInPage() {
 
     if (profileError) {
       logSupabaseError("users_email lookup error:", profileError);
-      setErrorMsg("Erreur de lecture du profil. Réessayez.");
+      setErrorMsg(T("Erreur de lecture du profil. Réessaie.", "Erreur de lecture du profil. Réessayez."));
       return;
     }
 
@@ -552,7 +562,7 @@ export default function SignInPage() {
       });
       if (verifiedEmail === ADMIN_EMAIL) setTypeUtilisateur("admin");
       setNeedsProfile(true);
-      setFeedback("Dernière étape : complète ton profil.");
+      setFeedback(T("Dernière étape : complète ton profil.", "Dernière étape : complétez votre profil."));
       return;
     }
 
@@ -581,7 +591,7 @@ export default function SignInPage() {
 
     const emailToUse = normalizeEmail(email);
     if (!emailToUse) {
-      setErrorMsg("Merci de renseigner votre email.");
+      setErrorMsg(T("Écris ton adresse email.", "Merci de renseigner votre email."));
       return;
     }
     if (!/^[0-9]{6}$/.test(pin)) {
@@ -595,13 +605,13 @@ export default function SignInPage() {
       if (etapePin) {
         if (pin !== pinChoisi) {
           setPin("");
-          setErrorMsg("Les deux codes ne sont pas pareils. Retapez-le.");
+          setErrorMsg(T("Les deux codes ne sont pas pareils. Retape-le.", "Les deux codes ne sont pas pareils. Retapez-le."));
           return;
         }
         const r = await appelCode6(emailToUse, pin, true);
         if (!r?.ok || r.etat !== "pret") {
           setPin("");
-          setErrorMsg(r?.error ?? "Erreur inattendue. Réessayez.");
+          setErrorMsg(r?.error ?? T("Erreur inattendue. Réessaie.", "Erreur inattendue. Réessayez."));
           return;
         }
       }
@@ -621,14 +631,14 @@ export default function SignInPage() {
       if (error?.status === 429) {
         setPin("");
         setErrorMsg(
-          "Trop de connexions depuis ce réseau (collège, wifi partagé). Réessayez dans quelques minutes."
+          T("Trop de connexions depuis ce réseau (collège, wifi partagé). Réessaie dans quelques minutes.", "Trop de connexions depuis ce réseau (collège, wifi partagé). Réessayez dans quelques minutes.")
         );
         return;
       }
 
       if (etapePin) {
         logSupabaseError("signInWithPassword after set error:", error);
-        setErrorMsg("Code enregistré, mais la connexion a échoué. Réessayez.");
+        setErrorMsg(T("Code enregistré, mais la connexion a échoué. Réessaie.", "Code enregistré, mais la connexion a échoué. Réessayez."));
         return;
       }
 
@@ -637,7 +647,7 @@ export default function SignInPage() {
       const r = await appelCode6(emailToUse, pin, false);
       if (!r?.ok) {
         setPin("");
-        setErrorMsg(r?.error ?? "Erreur inattendue. Réessayez.");
+        setErrorMsg(r?.error ?? T("Erreur inattendue. Réessaie.", "Erreur inattendue. Réessayez."));
         return;
       }
       if (r.etat === "choisir" || r.etat === "nouveau") {
@@ -650,7 +660,7 @@ export default function SignInPage() {
       setErrorMsg("Email ou code incorrect.");
     } catch (err: any) {
       console.error("Unexpected PIN sign-in error:", err);
-      setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
+      setErrorMsg(err?.message || T("Erreur inattendue. Réessaie.", "Erreur inattendue. Réessayez."));
     } finally {
       setLoading(false);
     }
@@ -664,7 +674,7 @@ export default function SignInPage() {
     if (!choisirPin) return;
 
     if (!/^[0-9]{6}$/.test(pin)) {
-      setErrorMsg("Choisissez 6 chiffres.");
+      setErrorMsg(T("Choisis 6 chiffres.", "Choisissez 6 chiffres."));
       return;
     }
 
@@ -680,7 +690,7 @@ export default function SignInPage() {
         setErrorMsg(
           process.env.NODE_ENV === "development"
             ? `Erreur Supabase: ${error.message}`
-            : "Ce code n'a pas été accepté. Essayez 6 autres chiffres."
+            : T("Ce code n'a pas été accepté. Essaie 6 autres chiffres.", "Ce code n'a pas été accepté. Essayez 6 autres chiffres.")
         );
         return;
       }
@@ -688,7 +698,7 @@ export default function SignInPage() {
       routeEmailProfile(choisirPin.profile, choisirPin.token);
     } catch (err: any) {
       console.error("Unexpected set PIN error:", err);
-      setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
+      setErrorMsg(err?.message || T("Erreur inattendue. Réessaie.", "Erreur inattendue. Réessayez."));
     } finally {
       setLoading(false);
     }
@@ -703,14 +713,14 @@ export default function SignInPage() {
     setErrorMsg(null);
 
     if (!pendingAuth) {
-      setErrorMsg("Session expirée. Recommencez la connexion.");
+      setErrorMsg(T("Session expirée. Recommence la connexion.", "Session expirée. Recommencez la connexion."));
       resetEmailFlow();
       return;
     }
 
     const nomToUse = nom.trim();
     if (!nomToUse) {
-      setErrorMsg("Merci de renseigner votre nom.");
+      setErrorMsg(T("Écris ton prénom.", "Merci de renseigner votre nom."));
       return;
     }
     if (typeUtilisateur === "eleve" && !classe) {
@@ -718,7 +728,7 @@ export default function SignInPage() {
       return;
     }
     if (!accepteCgv) {
-      setErrorMsg("Vous devez accepter les CGV pour créer votre compte.");
+      setErrorMsg(T("Coche la case : un adulte doit être d’accord.", "Vous devez accepter les CGV pour créer votre compte."));
       return;
     }
 
@@ -768,7 +778,7 @@ export default function SignInPage() {
       routeEmailProfile(profile as UserEmailProfile, sessionToken, true);
     } catch (err: any) {
       console.error("Unexpected profile submit error:", err);
-      setErrorMsg(err?.message || "Erreur inattendue. Réessayez.");
+      setErrorMsg(err?.message || T("Erreur inattendue. Réessaie.", "Erreur inattendue. Réessayez."));
     } finally {
       setLoading(false);
     }
@@ -809,7 +819,7 @@ export default function SignInPage() {
       if (!res.ok || !data?.ok || !data?.session) {
         setErrorEtab(
           data?.error ??
-            "Codes invalides ou compte inactif. Vérifiez vos informations."
+            "Codes faux ou compte inactif. Vérifie tes codes."
         );
         return;
       }
@@ -838,7 +848,7 @@ export default function SignInPage() {
       router.push(destination ?? "/accueil");
     } catch (err: any) {
       console.error("Unexpected etablissement login error:", err);
-      setErrorEtab(err?.message || "Erreur inattendue. Réessayez.");
+      setErrorEtab(err?.message || "Erreur inattendue. Réessaie.");
     } finally {
       setLoadingEtab(false);
     }
@@ -919,11 +929,13 @@ export default function SignInPage() {
                 {modeInscription ? (
                   <>
                     <p className="text-sm font-bold text-slate-900">
-                      Pour vous inscrire, votre email suffit 👇
+                      {T("Pour t’inscrire, ton email suffit 👇", "Pour vous inscrire, votre email suffit 👇")}
                     </p>
                     <p className="mt-0.5 text-xs text-slate-600">
-                      Puis vous choisissez votre code à 6 chiffres, sans
-                      attendre de mail.
+                      {T(
+                        "Puis tu choisis ton code à 6 chiffres, sans attendre de mail.",
+                        "Puis vous choisissez votre code à 6 chiffres, sans attendre de mail."
+                      )}
                     </p>
                   </>
                 ) : (
@@ -932,9 +944,10 @@ export default function SignInPage() {
                       Inscription et connexion, au même endroit 👇
                     </p>
                     <p className="mt-0.5 text-xs text-slate-600">
-                      Déjà un compte : votre email, puis votre code à 6 chiffres.
-                      Première fois : vous choisissez votre code à 6 chiffres, sans
-                      attendre de mail.
+                      {T(
+                        "Déjà un compte : ton email, puis ton code à 6 chiffres. Première fois : tu choisis ton code à 6 chiffres, sans attendre de mail.",
+                        "Déjà un compte : votre email, puis votre code à 6 chiffres. Première fois : vous choisissez votre code à 6 chiffres, sans attendre de mail."
+                      )}
                     </p>
                   </>
                 )}
@@ -945,7 +958,7 @@ export default function SignInPage() {
               </h1>
 
               <p className="mt-1 text-sm text-slate-600">
-                Votre email, puis votre code à 6 chiffres.
+                {T("Ton email, puis ton code à 6 chiffres.", "Votre email, puis votre code à 6 chiffres.")}
               </p>
 
               {/* EMAIL */}
@@ -955,7 +968,7 @@ export default function SignInPage() {
                   e.preventDefault();
                   setFeedback(null);
                   if (!normalizeEmail(email)) {
-                    setErrorMsg("Merci de renseigner votre email.");
+                    setErrorMsg(T("Écris ton adresse email.", "Merci de renseigner votre email."));
                     return;
                   }
                   setErrorMsg(null);
@@ -974,7 +987,7 @@ export default function SignInPage() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="votre.email@exemple.fr"
+                    placeholder={T("ton.email@exemple.fr", "votre.email@exemple.fr")}
                     disabled={emailSent || loading || modePin}
                     className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:bg-slate-100"
                   />
@@ -1008,22 +1021,25 @@ export default function SignInPage() {
                 >
                   <p className="text-xs font-semibold text-emerald-800 uppercase">
                     {etapePin === "nouveau"
-                      ? "Nouveau compte : retapez votre code"
+                      ? T("Nouveau compte : retape ton code", "Nouveau compte : retapez votre code")
                       : etapePin === "choisir"
-                        ? "Confirmez votre nouveau code"
+                        ? T("Confirme ton nouveau code", "Confirmez votre nouveau code")
                         : "Mon code (6 chiffres)"}
                   </p>
                   {etapePin === "nouveau" && (
                     <p className="text-[11px] text-emerald-700">
-                      Pas encore de compte pour cette adresse. Retapez le code
-                      que vous venez de choisir : il servira à chaque connexion.
+                      {T(
+                        "Pas encore de compte pour cette adresse. Retape le code que tu viens de choisir : il servira à chaque connexion.",
+                        "Pas encore de compte pour cette adresse. Retapez le code que vous venez de choisir : il servira à chaque connexion."
+                      )}
                     </p>
                   )}
                   {etapePin === "choisir" && (
                     <p className="text-[11px] text-emerald-700">
-                      Votre compte n’a pas encore de code à 6 chiffres. Retapez
-                      celui que vous venez de choisir : il servira à chaque
-                      connexion.
+                      {T(
+                        "Ton compte n’a pas encore de code à 6 chiffres. Retape celui que tu viens de choisir : il servira à chaque connexion.",
+                        "Votre compte n’a pas encore de code à 6 chiffres. Retapez celui que vous venez de choisir : il servira à chaque connexion."
+                      )}
                     </p>
                   )}
                   <PointsCode n={pin.length} onEffacer={() => setPin("")} />
@@ -1059,17 +1075,21 @@ export default function SignInPage() {
                     <div className="mt-2 space-y-2">
                       <p>
                         <span className="font-semibold">Identifiant oublié :</span>{" "}
-                        c’est votre adresse email. Élève d’un établissement :
-                        demandez vos codes à votre professeur.
+                        {T(
+                          "c’est ton adresse email. Élève d’un établissement : demande tes codes à ton professeur.",
+                          "c’est votre adresse email. Élève d’un établissement : demandez vos codes à votre professeur."
+                        )}
                       </p>
                       <p>
                         <span className="font-semibold">Code oublié :</span>{" "}
-                        écrivez-nous depuis la page{" "}
+                        {T("écris-nous depuis la page", "écrivez-nous depuis la page")}{" "}
                         <Link href="/contact" className="font-semibold underline">
                           Contact
                         </Link>
-                        , avec votre adresse email. On remet votre code à zéro,
-                        puis vous en choisissez un nouveau.
+                        {T(
+                          ", avec ton adresse email. On remet ton code à zéro, puis tu en choisis un nouveau.",
+                          ", avec votre adresse email. On remet votre code à zéro, puis vous en choisissez un nouveau."
+                        )}
                       </p>
                     </div>
                   </details>
@@ -1092,11 +1112,13 @@ export default function SignInPage() {
                   className="mt-4 space-y-3 rounded-lg bg-emerald-50 p-3 border border-emerald-200"
                 >
                   <p className="text-xs font-semibold text-emerald-800 uppercase">
-                    Choisissez votre code à 6 chiffres
+                    {T("Choisis ton code à 6 chiffres", "Choisissez votre code à 6 chiffres")}
                   </p>
                   <p className="text-[11px] text-emerald-700">
-                    La prochaine fois : votre email, puis ce code. Plus besoin
-                    d’attendre le mail.
+                    {T(
+                      "La prochaine fois : ton email, puis ce code. Plus besoin d’attendre le mail.",
+                      "La prochaine fois : votre email, puis ce code. Plus besoin d’attendre le mail."
+                    )}
                   </p>
                   <PointsCode n={pin.length} onEffacer={() => setPin("")} />
                   <ClavierCode
@@ -1208,7 +1230,7 @@ export default function SignInPage() {
                   className="mt-4 space-y-3 rounded-lg bg-emerald-50 p-3 border border-emerald-200"
                 >
                   <p className="text-xs font-semibold text-emerald-800 uppercase">
-                    Bienvenue ! Complète ton profil
+                    {T("Bienvenue ! Complète ton profil", "Bienvenue ! Complétez votre profil")}
                   </p>
                   {pendingAuth?.email && (
                     <p className="text-[11px] text-emerald-700">
@@ -1245,7 +1267,12 @@ export default function SignInPage() {
                             <button
                               key={option.value}
                               type="button"
-                              onClick={() => setTypeUtilisateur(option.value)}
+                              onClick={() => {
+                                setTypeUtilisateur(option.value);
+                                // Un message écrit au « tu » ne reste pas
+                                // affiché sous un profil au « vous ».
+                                setErrorMsg(null);
+                              }}
                               disabled={loading}
                               className={`rounded-lg border px-3 py-2 text-left text-xs font-semibold transition disabled:cursor-not-allowed disabled:opacity-60 ${
                                 active
@@ -1304,13 +1331,29 @@ export default function SignInPage() {
                       disabled={loading}
                       className="mt-0.5 h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
                     />
-                    <span>
-                      J&apos;accepte les{" "}
-                      <Link href="/cgu" className="text-emerald-600 underline">
-                        conditions générales de vente
-                      </Link>{" "}
-                      d&apos;EleveAI.
-                    </span>
+                    {/* 25/11/2026 — UN ENFANT N'ACCEPTE PAS DES « CGV » (parcours
+                        élève du 24/11). Avant 15 ans, l'accord d'un parent est
+                        exigé pour créer un compte en ligne (RGPD art. 8, loi
+                        Informatique et libertés art. 45) : la case reste donc
+                        OBLIGATOIRE, mais dit ce qu'elle veut dire, en mots
+                        d'enfant. Elle remplit la même colonne accepte_cgv. */}
+                    {tu ? (
+                      <span>
+                        Un adulte (parent ou prof) est d&apos;accord pour que je
+                        crée mon compte.{" "}
+                        <Link href="/cgu" className="text-emerald-600 underline">
+                          Les règles du site
+                        </Link>
+                      </span>
+                    ) : (
+                      <span>
+                        J&apos;accepte les{" "}
+                        <Link href="/cgu" className="text-emerald-600 underline">
+                          conditions générales d&apos;utilisation
+                        </Link>{" "}
+                        d&apos;EleveAI.
+                      </span>
+                    )}
                   </label>
 
                   <label className="flex items-start gap-2 text-xs text-slate-700">
@@ -1322,7 +1365,10 @@ export default function SignInPage() {
                       className="mt-0.5 h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
                     />
                     <span>
-                      J&apos;accepte de recevoir des emails sur les nouveautés.
+                      {T(
+                        "Je veux recevoir des emails sur les nouveautés.",
+                        "J'accepte de recevoir des emails sur les nouveautés."
+                      )}
                     </span>
                   </label>
 
@@ -1344,10 +1390,15 @@ export default function SignInPage() {
               )}
 
               {/* ✅ CONNEXION ÉTABLISSEMENT (sous la partie email) — en mode
-                  CONNEXION seulement ; à l'inscription, un simple renvoi. */}
-              {modeInscription ? (
+                  CONNEXION seulement ; à l'inscription, un simple renvoi.
+                  ⛔ 25/11/2026 : AU PREMIER ÉCRAN SEULEMENT (la saisie de
+                  l'email). Pendant le code et l'étape profil, il faisait croire
+                  à un second formulaire à remplir (parcours élève du 24/11).
+                  « Changer d'email » le fait revenir. Il s'adresse aux élèves :
+                  toujours au « tu ». */}
+              {modePin || emailSent || needsProfile || choisirPin ? null : modeInscription ? (
                 <p className="mt-5 border-t border-slate-200 pt-4 text-xs text-slate-600">
-                  Élève d’un établissement, avec des codes donnés par votre
+                  Élève d’un établissement, avec des codes donnés par ton
                   professeur ?{" "}
                   <button
                     type="button"
@@ -1363,7 +1414,7 @@ export default function SignInPage() {
                   Connexion établissement
                 </h2>
                 <p className="mt-1 text-xs text-slate-600">
-                  Saisissez le code établissement et votre code utilisateur.
+                  Tape le code établissement et ton code utilisateur.
                 </p>
 
                 <form onSubmit={handleEtablissementSubmit} className="mt-3 space-y-3">
