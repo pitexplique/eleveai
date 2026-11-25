@@ -9,7 +9,6 @@
 // Prof à droite) ; 3. Choisis ta classe ; 4. une ligne sur Frédéric.
 
 import Image from "next/image";
-import Link from "next/link";
 import { Roboto_Slab } from "next/font/google";
 import { CollinesAccueil } from "@/components/accueil/dessins/PaysageAccueil";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
@@ -34,17 +33,9 @@ export default function AccueilNuage() {
             Progressons ensemble en maths, <span className="whitespace-nowrap text-sky-700">chaque jour.</span>
           </h1>
           <div className="mt-5">
+            {/* « Parent ou prof ? Par ici ↓ » est dans le nuage (25/11) : caché pour un élève ou un prof connecté. */}
             <NuageAccueil />
           </div>
-          <p className="mt-3 text-center">
-            <Link
-              href="#parents-profs"
-              className="inline-block whitespace-nowrap rounded-full bg-white/90 px-5 py-2 text-base font-black text-violet-800 shadow ring-1 ring-violet-200 hover:ring-violet-400"
-            >
-              {/* 25/11 : plus court, pour tenir sur une ligne en 375 px (la flèche tombait sur le dessin). */}
-              Parent ou prof ? Par ici ↓
-            </Link>
-          </p>
         </div>
       </section>
 

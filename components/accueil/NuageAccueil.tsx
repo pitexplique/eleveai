@@ -291,6 +291,13 @@ export default function NuageAccueil() {
       <div className="absolute bottom-0 left-[34%] h-[50%] w-[34%] rounded-full bg-white" />
       <div className="absolute bottom-[2%] right-[12%] h-[48%] w-[38%] rounded-full bg-white" />
       <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+        {/* 25/11 (Frédéric) : « Mon univers » au-dessus de Ti Margo, pour l'élève
+            connecté seulement ; le visiteur n'a pas encore le sien. */}
+        {cas === "eleve" ? (
+          <span className={`font-black uppercase tracking-wide text-teal-700 ${petit ? "text-xs" : "text-sm lg:text-base"}`}>
+            ✨ Mon univers
+          </span>
+        ) : null}
         <Image
           src={IMAGE_HUMEUR[conseil?.humeur ?? "salut"]}
           alt="Ti Margo"
@@ -499,6 +506,20 @@ export default function NuageAccueil() {
           </div>
           <p className="mt-2 text-center text-sm font-bold text-slate-600">Ton prof t&apos;a donné un code ? Clique sur « Se connecter ».</p>
         </div>
+      ) : null}
+
+      {/* 25/11 : « Parent ou prof ? » seulement pour le visiteur et le parent ;
+          un élève ou un prof connecté ne le voit plus (venu d'AccueilNuage). */}
+      {cas === "visiteur" || cas === "autre" ? (
+        <p className="mt-3 text-center">
+          <Link
+            href="#parents-profs"
+            className="inline-block whitespace-nowrap rounded-full bg-white/90 px-5 py-2 text-base font-black text-violet-800 shadow ring-1 ring-violet-200 hover:ring-violet-400"
+          >
+            {/* Plus court, pour tenir sur une ligne en 375 px (la flèche tombait sur le dessin). */}
+            Parent ou prof ? Par ici ↓
+          </Link>
+        </p>
       ) : null}
     </div>
   );
