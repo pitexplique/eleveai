@@ -32,6 +32,10 @@
 // ⛔ 31/10/2026 — « en préparation » RETIRÉ (Frédéric : « tu enlèves "en
 // préparation" tant que je n'ai pas le feu vert du rectorat ») : la visio
 // payante attend l'accord écrit du cumul. À remettre avec ce feu vert.
+// ✅ 02/11 : le rectorat dit qu'aucune autorisation n'est nécessaire.
+// ⭐ 25/11/2026 : la bande annonce le STAGE INTENSIF DE JANVIER (4 → 22
+// janvier 2027, Hôtel Terre-Sainte ou à distance, 10 places par groupe),
+// voir app/formation-crpe/page.tsx.
 
 import Image from "next/image";
 import Link from "next/link";
@@ -82,11 +86,11 @@ export default function BanniereCrpe({ place }: { place: "haut" | "colonnes" }) 
               {/* ⚠️ Deux longueurs : la phrase entière doublerait la hauteur sur
                   un téléphone. */}
               <span className="sm:hidden">
-                Deux tests pour se situer, un suivi au quotidien.
+                Stage de maths du 4 au 22 janvier, 10 places.
               </span>
               <span className="hidden sm:inline">
-                Deux tests pour se situer en maths et en orthographe (personne ne
-                paie), et un suivi au quotidien.
+                Stage intensif de maths du 4 au 22 janvier, à Saint-Pierre ou à
+                distance : 10 places par groupe, après un test de 15 minutes.
               </span>
             </p>
           </div>
@@ -109,11 +113,11 @@ export default function BanniereCrpe({ place }: { place: "haut" | "colonnes" }) 
             </Link>
             <Link
               prefetch={false}
-              href="/formation-crpe?from=accueil#suivi"
-              onClick={() => track("accueil_bande_crpe", { lien: "suivi" })}
+              href="/formation-crpe?from=accueil"
+              onClick={() => track("accueil_bande_crpe", { lien: "stage" })}
               className="rounded-full bg-white px-3 py-1 text-xs font-black text-[#041B33] ring-1 ring-slate-300 transition hover:bg-slate-50"
             >
-              Suivi quotidien →
+              Le stage de janvier →
             </Link>
           </div>
         </div>
