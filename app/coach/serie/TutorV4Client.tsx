@@ -110,6 +110,7 @@ import ReactionDessin, {
   type TypeReaction,
 } from "./ReactionDessin";
 import PaveNumerique from "./PaveNumerique";
+import { clavierReponse } from "@/lib/tutor-v4/paveNumerique";
 import BoutonVideoCompetence from "./BoutonVideoCompetence";
 
 const CYCLE_2_COACH = new Set(["cp", "ce1", "ce2"]);
@@ -703,6 +704,8 @@ export default function TutorV4Page() {
   // Mode « affichage classe » : agrandit énoncé + réponses pour la projection
   // (plus besoin de zoomer le navigateur).
   const [classBoard, setClassBoard] = useState(false);
+  // ⭐ 25/11/2026 — téléphone : outils secondaires repliés derrière « ⋯ ».
+  const [outilsOuverts, setOutilsOuverts] = useState(false);
   // Micro-compétences repliées : on n'affiche le détail qu'au clic.
   const [expandedMicroId, setExpandedMicroId] = useState<string | null>(null);
   /* ⭐ 30/10/2026 — LES MICROS DU CONTRÔLE. Frédéric : « lors du contrôle j'ai
@@ -2409,25 +2412,30 @@ function handleInputKeyDown(
               Classe : 5e · Mode simple »), elle ne dit rien de la notion, et
               elle coûtait 60 px sur les 500 d'un aperçu. Ce sont les commandes
               du tutor, pas l'exercice — et l'aperçu promet l'exercice. */}
+          {/* ⭐ 25/11/2026 — SUR TÉLÉPHONE, UNE LIGNE : Retour, Coach sonore,
+              « ⋯ » (parcours élève du 24/11 : il fallait défiler pour voir la
+              question). « ⋯ » déplie Classe, Mode simple, Affichage classe, les
+              notions et le bandeau Mission. Les `order-*` ne jouent que sous
+              640 px : sur PC l'ordre et l'affichage restent ceux d'avant. */}
           <section
-            className="flex flex-col gap-2 sm:flex-row sm:items-center"
+            className="flex flex-wrap items-center gap-2 sm:flex-nowrap"
             data-hors-apercu=""
           >
             <button
               onClick={retourCoach}
               className="flex items-center justify-center rounded-2xl bg-orange-500 px-4 py-2.5 text-sm font-black text-white shadow hover:bg-orange-600"
             >
-              ← Retour Coach
+              ← Retour<span className="hidden sm:inline">&nbsp;Coach</span>
             </button>
 
-            <div className="rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-center text-sm font-black text-slate-800 shadow-sm">
+            <div className={`${outilsOuverts ? "" : "hidden"} order-3 rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-center text-sm font-black text-slate-800 shadow-sm sm:order-none sm:block`}>
               Classe : {classe}
             </div>
 
             <button
               type="button"
               onClick={() => choisirMode("simple")}
-              className="rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-center text-sm font-black text-slate-800 shadow-sm hover:bg-slate-50"
+              className={`${outilsOuverts ? "" : "hidden"} order-3 rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-center text-sm font-black text-slate-800 shadow-sm hover:bg-slate-50 sm:order-none sm:block`}
             >
               Mode simple
             </button>
@@ -2437,7 +2445,7 @@ function handleInputKeyDown(
               type="button"
               onClick={() => setClassBoard((v) => !v)}
               aria-pressed={classBoard}
-              className={`rounded-2xl border px-4 py-2.5 text-center text-sm font-black shadow-sm ${
+              className={`${outilsOuverts ? "" : "hidden"} order-3 rounded-2xl border px-4 py-2.5 text-center text-sm font-black shadow-sm sm:order-none sm:block ${
                 classBoard
                   ? "border-indigo-500 bg-indigo-600 text-white hover:bg-indigo-500"
                   : "border-slate-200 bg-white text-slate-800 hover:bg-slate-50"
@@ -2452,7 +2460,7 @@ function handleInputKeyDown(
               onClick={toggleAutoRead}
               aria-pressed={autoRead}
               title="Le coach lit à voix haute les questions, les réponses possibles et les corrections"
-              className={`rounded-2xl border px-4 py-2.5 text-center text-sm font-black shadow-sm ${
+              className={`order-1 ml-auto rounded-2xl border sm:order-none sm:ml-0 px-4 py-2.5 text-center text-sm font-black shadow-sm ${
                 autoRead
                   ? "border-sky-600 bg-sky-600 text-white hover:bg-sky-500"
                   : "border-sky-300 bg-sky-50 text-sky-800 hover:bg-sky-100"
@@ -2463,7 +2471,21 @@ function handleInputKeyDown(
 
             {/* Navigation rapide entre notions : ◀ ▶ (ou flèches clavier),
                 et le changement démarre directement une mission. */}
-            <div className="flex min-w-0 flex-1 items-stretch gap-2">
+            <button
+              type="button"
+              onClick={() => setOutilsOuverts((v) => !v)}
+              aria-expanded={outilsOuverts}
+              aria-label={outilsOuverts ? "Masquer les autres outils" : "Autres outils : mode, affichage, notions"}
+              className={`order-2 rounded-2xl border px-4 py-2.5 text-sm font-black shadow-sm sm:hidden ${
+                outilsOuverts
+                  ? "border-slate-700 bg-slate-800 text-white"
+                  : "border-slate-200 bg-white text-slate-800 hover:bg-slate-50"
+              }`}
+            >
+              <span aria-hidden="true" className="inline-block min-w-[1.25rem] text-lg leading-5">{outilsOuverts ? "✕" : "⋯"}</span>
+            </button>
+
+            <div className={`${outilsOuverts ? "flex" : "hidden"} order-3 w-full min-w-0 flex-none items-stretch gap-2 sm:order-none sm:flex sm:w-auto sm:flex-1`}>
               <button
                 type="button"
                 onClick={() => shiftNotion(-1)}
@@ -2511,7 +2533,7 @@ function handleInputKeyDown(
               bogue du 27/08, quand le script cachait la balise `header` en bloc
               et échouait sur chaque notion sans dire pourquoi. */}
           <header
-            className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-lg sm:rounded-[28px]"
+            className={`${outilsOuverts ? "" : "hidden"} overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-lg sm:block sm:rounded-[28px]`}
             data-hors-apercu=""
           >
             <div className="bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-4 py-4 text-white sm:px-6">
@@ -2899,6 +2921,11 @@ function handleInputKeyDown(
                         value={answer}
                         onChange={(e) => setAnswer(e.target.value)}
                         onKeyDown={handleInputKeyDown}
+                        // Réponse = un nombre : clavier chiffres avec la virgule
+                        // (voir clavierReponse, parcours élève du 24/11).
+                        inputMode={clavierReponse(currentQuestion.expected[0])}
+                        enterKeyHint="send"
+                        autoComplete="off"
                         placeholder="Ta réponse..."
                         disabled={busy || wrongAnswerPanelOpen}
                         className={`w-full rounded-2xl border border-slate-300 bg-white px-4 py-4 text-slate-900 ${boardInputClass}`}

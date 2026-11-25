@@ -22,6 +22,7 @@ import type { TutorMode, TutorQuestionOption } from "@/lib/tutor-v4/types";
 import BoutonVideoCompetence from "./BoutonVideoCompetence";
 import AQuoiCaSert from "./AQuoiCaSert";
 import PaveNumerique from "./PaveNumerique";
+import { clavierReponse } from "@/lib/tutor-v4/paveNumerique";
 
 type TutorSimpleViewProps = {
   classe: Classe;
@@ -164,6 +165,9 @@ export default function TutorSimpleView({
   // Rendu serveur : pas de synthèse vocale ; on attend le client pour montrer
   // les 🔊 des choix (sinon décalage d'hydratation).
   const [speechOk, setSpeechOk] = useState(false);
+  // ⭐ 25/11/2026 — Sur téléphone, les outils secondaires (Mode complet,
+  // Affichage classe, notions, bandeau Mission) se replient derrière « ⋯ ».
+  const [outilsOuverts, setOutilsOuverts] = useState(false);
   useEffect(() => {
     setSpeechOk(typeof window !== "undefined" && "speechSynthesis" in window);
   }, []);
@@ -226,6 +230,26 @@ export default function TutorSimpleView({
     };
   }, [cleChoix, colonnesMax, classBoard, speechOk, wrongAnswerPanelOpen]);
 
+  /* ⭐ 08/10/2026 — « Lecture auto » devient « Coach sonore », et il se VOIT
+     même éteint (bleu, pas blanc parmi les blancs) : c'est la porte d'entrée
+     de l'élève qui lit mal. Rendu à deux endroits (ligne du téléphone, rangée
+     du PC), un seul visible à la fois. */
+  const boutonSonore = (
+    <button
+      type="button"
+      onClick={onToggleAutoRead}
+      aria-pressed={autoRead}
+      title="Le coach lit à voix haute les questions, les réponses possibles et les corrections"
+      className={`rounded-md border px-3 py-2 text-sm font-black shadow-sm ${
+        autoRead
+          ? "border-sky-600 bg-sky-600 text-white hover:bg-sky-500"
+          : "border-sky-300 bg-sky-50 text-sky-800 hover:bg-sky-100"
+      }`}
+    >
+      {autoRead ? "🔊 Coach sonore : on" : "🔊 Coach sonore"}
+    </button>
+  );
+
   return (
     <main
       /* ⭐ Voir TutorV4Client : le cycle 2 lit dans la police de l'école. */
@@ -257,20 +281,49 @@ export default function TutorSimpleView({
               ⚠️ Aucune ligne ajoutée : il rejoint la ligne du fil d'Ariane, qui
               se tronque (`truncate`, `min-w-0`) au lieu de passer à la ligne sur
               téléphone. La page ne bouge pas d'un pixel. */}
-          <div className="flex min-w-0 items-center gap-3">
+          {/* ⭐ 25/11/2026 — LA QUESTION DANS LE PREMIER ÉCRAN DU TÉLÉPHONE.
+              Parcours élève du 24/11 (375 px) : Retour, Mode complet,
+              Affichage classe, Coach sonore, la liste des notions et le
+              bandeau Mission poussaient la question à 600 px, le bouton
+              Valider sous l'écran. Sur téléphone, une seule ligne : Retour,
+              Coach sonore (la porte de l'élève qui lit mal) et « ⋯ », qui
+              déplie le reste. Rien n'est supprimé, et à partir de 640 px
+              (`sm:`) tout est affiché comme avant. */}
+          <div className="flex min-w-0 items-center gap-2 sm:gap-3">
             <button
               type="button"
               onClick={onBackCoach}
               className="shrink-0 rounded-md bg-orange-500 px-3 py-2 text-sm font-black text-white shadow-sm hover:bg-orange-600"
             >
-              ← Retour Coach
+              ← Retour<span className="hidden sm:inline">&nbsp;Coach</span>
             </button>
-            <div className="truncate text-sm font-semibold text-slate-600">
+            <div className="hidden truncate text-sm font-semibold text-slate-600 sm:block">
               {classLabel(classe)} &gt; {matiereLabel(matiere)} &gt; {notionLabel}
+            </div>
+            <div className="ml-auto flex shrink-0 items-center gap-2 sm:hidden">
+              {boutonSonore}
+              <button
+                type="button"
+                onClick={() => setOutilsOuverts((v) => !v)}
+                aria-expanded={outilsOuverts}
+                aria-label={outilsOuverts ? "Masquer les autres outils" : "Autres outils : mode, affichage, notions"}
+                className={`rounded-md border px-3 py-2 text-sm font-black shadow-sm ${
+                  outilsOuverts
+                    ? "border-slate-700 bg-slate-800 text-white"
+                    : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                }`}
+              >
+                <span aria-hidden="true" className="inline-block min-w-[1.25rem] text-lg leading-5">{outilsOuverts ? "✕" : "⋯"}</span>
+              </button>
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-2">
+          <div className={`${outilsOuverts ? "flex" : "hidden"} flex-wrap gap-2 sm:flex`}>
+            {outilsOuverts ? (
+              <div className="w-full truncate text-sm font-semibold text-slate-600 sm:hidden">
+                {classLabel(classe)} &gt; {matiereLabel(matiere)} &gt; {notionLabel}
+              </div>
+            ) : null}
             <button
               type="button"
               onClick={onSwitchToComplete}
@@ -290,29 +343,14 @@ export default function TutorSimpleView({
             >
               {classBoard ? "🔍 Affichage classe : on" : "🔍 Affichage classe"}
             </button>
-            <button
-              type="button"
-              onClick={onToggleAutoRead}
-              aria-pressed={autoRead}
-              title="Le coach lit à voix haute les questions, les réponses possibles et les corrections"
-              /* ⭐ 08/10/2026 — « Lecture auto » devient « Coach sonore », et
-                 il se VOIT même éteint (bleu, pas blanc parmi les blancs) :
-                 c'est la porte d'entrée de l'élève qui lit mal. */
-              className={`rounded-md border px-3 py-2 text-sm font-black shadow-sm ${
-                autoRead
-                  ? "border-sky-600 bg-sky-600 text-white hover:bg-sky-500"
-                  : "border-sky-300 bg-sky-50 text-sky-800 hover:bg-sky-100"
-              }`}
-            >
-              {autoRead ? "🔊 Coach sonore : on" : "🔊 Coach sonore"}
-            </button>
+            <div className="hidden sm:block">{boutonSonore}</div>
           </div>
         </header>
 
         {/* Navigation entre notions : ◀ ▶ (ou flèches clavier), le changement
             démarre directement une nouvelle question. */}
         {notionOptions.length > 0 ? (
-          <div className="mb-4 flex items-center gap-2">
+          <div className={`mb-4 ${outilsOuverts ? "flex" : "hidden"} items-center gap-2 sm:flex`}>
             <button
               type="button"
               onClick={onPrevNotion}
@@ -356,7 +394,7 @@ export default function TutorSimpleView({
             rien de la notion ; dans un panneau de 380 px, il coûtait un tiers de
             l'image à ce qu'on vient justement montrer — l'exercice. */}
         <div
-          className="mb-4 flex flex-wrap items-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-4 py-2 text-white shadow-sm"
+          className={`mb-4 ${outilsOuverts ? "flex" : "hidden"} flex-wrap items-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 via-sky-600 to-cyan-500 px-4 py-2 text-white shadow-sm sm:flex`}
           data-hors-apercu=""
         >
           <span className="rounded-full bg-white/20 px-3 py-1 text-[11px] font-bold tracking-wide">
@@ -598,6 +636,11 @@ export default function TutorSimpleView({
                       onKeyDown={onInputKeyDown}
                       disabled={busy}
                       aria-label="Ta réponse"
+                      // Réponse = un nombre : clavier chiffres avec la virgule
+                      // (voir clavierReponse, parcours élève du 24/11).
+                      inputMode={clavierReponse(currentQuestion.expected[0])}
+                      enterKeyHint="send"
+                      autoComplete="off"
                       className={`w-full max-w-sm rounded-md border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none focus:border-sky-500 ${boardShortInputClass}`}
                       placeholder="Réponse"
                     />

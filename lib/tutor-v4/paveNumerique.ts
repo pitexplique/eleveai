@@ -78,3 +78,17 @@ export function boutonsNombresDirects(classe: string, lecture: LecturePave | nul
   if (lecture.valeur >= 1 && lecture.valeur <= 10) return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return Array.from({ length: 21 }, (_, k) => k);
 }
+
+/**
+ * ⭐ 25/11/2026 — LE CLAVIER CHIFFRES AU COLLÈGE. Parcours élève du 24/11 : en 6e,
+ * une réponse à taper ouvrait le clavier complet du téléphone (lettres d'abord).
+ * Quand la réponse attendue est un simple nombre (sans unité), le champ ouvre le
+ * clavier chiffres AVEC la virgule (`inputMode="decimal"`), qu'elle soit décimale
+ * ou non : la virgule toujours là, le clavier ne trahit rien. Une unité
+ * (« 24 cm »), un signe moins, une fraction ou un mot : clavier complet, comme
+ * avant. Le pavé à l'écran reste au primaire (`saisie: "pave"`).
+ */
+export function clavierReponse(attendue: string | undefined): "decimal" | undefined {
+  const lecture = lirePave(attendue);
+  return lecture && !lecture.unite ? "decimal" : undefined;
+}
