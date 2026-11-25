@@ -444,6 +444,12 @@ export default function CoachIA() {
     );
   }, [searchParams, classes, defaultClasse, classeEleve, matiere]);
 
+  // Téléphone : la liste des classes repliée quand la classe est déjà connue
+  // (`?classe=` ou élève connecté). `null` = pas encore touché par l'élève.
+  const [classesOuvertes, setClassesOuvertes] = useState<boolean | null>(null);
+  const classeDejaConnue = Boolean(searchParams.get("classe") || classeEleve);
+  const listeClassesOuverte = classesOuvertes ?? !classeDejaConnue;
+
   const notionOptions = getNotionOptions(classe, matiere);
   const notionMicroMap = getNotionMicroMap(classe, matiere);
   const microLabels = getMicroLabelMap(classe, matiere);
@@ -644,6 +650,7 @@ export default function CoachIA() {
        quittée, pour voir aussi les allers-retours. */
     track("coach_classe", { matiere, classe: item, depuis: classe });
     setClasse(item);
+    setClassesOuvertes(false);
     const params = new URLSearchParams(searchParams.toString());
     params.set("classe", item);
     router.replace(`/coach-ia/${matiere}?${params.toString()}`, {
@@ -903,7 +910,34 @@ export default function CoachIA() {
                 sélecteur d'année STMG : les deux boutons qui changent ce que la
                 liste contient sont maintenant voisins, au lieu d'encadrer le
                 titre. */}
-            <div className="mt-5 space-y-2 md:hidden">
+            {/* ⭐ 25/11/2026 — Frédéric : « corrige le défaut par téléphone ».
+                Arrivé avec SA classe (lien de l'accueil `?classe=`, ou élève
+                connecté), l'élève voyait d'abord les quinze classes et devait
+                défiler pour trouver ses notions. La liste se replie alors en
+                une ligne « Ta classe : 4e · Changer » ; elle reste ouverte
+                pour qui n'a encore rien choisi. */}
+            {!listeClassesOuverte ? (
+              <div className="mt-5 flex items-center gap-2 md:hidden">
+                <span className="text-sm font-bold text-slate-600">Ta classe :</span>
+                <span
+                  className={[
+                    "rounded-full border px-4 py-2 text-sm font-bold",
+                    getClasseBadgeColor(classe, true),
+                  ].join(" ")}
+                >
+                  {getClasseNavLabel(classe)}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setClassesOuvertes(true)}
+                  aria-expanded={false}
+                  className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-bold text-slate-700 transition hover:bg-slate-100"
+                >
+                  Changer ▾
+                </button>
+              </div>
+            ) : null}
+            <div className={`mt-5 space-y-2 md:hidden ${listeClassesOuverte ? "" : "hidden"}`}>
               {groupes.map((groupe) => (
                 <div key={groupe.titre ?? "tous"} className="flex flex-wrap items-center gap-2">
                   {groupe.titre && (
