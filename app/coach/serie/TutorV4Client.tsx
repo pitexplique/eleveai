@@ -619,6 +619,53 @@ function nouvelIdSeance(): string {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
 }
 
+/* ⭐ 25/11/2026 — LA SÉANCE SURVIT AU RECHARGEMENT. Un téléphone verrouillé ou
+   une page rechargée remettait tout à zéro : Questions, Score et Points
+   repartaient de 0, et de petites notes (« 1/1 = 20 ») s'empilaient dans
+   « Mes notes ». La séance en cours est gardée dans l'onglet (sessionStorage,
+   30 min) avec son seance_id : startSession la reprend, et /api/resultats
+   remplace la même ligne au lieu d'en créer une autre. */
+const CLE_SEANCE_EN_COURS = "tutorv4-seance-en-cours";
+
+type SeanceEnCours = {
+  at: number;
+  cle: string;
+  seanceId: string;
+  microId: string | null;
+  results: boolean[];
+  earnedPoints: number;
+  possiblePoints: number;
+  elapsed: number;
+  microScores: Record<string, MicroScore>;
+  microStatuses: Record<string, MicroStatus>;
+  aReviser: RevisionFocus[];
+  entrainement: boolean;
+};
+
+function cleSeanceEnCours(classe: string, matiere: string, notion: string) {
+  return `${classe}|${matiere}|${notion}`;
+}
+
+function lireSeanceEnCours(): SeanceEnCours | null {
+  try {
+    const brut = sessionStorage.getItem(CLE_SEANCE_EN_COURS);
+    const seance = brut ? (JSON.parse(brut) as SeanceEnCours) : null;
+    if (!seance || !Array.isArray(seance.results) || !seance.seanceId) return null;
+    if (Date.now() - seance.at > DUREE_SEANCE_A_REPRENDRE_MS) return null;
+    return seance;
+  } catch {
+    return null;
+  }
+}
+
+function effacerSeanceEnCours() {
+  try {
+    sessionStorage.removeItem(CLE_SEANCE_EN_COURS);
+  } catch {
+    /* Stockage indisponible : rien à effacer. */
+  }
+}
+
 export default function TutorV4Page() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -670,6 +717,12 @@ export default function TutorV4Page() {
   const hasInitializedFromUrl = useRef(false);
   const hasStartedFromUrl = useRef(false);
 const initialMicroIdRef = useRef<string | null>(null);
+/* La séance gardée dans l'onglet (rechargement, téléphone verrouillé) : lue
+   une fois à l'arrivée, consommée par le prochain startSession. */
+const repriseRef = useRef<SeanceEnCours | null | undefined>(undefined);
+if (repriseRef.current === undefined) {
+  repriseRef.current = typeof window === "undefined" ? null : lireSeanceEnCours();
+}
 const initialMicrosRef = useRef<string[] | null>(null);
 const initialUrlClasseRef = useRef<Classe | null>(null);
 const initialUrlNotionRef = useRef<string | null>(null);
@@ -1015,8 +1068,11 @@ useEffect(() => {
 useEffect(() => {
   if (!urlInitDone) return;
   if (hasStartedFromUrl.current) return;
-  if (!initialMicroIdRef.current && !initialMicrosRef.current) return;
   if (!notion) return;
+  // Une séance en cours sur cette notion (page rechargée) repart seule.
+  const repriseIci =
+    repriseRef.current?.cle === cleSeanceEnCours(classe, matiere, notion);
+  if (!initialMicroIdRef.current && !initialMicrosRef.current && !repriseIci) return;
 
   hasStartedFromUrl.current = true;
   void startSession(initialMicroIdRef.current ?? undefined);
@@ -1410,10 +1466,26 @@ function continueAfterExplanation() {
     const microsSeance =
       activeNotion === notion ? microsChoisisRef.current ?? undefined : undefined;
 
+    // Séance gardée dans l'onglet pour CETTE notion, de moins de 30 min : on la
+    // reprend (mêmes compteurs, même seance_id). Sinon elle est oubliée.
+    const gardee = repriseRef.current;
+    repriseRef.current = null;
+    const reprendre =
+      gardee &&
+      gardee.cle === cleSeanceEnCours(classe, matiere, activeNotion) &&
+      Date.now() - gardee.at < DUREE_SEANCE_A_REPRENDRE_MS
+        ? gardee
+        : null;
+    if (!reprendre) effacerSeanceEnCours();
+    const microCible = targetMicroId ?? reprendre?.microId ?? undefined;
+
     try {
       // La séance qui se termine part avant d'être remise à zéro.
       enregistrerEnSilenceRef.current();
-      seanceIdRef.current = nouvelIdSeance();
+      seanceIdRef.current = reprendre ? reprendre.seanceId : nouvelIdSeance();
+      chronoRef.current.garde = reprendre ? reprendre.elapsed : 0;
+      // Reprise : 0 aussi. Le dernier envoi a pu se perdre au rechargement ;
+      // la sortie suivante renvoie le cumul (même seance_id, même ligne).
       dernierEnregistreRef.current = 0;
       setEtatAuto(null);
       setBusy(true);
@@ -1431,7 +1503,23 @@ function continueAfterExplanation() {
       resetWrongAnswerFlow();
       resetMicroStatusesForNotion(activeNotion);
       initMicroScoresForNotion(activeNotion);
-      setActiveMicroId(targetMicroId ?? null);
+      setActiveMicroId(microCible ?? null);
+      if (reprendre) {
+        setSessionResults(reprendre.results);
+        setEarnedPoints(reprendre.earnedPoints);
+        setPossiblePoints(reprendre.possiblePoints);
+        setMicroScores((prev) => ({ ...prev, ...reprendre.microScores }));
+        // « current » est redonné plus bas à la série servie.
+        setMicroStatuses((prev) => {
+          const suite = { ...prev };
+          Object.entries(reprendre.microStatuses ?? {}).forEach(([id, statut]) => {
+            if (statut !== "current") suite[id] = statut;
+          });
+          return suite;
+        });
+        setAReviserList(reprendre.aReviser ?? []);
+        setEntrainement(!!reprendre.entrainement);
+      }
 
       const res = await fetch("/api/coach/start", {
         method: "POST",
@@ -1440,7 +1528,7 @@ function continueAfterExplanation() {
           classe,
           matiere,
           notion: activeNotion,
-          microId: targetMicroId,
+          microId: microCible,
           micros: microsSeance,
           displayMode,
           /* Ce que cet élève a déjà vu, gardé d'une séance à l'autre : sans
@@ -1466,7 +1554,8 @@ function continueAfterExplanation() {
       setMode(typed.mode);
       setRecommendedStar(typed.recommendedStar);
       setVisibleProgress(typed.visibleProgress);
-      setSessionStartedAt(Date.now());
+      // Reprise : le chrono continue là où il en était.
+      setSessionStartedAt(Date.now() - (reprendre ? reprendre.elapsed * 1000 : 0));
       setNotion(typed.pair.notionId);
       setActiveMicroId(typed.pair.microId);
 
@@ -1677,6 +1766,8 @@ function continueAfterExplanation() {
         if (/Session introuvable/i.test(message)) {
           setSelectedOptionId(null);
           setAnswer("");
+          // Les compteurs continuent : on reprend la séance gardée dans l'onglet.
+          repriseRef.current = lireSeanceEnCours();
           await startSession(activeMicroId ?? undefined);
           setFeedback("Le coach a fait une pause. On repart avec une nouvelle question !");
           return;
@@ -1881,6 +1972,7 @@ function continueAfterExplanation() {
         setAnswer("");
         submitInFlightRef.current = false;
         setBusy(false);
+        repriseRef.current = lireSeanceEnCours();
         void startSession(activeMicroId ?? undefined).then(() =>
           setFeedback("Le coach a fait une pause. On repart avec une nouvelle question !")
         );
@@ -1922,6 +2014,49 @@ function handleInputKeyDown(
   // /api/resultats remplace la version précédente, jamais de doublon.
   const seanceIdRef = useRef<string>(nouvelIdSeance());
   const dernierEnregistreRef = useRef(0);
+
+  // La séance en cours est gardée dans l'onglet après chaque réponse (voir
+  // CLE_SEANCE_EN_COURS) : un rechargement la reprend avec ses compteurs.
+  // Le chrono se lit à l'heure de l'écriture. Pendant une reprise, avant que
+  // le serveur réponde, il n'a pas encore redémarré : on garde le temps repris.
+  const chronoRef = useRef<{ depart: number | null; garde: number }>({ depart: null, garde: 0 });
+  chronoRef.current.depart = sessionStartedAt;
+  useEffect(() => {
+    if (sessionResults.length === 0 || !notion) return;
+    const seance: SeanceEnCours = {
+      at: Date.now(),
+      cle: cleSeanceEnCours(classe, matiere, notion),
+      seanceId: seanceIdRef.current,
+      microId: activeMicroId,
+      results: sessionResults,
+      earnedPoints,
+      possiblePoints,
+      elapsed: chronoRef.current.depart
+        ? Math.floor((Date.now() - chronoRef.current.depart) / 1000)
+        : chronoRef.current.garde,
+      microScores,
+      microStatuses,
+      aReviser: aReviserList,
+      entrainement,
+    };
+    try {
+      sessionStorage.setItem(CLE_SEANCE_EN_COURS, JSON.stringify(seance));
+    } catch {
+      /* Stockage indisponible : la séance continue, sans reprise possible. */
+    }
+  }, [
+    sessionResults,
+    earnedPoints,
+    possiblePoints,
+    microScores,
+    microStatuses,
+    aReviserList,
+    entrainement,
+    classe,
+    matiere,
+    notion,
+    activeMicroId,
+  ]);
 
   function contenuSeance() {
     return {
