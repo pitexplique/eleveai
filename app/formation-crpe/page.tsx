@@ -51,7 +51,9 @@ const LIEU_LONG = `l'${LIEU.nom}, à ${LIEU.ville}`;
 const STAGE = {
   periode: "du lundi au vendredi, au choix du 4 au 8 ou du 11 au 15 janvier 2027",
   periodeCourte: "4-8 ou 11-15 janvier 2027",
-  horaire: "8 h – 12 h",
+  // Frédéric, 25/11 : « les horaires à La Réunion 14 h-18 h » (= 11 h-15 h à
+  // Paris en janvier : la distance convient à la métropole).
+  horaire: "14 h – 18 h",
   heuresParJour: 4,
 };
 
@@ -317,7 +319,7 @@ export default function FormationCrpePage() {
 
         <p className="mt-5 max-w-2xl text-base font-semibold leading-7 text-slate-600 sm:text-lg">
           Votre bonne résolution pour 2027&nbsp;: commencer l&apos;année par le
-          concours. Une semaine intensive, {STAGE.periode}, de 8 h à 12 h, à {LIEU_LONG}{" "}
+          concours. Une semaine intensive, {STAGE.periode}, de 14 h à 18 h (heure de La Réunion), à {LIEU_LONG}{" "}
           ou à distance en direct. Vous écrivez, je corrige votre copie chaque
           jour, et vous voyez vos progrès. Les écrits sont les {ECRITS}&nbsp;:
           vous avez le temps, et un plan.
@@ -503,7 +505,7 @@ export default function FormationCrpePage() {
             Une caméra filme le tableau&nbsp;: vous êtes avec le groupe, vous
             posez vos questions, vous envoyez votre copie en photo et je vous la
             rends annotée. Les écrits ont lieu les mêmes jours dans toutes les
-            académies. Horaires de La Réunion&nbsp;: 8 h – 12 h, soit 5 h – 9 h à
+            académies. Horaires de La Réunion&nbsp;: 14 h – 18 h, soit 11 h – 15 h à
             Paris en janvier. {TARIF.placesDistance} places par session.
           </p>
         </div>
