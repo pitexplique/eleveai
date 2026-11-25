@@ -28,6 +28,7 @@ FILMS['lire-heure']=function(outils){
 
   /* L'ardoise fait 1056 × 720. Le réveil en haut à gauche (Ti Margo cache le bas milieu-gauche), l'écrit à DROITE. */
   const RX=290, RY=235, RR=170, XD=800;
+  const QX=470, QY=860, QW=420, QH=420; /* l'ardoise de la question, en px de la page 1080 × 1920 */
   const entre=(T,a,b)=>T>=a&&T<b;
 
   function dessiner(T){ const c=tab.c; tab.effacer();
@@ -87,6 +88,17 @@ FILMS['lire-heure']=function(outils){
   qd.jusque('Mets'); const pauseQ=[qd('Mets pause, et choisis !')];
   rd.saute(2); const r1=rd('La petite aiguille'), r2=rd('est sur le 6.'), r3=rd('Il est 6 heures.');
   const tC=mot('02b-reponse','C');
+  /* 25/11 (Frédéric) : pendant la question et la réponse, LE RÉVEIL RESTE À L'ÉCRAN, sinon l'enfant ne peut pas lire l'heure.
+     Une petite ardoise à droite de Ti Margo, sous la carte ; à la réponse, la petite aiguille brille et le 6 est entouré. */
+  const tPetR=mot('02b-reponse','petite'), t6R=mot('02b-reponse','6');
+  const ardQ=document.createElement('canvas'); ardQ.className='cv'; ardQ.width=QW*2; ardQ.height=QH*2;
+  ardQ.style.cssText=`left:${QX}px;top:${QY}px;width:${QW}px;height:${QH}px;display:none;z-index:3;border-radius:28px;box-shadow:0 0 0 10px #8a5a2b,0 0 0 13px #5c3a1a,0 12px 26px rgba(0,0,0,.28);`;
+  document.body.append(ardQ);
+  function dessinerQ(T){ const c=ardQ.getContext('2d'); c.setTransform(2,0,0,2,0,0); c.clearRect(0,0,QW,QH);
+    c.fillStyle='#1f3b2c'; c.fillRect(0,0,QW,QH);
+    const x=QW/2, y=QH/2+14, rr=QW*.33;
+    reveilCraie(c,x,y,rr,6,0,1,0,T>=tPetR&&T<t6R+1.2?{h:1}:{});
+    if(T>=t6R){ const [px,py]=placeNombre(x,y,rr,6); c.save(); c.lineWidth=7; cercle(c,px,py,26,AIG_H,(T-t6R)/.3); c.restore(); } }
 
   poserMiniature(outils,acc+1,'Mon réveil :<br>quelle heure ?'+PARI,ardoiseMini([['12 heures ?'],['6 heures ?']]));
   return { clips,FIN,titre:'Quelle heure est-il ?',ceinture:0,finTitre,groupes,finClip:'05-abonne',
@@ -100,6 +112,8 @@ FILMS['lire-heure']=function(outils){
       const dansQ=T>=q&&T<ouf, dansF=T>=f, gros=T<finTitre;
       tab.g.visible=!gros&&!dansQ&&!dansF&&!window.MINI;
       cadrer(cam,{gros,large:dansQ||dansF});
+      ardQ.style.display=dansQ&&!window.MINI?'block':'none';
+      if(dansQ){ dessinerQ(T); scene.x=-1.2; }
       /* le réveil sonne : Ti Margo sursaute */
       scene.y=0; if(T>=tSonne&&T<tSonne+.6) scene.y=.3*Math.sin((T-tSonne)/.6*Math.PI);
 
