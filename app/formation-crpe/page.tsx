@@ -37,6 +37,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import VideoStage from "./VideoStage";
 
 const SITE_URL = "https://www.eleveai.fr";
 const TEL = "06 92 74 29 58";
@@ -366,6 +367,10 @@ export default function FormationCrpePage() {
             </div>
           ))}
         </div>
+
+        {/* La vidéo YouTube du stage : visible à partir du 25/11 21 h 30
+            (heure de La Réunion), voir VideoStage.tsx. */}
+        <VideoStage />
 
         {/* ── LE STRESS : LA PAGE RASSURE D'ABORD ─────────────────────────
             Frédéric, 25/11 : le candidat « stresse », la page « doit être
