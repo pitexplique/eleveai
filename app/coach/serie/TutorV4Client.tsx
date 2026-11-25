@@ -1069,6 +1069,24 @@ useEffect(() => {
   if (!urlInitDone) return;
   if (hasStartedFromUrl.current) return;
   if (!notion) return;
+  /* L'adresse ne suit pas le changement de notion : rechargée, la page rouvre
+     la 1re notion. Si l'adresse n'impose ni notion ni micro, on revient à la
+     notion de la séance gardée (même classe, même matière). */
+  const prefixeReprise = `${classe}|${matiere}|`;
+  const notionReprise = repriseRef.current?.cle.startsWith(prefixeReprise)
+    ? repriseRef.current.cle.slice(prefixeReprise.length)
+    : null;
+  if (
+    notionReprise &&
+    notionReprise !== notion &&
+    notionOptions.includes(notionReprise) &&
+    !initialUrlNotionRef.current &&
+    !initialMicroIdRef.current &&
+    !initialMicrosRef.current
+  ) {
+    setNotion(notionReprise);
+    return;
+  }
   // Une séance en cours sur cette notion (page rechargée) repart seule.
   const repriseIci =
     repriseRef.current?.cle === cleSeanceEnCours(classe, matiere, notion);
