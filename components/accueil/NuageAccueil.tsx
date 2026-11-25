@@ -29,7 +29,6 @@ import { useEleve } from "@/context/EleveContext";
 import { prenomAffichable } from "@/lib/prenom";
 import { conseilTiMargo, notionARetravailler, type NotionEleve, type Reprise } from "@/lib/conseilTiMargo";
 import { CENTRE_PAR_ID, EMOJI_CENTRE } from "@/lib/videos/centres-interet";
-import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
 
 type Choix = { href: string; emoji: string; titre: string; detail?: string };
 type MessageProf = { id: string; texte: string; lu?: boolean; lien?: string | null };
@@ -76,7 +75,10 @@ const CHOIX_VISITEUR: Choix[] = [
   { href: "/dictee-du-jour", emoji: "✍️", titre: "La dictée", detail: "J'écoute, j'écris." },
 ];
 
-/** Le coach en un clic : la classe lance directement la 1re série (sans compte). */
+/** Le coach : la classe ouvre le coach maths AVEC cette classe sélectionnée
+ *  (l'élève y choisit sa notion), pas la 1re série directement.
+ *  Frédéric, 25/11 : « tu dois envoyer soit à choisis ta classe soit à coach
+ *  maths avec la bonne classe sélectionnée, pas sur le tutor directement ». */
 const CLASSES_COACH: { slug: string; label: string }[] = [
   { slug: "cp", label: "CP" },
   { slug: "ce1", label: "CE1" },
@@ -91,8 +93,7 @@ const CLASSES_COACH: { slug: string; label: string }[] = [
   { slug: "premiere-spe", label: "1re" },
   { slug: "terminale-spe", label: "Tle" },
 ];
-const lienSerie = (classe: string) =>
-  `/coach/serie?classe=${encodeURIComponent(classe)}&matiere=maths&${displayParamForClasse(classe)}`;
+const lienCoachClasse = (classe: string) => `/coach-ia/maths?classe=${encodeURIComponent(classe)}`;
 
 /** Ce qu'un compte ajoute (ce qui existe au 24/11 : Cockpit, récompenses, message du prof, reprise). */
 const AVEC_UN_COMPTE: Choix[] = [
@@ -361,8 +362,8 @@ export default function NuageAccueil() {
       ) : null}
 
       {/* LE CŒUR : le coach, en bandeau vert au-dessus du nuage.
-          Visiteur : la classe d'un clic → la 1re série (avant : un catalogue
-          de 6e imposé, 35 notions, le bouton GO deux écrans plus bas). */}
+          Visiteur : la classe d'un clic → le coach maths de CETTE classe
+          (25/11 soir, Frédéric : pas le tuteur directement). */}
       {cas === "visiteur" ? (
         <div className="mb-4 rounded-3xl bg-emerald-600 p-4 text-white shadow-lg ring-4 ring-emerald-200 sm:p-5">
           <p className="text-center text-2xl font-black leading-tight sm:text-3xl">
@@ -372,7 +373,7 @@ export default function NuageAccueil() {
             {CLASSES_COACH.map((c) => (
               <li key={c.slug}>
                 <Link
-                  href={lienSerie(c.slug)}
+                  href={lienCoachClasse(c.slug)}
                   className="block rounded-2xl bg-white py-2.5 text-center text-lg font-black text-emerald-800 shadow transition hover:scale-105 hover:bg-emerald-50"
                 >
                   {c.label}
