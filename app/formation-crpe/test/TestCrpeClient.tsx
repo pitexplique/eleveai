@@ -257,7 +257,7 @@ export default function TestCrpeClient({ test = "maths" }: { test?: NomTest }) {
 
         {/* Sur papier seulement : un bilan imprimé circule, il dit où venir. */}
         <p className="mt-5 hidden text-sm font-semibold text-slate-700 print:block">
-          Stage intensif de maths du CRPE, du 4 au 22 janvier 2027, à l&apos;Hôtel
+          Stage intensif de maths du CRPE, 4-8 ou 11-15 janvier 2027, à l&apos;Hôtel
           Terre-Sainte (Saint-Pierre) ou à distance · eleveai.fr/formation-crpe · 06 92 74 29 58
         </p>
 
@@ -296,8 +296,8 @@ export default function TestCrpeClient({ test = "maths" }: { test?: NomTest }) {
           <div className="mt-6 rounded-3xl bg-[#041B33] p-6 text-white shadow-xl sm:p-7 print:hidden">
             <h2 className="text-xl font-black">Travailler ces thèmes avec moi, en janvier</h2>
             <p className="mt-2 text-sm font-semibold leading-7 text-white/75">
-              Appelez-moi avec ce bilan&nbsp;: on choisit ensemble votre groupe
-              pour le stage du 4 au 22 janvier, et on part de vos rouges.
+              Appelez-moi avec ce bilan (Frédéric, 06 92 74 29 58)&nbsp;: on choisit ensemble votre semaine
+              pour le stage de janvier, et on part de vos rouges.
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               <Link

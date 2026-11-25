@@ -33,8 +33,8 @@
 // préparation" tant que je n'ai pas le feu vert du rectorat ») : la visio
 // payante attend l'accord écrit du cumul. À remettre avec ce feu vert.
 // ✅ 02/11 : le rectorat dit qu'aucune autorisation n'est nécessaire.
-// ⭐ 25/11/2026 : la bande annonce le STAGE INTENSIF DE JANVIER (4 → 22
-// janvier 2027, Hôtel Terre-Sainte ou à distance, 10 places par groupe),
+// ⭐ 25/11/2026 : la bande annonce le STAGE INTENSIF DE JANVIER (4 → 8 ou 11 → 15
+// janvier 2027, Hôtel Terre-Sainte ou à distance, 10 places par session),
 // voir app/formation-crpe/page.tsx.
 
 import Image from "next/image";
@@ -86,11 +86,11 @@ export default function BanniereCrpe({ place }: { place: "haut" | "colonnes" }) 
               {/* ⚠️ Deux longueurs : la phrase entière doublerait la hauteur sur
                   un téléphone. */}
               <span className="sm:hidden">
-                Stage de maths du 4 au 22 janvier, 10 places.
+                Stage de maths en janvier, 10 places.
               </span>
               <span className="hidden sm:inline">
-                Stage intensif de maths du 4 au 22 janvier, à Saint-Pierre ou à
-                distance : 10 places par groupe, après un test de 15 minutes.
+                Stage intensif de maths d'une semaine en janvier, à Saint-Pierre ou
+                à distance : 10 places par session, après un test de 15 minutes.
               </span>
             </p>
           </div>

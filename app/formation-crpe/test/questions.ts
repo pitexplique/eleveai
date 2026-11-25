@@ -13,7 +13,7 @@
 // (app/formation-crpe/page.tsx) : un fichier `page.tsx` ne peut rien exporter
 // d'autre que sa page. Si un jour bouge là-bas, il bouge ici aussi.
 // ⭐ 25/11/2026 : les samedis deviennent les jours du stage de janvier 2027
-// (4 → 22 janvier) ; le test sert aussi à la sélection et au choix du groupe.
+// (une semaine : 4 → 8 ou 11 → 15 janvier) ; le test sert aussi à la sélection et au choix du groupe.
 //
 // ⛔ QCM : jamais deux choix de même valeur, et chaque piège est une erreur
 // réelle de candidat (règle « ajouter un zéro », médiane lue sans trier,
@@ -30,15 +30,15 @@ export type Theme = {
 };
 
 export const THEMES: Theme[] = [
-  { id: "nombres", titre: "Nombres, fractions, décimaux", seance: "mardi 5 janvier" },
-  { id: "proportionnalite", titre: "Proportionnalité, pourcentages, échelles", seance: "mercredi 6 janvier" },
-  { id: "arithmetique", titre: "Arithmétique", seance: "jeudi 7 janvier" },
-  { id: "grandeurs", titre: "Grandeurs et mesures", seance: "vendredi 8 janvier" },
-  { id: "geometrie", titre: "Géométrie plane", seance: "lundi 11 janvier" },
-  { id: "donnees", titre: "Espace, statistiques, probabilités", seance: "mardi 12 janvier" },
-  { id: "eleves", titre: "Analyser des productions d'élèves", seance: "jeudi 14 janvier" },
-  { id: "algebre", titre: "Algèbre et mise en équation", seance: "vendredi 15 janvier" },
-  { id: "raisonner", titre: "Raisonner, démontrer, rédiger", seance: "lundi 18 janvier" },
+  { id: "nombres", titre: "Nombres, fractions, décimaux", seance: "jour 1 (lundi)" },
+  { id: "proportionnalite", titre: "Proportionnalité, pourcentages, échelles", seance: "jour 1 (lundi)" },
+  { id: "arithmetique", titre: "Arithmétique", seance: "jour 2 (mardi)" },
+  { id: "grandeurs", titre: "Grandeurs et mesures", seance: "jour 2 (mardi)" },
+  { id: "geometrie", titre: "Géométrie plane", seance: "jour 3 (mercredi)" },
+  { id: "donnees", titre: "Espace, statistiques, probabilités", seance: "jour 3 (mercredi)" },
+  { id: "eleves", titre: "Analyser des productions d'élèves", seance: "jour 4 (jeudi)" },
+  { id: "algebre", titre: "Algèbre et mise en équation", seance: "jour 4 (jeudi)" },
+  { id: "raisonner", titre: "Raisonner, démontrer, rédiger", seance: "jour 4 (jeudi)" },
 ];
 
 export type Question = {

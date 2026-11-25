@@ -1,4 +1,8 @@
-// /formation-crpe — STAGE INTENSIF DE MATHS DU CRPE, JANVIER 2027.
+// /formation-crpe — STAGE INTENSIF DE MATHS DU CRPE, 4 → 8 JANVIER 2027.
+//
+// ⭐ 25/11/2026, en fin de soirée : « stage du 3 au 7 janvier » → UNE semaine,
+// lundi 4 → vendredi 8 janvier (choisi par Frédéric : le 3 est un dimanche).
+// Les « 15 jours » de plus haut sont remplacés par ces 5 jours.
 //
 // ⭐⭐ 25/11/2026 — LA PAGE EST REFAITE. La formule des 14 samedis d'octobre à
 // mars (60 € la matinée) n'a eu AUCUN inscrit au 19/10. Frédéric, 25/11 :
@@ -9,12 +13,13 @@
 // vendre en distance avec une caméra », « 300 € la semaine » (« les 15 jours ne
 // peuvent pas être à 850 » : PAS de remise), « je paie pas café ! », « elle
 // doit être encourageante ». Il est libre du 19 décembre au 1er février.
-// Le candidat « stresse » : la page rassure d'abord.
+// Le candidat « stresse » : la page rassure d'abord. Et la première semaine
+// de l'année = « les bonnes résolutions de l'année » (son accroche, 25/11).
 //
 // ⚠️ CE QUI EST UNE PROPOSITION DE CLAUDE, PAS UNE DÉCISION DE FRÉDÉRIC :
-// - les dates exactes (lundi 4 → vendredi 22 janvier 2027 : 3 × 5 jours) ;
-// - l'horaire de l'après-midi (13 h 30 – 17 h 30) ;
-// - 250 €/semaine à distance, l'acompte de 100 €, le seuil de 4 par groupe ;
+// - la date de la 2e semaine (lundi 11 → vendredi 15 janvier ; lui : « une
+//   seconde semaine en janvier du lundi au vendredi ») ;
+// - 250 €/semaine à distance, l'acompte de 100 €, le seuil de 4 par session ;
 // - les options d'après-stage (épreuve blanche de mars 60 €, suivi 100 €/mois).
 // Tout se change dans les constantes ci-dessous, une seule fois.
 //
@@ -23,7 +28,7 @@
 //
 // L'ARGENT (pour mémoire, jamais à l'écran) : salle de l'hôtel 250 €/semaine
 // QUEL QUE SOIT le nombre d'élèves ; URSSAF ~26 % du CA ; pub Insta/Facebook
-// ~300 €. À 10 en salle : 9 000 € de CA, ≈ 5 580 € net. Point mort : 2 élèves.
+// ~300 €. Par session de 10 en salle : 3 000 € de CA (son chiffre du 25/11).
 //
 // ⚠️ L'URL reste en minuscules et courte (elle se dit au téléphone).
 // Le langage visuel est celui de /parents et /espace-profs : fond clair, cartes
@@ -44,24 +49,24 @@ const LIEU = {
 const LIEU_LONG = `l'${LIEU.nom}, à ${LIEU.ville}`;
 
 const STAGE = {
-  periode: "du 4 au 22 janvier 2027",
-  periodeCourte: "4 → 22 janvier 2027",
-  debutIso: "2027-01-04",
-  finIso: "2027-01-22",
+  periode: "du lundi au vendredi, au choix du 4 au 8 ou du 11 au 15 janvier 2027",
+  periodeCourte: "4-8 ou 11-15 janvier 2027",
+  horaire: "8 h – 12 h",
   heuresParJour: 4,
 };
 
-// Deux groupes de niveau, placés par les tests. Même programme, mêmes jours.
-const GROUPES = [
-  { nom: "Groupe du matin", horaire: "8 h – 12 h", emoji: "🌅" },
-  { nom: "Groupe de l'après-midi", horaire: "13 h 30 – 17 h 30", emoji: "🌤️" },
+// Deux sessions identiques d'une semaine (Frédéric, 25/11 : « stage du 3 au
+// 7 janvier », puis « et une seconde semaine en janvier du lundi au vendredi »).
+const SESSIONS = [
+  { nom: "Session 1", dates: "lundi 4 → vendredi 8 janvier", debutIso: "2027-01-04", finIso: "2027-01-08", emoji: "🎉" },
+  { nom: "Session 2", dates: "lundi 11 → vendredi 15 janvier", debutIso: "2027-01-11", finIso: "2027-01-15", emoji: "🌴" },
 ];
 
 const TARIF = {
   salleSemaine: 300,
   distanceSemaine: 250,
   acompte: 100,
-  placesSalleParGroupe: 10,
+  placesParSession: 10,
   placesDistance: 10,
   seuilOuverture: 4,
   epreuveBlancheMars: 60,
@@ -79,113 +84,44 @@ const REUNION_2026 = { postes: 149, presents: "2 000", admissibles: "500" };
 
 type Jour = { date: string; titre: string; detail: string };
 
-// ⛔ La progression est celle que Frédéric a validée le 22/08/2026 (« les 14
-// séances sont parfaites ») : même ordre, mêmes thèmes. Un seul jour ajouté, le
-// 12e (orthographe et rédaction : « l'orthographe sera prise en compte ainsi
-// que la rédaction », 16/10). Les dates de `test/questions.ts` suivent celles-ci.
+// ⛔ L'ORDRE est celui de la progression validée par Frédéric le 22/08/2026
+// (« les 14 séances sont parfaites »). Le 25/11 il ramène le stage à UNE
+// semaine (« stage du 3 au 7 janvier » → lundi 4 → vendredi 8, choisi par lui) :
+// les 14 thèmes + l'orthographe sont regroupés en 5 journées, dans le même
+// ordre, sans en retirer. Les jours de `test/questions.ts` suivent ceux-ci.
 const SEMAINES: { titre: string; jours: Jour[] }[] = [
   {
-    titre: "Semaine 1 · les bases qui rapportent",
+    titre: "Une semaine, cinq journées",
     jours: [
       {
-        date: "lundi 4 janvier",
-        titre: "Où vous en êtes vraiment",
+        date: "Jour 1 · lundi",
+        titre: "Nombres et proportionnalité",
         detail:
-          "On fait connaissance, on parcourt les 15 jours, puis on travaille : une épreuve d'entrée corrigée sur place. Pas pour classer : pour savoir ce qui comptera le plus pour vous.",
+          "On ouvre par une courte épreuve d'entrée, puis on travaille le socle : fractions, décimaux, priorités, ordres de grandeur, puis la proportionnalité, les pourcentages et les échelles, le thème le plus rentable du concours.",
       },
       {
-        date: "mardi 5 janvier",
-        titre: "Nombres, fractions, décimaux",
+        date: "Jour 2 · mardi",
+        titre: "Arithmétique, grandeurs et mesures",
         detail:
-          "Le socle qui fait gagner des points partout ailleurs. Priorités, écritures fractionnaires, ordres de grandeur, et les erreurs d'élèves qu'on vous demandera d'analyser.",
+          "Divisibilité, nombres premiers, PGCD et PPCM, puis conversions, périmètres, aires, volumes et durées. Des points faciles à prendre, et le chapitre que vous enseignerez le plus souvent.",
       },
       {
-        date: "mercredi 6 janvier",
-        titre: "Proportionnalité, pourcentages, échelles",
+        date: "Jour 3 · mercredi",
+        titre: "Géométrie, espace, statistiques, probabilités",
         detail:
-          "Le thème le plus rentable du concours : il revient chaque année, sous quatre habillages. On apprend à reconnaître lequel avant de calculer.",
+          "Triangles, quadrilatères, Thalès, Pythagore : on rédige une démonstration entière, ensemble. Puis solides et patrons, lecture de données, probabilités : souvent négligés, donc rentables.",
       },
       {
-        date: "jeudi 7 janvier",
-        titre: "Arithmétique",
+        date: "Jour 4 · jeudi",
+        titre: "Élèves, algèbre, rédaction",
         detail:
-          "Divisibilité, nombres premiers, PGCD et PPCM. Peu de technique, beaucoup de raisonnement : c'est là qu'un candidat qui démontre se distingue.",
+          "Analyser des productions d'élèves (la partie qui rapporte le plus), mettre en équation, raisonner et justifier. Et la copie : les mots des maths, l'orthographe, des phrases qu'un correcteur a plaisir à suivre.",
       },
       {
-        date: "vendredi 8 janvier",
-        titre: "Grandeurs et mesures",
+        date: "Jour 5 · vendredi",
+        titre: "Épreuve blanche, et votre plan jusqu'à l'écrit",
         detail:
-          "Conversions, périmètres, aires, volumes, durées. Des points faciles à prendre, et le chapitre que vous enseignerez le plus souvent.",
-      },
-    ],
-  },
-  {
-    titre: "Semaine 2 · le collège, sans peur",
-    jours: [
-      {
-        date: "lundi 11 janvier",
-        titre: "Géométrie plane",
-        detail:
-          "Triangles, quadrilatères, Thalès, Pythagore, constructions. On rédige une démonstration entière, ensemble, ligne par ligne.",
-      },
-      {
-        date: "mardi 12 janvier",
-        titre: "Espace, statistiques, probabilités",
-        detail:
-          "Solides et patrons, puis lecture et interprétation de données. Deux thèmes courts au concours, souvent négligés : donc rentables.",
-      },
-      {
-        date: "mercredi 13 janvier",
-        titre: "Premier problème en conditions réelles",
-        detail:
-          "Un sujet complet, chronométré, corrigé le jour même. À mi-stage, vous voyez déjà le chemin parcouru, et ce qu'il reste à faire.",
-      },
-      {
-        date: "jeudi 14 janvier",
-        titre: "Analyser des productions d'élèves",
-        detail:
-          "La partie qui rapporte le plus et qu'on prépare le moins. Reconnaître une erreur, dire d'où elle vient, proposer une remédiation : c'est déjà votre futur métier.",
-      },
-      {
-        date: "vendredi 15 janvier",
-        titre: "Algèbre et mise en équation",
-        detail:
-          "Traduire un énoncé en équation, puis revenir à la question posée. L'aller-retour, plus que la technique.",
-      },
-    ],
-  },
-  {
-    titre: "Semaine 3 · prêt pour mars",
-    jours: [
-      {
-        date: "lundi 18 janvier",
-        titre: "Raisonner, démontrer, rédiger",
-        detail:
-          "Vrai ou faux et justifiez, contre-exemples, disjonction des cas. Le correcteur note ce qui est écrit : on apprend à tout écrire.",
-      },
-      {
-        date: "mardi 19 janvier",
-        titre: "Orthographe et rédaction de la copie",
-        detail:
-          "La langue compte dans la note, maths comprises. Les mots des maths (hypoténuse, parallèle, isocèle), des phrases claires, une copie agréable à corriger.",
-      },
-      {
-        date: "mercredi 20 janvier",
-        titre: "Vos erreurs, et seulement les vôtres",
-        detail:
-          "Une journée construite avec vos copies depuis le premier jour. Rien de générique : on reprend exactement ce qui vous a résisté.",
-      },
-      {
-        date: "jeudi 21 janvier",
-        titre: "Épreuve blanche complète",
-        detail:
-          "Durée réelle, format réel. Copies ramassées, corrigées de ma main, rendues annotées le lendemain.",
-      },
-      {
-        date: "vendredi 22 janvier",
-        titre: "Correction, et votre plan jusqu'à l'écrit",
-        detail:
-          "On reprend l'épreuve blanche, on règle les derniers pièges, et vous repartez avec un plan clair pour février et mars.",
+          "Un sujet complet, en temps réel. On corrige ensemble les pièges qui reviennent, puis vous repartez avec un plan clair pour février et mars. Votre copie vous est rendue annotée.",
       },
     ],
   },
@@ -205,15 +141,11 @@ const eur = (n: number) =>
 const FAQ: { q: string; r: string }[] = [
   {
     q: "Je ne suis pas à l'aise en maths. C'est pour moi ?",
-    r: "Oui, c'est même pour vous qu'il existe. Les tests servent à vous placer dans le bon groupe, pas à vous écarter : on part de là où vous êtes, et on avance un jour après l'autre.",
+    r: "Oui, c'est même pour vous qu'il existe. Les tests servent à savoir d'où vous partez, pas à vous écarter : on part de là où vous êtes, et on avance un jour après l'autre.",
   },
   {
     q: "Pourquoi une sélection ?",
-    r: `Pour que chaque groupe avance au même rythme et que je corrige toutes les copies chaque jour. D'où ${TARIF.placesSalleParGroupe} places en salle par groupe, pas plus. On vérifie ensemble, au téléphone, que le stage vous convient.`,
-  },
-  {
-    q: "Je peux ne venir qu'une semaine ?",
-    r: `Oui : ${eur(TARIF.salleSemaine)} la semaine en salle, ${eur(TARIF.distanceSemaine)} à distance. Mais les trois semaines se suivent et se complètent : c'est le stage entier qui prépare vraiment.`,
+    r: `Pour que le groupe avance au même rythme et que je corrige toutes les copies chaque jour. D'où ${TARIF.placesParSession} places en salle par session, pas plus. On vérifie ensemble, au téléphone, que le stage vous convient.`,
   },
   {
     q: "Comment se passe la distance ?",
@@ -224,8 +156,8 @@ const FAQ: { q: string; r: string }[] = [
     r: `Un acompte de ${eur(TARIF.acompte)} réserve votre place quand vous êtes retenu ; le reste se règle le premier jour. Si le stage n'ouvre pas, l'acompte vous est rendu.`,
   },
   {
-    q: "Et si le groupe ne se forme pas ?",
-    r: `Un groupe ouvre à partir de ${TARIF.seuilOuverture} candidats. Sinon, vous êtes prévenu avant le 4 janvier et votre acompte vous est rendu.`,
+    q: "Et si la session ne se remplit pas ?",
+    r: `Une session ouvre à partir de ${TARIF.seuilOuverture} candidats. Sinon, on vous propose l'autre semaine, ou votre acompte vous est rendu.`,
   },
   {
     q: "C'est finançable par le CPF ?",
@@ -262,14 +194,15 @@ function donneesStructurees() {
       offre(TARIF.salleSemaine, "Stage en salle"),
       offre(TARIF.distanceSemaine, "Stage à distance"),
     ],
-    hasCourseInstance: [
+    hasCourseInstance: SESSIONS.flatMap((sess) => [
       {
         "@type": "CourseInstance",
+        name: sess.nom,
         courseMode: "onsite",
         courseWorkload: `PT${NB_HEURES}H`,
-        startDate: STAGE.debutIso,
-        endDate: STAGE.finIso,
-        maximumAttendeeCapacity: TARIF.placesSalleParGroupe * GROUPES.length,
+        startDate: sess.debutIso,
+        endDate: sess.finIso,
+        maximumAttendeeCapacity: TARIF.placesParSession,
         location: {
           "@type": "Place",
           name: LIEU.nom,
@@ -284,14 +217,15 @@ function donneesStructurees() {
       },
       {
         "@type": "CourseInstance",
+        name: sess.nom,
         courseMode: "online",
         courseWorkload: `PT${NB_HEURES}H`,
-        startDate: STAGE.debutIso,
-        endDate: STAGE.finIso,
+        startDate: sess.debutIso,
+        endDate: sess.finIso,
         maximumAttendeeCapacity: TARIF.placesDistance,
         instructor: { "@type": "Person", name: "Frédéric Lacoste" },
       },
-    ],
+    ]),
   };
 }
 
@@ -310,7 +244,7 @@ function donneesFaq() {
 const DESCRIPTION =
   `Stage intensif de ${NB_JOURS} jours, ${STAGE.periodeCourte}, pour réussir l'écrit de maths du CRPE ` +
   `(${ECRITS}). À l'${LIEU.nom}, ${LIEU.ville}, ou à distance en direct. ` +
-  `${eur(TARIF.salleSemaine)} la semaine. ${TARIF.placesSalleParGroupe} places par groupe.`;
+  `${eur(TARIF.salleSemaine)} la semaine. ${TARIF.placesParSession} places par session.`;
 
 export const metadata: Metadata = {
   title: `Stage intensif CRPE maths, janvier 2027, à ${LIEU.ville} (La Réunion)`,
@@ -366,7 +300,7 @@ export default function FormationCrpePage() {
       <div className="mx-auto max-w-4xl">
         {/* ── HERO ─────────────────────────────────────────────────────── */}
         <p className="inline-flex items-center rounded-full bg-amber-100 px-4 py-1.5 text-xs font-black uppercase tracking-wide text-amber-800 ring-1 ring-amber-200">
-          🏝️ Stage intensif · {STAGE.periodeCourte} · {LIEU.ville}
+          🎉 Bonne résolution 2027 · stage intensif · {STAGE.periodeCourte}
         </p>
 
         <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-5xl">
@@ -382,7 +316,8 @@ export default function FormationCrpePage() {
         </h1>
 
         <p className="mt-5 max-w-2xl text-base font-semibold leading-7 text-slate-600 sm:text-lg">
-          Trois semaines, {STAGE.periode}, du lundi au vendredi, à {LIEU_LONG}{" "}
+          Votre bonne résolution pour 2027&nbsp;: commencer l&apos;année par le
+          concours. Une semaine intensive, {STAGE.periode}, de 8 h à 12 h, à {LIEU_LONG}{" "}
           ou à distance en direct. Vous écrivez, je corrige votre copie chaque
           jour, et vous voyez vos progrès. Les écrits sont les {ECRITS}&nbsp;:
           vous avez le temps, et un plan.
@@ -402,12 +337,18 @@ export default function FormationCrpePage() {
             Voir les {NB_JOURS} jours
           </a>
         </div>
+        {/* Frédéric, 25/11 : « met mon numéro de téléphone », « frederic : ». */}
+        <p className="mt-4 text-base font-black text-slate-800">
+          <a href={TEL_HREF} className="underline decoration-orange-300 decoration-2 underline-offset-4 hover:text-orange-600">
+            📞 Frédéric&nbsp;: {TEL}
+          </a>
+        </p>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            { k: `${NB_JOURS} jours`, v: `${NB_HEURES} h, du lundi au vendredi, ${STAGE.periodeCourte}`, c: "text-sky-600" },
+            { k: `${NB_JOURS} jours`, v: `${NB_HEURES} h en une semaine, ${STAGE.horaire} · deux sessions en janvier`, c: "text-sky-600" },
             { k: eur(TARIF.salleSemaine), v: `la semaine en salle · ${eur(TARIF.distanceSemaine)} à distance`, c: "text-orange-600" },
-            { k: `${TARIF.placesSalleParGroupe} places`, v: "par groupe, après les tests : chaque copie corrigée", c: "text-rose-600" },
+            { k: `${TARIF.placesParSession} places`, v: "par session, après les tests : chaque copie corrigée", c: "text-rose-600" },
             { k: "30-31 mars", v: "les écrits 2027 : vous arrivez prêt", c: "text-emerald-600" },
           ].map((c) => (
             <div key={c.k} className="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-200/70">
@@ -437,7 +378,7 @@ export default function FormationCrpePage() {
           <ol className="mt-4 grid gap-3 sm:grid-cols-3">
             {[
               { n: "1", t: "Vous savez où vous en êtes", d: "Le test de 15 minutes vous le dit, thème par thème." },
-              { n: "2", t: "Vous avez un plan", d: `${NB_JOURS} jours, un thème par jour, dans l'ordre qui rapporte.` },
+              { n: "2", t: "Vous avez un plan", d: `${NB_JOURS} jours, dans l'ordre qui rapporte, et vos copies corrigées.` },
               { n: "3", t: "Vous arrivez prêt", d: "Une épreuve blanche corrigée, et un plan jusqu'au 30 mars." },
             ].map((e) => (
               <li key={e.n} className="rounded-2xl bg-white p-4 ring-1 ring-emerald-100">
@@ -514,7 +455,15 @@ export default function FormationCrpePage() {
             },
             {
               t: "Un appel",
-              d: <>Vous m&apos;appelez avec votre bilan. On choisit ensemble le groupe qui vous convient, en salle ou à distance.</>,
+              d: (
+                <>
+                  Vous m&apos;appelez avec votre bilan&nbsp;:{" "}
+                  <a href={TEL_HREF} className="whitespace-nowrap font-black text-sky-700 underline underline-offset-2">
+                    Frédéric, {TEL}
+                  </a>
+                  . On choisit ensemble votre semaine, en salle ou à distance.
+                </>
+              ),
             },
             {
               t: "Votre place réservée",
@@ -531,17 +480,17 @@ export default function FormationCrpePage() {
           ))}
         </ol>
 
-        {/* ── DEUX GROUPES ─────────────────────────────────────────────── */}
+        {/* ── DEUX SESSIONS ────────────────────────────────────────────── */}
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          {GROUPES.map((g) => (
+          {SESSIONS.map((g) => (
             <div key={g.nom} className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-amber-200">
               <p className="text-xs font-black uppercase tracking-wide text-orange-600">
-                {g.emoji} {g.nom}
+                {g.emoji} {g.nom} · {STAGE.horaire}
               </p>
-              <p className="mt-1 text-2xl font-black text-slate-900">{g.horaire}</p>
+              <p className="mt-1 text-2xl font-black text-slate-900">{g.dates}</p>
               <p className="mt-2 text-sm font-semibold leading-6 text-slate-600">
-                {TARIF.placesSalleParGroupe} places en salle, à l&apos;{LIEU.nom}.
-                Le même programme, au rythme de votre groupe.
+                {TARIF.placesParSession} places en salle, à l&apos;{LIEU.nom}.
+                Le même programme dans les deux sessions&nbsp;: choisissez votre semaine.
               </p>
             </div>
           ))}
@@ -554,8 +503,8 @@ export default function FormationCrpePage() {
             Une caméra filme le tableau&nbsp;: vous êtes avec le groupe, vous
             posez vos questions, vous envoyez votre copie en photo et je vous la
             rends annotée. Les écrits ont lieu les mêmes jours dans toutes les
-            académies. En janvier, l&apos;après-midi à La Réunion, c&apos;est la
-            matinée en métropole. {TARIF.placesDistance} places.
+            académies. Horaires de La Réunion&nbsp;: 8 h – 12 h, soit 5 h – 9 h à
+            Paris en janvier. {TARIF.placesDistance} places par session.
           </p>
         </div>
 
@@ -564,8 +513,8 @@ export default function FormationCrpePage() {
           🗓️ Les {NB_JOURS} jours
         </h2>
         <p className="mt-1 text-sm font-semibold text-slate-500">
-          Un thème par jour, dans l&apos;ordre qui rapporte. Vous savez dès
-          aujourd&apos;hui ce que vous ferez le 22 janvier.
+          Une grande partie du programme par jour, dans l&apos;ordre qui rapporte. Vous savez dès
+          aujourd&apos;hui ce que vous ferez chaque jour, dans l&apos;une ou l&apos;autre session.
         </p>
         {SEMAINES.map((s) => (
           <section key={s.titre}>
@@ -597,7 +546,7 @@ export default function FormationCrpePage() {
                 <span className="ml-2 align-middle text-base font-bold text-slate-600">la semaine</span>
               </p>
               <p className="mt-2 text-sm font-semibold leading-6 text-slate-700">
-                Soit {eur(p.semaine * NB_SEMAINES)} pour les {NB_SEMAINES} semaines du stage.
+                Pour les {NB_JOURS} jours du stage, de {STAGE.heuresParJour} h chacun.
               </p>
             </div>
           ))}
@@ -605,7 +554,7 @@ export default function FormationCrpePage() {
         <ul className="mt-4 grid gap-3 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200/70 sm:grid-cols-2 sm:p-7">
           {[
             "Les sujets, les corrigés, et votre copie annotée de ma main, chaque jour.",
-            "L'épreuve blanche complète, corrigée et rendue le lendemain.",
+            "L'épreuve blanche complète, et votre copie rendue annotée.",
             "Les fiches de cours et le coach du site, pour s'entraîner le soir.",
             `Un acompte de ${eur(TARIF.acompte)} pour réserver, rendu si le stage n'ouvre pas.`,
           ].map((l) => (
@@ -694,8 +643,8 @@ export default function FormationCrpePage() {
           <h2 className="text-2xl font-black sm:text-3xl">Réserver ma place au stage</h2>
           <p className="mt-2 text-sm font-semibold leading-7 text-white/75">
             Faites le test, puis appelez-moi avec votre bilan. On choisit
-            ensemble votre groupe, en salle ou à distance.{" "}
-            {TARIF.placesSalleParGroupe} places par groupe&nbsp;: les premières
+            ensemble votre semaine, en salle ou à distance.{" "}
+            {TARIF.placesParSession} places par session&nbsp;: les premières
             réservées partent en premier.
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-3">
@@ -709,10 +658,10 @@ export default function FormationCrpePage() {
               href={TEL_HREF}
               className="rounded-2xl bg-amber-400 px-6 py-3.5 text-base font-black text-[#041B33] shadow-lg transition hover:scale-105 hover:bg-amber-300"
             >
-              📞 {TEL}
+              📞 Frédéric&nbsp;: {TEL}
             </a>
             <a
-              href="mailto:contact@eleveai.fr?subject=Stage%20CRPE%20maths%20-%20janvier%202027"
+              href="mailto:contact@eleveai.fr?subject=Stage%20CRPE%20maths%20-%204-8%20janvier%202027"
               className="rounded-2xl bg-white/10 px-6 py-3.5 text-base font-black text-white ring-1 ring-white/25 transition hover:bg-white/20"
             >
               ✉️ contact@eleveai.fr
