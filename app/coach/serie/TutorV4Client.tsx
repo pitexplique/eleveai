@@ -111,6 +111,11 @@ import ReactionDessin, {
 } from "./ReactionDessin";
 import PaveNumerique from "./PaveNumerique";
 import { clavierReponse } from "@/lib/tutor-v4/paveNumerique";
+import {
+  LIMITE_QUESTIONS_OFFERTES,
+  compterQuestionOfferte,
+  questionsOffertesEpuisees,
+} from "@/lib/tutor-v4/questionsOffertes";
 import BoutonVideoCompetence from "./BoutonVideoCompetence";
 
 const CYCLE_2_COACH = new Set(["cp", "ce1", "ce2"]);
@@ -667,13 +672,61 @@ function effacerSeanceEnCours() {
   }
 }
 
+/* ⭐ 25/11/2026 — LE MUR DES 10 QUESTIONS OFFERTES (Frédéric : « après 10
+   questions il doit s'inscrire »). Visiteur sans compte seulement : la 10e
+   réponse est corrigée, la 11e ouvre cette fenêtre. */
+function MurQuestionsOffertes() {
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="mur-questions-offertes-titre"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 px-4 print:hidden"
+    >
+      <div className="w-full max-w-md rounded-3xl bg-white p-6 text-center shadow-2xl ring-4 ring-lime-400">
+        <Image
+          src="/ti-margo/animations/bravo.png"
+          alt="Ti Margo qui applaudit"
+          width={160}
+          height={160}
+          className="mx-auto h-32 w-32 object-contain"
+        />
+        <h2 id="mur-questions-offertes-titre" className="mt-3 text-2xl font-black text-emerald-800">
+          Bravo, tu as fait tes {LIMITE_QUESTIONS_OFFERTES} questions offertes aujourd&apos;hui&nbsp;!
+        </h2>
+        <p className="mt-2 text-lg font-semibold text-slate-700">Crée ton compte pour continuer.</p>
+        <div className="mt-5 flex flex-col gap-3">
+          <Link
+            href="/auth/signin?inscription=1"
+            className="rounded-full bg-emerald-600 px-6 py-3 text-lg font-black text-white shadow hover:bg-emerald-700"
+          >
+            Créer mon compte
+          </Link>
+          <Link
+            href="/auth/signin"
+            className="rounded-full bg-white px-6 py-3 text-lg font-black text-emerald-800 ring-2 ring-emerald-600 hover:bg-emerald-50"
+          >
+            Se connecter
+          </Link>
+          <Link href="/accueil" className="mt-1 text-sm font-semibold text-slate-500 underline hover:text-slate-700">
+            Revenir à l&apos;accueil
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function TutorV4Page() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
 
-  const eleveContext = useEleve() as unknown as { eleve?: EleveSession | null };
+  const eleveContext = useEleve() as unknown as { eleve?: EleveSession | null; pret?: boolean };
   const eleve = eleveContext.eleve ?? null;
+  // Visiteur sans compte (session lue, personne de connecté) : 10 questions par jour.
+  const visiteur = Boolean(eleveContext.pret) && !eleve;
+  const [murOffert, setMurOffert] = useState(false);
 
   const [etatAuto, setEtatAuto] = useState<EtatAuto>(null);
   const [reprise, setReprise] = useState<{ nbReponses: number; ok: boolean } | null>(null);
@@ -1483,6 +1536,10 @@ function continueAfterExplanation() {
     // sans attendre la mise à jour d'état (changement de notion par le prof).
     const activeNotion = notionOverride ?? notion;
     if (!activeNotion) return;
+    if (visiteur && questionsOffertesEpuisees()) {
+      setMurOffert(true);
+      return;
+    }
     // Les micros cochées appartiennent à LEUR notion : ailleurs, toute la notion.
     const microsSeance =
       activeNotion === notion ? microsChoisisRef.current ?? undefined : undefined;
@@ -1737,6 +1794,11 @@ function continueAfterExplanation() {
       return;
     }
 
+    if (visiteur && questionsOffertesEpuisees()) {
+      setMurOffert(true);
+      return;
+    }
+
     const finalAnswer = (submittedAnswer ?? answer).trim();
 
     if (!finalAnswer) {
@@ -1799,6 +1861,9 @@ function continueAfterExplanation() {
       }
 
       const typed = data as AnswerResponse;
+
+      // Réponse corrigée : elle compte dans les questions offertes du visiteur.
+      if (visiteur) compterQuestionOfferte();
 
       // Remédiation : on a été rerouté vers un prérequis → on le note « à réviser ».
       if (typed.aReviser) {
@@ -2375,6 +2440,7 @@ function handleInputKeyDown(
         ) : null}
         {/* ⛔ 12/11/2026 — Frédéric : « Demande à l'IA » retiré du coach (simple et
             complet) ; l'aide passe par « Ti Margo t’explique ton erreur ». */}
+        {murOffert ? <MurQuestionsOffertes /> : null}
       </>
     );
   }
@@ -2388,6 +2454,7 @@ function handleInputKeyDown(
     data-cycle={CYCLE_2_COACH.has(classe) ? "2" : undefined}
     className="min-h-screen bg-[#f3f4f6] px-2 py-3 sm:px-4 sm:py-6"
   >
+    {murOffert ? <MurQuestionsOffertes /> : null}
     <div className="mx-auto max-w-7xl">
        {remediationBanner}
       {/* ⛔ 10/11/2026 — plus de bandeau « Dis-nous ce que tu aimes » ici.
