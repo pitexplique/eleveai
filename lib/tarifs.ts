@@ -602,7 +602,9 @@ export const SUIVI = {
  * Restent à valider, et donc jamais affichés comme définitifs : l'année (100 €
  * proposé), l'essai prof (30 j proposé), le Premium (20 € proposé), la grille
  * par pays, l'offre établissement, les vidéos libres ou non.
- * ⚠️ Rien n'est codé : ni le compteur des 10 questions, ni le paiement prof.
+ * ⚠️ 25/11 : le compteur des 10 questions est codé pour le COACH seulement
+ * (lib/tutor-v4/questionsOffertes.ts) ; pas encore les exercices, le calcul
+ * rapide, les automatismes, les QCM. Le paiement prof n'est pas codé.
  */
 export const OFFRE = {
   /** UN compteur pour tout le site, par navigateur, sans compte. */
