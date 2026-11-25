@@ -29,6 +29,7 @@ import { useEleve } from "@/context/EleveContext";
 import { prenomAffichable } from "@/lib/prenom";
 import { conseilTiMargo, notionARetravailler, type NotionEleve, type Reprise } from "@/lib/conseilTiMargo";
 import { CENTRE_PAR_ID, EMOJI_CENTRE } from "@/lib/videos/centres-interet";
+import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
 
 type Choix = { href: string; emoji: string; titre: string; detail?: string };
 type MessageProf = { id: string; texte: string; lu?: boolean; lien?: string | null };
@@ -40,8 +41,9 @@ const H = 420;
 const PLACES: { x: number; y: number; de: [number, number]; vers: [number, number]; l?: number }[] = [
   { x: 100, y: 52, de: [215, 120], vers: [150, 82] },
   { x: 500, y: 52, de: [385, 120], vers: [450, 82] },
-  { x: 78, y: 210, de: [188, 210], vers: [160, 210], l: 26 },
-  { x: 522, y: 210, de: [412, 210], vers: [440, 210], l: 26 },
+  // 25/11 : 28 % (au lieu de 26 %) pour que « Automatismes » tienne sur une ligne.
+  { x: 84, y: 210, de: [192, 210], vers: [174, 210], l: 28 },
+  { x: 516, y: 210, de: [408, 210], vers: [426, 210], l: 28 },
   { x: 100, y: 368, de: [215, 300], vers: [150, 338] },
   { x: 500, y: 368, de: [385, 300], vers: [450, 338] },
 ];
@@ -59,15 +61,38 @@ const IMAGE_HUMEUR = {
   salut: "/ti-margo/animations/salut.png",
 } as const;
 
-/** Visiteur : six activités, toutes ouvertes sans compte. */
+/** ⭐ 25/11/2026 — Frédéric : « le cœur est quand même le coach » ; les élèves
+ *  aiment « le coach, les vidéos, les exercices interactifs et même la dictée ».
+ *  Son ordre : « coach fiches exercices vidéos automatisme énigme simulateur
+ *  dictée », « la dictée est en dernier ». Le coach a son bandeau vert
+ *  au-dessus du nuage (BandeauCoach) ; le nuage garde les six autres, dans
+ *  cet ordre (haut gauche, haut droite, milieu gauche… bas droite = dictée). */
 const CHOIX_VISITEUR: Choix[] = [
-  { href: "/coach-ia/maths", emoji: "🎯", titre: "Le coach", detail: "Je m'entraîne." },
+  { href: "/fiches-exercices", emoji: "📝", titre: "Fiches d'exercices", detail: "Corrigés tout de suite." },
   { href: "/video", emoji: "🎬", titre: "Les vidéos", detail: "Je regarde." },
-  { href: "/simulateurs", emoji: "🌋", titre: "Les simulateurs", detail: "Cyclone, volcan…" },
-  { href: "/fiches-exercices", emoji: "📝", titre: "Les exercices", detail: "Corrigés tout de suite." },
+  { href: "/automatismes-maths", emoji: "⚡", titre: "Automa­tismes" /* césure douce : coupe en 375 px seulement */, detail: "Vite, sans calculatrice." },
   { href: "/enigmes-maths", emoji: "🧩", titre: "Les énigmes", detail: "Je cherche." },
-  { href: "#classes", emoji: "🎒", titre: "Ma classe", detail: "Du CP à la Terminale." },
+  { href: "/simulateurs", emoji: "🌋", titre: "Les simulateurs", detail: "Cyclone, volcan…" },
+  { href: "/dictee-du-jour", emoji: "✍️", titre: "La dictée", detail: "J'écoute, j'écris." },
 ];
+
+/** Le coach en un clic : la classe lance directement la 1re série (sans compte). */
+const CLASSES_COACH: { slug: string; label: string }[] = [
+  { slug: "cp", label: "CP" },
+  { slug: "ce1", label: "CE1" },
+  { slug: "ce2", label: "CE2" },
+  { slug: "cm1", label: "CM1" },
+  { slug: "cm2", label: "CM2" },
+  { slug: "6e", label: "6e" },
+  { slug: "5e", label: "5e" },
+  { slug: "4e", label: "4e" },
+  { slug: "3e", label: "3e" },
+  { slug: "seconde", label: "2de" },
+  { slug: "premiere-spe", label: "1re" },
+  { slug: "terminale-spe", label: "Tle" },
+];
+const lienSerie = (classe: string) =>
+  `/coach/serie?classe=${encodeURIComponent(classe)}&matiere=maths&${displayParamForClasse(classe)}`;
 
 /** Ce qu'un compte ajoute (ce qui existe au 24/11 : Cockpit, récompenses, message du prof, reprise). */
 const AVEC_UN_COMPTE: Choix[] = [
@@ -91,11 +116,11 @@ const CHOIX_AUTRE: Choix[] = [
   { href: "/coach-ia/maths", emoji: "🎯", titre: "Le coach", detail: "S'entraîner." },
   { href: "/simulateurs", emoji: "🌋", titre: "Les simulateurs", detail: "Cyclone, volcan…" },
   { href: "/video", emoji: "🎬", titre: "Les vidéos", detail: "Regarder." },
-  { href: "/fiches-exercices", emoji: "📝", titre: "Les exercices", detail: "Corrigés tout de suite." },
+  { href: "/fiches-exercices", emoji: "📝", titre: "Fiches d'exercices", detail: "Corrigés tout de suite." },
   { href: "/enigmes-maths", emoji: "🧩", titre: "Les énigmes", detail: "Chercher." },
 ];
 
-export default function NuageAccueil({ essai, libres }: { essai?: string; libres?: string }) {
+export default function NuageAccueil() {
   const { eleve, pret } = useEleve();
   const cas: "attente" | "visiteur" | "eleve" | "prof" | "autre" = !pret
     ? "attente"
@@ -182,41 +207,43 @@ export default function NuageAccueil({ essai, libres }: { essai?: string; libres
   if (cas === "visiteur") choix = CHOIX_VISITEUR;
   else if (cas === "prof") choix = CHOIX_PROF;
   else if (cas === "autre") choix = CHOIX_AUTRE;
-  else if (cas === "eleve" && donneesPretes) {
-    choix = [
-      { href: "/dashboard-eleve", emoji: "✈️", titre: "Où j'en suis", detail: "Mon tableau de bord." },
-      {
-        href: classe ? `/coach-ia/maths?classe=${encodeURIComponent(classe)}` : "/coach-ia/maths",
-        emoji: "🎯",
-        titre: "Le coach",
-        detail: "Je m'entraîne.",
-      },
-    ];
-    const faible = notions ? notionARetravailler(notions.notions) : null;
-    if (faible) choix.push({ href: faible.href, emoji: "🔁", titre: "À revoir", detail: faible.titre });
-    choix.push({
-      href: classe ? `/video?classe=${encodeURIComponent(classe.toLowerCase())}` : "/video",
-      emoji: "🎬",
-      titre: "Les vidéos",
-      detail: "Je regarde.",
-    });
+  // Élève : le coach, « Où j'en suis » et « À revoir » vont dans le bandeau vert ;
+  // le nuage garde l'ordre de Frédéric (exercices … dictée), la passion
+  // remplaçant les simulateurs quand elle a le sien.
+  const faible = cas === "eleve" && notions ? notionARetravailler(notions.notions) : null;
+  const classeMin = classe ? classe.toLowerCase() : null;
+  if (cas === "eleve" && donneesPretes) {
     const passion = passions[0];
     const simu = passion ? SIMULATEUR_PASSION[passion] : undefined;
-    if (simu) choix.push({ href: simu.href, emoji: EMOJI_CENTRE[passion] ?? "💛", titre: simu.titre, detail: "Ma passion." });
-    else if (passion && CENTRE_PAR_ID.get(passion))
-      choix.push({ href: "/passions", emoji: EMOJI_CENTRE[passion] ?? "💛", titre: CENTRE_PAR_ID.get(passion)!.nom, detail: "Ma passion." });
-    else choix.push({ href: "/simulateurs", emoji: "🌋", titre: "Les simulateurs", detail: "Cyclone, volcan…" });
-    if (classe && /^(cp|ce1|ce2|cm1|cm2|6e|5e|4e|3e)$/i.test(classe)) {
-      choix.push({
-        href: `/fiches-exercices?classe=${encodeURIComponent(classe.toLowerCase())}`,
+    const centre = passion ? CENTRE_PAR_ID.get(passion) : undefined;
+    choix = [
+      {
+        href:
+          classeMin && /^(cp|ce1|ce2|cm1|cm2|6e|5e|4e|3e)$/.test(classeMin)
+            ? `/fiches-exercices?classe=${encodeURIComponent(classeMin)}`
+            : "/fiches-exercices",
         emoji: "📝",
-        titre: "Une fiche",
-        detail: "Des exercices.",
-      });
-    }
-    choix.push({ href: "/enigmes-maths", emoji: "🧩", titre: "Les énigmes", detail: "Je cherche." });
+        titre: "Fiches d'exercices",
+        detail: "Corrigés tout de suite.",
+      },
+      {
+        href: classeMin ? `/video?classe=${encodeURIComponent(classeMin)}` : "/video",
+        emoji: "🎬",
+        titre: "Les vidéos",
+        detail: "Je regarde.",
+      },
+      CHOIX_VISITEUR[2],
+      CHOIX_VISITEUR[3],
+      simu
+        ? { href: simu.href, emoji: EMOJI_CENTRE[passion] ?? "💛", titre: simu.titre, detail: "Ma passion." }
+        : centre
+          ? { href: "/passions", emoji: EMOJI_CENTRE[passion] ?? "💛", titre: centre.nom, detail: "Ma passion." }
+          : CHOIX_VISITEUR[4],
+      CHOIX_VISITEUR[5],
+    ];
   }
   const places = choix.slice(0, PLACES.length);
+  const lienCoachEleve = classe ? `/coach-ia/maths?classe=${encodeURIComponent(classe)}` : "/coach-ia/maths";
 
   const bulleCentre =
     cas === "eleve" ? (
@@ -330,6 +357,63 @@ export default function NuageAccueil({ essai, libres }: { essai?: string; libres
         </div>
       ) : null}
 
+      {/* LE CŒUR : le coach, en bandeau vert au-dessus du nuage.
+          Visiteur : la classe d'un clic → la 1re série (avant : un catalogue
+          de 6e imposé, 35 notions, le bouton GO deux écrans plus bas). */}
+      {cas === "visiteur" ? (
+        <div className="mb-4 rounded-3xl bg-emerald-600 p-4 text-white shadow-lg ring-4 ring-emerald-200 sm:p-5">
+          <p className="text-center text-2xl font-black leading-tight sm:text-3xl">
+            <span aria-hidden>🎯 </span>Le coach : choisis ta classe
+          </p>
+          <ul className="mt-3 grid grid-cols-4 gap-2 sm:grid-cols-6 lg:grid-cols-12">
+            {CLASSES_COACH.map((c) => (
+              <li key={c.slug}>
+                <Link
+                  href={lienSerie(c.slug)}
+                  className="block rounded-2xl bg-white py-2.5 text-center text-lg font-black text-emerald-800 shadow transition hover:scale-105 hover:bg-emerald-50"
+                >
+                  {c.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          {/* « Choisis ta classe » (plus bas, section #classes) reste : Frédéric, 25/11. */}
+          <p className="mt-3 flex flex-wrap justify-center gap-x-5 gap-y-1 text-sm font-bold">
+            <Link href="/coach-ia/maths" className="text-white underline underline-offset-2 hover:text-emerald-100">
+              Toutes les notions ›
+            </Link>
+            <a href="#classes" className="text-white underline underline-offset-2 hover:text-emerald-100">
+              Tout ce qu&apos;il y a dans ma classe ↓
+            </a>
+          </p>
+        </div>
+      ) : cas === "eleve" ? (
+        <div className="mb-4 flex flex-col gap-2 rounded-3xl bg-emerald-600 p-3 shadow-lg ring-4 ring-emerald-200 sm:flex-row sm:items-stretch sm:p-4">
+          <Link
+            href={lienCoachEleve}
+            className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-white px-4 py-3 text-xl font-black text-emerald-800 shadow transition hover:scale-[1.02] hover:bg-emerald-50 sm:text-2xl"
+          >
+            <span aria-hidden>🎯</span> Le coach
+            {classe ? <span className="text-base font-bold text-emerald-700">· {classe}</span> : null}
+          </Link>
+          {faible ? (
+            <Link
+              href={faible.href}
+              className="flex items-center justify-center gap-2 rounded-2xl bg-emerald-700 px-4 py-3 text-base font-black text-white ring-2 ring-white/70 hover:bg-emerald-800"
+            >
+              <span aria-hidden>🔁</span>
+              <span className="min-w-0 truncate">À revoir : {faible.titre}</span>
+            </Link>
+          ) : null}
+          <Link
+            href="/dashboard-eleve"
+            className="flex items-center justify-center gap-2 rounded-2xl bg-emerald-700 px-4 py-3 text-base font-black text-white ring-2 ring-white/70 hover:bg-emerald-800"
+          >
+            <span aria-hidden>✈️</span> Où j&apos;en suis
+          </Link>
+        </div>
+      ) : null}
+
       {/* Téléphone : le nuage, puis les bulles en grosse liste. */}
       <div className="sm:hidden">
         <div className="rounded-3xl bg-sky-100/80 py-2">{nuage(true)}</div>
@@ -383,11 +467,7 @@ export default function NuageAccueil({ essai, libres }: { essai?: string; libres
       </div>
 
       {/* Visiteur : ce qu'un compte ajoute, juste dessous. */}
-      {cas === "visiteur" && essai ? (
-        <p className="mt-4 text-center text-sm font-bold text-slate-600">
-          <span className="font-black text-emerald-800">{essai}.</span> {libres}
-        </p>
-      ) : null}
+      {/* 25/11 : la ligne « 10 questions offertes, sans compte » est retirée (Frédéric : « enlève »). */}
       {cas === "visiteur" ? (
         <div className="mt-5 rounded-3xl bg-white p-4 shadow-md ring-1 ring-teal-200 sm:p-5">
           <p className="text-center text-lg font-black text-teal-800 sm:text-xl">🔓 Avec ton compte, en plus :</p>
@@ -403,17 +483,18 @@ export default function NuageAccueil({ essai, libres }: { essai?: string; libres
             ))}
           </ul>
           <div className="mt-4 flex flex-col items-center justify-center gap-2 sm:flex-row">
-            <Link
-              href="/auth/signin"
-              className="w-full rounded-full bg-teal-700 px-7 py-3 text-center text-lg font-black text-white shadow-lg hover:bg-teal-800 sm:w-auto"
-            >
-              Se connecter
-            </Link>
+            {/* 25/11 : le visiteur n'a pas encore de compte → « Créer mon compte » en plein. */}
             <Link
               href="/auth/signin?inscription=1"
-              className="w-full rounded-full bg-white px-7 py-3 text-center text-lg font-black text-teal-800 shadow ring-2 ring-teal-600 hover:bg-teal-50 sm:w-auto"
+              className="w-full rounded-full bg-teal-700 px-7 py-3 text-center text-lg font-black text-white shadow-lg hover:bg-teal-800 sm:w-auto"
             >
               Créer mon compte
+            </Link>
+            <Link
+              href="/auth/signin"
+              className="w-full rounded-full bg-white px-7 py-3 text-center text-lg font-black text-teal-800 shadow ring-2 ring-teal-600 hover:bg-teal-50 sm:w-auto"
+            >
+              Se connecter
             </Link>
           </div>
           <p className="mt-2 text-center text-sm font-bold text-slate-600">Ton prof t&apos;a donné un code ? Clique sur « Se connecter ».</p>

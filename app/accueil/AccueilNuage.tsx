@@ -16,12 +16,10 @@ import RechercheEntete from "@/components/accueil/RechercheEntete";
 import NuageAccueil from "@/components/accueil/NuageAccueil";
 import { BandeChiffres, EncartsFamilleProf } from "@/components/accueil/CompteurFamille";
 import { ChoisisTaClasse } from "./AccueilCeo";
-import { PHRASE_ESSAI } from "@/lib/tarifs";
 
 const slab = Roboto_Slab({ subsets: ["latin"], weight: ["700"], display: "swap" });
 
 export default function AccueilNuage() {
-  const [essai, ...libres] = PHRASE_ESSAI.split(". ");
   return (
     <div className="min-h-screen bg-white text-slate-900 [color-scheme:light]">
       <div className="border-b border-slate-200 bg-white px-3 py-2 sm:hidden">
@@ -36,15 +34,15 @@ export default function AccueilNuage() {
             Progressons ensemble en maths, <span className="whitespace-nowrap text-sky-700">chaque jour.</span>
           </h1>
           <div className="mt-5">
-            {/* La ligne des 10 questions : seulement pour le visiteur (NuageAccueil la place). */}
-            <NuageAccueil essai={essai} libres={libres.join(". ")} />
+            <NuageAccueil />
           </div>
           <p className="mt-3 text-center">
             <Link
               href="#parents-profs"
-              className="inline-block rounded-full bg-white/90 px-5 py-2 text-base font-black text-violet-800 shadow ring-1 ring-violet-200 hover:ring-violet-400"
+              className="inline-block whitespace-nowrap rounded-full bg-white/90 px-5 py-2 text-base font-black text-violet-800 shadow ring-1 ring-violet-200 hover:ring-violet-400"
             >
-              Vous êtes parent ou prof ? Par ici ↓
+              {/* 25/11 : plus court, pour tenir sur une ligne en 375 px (la flèche tombait sur le dessin). */}
+              Parent ou prof ? Par ici ↓
             </Link>
           </p>
         </div>
