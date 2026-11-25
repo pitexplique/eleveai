@@ -618,3 +618,32 @@ class AnnonceCrpeStageShort(_Commun, Short6e):
         self.ecran_infos()
         self.ecran_commentaire()
         self.ecran_fin()
+
+
+# ══════════════════════════════════════════════════════════════════════════
+#  LE REEL (Instagram + Facebook) : le short, avec une fin sans « pouce » ni
+#  « cloche » (gestes YouTube) ; on demande de partager à un futur prof.
+#  Voix : manim/voix/annonce-crpe-stage-reel.json (= short, sauf 07-fin).
+#  Rendu : python -m manim render -qh -r 1080,1920 --disable_caching manim/scripts/annonce/annonce_crpe_stage.py AnnonceCrpeStageReel -o eleveai-annonce-crpe-stage-reel --media_dir manim/scripts/annonce/media
+# ══════════════════════════════════════════════════════════════════════════
+
+class AnnonceCrpeStageReel(AnnonceCrpeStageShort):
+    nom_voix = "annonce-crpe-stage-reel"
+
+    def ecran_fin(self):
+        self.nouvel_ecran()
+        self.dire("07-fin")
+        t1 = TS("Le test est sur", 38, JAUNE_TITRE).move_to(P(0, 2.65))
+        self.play(Write(t1), run_time=0.4)
+        self.au_mot("éleveai")
+        site = VGroup(TS("eleveai.fr", 52, BLEU_CALCUL, gras=True), TS("/formation-crpe", 34, BLEU_CALCUL)).arrange(DOWN, buff=0.1)
+        site.move_to(P(0, 1.65))
+        cadre = SurroundingRectangle(site, color=BLEU_CALCUL, buff=0.18, corner_radius=0.12)
+        tel = VGroup(TS("Frédéric :", 32), TS("06 92 74 29 58", 42, WHITE, gras=True)).arrange(DOWN, buff=0.1).move_to(P(0, 0.35))
+        self.play(GrowFromCenter(site), Create(cadre), FadeIn(tel), run_time=0.5)
+        self.au_mot("partagez")
+        part = VGroup(TS("Partagez à un", 38, VERT_OK, gras=True), TS("futur prof", 38, VERT_OK, gras=True),
+                      TS("des écoles !", 38, VERT_OK, gras=True)).arrange(DOWN, buff=0.08).move_to(P(0, -1.25))
+        self.play(FadeIn(part, scale=0.7), run_time=0.4)
+        self.insister(part, 1.06, 0.25)
+        self.attendre_voix(1.2)
