@@ -676,6 +676,12 @@ function effacerSeanceEnCours() {
    questions il doit s'inscrire »). Visiteur sans compte seulement : la 10e
    réponse est corrigée, la 11e ouvre cette fenêtre. */
 function MurQuestionsOffertes() {
+  // Après l'inscription ou la connexion, retour ici : la séance gardée dans
+  // l'onglet (30 min) repart avec ses compteurs.
+  const [retour, setRetour] = useState("");
+  useEffect(() => {
+    setRetour(`&next=${encodeURIComponent(window.location.pathname + window.location.search)}`);
+  }, []);
   return (
     <div
       role="dialog"
@@ -695,15 +701,16 @@ function MurQuestionsOffertes() {
           Bravo, tu as fait tes {LIMITE_QUESTIONS_OFFERTES} questions offertes aujourd&apos;hui&nbsp;!
         </h2>
         <p className="mt-2 text-lg font-semibold text-slate-700">Crée ton compte pour continuer.</p>
+        <p className="mt-1 text-sm font-bold text-slate-500">Ta séance est gardée : tu la retrouves juste après.</p>
         <div className="mt-5 flex flex-col gap-3">
           <Link
-            href="/auth/signin?inscription=1"
+            href={`/auth/signin?mode=eleve&inscription=1${retour}`}
             className="rounded-full bg-emerald-600 px-6 py-3 text-lg font-black text-white shadow hover:bg-emerald-700"
           >
             Créer mon compte
           </Link>
           <Link
-            href="/auth/signin"
+            href={`/auth/signin?mode=eleve${retour}`}
             className="rounded-full bg-white px-6 py-3 text-lg font-black text-emerald-800 ring-2 ring-emerald-600 hover:bg-emerald-50"
           >
             Se connecter
