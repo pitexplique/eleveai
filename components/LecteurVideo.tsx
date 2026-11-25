@@ -270,6 +270,14 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "premiere-prop-evo-compensation-short": 4.7,
   "stmg-prop-evo-compensation": 8.4,
   "stmg-prop-evo-compensation-short": 4.7,
+  // Série graphiques 1re (automatismes, 24/11/2026) : manim/passe_graphiques_1re.py coupes
+  "premiere-graph-appartenance": 8.3,
+  "stmg-graph-appartenance": 8.3,
+  "premiere-graph-variations": 8.4,
+  "stmg-graph-variations": 8.4,
+  "premiere-graph-croissance": 8.4,
+  "premiere-graph-croissance-short": 4.69,
+  "premiere-graph-histogramme": 8.4,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {

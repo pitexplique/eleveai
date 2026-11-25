@@ -113403,6 +113403,660 @@
           "explication": "Chacun de ses trois côtés est la diagonale d'une face du cube : B D, B E et D E ont tous pour longueur racine de 2. Rectangle en B ?"
         }
       ]
+    },
+    {
+      "id": "premiere-graph-appartenance",
+      "pas_avant": "2027-07-19",
+      "prioritaire": true,
+      "notionId": "auto_lecture_graphique",
+      "microId": "auto_fct_appartenance_courbe",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/graphiques/01-appartenance/eleveai-maths-premiere-graph-appartenance.mp4",
+      "miniature": "premiere/maths/graphiques/01-appartenance/eleveai-maths-premiere-graph-appartenance.png",
+      "titre": "Ce point est-il sur la courbe ? Le test de l'équation, sans rien tracer · Maths 1re",
+      "accroche": "Dans un jeu vidéo, un personnage saute le long de la courbe y = −x² + 4x. Une pièce d'or flotte au point (3 ; 3) : va-t-il l'attraper ? La développeuse de jeux fait ce test pour chaque saut, l'architecte pour une arche, l'ingénieur pour un pont.\n\nDans cette vidéo :\n• on remplace x par l'abscisse du point : −3² + 4 × 3 = 3\n• on compare à l'ordonnée : 3 = 3, le point est sur la courbe\n• la règle : un point est sur la courbe si ses coordonnées vérifient l'équation\n• le piège : −(−1)² = −1, le carré passe avant le signe moins\n• l'équation donne aussi les points qui manquent : le point d'abscisse 2 est (2 ; 4)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : le point (4 ; 0) est-il sur la courbe ? et quelle est l'ordonnée du point d'abscisse 5 ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-lecture-graphique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_lecture_graphique&microId=auto_fct_appartenance_courbe&display=simple\n\n📈 Épisode 1 de la série Graphiques : les automatismes de l'épreuve anticipée de maths.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une pièce sur le saut"
+        ],
+        [
+          "00:34",
+          "On remplace x"
+        ],
+        [
+          "00:49",
+          "On compare à l'ordonnée"
+        ],
+        [
+          "00:59",
+          "La règle"
+        ],
+        [
+          "01:10",
+          "Question 1"
+        ],
+        [
+          "01:42",
+          "Le piège du carré"
+        ],
+        [
+          "02:00",
+          "Trouver un point"
+        ],
+        [
+          "02:13",
+          "Question 2"
+        ],
+        [
+          "02:44",
+          "À toi de jouer"
+        ],
+        [
+          "03:00",
+          "Correction"
+        ],
+        [
+          "03:16",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-lecture-graphique",
+      "tags": [
+        "point sur une courbe",
+        "équation de courbe",
+        "appartenance",
+        "coordonnées",
+        "fonction",
+        "jeu vidéo",
+        "lecture graphique",
+        "fonctions",
+        "automatismes",
+        "1re",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:10",
+          "question": "Le point (1 ; 4) est-il sur la courbe y = −x² + 4x ?",
+          "choix": [
+            "oui",
+            "non, on trouve 3",
+            "non, on trouve 5"
+          ],
+          "reponse": 1,
+          "explication": "−1² + 4 × 1 = −1 + 4 = 3, et pas 4 : le point est au-dessus de la courbe."
+        },
+        {
+          "t": "02:13",
+          "question": "Sur y = 2x² − 3, quel est le point d'abscisse −1 ?",
+          "choix": [
+            "(−1 ; −1)",
+            "(−1 ; −5)",
+            "(−1 ; 1)"
+          ],
+          "reponse": 0,
+          "explication": "2 × 1 − 3 = −1. B oublie le carré, C met au carré 2 × (−1)."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ]
+    },
+    {
+      "id": "stmg-graph-appartenance",
+      "notionId": "auto_lecture_graphique",
+      "microId": "auto_fct_appartenance_courbe",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/graphiques/01-appartenance/eleveai-maths-stmg-graph-appartenance.mp4",
+      "miniature": "stmg/maths/graphiques/01-appartenance/eleveai-maths-stmg-graph-appartenance.png",
+      "titre": "Ce point est-il sur la courbe ? Le test de l'équation, sans rien tracer · Maths STMG",
+      "accroche": "Dans un jeu vidéo, un personnage saute le long de la courbe y = −x² + 4x. Une pièce d'or flotte au point (3 ; 3) : va-t-il l'attraper ? La développeuse de jeux fait ce test pour chaque saut, l'architecte pour une arche, l'ingénieur pour un pont.\n\nDans cette vidéo :\n• on remplace x par l'abscisse du point : −3² + 4 × 3 = 3\n• on compare à l'ordonnée : 3 = 3, le point est sur la courbe\n• la règle : un point est sur la courbe si ses coordonnées vérifient l'équation\n• le piège : −(−1)² = −1, le carré passe avant le signe moins\n• l'équation donne aussi les points qui manquent : le point d'abscisse 2 est (2 ; 4)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : le point (4 ; 0) est-il sur la courbe ? et quelle est l'ordonnée du point d'abscisse 5 ?\n\nPour s'entraîner :\n• les exercices corrigés (automatismes de 1re) : https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-lecture-graphique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_lecture_graphique&microId=auto_fct_appartenance_courbe&display=simple\n\n📈 Épisode 1 de la série Graphiques : les automatismes de l'épreuve anticipée de maths.",
+      "chapitres": [
+        [
+          "00:00",
+          "Une pièce sur le saut"
+        ],
+        [
+          "00:34",
+          "On remplace x"
+        ],
+        [
+          "00:49",
+          "On compare à l'ordonnée"
+        ],
+        [
+          "00:59",
+          "La règle"
+        ],
+        [
+          "01:10",
+          "Question 1"
+        ],
+        [
+          "01:42",
+          "Le piège du carré"
+        ],
+        [
+          "02:00",
+          "Trouver un point"
+        ],
+        [
+          "02:13",
+          "Question 2"
+        ],
+        [
+          "02:44",
+          "À toi de jouer"
+        ],
+        [
+          "03:00",
+          "Correction"
+        ],
+        [
+          "03:16",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-lecture-graphique",
+      "tags": [
+        "point sur une courbe",
+        "équation de courbe",
+        "appartenance",
+        "coordonnées",
+        "fonction",
+        "jeu vidéo",
+        "lecture graphique",
+        "fonctions",
+        "automatismes",
+        "STMG",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:10",
+          "question": "Le point (1 ; 4) est-il sur la courbe y = −x² + 4x ?",
+          "choix": [
+            "oui",
+            "non, on trouve 3",
+            "non, on trouve 5"
+          ],
+          "reponse": 1,
+          "explication": "−1² + 4 × 1 = −1 + 4 = 3, et pas 4 : le point est au-dessus de la courbe."
+        },
+        {
+          "t": "02:13",
+          "question": "Sur y = 2x² − 3, quel est le point d'abscisse −1 ?",
+          "choix": [
+            "(−1 ; −1)",
+            "(−1 ; −5)",
+            "(−1 ; 1)"
+          ],
+          "reponse": 0,
+          "explication": "2 × 1 − 3 = −1. B oublie le carré, C met au carré 2 × (−1)."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "premiere-graph-variations",
+      "pas_avant": "2027-07-20",
+      "prioritaire": true,
+      "notionId": "auto_resolution_graphique",
+      "microId": "auto_fct_variations_graphique",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/graphiques/02-variations/eleveai-maths-premiere-graph-variations.mp4",
+      "miniature": "premiere/maths/graphiques/02-variations/eleveai-maths-premiere-graph-variations.png",
+      "titre": "Le tableau de variations : le lire sur une courbe, sans se tromper d'axe · Maths 1re",
+      "accroche": "Une coureuse de trail enregistre son altitude sur 10 km : la courbe monte, descend, puis remonte. L'entraîneur, la géomètre, le data analyst du sport résument ce genre de courbe en un seul tableau.\n\nDans cette vidéo :\n• on parcourt la courbe de gauche à droite : croissante, décroissante, croissante\n• première ligne : les bornes et les x où la courbe change de sens (0, 4, 7, 10)\n• deuxième ligne : les flèches, et les valeurs au bout (200, 800, 300, 500)\n• maximum 800 m atteint en 4, minimum 200 m atteint en 0\n• le piège : les intervalles se lisent sur les x, jamais sur les y\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une courbe part de 3 en 0, descend jusqu'à −2 en 2, puis monte jusqu'à 4 en 5 : dresse son tableau de variations.\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-resolution-graphique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_resolution_graphique&microId=auto_fct_variations_graphique&display=simple\n\n📈 Épisode 2 de la série Graphiques : les automatismes de l'épreuve anticipée de maths.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un trail de 10 km"
+        ],
+        [
+          "00:28",
+          "De gauche à droite"
+        ],
+        [
+          "00:46",
+          "Le tableau de variations"
+        ],
+        [
+          "01:08",
+          "Maximum et minimum"
+        ],
+        [
+          "01:23",
+          "Question 1"
+        ],
+        [
+          "01:56",
+          "Le piège : x ou y ?"
+        ],
+        [
+          "02:11",
+          "Question 2"
+        ],
+        [
+          "02:51",
+          "À toi de jouer"
+        ],
+        [
+          "03:09",
+          "Correction"
+        ],
+        [
+          "03:25",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-resolution-graphique",
+      "tags": [
+        "tableau de variations",
+        "croissante",
+        "décroissante",
+        "maximum",
+        "minimum",
+        "lecture graphique",
+        "trail",
+        "lecture graphique",
+        "fonctions",
+        "automatismes",
+        "1re",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:23",
+          "question": "Sur quel intervalle la fonction est-elle décroissante ?",
+          "choix": [
+            "de 0 à 4",
+            "de 300 à 800",
+            "de 4 à 7"
+          ],
+          "reponse": 2,
+          "explication": "Entre 4 et 7 km, la courbe descend. A, c'est la montée ; B donne des altitudes : les intervalles se lisent sur les x."
+        },
+        {
+          "t": "02:11",
+          "question": "f vaut 2 en −3, monte jusqu'à 6 en 1, puis descend jusqu'à −1 en 4. Quel est le maximum ?",
+          "choix": [
+            "4, atteint en −1",
+            "6, atteint en 1",
+            "1, atteint en 6"
+          ],
+          "reponse": 1,
+          "explication": "Le maximum se lit en haut des flèches : 6, atteint en 1. A lit la dernière colonne, C inverse les deux lignes."
+        }
+      ],
+      "centres": [
+        "sport"
+      ]
+    },
+    {
+      "id": "stmg-graph-variations",
+      "notionId": "auto_resolution_graphique",
+      "microId": "auto_fct_variations_graphique",
+      "classe": "stmg",
+      "ceinture": "jaune",
+      "serie": "Maths STMG",
+      "type": "longue",
+      "fichier": "stmg/maths/graphiques/02-variations/eleveai-maths-stmg-graph-variations.mp4",
+      "miniature": "stmg/maths/graphiques/02-variations/eleveai-maths-stmg-graph-variations.png",
+      "titre": "Le tableau de variations : le lire sur une courbe, sans se tromper d'axe · Maths STMG",
+      "accroche": "Une coureuse de trail enregistre son altitude sur 10 km : la courbe monte, descend, puis remonte. L'entraîneur, la géomètre, le data analyst du sport résument ce genre de courbe en un seul tableau.\n\nDans cette vidéo :\n• on parcourt la courbe de gauche à droite : croissante, décroissante, croissante\n• première ligne : les bornes et les x où la courbe change de sens (0, 4, 7, 10)\n• deuxième ligne : les flèches, et les valeurs au bout (200, 800, 300, 500)\n• maximum 800 m atteint en 4, minimum 200 m atteint en 0\n• le piège : les intervalles se lisent sur les x, jamais sur les y\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : une courbe part de 3 en 0, descend jusqu'à −2 en 2, puis monte jusqu'à 4 en 5 : dresse son tableau de variations.\n\nPour s'entraîner :\n• les exercices corrigés (automatismes de 1re) : https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-resolution-graphique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=stmg&matiere=maths&notion=auto_resolution_graphique&microId=auto_fct_variations_graphique&display=simple\n\n📈 Épisode 2 de la série Graphiques : les automatismes de l'épreuve anticipée de maths.",
+      "chapitres": [
+        [
+          "00:00",
+          "Un trail de 10 km"
+        ],
+        [
+          "00:28",
+          "De gauche à droite"
+        ],
+        [
+          "00:46",
+          "Le tableau de variations"
+        ],
+        [
+          "01:08",
+          "Maximum et minimum"
+        ],
+        [
+          "01:23",
+          "Question 1"
+        ],
+        [
+          "01:56",
+          "Le piège : x ou y ?"
+        ],
+        [
+          "02:11",
+          "Question 2"
+        ],
+        [
+          "02:51",
+          "À toi de jouer"
+        ],
+        [
+          "03:09",
+          "Correction"
+        ],
+        [
+          "03:25",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/stmg/auto-resolution-graphique",
+      "tags": [
+        "tableau de variations",
+        "croissante",
+        "décroissante",
+        "maximum",
+        "minimum",
+        "lecture graphique",
+        "trail",
+        "lecture graphique",
+        "fonctions",
+        "automatismes",
+        "STMG",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:23",
+          "question": "Sur quel intervalle la fonction est-elle décroissante ?",
+          "choix": [
+            "de 0 à 4",
+            "de 300 à 800",
+            "de 4 à 7"
+          ],
+          "reponse": 2,
+          "explication": "Entre 4 et 7 km, la courbe descend. A, c'est la montée ; B donne des altitudes : les intervalles se lisent sur les x."
+        },
+        {
+          "t": "02:11",
+          "question": "f vaut 2 en −3, monte jusqu'à 6 en 1, puis descend jusqu'à −1 en 4. Quel est le maximum ?",
+          "choix": [
+            "4, atteint en −1",
+            "6, atteint en 1",
+            "1, atteint en 6"
+          ],
+          "reponse": 1,
+          "explication": "Le maximum se lit en haut des flèches : 6, atteint en 1. A lit la dernière colonne, C inverse les deux lignes."
+        }
+      ],
+      "centres": [
+        "sport"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "premiere-graph-croissance",
+      "pas_avant": "2027-07-21",
+      "prioritaire": true,
+      "notionId": "auto_resolution_graphique",
+      "microId": "auto_fct_lire_croissance",
+      "classe": "premiere",
+      "ceinture": "orange",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/graphiques/03-croissance/eleveai-maths-premiere-graph-croissance.mp4",
+      "miniature": "premiere/maths/graphiques/03-croissance/eleveai-maths-premiere-graph-croissance.png",
+      "titre": "Ça monte, mais comment ? Croissance constante, qui accélère, qui ralentit · Maths 1re",
+      "accroche": "Trois créateurs lancent leur chaîne vidéo le même jour. Six mois plus tard, les trois courbes d'abonnés montent, mais elles ne racontent pas la même histoire. Le community manager, la data analyst, l'épidémiologiste lisent ces courbes : elles annoncent la suite.\n\nDans cette vidéo :\n• on compare les hausses sur des intervalles de même largeur (ici, un mois)\n• hausses égales (+ 100 chaque mois) : une droite, la croissance est constante\n• hausses qui grandissent (le nombre double) : la croissance accélère\n• hausses qui rétrécissent (300, 150, 80, 40) : ça ralentit, mais ça monte encore\n• le temps de doublement reste le même alors que les hausses s'envolent\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : 500 vues après 1 h, 1 000 après 2 h, 2 000 après 3 h : combien après 5 h ? la croissance accélère-t-elle ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-resolution-graphique\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_resolution_graphique&microId=auto_fct_lire_croissance&display=simple\n\n📈 Épisode 3 de la série Graphiques : les automatismes de l'épreuve anticipée de maths.",
+      "chapitres": [
+        [
+          "00:00",
+          "Trois chaînes vidéo"
+        ],
+        [
+          "00:36",
+          "Croissance constante"
+        ],
+        [
+          "00:49",
+          "La croissance accélère"
+        ],
+        [
+          "01:09",
+          "Question 1"
+        ],
+        [
+          "01:43",
+          "Ralentir, ce n'est pas baisser"
+        ],
+        [
+          "01:56",
+          "Le temps de doublement"
+        ],
+        [
+          "02:12",
+          "Question 2"
+        ],
+        [
+          "02:49",
+          "À toi de jouer"
+        ],
+        [
+          "03:08",
+          "Correction"
+        ],
+        [
+          "03:21",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-resolution-graphique",
+      "tags": [
+        "croissance",
+        "accélération",
+        "ralentissement",
+        "doublement",
+        "lecture graphique",
+        "abonnés",
+        "bactéries",
+        "lecture graphique",
+        "fonctions",
+        "automatismes",
+        "1re",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:09",
+          "question": "Chez Sarah, les hausses sont 300, 150, 80, 40. Sa croissance :",
+          "choix": [
+            "ralentit",
+            "accélère",
+            "est constante"
+          ],
+          "reponse": 0,
+          "explication": "Sarah gagne des abonnés chaque mois, mais de moins en moins : la croissance ralentit."
+        },
+        {
+          "t": "02:12",
+          "question": "Des bactéries passent de 1 000 à 2 000 en 3 h et doublent à ce rythme. Combien sont-elles après 9 h ?",
+          "choix": [
+            "4 000",
+            "6 000",
+            "8 000"
+          ],
+          "reponse": 2,
+          "explication": "En 9 h, 3 doublements : 1 000, 2 000, 4 000, 8 000. A ajoute 1 000 à chaque fois, B multiplie 2 000 par 3."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux",
+        "sciences"
+      ]
+    },
+    {
+      "id": "premiere-graph-croissance-short",
+      "pas_avant": "2027-07-21",
+      "prioritaire": true,
+      "notionId": "auto_resolution_graphique",
+      "microId": "auto_fct_lire_croissance",
+      "classe": "premiere",
+      "ceinture": "blanche",
+      "serie": "Maths 1re",
+      "type": "short",
+      "renvoie_vers": "premiere-graph-croissance",
+      "fichier": "premiere/maths/graphiques/03-croissance/eleveai-maths-premiere-graph-croissance-short.mp4",
+      "miniature": "premiere/maths/graphiques/03-croissance/eleveai-maths-premiere-graph-croissance-short.png",
+      "titre": "Une courbe qui s'aplatit : est-ce qu'elle baisse ? 🔍 — 1re #Shorts",
+      "accroche": "Une courbe qui s'aplatit : est-ce qu'elle baisse ? Non ! Les hausses rétrécissent, 300, 150, 80, 40, mais on monte toujours.\nLa croissance ralentit.\n\nVoix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 1 000 bactéries doublent chaque heure. Combien après 4 heures ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_resolution_graphique&microId=auto_fct_lire_croissance&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #fonctions #1re #automatismes",
+      "tags": [
+        "croissance",
+        "ralentir",
+        "courbe",
+        "lecture graphique",
+        "maths",
+        "1re",
+        "lycée",
+        "EleveAI",
+        "ceinture blanche",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:17",
+          "question": "Les hausses sont 10, 20, 40, 80. La croissance :",
+          "choix": [
+            "ralentit",
+            "est constante",
+            "accélère"
+          ],
+          "reponse": 2,
+          "explication": "Les hausses grandissent : la croissance accélère."
+        }
+      ],
+      "centres": [
+        "sciences"
+      ]
+    },
+    {
+      "id": "premiere-graph-histogramme",
+      "pas_avant": "2027-07-22",
+      "prioritaire": true,
+      "notionId": "auto_lire_statistiques",
+      "microId": "auto_stat_lire_histogramme",
+      "classe": "premiere",
+      "ceinture": "jaune",
+      "serie": "Maths 1re",
+      "type": "longue",
+      "fichier": "premiere/maths/graphiques/04-histogramme/eleveai-maths-premiere-graph-histogramme.mp4",
+      "miniature": "premiere/maths/graphiques/04-histogramme/eleveai-maths-premiere-graph-histogramme.png",
+      "titre": "Lire un histogramme : classes, effectifs, fréquences · Maths 1re",
+      "accroche": "Un lycée veut décaler l'heure d'entrée en cours. Il demande à 50 élèves leur temps de trajet. L'urbaniste, la responsable des transports, le statisticien lisent les réponses sur un histogramme.\n\nDans cette vidéo :\n• les temps sont rangés par classes : [0 ; 10[, [10 ; 20[… une barre par classe, sans trou\n• la hauteur d'une barre donne l'effectif : 17 élèves mettent entre 10 et 20 minutes\n• [10 ; 20[ : 10 compris, 20 non compris\n• fréquence = effectif de la classe ÷ effectif total : 17 ÷ 50 = 0,34, soit 34 %\n• le piège : l'effectif total n'est pas le nombre de barres ; 8 + 17 + 12 + 9 + 4 = 50\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture jaune.\nUn défi en fin de vidéo, avec sa correction : quelle est la classe la plus représentée ? quelle part des élèves met entre 20 et 30 minutes ?\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-lire-statistiques\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=premiere&matiere=maths&notion=auto_lire_statistiques&microId=auto_stat_lire_histogramme&display=simple\n\n📈 Épisode 4 de la série Graphiques : les automatismes de l'épreuve anticipée de maths.",
+      "chapitres": [
+        [
+          "00:00",
+          "50 temps de trajet"
+        ],
+        [
+          "00:23",
+          "Les classes"
+        ],
+        [
+          "00:38",
+          "Hauteur = effectif"
+        ],
+        [
+          "00:58",
+          "Question 1"
+        ],
+        [
+          "01:30",
+          "La fréquence"
+        ],
+        [
+          "01:44",
+          "Le piège de l'effectif total"
+        ],
+        [
+          "02:01",
+          "Question 2"
+        ],
+        [
+          "02:39",
+          "À toi de jouer"
+        ],
+        [
+          "02:52",
+          "Correction"
+        ],
+        [
+          "03:07",
+          "Ce que tu as appris"
+        ]
+      ],
+      "fiche": "https://www.eleveai.fr/fiches-exercices/maths/premiere/auto-lire-statistiques",
+      "tags": [
+        "histogramme",
+        "effectif",
+        "fréquence",
+        "classes",
+        "statistiques",
+        "temps de trajet",
+        "lecture graphique",
+        "fonctions",
+        "automatismes",
+        "1re",
+        "maths",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:58",
+          "question": "Combien d'élèves mettent moins de 20 minutes ?",
+          "choix": [
+            "17",
+            "25",
+            "20"
+          ],
+          "reponse": 1,
+          "explication": "Les deux premières barres : 8 + 17 = 25. A ne prend qu'une barre, C lit la borne 20."
+        },
+        {
+          "t": "02:01",
+          "question": "Quelle part des élèves met au moins 30 minutes ?",
+          "choix": [
+            "26 %",
+            "13 %",
+            "9 %"
+          ],
+          "reponse": 0,
+          "explication": "Les deux dernières barres : 9 + 4 = 13 ; 13 ÷ 50 = 0,26 = 26 %. B oublie de diviser par 50, C ne prend qu'une barre."
+        }
+      ],
+      "centres": [
+        "transports"
+      ]
     }
   ]
 }

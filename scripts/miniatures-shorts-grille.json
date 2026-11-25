@@ -1215,5 +1215,13 @@
     "mention": null,
     "sans_decor": true,
     "margo_2d": true
+  },
+  "premiere-graph-croissance-short": {
+    "question": ["Une courbe qui s'aplatit :", "elle baisse ?"],
+    "calcul": [["+ 300, + 150, + 80", "blanc", 110], ["ça baisse ?", "jaune", 170]],
+    "ceinture": "blanche",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
   }
 }

@@ -18971,5 +18971,68 @@
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_defi&display=simple"
+ },
+ "premiere-graph-appartenance": {
+  "fichier": "premiere/maths/graphiques/01-appartenance/eleveai-maths-premiere-graph-appartenance.mp4",
+  "poster": "premiere/maths/graphiques/01-appartenance/eleveai-maths-premiere-graph-appartenance.png",
+  "vignette": "premiere/maths/graphiques/01-appartenance/eleveai-maths-premiere-graph-appartenance.vignette.webp",
+  "titre": "Ce point est-il sur la courbe ? Le test de l'équation, sans rien tracer · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_lecture_graphique&microId=auto_fct_appartenance_courbe&display=simple"
+ },
+ "stmg-graph-appartenance": {
+  "fichier": "stmg/maths/graphiques/01-appartenance/eleveai-maths-stmg-graph-appartenance.mp4",
+  "poster": "stmg/maths/graphiques/01-appartenance/eleveai-maths-stmg-graph-appartenance.png",
+  "vignette": "stmg/maths/graphiques/01-appartenance/eleveai-maths-stmg-graph-appartenance.vignette.webp",
+  "titre": "Ce point est-il sur la courbe ? Le test de l'équation, sans rien tracer · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_lecture_graphique&microId=auto_fct_appartenance_courbe&display=simple"
+ },
+ "premiere-graph-variations": {
+  "fichier": "premiere/maths/graphiques/02-variations/eleveai-maths-premiere-graph-variations.mp4",
+  "poster": "premiere/maths/graphiques/02-variations/eleveai-maths-premiere-graph-variations.png",
+  "vignette": "premiere/maths/graphiques/02-variations/eleveai-maths-premiere-graph-variations.vignette.webp",
+  "titre": "Le tableau de variations : le lire sur une courbe, sans se tromper d'axe · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_resolution_graphique&microId=auto_fct_variations_graphique&display=simple"
+ },
+ "stmg-graph-variations": {
+  "fichier": "stmg/maths/graphiques/02-variations/eleveai-maths-stmg-graph-variations.mp4",
+  "poster": "stmg/maths/graphiques/02-variations/eleveai-maths-stmg-graph-variations.png",
+  "vignette": "stmg/maths/graphiques/02-variations/eleveai-maths-stmg-graph-variations.vignette.webp",
+  "titre": "Le tableau de variations : le lire sur une courbe, sans se tromper d'axe · Maths STMG",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=stmg&matiere=maths&notion=auto_resolution_graphique&microId=auto_fct_variations_graphique&display=simple"
+ },
+ "premiere-graph-croissance": {
+  "fichier": "premiere/maths/graphiques/03-croissance/eleveai-maths-premiere-graph-croissance.mp4",
+  "poster": "premiere/maths/graphiques/03-croissance/eleveai-maths-premiere-graph-croissance.png",
+  "vignette": "premiere/maths/graphiques/03-croissance/eleveai-maths-premiere-graph-croissance.vignette.webp",
+  "titre": "Ça monte, mais comment ? Croissance constante, qui accélère, qui ralentit · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_resolution_graphique&microId=auto_fct_lire_croissance&display=simple"
+ },
+ "premiere-graph-croissance-short": {
+  "fichier": "premiere/maths/graphiques/03-croissance/eleveai-maths-premiere-graph-croissance-short.mp4",
+  "poster": "premiere/maths/graphiques/03-croissance/eleveai-maths-premiere-graph-croissance-short.png",
+  "vignette": "premiere/maths/graphiques/03-croissance/eleveai-maths-premiere-graph-croissance-short.vignette.webp",
+  "titre": "Une courbe qui s'aplatit : est-ce qu'elle baisse ? 🔍 — 1re #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_resolution_graphique&microId=auto_fct_lire_croissance&display=simple"
+ },
+ "premiere-graph-histogramme": {
+  "fichier": "premiere/maths/graphiques/04-histogramme/eleveai-maths-premiere-graph-histogramme.mp4",
+  "poster": "premiere/maths/graphiques/04-histogramme/eleveai-maths-premiere-graph-histogramme.png",
+  "vignette": "premiere/maths/graphiques/04-histogramme/eleveai-maths-premiere-graph-histogramme.vignette.webp",
+  "titre": "Lire un histogramme : classes, effectifs, fréquences · Maths 1re",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=premiere&matiere=maths&notion=auto_lire_statistiques&microId=auto_stat_lire_histogramme&display=simple"
  }
 }
