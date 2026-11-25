@@ -601,6 +601,8 @@ function playlistsDe(v, m) {
     premiere: ["Maths 1re et STMG"], "premiere-commun": ["Maths 1re et STMG"], stmg: ["Maths 1re et STMG"],
     "premiere-spe": ["Maths Première spécialité"],
     terminale: ["Maths terminale spé"], "terminale-spe": ["Maths terminale spé"],
+    // 25/11 : les annonces pour les futurs professeurs des écoles (stage CRPE).
+    crpe: [CRPE],
     bases: ["LES BASES"], actu: ["Les maths en vrai"], "maths-en-vrai": ["Les maths en vrai"], "974": ["Les maths en vrai"],
   };
   // 06/11 : la vidéo sert aussi une classe voisine (`aussi`, ou une jumelle qui
