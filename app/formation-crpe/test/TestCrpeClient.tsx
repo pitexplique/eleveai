@@ -46,7 +46,7 @@ const TESTS: Record<NomTest, {
     idTest: "positionnement-crpe",
     titreImpression: "Test de positionnement — les maths du CRPE",
     texteBilan:
-      "Ce score ne classe personne. Ce qui compte, c'est la liste du dessous : les thèmes en rouge sont les samedis à ne pas manquer, ceux en vert sont ceux que vous pourriez presque sauter.",
+      "Ce score ne classe personne. Ce qui compte, c'est la liste du dessous : les thèmes en rouge sont les jours du stage qui compteront le plus pour vous, ceux en vert sont déjà solides. Chaque rouge se travaille.",
   },
   orthographe: {
     questions: QUESTIONS_ORTHO,
@@ -235,7 +235,7 @@ export default function TestCrpeClient({ test = "maths" }: { test?: NomTest }) {
                   <p className="text-base font-black text-slate-900">{t.titre}</p>
                   {t.seance && (
                     <p className="text-xs font-bold uppercase tracking-wide text-slate-400">
-                      Séance du {t.seance}
+                      Au stage : {t.seance}
                     </p>
                   )}
                   {t.lien && (
@@ -257,8 +257,8 @@ export default function TestCrpeClient({ test = "maths" }: { test?: NomTest }) {
 
         {/* Sur papier seulement : un bilan imprimé circule, il dit où venir. */}
         <p className="mt-5 hidden text-sm font-semibold text-slate-700 print:block">
-          Les maths du CRPE, le samedi de 8 h à 12 h à l&apos;Hôtel Terre-Sainte
-          (Saint-Pierre) · eleveai.fr/formation-crpe · 06 92 74 29 58
+          Stage intensif de maths du CRPE, du 4 au 22 janvier 2027, à l&apos;Hôtel
+          Terre-Sainte (Saint-Pierre) ou à distance · eleveai.fr/formation-crpe · 06 92 74 29 58
         </p>
 
         <button
@@ -294,17 +294,17 @@ export default function TestCrpeClient({ test = "maths" }: { test?: NomTest }) {
 
         {test === "maths" ? (
           <div className="mt-6 rounded-3xl bg-[#041B33] p-6 text-white shadow-xl sm:p-7 print:hidden">
-            <h2 className="text-xl font-black">Travailler ces thèmes avec moi, le samedi</h2>
+            <h2 className="text-xl font-black">Travailler ces thèmes avec moi, en janvier</h2>
             <p className="mt-2 text-sm font-semibold leading-7 text-white/75">
-              Apportez ce bilan à la première séance où vous venez&nbsp;: on part
-              de vos rouges, pas d&apos;un programme générique.
+              Appelez-moi avec ce bilan&nbsp;: on choisit ensemble votre groupe
+              pour le stage du 4 au 22 janvier, et on part de vos rouges.
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               <Link
                 href="/formation-crpe#inscription"
                 className="rounded-2xl bg-amber-400 px-6 py-3 text-sm font-black text-[#041B33] transition hover:bg-amber-300"
               >
-                Rejoindre le groupe du samedi →
+                Réserver ma place au stage →
               </Link>
               <Link
                 href="/formation-crpe/test-orthographe"
@@ -315,7 +315,7 @@ export default function TestCrpeClient({ test = "maths" }: { test?: NomTest }) {
             </div>
           </div>
         ) : (
-          // ⚠️ La formation du samedi, c'est les MATHS : ce bloc ne promet pas
+          // ⚠️ Le stage, c'est les MATHS : ce bloc ne promet pas
           // de cours d'orthographe. Il dit seulement le vrai lien entre les
           // deux — une copie de maths se lit aussi, et se note aussi.
           <div className="mt-6 rounded-3xl bg-[#041B33] p-6 text-white shadow-xl sm:p-7 print:hidden">
@@ -336,7 +336,7 @@ export default function TestCrpeClient({ test = "maths" }: { test?: NomTest }) {
                 href="/formation-crpe"
                 className="rounded-2xl bg-white/10 px-6 py-3 text-sm font-black text-white ring-1 ring-white/25 transition hover:bg-white/20"
               >
-                La préparation du samedi
+                Le stage de janvier
               </Link>
             </div>
           </div>

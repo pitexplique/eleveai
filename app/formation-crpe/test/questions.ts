@@ -11,7 +11,9 @@
 //
 // ⚠️ LES TITRES ET LES DATES DE SÉANCE SONT RECOPIÉS de `SEANCES`
 // (app/formation-crpe/page.tsx) : un fichier `page.tsx` ne peut rien exporter
-// d'autre que sa page. Si un samedi bouge là-bas, il bouge ici aussi.
+// d'autre que sa page. Si un jour bouge là-bas, il bouge ici aussi.
+// ⭐ 25/11/2026 : les samedis deviennent les jours du stage de janvier 2027
+// (4 → 22 janvier) ; le test sert aussi à la sélection et au choix du groupe.
 //
 // ⛔ QCM : jamais deux choix de même valeur, et chaque piège est une erreur
 // réelle de candidat (règle « ajouter un zéro », médiane lue sans trier,
@@ -28,15 +30,15 @@ export type Theme = {
 };
 
 export const THEMES: Theme[] = [
-  { id: "nombres", titre: "Nombres, fractions, décimaux", seance: "samedi 31 octobre" },
-  { id: "proportionnalite", titre: "Proportionnalité, pourcentages, échelles", seance: "samedi 7 novembre" },
-  { id: "arithmetique", titre: "Arithmétique", seance: "samedi 14 novembre" },
-  { id: "grandeurs", titre: "Grandeurs et mesures", seance: "samedi 21 novembre" },
-  { id: "geometrie", titre: "Géométrie plane", seance: "samedi 28 novembre" },
-  { id: "donnees", titre: "Espace, statistiques, probabilités", seance: "samedi 5 décembre" },
-  { id: "eleves", titre: "Analyser des productions d'élèves", seance: "samedi 6 février" },
-  { id: "algebre", titre: "Algèbre et mise en équation", seance: "samedi 13 février" },
-  { id: "raisonner", titre: "Raisonner, démontrer, rédiger", seance: "samedi 20 février" },
+  { id: "nombres", titre: "Nombres, fractions, décimaux", seance: "mardi 5 janvier" },
+  { id: "proportionnalite", titre: "Proportionnalité, pourcentages, échelles", seance: "mercredi 6 janvier" },
+  { id: "arithmetique", titre: "Arithmétique", seance: "jeudi 7 janvier" },
+  { id: "grandeurs", titre: "Grandeurs et mesures", seance: "vendredi 8 janvier" },
+  { id: "geometrie", titre: "Géométrie plane", seance: "lundi 11 janvier" },
+  { id: "donnees", titre: "Espace, statistiques, probabilités", seance: "mardi 12 janvier" },
+  { id: "eleves", titre: "Analyser des productions d'élèves", seance: "jeudi 14 janvier" },
+  { id: "algebre", titre: "Algèbre et mise en équation", seance: "vendredi 15 janvier" },
+  { id: "raisonner", titre: "Raisonner, démontrer, rédiger", seance: "lundi 18 janvier" },
 ];
 
 export type Question = {

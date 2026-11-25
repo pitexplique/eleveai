@@ -19,7 +19,7 @@ export const THEMES_ORTHO: Theme[] = [
   // ⭐ EN PREMIER (Frédéric, 16/10 : « hypoténuse, médiatrice, etc. ») : les
   // mots des maths. C'est là qu'une copie de maths perd des points sans que
   // personne ne le voie — et c'est le pont avec la formation du samedi.
-  { id: "vocabulaire-maths", titre: "Les mots des maths", lien: { label: "La préparation maths du samedi", href: "/formation-crpe" } },
+  { id: "vocabulaire-maths", titre: "Les mots des maths", lien: { label: "Le stage de maths de janvier", href: "/formation-crpe" } },
   { id: "homophones", titre: "Homophones grammaticaux", lien: { label: "Fiche CM2 : l'orthographe grammaticale", href: "/fiches-cours/francais/cm2/grammaire-orthographe" } },
   { id: "pp-avoir", titre: "Participe passé avec être et avoir", lien: { label: "Fiche 5e : le participe passé", href: "/fiches-cours/francais/5e/orthographe-participe" } },
   { id: "pp-pronominal", titre: "Participe passé des verbes pronominaux", lien: { label: "Fiche 4e : le participe passé", href: "/fiches-cours/francais/4e/orthographe-participe" } },

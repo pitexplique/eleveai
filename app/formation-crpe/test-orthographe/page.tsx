@@ -28,7 +28,7 @@ export default function TestOrthographeCrpePage() {
           href="/formation-crpe"
           className="text-sm font-bold text-slate-500 underline underline-offset-2 hover:text-slate-800"
         >
-          ← La préparation du samedi
+          ← Le stage de janvier
         </Link>
         <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl">
           L&apos;orthographe du CRPE&nbsp;: où en êtes-vous&nbsp;?
