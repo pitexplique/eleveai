@@ -253,8 +253,8 @@ export const metadata: Metadata = {
   description: DESCRIPTION,
   alternates: { canonical: `${SITE_URL}/formation-crpe` },
   // ⚠️ Next ne fusionne pas `openGraph` avec celui du layout : l'image est
-  // déclarée ici. L'ancienne image de partage (pub des samedis à 60 €) ne
-  // correspond plus à l'offre : image générique en attendant une nouvelle pub.
+  // déclarée ici. Elle est régénérée pour le stage de janvier (25/11) par
+  // scripts/pub-crpe-instagram.py, avec le post et la story.
   openGraph: {
     title: `Les maths du CRPE en ${NB_JOURS} jours, en janvier, à ${LIEU.ville}`,
     description: DESCRIPTION,
@@ -262,13 +262,20 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "EleveAI",
     locale: "fr_FR",
-    images: [{ url: "/preview.jpg" }],
+    images: [
+      {
+        url: "/images/formation-crpe-partage-1200x630.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Stage intensif de maths du CRPE, une semaine en janvier 2027, Saint-Pierre, La Réunion",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `Les maths du CRPE en ${NB_JOURS} jours, en janvier, à ${LIEU.ville}`,
     description: DESCRIPTION,
-    images: ["/preview.jpg"],
+    images: ["/images/formation-crpe-partage-1200x630.jpg"],
   },
 };
 

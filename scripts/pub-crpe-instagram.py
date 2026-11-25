@@ -8,6 +8,12 @@
 # ⛔ AUCUN CHIFFRE INVENTÉ (taux d'admis, avis…) : la première promotion n'a
 # pas fini. Prix, lieu, horaires : ceux de la page, rien d'autre.
 #
+# ⭐ 25/11/2026 — LE STAGE DE JANVIER remplace les samedis (aucun inscrit) :
+# une semaine, lundi → vendredi, 14 h – 18 h (heure de La Réunion), deux
+# sessions (4-8 et 11-15 janvier 2027), 300 € la semaine en salle, 250 € à
+# distance, 10 places par session, sur test d'entrée. « Bonne résolution 2027 »
+# est son accroche. Tout vient de app/formation-crpe/page.tsx.
+#
 # Usage : python scripts/pub-crpe-instagram.py
 #   → pub/instagram/crpe/carrousel-{1,2,3}-…-1080x1350.png (à publier en premier)
 #   → pub/instagram/crpe/post-1080x1350.png
@@ -132,7 +138,7 @@ def composer(h):
         return y + (b[3] - b[1])
 
     y = ligne("CRPE 2027", NAVY, y) + k(26)
-    y = ligne("ÉPREUVE DE MATHS", ORANGE, y) + k(22)
+    y = ligne("STAGE INTENSIF MATHS", ORANGE, y) + k(22)
     y = ligne("LA RÉUNION · 974", (13, 148, 136), y) + k(30)
 
     # ── L'accroche, désormais en second
@@ -167,12 +173,12 @@ def composer(h):
     carte(im, (marge, y, W - marge, y + haut_carte))
     d = ImageDraw.Draw(im)
     cx = marge + 44
-    d.text((cx, y + k(36)), "Le samedi matin, 8 h – 12 h", font=NOIR(k(48)), fill=ENCRE)
-    d.text((cx, y + k(104)), "Hôtel Terre-Sainte, Saint-Pierre", font=GRAS(k(36)), fill=GRIS)
-    d.text((cx, y + k(170)), "60 €", font=NOIR(k(84)), fill=ORANGE)
-    px = cx + largeur(d, "60 € ", NOIR(k(84)))
-    d.text((px, y + k(182)), "la matinée, sans forfait", font=GRAS(k(34)), fill=GRIS)
-    d.text((px, y + k(228)), "1re séance : samedi 24 octobre", font=GRAS(k(30)), fill=GRIS)
+    d.text((cx, y + k(36)), "1 semaine en janvier, 14 h – 18 h", font=NOIR(k(46)), fill=ENCRE)
+    d.text((cx, y + k(104)), "Hôtel Terre-Sainte, Saint-Pierre · ou à distance", font=GRAS(k(32)), fill=GRIS)
+    d.text((cx, y + k(170)), "300 €", font=NOIR(k(84)), fill=ORANGE)
+    px = cx + largeur(d, "300 € ", NOIR(k(84)))
+    d.text((px, y + k(182)), "la semaine · 250 € à distance", font=GRAS(k(32)), fill=GRIS)
+    d.text((px, y + k(228)), "4-8 ou 11-15 janvier · 10 places", font=GRAS(k(30)), fill=GRIS)
     y += haut_carte + (40 if story else 26)
 
     # ── L'action : le seul bloc sombre
@@ -242,7 +248,7 @@ def composer_partage():
 
     y = 58
     y = ligne("CRPE 2027", NAVY, y, gauche) + 20
-    y = ligne("ÉPREUVE DE MATHS", ORANGE, y, gauche) + 16
+    y = ligne("STAGE INTENSIF MATHS", ORANGE, y, gauche) + 16
     y = ligne("LA RÉUNION · 974", (13, 148, 136), y, gauche) + 30
     d.text((marge, y), "Vous enseignerez jusqu'au CM2.", font=NOIR(30), fill=ENCRE)
     d.text((marge, y + 40), "L'épreuve, elle, va jusqu'en 3e.", font=NOIR(30), fill=ORANGE)
@@ -259,10 +265,10 @@ def composer_partage():
     carte(im, (x0, 58, x1, 300), rayon=28)
     d = ImageDraw.Draw(im)
     cx = x0 + 30
-    d.text((cx, 84), "Le samedi matin", font=NOIR(32), fill=ENCRE)
-    d.text((cx, 124), "8 h – 12 h, Saint-Pierre", font=GRAS(26), fill=GRIS)
-    d.text((cx, 172), "60 €", font=NOIR(64), fill=ORANGE)
-    d.text((cx, 250), "1re séance : sam. 24 oct.", font=GRAS(24), fill=GRIS)
+    d.text((cx, 84), "1 semaine en janvier", font=NOIR(28), fill=ENCRE)
+    d.text((cx, 124), "14 h – 18 h, Saint-Pierre", font=GRAS(26), fill=GRIS)
+    d.text((cx, 172), "300 €", font=NOIR(64), fill=ORANGE)
+    d.text((cx, 250), "4-8 ou 11-15 janv. · 10 places", font=GRAS(24), fill=GRIS)
     carte(im, (x0, 330, x1, LH - 40), rayon=28, fond_c=NAVY + (255,))
     d = ImageDraw.Draw(im)
     # Sa philosophie, comme sur le post (15/10) — plus de « Test gratuit » ici.
@@ -334,7 +340,7 @@ def carrousel_1():
     cible = int(W * 0.9)
     y = 110
     y = titre_large(d, "CRPE 2027", NAVY, y, cible) + 28
-    y = titre_large(d, "ÉPREUVE DE MATHS", ORANGE, y, cible) + 24
+    y = titre_large(d, "STAGE INTENSIF MATHS", ORANGE, y, cible) + 24
     y = titre_large(d, "LA RÉUNION · 974", (13, 148, 136), y, cible) + 110
     d.text((72, y), "Vous enseignerez", font=NOIR(66), fill=ENCRE)
     d.text((72, y + 78), "jusqu'au CM2.", font=NOIR(66), fill=ENCRE)
@@ -382,25 +388,25 @@ def carrousel_3():
     """Le pratique : la date, le lieu, le prix, le téléphone."""
     im = fond(H_CAR).convert("RGBA")
     d = ImageDraw.Draw(im)
-    d.text((72, 96), "1re séance", font=NOIR(58), fill=ORANGE)
-    y = titre_large(d, "SAMEDI 24 OCTOBRE", NAVY, 196, int(W * 0.9)) + 60
+    d.text((72, 96), "Bonne résolution 2027", font=NOIR(58), fill=ORANGE)
+    y = titre_large(d, "UNE SEMAINE EN JANVIER", NAVY, 196, int(W * 0.9)) + 60
     carte(im, (72, y, W - 72, y + 430), rayon=36)
     d = ImageDraw.Draw(im)
     cx = 116
-    d.text((cx, y + 40), "8 h – 12 h, le samedi matin", font=NOIR(46), fill=ENCRE)
+    d.text((cx, y + 40), "Lundi → vendredi, 14 h – 18 h", font=NOIR(46), fill=ENCRE)
     d.text((cx, y + 104), "Hôtel Terre-Sainte, Saint-Pierre", font=GRAS(38), fill=GRIS)
-    d.text((cx, y + 180), "60 €", font=NOIR(110), fill=ORANGE)
-    px = cx + largeur(d, "60 € ", NOIR(110))
-    d.text((px, y + 196), "la matinée, café compris", font=GRAS(34), fill=GRIS)
-    d.text((px, y + 244), "sans forfait : vous payez", font=GRAS(34), fill=GRIS)
-    d.text((px, y + 288), "les samedis où vous venez", font=GRAS(34), fill=GRIS)
-    d.text((cx, y + 362), "Groupe de 5 à 15 · 14 samedis jusqu'à fin mars", font=GRAS(30), fill=(13, 148, 136))
+    d.text((cx, y + 180), "300 €", font=NOIR(110), fill=ORANGE)
+    px = cx + largeur(d, "300 € ", NOIR(110))
+    d.text((px, y + 196), "la semaine en salle", font=GRAS(34), fill=GRIS)
+    d.text((px, y + 244), "250 € à distance,", font=GRAS(34), fill=GRIS)
+    d.text((px, y + 288), "en direct (11 h – 15 h Paris)", font=GRAS(34), fill=GRIS)
+    d.text((cx, y + 362), "4-8 ou 11-15 janvier · 10 places par session", font=GRAS(30), fill=(13, 148, 136))
     y += 430 + 40
     carte(im, (72, y, W - 72, y + 300), rayon=36, fond_c=NAVY + (255,))
     d = ImageDraw.Draw(im)
     d.text((cx, y + 36), "Réservez votre place", font=NOIR(44), fill=BLANC)
     d.text((cx, y + 100), "06 92 74 29 58", font=NOIR(76), fill=AMBRE)
-    d.text((cx, y + 210), "Test gratuit (15 min) : lien en bio", font=GRAS(32), fill=(203, 213, 225))
+    d.text((cx, y + 210), "Test d'entrée (15 min) : lien en bio", font=GRAS(32), fill=(203, 213, 225))
     tm = Image.open(TI_MARGO).convert("RGBA")
     tm = tm.resize((int(tm.width * 160 / tm.height), 160), Image.LANCZOS)
     im.paste(tm, (60, H_CAR - 60 - 160), tm)
