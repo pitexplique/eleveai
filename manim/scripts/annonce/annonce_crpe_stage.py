@@ -551,7 +551,7 @@ class AnnonceCrpeStageShort(_Commun, Short6e):
         self.play(FadeIn(t3, shift=UP * 0.2), run_time=0.5)
         self.au_mot("de 14 heures")
         t4 = TS("14 h – 18 h", 48, BLEU_CALCUL, gras=True).move_to(P(0, -1.35))
-        self.play(FadeIn(t4, scale=1.3), run_time=0.4)
+        self.play(FadeIn(t4, scale=0.7), run_time=0.4)
         self.attendre_voix(0.4)
 
     def ecran_infos(self):
@@ -571,7 +571,7 @@ class AnnonceCrpeStageShort(_Commun, Short6e):
         self.play(FadeIn(p2, shift=UP * 0.2), run_time=0.4)
         self.au_mot("Dix places")
         pl = TS("10 places", 58, ORANGE_RETENUE, gras=True).move_to(P(0, -1.6))
-        self.play(FadeIn(pl, scale=1.4), run_time=0.4)
+        self.play(FadeIn(pl, scale=0.7), run_time=0.4)
         self.insister(pl, 1.1, 0.25)
         self.attendre_voix(0.4)
 
