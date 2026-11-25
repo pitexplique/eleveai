@@ -97,6 +97,7 @@ import {
   lireQuestionsVues,
   retenirQuestionVue,
 } from "@/lib/tutor-v4/memoireQuestions";
+import { lireNiveauxGardes, retenirNiveau } from "@/lib/tutor-v4/memoireNiveaux";
 // La leçon écrite est retirée du tutor : elle se construisait sur les items
 // `fixed` et rendait mal. En attendant de revoir le principe, l'aide passe par
 // l'explication IA proposée sur l'écran d'erreur (`CoachErrorHelp`).
@@ -826,6 +827,15 @@ function forceScrollTopOnArrival() {
     useState<VisibleProgress | null>(null);
 
   const [sessionResults, setSessionResults] = useState<boolean[]>([]);
+
+  /* ⭐ NIVEAU GARDÉ (25/11/2026) — après chaque réponse, le niveau où l'élève
+     en est sur la série en cours. Pas au démarrage (rien n'a été joué) : on
+     n'écrase pas le niveau d'hier par celui de départ. */
+  const microNiveau = pair?.microId;
+  useEffect(() => {
+    if (!microNiveau || sessionResults.length === 0) return;
+    retenirNiveau(classe, matiere, microNiveau, recommendedStar);
+  }, [classe, matiere, microNiveau, recommendedStar, sessionResults.length]);
   const [earnedPoints, setEarnedPoints] = useState(0);
   const [possiblePoints, setPossiblePoints] = useState(0);
   const [lastResult, setLastResult] = useState<{
@@ -1436,6 +1446,8 @@ function continueAfterExplanation() {
           /* Ce que cet élève a déjà vu, gardé d'une séance à l'autre : sans
              cela le coach lui reposerait les questions d'hier. */
           seenQuestionIds: lireQuestionsVues(classe, matiere),
+          /* Le dernier niveau atteint par série (25/11/2026) : on repart de là. */
+          niveauxParMicro: lireNiveauxGardes(classe, matiere),
         }),
       });
 

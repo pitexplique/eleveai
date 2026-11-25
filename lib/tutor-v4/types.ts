@@ -408,6 +408,11 @@ export type StartTutorV4Input = {
   seenQuestionIds?: string[];
   /** Les micros cochées par le prof (voir `TutorSessionV4.microsAutorisees`). */
   microsAutorisees?: string[];
+  /**
+   * ⭐ 25/11/2026 — Le dernier niveau atteint par série, gardé par le client
+   * (memoireNiveaux.ts) : la séance repart de là au lieu du niveau 1.
+   */
+  niveauxParMicro?: Record<string, number>;
 };
 
 export type StartTutorV4Response = {

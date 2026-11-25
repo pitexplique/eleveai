@@ -544,8 +544,16 @@ export async function startTutorSessionV4(
   }
 
   const isSimpleMode = input.displayMode === "simple";
-  const recommendedDifficulty: DifficultyLevel = isSimpleMode ? 1 : 2;
-  const recommendedStar: StarLevel = recommendedDifficulty;
+  const niveauParDefaut: DifficultyLevel = isSimpleMode ? 1 : 2;
+  /* ⭐ NIVEAU GARDÉ (25/11/2026). Le niveau atteint la dernière fois sur cette
+     série, si le client l'a gardé : un élève monté au niveau 3 hier ne refait
+     pas le niveau 1 aujourd'hui. Borné à 1-5, on ne fait pas confiance au réseau. */
+  const niveauGarde = Number(input.niveauxParMicro?.[firstMicro.id]);
+  let recommendedDifficulty: DifficultyLevel =
+    Number.isFinite(niveauGarde) && niveauGarde >= 1 && niveauGarde <= 5
+      ? (Math.round(niveauGarde) as DifficultyLevel)
+      : niveauParDefaut;
+  let recommendedStar: StarLevel = recommendedDifficulty;
 
   /* La mémoire des séances précédentes, telle que le client l'a gardée.
      Bornée ici et pas seulement côté navigateur : une liste transmise par le
@@ -561,6 +569,22 @@ export async function startTutorSessionV4(
     preferExactStar: isSimpleMode,
     allowSingleItem: isSimpleMode,
   });
+
+  /* Niveau gardé sans question dans la banque : on redescend d'un cran à la
+     fois, sur la même série, avant d'en changer. */
+  while (!pair && recommendedStar > niveauParDefaut) {
+    recommendedStar = (recommendedStar - 1) as StarLevel;
+    recommendedDifficulty = recommendedStar;
+    pair = tryBuildPair({
+      bank,
+      notionId: notion.id,
+      microId: firstMicro.id,
+      recommendedStar,
+      recentQuestionIds: memoireLongue,
+      preferExactStar: isSimpleMode,
+      allowSingleItem: isSimpleMode,
+    });
+  }
 
   let actualMicro = firstMicro;
 
