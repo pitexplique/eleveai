@@ -284,6 +284,13 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "cp-entier-denombre": 5.05,
   "cp-entier-rang": 5.05,
   "cp-entier-collection": 5.05,
+  // Paires 4 à 6 (série cp-entier2, 26/11) : même fin, paysages ET shorts (clip de fin 6,1 s + 1,5 s d'écran) : 5,05 s aussi.
+  "cp-entier-comparer": 5.05,
+  "cp-entier-comparer-short": 5.05,
+  "cp-entier-dizaine": 5.05,
+  "cp-entier-dizaine-short": 5.05,
+  "cp-entier-droite": 5.05,
+  "cp-entier-droite-short": 5.05,
   // Short CP durées « Le gâteau tout mou » refait le 26/11 avec la nouvelle fin (clip de fin 6,1 s + 0,5 s, mp4 de 62,07 s).
   // Mesuré dans le mp4 : pause entre « point f r » et « ou » de 57,96 à 58,11 s ; 62,07 − 4,05 = 58,02 s, au milieu.
   "cp-duree-defi-short": 4.05,
