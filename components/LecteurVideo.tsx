@@ -284,6 +284,9 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "cp-entier-denombre": 5.05,
   "cp-entier-rang": 5.05,
   "cp-entier-collection": 5.05,
+  // Short CP durées « Le gâteau tout mou » refait le 26/11 avec la nouvelle fin (clip de fin 6,1 s + 0,5 s, mp4 de 62,07 s).
+  // Mesuré dans le mp4 : pause entre « point f r » et « ou » de 57,96 à 58,11 s ; 62,07 − 4,05 = 58,02 s, au milieu.
+  "cp-duree-defi-short": 4.05,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {
