@@ -51,3 +51,14 @@ Fini = paysages + shorts rendus, contrôlés image par image ; R2 + page `app/pe
 - Pièges vus : `dit().jusque('à')` s'arrête sur « a » (même mot normalisé) ; une capture isolée (controle) d'un instant de réponse montre les choix vides (normal : ils se remplissent pendant la question) ; la carte paysage est à x ≥ 1290 px (≥ 1390 dans rang) : dessiner à gauche de l'ardoise pendant les questions.
 - [x] 26/11 matin, Frédéric « CORRIGE » : shorts = carte à droite sous l'ardoise, Ti Margo petit à gauche (`carteCoteE`, `tiMargoCoteE`) ; paysage denombre « Des pommes. Combien ? » (120e94c82) ; HD + R2 des 3 shorts et de la paysage denombre.
 - [x] 26/11 midi : les 3 PAYSAGES finissent par « Entraîne-toi sur eleveai.fr, ou sur YouTube @eleveai974 » (voix 6,1 s + 1,5 s), ni pouce, ni abonnement, ni cloche ; HD + R2 au même chemin ; coupe du lecteur 5,05 s (arrêt après « point f r »). Les 3 SHORTS gardent l'ancienne fin (« modifie les PROCHAINS shorts comme ça »).
+
+## Paires 4-5-6 (comparer, dizaine_unite, droite) — 26/11 après-midi
+Voix validées par Frédéric le 26/11 (`manim/SCRIPTS-cp-nombres-dessins-animes-2.md`). Séries À PART `cp-entier2` (shorts) et
+`cp-entier2-paysage` (paysages), dessins nouveaux dans `films/cp-entier2-dessins.js`. Fin NOUVELLE partout (shorts compris) :
+« Entraîne-toi sur eleveai.fr / ou sur YouTube @eleveai974 ». Sorties `manim/sorties/cp/maths/entier/0N-<ép>/`.
+- [x] 04 comparer, short « Les écureuils » : 55,5 s, bonne réponse C (7 et 7 : autant). Paysage « Qui en a le plus ? » : 126,2 s, Q1 B (le rouge, 8 > 5), Q2 A (7 < 9, vers le 9).
+- [x] 05 dizaine, short « Le pari des billes » : 61,4 s, bonne réponse A (non, 53 > 35). Paysage « Les paquets de dix » : 122,5 s, Q1 C (25), Q2 B (les bouquets de 10).
+- [x] 06 droite, short « La fusée » : 54,2 s, bonne réponse B (8). Paysage « La piste de la grenouille » : 108,9 s, Q1 A (6), Q2 C (le point bleu = 9).
+- Contrôle HD des 6 : son ok (−19 dB en moyenne), compteur visible ~3 s à chaque question, rien de rogné, carte à droite et Ti Margo visible dans les shorts, fin eleveai.fr / YouTube, miniatures ok.
+- Corrigé après la 1re HD : paysage dizaine (« 5 unités » et « de 10 » insécables ; 4 bouquets et 6 tulipes séparés et loin de la carte) ; paysage droite (le « 9 » vert écrit sous la piste, il touchait le « 10 »). Ces deux HD sont refaites.
+- [ ] RESTE, sur l'OK de Frédéric seulement : R2, coach (modèle du commit 42c1a8c48, ids `cp-entier-<ép>` et `cp-entier-<ép>-short`), page /petits.

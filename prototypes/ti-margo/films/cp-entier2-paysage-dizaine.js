@@ -45,8 +45,8 @@ FILMS['dizaine']=function(outils){
       const s=nombreDUE(c,'46',260,250,280*(T>=r2?1:zoom(T,mot('05-question','quarante-six'),.4)),T>=r2?[CRAIE.r1,CRAIE.r0]:[CRAIE.blanc,CRAIE.blanc]);
       const tQ4=mot('05-question','quatre'); if(T>=tQ4) cercle(c,s[0],255,120,CRAIE.jaune,entreE(T,tQ4,tQ4+.4));
       if(T>=r2){ const tb=mot('05b-reponse','bouquets'), ts=mot('05b-reponse','six');
-        if(T>=tb) for(let i=0;i<4;i++) bouquetE(c,62+i*80,660,10,1,.55*zoom(T,tb+i*.12,.4),0,i);
-        if(T>=ts) for(let k=0;k<6;k++) tulipeE(c,370+k*28,660,370+k*28,530,COUL_TULIPE[k%5],zoom(T,ts+k*.08,.4)); }
+        if(T>=tb) for(let i=0;i<4;i++) bouquetE(c,50+i*74,660,10,1,.55*zoom(T,tb+i*.12,.4),0,i);
+        if(T>=ts) for(let k=0;k<6;k++) tulipeE(c,360+k*26,660,360+k*26,530,COUL_TULIPE[k%5],zoom(T,ts+k*.08,.4)); }
       tab.maj(); return; }
     if(T>=q1){ /* 2 paquets de 10 crayons, 5 crayons seuls */
       const XC=k=>320+k*40, tR=[mot('04b-reponse','vingt',2),mot('04b-reponse','vingt-deux'),mot('04b-reponse','vingt-trois'),mot('04b-reponse','vingt-quatre'),mot('04b-reponse','vingt-cinq')];
@@ -92,12 +92,12 @@ FILMS['dizaine']=function(outils){
       phrase:phrase1,pause:pause1,
       choix:[['7',tqa('A'),tqa('sept')],['52',tqa('B'),tqa('cinquante-deux')],['25',tqa('C'),tqa('vingt-cinq')]],
       tete:[[r1+.1,'Réponse '],[tC,'C !']],
-      reponse:[phraseE('10, 20, … 25.',[mr1('Dix'),mr1('vingt'),mr1('puis'),mr1('vingt-cinq')]),phraseE('2 dizaines, 5 unités : 25.',[mr1('Deux'),mr1('dizaines'),mr1('cinq'),mr1('unités'),mr1('unités'),mr1('vingt-cinq',2)])],suite:[] },
+      reponse:[phraseE('10, 20, … 25.',[mr1('Dix'),mr1('vingt'),mr1('puis'),mr1('vingt-cinq')]),phraseE('2 dizaines, 5 unités : 25.',[mr1('Deux'),mr1('dizaines'),mr1('cinq'),mr1('unités'),mr1('vingt-cinq',2)])],suite:[] },
     { qc:'05-question',rc:'05b-reponse',finR:fin('05b-reponse')+.8,cpt:fin('05-question')+.1,bonne:1,tBon:tB-r2,
       phrase:phrase2,pause:pause2,
       choix:[['les fleurs seules',tqb('A'),tqb('fleurs')],['les bouquets de 10',tqb('B'),tqb('bouquets')],['rien du tout',tqb('C'),tqb('rien')]],
       tete:[[r2+.1,'Réponse '],[tB,'B !']],
-      reponse:[phraseE('4 bouquets de 10,',[mr2('quatre',2),mr2('bouquets'),mr2('de'),mr2('dix')]),phraseE('6 fleurs seules : 46 !',[mr2('six'),mr2('fleurs'),mr2('seules'),mr2('seules'),mr2('Quarante-six'),mr2('Quarante-six')])],suite:[] }
+      reponse:[phraseE('4 bouquets de 10,',[mr2('quatre',2),mr2('bouquets'),mr2('de')]),phraseE('6 fleurs seules : 46 !',[mr2('six'),mr2('fleurs'),mr2('seules'),mr2('seules'),mr2('Quarante-six'),mr2('Quarante-six')])],suite:[] }
   ];
   const groupes=[groupe(ap+.05,f,30,60,phraseE('Ce que tu as appris',[ap+.05,ap+.05,ap+.05,ap+.05,ap+.05]))];
 

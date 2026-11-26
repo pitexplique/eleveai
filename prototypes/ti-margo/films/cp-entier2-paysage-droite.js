@@ -44,8 +44,10 @@ FILMS['droite']=function(outils){
       if(T>=tParsA) arcSautE(c,a,b,1,90,CRAIE.jaune);
       grenouilleE(c,p[0],p[1]-6,1.5); tab.maj(); return; }
     if(T>=q2){ /* où se cache le 9 ? trois points sur la petite piste */
-      const pos=pisteE(c,{...Pt,ecrits:[0,5,10].concat(T>=r2&&T>=tBleu?[9]:[]),taille:54,couleur:v=>v===9?CRAIE.ok:CRAIE.blanc,
-        allume:v=>T>=r2&&((v===10&&T>=tDixR&&T<tArr)||(v===9&&T>=tArr))?1:0,zEcrit:v=>v===9?zoom(T,tBleu,.5):1});
+      const pos=pisteE(c,{...Pt,ecrits:[0,5,10],taille:54,
+        allume:v=>T>=r2&&((v===10&&T>=tDixR&&T<tArr)||(v===9&&T>=tArr))?1:0});
+      /* le 9 écrit sous les nombres, pour ne pas toucher le 10 */
+      if(T>=r2&&T>=tBleu){ const [x9,y9]=pos(9); ecrire(c,'9',x9,y9+108,54*zoom(T,tBleu,.5),CRAIE.ok); }
       const mq=w=>mot('05-question',w);
       for(const [v,coul,t] of [[3,'#ff6b6b',mq('rouge')],[7,'#51cf66',mq('vert')],[9,'#339af0',mq('bleu')]]) if(T>=t-.6){ const [x,y]=pos(v); pointE(c,x,y-60,coul,1.25*zoom(T,t-.6,.4),v===9&&T>=r2&&T>=tBleu?.5+.5*Math.sin(T*5):0); }
       if(T>=r2&&T>=tArr) arcSautE(c,pos(10),pos(9),entreE(T,tArr,tArr+.5),70,CRAIE.ok);
