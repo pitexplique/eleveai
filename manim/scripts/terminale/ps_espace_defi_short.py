@@ -113,7 +113,53 @@ def ecarte_a_echelle(u, reference=1.10):
     # ⛔ Cette cote vaut pour CE cube et CETTE figure : les points B, D, E posés sur les
     # sommets changent la grille, et un écart mesuré ailleurs ne vaut pas ici.
     out["B"] = (-0.27, -0.09)
+    # ⛔⛔ ET « D » AUSSI, PARCE QUE LE RAMENER À L'ÉCHELLE L'AVAIT CASSÉ. Vu au gros
+    # plan du 26/11 et mesuré ensuite : avec l'écart mis à l'échelle (−0,26), le nom
+    # « D » tombait à **0,315 du sommet A** et à 0,520 du sien — autrement dit le
+    # sommet A avait « D » pour nom le plus proche, devant son propre « A » (0,368).
+    # Sur un short dont toute la leçon est le plan (BDE) et la diagonale [AG], c'est
+    # la figure entière qui ment.
+    # ⭐ LA CAUSE EST DANS LA MISE À L'ÉCHELLE ELLE-MÊME, et c'est contre-intuitif :
+    # l'écart BRUT du socle (−0,44) éloignait assez le nom pour qu'il dégage le sommet
+    # A ; ramené au rapport u/1,10 il ne l'éloigne plus assez. Mesuré sur les quatre
+    # tailles : sans écart la marge vaut −0,181, avec l'écart brut −0,010, avec
+    # l'écart mis à l'échelle −0,053. Aucun des trois ne passe à u = 0,65.
+    # ⚠️ Et le cube ne peut pas grandir pour s'en sortir : il occupe 1,694 entre le
+    # badge (2,480) et la colonne de calcul (0,640), soit 1,84 de fente.
+    # ⭐ Cherché en grille (pas de 0,03, 1 681 places) avec le critère qui manquait —
+    # CHAQUE SOMMET MONTRÉ DOIT AVOIR SON PROPRE NOM POUR PLUS PROCHE VOISIN. Les
+    # meilleures marges sont sous le cube, à 0,57 du sommet : un « D » qui flotte
+    # au-dessous se lit comme l'étiquette de l'arête [AB]. On garde donc la colonne de
+    # gauche, où E, D et A se lisent dans l'ordre de hauteur de leurs sommets, et on
+    # retient (−0,30 ; +0,15) : marge **+0,062**, 0,294 du trait le plus proche.
+    out["D"] = (-0.30, 0.15)
     return out
+
+
+def controler_noms(r, c, montres):
+    """Chaque sommet montré a-t-il SON nom pour plus proche voisin ?
+
+    ⛔⛔ C'EST LE CONTRÔLE QUI MANQUAIT À LA SÉRIE, et son absence a laissé passer un
+    « D » posé sur le sommet A jusqu'aux planches. `--ancres` mesure un nom contre les
+    TRAITS, `etiquettes()` mesure les noms ENTRE EUX : ni l'un ni l'autre ne demande
+    jamais *à qui un nom appartient*. Un nom peut donc être à bonne distance de tout,
+    et désigner le mauvais sommet.
+    ⭐ Il tient en dix lignes, il s'exécute au `pieces()`, et il casse le rendu au lieu
+    de laisser l'erreur atteindre l'image.
+    ⚠️ Les noms sont les DERNIERS mobjets du cube, et `cube_place(noms=…)` retire du
+    groupe ceux qu'on ne montre pas : on les relit donc dans l'ordre « ABCDEFGH »
+    filtré, et surtout pas par `c[len(c) - 8 + i]`. C'est ce décalage qui avait rendu
+    mon premier relevé faux, et il accusait trois noms innocents."""
+    gardes = [s for s in "ABCDEFGH" if s in montres]
+    etiq = {s: c[len(c) - len(gardes) + i] for i, s in enumerate(gardes)}
+    som = {k: np.array(r.pt(*v))[:2] for k, v in S.items()}
+    for k in montres:
+        d = sorted((float(np.linalg.norm(np.array(etiq[L].get_center())[:2] - som[k])), L)
+                   for L in montres)
+        if d[0][1] != k:
+            raise AssertionError(
+                f"le sommet {k} a « {d[0][1]} » pour nom le plus proche ({d[0][0]:.3f}) "
+                f"et non le sien ({next(x for x, L in d if L == k):.3f})")
 
 
 def carte_lignes(e, texte, fs=24, largeur=3.95):
@@ -183,8 +229,13 @@ def pieces(e):
     # ⚠️ Donc cette ligne ne passe plus par `blocs_phrase` (qui recopie la voix mot pour
     # mot, et la voix dit « B D E ») : elle est coupée à la main et son ancre est posée
     # explicitement, comme l'écran 03 du short de l'épisode 6.
-    a1 = e.pose(VGroup(*e.lignes("le plan (BDE) coupe", 26)[0],
-                       *e.lignes("la grande diagonale", 26)[0]
+    # ⛔ MAJUSCULE ET POINT : le gros plan du 26/11 a montré une accroche qui s'ouvrait
+    # sur « le plan (BDE) coupe » — la ligne recopiait le milieu de la voix (« Dans le
+    # cube, le plan B D E coupe… »). Une accroche est la PREMIÈRE chose qu'on lit.
+    # ⭐ Les deux lignes sont coupées à la main (la voix dit « B D E »), donc rien
+    # n'oblige à recopier sa casse. Mesuré : 3,75 et 3,71 pour 3,90 offerts.
+    a1 = e.pose(VGroup(*e.lignes("Le plan (BDE) coupe", 26)[0],
+                       *e.lignes("la grande diagonale.", 26)[0]
                        ).arrange(DOWN, buff=0.12), 1.85)
     a2 = e.blocs_phrase("En son milieu ?", 0.55, 30, C_REGARD)
     # ⛔ `larg=3,60` : la borne d'un bloc encadré que `insister` fait battre de 5 %.
@@ -199,6 +250,7 @@ def pieces(e):
     # avec la diagonale tracée (« quand la grille ne trouve rien, on n'étiquette pas »).
     r, _cube, _vs, cubeg = e.cube_place(U_CUBE, Y_CUBE, ecarte=ecarte_a_echelle(U_CUBE),
                                         noms=("A", "B", "D", "E", "G"))
+    controler_noms(r, _cube, ("A", "B", "D", "E", "G"))
     ag = e.arete(r, "A", "G", couleur=C_VECTEUR2, sw=5)
     # ⛔⛔ PAS DE TRIANGLE (BDE) : voir l'en-tête, la platitude est mesurée à l'import.
     #
@@ -263,7 +315,18 @@ def pieces(e):
     # majuscules (« [ » et « ] »).
     CHOIX = ("au tiers de [AG]", "au milieu de [AG]", "aux deux tiers de [AG]")
     assert len(CHOIX[BONNE]) < min(len(CHOIX[1]), len(CHOIX[2])), [len(c) for c in CHOIX]
-    q_lignes, _ = e.lignes("Ce point est situé où sur la diagonale ?", fsq)
+    # ⛔⛔ « CE POINT » NE DÉSIGNAIT RIEN, ET C'EST LE GROS PLAN DU 26/11 QUI L'A VU.
+    # L'écran de pause affichait « Ce point est situé où sur la diagonale ? » avec les
+    # trois cartes — et RIEN D'AUTRE : ni cube, ni diagonale, ni t = 1/3. Le découpage
+    # demandait pourtant que la pause les montre. Un élève qui met pause lisait un
+    # démonstratif sans antécédent, sur le seul écran qu'il regarde longtemps.
+    # ⚠️ Remettre la figure est impossible : la question (2 lignes) et les trois cartes
+    # (2 lignes chacune) prennent déjà ~3,3 des 3,885 disponibles, et un cube fait 1,40.
+    # ⭐ On change donc la QUESTION, pour qu'elle se tienne debout toute seule — et elle
+    # referme l'accroche, qui demandait « En son milieu ? Non. ». Mesuré : deux lignes,
+    # 3,05 d'unité au lieu de 3,74, l'écran y gagne même de l'air.
+    # ⛔ « [AG] » collé, comme les trois cartes : la coupe se fait aux espaces.
+    q_lignes, _ = e.lignes("Où le plan (BDE) coupe-t-il [AG] ?", fsq)
     tete, q, cartes, pause, rebours = e.q_tete(
         q_lignes, [carte_lignes(e, c, fsc) for c in CHOIX], fs_q=fsq, fs_c=fsc)
     p["02-question"] = [("titre", titre), ("badge", badge), ("tête", tete),
@@ -275,6 +338,7 @@ def pieces(e):
     # à la même échelle : une cote d'écart de nom est relative à son `u`.
     r2, _c2, _v2, cube2g = e.cube_place(U_K, 1.10, ecarte=ecarte_a_echelle(U_K),
                                         noms=("A", "G"))
+    controler_noms(r2, _c2, ("A", "G"))
     ag2 = e.arete(r2, "A", "G", couleur=C_VECTEUR2, sw=5)
     # ⛔⛔ LE POINT SEUL NE SUFFIT PAS, ET LA MESURE LE DIT : dans cette projection, K
     # tombe à **0,100 d'unité du sommet D** à u = 0,65 (0,108 à u = 0,70), pour un point
@@ -316,7 +380,13 @@ def pieces(e):
     # ⛔ « (BDE) » AVEC SES PARENTHÈSES : c'est un PLAN, pas un vecteur ni un produit.
     # C'est la convention tranchée par la passe des flèches (épisode 8) : « (A G) » la
     # droite, « [A G] » le segment, « (BDE) » le plan, « A G⃗ » le vecteur.
-    dq = e.pose(VGroup(*e.lignes("la distance du point A", 28, color=C_REGARD)[0],
+    # ⛔ « La distance de A » ET NON « la distance du point A ». Deux défauts d'un coup,
+    # vus au gros plan du 26/11 : la minuscule d'ouverture, et surtout « la distance du
+    # point A » qui se coupait en « la distance du » / « point A » — le A, c'est-à-dire
+    # le point dont parle toute la question, se retrouvait SEUL sur sa ligne.
+    # ⭐ Mesuré à 28 px : « La distance de A » tient sur une ligne (3,26 pour 3,90), et
+    # la question redevient deux lignes nettes. C'est l'écriture du découpage.
+    dq = e.pose(VGroup(*e.lignes("La distance de A", 28, color=C_REGARD)[0],
                        *e.lignes("au plan (BDE) ?", 28, color=C_REGARD)[0]
                        ).arrange(DOWN, buff=0.14), 1.55)
     appel = e.appel_blocs(-0.60)
