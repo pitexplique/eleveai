@@ -61,3 +61,33 @@ local_700b3f43 est ARCHIVÉ, ne plus lui écrire.
 
 ⛔ Jamais `git add -A`, stash, reset, push, changement de branche. Ne jamais lancer la lecture
 d'une vidéo. Relève à 65 % de contexte (écrire ici, puis lancer la session suivante).
+
+
+## ⏩ ÉTAT au 26/11 ~16 h 50 (relève n° 2, contexte à 78 %)
+
+| | scène | dry run | HD | bords | R2 | coupe |
+|---|---|---|---|---|---|---|
+| E1 definition | ✅ 74d0d98f8 | ✅ | ✅ 289,30 s · 18 285 315 o | ✅ 0 | ✅ Content-Length = local | 4,91 |
+| E2 proprietes | ✅ (commit après 2e1d37504) | ✅ | ⏳ en file | | | |
+| E3 deriver | ✅ 2e1d37504 + correction 01 | ✅ | ⏳ REFAIT en file (le 1er HD avait « battements / min » hors du moniteur) | | | |
+| E4 equation_inequation | ✅ 2e1d37504 | ✅ | ⏳ en file | | | |
+| E5 limite | ✅ 2e1d37504 | ✅ | ⏳ en file | | | |
+| E6 defi | ✅ 2e1d37504 | ✅ | ⏳ en file | | | |
+
+- Les rendus HD tournent en arrière-plan (lancés par la session précédente) via
+  `manim/poste2/rendre2.sh <micro> <Classe> qh` (attend ≥ 2,5 Go libres, aucun autre rendu, et un verrou).
+  ⚠️ Avant d'en lancer un : `tasklist | grep -i python` — ne JAMAIS en lancer deux.
+  Un HD fini = `manim/scripts/terminale/media-exp-<micro-tirets>/videos/exp_<micro>/1080p60/…mp4`.
+- Après chaque HD : `bash manim/poste2/finir.sh <micro>` (copie dans `manim/sorties/terminale/maths/analyse/exp-<micro-tirets>/`,
+  vérifie les bords, donne durée, taille et les silences de fin). La coupe = le silence « fin − 4,99 → fin − 4,83 » : **4,91** (E1 et E3).
+- Puis REGARDER une planche du HD (`bash manim/poste2/cibles.sh <mp4> <sortie.png> t1 t2 …` ou ffmpeg fps=1/6 tile=4x4) :
+  E2 n'a JAMAIS été vue à l'image ; E4, E5, E6 ont des retouches pas encore vues ; E3 à revoir à l'écran 01.
+- R2 : `.\scripts2-videos.ps1 -Rclone "copyto <local> R2:terminale/maths/analyse/exp-<m>/<nom>.mp4"` puis
+  `curl -sI https://pub-a5bab809c9be4ab6a33fe47c1aa68b5b.r2.dev/<chemin>` → Content-Length = taille locale. Envoyer aussi la miniature .png.
+- Un agent préparait (pas fini à la relève) : `manim/poste2/manifeste-exp.py` (6 entrées du manifeste, instants pris du dry run),
+  `manim/poste2/videos-r2-exp.json` (à copier À LA MAIN dans `lib/videos/videos-r2.json`, ⛔ jamais generer-videos-r2.mjs),
+  `.tmp-ress-exp-tle.mjs` (notion_ressources : lecture, puis `ecrire`), `manim/miniature_exp_terminale.py`.
+  Vérifier que ces fichiers existent et sont justes ; les finir sinon.
+- `COUPE_PAR_VIDEO` (components/LecteurVideo.tsx) : ajouter les 6 ids `terminale-exp-*` (4,91 si la mesure est la même).
+- Manifeste : commit PAR CLÉS (`python manim/outils-commit-cles.py manim/manifeste-youtube.json <sortie> terminale-exp-`).
+- Rapport final au chef **local_fad0fe0b-b997-493e-ab73-a6c9f2e9ce8c** : 6 tailles R2, lignes notion_ressources, sha.
