@@ -303,6 +303,14 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "cp-suite-completer": 5.03,
   "cp-suite-defi": 5.03,
   "cp-suite-defi-short": 5.03,
+  // Série exponentielle Tle (26/11), 6 paysages : mesuré dans chaque mp4 HD (silencedetect), pause entre
+  // « point f r » et « ou » de 4,99 à 4,83 s avant la fin ; milieu 4,91 s.
+  "terminale-exp-definition": 4.91,
+  "terminale-exp-proprietes": 4.91,
+  "terminale-exp-deriver": 4.91,
+  "terminale-exp-equation-inequation": 4.91,
+  "terminale-exp-limite": 4.91,
+  "terminale-exp-defi": 4.91,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {

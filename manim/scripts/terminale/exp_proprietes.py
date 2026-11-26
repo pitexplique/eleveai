@@ -206,17 +206,17 @@ class ExpProprietesTerminale(ExpBase):
         flacon = erlenmeyer(1.25).move_to(P(-5.2, -1.85))
         self.play(FadeIn(flacon, shift=UP * 0.2), run_time=0.45)
         # les trois boîtes de Petri : la culture grossit
-        b1 = boite_petri(0.55, 5, 1).move_to(P(-2.0, 0.9))
-        b2 = boite_petri(0.72, 18, 2).move_to(P(1.15, 0.9))
-        b3 = boite_petri(0.88, 60, 3).move_to(P(4.45, 0.9))
+        b1 = boite_petri(0.55, 5, 1).move_to(P(-2.3, 0.9))
+        b2 = boite_petri(0.72, 18, 2).move_to(P(0.75, 0.9))
+        b3 = boite_petri(0.88, 60, 3).move_to(P(4.65, 0.9))
         self.au_mot("fait pousser des levures")
         self.play(FadeIn(b1, scale=0.6), run_time=0.45)
         self.play(LaggedStart(*[Indicate(l, color=WHITE, scale_factor=1.8) for l in b1[2]], lag_ratio=0.15),
                   run_time=0.6)
         f1 = self.fleche(b1.get_right() + RIGHT * 0.15, b2.get_left() + LEFT * 0.15, BLEU_CALCUL)
         f2 = self.fleche(b2.get_right() + RIGHT * 0.15, b3.get_left() + LEFT * 0.15, BLEU_CALCUL)
-        m1 = self.t("le matin", 26, GREY_A).next_to(f1, DOWN, buff=0.2)
-        m2 = self.t("l'après-midi", 26, GREY_A).next_to(f2, DOWN, buff=0.2)
+        m1 = self.t("le matin", 24, GREY_A).next_to(f1, DOWN, buff=0.2)
+        m2 = self.t("l'après-midi", 24, GREY_A).next_to(f2, DOWN, buff=0.2)
         e1 = self.F("× e^{2}", 42, BLEU_CALCUL).next_to(f1, UP, buff=0.25)
         e2 = self.F("× e^{3}", 42, BLEU_CALCUL).next_to(f2, UP, buff=0.25)
         self.au_mot("Le matin")
@@ -227,7 +227,7 @@ class ExpProprietesTerminale(ExpBase):
         self.play(FadeIn(e2, scale=1.3), FadeIn(b3, scale=0.6), run_time=0.5)
         arc = CurvedArrow(b1.get_bottom() + DOWN * 0.1, b3.get_bottom() + DOWN * 0.1, angle=TAU / 7,
                           color=AMBRE, stroke_width=5)
-        q = self.t("× ?", 46, AMBRE).move_to(P(1.15, -1.45))
+        q = self.t("× ?", 46, AMBRE).move_to(P(0.75, -1.45))
         j = self.t("sur toute la journée", 28, AMBRE).next_to(q, DOWN, buff=0.12)
         self.au_mot("toute la journée")
         self.play(Create(arc), FadeIn(q, scale=1.3), FadeIn(j), run_time=0.7)
@@ -424,7 +424,7 @@ class ExpProprietesTerminale(ExpBase):
         e = self.t("≈ 7,39", 42, BLEU_CALCUL)
         l4 = self.lg(d, e, y=-1.35, x=x, buff=0.25)
         # les barres
-        base, k = -2.6, 0.62
+        base, k = -2.9, 0.45  # barres sous « pas pour une somme » (planche HD 26/11)
         sol = Line(P(1.7, base), P(5.2, base), color=GREY_B, stroke_width=3)
         b2 = Rectangle(width=1.1, height=5.44 * k, fill_color=ROUGE_ERREUR, fill_opacity=0.85, stroke_width=0)
         b2.move_to(P(2.6, base + 5.44 * k / 2))
@@ -442,7 +442,7 @@ class ExpProprietesTerminale(ExpBase):
         self.play(FadeIn(d, shift=RIGHT * 0.15), run_time=0.3)
         self.au_mot("7,39")
         self.play(FadeIn(e, scale=1.3), GrowFromEdge(b1, DOWN), FadeIn(e1), run_time=0.5)
-        ne = self.t("≠", 60, ROUGE_ERREUR).move_to(P(3.45, base + 5.44 * k + 0.6))
+        ne = self.t("≠", 60, ROUGE_ERREUR).move_to(P(2.6, base + 5.44 * k + 0.45))  # au-dessus de la barre rouge, sans toucher la bleue
         self.play(FadeIn(ne, scale=1.5), run_time=0.35)
         self.insister(VGroup(l3, l4), 1.08)
         del l2

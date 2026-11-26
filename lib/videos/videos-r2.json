@@ -19257,5 +19257,59 @@
   "short": false,
   "youtube": "ZZiXPXBTXIQ",
   "coach": "/coach/serie?classe=seconde&matiere=maths&notion=arithmetique_entiers&display=simple"
+ },
+ "terminale-exp-definition": {
+  "fichier": "terminale/maths/analyse/exp-definition/eleveai-maths-terminale-exp-definition.mp4",
+  "poster": "terminale/maths/analyse/exp-definition/eleveai-maths-terminale-exp-definition.png",
+  "vignette": "terminale/maths/analyse/exp-definition/eleveai-maths-terminale-exp-definition.vignette.webp",
+  "titre": "Une vidéo qui devient virale ? — La fonction exponentielle · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=fonction_exponentielle&microId=exp_definition&display=simple"
+ },
+ "terminale-exp-proprietes": {
+  "fichier": "terminale/maths/analyse/exp-proprietes/eleveai-maths-terminale-exp-proprietes.mp4",
+  "poster": "terminale/maths/analyse/exp-proprietes/eleveai-maths-terminale-exp-proprietes.png",
+  "vignette": "terminale/maths/analyse/exp-proprietes/eleveai-maths-terminale-exp-proprietes.vignette.webp",
+  "titre": "Multiplier par e², puis par e³ ? — Propriétés de l'exponentielle · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=fonction_exponentielle&microId=exp_proprietes&display=simple"
+ },
+ "terminale-exp-deriver": {
+  "fichier": "terminale/maths/analyse/exp-deriver/eleveai-maths-terminale-exp-deriver.mp4",
+  "poster": "terminale/maths/analyse/exp-deriver/eleveai-maths-terminale-exp-deriver.png",
+  "vignette": "terminale/maths/analyse/exp-deriver/eleveai-maths-terminale-exp-deriver.vignette.webp",
+  "titre": "À quelle vitesse le cœur redescend ? — Dériver eᵘ · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=fonction_exponentielle&microId=exp_deriver&display=simple"
+ },
+ "terminale-exp-equation-inequation": {
+  "fichier": "terminale/maths/analyse/exp-equation-inequation/eleveai-maths-terminale-exp-equation-inequation.mp4",
+  "poster": "terminale/maths/analyse/exp-equation-inequation/eleveai-maths-terminale-exp-equation-inequation.png",
+  "vignette": "terminale/maths/analyse/exp-equation-inequation/eleveai-maths-terminale-exp-equation-inequation.vignette.webp",
+  "titre": "Quand ce titre va-t-il rattraper l'autre ? — Équations avec l'exponentielle · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=fonction_exponentielle&microId=exp_equation_inequation&display=simple"
+ },
+ "terminale-exp-limite": {
+  "fichier": "terminale/maths/analyse/exp-limite/eleveai-maths-terminale-exp-limite.mp4",
+  "poster": "terminale/maths/analyse/exp-limite/eleveai-maths-terminale-exp-limite.png",
+  "vignette": "terminale/maths/analyse/exp-limite/eleveai-maths-terminale-exp-limite.vignette.webp",
+  "titre": "Qui gagne la course vers l'infini ? — Limites et croissances comparées · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=fonction_exponentielle&microId=exp_limite&display=simple"
+ },
+ "terminale-exp-defi": {
+  "fichier": "terminale/maths/analyse/exp-defi/eleveai-maths-terminale-exp-defi.mp4",
+  "poster": "terminale/maths/analyse/exp-defi/eleveai-maths-terminale-exp-defi.png",
+  "vignette": "terminale/maths/analyse/exp-defi/eleveai-maths-terminale-exp-defi.vignette.webp",
+  "titre": "Quand y a-t-il le plus de médicament dans le sang ? — Exercice type bac, exponentielle · Tle spé",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=fonction_exponentielle&microId=exp_defi&display=simple"
  }
 }
