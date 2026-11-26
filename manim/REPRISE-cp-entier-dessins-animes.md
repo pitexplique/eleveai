@@ -61,4 +61,4 @@ Voix validées par Frédéric le 26/11 (`manim/SCRIPTS-cp-nombres-dessins-animes
 - [x] 06 droite, short « La fusée » : 54,2 s, bonne réponse B (8). Paysage « La piste de la grenouille » : 108,9 s, Q1 A (6), Q2 C (le point bleu = 9).
 - Contrôle HD des 6 : son ok (−19 dB en moyenne), compteur visible ~3 s à chaque question, rien de rogné, carte à droite et Ti Margo visible dans les shorts, fin eleveai.fr / YouTube, miniatures ok.
 - Corrigé après la 1re HD : paysage dizaine (« 5 unités » et « de 10 » insécables ; 4 bouquets et 6 tulipes séparés et loin de la carte) ; paysage droite (le « 9 » vert écrit sous la piste, il touchait le « 10 »). Ces deux HD sont refaites.
-- [ ] RESTE, sur l'OK de Frédéric seulement : R2, coach (modèle du commit 42c1a8c48, ids `cp-entier-<ép>` et `cp-entier-<ép>-short`), page /petits.
+- [x] 26/11 après-midi, sur son « Oui, envoie » : R2 (24 fichiers, tailles vérifiées), videos-r2.json et /petits (b4fd379d2) ; manifeste (YouTube daté 31/07, 01/08, 02/08/2027), bilans et coach : 6 lignes notion_ressources (9933fd963). Pas poussé.
