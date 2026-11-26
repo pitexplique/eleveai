@@ -10,7 +10,7 @@ Cette procédure est la jumelle de la procédure fiches : même point de départ
 - **Voix (clé `…-abonne`), paysage comme short :** « Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre ! »
 - **Écran :** « Entraîne-toi sur » + « eleveai.fr » (encadré), puis « ou sur YouTube » + « @eleveai974 », avec Ti Margo pouce levé en dessous. Plus de pouce, de commentaire, d'abonne-toi ni de cloche.
 - Dans un short, la question « Réponds en commentaire ! » juste avant la fin reste.
-- Appliqué en premier aux 6 dessins animés CP nombres entiers (26/11). Les vidéos déjà en ligne gardent leur fin : on ne les refait pas sans son accord.
+- Appliqué en premier aux 3 paysages CP nombres entiers (26/11) ; les 3 shorts CP nombres entiers gardent l'ancienne fin. Les vidéos déjà en ligne gardent leur fin : on ne les refait pas sans son accord.
 - ⏳ `manim/fin_commune.py` (`ecran_fin`) et la fin Ti Margo (`prototypes/ti-margo/short.js`, `#fin`) écrivent encore l'ancienne fin. En attendant qu'on les change, chaque nouveau film doit surcharger son écran de fin. Il faut aussi recaler la coupe du lecteur (`COUPE_PAR_VIDEO`, `components/LecteurVideo.tsx`).
 
 *Règle du 05/11 (remplacée le 26/11 pour toutes les NOUVELLES vidéos ; reste celle des vidéos déjà rendues) :* la voix finit par la clé `…-abonne` exactement ainsi :
