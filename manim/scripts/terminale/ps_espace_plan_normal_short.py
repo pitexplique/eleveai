@@ -109,7 +109,47 @@ def equation(e, eq, fs=28, color=WHITE):
     jd = f"{'−' if d < 0 else '+'} {abs(d)}"
     jetons = [jx, jy, jz, jd, "=", "0"]
     g = e.eq_mots(jetons, fs, color)
+    _aligner_lignes_de_base(e, jetons, g, fs)
     g.coef, g.cte, g.zero = [g[0], g[1], g[2]], g[3], g[5]
+    return g
+
+
+def _aligner_lignes_de_base(e, jetons, g, fs):
+    """Remet les jetons d'une équation sur UNE SEULE ligne de base.
+
+    ⛔⛔ VU AU GROS PLAN DU 26/11, ET PAR RIEN D'AUTRE. Dans « 2x − y + 3z − 5 = 0 »,
+    le moins de « − y » avait son milieu 21 px (0,087 d'unité) AU-DESSUS de celui de
+    « − 5 » et du « + ». À l'écran il ne se lit plus comme un signe mais comme un
+    macron posé sur le y.
+
+    ⭐ LA CAUSE EST DANS `eq_mots`, QUI EST GELÉ : il fait `arrange(RIGHT)`, et
+    `arrange` aligne les CENTRES DE BOÎTE. Le jeton « − y » descend sous la ligne de
+    base (la jambe du y) et « − 5 » n'y descend pas : centrer les deux boîtes soulève
+    la première tout entière. ⭐⭐ Le contre-exemple le prouve et ferme le diagnostic :
+    dans « x − 4y + z − 9 = 0 » l'écart tombe à 6 px, parce que le « 4 » remonte AUSSI
+    le haut de la boîte. Le défaut n'existe donc que pour un coefficient **unité**
+    devant une lettre à descendante — c'est-à-dire exactement « − y », le jeton dont ce
+    short a besoin.
+
+    ⭐ LA MESURE, plutôt qu'un décalage deviné : on rend chaque jeton SUIVI d'une cale
+    « 0g » dans un seul `Text`, donc sur une seule ligne de base. La boîte de cette
+    sonde a les mêmes extrêmes pour tous les jetons (la capitale du zéro, la
+    descendante du g), donc son centre est à un écart FIXE de la ligne de base. L'écart
+    entre le centre du jeton et celui de sa sonde est ce qu'il faut lui rendre.
+    Relevé à 28 px : « 2x » +0,043 · « − y » **−0,044** · « + 3z » +0,040 ·
+    « − 5 » +0,038 · « = » +0,021 · « 0 » +0,040. Le seul négatif est le coupable, et
+    l'écart « − y » / « − 5 » vaut 0,081 — les 21 px mesurés à l'image.
+
+    ⛔ La correction vit ICI et pas dans le socle : `espace_commun_short.py` est gelé,
+    un rendu le lit à l'import, et le toucher changerait ce qu'une autre session rend.
+    """
+    for j, mob in zip(jetons, g):
+        sonde = e.t(j + "0g", fs, larg=None)
+        n = len([c for c in j if not c.isspace()])
+        if len(sonde) != n + 2:        # ⛔ l'indexage des glyphes n'est pas celui qu'on croit
+            continue                   #    → on ne bouge rien plutôt que de bouger au hasard
+        ecart = float(VGroup(*sonde[:n]).get_center()[1] - sonde.get_center()[1])
+        mob.shift(UP * ecart)
     return g
 
 
@@ -121,7 +161,10 @@ def pieces(e):
 
     # ── 00 : tu l'as déjà ───────────────────────────────────────────────────
     a1 = e.blocs_phrase("Tu as l'équation d'un plan ?", 1.85, 26)
-    a2 = e.blocs_phrase("tu as déjà son vecteur normal", 0.70, 26, C_REGARD)
+    # ⛔ « Alors » : sans lui, l'écran enchaînait « Tu as l'équation d'un plan ? » sur
+    # « tu as déjà son vecteur normal » — une minuscule après un point d'interrogation.
+    # La voix dit « Alors tu as déjà… » : le mot manquait à l'écran, pas à l'oreille.
+    a2 = e.blocs_phrase("Alors tu as déjà son vecteur normal", 0.70, 26, C_REGARD)
     # ⛔ `larg=3,60` : la borne d'un bloc encadré que `insister` fait battre de 5 % est
     # 2 × 2,115 / 1,05 − 0,28 = 3,75.
     a3 = e.blocs_phrase("sans aucun calcul", -1.10, 36, VERT_OK, larg=3.60)
@@ -145,9 +188,21 @@ def pieces(e):
                   ).arrange(RIGHT, buff=0.20)
     e.pose(nvec, -0.45)
     cadre_n = SurroundingRectangle(nvec, color=VERT_OK, buff=0.14, stroke_width=3)
-    ph2 = e.blocs_phrase("Le terme constant, lui, n'en fait pas partie", -1.75, 22,
+    # ⛔⛔ LA PHRASE AVAIT PERDU SA TÊTE, ET SEUL LE GROS PLAN DU 26/11 L'A VU. L'écran
+    # affichait « Le terme constant, lui, n'en fait pas partie » puis, en gris, « pas
+    # comment il est orienté » : la queue d'une phrase dont le milieu n'est jamais
+    # écrit. La voix, elle, dit tout — « … n'en fait pas partie : IL DIT SEULEMENT OÙ
+    # LE PLAN SE PLACE, pas comment il est orienté ». Lu seul, l'écran était du
+    # charabia. On écrit la clause entière, mot pour mot.
+    # ⚠️ Elle fait TROIS lignes à 22 px (1,033 de haut) là où il y en avait deux
+    # (0,664), et il a fallu remonter les deux blocs : mesuré, « la normale » finit à
+    # −0,793 et la boîte de Ti-Margo commence à −2,92. À −1,49 et −2,30, le premier
+    # bloc laisse 0,35 au-dessus de lui et le second garde les 0,108 de garde que
+    # l'ancienne mise en page avait sous elle.
+    ph2 = e.blocs_phrase("Le terme constant, lui, n'en fait pas partie", -1.37, 22,
                          C_PIEGE)
-    ph3 = e.blocs_phrase("pas comment il est orienté", -2.48, 22, GREY_A)
+    ph3 = e.blocs_phrase("il dit seulement où le plan se place, "
+                         "pas comment il est orienté", -2.30, 22, GREY_A)
     p["01-idee"] = [("titre", titre), ("badge", badge), ("les coordonnées", ph0),
                     ("les signes", ph1), ("équation", eq),
                     ("la normale", VGroup(nvec, cadre_n)),
@@ -190,7 +245,13 @@ def pieces(e):
     # ⚠️ « C : le terme constant » et non « a pris le terme constant » : à 22 px la
     # phrase entière fait 4,0 et passe sur deux lignes, et il n'y a que 1,20 sous les
     # cartes pour DEUX corrections.
-    lc = e.blocs_phrase("C : le terme constant", bas - 0.90, 22, C_PIEGE)
+    # ⚠️ 0,86 et non 0,90 : réaligner les jetons de l'équation sur leur ligne de base
+    # (voir `_aligner_lignes_de_base`) change sa boîte de quelques centièmes, et
+    # `q_tete` descend les cartes d'autant. À 0,90 le bas de cette correction tombait à
+    # −2,876 pour une boîte de Ti-Margo qui monte à −2,92 : six millièmes sous le seuil
+    # de la mesure. ⭐ Un correctif de typographie déplace la page entière — c'est la
+    # mesure de la série qui l'a rattrapé, pas la relecture.
+    lc = e.blocs_phrase("C : le terme constant", bas - 0.86, 22, C_PIEGE)
     # ⛔ Le bloc enregistré ici est l'ÉQUATION SEULE, pas le groupe de question : sur cet
     # écran les deux lignes de texte sont effacées, et mesurer le groupe entier ferait
     # croire à un chevauchement de 0,32 avec une ligne qui n'est plus là.
@@ -228,7 +289,7 @@ class PsEspacePlanNormalShort(ShortEspace):
         self.dire("00-accroche")
         a = p["00-accroche"]
         self.jouer_phrase(a["l'équation"], "Tu as l'équation d'un plan ?")
-        self.jouer_phrase(a["déjà la normale"], "tu as déjà son vecteur normal")
+        self.jouer_phrase(a["déjà la normale"], "Alors tu as déjà son vecteur normal")
         self.au_mot("sans aucun calcul")
         self.play(FadeIn(a["sans calcul"][0], scale=1.2),
                   Create(a["sans calcul"][1]), run_time=0.45)
@@ -300,7 +361,9 @@ class PsEspacePlanNormalShort(ShortEspace):
         self.jouer_phrase(i["le terme constant"],
                           "Le terme constant, lui, n'en fait pas partie",
                           avec=[eq.cte.animate.set_color(C_PIEGE)])
-        self.jouer_phrase(i["orienté"], "pas comment il est orienté")
+        self.jouer_phrase(i["orienté"],
+                          "il dit seulement où le plan se place, "
+                          "pas comment il est orienté")
         self.attendre_voix(marge=0.3)
 
         # ── 02 : la question-pause ──────────────────────────────────────────
