@@ -5,13 +5,13 @@ Cette procédure est la jumelle de la procédure fiches : même point de départ
 
 ## ⛔ La phrase de fin (Frédéric, 19/10/2026 ; pouce, commentaire et cloche ajoutés le 05/11/2026 ; ⛔⛔ PAYSAGES ET SHORTS changés le 26/11/2026)
 
-**⛔⛔ RÈGLE ACTUELLE, 26/11/2026 : TOUTE NOUVELLE VIDÉO, PAYSAGE ET SHORT, finit par « Entraîne-toi sur eleveai.fr ou sur YouTube @eleveai974 ».** Frédéric : « On laisse juste Entraîne-toi sur eleveai.fr ou youtube @eleveai974, mémorise pour les autres vidéos » ; puis, en montrant l'écran de fin d'une paysage CP : « pour la fin des shorts mettre », « modifie les prochains shorts comme ça », « idem pour les paysage », « mets la règle en place ».
+**⛔⛔ RÈGLE ACTUELLE, 26/11/2026 : paysage ET short finissent par « eleveai.fr ou YouTube @eleveai974 ».** Frédéric : « On laisse juste Entraîne-toi sur eleveai.fr ou youtube @eleveai974, mémorise pour les autres vidéos » ; puis, pour les shorts, « pour la fin des shorts mettre » + la capture de la fin des paysages, et il l'a confirmé (« Comme les paysages »), après avoir hésité dans la journée.
 
-- **Voix (clé `…-abonne`), paysage ET short :** « Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre ! » **Écran :** « Entraîne-toi sur » + « eleveai.fr » (encadré), puis « ou sur YouTube » + « @eleveai974 » ; Ti Margo (ou le personnage) pouce levé en dessous. Plus de « mets un pouce », de « laisse un commentaire », d'« abonne-toi » ni de cloche.
-- **Short :** la question « Réponds en commentaire ! » reste juste AVANT cet écran de fin (voir la règle des shorts qui finissent par une question).
-- Appliqué d'abord aux 3 paysages CP nombres entiers (26/11). Les vidéos déjà rendues (dont les 3 shorts CP nombres entiers) gardent leur fin : on ne les refait pas pour ça.
-- ⏳ Pour les shorts aussi : `fin_commune.py` (`ecran_fin(self, "short", …)`) et les gabarits écrivent encore l'ancienne fin ; chaque nouveau short surcharge son écran de fin en attendant, et doit avoir sa ligne de coupe dans `COUPE_PAR_VIDEO` (`components/LecteurVideo.tsx`), mesurée sur la nouvelle voix.
-- ⏳ `manim/fin_commune.py` (`ecran_fin(self, "paysage", …)`) et la fin des paysages Ti Margo (`prototypes/ti-margo/short.js`, `#fin`) écrivent encore l'ancienne fin des paysages. En attendant qu'on les change, chaque nouvelle paysage doit surcharger son écran de fin. Il faut aussi recaler la coupe du lecteur (`COUPE_PAR_VIDEO`, `components/LecteurVideo.tsx`) pour ces paysages.
+- **Voix (clé `…-abonne`), paysage comme short :** « Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre ! »
+- **Écran :** « Entraîne-toi sur » + « eleveai.fr » (encadré), puis « ou sur YouTube » + « @eleveai974 », avec Ti Margo pouce levé en dessous. Plus de pouce, de commentaire, d'abonne-toi ni de cloche.
+- Dans un short, la question « Réponds en commentaire ! » juste avant la fin reste.
+- Appliqué en premier aux 6 dessins animés CP nombres entiers (26/11). Les vidéos déjà en ligne gardent leur fin : on ne les refait pas sans son accord.
+- ⏳ `manim/fin_commune.py` (`ecran_fin`) et la fin Ti Margo (`prototypes/ti-margo/short.js`, `#fin`) écrivent encore l'ancienne fin. En attendant qu'on les change, chaque nouveau film doit surcharger son écran de fin. Il faut aussi recaler la coupe du lecteur (`COUPE_PAR_VIDEO`, `components/LecteurVideo.tsx`).
 
 *Règle du 05/11 (remplacée le 26/11 pour toutes les NOUVELLES vidéos ; reste celle des vidéos déjà rendues) :* la voix finit par la clé `…-abonne` exactement ainsi :
 
