@@ -1134,7 +1134,7 @@
   "vignette": "4e/maths/divisibilite/05-diviseurs/eleveai-maths-4e-div-diviseurs.vignette.webp",
   "titre": "Comment n'en oublier aucun ? — Lister tous les diviseurs — épisode 5 · Maths 4e",
   "short": false,
-  "youtube": null,
+  "youtube": "hmz8g7zLUtk",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=divisibilite&microId=div_lister_diviseurs&display=simple"
  },
  "4e-div-diviseurs-short": {
@@ -1287,7 +1287,7 @@
   "vignette": "4e/maths/equations/04-resoudre-reduction/eleveai-maths-4e-equation-resoudre-reduction.vignette.webp",
   "titre": "Quand x apparaît deux fois — Résoudre en réduisant — épisode 4 · Maths 4e",
   "short": false,
-  "youtube": null,
+  "youtube": "FEAeqzlj4Ro",
   "coach": "/coach/serie?classe=4e&matiere=maths&notion=equation_resolution&microId=equation_resoudre_reduction&display=simple"
  },
  "4e-equation-resoudre-reduction-short": {
@@ -5174,7 +5174,7 @@
   "vignette": "6e/maths/decimaux/05-encadrer/eleveai-maths-6e-decimal-encadrer-short-miniature.vignette.webp",
   "titre": "Aucun nombre entre 4,7 et 4,8 ? Faux ! Et 4,75 ? #maths #6e",
   "short": true,
-  "youtube": null,
+  "youtube": "g3HIRBVifB8",
   "coach": "/coach/serie?classe=6e&matiere=maths&notion=decimal_nombre&microId=decimal_encadrer&display=simple"
  },
  "6e-decimal-lire-ecrire": {
@@ -6907,7 +6907,7 @@
  "annonce-crpe-stage": {
   "fichier": "annonce/crpe-stage/eleveai-annonce-crpe-stage.mp4",
   "poster": "annonce/crpe-stage/eleveai-annonce-crpe-stage.png",
-  "vignette": null,
+  "vignette": "annonce/crpe-stage/eleveai-annonce-crpe-stage.vignette.webp",
   "titre": "CRPE 2027 : les maths du concours en 1 semaine (stage intensif en janvier)",
   "short": false,
   "youtube": "ZXczUKs52k4",
@@ -6916,7 +6916,7 @@
  "annonce-crpe-stage-short": {
   "fichier": "annonce/crpe-stage/eleveai-annonce-crpe-stage-short.mp4",
   "poster": "annonce/crpe-stage/eleveai-annonce-crpe-stage-short.png",
-  "vignette": null,
+  "vignette": "annonce/crpe-stage/eleveai-annonce-crpe-stage-short.vignette.webp",
   "titre": "CRPE : l'hypoténuse d'un triangle 6 cm × 8 cm ? 🤔 Les maths du concours en 1 semaine #Shorts",
   "short": true,
   "youtube": "qbR-Z8l0fzU",
@@ -8537,7 +8537,7 @@
   "titre": "Où pointe l'aiguille de la balance ? — Lire une balance — épisode 2 · Maths CM1",
   "short": false,
   "youtube": null,
-  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&display=simple"
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_mesurer&display=simple"
  },
  "cm1-masse-mesurer-short": {
   "fichier": "cm1/maths/masse/02-mesurer/eleveai-maths-cm1-masse-mesurer-short.mp4",
@@ -8546,7 +8546,7 @@
   "titre": "Combien pèse ma pastèque ? #maths #cm1",
   "short": true,
   "youtube": null,
-  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&display=simple"
+  "coach": "/coach/serie?classe=cm1&matiere=maths&notion=masse&microId=masse_mesurer&display=simple"
  },
  "cm1-perimetre-defi": {
   "fichier": "cm1/maths/perimetre/04-defi/eleveai-maths-cm1-perimetre-defi.mp4",
@@ -9742,7 +9742,7 @@
   "vignette": "cm2/maths/probabilites/01-vocabulaire/eleveai-maths-cm2-proba-vocabulaire.vignette.webp",
   "titre": "3 chances sur 6… ou sur 3 ? — Certain, possible, impossible — épisode 1 · Maths CM2",
   "short": false,
-  "youtube": null,
+  "youtube": "XmMs1ZVMiGM",
   "coach": "/coach/serie?classe=cm2&matiere=maths&notion=probabilite&microId=probabilite_vocabulaire&display=simple"
  },
  "cm2-proba-vocabulaire-short": {
