@@ -242,8 +242,8 @@ class ExpBase(AuditSynchro, MotsCales, Notion6e):
         reste = self.t_pos(i) - self.renderer.time
         if reste < -0.3:
             print(f"RETARD {self._cle_voix} pos {i} : {-reste:.2f} s", flush=True)
-        if reste > 0.03:
-            self.wait(reste)
+        if reste > -0.02:   # + 0,07 : une image de -ql, pour ne jamais devancer la voix
+            self.wait(max(reste, 0) + 0.07)
 
     def au_mot(self, extrait, n=1):
         self.au_pos(self._pos(extrait, n))
@@ -277,6 +277,12 @@ class ExpBase(AuditSynchro, MotsCales, Notion6e):
     def carte_choix(self, lettre, corps, largeur=4.1, fs=32):
         rond = Circle(radius=0.25 * fs / 32, fill_color=BLEU_CALCUL, fill_opacity=1, stroke_width=0)
         l = Text(lettre, font_size=fs, color=WHITE, weight=BOLD).move_to(rond)
+        etapes = None
+        if isinstance(corps, (list, tuple)):   # [(extrait, texte ou mobjet), …] : révélés un par un
+            etapes = [e for e, _ in corps]
+            corps = VGroup(*[m if isinstance(m, Mobject) else Text(m, font_size=fs, color=WHITE)
+                             for _, m in corps]).arrange(RIGHT, buff=0.14)
+            corps._etapes = etapes
         c = corps if isinstance(corps, Mobject) else Text(corps, font_size=fs, color=WHITE)
         ligne = VGroup(VGroup(rond, l), c).arrange(RIGHT, buff=0.25)
         # ⛔ la coche se pose à 0,35 du bord droit : on lui réserve sa place (REGLES.md)
@@ -313,8 +319,18 @@ class ExpBase(AuditSynchro, MotsCales, Notion6e):
             i = voix.find(f"{L} : ")
             self.au_pos(i)
             self.play(FadeIn(c[0]), FadeIn(c[1][0], shift=RIGHT * 0.15), run_time=0.2)
-            self.au_pos(i + 4)
-            self.play(FadeIn(c[1][1], shift=RIGHT * 0.15), run_time=0.2)
+            corps = c[1][1]
+            etapes = getattr(corps, "_etapes", None)
+            if not etapes:
+                self.au_pos(i + 4)
+                self.play(FadeIn(corps, shift=RIGHT * 0.15), run_time=0.2)
+                continue
+            j = i
+            for ext, part in zip(etapes, corps):
+                j = voix.find(ext, j)
+                assert j >= 0, (L, ext)
+                self.au_pos(j)
+                self.play(FadeIn(part, shift=RIGHT * 0.15), run_time=0.2)
 
     def q_pause(self, pause, rebours, cle_q, t0, bonne):
         self.au_mot("Mets pause")
@@ -376,6 +392,55 @@ class ExpBase(AuditSynchro, MotsCales, Notion6e):
                     self.play(Create(cx), run_time=0.3)
         del rep, h
         self.attendre_voix(marge=0.8)
+
+    # ── 09 : le défi (pause + compte à rebours) ────────────────────────────
+
+    def ecran_defi(self, lignes, figure=None, x=-6.1, y0=2.2, fs=40):
+        """lignes : [(extrait, texte ou mobjet)] posées l'une sous l'autre à gauche (ou à x) ;
+        figure : fonction appelée après le titre (un dessin, sans nombre non dit)."""
+        t0 = self.nouvel_ecran("09-defi")
+        self.au_mot("À toi de jouer")
+        tete = VGroup(pastille_pause(0.5), self.t("À toi de jouer !", 50, ORANGE_RETENUE)).arrange(RIGHT, buff=0.3)
+        tete.to_edge(UP, buff=0.5)
+        self.play(FadeIn(tete, shift=DOWN * 0.2), run_time=0.45)
+        if figure:
+            figure()
+        y = y0
+        rangs = []
+        for ext, m in lignes:
+            if isinstance(m, list):   # une ligne en morceaux : [(extrait, mobjet), …]
+                mob = VGroup(*[x for _, x in m]).arrange(RIGHT, buff=0.3, aligned_edge=DOWN)
+                mob._etapes = [e for e, _ in m]
+            else:
+                mob = m if isinstance(m, Mobject) else self.t(m, fs)
+            if mob.width > BORD_X - x:
+                mob.scale_to_fit_width(BORD_X - x)
+            mob.move_to(P(0, y - mob.height / 2)).align_to(P(x, 0), LEFT)
+            y -= mob.height + 0.3
+            rangs.append((ext, mob))
+        assert y > -1.9, f"09-defi : trop de lignes ({y:.2f})"
+        for ext, mob in rangs:
+            if getattr(mob, "_etapes", None):
+                for e, part in zip(mob._etapes, mob):
+                    self.montrer((e, part, "pop"))
+            else:
+                self.montrer((ext, mob))
+        pause = VGroup(pastille_pause(0.42), self.t("Mets pause, et cherche !", 40, ORANGE_RETENUE))
+        pause.arrange(RIGHT, buff=0.25).move_to(P(-1.2, -2.6))
+        rebours = CompteARebours(5, r=0.38, fs=34).next_to(pause, RIGHT, buff=0.45)
+        self.au_mot("Mets pause")
+        self.play(FadeIn(pause, scale=0.8), FadeIn(rebours, scale=0.6), run_time=0.4)
+        self.attendre_voix(marge=0.2)
+        rebours.jouer(self)
+        print(f"QUESTION 09-defi t={int(t0 // 60):02d}:{int(t0 % 60):02d} ({t0:.2f})", flush=True)
+        self.wait(0.4)
+
+    def titre_ecran(self, texte, extrait, color=JAUNE_TITRE, fs=44):
+        """Un titre en haut, centré, écrit quand la voix le dit."""
+        tit = self.t(texte, fs, color, larg=12).to_edge(UP, buff=0.45)
+        self.au_mot(extrait)
+        self.play(Write(tit), run_time=0.6)
+        return tit
 
     # ── 00 : la page de garde ──────────────────────────────────────────────
 
