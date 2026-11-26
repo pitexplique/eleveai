@@ -6,7 +6,8 @@
 # ⭐ UNE SEULE IDÉE : le cosinus vient du produit scalaire divisé par le PRODUIT des
 # normes — et le dessin, lui, trompe.
 #
-#   · 00-accroche   : la diagonale et l'arête, « 45 degrés ? », et « c'est faux » ;
+#   · 00-accroche   : la diagonale et l'arête, « quel angle ? », et « se trompent ».
+#                     ⛔ Elle n'ÉCRIT PLUS « 45 degrés » : c'est la carte A ;
 #   · 01-idee       : le cube avec [A G] et [A B] en couleur, puis le calcul du cosinus ;
 #   · 02/02b        : question-pause (C : 55 degrés), 3 s, puis l'angle montré ENFIN ;
 #   · 03-commentaire: u · v = −6 — ⛔ la réponse (obtus) n'est NI dite NI affichée ;
@@ -111,17 +112,23 @@ def pieces(e):
     # **24,2 px obtenus** — le pire des six titres.
     titre, badge = e.entete_blocs("Angle dans l'espace", fs=28)
 
-    # ── 00 : 45 degrés ? Non. ───────────────────────────────────────────────
+    # ── 00 : quel angle ? beaucoup de copies se trompent ─────────────────────────────
     a1 = e.blocs_phrase("La grande diagonale d'un cube", 1.95, 26)
-    a2 = e.blocs_phrase("et une arête : 45 degrés ?", 0.95, 24, C_REGARD)
-    a3 = e.blocs_phrase("Beaucoup de copies l'écrivent", -0.25, 22, GREY_A)
+    # ⛔⛔ L'ACCROCHE N'ÉCRIT PLUS « 45 degrés » (26/11/2026). C'est la carte A de la
+    # question, et la donner fausse d'entrée la rendait éliminable DE MÉMOIRE, sans aucun
+    # calcul : le vrai choix tombait à 60 contre 55.
+    # ⭐ La règle : une carte ne doit pas être réfutable par la seule mémoire de l'accroche.
+    # L'erreur classique garde toute sa place — mais DANS les cartes, là où elle fait
+    # travailler, et dans le 02b qui l'explique (« 45 degrés : cos 0,71 »).
+    a2 = e.blocs_phrase("et une arête. Quel angle ?", 0.95, 24, C_REGARD)
+    a3 = e.blocs_phrase("Beaucoup de copies", -0.25, 22, GREY_A)
     # ⛔ `larg=3,60` : un bloc encadré qui remplit la largeur sort du cadre pendant le
     # battement de `insister` — la borne est 2 × 2,115 / 1,05 − 0,28 = 3,75.
-    a4 = e.blocs_phrase("c'est faux", -1.70, 40, C_PIEGE, larg=3.60)
+    a4 = e.blocs_phrase("se trompent", -1.70, 40, C_PIEGE, larg=3.60)
     cadre4 = SurroundingRectangle(a4, color=C_PIEGE, buff=0.16, stroke_width=3)
     p["00-accroche"] = [("titre", titre), ("badge", badge), ("la diagonale", a1),
-                        ("45 degrés", a2), ("les copies", a3),
-                        ("c'est faux", VGroup(a4, cadre4))]
+                        ("quel angle", a2), ("les copies", a3),
+                        ("se trompent", VGroup(a4, cadre4))]
 
     # ── 01 : le cube, et le calcul du cosinus ───────────────────────────────
     # ⛔⛔ PAS D'ARC DANS CE CUBE (voir l'en-tête) : il se dessinerait à 42,4° pour un
@@ -268,19 +275,19 @@ class PsEspaceAngleShort(ShortEspace):
         self.dire("00-accroche")
         a = p["00-accroche"]
         self.jouer_phrase(a["la diagonale"], "La grande diagonale d'un cube")
-        self.jouer_phrase(a["45 degrés"], "et une arête : 45 degrés ?")
-        self.jouer_phrase(a["les copies"], "Beaucoup de copies l'écrivent")
-        self.au_mot("c'est faux")
-        self.play(FadeIn(a["c'est faux"][0], scale=1.2),
-                  Create(a["c'est faux"][1]), run_time=0.45)
-        self.insister(a["c'est faux"], 1.05)
+        self.jouer_phrase(a["quel angle"], "et une arête. Quel angle ?")
+        self.jouer_phrase(a["les copies"], "Beaucoup de copies")
+        self.au_mot("se trompent")
+        self.play(FadeIn(a["se trompent"][0], scale=1.2),
+                  Create(a["se trompent"][1]), run_time=0.45)
+        self.insister(a["se trompent"], 1.05)
         self.attendre_voix(marge=0.25)
 
         # ── 01 : le cube et le cosinus ──────────────────────────────────────
         self.dire("01-idee")
         i = p["01-idee"]
-        self.play(FadeOut(VGroup(a["la diagonale"], a["45 degrés"], a["les copies"],
-                                 a["c'est faux"])), run_time=0.25)
+        self.play(FadeOut(VGroup(a["la diagonale"], a["quel angle"], a["les copies"],
+                                 a["se trompent"])), run_time=0.25)
         self.au_mot("Dans le cube d'arête 1")
         self.play(FadeIn(i["cube"]), run_time=0.45)
         self.au_fin("le vecteur A G a pour coordonnées 1, 1, 1")
