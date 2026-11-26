@@ -21,8 +21,13 @@ function gateauCraie(c,x,y,w,z=1,mou=0,T=0){ if(z<=0) return; const k=Math.min(1
   if(mou>0){ c.fillStyle='#f783ac'; for(const s of [-.3,.1,.38]){ c.beginPath(); c.ellipse(s*w,-h+w*.06+mou*w*.06,w*.05,w*.09*mou,0,0,7); c.fill(); } }
   c.fillStyle='#e03131'; c.beginPath(); c.arc(0,-h-w*.16,w*.07,0,7); c.fill(); c.restore(); }
 
+/* 26/11, Frédéric : la fin des shorts comme celle des paysages, « Entraîne-toi sur eleveai.fr ou sur YouTube @eleveai974 », rien d'autre
+   (même écran que films/cp-entier2.js) */
+function finShortD(){ const css=document.createElement('style'); css.textContent='#f3,#f6{display:none!important;} #fin #f5{font-size:64px;}';
+  document.head.append(css); document.getElementById('f4').innerHTML='<span>ou sur YouTube</span>'; }
+
 FILMS['defi']=function(outils){
-  const DUR={'00-accroche':8.63,'01-oups':5.31,'02-question':12.01,'02b-reponse':6.86,'03-ouf':5.44,'04-commentaire':9.61,'05-abonne':6.04};
+  const DUR={'00-accroche':8.63,'01-oups':5.31,'02-question':12.01,'02b-reponse':6.86,'03-ouf':5.44,'04-commentaire':9.61,'05-abonne':6.10};
   const clips=enchainer(.4,Object.keys(DUR),DUR,{'00-accroche':.5,'01-oups':.5,'02-question':3.3,'02b-reponse':.6,'03-ouf':.8,'04-commentaire':1.5});
   const A=Object.fromEntries(clips), {dit,mot}=voixDe(A);
   const [acc,oups,q,r,ouf,com,f]=clips.map(x=>x[1]), FIN=+(f+DUR['05-abonne']+.5).toFixed(2);
@@ -86,6 +91,22 @@ FILMS['defi']=function(outils){
   qd.jusque('Mets'); const pauseQ=[qd('Mets pause, et choisis !')];
   rd.saute(2); const r1=rd("L'horloge avance de 1 heure."), r2=rd('On recule : il est 2 heures.');
   const tC=mot('02b-reponse','C');
+  /* 26/11 (Frédéric) : pendant la question et la réponse, les DONNÉES RESTENT À L'ÉCRAN (comme le réveil, épisode 01) :
+     une petite ardoise à droite de Ti Margo, sous la carte, dans la zone sûre des Shorts (x 470 → 890, y 860 → 1320).
+     L'horloge montre 3 h, « avance de 1 h » ; à « On recule », la petite aiguille recule du 3 au 2. */
+  const tAvR=mot('02b-reponse','avance'), tRecule=mot('02b-reponse','recule');
+  const QX=470, QY=860, QW=420, QH=460;
+  const ardQ=document.createElement('canvas'); ardQ.className='cv'; ardQ.width=QW*2; ardQ.height=QH*2;
+  ardQ.style.cssText=`left:${QX}px;top:${QY}px;width:${QW}px;height:${QH}px;display:none;z-index:3;border-radius:28px;box-shadow:0 0 0 10px #8a5a2b,0 0 0 13px #5c3a1a,0 12px 26px rgba(0,0,0,.28);`;
+  document.body.append(ardQ);
+  function dessinerQ(T){ const c=ardQ.getContext('2d'); c.setTransform(2,0,0,2,0,0); c.clearRect(0,0,QW,QH);
+    c.fillStyle='#1f3b2c'; c.fillRect(0,0,QW,QH);
+    const u=sort(T,tRecule,.9);
+    horlogeNum(c,QW/2,158,122,3-u,12,1,T>=tAvR&&T<tRecule+1.2?{h:1}:{});
+    ecrire(c,'montre 3 h',QW/2,318,46,CRAIE.blanc);
+    ecrire(c,'avance de 1 h',QW/2,370,46,'#ffa94d');
+    if(T>=tRecule) ecrire(c,'on recule : 2 h',QW/2,424,46*zoom(T,tRecule,.4),CRAIE.ok); }
+  finShortD();
 
   poserMiniature(outils,acc+1,'Mon gâteau<br>tout mou ?'+PARI,ardoiseMini([["l'horloge : 3 h",CRAIE.blanc],['avance de 1 h !',CRAIE.faux]]));
   return { clips,FIN,titre:'Le gâteau tout mou',ceinture:0,finTitre,groupes,finClip:'05-abonne',
@@ -99,6 +120,8 @@ FILMS['defi']=function(outils){
       const dansQ=T>=q&&T<ouf, dansF=T>=f, gros=T<finTitre;
       tab.g.visible=!gros&&!dansQ&&!dansF&&!window.MINI;
       cadrer(cam,{gros,large:dansQ||dansF});
+      ardQ.style.display=dansQ&&!window.MINI?'block':'none';
+      if(dansQ){ dessinerQ(T); scene.x=-1.2; }
       scene.y=0;
       for(const t of [tMou,tChange]) if(T>=t-.05&&T<t+.5) scene.y=.3*Math.sin((T-t+.05)/.55*Math.PI);
 
