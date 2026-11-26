@@ -10204,6 +10204,60 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cp&matiere=maths&notion=duree&microId=cp_duree_placer_aiguilles&display=simple"
  },
+ "cp-entier-collection": {
+  "fichier": "cp/maths/entier/03-collection/eleveai-maths-cp-entier-collection-paysage.mp4",
+  "poster": "cp/maths/entier/03-collection/eleveai-maths-cp-entier-collection-paysage-miniature.png",
+  "vignette": "cp/maths/entier/03-collection/eleveai-maths-cp-entier-collection-paysage-miniature.vignette.webp",
+  "titre": "Une assiette pour chacun : assez de chapeaux ? — Nombres entiers — épisode 3 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_construire_collection&display=simple"
+ },
+ "cp-entier-collection-short": {
+  "fichier": "cp/maths/entier/03-collection/eleveai-maths-cp-entier-collection-short.mp4",
+  "poster": "cp/maths/entier/03-collection/eleveai-maths-cp-entier-collection-short-miniature.png",
+  "vignette": "cp/maths/entier/03-collection/eleveai-maths-cp-entier-collection-short-miniature.vignette.webp",
+  "titre": "Cinq ans : combien de bougies sur le gâteau ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_construire_collection&display=simple"
+ },
+ "cp-entier-denombre": {
+  "fichier": "cp/maths/entier/01-denombre/eleveai-maths-cp-entier-denombre-paysage.mp4",
+  "poster": "cp/maths/entier/01-denombre/eleveai-maths-cp-entier-denombre-paysage-miniature.png",
+  "vignette": "cp/maths/entier/01-denombre/eleveai-maths-cp-entier-denombre-paysage-miniature.vignette.webp",
+  "titre": "Combien de fraises ? Compter sans se tromper — Nombres entiers — épisode 1 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_denombre&display=simple"
+ },
+ "cp-entier-denombre-short": {
+  "fichier": "cp/maths/entier/01-denombre/eleveai-maths-cp-entier-denombre-short.mp4",
+  "poster": "cp/maths/entier/01-denombre/eleveai-maths-cp-entier-denombre-short-miniature.png",
+  "vignette": "cp/maths/entier/01-denombre/eleveai-maths-cp-entier-denombre-short-miniature.vignette.webp",
+  "titre": "Sept ou huit fraises ? Qui a raison ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_denombre&display=simple"
+ },
+ "cp-entier-rang": {
+  "fichier": "cp/maths/entier/02-rang/eleveai-maths-cp-entier-rang-paysage.mp4",
+  "poster": "cp/maths/entier/02-rang/eleveai-maths-cp-entier-rang-paysage-miniature.png",
+  "vignette": "cp/maths/entier/02-rang/eleveai-maths-cp-entier-rang-paysage-miniature.vignette.webp",
+  "titre": "La file du toboggan : premier, deuxième, troisième — Nombres entiers — épisode 2 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_rang&display=simple"
+ },
+ "cp-entier-rang-short": {
+  "fichier": "cp/maths/entier/02-rang/eleveai-maths-cp-entier-rang-short.mp4",
+  "poster": "cp/maths/entier/02-rang/eleveai-maths-cp-entier-rang-short-miniature.png",
+  "vignette": "cp/maths/entier/02-rang/eleveai-maths-cp-entier-rang-short-miniature.vignette.webp",
+  "titre": "La course des escargots : qui est premier ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_rang&display=simple"
+ },
  "cp-famille-coccinelle": {
   "fichier": "cp/maths/shorts/fr/eleveai-maths-cp-short-famille-coccinelle.mp4",
   "poster": "cp/maths/shorts/fr/vignette-short-eleveai-maths-cp-short-famille-coccinelle.png",

@@ -96581,6 +96581,388 @@
       ]
     },
     {
+      "id": "cp-entier-denombre",
+      "pas_avant": "2027-07-23",
+      "notionId": "nombre_entier",
+      "microId": "cp_entier_denombre",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/entier/01-denombre/eleveai-maths-cp-entier-denombre-paysage.mp4",
+      "miniature": "cp/maths/entier/01-denombre/eleveai-maths-cp-entier-denombre-paysage-miniature.png",
+      "titre": "Combien de fraises ? Compter sans se tromper — Nombres entiers — épisode 1 · Maths CP",
+      "accroche": "Le soleil se couche, c'est l'heure du goûter. Ti Margo compte ses fraises… et en compte une deux fois ! Comment compter sans se tromper ?\n\nDans cette vidéo :\n• je prends un objet, je dis un nombre, je le pose dans le bol\n• je touche chaque objet une seule fois\n• le dernier nombre que je dis, c'est combien il y en a\n\n⏸ 2 questions-pauses : mets pause, et compte !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_denombre&display=simple\n\n🦎 Épisode 1 de la série Nombres entiers d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le goûter de Ti Margo"
+        ],
+        [
+          "00:18",
+          "Mon astuce pour compter"
+        ],
+        [
+          "00:43",
+          "Question 1"
+        ],
+        [
+          "01:08",
+          "Question 2"
+        ],
+        [
+          "01:31",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "compter",
+        "dénombrer",
+        "compter des objets",
+        "fraises",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:43",
+          "question": "Dans l'arbre, des pommes. Combien ?",
+          "choix": [
+            "4",
+            "5",
+            "6"
+          ],
+          "reponse": 1,
+          "explication": "Un, deux, trois, quatre, cinq : cinq pommes."
+        },
+        {
+          "t": "01:08",
+          "question": "Des ballons s'envolent dans le ciel. Combien ?",
+          "choix": [
+            "8",
+            "6",
+            "7"
+          ],
+          "reponse": 2,
+          "explication": "Sept ballons."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-entier-denombre-short",
+      "pas_avant": "2027-07-23",
+      "notionId": "nombre_entier",
+      "microId": "cp_entier_denombre",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "short",
+      "renvoie_vers": "cp-entier-denombre",
+      "fichier": "cp/maths/entier/01-denombre/eleveai-maths-cp-entier-denombre-short.mp4",
+      "miniature": "cp/maths/entier/01-denombre/eleveai-maths-cp-entier-denombre-short-miniature.png",
+      "titre": "Sept ou huit fraises ? Qui a raison ? #maths #cp",
+      "accroche": "Le copain de Ti Margo a compté les fraises : huit ! Ti Margo dit : sept ! Qui a raison ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de cerises ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_denombre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #compter #cp",
+      "tags": [
+        "compter",
+        "dénombrer",
+        "fraises",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "Mon copain dit 8 fraises, moi 7. Qui a raison ?",
+          "choix": [
+            "moi",
+            "mon copain",
+            "les deux"
+          ],
+          "reponse": 0,
+          "explication": "Il y a 7 fraises : le copain en a compté une deux fois."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-entier-rang",
+      "pas_avant": "2027-07-24",
+      "notionId": "nombre_entier",
+      "microId": "cp_entier_rang",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/entier/02-rang/eleveai-maths-cp-entier-rang-paysage.mp4",
+      "miniature": "cp/maths/entier/02-rang/eleveai-maths-cp-entier-rang-paysage-miniature.png",
+      "titre": "La file du toboggan : premier, deuxième, troisième — Nombres entiers — épisode 2 · Maths CP",
+      "accroche": "Au parc, on fait la queue pour le toboggan. Chacun son tour ! Qui est le premier ? Et Ti Margo, il est à quelle place ?\n\nDans cette vidéo :\n• le premier, c'est celui qui est tout devant\n• je compte à partir de lui : premier, deuxième, troisième\n• quand le premier part, tout le monde avance d'une place\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_rang&display=simple\n\n🦎 Épisode 2 de la série Nombres entiers d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "La file du toboggan"
+        ],
+        [
+          "00:12",
+          "Premier, deuxième, troisième"
+        ],
+        [
+          "00:28",
+          "Question 1"
+        ],
+        [
+          "00:51",
+          "Question 2"
+        ],
+        [
+          "01:21",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "premier",
+        "deuxième",
+        "rang",
+        "nombres ordinaux",
+        "toboggan",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:28",
+          "question": "Qui est le deuxième dans la file ?",
+          "choix": [
+            "la souris",
+            "le canard",
+            "le chat"
+          ],
+          "reponse": 2,
+          "explication": "Premier, le lapin. Deuxième, le chat."
+        },
+        {
+          "t": "00:51",
+          "question": "Le lapin a glissé. Ti Margo est à quelle place ?",
+          "choix": [
+            "deuxième",
+            "troisième",
+            "quatrième"
+          ],
+          "reponse": 0,
+          "explication": "Le chat est premier, Ti Margo est deuxième."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-entier-rang-short",
+      "pas_avant": "2027-07-24",
+      "notionId": "nombre_entier",
+      "microId": "cp_entier_rang",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "short",
+      "renvoie_vers": "cp-entier-rang",
+      "fichier": "cp/maths/entier/02-rang/eleveai-maths-cp-entier-rang-short.mp4",
+      "miniature": "cp/maths/entier/02-rang/eleveai-maths-cp-entier-rang-short-miniature.png",
+      "titre": "La course des escargots : qui est premier ? #maths #cp",
+      "accroche": "C'est la course des escargots, tout doucement sous la pluie. Qui arrive le premier ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : qui est troisième ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_rang&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #premier #cp",
+      "tags": [
+        "premier",
+        "rang",
+        "course",
+        "escargots",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "Qui est premier ?",
+          "choix": [
+            "le rouge",
+            "le jaune",
+            "le bleu"
+          ],
+          "reponse": 1,
+          "explication": "Le jaune est arrivé le premier."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-entier-collection",
+      "pas_avant": "2027-07-25",
+      "notionId": "nombre_entier",
+      "microId": "cp_entier_construire_collection",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/entier/03-collection/eleveai-maths-cp-entier-collection-paysage.mp4",
+      "miniature": "cp/maths/entier/03-collection/eleveai-maths-cp-entier-collection-paysage-miniature.png",
+      "titre": "Une assiette pour chacun : assez de chapeaux ? — Nombres entiers — épisode 3 · Maths CP",
+      "accroche": "Ce soir, c'est la fête sous les étoiles. Six copains arrivent : il faut une assiette pour chacun. Combien d'assiettes ?\n\nDans cette vidéo :\n• je compte les copains : six\n• je prends autant d'assiettes : six\n• une pour chacun : personne n'est oublié\n• s'il y a moins d'objets que de copains, il en manque\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_construire_collection&display=simple\n\n🦎 Épisode 3 de la série Nombres entiers d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "La fête sous les étoiles"
+        ],
+        [
+          "00:10",
+          "Une assiette pour chacun"
+        ],
+        [
+          "00:30",
+          "Question 1"
+        ],
+        [
+          "00:55",
+          "Question 2"
+        ],
+        [
+          "01:20",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "autant que",
+        "une pour chacun",
+        "construire une collection",
+        "compter",
+        "fête",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:30",
+          "question": "Un ballon pour chacun des 5 enfants. Combien de ballons ?",
+          "choix": [
+            "4",
+            "5",
+            "6"
+          ],
+          "reponse": 1,
+          "explication": "Cinq enfants, cinq ballons."
+        },
+        {
+          "t": "00:55",
+          "question": "4 copains, 3 chapeaux. Est-ce qu’il y en a assez ?",
+          "choix": [
+            "il y en a trop",
+            "oui",
+            "non, il en manque un"
+          ],
+          "reponse": 2,
+          "explication": "Un copain n’a pas de chapeau : il en manque un."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-entier-collection-short",
+      "pas_avant": "2027-07-25",
+      "notionId": "nombre_entier",
+      "microId": "cp_entier_construire_collection",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "short",
+      "renvoie_vers": "cp-entier-collection",
+      "fichier": "cp/maths/entier/03-collection/eleveai-maths-cp-entier-collection-short.mp4",
+      "miniature": "cp/maths/entier/03-collection/eleveai-maths-cp-entier-collection-short-miniature.png",
+      "titre": "Cinq ans : combien de bougies sur le gâteau ? #maths #cp",
+      "accroche": "La petite sœur de Ti Margo a cinq ans aujourd'hui. Combien de bougies faut-il sur son gâteau ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de bougies pour six ans ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_construire_collection&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #anniversaire #cp",
+      "tags": [
+        "bougies",
+        "anniversaire",
+        "gâteau",
+        "compter",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:09",
+          "question": "Combien de bougies pour cinq ans ?",
+          "choix": [
+            "5",
+            "4",
+            "6"
+          ],
+          "reponse": 0,
+          "explication": "Cinq ans, cinq bougies."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
       "id": "cp-duree-placer-aiguilles",
       "pas_avant": "2027-05-09",
       "notionId": "duree",
