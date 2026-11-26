@@ -150,12 +150,24 @@ try {
   }
   const { createClient } = await import("@supabase/supabase-js");
   const db = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
-  const { data, error } = await db.from("notion_ressources")
-    .select("classe, notion_id, micro_id, url").eq("matiere", "maths").eq("type", "video");
-  if (error) throw error;
+  // ⛔ 25/11 : Supabase rend 1 000 lignes au plus par requête (2 072 vidéos
+  // maths ce jour-là), dans un ordre quelconque → 31 liens coach perdus au
+  // hasard d'une régénération. On lit donc par pages, triées par id.
+  const data = [];
+  for (let debut = 0; ; debut += 1000) {
+    const { data: page, error } = await db.from("notion_ressources")
+      .select("classe, notion_id, micro_id, url").eq("matiere", "maths").eq("type", "video")
+      .order("id").range(debut, debut + 999);
+    if (error) throw error;
+    data.push(...page);
+    if (page.length < 1000) break;
+  }
+  console.log(`${data.length} vidéos lues dans notion_ressources`);
   const place = new Map();
   for (const r of data) {
-    const y = ytId(r.url);
+    // ⛔ 26/11 : depuis le passage à R2, la ligne porte l'adresse du site
+    // (https://www.eleveai.fr/video/youtube-<ID>) et plus celle de YouTube.
+    const y = ytId(r.url) ?? r.url?.match(/\/video\/youtube-([\w-]{11})(?:[/?#]|$)/)?.[1] ?? null;
     if (!y || (place.has(y) && !r.micro_id)) continue; // une micro plutôt qu'une notion
     place.set(y, `/coach/serie?classe=${r.classe}&matiere=maths&notion=${r.notion_id}${r.micro_id ? `&microId=${r.micro_id}` : ""}&display=simple`);
   }
