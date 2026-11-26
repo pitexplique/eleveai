@@ -161,7 +161,17 @@ def pieces(e):
     # ── 00 : ce qu'un produit scalaire nul prouve, et ce qu'il ne prouve pas ─
     # ⚠️ 26 px : à 28 px « Un produit scalaire nul » dépasse 3,90 et se coupe en
     # « Un produit scalaire » / « nul » — un mot de trois lettres seul sur sa ligne.
-    a1 = e.blocs_phrase("Un produit scalaire nul", 1.95, 26)
+    # ⛔⛔ « PROUVE QUE » N'EST PAS UN ORNEMENT, C'EST CE QUI FAIT UNE PHRASE. Au gros
+    # plan du 26/11, l'accroche affichait « Un produit scalaire nul » puis « deux
+    # vecteurs sont orthogonaux » — deux fragments sans rien entre eux. La VOIX dit
+    # « … nul prouve que deux vecteurs… » : l'oreille entend une phrase, l'œil lit une
+    # suite de mots. ⛔ Et le remède évident — ajouter « : » — est impossible :
+    # `jouer_phrase` cherche le texte de CHAQUE LIGNE AFFICHÉE dans le fragment de voix
+    # (`texte.find(m.original_text, k)`), donc un caractère que la voix ne porte pas
+    # casse le calage en silence. On rallonge l'écran jusqu'au mot qui manque.
+    # ⭐ Mesuré : même découpe en deux lignes, « Un produit scalaire » / « nul prouve
+    # que », 3,51 d'unité pour 3,90 — la cote de l'écran ne bouge pas.
+    a1 = e.blocs_phrase("Un produit scalaire nul prouve que", 1.95, 26)
     a2 = e.blocs_phrase("deux vecteurs sont orthogonaux", 1.00, 28, VERT_OK)
     # ⛔⛔ `larg=3,60` ET NON LES 3,90 OFFERTS, ET C'EST UNE RÈGLE GÉNÉRALE QUE CE
     # SHORT A PAYÉE APRÈS E7 : un bloc ENCADRÉ qui remplit la largeur ne peut pas être
@@ -276,7 +286,7 @@ class PsEspaceOrthogonaliteShort(ShortEspace):
         self.add(titre, badge)
         self.dire("00-accroche")
         a = p["00-accroche"]
-        self.jouer_phrase(a["ce qu'il prouve"], "Un produit scalaire nul")
+        self.jouer_phrase(a["ce qu'il prouve"], "Un produit scalaire nul prouve que")
         self.jouer_phrase(a["orthogonaux"], "deux vecteurs sont orthogonaux")
         self.au_mot("Mais face à un plan")
         self.play(FadeIn(a["le piège"][0], shift=UP * 0.08),
