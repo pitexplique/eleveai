@@ -3,9 +3,17 @@
 Une notion = une banque (source de vérité) = une fiche = **une vidéo**.
 Cette procédure est la jumelle de la procédure fiches : même point de départ (la banque), même nommage (le notionId), même standard qualité (montrer, pas raconter).
 
-## ⛔ La phrase de fin (Frédéric, 19/10/2026 ; pouce, commentaire et cloche ajoutés le 05/11/2026)
+## ⛔ La phrase de fin (Frédéric, 19/10/2026 ; pouce, commentaire et cloche ajoutés le 05/11/2026 ; ⛔⛔ REMPLACÉE le 26/11/2026)
 
-Toute NOUVELLE voix finit par la clé `…-abonne` exactement ainsi :
+**⛔⛔ RÈGLE ACTUELLE, 26/11/2026 : paysages ET shorts finissent par « eleveai.fr ou YouTube », rien d'autre.** Frédéric : « On laisse juste Entraîne-toi sur eleveai.fr ou youtube @eleveai974, mémorise pour les autres vidéos », puis « idem pour les shorts ». Il avait déjà dit : « j'aime commentaire partage est la fin de la vidéo et pas obligatoire », et « les paysages vont sur R2 ».
+
+- **Voix (clé `…-abonne`), paysage comme short :** « Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre ! »
+- **Écran de fin :** « Entraîne-toi sur » + « eleveai.fr » (encadré), puis « ou sur YouTube » + « @eleveai974 ». Plus de pouce, de commentaire, d'abonne-toi ni de cloche.
+- Dans un short, la question « Réponds en commentaire ! » juste avant la fin reste.
+- Appliqué en premier aux 6 dessins animés CP nombres entiers (26/11). Les vidéos déjà rendues gardent leur fin : on ne les refait pas pour ça.
+- ⏳ Les deux modules qui fabriquent la fin écrivent encore l'ancienne : `manim/fin_commune.py` (Manim) et `prototypes/ti-margo/short.js` (dessins animés Ti Margo, `#fin`). En attendant qu'on les change, chaque nouveau film doit surcharger son écran de fin. Il faut aussi recaler la coupe du lecteur (`COUPE_PAR_VIDEO`, `components/LecteurVideo.tsx`) sur cette fin plus courte.
+
+*Ancienne règle (05/11 → 25/11), gardée pour l'historique :* toute nouvelle voix finissait par la clé `…-abonne` exactement ainsi :
 
 - **Paysage :** « Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche ! »
 - **Short :** « Entraîne-toi sur éleveai point f r. Mets un pouce, abonne-toi et active la cloche ! » (le commentaire est déjà demandé juste avant, par la question « Réponds en commentaire ».)
