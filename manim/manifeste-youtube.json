@@ -115479,6 +115479,644 @@
         "Shorts"
       ],
       "url": "https://youtube.com/shorts/qbR-Z8l0fzU"
+    },
+    {
+      "id": "terminale-exp-definition",
+      "notionId": "fonction_exponentielle",
+      "microId": "exp_definition",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/analyse/exp-definition/eleveai-maths-terminale-exp-definition.mp4",
+      "miniature": "terminale/maths/analyse/exp-definition/eleveai-maths-terminale-exp-definition.png",
+      "titre": "Une vidéo qui devient virale ? — La fonction exponentielle · Tle spé",
+      "accroche": "Inès est community manager : elle s'occupe des comptes d'une marque sur les réseaux sociaux. Une de ses vidéos se met à tourner : plus elle a de vues, plus elle en gagne vite. Quelle fonction grandit exactement à la vitesse de sa propre valeur ?\n\nDans cette vidéo :\n• f′ = f et f(0) = 1 : une seule fonction, l'exponentielle, notée eˣ\n• eˣ est défini sur tous les réels, toujours strictement positif, et e ≈ 2,72\n• sa dérivée, c'est elle-même : elle est strictement croissante\n• la tangente en 0 : y = x + 1, et la courbe reste au-dessus\n• le piège : e² = e × e ≈ 7,39, ce n'est pas 2 × e ≈ 5,44\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : range e⁻¹, e⁰ et e¹ du plus petit au plus grand (réponse : e⁻¹ ≈ 0,37, puis e⁰ = 1, puis e ≈ 2,72).\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/fonction-exponentielle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=fonction_exponentielle&microId=exp_definition&display=simple\n\n📈 Épisode 1 sur 6 de la série Fonction exponentielle d'EleveAI (terminale, spécialité maths).",
+      "chapitres": [
+        [
+          "00:00",
+          "Une vidéo virale : Inès, community manager"
+        ],
+        [
+          "00:26",
+          "f′ = f et f(0) = 1"
+        ],
+        [
+          "00:55",
+          "Ce qu'il faut savoir sur eˣ"
+        ],
+        [
+          "01:21",
+          "Question 1"
+        ],
+        [
+          "01:58",
+          "La tangente en 0 : y = x + 1"
+        ],
+        [
+          "02:20",
+          "Le piège : eˣ n'est pas e fois x"
+        ],
+        [
+          "02:40",
+          "Question 2"
+        ],
+        [
+          "03:20",
+          "Citer les propriétés au bac"
+        ],
+        [
+          "03:41",
+          "À toi de jouer"
+        ],
+        [
+          "04:00",
+          "Correction"
+        ],
+        [
+          "04:24",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "e puissance x",
+        "nombre e",
+        "dérivée",
+        "croissance",
+        "vidéo virale",
+        "réseaux sociaux",
+        "community manager",
+        "fonction exponentielle",
+        "exponentielle",
+        "analyse",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:21",
+          "question": "Combien l'équation eˣ = 0 a-t-elle de solutions ?",
+          "choix": [
+            "une : x = 0",
+            "aucune",
+            "une : x = 1"
+          ],
+          "reponse": 1,
+          "explication": "eˣ est toujours strictement positif : il ne vaut jamais 0, l'équation n'a aucune solution. A confond avec e⁰, qui vaut 1, et pas 0."
+        },
+        {
+          "t": "02:40",
+          "question": "La fonction exponentielle est strictement croissante. Comment se comparent e² et e³ ?",
+          "choix": [
+            "e² est plus grand",
+            "ils sont égaux",
+            "e² est plus petit"
+          ],
+          "reponse": 2,
+          "explication": "2 est plus petit que 3, et une fonction strictement croissante garde l'ordre : e² est plus petit que e³. Pas besoin de calculatrice."
+        }
+      ],
+      "centres": [
+        "reseaux-sociaux"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "terminale-exp-proprietes",
+      "notionId": "fonction_exponentielle",
+      "microId": "exp_proprietes",
+      "classe": "terminale-spe",
+      "ceinture": "orange",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/analyse/exp-proprietes/eleveai-maths-terminale-exp-proprietes.mp4",
+      "miniature": "terminale/maths/analyse/exp-proprietes/eleveai-maths-terminale-exp-proprietes.png",
+      "titre": "Multiplier par e², puis par e³ ? — Propriétés de l'exponentielle · Tle spé",
+      "accroche": "Camille est technicienne dans un laboratoire de biologie : elle fait pousser des levures. Le matin, leur nombre est multiplié par e², l'après-midi par e³. Par combien a-t-il été multiplié sur toute la journée ? Sans calculatrice, avec les règles des exposants.\n\nDans cette vidéo :\n• e² × e³ = e⁵ : pour un produit, les exposants s'additionnent\n• les règles : eᵃ × eᵇ = eᵃ⁺ᵇ ; eᵃ ÷ eᵇ = eᵃ⁻ᵇ ; e⁻ᵃ = 1 ÷ eᵃ ; (eᵃ)ⁿ = eⁿᵃ\n• exemple : e⁵ × e⁻³ = e², et multiplier par e⁻³, c'est diviser par e³\n• le piège : eᵃ + eᵇ n'est pas eᵃ⁺ᵇ (e + e ≈ 5,44, alors que e² ≈ 7,39)\n• au bac, chaque étape avec la règle utilisée\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture orange.\nUn défi en fin de vidéo, avec sa correction : simplifier e⁴ × e⁻¹ ÷ e² (réponse : e¹ = e ≈ 2,72).\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/fonction-exponentielle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=fonction_exponentielle&microId=exp_proprietes&display=simple\n\n📈 Épisode 2 sur 6 de la série Fonction exponentielle d'EleveAI (terminale, spécialité maths).",
+      "chapitres": [
+        [
+          "00:00",
+          "Des levures qui se multiplient : Camille, technicienne de laboratoire"
+        ],
+        [
+          "00:30",
+          "e² × e³ = e⁵"
+        ],
+        [
+          "00:49",
+          "Les règles des exposants"
+        ],
+        [
+          "01:09",
+          "Question 1"
+        ],
+        [
+          "01:44",
+          "La dilution du soir : e⁵ × e⁻³"
+        ],
+        [
+          "02:05",
+          "Le piège : une somme ne se simplifie pas"
+        ],
+        [
+          "02:29",
+          "Question 2"
+        ],
+        [
+          "03:11",
+          "Rédiger au bac"
+        ],
+        [
+          "03:28",
+          "À toi de jouer"
+        ],
+        [
+          "03:45",
+          "Correction"
+        ],
+        [
+          "04:05",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "propriétés de l'exponentielle",
+        "e puissance a",
+        "exposants",
+        "produit",
+        "quotient",
+        "levures",
+        "laboratoire",
+        "biologie",
+        "fonction exponentielle",
+        "exponentielle",
+        "analyse",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:09",
+          "question": "Que vaut e⁵ ÷ e² ?",
+          "choix": [
+            "e puissance 2,5",
+            "e³",
+            "e⁷"
+          ],
+          "reponse": 1,
+          "explication": "Pour une division, on soustrait les exposants : 5 − 2 = 3. A divise les exposants, et C les additionne."
+        },
+        {
+          "t": "02:29",
+          "question": "Simplifie : (eˣ)² × e⁻ˣ",
+          "choix": [
+            "eˣ",
+            "eˣ²",
+            "1"
+          ],
+          "reponse": 0,
+          "explication": "(eˣ)² = e²ˣ : on double l'exposant. Puis e²ˣ × e⁻ˣ : 2x − x = x, il reste eˣ. B met le carré sur x au lieu de doubler l'exposant."
+        }
+      ],
+      "centres": [
+        "sciences"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "terminale-exp-deriver",
+      "notionId": "fonction_exponentielle",
+      "microId": "exp_deriver",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/analyse/exp-deriver/eleveai-maths-terminale-exp-deriver.mp4",
+      "miniature": "terminale/maths/analyse/exp-deriver/eleveai-maths-terminale-exp-deriver.png",
+      "titre": "À quelle vitesse le cœur redescend ? — Dériver eᵘ · Tle spé",
+      "accroche": "Malik est préparateur physique dans un club de handball. Après un sprint, le cœur d'une joueuse bat à 160 battements par minute, puis il redescend. Malik veut savoir à quelle vitesse : il lui faut la dérivée d'une exponentielle.\n\nDans cette vidéo :\n• la règle : la dérivée de eᵘ, c'est u′ × eᵘ\n• exemple : la dérivée de e²ˣ, c'est 2e²ˣ\n• le cœur de la joueuse : F′(0) = −50, il perd 50 battements par minute, à chaque minute\n• le piège : x eˣ est un produit, sa dérivée est (1 + x) eˣ\n• au bac, trois lignes : nommer u, appliquer la règle, factoriser par l'exponentielle\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : dériver f(x) = e³ˣ⁺¹ et g(x) = eˣ² (réponse : f′(x) = 3e³ˣ⁺¹ et g′(x) = 2x eˣ²).\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/fonction-exponentielle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=fonction_exponentielle&microId=exp_deriver&display=simple\n\n📈 Épisode 3 sur 6 de la série Fonction exponentielle d'EleveAI (terminale, spécialité maths).",
+      "chapitres": [
+        [
+          "00:00",
+          "Après un sprint : Malik, préparateur physique"
+        ],
+        [
+          "00:28",
+          "Le modèle du cœur, et F′"
+        ],
+        [
+          "00:50",
+          "La règle : (eᵘ)′ = u′ eᵘ"
+        ],
+        [
+          "01:10",
+          "Question 1"
+        ],
+        [
+          "01:49",
+          "Le cœur de la joueuse : F′(0) = −50"
+        ],
+        [
+          "02:27",
+          "Le piège : x eˣ est un produit"
+        ],
+        [
+          "02:52",
+          "Question 2"
+        ],
+        [
+          "03:33",
+          "Rédiger au bac"
+        ],
+        [
+          "03:53",
+          "À toi de jouer"
+        ],
+        [
+          "04:15",
+          "Correction"
+        ],
+        [
+          "04:37",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "dérivée exponentielle",
+        "dérivée de e puissance u",
+        "u prime",
+        "dérivation",
+        "fréquence cardiaque",
+        "handball",
+        "préparateur physique",
+        "sport",
+        "fonction exponentielle",
+        "exponentielle",
+        "analyse",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:10",
+          "question": "Quelle est la dérivée de e⁻ˣ ?",
+          "choix": [
+            "e⁻ˣ",
+            "−x e⁻ˣ",
+            "−e⁻ˣ"
+          ],
+          "reponse": 2,
+          "explication": "Ici u = −x, donc u′ = −1 : la dérivée est −1 × e⁻ˣ = −e⁻ˣ. A oublie u′, et B multiplie par u au lieu de u′."
+        },
+        {
+          "t": "02:52",
+          "question": "Quelle est la dérivée de 5e²ˣ ?",
+          "choix": [
+            "5e²ˣ",
+            "10e²ˣ",
+            "2e²ˣ"
+          ],
+          "reponse": 1,
+          "explication": "La constante 5 reste devant, et la dérivée de e²ˣ est 2e²ˣ : 5 × 2 = 10. C perd le 5, et A oublie le 2."
+        }
+      ],
+      "centres": [
+        "sport",
+        "handball-volley"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "terminale-exp-equation-inequation",
+      "notionId": "fonction_exponentielle",
+      "microId": "exp_equation_inequation",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/analyse/exp-equation-inequation/eleveai-maths-terminale-exp-equation-inequation.mp4",
+      "miniature": "terminale/maths/analyse/exp-equation-inequation/eleveai-maths-terminale-exp-equation-inequation.png",
+      "titre": "Quand ce titre va-t-il rattraper l'autre ? — Équations avec l'exponentielle · Tle spé",
+      "accroche": "Léa est programmatrice dans une radio. Deux titres montent en streaming : e²ˣ milliers d'écoutes pour le premier, eˣ⁺³ milliers pour le second, au bout de x semaines. Le premier part plus bas, mais grimpe plus vite. Quand va-t-il rattraper le second ?\n\nDans cette vidéo :\n• eᴬ = eᴮ si et seulement si A = B\n• eᴬ plus petit que eᴮ si et seulement si A plus petit que B : l'inégalité garde son sens\n• pour Léa : e²ˣ = eˣ⁺³ donne 2x = x + 3, donc x = 3 semaines\n• le piège : eˣ = 0 ou eˣ = −2 n'a aucune solution, et eˣ = 1 donne x = 0\n• au bac, trois lignes : écrire sous forme eᵘ, citer la croissance, résoudre\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture verte.\nUn défi en fin de vidéo, avec sa correction : résoudre e²ˣ plus grand que eˣ⁺³ (réponse : x plus grand que 3, soit ]3 ; +∞[).\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/fonction-exponentielle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=fonction_exponentielle&microId=exp_equation_inequation&display=simple\n\n📈 Épisode 4 sur 6 de la série Fonction exponentielle d'EleveAI (terminale, spécialité maths).",
+      "chapitres": [
+        [
+          "00:00",
+          "Deux titres en streaming : Léa, programmatrice radio"
+        ],
+        [
+          "00:35",
+          "Des exponentielles égales, des exposants égaux"
+        ],
+        [
+          "00:54",
+          "Les règles : égalité et inégalité"
+        ],
+        [
+          "01:13",
+          "Question 1"
+        ],
+        [
+          "01:45",
+          "Léa : x = 3 semaines"
+        ],
+        [
+          "02:05",
+          "Le piège : eˣ = 0 n'a pas de solution"
+        ],
+        [
+          "02:30",
+          "Question 2"
+        ],
+        [
+          "03:15",
+          "Rédiger au bac"
+        ],
+        [
+          "03:34",
+          "À toi de jouer"
+        ],
+        [
+          "03:53",
+          "Correction"
+        ],
+        [
+          "04:15",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "équation exponentielle",
+        "inéquation exponentielle",
+        "résoudre",
+        "exposant",
+        "streaming",
+        "radio",
+        "musique",
+        "programmatrice",
+        "fonction exponentielle",
+        "exponentielle",
+        "analyse",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:13",
+          "question": "Résous eˣ⁺¹ = e⁴. Que vaut x ?",
+          "choix": [
+            "3",
+            "4",
+            "5"
+          ],
+          "reponse": 0,
+          "explication": "Les exposants sont égaux : x + 1 = 4, donc x = 3. B oublie le « + 1 », et C ajoute 1 au lieu de l'enlever."
+        },
+        {
+          "t": "02:30",
+          "question": "Résous l'inéquation : eˣ plus petit que e². Quelles sont les solutions ?",
+          "choix": [
+            "]2 ; +∞[",
+            "]−∞ ; 2[",
+            "aucune solution"
+          ],
+          "reponse": 1,
+          "explication": "L'inégalité garde son sens : x plus petit que 2, soit ]−∞ ; 2[. A retourne l'inégalité, comme si la fonction était décroissante."
+        }
+      ],
+      "centres": [
+        "musique"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "terminale-exp-limite",
+      "notionId": "fonction_exponentielle",
+      "microId": "exp_limite",
+      "classe": "terminale-spe",
+      "ceinture": "bleue",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/analyse/exp-limite/eleveai-maths-terminale-exp-limite.mp4",
+      "miniature": "terminale/maths/analyse/exp-limite/eleveai-maths-terminale-exp-limite.png",
+      "titre": "Qui gagne la course vers l'infini ? — Limites et croissances comparées · Tle spé",
+      "accroche": "Yanis est concepteur de niveaux dans un studio de jeux vidéo. Au niveau x, la force du joueur vaut x³, et celle des ennemis eˣ. Au niveau 2, le joueur est devant. Mais qui gagne quand les niveaux deviennent très grands ?\n\nDans cette vidéo :\n• eˣ tend vers +∞ en +∞, et vers 0 en −∞ : y = 0 est une asymptote\n• croissances comparées : eˣ ÷ xⁿ tend vers +∞ en +∞, et xⁿ eˣ tend vers 0 en −∞\n• au niveau 10 : e¹⁰ ≈ 22 026, contre 1 000 pour le joueur\n• le piège : eˣ − x en +∞ est une forme indéterminée, on factorise par x\n• au bac, on écrit « par croissances comparées »\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture bleue.\nUn défi en fin de vidéo, avec sa correction : la limite de eˣ ÷ (x + 1) en +∞ (réponse : +∞).\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/fonction-exponentielle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=fonction_exponentielle&microId=exp_limite&display=simple\n\n📈 Épisode 5 sur 6 de la série Fonction exponentielle d'EleveAI (terminale, spécialité maths).",
+      "chapitres": [
+        [
+          "00:00",
+          "Le joueur contre les ennemis : Yanis, concepteur de niveaux"
+        ],
+        [
+          "00:31",
+          "Les deux limites de eˣ"
+        ],
+        [
+          "00:54",
+          "Les croissances comparées"
+        ],
+        [
+          "01:17",
+          "Question 1"
+        ],
+        [
+          "01:51",
+          "Niveau 10 : e¹⁰ contre 10³"
+        ],
+        [
+          "02:17",
+          "Le piège : une forme indéterminée"
+        ],
+        [
+          "02:43",
+          "Question 2"
+        ],
+        [
+          "03:19",
+          "Rédiger au bac"
+        ],
+        [
+          "03:39",
+          "À toi de jouer"
+        ],
+        [
+          "03:55",
+          "Correction"
+        ],
+        [
+          "04:20",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "limite exponentielle",
+        "croissances comparées",
+        "forme indéterminée",
+        "asymptote",
+        "limites",
+        "jeux vidéo",
+        "level design",
+        "concepteur de niveaux",
+        "fonction exponentielle",
+        "exponentielle",
+        "analyse",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:17",
+          "question": "Quand x tend vers +∞, vers quoi tend 1 ÷ eˣ ?",
+          "choix": [
+            "+∞",
+            "1",
+            "0"
+          ],
+          "reponse": 2,
+          "explication": "Le dénominateur eˣ devient immense : 1 divisé par un nombre immense devient tout petit, la limite est 0. A oublie qu'on divise par l'exponentielle."
+        },
+        {
+          "t": "02:43",
+          "question": "Quand x tend vers +∞, vers quoi tend x e⁻ˣ ?",
+          "choix": [
+            "0",
+            "+∞",
+            "1"
+          ],
+          "reponse": 0,
+          "explication": "x e⁻ˣ, c'est x ÷ eˣ. Par croissances comparées, l'exponentielle l'emporte au dénominateur : le quotient tend vers 0. B ne regarde que le facteur x."
+        }
+      ],
+      "centres": [
+        "jeux-video"
+      ],
+      "plus_tard": true
+    },
+    {
+      "id": "terminale-exp-defi",
+      "notionId": "fonction_exponentielle",
+      "microId": "exp_defi",
+      "classe": "terminale-spe",
+      "ceinture": "noire",
+      "serie": "Maths Tle spé",
+      "type": "longue",
+      "fichier": "terminale/maths/analyse/exp-defi/eleveai-maths-terminale-exp-defi.mp4",
+      "miniature": "terminale/maths/analyse/exp-defi/eleveai-maths-terminale-exp-defi.png",
+      "titre": "Quand y a-t-il le plus de médicament dans le sang ? — Exercice type bac, exponentielle · Tle spé",
+      "accroche": "Sarah est pharmacienne à l'hôpital. Un patient reçoit une piqûre dans le muscle : le médicament passe dans le sang, puis le corps l'élimine. À quel moment y en a-t-il le plus, et que devient la quantité ensuite ? Un exercice type bac, de la dérivée à la limite.\n\nDans cette vidéo :\n• le modèle : C(t) = 10t e⁻ᵗ, en milligrammes par litre, t en heures\n• la méthode du bac en quatre temps : dériver, signe, tableau de variations, limite\n• la dérivée d'un produit, puis on factorise : C′(t) = 10(1 − t) e⁻ᵗ\n• le piège : écrire la phrase clé, e⁻ᵗ est strictement positif, donc C′(t) a le signe de 1 − t\n• le maximum : C(1) = 10 ÷ e ≈ 3,68 mg/L, au bout d'une heure\n\n⏸ 2 questions-pauses : mets pause, et choisis !\n🥋 Ceinture noire.\nUn défi en fin de vidéo, avec sa correction : la limite de 10t e⁻ᵗ quand t tend vers +∞ (réponse : 0, par croissances comparées).\n\nPour s'entraîner :\n• les exercices corrigés : https://www.eleveai.fr/fiches-exercices/maths/terminale-spe/fonction-exponentielle\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=fonction_exponentielle&microId=exp_defi&display=simple\n\n📈 Épisode 6 sur 6 de la série Fonction exponentielle d'EleveAI (terminale, spécialité maths).",
+      "chapitres": [
+        [
+          "00:00",
+          "Une piqûre à l'hôpital : Sarah, pharmacienne"
+        ],
+        [
+          "00:29",
+          "Le modèle : C(t) = 10t e⁻ᵗ"
+        ],
+        [
+          "00:51",
+          "La méthode du bac en quatre temps"
+        ],
+        [
+          "01:10",
+          "Question 1"
+        ],
+        [
+          "01:52",
+          "Dériver et factoriser"
+        ],
+        [
+          "02:09",
+          "Le piège : la phrase clé du signe"
+        ],
+        [
+          "02:31",
+          "Question 2"
+        ],
+        [
+          "03:13",
+          "Le maximum : 10 ÷ e en t = 1"
+        ],
+        [
+          "03:35",
+          "À toi de jouer"
+        ],
+        [
+          "03:54",
+          "Correction"
+        ],
+        [
+          "04:17",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "exercice type bac",
+        "étude de fonction",
+        "tableau de variations",
+        "maximum",
+        "croissances comparées",
+        "concentration",
+        "médicament",
+        "pharmacienne",
+        "santé",
+        "fonction exponentielle",
+        "exponentielle",
+        "analyse",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "01:10",
+          "question": "Pour dériver 10t e⁻ᵗ, quelle règle utilise-t-on d'abord ?",
+          "choix": [
+            "la dérivée de eᵘ, seule",
+            "la dérivée d'un quotient",
+            "la dérivée d'un produit"
+          ],
+          "reponse": 2,
+          "explication": "C'est un produit : 10t, fois e⁻ᵗ. 10t donne 10, et e⁻ᵗ donne −e⁻ᵗ. A oublie le facteur 10t."
+        },
+        {
+          "t": "02:31",
+          "question": "C′(t) a le signe de 1 − t. Sur quel intervalle la concentration augmente-t-elle ?",
+          "choix": [
+            "de 0 à 1",
+            "de 1 à +∞",
+            "de 0 à 10"
+          ],
+          "reponse": 0,
+          "explication": "1 − t est positif quand t est plus petit que 1 : C croît sur [0 ; 1], puis décroît. C confond avec le coefficient 10."
+        }
+      ],
+      "centres": [
+        "corps-sante",
+        "sciences"
+      ],
+      "plus_tard": true
     }
   ]
 }
