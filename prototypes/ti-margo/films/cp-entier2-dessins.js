@@ -122,3 +122,46 @@ function sacE(c,x,yBas,w,coul='#c08550',z=1){ if(z<=0) return; w*=Math.min(1.15,
 /* Un nombre à deux chiffres, chaque chiffre de sa couleur (dizaines orange, unités bleu) ; renvoie le centre de chaque chiffre */
 function nombreDUE(c,s,x,y,taille,cols=[CRAIE.r1,CRAIE.r0],zs=[1,1]){ c.font=`800 ${taille}px "Segoe UI"`; const w=c.measureText(s[0]).width, w2=c.measureText(s[1]).width, x0=x-(w+w2)/2;
   const cx=[x0+w/2,x0+w+w2/2]; [0,1].forEach(i=>ecrire(c,s[i],cx[i],y,taille*zs[i],cols[i])); return cx; }
+
+/* ---- Paire 6 (la piste graduée) ---- */
+/* Une piste graduée de un en un. o = {x0, y0 : la place du min ; dx, dy : le pas ; min, max ; ecrits : les nombres écrits ;
+   taille ; allume(v) → 0..1 pour faire briller un trait ; couleur(v) pour un nombre }. Vertical si dy ≠ 0 (nombres à gauche). Renvoie pos(v). */
+function pisteE(c,o){ const {x0,y0,dx=0,dy=0,min=0,max=10,ecrits=[],taille=46,allume=()=>0,couleur=()=>CRAIE.blanc,zEcrit=()=>1}=o;
+  const pos=v=>[x0+(v-min)*dx,y0+(v-min)*dy], vert=dy!==0, L=Math.hypot(dx,dy)*.55;
+  const [ax,ay]=pos(min), [bx,by]=pos(max);
+  c.strokeStyle=CRAIE.blanc; c.lineWidth=7; c.lineCap='round'; c.beginPath(); c.moveTo(ax-(vert?0:L),ay+(vert?L:0)); c.lineTo(bx+(vert?0:L),by-(vert?L:0)); c.stroke();
+  c.fillStyle=CRAIE.blanc; c.beginPath(); if(vert){ c.moveTo(bx-14,by-L+4); c.lineTo(bx,by-L-22); c.lineTo(bx+14,by-L+4); } else { c.moveTo(bx+L-4,by-14); c.lineTo(bx+L+22,by); c.lineTo(bx+L-4,by+14); } c.closePath(); c.fill();
+  for(let v=min;v<=max;v++){ const [x,y]=pos(v), a=allume(v), h=(v%5===0?24:16)+8*a;
+    if(a>0){ c.fillStyle=`rgba(255,212,59,${.45*a})`; c.beginPath(); c.arc(x,y,26,0,7); c.fill(); }
+    c.strokeStyle=a>0?CRAIE.jaune:CRAIE.blanc; c.lineWidth=5; c.beginPath(); if(vert){ c.moveTo(x-h,y); c.lineTo(x+h,y); } else { c.moveTo(x,y-h); c.lineTo(x,y+h); } c.stroke(); }
+  for(const v of ecrits){ const [x,y]=pos(v), z=zEcrit(v); if(z<=0) continue; if(vert) ecrire(c,String(v),x-38-taille*.4,y,taille*z,couleur(v)); else ecrire(c,String(v),x,y+30+taille*.55,taille*z,couleur(v)); }
+  return pos; }
+/* Un saut en cloche dessiné en pointillé, de a vers b (u de 0 à 1) */
+function arcSautE(c,a,b,u,h=70,coul=CRAIE.jaune){ if(u<=0) return; u=Math.min(1,u); c.strokeStyle=coul; c.lineWidth=5; c.setLineDash([10,8]); c.beginPath();
+  for(let k=0;k<=20*u;k++){ const p=sautE(a,b,k/20,h); k?c.lineTo(...p):c.moveTo(...p); } c.stroke(); c.setLineDash([]); }
+/* Une grenouille assise : (x, y) = le dessous ; s = l'échelle ; dort = des yeux fermés */
+function grenouilleE(c,x,y,s=1,dort=false){ c.save(); c.translate(x,y); c.scale(s,s);
+  c.fillStyle='#40c057'; c.strokeStyle='#2b8a3e'; c.lineWidth=4;
+  for(const sx of [-1,1]){ c.beginPath(); c.ellipse(sx*30,-14,22,13,0,0,7); c.fill(); c.stroke(); }
+  c.beginPath(); c.ellipse(0,-34,40,30,0,0,7); c.fill(); c.stroke();
+  for(const sx of [-1,1]){ c.fillStyle='#40c057'; c.beginPath(); c.arc(sx*20,-62,14,0,7); c.fill(); c.stroke();
+    if(dort){ c.strokeStyle='#212529'; c.lineWidth=3; c.beginPath(); c.arc(sx*20,-62,7,.2,Math.PI-.2); c.stroke(); c.strokeStyle='#2b8a3e'; c.lineWidth=4; }
+    else { c.fillStyle='#fff'; c.beginPath(); c.arc(sx*20,-63,8,0,7); c.fill(); c.fillStyle='#212529'; c.beginPath(); c.arc(sx*20+2,-63,4,0,7); c.fill(); } }
+  c.strokeStyle='#2b8a3e'; c.lineWidth=3; c.beginPath(); c.arc(0,-30,16,.3,Math.PI-.3); c.stroke();
+  c.fillStyle='#ffa8a8'; for(const sx of [-1,1]){ c.beginPath(); c.arc(sx*26,-28,5,0,7); c.fill(); }
+  c.restore(); }
+/* L'étang : l'eau de y jusqu'en bas, des vaguelettes */
+function etangE(c,T,y,W=1056,H=720){ c.fillStyle='#1864ab'; c.fillRect(0,y,W,H-y);
+  c.strokeStyle='rgba(165,216,255,.5)'; c.lineWidth=3; for(let k=0;k<9;k++){ const x=(k*211+T*20)%W, yy=y+30+(k*47)%(H-y-40); c.beginPath(); c.moveTo(x,yy); c.quadraticCurveTo(x+20,yy-6,x+40,yy); c.stroke(); } }
+/* Une fusée debout : (x, y) = le milieu ; s = l'échelle ; feu (0 → 1) la flamme */
+function fuseeE(c,x,y,s,T,feu=0){ c.save(); c.translate(x,y); c.scale(s,s);
+  if(feu>0){ const f=1+.25*Math.sin(T*30); c.fillStyle='#ff922b'; c.beginPath(); c.moveTo(-16,60); c.quadraticCurveTo(0,60+70*feu*f,16,60); c.fill(); c.fillStyle='#ffe066'; c.beginPath(); c.moveTo(-8,60); c.quadraticCurveTo(0,60+40*feu*f,8,60); c.fill(); }
+  c.fillStyle='#e03131'; for(const sx of [-1,1]){ c.beginPath(); c.moveTo(sx*22,20); c.lineTo(sx*46,62); c.lineTo(sx*22,56); c.closePath(); c.fill(); }
+  c.fillStyle='#f1f3f5'; c.strokeStyle='#868e96'; c.lineWidth=4; c.beginPath(); c.moveTo(-24,60); c.lineTo(-24,-30); c.quadraticCurveTo(0,-90,24,-30); c.lineTo(24,60); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle='#e03131'; c.beginPath(); c.moveTo(-20,-38); c.quadraticCurveTo(0,-90,20,-38); c.closePath(); c.fill();
+  c.fillStyle='#74c0fc'; c.strokeStyle='#1864ab'; c.beginPath(); c.arc(0,0,12,0,7); c.fill(); c.stroke();
+  c.restore(); }
+/* Un point de couleur posé sur la piste */
+function pointE(c,x,y,coul,z=1,lueur=0){ if(z<=0) return; const r=17*Math.min(1.25,z);
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.45*lueur})`; c.beginPath(); c.arc(x,y,r*2,0,7); c.fill(); }
+  c.fillStyle=coul; c.strokeStyle='#f8f9fa'; c.lineWidth=4; c.beginPath(); c.arc(x,y,r,0,7); c.fill(); c.stroke(); }
