@@ -1,0 +1,17 @@
+{
+  "00-garde": "Dériver avec l'exponentielle. Comment dériver e puissance u, quand u est une fonction ?",
+  "01-situation": "Voici Malik. Il est préparateur physique dans un club de handball. Après un sprint, il suit le cœur d'une joueuse. À la fin de l'effort, il bat à 160 battements par minute. Puis il redescend. Malik veut savoir à quelle vitesse.",
+  "02-idee": "Le modèle de Malik : F de t égale 60 plus 100 fois e puissance moins 0,5 t. Ici, t est le temps en minutes. En t égale 0, e puissance 0 vaut 1, donc F de 0 égale 160. La vitesse à laquelle le cœur redescend, c'est la dérivée, F prime.",
+  "03-theoreme": "La règle. La dérivée de e puissance u, c'est u prime fois e puissance u. On garde l'exponentielle telle quelle, et on la multiplie par la dérivée de son exposant. Par exemple, la dérivée de e puissance 2x, c'est 2 fois e puissance 2x.",
+  "04-question": "Question ! Quelle est la dérivée de e puissance moins x ? A : e puissance moins x. B : moins x fois e puissance moins x. C : moins e puissance moins x. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. Ici, u égale moins x, donc u prime égale moins 1. La dérivée est moins 1 fois e puissance moins x. La réponse A oublie u prime. La réponse B multiplie par u, au lieu de u prime.",
+  "05-appliquer": "Appliquons au cœur de la joueuse. La constante 60 a pour dérivée 0. Pour 100 fois e puissance moins 0,5 t : u égale moins 0,5 t, et u prime égale moins 0,5. Donc F prime de t égale 100 fois moins 0,5, fois e puissance moins 0,5 t. Soit moins 50 fois e puissance moins 0,5 t. En t égale 0, F prime vaut moins 50 : juste après l'effort, le cœur perd 50 battements par minute, à chaque minute.",
+  "06-piege": "Voilà le piège ! Dans x fois e puissance x, il y a un produit. On ne dérive pas seulement e puissance x. On utilise la règle du produit : u prime v, plus u v prime. Ici : 1 fois e puissance x, plus x fois e puissance x. On factorise : 1 plus x, fois e puissance x.",
+  "07-question": "Question ! Quelle est la dérivée de 5 fois e puissance 2x ? A : 5 fois e puissance 2x. B : 10 fois e puissance 2x. C : 2 fois e puissance 2x. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. La constante 5 reste devant. La dérivée de e puissance 2x est 2 fois e puissance 2x. Et 5 fois 2 fait 10. La réponse C perd le 5, et la réponse A oublie le 2.",
+  "08-rediger": "Au bac, trois lignes. Un : on nomme u, l'exposant, et on calcule u prime. Deux : on applique la règle, u prime fois e puissance u. Trois : on factorise par l'exponentielle, pour étudier le signe facilement, car e puissance u est toujours positif.",
+  "09-defi": "À toi de jouer ! Dérive f de x égale e puissance 3x plus 1 : tout 3x plus 1 est en exposant. Puis dérive g de x égale e puissance x au carré : x au carré est en exposant. Mets pause, et cherche !",
+  "09b-correction": "Correction. Pour f, u égale 3x plus 1, et u prime égale 3. Donc f prime de x égale 3 fois e puissance 3x plus 1. Pour g, u égale x au carré, et u prime égale 2x. Donc g prime de x égale 2x fois e puissance x au carré.",
+  "10-finale": "Ce que tu as appris. La dérivée de e puissance u, c'est u prime fois e puissance u. Une constante devant reste devant. Et pour un produit, on utilise la règle du produit, puis on factorise par l'exponentielle.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

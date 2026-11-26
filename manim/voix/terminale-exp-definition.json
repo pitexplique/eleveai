@@ -1,0 +1,17 @@
+{
+  "00-garde": "La fonction exponentielle. Quelle fonction grandit exactement à la vitesse de sa propre valeur ?",
+  "01-situation": "Voici Inès. Elle est community manager : elle s'occupe des comptes d'une marque sur les réseaux sociaux. Une de ses vidéos se met à tourner. Chaque spectateur la montre à d'autres. Alors, plus elle a de vues, plus elle en gagne vite.",
+  "02-idee": "Traduisons. On appelle f de x le nombre de vues, en millions, au bout de x jours. La vitesse de croissance, c'est la dérivée, f prime. Ici, elle est égale au nombre de vues : f prime égale f. Et au départ, il y a 1 million de vues : f de 0 égale 1. Une seule fonction vérifie ces deux conditions : la fonction exponentielle. On la note e puissance x.",
+  "03-theoreme": "Ce qu'il faut savoir. La fonction exponentielle est définie sur tous les réels. Sa dérivée, c'est elle-même. e puissance 0 vaut 1. Le nombre e vaut environ 2,72. Et e puissance x est toujours strictement positif. Sa dérivée est donc positive : la fonction est strictement croissante.",
+  "04-question": "Question ! Combien l'équation e puissance x égale 0 a-t-elle de solutions ? A : une, x égale 0. B : aucune. C : une, x égale 1. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. e puissance x est toujours strictement positif : il ne vaut jamais 0. L'équation n'a aucune solution. La réponse A confond avec e puissance 0, qui vaut 1, et pas 0.",
+  "05-appliquer": "Appliquons : la tangente en 0. La courbe passe par le point de coordonnées 0 et 1. La pente de la tangente, c'est la dérivée en 0 : e puissance 0, soit 1. La tangente a donc pour équation y égale x plus 1. Près de 0, la courbe colle à cette droite, et elle reste toujours au-dessus.",
+  "06-piege": "Voilà le piège ! e puissance x, ce n'est pas e fois x. e puissance 2, c'est e fois e : environ 7,39. Alors que 2 fois e fait environ 5,44. L'exponentielle se comporte comme une puissance, pas comme un produit.",
+  "07-question": "Question ! La fonction exponentielle est strictement croissante. Comment se comparent e puissance 2 et e puissance 3 ? A : e puissance 2 est plus grand. B : ils sont égaux. C : e puissance 2 est plus petit. Mets pause, et choisis !",
+  "07b-reponse": "Réponse C. 2 est plus petit que 3, et une fonction strictement croissante garde l'ordre. Donc e puissance 2 est plus petit que e puissance 3. Pas besoin de calculatrice.",
+  "08-rediger": "Au bac, on cite les bonnes propriétés. Un : pour tout réel x, e puissance x est strictement positif. Deux : la dérivée de e puissance x est e puissance x. Trois : la dérivée est donc strictement positive, et la fonction est strictement croissante sur tous les réels.",
+  "09-defi": "À toi de jouer ! Donne une valeur approchée de e puissance moins 1, de e puissance 0 et de e puissance 1. Puis range-les du plus petit au plus grand. Mets pause, et cherche !",
+  "09b-correction": "Correction. e puissance moins 1 vaut environ 0,37. e puissance 0 vaut exactement 1. e puissance 1, c'est e, environ 2,72. La fonction est croissante : moins 1, 0 et 1 donnent le même ordre. Et les trois sont positifs, même e puissance moins 1.",
+  "10-finale": "Ce que tu as appris. L'exponentielle est la fonction égale à sa dérivée, qui vaut 1 en 0. Elle est toujours strictement positive, et strictement croissante. Et le nombre e vaut environ 2,72.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

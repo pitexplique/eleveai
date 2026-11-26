@@ -23,12 +23,13 @@ pas de short, pas de dessin animé.
   puissance** (Frédéric, 26/11/2026 : écrire l'exponentielle « soit exp() soit en KaTeX »).
   - **Dans ce fichier** (règles, passes maths, notes), on écrit exp(x), exp(2x),
     exp(x+3), exp(−0,5t), u′·exp(u).
-  - **À l'écran des vidéos, choix de la série : la VRAIE puissance, rendue en `MathTex`
-    (LaTeX)** : l'élève voit un vrai « e » avec son exposant écrit en petit et en hauteur,
-    comme dans son cahier et dans le coach (KaTeX). Le chapeau n'existe que dans le code
-    LaTeX, jamais dans un `Text`. Contrôle avant chaque rendu : aucun `Text(` des scripts
-    `manim/scripts/terminale/exp_*.py` ne contient de chapeau (une recherche qui doit
-    revenir vide), et la planche `-ql` montre chaque exposant en hauteur.
+  - **À l'écran des vidéos, choix de la série : la VRAIE puissance** : l'élève voit un
+    vrai « e » avec son exposant écrit en petit et en hauteur, comme dans son cahier et
+    dans le coach (KaTeX). ⚠️ Le poste n'a pas LaTeX (vérifié le 26/11) : l'exposant est
+    posé par l'outil `formule()` de `manim/scripts/terminale/exp_commun.py`, en texte
+    simple, et rien d'autre ne change à l'écran. Le chapeau ne sert que de balise dans le
+    code, il n'est jamais affiché. Contrôle : la planche `-ql` montre chaque exposant en
+    hauteur, et aucun chapeau.
   - **La voix ne change donc pas** : on voit e avec l'exposant x et on entend
     « e puissance x ». La voix et l'écran disent la même chose.
 - ⚠️ À l'oral, « e puissance x plus 3 » est ambigu. Règle de la série : **à l'écran,

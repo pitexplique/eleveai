@@ -1,0 +1,17 @@
+{
+  "00-garde": "Équations et inéquations avec l'exponentielle. Comment trouver x, quand il est caché dans l'exposant ?",
+  "01-situation": "Voici Léa. Elle est programmatrice dans une radio. Deux titres montent en streaming. Au bout de x semaines, le premier en est à e puissance 2x milliers d'écoutes. Le second, à e puissance x plus 3 milliers : tout x plus 3 est en exposant. Le premier part plus bas, mais grimpe plus vite. Quand va-t-il rattraper le second ?",
+  "02-idee": "On cherche x tel que e puissance 2x égale e puissance x plus 3. L'exponentielle est strictement croissante : deux exposants différents donnent toujours deux résultats différents. Donc, si les exponentielles sont égales, les exposants sont égaux.",
+  "03-theoreme": "Les règles, pour tous réels A et B. e puissance A égale e puissance B, si et seulement si A égale B. Et e puissance A est plus petit que e puissance B, si et seulement si A est plus petit que B. L'inégalité garde son sens, parce que la fonction est croissante.",
+  "04-question": "Question ! Résous e puissance x plus 1 égale e puissance 4. Que vaut x ? A : 3. B : 4. C : 5. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A. Les exposants sont égaux : x plus 1 égale 4, donc x égale 3. La réponse B oublie le plus 1. La réponse C ajoute 1, au lieu de l'enlever.",
+  "05-appliquer": "Revenons à Léa. e puissance 2x égale e puissance x plus 3 donne 2x égale x plus 3. On enlève x des deux côtés : x égale 3. Au bout de 3 semaines, les deux titres ont autant d'écoutes : e puissance 6 milliers, environ 403 mille.",
+  "06-piege": "Voilà le piège ! Une équation comme e puissance x égale 0, ou e puissance x égale moins 2, n'a aucune solution, car e puissance x est toujours strictement positif. Avant de résoudre, on regarde donc le signe de l'autre membre. Et pour e puissance x égale 1, on écrit 1 comme e puissance 0 : x égale 0.",
+  "07-question": "Question ! Résous l'inéquation e puissance x plus petit que e puissance 2. Quelles sont les solutions ? A : de 2, exclu, à plus l'infini. B : de moins l'infini à 2, exclu. C : aucune solution. Mets pause, et choisis !",
+  "07b-reponse": "Réponse B. L'inégalité garde son sens : e puissance x plus petit que e puissance 2 donne x plus petit que 2. Les solutions vont de moins l'infini à 2, exclu. La réponse A retourne l'inégalité, comme si la fonction était décroissante.",
+  "08-rediger": "Au bac, trois lignes. Un : on écrit les deux membres sous la forme e puissance quelque chose. Deux : on cite la propriété : la fonction exponentielle est strictement croissante. Trois : on résout sur les exposants, et on donne l'ensemble des solutions.",
+  "09-defi": "À toi de jouer ! À partir de quand le premier titre dépasse-t-il le second ? Résous e puissance 2x plus grand que e puissance x plus 3. Mets pause, et cherche !",
+  "09b-correction": "Correction. La fonction est strictement croissante, donc l'inégalité garde son sens : 2x plus grand que x plus 3. On enlève x : x plus grand que 3. Les solutions vont de 3, exclu, à plus l'infini. Après 3 semaines, le premier titre est devant.",
+  "10-finale": "Ce que tu as appris. e puissance A égale e puissance B revient à A égale B. Une inégalité entre deux exponentielles garde son sens. Et e puissance x égale un nombre négatif ou nul n'a aucune solution.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

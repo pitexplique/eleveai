@@ -1,0 +1,17 @@
+{
+  "00-garde": "Exercice type bac sur l'exponentielle. Comment étudier une fonction de bout en bout, de la dérivée à la limite ?",
+  "01-situation": "Voici Sarah. Elle est pharmacienne à l'hôpital. Un patient reçoit une piqûre dans le muscle. Le médicament passe dans le sang, puis le corps l'élimine. Sarah veut savoir à quel moment il y en a le plus dans le sang, et ce que devient la quantité ensuite.",
+  "02-idee": "Le modèle : C de t égale 10 t fois e puissance moins t. C est la concentration, en milligrammes par litre, et t le temps, en heures, à partir de 0. En t égale 0, C vaut 0 : le médicament n'est pas encore dans le sang. Pour trouver le maximum, on étudie le signe de la dérivée.",
+  "03-theoreme": "La méthode du bac, en quatre temps. Un : dériver. Deux : étudier le signe de la dérivée. Trois : dresser le tableau de variations, avec le maximum. Quatre : calculer la limite en plus l'infini. On les fait un par un.",
+  "04-question": "Question ! Pour dériver 10 t fois e puissance moins t, quelle règle utilise-t-on d'abord ? A : la dérivée de e puissance u, seule. B : la dérivée d'un quotient. C : la dérivée d'un produit. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C. C'est un produit : 10 t, fois e puissance moins t. On dérive chaque facteur : 10 t donne 10, et e puissance moins t donne moins e puissance moins t. La réponse A oublie le facteur 10 t.",
+  "05-appliquer": "Dérivons. C prime de t égale 10 fois e puissance moins t, plus 10 t fois moins e puissance moins t. On factorise par 10 fois e puissance moins t : C prime de t égale 10, fois 1 moins t, fois e puissance moins t.",
+  "06-piege": "Voilà le piège ! Le signe de C prime ne se lit pas d'un coup d'œil. Il faut écrire la phrase clé : e puissance moins t est strictement positif, et 10 aussi. Donc C prime de t a le signe de 1 moins t. Sans cette phrase, au bac, la justification est incomplète.",
+  "07-question": "Question ! C prime de t a le signe de 1 moins t. Sur quel intervalle la concentration augmente-t-elle ? A : de 0 à 1. B : de 1 à plus l'infini. C : de 0 à 10. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. 1 moins t est positif quand t est plus petit que 1. Donc C est croissante de 0 à 1, puis décroissante après 1. La concentration monte pendant la première heure, puis elle baisse. La réponse C confond avec le coefficient 10.",
+  "08-rediger": "Le maximum est atteint en t égale 1. C de 1 égale 10 fois 1 fois e puissance moins 1, soit 10 sur e : environ 3,68 milligrammes par litre, au bout d'une heure. Au bac, on l'écrit dans le tableau de variations : croissante, puis le maximum 10 sur e en 1, puis décroissante.",
+  "09-defi": "À toi de jouer ! Que devient la concentration à long terme ? Calcule la limite de 10 t fois e puissance moins t, quand t tend vers plus l'infini. Mets pause, et cherche !",
+  "09b-correction": "Correction. 10 t fois e puissance moins t, c'est 10 fois t sur e puissance t. Par croissances comparées, t sur e puissance t tend vers 0. Donc la concentration tend vers 0 : le médicament finit par quitter le sang. L'axe des abscisses est une asymptote à la courbe en plus l'infini.",
+  "10-finale": "Ce que tu as appris. Pour un produit avec une exponentielle, on dérive avec la règle du produit, puis on factorise. Le signe de la dérivée vient du facteur qui n'est pas l'exponentielle. Et la limite se règle par croissances comparées.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

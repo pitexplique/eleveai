@@ -1,0 +1,17 @@
+{
+  "00-garde": "Les propriétés de l'exponentielle. Comment calculer avec des puissances de e, sans calculatrice ?",
+  "01-situation": "Voici Camille. Elle est technicienne dans un laboratoire de biologie, et elle fait pousser des levures. Le matin, leur nombre est multiplié par e puissance 2. L'après-midi, il est encore multiplié par e puissance 3. Par combien a-t-il été multiplié sur toute la journée ?",
+  "02-idee": "Sur la journée, on multiplie : e puissance 2, fois e puissance 3. e puissance 2, ce sont deux facteurs e. e puissance 3, ce sont trois facteurs e. En tout, cinq facteurs e : e puissance 5. Les exposants s'additionnent.",
+  "03-theoreme": "Les règles, pour tous réels a et b. e puissance a, fois e puissance b, égale e puissance a plus b. e puissance a, divisé par e puissance b, égale e puissance a moins b. e puissance moins a égale 1 sur e puissance a. Et e puissance a, le tout puissance n, égale e puissance n fois a.",
+  "04-question": "Question ! Que vaut e puissance 5, divisé par e puissance 2 ? A : e puissance 2,5. B : e puissance 3. C : e puissance 7. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B. Pour une division, on soustrait les exposants : 5 moins 2 fait 3. La réponse A divise les exposants, et la réponse C les additionne.",
+  "05-appliquer": "Appliquons. Le soir, Camille dilue sa culture : le nombre de levures est multiplié par e puissance moins 3. Sur la journée entière, e puissance 5 fois e puissance moins 3 donne e puissance 2. Et multiplier par e puissance moins 3, c'est diviser par e puissance 3.",
+  "06-piege": "Voilà le piège ! e puissance a, plus e puissance b, ce n'est pas e puissance a plus b. La règle marche pour un produit, pas pour une somme. Par exemple, e puissance 1 plus e puissance 1 fait 2 fois e, environ 5,44. Alors que e puissance 2 vaut environ 7,39.",
+  "07-question": "Question ! Simplifie : e puissance x, le tout au carré, fois e puissance moins x. A : e puissance x. B : e puissance x au carré. C : 1. Mets pause, et choisis !",
+  "07b-reponse": "Réponse A. e puissance x, le tout au carré, égale e puissance 2x : on double l'exposant. Puis e puissance 2x fois e puissance moins x : 2x moins x fait x. Il reste e puissance x. La réponse B met le carré sur x, au lieu de doubler l'exposant.",
+  "08-rediger": "Au bac, on écrit chaque étape avec la règle utilisée. Un : on transforme les puissances de puissances. Deux : on regroupe les produits et les quotients en un seul exposant. Trois : on simplifie cet exposant.",
+  "09-defi": "À toi de jouer ! Simplifie : e puissance 4, fois e puissance moins 1, le tout divisé par e puissance 2. Mets pause, et cherche !",
+  "09b-correction": "Correction. En haut, e puissance 4 fois e puissance moins 1 : 4 moins 1 fait 3, donc e puissance 3. Puis on divise par e puissance 2 : 3 moins 2 fait 1. Le résultat est e puissance 1, c'est-à-dire e, environ 2,72.",
+  "10-finale": "Ce que tu as appris. Pour un produit, on additionne les exposants. Pour un quotient, on les soustrait. e puissance moins a, c'est 1 sur e puissance a. Et une somme de puissances de e ne se simplifie pas comme un produit.",
+  "11-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}
