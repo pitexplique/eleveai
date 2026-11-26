@@ -653,6 +653,15 @@ export const microSkills: MicroSkillSource[] = [
     notionId: "masse",
     prerequis: ["decimal_comparer"],
   },
+  // 26/11/2026 : la banque (`masse-outils.ts`, 8 gabarits) et les 2 vidéos
+  // « Lire une balance » existaient, mais la micro manquait ici : le coach ne la
+  // proposait jamais et ses vidéos ne s'affichaient sur aucune micro.
+  {
+    id: "masse_mesurer",
+    label: "Lire une balance pour mesurer une masse",
+    notionId: "masse",
+    prerequis: ["masse_comparer"],
+  },
   {
     id: "masse_convertir",
     label: "Convertir des masses simples",
