@@ -158,7 +158,22 @@ function fr(n: number, decimales = 0): string {
   });
 }
 
-type Unite = { couleur: string; allumee: boolean };
+// Une chambre de la façade : sa catégorie (cat), son rang dans la catégorie (k).
+type Unite = { couleur: string; allumee: boolean; cat: number; k: number; nom: string; prix: number };
+
+// Remplir chaque catégorie au même taux (c'est ce que fait le curseur) — on ne
+// vend pas 0,4 chambre, donc on arrondit catégorie par catégorie.
+function remplir(nombres: number[], t: number): boolean[][] {
+  return nombres.map((n) => {
+    const allumees = Math.round((n * t) / 100);
+    return Array.from({ length: n }, (_, k) => k < allumees);
+  });
+}
+
+// Le plus grand diviseur commun : pour simplifier la fraction 18/26 = 9/13.
+function pgcd(a: number, b: number): number {
+  return b === 0 ? Math.abs(a) : pgcd(b, a % b);
+}
 
 // ── La façade VIVANTE (SVG animé) ────────────────────────────────────────────
 // Une baie = une chambre. Les baies s'allument dans l'ordre, catégorie par
@@ -177,10 +192,20 @@ function repartir(total: number) {
   return { rangees, parRangee: Math.max(1, Math.ceil(total / rangees)) };
 }
 
-function HotelAnime({ unites, allumees }: { unites: Unite[]; allumees: number }) {
+function HotelAnime({
+  unites,
+  allumees,
+  onBasculer,
+}: {
+  unites: Unite[];
+  allumees: number;
+  onBasculer: (cat: number, k: number) => void;
+}) {
   const total = unites.length;
   const { rangees, parRangee } = repartir(total);
-  const hRangee = Math.min(32, 216 / rangees);
+  // 38 au plus : une chambre doit rester assez haute pour un doigt (≈ 29 px à
+  // 640 px de large, la largeur mini du dessin).
+  const hRangee = Math.min(38, 216 / rangees);
   const hDalle = 3; // la dalle blanche entre deux étages
   const hVitre = (hRangee - hDalle) * 0.56; // la baie vitrée
   const hGarde = (hRangee - hDalle) * 0.44; // le garde-corps du balcon
@@ -217,13 +242,20 @@ function HotelAnime({ unites, allumees }: { unites: Unite[]; allumees: number })
         .h-allumee { animation: hot-lueur calc(var(--cadence) * 2) ease-in-out infinite; }
         .h-fumee { animation: hot-fumee var(--cadence) ease-out infinite; }
         .h-soleil { animation: hot-soleil calc(var(--cadence) * 2.5) ease-in-out infinite; }
+        @keyframes hot-pop { 0% { transform: scale(.2); opacity: 0; } 60% { transform: scale(1.25); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes hot-halo { 0% { opacity: .9; } 100% { opacity: 0; } }
+        .h-pop { transform-box: fill-box; transform-origin: center; animation: hot-pop .45s ease-out; }
+        .h-halo { animation: hot-halo .7s ease-out forwards; }
+        .h-chambre { cursor: pointer; outline: none; }
+        .h-chambre:hover .h-cible, .h-chambre:focus-visible .h-cible { fill-opacity: .16; stroke-opacity: 1; }
         @media (prefers-reduced-motion: reduce) {
           .h-vague, .h-allumee, .h-fumee, .h-soleil { animation-duration: 14s; }
+          .h-pop, .h-halo { animation-duration: .01s; }
         }
       `}</style>
       <svg
         viewBox="0 0 820 380"
-        style={{ ["--cadence" as string]: cadence }}
+        style={{ ["--cadence" as string]: cadence, touchAction: "manipulation" }}
         className="mx-auto block min-w-[640px] max-w-[900px]"
         aria-label={`Façade animée d'un hôtel de Terre-Sainte : socle turquoise, bande de bois à l'angle, balcons à garde-corps sombres — ${allumees} baies allumées sur ${total} chambres, la mer derrière et les chauffe-eau solaires sur le toit`}
       >
@@ -302,8 +334,28 @@ function HotelAnime({ unites, allumees }: { unites: Unite[]; allumees: number })
           const col = i % parRangee;
           const x = x0 + 13 + col * pas + (pas - lFenetre) / 2;
           const yHaut = solY - rezH - (rangeeDepuisBas + 1) * hRangee + hDalle;
+          // Deux silhouettes (le tarif est pour 2 personnes), une seule si la baie est étroite.
+          const rTete = Math.max(1.2, Math.min(hVitre * 0.15, lFenetre * 0.1));
+          const silhouettes = lFenetre >= 20 ? [0.36, 0.64] : [0.5];
+          const basculer = () => onBasculer(u.cat, u.k);
           return (
-            <g key={i}>
+            <g
+              key={i}
+              className="h-chambre"
+              role="button"
+              tabIndex={0}
+              aria-pressed={u.allumee}
+              aria-label={`Chambre ${u.nom} (${fr(u.prix)} €) — ${u.allumee ? "occupée : clique pour la libérer" : "libre : clique pour installer des clients"}`}
+              onClick={() => {
+                basculer();
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  basculer();
+                }
+              }}
+            >
               {/* la baie vitrée : allumée = chambre vendue, à la couleur de sa catégorie */}
               <rect
                 x={x}
@@ -325,6 +377,50 @@ function HotelAnime({ unites, allumees }: { unites: Unite[]; allumees: number })
                 y2={yHaut + hVitre + hGarde / 2}
                 stroke="#4a585f"
                 strokeWidth="1"
+              />
+              {/* les clients installés : deux silhouettes qui « sautent » dans la lumière */}
+              {u.allumee && (
+                <g className="h-pop" fill="#3a2410" opacity="0.6">
+                  {silhouettes.map((f) => {
+                    const cx = x + lFenetre * f;
+                    const yTete = yHaut + hVitre * 0.42;
+                    return (
+                      <g key={f}>
+                        <circle cx={cx} cy={yTete} r={rTete} />
+                        <path
+                          d={`M${cx - rTete * 1.7},${yHaut + hVitre} Q${cx - rTete * 1.7},${yTete + rTete * 1.3} ${cx},${yTete + rTete * 1.3} Q${cx + rTete * 1.7},${yTete + rTete * 1.3} ${cx + rTete * 1.7},${yHaut + hVitre} Z`}
+                        />
+                      </g>
+                    );
+                  })}
+                </g>
+              )}
+              {/* le flash quand la lumière s'allume */}
+              {u.allumee && (
+                <rect
+                  x={x - 3}
+                  y={yHaut - 3}
+                  width={lFenetre + 6}
+                  height={hVitre + 6}
+                  rx="3"
+                  fill="#ffe9c2"
+                  className="h-halo"
+                  pointerEvents="none"
+                />
+              )}
+              {/* la zone à toucher : toute la case de la chambre (assez grande pour un doigt) */}
+              <rect
+                x={x0 + 13 + col * pas + 1}
+                y={yHaut - hDalle + 1}
+                width={pas - 2}
+                height={hRangee - 2}
+                rx="3"
+                fill="#ffffff"
+                fillOpacity={0}
+                stroke="#f5b942"
+                strokeOpacity={0}
+                strokeWidth="1.5"
+                className="h-cible"
               />
             </g>
           );
@@ -396,7 +492,7 @@ function HotelAnime({ unites, allumees }: { unites: Unite[]; allumees: number })
           ["G", 58, 234],
           ["H", x0 + 139, solY - 12],
         ] as const).map(([lettre, x, y]) => (
-          <g key={lettre}>
+          <g key={lettre} pointerEvents="none">
             <circle cx={x} cy={y} r="9" fill="#f5b942" />
             <text x={x} y={y + 3.5} fill="#071726" fontSize="11" fontWeight="800" textAnchor="middle" fontFamily="monospace">
               {lettre}
@@ -489,7 +585,6 @@ export default function SimulateurHotelClient() {
   // Les commandes : la saison, le remplissage, et la part des clients qui
   // prennent le petit-déjeuner (il n'est PAS compris dans le prix).
   const [saison, setSaison] = useState(2); // 0 basse · 1 moyenne · 2 haute · 3 pointe
-  const [taux, setTaux] = useState(70);
   const [partPdj, setPartPdj] = useState(60);
 
   // La maison, catégorie par catégorie. Ordres de grandeur : le directeur qui
@@ -497,6 +592,12 @@ export default function SimulateurHotelClient() {
   const [nSuperieure, setNSuperieure] = useState(14);
   const [nDeluxe, setNDeluxe] = useState(8);
   const [nFamiliale, setNFamiliale] = useState(4);
+
+  // UN SEUL ÉTAT pour la façade : chambre par chambre, occupée ou libre.
+  // L'élève clique une fenêtre → elle bascule ; le curseur remplit toutes les
+  // catégories au même taux. Les deux écrivent ici, donc ils restent d'accord.
+  const [occ, setOcc] = useState<boolean[][]>(() => remplir([14, 8, 4], 70));
+  const [curseur, setCurseur] = useState(70); // la position du curseur, en %
 
   // Les deux nombres que seul le gérant connaît (repliés, modifiables).
   const [chargeFixe, setChargeFixe] = useState(45); // € par chambre disponible et par nuit
@@ -524,9 +625,15 @@ export default function SimulateurHotelClient() {
   const parc = CATEGORIES.map((c, i) => ({ ...c, n: nombres[i], p: c.prix[saison] }));
   const total = parc.reduce((s, c) => s + c.n, 0);
 
-  // Chaque catégorie se remplit au même taux — on ne vend pas 0,4 chambre.
-  const occupees = parc.map((c) => Math.round((c.n * taux) / 100));
+  // Les chambres occupées, catégorie par catégorie — comptées sur la façade.
+  const etat = parc.map((c, i) => Array.from({ length: c.n }, (_, k) => !!occ[i]?.[k]));
+  const occupees = etat.map((l) => l.filter(Boolean).length);
   const vendues = occupees.reduce((s, n) => s + n, 0);
+  // LE TAUX D'OCCUPATION = chambres occupées ÷ chambres disponibles.
+  const taux = total > 0 ? (vendues / total) * 100 : 0;
+  const tauxExact = Math.abs(taux - Math.round(taux)) < 1e-9;
+  const d = pgcd(vendues, total) || 1;
+  const fractionSimplifiable = d > 1 && vendues > 0;
 
   // LE PRIX MOYEN EST UNE MOYENNE PONDÉRÉE — pas la moyenne des trois tarifs.
   const valeurParc = parc.reduce((s, c) => s + c.n * c.p, 0);
@@ -557,16 +664,47 @@ export default function SimulateurHotelClient() {
   // directeur se pose tous les jours.
   const marge = prixMoyen - coutVariable;
   const pointMort = marge > 0 ? Math.min(999, (chargeFixe / marge) * 100) : 999;
-  const rentable = taux >= pointMort;
+  // Le juge de paix, c'est le résultat de la nuit (avec les VRAIS prix des
+  // chambres allumées). Le point mort en %, lui, suppose qu'on vend chaque
+  // catégorie dans les mêmes proportions que la maison.
   const resultat = recetteChambres - chargeFixe * total - coutVariable * vendues;
+  const rentable = resultat >= 0;
+  const melangeTrompeur = (taux >= pointMort) !== rentable;
+  // Le point mort en chambres (null si même la maison pleine ne suffit pas).
+  const chambresPointMort = pointMort <= 100 ? Math.ceil((pointMort / 100) * total - 1e-9) : null;
 
-  // La façade : les chambres dans l'ordre des catégories, allumées d'abord.
-  const unites = parc.flatMap((c, i) =>
-    Array.from({ length: c.n }, (_, k) => ({ couleur: c.couleur, allumee: k < occupees[i] })),
+  // La façade : les chambres dans l'ordre des catégories.
+  const unites: Unite[] = parc.flatMap((c, i) =>
+    etat[i].map((allumee, k) => ({ couleur: c.couleur, allumee, cat: i, k, nom: c.nom, prix: c.p })),
   );
 
-  const majParc = (i: number, n: number) =>
-    [setNSuperieure, setNDeluxe, setNFamiliale][i](Math.max(0, Math.min(60, n)));
+  // Un clic sur une fenêtre : la chambre bascule, et le curseur suit.
+  const basculerChambre = (cat: number, k: number) => {
+    const suivant = etat.map((l, i) => (i === cat ? l.map((v, j) => (j === k ? !v : v)) : l));
+    setOcc(suivant);
+    const n = suivant.reduce((s, l) => s + l.filter(Boolean).length, 0);
+    setCurseur(total > 0 ? Math.round((n / total) * 100) : 0);
+  };
+
+  // Le curseur : toutes les catégories se remplissent au même taux.
+  const bougerCurseur = (t: number) => {
+    setCurseur(t);
+    setOcc(remplir(nombres, t));
+  };
+
+  // ↺ Recommencer : la maison est vide, l'élève la remplit lui-même.
+  const recommencer = () => {
+    setCurseur(0);
+    setOcc(remplir(nombres, 0));
+  };
+
+  const majParc = (i: number, n: number) => {
+    const v = Math.max(0, Math.min(60, Number.isFinite(n) ? Math.round(n) : 0));
+    [setNSuperieure, setNDeluxe, setNFamiliale][i](v);
+    // La maison change de taille : on la remplit au taux du curseur.
+    const nouveaux = nombres.map((m, j) => (j === i ? v : m));
+    setOcc(remplir(nouveaux, curseur));
+  };
 
   return (
     <div className="min-h-screen bg-[#071726] text-[#f2f7fb]">
@@ -677,16 +815,20 @@ export default function SimulateurHotelClient() {
               🛎️ Le remplissage de ce soir
             </p>
             <p className="font-mono text-2xl font-bold tabular-nums text-[#f5b942]">
-              {fr(taux)} <span className="text-sm font-normal text-[#8fb3c9]">%</span>
+              {tauxExact ? "" : "≈ "}
+              {fr(taux, 1)} <span className="text-sm font-normal text-[#8fb3c9]">%</span>
             </p>
           </div>
+          <p className="mt-1 text-[12px] leading-5 text-[#cfe3ee]">
+            Bouge le curseur, ou clique directement sur les fenêtres de l&apos;hôtel plus bas.
+          </p>
           <input
             type="range"
             min={0}
             max={100}
-            step={5}
-            value={taux}
-            onChange={(e) => setTaux(+e.target.value)}
+            step={1}
+            value={curseur}
+            onChange={(e) => bougerCurseur(+e.target.value)}
             className="mt-3 w-full accent-[#f5b942]"
             aria-label="Taux d'occupation de l'hôtel, en pourcentage"
           />
@@ -771,14 +913,85 @@ export default function SimulateurHotelClient() {
           </div>
         </div>
 
-        {/* LA FAÇADE VIVANTE — le pourcentage qu'on peut compter des yeux. */}
-        <HotelAnime unites={unites} allumees={vendues} />
+        {/* LA FAÇADE VIVANTE — le pourcentage qu'on peut compter des yeux,
+            et qu'on remplit à la main : un clic = une chambre vendue. */}
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-2 rounded border-2 border-[#f5b942] bg-[#0d2233] px-3 py-2">
+          <p className="text-[14px] font-bold leading-6 text-[#f2f7fb]">
+            👆 Clique sur une fenêtre pour installer des clients.
+            <span className="block text-[12.5px] font-normal text-[#cfe3ee]">
+              Clique encore pour libérer la chambre. La caisse compte le prix de la catégorie
+              (couleur) en saison {SAISONS[saison].nom.toLowerCase()}.
+            </span>
+          </p>
+          <button
+            type="button"
+            onClick={recommencer}
+            className="rounded border border-[#f5b942] bg-[#f5b942] px-3 py-1.5 text-[13px] font-bold text-[#071726] hover:brightness-110"
+          >
+            ↺ Recommencer
+          </button>
+        </div>
+        <HotelAnime unites={unites} allumees={vendues} onBasculer={basculerChambre} />
+
+        {/* LA CAISSE DU SOIR — les trois lignes que le prof projette. */}
+        <div className="mt-3 space-y-2 rounded border border-[#1c3d55] bg-[#0d2233] p-3 font-mono text-[13px] leading-6 tabular-nums">
+          <p className="text-[#f2f7fb]">
+            <span className="font-sans text-[11px] font-black uppercase tracking-[0.14em] text-[#8fb3c9]">
+              Taux d&apos;occupation{" "}
+            </span>
+            <br className="sm:hidden" />
+            {fr(vendues)} ÷ {fr(total)}
+            {fractionSimplifiable ? ` = ${fr(vendues / d)}/${fr(total / d)}` : ""}{" "}
+            {tauxExact ? "=" : "≈"} <b className="text-[#f5b942]">{fr(taux, 1)} %</b>
+          </p>
+          <p className="text-[#f2f7fb]">
+            <span className="font-sans text-[11px] font-black uppercase tracking-[0.14em] text-[#8fb3c9]">
+              Recette des chambres ce soir{" "}
+            </span>
+            <br className="sm:hidden" />
+            {parc.map((c, i) => (
+              <span key={c.cle}>
+                {i > 0 ? " + " : ""}
+                <span style={{ color: c.couleur }}>
+                  {fr(occupees[i])} × {fr(c.p)}
+                </span>
+              </span>
+            ))}{" "}
+            = <b className="text-[#f5b942]">{fr(recetteChambres)} €</b>
+          </p>
+          <p className={rentable ? "text-[#6ec78a]" : "text-[#ff9d7a]"}>
+            <span className="font-sans text-[11px] font-black uppercase tracking-[0.14em] text-[#8fb3c9]">
+              Point mort{" "}
+            </span>
+            <br className="sm:hidden" />
+            {chambresPointMort !== null
+              ? `≈ ${fr(pointMort)} % → au moins ≈ ${fr(chambresPointMort)} chambres sur ${fr(total)}`
+              : "jamais atteint : même complète, la maison ne couvre pas ses charges"}
+            <br />
+            {fr(recetteChambres)} − {fr(chargeFixe)} × {fr(total)} − {fr(coutVariable)} × {fr(vendues)} ={" "}
+            <b>
+              {resultat >= 0 ? "+" : "−"}
+              {fr(Math.abs(resultat))} €
+            </b>{" "}
+            <span className="font-sans font-bold">
+              {rentable ? "✅ au-dessus du point mort : la nuit rapporte" : "❌ sous le point mort : la nuit coûte"}
+            </span>
+          </p>
+          {melangeTrompeur && (
+            <p className="font-sans text-[12px] leading-5 text-[#cfe3ee]">
+              ⚠️ Le point mort en % suppose qu&apos;on remplit chaque catégorie autant que les autres.
+              Toi, tu as surtout allumé des chambres{" "}
+              {taux >= pointMort ? "bon marché" : "chères"} : c&apos;est le résultat en euros qui
+              tranche.
+            </p>
+          )}
+        </div>
 
         {/* La chaîne de l'hôtel */}
         <div className="mt-3 space-y-3">
           <Etape
             nom="1 · Les clés — le pourcentage devient des nuits"
-            explication={`Chaque catégorie se remplit à ${fr(taux)} % : ${fr(nSuperieure)} Supérieures, ${fr(nDeluxe)} Deluxe et ${fr(nFamiliale)} Familiales donnent ${fr(occupees[0])} + ${fr(occupees[1])} + ${fr(occupees[2])} = ${fr(vendues)} chambres vendues. On arrondit, parce qu'on ne vend pas une demi-chambre.`}
+            explication={`Sur ${fr(nSuperieure)} Supérieures, ${fr(nDeluxe)} Deluxe et ${fr(nFamiliale)} Familiales, ${fr(occupees[0])} + ${fr(occupees[1])} + ${fr(occupees[2])} = ${fr(vendues)} chambres sont vendues ce soir. ${fr(vendues)} ÷ ${fr(total)} ${tauxExact ? "=" : "≈"} ${fr(taux, 1)} % : c'est le taux d'occupation. Avec le curseur, on arrondit catégorie par catégorie, parce qu'on ne vend pas une demi-chambre.`}
             quantite={vendues}
             unite={`chambres sur ${fr(total)}`}
             pct={taux}
@@ -842,8 +1055,8 @@ export default function SimulateurHotelClient() {
             </p>
             <p className="mt-1 text-[11.5px] leading-4 text-[#cfe3ee]">
               {rentable
-                ? `à ${fr(taux)} %, la nuit passe : ${fr(resultat)} € restent une fois tout payé`
-                : `à ${fr(taux)} %, la nuit ne se paie pas : il manque ${fr(Math.abs(resultat))} €`}
+                ? `à ${fr(taux, 1)} %, la nuit passe : ${fr(resultat)} € restent une fois tout payé`
+                : `à ${fr(taux, 1)} %, la nuit ne se paie pas : il manque ${fr(Math.abs(resultat))} €`}
             </p>
           </div>
         </div>
@@ -927,7 +1140,7 @@ export default function SimulateurHotelClient() {
 
         {/* Les maths de l'hôtel, affichées — jamais cachées. */}
         <div className="mt-4 rounded border border-dashed border-[#f5b942]/40 bg-[#0d2233] px-3 py-2.5 font-mono text-[12.5px] leading-relaxed text-[#f5b942]">
-          chambres vendues ≈ {fr(total)} × {fr(taux / 100, 2)} ≈ <b>{fr(vendues)}</b>
+          taux = {fr(vendues)} ÷ {fr(total)} {tauxExact ? "=" : "≈"} <b>{fr(taux, 1)} %</b>
           <span className="text-[#8fb3c9]"> · </span>
           prix moyen = {fr(valeurParc)} ÷ {fr(total)} ≈ <b>{fr(prixMoyen, 2)} €</b>
           <span className="text-[#8fb3c9]"> · </span>

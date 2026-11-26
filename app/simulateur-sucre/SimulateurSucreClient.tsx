@@ -13,7 +13,12 @@
 //   une famille ~10 kWh/jour · un morceau de sucre ~6 g
 //   terrain de foot : 7 140 m² (105 × 68 — le même que le défi du jour)
 
-import { useEffect, useState } from "react";
+// 26/11 : l'élève COUPE lui-même la canne. Un champ de 4 × 5 = 20 parcelles
+// cliquables ; chaque parcelle vaut 10, 50, 100 ou 400 t (au choix). Tonnage
+// du champ = parcelles coupées × tonnes par parcelle (ligne affichée). Le
+// curseur ajoute la canne d'AUTRES planteurs, en plus du champ.
+
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { lienVideo } from "@/lib/videos/lienVideo";
 import DefisSimulateur, { type DefiSimulateur } from "@/components/simulateurs/DefisSimulateur";
@@ -27,6 +32,23 @@ const KWH_PAR_TONNE = 100;
 const KWH_FAMILLE_JOUR = 10;
 const MORCEAU_G = 6;
 const TERRAIN_FOOT_M2 = 7140;
+
+// Le champ cliquable : 4 rangées × 5 colonnes = 20 parcelles.
+const COLONNES = 5;
+const RANGEES = 4;
+const NB_PARCELLES = COLONNES * RANGEES;
+// Tonnes par parcelle au choix : 10 t (défis 30 t, 50 t), 50 t (20 × 50 =
+// 1 000 t), 400 t (20 × 400 = 8 000 t, une pleine journée).
+const TAILLES_PARCELLE = [10, 50, 100, 400];
+const TAILLE_DEPART = 50;
+// Départ déterministe (pas d'aléatoire au rendu) : 6 parcelles coupées = 300 t.
+const COUPEES_DEPART = Array.from({ length: NB_PARCELLES }, (_, i) => i < 6);
+// Géométrie du champ dans le SVG (viewBox 640 × 320).
+const CASE_L = 84;
+const CASE_H = 66;
+const CHAMP_X = 14;
+const CHAMP_Y = 38;
+const USINE_CIBLE = { x: 548, y: 226 }; // où arrivent les camions
 
 // ── Les défis de l'usine (règle du 18/07 : chaque simulateur a les siens) ────
 // Les nombres diffèrent du curseur : la réponse n'est pas à l'écran, mais
@@ -188,6 +210,165 @@ function UsineAnimee({ tonnes }: { tonnes: number }) {
   );
 }
 
+// ── Le CHAMP cliquable : l'élève coupe (ou replante) chaque parcelle ─────────
+type Camion = { id: number; x: number; y: number; delai: number };
+
+function centreParcelle(i: number) {
+  const col = i % COLONNES;
+  const rang = Math.floor(i / COLONNES);
+  return {
+    x: CHAMP_X + col * CASE_L + CASE_L / 2,
+    y: CHAMP_Y + rang * CASE_H + CASE_H / 2,
+  };
+}
+
+function ChampCliquable({
+  coupees,
+  taille,
+  tonnesTotal,
+  camions,
+  onBasculer,
+}: {
+  coupees: boolean[];
+  taille: number;
+  tonnesTotal: number;
+  camions: Camion[];
+  onBasculer: (i: number) => void;
+}) {
+  return (
+    <div className="mt-3 rounded border border-[#3a2a14] bg-[#1b1006]">
+      <style>{`
+        @keyframes champ-tombe { 0% { transform: rotate(0deg); opacity: 1; } 70% { transform: rotate(82deg); opacity: 1; } 100% { transform: rotate(88deg); opacity: 0; } }
+        @keyframes champ-pousse { 0% { transform: scaleY(0); } 100% { transform: scaleY(1); } }
+        @keyframes champ-camion { 0% { transform: translate(0px, 0px); opacity: 0; } 10% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translate(var(--dx), var(--dy)); opacity: 0; } }
+        @keyframes champ-vent { 0%,100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
+        .c-tombe { animation: champ-tombe .75s ease-in forwards; transform-origin: center bottom; transform-box: fill-box; }
+        .c-pousse { animation: champ-pousse .5s ease-out; transform-origin: center bottom; transform-box: fill-box; }
+        .c-vent { animation: champ-vent 3s ease-in-out infinite; transform-origin: center bottom; transform-box: fill-box; }
+        .c-camion { animation: champ-camion 1.3s ease-in forwards; opacity: 0; }
+        .c-parcelle { cursor: pointer; outline: none; }
+        .c-parcelle:hover .c-sol, .c-parcelle:focus-visible .c-sol { stroke: #f2a93b; stroke-width: 3; }
+        @media (prefers-reduced-motion: reduce) {
+          .c-vent { animation: none; }
+        }
+      `}</style>
+      <svg
+        viewBox="0 0 640 320"
+        className="mx-auto block w-full max-w-[860px] select-none"
+        style={{ touchAction: "manipulation" }}
+        aria-label="Le champ de canne : 20 parcelles. Clique sur une parcelle pour la couper, clique encore pour la replanter."
+      >
+        <text x={CHAMP_X} y="24" fill="#7fb069" fontSize="15" fontWeight="800" fontFamily="monospace">
+          TON CHAMP · 1 parcelle = {fr(taille)} t
+        </text>
+        {coupees.map((coupee, i) => {
+          const col = i % COLONNES;
+          const rang = Math.floor(i / COLONNES);
+          const x = CHAMP_X + col * CASE_L;
+          const y = CHAMP_Y + rang * CASE_H;
+          const bas = y + CASE_H - 8;
+          const tiges = [0, 1, 2, 3, 4, 5];
+          return (
+            <g
+              key={i}
+              className="c-parcelle"
+              role="button"
+              tabIndex={0}
+              aria-pressed={coupee}
+              aria-label={`Parcelle ${i + 1} : ${coupee ? "coupée, clique pour replanter" : "en canne, clique pour couper"}`}
+              onClick={() => {
+                onBasculer(i);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onBasculer(i);
+                }
+              }}
+            >
+              <rect
+                className="c-sol"
+                x={x + 2}
+                y={y + 2}
+                width={CASE_L - 4}
+                height={CASE_H - 4}
+                rx={6}
+                fill={coupee ? "#5a3a1c" : "#2a3d20"}
+                stroke={coupee ? "#8a5a3b" : "#3f5a2e"}
+                strokeWidth={1.5}
+              />
+              {coupee ? (
+                <g key="coupee">
+                  {/* les chaumes : la canne coupée au ras du sol */}
+                  {tiges.map((k) => (
+                    <line key={k} x1={x + 14 + k * 11} y1={bas} x2={x + 14 + k * 11} y2={bas - 6} stroke="#c9a86c" strokeWidth={3} strokeLinecap="round" />
+                  ))}
+                  {/* la canne qui tombe */}
+                  <g className="c-tombe">
+                    {tiges.map((k) => (
+                      <line key={k} x1={x + 14 + k * 11} y1={bas - 6} x2={x + 14 + k * 11} y2={y + 12} stroke="#7fb069" strokeWidth={3.5} strokeLinecap="round" />
+                    ))}
+                  </g>
+                  <text x={x + CASE_L / 2} y={y + 28} fill="#f2a93b" fontSize="14" fontWeight="800" textAnchor="middle" fontFamily="monospace">
+                    ✂ {fr(taille)} t
+                  </text>
+                </g>
+              ) : (
+                <g key="debout" className="c-pousse">
+                  <g className="c-vent" style={{ animationDelay: `${(i % 5) * 0.3}s` }}>
+                    {tiges.map((k) => {
+                      const tx = x + 14 + k * 11;
+                      const haut = y + 12 + (k % 2) * 6;
+                      return (
+                        <g key={k}>
+                          <line x1={tx} y1={bas} x2={tx} y2={haut} stroke="#7fb069" strokeWidth={3.5} strokeLinecap="round" />
+                          <path d={`M${tx},${haut + 8} q${k % 2 ? 9 : -9},-4 ${k % 2 ? 12 : -12},4`} fill="none" stroke="#a6d388" strokeWidth={2} strokeLinecap="round" />
+                        </g>
+                      );
+                    })}
+                  </g>
+                </g>
+              )}
+            </g>
+          );
+        })}
+
+        {/* La route et l'usine */}
+        <path d={`M${CHAMP_X + COLONNES * CASE_L + 4},${USINE_CIBLE.y} L${USINE_CIBLE.x - 20},${USINE_CIBLE.y}`} stroke="#3a2a14" strokeWidth="14" strokeLinecap="round" />
+        <path d={`M${CHAMP_X + COLONNES * CASE_L + 4},${USINE_CIBLE.y} L${USINE_CIBLE.x - 20},${USINE_CIBLE.y}`} stroke="#c9a86c" strokeWidth="1.5" strokeDasharray="6 6" />
+        <rect x="500" y="150" width="120" height="66" rx="6" fill="#241708" stroke="#c9a86c" strokeWidth="2.5" />
+        <rect x="590" y="110" width="14" height="40" fill="#241708" stroke="#c9a86c" strokeWidth="2.5" />
+        <circle cx="597" cy="100" r="6" fill="#f6ead6" opacity="0.5" />
+        <text x="560" y="174" fill="#c9a86c" fontSize="13" fontWeight="800" textAnchor="middle" fontFamily="monospace">USINE</text>
+        <text x="560" y="200" fill="#f2a93b" fontSize="17" fontWeight="800" textAnchor="middle" fontFamily="monospace">
+          {fr(tonnesTotal)} t
+        </text>
+
+        {/* Les camions qui partent des parcelles coupées vers l'usine */}
+        {camions.map((c) => (
+          <g
+            key={c.id}
+            className="c-camion"
+            style={
+              {
+                "--dx": `${USINE_CIBLE.x - c.x}px`,
+                "--dy": `${USINE_CIBLE.y - c.y}px`,
+                animationDelay: `${c.delai}s`,
+                pointerEvents: "none",
+              } as React.CSSProperties
+            }
+          >
+            <rect x={c.x - 14} y={c.y - 10} width={18} height={12} rx={2} fill="#7fb069" stroke="#160d04" strokeWidth={1} />
+            <rect x={c.x + 4} y={c.y - 6} width={9} height={8} rx={1.5} fill="#f2a93b" stroke="#160d04" strokeWidth={1} />
+            <circle cx={c.x - 8} cy={c.y + 4} r={3} fill="#160d04" />
+            <circle cx={c.x + 8} cy={c.y + 4} r={3} fill="#160d04" />
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
 function Etape({
   nom,
   explication,
@@ -225,9 +406,48 @@ function Etape({
 }
 
 export default function SimulateurSucreClient() {
-  // Le tonnage du jour : d'un cachalot de canne (30 t) à une pleine journée
-  // d'usine (8 000 t).
-  const [tonnes, setTonnes] = useState(300);
+  // Le tonnage du jour = la canne coupée dans TON champ (parcelles × tonnes
+  // par parcelle) + la canne des autres planteurs (le curseur).
+  const [coupees, setCoupees] = useState<boolean[]>(COUPEES_DEPART);
+  const [taille, setTaille] = useState(TAILLE_DEPART);
+  const [autres, setAutres] = useState(0);
+  const [camionsEnRoute, setCamionsEnRoute] = useState<Camion[]>([]);
+  const prochainCamion = useRef(0);
+
+  const nbCoupees = coupees.filter(Boolean).length;
+  const tonnesChamp = nbCoupees * taille;
+  const tonnes = tonnesChamp + autres;
+
+  // Un petit camion part de chaque parcelle coupée (aléatoire interdit au
+  // rendu : tout se passe ici, dans le clic).
+  const envoyerCamions = (indices: number[]) => {
+    const nouveaux = indices.slice(0, 8).map((i, k) => ({
+      id: prochainCamion.current++,
+      ...centreParcelle(i),
+      delai: k * 0.12,
+    }));
+    if (nouveaux.length === 0) return;
+    setCamionsEnRoute((c) => [...c, ...nouveaux]);
+    const ids = new Set(nouveaux.map((n) => n.id));
+    window.setTimeout(() => {
+      setCamionsEnRoute((c) => c.filter((x) => !ids.has(x.id)));
+    }, 2600);
+  };
+
+  const basculerParcelle = (i: number) => {
+    if (!coupees[i]) envoyerCamions([i]);
+    setCoupees((c) => c.map((v, k) => (k === i ? !v : v)));
+  };
+  const toutCouper = () => {
+    envoyerCamions(coupees.map((v, i) => (v ? -1 : i)).filter((i) => i >= 0));
+    setCoupees(Array(NB_PARCELLES).fill(true));
+  };
+  const recommencer = () => {
+    setCoupees(Array(NB_PARCELLES).fill(false));
+    setAutres(0);
+    setTaille(TAILLE_DEPART);
+    setCamionsEnRoute([]);
+  };
 
   // MODE CLASSE (vidéoprojecteur) : tout grossit — mémorisé, partagé avec le
   // simulateur cyclone (même clé localStorage).
@@ -298,19 +518,90 @@ export default function SimulateurSucreClient() {
               {fr(tonnes)} <span className="text-sm font-normal text-[#c9a86c]">tonnes</span>
             </p>
           </div>
+          {/* La consigne, courte */}
+          <p className="mt-2 text-[14px] font-bold leading-5 text-[#f6ead6]">
+            👆 Clique sur une parcelle pour couper la canne. Clique encore pour replanter.
+          </p>
+
+          {/* Taille d'une parcelle */}
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <span className="text-[12.5px] text-[#d8c4a0]">1 parcelle =</span>
+            {TAILLES_PARCELLE.map((t) => (
+              <button
+                key={t}
+                type="button"
+                onClick={() => setTaille(t)}
+                aria-pressed={taille === t}
+                className={`min-h-[34px] rounded-sm border px-3 py-1 font-mono text-[13px] font-bold transition ${
+                  taille === t
+                    ? "border-[#7fb069] bg-[#7fb069] text-[#160d04]"
+                    : "border-[#7fb069]/40 bg-transparent text-[#7fb069] hover:bg-[#7fb069]/15"
+                }`}
+              >
+                {fr(t)} t
+              </button>
+            ))}
+            <span className="text-[11.5px] text-[#c9a86c]">
+              (≈ {fr((taille * 1000) / RENDEMENT_CHAMP)} m² de champ)
+            </span>
+          </div>
+
+          {/* LE CHAMP cliquable */}
+          <ChampCliquable
+            coupees={coupees}
+            taille={taille}
+            tonnesTotal={tonnes}
+            camions={camionsEnRoute}
+            onBasculer={basculerParcelle}
+          />
+
+          <div className="mt-2 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={toutCouper}
+              className="min-h-[36px] rounded bg-[#7fb069] px-3 py-1.5 text-sm font-bold text-[#160d04] hover:brightness-110"
+            >
+              ✂️ Tout couper
+            </button>
+            <button
+              type="button"
+              onClick={recommencer}
+              className="min-h-[36px] rounded border border-[#3a2a14] bg-[#160d04] px-3 py-1.5 text-sm font-bold text-[#f6ead6] hover:brightness-125"
+            >
+              ↺ Recommencer
+            </button>
+          </div>
+
+          {/* La ligne de calcul : c'est elle que le prof projette */}
+          <p className="mt-3 rounded border border-dashed border-[#7fb069]/50 bg-[#160d04] px-3 py-2 font-mono text-[14px] font-bold leading-6 text-[#7fb069]">
+            {nbCoupees} {nbCoupees > 1 ? "parcelles" : "parcelle"} × {fr(taille)} t ={" "}
+            <span className="text-[#f6ead6]">{fr(tonnesChamp)} t</span>
+            {autres > 0 && (
+              <>
+                {" "}+ {fr(autres)} t des autres planteurs ={" "}
+                <span className="text-[#f2a93b]">{fr(tonnes)} t</span>
+              </>
+            )}
+          </p>
+
+          {/* Le curseur : la canne des AUTRES planteurs, en plus de ton champ */}
+          <p className="mt-3 text-[12.5px] leading-5 text-[#d8c4a0]">
+            ➕ <b className="text-[#f6ead6]">Les autres planteurs</b> livrent aussi l&apos;usine :
+            le curseur ajoute leur canne <b>en plus</b> de ton champ ({fr(autres)} t).
+          </p>
           <input
             type="range"
-            min={30}
-            max={8000}
+            min={0}
+            max={6000}
             step={10}
-            value={tonnes}
-            onChange={(e) => setTonnes(+e.target.value)}
-            className="mt-3 w-full accent-[#f2a93b]"
-            aria-label="Tonnage de canne du jour, en tonnes"
+            value={autres}
+            onChange={(e) => setAutres(+e.target.value)}
+            className="mt-1 w-full accent-[#f2a93b]"
+            aria-label="Canne des autres planteurs, en tonnes, en plus de ton champ"
           />
           <div className="mt-1 flex justify-between font-mono text-[10px] text-[#c9a86c]/70">
-            <span>30 t — un cachalot de canne</span>
-            <span>8 000 t — une pleine journée d&apos;usine</span>
+            <span>0 t — rien que ton champ</span>
+            <span>6 000 t</span>
           </div>
           <p className="mt-2 text-[12.5px] leading-5 text-[#d8c4a0]">
             Soit <b className="text-[#f6ead6]">{fr(camions, camions < 10 ? 1 : 0)} camions</b> venus
@@ -437,7 +728,7 @@ export default function SimulateurSucreClient() {
         {/* LES DÉFIS — à toi de calculer, l'usine vérifie */}
         <DefisSimulateur
           titre="Les défis de l'usine"
-          coupDePouce="Coup de pouce : règle le tonnage du défi — l'usine vérifie pour toi."
+          coupDePouce="Coup de pouce : coupe les parcelles qu'il faut (choisis 10 t ou 50 t par parcelle) — l'usine vérifie pour toi."
           defis={DEFIS}
           couleurs={COULEURS_DEFIS}
           coachHref="/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&display=simple"

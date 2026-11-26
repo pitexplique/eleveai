@@ -231,6 +231,445 @@ function SalleAnimee({ puissance }: { puissance: number }) {
   );
 }
 
+// ── LA MAISON À ALIMENTER (26/11 : « il faut que les élèves cliquent ») ─────
+// L'élève clique sur les appareils pour les allumer : la puissance demandée
+// s'additionne sous ses yeux, et on la compare à SA puissance sur le rameur.
+// Puis : combien de temps pédaler pour fournir l'énergie de X minutes
+// d'appareils ? temps = énergie ÷ ta puissance. La bouilloire (2 000 W) montre
+// qu'un humain seul n'y arrive pas : l'effet « waouh ».
+const APPAREILS = [
+  { id: "led", nom: "Ampoule LED", watts: 10 },
+  { id: "chargeur", nom: "Chargeur", watts: 5 },
+  { id: "ventilo", nom: "Ventilateur", watts: 40 },
+  { id: "tele", nom: "Télé", watts: 100 },
+  { id: "console", nom: "Console", watts: 150 },
+  { id: "bouilloire", nom: "Bouilloire", watts: 2000 },
+] as const;
+type IdAppareil = (typeof APPAREILS)[number]["id"];
+
+const CASE_L = 130; // largeur d'une case d'appareil (unités SVG)
+const CASE_H = 200; // hauteur d'une case
+const DUREES_MIN = [1, 10, 60]; // « pendant combien de temps ? »
+
+// Une durée longue qui se lit : « 2 h 21 min », « 7 min 20 s ».
+// `exacte` dit si l'écriture est égale à la valeur (sinon on affiche « ≈ »).
+function dureeLongue(secondes: number): { txt: string; exacte: boolean } {
+  const s = Math.round(secondes);
+  let exacte = Number.isInteger(secondes);
+  if (secondes < 59.5) return { txt: `${fr(secondes, secondes < 10 ? 1 : 0)} s`, exacte };
+  if (s < 3600) {
+    const m = Math.floor(s / 60);
+    const r = s % 60;
+    return { txt: r === 0 ? `${m} min` : `${m} min ${r} s`, exacte };
+  }
+  let h = Math.floor(s / 3600);
+  let m = Math.round((s % 3600) / 60);
+  if (s % 60 !== 0) exacte = false;
+  if (m === 60) {
+    h += 1;
+    m = 0;
+  }
+  return { txt: m === 0 ? `${h} h` : `${h} h ${m} min`, exacte };
+}
+
+// Le dessin d'un appareil, dans sa case (0 → 130 × 0 → 200), allumé ou non.
+function DessinAppareil({ id, allume }: { id: IdAppareil; allume: boolean }) {
+  const trait = allume ? "#ffd23f" : "#6b6596";
+  const sombre = "#12101d";
+  switch (id) {
+    case "led":
+      return (
+        <g>
+          {allume &&
+            [0, 45, 90, 135, 180, 225, 270, 315].map((a) => (
+              <line
+                key={a}
+                x1={65 + Math.cos((a * Math.PI) / 180) * 33}
+                y1={70 + Math.sin((a * Math.PI) / 180) * 33}
+                x2={65 + Math.cos((a * Math.PI) / 180) * 42}
+                y2={70 + Math.sin((a * Math.PI) / 180) * 42}
+                stroke="#ffd23f"
+                strokeWidth="3"
+                strokeLinecap="round"
+                className="e-rayon"
+              />
+            ))}
+          <circle cx="65" cy="70" r="25" fill={allume ? "#ffd23f" : "#1c1930"} stroke={trait} strokeWidth="3" />
+          <rect x="53" y="96" width="24" height="9" rx="2" fill="#a49fc9" />
+          <rect x="56" y="107" width="18" height="7" rx="2" fill="#6b6596" />
+        </g>
+      );
+    case "chargeur":
+      return (
+        <g>
+          <path d="M60,112 C60,128 92,128 98,118" fill="none" stroke="#a49fc9" strokeWidth="3" strokeLinecap="round" />
+          <rect x="92" y="104" width="16" height="16" rx="3" fill="#a49fc9" />
+          <rect x="38" y="38" width="44" height="76" rx="7" fill={sombre} stroke={trait} strokeWidth="3" />
+          <rect x="43" y="46" width="34" height="58" rx="3" fill={allume ? "#7fb069" : "#1c1930"} />
+          <path d="M63,58 L54,76 L62,76 L57,92 L68,71 L60,71 Z" fill={allume ? "#12101d" : "#4a4477"} />
+        </g>
+      );
+    case "ventilo":
+      return (
+        <g>
+          <line x1="65" y1="98" x2="65" y2="124" stroke="#a49fc9" strokeWidth="5" strokeLinecap="round" />
+          <rect x="44" y="122" width="42" height="7" rx="3" fill="#a49fc9" />
+          <circle cx="65" cy="66" r="33" fill={sombre} stroke={trait} strokeWidth="3" />
+          <g className={allume ? "e-helice" : undefined}>
+            <circle cx="65" cy="66" r="29" fill="none" />
+            {[0, 120, 240].map((a) => (
+              <ellipse
+                key={a}
+                cx="65"
+                cy="50"
+                rx="8"
+                ry="15"
+                fill={allume ? "#4cc9f0" : "#4a4477"}
+                transform={`rotate(${a} 65 66)`}
+              />
+            ))}
+          </g>
+          <circle cx="65" cy="66" r="5" fill={trait} />
+        </g>
+      );
+    case "tele":
+      return (
+        <g>
+          <path d="M55,100 L48,120 M75,100 L82,120" stroke="#a49fc9" strokeWidth="4" strokeLinecap="round" />
+          <line x1="40" y1="121" x2="90" y2="121" stroke="#a49fc9" strokeWidth="4" strokeLinecap="round" />
+          <rect x="18" y="38" width="94" height="62" rx="5" fill={sombre} stroke={trait} strokeWidth="3" />
+          <rect x="24" y="44" width="82" height="50" rx="2" fill={allume ? "#4cc9f0" : "#1c1930"} />
+          {allume && (
+            <g>
+              <circle cx="88" cy="56" r="7" fill="#ffd23f" />
+              <path d="M24,94 L50,64 L66,80 L78,70 L106,94 Z" fill="#7fb069" />
+            </g>
+          )}
+        </g>
+      );
+    case "console":
+      return (
+        <g>
+          <path d="M65,52 C65,40 80,40 80,30" fill="none" stroke="#a49fc9" strokeWidth="3" strokeLinecap="round" />
+          <rect x="22" y="56" width="86" height="42" rx="21" fill={sombre} stroke={trait} strokeWidth="3" />
+          <path d="M38,77 h16 M46,69 v16" stroke={allume ? "#f1effa" : "#4a4477"} strokeWidth="5" strokeLinecap="round" />
+          <circle cx="84" cy="70" r="5" fill={allume ? "#ff6b6b" : "#4a4477"} />
+          <circle cx="94" cy="80" r="5" fill={allume ? "#7fb069" : "#4a4477"} />
+          <circle cx="76" cy="84" r="5" fill={allume ? "#4cc9f0" : "#4a4477"} />
+          <circle cx="65" cy="64" r="3" fill={allume ? "#ffd23f" : "#4a4477"} />
+        </g>
+      );
+    case "bouilloire":
+      return (
+        <g>
+          {allume &&
+            [0, 1, 2].map((i) => (
+              <path
+                key={i}
+                d={`M${24 + i * 9},46 q6,-8 0,-16 q-6,-8 0,-16`}
+                fill="none"
+                stroke="#f1effa"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                className="e-vapeur"
+                style={{ animationDelay: `${i * 0.3}s` }}
+              />
+            ))}
+          <path d="M44,70 L26,56" stroke={trait} strokeWidth="6" strokeLinecap="round" />
+          <path d="M86,62 Q108,72 90,104" fill="none" stroke={trait} strokeWidth="6" strokeLinecap="round" />
+          <path d="M40,118 L46,56 Q65,44 84,56 L90,118 Z" fill={allume ? "#ff6b6b" : sombre} stroke={trait} strokeWidth="3" strokeLinejoin="round" />
+          <rect x="32" y="118" width="66" height="8" rx="3" fill="#a49fc9" />
+          <circle cx="65" cy="100" r="4" fill={allume ? "#ffd23f" : "#4a4477"} />
+        </g>
+      );
+  }
+}
+
+function MaisonCliquable({
+  puissance,
+  setPuissance,
+}: {
+  puissance: number;
+  setPuissance: (p: number) => void;
+}) {
+  const [allumes, setAllumes] = useState<boolean[]>(() => APPAREILS.map(() => false));
+  const [minutes, setMinutes] = useState(10);
+  const [etincelle, setEtincelle] = useState<{ x: number; y: number; n: number } | null>(null);
+  // 6 cases sur une ligne à l'ordinateur, 3 × 2 sur téléphone (lisible au doigt).
+  const [colonnes, setColonnes] = useState(6);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 640px)");
+    const maj = () => setColonnes(mq.matches ? 3 : 6);
+    maj();
+    mq.addEventListener("change", maj);
+    return () => mq.removeEventListener("change", maj);
+  }, []);
+  const lignes = Math.ceil(APPAREILS.length / colonnes);
+  const largeur = colonnes * CASE_L;
+  const hauteur = lignes * CASE_H;
+
+  const basculer = (i: number) =>
+    setAllumes((a) => a.map((v, j) => (j === i ? !v : v)));
+
+  const surClic = (e: React.PointerEvent<SVGSVGElement>) => {
+    const svg = e.currentTarget;
+    const ctm = svg.getScreenCTM();
+    if (!ctm) return;
+    const pt = new DOMPoint(e.clientX, e.clientY).matrixTransform(ctm.inverse());
+    const col = Math.floor(pt.x / CASE_L);
+    const ligne = Math.floor(pt.y / CASE_H);
+    if (col < 0 || col >= colonnes || ligne < 0) return;
+    const i = ligne * colonnes + col;
+    if (i >= APPAREILS.length) return;
+    basculer(i);
+    setEtincelle((p) => ({ x: pt.x, y: pt.y, n: (p?.n ?? 0) + 1 }));
+  };
+
+  const recommencer = () => {
+    setAllumes(APPAREILS.map(() => false));
+    setMinutes(10);
+    setEtincelle(null);
+  };
+
+  const allumesListe = APPAREILS.filter((_, i) => allumes[i]);
+  const demande = allumesListe.reduce((s, a) => s + a.watts, 0);
+  const suffit = demande > 0 && demande <= puissance;
+  const bouilloire = allumes[APPAREILS.findIndex((a) => a.id === "bouilloire")];
+  const personnes = Math.ceil(demande / puissance);
+
+  // L'énergie des appareils, puis le temps de rameur : t = E ÷ P.
+  const tAppareils = minutes * 60; // en secondes
+  const energie = demande * tAppareils; // J
+  const tPedaler = energie / puissance; // s
+  const tPedalerTxt = dureeLongue(tPedaler);
+  const sommeTxt =
+    allumesListe.length === 0
+      ? "0 W"
+      : allumesListe.length === 1
+        ? `${fr(demande)} W`
+        : `${allumesListe.map((a) => `${fr(a.watts)} W`).join(" + ")} = ${fr(demande)} W`;
+  const echelle = Math.max(demande, puissance, 1);
+
+  return (
+    <div className="mt-2 rounded border-2 border-[#ffd23f] bg-[#1c1930] p-3">
+      <style>{`
+        @keyframes nrg-helice { to { transform: rotate(360deg); } }
+        @keyframes nrg-clic { from { transform: scale(.3); opacity: 1; } to { transform: scale(2.2); opacity: 0; } }
+        @keyframes nrg-allume { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes nrg-battre { 0%,100% { opacity: .35; } 50% { opacity: 1; } }
+        .e-rayon { animation: nrg-battre 1.2s ease-in-out infinite; }
+        .e-vapeur { animation: nrg-battre 1.4s ease-in-out infinite; }
+        .e-helice { animation: nrg-helice .6s linear infinite; transform-origin: center; transform-box: fill-box; }
+        .e-clic { animation: nrg-clic .5s ease-out forwards; transform-origin: center; transform-box: fill-box; pointer-events: none; }
+        .e-halo { animation: nrg-allume .35s ease-out; transform-origin: center; transform-box: fill-box; }
+        @media (prefers-reduced-motion: reduce) {
+          .e-helice, .e-rayon, .e-vapeur { animation-duration: 6s; }
+          .e-halo { animation: none; }
+          .e-clic { animation-duration: .01s; }
+        }
+      `}</style>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#ffd23f]">
+          🏠 Ton effort peut-il alimenter la maison ?
+        </p>
+        <button
+          type="button"
+          onClick={recommencer}
+          className="rounded border border-[#ffd23f]/50 px-3 py-1.5 font-mono text-xs font-bold text-[#ffd23f] hover:bg-[#ffd23f]/15"
+        >
+          ↺ Recommencer
+        </button>
+      </div>
+      <p className="mt-1 text-[14px] font-bold leading-5 text-[#f1effa]">
+        👆 Clique sur les appareils pour les allumer ou les éteindre.
+      </p>
+
+      <svg
+        viewBox={`0 0 ${largeur} ${hauteur}`}
+        onPointerDown={surClic}
+        className="mx-auto mt-2 block w-full max-w-[820px] cursor-pointer select-none"
+        style={{ touchAction: "manipulation" }}
+        aria-label="Les appareils de la maison : clique sur un appareil pour l'allumer ou l'éteindre"
+      >
+        {APPAREILS.map((a, i) => {
+          const x = (i % colonnes) * CASE_L;
+          const y = Math.floor(i / colonnes) * CASE_H;
+          const on = allumes[i];
+          return (
+            <g
+              key={a.id}
+              transform={`translate(${x} ${y})`}
+              role="button"
+              tabIndex={0}
+              aria-pressed={on}
+              aria-label={`${a.nom}, ${fr(a.watts)} W, ${on ? "allumé" : "éteint"}`}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  basculer(i);
+                }
+              }}
+            >
+              <rect
+                x="5"
+                y="5"
+                width={CASE_L - 10}
+                height={CASE_H - 10}
+                rx="12"
+                fill={on ? "#2a2444" : "#12101d"}
+                stroke={on ? "#ffd23f" : "#2f2a4d"}
+                strokeWidth={on ? 3 : 2}
+              />
+              {on && <circle key="halo" cx="65" cy="78" r="52" fill="#ffd23f" opacity="0.14" className="e-halo" />}
+              <DessinAppareil id={a.id} allume={on} />
+              <text x="65" y="156" fill="#f1effa" fontSize="15" fontWeight="700" textAnchor="middle" fontFamily="monospace">
+                {a.nom}
+              </text>
+              <text x="65" y="179" fill={on ? "#ffd23f" : "#a49fc9"} fontSize="16" fontWeight="700" textAnchor="middle" fontFamily="monospace">
+                {fr(a.watts)} W {on ? "· ON" : ""}
+              </text>
+            </g>
+          );
+        })}
+        {etincelle && (
+          <circle
+            key={etincelle.n}
+            cx={etincelle.x}
+            cy={etincelle.y}
+            r="16"
+            fill="none"
+            stroke="#ffd23f"
+            strokeWidth="4"
+            className="e-clic"
+          />
+        )}
+      </svg>
+
+      {/* La ligne de calcul : ce que la maison demande */}
+      <div className="mt-2 rounded border border-dashed border-[#ffd23f]/40 bg-[#12101d] px-3 py-2 font-mono text-[13px] leading-6 text-[#ffd23f]">
+        Puissance demandée : <b>{sommeTxt}</b>
+        {allumesListe.length === 0 && (
+          <span className="text-[#a49fc9]"> (rien n&apos;est allumé)</span>
+        )}
+      </div>
+
+      {/* Toi contre la maison : les deux barres */}
+      <div className="mt-2 grid gap-1.5">
+        <div className="flex items-center gap-2">
+          <span className="w-[92px] shrink-0 font-mono text-[11px] font-bold text-[#ff6b6b]">TOI</span>
+          <div className="h-4 flex-1 overflow-hidden rounded-full bg-[#12101d]">
+            <div className="h-full rounded-full bg-[#ff6b6b] transition-all duration-500" style={{ width: (puissance / echelle) * 100 + "%" }} />
+          </div>
+          <span className="w-[72px] shrink-0 text-right font-mono text-[12px] font-bold tabular-nums text-[#f1effa]">{fr(puissance)} W</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="w-[92px] shrink-0 font-mono text-[11px] font-bold text-[#ffd23f]">LA MAISON</span>
+          <div className="h-4 flex-1 overflow-hidden rounded-full bg-[#12101d]">
+            <div className="h-full rounded-full bg-[#ffd23f] transition-all duration-500" style={{ width: Math.max(demande > 0 ? 1 : 0, (demande / echelle) * 100) + "%" }} />
+          </div>
+          <span className="w-[72px] shrink-0 text-right font-mono text-[12px] font-bold tabular-nums text-[#f1effa]">{fr(demande)} W</span>
+        </div>
+      </div>
+
+      {/* Ta puissance : réglable aussi d'un clic (même réglage que le curseur du haut) */}
+      <div className="mt-2 flex flex-wrap items-center gap-1.5 text-[12.5px] text-[#d6d2ea]">
+        <span>Ta puissance sur le rameur :</span>
+        {[100, 150, 200].map((p) => (
+          <button
+            key={p}
+            type="button"
+            onClick={() => setPuissance(p)}
+            aria-pressed={puissance === p}
+            className={`min-h-[32px] rounded border px-2.5 font-mono text-xs font-bold ${
+              puissance === p
+                ? "border-[#ff6b6b] bg-[#ff6b6b] text-[#12101d]"
+                : "border-[#ff6b6b]/50 text-[#ff6b6b] hover:bg-[#ff6b6b]/15"
+            }`}
+          >
+            {p} W
+          </button>
+        ))}
+        <span className="text-[#a49fc9]">(ou le curseur en haut)</span>
+      </div>
+
+      {/* Le verdict */}
+      {demande > 0 && (
+        <p
+          className={`mt-2 rounded px-3 py-2 text-[15px] font-bold leading-6 ${
+            suffit ? "bg-[#7fb069]/20 text-[#b6e09f]" : "bg-[#e07a5f]/20 text-[#ffb59f]"
+          }`}
+        >
+          {suffit
+            ? `✅ Oui ! Tes ${fr(puissance)} W suffisent pour ${fr(demande)} W (il reste ${fr(puissance - demande)} W).`
+            : `❌ Non : la maison demande ${fr(demande)} W, tu produis ${fr(puissance)} W. Il manque ${fr(demande - puissance)} W.`}
+        </p>
+      )}
+
+      {/* Combien de temps ramer ? temps = énergie ÷ ta puissance */}
+      {demande > 0 && (
+        <div className="mt-2 rounded border border-[#2f2a4d] bg-[#12101d] p-2.5">
+          <div className="flex flex-wrap items-center gap-1.5 text-[12.5px] text-[#d6d2ea]">
+            <span>Ces appareils restent allumés pendant :</span>
+            {DUREES_MIN.map((m) => (
+              <button
+                key={m}
+                type="button"
+                onClick={() => setMinutes(m)}
+                aria-pressed={minutes === m}
+                className={`min-h-[32px] rounded border px-2.5 font-mono text-xs font-bold ${
+                  minutes === m
+                    ? "border-[#ffd23f] bg-[#ffd23f] text-[#12101d]"
+                    : "border-[#ffd23f]/50 text-[#ffd23f] hover:bg-[#ffd23f]/15"
+                }`}
+              >
+                {m === 60 ? "1 h" : `${m} min`}
+              </button>
+            ))}
+          </div>
+          <p className="mt-2 font-mono text-[13px] leading-6 text-[#ffd23f]">
+            Énergie = puissance × temps = {fr(demande)} W × {fr(tAppareils)} s = <b>{fr(energie)} J</b>
+            <br />
+            Temps à ramer = énergie ÷ ta puissance = {fr(energie)} ÷ {fr(puissance)}{" "}
+            {Number.isInteger(tPedaler) ? "=" : "≈"}{" "}
+            {tPedaler < 60 ? (
+              <b>{tPedalerTxt.txt}</b>
+            ) : (
+              <>
+                {fr(tPedaler)} s {tPedalerTxt.exacte ? "=" : "≈"} <b>{tPedalerTxt.txt}</b>
+              </>
+            )}
+          </p>
+          <p className="mt-1 text-[13px] leading-5 text-[#f1effa]">
+            Pour {minutes === 60 ? "1 heure" : `${minutes} min`} de ces appareils, tu dois ramer{" "}
+            <b className="text-[#ffd23f]">{tPedalerTxt.exacte ? "" : "environ "}{tPedalerTxt.txt}</b> à {fr(puissance)} W
+            <span className="text-[#a49fc9]"> (sans compter les pertes de la machine).</span>
+          </p>
+        </div>
+      )}
+
+      {/* L'effet waouh : la bouilloire */}
+      {bouilloire && (
+        <div className="mt-2 rounded border-2 border-[#ff6b6b] bg-[#ff6b6b]/10 p-3">
+          <p className="text-[16px] font-black leading-6 text-[#ff6b6b]">
+            🤯 Waouh : la bouilloire demande 2 000 W à elle seule !
+          </p>
+          <p className="mt-1 text-[13.5px] leading-5 text-[#f1effa]">
+            Pour {fr(demande)} W, il faudrait{" "}
+            <b className="text-[#ffd23f]">{fr(personnes)} personnes comme toi</b> qui rament
+            en même temps (
+            {Number.isInteger(demande / puissance)
+              ? `${fr(demande)} ÷ ${fr(puissance)} = ${fr(demande / puissance)}`
+              : `${fr(demande)} ÷ ${fr(puissance)} ≈ ${fr(demande / puissance, 1)}, on arrondit au-dessus`}
+            ). Même un champion du Tour de France ne tient pas 400 W très
+            longtemps : un humain seul ne peut pas faire bouillir l&apos;eau à la vitesse d&apos;une
+            bouilloire.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function Etape({
   nom,
   explication,
@@ -440,6 +879,9 @@ export default function SimulateurEnergieClient() {
 
         {/* LE SCHÉMA VIVANT — la salle animée, qui accélère avec la puissance. */}
         <SalleAnimee puissance={puissance} />
+
+        {/* LA MAISON À ALIMENTER — l'élève clique sur les appareils (26/11). */}
+        <MaisonCliquable puissance={puissance} setPuissance={setPuissance} />
 
         {/* La chaîne de l'énergie */}
         <div className="mt-2 grid gap-2 lg:grid-cols-2">

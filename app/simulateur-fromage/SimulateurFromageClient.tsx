@@ -157,6 +157,223 @@ function FromagerieAnimee({ litres }: { litres: number }) {
   );
 }
 
+// ── LE PRÉ : le troupeau à traire (l'élève CLIQUE) ────────────────────────────
+// 12 vaches dessinées ; un clic = une traite (+20 L dans le seau), un re-clic
+// annule. Les litres restent l'état unique du simulateur : le curseur et les
+// clics pilotent la même valeur, la chaîne (caillé, pots…) suit.
+const NB_VACHES = 12;
+const SEAU_MAX_L = NB_VACHES * VACHE_L_JOUR; // 240 L : tout le troupeau
+
+function Troupeau({
+  traites,
+  litres,
+  anim,
+  onTraire,
+}: {
+  traites: boolean[];
+  litres: number;
+  anim: { i: number; k: number; plus: boolean } | null;
+  onTraire: (i: number) => void;
+}) {
+  const remplissage = Math.max(0, Math.min(1, litres / SEAU_MAX_L));
+  const nbTraites = traites.filter(Boolean).length;
+
+  return (
+    <div className="mt-3 rounded border border-[#1f3a47] bg-[#07131a]">
+      <style>{`
+        @keyframes from-traite { 0% { transform: scale(1); } 40% { transform: scale(1.12); } 100% { transform: scale(1); } }
+        @keyframes from-flotter { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-26px); opacity: 0; } }
+        .f-vache-traite { animation: from-traite .45s ease-out; transform-origin: center; transform-box: fill-box; }
+        .f-plus { animation: from-flotter 1s ease-out forwards; }
+        .f-vache:focus-visible { outline: none; }
+        .f-vache:focus-visible .f-cadre { stroke: #7fc4e8; stroke-width: 3; }
+        @media (prefers-reduced-motion: reduce) {
+          .f-vache-traite, .f-plus { animation-duration: 0.01s; }
+        }
+      `}</style>
+      <svg
+        viewBox="0 0 600 272"
+        className="block w-full"
+        style={{ touchAction: "manipulation" }}
+        aria-label="Le pré des Hauts : 12 vaches à traire et le seau de lait"
+      >
+        {/* L'herbe du pré */}
+        <rect x="6" y="28" width="448" height="238" rx="10" fill="#12291c" />
+        <text x="14" y="20" fill="#7fb069" fontSize="14" fontWeight="700" fontFamily="monospace">
+          LE PRÉ · {nbTraites} vache{nbTraites > 1 ? "s" : ""} traite{nbTraites > 1 ? "s" : ""} sur {NB_VACHES}
+        </text>
+
+        {traites.map((traite, i) => {
+          const x = 14 + (i % 4) * 110;
+          const y = 34 + Math.floor(i / 4) * 77;
+          return (
+            <g
+              key={i}
+              transform={`translate(${x} ${y})`}
+              className="f-vache"
+              role="button"
+              tabIndex={0}
+              aria-pressed={traite}
+              aria-label={`Vache ${i + 1}${traite ? ", déjà traite : clique pour annuler" : " : clique pour la traire"}`}
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                onTraire(i);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onTraire(i);
+                }
+              }}
+            >
+              {/* La zone de clic : toute la case (assez grosse pour un doigt) */}
+              <rect
+                className="f-cadre"
+                x="0"
+                y="0"
+                width="104"
+                height="72"
+                rx="8"
+                fill={traite ? "#1a3a26" : "transparent"}
+                stroke={traite ? "#7fb069" : "#1f3a47"}
+                strokeWidth="1.5"
+              />
+              {/* La vache — remontée à chaque traite pour rejouer le petit saut */}
+              <g key={traite ? "t" : "n"} className={traite ? "f-vache-traite" : undefined} opacity={traite ? 0.75 : 1}>
+                <rect x="10" y="14" width="56" height="28" rx="12" fill="#eef4ee" />
+                <circle cx="72" cy="22" r="11" fill="#eef4ee" />
+                <circle cx="76" cy="19" r="2" fill="#07131a" />
+                <path d="M66,12 L63,4 M78,12 L81,4" stroke="#eef4ee" strokeWidth="3" strokeLinecap="round" />
+                <circle cx="26" cy="23" r="6" fill="#243b47" />
+                <circle cx="46" cy="34" r="4.5" fill="#243b47" />
+                <ellipse cx="40" cy="44" rx="7" ry="4" fill="#f2a7b5" />
+                <path d="M18,42 L18,54 M32,42 L32,54 M50,42 L50,54 M60,42 L60,54" stroke="#eef4ee" strokeWidth="3.5" strokeLinecap="round" />
+              </g>
+              {traite ? (
+                <>
+                  <circle cx="92" cy="14" r="9" fill="#7fb069" />
+                  <path d="M87.5,14 L91,17.5 L97,10.5" stroke="#07131a" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                  <text x="52" y="67" fill="#7fb069" fontSize="12" fontWeight="800" textAnchor="middle" fontFamily="monospace">
+                    traite ✓
+                  </text>
+                </>
+              ) : (
+                <text x="52" y="67" fill="#8fb8c9" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="monospace">
+                  à traire
+                </text>
+              )}
+              {/* « +20 L » / « −20 L » qui s'envole au clic */}
+              {anim && anim.i === i && (
+                <text
+                  key={anim.k}
+                  x="52"
+                  y="10"
+                  fill={anim.plus ? "#7fc4e8" : "#e07a5f"}
+                  fontSize="15"
+                  fontWeight="800"
+                  textAnchor="middle"
+                  fontFamily="monospace"
+                  className="f-plus"
+                  pointerEvents="none"
+                >
+                  {anim.plus ? "+" : "−"}
+                  {VACHE_L_JOUR} L
+                </text>
+              )}
+            </g>
+          );
+        })}
+
+        {/* LE SEAU : il se remplit avec les litres */}
+        <text x="526" y="20" fill="#7fc4e8" fontSize="14" fontWeight="700" textAnchor="middle" fontFamily="monospace">
+          LE SEAU
+        </text>
+        <defs>
+          <clipPath id="fromage-seau-clip">
+            <path d="M474,70 L578,70 L566,232 L486,232 Z" />
+          </clipPath>
+        </defs>
+        <path d="M486,70 C486,40 566,40 566,70" fill="none" stroke="#8fb8c9" strokeWidth="3" />
+        <path d="M474,70 L578,70 L566,232 L486,232 Z" fill="#0f2028" />
+        <g clipPath="url(#fromage-seau-clip)">
+          <rect
+            x="470"
+            y="70"
+            width="112"
+            height="162"
+            fill="#eef4ee"
+            style={{
+              transform: `scaleY(${remplissage})`,
+              transformOrigin: "center bottom",
+              transformBox: "fill-box",
+              transition: "transform 0.5s ease-out",
+            }}
+          />
+        </g>
+        <path d="M474,70 L578,70 L566,232 L486,232 Z" fill="none" stroke="#8fb8c9" strokeWidth="3" />
+        <text
+          x="526"
+          y="160"
+          fill={remplissage > 0.55 ? "#07131a" : "#7fc4e8"}
+          fontSize="20"
+          fontWeight="800"
+          textAnchor="middle"
+          fontFamily="monospace"
+        >
+          {fr(litres)} L
+        </text>
+        <text x="526" y="254" fill={litres > SEAU_MAX_L ? "#e8c94f" : "#8fb8c9"} fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="monospace">
+          {litres > SEAU_MAX_L ? "plus que le troupeau !" : `${SEAU_MAX_L} L = plein`}
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+// Les pots qui se remplissent (petites icônes) : 20 pots dessinés, chacun
+// vaut 100, 1 000 ou 10 000 vrais pots selon la quantité (dit à l'écran).
+const POTS_DESSINES = 20;
+function PotsQuiSeRemplissent({ pots }: { pots: number }) {
+  const valeurIcone = pots <= POTS_DESSINES * 100 ? 100 : pots <= POTS_DESSINES * 1000 ? 1000 : 10000;
+  const pleins = pots / valeurIcone;
+  return (
+    <div className="mt-3 rounded border border-[#1f3a47] bg-[#0f2028] p-3">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[#8fb8c9]">
+          🥛 Les pots se remplissent
+        </p>
+        <p className="font-mono text-[11px] text-[#8fb8c9]">
+          1 pot dessiné = <b className="text-[#f0f7f4]">{fr(valeurIcone)}</b> vrais pots de 150 g
+        </p>
+      </div>
+      <div className="mt-2 flex flex-wrap gap-1.5">
+        {Array.from({ length: POTS_DESSINES }, (_, j) => {
+          const f = Math.max(0, Math.min(1, pleins - j));
+          return (
+            <svg key={j} viewBox="0 0 24 30" className="h-8 w-[26px] sm:h-9 sm:w-[29px]" aria-hidden="true">
+              <rect x="3" y="7" width="18" height="21" rx="4" fill="#07131a" stroke="#1f3a47" strokeWidth="1.5" />
+              <rect
+                x="4.5"
+                y={8.5 + 18 * (1 - f)}
+                width="15"
+                height={18 * f}
+                rx="2.5"
+                fill="#eef4ee"
+                style={{ transition: "y 0.5s, height 0.5s" }}
+              />
+              <rect x="1.5" y="3" width="21" height="5" rx="2.5" fill={f >= 1 ? "#7fc4e8" : "#1f3a47"} />
+            </svg>
+          );
+        })}
+      </div>
+      <p className="mt-2 font-mono text-[12.5px] text-[#7fc4e8]">
+        {fr(pots, pots < 10 ? 1 : 0)} pots en tout
+        {pots > POTS_DESSINES * valeurIcone ? " (les 20 pots dessinés sont pleins)" : ""}
+      </p>
+    </div>
+  );
+}
+
 // ── Les défis de la fromagerie (rappel actif) ─────────────────────────────────
 // Les nombres des questions sont DIFFÉRENTS du curseur : la réponse n'est pas
 // affichée à l'écran... mais l'élève peut la vérifier en réglant la machine —
@@ -250,9 +467,41 @@ function Etape({
 }
 
 export default function SimulateurFromageClient() {
-  // Les litres du jour : du pichet de la famille (4 L) à une journée de
-  // collecte de l'île (40 000 L).
-  const [litres, setLitres] = useState(400);
+  // Les litres du jour : de 0 (le seau vide) à une journée de collecte de
+  // l'île (40 000 L). UN SEUL état : les clics sur les vaches et le curseur
+  // écrivent tous les deux ici.
+  const [litres, setLitres] = useState(0);
+  // Les vaches traites (clics dans le pré).
+  const [traites, setTraites] = useState<boolean[]>(() => Array(NB_VACHES).fill(false));
+  // Le petit « +20 L » qui s'envole au-dessus de la vache cliquée.
+  const [anim, setAnim] = useState<{ i: number; k: number; plus: boolean } | null>(null);
+
+  // Clic sur une vache : traire, ou annuler si elle est déjà traite.
+  const traire = (i: number) => {
+    const suivant = traites.slice();
+    suivant[i] = !suivant[i];
+    setTraites(suivant);
+    setLitres(suivant.filter(Boolean).length * VACHE_L_JOUR);
+    setAnim((a) => ({ i, k: (a?.k ?? 0) + 1, plus: suivant[i] }));
+  };
+  const traireTout = () => {
+    setTraites(Array(NB_VACHES).fill(true));
+    setLitres(SEAU_MAX_L);
+    setAnim(null);
+  };
+  const recommencer = () => {
+    setTraites(Array(NB_VACHES).fill(false));
+    setLitres(0);
+    setAnim(null);
+  };
+  // Le curseur : il règle les litres, et le pré montre les vaches traites
+  // correspondantes (les 12 au plus — au-delà, le seau « dépasse le troupeau »).
+  const reglerCurseur = (v: number) => {
+    setLitres(v);
+    const k = Math.min(NB_VACHES, Math.floor(v / VACHE_L_JOUR));
+    setTraites(Array.from({ length: NB_VACHES }, (_, j) => j < k));
+    setAnim(null);
+  };
 
   // MODE CLASSE (vidéoprojecteur) : tout grossit — mémorisé, partagé avec les
   // simulateurs cyclone et sucre (même clé localStorage).
@@ -313,8 +562,45 @@ export default function SimulateurFromageClient() {
         className="mx-auto max-w-5xl px-4 py-5 sm:px-6"
         style={modeClasse ? ({ zoom: 1.35 } as React.CSSProperties) : undefined}
       >
-        {/* La commande : les litres du jour */}
+        {/* LE PRÉ — l'élève trait les vaches en cliquant */}
         <div className="rounded border border-[#1f3a47] bg-[#0f2028] p-4">
+          <p className="text-[15px] font-bold leading-6 text-[#f0f7f4]">
+            👆 Clique sur une vache pour la traire.
+            <span className="block text-[12.5px] font-normal text-[#8fb8c9]">
+              Chaque vache donne {VACHE_L_JOUR} L de lait. Clique encore pour annuler.
+            </span>
+          </p>
+          <Troupeau traites={traites} litres={litres} anim={anim} onTraire={traire} />
+          {/* LA LIGNE DE CALCUL — celle que le prof projette */}
+          <div className="mt-3 rounded border-2 border-[#7fc4e8] bg-[#07131a] px-3 py-2 text-center font-mono text-lg font-bold tabular-nums text-[#7fc4e8] sm:text-xl">
+            {fr(vaches, Number.isInteger(vaches) ? 0 : 1)} vache{vaches > 1 ? "s" : ""} × {VACHE_L_JOUR} L ={" "}
+            <span className="text-[#f0f7f4]">{fr(litres)} L</span>
+          </div>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={traireTout}
+              className="rounded bg-[#7fb069] px-4 py-2 text-sm font-bold text-[#07131a] hover:brightness-110"
+            >
+              🐄 Traire tout le troupeau
+            </button>
+            <button
+              type="button"
+              onClick={recommencer}
+              className="rounded border border-[#1f3a47] bg-[#07131a] px-4 py-2 text-sm font-bold text-[#f0f7f4] hover:brightness-125"
+            >
+              ↺ Recommencer
+            </button>
+          </div>
+          <p className="mt-2 text-[12px] leading-5 text-[#8fb8c9]">
+            Plus de {NB_VACHES} vaches ? Utilise le curseur juste en dessous (jusqu&apos;à 40 000 L).
+          </p>
+        </div>
+
+        <PotsQuiSeRemplissent pots={pots} />
+
+        {/* La commande : les litres du jour (le curseur, pour les grands nombres) */}
+        <div className="mt-3 rounded border border-[#1f3a47] bg-[#0f2028] p-4">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#8fb8c9]">
               🥛 Le lait qui descend aujourd&apos;hui
@@ -325,16 +611,16 @@ export default function SimulateurFromageClient() {
           </div>
           <input
             type="range"
-            min={4}
+            min={0}
             max={40000}
             step={4}
             value={litres}
-            onChange={(e) => setLitres(+e.target.value)}
+            onChange={(e) => reglerCurseur(+e.target.value)}
             className="mt-3 w-full accent-[#7fc4e8]"
             aria-label="Litres de lait du jour"
           />
-          <div className="mt-1 flex justify-between font-mono text-[10px] text-[#8fb8c9]/70">
-            <span>4 L — le pichet de la famille</span>
+          <div className="mt-1 flex justify-between gap-2 font-mono text-[10px] text-[#8fb8c9]/70">
+            <span>0 L — le seau vide</span>
             <span>40 000 L — une journée de collecte de l&apos;île</span>
           </div>
           <p className="mt-2 text-[12.5px] leading-5 text-[#c3d8d2]">

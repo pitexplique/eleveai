@@ -7,7 +7,7 @@
 // vérifient sur la machine. Thème papier-cahier : la machine vient d'un
 // dessin au stylo bleu ([[/pourquoi-eleveai]]), pas d'une usine.
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import Link from "next/link";
 import DefisSimulateur, {
   type DefiSimulateur,
@@ -85,6 +85,25 @@ const fmt = (n: number) => {
   return n.toFixed(n >= 10 ? 1 : 2).replace(".", ",");
 };
 
+// « = » si fmt affiche la valeur exacte, « ≈ » s'il l'a arrondie.
+const egalOuEnviron = (n: number) => {
+  const d = n >= 100 || Math.abs(n - Math.round(n)) < 0.005 ? 0 : n >= 10 ? 1 : 2;
+  const m = n * Math.pow(10, d);
+  return Math.abs(m - Math.round(m)) < 1e-6 * Math.max(1, m) ? "=" : "≈";
+};
+
+// La cascade à cliquer : au-delà de SEUIL_NUAGE étincelles, la génération est
+// dessinée en nuage qui porte son nombre.
+const SEUIL_NUAGE = 60;
+const MAX_DEPART = 5;
+const MAX_GEN = 10;
+type Etincelle = { id: number; x: number; y: number };
+type Pt = { x: number; y: number; id?: number };
+// Très petites valeurs (k < 1, génération 10) : chiffres significatifs, pas « 0,00 ».
+const fmtCalc = (n: number) => (n > 0 && n < 0.01 ? n.toPrecision(2).replace(".", ",") : fmt(n));
+const egalCalc = (n: number) => (n > 0 && n < 0.01 ? "≈" : egalOuEnviron(n));
+type Rang = { g: number; valeur: number; compte: number; y: number; pts: Pt[]; nuage: boolean; W: number };
+
 export default function SimulateurEpsilonClient() {
   const [k, setK] = useState(1.2);
   const [run, setRun] = useState(0);
@@ -113,6 +132,85 @@ export default function SimulateurEpsilonClient() {
     if (repere) return `À la génération 10 : ${fmt(g10)} étincelles — plus que ${repere.texte} !`;
     return `À la génération 10 : ${fmt(g10)} étincelles allumées par UN SEUL epsilon.`;
   }, [k, g10]);
+
+  // ── LA CASCADE À CLIQUER : u(n) = a × kⁿ ───────────────────────────────
+  // Étape 1 : l'élève pose 1 à 5 étincelles (a) dans la zone de départ.
+  // Étape 2 : chaque clic allume la génération suivante (n → n + 1).
+  const svgRef = useRef<SVGSVGElement>(null);
+  const idRef = useRef(1);
+  const [etincelles, setEtincelles] = useState<Etincelle[]>([]);
+  const [gen, setGen] = useState(0);
+  const [avis, setAvis] = useState("");
+  const a = etincelles.length;
+  const pas = Math.min(48, 470 / Math.max(gen, 1));
+
+  const rangs = useMemo(() => {
+    const out: Rang[] = [];
+    if (etincelles.length === 0) return out;
+    const nb = etincelles.length;
+    for (let g = 0; g <= gen; g++) {
+      const valeur = nb * Math.pow(k, g);
+      // on ne dessine que les étincelles ENTIÈRES (2,9 → 2 allumées)
+      const compte = g === 0 ? nb : Math.floor(valeur + 1e-9);
+      const y = g === 0 ? 70 : 130 + g * pas;
+      let pts: Pt[] = [];
+      let nuage = false;
+      let W = 0;
+      if (g === 0) pts = [...etincelles].sort((p, q) => p.x - q.x).map((s) => ({ x: s.x, y: s.y, id: s.id }));
+      else if (compte > SEUIL_NUAGE) {
+        nuage = true;
+        W = Math.min(840, 260 + 90 * Math.log10(compte));
+      } else pts = Array.from({ length: compte }, (_, i) => ({ x: 70 + (i + 0.5) * (890 / compte), y }));
+      out.push({ g, valeur, compte, y, pts, nuage, W });
+    }
+    return out;
+  }, [etincelles, k, gen, pas]);
+
+  const genSuivante = () => {
+    if (gen >= MAX_GEN) return;
+    setAvis("");
+    if (etincelles.length === 0) setEtincelles([{ id: idRef.current++, x: 515, y: 70 }]); // a = 1 par défaut
+    setGen((m) => Math.min(MAX_GEN, m + 1));
+  };
+  const recommencer = () => {
+    setEtincelles([]);
+    setGen(0);
+    setAvis("");
+  };
+  const surDessin = (e: ReactPointerEvent<SVGSVGElement>) => {
+    if (gen > 0) {
+      genSuivante();
+      return;
+    }
+    const svg = svgRef.current;
+    const m = svg?.getScreenCTM();
+    if (!svg || !m) return;
+    const pt = new DOMPoint(e.clientX, e.clientY).matrixTransform(m.inverse());
+    const x = Math.min(960, Math.max(70, pt.x));
+    const y = Math.min(100, Math.max(40, pt.y));
+    const proche = etincelles.find((s) => Math.hypot(s.x - x, s.y - y) < 36);
+    if (proche) {
+      setEtincelles((l) => l.filter((s) => s.id !== proche.id));
+      setAvis("Étincelle retirée.");
+      return;
+    }
+    if (etincelles.length >= MAX_DEPART) {
+      setAvis(`${MAX_DEPART} étincelles de départ au plus — touche ⚡ pour lancer la cascade.`);
+      return;
+    }
+    setEtincelles((l) => [...l, { id: idRef.current++, x, y }]);
+    setAvis("");
+  };
+
+  const kTxt = k.toFixed(1).replace(".", ",");
+  const valeurN = a * Math.pow(k, gen);
+  const compteN = rangs.length ? rangs[rangs.length - 1].compte : 0;
+  const verdict =
+    k < 1
+      ? "🌫️ k est plus petit que 1 : chaque génération est plus petite — la chaîne s'éteint."
+      : k === 1
+        ? "🔁 k = 1 : autant d'étincelles à chaque génération — la chaîne reste allumée."
+        : "💥 k est plus grand que 1 : chaque génération est plus grande — ça explose !";
 
   const grand = modeClasse ? "text-4xl sm:text-5xl" : "text-2xl sm:text-3xl";
 
@@ -177,6 +275,211 @@ export default function SimulateurEpsilonClient() {
           <p className="mt-1 text-[14px] font-semibold" style={{ color: "#4a5570" }}>
             {lecture}
           </p>
+        </div>
+
+        {/* À TOI DE JOUER — la cascade qu'on allume au doigt : l'élève pose a
+            étincelles, puis chaque clic allume une génération (a × kⁿ). */}
+        <div className="mt-5 rounded border p-4" style={{ borderColor: "#e3d3a8", backgroundColor: "#ffffffcc" }}>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-[11px] font-black uppercase tracking-[0.18em]" style={{ color: OR }}>
+              À toi — allume ta cascade
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={genSuivante}
+                disabled={gen >= MAX_GEN}
+                className="rounded px-3 py-1.5 text-sm font-black text-white hover:brightness-110 disabled:opacity-40"
+                style={{ backgroundColor: OR }}
+              >
+                ⚡ Génération suivante
+              </button>
+              <button
+                type="button"
+                onClick={recommencer}
+                className="rounded border px-3 py-1.5 text-sm font-black hover:brightness-95"
+                style={{ borderColor: "#d5ddf0", color: ENCRE, backgroundColor: "#fff" }}
+              >
+                ↺ Recommencer
+              </button>
+            </div>
+          </div>
+          <p className="mt-2 text-[15px] font-bold" style={{ color: "#4a5570" }}>
+            {gen === 0
+              ? "👆 Clique dans la zone jaune pour poser 1 à 5 étincelles. Puis touche ⚡."
+              : gen < MAX_GEN
+                ? "👆 Touche le dessin (ou ⚡) : chaque étincelle allumée en allume k."
+                : "🏁 Génération 10 ! Bouge le curseur k au-dessus, ou recommence."}
+          </p>
+          <p className="text-[12px]" style={{ color: "#8a93ab" }}>
+            Pour les défis : pose UNE seule étincelle (a = 1) et règle k avec le curseur.
+          </p>
+
+          {/* LA LIGNE DE CALCUL — c'est elle qu'on projette */}
+          <p className={`mt-3 font-black ${grand}`} style={{ color: ENCRE }}>
+            {a === 0 ? (
+              <>a = ? <span className="text-[0.6em] font-bold" style={{ color: "#8a93ab" }}>— pose tes étincelles de départ</span></>
+            ) : (
+              <>
+                génération {gen} : {a} × {kTxt}
+                <sup className="text-[0.6em]">{gen}</sup>{" "}
+                <span style={{ color: OR }}>
+                  {egalCalc(valeurN)} {fmtCalc(valeurN)}
+                </span>
+              </>
+            )}
+          </p>
+          {a > 0 && gen >= 1 && gen <= 5 && (
+            <p className="text-[14px] font-bold" style={{ color: "#4a5570" }}>
+              car {a} × {Array.from({ length: gen }, () => kTxt).join(" × ")} {egalCalc(valeurN)} {fmtCalc(valeurN)}
+            </p>
+          )}
+          {a > 0 && Math.abs(valeurN - compteN) > 1e-9 && (
+            <p className="text-[13px] font-semibold" style={{ color: "#8a7a55" }}>
+              On dessine seulement les étincelles entières : {fmt(compteN)} allumée{compteN >= 2 ? "s" : ""}.
+            </p>
+          )}
+          {avis && (
+            <p className="mt-1 text-[13px] font-bold" style={{ color: "#b3261e" }}>
+              {avis}
+            </p>
+          )}
+
+          <svg
+            ref={svgRef}
+            viewBox="0 0 1000 630"
+            className="mt-3 w-full select-none"
+            style={{ touchAction: "manipulation", cursor: "pointer" }}
+            onPointerDown={surDessin}
+            role="img"
+            aria-label={`Ta cascade : ${a} étincelle${a >= 2 ? "s" : ""} de départ, coefficient ${kTxt}, génération ${gen} : ${fmt(valeurN)} étincelles`}
+          >
+            <style>{`
+              .tpop{animation:tpop .45s ease-out both;transform-box:fill-box;transform-origin:center}
+              .tfade{animation:tfade .5s ease both}
+              .tvive{animation:tvive 1.4s ease-in-out infinite}
+              @keyframes tpop{0%{opacity:0;transform:scale(.2)}70%{opacity:1;transform:scale(1.25)}100%{opacity:1;transform:scale(1)}}
+              @keyframes tfade{from{opacity:0}to{opacity:1}}
+              @keyframes tvive{0%,100%{opacity:.8}50%{opacity:1}}
+            `}</style>
+
+            {/* la zone de départ */}
+            <rect x="6" y="8" width="988" height="116" rx="12" fill="#fff7e0" stroke={gen === 0 ? OR : "#e3d3a8"}
+              strokeWidth="2" strokeDasharray={gen === 0 ? "8 6" : undefined} />
+            <text x="16" y="28" fontSize="13" fontWeight="900" fill="#8a7a55">
+              Zone de départ · a = {a}
+            </text>
+            {a === 0 && (
+              <text x="515" y="80" textAnchor="middle" fontSize="26" fontWeight="900" fill={OR}>
+                👆 Clique ici pour poser tes étincelles
+              </text>
+            )}
+            {a > 0 && gen === 0 && (
+              <text x="500" y="330" textAnchor="middle" fontSize="22" fontWeight="900" fill="#8a93ab">
+                Puis touche ⚡ « Génération suivante »
+              </text>
+            )}
+
+            {/* les traits parents → enfants (dessinés sous les étincelles) */}
+            {rangs.slice(1).map((r) => {
+              const prev = rangs[r.g - 1];
+              const ry = Math.max(13, Math.min(21, pas * 0.42));
+              if (prev.compte === 0) return null;
+              if (r.compte === 0)
+                // la chaîne s'éteint : des traits gris qui retombent dans le vide
+                return (
+                  <g key={`l${r.g}`} className="tfade">
+                    {prev.pts.map((p, i) => (
+                      <line key={i} x1={p.x} y1={p.y} x2={p.x} y2={p.y + pas * 0.55}
+                        stroke="#c9cfdd" strokeWidth="2" strokeDasharray="4 4" />
+                    ))}
+                  </g>
+                );
+              if (r.nuage && prev.nuage)
+                return (
+                  <g key={`l${r.g}`} className="tfade">
+                    {Array.from({ length: 7 }, (_, j) => (
+                      <line key={j} x1={515 + (j - 3) * (prev.W / 8)} y1={prev.y + ry * 0.7}
+                        x2={515 + (j - 3) * (r.W / 8)} y2={r.y - ry * 0.7} stroke={OR} strokeWidth="2.5" opacity="0.7" />
+                    ))}
+                  </g>
+                );
+              if (r.nuage)
+                return (
+                  <g key={`l${r.g}`} className="tfade">
+                    {prev.pts.map((p, i) => (
+                      <line key={i} x1={p.x} y1={p.y} x2={515 + (p.x - 515) * (r.W / 1000)} y2={r.y - ry * 0.7}
+                        stroke={OR} strokeWidth="1.5" opacity="0.6" />
+                    ))}
+                  </g>
+                );
+              if (prev.nuage) return null; // (impossible : la suite est monotone)
+              return (
+                <g key={`l${r.g}`}>
+                  {r.pts.map((c, i) => {
+                    const p = prev.pts[Math.min(prev.compte - 1, Math.floor((i * prev.compte) / r.compte))];
+                    return (
+                      <line key={`${r.compte}-${i}`} className="tfade" x1={p.x} y1={p.y} x2={c.x} y2={c.y}
+                        stroke={OR} strokeWidth="1.5" opacity="0.55" />
+                    );
+                  })}
+                </g>
+              );
+            })}
+
+            {/* les générations */}
+            {rangs.map((r) => {
+              const derniere = r.g === gen;
+              const ry = Math.max(13, Math.min(21, pas * 0.42));
+              return (
+                <g key={`r${r.g}`} opacity={derniere ? 1 : 0.6} className={derniere ? "tvive" : undefined}>
+                  {r.g > 0 && (
+                    <>
+                      <text x="12" y={r.y + 1} fontSize="14" fontWeight="900" fill={ENCRE}>G{r.g}</text>
+                      <text x="12" y={r.y + 16} fontSize="11" fontWeight="700" fill="#8a93ab">{fmt(r.compte)}</text>
+                    </>
+                  )}
+                  {r.g === 0 &&
+                    r.pts.map((p, i) => (
+                      <g key={p.id ?? i} className="tpop">
+                        <circle cx={p.x} cy={p.y} r="20" fill="#e8a013" stroke="#fff" strokeWidth="3" />
+                        <text x={p.x} y={p.y + 7} textAnchor="middle" fontSize="20" fontWeight="900" fill="#fff">ε</text>
+                      </g>
+                    ))}
+                  {r.g > 0 && r.compte === 0 && (
+                    <text className="tfade" x="515" y={r.y + 6} textAnchor="middle" fontSize="16" fontWeight="900" fill="#a3abbd">
+                      {rangs[r.g - 1].compte > 0 ? "💨 éteinte : plus aucune étincelle entière" : "…"}
+                    </text>
+                  )}
+                  {r.g > 0 && r.nuage && (
+                    <g className="tpop">
+                      {Array.from({ length: 5 }, (_, j) => (
+                        <ellipse key={j} cx={515 + (j - 2) * (r.W / 5)} cy={r.y + (j % 2 ? -2 : 2)}
+                          rx={(r.W / 5) * 0.78} ry={ry} fill="#f6d27a" stroke={OR} strokeWidth="1.5" />
+                      ))}
+                      <ellipse cx="515" cy={r.y} rx={r.W * 0.42} ry={ry * 0.8} fill="#f6d27a" />
+                      <text x="515" y={r.y + 6} textAnchor="middle" fontSize="17" fontWeight="900" fill="#5a3d05">
+                        ☁️ {fmt(r.compte)} étincelles
+                      </text>
+                    </g>
+                  )}
+                  {r.g > 0 &&
+                    !r.nuage &&
+                    r.pts.map((p, i) => (
+                      <circle key={`${r.compte}-${i}`} className="tpop"
+                        style={{ animationDelay: `${Math.min(0.6, i * 0.012).toFixed(3)}s` }}
+                        cx={p.x} cy={p.y} r={r.compte > 30 ? 5.5 : r.compte > 12 ? 7.5 : 10}
+                        fill={derniere ? "#e8a013" : OR} />
+                    ))}
+                </g>
+              );
+            })}
+          </svg>
+          {gen >= 1 && (
+            <p className={`mt-2 font-black ${modeClasse ? "text-2xl" : "text-[15px]"}`} style={{ color: k < 1 ? "#6b7794" : k === 1 ? ENCRE : OR }}>
+              {verdict}
+            </p>
+          )}
         </div>
 
         {/* LA SIMULATION — le champ d'étincelles : l'epsilon au centre, chaque

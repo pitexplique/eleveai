@@ -14,6 +14,13 @@
 //   un poisson-perroquet fabrique ~90 kg de sable blanc par an
 //   la Réserve naturelle marine (2007) : 3 500 ha ≈ 4 900 terrains de foot
 //   t = taille ÷ vitesse — la même formule que le cyclone et le volcan.
+//
+// L'ÉLÈVE AGIT (26/11) : la barrière est découpée en 10 morceaux cliquables
+// (vue du ciel, sous la coupe). Un clic casse un morceau (corail blanchi, une
+// brèche), un re-clic le répare. Chaque morceau = 10 % de la barrière.
+//   part cassée de la hauteur = 90 % × (part intacte)
+//   vague lagon = houle × (1 − 0,9 × part intacte)
+// Barrière entière (état initial) : houle × 0,1 — les défis restent vrais.
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -81,6 +88,16 @@ const COULEURS_DEFIS = {
   rate: "#f2d43b",
 };
 
+const NB_MORCEAUX = 10;
+const COULEURS_CORAIL = ["#ff7a6b", "#f2a65a", "#c77dba"];
+
+// La risée du lagon : une vague d'amplitude a (en pixels), de x = 330 à 690.
+function cheminVagueLagon(a: number): string {
+  let d = `M330,120 Q345,${(120 - a).toFixed(1)} 360,120`;
+  for (let x = 390; x <= 690; x += 30) d += ` T${x},120`;
+  return d;
+}
+
 // Formatage français des grands nombres, sans décimales inutiles.
 function fr(n: number, decimales = 0): string {
   return n.toLocaleString("fr-FR", {
@@ -94,16 +111,59 @@ function fr(n: number, decimales = 0): string {
 // l'écume explose sur la crête, le lagon ondule à peine, les poissons nagent.
 // Pastilles A→H : la grammaire des coupes de manuel (on apprend aussi à LIRE
 // un schéma). De gauche à droite : le large → la pente externe → la crête →
-// le platier → le lagon (patates, poissons) → la plage.
-function LagonAnime({ houle }: { houle: number }) {
+// le platier → le lagon (patates, poissons) → la plage. Dessous : la barrière
+// vue du ciel, en 10 morceaux que l'élève casse ou répare.
+function LagonAnime({
+  houle,
+  casses,
+  onBasculer,
+  onRecommencer,
+}: {
+  houle: number;
+  casses: boolean[];
+  onBasculer: (i: number) => void;
+  onRecommencer: () => void;
+}) {
   // De 3,8 s (0,5 m, mer d'huile) à 1,2 s (10 m, la houle du siècle).
   const cadence = (3.8 - (Math.min(houle, 10) / 10) * 2.6).toFixed(2) + "s";
   // L'amplitude des vagues du large, en pixels du schéma.
   const amp = 4 + houle * 2.4;
 
+  // Les maths de la barrière (en entiers pour éviter les 0,0999…).
+  const intacts = casses.filter((c) => !c).length;
+  const nbCasses = NB_MORCEAUX - intacts;
+  const pctIntact = intacts * 10; // chaque morceau = 10 %
+  const pctCasse = 9 * intacts; // 90 % × part intacte, en %
+  const facteurPct = 100 - pctCasse; // ce qui reste de la hauteur, en %
+  const vagueCm = houle * facteurPct; // houle (m) × 100 × facteurPct / 100
+  const vagueM = vagueCm / 100;
+  // La vague du lagon, à la même échelle que la houle du large (plafonnée
+  // pour ne pas cogner le titre du lagon).
+  const ampLagon = Math.min(22, vagueM * 2.4);
+
   return (
     <div className="mt-3 overflow-x-auto rounded border border-[#0f4a58] bg-[#03181e]">
+      {/* La consigne — courte, pour les élèves qui lisent mal. */}
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 border-b border-[#0f4a58] px-3 py-2">
+        <p className="text-[13.5px] font-bold leading-5 text-[#ecfbfa]">
+          👆 Clique sur un morceau de la barrière pour le casser. Re-clique pour le réparer.
+        </p>
+        <span className="font-mono text-[12.5px] font-bold tabular-nums text-[#5bc8dd]">
+          {intacts}/10 intacts = {pctIntact} %
+        </span>
+        <button
+          type="button"
+          onClick={onRecommencer}
+          className="ml-auto rounded-sm border border-[#5bc8dd]/40 px-2.5 py-1 font-mono text-[11.5px] font-bold text-[#5bc8dd] hover:bg-[#5bc8dd]/15"
+        >
+          ↺ Recommencer
+        </button>
+      </div>
       <style>{`
+        @keyframes lag-crac { 0% { transform: scale(1.3); } 60% { transform: scale(0.92); } 100% { transform: scale(1); } }
+        .l-crac { animation: lag-crac .45s ease-out; transform-box: fill-box; transform-origin: center; }
+        .l-morceau:hover .l-survol, .l-morceau:focus-visible .l-survol { stroke: #f2d43b; }
+        .l-morceau:focus { outline: none; }
         @keyframes lag-flux { to { stroke-dashoffset: -28; } }
         @keyframes lag-ecume { 0% { transform: translate(0,0); opacity: 1; } 100% { transform: translate(var(--vx), -36px); opacity: 0; } }
         @keyframes lag-nage { 0%,100% { transform: translateX(0); } 50% { transform: translateX(28px); } }
@@ -115,13 +175,14 @@ function LagonAnime({ houle }: { houle: number }) {
         .l-corail { animation: lag-scintille calc(var(--cadence) * 2.5) ease-in-out infinite; }
         @media (prefers-reduced-motion: reduce) {
           .l-houle, .l-ride, .l-ecume, .l-poisson, .l-corail { animation-duration: 12s; }
+          .l-crac { animation: none; }
         }
       `}</style>
       <svg
-        viewBox="0 0 820 330"
-        style={{ ["--cadence" as string]: cadence }}
+        viewBox="0 0 820 414"
+        style={{ ["--cadence" as string]: cadence, touchAction: "manipulation" }}
         className="mx-auto block min-w-[640px] max-w-[900px]"
-        aria-label="Coupe animée du lagon : la houle du large déferle sur la crête du récif, le lagon reste calme derrière la barrière de corail, jusqu'à la plage de sable blanc"
+        aria-label="Coupe animée du lagon : la houle du large déferle sur la crête du récif, le lagon reste calme derrière la barrière de corail, jusqu'à la plage de sable blanc. En dessous, la barrière vue du ciel, en 10 morceaux à casser ou réparer."
       >
         {/* L'eau : le large (sombre, profond) puis le lagon (turquoise, ~1,2 m) */}
         <rect x="20" y="120" width="290" height="190" fill="#0a3345" />
@@ -164,26 +225,58 @@ function LagonAnime({ houle }: { houle: number }) {
         <text x="120" y="260" fill="#8fc6cf" fontSize="9.5" fontFamily="monospace">des polypes</text>
 
         {/* C · La crête : la vague déferle — l'écume explose */}
+        {/* La crête en coupe : 10 petits blocs qui suivent la vue du ciel
+            (corail vivant ou blanchi, cassé). */}
+        {casses.map((casse, i) => (
+          <rect
+            key={i}
+            x={296 + i * 10.5}
+            y={casse ? 124 : 115}
+            width={9}
+            height={casse ? 4 : 8}
+            rx={1.5}
+            fill={casse ? "#e9e4d8" : COULEURS_CORAIL[i % 3]}
+            opacity={casse ? 0.7 : 1}
+            pointerEvents="none"
+          />
+        ))}
         {[-8, -2, 4, 10].map((dx, i) => (
           <circle
             key={i}
             cx={303 + dx}
             cy={116}
-            r={2.6 + houle * 0.16}
+            r={(2.6 + houle * 0.16) * (0.4 + 0.6 * (intacts / NB_MORCEAUX))}
             fill="#f4fbfc"
             className="l-ecume"
             style={{ ["--vx" as string]: `${dx * 1.7}px`, animationDelay: `calc(var(--cadence) * ${i * 0.22})` }}
           />
         ))}
         <text x="303" y="88" fill="#f4fbfc" fontSize="10" fontWeight="700" textAnchor="middle" fontFamily="monospace">ÇA DÉFERLE</text>
-        <text x="303" y="100" fill="#8fc6cf" fontSize="9.5" textAnchor="middle" fontFamily="monospace">−90 % de hauteur</text>
+        <text x="303" y="100" fill="#8fc6cf" fontSize="9.5" textAnchor="middle" fontFamily="monospace">−{pctCasse} % de hauteur</text>
 
         {/* D · Le platier, à fleur d'eau */}
         <text x="352" y="176" fill="#8fc6cf" fontSize="9.5" textAnchor="middle" fontFamily="monospace">le platier</text>
 
-        {/* E · Le lagon : l'eau calme — une risée à peine */}
-        <path d="M330,120 L688,120" fill="none" stroke="#8fe0ee" strokeWidth="2.5" className="l-ride" />
-        <text x="500" y="105" fill="#5bc8dd" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="monospace">LE LAGON · L&apos;EAU CALME (~1,2 m)</text>
+        {/* E · Le lagon : l'eau calme — une risée à peine… tant que la
+            barrière tient. Chaque brèche fait grossir la vague. */}
+        <path
+          d={cheminVagueLagon(ampLagon)}
+          fill="none"
+          stroke="#8fe0ee"
+          strokeWidth="2.5"
+          className={ampLagon < 2 ? "l-ride" : "l-houle"}
+        />
+        <text
+          x="500"
+          y="82"
+          fill={nbCasses > 0 ? "#f2d43b" : "#5bc8dd"}
+          fontSize="11"
+          fontWeight="700"
+          textAnchor="middle"
+          fontFamily="monospace"
+        >
+          {nbCasses > 0 ? "LE LAGON · LES VAGUES ENTRENT !" : "LE LAGON · L’EAU CALME (~1,2 m)"}
+        </text>
 
         {/* F · Les patates de corail (les immeubles des poissons) */}
         <ellipse cx="452" cy="146" rx="11" ry="7" fill="#ff7a6b" className="l-corail" />
@@ -218,7 +311,99 @@ function LagonAnime({ houle }: { houle: number }) {
             <text x={x} y={y + 3.5} fill="#03181e" fontSize="11" fontWeight="800" textAnchor="middle" fontFamily="monospace">{lettre}</text>
           </g>
         ))}
+
+        {/* LA BARRIÈRE VUE DU CIEL — 10 morceaux cliquables (70 × 64 unités,
+            ≈ 55 × 50 px à 375 px de large : assez gros pour un doigt). */}
+        <text x="410" y="332" fill="#ecfbfa" fontSize="11" fontWeight="700" textAnchor="middle" fontFamily="monospace">
+          LA BARRIÈRE VUE DU CIEL · 10 morceaux · chacun = 10 %
+        </text>
+        <rect x="50" y="340" width="720" height="14" fill="#0a3345" />
+        <rect x="50" y="354" width="720" height="36" fill="#0e5666" />
+        <rect x="50" y="390" width="720" height="16" fill="#1a7a88" />
+        <text x="56" y="350" fill="#8fc6cf" fontSize="8.5" fontFamily="monospace">↓ LE LARGE</text>
+        <text x="56" y="402" fill="#ecfbfa" fontSize="8.5" fontFamily="monospace">LE LAGON</text>
+        {casses.map((casse, i) => {
+          const x = 60 + i * 70;
+          const couleur = COULEURS_CORAIL[i % 3];
+          return (
+            <g
+              key={i}
+              role="button"
+              tabIndex={0}
+              aria-pressed={casse}
+              aria-label={`Morceau ${i + 1} de la barrière : ${casse ? "cassé, clique pour le réparer" : "intact, clique pour le casser"}`}
+              className="l-morceau"
+              style={{ cursor: "pointer" }}
+              onClick={() => onBasculer(i)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onBasculer(i);
+                }
+              }}
+            >
+              {/* La zone de clic : tout le morceau, même la brèche vide */}
+              <rect x={x - 3} y={338} width={70} height={66} fill="transparent" />
+              <g key={casse ? "casse" : "intact"} className="l-crac">
+                {casse ? (
+                  <>
+                    {/* Corail blanchi, effondré : une brèche où l'eau passe */}
+                    <rect x={x + 4} y={374} width={56} height={15} rx={3} fill="#e9e4d8" opacity={0.85} />
+                    <path
+                      d={`M${x + 8},378 l8,6 l7,-5 l9,6 l8,-6 l10,5`}
+                      fill="none"
+                      stroke="#7d7466"
+                      strokeWidth="1.6"
+                    />
+                    <text x={x + 32} y={368} fill="#f2d43b" fontSize="11" fontWeight="800" textAnchor="middle" fontFamily="monospace">
+                      ≋ brèche
+                    </text>
+                  </>
+                ) : (
+                  <>
+                    {/* Corail vivant : un bloc et ses branches */}
+                    <path
+                      d={`M${x + 14},356 l-4,-10 M${x + 14},356 l5,-9 M${x + 34},356 l0,-11 M${x + 34},356 l-5,-7 M${x + 52},356 l4,-9`}
+                      stroke={couleur}
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                    />
+                    <rect x={x} y={354} width={64} height={36} rx={6} fill={couleur} />
+                    <text x={x + 32} y={377} fill="#03181e" fontSize="12" fontWeight="800" textAnchor="middle" fontFamily="monospace">
+                      {i + 1}
+                    </text>
+                  </>
+                )}
+              </g>
+              <rect
+                x={x - 1}
+                y={341}
+                width={66}
+                height={62}
+                rx={7}
+                fill="none"
+                stroke="transparent"
+                strokeWidth="2"
+                className="l-survol"
+              />
+            </g>
+          );
+        })}
       </svg>
+
+      {/* La ligne de calcul — celle que le prof projette. */}
+      <div className="border-t border-[#0f4a58] px-3 py-2 font-mono text-[13px] leading-6 text-[#5bc8dd]">
+        {intacts} {intacts > 1 ? "morceaux" : "morceau"} sur 10 = {pctIntact} % intact → la barrière casse 90 % × {pctIntact} % ={" "}
+        <b className="text-[#ecfbfa]">{pctCasse} %</b> de la hauteur → {fr(houle, 1)} m × {fr(facteurPct / 100, 2)} ={" "}
+        <b className="text-[#ecfbfa]">{fr(vagueM, 3)} m</b> = {fr(vagueCm, 1)} cm
+      </div>
+      {/* Le message de tact : ici on casse pour comprendre, jamais en vrai. */}
+      <p
+        className={`px-3 pb-2 text-[12.5px] leading-5 ${nbCasses > 0 ? "font-bold text-[#f2d43b]" : "text-[#8fc6cf]"}`}
+      >
+        🤿 Ici, c&apos;est un jeu. Dans le vrai lagon, on ne marche JAMAIS sur le corail : un morceau cassé met des
+        dizaines d&apos;années à repousser (~1 cm par an).
+      </p>
       {/* Le vocabulaire du schéma, de A à H — replié pour garder la page courte. */}
       <details className="border-t border-[#0f4a58] px-3 py-2">
         <summary className="cursor-pointer text-[11.5px] font-bold text-[#8fc6cf] hover:text-[#ecfbfa]">
@@ -270,7 +455,7 @@ function Etape({
           {nom}
         </p>
         <p className="font-mono text-sm font-bold tabular-nums text-[#ecfbfa]">
-          {fr(quantite, quantite < 10 ? 1 : 0)} <span className="text-[11px] font-normal text-[#8fc6cf]">{unite}</span>
+          {fr(quantite, Number.isInteger(quantite) ? 0 : 1)} <span className="text-[11px] font-normal text-[#8fc6cf]">{unite}</span>
         </p>
       </div>
       <div className="mt-1.5 h-2.5 overflow-hidden rounded-full bg-[#03181e]">
@@ -306,8 +491,25 @@ export default function SimulateurLagonClient() {
     });
   };
 
-  // La barrière casse ~90 % de la hauteur : vague lagon ≈ houle × 0,1.
-  const vagueLagonCm = houle * 10;
+  // La barrière, en 10 morceaux : false = intact (état initial : tout
+  // intact, donc les défis « houle × 0,1 » restent vrais).
+  const [casses, setCasses] = useState<boolean[]>(() => Array(NB_MORCEAUX).fill(false));
+  const basculerMorceau = (i: number) =>
+    setCasses((c) => c.map((v, j) => (j === i ? !v : v)));
+  const recommencer = () => {
+    setCasses(Array(NB_MORCEAUX).fill(false));
+    setHoule(2);
+  };
+
+  // La barrière casse 90 % × (part intacte) de la hauteur :
+  // vague lagon = houle × (1 − 0,9 × part intacte). En entiers (%) pour
+  // éviter les 0,0999… : barrière entière → houle × 0,1.
+  const intacts = casses.filter((c) => !c).length;
+  const nbCasses = NB_MORCEAUX - intacts;
+  const pctCasse = 9 * intacts;
+  const facteurPct = 100 - pctCasse;
+  const vagueLagonCm = houle * facteurPct;
+  const vagueLagonM = vagueLagonCm / 100;
 
   return (
     <div className="min-h-screen bg-[#03181e] text-[#ecfbfa]">
@@ -366,13 +568,20 @@ export default function SimulateurLagonClient() {
           </div>
           <p className="mt-2 text-[12.5px] leading-5 text-[#cfe9ec]">
             Sur la crête, la vague de <b className="text-[#ecfbfa]">{fr(houle, 1)} m</b> déferle
-            et perd <b className="text-[#ecfbfa]">~90 % de sa hauteur</b> — dans le lagon, il
-            ne reste qu&apos;une vaguelette de <b className="text-[#ecfbfa]">{fr(vagueLagonCm)} cm</b>.
+            et perd <b className="text-[#ecfbfa]">{nbCasses === 0 ? "~90 %" : `${pctCasse} %`} de sa hauteur</b>
+            {nbCasses > 0 ? ` (barrière intacte à ${intacts * 10} %)` : ""} — dans le lagon, il
+            reste une vague de <b className="text-[#ecfbfa]">{fr(vagueLagonCm, 1)} cm</b>.
           </p>
         </div>
 
-        {/* LE SCHÉMA VIVANT — la coupe du lagon, qui suit la houle. */}
-        <LagonAnime houle={houle} />
+        {/* LE SCHÉMA VIVANT — la coupe du lagon, qui suit la houle ET la
+            barrière que l'élève casse ou répare. */}
+        <LagonAnime
+          houle={houle}
+          casses={casses}
+          onBasculer={basculerMorceau}
+          onRecommencer={recommencer}
+        />
 
         {/* La chaîne du lagon */}
         <div className="mt-3 space-y-3">
@@ -386,18 +595,26 @@ export default function SimulateurLagonClient() {
           />
           <Etape
             nom="2 · La barrière de corail — la muraille vivante"
-            explication="Construite par des milliards de polypes en ~8 000 ans, elle monte jusqu'à la surface. La vague trébuche dessus et déferle : ~90 % de la hauteur des vagues est cassée là, sur la crête — la ligne blanche qu'on voit du ciel."
-            quantite={90}
+            explication={
+              "Construite par des milliards de polypes en ~8 000 ans, elle monte jusqu'à la surface. La vague trébuche dessus et déferle : ~90 % de la hauteur des vagues est cassée là, sur la crête — la ligne blanche qu'on voit du ciel." +
+              (nbCasses > 0
+                ? ` Avec ${nbCasses} ${nbCasses > 1 ? "morceaux cassés" : "morceau cassé"}, elle ne casse plus que 90 % × ${intacts * 10} % = ${pctCasse} %.`
+                : "")
+            }
+            quantite={pctCasse}
             unite="% de la hauteur cassée"
-            pct={90}
+            pct={pctCasse}
             couleur="#ff7a6b"
           />
           <Etape
             nom="3 · Le lagon — l'eau calme, la nurserie"
-            explication="Derrière la muraille, ~1,2 m d'eau tranquille. Les bébés poissons y grandissent à l'abri, protégés aussi par la Réserve naturelle marine (3 500 ha depuis 2007)."
+            explication={
+              "Derrière la muraille, ~1,2 m d'eau tranquille. Les bébés poissons y grandissent à l'abri, protégés aussi par la Réserve naturelle marine (3 500 ha depuis 2007)." +
+              (nbCasses > 0 ? " Mais par les brèches, la houle entre : la nurserie n'est plus à l'abri." : "")
+            }
             quantite={vagueLagonCm}
-            unite="cm de vaguelettes"
-            pct={(houle / 10) * 100}
+            unite="cm de vague"
+            pct={(vagueLagonM / 10) * 100}
             couleur="#5bc8dd"
           />
           <Etape
@@ -414,9 +631,10 @@ export default function SimulateurLagonClient() {
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
           <div className="rounded border-2 border-[#5bc8dd] bg-[#062b33] p-3 text-center">
             <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#8fc6cf]">🌊 Dans le lagon</p>
-            <p className="mt-1 font-mono text-2xl font-bold tabular-nums text-[#5bc8dd]">{fr(vagueLagonCm)} cm</p>
+            <p className="mt-1 font-mono text-2xl font-bold tabular-nums text-[#5bc8dd]">{fr(vagueLagonCm, 1)} cm</p>
             <p className="mt-1 text-[11.5px] leading-4 text-[#cfe9ec]">
-              de vaguelette quand le large frappe à {fr(houle, 1)} m — la muraille a bu le reste
+              de vague quand le large frappe à {fr(houle, 1)} m —{" "}
+              {nbCasses > 0 ? "les brèches laissent passer la houle" : "la muraille a bu le reste"}
             </p>
           </div>
           <div className="rounded border-2 border-[#7fb069] bg-[#062b33] p-3 text-center">
@@ -437,7 +655,8 @@ export default function SimulateurLagonClient() {
 
         {/* Les maths du lagon, affichées */}
         <div className="mt-4 rounded border border-dashed border-[#5bc8dd]/40 bg-[#062b33] px-3 py-2.5 font-mono text-[12.5px] leading-relaxed text-[#5bc8dd]">
-          vague lagon = {fr(houle, 1)} m × 0,1 = <b>{fr(vagueLagonCm)} cm</b>
+          vague lagon = {fr(houle, 1)} m × (1 − 0,9 × {fr(intacts / NB_MORCEAUX, 1)}) = {fr(houle, 1)} m ×{" "}
+          {fr(facteurPct / 100, 2)} = <b>{fr(vagueLagonCm, 1)} cm</b>
           <span className="text-[#8fc6cf]"> · </span>
           réserve : 35 000 000 ÷ 7 140 ≈ <b>4 900 terrains</b>
           <span className="text-[#8fc6cf]"> · </span>
@@ -447,7 +666,7 @@ export default function SimulateurLagonClient() {
         {/* LES DÉFIS — à toi de calculer, le lagon vérifie */}
         <DefisSimulateur
           titre="Les défis du lagon"
-          coupDePouce="Coup de pouce : règle la houle du défi — le lagon vérifie pour toi."
+          coupDePouce="Coup de pouce : garde la barrière entière (10 morceaux), règle la houle du défi — le lagon vérifie pour toi."
           defis={DEFIS}
           couleurs={COULEURS_DEFIS}
           coachHref="/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&display=simple"
