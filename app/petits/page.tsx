@@ -16,7 +16,18 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+// 26/11 : les 6 dessins animés « nombres entiers » (Ti Margo, CP) rejoignent le test : 3 paysages (une
+// histoire, deux questions) et 3 shorts (un petit jeu), en plus des 3 shorts du début.
+const PAYSAGES = [
+  { id: "cp-entier-denombre", theme: "Combien de fraises ?", emoji: "🍓" },
+  { id: "cp-entier-rang", theme: "La file du toboggan", emoji: "🛝" },
+  { id: "cp-entier-collection", theme: "Une assiette pour chacun", emoji: "🎉" },
+];
+
 const SHORTS = [
+  { id: "cp-entier-denombre-short", theme: "Qui a raison ?", emoji: "🍓" },
+  { id: "cp-entier-rang-short", theme: "La course des escargots", emoji: "🐌" },
+  { id: "cp-entier-collection-short", theme: "Les bougies", emoji: "🎂" },
   { id: "cp-famille-coccinelle", theme: "Compter", emoji: "🐞" },
   { id: "cp-duree-lire-heure-short", theme: "Lire l’heure", emoji: "⏰" },
   { id: "cp-masse-comparer-short", theme: "Lourd ou léger", emoji: "⚖️" },
@@ -29,8 +40,47 @@ const QUESTIONS = [
   "En a-t-il redemandé une autre ?",
 ];
 
+type Carte = { id: string; theme: string; emoji: string };
+
+function avecVideo(liste: Carte[]) {
+  return liste.map((c) => ({ ...c, v: trouverVideo(c.id) })).filter((c) => c.v);
+}
+
+function CarteVideo({ id, theme, emoji, v, numero, paysage }: Carte & { v: ReturnType<typeof trouverVideo>; numero: number; paysage: boolean }) {
+  return (
+    <Link
+      href={`/video/${id}`}
+      className="group overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-slate-200 transition hover:-translate-y-1 hover:shadow-xl"
+    >
+      <div className={`relative bg-slate-200 ${paysage ? "aspect-video" : "aspect-[9/16]"}`}>
+        {v!.vignette && (
+          <Image
+            src={urlR2(v!.vignette)}
+            alt={v!.titre}
+            fill
+            unoptimized
+            sizes="(min-width: 640px) 33vw, 100vw"
+            className="object-cover"
+          />
+        )}
+        <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-sm font-black text-slate-800">
+          {numero}
+        </span>
+        {/* Le bouton ▶ dans le coin : au centre, il cachait le texte de la miniature (« TU PARIES ? ») */}
+        <span className="absolute bottom-3 right-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/95 text-2xl shadow-lg transition group-hover:scale-110">
+          ▶
+        </span>
+      </div>
+      <p className="px-4 py-3 text-center text-xl font-black text-slate-800">
+        {emoji} {theme}
+      </p>
+    </Link>
+  );
+}
+
 export default function PagePetits() {
-  const videos = SHORTS.map((s) => ({ ...s, v: trouverVideo(s.id) })).filter((s) => s.v);
+  const paysages = avecVideo(PAYSAGES);
+  const shorts = avecVideo(SHORTS);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-amber-50 to-sky-50 px-4 py-8">
@@ -39,41 +89,29 @@ export default function PagePetits() {
           Des dessins animés pour les petits 🎈
         </h1>
         <p className="mx-auto mt-3 max-w-2xl text-center text-lg font-semibold text-slate-600">
-          Montre ces 3 petits dessins animés à ta petite sœur ou à ton petit frère.
+          Montre ces dessins animés à ta petite sœur ou à ton petit frère.
           Appuie sur une image pour l’ouvrir.
         </p>
 
-        <div className="mt-8 grid gap-6 sm:grid-cols-3">
-          {videos.map(({ id, theme, emoji, v }, i) => (
-            <Link
-              key={id}
-              href={`/video/${id}`}
-              className="group overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-slate-200 transition hover:-translate-y-1 hover:shadow-xl"
-            >
-              <div className="relative aspect-[9/16] bg-slate-200">
-                {v!.vignette && (
-                  <Image
-                    src={urlR2(v!.vignette)}
-                    alt={v!.titre}
-                    fill
-                    unoptimized
-                    sizes="(min-width: 640px) 33vw, 100vw"
-                    className="object-cover"
-                  />
-                )}
-                <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-sm font-black text-slate-800">
-                  {i + 1}
-                </span>
-                <span className="absolute inset-0 flex items-center justify-center">
-                  <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-3xl shadow-lg transition group-hover:scale-110">
-                    ▶
-                  </span>
-                </span>
-              </div>
-              <p className="px-4 py-3 text-center text-xl font-black text-slate-800">
-                {emoji} {theme}
-              </p>
-            </Link>
+        <h2 className="mt-10 text-center text-2xl font-black text-slate-800">
+          ✨ Nouveau : les nombres, avec Ti Margo
+        </h2>
+        <p className="mt-1 text-center text-base font-semibold text-slate-500">
+          Une petite histoire et deux questions : mets pause, et réponds à voix haute !
+        </p>
+        <div className="mt-5 grid gap-6 sm:grid-cols-3">
+          {paysages.map((c, i) => (
+            <CarteVideo key={c.id} {...c} numero={i + 1} paysage />
+          ))}
+        </div>
+
+        <h2 className="mt-12 text-center text-2xl font-black text-slate-800">🎲 Les petits jeux</h2>
+        <p className="mt-1 text-center text-base font-semibold text-slate-500">
+          Moins d’une minute chacun : une question, et à toi de jouer !
+        </p>
+        <div className="mt-5 grid gap-6 sm:grid-cols-3">
+          {shorts.map((c, i) => (
+            <CarteVideo key={c.id} {...c} numero={paysages.length + i + 1} paysage={false} />
           ))}
         </div>
 
