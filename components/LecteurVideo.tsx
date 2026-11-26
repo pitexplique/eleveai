@@ -278,6 +278,12 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   "premiere-graph-croissance": 8.4,
   "premiere-graph-croissance-short": 4.69,
   "premiere-graph-histogramme": 8.4,
+  // Dessins animés CP nombres entiers, PAYSAGES (26/11 ; les shorts gardent l'ancienne fin) : nouvelle fin « Entraîne-toi sur éleveai point f r, ou sur YouTube :
+  // éleveai neuf sept quatre ! » (6,1 s) + 1,5 s d'écran. Sur le site, on s'arrête après « point f r » (« r » à 2,14 s,
+  // « ou » à 2,65 s du clip de fin) : 7,6 − 2,55 = 5,05 s.
+  "cp-entier-denombre": 5.05,
+  "cp-entier-rang": 5.05,
+  "cp-entier-collection": 5.05,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {

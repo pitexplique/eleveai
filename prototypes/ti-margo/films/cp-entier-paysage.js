@@ -16,8 +16,11 @@ function cadrePaysageE(){
     #carte{left:1290px!important;right:30px!important;top:40px!important;padding:16px 20px!important;}
     #carte .choix{font-size:72px;margin:8px 4px;}
     #fin{left:430px;right:430px;top:60px;font-size:56px;padding:22px;}
-    #fin .site{font-size:88px;margin:6px 0 12px;} #fin .geste{margin:4px 0;} #fin .ico{font-size:62px;}`;
+    #fin .site{font-size:88px;margin:6px 0 12px;} #fin .geste{margin:4px 0;} #fin .ico{font-size:62px;}
+    /* 26/11, Frédéric : « On laisse juste Entraîne-toi sur eleveai.fr ou youtube @eleveai974 » : ni pouce, ni abonnement, ni cloche */
+    #f3,#f6{display:none!important;} #fin #f5{font-size:64px;}`;
   document.head.append(css);
+  document.getElementById('f4').innerHTML='<span>ou sur YouTube</span>';
   return tab; }
 
 /* La caméra des paysages : gros plan au titre, Ti Margo à gauche du tableau ensuite, seul à gauche pour la fin */

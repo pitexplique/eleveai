@@ -8,11 +8,11 @@
    ============================================================ */
 FILMS['denombre']=function(outils){
   const DUR={'00-accroche':17.41,'01-astuce':6.76,'02-compte':8.91,'03-dernier':6.34,'04-question':15.08,'04b-reponse':5.96,
-    '05-question':13.46,'05b-reponse':4.84,'06-appris':6.38,'07-abonne':9.74};
+    '05-question':13.46,'05b-reponse':4.84,'06-appris':6.38,'07-abonne':6.1};
   const clips=enchainer(.4,Object.keys(DUR),DUR,{'00-accroche':1,'01-astuce':.5,'02-compte':.6,'03-dernier':1.2,
     '04-question':3.3,'04b-reponse':1.4,'05-question':3.3,'05b-reponse':1.4,'06-appris':1.4});
   const A=Object.fromEntries(clips), {dit,mot}=voixDe(A);
-  const [acc,ast,cpt,der,q1,r1,q2,r2,ap,f]=clips.map(x=>x[1]), FIN=+(f+DUR['07-abonne']+.5).toFixed(2);
+  const [acc,ast,cpt,der,q1,r1,q2,r2,ap,f]=clips.map(x=>x[1]), FIN=+(f+DUR['07-abonne']+1.5).toFixed(2) /* 26/11 : la fin dit seulement « Entraîne-toi sur eleveai.fr, ou sur YouTube @eleveai974 » ; 1,5 s pour lire */;
   const fin=x=>A[x]+DUR[x];
 
   poserClasse(); const tab=cadrePaysageE();
@@ -27,7 +27,6 @@ FILMS['denombre']=function(outils){
   const tPom=mot('04-question','pommes'), tRP=['Un','deux','trois','quatre','cinq'].map(w=>mot('04b-reponse',w)), tCinq2=mot('04b-reponse','cinq',2);
   const tBal=mot('05-question','ballons'), tVol=mot('05-question',"s'envolent"), tRC=mot('05b-reponse','C'), tSeptB=mot('05b-reponse','Sept'), tVent=mot('05b-reponse','vent');
   const tTouche=mot('06-appris','touche'), tFois=mot('06-appris','fois'), tDern2=mot('06-appris','dernier'), tComb2=mot('06-appris','combien');
-  const tRep=mot('07-abonne','commentaire');
   const finTitre=tLe-.08;
 
   /* Les 7 fraises sur l'assiette (en désordre), et leur place dans le bol */
@@ -133,7 +132,7 @@ FILMS['denombre']=function(outils){
       else if(dansQ) g.reflechit();
       else if(T<ap) g.fier();
       else if(T<f) g.montre();
-      else { T-f<2.35?g.ouvre():g.pouce(); }
+      else { T-f<2.35?g.ouvre():g.fier(); } /* 26/11 : plus de pouce à la fin des paysages */
 
       if(window.MINI){ tab.g.visible=false; scene.x=-3.1; scene.ry=.2; cam.x=0; cam.y=2.75; cam.d=7.6; cam.e=.02; P.jaw=.62; g.fier(); }
     } };

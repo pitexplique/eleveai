@@ -7,11 +7,11 @@
    ============================================================ */
 FILMS['rang']=function(outils){
   const DUR={'00-accroche':10.6,'01-premier':7.33,'02-compter':7.93,'03-question':12.02,'03b-reponse':6.27,
-    '04-question':16.87,'04b-reponse':8.16,'05-appris':5.45,'06-abonne':9.74};
+    '04-question':16.87,'04b-reponse':8.16,'05-appris':5.45,'06-abonne':6.1};
   const clips=enchainer(.4,Object.keys(DUR),DUR,{'00-accroche':1,'01-premier':.5,'02-compter':1.2,
     '03-question':3.3,'03b-reponse':1.4,'04-question':3.3,'04b-reponse':1.4,'05-appris':1.4});
   const A=Object.fromEntries(clips), {dit,mot}=voixDe(A);
-  const [acc,pre,cpt,q1,r1,q2,r2,ap,f]=clips.map(x=>x[1]), FIN=+(f+DUR['06-abonne']+.5).toFixed(2);
+  const [acc,pre,cpt,q1,r1,q2,r2,ap,f]=clips.map(x=>x[1]), FIN=+(f+DUR['06-abonne']+1.5).toFixed(2) /* 26/11 : la fin dit seulement « Entraîne-toi sur eleveai.fr, ou sur YouTube @eleveai974 » ; 1,5 s pour lire */;
   const fin=x=>A[x]+DUR[x];
 
   poserClasse(); const tab=cadrePaysageE();
@@ -120,7 +120,7 @@ FILMS['rang']=function(outils){
       else if(dansQ) g.reflechit();
       else if(T<ap) T>=tBien?g.pouce():g.fier();
       else if(T<f) g.montre();
-      else { T-f<2.35?g.ouvre():g.pouce(); }
+      else { T-f<2.35?g.ouvre():g.fier(); } /* 26/11 : plus de pouce à la fin des paysages */
 
       if(window.MINI){ tab.g.visible=false; scene.x=-3.1; scene.ry=.2; cam.x=0; cam.y=2.75; cam.d=7.6; cam.e=.02; P.jaw=.62; g.fier(); }
     } };
