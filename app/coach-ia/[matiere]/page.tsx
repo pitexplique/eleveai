@@ -24,7 +24,6 @@ import {
 import TexteMath from "@/components/fiches/TexteMath";
 import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
 import { normaliser } from "@/lib/matrice/normaliser";
-import FloatingCoach from "@/components/FloatingCoach";
 import BoiteAOutils from "@/components/BoiteAOutils";
 import { useEleve } from "@/context/EleveContext";
 import Link from "next/link";
@@ -648,7 +647,7 @@ export default function CoachIA() {
       ? `&micros=${encodeURIComponent(cochees.join(","))}`
       : "";
     partir(() => router.push(
-      `/coach/serie?classe=${encodeURIComponent(classe)}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}${micros}&${displayParamForClasse(classe)}`
+      `/coach/serie?classe=${encodeURIComponent(classe)}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}${micros}&${displayParamForClasse(classe)}${depuisAccueil ? "&from=accueil" : ""}`
     ));
   }
 
@@ -1385,7 +1384,9 @@ export default function CoachIA() {
         </section>
       </div>
 
-      <FloatingCoach />
+      {/* ⛔ 26/11/2026 — Frédéric : « enlève le chips demander à l'IA ».
+          « Demande à l'IA » (FloatingCoach) n'est plus monté sur le coach,
+          comme sur le tutor depuis le 12/11 (décision du 22/11 : aucune IA). */}
       {matiere === "maths" && <BoiteAOutils />}
     </main>
   );

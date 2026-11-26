@@ -1693,9 +1693,15 @@ function continueAfterExplanation() {
   // écrivait donc un identifiant technique — `fractions_rationnelles` — que le
   // filtre compare aux libellés affichés : il ne matche rien, et la liste des
   // notions revenait VIDE. Frédéric, 18/08 : « laisse le champ vide au retour ».
+  //
+  // ⭐ 26/11/2026 — ET LE MARQUEUR DE L'ACCUEIL. Arrivé de l'accueil
+  // (`from=accueil`, transmis par le GO du coach), l'élève retrouve au retour
+  // le coach SANS la colonne des classes, comme à l'aller. Lu une seule fois à
+  // l'arrivée : changer de notion réécrit l'adresse du tutor.
+  const [depuisAccueil] = useState(() => searchParams.get("from") === "accueil");
   function retourCoach() {
     router.push(
-      `/coach-ia/${matiere}?classe=${encodeURIComponent(classe)}`,
+      `/coach-ia/${matiere}?classe=${encodeURIComponent(classe)}${depuisAccueil ? "&from=accueil" : ""}`,
     );
   }
 
