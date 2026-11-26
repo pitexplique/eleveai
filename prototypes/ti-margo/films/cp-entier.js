@@ -112,19 +112,22 @@ function drapeauE(c,x,yBas,h=420){ c.strokeStyle=CRAIE.blanc; c.lineWidth=7; c.b
 /* Les copains en craie (petits portraits en pied) : (x, y) = les pieds ; s = l'échelle */
 function copainE(c,qui,x,y,s=1,lueur=0){ c.save(); c.translate(x,y); c.scale(s,s);
   if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.35*lueur})`; c.beginPath(); c.ellipse(0,-70,80,95,0,0,7); c.fill(); }
-  const P={lapin:['#f1f3f5','#ced4da'],chat:['#ffa94d','#d9480f'],souris:['#adb5bd','#495057'],canard:['#ffe066','#f59f00'],margo:['#69db7c','#2b8a3e']}[qui];
+  const P={lapin:['#f1f3f5','#ced4da'],chat:['#ffa94d','#d9480f'],souris:['#adb5bd','#495057'],canard:['#ffe066','#f59f00'],margo:['#69db7c','#2b8a3e'],ours:['#c08550','#8a5a2b'],cochon:['#ffc9c9','#e64980']}[qui];
   c.fillStyle=P[0]; c.strokeStyle=P[1]; c.lineWidth=4;
   c.beginPath(); c.ellipse(0,-45,38,45,0,0,7); c.fill(); c.stroke();                         /* le corps */
   if(qui==='lapin'){ for(const sx of [-1,1]){ c.beginPath(); c.ellipse(sx*16,-170,12,42,sx*.12,0,7); c.fill(); c.stroke(); c.fillStyle='#ffc9c9'; c.beginPath(); c.ellipse(sx*16,-168,5,28,sx*.12,0,7); c.fill(); c.fillStyle=P[0]; } }
   if(qui==='chat'){ for(const sx of [-1,1]){ c.beginPath(); c.moveTo(sx*12,-150); c.lineTo(sx*34,-160); c.lineTo(sx*30,-128); c.closePath(); c.fill(); c.stroke(); }
     c.beginPath(); c.moveTo(34,-30); c.quadraticCurveTo(80,-40,62,-100); c.stroke(); }
+  if(qui==='ours'){ for(const sx of [-1,1]){ c.beginPath(); c.arc(sx*27,-140,15,0,7); c.fill(); c.stroke(); } }
+  if(qui==='cochon'){ for(const sx of [-1,1]){ c.beginPath(); c.moveTo(sx*14,-142); c.lineTo(sx*32,-152); c.lineTo(sx*30,-124); c.closePath(); c.fill(); c.stroke(); } }
   if(qui==='souris'){ for(const sx of [-1,1]){ c.beginPath(); c.arc(sx*30,-142,22,0,7); c.fill(); c.stroke(); } c.beginPath(); c.moveTo(34,-12); c.quadraticCurveTo(80,0,70,-50); c.stroke(); }
   if(qui==='margo'){ c.beginPath(); c.moveTo(30,-20); c.quadraticCurveTo(90,-10,70,-60); c.quadraticCurveTo(55,-75,50,-55); c.stroke(); }
   c.beginPath(); c.arc(0,-112,34,0,7); c.fill(); c.stroke();                                   /* la tête */
+  if(qui==='cochon'){ c.fillStyle='#faa2c1'; c.beginPath(); c.ellipse(0,-100,15,10,0,0,7); c.fill(); c.stroke(); c.fillStyle='#c2255c'; for(const sx of [-1,1]){ c.beginPath(); c.arc(sx*5,-100,2.5,0,7); c.fill(); } }
   if(qui==='canard'){ c.fillStyle='#ff922b'; c.beginPath(); c.ellipse(34,-106,22,9,0,0,7); c.fill(); }
   if(qui==='margo'){ c.fillStyle='#f8f9fa'; for(const sx of [-1,1]){ c.beginPath(); c.arc(sx*15,-136,14,0,7); c.fill(); c.stroke(); } c.fillStyle='#212529'; for(const sx of [-1,1]){ c.beginPath(); c.arc(sx*15+3,-136,6,0,7); c.fill(); } }
   else { c.fillStyle='#212529'; for(const sx of [-1,1]){ c.beginPath(); c.arc(sx*12+6,-118,5,0,7); c.fill(); } }
-  if(qui==='chat'||qui==='souris'||qui==='lapin'){ c.fillStyle='#ff8787'; c.beginPath(); c.arc(8,-104,5,0,7); c.fill(); }
+  if(qui==='chat'||qui==='souris'||qui==='lapin'||qui==='ours'){ c.fillStyle='#ff8787'; c.beginPath(); c.arc(8,-104,5,0,7); c.fill(); }
   c.restore(); }
 
 /* Une phrase écrite à la main : chaque mot à l'instant donné (pour écrire « 5 » quand la voix dit « cinq ») */
@@ -135,3 +138,29 @@ function soleilEtoileE(c,x,y,r,T,u=1){ if(u<=0) return; c.save(); c.globalAlpha=
   c.strokeStyle='#ffd43b'; c.lineWidth=7; c.lineCap='round';
   for(let i=0;i<10;i++){ const a=i*Math.PI/5+T*.25; c.beginPath(); c.moveTo(x+Math.cos(a)*r*1.3,y+Math.sin(a)*r*1.3); c.lineTo(x+Math.cos(a)*r*1.7,y+Math.sin(a)*r*1.7); c.stroke(); }
   c.fillStyle='#fcc419'; c.beginPath(); c.arc(x,y,r,0,7); c.fill(); c.restore(); }
+
+/* ---- Paire 3 (construire une collection) : gâteau, bougies, chapeaux de fête, étoiles ---- */
+/* Un gâteau rose sur son plat : (x, yBas) = le milieu du plat, w = la largeur. Renvoie le haut du gâteau (où piquer les bougies). */
+function gateauCraie(c,x,yBas,w,z=1){ if(z<=0) return yBas-w*.4; w*=Math.min(1.12,z); const h=w*.38;
+  c.fillStyle='#f1f3f5'; c.beginPath(); c.ellipse(x,yBas,w*.62,w*.07,0,0,7); c.fill();
+  c.fillStyle='#faa2c1'; c.strokeStyle='#c2255c'; c.lineWidth=5; c.beginPath(); c.roundRect(x-w/2,yBas-h,w,h,18); c.fill(); c.stroke();
+  c.fillStyle='#fff5f5'; c.beginPath(); c.moveTo(x-w/2,yBas-h+16);
+  for(let i=0;i<=8;i++){ const u=x-w/2+i*w/8; c.quadraticCurveTo(u-w/16,yBas-h+(i%2?48:30),u,yBas-h+18); } c.lineTo(x+w/2,yBas-h); c.lineTo(x-w/2,yBas-h); c.closePath(); c.fill();
+  c.fillStyle='#e03131'; for(const u of [-.3,0,.3]){ c.beginPath(); c.arc(x+u*w,yBas-h-4,12,0,7); c.fill(); }
+  return yBas-h; }
+/* Une bougie rayée, plantée en (x, yBas) ; sa flamme danse avec T ; lueur ajoute un halo */
+function bougieCraie(c,x,yBas,T,z=1,lueur=0){ if(z<=0) return; const k=Math.min(1.2,z), h=95*k, w=24*k;
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.4*lueur})`; c.beginPath(); c.arc(x,yBas-h-26*k,46*k,0,7); c.fill(); }
+  c.fillStyle='#74c0fc'; c.fillRect(x-w/2,yBas-h,w,h); c.strokeStyle='#f8f9fa'; c.lineWidth=5;
+  for(let y=yBas-h+12;y<yBas;y+=24){ c.beginPath(); c.moveTo(x-w/2,y+8); c.lineTo(x+w/2,y-4); c.stroke(); }
+  const f=1+.12*Math.sin(T*11+x);
+  c.fillStyle='#ff922b'; c.beginPath(); c.ellipse(x,yBas-h-20*k,11*k*f,22*k*f,0,0,7); c.fill();
+  c.fillStyle='#ffe066'; c.beginPath(); c.ellipse(x,yBas-h-16*k,5*k,11*k,0,0,7); c.fill(); }
+/* Un chapeau pointu de fête : (x, yBas) = le milieu du bord */
+function chapeauFete(c,x,yBas,s=1,coul='#be4bdb'){ c.save(); c.translate(x,yBas); c.scale(s,s);
+  c.fillStyle=coul; c.strokeStyle='#f8f9fa'; c.lineWidth=4; c.beginPath(); c.moveTo(-34,0); c.lineTo(0,-92); c.lineTo(34,0); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle='#ffe066'; for(const [u,v] of [[-10,-22],[10,-48],[-4,-66]]){ c.beginPath(); c.arc(u,v,6,0,7); c.fill(); }
+  c.fillStyle='#ffd43b'; c.beginPath(); c.arc(0,-96,11,0,7); c.fill(); c.restore(); }
+/* Un ciel d'étoiles qui scintillent (toujours les mêmes) */
+function etoilesE(c,T,n=18,W=1056,yMax=260){ for(let k=0;k<n;k++){ const x=(k*173+60)%W, y=30+(k*89)%yMax, b=.5+.5*Math.sin(T*2.4+k*1.9);
+  etincelle(c,x,y,9+8*b,`rgba(255,236,153,${.45+.55*b})`); } }
