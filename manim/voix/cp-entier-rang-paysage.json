@@ -1,0 +1,11 @@
+{
+  "00-accroche": "Salut ! Au parc, le soleil brille, et le toboggan nous attend. On fait la queue, bien en file. Chacun son tour !",
+  "01-premier": "Celui qui est tout devant, c'est le premier. Ici, c'est le lapin, avec ses grandes oreilles.",
+  "02-compter": "Après lui, je compte : premier, deuxième, troisième. Moi, je suis le troisième !",
+  "03-question": "Question ! Qui est le deuxième ? A : la souris. B : le canard. C : le chat. Mets pause, et montre-le !",
+  "03b-reponse": "Réponse C ! Premier, le lapin. Deuxième, le chat.",
+  "04-question": "Question ! Wiii ! Le lapin a glissé. Maintenant, je suis à quelle place ? A : deuxième. B : troisième. C : quatrième. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A ! Le chat est premier. Moi, je suis deuxième. Bientôt mon tour !",
+  "05-appris": "Je pars de celui qui est devant : premier, deuxième, troisième.",
+  "06-abonne": "Entraîne-toi sur éleveai point f r. Et si ça t'a aidé : mets un pouce, laisse un commentaire, abonne-toi et active la cloche !"
+}

@@ -56,7 +56,12 @@ if (mode === 'controle') {
   const n = mode === 'mix' ? 0 : Math.round(FIN * IPS), debut = Date.now();
   for (let i = 0; i < n; i++) {
     await page.evaluate((T) => window.tiMargo.image(T), i / IPS);
-    const img = await page.screenshot({ type: 'jpeg', quality: 96 });
+    /* 25/11 : une capture peut rester bloquée (délai de 30 s dépassé) au milieu d'un long rendu : on la refait, 3 essais */
+    let img = null;
+    for (let essai = 1; !img; essai++) {
+      try { img = await page.screenshot({ type: 'jpeg', quality: 96, timeout: 60000 }); }
+      catch (e) { if (essai >= 3) throw e; console.log(`image ${i} : capture bloquée, essai ${essai + 1}`); await page.waitForTimeout(2000); await page.evaluate((T) => window.tiMargo.image(T), i / IPS); }
+    }
     if (!ff.stdin.write(img)) await new Promise((r) => ff.stdin.once('drain', r));
     if (i % 300 === 0) console.log(`${i}/${n} images, ${Math.round((Date.now() - debut) / 1000)} s`);
   }

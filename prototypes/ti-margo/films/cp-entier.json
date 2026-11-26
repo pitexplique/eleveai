@@ -1,0 +1,7 @@
+{
+  "voix": "cp-entier-{ep}-short",
+  "sons": "public/sons/cp-entier-{ep}-short",
+  "sortie": "manim/sorties/cp/maths/entier/{num}-{ep}",
+  "nom": "eleveai-maths-cp-entier-{ep}-short",
+  "episodes": { "denombre": "01", "rang": "02", "collection": "03" }
+}

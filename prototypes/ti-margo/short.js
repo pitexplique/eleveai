@@ -124,7 +124,8 @@ function preparerVideo(){
     if(gr){ legende.style.top=gr.top+'px'; legende.style.fontSize=(gr.fs||62)+'px'; mots(legende,gr.phrases,T); }
 
     /* Carte question, puis réponse */
-    const Q=film.question, q=T>=A[Q.qc]&&T<A[Q.rc], r=T>=A[Q.rc]&&T<Q.finR;
+    /* 25/11 : un film peut poser plusieurs questions (film.questions) ; sinon, la seule film.question, comme avant */
+    const QS=film.questions||[film.question], Q=QS.find(x=>T>=A[x.qc]&&T<x.finR)||QS[0], q=T>=A[Q.qc]&&T<A[Q.rc], r=T>=A[Q.rc]&&T<Q.finR;
     carte.style.display=(q||r)?'block':'none';
     const ids=['cA','cB','cC'], tq=T-A[Q.qc], tr=T-A[Q.rc];
     if(q){
