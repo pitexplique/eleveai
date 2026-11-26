@@ -1,5 +1,5 @@
 {
-  "00-accroche": "La grande diagonale d'un cube et une arête : 45 degrés ? Beaucoup de copies l'écrivent, et c'est faux.",
+  "00-accroche": "La grande diagonale d'un cube et une arête. Quel angle ? Beaucoup de copies se trompent, et pour une bonne raison.",
   "01-idee": "Le cosinus de l'angle, c'est le produit scalaire divisé par le produit des deux normes. Dans le cube d'arête 1, le vecteur A G a pour coordonnées 1, 1, 1 et le vecteur A B a pour coordonnées 1, zéro, zéro. Leur produit scalaire vaut 1. Les normes valent racine de 3 et 1. Le cosinus vaut donc 1 sur racine de 3, environ zéro virgule 577.",
   "02-question": "Question ! Que vaut alors l'angle entre la grande diagonale et l'arête, arrondi au degré ? A : 45 degrés. B : 60 degrés. C : 55 degrés. Mets pause, et choisis !",
   "02b-reponse": "Réponse C. L'arccosinus de zéro virgule 577 donne environ 54 virgule 7 degrés, donc 55 degrés arrondi au degré. 45 degrés correspondrait à un cosinus de zéro virgule 71, et 60 degrés à un cosinus de zéro virgule 5 : ni l'un ni l'autre n'est la valeur trouvée. Le dessin trompe, le calcul tranche.",

@@ -6,7 +6,8 @@
 # ⭐ UNE SEULE IDÉE : on atteint un projeté orthogonal en SUIVANT LA NORMALE — et le
 # résultat est une surprise géométrique.
 #
-#   · 00-accroche   : le plan (BDE) coupe la grande diagonale. En son milieu ? Non ;
+#   · 00-accroche   : le plan (BDE) coupe la grande diagonale — « pas là où on le croit ».
+#                     ⛔ Elle ne dit PLUS « en son milieu ? Non » : c'était la carte B ;
 #   · 01-idee       : le cube, B, D, E en ambre, la diagonale [A G], puis l'équation du
 #                     plan, sa normale, la droite, la substitution et t = 1/3 ;
 #   · 02/02b        : question-pause (A : au tiers), 3 s, puis le point K apparaît ;
@@ -217,7 +218,7 @@ def pieces(e):
     # offerts — il serait tombé à 27 px. Raccourci et remesuré, il tient à 30.
     titre, badge = e.entete_blocs("Type bac : projeté", fs=30)
 
-    # ── 00 : en son milieu ? Non. ───────────────────────────────────────────
+    # ── 00 : pas là où on le croit ─────────────────────────────────────────
     # ⛔⛔ « (BDE) » ET NON « B D E » : c'est un PLAN, et la notation tranche. Écrit avec
     # des espaces, « B D » entre dans la règle des noms de vecteur et
     # `mesure-shorts-ps-espace.py --fleches` le signale comme nu — à juste titre, puisque
@@ -237,12 +238,18 @@ def pieces(e):
     a1 = e.pose(VGroup(*e.lignes("Le plan (BDE) coupe", 26)[0],
                        *e.lignes("la grande diagonale.", 26)[0]
                        ).arrange(DOWN, buff=0.12), 1.85)
-    a2 = e.blocs_phrase("En son milieu ?", 0.55, 30, C_REGARD)
-    # ⛔ `larg=3,60` : la borne d'un bloc encadré que `insister` fait battre de 5 %.
-    a3 = e.blocs_phrase("Non.", -1.10, 44, C_PIEGE, larg=3.60)
+    # ⛔⛔ L'ACCROCHE NE NOMME PLUS LE MILIEU (26/11/2026). Elle disait « En son milieu ? /
+    # Non. », et la carte B de la question est « au milieu de [AG] » : l'élève pouvait
+    # l'écarter en se rappelant l'accroche MOT POUR MOT, sans rien calculer — le vrai choix
+    # était A contre C, un sur deux.
+    # ⭐ La règle : une carte ne doit pas être réfutable par la seule mémoire de l'accroche.
+    # La forme est gardée (une idée fausse, encadrée en rouge) — elle ne désigne plus rien.
+    # ⛔ `larg=3,60` : la borne d'un bloc encadré que `insister` fait battre de 5 %. ⚠️ 34 px
+    # et non 44 : la phrase est plus longue que « Non. » et tient ainsi sur deux lignes.
+    a3 = e.blocs_phrase("Pas là où on le croit.", -1.10, 34, C_PIEGE, larg=3.60)
     cadre3 = SurroundingRectangle(a3, color=C_PIEGE, buff=0.18, stroke_width=3)
     p["00-accroche"] = [("titre", titre), ("badge", badge), ("le plan coupe", a1),
-                        ("en son milieu", a2), ("non", VGroup(a3, cadre3))]
+                        ("non", VGroup(a3, cadre3))]
 
     # ── 01 : le cube, puis la chaîne de calcul ──────────────────────────────
     # ⛔ SEULS A, B, D, E ET G SONT NOMMÉS : ce sont les cinq sommets dont la question
@@ -289,15 +296,18 @@ def pieces(e):
     subst = e.eq_mots(["3t", "−", "1", "=", "0"], 24)
     e.sans_audit(subst[0])
     e.pose(subst, -1.24)
-    tfrac = VGroup(e.t("t =", 28, VERT_OK, larg=None), tiers(e, 28, VERT_OK)
-                   ).arrange(RIGHT, buff=0.16)
-    e.pose(tfrac, -2.08)
-    cadre_t = SurroundingRectangle(tfrac, color=VERT_OK, buff=0.14, stroke_width=3)
+    # ⛔⛔ PAS DE « t = 1/3 » ICI, ET C'EST LA CORRECTION DU 26/11/2026.
+    # Cet écran l'affichait encadré en vert, et la voix le disait — six secondes avant que
+    # la question ne demande où est le point, avec « au tiers de [AG] » comme choix A.
+    # La question ne demandait rien. ⭐ Le gabarit des onze autres shorts : l'idée montre la
+    # méthode, la question l'applique — ici l'idée s'arrête à « 3t − 1 = 0 », et la résolution
+    # appartient à 02b, qui la disait déjà en entier (« c'est exactement un tiers de AG »).
+    # ⚠️ La voix de 01 est COUPÉE, pas réenregistrée : le WAV s'arrête à 20,10 s, dans un
+    # silence mesuré (rms 0,0 à 20,04 s), et les marques au-delà sont retirées.
     p["01-idee"] = [("titre", titre), ("badge", badge), ("cube", cubeg),
                     ("+ [A G]", ag),
                     ("équation du plan", eqp), ("la normale", nvec),
-                    ("la droite", param), ("la substitution", subst),
-                    ("t", VGroup(tfrac, cadre_t))]
+                    ("la droite", param), ("la substitution", subst)]
 
     # ── 02 / 02b : la question-pause ────────────────────────────────────────
     # ⭐ LES TROIS CHOIX GARDENT LA MÊME FORME, et c'est ce qui compte plus encore que
@@ -323,7 +333,7 @@ def pieces(e):
     # ⚠️ Remettre la figure est impossible : la question (2 lignes) et les trois cartes
     # (2 lignes chacune) prennent déjà ~3,3 des 3,885 disponibles, et un cube fait 1,40.
     # ⭐ On change donc la QUESTION, pour qu'elle se tienne debout toute seule — et elle
-    # referme l'accroche, qui demandait « En son milieu ? Non. ». Mesuré : deux lignes,
+    # se tient seule — l'accroche, elle, ne nomme plus aucune carte. Mesuré : deux lignes,
     # 3,05 d'unité au lieu de 3,74, l'écran y gagne même de l'air.
     # ⛔ « [AG] » collé, comme les trois cartes : la coupe se fait aux espaces.
     q_lignes, _ = e.lignes("Où le plan (BDE) coupe-t-il [AG] ?", fsq)
@@ -365,8 +375,9 @@ def pieces(e):
     # ⚠️ LES TROIS TIERS SONT ÉCRITS EN LIGNE ET NON EN FRACTIONS BÂTIES, et c'est une
     # cote : trois `frac()` côte à côte font **0,83 de haut**, et il ne reste que 0,78
     # sous les cartes avant la boîte de Ti-Margo (mesuré : le bloc descendait à −3,01).
-    # La grande fraction encadrée, elle, a toute sa place à l'écran 01, où elle est la
-    # conclusion du calcul.
+    # ⚠️ Depuis le 26/11, l'écran 01 ne porte PLUS la grande fraction encadrée : elle y
+    # donnait la réponse avant la question. Ce bloc-ci est donc le seul endroit où le
+    # tiers s'écrit, et le trait vert sur le premier tiers de [AG] le montre en longueur.
     # ⛔ Tout le bloc est hors audit : « un tiers, un tiers, un tiers » est dit en
     # LETTRES, et « K » est une lettre.
     bloc_k = e.sans_audit(e.t("K (1/3 ; 1/3 ; 1/3)", 26, VERT_OK, larg=None))
@@ -409,8 +420,7 @@ class PsEspaceDefiShort(ShortEspace):
         a = p["00-accroche"]
         self.au_mot("le plan B D E coupe la grande diagonale")
         self.play(FadeIn(a["le plan coupe"], shift=UP * 0.08), run_time=0.4)
-        self.jouer_phrase(a["en son milieu"], "En son milieu ?")
-        self.au_mot("Non.")
+        self.au_mot("Mais pas là où on le croit")
         self.play(FadeIn(a["non"][0], scale=1.2), Create(a["non"][1]), run_time=0.45)
         self.insister(a["non"], 1.05)
         self.attendre_voix(marge=0.25)
@@ -418,7 +428,7 @@ class PsEspaceDefiShort(ShortEspace):
         # ── 01 : la chaîne de calcul ────────────────────────────────────────
         self.dire("01-idee")
         i = p["01-idee"]
-        self.play(FadeOut(VGroup(a["le plan coupe"], a["en son milieu"], a["non"])),
+        self.play(FadeOut(VGroup(a["le plan coupe"], a["non"])),
                   run_time=0.25)
         self.au_mot("Le plan B D E")
         self.play(FadeIn(i["cube"]), run_time=0.45)
@@ -434,9 +444,9 @@ class PsEspaceDefiShort(ShortEspace):
                   Create(i["+ [A G]"]), run_time=0.4)
         self.au_fin("trois t moins 1 égale zéro")
         self.play(FadeIn(i["la substitution"], shift=UP * 0.08), run_time=0.35)
-        self.au_fin("donc t vaut un tiers")
-        self.play(FadeIn(i["t"][0], shift=UP * 0.08), Create(i["t"][1]), run_time=0.4)
-        self.insister(i["t"], 1.05)
+        # ⭐ On insiste sur « 3t − 1 = 0 » : c'est la DERNIÈRE image avant la question, et
+        # c'est exactement ce qu'on laisse à l'élève — l'équation à résoudre, pas sa solution.
+        self.insister(i["la substitution"], 1.05)
         self.attendre_voix(marge=0.3)
 
         # ── 02 : la question-pause ──────────────────────────────────────────
@@ -448,10 +458,13 @@ class PsEspaceDefiShort(ShortEspace):
         qq = p["02-question"]
         self.play(FadeOut(VGroup(i["cube"], i["+ [A G]"],
                                  i["équation du plan"], i["la normale"], i["la droite"],
-                                 i["la substitution"], i["t"])), run_time=0.3)
+                                 i["la substitution"])), run_time=0.3)
         self.au_mot("Question")
         self.play(FadeIn(qq["tête"], shift=DOWN * 0.12), run_time=0.3)
-        self.au_mot("Ce point est donc situé où")
+        # ⚠️ La voix disait « CE point est donc situé où » — or le point, c'était t = 1/3,
+        # retiré de l'écran 01 le 26/11 : elle désignait ce que personne n'avait vu. Elle dit
+        # maintenant la même chose que l'écran, mot pour mot.
+        self.au_mot("Où le plan B D E coupe-t-il")
         self.play(FadeIn(qq["question"], shift=UP * 0.08), run_time=0.35)
         self.q_montrer_choix(qq["cartes"])
         self.q_pause(qq["pause"], qq["rebours"], "02-question", t0, BONNE)

@@ -2870,3 +2870,79 @@ PYTHONIOENCODING=utf-8 python -X utf8 -m manim render -qh --disable_caching \
 Puis, à chaque épisode et **pas à la fin de la série** :
 `node scripts/brancher-videos-coach.mjs --classe terminale-spe --tout`
 (⚠️ `--classe terminale` sans `-spe` ne mesure rien et dit « notion inconnue »).
+
+
+## ⛔⛔ 26/11/2026 — UNE VOIX COUPÉE NE SE TRANSPORTE PAS AVEC LE SCRIPT
+
+`ps_espace_defi_short` (E12) donnait sa réponse avant de poser sa question : l'écran 01-idee
+affichait **t = ⅓ encadré en vert** et la voix le disait, **six secondes** avant que la question
+ne demande où le plan coupe [AG] — avec « au tiers de [AG] » comme choix A. L'accroche avait en
+plus déjà éliminé « au milieu ».
+
+⭐ **Le remède n'a réenregistré aucune voix**, parce que `02b-reponse` disait déjà tout
+(« Réponse A […] c'est exactement un tiers du vecteur A G »). La voix de 01-idee est **coupée** :
+
+| quoi | où | valeur |
+|---|---|---|
+| coupe du WAV | `public/sons/terminale-ps-espace-defi-short/01-idee.wav` | **20,10 s** (27,52 → 20,16) |
+| silence visé | mesuré au rms par tranches de 20 ms | **rms 0,0 à 20,04 s**, parole à 4 327 |
+| marques | `ps_espace_defi_short_marques.json`, clé `01-idee` | 73 → **55** (index < 272) |
+| texte | `manim/voix/terminale-ps-espace-defi-short.json` | s'arrête à « …trois t moins 1 égale zéro. » |
+| écran | le bloc `tfrac`/`cadre_t` retiré, `insister` reporté sur « 3t − 1 = 0 » | 91,80 s → **84,67 s** |
+
+⛔⛔ **ET VOICI LE PIÈGE : `/public/sons/` EST DANS `.gitignore`.** Le script corrigé, ses marques
+et son texte sont versionnés — **le WAV coupé ne l'est pas**. Un poste qui prend ce script avec
+l'ancien `01-idee.wav` aura **7 s de son en trop** et tout l'écran décalé, *sans aucune alerte* :
+`attendre_voix` suivra simplement un son plus long. L'original est gardé dans
+`manim/poste2/.avant-correction-e12/`, et la coupe se refait en une ligne :
+
+```
+ffmpeg -v error -y -i manim/poste2/.avant-correction-e12/01-idee.wav.origine -t 20.10 -c copy \
+  public/sons/terminale-ps-espace-defi-short/01-idee.wav
+```
+
+⭐ **Et la règle générale qu'il faut en tirer, pour les prochains shorts :** l'écran idée doit
+traiter **un autre cas que la question**. Les onze autres shorts le font. Quand l'idée traite LE
+cas de la question, le short n'interroge plus — et **aucun instrument ne le voit** : le dry run
+regarde les bords, l'audit les nombres dits, la devinabilité la longueur des choix (ici les trois
+choix sont irréprochables). Ça se lit dans l'en-tête du script, en deux minutes par épisode.
+
+
+### ✅ Le même soir, 19h52 — la coupe à la main a disparu, et c'est mieux
+
+⛔ **Le tableau ci-dessus est périmé sur un point : il n'y a plus de WAV coupé à conserver.**
+En réécrivant les accroches de E10 et E12, la voix de E12 a été **régénérée depuis son texte**
+(20,70 s, 55 marques) — le texte tronqué étant déjà dans `manim/voix/`, qui est versionné. Donc :
+
+- ⭐ **la voix redevient reproductible** : plus besoin de l'original ni de la commande `ffmpeg`.
+  N'importe quel poste refait le WAV juste en relançant la synthèse ;
+- le piège de fond reste vrai — `/public/sons/` n'est pas versionné — mais il n'est plus
+  **irréparable** : ce qui est versionné (le texte) suffit à reconstruire ce qui ne l'est pas.
+
+⛔⛔ **Mais un autre piège prend sa place : `voix-ps-espace-shorts-wav.sh --refaire` refait LES
+SIX shorts.** Un WAV refait, même à texte identique, est un fichier neuf : il périme le HD de son
+short, et rien ne le signale. ⭐ Pour ne reprendre que ce qu'on a changé :
+`bash manim/poste2/voix-ps-refaire-deux.sh` (⚠️ `-Debit -6` aux DEUX étapes, sinon les marques
+datent une autre voix que le WAV et tous les `au_mot` glissent, sans un mot).
+
+**Et le contrôle qui ferme tout ça :** `bash manim/poste2/fraicheur-hd.sh` compare la date de
+chaque MP4 de sortie à celle du dernier commit de son script (ou à la date du fichier s'il est
+modifié sans être commité). Les douze shorts y passent en une seconde.
+
+
+### ⭐⭐ La règle d'écriture que ces deux accroches ont sortie
+
+> **Une carte ne doit pas être réfutable en se rappelant l'accroche mot pour mot.**
+
+C'est la formulation juste, plus serrée que « l'idée traite un autre cas que la question ».
+Deux shorts la cassaient, de la même façon :
+
+| short | accroche | carte tuée | ce qu'il restait |
+|---|---|---|---|
+| E12 `ps_espace_defi` | « En son milieu ? **Non.** » | B « au milieu de [AG] » | A contre C |
+| E10 `ps_espace_angle` | « 45 degrés ? … **c'est faux** » | A « 45 degrés » | B contre C |
+
+⭐ **L'erreur classique garde toute sa place — mais DANS les cartes**, là où elle fait travailler,
+et dans le 02b qui l'explique. Pas dans l'accroche, qui doit donner envie sans donner d'indice.
+Les accroches disent maintenant « Pas là où on le croit. » et « Beaucoup de copies **se
+trompent** » : la forme (une idée fausse, encadrée en rouge) est gardée, elle ne désigne plus rien.

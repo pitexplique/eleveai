@@ -19311,5 +19311,113 @@
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=fonction_exponentielle&microId=exp_defi&display=simple"
+ },
+ "terminale-espace-vecteurs-short": {
+  "fichier": "terminale/maths/geometrie/espace-vecteurs/eleveai-maths-terminale-espace-vecteurs-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/geometrie/espace-vecteurs/eleveai-maths-terminale-espace-vecteurs-short.vignette.webp",
+  "titre": "Trois nombres au lieu de deux — Vecteurs dans l'espace · Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_vecteurs&display=simple"
+ },
+ "terminale-espace-repere-coordonnees-short": {
+  "fichier": "terminale/maths/geometrie/espace-repere-coordonnees/eleveai-maths-terminale-espace-repere-coordonnees-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/geometrie/espace-repere-coordonnees/eleveai-maths-terminale-espace-repere-coordonnees-short.vignette.webp",
+  "titre": "Le cube où tout vaut 0 ou 1 — Coordonnées dans l'espace · Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_repere_coordonnees&display=simple"
+ },
+ "terminale-espace-droite-parametrique-short": {
+  "fichier": "terminale/maths/geometrie/espace-droite-parametrique/eleveai-maths-terminale-espace-droite-parametrique-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/geometrie/espace-droite-parametrique/eleveai-maths-terminale-espace-droite-parametrique-short.vignette.webp",
+  "titre": "Un point, une direction, un curseur — Représentation paramétrique · Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_droite_parametrique&display=simple"
+ },
+ "terminale-espace-plan-equation-short": {
+  "fichier": "terminale/maths/geometrie/espace-plan-equation/eleveai-maths-terminale-espace-plan-equation-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/geometrie/espace-plan-equation/eleveai-maths-terminale-espace-plan-equation-short.vignette.webp",
+  "titre": "Une seule ligne décrit un plan entier — Équation cartésienne · Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_plan_equation&display=simple"
+ },
+ "terminale-espace-position-relative-short": {
+  "fichier": "terminale/maths/geometrie/espace-position-relative/eleveai-maths-terminale-espace-position-relative-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/geometrie/espace-position-relative/eleveai-maths-terminale-espace-position-relative-short.vignette.webp",
+  "titre": "Elles se croisent sur le dessin, jamais dans l'espace — Positions relatives · Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_position_relative&display=simple"
+ },
+ "terminale-espace-defi-short": {
+  "fichier": "terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi-short.vignette.webp",
+  "titre": "Deux droites qui se croisent sur le dessin — Exercice type bac · Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_defi&display=simple"
+ },
+ "terminale-ps-espace-norme-distance-short": {
+  "fichier": "terminale/maths/geometrie/ps-espace-norme-distance/eleveai-maths-terminale-ps-espace-norme-distance-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/geometrie/ps-espace-norme-distance/eleveai-maths-terminale-ps-espace-norme-distance-short.vignette.webp",
+  "titre": "10 km à plat et 1 de dénivelé — Norme et distance dans l'espace · Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_norme_distance&display=simple"
+ },
+ "terminale-ps-espace-orthogonalite-short": {
+  "fichier": "terminale/maths/geometrie/ps-espace-orthogonalite/eleveai-maths-terminale-ps-espace-orthogonalite-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/geometrie/ps-espace-orthogonalite/eleveai-maths-terminale-ps-espace-orthogonalite-short.vignette.webp",
+  "titre": "Un produit scalaire nul, et un poteau penché — Orthogonalité dans l'espace · Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_orthogonalite&display=simple"
+ },
+ "terminale-ps-espace-plan-normal-short": {
+  "fichier": "terminale/maths/geometrie/ps-espace-plan-normal/eleveai-maths-terminale-ps-espace-plan-normal-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/geometrie/ps-espace-plan-normal/eleveai-maths-terminale-ps-espace-plan-normal-short.vignette.webp",
+  "titre": "La perpendiculaire est déjà écrite dans l'équation — Vecteur normal · Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_plan_normal&display=simple"
+ },
+ "terminale-ps-espace-angle-short": {
+  "fichier": "terminale/maths/geometrie/ps-espace-angle/eleveai-maths-terminale-ps-espace-angle-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/geometrie/ps-espace-angle/eleveai-maths-terminale-ps-espace-angle-short.vignette.webp",
+  "titre": "La grande diagonale d'un cube et une arête — Calculer un angle dans l'espace · Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_angle&display=simple"
+ },
+ "terminale-ps-espace-calculer-short": {
+  "fichier": "terminale/maths/geometrie/ps-espace-calculer/eleveai-maths-terminale-ps-espace-calculer-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/geometrie/ps-espace-calculer/eleveai-maths-terminale-ps-espace-calculer-short.vignette.webp",
+  "titre": "Trois multiplications, une addition — Le produit scalaire dans l'espace · Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_calculer&display=simple"
+ },
+ "terminale-ps-espace-defi-short": {
+  "fichier": "terminale/maths/geometrie/ps-espace-defi/eleveai-maths-terminale-ps-espace-defi-short.mp4",
+  "poster": null,
+  "vignette": "terminale/maths/geometrie/ps-espace-defi/eleveai-maths-terminale-ps-espace-defi-short.vignette.webp",
+  "titre": "Où le plan (BDE) coupe-t-il la grande diagonale ? — Exercice type bac · Tle spé #Shorts",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_defi&display=simple"
  }
 }
