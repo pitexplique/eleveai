@@ -247,7 +247,11 @@ class ExpDeriverTerminale(ExpBase):
         self.au_mot("À la fin de l'effort")
         self.play(FadeIn(mon[0]), Create(mon[1]), run_time=0.6)
         val = self.t("160", 60, VERT_OK).move_to(P(4.45, 2.3))
-        unite = self.t("battements / min", 20, VERT_OK).next_to(val, DOWN, buff=0.1)
+        unite = VGroup(self.t("battements", 20, VERT_OK), self.t("par minute", 20, VERT_OK)).arrange(DOWN, buff=0.04)
+        unite.next_to(val, DOWN, buff=0.08)
+        val.shift(UP * 0.12)
+        unite.shift(UP * 0.12)
+        assert unite.get_right()[0] < mon[0].get_right()[0] - 0.15 and unite.get_bottom()[1] > mon[0].get_bottom()[1] + 0.05
         self.au_mot("160 battements")
         self.play(FadeIn(val, scale=1.3), FadeIn(unite), run_time=0.4)
         self.play(Indicate(cr, color=ROUGE_ERREUR, scale_factor=1.4), run_time=0.4)
