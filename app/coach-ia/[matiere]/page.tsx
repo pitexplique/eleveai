@@ -450,6 +450,16 @@ export default function CoachIA() {
   const classeDejaConnue = Boolean(searchParams.get("classe") || classeEleve);
   const listeClassesOuverte = classesOuvertes ?? !classeDejaConnue;
 
+  /* ⭐ 26/11/2026 — Frédéric : « s'il est envoyé directement par la page
+     d'accueil, la barre latérale coach doit disparaître comme sur le
+     téléphone ». L'accueil pose `?from=accueil` sur ses liens de classe
+     (convention déjà mesurée dans `pages_vues`). Sur ordinateur, la colonne
+     des quinze classes est alors cachée et la ligne « Ta classe : 4e ·
+     Changer » du téléphone s'affiche aussi : « Changer » rouvre la colonne.
+     ⛔ Les autres entrées (menu, prof, liens directs) gardent la colonne. */
+  const depuisAccueil = searchParams.get("from") === "accueil" && classeDejaConnue;
+  const barreCachee = depuisAccueil && !listeClassesOuverte;
+
   const notionOptions = getNotionOptions(classe, matiere);
   const notionMicroMap = getNotionMicroMap(classe, matiere);
   const microLabels = getMicroLabelMap(classe, matiere);
@@ -690,7 +700,10 @@ export default function CoachIA() {
             force un ascenseur permanent, `scrollbar-width:thin` le garde
             discret : on VOIT qu'il reste des classes plus bas. */}
         <aside
-          className="sticky hidden w-28 shrink-0 overflow-y-auto overscroll-contain border-r border-slate-200 bg-white [scrollbar-color:theme(colors.slate.300)_transparent] [scrollbar-width:thin] md:flex md:flex-col md:items-center md:gap-2 md:py-4"
+          className={[
+            "sticky hidden w-28 shrink-0 overflow-y-auto overscroll-contain border-r border-slate-200 bg-white [scrollbar-color:theme(colors.slate.300)_transparent] [scrollbar-width:thin]",
+            barreCachee ? "" : "md:flex md:flex-col md:items-center md:gap-2 md:py-4",
+          ].join(" ")}
           style={{
             top: hauteurHeader,
             height: `calc(100dvh - ${hauteurHeader}px)`,
@@ -917,7 +930,7 @@ export default function CoachIA() {
                 une ligne « Ta classe : 4e · Changer » ; elle reste ouverte
                 pour qui n'a encore rien choisi. */}
             {!listeClassesOuverte ? (
-              <div className="mt-5 flex items-center gap-2 md:hidden">
+              <div className={`mt-5 flex items-center gap-2 ${barreCachee ? "" : "md:hidden"}`}>
                 <span className="text-sm font-bold text-slate-600">Ta classe :</span>
                 <span
                   className={[

@@ -212,13 +212,13 @@ export function ChoisisTaClasse() {
               <span className={`flex h-11 min-w-11 items-center justify-center rounded-full px-2 text-sm font-black ${t.pastille}`}>
                 {PASTILLE[c.slug] ?? c.label}
               </span>
-              <Link href={`/coach-ia/maths?classe=${c.slug}`} className={`text-2xl font-black hover:underline ${t.titre}`}>
+              <Link href={`/coach-ia/maths?classe=${c.slug}&from=accueil`} className={`text-2xl font-black hover:underline ${t.titre}`}>
                 {c.label}
               </Link>
             </div>
             <p className="mt-3 min-h-[3rem] text-slate-700">{c.apercu.join(", ")}, et plus.</p>
             <div className="mt-3 grid grid-cols-[auto_auto] justify-between gap-x-3 gap-y-1 whitespace-nowrap border-t border-slate-200 pt-3 text-sm font-bold">
-              <Link href={`/coach-ia/maths?classe=${c.slug}`} className="text-sky-700 hover:underline">
+              <Link href={`/coach-ia/maths?classe=${c.slug}&from=accueil`} className="text-sky-700 hover:underline">
                 S&apos;entraîner ›
               </Link>
               {c.videos > 0 && (

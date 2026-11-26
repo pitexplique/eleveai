@@ -93,7 +93,8 @@ const CLASSES_COACH: { slug: string; label: string }[] = [
   { slug: "premiere-spe", label: "1re" },
   { slug: "terminale-spe", label: "Tle" },
 ];
-const lienCoachClasse = (classe: string) => `/coach-ia/maths?classe=${encodeURIComponent(classe)}`;
+// `from=accueil` : le coach cache alors sa colonne de classes sur ordinateur (26/11).
+const lienCoachClasse = (classe: string) => `/coach-ia/maths?classe=${encodeURIComponent(classe)}&from=accueil`;
 
 /** Ce qu'un compte ajoute (ce qui existe au 24/11 : Cockpit, récompenses, message du prof, reprise). */
 const AVEC_UN_COMPTE: Choix[] = [
@@ -244,7 +245,7 @@ export default function NuageAccueil() {
     ];
   }
   const places = choix.slice(0, PLACES.length);
-  const lienCoachEleve = classe ? `/coach-ia/maths?classe=${encodeURIComponent(classe)}` : "/coach-ia/maths";
+  const lienCoachEleve = classe ? lienCoachClasse(classe) : "/coach-ia/maths";
 
   const bulleCentre =
     // 25/11 (Frédéric) : « Je te suis et je t'accompagne » trop long →
