@@ -66,3 +66,59 @@ function sapinE(c,x,yBas,s=1){ c.fillStyle='#8a5a2b'; c.fillRect(x-12*s,yBas-40*
     c.fillStyle='#f8f9fa'; c.beginPath(); c.moveTo(x-w*.5*s,yBas+(v-48)*s); c.lineTo(x,yBas+(v-95)*s); c.lineTo(x+w*.5*s,yBas+(v-48)*s); c.closePath(); c.fill(); } }
 /* Un trait en pointillé qui se trace de a vers b (u de 0 à 1) */
 function lienE(c,a,b,u,coul=CRAIE.ok){ if(u<=0) return; u=Math.min(1,u); c.strokeStyle=coul; c.lineWidth=5; c.setLineDash([10,8]); c.beginPath(); c.moveTo(...a); c.lineTo(a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u); c.stroke(); c.setLineDash([]); }
+
+/* ---- Paire 5 (dizaines et unités) ---- */
+const COUL_TULIPE=['#e03131','#f783ac','#ffd43b','#be4bdb','#ff922b'];
+/* Une tulipe : (x, yBas) = le pied de la tige ; (hx, hy) = la fleur (par défaut juste au-dessus) */
+function tulipeE(c,x,yBas,hx,hy,coul,z=1,lueur=0){ if(z<=0) return; const r=22*Math.min(1.2,z);
+  c.strokeStyle='#2f9e44'; c.lineWidth=5; c.beginPath(); c.moveTo(x,yBas); c.quadraticCurveTo((x+hx)/2,(yBas+hy)/2+10,hx,hy+r*.6); c.stroke();
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.4*lueur})`; c.beginPath(); c.arc(hx,hy,r*1.7,0,7); c.fill(); }
+  c.fillStyle=coul; c.strokeStyle='rgba(0,0,0,.35)'; c.lineWidth=2.5; c.beginPath();
+  c.moveTo(hx-r,hy-r*.5); c.lineTo(hx-r*.5,hy-r*.05); c.lineTo(hx,hy-r*.7); c.lineTo(hx+r*.5,hy-r*.05); c.lineTo(hx+r,hy-r*.5);
+  c.quadraticCurveTo(hx+r,hy+r*.75,hx,hy+r*.75); c.quadraticCurveTo(hx-r,hy+r*.75,hx-r,hy-r*.5); c.closePath(); c.fill(); c.stroke(); }
+/* Les places des 10 fleurs d'un bouquet, par rapport au nœud du ruban */
+const FLEURS_B=[[-62,-150],[-22,-168],[22,-168],[62,-150],[-44,-112],[0,-128],[44,-112],[-84,-110],[84,-110],[0,-200]];
+/* Un bouquet de n tulipes (n ≤ 10) : (x, yBas) = le bas des tiges ; ruban (0 → 1) noue le ruban ; s = l'échelle */
+function bouquetE(c,x,yBas,n,ruban=0,s=1,lueur=0,decal=0){ c.save(); c.translate(x,yBas); c.scale(s,s);
+  for(let i=0;i<n;i++){ const [u,v]=FLEURS_B[i]; tulipeE(c,0,0,u,-90+v,COUL_TULIPE[(i+decal)%5],1,lueur); }
+  if(ruban>0){ c.globalAlpha=Math.min(1,ruban); c.fillStyle='#ff922b'; c.fillRect(-16,-62,32,18);
+    for(const sx of [-1,1]){ c.beginPath(); c.moveTo(0,-53); c.quadraticCurveTo(sx*40,-85,sx*34,-45); c.closePath(); c.fill(); } c.globalAlpha=1; }
+  c.restore(); }
+/* Un seau de fleuriste : (x, yBas) = le milieu du fond ; w = la largeur du haut */
+function seauE(c,x,yBas,w){ c.fillStyle='#868e96'; c.strokeStyle='#495057'; c.lineWidth=5; c.beginPath();
+  c.moveTo(x-w/2,yBas-w*.7); c.lineTo(x+w/2,yBas-w*.7); c.lineTo(x+w*.36,yBas); c.lineTo(x-w*.36,yBas); c.closePath(); c.fill(); c.stroke();
+  c.strokeStyle='#ced4da'; c.lineWidth=4; for(const v of [.25,.5]){ c.beginPath(); c.moveTo(x-w*(.5-.14*v),yBas-w*.7*(1-v)); c.lineTo(x+w*(.5-.14*v),yBas-w*.7*(1-v)); c.stroke(); } }
+/* Le store rayé d'un stand de marché, en haut de l'ardoise */
+function storeE(c,W=1056){ for(let k=0;k*88<W;k++){ c.fillStyle=k%2?'#f8f9fa':'#e03131'; c.beginPath(); c.moveTo(k*88,0); c.lineTo(k*88+88,0); c.lineTo(k*88+88,70); c.quadraticCurveTo(k*88+44,100,k*88,70); c.closePath(); c.fill(); } }
+/* Un crayon de couleur debout : (x, yBas) = le bas ; h = la hauteur */
+function crayonE(c,x,yBas,h,coul,w=16,z=1,lueur=0){ if(z<=0) return; h*=Math.min(1.15,z);
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.35*lueur})`; c.beginPath(); c.ellipse(x,yBas-h/2,w*1.6,h*.6,0,0,7); c.fill(); }
+  c.fillStyle=coul; c.fillRect(x-w/2,yBas-h+w*1.4,w,h-w*1.4);
+  c.fillStyle='#ffe8cc'; c.beginPath(); c.moveTo(x-w/2,yBas-h+w*1.4); c.lineTo(x,yBas-h); c.lineTo(x+w/2,yBas-h+w*1.4); c.closePath(); c.fill();
+  c.fillStyle=coul; c.beginPath(); c.moveTo(x-w*.18,yBas-h+w*.5); c.lineTo(x,yBas-h); c.lineTo(x+w*.18,yBas-h+w*.5); c.closePath(); c.fill(); }
+const COUL_CRAYON=['#e03131','#1c7ed6','#2f9e44','#fcc419','#be4bdb','#ff922b','#f783ac','#15aabf','#8a5a2b','#495057'];
+/* Un paquet de 10 crayons serrés par un élastique : (x, yBas) = le milieu du bas */
+function paquetCrayonsE(c,x,yBas,h,z=1,lueur=0){ if(z<=0) return;
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.35*lueur})`; c.beginPath(); c.ellipse(x,yBas-h/2,85,h*.62,0,0,7); c.fill(); }
+  for(let i=0;i<10;i++) crayonE(c,x-45+i*10,yBas,h*(i%2?1:.96),COUL_CRAYON[i],14,z);
+  c.fillStyle='#c92a2a'; c.fillRect(x-56,yBas-h*.42,112,14); }
+/* Une bille de verre qui brille */
+function billeE(c,x,y,r,coul,z=1){ if(z<=0) return; r*=Math.min(1.2,z);
+  c.fillStyle=coul; c.beginPath(); c.arc(x,y,r,0,7); c.fill(); c.strokeStyle='rgba(0,0,0,.3)'; c.lineWidth=2; c.stroke();
+  c.fillStyle='rgba(255,255,255,.7)'; c.beginPath(); c.arc(x-r*.35,y-r*.35,r*.3,0,7); c.fill(); }
+const COUL_BILLE=['#4dabf7','#ff6b6b','#51cf66','#fcc419','#cc5de8'];
+/* Un paquet de 10 billes : un tube de verre debout, (x, yBas) = le milieu du bas, r = le rayon d'une bille */
+function tubeDixE(c,x,yBas,r,z=1,lueur=0){ if(z<=0) return; const h=r*20+10;
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.35*lueur})`; c.beginPath(); c.roundRect(x-r*2,yBas-h-r,r*4,h+r*2,r*2); c.fill(); }
+  for(let i=0;i<10;i++) billeE(c,x,yBas-5-r-i*2*r,r*.92,COUL_BILLE[i%5],z);
+  c.strokeStyle='#d0ebff'; c.lineWidth=4; c.beginPath(); c.roundRect(x-r*1.15,yBas-h,r*2.3,h,r); c.stroke(); }
+/* Un sac de billes en tissu, fermé par un lacet : (x, yBas) = le milieu du bas, w = la largeur */
+function sacE(c,x,yBas,w,coul='#c08550',z=1){ if(z<=0) return; w*=Math.min(1.15,z); const h=w*1.05;
+  c.fillStyle=coul; c.strokeStyle='#6b3a10'; c.lineWidth=5; c.beginPath();
+  c.moveTo(x-w*.22,yBas-h*.82); c.quadraticCurveTo(x-w*.62,yBas-h*.4,x-w*.48,yBas-h*.05); c.quadraticCurveTo(x,yBas+h*.06,x+w*.48,yBas-h*.05);
+  c.quadraticCurveTo(x+w*.62,yBas-h*.4,x+w*.22,yBas-h*.82); c.closePath(); c.fill(); c.stroke();
+  c.beginPath(); c.moveTo(x-w*.22,yBas-h*.82); c.lineTo(x-w*.3,yBas-h); c.lineTo(x+w*.3,yBas-h); c.lineTo(x+w*.22,yBas-h*.82); c.closePath(); c.fill(); c.stroke();
+  c.strokeStyle='#fcc419'; c.lineWidth=6; c.beginPath(); c.moveTo(x-w*.24,yBas-h*.84); c.lineTo(x+w*.24,yBas-h*.84); c.stroke(); }
+/* Un nombre à deux chiffres, chaque chiffre de sa couleur (dizaines orange, unités bleu) ; renvoie le centre de chaque chiffre */
+function nombreDUE(c,s,x,y,taille,cols=[CRAIE.r1,CRAIE.r0],zs=[1,1]){ c.font=`800 ${taille}px "Segoe UI"`; const w=c.measureText(s[0]).width, w2=c.measureText(s[1]).width, x0=x-(w+w2)/2;
+  const cx=[x0+w/2,x0+w+w2/2]; [0,1].forEach(i=>ecrire(c,s[i],cx[i],y,taille*zs[i],cols[i])); return cx; }
