@@ -32,7 +32,8 @@ import { ficheExercicesHrefPourCoach } from "@/lib/fiches-exercices/registre";
 import { estShortVideo } from "@/lib/videos/lienVideo";
 import LienVideoModal from "@/components/LienVideoModal";
 import { ficheClasseSource, ficheHrefPourCoach, libelleClasse } from "@/lib/fiches/registre";
-import { useNotionsPliees } from "@/components/coach/useNotionsPliees";import { track } from "@vercel/analytics";
+import { useNotionsPliees } from "@/components/coach/useNotionsPliees";
+import VisiteGuidee, { BoutonVisiteGuidee } from "@/components/coach/VisiteGuidee";import { track } from "@vercel/analytics";
 
 /* ⭐ 13/09/2026 — LA COLONNE SE LIT DE LA TERMINALE AU CP (Frédéric : « plutôt
    que de démarrer sur CP et aller vers adulte, je préfère inversé »).
@@ -783,7 +784,7 @@ export default function CoachIA() {
                     ce fichier (`chez toi&nbsp;!` avant lui) : sans elle le
                     point d'exclamation part seul à la ligne suivante dès que la
                     colonne se resserre. */}
-                <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
+                <p data-visite="score" className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
                   Séries d&apos;exercices avec correction et score&nbsp;!
                 </p>
 
@@ -815,6 +816,8 @@ export default function CoachIA() {
                 >
                   {tousDeplies ? "Tout replier" : "Tout déplier"}
                 </button>
+                {/* 26/11/2026 : relance la visite guidée de Ti Margo (components/coach/VisiteGuidee.tsx). */}
+                <BoutonVisiteGuidee />
                 {/* ⭐ 22/10/2026 — LE PROGRAMME D'UN AUTRE PAYS (version
                     d'étude). Frédéric : adapter le site aux pays francophones
                     plutôt que le traduire ; « le sélecteur doit venir du
@@ -1130,7 +1133,7 @@ export default function CoachIA() {
                           {/* Le bouton vit DANS le h3 (motif accordéon), et
                               les liens Fiche / Vidéo restent ses voisins : un
                               lien dans un bouton n'est pas du HTML. */}
-                          <h3 className="min-w-0 flex-1 text-base font-bold text-slate-800">
+                          <h3 data-visite="notion" className="min-w-0 flex-1 text-base font-bold text-slate-800">
                             {forceeParLaRecherche ? (
                               <span className="inline-flex items-center gap-1.5 py-1">
                                 <TexteMath>{libelleNotionMath(notionId)}</TexteMath>
@@ -1200,6 +1203,7 @@ export default function CoachIA() {
                             onClick={() =>
                               handleClick(notionId, (microsCochees[notionId] ?? [])[0] ?? micros[0])
                             }
+                            data-visite="go"
                             aria-busy={enRoute && cible?.startsWith(`${notionId}|`) ? true : undefined}
                             aria-label={`Commencer : ${libelleNotion(notionId)}`}
                             title={
@@ -1389,6 +1393,7 @@ export default function CoachIA() {
           ⛔ 26/11/2026 — et la calculatrice non plus : « calculatrice qui n'a
           rien à faire » (Frédéric). Elle flottait par-dessus la liste des
           notions ; elle reste dans les exercices (tutor), où elle sert. */}
+      <VisiteGuidee />
     </main>
   );
 }
