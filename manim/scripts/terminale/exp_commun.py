@@ -300,6 +300,9 @@ class ExpBase(AuditSynchro, MotsCales, Notion6e):
         if rebours.get_right()[0] > BORD_X:
             rebours.shift(LEFT * (rebours.get_right()[0] - BORD_X))
         q = VGroup(*[x if isinstance(x, Mobject) else self.t(x, 32) for x in question])
+        for x in q:   # chaque ligne à sa taille : une ligne longue ne rétrécit pas les autres
+            if x.width > BORD_X - XL:
+                x.scale_to_fit_width(BORD_X - XL)
         q.arrange(DOWN, aligned_edge=LEFT, buff=0.14)
         self.col(q, 0)
         q.align_to(P(0, tete.get_bottom()[1] - 0.25), UP)
@@ -409,10 +412,13 @@ class ExpBase(AuditSynchro, MotsCales, Notion6e):
         rangs = []
         for ext, m in lignes:
             if isinstance(m, list):   # une ligne en morceaux : [(extrait, mobjet), …]
-                mob = VGroup(*[x for _, x in m]).arrange(RIGHT, buff=0.3, aligned_edge=DOWN)
+                mob = VGroup(*[x for _, x in m]).arrange(RIGHT, buff=0.9, aligned_edge=DOWN)
                 mob._etapes = [e for e, _ in m]
             else:
                 mob = m if isinstance(m, Mobject) else self.t(m, fs)
+            if getattr(mob, "_fixe", False):   # un dessin déjà placé : on ne le range pas
+                rangs.append((ext, mob))
+                continue
             if mob.width > BORD_X - x:
                 mob.scale_to_fit_width(BORD_X - x)
             mob.move_to(P(0, y - mob.height / 2)).align_to(P(x, 0), LEFT)

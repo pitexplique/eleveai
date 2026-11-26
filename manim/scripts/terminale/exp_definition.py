@@ -68,7 +68,7 @@ class ExpDefinitionTerminale(ExpBase):
         self.ecran_theoreme()
         self.ecran_question(
             "04",
-            [self.t("Combien de solutions pour", 32), self.F("e^{x} = 0  ?", 38)],
+            [self.t("Combien de solutions", 34), VGroup(self.t("pour", 34), self.F("e^{x} = 0  ?", 40)).arrange(RIGHT, buff=0.2)],
             [[("une,", "une :"), ("0. B", self.F("x = 0", 32))], "aucune",
              [("une,", "une :"), ("1. Mets", self.F("x = 1", 32))]],
             1, ["Combien", "0 a-t-elle"],
@@ -82,22 +82,24 @@ class ExpDefinitionTerminale(ExpBase):
         self.ecran_piege()
         self.ecran_question(
             "07",
-            [self.t("La fonction est strictement croissante.", 30),
+            [self.t("La fonction est", 32), self.t("strictement croissante.", 32, BLEU_CALCUL),
              VGroup(self.t("Compare", 32), self.F("e^{2}", 38), self.t("et", 32),
                     self.F("e^{3}", 38)).arrange(RIGHT, buff=0.18)],
             [[("e puissance 2", self.F("e^{2}", 34)), ("plus grand", self.F("> e^{3}", 34))],
              [("ils sont", self.F("e^{2} = e^{3}", 34))],
              [("e puissance 2", self.F("e^{2}", 34)), ("plus petit", self.F("< e^{3}", 34))]],
-            2, ["La fonction", "3 ?"],
+            2, ["La fonction", "strictement croissante", "3 ?"],
             [("3, et une", self.t("2 < 3", 40, AMBRE)),
              ("garde l'ordre", self.t("une fonction croissante garde l'ordre", 32)),
              ("Donc e puissance 2", self.F("donc  e^{2} < e^{3}", 40, VERT_OK)),
              ("Pas besoin", self.t("Pas besoin de calculatrice !", 32, GREY_A))],
             figure=self.figure_q2)
-        fs = 30
+        fs = 34
         noir = "#0f172a"
         self.ecran_copie("08-rediger", "Au bac : on cite les propriétés", "Au bac", [
-            ("pour tout réel", self.F("Pour tout réel x,  e^{x} est strictement positif.", fs, noir)),
+            ("pour tout réel", VGroup(self.t("Pour tout réel x,", fs, noir),
+                                      self.F("e^{x} est strictement positif.", fs, noir)
+                                      ).arrange(DOWN, aligned_edge=LEFT, buff=0.12)),
             ("la dérivée de e", self.F("La dérivée de e^{x} est e^{x}.", fs, noir)),
             ("la dérivée est donc", VGroup(self.F("Donc la dérivée est strictement positive :", fs, noir),
                                            self.t("exp est strictement croissante sur ℝ.", fs, noir)
@@ -108,11 +110,12 @@ class ExpDefinitionTerminale(ExpBase):
             (None, [("1, de e", self.F("e^{−1}", 56, BLEU_CALCUL)), ("0 et de", self.F("e^{0}", 56, BLEU_CALCUL)),
                     ("1. Puis", self.F("e^{1}", 56, BLEU_CALCUL))]),
             ("Puis range", self.t("Puis range-les du plus petit au plus grand.", 36, AMBRE)),
+            ("du plus petit", self.figure_defi()),
         ], y0=2.3)
         self.ecran_correction()
         self.ecran_appris([
-            ("0. Elle est", VGroup(self.t("égale à sa dérivée, et", 38),
-                                   self.F("e^{0} = 1", 40)).arrange(RIGHT, buff=0.25)),
+            ("égale à sa dérivée", self.t("la fonction égale à sa dérivée", 38)),
+            ("0. Elle est", self.F("e^{0} = 1", 40)),
             ("toujours strictement", self.F("e^{x} > 0  toujours", 40)),
             ("strictement croissante", self.t("strictement croissante sur ℝ", 38)),
             ("2,72", self.t("e ≈ 2,72", 40, BLEU_CALCUL)),
@@ -170,7 +173,7 @@ class ExpDefinitionTerminale(ExpBase):
         self.play(Create(traits[2]), FadeIn(points[2], scale=1.5), run_time=0.35)
         self.play(Create(traits[3]), FadeIn(points[3], scale=1.5), run_time=0.35)
         # la courbe des vues
-        g = Graphe((0, 3.0), (0, 20), (0.3, -2.4), (5.6, 2.6))
+        g = Graphe((0, 3.0), (0, 20), (0.3, -2.4), (5.6, 2.1))
         ax = self.sans_audit(g.axes())
         lj = self.t("jours", 26, GREY_A).next_to(g.G(3.0, 0), DOWN, buff=0.12).align_to(g.G(3.0, 0), RIGHT)
         lv = self.t("vues", 26, GREY_A).next_to(g.G(0, 20), RIGHT, buff=0.15)
@@ -186,7 +189,7 @@ class ExpDefinitionTerminale(ExpBase):
         trace.clear_updaters()
         pt.clear_updaters()
         phrase = VGroup(self.t("plus de vues", 30, AMBRE), self.t("→ elle en gagne plus vite", 30, AMBRE))
-        phrase.arrange(DOWN, aligned_edge=LEFT, buff=0.1).move_to(P(2.0, 1.7))
+        phrase.arrange(DOWN, aligned_edge=LEFT, buff=0.1).move_to(P(2.95, 2.95))
         self.play(FadeIn(phrase, shift=UP * 0.1), Indicate(trace, color=AMBRE, scale_factor=1.03), run_time=0.6)
         self.attendre_voix(marge=0.6)
 
@@ -204,10 +207,10 @@ class ExpDefinitionTerminale(ExpBase):
         tit = self.col(self.t("Traduisons", 40, JAUNE_TITRE), 3.25, xl=0.1)
         self.play(FadeIn(tit, shift=DOWN * 0.1), Create(ax), FadeIn(lj), FadeIn(lv), run_time=0.5)
         self.au_mot("On appelle")
-        l1 = self.col(self.t("f(x) = nombre de vues (en millions)", fs), 2.45, xl=0.1)
+        l1 = self.col(self.t("f(x) = nombre de vues", fs), 2.45, xl=0.1)
         self.play(FadeIn(l1, shift=UP * 0.1), Create(c), run_time=0.7)
         self.au_mot("au bout de x jours")
-        l1b = self.col(self.t("au bout de x jours", fs, GREY_A), 1.9, xl=0.1)
+        l1b = self.col(self.t("en millions, au bout de x jours", fs, GREY_A), 1.9, xl=0.1)
         self.play(FadeIn(l1b, shift=UP * 0.1), run_time=0.3)
         self.au_mot("La vitesse")
         l2 = self.col(self.t("vitesse de croissance = f′", fs), 1.15, xl=0.1)
@@ -237,8 +240,7 @@ class ExpDefinitionTerminale(ExpBase):
         l6 = self.col(self.t("la fonction exponentielle", 38, BLEU_CALCUL), -1.95, xl=0.1)
         self.play(FadeIn(l6, shift=UP * 0.1), run_time=0.35)
         self.au_mot("On la note")
-        l7 = self.F("x ↦ e^{x}", 54, BLEU_CALCUL)
-        l7.move_to(P(-3.4, 3.0))
+        l7 = self.col(self.F("x ↦ e^{x}", 54, BLEU_CALCUL), -2.85, xl=0.3)
         self.play(Write(l7), run_time=0.6)
         cad = self.encadrer(l7, BLEU_CALCUL)
         self.insister(VGroup(l7, cad), 1.15)
@@ -249,7 +251,7 @@ class ExpDefinitionTerminale(ExpBase):
     def ecran_theoreme(self):
         self.nouvel_ecran("03-theoreme")
         self.titre_ecran("Ce qu'il faut savoir", "Ce qu'il faut savoir")
-        g = Graphe((-2.0, 1.4), (0, 4.4), (2.5, -2.7), (6.3, 1.9))
+        g = Graphe((-2.0, 1.4), (0, 4.4), (2.6, -1.6), (5.9, 2.4))
         ax = self.sans_audit(g.axes())
         c = g.courbe(np.exp, -2.0, 1.4, EXP, 6)
         fs = 36
@@ -306,6 +308,18 @@ class ExpDefinitionTerminale(ExpBase):
         self.play(Create(ax), Create(c), GrowArrow(fl), run_time=0.8)
         return 1.3
 
+    def figure_defi(self):
+        """Trois cases vides sur une droite : l'ordre à trouver (posé au mot, pas rangé)."""
+        axe = Arrow(P(-5.6, -1.85), P(1.6, -1.85), buff=0, color=GREY_B, stroke_width=3,
+                    max_tip_length_to_length_ratio=0.04)
+        cases = VGroup(*[VGroup(RoundedRectangle(width=1.0, height=0.8, corner_radius=0.1, stroke_color=AMBRE,
+                                                 stroke_width=3), self.t("?", 40, AMBRE)).move_to(P(x, -1.2))
+                         for x in (-4.4, -2.0, 0.4)])
+        signes = VGroup(*[self.t("<", 44, AMBRE).move_to(P(x, -1.2)) for x in (-3.2, -0.8)])
+        g = VGroup(axe, cases, signes)
+        g._fixe = True
+        return g
+
     # ── 05 : la tangente en 0 ──────────────────────────────────────────────
 
     def ecran_appliquer(self):
@@ -339,10 +353,11 @@ class ExpDefinitionTerminale(ExpBase):
         cad = self.encadrer(l3)
         self.au_mot("Près de 0")
         loupe = Circle(radius=0.75, color=AMBRE, stroke_width=4).move_to(g.G(0, 1))
-        l4 = self.col(self.t("près de 0 : la courbe colle à la droite", 30), -0.75, xl)
+        l4 = self.col(VGroup(self.t("près de 0 : la courbe", 32), self.t("colle à la droite", 32)).arrange(
+            DOWN, aligned_edge=LEFT, buff=0.08), -0.75, xl)
         self.play(Create(loupe), FadeIn(l4, shift=UP * 0.1), run_time=0.5)
         self.au_mot("toujours au-dessus")
-        l5 = self.col(self.t("et reste toujours au-dessus", 30, BLEU_CALCUL), -1.35, xl)
+        l5 = self.col(self.t("et reste toujours au-dessus", 32, BLEU_CALCUL), -1.6, xl)
         ecart = VGroup(*[Line(g.G(x, x + 1), g.G(x, math.exp(x)), color=BLEU_CALCUL, stroke_width=3)
                          for x in (-2.2, -1.5, 1.0, 1.35)])
         self.play(FadeIn(l5, shift=UP * 0.1), FadeOut(loupe), Create(ecart), run_time=0.5)
