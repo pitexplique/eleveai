@@ -287,6 +287,15 @@ const COUPE_PAR_VIDEO: Record<string, number> = {
   // Short CP durées « Le gâteau tout mou » refait le 26/11 avec la nouvelle fin (clip de fin 6,1 s + 0,5 s, mp4 de 62,07 s).
   // Mesuré dans le mp4 : pause entre « point f r » et « ou » de 57,96 à 58,11 s ; 62,07 − 4,05 = 58,02 s, au milieu.
   "cp-duree-defi-short": 4.05,
+  // Dessins animés CP suites de nombres (26/11), paysages ET shorts : nouvelle fin (clip de fin 6,1 s + 1,5 s d'écran).
+  // Mesuré dans chaque mp4 (silencedetect) : pause entre « point f r » et « ou » de 5,10 à 4,95 s avant la fin ; milieu 5,03 s.
+  "cp-suite-avant": 5.03,
+  "cp-suite-arriere": 5.03,
+  "cp-suite-pas": 5.03,
+  "cp-suite-pas-short": 5.03,
+  "cp-suite-completer": 5.03,
+  "cp-suite-defi": 5.03,
+  "cp-suite-defi-short": 5.03,
 };
 
 type Props = Omit<VideoHTMLAttributes<HTMLVideoElement>, "autoPlay" | "onPlay"> & {
