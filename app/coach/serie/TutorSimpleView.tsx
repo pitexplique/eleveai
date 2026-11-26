@@ -22,7 +22,8 @@ import type { TutorMode, TutorQuestionOption } from "@/lib/tutor-v4/types";
 import BoutonVideoCompetence from "./BoutonVideoCompetence";
 import AQuoiCaSert from "./AQuoiCaSert";
 import PaveNumerique from "./PaveNumerique";
-import { clavierReponse } from "@/lib/tutor-v4/paveNumerique";
+import PaveLycee from "./PaveLycee";
+import { clavierReponse, paveLycee } from "@/lib/tutor-v4/paveNumerique";
 
 type TutorSimpleViewProps = {
   classe: Classe;
@@ -594,6 +595,17 @@ export default function TutorSimpleView({
                       );
                     })}
                   </div>
+                ) : currentQuestion.format === "short" && paveLycee(classe, currentQuestion.expected[0]) ? (
+                  /* ⭐ 26/11/2026 — le pavé du lycée (« − », « eˣ »). Voir PaveLycee.tsx. */
+                  <PaveLycee
+                    key={currentQuestion.id}
+                    exp={paveLycee(classe, currentQuestion.expected[0])?.exp ?? false}
+                    saisie={answer}
+                    setSaisie={setAnswer}
+                    onEnvoyer={onQcmClick}
+                    disabled={busy}
+                    grand={classBoard}
+                  />
                 ) : currentQuestion.format === "short" && currentQuestion.saisie === "pave" ? (
                   /* ⭐ 14/11/2026 — le pavé numérique enfant (façon IXL) : on
                      clique, on ne tape pas. Voir PaveNumerique.tsx. */

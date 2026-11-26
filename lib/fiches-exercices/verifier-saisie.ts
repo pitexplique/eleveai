@@ -173,6 +173,16 @@ function evaluer(src: string, vars: Valeurs): number {
   return v;
 }
 
+/** La valeur d'une saisie « calculatrice » sans lettre inconnue (e et π permis), ou null. */
+export function valeurSaisie(src: string): number | null {
+  try {
+    const v = evaluer(src, {});
+    return Number.isFinite(v) ? v : null;
+  } catch {
+    return null;
+  }
+}
+
 /** « x = 3 », « S = {3} », « AB = 5 cm » → « 3 », « 3 », « 5 cm ». */
 function sansMembreGauche(s: string): string {
   // ⭐ STMG (05/11) : « ≈ 0,41 » et « P ≈ 0,41 » se lisent comme « 0,41 » et « P = 0,41 ».

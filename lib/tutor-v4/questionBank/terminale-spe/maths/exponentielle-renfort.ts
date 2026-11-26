@@ -70,6 +70,18 @@ function droiteEq(m: number, p: number) {
   return `y = ${lin(m, p)}`;
 }
 
+/** Réponse exacte à TAPER au pavé du lycée (touche eˣ), notation clavier : « 3e^(2) », « -e^(-1) », « 2/e ».
+ *  Corrigée en VALEUR (comparateur valeur_exacte) : la forme exacte, et aussi le
+ *  résultat calculé avec e ≈ 2,72 ou 2,71 (Frédéric, 26/11). */
+function courtExact(text: string, attendu: string, explanation: string): TutorGeneratedQuestionV4 {
+  return { text: propre(text), format: "short", expected: [attendu], comparator: "valeur_exacte", explanation: propre(explanation) };
+}
+
+/** k·e^m en notation clavier. */
+function cE(k: number, m: number) {
+  return `${k === 1 ? "" : k === -1 ? "-" : fr(k)}e^(${m})`;
+}
+
 const $ = (s: string) => `$${s}$`;
 
 function expl(definition: string, methode: string, calcul: string, conclusion: string) {
@@ -248,6 +260,20 @@ function genTangenteEnZero() {
     bon,
     [$(droiteEq(k, k * a)), $(droiteEq(k * a, 0)), $(droiteEq(a, k)), $(droiteEq(k * a, 1))],
     expl("la tangente en $0$ a pour équation $y = f'(0)\\,x + f(0)$.", "$(e^{ax})' = ae^{ax}$.", `$f(0) = ${n(k)}$ et $f'(x) = ${ke(k * a, lin(a, 0))}$, donc $f'(0) = ${n(k * a)}$.`, `$${droiteEq(k * a, k)}$.`)
+  );
+}
+
+function genImageExacte() {
+  const k = nonNul(5), a = nonNul(3), b = randomInt(-4, 4);
+  let c = 0, m = 0;
+  while (m === 0) {
+    c = nonNul(3);
+    m = a * c + b;
+  }
+  return courtExact(
+    `${cadre()} On pose $f(x) = ${ke(k, lin(a, b))}$. Donne la valeur exacte de $f(${c})$ (touche $e^x$ du pavé).`,
+    cE(k, m),
+    expl("une valeur exacte garde l’exponentielle, sans arrondi.", `on remplace $x$ par $${c}$ dans l’exposant.`, `$${n(a)} \\times (${c})${plus(b)} = ${m}$, donc $f(${c}) = ${ke(k, String(m))}$.`, `$f(${c}) = ${ke(k, String(m))}$ (environ $${n(k * Math.exp(m))}$).`)
   );
 }
 
@@ -467,6 +493,15 @@ function genDeriveeQuotient() {
     bon,
     [$(`\\dfrac{(${lin(1, m + 1)})e^{x}}{(${den})^{2}}`), $(`\\dfrac{e^{x}}{(${den})^{2}}`), $(`e^{x}`), $(`\\dfrac{(${lin(1, m - 1)})e^{x}}{${den}}`)],
     expl("$\\left(\\dfrac{u}{v}\\right)' = \\dfrac{u'v - uv'}{v^2}$.", `$u = e^x$, $u' = e^x$ ; $v = ${den}$, $v' = 1$.`, `$f'(x) = \\dfrac{e^{x}(${den}) - e^{x}}{(${den})^{2}} = \\dfrac{(${lin(1, m - 1)})e^{x}}{(${den})^{2}}$.`, `${bon}.`)
+  );
+}
+
+function genNombreDeriveExact() {
+  const k = nonNul(5), a = nonNul(3);
+  return courtExact(
+    `${cadre()} On pose $f(x) = ${ke(k, lin(a, 0))}$. Donne la valeur exacte de $f'(1)$ (touche $e^x$ du pavé).`,
+    cE(k * a, a),
+    expl("$(e^{ax})' = ae^{ax}$.", "on dérive, puis on remplace $x$ par $1$.", `$f'(x) = ${ke(k * a, lin(a, 0))}$, donc $f'(1) = ${ke(k * a, String(a))}$.`, `$f'(1) = ${ke(k * a, String(a))}$.`)
   );
 }
 
@@ -796,6 +831,25 @@ function genDefiLimite() {
   );
 }
 
+function genDefiMaxExact() {
+  const A = randomInt(2, 9);
+  return courtExact(
+    `${cadre()} Soit $f(x) = ${A}xe^{-x}$ sur $[0\\,;+\\infty[$, maximale en $x = 1$. Donne la valeur exacte de ce maximum (touche $e^x$ du pavé).`,
+    `${A}/e`,
+    expl("le maximum est l’image du point où il est atteint.", "on remplace $x$ par $1$.", `$f(1) = ${A} \\times 1 \\times e^{-1} = \\dfrac{${A}}{e}$.`, `le maximum vaut $\\dfrac{${A}}{e} \\approx ${n(A / Math.E)}$.`)
+  );
+}
+
+function genDefiMinExact() {
+  const p = randomInt(-5, 4);
+  const x0 = -(p + 1);
+  return courtExact(
+    `${cadre()} Soit $f(x) = (${lin(1, p)})e^{x}$, de dérivée $f'(x) = (${lin(1, p + 1)})e^{x}$, minimale en $x = ${x0}$. Donne la valeur exacte de ce minimum (touche $e^x$ du pavé).`,
+    cE(-1, x0),
+    expl("le minimum est l’image du point où $f'$ s’annule.", `on remplace $x$ par $${x0}$.`, `$f(${x0}) = (${x0}${plus(p)})e^{${x0}} = -e^{${x0}}$.`, `le minimum vaut $-e^{${x0}}$ (environ $${n(-Math.exp(x0))}$).`)
+  );
+}
+
 /* =========================================================
    GABARITS ET FUSION
 ========================================================= */
@@ -833,10 +887,12 @@ const LIGNES: Ligne[] = [
   ["exp_definition", 2, genNombreSolutions, H_DEF],
   ["exp_definition", 2, genValeurEnZero, H_DEF],
   ["exp_definition", 2, genComparer, H_DEF],
+  ["exp_definition", 2, genImageExacte, H_DEF],
   ["exp_definition", 3, genComparer, H_DEF],
   ["exp_definition", 3, genSensVariation, H_DEF],
   ["exp_definition", 3, genEgaleSaDerivee, H_DEF],
   ["exp_definition", 3, genNombreSolutions, H_DEF],
+  ["exp_definition", 3, genImageExacte, H_DEF],
   ["exp_definition", 4, genTangenteEnZero, "Tangente en 0 : y = f'(0)x + f(0)."],
   ["exp_definition", 4, genEgaleSaDerivee, H_DEF],
   ["exp_definition", 4, genSensVariation, H_DEF],
@@ -859,9 +915,11 @@ const LIGNES: Ligne[] = [
   ["exp_deriver", 3, genDeriveeAffine, H_DER],
   ["exp_deriver", 3, genDeriveeContexte, H_DER],
   ["exp_deriver", 3, genDeriveeSomme, H_DER],
+  ["exp_deriver", 3, genNombreDeriveExact, H_DER],
   ["exp_deriver", 4, genDeriveeProduit, H_DER],
   ["exp_deriver", 4, genDeriveeProduitMoins, H_DER],
   ["exp_deriver", 4, genDeriveeContexte, H_DER],
+  ["exp_deriver", 4, genNombreDeriveExact, H_DER],
   ["exp_deriver", 5, genDeriveeCarre, H_DER],
   ["exp_deriver", 5, genDeriveeQuotient, "(u/v)' = (u'v − uv')/v²."],
   ["exp_deriver", 5, genDeriveeProduitMoins, H_DER],
@@ -900,6 +958,8 @@ const LIGNES: Ligne[] = [
   ["exp_defi", 5, genDefiValeurMax, H_DEFI],
   ["exp_defi", 5, genDefiLimite, H_LIM],
   ["exp_defi", 5, genDefiMinimum, H_DEFI],
+  ["exp_defi", 5, genDefiMaxExact, H_DEFI],
+  ["exp_defi", 5, genDefiMinExact, H_DEFI],
 ];
 
 export const renfortExponentielle: TutorBankItemV4[] = (() => {

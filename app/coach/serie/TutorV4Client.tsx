@@ -110,7 +110,8 @@ import ReactionDessin, {
   type TypeReaction,
 } from "./ReactionDessin";
 import PaveNumerique from "./PaveNumerique";
-import { clavierReponse } from "@/lib/tutor-v4/paveNumerique";
+import PaveLycee from "./PaveLycee";
+import { clavierReponse, paveLycee } from "@/lib/tutor-v4/paveNumerique";
 import {
   LIMITE_QUESTIONS_OFFERTES,
   compterQuestionOfferte,
@@ -2947,6 +2948,18 @@ function handleInputKeyDown(
                         })}
                       </div>
                     </div>
+                  ) : currentQuestion.format === "short" &&
+                    paveLycee(classe, currentQuestion.expected[0]) ? (
+                    /* ⭐ 26/11/2026 — le pavé du lycée (« − », « eˣ »). Voir PaveLycee.tsx. */
+                    <PaveLycee
+                      key={currentQuestion.id}
+                      exp={paveLycee(classe, currentQuestion.expected[0])?.exp ?? false}
+                      saisie={answer}
+                      setSaisie={setAnswer}
+                      onEnvoyer={(reponse) => void handleQcmClick(reponse)}
+                      disabled={busy || wrongAnswerPanelOpen}
+                      grand={classBoard}
+                    />
                   ) : currentQuestion.format === "short" &&
                     currentQuestion.saisie === "pave" ? (
                     /* ⭐ 14/11/2026 — le pavé numérique enfant (façon IXL) :

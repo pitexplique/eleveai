@@ -3,6 +3,7 @@
 import { answersMatch } from "@/lib/answerMatch";
 import type { ComparatorName } from "@/lib/tutor/types";
 import { estFactorisee, estReduite, expressionsEquivalentes } from "@/lib/tutor/evaluation/expressionAlgebrique";
+import { saisieJuste, valeurSaisie } from "@/lib/fiches-exercices/verifier-saisie";
 
 function normalize(value: string) {
  const normalized = value
@@ -72,10 +73,31 @@ export function compareAnswer(args: {
         .trim()
         .replace(/^\(\s*([+\-−–]?\s*\d[\d\s.,]*?)\s*\)$/, "$1")
         .replace(/^\+\s*/, "");
+      // ⭐ 26/11/2026 — au pavé du lycée, l'élève peut écrire une valeur avec
+      // l'exponentielle (« e^(0) ») : elle se CALCULE. Seulement s'il a tapé e^ ou
+      // exp, pour ne rien changer ailleurs (« 7 × 8 » ne vaut toujours pas 56).
+      const avecExp = /e\^|exp/.test(args.answer);
       return args.expected.some(
-        (exp) => normalize(exp) === a || answersMatch(nu, exp)
+        (exp) => normalize(exp) === a || answersMatch(nu, exp) || (avecExp && saisieJuste(args.answer, { attendu: exp }))
       );
     }
+
+    // ⭐ 26/11/2026 — une VALEUR EXACTE avec e (pavé du lycée) : « 2e^(-1) » et
+    // « 2/e » sont la même réponse ; une valeur approchée (« 0,74 ») ne l'est pas.
+    // ⭐ Et Frédéric, le même jour : « prends e = 2,72 » (puis « 2,71 ») — l'élève
+    // qui calcule à la main avec e ≈ 2,72 ou e ≈ 2,71 et donne un résultat au
+    // centième a juste aussi : on accepte tout ce qui tombe entre les deux
+    // calculs, à un demi-centième près.
+    case "valeur_exacte":
+      return args.expected.some((exp) => {
+        if (saisieJuste(args.answer, { attendu: exp })) return true;
+        const v = valeurSaisie(args.answer);
+        if (v === null || /e/.test(args.answer)) return false;
+        const avec = (e: string) => valeurSaisie(exp.replace(/e/g, `(${e})`));
+        const bornes = [avec("2.71"), avec("2.72"), valeurSaisie(exp)].filter((x): x is number => x !== null);
+        if (!bornes.length) return false;
+        return v >= Math.min(...bornes) - 0.006 && v <= Math.max(...bornes) + 0.006;
+      });
 
     case "fraction_decimal_equivalent":
       return args.expected.some((exp) => {

@@ -92,3 +92,24 @@ export function clavierReponse(attendue: string | undefined): "decimal" | undefi
   const lecture = lirePave(attendue);
   return lecture && !lecture.unite ? "decimal" : undefined;
 }
+
+/**
+ * ⭐ 26/11/2026 — LE PAVÉ DU LYCÉE. Frédéric : « oui, ajoute-le », puis « il doit
+ * contenir exp aussi ». En terminale, une réponse sur deux à taper est NÉGATIVE
+ * (f(0) = −5, x = −4) : le clavier chiffres du téléphone n'a pas de « − », le
+ * champ ouvrait donc le clavier complet, lettres d'abord. Au lycée, une réponse
+ * qui est un nombre (signé, décimal) ou une valeur exacte avec e (« 2/e »,
+ * « -e^(-3) ») se donne au pavé : 0-9, « − », « , », « ÷ », « ( ) » et, là où
+ * l'exponentielle est au programme (1re spé, terminale), la touche « eˣ ».
+ * ⛔ Toutes ces touches sont TOUJOURS là : le pavé ne trahit ni le signe, ni la
+ * virgule, ni la présence d'une exponentielle. Une unité, un intervalle, un mot :
+ * le champ ordinaire, comme avant. Renvoie null hors lycée.
+ */
+export function paveLycee(classe: string, attendue: string | undefined): { exp: boolean } | null {
+  if (!/^(seconde|premiere|terminale|stmg)/.test(classe) || typeof attendue !== "string") return null;
+  const a = attendue.trim();
+  const nombre = /^[-−]?\d+(,\d+)?$/.test(a);
+  const avecE = /^[-−]?[\d,]*(e(\^\([-−]?\d+(,\d+)?\))?)?(\/[\d,]*e(\^\([-−]?\d+\))?|\/\d+)?$/.test(a) && /e/.test(a);
+  if (!nombre && !avecE) return null;
+  return { exp: /^(premiere-spe|terminale)/.test(classe) };
+}

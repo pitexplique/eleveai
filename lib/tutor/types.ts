@@ -12,7 +12,9 @@ export type ComparatorName =
   | "expression_equivalente"
   | "expression_developpee"
   | "expression_reduite"
-  | "expression_factorisee";
+  | "expression_factorisee"
+  // ⭐ 26/11/2026 — la VALEUR compte : « 2e^(-1) » vaut « 2/e » (pavé du lycée, touche eˣ).
+  | "valeur_exacte";
 
 export type BoCompetence = {
   boId: string;
