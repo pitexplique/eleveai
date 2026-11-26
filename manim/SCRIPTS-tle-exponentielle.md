@@ -17,11 +17,23 @@ pas de short, pas de dessin animé.
   `07-question`, `07b-reponse`, `08-rediger`, `09-defi`, `09b-correction`, `10-finale`,
   `11-abonne`.
 - **Tout en toutes lettres** dans la voix : « e puissance x », « moins l'infini »,
-  « u prime ». L'écran écrit la formule (e^x, e^(x+3), u′e^u) ; **chaque nombre et chaque
-  formule dits sont écrits à l'écran, et rien n'apparaît avant d'être dit.**
+  « u prime ». **Chaque nombre et chaque formule dits sont écrits à l'écran, et rien
+  n'apparaît avant d'être dit.**
+- ⛔ **Jamais de caractère « ^ » (Frédéric, 26/11/2026 : « écrire l'exponentielle soit
+  exp() soit en KaTeX, mais n'utilise pas ^ »).**
+  - **Dans ce fichier** (règles, passes maths, notes), on écrit exp(x), exp(2x),
+    exp(x+3), exp(−0,5t), u′·exp(u).
+  - **À l'écran des vidéos, choix de la série : la VRAIE puissance, rendue en `MathTex`
+    (LaTeX)**, l'exposant écrit en petit et en hauteur : e^{x}, e^{2x}, e^{x+3}, u'e^{u} dans
+    le code, mais l'élève voit un vrai « e » avec son exposant, comme dans son cahier et
+    dans le coach (KaTeX). Aucun `Text` ne contient de « ^ ». Contrôle avant chaque rendu :
+    `grep -n 'Text(.*\^' manim/scripts/terminale/exp_*.py` doit être vide.
+  - **La voix ne change donc pas** : on voit e avec l'exposant x et on entend
+    « e puissance x ». La voix et l'écran disent la même chose.
 - ⚠️ À l'oral, « e puissance x plus 3 » est ambigu. Règle de la série : **à l'écran,
-  l'exposant entier est toujours montré en exposant** (e^(x+3)), et quand l'exposant est
-  une somme, la voix le dit une fois en clair (« tout 3x plus 1 est en exposant »).
+  l'exposant entier est toujours écrit en hauteur** (tout x + 3 en exposant), et quand
+  l'exposant est une somme, la voix le dit une fois en clair (« tout 3x plus 1 est en
+  exposant »).
 - **On ouvre sur la situation concrète** : la page de garde donne le nom de la notion et
   sa question, puis on entre tout de suite dans la vie de quelqu'un. Ni formule, ni
   objectifs au début.
@@ -77,7 +89,7 @@ diront la même lettre que la voix.
 
 **Micro** : `exp_definition` — Comprendre la fonction exponentielle. **Ceinture** : orange (proposée).
 **Contexte** : Inès, community manager — centre `reseaux-sociaux`.
-**Code couleur** : bleu = la courbe e^x, ambre = ce qu'on regarde, vert = juste, rouge = le piège.
+**Code couleur** : bleu = la courbe exp(x), ambre = ce qu'on regarde, vert = juste, rouge = le piège.
 
 - **00-garde** : La fonction exponentielle. Quelle fonction grandit exactement à la vitesse de sa propre valeur ?
 - **01-situation** : Voici Inès. Elle est community manager : elle s'occupe des comptes d'une marque sur les réseaux sociaux. Une de ses vidéos se met à tourner. Chaque spectateur la montre à d'autres. Alors, plus elle a de vues, plus elle en gagne vite.
@@ -101,11 +113,11 @@ diront la même lettre que la voix.
 |---|---|---|---|
 | `02` | une seule fonction vérifie f′ = f et f(0) = 1 | théorème d'existence et d'unicité du cours | ✅ |
 | `03` | e ≈ 2,72 | e = 2,71828… | ✅ |
-| `04b` | e^x = 0 n'a aucune solution | e^x > 0 pour tout x | ✅ |
-| `05` | tangente en 0 : y = x + 1 | y = e⁰(x − 0) + e⁰ | ✅ |
-| `05` | la courbe reste au-dessus de la tangente | e^x ≥ x + 1 (convexité) | ✅ |
-| `06` | e² ≈ 7,39 ; 2e ≈ 5,44 | 7,389… ; 5,436… | ✅ |
-| `09b` | e^−1 ≈ 0,37 | 0,3679… | ✅ |
+| `04b` | exp(x) = 0 n'a aucune solution | exp(x) > 0 pour tout x | ✅ |
+| `05` | tangente en 0 : y = x + 1 | y = exp(0)(x − 0) + exp(0) | ✅ |
+| `05` | la courbe reste au-dessus de la tangente | exp(x) ≥ x + 1 (convexité) | ✅ |
+| `06` | exp(2) ≈ 7,39 ; 2e ≈ 5,44 | 7,389… ; 5,436… | ✅ |
+| `09b` | exp(−1) ≈ 0,37 | 0,3679… | ✅ |
 
 ---
 
@@ -135,12 +147,12 @@ diront la même lettre que la voix.
 
 | Clip | Ce que la voix affirme | Recalcul | Verdict |
 |---|---|---|---|
-| `02` | e² × e³ = e⁵ | 2 + 3 = 5 | ✅ |
-| `04b` | e⁵ / e² = e³ | 5 − 2 = 3 | ✅ |
-| `05` | e⁵ × e^−3 = e² | 5 − 3 = 2 | ✅ |
-| `06` | e + e = 2e ≈ 5,44 ≠ e² ≈ 7,39 | 5,436… ; 7,389… | ✅ |
-| `07b` | (e^x)² × e^−x = e^x | e^(2x) × e^(−x) = e^(2x − x) | ✅ |
-| `09b` | e⁴ × e^−1 / e² = e | 4 − 1 − 2 = 1 | ✅ |
+| `02` | exp(2) × exp(3) = exp(5) | 2 + 3 = 5 | ✅ |
+| `04b` | exp(5) / exp(2) = exp(3) | 5 − 2 = 3 | ✅ |
+| `05` | exp(5) × exp(−3) = exp(2) | 5 − 3 = 2 | ✅ |
+| `06` | e + e = 2e ≈ 5,44 ≠ exp(2) ≈ 7,39 | 5,436… ; 7,389… | ✅ |
+| `07b` | (exp(x))² × exp(−x) = exp(x) | exp(2x) × exp(−x) = exp(2x − x) | ✅ |
+| `09b` | exp(4) × exp(−1) / exp(2) = e | 4 − 1 − 2 = 1 | ✅ |
 
 ---
 
@@ -171,12 +183,12 @@ diront la même lettre que la voix.
 | Clip | Ce que la voix affirme | Recalcul | Verdict |
 |---|---|---|---|
 | `02` | F(0) = 160 | 60 + 100 × 1 | ✅ |
-| `03` | (e^(2x))′ = 2e^(2x) | u′ = 2 | ✅ |
-| `04b` | (e^−x)′ = −e^−x | u′ = −1 | ✅ |
-| `05` | F′(t) = −50 e^(−0,5t) ; F′(0) = −50 | 100 × (−0,5) = −50 ; e⁰ = 1 | ✅ |
-| `06` | (x e^x)′ = (1 + x) e^x | 1·e^x + x·e^x | ✅ |
-| `07b` | (5e^(2x))′ = 10 e^(2x) | 5 × 2 | ✅ |
-| `09b` | (e^(3x+1))′ = 3e^(3x+1) ; (e^(x²))′ = 2x e^(x²) | u′ = 3 ; u′ = 2x | ✅ |
+| `03` | (exp(2x))′ = 2exp(2x) | u′ = 2 | ✅ |
+| `04b` | (exp(−x))′ = −exp(−x) | u′ = −1 | ✅ |
+| `05` | F′(t) = −50 exp(−0,5t) ; F′(0) = −50 | 100 × (−0,5) = −50 ; exp(0) = 1 | ✅ |
+| `06` | (x exp(x))′ = (1 + x) exp(x) | 1·exp(x) + x·exp(x) | ✅ |
+| `07b` | (5exp(2x))′ = 10 exp(2x) | 5 × 2 | ✅ |
+| `09b` | (exp(3x+1))′ = 3exp(3x+1) ; (exp(x²))′ = 2x exp(x²) | u′ = 3 ; u′ = 2x | ✅ |
 
 ---
 
@@ -184,7 +196,7 @@ diront la même lettre que la voix.
 
 **Micro** : `exp_equation_inequation` — Résoudre une équation ou inéquation avec exponentielle. **Ceinture** : verte (proposée).
 **Contexte** : Léa, programmatrice dans une radio — centre `musique`.
-**Code couleur** : bleu = titre 1 (e^(2x)), rose = titre 2 (e^(x+3)), vert = juste, rouge = le piège.
+**Code couleur** : bleu = titre 1 (exp(2x)), rose = titre 2 (exp(x+3)), vert = juste, rouge = le piège.
 
 - **00-garde** : Équations et inéquations avec l'exponentielle. Comment trouver x, quand il est caché dans l'exposant ?
 - **01-situation** : Voici Léa. Elle est programmatrice dans une radio. Deux titres montent en streaming. Au bout de x semaines, le premier en est à e puissance 2x milliers d'écoutes. Le second, à e puissance x plus 3 milliers : tout x plus 3 est en exposant. Le premier part plus bas, mais grimpe plus vite. Quand va-t-il rattraper le second ?
@@ -206,12 +218,12 @@ diront la même lettre que la voix.
 
 | Clip | Ce que la voix affirme | Recalcul | Verdict |
 |---|---|---|---|
-| `01` | le premier part plus bas | en x = 0 : e⁰ = 1 < e³ ≈ 20,1 | ✅ |
-| `04b` | e^(x+1) = e⁴ ⟹ x = 3 | x + 1 = 4 | ✅ |
-| `05` | 2x = x + 3 ⟹ x = 3 ; e⁶ ≈ 403 | e⁶ = 403,43… | ✅ |
-| `06` | e^x = 1 ⟹ x = 0 | 1 = e⁰ | ✅ |
-| `07b` | e^x < e² ⟺ x ∈ ]−∞ ; 2[ | croissance stricte | ✅ |
-| `09b` | e^(2x) > e^(x+3) ⟺ x > 3 | 2x > x + 3 | ✅ |
+| `01` | le premier part plus bas | en x = 0 : exp(0) = 1 < exp(3) ≈ 20,1 | ✅ |
+| `04b` | exp(x+1) = exp(4) ⟹ x = 3 | x + 1 = 4 | ✅ |
+| `05` | 2x = x + 3 ⟹ x = 3 ; exp(6) ≈ 403 | exp(6) = 403,43… | ✅ |
+| `06` | exp(x) = 1 ⟹ x = 0 | 1 = exp(0) | ✅ |
+| `07b` | exp(x) < exp(2) ⟺ x ∈ ]−∞ ; 2[ | croissance stricte | ✅ |
+| `09b` | exp(2x) > exp(x+3) ⟺ x > 3 | 2x > x + 3 | ✅ |
 
 ---
 
@@ -219,7 +231,7 @@ diront la même lettre que la voix.
 
 **Micro** : `exp_limite` — Étudier une limite avec exponentielle. **Ceinture** : bleue (proposée).
 **Contexte** : Yanis, concepteur de niveaux dans un studio de jeux vidéo — centre `jeux-video`.
-**Code couleur** : bleu = les ennemis (e^x), vert = le joueur (x³), ambre = ce qu'on regarde, rouge = le piège.
+**Code couleur** : bleu = les ennemis (exp(x)), vert = le joueur (x³), ambre = ce qu'on regarde, rouge = le piège.
 
 - **00-garde** : Limites avec l'exponentielle. Qui gagne la course vers l'infini : l'exponentielle, ou les puissances de x ?
 - **01-situation** : Voici Yanis. Il est concepteur de niveaux dans un studio de jeux vidéo. Dans son jeu, au niveau x, la force du joueur vaut x au cube. Et celle des ennemis vaut e puissance x. Au niveau 2, le joueur est devant. Mais Yanis veut savoir qui gagne quand les niveaux deviennent très grands.
@@ -241,13 +253,13 @@ diront la même lettre que la voix.
 
 | Clip | Ce que la voix affirme | Recalcul | Verdict |
 |---|---|---|---|
-| `01`/`05` | au niveau 2 le joueur est devant : 8 contre ≈ 7,39 | 2³ = 8 > e² = 7,389… | ✅ |
-| `03` | e^x / xⁿ → +∞ ; xⁿ e^x → 0 en −∞ | croissances comparées (n entier naturel) | ✅ |
-| `04b` | 1/e^x → 0 | 1 / (+∞) | ✅ |
-| `05` | e¹⁰ ≈ 22 026 ; 10³ = 1 000 | 22 026,47… | ✅ |
-| `06` | e^x − x = x (e^x/x − 1) → +∞ | +∞ × +∞ | ✅ |
-| `07b` | x e^−x = x / e^x → 0 | croissances comparées | ✅ |
-| `09b` | e^x/(x+1) = (e^x/x) × (x/(x+1)) → +∞ | +∞ × 1 | ✅ |
+| `01`/`05` | au niveau 2 le joueur est devant : 8 contre ≈ 7,39 | 2³ = 8 > exp(2) = 7,389… | ✅ |
+| `03` | exp(x) / xⁿ → +∞ ; xⁿ exp(x) → 0 en −∞ | croissances comparées (n entier naturel) | ✅ |
+| `04b` | 1/exp(x) → 0 | 1 / (+∞) | ✅ |
+| `05` | exp(10) ≈ 22 026 ; 10³ = 1 000 | 22 026,47… | ✅ |
+| `06` | exp(x) − x = x (exp(x)/x − 1) → +∞ | +∞ × +∞ | ✅ |
+| `07b` | x exp(−x) = x / exp(x) → 0 | croissances comparées | ✅ |
+| `09b` | exp(x)/(x+1) = (exp(x)/x) × (x/(x+1)) → +∞ | +∞ × 1 | ✅ |
 
 ---
 
@@ -278,10 +290,10 @@ diront la même lettre que la voix.
 | Clip | Ce que la voix affirme | Recalcul | Verdict |
 |---|---|---|---|
 | `02` | C(0) = 0 | 10 × 0 × 1 | ✅ |
-| `05` | C′(t) = 10 (1 − t) e^−t | 10e^−t + 10t(−e^−t) | ✅ |
+| `05` | C′(t) = 10 (1 − t) exp(−t) | 10exp(−t) + 10t(−exp(−t)) | ✅ |
 | `07b` | C croissante sur [0 ; 1], décroissante après | signe de 1 − t | ✅ |
 | `08` | C(1) = 10/e ≈ 3,68 | 3,6788… | ✅ |
-| `09b` | 10t e^−t = 10 t/e^t → 0 | croissances comparées | ✅ |
+| `09b` | 10t exp(−t) = 10 t/exp(t) → 0 | croissances comparées | ✅ |
 
 ---
 
