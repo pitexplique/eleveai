@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 import { useRouter, useParams, useSearchParams } from "next/navigation";
 import {
   getNotionOptions,
@@ -29,7 +29,7 @@ import BoiteAOutils from "@/components/BoiteAOutils";
 import { useEleve } from "@/context/EleveContext";
 import Link from "next/link";
 import SelecteurPays from "@/components/SelecteurPays";
-import { BookOpen, Camera, ChevronRight, Network, PencilLine, Play } from "lucide-react";
+import { BookOpen, Camera, ChevronRight, Loader2, Network, PencilLine, Play } from "lucide-react";
 import { ficheExercicesHrefPourCoach } from "@/lib/fiches-exercices/registre";
 import { estShortVideo } from "@/lib/videos/lienVideo";
 import LienVideoModal from "@/components/LienVideoModal";
@@ -627,16 +627,29 @@ export default function CoachIA() {
     });
   }
 
+  /* ⭐ 26/11/2026 — LE CLIC SUR GO SE VOIT TOUT DE SUITE (Frédéric : « on
+     améliore l'expérience utilisateur »). Entre le clic et l'écran du tutor,
+     la page restait figée plusieurs secondes : rien ne disait à l'élève que
+     ça partait, et il recliquait. `useTransition` garde la trace du départ :
+     le GO (ou la ligne) cliqué tourne jusqu'à l'arrivée. Le tutor est aussi
+     préchargé dès l'ouverture du coach, pour que son code soit déjà là. */
+  const [enRoute, partir] = useTransition();
+  const [cible, setCible] = useState<string | null>(null);
+  useEffect(() => {
+    router.prefetch("/coach/serie");
+  }, [router]);
+
   function handleClick(notionId: string, microId: string) {
+    setCible(`${notionId}|${microId}`);
     const cochees = microsCochees[notionId] ?? [];
     // Une micro hors de la sélection ouverte à la main : la sélection ne suit pas.
     const avecSelection = cochees.length > 0 && cochees.includes(microId);
     const micros = avecSelection
       ? `&micros=${encodeURIComponent(cochees.join(","))}`
       : "";
-    router.push(
+    partir(() => router.push(
       `/coach/serie?classe=${encodeURIComponent(classe)}&matiere=${encodeURIComponent(matiere)}&notion=${encodeURIComponent(notionId)}&microId=${encodeURIComponent(microId)}${micros}&${displayParamForClasse(classe)}`
-    );
+    ));
   }
 
   // ⭐ LA CLASSE CHOISIE S'ÉCRIT DANS L'ADRESSE (18/08/2026).
@@ -1189,6 +1202,7 @@ export default function CoachIA() {
                             onClick={() =>
                               handleClick(notionId, (microsCochees[notionId] ?? [])[0] ?? micros[0])
                             }
+                            aria-busy={enRoute && cible?.startsWith(`${notionId}|`) ? true : undefined}
                             aria-label={`Commencer : ${libelleNotion(notionId)}`}
                             title={
                               microsCochees[notionId]?.length
@@ -1197,7 +1211,11 @@ export default function CoachIA() {
                             }
                             className={[CASE_GO, "rounded-full bg-green-600 font-black tracking-wide text-white shadow-sm transition hover:bg-green-700"].join(" ")}
                           >
-                            GO
+                            {enRoute && cible?.startsWith(`${notionId}|`) ? (
+                              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+                            ) : (
+                              "GO"
+                            )}
                             {microsCochees[notionId]?.length ? (
                               <span className="rounded-full bg-white/25 px-1 text-[10px]">
                                 {microsCochees[notionId].length}
@@ -1297,6 +1315,9 @@ export default function CoachIA() {
                                 <span className="underline-offset-2 group-hover:underline">
                                   <TexteMath>{microLabelsMath[microId] || microId}</TexteMath>
                                 </span>
+                                {enRoute && cible === `${notionId}|${microId}` ? (
+                                  <Loader2 className="ml-auto mt-0.5 h-4 w-4 shrink-0 animate-spin text-green-700" aria-hidden="true" />
+                                ) : null}
                                 {microId.includes("defis") && (
                                   <span className="ml-1 rounded-full bg-orange-100 px-2 py-0.5 text-xs font-bold text-orange-600">
                                     défi

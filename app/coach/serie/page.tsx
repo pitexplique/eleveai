@@ -1,22 +1,11 @@
 // app/coach/page.tsx
 import { Suspense } from "react";
 import TutorV4Client from "./TutorV4Client";
-
-function CoachFallback() {
-  return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#dbeafe,_#f8fafc_45%,_#eef2ff_70%,_#ffffff)] px-4 py-6">
-      <div className="mx-auto max-w-7xl">
-        <div className="rounded-3xl border border-slate-200 bg-white p-10 text-center text-sm text-slate-600 shadow-sm">
-          Chargement du coach…
-        </div>
-      </div>
-    </main>
-  );
-}
+import ChargementCoach from "./ChargementCoach";
 
 export default function CoachPage() {
   return (
-    <Suspense fallback={<CoachFallback />}>
+    <Suspense fallback={<ChargementCoach />}>
       {/* « Demande à l’IA » retiré du coach le 12/11 (Ti Margo aide à la place). */}
       <TutorV4Client />
     </Suspense>
