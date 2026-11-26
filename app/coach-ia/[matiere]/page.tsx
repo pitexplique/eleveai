@@ -24,7 +24,6 @@ import {
 import TexteMath from "@/components/fiches/TexteMath";
 import { displayParamForClasse } from "@/lib/tutor-v4/displayMode";
 import { normaliser } from "@/lib/matrice/normaliser";
-import BoiteAOutils from "@/components/BoiteAOutils";
 import { useEleve } from "@/context/EleveContext";
 import Link from "next/link";
 import SelecteurPays from "@/components/SelecteurPays";
@@ -1386,8 +1385,10 @@ export default function CoachIA() {
 
       {/* ⛔ 26/11/2026 — Frédéric : « enlève le chips demander à l'IA ».
           « Demande à l'IA » (FloatingCoach) n'est plus monté sur le coach,
-          comme sur le tutor depuis le 12/11 (décision du 22/11 : aucune IA). */}
-      {matiere === "maths" && <BoiteAOutils />}
+          comme sur le tutor depuis le 12/11 (décision du 22/11 : aucune IA).
+          ⛔ 26/11/2026 — et la calculatrice non plus : « calculatrice qui n'a
+          rien à faire » (Frédéric). Elle flottait par-dessus la liste des
+          notions ; elle reste dans les exercices (tutor), où elle sert. */}
     </main>
   );
 }
