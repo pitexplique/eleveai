@@ -2870,3 +2870,39 @@ PYTHONIOENCODING=utf-8 python -X utf8 -m manim render -qh --disable_caching \
 Puis, à chaque épisode et **pas à la fin de la série** :
 `node scripts/brancher-videos-coach.mjs --classe terminale-spe --tout`
 (⚠️ `--classe terminale` sans `-spe` ne mesure rien et dit « notion inconnue »).
+
+
+## ⛔⛔ 26/11/2026 — UNE VOIX COUPÉE NE SE TRANSPORTE PAS AVEC LE SCRIPT
+
+`ps_espace_defi_short` (E12) donnait sa réponse avant de poser sa question : l'écran 01-idee
+affichait **t = ⅓ encadré en vert** et la voix le disait, **six secondes** avant que la question
+ne demande où le plan coupe [AG] — avec « au tiers de [AG] » comme choix A. L'accroche avait en
+plus déjà éliminé « au milieu ».
+
+⭐ **Le remède n'a réenregistré aucune voix**, parce que `02b-reponse` disait déjà tout
+(« Réponse A […] c'est exactement un tiers du vecteur A G »). La voix de 01-idee est **coupée** :
+
+| quoi | où | valeur |
+|---|---|---|
+| coupe du WAV | `public/sons/terminale-ps-espace-defi-short/01-idee.wav` | **20,10 s** (27,52 → 20,16) |
+| silence visé | mesuré au rms par tranches de 20 ms | **rms 0,0 à 20,04 s**, parole à 4 327 |
+| marques | `ps_espace_defi_short_marques.json`, clé `01-idee` | 73 → **55** (index < 272) |
+| texte | `manim/voix/terminale-ps-espace-defi-short.json` | s'arrête à « …trois t moins 1 égale zéro. » |
+| écran | le bloc `tfrac`/`cadre_t` retiré, `insister` reporté sur « 3t − 1 = 0 » | 91,80 s → **84,67 s** |
+
+⛔⛔ **ET VOICI LE PIÈGE : `/public/sons/` EST DANS `.gitignore`.** Le script corrigé, ses marques
+et son texte sont versionnés — **le WAV coupé ne l'est pas**. Un poste qui prend ce script avec
+l'ancien `01-idee.wav` aura **7 s de son en trop** et tout l'écran décalé, *sans aucune alerte* :
+`attendre_voix` suivra simplement un son plus long. L'original est gardé dans
+`manim/poste2/.avant-correction-e12/`, et la coupe se refait en une ligne :
+
+```
+ffmpeg -v error -y -i manim/poste2/.avant-correction-e12/01-idee.wav.origine -t 20.10 -c copy \
+  public/sons/terminale-ps-espace-defi-short/01-idee.wav
+```
+
+⭐ **Et la règle générale qu'il faut en tirer, pour les prochains shorts :** l'écran idée doit
+traiter **un autre cas que la question**. Les onze autres shorts le font. Quand l'idée traite LE
+cas de la question, le short n'interroge plus — et **aucun instrument ne le voit** : le dry run
+regarde les bords, l'audit les nombres dits, la devinabilité la longueur des choix (ici les trois
+choix sont irréprochables). Ça se lit dans l'en-tête du script, en deux minutes par épisode.
