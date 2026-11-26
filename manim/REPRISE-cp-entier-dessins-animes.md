@@ -41,12 +41,10 @@ Fini = paysages + shorts rendus, contrôlés image par image ; R2 + page `app/pe
 - [x] voix + instants paires 2 et 3 (JSON dans manim/voix/cp-entier-{rang,collection}-{paysage,short}.json). Bonnes réponses : paire 1 B, C, short A ; paire 2 C (le chat), A (deuxième), short B (le jaune) ; paire 3 B (5), C (il en manque un), short A (5 bougies).
 - [x] HD paysage denombre : 1 min 50 (109,9 s), son ok, compteurs visibles (57 s, 85 s), planche ok, miniature faite.
 - [x] short rang « La course des escargots » (`films/cp-entier-rang.js`) : HD 47,4 s, son ok, planche ok, miniature faite.
-- [x] paysage rang « La file du toboggan » (`films/cp-entier-paysage-rang.js`) : planches ok ; HD lancée le 26/11 vers 0 h (log : scratchpad de la 2e session, hd-paysage-rang.log). À FAIRE : vérifier le MP4 (`manim/sorties/cp/maths/entier/02-rang/eleveai-maths-cp-entier-rang-paysage.mp4`, ~1 min 39), planche du MP4, miniature (`node scripts/ti-margo-short.mjs cp-entier-paysage rang miniature`).
-- [x] short collection « Les bougies » (`films/cp-entier-collection.js`) écrit, planche ok (bonne réponse A). À FAIRE : HD APRÈS la HD paysage rang, puis planche du MP4 + miniature.
-- [ ] paysage collection « Une assiette pour chacun » : `films/cp-entier-paysage-collection.js` À ÉCRIRE (modèle : `cp-entier-paysage-rang.js`). Dessins prêts dans cp-entier.js : copainE (lapin, chat, souris, canard, margo, ours, cochon), assietteCraie, ballonAir, chapeauFete, etoilesE, etiquette, doigtE, phraseE.
-  DUR = 00-accroche 9.51, 01-compter 7.72, 02-construire 10.32, 03-question 13.69, 03b-reponse 6.17, 04-question 15.0, 04b-reponse 5.86, 05-appris 3.85, 06-abonne 9.74.
-  Idée : nuit étoilée ; 6 copains en ligne (x = 120 + k·150) arrivent à « arrivent » ; 01 : étiquettes 1 → 6 aux mots, grand « 6 » ; 02 : une assiette devant chacun aux mots « Un »… « six », étincelles à « personne n'est oublié ».
-  Q1 (B, 5) : 5 enfants À GAUCHE (x < 520, la carte est à droite), choix 4/5/6 ; réponse : un ballon dans la main de chacun à « ballons », grand « 5 ».
-  Q2 (C) : 4 copains, 3 chapeaux au-dessus ; choix « trop » / « oui » / « il en manque 1 » ; réponse : les 3 chapeaux tombent sur 3 têtes à « copain », le 4e a un chapeau en pointillé rouge.
-  05-appris (3,85 s) : titre « Ce que tu as appris » (groupe en haut, comme rang) ; 4 copains en haut, 4 assiettes en bas reliées par des traits à « donne ».
+- [x] paysage rang « La file du toboggan » : HD 98,8 s, son ok, compteurs visibles, miniature faite.
+- [x] short collection « Les bougies » : HD 49,3 s, son ok, compteur visible, miniature faite.
+- [x] paysage collection « Une assiette pour chacun » (`films/cp-entier-paysage-collection.js`) : HD faite le 26/11 : 96,3 s, son ok, compteurs visibles (Q1 ~46 s, Q2 ~73 s), rien de rogné, miniature faite (« Assez de chapeaux ? TU PARIES ? »). Corrigé avant la HD finale : « 5 enfants, 5 ballons. » (espace insécable, sinon « 5 » restait seul en fin de ligne).
+- [x] LES 6 VIDÉOS SONT RENDUES EN HD.
+- Frédéric (26/11) : « les vidéos sont pour les CP » → les brancher au coach CP (micros cp_entier_denombre, cp_entier_rang, cp_entier_construire_collection) : manifeste + R2 + notion_ressources + push.
+- [ ] RESTE (sur le OK de Frédéric) : regarder les 6 vidéos ; R2 + page `app/petits/page.tsx` ; push.
 - Pièges vus : `dit().jusque('à')` s'arrête sur « a » (même mot normalisé) ; une capture isolée (controle) d'un instant de réponse montre les choix vides (normal : ils se remplissent pendant la question) ; la carte paysage est à x ≥ 1290 px (≥ 1390 dans rang) : dessiner à gauche de l'ardoise pendant les questions.
