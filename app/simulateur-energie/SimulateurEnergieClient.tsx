@@ -18,6 +18,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { lienVideo } from "@/lib/videos/lienVideo";
 import DefisSimulateur, { type DefiSimulateur } from "@/components/simulateurs/DefisSimulateur";
 
 const KCAL_EN_J = 4184; // 1 kcal = 4 184 J
@@ -607,9 +608,7 @@ export default function SimulateurEnergieClient() {
         {/* LE FILM — la même histoire en 69 s, muette (publiée le 24/07). La
             vignette vient de YouTube : aucune image à héberger. */}
         <a
-          href="https://youtube.com/shorts/XdBT05f9_F0"
-          target="_blank"
-          rel="noopener noreferrer"
+          href={lienVideo("https://youtube.com/shorts/XdBT05f9_F0")}
           className="group mt-3 flex items-center gap-3 rounded border-2 border-[#ffd23f] bg-[#1c1930] p-2.5 transition hover:brightness-125"
         >
           <span className="relative block w-[92px] shrink-0 overflow-hidden rounded">
@@ -646,6 +645,8 @@ export default function SimulateurEnergieClient() {
           coupDePouce="Coup de pouce : règle les curseurs du défi — la machine vérifie pour toi."
           defis={DEFIS}
           couleurs={COULEURS_DEFIS}
+          coachHref="/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&display=simple"
+          coachLabel="Entraîne-toi sur le coach (grandeurs composées, 4e)"
         />
 
         {/* Le pont vers la machine jumelle et le défi du jour */}

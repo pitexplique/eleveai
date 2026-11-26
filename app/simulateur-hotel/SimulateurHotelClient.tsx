@@ -945,6 +945,8 @@ export default function SimulateurHotelClient() {
           coupDePouce="Coup de pouce : les défis se calculent sur la grille du haut — la machine vérifie pour toi."
           defis={DEFIS}
           couleurs={COULEURS_DEFIS}
+          coachHref="/coach/serie?classe=4e&matiere=maths&notion=stat_statistique&display=simple"
+          coachLabel="Entraîne-toi sur le coach (moyenne pondérée, 4e)"
         />
 
         {/* Le métier, dit aux élèves : derrière les nombres, des gens. */}

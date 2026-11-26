@@ -15,6 +15,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { lienVideo } from "@/lib/videos/lienVideo";
 import DefisSimulateur, { type DefiSimulateur } from "@/components/simulateurs/DefisSimulateur";
 
 const CHUTE_M = 500;
@@ -410,14 +411,14 @@ export default function SimulateurBarrageClient() {
           coupDePouce="Coup de pouce : règle le débit du défi — le barrage vérifie pour toi."
           defis={DEFIS}
           couleurs={COULEURS_DEFIS}
+          coachHref="/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&display=simple"
+          coachLabel="Entraîne-toi sur le coach (débit et puissance, 4e)"
         />
 
         {/* Le pont vers l'épisode et le défi */}
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <a
-            href="https://youtu.be/bxbqIllTbYQ"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={lienVideo("https://youtu.be/bxbqIllTbYQ")}
             className="inline-flex items-center gap-2 rounded bg-[#5bc8dd] px-4 py-2 text-sm font-bold text-[#081510] hover:brightness-110"
           >
             ▶ L&apos;épisode « L&apos;eau de La Réunion »

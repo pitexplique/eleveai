@@ -2,14 +2,14 @@
 
 // « Le lagon dans ta main » — l'élève règle la houle du large, la barrière
 // de corail travaille sous ses yeux : la vague déferle sur la crête (la
-// muraille vivante casse ~90 % de l'énergie), le lagon reste calme, la
+// muraille vivante casse ~90 % de la hauteur), le lagon reste calme, la
 // nurserie grandit à l'abri — et le poisson-perroquet fabrique le sable
 // blanc de la plage. Les maths (hauteurs, pourcentages, durées) sont
 // AFFICHÉES, jamais cachées.
 //
 // Chiffres pédagogiques ARRONDIS (assumés « environ ») :
 //   houle du large : de 0,5 m (mer d'huile) à 10 m (mai 2007, la houle du
-//   siècle) · le récif casse ~90 % de l'énergie → vague lagon ≈ houle × 0,1
+//   siècle) · le récif casse ~90 % de la hauteur → vague lagon ≈ houle × 0,1
 //   un corail massif grandit ~1 cm/an · le récif de l'Ermitage ≈ 8 000 ans
 //   un poisson-perroquet fabrique ~90 kg de sable blanc par an
 //   la Réserve naturelle marine (2007) : 3 500 ha ≈ 4 900 terrains de foot
@@ -17,6 +17,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { lienVideo } from "@/lib/videos/lienVideo";
 import DefisSimulateur, { type DefiSimulateur } from "@/components/simulateurs/DefisSimulateur";
 
 const TERRAIN_FOOT_M2 = 7140;
@@ -32,7 +33,7 @@ const DEFIS: DefiSimulateur[] = [
   {
     id: "houle",
     question:
-      "La houle du large mesure 6 m. La barrière casse 90 % de l'énergie : quelle hauteur de vaguelette dans le lagon, en cm ?",
+      "La houle du large mesure 6 m. La barrière casse 90 % de la hauteur des vagues : quelle hauteur de vaguelette dans le lagon, en cm ?",
     reponse: 60,
     unite: "cm",
     tolerance: 1,
@@ -175,7 +176,7 @@ function LagonAnime({ houle }: { houle: number }) {
           />
         ))}
         <text x="303" y="88" fill="#f4fbfc" fontSize="10" fontWeight="700" textAnchor="middle" fontFamily="monospace">ÇA DÉFERLE</text>
-        <text x="303" y="100" fill="#8fc6cf" fontSize="9.5" textAnchor="middle" fontFamily="monospace">−90 % d&apos;énergie</text>
+        <text x="303" y="100" fill="#8fc6cf" fontSize="9.5" textAnchor="middle" fontFamily="monospace">−90 % de hauteur</text>
 
         {/* D · Le platier, à fleur d'eau */}
         <text x="352" y="176" fill="#8fc6cf" fontSize="9.5" textAnchor="middle" fontFamily="monospace">le platier</text>
@@ -305,7 +306,7 @@ export default function SimulateurLagonClient() {
     });
   };
 
-  // La barrière casse ~90 % de l'énergie : vague lagon ≈ houle × 0,1.
+  // La barrière casse ~90 % de la hauteur : vague lagon ≈ houle × 0,1.
   const vagueLagonCm = houle * 10;
 
   return (
@@ -365,7 +366,7 @@ export default function SimulateurLagonClient() {
           </div>
           <p className="mt-2 text-[12.5px] leading-5 text-[#cfe9ec]">
             Sur la crête, la vague de <b className="text-[#ecfbfa]">{fr(houle, 1)} m</b> déferle
-            et perd <b className="text-[#ecfbfa]">~90 % de son énergie</b> — dans le lagon, il
+            et perd <b className="text-[#ecfbfa]">~90 % de sa hauteur</b> — dans le lagon, il
             ne reste qu&apos;une vaguelette de <b className="text-[#ecfbfa]">{fr(vagueLagonCm)} cm</b>.
           </p>
         </div>
@@ -385,9 +386,9 @@ export default function SimulateurLagonClient() {
           />
           <Etape
             nom="2 · La barrière de corail — la muraille vivante"
-            explication="Construite par des milliards de polypes en ~8 000 ans, elle monte jusqu'à la surface. La vague trébuche dessus et déferle : ~90 % de l'énergie est cassée là, sur la crête — la ligne blanche qu'on voit du ciel."
+            explication="Construite par des milliards de polypes en ~8 000 ans, elle monte jusqu'à la surface. La vague trébuche dessus et déferle : ~90 % de la hauteur des vagues est cassée là, sur la crête — la ligne blanche qu'on voit du ciel."
             quantite={90}
-            unite="% de l'énergie cassée"
+            unite="% de la hauteur cassée"
             pct={90}
             couleur="#ff7a6b"
           />
@@ -449,14 +450,14 @@ export default function SimulateurLagonClient() {
           coupDePouce="Coup de pouce : règle la houle du défi — le lagon vérifie pour toi."
           defis={DEFIS}
           couleurs={COULEURS_DEFIS}
+          coachHref="/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&display=simple"
+          coachLabel="Entraîne-toi sur le coach (pourcentages, 4e)"
         />
 
         {/* Le pont vers l'épisode et le défi */}
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <a
-            href="https://youtu.be/3bPBjYsRciA"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={lienVideo("https://youtu.be/3bPBjYsRciA")}
             className="inline-flex items-center gap-2 rounded bg-[#5bc8dd] px-4 py-2 text-sm font-bold text-[#03181e] hover:brightness-110"
           >
             ▶ L&apos;épisode « Les requins » — le gardien du récif

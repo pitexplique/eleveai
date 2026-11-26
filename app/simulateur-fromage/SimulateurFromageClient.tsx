@@ -16,6 +16,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { lienVideo } from "@/lib/videos/lienVideo";
 import DefisSimulateur, { type DefiSimulateur } from "@/components/simulateurs/DefisSimulateur";
 
 const VACHE_L_JOUR = 20;
@@ -523,14 +524,14 @@ export default function SimulateurFromageClient() {
           coupDePouce="Coup de pouce : règle le curseur sur les litres du défi — la machine vérifie pour toi."
           defis={DEFIS}
           couleurs={COULEURS_DEFIS}
+          coachHref="/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&display=simple"
+          coachLabel="Entraîne-toi sur le coach (proportionnalité, 6e)"
         />
 
         {/* Le pont vers l'épisode et le défi */}
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <a
-            href="https://youtu.be/UjblKadInPw"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={lienVideo("https://youtu.be/UjblKadInPw")}
             className="inline-flex items-center gap-2 rounded bg-[#7fc4e8] px-4 py-2 text-sm font-bold text-[#07131a] hover:brightness-110"
           >
             ▶ L&apos;épisode « Le lait de la Plaine des Cafres »

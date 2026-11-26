@@ -24,7 +24,7 @@ export type Machine = {
 
 export const MACHINES: Machine[] = [
   // ── En vrai, à La Réunion ──────────────────────────────────────────────────
-  { href: "/simulateur-cyclone", emoji: "🌀", nom: "Dans l'œil du cyclone", notion: "Trajectoire et vent : la trigonométrie de la tempête.", cta: "Lancer ton cyclone", image: "/images/cyclone-simulateur.webp", groupe: "reel", date: "2026-07-18" },
+  { href: "/simulateur-cyclone", emoji: "🌀", nom: "Dans l'œil du cyclone", notion: "Trace sa route : temps = distance ÷ vitesse, et les alertes de l'île.", cta: "Lancer ton cyclone", image: "/images/cyclone-simulateur.webp", groupe: "reel", date: "2026-07-18" },
   { href: "/simulateur-sucre", emoji: "🏭", nom: "L'usine à sucre", notion: "Du champ de canne au sucre et à la lumière : rendements et proportions.", cta: "Faire tourner l'usine", image: "/images/usine-sucre.webp", groupe: "reel", date: "2026-07-18" },
   { href: "/simulateur-fromage", emoji: "🧀", nom: "La fromagerie", notion: "Du lait des Hauts au pot : proportions et transformations.", cta: "Remplir les pots", image: "/images/fromagerie.webp", groupe: "reel", date: "2026-07-18" },
   { href: "/simulateur-barrage", emoji: "💧", nom: "Le barrage de Takamaka", notion: "L'eau tombe de 500 m, l'île s'allume : l'énergie m·g·h.", cta: "Ouvrir les vannes", image: "/images/barrage-takamaka.webp", groupe: "reel", date: "2026-07-19" },

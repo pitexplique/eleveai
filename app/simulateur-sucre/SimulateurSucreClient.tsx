@@ -15,6 +15,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { lienVideo } from "@/lib/videos/lienVideo";
 import DefisSimulateur, { type DefiSimulateur } from "@/components/simulateurs/DefisSimulateur";
 
 const RENDEMENT_CHAMP = 10; // kg de canne par m²
@@ -439,14 +440,14 @@ export default function SimulateurSucreClient() {
           coupDePouce="Coup de pouce : règle le tonnage du défi — l'usine vérifie pour toi."
           defis={DEFIS}
           couleurs={COULEURS_DEFIS}
+          coachHref="/coach/serie?classe=6e&matiere=maths&notion=prop_proportionnalite&display=simple"
+          coachLabel="Entraîne-toi sur le coach (proportionnalité, 6e)"
         />
 
         {/* Le pont vers l'épisode et le défi */}
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <a
-            href="https://youtu.be/hH2N0Cvx-AI"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={lienVideo("https://youtu.be/hH2N0Cvx-AI")}
             className="inline-flex items-center gap-2 rounded bg-[#f2a93b] px-4 py-2 text-sm font-bold text-[#160d04] hover:brightness-110"
           >
             ▶ L&apos;épisode « La canne à sucre » (4 min)

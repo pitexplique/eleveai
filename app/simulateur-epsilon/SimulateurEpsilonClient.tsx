@@ -339,7 +339,7 @@ export default function SimulateurEpsilonClient() {
                     <div
                       className="h-full rounded-sm transition-all duration-300"
                       style={{
-                        width: `${Math.min(largeur, 100)}%`,
+                        width: `${Math.min(largeur, 100).toFixed(2)}%`,
                         background: n >= 1 ? `linear-gradient(90deg, ${ENCRE}, ${OR})` : "#c9cfdd",
                       }}
                     />
@@ -376,6 +376,8 @@ export default function SimulateurEpsilonClient() {
           coupDePouce="Coup de pouce : règle k sur la machine — la cascade vérifie pour toi."
           defis={DEFIS}
           couleurs={COULEURS_DEFIS}
+          coachHref="/coach/serie?classe=3e&matiere=maths&notion=entier_puissance&display=simple"
+          coachLabel="Entraîne-toi sur le coach (puissances, 3e)"
         />
 
         {/* LES PONTS */}

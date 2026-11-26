@@ -883,6 +883,8 @@ export default function SimulateurCycloneClient({ embed = false }: { embed?: boo
             coupDePouce="Coup de pouce : trace la même course sur la carte — la vigie vérifie pour toi."
             defis={DEFIS}
             couleurs={COULEURS_DEFIS}
+            coachHref="/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&display=simple"
+            coachLabel="Entraîne-toi sur le coach (vitesse, distance, temps, 4e)"
           />
         </div>
       </section>
