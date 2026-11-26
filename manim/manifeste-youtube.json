@@ -96963,6 +96963,403 @@
       ]
     },
     {
+      "id": "cp-entier-comparer",
+      "pas_avant": "2027-07-31",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_comparer",
+      "type": "longue",
+      "fichier": "cp/maths/entier/04-comparer/eleveai-maths-cp-entier-comparer-paysage.mp4",
+      "miniature": "cp/maths/entier/04-comparer/eleveai-maths-cp-entier-comparer-paysage-miniature.png",
+      "titre": "Qui en a le plus ? Comparer deux nombres — Nombres entiers — épisode 4 · Maths CP",
+      "accroche": "Sur la plage, Ti Margo et le chat ramassent des coquillages. Qui en a le plus ? Pour le savoir, pas besoin de deviner : on les met face à face !\n\nDans cette vidéo :\n• je range en deux lignes, un en face d'un\n• celui qui a des restes en a le plus\n• le signe > ou < : la bouche du crocodile s'ouvre vers le plus grand\n• pas de reste : on en a autant, on écrit =\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_comparer&display=simple\n\n🦎 Épisode 4 de la série Nombres entiers d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les coquillages de la plage"
+        ],
+        [
+          "00:11",
+          "Face à face"
+        ],
+        [
+          "00:30",
+          "La bouche du crocodile"
+        ],
+        [
+          "00:49",
+          "Question 1"
+        ],
+        [
+          "01:20",
+          "Question 2"
+        ],
+        [
+          "01:48",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "comparer",
+        "plus que",
+        "moins que",
+        "autant",
+        "signe inférieur",
+        "signe supérieur",
+        "coquillages",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:49",
+          "question": "Lequel brille le plus ?",
+          "choix": [
+            "le bleu",
+            "le rouge",
+            "autant"
+          ],
+          "reponse": 1,
+          "explication": "Huit lucioles dans le rouge, cinq dans le bleu : 8 est plus que 5."
+        },
+        {
+          "t": "01:20",
+          "question": "7 et 9. Vers qui le crocodile ouvre-t-il sa bouche ?",
+          "choix": [
+            "vers le 9",
+            "vers le 7",
+            "pareils"
+          ],
+          "reponse": 0,
+          "explication": "9 est le plus grand : 7 < 9."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-entier-comparer-short",
+      "pas_avant": "2027-07-31",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_comparer",
+      "type": "short",
+      "renvoie_vers": "cp-entier-comparer",
+      "fichier": "cp/maths/entier/04-comparer/eleveai-maths-cp-entier-comparer-short.mp4",
+      "miniature": "cp/maths/entier/04-comparer/eleveai-maths-cp-entier-comparer-short-miniature.png",
+      "titre": "Les écureuils : qui a le plus de noisettes ? #maths #cp",
+      "accroche": "Il neige sur la forêt. Deux écureuils ont caché des noisettes pour l'hiver. Le roux a fait un tas tout haut… Qui en a le plus ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : douze ou vingt et un, lequel est le plus grand ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #comparer #cp",
+      "tags": [
+        "comparer",
+        "autant",
+        "écureuils",
+        "noisettes",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:11",
+          "question": "Qui a le plus de noisettes ?",
+          "choix": [
+            "le roux",
+            "le gris",
+            "autant"
+          ],
+          "reponse": 2,
+          "explication": "7 et 7 : ils en ont autant. Un tas haut ne veut pas dire plus."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-entier-dizaine",
+      "pas_avant": "2027-08-01",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_dizaine_unite",
+      "type": "longue",
+      "fichier": "cp/maths/entier/05-dizaine/eleveai-maths-cp-entier-dizaine-paysage.mp4",
+      "miniature": "cp/maths/entier/05-dizaine/eleveai-maths-cp-entier-dizaine-paysage-miniature.png",
+      "titre": "Les paquets de dix : dizaines et unités — Nombres entiers — épisode 5 · Maths CP",
+      "accroche": "Au marché, Ti Margo aide la fleuriste. Que de tulipes ! Trop pour les compter une par une… alors on fait des bouquets de dix.\n\nDans cette vidéo :\n• un paquet de dix, c'est une dizaine\n• ce qui reste tout seul, ce sont les unités\n• 3 dizaines et 4 unités : 34\n• à gauche les paquets, à droite ce qui reste\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_dizaine_unite&display=simple\n\n🦎 Épisode 5 de la série Nombres entiers d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les tulipes du marché"
+        ],
+        [
+          "00:10",
+          "Un bouquet de dix"
+        ],
+        [
+          "00:33",
+          "Trois bouquets, quatre fleurs : 34"
+        ],
+        [
+          "00:45",
+          "Question 1"
+        ],
+        [
+          "01:16",
+          "Question 2"
+        ],
+        [
+          "01:45",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "dizaines",
+        "unités",
+        "paquets de dix",
+        "nombres à deux chiffres",
+        "tulipes",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:45",
+          "question": "2 paquets de 10, et 5 seuls. Combien de crayons ?",
+          "choix": [
+            "7",
+            "52",
+            "25"
+          ],
+          "reponse": 2,
+          "explication": "10, 20, puis 21, 22, 23, 24, 25 : 2 dizaines, 5 unités."
+        },
+        {
+          "t": "01:16",
+          "question": "Dans 46, que compte le 4 ?",
+          "choix": [
+            "les fleurs seules",
+            "les bouquets de 10",
+            "rien du tout"
+          ],
+          "reponse": 1,
+          "explication": "4 bouquets de 10 et 6 fleurs seules : 46."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-entier-dizaine-short",
+      "pas_avant": "2027-08-01",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_dizaine_unite",
+      "type": "short",
+      "renvoie_vers": "cp-entier-dizaine",
+      "fichier": "cp/maths/entier/05-dizaine/eleveai-maths-cp-entier-dizaine-short.mp4",
+      "miniature": "cp/maths/entier/05-dizaine/eleveai-maths-cp-entier-dizaine-short-miniature.png",
+      "titre": "53 et 35, c'est pareil ? Le pari des billes #maths #cp",
+      "accroche": "Le copain de Ti Margo dit : 53 billes, 35 billes, c'est pareil, ce sont les mêmes chiffres ! Tu paries ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 4 paquets de dix et 2 billes toutes seules, ça fait combien ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_dizaine_unite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #dizaines #cp",
+      "tags": [
+        "dizaines",
+        "unités",
+        "billes",
+        "place du chiffre",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:12",
+          "question": "Est-ce qu'il a raison ?",
+          "choix": [
+            "non, 53 > 35",
+            "oui, pareil",
+            "non, 35 > 53"
+          ],
+          "reponse": 0,
+          "explication": "53, c'est 5 paquets de 10 ; 35, seulement 3. La place du chiffre change tout."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-entier-droite",
+      "pas_avant": "2027-08-02",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_droite",
+      "type": "longue",
+      "fichier": "cp/maths/entier/06-droite/eleveai-maths-cp-entier-droite-paysage.mp4",
+      "miniature": "cp/maths/entier/06-droite/eleveai-maths-cp-entier-droite-paysage-miniature.png",
+      "titre": "La piste de la grenouille : placer les nombres — Nombres entiers — épisode 6 · Maths CP",
+      "accroche": "Sur l'étang, le jour se lève. La grenouille saute sur sa piste, à partir de zéro. Sur quel nombre va-t-elle s'arrêter ?\n\nDans cette vidéo :\n• à chaque saut, on avance de un\n• les petits nombres au début, les grands plus loin\n• je pars d'un nombre écrit, et je compte les sauts\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_droite&display=simple\n\n🦎 Épisode 6 de la série Nombres entiers d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "La piste de l'étang"
+        ],
+        [
+          "00:10",
+          "Les sauts de la grenouille"
+        ],
+        [
+          "00:28",
+          "Trouver un nombre"
+        ],
+        [
+          "00:42",
+          "Question 1"
+        ],
+        [
+          "01:06",
+          "Question 2"
+        ],
+        [
+          "01:33",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "droite graduée",
+        "piste graduée",
+        "placer un nombre",
+        "compter les sauts",
+        "grenouille",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:42",
+          "question": "Une luciole se pose sur la piste. Sur quel nombre ?",
+          "choix": [
+            "6",
+            "4",
+            "7"
+          ],
+          "reponse": 0,
+          "explication": "Je pars du 5 et je fais un saut : 6."
+        },
+        {
+          "t": "01:06",
+          "question": "Où se cache le 9 ?",
+          "choix": [
+            "rouge",
+            "vert",
+            "bleu"
+          ],
+          "reponse": 2,
+          "explication": "9, c'est juste avant 10 : le point bleu."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-entier-droite-short",
+      "pas_avant": "2027-08-02",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_droite",
+      "type": "short",
+      "renvoie_vers": "cp-entier-droite",
+      "fichier": "cp/maths/entier/06-droite/eleveai-maths-cp-entier-droite-short.mp4",
+      "miniature": "cp/maths/entier/06-droite/eleveai-maths-cp-entier-droite-short-miniature.png",
+      "titre": "La fusée : jusqu'où est-elle montée ? #maths #cp",
+      "accroche": "Trois, deux, un… décollage ! La fusée de Ti Margo monte sur la piste, vers les étoiles. Elle s'arrête ! Sur quel nombre ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : sur la piste, quel nombre vient juste après dix-neuf ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_droite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #droitegraduee #cp",
+      "tags": [
+        "droite graduée",
+        "compter les sauts",
+        "fusée",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:11",
+          "question": "Jusqu'où ma fusée est-elle montée ?",
+          "choix": [
+            "9",
+            "8",
+            "7"
+          ],
+          "reponse": 1,
+          "explication": "Je pars du 5 : 6, 7, 8. La fusée est sur le 8."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
+    },
+    {
       "id": "cp-suite-avant",
       "pas_avant": "2027-07-26",
       "notionId": "suite_nombre",
