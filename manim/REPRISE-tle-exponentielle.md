@@ -91,3 +91,21 @@ d'une vidéo. Relève à 65 % de contexte (écrire ici, puis lancer la session s
 - `COUPE_PAR_VIDEO` (components/LecteurVideo.tsx) : ajouter les 6 ids `terminale-exp-*` (4,91 si la mesure est la même).
 - Manifeste : commit PAR CLÉS (`python manim/outils-commit-cles.py manim/manifeste-youtube.json <sortie> terminale-exp-`).
 - Rapport final au chef **local_fad0fe0b-b997-493e-ab73-a6c9f2e9ce8c** : 6 tailles R2, lignes notion_ressources, sha.
+
+
+## ✅ SÉRIE FINIE — 26/11 ~17 h 25 (relève n° 3)
+
+| | HD | R2 (Content-Length = local) | coupe |
+|---|---|---|---|
+| E1 definition | 289,30 s | 18 285 315 o | 4,91 |
+| E2 proprietes | 270,92 s (refaite 2 fois d'après la planche HD : « l'après-midi » touchait les boîtes, barre bleue sur « somme », ≠ sur la barre) | 16 987 493 o | 4,91 |
+| E3 deriver | 302,78 s (refait : moniteur) | 19 184 664 o | 4,91 |
+| E4 equation_inequation | 279,90 s | 18 618 072 o | 4,91 |
+| E5 limite | 287,22 s | 18 232 953 o | 4,91 |
+| E6 defi | 283,97 s | 18 730 969 o | 4,91 |
+
+- Les 6 planches HD ont été regardées : 0 bord, aucun « ^ », exposants en hauteur, compte à rebours, lettres BC BA CB AB CA CA.
+- Miniatures `.png` et `.vignette.webp` sur R2 (`manim/poste2/r2-exp.sh <micro>` envoie et compare).
+- Manifeste 84af10fd0 (par clés), videos-r2.json + COUPE_PAR_VIDEO + correction E2 8ef51effd (par clés : `manim/poste2/commit-cles-exp.sh`).
+- notion_ressources : 6 lignes insérées (terminale-spe, fonction_exponentielle, micro_id exp_*, url /video/terminale-exp-*).
+- Reste : push (le chef), publication YouTube (manifeste `plus_tard: true`).
