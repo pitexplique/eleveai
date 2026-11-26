@@ -19,15 +19,16 @@ pas de short, pas de dessin animé.
 - **Tout en toutes lettres** dans la voix : « e puissance x », « moins l'infini »,
   « u prime ». **Chaque nombre et chaque formule dits sont écrits à l'écran, et rien
   n'apparaît avant d'être dit.**
-- ⛔ **Jamais de caractère « ^ » (Frédéric, 26/11/2026 : « écrire l'exponentielle soit
-  exp() soit en KaTeX, mais n'utilise pas ^ »).**
+- ⛔ **Jamais d'accent circonflexe seul (le « chapeau » des calculatrices) pour écrire une
+  puissance** (Frédéric, 26/11/2026 : écrire l'exponentielle « soit exp() soit en KaTeX »).
   - **Dans ce fichier** (règles, passes maths, notes), on écrit exp(x), exp(2x),
     exp(x+3), exp(−0,5t), u′·exp(u).
   - **À l'écran des vidéos, choix de la série : la VRAIE puissance, rendue en `MathTex`
-    (LaTeX)**, l'exposant écrit en petit et en hauteur : e^{x}, e^{2x}, e^{x+3}, u'e^{u} dans
-    le code, mais l'élève voit un vrai « e » avec son exposant, comme dans son cahier et
-    dans le coach (KaTeX). Aucun `Text` ne contient de « ^ ». Contrôle avant chaque rendu :
-    `grep -n 'Text(.*\^' manim/scripts/terminale/exp_*.py` doit être vide.
+    (LaTeX)** : l'élève voit un vrai « e » avec son exposant écrit en petit et en hauteur,
+    comme dans son cahier et dans le coach (KaTeX). Le chapeau n'existe que dans le code
+    LaTeX, jamais dans un `Text`. Contrôle avant chaque rendu : aucun `Text(` des scripts
+    `manim/scripts/terminale/exp_*.py` ne contient de chapeau (une recherche qui doit
+    revenir vide), et la planche `-ql` montre chaque exposant en hauteur.
   - **La voix ne change donc pas** : on voit e avec l'exposant x et on entend
     « e puissance x ». La voix et l'écran disent la même chose.
 - ⚠️ À l'oral, « e puissance x plus 3 » est ambigu. Règle de la série : **à l'écran,
