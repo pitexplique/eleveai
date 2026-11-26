@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Sur l'étang, le jour se lève. Voici la piste de la grenouille. Elle part de zéro.",
+  "01-sauts": "À chaque saut, elle avance de un. Un, deux, trois. Chaque petit trait a son nombre.",
+  "02-ranges": "Sur la piste, les nombres sont bien rangés. Les petits au début. Les grands, plus loin. Jusqu'à dix !",
+  "03-trouver": "Souvent, on n'écrit que quelques nombres. La grenouille dort ici. Je pars du cinq, et je compte les sauts : six, sept. Elle dort sur le sept !",
+  "04-question": "Question ! Une luciole se pose sur la piste. Sur quel nombre ? A : six. B : quatre. C : sept. Mets pause, et compte les sauts !",
+  "04b-reponse": "Réponse A ! Je pars du cinq, et je fais un saut : six.",
+  "05-question": "Question ! Où se cache le nombre neuf ? A : sur le point rouge. B : sur le point vert. C : sur le point bleu. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C ! Neuf, c'est juste avant dix. Un petit saut en arrière : le point bleu.",
+  "06-appris": "Sur la piste, chaque saut avance de un. Je pars d'un nombre écrit, et je compte les sauts.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

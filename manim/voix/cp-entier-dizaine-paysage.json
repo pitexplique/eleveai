@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Ce matin, j'aide la fleuriste du marché. Que de tulipes ! Trop pour les compter une par une.",
+  "01-paquet": "Alors je fais un bouquet de dix. Un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix ! Un ruban, et voilà : une dizaine.",
+  "02-encore": "Encore un bouquet, et encore un. Trois bouquets. Il reste quatre tulipes toutes seules : ce sont les unités.",
+  "03-nombre": "Trois dizaines, quatre unités : trente-quatre ! Le trois, à gauche, compte les bouquets. Le quatre, à droite, compte les fleurs seules.",
+  "04-question": "Question ! Deux paquets de dix crayons, et cinq crayons tout seuls. Combien de crayons ? A : sept. B : cinquante-deux. C : vingt-cinq. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C ! Dix, vingt… puis vingt et un, vingt-deux, vingt-trois, vingt-quatre, vingt-cinq. Deux dizaines, cinq unités : vingt-cinq.",
+  "05-question": "Question ! Dans quarante-six, que compte le quatre ? A : les fleurs toutes seules. B : les bouquets de dix. C : rien du tout. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B ! Le quatre est à gauche : quatre bouquets de dix. Et six fleurs toutes seules. Quarante-six !",
+  "06-appris": "Je fais des paquets de dix. À gauche, j'écris les paquets. À droite, ce qui reste tout seul.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}
