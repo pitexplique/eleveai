@@ -10222,6 +10222,24 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_construire_collection&display=simple"
  },
+ "cp-entier-comparer": {
+  "fichier": "cp/maths/entier/04-comparer/eleveai-maths-cp-entier-comparer-paysage.mp4",
+  "poster": "cp/maths/entier/04-comparer/eleveai-maths-cp-entier-comparer-paysage-miniature.png",
+  "vignette": "cp/maths/entier/04-comparer/eleveai-maths-cp-entier-comparer-paysage-miniature.vignette.webp",
+  "titre": "Qui en a le plus ? Comparer deux nombres — Nombres entiers — épisode 4 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_comparer&display=simple"
+ },
+ "cp-entier-comparer-short": {
+  "fichier": "cp/maths/entier/04-comparer/eleveai-maths-cp-entier-comparer-short.mp4",
+  "poster": "cp/maths/entier/04-comparer/eleveai-maths-cp-entier-comparer-short-miniature.png",
+  "vignette": "cp/maths/entier/04-comparer/eleveai-maths-cp-entier-comparer-short-miniature.vignette.webp",
+  "titre": "Les écureuils : qui a le plus de noisettes ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_comparer&display=simple"
+ },
  "cp-entier-denombre": {
   "fichier": "cp/maths/entier/01-denombre/eleveai-maths-cp-entier-denombre-paysage.mp4",
   "poster": "cp/maths/entier/01-denombre/eleveai-maths-cp-entier-denombre-paysage-miniature.png",
@@ -10239,6 +10257,42 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_denombre&display=simple"
+ },
+ "cp-entier-dizaine": {
+  "fichier": "cp/maths/entier/05-dizaine/eleveai-maths-cp-entier-dizaine-paysage.mp4",
+  "poster": "cp/maths/entier/05-dizaine/eleveai-maths-cp-entier-dizaine-paysage-miniature.png",
+  "vignette": "cp/maths/entier/05-dizaine/eleveai-maths-cp-entier-dizaine-paysage-miniature.vignette.webp",
+  "titre": "Les paquets de dix : dizaines et unités — Nombres entiers — épisode 5 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_dizaine_unite&display=simple"
+ },
+ "cp-entier-dizaine-short": {
+  "fichier": "cp/maths/entier/05-dizaine/eleveai-maths-cp-entier-dizaine-short.mp4",
+  "poster": "cp/maths/entier/05-dizaine/eleveai-maths-cp-entier-dizaine-short-miniature.png",
+  "vignette": "cp/maths/entier/05-dizaine/eleveai-maths-cp-entier-dizaine-short-miniature.vignette.webp",
+  "titre": "53 et 35, c'est pareil ? Le pari des billes #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_dizaine_unite&display=simple"
+ },
+ "cp-entier-droite": {
+  "fichier": "cp/maths/entier/06-droite/eleveai-maths-cp-entier-droite-paysage.mp4",
+  "poster": "cp/maths/entier/06-droite/eleveai-maths-cp-entier-droite-paysage-miniature.png",
+  "vignette": "cp/maths/entier/06-droite/eleveai-maths-cp-entier-droite-paysage-miniature.vignette.webp",
+  "titre": "La piste de la grenouille : placer les nombres — Nombres entiers — épisode 6 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_droite&display=simple"
+ },
+ "cp-entier-droite-short": {
+  "fichier": "cp/maths/entier/06-droite/eleveai-maths-cp-entier-droite-short.mp4",
+  "poster": "cp/maths/entier/06-droite/eleveai-maths-cp-entier-droite-short-miniature.png",
+  "vignette": "cp/maths/entier/06-droite/eleveai-maths-cp-entier-droite-short-miniature.vignette.webp",
+  "titre": "La fusée : jusqu'où est-elle montée ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_droite&display=simple"
  },
  "cp-entier-rang": {
   "fichier": "cp/maths/entier/02-rang/eleveai-maths-cp-entier-rang-paysage.mp4",
