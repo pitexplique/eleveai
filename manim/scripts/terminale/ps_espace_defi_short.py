@@ -289,15 +289,18 @@ def pieces(e):
     subst = e.eq_mots(["3t", "−", "1", "=", "0"], 24)
     e.sans_audit(subst[0])
     e.pose(subst, -1.24)
-    tfrac = VGroup(e.t("t =", 28, VERT_OK, larg=None), tiers(e, 28, VERT_OK)
-                   ).arrange(RIGHT, buff=0.16)
-    e.pose(tfrac, -2.08)
-    cadre_t = SurroundingRectangle(tfrac, color=VERT_OK, buff=0.14, stroke_width=3)
+    # ⛔⛔ PAS DE « t = 1/3 » ICI, ET C'EST LA CORRECTION DU 26/11/2026.
+    # Cet écran l'affichait encadré en vert, et la voix le disait — six secondes avant que
+    # la question ne demande où est le point, avec « au tiers de [AG] » comme choix A.
+    # La question ne demandait rien. ⭐ Le gabarit des onze autres shorts : l'idée montre la
+    # méthode, la question l'applique — ici l'idée s'arrête à « 3t − 1 = 0 », et la résolution
+    # appartient à 02b, qui la disait déjà en entier (« c'est exactement un tiers de AG »).
+    # ⚠️ La voix de 01 est COUPÉE, pas réenregistrée : le WAV s'arrête à 20,10 s, dans un
+    # silence mesuré (rms 0,0 à 20,04 s), et les marques au-delà sont retirées.
     p["01-idee"] = [("titre", titre), ("badge", badge), ("cube", cubeg),
                     ("+ [A G]", ag),
                     ("équation du plan", eqp), ("la normale", nvec),
-                    ("la droite", param), ("la substitution", subst),
-                    ("t", VGroup(tfrac, cadre_t))]
+                    ("la droite", param), ("la substitution", subst)]
 
     # ── 02 / 02b : la question-pause ────────────────────────────────────────
     # ⭐ LES TROIS CHOIX GARDENT LA MÊME FORME, et c'est ce qui compte plus encore que
@@ -365,8 +368,9 @@ def pieces(e):
     # ⚠️ LES TROIS TIERS SONT ÉCRITS EN LIGNE ET NON EN FRACTIONS BÂTIES, et c'est une
     # cote : trois `frac()` côte à côte font **0,83 de haut**, et il ne reste que 0,78
     # sous les cartes avant la boîte de Ti-Margo (mesuré : le bloc descendait à −3,01).
-    # La grande fraction encadrée, elle, a toute sa place à l'écran 01, où elle est la
-    # conclusion du calcul.
+    # ⚠️ Depuis le 26/11, l'écran 01 ne porte PLUS la grande fraction encadrée : elle y
+    # donnait la réponse avant la question. Ce bloc-ci est donc le seul endroit où le
+    # tiers s'écrit, et le trait vert sur le premier tiers de [AG] le montre en longueur.
     # ⛔ Tout le bloc est hors audit : « un tiers, un tiers, un tiers » est dit en
     # LETTRES, et « K » est une lettre.
     bloc_k = e.sans_audit(e.t("K (1/3 ; 1/3 ; 1/3)", 26, VERT_OK, larg=None))
@@ -434,9 +438,9 @@ class PsEspaceDefiShort(ShortEspace):
                   Create(i["+ [A G]"]), run_time=0.4)
         self.au_fin("trois t moins 1 égale zéro")
         self.play(FadeIn(i["la substitution"], shift=UP * 0.08), run_time=0.35)
-        self.au_fin("donc t vaut un tiers")
-        self.play(FadeIn(i["t"][0], shift=UP * 0.08), Create(i["t"][1]), run_time=0.4)
-        self.insister(i["t"], 1.05)
+        # ⭐ On insiste sur « 3t − 1 = 0 » : c'est la DERNIÈRE image avant la question, et
+        # c'est exactement ce qu'on laisse à l'élève — l'équation à résoudre, pas sa solution.
+        self.insister(i["la substitution"], 1.05)
         self.attendre_voix(marge=0.3)
 
         # ── 02 : la question-pause ──────────────────────────────────────────
@@ -448,7 +452,7 @@ class PsEspaceDefiShort(ShortEspace):
         qq = p["02-question"]
         self.play(FadeOut(VGroup(i["cube"], i["+ [A G]"],
                                  i["équation du plan"], i["la normale"], i["la droite"],
-                                 i["la substitution"], i["t"])), run_time=0.3)
+                                 i["la substitution"])), run_time=0.3)
         self.au_mot("Question")
         self.play(FadeIn(qq["tête"], shift=DOWN * 0.12), run_time=0.3)
         self.au_mot("Ce point est donc situé où")
