@@ -159,7 +159,19 @@ def pieces(e):
 
     # ── 02 / 02b : la question-pause ────────────────────────────────────────
     fsq, fsc = 24, 26
-    q_lignes, _ = e.lignes("l'angle entre la grande diagonale et l'arête, "
+    # ⛔ MAJUSCULE, ET C'EST LE GROS PLAN DU 26/11 QUI L'A DIT. Le premier jet recopiait
+    # le fragment de la voix (« … que vaut alors l'angle entre… ») tel quel : l'écran de
+    # pause s'ouvrait donc sur une minuscule, seul des six à le faire. Un écran de pause
+    # est lu SEUL, arrêté, sans la phrase qui le précède — il doit se tenir debout tout
+    # seul. Le découpage l'écrivait déjà « L'angle entre… ».
+    # ⛔⛔ ET « GRANDE » TOMBE AVEC LA MAJUSCULE, CE QUI N'EST PAS UN CHOIX DE STYLE.
+    # Mesuré : en minuscule, « l'angle entre la grande » faisait 3,83 pour 3,90 offerts
+    # — à sept centièmes de la coupe. La capitale passe la ligne au-dessus, `lignes()`
+    # rend QUATRE lignes au lieu de trois, les cartes descendent d'autant et le second
+    # leurre de l'écran 02b finit à −3,20, c'est-à-dire SUR Ti-Margo. C'est la mesure
+    # de la série qui l'a dit, pas l'œil. Sans « grande » : trois lignes, 3,33.
+    # ⭐ Et c'est le texte du découpage, qui écrivait « L'angle entre la diagonale ».
+    q_lignes, _ = e.lignes("L'angle entre la diagonale et l'arête, "
                            "arrondi au degré ?", fsq)
     # ⭐ Les trois libellés font NEUF caractères chacun — « 45 degrés », « 60 degrés »,
     # « 55 degrés ». Mesurés sur l'écran, ils sont strictement ex æquo : un devineur
@@ -225,7 +237,13 @@ def pieces(e):
     # d'aucune marge, il ne chevauche aucun autre bloc, et le dry run est muet. Seule la
     # PLANCHE le montre. C'est la raison d'être de la règle de Frédéric — on regarde
     # l'image avant tout HD.
-    dq = e.pose(VGroup(*e.lignes("aigu, droit ou obtus ?", 30)[0]
+    # ⛔ « Leur angle est-il … » ET NON « aigu, droit ou obtus ? ». Même défaut que
+    # l'écran de pause, vu au même gros plan : la queue d'une phrase de la voix posée
+    # seule à l'écran. Ici la voix donne la tête (« Leur angle est-il aigu, droit ou
+    # obtus ? »), donc on l'écrit en entier — mot pour mot, et c'est une question.
+    # ⚠️ Trois lignes au lieu de deux à 30 px : la donnée est à 1,80 et l'appel à −1,25,
+    # le bloc centré en 0,45 a 2,4 d'unité devant lui pour 1,50 — il y tient.
+    dq = e.pose(VGroup(*e.lignes("Leur angle est-il aigu, droit ou obtus ?", 30)[0]
                        ).arrange(DOWN, buff=0.12), 0.45)
     appel = e.appel_blocs(-1.25)
     p["03-commentaire"] = [("à toi", et), ("donnée", d1), ("question", dq),
