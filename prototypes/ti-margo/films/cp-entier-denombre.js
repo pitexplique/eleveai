@@ -2,7 +2,7 @@
    Série Nombres entiers CP — SHORT 01 : « Qui a raison ? » (micro cp_entier_denombre). Outils : cp-commun.js + cp-entier.js.
    Le copain a compté 8 fraises, Ti Margo en compte 7. On compte ensemble : 7 ! Le copain en a compté une deux fois.
    Question : qui a raison ? A (Ti Margo). Ceinture blanche. Commentaire : combien de cerises ? (9)
-   ⭐ La question se joue SUR l'ardoise : les fraises restent visibles pendant la pause, la carte descend en bas.
+   ⭐ La question se joue SUR l'ardoise : les fraises restent visibles pendant la pause, la carte se range à droite, Ti Margo à gauche (26/11).
    ============================================================ */
 FILMS['denombre']=function(outils){
   const DUR={'00-accroche':8.62,'01-question':10.99,'01b-reponse':9.49,'02-commentaire':8.04,'03-abonne':6.04};
@@ -13,10 +13,7 @@ FILMS['denombre']=function(outils){
 
   poserClasse(); const tab=poserTableau({L:4.4,H:3,x:0,y:4.55});
   outils.panneau.style.display='none'; cssCartes();
-  const css=document.createElement('style');
-  /* La carte en bas : l'ardoise (les fraises) reste visible pendant la question */
-  css.textContent='#carte{top:auto!important;bottom:40px;}';
-  document.head.append(css);
+  carteCoteE(); /* 26/11 : carte à droite, Ti Margo à gauche (voir cp-entier.js) : l'ardoise et Ti Margo restent visibles */
 
   const tMon=mot('00-accroche','Mon'), tFr=mot('00-accroche','fraises'), tHuit=mot('00-accroche','huit'), tSept=mot('00-accroche','sept');
   const tN=k=>mot('01b-reponse',NOMBRES_E[k]);
@@ -72,6 +69,7 @@ FILMS['denombre']=function(outils){
       const dansF=T>=f, gros=T<finTitre;
       tab.g.visible=!gros&&!dansF&&!window.MINI;
       cadrer(cam,{gros,large:dansF});
+      if(T>=q&&T<com) tiMargoCoteE();
 
       if(T<acc+1.4) g.salut(T-acc,1.4);
       else if(gros) g.fier();

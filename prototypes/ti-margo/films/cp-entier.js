@@ -164,3 +164,16 @@ function chapeauFete(c,x,yBas,s=1,coul='#be4bdb'){ c.save(); c.translate(x,yBas)
 /* Un ciel d'étoiles qui scintillent (toujours les mêmes) */
 function etoilesE(c,T,n=18,W=1056,yMax=260){ for(let k=0;k<n;k++){ const x=(k*173+60)%W, y=30+(k*89)%yMax, b=.5+.5*Math.sin(T*2.4+k*1.9);
   etincelle(c,x,y,9+8*b,`rgba(255,236,153,${.45+.55*b})`); } }
+
+/* 26/11 (Frédéric : « CORRIGE ») — SHORTS : pendant la question et la réponse, la carte se range à DROITE, sous l'ardoise,
+   plus compacte ; Ti Margo, plus petit et un peu en arrière, se tient à GAUCHE : on le voit en entier, l'ardoise aussi.
+   Tout tient dans la zone sûre 215 → 1700 px. */
+function carteCoteE(){ const css=document.createElement('style'); css.textContent=`
+  #carte{top:1088px!important;bottom:auto!important;left:440px!important;right:26px!important;padding:12px 14px!important;border-width:6px!important;border-radius:34px!important;}
+  #carte .tete{font-size:46px;padding:4px 26px;margin-bottom:6px;}
+  #carte .q{font-size:48px!important;line-height:1.1;margin-bottom:6px;min-height:54px;}
+  #carte .choix{font-size:50px;gap:14px;padding:2px 14px;margin:7px 2px;border-width:4px;}
+  #carte .choix b{width:62px;height:62px;}
+  #carte #pause{font-size:40px;margin-top:4px;min-height:46px;}
+  #carte #rebours{height:28px;margin:8px 14px 2px;}`; document.head.append(css); }
+function tiMargoCoteE(){ scene.x=-1.74; scene.z=-1.2; scene.taille=.6; }

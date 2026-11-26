@@ -3,7 +3,7 @@
    Outils : cp-commun.js + cp-entier.js. Voix : manim/voix/cp-entier-collection-short.json.
    La petite sœur de Ti Margo a 5 ans ; sur le gâteau, seulement 4 bougies (une place reste vide).
    Question : combien de bougies pour 5 ans ? A (5). Ceinture blanche. Commentaire : et pour 6 ans ?
-   ⭐ La carte descend en bas : le gâteau reste visible pendant la question.
+   ⭐ La carte se range à droite, Ti Margo à gauche (26/11) : le gâteau reste visible pendant la question.
    ============================================================ */
 FILMS['collection']=function(outils){
   const DUR={'00-accroche':7.85,'01-question':12.05,'01b-reponse':8.1,'02-commentaire':6.92,'03-abonne':6.04};
@@ -14,7 +14,7 @@ FILMS['collection']=function(outils){
 
   poserClasse(); const tab=poserTableau({L:4.4,H:3,x:0,y:4.55});
   outils.panneau.style.display='none'; cssCartes();
-  const css=document.createElement('style'); css.textContent='#carte{top:auto!important;bottom:40px;}'; document.head.append(css);
+  carteCoteE(); /* 26/11 : carte à droite, Ti Margo à gauche (voir cp-entier.js) */
 
   const tMa=mot('00-accroche','Ma'), tCinq=mot('00-accroche','cinq'), tGat=mot('00-accroche','gâteau'), tLune=mot('00-accroche','lune');
   const tA=mot('01b-reponse','A'), tCinq2=mot('01b-reponse','cinq',1), tBoug=mot('01b-reponse','bougies'), tManq=mot('01b-reponse','manquait'), tJoy=mot('01b-reponse','Joyeux');
@@ -62,6 +62,7 @@ FILMS['collection']=function(outils){
       const dansF=T>=f, gros=T<finTitre;
       tab.g.visible=!gros&&!dansF&&!window.MINI;
       cadrer(cam,{gros,large:dansF});
+      if(T>=q&&T<com) tiMargoCoteE();
 
       if(T<acc+1.4) g.salut(T-acc,1.4);
       else if(gros) g.ouvre();

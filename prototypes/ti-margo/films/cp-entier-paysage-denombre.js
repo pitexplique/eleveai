@@ -97,7 +97,7 @@ FILMS['denombre']=function(outils){
 
   /* La carte des deux questions */
   const qa=dit('04-question'), qb=dit('05-question');
-  qa('Question !'); qa.jusque('des'); const phrase1=[qa('des pommes.'),qa('Combien ?')]; qa.jusque('Mets'); const pause1=[qa('Mets pause, et compte !')];
+  qa('Question !'); qa.jusque('des'); const phrase1=[qa('Des pommes.'),qa('Combien ?')]; qa.jusque('Mets'); const pause1=[qa('Mets pause, et compte !')];
   qb('Question !'); qb.jusque('Des'); const phrase2=[qb('Des ballons'),(qb.jusque('Combien'),qb('Combien ?'))]; qb.jusque('Mets'); const pause2=[qb('Mets pause, et compte !')];
   const tqa=m=>mot('04-question',m)-q1, tqb=m=>mot('05-question',m)-q2;
   const tB=mot('04b-reponse','B'), tC=tRC;

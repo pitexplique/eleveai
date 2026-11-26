@@ -3,7 +3,7 @@
    Outils : cp-commun.js + cp-entier.js. Voix : manim/voix/cp-entier-rang-short.json.
    Trois escargots (rouge, jaune, bleu) font la course sous la pluie. Le jaune arrive premier.
    Question : qui est premier ? B (le jaune). Ceinture blanche. Commentaire : qui est troisième ? (le bleu)
-   ⭐ La carte descend en bas : la course reste visible pendant la question.
+   ⭐ La carte se range à droite, Ti Margo à gauche (26/11) : la course reste visible pendant la question.
    ============================================================ */
 FILMS['rang']=function(outils){
   const DUR={'00-accroche':8.69,'01-question':11.43,'01b-reponse':6.8,'02-commentaire':6.15,'03-abonne':6.04};
@@ -14,7 +14,7 @@ FILMS['rang']=function(outils){
 
   poserClasse(); const tab=poserTableau({L:4.4,H:3,x:0,y:4.55});
   outils.panneau.style.display='none'; cssCartes();
-  const css=document.createElement('style'); css.textContent='#carte{top:auto!important;bottom:40px;}'; document.head.append(css);
+  carteCoteE(); /* 26/11 : carte à droite, Ti Margo à gauche (voir cp-entier.js) */
 
   const tCest=mot('00-accroche',"C'est"), tCourse=mot('00-accroche','course'), tGout=mot('00-accroche','gouttes'), tAllez=mot('00-accroche','allez');
   const tPrem=mot('01b-reponse','premier'), tBravo=mot('01b-reponse','Bravo'), tJ2=mot('01b-reponse','jaune',2);
@@ -61,6 +61,7 @@ FILMS['rang']=function(outils){
       const dansF=T>=f, gros=T<finTitre;
       tab.g.visible=!gros&&!dansF&&!window.MINI;
       cadrer(cam,{gros,large:dansF});
+      if(T>=q&&T<com) tiMargoCoteE();
 
       if(T<acc+1.4) g.salut(T-acc,1.4);
       else if(gros) g.ouvre();
