@@ -18,6 +18,7 @@
 
 import type { TutorBankItemV4 } from "@/lib/tutor-v4/types";
 import { melangeEnPlace } from "@/lib/tutor-v4/questionBank/melange";
+import { renfortExponentielle } from "./exponentielle-renfort";
 
 // Les propositions d'un gabarit sont écrites à la main, et deux d'entre elles
 // finissent par coïncider dès qu'un paramètre tombe sur une valeur particulière
@@ -49,7 +50,7 @@ function exp(definition: string, methode: string, calcul: string, conclusion: st
   );
 }
 
-export const exponentielleBank: TutorBankItemV4[] = [
+const anciens: TutorBankItemV4[] = [
   /* =========================================================
      EXP_DEFINITION — Comprendre la fonction exponentielle
   ========================================================= */
@@ -1600,4 +1601,31 @@ export const exponentielleBank: TutorBankItemV4[] = [
     ),
     tags: ["terminale-spe", "exponentielle", "type_bac", "signe", "qcm"],
   },
+];
+
+/* 26/11/2026 — Frédéric : « utilise des générateurs ». Mesure du jour : 54 items
+   figés pour 6 gabarits, 13 à 18 questions déjà vues sur 20. Les générateurs de
+   exponentielle-renfort.ts remplacent tout ; on ne garde que les questions de
+   cours (valeur en 0, domaine, sens de variation, les quatre règles de calcul,
+   la formule (e^u)' = u'e^u, la propriété e^A = e^B, les deux limites de
+   référence, l'asymptote, et l'argument du signe de f'). */
+const CAS_SPECIAUX = new Set([
+  "terminale_spe_exp_definition_fixed_1",
+  "terminale_spe_exp_definition_fixed_2",
+  "terminale_spe_exp_definition_fixed_8",
+  "terminale_spe_exp_proprietes_fixed_1",
+  "terminale_spe_exp_proprietes_fixed_2",
+  "terminale_spe_exp_proprietes_fixed_3",
+  "terminale_spe_exp_proprietes_fixed_4",
+  "terminale_spe_exp_deriver_fixed_2",
+  "terminale_spe_exp_equation_fixed_3",
+  "terminale_spe_exp_limite_fixed_1",
+  "terminale_spe_exp_limite_fixed_2",
+  "terminale_spe_exp_limite_fixed_4",
+  "terminale_spe_exp_defi_fixed_10",
+]);
+
+export const exponentielleBank: TutorBankItemV4[] = [
+  ...anciens.filter((i) => CAS_SPECIAUX.has(i.id)),
+  ...renfortExponentielle,
 ];
