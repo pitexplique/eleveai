@@ -784,13 +784,17 @@ export default function CoachIA() {
                     ce fichier (`chez toi&nbsp;!` avant lui) : sans elle le
                     point d'exclamation part seul à la ligne suivante dès que la
                     colonne se resserre. */}
-                <p data-visite="score" className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
+                <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
                   Séries d&apos;exercices avec correction et score&nbsp;!
                 </p>
 
               </div>
 
               <div className="flex flex-wrap gap-2">
+                {/* 26/11/2026 — Frédéric : « met un chips lance l'animation ». En
+                    tête de la rangée : relance la visite guidée de Ti Margo
+                    (components/coach/VisiteGuidee.tsx). */}
+                <BoutonVisiteGuidee />
                 <span className="rounded-full border border-orange-300 bg-white px-4 py-2 text-sm font-semibold text-orange-600">
                   {totalNotions} notions
                 </span>
@@ -816,8 +820,6 @@ export default function CoachIA() {
                 >
                   {tousDeplies ? "Tout replier" : "Tout déplier"}
                 </button>
-                {/* 26/11/2026 : relance la visite guidée de Ti Margo (components/coach/VisiteGuidee.tsx). */}
-                <BoutonVisiteGuidee />
                 {/* ⭐ 22/10/2026 — LE PROGRAMME D'UN AUTRE PAYS (version
                     d'étude). Frédéric : adapter le site aux pays francophones
                     plutôt que le traduire ; « le sélecteur doit venir du
@@ -878,6 +880,7 @@ export default function CoachIA() {
                 🔍
               </span>
               <input
+                data-visite="recherche"
                 type="search"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -1115,7 +1118,7 @@ export default function CoachIA() {
                          le manifeste est vide ; le composant et le script de
                          capture restent — rebrancher, c'est relancer la
                          capture PUIS remettre le composant ici. */
-                      <article key={notionId} className="@container relative">
+                      <article key={notionId} data-visite="bloc" className="@container relative">
                         {/* ⭐ 21/09/2026 — « ça fait un peu fouillis non ».
                             Tout était dans UN flex-wrap : les boutons partaient
                             à la ligne là où la place manquait, donc à un
@@ -1133,7 +1136,7 @@ export default function CoachIA() {
                           {/* Le bouton vit DANS le h3 (motif accordéon), et
                               les liens Fiche / Vidéo restent ses voisins : un
                               lien dans un bouton n'est pas du HTML. */}
-                          <h3 data-visite="notion" className="min-w-0 flex-1 text-base font-bold text-slate-800">
+                          <h3 className="min-w-0 flex-1 text-base font-bold text-slate-800">
                             {forceeParLaRecherche ? (
                               <span className="inline-flex items-center gap-1.5 py-1">
                                 <TexteMath>{libelleNotionMath(notionId)}</TexteMath>
@@ -1240,6 +1243,7 @@ export default function CoachIA() {
                               href={exercicesHref}
                               className={[CASE_EXERCICES, BOUTON_SECONDAIRE].join(" ")}
                               title="La feuille d'exercices corrigés de cette notion"
+                              data-visite="exercices"
                             >
                               <PencilLine className="h-3.5 w-3.5 text-amber-600" />
                               Exercices
@@ -1269,6 +1273,7 @@ export default function CoachIA() {
                               href={`/cartes-mentales/maths/${classe}/${notionId}`}
                               className={[CASE_CM, BOUTON_SECONDAIRE].join(" ")}
                               title="La carte mentale de cette notion, à imprimer"
+                              data-visite="cm"
                             >
                               <Network className="h-3.5 w-3.5 text-teal-600" />
                               CM
