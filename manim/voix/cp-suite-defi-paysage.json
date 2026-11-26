@@ -1,0 +1,11 @@
+{
+  "00-accroche": "Salut ! Chasse au trésor ! Sur le chemin, chaque pierre porte un nombre. Il faut trouver les bonnes pierres.",
+  "01-pas": "Je lis : cinq, dix, quinze, un trou, vingt-cinq. Ici, on avance de cinq en cinq. Il manque vingt.",
+  "02-astuce": "Avant de répondre, je regarde : on avance ou on recule ? De un, de deux, de cinq, de dix ?",
+  "03-question": "Question ! Vingt, dix-neuf, dix-huit, un trou, seize. Quel nombre manque ? A : dix-neuf. B : quinze. C : dix-sept. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C ! On recule de un : dix-huit, dix-sept, seize.",
+  "04-question": "Question ! Dernière pierre : quarante, quarante-cinq, cinquante, un trou. Quel nombre ? A : cinquante-cinq. B : cinquante et un. C : soixante. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A ! De cinq en cinq : cinquante, cinquante-cinq. Le trésor est à nous !",
+  "05-appris": "Dans une suite, je trouve d'abord le pas : un, deux, cinq ou dix. En avant ou à rebours. Puis je continue.",
+  "06-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

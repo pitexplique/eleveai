@@ -1,0 +1,8 @@
+{
+  "format": "paysage",
+  "voix": "cp-suite-{ep}-paysage",
+  "sons": "public/sons/cp-suite-{ep}-paysage",
+  "sortie": "manim/sorties/cp/maths/suite/{num}-{ep}",
+  "nom": "eleveai-maths-cp-suite-{ep}-paysage",
+  "episodes": { "avant": "01", "arriere": "02", "pas": "03", "completer": "04", "defi": "05" }
+}

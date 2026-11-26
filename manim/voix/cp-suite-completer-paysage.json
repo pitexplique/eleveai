@@ -1,0 +1,11 @@
+{
+  "00-accroche": "Salut ! Voici le train de la fête. Chaque wagon a son numéro. Mais oh ! La pluie a effacé des numéros !",
+  "01-trou": "Je lis : douze, treize, un trou, quinze. Entre treize et quinze, il manque quatorze.",
+  "02-astuce": "Pour trouver le trou, je regarde le nombre d'avant ET le nombre d'après.",
+  "03-question": "Question ! Trente-six, trente-sept, un trou, trente-neuf. Quel nombre manque ? A : trente-huit. B : quarante. C : trente-cinq. Mets pause, et choisis !",
+  "03b-reponse": "Réponse A ! Entre trente-sept et trente-neuf, il y a trente-huit.",
+  "04-question": "Question ! Dix, vingt, un trou, quarante. Quel nombre manque ? A : vingt et un. B : trente. C : cinquante. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B ! On avance de dix en dix : dix, vingt, trente, quarante.",
+  "05-appris": "Pour compléter une suite, je cherche de combien on avance, puis je remplis le trou.",
+  "06-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

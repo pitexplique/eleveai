@@ -1,0 +1,11 @@
+{
+  "00-accroche": "Salut ! Une fusée va décoller. Tout le monde compte avec moi : dix, neuf, huit, sept…",
+  "01-compter": "Je compte à rebours : chaque fois, un de moins. Six, cinq, quatre, trois, deux, un… zéro ! Décollage !",
+  "02-piege": "Attention ! À rebours, après trente, ce n'est pas vingt-dix. C'est vingt-neuf : on descend à la dizaine d'avant.",
+  "03-question": "Question ! Je compte à rebours : quarante-trois, quarante-deux… Et après ? A : quarante-quatre. B : quarante. C : quarante et un. Mets pause, et choisis !",
+  "03b-reponse": "Réponse C ! Un de moins que quarante-deux : quarante et un.",
+  "04-question": "Question ! Quel nombre vient juste avant soixante ? A : soixante et un. B : cinquante-neuf. C : cinquante. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B ! Juste avant soixante, il y a cinquante-neuf.",
+  "05-appris": "Compter à rebours, c'est enlever un à chaque fois. Avant un zéro, on descend à la dizaine d'avant.",
+  "06-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

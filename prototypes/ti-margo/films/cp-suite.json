@@ -1,0 +1,7 @@
+{
+  "voix": "cp-suite-{ep}-short",
+  "sons": "public/sons/cp-suite-{ep}-short",
+  "sortie": "manim/sorties/cp/maths/suite/{num}-{ep}",
+  "nom": "eleveai-maths-cp-suite-{ep}-short",
+  "episodes": { "pas": "03", "defi": "05" }
+}

@@ -1,0 +1,11 @@
+{
+  "00-accroche": "Salut ! Ce soir, je lis une histoire. J'en suis à la page vingt-huit. Je tourne la page…",
+  "01-compter": "Après vingt-huit, il y a vingt-neuf. Puis trente ! Je compte en avant : chaque fois, un de plus.",
+  "02-piege": "Attention ! Après vingt-neuf, ce n'est pas vingt-dix. C'est trente : une nouvelle dizaine commence !",
+  "03-question": "Question ! Je suis à la page quarante-cinq. Quelle est la page suivante ? A : quarante-quatre. B : quarante-six. C : cinquante-cinq. Mets pause, et choisis !",
+  "03b-reponse": "Réponse B ! Après quarante-cinq, un de plus : quarante-six.",
+  "04-question": "Question ! Je compte : cinquante-sept, cinquante-huit, cinquante-neuf… Et après ? A : soixante. B : cinquante-dix. C : cinquante. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A ! Après cinquante-neuf vient soixante. Une nouvelle dizaine !",
+  "05-appris": "Compter en avant, c'est ajouter un à chaque fois. Après un neuf, on passe à la dizaine suivante.",
+  "06-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

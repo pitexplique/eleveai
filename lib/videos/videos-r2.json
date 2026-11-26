@@ -10258,6 +10258,69 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_rang&display=simple"
  },
+ "cp-suite-avant": {
+  "fichier": "cp/maths/suite/01-avant/eleveai-maths-cp-suite-avant-paysage.mp4",
+  "poster": "cp/maths/suite/01-avant/eleveai-maths-cp-suite-avant-paysage-miniature.png",
+  "vignette": "cp/maths/suite/01-avant/eleveai-maths-cp-suite-avant-paysage-miniature.vignette.webp",
+  "titre": "La page suivante : compter en avant — Suites de nombres — épisode 1 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=suite_nombre&microId=cp_suite_compter_avant&display=simple"
+ },
+ "cp-suite-arriere": {
+  "fichier": "cp/maths/suite/02-arriere/eleveai-maths-cp-suite-arriere-paysage.mp4",
+  "poster": "cp/maths/suite/02-arriere/eleveai-maths-cp-suite-arriere-paysage-miniature.png",
+  "vignette": "cp/maths/suite/02-arriere/eleveai-maths-cp-suite-arriere-paysage-miniature.vignette.webp",
+  "titre": "Le compte à rebours : compter en reculant — Suites de nombres — épisode 2 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=suite_nombre&microId=cp_suite_compter_arriere&display=simple"
+ },
+ "cp-suite-pas": {
+  "fichier": "cp/maths/suite/03-pas/eleveai-maths-cp-suite-pas-paysage.mp4",
+  "poster": "cp/maths/suite/03-pas/eleveai-maths-cp-suite-pas-paysage-miniature.png",
+  "vignette": "cp/maths/suite/03-pas/eleveai-maths-cp-suite-pas-paysage-miniature.vignette.webp",
+  "titre": "Compter plus vite : de 2 en 2, de 5 en 5, de 10 en 10 — Suites de nombres — épisode 3 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=suite_nombre&microId=cp_suite_2_5_10&display=simple"
+ },
+ "cp-suite-pas-short": {
+  "fichier": "cp/maths/suite/03-pas/eleveai-maths-cp-suite-pas-short.mp4",
+  "poster": "cp/maths/suite/03-pas/eleveai-maths-cp-suite-pas-short-miniature.png",
+  "vignette": "cp/maths/suite/03-pas/eleveai-maths-cp-suite-pas-short-miniature.vignette.webp",
+  "titre": "Des chaussettes de 2 en 2 : combien ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=suite_nombre&microId=cp_suite_2_5_10&display=simple"
+ },
+ "cp-suite-completer": {
+  "fichier": "cp/maths/suite/04-completer/eleveai-maths-cp-suite-completer-paysage.mp4",
+  "poster": "cp/maths/suite/04-completer/eleveai-maths-cp-suite-completer-paysage-miniature.png",
+  "vignette": "cp/maths/suite/04-completer/eleveai-maths-cp-suite-completer-paysage-miniature.vignette.webp",
+  "titre": "Le train de la fête : compléter une suite — Suites de nombres — épisode 4 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=suite_nombre&microId=cp_suite_completer&display=simple"
+ },
+ "cp-suite-defi": {
+  "fichier": "cp/maths/suite/05-defi/eleveai-maths-cp-suite-defi-paysage.mp4",
+  "poster": "cp/maths/suite/05-defi/eleveai-maths-cp-suite-defi-paysage-miniature.png",
+  "vignette": "cp/maths/suite/05-defi/eleveai-maths-cp-suite-defi-paysage-miniature.vignette.webp",
+  "titre": "La chasse au trésor : le défi des suites — Suites de nombres — épisode 5 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=suite_nombre&microId=cp_suite_defi&display=simple"
+ },
+ "cp-suite-defi-short": {
+  "fichier": "cp/maths/suite/05-defi/eleveai-maths-cp-suite-defi-short.mp4",
+  "poster": "cp/maths/suite/05-defi/eleveai-maths-cp-suite-defi-short-miniature.png",
+  "vignette": "cp/maths/suite/05-defi/eleveai-maths-cp-suite-defi-short-miniature.vignette.webp",
+  "titre": "Il manque un nombre au compte à rebours ! #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=suite_nombre&microId=cp_suite_defi&display=simple"
+ },
  "cp-famille-coccinelle": {
   "fichier": "cp/maths/shorts/fr/eleveai-maths-cp-short-famille-coccinelle.mp4",
   "poster": "cp/maths/shorts/fr/vignette-short-eleveai-maths-cp-short-famille-coccinelle.png",

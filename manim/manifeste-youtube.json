@@ -96963,6 +96963,502 @@
       ]
     },
     {
+      "id": "cp-suite-avant",
+      "pas_avant": "2027-07-26",
+      "notionId": "suite_nombre",
+      "microId": "cp_suite_compter_avant",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/suite/01-avant/eleveai-maths-cp-suite-avant-paysage.mp4",
+      "miniature": "cp/maths/suite/01-avant/eleveai-maths-cp-suite-avant-paysage-miniature.png",
+      "titre": "La page suivante : compter en avant — Suites de nombres — épisode 1 · Maths CP",
+      "accroche": "Ce soir, Ti Margo lit une histoire. Page 28… il tourne la page. Et après 29, c'est quelle page ?\n\nDans cette vidéo :\n• compter en avant, c'est ajouter un à chaque fois\n• après 29, ce n'est pas « vingt-dix » : c'est 30\n• après un 9, une nouvelle dizaine commence\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=suite_nombre&microId=cp_suite_compter_avant&display=simple\n\n🦎 Épisode 1 de la série Suites de nombres d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le livre du soir"
+        ],
+        [
+          "00:19",
+          "Après 29, vingt-dix ?"
+        ],
+        [
+          "00:29",
+          "Question 1"
+        ],
+        [
+          "00:55",
+          "Question 2"
+        ],
+        [
+          "01:24",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "compter en avant",
+        "suite de nombres",
+        "nombre suivant",
+        "dizaine",
+        "livre",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:29",
+          "question": "Je suis à la page 45. Quelle est la page suivante ?",
+          "choix": [
+            "44",
+            "46",
+            "55"
+          ],
+          "reponse": 1,
+          "explication": "Après 45, un de plus : 46."
+        },
+        {
+          "t": "00:55",
+          "question": "57, 58, 59… Et après ?",
+          "choix": [
+            "60",
+            "cinquante-dix",
+            "50"
+          ],
+          "reponse": 0,
+          "explication": "Après 59 vient 60 : une nouvelle dizaine."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-suite-arriere",
+      "pas_avant": "2027-07-27",
+      "notionId": "suite_nombre",
+      "microId": "cp_suite_compter_arriere",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/suite/02-arriere/eleveai-maths-cp-suite-arriere-paysage.mp4",
+      "miniature": "cp/maths/suite/02-arriere/eleveai-maths-cp-suite-arriere-paysage-miniature.png",
+      "titre": "Le compte à rebours : compter en reculant — Suites de nombres — épisode 2 · Maths CP",
+      "accroche": "Une fusée va décoller ! Tout le monde compte avec Ti Margo : 10, 9, 8… 0, décollage ! Et à rebours, après 30 ?\n\nDans cette vidéo :\n• compter à rebours, c'est enlever un à chaque fois\n• à rebours, après 30, ce n'est pas « vingt-dix » : c'est 29\n• avant un zéro, on descend à la dizaine d'avant\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=suite_nombre&microId=cp_suite_compter_arriere&display=simple\n\n🦎 Épisode 2 de la série Suites de nombres d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "La fusée décolle"
+        ],
+        [
+          "00:20",
+          "Après 30, vingt-dix ?"
+        ],
+        [
+          "00:31",
+          "Question 1"
+        ],
+        [
+          "00:57",
+          "Question 2"
+        ],
+        [
+          "01:21",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "compter à rebours",
+        "compte à rebours",
+        "suite de nombres",
+        "nombre précédent",
+        "fusée",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:31",
+          "question": "43, 42… Et après ?",
+          "choix": [
+            "44",
+            "40",
+            "41"
+          ],
+          "reponse": 2,
+          "explication": "Un de moins que 42 : 41."
+        },
+        {
+          "t": "00:57",
+          "question": "Quel nombre vient juste avant 60 ?",
+          "choix": [
+            "61",
+            "59",
+            "50"
+          ],
+          "reponse": 1,
+          "explication": "Juste avant 60, il y a 59."
+        }
+      ],
+      "centres": [
+        "espace",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-suite-pas",
+      "pas_avant": "2027-07-28",
+      "notionId": "suite_nombre",
+      "microId": "cp_suite_2_5_10",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/suite/03-pas/eleveai-maths-cp-suite-pas-paysage.mp4",
+      "miniature": "cp/maths/suite/03-pas/eleveai-maths-cp-suite-pas-paysage-miniature.png",
+      "titre": "Compter plus vite : de 2 en 2, de 5 en 5, de 10 en 10 — Suites de nombres — épisode 3 · Maths CP",
+      "accroche": "Ti Margo range ses chaussettes. Elles vont par deux ! Combien de chaussettes ? On compte vite…\n\nDans cette vidéo :\n• de 2 en 2 : 2, 4, 6, 8, 10 (les chaussettes)\n• de 5 en 5 : 5, 10, 15, 20 (les mains)\n• de 10 en 10 : 10, 20, 30, 40 (les paquets de 10 crayons)\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=suite_nombre&microId=cp_suite_2_5_10&display=simple\n\n🦎 Épisode 3 de la série Suites de nombres d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les chaussettes par deux"
+        ],
+        [
+          "00:20",
+          "Mains et paquets de 10"
+        ],
+        [
+          "00:32",
+          "Question 1"
+        ],
+        [
+          "00:57",
+          "Question 2"
+        ],
+        [
+          "01:24",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "compter de 2 en 2",
+        "compter de 5 en 5",
+        "compter de 10 en 10",
+        "suite de nombres",
+        "chaussettes",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:32",
+          "question": "Je compte de 2 en 2 : 10, 12, 14… Et après ?",
+          "choix": [
+            "15",
+            "16",
+            "20"
+          ],
+          "reponse": 1,
+          "explication": "Deux de plus que 14 : 16."
+        },
+        {
+          "t": "00:57",
+          "question": "Je compte de 10 en 10 : 30, 40, 50… Et après ?",
+          "choix": [
+            "51",
+            "55",
+            "60"
+          ],
+          "reponse": 2,
+          "explication": "Dix de plus que 50 : 60."
+        }
+      ],
+      "centres": [
+        "mode",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-suite-pas-short",
+      "pas_avant": "2027-07-28",
+      "notionId": "suite_nombre",
+      "microId": "cp_suite_2_5_10",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "short",
+      "renvoie_vers": "cp-suite-pas",
+      "fichier": "cp/maths/suite/03-pas/eleveai-maths-cp-suite-pas-short.mp4",
+      "miniature": "cp/maths/suite/03-pas/eleveai-maths-cp-suite-pas-short-miniature.png",
+      "titre": "Des chaussettes de 2 en 2 : combien ? #maths #cp",
+      "accroche": "Des chaussettes partout ! Ti Margo compte de 2 en 2 : 2, 4, 6, 8. Encore une paire : combien de chaussettes ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : compte de 5 en 5 jusqu'à 30 ! Dis-le à voix haute, ou réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=suite_nombre&microId=cp_suite_2_5_10&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #cp",
+      "tags": [
+        "chaussettes",
+        "compter de 2 en 2",
+        "compter de 2 en 2",
+        "compter de 5 en 5",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:09",
+          "question": "Encore une paire. Combien de chaussettes ?",
+          "choix": [
+            "9",
+            "12",
+            "10"
+          ],
+          "reponse": 2,
+          "explication": "De 2 en 2 : 8, 10. Dix chaussettes !"
+        }
+      ],
+      "centres": [
+        "mode",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-suite-completer",
+      "pas_avant": "2027-07-29",
+      "notionId": "suite_nombre",
+      "microId": "cp_suite_completer",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/suite/04-completer/eleveai-maths-cp-suite-completer-paysage.mp4",
+      "miniature": "cp/maths/suite/04-completer/eleveai-maths-cp-suite-completer-paysage-miniature.png",
+      "titre": "Le train de la fête : compléter une suite — Suites de nombres — épisode 4 · Maths CP",
+      "accroche": "Voici le train de la fête : chaque wagon a son numéro. Mais la pluie en a effacé un ! Quel numéro manque ?\n\nDans cette vidéo :\n• je regarde le nombre d'avant ET le nombre d'après\n• je cherche de combien on avance\n• puis je remplis le trou\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=suite_nombre&microId=cp_suite_completer&display=simple\n\n🦎 Épisode 4 de la série Suites de nombres d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "La pluie efface un numéro"
+        ],
+        [
+          "00:19",
+          "Mon astuce"
+        ],
+        [
+          "00:25",
+          "Question 1"
+        ],
+        [
+          "00:52",
+          "Question 2"
+        ],
+        [
+          "01:19",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "compléter une suite",
+        "nombre manquant",
+        "suite de nombres",
+        "train",
+        "wagons",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:25",
+          "question": "36, 37, ?, 39. Quel nombre manque ?",
+          "choix": [
+            "38",
+            "40",
+            "35"
+          ],
+          "reponse": 0,
+          "explication": "Entre 37 et 39, il y a 38."
+        },
+        {
+          "t": "00:52",
+          "question": "10, 20, ?, 40. Quel nombre manque ?",
+          "choix": [
+            "21",
+            "30",
+            "50"
+          ],
+          "reponse": 1,
+          "explication": "On avance de 10 en 10 : 10, 20, 30, 40."
+        }
+      ],
+      "centres": [
+        "transports",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-suite-defi",
+      "pas_avant": "2027-07-30",
+      "notionId": "suite_nombre",
+      "microId": "cp_suite_defi",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "longue",
+      "fichier": "cp/maths/suite/05-defi/eleveai-maths-cp-suite-defi-paysage.mp4",
+      "miniature": "cp/maths/suite/05-defi/eleveai-maths-cp-suite-defi-paysage-miniature.png",
+      "titre": "La chasse au trésor : le défi des suites — Suites de nombres — épisode 5 · Maths CP",
+      "accroche": "Chasse au trésor ! Sur le chemin, chaque pierre porte un nombre. Il faut trouver les bonnes pierres pour ouvrir le coffre.\n\nDans cette vidéo :\n• je trouve d'abord le pas : 1, 2, 5 ou 10\n• je regarde : on avance ou on recule ?\n• puis je continue la suite\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=suite_nombre&microId=cp_suite_defi&display=simple\n\n🦎 Épisode 5 de la série Suites de nombres d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les pierres numérotées"
+        ],
+        [
+          "00:21",
+          "On avance ou on recule ?"
+        ],
+        [
+          "00:30",
+          "Question 1"
+        ],
+        [
+          "00:57",
+          "Question 2"
+        ],
+        [
+          "01:27",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "suite de nombres",
+        "défi",
+        "trouver le pas",
+        "chasse au trésor",
+        "nombre manquant",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:30",
+          "question": "20, 19, 18, ?, 16. Quel nombre manque ?",
+          "choix": [
+            "19",
+            "15",
+            "17"
+          ],
+          "reponse": 2,
+          "explication": "On recule de un : 18, 17, 16."
+        },
+        {
+          "t": "00:57",
+          "question": "40, 45, 50, ? Quel nombre ?",
+          "choix": [
+            "55",
+            "51",
+            "60"
+          ],
+          "reponse": 0,
+          "explication": "De 5 en 5 : 50, 55."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "cp-suite-defi-short",
+      "pas_avant": "2027-07-30",
+      "notionId": "suite_nombre",
+      "microId": "cp_suite_defi",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "type": "short",
+      "renvoie_vers": "cp-suite-defi",
+      "fichier": "cp/maths/suite/05-defi/eleveai-maths-cp-suite-defi-short.mp4",
+      "miniature": "cp/maths/suite/05-defi/eleveai-maths-cp-suite-defi-short-miniature.png",
+      "titre": "Il manque un nombre au compte à rebours ! #maths #cp",
+      "accroche": "La fusée décolle à zéro. Mais il manque un nombre au compte à rebours : 5, 4, ?, 2, 1, 0…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 90, 80, 70… quel nombre vient après ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=suite_nombre&microId=cp_suite_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #suites #cp",
+      "tags": [
+        "fusée",
+        "compte à rebours",
+        "suite de nombres",
+        "défi",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:08",
+          "question": "5, 4, ?, 2, 1, 0. Quel nombre manque ?",
+          "choix": [
+            "3",
+            "6",
+            "1"
+          ],
+          "reponse": 0,
+          "explication": "On recule de un : 4, 3, 2. Décollage !"
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "nature-ecologie"
+      ]
+    },
+    {
       "id": "cp-duree-placer-aiguilles",
       "pas_avant": "2027-05-09",
       "notionId": "duree",
