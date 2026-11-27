@@ -1798,3 +1798,82 @@ n'est pas le territoire de cette série, mais quelqu'un la croisera (§ 1).
 `terminale-tvi-appliquer`, `terminale-tvi-unicite`, `terminale-tvi-rediger`,
 `terminale-tvi-defi` — et leurs `microId` : `continuite_reconnaitre`, `tvi_appliquer`,
 `tvi_unicite`, `tvi_rediger`, `tvi_defi`.
+
+---
+
+# 15. VIGNETTES, REGISTRE, ET LE PIÈGE DE L'ENVOI R2 (27/11, fin)
+
+## 15.1 Les cinq miniatures
+
+`manim/miniature_analyse_terminale.py`, copié de `miniature_espace_terminale.py`.
+⭐ `acc_paysage` y est **recopié et non importé** : il porte la CEINTURE, et la ceinture
+appartient à la série. Les helpers de dessin purs (`ajuste`, `ecrire`) sont importés —
+ce sont des outils, pas du contenu.
+
+⛔⛔ **Une vignette ne doit pas donner la réponse d'une question-pause.** C'est la faute
+du rappel de E1 `07` déplacée en couverture, et elle est pire : elle se lit AVANT la
+vidéo. Les cinq relues contre les dix bonnes réponses :
+
+| | verdict |
+|---|---|
+| E1, E4, E5 | rien : ni intervalle de continuité, ni nombre de solutions, ni hypothèse manquante |
+| E2 | « une solution existe, sans la calculer » — **gardée volontairement** : `04` porte sur k = 7 avec f(1) = 5 et f(4) = 9, deux valeurs de MÊME signe. La vignette y pousse vers le leurre A, pas vers la bonne réponse |
+| E3 | ⛔ disait « croissante ne suffit pas : **STRICTEMENT** », et `07` répond « que f soit strictement monotone ». **Corrigée** en « le TVI seul ne donne jamais l'unicité » — l'autre piège de l'épisode, que la voix dit aussi |
+
+⚠️ **25 %, et pourtant à corriger.** E3 était sous le seuil de
+`colonne-ne-donne-pas-la-reponse.py`, qui compare des MOTS. Un instrument ne voit pas
+qu'une couverture *installe* une réponse. ⛔ Un chiffre sous le seuil n'innocente pas.
+
+⚠️ Trois titres auraient été **rétrécis en silence** : mesurés avant, puis raccourcis sur
+des candidats mesurés. ⚠️ Et aucun glyphe exotique : `ariblk.ttf` n'a ni `⟹`, ni `∞`,
+ni `′`. Les cinq images ont été **regardées** : aucun carré vide.
+
+## 15.2 Les cinq clés du registre
+
+Écrites **à la main**. ⛔ `generer-videos-r2.mjs` n'a pas été lancé.
+Diff mesuré : **45 insertions, 0 suppression** — aucune des 2 153 entrées existantes n'a
+bougé. ⭐ `short: false` sur les cinq (c'est ce champ, pas l'URL, qui décide du format
+servi), `youtube: null` sur les cinq, `coach` avec `notion=continuite_tvi` et le bon
+`microId`.
+
+## 15.3 ⛔⛔ `r2-videos.ps1 -Envoyer` N'ENVOIE PAS QUE VOTRE SÉRIE
+
+**Mesuré à l'essai à blanc le 27/11, et c'est le constat le plus utile de cette étape.**
+L'outil fait `rclone copy` sur **tout `manim/sorties`**. Lancé ce soir, il aurait envoyé
+**375 Mo**, dont seulement 121 pour cette série :
+
+| ce qui serait parti | |
+|---|---|
+| les 15 fichiers de la série (5 mp4 + 5 png + 5 webp) | **121 Mo**, voulus |
+| des dizaines de **`_muet.mp4`** de la série 5e, + leurs vignettes | ~250 Mo, **pas à nous** |
+| `apercu-ql-eleveai-maths-5e-aire-triangle.mp4` | 7,2 Mo — un **brouillon `-ql`** |
+
+⛔ **Le filtre `- **/480p*/**` ne protège pas d'un aperçu `-ql`** : celui-là a été copié
+dans un dossier de SORTIE sous un nom ordinaire, donc il passe. Le filtre regarde le
+chemin, pas la nature du fichier.
+⚠️ Et sur R2 on ne reprend pas : `copy` n'efface jamais, donc un fichier envoyé par
+erreur y reste.
+
+⭐ **La commande ciblée, essayée à blanc et exacte (15 fichiers, 120,9 Mo, rien
+d'autre)** :
+
+```
+.\scripts\r2-videos.ps1 -Rclone "copy manim\sorties\terminale\maths\analyse R2:terminale/maths/analyse --transfers 8 --s3-chunk-size 16M"
+```
+
+⭐ Et toujours l'essai à blanc d'abord : `.\scripts\r2-videos.ps1` sans `-Envoyer` liste
+ce qui partirait. ⚠️ Ne pas écrire `2>&1` devant : en PowerShell 5.1, cela transforme le
+`NOTICE` de rclone en erreur et fait croire à un échec.
+
+## 15.4 Où ça en est
+
+| | état |
+|---|---|
+| les 5 voix, la synchronisation, les 5 planches regardées | ✅ |
+| les 5 HD, 0 bord, durées égales aux `-ql` | ✅ |
+| les 5 miniatures + vignettes `.webp`, regardées | ✅ |
+| les 5 clés du registre | ✅ écrites, **non poussées** |
+| **l'envoi R2** | ⏳ **en attente du feu vert de Frédéric** |
+| vérifier que les 5 répondent depuis R2 | ⏳ en les APPELANT, pas en lisant le code de sortie |
+| fusion dans `main`, déploiement, URL en 200 | ⏳ |
+| ⛔ lignes de `notion_ressources` | ⏳ **en tout dernier**, sinon bouton mort |
