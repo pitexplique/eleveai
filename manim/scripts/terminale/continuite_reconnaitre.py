@@ -334,9 +334,20 @@ class ContinuiteReconnaitre(EcransAnalyse):
         self.clear()
         self.dire("07-question")
         self.add_mascotte(scale=0.5)
+        # ⛔⛔ CE RAPPEL DONNAIT LA RÉPONSE DE SA PROPRE QUESTION. Il disait
+        # « ln continue / sur ]0 ; +∞[ », et la bonne réponse de `07` est la carte B,
+        # « sur ]0 ; +∞[ » — mot pour mot, affiché pendant toute la pause. L'élève
+        # n'avait pas à savoir où ln existe : il lui suffisait de faire correspondre
+        # deux lignes. Mesuré à 100 % par `colonne-ne-donne-pas-la-reponse.py`, contre
+        # 0 à 33 % pour les neuf autres questions de la série.
+        # ⭐ Tranché par Frédéric le 27/11 : on garde un rappel, mais il porte la
+        # MÉTHODE au lieu du RÉSULTAT — c'est la phrase que la voix de `07b` emploie
+        # déjà. L'élève doit encore savoir où ln existe, et c'est la compétence visée.
+        # ⚠️ Aucun WAV en jeu : la voix ne dit pas ce rappel, il est à l'écran seul.
         rap = self.pile([self.t("rappel :", 28, GREY_B),
-                         self.t("ln continue", 30, VERT_OK),
-                         self.t("sur ]0 ; +∞[", 30, VERT_OK)], 0.0, xl=-6.2)
+                         self.t("une somme n'existe", 28, VERT_OK),
+                         self.t("que là où ses deux", 28, VERT_OK),
+                         self.t("morceaux existent", 28, VERT_OK)], 0.0, xl=-6.2)
         self.play(FadeIn(rap), run_time=0.4)
 
         t0 = self.renderer.time
