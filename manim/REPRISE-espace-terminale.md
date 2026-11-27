@@ -2946,3 +2946,67 @@ Deux shorts la cassaient, de la même façon :
 et dans le 02b qui l'explique. Pas dans l'accroche, qui doit donner envie sans donner d'indice.
 Les accroches disent maintenant « Pas là où on le croit. » et « Beaucoup de copies **se
 trompent** » : la forme (une idée fausse, encadrée en rouge) est gardée, elle ne désigne plus rien.
+
+
+---
+
+## 27/11 — La serie est FINIE et en ligne : le verrou est leve, tout est mesure
+
+La fusion du poste 1 (`27e6da47e`) a porte les 12 shorts dans `main`. Mesure faite depuis
+`poste2` apres le deploiement, en appelant les URL, pas en lisant la base :
+
+| Ce qui est mesure | Resultat |
+|---|---|
+| Les 12 pages de **paysage** `eleveai.fr/video/<id>` | **12 x 200** — le 404 du 24/11 est clos |
+| Les 12 pages de **short** | **12 x 200** |
+| Lignes de coach dans `notion_ressources` | **24** : chaque micro a son paysage ET son short |
+| `videos-r2.json` | 2 153 sur `poste2` - **2 191 sur `main`** (les 24 cles y sont) |
+| `notion_ressources`, total | 2 095 lignes |
+| Micros de coach pointant hors catalogue | **0** |
+
+### Ne PAS relancer `manim/poste2/coach-shorts-terminale.mjs`
+
+Son verrou etait bon et il a fait son travail : **les 12 lignes sont ecrites**. Le script
+n'a pas de garde anti-doublon — le relancer ecrirait 12 lignes de plus. Il reste au depot
+comme trace de la methode (appeler l'URL avant d'ecrire), pas comme une commande a rejouer.
+
+Son commit `27b189ccd` n'est pas fusionne dans `main`, et ce n'est pas un manque : il
+n'ajoute qu'un outil dans `manim/poste2/`, aucun code que le site sert. Rien n'attend
+cette fusion, et rien dans la serie n'est « desactive ».
+
+## Ce qui reste ouvert, non tranche par Frederic
+
+1. **Deux titres de paysage donnent la reponse de leur propre question** (en production,
+   dans `videos-r2.json` ET dans `notion_ressources`) :
+   - `terminale-ps-espace-angle` — « La grande diagonale d'un cube ne fait pas 45° », alors
+     que la carte A de sa question est « 45 degres » ;
+   - `terminale-ps-espace-defi` — « ...coupe la diagonale du cube a son premier tiers », qui
+     EST la reponse.
+
+   La regle : *une carte ne doit pas etre refutable en se rappelant l'accroche — ni le
+   titre — mot pour mot.* Les 12 shorts la respectent. C'est de l'ecriture, et c'est en
+   ligne : rien ne bouge sans son accord.
+
+2. **Cinq micros de Pythagore n'ont plus aucune video** (sortis du coach le 26/11 avec
+   YouTube, sans rien a mettre a la place) : `4e/pythagore_reciproque_conclure`,
+   `4e/pythagore_rediger`, `4e/pythagore_defi`, `3e/pythagore_rediger`, `3e/pythagore_defi`.
+
+   **Mesure du 27/11 : aucun MP4 de Pythagore n'existe plus sur ce disque.** Recherche sur
+   tout le profil utilisateur : zero fichier `.mp4` dont le chemin contient « pythag », et
+   aucun dossier `media-hd-*pythagore*`. Il n'y a donc **rien a porter sur R2** : il faut
+   les **refaire**. Les scripts Manim, eux, sont tous la —
+   `scripts/4e/pythagore_rediger.py`, `pythagore_reciproque.py`, `pythagore_defi_cube.py`,
+   `scripts/3e/pythagore_solide.py` — donc c'est un rendu a relancer, pas une serie a
+   ecrire de zero.
+
+3. **Terminale spe : 15 notions sur 27 n'ont encore aucune video.** Mesure par
+   `npx tsx manim/poste2/couverture-videos-tle.ts` (lecture seule, catalogue contre
+   `notion_ressources`) : **73 micros ont un paysage, 74 n'en ont pas.** En comptant comme
+   Frederic compte — une notion = une serie de 4 a 6 episodes — cela fait **~55 videos
+   paysage** a produire. Les 12 notions finies : suites, limites de suites, continuite/TVI,
+   convexite, exponentielle, denombrement, geometrie dans l'espace, produit scalaire,
+   probabilites conditionnelles, variable aleatoire, loi binomiale, concentration.
+
+   Les plus grosses restantes : `primitive_integrale` (11 micros), `nombres_complexes` (9),
+   `derivation_fonction` (8), `limite_fonction` (6), `fonction_logarithme` (6),
+   `equation_differentielle` (6).
