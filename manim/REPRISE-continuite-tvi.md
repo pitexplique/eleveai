@@ -1877,3 +1877,34 @@ ce qui partirait. ⚠️ Ne pas écrire `2>&1` devant : en PowerShell 5.1, cela 
 | vérifier que les 5 répondent depuis R2 | ⏳ en les APPELANT, pas en lisant le code de sortie |
 | fusion dans `main`, déploiement, URL en 200 | ⏳ |
 | ⛔ lignes de `notion_ressources` | ⏳ **en tout dernier**, sinon bouton mort |
+
+## 15.5 ✅ L'ENVOI EST FAIT — 15 objets sur R2, vérifiés par somme de contrôle
+
+**Feu vert de Frédéric le 27/11.** Envoi par la commande CIBLÉE du § 15.3, pas par
+`-Envoyer` : 15 objets, 121 Mo, et rien d'autre n'a bougé sur le bucket.
+
+⭐⭐ **Vérifié en interrogeant R2, pas en lisant le code de sortie de l'outil** — « un
+envoi qui rend 0 n'est pas un objet qui répond » :
+
+```
+.\scripts\r2-videos.ps1 -Rclone "lsl R2:terminale/maths/analyse"
+.\scripts\r2-videos.ps1 -Rclone "check manim\sorties\terminale\maths\analyse R2:terminale/maths/analyse --one-way"
+```
+
+| contrôle | résultat |
+|---|---|
+| les 15 objets listés depuis le bucket | ✅ présents |
+| taille R2 contre taille locale, fichier par fichier | ✅ **0 écart sur 15** |
+| `rclone check` (somme de contrôle, pas la taille) | ✅ **0 différence, 15 fichiers correspondants** |
+
+⭐ Le `check` est le contrôle qui compte : deux fichiers peuvent avoir la même taille et
+des contenus différents. C'est lui qui prouve que la miniature de E3 présente sur R2 est
+bien la version **corrigée** (celle sans le mot « STRICTEMENT »), et pas la première.
+
+⚠️ **Ce que ce vert ne dit pas** : rien n'est encore servi à un élève. Les URL
+`eleveai.fr/video/<id>` ne répondront qu'après le push, la fusion dans `main` et le
+déploiement. ⛔ Les lignes de `notion_ressources` viennent **après** ce 200, jamais
+avant : une ligne écrite plus tôt donne un bouton mort.
+
+**Il reste, dans cet ordre** : push (Frédéric) · fusion par union de clés · déploiement ·
+appel des cinq URL pour exiger le 200 · **et seulement alors** les lignes de coach.
