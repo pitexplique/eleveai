@@ -899,6 +899,13 @@ droite le dit : le dry run voit les bords et les nombres, la planche voit l'imag
 | E4 | `tvi_rediger` | ✅ | ✅ 15 clips | ✅ | ✅ 15 / 0 / 0 | ✅ **2 fois** | ⛔ | ⛔ |
 | E5 | `tvi_defi` | ✅ | ✅ 15 clips | ✅ | ✅ 15 / 0 / 0 | ✅ **2 fois** | ⛔ | ⛔ |
 
+✅ **LES CINQ PLANCHES SONT VALIDÉES PAR FRÉDÉRIC (27/11/2026)** : « les écrans sont
+parfaits ». ⛔ **Ce que ce oui couvre, et rien de plus : l'IMAGE.** Il ne vaut ni pour
+l'écriture (les titres, les accroches, et les deux points du § 10.4 restent ouverts), ni
+pour l'arithmétique — c'est la leçon de la série des entiers, où une voix validée disait
+« 6 032 a 3 centaines ». Ici les nombres sont tenus à part, par
+`controler-maths-continuite-tvi.py`, et c'est lui qui en répond.
+
 ⚠️ **Ce que ces planches NE prouvent pas** : la synchronisation. Elles ont été faites
 sans marques, donc tous les `au_mot` y sont estimés au prorata des caractères. Elles
 jugent la **mise en page**, et seulement elle. Une fois les WAV faits, il faut **refaire
