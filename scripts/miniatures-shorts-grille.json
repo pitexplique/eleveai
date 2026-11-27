@@ -1223,5 +1223,101 @@
     "mention": null,
     "sans_decor": true,
     "margo_2d": true
+  },
+  "terminale-espace-vecteurs-short": {
+    "question": ["A(3 ; 1 ; 0), B(5 ; 1 ; 0) :", "le vecteur AB ?"],
+    "calcul": [["(8 ; 2 ; 0)", "blanc", 170], ["on additionne ?", "jaune", 120]],
+    "ceinture": "verte",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "terminale-espace-repere-coordonnees-short": {
+    "question": ["Dans le cube ABCDEFGH :", "les coordonnées de H ?"],
+    "calcul": [["H (1 ; 1 ; 0)", "blanc", 160], ["vraiment ?", "jaune", 130]],
+    "ceinture": "verte",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "terminale-espace-droite-parametrique-short": {
+    "question": ["x = 2 + 3t, y = −t, z = 1 + 4t :", "le vecteur directeur ?"],
+    "calcul": [["(2 ; 0 ; 1)", "blanc", 170], ["les nombres sans t ?", "jaune", 100]],
+    "ceinture": "verte",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "terminale-espace-plan-equation-short": {
+    "question": ["Dans l'espace,", "x = 2, c'est quoi ?"],
+    "calcul": [["x = 2", "blanc", 200], ["une droite ?", "jaune", 140]],
+    "ceinture": "verte",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "terminale-espace-position-relative-short": {
+    "question": ["Droite et plan :", "il reste 0 = 0. Et alors ?"],
+    "calcul": [["0 = 0", "blanc", 200], ["aucun point ?", "jaune", 130]],
+    "ceinture": "verte",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "terminale-espace-defi-short": {
+    "question": ["Elles se croisent", "sur la figure…"],
+    "calcul": [["(AC) et (EB)", "blanc", 150], ["sécantes ?", "jaune", 150]],
+    "ceinture": "verte",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "terminale-ps-espace-calculer-short": {
+    "question": ["u(3 ; 0 ; 1), v(2 ; 1 ; −1) :", "le produit scalaire ?"],
+    "calcul": [["u · v = (6 ; 0 ; −1)", "blanc", 110], ["un vecteur ?", "jaune", 140]],
+    "ceinture": "verte",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "terminale-ps-espace-orthogonalite-short": {
+    "question": ["Orthogonal à UNE direction", "du plan : ça suffit ?"],
+    "calcul": [["u · v = 0", "blanc", 170], ["u orthogonal au plan ?", "jaune", 100]],
+    "ceinture": "verte",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "terminale-ps-espace-norme-distance-short": {
+    "question": ["10 km à plat", "+ 1 km de dénivelé :"],
+    "calcul": [["10 + 1 = 11 km", "blanc", 140], ["vraiment ?", "jaune", 130]],
+    "ceinture": "verte",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "terminale-ps-espace-angle-short": {
+    "question": ["Grande diagonale et arête", "du cube : quel angle ?"],
+    "calcul": [["45°", "blanc", 220], ["à vue d'œil ?", "jaune", 130]],
+    "ceinture": "verte",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "terminale-ps-espace-plan-normal-short": {
+    "question": ["2x − y + 3z − 5 = 0 :", "son vecteur normal ?"],
+    "calcul": [["n = ?", "blanc", 200], ["il faut calculer ?", "jaune", 110]],
+    "ceinture": "verte",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
+  },
+  "terminale-ps-espace-defi-short": {
+    "question": ["Le plan (BDE) coupe", "la diagonale [AG] :"],
+    "calcul": [["au milieu ?", "blanc", 160], ["à vue d'œil…", "jaune", 120]],
+    "ceinture": "verte",
+    "mention": null,
+    "sans_decor": true,
+    "margo_2d": true
   }
 }

@@ -114336,7 +114336,8 @@
           "reponse": 2,
           "explication": "2 égale 2 fois 1, 4 égale 2 fois 2, et 6 égale 2 fois 3. Le même facteur 2 pour les trois coordonnées : le vecteur v égale 2 fois le vecteur u."
         }
-      ]
+      ],
+      "pas_avant": "2026-11-16"
     },
     {
       "id": "terminale-espace-repere-coordonnees",
@@ -114443,7 +114444,8 @@
           "reponse": 0,
           "explication": "Pour aller de A à G, on fait un pas dans chacune des trois directions : un vers B, un vers D, un vers le haut. Le triplet 1, 1, 0, c'est le sommet C, resté au sol."
         }
-      ]
+      ],
+      "pas_avant": "2026-11-18"
     },
     {
       "id": "terminale-espace-droite-parametrique",
@@ -114549,7 +114551,8 @@
           "reponse": 0,
           "explication": "La première ligne donne 1 plus 2 t égale 7, donc t vaut 3. La deuxième suit : 2 moins 3 fait bien moins 1. Mais la troisième donne 3 fois 3, c'est-à-dire 9, et on nous propose 10."
         }
-      ]
+      ],
+      "pas_avant": "2026-11-20"
     },
     {
       "id": "terminale-espace-plan-equation",
@@ -114655,7 +114658,8 @@
           "reponse": 1,
           "explication": "Réécrivons l'équation sous sa forme complète : zéro fois x, plus 1 fois y, plus zéro fois z, moins 1, égale zéro. C'est bien une équation de plan, avec les coefficients zéro, 1 et zéro, qui ne sont pas tous nuls."
         }
-      ]
+      ],
+      "pas_avant": "2026-11-22"
     },
     {
       "id": "terminale-espace-position-relative",
@@ -114762,7 +114766,8 @@
           "reponse": 2,
           "explication": "Parallèles, cela voudrait dire des vecteurs directeurs colinéaires, et l'énoncé dit exactement le contraire. Quant à impossible, c'est tout l'inverse : c'est la route et le pont, le cas le plus courant dans l'espace."
         }
-      ]
+      ],
+      "pas_avant": "2026-11-24"
     },
     {
       "id": "terminale-espace-defi",
@@ -114871,7 +114876,8 @@
           "reponse": 1,
           "explication": "La même norme, cela dit seulement que B et C sont à la même distance de A, ce qui n'a rien à voir avec l'alignement. Et la réponse C est un piège magnifique : trois points de l'espace sont toujours dans un même plan."
         }
-      ]
+      ],
+      "pas_avant": "2026-11-26"
     },
     {
       "id": "terminale-ps-espace-calculer",
@@ -114980,7 +114986,8 @@
           "reponse": 0,
           "explication": "Un produit scalaire nul entre deux vecteurs non nuls, c'est la définition même de l'orthogonalité. Colinéaires, c'est au contraire le cas extrême opposé : le produit scalaire y est le plus grand possible en valeur absolue, il vaut le produit des normes."
         }
-      ]
+      ],
+      "pas_avant": "2026-11-17"
     },
     {
       "id": "terminale-ps-espace-orthogonalite",
@@ -115089,7 +115096,8 @@
           "reponse": 2,
           "explication": "Une seule direction ne suffit jamais, même bien choisie, même si u n'est pas nul. La preuve : le vecteur n pourrait être lui-même dans le plan P, comme le nord est au sol."
         }
-      ]
+      ],
+      "pas_avant": "2026-11-19"
     },
     {
       "id": "terminale-ps-espace-norme-distance",
@@ -115199,7 +115207,8 @@
           "reponse": 2,
           "explication": "Le vecteur A B a pour coordonnées zéro, zéro, 5. Sa norme : racine de zéro plus zéro plus 25, c'est-à-dire racine de 25, donc 5."
         }
-      ]
+      ],
+      "pas_avant": "2026-11-21"
     },
     {
       "id": "terminale-ps-espace-angle",
@@ -115308,7 +115317,8 @@
           "reponse": 1,
           "explication": "Un cosinus ne dépasse jamais 1, jamais. Les deux erreurs les plus fréquentes : avoir divisé par la somme des normes au lieu de leur produit, ou avoir oublié une racine dans une norme."
         }
-      ]
+      ],
+      "pas_avant": "2026-11-23"
     },
     {
       "id": "terminale-ps-espace-plan-normal",
@@ -115417,7 +115427,8 @@
           "reponse": 1,
           "explication": "Les deux normales, 1, 1, 1 et 2, 2, 2, sont colinéaires : les plans sont donc parallèles, ils ne sont pas sécants. Sont-ils confondus ?"
         }
-      ]
+      ],
+      "pas_avant": "2026-11-25"
     },
     {
       "id": "terminale-ps-espace-defi",
@@ -115527,7 +115538,8 @@
           "reponse": 0,
           "explication": "Chacun de ses trois côtés est la diagonale d'une face du cube : B D, B E et D E ont tous pour longueur racine de 2. Rectangle en B ?"
         }
-      ]
+      ],
+      "pas_avant": "2026-11-27"
     },
     {
       "id": "premiere-graph-appartenance",
@@ -116920,6 +116932,394 @@
         "sciences"
       ],
       "plus_tard": true
+    },
+    {
+      "id": "terminale-espace-vecteurs-short",
+      "notionId": "geometrie_espace",
+      "microId": "espace_vecteurs",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-espace-vecteurs",
+      "fichier": "terminale/maths/geometrie/espace-vecteurs/eleveai-maths-terminale-espace-vecteurs-short.mp4",
+      "miniature": "terminale/maths/geometrie/espace-vecteurs/eleveai-maths-terminale-espace-vecteurs-short.png",
+      "titre": "A(3;1;0), B(5;1;0) : vecteur AB = (8;2;0) ? Non ! Arrivée moins départ — Tle spé #Shorts",
+      "accroche": "Un vecteur dans l'espace, c'est trois nombres. Et pour les trouver, un seul geste : arrivée moins départ, coordonnée par coordonnée. A(1 ; 0 ; 0) et B(1 ; 0 ; 2) donnent AB(0 ; 0 ; 2). Additionner, c'est le piège : on obtient une somme, pas un vecteur AB.\n\n🥋 Ceinture verte.\n👉 À toi : A(2 ; 1 ; 4) et B(2 ; 5 ; 4) : que vaut le vecteur AB ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_vecteurs&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\nEntraîne-toi sur eleveai.fr ou YouTube @eleveai974\n\n#Shorts #maths #terminale #bac #vecteurs",
+      "tags": [
+        "vecteurs",
+        "coordonnées",
+        "arrivée moins départ",
+        "géométrie dans l'espace",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "eleveai",
+        "ceinture verte",
+        "Shorts"
+      ],
+      "centres": [
+        "technologie-ia"
+      ],
+      "pas_avant": "2026-11-16"
+    },
+    {
+      "id": "terminale-espace-repere-coordonnees-short",
+      "notionId": "geometrie_espace",
+      "microId": "espace_repere_coordonnees",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-espace-repere-coordonnees",
+      "fichier": "terminale/maths/geometrie/espace-repere-coordonnees/eleveai-maths-terminale-espace-repere-coordonnees-short.mp4",
+      "miniature": "terminale/maths/geometrie/espace-repere-coordonnees/eleveai-maths-terminale-espace-repere-coordonnees-short.png",
+      "titre": "Dans un cube, H = (1;1;0) ? Non ! Compte les pas depuis A 🧊 — Tle spé #Shorts",
+      "accroche": "Dans un cube, les coordonnées des huit sommets ne contiennent que des 0 et des 1, à une condition : bien choisir le repère. Origine A, directions AB, AD, AE : A(0 ; 0 ; 0), B(1 ; 0 ; 0), D(0 ; 1 ; 0), E(0 ; 0 ; 1) et G(1 ; 1 ; 1), tout à l'opposé.\n\n🥋 Ceinture verte.\n👉 À toi : dans le même cube et le même repère, quelles sont les coordonnées du sommet F ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_repere_coordonnees&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\nEntraîne-toi sur eleveai.fr ou YouTube @eleveai974\n\n#Shorts #maths #terminale #bac #cube",
+      "tags": [
+        "repère",
+        "cube",
+        "coordonnées",
+        "géométrie dans l'espace",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "eleveai",
+        "ceinture verte",
+        "Shorts"
+      ],
+      "centres": [
+        "transports"
+      ],
+      "pas_avant": "2026-11-18"
+    },
+    {
+      "id": "terminale-espace-droite-parametrique-short",
+      "notionId": "geometrie_espace",
+      "microId": "espace_droite_parametrique",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-espace-droite-parametrique",
+      "fichier": "terminale/maths/geometrie/espace-droite-parametrique/eleveai-maths-terminale-espace-droite-parametrique-short.mp4",
+      "miniature": "terminale/maths/geometrie/espace-droite-parametrique/eleveai-maths-terminale-espace-droite-parametrique-short.png",
+      "titre": "x = 2 + 3t : le vecteur directeur est (2;0;1) ? Non ! — Tle spé #Shorts",
+      "accroche": "Une représentation paramétrique, c'est trois lignes, et tout y est écrit. Les nombres sans t donnent un point de la droite. Les coefficients de t, avec leurs signes, donnent un vecteur directeur. x = 1 + 2t, y = 2 − t, z = 3t : le point (1 ; 2 ; 0) et la direction (2 ; −1 ; 3).\n\n🥋 Ceinture verte.\n👉 À toi : la droite d' : x = 4 − 2t, y = 3t, z = −1 + t. Quel est un vecteur directeur ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_droite_parametrique&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\nEntraîne-toi sur eleveai.fr ou YouTube @eleveai974\n\n#Shorts #maths #terminale #bac #droite",
+      "tags": [
+        "représentation paramétrique",
+        "droite",
+        "vecteur directeur",
+        "géométrie dans l'espace",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "eleveai",
+        "ceinture verte",
+        "Shorts"
+      ],
+      "centres": [
+        "transports"
+      ],
+      "pas_avant": "2026-11-20"
+    },
+    {
+      "id": "terminale-espace-plan-equation-short",
+      "notionId": "geometrie_espace",
+      "microId": "espace_plan_equation",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-espace-plan-equation",
+      "fichier": "terminale/maths/geometrie/espace-plan-equation/eleveai-maths-terminale-espace-plan-equation-short.mp4",
+      "miniature": "terminale/maths/geometrie/espace-plan-equation/eleveai-maths-terminale-espace-plan-equation-short.png",
+      "titre": "x = 2 dans l'espace, c'est une droite ? Non, un plan entier ! — Tle spé #Shorts",
+      "accroche": "Dans le plan, une équation donne une droite. Dans l'espace, elle donne un plan tout entier : c'est le piège le plus coûteux du chapitre. z = 0, ce n'est ni un point ni une droite, c'est le sol tout entier : x et y restent libres, et deux libertés font une surface.\n\n🥋 Ceinture verte.\n👉 À toi : dans l'espace, l'ensemble des points qui vérifient y = −3, c'est quoi ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_plan_equation&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\nEntraîne-toi sur eleveai.fr ou YouTube @eleveai974\n\n#Shorts #maths #terminale #bac #plan",
+      "tags": [
+        "équation cartésienne",
+        "plan",
+        "ax + by + cz + d = 0",
+        "géométrie dans l'espace",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "eleveai",
+        "ceinture verte",
+        "Shorts"
+      ],
+      "centres": [
+        "sciences"
+      ],
+      "pas_avant": "2026-11-22"
+    },
+    {
+      "id": "terminale-espace-position-relative-short",
+      "notionId": "geometrie_espace",
+      "microId": "espace_position_relative",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-espace-position-relative",
+      "fichier": "terminale/maths/geometrie/espace-position-relative/eleveai-maths-terminale-espace-position-relative-short.mp4",
+      "miniature": "terminale/maths/geometrie/espace-position-relative/eleveai-maths-terminale-espace-position-relative-short.png",
+      "titre": "Il reste 0 = 0 : pas de solution ? Non, la droite est DANS le plan ! — Tle spé #Shorts",
+      "accroche": "Une droite et un plan dans l'espace : trois positions, et une seule ligne de calcul. On remplace x, y et z de la droite dans l'équation du plan, et on lit ce qu'il reste. Une solution (2t = 0) : sécante. Aucune (3 = 0) : strictement parallèle. Toutes (0 = 0) : contenue dans le plan.\n\n🥋 Ceinture verte.\n👉 À toi : la droite d : x = 1 + t, y = t, z = 2t, et le plan P : x + y − z − 1 = 0. Position relative ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_position_relative&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\nEntraîne-toi sur eleveai.fr ou YouTube @eleveai974\n\n#Shorts #maths #terminale #bac #géométrie",
+      "tags": [
+        "position relative",
+        "droite et plan",
+        "substitution",
+        "géométrie dans l'espace",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "eleveai",
+        "ceinture verte",
+        "Shorts"
+      ],
+      "centres": [
+        "transports"
+      ],
+      "pas_avant": "2026-11-24"
+    },
+    {
+      "id": "terminale-espace-defi-short",
+      "notionId": "geometrie_espace",
+      "microId": "espace_defi",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-espace-defi",
+      "fichier": "terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi-short.mp4",
+      "miniature": "terminale/maths/geometrie/espace-defi/eleveai-maths-terminale-espace-defi-short.png",
+      "titre": "Elles se croisent sur la figure… et jamais dans l'espace ! 🧊 — Tle spé #Shorts",
+      "accroche": "Deux droites qui se croisent sur le dessin, et qui ne se rencontrent jamais. Dans le cube ABCDEFGH, les traits de (AC) et de (EB) se coupent. Pourtant (AC) reste au sol et (EB) descend du haut du cube au sol : aucun point commun, aucun plan commun. Ne conclus jamais sur une figure : c'est le calcul qui tranche.\n\n🥋 Ceinture verte.\n👉 À toi : dans le même cube, les droites (AG) et (BH) ont-elles un point commun ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=geometrie_espace&microId=espace_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\nEntraîne-toi sur eleveai.fr ou YouTube @eleveai974\n\n#Shorts #maths #terminale #bac #cube",
+      "tags": [
+        "droites non coplanaires",
+        "perspective",
+        "cube",
+        "exercice type bac",
+        "géométrie dans l'espace",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "eleveai",
+        "ceinture verte",
+        "Shorts"
+      ],
+      "centres": [
+        "jeux-defis"
+      ],
+      "pas_avant": "2026-11-26"
+    },
+    {
+      "id": "terminale-ps-espace-calculer-short",
+      "notionId": "produit_scalaire_espace",
+      "microId": "ps_espace_calculer",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-ps-espace-calculer",
+      "fichier": "terminale/maths/geometrie/ps-espace-calculer/eleveai-maths-terminale-ps-espace-calculer-short.mp4",
+      "miniature": "terminale/maths/geometrie/ps-espace-calculer/eleveai-maths-terminale-ps-espace-calculer-short.png",
+      "titre": "Un produit scalaire donne un vecteur ? Non, un NOMBRE ! — Tle spé #Shorts",
+      "accroche": "Deux vecteurs, trois multiplications, une addition. Et ce qui sort n'est pas un vecteur : c'est un nombre. Dans un repère orthonormé, u(1 ; 2 ; 3) et v(4 ; −1 ; 2) : 4 − 2 + 6 = 8. Le piège : oublier un signe moins.\n\n🥋 Ceinture verte.\n👉 À toi : u(2 ; −1 ; 1) et v(3 ; 1 ; 5) : que vaut leur produit scalaire ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_calculer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\nEntraîne-toi sur eleveai.fr ou YouTube @eleveai974\n\n#Shorts #maths #terminale #bac #produitscalaire",
+      "tags": [
+        "produit scalaire",
+        "coordonnées",
+        "repère orthonormé",
+        "géométrie dans l'espace",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "eleveai",
+        "ceinture verte",
+        "Shorts"
+      ],
+      "centres": [
+        "sport"
+      ],
+      "pas_avant": "2026-11-17"
+    },
+    {
+      "id": "terminale-ps-espace-orthogonalite-short",
+      "notionId": "produit_scalaire_espace",
+      "microId": "ps_espace_orthogonalite",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-ps-espace-orthogonalite",
+      "fichier": "terminale/maths/geometrie/ps-espace-orthogonalite/eleveai-maths-terminale-ps-espace-orthogonalite-short.mp4",
+      "miniature": "terminale/maths/geometrie/ps-espace-orthogonalite/eleveai-maths-terminale-ps-espace-orthogonalite-short.png",
+      "titre": "Orthogonal à UNE direction du plan = orthogonal au plan ? Non ! — Tle spé #Shorts",
+      "accroche": "Un produit scalaire nul prouve que deux vecteurs sont orthogonaux. Mais face à un plan, un seul ne suffit pas. Marc vérifie son poteau au niveau dans un seul sens : il peut être droit vu de face et penché vu de côté. Pour une droite et un plan, il faut deux vecteurs du plan non colinéaires, et deux produits scalaires nuls.\n\n🥋 Ceinture verte.\n👉 À toi : dans le cube ABCDEFGH, les arêtes [AB] et [CG] sont orthogonales. Se coupent-elles ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_orthogonalite&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\nEntraîne-toi sur eleveai.fr ou YouTube @eleveai974\n\n#Shorts #maths #terminale #bac #produitscalaire",
+      "tags": [
+        "orthogonalité",
+        "droite et plan",
+        "produit scalaire",
+        "géométrie dans l'espace",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "eleveai",
+        "ceinture verte",
+        "Shorts"
+      ],
+      "centres": [
+        "sciences"
+      ],
+      "pas_avant": "2026-11-19"
+    },
+    {
+      "id": "terminale-ps-espace-norme-distance-short",
+      "notionId": "produit_scalaire_espace",
+      "microId": "ps_espace_norme_distance",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-ps-espace-norme-distance",
+      "fichier": "terminale/maths/geometrie/ps-espace-norme-distance/eleveai-maths-terminale-ps-espace-norme-distance-short.mp4",
+      "miniature": "terminale/maths/geometrie/ps-espace-norme-distance/eleveai-maths-terminale-ps-espace-norme-distance-short.png",
+      "titre": "10 km à plat + 1 km de dénivelé = 11 km ? Non ! ⛰️ — Tle spé #Shorts",
+      "accroche": "Dix kilomètres à plat et un kilomètre de dénivelé : onze kilomètres parcourus ? Non. On n'additionne pas une distance au sol et une hauteur : on passe par les carrés. 100 + 1 = 101, et √101 fait à peine plus de 10. Le dénivelé change presque tout à l'effort, et presque rien à la distance.\n\n🥋 Ceinture verte.\n👉 À toi : u(2 ; 3 ; 6) : que vaut sa norme ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_norme_distance&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\nEntraîne-toi sur eleveai.fr ou YouTube @eleveai974\n\n#Shorts #maths #terminale #bac #norme",
+      "tags": [
+        "norme",
+        "distance",
+        "racine carrée",
+        "randonnée",
+        "géométrie dans l'espace",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "eleveai",
+        "ceinture verte",
+        "Shorts"
+      ],
+      "centres": [
+        "sport"
+      ],
+      "pas_avant": "2026-11-21"
+    },
+    {
+      "id": "terminale-ps-espace-angle-short",
+      "notionId": "produit_scalaire_espace",
+      "microId": "ps_espace_angle",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-ps-espace-angle",
+      "fichier": "terminale/maths/geometrie/ps-espace-angle/eleveai-maths-terminale-ps-espace-angle-short.mp4",
+      "miniature": "terminale/maths/geometrie/ps-espace-angle/eleveai-maths-terminale-ps-espace-angle-short.png",
+      "titre": "Grande diagonale du cube et arête : 45° ? Non ! 🧊 — Tle spé #Shorts",
+      "accroche": "La grande diagonale d'un cube et une arête : quel angle ? Beaucoup de copies se trompent. Le cosinus, c'est le produit scalaire divisé par le produit des normes. Dans le cube d'arête 1, AG(1 ; 1 ; 1) et AB(1 ; 0 ; 0) : produit scalaire 1, normes √3 et 1, cosinus 1/√3 ≈ 0,577. Le dessin trompe, le calcul tranche.\n\n🥋 Ceinture verte.\n👉 À toi : le produit scalaire de deux vecteurs non nuls vaut −6. Leur angle est-il aigu, droit ou obtus ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_angle&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\nEntraîne-toi sur eleveai.fr ou YouTube @eleveai974\n\n#Shorts #maths #terminale #bac #cube",
+      "tags": [
+        "angle",
+        "cosinus",
+        "produit scalaire",
+        "cube",
+        "géométrie dans l'espace",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "eleveai",
+        "ceinture verte",
+        "Shorts"
+      ],
+      "centres": [
+        "nature-ecologie"
+      ],
+      "pas_avant": "2026-11-23"
+    },
+    {
+      "id": "terminale-ps-espace-plan-normal-short",
+      "notionId": "produit_scalaire_espace",
+      "microId": "ps_espace_plan_normal",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-ps-espace-plan-normal",
+      "fichier": "terminale/maths/geometrie/ps-espace-plan-normal/eleveai-maths-terminale-ps-espace-plan-normal-short.mp4",
+      "miniature": "terminale/maths/geometrie/ps-espace-plan-normal/eleveai-maths-terminale-ps-espace-plan-normal-short.png",
+      "titre": "2x − y + 3z − 5 = 0 : la normale se calcule ? Non, elle est écrite ! — Tle spé #Shorts",
+      "accroche": "Tu as l'équation d'un plan ? Alors tu as déjà son vecteur normal sous les yeux, sans aucun calcul. Les coefficients de x, de y et de z, avec leurs signes : 2x − y + 3z − 5 = 0 a pour vecteur normal (2 ; −1 ; 3). Le terme constant n'en fait pas partie : il dit où se place le plan, pas comment il est orienté.\n\n🥋 Ceinture verte.\n👉 À toi : quel est un vecteur normal au plan d'équation x − 4y + z − 9 = 0 ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_plan_normal&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\nEntraîne-toi sur eleveai.fr ou YouTube @eleveai974\n\n#Shorts #maths #terminale #bac #plan",
+      "tags": [
+        "vecteur normal",
+        "équation de plan",
+        "produit scalaire",
+        "géométrie dans l'espace",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "eleveai",
+        "ceinture verte",
+        "Shorts"
+      ],
+      "centres": [
+        "sciences"
+      ],
+      "pas_avant": "2026-11-25"
+    },
+    {
+      "id": "terminale-ps-espace-defi-short",
+      "notionId": "produit_scalaire_espace",
+      "microId": "ps_espace_defi",
+      "classe": "terminale-spe",
+      "ceinture": "verte",
+      "serie": "Maths Tle spé",
+      "type": "short",
+      "renvoie_vers": "terminale-ps-espace-defi",
+      "fichier": "terminale/maths/geometrie/ps-espace-defi/eleveai-maths-terminale-ps-espace-defi-short.mp4",
+      "miniature": "terminale/maths/geometrie/ps-espace-defi/eleveai-maths-terminale-ps-espace-defi-short.png",
+      "titre": "Le plan (BDE) coupe la diagonale du cube en son milieu ? Non ! 🧊 — Tle spé #Shorts",
+      "accroche": "Dans le cube, le plan (BDE) coupe la grande diagonale [AG], mais pas là où on le croit. Son équation x + y + z − 1 = 0 donne la normale (1 ; 1 ; 1), qui suit justement la diagonale : x = t, y = t, z = t. On remplace : 3t − 1 = 0, donc t = 1/3. Le plan coupe la diagonale à son premier tiers.\n\n🥋 Ceinture verte.\n👉 À toi : quelle est alors la distance du point A au plan (BDE) ? Ta réponse en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\nEntraîne-toi sur eleveai.fr ou YouTube @eleveai974\n\n#Shorts #maths #terminale #bac #cube",
+      "tags": [
+        "projeté orthogonal",
+        "cube",
+        "plan",
+        "exercice type bac",
+        "géométrie dans l'espace",
+        "maths",
+        "terminale",
+        "spé maths",
+        "bac",
+        "lycée",
+        "eleveai",
+        "ceinture verte",
+        "Shorts"
+      ],
+      "centres": [
+        "jeux-defis"
+      ],
+      "pas_avant": "2026-11-27"
     }
   ]
 }
