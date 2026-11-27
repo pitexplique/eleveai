@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Ce soir, c'est le bal masqué des nombres. Un nombre arrive, tout déguisé. Qui se cache là-dessous ?",
+  "01-cubes": "Son premier costume : deux barres de dix, et trois petits cubes. Dix, vingt… vingt et un, vingt-deux, vingt-trois !",
+  "02-costumes": "Il change de costume. En lettres : vingt-trois. En calcul : vingt plus trois. Dans les cadres de dix : deux cadres pleins, et trois jetons.",
+  "03-meme": "Toutes ces écritures disent le même nombre : vingt-trois. C'est toujours lui !",
+  "04-question": "Question ! Un autre nombre arrive : trois barres de dix, et six cubes. Qui est-ce ? A : soixante-trois. B : neuf. C : trente-six. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C ! Trois barres : dix, vingt, trente. Six cubes : trente et un… trente-six. C'est trente-six !",
+  "05-question": "Question ! Le nombre cinquante-deux cherche son costume. Lequel ? A : cinq barres et deux cubes. B : deux barres et cinq cubes. C : sept cubes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A ! Cinquante, c'est cinq barres de dix. Plus deux cubes. Cinquante-deux !",
+  "06-appris": "Un nombre a plusieurs costumes : des chiffres, des lettres, des barres et des cubes. C'est toujours le même nombre !",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

@@ -116,4 +116,16 @@ pas de `PARI` (cp-commun.js) ni dans le film ni sur la miniature. Ne pas toucher
   « 14 < 24 < 40 » et « 32 < 35 < 38 » desserrés, espaces avalés dans l'ardoise de la miniature (→ « ; »). Choix « 32 ; 35 ; 38 » à 58 px.
   ⚠ Piège shell : un heredoc bash avec certains contenus a été coupé (« here-document delimited by end-of-file ») : écrire les gros
   fichiers avec l'outil d'écriture, pas par `cat <<EOF`.
-- [ ] 11 → 12 : films, planches, HD une à la fois. Branchement R2 / manifeste / coach : seulement sur l'accord de Frédéric.
+- [x] 11 representations : dessins ajoutés à `cp-entier3-dessins.js` (barreDixE orange, cubeUniteE bleu, costumeE = b barres + u cubes,
+  rideauE, projecteurE, masqueE, ombreMasqueeE, cadreDixE + jetons, murPierresE, mainLeveeE (doigts levés 1 à 5)).
+  Short « Les mains derrière le mur » (`films/cp-entier2-representations.js`) : 4 copains × 2 mains + 3 doigts → C (43) ; plaques « 10 »
+  au-dessus de chaque copain puis 10, 20, 30, 40… 41, 42, 43 ; les copains sortent. HD 62,8 s (−19,0 dB), compteur ~30-33 s.
+  Paysage « Le bal masqué des nombres » (`films/cp-entier2-paysage-representations.js`) : rideau, ombre masquée, 2 barres + 3 cubes
+  comptés sur une plaque compteur, le masque tombe : 23 ; costumes « vingt-trois », 20 + 3, 2 cadres de dix + 3 jetons, traits vers 23.
+  Q1 3 barres + 6 cubes → C (36), compteur ~57-61 s ; Q2 52 → A (5 barres, 2 cubes ; choix en 44 px), compteur ~88-92 s.
+  HD 120,1 s (−19,4 dB). Miniatures « Combien de doigts ? » (🖐🖐🖐 ?) et « Qui se cache là-dessous ? » 🎭.
+  Corrigé : mains ×1,9 (illisibles à ×1,1), le « 3 » bleu de 43 invisible sur le ciel bleu → plaque sombre, barre et cube du commentaire
+  agrandis et visibles dès le début du « À toi » (ardoise vide 1,3 s → HD refaite), ombre et costumes agrandis, « ? » insécable.
+- [ ] 12 defi : voix, WAV, instants, dessins (hibouE, foretE, brancheE, croixE, coffreE, cadenasE à roues, petitMotE) et les 2 films
+  (`films/cp-entier2-defi.js`, `films/cp-entier2-paysage-defi.js`) ÉCRITS ; planches, HD, miniatures à faire.
+  Branchement R2 / manifeste / coach des paires 7-12 : seulement sur l'accord de Frédéric.
