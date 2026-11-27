@@ -1,6 +1,6 @@
 # Ce qui tombe en silence dans le coach
 
-Mesure du 2026-11-27 02:05 UTC · base `https://www.eleveai.fr`
+Mesure du 2026-11-27 02:48 UTC · base `https://www.eleveai.fr`
 Vérificateur : `npx tsx scripts/verifier-coach-silencieux.ts` (lecture seule).
 Registre R2 lu : **`origin/main` (ce que Vercel sert)** — 2191 clés.
 
@@ -8,10 +8,10 @@ Registre R2 lu : **`origin/main` (ce que Vercel sert)** — 2191 clés.
 
 | grandeur | valeur |
 | --- | ---: |
-| lignes de `notion_ressources` | 2095 |
-| dont `type = "video"` | 2095 |
-| URL distinctes | 1786 |
-| identifiants de vidéo distincts | 1783 |
+| lignes de `notion_ressources` | 2101 |
+| dont `type = "video"` | 2101 |
+| URL distinctes | 1792 |
+| identifiants de vidéo distincts | 1789 |
 | lignes sans `micro_id` (vidéo de notion) | 74 |
 | clés du registre `videos-r2.json` | 2191 |
 
@@ -19,7 +19,7 @@ Registre R2 lu : **`origin/main` (ce que Vercel sert)** — 2191 clés.
 
 | mesure | chiffre |
 | --- | ---: |
-| identifiants appelés | 1783 |
+| identifiants appelés | 1789 |
 | `/api/video-lecteur/<id>` non-200 | **0** |
 | `/video/<id>` non-200 (3xx compris) | **0** |
 | dont redirigés vers YouTube | **0** |
@@ -32,7 +32,7 @@ Registre R2 lu : **`origin/main` (ce que Vercel sert)** — 2191 clés.
 
 | hôte servi | lignes |
 | --- | ---: |
-| `www.eleveai.fr` | 2095 |
+| `www.eleveai.fr` | 2101 |
 
 Lignes servant un hôte YouTube : **0**.
 Clés nommées `youtube-*` (le piège : c'est une clé R2, pas un lien YouTube) : 35 lignes, toutes sur `www.eleveai.fr`.
@@ -85,9 +85,9 @@ Clés nommées `youtube-*` (le piège : c'est une clé R2, pas un lien YouTube) 
 
 | couverture d'une micro servie | micros |
 | --- | ---: |
-| micros servies au total | 1038 |
-| un paysage (avec ou sans short) | 974 |
-| les deux | 943 |
+| micros servies au total | 1041 |
+| un paysage (avec ou sans short) | 977 |
+| les deux | 946 |
 | **seulement un short** (= un trou, pas une couverture) | **64** |
 | seulement des identifiants hors registre | 0 |
 
@@ -181,32 +181,26 @@ Clés nommées `youtube-*` (le piège : c'est une clé R2, pas un lien YouTube) 
 | --- | ---: |
 | clés du registre | 2191 |
 | clés du registre portant un lien `coach` | 1805 |
-| dont AUCUNE ligne de `notion_ressources` ne les sert | **57** |
-| identifiants servis par le coach | 1783 |
+| dont AUCUNE ligne de `notion_ressources` ne les sert | **51** |
+| identifiants servis par le coach | 1789 |
 | dont ABSENTS du registre R2 | **0** |
 
-### Clés R2 avec lien coach mais sans ligne de coach (57)
+### Clés R2 avec lien coach mais sans ligne de coach (51)
 
 | classe visée par le lien coach | clés |
 | --- | ---: |
 | seconde | 23 |
 | 6e | 10 |
 | premiere-spe | 10 |
-| 4e | 8 |
 | 5e | 5 |
+| 4e | 2 |
 | 3e | 1 |
 
-<details><summary>La liste complète (57)</summary>
+<details><summary>La liste complète (51)</summary>
 
 - `3e-affine-defi-short-dessin-anime` (short) → `/coach/serie?classe=3e&matiere=maths&notion=affine_fonction&microId=affine_defi&display=simple`
 - `4e-prop-grandeur-defi-short` (short) → `/coach/serie?classe=4e&matiere=maths&notion=grandeur_composee&microId=grandeur_defi&display=simple`
 - `4e-prop-pourcentages-short-diagonale` (short) → `/coach/serie?classe=4e&matiere=maths&notion=prop_pourcentages&microId=prop_pourcentage_defi&display=simple`
-- `4e-pythagore-defi-cube` → `/coach/serie?classe=4e&matiere=maths&notion=pythagore_theoreme&microId=pythagore_defi&display=simple`
-- `4e-pythagore-defi-cube-short` (short) → `/coach/serie?classe=4e&matiere=maths&notion=pythagore_theoreme&microId=pythagore_defi&display=simple`
-- `4e-pythagore-reciproque` → `/coach/serie?classe=4e&matiere=maths&notion=pythagore_theoreme&microId=pythagore_reciproque_conclure&display=simple`
-- `4e-pythagore-reciproque-short` (short) → `/coach/serie?classe=4e&matiere=maths&notion=pythagore_theoreme&microId=pythagore_reciproque_conclure&display=simple`
-- `4e-pythagore-rediger` → `/coach/serie?classe=4e&matiere=maths&notion=pythagore_theoreme&microId=pythagore_rediger&display=simple`
-- `4e-pythagore-rediger-short` (short) → `/coach/serie?classe=4e&matiere=maths&notion=pythagore_theoreme&microId=pythagore_rediger&display=simple`
 - `5e-frac-additionner-short` (short) → `/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_additionner&display=simple`
 - `5e-frac-multiplier-short` (short) → `/coach/serie?classe=5e&matiere=maths&notion=fraction_calcul&microId=fraction_multiplier&display=simple`
 - `5e-frac-rationnel-short` (short) → `/coach/serie?classe=5e&matiere=maths&notion=fraction_nombre&microId=fraction_rationnel&display=simple`
@@ -377,4 +371,4 @@ Clés nommées `youtube-*` (le piège : c'est une clé R2, pas un lien YouTube) 
 | `app/coach/serie/TutorV4Client.tsx:3001` | catch → valeur de repli | `const data = (await res.json().catch(() => ({}))) as {` |
 | `app/coach-ia/[matiere]/page.tsx:314` | default: sert un contenu | `default:         return "text-slate-700";` |
 
-_Mesure terminée en 190 s._
+_Mesure terminée en 259 s._

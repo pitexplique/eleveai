@@ -207,7 +207,50 @@ comportement d'anciens liens déjà distribués. C'est ta décision.
 
 ---
 
-## Les 57 clés : tout est prêt, rien n'est écrit
+## ✅ Les 6 lignes de Pythagore 4e sont écrites (27/11)
+
+Accord donné sur **6 clés nommées, pas 55** : celles qui comblent un vrai trou. Écrites avec
+`--cles=` (garde de périmètre : le script s'arrête si une clé demandée n'est pas candidate),
+les six gardes passées, zéro refus.
+
+| contrôle | valeur |
+| --- | --- |
+| lignes de `notion_ressources`, comptées avant puis après l'écriture | 2 095 → **2 101** |
+| insertions réussies | **6 / 6** |
+| micros de 4e servies, **recomptées sur l'état final** | **149** |
+| micros de 4e ayant un **paysage**, recomptées sur l'état final | **149** — aucune n'est couverte par un short seul |
+| les 6 URL en 200 (`/api/video-lecteur` **et** `/video`), rappelées après l'écriture | **6 / 6** |
+
+⚠️ Les deux « 149 » sont recomptés sur l'état final, pas déduits d'un delta. Je n'ai **pas**
+mesuré le compte de micros de 4e avant l'écriture : il n'y a donc pas de colonne « avant »
+pour ces deux lignes, et je n'en invente pas.
+
+Les trois micros — `pythagore_defi`, `pythagore_reciproque_conclure`, `pythagore_rediger` —
+reçoivent chacun son paysage **et** son short. Vérifié dans le navigateur sur
+`www.eleveai.fr/coach-ia/maths?classe=4e` : les trois montrent le bouton « Vidéo » et la
+petite case verticale du short.
+
+Pour défaire : lignes `a817fed4…`, `ca83c118…`, `23940300…`, `5af0410a…`, `ea6d392d…`,
+`1bca99d4…` (identifiants complets dans `scripts/REPRISE-COACH-SILENCIEUX.md`).
+
+⏳ **Les 49 autres n'ont pas été écrites** : elles complètent des micros déjà pourvus, et
+c'est à Frédéric de dire ce qui s'ajoute sous les yeux des élèves quand rien ne manque.
+Après écriture, les clés orphelines passent de 57 à **51** (recompté, pas déduit).
+
+⛔ **Deux micros de 3e restent sans aucune vidéo**, et aucune clé du registre ne les sert :
+`3e / pythagore_theoreme / pythagore_rediger` et `3e / pythagore_theoreme / pythagore_defi`.
+Vérifié micro par micro : la notion en a 7, cinq sont servis par les vidéos de 4e — la 3e les
+réutilise, c'est délibéré — et `pythagore_solide` a les siennes. ⭐ Avant de produire :
+`4e-pythagore-rediger` et `4e-pythagore-defi-cube` existent et portent les mêmes identifiants
+de micro ; les rattacher à la 3e coûterait deux lignes au lieu de deux tournages. Décision de
+contenu, pas d'audit.
+
+⚠️ **Le correctif des 42 micros n'est pas en ligne.** La production ne renvoie pas encore le
+champ `short` : les élèves reçoivent toujours un short à la place du cours sur ces 42 micros,
+et jusqu'au déploiement. Les 6 lignes écrites aujourd'hui n'en souffrent pas, leurs shorts
+portant `?format=short`.
+
+## Les 57 clés : l'audit qui a servi à décider
 
 Script : `scripts/brancher-cles-coach-orphelines.ts`. **Il n'écrit pas** sans `--ecrire`,
 et il ne sera lancé que sur l'accord de Frédéric. Six gardes, et une clé refusée par l'une

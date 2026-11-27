@@ -10,6 +10,12 @@
 //
 //   npx tsx scripts/brancher-cles-coach-orphelines.ts            → simulation, n'écrit RIEN
 //   npx tsx scripts/brancher-cles-coach-orphelines.ts --ecrire    → insère (sur accord de Frédéric)
+//   …                                                 --cles=a,b,c → n'agit QUE sur ces clés
+//
+// ⭐ `--cles=` est une GARDE DE PÉRIMÈTRE, pas un confort. Un accord porte sur une liste
+//    nommée, jamais sur « tout ce que le script retient ce jour-là » : le registre bouge,
+//    et une clé ajoutée entre l'accord et l'exécution serait écrite sans que personne
+//    l'ait lue. Le script refuse de démarrer si une clé demandée n'est pas candidate.
 //
 // ⛔ PAR DÉFAUT IL N'ÉCRIT PAS. `--ecrire` est obligatoire, et c'est délibéré :
 //    un script d'insertion sans garde a déjà failli créer 12 lignes en double.
@@ -37,6 +43,10 @@ import { createClient } from "@supabase/supabase-js";
 import { getNotionMicroMap, type Classe, type Matiere } from "../lib/tutor-v4/catalog";
 
 const ECRIRE = process.argv.includes("--ecrire");
+const CLES_DEMANDEES = (process.argv.find((a) => a.startsWith("--cles="))?.split("=")[1] ?? "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
 const BASE = "https://www.eleveai.fr";
 const REF = process.argv.find((a) => a.startsWith("--registre="))?.split("=")[1] ?? "origin/main";
 
@@ -133,6 +143,24 @@ async function main() {
   }
   console.log(`Clés du registre (${REF}) avec lien coach et sans ligne de coach : ${candidates.length}`);
 
+  // ── Garde de périmètre : on n'agit que sur les clés nommées dans l'accord. ──
+  let perimetre = candidates;
+  if (CLES_DEMANDEES.length) {
+    const connues = new Set(candidates.map((c) => c.id));
+    const introuvables = CLES_DEMANDEES.filter((k) => !connues.has(k));
+    if (introuvables.length) {
+      console.error(
+        `\n⛔ ARRÊT : ${introuvables.length} clé(s) demandée(s) ne sont pas candidates — ` +
+          `soit elles sont déjà servies, soit elles n'ont pas de lien coach au registre :\n   ${introuvables.join("\n   ")}`
+      );
+      process.exit(1);
+    }
+    perimetre = candidates.filter((c) => CLES_DEMANDEES.includes(c.id));
+    console.log(`Périmètre de l'accord : ${perimetre.length} clé(s) nommée(s) sur ${candidates.length}.`);
+  }
+  candidates.length = 0;
+  candidates.push(...perimetre);
+
   // ── Gardes 3 et 4 : catalogue, et micro masquée. ──
   const cache = new Map<string, { tout: Record<string, string[]>; vis: Record<string, string[]> }>();
   const catalogue = (c: string, m: string) => {
@@ -220,8 +248,17 @@ async function main() {
     return;
   }
 
+  // ── Le compte AVANT, sur l'état réel de la table (jamais un souvenir). ──
+  const compte = async () => {
+    const { count } = await sb.from("notion_ressources").select("*", { count: "exact", head: true });
+    return count ?? -1;
+  };
+  const avant = await compte();
+  console.log(`\nLignes de notion_ressources AVANT : ${avant}`);
+
   // ── L'écriture, une ligne à la fois, avec une dernière relecture anti-doublon. ──
   let faites = 0;
+  const inserees: { id: string; ligne: string }[] = [];
   for (const c of retenues) {
     const { data: deja } = await sb
       .from("notion_ressources")
@@ -235,22 +272,72 @@ async function main() {
       console.log(`  ~ déjà là, passée : ${c.id}`);
       continue;
     }
-    const { error } = await sb.from("notion_ressources").insert({
-      matiere: c.matiere,
-      classe: c.classe,
-      notion_id: c.notion,
-      type: "video",
-      url: c.url,
-      titre: c.titre,
-      micro_id: c.micro,
-    });
+    const { data: cree, error } = await sb
+      .from("notion_ressources")
+      .insert({
+        matiere: c.matiere,
+        classe: c.classe,
+        notion_id: c.notion,
+        type: "video",
+        url: c.url,
+        titre: c.titre,
+        micro_id: c.micro,
+      })
+      .select("id");
     if (error) console.log(`  ✗ ${c.id} : ${error.message}`);
     else {
       faites++;
-      console.log(`  ✓ ${c.id}`);
+      inserees.push({ id: c.id, ligne: cree?.[0]?.id ?? "?" });
+      console.log(`  ✓ ${c.id}  (ligne ${cree?.[0]?.id ?? "?"})`);
     }
   }
-  console.log(`\n${faites} ligne(s) insérée(s). Relancer le vérificateur pour recompter sur l'état final :`);
+
+  // ── Le recompte SUR L'ÉTAT FINAL, jamais sur le delta. ──
+  const apres = await compte();
+  console.log(`\nLignes de notion_ressources APRÈS : ${apres}   (avant : ${avant})`);
+  console.log(`Insertions réussies : ${faites} / ${retenues.length}`);
+
+  // Les micros de chaque classe touchée qui ont désormais un PAYSAGE, recomptés en entier.
+  const classesTouchees = [...new Set(retenues.map((c) => c.classe))];
+  const final: Row[] = [];
+  for (let de = 0; ; de += 1000) {
+    const { data, error } = await sb
+      .from("notion_ressources")
+      .select("matiere,classe,notion_id,micro_id,url")
+      .eq("type", "video")
+      .order("id")
+      .range(de, de + 999);
+    if (error) throw error;
+    final.push(...(data as Row[]));
+    if (!data || data.length < 1000) break;
+  }
+  for (const cl of classesTouchees) {
+    const avecPaysage = new Set<string>();
+    const servis = new Set<string>();
+    for (const r of final.filter((r) => r.classe === cl)) {
+      const m = (r.micro_id ?? "").trim();
+      if (!m) continue;
+      servis.add(`${r.notion_id}/${m}`);
+      const id = idDeUrl(r.url);
+      const v = id ? resoudre(decodeURIComponent(id)) : null;
+      if (v && !R2[v].short) avecPaysage.add(`${r.notion_id}/${m}`);
+    }
+    console.log(`  ${cl} : ${avecPaysage.size} micros ont un paysage, sur ${servis.size} micros servies (état final)`);
+  }
+
+  // Dernier appel des URL écrites : le bouton doit répondre 200 aujourd'hui.
+  console.log(`\nDernier appel des ${inserees.length} vidéo(s) écrite(s) :`);
+  for (const x of inserees) {
+    const api = await appeler(`${BASE}/api/video-lecteur/${encodeURIComponent(x.id)}`);
+    const page = await appeler(`${BASE}/video/${encodeURIComponent(x.id)}`);
+    console.log(`  ${api === 200 && page === 200 ? "✓" : "✗"} ${x.id}  api=${api} page=${page}`);
+  }
+
+  if (inserees.length) {
+    console.log(`\nPour défaire, si besoin — les ${inserees.length} identifiants de ligne créés :`);
+    console.log(`  ${inserees.map((x) => x.ligne).join(", ")}`);
+  }
+  console.log(`\nRecompter tout sur l'état final :`);
   console.log(`  npx tsx scripts/verifier-coach-silencieux.ts --sortie=scripts/RAPPORT-COACH-SILENCIEUX.md`);
 }
 
