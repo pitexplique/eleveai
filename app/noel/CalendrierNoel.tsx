@@ -87,6 +87,13 @@ export default function CalendrierNoel() {
             className="mx-auto mt-4 h-24 w-auto drop-shadow-[0_0_18px_rgba(252,211,77,0.35)] sm:h-32"
             priority
           />
+          {/* Le simulateur du traîneau (27/11) : l'élève pose les 5 arrêts. */}
+          <Link
+            href="/simulateur-pere-noel"
+            className="mx-auto mt-4 inline-flex items-center gap-2 rounded-2xl bg-amber-300 px-5 py-2.5 font-black text-[#0f1d3a] shadow-lg hover:bg-amber-200"
+          >
+            🛷 Le traîneau du Père Noël : pose ses 5 arrêts →
+          </Link>
         </div>
       </section>
 

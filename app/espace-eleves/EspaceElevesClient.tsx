@@ -128,7 +128,7 @@ const decouvrir = [
   {
     emoji: "🌋",
     title: `${NB_MACHINES} machines dans ta main`,
-    description: "Cyclone, volcan, barrage, lagon… tu règles un curseur, l'île réagit.",
+    description: "Cyclone, traîneau du Père Noël, volcan, barrage… tu poses, tu règles, la machine réagit.",
     href: "/simulateurs",
     color: "from-emerald-400 to-teal-600",
   },
