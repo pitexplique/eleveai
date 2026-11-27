@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Ce soir, Idriss a douze poissons. Il veut en donner autant à chacun de ses trois voisins. Combien dans chaque panier ?",
+  "01-distribue": "Je fais comme pour distribuer des cartes : un poisson dans chaque panier… encore un… encore un… jusqu'au dernier.",
+  "02-resultat": "Dans chaque panier, quatre poissons. Douze, partagé en trois parts égales, ça fait quatre.",
+  "03-verif": "Je vérifie : quatre plus quatre plus quatre, douze. Trois fois quatre, douze. C'est juste !",
+  "04-question": "Question ! Dix crabes, à partager dans deux seaux, autant dans chacun. Combien par seau ? A : huit. B : cinq. C : douze. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B ! Cinq dans un seau, cinq dans l'autre. Cinq plus cinq, dix.",
+  "05-question": "Question ! Quinze coquillages pour trois enfants, autant chacun. Combien chacun ? A : cinq. B : trois. C : douze. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A ! Cinq, cinq et cinq : quinze. Chaque enfant a cinq coquillages.",
+  "06-appris": "Pour partager en parts égales, je distribue un par un. Puis je vérifie que chacun en a autant.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

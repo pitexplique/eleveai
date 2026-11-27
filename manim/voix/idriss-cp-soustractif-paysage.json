@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Sur son étal, Idriss a posé neuf poissons, bien alignés. Mais derrière la caisse… quelqu'un regarde. Miaou !",
+  "01-vol": "Hop ! Le chat file avec deux poissons. Idriss se gratte la tête : combien en reste-t-il ?",
+  "02-reste": "Je compte ceux qui restent : un, deux, trois, quatre, cinq, six, sept. Neuf moins deux, ça fait sept.",
+  "03-mots": "Quand on enlève, on cherche combien il en reste. On retire : c'est une soustraction.",
+  "04-question": "Question ! Huit coquillages sur le quai. Une vague en emporte trois. Combien en reste-t-il ? A : cinq. B : onze. C : trois. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A ! Huit, et j'en enlève trois : sept, six, cinq. Il en reste cinq.",
+  "05-question": "Question ! Idriss avait dix hameçons. Il en fait tomber quatre dans l'eau. Combien lui en reste-t-il ? A : six. B : quatorze. C : quatre. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A ! Dix moins quatre : il lui reste six hameçons. Les quatre autres, c'est pour les poissons !",
+  "06-appris": "On enlève ? Je cherche combien il en reste. Je retire : c'est une soustraction.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

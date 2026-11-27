@@ -1,0 +1,7 @@
+{
+  "voix": "idriss-{ep}-short",
+  "sons": "public/sons/idriss-{ep}-short",
+  "sortie": "manim/sorties/idriss/{num}-{ep}",
+  "nom": "eleveai-maths-idriss-{ep}-short",
+  "episodes": { "cp-additif": "01", "cp-soustractif": "02", "cp-monnaie": "03", "ce1-partage": "04", "ce1-rendre": "05", "ce2-kilo": "06" }
+}

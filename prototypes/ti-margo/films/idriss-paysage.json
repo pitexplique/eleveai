@@ -1,0 +1,8 @@
+{
+  "format": "paysage",
+  "voix": "idriss-{ep}-paysage",
+  "sons": "public/sons/idriss-{ep}-paysage",
+  "sortie": "manim/sorties/idriss/{num}-{ep}",
+  "nom": "eleveai-maths-idriss-{ep}-paysage",
+  "episodes": { "cp-additif": "01", "cp-soustractif": "02", "cp-monnaie": "03", "ce1-partage": "04", "ce1-rendre": "05", "ce2-kilo": "06" }
+}

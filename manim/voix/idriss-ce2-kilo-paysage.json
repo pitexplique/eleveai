@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Au marché, Idriss a écrit sur son ardoise : thon, neuf euros le kilo. Une dame en demande deux kilos.",
+  "01-kilo": "Un kilo, neuf euros. Deux kilos, c'est deux fois neuf euros. Neuf plus neuf, dix-huit euros.",
+  "02-rendre": "La dame donne un billet de vingt euros. De dix-huit à vingt, il manque deux. Idriss lui rend deux euros.",
+  "03-etapes": "Deux étapes : d'abord, je calcule le prix. Ensuite, je calcule la monnaie.",
+  "04-question": "Question ! La dorade coûte six euros le kilo. Un monsieur en prend trois kilos. Combien paie-t-il ? A : dix-huit euros. B : neuf euros. C : soixante-trois euros. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A ! Six, douze, dix-huit. Trois fois six, dix-huit euros.",
+  "05-question": "Question ! Les crevettes coûtent douze euros le kilo. J'en prends deux kilos et je paie avec cinquante euros. Combien me rend-on ? A : trente-huit euros. B : vingt-quatre euros. C : vingt-six euros. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C ! D'abord le prix : douze plus douze, vingt-quatre euros. Puis la monnaie : de vingt-quatre à cinquante, vingt-six euros. Attention, B, c'est le prix, pas la monnaie !",
+  "06-appris": "Le prix au kilo, je le compte autant de fois qu'il y a de kilos. Puis je calcule la monnaie.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}
