@@ -74,6 +74,7 @@ def f_defi(x):
 
 
 class TviUnicite(EcransAnalyse):
+    fichier_marques = "tvi_unicite_marques.json"   # WAV faits le 27/11 (-Debit -6 aux deux etapes)
     nom_voix = "terminale-tvi-unicite"
 
     def page_de_garde(self):

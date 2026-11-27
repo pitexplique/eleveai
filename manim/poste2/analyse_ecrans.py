@@ -435,6 +435,40 @@ class EcransAnalyse(AuditSynchro, MotsCales, Notion6e):
         if reste > 0.03:
             self.wait(reste)
 
+    def au_fin(self, extrait, n=1):
+        """Attend que la voix ait FINI de dire `extrait`, et non qu'elle le COMMENCE.
+
+        ⛔⛔ CE HELPER MANQUAIT, ET C'EST LA CAUSE DE 163 `AUDIT-AVANCE` (27/11, après
+        les WAV). `analyse_ecrans.py` a été recopié de `espace_ecrans.py` « sans le
+        3D » — et `au_fin` est tombé dans la recopie. Mesure : les 5 épisodes de cette
+        série l'appelaient **0 fois** ; `ps_espace_angle.py` l'appelle 50 fois et
+        `espace_plan_equation.py` 28 fois. Les deux séries ont le même besoin, une
+        seule avait l'outil.
+
+        ⭐⭐ CE QU'IL SOIGNE. Une ligne entière paraît d'un coup. Posée au PREMIER mot
+        de ce que la voix en dit, ses derniers nombres sont à l'écran avant d'être dits
+        — « f(1) = 5 » posé sur « f de 1 » met le 5 à l'écran 7 s avant qu'on l'entende.
+        C'est le piège n° 6 de la série des entiers : **une ligne qui finit par un
+        nombre se pose à l'instant de CE nombre.** La série espace l'avait mesuré sur
+        son épisode 3 : 40 `AUDIT-AVANCE`, dont 35 de cette seule cause, et aucun ne
+        dépassait 1,9 s — donc aucun ne sautait aux yeux. Ici ils montent à 17 s.
+
+        ⚠️ L'extrait doit couvrir la ligne JUSQU'À son dernier nombre, intervalle
+        compris : `au_fin("f de 1 vaut 5")`, pas `au_fin("f de 1")`.
+        ⚠️ Sans marques, `t_pos` estime au prorata des caractères et la fin de
+        l'extrait est alors une MEILLEURE estimation que son début — le repli reste bon.
+        """
+        i = -1
+        for _ in range(n):
+            i = self._texte_voix.find(extrait, i + 1)
+            if i < 0:
+                raise ValueError(f"« {extrait} » (n = {n}) absent de la voix "
+                                 f"{self._cle_voix}")
+        j = i + len(extrait)
+        m = self._marques().get(self._cle_voix) or []
+        dedans = [p for p, _ in m if i <= p < j]
+        self.au_pos(max(dedans) if dedans else j - 1)
+
     def q_pause(self, pause, rebours, cle_q, t0, bonne):
         self.au_mot("Mets pause")
         self.play(FadeIn(pause, scale=0.8), FadeIn(rebours, scale=0.6), run_time=0.4)

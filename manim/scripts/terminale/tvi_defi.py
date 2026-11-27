@@ -64,6 +64,7 @@ def f_defi(x):
 
 
 class TviDefi(EcransAnalyse):
+    fichier_marques = "tvi_defi_marques.json"   # WAV faits le 27/11 (-Debit -6 aux deux etapes)
     nom_voix = "terminale-tvi-defi"
 
     def page_de_garde(self):

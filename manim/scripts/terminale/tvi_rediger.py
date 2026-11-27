@@ -59,6 +59,7 @@ Q07 = (["Que manque-t-il", "à cette copie ?"],
 
 
 class TviRediger(EcransAnalyse):
+    fichier_marques = "tvi_rediger_marques.json"   # WAV faits le 27/11 (-Debit -6 aux deux etapes)
     nom_voix = "terminale-tvi-rediger"
 
     def page_de_garde(self):
@@ -237,7 +238,17 @@ class TviRediger(EcransAnalyse):
             if mot:
                 self.au_mot(mot)
             self.play(FadeIn(l, shift=RIGHT * 0.2), run_time=0.3)
-        self.au_mot("la continuité se démontre")
+        # ⛔⛔ UN REPÈRE QUI POINTE EN ARRIÈRE : ce bloc était posé sur
+        # `au_mot("la continuité se démontre")`, et cette phrase est dite dans la
+        # PREMIÈRE phrase du clip (« Appliquons, sur une fonction où la continuité se
+        # démontre vraiment »), soit ~2 s. Posé après les quatre lignes de la copie, le
+        # repère regardait donc 38 s en arrière : `RETARD 05-appliquer 38,64 s` au dry
+        # run du 27/11, le plus gros de la série. Invisible avant les WAV — sans
+        # marques, les `au_mot` sont estimés au prorata et rien ne dépasse.
+        # ⭐ La règle : les repères d'un écran doivent être CROISSANTS dans le texte de
+        # la voix. Le commentaire glose la copie entière, donc il se pose sur la
+        # dernière phrase dite, pas sur l'annonce du début.
+        self.au_mot("d'après le corollaire")
         c = self.t("ici la continuité se DÉMONTRE, elle ne se récite pas", 28, VERT_OK)
         self.play(FadeIn(c.move_to(P(-0.4, -2.6))))
         self.attendre_voix(marge=0.5)

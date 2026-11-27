@@ -85,6 +85,7 @@ def defi(x):
 
 
 class TviAppliquer(EcransAnalyse):
+    fichier_marques = "tvi_appliquer_marques.json"   # WAV faits le 27/11 (-Debit -6 aux deux etapes)
     nom_voix = "terminale-tvi-appliquer"
 
     # ── 00 ──────────────────────────────────────────────────────────────────

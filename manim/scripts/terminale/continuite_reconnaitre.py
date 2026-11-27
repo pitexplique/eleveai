@@ -69,6 +69,7 @@ def hyperbole(x):
 
 
 class ContinuiteReconnaitre(EcransAnalyse):
+    fichier_marques = "continuite_reconnaitre_marques.json"   # WAV faits le 27/11 (-Debit -6 aux deux etapes)
     nom_voix = "terminale-continuite-reconnaitre"
 
     # ── 00 ──────────────────────────────────────────────────────────────────
