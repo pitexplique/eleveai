@@ -4,38 +4,52 @@
    Chargé par films/idriss.js (shorts) et films/idriss-paysage.js (paysages), après cp-entier*.js et cp-entier2/3-dessins.js.
    ============================================================ */
 
-/* Idriss debout : (x, yBas) = entre les bottes ; s = l'échelle (≈ 300 px de haut à s = 1).
-   salut (0 → 1) lève le bras droit et l'agite ; montre (0 → 1) tend le bras gauche ; T anime le salut. */
-function idrissE(c,x,yBas,s=1,{salut=0,montre=0,T=0,lueur=0,cire='#fcc419',cireB='#e67700',peau='#b9774a'}={}){ c.save(); c.translate(x,yBas); c.scale(s,s);
-  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.32*lueur})`; c.beginPath(); c.ellipse(0,-150,120,170,0,0,7); c.fill(); }
-  const CIRE=cire, CIRE_B=cireB, PEAU=peau, PEAU_B='#7a4a2a'; /* 27/11 : un autre ciré pour le pêcheur voisin (paire 6) */
-  /* les bottes et le pantalon */
-  c.fillStyle='#343a40'; c.beginPath(); c.roundRect(-38,-24,32,24,6); c.roundRect(6,-24,32,24,6); c.fill();
-  c.fillStyle='#1c7ed6'; c.fillRect(-32,-96,24,74); c.fillRect(8,-96,24,74);
-  /* le ciré jaune */
+/* Idriss debout : (x, yBas) = entre les bottes ; s = l'échelle (≈ 390 px de haut à s = 1).
+   ⭐ 27/11, portrait par Frédéric (un vrai pêcheur) : yeux BLEUS, peau marron, TRÈS GRAND et élancé, un très beau sourire.
+   Ce portrait vaut à partir de la paire 2 ; les vidéos de la paire 1 gardent l'ancien Idriss (plus petit, yeux fermés) — ne pas les refaire.
+   salut (0 → 1) lève le bras droit et l'agite ; montre (0 → 1) tend le bras gauche ; T anime le salut et les clignements. */
+function idrissE(c,x,yBas,s=1,{salut=0,montre=0,T=0,lueur=0,cire='#fcc419',cireB='#e67700',peau='#b06a3b'}={}){ c.save(); c.translate(x,yBas); c.scale(s,s);
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.32*lueur})`; c.beginPath(); c.ellipse(0,-195,130,215,0,0,7); c.fill(); }
+  const CIRE=cire, CIRE_B=cireB, PEAU=peau, PEAU_B='#6e3f1f'; /* 27/11 : un autre ciré pour le pêcheur voisin (paire 6) */
+  /* les bottes et les longues jambes */
+  c.fillStyle='#343a40'; c.beginPath(); c.roundRect(-36,-26,32,26,6); c.roundRect(4,-26,32,26,6); c.fill();
+  c.fillStyle='#1c7ed6'; c.fillRect(-30,-158,24,134); c.fillRect(6,-158,24,134);
+  /* le ciré jaune, long et élancé */
   c.fillStyle=CIRE; c.strokeStyle=CIRE_B; c.lineWidth=4;
-  c.beginPath(); c.moveTo(-50,-90); c.lineTo(-44,-196); c.quadraticCurveTo(0,-214,44,-196); c.lineTo(50,-90); c.closePath(); c.fill(); c.stroke();
-  c.strokeStyle=CIRE_B; c.lineWidth=3; c.beginPath(); c.moveTo(0,-204); c.lineTo(0,-92); c.stroke();
-  for(const y of [-176,-148,-120]){ c.fillStyle='#e67700'; c.beginPath(); c.arc(6,y,4,0,7); c.fill(); }
-  /* les bras : gauche (vers la droite de l'image si montre) et droit (salut) */
-  const bras=(epaule,ang,main)=>{ c.save(); c.translate(epaule,-188); c.rotate(ang);
-    c.fillStyle=CIRE; c.strokeStyle=CIRE_B; c.lineWidth=4; c.beginPath(); c.roundRect(-11,0,22,92,10); c.fill(); c.stroke();
-    if(main){ c.fillStyle=PEAU; c.strokeStyle=PEAU_B; c.lineWidth=3; c.beginPath(); c.arc(0,100,12,0,7); c.fill(); c.stroke(); } c.restore(); };
+  c.beginPath(); c.moveTo(-46,-140); c.lineTo(-42,-268); c.quadraticCurveTo(0,-286,42,-268); c.lineTo(46,-140); c.closePath(); c.fill(); c.stroke();
+  c.strokeStyle=CIRE_B; c.lineWidth=3; c.beginPath(); c.moveTo(0,-276); c.lineTo(0,-142); c.stroke();
+  for(const y of [-246,-214,-182]){ c.fillStyle='#e67700'; c.beginPath(); c.arc(6,y,4,0,7); c.fill(); }
+  /* les bras, longs eux aussi */
+  const bras=(epaule,ang)=>{ c.save(); c.translate(epaule,-258); c.rotate(ang);
+    c.fillStyle=CIRE; c.strokeStyle=CIRE_B; c.lineWidth=4; c.beginPath(); c.roundRect(-11,0,22,112,10); c.fill(); c.stroke();
+    c.fillStyle=PEAU; c.strokeStyle=PEAU_B; c.lineWidth=3; c.beginPath(); c.arc(0,120,13,0,7); c.fill(); c.stroke(); c.restore(); };
   const agite=salut>0?Math.sin(T*9)*.25*salut:0;
-  bras(-44,.18+salut*2.6+agite,true);
-  bras(44,-.18-montre*1.25,true);
-  /* la tête : visage, barbe courte, yeux qui sourient */
-  c.fillStyle=PEAU; c.strokeStyle=PEAU_B; c.lineWidth=4; c.beginPath(); c.ellipse(0,-246,34,38,0,0,7); c.fill(); c.stroke();
-  c.fillStyle='#212529'; c.beginPath(); c.moveTo(-32,-244); c.quadraticCurveTo(-30,-206,0,-204); c.quadraticCurveTo(30,-206,32,-244);
-  c.quadraticCurveTo(22,-224,0,-222); c.quadraticCurveTo(-22,-224,-32,-244); c.fill();
-  c.strokeStyle='#212529'; c.lineWidth=4; c.lineCap='round';
-  for(const sx of [-1,1]){ c.beginPath(); c.arc(sx*13,-250,6,Math.PI*1.1,Math.PI*1.9); c.stroke(); }
-  c.strokeStyle='#f8f9fa'; c.lineWidth=3; c.beginPath(); c.arc(0,-226,9,.15*Math.PI,.85*Math.PI); c.stroke();
+  bras(-42,.16+salut*2.6+agite);
+  bras(42,-.16-montre*1.25);
+  /* le cou, la tête */
+  c.fillStyle=PEAU; c.fillRect(-11,-292,22,22);
+  c.strokeStyle=PEAU_B; c.lineWidth=4; c.beginPath(); c.ellipse(0,-326,35,40,0,0,7); c.fill(); c.stroke();
+  /* la barbe courte, sur le menton et les joues (elle laisse la place au sourire) */
+  c.fillStyle='#2b2118'; c.beginPath(); c.moveTo(-33,-326); c.quadraticCurveTo(-32,-288,0,-286); c.quadraticCurveTo(32,-288,33,-326);
+  c.quadraticCurveTo(28,-300,0,-298); c.quadraticCurveTo(-28,-300,-33,-326); c.fill();
+  /* le grand sourire, qui montre les dents */
+  c.fillStyle='#7a1f1f'; c.beginPath(); c.moveTo(-19,-312); c.quadraticCurveTo(0,-308,19,-312); c.quadraticCurveTo(16,-293,0,-292); c.quadraticCurveTo(-16,-293,-19,-312); c.fill();
+  c.fillStyle='#fff'; c.beginPath(); c.moveTo(-17,-311); c.quadraticCurveTo(0,-307,17,-311); c.lineTo(15,-304); c.quadraticCurveTo(0,-301,-15,-304); c.closePath(); c.fill();
+  c.strokeStyle='#dee2e6'; c.lineWidth=1.2; for(const u of [-8,0,8]){ c.beginPath(); c.moveTo(u,-309); c.lineTo(u,-303); c.stroke(); }
+  c.strokeStyle=PEAU_B; c.lineWidth=2; for(const sx of [-1,1]){ c.beginPath(); c.arc(sx*22,-310,5,sx>0?Math.PI*1.4:Math.PI*1.1,sx>0?Math.PI*1.9:Math.PI*1.6); c.stroke(); }
+  /* les yeux BLEUS, ouverts : blanc, iris bleu, pupille, reflet (un clignement de temps en temps) */
+  const cl=Math.sin(T*.9+x*.01)>.985?.15:1;
+  for(const sx of [-1,1]){ const ex=sx*13, ey=-334;
+    c.fillStyle='#fff'; c.beginPath(); c.ellipse(ex,ey,9,7.5*cl,0,0,7); c.fill(); c.strokeStyle=PEAU_B; c.lineWidth=1.5; c.stroke();
+    if(cl>.5){ c.fillStyle='#339af0'; c.beginPath(); c.arc(ex+1,ey,5.2,0,7); c.fill(); c.fillStyle='#1864ab'; c.beginPath(); c.arc(ex+1,ey,5.2,0,7); c.lineWidth=1.2; c.strokeStyle='#1864ab'; c.stroke();
+      c.fillStyle='#111'; c.beginPath(); c.arc(ex+1,ey,2.4,0,7); c.fill(); c.fillStyle='#fff'; c.beginPath(); c.arc(ex-1,ey-2,1.6,0,7); c.fill(); }
+    c.strokeStyle='#2b2118'; c.lineWidth=3; c.lineCap='round'; c.beginPath(); c.moveTo(ex-9,ey-12); c.quadraticCurveTo(ex,ey-16,ex+9,ey-12); c.stroke(); c.lineCap='butt'; }
+  c.fillStyle=PEAU_B; c.globalAlpha=.5; c.beginPath(); c.moveTo(0,-330); c.lineTo(-4,-318); c.lineTo(4,-318); c.closePath(); c.fill(); c.globalAlpha=1;
   /* le bob de pêcheur, jaune comme le ciré */
   c.fillStyle=CIRE; c.strokeStyle=CIRE_B; c.lineWidth=4;
-  c.beginPath(); c.ellipse(0,-272,52,12,0,0,7); c.fill(); c.stroke();
-  c.beginPath(); c.moveTo(-30,-272); c.quadraticCurveTo(-28,-306,0,-308); c.quadraticCurveTo(28,-306,30,-272); c.closePath(); c.fill(); c.stroke();
-  c.lineCap='butt'; c.restore(); }
+  c.beginPath(); c.ellipse(0,-354,54,12,0,0,7); c.fill(); c.stroke();
+  c.beginPath(); c.moveTo(-31,-354); c.quadraticCurveTo(-29,-388,0,-390); c.quadraticCurveTo(29,-388,31,-354); c.closePath(); c.fill(); c.stroke();
+  c.restore(); }
 
 /* Un poisson vu de côté : (x, y) = le centre ; L = la longueur ; dir = 1 tête à droite, −1 à gauche ;
    z = l'apparition (zoom) ; lueur ; T fait frétiller la queue ; ray = des rayures */

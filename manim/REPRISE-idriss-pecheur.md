@@ -5,6 +5,14 @@ Choix : « Les 6, dans l'ordre », « 6 shorts et 6 paysage ». Voix des 12 dans
 (validées : « Oui, lance la paire 1 »). Ses réponses sur Idriss (accord du prénom, ce qu'il pêche, où il vend) : pas encore données ;
 hypothèse : barque bleue, ligne + filet, marché du port, aucun lieu nommé.
 
+## Idriss, le vrai (27/11, Frédéric)
+- « Parfait pour Idriss » : accord pour le prénom. Un vrai pêcheur rencontré à Saint-Gilles (la Réunion) — à garder pour une future
+  description YouTube, JAMAIS dans les vidéos (aucun lieu nommé).
+- Portrait : yeux BLEUS, peau marron, TRÈS GRAND et élancé, très sympa, un très beau sourire. `idrissE` redessiné le 27/11 soir
+  (≈ 390 px à s = 1 au lieu de 308 ; yeux ouverts bleus ; grand sourire avec les dents ; ciré, bob jaunes et barbe courte gardés).
+- ⛔ « Ne corrige pas les anciennes, adopte le profil aux prochaines » : la paire 1 garde l'ancien Idriss, AUCUN nouveau rendu de la paire 1.
+  La paysage 02 (rendue avant le nouveau portrait) garde aussi l'ancien Idriss ; le short 02 n'a pas d'Idriss.
+
 ## Le socle
 - Séries : `prototypes/ti-margo/films/idriss.json` (shorts) et `idriss-paysage.json` ; épisodes nommés `<classe>-<idée>` (cp-additif…).
 - `films/idriss-commun.js` relit `cp-commun.js` (la page charge `<préfixe>-commun.js`).

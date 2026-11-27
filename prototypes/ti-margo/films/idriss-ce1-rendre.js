@@ -41,7 +41,7 @@ FILMS['ce1-rendre']=function(outils){
 
     const reve=T>=tVagues&&T<r;
     idrissE(c,880,700,1.3,{montre:T>=tRend&&T<q?1:0,salut:T>=r&&T>=tSourire?1:0,T});
-    if(T>=tVagues) reveVaguesE(c,760,120,250,140,860,260,T,reve?zoom(T,tVagues,.5):0);
+    if(T>=tVagues) reveVaguesE(c,680,110,250,140,830,205,T,reve?zoom(T,tVagues,.5):0);
     comptoir(c);
     if(T>=tPoisson) poissonE(c,250,380,330,'#ffa94d',{T,z:zoom(T,tPoisson,.4)});
     if(T>=tHuit) prixE(c,'8 €',250,160,110,{z:zoom(T,tHuit,.5)});

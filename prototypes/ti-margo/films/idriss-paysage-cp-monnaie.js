@@ -45,13 +45,13 @@ FILMS['cp-monnaie']=function(outils){
   function zonePaie(c){ c.save(); c.setLineDash([14,10]); c.strokeStyle='rgba(255,255,255,.7)'; c.lineWidth=4; c.beginPath(); c.roundRect(90,585,440,120,20); c.stroke(); c.restore(); }
   /* une rangée de pièces / billets à partir de x0, centrée en y ; renvoie le bord droit */
   function rangee(c,T,vals,x0,y,{z=1,lueur=0,terne=0}={}){ let x=x0;
-    vals.forEach(v=>{ const w=v>2?128:96; euroE(c,v,x+w/2,y,v>2?26:38,{z,lueur,terne}); x+=w+8; }); return x; }
+    vals.forEach(v=>{ const w=v>2?156:(v===2?116:104); euroE(c,v,x+w/2,y,v>2?34:52,{z,lueur,terne}); x+=w+6; }); return x; }
   function choixDessines(c,T,rangs,ts,{bonne=-1,tB=1e9,ternes=[],sommes=[]}={}){
-    rangs.forEach((vals,k)=>{ if(T<ts[k]) return; const y=420+k*110, z=zoom(T,ts[k],.4);
-      etiquette(c,'ABC'[k],48,y,T,ts[k],CRAIE.blanc,50);
+    rangs.forEach((vals,k)=>{ if(T<ts[k]) return; const y=410+k*118, z=zoom(T,ts[k],.4);
+      etiquette(c,'ABC'[k],36,y,T,ts[k],CRAIE.blanc,44);
       const tn=ternes[k]&&T>=ternes[k]?1:0, lu=k===bonne&&T>=tB?.5+.5*Math.sin(T*5):0;
-      const xd=rangee(c,T,vals,95,y,{z,lueur:lu,terne:tn});
-      const s=sommes[k]; if(s&&T>=s[1]) ecrire(c,s[0],xd+40,y+2,54*zoom(T,s[1],.4),s[2]); }); }
+      const xd=rangee(c,T,vals,72,y,{z,lueur:lu,terne:tn});
+      const s=sommes[k]; if(s&&T>=s[1]) ecrire(c,s[0],xd+34,y+2,48*zoom(T,s[1],.4),s[2]); }); }
 
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=ap){ /* ce que tu as appris : j'ajoute jusqu'au prix */
@@ -82,7 +82,6 @@ FILMS['cp-monnaie']=function(outils){
         sommes:T>=r1?[['3 €',tTrois1,CRAIE.faux],['6 €',tSix1,CRAIE.faux],null]:[]});
       if(T<r1){ if(T>=tQuelles) ecrire(c,'?',250,325,90*zoom(T,tQuelles,.5),CRAIE.jaune); }
       else formuleE(c,T,240,328,['2','+','2','=','4 €'],[tDeux1,tPlus1,tDeux1b,tQuatre1,tQuatre1],66,[CRAIE.jaune,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
-      if(T>=r1&&T>=tTrop1) ecrire(c,'trop !',420,530,46*zoom(T,tTrop1,.4),CRAIE.faux);
       tab.maj(); return; }
 
     /* le marché : l'accroche, les pièces, deux façons de faire 7 € */
@@ -98,9 +97,9 @@ FILMS['cp-monnaie']=function(outils){
       const z1=T>=pi?apparu(tUnP):apparu(tPieces), z2=T>=pi?apparu(tDeuxP):apparu(tPieces+.15), z5=T>=pi?apparu(tCinqP):0;
       euroE(c,5,p5[0],p5[1],34,{z:z5}); euroE(c,2,p2[0],p2[1],44,{z:z2}); euroE(c,1,p1[0],p1[1],40,{z:z1});
       if(p1b) euroE(c,1,p1b[0],p1b[1],40); }
-    if(T>=f7&&T<au){ formuleE(c,T,830,200,['5','+','2','=','7 €'],[tCinq7b,tPlus7,tDeux7b,tSept7b,tSept7b],86,[CRAIE.blanc,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
+    if(T>=f7&&T<au){ formuleE(c,T,800,200,['5','+','2','=','7 €'],[tCinq7b,tPlus7,tDeux7b,tSept7b,tSept7b],86,[CRAIE.blanc,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
       if(T>=tBon){ coche(c,470,235,1.3); for(const [x,y] of [[640,120],[1010,300]]) etincelle(c,x,y,14+6*Math.sin(T*6+x)); } }
-    if(T>=au){ formuleE(c,T,830,200,['5','+','1','+','1','=','7 €'],[tCinqA,tPlusA,tUnA,tPlusA2,tUnA2,tSeptA,tSeptA],72,[CRAIE.blanc,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
+    if(T>=au){ formuleE(c,T,800,200,['5','+','1','+','1','=','7 €'],[tCinqA,tPlusA,tUnA,tPlusA2,tUnA2,tSeptA,tSeptA],72,[CRAIE.blanc,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
       if(T>=tFacons) for(const [x,y] of [[640,120],[1010,300]]) etincelle(c,x,y,14+6*Math.sin(T*6+x)); }
     tab.maj();
   }

@@ -51,7 +51,7 @@ FILMS['cp-monnaie']=function(outils){
     else {
       formuleE(c,T,730,110,['2','+','1','=','3 €'],[tDeuxR,tPlus,tUnR,tTroisR,tTroisR],96,[CRAIE.jaune,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
       if(T>=tPile&&T<tAvec) for(const [x,y] of [[460,140],[110,520]]) etincelle(c,x,y,14+6*Math.sin(T*6+x));
-      if(T>=tQuatre) formuleE(c,T,720,430,['2','+','1','+','1','=','4 €'],[tQuatre,tQuatre,tQuatre,tQuatre,tQuatre,tQuatre,tQuatre],62,
+      if(T>=tQuatre) formuleE(c,T,655,430,['2','+','1','+','1','=','4 €'],[tQuatre,tQuatre,tQuatre,tQuatre,tQuatre,tQuatre,tQuatre],54,
         [CRAIE.gris,CRAIE.gris,CRAIE.gris,CRAIE.gris,CRAIE.faux,CRAIE.gris,CRAIE.faux]); }
     tab.maj();
   }
