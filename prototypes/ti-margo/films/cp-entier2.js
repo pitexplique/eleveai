@@ -5,7 +5,7 @@
    Mêmes sorties que cp-entier : manim/sorties/cp/maths/entier/<num>-<épisode>, noms eleveai-maths-cp-entier-<ép>-short.
    Voix : manim/voix/cp-entier-<ép>-short.json ; scripts : manim/SCRIPTS-cp-nombres-dessins-animes-2.md.
    ============================================================ */
-(function(){ for(const f of ['films/cp-entier.js','films/cp-entier2-dessins.js']){ const x=new XMLHttpRequest(); x.open('GET',f,false); x.send();
+(function(){ for(const f of ['films/cp-entier.js','films/cp-entier2-dessins.js','films/cp-entier3-dessins.js']){ const x=new XMLHttpRequest(); x.open('GET',f,false); x.send();
   const s=document.createElement('script'); s.textContent=x.responseText; document.head.append(s); } })();
 
 /* 26/11, Frédéric : la fin des shorts comme celle des paysages, « Entraîne-toi sur eleveai.fr ou YouTube @eleveai974 », rien d'autre */

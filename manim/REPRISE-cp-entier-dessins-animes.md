@@ -68,8 +68,19 @@ Demande du 27/11 (test avec un enfant de CP : il adore les shorts d'une minute) 
 Il n'a pas vu le « TU PARIES ? » écrit → dans ces films, accroche par le DESSIN qui intrigue + une QUESTION DITE ;
 pas de `PARI` (cp-commun.js) ni dans le film ni sur la miniature. Ne pas toucher aux 12 vidéos en ligne.
 - [x] Voix des 12 écrites : `manim/SCRIPTS-cp-nombres-dessins-animes-3.md` (bonnes réponses 07 B A C · 08 A B B · 09 B B C ·
-  10 C A B · 11 C A C · 12 A C A). ⏳ ATTENTE DU OK DE FRÉDÉRIC : aucun WAV, aucun rendu avant.
+  10 C A B · 11 C A C · 12 A C A). ✅ Validées par Frédéric le 27/11 (« Oui, lance la paire 7 »).
 - Les brouillons `manim/voix/cp-entier-lire-{paysage,short}.json` (26/11, non suivis, ancienne fin) seront écrasés par les voix validées.
 - Ensuite : JSON des voix (`manim/voix/cp-entier-<ep>-{paysage,short}.json`), WAV -Debit -6, instants (séries cp-entier2 /
   cp-entier2-paysage), films `films/cp-entier2-<ep>.js` + `cp-entier2-paysage-<ep>.js`, planches -ql, HD une à la fois,
   contrôle image par image, miniatures ; sorties `manim/sorties/cp/maths/entier/07-lire` … `12-defi`.
+- Nouveaux dessins : `films/cp-entier3-dessins.js` (bus, brume, arrêt, route, ticket, bulle, ondes, maison de la rue + mamie,
+  faisceau de lanterne, lune, casier, bracelet, piscine), chargé par `cp-entier2.js` et `cp-entier2-paysage.js`.
+- [x] 07 lire : voix + WAV + instants ; short « La porte de mamie » (`films/cp-entier2-lire.js`, 60 s, C = 41) et paysage
+  « Le bus de la piscine » (`films/cp-entier2-paysage-lire.js`, 131 s, Q1 B = 32 vers 50 s, Q2 A = soixante-cinq) écrits,
+  planches -ql contrôlées (maisons et numéros grossis, « vingt »/« huit » séparés, plaque du bracelet blanche, choix sur une ligne).
+- [x] 07 HD : short 60,0 s (−18,8 dB), compteur visible à ~30 s ; paysage 131,3 s (−19,0 dB), compteurs Q1 ~66 s, Q2 ~98 s ;
+  rien de rogné, ceinture blanche, fin eleveai.fr / YouTube ; miniatures « Quelle porte est chez mamie ? » et « Est-ce notre bus ? »
+  (sans TU PARIES). Corrigé avant la HD finale de la paysage : `me('Vingt-huit',2)` (le 1er « vingt-huit » est celui du chauffeur,
+  le cadre vert paraissait vide trop tôt). ⚠ Piège : `mot()` normalise, « Vingt-huit » = « vingt-huit » → préciser n.
+- [x] 08 decomposer : voix JSON + WAV faits (instants pas encore : `ti-margo-cues.py` après avoir ajouté "decomposer": "08" aux 2 séries).
+- [ ] 08 → 12 : films, planches, HD une à la fois. Branchement R2 / manifeste / coach : seulement sur l'accord de Frédéric.

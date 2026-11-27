@@ -3,5 +3,5 @@
   "sons": "public/sons/cp-entier-{ep}-short",
   "sortie": "manim/sorties/cp/maths/entier/{num}-{ep}",
   "nom": "eleveai-maths-cp-entier-{ep}-short",
-  "episodes": { "comparer": "04", "dizaine": "05", "droite": "06" }
+  "episodes": { "comparer": "04", "dizaine": "05", "droite": "06", "lire": "07" }
 }

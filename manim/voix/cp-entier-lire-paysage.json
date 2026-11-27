@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Ce matin, on va à la piscine en bus. Un bus arrive dans la brume… Est-ce que c'est le nôtre ? Sur mon ticket, il y a un quatre, puis un sept.",
+  "01-lire": "Je lis d'abord le chiffre de devant : quatre, ça fait quarante. Puis celui de derrière : sept. Quarante-sept ! C'est notre bus !",
+  "02-piege": "Attention ! Si le sept passe devant, on lit soixante-quatorze. Ce n'est plus notre bus !",
+  "03-ecrire": "Et pour écrire un nombre que j'entends ? Le chauffeur dit : vingt-huit. J'entends vingt : j'écris un deux. J'entends huit : j'écris un huit, juste à côté. Vingt-huit !",
+  "04-question": "Question ! Le chauffeur crie : trente-deux ! Quel numéro est écrit sur son bus ? A : vingt-trois. B : trente-deux. C : trois cent deux. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B ! J'entends trente : un trois devant. J'entends deux : un deux derrière. Trente-deux !",
+  "05-question": "Question ! À la piscine, voici la clé de mon casier. Comment se lit ce nombre ? A : soixante-cinq. B : cinquante-six. C : six-cinq. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A ! Un six devant : soixante. Un cinq derrière : soixante-cinq. Voilà mon casier !",
+  "06-appris": "Je lis le chiffre de devant, puis celui de derrière. Quand j'entends un nombre, j'écris d'abord le chiffre des dizaines. L'ordre des chiffres compte !",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}
