@@ -13,6 +13,7 @@ import { Roboto_Slab } from "next/font/google";
 import { CollinesAccueil } from "@/components/accueil/dessins/PaysageAccueil";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
 import NuageAccueil from "@/components/accueil/NuageAccueil";
+import BandeauNoel from "@/components/accueil/BandeauNoel";
 import { BandeChiffres, EncartsFamilleProf } from "@/components/accueil/CompteurFamille";
 import { ChoisisTaClasse } from "./AccueilCeo";
 
@@ -36,6 +37,9 @@ export default function AccueilNuage() {
             {/* « Parent ou prof ? Par ici ↓ » est dans le nuage (25/11) : caché pour un élève ou un prof connecté. */}
             <NuageAccueil />
           </div>
+          {/* 🎄 27/11 : Noël, sous le nuage (s'efface seul après le 6 janvier). */}
+          <BandeauNoel />
+
         </div>
       </section>
 
