@@ -331,7 +331,7 @@ export function pourcent(valeur: number): string {
    ───────────────────────────────────────────────────────────────────────────── */
 
 /** Les dates d'ouverture, dites partout pareil. */
-export const OUVERTURE_SUIVI = "fin janvier 2027"; // 18/11/2026 (était fin décembre 2026)
+export const OUVERTURE_SUIVI = "mi-décembre 2026"; // 27/11/2026, Frédéric : « ouverture mi décembre » (après « le 1er décembre » dans la même minute). Avant : fin janvier 2027 (18/11)
 export const OUVERTURE_VISIO = "janvier 2027";
 
 /** La séance de visio en groupe, en France. */
@@ -573,7 +573,7 @@ export const PRIX_LANCEMENT = {
   mensuel: 4.95,
   annuel: 49,
   /** Dernier jour pour S'ABONNER au prix de lancement (AAAA-MM-JJ), ou null.
-      ⚠️ La vente ouvre fin janvier 2027 : une date avant n'aurait pas de sens. */
+      ⚠️ La vente ouvre mi-décembre 2026 (27/11). */
   fin: null as string | null,
   /** ✅ 19/11/2026, Frédéric choisit « 1 » : le prix de lancement est GARANTI
       jusqu'au 31 août 2028 tant que l'abonnement continue. ⛔ Jamais « à vie ».
