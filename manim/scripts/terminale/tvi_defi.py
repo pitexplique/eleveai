@@ -125,7 +125,7 @@ class TviDefi(EcransAnalyse):
                                   w=4.8, h=3.4, grad_x=(1,), grad_y=(0,))
         self.play(Create(ax), FadeIn(grad), run_time=0.6)
 
-        self.au_mot("Soit g de x égale x moins 1")
+        self.au_fin("le tout au carré, moins 4")
         self.play(FadeIn(self.col(
             self.t("g(x) = (x − 1)² − 4", 36, BLEU_CALCUL), 2.5)))
         self.play(Create(self.courbe(ax, parabole, -2, 4.1)), run_time=1.2)
@@ -229,7 +229,7 @@ class TviDefi(EcransAnalyse):
         titre = self.t("La courbe de Ryan", 40, JAUNE_TITRE).to_edge(UP, buff=0.45)
         self.play(Write(titre), run_time=0.5)
 
-        self.au_mot("Soit f de t égale t au cube")
+        self.au_fin("plus 1, sur l'intervalle 0 2")
         f_ = self.t("f(t) = t³ − 3t + 1   sur [0 ; 2]", 34, BLEU_CALCUL)
         self.play(FadeIn(self.col(f_, 2.5)))
         self.au_mot("C'est un polynôme")
@@ -264,7 +264,7 @@ class TviDefi(EcransAnalyse):
         titre = self.t("Le piège", 44, ORANGE_RETENUE).to_edge(UP, buff=0.45)
         self.play(Write(titre), run_time=0.5)
 
-        self.au_mot("Si on applique le théorème sur l'intervalle 0 2")
+        self.au_fin("f de 2 vaut 3")
         bloc = VGroup(self.t("f(0) = 1 > 0", 34, ROUGE_ERREUR),
                       self.t("f(2) = 3 > 0", 34, ROUGE_ERREUR),
                       self.t("deux nombres positifs", 28, ROUGE_ERREUR))
@@ -344,18 +344,26 @@ class TviDefi(EcransAnalyse):
         self.add_mascotte(scale=0.5)
         titre = self.t("La copie type bac", 42, JAUNE_TITRE).to_edge(UP, buff=0.45)
         self.play(Write(titre), run_time=0.5)
-        lignes = [("f est un polynôme, donc continue sur [0 ; 2]", "f est un polynôme"),
-                  ("le tableau de variations, avec le signe de f ′", "Ensuite le tableau"),
+        # ⭐ Chaque mot-cle couvre la ligne JUSQU'A son dernier nombre : le parcours
+        # ci-dessous attend la FIN de ce que la voix en dit (au_fin), sinon la fin de
+        # la ligne est a l'ecran avant d'etre prononcee.
+        lignes = [("f est un polynôme, donc continue sur [0 ; 2]",
+                   "f est un polynôme, donc elle est continue sur l'intervalle 0 2"),
+                  ("le tableau de variations, avec le signe de f ′",
+                   "Ensuite le tableau de variations, avec le signe de la dérivée"),
                   ("[0 ; 1] : continue, strictement décroissante de 1 à −1,",
-                   "sur l'intervalle 0 1"),
-                  ("0 entre les deux : une unique solution α", None),
-                  ("le même bloc sur [1 ; 2] pour β", "Le même bloc"),
-                  ("0,3 < α < 0,4", "Enfin l'encadrement")]
+                   "f est continue et strictement décroissante, f de 0 vaut 1, f de 1 vaut moins 1"),
+                  ("0 entre les deux : une unique solution α",
+                   "0 est compris entre les deux, donc il existe une unique solution alpha"),
+                  ("le même bloc sur [1 ; 2] pour β",
+                   "Le même bloc sur l'intervalle 1 2 pour bêta"),
+                  ("0,3 < α < 0,4",
+                   "lui-même plus petit que 0,4")]
         bloc = VGroup(*[self.t(s, 28, larg=11.4) for s, _ in lignes])
         bloc.arrange(DOWN, aligned_edge=LEFT, buff=0.26).move_to(P(-0.4, 0.1))
         for l, (_, mot) in zip(bloc, lignes):
             if mot:
-                self.au_mot(mot)
+                self.au_fin(mot)
             self.play(FadeIn(l, shift=RIGHT * 0.2), run_time=0.35)
         self.attendre_voix(marge=0.5)
 
@@ -365,6 +373,7 @@ class TviDefi(EcransAnalyse):
         self.add_mascotte(scale=0.6)
         titre = self.t("À toi de jouer !", 46, JAUNE_TITRE).to_edge(UP, buff=0.5)
         self.play(Write(titre), run_time=0.5)
+        self.au_fin("moins 12 x, plus 5")
         f_ = self.t("f(x) = x³ − 12x + 5", 62, BLEU_CALCUL)
         self.play(FadeIn(f_.move_to(P(-0.4, 1.4))))
         self.au_mot("Combien l'équation f de x égale 0")
@@ -385,7 +394,7 @@ class TviDefi(EcransAnalyse):
         titre = self.t("Correction", 42, VERT_OK).to_edge(UP, buff=0.45)
         self.play(Write(titre), run_time=0.5)
 
-        self.au_mot("La dérivée f prime de x vaut 3 x au carré")
+        self.au_fin("moins 12 : elle s'annule en 2")
         d = self.t("f ′(x) = 3x² − 12, nulle en 2", 32, JAUNE_TITRE)
         self.play(FadeIn(self.col(d, 2.5)))
         tab = self.tab_variations(("0", "2", "3"), ("−", "+"),

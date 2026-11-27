@@ -1259,3 +1259,248 @@ WAV** — et c'est à ce moment-là, et seulement là, qu'il faudra les lire, av
 3. re-dry-run les 5 : **c'est là que les `RETARD` et les `AUDIT-AVANCE` apparaîtront** ;
 4. `bash manim/poste2/planches-tvi.sh`, puis **regarder les cinq planches** ;
 5. ⛔ **s'arrêter là** et montrer l'état au chef d'orchestre. Le HD est sa porte.
+
+---
+
+# 12. LES VOIX ENREGISTRÉES — la synchronisation devient mesurable (27/11, nuit)
+
+Les 75 WAV sont faits. C'est le premier moment où le dry run mesure la
+**synchronisation** et plus seulement la mise en page, et il parle beaucoup.
+
+## 12.1 Ce qui est fait, mesuré
+
+| | |
+|---|---|
+| WAV | ✅ **75**, 15 clips × 5 épisodes, `-Debit -6` **aux deux étapes** |
+| marques | ✅ **5 fichiers**, 859 à 999 marques — et `MARQUES … : 15 clip(s) calés` au dry run, donc plus aucun `au_mot` estimé |
+| `fichier_marques` | ✅ posé dans les 5 scènes, **une ligne chacune**, rien d'autre |
+| durées de voix | 340 à 425 s cumulées, soit **5 min 40 à 7 min 05** par épisode — ce que la note annonçait |
+| dry run des 5 | ✅ **15 écrans, 0 bord, 0 `AUDIT-ABSENT`** : la passe chiffres tient avec de VRAIES marques |
+
+⭐ **Les marques ont été vérifiées, pas crues.** `voix-continuite-tous-les-wav.sh`
+annonçait « 859 marques » pour E1 **et** pour E2, à un octet près de taille de fichier :
+de quoi soupçonner un fichier recopié. Contrôle fait : les 5 md5 diffèrent, les durées
+diffèrent, et surtout **chaque position de marque indexe le texte de SA propre voix**
+(aucune position au-delà de la fin du clip, aucune dernière marque loin de la fin). Les
+premières marques sont identiques parce que les cinq clips `04-question` commencent par
+« Question ! » — même préfixe, même durée. Coïncidence vérifiée, pas supposée.
+
+## 12.2 ⛔⛔ 163 `AUDIT-AVANCE` — et la cause est dans le SOCLE, pas dans les épisodes
+
+C'est le chiffre que personne n'avait vu : sans marques, chaque `au_mot` est estimé au
+prorata des caractères, donc **rien ne dépasse jamais** et le compte était 0.
+
+⭐⭐ **`au_fin` MANQUAIT.** `analyse_ecrans.py` a été recopié de `espace_ecrans.py`
+« sans le 3D », et `au_fin` est tombé dans la recopie. Mesure :
+
+| | `au_fin` | `au_mot` |
+|---|---|---|
+| les 5 épisodes de cette série | **0** | 172 |
+| `ps_espace_angle.py` (en production) | **50** | 39 |
+| `espace_plan_equation.py` (en production) | **28** | 66 |
+
+Les deux séries ont exactement le même besoin — **une ligne entière paraît d'un coup ;
+posée au PREMIER mot de ce que la voix en dit, ses derniers nombres sont à l'écran avant
+d'être dits** — et une seule avait l'outil. « f(1) = 5 » posé sur « f de 1 » met le 5 à
+l'écran 7 s avant qu'on l'entende. C'est le piège n° 6 de la série des entiers.
+⭐ `au_fin` est rendu au socle, documenté, et **il a tourné** (§ 12.4).
+
+⚠️ **La série espace avait mesuré 35 avances de cette seule cause, aucune au-dessus de
+1,9 s — « donc aucune ne sautait aux yeux ». Ici elles montent à 17,29 s.**
+
+### Le partage qui rend le chiffre lisible
+
+⭐⭐ **Les 163 ne sont pas 163 défauts.** Relus par LIGNE d'écran
+(`manim/poste2/lire-avance-tvi.py`), ils font **98 lignes**, et elles se séparent en deux
+familles qui ne se corrigent pas du tout de la même façon :
+
+| | avances | ce que c'est |
+|---|---|---|
+| écrans de **question** / réponse | **62** | la colonne de gauche porte l'ÉNONCÉ, montré en entier dès le début. ⭐ **C'est voulu** : la règle de la série est « la question dit à l'écran exactement ce que la voix dit » et l'élève lit pendant qu'on lit. Un énoncé qui s'assemble est plus dur, pas plus clair. ⛔ **À ne PAS chasser** |
+| écrans d'**exposition** (02, 03, 05, 06, 08, 09, 09b) | **101** | là, un résultat paraît avant d'être expliqué. **C'est la cible de `au_fin`** |
+
+⛔ **Et surtout : ne pas faire taire l'audit sur les écrans de question.** C'est une
+avance de ces écrans-là, 14,94 s sur E1 `07`, qui a trouvé le défaut du § 12.3. Un
+`sans_audit` posé là aurait caché le seul vrai défaut de la journée.
+
+## 12.3 ⛔⛔ E1 `07` DONNE SA PROPRE RÉPONSE — à trancher par Frédéric
+
+En cherchant un défaut de synchronisation, l'audit en a trouvé un autre. La colonne de
+gauche de E1 `07` affiche, **dès la première seconde et pendant toute la pause** :
+
+```
+rappel :
+ln continue
+sur ]0 ; +∞[
+```
+
+et la bonne réponse de cette question est la carte B, **« sur ]0 ; +∞[ »**. Mot pour mot.
+L'élève n'a pas besoin de savoir où `ln` existe : il lui suffit de faire correspondre
+deux lignes. La question ne mesure plus rien.
+
+⭐⭐ **Pourquoi aucun instrument ne l'avait vu.**
+`verifier-accroches-continuite-tvi.py` mesure *exactement* cette règle — une carte ne
+doit pas être décidable par ce que l'élève a déjà sous les yeux — mais il ne regarde que
+le **titre** et l'**accroche**, qui sont de la mémoire. Ici le texte est **sur le même
+écran, au même instant** : le cas le plus fort de la famille, et le seul angle mort.
+
+⭐ **L'instrument existe maintenant** : `manim/poste2/colonne-ne-donne-pas-la-reponse.py`.
+Il lit les tuples `Q04` / `Q07` (donc la bonne lettre), relève les `self.t("…")` posés
+entre `dire("0X-question")` et `t0`, et mesure la part des mots de la bonne carte
+contenue dans **UNE SEULE ligne** de la colonne — segment par segment, comme son aîné.
+
+```
+python -X utf8 manim/poste2/colonne-ne-donne-pas-la-reponse.py
+python -X utf8 manim/poste2/colonne-ne-donne-pas-la-reponse.py --etalonner
+```
+
+**Les 10 questions, mesurées** : E1 `07` à **100 %**. Les neuf autres de 0 % à 33 %, et
+le 33 % est E4 `07`, où la colonne EST la copie qu'on examine — c'est le sujet de la
+question, pas sa réponse. Étalon : 4 cas, 0 désaccord, seuil 50 %, et la marge est
+réelle des deux côtés (100 % contre 33 %), contrairement à son aîné.
+
+⛔⛔ **JE N'Y AI PAS TOUCHÉ, ET C'EST VOLONTAIRE.** C'est de l'ÉCRITURE, et la note dit
+que quelqu'un qui prendrait une écriture pour une erreur abîmerait la série. Mais ce
+n'est pas non plus un choix documenté : il n'est nulle part dans ce fichier, et le § 6
+travaille justement à l'empêcher. ⭐ **Bonne nouvelle : la réparation ne coûte aucun
+WAV** — le rappel est à l'écran seulement, la voix ne le dit pas.
+**Proposition, à valider** : remplacer les deux lignes du rappel par la méthode au lieu
+du résultat, par exemple *« une somme n'existe que là où ses deux morceaux existent »* —
+c'est la phrase que la voix de `07b` emploie déjà. L'étalon de l'instrument contient ce
+cas réécrit : il mesure **0 %**.
+
+## 12.4 ✅ `au_fin` a tourné, et E5 est le patron : 29 avances → 6
+
+E5 (`tvi_defi`) a été converti en entier, et mesuré. C'est la preuve que la méthode
+marche, pas une promesse :
+
+| E5 | avant | après |
+|---|---|---|
+| `AUDIT-AVANCE` | **29** sur 12 lignes | **6** sur 4 lignes |
+| dont sur les écrans d'exposition | **24** | **1**, à **0,07 s** (sous le seuil de tolérance de l'audit) |
+| dont sur les écrans de question | 5 | 5 — *inchangés, et c'est normal* (§ 12.2) |
+| écrans / bords / `AUDIT-ABSENT` | 15 / 0 / 0 | **15 / 0 / 0** |
+
+**Les 7 gestes faits sur E5**, c'est tout le patron à recopier sur E1 à E4 :
+
+1. `au_mot("Soit g de x égale x moins 1")` → `au_fin("le tout au carré, moins 4")` — la
+   ligne finit par `− 4`, on l'attend ;
+2. `au_mot("Soit f de t égale t au cube")` → `au_fin("plus 1, sur l'intervalle 0 2")` —
+   ⭐ **l'extrait doit couvrir l'INTERVALLE**, qui est dit en dernier et qui est à
+   l'écran dans la même ligne ;
+3. un bloc de trois lignes posé d'un coup (`06-piege`) → `au_fin("f de 2 vaut 3")`, la
+   fin du dernier nombre du bloc ;
+4. `09-defi` : la formule n'avait **aucun repère du tout** → `au_fin` ajouté avant elle ;
+5. `09b` : `au_fin("moins 12 : elle s'annule en 2")` ;
+6. ⭐ `08-rediger` est nourri par une **liste de couples** : les mots-clés deviennent des
+   **phrases entières** jusqu'au dernier nombre de leur ligne, et le parcours passe de
+   `au_mot(mot)` à `au_fin(mot)`. Une ligne sans repère (`None`) en reçoit un.
+7. Les repères restent **croissants** : contrôlé (§ 12.5).
+
+⚠️ `AUDIT-TARD` monte quand on corrige (E5 : 41 → 51), et c'est attendu : une ligne posée
+à la FIN de sa phrase est forcément « en retard » sur le premier de ses nombres. ⛔ Un
+`AUDIT-TARD` n'est pas un défaut ; un `AUDIT-AVANCE` en est un.
+
+## 12.5 ⛔⛔ Le `RETARD` de 38 s était un vrai bug — et il se voit SANS RENDU
+
+4 `RETARD` en tout, dont trois sous 3,1 s (une animation un peu longue, pas un repère mal
+placé). Le quatrième : **`RETARD 05-appliquer « la continuité se démontre » : 38,64 s`**
+sur E4.
+
+Le commentaire vert était posé **après** les quatre lignes de la copie, alors que la
+phrase qu'il vise est dite dans la **PREMIÈRE phrase du clip** (« Appliquons, sur une
+fonction où la continuité se démontre vraiment »). Le repère regardait 38 secondes en
+arrière. ⚠️ `au_pos` ne recule pas : il imprime un RETARD et continue, donc **le seul
+effet visible est que le bloc paraît trop tôt**. Corrigé : posé sur « d'après le
+corollaire », dernière phrase dite.
+
+⭐⭐ **La règle, et elle vaut pour toute la maison : les repères d'un écran sont
+CROISSANTS dans le texte de la voix.** Un écran se construit dans l'ordre où la voix
+parle.
+⭐ `manim/poste2/reperes-croissants-tvi.py` la mesure **sur la source seule, sans rendu**
+— donc même avant les WAV, là où aucun RETARD ne sort du dry run et où le défaut dort.
+**Vérifié en remettant le défaut : il crie, et il nomme le recul** (« RECULE de 36
+caractères »). Un zéro ne vaut que si on a vu l'instrument crier.
+⚠️ Son angle mort est celui de `verifier-avant-rendu.py` : il ne lit que les appels
+**littéraux**, donc les repères passés par une LISTE (E4, E5) lui échappent. Le compte de
+`RETARD` au dry run reste le contrôle de vérité.
+
+## 12.6 La planche de E5, AVEC marques — regardée, et pourquoi elle a 13 vignettes
+
+E5 a été rendu en `-ql` **avec ses marques** et sa planche faite : la première planche de
+la série qui vaille quelque chose sur la synchronisation. Durée : **7 min 48 s**, contre
+1 min 15 sans voix — c'est l'ordre de grandeur annoncé.
+
+⚠️ **`planche-video.py` annonce « 13 écrans détectés » alors que le dry run en compte 15,
+et ce n'est PAS un défaut.** J'ai d'abord cru à un effet de la longueur (l'outil repère
+les chutes de pixels allumés deux fois par seconde, et une vidéo quatre fois plus longue
+pourrait noyer une frontière). **C'est faux, et je l'ai vérifié en lisant les vignettes
+plutôt qu'en raisonnant** : les deux « manquantes » sont `04-question` et `07-question`.
+Elles n'ont pas de vignette parce que **l'écran de réponse HÉRITE de l'écran de
+question** — il n'y a pas de `clear()` entre les deux, donc c'est un seul écran pour un
+détecteur qui compte les `clear()`, et la vignette montre l'état final, c'est-à-dire la
+réponse. C'est écrit au § 9 des pièges hérités, c'est constant, et c'était déjà vrai sur
+les planches sans voix.
+
+⭐ **La leçon tient quand même, et elle est pour le lecteur de planches** : 13 ≠ 15 doit
+se vérifier avant d'être expliqué. Ici la bonne explication était dans la note ; la
+mauvaise était plausible, chiffrée, et fausse.
+⚠️ **Conséquence réelle** : sur une planche, les écrans `04-question` et `07-question`
+**ne sont jamais montrés dans leur état de question** — on ne voit que leur état de
+réponse. La mise en page de la question seule (cartes avant la bonne réponse) n'est donc
+contrôlée par aucune planche : c'est `mesure-continuite-tvi.py` qui en répond.
+
+**Ce que j'ai vu sur les 13 vignettes de E5** : aucun chevauchement, aucun carré vide,
+aucun bloc rétréci, et les nombres de chaque écran sont justes (tableau 0/2/3 avec
+5 → −11 → −4, « [2 ; 3] : 0 n'y est pas : AUCUNE », « en tout : une seule solution »).
+⛔ Et ce qu'elle ne prouve pas : la planche montre la **dernière** image de chaque écran,
+donc elle ne dit rien de l'ordre d'apparition — c'est-à-dire précisément de ce que
+`au_fin` vient de corriger. La synchronisation se lit au dry run, pas à la planche.
+
+## 12.7 Les quatre outils neufs
+
+```
+bash manim/poste2/dry-tvi.sh [script]          # le dry run des 5, ou d'un seul
+python -X utf8 manim/poste2/lire-avance-tvi.py [--detail]
+python -X utf8 manim/poste2/reperes-croissants-tvi.py
+python -X utf8 manim/poste2/colonne-ne-donne-pas-la-reponse.py [--etalonner]
+```
+
+| outil | ce qu'il attrape | ce qu'il ne voit PAS |
+|---|---|---|
+| `dry-tvi.sh` | `PYTHONIOENCODING`, les `\r` éclatés, et **le compte d'écrans traité comme un contrôle** (15, pas 14, pas 11) | il ne juge rien : il compte |
+| `lire-avance-tvi.py` | les avances relues **par ligne d'écran**, pire délai en tête — l'unité de correction est la ligne, pas le nombre | il lit des journaux : relancer le dry run d'abord |
+| `reperes-croissants-tvi.py` | un repère qui pointe en arrière, **sur la source, sans rendu** | les repères passés par une liste |
+| `colonne-ne-donne-pas-la-reponse.py` | une question dont l'écran affiche sa propre réponse | le SENS : « ln n'existe que pour x > 0 » ne partage aucun mot avec « ]0 ; +∞[ » et laisse la carte tout aussi décidable. Il confirme, il n'innocente pas |
+
+## 12.8 Où ça en est, épisode par épisode
+
+| | script | WAV | `fichier_marques` | dry run avec marques | `au_fin` converti | planche AVEC marques |
+|---|---|---|---|---|---|---|
+| E1 | `continuite_reconnaitre` | ✅ | ✅ | 15 / 0 bord / 0 absent · **29 avances (17 exposition)** · 1 retard 1,03 s | ⛔ | ⛔ |
+| E2 | `tvi_appliquer` | ✅ | ✅ | 15 / 0 / 0 · **31 avances (13 exposition)** · 0 retard | ⛔ | ⛔ |
+| E3 | `tvi_unicite` | ✅ | ✅ | 15 / 0 / 0 · **31 avances (17 exposition)** · 0 retard | ⛔ | ⛔ |
+| E4 | `tvi_rediger` | ✅ | ✅ | 15 / 0 / 0 · **43 avances (30 exposition)** · retard 38 s **CORRIGÉ** | ⛔ | ⛔ |
+| E5 | `tvi_defi` | ✅ | ✅ | 15 / 0 / 0 · **6 avances (1 exposition, 0,07 s)** · 2 retards ≤ 3,1 s | ✅ **le patron** | ✅ faite, **13 vignettes sur 15** (§ 12.6) |
+
+⛔⛔ **Les planches de E1 à E4 n'ont PAS été refaites, et c'est délibéré.** Leurs quatre
+scripts vont changer (la conversion `au_fin`), et une planche rendue maintenant montrerait
+un état du code sur le point de disparaître — exactement le défaut que cette série a payé
+deux fois le 27/11. `fraicheur-planches.py` les donne périmées, et elles le sont.
+
+## 12.9 ⛔ Le prochain geste, dans l'ordre exact
+
+1. **Trancher E1 `07`** (§ 12.3) — c'est de l'écriture, donc Frédéric. Aucun WAV en jeu.
+2. **Convertir E1, E2, E3, E4** en `au_fin` sur leurs écrans d'**exposition** : 77 avances
+   à reprendre, le patron est au § 12.4 et la liste des lignes sort de
+   `python -X utf8 manim/poste2/lire-avance-tvi.py --detail`.
+   ⛔ **Ne pas toucher aux écrans de question** (§ 12.2).
+3. `bash manim/poste2/dry-tvi.sh` — attendu : 15 / 0 bord / 0 absent sur les cinq, et les
+   avances d'exposition à 0 ou sous 0,1 s. Puis `reperes-croissants-tvi.py` à 0.
+4. `bash manim/poste2/planches-tvi.sh`, puis **regarder les cinq à l'image**, en comptant
+   d'abord les vignettes (§ 12.6).
+5. ⛔ **s'arrêter là.** Le HD est la porte du chef d'orchestre.
+
+⛔ Rien de changé par ailleurs : aucun rendu HD, aucune écriture dans `videos-r2.json` ni
+dans `notion_ressources`, aucun push, aucune publication. Le verrou HD était **libre** et
+n'a pas été pris : tout ce tour est en `-ql`.
