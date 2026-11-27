@@ -596,6 +596,31 @@ la carte « exactement deux » : l'instrument lisait un nombre de questions comm
 de solutions. Retirer du texte mesuré ce qui dérange est la façon la plus simple de faire
 mentir un instrument — c'est pour ça que la coupe est à forme exacte, et visible.
 
+### ⭐ Troisième mode : `--voix`, la voix contre le manifeste
+
+```
+python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py --voix
+```
+
+La règle de la série est « la question dit à l'écran exactement ce que la voix dit, mot
+pour mot ». Ce mode la mesure : pour chaque carte, il cherche la proposition dans la
+phrase du clip `04-question` / `07-question`, **après avoir remis en chiffres les nombres
+écrits en lettres** (l'écran dit « 4 », la voix dit « quatre »). Il vérifie aussi que le
+clip de réponse commence bien par « Réponse A. », « Réponse B. » ou « Réponse C. », et que
+la question finit par « Mets pause, et choisis ! ». Un épisode non encore mis en voix est
+annoncé « voix pas encore écrite » — **jamais compté comme bon**.
+
+État : **12 cartes comparées (E1 et E2), 0 écart.**
+
+⭐⭐ **Et il a sorti une famille le premier jour** : les trois cartes de E1 `07` sont
+écrites en SYMBOLES à l'écran — « sur ℝ tout entier », « sur ]0 ; +∞[ », « sur
+[0 ; +∞[ » — alors que la voix dit « sur l'ensemble des réels tout entier », « sur zéro
+plus l'infini, crochets ouverts », « sur zéro plus l'infini, crochet fermé en zéro ».
+**Les deux sont justes, et aucune machine ne peut dire qu'ils désignent la même chose.**
+⛔ On n'a donc pas fait taire l'instrument : il les range à part et demande une relecture
+humaine, nommément, à chaque passage. C'est la même famille que le « hors audit » de la
+série espace (la voix dit « moins 1 », l'écran écrit « −1 »).
+
 ### Ce qu'il ne voit pas (écrit dans son en-tête, à ne pas oublier)
 
 - ⛔ il compare des **mots**, pas du sens : « il n'y a aucune solution » et « le théorème
@@ -650,7 +675,8 @@ coûte un WAV et un rendu.
 | 1 bis | contre-contrôle outillé des titres et des accroches, avec son étalon | ✅ 30 cartes, 0 alerte |
 | 1 ter | **passe maths du manifeste**, recalculée | ✅ 59 contrôles, 0 erreur |
 | 2 | relecture de Frédéric : les 5 titres, les 5 accroches, les 2 points du § 6 | ⏳ **le prochain geste** |
-| 3 | `manim/poste2/VOIX-continuite-tvi.md` — 5 × 15 clips, tout en toutes lettres | ⏳ |
+| 3 | `manim/poste2/VOIX-continuite-tvi.md` — 5 × 15 clips, tout en toutes lettres | ⏳ **E1 et E2 écrits** (30 clips), E3 · E4 · E5 à écrire |
+| 3 bis | la voix comparée au manifeste, carte par carte (`--voix`) | ✅ 12 cartes, 0 écart |
 | 4 | extraction des JSON de voix, passe gabarit **et passe maths recalculée** | ⏳ |
 | 5 | WAV + marques (`-Debit -6` **aux deux étapes**) | ⏳ |
 | 6 | `manim/poste2/analyse_ecrans.py` — le socle d'écran de la série | ⏳ |
@@ -694,17 +720,33 @@ coûte un WAV et un rendu.
   de signe, pas annoncé). **59 contrôles, 0 erreur.** ⭐ À relancer après chaque retouche
   d'un exemple : c'est exactement là qu'une erreur se fait ENSEIGNER.
 
-**Pas fait, et volontairement** : aucune voix, aucun script Manim, aucun rendu, aucune
-écriture dans un registre ni dans `notion_ressources`, aucun push.
+- `manim/poste2/VOIX-continuite-tvi.md` — les règles d'écriture de la série, la table des
+  lettres, et **E1 et E2 mis en voix : 30 clips sur 75**. Le texte seul, relu par
+  l'instrument : 12 cartes, 0 écart.
+
+**Pas fait, et volontairement** : les voix de E3, E4 et E5 ; **aucun WAV** ; aucun script
+Manim ; aucun rendu ; aucune écriture dans un registre ni dans `notion_ressources` ;
+aucun push.
+
+⛔ **Pourquoi aucun WAV** : les titres et les accroches ne sont pas relus. Le texte d'une
+voix se corrige pour rien ; un WAV enregistré, lui, périme son rendu, et personne ne le
+signale. On écrit le texte, on n'enregistre pas.
 
 **Le prochain geste, dans cet ordre** :
 1. faire relire le § 5 à Frédéric — **les titres et les accroches d'abord**, parce que
-   tout le reste en dépend, et les trois ⚠️ du § 6 ;
+   tout le reste en dépend, plus les deux points laissés ouverts au § 6 (le titre de E3,
+   et sa dernière puce d'accroche) et les **3 cartes de E1 `07` écrites en symboles** ;
 2. trancher la question des **3 cartes contre 4** (§ 2) : si c'est quatre, c'est un
-   chantier de socle à faire **avant** les voix ;
-3. écrire `manim/poste2/VOIX-continuite-tvi.md`, 75 clips, en recopiant le gabarit de
-   `VOIX-espace-terminale.md` ;
+   chantier de socle à faire **avant** la suite des voix ;
+3. écrire les voix de **E3, E4 et E5** (45 clips) dans `VOIX-continuite-tvi.md`, en
+   recopiant les questions depuis le § 5 **sans les reformuler**, puis relancer les trois
+   modes de l'instrument et la passe maths ;
 4. puis seulement `analyse_ecrans.py` et les 5 scripts.
 
-⛔ **Ne pas écrire les voix avant d'avoir la relecture des titres** : un titre qui change
-après l'enregistrement, c'est un WAV et un rendu de perdus.
+⭐ **Les trois commandes qui disent où on en est**, à relancer après chaque retouche :
+
+```
+python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py            # 30 cartes, 0 alerte
+python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py --voix     # 12 cartes, 0 écart
+python -X utf8 manim/poste2/controler-maths-continuite-tvi.py               # 59 contrôles, 0 erreur
+```

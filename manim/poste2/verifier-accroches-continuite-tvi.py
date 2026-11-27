@@ -154,9 +154,122 @@ def etalonner():
     return 1 if faux else 0
 
 
+# ── LA VOIX CONTRE LE MANIFESTE (--voix) ────────────────────────────────────────
+# ⭐⭐ Le défaut qu'on cherche : l'écran affiche « 4 », la voix dit « quatre », et le
+# `au_mot` du script Manim ira chercher un mot qui n'est pas dans les marques. Ou pire :
+# la voix reformule une proposition, et l'élève lit autre chose que ce qu'il entend.
+# La règle de la série est « la question dit à l'écran exactement ce que la voix dit » —
+# ce mode la mesure, en comparant les mots une fois les nombres remis en chiffres.
+# ⚠️ Il ne vaut QUE pour les épisodes déjà écrits dans VOIX-continuite-tvi.md : ceux qui
+# manquent sont annoncés « voix pas encore écrite », jamais comptés comme bons.
+
+VOIX = Path(__file__).resolve().parent / "VOIX-continuite-tvi.md"
+
+CHIFFRES = {
+    "zero": "0", "un": "1", "une": "1", "deux": "2", "trois": "3", "quatre": "4",
+    "cinq": "5", "six": "6", "sept": "7", "huit": "8", "neuf": "9", "dix": "10",
+    "onze": "11", "douze": "12", "treize": "13", "quatorze": "14", "quinze": "15",
+    "seize": "16", "vingt": "20", "trente": "30",
+}
+
+
+SYMBOLES = set("ℝ∞[]{}<>=√≠⩽⩾≤≥∪∩/−–+°")
+
+
+def symbolique(texte):
+    """un texte d'écran qu'une voix ne peut PAS prononcer tel quel."""
+    return any(c in SYMBOLES for c in texte)
+
+
+def mots_compares(texte):
+    """les mots d'un texte, nombres écrits en lettres remis en chiffres."""
+    bruts = [plat(m) for m in re.split(r"[\s'’]+", texte) if m]
+    sortis = []
+    for m in bruts:
+        m = m.strip(",.;:!?()[]")
+        if m:
+            sortis.append(CHIFFRES.get(m, m))
+    return sortis
+
+
+def verifier_voix():
+    if not VOIX.exists():
+        print("⚠️ pas de VOIX-continuite-tvi.md : rien à comparer")
+        return 0
+    src = io.open(MANIFESTE, encoding="utf-8").read()
+    voix = io.open(VOIX, encoding="utf-8").read()
+    ecarts, vus, ecrits = 0, 0, 0
+    arelire = []
+    for num, ident, _titre, _accroche, questions in lire_episodes(src):
+        entete = "\n# " + num + " · `" + ident + "`\n"
+        if entete not in voix:
+            print("   ⏳ " + num + " · " + ident + " — voix pas encore écrite")
+            continue
+        ecrits += 1
+        corps = voix.split(entete, 1)[1].split("\n# ", 1)[0]
+        souci = 0
+        for cle, cartes in questions:
+            cq = re.search(r"\*\*" + cle + r"-question\*\* : (.+)", corps)
+            cr = re.search(r"\*\*" + cle + r"b-reponse\*\* : (.+)", corps)
+            if not cq or not cr:
+                print("   ⛔ " + num + " " + cle + " : clip de question ou de réponse absent")
+                ecarts += 1
+                souci += 1
+                continue
+            dits = mots_compares(cq.group(1))
+            for lettre, texte, _bonne in cartes:
+                vus += 1
+                attendus = mots_compares(texte)
+                trouve = any(dits[i:i + len(attendus)] == attendus
+                             for i in range(len(dits) - len(attendus) + 1))
+                if not trouve and symbolique(texte):
+                    # ⭐⭐ FAMILLE CONNUE, ET STRUCTURELLE — pas un défaut.
+                    # L'écran d'un cours de maths écrit « ]0 ; +∞[ » et « ℝ » ; la voix,
+                    # elle, est LUE, donc elle dit « zéro plus l'infini, crochets
+                    # ouverts » et « l'ensemble des réels ». Les deux sont justes, et
+                    # aucune machine ne peut dire qu'ils désignent la même chose.
+                    # ⛔ On ne fait donc PAS taire l'instrument : on le fait dire autre
+                    # chose, et la ligne demande une relecture humaine.
+                    arelire.append(num + " " + cle + " carte " + lettre + " : « " +
+                                   texte + " »")
+                elif not trouve:
+                    ecarts += 1
+                    souci += 1
+                    print("   ⛔ " + num + " " + cle + " carte " + lettre +
+                          " — l'écran dit « " + texte + " », la voix ne le reprend pas "
+                          "mot pour mot")
+            bonne = next(l for l, _, b in cartes if b)
+            if not cr.group(1).startswith("Réponse " + bonne + "."):
+                ecarts += 1
+                souci += 1
+                print("   ⛔ " + num + " " + cle + "b — la voix n'annonce pas « Réponse "
+                      + bonne + ". »")
+            if "Mets pause, et choisis !" not in cq.group(1):
+                ecarts += 1
+                souci += 1
+                print("   ⛔ " + num + " " + cle + " — la voix ne finit pas par "
+                      "« Mets pause, et choisis ! »")
+        if not souci:
+            symb = sum(1 for l in arelire if l.startswith(num + " "))
+            print("   OK " + num + " · " + ident + " — 2 questions, " + str(6 - symb) +
+                  " carte(s) reprises mot pour mot, " + str(symb) +
+                  " en symboles (à relire), 2 lettres annoncées")
+    print("\n" + str(ecrits) + " épisode(s) mis en voix, " + str(vus) +
+          " cartes comparées, " + str(ecarts) + " écart(s).")
+    if arelire:
+        print("\n⚠️ " + str(len(arelire)) + " carte(s) écrite(s) en SYMBOLES à l'écran : "
+              "la voix les dit en toutes lettres, et aucune machine ne peut vérifier "
+              "qu'elle dit la même chose. À RELIRE une par une :")
+        for ligne in arelire:
+            print("   · " + ligne)
+    return 1 if ecarts else 0
+
+
 def main():
     if "--etalonner" in sys.argv:
         return etalonner()
+    if "--voix" in sys.argv:
+        return verifier_voix()
     src = io.open(MANIFESTE, encoding="utf-8").read()
     episodes = lire_episodes(src)
     alertes = 0
