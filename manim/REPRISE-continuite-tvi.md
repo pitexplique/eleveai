@@ -878,3 +878,165 @@ compte ce que l'audit ne voit pas. La cause est écrite dans la docstring de
 affichés que la voix ne dit pas, dont un dans une FINALE — l'écran où tout est enseigné.
 ⭐ Ce qui le rendrait entier : une passe sur `VOIX-continuite-tvi.md` écrivant les valeurs
 en chiffres, comme la série espace. **Mécanique, et à faire AVANT les WAV.**
+
+---
+
+# 10. LA RELÈVE — reprendre la série sans moi
+
+*(écrit le 27/11/2026 par la session qui a produit le manifeste, les voix et les cinq
+scènes. Règle de Frédéric : une seule productrice par série, relève à 65 % de contexte.)*
+
+## 10.1 Où en est chaque épisode, exactement
+
+⭐ **« Regardé » et « dry run propre » ne sont pas la même chose**, et la colonne de
+droite le dit : le dry run voit les bords et les nombres, la planche voit l'image.
+
+| | épisode | script | voix | mesure | dry run | planche `-ql` **regardée** | WAV | HD |
+|---|---|---|---|---|---|---|---|---|
+| E1 | `continuite_reconnaitre` | ✅ | ✅ 15 clips | ✅ | ✅ 15 écrans, 0 bord, 0 audit | ✅ **2 fois** (corrigée entre les deux) | ⛔ | ⛔ |
+| E2 | `tvi_appliquer` | ✅ | ✅ 15 clips | ✅ | ✅ 15 / 0 / 0 | ✅ **2 fois** | ⛔ | ⛔ |
+| E3 | `tvi_unicite` | ✅ | ✅ 15 clips | ✅ | ✅ 15 / 0 / 0 | ✅ **2 fois** | ⛔ | ⛔ |
+| E4 | `tvi_rediger` | ✅ | ✅ 15 clips | ✅ | ✅ 15 / 0 / 0 | ✅ **2 fois** | ⛔ | ⛔ |
+| E5 | `tvi_defi` | ✅ | ✅ 15 clips | ✅ | ✅ 15 / 0 / 0 | ✅ **2 fois** | ⛔ | ⛔ |
+
+⚠️ **Ce que ces planches NE prouvent pas** : la synchronisation. Elles ont été faites
+sans marques, donc tous les `au_mot` y sont estimés au prorata des caractères. Elles
+jugent la **mise en page**, et seulement elle. Une fois les WAV faits, il faut **refaire
+dry run et planches** : c'est là qu'apparaîtront les `RETARD` et les `AUDIT-AVANCE` que
+personne n'a encore vus.
+
+⚠️ Les durées `-ql` (1 min 15 à 1 min 35) ne veulent rien dire : sans WAV, chaque écran
+ne dure que ses animations. Avec les voix, compter 5 à 7 minutes par épisode.
+
+## 10.2 Les commandes, exactement
+
+**Régénérer une planche** (les cinq se font ainsi, en changeant les trois noms) :
+
+```
+python -m manim render -ql --disable_caching manim/scripts/terminale/tvi_appliquer.py TviAppliquer -o e2-ql --media_dir manim/scripts/terminale/media
+python scripts/planche-video.py manim/scripts/terminale/media/videos/tvi_appliquer/480p15/e2-ql.mp4 planche-e2.png 4
+```
+
+| | script | scène |
+|---|---|---|
+| E1 | `continuite_reconnaitre.py` | `ContinuiteReconnaitre` |
+| E2 | `tvi_appliquer.py` | `TviAppliquer` |
+| E3 | `tvi_unicite.py` | `TviUnicite` |
+| E4 | `tvi_rediger.py` | `TviRediger` |
+| E5 | `tvi_defi.py` | `TviDefi` |
+
+**Le dry run** — ⚠️ écrire dans un fichier et éclater les retours chariot, sinon le
+`grep` sous-compte (voir § 9) :
+
+```
+AUDIT=1 BORDS=1 python -m manim render -ql --disable_caching --dry_run manim/scripts/terminale/tvi_defi.py TviDefi --media_dir manim/scripts/terminale/media > dry.log 2>&1
+tr "\r" "\n" < dry.log > dry.txt
+grep -c ECRAN dry.txt ; grep -c AUDIT- dry.txt ; grep -c "BORD " dry.txt
+```
+
+**Les cinq contrôles qui disent où on en est** :
+
+```
+python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py
+python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py --voix
+python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py --etalonner
+python -X utf8 manim/poste2/controler-maths-continuite-tvi.py
+python -X utf8 manim/poste2/mesure-continuite-tvi.py
+```
+
+Attendus, au 27/11 : 30 cartes / 0 alerte · 30 cartes / 0 écart · 4 cas / 0 désaccord ·
+73 contrôles / 0 erreur · 10 questions / 0 ennui.
+
+**Les WAV, quand le feu passera au vert** — le script est écrit, il n'a jamais tourné :
+
+```
+bash manim/poste2/voix-continuite-tous-les-wav.sh
+```
+
+⚠️ `-Debit -6` **aux deux étapes** : `generer-voix.ps1` a pour défaut −18 et
+`marques_dump.ps1` −10. Deux débits différents = des marques qui datent une AUTRE voix
+que le WAV, tous les `au_mot` glissent, et **aucun outil ne le dit**. Le script le fait
+déjà ; ne pas le court-circuiter.
+⭐ Et **seulement après** : poser `fichier_marques = "<script>_marques.json"` dans chaque
+classe de scène. Rien d'autre ne change dans le code.
+
+**Si une voix change** : on corrige `manim/poste2/VOIX-continuite-tvi.md`, jamais les
+JSON, puis `python -X utf8 manim/poste2/voix-continuite-depuis-md.py --tout`.
+
+## 10.3 Ce que les planches ont imposé — et ce que j'ai vu à l'écran
+
+⭐ C'est la partie qui ne se retrouve pas dans un diff.
+
+| ce que j'ai VU | l'épisode | la correction |
+|---|---|---|
+| « 5 < 7 < 9 » écrit **par-dessus** « f(x) = 7 ? », les deux lisibles l'un dans l'autre | E2 `04b` | la ligne de question devient sa propre réponse (`ReplacementTransform`) |
+| l'explication de la réponse écrite **sur le rappel** de la colonne de gauche, resté affiché | E1 `07b` | `FadeOut` du rappel avant l'explication |
+| « g(x) ⩽²x²=si4x ▮ 2 » — une bouillie de trois textes au même endroit, avec un **carré vide** au milieu | E1 `04` | légende remontée **au-dessus** des axes ; et les glyphes ⩽ / ⩾ remplacés par ≤ / ≥ |
+| « √(x − 1) : x ▮ 1 » — le carré vide, encore | E1 `09b` | idem, et le socle REFUSE maintenant ces deux glyphes |
+| un graphique **vide** avec deux points flottants, sans rien qui dise à quoi ils correspondent | E2 `01` | pointillés vers les deux axes |
+| « monotone SUR l'intervalle… » sorti **deux fois plus petit** que les lignes voisines | E3 `06` | remonté à −1,45 et passé à 26 px (les deux contraintes se contredisent : § 9) |
+| la courbe annoncée « elle coupe trois fois » n'en montrait que **deux** | E3 `02` | amplitude 2,6 → 3,2, hauteur 1,6 → 1,9 |
+| « → une seule : NON » écrit **sur** « A confond la démonstration » | E4 `07b` | les blocs se posent par `next_to` les uns sous les autres |
+| « des IMAGES » écrit **sur** « la fonction change de signe » | E5 `07b` | idem |
+| la question de `07` lisible **deux fois plus petite** que les autres écrans | E2 `07` | données passées à gauche, cartes élargies à 6,0 |
+
+## 10.4 Les deux points d'ÉCRITURE encore ouverts — ⛔ ne pas les « corriger »
+
+Ils sont détaillés au § 6, et ils attendent la parole de Frédéric. **Ce ne sont pas des
+défauts** : ce sont des choix d'écriture, et quelqu'un qui les prendrait pour des
+erreurs abîmerait la série.
+
+1. **E3, le titre** — « Une seule fois au kilomètre cent » installe **exactement** le
+   réflexe que la question `04` mesure (sa bonne réponse est « aucune »). Il ne donne
+   aucune réponse : il tend un piège, et c'est voulu.
+2. **E3, la dernière puce de l'accroche** — elle oppose « croissante » et « strictement
+   croissante », donc elle **nomme** la monotonie, qui est la carte B de `07`. Mesure :
+   33 %, sous le seuil, parce qu'elle ne dit pas que c'est elle qui manque dans la copie.
+   C'est l'endroit le plus serré de la série.
+
+⚠️ Et les **7 cartes écrites en symboles** (tableau du § 6) : la voix les dit en toutes
+lettres, aucune machine ne peut vérifier qu'elle dit la même chose. E5 `07` y met ses
+TROIS cartes. À relire à l'œil avant l'enregistrement.
+
+## 10.5 ⛔ Ce qu'un repreneur ne doit SURTOUT pas faire
+
+- ⛔⛔ **Pas de rendu HD sans avoir regardé la planche `-ql` de l'épisode.** Tout se
+  contrôle en `-ql` ; le HD seulement quand on est certain. Et celui qui rend est celui
+  qui a regardé.
+- ⛔⛔ **Le verrou de rendu HD est un mutex `mkdir` / `rmdir` partagé avec les autres
+  sessions** : une seule série en rendu à la fois. Un verrou orphelin bloque tout le
+  monde.
+- ⛔⛔ **Ne jamais lancer `node scripts/generer-videos-r2.mjs`** : il sort du registre
+  toute vidéo dont le MP4 n'est pas sur ce disque.
+- ⛔⛔ **Rien dans `notion_ressources` avant que les URL répondent 200** en production.
+  Une ligne de coach écrite avant le déploiement donne un bouton mort — c'est arrivé le
+  24/11 sur les douze paysages de l'espace.
+- ⛔⛔ **Aucune publication YouTube, jamais.** Le coach sert `eleveai.fr/video/<id>`.
+- ⛔ **Ne pas modifier `manim/poste2/espace_ecrans.py`** : il sert une série en
+  production. Les corrections d'outil de CETTE série vont dans `analyse_ecrans.py`.
+- ⛔ **Ne pas toucher `scripts/cues2marques.py`** (le convertisseur commun) : d'autres
+  séries ont de vrais doublons à jeter.
+- ⛔ **Pas de `git add -A`** : plusieurs sessions partagent ce dossier. On committe par
+  chemin explicite, sur `poste2`, et on ne pousse pas.
+- ⚠️ **Le format d'une vidéo ne se lit pas dans son URL** — ni le suffixe `-short`, ni
+  `?format=short`. La vérité est le champ `short` de `lib/videos/videos-r2.json`. Mesuré
+  par une session sœur le 27/11 : le coach servait un short à la place du cours sur
+  42 micros. C'est ce champ qu'il faudra renseigner au moment des clés.
+
+## 10.6 Les six instruments laissés derrière, et ce qu'ils valent
+
+| outil | ce qu'il attrape | ce qu'il ne voit PAS |
+|---|---|---|
+| `verifier-accroches-continuite-tvi.py` | une carte réfutable en se rappelant le titre ou l'accroche, **segment par segment**, seuil étalonné sur 4 cas réels | le sens : il compare des mots. Et sa marge est NULLE du côté « doit crier » |
+| ⤷ `--voix` | une proposition que la voix ne reprend pas mot pour mot, nombres remis en chiffres | les 7 cartes en symboles, qu'il range à part et nomme |
+| ⤷ `--etalonner` | que le seuil sépare encore les cas connus | rien d'autre : c'est la règle graduée de l'instrument |
+| `controler-maths-continuite-tvi.py` | un nombre faux parmi les 73 du manifeste et des corrections dites à voix haute | tout choix pédagogique |
+| `mesure-continuite-tvi.py` | une carte rétrécie sous 19 px, un énoncé rétréci par `col()`, un bloc qui recouvre Ti-Margo | les figures, les colonnes de calcul, les chevauchements d'un écran à l'autre |
+| `voix-continuite-depuis-md.py` | un des 15 clips manquant ou hors gabarit | le contenu des clips |
+| `voix-continuite-tous-les-wav.sh` | — | ⛔ **il n'a jamais tourné** |
+
+⭐ Les trois premiers ne sont pas propres à cette série : ils lisent un manifeste et une
+voix, et la règle qu'ils mesurent — *une carte ne doit pas être réfutable en se
+rappelant l'accroche, ni le titre* — vaut pour toutes les séries. Deux paysages de
+terminale sont en production avec ce défaut, et il n'y avait aucun instrument pour le
+dire.
