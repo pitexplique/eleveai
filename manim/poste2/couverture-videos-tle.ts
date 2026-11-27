@@ -23,10 +23,18 @@ async function main() {
     .select("notion_id,micro_id,url")
     .eq("classe", "terminale-spe");
   if (error) throw error;
+  // ⛔ Un short se reconnait a DEUX formes, et la seconde ne se voit pas dans la cle :
+  //    .../video/xxx-short          (suffixe)
+  //    .../video/xxx-short-yyy?format=short   (parametre -- continuite_tvi est servie ainsi)
+  // Ne tester que le suffixe comptait 5 shorts de TVI comme des paysages.
+  const estShort = (url: string) => {
+    const id = (url.split("/video/")[1] ?? "");
+    return /[?&]format=short/.test(id) || id.split("?")[0].endsWith("-short");
+  };
   const servis = new Set<string>();
   for (const r of data!) {
-    const id = (r.url ?? "").split("/video/")[1] ?? "";
-    if (r.micro_id && id && !id.endsWith("-short")) servis.add(r.notion_id + "/" + r.micro_id);
+    const url = r.url ?? "";
+    if (r.micro_id && url.includes("/video/") && !estShort(url)) servis.add(r.notion_id + "/" + r.micro_id);
   }
 
   // 2. Ce qui existe au catalogue.
