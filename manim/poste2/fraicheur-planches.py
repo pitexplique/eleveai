@@ -22,6 +22,16 @@
 #   le cas le plus facile à oublier.
 # ⚠️ Il ne regarde que les dates. Une planche fraîche peut être mauvaise ; une planche
 #   périmée est forcément à refaire. Il dit « à refaire », jamais « c'est bon ».
+#
+# ⭐⭐ IL NE REFAIT RIEN, ET C'EST VOULU : le re-rendu est le travail de
+# `manim/poste2/planches-tvi.sh` (session sœur, 27/11), qui porte les deux gardes que
+# CETTE panne-là demandait — `PYTHONIOENCODING=utf-8`, parce que ses cinq rendus
+# avaient échoué en UnicodeEncodeError sur une console Windows en cp1252, et un refus
+# explicite si le MP4 produit reste plus vieux que son script.
+# ⛔ DEUX MÉCANISMES DIFFÉRENTS, LE MÊME SYMPTÔME : une planche crédible qui montre un
+# état du code qui n'existe plus. Ici on avait oublié de rendre ; là-bas le rendu avait
+# échoué sans qu'on le voie. Les deux outils se complètent : celui-ci DIT, celui-là
+# REFAIT. ⛔ Ne pas en écrire un troisième.
 
 import sys
 from pathlib import Path
@@ -68,6 +78,9 @@ for script, (scene, sortie, voix) in EPISODES.items():
         print(f"OK {script:24s} rendu postérieur à son script, au socle et à sa voix")
 
 print(f"\n{len(perimes)} planche(s) à refaire.")
+if perimes:
+    print("  ⭐ Pour TOUT refaire d'un coup, avec ses propres gardes : "
+          "bash manim/poste2/planches-tvi.sh")
 for s in perimes:
     scene, sortie, _ = EPISODES[s]
     print(f"  python -m manim render -ql --disable_caching "

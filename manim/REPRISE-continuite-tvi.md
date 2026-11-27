@@ -858,6 +858,24 @@ que de l'artefact qu'on a effectivement RECONSTRUIT.** Un dry run propre ne reco
 rien. Entre la correction et la planche il y a un rendu, et rien ne rappelle de le
 faire — ni Manim, ni le dry run, ni la planche elle-même, qui s'ouvre sans dire son âge.
 
+⭐⭐ **ET IL Y AVAIT UN SECOND MÉCANISME, trouvé par la session sœur le même soir.**
+Elle a régénéré les cinq planches de son côté, et revu le même carré vide : **ses cinq
+rendus Manim avaient échoué** en `UnicodeEncodeError` — console Windows en cp1252,
+Manim qui écrit de l'Unicode — et `planche-video.py`, qui ne vérifie rien, a refabriqué
+cinq planches **à partir des MP4 déjà présents**, dont trois dataient de cinq heures
+plus tôt. Les planches avaient l'air parfaitement normales.
+⛔ **Deux causes différentes, le même symptôme** : une planche crédible qui montre un
+état du code qui n'existe plus. Ici on avait oublié de rendre ; là-bas le rendu avait
+échoué sans que personne le voie. C'est la famille de défaut la plus dangereuse de
+cette chaîne, parce que l'artefact ne dit jamais son âge.
+
+⭐ **Les deux outils, et il n'en faut pas un troisième** :
+
+| | |
+|---|---|
+| `manim/poste2/fraicheur-planches.py` | **DIT** ce qui est périmé, sans rien rendre |
+| `manim/poste2/planches-tvi.sh` (session sœur) | **REFAIT** les cinq, avec `PYTHONIOENCODING=utf-8` et un refus explicite si le MP4 produit reste plus vieux que son script |
+
 ⭐ **L'instrument qui manquait** : `python -X utf8 manim/poste2/fraicheur-planches.py`.
 Il compare chaque MP4 `-ql` à **trois** dates : son script, **le socle d'écran**, et sa
 voix. Il imprime la commande de re-rendu de chaque planche périmée.
