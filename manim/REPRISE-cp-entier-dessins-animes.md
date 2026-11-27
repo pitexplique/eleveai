@@ -93,4 +93,14 @@ pas de `PARI` (cp-commun.js) ni dans le film ni sur la miniature. Ne pas toucher
   HD : short 59,8 s (−19,4 dB), compteur visible ~28-31 s ; paysage 118,8 s (−19,5 dB), compteurs Q1 ~62-64 s, Q2 ~90-92 s ;
   rien de rogné, ceinture blanche, fin eleveai.fr / YouTube. Miniatures « Combien dans ma tirelire ? » (🐷 💶 ?) et
   « Combien de perles ? » 💎 (pas 📿 : c'est un chapelet). Pas de R2 / manifeste / coach (attend l'accord de Frédéric).
-- [ ] 08 → 12 : films, planches, HD une à la fois. Branchement R2 / manifeste / coach : seulement sur l'accord de Frédéric.
+- [x] 09 ordinal : voix JSON (texte exact du script) + WAV -Debit -6, "ordinal": "09" aux 2 séries, instants. Dessins ajoutés à
+  `cp-entier3-dessins.js` (cubeE, pleineLuneE, guirlandeE, locoE, wagonE (h en option), oursonE, railsE, ordinalZE (fin « e/er »
+  qui grossit), motCouleursE (mot en morceaux colorés : neu-f / neu-v-ième)). Fin d'ordinal dans la carte : « 9ᵉ », « 1ᵉʳ »
+  (lettres en exposant Unicode, la carte écrit en texte brut) ; dans les choix : `9<sup>e</sup>` (innerHTML).
+  Short « Le petit train de la fête » (`films/cp-entier2-ordinal.js`) : HD 63,7 s (−18,5 dB), C = le 9e, compteur ~29-31 s ;
+  commentaire « 11e → ? ». Paysage « La tour qui touche la lune » (`films/cp-entier2-paysage-ordinal.js`) : HD 126,4 s (−18,6 dB),
+  Q1 B (le 7e, compteur ~62-65 s), Q2 B (20e, compteur ~97-100 s) ; rien de rogné, ceinture blanche, fin eleveai.fr / YouTube.
+  Miniatures « Dans quel wagon ? » (🚃🧸 ?) et « Qui touche la lune ? » 🌕. Corrigé sur les planches : train et ourson grossis,
+  flèches « → » qui mordaient sur les mots, lune déplacée (sous « 4e » / « 1er »), tour de 20 cubes et « 20e » décalés à gauche
+  (la carte rognait le « e »). ⚠ En paysage, la zone visible à gauche de la carte s'arrête vers x ≈ 470, pas 520.
+- [ ] 10 → 12 : films, planches, HD une à la fois. Branchement R2 / manifeste / coach : seulement sur l'accord de Frédéric.

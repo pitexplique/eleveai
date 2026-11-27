@@ -172,3 +172,58 @@ function pieceUnE(c,x,y,r=30,z=1,lueur=0){ if(z<=0) return; r*=Math.min(1.2,z);
   ecrire(c,'1',x,y+2,r*.95,'#495057'); }
 /* Une étagère de bois : (x0, y) = le dessus, longueur L */
 function etagereE(c,x0,y,L){ c.fillStyle='#8a5a2b'; c.fillRect(x0,y,L,22); c.fillStyle='#6b3a10'; c.fillRect(x0+30,y+22,16,26); c.fillRect(x0+L-46,y+22,16,26); }
+
+/* ---- Paire 9 (ordinaux) : les cubes de la tour, la pleine lune, le petit train de la fête, l'ourson, les guirlandes ---- */
+const COUL_CUBE=['#ff6b6b','#fcc419','#51cf66','#4dabf7','#cc5de8','#ff922b','#20c997','#f783ac','#748ffc','#94d82d'];
+/* Un cube de bois peint : (x, yBas) = le milieu du bas ; s = le côté ; lueur ajoute un halo ; a = un petit penché */
+function cubeE(c,x,yBas,s,coul,z=1,lueur=0,a=0){ if(z<=0) return; s*=Math.min(1.15,z); c.save(); c.translate(x,yBas); c.rotate(a);
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.45*lueur})`; c.beginPath(); c.roundRect(-s*.75,-s*1.25,s*1.5,s*1.5,s*.3); c.fill(); }
+  c.fillStyle=coul; c.strokeStyle='rgba(0,0,0,.45)'; c.lineWidth=Math.max(2,s*.05); c.beginPath(); c.roundRect(-s/2,-s,s,s,s*.12); c.fill(); c.stroke();
+  c.fillStyle='rgba(255,255,255,.35)'; c.beginPath(); c.roundRect(-s*.38,-s*.88,s*.3,s*.18,s*.06); c.fill(); c.restore(); }
+/* La pleine lune qui sourit : (x, y) = le centre ; allume (0 → 1) la fait briller et sourire */
+function pleineLuneE(c,x,y,r,allume=0,T=0){ const g=c.createRadialGradient(x,y,r*.6,x,y,r*(1.6+.5*allume)); g.addColorStop(0,`rgba(255,243,191,${.35+.4*allume})`); g.addColorStop(1,'rgba(255,243,191,0)');
+  c.fillStyle=g; c.beginPath(); c.arc(x,y,r*(1.6+.5*allume),0,7); c.fill();
+  c.fillStyle=allume>0?'#fff3bf':'#e9ecef'; c.beginPath(); c.arc(x,y,r,0,7); c.fill();
+  c.fillStyle='rgba(173,181,189,.5)'; for(const [dx,dy,k] of [[-.35,-.3,.16],[.3,.25,.12],[.1,-.45,.09]]){ c.beginPath(); c.arc(x+dx*r,y+dy*r,r*k,0,7); c.fill(); }
+  if(allume>0){ c.fillStyle='#495057'; c.beginPath(); c.arc(x-r*.3,y-r*.1,r*.07,0,7); c.arc(x+r*.3,y-r*.1,r*.07,0,7); c.fill();
+    c.strokeStyle='#495057'; c.lineWidth=r*.06; c.beginPath(); c.arc(x,y+r*.08,r*.32*allume,.25,Math.PI-.25); c.stroke(); } }
+/* Une guirlande de fête : un fil en vagues de x0 à x1 vers y, des ampoules qui clignotent */
+function guirlandeE(c,x0,x1,y,T,n=14){ c.strokeStyle='#495057'; c.lineWidth=3; c.beginPath();
+  for(let k=0;k<=40;k++){ const x=x0+(x1-x0)*k/40; c.lineTo(x,y+18*Math.sin(k/40*Math.PI*3)); } c.stroke();
+  for(let k=0;k<n;k++){ const u=(k+.5)/n, x=x0+(x1-x0)*u, yy=y+18*Math.sin(u*Math.PI*3)+10, b=.5+.5*Math.sin(T*4+k*1.7);
+    c.fillStyle=['#ff6b6b','#ffd43b','#69db7c','#74c0fc','#da77f2'][k%5]; c.globalAlpha=.55+.45*b; c.beginPath(); c.arc(x,yy,9,0,7); c.fill(); c.globalAlpha=1; } }
+/* La locomotive du petit train, tournée vers la GAUCHE : (x, yBas) = l'avant en bas ; w = la longueur. Renvoie l'arrière (x). */
+function locoE(c,x,yBas,w=130,T=0){ const h=w*.62;
+  c.fillStyle='#e03131'; c.strokeStyle='#7d1515'; c.lineWidth=4; c.beginPath(); c.roundRect(x,yBas-h*.55,w,h*.55,10); c.fill(); c.stroke();
+  c.fillStyle='#1c7ed6'; c.beginPath(); c.roundRect(x+w*.5,yBas-h,w*.5,h*.48,8); c.fill(); c.stroke();
+  c.fillStyle='#a5d8ff'; c.fillRect(x+w*.6,yBas-h*.9,w*.3,h*.26);
+  c.fillStyle='#343a40'; c.fillRect(x+w*.14,yBas-h*.95,w*.16,h*.42);
+  for(let k=0;k<3;k++){ const u=((T*.8+k/3)%1); c.fillStyle=`rgba(241,243,245,${.7*(1-u)})`; c.beginPath(); c.arc(x+w*.22-u*30,yBas-h*.98-u*60,8+u*14,0,7); c.fill(); }
+  for(const k of [.22,.72]){ c.fillStyle='#212529'; c.beginPath(); c.arc(x+w*k,yBas,h*.17,0,7); c.fill(); c.fillStyle='#fcc419'; c.beginPath(); c.arc(x+w*k,yBas,h*.07,0,7); c.fill(); }
+  c.fillStyle='#fff3bf'; c.beginPath(); c.arc(x+6,yBas-h*.3,7,0,7); c.fill();
+  return x+w; }
+/* Un wagon ouvert : (x, yBas) = le coin avant en bas ; w = la longueur ; lueur l'éclaire */
+function wagonE(c,x,yBas,w,coul,lueur=0,h=w*.62){
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.45*lueur})`; c.beginPath(); c.roundRect(x-8,yBas-h-12,w+16,h+28,14); c.fill(); }
+  c.fillStyle=coul; c.strokeStyle='rgba(0,0,0,.45)'; c.lineWidth=4; c.beginPath(); c.roundRect(x,yBas-h,w,h*.82,[4,4,10,10]); c.fill(); c.stroke();
+  c.fillStyle='rgba(255,255,255,.3)'; c.fillRect(x+6,yBas-h+6,w-12,6);
+  c.strokeStyle='#495057'; c.lineWidth=4; c.beginPath(); c.moveTo(x-8,yBas-h*.35); c.lineTo(x,yBas-h*.35); c.stroke();
+  for(const k of [.25,.75]){ c.fillStyle='#212529'; c.beginPath(); c.arc(x+w*k,yBas,h*.15,0,7); c.fill(); } }
+/* Un ourson qui dépasse d'un wagon : (x, y) = le centre de la tête ; s = l'échelle ; salut (0 → 1) agite la patte */
+function oursonE(c,x,y,s=1,salut=0,T=0){ c.save(); c.translate(x,y); c.scale(s,s);
+  c.fillStyle='#c08550'; c.strokeStyle='#6b3a10'; c.lineWidth=3;
+  for(const dx of [-20,20]){ c.beginPath(); c.arc(dx,-20,10,0,7); c.fill(); c.stroke(); }
+  c.beginPath(); c.arc(0,0,24,0,7); c.fill(); c.stroke();
+  c.fillStyle='#f1d3b0'; c.beginPath(); c.ellipse(0,8,11,8,0,0,7); c.fill();
+  c.fillStyle='#212529'; c.beginPath(); c.arc(-9,-4,3.5,0,7); c.arc(9,-4,3.5,0,7); c.arc(0,5,4,0,7); c.fill();
+  if(salut>0){ const a=-.5+.45*Math.sin(T*10); c.save(); c.translate(26,16); c.rotate(a); c.fillStyle='#c08550'; c.beginPath(); c.ellipse(0,-22*salut,9,14,0,0,7); c.fill(); c.stroke(); c.restore(); }
+  c.restore(); }
+/* Les rails */
+function railsE(c,y,x0=0,x1=1056){ c.fillStyle='#868e96'; c.fillRect(x0,y,x1-x0,7); c.fillStyle='#8a5a2b'; for(let x=x0+10;x<x1;x+=44) c.fillRect(x,y+7,24,10); }
+/* Un ordinal dont la fin (« e », « er ») peut grossir : ze = l'échelle de la fin */
+function ordinalZE(c,n,x,y,taille,coul=CRAIE.jaune,ze=1,coulFin=null){ const fin=n===1?'er':'e';
+  c.font=`800 ${taille}px "Segoe UI"`; const w=c.measureText(String(n)).width; c.font=`800 ${taille*.5}px "Segoe UI"`; const w2=c.measureText(fin).width;
+  const x0=x-(w+w2)/2; ecrire(c,String(n),x0+w/2,y,taille,coul); ecrire(c,fin,x0+w+w2/2,y-taille*.28,taille*.5*ze,coulFin||coul); }
+/* Un mot écrit en morceaux de couleurs : parts = [[texte, couleur], …], centré en x */
+function motCouleursE(c,parts,x,y,taille){ c.font=`800 ${taille}px "Segoe UI"`; const ws=parts.map(([s])=>c.measureText(s).width), W=ws.reduce((a,b)=>a+b,0);
+  let x0=x-W/2; parts.forEach(([s,col],i)=>{ ecrire(c,s,x0,y,taille,col,'left'); x0+=ws[i]; }); }
