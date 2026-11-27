@@ -678,7 +678,7 @@ les deux sur E3 `04` carte A. Recouvrement maximal, mesure juste :
 |---|---|---|---|---|
 | E1 | 33 % | 0 % | non | ✅ 3 cas |
 | E2 | 0 % | 40 % | non | ✅ 3 cas |
-| E3 | **50 %** ⛔ | 33 % | ⚠️ voir ci-dessous — c'est LA décision à prendre | ✅ 3 cas |
+| E3 | **50 %** ⚖️ arbitré | 33 % | ✅ tranché le 27/11 : le titre RESTE | ✅ 3 cas |
 | E4 | 0 % | 33 % | non | ✅ 3 cas |
 | E5 | 0 % | 0 % | non | ✅ 3 cas |
 
@@ -713,7 +713,7 @@ coûte un WAV et un rendu.
 | # | étape | état |
 |---|---|---|
 | 1 | manifeste des 5 épisodes | ✅ **ce fichier** |
-| 1 bis | contre-contrôle outillé des titres et des accroches, avec son étalon | ⚠️ 30 cartes, **2 alertes**, les deux sur E3 `04` A |
+| 1 bis | contre-contrôle outillé des titres et des accroches, avec son étalon | ✅ 30 cartes, **0 alerte ouverte** — les 2 de E3 sont ARBITRÉES par Frédéric |
 | 1 ter | **passe maths du manifeste**, recalculée | ✅ 59 contrôles, 0 erreur |
 | 2 | relecture de Frédéric : les 5 titres, les 5 accroches, les 2 points du § 6 | ⏳ **le prochain geste** |
 | 3 | `manim/poste2/VOIX-continuite-tvi.md` — 5 × 15 clips, tout en toutes lettres | ✅ **les 75 clips écrits** |
@@ -805,7 +805,7 @@ signale. On écrit le texte, on n'enregistre pas.
 ⭐ **Les trois commandes qui disent où on en est**, à relancer après chaque retouche :
 
 ```
-python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py            # 30 cartes, 2 alertes (E3)
+python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py            # 0 alerte ouverte, 2 arbitrées
 python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py --voix     # 30 cartes, 0 écart
 python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py --etalonner  # 4 cas, 0 désaccord
 python -X utf8 manim/poste2/controler-maths-continuite-tvi.py               # 73 contrôles, 0 erreur
@@ -1025,7 +1025,7 @@ python -X utf8 manim/poste2/mesure-continuite-tvi.py
 python -X utf8 manim/poste2/fraicheur-planches.py
 ```
 
-Attendus, au 27/11 au soir : 30 cartes / **2 alertes, les deux sur E3 `04` A** ·
+Attendus, au 27/11 au soir : 30 cartes / **0 alerte ouverte, 2 arbitrées (E3 `04` A)** ·
 30 cartes / 0 écart · 4 cas / 0 désaccord ·
 73 contrôles / 0 erreur · 10 questions / 0 ennui.
 
@@ -1062,21 +1062,25 @@ JSON, puis `python -X utf8 manim/poste2/voix-continuite-depuis-md.py --tout`.
 | « des IMAGES » écrit **sur** « la fonction change de signe » | E5 `07b` | idem |
 | la question de `07` lisible **deux fois plus petite** que les autres écrans | E2 `07` | données passées à gauche, cartes élargies à 6,0 |
 
-## 10.4 Les deux points d'ÉCRITURE encore ouverts — ⛔ ne pas les « corriger »
+## 10.4 L'écriture : un point TRANCHÉ, un point encore ouvert
 
-Ils sont détaillés au § 6, et ils attendent la parole de Frédéric. **Ce ne sont pas des
-défauts** : ce sont des choix d'écriture, et quelqu'un qui les prendrait pour des
-erreurs abîmerait la série.
+Ils sont détaillés au § 6. **Ce ne sont pas des défauts** : ce sont des choix
+d'écriture, et quelqu'un qui les prendrait pour des erreurs abîmerait la série.
+⛔ Le premier est **tranché** — n'y touchez pas sans rouvrir la décision avec Frédéric.
 
-1. ⛔ **E3, le titre — MESURÉ À 50 %, le même niveau que les deux fautes de la série
-   espace.** « Une seule fois au kilomètre cent » reprend mot pour mot la carte A de
-   `04` (« une seule, g est monotone »), et la bonne réponse est « aucune ».
-   ⭐ **Mais le sens de l'effet est l'INVERSE de celui des deux fautes connues** : là-bas
-   le titre réfutait une carte, ici il rend un LEURRE attirant. L'instrument voit le
-   recouvrement, il ne voit pas le sens — il dit « DÉSIGNE UN LEURRE » et s'arrête là.
-   C'est donc une décision d'écriture, et c'est **la seule vraie décision de la série** :
-   ou bien le piège est voulu (et il fait travailler), ou bien le titre change.
-   ⚠️ L'accroche porte le même mot (50 % aussi) : la changer suppose de changer les deux.
+1. ✅ **E3, le titre — TRANCHÉ PAR FRÉDÉRIC LE 27/11/2026 : il RESTE.**
+   « Une seule fois au kilomètre cent » reprend mot pour mot la carte A de `04`
+   (« une seule, g est monotone »), et la bonne réponse est « aucune ». Mesuré à 50 % —
+   le même niveau que les deux fautes de la série espace, **mais dans l'autre sens** :
+   là-bas le titre réfutait une carte, ici il rend un LEURRE attirant. Le piège est
+   voulu, et il fait travailler.
+   ⭐ **L'arbitrage est dans l'instrument, pas seulement dans cette note** : la table
+   `ARBITRAGES` de `verifier-accroches-continuite-tvi.py` porte la carte, la date, la
+   raison — et **l'empreinte du couple (titre, accroche)**. L'alerte est déplacée dans
+   une liste à part, affichée à chaque passage, et elle **revient d'elle-même si le
+   titre ou l'accroche changent d'un seul caractère** (vérifié : un accent retiré suffit
+   à la faire crier). ⛔ Faire taire un instrument est la façon la plus simple de le
+   faire mentir : celui-ci ne se tait pas, il classe.
 2. **E3, la dernière puce de l'accroche** — elle oppose « croissante » et « strictement
    croissante », donc elle **nomme** la monotonie, qui est la carte B de `07`. Mesure :
    33 %, sous le seuil, parce qu'elle ne dit pas que c'est elle qui manque dans la copie.
@@ -1125,6 +1129,7 @@ TROIS cartes. À relire à l'œil avant l'enregistrement.
 | `controler-maths-continuite-tvi.py` | un nombre faux parmi les 73 du manifeste et des corrections dites à voix haute | tout choix pédagogique |
 | `mesure-continuite-tvi.py` | une carte rétrécie sous 19 px, un énoncé rétréci par `col()`, un bloc qui recouvre Ti-Margo | les figures, les colonnes de calcul, les chevauchements d'un écran à l'autre |
 | `voix-continuite-depuis-md.py` | un des 15 clips manquant ou hors gabarit | le contenu des clips |
+| ⤷ `ARBITRAGES` | rien — c'est l'inverse : il CLASSE une alerte tranchée au lieu de la taire, et la fait revenir si le texte arbitré change | il ne juge pas la décision, il la retient |
 | `fraicheur-planches.py` | une planche `-ql` plus vieille que son script, **que le socle** ou que sa voix | si une planche fraîche est bonne : il ne regarde que les dates |
 | `voix-continuite-tous-les-wav.sh` | — | ⛔ **il n'a jamais tourné** |
 

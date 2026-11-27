@@ -32,6 +32,7 @@ CE QU'IL NE VOIT PAS, ET C'EST ÉCRIT ICI POUR QU'ON NE S'Y FIE PAS
   · ⛔ il ne vérifie pas que l'écran `02-idee` traite un autre cas que les questions : ça
     se lit dans le manifeste, en deux minutes par épisode.
 """
+import hashlib
 import io
 import re
 import sys
@@ -70,6 +71,38 @@ def contenu(texte):
     ⭐ On retire la ponctuation aux DEUX BOUTS seulement : « 0,13 » reste entier."""
     mots = [plat(m).strip(",.;:!?()[]«»'’—–-") for m in re.split(r"\s+", texte) if m]
     return {m for m in mots if m and m not in VIDES and (len(m) > 1 or m.isdigit())}
+
+
+# ── LES ARBITRAGES DE FRÉDÉRIC ──────────────────────────────────────────────────
+# ⛔⛔ FAIRE TAIRE UN INSTRUMENT EST LA FAÇON LA PLUS SIMPLE DE LE FAIRE MENTIR.
+# Celui-ci ne se tait donc pas : il DÉPLACE l'alerte dans une liste à part, la nomme,
+# la date, et l'affiche à CHAQUE passage avec la décision qui l'a close. Ce qui change,
+# c'est seulement le compte des alertes ouvertes et le code de sortie.
+# ⭐ Pourquoi c'est nécessaire : une alerte tranchée qui crie à chaque exécution finit
+# par être lue comme du bruit, et le jour où une VRAIE alerte apparaît à côté d'elle,
+# personne ne la distingue. La série espace l'écrit déjà : « 2 alertes de devinabilité
+# (20 % et 86 %, arbitrées) ».
+# ⚠️ La clé est (épisode, question, LETTRE) : un arbitrage ne couvre QUE cette carte.
+# Si le titre change, ou si une autre carte se met à crier, l'instrument crie.
+ARBITRAGES = {
+    ("E3", "04", "A"): (
+        "27/11/2026",
+        "Frédéric : le titre reste. « Une seule fois au kilomètre cent » installe "
+        "volontairement le réflexe que la question mesure — la bonne réponse est "
+        "« aucune ». Le titre ne donne pas la réponse : il tend un piège, et le piège "
+        "fait travailler. Vaut aussi pour l'accroche, qui porte le même mot.",
+        # ⭐⭐ L'EMPREINTE, JAMAIS L'HORODATAGE : un arbitrage porte sur un texte
+        # PRÉCIS. Sans elle, on pourrait réécrire le titre et garder le silence hérité
+        # d'une décision qui ne porte plus sur rien. Si le titre ou l'accroche changent,
+        # l'arbitrage PÉRIME tout seul et l'alerte revient, en le disant.
+        "ecf73fc61b",
+    ),
+}
+
+
+def empreinte(titre, accroche):
+    """Ce sur quoi l'arbitrage a porté : le couple (titre, accroche), pas la date."""
+    return hashlib.sha1((titre + chr(10) + accroche).encode("utf-8")).hexdigest()[:10]
 
 
 def lire_episodes(src):
@@ -365,6 +398,7 @@ def main():
     src = io.open(MANIFESTE, encoding="utf-8").read()
     episodes = lire_episodes(src)
     alertes = 0
+    arbitres = []
     cartes_vues = 0
     for num, ident, titre, accroche, questions in episodes:
         print(f"\n{num} · {ident}")
@@ -382,6 +416,20 @@ def main():
                 cartes_vues += 1
                 for source, nom in ((titre, "titre"), (accroche, "accroche")):
                     p, mots = part(texte, source)
+                    if p >= SEUIL and (num, cle, lettre) in ARBITRAGES:
+                        quand, pourquoi, emp = ARBITRAGES[(num, cle, lettre)]
+                        vraie = empreinte(titre, accroche)
+                        if vraie != emp:
+                            alertes += 1
+                            print(f"   ⛔ {cle} carte {lettre} — {p:.0%}, et "
+                                  f"l'ARBITRAGE DU {quand} EST PÉRIMÉ : le "
+                                  f"titre ou l'accroche ont changé depuis "
+                                  f"({emp} → {vraie}). À reprendre.")
+                            continue
+                        arbitres.append((num, cle, lettre, nom, p, quand, pourquoi))
+                        print(f"   ⚖️  {cle} carte {lettre} — le {nom} "
+                              f"à {p:.0%}, ARBITRÉ le {quand}")
+                        continue
                     if p >= SEUIL:
                         alertes += 1
                         # ⚠️ « DÉSIGNE », et pas « ÉLIMINE » : sur un LEURRE, un titre
@@ -399,7 +447,18 @@ def main():
                   f"recouvrement max "
                   f"{max(max(part(t, titre)[0], part(t, accroche)[0]) for _, t, _ in cartes):.0%}")
     print(f"\n{len(episodes)} épisodes, {cartes_vues} cartes mesurées, "
-          f"{alertes} alerte(s) au-dessus de {SEUIL:.0%}.")
+          f"{alertes} alerte(s) OUVERTE(S) au-dessus de {SEUIL:.0%}, "
+          f"{len(arbitres)} arbitrée(s).")
+    if arbitres:
+        print("\n\u2696\ufe0f  CE QUI A ÉTÉ TRANCHÉ, et qui crierait sans cela :")
+        vus = set()
+        for num, cle, lettre, _nom, _p, quand, pourquoi in arbitres:
+            if (num, cle, lettre) in vus:
+                continue
+            vus.add((num, cle, lettre))
+            print(f"   · {num} `{cle}` carte {lettre} — {quand}\n     {pourquoi}")
+        print("   ⛔ Un arbitrage ne couvre QUE sa carte. Si le titre ou l'accroche "
+              "changent, il est à reprendre.")
     print("⚠️ Un zéro ici ne veut pas dire « les cartes sont bonnes » : "
           "l'exclusion mutuelle et le « autre cas que l'idée » se relisent à la main.")
     return 1 if alertes else 0
