@@ -19079,5 +19079,50 @@
     "short": true,
     "youtube": null,
     "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=produit_scalaire_espace&microId=ps_espace_defi&display=simple"
+  },
+  "terminale-continuite-reconnaitre": {
+    "fichier": "terminale/maths/analyse/continuite-reconnaitre/eleveai-maths-terminale-continuite-reconnaitre.mp4",
+    "poster": "terminale/maths/analyse/continuite-reconnaitre/eleveai-maths-terminale-continuite-reconnaitre.png",
+    "vignette": "terminale/maths/analyse/continuite-reconnaitre/eleveai-maths-terminale-continuite-reconnaitre.vignette.webp",
+    "titre": "Le compteur saute, la cabine non · Reconnaître une fonction continue · Tle spé",
+    "short": false,
+    "youtube": null,
+    "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=continuite_tvi&microId=continuite_reconnaitre&display=simple"
+  },
+  "terminale-tvi-appliquer": {
+    "fichier": "terminale/maths/analyse/tvi-appliquer/eleveai-maths-terminale-tvi-appliquer.mp4",
+    "poster": "terminale/maths/analyse/tvi-appliquer/eleveai-maths-terminale-tvi-appliquer.png",
+    "vignette": "terminale/maths/analyse/tvi-appliquer/eleveai-maths-terminale-tvi-appliquer.vignette.webp",
+    "titre": "Le théorème qui prouve sans calculer · Appliquer le TVI · Tle spé",
+    "short": false,
+    "youtube": null,
+    "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=continuite_tvi&microId=tvi_appliquer&display=simple"
+  },
+  "terminale-tvi-unicite": {
+    "fichier": "terminale/maths/analyse/tvi-unicite/eleveai-maths-terminale-tvi-unicite.mp4",
+    "poster": "terminale/maths/analyse/tvi-unicite/eleveai-maths-terminale-tvi-unicite.png",
+    "vignette": "terminale/maths/analyse/tvi-unicite/eleveai-maths-terminale-tvi-unicite.vignette.webp",
+    "titre": "Une seule fois au kilomètre cent · Justifier l'unicité d'une solution · Tle spé",
+    "short": false,
+    "youtube": null,
+    "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=continuite_tvi&microId=tvi_unicite&display=simple"
+  },
+  "terminale-tvi-rediger": {
+    "fichier": "terminale/maths/analyse/tvi-rediger/eleveai-maths-terminale-tvi-rediger.mp4",
+    "poster": "terminale/maths/analyse/tvi-rediger/eleveai-maths-terminale-tvi-rediger.png",
+    "vignette": "terminale/maths/analyse/tvi-rediger/eleveai-maths-terminale-tvi-rediger.vignette.webp",
+    "titre": "Il a trouvé la bonne réponse et perdu les points · Rédiger le TVI au bac · Tle spé",
+    "short": false,
+    "youtube": null,
+    "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=continuite_tvi&microId=tvi_rediger&display=simple"
+  },
+  "terminale-tvi-defi": {
+    "fichier": "terminale/maths/analyse/tvi-defi/eleveai-maths-terminale-tvi-defi.mp4",
+    "poster": "terminale/maths/analyse/tvi-defi/eleveai-maths-terminale-tvi-defi.png",
+    "vignette": "terminale/maths/analyse/tvi-defi/eleveai-maths-terminale-tvi-defi.vignette.webp",
+    "titre": "Le théorème ne dit rien, et pourtant elle s'annule · Continuité et TVI, type bac · Tle spé",
+    "short": false,
+    "youtube": null,
+    "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=continuite_tvi&microId=tvi_defi&display=simple"
   }
 }
