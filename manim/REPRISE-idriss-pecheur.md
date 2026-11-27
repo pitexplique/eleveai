@@ -29,8 +29,14 @@ hypothèse : barque bleue, ligne + filet, marché du port, aucun lieu nommé.
 - Socle 27/11 soir : `idriss-dessins.js` a aussi quaiBoisE, ploufE, etalE, chatE (+ yeuxOmbreE), crevetteE, hameconE, boueeE, vagueE,
   euroE (pièces 1/2 €, billets 5/10/20/50 €), prixE (étiquette), porteMonnaieE, formuleE (formule centrée mot à mot).
   `ce1-commun.js` / `ce2-commun.js` = copies du même socle : on garde le socle CP pour les 6 paires.
-- [x] Paire 2 `cp-soustractif` (02) : voix + WAV + instants ; short « Le goûter de la mouette » (C = 5) HD 62,0 s, −19,5 dB, planche ok, miniature ;
-  paysage « Le chat du port » (Q1 A = 5 coquillages, Q2 A = 6 hameçons) planches ok, HD lancée.
-- [ ] Paire 3 `cp-monnaie` (03) : voix + WAV + instants faits ; short écrit (B), paysage à écrire.
-- [ ] Paires 4 → 6 (voix dans le SCRIPTS ; épisodes 04-06 déjà déclarés dans les deux séries JSON).
+- [x] Paire 2 `cp-soustractif` (02) : short « Le goûter de la mouette » (C = 5) HD 62,0 s, −19,5 dB, miniature ;
+  paysage « Le chat du port » (Q1 A = 5 coquillages, Q2 A = 6 hameçons) HD 125,4 s, −19,7 dB, planche ok, miniature.
+- Voix + WAV + instants des paires 3 → 6 FAITS (les 12 voix dans `manim/voix/idriss-*`, sons dans `public/sons/idriss-*`).
+- Films 03 → 06 (short + paysage) ÉCRITS le 27/11 soir (dessins ajoutés : enfantE, rubanE, droiteE, reveVaguesE, ardoisePrixE,
+  balanceE, calamarE, sachetKiloE, dameE ; idrissE accepte cire/cireB/peau pour le pêcheur voisin).
+  - 03 short « Pas une pièce de trop » (B) : planche ok (pièces agrandies), HD à faire. 03 paysage « J'achète mon poisson » (C, B) : planche à faire.
+  - 04 « Les quatre chats » (C) / « Les trois paniers » (B, A) ; 05 « Idriss dans la lune » (B) / « Idriss rend la monnaie » (C, A) ;
+    06 « Le compte est pile » (B) / « La balance d'Idriss » (A, C) : planches à faire, puis HD, miniatures.
+- ⚠️ 27/11 soir : RAM libre 0,9 → 1,9 Go (trois `next dev` d'autres sessions ≈ 4,6 Go) : rendus en pause (règle : rien sous 2,5 Go).
+- Contrôle : `CONTROLE=<dossier> node scripts/ti-margo-short.mjs idriss[-paysage] <ep> controle $(seq 3 4.5 135)` puis planche du dossier.
 - R2, coach, manifeste YouTube : seulement sur son accord. Commit par chemin, pas de push.

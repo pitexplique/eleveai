@@ -6,9 +6,9 @@
 
 /* Idriss debout : (x, yBas) = entre les bottes ; s = l'échelle (≈ 300 px de haut à s = 1).
    salut (0 → 1) lève le bras droit et l'agite ; montre (0 → 1) tend le bras gauche ; T anime le salut. */
-function idrissE(c,x,yBas,s=1,{salut=0,montre=0,T=0,lueur=0}={}){ c.save(); c.translate(x,yBas); c.scale(s,s);
+function idrissE(c,x,yBas,s=1,{salut=0,montre=0,T=0,lueur=0,cire='#fcc419',cireB='#e67700',peau='#b9774a'}={}){ c.save(); c.translate(x,yBas); c.scale(s,s);
   if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.32*lueur})`; c.beginPath(); c.ellipse(0,-150,120,170,0,0,7); c.fill(); }
-  const CIRE='#fcc419', CIRE_B='#e67700', PEAU='#b9774a', PEAU_B='#7a4a2a';
+  const CIRE=cire, CIRE_B=cireB, PEAU=peau, PEAU_B='#7a4a2a'; /* 27/11 : un autre ciré pour le pêcheur voisin (paire 6) */
   /* les bottes et le pantalon */
   c.fillStyle='#343a40'; c.beginPath(); c.roundRect(-38,-24,32,24,6); c.roundRect(6,-24,32,24,6); c.fill();
   c.fillStyle='#1c7ed6'; c.fillRect(-32,-96,24,74); c.fillRect(8,-96,24,74);
@@ -295,3 +295,67 @@ function rubanE(c,x,y,coul,s=1){ c.save(); c.translate(x,y); c.scale(s,s); c.fil
   for(const sx of [-1,1]){ c.beginPath(); c.moveTo(0,0); c.lineTo(sx*30,-16); c.lineTo(sx*30,16); c.closePath(); c.fill(); c.stroke(); }
   c.beginPath(); c.moveTo(-4,4); c.lineTo(-16,38); c.lineTo(-6,36); c.closePath(); c.fill(); c.beginPath(); c.moveTo(4,4); c.lineTo(16,38); c.lineTo(6,36); c.closePath(); c.fill();
   c.beginPath(); c.arc(0,0,8,0,7); c.fill(); c.stroke(); c.restore(); }
+
+/* ---- Paires 5, 6 (rendre la monnaie) ---- */
+/* Une petite droite graduée : de n0 à n1, la graduation n à x0 + (n − n0)·dx, sur la ligne y ;
+   hi = { n: couleur } pour colorer un nombre ; z = l'apparition ; pas = l'écart entre deux nombres écrits */
+function droiteE(c,x0,dx,y,n0,n1,{hi={},z=1,pas=1,taille=46}={}){ if(z<=0) return; const X=n=>x0+(n-n0)*dx;
+  c.globalAlpha=Math.min(1,z); c.strokeStyle=CRAIE.blanc; c.lineWidth=5; c.beginPath(); c.moveTo(X(n0)-30,y); c.lineTo(X(n1)+30,y); c.stroke();
+  for(let n=n0;n<=n1;n++){ c.beginPath(); c.moveTo(X(n),y-14); c.lineTo(X(n),y+14); c.stroke();
+    if((n-n0)%pas===0||n===n1||hi[n]) ecrire(c,String(n),X(n),y+44,taille,hi[n]||CRAIE.blanc); }
+  c.globalAlpha=1; return X; }
+/* Une bulle de rêve (des ronds qui montent vers la tête) avec des vagues dedans : (x, y) le centre ; (qx, qy) la tête */
+function reveVaguesE(c,x,y,w,h,qx,qy,T,z=1){ if(z<=0) return; const k=Math.min(1.1,z); w*=k; h*=k;
+  c.fillStyle='#f8f9fa'; c.strokeStyle='#343a40'; c.lineWidth=4;
+  for(const [u,r] of [[.25,9],[.55,14]]){ c.beginPath(); c.arc(qx+(x-qx)*u,qy+(y+h/2-qy)*u,r*k,0,7); c.fill(); c.stroke(); }
+  c.beginPath(); c.ellipse(x,y,w/2,h/2,0,0,7); c.fill(); c.stroke();
+  c.save(); c.beginPath(); c.ellipse(x,y,w/2-6,h/2-6,0,0,7); c.clip();
+  for(const [dy,coul] of [[-h*.12,'#74c0fc'],[h*.12,'#1c7ed6']]){ c.fillStyle=coul; c.beginPath(); c.moveTo(x-w/2,y+h/2);
+    for(let xx=x-w/2;xx<=x+w/2;xx+=8) c.lineTo(xx,y+dy+10*Math.sin(xx/22+T*2.4+dy)); c.lineTo(x+w/2,y+h/2); c.closePath(); c.fill(); }
+  c.restore(); }
+
+/* ---- Paire 6 (ce2-kilo) ---- */
+/* L'ardoise des prix d'Idriss (cadre de bois) : (x, y) = le centre ; lignes = [[texte, couleur]] */
+function ardoisePrixE(c,x,y,lignes,taille=50,{z=1,lueur=0}={}){ if(z<=0) return; c.save(); c.translate(x,y); c.scale(Math.min(1.12,z),Math.min(1.12,z));
+  c.font=`800 ${taille}px "Segoe UI"`; const w=Math.max(...lignes.map(([t])=>c.measureText(t).width))+taille*1.3, h=lignes.length*taille*1.3+taille*.7;
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.4*lueur})`; c.beginPath(); c.roundRect(-w/2-24,-h/2-24,w+48,h+48,24); c.fill(); }
+  c.fillStyle='#212529'; c.strokeStyle='#8a5a2b'; c.lineWidth=12; c.beginPath(); c.roundRect(-w/2,-h/2,w,h,14); c.fill(); c.stroke();
+  lignes.forEach(([t,coul],k)=>ecrire(c,t,0,-h/2+taille*.95+k*taille*1.3,taille,coul||CRAIE.blanc)); c.restore(); }
+/* Une balance de marché : (x, yBas) ; s ; ecran = le texte de l'écran (« 2 kg ») ; plateau = des objets posés (fonction dessin(c, xPlateau, yPlateau)) */
+function balanceE(c,x,yBas,s=1,{ecran='',lueur=0,plateau=null,coulEcran='#8ce99a'}={}){ c.save(); c.translate(x,yBas); c.scale(s,s);
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.35*lueur})`; c.beginPath(); c.ellipse(0,-110,190,140,0,0,7); c.fill(); }
+  c.fillStyle='#dee2e6'; c.strokeStyle='#495057'; c.lineWidth=5; c.beginPath(); c.roundRect(-130,-150,260,150,18); c.fill(); c.stroke();
+  c.fillStyle='#1f3b2c'; c.beginPath(); c.roundRect(-90,-112,180,70,10); c.fill();
+  if(ecran) ecrire(c,ecran,0,-76,48,coulEcran);
+  c.fillStyle='#adb5bd'; c.fillRect(-14,-178,28,30);
+  c.fillStyle='#ced4da'; c.strokeStyle='#495057'; c.beginPath(); c.ellipse(0,-184,170,22,0,0,7); c.fill(); c.stroke();
+  c.restore(); if(plateau) plateau(c,x,yBas-184*s); }
+/* Un calamar : (x, y) = le centre du corps ; L = la longueur ; T fait onduler les bras */
+function calamarE(c,x,y,L,{dir=1,z=1,T=0,k=0,lueur=0}={}){ if(z<=0) return; c.save(); c.translate(x,y); c.scale(dir*z,z);
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.4*lueur})`; c.beginPath(); c.ellipse(0,0,L*.65,L*.3,0,0,7); c.fill(); }
+  c.strokeStyle='#e599f7'; c.lineWidth=Math.max(4,L*.04); c.lineCap='round';
+  for(let j=0;j<6;j++){ const v=(j-2.5)*L*.05; c.beginPath(); c.moveTo(L*.1,v*.6);
+    c.quadraticCurveTo(L*.3,v+Math.sin(T*4+j+k)*L*.06,L*.5,v*1.6+Math.sin(T*4+j+k+1)*L*.08); c.stroke(); }
+  c.lineCap='butt';
+  c.fillStyle='#f3d9fa'; c.strokeStyle='#ae3ec9'; c.lineWidth=3; c.beginPath(); c.moveTo(L*.14,-L*.13); c.quadraticCurveTo(-L*.3,-L*.16,-L*.42,0); c.quadraticCurveTo(-L*.3,L*.16,L*.14,L*.13); c.closePath(); c.fill(); c.stroke();
+  c.beginPath(); c.moveTo(-L*.34,0); c.lineTo(-L*.5,-L*.12); c.lineTo(-L*.46,0); c.lineTo(-L*.5,L*.12); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle='rgba(174,62,201,.35)'; for(const [u,v] of [[-.15,-.05],[0,.04],[-.25,.05]]){ c.beginPath(); c.arc(L*u,L*v,L*.025,0,7); c.fill(); }
+  c.fillStyle='#fff'; c.beginPath(); c.arc(L*.1,-L*.04,L*.045,0,7); c.fill(); c.fillStyle='#212529'; c.beginPath(); c.arc(L*.11,-L*.04,L*.022,0,7); c.fill();
+  c.restore(); }
+/* Un sachet d'un kilo (papier) avec son étiquette « 1 kg » : (x, yBas) ; w ; contenu = fonction dessin(c, x, yHaut) */
+function sachetKiloE(c,x,yBas,w=150,{z=1,lueur=0,contenu=null,txt='1 kg'}={}){ if(z<=0) return; const k=Math.min(1.12,z); w*=k; const h=w*.9;
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.4*lueur})`; c.beginPath(); c.ellipse(x,yBas-h/2,w*.75,h*.75,0,0,7); c.fill(); }
+  if(contenu) contenu(c,x,yBas-h);
+  c.fillStyle='#e9c46a'; c.strokeStyle='#8a5a2b'; c.lineWidth=4; c.beginPath(); c.moveTo(x-w/2,yBas-h); c.lineTo(x+w/2,yBas-h); c.lineTo(x+w*.44,yBas); c.lineTo(x-w*.44,yBas); c.closePath(); c.fill(); c.stroke();
+  c.strokeStyle='rgba(138,90,43,.5)'; c.beginPath(); for(let j=1;j<4;j++){ c.moveTo(x-w/2+j*8,yBas-h+6); c.lineTo(x-w/2+j*8+4,yBas-h+20); } c.stroke();
+  c.fillStyle='#fff9db'; c.beginPath(); c.roundRect(x-w*.32,yBas-h*.58,w*.64,h*.36,8); c.fill(); c.stroke();
+  ecrire(c,txt,x,yBas-h*.4,w*.22,'#495057'); }
+/* Une dame (la cliente du marché) : (x, yBas) ; s (≈ 300 px à s = 1) ; tend (0 → 1) avance le bras gauche (vers la gauche de l'image) */
+function dameE(c,x,yBas,s=1,{tend=0,T=0,robe='#e64980'}={}){ c.save(); c.translate(x,yBas); c.scale(s,s);
+  c.fillStyle='#f3c9a0'; c.fillRect(-22,-60,14,52); c.fillRect(8,-60,14,52);
+  c.fillStyle='#495057'; c.beginPath(); c.roundRect(-28,-12,24,12,5); c.roundRect(4,-12,24,12,5); c.fill();
+  c.strokeStyle='#f3c9a0'; c.lineWidth=14; c.lineCap='round';
+  c.beginPath(); c.moveTo(-30,-200); c.lineTo(-30-70*tend,-150-40*tend); c.stroke(); c.beginPath(); c.moveTo(30,-200); c.lineTo(42,-130); c.stroke(); c.lineCap='butt';
+  c.fillStyle=robe; c.strokeStyle='rgba(0,0,0,.35)'; c.lineWidth=3; c.beginPath(); c.moveTo(-30,-215); c.lineTo(30,-215); c.lineTo(62,-56); c.lineTo(-62,-56); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle='rgba(255,255,255,.35)'; for(const [u,v] of [[-20,-170],[14,-140],[-30,-100],[30,-90],[0,-110]]){ c.beginPath(); c.arc(u,v,7,0,7); c.fill(); }
+  c.restore(); mamieE(c,x,yBas-s*252,s*1.25); }

@@ -24,34 +24,34 @@ FILMS['cp-monnaie']=function(outils){
   const finTitre=tCe-.08;
 
   /* le comptoir du marché ; le poisson et son prix à gauche, les pièces de Ti Margo à droite */
-  const P0=[[720,330,2],[860,330,1],[990,330,1]], DONNE=[[210,610],[350,610]];
+  const P0=[[640,330,2],[815,330,1],[975,330,1]], DONNE=[[200,605],[395,605]];
   function comptoir(c){ c.fillStyle='#c08550'; c.fillRect(0,480,1056,240); c.strokeStyle='#6b3a10'; c.lineWidth=5; c.beginPath(); c.moveTo(0,480); c.lineTo(1056,480); c.stroke();
     c.fillStyle='rgba(255,255,255,.15)'; c.fillRect(0,486,1056,10); }
 
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=com){ /* payer 6 € avec des pièces de 2 € */
       comptoir(c);
-      if(T>=tSixC) prixE(c,'6 €',300,250,110,{z:zoom(T,tSixC,.5)});
-      if(T>=tDeuxC) for(let k=0;k<5;k++) euroE(c,2,120+k*200,600,64,{z:zoom(T,tDeuxC+k*.1,.4)});
+      if(T>=tSixC) prixE(c,'6 €',300,250,140,{z:zoom(T,tSixC,.5)});
+      if(T>=tDeuxC) for(let k=0;k<5;k++) euroE(c,2,128+k*200,600,80,{z:zoom(T,tDeuxC+k*.1,.4)});
       if(T>=tDeuxC+.6) ecrire(c,'?',780,250,170*zoom(T,tDeuxC+.6,.5),CRAIE.jaune);
       tab.maj(); return; }
 
     comptoir(c);
-    if(T>=tPoisson) poissonE(c,290,400,300,'#ffa94d',{T,z:zoom(T,tPoisson,.4)});
-    if(T>=tTrois) prixE(c,'3 €',290,170,96,{z:zoom(T,tTrois,.5),lueur:T>=r&&T>=tPile&&T<tAvec?.6:0});
+    if(T>=tPoisson) poissonE(c,270,380,380,'#ffa94d',{T,z:zoom(T,tPoisson,.4)});
+    if(T>=tTrois) prixE(c,'3 €',270,160,120,{z:zoom(T,tTrois,.5),lueur:T>=r&&T>=tPile&&T<tAvec?.6:0});
     if(T>=tJai) porteMonnaieE(c,860,700,260,1);
     /* les trois pièces ; dans la réponse, la pièce de 2 € puis une de 1 € glissent sous le poisson */
     const tP=[tDeux,tDeux2,tDeux2+.2], tG=[tDeuxR,tUnR];
     P0.forEach(([x,y,v],k)=>{ if(T<tP[k]) return; let p=[x,y];
       if(k<2&&T>=r){ const u=entreE(T,tG[k]-.2,tG[k]+.5); p=sautE([x,y],DONNE[k],u,120); }
       const trop=k===2&&T>=r&&T>=tAvec;
-      euroE(c,v,p[0],p[1],v===2?62:58,{z:zoom(T,tP[k],.4),lueur:(k<2&&T>=r&&T>=tPile&&T<tAvec)||trop?.6+.4*Math.sin(T*5):0});
-      if(trop&&T>=tQuatre){ cercle(c,x,y,92,CRAIE.faux,entreE(T,tQuatre,tQuatre+.4)); } });
-    if(T<r){ if(T>=tQuelles) ecrire(c,'?',560,200,150*zoom(T,tQuelles,.5),CRAIE.jaune); }
+      euroE(c,v,p[0],p[1],74,{z:zoom(T,tP[k],.4),lueur:(k<2&&T>=r&&T>=tPile&&T<tAvec)||trop?.6+.4*Math.sin(T*5):0});
+      if(trop&&T>=tQuatre){ cercle(c,x,y,110,CRAIE.faux,entreE(T,tQuatre,tQuatre+.4)); } });
+    if(T<r){ if(T>=tQuelles) ecrire(c,'?',810,150,150*zoom(T,tQuelles,.5),CRAIE.jaune); }
     else {
-      formuleE(c,T,700,110,['2','+','1','=','3 €'],[tDeuxR,tPlus,tUnR,tTroisR,tTroisR],96,[CRAIE.jaune,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
+      formuleE(c,T,730,110,['2','+','1','=','3 €'],[tDeuxR,tPlus,tUnR,tTroisR,tTroisR],96,[CRAIE.jaune,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
       if(T>=tPile&&T<tAvec) for(const [x,y] of [[460,140],[110,520]]) etincelle(c,x,y,14+6*Math.sin(T*6+x));
-      if(T>=tQuatre) formuleE(c,T,700,230,['2','+','1','+','1','=','4 €'],[tQuatre,tQuatre,tQuatre,tQuatre,tQuatre,tQuatre,tQuatre],62,
+      if(T>=tQuatre) formuleE(c,T,720,430,['2','+','1','+','1','=','4 €'],[tQuatre,tQuatre,tQuatre,tQuatre,tQuatre,tQuatre,tQuatre],62,
         [CRAIE.gris,CRAIE.gris,CRAIE.gris,CRAIE.gris,CRAIE.faux,CRAIE.gris,CRAIE.faux]); }
     tab.maj();
   }
