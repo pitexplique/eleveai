@@ -704,10 +704,10 @@ coûte un WAV et un rendu.
 | 3 bis | la voix comparée au manifeste, carte par carte (`--voix`) | ✅ 30 cartes, 0 écart |
 | 4 | extraction des JSON de voix, passe gabarit **et passe maths recalculée** | ⏳ |
 | 5 | WAV + marques (`-Debit -6` **aux deux étapes**) | ⏳ |
-| 6 | `manim/poste2/analyse_ecrans.py` — le socle d'écran de la série | ⏳ |
-| 7 | les 5 scripts Manim + une mesure hors rendu par épisode | ⏳ |
-| 8 | `verifier-avant-rendu.py`, puis dry run `AUDIT=1 BORDS=1` | ⏳ |
-| 9 | planches `-ql` **regardées à l'image** + gros plans sur `04b`, `07b`, `09b` | ⏳ |
+| 6 | `manim/poste2/analyse_ecrans.py` — le socle d'écran de la série | ✅ |
+| 7 | les 5 scripts Manim + la mesure hors rendu des questions-pauses | ✅ 10 questions, 0 ennui |
+| 8 | `verifier-avant-rendu.py`, puis dry run `AUDIT=1 BORDS=1` | ✅ 5 × 15 écrans, 0 bord, 0 audit |
+| 9 | planches `-ql` **regardées à l'image** | ✅ les 5, et corrigées d'après ce qu'on y a vu |
 | 10 | voix validée par Frédéric, rendu HD (verrou `mkdir`/`rmdir` partagé) | ⏳ |
 | 11 | vignettes, envoi R2, clés à la main dans `lib/videos/videos-r2.json` | ⏳ |
 | 12 | fusion dans `main` **par union de clés**, déploiement, URL en 200 | ⏳ |
@@ -749,8 +749,18 @@ coûte un WAV et un rendu.
   lettres, et **les 5 épisodes mis en voix : 75 clips**. Le texte seul, mesuré par
   l'instrument : 30 cartes, 0 écart, 7 cartes en symboles listées pour relecture.
 
-**Pas fait, et volontairement** : **aucun WAV** ; aucun script Manim ; aucun rendu ;
-aucune écriture dans un registre ni dans `notion_ressources` ; aucun push.
+- `manim/voix/terminale-*.json` — les 5 voix extraites par
+  `manim/poste2/voix-continuite-depuis-md.py` (qui refuse d'écrire si un des 15 clips
+  manque : un clip absent passerait en silence, `dire()` rendant 0,0 sans rien dire) ;
+- `manim/poste2/analyse_ecrans.py` — le socle d'écran, recopié de `espace_ecrans.py`
+  sans le 3D, avec axes, courbes, pointillés, bandes, fonctions en deux morceaux,
+  escaliers et **tableau de variations** ;
+- `manim/poste2/mesure-continuite-tvi.py` — la mesure hors rendu des 10 questions ;
+- les **5 scripts Manim**, 15 écrans chacun : dry run `AUDIT=1 BORDS=1` à **0 bord et
+  0 audit**, et les 5 planches `-ql` **regardées**, puis corrigées.
+
+**Pas fait, et volontairement** : **aucun WAV, aucun rendu HD** ; aucune écriture dans
+un registre ni dans `notion_ressources` ; aucun push.
 
 ⛔ **Pourquoi aucun WAV** : les titres et les accroches ne sont pas relus. Le texte d'une
 voix se corrige pour rien ; un WAV enregistré, lui, périme son rendu, et personne ne le
@@ -764,20 +774,17 @@ signale. On écrit le texte, on n'enregistre pas.
 - **aucun WAV, aucun rendu** tant que le chef ne l'a pas dit.
 
 **Le prochain geste, dans cet ordre** :
-1. la relecture de Frédéric : les 5 titres, les 5 accroches, les deux points du § 6 et
-   **les 7 cartes en symboles** du tableau ci-dessus ;
-2. **le socle d'écran `manim/poste2/analyse_ecrans.py`** — recopié de `espace_ecrans.py`
-   en retirant tout le 3D (`repere`, `fleche_de_nom`, `trip`, `Repere3D`) et en ajoutant
-   ce dont une série d'analyse a besoin : des axes, une courbe tracée par `plot`, un
-   point marqué sur l'axe, et un **tableau de variations** (E3 et E5 en vivent).
-   ⛔ Ne pas importer `espace_ecrans.py` : son en-tête dit que la convention
-   « recopiés, rien importé » vaut d'un chapitre à l'autre, et cette série en est un
-   autre. Et il sert une série en production.
-3. les WAV et les marques, **une fois le feu vert donné** — `-Debit -6` **aux deux
+1. la relecture de Frédéric : les 5 titres, les 5 accroches, les deux points du § 6,
+   **les 7 cartes en symboles**, et les planches `-ql` (elles sont dans le dossier de
+   travail de la session, à refaire par la commande du § 9 si besoin) ;
+2. les WAV et les marques, **une fois le feu vert donné** — `-Debit -6` **aux deux
    étapes**, sinon les marques datent une autre voix que le WAV et tous les `au_mot`
-   glissent sans qu'aucun outil le dise ;
-4. les 5 scripts Manim, en commençant par E2 (`tvi_appliquer`), le plus simple à l'écran :
-   pas de tableau de variations, pas de courbe en deux morceaux.
+   glissent sans qu'aucun outil le dise. Puis poser `fichier_marques` dans chaque
+   épisode : rien d'autre ne change, et les `au_mot` deviennent exacts ;
+3. **re-dry-run et re-planches avec les marques** : la synchronisation n'a été vérifiée
+   par personne jusque-là (voir § 9) ;
+4. seulement ensuite le HD, les vignettes, R2, le registre, `main`, le déploiement, et
+   en tout dernier les lignes de coach.
 
 ⭐ **Les trois commandes qui disent où on en est**, à relancer après chaque retouche :
 
@@ -792,3 +799,82 @@ python -X utf8 manim/poste2/controler-maths-continuite-tvi.py               # 73
 correction ne donne pas un résultat, elle le déroule (« huit, moins vingt-quatre, plus
 cinq : moins onze »), et chacun de ces nombres est enseigné. Une faute d'étape passe
 inaperçue quand le total, lui, est juste.
+
+---
+
+## 9. Les scènes Manim — ce que la planche a trouvé, et ce qu'elle ne peut pas trouver
+
+Les 5 épisodes passent, chacun : **15 écrans, 0 bord, 0 audit**, et leur planche `-ql` a
+été **regardée à l'image** puis corrigée.
+
+```
+python -X utf8 manim/poste2/mesure-continuite-tvi.py                       # 10 questions, 0 ennui
+AUDIT=1 BORDS=1 python -m manim render -ql --disable_caching --dry_run \
+  manim/scripts/terminale/<script>.py <Scene> --media_dir manim/scripts/terminale/media
+python -m manim render -ql --disable_caching manim/scripts/terminale/<script>.py <Scene> \
+  -o <nom>-ql --media_dir manim/scripts/terminale/media
+python scripts/planche-video.py <...>/<nom>-ql.mp4 <planche>.png 4
+```
+
+### ⛔⛔ Deux glyphes sortent en CARRÉ VIDE, et rien ne le dit
+
+« ⩽ » (U+2A7D) et « ⩾ » (U+2A7E) ne sont pas dans la police. Ni le dry run ni l'audit ne
+voient un tofu : ce n'est ni un bord, ni un nombre. Vu à la planche de E1, sur « x ⩽ 2 »
+et « x ⩾ 1 ». Les bons sont **« ≤ » (U+2264) et « ≥ » (U+2265)**, et `EcransAnalyse.t`
+**refuse** maintenant les deux mauvais, avec le bon caractère dans le message.
+⚠️ Vérifiés bons à l'image : ≠, ∞, ℝ, √, ⟹, α, β, ≈, ′.
+
+### ⛔⛔ Une graduation ancrée sur `c2p(0, v)` part hors cadre quand 0 n'est pas dans l'intervalle
+
+Avec des x de 6 à 12,4, les étiquettes de l'axe vertical se posaient à **x = −11,9** —
+très au-delà du cadre (±7,1). Elles ne s'affichaient nulle part, et seul `BORDS=1` l'a
+dit : 6 étiquettes sur 3 écrans. `plan_axes` ancre désormais sur la borne de
+l'intervalle quand 0 n'y est pas.
+
+### ⭐⭐ La règle qui a corrigé TROIS chevauchements : un bloc se pose par rapport au précédent
+
+Trois fois le même accident, sur trois épisodes : un bloc posé à une **ordonnée devinée**
+dans la colonne de gauche s'écrivait sur celui du dessus (E2 `04b`, E4 `07b`, E5 `07b`).
+⛔ Le dry run ne le voit pas — deux objets qui se chevauchent sont tous les deux dans la
+marge. ⭐ Le remède : `next_to(precedent, DOWN, buff=…).align_to(premier, LEFT)`. Et
+quand le bloc du dessus est la *question* à laquelle le nouveau répond, mieux encore :
+`ReplacementTransform` — la ligne devient sa propre réponse (E2 `04b` et `07b`).
+
+### ⚠️ `col()` rétrécit en silence sous −1,95, et seule la planche le montre
+
+Son garde-fou Ti-Margo (« bas sous −1,95 **et** droite au-delà de 5,3 → réduire ») est
+bon, mais invisible : sur E3 deux blocs sortaient deux fois trop petits. Remèdes, dans
+l'ordre de préférence : remonter le bloc, raccourcir le texte, baisser la police d'un
+cran. ⚠️ Et les deux contraintes se contredisent (trop haut = chevauchement, trop bas =
+rétrécissement) : sur E3 `06` il a fallu 26 px à y = −1,45 pour tenir les deux.
+
+### ⚠️ Une figure trop écrasée ment sur ce que le texte affirme
+
+Sur E3 `02`, l'écran disait « elle coupe trois fois » et la courbe n'en montrait que
+deux : son creux descendait à −1,6 sur une figure de 1,6 de haut, soit 0,26 d'écran.
+Aucun instrument ne compare un texte à une figure. Amplitude portée à 3,2, hauteur à 1,9.
+
+### ⭐ Le socle tourne SANS WAV, et il le DIT
+
+`dire()` imprime une bannière au premier clip : « SANS MARQUES — les `au_mot` sont
+ESTIMÉS au prorata des caractères ». ⛔ C'est ce qui permet de faire des planches
+aujourd'hui, et c'est aussi la limite de ce qu'elles prouvent : **la mise en page est
+vérifiée, la SYNCHRONISATION ne l'est par personne.** Le jour des WAV, il suffit de poser
+`fichier_marques` dans chaque épisode — rien d'autre ne change — puis de **refaire dry
+run et planches**.
+
+### ⚠️ `grep "^ECRAN"` SOUS-COMPTE — piège hérité, confirmé ici
+
+Sur le premier dry run, le `grep` ancré annonçait 14 écrans, 0 question et 0 audit ; le
+vrai compte était 15, 2 et 1. Les signalements tombent **sur les barres de progression**.
+⭐ On écrit la sortie dans un fichier, on éclate les `\r` en `\n`, et on compte sans ancre.
+
+### ⚠️ L'audit est en grande partie DÉSARMÉ dans cette série, et c'est mesurable
+
+`grep -c "self.lettres(" manim/scripts/terminale/{continuite_reconnaitre,tvi_*}.py`
+compte ce que l'audit ne voit pas. La cause est écrite dans la docstring de
+`EcransAnalyse.lettres` : les voix disent les valeurs **en toutes lettres**, l'écran les
+écrit en chiffres. ⭐ Il reste utile là où on ne l'a pas désarmé : il a sorti 8 nombres
+affichés que la voix ne dit pas, dont un dans une FINALE — l'écran où tout est enseigné.
+⭐ Ce qui le rendrait entier : une passe sur `VOIX-continuite-tvi.md` écrivant les valeurs
+en chiffres, comme la série espace. **Mécanique, et à faire AVANT les WAV.**
