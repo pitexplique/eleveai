@@ -259,7 +259,12 @@ function Materiel({ figure, width }: { figure: BaseDixCanvasData; width: number 
       });
     }
     if (D) {
-      const g = grouper(D, c, 10 * c, 3, 10, 8);
+      /* ⭐ 27/11/2026 — Frédéric, après le test d'un enfant de 6 ans : « quand tu
+         fais des cubes avec des rangées, il faut que ça soit hyper simple ». Les
+         barres collées à 3 px se lisaient comme UN bloc : on les espace (un
+         carreau), pour qu'un doigt puisse les compter une à une. */
+      const ecartBarres = Math.round(c * 0.9);
+      const g = grouper(D, c, 10 * c, ecartBarres, 10, 8);
       groupes.push({
         w: g.w,
         h: g.h,
@@ -268,7 +273,7 @@ function Materiel({ figure, width }: { figure: BaseDixCanvasData; width: number 
           Array.from({ length: D }, (_, i) => (
             <Barre
               key={`b${i}`}
-              x={x + (i % g.cols) * (c + 3)}
+              x={x + (i % g.cols) * (c + ecartBarres)}
               y={y + Math.floor(i / g.cols) * (10 * c + 8)}
               c={c}
               fond={fond(TEINTES.barre)}
@@ -278,13 +283,13 @@ function Materiel({ figure, width }: { figure: BaseDixCanvasData; width: number 
     }
     if (U) {
       // Rangées de 5 ; un écart de plus toutes les 2 rangées (toutes les 10).
-      const pas = c + 3;
+      const pas = c + 6; // 27/11 : cubes espacés, comptables du doigt
       const cols = Math.min(5, U);
       const rangees = Math.ceil(U / 5);
       const paquets = Math.ceil(rangees / 2);
-      const h = rangees * pas - 3 + (paquets - 1) * 5;
+      const h = rangees * pas - 6 + (paquets - 1) * 5;
       groupes.push({
-        w: cols * pas - 3,
+        w: cols * pas - 6,
         h,
         etiquette: "unités",
         dessiner: (x, y) =>
