@@ -1,6 +1,6 @@
 # Ce qui tombe en silence dans le coach
 
-Mesure du 2026-11-27 01:45 UTC · base `https://www.eleveai.fr`
+Mesure du 2026-11-27 02:05 UTC · base `https://www.eleveai.fr`
 Vérificateur : `npx tsx scripts/verifier-coach-silencieux.ts` (lecture seule).
 Registre R2 lu : **`origin/main` (ce que Vercel sert)** — 2191 clés.
 
@@ -44,7 +44,12 @@ Clés nommées `youtube-*` (le piège : c'est une clé R2, pas un lien YouTube) 
 | couples (matière, classe) présents en base | 14 |
 | `notion_id` absent du catalogue | **1** |
 | `micro_id` absent de sa notion | **2** |
-| `micro_id` présent mais MASQUÉ (le coach ne le propose plus) | 22 |
+
+**Les micros masquées sont comptées à part, et ce n'est pas un reste à traiter.** Décision du 27/11/2026 : on GARDE ces lignes. Une micro masquée peut être démasquée, et la ligne retirée serait à réécrire sans que personne se souvienne qu'elle a existé. Elles ne s'affichent pas aujourd'hui — c'est la conséquence voulue du masquage, pas une faute.
+
+| classement à part (choix fait) | lignes |
+| --- | ---: |
+| `micro_id` présent mais MASQUÉ (gardé exprès) | 22 |
 
 ### Notions fantômes (1)
 
@@ -59,32 +64,14 @@ Clés nommées `youtube-*` (le piège : c'est une clé R2, pas un lien YouTube) 
 | cm1 | `masse` | `masse_mesurer` | Combien pèse ma pastèque ? #maths #cm1 |
 | cm1 | `masse` | `masse_mesurer` | Où pointe l'aiguille de la balance ? — Lire une balance — ép |
 
-### Micros masquées servies quand même (22)
+### Lignes gardées sur des micros masquées, par classe
 
-| classe | notion_id | micro_id | titre |
-| --- | --- | --- | --- |
-| seconde | `echantillonnage_simulation` | `echantillon_fluctuation` | 29 % AU LIEU DE 25 % : LE VENDEUR MENT ? — Fluctuation d'éch |
-| seconde | `fonctions_reference_2de` | `reference_cube` | Le cube monte sans jamais se retourner |
-| seconde | `geometrie_problemes_plan` | `geo_projete_orthogonal` | Le chemin le plus court vers une droite, et sa démonstration |
-| seconde | `racine_carree_2de` | `racine_domaine` | Pourquoi √(−9) n'existe pas |
-| stmg | `donnees_frequences` | `don_freq_conditionnelle` | Football ou handball : quel sport est le plus féminin ? — Fr |
-| stmg | `donnees_frequences` | `don_freq_marginale` | Touristes de l'étranger : 28,5 %, pas 44,5 % ! — Fréquence m |
-| stmg | `donnees_frequences` | `don_freq_conditionnelle` | Football ou handball : quel sport est le plus féminin ? 🤾‍♀ |
-| stmg | `donnees_frequences` | `don_freq_interpreter` | 92 % des tués à deux-roues sont des hommes… donc ? 🏍️ — STM |
-| stmg | `donnees_frequences` | `don_freq_interpreter` | « 92 % des tués à deux-roues sont des hommes » : 92 % de qui |
-| cm2 | `proportionnalite` | `prop_tableau` | 1 wagon : 20 places. 5 wagons ? — Compléter un tableau de pr |
-| stmg | `donnees_frequences` | `don_freq_completer` | 2024 : combien de voitures électriques vendues en France ? � |
-| stmg | `donnees_frequences` | `don_freq_marginale` | Les nuits d'hôtel en Auvergne-Rhône-Alpes : quelle part vien |
-| cm2 | `proportionnalite` | `prop_coefficient` | 4 gâteaux, 12 œufs. Et pour 7 ? — Le coefficient de proporti |
-| stmg | `donnees_frequences` | `don_freq_completer` | Voitures électriques : du pourcentage à l'effectif, et retou |
-| cm2 | `proportionnalite` | `prop_tableau` | Combien de pattes pour 100 fourmis ? 🐜 — CM2 #Shorts |
-| cm1 | `proportionnalite` | `prop_tableau` | 1 wagon : 20 places. 5 wagons ? — Compléter un tableau de pr |
-| cm1 | `proportionnalite` | `prop_coefficient` | 4 gâteaux, 12 œufs. Et pour 7 ? — Le coefficient de proporti |
-| cm2 | `proportionnalite` | `prop_coefficient` | Combien de fois ton cœur bat pendant la récré ? ❤️ — CM2 #Sh |
-| seconde | `arithmetique_entiers` | `arith_nombre_premier` | Pourquoi 13 billes ne se rangent pas ? |
-| cm1 | `proportionnalite` | `prop_tableau` | Combien de pattes pour 100 fourmis ? 🐜 — CM1 #Shorts |
-| cm1 | `proportionnalite` | `prop_coefficient` | Combien de fois ton cœur bat pendant la récré ? ❤️ — CM1 #Sh |
-| seconde | `echantillonnage_simulation` | `echantillon_fluctuation` | 29 sur 100… il ment ? 🍒 — 2de #Shorts |
+| classe | lignes |
+| --- | ---: |
+| stmg | 8 |
+| seconde | 6 |
+| cm2 | 4 |
+| cm1 | 4 |
 
 ## 4. Un short servi là où l'élève attend un cours
 
@@ -390,4 +377,4 @@ Clés nommées `youtube-*` (le piège : c'est une clé R2, pas un lien YouTube) 
 | `app/coach/serie/TutorV4Client.tsx:3001` | catch → valeur de repli | `const data = (await res.json().catch(() => ({}))) as {` |
 | `app/coach-ia/[matiere]/page.tsx:314` | default: sert un contenu | `default:         return "text-slate-700";` |
 
-_Mesure terminée en 182 s._
+_Mesure terminée en 190 s._

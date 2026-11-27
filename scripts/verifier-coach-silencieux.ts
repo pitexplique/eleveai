@@ -357,7 +357,17 @@ async function main() {
   dire(`| couples (matière, classe) présents en base | ${combos.length} |`);
   dire(`| \`notion_id\` absent du catalogue | **${fantomesNotion.length}** |`);
   dire(`| \`micro_id\` absent de sa notion | **${fantomesMicro.length}** |`);
-  dire(`| \`micro_id\` présent mais MASQUÉ (le coach ne le propose plus) | ${masquees.length} |`);
+  dire("");
+  dire(
+    `**Les micros masquées sont comptées à part, et ce n'est pas un reste à traiter.** Décision du ` +
+      `27/11/2026 : on GARDE ces lignes. Une micro masquée peut être démasquée, et la ligne retirée ` +
+      `serait à réécrire sans que personne se souvienne qu'elle a existé. Elles ne s'affichent pas ` +
+      `aujourd'hui — c'est la conséquence voulue du masquage, pas une faute.`
+  );
+  dire("");
+  dire(`| classement à part (choix fait) | lignes |`);
+  dire(`| --- | ---: |`);
+  dire(`| \`micro_id\` présent mais MASQUÉ (gardé exprès) | ${masquees.length} |`);
   const detailler = (nom: string, liste: Ressource[]) => {
     if (!liste.length) return;
     dire("");
@@ -371,7 +381,18 @@ async function main() {
   };
   detailler("Notions fantômes", fantomesNotion);
   detailler("Micros fantômes", fantomesMicro);
-  detailler("Micros masquées servies quand même", masquees);
+  // ⛔ Pas de liste ligne à ligne : ce sont des lignes gardées volontairement, les
+  //    rappeler chaque semaine ferait du bruit. Un décompte par classe suffit.
+  if (masquees.length) {
+    const parClasse = new Map<string, number>();
+    for (const r of masquees) parClasse.set(r.classe, (parClasse.get(r.classe) ?? 0) + 1);
+    dire("");
+    dire(`### Lignes gardées sur des micros masquées, par classe`);
+    dire("");
+    dire(`| classe | lignes |`);
+    dire(`| --- | ---: |`);
+    for (const [c, n] of [...parClasse].sort((a, b) => b[1] - a[1])) dire(`| ${c} | ${n} |`);
+  }
 
   // ── 4. Short / paysage ────────────────────────────────────────────────────
   titre("4. Un short servi là où l'élève attend un cours");

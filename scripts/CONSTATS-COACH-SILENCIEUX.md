@@ -68,7 +68,11 @@ le coach ne connaît pas. **Rien n'a été écrit en base** — c'est ta décisi
 À part : **22 lignes servent des micros masquées** (`lib/tutor-v4/micros-masquees.ts`) —
 proportionnalité en CM1/CM2, fréquences en STMG, quatre micros de seconde. La micro existe,
 sa vidéo existe, mais le coach ne propose plus la micro : le bouton ne s'affiche jamais.
-Ce n'est pas une faute, c'est une conséquence du masquage. À garder ou à nettoyer.
+
+✅ **Décidé le 27/11 : on les garde.** Une micro masquée peut être démasquée, et la ligne
+retirée serait à réécrire sans que personne se souvienne qu'elle a existé. Le vérificateur
+les classe désormais **à part**, comme un choix fait, et n'en donne plus la liste ligne à
+ligne — seulement un décompte par classe, pour ne pas sonner chaque semaine.
 
 ## 4 · Le cas qui a motivé le chantier — et la troisième forme
 
@@ -131,9 +135,9 @@ C'est un chantier de production vidéo, pas un bug.
 ## 5 · Les deux registres
 
 - **Sens registre → coach : 57 clés** portent un lien `coach` mais aucune ligne de
-  `notion_ressources` ne les sert. 23 visent la seconde, 10 la 6e, 10 la première spé,
-  8 la 4e, 5 la 5e, 1 la 3e. Ce sont des vidéos qui existent, qui ont une destination
+  `notion_ressources` ne les sert. Ce sont des vidéos qui existent, qui ont une destination
   d'entraînement écrite dans le registre, et qu'aucun élève ne voit depuis le coach.
+  **Les trois contrôles demandés avant toute écriture sont faits** (voir plus bas).
 - **Sens coach → registre : 0.** Les 1 783 identifiants servis existent tous au registre
   déployé.
 
@@ -142,23 +146,56 @@ donnait **32 « clés manquantes » imaginaires** : `main` local a 452 commits d
 `origin/main` et `poste2` est 38 clés derrière le registre déployé. Les mêmes URL répondaient
 200 en prod. Le vérificateur lit donc `origin/main` par défaut.
 
-## 6 · Les replis muets
+## 6 · Les replis muets — mesuré deux fois, par deux chemins
 
-**Mesuré, pas lu** : 22 classes × 6 matières = 132 combinaisons qu'une adresse
-`/coach/serie?classe=…&matiere=…` peut produire (une valeur inconnue est déjà ramenée à `6e`
-/ `maths` par `normalizeClasse`/`normalizeMatiere`).
+**Sonde en Node** : 22 classes × 6 matières = 132 combinaisons qu'une adresse
+`/coach/serie?classe=…&matiere=…` peut produire. **44** reçoivent leur propre paquet, **88**
+reçoivent le catalogue d'une autre classe (`ce1/francais`, `a1/economie`, `a1/espagnol`,
+`a1/ia`, `a1/english-maths`, `6e/maths`).
 
-- **44** reçoivent leur propre paquet.
-- **88** reçoivent **le catalogue d'une autre classe, sans un mot** — `ce1/francais` pour
-  toutes les classes de français non branchées, `a1/economie`, `a1/espagnol`, `a1/ia`,
-  `a1/english-maths`, `6e/maths`.
-- Les 88 finissent toutes par un échec de l'API (`loadKnowledgeV4` lève, lui). L'élève voit
-  donc une **liste de notions qui n'est pas la sienne**, puis « Chargement du tutor… » sans
-  fin. Aucune ne sert du contenu faux *qui marche* : c'est la seule bonne nouvelle.
+**Contre-mesure en partant de l'accueil, dans le navigateur, sur la production** — parce
+qu'interroger une page par `?classe=` ment sur ce que l'élève voit. Trois choses en sont
+sorties, dont deux corrigent mon premier rapport.
 
-Un cas n'est pas dans ces 88 et reste **entièrement muet** : une classe inconnue
-(`?classe=4eme`, `?classe=quatrieme`) devient `6e` et le coach fonctionne — avec le programme
-de 6e. Rien ne le signale.
+### a) Aucune de ces 88 combinaisons n'est atteignable depuis l'accueil
+
+Depuis `/accueil`, les portes du coach sont `/coach-ia/<matiere>?classe=<classe>` — **la
+matière est dans le chemin, pas en paramètre**. Le coach de français n'offre que CP → 2nd,
+exactement les dix classes qui ont un paquet. Et si on force l'adresse,
+`/coach-ia/francais?classe=terminale-spe` **retombe sur le CP en l'annonçant** : la page
+titre « Français CP », le sélecteur dit « Ta classe : CP », l'encart dit « CP a 3e ouverts ».
+Ce repli-là est étiqueté, donc honnête.
+
+### b) Mais par une adresse `/coach/serie` écrite à la main, le repli est réel — et il MENT
+
+Reproduit sur `www.eleveai.fr`, pas en local :
+
+| adresse forcée | fil d'Ariane affiché | catalogue réellement servi |
+| --- | --- | --- |
+| `?classe=terminale-spe&matiere=francais` | **« Terminale spé > Français > Langage oral »** | celui du **CE1** (fluence, écriture cursive, « Devenir lecteur ») |
+| `?classe=cp&matiere=economie` | **« Classe : cp »** | celui de l'**A1 économie** (« L'argent : payer et échanger », « Le budget ») |
+
+L'étiquette affiche la classe demandée pendant que la liste est celle d'une autre. C'est
+plus grave qu'une liste vide : rien ne permet à l'élève — ni au prof qui a partagé le lien —
+de voir que ce n'est pas le bon programme.
+
+### c) Deux corrections à mon premier rapport
+
+- **Ce n'est pas « Chargement du tutor… sans fin ».** Mesuré :
+  `POST /api/coach/start` répond **500**, et le bouton « Commencer » **ne fait rien** —
+  aucune question, aucun message, aucune roue qui tourne. Le silence est donc complet, pas
+  partiel.
+- **La classe inconnue n'est PAS muette.** `?classe=4eme&matiere=maths` tombe bien sur la 6e,
+  mais le fil d'Ariane affiche « **Classe : 6e** » : le coach annonce sa correction. Je l'avais
+  classé comme le cas « entièrement muet » ; c'est faux, et c'est le seul des trois replis
+  qui se comporte bien.
+
+Relevé statique en complément (hors banques de questions, où un `default:` est une variante
+de plus) : **6 `default:` qui servent un contenu** — les 5 de `lib/tutor-v4/catalog.ts` et un
+inoffensif dans `coach-ia` (une couleur) — et **3 `catch` à valeur de repli**, tous les trois
+légitimes (une liste vide quand le réseau tombe).
+
+**Rien de corrigé ici, et `/coach/serie` n'a pas été touché.**
 
 Relevé statique en complément (hors banques de questions, où un `default:` est une variante
 de plus) : **6 `default:` qui servent un contenu** — les 5 de `lib/tutor-v4/catalog.ts` et un
@@ -170,18 +207,65 @@ comportement d'anciens liens déjà distribués. C'est ta décision.
 
 ---
 
-## Ce qui attend une décision
+## Les 57 clés : tout est prêt, rien n'est écrit
 
-1. **Les 3 lignes mal rangées** (`exponentielle_etude`, et `masse_mesurer` × 2). Correction =
-   un `UPDATE` sur `notion_ressources`. Dis-moi la bonne micro pour les deux vidéos de masse
-   CM1 et je prépare l'écriture, avec garde anti-doublon.
-2. **Les 22 lignes de micros masquées** : on les garde (la micro peut être démasquée un jour)
-   ou on les retire ?
-3. **Les 57 clés R2 avec lien coach mais sans ligne de coach** : ce sont des vidéos prêtes et
-   invisibles dans le coach. Faut-il les brancher ? C'est le plus gros gain pour l'élève de
-   tout ce rapport.
-4. **Les 88 combinaisons repliées** : veux-tu que `/coach/serie` refuse visiblement une
-   combinaison inconnue au lieu de montrer le catalogue d'une autre classe ?
+Script : `scripts/brancher-cles-coach-orphelines.ts`. **Il n'écrit pas** sans `--ecrire`,
+et il ne sera lancé que sur l'accord de Frédéric. Six gardes, et une clé refusée par l'une
+d'elles n'est jamais insérée : anti-doublon (par identifiant du registre, pas par chaîne
+d'URL), HTTP 200 sur les deux adresses, notion et micro présentes au catalogue, micro non
+masquée, aucun short seul sur sa micro, et lecture sur `origin/main`.
+
+Résultat de la simulation du 27/11 :
+
+| contrôle demandé | résultat |
+| --- | --- |
+| les 57 URL répondent 200 | **57 / 57**, sur `/api/video-lecteur/<id>` ET `/video/<id>` |
+| notion/micro existent au catalogue | **57 / 57** — aucune notion ni micro fantôme |
+| combien de shorts | **36 shorts, 21 paysages** |
+| un short deviendrait-il la seule ressource d'un micro ? | **0** — le défaut corrigé le 27/11 ne revient pas |
+| **retenues après les six gardes** | **55** |
+| refusées | **2**, parce qu'elles visent une micro **masquée** : `youtube-h8veBP9mtMQ` (`seconde/racine_carree_2de/racine_domaine`) et `youtube-pPQUPDx3aeA` (`seconde/geometrie_problemes_plan/geo_projete_orthogonal`) — la ligne ne s'afficherait jamais |
+
+**Le chiffre qui compte, et il est plus petit qu'espéré : 6 lignes seulement apportent une
+PREMIÈRE vidéo à leur destination, soit 3 micros** — toutes en 4e, sur Pythagore :
+`pythagore_defi`, `pythagore_reciproque_conclure`, `pythagore_rediger`, chacune avec son
+paysage **et** son short. Les 49 autres ajoutent une deuxième vidéo à un micro ou une notion
+qui en a déjà une (presque toujours le short qui manque à côté du paysage, ou l'inverse).
+
+Les 55 retenues, par classe :
+
+| classe | lignes | dont shorts | ce que ça change |
+| --- | ---: | ---: | --- |
+| seconde | 21 | 13 | le short manquant sur 13 micros déjà pourvues, 8 vidéos de notion |
+| premiere-spe | 10 | 2 | 8 vidéos de notion + 2 shorts de trigonométrie ; ⚠️ leurs titres sont des libellés techniques (« maths premiere exponentielle calculer »), à relire avant d'afficher |
+| 6e | 10 | 8 | les shorts des décimaux, 2 vidéos de notion |
+| 4e | 8 | 5 | **les 6 lignes de Pythagore qui comblent un vrai trou**, + 2 shorts de défi |
+| 5e | 5 | 5 | les shorts des fractions |
+| 3e | 1 | 1 | le short « Pense à un nombre » sur `affine_defi` |
+
+La liste exacte, clé par clé, sort de la simulation :
+
+```powershell
+npx tsx scripts/brancher-cles-coach-orphelines.ts
+```
+
+⚠️ Un point à trancher avant d'écrire : les **10 clés de première spé** ont pour titre leur
+propre identifiant (« maths premiere second degre signe »). Ce titre s'affiche à l'élève dans
+le modal. Il faudrait les renommer au registre avant de les brancher — et le registre n'est
+pas mon territoire.
+
+## Ce qui attend encore une décision
+
+1. **Les 3 lignes mal rangées** (`exponentielle_etude`, et `masse_mesurer` × 2) — question de
+   contenu, portée à Frédéric.
+2. ✅ **Les 22 lignes de micros masquées : gardées.** Décidé le 27/11. Le vérificateur les
+   classe à part et ne les signale plus comme un reste à traiter.
+3. **Les 55 lignes retenues** : feu vert pour `--ecrire` ? (et faut-il d'abord renommer les
+   10 titres de première spé au registre ?)
+4. **Les 88 combinaisons** : le chiffre est confirmé par le chemin de l'élève — aucune n'est
+   atteignable depuis l'accueil, mais par une adresse écrite à la main le fil d'Ariane
+   affiche la classe demandée pendant que le catalogue est celui d'une autre. Veux-tu que
+   `/coach/serie` refuse visiblement une combinaison inconnue ?
 
 ## Une observation à reproduire
 
