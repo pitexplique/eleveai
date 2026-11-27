@@ -135,4 +135,9 @@ pas de `PARI` (cp-commun.js) ni dans le film ni sur la miniature. Ne pas toucher
   Corrigé : 62 sur plaque sombre (le 2 bleu disparaissait sur la mer), coffre et cadenas agrandis, forêt assombrie (chiffres bleus
   invisibles sur les sapins), hibou ×1,4 et bulles plus lisibles, « 0 » qui paraissait seul dans la réponse (instants dans l'ordre).
 - [x] LES 12 VIDÉOS DES PAIRES 7 → 12 SONT RENDUES EN HD (sorties `manim/sorties/cp/maths/entier/07-lire` … `12-defi`).
-- [ ] Branchement R2 / manifeste / coach / YouTube des paires 7-12 : seulement sur l'accord de Frédéric (rien n'est poussé).
+- [x] paires 7-12 branchées le 27/11 après-midi, sur son « Oui, branche-les » : vignettes webp faites pour 07-12 seulement (script ad hoc,
+  même réglage que `scripts/vignettes-videos.py`), R2 48 fichiers (mp4 + png + 2 webp par vidéo, `r2-videos.ps1 -Rclone "copy … --include eleveai-*"`
+  dossier par dossier, tailles R2 = locales), videos-r2.json + bilans-videos.json (mes 12 clés seulement, index construit à la main) et /petits ;
+  manifeste : 12 entrées après cp-entier-droite-short, YouTube daté 03/08 → 08/08/2027 (une paire par jour) ; coach :
+  `brancher-videos-coach.mjs --classe cp --notion nombre_entier --ecrire` → 12 lignes notion_ressources, /api/notion-videos les renvoie.
+  Rien publié sur YouTube.
