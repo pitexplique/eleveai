@@ -173,7 +173,7 @@ CHIFFRES = {
 }
 
 
-SYMBOLES = set("ℝ∞[]{}<>=√≠⩽⩾≤≥∪∩/−–+°")
+SYMBOLES = set("ℝ∞[]{}<>=√≈≠⩽⩾≤≥∪∩/−–+°")
 
 
 def symbolique(texte):
@@ -182,7 +182,15 @@ def symbolique(texte):
 
 
 def mots_compares(texte):
-    """les mots d'un texte, nombres écrits en lettres remis en chiffres."""
+    """les mots d'un texte, nombres écrits en lettres remis en chiffres.
+
+    ⭐ « f(1) » devient « f de 1 », parce que c'est ce que la voix prononce. Sans ça
+    l'instrument criait sur E4 `04` carte A et E4 `07` carte B, deux cartes pourtant
+    justes : il ne savait pas lire une image de fonction. ⛔ On ne range PAS ces cartes
+    dans les « symboles à relire » : la correspondance « f de un » / « f(1) » est exacte
+    et mécanique, donc elle se vérifie — et une carte vérifiée vaut mieux qu'une carte
+    confiée à l'œil."""
+    texte = re.sub(r"([a-zA-Zα-ω])\s*\(\s*(-?[\d,]+)\s*\)", r"\1 de \2", texte)
     bruts = [plat(m) for m in re.split(r"[\s'’]+", texte) if m]
     sortis = []
     for m in bruts:

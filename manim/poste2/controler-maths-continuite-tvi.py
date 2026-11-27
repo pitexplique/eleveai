@@ -133,6 +133,26 @@ vrai("09b f' s'annule en 2 sur [0 ; 3]", abs(3 * 2 ** 2 - 12) < 1e-12, "deux mor
 vrai("09b sur [2 ; 3], 0 n'est pas entre -11 et -4", not (-11 <= 0 <= -4), "aucune solution sur ce morceau")
 eq("09b nombre de solutions sur [0 ; 3]", solutions(f5b, 0, 3), 1)
 
+print("\nLES DÉCOMPOSITIONS DITES À HAUTE VOIX")
+# ⛔ Une voix de correction ne donne pas un résultat, elle le DÉROULE : « huit, moins
+# vingt-quatre, plus cinq : moins onze ». Chacun de ces trois nombres est enseigné, et
+# une faute d'étape passe inaperçue quand le total, lui, est juste. On les recalcule.
+eq("E2 05  1 + 3 - 5", 1 + 3 - 5, -1)
+eq("E2 05  32 + 6 - 5", 32 + 6 - 5, 33)
+eq("E2 09b 1 - 1 - 5", 1 - 1 - 5, -5)
+eq("E2 09b 8 - 2 - 5", 8 - 2 - 5, 1)
+eq("E3 05  1 + 0 - 4", 1 + 0 - 4, -3)
+eq("E3 05  e² (la voix dit 5,39 pour f(2))", math.exp(2) + 2 - 4, 5.39)
+eq("E3 09b 1 + 0 - 3", 1 + 0 - 3, -2)
+eq("E3 09b ln 3 (la voix dit 1,10)", math.log(3), 1.10)
+eq("E4 02  f'(1) = 6 x 1 + 3", 6 * 1 ** 2 + 3, 9)
+eq("E4 05  2 ln 4 + 4 - 4 (la voix dit 2,77)", 2 * math.log(4) + 4 - 4, 2.77)
+eq("E5 05  1 - 3 + 1", 1 - 3 + 1, -1)
+eq("E5 09b 8 - 24 + 5", 8 - 24 + 5, -11)
+eq("E5 09b 27 - 36 + 5", 27 - 36 + 5, -4)
+vrai("E3 02  deux courbes de -3 à 5", True,
+     "3 traversées et 1 : dessinées, aucune formule — rien à recalculer")
+
 print(f"\n{controles} contrôles, {len(erreurs)} erreur(s).")
 for e in erreurs:
     print("  ⛔ " + e)
