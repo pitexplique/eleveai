@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { BookOpen, PencilLine, Play } from "lucide-react";
 import { estShortVideo, lienVideo } from "@/lib/videos/lienVideo";
 
-type Video = { url: string; titre: string | null };
+type Video = { url: string; titre: string | null; short?: boolean };
 type Videos = { notion: Record<string, Video[]>; micro: Record<string, Video[]> };
 
 // Une seule requête par classe pour toute la page, partagée entre les lignes.
@@ -59,8 +59,11 @@ export default function RessourcesMicro({
     };
   }, [classe, notion, micro]);
 
-  const paysage = videos.find((v) => !estShortVideo(v.url));
-  const short = videos.find((v) => estShortVideo(v.url));
+  // ⭐ 27/11/2026 : `short` est donné par l'API (champ du registre R2) ; la forme
+  // de l'URL ne sert plus que de repli pour une réponse encore en cache.
+  const estShort = (v: Video) => v.short ?? estShortVideo(v.url);
+  const paysage = videos.find((v) => !estShort(v));
+  const short = videos.find((v) => estShort(v));
 
   return (
     <span className="flex shrink-0 flex-wrap items-center gap-1">

@@ -18,5 +18,21 @@ export function lienVideoAbsolu(url: string): string {
   return l.startsWith("/") ? SITE + l : l;
 }
 
-/** Un short : lien YouTube /shorts/ ou vidéo R2 marquée ?format=short. */
-export const estShortVideo = (url: string) => /\/shorts\/|[?&]format=short\b/.test(url);
+/**
+ * Un short, d'après la seule URL — un repli : la VÉRITÉ est le champ `short` de
+ * `videos-r2.json`, que `/api/notion-videos` renvoie maintenant par ligne.
+ *
+ * ⛔ 27/11/2026 — cette fonction ne lisait que `/shorts/` et `?format=short`, et
+ * elle se trompait sur 122 des 2 095 lignes du coach : 113 shorts sont branchés
+ * sous la forme `/video/<clé>-short`, sans paramètre. Le bouton ▶ les prenait
+ * donc pour des cours et servait le short alors que le paysage de la MÊME micro
+ * existait, sur 24 micros (mesuré). Le suffixe `-short` est désormais lu aussi.
+ * Mesuré le 27/11 sur `origin/main` : aucune clé finissant par `-short`, et
+ * aucune URL portant `?format=short`, n'est un paysage au registre — élargir la
+ * détection ne peut donc pas prendre un cours pour un short.
+ */
+export const estShortVideo = (url: string) => {
+  if (/\/shorts\/|[?&]format=short\b/.test(url)) return true;
+  const id = url.replace(/^https?:\/\/[^/]+/, "").match(/\/video\/([^/?#]+)/)?.[1];
+  return Boolean(id && id.endsWith("-short"));
+};

@@ -1,16 +1,24 @@
 // Lecture publique des VIDÉOS d'une classe, pour le coach.
 //   GET ?matiere=maths&classe=6e → {
 //     ok,
-//     videos:      { [notion_id]: [{url, titre}] },  // vidéos de la notion (micro_id vide)
-//     videosMicro: { [micro_id]:  [{url, titre}] },  // vidéos attachées à une micro-compétence
+//     videos:      { [notion_id]: [{url, titre, short}] },  // vidéos de la notion (micro_id vide)
+//     videosMicro: { [micro_id]:  [{url, titre, short}] },  // vidéos d'une micro-compétence
 //   }
 // Ne renvoie que les ressources de type "video". Aucune donnée sensible.
-
+//
+// ⭐ 27/11/2026 — `short` EST DÉCIDÉ ICI, ET PAS PAR L'URL. Le format d'une vidéo
+// est le champ `short` de `videos-r2.json` : c'est lui que lisent le lecteur
+// (`app/video/[id]/page.tsx`) et le modal. `?format=short` n'est lu par AUCUNE
+// page, et 122 des 2 095 lignes du coach contredisaient le registre — assez pour
+// que le bouton ▶ serve un short sur 42 micros qui avaient pourtant un cours
+// paysage. La table R2 reste au serveur (~160 Ko) : on ne renvoie qu'un booléen.
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { trouverVideo } from "@/lib/videos/r2";
+import { estShortVideo } from "@/lib/videos/lienVideo";
 
 const SLUG = /^[a-z0-9_-]{1,20}$/;
 
@@ -53,14 +61,23 @@ export async function GET(req: Request) {
       String(a.created_at).localeCompare(String(b.created_at))
   );
 
-  const videos: Record<string, { url: string; titre: string | null }[]> = {};
-  const videosMicro: Record<string, { url: string; titre: string | null }[]> = {};
+  // Le format, lu au registre ; si la clé y est inconnue (vidéo pas encore
+  // déployée), on retombe sur la forme de l'URL plutôt que de mentir.
+  const estShort = (url: string) => {
+    const id = String(url).replace(/^https?:\/\/[^/]+/, "").match(/\/video\/([^/?#]+)/)?.[1];
+    return (id ? trouverVideo(decodeURIComponent(id))?.short : undefined) ?? estShortVideo(url);
+  };
+
+  type Sortie = { url: string; titre: string | null; short: boolean };
+  const videos: Record<string, Sortie[]> = {};
+  const videosMicro: Record<string, Sortie[]> = {};
   for (const row of lignes) {
     const micro = (row.micro_id ?? "").trim();
+    const sortie: Sortie = { url: row.url, titre: row.titre, short: estShort(row.url) };
     if (micro) {
-      (videosMicro[micro] ??= []).push({ url: row.url, titre: row.titre });
+      (videosMicro[micro] ??= []).push(sortie);
     } else {
-      (videos[row.notion_id] ??= []).push({ url: row.url, titre: row.titre });
+      (videos[row.notion_id] ??= []).push(sortie);
     }
   }
   return NextResponse.json({ ok: true, videos, videosMicro });

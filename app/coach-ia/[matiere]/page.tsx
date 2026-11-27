@@ -507,12 +507,12 @@ export default function CoachIA() {
   // Vidéos attachées aux notions (table notion_ressources, gérée depuis
   // /admin/ressources). Clé = notionId du coach → aucune correspondance.
   const [videosParNotion, setVideosParNotion] = useState<
-    Record<string, { url: string; titre: string | null }[]>
+    Record<string, { url: string; titre: string | null; short?: boolean }[]>
   >({});
   // Vidéos attachées à une MICRO-COMPÉTENCE précise (clé = microId) : un petit
   // lien YouTube « pile sur la compétence », en plus de la vidéo de notion.
   const [videosParMicro, setVideosParMicro] = useState<
-    Record<string, { url: string; titre: string | null }[]>
+    Record<string, { url: string; titre: string | null; short?: boolean }[]>
   >({});
   useEffect(() => {
     let annule = false;
@@ -1266,8 +1266,13 @@ export default function CoachIA() {
                                 // bouton « Vidéo » ; le short a sa petite case
                                 // verticale, le format d'un téléphone.
                                 (() => {
-                                  const paysage = microVideos.find((v) => !estShortVideo(v.url));
-                                  const short = microVideos.find((v) => estShortVideo(v.url));
+                                  // ⭐ 27/11/2026 : le format vient du champ `short`
+                                  // de l'API (lu au registre R2) ; l'URL n'est
+                                  // qu'un repli pour une réponse encore en cache.
+                                  const estShort = (v: { url: string; short?: boolean }) =>
+                                    v.short ?? estShortVideo(v.url);
+                                  const paysage = microVideos.find((v) => !estShort(v));
+                                  const short = microVideos.find((v) => estShort(v));
                                   return (
                                     <span className="flex shrink-0 items-center gap-1 self-center">
                                       {paysage ? (
