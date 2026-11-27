@@ -97360,6 +97360,809 @@
       ]
     },
     {
+      "id": "cp-entier-lire",
+      "pas_avant": "2027-08-03",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_lire_ecrire",
+      "type": "longue",
+      "fichier": "cp/maths/entier/07-lire/eleveai-maths-cp-entier-lire-paysage.mp4",
+      "miniature": "cp/maths/entier/07-lire/eleveai-maths-cp-entier-lire-paysage-miniature.png",
+      "titre": "Le bus de la piscine : lire et écrire les nombres — Nombres entiers — épisode 7 · Maths CP",
+      "accroche": "Ce matin, Ti Margo va à la piscine en bus. Un bus arrive dans la brume… Est-ce le bon ? Sur le ticket, il y a un 4, puis un 7.\n\nDans cette vidéo :\n• je lis le chiffre de devant, puis celui de derrière : 47\n• si le 7 passe devant, on lit 74 : ce n'est plus le même nombre\n• j'entends vingt-huit : j'écris un 2, puis un 8 juste à côté\n• l'ordre des chiffres compte !\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_lire_ecrire&display=simple\n\n🦎 Épisode 7 de la série Nombres entiers d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le bus dans la brume"
+        ],
+        [
+          "00:14",
+          "Lire : le chiffre de devant d'abord"
+        ],
+        [
+          "00:34",
+          "Écrire un nombre entendu"
+        ],
+        [
+          "00:50",
+          "Question 1"
+        ],
+        [
+          "01:19",
+          "Question 2"
+        ],
+        [
+          "01:51",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "lire les nombres",
+        "écrire les nombres",
+        "nombres à deux chiffres",
+        "dizaines",
+        "bus",
+        "piscine",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:50",
+          "question": "Le chauffeur crie « trente-deux ». Quel numéro est écrit sur son bus ?",
+          "choix": [
+            "23",
+            "32",
+            "302"
+          ],
+          "reponse": 1,
+          "explication": "J'entends trente : un 3 devant. J'entends deux : un 2 derrière. 32."
+        },
+        {
+          "t": "01:19",
+          "question": "Sur la clé du casier, il y a 65. Comment se lit ce nombre ?",
+          "choix": [
+            "soixante-cinq",
+            "cinquante-six",
+            "six-cinq"
+          ],
+          "reponse": 0,
+          "explication": "Un 6 devant : soixante. Un 5 derrière : soixante-cinq."
+        }
+      ],
+      "centres": [
+        "transports",
+        "sport"
+      ]
+    },
+    {
+      "id": "cp-entier-lire-short",
+      "pas_avant": "2027-08-03",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_lire_ecrire",
+      "type": "short",
+      "renvoie_vers": "cp-entier-lire",
+      "fichier": "cp/maths/entier/07-lire/eleveai-maths-cp-entier-lire-short.mp4",
+      "miniature": "cp/maths/entier/07-lire/eleveai-maths-cp-entier-lire-short-miniature.png",
+      "titre": "La porte de mamie : où habite-t-elle ? #maths #cp",
+      "accroche": "Ce soir, Ti Margo va chez sa mamie. Au téléphone, elle a dit : « J'habite au quarante et un. » Mais toutes les portes se ressemblent ! Laquelle est la sienne ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : comment écris-tu soixante-dix en chiffres ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_lire_ecrire&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #lirelesnombres #cp",
+      "tags": [
+        "lire les nombres",
+        "écrire les nombres",
+        "mamie",
+        "portes",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "Mamie habite au quarante et un. Quelle est sa porte ?",
+          "choix": [
+            "14",
+            "401",
+            "41"
+          ],
+          "reponse": 2,
+          "explication": "Quarante : un 4 devant. Et un : un 1 derrière. 41."
+        }
+      ],
+      "centres": [
+        "transports",
+        "sport"
+      ]
+    },
+    {
+      "id": "cp-entier-decomposer",
+      "pas_avant": "2027-08-04",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_decomposer",
+      "type": "longue",
+      "fichier": "cp/maths/entier/08-decomposer/eleveai-maths-cp-entier-decomposer-paysage.mp4",
+      "miniature": "cp/maths/entier/08-decomposer/eleveai-maths-cp-entier-decomposer-paysage-miniature.png",
+      "titre": "La boîte à perles : des dizaines plus des unités — Nombres entiers — épisode 8 · Maths CP",
+      "accroche": "Pour l'anniversaire de sa sœur, Ti Margo fait un bracelet. Combien de perles se cachent dans la boîte ? Trop pour les compter une par une… alors on les enfile par dix.\n\nDans cette vidéo :\n• 3 fils de dix et 4 perles toutes seules : 30 + 4\n• 30 + 4, c'est 34\n• dans 34, le 3 vaut 30 et le 4 vaut 4\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_decomposer&display=simple\n\n🦎 Épisode 8 de la série Nombres entiers d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "La boîte à perles"
+        ],
+        [
+          "00:12",
+          "Des fils de dix"
+        ],
+        [
+          "00:30",
+          "Trente plus quatre : 34"
+        ],
+        [
+          "00:40",
+          "Question 1"
+        ],
+        [
+          "01:16",
+          "Question 2"
+        ],
+        [
+          "01:42",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "décomposer",
+        "dizaines",
+        "unités",
+        "addition",
+        "perles",
+        "bracelet",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:40",
+          "question": "5 rangées de 10 salades, et 2 salades seules. Quelle addition va avec le dessin ?",
+          "choix": [
+            "50 + 2",
+            "5 + 2",
+            "20 + 5"
+          ],
+          "reponse": 0,
+          "explication": "Cinq rangées de dix : 50. Plus deux salades : 50 + 2 = 52."
+        },
+        {
+          "t": "01:16",
+          "question": "68, c'est 60 plus combien ?",
+          "choix": [
+            "6",
+            "8",
+            "60"
+          ],
+          "reponse": 1,
+          "explication": "68, c'est 6 fils de dix et 8 perles seules : 60 + 8."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "art-design"
+      ]
+    },
+    {
+      "id": "cp-entier-decomposer-short",
+      "pas_avant": "2027-08-04",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_decomposer",
+      "type": "short",
+      "renvoie_vers": "cp-entier-decomposer",
+      "fichier": "cp/maths/entier/08-decomposer/eleveai-maths-cp-entier-decomposer-short.mp4",
+      "miniature": "cp/maths/entier/08-decomposer/eleveai-maths-cp-entier-decomposer-short-miniature.png",
+      "titre": "La tirelire : combien d'euros dedans ? #maths #cp",
+      "accroche": "La tirelire de Ti Margo est toute lourde. Ding, ding ! Dedans : quatre billets de dix euros et six pièces d'un euro. Combien d'euros en tout ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : vingt plus neuf, ça fait combien ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_decomposer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #dizaines #cp",
+      "tags": [
+        "décomposer",
+        "dizaines",
+        "unités",
+        "tirelire",
+        "euros",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:14",
+          "question": "4 billets de 10 € et 6 pièces de 1 €. Combien d'euros dans la tirelire ?",
+          "choix": [
+            "10",
+            "46",
+            "64"
+          ],
+          "reponse": 1,
+          "explication": "Quatre billets de dix : 40. Six pièces : 6. 40 + 6 = 46 euros."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "art-design"
+      ]
+    },
+    {
+      "id": "cp-entier-ordinal",
+      "pas_avant": "2027-08-05",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_ordinal",
+      "type": "longue",
+      "fichier": "cp/maths/entier/09-ordinal/eleveai-maths-cp-entier-ordinal-paysage.mp4",
+      "miniature": "cp/maths/entier/09-ordinal/eleveai-maths-cp-entier-ordinal-paysage-miniature.png",
+      "titre": "La tour qui touche la lune : premier, deuxième… vingtième — Nombres entiers — épisode 9 · Maths CP",
+      "accroche": "Ce soir, Ti Margo construit une tour de cubes. Elle veut toucher la lune ! Mais quel cube va la toucher ?\n\nDans cette vidéo :\n• pour dire la place, j'ajoute « ième » : quatre, quatrième\n• on l'écrit avec un petit e en haut : 4ᵉ\n• le tout premier, c'est premier : 1ᵉʳ\n• neuf devient neuvième : le f se change en v\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_ordinal&display=simple\n\n🦎 Épisode 9 de la série Nombres entiers d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "La tour de cubes"
+        ],
+        [
+          "00:10",
+          "Premier, deuxième, troisième"
+        ],
+        [
+          "00:24",
+          "Le petit e en haut"
+        ],
+        [
+          "00:47",
+          "Question 1"
+        ],
+        [
+          "01:19",
+          "Question 2"
+        ],
+        [
+          "01:49",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "nombres ordinaux",
+        "premier",
+        "deuxième",
+        "rang",
+        "position",
+        "tour de cubes",
+        "lune",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:47",
+          "question": "Le cube qui brille, c'est lequel ?",
+          "choix": [
+            "le sixième",
+            "le septième",
+            "le huitième"
+          ],
+          "reponse": 1,
+          "explication": "Je compte depuis le bas : premier, deuxième… septième. On écrit 7ᵉ."
+        },
+        {
+          "t": "01:19",
+          "question": "Le vingtième cube touche la lune. Comment l'écrit-on ?",
+          "choix": [
+            "2ᵉ",
+            "20ᵉ",
+            "20"
+          ],
+          "reponse": 1,
+          "explication": "Vingtième : 20 avec un petit e en haut, 20ᵉ."
+        }
+      ],
+      "centres": [
+        "espace",
+        "transports"
+      ]
+    },
+    {
+      "id": "cp-entier-ordinal-short",
+      "pas_avant": "2027-08-05",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_ordinal",
+      "type": "short",
+      "renvoie_vers": "cp-entier-ordinal",
+      "fichier": "cp/maths/entier/09-ordinal/eleveai-maths-cp-entier-ordinal-short.mp4",
+      "miniature": "cp/maths/entier/09-ordinal/eleveai-maths-cp-entier-ordinal-short-miniature.png",
+      "titre": "Le petit train de la fête : dans quel wagon ? #maths #cp",
+      "accroche": "À la fête, le petit train passe. Oh ! L'ourson de Ti Margo est monté tout seul dedans ! Dans quel wagon est-il ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : je suis juste après le onzième. Quelle est ma place ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_ordinal&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #ordinal #cp",
+      "tags": [
+        "nombres ordinaux",
+        "rang",
+        "petit train",
+        "ourson",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:12",
+          "question": "Je compte depuis la locomotive. L'ourson est dans quel wagon ?",
+          "choix": [
+            "le huitième",
+            "le dixième",
+            "le neuvième"
+          ],
+          "reponse": 2,
+          "explication": "Premier, deuxième… huitième, neuvième : le 9ᵉ wagon. Neuf devient neuvième."
+        }
+      ],
+      "centres": [
+        "espace",
+        "transports"
+      ]
+    },
+    {
+      "id": "cp-entier-ordonner",
+      "pas_avant": "2027-08-06",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_ordonner",
+      "type": "longue",
+      "fichier": "cp/maths/entier/10-ordonner/eleveai-maths-cp-entier-ordonner-paysage.mp4",
+      "miniature": "cp/maths/entier/10-ordonner/eleveai-maths-cp-entier-ordonner-paysage-miniature.png",
+      "titre": "Les bateaux rentrent au port : du plus petit au plus grand — Nombres entiers — épisode 10 · Maths CP",
+      "accroche": "Le soir, les petits bateaux rentrent au port. Mais quel désordre ! Comment les ranger, du plus petit au plus grand ?\n\nDans cette vidéo :\n• je cherche d'abord le plus petit\n• un nombre à un seul chiffre passe devant\n• je regarde les dizaines, puis les unités si elles sont pareilles\n• 5 < 12 < 21 < 30\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_ordonner&display=simple\n\n🦎 Épisode 10 de la série Nombres entiers d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le port en désordre"
+        ],
+        [
+          "00:12",
+          "D'abord le plus petit"
+        ],
+        [
+          "00:20",
+          "Regarder les dizaines"
+        ],
+        [
+          "00:41",
+          "Question 1"
+        ],
+        [
+          "01:16",
+          "Question 2"
+        ],
+        [
+          "01:53",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "ranger les nombres",
+        "ordre croissant",
+        "comparer",
+        "dizaines",
+        "bateaux",
+        "port",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:41",
+          "question": "40, 24, 14 : lequel passe en premier, du plus petit au plus grand ?",
+          "choix": [
+            "40",
+            "24",
+            "14"
+          ],
+          "reponse": 2,
+          "explication": "14 n'a qu'une dizaine : il passe en premier. Puis 24, puis 40."
+        },
+        {
+          "t": "01:16",
+          "question": "Mamie range ses pots du plus petit au plus grand. Quel rangement est juste ?",
+          "choix": [
+            "32 ; 35 ; 38",
+            "38 ; 35 ; 32",
+            "35 ; 32 ; 38"
+          ],
+          "reponse": 0,
+          "explication": "Trois dizaines partout : je regarde les unités, 2 puis 5 puis 8."
+        }
+      ],
+      "centres": [
+        "bateaux",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-entier-ordonner-short",
+      "pas_avant": "2027-08-06",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_ordonner",
+      "type": "short",
+      "renvoie_vers": "cp-entier-ordonner",
+      "fichier": "cp/maths/entier/10-ordonner/eleveai-maths-cp-entier-ordonner-short.mp4",
+      "miniature": "cp/maths/entier/10-ordonner/eleveai-maths-cp-entier-ordonner-short-miniature.png",
+      "titre": "Les cartes dans le vent : dans quel ordre ? #maths #cp",
+      "accroche": "Le vent a fait voler les cartes de Ti Margo ! 91, 9, 19 : tout est mélangé. Comment les remettre dans l'ordre, du plus petit au plus grand ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : range-les du plus petit au plus grand : cinquante, quinze, cinq. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_ordonner&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #ranger #cp",
+      "tags": [
+        "ranger les nombres",
+        "ordre croissant",
+        "cartes",
+        "vent",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "91, 9, 19 : quel est le bon rangement, du plus petit au plus grand ?",
+          "choix": [
+            "91 ; 19 ; 9",
+            "9 ; 19 ; 91",
+            "19 ; 9 ; 91"
+          ],
+          "reponse": 1,
+          "explication": "9 n'a qu'un chiffre : c'est le plus petit. 19 a une dizaine, 91 en a neuf."
+        }
+      ],
+      "centres": [
+        "bateaux",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-entier-representations",
+      "pas_avant": "2027-08-07",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_representations",
+      "type": "longue",
+      "fichier": "cp/maths/entier/11-representations/eleveai-maths-cp-entier-representations-paysage.mp4",
+      "miniature": "cp/maths/entier/11-representations/eleveai-maths-cp-entier-representations-paysage-miniature.png",
+      "titre": "Le bal masqué des nombres : un nombre, plusieurs costumes — Nombres entiers — épisode 11 · Maths CP",
+      "accroche": "Ce soir, c'est le bal masqué des nombres. Un nombre arrive, tout déguisé. Qui se cache là-dessous ?\n\nDans cette vidéo :\n• 2 barres de dix et 3 petits cubes : 23\n• en lettres : vingt-trois ; en calcul : 20 + 3\n• dans les cadres de dix : 2 cadres pleins et 3 jetons\n• toutes ces écritures disent le même nombre\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_representations&display=simple\n\n🦎 Épisode 11 de la série Nombres entiers d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le bal masqué"
+        ],
+        [
+          "00:11",
+          "Barres de dix et petits cubes"
+        ],
+        [
+          "00:21",
+          "Il change de costume"
+        ],
+        [
+          "00:42",
+          "Question 1"
+        ],
+        [
+          "01:13",
+          "Question 2"
+        ],
+        [
+          "01:43",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "représenter un nombre",
+        "barres de dix",
+        "cubes",
+        "cadres de dix",
+        "nombres en lettres",
+        "bal masqué",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:42",
+          "question": "3 barres de dix et 6 cubes. Qui est-ce ?",
+          "choix": [
+            "63",
+            "9",
+            "36"
+          ],
+          "reponse": 2,
+          "explication": "Trois barres : 30. Six cubes : 31… 36."
+        },
+        {
+          "t": "01:13",
+          "question": "Le nombre 52 cherche son costume. Lequel ?",
+          "choix": [
+            "5 barres et 2 cubes",
+            "2 barres et 5 cubes",
+            "7 cubes"
+          ],
+          "reponse": 0,
+          "explication": "Cinquante, c'est cinq barres de dix. Plus deux cubes : 52."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-entier-representations-short",
+      "pas_avant": "2027-08-07",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_representations",
+      "type": "short",
+      "renvoie_vers": "cp-entier-representations",
+      "fichier": "cp/maths/entier/11-representations/eleveai-maths-cp-entier-representations-short.mp4",
+      "miniature": "cp/maths/entier/11-representations/eleveai-maths-cp-entier-representations-short-miniature.png",
+      "titre": "Les mains derrière le mur : combien de doigts ? #maths #cp",
+      "accroche": "Derrière le mur, les copains de Ti Margo lèvent les mains. Une main, deux mains, encore, encore… Combien de doigts se cachent là ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : pour faire vingt-cinq avec des barres et des cubes, combien de barres de dix faut-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_representations&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #dizaines #cp",
+      "tags": [
+        "représenter un nombre",
+        "dizaines",
+        "compter par dix",
+        "doigts",
+        "mains",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:12",
+          "question": "4 copains lèvent 10 doigts chacun, et un copain en lève 3. Combien de doigts en tout ?",
+          "choix": [
+            "7",
+            "34",
+            "43"
+          ],
+          "reponse": 2,
+          "explication": "Deux mains, c'est dix doigts. Dix, vingt, trente, quarante… et trois : 43."
+        }
+      ],
+      "centres": [
+        "art-design",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-entier-defi",
+      "pas_avant": "2027-08-08",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_defi",
+      "type": "longue",
+      "fichier": "cp/maths/entier/12-defi/eleveai-maths-cp-entier-defi-paysage.mp4",
+      "miniature": "cp/maths/entier/12-defi/eleveai-maths-cp-entier-defi-paysage-miniature.png",
+      "titre": "Les devinettes du hibou : les défis des nombres — Nombres entiers — épisode 12 · Maths CP",
+      "accroche": "Dans la forêt, deux grands yeux s'allument. C'est le hibou des devinettes ! Ti Margo est prête à jouer. Et toi ?\n\nDans cette vidéo :\n• 4 dizaines et 2 unités : 42\n• avec un 3 et un 8, le plus grand nombre : 83\n• j'échange les cartes : 38, ce n'est plus le même nombre\n• jamais de zéro devant\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_defi&display=simple\n\n🦎 Épisode 12 de la série Nombres entiers d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le hibou des devinettes"
+        ],
+        [
+          "00:11",
+          "Quatre dizaines, deux unités"
+        ],
+        [
+          "00:24",
+          "Le plus grand nombre avec 3 et 8"
+        ],
+        [
+          "00:48",
+          "Question 1"
+        ],
+        [
+          "01:23",
+          "Question 2"
+        ],
+        [
+          "01:56",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "devinettes",
+        "défi",
+        "dizaines",
+        "unités",
+        "plus grand nombre",
+        "hibou",
+        "forêt",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:48",
+          "question": "Je suis entre 60 et 70. Mon chiffre des unités est 5. Qui suis-je ?",
+          "choix": [
+            "65",
+            "56",
+            "75"
+          ],
+          "reponse": 0,
+          "explication": "Entre 60 et 70 : un 6 devant. Cinq unités : un 5 derrière. 65."
+        },
+        {
+          "t": "01:23",
+          "question": "Avec deux cartes parmi 5, 0 et 9 : le plus petit nombre à deux chiffres ?",
+          "choix": [
+            "05",
+            "59",
+            "50"
+          ],
+          "reponse": 2,
+          "explication": "Jamais de zéro devant : le 5 devant, le 0 derrière. 50."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "cp-entier-defi-short",
+      "pas_avant": "2027-08-08",
+      "notionId": "nombre_entier",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_entier_defi",
+      "type": "short",
+      "renvoie_vers": "cp-entier-defi",
+      "fichier": "cp/maths/entier/12-defi/eleveai-maths-cp-entier-defi-short.mp4",
+      "miniature": "cp/maths/entier/12-defi/eleveai-maths-cp-entier-defi-short-miniature.png",
+      "titre": "Le coffre au trésor : quel est le code ? #maths #cp",
+      "accroche": "Ti Margo a trouvé un coffre au trésor ! Sur le cadenas, un petit mot : le code, c'est le plus grand nombre avec un 2 et un 6. Quel est le code ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : avec un un et un neuf, quel est le plus petit nombre ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #defi #cp",
+      "tags": [
+        "défi",
+        "plus grand nombre",
+        "place du chiffre",
+        "coffre au trésor",
+        "code",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Le code, c'est le plus grand nombre avec un 2 et un 6. Quel est le code ?",
+          "choix": [
+            "62",
+            "26",
+            "8"
+          ],
+          "reponse": 0,
+          "explication": "Le plus grand chiffre devant : 6. Puis 2. 62."
+        }
+      ],
+      "centres": [
+        "animaux",
+        "jeux-defis"
+      ]
+    },
+    {
       "id": "cp-suite-avant",
       "pas_avant": "2027-07-26",
       "notionId": "suite_nombre",
