@@ -213,6 +213,18 @@ const ponctuationCollee = () => (arbre: unknown) => collerLaPonctuation(arbre as
  * On peut donc l'utiliser partout sans réécrire les banques existantes en
  * Unicode ; seules les banques écrites en LaTeX bénéficient du rendu KaTeX.
  */
+/**
+ * ⛔ 27/11/2026 — un choix de QCM « > » s'affichait VIDE au coach CP (comparer
+ * 33 … 85) : en Markdown, « > » en début de ligne ouvre une citation. En ligne
+ * (choix, libellés), un marqueur de bloc en tête — « > », « # », « - », « + »,
+ * « * », « 3. » — est du texte : on l'échappe.
+ */
+export const sansBlocMarkdown = (texte: string) =>
+  String(texte ?? "")
+    .replace(/^(\s*)>/gm, "$1\\>")
+    .replace(/^(\s*)([#+*-])(?=\s|$)/gm, "$1\\$2")
+    .replace(/^(\s*\d+)([.)])(?=\s|$)/gm, "$1\\$2");
+
 export function MarkdownMath({ children, className, inline = false }: MarkdownMathProps) {
   const content = (
     <ReactMarkdown
@@ -223,7 +235,7 @@ export function MarkdownMath({ children, className, inline = false }: MarkdownMa
           inline ? <span>{children}</span> : <p className="mb-2 last:mb-0">{children}</p>,
       }}
     >
-      {formulesNonCoupees(espacesInsecables(children))}
+      {formulesNonCoupees(espacesInsecables(inline ? sansBlocMarkdown(children) : children))}
     </ReactMarkdown>
   );
 
