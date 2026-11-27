@@ -1680,3 +1680,121 @@ sur les cinq scripts.** Elles ne changent rien au rendu et aucun contrôle ne le
 c'est du bruit dans des fichiers que d'autres liront. L'outil aurait dû supprimer
 l'instruction entière au lieu de la vider — à corriger dans l'outil, puis dans les
 fichiers, par la session qui les tient.
+
+---
+
+# 14. E1 `07` TRANCHÉ, ET LES CINQ HD (27/11, fin de nuit)
+
+> ⚠️ Ce § 14 **remplace le § 13.6** (« ce qui reste »). Le reste du § 13 est toujours vrai.
+
+## 14.1 ✅ E1 `07` : le rappel porte la méthode, plus le résultat
+
+**Tranché par Frédéric le 27/11.** Le rappel de la colonne de gauche disait
+« ln continue / sur ]0 ; +∞[ », mot pour mot la carte B, bonne réponse de la question
+(§ 12.3). Il dit maintenant :
+
+```
+rappel :
+une somme n'existe
+que là où ses deux
+morceaux existent
+```
+
+⭐ C'est la phrase que la voix de `07b` emploie **déjà** : l'écran et la parole se
+répondent au lieu de se dupliquer. Ce qu'il faut FAIRE est donné, ce qu'il faut TROUVER
+ne l'est plus — savoir où `ln` existe est la compétence que la question vise.
+
+| | avant | après |
+|---|---|---|
+| `colonne-ne-donne-pas-la-reponse.py` sur E1 `07` | **100 %** | **0 %** |
+| questions de la série dont l'écran donne sa réponse | 1 | **0** |
+| `AUDIT-AVANCE` de E1 `07` sur « sur ]0 ; +∞[ » | **14,94 s** | **0,34 s** |
+
+⭐⭐ **La troisième ligne est une confirmation mécanique, et elle valait la peine d'être
+lue** : les 14,94 s étaient *causées* par le rappel, puisqu'elles tombent en même temps
+que lui. L'avance qui restait (0,34 s) est celle de la carte B elle-même, correctement
+calée par `q_montrer_choix`. E1 passe de 13 à 12 avances.
+⚠️ Aucun WAV touché : la voix ne dit pas ce rappel.
+
+### ⛔⛔ Et une planche NE POUVAIT PAS montrer ce changement
+
+C'est le piège de cette correction, et il a failli passer. Le nouveau rappel n'apparaît
+sur **aucune vignette** de la planche de E1, pour deux raisons qui se cumulent :
+l'écran `07-question` n'a pas de vignette (sa réponse en hérite, § 13.4), **et** le
+rappel est retiré par `FadeOut` dans `07b` avant que l'explication s'écrive — c'est
+précisément la correction d'hier, pour qu'il ne soit pas recouvert.
+
+⭐ **L'instrument qui manquait** : `manim/poste2/image-a-linstant.py`, qui extrait une
+image de la vidéo à une seconde donnée. L'instant se lit dans le dry run, qui imprime
+`ECRAN <nom> t=<secondes>`.
+
+```
+grep "ECRAN 07" manim/poste2/dry-tvi/e1-continuite_reconnaitre.txt   # 07-question t=222.67
+python -X utf8 manim/poste2/image-a-linstant.py \
+  manim/scripts/terminale/media/videos/continuite_reconnaitre/480p15/e1-ql.mp4 \
+  248 planches-tvi/e1-07-question.png
+```
+
+⚠️ Il décode depuis le début au lieu de faire un `seek` : sur un MP4 Manim, un seek
+retombe sur la keyframe précédente et rend une image d'un AUTRE écran sans le dire.
+**Vu à l'image, à 248 s** : le rappel tient sur ses quatre lignes dans la colonne, sans
+déborder ni toucher la question ; les trois cartes sont posées, aucune révélée ; et la
+carte B n'est plus écrite dans la colonne. ⭐ La vignette `07b` de la planche est, elle,
+**inchangée** — donc le `FadeOut` marche toujours et rien n'a cassé en aval.
+
+## 14.2 ✅ LES CINQ HD
+
+Rendus un par un sous le verrou commun (`4e_hd.sh`, mutex `mkdir`/`rmdir`), chacun
+contrôlé avant de lancer le suivant. ⭐ Le verrou était libre à chaque prise et libéré à
+chaque fin ; **aucun verrou orphelin rencontré, aucun forcé.**
+
+| | fichier de sortie | durée HD | durée `-ql` | bords |
+|---|---|---|---|---|
+| E1 | `analyse/continuite-reconnaitre/eleveai-maths-terminale-continuite-reconnaitre.mp4` | **6:44** | 6:44 | **0** |
+| E2 | `analyse/tvi-appliquer/eleveai-maths-terminale-tvi-appliquer.mp4` | **6:23** | 6:22 | **0** |
+| E3 | `analyse/tvi-unicite/eleveai-maths-terminale-tvi-unicite.mp4` | **6:55** | 6:54 | **0** |
+| E4 | `analyse/tvi-rediger/eleveai-maths-terminale-tvi-rediger.mp4` | **7:03** | 7:02 | **0** |
+| E5 | `analyse/tvi-defi/eleveai-maths-terminale-tvi-defi.mp4` | **7:48** | 7:48 | **0** |
+
+⭐⭐ **La durée du HD vaut celle du `-ql` à la seconde près, sur chacun.** C'est le
+contrôle qui dit que la synchronisation réglée en `-ql` est conservée au rendu — et
+c'est tout l'intérêt d'avoir fait les WAV avant le HD : sans voix, un épisode fait
+1 min 30, et une planche d'1 min 30 ne prouve rien sur la synchronisation.
+
+⭐ `manim/poste2/fraicheur-hd-tvi.sh` — le contrôle de fraîcheur des HD de cette série.
+`fraicheur-hd.sh` existe déjà mais il est **codé en dur pour les 12 shorts de la série
+espace**, qui est en production : on n'étend pas l'outil d'une autre série, on écrit le
+sien (même raison que `analyse_ecrans.py` vs `espace_ecrans.py`). Il compare le MP4 de
+sortie à **trois** dates — son script (commit ou fichier, le plus récent), le socle, et
+sa voix — et il imprime la durée, parce qu'une durée de 1 min 30 trahirait un HD rendu
+sans marques.
+
+## 14.3 ⛔ CE QUI RESTE — et ce qu'il ne faut surtout pas faire avant
+
+Les cinq épisodes sont **écrits, mis en voix, synchronisés, regardés et rendus en HD**.
+La chaîne de diffusion, elle, n'est pas commencée, et c'est volontaire.
+
+| # | étape | état |
+|---|---|---|
+| 1 | vignettes des 5 | ⏳ |
+| 2 | envoi R2 vers `terminale/maths/analyse/<slug>/` | ⏳ |
+| 3 | clés **à la main** dans `lib/videos/videos-r2.json` | ⏳ |
+| 4 | fusion dans `main` **par union de clés**, déploiement, URL en 200 | ⏳ |
+| 5 | **et seulement alors** les lignes de `notion_ressources` | ⏳ |
+
+⛔⛔ **Ne jamais lancer `node scripts/generer-videos-r2.mjs`** : il sort du registre
+toute vidéo dont le MP4 n'est pas sur ce disque.
+⛔⛔ **Rien dans `notion_ressources` avant que les URL répondent 200** en production. Une
+ligne de coach écrite avant le déploiement donne un bouton mort — c'est arrivé le 24/11
+sur les douze paysages de l'espace.
+⛔⛔ **Aucune publication YouTube.** Le coach sert `eleveai.fr/video/<id>`.
+⚠️ **Au moment des clés, renseigner le champ `short`** : le format d'une vidéo ne se lit
+pas dans son URL. Ces cinq-là sont des **paysages** (`short` faux) ; les cinq shorts de
+`continuite_tvi` existent déjà et sont en ligne.
+⚠️ Et l'entrée de notion `terminale-continuite-tvi` porte encore un champ `youtube` : ce
+n'est pas le territoire de cette série, mais quelqu'un la croisera (§ 1).
+
+**Les cinq identifiants, pour le registre** : `terminale-continuite-reconnaitre`,
+`terminale-tvi-appliquer`, `terminale-tvi-unicite`, `terminale-tvi-rediger`,
+`terminale-tvi-defi` — et leurs `microId` : `continuite_reconnaitre`, `tvi_appliquer`,
+`tvi_unicite`, `tvi_rediger`, `tvi_defi`.
