@@ -354,7 +354,7 @@ function mainLeveeE(c,x,yBas,s,doigts=5,manche='#4dabf7',{droite=true,lueur=0,a=
 function brancheE(c,x0,x1,y){ c.strokeStyle='#5c3d0a'; c.lineCap='round'; c.lineWidth=26; c.beginPath(); c.moveTo(x1,y+10); c.quadraticCurveTo((x0+x1)/2,y-6,x0,y); c.stroke();
   c.lineWidth=10; c.beginPath(); c.moveTo(x0+80,y-2); c.lineTo(x0+40,y-46); c.stroke(); c.fillStyle='#2b8a3e'; c.beginPath(); c.arc(x0+40,y-56,22,0,7); c.fill(); }
 /* La forêt la nuit : des sapins sombres */
-function foretE(c,yBas=700,W=1056){ for(let k=0;k<9;k++){ const x=40+k*125+(k%2)*30; c.save(); c.globalAlpha=.55; sapinE(c,x,yBas-40,1.5+.3*(k%3)); c.restore(); }
+function foretE(c,yBas=700,W=1056){ for(let k=0;k<9;k++){ const x=40+k*125+(k%2)*30; c.save(); c.globalAlpha=.2; sapinE(c,x,yBas-40,1.5+.3*(k%3)); c.restore(); }
   c.fillStyle='#0b2015'; c.fillRect(0,yBas-30,W,720-yBas+30); }
 /* Le hibou des devinettes : (x, y) = les pattes sur la branche ; s = l'échelle ; yeux (0 → 1) les ouvre ; vu (0 → 1) le sort de l'ombre ; non = secoue la tête */
 function hibouE(c,x,y,s,{yeux=1,vu=1,non=0,T=0,cligne=true}={}){ c.save(); c.translate(x,y); c.scale(s,s);

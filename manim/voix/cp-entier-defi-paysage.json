@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Dans la forêt, deux grands yeux s'allument. C'est le hibou des devinettes ! Tu es prêt à jouer avec moi ?",
+  "01-devinette": "Le hibou dit : je suis un nombre. J'ai quatre dizaines et deux unités. Quatre dizaines : quarante. Deux unités : deux. Quarante-deux !",
+  "02-cartes": "Deuxième défi : avec un trois et un huit, fais le plus grand nombre ! Je mets le plus grand chiffre devant. Huit, puis trois : quatre-vingt-trois !",
+  "03-echange": "Et si j'échange les cartes ? Trente-huit. Ce n'est plus le même nombre ! La place du chiffre change tout.",
+  "04-question": "Question ! Le hibou dit : je suis entre soixante et soixante-dix. Mon chiffre des unités est cinq. Qui suis-je ? A : soixante-cinq. B : cinquante-six. C : soixante-quinze. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A ! Entre soixante et soixante-dix : un six devant. Cinq unités : un cinq derrière. Soixante-cinq !",
+  "05-question": "Question ! Avec deux cartes, parmi cinq, zéro et neuf, fais le plus petit nombre à deux chiffres. A : zéro, cinq. B : cinquante-neuf. C : cinquante. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C ! Le zéro ne se met jamais devant. Je mets le cinq devant, et le zéro derrière : cinquante. Hou hou, bravo !",
+  "06-appris": "Pour un défi, je lis les indices un par un. Le chiffre de devant compte les dizaines. Et jamais de zéro devant !",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

@@ -126,6 +126,13 @@ pas de `PARI` (cp-commun.js) ni dans le film ni sur la miniature. Ne pas toucher
   HD 120,1 s (−19,4 dB). Miniatures « Combien de doigts ? » (🖐🖐🖐 ?) et « Qui se cache là-dessous ? » 🎭.
   Corrigé : mains ×1,9 (illisibles à ×1,1), le « 3 » bleu de 43 invisible sur le ciel bleu → plaque sombre, barre et cube du commentaire
   agrandis et visibles dès le début du « À toi » (ardoise vide 1,3 s → HD refaite), ombre et costumes agrandis, « ? » insécable.
-- [ ] 12 defi : voix, WAV, instants, dessins (hibouE, foretE, brancheE, croixE, coffreE, cadenasE à roues, petitMotE) et les 2 films
-  (`films/cp-entier2-defi.js`, `films/cp-entier2-paysage-defi.js`) ÉCRITS ; planches, HD, miniatures à faire.
-  Branchement R2 / manifeste / coach des paires 7-12 : seulement sur l'accord de Frédéric.
+- [x] 12 defi : dessins (hibouE, foretE sombre à 20 %, brancheE, croixE, coffreE, cadenasE à deux roues qui défilent, petitMotE ;
+  carteNumE accepte coul et alpha). Short « Le coffre au trésor » (`films/cp-entier2-defi.js`) : code = le plus grand avec 2 et 6 → A (62),
+  roues 6 puis 2, clic, le coffre s'ouvre ; commentaire 1 et 9, le plus petit. HD 58,9 s (−19,1 dB), compteur ~26-29 s.
+  Paysage « Les devinettes du hibou » (`films/cp-entier2-paysage-defi.js`) : 4 dizaines et 2 unités → 42 ; 3 et 8 → 83, échange → 38,
+  83 > 38 ; Q1 entre 60 et 70, unités 5 → A (65), piste 60-70, compteur ~67-71 s ; Q2 5, 0, 9 → C (50), 05 barré, le hibou fait non,
+  compteur ~99-103 s. HD 134,2 s (−18,7 dB). Miniatures « Quel est le code ? » (🔒 ? ?) et « Qui suis-je ? » 🦉.
+  Corrigé : 62 sur plaque sombre (le 2 bleu disparaissait sur la mer), coffre et cadenas agrandis, forêt assombrie (chiffres bleus
+  invisibles sur les sapins), hibou ×1,4 et bulles plus lisibles, « 0 » qui paraissait seul dans la réponse (instants dans l'ordre).
+- [x] LES 12 VIDÉOS DES PAIRES 7 → 12 SONT RENDUES EN HD (sorties `manim/sorties/cp/maths/entier/07-lire` … `12-defi`).
+- [ ] Branchement R2 / manifeste / coach / YouTube des paires 7-12 : seulement sur l'accord de Frédéric (rien n'est poussé).
