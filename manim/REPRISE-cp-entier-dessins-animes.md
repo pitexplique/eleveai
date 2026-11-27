@@ -82,5 +82,15 @@ pas de `PARI` (cp-commun.js) ni dans le film ni sur la miniature. Ne pas toucher
   rien de rogné, ceinture blanche, fin eleveai.fr / YouTube ; miniatures « Quelle porte est chez mamie ? » et « Est-ce notre bus ? »
   (sans TU PARIES). Corrigé avant la HD finale de la paysage : `me('Vingt-huit',2)` (le 1er « vingt-huit » est celui du chauffeur,
   le cadre vert paraissait vide trop tôt). ⚠ Piège : `mot()` normalise, « Vingt-huit » = « vingt-huit » → préciser n.
-- [x] 08 decomposer : voix JSON + WAV faits (instants pas encore : `ti-margo-cues.py` après avoir ajouté "decomposer": "08" aux 2 séries).
+- [x] 08 decomposer : voix JSON + WAV, "decomposer": "08" ajouté aux 2 séries, instants. Dessins ajoutés à `cp-entier3-dessins.js`
+  (perleE, filDixE, boiteBijouxE, saladeE, rangTerreE, tissuE, tirelireE, billetDixE, pieceUnE, etagereE).
+  Short « La tirelire » (`films/cp-entier2-decomposer.js`) : 4 billets de 10 € + 6 pièces de 1 €, B = 46 ; commentaire 20 + 9 = ?
+  Paysage « La boîte à perles » (`films/cp-entier2-paysage-decomposer.js`) : 34 perles → 3 fils de 10 (cadres orange) + 4 seules (cadre bleu),
+  30 + 4 = 34 ; Q1 potager (5 rangées de 10 salades + 2) → A (50 + 2) ; Q2 68 = 60 + ? sous un tissu → B (8).
+  Corrigé sur les planches -ql : billets et pièces grossis, nombres 10/20/30/40 sur fond plein (le « 10 € » transparaissait),
+  formule du short décalée (touchait le pied de l'étagère), fils et formules de la paysage agrandis, « vaut 30 / vaut 4 » remplacés
+  par des traits pointillés vers les fils et les perles, « 8 perles » insécable.
+  HD : short 59,8 s (−19,4 dB), compteur visible ~28-31 s ; paysage 118,8 s (−19,5 dB), compteurs Q1 ~62-64 s, Q2 ~90-92 s ;
+  rien de rogné, ceinture blanche, fin eleveai.fr / YouTube. Miniatures « Combien dans ma tirelire ? » (🐷 💶 ?) et
+  « Combien de perles ? » 💎 (pas 📿 : c'est un chapelet). Pas de R2 / manifeste / coach (attend l'accord de Frédéric).
 - [ ] 08 → 12 : films, planches, HD une à la fois. Branchement R2 / manifeste / coach : seulement sur l'accord de Frédéric.

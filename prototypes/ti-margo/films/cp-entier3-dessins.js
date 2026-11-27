@@ -95,3 +95,80 @@ function braceletE(c,x,y,s=1){ c.strokeStyle='#ff6b6b'; c.lineWidth=16*s; c.begi
 /* Les vagues de la piscine */
 function piscineE(c,T,y,W=1056){ c.fillStyle='#74c0fc'; c.fillRect(0,y,W,720-y); c.strokeStyle='#d0ebff'; c.lineWidth=4;
   for(let r=0;r<3;r++){ c.beginPath(); for(let x=0;x<=W;x+=16) c.lineTo(x,y+20+r*34+6*Math.sin(x/40+T*2+r)); c.stroke(); } }
+
+/* ---- Paire 8 (décomposer : dizaines + unités) : les perles, la boîte à bijoux, le potager, la tirelire ---- */
+const COUL_PERLE=['#ff6b6b','#fcc419','#51cf66','#4dabf7','#cc5de8','#ff922b','#f783ac','#20c997','#ffd43b','#748ffc'];
+/* Une perle ronde et brillante : (x, y) = le centre */
+function perleE(c,x,y,r,coul,z=1){ if(z<=0) return; r*=Math.min(1.2,z);
+  c.fillStyle=coul; c.beginPath(); c.arc(x,y,r,0,7); c.fill(); c.strokeStyle='rgba(0,0,0,.35)'; c.lineWidth=2; c.stroke();
+  c.fillStyle='rgba(255,255,255,.75)'; c.beginPath(); c.arc(x-r*.35,y-r*.38,r*.28,0,7); c.fill(); }
+/* Un fil de 10 perles, debout : (x, yBas) = le nœud du bas ; r = le rayon d'une perle ; n perles déjà enfilées (≤ 10) ;
+   lueur ajoute un halo doré. Renvoie la hauteur du fil. */
+function filDixE(c,x,yBas,r,n=10,z=1,lueur=0,coul=null){ if(z<=0) return 0; const h=r*20+24;
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.35*lueur})`; c.beginPath(); c.roundRect(x-r*1.9,yBas-h-r,r*3.8,h+r*2,r*1.9); c.fill(); }
+  c.strokeStyle='#f8f9fa'; c.lineWidth=3; c.beginPath(); c.moveTo(x,yBas+6); c.lineTo(x,yBas-h); c.stroke();
+  for(let i=0;i<Math.min(10,n);i++) perleE(c,x,yBas-12-r-i*2*r,r*.94,coul||COUL_PERLE[i],z);
+  c.fillStyle='#f8f9fa'; c.beginPath(); c.arc(x,yBas+8,5,0,7); c.arc(x,yBas-h,5,0,7); c.fill(); return h; }
+/* La boîte à bijoux : (x, yBas) = le milieu du bas ; w = la largeur ; ouvre (0 → 1) lève le couvercle ; lumiere (0 → 1) la lueur qui sort */
+function boiteBijouxE(c,x,yBas,w,ouvre=0,lumiere=0,T=0){ const h=w*.42, x0=x-w/2, y0=yBas-h;
+  if(lumiere>0){ const g=c.createRadialGradient(x,y0,0,x,y0,w*.9); g.addColorStop(0,`rgba(255,236,153,${.75*lumiere})`); g.addColorStop(1,'rgba(255,236,153,0)');
+    c.fillStyle=g; c.beginPath(); c.arc(x,y0,w*.9,0,7); c.fill();
+    c.strokeStyle=`rgba(255,236,153,${.6*lumiere})`; c.lineWidth=6; for(let k=0;k<7;k++){ const a=-Math.PI*(.12+.76*k/6)+.04*Math.sin(T*2+k);
+      c.beginPath(); c.moveTo(x+Math.cos(a)*w*.32,y0+Math.sin(a)*w*.12); c.lineTo(x+Math.cos(a)*w*.75,y0+Math.sin(a)*w*.55); c.stroke(); } }
+  /* le dedans (velours) */
+  c.fillStyle='#5f3dc4'; c.fillRect(x0+10,y0-8,w-20,20);
+  /* le corps de la boîte */
+  c.fillStyle='#c2255c'; c.strokeStyle='#5c0f2e'; c.lineWidth=5; c.beginPath(); c.roundRect(x0,y0,w,h,14); c.fill(); c.stroke();
+  c.strokeStyle='#fcc419'; c.lineWidth=6; c.beginPath(); c.moveTo(x0+12,y0+h*.3); c.lineTo(x0+w-12,y0+h*.3); c.stroke();
+  c.fillStyle='#fcc419'; c.beginPath(); c.arc(x,y0+h*.3,13,0,7); c.fill();
+  /* le couvercle, qui tourne autour de la charnière arrière (à gauche) */
+  c.save(); c.translate(x0,y0); c.rotate(-1.25*douxE(Math.min(1,ouvre)));
+  c.fillStyle='#e64980'; c.strokeStyle='#5c0f2e'; c.lineWidth=5; c.beginPath(); c.roundRect(0,-h*.42,w,h*.42,[18,18,4,4]); c.fill(); c.stroke();
+  c.fillStyle='#fcc419'; c.beginPath(); c.arc(w/2,-h*.21,15,0,7); c.fill(); c.restore(); }
+/* Une salade (laitue) vue de face : (x, yBas) = le sol ; r = le rayon */
+function saladeE(c,x,yBas,r,z=1,lueur=0){ if(z<=0) return; r*=Math.min(1.2,z); const y=yBas-r*.8;
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.4*lueur})`; c.beginPath(); c.arc(x,y,r*1.5,0,7); c.fill(); }
+  c.fillStyle='#2f9e44'; c.strokeStyle='#1b5e20'; c.lineWidth=2.5;
+  for(const [dx,dy,k] of [[-.55,.15,.62],[.55,.15,.62],[0,-.25,.66],[-.3,.3,.6],[.3,.3,.6]]){ c.beginPath(); c.arc(x+dx*r,y+dy*r,r*k,0,7); c.fill(); c.stroke(); }
+  c.fillStyle='#8ce99a'; c.beginPath(); c.arc(x,y+r*.1,r*.42,0,7); c.fill(); c.stroke();
+  c.strokeStyle='#2f9e44'; c.lineWidth=2; c.beginPath(); c.moveTo(x,y+r*.5); c.lineTo(x,y-r*.25); c.stroke(); }
+/* Une rangée de terre du potager : (x0, y) = le début, longueur L */
+function rangTerreE(c,x0,y,L,e=26){ c.fillStyle='#6b4a2b'; c.beginPath(); c.roundRect(x0,y-e*.4,L,e,e/2); c.fill(); }
+/* Un tissu qui cache (rouge à pois) : (x, y) = le centre ; w × h ; u (0 → 1) le fait s'envoler vers le haut à droite */
+function tissuE(c,x,y,w,h,u=0,T=0){ if(u>=1) return; const dx=u*700, dy=-u*500, a=u*.8; c.save(); c.globalAlpha=1-u; c.translate(x+dx,y+dy); c.rotate(a);
+  c.fillStyle='#e03131'; c.strokeStyle='#7d1515'; c.lineWidth=5; c.beginPath(); c.moveTo(-w/2,-h/2);
+  for(let k=0;k<=8;k++) c.lineTo(-w/2+w*k/8,-h/2+6*Math.sin(k+T*3));
+  for(let k=8;k>=0;k--) c.lineTo(-w/2+w*k/8,h/2+8*Math.sin(k*1.3+T*3)); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle='#f8f9fa'; for(let i=0;i<5;i++) for(let j=0;j<3;j++){ c.beginPath(); c.arc(-w/2+w*(i+.5)/5,-h/2+h*(j+.5)/3,8,0,7); c.fill(); }
+  c.restore(); }
+/* La tirelire cochon : (x, yBas) = les pattes ; s = l'échelle ; tremble (0 → 1) la secoue ; ouvre (0 → 1) ouvre la trappe du ventre */
+function tirelireE(c,x,yBas,s=1,tremble=0,T=0,ouvre=0){ c.save(); c.translate(x+tremble*9*Math.sin(T*38),yBas); c.rotate(tremble*.06*Math.sin(T*31)); c.scale(s,s);
+  c.fillStyle='#f783ac'; c.strokeStyle='#a61e4d'; c.lineWidth=5;
+  for(const px of [-70,-30,30,70]){ c.beginPath(); c.roundRect(px-14,-40,28,40,8); c.fill(); c.stroke(); }
+  c.beginPath(); c.ellipse(0,-110,135,95,0,0,7); c.fill(); c.stroke();
+  /* les oreilles, le groin, l'œil, la queue en tire-bouchon */
+  c.beginPath(); c.moveTo(60,-185); c.lineTo(95,-235); c.lineTo(108,-170); c.closePath(); c.fill(); c.stroke();
+  c.beginPath(); c.moveTo(20,-198); c.lineTo(40,-245); c.lineTo(68,-190); c.closePath(); c.fill(); c.stroke();
+  c.fillStyle='#faa2c1'; c.beginPath(); c.ellipse(142,-110,22,32,0,0,7); c.fill(); c.stroke();
+  c.fillStyle='#a61e4d'; c.beginPath(); c.arc(140,-120,5,0,7); c.arc(140,-100,5,0,7); c.fill();
+  c.fillStyle='#212529'; c.beginPath(); c.arc(90,-140,8,0,7); c.fill();
+  c.strokeStyle='#a61e4d'; c.lineWidth=5; c.beginPath(); c.moveTo(-134,-120); c.bezierCurveTo(-175,-140,-160,-170,-145,-150); c.bezierCurveTo(-130,-130,-170,-115,-180,-135); c.stroke();
+  /* la fente sur le dos */
+  c.fillStyle='#212529'; c.beginPath(); c.roundRect(-35,-203,70,10,5); c.fill();
+  /* la trappe du ventre */
+  c.fillStyle=ouvre>0?'#343a40':'#f06595'; c.strokeStyle='#a61e4d'; c.lineWidth=4; c.beginPath(); c.ellipse(-10,-60,36*(1-.15*ouvre),16,0,0,7); c.fill(); c.stroke();
+  c.restore(); }
+/* Un billet de 10 € : (x, y) = le centre ; w = la largeur ; a = l'angle */
+function billetDixE(c,x,y,w=150,z=1,a=0,lueur=0){ if(z<=0) return; w*=Math.min(1.15,z); const h=w*.52; c.save(); c.translate(x,y); c.rotate(a);
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.4*lueur})`; c.beginPath(); c.roundRect(-w*.62,-h*.7,w*1.24,h*1.4,16); c.fill(); }
+  c.fillStyle='#ffa8a8'; c.strokeStyle='#c92a2a'; c.lineWidth=4; c.beginPath(); c.roundRect(-w/2,-h/2,w,h,8); c.fill(); c.stroke();
+  c.strokeStyle='rgba(201,42,42,.45)'; c.lineWidth=3; c.beginPath(); c.arc(w*.3,0,h*.28,0,7); c.stroke();
+  ecrire(c,'10 €',-w*.1,2,h*.48,'#a61e1e'); c.restore(); }
+/* Une pièce de 1 € : (x, y) = le centre ; r = le rayon */
+function pieceUnE(c,x,y,r=30,z=1,lueur=0){ if(z<=0) return; r*=Math.min(1.2,z);
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.4*lueur})`; c.beginPath(); c.arc(x,y,r*1.5,0,7); c.fill(); }
+  c.fillStyle='#fcc419'; c.strokeStyle='#e67700'; c.lineWidth=4; c.beginPath(); c.arc(x,y,r,0,7); c.fill(); c.stroke();
+  c.fillStyle='#ced4da'; c.beginPath(); c.arc(x,y,r*.68,0,7); c.fill(); c.strokeStyle='#868e96'; c.lineWidth=2; c.stroke();
+  ecrire(c,'1',x,y+2,r*.95,'#495057'); }
+/* Une étagère de bois : (x0, y) = le dessus, longueur L */
+function etagereE(c,x0,y,L){ c.fillStyle='#8a5a2b'; c.fillRect(x0,y,L,22); c.fillStyle='#6b3a10'; c.fillRect(x0+30,y+22,16,26); c.fillRect(x0+L-46,y+22,16,26); }

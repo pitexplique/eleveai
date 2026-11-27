@@ -4,5 +4,5 @@
   "sons": "public/sons/cp-entier-{ep}-paysage",
   "sortie": "manim/sorties/cp/maths/entier/{num}-{ep}",
   "nom": "eleveai-maths-cp-entier-{ep}-paysage",
-  "episodes": { "comparer": "04", "dizaine": "05", "droite": "06", "lire": "07" }
+  "episodes": { "comparer": "04", "dizaine": "05", "droite": "06", "lire": "07", "decomposer": "08" }
 }
