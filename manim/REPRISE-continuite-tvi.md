@@ -1627,3 +1627,56 @@ bash manim/poste2/dry-tvi.sh                                         # 15 / 0 / 
 ⛔ **Non fait, et volontairement** : aucun rendu HD (le verrou était libre et n'a jamais
 été pris — tout ce tour est en `-ql`), aucune écriture dans `videos-r2.json` ni dans
 `notion_ressources`, aucune publication, aucun push. Trois commits sur `poste2`.
+
+---
+
+# 12. ⛔⛔ LA COLLISION DU 27/11 — ce qu'une modification non commitée coûte
+
+**Les faits, sans enjoliver.** En fin de journée, deux sessions ont reçu deux ordres sur
+le même fichier, `manim/scripts/terminale/continuite_reconnaitre.py`. L'une avait déjà
+réécrit le rappel de l'écran `07` ; on m'a demandé de le réécrire. Rien n'a été écrasé,
+et c'est le seul point qui compte pour la suite : **j'ai lu le fichier sur le disque
+avant d'y toucher**, et ce que j'y ai lu était déjà la bonne version.
+
+## Le mécanisme, à retenir
+
+⛔⛔ **Une modification NON COMMITÉE dans un dossier partagé est INVISIBLE pour la
+session d'à côté.** Elle est sur le disque, elle est juste, elle est mesurée — et rien
+ne la signale : pas l'historique, pas un verrou, pas un message. La session voisine
+ouvre le même fichier, lit ce qu'elle croit être l'original, et écrit par-dessus.
+⭐ **Un commit est le seul moyen de diffuser qu'un travail existe.** Ce n'est pas un
+geste de fin de tâche, c'est un geste de coordination : on commite dès qu'une
+modification est juste, même petite, même seule sur sa branche.
+
+## Les trois réflexes qui ont fait que rien n'a été perdu
+
+1. ⭐⭐ **Mesurer AVANT de corriger ce qu'on vous dit de corriger.** L'ordre reçu était
+   précis et chiffré (« E1 `07` est à 100 %, fais-le descendre »). J'ai d'abord relancé
+   l'instrument : il disait **0 %**. Il n'y avait rien à faire. Un ordre décrit l'état
+   du monde au moment où il a été écrit, pas au moment où on le lit — exactement comme
+   une planche, qui ne dit pas son âge.
+2. ⭐ **Lire le fichier sur le disque, jamais de mémoire.** Le mien avait changé en
+   profondeur depuis le matin : marques d'audit retirées, `au_mot` réalignés, écrans
+   passés à `au_fin`. Une édition faite de souvenir aurait défait des heures de réglage
+   sans qu'aucun contrôle ne le dise.
+3. ⭐ **Vérifier que l'instrument n'est pas muet avant de se fier à son zéro.** Son
+   `--etalonner` crie bien à 100 % sur l'ancien texte et se tait sur le nouveau. Un zéro
+   ne vaut que si on a vu l'outil crier au moins une fois (voir § 6, « la virgule »).
+
+## Ce que ça change pour la suite de cette série
+
+- ⛔ **Deux sessions n'écrivent jamais dans le même fichier.** Les territoires se posent
+  AVANT d'envoyer les sessions, pas après.
+- ⛔ Avant d'éditer un fichier d'un dossier partagé : `git status <chemin>`. Une ligne
+  `M` veut dire **quelqu'un y travaille en ce moment** — on ne touche pas, on le dit.
+- ⭐ Et quand on reçoit un ordre de correction : **reproduire le défaut d'abord**. S'il
+  n'est plus là, répondre par la mesure, pas par une modification.
+
+## ⚠️ Une séquelle laissée par `retirer-lettres.py`, à nettoyer
+
+Il transformait un appel isolé `self.lettres(q)` en une instruction sans effet — une
+ligne qui ne contient que `q`, ou une boucle `for c in cartes: c`. **27 lignes mortes
+sur les cinq scripts.** Elles ne changent rien au rendu et aucun contrôle ne les voit ;
+c'est du bruit dans des fichiers que d'autres liront. L'outil aurait dû supprimer
+l'instruction entière au lieu de la vider — à corriger dans l'outil, puis dans les
+fichiers, par la session qui les tient.
