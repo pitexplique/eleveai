@@ -10240,6 +10240,42 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_comparer&display=simple"
  },
+ "cp-entier-decomposer": {
+  "fichier": "cp/maths/entier/08-decomposer/eleveai-maths-cp-entier-decomposer-paysage.mp4",
+  "poster": "cp/maths/entier/08-decomposer/eleveai-maths-cp-entier-decomposer-paysage-miniature.png",
+  "vignette": "cp/maths/entier/08-decomposer/eleveai-maths-cp-entier-decomposer-paysage-miniature.vignette.webp",
+  "titre": "La boîte à perles : des dizaines plus des unités — Nombres entiers — épisode 8 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_decomposer&display=simple"
+ },
+ "cp-entier-decomposer-short": {
+  "fichier": "cp/maths/entier/08-decomposer/eleveai-maths-cp-entier-decomposer-short.mp4",
+  "poster": "cp/maths/entier/08-decomposer/eleveai-maths-cp-entier-decomposer-short-miniature.png",
+  "vignette": "cp/maths/entier/08-decomposer/eleveai-maths-cp-entier-decomposer-short-miniature.vignette.webp",
+  "titre": "La tirelire : combien d'euros dedans ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_decomposer&display=simple"
+ },
+ "cp-entier-defi": {
+  "fichier": "cp/maths/entier/12-defi/eleveai-maths-cp-entier-defi-paysage.mp4",
+  "poster": "cp/maths/entier/12-defi/eleveai-maths-cp-entier-defi-paysage-miniature.png",
+  "vignette": "cp/maths/entier/12-defi/eleveai-maths-cp-entier-defi-paysage-miniature.vignette.webp",
+  "titre": "Les devinettes du hibou : les défis des nombres — Nombres entiers — épisode 12 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_defi&display=simple"
+ },
+ "cp-entier-defi-short": {
+  "fichier": "cp/maths/entier/12-defi/eleveai-maths-cp-entier-defi-short.mp4",
+  "poster": "cp/maths/entier/12-defi/eleveai-maths-cp-entier-defi-short-miniature.png",
+  "vignette": "cp/maths/entier/12-defi/eleveai-maths-cp-entier-defi-short-miniature.vignette.webp",
+  "titre": "Le coffre au trésor : quel est le code ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_defi&display=simple"
+ },
  "cp-entier-denombre": {
   "fichier": "cp/maths/entier/01-denombre/eleveai-maths-cp-entier-denombre-paysage.mp4",
   "poster": "cp/maths/entier/01-denombre/eleveai-maths-cp-entier-denombre-paysage-miniature.png",
@@ -10294,6 +10330,60 @@
   "youtube": null,
   "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_droite&display=simple"
  },
+ "cp-entier-lire": {
+  "fichier": "cp/maths/entier/07-lire/eleveai-maths-cp-entier-lire-paysage.mp4",
+  "poster": "cp/maths/entier/07-lire/eleveai-maths-cp-entier-lire-paysage-miniature.png",
+  "vignette": "cp/maths/entier/07-lire/eleveai-maths-cp-entier-lire-paysage-miniature.vignette.webp",
+  "titre": "Le bus de la piscine : lire et écrire les nombres — Nombres entiers — épisode 7 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_lire_ecrire&display=simple"
+ },
+ "cp-entier-lire-short": {
+  "fichier": "cp/maths/entier/07-lire/eleveai-maths-cp-entier-lire-short.mp4",
+  "poster": "cp/maths/entier/07-lire/eleveai-maths-cp-entier-lire-short-miniature.png",
+  "vignette": "cp/maths/entier/07-lire/eleveai-maths-cp-entier-lire-short-miniature.vignette.webp",
+  "titre": "La porte de mamie : où habite-t-elle ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_lire_ecrire&display=simple"
+ },
+ "cp-entier-ordinal": {
+  "fichier": "cp/maths/entier/09-ordinal/eleveai-maths-cp-entier-ordinal-paysage.mp4",
+  "poster": "cp/maths/entier/09-ordinal/eleveai-maths-cp-entier-ordinal-paysage-miniature.png",
+  "vignette": "cp/maths/entier/09-ordinal/eleveai-maths-cp-entier-ordinal-paysage-miniature.vignette.webp",
+  "titre": "La tour qui touche la lune : premier, deuxième… vingtième — Nombres entiers — épisode 9 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_ordinal&display=simple"
+ },
+ "cp-entier-ordinal-short": {
+  "fichier": "cp/maths/entier/09-ordinal/eleveai-maths-cp-entier-ordinal-short.mp4",
+  "poster": "cp/maths/entier/09-ordinal/eleveai-maths-cp-entier-ordinal-short-miniature.png",
+  "vignette": "cp/maths/entier/09-ordinal/eleveai-maths-cp-entier-ordinal-short-miniature.vignette.webp",
+  "titre": "Le petit train de la fête : dans quel wagon ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_ordinal&display=simple"
+ },
+ "cp-entier-ordonner": {
+  "fichier": "cp/maths/entier/10-ordonner/eleveai-maths-cp-entier-ordonner-paysage.mp4",
+  "poster": "cp/maths/entier/10-ordonner/eleveai-maths-cp-entier-ordonner-paysage-miniature.png",
+  "vignette": "cp/maths/entier/10-ordonner/eleveai-maths-cp-entier-ordonner-paysage-miniature.vignette.webp",
+  "titre": "Les bateaux rentrent au port : du plus petit au plus grand — Nombres entiers — épisode 10 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_ordonner&display=simple"
+ },
+ "cp-entier-ordonner-short": {
+  "fichier": "cp/maths/entier/10-ordonner/eleveai-maths-cp-entier-ordonner-short.mp4",
+  "poster": "cp/maths/entier/10-ordonner/eleveai-maths-cp-entier-ordonner-short-miniature.png",
+  "vignette": "cp/maths/entier/10-ordonner/eleveai-maths-cp-entier-ordonner-short-miniature.vignette.webp",
+  "titre": "Les cartes dans le vent : dans quel ordre ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_ordonner&display=simple"
+ },
  "cp-entier-rang": {
   "fichier": "cp/maths/entier/02-rang/eleveai-maths-cp-entier-rang-paysage.mp4",
   "poster": "cp/maths/entier/02-rang/eleveai-maths-cp-entier-rang-paysage-miniature.png",
@@ -10311,6 +10401,24 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_rang&display=simple"
+ },
+ "cp-entier-representations": {
+  "fichier": "cp/maths/entier/11-representations/eleveai-maths-cp-entier-representations-paysage.mp4",
+  "poster": "cp/maths/entier/11-representations/eleveai-maths-cp-entier-representations-paysage-miniature.png",
+  "vignette": "cp/maths/entier/11-representations/eleveai-maths-cp-entier-representations-paysage-miniature.vignette.webp",
+  "titre": "Le bal masqué des nombres : un nombre, plusieurs costumes — Nombres entiers — épisode 11 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_representations&display=simple"
+ },
+ "cp-entier-representations-short": {
+  "fichier": "cp/maths/entier/11-representations/eleveai-maths-cp-entier-representations-short.mp4",
+  "poster": "cp/maths/entier/11-representations/eleveai-maths-cp-entier-representations-short-miniature.png",
+  "vignette": "cp/maths/entier/11-representations/eleveai-maths-cp-entier-representations-short-miniature.vignette.webp",
+  "titre": "Les mains derrière le mur : combien de doigts ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=nombre_entier&microId=cp_entier_representations&display=simple"
  },
  "cp-suite-avant": {
   "fichier": "cp/maths/suite/01-avant/eleveai-maths-cp-suite-avant-paysage.mp4",

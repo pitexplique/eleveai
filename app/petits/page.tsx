@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 // 26/11 : les 6 dessins animés « nombres entiers » (Ti Margo, CP) rejoignent le test : 3 paysages (une
 // histoire, deux questions) et 3 shorts (un petit jeu), en plus des 3 shorts du début.
 // 26/11 après-midi : + les paires 4-5-6 (comparer, dizaines-unités, piste graduée), sur l'OK de Frédéric.
+// 27/11 : + les paires 7 à 12 (lire-écrire, décomposer, ordinal, ranger, représentations, défis), sur l'OK de Frédéric.
 const PAYSAGES = [
   { id: "cp-entier-denombre", theme: "Combien de fraises ?", emoji: "🍓" },
   { id: "cp-entier-rang", theme: "La file du toboggan", emoji: "🛝" },
@@ -26,6 +27,12 @@ const PAYSAGES = [
   { id: "cp-entier-comparer", theme: "Qui en a le plus ?", emoji: "🐚" },
   { id: "cp-entier-dizaine", theme: "Les paquets de dix", emoji: "💐" },
   { id: "cp-entier-droite", theme: "La piste de la grenouille", emoji: "🐸" },
+  { id: "cp-entier-lire", theme: "Le bus de la piscine", emoji: "🚌" },
+  { id: "cp-entier-decomposer", theme: "La boîte à perles", emoji: "💎" },
+  { id: "cp-entier-ordinal", theme: "La tour qui touche la lune", emoji: "🌕" },
+  { id: "cp-entier-ordonner", theme: "Les bateaux rentrent au port", emoji: "⛵" },
+  { id: "cp-entier-representations", theme: "Le bal masqué des nombres", emoji: "🎭" },
+  { id: "cp-entier-defi", theme: "Les devinettes du hibou", emoji: "🦉" },
 ];
 
 const SHORTS = [
@@ -35,6 +42,12 @@ const SHORTS = [
   { id: "cp-entier-comparer-short", theme: "Les écureuils", emoji: "🐿️" },
   { id: "cp-entier-dizaine-short", theme: "Le pari des billes", emoji: "🔵" },
   { id: "cp-entier-droite-short", theme: "La fusée", emoji: "🚀" },
+  { id: "cp-entier-lire-short", theme: "La porte de mamie", emoji: "🚪" },
+  { id: "cp-entier-decomposer-short", theme: "La tirelire", emoji: "🐷" },
+  { id: "cp-entier-ordinal-short", theme: "Le petit train de la fête", emoji: "🚃" },
+  { id: "cp-entier-ordonner-short", theme: "Les cartes dans le vent", emoji: "🃏" },
+  { id: "cp-entier-representations-short", theme: "Les mains derrière le mur", emoji: "🖐️" },
+  { id: "cp-entier-defi-short", theme: "Le coffre au trésor", emoji: "🔒" },
   { id: "cp-famille-coccinelle", theme: "Compter", emoji: "🐞" },
   { id: "cp-duree-lire-heure-short", theme: "Lire l’heure", emoji: "⏰" },
   { id: "cp-masse-comparer-short", theme: "Lourd ou léger", emoji: "⚖️" },
