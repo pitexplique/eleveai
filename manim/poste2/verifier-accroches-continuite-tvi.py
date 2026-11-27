@@ -58,8 +58,17 @@ def plat(mot):
 
 
 def contenu(texte):
-    """les mots de contenu d'un texte : ni vides, ni d'une seule lettre."""
-    mots = [plat(m) for m in re.split(r"\s+", texte) if m]
+    """les mots de contenu d'un texte : ni vides, ni d'une seule lettre.
+
+    ⛔⛔ LA VIRGULE FINALE A FAIT SOUS-COMPTER CET INSTRUMENT DEPUIS SON PREMIER PASSAGE.
+    `plat` garde la virgule — il le faut, « 0,13 » est un nombre — mais du coup
+    « seule, » et « seule » étaient deux mots différents, et une carte qui écrit
+    « une seule, g est monotone » ne retrouvait jamais le « seule » de son titre.
+    Mesuré le 27/11 en préparant la fiche de relecture : la carte A de E3 `04`
+    s'affichait à 0 % alors qu'elle est à 50 %. Trouvé en LISANT la sortie, pas par un
+    contrôle — un instrument qui sous-compte se tait, c'est sa façon d'échouer.
+    ⭐ On retire la ponctuation aux DEUX BOUTS seulement : « 0,13 » reste entier."""
+    mots = [plat(m).strip(",.;:!?()[]«»'’—–-") for m in re.split(r"\s+", texte) if m]
     return {m for m in mots if m and m not in VIDES and (len(m) > 1 or m.isdigit())}
 
 
@@ -273,11 +282,86 @@ def verifier_voix():
     return 1 if ecarts else 0
 
 
+
+# ── LA FICHE DE RELECTURE (--relire) ────────────────────────────────────────────
+# ⭐⭐ Elle est GÉNÉRÉE depuis le manifeste, jamais recopiée à côté. Une liste tenue à
+# la main à côté d'un registre est l'accident déjà arrivé trois fois dans ce dépôt :
+# des pages en ligne que rien ne déclarait. Si le manifeste change, on relance ; si on
+# recopiait, la fiche vieillirait en silence.
+#
+#   python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py --relire
+#
+# Ce qu'elle met EN FACE : chaque titre et chaque accroche, et juste en dessous les six
+# cartes qu'ils annoncent, avec la mesure de recouvrement. C'est la seule disposition
+# qui permet de vérifier la règle en lisant — « une carte ne doit pas être réfutable en
+# se rappelant l'accroche, ni le titre ».
+
+FICHE = MANIFESTE.parent / "RELECTURE-continuite-tvi.md"
+
+A_TRANCHER = """## Les trois choses à trancher
+
+1. **Les 5 titres et les 5 accroches** ci-dessous. La question à se poser pour chacun :
+   *est-ce qu'un élève qui se souvient de cette phrase peut éliminer une carte sans
+   réfléchir ?* L'instrument mesure les mots, il ne mesure pas le sens.
+2. **E3, deux points volontaires** (⛔ ce ne sont pas des défauts) :
+   · son titre « Une seule fois au kilomètre cent » installe exactement le réflexe que
+     sa question `04` mesure — dont la bonne réponse est « aucune » ;
+   · la dernière puce de son accroche oppose « croissante » et « strictement
+     croissante » : elle NOMME la monotonie, qui est la bonne réponse de sa question
+     `07`. Mesure : 33 %, sous le seuil, parce qu'elle ne dit pas que c'est elle qui
+     manque dans la copie.
+3. **Les cartes écrites en symboles** (marquées ⚠ ci-dessous) : l'écran écrit
+   « ]0 ; +∞[ », la voix dit « zéro plus l'infini, crochets ouverts ». Les deux sont
+   justes, et aucune machine ne peut vérifier qu'elles disent la même chose.
+"""
+
+
+def fiche_relecture():
+    src = io.open(MANIFESTE, encoding="utf-8").read()
+    episodes = lire_episodes(src)
+    out = ["# RELECTURE — série « CONTINUITÉ ET TVI », terminale spé",
+           "",
+           "> ⛔ **FICHIER GÉNÉRÉ. Ne pas l'éditer.** On corrige",
+           "> `manim/REPRISE-continuite-tvi.md` (§ 5), puis on relance :",
+           "> `python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py --relire`",
+           "",
+           "Les titres et les accroches des 5 paysages, chacun **en face des cartes qu'il",
+           "annonce**. Rien ici n'est recopié : tout est relu dans le manifeste.",
+           "",
+           A_TRANCHER,
+           "---", ""]
+    for num, ident, titre, accroche, questions in episodes:
+        out += [f"## {num} · `{ident}`", "",
+                f"### Titre", "", f"> **{titre}**", "",
+                "### Accroche", ""]
+        out += ["> " + l if l.strip() else ">" for l in accroche.splitlines()]
+        out += ["", "### Les cartes que ce titre et cette accroche annoncent", "",
+                "| | proposition | | titre | accroche |",
+                "|---|---|---|---|---|"]
+        for cle, cartes in questions:
+            for lettre, texte, bonne in cartes:
+                pt, _ = part(texte, titre)
+                pa, _ = part(texte, accroche)
+                marque = "✅" if bonne else ""
+                symb = " ⚠" if symbolique(texte) else ""
+                out.append(f"| `{cle}` **{lettre}** | {texte}{symb} | {marque} | "
+                           f"{pt:.0%} | {pa:.0%} |")
+        out += ["", "⭐ Le pourcentage est la part des mots d'une carte que contient **un",
+                "seul segment** du titre ou de l'accroche. Au-delà de 50 %, l'instrument crie",
+                "(seuil étalonné sur les deux titres fautifs de la série espace). ⚠ = carte",
+                "écrite en symboles : non vérifiable par la machine.", "", "---", ""]
+    io.open(FICHE, "w", encoding="utf-8").write("\n".join(out) + "\n")
+    print(f"fiche écrite : {FICHE}")
+    print(f"{len(episodes)} épisodes, {sum(len(q[1]) for e in episodes for q in e[4])} cartes.")
+    return 0
+
 def main():
     if "--etalonner" in sys.argv:
         return etalonner()
     if "--voix" in sys.argv:
         return verifier_voix()
+    if "--relire" in sys.argv:
+        return fiche_relecture()
     src = io.open(MANIFESTE, encoding="utf-8").read()
     episodes = lire_episodes(src)
     alertes = 0
@@ -300,7 +384,14 @@ def main():
                     p, mots = part(texte, source)
                     if p >= SEUIL:
                         alertes += 1
-                        quoi = "DONNE LA RÉPONSE" if bonne else "ÉLIMINE UN LEURRE"
+                        # ⚠️ « DÉSIGNE », et pas « ÉLIMINE » : sur un LEURRE, un titre
+                        # qui le reprend mot pour mot peut aussi bien le faire écarter
+                        # (« c'est trop évident ») que le rendre ATTIRANT. E3 `04` en
+                        # est le cas d'école : son titre dit « une seule fois » et la
+                        # carte A dit « une seule » — mais la bonne réponse est
+                        # « aucune ». L'instrument voit le recouvrement ; le SENS de
+                        # l'effet, lui, se lit, et c'est une décision d'écriture.
+                        quoi = "DONNE LA RÉPONSE" if bonne else "DÉSIGNE UN LEURRE"
                         print(f"   ⛔ {cle} carte {lettre} — le {nom} {quoi} "
                               f"({p:.0%} de ses mots : {' '.join(sorted(mots))})")
             bonne = next(l for l, _, b in cartes if b)

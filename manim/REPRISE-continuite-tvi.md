@@ -646,6 +646,20 @@ l'oral : la carte A fait 17 mots dits. À surveiller au moment de l'écran — `
 plafonne à trois lignes de quatorze caractères, et la question ne doit pas dépasser deux
 lignes sinon le bloc descend sur Ti-Margo.
 
+### ⛔⛔ « La virgule finale » — l'instrument sous-comptait depuis son premier passage
+
+Trouvé le 27/11 au soir, **en lisant sa sortie**, pas par un contrôle : la fiche de
+relecture annonçait **0 %** entre la carte « une seule, g est monotone » et le titre
+« Une seule fois au kilomètre cent ». `plat()` garde la virgule — il le faut, « 0,13 »
+est un nombre — donc « seule, » et « seule » étaient deux mots différents. **Tout mot
+suivi d'une virgule était invisible à l'instrument.**
+
+⭐ Corrigé : la ponctuation est retirée aux DEUX BOUTS seulement, « 0,13 » reste entier.
+L'étalon continue de séparer les quatre cas connus (50 / 50 contre 0 / 0), et la série
+passe de 0 à **2 alertes**.
+⛔ La leçon : **un instrument qui sous-compte se tait — c'est sa façon d'échouer.** Un
+zéro n'est une bonne nouvelle que si on a vu l'instrument crier au moins une fois.
+
 ### Ce qu'il ne voit pas (écrit dans son en-tête, à ne pas oublier)
 
 - ⛔ il compare des **mots**, pas du sens : « il n'y a aucune solution » et « le théorème
@@ -656,13 +670,15 @@ lignes sinon le bloc descend sur Ti-Margo.
 
 ### Le résultat, épisode par épisode
 
-**5 épisodes, 30 cartes, 0 alerte au-dessus de 50 %.** Recouvrement maximal mesuré :
+⚠️ **CHIFFRES CORRIGÉS LE 27/11 AU SOIR** — l'instrument sous-comptait (voir plus bas,
+« la virgule finale »). Il annonçait 0 alerte ; après correction il en trouve **2**,
+les deux sur E3 `04` carte A. Recouvrement maximal, mesure juste :
 
 | épisode | `04` | `07` | titre réfute-t-il une carte ? | `02-idee` ≠ `04` ≠ `07` |
 |---|---|---|---|---|
 | E1 | 33 % | 0 % | non | ✅ 3 cas |
 | E2 | 0 % | 40 % | non | ✅ 3 cas |
-| E3 | 20 % | 33 % | non (⚠️ voir ci-dessous) | ✅ 3 cas |
+| E3 | **50 %** ⛔ | 33 % | ⚠️ voir ci-dessous — c'est LA décision à prendre | ✅ 3 cas |
 | E4 | 0 % | 33 % | non | ✅ 3 cas |
 | E5 | 0 % | 0 % | non | ✅ 3 cas |
 
@@ -697,7 +713,7 @@ coûte un WAV et un rendu.
 | # | étape | état |
 |---|---|---|
 | 1 | manifeste des 5 épisodes | ✅ **ce fichier** |
-| 1 bis | contre-contrôle outillé des titres et des accroches, avec son étalon | ✅ 30 cartes, 0 alerte |
+| 1 bis | contre-contrôle outillé des titres et des accroches, avec son étalon | ⚠️ 30 cartes, **2 alertes**, les deux sur E3 `04` A |
 | 1 ter | **passe maths du manifeste**, recalculée | ✅ 59 contrôles, 0 erreur |
 | 2 | relecture de Frédéric : les 5 titres, les 5 accroches, les 2 points du § 6 | ⏳ **le prochain geste** |
 | 3 | `manim/poste2/VOIX-continuite-tvi.md` — 5 × 15 clips, tout en toutes lettres | ✅ **les 75 clips écrits** |
@@ -789,7 +805,7 @@ signale. On écrit le texte, on n'enregistre pas.
 ⭐ **Les trois commandes qui disent où on en est**, à relancer après chaque retouche :
 
 ```
-python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py            # 30 cartes, 0 alerte
+python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py            # 30 cartes, 2 alertes (E3)
 python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py --voix     # 30 cartes, 0 écart
 python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py --etalonner  # 4 cas, 0 désaccord
 python -X utf8 manim/poste2/controler-maths-continuite-tvi.py               # 73 contrôles, 0 erreur
@@ -951,7 +967,8 @@ python -X utf8 manim/poste2/controler-maths-continuite-tvi.py
 python -X utf8 manim/poste2/mesure-continuite-tvi.py
 ```
 
-Attendus, au 27/11 : 30 cartes / 0 alerte · 30 cartes / 0 écart · 4 cas / 0 désaccord ·
+Attendus, au 27/11 au soir : 30 cartes / **2 alertes, les deux sur E3 `04` A** ·
+30 cartes / 0 écart · 4 cas / 0 désaccord ·
 73 contrôles / 0 erreur · 10 questions / 0 ennui.
 
 **Les WAV, quand le feu passera au vert** — le script est écrit, il n'a jamais tourné :
@@ -993,13 +1010,18 @@ Ils sont détaillés au § 6, et ils attendent la parole de Frédéric. **Ce ne 
 défauts** : ce sont des choix d'écriture, et quelqu'un qui les prendrait pour des
 erreurs abîmerait la série.
 
-1. **E3, le titre** — « Une seule fois au kilomètre cent » installe **exactement** le
-   réflexe que la question `04` mesure (sa bonne réponse est « aucune »). Il ne donne
-   aucune réponse : il tend un piège, et c'est voulu.
+1. ⛔ **E3, le titre — MESURÉ À 50 %, le même niveau que les deux fautes de la série
+   espace.** « Une seule fois au kilomètre cent » reprend mot pour mot la carte A de
+   `04` (« une seule, g est monotone »), et la bonne réponse est « aucune ».
+   ⭐ **Mais le sens de l'effet est l'INVERSE de celui des deux fautes connues** : là-bas
+   le titre réfutait une carte, ici il rend un LEURRE attirant. L'instrument voit le
+   recouvrement, il ne voit pas le sens — il dit « DÉSIGNE UN LEURRE » et s'arrête là.
+   C'est donc une décision d'écriture, et c'est **la seule vraie décision de la série** :
+   ou bien le piège est voulu (et il fait travailler), ou bien le titre change.
+   ⚠️ L'accroche porte le même mot (50 % aussi) : la changer suppose de changer les deux.
 2. **E3, la dernière puce de l'accroche** — elle oppose « croissante » et « strictement
    croissante », donc elle **nomme** la monotonie, qui est la carte B de `07`. Mesure :
    33 %, sous le seuil, parce qu'elle ne dit pas que c'est elle qui manque dans la copie.
-   C'est l'endroit le plus serré de la série.
 
 ⚠️ Et les **7 cartes écrites en symboles** (tableau du § 6) : la voix les dit en toutes
 lettres, aucune machine ne peut vérifier qu'elle dit la même chose. E5 `07` y met ses
