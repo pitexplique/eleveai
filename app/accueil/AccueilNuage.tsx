@@ -14,6 +14,8 @@ import { CollinesAccueil } from "@/components/accueil/dessins/PaysageAccueil";
 import RechercheEntete from "@/components/accueil/RechercheEntete";
 import NuageAccueil from "@/components/accueil/NuageAccueil";
 import BandeauNoel from "@/components/accueil/BandeauNoel";
+import FondNoel from "@/components/accueil/FondNoel";
+import { saisonDeNoel } from "@/lib/noel/saison";
 import { BandeChiffres, EncartsFamilleProf } from "@/components/accueil/CompteurFamille";
 import { ChoisisTaClasse } from "./AccueilCeo";
 
@@ -29,9 +31,12 @@ export default function AccueilNuage() {
       {/* 1. LE TITRE ET LE NUAGE : chacun choisit par où commencer. */}
       <section className="relative overflow-hidden bg-gradient-to-b from-sky-100 via-emerald-50 to-emerald-50">
         <CollinesAccueil className="absolute inset-x-0 bottom-0 h-[150px] w-full sm:h-[200px]" />
-        <div className="relative mx-auto max-w-6xl px-4 pb-8 pt-6 sm:pb-12 sm:pt-8">
-          <h1 className={`${slab.className} text-center text-[1.6rem] font-bold leading-tight text-teal-800 sm:text-4xl lg:text-5xl`}>
-            Progressons ensemble en maths, <span className="whitespace-nowrap text-sky-700">chaque jour.</span>
+        {/* 🎅 27/11 : la nuit de Noël (petit traîneau, guirlandes, flocons de Koch), du 1er décembre
+            au 6 janvier ; ?noel=1 pour la voir avant. Elle passe le titre en blanc (CSS dans FondNoel). */}
+        <FondNoel actif={saisonDeNoel(new Date())} />
+        <div className="accueil-haut relative mx-auto max-w-6xl px-4 pb-8 pt-6 sm:pb-12 sm:pt-8">
+          <h1 className={`${slab.className} accueil-titre text-center text-[1.6rem] font-bold leading-tight text-teal-800 sm:text-4xl lg:text-5xl`}>
+            Progressons ensemble en maths, <span className="accueil-titre-2 whitespace-nowrap text-sky-700">chaque jour.</span>
           </h1>
           <div className="mt-5">
             {/* « Parent ou prof ? Par ici ↓ » est dans le nuage (25/11) : caché pour un élève ou un prof connecté. */}
