@@ -44,7 +44,7 @@ export default function TarifsJustesClient() {
             </p>
 
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-50">
-              Pourquoi {montant(OFFRE.famille)} par mois, et pas dix fois plus
+              Pourquoi {montant(OFFRE.eleve)} par mois, et pas dix fois plus
             </h1>
 
             <p className="max-w-3xl text-slate-300">
@@ -58,10 +58,10 @@ export default function TarifsJustesClient() {
             <div className="rounded-2xl border border-emerald-500/30 bg-slate-900/60 p-4 sm:p-5">
               <p className="text-sm font-semibold text-emerald-300">À retenir</p>
               <ul className="mt-2 text-sm text-slate-200 space-y-1">
-                <li>• {OFFRE.questionsGratuitesParJour} questions offertes chaque jour. Puis {montant(OFFRE.famille)} par mois pour toute la famille.</li>
+                <li>• {OFFRE.questionsGratuitesParJour} questions offertes chaque jour. Puis {montant(OFFRE.eleve)} par mois pour un enfant, {montant(OFFRE.famille)} pour la famille, jusqu&apos;à 3 enfants.</li>
                 <li>• Aucun investisseur à rémunérer, aucun commercial à payer.</li>
                 <li>• L&apos;IA démultiplie le travail, l&apos;enseignant vérifie. Jamais l&apos;un sans l&apos;autre.</li>
-                <li>• Un prix rond, sans dépassement ni facture surprise.</li>
+                <li>• Un prix clair, sans dépassement ni facture surprise.</li>
               </ul>
             </div>
           </header>
@@ -98,7 +98,7 @@ export default function TarifsJustesClient() {
             Les exercices, les corrections et les explications sont produits avec
             l&apos;aide de l&apos;intelligence artificielle. C&apos;est ce qui
             permet d&apos;écrire en un mois ce qui prenait des années, et donc de
-            demander {montant(OFFRE.famille)} par mois.
+            demander {montant(OFFRE.eleve)} par mois.
           </p>
           <p className="text-sm text-slate-200">
             Mais les deux moitiés de cette phrase ne se séparent jamais. Un
@@ -211,8 +211,8 @@ export default function TarifsJustesClient() {
                 Le détail des offres est sur la page tarifs
               </h2>
               <p className="text-sm text-slate-300 max-w-2xl">
-                Une famille, ou une classe que son professeur organise — et pas
-                un élève à compter. Le même prix rond pour les deux.
+                Un enfant, une famille jusqu&apos;à trois enfants, ou les classes
+                d&apos;un professeur : trois offres, sans engagement.
               </p>
             </div>
 

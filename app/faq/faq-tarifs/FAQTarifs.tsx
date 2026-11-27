@@ -27,7 +27,7 @@ import { VENTE } from "@/lib/legal/editeur";
 // réponse qui reste ici reste dans le JSON-LD.
 // ⭐ 22/11/2026 — RÉÉCRITE AU MODÈLE DU 22/11 (note modele-tarifaire-22-11).
 // Ancienne FAQ (« l'élève ne paie jamais », prof gratuit) : git show 664275b6:app/faq/faq-tarifs/FAQTarifs.tsx
-import { MENTION_TVA, OFFRE, OUVERTURE_SUIVI, PHRASE_A_VENIR, PHRASE_ESSAI, PHRASE_FAMILLE, PHRASE_PROF, montant } from "@/lib/tarifs";
+import { ENFANT_EN_PLUS, FORMULES_FAMILLE, MENTION_TVA, OFFRE, OUVERTURE_SUIVI, PHRASE_A_VENIR, PHRASE_ELEVE, PHRASE_ESSAI, PHRASE_FAMILLE, PHRASE_PROF, montant } from "@/lib/tarifs";
 
 export default function FAQTarifs() {
   // La même phrase que sur /tarifs et dans le llms.txt : tant que Stripe
@@ -48,11 +48,11 @@ export default function FAQTarifs() {
     },
     {
       q: "Combien coûte le compte Famille ?",
-      a: `${PHRASE_FAMILLE}. Un seul compte par courriel. Il ne contient pas d'aide par l'IA. ${MENTION_TVA}.`,
+      a: `Famille : ${PHRASE_FAMILLE}. Un seul compte par courriel. Il ne contient pas d'aide par l'IA. ${MENTION_TVA}.`,
     },
     {
       q: "Par enfant ou par famille ?",
-      a: `Par famille, quel que soit le nombre d'enfants. Le frère ou la sœur d'à côté ne coûte rien de plus : ${montant(OFFRE.famille)} par mois pour toute la maison.`,
+      a: `Les deux. Pour un enfant, le compte Élève : ${PHRASE_ELEVE}. Pour plusieurs, le compte Famille : ${montant(OFFRE.famille)} par mois jusqu'à ${FORMULES_FAMILLE.famille.enfants} enfants, chacun avec son tableau de bord, puis ${montant(ENFANT_EN_PLUS.mensuel)} par mois par enfant en plus.`,
     },
     {
       q: "Et si je suis professeur ?",
@@ -67,7 +67,7 @@ export default function FAQTarifs() {
       a: "Elle viendra dans une option Premium : Ti Margo donne un indice, puis un autre, sans donner la réponse. Pour les moins de 15 ans, c'est le parent qui l'active. Son prix sera annoncé plus tard.",
     },
     {
-      q: "Une formule à l'année ? D'autres pays ?",
+      q: "D'autres pays ? L'option Premium ?",
       a: PHRASE_A_VENIR,
     },
     {
@@ -122,8 +122,8 @@ export default function FAQTarifs() {
             citait le bon montant à côté du mauvais payeur, et c'est ce qui l'a
             rendue invisible à toutes les relectures. */}
         <p className="text-slate-300 text-sm leading-relaxed">
-          {OFFRE.questionsGratuitesParJour} questions offertes chaque jour. Puis {montant(OFFRE.famille)} par mois
-          pour toute la famille, ou {montant(OFFRE.prof)} par mois pour toutes vos classes. {etatVente}
+          {OFFRE.questionsGratuitesParJour} questions offertes chaque jour. Puis {montant(OFFRE.eleve)} par mois
+          pour un enfant, {montant(OFFRE.famille)} par mois pour la famille, ou {montant(OFFRE.prof)} par mois pour toutes vos classes. {etatVente}
         </p>
 
         <section className="space-y-4">

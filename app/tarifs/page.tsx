@@ -10,7 +10,7 @@ import TarifsClient from "./TarifsClient";
 // encore. C'est exactement la leçon de `retirer-du-sitemap-ne-ferme-rien` :
 // retirer une carte n'éteint pas une page, il faut éteindre les quatre
 // endroits — la carte, la description, le JSON-LD et le llms.txt.
-import { OFFRE, montant } from "@/lib/tarifs";
+import { FORMULES_FAMILLE, OFFRE, montant } from "@/lib/tarifs";
 
 const url = "https://www.eleveai.fr/tarifs";
 
@@ -18,11 +18,11 @@ const url = "https://www.eleveai.fr/tarifs";
 // est ce que Google affiche : il suit le texte visible, ses prix viennent de
 // lib/tarifs.ts. ⛔ Aucun prix non validé (année, Premium, pays, établissements).
 const resume =
-  `${OFFRE.questionsGratuitesParJour} questions offertes chaque jour pour essayer. Famille : ${montant(OFFRE.famille)} par mois, autant d'enfants que vous voulez, du CP à la Terminale. ` +
+  `${OFFRE.questionsGratuitesParJour} questions offertes chaque jour pour essayer. Élève : ${montant(OFFRE.eleve)} par mois. Famille : ${montant(OFFRE.famille)} par mois jusqu'à ${FORMULES_FAMILLE.famille.enfants} enfants, du CP à la Terminale. ` +
   `Prof : ${montant(OFFRE.prof)} par mois, toutes vos classes. Les fiches de cours, les énigmes à projeter et les PDF restent libres.`;
 
 export const metadata: Metadata = {
-  title: `Tarifs — ${montant(OFFRE.famille)} par mois pour la famille ou le prof`,
+  title: `Tarifs — dès ${montant(OFFRE.eleve)} par mois, du CP à la Terminale`,
   description: resume,
   alternates: { canonical: url },
   /* ✅ 02/11/2026 : `noindex` levé (il datait du 09/09, « je veux plus voir des

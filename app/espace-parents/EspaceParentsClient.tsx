@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import { VENTE } from "@/lib/legal/editeur";
-import { OFFRE, PRIX_MENSUEL, PRIX_PUBLICS, montant } from "@/lib/tarifs"; // 22/11/2026 : au mois (l'année n'est pas validée)
+import { ENFANT_EN_PLUS, FORMULES_FAMILLE, OFFRE, PRIX_MENSUEL, PRIX_PUBLICS, montant } from "@/lib/tarifs"; // 27/11/2026 : Élève 4,95 € (1 enfant), Famille 7,95 € (jusqu'à 3 enfants)
 
 // ─────────────────────────────────────────────────────────────────────────────
 // LA FENÊTRE DU PARENT, REFAITE LE 21/08/2026.
@@ -300,7 +300,7 @@ export default function EspaceParentsClient() {
                     </span>
                   </p>
                   <p className="mt-1 text-sm font-black text-emerald-700">
-                    Une adresse courriel, autant d&apos;enfants que vous voulez
+                    Famille, jusqu&apos;à {FORMULES_FAMILLE.famille.enfants} enfants ({montant(ENFANT_EN_PLUS.mensuel)} par enfant en plus). Pour un seul enfant : {montant(OFFRE.eleve)} par mois.
                   </p>
 
                   {venteOuverte ? (
@@ -329,7 +329,7 @@ export default function EspaceParentsClient() {
               ) : (
                 <>
                   <p className="mt-4 text-sm font-black text-emerald-700">
-                    Une adresse courriel, autant d&apos;enfants que vous voulez
+                    Famille, jusqu&apos;à {FORMULES_FAMILLE.famille.enfants} enfants ({montant(ENFANT_EN_PLUS.mensuel)} par enfant en plus). Pour un seul enfant : {montant(OFFRE.eleve)} par mois.
                   </p>
                   <p className="mt-3 text-xs font-bold text-slate-500">
                     Cette vue se construit en ce moment, et sa formule est en

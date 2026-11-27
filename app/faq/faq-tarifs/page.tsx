@@ -11,9 +11,9 @@ import FAQTarifs from "./FAQTarifs";
 // la page dont les réponses partent en plus dans un `FAQPage`. Retirer la carte
 // n'éteint rien tant que la description dit le contraire.
 // 22/11/2026 : au modèle du 22/11 (note modele-tarifaire-22-11).
-import { PHRASE_ESSAI, PHRASE_FAMILLE, PHRASE_PROF } from "@/lib/tarifs";
+import { PHRASE_ELEVE, PHRASE_ESSAI, PHRASE_FAMILLE, PHRASE_PROF } from "@/lib/tarifs";
 
-const resume = `${PHRASE_ESSAI} Famille : ${PHRASE_FAMILLE}. Prof : ${PHRASE_PROF}.`;
+const resume = `${PHRASE_ESSAI} Élève : ${PHRASE_ELEVE}. Famille : ${PHRASE_FAMILLE}. Prof : ${PHRASE_PROF}.`;
 
 export const metadata: Metadata = {
   title: "FAQ Tarifs",

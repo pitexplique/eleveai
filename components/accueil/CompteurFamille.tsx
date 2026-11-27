@@ -99,7 +99,7 @@ export function EncartsFamilleProf() {
         <div className="mt-auto pt-4">
           {PRIX_SUR_ACCUEIL && (
             <p className="mb-3 text-lg font-black text-slate-900">
-              {montant(OFFRE.famille)} par mois, <span className="whitespace-nowrap">tous vos enfants</span>
+              dès {montant(OFFRE.eleve)} par mois, <span className="whitespace-nowrap">du CP à la Terminale</span>
             </p>
           )}
           <Link
@@ -229,7 +229,7 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
               </li>
             </ul>
             {/* ⭐ 22/11/2026 — LE MODÈLE DU 22/11 (note modele-tarifaire-22-11) :
-                Famille 10 €/mois, autant d'enfants qu'on veut, toutes les classes,
+                Famille 10 €/mois (27/11 : Élève 4,95 €, Famille 7,95 € jusqu'à 3 enfants), toutes les classes,
                 sans IA. Fini le « Suivi » à 7,95 €, les aides de Ti Margo comptées
                 et le « gratuit pour commencer ». ⛔ Prix venus de lib/tarifs.ts. */}
             <p className="mt-1.5 text-sm font-black text-sky-800">Vous savez où ils en sont :</p>
@@ -246,7 +246,7 @@ export default function CompteurFamille({ variante }: { variante: VarianteCompte
               ))}
             </ul>
             <p className="mt-2 text-base font-black text-slate-900">
-              {montant(OFFRE.famille)} par mois, <span className="whitespace-nowrap">tous vos enfants</span>
+              dès {montant(OFFRE.eleve)} par mois, <span className="whitespace-nowrap">du CP à la Terminale</span>
             </p>
             <p className="text-xs font-bold text-slate-600">
               Du CP à la Terminale, un seul compte. Ouverture {OUVERTURE_SUIVI}.

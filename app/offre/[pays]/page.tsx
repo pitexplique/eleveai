@@ -60,7 +60,7 @@ export default async function OffrePays({ params }: { params: Promise<{ pays: st
     "Un bilan de départ : ce que votre enfant sait, et ce qui lui manque",
     "Un compte rendu chaque semaine, et une alerte quand il décroche",
     `La préparation ciblée des examens : ${o.examens}`,
-    "Un seul paiement pour tous les enfants de la maison",
+    "Un seul compte pour jusqu'à 3 enfants de la maison",
   ];
 
   return (

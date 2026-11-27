@@ -167,7 +167,7 @@ export const PRIX_PUBLICS = VENTE.ouverte; // 05/11/2026 : un seul interrupteur,
  * ⚠️ Il se dit toujours AU MOIS. « 30 € par an » est le même montant et le
  * mauvais nombre — c'est celui qui fait renoncer.
  */
-export const PRIX_MENSUEL = 10; // ✅ 22/11/2026, Frédéric : Famille 10 €/mois, prix ronds (« ma femme ne veut pas 9,95 € mais 10 € »). Avant : 7,95 € le 19/11, Frédéric : « mets les prix à 7,95 € » (était 4,95 €, 2,50 € avant)
+export const PRIX_MENSUEL = 7.95; // ✅ 27/11/2026, Frédéric : Famille (jusqu'à 3 enfants) 7,95 €/mois ; prix ronds abandonnés (« on va se baser sur ce que font tout le monde »). Avant : 10 € le 22/11/2026, Frédéric : Famille 10 €/mois, prix ronds (« ma femme ne veut pas 9,95 € mais 10 € »). Avant : 7,95 € le 19/11, Frédéric : « mets les prix à 7,95 € » (était 4,95 €, 2,50 € avant)
 
 /**
  * ⭐ 19,90 € POUR L'ANNÉE SCOLAIRE — la formule à recommander.
@@ -177,7 +177,7 @@ export const PRIX_MENSUEL = 10; // ✅ 22/11/2026, Frédéric : Famille 10 €/m
  * suivant, il s'arrête avec l'année scolaire. Le taire, c'est vendre onze mois
  * pour cinq — et c'est le genre de silence qui se retrouve en litige.
  */
-export const PRIX_ANNUEL = 100; // ⏳ 22/11/2026 : 100 €/an PROPOSÉ, PAS VALIDÉ — ni l'accueil ni /tarifs ne l'affichent. Avant : 79 € le 19/11 : 79 € par an = 10 mois, « 2 mois offerts » (était 49 €, 39 € avant)
+export const PRIX_ANNUEL = 79; // ✅ 27/11/2026 : Famille 79 €/an = 10 mois (validé avec la grille). Avant : 100 € proposé le 22/11, jamais affiché. Avant : 79 € le 19/11 : 79 € par an = 10 mois, « 2 mois offerts » (était 49 €, 39 € avant)
 
 /**
  * La période que couvre l'abonnement annuel. ⛔ MENTION OBLIGATOIRE : elle
@@ -185,6 +185,19 @@ export const PRIX_ANNUEL = 100; // ⏳ 22/11/2026 : 100 €/an PROPOSÉ, PAS VAL
  */
 export const PERIODE_ANNUELLE =
   "par an (2 mois offerts)"; // 19/11/2026 : abonnement annuel Stripe (suivi_yearly), plus l'année scolaire
+
+/**
+ * ⭐⭐ LA GRILLE FAMILLES DU 27/11/2026 (Frédéric, note modele-tarifaire-27-11).
+ * Élève = 1 enfant ; Famille = jusqu'à 3 enfants ; au-delà, chaque enfant en
+ * plus. L'année = 10 mois. Aucune IA dans ces offres (Premium à venir).
+ * ⏳ Stripe n'est pas encore branché sur cette grille (prévu le 28/11).
+ */
+export const FORMULES_FAMILLE = {
+  eleve: { nom: "Élève", enfants: 1, mensuel: 4.95, annuel: 49 },
+  famille: { nom: "Famille", enfants: 3, mensuel: PRIX_MENSUEL, annuel: PRIX_ANNUEL },
+} as const;
+/** Le 4e enfant et les suivants, sur l'offre Famille. L'année (40 €) suit la règle des 10 mois. */
+export const ENFANT_EN_PLUS = { mensuel: 4, annuel: 40 } as const;
 
 /** Ce que coûterait une année entière payée au mois : 30 €. Sert au calcul. */
 export const ANNUEL_AU_TARIF_MENSUEL = PRIX_MENSUEL * 12;
@@ -609,7 +622,9 @@ export const SUIVI = {
 export const OFFRE = {
   /** UN compteur pour tout le site, par navigateur, sans compte. */
   questionsGratuitesParJour: 10,
-  /** Famille : autant d'enfants qu'on veut, toutes les classes, sans IA. */
+  /** 27/11 : Élève, 1 enfant, toutes les classes, sans IA. */
+  eleve: FORMULES_FAMILLE.eleve.mensuel,
+  /** 27/11 : Famille, jusqu'à 3 enfants (+ ENFANT_EN_PLUS au-delà), toutes les classes, sans IA. */
   famille: PRIX_MENSUEL,
   /** Prof : toutes ses classes, sans IA ; ses codes élèves marchent quand il est connecté. */
   prof: 10,
@@ -621,10 +636,11 @@ export const OFFRE = {
 
 /** ⭐ 22/11/2026 — les phrases du modèle, écrites une fois pour toutes les pages. */
 export const PHRASE_ESSAI = `${OFFRE.questionsGratuitesParJour} questions offertes chaque jour, sans compte. Les fiches de cours, les énigmes à projeter et les PDF restent libres.`;
-export const PHRASE_FAMILLE = `${montant(OFFRE.famille)} par mois, autant d'enfants que vous voulez, du CP à la Terminale, sans engagement`;
+export const PHRASE_ELEVE = `${montant(OFFRE.eleve)} par mois ou ${montant(FORMULES_FAMILLE.eleve.annuel)} par an pour un enfant, du CP à la Terminale, sans engagement`;
+export const PHRASE_FAMILLE = `${montant(OFFRE.famille)} par mois ou ${montant(PRIX_ANNUEL)} par an jusqu'à ${FORMULES_FAMILLE.famille.enfants} enfants, puis ${montant(ENFANT_EN_PLUS.mensuel)} par mois par enfant en plus, du CP à la Terminale, sans engagement`;
 export const PHRASE_PROF = `${montant(OFFRE.prof)} par mois, toutes vos classes, sans engagement`;
 /** ⏳ Non validé le 22/11 : l'année, l'essai prof, le Premium, les pays, les établissements. */
-export const PHRASE_A_VENIR = "La formule à l'année et les prix des autres pays seront fixés avant l'ouverture.";
+export const PHRASE_A_VENIR = "Les prix des autres pays et l'option Premium (l'aide de Ti Margo) seront fixés avant l'ouverture."; // 27/11 : l'année est fixée
 
 /** La phrase principale de l'offre, écrite une fois. ⛔ Jamais « illimité » ni « sans limite ». */
 export const PHRASE_OFFRE = `Inscris-toi gratuitement. Pour le vrai suivi : ${montant(PRIX_MENSUEL)}/mois ou ${montant(PRIX_ANNUEL)}/an (${MOIS_OFFERTS} mois offerts).`;

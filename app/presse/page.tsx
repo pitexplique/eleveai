@@ -125,8 +125,9 @@ export default function PressePage() {
                     {/* 22/11/2026 : au modèle du 22/11 (note modele-tarifaire-22-11). */}
                     {OFFRE.questionsGratuitesParJour} questions offertes chaque jour pour
                     essayer, sans publicité. Les fiches de cours, les énigmes à projeter
-                    et les PDF restent libres. Puis un abonnement : {montant(OFFRE.famille)} par
-                    mois pour une famille, quel que soit le nombre d’enfants, ou{" "}
+                    et les PDF restent libres. Puis un abonnement : {montant(OFFRE.eleve)} par
+                    mois pour un enfant, {montant(OFFRE.famille)} par mois pour une famille
+                    jusqu’à 3 enfants, ou{" "}
                     {montant(OFFRE.prof)} par mois pour un professeur et toutes ses
                     classes. En classe, avec le code du professeur, les élèves ne
                     sont jamais comptés.{" "}

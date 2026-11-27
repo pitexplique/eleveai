@@ -317,7 +317,7 @@ export default function AccueilSuivi({ offresFamille, compteur }: { offresFamill
               { Icone: PlayCircle, titre: "Avec ses vidéos", texte: "Chaque micro-compétence a sa vidéo, avec des questions-pauses, pour comprendre avant de s'entraîner." },
               { Icone: Globe2, titre: "8 pays, puis 40", texte: "Adapté au programme de 8 pays francophones aujourd'hui, et demain de 40." },
               // 22/11/2026 : « Offert à chaque élève » contredit le modèle du 22/11 (10 questions par jour, puis l'abonnement).
-              { Icone: Users, titre: "10 questions par jour", texte: `${OFFRE.questionsGratuitesParJour} questions offertes chaque jour pour essayer. Puis ${montant(OFFRE.famille)} par mois pour toute la famille.` },
+              { Icone: Users, titre: "10 questions par jour", texte: `${OFFRE.questionsGratuitesParJour} questions offertes chaque jour pour essayer. Puis dès ${montant(OFFRE.eleve)} par mois, ${montant(OFFRE.famille)} pour la famille.` },
             ].map(({ Icone, titre, texte }) => (
               <div key={titre} className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-teal-100">
                 <Icone className="h-7 w-7 text-teal-700" aria-hidden="true" />

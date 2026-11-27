@@ -33,16 +33,18 @@ import type { Metadata } from "next";
 // le suivi famille ouvre fin décembre, prix par pays, vidéothèque entière
 // (3 500 vidéos, 500 sur YouTube). L'enfant garde le coach sans abonnement.
 // ⭐ 22/11/2026 — ALIGNÉE SUR LE MODÈLE DU 22/11 (note modele-tarifaire-22-11) :
-// 10 questions par jour, Famille 10 €/mois (enfants illimités), Prof 10 €/mois.
+// 10 questions par jour ; 27/11 : Élève 4,95 €/mois (1 enfant), Famille 7,95 €/mois (jusqu'à 3 enfants), Prof 10 €/mois.
 import {
   OFFRE,
   OUVERTURE_SUIVI,
-  PRIX_MENSUEL,
   montant,
   MENTION_TVA,
   PHRASE_A_VENIR,
   PHRASE_ESSAI,
+  PHRASE_ELEVE,
   PHRASE_FAMILLE,
+  FORMULES_FAMILLE,
+  ENFANT_EN_PLUS,
   PHRASE_PROF,
 } from "@/lib/tarifs";
 import { etatCompteurVideos } from "@/lib/videos/compteur";
@@ -58,7 +60,7 @@ export const metadata: Metadata = {
      la SERP : ce texte est ce que Google affiche sous le lien, et il s'y
      périme plus lentement que la page — une grille annoncée ici survit des
      semaines à la carte qui l'a produite (« 4,90 €/mois », voir lib/tarifs.ts). */
-  description: `${PHRASE_ESSAI} Le compte Famille ouvre ${OUVERTURE_SUIVI} : ${PHRASE_FAMILLE}.`,
+  description: `${PHRASE_ESSAI} Les comptes ouvrent ${OUVERTURE_SUIVI}. Élève : ${montant(OFFRE.eleve)} par mois. Famille : ${montant(OFFRE.famille)} par mois jusqu'à ${FORMULES_FAMILLE.famille.enfants} enfants.`,
   alternates: { canonical: "https://www.eleveai.fr/parents" },
 };
 
@@ -115,7 +117,7 @@ const faq = [
        le coût donne à croire qu'on l'esquive. */
     q: "Combien ça coûte, pour moi ?",
     // 22/11/2026 : le modèle du 22/11 (note modele-tarifaire-22-11).
-    a: `Rien pour essayer : ${PHRASE_ESSAI} Le compte Famille ouvre ${OUVERTURE_SUIVI} : ${PHRASE_FAMILLE}. ${MENTION_TVA}. ${PHRASE_A_VENIR}`,
+    a: `Rien pour essayer : ${PHRASE_ESSAI} Les comptes ouvrent ${OUVERTURE_SUIVI}. Élève : ${PHRASE_ELEVE}. Famille : ${PHRASE_FAMILLE}. ${MENTION_TVA}. ${PHRASE_A_VENIR}`,
   },
   {
     // ⭐ LA QUESTION QUE POSE LA COMPARAISON AVEC LES CONCURRENTS, et la seule
@@ -421,7 +423,8 @@ export default function ParentsPage() {
                   des CGV), donc garder l'un sans l'autre serait un défaut de
                   mention, pas une demi-mesure. */}
               <p className="mt-2 text-3xl font-black leading-tight text-slate-900">
-                {montant(PRIX_MENSUEL)}
+                <span className="text-base font-black text-slate-500">dès </span>
+                {montant(OFFRE.eleve)}
                 <span className="ml-1 align-middle text-base font-black text-slate-500">
                   par mois
                 </span>
@@ -436,7 +439,7 @@ export default function ParentsPage() {
                   ["📊", "Un bilan de départ, puis un compte rendu chaque semaine"],
                   ["📌", "Les erreurs qui reviennent, et les 3 choses à revoir"],
                   ["🔔", "Une alerte quand il décroche sur une notion"],
-                  ["👪", "Autant d'enfants que vous voulez, une seule adresse courriel"],
+                  ["👪", `Un enfant : ${montant(OFFRE.eleve)} par mois. Jusqu'à ${FORMULES_FAMILLE.famille.enfants} enfants : ${montant(OFFRE.famille)} par mois, puis ${montant(ENFANT_EN_PLUS.mensuel)} par enfant en plus`],
                 ].map(([emoji, texte]) => (
                   <li key={texte} className="flex gap-2.5 text-sm font-semibold leading-relaxed text-slate-700">
                     <span aria-hidden="true">{emoji}</span>

@@ -108,7 +108,8 @@ export function composerDemandeDuSuivi(r: RapportEnfant, code: string, expire: D
   const jusquau = expire.toLocaleDateString("fr-FR", { timeZone: "Indian/Reunion", day: "numeric", month: "long" });
   // ⭐ 22/11/2026 : le modèle du 22/11 (note modele-tarifaire-22-11) — au mois
   // seulement, l'année n'est pas validée ; le prix de lancement est retiré.
-  const prix = `${montant(OFFRE.famille)} par mois sans engagement, autant d'enfants que vous voulez`;
+  // 27/11/2026 : Élève 4,95 € (1 enfant), Famille 7,95 € (jusqu'à 3 enfants).
+  const prix = `${montant(OFFRE.eleve)} par mois pour un enfant, ou ${montant(OFFRE.famille)} par mois jusqu'à 3 enfants, sans engagement`;
   const html = `<div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:560px;margin:0 auto;color:#0f172a;line-height:1.6;font-size:15px">
 <p style="margin:0">Bonjour,</p>
 <p style="margin:8px 0">${echap(r.prenom)} travaille les maths sur EleveAI et vous envoie son bilan de la semaine.</p>

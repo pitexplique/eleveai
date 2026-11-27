@@ -31,7 +31,7 @@
 // ⛔ Les quatre constantes `*_ETABLISSEMENT*` ne s'importent plus ici depuis le
 // 31/08/2026 : ce fichier est lu par les modèles de langage, et il annonçait un
 // abonnement établissement que Frédéric n'a pas le droit de vendre.
-import { OFFRE, OUVERTURE_SUIVI, montant } from "@/lib/tarifs";
+import { ENFANT_EN_PLUS, FORMULES_FAMILLE, OFFRE, OUVERTURE_SUIVI, montant } from "@/lib/tarifs";
 import { VENTE } from "@/lib/legal/editeur";
 
 const SITE = "https://www.eleveai.fr";
@@ -57,13 +57,14 @@ const etatVente = VENTE.ouverte
   ? `Les abonnements sont ouverts.`
   : `Les abonnements ouvrent ${OUVERTURE_SUIVI} : rien ne peut être payé pour l'instant, et tout le site reste ouvert pendant sa construction.`;
 
-const blocGrille = `### Les tarifs (décidés le 22/11/2026)
+const blocGrille = `### Les tarifs (décidés le 22/11/2026, grille familles du 27/11/2026)
 
 - **${OFFRE.questionsGratuitesParJour} questions offertes chaque jour, sans compte**, sur tout le site (un seul compteur : coach, exercices interactifs, calcul rapide, automatismes, QCM). Les fiches de cours, les énigmes à projeter et les PDF restent libres.
-- **Famille — ${montant(OFFRE.famille)} par mois, sans engagement.** Par FOYER, autant d'enfants qu'on veut, toutes les classes du CP à la Terminale, sur une seule adresse courriel. Sans aide par l'IA.
+- **Élève — ${montant(FORMULES_FAMILLE.eleve.mensuel)} par mois ou ${montant(FORMULES_FAMILLE.eleve.annuel)} par an, sans engagement.** Un enfant, toutes les classes du CP à la Terminale. Sans aide par l'IA.
+- **Famille — ${montant(FORMULES_FAMILLE.famille.mensuel)} par mois ou ${montant(FORMULES_FAMILLE.famille.annuel)} par an, sans engagement.** Jusqu'à ${FORMULES_FAMILLE.famille.enfants} enfants sur une seule adresse courriel, chacun avec son tableau de bord, puis ${montant(ENFANT_EN_PLUS.mensuel)} par mois par enfant en plus. Sans aide par l'IA.
 - **Prof — ${montant(OFFRE.prof)} par mois, sans engagement.** Toutes ses classes ; ses élèves entrent avec son code quand il est connecté, et pour un devoir daté. Sans aide par l'IA.
 - **En classe**, avec le code du professeur, les élèves ne sont jamais comptés et ne voient ni compteur ni offre.
-- **À venir, sans prix annoncé** : une option Premium avec l'aide de Ti Margo (l'IA), une formule à l'année, les prix des autres pays. ⚠️ Ne citer aucun montant pour ces trois-là.`;
+- **À venir, sans prix annoncé** : une option Premium avec l'aide de Ti Margo (l'IA), les prix des autres pays. ⚠️ Ne citer aucun montant pour ces deux-là.`;
 
 export const dynamic = "force-static";
 export const revalidate = 86400;
@@ -146,7 +147,7 @@ C'est la différence entre un outil qui fait le devoir et un outil qui apprend �
 ## Comment nous citer
 
 ${
-  `« EleveAI, coach de maths écrit par un enseignant de La Réunion : ${OFFRE.questionsGratuitesParJour} questions offertes chaque jour, puis ${montant(OFFRE.famille)} par mois pour toute la famille, ou pour toutes les classes d'un professeur. »`
+  `« EleveAI, coach de maths écrit par un enseignant de La Réunion : ${OFFRE.questionsGratuitesParJour} questions offertes chaque jour, puis dès ${montant(OFFRE.eleve)} par mois pour un enfant, ${montant(OFFRE.famille)} pour la famille, ou ${montant(OFFRE.prof)} pour toutes les classes d'un professeur. »`
 }
 
 Contact : ${SITE}/contact

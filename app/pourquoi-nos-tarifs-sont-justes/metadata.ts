@@ -14,7 +14,7 @@ const resume =
   `Un prix dix fois plus bas que les autres se lit « dix fois moins bon » tant que personne n'explique l'écart. ` +
   `Voici d'où il vient : aucun investisseur à rémunérer, aucun commercial, des exercices écrits ici et non achetés. ` +
   `L'IA démultiplie le travail, l'enseignant vérifie. ${OFFRE.questionsGratuitesParJour} questions offertes chaque jour, ` +
-  `puis ${montant(OFFRE.famille)} par mois pour toute la famille, ou pour toutes les classes d'un prof.`;
+  `puis ${montant(OFFRE.eleve)} par mois pour un enfant, ${montant(OFFRE.famille)} pour la famille (jusqu'à 3 enfants), ${montant(OFFRE.prof)} pour toutes les classes d'un prof.`;
 
 export const metadata: Metadata = {
   title: "Pourquoi nos tarifs sont justes",

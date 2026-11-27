@@ -329,9 +329,27 @@ export default function RootLayout({
       ...(PRIX_PUBLICS ? { offers: [
         {
           "@type": "Offer",
-          name: "Famille — par foyer, autant d'enfants que vous voulez",
+          name: "Élève — un enfant (27/11/2026)",
           description:
-            "Toutes les classes, du CP à la Terminale, sur une seule adresse courriel : les questions sans limite, le bilan chaque semaine et tout l'historique. Sans aide par l'IA. Sans engagement.",
+            "Un enfant, toutes les classes du CP à la Terminale : les questions sans limite, le bilan chaque semaine et tout l'historique. Sans aide par l'IA. Sans engagement.",
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            price: OFFRE.eleve,
+            priceCurrency: "EUR",
+            billingDuration: 1,
+            billingIncrement: 1,
+            unitCode: "MON",
+          },
+          availability: VENTE.ouverte
+            ? "https://schema.org/InStock"
+            : "https://schema.org/PreOrder",
+          url: `${SITE_URL}/tarifs#eleve`,
+        },
+        {
+          "@type": "Offer",
+          name: "Famille — jusqu'à 3 enfants (27/11/2026)",
+          description:
+            "Jusqu'à 3 enfants, toutes les classes du CP à la Terminale, sur une seule adresse courriel : les questions sans limite, le bilan chaque semaine et tout l'historique. Sans aide par l'IA. Sans engagement.",
           priceSpecification: {
             "@type": "UnitPriceSpecification",
             price: OFFRE.famille,

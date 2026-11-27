@@ -1,4 +1,9 @@
-// app/tarifs/TarifsClient.tsx — LES TARIFS DU 22/11/2026.
+// app/tarifs/TarifsClient.tsx — LES TARIFS DU 22/11/2026, GRILLE FAMILLES DU 27/11.
+//
+// ⭐ 27/11/2026, Frédéric : prix ronds abandonnés (« on va se baser sur ce que
+// font tout le monde ») ; Élève 4,95 €/mois ou 49 €/an (1 enfant) ; Famille
+// 7,95 €/mois ou 79 €/an (jusqu'à 3 enfants), +4 €/mois par enfant en plus.
+// Note mémoire : modele-tarifaire-27-11. Le Prof reste à 10 € (à revoir).
 //
 // ⭐ Frédéric, 22/11, après en avoir parlé avec sa compagne et regardé IXL :
 // 10 questions offertes par jour sur tout le site, puis l'inscription PAYANTE ;
@@ -17,9 +22,12 @@
 // ⛔ Jamais aux élèves actuels ou anciens de Frédéric.
 
 import Link from "next/link";
-import { ArrowRight, Check, Clock, GraduationCap, Heart, ShieldCheck, Sparkles, Users } from "lucide-react";
+import { ArrowRight, Check, Clock, GraduationCap, Heart, ShieldCheck, Sparkles, UserRound, Users } from "lucide-react";
 import { DONS, VENTE } from "@/lib/legal/editeur";
-import { MENTION_TVA, OFFRE, OUVERTURE_SUIVI, montant } from "@/lib/tarifs";
+import { ENFANT_EN_PLUS, FORMULES_FAMILLE, MENTION_TVA, MOIS_OFFERTS, OFFRE, OUVERTURE_SUIVI, montant } from "@/lib/tarifs";
+
+const ELEVE_F = FORMULES_FAMILLE.eleve;
+const FAMILLE_F = FORMULES_FAMILLE.famille;
 
 const n = OFFRE.questionsGratuitesParJour;
 const libres = OFFRE.libres.join(", ").replace(/, ([^,]*)$/, " et $1");
@@ -30,8 +38,17 @@ const SANS_COMPTE = [
   `Toujours libres : ${libres}`,
 ];
 
+const ELEVE = [
+  "Un enfant",
+  "Toutes les classes, du CP à la Terminale",
+  "Ce qu'il a compris, les 3 choses à revoir",
+  "Un bilan chaque semaine par courriel",
+  "Un compte par courriel, sans aide de l'IA",
+];
+
 const FAMILLE = [
-  "Autant d'enfants que vous voulez",
+  `Jusqu'à ${FAMILLE_F.enfants} enfants, chacun son tableau de bord`,
+  `${montant(ENFANT_EN_PLUS.mensuel)} par mois par enfant en plus`,
   "Toutes les classes, du CP à la Terminale",
   "Ce qu'ils ont compris, les 3 choses à revoir",
   "Un bilan chaque semaine par courriel",
@@ -47,7 +64,7 @@ const PROF = [
 ];
 
 const A_VENIR = [
-  "Une formule à l'année",
+  "L'option Premium, avec l'aide de Ti Margo",
   "Un essai pour les professeurs",
   "Les prix des autres pays",
   "Une offre pour les établissements",
@@ -89,15 +106,15 @@ export default function TarifsClient() {
             {VENTE.ouverte ? "Les abonnements sont ouverts" : `Ouverture ${OUVERTURE_SUIVI}`}
           </p>
           <h1 className="mt-4 text-3xl font-black leading-tight sm:text-5xl">
-            Des prix simples : <span className="whitespace-nowrap text-sky-700">{montant(OFFRE.famille)} par mois</span>
+            Des prix simples : <span className="whitespace-nowrap text-sky-700">dès {montant(OFFRE.eleve)} par mois</span>
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
-            {n} questions offertes chaque jour pour essayer. Ensuite, un abonnement pour toute la famille, ou pour toutes vos classes.
+            {n} questions offertes chaque jour pour essayer. Ensuite, un abonnement pour un enfant, pour la famille, ou pour toutes vos classes.
           </p>
         </section>
 
         {/* 2. LES TROIS CARTES */}
-        <section className="grid gap-5 md:grid-cols-3">
+        <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           <Carte
             etiquette="Pour essayer"
             titre="Sans compte"
@@ -113,11 +130,26 @@ export default function TarifsClient() {
           </Carte>
 
           <Carte
+            id="eleve"
+            etiquette="Un enfant"
+            titre={ELEVE_F.nom}
+            prix={montant(ELEVE_F.mensuel)}
+            sousPrix="par mois"
+            annee={`ou ${montant(ELEVE_F.annuel)} par an (${MOIS_OFFERTS} mois offerts)`}
+            Icone={UserRound}
+            couleurs={{ bord: "border-sky-300", fond: "bg-sky-50/40", texte: "text-sky-700", puce: "text-sky-600" }}
+            lignes={ELEVE}
+          >
+            <BoutonOuverture href="/abonnement" couleur="bg-sky-600 hover:bg-sky-700 text-white" />
+          </Carte>
+
+          <Carte
             id="famille"
             etiquette="La famille"
-            titre="Famille"
-            prix={montant(OFFRE.famille)}
+            titre={FAMILLE_F.nom}
+            prix={montant(FAMILLE_F.mensuel)}
             sousPrix="par mois"
+            annee={`ou ${montant(FAMILLE_F.annuel)} par an (${MOIS_OFFERTS} mois offerts)`}
             Icone={Users}
             couleurs={{ bord: "border-sky-400", fond: "bg-white shadow-lg", texte: "text-sky-700", puce: "text-sky-600" }}
             lignes={FAMILLE}
@@ -229,6 +261,7 @@ function Carte({
   titre,
   prix,
   sousPrix,
+  annee,
   Icone,
   couleurs,
   lignes,
@@ -239,6 +272,7 @@ function Carte({
   titre: string;
   prix: string;
   sousPrix: string;
+  annee?: string;
   Icone: typeof Users;
   couleurs: { bord: string; fond: string; texte: string; puce: string };
   lignes: readonly string[];
@@ -251,8 +285,9 @@ function Carte({
       </p>
       <h2 className="mt-1 text-2xl font-black">{titre}</h2>
       <p className="mt-3 text-4xl font-black">
-        {prix} <span className="text-base font-bold text-slate-500">{sousPrix}</span>
+        <span className="whitespace-nowrap">{prix}</span> <span className="text-base font-bold text-slate-500">{sousPrix}</span>
       </p>
+      {annee && <p className="mt-1 text-sm font-bold text-slate-600">{annee}</p>}
       <ul className="mt-4 flex-1 space-y-2 text-sm text-slate-800">
         {lignes.map((t) => (
           <li key={t} className="flex gap-2">
