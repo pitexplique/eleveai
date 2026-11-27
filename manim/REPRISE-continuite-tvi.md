@@ -1,0 +1,710 @@
+# REPRISE — série « CONTINUITÉ ET TVI », terminale spé (27/11/2026)
+
+**5 épisodes PAYSAGE = les 5 micro-compétences du coach** de la notion `continuite_tvi`.
+Les 5 shorts existent déjà et sont en ligne ; ce sont les paysages qui manquent.
+
+> ⛔ **Ce tour-ci : l'ÉCRITURE seule.** Pas de rendu HD, pas d'écriture dans
+> `lib/videos/videos-r2.json`, pas de ligne dans `notion_ressources`, pas de push.
+
+---
+
+## 1. Le trou qu'on vient combler, mesuré
+
+| ce que le coach sert aujourd'hui pour `continuite_tvi` | |
+|---|---|
+| `terminale-continuite-tvi` | **1 paysage de NOTION**, sans `microId` — il couvre les 5 micros en une vidéo |
+| `terminale-continuite-tvi-short-continuite` | short → `continuite_reconnaitre` |
+| `terminale-continuite-tvi-short-appliquer` | short → `tvi_appliquer` |
+| `terminale-continuite-tvi-short-unicite` | short → `tvi_unicite` |
+| `terminale-continuite-tvi-short-rediger` | short → `tvi_rediger` |
+| `terminale-continuite-tvi-short-defi` | short → `tvi_defi` |
+
+**Aucun paysage par micro.** L'élève qui ouvre « Vidéo » sur un micro tombe sur une
+accroche verticale de 40 secondes. C'est ce que ces 5 épisodes réparent.
+
+⚠️ L'entrée de notion `terminale-continuite-tvi` porte encore un champ `youtube`
+(`GWVlbZyiME4`) et son en-tête de script y renvoie. ⛔ Les 5 nouveaux épisodes ne portent
+aucune référence YouTube, dans aucun fichier : le coach sert `eleveai.fr/video/<id>`.
+Cette vieille entrée n'est pas mon territoire et je n'y touche pas — c'est un constat.
+
+---
+
+## 2. Les décisions de ce tour, et pourquoi
+
+### ⭐⭐ TROIS cartes de choix, pas quatre — et c'est une MESURE, pas une préférence
+
+Le brief demandait « les 4 propositions ». **Le socle de production n'en rend que trois**,
+et une quatrième disparaîtrait sans un mot :
+
+- `manim/poste2/espace_ecrans.py` l. 471 : `for l, c in zip("ABC", choix)` — `zip`
+  **tronque en silence**. Un quatrième choix écrit dans la voix ne serait jamais affiché ;
+- `q_montrer_choix` (l. 525) boucle elle aussi sur `"ABC"` et va chercher `"A : "`,
+  `"B : "`, `"C : "` dans le texte de la voix : un `D : ` ne serait jamais cherché ;
+- et la géométrie ne le permet pas : la note de la série espace mesure qu'**à quatre
+  lignes de question les cartes descendent sur Ti-Margo et lui coupent la tête**
+  (boîte x ∈ [5,54 ; 6,66], y ∈ [−3,55 ; −2,15]). Une carte de plus, c'est 0,88 de plus.
+
+Tout le dépôt est à trois : `zip("ABC", …)` dans `4e/div_multiple.py`,
+`4e/equation_defi.py`, `4e/pythagore_pauses.py`, les 12 épisodes de l'espace. Les QCM à
+quatre choix sont ceux des **banques d'exercices**, pas des vidéos.
+
+👉 **Les 10 questions de cette série ont donc 3 propositions.** La règle de fond — *les
+propositions doivent s'exclure mutuellement* — est appliquée et vérifiée une par une au
+§ 5. Si Frédéric veut vraiment quatre cartes en vidéo, c'est un chantier de socle
+(`carte_choix`, `q_tete`, `q_montrer_choix`, et la hauteur du bloc) : à trancher avant
+d'écrire les voix, pas après.
+
+### Les identifiants, les chemins, le socle
+
+| | choix | raison |
+|---|---|---|
+| id | `terminale-continuite-reconnaitre`, `terminale-tvi-appliquer`, `terminale-tvi-unicite`, `terminale-tvi-rediger`, `terminale-tvi-defi` | la règle de la série espace : `terminale-` + le `microId`, tirets au lieu des tirets bas (`ps_espace_angle` → `terminale-ps-espace-angle`) |
+| fichier R2 | `terminale/maths/analyse/<slug>/eleveai-maths-<id>.mp4` | l'espace a ouvert `…/maths/geometrie/<slug>/` ; `analyse` est son équivalent. ⛔ Pas `…/maths/paysage/fr/continuite-tvi/`, qui est le dossier de la vieille vidéo de notion |
+| `renvoie_vers` | aucun | ce sont les SHORTS qui renvoient vers un paysage, pas l'inverse |
+| ceinture | `verte` | comme les 12 épisodes de terminale spé déjà au manifeste. ⚠️ Rien dans `lib/tutor-v4/knowledge/` ne porte de ceinture : c'est un champ du manifeste, pas une donnée du catalogue |
+| socle d'écran | **un socle NEUF**, `manim/poste2/analyse_ecrans.py` | l'en-tête de `espace_ecrans.py` le dit : « la convention terminale (recopiés, rien importé) vaut d'un CHAPITRE à l'autre ». Une série d'analyse n'est pas la série espace : elle n'a aucun repère 3D et il lui faut des axes, des courbes et un tableau de variations. ⛔ Et `espace_ecrans.py` sert une série EN PRODUCTION : on n'y touche pas |
+
+### Les centres d'intérêt, tous ouverts à la tranche 15-18
+
+Lus dans `lib/videos/centres-interet.ts` (liste **fermée**, 18 entrées, 16 ouvertes à
+15-18) : `transports`, `meteo-climat`, `sport`, `jeux-defis`, `sciences`.
+⚠️ Le contrôle `node scripts/verifier-centres-age.mjs <manifeste>` se relance au moment
+de la fiche, pas avant.
+
+### ⭐ La place de la bonne réponse, tirée — et une contrainte de plus
+
+`python -X utf8 manim/poste2/tirage-lettres-continuite-tvi.py` (graine 2711) :
+
+| | E1 | E2 | E3 | E4 | E5 |
+|---|---|---|---|---|---|
+| `04` | **A** | **C** | **C** | **A** | **B** |
+| `07` | **B** | **A** | **B** | **C** | **A** |
+
+Soit **A 4 · B 3 · C 3** sur 10 questions, deux lettres différentes dans chaque épisode,
+et jamais deux fois la même lettre d'un épisode au suivant.
+
+⛔⛔ **Le premier tirage retenu mettait A en `04` quatre fois sur cinq.** Il respectait
+pourtant `manim/REGLES.md` à la lettre : la règle parle de la série entière et de deux
+questions consécutives — **elle ne voit pas les colonnes**. Un élève qui répond toujours
+A à la première question gagnait 80 %. Le script porte donc une contrainte de plus :
+*aucune lettre plus de deux fois dans la même colonne*. À reprendre pour les séries
+suivantes.
+
+---
+
+## 3. Ce que les 5 shorts disent DÉJÀ — et que les paysages ne redisent pas
+
+Lu dans `manim/scripts/terminale/continuite_tvi_short.py`. Le short accroche, le paysage
+installe : **aucun des cinq paysages ne rejoue l'exemple de son short.**
+
+| short | son exemple | son défi | ce que le paysage fait à la place |
+|---|---|---|---|
+| `…-short-continuite` | la fonction en escalier (saut de −1 à 1) ; le catalogue polynômes / exp / ln | « la partie entière est-elle continue ? » | la définition par la limite, le **recollement de deux morceaux**, les intervalles d'une fonction rationnelle, continue ≠ dérivable. ⛔ La partie entière n'apparaît nulle part |
+| `…-short-appliquer` | **x³ + x − 1 = 0 sur [0 ; 1]** | x³ − 2 = 0 entre 1 et 2 | le TVI pour **k ≠ 0**, et le cas où il ne dit RIEN. Exemples : x⁵ + 3x − 5, puis x³ = x + 5 |
+| `…-short-unicite` | x³ + x − 1, f′ = 3x² + 1 | x² − 1 sur [−2 ; 2] | eˣ + x − 4, puis x + ln x = 3 ; et le cas « strictement croissante mais qui ne s'annule pas » |
+| `…-short-rediger` | les 4 lignes, « corollaire du TVI » | « laquelle oublies-tu ? » | **à quoi sert chaque ligne** : une phrase par hypothèse du théorème, et deux copies à réparer |
+| `…-short-defi` | le balayage 0,6 / 0,7 puis 0,68 / 0,69 sur x³ + x − 1 | x³ = 2 au dixième | l'exercice entier : **variations d'abord, TVI sur CHAQUE morceau monotone**, puis l'encadrement |
+
+⚠️ **La vieille vidéo de notion est aussi à éviter** : elle tient sur x³ + x − 1 et sur la
+montée de Cilaos au Piton des Neiges. Les cinq paysages ne reprennent ni l'un ni l'autre.
+
+---
+
+## 4. Le gabarit d'un épisode — 15 clips, le modèle terminale
+
+`00-garde` · `01-situation` · `02-idee` · `03-theoreme` · `04-question` · `04b-reponse` ·
+`05-appliquer` · `06-piege` · `07-question` · `07b-reponse` · `08-rediger` · `09-defi` ·
+`09b-correction` · `10-finale` · `11-abonne`.
+
+⭐ **Trois lignes de question à l'écran au MAXIMUM.**
+⭐ **La question dit à l'écran exactement ce que la voix dit, mot pour mot.**
+⭐ **L'écran `02-idee` traite un AUTRE cas que `04-question` et que `07-question`** —
+contrôlé épisode par épisode au § 5. Aucun instrument ne le voit.
+
+⭐⭐ **Une nouveauté de cette série, dans les chapitres.** Les chapitres partent verbatim
+dans la description, et ceux de la série espace écrivent « Réponse : un vecteur
+vertical » — c'est-à-dire **la réponse de la question-pause, lisible sans regarder la
+vidéo**. Ici les chapitres de réponse nomment le **geste**, jamais le verdict :
+« Réponse : comparer les deux morceaux au point de recollement ».
+
+---
+
+## 5. LE MANIFESTE DES 5 ÉPISODES
+
+> Les chapitres sont donnés **sans horodatage** : les instants viennent du journal du
+> rendu HD, et il n'y a pas de rendu ce tour-ci. L'ordre et les libellés, eux, sont figés.
+
+---
+
+### E1 · `terminale-continuite-reconnaitre`
+
+**Micro** : `continuite_reconnaitre` — Reconnaître une fonction continue sur un intervalle.
+**Centre** : `transports`. **Contexte** : Kévin régule le téléphérique urbain de Saint-Denis.
+**Script** : `manim/scripts/terminale/continuite_reconnaitre.py`, scène `ContinuiteReconnaitre`.
+
+**Titre** : *Le compteur saute, la cabine non — Reconnaître une fonction continue · Tle spé*
+
+**Accroche** :
+
+> Kévin suit deux écrans en salle de régulation. L'altitude de la cabine : elle monte de
+> 40 à 180 mètres et passe par toutes les valeurs du chemin. Le compteur de passagers :
+> il saute de 1 à 2, et ne vaut jamais 1,5. Deux courbes, deux mondes — et c'est toute la
+> différence entre continue et pas continue.
+>
+> Dans cette vidéo :
+> • la définition : f est continue en a quand la limite en a vaut f(a)
+> • deux morceaux recollés : ce qu'on compare, et où
+> • le catalogue du bac : polynômes, racine, exponentielle, logarithme, et les quotients
+> • une fonction rationnelle se déclare **intervalle par intervalle**, jamais d'un bloc
+> • continue et dérivable, ce n'est pas la même chose — et une seule des deux entraîne
+>   l'autre
+>
+> Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
+
+**Les écrans** :
+- `02-idee` — **cas 1** : f(x) = 2x + 1 si x < 1, f(x) = 5 si x ⩾ 1. À gauche la limite
+  vaut 3, la valeur en 1 vaut 5 : un saut de 2.
+- `03-theoreme` — le catalogue, plus « toute fonction dérivable sur un intervalle y est
+  continue ».
+- `05-appliquer` — **cas 3** : f(x) = (2x + 1)/(x − 3), continue sur ]−∞ ; 3[ **et** sur
+  ]3 ; +∞[.
+- `06-piege` — un ensemble de continuité s'écrit en intervalles ; la valeur absolue est
+  continue en 0 sans y être dérivable ; la réciproque, elle, est vraie.
+- `08-rediger` — « h est la somme de ln, continue sur ]0 ; +∞[, et d'un polynôme, continu
+  sur ℝ : h est continue sur ]0 ; +∞[. » On nomme la raison, jamais « c'est continu ».
+- `09-defi` / `09b` — **cas 5** : f(x) = √(x − 1) + 1/(x − 4). Réponse : continue sur
+  [1 ; 4[ et sur ]4 ; +∞[ — **deux intervalles, pas un**.
+
+**Question 1 (`04`) — cas 2** : « g(x) = x² si x ⩽ 2, et g(x) = 3x − 2 si x > 2. g est-elle
+continue en 2 ? »
+
+| | proposition | |
+|---|---|---|
+| **A** | oui, les deux morceaux valent 4 en 2 | ✅ **bonne réponse** |
+| B | non, il y a un saut de 2 unités | |
+| C | il faudrait connaître la dérivée | |
+
+*Exclusion* : « oui », « non », « on ne peut pas savoir » — trois verdicts incompatibles,
+un seul vrai (2² = 4 et 3 × 2 − 2 = 4).
+
+**Question 2 (`07`) — cas 4** : « Sur quel ensemble la fonction h(x) = ln x + x² est-elle
+continue ? »
+
+| | proposition | |
+|---|---|---|
+| A | sur ℝ tout entier | |
+| **B** | sur ]0 ; +∞[ | ✅ **bonne réponse** |
+| C | sur [0 ; +∞[ | |
+
+*Exclusion* : trois ensembles deux à deux différents ; un seul contient exactement les x
+où ln x existe.
+
+**Chapitres** : Le compteur saute, la cabine non · Kévin et ses deux écrans · Recoller
+deux morceaux · Le catalogue du bac · Question 1 · Réponse : comparer les deux morceaux au
+point de recollement · Une fonction qui a un trou · Le piège · Question 2 · Réponse : le
+domaine du logarithme décide · La première ligne de la copie · À toi de jouer · Correction
+· Ce que tu as appris.
+
+**Contre-contrôle du titre et de l'accroche** :
+
+| | vérification |
+|---|---|
+| titre vs A/B/C de `04` | le titre parle du **compteur** et de la **cabine** : ni 2, ni 4, ni « recollement ». Aucune carte n'est réfutable en s'en souvenant |
+| titre vs A/B/C de `07` | le titre ne nomme ni ln, ni intervalle, ni ensemble |
+| accroche vs `04` | la puce dit « deux morceaux recollés : ce qu'on compare, et où » — elle pose le geste, **elle ne dit pas si ça recolle** |
+| accroche vs `07` | la puce dit « une fonction rationnelle se déclare intervalle par intervalle » : c'est le cas 3, pas le logarithme de la question |
+| idée ≠ question | `02` = un saut (deux morceaux qui ne recollent pas) ; `04` = deux morceaux qui recollent. **Cas différents, verdicts opposés** |
+
+---
+
+### E2 · `terminale-tvi-appliquer`
+
+**Micro** : `tvi_appliquer` — Appliquer le théorème des valeurs intermédiaires.
+**Centre** : `meteo-climat`. **Contexte** : Léa, prévisionniste, relève la température au
+sommet du Maïdo.
+**Script** : `manim/scripts/terminale/tvi_appliquer.py`, scène `TviAppliquer`.
+
+**Titre** : *Le théorème qui prouve sans calculer — Appliquer le TVI · Tle spé*
+
+**Accroche** :
+
+> À six heures, Léa relève −2 °C au sommet du Maïdo. À midi, 14 °C. Elle n'a pas regardé
+> entre les deux, et elle peut pourtant affirmer qu'il a fait exactement 0 °C à un moment.
+> Sans savoir quand. C'est le théorème des valeurs intermédiaires, et c'est un des rares
+> endroits des maths où on prouve qu'une chose existe sans jamais la trouver.
+>
+> Dans cette vidéo :
+> • l'énoncé exact : f continue sur [a ; b], et k compris entre f(a) et f(b)
+> • le cas k = 0, celui du bac, et ce que « signes contraires » veut dire
+> • un exemple complet sur x⁵ + 3x − 5 entre 1 et 2
+> • **le piège : ce que le théorème ne dit pas quand f(a) et f(b) ont le même signe**
+> • ramener une équation à f(x) = 0 avant de commencer
+>
+> Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
+
+**Les écrans** :
+- `02-idee` — **cas 1** : la courbe des températures, k = 0 entre −2 et 14.
+- `03-theoreme` — l'énoncé, puis le cas particulier k = 0 avec les signes contraires.
+- `05-appliquer` — **cas 3** : g(x) = x⁵ + 3x − 5 sur [1 ; 2]. g(1) = −1, g(2) = 33,
+  polynôme donc continue : au moins une solution.
+- `06-piege` — oublier d'écrire « f est continue » ; **pas de changement de signe ne veut
+  pas dire pas de solution** ; le TVI donne l'existence, jamais la valeur ni le nombre.
+- `08-rediger` — les trois lignes de l'existence.
+- `09-defi` / `09b` — **cas 5** : montrer que x³ = x + 5 a une solution entre 1 et 2. On
+  pose f(x) = x³ − x − 5 : f(1) = −5, f(2) = 1.
+
+**Question 1 (`04`) — cas 2** : « f est continue sur [1 ; 4], f(1) = 5 et f(4) = 9.
+L'équation f(x) = 7 a-t-elle une solution sur [1 ; 4] ? »
+
+| | proposition | |
+|---|---|---|
+| A | non, f ne s'annule pas | |
+| B | on ne peut pas conclure | |
+| **C** | oui, au moins une | ✅ **bonne réponse** |
+
+*Exclusion* : « non », « on ne sait pas », « oui » — incompatibles. A est l'élève qui
+cherche un zéro là où on demande 7.
+
+**Question 2 (`07`) — cas 4** : « f est continue sur [0 ; 3], f(0) = 2 et f(3) = 8. Que dit
+le théorème pour l'équation f(x) = 0 ? »
+
+| | proposition | |
+|---|---|---|
+| **A** | rien : 0 n'est pas entre 2 et 8 | ✅ **bonne réponse** |
+| B | qu'il y a au moins une solution | |
+| C | qu'il n'y a aucune solution | |
+
+*Exclusion* : « le théorème ne conclut pas », « il conclut qu'il y en a », « il conclut
+qu'il n'y en a pas » — trois verdicts incompatibles. C est l'erreur la plus répandue :
+confondre « le théorème se tait » et « il n'y a rien ».
+
+**Chapitres** : Prouver sans calculer · Léa, −2 °C à six heures et 14 °C à midi · L'idée ·
+L'énoncé exact · Question 1 · Réponse : où se trouve la valeur cherchée · Un exemple
+complet · Le piège · Question 2 · Réponse : ce que le théorème ne couvre pas · La
+rédaction de l'existence · À toi de jouer · Correction · Ce que tu as appris.
+
+**Contre-contrôle du titre et de l'accroche** :
+
+| | vérification |
+|---|---|
+| titre vs `04` | « prouve sans calculer » ne dit rien de 5, 7, 9 ni d'un intervalle. Aucune carte réfutée |
+| titre vs `07` | le titre vante ce que le théorème fait ; la question porte sur ce qu'il **ne** fait pas. Il ne désigne ni A, ni B, ni C |
+| accroche vs `04` | l'accroche illustre k = 0 sur les températures ; la question porte sur k = 7. Se souvenir de l'accroche n'élimine aucune carte |
+| ⚠️ accroche vs `07` | **point le plus serré de la série.** Une première version écrivait « le piège : sans changement de signe, le théorème ne dit RIEN » — c'est mot pour mot la carte A. Réécrit en « ce que le théorème ne dit pas quand f(a) et f(b) ont le même signe » : la forme interrogative est gardée, le verdict est retiré |
+| idée ≠ question | `02` = températures, k = 0, signes contraires ; `04` = k = 7, pas de zéro ; `07` = même signe aux deux bornes. Trois cas |
+
+---
+
+### E3 · `terminale-tvi-unicite`
+
+**Micro** : `tvi_unicite` — Justifier l'unicité d'une solution.
+**Centre** : `sport`. **Contexte** : Mathis court le Grand Raid ; sa distance parcourue ne
+recule jamais.
+**Script** : `manim/scripts/terminale/tvi_unicite.py`, scène `TviUnicite`.
+
+**Titre** : *Une seule fois au kilomètre cent — Justifier l'unicité d'une solution · Tle spé*
+
+**Accroche** :
+
+> Mathis est quelque part entre Cilaos et Grand-Îlet. Sa distance parcourue depuis le
+> départ ne saute pas et ne recule jamais : il est passé au kilomètre cent une fois, et
+> une seule. Un marcheur qui ferait demi-tour, lui, pourrait y repasser trois fois. Toute
+> la différence entre « il existe une solution » et « il en existe une seule » tient dans
+> cette phrase.
+>
+> Dans cette vidéo :
+> • le théorème des valeurs intermédiaires donne l'existence — et jamais autre chose
+> • ce qu'il faut lui ajouter pour écrire « unique », et comment on le justifie
+> • le corollaire du TVI, aussi appelé théorème de la bijection
+> • un exemple complet sur eˣ + x − 4 entre 0 et 2
+> • le piège : « croissante » et « strictement croissante » ne valent pas le même nombre
+>   de points, parce qu'elles ne disent pas la même chose
+>
+> Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
+
+**Les écrans** :
+- `02-idee` — **cas 1** : deux courbes côte à côte sur [0 ; 4], mêmes valeurs aux bornes.
+  L'une monte puis descend et coupe deux fois ; l'autre ne fait que monter et coupe une
+  fois.
+- `03-theoreme` — le corollaire : continue **et** strictement monotone sur [a ; b], k entre
+  f(a) et f(b) ⇒ **une unique** solution. La stricte monotonie se justifie par le signe
+  de f′.
+- `05-appliquer` — **cas 3** : f(x) = eˣ + x − 4 sur [0 ; 2]. f(0) = −3, f(2) ≈ 5,39,
+  f′(x) = eˣ + 1 > 0 : une unique solution α.
+- `06-piege` — « croissante » sans « strictement » autorise un palier, donc une infinité
+  de solutions ; le TVI seul ne donne jamais l'unicité ; la monotonie doit valoir sur
+  l'intervalle de travail.
+- `08-rediger` — la seule ligne qui change par rapport à E2 : « f′(x) > 0 sur [0 ; 2],
+  donc f est strictement croissante sur [0 ; 2] ». La copie entière est le sujet de E4.
+- `09-defi` / `09b` — **cas 5** : x + ln x = 3 sur [1 ; 3]. f(1) = −2, f(3) = ln 3 ≈ 1,10,
+  f′(x) = 1 + 1/x > 0 : une unique solution.
+
+**Question 1 (`04`) — cas 2** : « g est continue et strictement croissante sur [0 ; 5],
+g(0) = 2 et g(5) = 9. Combien l'équation g(x) = 0 a-t-elle de solutions sur [0 ; 5] ? »
+
+| | proposition | |
+|---|---|---|
+| A | une seule, g est monotone | |
+| B | on ne peut pas le savoir | |
+| **C** | aucune, 0 n'est jamais atteint | ✅ **bonne réponse** |
+
+*Exclusion* : « une », « on ne sait pas », « zéro » — trois nombres de solutions
+incompatibles. A est le réflexe : stricte monotonie = unicité, en oubliant que 0 doit
+d'abord être **atteint**.
+
+**Question 2 (`07`) — cas 4** : « f est continue sur [0 ; 6], f(0) = −4 et f(6) = 2.
+Qu'est-ce qui manque pour écrire « une unique solution » ? »
+
+| | proposition | |
+|---|---|---|
+| A | que f soit dérivable sur [0 ; 6] | |
+| **B** | que f soit strictement monotone | ✅ **bonne réponse** |
+| C | rien, on peut déjà l'écrire | |
+
+*Exclusion* : deux manques différents et « rien ne manque » : incompatibles. A est le
+glissement classique — on se sert de f′ pour justifier la monotonie, donc on croit que
+c'est la dérivabilité qu'on exige.
+
+**Chapitres** : Une seule fois au kilomètre cent · Mathis sur le Grand Raid · Deux courbes,
+deux réponses · Le corollaire du TVI · Question 1 · Réponse : ce qu'il faut vérifier avant
+de compter · Un exemple complet · Le piège · Question 2 · Réponse : l'hypothèse qui
+manque · La ligne qui change dans la copie · À toi de jouer · Correction · Ce que tu as
+appris.
+
+**Contre-contrôle du titre et de l'accroche** :
+
+| | vérification |
+|---|---|
+| titre vs `04` | ⚠️ le titre dit « une seule fois », la bonne réponse est « aucune ». Il **ne donne donc pas** la réponse — et le réflexe qu'il installe est exactement celui que la question mesure. C'est voulu, et c'est noté ici pour que personne ne le « corrige » |
+| titre vs `07` | le titre ne nomme ni la monotonie, ni la dérivabilité |
+| accroche vs `04` | l'accroche parle d'un marcheur qui ferait demi-tour : c'est le cas 1 de l'écran idée, pas la question |
+| ⚠️ accroche vs `07` | la dernière puce oppose « croissante » et « strictement croissante ». Elle **nomme la monotonie**, qui est la carte B. Elle ne dit pas qu'elle manque dans la copie de la question, mais c'est l'endroit le plus proche du fil rouge de toute la série : **à relire avec Frédéric**, et à réécrire en « deux mots qui ne valent pas le même nombre de points » si le doute subsiste |
+| idée ≠ question | `02` = deux courbes dessinées, sans formule ; `04` = valeurs numériques sans zéro atteint ; `07` = une copie incomplète. Trois cas |
+
+---
+
+### E4 · `terminale-tvi-rediger`
+
+**Micro** : `tvi_rediger` — Rédiger une justification conforme au bac avec le TVI.
+**Centre** : `jeux-defis`. **Contexte** : Yoan relit sa copie de bac blanc, ligne par ligne.
+**Script** : `manim/scripts/terminale/tvi_rediger.py`, scène `TviRediger`.
+
+**Titre** : *Il a trouvé la bonne réponse et perdu les points — Rédiger le TVI au bac · Tle spé*
+
+**Accroche** :
+
+> Yoan a écrit la bonne conclusion : l'équation a une unique solution. Il a eu le quart
+> des points. Ce qui manquait n'était pas le résultat — c'étaient les phrases qui
+> autorisent à l'écrire. Dans un exercice de TVI, chaque ligne de la copie répond à une
+> hypothèse du théorème, et une hypothèse non citée est une ligne non payée.
+>
+> Dans cette vidéo :
+> • le théorème et la copie posés côte à côte : une hypothèse, une phrase
+> • la formule exacte à citer, et pourquoi « d'après le TVI » ne suffit pas pour l'unicité
+> • une copie complète sur 2 ln x + x − 4, où la continuité se justifie vraiment
+> • trois phrases qui coûtent des points chaque année
+> • deux copies à réparer : il manque une ligne, puis deux
+>
+> Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
+
+**Les écrans** :
+- `02-idee` — **cas 1** : le théorème à gauche, la copie à droite, sur
+  f(x) = 2x³ + 3x − 4 sur [0 ; 2] (f(0) = −4, f(2) = 18, f′(x) = 6x² + 3 > 0). Chaque
+  hypothèse s'allume en même temps que la phrase qui la cite.
+- `03-theoreme` — la formule exacte : « d'après le corollaire du théorème des valeurs
+  intermédiaires », et les quatre lignes dans l'ordre.
+- `05-appliquer` — **cas 3** : g(x) = 2 ln x + x − 4 sur [1 ; 4]. g(1) = −3, g(4) ≈ 2,77,
+  g′(x) = 2/x + 1 > 0. ⭐ Ici la continuité se démontre (somme de fonctions continues sur
+  ]0 ; +∞[) au lieu de se réciter : c'est E1 qui revient.
+- `06-piege` — « croissante » au lieu de « strictement croissante » ; citer « le TVI »
+  pour conclure à l'unicité, alors que c'est son corollaire ; oublier de dire sur quel
+  intervalle.
+- `08-rediger` — le modèle recopiable, avec ses quatre trous à remplir.
+- `09-defi` / `09b` — **cas 5** : la copie de Yoan sur f(x) = x³ + 3x − 6 sur [1 ; 2]
+  (f(1) = −2, f(2) = 8). Il manque **deux** phrases : la continuité comme polynôme, et
+  f′(x) = 3x² + 3 > 0 donc strictement croissante.
+
+**Question 1 (`04`) — cas 2** : « Dans une rédaction, à quoi sert la phrase « f(1) et f(3)
+sont de signes contraires » ? »
+
+| | proposition | |
+|---|---|---|
+| **A** | à dire que 0 est entre f(1) et f(3) | ✅ **bonne réponse** |
+| B | à dire que f est continue | |
+| C | à dire que f est strictement monotone | |
+
+*Exclusion* : les trois hypothèses du théorème sont distinctes ; une phrase en sert une
+seule.
+
+**Question 2 (`07`) — cas 4** : « Une copie dit : « h est continue sur [2 ; 5] », « h(2) = −1
+et h(5) = 6 », « donc h(x) = 0 admet une unique solution ». Que manque-t-il ? »
+
+| | proposition | |
+|---|---|---|
+| A | la valeur approchée de la solution | |
+| B | le calcul de h(3) | |
+| **C** | la stricte monotonie de h | ✅ **bonne réponse** |
+
+*Exclusion* : trois manques différents, un seul est une hypothèse du théorème.
+
+**Chapitres** : Il a trouvé la réponse et perdu les points · Yoan relit sa copie · Une
+hypothèse, une phrase · La formule exacte à citer · Question 1 · Réponse : à quelle
+hypothèse cette phrase répond · Une copie complète · Le piège · Question 2 · Réponse :
+l'hypothèse absente de la copie · Le modèle à recopier · À toi de jouer · Correction · Ce
+que tu as appris.
+
+**Contre-contrôle du titre et de l'accroche** :
+
+| | vérification |
+|---|---|
+| titre vs `04` | le titre parle de points perdus, pas de signes, pas de 0, pas de f(1) ni f(3) |
+| titre vs `07` | le titre ne nomme aucune des trois hypothèses |
+| accroche vs `04` | « chaque ligne répond à une hypothèse » est la **méthode**, pas l'appariement demandé. Les trois cartes restent possibles après l'avoir lue |
+| accroche vs `07` | la puce « deux copies à réparer : il manque une ligne, puis deux » donne le **nombre**, jamais **laquelle** |
+| idée ≠ question | `02` = 2x³ + 3x − 4 ; `04` = une phrase isolée, sans fonction ; `07` = la copie de h sur [2 ; 5], des nombres qu'aucun autre écran n'emploie. ⛔ Une première version de `07` rejouait la copie du `02` : corrigé |
+
+---
+
+### E5 · `terminale-tvi-defi`
+
+**Micro** : `tvi_defi` — Résoudre un exercice type bac avec continuité et TVI.
+**Centre** : `sciences`. **Contexte** : Ryan, technicien à l'observatoire du Piton de la
+Fournaise, suit l'écart entre l'inclinaison mesurée et celle que prévoit le modèle.
+**Script** : `manim/scripts/terminale/tvi_defi.py`, scène `TviDefi`.
+
+**Titre** : *Le théorème ne dit rien, et pourtant elle s'annule — Continuité et TVI, type bac · Tle spé*
+
+**Accroche** :
+
+> Sur l'écran de Ryan, une courbe : l'écart entre l'inclinaison mesurée du volcan et celle
+> que prévoit le modèle. Quand l'écart vaut zéro, le modèle tombe juste. Au début de la
+> matinée l'écart est positif, à la fin aussi — et pourtant la courbe a croisé le zéro en
+> chemin. Un exercice de bac complet commence toujours par là : regarder comment la
+> fonction varie avant de chercher où elle s'annule.
+>
+> Dans cette vidéo :
+> • pourquoi appliquer le théorème sur tout l'intervalle fait rater des solutions
+> • les variations d'abord : le signe de f′, puis le tableau
+> • le théorème appliqué sur **chaque morceau strictement monotone**, un par un
+> • un morceau où il n'y a rien à trouver, et comment on l'écrit quand même
+> • l'encadrement à la calculatrice, et ce qu'on a le droit d'en conclure
+>
+> Deux questions-pauses et un défi corrigé. Entraîne-toi sur eleveai.fr
+
+**Les écrans** :
+- `02-idee` — **cas 1** : g(x) = (x − 1)² − 4 sur [−2 ; 4]. g(−2) = 5, g(1) = −4, g(4) = 5 :
+  même signe aux deux bornes, et pourtant deux zéros (−1 et 3). On coupe en 1.
+- `03-theoreme` — la méthode en quatre temps : continuité, variations, le théorème sur
+  chaque morceau monotone, encadrement.
+- `05-appliquer` — **cas 3** : f(t) = t³ − 3t + 1 sur [0 ; 2]. f′(t) = 3t² − 3 s'annule en
+  1 ; f(0) = 1, f(1) = −1, f(2) = 3. Sur [0 ; 1] : strictement décroissante de 1 à −1, une
+  unique solution α. Sur [1 ; 2] : strictement croissante de −1 à 3, une unique solution β.
+- `06-piege` — appliquer le théorème sur [0 ; 2] entier ne donne **rien du tout** (f(0) = 1
+  et f(2) = 3 sont du même signe) alors qu'il y a deux solutions ; « deux solutions » se
+  démontre en deux fois ; un morceau sans changement de signe se conclut, il ne se saute
+  pas.
+- `08-rediger` — la copie complète : le tableau de variations, puis un bloc par morceau,
+  puis l'encadrement.
+- `09-defi` / `09b` — **cas 5** : f(x) = x³ − 12x + 5 sur [0 ; 3]. f′ s'annule en 2 ;
+  f(0) = 5, f(2) = −11, f(3) = −4. Sur [0 ; 2], une solution ; sur [2 ; 3], **aucune**, car
+  0 n'est pas entre −11 et −4. Réponse : **une seule solution**.
+
+**Question 1 (`04`) — cas 2** : « Une fonction continue sur [0 ; 4] est strictement
+décroissante de 5 à −2, puis strictement croissante de −2 à 3. Combien l'équation
+f(x) = 0 a-t-elle de solutions ? »
+
+| | proposition | |
+|---|---|---|
+| A | une seule | |
+| **B** | exactement deux | ✅ **bonne réponse** |
+| C | au moins une, sans pouvoir dire combien | |
+
+*Exclusion* : « une », « deux », « on ne peut pas compter » — incompatibles. C est l'élève
+qui applique le théorème sans la stricte monotonie et s'arrête à l'existence.
+
+**Question 2 (`07`) — cas 4** : « À la calculatrice, f(0,3) ≈ 0,13 et f(0,4) ≈ −0,14. Que
+peut-on écrire pour α ? »
+
+| | proposition | |
+|---|---|---|
+| **A** | 0,3 < α < 0,4 | ✅ **bonne réponse** |
+| B | α ≈ 0,13 | |
+| C | 0,13 < α < 0,14 | |
+
+*Exclusion* : trois écritures différentes de α, une seule vraie. B et C confondent les
+**images** avec les **antécédents** — l'erreur de lecture du balayage.
+
+**Chapitres** : Le théorème ne dit rien, et pourtant elle s'annule · Ryan et l'inclinaison
+du volcan · Couper l'intervalle · La méthode en quatre temps · Question 1 · Réponse :
+compter morceau par morceau · L'exercice complet · Le piège · Question 2 · Réponse : ce
+que la calculatrice encadre vraiment · La copie type bac · À toi de jouer · Correction ·
+Ce que tu as appris.
+
+**Contre-contrôle du titre et de l'accroche** :
+
+| | vérification |
+|---|---|
+| titre vs `04` | ⚠️ le titre dit « elle s'annule » au singulier ; la bonne réponse est « exactement deux ». Il ne nomme **aucun nombre** : A, B et C restent toutes possibles après l'avoir lu. ⛔ Les versions écartées disaient « deux fois zéro » (= la carte B) et « quand il faut couper en deux » (trop proche) |
+| titre vs `07` | le titre ne porte aucun chiffre, et la question est numérique |
+| accroche vs `04` | l'accroche dit « il est passé deux fois par zéro » — mais pour la **courbe de Ryan**, qui est le cas 3, pas pour la fonction de la question. ⚠️ C'est le seul endroit de la série où un nombre de solutions est écrit avant une question qui en demande un : les deux cas sont différents (une courbe de volcan ; une fonction donnée par ses variations), **et la réponse reste à compter**. À relire avec Frédéric |
+| accroche vs `07` | « l'encadrement à la calculatrice, et ce qu'on a le droit d'en conclure » : pose la question, ne la tranche pas |
+| idée ≠ question | `02` = une parabole décalée, deux zéros, coupée en 1 ; `04` = une fonction décrite par ses seules variations, sans formule ; `07` = l'encadrement de α, qui n'a été fait nulle part avant. Trois cas |
+
+---
+
+## 6. Le contre-contrôle, et l'instrument qui le mesure
+
+### ⭐⭐ `manim/poste2/verifier-accroches-continuite-tvi.py` — il n'existait pas
+
+La règle « une carte ne doit pas être réfutable en se rappelant l'accroche — ni le titre —
+mot pour mot » a été écrite le 26/11 **à la relecture**, après coup, et les deux paysages
+fautifs sont en production. Il n'y avait aucun instrument. En voici un :
+
+```
+python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py              # le manifeste
+python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py --etalonner  # la règle graduée
+```
+
+Il lit le manifeste — **source unique, rien de recopié** — et mesure, pour chacune des 30
+cartes, la part de ses mots de contenu que contient **un seul segment** du titre ou de
+l'accroche.
+
+⭐⭐ **Segment par segment, et c'est tout le sujet.** La première version comparait la
+carte à l'accroche entière : elle criait sur E2 `07` carte A (« rien : 0 n'est pas entre 2
+et 8 ») parce que l'accroche écrit « −2 °C » dans une phrase, « 0 °C » dans une autre et
+« entre » dans une troisième. **Trois coïncidences dans trois phrases ne réfutent rien** —
+personne ne se souvient d'une accroche en vrac. Une carte réfutable l'est par UNE phrase.
+
+### ⭐⭐ L'étalon : le seuil vient des quatre cas connus, pas d'une intuition
+
+| cas réel (série espace) | mesure | attendu |
+|---|---|---|
+| « La grande diagonale d'un cube ne fait pas 45° » / carte « 45 degrés » | **50 %** | doit crier |
+| « En son milieu ? Non. » / carte « au milieu de [AG] » | **50 %** | doit crier |
+| « Beaucoup de copies se trompent » / carte « 45 degrés » (réécrit) | **0 %** | doit se taire |
+| « Pas là où on le croit. » / carte « au milieu de [AG] » (réécrit) | **0 %** | doit se taire |
+
+Seuil retenu : **50 %**, et `--etalonner` affiche 4 cas / 0 désaccord.
+⚠️ **La marge est nulle du côté « doit crier »** : les deux défauts connus tombent
+exactement SUR le seuil. Un mot de plus dans une de ces cartes et l'instrument se tait.
+⛔ Donc il confirme, il n'innocente pas.
+
+⛔ **Et une coupe, une seule, affichée à chaque passage** : le pied de page
+« Deux questions-pauses et un défi corrigé », identique dans toutes les accroches de
+toutes les séries, est retiré du texte mesuré. Son « Deux » faisait crier E5 `04` contre
+la carte « exactement deux » : l'instrument lisait un nombre de questions comme un nombre
+de solutions. Retirer du texte mesuré ce qui dérange est la façon la plus simple de faire
+mentir un instrument — c'est pour ça que la coupe est à forme exacte, et visible.
+
+### Ce qu'il ne voit pas (écrit dans son en-tête, à ne pas oublier)
+
+- ⛔ il compare des **mots**, pas du sens : « il n'y a aucune solution » et « le théorème
+  ne conclut pas » ne partagent presque rien et s'opposent pourtant dans une tête d'élève ;
+- ⛔ il ne vérifie pas que les trois propositions **s'excluent** — aucun instrument ne sait
+  le faire ;
+- ⛔ il ne vérifie pas que `02-idee` traite un autre cas que les questions.
+
+### Le résultat, épisode par épisode
+
+**5 épisodes, 30 cartes, 0 alerte au-dessus de 50 %.** Recouvrement maximal mesuré :
+
+| épisode | `04` | `07` | titre réfute-t-il une carte ? | `02-idee` ≠ `04` ≠ `07` |
+|---|---|---|---|---|
+| E1 | 33 % | 0 % | non | ✅ 3 cas |
+| E2 | 0 % | 40 % | non | ✅ 3 cas |
+| E3 | 20 % | 33 % | non (⚠️ voir ci-dessous) | ✅ 3 cas |
+| E4 | 0 % | 33 % | non | ✅ 3 cas |
+| E5 | 0 % | 0 % | non | ✅ 3 cas |
+
+**Les deux réécritures que ce contrôle a imposées** :
+
+1. **E2, la puce du piège.** Écrite « le piège : sans changement de signe, le théorème ne
+   dit RIEN », c'était mot pour mot la carte A de `07`. Devenue « ce que le théorème ne dit
+   pas quand f(a) et f(b) ont le même signe » : la forme est gardée, le verdict retiré.
+   Trouvé à la relecture, avant l'instrument.
+2. **E5, la phrase d'ouverture.** « …et pourtant il est passé deux fois par zéro » mesure
+   **50 %** contre la carte B « exactement deux » (vérifié en rejouant l'ancienne phrase).
+   Ma relecture l'avait marquée « à relire » sans trancher ; l'instrument a tranché.
+   Devenue « …et pourtant la courbe a croisé le zéro en chemin ».
+
+**Les deux points que l'instrument laisse passer et qui restent à l'appréciation de Frédéric** :
+
+- **E3, le titre.** « Une seule fois au kilomètre cent » installe exactement le réflexe que
+  `04` mesure (la bonne réponse y est « aucune »). Il ne donne aucune réponse — il tend un
+  piège. C'est voulu, et c'est écrit ici pour que personne ne le « corrige » par accident.
+- **E3, la dernière puce de l'accroche.** Elle oppose « croissante » et « strictement
+  croissante », donc elle **nomme** la monotonie, qui est la carte B de `07`. Mesure :
+  33 %, parce qu'elle ne dit pas que c'est elle qui manque dans la copie. C'est l'endroit
+  le plus serré de la série.
+
+⛔ Ces arbitrages se font **avant** l'enregistrement des voix : après, chaque mot changé
+coûte un WAV et un rendu.
+
+---
+
+## 7. La chaîne qui reste, dans l'ordre
+
+| # | étape | état |
+|---|---|---|
+| 1 | manifeste des 5 épisodes | ✅ **ce fichier** |
+| 1 bis | contre-contrôle outillé des titres et des accroches, avec son étalon | ✅ 30 cartes, 0 alerte |
+| 1 ter | **passe maths du manifeste**, recalculée | ✅ 59 contrôles, 0 erreur |
+| 2 | relecture de Frédéric : les 5 titres, les 5 accroches, les 2 points du § 6 | ⏳ **le prochain geste** |
+| 3 | `manim/poste2/VOIX-continuite-tvi.md` — 5 × 15 clips, tout en toutes lettres | ⏳ |
+| 4 | extraction des JSON de voix, passe gabarit **et passe maths recalculée** | ⏳ |
+| 5 | WAV + marques (`-Debit -6` **aux deux étapes**) | ⏳ |
+| 6 | `manim/poste2/analyse_ecrans.py` — le socle d'écran de la série | ⏳ |
+| 7 | les 5 scripts Manim + une mesure hors rendu par épisode | ⏳ |
+| 8 | `verifier-avant-rendu.py`, puis dry run `AUDIT=1 BORDS=1` | ⏳ |
+| 9 | planches `-ql` **regardées à l'image** + gros plans sur `04b`, `07b`, `09b` | ⏳ |
+| 10 | voix validée par Frédéric, rendu HD (verrou `mkdir`/`rmdir` partagé) | ⏳ |
+| 11 | vignettes, envoi R2, clés à la main dans `lib/videos/videos-r2.json` | ⏳ |
+| 12 | fusion dans `main` **par union de clés**, déploiement, URL en 200 | ⏳ |
+| 13 | **et seulement alors** les lignes de `notion_ressources` | ⏳ |
+
+⛔ Une ligne de coach écrite avant le déploiement donne un bouton mort : c'est arrivé le
+24/11 sur les douze paysages de l'espace.
+
+### Les pièges hérités à relire avant d'écrire les scripts
+
+- `manim/REPRISE-espace-terminale.md` — la méthode entière, et notamment : la planche ne
+  montre que la **dernière image** d'un écran ; `col()` rapetisse un bloc sans le dire ;
+  un gros `AUDIT-TARD` cache une vraie avance ; l'écran de réponse **hérite** de l'écran
+  de question.
+- `manim/REPRISE-entiers-cm1-6e.md` — ses 43 pièges valent ici.
+- ⛔ Ne **jamais** lancer `node scripts/generer-videos-r2.mjs` : il sort du registre toute
+  vidéo dont le MP4 n'est pas sur ce disque.
+
+---
+
+## 8. Où j'en suis exactement (27/11/2026)
+
+**Fait** :
+- lecture des 5 shorts (`continuite_tvi_short.py`) et de la vieille paysage de notion
+  (`continuite_tvi.py`) — le § 3 dit ce qu'ils occupent déjà ;
+- `manim/poste2/tirage-lettres-continuite-tvi.py` — le tirage des 10 lettres, rejouable ;
+- ce manifeste : 5 titres, 5 accroches, 5 × 14 chapitres, 10 questions avec leurs
+  propositions, leur bonne réponse et leur contrôle d'exclusion, et le contre-contrôle
+  titre / accroche de chaque épisode ;
+- `manim/poste2/verifier-accroches-continuite-tvi.py` — l'instrument du contre-contrôle,
+  avec son étalon (§ 6) : **30 cartes, 0 alerte**, et deux réécritures qu'il a imposées ;
+- `manim/poste2/controler-maths-continuite-tvi.py` — **la passe maths du manifeste** :
+  les 59 affirmations chiffrées du § 5 recalculées, pas relues. f(0), f(2), les signes de
+  f′, le nombre de solutions de chaque exemple et de chaque défi (compté par changement
+  de signe, pas annoncé). **59 contrôles, 0 erreur.** ⭐ À relancer après chaque retouche
+  d'un exemple : c'est exactement là qu'une erreur se fait ENSEIGNER.
+
+**Pas fait, et volontairement** : aucune voix, aucun script Manim, aucun rendu, aucune
+écriture dans un registre ni dans `notion_ressources`, aucun push.
+
+**Le prochain geste, dans cet ordre** :
+1. faire relire le § 5 à Frédéric — **les titres et les accroches d'abord**, parce que
+   tout le reste en dépend, et les trois ⚠️ du § 6 ;
+2. trancher la question des **3 cartes contre 4** (§ 2) : si c'est quatre, c'est un
+   chantier de socle à faire **avant** les voix ;
+3. écrire `manim/poste2/VOIX-continuite-tvi.md`, 75 clips, en recopiant le gabarit de
+   `VOIX-espace-terminale.md` ;
+4. puis seulement `analyse_ecrans.py` et les 5 scripts.
+
+⛔ **Ne pas écrire les voix avant d'avoir la relecture des titres** : un titre qui change
+après l'enregistrement, c'est un WAV et un rendu de perdus.
