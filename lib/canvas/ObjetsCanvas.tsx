@@ -69,6 +69,14 @@ const TEINTES: Record<ObjetId, Teinte> = {
   chapeau: { a: "#1d4ed8", b: "#fbbf24", c: "#ffffff" },
   pomme: { a: "#ef4444", b: "#16a34a", c: "#78350f" },
   banane: { a: "#fde047", b: "#a16207", c: "#ffffff" },
+  ananas: { a: "#fbbf24", b: "#16a34a", c: "#b45309" },
+  orange: { a: "#fb923c", b: "#16a34a", c: "#ffffff" },
+  fraise: { a: "#ef4444", b: "#16a34a", c: "#fef08a" },
+  ours: { a: "#c08457", b: "#f5d0a9", c: "#111827" },
+  bouteille: { a: "#7dd3fc", b: "#2563eb", c: "#ffffff" },
+  bille: { a: "#60a5fa", b: "#ffffff", c: "#ffffff" },
+  coquillage: { a: "#fda4af", b: "#ffffff", c: "#ffffff" },
+  caisse: { a: "#d97706", b: "#92400e", c: "#ffffff" },
   arbre: { a: "#22c55e", b: "#92400e", c: "#ffffff" },
   fleur: { a: "#ec4899", b: "#fbbf24", c: "#16a34a" },
   feuille: { a: "#4ade80", b: "#15803d", c: "#ffffff" },
@@ -202,6 +210,72 @@ const DESSINS: Record<ObjetId, (t: Teinte) => React.ReactNode> = {
       <path d="M 13 14 A 36 36 0 0 0 49 50 A 24 24 0 0 1 25 18 Z" {...forme(t.a)} />
       <path d="M 13 14 L 11 8" {...forme(t.b)} />
       <path d="M 49 50 L 55 52" {...forme(t.b)} />
+    </>
+  ),
+  // ⭐ 27/11/2026 — dessins CALMES : une forme pleine, peu de détails, pas de
+  // visage expressif (sauf l'ours, gentil et immobile). Frédéric : « les objets
+  // doivent être tranquilles ».
+  ananas: (t) => (
+    <>
+      <path d="M 30 22 L 22 6 L 29 14 L 30 4 L 31 14 L 38 6 Z" {...forme(t.b)} />
+      <ellipse cx={30} cy={38} rx={14} ry={17} {...forme(t.a)} />
+      <path d="M 20 30 L 40 46 M 40 30 L 20 46 M 18 38 L 30 50 M 42 38 L 30 50 M 24 24 L 36 34 M 36 24 L 24 34" {...detail(1.2)} />
+    </>
+  ),
+  orange: (t) => (
+    <>
+      <circle cx={30} cy={33} r={19} {...forme(t.a)} />
+      <path d="M 30 14 a 9 5 0 0 1 11 -3 a 9 5 0 0 1 -11 3 Z" {...forme(t.b)} />
+      <circle cx={30} cy={15} r={1.6} fill={ENCRE} />
+    </>
+  ),
+  fraise: (t) => (
+    <>
+      <path d="M 14 22 C 14 40 24 54 30 54 C 36 54 46 40 46 22 C 40 18 20 18 14 22 Z" {...forme(t.a)} />
+      <path d="M 16 21 L 22 12 L 26 19 L 30 10 L 34 19 L 38 12 L 44 21 C 36 25 24 25 16 21 Z" {...forme(t.b)} />
+      {[[22, 30], [30, 32], [38, 30], [25, 40], [35, 40], [30, 47]].map(([x, y], i) => (
+        <ellipse key={i} cx={x} cy={y} rx={1.3} ry={2} fill={t.c} stroke={ENCRE} strokeWidth={0.8} />
+      ))}
+    </>
+  ),
+  ours: (t) => (
+    <>
+      <circle cx={17} cy={13} r={7} {...forme(t.a)} />
+      <circle cx={43} cy={13} r={7} {...forme(t.a)} />
+      <ellipse cx={30} cy={45} rx={15} ry={12} {...forme(t.a)} />
+      <ellipse cx={30} cy={47} rx={8} ry={7} {...forme(t.b)} />
+      <circle cx={30} cy={24} r={14} {...forme(t.a)} />
+      <ellipse cx={30} cy={29} rx={6} ry={4.5} {...forme(t.b)} />
+      <circle cx={25} cy={21} r={1.9} fill={ENCRE} />
+      <circle cx={35} cy={21} r={1.9} fill={ENCRE} />
+      <ellipse cx={30} cy={27.5} rx={2.2} ry={1.6} fill={ENCRE} />
+    </>
+  ),
+  bouteille: (t) => (
+    <>
+      <path d="M 25 6 L 35 6 L 35 16 C 42 20 42 24 42 28 L 42 52 C 42 54 40 56 38 56 L 22 56 C 20 56 18 54 18 52 L 18 28 C 18 24 18 20 25 16 Z" {...forme(t.a)} />
+      <rect x={24} y={3} width={12} height={6} rx={1.5} {...forme(t.b)} />
+      <rect x={18} y={32} width={24} height={12} {...forme(t.c)} />
+    </>
+  ),
+  bille: (t) => (
+    <>
+      <circle cx={30} cy={31} r={17} {...forme(t.a)} />
+      <ellipse cx={24} cy={24} rx={4} ry={3} fill={t.b} stroke="none" />
+    </>
+  ),
+  coquillage: (t) => (
+    <>
+      <path d="M 30 52 L 8 26 C 12 12 48 12 52 26 Z" {...forme(t.a)} />
+      <path d="M 30 52 L 16 18 M 30 52 L 30 15 M 30 52 L 44 18" {...detail(1.4)} />
+      <path d="M 24 52 L 36 52 L 33 56 L 27 56 Z" {...forme(t.a)} />
+    </>
+  ),
+  caisse: (t) => (
+    <>
+      <rect x={9} y={14} width={42} height={36} rx={2} {...forme(t.a)} />
+      <path d="M 9 26 L 51 26 M 9 38 L 51 38" {...detail(1.6)} />
+      <path d="M 9 14 L 51 50" {...detail(1.2)} />
     </>
   ),
   arbre: (t) => (
@@ -349,8 +423,17 @@ export default function ObjetsCanvas({ figure }: Props) {
   // ⭐ LA RÉPÉTITION SE SERRE, ELLE NE S'ÉTALE PAS. Trois pommes côte à côte à
   // pleine taille demanderaient 180 px ; elles se chevauchent d'un tiers, comme
   // des objets posés les uns devant les autres, et la cellule reste lisible.
-  const nombreDe = (i: number) => Math.min(5, Math.max(1, elements[i].nombre ?? 1));
-  const largeurCellule = (i: number) => BOITE + (nombreDe(i) - 1) * BOITE * 0.62;
+  // ⭐ 27/11/2026 — `compter` : une COLLECTION à dénombrer (coach CP → CE2).
+  // Les exemplaires ne se chevauchent plus (un enfant de 6 ans compte du doigt),
+  // rangés par 5 comme les doigts d'une main, jusqu'à 20.
+  const compter = figure.compter === true;
+  const nombreDe = (i: number) => Math.min(compter ? 20 : 5, Math.max(1, elements[i].nombre ?? 1));
+  const PAS = compter ? BOITE * 1.08 : BOITE * 0.62;
+  const parRang = (i: number) => (compter ? Math.min(5, nombreDe(i)) : nombreDe(i));
+  const rangsDe = (i: number) => (compter ? Math.ceil(nombreDe(i) / 5) : 1);
+  const largeurCellule = (i: number) => BOITE + (parRang(i) - 1) * PAS;
+  const rangsMax = Math.max(1, ...elements.map((_, i) => rangsDe(i)));
+  const hauteurObjets = BOITE * (1 + (rangsMax - 1) * 1.08);
 
   /* ⛔ L'ÉCART ENTRE CELLULES DÉPEND DES ÉTIQUETTES (mesuré le 02/09/2026).
      Avec 10 px d'écart, « une maison » et « un chapeau » se rejoignaient en
@@ -360,7 +443,7 @@ export default function ObjetsCanvas({ figure }: Props) {
      large que l'objet qu'il nomme : c'est l'étiquette qui fixe l'écart, jamais
      le dessin. */
   const aDesLabels = elements.some((e) => e.label);
-  const ECART = aDesLabels ? 18 : 10;
+  const ECART = aDesLabels ? 18 : compter ? 26 : 10;
 
   /* ⛔⛔ C'EST LE MOT LE PLUS LONG QUI DÉCIDE DU NOMBRE DE COLONNES, PAS LE
      DESSIN (mesuré le 02/09/2026, après deux réglages qui n'ont pas suffi).
@@ -399,7 +482,7 @@ export default function ObjetsCanvas({ figure }: Props) {
   const echelle = Math.min(1.5, largeurUtile / Math.max(1, largeurLigneMax));
 
   const hLabel = aDesLabels ? FONT_LABEL + 8 : 0;
-  const hLigne = BOITE * echelle + hLabel + 12;
+  const hLigne = hauteurObjets * echelle + hLabel + 12;
   const lignes = Math.ceil(elements.length / colonnes);
 
   const lignesConsigne = figure.consigne
@@ -441,7 +524,7 @@ export default function ObjetsCanvas({ figure }: Props) {
                   x={xCell - 3}
                   y={y - 3}
                   width={wCell + 6}
-                  height={BOITE * echelle + hLabel + 4}
+                  height={hauteurObjets * echelle + hLabel + 4}
                   rx={10}
                   fill="none"
                   stroke={ENCRE}
@@ -454,7 +537,7 @@ export default function ObjetsCanvas({ figure }: Props) {
               {Array.from({ length: n }).map((__, j) => (
                 <g
                   key={j}
-                  transform={`translate(${xCell + j * BOITE * 0.62 * echelle}, ${y}) scale(${echelle})`}
+                  transform={`translate(${xCell + (compter ? j % 5 : j) * PAS * echelle}, ${y + (compter ? Math.floor(j / 5) : 0) * BOITE * 1.08 * echelle}) scale(${echelle})`}
                 >
                   {DESSINS[el.quoi](t)}
                 </g>
@@ -480,7 +563,7 @@ export default function ObjetsCanvas({ figure }: Props) {
                 return (
                   <text
                     x={cx}
-                    y={y + BOITE * echelle + FONT_LABEL}
+                    y={y + hauteurObjets * echelle + FONT_LABEL}
                     fontSize={police}
                     fill={ENCRE}
                     textAnchor="middle"

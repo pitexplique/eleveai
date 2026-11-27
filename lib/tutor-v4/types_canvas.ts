@@ -1944,6 +1944,16 @@ export type ObjetId =
   // Ce qui se mange
   | "pomme"
   | "banane"
+  // ⭐ 27/11/2026 — Frédéric, après le test d'un enfant de 6 ans : « toujours
+  // avec des objets. Des ananas, des pommes, des oranges, des ours ».
+  | "ananas"
+  | "orange"
+  | "fraise"
+  | "ours"
+  | "bouteille"
+  | "bille"
+  | "coquillage"
+  | "caisse"
   // La nature
   | "arbre"
   | "fleur"
@@ -1974,6 +1984,9 @@ export type ObjetsCanvasData = {
   elements: ObjetsElement[];
   /** Nombre de colonnes. Par défaut, le canvas en déduit un des éléments. */
   colonnes?: number;
+  /** ⭐ 27/11/2026 — collection à DÉNOMBRER : exemplaires espacés (jamais
+   *  superposés), rangés par 5, jusqu'à 20 par élément. */
+  compter?: boolean;
   /** `coloriage` (défaut) : trait noir fermé, prêt à photocopier. */
   mode?: "couleur" | "coloriage";
   consigne?: string;
