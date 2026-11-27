@@ -10,7 +10,11 @@ import { Video } from "lucide-react";
 import LienVideoModal from "@/components/LienVideoModal";
 import { estShortVideo } from "@/lib/videos/lienVideo";
 
-type VideoCoach = { url: string; titre: string | null };
+// ⭐ 27/11/2026 : `short` vient de l'API, qui le lit au registre R2 — pas de la
+// forme de l'URL. Le repli `estShortVideo` ne sert plus qu'aux vieilles réponses
+// (cache du navigateur) qui n'ont pas encore le champ.
+type VideoCoach = { url: string; titre: string | null; short?: boolean };
+const estShort = (v: VideoCoach) => v.short ?? estShortVideo(v.url);
 type Videos = { notion: Record<string, VideoCoach[]>; micro: Record<string, VideoCoach[]> };
 
 // Une requête par classe et matière, partagée entre les deux modes.
@@ -56,9 +60,9 @@ export default function BoutonVideoCompetence({
   const deLaMicro = (microId && videos?.micro[microId]) || [];
   const deLaNotion = (notionId && videos?.notion[notionId]) || [];
   const video =
-    deLaMicro.find((v) => !estShortVideo(v.url)) ??
+    deLaMicro.find((v) => !estShort(v)) ??
     deLaMicro[0] ??
-    deLaNotion.find((v) => !estShortVideo(v.url)) ??
+    deLaNotion.find((v) => !estShort(v)) ??
     deLaNotion[0];
   if (!video) return null;
 
