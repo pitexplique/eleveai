@@ -153,7 +153,16 @@ class EcransAnalyse(AuditSynchro, MotsCales, Notion6e):
         ⭐ Ce qui le rendrait : une passe sur `VOIX-continuite-tvi.md` qui écrit les
         VALEURS en chiffres, comme la série espace — mécanique, à faire AVANT les WAV.
         Elle n'est pas faite : décision à Frédéric et au chef d'orchestre.
-        ⚠️ `grep -c "self.lettres(" <script>` compte ce que l'audit ne voit pas."""
+        ⚠️ `grep -c "self.lettres(" <script>` compte ce que l'audit ne voit pas.
+
+        ⭐⭐ `AUDIT_TOUT=1` NEUTRALISE CETTE MARQUE, et c'est un outil de MESURE, pas un
+        mode de rendu. Il sert à répondre à une seule question : « si la voix disait ce
+        nombre, l'audit le couvrirait-il ? » On lance un dry run avec `AUDIT=1
+        AUDIT_TOUT=1`, et la liste des `AUDIT-ABSENT` est exactement l'inventaire de ce
+        que la passe « valeurs en chiffres » doit rattraper. ⛔ Ne jamais rendre une
+        vidéo avec : l'audit crierait sur des nombres légitimement dits en lettres."""
+        if os.environ.get("AUDIT_TOUT") == "1":
+            return mob
         return self.sans_audit(mob)
 
     def echelle(self):
@@ -232,9 +241,19 @@ class EcransAnalyse(AuditSynchro, MotsCales, Notion6e):
 
     def pointilles(self, ax, x, y, color=GREY_B):
         """Les deux pointillés qui ramènent un point sur les axes : c'est ce qui rend
-        une image LISIBLE sans graduer tout l'axe."""
-        return VGroup(DashedLine(ax.c2p(x, 0), ax.c2p(x, y), color=color, stroke_width=2),
-                      DashedLine(ax.c2p(0, y), ax.c2p(x, y), color=color, stroke_width=2))
+        une image LISIBLE sans graduer tout l'axe.
+
+        ⛔⛔ MÊME DÉFAUT QUE LES GRADUATIONS, ET IL A ÉCHAPPÉ À LA PREMIÈRE CORRECTION.
+        `ax.c2p(x, 0)` et `ax.c2p(0, y)` EXTRAPOLENT quand l'intervalle ne contient pas
+        0 : sur l'écran du Maïdo (x de 6 à 12,4), les pointillés partaient à x = −11,4,
+        hors cadre. ⚠️ J'avais corrigé `plan_axes` sans regarder les AUTRES fonctions
+        qui appellent `c2p` avec un zéro — corriger un helper ne corrige pas sa famille.
+        Trouvé par `BORDS=1`, et seulement parce qu'un dry run est repassé sur E2 : le
+        défaut dormait depuis l'ajout des pointillés, qu'aucun contrôle n'avait suivi."""
+        ax_x = 0 if ax.x_range[0] <= 0 <= ax.x_range[1] else ax.x_range[0]
+        ax_y = 0 if ax.y_range[0] <= 0 <= ax.y_range[1] else ax.y_range[0]
+        return VGroup(DashedLine(ax.c2p(x, ax_y), ax.c2p(x, y), color=color, stroke_width=2),
+                      DashedLine(ax.c2p(ax_x, y), ax.c2p(x, y), color=color, stroke_width=2))
 
     def bande(self, ax, x0, x1, color=VERT_OK, opacite=0.14):
         """Un intervalle de l'axe des x, surligné. Sert à montrer le MORCEAU sur lequel

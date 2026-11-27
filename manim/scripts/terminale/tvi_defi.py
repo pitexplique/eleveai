@@ -99,8 +99,8 @@ class TviDefi(EcransAnalyse):
              self.t("modèle", 30, BLEU_CALCUL)], 2.4), 2.4)))
         self.au_mot("le modèle tombe juste")
         self.play(Create(self.niveau(ax, 0.0)), run_time=0.5)
-        self.play(FadeIn(self.col(self.lettres(
-            self.t("écart = 0 : le modèle colle", 28, JAUNE_TITRE)), 1.5)))
+        self.play(FadeIn(self.col(
+            self.t("écart = 0 : le modèle colle", 28, JAUNE_TITRE), 1.5)))
 
         self.au_mot("l'écart est positif, à la fin aussi")
         c = self.courbe(ax, ecart, 0, 2.1)
@@ -108,7 +108,7 @@ class TviDefi(EcransAnalyse):
         self.play(FadeIn(self.pt(ax, 0, 1, VERT_OK)), FadeIn(self.pt(ax, 2, 3, VERT_OK)))
         self.play(FadeIn(self.col(self.t("positif aux deux bouts", 30, VERT_OK), 0.4)))
 
-        self.au_mot("la courbe a croisé le zéro en chemin")
+        self.au_mot("la courbe a croisé le 0 en chemin")
         self.play(FadeIn(self.col(self.t("et pourtant elle a croisé zéro", 30,
                                          ORANGE_RETENUE), -0.8)))
         self.attendre_voix(marge=0.5)
@@ -124,26 +124,26 @@ class TviDefi(EcransAnalyse):
                                   w=4.8, h=3.4, grad_x=(1,), grad_y=(0,))
         self.play(Create(ax), FadeIn(grad), run_time=0.6)
 
-        self.au_mot("Soit g de x égale x moins un")
-        self.play(FadeIn(self.col(self.lettres(
-            self.t("g(x) = (x − 1)² − 4", 36, BLEU_CALCUL)), 2.5)))
+        self.au_mot("Soit g de x égale x moins 1")
+        self.play(FadeIn(self.col(
+            self.t("g(x) = (x − 1)² − 4", 36, BLEU_CALCUL), 2.5)))
         self.play(Create(self.courbe(ax, parabole, -2, 4.1)), run_time=1.2)
         self.play(Create(self.niveau(ax, 0.0)), run_time=0.4)
 
         self.au_mot("Les deux bornes sont positives")
         self.play(FadeIn(self.pt(ax, -2, 5, VERT_OK)), FadeIn(self.pt(ax, 4, 5, VERT_OK)),
-                  FadeIn(self.col(self.lettres(self.t("g(−2) = 5, g(4) = 5", 32, VERT_OK)),
+                  FadeIn(self.col(self.t("g(−2) = 5, g(4) = 5", 32, VERT_OK),
                                   1.6)))
         self.au_mot("le théorème ne dit rien")
         self.play(FadeIn(self.col(self.t("d'un bloc : il ne dit RIEN", 30, ROUGE_ERREUR),
                                   0.8)))
 
-        self.au_mot("On coupe donc en un")
+        self.au_mot("On coupe donc en 1")
         coupe = DashedLine(ax.c2p(1, -5), ax.c2p(1, 6), color=JAUNE_TITRE, stroke_width=3)
         self.play(Create(coupe), run_time=0.5)
         self.play(FadeIn(self.pt(ax, 1, -4, ROUGE_ERREUR)),
-                  FadeIn(self.col(self.lettres(self.t("au creux : g(1) = −4", 32,
-                                                      JAUNE_TITRE)), -0.1)))
+                  FadeIn(self.col(self.t("au creux : g(1) = −4", 32,
+                                                      JAUNE_TITRE), -0.1)))
 
         self.au_mot("une solution de chaque côté")
         self.play(FadeIn(self.pt(ax, -1, 0, JAUNE_TITRE, r=0.1)),
@@ -193,9 +193,9 @@ class TviDefi(EcransAnalyse):
             [self.t(s, kw.get("fs_enonce", 32)) for s in enonce],
             [c[0] if len(c) == 1 else self.choix2(*c) for c in choix],
             **{k: v for k, v in kw.items() if k != "fs_enonce"})
-        self.lettres(q)
+        q
         for c in cartes:
-            self.lettres(c)
+            c
         self.play(FadeIn(tete), run_time=0.3)
         self.play(FadeIn(q, shift=UP * 0.15), run_time=0.4)
         self.q_montrer_choix(cartes)
@@ -212,11 +212,11 @@ class TviDefi(EcransAnalyse):
         self.play(FadeIn(un))
         self.au_mot("Sur le second")
         deux = self.t("morceau 2 : une solution", 28, VERT_OK)
-        self.lettres(deux)
+        deux
         self.gauche(deux, -2.0, xmax=0.2, x0=-6.4)
         self.play(FadeIn(deux))
         self.au_mot("Une plus une font deux")
-        tot = self.lettres(self.t("en tout : 2", 36, JAUNE_TITRE))
+        tot = self.t("en tout : 2", 36, JAUNE_TITRE)
         self.gauche(tot, -2.8, xmax=0.2, x0=-6.4)
         self.play(FadeIn(tot, scale=1.2))
         self.attendre_voix(marge=0.5)
@@ -229,30 +229,30 @@ class TviDefi(EcransAnalyse):
         self.play(Write(titre), run_time=0.5)
 
         self.au_mot("Soit f de t égale t au cube")
-        f_ = self.lettres(self.t("f(t) = t³ − 3t + 1   sur [0 ; 2]", 34, BLEU_CALCUL))
+        f_ = self.t("f(t) = t³ − 3t + 1   sur [0 ; 2]", 34, BLEU_CALCUL)
         self.play(FadeIn(self.col(f_, 2.5)))
         self.au_mot("C'est un polynôme")
         self.play(FadeIn(self.col(self.t("polynôme → continue", 28, VERT_OK), 1.8)))
 
         self.au_mot("La dérivée f prime de t vaut")
-        d = self.lettres(self.t("f ′(t) = 3t² − 3", 34, JAUNE_TITRE))
+        d = self.t("f ′(t) = 3t² − 3", 34, JAUNE_TITRE)
         self.play(FadeIn(self.col(d, 1.0)))
-        self.au_mot("elle s'annule en un")
+        self.au_mot("elle s'annule en 1")
         tab = self.tab_variations(("0", "1", "2"), ("−", "+"),
                                   (("1", "−1"), ("−1", "3")), x0=-6.4, y=0.3, larg=4.6,
                                   h=2.2)
         self.play(FadeIn(tab), run_time=0.7)
 
-        self.au_mot("Sur l'intervalle zéro un")
+        self.au_mot("Sur l'intervalle 0 1")
         a = self.t("[0 ; 1] : une unique solution α", 30, VERT_OK)
-        self.lettres(a)
+        a
         self.play(FadeIn(self.col(a, -0.2)))
-        self.au_mot("Sur l'intervalle un deux")
+        self.au_mot("Sur l'intervalle 1 2")
         b = self.t("[1 ; 2] : une unique solution β", 30, VERT_OK)
-        self.lettres(b)
+        b
         self.play(FadeIn(self.col(b, -1.1)))
         self.au_mot("Deux solutions en tout")
-        self.play(FadeIn(self.col(self.lettres(self.t("2 solutions", 40, JAUNE_TITRE)),
+        self.play(FadeIn(self.col(self.t("2 solutions", 40, JAUNE_TITRE),
                                   -2.1), scale=1.15))
         self.attendre_voix(marge=0.5)
 
@@ -263,9 +263,9 @@ class TviDefi(EcransAnalyse):
         titre = self.t("Le piège", 44, ORANGE_RETENUE).to_edge(UP, buff=0.45)
         self.play(Write(titre), run_time=0.5)
 
-        self.au_mot("Si on applique le théorème sur l'intervalle zéro deux")
-        bloc = VGroup(self.lettres(self.t("f(0) = 1 > 0", 34, ROUGE_ERREUR)),
-                      self.lettres(self.t("f(2) = 3 > 0", 34, ROUGE_ERREUR)),
+        self.au_mot("Si on applique le théorème sur l'intervalle 0 2")
+        bloc = VGroup(self.t("f(0) = 1 > 0", 34, ROUGE_ERREUR),
+                      self.t("f(2) = 3 > 0", 34, ROUGE_ERREUR),
                       self.t("deux nombres positifs", 28, ROUGE_ERREUR))
         bloc.arrange(DOWN, buff=0.2)
         self.gauche(bloc, 1.5, xmax=1.0, x0=-6.4)
@@ -274,13 +274,13 @@ class TviDefi(EcransAnalyse):
         self.au_mot("Le théorème ne dit rien du tout")
         r = self.t("le théorème ne dit RIEN", 36, ROUGE_ERREUR)
         self.play(FadeIn(self.col(r, 1.8), scale=1.15))
-        self.au_mot("Il y a pourtant deux solutions")
-        p = self.lettres(self.t("et il y a 2 solutions", 34, VERT_OK))
+        self.au_mot("Il y a pourtant 2 solutions")
+        p = self.t("et il y a 2 solutions", 34, VERT_OK)
         self.play(FadeIn(self.col(p, 0.9)))
 
-        self.au_mot("deux solutions, ça se démontre en deux fois")
-        self.play(FadeIn(self.col(self.lettres(
-            self.t("2 solutions = 2 démonstrations", 30, WHITE)), 0.0)))
+        self.au_mot("2 solutions, ça se démontre en 2 fois")
+        self.play(FadeIn(self.col(
+            self.t("2 solutions = 2 démonstrations", 30, WHITE), 0.0)))
         self.au_mot("un morceau sans changement de signe")
         self.play(FadeIn(self.col(self.pile(
             [self.t("un morceau sans changement", 28, JAUNE_TITRE),
@@ -293,8 +293,8 @@ class TviDefi(EcransAnalyse):
         self.dire("07-question")
         self.add_mascotte(scale=0.5)
         calc = VGroup(self.t("à la calculatrice :", 26, GREY_B),
-                      self.lettres(self.t("f(0,3) ≈ 0,13", 36, VERT_OK)),
-                      self.lettres(self.t("f(0,4) ≈ −0,14", 36, ROUGE_ERREUR)))
+                      self.t("f(0,3) ≈ 0,13", 36, VERT_OK),
+                      self.t("f(0,4) ≈ −0,14", 36, ROUGE_ERREUR))
         calc.arrange(DOWN, aligned_edge=LEFT, buff=0.26)
         self.gauche(calc, 0.3, xmax=1.6, x0=-6.0)
         self.play(FadeIn(calc), run_time=0.5)
@@ -305,9 +305,9 @@ class TviDefi(EcransAnalyse):
             [self.t(s, kw.get("fs_enonce", 32)) for s in enonce],
             [c[0] for c in choix],
             **{k: v for k, v in kw.items() if k != "fs_enonce"})
-        self.lettres(q)
+        q
         for c in cartes:
-            self.lettres(c)
+            c
         self.play(FadeIn(tete), run_time=0.3)
         self.play(FadeIn(q, shift=UP * 0.15), run_time=0.4)
         self.q_montrer_choix(cartes)
@@ -322,7 +322,7 @@ class TviDefi(EcransAnalyse):
         chg.next_to(calc, DOWN, buff=0.3).align_to(calc, LEFT)
         self.play(FadeIn(chg))
         self.au_mot("ce sont des images, pas des antécédents")
-        bloc = VGroup(self.lettres(self.t("0,13 et −0,14 : des IMAGES", 28, ROUGE_ERREUR)),
+        bloc = VGroup(self.t("0,13 et −0,14 : des IMAGES", 28, ROUGE_ERREUR),
                       self.t("pas des antécédents", 28, ROUGE_ERREUR))
         bloc.arrange(DOWN, aligned_edge=LEFT, buff=0.16)
         # ⛔ même correction qu'en E4 : les blocs empilés se posent les uns par rapport
@@ -332,7 +332,7 @@ class TviDefi(EcransAnalyse):
         self.play(FadeIn(bloc))
         self.au_mot("On encadre alpha par des valeurs de t")
         bas = self.t("on encadre α par des valeurs de t", 28, JAUNE_TITRE)
-        self.lettres(bas)
+        bas
         bas.next_to(bloc, DOWN, buff=0.3).align_to(calc, LEFT)
         self.play(FadeIn(bas))
         self.attendre_voix(marge=0.5)
@@ -346,11 +346,11 @@ class TviDefi(EcransAnalyse):
         lignes = [("f est un polynôme, donc continue sur [0 ; 2]", "f est un polynôme"),
                   ("le tableau de variations, avec le signe de f ′", "Ensuite le tableau"),
                   ("[0 ; 1] : continue, strictement décroissante de 1 à −1,",
-                   "sur l'intervalle zéro un"),
+                   "sur l'intervalle 0 1"),
                   ("0 entre les deux : une unique solution α", None),
                   ("le même bloc sur [1 ; 2] pour β", "Le même bloc"),
                   ("0,3 < α < 0,4", "Enfin l'encadrement")]
-        bloc = VGroup(*[self.lettres(self.t(s, 28, larg=11.4)) for s, _ in lignes])
+        bloc = VGroup(*[self.t(s, 28, larg=11.4) for s, _ in lignes])
         bloc.arrange(DOWN, aligned_edge=LEFT, buff=0.26).move_to(P(-0.4, 0.1))
         for l, (_, mot) in zip(bloc, lignes):
             if mot:
@@ -364,10 +364,10 @@ class TviDefi(EcransAnalyse):
         self.add_mascotte(scale=0.6)
         titre = self.t("À toi de jouer !", 46, JAUNE_TITRE).to_edge(UP, buff=0.5)
         self.play(Write(titre), run_time=0.5)
-        f_ = self.lettres(self.t("f(x) = x³ − 12x + 5", 62, BLEU_CALCUL))
+        f_ = self.t("f(x) = x³ − 12x + 5", 62, BLEU_CALCUL)
         self.play(FadeIn(f_.move_to(P(-0.4, 1.4))))
-        self.au_mot("Combien l'équation f de x égale zéro")
-        q = self.lettres(self.t("combien de solutions sur [0 ; 3] ?", 36))
+        self.au_mot("Combien l'équation f de x égale 0")
+        q = self.t("combien de solutions sur [0 ; 3] ?", 36)
         self.play(FadeIn(q.move_to(P(-0.4, 0.0)), shift=UP * 0.15))
         self.au_mot("les deux morceaux ne donnent pas la même réponse")
         ind = self.t("attention : les deux morceaux diffèrent", 30, ORANGE_RETENUE)
@@ -384,23 +384,23 @@ class TviDefi(EcransAnalyse):
         titre = self.t("Correction", 42, VERT_OK).to_edge(UP, buff=0.45)
         self.play(Write(titre), run_time=0.5)
 
-        self.au_mot("La dérivée f prime de x vaut trois x au carré")
-        d = self.lettres(self.t("f ′(x) = 3x² − 12, nulle en 2", 32, JAUNE_TITRE))
+        self.au_mot("La dérivée f prime de x vaut 3 x au carré")
+        d = self.t("f ′(x) = 3x² − 12, nulle en 2", 32, JAUNE_TITRE)
         self.play(FadeIn(self.col(d, 2.5)))
         tab = self.tab_variations(("0", "2", "3"), ("−", "+"),
                                   (("5", "−11"), ("−11", "−4")), x0=-6.4, y=0.9, larg=4.6,
                                   h=2.0)
         self.play(FadeIn(tab), run_time=0.7)
 
-        self.au_mot("Sur l'intervalle zéro deux")
-        a = VGroup(self.lettres(self.t("[0 ; 2] : de 5 à −11", 30, VERT_OK)),
-                   self.lettres(self.t("0 entre les deux : UNE solution", 28, VERT_OK)))
+        self.au_mot("Sur l'intervalle 0 2")
+        a = VGroup(self.t("[0 ; 2] : de 5 à −11", 30, VERT_OK),
+                   self.t("0 entre les deux : UNE solution", 28, VERT_OK))
         a.arrange(DOWN, aligned_edge=LEFT, buff=0.14)
         self.play(FadeIn(self.col(a, 1.4)))
 
-        self.au_mot("Sur l'intervalle deux trois")
-        b = VGroup(self.lettres(self.t("[2 ; 3] : de −11 à −4", 30, ROUGE_ERREUR)),
-                   self.lettres(self.t("0 n'y est pas : AUCUNE", 28, ROUGE_ERREUR)))
+        self.au_mot("Sur l'intervalle 2 3")
+        b = VGroup(self.t("[2 ; 3] : de −11 à −4", 30, ROUGE_ERREUR),
+                   self.t("0 n'y est pas : AUCUNE", 28, ROUGE_ERREUR))
         b.arrange(DOWN, aligned_edge=LEFT, buff=0.14)
         self.play(FadeIn(self.col(b, 0.0)))
 

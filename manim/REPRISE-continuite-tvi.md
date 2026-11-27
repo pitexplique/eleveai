@@ -951,7 +951,7 @@ Sur le premier dry run, le `grep` ancré annonçait 14 écrans, 0 question et 0 
 vrai compte était 15, 2 et 1. Les signalements tombent **sur les barres de progression**.
 ⭐ On écrit la sortie dans un fichier, on éclate les `\r` en `\n`, et on compte sans ancre.
 
-### ⚠️ L'audit est en grande partie DÉSARMÉ dans cette série, et c'est mesurable
+### ✅ (PÉRIMÉ — voir § 11) L'audit était désarmé ; il ne l'est plus depuis le 27/11 au soir
 
 `grep -c "self.lettres(" manim/scripts/terminale/{continuite_reconnaitre,tvi_*}.py`
 compte ce que l'audit ne voit pas. La cause est écrite dans la docstring de
@@ -975,6 +975,11 @@ droite le dit : le dry run voit les bords et les nombres, la planche voit l'imag
 
 | | épisode | script | voix | mesure | dry run | planche `-ql` **regardée** | WAV | HD |
 |---|---|---|---|---|---|---|---|---|
+> ⛔⛔ **CE TABLEAU EST DÉPASSÉ DEPUIS LA PASSE CHIFFRES (§ 11) : les cinq planches
+> sont de nouveau PÉRIMÉES**, parce que les cinq scripts ont changé. Les colonnes
+> « dry run » restent vraies (relancées après la passe) ; la colonne « planche » ne
+> l'est plus. `python -X utf8 manim/poste2/fraicheur-planches.py` → 5 à refaire.
+
 | E1 | `continuite_reconnaitre` | ✅ | ✅ 15 clips | ✅ | ✅ 15 écrans, 0 bord, 0 audit | ✅ **refaite et regardée au soir** (⚠️ la 1ʳᵉ lecture portait sur un rendu PÉRIMÉ) | ⛔ | ⛔ |
 | E2 | `tvi_appliquer` | ✅ | ✅ 15 clips | ✅ | ✅ 15 / 0 / 0 | ✅ **refaite et regardée au soir** (⚠️ idem, périmée par le socle) | ⛔ | ⛔ |
 | E3 | `tvi_unicite` | ✅ | ✅ 15 clips | ✅ | ✅ 15 / 0 / 0 | ✅ **2 fois** | ⛔ | ⛔ |
@@ -1156,3 +1161,101 @@ voix, et la règle qu'ils mesurent — *une carte ne doit pas être réfutable e
 rappelant l'accroche, ni le titre* — vaut pour toutes les séries. Deux paysages de
 terminale sont en production avec ce défaut, et il n'y avait aucun instrument pour le
 dire.
+
+---
+
+# 11. LA PASSE « VALEURS EN CHIFFRES » — l'audit rendu à la série (27/11, soir)
+
+**Décidée par le chef d'orchestre**, sur le constat que j'avais écrit au § 9 : les voix
+écrivaient les valeurs en toutes lettres, l'écran les écrit en chiffres, et l'audit —
+qui cherche chaque nombre affiché dans le TEXTE de la voix — ne pouvait rien
+reconnaître. Ce n'était pas un pari : les douze voix de la série espace écrivent déjà
+les valeurs en chiffres et sont en production. La prononciation tient.
+
+## 11.1 Ce que ça a rendu, mesuré
+
+| | avant la passe | après |
+|---|---|---|
+| E2, nombres à l'écran que la voix ne dit pas | **60** | **1**, puis **0** |
+| les 5 épisodes, `AUDIT-ABSENT` au dry run | ⃠ l'audit était désarmé | **0** |
+| marques `self.lettres(` dans les 5 scripts | **163** | **5** |
+| cartes vérifiables par `--voix` | 23 sur 30 | **24 sur 30** |
+
+⭐⭐ **Et l'audit MORD, c'est vérifié et pas supposé** : en écrivant `g(2) = 34` à la
+place de `33` dans E2, le dry run a sorti `AUDIT-ABSENT 05-appliquer « 34 »`
+immédiatement. C'est le contrôle qui manquait à toute la série — « un nombre est à
+l'écran sans être dit » — et il couvre maintenant les cinq épisodes.
+
+## 11.2 L'outil qui a servi à mesurer : `AUDIT_TOUT=1`
+
+`EcransAnalyse.lettres` devient un no-op quand `AUDIT_TOUT=1`. Un dry run
+`AUDIT=1 AUDIT_TOUT=1` rend alors **l'inventaire exact de ce que la passe doit
+rattraper**, au lieu de le deviner. ⛔ C'est un outil de MESURE : jamais un rendu.
+
+## 11.3 Les 5 marques gardées, et pourquoi (sur 163)
+
+| épisode | texte | pourquoi la voix ne le dit pas |
+|---|---|---|
+| E2 `00` | `f(a) < 0 < f(b)` | formule de page de garde, la voix ne l'énonce pas |
+| E4 `02` | `1. f continue` | **numéro de liste**, pas une valeur |
+| E4 `04b` | `c'est la 3ᵉ hypothèse,` | **ordinal** : « 3ᵉ » se dit « troisième », l'écrire en chiffre ferait lire « 3 e » |
+| E4 `09b` | `f ′(x) = 3x² + 3 > 0` | le « 0 » de « > 0 » est de la NOTATION, la voix dit « strictement positif » |
+| E5 `04b` | `morceau 1 : une solution` | **étiquette** de morceau, la voix dit « sur le premier morceau » |
+
+⭐ Trois autres résidus ont été réglés **en alignant l'écran sur la voix**, ce qui vaut
+mieux qu'une marque : « 12 h : 14 °C » → « midi : 14 °C » (la voix dit midi),
+« g(x) ≥ 2 sur [0 ; 5] » → « sur tout l'intervalle », « = 0 entre f(1) et f(3) » →
+« entre les deux images ». ⚠️ Et un mot de voix a changé pour coller à l'écran :
+« Quatre lignes » → « 4 lignes » dans E4 `00`.
+
+## 11.4 ⛔⛔ Deux pièges que la passe a révélés
+
+### `verifier-avant-rendu.py` ne voit pas un extrait passé par une LISTE
+
+Il lit les appels `au_mot("…")` **littéraux**. Or E4 et E5 construisent leurs écrans à
+partir de listes de couples `(texte, mot-clé)` : ces extraits-là lui sont **invisibles**.
+Un seul a survécu à la passe (`"sur l'intervalle zéro un"`, E5 `08`), et il n'est apparu
+qu'au rendu : la scène s'est arrêtée à **11 écrans sur 15**, en silence pour le
+contrôleur. ⚠️ **Le compte d'écrans du dry run est donc un contrôle à part entière** :
+15, pas 14, pas 11. ⛔ Ne pas se fier au « 0 problème » du contrôleur statique quand un
+épisode nourrit ses écrans par des données.
+
+### Corriger un helper ne corrige pas sa famille
+
+`pointilles()` avait **exactement** le défaut de `plan_axes` — `c2p(x, 0)` qui
+extrapole quand l'intervalle ne contient pas 0 — et il a survécu à la correction, parce
+que j'avais corrigé la fonction signalée sans regarder les autres qui appellent `c2p`
+avec un zéro. Les pointillés de E2 partaient à x = −11,4, hors cadre. ⚠️ Et le défaut a
+dormi : aucun dry run n'était repassé sur E2 depuis leur ajout.
+
+## 11.5 Où ça en est, et ce qui vient
+
+| | état |
+|---|---|
+| la passe chiffres sur les 5 voix | ✅ faite, 75 clips |
+| les extraits `au_mot` rattrapés | ✅ 33 + 1 trouvé au rendu |
+| dry run des 5 | ✅ **15 écrans, 0 bord, 0 AUDIT-ABSENT** |
+| `--voix`, passe maths, mesure, étalon, arbitrages | ✅ tous verts |
+| ⏳ **les planches** | ⛔ **les 5 sont PÉRIMÉES** : les scripts ont changé. `fraicheur-planches.py` le dit |
+| ⏳ **les WAV** | ⛔ **pas lancés** — voir ci-dessous |
+
+⛔⛔ **POURQUOI JE N'AI PAS LANCÉ LES WAV, alors que le chef avait ouvert la porte.**
+La règle de relève (65 % de contexte) tombe ici, et c'est la bonne place pour s'arrêter :
+les WAV sont une étape longue dont le résultat se vérifie APRÈS (marques, dry run,
+planches). Les lancer sans avoir de quoi vérifier produirait exactement ce que cette
+journée a appris à redouter : un artefact crédible que personne n'a regardé. La passe
+chiffres, elle, est une unité COMPLÈTE et stable — la suivante part d'un état cohérent.
+
+⭐ **Les `AUDIT-TARD` ne sont pas des défauts aujourd'hui.** Il y en a 35 à 67 par
+épisode, et c'est normal : sans marques, chaque `au_mot` est estimé au prorata des
+caractères, donc tout paraît en retard. **Ils ne veulent dire quelque chose qu'après les
+WAV** — et c'est à ce moment-là, et seulement là, qu'il faudra les lire, avec les
+`AUDIT-AVANCE` (0 aujourd'hui, ce qui ne prouve rien non plus).
+
+**Le prochain geste, dans l'ordre exact :**
+
+1. `bash manim/poste2/voix-continuite-tous-les-wav.sh` — il n'a jamais tourné ;
+2. poser `fichier_marques = "<script>_marques.json"` dans les 5 classes de scène ;
+3. re-dry-run les 5 : **c'est là que les `RETARD` et les `AUDIT-AVANCE` apparaîtront** ;
+4. `bash manim/poste2/planches-tvi.sh`, puis **regarder les cinq planches** ;
+5. ⛔ **s'arrêter là** et montrer l'état au chef d'orchestre. Le HD est sa porte.

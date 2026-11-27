@@ -110,13 +110,13 @@ class TviUnicite(EcransAnalyse):
             [self.t("elle ne saute pas", 30, VERT_OK),
              self.t("et ne recule jamais", 30, VERT_OK)], 2.2), 2.2)))
 
-        self.au_mot("est donc passé au kilomètre cent")
+        self.au_mot("est donc passé au kilomètre 100")
         self.play(Create(self.niveau(ax, 100)), run_time=0.5)
         t100 = 10.5 * (100 / 165) ** (1 / 1.25)
         d = self.pt(ax, t100, 100, JAUNE_TITRE, r=0.11)
         self.play(FadeIn(d, scale=2.2), Flash(d, color=JAUNE_TITRE, line_length=0.25))
-        self.play(FadeIn(self.col(self.lettres(
-            self.t("au km 100 : une fois", 34, JAUNE_TITRE)), 0.6)))
+        self.play(FadeIn(self.col(
+            self.t("au km 100 : une fois", 34, JAUNE_TITRE), 0.6)))
 
         self.au_mot("Un promeneur qui ferait demi-tour")
         self.play(FadeIn(self.col(self.pile(
@@ -138,12 +138,12 @@ class TviUnicite(EcransAnalyse):
                                  w=4.6, h=1.9, grad_y=(0,))
         self.play(Create(ax1), Create(ax2), FadeIn(g1), FadeIn(g2), run_time=0.7)
 
-        self.au_mot("Elles partent toutes les deux de moins trois")
+        self.au_mot("Elles partent toutes les deux de moins 3")
         bornes = VGroup(self.pt(ax1, 0, -3, GREY_B), self.pt(ax1, 4, 5, GREY_B),
                         self.pt(ax2, 0, -3, GREY_B), self.pt(ax2, 4, 5, GREY_B))
         self.play(FadeIn(bornes), run_time=0.4)
-        self.play(FadeIn(self.col(self.lettres(
-            self.t("de −3 à 5, les deux", 30)), 2.6)))
+        self.play(FadeIn(self.col(
+            self.t("de −3 à 5, les deux", 30), 2.6)))
 
         self.au_mot("La première monte, redescend")
         self.play(Create(self.courbe(ax1, ondule, 0, 4.1, color=ORANGE_RETENUE)),
@@ -170,7 +170,7 @@ class TviUnicite(EcransAnalyse):
                   ("k est compris entre f(a) et f(b)", VERT_OK, "Soit k un nombre"),
                   ("alors f(x) = k admet", WHITE, "Alors l'équation"),
                   ("une UNIQUE solution dans [a ; b]", WHITE, "admet une unique solution")]
-        bloc = VGroup(*[self.lettres(self.t(s, 34, c)) for s, c, _ in lignes])
+        bloc = VGroup(*[self.t(s, 34, c) for s, c, _ in lignes])
         bloc.arrange(DOWN, aligned_edge=LEFT, buff=0.24).move_to(P(-0.5, 0.9))
         for l, (_, _, mot) in zip(bloc, lignes):
             self.au_mot(mot)
@@ -179,7 +179,7 @@ class TviUnicite(EcransAnalyse):
         d = self.t("DEUX hypothèses, pas une", 36, ORANGE_RETENUE).move_to(P(-0.5, -1.6))
         self.play(FadeIn(d, scale=1.15))
         self.au_mot("se justifie par le signe de la dérivée")
-        j = self.lettres(self.t("la monotonie se prouve par le signe de f ′", 30, BLEU_CALCUL))
+        j = self.t("la monotonie se prouve par le signe de f ′", 30, BLEU_CALCUL)
         self.play(FadeIn(j.move_to(P(-0.5, -2.5))))
         self.attendre_voix(marge=0.5)
 
@@ -189,9 +189,9 @@ class TviUnicite(EcransAnalyse):
         self.add_mascotte(scale=0.5)
         donnees = VGroup(self.t("g continue et", 30),
                          self.t("strictement croissante", 30),
-                         self.lettres(self.t("sur [0 ; 5]", 32)),
-                         self.lettres(self.t("g(0) = 2", 40, BLEU_CALCUL)),
-                         self.lettres(self.t("g(5) = 9", 40, BLEU_CALCUL)))
+                         self.t("sur [0 ; 5]", 32),
+                         self.t("g(0) = 2", 40, BLEU_CALCUL),
+                         self.t("g(5) = 9", 40, BLEU_CALCUL))
         donnees.arrange(DOWN, buff=0.26)
         self.gauche(donnees, 0.2, xmax=1.6, x0=-6.0)
         self.play(FadeIn(donnees), run_time=0.5)
@@ -202,9 +202,9 @@ class TviUnicite(EcransAnalyse):
             [self.t(s, kw.get("fs_enonce", 32)) for s in enonce],
             [self.choix2(*c) for c in choix],
             **{k: v for k, v in kw.items() if k != "fs_enonce"})
-        self.lettres(q)
+        q
         for c in cartes:
-            self.lettres(c)
+            c
         self.play(FadeIn(tete), run_time=0.3)
         self.play(FadeIn(q, shift=UP * 0.15), run_time=0.4)
         self.q_montrer_choix(cartes)
@@ -215,9 +215,9 @@ class TviUnicite(EcransAnalyse):
         self.dire("04b-reponse")
         self.play(FadeOut(donnees), run_time=0.2)
         self.q_reponse(cartes, 2, pause, rebours)
-        self.au_mot("elle reste plus grande que deux")
-        bloc = VGroup(self.lettres(self.t("g(x) ≥ 2 sur [0 ; 5]", 38, VERT_OK)),
-                      self.lettres(self.t("elle ne vaut jamais 0", 32, VERT_OK)))
+        self.au_mot("elle reste plus grande que 2")
+        bloc = VGroup(self.t("g(x) ≥ 2 sur tout l'intervalle", 34, VERT_OK),
+                      self.t("elle ne vaut jamais 0", 32, VERT_OK))
         bloc.arrange(DOWN, buff=0.22)
         self.gauche(bloc, 1.2, xmax=1.6, x0=-6.0)
         self.play(FadeIn(bloc))
@@ -227,7 +227,7 @@ class TviUnicite(EcransAnalyse):
                      self.t("encore faut-il que 0", 26, GREY_B),
                      self.t("soit atteint", 26, GREY_B))
         bas.arrange(DOWN, aligned_edge=LEFT, buff=0.12)
-        self.lettres(bas)
+        bas
         self.gauche(bas, -1.5, xmax=1.6, x0=-6.0)
         self.play(FadeIn(bas))
         self.attendre_voix(marge=0.5)
@@ -244,23 +244,23 @@ class TviUnicite(EcransAnalyse):
         self.play(Create(ax), FadeIn(grad), run_time=0.6)
 
         self.au_mot("Soit f de x égale exponentielle")
-        self.play(FadeIn(self.col(self.lettres(
-            self.t("f(x) = eˣ + x − 4", 38, BLEU_CALCUL)), 2.5)))
+        self.play(FadeIn(self.col(
+            self.t("f(x) = eˣ + x − 4", 38, BLEU_CALCUL), 2.5)))
         self.au_mot("C'est une somme de fonctions continues")
         self.play(FadeIn(self.col(self.t("somme de continues", 30, VERT_OK), 1.7)))
 
-        self.au_mot("f de zéro vaut un")
+        self.au_mot("f de 0 vaut 1")
         self.play(FadeIn(self.pt(ax, 0, f_appliquer(0), ROUGE_ERREUR), scale=2),
-                  FadeIn(self.col(self.lettres(self.t("f(0) = −3", 36, ROUGE_ERREUR)), 0.9)))
-        self.au_mot("f de deux vaut environ")
+                  FadeIn(self.col(self.t("f(0) = −3", 36, ROUGE_ERREUR), 0.9)))
+        self.au_mot("f de 2 vaut environ")
         self.play(FadeIn(self.pt(ax, 2, f_appliquer(2), VERT_OK), scale=2),
-                  FadeIn(self.col(self.lettres(self.t("f(2) ≈ 5,39", 36, VERT_OK)), 0.1)))
+                  FadeIn(self.col(self.t("f(2) ≈ 5,39", 36, VERT_OK), 0.1)))
 
         self.au_mot("La dérivée f prime de x vaut")
         self.play(Create(self.courbe(ax, f_appliquer, 0, 2.1)), run_time=1.0)
         self.play(Create(self.niveau(ax, 0.0)), run_time=0.4)
-        self.play(FadeIn(self.col(self.lettres(
-            self.t("f ′(x) = eˣ + 1 > 0", 36, JAUNE_TITRE)), -0.8)))
+        self.play(FadeIn(self.col(
+            self.t("f ′(x) = eˣ + 1 > 0", 36, JAUNE_TITRE), -0.8)))
         self.au_mot("f est strictement croissante")
         self.play(FadeIn(self.col(self.t("strictement croissante", 30, VERT_OK), -1.5)))
         # ⚠️ à −2,4 cette ligne tombait sous le garde-fou Ti-Margo de col() et sortait
@@ -290,8 +290,8 @@ class TviUnicite(EcransAnalyse):
                         self.courbe(ax, lambda x: 0.0, 1, 2.6, color=ROUGE_ERREUR),
                         self.courbe(ax, lambda x: 2 * (x - 2.6), 2.6, 4.1, color=ROUGE_ERREUR))
         self.play(Create(palier), run_time=1.0)
-        self.play(FadeIn(self.col(self.lettres(
-            self.t("un palier à 0 :", 30, ROUGE_ERREUR)), 1.6)))
+        self.play(FadeIn(self.col(
+            self.t("un palier à 0 :", 30, ROUGE_ERREUR), 1.6)))
         self.au_mot("une infinité de solutions")
         self.play(FadeIn(self.col(self.t("une INFINITÉ de solutions", 32, ROUGE_ERREUR), 0.8)))
 
@@ -315,10 +315,10 @@ class TviUnicite(EcransAnalyse):
         self.clear()
         self.dire("07-question")
         self.add_mascotte(scale=0.5)
-        donnees = VGroup(self.lettres(self.t("f continue", 30)),
-                         self.lettres(self.t("sur [0 ; 6]", 30)),
-                         self.lettres(self.t("f(0) = −4", 36, BLEU_CALCUL)),
-                         self.lettres(self.t("f(6) = 2", 36, BLEU_CALCUL)))
+        donnees = VGroup(self.t("f continue", 30),
+                         self.t("sur [0 ; 6]", 30),
+                         self.t("f(0) = −4", 36, BLEU_CALCUL),
+                         self.t("f(6) = 2", 36, BLEU_CALCUL))
         donnees.arrange(DOWN, buff=0.28)
         self.gauche(donnees, 0.2, xmax=0.2, x0=-6.4)
         self.play(FadeIn(donnees), run_time=0.5)
@@ -329,9 +329,9 @@ class TviUnicite(EcransAnalyse):
             [self.t(s, kw.get("fs_enonce", 32)) for s in enonce],
             [c[0] for c in choix],
             **{k: v for k, v in kw.items() if k != "fs_enonce"})
-        self.lettres(q)
+        q
         for c in cartes:
-            self.lettres(c)
+            c
         self.play(FadeIn(tete), run_time=0.3)
         self.play(FadeIn(q, shift=UP * 0.15), run_time=0.4)
         self.q_montrer_choix(cartes)
@@ -355,7 +355,7 @@ class TviUnicite(EcransAnalyse):
                      self.t("prouver la monotonie —", 26, ORANGE_RETENUE),
                      self.t("ce n'est pas elle qu'on exige", 26, ORANGE_RETENUE))
         bas.arrange(DOWN, aligned_edge=LEFT, buff=0.12)
-        self.lettres(bas)
+        bas
         self.gauche(bas, -1.9, xmax=0.2, x0=-6.4)
         self.play(FadeIn(bas))
         self.attendre_voix(marge=0.5)
@@ -366,8 +366,8 @@ class TviUnicite(EcransAnalyse):
         self.add_mascotte(scale=0.5)
         titre = self.t("La ligne qui change", 42, JAUNE_TITRE).to_edge(UP, buff=0.45)
         self.play(Write(titre), run_time=0.5)
-        ligne = self.lettres(self.t("f ′(x) > 0 sur [0 ; 2], donc f est", 34, VERT_OK))
-        ligne2 = self.lettres(self.t("strictement croissante sur [0 ; 2].", 34, VERT_OK))
+        ligne = self.t("f ′(x) > 0 sur [0 ; 2], donc f est", 34, VERT_OK)
+        ligne2 = self.t("strictement croissante sur [0 ; 2].", 34, VERT_OK)
         bloc = VGroup(ligne, ligne2).arrange(DOWN, aligned_edge=LEFT, buff=0.2)
         self.play(FadeIn(bloc.move_to(P(-0.4, 1.3)), shift=RIGHT * 0.2), run_time=0.6)
         self.au_mot("qui transforme au moins une en une seule")
@@ -384,10 +384,10 @@ class TviUnicite(EcransAnalyse):
         self.add_mascotte(scale=0.6)
         titre = self.t("À toi de jouer !", 46, JAUNE_TITRE).to_edge(UP, buff=0.5)
         self.play(Write(titre), run_time=0.5)
-        enonce = self.lettres(self.t("x + ln x = 3", 76, BLEU_CALCUL))
+        enonce = self.t("x + ln x = 3", 76, BLEU_CALCUL)
         self.play(FadeIn(enonce.move_to(P(-0.4, 0.9))))
         self.au_mot("admet une unique solution")
-        q = self.lettres(self.t("une UNIQUE solution sur [1 ; 3] ?", 36))
+        q = self.t("une UNIQUE solution sur [1 ; 3] ?", 36)
         self.play(FadeIn(q.move_to(P(-0.4, -0.4)), shift=UP * 0.15))
         reb = CompteARebours(5, r=0.34, fs=32).move_to(P(-0.4, -1.8))
         self.play(FadeIn(reb, scale=0.6), run_time=0.3)
@@ -406,23 +406,23 @@ class TviUnicite(EcransAnalyse):
         self.play(Create(ax), FadeIn(grad), run_time=0.6)
 
         self.au_mot("On pose f de x égale x, plus logarithme")
-        self.play(FadeIn(self.col(self.lettres(
-            self.t("f(x) = x + ln x − 3", 36, BLEU_CALCUL)), 2.5)))
+        self.play(FadeIn(self.col(
+            self.t("f(x) = x + ln x − 3", 36, BLEU_CALCUL), 2.5)))
         self.au_mot("donc f est continue")
         self.play(FadeIn(self.col(self.t("somme de continues", 28, VERT_OK), 1.8)))
 
-        self.au_mot("f de un vaut un")
+        self.au_mot("f de 1 vaut 1")
         self.play(FadeIn(self.pt(ax, 1, f_defi(1), ROUGE_ERREUR), scale=2),
-                  FadeIn(self.col(self.lettres(self.t("f(1) = −2", 34, ROUGE_ERREUR)), 1.0)))
-        self.au_mot("f de trois vaut logarithme népérien de trois")
+                  FadeIn(self.col(self.t("f(1) = −2", 34, ROUGE_ERREUR), 1.0)))
+        self.au_mot("f de 3 vaut logarithme népérien de 3")
         self.play(FadeIn(self.pt(ax, 3, f_defi(3), VERT_OK), scale=2),
-                  FadeIn(self.col(self.lettres(self.t("f(3) = ln 3 ≈ 1,10", 34, VERT_OK)), 0.2)))
+                  FadeIn(self.col(self.t("f(3) = ln 3 ≈ 1,10", 34, VERT_OK), 0.2)))
 
-        self.au_mot("La dérivée f prime de x vaut un, plus un sur x")
+        self.au_mot("La dérivée f prime de x vaut 1, plus 1 sur x")
         self.play(Create(self.courbe(ax, f_defi, 1, 3.1)), run_time=1.0)
         self.play(Create(self.niveau(ax, 0.0)), run_time=0.4)
-        self.play(FadeIn(self.col(self.lettres(
-            self.t("f ′(x) = 1 + 1/x > 0", 34, JAUNE_TITRE)), -0.7)))
+        self.play(FadeIn(self.col(
+            self.t("f ′(x) = 1 + 1/x > 0", 34, JAUNE_TITRE), -0.7)))
         self.au_mot("admet une unique solution")
         self.play(FadeIn(self.col(self.t("une UNIQUE solution", 32, VERT_OK), -1.7)))
         self.attendre_voix(marge=0.6)

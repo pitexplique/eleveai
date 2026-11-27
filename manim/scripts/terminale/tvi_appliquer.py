@@ -120,14 +120,14 @@ class TviAppliquer(EcransAnalyse):
                                   w=5.6, h=4.0, grad_x=(6, 12), grad_y=(-2, 14))
         self.play(Create(ax), FadeIn(grad), run_time=0.8)
 
-        self.au_mot("À six heures")
+        self.au_mot("À 6 heures")
         p6 = VGroup(self.pt(ax, 6, -2, ROUGE_ERREUR), self.pointilles(ax, 6, -2))
-        l6 = self.lettres(self.t("6 h : −2 °C", 30, ROUGE_ERREUR))
+        l6 = self.t("6 h : −2 °C", 30, ROUGE_ERREUR)
         self.play(FadeIn(p6, scale=2), FadeIn(self.col(l6, 2.1)))
 
         self.au_mot("À midi")
         p12 = VGroup(self.pt(ax, 12, 14, VERT_OK), self.pointilles(ax, 12, 14))
-        l12 = self.lettres(self.t("12 h : 14 °C", 30, VERT_OK))
+        l12 = self.t("midi : 14 °C", 30, VERT_OK)
         self.play(FadeIn(p12, scale=2), FadeIn(self.col(l12, 1.2)))
 
         self.au_mot("Elle n'a pas regardé")
@@ -135,7 +135,7 @@ class TviAppliquer(EcransAnalyse):
         self.play(FadeIn(self.col(q, 0.2), shift=UP * 0.15))
 
         self.au_mot("il a fait exactement")
-        zero = self.lettres(self.t("0 °C, forcément", 36, BLEU_CALCUL))
+        zero = self.t("0 °C, forcément", 36, BLEU_CALCUL)
         self.play(FadeIn(self.col(zero, -0.9), shift=UP * 0.15))
         self.au_mot("Sans savoir quand")
         quand = self.t("mais on ne sait pas quand", 28, GREY_B)
@@ -168,11 +168,11 @@ class TviAppliquer(EcransAnalyse):
         ligne0 = self.niveau(ax, 0.0)
         self.play(Create(ligne0), run_time=0.7)
 
-        self.au_mot("Zéro est compris entre")
-        enc = self.lettres(self.t("−2 < 0 < 14", 44, BLEU_CALCUL))
+        self.au_mot("0 est compris entre")
+        enc = self.t("−2 < 0 < 14", 44, BLEU_CALCUL)
         self.play(FadeIn(self.col(enc, 0.5), shift=UP * 0.15))
 
-        self.au_mot("donc zéro est atteint")
+        self.au_mot("donc 0 est atteint")
         t_zero = 6 + 6 * (2 / 16) ** (1 / 1.6)
         d = self.pt(ax, t_zero, 0, JAUNE_TITRE, r=0.11)
         self.play(FadeIn(d, scale=2.2), Flash(d, color=JAUNE_TITRE, line_length=0.25))
@@ -192,20 +192,20 @@ class TviAppliquer(EcransAnalyse):
                   ("k est compris entre f(a) et f(b)", VERT_OK),
                   ("alors il existe au moins un c", WHITE),
                   ("de [a ; b] tel que f(c) = k", WHITE)]
-        bloc = VGroup(*[self.lettres(self.t(s, 34, col)) for s, col in lignes])
+        bloc = VGroup(*[self.t(s, 34, col) for s, col in lignes])
         bloc.arrange(DOWN, aligned_edge=LEFT, buff=0.26).move_to(P(-0.5, 1.15))
         for i, l in enumerate(bloc):
             self.au_mot(["Soit f une fonction", "Soit k un nombre",
                          "Alors il existe", "tel que f de c"][i])
             self.play(FadeIn(l, shift=RIGHT * 0.2), run_time=0.4)
 
-        self.au_mot("k vaut presque toujours zéro")
-        cadre = self.lettres(self.t("au bac : k = 0", 40, ORANGE_RETENUE)).move_to(P(-0.5, -1.0))
+        self.au_mot("k vaut presque toujours 0")
+        cadre = self.t("au bac : k = 0", 40, ORANGE_RETENUE).move_to(P(-0.5, -1.0))
         self.play(FadeIn(cadre, scale=1.2),
                   Create(SurroundingRectangle(cadre, color=ORANGE_RETENUE, buff=0.22,
                                               stroke_width=3)))
         self.au_mot("sont de signes contraires")
-        sig = self.lettres(self.t("f(a) et f(b) de signes contraires", 34, BLEU_CALCUL))
+        sig = self.t("f(a) et f(b) de signes contraires", 34, BLEU_CALCUL)
         self.play(FadeIn(sig.move_to(P(-0.5, -2.1)), shift=UP * 0.15))
         self.attendre_voix(marge=0.5)
 
@@ -215,10 +215,10 @@ class TviAppliquer(EcransAnalyse):
         self.clear()
         self.dire("04-question")
         self.add_mascotte(scale=0.5)
-        donnees = VGroup(self.lettres(self.t("f continue sur [1 ; 4]", 34)),
-                         self.lettres(self.t("f(1) = 5", 42, BLEU_CALCUL)),
-                         self.lettres(self.t("f(4) = 9", 42, BLEU_CALCUL)),
-                         self.lettres(self.t("f(x) = 7 ?", 46, JAUNE_TITRE)))
+        donnees = VGroup(self.t("f continue sur [1 ; 4]", 34),
+                         self.t("f(1) = 5", 42, BLEU_CALCUL),
+                         self.t("f(4) = 9", 42, BLEU_CALCUL),
+                         self.t("f(x) = 7 ?", 46, JAUNE_TITRE))
         donnees.arrange(DOWN, buff=0.38)
         self.gauche(donnees, 0.3, xmax=1.6, x0=-6.0)
         self.play(FadeIn(donnees), run_time=0.5)
@@ -229,7 +229,7 @@ class TviAppliquer(EcransAnalyse):
             [self.t(s, kw.get("fs_enonce", 32)) for s in enonce],
             [self.choix2(*c) for c in choix],
             **{k: v for k, v in kw.items() if k != "fs_enonce"})
-        self.lettres(q)
+        q
         self.play(FadeIn(tete), run_time=0.3)
         self.play(FadeIn(q, shift=UP * 0.15), run_time=0.4)
         self.q_montrer_choix(cartes)
@@ -239,16 +239,16 @@ class TviAppliquer(EcransAnalyse):
     def reponse_1(self, cartes, pause, rebours, donnees):
         self.dire("04b-reponse")
         self.q_reponse(cartes, 2, pause, rebours)
-        self.au_mot("Sept est compris entre cinq et neuf")
+        self.au_mot("7 est compris entre 5 et 9")
         # ⛔ VU À LA PLANCHE : l'encadrement posé à y = −1,4 s'écrivait PAR-DESSUS la
         # ligne « f(x) = 7 ? » de la colonne de gauche, qui reste à l'écran. Le dry run
         # ne l'a pas vu (rien ne dépassait du cadre), BORDS non plus : deux objets qui
         # se chevauchent sont tous les deux dans la marge. ⭐ La question « f(x) = 7 ? »
         # est justement ce que l'encadrement RÉPOND : elle se transforme en lui.
-        enc = self.lettres(self.t("5 < 7 < 9", 54, VERT_OK))
+        enc = self.t("5 < 7 < 9", 54, VERT_OK)
         enc.move_to(donnees[3]).align_to(donnees[3], LEFT)
         self.play(ReplacementTransform(donnees[3], enc))
-        self.au_mot("La réponse A cherche un zéro")
+        self.au_mot("La réponse A cherche un 0")
         bulle = self.t("A cherche un zéro :\non ne demande pas zéro", 28, ROUGE_ERREUR)
         self.gauche(bulle, -2.6, xmax=1.6, x0=-6.0)
         self.play(FadeIn(bulle))
@@ -268,24 +268,24 @@ class TviAppliquer(EcransAnalyse):
         self.play(Create(ax), FadeIn(grad), run_time=0.7)
 
         self.au_mot("Soit g de x égale")
-        f_ = self.lettres(self.t("g(x) = x⁵ + 3x − 5", 38, BLEU_CALCUL))
+        f_ = self.t("g(x) = x⁵ + 3x − 5", 38, BLEU_CALCUL)
         self.play(FadeIn(self.col(f_, 2.5)))
         self.au_mot("C'est une fonction polynôme")
         self.play(FadeIn(self.col(self.t("polynôme → continue", 32, VERT_OK), 1.6)))
 
-        self.au_mot("g de un vaut")
+        self.au_mot("g de 1 vaut")
         p1 = self.pt(ax, 1, g(1), ROUGE_ERREUR)
         self.play(FadeIn(p1, scale=2),
-                  FadeIn(self.col(self.lettres(self.t("g(1) = −1", 38, ROUGE_ERREUR)), 0.7)))
-        self.au_mot("g de deux vaut")
+                  FadeIn(self.col(self.t("g(1) = −1", 38, ROUGE_ERREUR), 0.7)))
+        self.au_mot("g de 2 vaut")
         p2 = self.pt(ax, 2, g(2), VERT_OK)
         self.play(FadeIn(p2, scale=2),
-                  FadeIn(self.col(self.lettres(self.t("g(2) = 33", 38, VERT_OK)), -0.1)))
+                  FadeIn(self.col(self.t("g(2) = 33", 38, VERT_OK), -0.1)))
 
-        self.au_mot("Zéro est compris entre")
+        self.au_mot("0 est compris entre")
         self.play(Create(self.courbe(ax, g, 0.9, 2.1)), run_time=1.2)
         self.play(Create(self.niveau(ax, 0.0)), run_time=0.5)
-        self.play(FadeIn(self.col(self.lettres(self.t("−1 < 0 < 33", 40, JAUNE_TITRE)), -1.0)))
+        self.play(FadeIn(self.col(self.t("−1 < 0 < 33", 40, JAUNE_TITRE), -1.0)))
 
         self.au_mot("admet donc au moins une solution")
         self.play(FadeIn(self.col(self.t("au moins une solution", 32, VERT_OK), -1.9)))
@@ -332,10 +332,10 @@ class TviAppliquer(EcransAnalyse):
         self.clear()
         self.dire("07-question")
         self.add_mascotte(scale=0.5)
-        donnees = VGroup(self.lettres(self.t("f continue sur [0 ; 3]", 34)),
-                         self.lettres(self.t("f(0) = 2", 42, BLEU_CALCUL)),
-                         self.lettres(self.t("f(3) = 8", 42, BLEU_CALCUL)),
-                         self.lettres(self.t("f(x) = 0 ?", 46, JAUNE_TITRE)))
+        donnees = VGroup(self.t("f continue sur [0 ; 3]", 34),
+                         self.t("f(0) = 2", 42, BLEU_CALCUL),
+                         self.t("f(3) = 8", 42, BLEU_CALCUL),
+                         self.t("f(x) = 0 ?", 46, JAUNE_TITRE))
         donnees.arrange(DOWN, buff=0.38)
         self.gauche(donnees, 0.3, xmax=0.2, x0=-6.4)     # ⚠️ cartes larges : avant 0,2
         self.play(FadeIn(donnees), run_time=0.5)
@@ -346,9 +346,9 @@ class TviAppliquer(EcransAnalyse):
             [self.t(s, kw.get("fs_enonce", 32)) for s in enonce],
             [self.choix2(*c) for c in choix],
             **{k: v for k, v in kw.items() if k != "fs_enonce"})
-        self.lettres(q)
+        q
         for c in cartes:
-            self.lettres(c)
+            c
         self.play(FadeIn(tete), run_time=0.3)
         self.play(FadeIn(q, shift=UP * 0.15), run_time=0.4)
         self.q_montrer_choix(cartes)
@@ -361,12 +361,12 @@ class TviAppliquer(EcransAnalyse):
         self.au_mot("les deux images sont positives")
         # même remède qu'en 04b : la ligne de question devient sa propre réponse,
         # au lieu de recevoir un bloc par-dessus.
-        enc = self.lettres(self.t("2 > 0  et  8 > 0", 40, ROUGE_ERREUR))
+        enc = self.t("2 > 0  et  8 > 0", 40, ROUGE_ERREUR)
         enc.move_to(donnees[3]).align_to(donnees[3], LEFT)
         self.play(ReplacementTransform(donnees[3], enc))
         self.au_mot("Le théorème ne s'applique pas")
         rien = self.t("0 n'est pas entre les deux", 26, ROUGE_ERREUR)
-        self.lettres(rien)
+        rien
         self.gauche(rien, -1.95, xmax=0.2, x0=-6.4)   # ⚠️ vu à la planche : trop serré à −1,65
         self.play(FadeIn(rien))
         self.au_mot("La réponse C va trop loin")
@@ -395,7 +395,7 @@ class TviAppliquer(EcransAnalyse):
             # ⚠️ La 4ᵉ ligne prolonge la 3ᵉ : sa pastille est un ESPACEUR invisible.
             # `Text(" ")` ne se rend pas et casse l'alignement — un Dot transparent, si.
             n = self.pastille(i + 1) if i < 3 else Dot(radius=0.24).set_opacity(0)
-            bloc.add(VGroup(n, self.lettres(self.t(s, 30, larg=9.6))).arrange(RIGHT, buff=0.3))
+            bloc.add(VGroup(n, self.t(s, 30, larg=9.6)).arrange(RIGHT, buff=0.3))
         bloc.arrange(DOWN, aligned_edge=LEFT, buff=0.34).move_to(P(-0.5, 0.55))
         for i, l in enumerate(bloc):
             if i < 3:
@@ -414,10 +414,10 @@ class TviAppliquer(EcransAnalyse):
         self.add_mascotte(scale=0.6)
         titre = self.t("À toi de jouer !", 46, JAUNE_TITRE).to_edge(UP, buff=0.5)
         self.play(Write(titre), run_time=0.5)
-        enonce = self.lettres(self.t("x³ = x + 5", 80, BLEU_CALCUL)).move_to(P(-0.4, 0.9))
+        enonce = self.t("x³ = x + 5", 80, BLEU_CALCUL).move_to(P(-0.4, 0.9))
         self.play(FadeIn(enonce))
-        self.au_mot("admet une solution entre un et deux")
-        c = self.lettres(self.t("une solution entre 1 et 2 ?", 38)).move_to(P(-0.4, -0.3))
+        self.au_mot("admet une solution entre 1 et 2")
+        c = self.t("une solution entre 1 et 2 ?", 38).move_to(P(-0.4, -0.3))
         self.play(FadeIn(c, shift=UP * 0.15))
         self.au_mot("il faut tout ramener")
         ind = self.t("d'abord : tout ramener d'un seul côté", 30, ORANGE_RETENUE)
@@ -444,22 +444,22 @@ class TviAppliquer(EcransAnalyse):
         self.play(Create(ax), FadeIn(grad), run_time=0.6)
 
         self.au_mot("On pose f de x égale")
-        pose = self.lettres(self.t("f(x) = x³ − x − 5", 38, BLEU_CALCUL))
+        pose = self.t("f(x) = x³ − x − 5", 38, BLEU_CALCUL)
         self.play(FadeIn(self.col(pose, 2.4)))
         self.au_mot("donc elle est continue")
         self.play(FadeIn(self.col(self.t("polynôme → continue", 30, VERT_OK), 1.5)))
 
-        self.au_mot("f de un vaut")
+        self.au_mot("f de 1 vaut")
         self.play(FadeIn(self.pt(ax, 1, defi(1), ROUGE_ERREUR), scale=2),
-                  FadeIn(self.col(self.lettres(self.t("f(1) = −5", 38, ROUGE_ERREUR)), 0.6)))
-        self.au_mot("f de deux vaut")
+                  FadeIn(self.col(self.t("f(1) = −5", 38, ROUGE_ERREUR), 0.6)))
+        self.au_mot("f de 2 vaut")
         self.play(FadeIn(self.pt(ax, 2, defi(2), VERT_OK), scale=2),
-                  FadeIn(self.col(self.lettres(self.t("f(2) = 1", 38, VERT_OK)), -0.2)))
+                  FadeIn(self.col(self.t("f(2) = 1", 38, VERT_OK), -0.2)))
 
-        self.au_mot("Zéro est compris entre moins cinq et un")
+        self.au_mot("0 est compris entre moins 5 et 1")
         self.play(Create(self.courbe(ax, defi, 0.9, 2.1)), run_time=1.0)
         self.play(Create(self.niveau(ax, 0.0)), run_time=0.4)
-        self.play(FadeIn(self.col(self.lettres(self.t("−5 < 0 < 1", 40, JAUNE_TITRE)), -1.1)))
+        self.play(FadeIn(self.col(self.t("−5 < 0 < 1", 40, JAUNE_TITRE), -1.1)))
         self.au_mot("c'est exactement résoudre")
         self.play(FadeIn(self.col(self.t("au moins une solution", 32, VERT_OK), -2.0)))
         self.attendre_voix(marge=0.6)
