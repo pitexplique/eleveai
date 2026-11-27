@@ -832,6 +832,54 @@ python -m manim render -ql --disable_caching manim/scripts/terminale/<script>.py
 python scripts/planche-video.py <...>/<nom>-ql.mp4 <planche>.png 4
 ```
 
+### ⛔⛔ LA PLANCHE PÉRIMÉE — le défaut le plus coûteux de la journée
+
+**Ce qui s'est passé.** J'ai vu le carré vide sur la planche de E1, corrigé les glyphes
+⩽ / ⩾ en ≤ / ≥, ajouté un garde-fou dans le socle qui REFUSE les deux mauvais, relancé
+le dry run — propre — et commité. **Je n'ai jamais re-rendu l'épisode.** J'ai relu sa
+planche en croyant regarder le nouveau rendu : le carré y était toujours, et je l'ai lu
+comme un glyphe à la taille de la vignette. Il a fallu qu'une session sœur le reprenne
+au pixel pour que ça se voie — le carré porte `2A` / `7E` écrits en tout petit dedans,
+c'est la façon dont Pango affiche un codepoint sans glyphe.
+
+**Les trois mesures qui ont tranché, dans l'ordre :**
+
+1. la source dit bien `≥` (U+2265) à la ligne 428 — donc ni le texte ni le garde-fou
+   n'étaient en cause ;
+2. un rendu minimal de `Text("x ≥ 1")`, `Text("x ≤ 2")`, `Text("x ≠ 3")` les affiche
+   **tous les trois parfaitement** — donc ni la police ni Manim ;
+3. `stat` sur les deux fichiers : le MP4 datait de **06:21:27**, la source de
+   **06:22:55**. **La source était plus récente de 88 secondes que la vidéo.**
+
+Il n'y avait aucune transformation à trouver : l'artefact était simplement vieux.
+
+⭐⭐ **LA LEÇON, et elle vaut au-delà de cette série : « planche regardée » n'est vrai
+que de l'artefact qu'on a effectivement RECONSTRUIT.** Un dry run propre ne reconstruit
+rien. Entre la correction et la planche il y a un rendu, et rien ne rappelle de le
+faire — ni Manim, ni le dry run, ni la planche elle-même, qui s'ouvre sans dire son âge.
+
+⭐ **L'instrument qui manquait** : `python -X utf8 manim/poste2/fraicheur-planches.py`.
+Il compare chaque MP4 `-ql` à **trois** dates : son script, **le socle d'écran**, et sa
+voix. Il imprime la commande de re-rendu de chaque planche périmée.
+⚠️ Il ne regarde que les dates : une planche fraîche peut être mauvaise, une planche
+périmée est forcément à refaire. Il dit « à refaire », jamais « c'est bon ».
+⭐⭐ Et il en a trouvé **deux**, pas une : E2 aussi était périmée — par une modification
+du SOCLE, 56 secondes après son rendu. C'est le cas le plus facile à oublier, parce
+qu'on pense à son épisode et pas à l'outil commun : **une correction dans le socle
+périme les cinq planches d'un coup.**
+
+**Vérification faite après re-rendu, au pixel**, sur les trois seuls endroits de la
+série où un symbole de comparaison est écrit à l'écran :
+
+| | écran | affiché | état |
+|---|---|---|---|
+| E1 `04` | la légende de g | `g(x) = x² si x ≤ 2, / 3x − 2 si x > 2` | ✅ vrai ≤ |
+| E1 `09b` | la correction | `√(x − 1) : x ≥ 1` | ✅ vrai ≥ |
+| E3 `04b` | la réponse | `g(x) ≥ 2 sur [0 ; 5]` | ✅ vrai ≥ |
+
+Les cinq planches ont été refaites et regardées ensuite ; `fraicheur-planches.py` rend
+**0 planche à refaire**.
+
 ### ⛔⛔ Deux glyphes sortent en CARRÉ VIDE, et rien ne le dit
 
 « ⩽ » (U+2A7D) et « ⩾ » (U+2A7E) ne sont pas dans la police. Ni le dry run ni l'audit ne
@@ -909,14 +957,23 @@ droite le dit : le dry run voit les bords et les nombres, la planche voit l'imag
 
 | | épisode | script | voix | mesure | dry run | planche `-ql` **regardée** | WAV | HD |
 |---|---|---|---|---|---|---|---|---|
-| E1 | `continuite_reconnaitre` | ✅ | ✅ 15 clips | ✅ | ✅ 15 écrans, 0 bord, 0 audit | ✅ **2 fois** (corrigée entre les deux) | ⛔ | ⛔ |
-| E2 | `tvi_appliquer` | ✅ | ✅ 15 clips | ✅ | ✅ 15 / 0 / 0 | ✅ **2 fois** | ⛔ | ⛔ |
+| E1 | `continuite_reconnaitre` | ✅ | ✅ 15 clips | ✅ | ✅ 15 écrans, 0 bord, 0 audit | ✅ **refaite et regardée au soir** (⚠️ la 1ʳᵉ lecture portait sur un rendu PÉRIMÉ) | ⛔ | ⛔ |
+| E2 | `tvi_appliquer` | ✅ | ✅ 15 clips | ✅ | ✅ 15 / 0 / 0 | ✅ **refaite et regardée au soir** (⚠️ idem, périmée par le socle) | ⛔ | ⛔ |
 | E3 | `tvi_unicite` | ✅ | ✅ 15 clips | ✅ | ✅ 15 / 0 / 0 | ✅ **2 fois** | ⛔ | ⛔ |
 | E4 | `tvi_rediger` | ✅ | ✅ 15 clips | ✅ | ✅ 15 / 0 / 0 | ✅ **2 fois** | ⛔ | ⛔ |
 | E5 | `tvi_defi` | ✅ | ✅ 15 clips | ✅ | ✅ 15 / 0 / 0 | ✅ **2 fois** | ⛔ | ⛔ |
 
 ✅ **LES CINQ PLANCHES SONT VALIDÉES PAR FRÉDÉRIC (27/11/2026)** : « les écrans sont
-parfaits ». ⛔ **Ce que ce oui couvre, et rien de plus : l'IMAGE.** Il ne vaut ni pour
+parfaits ».
+
+⛔⛔ **MAIS CETTE VALIDATION A ÉTÉ DONNÉE SUR DES ÉCRANS QUI CONTENAIENT ENCORE UN CARRÉ
+VIDE** (E1, écran « Correction », U+2A7E — voir § 9, « la planche périmée »). Elle ne le
+couvre donc pas : **personne ne valide un défaut qu'on ne lui a pas montré.** Ce n'est
+le reproche de personne, et c'est écrit ici pour que dans six mois quelqu'un ne croie
+pas que ce tofu avait été accepté. Les planches ont été refaites et regardées depuis,
+le carré n'y est plus.
+
+⛔ **Ce que ce oui couvre, et rien de plus : l'IMAGE.** Il ne vaut ni pour
 l'écriture (les titres, les accroches, et les deux points du § 10.4 restent ouverts), ni
 pour l'arithmétique — c'est la leçon de la série des entiers, où une voix validée disait
 « 6 032 a 3 centaines ». Ici les nombres sont tenus à part, par
@@ -965,6 +1022,7 @@ python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py --voix
 python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py --etalonner
 python -X utf8 manim/poste2/controler-maths-continuite-tvi.py
 python -X utf8 manim/poste2/mesure-continuite-tvi.py
+python -X utf8 manim/poste2/fraicheur-planches.py
 ```
 
 Attendus, au 27/11 au soir : 30 cartes / **2 alertes, les deux sur E3 `04` A** ·
@@ -1032,6 +1090,11 @@ TROIS cartes. À relire à l'œil avant l'enregistrement.
 - ⛔⛔ **Pas de rendu HD sans avoir regardé la planche `-ql` de l'épisode.** Tout se
   contrôle en `-ql` ; le HD seulement quand on est certain. Et celui qui rend est celui
   qui a regardé.
+- ⛔⛔ **Et la planche regardée doit être FRAÎCHE** : après toute correction — dans
+  l'épisode **ou dans le socle** — il faut RE-RENDRE avant de regarder. Un dry run
+  propre ne reconstruit rien. `python -X utf8 manim/poste2/fraicheur-planches.py` le
+  dit en une seconde ; sans lui, on relit un vieux rendu en croyant voir le nouveau,
+  et c'est arrivé le 27/11 sur deux épisodes.
 - ⛔⛔ **Le verrou de rendu HD est un mutex `mkdir` / `rmdir` partagé avec les autres
   sessions** : une seule série en rendu à la fois. Un verrou orphelin bloque tout le
   monde.
@@ -1062,6 +1125,7 @@ TROIS cartes. À relire à l'œil avant l'enregistrement.
 | `controler-maths-continuite-tvi.py` | un nombre faux parmi les 73 du manifeste et des corrections dites à voix haute | tout choix pédagogique |
 | `mesure-continuite-tvi.py` | une carte rétrécie sous 19 px, un énoncé rétréci par `col()`, un bloc qui recouvre Ti-Margo | les figures, les colonnes de calcul, les chevauchements d'un écran à l'autre |
 | `voix-continuite-depuis-md.py` | un des 15 clips manquant ou hors gabarit | le contenu des clips |
+| `fraicheur-planches.py` | une planche `-ql` plus vieille que son script, **que le socle** ou que sa voix | si une planche fraîche est bonne : il ne regarde que les dates |
 | `voix-continuite-tous-les-wav.sh` | — | ⛔ **il n'a jamais tourné** |
 
 ⭐ Les trois premiers ne sont pas propres à cette série : ils lisent un manifeste et une
