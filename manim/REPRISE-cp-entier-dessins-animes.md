@@ -62,3 +62,14 @@ Voix validées par Frédéric le 26/11 (`manim/SCRIPTS-cp-nombres-dessins-animes
 - Contrôle HD des 6 : son ok (−19 dB en moyenne), compteur visible ~3 s à chaque question, rien de rogné, carte à droite et Ti Margo visible dans les shorts, fin eleveai.fr / YouTube, miniatures ok.
 - Corrigé après la 1re HD : paysage dizaine (« 5 unités » et « de 10 » insécables ; 4 bouquets et 6 tulipes séparés et loin de la carte) ; paysage droite (le « 9 » vert écrit sous la piste, il touchait le « 10 »). Ces deux HD sont refaites.
 - [x] 26/11 après-midi, sur son « Oui, envoie » : R2 (24 fichiers, tailles vérifiées), videos-r2.json et /petits (b4fd379d2) ; manifeste (YouTube daté 31/07, 01/08, 02/08/2027), bilans et coach : 6 lignes notion_ressources (9933fd963). Pas poussé.
+
+## Paires 7 → 12 (lire_ecrire, decomposer, ordinal, ordonner, representations, defi) — 27/11
+Demande du 27/11 (test avec un enfant de CP : il adore les shorts d'une minute) : UNE paysage ET UN short par micro.
+Il n'a pas vu le « TU PARIES ? » écrit → dans ces films, accroche par le DESSIN qui intrigue + une QUESTION DITE ;
+pas de `PARI` (cp-commun.js) ni dans le film ni sur la miniature. Ne pas toucher aux 12 vidéos en ligne.
+- [x] Voix des 12 écrites : `manim/SCRIPTS-cp-nombres-dessins-animes-3.md` (bonnes réponses 07 B A C · 08 A B B · 09 B B C ·
+  10 C A B · 11 C A C · 12 A C A). ⏳ ATTENTE DU OK DE FRÉDÉRIC : aucun WAV, aucun rendu avant.
+- Les brouillons `manim/voix/cp-entier-lire-{paysage,short}.json` (26/11, non suivis, ancienne fin) seront écrasés par les voix validées.
+- Ensuite : JSON des voix (`manim/voix/cp-entier-<ep>-{paysage,short}.json`), WAV -Debit -6, instants (séries cp-entier2 /
+  cp-entier2-paysage), films `films/cp-entier2-<ep>.js` + `cp-entier2-paysage-<ep>.js`, planches -ql, HD une à la fois,
+  contrôle image par image, miniatures ; sorties `manim/sorties/cp/maths/entier/07-lire` … `12-defi`.
