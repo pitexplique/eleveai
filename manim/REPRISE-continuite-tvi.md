@@ -1504,3 +1504,126 @@ deux fois le 27/11. `fraicheur-planches.py` les donne périmées, et elles le so
 ⛔ Rien de changé par ailleurs : aucun rendu HD, aucune écriture dans `videos-r2.json` ni
 dans `notion_ressources`, aucun push, aucune publication. Le verrou HD était **libre** et
 n'a pas été pris : tout ce tour est en `-ql`.
+
+---
+
+# 13. LES CINQ CONVERTIS, LES CINQ PLANCHES REGARDÉES (27/11, fin de nuit)
+
+> ⚠️ Ce § 13 **remplace le § 12.8 et le § 12.9** : ils décrivaient l'état où seul E5
+> était converti. Le reste du § 12 (le diagnostic, les instruments, E1 `07`) reste vrai.
+
+## 13.1 Le chiffre, avant / après
+
+| sur les 5 épisodes | avant les WAV | avec les WAV | après conversion |
+|---|---|---|---|
+| `AUDIT-AVANCE` | *0 — mais estimé, donc sans valeur* | **163** | **65** |
+| ⤷ sur les écrans d'**exposition** | — | **101** | **3** — à 0,06 · 0,07 · 0,07 s |
+| ⤷ sur les écrans de **question** | — | 62 | **62**, *intactes et voulues* (§ 12.2) |
+| `RETARD` | 0, estimé | 4 | **3**, tous ≤ 1,03 s |
+| écrans / bords / `AUDIT-ABSENT` | 15 / 0 / 0 | 15 / 0 / 0 | **15 / 0 / 0** |
+
+⭐ **Les 3 avances d'exposition qui restent sont sous le seuil de tolérance de l'audit
+lui-même** (0,06 s) : c'est du bruit d'arrondi entre la fin d'une animation et la marque
+de la voix, pas un résultat montré avant d'être dit. ⛔ Il n'y a rien à y gagner.
+⭐ **Les 3 `RETARD` qui restent** (1,03 s sur E1 `02`, 0,55 s sur E3 `06`, 0,47 s sur E5
+`01`) sont des **animations un peu longues**, pas des repères mal placés : sous une
+seconde, c'est le temps que met un `Create()` de courbe, et le repère suivant rattrape.
+
+## 13.2 Deux choses apprises en convertissant, qui ne sont pas des réglages
+
+### ⭐⭐ Les deux plus grosses avances de la série étaient un oubli de MARQUAGE
+
+17,29 s et 15,63 s, les deux records, sur E4 `02`. Ce n'était pas un défaut de
+synchronisation : la colonne des trois hypothèses numérote « 1. » « 2. » « 3. », et
+**seul le « 1. » portait `self.lettres()`**. Ce sont des numéros de liste — la voix dit
+« le théorème demande trois choses », elle ne les égrène pas — et le commentaire juste
+au-dessus du bloc le disait déjà. Les deux autres le portent maintenant.
+⚠️ **La leçon** : le plus gros chiffre d'une liste d'alertes n'est pas forcément le plus
+grave ; il peut être le plus bête. Lire avant de corriger.
+⭐ Même famille, même soir : les graduations « 1 » et « 4 » de la droite dessinée à la
+main de E1 `09b` (le « 4 » partait à 15,74 s). `plan_axes` sort ses graduations de
+l'audit depuis toujours — « des nombres qu'on LIT, pas des nombres que la voix énonce » —
+mais cette droite-là est construite à la main et personne n'y avait pensé. `sans_audit`.
+
+### ⭐ Six blocs n'avaient AUCUN repère et paraissaient d'un coup
+
+Les quatre lignes de la copie de E1 `08`, les deux de E3 `08`, la citation en quatre
+lignes de E4 `03`, et les énoncés de défi de E1, E2, E4 et E5. Un bloc sans repère paraît
+à l'instant où l'animation y arrive, c'est-à-dire **aussi tôt que possible** : c'est le
+pire cas, et il ne se voit nulle part avant les WAV. **Une ligne, un repère.**
+
+## 13.3 ⚠️ L'angle mort de `reperes-croissants-tvi.py`, confirmé sur un cas réel
+
+Le dry run gardait un `RETARD` de 3,07 s sur E5 `03-theoreme`. Même défaut que celui de
+E4 : le commentaire final était posé sur « une solution, ou aucune », dit à la fin du
+point **trois**, alors qu'il paraît après le point **quatre**. Un repère qui regarde en
+arrière.
+
+⛔ **Et l'outil ne l'a pas vu**, parce que les quatre étapes de cet écran passent par une
+LISTE : il ne lit que les appels littéraux, donc il n'avait rien à quoi comparer. C'est
+l'angle mort écrit dans son en-tête, et il vient de coûter un vrai défaut.
+⭐ **Ce qui l'a trouvé, c'est le dry run.** Les deux instruments ne se remplacent pas :
+celui-ci prévient avant le rendu, le dry run tranche après. Corrigé, et E5 passe de 2
+`RETARD` à 1 (0,47 s).
+
+## 13.4 ✅ Les cinq planches, refaites AVEC marques et regardées à l'image
+
+`bash manim/poste2/planches-tvi.sh` → **0 échec**, et `fraicheur-planches.py` → **0
+planche à refaire** (chaque MP4 postérieur à son script, au socle et à sa voix).
+
+Durées : 6 min 54 à 7 min 48, contre 1 min 15 sans voix. ⚠️ Les rendus prennent environ
+**50 secondes** chacun, et ce n'est PAS le signe d'alerte du § 9 : avec marques, l'essentiel
+de la durée est du `wait()` sur image fixe, qui ne coûte presque rien à rendre. Les gardes
+de `planches-tvi.sh` (MP4 produit, et plus récent que son script) sont passés sur les cinq.
+
+**Ce que j'ai vu, les cinq regardées une par une** :
+
+| | vignettes | ce que j'y ai vu |
+|---|---|---|
+| E1 | 13 | rien à signaler. ⭐ Les `≤` et `≥` s'affichent **vraiment** (`g(x) = x² si x ≤ 2`, `√(x − 1) : x ≥ 1`) — c'est le tofu payé deux fois hier, il n'est plus là |
+| E2 | 13 | rien. ⚠️ Le graphique « vide » de la tuile Maïdo (deux points, pas de courbe) **est voulu** : Léa n'a relevé que deux mesures, c'est le propos de l'écran, et la tuile suivante montre la courbe |
+| E3 | **14** | rien. ⭐ La courbe « elle coupe trois fois » en coupe bien **trois** — vérifié en agrandissant la vignette, pas à l'œil nu sur la planche : la correction d'amplitude (2,6 → 3,2) tient |
+| E4 | 13 | rien, y compris aux deux endroits qui se chevauchaient hier (`07b`, et le commentaire vert de `05`) |
+| E5 | 13 | rien ; nombres justes jusqu'au bout (`[2 ; 3] : de −11 à −4, 0 n'y est pas : AUCUNE`) |
+
+⭐ **Pourquoi E3 a 14 vignettes et les autres 13** : l'écran de réponse hérite de l'écran
+de question (pas de `clear()` entre les deux), donc un couple question/réponse ne donne
+qu'UNE vignette, celle de la réponse. Sur E3 `04`, la fin du compte à rebours fait chuter
+assez de pixels pour que le détecteur y voie une frontière de plus.
+⛔⛔ **Conséquence, et elle vaut pour toutes les séries** : sur une planche, un écran de
+question n'est **jamais** montré dans son état de question — on ne voit que sa réponse.
+La mise en page de la question seule n'est contrôlée par aucune planche ; c'est
+`mesure-continuite-tvi.py` qui en répond.
+⛔ Et ce qu'une planche ne prouve pas : elle montre la **dernière** image de chaque écran,
+donc elle ne dit rien de l'ordre d'apparition — c'est-à-dire précisément de ce que
+`au_fin` vient de corriger. **La synchronisation se lit au dry run, l'image à la planche.**
+
+## 13.5 Les contrôles, tous verts
+
+```
+python -X utf8 manim/poste2/controler-maths-continuite-tvi.py        # 73 contrôles, 0 erreur
+python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py --voix        # 30 cartes, 0 écart
+python -X utf8 manim/poste2/verifier-accroches-continuite-tvi.py --etalonner   # 4 cas, 0 désaccord
+python -X utf8 manim/poste2/mesure-continuite-tvi.py                 # 10 questions, 0 ennui
+python -X utf8 manim/poste2/reperes-croissants-tvi.py                # 0 repère qui recule
+python -X utf8 manim/poste2/fraicheur-planches.py                    # 0 planche à refaire
+python -X utf8 manim/poste2/colonne-ne-donne-pas-la-reponse.py       # ⛔ 1 : E1 07
+bash manim/poste2/dry-tvi.sh                                         # 15 / 0 / 0 sur les cinq
+```
+
+## 13.6 ⛔ CE QUI RESTE, ET DANS QUEL ORDRE
+
+**Une seule chose avant le HD, et elle n'est pas technique :**
+
+1. ⛔⛔ **Trancher E1 `07`** (§ 12.3) : la colonne de gauche affiche « rappel : ln continue
+   / sur ]0 ; +∞[ » pendant toute la pause, et la bonne réponse est la carte B,
+   « sur ]0 ; +∞[ ». C'est de l'ÉCRITURE, donc Frédéric. **Aucun WAV en jeu** : le rappel
+   est à l'écran seulement. Proposition au § 12.3 ; si elle est retenue, c'est deux lignes
+   de texte, un re-rendu de E1 et sa planche.
+2. Ensuite seulement : le HD, les vignettes, R2, les clés dans `videos-r2.json`, la fusion
+   dans `main` **par union de clés**, le déploiement, les URL en 200 — et **en tout
+   dernier** les lignes de `notion_ressources`.
+
+⛔ **Non fait, et volontairement** : aucun rendu HD (le verrou était libre et n'a jamais
+été pris — tout ce tour est en `-ql`), aucune écriture dans `videos-r2.json` ni dans
+`notion_ressources`, aucune publication, aucun push. Trois commits sur `poste2`.

@@ -174,7 +174,13 @@ class TviDefi(EcransAnalyse):
         for l, (_, mot) in zip(bloc, etapes):
             self.au_mot(mot)
             self.play(FadeIn(l, shift=RIGHT * 0.2), run_time=0.4)
-        self.au_mot("une solution, ou aucune")
+        # ⛔ Repere qui pointait EN ARRIERE : « une solution, ou aucune » est dit a la
+        # fin du point TROIS, alors que ce commentaire parait apres le point QUATRE.
+        # RETARD de 3,07 s au dry run. ⚠️ `reperes-croissants-tvi.py` ne pouvait pas
+        # le voir : les quatre etapes passent par une LISTE, et il ne lit que les
+        # appels litteraux -- son angle mort, confirme sur un cas reel.
+        # Le commentaire glose la methode entiere : il se pose sur la DERNIERE phrase.
+        self.au_fin("on encadre les solutions à la calculatrice")
         c = self.t("sur chaque morceau on CONCLUT : une, ou aucune", 30, ORANGE_RETENUE)
         self.play(FadeIn(c.move_to(P(-0.4, -2.4))))
         self.attendre_voix(marge=0.5)
