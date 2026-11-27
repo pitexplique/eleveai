@@ -31,7 +31,7 @@ export default function AccueilNuage() {
       {/* 1. LE TITRE ET LE NUAGE : chacun choisit par où commencer. */}
       <section className="relative overflow-hidden bg-gradient-to-b from-sky-100 via-emerald-50 to-emerald-50">
         <CollinesAccueil className="absolute inset-x-0 bottom-0 h-[150px] w-full sm:h-[200px]" />
-        {/* 🎅 27/11 : la nuit de Noël (petit traîneau, guirlandes, flocons de Koch), du 1er décembre
+        {/* 🎅 27/11 : la nuit de Noël (petit traîneau, guirlandes, flocons de Koch), du 27 novembre
             au 6 janvier ; ?noel=1 pour la voir avant. Elle passe le titre en blanc (CSS dans FondNoel). */}
         <FondNoel actif={saisonDeNoel(new Date())} />
         <div className="accueil-haut relative mx-auto max-w-6xl px-4 pb-8 pt-6 sm:pb-12 sm:pt-8">
