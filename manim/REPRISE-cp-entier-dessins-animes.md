@@ -103,4 +103,17 @@ pas de `PARI` (cp-commun.js) ni dans le film ni sur la miniature. Ne pas toucher
   Miniatures « Dans quel wagon ? » (🚃🧸 ?) et « Qui touche la lune ? » 🌕. Corrigé sur les planches : train et ourson grossis,
   flèches « → » qui mordaient sur les mots, lune déplacée (sous « 4e » / « 1er »), tour de 20 cubes et « 20e » décalés à gauche
   (la carte rognait le « e »). ⚠ En paysage, la zone visible à gauche de la carte s'arrête vers x ≈ 470, pas 520.
-- [ ] 10 → 12 : films, planches, HD une à la fois. Branchement R2 / manifeste / coach : seulement sur l'accord de Frédéric.
+- [x] 10 ordonner : voix JSON + WAV des paires 10, 11 ET 12 faites d'un coup ; "ordonner"/"representations"/"defi" ajoutés aux 2 séries ;
+  instants des 3. Dessins ajoutés à `cp-entier3-dessins.js` : numDUE (1 ou 2 chiffres, dizaines orange / unités bleu), plaqueNumE (nombre sur
+  plaque sombre : lisible sur une voile, un pot, un cerf-volant), bateauE, quaiE (lanternes), cerfVolantE, potConfitureE, carteNumE (carte
+  bleu nuit ; n = null → « ? »), ventE, herbeE.
+  Short « Les cartes dans le vent » (`films/cp-entier2-ordonner.js`) : 91, 9, 19 → B (9 ; 19 ; 91) ; réponse = deux échanges en arc
+  (9 ↔ 91 puis 19 ↔ 91, sinon les cartes se recouvrent) ; commentaire 50, 15, 5 (cartes « ? » qui se retournent). HD 69,0 s (−18,9 dB),
+  compteur ~33-35 s. Paysage « Les bateaux rentrent au port » (`films/cp-entier2-paysage-ordonner.js`) : 21, 5, 30, 12 → 5 < 12 < 21 < 30 ;
+  Q1 cerfs-volants 40, 24, 14 → C (14), compteur ~62-65 s ; Q2 pots 38, 32, 35 → A (32 ; 35 ; 38), compteur ~99-102 s ; HD 131,3 s (−19,1 dB).
+  Rien de rogné, ceinture blanche, fin eleveai.fr / YouTube. Miniatures « Dans quel ordre ? » (ardoise « 91 ; 9 ; 19 / ? ») et
+  « Comment les ranger ? » ⛵⛵⛵. Corrigé sur les planches : cartes, bateaux, cerfs-volants et pots agrandis (trop petits à ×0,9),
+  « 14 < 24 < 40 » et « 32 < 35 < 38 » desserrés, espaces avalés dans l'ardoise de la miniature (→ « ; »). Choix « 32 ; 35 ; 38 » à 58 px.
+  ⚠ Piège shell : un heredoc bash avec certains contenus a été coupé (« here-document delimited by end-of-file ») : écrire les gros
+  fichiers avec l'outil d'écriture, pas par `cat <<EOF`.
+- [ ] 11 → 12 : films, planches, HD une à la fois. Branchement R2 / manifeste / coach : seulement sur l'accord de Frédéric.

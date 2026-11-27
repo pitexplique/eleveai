@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Le soir, les petits bateaux rentrent au port. Mais quel désordre ! Comment les ranger, du plus petit au plus grand ?",
+  "01-petit": "Je cherche d'abord le plus petit. Cinq ! Il n'a qu'un chiffre : il passe devant.",
+  "02-dizaines": "Ensuite, je regarde les dizaines. Douze a une dizaine. Vingt et un en a deux. Trente en a trois.",
+  "03-range": "Cinq, douze, vingt et un, trente. Du plus petit au plus grand. Bonne nuit, les bateaux !",
+  "04-question": "Question ! Trois cerfs-volants dansent dans le ciel : quarante, vingt-quatre, quatorze. Lequel passe en premier, si je range du plus petit au plus grand ? A : quarante. B : vingt-quatre. C : quatorze. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C ! Quatorze n'a qu'une dizaine : il passe en premier. Puis vingt-quatre. Puis quarante.",
+  "05-question": "Question ! Mamie range ses pots de confiture, du plus petit au plus grand. Quel rangement est juste ? A : trente-deux, trente-cinq, trente-huit. B : trente-huit, trente-cinq, trente-deux. C : trente-cinq, trente-deux, trente-huit. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A ! Ils ont tous trois dizaines. Alors je regarde les unités : deux, puis cinq, puis huit.",
+  "06-appris": "Je cherche le plus petit. Je regarde d'abord les dizaines. Si elles sont pareilles, je regarde les unités.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}
