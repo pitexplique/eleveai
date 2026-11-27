@@ -121,12 +121,12 @@ class TviAppliquer(EcransAnalyse):
                                   w=5.6, h=4.0, grad_x=(6, 12), grad_y=(-2, 14))
         self.play(Create(ax), FadeIn(grad), run_time=0.8)
 
-        self.au_mot("À 6 heures")
+        self.au_fin("À 6 heures, moins 2 degrés")
         p6 = VGroup(self.pt(ax, 6, -2, ROUGE_ERREUR), self.pointilles(ax, 6, -2))
         l6 = self.t("6 h : −2 °C", 30, ROUGE_ERREUR)
         self.play(FadeIn(p6, scale=2), FadeIn(self.col(l6, 2.1)))
 
-        self.au_mot("À midi")
+        self.au_fin("À midi, 14 degrés")
         p12 = VGroup(self.pt(ax, 12, 14, VERT_OK), self.pointilles(ax, 12, 14))
         l12 = self.t("midi : 14 °C", 30, VERT_OK)
         self.play(FadeIn(p12, scale=2), FadeIn(self.col(l12, 1.2)))
@@ -135,7 +135,7 @@ class TviAppliquer(EcransAnalyse):
         q = self.t("Entre les deux ?", 34, ORANGE_RETENUE)
         self.play(FadeIn(self.col(q, 0.2), shift=UP * 0.15))
 
-        self.au_mot("il a fait exactement")
+        self.au_fin("il a fait exactement 0 degré")
         zero = self.t("0 °C, forcément", 36, BLEU_CALCUL)
         self.play(FadeIn(self.col(zero, -0.9), shift=UP * 0.15))
         self.au_mot("Sans savoir quand")
@@ -200,7 +200,7 @@ class TviAppliquer(EcransAnalyse):
                          "Alors il existe", "tel que f de c"][i])
             self.play(FadeIn(l, shift=RIGHT * 0.2), run_time=0.4)
 
-        self.au_mot("k vaut presque toujours 0")
+        self.au_fin("k vaut presque toujours 0")
         cadre = self.t("au bac : k = 0", 40, ORANGE_RETENUE).move_to(P(-0.5, -1.0))
         self.play(FadeIn(cadre, scale=1.2),
                   Create(SurroundingRectangle(cadre, color=ORANGE_RETENUE, buff=0.22,
@@ -268,17 +268,17 @@ class TviAppliquer(EcransAnalyse):
                                   w=5.0, h=3.8, grad_x=(1, 2), grad_y=(0,))
         self.play(Create(ax), FadeIn(grad), run_time=0.7)
 
-        self.au_mot("Soit g de x égale")
+        self.au_fin("plus 3 x, moins 5")
         f_ = self.t("g(x) = x⁵ + 3x − 5", 38, BLEU_CALCUL)
         self.play(FadeIn(self.col(f_, 2.5)))
         self.au_mot("C'est une fonction polynôme")
         self.play(FadeIn(self.col(self.t("polynôme → continue", 32, VERT_OK), 1.6)))
 
-        self.au_mot("g de 1 vaut")
+        self.au_fin("moins 5 : moins 1")
         p1 = self.pt(ax, 1, g(1), ROUGE_ERREUR)
         self.play(FadeIn(p1, scale=2),
                   FadeIn(self.col(self.t("g(1) = −1", 38, ROUGE_ERREUR), 0.7)))
-        self.au_mot("g de 2 vaut")
+        self.au_fin("moins 5 : 33")
         p2 = self.pt(ax, 2, g(2), VERT_OK)
         self.play(FadeIn(p2, scale=2),
                   FadeIn(self.col(self.t("g(2) = 33", 38, VERT_OK), -0.1)))
@@ -400,7 +400,9 @@ class TviAppliquer(EcransAnalyse):
         bloc.arrange(DOWN, aligned_edge=LEFT, buff=0.34).move_to(P(-0.5, 0.55))
         for i, l in enumerate(bloc):
             if i < 3:
-                self.au_mot(["Un : la fonction f", "Deux : f de a vaut", "Trois : d'après"][i])
+                self.au_fin(["Un : la fonction f est continue sur l'intervalle a b",
+                             "Deux : f de a vaut tel nombre, f de b vaut tel nombre, et 0 est compris entre les deux",
+                             "Trois : d'après le théorème des valeurs intermédiaires"][i])
             self.play(FadeIn(l, shift=RIGHT * 0.2), run_time=0.4)
         self.au_mot("Le mot qui compte")
         mot = self.t("« au moins »", 42, ORANGE_RETENUE).move_to(P(-0.5, -2.2))
@@ -415,9 +417,10 @@ class TviAppliquer(EcransAnalyse):
         self.add_mascotte(scale=0.6)
         titre = self.t("À toi de jouer !", 46, JAUNE_TITRE).to_edge(UP, buff=0.5)
         self.play(Write(titre), run_time=0.5)
+        self.au_fin("x au cube égale x plus 5")
         enonce = self.t("x³ = x + 5", 80, BLEU_CALCUL).move_to(P(-0.4, 0.9))
         self.play(FadeIn(enonce))
-        self.au_mot("admet une solution entre 1 et 2")
+        self.au_fin("admet une solution entre 1 et 2")
         c = self.t("une solution entre 1 et 2 ?", 38).move_to(P(-0.4, -0.3))
         self.play(FadeIn(c, shift=UP * 0.15))
         self.au_mot("il faut tout ramener")
@@ -444,7 +447,7 @@ class TviAppliquer(EcransAnalyse):
                                   w=5.0, h=3.6, grad_x=(1, 2), grad_y=(0,))
         self.play(Create(ax), FadeIn(grad), run_time=0.6)
 
-        self.au_mot("On pose f de x égale")
+        self.au_fin("moins x, moins 5")
         pose = self.t("f(x) = x³ − x − 5", 38, BLEU_CALCUL)
         self.play(FadeIn(self.col(pose, 2.4)))
         self.au_mot("donc elle est continue")

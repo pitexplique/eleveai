@@ -122,7 +122,9 @@ class ContinuiteReconnaitre(EcransAnalyse):
         self.play(Create(ax2), FadeIn(g2), run_time=0.5)
         marches = self.marche(ax2, [0, 1.6, 3.1, 5], [1, 2, 3])
         self.play(Create(marches), run_time=0.9)
-        # ⚠️ « 1,5 » est dit « un et demi » par la voix : hors audit.
+        # ⚠️ « 1,5 » etait dit « un et demi » ; depuis la passe chiffres (§ 11) la
+        # voix dit « 1,5 », donc il est AUDITE : le bloc s'attend.
+        self.au_fin("il ne vaut jamais 1,5")
         self.play(FadeIn(self.col(self.pile(
             [self.t("les passagers :", 30, C_SAUT),
              self.t("jamais 1,5", 28, C_SAUT)], -0.7), -0.7)))
@@ -155,7 +157,7 @@ class ContinuiteReconnaitre(EcransAnalyse):
         self.play(Create(mor.m1), run_time=0.7)
         self.play(Create(mor.m2), run_time=0.7)
 
-        self.au_mot("s'approche de 3")
+        self.au_fin("s'approche de 3")
         self.play(FadeIn(self.col(self.t("à gauche : 3", 36, C_SAUT), 0.9)))
         self.au_mot("la valeur en 1, c'est 5")
         self.play(FadeIn(self.col(self.t("en 1 : 5", 36, C_SAUT), 0.0)))
@@ -177,19 +179,27 @@ class ContinuiteReconnaitre(EcransAnalyse):
         titre = self.t("Le catalogue du bac", 42, JAUNE_TITRE).to_edge(UP, buff=0.45)
         self.play(Write(titre), run_time=0.5)
 
-        lignes = [("les polynômes", "sur ℝ", "Les fonctions polynômes"),
-                  ("la racine carrée", "sur [0 ; +∞[", "La fonction racine carrée"),
-                  ("l'exponentielle", "sur ℝ", "L'exponentielle est continue"),
-                  ("le logarithme", "sur ]0 ; +∞[", "le logarithme népérien"),
-                  ("sommes, produits, composées", "continues", "Les sommes, les produits"),
-                  ("un quotient", "là où le bas ne s'annule pas", "Un quotient l'est")]
+        # ⭐ Le mot-cle couvre la ligne JUSQU'A son domaine : « sur [0 ; +∞[ » porte un
+        # 0 que la voix ne dit qu'a la fin de sa phrase.
+        lignes = [("les polynômes", "sur ℝ",
+                   "Les fonctions polynômes sont continues sur l'ensemble des réels"),
+                  ("la racine carrée", "sur [0 ; +∞[",
+                   "La fonction racine carrée est continue sur 0 plus l'infini, crochet fermé en 0"),
+                  ("l'exponentielle", "sur ℝ",
+                   "L'exponentielle est continue sur l'ensemble des réels"),
+                  ("le logarithme", "sur ]0 ; +∞[",
+                   "le logarithme népérien sur 0 plus l'infini, crochet ouvert"),
+                  ("sommes, produits, composées", "continues",
+                   "Les sommes, les produits et les composées de fonctions continues"),
+                  ("un quotient", "là où le bas ne s'annule pas",
+                   "Un quotient l'est partout où son dénominateur ne s'annule pas")]
         bloc = VGroup()
         for nom, ou, _ in lignes:
             bloc.add(VGroup(self.t(nom + " :", 28), self.t(ou, 28, VERT_OK))
                      .arrange(RIGHT, buff=0.22))
         bloc.arrange(DOWN, aligned_edge=LEFT, buff=0.24).move_to(P(-0.4, 0.7))
         for l, (_, _, mot) in zip(bloc, lignes):
-            self.au_mot(mot)
+            self.au_fin(mot)
             self.play(FadeIn(l, shift=RIGHT * 0.2), run_time=0.3)
 
         self.au_mot("une règle qui sert tout le temps")
@@ -256,7 +266,7 @@ class ContinuiteReconnaitre(EcransAnalyse):
                                   w=5.0, h=3.6, grad_x=(3,), grad_y=(0,))
         self.play(Create(ax), FadeIn(grad), run_time=0.6)
 
-        self.au_mot("Soit f de x égale")
+        self.au_fin("divisé par x moins 3")
         f_ = self.t("f(x) = (2x + 1)/(x − 3)", 34, BLEU_CALCUL)
         self.play(FadeIn(self.col(f_, 2.4)))
         self.au_mot("C'est un quotient de deux polynômes")
@@ -287,7 +297,7 @@ class ContinuiteReconnaitre(EcransAnalyse):
         titre = self.t("Le piège", 44, ORANGE_RETENUE).to_edge(UP, buff=0.45)
         self.play(Write(titre), run_time=0.5)
 
-        self.au_mot("On n'écrit jamais")
+        self.au_fin("privé de 3")
         faux = self.t("continue sur ℝ \\ {3}", 34, ROUGE_ERREUR)
         self.gauche(faux, 2.1, xmax=1.2, x0=-6.4)
         self.play(FadeIn(faux))
@@ -303,6 +313,7 @@ class ContinuiteReconnaitre(EcransAnalyse):
                                   w=3.6, h=1.8, grad_y=(0,))
         self.play(Create(ax), FadeIn(grad),
                   Create(self.courbe(ax, abs, -2, 2.1, color=ORANGE_RETENUE)), run_time=0.8)
+        self.au_fin("est continue en 0")
         self.play(FadeIn(self.t("|x| : une pointe en 0", 26, ORANGE_RETENUE)
                          .next_to(ax, DOWN, buff=0.18)))
 
@@ -373,13 +384,21 @@ class ContinuiteReconnaitre(EcransAnalyse):
         self.add_mascotte(scale=0.5)
         titre = self.t("Sur la copie", 42, JAUNE_TITRE).to_edge(UP, buff=0.45)
         self.play(Write(titre), run_time=0.5)
-        lignes = ["h est la somme du logarithme népérien,",
-                  "continu sur ]0 ; +∞[, et d'un polynôme,",
-                  "continu sur ℝ. Donc h est continue",
-                  "sur ]0 ; +∞[."]
-        bloc = VGroup(*[self.t(s, 32, larg=10.6) for s in lignes])
+        # ⛔ Les quatre lignes paraissaient d'un COUP et sans aucun repere : les deux
+        # « ]0 ; +∞[ » etaient a l'ecran 6,81 s avant d'etre dits. Une ligne, un repere.
+        lignes = [("h est la somme du logarithme népérien,",
+                   "La fonction h est la somme du logarithme népérien"),
+                  ("continu sur ]0 ; +∞[, et d'un polynôme,",
+                   "continu sur 0 plus l'infini, et d'une fonction polynôme"),
+                  ("continu sur ℝ. Donc h est continue",
+                   "continue sur l'ensemble des réels"),
+                  ("sur ]0 ; +∞[.",
+                   "Donc h est continue sur 0 plus l'infini")]
+        bloc = VGroup(*[self.t(s, 32, larg=10.6) for s, _ in lignes])
         bloc.arrange(DOWN, aligned_edge=LEFT, buff=0.22).move_to(P(-0.4, 0.9))
-        self.play(FadeIn(bloc, shift=RIGHT * 0.2), run_time=0.8)
+        for l, (_, mot) in zip(bloc, lignes):
+            self.au_fin(mot)
+            self.play(FadeIn(l, shift=RIGHT * 0.2), run_time=0.35)
         self.au_mot("On nomme la raison")
         r = self.t("on nomme la RAISON, et l'INTERVALLE", 32, VERT_OK)
         self.play(FadeIn(r.move_to(P(-0.4, -1.5))))
@@ -396,6 +415,7 @@ class ContinuiteReconnaitre(EcransAnalyse):
         self.add_mascotte(scale=0.6)
         titre = self.t("À toi de jouer !", 46, JAUNE_TITRE).to_edge(UP, buff=0.5)
         self.play(Write(titre), run_time=0.5)
+        self.au_fin("plus 1 divisé par x moins 4")
         enonce = self.t("f(x) = √(x − 1) + 1/(x − 4)", 56, BLEU_CALCUL)
         self.play(FadeIn(enonce.move_to(P(-0.4, 0.9))))
         self.au_mot("Sur quels intervalles")
@@ -421,11 +441,11 @@ class ContinuiteReconnaitre(EcransAnalyse):
         un, quatre = P(-4.6, 0.4), P(-1.6, 0.4)
         marques = VGroup(Line(un + DOWN * 0.14, un + UP * 0.14, stroke_width=3),
                          Line(quatre + DOWN * 0.14, quatre + UP * 0.14, stroke_width=3),
-                         self.t("1", 26).move_to(un + DOWN * 0.42),
-                         self.t("4", 26).move_to(quatre + DOWN * 0.42))
+                         self.sans_audit(self.t("1", 26).move_to(un + DOWN * 0.42)),
+                         self.sans_audit(self.t("4", 26).move_to(quatre + DOWN * 0.42)))
         self.play(Create(axe), FadeIn(marques), run_time=0.6)
 
-        self.au_mot("La racine de x moins 1 existe")
+        self.au_fin("pour x plus grand ou égal à 1")
         r1 = self.t("√(x − 1) : x ≥ 1", 32, VERT_OK)
         self.play(FadeIn(self.col(r1, 2.3)))
         self.au_mot("est continu partout sauf en 4")

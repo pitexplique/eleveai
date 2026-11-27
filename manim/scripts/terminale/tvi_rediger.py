@@ -69,7 +69,7 @@ class TviRediger(EcransAnalyse):
         titre = self.t("Rédiger le TVI au bac", 46, JAUNE_TITRE, larg=11.6)
         titre.to_edge(UP, buff=0.55)
         ident = self.t(self.identite, 26).next_to(titre, DOWN, buff=0.22)
-        coeur = self.t("4 lignes", 86, BLEU_CALCUL).move_to(P(-0.6, 0.7))
+        coeur = self.sans_audit(self.t("4 lignes", 86, BLEU_CALCUL)).move_to(P(-0.6, 0.7))
         self.play(Write(titre), FadeIn(ident, shift=DOWN * 0.2))
         self.play(FadeIn(coeur))
         self.au_mot("chacune répond à une hypothèse")
@@ -115,30 +115,34 @@ class TviRediger(EcransAnalyse):
         # ⚠️ Les NUMÉROS de ligne sont hors audit : la voix dit « le théorème demande
         # trois choses », elle ne les égrène pas « un, deux, trois ».
         hyp = VGroup(self.lettres(self.t("1. f continue", 30, VERT_OK)),
-                     self.t("2. f strictement", 30, VERT_OK),
+                     self.lettres(self.t("2. f strictement", 30, VERT_OK)),
                      self.t("    monotone", 30, VERT_OK),
-                     self.t("3. k entre les", 30, VERT_OK),
+                     self.lettres(self.t("3. k entre les", 30, VERT_OK)),
                      self.t("    deux images", 30, VERT_OK))
         hyp.arrange(DOWN, aligned_edge=LEFT, buff=0.14)
         gche = VGroup(th_titre, hyp).arrange(DOWN, aligned_edge=LEFT, buff=0.3)
         self.gauche(gche, 0.6, xmax=0.0, x0=-6.4)
         self.play(FadeIn(gche), run_time=0.5)
 
-        self.au_mot("Prenons f de x égale 2 x au cube")
+        self.au_fin("moins 4, sur l'intervalle 0 2")
         f_ = self.t("f(x) = 2x³ + 3x − 4  sur [0 ; 2]", 30, BLEU_CALCUL)
         self.play(FadeIn(self.col(f_, 2.5, xl=0.6)))
 
-        phrases = [("f est un polynôme, donc continue", "Première phrase"),
-                   ("f ′(x) = 6x² + 3 > 0, donc f est", "Deuxième phrase"),
+        # ⭐ Chaque mot-cle couvre la phrase JUSQU'A son dernier nombre.
+        phrases = [("f est un polynôme, donc continue",
+                    "Première phrase : f est une fonction polynôme"),
+                   ("f ′(x) = 6x² + 3 > 0, donc f est",
+                    "Deuxième phrase : f prime de x vaut 6 x au carré, plus 3"),
                    ("strictement croissante", None),
-                   ("f(0) = −4, f(2) = 18, et 0 est", "Troisième phrase"),
+                   ("f(0) = −4, f(2) = 18, et 0 est",
+                    "Troisième phrase : f de 0 vaut moins 4, f de 2 vaut 18"),
                    ("compris entre les deux", None)]
         bloc = VGroup(*[self.t(s, 28) for s, _ in phrases])
         bloc.arrange(DOWN, aligned_edge=LEFT, buff=0.2)
         self.col(bloc, 0.3, xl=0.6)
         for l, (_, mot) in zip(bloc, phrases):
             if mot:
-                self.au_mot(mot)
+                self.au_fin(mot)
             self.play(FadeIn(l, shift=RIGHT * 0.2), run_time=0.3)
 
         self.au_mot("Une hypothèse, une phrase")
@@ -158,7 +162,14 @@ class TviRediger(EcransAnalyse):
                       self.t("f(x) = 0 admet une unique solution", 34, VERT_OK),
                       self.t("dans l'intervalle [0 ; 2] »", 34, VERT_OK))
         cite.arrange(DOWN, aligned_edge=LEFT, buff=0.2).move_to(P(-0.4, 1.1))
-        self.play(FadeIn(cite, shift=RIGHT * 0.2), run_time=0.8)
+        # ⛔ Les 4 lignes paraissaient d'un coup : « dans l'intervalle [0 ; 2] » etait
+        # a l'ecran 11,32 s avant d'etre dit. Trois temps, sur la phrase citee.
+        self.play(FadeIn(cite[0], shift=RIGHT * 0.2), FadeIn(cite[1], shift=RIGHT * 0.2),
+                  run_time=0.5)
+        self.au_fin("l'équation f de x égale 0 admet une unique solution")
+        self.play(FadeIn(cite[2], shift=RIGHT * 0.2), run_time=0.4)
+        self.au_fin("dans l'intervalle 0 2")
+        self.play(FadeIn(cite[3], shift=RIGHT * 0.2), run_time=0.4)
         self.au_mot("Le mot corollaire compte")
         m = self.t("« corollaire » : sans lui, l'existence seule", 32, ORANGE_RETENUE)
         self.play(FadeIn(m.move_to(P(-0.4, -1.3))))
@@ -218,17 +229,17 @@ class TviRediger(EcransAnalyse):
         self.add_mascotte(scale=0.5)
         titre = self.t("Une copie complète", 40, JAUNE_TITRE).to_edge(UP, buff=0.45)
         self.play(Write(titre), run_time=0.5)
-        self.au_mot("Soit g de x égale 2 logarithme")
+        self.au_fin("moins 4, sur l'intervalle 1 4")
         f_ = self.t("g(x) = 2 ln x + x − 4   sur [1 ; 4]", 34, BLEU_CALCUL)
         self.play(FadeIn(f_.move_to(P(-0.4, 2.3))))
 
         lignes = [("1. g est la somme d'un logarithme et d'un polynôme,",
-                   "Première ligne"),
+                   "Première ligne : g est la somme d'un logarithme et d'un polynôme, tous deux continus sur 0 plus l'infini"),
                   ("    tous deux continus sur ]0 ; +∞[ : g est continue", None),
                   ("2. g ′(x) = 2/x + 1 > 0 : g est strictement croissante",
-                   "Deuxième ligne"),
+                   "Deuxième ligne : g prime de x vaut 2 sur x, plus 1"),
                   ("3. g(1) = −3, g(4) ≈ 2,77, et 0 est entre les deux",
-                   "Troisième ligne"),
+                   "Troisième ligne : g de 1 vaut moins 3, g de 4 vaut environ 2,77"),
                   ("4. d'après le corollaire du TVI, g(x) = 0 admet",
                    "Quatrième ligne"),
                   ("    une unique solution sur [1 ; 4]", None)]
@@ -236,7 +247,7 @@ class TviRediger(EcransAnalyse):
         bloc.arrange(DOWN, aligned_edge=LEFT, buff=0.22).move_to(P(-0.4, -0.3))
         for l, (_, mot) in zip(bloc, lignes):
             if mot:
-                self.au_mot(mot)
+                self.au_fin(mot)
             self.play(FadeIn(l, shift=RIGHT * 0.2), run_time=0.3)
         # ⛔⛔ UN REPÈRE QUI POINTE EN ARRIÈRE : ce bloc était posé sur
         # `au_mot("la continuité se démontre")`, et cette phrase est dite dans la
@@ -347,7 +358,7 @@ class TviRediger(EcransAnalyse):
                   ("f ′(x) est de signe constant : f est strictement monotone",
                    "Deux : f prime de x"),
                   ("f(a) = … , f(b) = … , et 0 est entre les deux",
-                   "Trois : f de a vaut"),
+                   "Trois : f de a vaut tel nombre, f de b vaut tel nombre, et 0 est compris entre les deux"),
                   ("d'après le corollaire du TVI, f(x) = 0 admet une",
                    "Quatre : d'après"),
                   ("unique solution dans [a ; b]", None)]
@@ -359,7 +370,7 @@ class TviRediger(EcransAnalyse):
         bloc.arrange(DOWN, aligned_edge=LEFT, buff=0.3).move_to(P(-0.4, 0.5))
         for l, (_, mot) in zip(bloc, lignes):
             if mot:
-                self.au_mot(mot)
+                self.au_fin(mot)
             self.play(FadeIn(l, shift=RIGHT * 0.2), run_time=0.35)
         self.au_mot("toujours dans cet ordre")
         o = self.t("quatre lignes, toujours dans cet ordre", 32, ORANGE_RETENUE)
@@ -372,13 +383,16 @@ class TviRediger(EcransAnalyse):
         self.add_mascotte(scale=0.6)
         titre = self.t("À toi de jouer !", 46, JAUNE_TITRE).to_edge(UP, buff=0.5)
         self.play(Write(titre), run_time=0.5)
+        self.au_fin("moins 6, sur l'intervalle 1 2")
         f_ = self.t("f(x) = x³ + 3x − 6   sur [1 ; 2]", 40, BLEU_CALCUL)
         self.play(FadeIn(f_.move_to(P(-0.4, 1.9))))
-        self.au_mot("Il a écrit")
         copie = VGroup(self.t("f(1) = −2, f(2) = 8,", 32),
                        self.t("donc f(x) = 0 admet une unique solution", 32))
         copie.arrange(DOWN, aligned_edge=LEFT, buff=0.2).move_to(P(-0.4, 0.5))
-        self.play(FadeIn(copie), run_time=0.5)
+        self.au_fin("f de 1 vaut moins 2, f de 2 vaut 8")
+        self.play(FadeIn(copie[0]), run_time=0.4)
+        self.au_fin("admet une unique solution")
+        self.play(FadeIn(copie[1]), run_time=0.4)
         self.au_mot("Il manque deux phrases")
         q = self.t("il manque DEUX phrases. Lesquelles ?", 36, ORANGE_RETENUE)
         self.play(FadeIn(q.move_to(P(-0.4, -1.0)), shift=UP * 0.15))
@@ -393,7 +407,7 @@ class TviRediger(EcransAnalyse):
         self.add_mascotte(scale=0.5)
         titre = self.t("Correction", 42, VERT_OK).to_edge(UP, buff=0.45)
         self.play(Write(titre), run_time=0.5)
-        self.au_mot("Il manque d'abord la continuité")
+        self.au_fin("donc elle est continue sur l'intervalle 1 2")
         un = VGroup(self.pastille(1),
                     self.t("f est un polynôme, donc continue sur [1 ; 2]",
                                         30, VERT_OK, larg=10.4)).arrange(RIGHT, buff=0.3)
