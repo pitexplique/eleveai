@@ -65,4 +65,7 @@ Mettre à jour « État » ci-dessous, puis lancer une session fille qui reprend
 
 ## État
 - [x] Voix validées, WAV, instants, socle (session mère, 28/11).
-- [ ] Films écrits → planches -ql contrôlées → HD (une à la fois) → planches HD → miniatures → branchement → rapport (hash, nombre branché, reste).
+- [x] 28/11 : `margo-dessins-cp.js` (poule, nid, œufs, oiseaux, biscuits, boîte, fenêtre du train, cartes, bandeauE) ; short 01 identifier écrit et contrôlé -ql.
+- [ ] Trois filles en parallèle (consignes : dossier de notes local_c6aabc66-…/margo-pb-cp-consignes-filles.md) : `margo-cp-01p-02-03` (paysage 01 + 02 + 03),
+  `margo-cp-04-05`, `margo-cp-06-07` : films → planches -ql → HD sous verrou → planches HD → miniatures sources, commit de leurs films. PAS de branchement.
+- [ ] Session CP (mère des filles) : HD du short 01, puis à la fin : miniatures gabarit A des 7 shorts, branchement des 14, rapport (hash, nombre branché, reste).
