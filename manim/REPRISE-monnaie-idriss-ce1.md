@@ -20,18 +20,20 @@ Voix VALIDÉES par Frédéric (ne pas les changer sans lui) : `manim/SCRIPTS-mon
   | 14 ce1-comparer | Le crabe têtu (C) | Les deux tirelires (C, B) |
   | 15 ce1-constituer | La glace pour la barque (A) | Payer pile (C, B) |
   | 16 ce1-virgule | La mouette et l'ardoise (B) | La petite virgule (B, A) |
-- HD : 12 short FAIT (`manim/sorties/idriss/12-ce1-centimes/`). File d'attente lancée pour 12 paysage puis 13 → 16
-  (script `file-hd.sh` du dossier de notes de la session CE1 : attend verrou libre + RAM ≥ 2,5 Go, prend/rend le verrou).
+  | 17 ce1-probleme | Le café et le pain (C) | Les courses d'Idriss (A, B) |
+  | 18 ce1-defi | Six beignets ? (B) | Les défis du soir (B, C) |
+- HD 12 → 16 FAITES (10 MP4, son + durée vérifiés) ; planches HD `manim/sorties/idriss/<num>-<ep>/planche-hd-{short,paysage}.png` regardées.
+- HD 17 et 18 : file `file-hd.sh` lancée le 28/11 vers 6 h ; miniatures des 14 lancées en même temps (script `mini.sh`, même verrou).
 
 ## Reste à faire
-1. Films 17 `ce1-probleme` (« Les courses d'Idriss » A, B · « Le café et le pain » C) et 18 `ce1-defi`
-   (« Les défis du soir » B, C · « Six beignets ? » B) : dessins prêts (cafeE, painE, beignetE, boueeE, filetE, ballonFootE, cornetE).
-   Modèle le plus proche : `films/idriss-paysage-ce1-constituer.js` / `idriss-ce1-constituer.js`.
-2. Planches -ql de 17-18, puis HD (file-hd.sh), puis planches HD des 14 MP4 (compteur 8 s visible, fin eleveai.fr / YouTube).
-3. Miniatures : `node scripts/ti-margo-short.mjs idriss[-paysage] <ep> miniature` (shorts : miniCe1E = gabarit A, « Dessin animé »).
-4. Commits PAR CHEMIN, pas de push. R2, manifeste, coach, YouTube : seulement avec l'accord de Frédéric.
+1. Vérifier que les 4 MP4 de 17 et 18 existent, puis planches HD (`python scripts/ti-margo-planche.py <mp4> <png> 18`).
+2. Vérifier les 14 miniatures (`manim/sorties/idriss/<num>-<ep>/*-miniature.png`).
+3. Commits PAR CHEMIN, pas de push. R2, manifeste, coach, YouTube : seulement avec l'accord de Frédéric.
 
 ## Leçons
 - Paysage : pendant les questions, tout à x < 480 ; pièces de 50 c à t ≤ 80 si elles sont côte à côte à 110-140 px.
 - `mot()` prend le n-ième mot EXACT (« cinq » ≠ « cinquante », « un » ≠ « une ») : compter les occurrences dans les instants.
 - Contrôle : `CONTROLE=<dossier> node scripts/ti-margo-short.mjs <série> <ep> controle t1 t2 …` puis `python scripts/ti-margo-planche.py <dossier> <png>`.
+- `mot('A')` attrape aussi « a » et « à » dits avant (« Idriss a quinze », « à huit euros ») : compter (`mot('04-question','A',3)`).
+- Short (tableau 1056 × 720) : dessiner GRAND (billets t ≥ 56, café ×1,4, enfants ×1,2), fond `quaiBoisE(c,T,40)` pour les questions.
+- Banc d'essai hors navigateur (voix mot à mot, sans RAM) : `banc.js` (+ `controle.sh`, `mini.sh` sous verrou) dans le dossier de notes `side-session-notes/local_a6405527-72c4-417a-a8a3-2d1d01d770f0/` (`node banc.js idriss-paysage ce1-defi`).
