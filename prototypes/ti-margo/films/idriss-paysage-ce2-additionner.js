@@ -43,35 +43,33 @@ FILMS['ce2-additionner']=function(outils){
 
     if(T>=q2){ /* sardines 1,80 € + citron 0,50 € (x < 480) */
       quaiBoisE(c,T,40);
-      if(T>=tSardQ) for(let k=0;k<3;k++) poissonE(c,130,280+k*34,140,'#a5d8ff',{T,k,ray:'#495057',z:zoom(T,tSardQ+k*.1,.4)});
-      if(T>=tUnQ) ardoiseVCe2E(c,'1,80 €',130,130,52,{z:zoom(T,tUnQ,.5)});
-      if(T>=tCitQ) citronCe2E(c,360,320,56,{z:zoom(T,tCitQ,.4)});
-      if(T>=tZeroQ) ardoiseVCe2E(c,'0,50 €',360,130,52,{z:zoom(T,tZeroQ,.5)});
+      if(T>=tSardQ) for(let k=0;k<3;k++) poissonE(c,125,275+k*42,180,'#a5d8ff',{T,k,ray:'#495057',z:zoom(T,tSardQ+k*.1,.4)});
+      if(T>=tUnQ) ardoiseVCe2E(c,'1,80 €',118,120,54,{z:zoom(T,tUnQ,.5)});
+      if(T>=tCitQ) citronCe2E(c,362,310,72,{z:zoom(T,tCitQ,.4)});
+      if(T>=tZeroQ) ardoiseVCe2E(c,'0,50 €',365,120,54,{z:zoom(T,tZeroQ,.5)});
       if(T<r2){ if(T>=tComb2) ecrire(c,'?',245,520,130*zoom(T,tComb2,.5),CRAIE.jaune); }
       else {
-        calculVCe2E(c,T,240,450,['80 c','+','50 c','=','130 c'],[tQV2,tPlus2,tCinq2,tCent2,tTrente2],44,{vert:false});
-        if(T>=tUn2) prixVCe2E(c,'= 1 € et 30 c',300,515,46,{z:zoom(T,tUn2,.5),fond:1});
-        if(T>=tUn2b) calculVCe2E(c,T,240,590,['1 €','+','1 €','=','2 €'],[tUn2b,tPlus2b,tCet2,tDeux2,tDeux2],50);
-        if(T>=tDeux2b) ardoiseVCe2E(c,'2,30 €',240,672,56,{z:zoom(T,tDeux2b,.5),lueur:T<tA2?.5:0});
-        if(T>=tA2){ c.fillStyle='rgba(31,59,44,.95)'; c.beginPath(); c.roundRect(40,190,400,190,22); c.fill(); c.strokeStyle=CRAIE.faux; c.lineWidth=4; c.stroke();
-          const xs=prixVCe2E(c,'A : 1,130 €',240,235,52,{z:zoom(T,tA2,.5)});
+        calculVCe2E(c,T,240,450,['80 c','+','50 c','=','130 c'],[tQV2,tPlus2,tCinq2,tCent2,tTrente2],48,{vert:false});
+        if(T>=tUn2) prixVCe2E(c,'= 1 € et 30 c',270,515,52,{z:zoom(T,tUn2,.5),fond:1});
+        if(T>=tUn2b) calculVCe2E(c,T,240,590,['1 €','+','1 €','=','2 €'],[tUn2b,tPlus2b,tCet2,tDeux2,tDeux2],56);
+        if(T>=tDeux2b) ardoiseVCe2E(c,'2,30 €',240,675,62,{z:zoom(T,tDeux2b,.5),lueur:T<tA2?.5:0});
+        if(T>=tA2){ c.fillStyle='rgba(31,59,44,.95)'; c.beginPath(); c.roundRect(30,190,420,200,22); c.fill(); c.strokeStyle=CRAIE.faux; c.lineWidth=4; c.stroke();
+          const xs=prixVCe2E(c,'A : 1,130 €',240,238,58,{z:zoom(T,tA2,.5)});
           if(T>=tA2+.6&&xs.length>9) barreCe2E(c,[xs[6]-14,240],[xs[8]+14,240],entreE(T,tA2+.6,tA2+1));
-          ecrire(c,'3 chiffres après',240,295,38,CRAIE.blanc); ecrire(c,'la virgule ? Non !',240,343,38,CRAIE.faux); } }
+          ecrire(c,'3 chiffres après',240,302,42,CRAIE.blanc); ecrire(c,'la virgule ? Non !',240,354,42,CRAIE.faux); } }
       tab.maj(); return; }
 
     if(T>=q1){ /* calamar 2,50 € + poisson 4,20 € (x < 480) */
       quaiBoisE(c,T,40);
-      if(T>=tCalQ) calamarE(c,130,300,200,{T,z:zoom(T,tCalQ,.4)});
-      if(T>=tDeuxQ) ardoiseVCe2E(c,'2,50 €',130,140,52,{z:zoom(T,tDeuxQ,.5)});
-      if(T>=tPoisQ) poissonE(c,360,300,190,'#ffa94d',{T,k:2,z:zoom(T,tPoisQ,.4)});
-      if(T>=tQuatreQ) ardoiseVCe2E(c,'4,20 €',360,140,52,{z:zoom(T,tQuatreQ,.5)});
+      if(T>=tCalQ) calamarE(c,118,300,215,{T,z:zoom(T,tCalQ,.4)});
+      if(T>=tDeuxQ) ardoiseVCe2E(c,'2,50 €',118,130,54,{z:zoom(T,tDeuxQ,.5)});
+      if(T>=tPoisQ) poissonE(c,362,300,230,'#ffa94d',{T,k:2,z:zoom(T,tPoisQ,.4)});
+      if(T>=tQuatreQ) ardoiseVCe2E(c,'4,20 €',365,130,54,{z:zoom(T,tQuatreQ,.5)});
       if(T<r1){ if(T>=tComb1) ecrire(c,'?',245,520,130*zoom(T,tComb1,.5),CRAIE.jaune); }
       else {
-        if(T>=tDeux1) ecrire(c,'euros',70,450,30,EUR_CE2);
-        formuleE(c,T,270,450,['2','+','4','=','6'],[tDeux1,tPlus1,tQuatre1,tSix1,tSix1],60,[EUR_CE2,CRAIE.blanc,EUR_CE2,CRAIE.blanc,CRAIE.ok]);
-        if(T>=tCinq1) ecrire(c,'centimes',70,545,26,CEN_CE2);
-        formuleE(c,T,290,545,['50','+','20','=','70'],[tCinq1,tPlus1b,tVingt1,tSD1,tSD1],60,[CEN_CE2,CRAIE.blanc,CEN_CE2,CRAIE.blanc,CRAIE.ok]);
-        if(T>=tSix1b) ardoiseVCe2E(c,'6,70 €',245,650,62,{z:zoom(T,tSix1b,.5),lueur:.5}); }
+        formuleE(c,T,245,440,['2','+','4','=','6'],[tDeux1,tPlus1,tQuatre1,tSix1,tSix1],76,[EUR_CE2,CRAIE.blanc,EUR_CE2,CRAIE.blanc,CRAIE.ok]);
+        formuleE(c,T,245,545,['50','+','20','=','70'],[tCinq1,tPlus1b,tVingt1,tSD1,tSD1],76,[CEN_CE2,CRAIE.blanc,CEN_CE2,CRAIE.blanc,CRAIE.ok]);
+        if(T>=tSix1b) ardoiseVCe2E(c,'6,70 €',245,660,70,{z:zoom(T,tSix1b,.5),lueur:.5}); }
       tab.maj(); return; }
 
     if(T>=re){ /* 100 c et plus : un euro de plus */
@@ -102,12 +100,12 @@ FILMS['ce2-additionner']=function(outils){
     quaiBoisE(c,T,140); etalE(c,200,680,560,{toile:false});
     if(T>=tIdriss) idrissE(c,110,705,1.1,{montre:T>=tDorade&&T<tComb?1:0,T});
     if(T>=tDorade) dorade(c,T,350,500,230,zoom(T,tDorade,.4));
-    if(T>=tSix) ardoiseVCe2E(c,'6,40 €',350,290,70,{z:zoom(T,tSix,.5)});
+    if(T>=tSix) ardoiseVCe2E(c,'6,40 €',320,290,64,{z:zoom(T,tSix,.5)});
     if(T>=tCrev) crevettes(c,T,580,500,90,zoom(T,tCrev,.4));
-    if(T>=tTrois) ardoiseVCe2E(c,'3,30 €',590,290,70,{z:zoom(T,tTrois,.5)});
+    if(T>=tTrois) ardoiseVCe2E(c,'3,30 €',620,290,64,{z:zoom(T,tTrois,.5)});
     if(T>=tDame){ dameE(c,880,705,1.15,{tend:0,T}); }
     if(T>=tPanier) panierE(c,800,690,150);
-    if(T>=tComb) ecrire(c,'?',470,140,130*zoom(T,tComb,.5),CRAIE.jaune);
+    if(T>=tComb) ecrire(c,'?',470,130,120*zoom(T,tComb,.5),CRAIE.jaune);
     tab.maj();
   }
 
@@ -123,7 +121,7 @@ FILMS['ce2-additionner']=function(outils){
     { qc:'05-question',rc:'05b-reponse',finR:fin('05b-reponse')+.8,cpt:fin('05-question')+.1,rebours:8,bonne:1,tBon:tB2-r2,
       phrase:[phraseE('1,80 € + 0,50 €',[tUnQ,mq2('euro'),mq2('et'),tZeroQ,mq2('euro',2)]),phrase2],pause:pause2,
       choix:[['1,130 €',tqb('A',3),tqb('euro',3)],['2,30 €',tqb('B'),tqb('euros')],['1,30 €',tqb('C'),tqb('euro',4)]],
-      tete:[[r2+.1,'Réponse '],[tB2,'B !']],reponse:[phraseE('130 c = 1 € et 30 c',[tCent2,mr2('centimes',1),tUn2,tUn2,mr2('euro'),mr2('et'),tTrente2,mr2('centimes',2)].map((t,k,a)=>k&&t<a[k-1]?a[k-1]:t)),phraseE('2,30 €',[tDeux2b,mr2('euros',2)])],suite:[] }
+      tete:[[r2+.1,'Réponse '],[tB2,'B !']],reponse:[phraseE('130 c = 1 € et 30 c',[tCent2,tUn2,tUn2,mr2('et'),tTrente2].map((t,k,a)=>k&&t<a[k-1]?a[k-1]:t)),phraseE('2,30 €',[tDeux2b,mr2('euros',2)])],suite:[] }
   ];
   const groupes=[groupe(ap+.05,f,30,60,phraseE('Ce que tu as appris',[ap+.05,ap+.05,ap+.05,ap+.05,ap+.05]))];
 

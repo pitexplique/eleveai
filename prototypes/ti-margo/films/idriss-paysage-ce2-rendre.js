@@ -30,59 +30,59 @@ FILMS['ce2-rendre']=function(outils){
   const finTitre=tUn-.08;
 
   /* la droite des prix de l'histoire : 7,60 € → 8 € → 10 € */
-  const DX=[220,460,900], DY=330;
+  const DX=[160,460,930], DY=330;
   const monsieur=(c,T,x,s,tend=0)=>idrissE(c,x,705,s,{cire:'#37b24d',cireB:'#2b8a3e',peau:'#e0ac69',montre:tend,T});
 
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=ap){ /* ce que tu as appris : petit bond jusqu'à l'euro, grand bond jusqu'au billet */
       quaiBoisE(c,T,40);
-      if(T>=tPrixA){ droitePrixCe2E(c,[[DX[0],'le prix'],[DX[1],'l\'euro'],[DX[2],'le billet']],380,{taille:50,z:zoom(T,tPrixA,.4)}); }
-      if(T>=tPrixA) bondCe2E(c,T,DX[0],DX[1],380,tSuivA-.4,tSuivA,'petit bond',70,CEN_CE2,46);
-      if(T>=tBilA-.4) bondCe2E(c,T,DX[1],DX[2],380,tBilA-.4,tBilA,'grand bond',120,EUR_CE2,46);
+      if(T>=tPrixA){ droitePrixCe2E(c,[[DX[0],'le prix'],[DX[1],'l\'euro'],[DX[2],'le billet']],380,{taille:62,z:zoom(T,tPrixA,.4)}); }
+      if(T>=tPrixA) bondCe2E(c,T,DX[0],DX[1],380,tSuivA-.4,tSuivA,'petit bond',70,CEN_CE2,58);
+      if(T>=tBilA-.4) bondCe2E(c,T,DX[1],DX[2],380,tBilA-.4,tBilA,'grand bond',120,EUR_CE2,58);
       tab.maj(); return; }
 
     if(T>=q2){ /* 12,35 € payé avec 20 € (x < 480) */
       quaiBoisE(c,T,40);
       if(T>=tDameQ&&T<r2) dameE(c,110,705,.95,{T});
       if(T>=tDouzeQ) ardoiseVCe2E(c,'12,35 €',300,110,56,{z:zoom(T,tDouzeQ,.5)});
-      if(T>=tVingtQ) euroE(c,20,330,250,32,{z:zoom(T,tVingtQ,.5),grand:1});
+      if(T>=tVingtQ) euroE(c,20,330,250,40,{z:zoom(T,tVingtQ,.5),grand:1});
       if(T<r2){ if(T>=tComb2) ecrire(c,'?',330,420,120*zoom(T,tComb2,.5),CRAIE.jaune); }
       else {
-        droitePrixCe2E(c,[[90,'12,35 €'],[230,'13 €'],[440,'20 €']],520,{taille:34,z:zoom(T,tDe2,.4)});
-        bondCe2E(c,T,90,230,520,tDe2,tSC2,'+ 65 c',50,CEN_CE2,38);
-        bondCe2E(c,T,230,440,520,tDe2b,tSept2,'+ 7 €',90,EUR_CE2,38);
-        if(T>=tSept2b) ardoiseVCe2E(c,'7,65 €',330,660,56,{z:zoom(T,tSept2b,.5),lueur:.5}); }
+        droitePrixCe2E(c,[[100,'12,35 €'],[255,'13 €'],[440,'20 €']],520,{taille:44,z:zoom(T,tDe2,.4)});
+        bondCe2E(c,T,100,255,520,tDe2,tSC2,'+ 65 c',50,CEN_CE2,46);
+        bondCe2E(c,T,255,440,520,tDe2b,tSept2,'+ 7 €',100,EUR_CE2,46);
+        if(T>=tSept2b) ardoiseVCe2E(c,'7,65 €',300,665,62,{z:zoom(T,tSept2b,.5),lueur:.5}); }
       tab.maj(); return; }
 
     if(T>=q1){ /* une dorade à 4,20 € payée avec 5 € (x < 480) */
       quaiBoisE(c,T,40);
       if(T>=tDoradeQ) poissonE(c,150,300,230,'#ff8787',{T,ray:'#c92a2a',z:zoom(T,tDoradeQ,.4)});
       if(T>=tQuatreQ) ardoiseVCe2E(c,'4,20 €',150,140,60,{z:zoom(T,tQuatreQ,.5)});
-      if(T>=tCinqQ) euroE(c,5,370,190,30,{z:zoom(T,tCinqQ,.5),grand:1});
+      if(T>=tCinqQ) euroE(c,5,370,190,40,{z:zoom(T,tCinqQ,.5),grand:1});
       if(T<r1){ if(T>=tComb1) ecrire(c,'?',370,350,120*zoom(T,tComb1,.5),CRAIE.jaune); }
       else {
-        droitePrixCe2E(c,[[90,'4,20 €'],[390,'5 €']],520,{taille:44,z:zoom(T,tDe1,.4)});
-        bondCe2E(c,T,90,390,520,tDe1,tQV1,'+ 80 c',70,CEN_CE2,46);
+        droitePrixCe2E(c,[[100,'4,20 €'],[400,'5 €']],520,{taille:56,z:zoom(T,tDe1,.4)});
+        bondCe2E(c,T,100,400,520,tDe1,tQV1,'+ 80 c',80,CEN_CE2,56);
         if(T>=tZero1) ardoiseVCe2E(c,'0,80 €',240,665,62,{z:zoom(T,tZero1,.5),lueur:.5}); }
       tab.maj(); return; }
 
     if(T>=ve){ /* je vérifie : 10 − 7,60 = 2,40 */
       quaiBoisE(c,T,40);
-      droitePrixCe2E(c,[[DX[0],'7,60 €'],[DX[1],'8 €'],[DX[2],'10 €']],DY+150,{taille:44});
-      bondCe2E(c,T,DX[0],DX[1],DY+150,-1,-1,'+ 40 c',60,CEN_CE2,44); bondCe2E(c,T,DX[1],DX[2],DY+150,-1,-1,'+ 2 €',100,EUR_CE2,44);
+      droitePrixCe2E(c,[[DX[0],'7,60 €'],[DX[1],'8 €'],[DX[2],'10 €']],DY+150,{taille:60});
+      bondCe2E(c,T,DX[0],DX[1],DY+150,-1,-1,'+ 40 c',60,CEN_CE2,58); bondCe2E(c,T,DX[1],DX[2],DY+150,-1,-1,'+ 2 €',100,EUR_CE2,58);
       calculVCe2E(c,T,528,110,['10 €','−','7,60 €','=','2,40 €'],[tDixV,tMoinsV,tSeptV,tDeuxV,tDeuxV],84);
       if(T>=tBonV) coche(c,940,100,.6);
       tab.maj(); return; }
 
     if(T>=eu){ /* de 7,60 € à 8 € (+ 40 c), puis de 8 € à 10 € (+ 2 €) */
       quaiBoisE(c,T,40);
-      droitePrixCe2E(c,[[DX[0],'7,60 €'],[DX[1],'8 €'],[DX[2],'10 €']],DY,{taille:48,z:zoom(T,eu,.4)});
-      bondCe2E(c,T,DX[0],DX[1],DY,tSeptE,tQuarE,'+ 40 c',70,CEN_CE2,50);
-      if(T>=tQuarE){ centimeE(c,20,DX[0]+70,520,50,{z:zoom(T,tQuarE,.4)}); centimeE(c,20,DX[0]+170,520,50,{z:zoom(T,tQuarE+.15,.4)}); }
-      if(T>=bi){ bondCe2E(c,T,DX[1],DX[2],DY,tHuitB,tDeuxB,'+ 2 €',120,EUR_CE2,50);
-        if(T>=tDeuxB) euroE(c,2,680,520,52,{z:zoom(T,tDeuxB,.4)});
-        if(T>=tRendB) prixVCe2E(c,'2 € et 40 c',528,640,60,{z:zoom(T,tRendB,.5),fond:1});
-        if(T>=tDeuxB3) prixVCe2E(c,'= 2,40 €',880,640,64,{z:zoom(T,tDeuxB3,.5),une:CRAIE.ok}); }
+      droitePrixCe2E(c,[[DX[0],'7,60 €'],[DX[1],'8 €'],[DX[2],'10 €']],DY,{taille:62,z:zoom(T,eu,.4)});
+      bondCe2E(c,T,DX[0],DX[1],DY,tSeptE,tQuarE,'+ 40 c',70,CEN_CE2,62);
+      if(T>=tQuarE){ centimeE(c,20,DX[0]+70,520,62,{z:zoom(T,tQuarE,.4)}); centimeE(c,20,DX[0]+200,520,62,{z:zoom(T,tQuarE+.15,.4)}); }
+      if(T>=bi){ bondCe2E(c,T,DX[1],DX[2],DY,tHuitB,tDeuxB,'+ 2 €',120,EUR_CE2,62);
+        if(T>=tDeuxB) euroE(c,2,680,520,64,{z:zoom(T,tDeuxB,.4)});
+        if(T>=tRendB) prixVCe2E(c,'2 € et 40 c',460,650,70,{z:zoom(T,tRendB,.5),fond:1});
+        if(T>=tDeuxB3) prixVCe2E(c,'= 2,40 €',820,650,74,{z:zoom(T,tDeuxB3,.5),une:CRAIE.ok}); }
       tab.maj(); return; }
 
     /* le marché : un monsieur achète un poisson à 7,60 €, il paie avec 10 € */
@@ -97,18 +97,18 @@ FILMS['ce2-rendre']=function(outils){
   }
 
   const qa=dit('04-question'), qb=dit('05-question');
-  qa('Question !'); qa.jusque('Combien'); const phrase1=qa('Combien rend-on ?'); qa.jusque('Mets'); const pause1=[qa('Mets pause, et choisis !')];
-  qb('Question !'); qb.jusque('Combien'); const phrase2=qb('Combien lui rend-on ?'); qb.jusque('Mets'); const pause2=[qb('Mets pause, et choisis !')];
+  qa('Question !'); qa.jusque('Combien'); const phrase1=qa('Combien rend‑on ?'); qa.jusque('Mets'); const pause1=[qa('Mets pause, et choisis !')];
+  qb('Question !'); qb.jusque('Combien'); const phrase2=qb('Combien lui rend‑on ?'); qb.jusque('Mets'); const pause2=[qb('Mets pause, et choisis !')];
   const tqa=(w,n=1)=>mot('04-question',w,n)-q1, tqb=(w,n=1)=>mot('05-question',w,n)-q2;
   const questions=[
     { qc:'04-question',rc:'04b-reponse',finR:fin('04b-reponse')+.8,cpt:fin('04-question')+.1,rebours:8,bonne:2,tBon:tC1-r1,
-      phrase:[phraseE('4,20 €, payé avec 5 €.',[tQuatreQ,mq1('euros'),mq1('payée'),mq1('avec'),tCinqQ,mq1('euros',2)]),phrase1],pause:pause1,
+      phrase:[phraseE('4,20 €, payé avec 5 €.',[tQuatreQ,mq1('euros'),mq1('payée'),mq1('avec'),tCinqQ]),phrase1],pause:pause1,
       choix:[['1,20 €',tqa('A',2),tqa('euro')],['9,20 €',tqa('B'),tqa('euros',3)],['0,80 €',tqa('C'),tqa('euro',2)]],
-      tete:[[r1+.1,'Réponse '],[tC1,'C !']],reponse:[phraseE('4,20 € → 5 € : + 80 c',[tDe1,tDe1,tDe1,tCinq1,tCinq1,tCinq1,tQV1,tQV1,tQV1]),phraseE('0,80 €',[tZero1,mr1('euro')])],suite:[] },
+      tete:[[r1+.1,'Réponse '],[tC1,'C !']],reponse:[phraseE('4,20 € → 5 € : + 80 c',[tDe1,tDe1,tCinq1,tCinq1,tQV1]),phraseE('0,80 €',[tZero1,mr1('euro')])],suite:[] },
     { qc:'05-question',rc:'05b-reponse',finR:fin('05b-reponse')+.8,cpt:fin('05-question')+.1,rebours:8,bonne:2,tBon:tC2-r2,
-      phrase:[phraseE('12,35 €, payé avec 20 €.',[tDouzeQ,mq2('euros'),mq2('paie'),mq2('avec'),tVingtQ,mq2('euros',2)]),phrase2],pause:pause2,
+      phrase:[phraseE('12,35 €, payé avec 20 €.',[tDouzeQ,mq2('euros'),mq2('paie'),mq2('avec'),tVingtQ]),phrase2],pause:pause2,
       choix:[['8,35 €',tqb('A'),tqb('euros',3)],['7,75 €',tqb('B'),tqb('euros',4)],['7,65 €',tqb('C'),tqb('euros',5)]],
-      tete:[[r2+.1,'Réponse '],[tC2,'C !']],reponse:[phraseE('+ 65 c + 7 € = 7,65 €',[tSC2,tSC2,mr2('centimes'),tSept2,tSept2,mr2('euros'),tSept2b,tSept2b,tSept2b]),],suite:[] }
+      tete:[[r2+.1,'Réponse '],[tC2,'C !']],reponse:[phraseE('+ 65 c + 7 € = 7,65 €',[tSC2,tSept2,tSept2,tSept2b,tSept2b]),],suite:[] }
   ];
   const groupes=[groupe(ap+.05,f,30,60,phraseE('Ce que tu as appris',[ap+.05,ap+.05,ap+.05,ap+.05,ap+.05]))];
 

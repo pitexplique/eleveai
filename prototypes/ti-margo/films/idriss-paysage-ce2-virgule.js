@@ -44,30 +44,30 @@ FILMS['ce2-virgule']=function(outils){
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=ap){ /* ce que tu as appris */
       quaiBoisE(c,T,40);
-      if(T>=tEurA){ ecrire(c,'euros',380,250,90*zoom(T,tEurA,.4),EUR_CE2); ecrire(c,',',528,262,130*zoom(T,ap+.3,.4),CRAIE.blanc); }
-      if(T>=tCentA) ecrire(c,'centimes',720,250,90*zoom(T,tCentA,.4),CEN_CE2);
-      if(T>=tDeuxA){ ardoiseVCe2E(c,'7,06 €',528,420,96,{z:zoom(T,tDeuxA,.5)}); }
-      if(T>=tCentA2) prixVCe2E(c,'100 c = 1 €',528,600,90,{z:zoom(T,tCentA2,.5),fond:1});
+      if(T>=tEurA){ ecrire(c,'euros',420,250,90*zoom(T,tEurA,.4),EUR_CE2); ecrire(c,',',582,262,130*zoom(T,ap+.3,.4),CRAIE.blanc); }
+      if(T>=tCentA) ecrire(c,'centimes',800,250,90*zoom(T,tCentA,.4),CEN_CE2);
+      if(T>=tDeuxA){ ardoiseVCe2E(c,'7,06 €',640,430,110,{z:zoom(T,tDeuxA,.5)}); }
+      if(T>=tCentA2) prixVCe2E(c,'100 c = 1 €',640,630,96,{z:zoom(T,tCentA2,.5),fond:1});
       tab.maj(); return; }
 
     if(T>=q2){ /* 2 € et 5 c, écrit « 2,5 € » ; corriger (x < 480) */
       quaiBoisE(c,T,40);
       const efface=T>=r2&&T>=tDeux2;
-      idriss(c,T,efface?1:0,95,.92);
+      idriss(c,T,0,95,.92);
       grandeArdoise(c,170,60,300,200,efface?.5:0);
       ecrire(c,'sardines',320,110,46,CRAIE.blanc);
       if(!efface){ if(T>=tEcrit) prixVCe2E(c,'2,5 €',320,195,84,{z:zoom(T,tEcrit,.5)}); }
       else prixVCe2E(c,'2,05 €',320,195,84,{z:zoom(T,tDeux2,.5)});
-      if(T>=tVoulait&&!(T>=r2)) bulleE(c,330,350,270,96,160,400,'2 € et 5 c',52,zoom(T,tVoulait,.5));
+      if(T>=tVoulait&&!(T>=r2)) bulleE(c,300,350,270,96,160,400,'2 € et 5 c',52,zoom(T,tVoulait,.5));
       for(let k=0;k<3;k++) poissonE(c,240+k*85,650,110,'#a5d8ff',{T,k,ray:'#495057'});
-      if(T<r2){ if(T>=tCorriger) ecrire(c,'?',420,350,120*zoom(T,tCorriger,.5),CRAIE.jaune); }
+      if(T<r2){ if(T>=tCorriger) ecrire(c,'?',510,350,120*zoom(T,tCorriger,.5),CRAIE.jaune); }
       else {
-        if(T>=tCinq2) prixVCe2E(c,'5 c',190,350,70,{z:zoom(T,tCinq2,.5),fond:1});
-        if(T>=tZero2){ ecrire(c,'→',290,350,64,CRAIE.blanc); prixVCe2E(c,',0',375,350,80,{z:zoom(T,tZero2,.5),une:CEN_CE2}); }
-        if(T>=tCinq2b) ecrire(c,'5',428,350,80*zoom(T,tCinq2b,.5),CEN_CE2);
-        if(T>=tZero2) cercle(c,384,352,40,CRAIE.jaune,entreE(T,tZero2,tZero2+.4));
-        if(T>=tA2) prixVCe2E(c,'A : 2,50 €',300,480,52,{z:zoom(T,tA2,.5),fond:1});
-        if(T>=tCinquante2) prixVCe2E(c,'= 2 € et 50 c',300,545,48,{z:zoom(T,tCinquante2,.5),fond:1}); }
+        if(T>=tCinq2) prixVCe2E(c,'5 c',250,350,70,{z:zoom(T,tCinq2,.5),fond:1});
+        if(T>=tZero2){ ecrire(c,'→',350,350,64,CRAIE.blanc); prixVCe2E(c,',0',435,350,80,{z:zoom(T,tZero2,.5),une:CEN_CE2}); }
+        if(T>=tCinq2b) ecrire(c,'5',488,350,80*zoom(T,tCinq2b,.5),CEN_CE2);
+        if(T>=tZero2) cercle(c,444,352,40,CRAIE.jaune,entreE(T,tZero2,tZero2+.4));
+        if(T>=tA2) prixVCe2E(c,'A : 2,50 €',370,470,56,{z:zoom(T,tA2,.5),fond:1});
+        if(T>=tCinquante2) prixVCe2E(c,'= 2 € et 50 c',370,545,52,{z:zoom(T,tCinquante2,.5),fond:1}); }
       tab.maj(); return; }
 
     if(T>=q1){ /* 520 c en euros (x < 480) */
@@ -75,7 +75,7 @@ FILMS['ce2-virgule']=function(outils){
       if(T>=tCinqQ) prixVCe2E(c,'520 c',240,140,110,{z:zoom(T,tCinqQ,.5),fond:1});
       if(T>=tEurosQ) prixVCe2E(c,'= ? €',240,270,96,{z:zoom(T,tEurosQ,.5),une:CRAIE.jaune});
       if(T<r1){ const pc=['50c','20c','50c','10c','20c','50c','5c'];
-        if(T>=tCentimesQ) pc.forEach((n,k)=>centimeCe2(c,n,100+(k%4)*95,450+Math.floor(k/4)*95,T,tCentimesQ+k*.08)); }
+        if(T>=tCentimesQ) pc.forEach((n,k)=>centimeCe2(c,n,90+(k%4)*125,460+Math.floor(k/4)*125,T,tCentimesQ+k*.08)); }
       else {
         calculVCe2E(c,T,240,400,['500 c','=','5 €'],[tCinq1,tCinq1b,tCinq1b],62,{vert:false});
         if(T>=tReste1) prixVCe2E(c,'+ 20 c',240,500,62,{z:zoom(T,tVingt1,.5)});
@@ -84,21 +84,21 @@ FILMS['ce2-virgule']=function(outils){
 
     if(T>=ze){ /* toujours deux chiffres après la virgule : 7,06 € */
       quaiBoisE(c,T,40); idriss(c,T,0);
-      if(T>=tDeuxZ){ ecrire(c,',',560,170,140*zoom(T,tDeuxZ,.4),CRAIE.blanc);
-        for(const [k,x] of [[0,640],[1,730]]){ const u=zoom(T,tDeuxZ+k*.25,.4); if(u<=0) continue; c.strokeStyle=CEN_CE2; c.lineWidth=6; c.setLineDash([12,10]);
-          c.strokeRect(x-36*u,120-48*u+30,72*u,96*u); c.setLineDash([]); }
-        ecrire(c,'2 chiffres',880,170,56*zoom(T,tDeuxZ+.4,.4),CEN_CE2); }
-      if(T>=tSeptZ) prixVCe2E(c,'7 € et 6 c',640,370,84,{z:zoom(T,tSeptZ,.5),fond:1});
-      if(T>=tSeptZ2){ const xs=prixVCe2E(c,'= 7,06 €',640,540,120,{z:zoom(T,tSeptZ2,.5)});
-        if(T>=tZeroZ&&xs[4]) cercle(c,xs[4],542,58,CRAIE.jaune,entreE(T,tZeroZ,tZeroZ+.4)); }
+      if(T>=tDeuxZ){ ecrire(c,',',520,190,170*zoom(T,tDeuxZ,.4),CRAIE.blanc);
+        for(const [k,x] of [[0,610],[1,715]]){ const u=zoom(T,tDeuxZ+k*.25,.4); if(u<=0) continue; c.strokeStyle=CEN_CE2; c.lineWidth=6; c.setLineDash([12,10]);
+          c.strokeRect(x-44*u,150-60*u,88*u,120*u); c.setLineDash([]); }
+        ecrire(c,'2 chiffres',935,150,62*zoom(T,tDeuxZ+.4,.4),CEN_CE2); }
+      if(T>=tSeptZ) prixVCe2E(c,'7 € et 6 c',760,390,90,{z:zoom(T,tSeptZ,.5),fond:1});
+      if(T>=tSeptZ2){ const xs=prixVCe2E(c,'= 7,06 €',760,570,130,{z:zoom(T,tSeptZ2,.5)});
+        if(T>=tZeroZ&&xs[4]) cercle(c,xs[4],572,62,CRAIE.jaune,entreE(T,tZeroZ,tZeroZ+.4)); }
       tab.maj(); return; }
 
     if(T>=ce){ /* 345 c = 3,45 € ; 100 c = 1 € ; 300 c = 3 € */
       quaiBoisE(c,T,40); idriss(c,T,0);
-      if(T>=tTroisC) prixVCe2E(c,'345 c',520,140,100,{z:zoom(T,tTroisC,.5),fond:1});
-      if(T>=tPareil) prixVCe2E(c,'= 3,45 €',800,140,100,{z:zoom(T,tPareil,.5)});
-      if(T>=tCentC) prixVCe2E(c,'100 c = 1 €',650,350,96,{z:zoom(T,tCentC,.5),fond:1});
-      if(T>=tTroisC2) prixVCe2E(c,'300 c = 3 €',650,540,96,{z:zoom(T,tTroisC2,.5),fond:1,lueur:T>=tEurosC?.4:0});
+      if(T>=tTroisC) prixVCe2E(c,'345 c',480,140,100,{z:zoom(T,tTroisC,.5),fond:1});
+      if(T>=tPareil) prixVCe2E(c,'= 3,45 €',920,140,100,{z:zoom(T,tPareil,.5)});
+      if(T>=tCentC) prixVCe2E(c,'100 c = 1 €',700,350,96,{z:zoom(T,tCentC,.5),fond:1});
+      if(T>=tTroisC2) prixVCe2E(c,'300 c = 3 €',700,540,96,{z:zoom(T,tTroisC2,.5),fond:1,lueur:T>=tEurosC?.4:0});
       tab.maj(); return; }
 
     /* le matin : Idriss, la craie à la main, devant sa grande ardoise des prix */
@@ -115,11 +115,11 @@ FILMS['ce2-virgule']=function(outils){
       if(T>=tVirgE) cercle(c,672,330,52,CRAIE.jaune,entreE(T,tVirgE,tVirgE+.4)*(T<tTroisE2?1:0)); }
     tab.maj();
   }
-  function centimeCe2(c,n,x,y,T,t0){ if(T<t0) return; argentCe2E(c,n,x,y,44,{z:zoom(T,t0,.4)}); }
+  function centimeCe2(c,n,x,y,T,t0){ if(T<t0) return; argentCe2E(c,n,x,y,60,{z:zoom(T,t0,.4)}); }
 
   const qa=dit('04-question'), qb=dit('05-question');
   qa('Question !'); qa.jusque('Mets'); const pause1=[qa('Mets pause, et choisis !')];
-  qb('Question !'); qb.jusque('Comment'); const phrase2b=qb('Comment corriger ?'); qb.jusque('Mets'); const pause2=[qb('Mets pause, et choisis !')];
+  qb('Question !'); qb.jusque('Comment'); const phrase2b=qb('Comment corriger ?'); qb.jusque('Mets'); const pause2=[qb('Mets pause, et choisis !')];
   const tqa=(w,n=1)=>mot('04-question',w,n)-q1, tqb=(w,n=1)=>mot('05-question',w,n)-q2;
   const questions=[
     { qc:'04-question',rc:'04b-reponse',finR:fin('04b-reponse')+.8,cpt:fin('04-question')+.1,rebours:8,bonne:0,tBon:tA1-r1,
@@ -127,7 +127,7 @@ FILMS['ce2-virgule']=function(outils){
       choix:[['5,20 €',tqa('A'),tqa('euros',2)],['52 €',tqa('B'),tqa('euros',3)],['0,52 €',tqa('C'),tqa('euro',1)]],
       tete:[[r1+.1,'Réponse '],[tA1,'A !']],reponse:[phraseE('500 c = 5 €',[tCinq1,mr1('cents'),tCinq1b,tCinq1b,mr1('euros')]),phraseE('5,20 €',[tCinq1c,tEuros1])],suite:[] },
     { qc:'05-question',rc:'05b-reponse',finR:fin('05b-reponse')+.8,cpt:fin('05-question')+.1,rebours:8,bonne:1,tBon:tB2-r2,
-      phrase:[phraseE('Il voulait 2 € et 5 c.',[mq2('Idriss'),tVoulait,tDeuxQ,mq2('euros'),mq2('et'),tCinqQ2,mq2('centimes')]),phraseE('Il a écrit 2,5 €.',[mq2('Il'),mq2('a'),tEcrit,tDeuxQ2,tCinqQ2b]),phrase2b],pause:pause2,
+      phrase:[phraseE('Il voulait 2 € et 5 c.',[mq2('Idriss'),tVoulait,tDeuxQ,mq2('et'),tCinqQ2]),phraseE('Il a écrit 2,5 €.',[mq2('Il'),mq2('a'),tEcrit,tDeuxQ2]),phrase2b],pause:pause2,
       choix:[['2,50 €',tqb('A',2),tqb('euros',2)],['2,05 €',tqb('B'),tqb('euros',3)],['25 €',tqb('C'),tqb('euros',4)]],
       tete:[[r2+.1,'Réponse '],[tB2,'B !']],reponse:[phraseE('5 c → 05',[tCinq2,mr2('centimes'),tZero2,tCinq2b]),phraseE('2,05 €',[tDeux2,tEuros2])],suite:[] }
   ];

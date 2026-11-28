@@ -23,7 +23,7 @@ FILMS['ce2-rendre']=function(outils){
   const finTitre=tJe-.08;
 
   function comptoir(c){ c.fillStyle='#c08550'; c.fillRect(0,560,1056,160); c.strokeStyle='#6b3a10'; c.lineWidth=5; c.beginPath(); c.moveTo(0,560); c.lineTo(1056,560); c.stroke(); }
-  const DX=[230,520,860], DY=330;
+  const DX=[150,330,690], DY=310;
 
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=com){ /* à toi : 6,50 € payé avec 10 € */
@@ -40,18 +40,18 @@ FILMS['ce2-rendre']=function(outils){
     if(!repond){
       if(T>=tTrois) ardoiseVCe2E(c,'3,90 €',330,440,72,{z:zoom(T,tTrois,.5)});
       /* Ti Margo (à gauche) tend le billet de 5 € ; Idriss rend 1 € et 10 c */
-      if(T>=tBillet){ const p=sautE([150,250],[600,250],entreE(T,tCinq,tCinq+.6),60); euroE(c,5,p[0],p[1],30,{z:zoom(T,tBillet,.5),grand:1}); }
-      if(T>=tRend){ const u=entreE(T,tRend,tRend+.6), p1=sautE([800,300],[470,150],u,50), p2=sautE([830,300],[560,150],u,50);
-        euroE(c,1,p1[0],p1[1],40); centimeE(c,10,p2[0],p2[1],40); }
+      if(T>=tBillet){ const p=sautE([150,250],[600,250],entreE(T,tCinq,tCinq+.6),60); euroE(c,5,p[0],p[1],40,{z:zoom(T,tBillet,.5),grand:1}); }
+      if(T>=tRend){ const u=entreE(T,tRend,tRend+.6), p1=sautE([800,300],[450,170],u,50), p2=sautE([830,300],[580,170],u,50);
+        euroE(c,1,p1[0],p1[1],52); centimeE(c,10,p2[0],p2[1],52); }
       if(T>=tUn) prixVCe2E(c,'1,10 €',515,70,64,{z:zoom(T,tUn,.5),fond:1});
       if(T>=q) ecrire(c,'?',700,90,120,CRAIE.jaune); }
     else {
-      ardoiseVCe2E(c,'3,90 €',330,440,60);
-      euroE(c,1,700,470,36); centimeE(c,10,790,470,36);
+      /* (la droite porte déjà 3,90 €) ; ce qu'Idriss a rendu, sous la droite */
+      euroE(c,1,430,470,50); centimeE(c,10,560,470,50);
       /* la droite des prix : 3,90 € → 4 € → 5 € */
-      if(T>=tDe){ droitePrixCe2E(c,[[DX[0],'3,90 €'],[DX[1],'4 €'],[DX[2],'5 €']],DY,{taille:46,z:zoom(T,tDe,.4),hi:{0:null}});
-        bondCe2E(c,T,DX[0],DX[1],DY,tQuatre,tDix,'+ 10 c',60,CEN_CE2,46);
-        bondCe2E(c,T,DX[1],DX[2],DY,tCinqR,tUnR,'+ 1 €',80,EUR_CE2,46); }
+      if(T>=tDe){ droitePrixCe2E(c,[[DX[0],'3,90 €'],[DX[1],'4 €'],[DX[2],'5 €']],DY,{taille:54,z:zoom(T,tDe,.4),hi:{0:null}});
+        bondCe2E(c,T,DX[0],DX[1],DY,tQuatre,tDix,'+ 10 c',60,CEN_CE2,52);
+        bondCe2E(c,T,DX[1],DX[2],DY,tCinqR,tUnR,'+ 1 €',80,EUR_CE2,52); }
       if(T>=tUnR2) ardoiseVCe2E(c,'1,10 €',528,80,70,{z:zoom(T,tUnR2,.5),lueur:.5});
       if(T>=tUnR2) coche(c,680,80,.5);
       if(T>=tBravo) for(const [x,y] of [[160,120],[900,140]]) etincelle(c,x,y,14+6*Math.sin(T*6+x)); }
@@ -63,7 +63,7 @@ FILMS['ce2-rendre']=function(outils){
   const tq=(w,n=1)=>mot('01-question',w,n)-q;
   qd.jusque('Mets'); const pauseQ=[qd('Mets pause, et choisis !')];
 
-  poserMiniature(outils,q-.3,'Bien<br>rendu ?',ardoiseMini([['5 € − 3,90 €'],['= 1,10 € ?','#ffd43b']]));
+  miniCe2E(outils,q-.3,'Bien<br>rendu ?',[['5 € − 3,90 €'],['= 1,10 € ?','#ffd43b']]);
   return { clips,FIN,titre:'Idriss a-t-il bien rendu ?',ceinture:0,finTitre,groupes:[],finClip:'03-abonne',
     cuts:[finTitre,q,r,com,f],
     question:{ qc:'01-question',rc:'01b-reponse',finR:com,cpt:fin('01-question')+.1,rebours:8,bonne:0,tBon:tA-r,

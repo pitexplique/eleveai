@@ -16,14 +16,14 @@ FILMS['ce2-constituer']=function(outils){
   const css=document.createElement('style'); css.textContent='#carte .choix{font-size:46px!important;}'; document.head.append(css);
 
   const m0=(w,n=1)=>mot('00-accroche',w,n);
-  const tIdriss=m0('Idriss'), tFilet=m0('filet'), tVT=m0('vingt-trois'), tDeux=m0('deux'), tBillets=m0('billets'), tDix=m0('dix'), tPiece=m0('pièce'), tDeuxE=m0('deux',2), tPiece2=m0('pièce',2), tCinquante=m0('cinquante');
+  const tIdriss=m0('Idriss'), tFilet=m0('filet'), tVT=m0('vingt-trois'), tDeux=m0('deux'), tBillets=m0('billets'), tDix=m0('dix'), tPiece=m0('pièce'), tDeuxE=m0('deux',2), tPiece2=m0('pièce',2), tCinquante=m0('cinquante',2);
   const mr=(w,n=1)=>mot('01b-reponse',w,n);
   const tB=mr('B'), tDixR=mr('Dix'), tVingtR=mr('vingt'), tVD=mr('vingt-deux'), tCinqR=mr('cinquante'), tVD2=mr('vingt-deux',2), tManque=mr('manque'), tEuroR=mr('euro'), tCe=mr('Ce'), tDemain=mr('demain');
   const mc=w=>mot('02-commentaire',w), tCinqC=mc('cinquante'), tCinqEC=mc('cinq'), tRep=mc('réponds');
   const finTitre=tIdriss-.08;
 
   /* l'argent d'Idriss sur le comptoir : deux billets de 10 €, une pièce de 2 €, une pièce de 50 c ; le filet neuf à droite */
-  const MON=[['10€',300,'10 €'],['10€',465,'20 €'],['2€',595,'22 €'],['50c',698,'22,50 €']], MY=640;
+  const MON=[['10€',285,'10 €'],['10€',505,'20 €'],['2€',665,'22 €'],['50c',775,'22,50 €']], MY=640;
   function comptoir(c){ c.fillStyle='#c08550'; c.fillRect(0,560,1056,160); c.strokeStyle='#6b3a10'; c.lineWidth=5; c.beginPath(); c.moveTo(0,560); c.lineTo(1056,560); c.stroke(); }
 
   function dessiner(T){ const c=tab.c; tab.effacer();
@@ -36,7 +36,7 @@ FILMS['ce2-constituer']=function(outils){
 
     quaiBoisE(c,T,150); comptoir(c);
     const repond=T>=r;
-    idrissE(c,150,712,1.25,{montre:(T>=tFilet&&T<tDeux)||(repond&&T<tCe)?1:0,T});
+    idrissE(c,150,712,1.25,{montre:T>=tFilet&&T<tDeux&&!repond?1:0,T});
     /* le filet neuf et son prix ; il s'en va « pour demain » */
     const part=repond?entreE(T,tCe,tDemain):0;
     if(T>=tFilet){ filetCe2E(c,880+part*240,560,270,{z:zoom(T,tFilet,.4),lueur:T>=q&&T<r?.4:0}); }
@@ -44,14 +44,14 @@ FILMS['ce2-constituer']=function(outils){
     /* l'argent paraît quand la voix le dit */
     const ts=[tBillets,tBillets+.25,tDeuxE,tCinquante];
     MON.forEach(([n,x],k)=>{ if(T<ts[k]) return; const lu=repond&&T>=[tDixR,tVingtR,tVD,tCinqR][k]&&T<tVD2?.6:0;
-      argentCe2E(c,n,x,MY,n.endsWith('€')&&parseInt(n)>=5?30:44,{z:zoom(T,ts[k],.4),lueur:lu,grand:1}); });
-    if(T>=tDeux&&T<r) etiquette(c,'2',300,520,T,tDeux,'#74c0fc',46);
+      argentCe2E(c,n,x,MY,n.endsWith('€')&&parseInt(n)>=5?40:56,{z:zoom(T,ts[k],.4),lueur:lu,grand:1}); });
+    if(T>=tDeux&&T<r) etiquette(c,'2',400,545,T,tDeux,'#74c0fc',50);
     if(T<r){ if(T>=q) ecrire(c,'?',540,330,150*zoom(T,q+1,.5),CRAIE.jaune); }
     else {
       /* 10, 20, 22 euros, et 50 c : 22,50 € < 23,50 € ; il manque 1 € */
-      MON.forEach(([n,x,txt],k)=>{ const t=[tDixR,tVingtR,tVD,tCinqR][k]; if(T>=t&&k<3) plaqueCe2E(c,txt,x,522,40,T,t,k===2?CRAIE.ok:CRAIE.jaune); });
-      if(T>=tVD2) calculVCe2E(c,T,500,300,['22,50 €','<','23,50 €'],[tVD2,tVD2+.3,tVD2+.5],70,{vert:false});
-      if(T>=tManque) prixVCe2E(c,'il manque 1 €',500,420,66,{z:zoom(T,tManque,.5),une:CRAIE.faux,fond:1}); }
+      MON.forEach(([n,x,txt],k)=>{ const t=[tDixR,tVingtR,tVD,tCinqR][k]; if(T>=t&&k<3) plaqueCe2E(c,txt,x,520,44,T,t,k===2?CRAIE.ok:CRAIE.jaune); });
+      if(T>=tVD2) calculVCe2E(c,T,615,300,['22,50 €','<','23,50 €'],[tVD2,tVD2+.3,tVD2+.5],64,{vert:false});
+      if(T>=tManque) prixVCe2E(c,'il manque 1 €',530,415,64,{z:zoom(T,tManque,.5),une:CRAIE.faux,fond:1}); }
     tab.maj();
   }
 
@@ -60,7 +60,7 @@ FILMS['ce2-constituer']=function(outils){
   const tq=(w,n=1)=>mot('01-question',w,n)-q;
   qd.jusque('Mets'); const pauseQ=[qd('Mets pause, et choisis !')];
 
-  poserMiniature(outils,q-.3,'Assez<br>d\'argent ?',ardoiseMini([['filet :'],['23,50 €','#ffd43b']]));
+  miniCe2E(outils,q-.3,'Assez<br>d\'argent ?',[['filet :'],['23,50 €','#ffd43b']]);
   return { clips,FIN,titre:'Le filet neuf',ceinture:0,finTitre,groupes:[],finClip:'03-abonne',
     cuts:[finTitre,q,r,com,f],
     question:{ qc:'01-question',rc:'01b-reponse',finR:com,cpt:fin('01-question')+.1,rebours:8,bonne:1,tBon:tB-r,

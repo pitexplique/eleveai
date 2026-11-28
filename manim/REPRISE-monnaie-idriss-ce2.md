@@ -32,6 +32,20 @@ Règles communes aux 3 sessions (CP, CE1, CE2) : note `monnaie-idriss-regles-com
 ## État (28/11, fin de la 1re session CE2)
 - [x] 10 WAV + instants (vérifiés présents dans les deux fichiers de cues).
 - [x] 10 films écrits ; les 10 se chargent sans erreur (contrôle à 5, 15, 25 s).
+- [x] 28/11 (2e session CE2) : planches -ql 19 → 22 (short + paysage) contrôlées et CORRIGÉES (scratchpad, non gardées) :
+      19 short : « 9 c → 09 » sur plaque sombre (illisible sur la mer), ardoise du crabe décalée ; « À toi » : « ?,?? € » au lieu d'une virgule seule.
+      19 paysage : 345 c / = 3,45 € ne se chevauchent plus ; « , [ ][ ] 2 chiffres » agrandi ; pièces Q1 plus grandes ; « 5 c → 05 » loin du chapeau ;
+         Idriss ne montre plus (bras sur « A : 2,50 € ») ; « euros , centimes » séparés ; carte sans mot seul (espaces insécables).
+      20 short : billets/pièces agrandis et espacés, 50 c au 2e « cinquante » (paraissait avec le prix), calcul hors de la tête d'Idriss.
+      20 paysage : tas A/B/C et pièces de 20 c agrandis ; cartes en espaces insécables (« 2 € ? », « 8,40 € »).
+      21 short : « + » entre les deux ardoises, formule 2 + 3 + 1 = 6 hors de la tête d'Idriss, ⭐ le « 1 » de l'euro de plus en JAUNE.
+      21 paysage : ardoises 6,40/3,30 séparées ; Q1/Q2 agrandies (animaux, formules, encadré « A : 1,130 € ») ; « 130 c = 1 € et 30 c » insécable.
+      22 short : droite des prix 3,90 → 4 → 5 € déplacée (passait sur Idriss), argent agrandi.
+      22 paysage : droites et bonds agrandis partout ; « rend‑on ? » insécable.
+      ⚠️ Un contrôle qui SAUTE directement dans la 2e question peut montrer les choix de la 1re : artefact du saut, pas du film.
+- [x] Miniatures shorts : `miniCe2E` (gabarit A DANS le film, zone sûre 215 → 1700, « Dessin animé ») dans `idriss-dessins-ce2.js`, les 5 shorts l'utilisent ;
+      23 : titre « Assez pour la lampe ? » (le 20 garde « Assez d'argent ? »). ⚠️ `miniatures-shorts-grille.py` exige une entrée du MANIFESTE : pas utilisé (manifeste = accord de Frédéric).
+- [ ] 23 (short + paysage) : planches -ql à LIRE (déjà faites, à refaire après correction) puis corriger.
 - [ ] Planches -ql image par image (toute la durée, pas de 2 à 3 s) : compteur 8 s visible, bonne réponse du script, chaque nombre dit
       est écrit, virgule et deux chiffres lisibles, rien de coupé ni serré ; corriger ce qui chevauche.
       `CONTROLE=<dossier> node scripts/ti-margo-short.mjs idriss[-paysage] ce2-<ep> controle $(seq 3 3 135)` puis

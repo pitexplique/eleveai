@@ -64,7 +64,7 @@ FILMS['ce2-defi']=function(outils){
   const tq=(w,n=1)=>mot('01-question',w,n)-q;
   qd.jusque('Mets'); const pauseQ=[qd('Mets pause, et choisis !')];
 
-  poserMiniature(outils,q-.3,'Assez<br>d\'argent ?',ardoiseMini([['10 €'],['6,20 + 1,50','#ffd43b'],['+ 2,40','#ffd43b']]));
+  miniCe2E(outils,q-.3,'Assez pour<br>la lampe ?',[['10 €'],['6,20 + 1,50','#ffd43b'],['+ 2,40','#ffd43b']]);
   return { clips,FIN,titre:"La lampe d'Idriss",ceinture:0,finTitre,groupes:[],finClip:'03-abonne',
     cuts:[finTitre,q,r,com,f],
     question:{ qc:'01-question',rc:'01b-reponse',finR:com,cpt:fin('01-question')+.1,rebours:8,bonne:0,tBon:tA-r,

@@ -40,19 +40,19 @@ FILMS['ce2-additionner']=function(outils){
     if(T>=tSac) sacGlaceCe2E(c,GX,560,170,{z:zoom(T,tSac,.4),lueur:repond&&T>=tSoix&&T<tCent?.5:0});
     if(T>=tAppats) appatsCe2E(c,PX,560,210,{z:zoom(T,tAppats,.4),T,lueur:repond&&T>=tCinq&&T<tCent?.5:0});
     if(!repond){
-      if(T>=tDeux) ardoiseVCe2E(c,'2,60 €',GX,215,72,{z:zoom(T,tDeux,.5)});
-      if(T>=tTrois) ardoiseVCe2E(c,'3,50 €',PX,250,72,{z:zoom(T,tTrois,.5)});
+      if(T>=tDeux) ardoiseVCe2E(c,'2,60 €',GX-40,215,66,{z:zoom(T,tDeux,.5)});
+      if(T>=tTrois) ardoiseVCe2E(c,'3,50 €',PX+20,250,66,{z:zoom(T,tTrois,.5)});
       if(T>=q) ecrire(c,'+',(GX+PX)/2,250,110,CRAIE.blanc); }
     else {
       prixVCe2E(c,'2,60 €',GX,380,54,{fond:1}); prixVCe2E(c,'3,50 €',PX,380,54,{fond:1});
       /* les centimes d'abord : 60 c + 50 c = 110 c = 1 € et 10 c */
       calculVCe2E(c,T,528,70,['60 c','+','50 c','=','110 c'],[tSoix,tPlus,tCinq,tCent,tCent],68,{vert:false});
       if(T>=tUn) prixVCe2E(c,'= 1 € et 10 c',640,155,68,{z:zoom(T,tUn,.5),fond:1});
-      /* puis les euros : 2 + 3 + 1 = 6 */
-      formuleE(c,T,420,255,['2','+','3','+','1','=','6'],[tDeuxR,tPlus2,tTroisR,tPlus3,tUn2,tSix,tSix],70,[EUR_CE2,CRAIE.blanc,EUR_CE2,CRAIE.blanc,EUR_CE2,CRAIE.blanc,CRAIE.ok]);
-      if(T>=tSix2) ardoiseVCe2E(c,'6,10 €',850,265,66,{z:zoom(T,tSix2,.5),lueur:T<tC?.6:0});
+      /* puis les euros : 2 + 3 + 1 = 6 ; le « 1 » (l'euro de plus, venu des centimes) en JAUNE */
+      formuleE(c,T,480,255,['2','+','3','+','1','=','6'],[tDeuxR,tPlus2,tTroisR,tPlus3,tUn2,tSix,tSix],70,[EUR_CE2,CRAIE.blanc,EUR_CE2,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
+      if(T>=tSix2) ardoiseVCe2E(c,'6,10 €',890,265,66,{z:zoom(T,tSix2,.5),lueur:T<tC?.6:0});
       if(T>=tC){ prixVCe2E(c,'C : 5,10 €',520,650,56,{z:zoom(T,tC,.5),fond:1}); if(T>=tOublie) barreCe2E(c,[400,650],[640,650],entreE(T,tOublie,tOublie+.4)); }
-      if(T>=tSix2) for(const [x,y] of [[700,240],[1000,300]]) etincelle(c,x,y,12+6*Math.sin(T*6+x)); }
+      if(T>=tSix2) for(const [x,y] of [[760,330],[1010,200]]) etincelle(c,x,y,12+6*Math.sin(T*6+x)); }
     tab.maj();
   }
 
@@ -61,7 +61,7 @@ FILMS['ce2-additionner']=function(outils){
   const tq=(w,n=1)=>mot('01-question',w,n)-q;
   qd.jusque('Mets'); const pauseQ=[qd('Mets pause, et choisis !')];
 
-  poserMiniature(outils,q-.3,'Combien<br>en tout ?',ardoiseMini([['2,60 €'],['+ 3,50 €','#ffd43b']]));
+  miniCe2E(outils,q-.3,'Combien<br>en tout ?',[['2,60 €'],['+ 3,50 €','#ffd43b']]);
   return { clips,FIN,titre:'La glace et les appâts',ceinture:0,finTitre,groupes:[],finClip:'03-abonne',
     cuts:[finTitre,q,r,com,f],
     question:{ qc:'01-question',rc:'01b-reponse',finR:com,cpt:fin('01-question')+.1,rebours:8,bonne:0,tBon:tA-r,

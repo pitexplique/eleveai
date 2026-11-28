@@ -123,6 +123,14 @@ function ardoiseVCe2E(c,txt,x,y,taille=64,{z=1,lueur=0,une=null}={}){ if(z<=0) r
   if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.42*lueur})`; c.beginPath(); c.roundRect(-w/2-22,-h/2-22,w+44,h+44,22); c.fill(); }
   c.fillStyle='#212529'; c.strokeStyle='#8a5a2b'; c.lineWidth=10; c.beginPath(); c.roundRect(-w/2,-h/2,w,h,12); c.fill(); c.stroke();
   prixVCe2E(c,txt,0,2,taille,{une}); c.restore(); }
+/* Miniature d'un short CE2 au GABARIT A (zone sûre de la grille YouTube : tout entre y = 215 et 1700) :
+   la question en haut dans la carte blanche, l'échelle des ceintures, l'ardoise du calcul en GRAND, Ti Margo, « Dessin animé » au-dessus de la coupe du bas.
+   lignes = celles d'ardoiseMini : [['409 c'], ['= ? €', '#ffd43b']] */
+function miniCe2E(outils,t,html,lignes){ poserMiniature(outils,t,html,ardoiseMini(lignes,470,330)); const f=window.tiMargoMiniature;
+  window.tiMargoMiniature=()=>{ f(); const {$,legende}=outils;
+    legende.style.top='230px'; legende.style.fontSize='88px';
+    const e=$('echelle'); if(e) e.style.top='560px';
+    for(const d of document.querySelectorAll('body > .cv')){ if(d.textContent==='Dessin animé') d.style.bottom='240px'; else if(d.innerHTML.includes('<svg')){ d.style.top='730px'; d.style.left='30px'; } } }; }
 /* Une droite des prix (rendre la monnaie) : pts = [[x, '3,90 €'], [x, '4 €'], …] sur la ligne y ; hi = { indice: couleur } ; z = l'apparition */
 function droitePrixCe2E(c,pts,y,{taille=44,z=1,hi={}}={}){ if(z<=0) return; c.save(); c.globalAlpha=Math.min(1,z);
   c.strokeStyle=CRAIE.blanc; c.lineWidth=5; c.beginPath(); c.moveTo(pts[0][0]-34,y); c.lineTo(pts[pts.length-1][0]+34,y); c.stroke();

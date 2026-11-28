@@ -49,15 +49,15 @@ FILMS['ce2-constituer']=function(outils){
         const bon=T>=r2&&k===0, lu=bon&&T>=tA2?.5:0;
         if(lu){ c.fillStyle='rgba(255,212,59,.22)'; c.beginPath(); c.roundRect(14,y-62,456,124,24); c.fill(); }
         ecrire(c,L,40,y,56*Math.max(1,zoom(T,tL,.5)),T>=tL&&T<tL+.8?CRAIE.jaune:CRAIE.blanc);
-        const X=tasCe2E(c,noms,82,y,24,60,{zs:noms.map((_,j)=>zoom(T,tTasQ+k*.2+j*.06,.4))});
-        if(T>=r2&&k===0){ [tCinq2,tSept2,tHuit2,tVingt2,tQuar2].forEach((t,j)=>{ if(T>=t&&T<tHuit2b) etiquette(c,['5','7','8','20','40'][j],X[j],y-52,T,t,j<3?EUR_CE2:CEN_CE2,30); }); }
-        if(T>=r2&&T>=tS) prixVCe2E(c,somme,300,y+66,40,{z:zoom(T,tS,.5),une:coul,fond:1}); });
+        const X=tasCe2E(c,noms,74,y,30,66,{zs:noms.map((_,j)=>zoom(T,tTasQ+k*.2+j*.06,.4))});
+        if(T>=r2&&k===0){ [tCinq2,tSept2,tHuit2,tVingt2,tQuar2].forEach((t,j)=>{ if(T>=t&&T<tHuit2b) etiquette(c,['5','7','8','20','40'][j],X[j],y-60,T,t,j<3?EUR_CE2:CEN_CE2,36); }); }
+        if(T>=r2&&T>=tS) prixVCe2E(c,somme,300,y+70,46,{z:zoom(T,tS,.5),une:coul,fond:1}); });
       tab.maj(); return; }
 
     if(T>=q1){ /* 2 € en pièces de 20 c (x < 480) */
       quaiBoisE(c,T,40);
       if(T<r1){ if(T>=tDeuxQ) prixVCe2E(c,'2 € = ?',240,110,96,{z:zoom(T,tDeuxQ,.5),fond:1});
-        if(T>=tVingtQ) for(let k=0;k<5;k++) centimeE(c,20,110+k*62,380-(k%2)*30,52,{z:zoom(T,tVingtQ+k*.08,.4)});
+        if(T>=tVingtQ) for(let k=0;k<5;k++) centimeE(c,20,90+k*92,380,46,{z:zoom(T,tVingtQ+k*.08,.4)});
         if(T>=tVingtQ) ecrire(c,'?',240,560,130*zoom(T,tComb1+2,.5),CRAIE.jaune); }
       else {
         prixVCe2E(c,'2 € = 200 c',240,110,84,{z:zoom(T,tDeux1,.5),fond:1});
@@ -108,13 +108,13 @@ FILMS['ce2-constituer']=function(outils){
   const tqa=(w,n=1)=>mot('04-question',w,n)-q1, tqb=(w,n=1)=>mot('05-question',w,n)-q2;
   const questions=[
     { qc:'04-question',rc:'04b-reponse',finR:fin('04b-reponse')+.8,cpt:fin('04-question')+.1,rebours:8,bonne:2,tBon:tC1-r1,
-      phrase:[phraseE('Combien de pièces de 20 c pour faire 2 € ?',[tComb1,mq1('de'),mq1('pièces'),mq1('de',2),tVingtQ,mq1('centimes'),mq1('pour'),mq1('faire'),tDeuxQ,mq1('euros'),mq1('euros')])],pause:pause1,
+      phrase:[phraseE('Combien de pièces de 20 c pour faire 2 € ?',[tComb1,mq1('de'),mq1('pièces'),mq1('de',2),tVingtQ,mq1('pour'),mq1('faire'),tDeuxQ])],pause:pause1,
       choix:[['20',tqa('A'),tqa('vingt',2)],['2',tqa('B'),tqa('deux',2)],['10',tqa('C'),tqa('dix')]],
       tete:[[r1+.1,'Réponse '],[tC1,'C !']],reponse:[phraseE('2 € = 200 c',[tDeux1,mr1('euros'),tCents1,tCents1,mr1('centimes')]),phraseE('10 pièces',[tDix1,mr1('pièces')])],suite:[] },
     { qc:'05-question',rc:'05b-reponse',finR:fin('05b-reponse')+.8,cpt:fin('05-question')+.1,rebours:8,bonne:0,tBon:tA2-r2,
-      phrase:[phraseE('Pour payer 8,40 €, quel tas ?',[mq2('Pour'),mq2('payer'),tHuitQ,mq2('euros'),mq2('quel'),tTasQ,tTasQ]),phrase2b],pause:pause2,
+      phrase:[phraseE('Pour payer 8,40 €, quel tas ?',[mq2('Pour'),mq2('payer'),tHuitQ,mq2('quel'),tTasQ]),phrase2b],pause:pause2,
       choix:[['le tas A',tqb('A'),tqb('A')+.5],['le tas B',tqb('B'),tqb('B')+.5],['le tas C',tqb('C'),tqb('C')+.5]],
-      tete:[[r2+.1,'Réponse '],[tA2,'A !']],reponse:[phraseE('8 € et 40 c = 8,40 €',[tHuit2,mr2('euros'),tVingt2,tQuar2,mr2('centimes'),tHuit2b,tHuit2b,mr2('euros',2)])],suite:[] }
+      tete:[[r2+.1,'Réponse '],[tA2,'A !']],reponse:[phraseE('8 € et 40 c = 8,40 €',[tHuit2,mr2('euros'),tQuar2,tHuit2b,tHuit2b])],suite:[] }
   ];
   const groupes=[groupe(ap+.05,f,30,60,phraseE('Ce que tu as appris',[ap+.05,ap+.05,ap+.05,ap+.05,ap+.05]))];
 

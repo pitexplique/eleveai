@@ -35,8 +35,10 @@ FILMS['ce2-virgule']=function(outils){
       crabeE(c,860,500,1.3,{T,k:2});
       if(T>=tCinqC) prixVCe2E(c,'205 c',528,170,130,{z:zoom(T,tCinqC,.5),fond:1});
       if(T>=tEurosC){ ecrire(c,'=',528,330,110*zoom(T,tEurosC,.5),CRAIE.blanc); }
-      if(T>=tEurosC) prixVCe2E(c,'? €',528,460,120,{z:zoom(T,tEurosC+.2,.5),une:CRAIE.jaune,fond:1});
-      if(T>=tVirgC) ecrire(c,',',640,470,150*zoom(T,tVirgC,.5),CRAIE.blanc);
+      /* « en euros » : ? € ; « avec une virgule » : ? , ? ? € (la place de la virgule et des deux chiffres des centimes) */
+      if(T>=tEurosC&&T<tVirgC) prixVCe2E(c,'? €',528,460,120,{z:zoom(T,tEurosC+.2,.5),une:CRAIE.jaune,fond:1});
+      if(T>=tVirgC){ c.fillStyle='rgba(31,59,44,.92)'; c.beginPath(); c.roundRect(300,385,456,150,30); c.fill();
+        const k=zoom(T,tVirgC,.5); ecrire(c,'?',380,460,120*k,EUR_CE2); ecrire(c,',',438,478,140*k,CRAIE.blanc); ecrire(c,'??',530,460,120*k,CEN_CE2); ecrire(c,'€',680,460,120*k,CRAIE.blanc); }
       tab.maj(); return; }
 
     quaiBoisE(c,T,150); comptoir(c);
@@ -46,19 +48,20 @@ FILMS['ce2-virgule']=function(outils){
     if(T>=tCrabe) crabe(c,T,{saute:T>=r&&T>=tQ3?1:0});
     /* l'étiquette du crabe (ficelle) : vide puis « ? », puis 4,09 € dans la réponse */
     if(T>=tCrabe){ c.strokeStyle='#8a5a2b'; c.lineWidth=3; c.beginPath(); c.moveTo(CX-20,CY-40); c.lineTo(CX+40,CY-150); c.stroke(); }
-    const ex=CX+60, ey=CY-200;
+    const ex=CX+90, ey=CY-190;
     if(T>=tCrabe&&!(T>=r&&T>=tQ3)) ardoiseVCe2E(c,T>=tEcrire?'? €':'    ',ex,ey,72,{z:zoom(T,tCrabe,.4),une:CRAIE.jaune,lueur:T>=q&&T<r?.4:0});
     if(T>=r&&T>=tQ3) ardoiseVCe2E(c,'4,09 €',ex,ey,80,{z:zoom(T,tQ3,.5),lueur:T<tB?.6:0});
     if(T<r){ /* la bulle : 409 c */
       if(T>=tQuatre) bulleE(c,400,110,250,110,300,220,'409 c',70,zoom(T,tQuatre,.5));
-      if(T>=tEuros) ecrire(c,'→ €',880,300,90*zoom(T,tEuros,.5),CRAIE.jaune); }
+      if(T>=tEuros) ecrire(c,'→ €',925,300,90*zoom(T,tEuros,.5),CRAIE.jaune); }
     else {
       /* 400 c = 4 € ; il reste 9 c → 0 9 */
       calculVCe2E(c,T,560,80,['400 c','=','4 €'],[tQ1,tQ2,tQ2],76,{vert:false});
-      if(T>=tReste){ prixVCe2E(c,'9 c',400,170,72); }
-      if(T>=tZero){ ecrire(c,'→',520,170,72,CRAIE.blanc); prixVCe2E(c,'0',610,170,80,{z:zoom(T,tZero,.5),une:CEN_CE2}); }
-      if(T>=tNeuf2) prixVCe2E(c,'9',660,170,80,{z:zoom(T,tNeuf2,.5),une:CEN_CE2});
-      if(T>=tZero) cercle(c,610,172,48,CRAIE.jaune,entreE(T,tZero,tZero+.4));
+      /* 9 c → 0 9 : sur une plaque sombre (la mer derrière rendait l'orange peu lisible), à gauche de l'ardoise du crabe */
+      if(T>=tReste){ c.fillStyle='rgba(31,59,44,.94)'; c.beginPath(); c.roundRect(222,104,356,100,18); c.fill(); prixVCe2E(c,'9 c',300,155,72); }
+      if(T>=tZero){ ecrire(c,'→',400,155,72,CRAIE.blanc); prixVCe2E(c,'0',480,155,80,{z:zoom(T,tZero,.5),une:CEN_CE2}); }
+      if(T>=tNeuf2) prixVCe2E(c,'9',530,155,80,{z:zoom(T,tNeuf2,.5),une:CEN_CE2});
+      if(T>=tZero) cercle(c,480,157,44,CRAIE.jaune,entreE(T,tZero,tZero+.4));
       if(T>=tB) prixVCe2E(c,'B : 4,90 €',840,606,54,{z:zoom(T,tB,.5),fond:1});
       if(T>=tQV) prixVCe2E(c,'= 90 c',840,676,54,{z:zoom(T,tQV,.5),fond:1});
       if(T>=tQ3) for(const [x,y] of [[CX-200,CY-60],[CX+230,CY-40]]) etincelle(c,x,y,14+6*Math.sin(T*6+x)); }
@@ -72,7 +75,7 @@ FILMS['ce2-virgule']=function(outils){
   const rep1=phraseE('400 c = 4 €',[tQ1,tCents,tQ2,tQ2,tEur1]);
   const rep2=phraseE('4,09 €',[tQ3,mr('euros',2)]);
 
-  poserMiniature(outils,q-.3,'Le zéro<br>oublié ?',ardoiseMini([['409 c'],['= ? €','#ffd43b']]));
+  miniCe2E(outils,q-.3,'Le zéro<br>oublié ?',[['409 c'],['= ? €','#ffd43b']]);
   return { clips,FIN,titre:'Le zéro oublié',ceinture:0,finTitre,groupes:[],finClip:'03-abonne',
     cuts:[finTitre,q,r,com,f],
     question:{ qc:'01-question',rc:'01b-reponse',finR:com,cpt:fin('01-question')+.1,rebours:8,bonne:2,tBon:tC-r,
