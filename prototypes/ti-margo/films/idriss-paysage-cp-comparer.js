@@ -30,49 +30,49 @@ FILMS['cp-comparer']=function(outils){
   const mA=w=>mot('06-appris',w), tComparerA=mA('comparer'), tChaque=mA('chaque'), tPasA=mA('Pas'), tPiecesA=mA('pièces');
   const finTitre=tDeux0-.08;
 
-  const RANG=[100,190,280,370,460];
+  const RANG=[75,195,315,435,555];
   /* cinq pièces de 1 € en rang (à gauche) et un billet de 10 € (à droite) */
   function cinqContreDix(c,T,y,{tP=0,tB=0,lus=null,lb=0}={}){
-    RANG.forEach((x,k)=>{ const t=tP+k*.12; if(T>=t) euroE(c,1,x,y,40,{z:zoom(T,t,.4),lueur:lus&&T>=lus[k]?.55+.45*Math.sin(T*5):0}); });
-    if(T>=tB) euroE(c,10,800,y,48,{z:zoom(T,tB,.4),grand:1,lueur:lb}); }
+    RANG.forEach((x,k)=>{ const t=tP+k*.12; if(T>=t) euroE(c,1,x,y,56,{z:zoom(T,t,.4),lueur:lus&&T>=lus[k]?.55+.45*Math.sin(T*5):0}); });
+    if(T>=tB) euroE(c,10,820,y,56,{z:zoom(T,tB,.4),grand:1,lueur:lb}); }
   function tapis(c,x0,y0,w,h,coul){ c.fillStyle=coul; c.globalAlpha=.85; c.beginPath(); c.roundRect(x0,y0,w,h,22); c.fill(); c.globalAlpha=1; }
 
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=ap){ /* je compte ce que vaut chaque tas, pas le nombre de pièces */
       cinqContreDix(c,T,380,{tP:ap,tB:ap});
-      if(T>=tChaque){ ecrire(c,'5 €',280,520,90*zoom(T,tChaque,.4),CRAIE.jaune); ecrire(c,'10 €',800,520,90*zoom(T,tChaque,.4),CRAIE.ok); }
+      if(T>=tChaque){ ecrire(c,'5 €',315,520,90*zoom(T,tChaque,.4),CRAIE.jaune); ecrire(c,'10 €',820,520,90*zoom(T,tChaque,.4),CRAIE.ok); }
       if(T>=tPasA) ecrire(c,'pas le nombre de pièces',528,640,56*zoom(T,tPasA,.4),CRAIE.faux);
       tab.maj(); return; }
 
     if(T>=q2){ /* panier vert : un billet de 10 € ; panier jaune : deux billets de 5 € */
       quaiBoisE(c,T,40);
-      panierE(c,130,660,220); rubanE(c,130,470,'#40c057',1.1); panierE(c,360,660,220); rubanE(c,360,470,'#fcc419',1.1);
-      if(T>=tVert) ecrire(c,'vert',130,690,40,'#8ce99a');
-      if(T>=tJaune) ecrire(c,'jaune',360,690,40,'#ffe066');
-      if(T>=tDixQ2) euroE(c,10,130,330,30,{z:zoom(T,tDixQ2,.4),grand:1,lueur:T>=r2&&T>=tDixB2?.5:0});
-      if(T>=tCinqQ2){ euroE(c,5,360,230,28,{z:zoom(T,tCinqQ2,.4),grand:1,lueur:T>=r2&&T>=tCinqB&&T<tPlusB?.6:0}); euroE(c,5,360,345,28,{z:zoom(T,tCinqQ2+.15,.4),grand:1,lueur:T>=r2&&T>=tPlusB&&T<tDixB?.6:0}); }
-      if(T<r2){ if(T>=tLequel2) ecrire(c,'?',245,110,100*zoom(T,tLequel2,.5),CRAIE.jaune); }
-      else { if(T>=tCinqB) formuleE(c,T,240,100,['5','+','5','=','10'],[tCinqB,tPlusB,tPlusB+.3,tDixB,tDixB],64);
-        if(T>=tDixB2) ecrire(c,'10 € = 10 €',240,180,56*zoom(T,tDixB2,.4),CRAIE.ok);
+      panierE(c,120,660,230); rubanE(c,120,470,'#40c057',1.1); panierE(c,360,660,230); rubanE(c,360,470,'#fcc419',1.1);
+      if(T>=tVert) ecrire(c,'vert',120,690,44,'#8ce99a');
+      if(T>=tJaune) ecrire(c,'jaune',360,690,44,'#ffe066');
+      if(T>=tDixQ2) euroE(c,10,120,330,40,{z:zoom(T,tDixQ2,.4),grand:1,lueur:T>=r2&&T>=tDixB2?.5:0});
+      if(T>=tCinqQ2){ euroE(c,5,360,262,36,{z:zoom(T,tCinqQ2,.4),grand:1,lueur:T>=r2&&T>=tCinqB&&T<tPlusB?.6:0}); euroE(c,5,360,372,36,{z:zoom(T,tCinqQ2+.15,.4),grand:1,lueur:T>=r2&&T>=tPlusB&&T<tDixB?.6:0}); }
+      if(T<r2){ if(T>=tLequel2) ecrire(c,'?',240,110,100*zoom(T,tLequel2,.5),CRAIE.jaune); }
+      else { if(T>=tCinqB) formuleE(c,T,240,75,['5','+','5','=','10'],[tCinqB,tPlusB,tPlusB+.3,tDixB,tDixB],60);
+        if(T>=tDixB2) ecrire(c,'10 € = 10 €',240,155,52*zoom(T,tDixB2,.4),CRAIE.ok);
         if(T>=tPareilB) for(const [x,y] of [[30,160],[455,240]]) etincelle(c,x,y,14+6*Math.sin(T*6+x)); }
       tab.maj(); return; }
 
     if(T>=q1){ /* tas rouge : deux billets de 5 € ; tas bleu : une pièce de 2 € et une pièce de 1 € */
       quaiBoisE(c,T,40);
-      tapis(c,20,150,370,200,'#c92a2a'); tapis(c,20,420,370,200,'#1971c2');
-      if(T>=tRouge) ecrire(c,'rouge',205,125,36,'#ffa8a8');
-      if(T>=tBleu) ecrire(c,'bleu',205,650,36,'#a5d8ff');
+      tapis(c,15,130,460,210,'#c92a2a'); tapis(c,15,400,460,210,'#1971c2');
+      if(T>=tRouge) ecrire(c,'rouge',240,105,40,'#ffa8a8');
+      if(T>=tBleu) ecrire(c,'bleu',240,650,40,'#a5d8ff');
       const luR=k=>T>=r1&&T>=[tCinqR,tDixR][k]&&T<[tCinqR,tDixR][k]+1?.6:0, luB=k=>T>=r1&&T>=[tDeuxR,tTroisR][k]&&T<[tDeuxR,tTroisR][k]+1?.6:0;
-      if(T>=tCinqQ){ euroE(c,5,115,250,28,{z:zoom(T,tCinqQ,.4),grand:1,lueur:luR(0)}); euroE(c,5,295,250,28,{z:zoom(T,tCinqQ+.15,.4),grand:1,lueur:luR(1)}); }
-      if(T>=tDeuxQ) euroE(c,2,130,520,56,{z:zoom(T,tDeuxQ,.4),lueur:luB(0)});
-      if(T>=tUnQ) euroE(c,1,280,520,50,{z:zoom(T,tUnQ,.4),lueur:luB(1)});
-      if(T<r1){ if(T>=tLequel1) ecrire(c,'?',440,385,90*zoom(T,tLequel1,.5),CRAIE.jaune); }
+      if(T>=tCinqQ){ euroE(c,5,95,250,36,{z:zoom(T,tCinqQ,.4),grand:1,lueur:luR(0)}); euroE(c,5,268,250,36,{z:zoom(T,tCinqQ+.15,.4),grand:1,lueur:luR(1)}); }
+      if(T>=tDeuxQ) euroE(c,2,120,522,60,{z:zoom(T,tDeuxQ,.4),lueur:luB(0)});
+      if(T>=tUnQ) euroE(c,1,290,522,60,{z:zoom(T,tUnQ,.4),lueur:luB(1)});
+      if(T<r1){ if(T>=tLequel1) ecrire(c,'?',420,370,72*zoom(T,tLequel1,.5),CRAIE.jaune); }
       else {
-        if(T>=tCinqR) ecrire(c,'5',115,190,40,CRAIE.jaune); if(T>=tDixR) ecrire(c,'10',295,190,40,CRAIE.jaune);
-        if(T>=tDeuxR) ecrire(c,'2',130,450,40,CRAIE.jaune); if(T>=tTroisR) ecrire(c,'3',280,450,40,CRAIE.jaune);
-        if(T>=tDixR2) ecrire(c,'10 €',440,250,52*zoom(T,tDixR2,.4),CRAIE.ok);
-        if(T>=tTroisR2) ecrire(c,'3 €',440,520,52*zoom(T,tTroisR2,.4),CRAIE.blanc);
-        if(T>=tPlusR) ecrire(c,'10 € > 3 €',205,385,56*zoom(T,tPlusR,.4),CRAIE.blanc); }
+        if(T>=tCinqR) ecrire(c,'5',95,168,44,CRAIE.jaune); if(T>=tDixR) ecrire(c,'10',268,168,44,CRAIE.jaune);
+        if(T>=tDeuxR) ecrire(c,'2',200,445,44,CRAIE.jaune); if(T>=tTroisR) ecrire(c,'3',370,445,44,CRAIE.jaune);
+        if(T>=tDixR2) ecrire(c,'10 €',420,250,48*zoom(T,tDixR2,.4),CRAIE.ok);
+        if(T>=tTroisR2) ecrire(c,'3 €',425,522,52*zoom(T,tTroisR2,.4),CRAIE.blanc);
+        if(T>=tPlusR) ecrire(c,'10 € > 3 €',240,370,48*zoom(T,tPlusR,.4),CRAIE.blanc); }
       tab.maj(); return; }
 
     if(T>=pa){ /* parfois c'est pareil : 1 € + 1 € = 2 € */
@@ -86,10 +86,10 @@ FILMS['cp-comparer']=function(outils){
     if(T>=co){ /* elle : 1, 2, 3, 4, 5 € ; lui : 10 € ; 10 € > 5 € */
       const tc=[tC1,tC2,tC3,tC4,tC5];
       cinqContreDix(c,T,330,{tP:co,tB:co,lus:tc,lb:T>=tDixC?.6:0});
-      if(T>=co) { ecrire(c,'elle',280,170,52,CRAIE.blanc); ecrire(c,'lui',800,170,52,CRAIE.blanc); }
-      tc.forEach((t,k)=>{ if(T>=t) ecrire(c,String(k+1),RANG[k],250,52*zoom(T,t,.4),CRAIE.jaune); });
-      if(T>=tEuros5) ecrire(c,'5 €',280,470,80*zoom(T,tEuros5,.4),CRAIE.jaune);
-      if(T>=tDixC) ecrire(c,'10 €',800,470,80*zoom(T,tDixC,.4),CRAIE.ok);
+      if(T>=co) { ecrire(c,'elle',315,150,56,CRAIE.blanc); ecrire(c,'lui',820,150,56,CRAIE.blanc); }
+      tc.forEach((t,k)=>{ if(T>=t) ecrire(c,String(k+1),RANG[k],240,56*zoom(T,t,.4),CRAIE.jaune); });
+      if(T>=tEuros5) ecrire(c,'5 €',315,470,80*zoom(T,tEuros5,.4),CRAIE.jaune);
+      if(T>=tDixC) ecrire(c,'10 €',820,470,80*zoom(T,tDixC,.4),CRAIE.ok);
       if(T>=tPlusC) ecrire(c,'10 € > 5 €',528,620,80*zoom(T,tPlusC,.4),CRAIE.blanc);
       if(T>=tGarcon) for(const [x,y] of [[660,300],[950,380]]) etincelle(c,x,y,14+6*Math.sin(T*6+x));
       tab.maj(); return; }
@@ -106,9 +106,9 @@ FILMS['cp-comparer']=function(outils){
     quaiBoisE(c,T,140); caisseE(c,528,715,260,90); caisseE(c,528,625,200,80);
     idrissE(c,528,540,.95,{T,montre:T>=tElle0&&T<tQui0?1:0});
     if(T>=tDeux0){ enfantE(c,190,715,1.6,{k:1,T,bras:T>=tCinq0&&T<tLui0?.6:0}); enfantE(c,870,715,1.6,{k:0,T,bras:T>=tBillet0&&T<tQui0?.6:0}); }
-    [60,130,200,270,340].forEach((x,k)=>{ const t=tCinq0+k*.1; if(T>=t) euroE(c,1,x,140,32,{z:zoom(T,t,.4)}); });
-    if(T>=tBillet0) euroE(c,10,870,140,36,{z:zoom(T,tBillet0,.4),grand:1});
-    if(T>=tQui0) ecrire(c,'?',528,110,110*zoom(T,tQui0,.5),CRAIE.jaune);
+    [60,150,240,330,420].forEach((x,k)=>{ const t=tCinq0+k*.1; if(T>=t) euroE(c,1,x,150,42,{z:zoom(T,t,.4)}); });
+    if(T>=tBillet0) euroE(c,10,880,150,46,{z:zoom(T,tBillet0,.4),grand:1});
+    if(T>=tQui0) ecrire(c,'?',660,170,110*zoom(T,tQui0,.5),CRAIE.jaune);
     tab.maj();
   }
 

@@ -37,55 +37,53 @@ FILMS['cp-valeur']=function(outils){
     if(T>=tDorade) poissonE(c,340,345,330,'#f3a5b8',{T,z:zoom(T,tDorade,.4),ray:'#c2255c'});
     dameE(c,870,715,1.05,{tend:T>=tPose&&T<tPose+1.6?1:0,T}); }
   /* trois objets en rang, avec leurs nombres comptés au-dessus */
-  function compte(c,T,objs,y,labels){ objs.forEach(([v,x,t,tt],k)=>{ if(T<t) return;
+  function compte(c,T,objs,y,labels,tb=62,tp=84){ objs.forEach(([v,x,t,tt],k)=>{ if(T<t) return;
       const lu=T>=tt&&T<tt+1.1?.55+.45*Math.sin(T*5):0;
-      euroE(c,v,x,y,v>2?44:66,{z:zoom(T,t,.4),grand:1,lueur:lu}); });
-    labels.forEach(([s,x,t])=>{ if(T>=t) ecrire(c,s,x,y-150,72*zoom(T,t,.4),CRAIE.jaune); }); }
+      euroE(c,v,x,y,v>2?tb:tp,{z:zoom(T,t,.4),grand:1,lueur:lu}); });
+    labels.forEach(([s,x,t])=>{ if(T>=t) ecrire(c,s,x,y-160,76*zoom(T,t,.4),CRAIE.jaune); }); }
 
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=ap){ /* le plus gros billet d'abord, puis le reste */
-      compte(c,T,[[5,250,ap,tGrosA],[2,560,ap,tResteA],[1,780,ap,tResteA+.3]],400,[]);
-      if(T>=tGrosA){ c.strokeStyle=CRAIE.ok; c.lineWidth=8; const u=entreE(T,tGrosA,tResteA+.6); c.beginPath(); c.moveTo(150,530); c.lineTo(150+720*u,530); c.stroke(); }
+      compte(c,T,[[5,230,ap,tGrosA],[2,560,ap,tResteA],[1,820,ap,tResteA+.3]],380,[]);
+      if(T>=tGrosA){ c.strokeStyle=CRAIE.ok; c.lineWidth=8; const u=entreE(T,tGrosA,tResteA+.6); c.beginPath(); c.moveTo(110,530); c.lineTo(110+800*u,530); c.stroke(); }
       if(T>=tResteA) formuleE(c,T,528,640,['5','+','2','+','1','=','8 €'],Array(7).fill(tResteA),76,[CRAIE.blanc,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
       tab.maj(); return; }
 
     if(T>=q2){ /* le pêcheur voisin pose un billet de 20 €, un billet de 5 €, une pièce de 2 € */
       quaiBoisE(c,T,40);
-      if(T>=tPecheur) idrissE(c,105,715,1.0,{T,cire:'#69db7c',cireB:'#2b8a3e',peau:'#8d5524'});
-      const it=[[20,330,220,tVingtQ,tVingt2],[5,330,390,tCinqQ,tVC],[2,330,545,tDeuxQ,tVS]];
+      if(T>=tPecheur) idrissE(c,62,715,.82,{T,cire:'#69db7c',cireB:'#2b8a3e',peau:'#8d5524'});
+      const it=[[20,280,130,tVingtQ,tVingt2],[5,280,300,tCinqQ,tVC],[2,280,480,tDeuxQ,tVS]];
       it.forEach(([v,x,y,t,tt])=>{ if(T<t) return; const lu=T>=r2&&T>=tt&&T<tt+1.2?.55+.45*Math.sin(T*5):0;
-        euroE(c,v,x,y,v>2?36:56,{z:zoom(T,t,.4),grand:1,lueur:lu}); });
-      if(T<r2){ if(T>=tCombien2) ecrire(c,'?',460,100,90*zoom(T,tCombien2,.5),CRAIE.jaune); }
+        euroE(c,v,x,y,v>2?44:62,{z:zoom(T,t,.4),grand:1,lueur:lu}); });
+      if(T<r2){ if(T>=tCombien2) ecrire(c,'?',430,300,100*zoom(T,tCombien2,.5),CRAIE.jaune); }
       else {
-        if(T>=tVingt2) ecrire(c,'20',455,220,56*zoom(T,tVingt2,.4),CRAIE.jaune);
-        if(T>=tVC) ecrire(c,'25',455,390,56*zoom(T,tVC,.4),CRAIE.jaune);
-        if(T>=tVS) ecrire(c,'26, 27',448,545,48*zoom(T,tVS,.4),CRAIE.jaune);
-        if(T>=tVSept2) formuleE(c,T,235,90,['20','+','5','+','2','=','27 €'],Array(7).fill(tVSept2),52,[CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.ok]);
-        if(T>=tOublie){ cercle(c,330,545,80,CRAIE.faux,entreE(T,tOublie,tOublie+.4)); ecrire(c,'25 € : pièce oubliée',235,660,40,CRAIE.faux); } }
+        if(T>=tVingt2) ecrire(c,'20',440,130,58*zoom(T,tVingt2,.4),CRAIE.jaune);
+        if(T>=tVC) ecrire(c,'25',440,300,58*zoom(T,tVC,.4),CRAIE.jaune);
+        if(T>=tVS) ecrire(c,'26, 27',280,605,54*zoom(T,tVS,.4),CRAIE.jaune);
+        if(T>=tOublie){ cercle(c,280,480,86,CRAIE.faux,entreE(T,tOublie,tOublie+.4)); ecrire(c,'C : pièce oubliée',310,680,40,CRAIE.faux); } }
       tab.maj(); return; }
 
     if(T>=q1){ /* un garçon pose trois pièces de 2 € */
       quaiBoisE(c,T,40);
-      if(T>=tGarcon) enfantE(c,110,560,1.45,{k:0,T});
-      const P=[[210,tDeux1],[320,tQuatre1],[430,tSix1]];
-      P.forEach(([x,tt],k)=>{ const t=tTroisQ+k*.15; if(T<t) return; const lu=T>=r1&&T>=tt&&T<tt+1?.55+.45*Math.sin(T*5):0;
-        euroE(c,2,x,650,46,{z:zoom(T,t,.4),lueur:lu}); if(T>=r1&&T>=tt) ecrire(c,String(2*k+2),x,560,62*zoom(T,tt,.4),CRAIE.jaune); });
-      if(T<r1){ if(T>=tCombien1) ecrire(c,'?',330,160,110*zoom(T,tCombien1,.5),CRAIE.jaune); }
-      else { if(T>=tSix1b) formuleE(c,T,300,150,['2','+','2','+','2','=','6 €'],Array(7).fill(tSix1b),56,[CRAIE.jaune,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
-        if(T>=tNombre1) ecrire(c,'3 pièces, pas 3 €',300,260,44*zoom(T,tNombre1,.4),CRAIE.faux); }
+      if(T>=tGarcon) enfantE(c,92,690,1.6,{k:0,T});
+      const P=[[170,tDeux1],[350,tQuatre1],[530,tSix1]];
+      P.forEach(([y,tt],k)=>{ const t=tTroisQ+k*.15; if(T<t) return; const lu=T>=r1&&T>=tt&&T<tt+1?.55+.45*Math.sin(T*5):0;
+        euroE(c,2,300,y,62,{z:zoom(T,t,.4),lueur:lu}); if(T>=r1&&T>=tt) ecrire(c,String(2*k+2),435,y,70*zoom(T,tt,.4),CRAIE.jaune); });
+      if(T<r1){ if(T>=tCombien1) ecrire(c,'?',110,170,110*zoom(T,tCombien1,.5),CRAIE.jaune); }
+      else { if(T>=tNombre1){ ecrire(c,'3 pièces,',300,630,46*zoom(T,tNombre1,.4),CRAIE.faux); ecrire(c,'pas 3 €',300,685,46*zoom(T,tNombre1,.4),CRAIE.faux); } }
       tab.maj(); return; }
 
     if(T>=di){ /* deux billets de 10 € et deux pièces de 1 € : 10, 20… 21, 22 */
-      compte(c,T,[[10,190,di+.2,tDixD],[10,450,di+.4,tVingtD],[1,670,tPlusD,tVingtUn],[1,830,tPlusD+.15,tVingtDeux]],400,
-        [['10',190,tDixD],['20',450,tVingtD],['21',670,tVingtUn],['22',830,tVingtDeux]]);
+      compte(c,T,[[10,155,di+.2,tDixD],[10,435,di+.4,tVingtD],[1,680,tPlusD,tVingtUn],[1,885,tPlusD+.15,tVingtDeux]],400,
+        [['10',155,tDixD],['20',435,tVingtD],['21',680,tVingtUn],['22',885,tVingtDeux]],52,80);
       if(T>=tVingtDeux2) formuleE(c,T,528,620,['10','+','10','+','1','+','1','=','22 €'],Array(9).fill(tVingtDeux2),72,
         [CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.ok]);
       tab.maj(); return; }
 
     if(T>=co){ /* je commence par le billet : 5, puis 6, 7, puis 8 */
-      const objs=[[5,250,co+.1,tCinq],[2,560,co+.2,tSix],[1,780,co+.3,tHuit]];
-      compte(c,T,objs,400,[['5',250,tCinq],['8',780,tHuit]]);
-      if(T>=tSix) ecrire(c,T<tSept?'6':'6, 7',560,250,72*zoom(T,T<tSept?tSix:tSept,.4),CRAIE.jaune);
+      const objs=[[5,230,co+.1,tCinq],[2,560,co+.2,tSix],[1,820,co+.3,tHuit]];
+      compte(c,T,objs,400,[['5',230,tCinq],['8',820,tHuit]]);
+      if(T>=tSix) ecrire(c,T<tSept?'6':'6, 7',560,240,72*zoom(T,T<tSept?tSix:tSept,.4),CRAIE.jaune);
       if(T>=tHuit2) formuleE(c,T,528,620,['5','+','2','+','1','=','8 €'],Array(7).fill(tHuit2),80,[CRAIE.blanc,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
       if(T>=gr-.4) for(const [x,y] of [[120,560],[930,560]]) etincelle(c,x,y,14+6*Math.sin(T*6+x));
       /* 02 : le plus gros d'abord, une flèche passe sur les trois */
@@ -93,18 +91,18 @@ FILMS['cp-valeur']=function(outils){
 
     /* une dame achète une dorade et pose son argent */
     marche(c,T);
-    const Z=[[5,170,600],[2,370,600],[1,500,600]];
+    const Z=[[5,170,600],[2,380,600],[1,540,600]];
     Z.forEach(([v,x,y],k)=>{ const t0=tPose+k*.3; if(T<t0) return; const u=entreE(T,t0,t0+.6); const p=sautE([780,520],[x,y],u,110);
-      euroE(c,v,p[0],p[1],v>2?40:58,{grand:1}); });
+      euroE(c,v,p[0],p[1],v>2?50:66,{grand:1}); });
     if(T>=tCombien0) ecrire(c,'?',900,150,130*zoom(T,tCombien0,.5),CRAIE.jaune);
     tab.maj();
   }
   /* 02-gros : le même rang que 01, avec une flèche du plus gros au plus petit */
   const dessin01=dessiner;
   function dessinerTout(T){ if(T>=gr&&T<di){ const c=tab.c; tab.effacer();
-      compte(c,T,[[5,250,0,tToujours],[2,560,0,tPetits],[1,780,0,tPetits+.3]],400,[]);
-      if(T>=tToujours){ const u=entreE(T,tToujours,tPetits+.6); c.strokeStyle=CRAIE.ok; c.lineWidth=8; c.beginPath(); c.moveTo(150,540); c.lineTo(150+720*u,540); c.stroke();
-        if(u>=1){ c.fillStyle=CRAIE.ok; c.beginPath(); c.moveTo(900,540); c.lineTo(866,520); c.lineTo(866,560); c.closePath(); c.fill(); } }
+      compte(c,T,[[5,230,0,tToujours],[2,560,0,tPetits],[1,820,0,tPetits+.3]],400,[]);
+      if(T>=tToujours){ const u=entreE(T,tToujours,tPetits+.6); c.strokeStyle=CRAIE.ok; c.lineWidth=8; c.beginPath(); c.moveTo(110,550); c.lineTo(110+800*u,550); c.stroke();
+        if(u>=1){ c.fillStyle=CRAIE.ok; c.beginPath(); c.moveTo(950,550); c.lineTo(910,528); c.lineTo(910,572); c.closePath(); c.fill(); } }
       if(T>=tGros) ecrire(c,"le plus gros d'abord",528,150,66*zoom(T,tGros,.4),CRAIE.jaune);
       tab.maj(); return; }
     dessin01(T); }

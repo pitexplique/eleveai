@@ -31,38 +31,38 @@ FILMS['cp-defi']=function(outils){
   const finTitre=tAujourd-.08;
 
   /* défi 1 : mes deux pièces de 2 € et une de 1 € ; le poisson à 6 € */
-  const PC=[[2,170,590],[2,320,590],[1,460,590]];
+  const PC=[[2,150,590],[2,320,590],[1,480,590]];
   function defi1(c,T,{lus=null}={}){
-    PC.forEach(([v,x,y],k)=>{ const t=k<2?tDeux0+k*.15:tUn0; if(T<t) return; euroE(c,v,x,y,v===2?58:54,{z:zoom(T,t,.4),lueur:lus&&T>=lus[k]&&T<lus[k]+1?.6:0}); });
+    PC.forEach(([v,x,y],k)=>{ const t=k<2?tDeux0+k*.15:tUn0; if(T<t) return; euroE(c,v,x,y,v===2?68:66,{z:zoom(T,t,.4),lueur:lus&&T>=lus[k]&&T<lus[k]+1?.6:0}); });
     if(T>=tPoisson) poissonE(c,330,330,320,'#ffa94d',{T,z:zoom(T,tPoisson,.4),ray:'#e8590c'});
     if(T>=tSix0) prixE(c,'6 €',620,250,80,{z:zoom(T,tSix0,.5)}); }
   /* défi 2 : 23 € ; un billet de 20, une pièce de 2, une pièce de 1 glissent dans la zone */
-  const Z2=[[20,250,520,()=>tVingtM],[2,500,520,()=>tDeuxM],[1,640,520,()=>tUnM]];
+  const Z2=[[20,250,520,()=>tVingtM],[2,510,520,()=>tDeuxM],[1,670,520,()=>tUnM]];
   function defi2(c,T){ ecrire(c,'Défi 2',528,70,60,CRAIE.gris);
     if(T>=t23) ecrire(c,'23 €',528,200,130*zoom(T,t23,.5),CRAIE.jaune);
     c.save(); c.setLineDash([14,10]); c.strokeStyle='rgba(255,255,255,.6)'; c.lineWidth=4; c.beginPath(); c.roundRect(90,420,700,200,20); c.stroke(); c.restore();
-    Z2.forEach(([v,x,y,tf])=>{ const t=tf(); if(T<t-.3) return; const p=sautE([980,640],[x,y],entreE(T,t-.3,t+.4),140); euroE(c,v,p[0],p[1],v>2?40:58,{grand:1}); }); }
+    Z2.forEach(([v,x,y,tf])=>{ const t=tf(); if(T<t-.3) return; const p=sautE([980,640],[x,y],entreE(T,t-.3,t+.4),140); euroE(c,v,p[0],p[1],v>2?52:64,{grand:1}); }); }
 
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=ap){ /* assez ? je compte, je compare ; le moins ? le plus gros d'abord */
-      if(T>=tAssezA) ecrire(c,"Assez d'argent ?",528,220,66*zoom(T,tAssezA,.4),CRAIE.jaune);
-      if(T>=tCompteA) ecrire(c,'je compte,',380,320,58*zoom(T,tCompteA,.4),CRAIE.blanc);
-      if(T>=tCompare) ecrire(c,'je compare au prix',720,320,58*zoom(T,tCompare,.4),CRAIE.blanc);
-      if(T>=tMoinsA) ecrire(c,'Le moins de billets ?',528,480,66*zoom(T,tMoinsA,.4),CRAIE.jaune);
-      if(T>=tGrosA2) ecrire(c,"les plus gros d'abord",528,580,58*zoom(T,tGrosA2,.4),CRAIE.ok);
+      if(T>=tAssezA) ecrire(c,"Assez d'argent ?",528,170,66*zoom(T,tAssezA,.4),CRAIE.jaune);
+      if(T>=tCompteA) ecrire(c,'je compte,',528,255,58*zoom(T,tCompteA,.4),CRAIE.blanc);
+      if(T>=tCompare) ecrire(c,'je compare au prix',528,335,58*zoom(T,tCompare,.4),CRAIE.blanc);
+      if(T>=tMoinsA) ecrire(c,'Le moins de billets ?',528,470,66*zoom(T,tMoinsA,.4),CRAIE.jaune);
+      if(T>=tGrosA2) ecrire(c,"les plus gros d'abord",528,560,58*zoom(T,tGrosA2,.4),CRAIE.ok);
       tab.maj(); return; }
 
     if(T>=q2){ /* payer 35 € avec le moins de billets possible */
       quaiBoisE(c,T,40);
       if(T>=t35Q) prixE(c,'35 €',230,110,64,{z:zoom(T,t35Q,.5)});
       if(T<r2){
-        [[20,tVingtQ,250],[10,tDixQ2,390],[5,tCinqQ2,520]].forEach(([v,t,y])=>{ if(T>=t) euroE(c,v,230,y,30,{z:zoom(T,t,.4),grand:1}); });
+        [[20,tVingtQ,250],[10,tDixQ2,390],[5,tCinqQ2,520]].forEach(([v,t,y])=>{ if(T>=t) euroE(c,v,220,y-10,42,{z:zoom(T,t,.4),grand:1}); });
         if(T>=tCombien2) ecrire(c,'?',430,390,100*zoom(T,tCombien2,.5),CRAIE.jaune); }
       else {
-        const Z=[[20,95,tVingt2,'20'],[10,240,tDix2,'30'],[5,380,tCinq2,'35']];
+        const Z=[[20,90,tVingt2,'20'],[10,245,tDix2,'30'],[5,400,tCinq2,'35']];
         Z.forEach(([v,x,t,lab],k)=>{ if(T<t-.3) return; const p=sautE([230,700],[x,330],entreE(T,t-.3,t+.4),100);
-          euroE(c,v,p[0],p[1],25,{grand:1,lueur:k===1&&T>=tSeul2&&T<tMarche?.6:0});
-          const tl=[tVingt2,tTrente,t35][k]; if(T>=tl) ecrire(c,lab,x,240,54*zoom(T,tl,.4),CRAIE.jaune); });
+          euroE(c,v,p[0],p[1],30,{grand:1,lueur:k===1&&T>=tSeul2&&T<tMarche?.6:0});
+          const tl=[tVingt2,tTrente,t35][k]; if(T>=tl) ecrire(c,lab,x,240,58*zoom(T,tl,.4),CRAIE.jaune); });
         if(T>=t35) formuleE(c,T,240,460,['20','+','10','+','5','=','35'],Array(7).fill(t35),52,[CRAIE.blanc,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.ok]);
         if(T>=tSeul2) ecrire(c,'1 seul billet de 10 €',240,560,40*zoom(T,tSeul2,.4),CRAIE.ok);
         if(T>=tPlus2) ecrire(c,'B : plus de billets',240,650,38*zoom(T,tPlus2,.4),CRAIE.gris); }
@@ -71,15 +71,15 @@ FILMS['cp-defi']=function(outils){
     if(T>=q1){ /* la dame : un billet de 10 € et une pièce de 2 € ; deux poissons à 11 € */
       quaiBoisE(c,T,40);
       if(T>=tDame) dameE(c,90,715,.95,{T});
-      if(T>=tDixQ) euroE(c,10,280,160,28,{z:zoom(T,tDixQ,.4),grand:1,lueur:T>=r1&&T>=tDix1&&T<tDouze1+.5?.6:0});
-      if(T>=tDeuxQ) euroE(c,2,420,160,46,{z:zoom(T,tDeuxQ,.4),lueur:T>=r1&&T>=tDeux1&&T<tDouze1+.5?.6:0});
-      if(T>=tPoissonsQ){ poissonE(c,320,455,190,'#4dabf7',{T,ray:'#1864ab'}); poissonE(c,320,555,190,'#4dabf7',{T,k:1,ray:'#1864ab'}); }
-      if(T>=tOnzeQ) prixE(c,'11 €',330,660,48,{z:zoom(T,tOnzeQ,.5)});
-      if(T<r1){ if(T>=tAssezQ) ecrire(c,'?',450,330,90*zoom(T,tAssezQ,.5),CRAIE.jaune); }
+      if(T>=tDixQ) euroE(c,10,250,120,40,{z:zoom(T,tDixQ,.4),grand:1,lueur:T>=r1&&T>=tDix1&&T<tDouze1+.5?.6:0});
+      if(T>=tDeuxQ) euroE(c,2,410,120,52,{z:zoom(T,tDeuxQ,.4),lueur:T>=r1&&T>=tDeux1&&T<tDouze1+.5?.6:0});
+      if(T>=tPoissonsQ){ poissonE(c,300,340,230,'#4dabf7',{T,ray:'#1864ab'}); poissonE(c,300,450,230,'#4dabf7',{T,k:1,ray:'#1864ab'}); }
+      if(T>=tOnzeQ) prixE(c,'11 €',300,565,56,{z:zoom(T,tOnzeQ,.5)});
+      if(T<r1){ if(T>=tAssezQ) ecrire(c,'?',448,330,90*zoom(T,tAssezQ,.5),CRAIE.jaune); }
       else {
-        if(T>=tDix1&&T<tRestera) formuleE(c,T,300,270,['10','+','2','=','12 €'],[tDix1,tPlus1,tDeux1,tDouze1,tDouze1],50,[CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.ok]);
-        if(T>=tRestera) ecrire(c,'il reste 1 €',300,270,50*zoom(T,tRestera,.4),CRAIE.ok);
-        if(T>=tPlus1b) ecrire(c,'12 € > 11 €',300,345,48*zoom(T,tPlus1b,.4),CRAIE.blanc); }
+        if(T>=tDix1&&T<tRestera) formuleE(c,T,300,232,['10','+','2','=','12 €'],[tDix1,tPlus1,tDeux1,tDouze1,tDouze1],50,[CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.ok]);
+        if(T>=tRestera) ecrire(c,'il reste 1 €',300,232,50*zoom(T,tRestera,.4),CRAIE.ok);
+        if(T>=tPlus1b) ecrire(c,'12 € > 11 €',300,655,50*zoom(T,tPlus1b,.4),CRAIE.blanc); }
       tab.maj(); return; }
 
     if(T>=as){ /* 20 + 2 + 1 = 23 : seulement trois ; le plus gros d'abord */
@@ -97,7 +97,7 @@ FILMS['cp-defi']=function(outils){
     if(T>=co){ /* défi 1 : 2, 4, 5 → 5 € < 6 € ; il manque 1 € */
       ecrire(c,'Défi 1',528,70,60,CRAIE.gris);
       defi1(c,T,{lus:[tDeuxC,tQuatreC,tCinqC]});
-      [[tDeuxC,'2'],[tQuatreC,'4'],[tCinqC,'5']].forEach(([t,s],k)=>{ if(T>=t) ecrire(c,s,PC[k][1],490,56*zoom(T,t,.4),CRAIE.jaune); });
+      [[tDeuxC,'2'],[tQuatreC,'4'],[tCinqC,'5']].forEach(([t,s],k)=>{ if(T>=t) ecrire(c,s,PC[k][1],472,58*zoom(T,t,.4),CRAIE.jaune); });
       if(T>=tCinqC2) ecrire(c,'5 €',800,420,90*zoom(T,tCinqC2,.4),CRAIE.jaune);
       if(T>=tMoinsC) ecrire(c,'5 € < 6 €',800,540,70*zoom(T,tMoinsC,.4),CRAIE.blanc);
       if(T>=tManque) ecrire(c,'il manque 1 €',800,650,64*zoom(T,tManque,.4),CRAIE.faux);

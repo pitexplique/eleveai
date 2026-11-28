@@ -22,8 +22,8 @@ FILMS['cp-defi']=function(outils){
   const mc=w=>mot('02-commentaire',w), tMoins=mc('moins'), tPiecesC=mc('pièces'), tQuatreC=mc('quatre'), tRep=mc('réponds');
   const finTitre=tIl-.08;
 
-  const G=[[470,470],[630,470]];
-  function decor(c,T){ c.fillStyle='#a5d8ff'; c.fillRect(0,0,1056,560); c.fillStyle='#ffe8a1'; c.fillRect(0,560,1056,160);
+  const G=[[445,545],[655,545]];
+  function decor(c,T){ c.fillStyle='#1971c2'; c.fillRect(0,0,1056,560); c.fillStyle='#ffe8a1'; c.fillRect(0,560,1056,160);
     soleilMatinE(c,120,110,70,1); }
 
   function dessiner(T){ const c=tab.c; tab.effacer();
@@ -34,23 +34,23 @@ FILMS['cp-defi']=function(outils){
       tab.maj(); return; }
 
     decor(c,T);
-    chariotGlacesE(c,190,700,250,T);
+    chariotGlacesE(c,165,705,290,T);
     idrissE(c,905,720,1.15,{T,montre:T>=tPoche&&T<q?1:0});
     if(T>=tChaud&&T<r+1) goutteE(c,875,250,(T*.7)%1);
     /* les deux glaces, leur prix ; à la fin, Idriss partage UNE seule glace */
     const part=T>=r&&T>=tPartage;
     G.forEach(([x,y],k)=>{ const t=tDeux0+k*.2; if(T<t) return;
       if(part&&k===1){ const u=entreE(T,tPartage-.2,tPartage+.5); if(u>=1) return; c.globalAlpha=1-u; }
-      glaceE(c,x,y,1.05,{coul:k?'#8ce99a':'#ff8fab',z:zoom(T,t,.4),lueur:T>=r&&T>=tTrois&&T<tSix+.6?.5:0}); c.globalAlpha=1;
-      if(T>=tTrois0&&!(part&&k===1)) prixE(c,'3 €',x,525,46,{z:zoom(T,tTrois0+k*.15,.5)}); });
-    if(part){ const x=G[0][0]; c.strokeStyle='#495057'; c.lineWidth=5; c.setLineDash([10,7]); c.beginPath(); c.moveTo(x,250); c.lineTo(x,480); c.stroke(); c.setLineDash([]); }
-    if(T>=tCinq0) euroE(c,5,760,620,40,{z:zoom(T,tCinq0,.4),grand:1,a:-.08,lueur:T>=r&&T>=tCinq&&T<tManque?.6:0});
+      glaceE(c,x,y,1.3,{coul:k?'#8ce99a':'#ff8fab',z:zoom(T,t,.4),lueur:T>=r&&T>=tTrois&&T<tSix+.6?.5:0}); c.globalAlpha=1;
+      if(T>=tTrois0&&!(part&&k===1)) prixE(c,'3 €',x,605,56,{z:zoom(T,tTrois0+k*.15,.5)}); });
+    if(part){ const x=G[0][0]; c.strokeStyle='#495057'; c.lineWidth=5; c.setLineDash([10,7]); c.beginPath(); c.moveTo(x,235); c.lineTo(x,540); c.stroke(); c.setLineDash([]); }
+    if(T>=tCinq0) euroE(c,5,880,668,44,{z:zoom(T,tCinq0,.4),grand:1,a:-.08,lueur:T>=r&&T>=tCinq&&T<tManque?.6:0});
     if(T<r){ if(T>=tAssez) ecrire(c,'?',560,150,150*zoom(T,tAssez,.5),CRAIE.jaune); }
     else {
-      if(T>=tTrois) formuleE(c,T,560,90,['3','+','3','=','6 €'],[tTrois,tPlus,tTrois2,tSix,tSix],80,[CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.ok]);
-      if(T>=tCinq&&T<tPartage) ecrire(c,'5 € < 6 €',560,190,72*zoom(T,tCinq,.4),CRAIE.blanc);
-      if(T>=tManque&&T<tPartage) ecrire(c,'il manque 1 €',560,270,64*zoom(T,tManque,.4),CRAIE.faux);
-      if(T>=tPartage) ecrire(c,'une glace pour deux !',560,200,62*zoom(T,tPartage,.4),CRAIE.ok); }
+      if(T>=tTrois) formuleE(c,T,550,62,['3','+','3','=','6 €'],[tTrois,tPlus,tTrois2,tSix,tSix],72,[CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.ok]);
+      if(T>=tCinq&&T<tManque) ecrire(c,'5 € < 6 €',550,145,64*zoom(T,tCinq,.4),CRAIE.blanc);
+      if(T>=tManque&&T<tPartage) ecrire(c,'il manque 1 €',550,145,64*zoom(T,tManque,.4),'#ffa8a8');
+      if(T>=tPartage) ecrire(c,'une glace pour deux !',550,145,58*zoom(T,tPartage,.4),CRAIE.ok); }
     tab.maj();
   }
 

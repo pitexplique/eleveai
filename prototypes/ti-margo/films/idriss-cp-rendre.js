@@ -27,17 +27,17 @@ FILMS['cp-rendre']=function(outils){
 
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=com){ /* une glace à 3 €, payée avec un billet de 10 € */
-      if(T>=tGlace) glaceE(c,280,650,1.9,{z:zoom(T,tGlace,.4)});
+      if(T>=tGlace) glaceE(c,280,680,2.4,{z:zoom(T,tGlace,.4)});
       if(T>=tTrois) prixE(c,'3 €',280,170,90,{z:zoom(T,tTrois,.5)});
-      if(T>=tDixC) euroE(c,10,770,330,56,{z:zoom(T,tDixC,.4),grand:1});
+      if(T>=tDixC) euroE(c,10,770,300,66,{z:zoom(T,tDixC,.4),grand:1});
       if(T>=tCombienC) ecrire(c,'rendu : ?',770,580,90*zoom(T,tCombienC,.5),CRAIE.jaune);
       tab.maj(); return; }
 
     etal(c);
-    if(T>=tVoisin) idrissE(c,915,720,1.18,{T,cire:'#69db7c',cireB:'#2b8a3e',peau:'#8d5524',montre:T>=tDonne&&T<q?1:0});
+    if(T>=tVoisin) idrissE(c,940,720,1.35,{T,cire:'#69db7c',cireB:'#2b8a3e',peau:'#8d5524',montre:T>=tDonne&&T<q?1:0});
     if(T>=tFilet) filetRouleE(c,330,630,330,{z:zoom(T,tFilet,.4)});
     if(T>=tNeuf0) prixE(c,'9 €',330,400,90,{z:zoom(T,tNeuf0,.5),lueur:T>=r&&T>=tNeuf&&T<tDix?.6:0});
-    if(T>=tDix0) euroE(c,10,700,300,52,{z:zoom(T,tDix0,.4),grand:1,a:-.08,lueur:T>=r&&T>=tDix&&T<tSeul?.6:0});
+    if(T>=tDix0) euroE(c,10,690,290,60,{z:zoom(T,tDix0,.4),grand:1,a:-.08,lueur:T>=r&&T>=tDix&&T<tSeul?.6:0});
     if(T<r){ if(T>=tCombien) ecrire(c,'?',528,130,150*zoom(T,tCombien,.5),CRAIE.jaune); }
     else {
       /* de 9 à 10 : un seul pas ; une pièce de 1 € glisse vers le voisin */
@@ -45,7 +45,7 @@ FILMS['cp-rendre']=function(outils){
       if(T>=tDix) arcSautE(c,[X(9),130],[X(10),130],entreE(T,tDix-.1,tDix+.5),90,CRAIE.jaune);
       if(T>=tSeul) ecrire(c,'1 pas',500,40,52*zoom(T,tSeul,.4),CRAIE.jaune);
       if(T>=tRend){ const p=sautE([330,420],[780,520],entreE(T,tRend,tRend+.6),120); euroE(c,1,p[0],p[1],56,{lueur:.6}); }
-      if(T>=tEuro) formuleE(c,T,330,430,['9','+','1','=','10'],Array(5).fill(tEuro),80,[CRAIE.blanc,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]); }
+      if(T>=tEuro) formuleE(c,T,330,280,['9','+','1','=','10'],Array(5).fill(tEuro),72,[CRAIE.blanc,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]); }
     tab.maj();
   }
 

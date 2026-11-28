@@ -22,34 +22,34 @@ FILMS['cp-comparer']=function(outils){
   const mc=(w,n=1)=>mot('02-commentaire',w,n), tTroisC=mc('trois'), tCinqC=mc('cinq'), tLequel=mc('Lequel'), tRep=mc('réponds');
   const finTitre=tLa-.08;
 
-  const PCS=[[110,640],[225,640],[340,640],[455,640]], CR=[790,560];
-  function quai(c){ c.fillStyle='#a9774a'; c.fillRect(0,500,1056,220); c.strokeStyle='#6b3a10'; c.lineWidth=4;
-    for(let y=500;y<720;y+=55){ c.beginPath(); c.moveTo(0,y); c.lineTo(1056,y); c.stroke(); }
-    c.fillStyle='#74c0fc'; c.fillRect(0,0,1056,500); c.fillStyle='#4dabf7'; c.fillRect(0,380,1056,120); }
+  const PCS=[[80,635],[205,635],[330,635],[455,635]], CR=[790,575];
+  function quai(c){ c.fillStyle='#a9774a'; c.fillRect(0,470,1056,250); c.strokeStyle='#6b3a10'; c.lineWidth=4;
+    for(let y=470;y<720;y+=62){ c.beginPath(); c.moveTo(0,y); c.lineTo(1056,y); c.stroke(); }
+    c.fillStyle='#1971c2'; c.fillRect(0,0,1056,470); c.fillStyle='#339af0'; c.fillRect(0,350,1056,120); }
 
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=com){ /* trois pièces de 2 € ou un billet de 5 € ? */
-      if(T>=tTroisC) [150,280,410].forEach((x,k)=>euroE(c,2,x,330,62,{z:zoom(T,tTroisC+k*.12,.4)}));
-      if(T>=tCinqC-.5) ecrire(c,'ou',560,330,70,CRAIE.gris);
-      if(T>=tCinqC) euroE(c,5,820,330,52,{z:zoom(T,tCinqC,.4),grand:1});
+      if(T>=tTroisC) [[170,220],[370,220],[270,390]].forEach(([x,y],k)=>euroE(c,2,x,y,70,{z:zoom(T,tTroisC+k*.12,.4)}));
+      if(T>=tCinqC-.5) ecrire(c,'ou',545,300,80,CRAIE.gris);
+      if(T>=tCinqC) euroE(c,5,815,300,64,{z:zoom(T,tCinqC,.4),grand:1});
       if(T>=tLequel) ecrire(c,'?',528,580,160*zoom(T,tLequel,.5),CRAIE.jaune);
       tab.maj(); return; }
 
     quai(c);
     /* la mouette et ses quatre pièces, le crabe et son billet */
     const gagne=T>=r&&T>=tGagne;
-    if(T>=tLa) mouetteE(c,280,470,3.2,{T,z:zoom(T,tLa,.4),dir:1});
-    PCS.forEach((p,k)=>{ const t=tQuatre0+k*.12; if(T>=t) euroE(c,1,p[0],p[1],48,{z:zoom(T,t,.4),lueur:T>=r&&T>=tQuatre&&T<tCinq?.55+.45*Math.sin(T*5):0}); });
+    if(T>=tLa) mouetteE(c,260,500,4.4,{T,z:zoom(T,tLa,.4),dir:1});
+    PCS.forEach((p,k)=>{ const t=tQuatre0+k*.12; if(T>=t) euroE(c,1,p[0],p[1],56,{z:zoom(T,t,.4),lueur:T>=r&&T>=tQuatre&&T<tCinq?.55+.45*Math.sin(T*5):0}); });
     if(T>=tCrabe0){ const dx=gagne?Math.sin(T*7)*30:0;
-      crabeE(c,CR[0]+dx,CR[1],2.4,{T,z:zoom(T,tCrabe0,.4),marche:gagne?1:0});
-      if(T>=tBillet0) euroE(c,5,CR[0]+dx,300+(gagne?Math.sin(T*14)*12:0),50,{z:zoom(T,tBillet0,.4),grand:1,a:-.1,lueur:T>=r&&T>=tCinq&&T<tPlus+1?.55+.45*Math.sin(T*5):0}); }
+      crabeE(c,CR[0]+dx,CR[1],3.2,{T,z:zoom(T,tCrabe0,.4),marche:gagne?1:0});
+      if(T>=tBillet0) euroE(c,5,CR[0]+dx,330+(gagne?Math.sin(T*14)*12:0),62,{z:zoom(T,tBillet0,.4),grand:1,a:-.1,lueur:T>=r&&T>=tCinq&&T<tPlus+1?.55+.45*Math.sin(T*5):0}); }
     /* « c'est moi le plus riche ! » */
-    if(T>=tChacun&&T<q){ const z=zoom(T,tChacun,.5); bulleE(c,260,160,250,120,290,330,'Moi !',64,z); bulleE(c,640,130,250,120,760,230,'Moi !',64,z); }
+    if(T>=tChacun&&T<q){ const z=zoom(T,tChacun,.5); bulleE(c,250,130,250,120,270,300,'Moi !',64,z); bulleE(c,560,110,250,120,700,240,'Moi !',64,z); }
     if(T<r){ if(T>=tQui) ecrire(c,'?',528,180,150*zoom(T,tQui,.5),CRAIE.jaune); }
     else {
-      if(T>=tQuatre) ecrire(c,'4 €',280,300,100*zoom(T,tQuatre,.4),CRAIE.jaune);
-      if(T>=tCinq) ecrire(c,'5 €',790,150,100*zoom(T,tCinq,.4),CRAIE.ok);
-      if(T>=tPlus) ecrire(c,'5 € > 4 €',528,80,80*zoom(T,tPlus,.4),CRAIE.blanc);
+      if(T>=tQuatre) ecrire(c,'4 €',260,160,100*zoom(T,tQuatre,.4),CRAIE.jaune);
+      if(T>=tCinq) ecrire(c,'5 €',790,160,100*zoom(T,tCinq,.4),CRAIE.ok);
+      if(T>=tPlus) ecrire(c,'5 € > 4 €',528,55,72*zoom(T,tPlus,.4),CRAIE.blanc);
       if(gagne) for(const [x,y] of [[640,250],[960,420]]) etincelle(c,x,y,14+6*Math.sin(T*6+x)); }
     tab.maj();
   }
