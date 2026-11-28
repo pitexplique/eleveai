@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Il neige à la montagne ! Douze enfants jouent dehors. Cinq ont un bonnet rouge. Les autres ont un bonnet bleu. Combien de bonnets bleus ?",
+  "01-barre": "Je ne calcule pas tout de suite : je fais un dessin. Une grande barre pour les douze enfants.",
+  "02-parts": "En dessous, la part rouge : cinq. Et la part bleue : je ne sais pas. J'y mets un point d'interrogation.",
+  "03-calcul": "Le point d'interrogation est sur une part. Alors j'enlève. Douze moins cinq, sept. Sept bonnets bleus !",
+  "04-question": "Question ! Six enfants font de la luge. Trois font du ski. Combien en tout ? Le point d'interrogation est en haut, sur le tout. Quel calcul ? A : six plus trois. B : six moins trois. C : six plus six. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A ! On cherche le tout, alors on réunit les parts. Six plus trois, neuf enfants.",
+  "05-question": "Question ! Quinze moufles sèchent sur le fil. Dix sont déjà sèches. Combien sont encore mouillées ? Où je mets le point d'interrogation ? A : sur une part. B : sur le tout. C : nulle part. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A ! Le tout, quinze, je le connais. Je cherche une part. Quinze moins dix, cinq moufles mouillées.",
+  "06-appris": "Je dessine une barre : le tout en haut, les parts en dessous. Le point d'interrogation me dit si j'ajoute ou si j'enlève.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

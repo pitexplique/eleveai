@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Au cirque, le clown me lance des défis. Défi un : j'avais des ballons. J'en ai donné cinq. Il m'en reste six. Combien en avais-je au début ?",
+  "01-debut": "Au début, il en avait plus ! Je remets les ballons donnés. Six plus cinq, onze ballons.",
+  "02-defi2": "Défi deux : le jongleur a douze balles. Il en a trois de plus que la jongleuse. Combien en a-t-elle ?",
+  "03-piege": "Le mot plus est là… Mais c'est lui qui en a le plus ! Elle en a moins. Douze moins trois, neuf.",
+  "04-question": "Question ! L'acrobate avait des rubans. Elle en perd quatre. Il lui en reste huit. Combien en avait-elle au début ? A : quatre. B : huit. C : douze. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C ! Au début, elle en avait plus. Huit plus quatre, douze rubans.",
+  "05-question": "Question ! Le tigre saute sept cerceaux. C'est deux de moins que le lion. Combien de cerceaux saute le lion ? A : cinq. B : sept. C : neuf. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C ! Le tigre en saute moins. Donc le lion en saute plus. Sept plus deux, neuf !",
+  "06-appris": "Pour trouver le début, je remets ce qui est parti. Et le mot plus ne veut pas toujours dire j'ajoute : c'est l'histoire qui décide.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

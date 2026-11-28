@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Je prends le bus. Dedans, huit personnes. Le bus va s'arrêter deux fois. Combien de personnes à la fin ?",
+  "01-etape1": "Premier arrêt : trois personnes montent. Huit plus trois, onze.",
+  "02-etape2": "Deuxième arrêt : deux personnes descendent. Je pars de onze. Onze moins deux, neuf.",
+  "03-deux": "L'histoire bouge deux fois : je calcule deux fois. Le résultat de la première étape sert à la deuxième. Neuf personnes à la fin !",
+  "04-question": "Question ! Maman achète cinq croissants et quatre pains au chocolat. Sur le chemin, on en mange deux. Combien en reste-t-il ? A : sept. B : neuf. C : onze. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A ! Étape un : cinq plus quatre, neuf. Étape deux : neuf moins deux, sept. B, on s'est arrêté trop tôt !",
+  "05-question": "Question ! Dans ma trousse, dix crayons. J'en prête trois. Puis un copain m'en rend un. Combien de crayons dans ma trousse ? A : sept. B : huit. C : quatorze. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B ! Étape un : dix moins trois, sept. Étape deux : sept plus un, huit crayons.",
+  "06-appris": "Quand l'histoire bouge deux fois, je calcule en deux étapes. Le résultat de la première sert à la deuxième.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Pique-nique dans la forêt ! Nous sommes trois amis. Dans le panier, neuf mandarines. On les partage : autant chacun.",
+  "01-distribue": "Je les donne une par une. Une pour toi, une pour toi, une pour moi. Encore un tour… et encore un.",
+  "02-chacun": "Le panier est vide. Chacun a trois mandarines.",
+  "03-verif": "Je vérifie : trois plus trois plus trois, neuf. Je retrouve tout le panier. Le partage est juste !",
+  "04-question": "Question ! Huit glands pour deux écureuils, autant chacun. Combien de glands pour chaque écureuil ? A : quatre. B : six. C : dix. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A ! Quatre pour l'un, quatre pour l'autre. Quatre plus quatre, huit.",
+  "05-question": "Question ! Douze champignons. J'en mets quatre dans chaque sac. Combien de sacs ? A : trois. B : huit. C : seize. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A ! Quatre, huit, douze. Trois sacs de quatre champignons.",
+  "06-appris": "Pour partager, je donne un par un, jusqu'au dernier. Puis je vérifie : les parts réunies redonnent le tout.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

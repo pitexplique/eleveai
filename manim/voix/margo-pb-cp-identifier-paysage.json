@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Je pars en train chez mon cousin. Dans ma boîte, neuf biscuits. Pendant le voyage, j'en mange trois.",
+  "01-question": "Avant de calculer, je lis la question. Combien en reste-t-il ?",
+  "02-redire": "Je la redis avec mes mots. Je cherche les biscuits qui restent dans la boîte. Pas ceux que j'ai mangés !",
+  "03-calcul": "Neuf moins trois, six. Il reste six biscuits. Et ça répond bien à la question !",
+  "04-question": "Question ! Un garçon a cinq cartes. Sa sœur lui en donne quatre. Combien en a-t-il maintenant ? Que cherche-t-on ? A : les cartes de sa sœur. B : les cartes du début. C : toutes ses cartes, à la fin. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C ! Maintenant, c'est à la fin. On cherche toutes ses cartes. Cinq plus quatre, neuf cartes.",
+  "05-question": "Question ! Mon cousin a sept ballons. Moi, j'en ai deux de plus que lui. Combien de ballons ai-je ? Quel calcul ? A : sept plus deux. B : sept moins deux. C : deux plus deux. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A ! J'en ai plus que lui. Je pars de sept, et j'ajoute deux. Neuf ballons !",
+  "06-appris": "Avant de calculer, je lis la question. Je dis avec mes mots ce que je cherche. Puis je calcule.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

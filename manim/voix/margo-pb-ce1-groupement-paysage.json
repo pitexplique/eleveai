@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Le boulanger sort vingt-quatre croissants du four. Il les range par boîtes de six. Combien de boîtes lui faut-il ?",
+  "01-paquets": "Je fais des paquets de six. Six, douze, dix-huit, vingt-quatre.",
+  "02-boites": "Je compte les paquets : quatre boîtes.",
+  "03-difference": "Attention : ici, je connais la taille d'un paquet, six. Je cherche le nombre de paquets. Je vérifie : quatre fois six, vingt-quatre.",
+  "04-question": "Question ! Trente élèves font des équipes de cinq. Combien d'équipes ? A : vingt-cinq. B : six. C : trente-cinq. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B ! Cinq, dix, quinze, vingt, vingt-cinq, trente. Six équipes de cinq.",
+  "05-question": "Question ! Quarante œufs, rangés par boîtes de dix. Combien de boîtes ? A : quatre. B : dix. C : cinquante. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A ! Dix, vingt, trente, quarante. Quatre boîtes de dix œufs.",
+  "06-appris": "Je connais la taille d'un paquet ? Je fais des paquets, et je les compte. Puis je vérifie avec une multiplication.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

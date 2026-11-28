@@ -1,0 +1,16 @@
+{
+  "format": "paysage",
+  "voix": "margo-pb-cp-{ep}-paysage",
+  "sons": "public/sons/margo-pb-cp-{ep}-paysage",
+  "sortie": "manim/sorties/margo-pb/{num}-cp-{ep}",
+  "nom": "eleveai-maths-margo-pb-cp-{ep}-paysage",
+  "episodes": {
+    "identifier": "01",
+    "schema": "02",
+    "deux-etapes": "03",
+    "multiplicatif": "04",
+    "partage": "05",
+    "reponse": "06",
+    "defi": "07"
+  }
+}

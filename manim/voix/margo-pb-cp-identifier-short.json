@@ -1,0 +1,7 @@
+{
+  "00-accroche": "Salut ! La poule a pondu huit œufs. J'en ramasse six pour faire un gâteau. Combien d'œufs restent dans le nid ?",
+  "01-question": "Question ! Que cherche-t-on ? A : les œufs du panier. B : les œufs qui restent dans le nid. C : tous les œufs pondus. Mets pause, et choisis !",
+  "01b-reponse": "Réponse B ! La question dit : dans le nid. Huit moins six, deux. Il reste deux œufs. La poule est contente !",
+  "02-commentaire": "À toi : trois oiseaux sur un fil. Deux autres arrivent. On cherche ceux qui arrivent, ou tous les oiseaux ? Dis-le à voix haute, ou réponds en commentaire !",
+  "03-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

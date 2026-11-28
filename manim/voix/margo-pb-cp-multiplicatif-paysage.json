@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! C'est mon anniversaire ! Sur la table, quatre assiettes. Sur chaque assiette, trois fraises. Combien de fraises en tout ?",
+  "01-pareil": "Toutes les assiettes ont pareil : trois fraises. Ce sont des groupes égaux.",
+  "02-compter": "Je compte de trois en trois. Trois, six, neuf, douze. Douze fraises !",
+  "03-fois": "Quatre groupes de trois. On dit aussi : quatre fois trois, douze.",
+  "04-question": "Question ! Trois copains arrivent. Chacun tient deux ballons. Combien de ballons en tout ? A : cinq. B : six. C : trente-deux. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B ! Deux, quatre, six. Trois fois deux, six ballons. A, on a ajouté trois et deux : ce n'est pas ça !",
+  "05-question": "Question ! Sur le gâteau, deux rangées de cinq bougies. Combien de bougies ? A : sept. B : vingt-cinq. C : dix. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C ! Cinq, puis dix. Deux fois cinq, dix bougies. Je souffle !",
+  "06-appris": "Des groupes tous pareils ? Je compte un groupe, puis je répète. Quatre fois trois, c'est trois plus trois plus trois plus trois.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Sur l'étagère, vingt livres, des rouges et des bleus. Mon copain a compté. Il dit : il y a vingt-quatre livres rouges !",
+  "01-possible": "Est-ce possible ? Les rouges sont une partie des vingt livres. Une partie ne peut pas être plus grande que le tout !",
+  "02-recompte": "Il recompte : huit livres rouges. Huit, c'est moins que vingt. Ça, c'est possible !",
+  "03-phrase": "Et je finis par une phrase qui répond à la question : il y a huit livres rouges.",
+  "04-question": "Question ! Dans la classe, vingt-cinq élèves. Une élève dit : il y a trente filles. Est-ce possible ? A : oui. B : non, c'est plus que toute la classe. C : on ne peut pas savoir. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B ! Les filles sont une partie de la classe. Trente, c'est plus que vingt-cinq : impossible !",
+  "05-question": "Question ! Nina a six crayons. Elle en achète deux. Combien en a-t-elle ? Quelle phrase répond à la question ? A : Nina a six crayons. B : Nina a acheté deux crayons. C : Nina a huit crayons. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C ! Six plus deux, huit. La phrase dit combien elle en a maintenant : Nina a huit crayons.",
+  "06-appris": "Quand j'ai trouvé, je vérifie que c'est possible. Puis j'écris une phrase qui répond à la question.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

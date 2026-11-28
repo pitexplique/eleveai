@@ -1,0 +1,11 @@
+{
+  "voix": "margo-pb-ce1-{ep}-short",
+  "sons": "public/sons/margo-pb-ce1-{ep}-short",
+  "sortie": "manim/sorties/margo-pb/{num}-ce1-{ep}",
+  "nom": "eleveai-maths-margo-pb-ce1-{ep}-short",
+  "episodes": {
+    "groupement": "08",
+    "reste": "09",
+    "defi": "10"
+  }
+}

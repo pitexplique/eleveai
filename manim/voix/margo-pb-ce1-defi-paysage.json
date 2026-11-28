@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Au tournoi de foot, voici les défis. Défi un : trente-deux joueurs font des équipes de huit. Combien d'équipes ?",
+  "01-equipes": "Huit, seize, vingt-quatre, trente-deux. Quatre équipes !",
+  "02-defi2": "Défi deux : trois packs de six gourdes. On les partage entre deux équipes. Combien de gourdes par équipe ?",
+  "03-etapes": "Étape un : six, douze, dix-huit gourdes. Étape deux : dix-huit, partagé en deux. Neuf gourdes par équipe !",
+  "04-question": "Question ! Vingt-cinq ballons, rangés dans des filets de six. Combien de filets pour ranger tous les ballons ? A : quatre. B : cinq. C : six. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B ! Quatre filets, vingt-quatre ballons. Il en reste un : il faut un filet de plus. Cinq filets !",
+  "05-question": "Question ! Deux équipes de dix enfants. On fait des groupes de cinq. Combien de groupes ? A : deux. B : quatre. C : quinze. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B ! Dix plus dix, vingt enfants. Cinq, dix, quinze, vingt : quatre groupes.",
+  "06-appris": "Je lis bien : je cherche le nombre de paquets, ou combien dans chaque paquet ? S'il reste des objets, je relis la question.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

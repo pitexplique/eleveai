@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Pour la fête de l'école, on fait des bouquets. Dix-sept fleurs, cinq par bouquet. Combien de bouquets ?",
+  "01-bouquets": "Cinq, dix, quinze. Trois bouquets ! Et il reste deux fleurs.",
+  "02-reste": "Deux fleurs, ce n'est pas assez pour un bouquet. Le reste est toujours plus petit qu'un paquet.",
+  "03-verif": "Je vérifie : trois fois cinq, quinze. Plus deux, dix-sept. Toutes les fleurs sont là !",
+  "04-question": "Question ! Le fermier a vingt-trois œufs. Il remplit des boîtes de six. Combien de boîtes pleines ? A : quatre. B : trois. C : vingt-neuf. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B ! Six, douze, dix-huit : trois boîtes pleines. Il reste cinq œufs. Pas assez pour une quatrième boîte.",
+  "05-question": "Question ! Vingt-deux enfants partent en sortie, cinq par voiture. Combien de voitures pour que tous partent ? A : cinq. B : quatre. C : vingt-sept. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A ! Quatre voitures, vingt enfants. Mais il en reste deux ! Il faut une voiture de plus : cinq voitures.",
+  "06-appris": "Parfois, il reste des objets. Le reste est plus petit qu'un paquet. Je relis la question : des paquets pleins, ou tout le monde ?",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}
