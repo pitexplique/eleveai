@@ -117,21 +117,36 @@ def paysage():
 
 
 def short():
+    """⛔ 28/11/2026 (Frédéric : « on corrige tous les points ») : la première
+    version disait « Bonne résolution 2027 » alors que le titre YouTube pose la
+    question de l'hypoténuse. Celui qui clique pour la question tombait sur une
+    pub. La miniature pose maintenant LA MÊME question que le titre, en gros, et
+    garde le stage en bas."""
     W, H = 1080, 1920
     im = fond(W, H).convert("RGBA")
     d = ImageDraw.Draw(im)
     cx, L = W // 2, 940
-    y = pilule(d, cx, 250, "CRPE 2027 · stage intensif", NOIR(44), NAVY, AMBRE, centre=True)
-    y = texte_ajuste(d, cx, y + 70, "Bonne résolution", "ariblk.ttf", 96, L, ENCRE, centre=True)
-    y = texte_ajuste(d, cx, y + 26, "2027", "ariblk.ttf", 220, L, ORANGE, centre=True)
-    y = texte_ajuste(d, cx, y + 50, "Les maths du CRPE", "ariblk.ttf", 80, L, ENCRE, centre=True)
-    y = texte_ajuste(d, cx, y + 20, "en 1 semaine", "ariblk.ttf", 80, L, ENCRE, centre=True)
-    y = texte_ajuste(d, cx, y + 60, "L'épreuve va jusqu'en 3e !", "ariblk.ttf", 58, L, ORANGE, centre=True)
-    av = avatar_rond(260)
-    im.paste(av, (cx - av.width // 2 - 150, y + 70), av)
-    mg = margo(250)
-    im.paste(mg, (cx + 60, y + 80), mg)
-    pilule(d, cx, y + 70 + av.height + 60, "Janvier · 10 places", NOIR(52), ORANGE, BLANC, centre=True)
+    y = pilule(d, cx, 240, "CRPE 2027 · question du concours", NOIR(42), NAVY, AMBRE, centre=True)
+    y = texte_ajuste(d, cx, y + 50, "Triangle rectangle", "ariblk.ttf", 84, L, ENCRE, centre=True)
+    # le triangle : 6 cm debout, 8 cm couché, l'angle droit en bas à gauche
+    k = 58
+    ax, ay = cx - 4 * k, y + 70 + 6 * k
+    A, B, C = (ax, ay), (ax + 8 * k, ay), (ax, ay - 6 * k)
+    d.polygon([A, B, C], fill=(255, 255, 255, 235))
+    d.line([C, A, B], fill=ENCRE, width=12)
+    d.line([B, C], fill=ORANGE, width=16)
+    d.rectangle((ax, ay - 40, ax + 40, ay), outline=ENCRE, width=6)
+    d.text((ax - 200, ay - 3 * k - 40), "6 cm", font=NOIR(64), fill=ENCRE)
+    d.text((ax + 4 * k - 85, ay + 18), "8 cm", font=NOIR(64), fill=ENCRE)
+    d.text((ax + 4 * k + 40, ay - 3 * k - 150), "?", font=NOIR(150), fill=ORANGE)
+    y = ay + 150
+    y = texte_ajuste(d, cx, y, "l'hypoténuse ?", "ariblk.ttf", 120, L, ORANGE, centre=True)
+    y = texte_ajuste(d, cx, y + 50, "Les maths du CRPE en 1 semaine", "ariblk.ttf", 58, L, ENCRE, centre=True)
+    av = avatar_rond(200)
+    im.paste(av, (cx - av.width - 40, y + 60), av)
+    mg = margo(240)
+    im.paste(mg, (cx + 60, y + 40), mg)
+    pilule(d, cx, y + 60 + av.height + 50, "Janvier · 10 places", NOIR(56), ORANGE, BLANC, centre=True)
     return im.convert("RGB")
 
 

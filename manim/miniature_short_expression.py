@@ -53,8 +53,11 @@ def echelle(d, cx, cy, nom, s=0.55, pas=None):
         pale = tuple(int(v * 0.4 + 255 * 0.6) for v in c)
         _ceinture(d, x0 + i * pas, cy, s, pale, (170, 180, 200))
     i = [n for n, _ in CEINTURES].index(nom)
-    _ceinture(d, x0 + i * pas, cy - 6 * s, s * 1.5, dict(CEINTURES)[nom], NAVY)
-    centre(d, x0 + i * pas, cy + 100 * s, f"ceinture {nom}", police("arialbd.ttf", int(46 * s)), NAVY)
+    # ⛔ 28/11/2026 (Frédéric : « on corrige tous les points ») : plus de légende
+    # « ceinture jaune » sous l'échelle. À la taille de la grille YouTube elle
+    # faisait 5 px de haut, illisible : c'est la COULEUR, grandie, qui dit la
+    # ceinture. La ceinture du jour passe de ×1,5 à ×1,8 pour se voir seule.
+    _ceinture(d, x0 + i * pas, cy - 8 * s, s * 1.8, dict(CEINTURES)[nom], NAVY)
 
 
 # ⭐ Frédéric, 14/10 : « tout ne doit pas être en ceinture blanche, les faibles

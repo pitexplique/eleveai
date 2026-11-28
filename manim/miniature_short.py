@@ -47,6 +47,11 @@ HAUT_SUR, BAS_SUR = 190, 1630
 # vignettes (le rouge marque le caractère qui varie, le vert le résultat juste).
 ORANGE = (217, 119, 20)
 
+# ⛔ 28/11/2026 (Frédéric : « on corrige tous les points ») : le JAUNE vif de
+# `miniature.py` ne se lit pas sur le papier blanc des shorts. Ici, le « jaune »
+# devient un OR FONCÉ, lisible dans la grille de la chaîne.
+JAUNE = (196, 132, 0)
+
 
 def centre(d, cx, y, txt, f, fill):
     d.text((cx - d.textlength(txt, font=f) / 2, y), txt, font=f, fill=fill)
@@ -181,9 +186,13 @@ def acc_eq_balance(d):
 
 
 def acc_eq_probleme(d):
-    for i, (txt, coul) in enumerate([("1. nommer", NAVY), ("2. traduire", NAVY),
-                                     ("3. résoudre", NAVY), ("4. répondre", VERT)]):
-        centre(d, W // 2, 680 + i * 118, txt, police("ariblk.ttf", 76), coul)
+    """⛔ 28/11/2026 : la liste « 1. nommer … 4. répondre » n'accrochait rien
+    (7 vues). Comme les shorts qui marchent : l'affirmation fausse en gros,
+    puis ce qui manque."""
+    centre(d, W // 2, 640, "x = 12", police("ariblk.ttf", 170), BLEU)
+    centre(d, W // 2, 860, "FINI ?", police("ariblk.ttf", 130), ROUGE)
+    centre(d, W // 2, 1060, "il manque", police("ariblk.ttf", 72), VERT)
+    centre(d, W // 2, 1150, "la PHRASE", police("ariblk.ttf", 84), VERT)
 
 
 def acc_fv_dissymetrie(d):
@@ -296,14 +305,18 @@ def acc_geo_projete(d):
     Y = 1120
     d.line([(190, Y), (890, Y)], fill=NAVY, width=7)
     Mx, My, Hx, Ax = 400, 760, 400, 760
+    # ⛔ 28/11/2026 : le « M » était posé À GAUCHE du point (et non plus 76 px
+    # au-dessus) : à y = 684, il tombait dans « LE PLUS COURT » (650 → 740) et
+    # la ligne verte semblait couper le titre en deux.
+    My = 800
     d.ellipse([Mx - 14, My - 14, Mx + 14, My + 14], fill=(217, 119, 20))
-    d.text((Mx - 16, My - 76), "M", font=police("ariblk.ttf", 46), fill=(217, 119, 20))
+    d.text((Mx - 74, My - 30), "M", font=police("ariblk.ttf", 46), fill=(217, 119, 20))
     d.line([(Mx, My), (Hx, Y)], fill=VERT, width=11)
     d.line([(Mx, My), (Ax, Y)], fill=ROUGE, width=7)
     d.rectangle([Hx, Y - 26, Hx + 26, Y], outline=VERT, width=4)
     d.text((Hx - 20, Y + 16), "H", font=police("ariblk.ttf", 40), fill=VERT)
     d.text((Ax - 16, Y + 16), "A", font=police("ariblk.ttf", 40), fill=ROUGE)
-    centre(d, W // 2, 650, "LE PLUS COURT", police("ariblk.ttf", 82), NAVY)
+    centre(d, W // 2, 620, "LE PLUS COURT", police("ariblk.ttf", 82), NAVY)
     centre(d, W // 2, 1230, "c'est la perpendiculaire",
            police("arialbd.ttf", 46), VERT)
 
@@ -856,13 +869,17 @@ def acc_fr_simplifier(d):
 
 
 def acc_fr_ecritures(d):
-    frac(d, 190, 610, 1, 5, 104, BLEU)
-    centre(d, 330, 650, "=", police("ariblk.ttf", 70), NAVY)
-    centre(d, 500, 630, "0,2", police("ariblk.ttf", 96), NAVY)
-    centre(d, 680, 650, "=", police("ariblk.ttf", 70), NAVY)
-    centre(d, 870, 630, "20 %", police("ariblk.ttf", 88), VERT)
-    centre(d, W // 2, 990, "le MÊME", police("ariblk.ttf", 72), JAUNE)
-    centre(d, W // 2, 1080, "nombre", police("ariblk.ttf", 72), JAUNE)
+    # 28/11 : la barre de la fraction à hauteur des « = », et toute la ligne
+    # 50 px plus bas pour ne pas toucher le sous-titre (passé à 46 px).
+    frac(d, 190, 616, 1, 5, 104, BLEU)
+    centre(d, 330, 710, "=", police("ariblk.ttf", 70), NAVY)
+    centre(d, 500, 690, "0,2", police("ariblk.ttf", 96), NAVY)
+    centre(d, 680, 710, "=", police("ariblk.ttf", 70), NAVY)
+    centre(d, 870, 690, "20 %", police("ariblk.ttf", 88), VERT)
+    # ⛔ 28/11/2026 : ORANGE et plus gros, plus de JAUNE sur le papier blanc
+    # (invisible dans la grille YouTube).
+    centre(d, W // 2, 960, "le MÊME", police("ariblk.ttf", 96), ORANGE)
+    centre(d, W // 2, 1075, "nombre", police("ariblk.ttf", 96), ORANGE)
 
 
 def acc_fr_multiplier(d):
@@ -1221,8 +1238,9 @@ SHORTS = {
         "dossier": "seconde/maths/fr",
     },
     "eleveai-maths-seconde-equations-inequations-short-probleme": {
-        "badge": "MATHS · SECONDE", "titre": ["METTRE EN", "ÉQUATION"], "taille": 88,
-        "sous": "la méthode en quatre étapes", "accroche": acc_eq_probleme,
+        "badge": "MATHS · SECONDE", "titre": ["J'AI TROUVÉ", "LA SOLUTION"], "taille": 80,
+        "sous": "le problème est-il résolu ?", "taille_sous": 50, "couleur_sous": ORANGE,
+        "accroche": acc_eq_probleme,
         "dossier": "seconde/maths/fr",
     },
     "eleveai-maths-seconde-identites-remarquables-short-doubleproduit": {
@@ -1298,8 +1316,12 @@ def construire(nom, spec):
     # les vignettes déjà validées — on ne grossit que celles qui le demandent.
     # ⛔ Et il se RÉTRÉCIT tout seul s'il dépasse : une accroche longue en gros
     # corps sortirait du cadre sans prévenir.
-    t_sous = spec.get("taille_sous", 40)
-    while t_sous > 24 and d.textlength(spec["sous"],
+    # ⛔ 28/11/2026 : AU MOINS 46 px, et jamais rétréci sous 40. Les sous-titres
+    # à 40-44 px (« combien de billes dans le sac ? ») ne se lisaient pas dans
+    # la grille de la chaîne. Une accroche trop longue se raccourcit, elle ne
+    # rapetisse pas.
+    t_sous = max(46, spec.get("taille_sous", 46))
+    while t_sous > 40 and d.textlength(spec["sous"],
                                        font=police("arialbd.ttf", t_sous)) > W - 120:
         t_sous -= 2
     # ⭐ `couleur_sous` (Frédéric, 23/09 : « grossis-le un peu et trouve une

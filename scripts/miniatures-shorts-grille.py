@@ -129,7 +129,8 @@ def dessine(e, src):
     bloc(d, HAUT + 30, lignes)
 
     # 2. Le calcul en très gros, sur l'ardoise
-    y0, y1 = HAUT + h + 60 + 30, 1210
+    # 28/11 : la bande des ceintures est plus fine (sans légende) → l'ardoise gagne 70 px.
+    y0, y1 = HAUT + h + 60 + 30, 1280 if e.get('ceinture') else 1360
     d.rounded_rectangle((60, y0, W - 60, y1), radius=36, fill='#1f3b2c', outline='#8a5a2b', width=18)
     if e.get('figure') == 'triangles':
         figure_triangles(d, 90, y0 + 20, W - 90, y1 - 20)
@@ -141,8 +142,9 @@ def dessine(e, src):
 
     # 3. L'échelle des ceintures (REGLES.md : les miniatures la dessinent aussi)
     if e.get('ceinture'):
-        d.rounded_rectangle((60, 1228, W - 60, 1430), radius=30, fill='#fff', outline=VERT, width=6)
-        echelle(d, W // 2, 1282, e['ceinture'], s=0.8, pas=100)
+        # 28/11 : bande fine (1298 → 1430), la ceinture du jour se reconnaît à sa couleur.
+        d.rounded_rectangle((60, 1298, W - 60, 1430), radius=30, fill='#fff', outline=VERT, width=6)
+        echelle(d, W // 2, 1332, e['ceinture'], s=0.8, pas=100)
 
     # 4. Ti Margo en médaillon et la pastille, en bas de la zone sûre
     if src and not e.get('margo_2d'):

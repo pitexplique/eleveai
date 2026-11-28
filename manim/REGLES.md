@@ -108,6 +108,16 @@ Directive de Frédéric, 07/11/2026 : « on va créer paysage normalement et sho
 - **Shorts Manim déjà rendus ou en ligne :** on les garde, sans les refaire.
 - **⛔ Miniature (Frédéric, 08/11/2026) :** toute miniature de short en dessin animé porte la mention **« Dessin animé »** dans le bandeau du bas (choix de Frédéric le 08/11, à la place de « Film d'animation 3D », qui reste celle des films Ti Margo 3D à part). Elle est posée par `window.tiMargoMiniature` dans le fichier commun de la série (`prototypes/ti-margo/films/<serie>.js`, classe `cv`) : toute nouvelle série la reprend. Un short sans cette mention n'est pas envoyé.
 - **⛔ Miniature : GABARIT A, tout dans la zone sûre (Frédéric, 18/11/2026 : « gabarit A », puis « c'est ok »).** L'onglet Shorts de la chaîne montre chaque short dans une carte 2:3 : sur le PNG 1080 × 1920, il **coupe 150 px en haut et 150 px en bas** (mesuré le 18/11). Tout ce qui compte tient donc entre **y = 215 et y = 1700**. Le gabarit A comprend : la question dans une carte blanche en haut, le calcul en très gros sur une ardoise, l'échelle des ceintures, Ti Margo en petit médaillon et la pastille « Dessin animé ». Il est produit par `python scripts/miniatures-shorts-grille.py [filtre] --planche`, à partir de l'entrée du short dans `scripts/miniatures-shorts-grille.json`. Le script réécrit la miniature du manifeste et garde l'ancienne sous `-avant-grille.png`. ⚠️ Relancer `ti-margo-short.mjs … miniature` remet l'ancien style : il faut alors relancer ce script. Une fois le short en ligne, on repose la miniature avec `node scripts/publier-youtube.mjs --miniatures <id>`. Sans cela, la grille montre une image prise dans la vidéo (`oar2`), parfois noire. Les miniatures des shorts Manim (style « cahier ») tenaient déjà dans la zone sûre.
+- **⛔ Miniatures des shorts : la relecture du 28/11/2026 (Frédéric : « on corrige tous les points »).**
+  - **« TU PARIES ? » n'est pas obligatoire** (Frédéric, 28/11). C'est la ligne orange par défaut de la carte du gabarit A, mais une question qui colle mieux à la situation la remplace (« TU PRENDS QUOI ? » du restaurant, 111 vues) : champ `accroche` de `scripts/miniatures-shorts-grille.json`.
+  - **L'affirmation fausse et chiffrée en gros** (« 1 centime doublé 20 fois = 40 c ? ») : c'est ce qui fait les vues. Pas une liste d'étapes, pas un simple nom de thème.
+  - **La miniature pose la même question que le titre.** Un titre sur l'hypoténuse avec une miniature « Bonne résolution 2027 » trompe celui qui clique.
+  - **La ceinture sans légende**, dans une bande fine : la ceinture du jour, grandie et en couleur, suffit (`echelle()` ne l'écrit plus ; la légende faisait 5 px dans la grille).
+  - **Sous-titres d'au moins 46 px**, jamais rétrécis sous 40 (`miniature_short.py`).
+  - **Pas de jaune sur le papier blanc** : il devient or foncé dans `miniature_short.py` ; ailleurs, orange.
+  - **Rien ne doit chevaucher le titre** (lettre d'une figure, trait) : on regarde la miniature avant de l'envoyer.
+  - **Titres : « … — 6e #Shorts »**, plus jamais « #maths #6e » (21 titres harmonisés le 28/11).
+  - **Avant d'envoyer, chercher le titre sur la chaîne** : le 28/11, deux shorts étaient en ligne en double (tangram, « 2x + 3x = 15 »).
 
 ### ⛔ Le short CEINTURE BLANCHE : la règle
 
