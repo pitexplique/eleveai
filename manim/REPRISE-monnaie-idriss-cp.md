@@ -37,15 +37,14 @@ Règles communes aux trois sessions (CP, CE1, CE2) : note `monnaie-idriss-regles
   pièces/billets agrandis, ciel foncé (09 et 11 short) pour lire les textes, couvercle de la boîte fermé pendant la question (08),
   paysages : tout à x < 480 pendant questions ET réponses (formules redondantes avec la carte retirées du tableau).
 - 28/11 : Frédéric a fait arrêter les 4 `next dev` (≈ 4 Go) → 5,3 Go libres. Il préfère : UNE chose à la fois, petit à petit.
-- [ ] HD : lancées à 4 h 50 par `hd-cp.sh` (scratchpad de la session CP, journal `hd.log`), une à la fois, verrou pris/rendu à chaque vidéo.
-  07 short + 07 paysage FAITES et planches HD regardées (bonnes) : `manim/sorties/idriss/07-cp-reconnaitre/planche-hd-*.png`.
-  Ordre : 08 short, 08 paysage, 09, 10, 11. MP4 : `manim/sorties/idriss/<num>-cp-<ep>/eleveai-maths-idriss-cp-<ep>-{short,paysage}.mp4`.
-  Planche HD : `python scripts/ti-margo-planche.py <mp4> <dossier>/planche-hd-{short,paysage}.png 24`.
-- [ ] Miniatures : `node scripts/ti-margo-short.mjs idriss[-paysage] cp-<ep> miniature` (source), puis gabarit A pour les shorts.
-  ⚠️ `miniatures-shorts-grille.py` lit le MANIFESTE (`V[cle]`) : les ids idriss-cp-<ep>-short n'y sont pas (manifeste interdit sans Frédéric)
-  → appeler `dessine(e, src)` du script en direct (import) et écrire le PNG dans le dossier de sortie, sans toucher au manifeste.
-  Entrées JSON prévues (clé idriss-cp-<ep>-short, ceinture blanche, mention par défaut « Dessin animé », accroche adaptée, pas forcément « TU PARIES ? ») :
-  07 « Trois trésors : lequel n'est PAS de l'argent ? » ; 08 « 10 € et 4 pièces de 1 € » → faux « = 5 € » ; 09 « 4 pièces de 1 € ou un billet de 5 € » ;
-  10 « filet à 9 €, payé 10 € » → faux « on rend 19 € » ; 11 « deux glaces à 3 €, billet de 5 € » → faux « assez ! ».
-  Ajouter ces lignes à la main juste avant la dernière `}` du JSON partagé (le relire juste avant) : une clé absente du manifeste ferait planter un lancement SANS filtre.
+- [x] HD des 10 vidéos rendues le 28/11 entre 4 h 51 et 5 h 28 (une à la fois, verrou pris et rendu à chaque fois), toutes rc=0.
+  Planches HD regardées, toutes bonnes : `manim/sorties/idriss/<num>-cp-<ep>/planche-hd-{short,paysage}.png`.
+  MP4 : `manim/sorties/idriss/<num>-cp-<ep>/eleveai-maths-idriss-cp-<ep>-{short,paysage}.mp4`.
+- [x] Miniatures : sources `... miniature` pour les 10 films ; gabarit A « Dessin animé » pour les 5 shorts
+  (entrées `idriss-cp-<ep>-short` ajoutées en fin de `scripts/miniatures-shorts-grille.json`, ancienne image gardée en `-avant-grille.png`).
+  Planche des 5 : `manim/sorties/idriss/planche-miniatures-cp-07-11.png`.
+  ⚠️ `miniatures-shorts-grille.py` lit le MANIFESTE (`V[cle]`) : ces 5 ids n'y sont pas encore (manifeste interdit sans Frédéric),
+  donc un lancement SANS filtre plantera sur eux tant qu'ils ne sont pas au manifeste ; on a appelé `dessine()` en direct.
+  Miniatures des paysages : modèle commun de la série (titre + « Dessin animé »), non modifiées.
+- [ ] À décider par Frédéric : R2, manifeste YouTube, coach (notion_ressources), publication.
 - R2, manifeste, coach, YouTube : PAS sans l'accord de Frédéric. Pas de push.

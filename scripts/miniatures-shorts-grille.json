@@ -1319,5 +1319,105 @@
     "mention": null,
     "sans_decor": true,
     "margo_2d": true
+  },
+  "idriss-cp-reconnaitre-short": {
+    "question": [
+      "Trois trésors :",
+      "lequel n'est PAS de l'argent ?"
+    ],
+    "accroche": "TU CHOISIS QUOI ?",
+    "calcul": [
+      [
+        "2 €   10 €",
+        "blanc",
+        170
+      ],
+      [
+        "un coquillage ?",
+        "jaune",
+        130
+      ]
+    ],
+    "ceinture": "blanche"
+  },
+  "idriss-cp-valeur-short": {
+    "question": [
+      "Un billet de 10 €",
+      "et 4 pièces de 1 € :"
+    ],
+    "accroche": "COMBIEN ?",
+    "calcul": [
+      [
+        "= 5 €",
+        "blanc",
+        200
+      ],
+      [
+        "on compte les pièces ?",
+        "jaune",
+        100
+      ]
+    ],
+    "ceinture": "blanche"
+  },
+  "idriss-cp-comparer-short": {
+    "question": [
+      "4 pièces de 1 €",
+      "ou un billet de 5 € ?"
+    ],
+    "accroche": "QUI EST LE PLUS RICHE ?",
+    "calcul": [
+      [
+        "4 pièces > 1 billet",
+        "blanc",
+        120
+      ],
+      [
+        "vraiment ?",
+        "jaune",
+        130
+      ]
+    ],
+    "ceinture": "blanche"
+  },
+  "idriss-cp-rendre-short": {
+    "question": [
+      "Un filet à 9 €,",
+      "payé avec un billet de 10 € :"
+    ],
+    "accroche": "COMBIEN ON REND ?",
+    "calcul": [
+      [
+        "on rend 19 €",
+        "blanc",
+        150
+      ],
+      [
+        "vraiment ?",
+        "jaune",
+        130
+      ]
+    ],
+    "ceinture": "blanche"
+  },
+  "idriss-cp-defi-short": {
+    "question": [
+      "Deux glaces à 3 €",
+      "et un billet de 5 € :"
+    ],
+    "accroche": "ASSEZ D'ARGENT ?",
+    "calcul": [
+      [
+        "5 € : c'est assez !",
+        "blanc",
+        120
+      ],
+      [
+        "vraiment ?",
+        "jaune",
+        130
+      ]
+    ],
+    "ceinture": "blanche"
   }
 }
