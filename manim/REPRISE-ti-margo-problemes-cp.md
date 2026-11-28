@@ -68,4 +68,15 @@ Mettre à jour « État » ci-dessous, puis lancer une session fille qui reprend
 - [x] 28/11 : `margo-dessins-cp.js` (poule, nid, œufs, oiseaux, biscuits, boîte, fenêtre du train, cartes, bandeauE) ; short 01 identifier écrit et contrôlé -ql.
 - [ ] Trois filles en parallèle (consignes : dossier de notes local_c6aabc66-…/margo-pb-cp-consignes-filles.md) : `margo-cp-01p-02-03` (paysage 01 + 02 + 03),
   `margo-cp-04-05`, `margo-cp-06-07` : films → planches -ql → HD sous verrou → planches HD → miniatures sources, commit de leurs films. PAS de branchement.
-- [ ] Session CP (mère des filles) : HD du short 01, puis à la fin : miniatures gabarit A des 7 shorts, branchement des 14, rapport (hash, nombre branché, reste).
+- [x] Short 01 : HD rendue (66,4 s) et planche HD regardée, miniature source faite.
+- [x] Filles finies : 1bdf32d6c (01p, 02, 03), e8fa7cadc (04, 05), 7f37c4a2b (06, 07) ; 14 HD contrôlées.
+- [x] 28/11 ~10 h 30 : miniatures gabarit A des 7 shorts (`dessine()` en direct ; clés `margo-pb-cp-<ep>-short` ajoutées à
+  `scripts/miniatures-shorts-grille.json` ; ancienne image en `-avant-grille.png` ; planche `manim/sorties/margo-pb/planche-miniatures-cp.png`) ;
+  vignettes webp ; R2 `cp/maths/ti-margo/<num>-cp-<ep>/` (84 fichiers, tailles = locales ; ⚠️ rclone a ignoré les --exclude :
+  les `_muet.mp4` et `-avant-grille.png` sont partis aussi, sans gêne, rien supprimé) ; manifeste : 14 entrées `margo-pb-cp-<ep>[-short]`
+  à la fin, YouTube daté 01/09 → 07/09/2027, titres « … — Ti Margo — épisode N · Maths CP » (≤ 100 car.) et « … — CP #Shorts » ;
+  videos-r2 + bilans (mes 14 clés, index = HEAD + mes clés : les modifs non commitées des autres restent dans la copie de travail) ;
+  coach : `brancher-videos-coach.mjs --ecrire --id …` → 14 lignes notion_ressources (7 micros cp_probleme_*).
+  Script des entrées : instants relus dans les films (DUR + enchainer).
+- [ ] Reste : push (avec l'accord de Frédéric ; les boutons du coach mènent à /video/margo-pb-cp-… qui n'existe en ligne qu'après le push) ;
+  publication YouTube à son heure. Le CE1 (08 → 10, 08/09 → 10/09/2027) peut maintenant toucher au manifeste et à videos-r2.

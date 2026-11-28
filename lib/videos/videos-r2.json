@@ -19986,5 +19986,131 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_defi&display=simple"
+ },
+ "margo-pb-cp-identifier": {
+  "fichier": "cp/maths/ti-margo/01-cp-identifier/eleveai-maths-margo-pb-cp-identifier-paysage.mp4",
+  "poster": "cp/maths/ti-margo/01-cp-identifier/eleveai-maths-margo-pb-cp-identifier-paysage-miniature.png",
+  "vignette": "cp/maths/ti-margo/01-cp-identifier/eleveai-maths-margo-pb-cp-identifier-paysage-miniature.vignette.webp",
+  "titre": "Les biscuits du train : que cherche-t-on ? — Ti Margo — épisode 1 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_identifier&display=simple"
+ },
+ "margo-pb-cp-identifier-short": {
+  "fichier": "cp/maths/ti-margo/01-cp-identifier/eleveai-maths-margo-pb-cp-identifier-short.mp4",
+  "poster": "cp/maths/ti-margo/01-cp-identifier/eleveai-maths-margo-pb-cp-identifier-short-miniature.png",
+  "vignette": "cp/maths/ti-margo/01-cp-identifier/eleveai-maths-margo-pb-cp-identifier-short-miniature.vignette.webp",
+  "titre": "Les œufs de la poule : que cherche-t-on ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_identifier&display=simple"
+ },
+ "margo-pb-cp-schema": {
+  "fichier": "cp/maths/ti-margo/02-cp-schema/eleveai-maths-margo-pb-cp-schema-paysage.mp4",
+  "poster": "cp/maths/ti-margo/02-cp-schema/eleveai-maths-margo-pb-cp-schema-paysage-miniature.png",
+  "vignette": "cp/maths/ti-margo/02-cp-schema/eleveai-maths-margo-pb-cp-schema-paysage-miniature.vignette.webp",
+  "titre": "Les bonnets dans la neige : un dessin pour comprendre — Ti Margo — épisode 2 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_schema&display=simple"
+ },
+ "margo-pb-cp-schema-short": {
+  "fichier": "cp/maths/ti-margo/02-cp-schema/eleveai-maths-margo-pb-cp-schema-short.mp4",
+  "poster": "cp/maths/ti-margo/02-cp-schema/eleveai-maths-margo-pb-cp-schema-short-miniature.png",
+  "vignette": "cp/maths/ti-margo/02-cp-schema/eleveai-maths-margo-pb-cp-schema-short-miniature.vignette.webp",
+  "titre": "Les poissons de l'aquarium : un dessin pour comprendre #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_schema&display=simple"
+ },
+ "margo-pb-cp-deux-etapes": {
+  "fichier": "cp/maths/ti-margo/03-cp-deux-etapes/eleveai-maths-margo-pb-cp-deux-etapes-paysage.mp4",
+  "poster": "cp/maths/ti-margo/03-cp-deux-etapes/eleveai-maths-margo-pb-cp-deux-etapes-paysage-miniature.png",
+  "vignette": "cp/maths/ti-margo/03-cp-deux-etapes/eleveai-maths-margo-pb-cp-deux-etapes-paysage-miniature.vignette.webp",
+  "titre": "Le bus qui s'arrête : deux étapes — Ti Margo — épisode 3 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_deux_etapes&display=simple"
+ },
+ "margo-pb-cp-deux-etapes-short": {
+  "fichier": "cp/maths/ti-margo/03-cp-deux-etapes/eleveai-maths-margo-pb-cp-deux-etapes-short.mp4",
+  "poster": "cp/maths/ti-margo/03-cp-deux-etapes/eleveai-maths-margo-pb-cp-deux-etapes-short-miniature.png",
+  "vignette": "cp/maths/ti-margo/03-cp-deux-etapes/eleveai-maths-margo-pb-cp-deux-etapes-short-miniature.vignette.webp",
+  "titre": "La mangeoire des oiseaux : deux étapes #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_deux_etapes&display=simple"
+ },
+ "margo-pb-cp-multiplicatif": {
+  "fichier": "cp/maths/ti-margo/04-cp-multiplicatif/eleveai-maths-margo-pb-cp-multiplicatif-paysage.mp4",
+  "poster": "cp/maths/ti-margo/04-cp-multiplicatif/eleveai-maths-margo-pb-cp-multiplicatif-paysage-miniature.png",
+  "vignette": "cp/maths/ti-margo/04-cp-multiplicatif/eleveai-maths-margo-pb-cp-multiplicatif-paysage-miniature.vignette.webp",
+  "titre": "Les fraises de l'anniversaire : des groupes pareils — Ti Margo — épisode 4 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_multiplicatif&display=simple"
+ },
+ "margo-pb-cp-multiplicatif-short": {
+  "fichier": "cp/maths/ti-margo/04-cp-multiplicatif/eleveai-maths-margo-pb-cp-multiplicatif-short.mp4",
+  "poster": "cp/maths/ti-margo/04-cp-multiplicatif/eleveai-maths-margo-pb-cp-multiplicatif-short-miniature.png",
+  "vignette": "cp/maths/ti-margo/04-cp-multiplicatif/eleveai-maths-margo-pb-cp-multiplicatif-short-miniature.vignette.webp",
+  "titre": "Les pattes des chatons : des groupes pareils #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_multiplicatif&display=simple"
+ },
+ "margo-pb-cp-partage": {
+  "fichier": "cp/maths/ti-margo/05-cp-partage/eleveai-maths-margo-pb-cp-partage-paysage.mp4",
+  "poster": "cp/maths/ti-margo/05-cp-partage/eleveai-maths-margo-pb-cp-partage-paysage-miniature.png",
+  "vignette": "cp/maths/ti-margo/05-cp-partage/eleveai-maths-margo-pb-cp-partage-paysage-miniature.vignette.webp",
+  "titre": "Le pique-nique dans la forêt : partager — Ti Margo — épisode 5 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_partage&display=simple"
+ },
+ "margo-pb-cp-partage-short": {
+  "fichier": "cp/maths/ti-margo/05-cp-partage/eleveai-maths-margo-pb-cp-partage-short.mp4",
+  "poster": "cp/maths/ti-margo/05-cp-partage/eleveai-maths-margo-pb-cp-partage-short-miniature.png",
+  "vignette": "cp/maths/ti-margo/05-cp-partage/eleveai-maths-margo-pb-cp-partage-short-miniature.vignette.webp",
+  "titre": "Les crêpes de mamie : partager #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_partage&display=simple"
+ },
+ "margo-pb-cp-reponse": {
+  "fichier": "cp/maths/ti-margo/06-cp-reponse/eleveai-maths-margo-pb-cp-reponse-paysage.mp4",
+  "poster": "cp/maths/ti-margo/06-cp-reponse/eleveai-maths-margo-pb-cp-reponse-paysage-miniature.png",
+  "vignette": "cp/maths/ti-margo/06-cp-reponse/eleveai-maths-margo-pb-cp-reponse-paysage-miniature.vignette.webp",
+  "titre": "Les livres de la bibliothèque : ma réponse est-elle possible ? — Ti Margo — épisode 6 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_reponse&display=simple"
+ },
+ "margo-pb-cp-reponse-short": {
+  "fichier": "cp/maths/ti-margo/06-cp-reponse/eleveai-maths-margo-pb-cp-reponse-short.mp4",
+  "poster": "cp/maths/ti-margo/06-cp-reponse/eleveai-maths-margo-pb-cp-reponse-short-miniature.png",
+  "vignette": "cp/maths/ti-margo/06-cp-reponse/eleveai-maths-margo-pb-cp-reponse-short-miniature.vignette.webp",
+  "titre": "Les cerises de Lina : ma réponse est-elle possible ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_reponse&display=simple"
+ },
+ "margo-pb-cp-defi": {
+  "fichier": "cp/maths/ti-margo/07-cp-defi/eleveai-maths-margo-pb-cp-defi-paysage.mp4",
+  "poster": "cp/maths/ti-margo/07-cp-defi/eleveai-maths-margo-pb-cp-defi-paysage-miniature.png",
+  "vignette": "cp/maths/ti-margo/07-cp-defi/eleveai-maths-margo-pb-cp-defi-paysage-miniature.vignette.webp",
+  "titre": "Les défis du cirque : défis de problèmes — Ti Margo — épisode 7 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_defi&display=simple"
+ },
+ "margo-pb-cp-defi-short": {
+  "fichier": "cp/maths/ti-margo/07-cp-defi/eleveai-maths-margo-pb-cp-defi-short.mp4",
+  "poster": "cp/maths/ti-margo/07-cp-defi/eleveai-maths-margo-pb-cp-defi-short-miniature.png",
+  "vignette": "cp/maths/ti-margo/07-cp-defi/eleveai-maths-margo-pb-cp-defi-short-miniature.vignette.webp",
+  "titre": "Les billes de la récré : défis de problèmes #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_defi&display=simple"
  }
 }

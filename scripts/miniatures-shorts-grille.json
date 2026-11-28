@@ -1422,5 +1422,145 @@
   },
   "margo-pb-ce1-groupement-short": {"question": ["16 chaussettes", "rangées par paires :"], "accroche": "COMBIEN DE PAIRES ?", "calcul": [["2, 4, 6 … 16", "blanc", 120], ["? paires", "jaune", 130]], "ceinture": "blanche"},
   "margo-pb-ce1-defi-short": {"question": ["3 paquets de 4 sandwichs", "pour 6 enfants :"], "accroche": "COMBIEN CHACUN ?", "calcul": [["3 × 4 = ?", "blanc", 150], ["… pour 6 = ?", "jaune", 130]], "ceinture": "blanche"},
-  "margo-pb-ce1-reste-short": {"question": ["14 cookies", "pour 4 amis, autant chacun :"], "accroche": "COMBIEN EN RESTE-T-IL ?", "calcul": [["14 pour 4 = ?", "blanc", 140], ["reste ?", "jaune", 140]], "ceinture": "blanche"}
+  "margo-pb-ce1-reste-short": {"question": ["14 cookies", "pour 4 amis, autant chacun :"], "accroche": "COMBIEN EN RESTE-T-IL ?", "calcul": [["14 pour 4 = ?", "blanc", 140], ["reste ?", "jaune", 140]], "ceinture": "blanche"},
+  "margo-pb-cp-identifier-short": {
+    "question": [
+      "8 œufs,",
+      "j'en ramasse 6 :"
+    ],
+    "accroche": "QUE CHERCHE-T-ON ?",
+    "calcul": [
+      [
+        "8 − 6 = ?",
+        "blanc",
+        150
+      ],
+      [
+        "dans le nid ?",
+        "jaune",
+        130
+      ]
+    ],
+    "ceinture": "blanche"
+  },
+  "margo-pb-cp-schema-short": {
+    "question": [
+      "10 poissons,",
+      "4 sont orange :"
+    ],
+    "accroche": "COMBIEN DE JAUNES ?",
+    "calcul": [
+      [
+        "10 = 4 + ?",
+        "blanc",
+        150
+      ],
+      [
+        "6 ? 14 ? 4 ?",
+        "jaune",
+        120
+      ]
+    ],
+    "ceinture": "blanche"
+  },
+  "margo-pb-cp-deux-etapes-short": {
+    "question": [
+      "6 oiseaux, 4 arrivent,",
+      "puis 5 s'envolent :"
+    ],
+    "accroche": "COMBIEN RESTENT ?",
+    "calcul": [
+      [
+        "6 + 4 − 5",
+        "blanc",
+        150
+      ],
+      [
+        "10 ? 5 ?",
+        "jaune",
+        130
+      ]
+    ],
+    "ceinture": "blanche"
+  },
+  "margo-pb-cp-multiplicatif-short": {
+    "question": [
+      "3 chatons,",
+      "4 pattes chacun :"
+    ],
+    "accroche": "COMBIEN DE PATTES ?",
+    "calcul": [
+      [
+        "4 + 4 + 4",
+        "blanc",
+        150
+      ],
+      [
+        "3 fois 4 = ?",
+        "jaune",
+        130
+      ]
+    ],
+    "ceinture": "blanche"
+  },
+  "margo-pb-cp-partage-short": {
+    "question": [
+      "10 crêpes,",
+      "5 enfants à table :"
+    ],
+    "accroche": "COMBIEN CHACUN ?",
+    "calcul": [
+      [
+        "10 pour 5",
+        "blanc",
+        150
+      ],
+      [
+        "autant chacun ?",
+        "jaune",
+        120
+      ]
+    ],
+    "ceinture": "blanche"
+  },
+  "margo-pb-cp-reponse-short": {
+    "question": [
+      "10 cerises, elle en mange 4.",
+      "Lina : « il en reste 14 ! »"
+    ],
+    "accroche": "EST-CE POSSIBLE ?",
+    "calcul": [
+      [
+        "14 > 10 ?",
+        "blanc",
+        150
+      ],
+      [
+        "bravo Lina ?",
+        "jaune",
+        130
+      ]
+    ],
+    "ceinture": "blanche"
+  },
+  "margo-pb-cp-defi-short": {
+    "question": [
+      "J'en gagne 3,",
+      "maintenant j'en ai 10 :"
+    ],
+    "accroche": "ET CE MATIN ?",
+    "calcul": [
+      [
+        "10 + 3 = 13 ?",
+        "blanc",
+        140
+      ],
+      [
+        "le piège !",
+        "jaune",
+        130
+      ]
+    ],
+    "ceinture": "blanche"
+  }
 }

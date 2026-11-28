@@ -120491,6 +120491,947 @@
         "argent-budget",
         "animaux-marins"
       ]
+    },
+    {
+      "id": "margo-pb-cp-identifier",
+      "pas_avant": "2027-09-01",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_identifier",
+      "type": "longue",
+      "fichier": "cp/maths/ti-margo/01-cp-identifier/eleveai-maths-margo-pb-cp-identifier-paysage.mp4",
+      "miniature": "cp/maths/ti-margo/01-cp-identifier/eleveai-maths-margo-pb-cp-identifier-paysage-miniature.png",
+      "titre": "Les biscuits du train : que cherche-t-on ? — Ti Margo — épisode 1 · Maths CP",
+      "accroche": "Je pars en train chez mon cousin, avec neuf biscuits dans ma boîte. J'en mange trois pendant le voyage. Avant de calculer, que cherche-t-on ?\n\nDans cette vidéo :\n• je lis la question avant de calculer\n• je dis avec mes mots ce que je cherche\n• puis je calcule : 9 − 3 = 6\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_identifier&display=simple\n\n🦎 Épisode 1 de la série Les problèmes de Ti Margo d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les biscuits du train"
+        ],
+        [
+          "00:11",
+          "Je lis la question"
+        ],
+        [
+          "00:36",
+          "Question 1"
+        ],
+        [
+          "01:17",
+          "Question 2"
+        ],
+        [
+          "01:54",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "que cherche-t-on",
+        "lire la question",
+        "biscuits",
+        "train",
+        "poule",
+        "œufs",
+        "problème",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:36",
+          "question": "Un garçon a 5 cartes. Sa sœur lui en donne 4. Combien en a-t-il maintenant ? Que cherche-t-on ?",
+          "choix": [
+            "les cartes de sa sœur",
+            "les cartes du début",
+            "toutes ses cartes, à la fin"
+          ],
+          "reponse": 2,
+          "explication": "Maintenant, c'est à la fin : on cherche toutes ses cartes. 5 + 4 = 9 cartes."
+        },
+        {
+          "t": "01:17",
+          "question": "Mon cousin a 7 ballons. Moi, j'en ai 2 de plus que lui. Combien de ballons ai-je ? Quel calcul ?",
+          "choix": [
+            "7 + 2",
+            "7 − 2",
+            "2 + 2"
+          ],
+          "reponse": 0,
+          "explication": "J'en ai plus que lui : je pars de 7 et j'ajoute 2. 7 + 2 = 9 ballons."
+        }
+      ],
+      "centres": [
+        "transports",
+        "animaux"
+      ]
+    },
+    {
+      "id": "margo-pb-cp-identifier-short",
+      "pas_avant": "2027-09-01",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_identifier",
+      "type": "short",
+      "renvoie_vers": "margo-pb-cp-identifier",
+      "fichier": "cp/maths/ti-margo/01-cp-identifier/eleveai-maths-margo-pb-cp-identifier-short.mp4",
+      "miniature": "cp/maths/ti-margo/01-cp-identifier/eleveai-maths-margo-pb-cp-identifier-short-miniature.png",
+      "titre": "Les œufs de la poule : que cherche-t-on ? — CP #Shorts",
+      "accroche": "La poule a pondu huit œufs. J'en ramasse six pour faire un gâteau. Combien d'œufs restent dans le nid ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : trois oiseaux sur un fil, deux autres arrivent. On cherche ceux qui arrivent, ou tous les oiseaux ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_identifier&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probleme #cp",
+      "tags": [
+        "que cherche-t-on",
+        "lire la question",
+        "biscuits",
+        "train",
+        "poule",
+        "œufs",
+        "problème",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "La poule a pondu 8 œufs, j'en ramasse 6. Que cherche-t-on ?",
+          "choix": [
+            "les œufs du panier",
+            "les œufs qui restent dans le nid",
+            "tous les œufs pondus"
+          ],
+          "reponse": 1,
+          "explication": "La question dit : dans le nid. 8 − 6 = 2 : il reste 2 œufs."
+        }
+      ],
+      "centres": [
+        "transports",
+        "animaux"
+      ]
+    },
+    {
+      "id": "margo-pb-cp-schema",
+      "pas_avant": "2027-09-02",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_schema",
+      "type": "longue",
+      "fichier": "cp/maths/ti-margo/02-cp-schema/eleveai-maths-margo-pb-cp-schema-paysage.mp4",
+      "miniature": "cp/maths/ti-margo/02-cp-schema/eleveai-maths-margo-pb-cp-schema-paysage-miniature.png",
+      "titre": "Les bonnets dans la neige : un dessin pour comprendre — Ti Margo — épisode 2 · Maths CP",
+      "accroche": "Il neige à la montagne ! Douze enfants jouent dehors, cinq ont un bonnet rouge, les autres un bonnet bleu. Avant de calculer, je fais un dessin.\n\nDans cette vidéo :\n• une barre pour le tout, les parts en dessous\n• le « ? » sur une part : j'enlève\n• le « ? » sur le tout : je réunis les parts\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_schema&display=simple\n\n🦎 Épisode 2 de la série Les problèmes de Ti Margo d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les bonnets dans la neige"
+        ],
+        [
+          "00:14",
+          "Une barre pour le tout"
+        ],
+        [
+          "00:41",
+          "Question 1"
+        ],
+        [
+          "01:22",
+          "Question 2"
+        ],
+        [
+          "02:03",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "schéma",
+        "schéma en barre",
+        "le tout et les parts",
+        "neige",
+        "bonnets",
+        "aquarium",
+        "poissons",
+        "problème",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:41",
+          "question": "Six enfants font de la luge, trois font du ski. Combien en tout ? Quel calcul ?",
+          "choix": [
+            "6 + 3",
+            "6 − 3",
+            "6 + 6"
+          ],
+          "reponse": 0,
+          "explication": "On cherche le tout : on réunit les parts. 6 + 3 = 9 enfants."
+        },
+        {
+          "t": "01:22",
+          "question": "Quinze moufles sèchent sur le fil, dix sont déjà sèches. Combien sont encore mouillées ? Où je mets le « ? » ?",
+          "choix": [
+            "sur une part",
+            "sur le tout",
+            "nulle part"
+          ],
+          "reponse": 0,
+          "explication": "Le tout, 15, je le connais : je cherche une part. 15 − 10 = 5 moufles mouillées."
+        }
+      ],
+      "centres": [
+        "meteo-climat",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "margo-pb-cp-schema-short",
+      "pas_avant": "2027-09-02",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_schema",
+      "type": "short",
+      "renvoie_vers": "margo-pb-cp-schema",
+      "fichier": "cp/maths/ti-margo/02-cp-schema/eleveai-maths-margo-pb-cp-schema-short.mp4",
+      "miniature": "cp/maths/ti-margo/02-cp-schema/eleveai-maths-margo-pb-cp-schema-short-miniature.png",
+      "titre": "Les poissons de l'aquarium : un dessin pour comprendre — CP #Shorts",
+      "accroche": "Dans l'aquarium, dix poissons. Quatre sont orange, les autres sont jaunes. Je fais mon dessin !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : fais le dessin ! Trois chats noirs et cinq chats blancs. Combien de chats en tout ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_schema&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probleme #cp",
+      "tags": [
+        "schéma",
+        "schéma en barre",
+        "le tout et les parts",
+        "neige",
+        "bonnets",
+        "aquarium",
+        "poissons",
+        "problème",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:11",
+          "question": "Dix poissons, quatre sont orange. Combien de poissons jaunes ?",
+          "choix": [
+            "6",
+            "14",
+            "4"
+          ],
+          "reponse": 0,
+          "explication": "Le « ? » est sur une part : 10 − 4 = 6 poissons jaunes."
+        }
+      ],
+      "centres": [
+        "meteo-climat",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "margo-pb-cp-deux-etapes",
+      "pas_avant": "2027-09-03",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_deux_etapes",
+      "type": "longue",
+      "fichier": "cp/maths/ti-margo/03-cp-deux-etapes/eleveai-maths-margo-pb-cp-deux-etapes-paysage.mp4",
+      "miniature": "cp/maths/ti-margo/03-cp-deux-etapes/eleveai-maths-margo-pb-cp-deux-etapes-paysage-miniature.png",
+      "titre": "Le bus qui s'arrête : deux étapes — Ti Margo — épisode 3 · Maths CP",
+      "accroche": "Je prends le bus : huit personnes dedans. Le bus va s'arrêter deux fois. Combien de personnes à la fin ?\n\nDans cette vidéo :\n• quand l'histoire bouge deux fois, je calcule en deux étapes\n• étape 1 : 8 + 3 = 11\n• étape 2 : 11 − 2 = 9 : le résultat de la première sert à la deuxième\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_deux_etapes&display=simple\n\n🦎 Épisode 3 de la série Les problèmes de Ti Margo d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le bus qui s'arrête"
+        ],
+        [
+          "00:12",
+          "Étape 1 : 8 + 3 = 11"
+        ],
+        [
+          "00:27",
+          "Le résultat sert à la deuxième"
+        ],
+        [
+          "00:39",
+          "Question 1"
+        ],
+        [
+          "01:16",
+          "Question 2"
+        ],
+        [
+          "01:52",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "deux étapes",
+        "problème à étapes",
+        "bus",
+        "passagers",
+        "oiseaux",
+        "mangeoire",
+        "problème",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:39",
+          "question": "Maman achète cinq croissants et quatre pains au chocolat. Sur le chemin, on en mange deux. Combien en reste-t-il ?",
+          "choix": [
+            "7",
+            "9",
+            "11"
+          ],
+          "reponse": 0,
+          "explication": "Étape 1 : 5 + 4 = 9. Étape 2 : 9 − 2 = 7. B, on s'est arrêté trop tôt !"
+        },
+        {
+          "t": "01:16",
+          "question": "Dans ma trousse, dix crayons. J'en prête trois, puis un copain m'en rend un. Combien de crayons dans ma trousse ?",
+          "choix": [
+            "7",
+            "8",
+            "14"
+          ],
+          "reponse": 1,
+          "explication": "Étape 1 : 10 − 3 = 7. Étape 2 : 7 + 1 = 8 crayons."
+        }
+      ],
+      "centres": [
+        "transports",
+        "animaux"
+      ]
+    },
+    {
+      "id": "margo-pb-cp-deux-etapes-short",
+      "pas_avant": "2027-09-03",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_deux_etapes",
+      "type": "short",
+      "renvoie_vers": "margo-pb-cp-deux-etapes",
+      "fichier": "cp/maths/ti-margo/03-cp-deux-etapes/eleveai-maths-margo-pb-cp-deux-etapes-short.mp4",
+      "miniature": "cp/maths/ti-margo/03-cp-deux-etapes/eleveai-maths-margo-pb-cp-deux-etapes-short-miniature.png",
+      "titre": "La mangeoire des oiseaux : deux étapes — CP #Shorts",
+      "accroche": "Sur la mangeoire, six oiseaux. Quatre autres arrivent. Puis un chat passe, et cinq s'envolent !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : j'ai sept billes. J'en gagne trois, puis j'en perds deux. Combien en ai-je ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_deux_etapes&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probleme #cp",
+      "tags": [
+        "deux étapes",
+        "problème à étapes",
+        "bus",
+        "passagers",
+        "oiseaux",
+        "mangeoire",
+        "problème",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:11",
+          "question": "Six oiseaux sur la mangeoire, quatre arrivent, puis cinq s'envolent. Combien d'oiseaux restent ?",
+          "choix": [
+            "15",
+            "10",
+            "5"
+          ],
+          "reponse": 2,
+          "explication": "6 + 4 = 10, puis 10 − 5 = 5 oiseaux. B, c'était seulement la première étape !"
+        }
+      ],
+      "centres": [
+        "transports",
+        "animaux"
+      ]
+    },
+    {
+      "id": "margo-pb-cp-multiplicatif",
+      "pas_avant": "2027-09-04",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_multiplicatif",
+      "type": "longue",
+      "fichier": "cp/maths/ti-margo/04-cp-multiplicatif/eleveai-maths-margo-pb-cp-multiplicatif-paysage.mp4",
+      "miniature": "cp/maths/ti-margo/04-cp-multiplicatif/eleveai-maths-margo-pb-cp-multiplicatif-paysage-miniature.png",
+      "titre": "Les fraises de l'anniversaire : des groupes pareils — Ti Margo — épisode 4 · Maths CP",
+      "accroche": "C'est mon anniversaire ! Sur la table, quatre assiettes, et sur chaque assiette, trois fraises. Combien de fraises en tout ?\n\nDans cette vidéo :\n• des groupes tous pareils : des groupes égaux\n• je compte de 3 en 3 : 3, 6, 9, 12\n• 4 fois 3, c'est 3 + 3 + 3 + 3 = 12\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_multiplicatif&display=simple\n\n🦎 Épisode 4 de la série Les problèmes de Ti Margo d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les fraises de l'anniversaire"
+        ],
+        [
+          "00:13",
+          "Des groupes égaux"
+        ],
+        [
+          "00:35",
+          "Question 1"
+        ],
+        [
+          "01:12",
+          "Question 2"
+        ],
+        [
+          "01:44",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "groupes égaux",
+        "fois",
+        "compter de 3 en 3",
+        "anniversaire",
+        "fraises",
+        "chatons",
+        "problème",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "Trois copains arrivent, chacun tient deux ballons. Combien de ballons en tout ?",
+          "choix": [
+            "5",
+            "6",
+            "32"
+          ],
+          "reponse": 1,
+          "explication": "2, 4, 6 : 3 fois 2, 6 ballons. A, on a ajouté 3 et 2 : ce n'est pas ça !"
+        },
+        {
+          "t": "01:12",
+          "question": "Sur le gâteau, deux rangées de cinq bougies. Combien de bougies ?",
+          "choix": [
+            "7",
+            "25",
+            "10"
+          ],
+          "reponse": 2,
+          "explication": "5, puis 10 : 2 fois 5, 10 bougies."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "animaux"
+      ]
+    },
+    {
+      "id": "margo-pb-cp-multiplicatif-short",
+      "pas_avant": "2027-09-04",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_multiplicatif",
+      "type": "short",
+      "renvoie_vers": "margo-pb-cp-multiplicatif",
+      "fichier": "cp/maths/ti-margo/04-cp-multiplicatif/eleveai-maths-margo-pb-cp-multiplicatif-short.mp4",
+      "miniature": "cp/maths/ti-margo/04-cp-multiplicatif/eleveai-maths-margo-pb-cp-multiplicatif-short-miniature.png",
+      "titre": "Les pattes des chatons : des groupes pareils — CP #Shorts",
+      "accroche": "Trois chatons dorment dans un panier. Chacun a quatre pattes.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : quatre mains, cinq doigts sur chaque main. Combien de doigts ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_multiplicatif&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probleme #cp",
+      "tags": [
+        "groupes égaux",
+        "fois",
+        "compter de 3 en 3",
+        "anniversaire",
+        "fraises",
+        "chatons",
+        "problème",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:08",
+          "question": "Trois chatons, chacun a quatre pattes. Combien de pattes en tout ?",
+          "choix": [
+            "7",
+            "12",
+            "3"
+          ],
+          "reponse": 1,
+          "explication": "4, 8, 12 : 3 fois 4, 12 pattes."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "animaux"
+      ]
+    },
+    {
+      "id": "margo-pb-cp-partage",
+      "pas_avant": "2027-09-05",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_partage",
+      "type": "longue",
+      "fichier": "cp/maths/ti-margo/05-cp-partage/eleveai-maths-margo-pb-cp-partage-paysage.mp4",
+      "miniature": "cp/maths/ti-margo/05-cp-partage/eleveai-maths-margo-pb-cp-partage-paysage-miniature.png",
+      "titre": "Le pique-nique dans la forêt : partager — Ti Margo — épisode 5 · Maths CP",
+      "accroche": "Pique-nique dans la forêt ! Nous sommes trois amis, avec neuf mandarines dans le panier. On les partage : autant chacun.\n\nDans cette vidéo :\n• pour partager, je donne un par un, jusqu'au dernier\n• chacun a 3 mandarines\n• je vérifie : 3 + 3 + 3 = 9, je retrouve le tout\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_partage&display=simple\n\n🦎 Épisode 5 de la série Les problèmes de Ti Margo d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le pique-nique dans la forêt"
+        ],
+        [
+          "00:12",
+          "Je donne un par un"
+        ],
+        [
+          "00:27",
+          "Je vérifie : 3 + 3 + 3 = 9"
+        ],
+        [
+          "00:37",
+          "Question 1"
+        ],
+        [
+          "01:10",
+          "Question 2"
+        ],
+        [
+          "01:43",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "partage",
+        "autant chacun",
+        "distribuer",
+        "pique-nique",
+        "mandarines",
+        "crêpes",
+        "problème",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:37",
+          "question": "Huit glands pour deux écureuils, autant chacun. Combien de glands pour chaque écureuil ?",
+          "choix": [
+            "4",
+            "6",
+            "10"
+          ],
+          "reponse": 0,
+          "explication": "4 pour l'un, 4 pour l'autre : 4 + 4 = 8."
+        },
+        {
+          "t": "01:10",
+          "question": "Douze champignons. J'en mets quatre dans chaque sac. Combien de sacs ?",
+          "choix": [
+            "3",
+            "8",
+            "16"
+          ],
+          "reponse": 0,
+          "explication": "4, 8, 12 : 3 sacs de 4 champignons."
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "margo-pb-cp-partage-short",
+      "pas_avant": "2027-09-05",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_partage",
+      "type": "short",
+      "renvoie_vers": "margo-pb-cp-partage",
+      "fichier": "cp/maths/ti-margo/05-cp-partage/eleveai-maths-margo-pb-cp-partage-short.mp4",
+      "miniature": "cp/maths/ti-margo/05-cp-partage/eleveai-maths-margo-pb-cp-partage-short-miniature.png",
+      "titre": "Les crêpes de mamie : partager — CP #Shorts",
+      "accroche": "Mamie a fait dix crêpes. Nous sommes cinq à table. Autant chacun !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : six bonbons pour trois enfants, autant chacun. Combien chacun ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_partage&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probleme #cp",
+      "tags": [
+        "partage",
+        "autant chacun",
+        "distribuer",
+        "pique-nique",
+        "mandarines",
+        "crêpes",
+        "problème",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:09",
+          "question": "Dix crêpes pour cinq, autant chacun. Combien de crêpes pour chacun ?",
+          "choix": [
+            "5",
+            "15",
+            "2"
+          ],
+          "reponse": 2,
+          "explication": "2 crêpes chacun : 2, 4, 6, 8, 10. Merci mamie !"
+        }
+      ],
+      "centres": [
+        "nature-ecologie",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "margo-pb-cp-reponse",
+      "pas_avant": "2027-09-06",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_reponse",
+      "type": "longue",
+      "fichier": "cp/maths/ti-margo/06-cp-reponse/eleveai-maths-margo-pb-cp-reponse-paysage.mp4",
+      "miniature": "cp/maths/ti-margo/06-cp-reponse/eleveai-maths-margo-pb-cp-reponse-paysage-miniature.png",
+      "titre": "Les livres de la bibliothèque : ma réponse est-elle possible ? — Ti Margo — épisode 6 · Maths CP",
+      "accroche": "Sur l'étagère, vingt livres, des rouges et des bleus. Mon copain a compté : il dit qu'il y a vingt-quatre livres rouges ! Est-ce possible ?\n\nDans cette vidéo :\n• une partie ne peut pas être plus grande que le tout\n• quand j'ai trouvé, je vérifie que c'est possible\n• je finis par une phrase qui répond à la question\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_reponse&display=simple\n\n🦎 Épisode 6 de la série Les problèmes de Ti Margo d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les livres de la bibliothèque"
+        ],
+        [
+          "00:12",
+          "Est-ce possible ?"
+        ],
+        [
+          "00:37",
+          "Question 1"
+        ],
+        [
+          "01:15",
+          "Question 2"
+        ],
+        [
+          "01:54",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "vérifier",
+        "est-ce possible",
+        "phrase réponse",
+        "bibliothèque",
+        "livres",
+        "cerises",
+        "problème",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:37",
+          "question": "Dans la classe, vingt-cinq élèves. Une élève dit : il y a trente filles. Est-ce possible ?",
+          "choix": [
+            "oui",
+            "non, c'est plus que toute la classe",
+            "on ne peut pas savoir"
+          ],
+          "reponse": 1,
+          "explication": "Les filles sont une partie de la classe : 30, c'est plus que 25, impossible !"
+        },
+        {
+          "t": "01:15",
+          "question": "Nina a six crayons, elle en achète deux. Combien en a-t-elle ? Quelle phrase répond à la question ?",
+          "choix": [
+            "Nina a 6 crayons.",
+            "Nina a acheté 2 crayons.",
+            "Nina a 8 crayons."
+          ],
+          "reponse": 2,
+          "explication": "6 + 2 = 8 : la phrase dit combien elle en a maintenant, Nina a 8 crayons."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "margo-pb-cp-reponse-short",
+      "pas_avant": "2027-09-06",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_reponse",
+      "type": "short",
+      "renvoie_vers": "margo-pb-cp-reponse",
+      "fichier": "cp/maths/ti-margo/06-cp-reponse/eleveai-maths-margo-pb-cp-reponse-short.mp4",
+      "miniature": "cp/maths/ti-margo/06-cp-reponse/eleveai-maths-margo-pb-cp-reponse-short-miniature.png",
+      "titre": "Les cerises de Lina : ma réponse est-elle possible ? — CP #Shorts",
+      "accroche": "Lina avait dix cerises. Elle en mange quatre. Elle dit : il m'en reste quatorze !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : trois poissons dans le bocal, on en ajoute deux. Tom trouve un poisson. Est-ce possible ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_reponse&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probleme #cp",
+      "tags": [
+        "vérifier",
+        "est-ce possible",
+        "phrase réponse",
+        "bibliothèque",
+        "livres",
+        "cerises",
+        "problème",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "Lina avait 10 cerises, elle en mange 4. Elle dit : il m'en reste 14. Est-ce possible ?",
+          "choix": [
+            "oui, bravo Lina",
+            "on ne peut pas savoir",
+            "non, il ne peut pas en rester plus qu'au début"
+          ],
+          "reponse": 2,
+          "explication": "Elle en a mangé : il en reste moins que 10. 10 − 4 = 6 cerises."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "margo-pb-cp-defi",
+      "pas_avant": "2027-09-07",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_defi",
+      "type": "longue",
+      "fichier": "cp/maths/ti-margo/07-cp-defi/eleveai-maths-margo-pb-cp-defi-paysage.mp4",
+      "miniature": "cp/maths/ti-margo/07-cp-defi/eleveai-maths-margo-pb-cp-defi-paysage-miniature.png",
+      "titre": "Les défis du cirque : défis de problèmes — Ti Margo — épisode 7 · Maths CP",
+      "accroche": "Au cirque, le clown me lance des défis. Défi un : j'avais des ballons, j'en ai donné cinq, il m'en reste six. Combien en avais-je au début ?\n\nDans cette vidéo :\n• pour trouver le début, je remets ce qui est parti : 6 + 5 = 11\n• le mot « plus » ne veut pas toujours dire j'ajoute\n• c'est l'histoire qui décide : 12 − 3 = 9\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_defi&display=simple\n\n🦎 Épisode 7 de la série Les problèmes de Ti Margo d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les défis du cirque"
+        ],
+        [
+          "00:24",
+          "Défi 2 : le jongleur"
+        ],
+        [
+          "00:43",
+          "Question 1"
+        ],
+        [
+          "01:19",
+          "Question 2"
+        ],
+        [
+          "01:53",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "défi",
+        "problème",
+        "le début",
+        "piège du mot plus",
+        "cirque",
+        "billes",
+        "problème",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:43",
+          "question": "L'acrobate avait des rubans. Elle en perd quatre, il lui en reste huit. Combien en avait-elle au début ?",
+          "choix": [
+            "4",
+            "8",
+            "12"
+          ],
+          "reponse": 2,
+          "explication": "Au début, elle en avait plus : 8 + 4 = 12 rubans."
+        },
+        {
+          "t": "01:19",
+          "question": "Le tigre saute sept cerceaux, c'est deux de moins que le lion. Combien de cerceaux saute le lion ?",
+          "choix": [
+            "5",
+            "7",
+            "9"
+          ],
+          "reponse": 2,
+          "explication": "Le tigre en saute moins, donc le lion plus : 7 + 2 = 9."
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "sport"
+      ]
+    },
+    {
+      "id": "margo-pb-cp-defi-short",
+      "pas_avant": "2027-09-07",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_defi",
+      "type": "short",
+      "renvoie_vers": "margo-pb-cp-defi",
+      "fichier": "cp/maths/ti-margo/07-cp-defi/eleveai-maths-margo-pb-cp-defi-short.mp4",
+      "miniature": "cp/maths/ti-margo/07-cp-defi/eleveai-maths-margo-pb-cp-defi-short-miniature.png",
+      "titre": "Les billes de la récré : défis de problèmes — CP #Shorts",
+      "accroche": "Ce matin, j'avais des billes. À la récré, j'en gagne trois. Maintenant, j'en ai dix !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : j'ai mangé deux bonbons, il m'en reste cinq. Combien en avais-je au début ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #probleme #cp",
+      "tags": [
+        "défi",
+        "problème",
+        "le début",
+        "piège du mot plus",
+        "cirque",
+        "billes",
+        "problème",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "À la récré, j'en gagne 3. Maintenant, j'en ai 10. Combien de billes avais-je ce matin ?",
+          "choix": [
+            "13",
+            "3",
+            "7"
+          ],
+          "reponse": 2,
+          "explication": "Ce matin, j'en avais moins : 10 − 3 = 7. A, c'est le piège du mot « gagne » !"
+        }
+      ],
+      "centres": [
+        "jeux-defis",
+        "sport"
+      ]
     }
   ]
 }
