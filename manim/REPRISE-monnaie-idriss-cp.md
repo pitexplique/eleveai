@@ -32,6 +32,9 @@ Règles communes aux trois sessions (CP, CE1, CE2) : note `monnaie-idriss-regles
 ## État
 - [x] 10 WAV + instants (28/11).
 - [x] 10 films écrits (commit 3b03bb352).
-- [ ] Planches -ql contrôlées (07 short vu une fois : objets agrandis, titre réduit, à revoir).
+- [x] Planches -ql 07 short + 07 paysage contrôlées et corrigées (commit e6d98ed09) : prêtes pour la HD.
+- [ ] Planches -ql 08 → 11 (shorts + paysages) : JAMAIS regardées. Leçon du 07 paysage : dessiner plus GRAND (pièces t ≥ 80, billets t ≥ 52),
+  textes de réponse aérés, rien sous Ti Margo (x < 120 en bas à gauche), rien à droite de x = 480 pendant les questions.
+- 28/11 : Frédéric a fait arrêter les 4 `next dev` (≈ 4 Go) → 5,3 Go libres. Il préfère : UNE chose à la fois, petit à petit.
 - [ ] HD une à la fois, planches HD, miniatures (gabarit A, « Dessin animé »).
 - R2, manifeste, coach, YouTube : PAS sans l'accord de Frédéric. Pas de push.
