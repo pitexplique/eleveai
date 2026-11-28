@@ -31,7 +31,7 @@ function nappeE_partage(c,x0,y0,w,h){ c.fillStyle='#fff'; c.fillRect(x0,y0,w,h);
   const p=44; for(let i=0;i*p<w;i++) for(let j=0;j*p<h;j++) if((i+j)%2===0) c.fillRect(x0+i*p,y0+j*p,Math.min(p,w-i*p),Math.min(p,h-j*p));
   c.fillStyle='rgba(224,49,49,.35)'; for(let i=0;i*p<w;i+=2) c.fillRect(x0+i*p,y0,p,h); }
 /* La clairière : de grands arbres derrière, l'herbe */
-function clairiereE_partage(c,T,yHerbe=470){ c.fillStyle='#1b3a2a'; c.fillRect(0,0,1056,720);
+function clairiereE_partage(c,T,yHerbe=380){ c.fillStyle='#1b3a2a'; c.fillRect(0,0,1056,720);
   for(let k=0;k<7;k++){ const x=60+k*160+(k%2)*40; c.save(); c.globalAlpha=.35; sapinE(c,x,yHerbe+10,2.2+.4*(k%3)); c.restore(); }
   c.fillStyle='#2b8a3e'; c.fillRect(0,yHerbe,1056,720-yHerbe); c.strokeStyle='#51cf66'; c.lineWidth=3;
   for(let x=10;x<1056;x+=34){ c.beginPath(); c.moveTo(x,yHerbe+12); c.lineTo(x+6,yHerbe-4); c.stroke(); } }
@@ -61,99 +61,100 @@ FILMS['partage']=function(outils){
   const finTitre=tPique-.08;
 
   /* les 3 places (ami, amie, moi) et le panier de 9 mandarines */
-  const PL=[170,420,670], PK=[1,3], PANX=905, PANY=690, NAPPE=[30,540,780,170];
-  const PAN=[[-84,540],[-28,540],[28,540],[84,540],[-56,494],[0,494],[56,494],[-28,450],[28,450]].map(([dx,y])=>[PANX+dx,y]);
+  const PL=[150,410,670], PK=[1,3], PANX=915, PANY=700, NAPPE=[20,500,790,210];
+  const PAN=[[-90,550],[-30,550],[30,550],[90,550],[-60,500],[0,500],[60,500],[-30,452],[30,452]].map(([dx,y])=>[PANX+dx,y]);
   /* la mandarine n° i (0 → 8) va à la place i % 3, au tour i / 3 ; quand */
   const TDON=[tU1,tU2,tU3,tEncore+.2,tEncore+.55,tEncore+.9,tEncore2+.15,tEncore2+.5,tEncore2+.85];
-  const dest=i=>[PL[i%3]-62+Math.floor(i/3)*62,650];
-  function amis(c,T){ PK.forEach((k,j)=>enfantE(c,PL[j],600,1.45,{k,T,bras:0}));
-    /* ma place : un coussin vert */
-    c.fillStyle='#69db7c'; c.strokeStyle='#2b8a3e'; c.lineWidth=5; c.beginPath(); c.ellipse(PL[2],560,90,30,0,0,7); c.fill(); c.stroke(); }
+  const dest=i=>[PL[i%3]-78+Math.floor(i/3)*78,575];
+  function amis(c,T){ PK.forEach((k,j)=>enfantE(c,PL[j],650,1.9,{k,T,bras:0}));
+    /* ma place : un coussin vert, « moi » écrit dessus */
+    c.fillStyle='#69db7c'; c.strokeStyle='#2b8a3e'; c.lineWidth=6; c.beginPath(); c.ellipse(PL[2],478,110,40,0,0,7); c.fill(); c.stroke();
+    ecrire(c,'moi',PL[2],400,64,CRAIE.jaune); }
   function scenePique(c,T,{nPanier=9,places=null,lues=null}={}){
     clairiereE_partage(c,T); amis(c,T);
     nappeE_partage(c,...NAPPE);
-    ecrire(c,'moi',PL[2],720-14,44,CRAIE.jaune);
-    for(let j=0;j<nPanier;j++) mandarineE_partage(c,PAN[j][0],PAN[j][1],30);
-    panierE(c,PANX,PANY,260);
+    for(let j=0;j<nPanier;j++) mandarineE_partage(c,PAN[j][0],PAN[j][1],34);
+    panierE(c,PANX,PANY,270);
     if(places) places(c); }
 
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=ap){ /* je donne un par un ; les parts réunies redonnent le tout */
-      if(T>=tDonneA) ecrire(c,'je donne un par un',528,110,72*zoom(T,tDonneA,.4),CRAIE.jaune);
-      PL.map(x=>x+110).forEach((x,j)=>{ for(let k=0;k<3;k++) mandarineE_partage(c,x-70+k*70,330,34); rondNombreE(c,'3',x,420,40); });
-      if(T>=tParts) formuleE(c,T,528,580,['3','+','3','+','3','=','9'],Array(7).fill(tParts),100,[...Array(6).fill(CRAIE.blanc),CRAIE.ok]);
-      if(T>=tTout) ecrire(c,'tout le panier',528,680,52*zoom(T,tTout,.4),CRAIE.ok);
+      if(T>=tDonneA) ecrire(c,'je donne un par un',528,130,76*zoom(T,tDonneA,.4),CRAIE.jaune);
+      [198,528,858].forEach(x=>{ for(let k=0;k<3;k++) mandarineE_partage(c,x-92+k*92,300,42); rondNombreE(c,'3',x,405,44); });
+      if(T>=tParts) formuleE(c,T,528,545,['3','+','3','+','3','=','9'],Array(7).fill(tParts),104,[...Array(6).fill(CRAIE.blanc),CRAIE.ok]);
+      if(T>=tTout) ecrire(c,'tout le panier',528,655,64*zoom(T,tTout,.4),CRAIE.ok);
       tab.maj(); return; }
 
     if(T>=q2){ /* 12 champignons, 4 dans chaque sac */
       herbeE(c,640);
-      const rep=T>=r2, GR=[tS4,tS8,tS12], SX=[90,240,390];
-      for(let i=0;i<12;i++){ const x=90+(i%4)*100, y=170+Math.floor(i/4)*72, g=Math.floor(i/4);
-        if(!rep){ if(T>=tDouzeQ) champignonE_partage(c,x,y,32,{z:zoom(T,tDouzeQ+i*.05,.4)}); continue; }
-        const t=GR[g]-.35+(i%4)*.08; if(T<t){ champignonE_partage(c,x,y,32); continue; }
-        const d=[SX[g]-36+(i%4)*24,560-(i%2)*18], p=sautE([x,y],d,entreE(T,t,t+.35),90); champignonE_partage(c,p[0],p[1],22); }
+      const rep=T>=r2, GR=[tS4,tS8,tS12], SX=[85,240,395];
+      for(let i=0;i<12;i++){ const x=75+(i%4)*110, y=165+Math.floor(i/4)*95, g=Math.floor(i/4);
+        if(!rep){ if(T>=tDouzeQ) champignonE_partage(c,x,y,40,{z:zoom(T,tDouzeQ+i*.05,.4)}); continue; }
+        const t=GR[g]-.35+(i%4)*.08; if(T<t){ champignonE_partage(c,x,y,40); continue; }
+        const d=[SX[g]-42+(i%4)*28,545-(i%2)*24], p=sautE([x,y],d,entreE(T,t,t+.35),90); champignonE_partage(c,p[0],p[1],28); }
       if(!rep){
-        if(T>=tDouzeQ) ecrire(c,'12 champignons',240,70,56*zoom(T,tDouzeQ,.4),CRAIE.jaune);
-        if(T>=tQuatreQ){ sacE(c,170,700,140,'#c08550',zoom(T,tQuatreQ,.4)); rondNombreE(c,'4',170,560,40,{z:zoom(T,tQuatreQ,.5)});
-          ecrire(c,'4 par sac',340,420,52*zoom(T,tQuatreQ,.4),CRAIE.blanc); }
-        if(T>=tCombien2) rondNombreE(c,'?',380,560,42,{z:zoom(T,tCombien2,.5),coul:'#ff922b'}); }
+        if(T>=tDouzeQ) ecrire(c,'12 champignons',240,62,56*zoom(T,tDouzeQ,.4),CRAIE.jaune);
+        if(T>=tQuatreQ){ sacE(c,120,705,170,'#c08550',zoom(T,tQuatreQ,.4)); rondNombreE(c,'4',120,620,44,{z:zoom(T,tQuatreQ,.5)});
+          ecrire(c,'4 par sac',330,500,56*zoom(T,tQuatreQ,.4),CRAIE.blanc); }
+        if(T>=tCombien2) rondNombreE(c,'?',330,610,46,{z:zoom(T,tCombien2,.5),coul:'#ff922b'}); }
       else {
-        SX.forEach((x,g)=>{ if(T>=GR[g]-.4) sacE(c,x,700,130,['#c08550','#a9713a','#d9a066'][g],zoom(T,GR[g]-.4,.4)); });
-        GR.forEach((t,g)=>{ if(T>=t) rondNombreE(c,['4','8','12'][g],SX[g],450,38,{z:zoom(T,t,.5),coul:g===2?CRAIE.ok:CRAIE.jaune}); });
-        if(T>=tS12) formuleE(c,T,240,70,['4','+','4','+','4','=','12'],Array(7).fill(tS12),56,[...Array(6).fill(CRAIE.blanc),CRAIE.ok]);
-        if(T>=tTrois2) ecrire(c,'3 sacs',240,370,72*zoom(T,tTrois2,.4),CRAIE.ok); }
+        SX.forEach((x,g)=>{ if(T>=GR[g]-.4) sacE(c,x,705,135,['#c08550','#a9713a','#d9a066'][g],zoom(T,GR[g]-.4,.4)); });
+        GR.forEach((t,g)=>{ if(T>=t) rondNombreE(c,['4','8','12'][g],SX[g],455,40,{z:zoom(T,t,.5),coul:g===2?CRAIE.ok:CRAIE.jaune}); });
+        if(T>=tS12) formuleE(c,T,240,62,['4','+','4','+','4','=','12'],Array(7).fill(tS12),60,[...Array(6).fill(CRAIE.blanc),CRAIE.ok]);
+        if(T>=tTrois2) ecrire(c,'3 sacs',240,360,76*zoom(T,tTrois2,.4),CRAIE.ok); }
       tab.maj(); return; }
 
     if(T>=q1){ /* 8 glands pour 2 écureuils, autant chacun */
-      clairiereE_partage(c,T,560);
-      c.strokeStyle='#5c3d0a'; c.lineCap='round'; c.lineWidth=30; c.beginPath(); c.moveTo(-10,600); c.quadraticCurveTo(240,585,480,600); c.stroke(); c.lineCap='butt';
+      clairiereE_partage(c,T,600);
+      c.strokeStyle='#5c3d0a'; c.lineCap='round'; c.lineWidth=30; c.beginPath(); c.moveTo(-10,665); c.quadraticCurveTo(240,650,480,665); c.stroke(); c.lineCap='butt';
       const rep=T>=r1, EX=[120,360];
-      if(T>=tEcureuilsQ||rep) EX.forEach((x,j)=>ecureuilE(c,x,590,1.25,j?'#e8590c':'#868e96',j?-1:1,T));
-      for(let i=0;i<8;i++){ const x=90+(i%4)*100, y=165+Math.floor(i/4)*72;
-        if(!rep){ if(T>=tHuitQ) glandE_partage(c,x,y,30,{z:zoom(T,tHuitQ+i*.05,.4),lueur:T>=tAutantQ&&T<tCombien1?.5:0}); continue; }
-        const t=r1+.9+i*.16; if(T<t){ glandE_partage(c,x,y,30); continue; }
-        const j=i%2, n=Math.floor(i/2), d=[EX[j]-45+(n%2)*90,650+Math.floor(n/2)*48], p=sautE([x,y],d,entreE(T,t,t+.4),60);
-        glandE_partage(c,p[0],p[1],24,{lueur:(j===0&&T>=tLun&&T<tLun+1)||(j===1&&T>=tLautre&&T<tLautre+1)?.8:0}); }
+      if(T>=tEcureuilsQ||rep) EX.forEach((x,j)=>ecureuilE(c,x,655,1.3,j?'#e8590c':'#868e96',j?-1:1,T));
+      for(let i=0;i<8;i++){ const x=75+(i%4)*110, y=165+Math.floor(i/4)*100;
+        if(!rep){ if(T>=tHuitQ) glandE_partage(c,x,y,40,{z:zoom(T,tHuitQ+i*.05,.4),lueur:T>=tAutantQ&&T<tCombien1?.5:0}); continue; }
+        const t=r1+.9+i*.16; if(T<t){ glandE_partage(c,x,y,40); continue; }
+        const j=i%2, n=Math.floor(i/2), d=[EX[j]-50+(n%2)*100,165+Math.floor(n/2)*100], p=sautE([x,y],d,entreE(T,t,t+.4),60);
+        glandE_partage(c,p[0],p[1],40,{lueur:(j===0&&T>=tLun&&T<tLun+1)||(j===1&&T>=tLautre&&T<tLautre+1)?.8:0}); }
       if(!rep){
-        if(T>=tHuitQ) ecrire(c,'8 glands',240,70,66*zoom(T,tHuitQ,.4),CRAIE.jaune);
-        if(T>=tDeuxQ) ecrire(c,'2 écureuils',220,300,54*zoom(T,tDeuxQ,.4),CRAIE.blanc);
-        if(T>=tCombien1) rondNombreE(c,'?',430,300,34,{z:zoom(T,tCombien1,.5),coul:'#ff922b'}); }
+        if(T>=tHuitQ) ecrire(c,'8 glands',240,62,66*zoom(T,tHuitQ,.4),CRAIE.jaune);
+        if(T>=tDeuxQ) ecrire(c,'2 écureuils',205,350,56*zoom(T,tDeuxQ,.4),CRAIE.blanc);
+        if(T>=tCombien1) rondNombreE(c,'?',425,350,38,{z:zoom(T,tCombien1,.5),coul:'#ff922b'}); }
       else {
-        if(T>=tLun) rondNombreE(c,'4',EX[0],300,40,{z:zoom(T,tLun,.5)});
-        if(T>=tLautre) rondNombreE(c,'4',EX[1],300,40,{z:zoom(T,tLautre,.5)});
-        if(T>=tQ4a) formuleE(c,T,240,70,['4','+','4','=','8'],[tQ4a,tPlus1,tQ4b,tHuit1,tHuit1],70,[CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.ok]); }
+        c.strokeStyle='rgba(255,255,255,.5)'; c.lineWidth=4; c.setLineDash([12,10]); c.beginPath(); c.moveTo(240,120); c.lineTo(240,320); c.stroke(); c.setLineDash([]);
+        if(T>=tLun) rondNombreE(c,'4',EX[0],350,42,{z:zoom(T,tLun,.5)});
+        if(T>=tLautre) rondNombreE(c,'4',EX[1],350,42,{z:zoom(T,tLautre,.5)});
+        if(T>=tQ4a) formuleE(c,T,240,62,['4','+','4','=','8'],[tQ4a,tPlus1,tQ4b,tHuit1,tHuit1],70,[CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.ok]); }
       tab.maj(); return; }
 
     if(T>=ve){ /* 3 + 3 + 3 = 9 : je retrouve tout le panier */
-      scenePique(c,T,{nPanier:T>=tRetrouve?9:0,places:c=>{ for(let i=0;i<9;i++){ const d=dest(i); if(T<tRetrouve) mandarineE_partage(c,d[0],d[1],30,{lueur:T>=[tV1,tV2,tV3][i%3]&&T<tV9?.6:0}); } }});
-      PL.forEach(x=>rondNombreE(c,'3',x,370,38));
-      formuleE(c,T,528,110,['3','+','3','+','3','=','9'],[tV1,tVp1,tV2,tVp2,tV3,tV9,tV9],100,[...Array(6).fill(CRAIE.blanc),CRAIE.ok]);
-      if(T>=tRetrouve) rondNombreE(c,'9',PANX,360,46,{z:zoom(T,tRetrouve,.5),coul:CRAIE.ok});
-      if(T>=tJuste) ecrire(c,'le partage est juste !',528,220,62*zoom(T,tJuste,.4),CRAIE.ok);
+      scenePique(c,T,{nPanier:T>=tRetrouve?9:0,places:c=>{ for(let i=0;i<9;i++){ const d=dest(i); if(T<tRetrouve) mandarineE_partage(c,d[0],d[1],36,{lueur:T>=[tV1,tV2,tV3][i%3]&&T<tV9?.6:0}); } }});
+      PL.forEach(x=>rondNombreE(c,'3',x,660,40));
+      formuleE(c,T,528,80,['3','+','3','+','3','=','9'],[tV1,tVp1,tV2,tVp2,tV3,tV9,tV9],92,[...Array(6).fill(CRAIE.blanc),CRAIE.ok]);
+      if(T>=tRetrouve) rondNombreE(c,'9',PANX,370,48,{z:zoom(T,tRetrouve,.5),coul:CRAIE.ok});
+      if(T>=tJuste) ecrire(c,'le partage est juste !',528,175,56*zoom(T,tJuste,.4),CRAIE.ok);
       tab.maj(); return; }
 
     if(T>=ch){ /* le panier est vide ; chacun a 3 */
-      scenePique(c,T,{nPanier:0,places:c=>{ for(let i=0;i<9;i++){ const d=dest(i); mandarineE_partage(c,d[0],d[1],30,{lueur:T>=tChacun&&T<tChacun+1.5?.5:0}); } }});
-      if(T>=tVide) ecrire(c,'vide !',PANX,400,60*zoom(T,tVide,.4),CRAIE.faux);
-      PL.forEach((x,j)=>{ if(T>=tTroisCh) rondNombreE(c,'3',x,370,44,{z:zoom(T,tTroisCh+j*.1,.5)}); });
-      if(T>=tChacun) ecrire(c,'3 chacun',528,110,84*zoom(T,tChacun,.4),CRAIE.jaune);
+      scenePique(c,T,{nPanier:0,places:c=>{ for(let i=0;i<9;i++){ const d=dest(i); mandarineE_partage(c,d[0],d[1],36,{lueur:T>=tChacun&&T<tChacun+1.5?.5:0}); } }});
+      if(T>=tVide) ecrire(c,'vide !',PANX,300,64*zoom(T,tVide,.4),CRAIE.faux);
+      PL.forEach((x,j)=>{ if(T>=tTroisCh) rondNombreE(c,'3',x,660,44,{z:zoom(T,tTroisCh+j*.1,.5)}); });
+      if(T>=tChacun) ecrire(c,'3 chacun',528,90,84*zoom(T,tChacun,.4),CRAIE.jaune);
       tab.maj(); return; }
 
     if(T>=di){ /* je les donne une par une, tour après tour */
       const partis=TDON.filter(t=>T>=t-.25).length;
       scenePique(c,T,{nPanier:9-partis,places:c=>{ for(let i=0;i<partis;i++){ const t=TDON[i]-.25, p=sautE(PAN[8-i],dest(i),entreE(T,t,t+.45),140);
-        mandarineE_partage(c,p[0],p[1],30,{lueur:T<t+1?.6:0}); } }});
-      if(T>=tDonne) ecrire(c,'une par une',528,110,80*zoom(T,tDonne,.4),CRAIE.jaune);
-      if(T>=tEncore) ecrire(c,T>=tEncore2?'3e tour':'2e tour',528,210,62,CRAIE.blanc);
-      else if(T>=tU1) ecrire(c,'1er tour',528,210,62,CRAIE.blanc);
+        mandarineE_partage(c,p[0],p[1],36,{lueur:T<t+1?.6:0}); } }});
+      if(T>=tDonne) ecrire(c,'une par une',400,90,80*zoom(T,tDonne,.4),CRAIE.jaune);
+      if(T>=tEncore) ecrire(c,T>=tEncore2?'3e tour':'2e tour',PANX,300,64,CRAIE.blanc);
+      else if(T>=tU1) ecrire(c,'1er tour',PANX,300,64,CRAIE.blanc);
       tab.maj(); return; }
 
     /* l'accroche : la clairière, 3 amis, 9 mandarines dans le panier */
     scenePique(c,T,{nPanier:T>=tPanier0?9:0});
-    if(T>=tTrois0) ecrire(c,'3 amis',260,110,84*zoom(T,tTrois0,.4),CRAIE.jaune);
-    if(T>=tNeuf0) rondNombreE(c,'9',PANX,330,50,{z:zoom(T,tNeuf0,.5)});
-    if(T>=tNeuf0) ecrire(c,'mandarines',PANX,240,46,CRAIE.blanc);
-    if(T>=tAutant0) ecrire(c,'autant chacun',560,110,66*zoom(T,tAutant0,.4),CRAIE.ok);
+    if(T>=tTrois0) ecrire(c,'3 amis',200,90,84*zoom(T,tTrois0,.4),CRAIE.jaune);
+    if(T>=tNeuf0) rondNombreE(c,'9',PANX,370,52,{z:zoom(T,tNeuf0,.5)});
+    if(T>=tNeuf0) ecrire(c,'mandarines',PANX,280,52,CRAIE.blanc);
+    if(T>=tAutant0) ecrire(c,'autant chacun',640,90,66*zoom(T,tAutant0,.4),CRAIE.ok);
     tab.maj();
   }
 

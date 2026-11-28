@@ -82,7 +82,7 @@ FILMS['multiplicatif']=function(outils){
     if(T>=com){ /* quatre mains ouvertes, cinq doigts chacune */
       const MX=[150,405,660,915], MAN=['#4dabf7','#ff6b6b','#51cf66','#fcc419'];
       MX.forEach((x,k)=>{ const t=tQuatreC+k*.22; if(T<t) return; const z=zoom(T,t,.4);
-        mainLeveeE(c,x,690,2.45*Math.min(1.1,z),5,MAN[k],{droite:k%2===0,lueur:T>=tCinqC&&T<tCombienC?.6:0}); });
+        mainLeveeE(c,x,690,2.45*Math.min(1.1,z),5,MAN[k],{droite:true,lueur:T>=tCinqC&&T<tCombienC?.6:0}); });
       if(T>=tQuatreC) ecrire(c,'4 mains',290,90,74*zoom(T,tQuatreC,.4),CRAIE.jaune);
       if(T>=tCinqC) ecrire(c,'5 doigts sur chaque main',528,190,58*zoom(T,tCinqC,.4),CRAIE.blanc);
       if(T>=tCombienC) rondNombreE(c,'?',800,90,58,{z:zoom(T,tCombienC,.5),coul:'#ff922b'});

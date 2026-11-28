@@ -66,12 +66,12 @@ FILMS['partage']=function(outils){
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=com){ /* 6 bonbons pour 3 enfants */
       const BC=['#ff6b6b','#4dabf7','#51cf66','#fcc419','#da77f2','#ff922b'];
-      BC.forEach((col,i)=>{ const t=tSixC+i*.1; if(T>=t) bonbonE_partage(c,150+i*151,250,42,col,{z:zoom(T,t,.4)}); });
+      BC.forEach((col,i)=>{ const t=tSixC+i*.1; if(T>=t) bonbonE_partage(c,150+i*151,200,42,col,{z:zoom(T,t,.4)}); });
       [250,528,806].forEach((x,k)=>{ const t=tTroisC+k*.15; if(T>=t) enfantE(c,x,710,1.6,{k:k+1,T,bras:T>=tAutantC&&T<tCombienC?.3:0}); });
-      if(T>=tSixC) ecrire(c,'6 bonbons',290,90,72*zoom(T,tSixC,.4),CRAIE.jaune);
-      if(T>=tTroisC) ecrire(c,'3 enfants',780,90,72*zoom(T,tTroisC,.4),CRAIE.blanc);
-      if(T>=tAutantC) ecrire(c,'autant chacun',450,305,60*zoom(T,tAutantC,.4),CRAIE.ok);
-      if(T>=tCombienC) rondNombreE(c,'?',800,305,46,{z:zoom(T,tCombienC,.5),coul:'#ff922b'});
+      if(T>=tSixC) ecrire(c,'6 bonbons',290,80,72*zoom(T,tSixC,.4),CRAIE.jaune);
+      if(T>=tTroisC) ecrire(c,'3 enfants',780,80,72*zoom(T,tTroisC,.4),CRAIE.blanc);
+      if(T>=tAutantC) ecrire(c,'autant chacun',450,300,60*zoom(T,tAutantC,.4),CRAIE.ok);
+      if(T>=tCombienC) rondNombreE(c,'?',800,300,46,{z:zoom(T,tCombienC,.5),coul:'#ff922b'});
       tab.maj(); return; }
 
     decor(c,T);
@@ -93,12 +93,12 @@ FILMS['partage']=function(outils){
       if(T>=tDix0) ecrire(c,'10 crêpes',800,110,74*zoom(T,tDix0,.4),CRAIE.jaune);
       if(T>=tCinq0) rondNombreE(c,'5',960,300,50,{z:zoom(T,tCinq0,.5)});
       if(T>=tCinq0) ecrire(c,'à table',960,380,46,CRAIE.blanc);
-      if(T>=tAutant0) ecrire(c,'autant chacun',400,200,58*zoom(T,tAutant0,.4),CRAIE.ok);
+      if(T>=tAutant0) ecrire(c,'autant chacun',440,185,58*zoom(T,tAutant0,.4),CRAIE.ok);
       if(T>=q) rondNombreE(c,'?',420,300,50,{z:zoom(T,tQCombien,.5),coul:'#ff922b'}); }
     else {
       if(T>=tDeux) ecrire(c,'2 chacun',528,110,74*zoom(T,tDeux,.4),CRAIE.jaune);
-      COMPTE.forEach((t,i)=>{ if(T>=t) rondNombreE(c,['2','4','6','8','10'][i],PX[i],520,42,{z:zoom(T,t,.5),coul:i===4?CRAIE.ok:CRAIE.jaune}); });
-      if(T>=tD10) formuleE(c,T,528,250,['2','+','2','+','2','+','2','+','2','=','10'],Array(11).fill(tD10),72,[...Array(10).fill(CRAIE.blanc),CRAIE.ok]);
+      COMPTE.forEach((t,i)=>{ if(T>=t) rondNombreE(c,['2','4','6','8','10'][i],PX[i],684,34,{z:zoom(T,t,.5),coul:i===4?CRAIE.ok:CRAIE.jaune}); });
+      if(T>=tD10) formuleE(c,T,690,250,['2','+','2','+','2','+','2','+','2','=','10'],Array(11).fill(tD10),66,[...Array(10).fill(CRAIE.blanc),CRAIE.ok]);
       if(T>=tMerci) ecrire(c,'♥',528+Math.sin(T*3)*6,370,70*zoom(T,tMerci,.4),'#e64980'); }
     tab.maj();
   }

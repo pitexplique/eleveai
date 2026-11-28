@@ -63,16 +63,16 @@ FILMS['multiplicatif']=function(outils){
     enfantE(c,x,yb,1.42,{k:i,bras:.25,T}); }
 
   /* le gâteau : 2 rangées de 5 bougies (rangée du fond, rangée de devant) */
-  const GX=240, GB=700, GW=225, GH=200;
+  const GX=240, GB=700, GW=225, GH=160;
   function gateau(c,T,{feu=[0,0],fumee=0,lues=[0,0]}={}){
     c.fillStyle='#f1f3f5'; c.beginPath(); c.ellipse(GX,GB+4,GW+20,18,0,0,7); c.fill();
     /* le dessus (vu un peu d'en haut) puis la face */
     c.fillStyle='#ffdeeb'; c.strokeStyle='#c2255c'; c.lineWidth=5;
-    c.beginPath(); c.moveTo(GX-GW,GB-GH); c.lineTo(GX+GW,GB-GH); c.lineTo(GX+GW-30,GB-GH-100); c.lineTo(GX-GW+30,GB-GH-100); c.closePath(); c.fill(); c.stroke();
+    c.beginPath(); c.moveTo(GX-GW,GB-GH); c.lineTo(GX+GW,GB-GH); c.lineTo(GX+GW-30,GB-GH-180); c.lineTo(GX-GW+30,GB-GH-180); c.closePath(); c.fill(); c.stroke();
     c.fillStyle='#faa2c1'; c.beginPath(); c.roundRect(GX-GW,GB-GH,2*GW,GH,14); c.fill(); c.stroke();
     c.fillStyle='#fff5f5'; c.beginPath(); c.moveTo(GX-GW,GB-GH);
     for(let i=0;i<=10;i++){ const u=GX-GW+i*GW/5; c.quadraticCurveTo(u-GW/10,GB-GH+(i%2?40:24),u,GB-GH+8); } c.lineTo(GX+GW,GB-GH); c.closePath(); c.fill();
-    [[GB-GH-72,1.0,0],[GB-GH-18,1.15,1]].forEach(([yb,k,r])=>{ for(let j=0;j<5;j++){ const x=GX-(r?172:150)+j*(r?86:75);
+    [[GB-GH-160,1.3,0],[GB-GH-10,1.3,1]].forEach(([yb,k,r])=>{ for(let j=0;j<5;j++){ const x=GX-(r?190:150)+j*(r?95:75);
       bougieE_mult(c,x,yb,k,{feu:feu[r],fumee,T,coul:r?'#74c0fc':'#b197fc',lueur:lues[r]}); } }); }
 
   function dessiner(T){ const c=tab.c; tab.effacer();
@@ -86,9 +86,9 @@ FILMS['multiplicatif']=function(outils){
       const lit=T>=r2, f1=lit?entreE(T,tCinq2-.3,tCinq2+.2):0, f2=lit?entreE(T,tDix2-.3,tDix2+.2):0, fum=lit&&T>=tSouffle?entreE(T,tSouffle,tSouffle+1.6):0;
       gateau(c,T,{feu:fum>0?[0,0]:[f1,f2],fumee:fum,lues:[lit&&T>=tCinq2&&T<tDeux2?.7:0,lit&&T>=tDix2&&T<tDeux2?.7:0]});
       if(!lit){
-        if(T>=tDeuxQ2) ecrire(c,'2 rangées',240,75,80*zoom(T,tDeuxQ2,.4),CRAIE.jaune);
-        if(T>=tCinqQ2) ecrire(c,'de 5 bougies',240,150,64*zoom(T,tCinqQ2,.4),CRAIE.blanc);
-        if(T>=tCombien2) rondNombreE(c,'?',240,225,40,{z:zoom(T,tCombien2,.5),coul:'#ff922b'}); }
+        if(T>=tDeuxQ2) ecrire(c,'2 rangées',240,60,76*zoom(T,tDeuxQ2,.4),CRAIE.jaune);
+        if(T>=tCinqQ2) ecrire(c,'de 5 bougies',240,130,60*zoom(T,tCinqQ2,.4),CRAIE.blanc);
+        if(T>=tCombien2) rondNombreE(c,'?',240,198,32,{z:zoom(T,tCombien2,.5),coul:'#ff922b'}); }
       else {
         if(T>=tCinq2&&T<tDeux2) formuleE(c,T,240,80,['5','+','5','=','10'],[tCinq2,tCinq2,tDix2,tDix2,tDix2],76,[CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.ok]);
         if(T>=tDeux2) formuleE(c,T,240,80,['2','fois','5','=','10'],[tDeux2,tFois2,tCinq2b,tDix2b,tDix2b],76,[CRAIE.jaune,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.ok]);
@@ -100,9 +100,9 @@ FILMS['multiplicatif']=function(outils){
       KX.forEach((x,i)=>{ const t=tCopains+i*.2; if(T<t&&!rep) return;
         copain(c,T,i,{z:rep?1:zoom(T,t,.4),lueur:rep&&T>=COMPTE[i]&&T<COMPTE[i]+1.2?.8:(!rep&&T>=tBallonsQ&&T<tBallonsQ+1.2?.6:0)}); });
       if(!rep){
-        if(T>=tTroisQ) ecrire(c,'3 copains',240,75,80*zoom(T,tTroisQ,.4),CRAIE.jaune);
-        if(T>=tDeuxQ) ecrire(c,'2 ballons chacun',240,150,56*zoom(T,tDeuxQ,.4),CRAIE.blanc);
-        if(T>=tCombien1) rondNombreE(c,'?',240,215,40,{z:zoom(T,tCombien1,.5),coul:'#ff922b'}); }
+        if(T>=tTroisQ) ecrire(c,'3 copains',240,62,80*zoom(T,tTroisQ,.4),CRAIE.jaune);
+        if(T>=tDeuxQ) ecrire(c,'2 ballons chacun',240,130,56*zoom(T,tDeuxQ,.4),CRAIE.blanc);
+        if(T>=tCombien1) rondNombreE(c,'?',240,200,32,{z:zoom(T,tCombien1,.5),coul:'#ff922b'}); }
       else {
         COMPTE.forEach((t,i)=>{ if(T>=t) rondNombreE(c,['2','4','6'][i],KX[i],205,36,{z:zoom(T,t,.5),coul:i===2?CRAIE.ok:CRAIE.jaune}); });
         if(T>=tTrois1) formuleE(c,T,240,70,['3','fois','2','=','6'],[tTrois1,tFois1,tDeux1,tSix1,tSix1],76,[CRAIE.jaune,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.ok]);
