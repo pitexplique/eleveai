@@ -118146,6 +118146,697 @@
         "argent-budget",
         "cuisine"
       ]
+    },
+    {
+      "id": "idriss-cp-reconnaitre",
+      "pas_avant": "2027-08-15",
+      "notionId": "monnaie",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_monnaie_reconnaitre",
+      "type": "longue",
+      "fichier": "cp/maths/idriss/07-cp-reconnaitre/eleveai-maths-idriss-cp-reconnaitre-paysage.mp4",
+      "miniature": "cp/maths/idriss/07-cp-reconnaitre/eleveai-maths-idriss-cp-reconnaitre-paysage-miniature.png",
+      "titre": "Le soir, la caisse d’Idriss : pièces et billets — Idriss le pêcheur — épisode 7 · Maths CP",
+      "accroche": "Le marché est fini. Idriss vide sa caisse sur l’étal : que de pièces et de billets ! Comment les reconnaître ?\n\nDans cette vidéo :\n• les pièces sont rondes, en métal : 1 €, 2 €\n• les billets sont en papier : 5 €, 10 €, 20 €, 50 €\n• pour savoir ce que ça vaut, je lis le nombre écrit dessus\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_reconnaitre&display=simple\n\n🦎 Épisode 7 de la série Idriss le pêcheur d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le soir, la caisse d’Idriss"
+        ],
+        [
+          "00:10",
+          "Pièces et billets"
+        ],
+        [
+          "00:36",
+          "Question 1"
+        ],
+        [
+          "01:11",
+          "Question 2"
+        ],
+        [
+          "01:43",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "euros",
+        "pièces",
+        "billets",
+        "reconnaître",
+        "mouette",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:36",
+          "question": "Idriss montre un rectangle de papier où est écrit 20. Qu’est-ce que c’est ?",
+          "choix": [
+            "un billet de 20 €",
+            "une pièce de 20 €",
+            "un billet de 2 €"
+          ],
+          "reponse": 0,
+          "explication": "Un rectangle de papier, c’est un billet. Il est écrit 20 dessus : un billet de 20 €."
+        },
+        {
+          "t": "01:11",
+          "question": "Idriss cherche la pièce de 2 €. Laquelle est-ce ?",
+          "choix": [
+            "un rectangle de papier marqué 5",
+            "une pièce ronde marquée 1",
+            "une pièce ronde marquée 2"
+          ],
+          "reponse": 2,
+          "explication": "Elle est ronde : c’est une pièce. Et il est écrit 2 dessus."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-cp-reconnaitre-short",
+      "pas_avant": "2027-08-15",
+      "notionId": "monnaie",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_monnaie_reconnaitre",
+      "type": "short",
+      "renvoie_vers": "idriss-cp-reconnaitre",
+      "fichier": "cp/maths/idriss/07-cp-reconnaitre/eleveai-maths-idriss-cp-reconnaitre-short.mp4",
+      "miniature": "cp/maths/idriss/07-cp-reconnaitre/eleveai-maths-idriss-cp-reconnaitre-short-miniature.png",
+      "titre": "Les trois trésors de la mouette : lequel n’est pas de l’argent ? — cp #Shorts",
+      "accroche": "Une mouette rapporte trois trésors sur l’étal d’Idriss. Ils brillent au soleil ! Lequel n’est pas de l’argent ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : cinquante euros, c’est une pièce ou un billet ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_reconnaitre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #cp",
+      "tags": [
+        "monnaie",
+        "euros",
+        "pièces",
+        "billets",
+        "reconnaître",
+        "mouette",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:09",
+          "question": "Lequel n’est pas de l’argent ?",
+          "choix": [
+            "une pièce ronde marquée 2",
+            "un billet marqué 10",
+            "un coquillage rond, sans nombre"
+          ],
+          "reponse": 2,
+          "explication": "C’est un coquillage : il est rond, mais aucun nombre n’est écrit dessus."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-cp-valeur",
+      "pas_avant": "2027-08-16",
+      "notionId": "monnaie",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_monnaie_valeur",
+      "type": "longue",
+      "fichier": "cp/maths/idriss/08-cp-valeur/eleveai-maths-idriss-cp-valeur-paysage.mp4",
+      "miniature": "cp/maths/idriss/08-cp-valeur/eleveai-maths-idriss-cp-valeur-paysage-miniature.png",
+      "titre": "Combien m’a-t-on donné ? Compter son argent — Idriss le pêcheur — épisode 8 · Maths CP",
+      "accroche": "Une dame achète une dorade. Elle pose son argent sur l’étal d’Idriss : un billet et deux pièces. Combien a-t-elle donné ?\n\nDans cette vidéo :\n• je commence par le plus gros billet\n• puis j’ajoute les pièces : 5, 6, 7, 8\n• 10, 20, 21, 22 : vingt-deux euros\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_valeur&display=simple\n\n🦎 Épisode 8 de la série Idriss le pêcheur d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Combien m’a-t-on donné ?"
+        ],
+        [
+          "00:10",
+          "Je compte : 5, 6, 7, 8"
+        ],
+        [
+          "00:22",
+          "Le plus gros d’abord"
+        ],
+        [
+          "00:37",
+          "Question 1"
+        ],
+        [
+          "01:12",
+          "Question 2"
+        ],
+        [
+          "01:50",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "euros",
+        "pièces",
+        "billets",
+        "compter",
+        "valeur",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:37",
+          "question": "Un garçon pose trois pièces de 2 €. Combien a-t-il donné ?",
+          "choix": [
+            "3 €",
+            "5 €",
+            "6 €"
+          ],
+          "reponse": 2,
+          "explication": "2, 4, 6 : 6 €. 3, c’est le nombre de pièces, pas l’argent !"
+        },
+        {
+          "t": "01:12",
+          "question": "Un billet de 20 €, un billet de 5 € et une pièce de 2 €. Combien en tout ?",
+          "choix": [
+            "3 €",
+            "27 €",
+            "25 €"
+          ],
+          "reponse": 1,
+          "explication": "20… 25… 26, 27 : 27 €. Avec 25 €, on a oublié la pièce !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-cp-valeur-short",
+      "pas_avant": "2027-08-16",
+      "notionId": "monnaie",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_monnaie_valeur",
+      "type": "short",
+      "renvoie_vers": "idriss-cp-valeur",
+      "fichier": "cp/maths/idriss/08-cp-valeur/eleveai-maths-idriss-cp-valeur-short.mp4",
+      "miniature": "cp/maths/idriss/08-cp-valeur/eleveai-maths-idriss-cp-valeur-short-miniature.png",
+      "titre": "La vieille boîte à hameçons : combien d’argent ? — cp #Shorts",
+      "accroche": "Idriss secoue sa vieille boîte à hameçons. Il en sort un billet de dix euros et quatre pièces de un euro !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : deux billets de cinq euros et une pièce de deux euros. Combien ça fait ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_valeur&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #cp",
+      "tags": [
+        "monnaie",
+        "euros",
+        "pièces",
+        "billets",
+        "compter",
+        "valeur",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "Un billet de 10 € et quatre pièces de 1 €. Combien d’argent dans la boîte ?",
+          "choix": [
+            "5 €",
+            "40 €",
+            "14 €"
+          ],
+          "reponse": 2,
+          "explication": "10… 11, 12, 13, 14 : 14 €. 5, c’est le nombre de billets et de pièces, pas l’argent."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-cp-comparer",
+      "pas_avant": "2027-08-17",
+      "notionId": "monnaie",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_monnaie_comparer",
+      "type": "longue",
+      "fichier": "cp/maths/idriss/09-cp-comparer/eleveai-maths-idriss-cp-comparer-paysage.mp4",
+      "miniature": "cp/maths/idriss/09-cp-comparer/eleveai-maths-idriss-cp-comparer-paysage-miniature.png",
+      "titre": "Qui a le plus ? Comparer deux sommes — Idriss le pêcheur — épisode 9 · Maths CP",
+      "accroche": "Deux enfants aident Idriss au marché. Elle reçoit cinq pièces, lui un seul billet. Qui a le plus d’argent ?\n\nDans cette vidéo :\n• beaucoup de pièces, ce n’est pas forcément beaucoup d’argent\n• je compte ce que vaut chaque tas : 10 €, c’est plus que 5 €\n• deux pièces de 1 € valent une pièce de 2 €\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_comparer&display=simple\n\n🦎 Épisode 9 de la série Idriss le pêcheur d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Qui a le plus ?"
+        ],
+        [
+          "00:12",
+          "Le piège : compter ce que ça vaut"
+        ],
+        [
+          "00:41",
+          "Question 1"
+        ],
+        [
+          "01:24",
+          "Question 2"
+        ],
+        [
+          "02:01",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "euros",
+        "comparer",
+        "plus que",
+        "mouette",
+        "crabe",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:41",
+          "question": "Tas rouge : deux billets de 5 €. Tas bleu : une pièce de 2 € et une pièce de 1 €. Lequel vaut le plus ?",
+          "choix": [
+            "le tas bleu",
+            "les deux pareil",
+            "le tas rouge"
+          ],
+          "reponse": 2,
+          "explication": "Rouge : 5, 10, donc 10 €. Bleu : 2, 3, donc 3 €. 10, c’est plus que 3."
+        },
+        {
+          "t": "01:24",
+          "question": "Panier vert : un billet de 10 €. Panier jaune : deux billets de 5 €. Lequel vaut le plus ?",
+          "choix": [
+            "le vert",
+            "les deux pareil",
+            "le jaune"
+          ],
+          "reponse": 1,
+          "explication": "5 + 5 = 10 : les deux paniers valent 10 €, c’est pareil !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-cp-comparer-short",
+      "pas_avant": "2027-08-17",
+      "notionId": "monnaie",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_monnaie_comparer",
+      "type": "short",
+      "renvoie_vers": "idriss-cp-comparer",
+      "fichier": "cp/maths/idriss/09-cp-comparer/eleveai-maths-idriss-cp-comparer-short.mp4",
+      "miniature": "cp/maths/idriss/09-cp-comparer/eleveai-maths-idriss-cp-comparer-short-miniature.png",
+      "titre": "La mouette et le crabe : qui est le plus riche ? — cp #Shorts",
+      "accroche": "La mouette a quatre pièces de un euro. Le crabe a un seul billet de cinq euros. Chacun crie : c’est moi le plus riche !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : trois pièces de deux euros, ou un billet de cinq euros. Lequel vaut le plus ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_comparer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #cp",
+      "tags": [
+        "monnaie",
+        "euros",
+        "comparer",
+        "plus que",
+        "mouette",
+        "crabe",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:12",
+          "question": "La mouette a quatre pièces de 1 €, le crabe un billet de 5 €. Qui a raison de dire « c’est moi le plus riche » ?",
+          "choix": [
+            "le crabe",
+            "la mouette",
+            "ils ont pareil"
+          ],
+          "reponse": 0,
+          "explication": "La mouette a 4 €, le crabe 5 €. 5, c’est plus que 4 : le crabe gagne, d’une pince !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-cp-rendre",
+      "pas_avant": "2027-08-18",
+      "notionId": "monnaie",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_monnaie_rendre",
+      "type": "longue",
+      "fichier": "cp/maths/idriss/10-cp-rendre/eleveai-maths-idriss-cp-rendre-paysage.mp4",
+      "miniature": "cp/maths/idriss/10-cp-rendre/eleveai-maths-idriss-cp-rendre-paysage-miniature.png",
+      "titre": "La sardine du petit garçon : rendre la monnaie — Idriss le pêcheur — épisode 10 · Maths CP",
+      "accroche": "Un petit garçon achète une sardine à trois euros. Il donne un billet de cinq euros. Combien Idriss doit-il lui rendre ?\n\nDans cette vidéo :\n• quand on donne plus que le prix, on me rend la monnaie\n• je pars du prix et j’avance jusqu’à ce qu’on m’a donné\n• je vérifie : le prix plus la monnaie, ça fait ce qu’on a donné\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_rendre&display=simple\n\n🦎 Épisode 10 de la série Idriss le pêcheur d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "La sardine du petit garçon"
+        ],
+        [
+          "00:10",
+          "Rendre : j’avance du prix"
+        ],
+        [
+          "00:28",
+          "Je vérifie : 3 + 2 = 5"
+        ],
+        [
+          "00:38",
+          "Question 1"
+        ],
+        [
+          "01:13",
+          "Question 2"
+        ],
+        [
+          "01:49",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "rendre la monnaie",
+        "euros",
+        "compléter",
+        "marché",
+        "sardine",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:38",
+          "question": "Des crevettes à 4 €, payées avec un billet de 5 €. Combien Idriss me rend-il ?",
+          "choix": [
+            "9 €",
+            "4 €",
+            "1 €"
+          ],
+          "reponse": 2,
+          "explication": "4… 5 : un seul pas. Idriss rend 1 €."
+        },
+        {
+          "t": "01:13",
+          "question": "Une dorade à 17 €, payée avec un billet de 20 €. Combien lui rend-on ?",
+          "choix": [
+            "37 €",
+            "3 €",
+            "17 €"
+          ],
+          "reponse": 1,
+          "explication": "17… 18, 19, 20 : trois pas. Idriss rend 3 €."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-cp-rendre-short",
+      "pas_avant": "2027-08-18",
+      "notionId": "monnaie",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_monnaie_rendre",
+      "type": "short",
+      "renvoie_vers": "idriss-cp-rendre",
+      "fichier": "cp/maths/idriss/10-cp-rendre/eleveai-maths-idriss-cp-rendre-short.mp4",
+      "miniature": "cp/maths/idriss/10-cp-rendre/eleveai-maths-idriss-cp-rendre-short-miniature.png",
+      "titre": "Le filet du voisin : combien rendre ? — cp #Shorts",
+      "accroche": "Le voisin d’Idriss achète un filet à neuf euros. Il donne un billet de dix euros.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : une glace à trois euros, payée avec un billet de dix euros. Combien te rend-on ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_rendre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #cp",
+      "tags": [
+        "monnaie",
+        "rendre la monnaie",
+        "euros",
+        "compléter",
+        "marché",
+        "sardine",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:09",
+          "question": "Un filet à 9 €, payé avec un billet de 10 €. Combien Idriss rend-il ?",
+          "choix": [
+            "1 €",
+            "19 €",
+            "10 €"
+          ],
+          "reponse": 0,
+          "explication": "9… 10 : un seul pas. Idriss rend 1 €."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-cp-defi",
+      "pas_avant": "2027-08-19",
+      "notionId": "monnaie",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_monnaie_defi",
+      "type": "longue",
+      "fichier": "cp/maths/idriss/11-cp-defi/eleveai-maths-idriss-cp-defi-paysage.mp4",
+      "miniature": "cp/maths/idriss/11-cp-defi/eleveai-maths-idriss-cp-defi-paysage-miniature.png",
+      "titre": "Les défis d’Idriss : assez d’argent ? — Idriss le pêcheur — épisode 11 · Maths CP",
+      "accroche": "Idriss me lance des défis. Premier défi : deux pièces de deux euros et une pièce de un euro. Le poisson coûte six euros. Ai-je assez d’argent ?\n\nDans cette vidéo :\n• assez d’argent ? je compte, puis je compare au prix\n• payer 23 € : 20 + 2 + 1, seulement trois\n• le moins de billets possible : je commence par les plus gros\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_defi&display=simple\n\n🦎 Épisode 11 de la série Idriss le pêcheur d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les défis d’Idriss"
+        ],
+        [
+          "00:15",
+          "Assez d’argent ? Je compte"
+        ],
+        [
+          "00:26",
+          "Payer 23 € avec le moins possible"
+        ],
+        [
+          "00:39",
+          "Le plus gros d’abord"
+        ],
+        [
+          "00:50",
+          "Question 1"
+        ],
+        [
+          "01:29",
+          "Question 2"
+        ],
+        [
+          "02:15",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "euros",
+        "défi",
+        "assez d’argent",
+        "payer",
+        "glaces",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:50",
+          "question": "La dame a un billet de 10 € et une pièce de 2 €. Ses poissons coûtent 11 €. A-t-elle assez d’argent ?",
+          "choix": [
+            "oui",
+            "non, il manque de l’argent",
+            "on ne peut pas savoir"
+          ],
+          "reponse": 0,
+          "explication": "10 + 2 = 12 €. 12, c’est plus que 11 : elle a assez, il lui restera 1 €."
+        },
+        {
+          "t": "01:29",
+          "question": "Payer 35 € avec le moins de billets possible (billets de 20 €, 10 € et 5 €). Combien de billets de 10 € ?",
+          "choix": [
+            "un",
+            "trois",
+            "cinq"
+          ],
+          "reponse": 0,
+          "explication": "20 + 10 + 5 = 35 : un seul billet de 10 €. Trois marche aussi, mais avec plus de billets."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "idriss-cp-defi-short",
+      "pas_avant": "2027-08-19",
+      "notionId": "monnaie",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_monnaie_defi",
+      "type": "short",
+      "renvoie_vers": "idriss-cp-defi",
+      "fichier": "cp/maths/idriss/11-cp-defi/eleveai-maths-idriss-cp-defi-short.mp4",
+      "miniature": "cp/maths/idriss/11-cp-defi/eleveai-maths-idriss-cp-defi-short-miniature.png",
+      "titre": "Deux glaces pour Idriss : assez d’argent ? — cp #Shorts",
+      "accroche": "Il fait chaud. Idriss veut deux glaces, à trois euros chacune. Dans sa poche : un billet de cinq euros.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : avec le moins de pièces possible, comment payer quatre euros ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #cp",
+      "tags": [
+        "monnaie",
+        "euros",
+        "défi",
+        "assez d’argent",
+        "payer",
+        "glaces",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:11",
+          "question": "Deux glaces à 3 € chacune, et un billet de 5 € dans la poche. A-t-il assez d’argent ?",
+          "choix": [
+            "oui, tout juste",
+            "non, il manque 1 €",
+            "oui, il reste 2 €"
+          ],
+          "reponse": 1,
+          "explication": "3 + 3 = 6 €. Il n’a que 5 € : il manque 1 €."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "cuisine"
+      ]
     }
   ]
 }

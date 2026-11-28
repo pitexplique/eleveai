@@ -19680,5 +19680,95 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_probleme&display=simple"
+ },
+ "idriss-cp-reconnaitre": {
+  "fichier": "cp/maths/idriss/07-cp-reconnaitre/eleveai-maths-idriss-cp-reconnaitre-paysage.mp4",
+  "poster": "cp/maths/idriss/07-cp-reconnaitre/eleveai-maths-idriss-cp-reconnaitre-paysage-miniature.png",
+  "vignette": "cp/maths/idriss/07-cp-reconnaitre/eleveai-maths-idriss-cp-reconnaitre-paysage-miniature.vignette.webp",
+  "titre": "Le soir, la caisse d’Idriss : pièces et billets — Idriss le pêcheur — épisode 7 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_reconnaitre&display=simple"
+ },
+ "idriss-cp-reconnaitre-short": {
+  "fichier": "cp/maths/idriss/07-cp-reconnaitre/eleveai-maths-idriss-cp-reconnaitre-short.mp4",
+  "poster": "cp/maths/idriss/07-cp-reconnaitre/eleveai-maths-idriss-cp-reconnaitre-short-miniature.png",
+  "vignette": "cp/maths/idriss/07-cp-reconnaitre/eleveai-maths-idriss-cp-reconnaitre-short-miniature.vignette.webp",
+  "titre": "Les trois trésors de la mouette : lequel n’est pas de l’argent ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_reconnaitre&display=simple"
+ },
+ "idriss-cp-valeur": {
+  "fichier": "cp/maths/idriss/08-cp-valeur/eleveai-maths-idriss-cp-valeur-paysage.mp4",
+  "poster": "cp/maths/idriss/08-cp-valeur/eleveai-maths-idriss-cp-valeur-paysage-miniature.png",
+  "vignette": "cp/maths/idriss/08-cp-valeur/eleveai-maths-idriss-cp-valeur-paysage-miniature.vignette.webp",
+  "titre": "Combien m’a-t-on donné ? Compter son argent — Idriss le pêcheur — épisode 8 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_valeur&display=simple"
+ },
+ "idriss-cp-valeur-short": {
+  "fichier": "cp/maths/idriss/08-cp-valeur/eleveai-maths-idriss-cp-valeur-short.mp4",
+  "poster": "cp/maths/idriss/08-cp-valeur/eleveai-maths-idriss-cp-valeur-short-miniature.png",
+  "vignette": "cp/maths/idriss/08-cp-valeur/eleveai-maths-idriss-cp-valeur-short-miniature.vignette.webp",
+  "titre": "La vieille boîte à hameçons : combien d’argent ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_valeur&display=simple"
+ },
+ "idriss-cp-comparer": {
+  "fichier": "cp/maths/idriss/09-cp-comparer/eleveai-maths-idriss-cp-comparer-paysage.mp4",
+  "poster": "cp/maths/idriss/09-cp-comparer/eleveai-maths-idriss-cp-comparer-paysage-miniature.png",
+  "vignette": "cp/maths/idriss/09-cp-comparer/eleveai-maths-idriss-cp-comparer-paysage-miniature.vignette.webp",
+  "titre": "Qui a le plus ? Comparer deux sommes — Idriss le pêcheur — épisode 9 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_comparer&display=simple"
+ },
+ "idriss-cp-comparer-short": {
+  "fichier": "cp/maths/idriss/09-cp-comparer/eleveai-maths-idriss-cp-comparer-short.mp4",
+  "poster": "cp/maths/idriss/09-cp-comparer/eleveai-maths-idriss-cp-comparer-short-miniature.png",
+  "vignette": "cp/maths/idriss/09-cp-comparer/eleveai-maths-idriss-cp-comparer-short-miniature.vignette.webp",
+  "titre": "La mouette et le crabe : qui est le plus riche ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_comparer&display=simple"
+ },
+ "idriss-cp-rendre": {
+  "fichier": "cp/maths/idriss/10-cp-rendre/eleveai-maths-idriss-cp-rendre-paysage.mp4",
+  "poster": "cp/maths/idriss/10-cp-rendre/eleveai-maths-idriss-cp-rendre-paysage-miniature.png",
+  "vignette": "cp/maths/idriss/10-cp-rendre/eleveai-maths-idriss-cp-rendre-paysage-miniature.vignette.webp",
+  "titre": "La sardine du petit garçon : rendre la monnaie — Idriss le pêcheur — épisode 10 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_rendre&display=simple"
+ },
+ "idriss-cp-rendre-short": {
+  "fichier": "cp/maths/idriss/10-cp-rendre/eleveai-maths-idriss-cp-rendre-short.mp4",
+  "poster": "cp/maths/idriss/10-cp-rendre/eleveai-maths-idriss-cp-rendre-short-miniature.png",
+  "vignette": "cp/maths/idriss/10-cp-rendre/eleveai-maths-idriss-cp-rendre-short-miniature.vignette.webp",
+  "titre": "Le filet du voisin : combien rendre ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_rendre&display=simple"
+ },
+ "idriss-cp-defi": {
+  "fichier": "cp/maths/idriss/11-cp-defi/eleveai-maths-idriss-cp-defi-paysage.mp4",
+  "poster": "cp/maths/idriss/11-cp-defi/eleveai-maths-idriss-cp-defi-paysage-miniature.png",
+  "vignette": "cp/maths/idriss/11-cp-defi/eleveai-maths-idriss-cp-defi-paysage-miniature.vignette.webp",
+  "titre": "Les défis d’Idriss : assez d’argent ? — Idriss le pêcheur — épisode 11 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_defi&display=simple"
+ },
+ "idriss-cp-defi-short": {
+  "fichier": "cp/maths/idriss/11-cp-defi/eleveai-maths-idriss-cp-defi-short.mp4",
+  "poster": "cp/maths/idriss/11-cp-defi/eleveai-maths-idriss-cp-defi-short-miniature.png",
+  "vignette": "cp/maths/idriss/11-cp-defi/eleveai-maths-idriss-cp-defi-short-miniature.vignette.webp",
+  "titre": "Deux glaces pour Idriss : assez d’argent ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_defi&display=simple"
  }
 }

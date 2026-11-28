@@ -46,5 +46,11 @@ Règles communes aux trois sessions (CP, CE1, CE2) : note `monnaie-idriss-regles
   ⚠️ `miniatures-shorts-grille.py` lit le MANIFESTE (`V[cle]`) : ces 5 ids n'y sont pas encore (manifeste interdit sans Frédéric),
   donc un lancement SANS filtre plantera sur eux tant qu'ils ne sont pas au manifeste ; on a appelé `dessine()` en direct.
   Miniatures des paysages : modèle commun de la série (titre + « Dessin animé »), non modifiées.
-- [ ] À décider par Frédéric : R2, manifeste YouTube, coach (notion_ressources), publication.
-- R2, manifeste, coach, YouTube : PAS sans l'accord de Frédéric. Pas de push.
+- [x] 28/11 ~06 h 30, sur son « oui » : vignettes webp (20) ; R2 45 fichiers sous `cp/maths/idriss/<num>-cp-<ep>/` (tailles = locales ;
+  les 5 `-avant-grille.png` sont partis aussi, sans gêne) ; manifeste : 10 entrées `idriss-cp-<ep>[-short]` à la fin, YouTube daté
+  15/08 → 19/08/2027 (une paire par jour, à la suite du 14/08 ; CE1/CE2 : prendre à partir du 20/08) ; chapitres depuis les durées des voix ;
+  videos-r2.json + bilans-videos.json (mes 10 clés) ; coach : `brancher-videos-coach.mjs --ecrire --id …` → 10 lignes notion_ressources
+  (5 micros cp_monnaie_*, paysage + short). `miniatures-shorts-grille.py` ne plante plus (240 clés au manifeste).
+  ⚠️ Pas poussé : les boutons du coach mènent à /video/idriss-cp-… qui n'existe en ligne qu'après le push.
+- [ ] Reste : push (avec son accord) ; publication YouTube à son heure.
+- Pas de push sans Frédéric.
