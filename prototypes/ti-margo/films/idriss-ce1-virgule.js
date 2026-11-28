@@ -55,7 +55,7 @@ FILMS['ce1-virgule']=function(outils){
   const tq=(w,n=1)=>mot('01-question',w,n)-q;
   qd.jusque('Mets'); const pauseQ=[qd('Mets pause, et choisis !')];
 
-  miniCe1E(outils,q+3,'1,05 € :<br>combien de centimes ?',ardoiseMini([['1,05 €'],['… c ?','#ffd43b']]));
+  miniCe1E(outils,q+3,'1,05 € :<br>combien de c ?',ardoiseMini([['1,05 €'],['… c ?','#ffd43b']]));
   return { clips,FIN,titre:"La mouette et l'ardoise",ceinture:0,finTitre,groupes:[],finClip:'03-abonne',
     cuts:[finTitre,q,r,com,f],
     question:{ qc:'01-question',rc:'01b-reponse',finR:com,cpt:fin('01-question')+.1,rebours:8,bonne:1,tBon:tB-r,

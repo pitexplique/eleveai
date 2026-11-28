@@ -70,7 +70,7 @@ FILMS['ce1-probleme']=function(outils){
   const tq=(w,n=1)=>mot('01-question',w,n)-q;
   qd.jusque('Mets'); const pauseQ=[qd('Mets pause, et choisis !')];
 
-  miniCe1E(outils,q+5,'Café + pain :<br>il reste ?',ardoiseMini([['j\'ai 5 €'],['− 1,50 € − 1 €'],['= ?','#ffd43b']]));
+  miniCe1E(outils,q+5,'Café + pain :<br>il reste ?',ardoiseMini([['1,50 € + 1 €'],['il a 5 €','#ffd43b']]));
   return { clips,FIN,titre:'Le café et le pain',ceinture:0,finTitre,groupes:[],finClip:'03-abonne',
     cuts:[finTitre,q,r,com,f],
     question:{ qc:'01-question',rc:'01b-reponse',finR:com,cpt:fin('01-question')+.1,rebours:8,bonne:2,tBon:tC-r,

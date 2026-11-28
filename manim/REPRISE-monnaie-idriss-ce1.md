@@ -22,13 +22,13 @@ Voix VALIDÉES par Frédéric (ne pas les changer sans lui) : `manim/SCRIPTS-mon
   | 16 ce1-virgule | La mouette et l'ardoise (B) | La petite virgule (B, A) |
   | 17 ce1-probleme | Le café et le pain (C) | Les courses d'Idriss (A, B) |
   | 18 ce1-defi | Six beignets ? (B) | Les défis du soir (B, C) |
-- HD 12 → 16 FAITES (10 MP4, son + durée vérifiés) ; planches HD `manim/sorties/idriss/<num>-<ep>/planche-hd-{short,paysage}.png` regardées.
-- HD 17 et 18 : file `file-hd.sh` lancée le 28/11 vers 6 h ; miniatures des 14 lancées en même temps (script `mini.sh`, même verrou).
+- ✅ HD des 14 FAITES (12 → 18, short + paysage ; son présent, durée = FIN) ; planches HD regardées une à une :
+  `manim/sorties/idriss/<num>-<ep>/planche-hd-{short,paysage}.png`.
+- ✅ 14 miniatures faites et regardées (`*-miniature.png`, shorts : gabarit A + « Dessin animé ») ; titre du short 16 raccourci
+  (« 1,05 € : combien de c ? ») et ardoise du short 17 (« 1,50 € + 1 € / il a 5 € ») corrigés le 28/11.
 
-## Reste à faire
-1. Vérifier que les 4 MP4 de 17 et 18 existent, puis planches HD (`python scripts/ti-margo-planche.py <mp4> <png> 18`).
-2. Vérifier les 14 miniatures (`manim/sorties/idriss/<num>-<ep>/*-miniature.png`).
-3. Commits PAR CHEMIN, pas de push. R2, manifeste, coach, YouTube : seulement avec l'accord de Frédéric.
+## Reste à faire (rien sans Frédéric)
+- Montrer la série à Frédéric. R2, manifeste, coach, YouTube : seulement avec son accord. Pas de push.
 
 ## Leçons
 - Paysage : pendant les questions, tout à x < 480 ; pièces de 50 c à t ≤ 80 si elles sont côte à côte à 110-140 px.
