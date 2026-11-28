@@ -1419,5 +1419,8 @@
       ]
     ],
     "ceinture": "blanche"
-  }
+  },
+  "margo-pb-ce1-groupement-short": {"question": ["16 chaussettes", "rangées par paires :"], "accroche": "COMBIEN DE PAIRES ?", "calcul": [["2, 4, 6 … 16", "blanc", 120], ["? paires", "jaune", 130]], "ceinture": "blanche"},
+  "margo-pb-ce1-defi-short": {"question": ["3 paquets de 4 sandwichs", "pour 6 enfants :"], "accroche": "COMBIEN CHACUN ?", "calcul": [["3 × 4 = ?", "blanc", 150], ["… pour 6 = ?", "jaune", 130]], "ceinture": "blanche"},
+  "margo-pb-ce1-reste-short": {"question": ["14 cookies", "pour 4 amis, autant chacun :"], "accroche": "COMBIEN EN RESTE-T-IL ?", "calcul": [["14 pour 4 = ?", "blanc", 140], ["reste ?", "jaune", 140]], "ceinture": "blanche"}
 }

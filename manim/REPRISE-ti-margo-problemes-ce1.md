@@ -62,4 +62,8 @@ Mettre à jour « État » ci-dessous, puis lancer une session fille qui reprend
 
 ## État
 - [x] Voix validées, WAV, instants, socle (session mère, 28/11).
-- [ ] Films écrits → planches -ql contrôlées → HD (une à la fois) → planches HD → miniatures → branchement → rapport (hash, nombre branché, reste).
+- [x] 28/11 : `films/margo-dessins-ce1.js` écrit (chaussettes, croissants, boîtes, œufs, élèves, voitures, cookies, cartes, fleurs, sandwichs, chaises, gourdes, filets…).
+- [x] 08 groupement : short + paysage écrits, planches -ql regardées et corrigées ; HD lancées sous le verrou (script `hd.sh` du dossier de notes de la session CE1).
+- [ ] 09 reste et 10 défi : confiés à deux filles (margo-ce1-reste, margo-ce1-defi ; brief dans le dossier de notes de la session CE1) jusqu'aux HD + miniatures, SANS branchement.
+- [ ] Branchement des 6 par la session CE1 : `brancher.py [--ecrire]` (dossier de notes de la session CE1) (manifeste + videos-r2 + bilans par clés ; titres « … — Ti Margo — épisode N · Maths CE1 »,
+  notion `division_partage`), puis vignettes, R2 `ce1/maths/ti-margo/`, coach `brancher-videos-coach.mjs --ecrire --id …`, miniatures shorts gabarit A (`dessine()` en direct).
