@@ -2,7 +2,7 @@
 
 Voix VALIDÉES par Frédéric le 28/11 (ne pas les changer sans lui) : `manim/SCRIPTS-ti-margo-problemes.md` (section CE1)
 et `manim/voix/margo-pb-ce1-<ep>-{paysage,short}.json`. WAV déjà faits (`public/sons/margo-pb-ce1-*`, Julie débit −6, ignorés par git) ;
-instants des mots déjà faits dans `films/margo-pb-ce1-cues.js` et `films/margo-pb-ce1-paysage-cues.js` (séries PROPRES au CP :
+instants des mots déjà faits dans `films/margo-pb-ce1-cues.js` et `films/margo-pb-ce1-paysage-cues.js` (séries PROPRES au CE1 :
 personne d'autre ne les réécrit ; si une voix change, relancer `python scripts/ti-margo-cues.py margo-pb-ce1[-paysage] <ep>`).
 Le CP (01 → 07) a sa propre session et ses propres séries `margo-pb-cp[-paysage]` : ne pas y toucher.
 ⛔ `ce1_division_partage` est déjà fait avec Idriss : ne pas le refaire.
