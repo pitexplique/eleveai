@@ -27,8 +27,15 @@ Voix VALIDÉES par Frédéric (ne pas les changer sans lui) : `manim/SCRIPTS-mon
 - ✅ 14 miniatures faites et regardées (`*-miniature.png`, shorts : gabarit A + « Dessin animé ») ; titre du short 16 raccourci
   (« 1,05 € : combien de c ? ») et ardoise du short 17 (« 1,50 € + 1 € / il a 5 € ») corrigés le 28/11.
 
+- ✅ 28/11 ~07 h, sur son accord : BRANCHÉ. Vignettes webp ; R2 sous `ce1/maths/idriss/<num>-ce1-<ep>/` (8 fichiers par épisode :
+  2 MP4, 2 miniatures, 4 vignettes ; tailles R2 = locales, `rclone check` 0 différence) ; manifeste : 14 entrées `idriss-ce1-<ep>[-short]`
+  à la fin, YouTube daté 20/08 → 26/08/2027 (une paire par jour, à la suite du CP) ; chapitres et instants des questions calculés
+  depuis les films (`enchainer` + DUR), ≥ 10 s chacun ; bonnes réponses = celles des films = script ; videos-r2.json + bilans-videos.json
+  (mes 14 clés seulement) ; coach : `brancher-videos-coach.mjs --ecrire --id …` → 14 lignes notion_ressources (7 micros ce1_monnaie_*,
+  paysage + short). ⚠️ Pas poussé : les boutons du coach mènent à /video/idriss-ce1-… qui n'existe en ligne qu'après le push.
+
 ## Reste à faire (rien sans Frédéric)
-- Montrer la série à Frédéric. R2, manifeste, coach, YouTube : seulement avec son accord. Pas de push.
+- Push (avec son accord) ; publication YouTube à son heure. Pas de push sans Frédéric.
 
 ## Leçons
 - Paysage : pendant les questions, tout à x < 480 ; pièces de 50 c à t ≤ 80 si elles sont côte à côte à 110-140 px.

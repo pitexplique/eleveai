@@ -19770,5 +19770,221 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_defi&display=simple"
+ },
+ "idriss-ce1-centimes": {
+  "fichier": "ce1/maths/idriss/12-ce1-centimes/eleveai-maths-idriss-ce1-centimes-paysage.mp4",
+  "poster": "ce1/maths/idriss/12-ce1-centimes/eleveai-maths-idriss-ce1-centimes-paysage-miniature.png",
+  "vignette": "ce1/maths/idriss/12-ce1-centimes/eleveai-maths-idriss-ce1-centimes-paysage-miniature.vignette.webp",
+  "titre": "Les toutes petites pièces : 1 euro = 100 centimes — Idriss le pêcheur — épisode 12 · Maths CE1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_euros_centimes&display=simple"
+ },
+ "idriss-ce1-centimes-short": {
+  "fichier": "ce1/maths/idriss/12-ce1-centimes/eleveai-maths-idriss-ce1-centimes-short.mp4",
+  "poster": "ce1/maths/idriss/12-ce1-centimes/eleveai-maths-idriss-ce1-centimes-short-miniature.png",
+  "vignette": "ce1/maths/idriss/12-ce1-centimes/eleveai-maths-idriss-ce1-centimes-short-miniature.vignette.webp",
+  "titre": "La pièce de la mouette : combien pour 1 euro ? #maths #ce1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_euros_centimes&display=simple"
+ },
+ "idriss-ce1-valeur": {
+  "fichier": "ce1/maths/idriss/13-ce1-valeur/eleveai-maths-idriss-ce1-valeur-paysage.mp4",
+  "poster": "ce1/maths/idriss/13-ce1-valeur/eleveai-maths-idriss-ce1-valeur-paysage-miniature.png",
+  "vignette": "ce1/maths/idriss/13-ce1-valeur/eleveai-maths-idriss-ce1-valeur-paysage-miniature.vignette.webp",
+  "titre": "La caisse du soir : compter les euros et les centimes — Idriss le pêcheur — épisode 13 · Maths CE1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_valeur_ensemble&display=simple"
+ },
+ "idriss-ce1-valeur-short": {
+  "fichier": "ce1/maths/idriss/13-ce1-valeur/eleveai-maths-idriss-ce1-valeur-short.mp4",
+  "poster": "ce1/maths/idriss/13-ce1-valeur/eleveai-maths-idriss-ce1-valeur-short-miniature.png",
+  "vignette": "ce1/maths/idriss/13-ce1-valeur/eleveai-maths-idriss-ce1-valeur-short-miniature.vignette.webp",
+  "titre": "Le trésor du filet : combien d’argent ? #maths #ce1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_valeur_ensemble&display=simple"
+ },
+ "idriss-ce1-comparer": {
+  "fichier": "ce1/maths/idriss/14-ce1-comparer/eleveai-maths-idriss-ce1-comparer-paysage.mp4",
+  "poster": "ce1/maths/idriss/14-ce1-comparer/eleveai-maths-idriss-ce1-comparer-paysage-miniature.png",
+  "vignette": "ce1/maths/idriss/14-ce1-comparer/eleveai-maths-idriss-ce1-comparer-paysage-miniature.vignette.webp",
+  "titre": "Les deux tirelires : quel tas vaut le plus ? — Idriss le pêcheur — épisode 14 · Maths CE1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_comparer_ensembles&display=simple"
+ },
+ "idriss-ce1-comparer-short": {
+  "fichier": "ce1/maths/idriss/14-ce1-comparer/eleveai-maths-idriss-ce1-comparer-short.mp4",
+  "poster": "ce1/maths/idriss/14-ce1-comparer/eleveai-maths-idriss-ce1-comparer-short-miniature.png",
+  "vignette": "ce1/maths/idriss/14-ce1-comparer/eleveai-maths-idriss-ce1-comparer-short-miniature.vignette.webp",
+  "titre": "Le crabe têtu : plus de pièces, plus d’argent ? #maths #ce1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_comparer_ensembles&display=simple"
+ },
+ "idriss-ce1-constituer": {
+  "fichier": "ce1/maths/idriss/15-ce1-constituer/eleveai-maths-idriss-ce1-constituer-paysage.mp4",
+  "poster": "ce1/maths/idriss/15-ce1-constituer/eleveai-maths-idriss-ce1-constituer-paysage-miniature.png",
+  "vignette": "ce1/maths/idriss/15-ce1-constituer/eleveai-maths-idriss-ce1-constituer-paysage-miniature.vignette.webp",
+  "titre": "Payer pile : faire une somme en euros et centimes — Idriss le pêcheur — épisode 15 · Maths CE1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_constituer&display=simple"
+ },
+ "idriss-ce1-constituer-short": {
+  "fichier": "ce1/maths/idriss/15-ce1-constituer/eleveai-maths-idriss-ce1-constituer-short.mp4",
+  "poster": "ce1/maths/idriss/15-ce1-constituer/eleveai-maths-idriss-ce1-constituer-short-miniature.png",
+  "vignette": "ce1/maths/idriss/15-ce1-constituer/eleveai-maths-idriss-ce1-constituer-short-miniature.vignette.webp",
+  "titre": "La glace pour la barque : quelles pièces donner ? #maths #ce1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_constituer&display=simple"
+ },
+ "idriss-ce1-virgule": {
+  "fichier": "ce1/maths/idriss/16-ce1-virgule/eleveai-maths-idriss-ce1-virgule-paysage.mp4",
+  "poster": "ce1/maths/idriss/16-ce1-virgule/eleveai-maths-idriss-ce1-virgule-paysage-miniature.png",
+  "vignette": "ce1/maths/idriss/16-ce1-virgule/eleveai-maths-idriss-ce1-virgule-paysage-miniature.vignette.webp",
+  "titre": "La petite virgule : lire un prix en euros — Idriss le pêcheur — épisode 16 · Maths CE1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_virgule&display=simple"
+ },
+ "idriss-ce1-virgule-short": {
+  "fichier": "ce1/maths/idriss/16-ce1-virgule/eleveai-maths-idriss-ce1-virgule-short.mp4",
+  "poster": "ce1/maths/idriss/16-ce1-virgule/eleveai-maths-idriss-ce1-virgule-short-miniature.png",
+  "vignette": "ce1/maths/idriss/16-ce1-virgule/eleveai-maths-idriss-ce1-virgule-short-miniature.vignette.webp",
+  "titre": "La mouette et l’ardoise : 1,05 €, combien de centimes ? #maths #ce1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_virgule&display=simple"
+ },
+ "idriss-ce1-probleme": {
+  "fichier": "ce1/maths/idriss/17-ce1-probleme/eleveai-maths-idriss-ce1-probleme-paysage.mp4",
+  "poster": "ce1/maths/idriss/17-ce1-probleme/eleveai-maths-idriss-ce1-probleme-paysage-miniature.png",
+  "vignette": "ce1/maths/idriss/17-ce1-probleme/eleveai-maths-idriss-ce1-probleme-paysage-miniature.vignette.webp",
+  "titre": "Les courses d’Idriss : un problème d’argent — Idriss le pêcheur — épisode 17 · Maths CE1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_probleme&display=simple"
+ },
+ "idriss-ce1-probleme-short": {
+  "fichier": "ce1/maths/idriss/17-ce1-probleme/eleveai-maths-idriss-ce1-probleme-short.mp4",
+  "poster": "ce1/maths/idriss/17-ce1-probleme/eleveai-maths-idriss-ce1-probleme-short-miniature.png",
+  "vignette": "ce1/maths/idriss/17-ce1-probleme/eleveai-maths-idriss-ce1-probleme-short-miniature.vignette.webp",
+  "titre": "Le café et le pain : combien lui reste-t-il ? #maths #ce1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_probleme&display=simple"
+ },
+ "idriss-ce1-defi": {
+  "fichier": "ce1/maths/idriss/18-ce1-defi/eleveai-maths-idriss-ce1-defi-paysage.mp4",
+  "poster": "ce1/maths/idriss/18-ce1-defi/eleveai-maths-idriss-ce1-defi-paysage-miniature.png",
+  "vignette": "ce1/maths/idriss/18-ce1-defi/eleveai-maths-idriss-ce1-defi-paysage-miniature.vignette.webp",
+  "titre": "Les défis du soir : le plus possible, sans dépasser — Idriss le pêcheur — épisode 18 · Maths CE1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_defi&display=simple"
+ },
+ "idriss-ce1-defi-short": {
+  "fichier": "ce1/maths/idriss/18-ce1-defi/eleveai-maths-idriss-ce1-defi-short.mp4",
+  "poster": "ce1/maths/idriss/18-ce1-defi/eleveai-maths-idriss-ce1-defi-short-miniature.png",
+  "vignette": "ce1/maths/idriss/18-ce1-defi/eleveai-maths-idriss-ce1-defi-short-miniature.vignette.webp",
+  "titre": "Six beignets : ai-je assez d’argent ? #maths #ce1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_defi&display=simple"
+ },
+ "idriss-ce2-virgule": {
+  "fichier": "ce2/maths/idriss/19-ce2-virgule/eleveai-maths-idriss-ce2-virgule-paysage.mp4",
+  "poster": "ce2/maths/idriss/19-ce2-virgule/eleveai-maths-idriss-ce2-virgule-paysage-miniature.png",
+  "vignette": "ce2/maths/idriss/19-ce2-virgule/eleveai-maths-idriss-ce2-virgule-paysage-miniature.vignette.webp",
+  "titre": "L’ardoise des prix : écrire un prix avec une virgule — Idriss le pêcheur — épisode 19 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_ecriture_virgule&display=simple"
+ },
+ "idriss-ce2-virgule-short": {
+  "fichier": "ce2/maths/idriss/19-ce2-virgule/eleveai-maths-idriss-ce2-virgule-short.mp4",
+  "poster": "ce2/maths/idriss/19-ce2-virgule/eleveai-maths-idriss-ce2-virgule-short-miniature.png",
+  "vignette": "ce2/maths/idriss/19-ce2-virgule/eleveai-maths-idriss-ce2-virgule-short-miniature.vignette.webp",
+  "titre": "Le zéro oublié : 409 centimes en euros ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_ecriture_virgule&display=simple"
+ },
+ "idriss-ce2-constituer": {
+  "fichier": "ce2/maths/idriss/20-ce2-constituer/eleveai-maths-idriss-ce2-constituer-paysage.mp4",
+  "poster": "ce2/maths/idriss/20-ce2-constituer/eleveai-maths-idriss-ce2-constituer-paysage-miniature.png",
+  "vignette": "ce2/maths/idriss/20-ce2-constituer/eleveai-maths-idriss-ce2-constituer-paysage-miniature.vignette.webp",
+  "titre": "Le beau thon : payer pile un prix à virgule — Idriss le pêcheur — épisode 20 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_constituer&display=simple"
+ },
+ "idriss-ce2-constituer-short": {
+  "fichier": "ce2/maths/idriss/20-ce2-constituer/eleveai-maths-idriss-ce2-constituer-short.mp4",
+  "poster": "ce2/maths/idriss/20-ce2-constituer/eleveai-maths-idriss-ce2-constituer-short-miniature.png",
+  "vignette": "ce2/maths/idriss/20-ce2-constituer/eleveai-maths-idriss-ce2-constituer-short-miniature.vignette.webp",
+  "titre": "Le filet neuf : a-t-il assez d’argent ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_constituer&display=simple"
+ },
+ "idriss-ce2-additionner": {
+  "fichier": "ce2/maths/idriss/21-ce2-additionner/eleveai-maths-idriss-ce2-additionner-paysage.mp4",
+  "poster": "ce2/maths/idriss/21-ce2-additionner/eleveai-maths-idriss-ce2-additionner-paysage-miniature.png",
+  "vignette": "ce2/maths/idriss/21-ce2-additionner/eleveai-maths-idriss-ce2-additionner-paysage-miniature.vignette.webp",
+  "titre": "Le panier de la dame : additionner des prix — Idriss le pêcheur — épisode 21 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_additionner&display=simple"
+ },
+ "idriss-ce2-additionner-short": {
+  "fichier": "ce2/maths/idriss/21-ce2-additionner/eleveai-maths-idriss-ce2-additionner-short.mp4",
+  "poster": "ce2/maths/idriss/21-ce2-additionner/eleveai-maths-idriss-ce2-additionner-short-miniature.png",
+  "vignette": "ce2/maths/idriss/21-ce2-additionner/eleveai-maths-idriss-ce2-additionner-short-miniature.vignette.webp",
+  "titre": "La glace et les appâts : combien en tout ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_additionner&display=simple"
+ },
+ "idriss-ce2-rendre": {
+  "fichier": "ce2/maths/idriss/22-ce2-rendre/eleveai-maths-idriss-ce2-rendre-paysage.mp4",
+  "poster": "ce2/maths/idriss/22-ce2-rendre/eleveai-maths-idriss-ce2-rendre-paysage-miniature.png",
+  "vignette": "ce2/maths/idriss/22-ce2-rendre/eleveai-maths-idriss-ce2-rendre-paysage-miniature.vignette.webp",
+  "titre": "La monnaie au centime près : rendre la monnaie — Idriss le pêcheur — épisode 22 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_rendre&display=simple"
+ },
+ "idriss-ce2-rendre-short": {
+  "fichier": "ce2/maths/idriss/22-ce2-rendre/eleveai-maths-idriss-ce2-rendre-short.mp4",
+  "poster": "ce2/maths/idriss/22-ce2-rendre/eleveai-maths-idriss-ce2-rendre-short-miniature.png",
+  "vignette": "ce2/maths/idriss/22-ce2-rendre/eleveai-maths-idriss-ce2-rendre-short-miniature.vignette.webp",
+  "titre": "Idriss a-t-il bien rendu la monnaie ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_rendre&display=simple"
+ },
+ "idriss-ce2-defi": {
+  "fichier": "ce2/maths/idriss/23-ce2-defi/eleveai-maths-idriss-ce2-defi-paysage.mp4",
+  "poster": "ce2/maths/idriss/23-ce2-defi/eleveai-maths-idriss-ce2-defi-paysage-miniature.png",
+  "vignette": "ce2/maths/idriss/23-ce2-defi/eleveai-maths-idriss-ce2-defi-paysage-miniature.vignette.webp",
+  "titre": "Le grand défi du marché : trois défis de monnaie — Idriss le pêcheur — épisode 23 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_defi&display=simple"
+ },
+ "idriss-ce2-defi-short": {
+  "fichier": "ce2/maths/idriss/23-ce2-defi/eleveai-maths-idriss-ce2-defi-short.mp4",
+  "poster": "ce2/maths/idriss/23-ce2-defi/eleveai-maths-idriss-ce2-defi-short-miniature.png",
+  "vignette": "ce2/maths/idriss/23-ce2-defi/eleveai-maths-idriss-ce2-defi-short-miniature.vignette.webp",
+  "titre": "La lampe d’Idriss : a-t-il assez d’argent ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_defi&display=simple"
  }
 }

@@ -60,7 +60,13 @@ Règles communes aux 3 sessions (CP, CE1, CE2) : note `monnaie-idriss-regles-com
       66 → 149 s), planches HD `planche-hd-{short,paysage}.png` dans le même dossier (20, 21, 22 paysage = HD refaites après correction).
 - [x] Miniatures des 10 films faites (`... miniature`) et regardées : shorts = `miniCe2E` (gabarit A, « Dessin animé ») ; paysages = même modèle
       que `ce2-kilo`. `miniatures-shorts-grille.py` exige le manifeste : PAS utilisé (accord de Frédéric).
-- [ ] SUITE (accord de Frédéric) : R2, manifeste, coach (notion_ressources), YouTube. Rien n'est poussé.
+- [x] 28/11 ~07 h, sur son accord : BRANCHÉ. Vignettes webp ; R2 sous `ce2/maths/idriss/<num>-ce2-<ep>/` (8 fichiers par épisode :
+      2 MP4, 2 miniatures, 4 vignettes ; tailles R2 = locales, `rclone check` 0 différence) ; manifeste : 10 entrées `idriss-ce2-<ep>[-short]`
+      à la fin, YouTube daté 27/08 → 31/08/2027 (une paire par jour, à la suite du CE1) ; chapitres et instants des questions calculés
+      depuis les films, ≥ 10 s chacun ; bonnes réponses = films = script ; videos-r2.json + bilans-videos.json (mes 10 clés seulement) ;
+      coach : `brancher-videos-coach.mjs --ecrire --id …` → 10 lignes notion_ressources (5 micros ce2_monnaie_*, paysage + short).
+      ⚠️ Pas poussé : les boutons du coach mènent à /video/idriss-ce2-… qui n'existe en ligne qu'après le push.
+- [ ] Reste : push (avec son accord) ; publication YouTube à son heure. Rien n'est poussé.
 - ⚠️ Verrou HD : à la fin, ne supprimer `hd-verrou.txt` QUE s'il porte encore sa propre ligne (une session l'a supprimé alors qu'un autre rendu
       tournait : deux HD ont tourné en même temps vers 05:28-05:36, sans échec).
 - R2, manifeste, coach, YouTube : NON sans l'accord de Frédéric. Pas de push. Ne jamais lancer la lecture d'une vidéo.

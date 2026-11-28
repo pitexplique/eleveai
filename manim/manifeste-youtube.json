@@ -118837,6 +118837,1660 @@
         "argent-budget",
         "cuisine"
       ]
+    },
+    {
+      "id": "idriss-ce1-centimes",
+      "pas_avant": "2027-08-20",
+      "notionId": "monnaie",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_monnaie_euros_centimes",
+      "type": "longue",
+      "fichier": "ce1/maths/idriss/12-ce1-centimes/eleveai-maths-idriss-ce1-centimes-paysage.mp4",
+      "miniature": "ce1/maths/idriss/12-ce1-centimes/eleveai-maths-idriss-ce1-centimes-paysage-miniature.png",
+      "titre": "Les toutes petites pièces : 1 euro = 100 centimes — Idriss le pêcheur — épisode 12 · Maths CE1",
+      "accroche": "Ce matin, une dame paie Idriss avec de toutes petites pièces. Ce ne sont pas des euros… ce sont des centimes !\n\nDans cette vidéo :\n• les pièces en centimes : 1 c, 2 c, 5 c, 10 c, 20 c, 50 c\n• 1 € = 100 c, comme 1 m = 100 cm\n• 50 c + 50 c = 100 c = 1 €\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_euros_centimes&display=simple\n\n🦎 Épisode 12 de la série Idriss le pêcheur d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les toutes petites pièces"
+        ],
+        [
+          "00:11",
+          "Les pièces en centimes"
+        ],
+        [
+          "00:34",
+          "Question 1"
+        ],
+        [
+          "01:06",
+          "Question 2"
+        ],
+        [
+          "01:42",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "pièces",
+        "1 euro = 100 centimes",
+        "convertir",
+        "mouette",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Combien de pièces de 10 c faut-il pour faire 1 € ?",
+          "choix": [
+            "10",
+            "100",
+            "1"
+          ],
+          "reponse": 0,
+          "explication": "10, 20, 30… jusqu’à 100 : 10 pièces de 10 c font 100 c, donc 1 €."
+        },
+        {
+          "t": "01:06",
+          "question": "Idriss a 3 €. Combien de centimes, ça fait ?",
+          "choix": [
+            "300 c",
+            "30 c",
+            "3 c"
+          ],
+          "reponse": 0,
+          "explication": "1 € = 100 c. 3 € : 100, 200, 300. 300 c !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce1-centimes-short",
+      "pas_avant": "2027-08-20",
+      "notionId": "monnaie",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_monnaie_euros_centimes",
+      "type": "short",
+      "renvoie_vers": "idriss-ce1-centimes",
+      "fichier": "ce1/maths/idriss/12-ce1-centimes/eleveai-maths-idriss-ce1-centimes-short.mp4",
+      "miniature": "ce1/maths/idriss/12-ce1-centimes/eleveai-maths-idriss-ce1-centimes-short-miniature.png",
+      "titre": "La pièce de la mouette : combien pour 1 euro ? — ce1 #Shorts",
+      "accroche": "Une mouette dépose une pièce de cinquante centimes sur l’étal d’Idriss. Il en faut combien pour faire un euro ?\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de pièces de vingt centimes pour faire un euro ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_euros_centimes&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #ce1",
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "pièces",
+        "1 euro = 100 centimes",
+        "convertir",
+        "mouette",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "Combien de pièces de 50 c pour faire 1 € ?",
+          "choix": [
+            "50",
+            "2",
+            "100"
+          ],
+          "reponse": 1,
+          "explication": "50 c + 50 c = 100 c = 1 € : deux pièces suffisent."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce1-valeur",
+      "pas_avant": "2027-08-21",
+      "notionId": "monnaie",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_monnaie_valeur_ensemble",
+      "type": "longue",
+      "fichier": "ce1/maths/idriss/13-ce1-valeur/eleveai-maths-idriss-ce1-valeur-paysage.mp4",
+      "miniature": "ce1/maths/idriss/13-ce1-valeur/eleveai-maths-idriss-ce1-valeur-paysage-miniature.png",
+      "titre": "La caisse du soir : compter les euros et les centimes — Idriss le pêcheur — épisode 13 · Maths CE1",
+      "accroche": "Le soir, Idriss compte sa caisse : un billet, des pièces en euros, des pièces en centimes. Combien a-t-il ?\n\nDans cette vidéo :\n• je compte d’abord les euros : 5 + 2 = 7 €\n• puis les centimes : 50 + 20 = 70 c\n• en tout : 7 € et 70 c, sans mélanger les deux\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_valeur_ensemble&display=simple\n\n🦎 Épisode 13 de la série Idriss le pêcheur d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "La caisse du soir"
+        ],
+        [
+          "00:12",
+          "Les euros, puis les centimes"
+        ],
+        [
+          "00:33",
+          "Question 1"
+        ],
+        [
+          "01:13",
+          "Question 2"
+        ],
+        [
+          "01:51",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "pièces",
+        "billets",
+        "compter",
+        "valeur",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:33",
+          "question": "Un billet de 10 €, une pièce de 1 € et une pièce de 50 c. Combien en tout ?",
+          "choix": [
+            "61 €",
+            "11 € et 50 c",
+            "12 €"
+          ],
+          "reponse": 1,
+          "explication": "10 + 1 = 11 €, et 50 c : 11 € et 50 c. 61 €, c’est mélanger les euros et les centimes !"
+        },
+        {
+          "t": "01:13",
+          "question": "Trois pièces de 20 c et deux pièces de 10 c. Combien en tout ?",
+          "choix": [
+            "5 c",
+            "80 c",
+            "5 €"
+          ],
+          "reponse": 1,
+          "explication": "20, 40, 60… 70, 80 : 80 c. 5, c’est le nombre de pièces !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce1-valeur-short",
+      "pas_avant": "2027-08-21",
+      "notionId": "monnaie",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_monnaie_valeur_ensemble",
+      "type": "short",
+      "renvoie_vers": "idriss-ce1-valeur",
+      "fichier": "ce1/maths/idriss/13-ce1-valeur/eleveai-maths-idriss-ce1-valeur-short.mp4",
+      "miniature": "ce1/maths/idriss/13-ce1-valeur/eleveai-maths-idriss-ce1-valeur-short-miniature.png",
+      "titre": "Le trésor du filet : combien d’argent ? — ce1 #Shorts",
+      "accroche": "Dans le filet d’Idriss, pas de poisson… mais un vieux porte-monnaie ! Dedans : un billet de vingt euros et deux pièces de cinquante centimes.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un billet de cinq euros et trois pièces de dix centimes. Combien ça fait ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_valeur_ensemble&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #ce1",
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "pièces",
+        "billets",
+        "compter",
+        "valeur",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:12",
+          "question": "Un billet de 20 € et deux pièces de 50 c. Combien d’argent dans le porte-monnaie ?",
+          "choix": [
+            "21 €",
+            "20 € et 2 c",
+            "120 €"
+          ],
+          "reponse": 0,
+          "explication": "50 c + 50 c = 100 c = 1 €. 20 + 1 = 21 €."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce1-comparer",
+      "pas_avant": "2027-08-22",
+      "notionId": "monnaie",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_monnaie_comparer_ensembles",
+      "type": "longue",
+      "fichier": "ce1/maths/idriss/14-ce1-comparer/eleveai-maths-idriss-ce1-comparer-paysage.mp4",
+      "miniature": "ce1/maths/idriss/14-ce1-comparer/eleveai-maths-idriss-ce1-comparer-paysage-miniature.png",
+      "titre": "Les deux tirelires : quel tas vaut le plus ? — Idriss le pêcheur — épisode 14 · Maths CE1",
+      "accroche": "Deux enfants vident leur tirelire devant l’étal d’Idriss : ils veulent offrir un poisson à leur maman. Qui a le plus d’argent ?\n\nDans cette vidéo :\n• quatre pièces de 50 c : 200 c, c’est 2 €\n• 2 € et 10 c, c’est plus que 2 €\n• je calcule chaque tas : d’abord les euros, puis les centimes\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_comparer_ensembles&display=simple\n\n🦎 Épisode 14 de la série Idriss le pêcheur d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les deux tirelires"
+        ],
+        [
+          "00:11",
+          "Quatre pièces de 50 c = 2 €"
+        ],
+        [
+          "00:30",
+          "Je calcule, puis je compare"
+        ],
+        [
+          "00:42",
+          "Question 1"
+        ],
+        [
+          "01:28",
+          "Question 2"
+        ],
+        [
+          "02:07",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "comparer",
+        "plus que",
+        "tirelire",
+        "crabe",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:42",
+          "question": "Rouge : un billet de 5 € et une pièce de 20 c. Bleu : cinq pièces de 1 € et une pièce de 50 c. Lequel a le plus ?",
+          "choix": [
+            "le rouge",
+            "les deux pareil",
+            "le bleu"
+          ],
+          "reponse": 2,
+          "explication": "Rouge : 5 € et 20 c. Bleu : 5 € et 50 c. Les euros sont pareils : 50 c, c’est plus que 20 c."
+        },
+        {
+          "t": "01:28",
+          "question": "Idriss a deux pièces de 1 €. La dame a une pièce de 1 € et deux pièces de 50 c. Qui a le plus ?",
+          "choix": [
+            "Idriss",
+            "les deux pareil",
+            "la dame"
+          ],
+          "reponse": 1,
+          "explication": "50 c + 50 c = 1 €. La dame a 2 €, comme Idriss : c’est pareil !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce1-comparer-short",
+      "pas_avant": "2027-08-22",
+      "notionId": "monnaie",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_monnaie_comparer_ensembles",
+      "type": "short",
+      "renvoie_vers": "idriss-ce1-comparer",
+      "fichier": "ce1/maths/idriss/14-ce1-comparer/eleveai-maths-idriss-ce1-comparer-short.mp4",
+      "miniature": "ce1/maths/idriss/14-ce1-comparer/eleveai-maths-idriss-ce1-comparer-short-miniature.png",
+      "titre": "Le crabe têtu : plus de pièces, plus d’argent ? — ce1 #Shorts",
+      "accroche": "Le crabe a dix pièces de dix centimes. La mouette a une seule pièce de deux euros. Le crabe crie : j’ai plus de pièces, je suis le plus riche !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : cinq pièces de vingt centimes, ou une pièce de un euro. Lequel vaut le plus ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_comparer_ensembles&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #ce1",
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "comparer",
+        "plus que",
+        "tirelire",
+        "crabe",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Le crabe a dix pièces de 10 c, la mouette une pièce de 2 €. Qui a le plus d’argent ?",
+          "choix": [
+            "le crabe",
+            "les deux pareil",
+            "la mouette"
+          ],
+          "reponse": 2,
+          "explication": "10 pièces de 10 c = 100 c = 1 €. La mouette a 2 € : plus de pièces, mais moins d’argent !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce1-constituer",
+      "pas_avant": "2027-08-23",
+      "notionId": "monnaie",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_monnaie_constituer",
+      "type": "longue",
+      "fichier": "ce1/maths/idriss/15-ce1-constituer/eleveai-maths-idriss-ce1-constituer-paysage.mp4",
+      "miniature": "ce1/maths/idriss/15-ce1-constituer/eleveai-maths-idriss-ce1-constituer-paysage-miniature.png",
+      "titre": "Payer pile : faire une somme en euros et centimes — Idriss le pêcheur — épisode 15 · Maths CE1",
+      "accroche": "Sur l’ardoise d’Idriss : sardines, trois euros et vingt centimes. Ti Margo veut payer pile, sans qu’on lui rende la monnaie.\n\nDans cette vidéo :\n• d’abord les euros : 2 € + 1 € = 3 €\n• puis les centimes : 20 c, et c’est pile 3 € et 20 c\n• il y a plusieurs façons de payer\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_constituer&display=simple\n\n🦎 Épisode 15 de la série Idriss le pêcheur d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Payer pile"
+        ],
+        [
+          "00:11",
+          "D’abord les euros, puis les centimes"
+        ],
+        [
+          "00:36",
+          "Question 1"
+        ],
+        [
+          "01:15",
+          "Question 2"
+        ],
+        [
+          "01:53",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "pièces",
+        "payer",
+        "faire une somme",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:36",
+          "question": "Un crabe coûte 2 € et 50 c. Que donner ?",
+          "choix": [
+            "1 €, 1 € et 20 c",
+            "2 € et 5 c",
+            "2 € et 50 c"
+          ],
+          "reponse": 2,
+          "explication": "2 € plus 50 c : 2 € et 50 c. A ne fait que 2 € et 20 c ; B, 2 € et 5 c."
+        },
+        {
+          "t": "01:15",
+          "question": "Pour payer 4 €, j’ai déjà posé 3 € et 50 c. Quelle pièce ajouter ?",
+          "choix": [
+            "1 €",
+            "50 c",
+            "5 c"
+          ],
+          "reponse": 1,
+          "explication": "50 c + 50 c = 1 €. 3 € + 1 € = 4 € pile."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce1-constituer-short",
+      "pas_avant": "2027-08-23",
+      "notionId": "monnaie",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_monnaie_constituer",
+      "type": "short",
+      "renvoie_vers": "idriss-ce1-constituer",
+      "fichier": "ce1/maths/idriss/15-ce1-constituer/eleveai-maths-idriss-ce1-constituer-short.mp4",
+      "miniature": "ce1/maths/idriss/15-ce1-constituer/eleveai-maths-idriss-ce1-constituer-short-miniature.png",
+      "titre": "La glace pour la barque : quelles pièces donner ? — ce1 #Shorts",
+      "accroche": "Idriss achète un sac de glace, pour garder ses poissons au frais. Il coûte un euro et vingt centimes.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : comment payer deux euros et cinquante centimes avec trois pièces ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_constituer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #ce1",
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "pièces",
+        "payer",
+        "faire une somme",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "Un sac de glace à 1 € et 20 c. Quelles pièces donner ?",
+          "choix": [
+            "1 €, 10 c et 10 c",
+            "1 € et 2 c",
+            "1 € et 1 €"
+          ],
+          "reponse": 0,
+          "explication": "10 c + 10 c = 20 c : 1 € et 20 c, pile. B, c’est 2 c, pas 20 c !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce1-virgule",
+      "pas_avant": "2027-08-24",
+      "notionId": "monnaie",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_monnaie_virgule",
+      "type": "longue",
+      "fichier": "ce1/maths/idriss/16-ce1-virgule/eleveai-maths-idriss-ce1-virgule-paysage.mp4",
+      "miniature": "ce1/maths/idriss/16-ce1-virgule/eleveai-maths-idriss-ce1-virgule-paysage-miniature.png",
+      "titre": "La petite virgule : lire un prix en euros — Idriss le pêcheur — épisode 16 · Maths CE1",
+      "accroche": "Sur l’ardoise d’Idriss, un prix avec une petite virgule : 4,50 €. Mais que veut-elle dire ?\n\nDans cette vidéo :\n• devant la virgule, les euros ; derrière, les centimes : 4,50 € = 4 € et 50 c\n• derrière la virgule, toujours deux chiffres : 3 € et 5 c = 3,05 €\n• on dit souvent « quatre euros cinquante »\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_virgule&display=simple\n\n🦎 Épisode 16 de la série Idriss le pêcheur d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "La petite virgule"
+        ],
+        [
+          "00:10",
+          "Euros devant, centimes derrière"
+        ],
+        [
+          "00:23",
+          "Toujours deux chiffres : 3,05 €"
+        ],
+        [
+          "00:40",
+          "Question 1"
+        ],
+        [
+          "01:16",
+          "Question 2"
+        ],
+        [
+          "01:55",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "virgule",
+        "prix",
+        "écrire un prix",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:40",
+          "question": "Comment écrire 2 € et 30 c ?",
+          "choix": [
+            "23 €",
+            "2,30 €",
+            "2,3 c"
+          ],
+          "reponse": 1,
+          "explication": "2 pour les euros, la virgule, 30 pour les centimes : 2,30 €."
+        },
+        {
+          "t": "01:16",
+          "question": "Sur l’ardoise : 6,08 €. Combien de centimes après les euros ?",
+          "choix": [
+            "8 c",
+            "80 c",
+            "6 c"
+          ],
+          "reponse": 0,
+          "explication": "Derrière la virgule : 0, 8. 6,08 € = 6 € et 8 c : le zéro compte !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce1-virgule-short",
+      "pas_avant": "2027-08-24",
+      "notionId": "monnaie",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_monnaie_virgule",
+      "type": "short",
+      "renvoie_vers": "idriss-ce1-virgule",
+      "fichier": "ce1/maths/idriss/16-ce1-virgule/eleveai-maths-idriss-ce1-virgule-short.mp4",
+      "miniature": "ce1/maths/idriss/16-ce1-virgule/eleveai-maths-idriss-ce1-virgule-short-miniature.png",
+      "titre": "La mouette et l’ardoise : 1,05 €, combien de centimes ? — ce1 #Shorts",
+      "accroche": "Une mouette lit l’ardoise d’Idriss : sardine, 1,05 €. Elle penche la tête…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : comment écrire sept euros et quarante centimes, avec une virgule ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_virgule&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #ce1",
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "virgule",
+        "prix",
+        "écrire un prix",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "Sur l’ardoise : 1,05 €. Combien de centimes après l’euro ?",
+          "choix": [
+            "50 c",
+            "5 c",
+            "105 c"
+          ],
+          "reponse": 1,
+          "explication": "Derrière la virgule : 0, 5. 1,05 € = 1 € et 5 c. Pas 50 !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce1-probleme",
+      "pas_avant": "2027-08-25",
+      "notionId": "monnaie",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_monnaie_probleme",
+      "type": "longue",
+      "fichier": "ce1/maths/idriss/17-ce1-probleme/eleveai-maths-idriss-ce1-probleme-paysage.mp4",
+      "miniature": "ce1/maths/idriss/17-ce1-probleme/eleveai-maths-idriss-ce1-probleme-paysage-miniature.png",
+      "titre": "Les courses d’Idriss : un problème d’argent — Idriss le pêcheur — épisode 17 · Maths CE1",
+      "accroche": "Aujourd’hui, c’est Idriss qui fait les courses. Il a vingt euros. Il achète un filet à douze euros, et des hameçons à cinq euros. Combien lui reste-t-il ?\n\nDans cette vidéo :\n• le total : 12 + 5 = 17 €\n• ce qui reste : de 17 à 20, 3 €\n• je lis bien la question : le total, ce qui reste, ou ce qui manque ?\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_probleme&display=simple\n\n🦎 Épisode 17 de la série Idriss le pêcheur d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les courses d’Idriss"
+        ],
+        [
+          "00:12",
+          "Le total, puis ce qui reste"
+        ],
+        [
+          "00:37",
+          "Question 1"
+        ],
+        [
+          "01:14",
+          "Question 2"
+        ],
+        [
+          "01:57",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "problème",
+        "euros",
+        "centimes",
+        "total",
+        "reste",
+        "manque",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:37",
+          "question": "Idriss a 15 €. Il veut une bouée à 21 €. Combien lui manque-t-il ?",
+          "choix": [
+            "6 €",
+            "36 €",
+            "15 €"
+          ],
+          "reponse": 0,
+          "explication": "De 15 à 21 : 6. Il lui manque 6 € : 15 + 6 = 21."
+        },
+        {
+          "t": "01:14",
+          "question": "Une dorade à 8,50 € et des crevettes à 2 €. Combien paie la dame ?",
+          "choix": [
+            "8,52 €",
+            "10,50 €",
+            "6,50 €"
+          ],
+          "reponse": 1,
+          "explication": "8 € + 2 € = 10 €, les 50 c restent : 10,50 €. A : on a ajouté 2 c, pas 2 € !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "idriss-ce1-probleme-short",
+      "pas_avant": "2027-08-25",
+      "notionId": "monnaie",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_monnaie_probleme",
+      "type": "short",
+      "renvoie_vers": "idriss-ce1-probleme",
+      "fichier": "ce1/maths/idriss/17-ce1-probleme/eleveai-maths-idriss-ce1-probleme-short.mp4",
+      "miniature": "ce1/maths/idriss/17-ce1-probleme/eleveai-maths-idriss-ce1-probleme-short-miniature.png",
+      "titre": "Le café et le pain : combien lui reste-t-il ? — ce1 #Shorts",
+      "accroche": "Avant la pêche, Idriss a cinq euros. Il achète un café à un euro cinquante, et un pain à un euro.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : tu as dix euros. Un ballon coûte douze euros. Combien te manque-t-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #ce1",
+      "tags": [
+        "monnaie",
+        "problème",
+        "euros",
+        "centimes",
+        "total",
+        "reste",
+        "manque",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "Idriss a 5 €. Il achète un café à 1,50 € et un pain à 1 €. Combien lui reste-t-il ?",
+          "choix": [
+            "7,50 €",
+            "3,50 €",
+            "2,50 €"
+          ],
+          "reponse": 2,
+          "explication": "1,50 € + 1 € = 2,50 €. 5 € − 2,50 € = 2,50 €. B, on a oublié le pain !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "idriss-ce1-defi",
+      "pas_avant": "2027-08-26",
+      "notionId": "monnaie",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_monnaie_defi",
+      "type": "longue",
+      "fichier": "ce1/maths/idriss/18-ce1-defi/eleveai-maths-idriss-ce1-defi-paysage.mp4",
+      "miniature": "ce1/maths/idriss/18-ce1-defi/eleveai-maths-idriss-ce1-defi-paysage-miniature.png",
+      "titre": "Les défis du soir : le plus possible, sans dépasser — Idriss le pêcheur — épisode 18 · Maths CE1",
+      "accroche": "Ce soir, Idriss lance des défis. Premier défi : pour le même prix, une amie écrit 2,50 €, l’autre dit deux cent cinquante centimes. Qui a raison ?\n\nDans cette vidéo :\n• 2,50 € = 250 c : les deux ont raison\n• le plus de glaces possible : j’ajoute le prix sans dépasser\n• le moins de billets possible : je commence par les plus gros\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_defi&display=simple\n\n🦎 Épisode 18 de la série Idriss le pêcheur d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les défis du soir"
+        ],
+        [
+          "00:16",
+          "2,50 € = 250 c"
+        ],
+        [
+          "00:26",
+          "Sans dépasser : combien de glaces ?"
+        ],
+        [
+          "00:49",
+          "Question 1"
+        ],
+        [
+          "01:30",
+          "Question 2"
+        ],
+        [
+          "02:06",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "défi",
+        "assez d’argent",
+        "sans dépasser",
+        "beignets",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:49",
+          "question": "Idriss doit donner 38 €, avec le moins de billets et de pièces possible. Combien lui en faut-il ?",
+          "choix": [
+            "3",
+            "5",
+            "8"
+          ],
+          "reponse": 1,
+          "explication": "20 + 10 + 5 + 2 + 1 = 38 : un billet de 20, un de 10, un de 5, une pièce de 2, une de 1. 5 en tout !"
+        },
+        {
+          "t": "01:30",
+          "question": "Une sardine coûte 3 €. Avec 20 €, combien de sardines peut-on acheter, au plus ?",
+          "choix": [
+            "7",
+            "3",
+            "6"
+          ],
+          "reponse": 2,
+          "explication": "3, 6, 9, 12, 15, 18 : 6 sardines. Une de plus ferait 21 € : trop !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "idriss-ce1-defi-short",
+      "pas_avant": "2027-08-26",
+      "notionId": "monnaie",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_monnaie_defi",
+      "type": "short",
+      "renvoie_vers": "idriss-ce1-defi",
+      "fichier": "ce1/maths/idriss/18-ce1-defi/eleveai-maths-idriss-ce1-defi-short.mp4",
+      "miniature": "ce1/maths/idriss/18-ce1-defi/eleveai-maths-idriss-ce1-defi-short-miniature.png",
+      "titre": "Six beignets : ai-je assez d’argent ? — ce1 #Shorts",
+      "accroche": "J’ai cinq euros. Un beignet coûte un euro. Je veux en acheter six, pour mes copains.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un euro cinquante, c’est combien de centimes ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #ce1",
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "défi",
+        "assez d’argent",
+        "sans dépasser",
+        "beignets",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "J’ai 5 €. Un beignet coûte 1 €. J’en veux six. Ai-je assez d’argent ?",
+          "choix": [
+            "oui",
+            "non, il manque 1 €",
+            "oui, il reste 1 €"
+          ],
+          "reponse": 1,
+          "explication": "6 beignets, 6 €. Je n’ai que 5 € : il manque 1 €."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "idriss-ce2-virgule",
+      "pas_avant": "2027-08-27",
+      "notionId": "monnaie",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "microId": "ce2_monnaie_ecriture_virgule",
+      "type": "longue",
+      "fichier": "ce2/maths/idriss/19-ce2-virgule/eleveai-maths-idriss-ce2-virgule-paysage.mp4",
+      "miniature": "ce2/maths/idriss/19-ce2-virgule/eleveai-maths-idriss-ce2-virgule-paysage-miniature.png",
+      "titre": "L’ardoise des prix : écrire un prix avec une virgule — Idriss le pêcheur — épisode 19 · Maths CE2",
+      "accroche": "Ce matin, Idriss écrit ses prix sur l’ardoise. Mais il hésite : comment écrire trois euros et quarante-cinq centimes ?\n\nDans cette vidéo :\n• 3 € et 45 c s’écrit 3,45 €\n• 345 c = 3,45 €, car 100 c = 1 €\n• derrière la virgule, toujours deux chiffres : 7 € et 6 c = 7,06 €\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_ecriture_virgule&display=simple\n\n🦎 Épisode 19 de la série Idriss le pêcheur d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "L’ardoise des prix"
+        ],
+        [
+          "00:11",
+          "Euros devant, centimes derrière"
+        ],
+        [
+          "00:22",
+          "345 c = 3,45 €"
+        ],
+        [
+          "00:42",
+          "Question 1"
+        ],
+        [
+          "01:17",
+          "Question 2"
+        ],
+        [
+          "01:59",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "virgule",
+        "écrire un prix",
+        "convertir",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE2",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:42",
+          "question": "Comment écrire 520 c en euros ?",
+          "choix": [
+            "5,20 €",
+            "52 €",
+            "0,52 €"
+          ],
+          "reponse": 0,
+          "explication": "500 c = 5 €, il reste 20 c : 5,20 €."
+        },
+        {
+          "t": "01:17",
+          "question": "Idriss voulait écrire 2 € et 5 c. Il a écrit 2,5 €. Comment corriger ?",
+          "choix": [
+            "2,50 €",
+            "2,05 €",
+            "25 €"
+          ],
+          "reponse": 1,
+          "explication": "5 c s’écrit 05 derrière la virgule : 2,05 €. 2,50 €, c’est 50 c !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce2-virgule-short",
+      "pas_avant": "2027-08-27",
+      "notionId": "monnaie",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "microId": "ce2_monnaie_ecriture_virgule",
+      "type": "short",
+      "renvoie_vers": "idriss-ce2-virgule",
+      "fichier": "ce2/maths/idriss/19-ce2-virgule/eleveai-maths-idriss-ce2-virgule-short.mp4",
+      "miniature": "ce2/maths/idriss/19-ce2-virgule/eleveai-maths-idriss-ce2-virgule-short-miniature.png",
+      "titre": "Le zéro oublié : 409 centimes en euros ? — ce2 #Shorts",
+      "accroche": "Ce crabe coûte quatre cent neuf centimes. Idriss doit écrire son prix en euros.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : écris deux cent cinq centimes en euros, avec une virgule. Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_ecriture_virgule&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #ce2",
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "virgule",
+        "écrire un prix",
+        "convertir",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE2",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:09",
+          "question": "Le crabe coûte 409 c. Quelle étiquette est juste ?",
+          "choix": [
+            "40,9 €",
+            "4,90 €",
+            "4,09 €"
+          ],
+          "reponse": 2,
+          "explication": "400 c = 4 €, il reste 9 c : 09. 4,09 €. B, c’est 90 c !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce2-constituer",
+      "pas_avant": "2027-08-28",
+      "notionId": "monnaie",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "microId": "ce2_monnaie_constituer",
+      "type": "longue",
+      "fichier": "ce2/maths/idriss/20-ce2-constituer/eleveai-maths-idriss-ce2-constituer-paysage.mp4",
+      "miniature": "ce2/maths/idriss/20-ce2-constituer/eleveai-maths-idriss-ce2-constituer-paysage-miniature.png",
+      "titre": "Le beau thon : payer pile un prix à virgule — Idriss le pêcheur — épisode 20 · Maths CE2",
+      "accroche": "Une dame achète un beau thon à Idriss, à 13,75 €. Elle veut payer pile.\n\nDans cette vidéo :\n• d’abord les euros : 10 + 2 + 1 = 13 €\n• puis les centimes : 50 + 20 + 5 = 75 c\n• toujours le plus gros d’abord, sans dépasser\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_constituer&display=simple\n\n🦎 Épisode 20 de la série Idriss le pêcheur d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le beau thon"
+        ],
+        [
+          "00:10",
+          "Les euros, puis les centimes"
+        ],
+        [
+          "00:36",
+          "Question 1"
+        ],
+        [
+          "01:08",
+          "Question 2"
+        ],
+        [
+          "01:45",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "virgule",
+        "payer",
+        "faire une somme",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE2",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:36",
+          "question": "Combien de pièces de 20 c pour faire 2 € ?",
+          "choix": [
+            "20",
+            "2",
+            "10"
+          ],
+          "reponse": 2,
+          "explication": "2 € = 200 c. 20, 40… jusqu’à 200 : 10 pièces."
+        },
+        {
+          "t": "01:08",
+          "question": "Pour payer 8,40 €, quel tas faut-il donner ?",
+          "choix": [
+            "5 € + 2 € + 1 € + 20 c + 20 c",
+            "5 € + 2 € + 20 c + 20 c",
+            "5 € + 2 € + 1 € + 20 c + 2 c"
+          ],
+          "reponse": 0,
+          "explication": "5, 7, 8 € et 20, 40 c : 8,40 €. B ne fait que 7,40 € ; C, 8,22 €."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce2-constituer-short",
+      "pas_avant": "2027-08-28",
+      "notionId": "monnaie",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "microId": "ce2_monnaie_constituer",
+      "type": "short",
+      "renvoie_vers": "idriss-ce2-constituer",
+      "fichier": "ce2/maths/idriss/20-ce2-constituer/eleveai-maths-idriss-ce2-constituer-short.mp4",
+      "miniature": "ce2/maths/idriss/20-ce2-constituer/eleveai-maths-idriss-ce2-constituer-short-miniature.png",
+      "titre": "Le filet neuf : a-t-il assez d’argent ? — ce2 #Shorts",
+      "accroche": "Idriss veut un filet neuf, à 23,50 €. Il a deux billets de dix euros, une pièce de deux euros et une pièce de cinquante centimes.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : combien de pièces de cinquante centimes pour faire cinq euros ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_constituer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #ce2",
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "virgule",
+        "payer",
+        "faire une somme",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE2",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Un filet à 23,50 €. Idriss a deux billets de 10 €, une pièce de 2 € et une pièce de 50 c. A-t-il assez d’argent ?",
+          "choix": [
+            "oui, pile",
+            "non, il manque 1 €",
+            "oui, il reste 1 €"
+          ],
+          "reponse": 1,
+          "explication": "10, 20, 22 € et 50 c : 22,50 €. Il manque 1 €."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce2-additionner",
+      "pas_avant": "2027-08-29",
+      "notionId": "monnaie",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "microId": "ce2_monnaie_additionner",
+      "type": "longue",
+      "fichier": "ce2/maths/idriss/21-ce2-additionner/eleveai-maths-idriss-ce2-additionner-paysage.mp4",
+      "miniature": "ce2/maths/idriss/21-ce2-additionner/eleveai-maths-idriss-ce2-additionner-paysage-miniature.png",
+      "titre": "Le panier de la dame : additionner des prix — Idriss le pêcheur — épisode 21 · Maths CE2",
+      "accroche": "Une dame remplit son panier chez Idriss : une dorade à 6,40 € et des crevettes à 3,30 €. Combien en tout ?\n\nDans cette vidéo :\n• les euros avec les euros : 6 + 3 = 9\n• les centimes avec les centimes : 40 + 30 = 70, donc 9,70 €\n• 100 c, c’est 1 € de plus : 60 c + 50 c = 1 € et 10 c\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_additionner&display=simple\n\n🦎 Épisode 21 de la série Idriss le pêcheur d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le panier de la dame"
+        ],
+        [
+          "00:12",
+          "Euros avec euros, centimes avec centimes"
+        ],
+        [
+          "00:28",
+          "100 c = 1 € de plus"
+        ],
+        [
+          "00:41",
+          "Question 1"
+        ],
+        [
+          "01:22",
+          "Question 2"
+        ],
+        [
+          "02:11",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "virgule",
+        "additionner",
+        "addition de prix",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE2",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:41",
+          "question": "Un calamar à 2,50 € et un poisson à 4,20 €. Combien en tout ?",
+          "choix": [
+            "6,07 €",
+            "67 €",
+            "6,70 €"
+          ],
+          "reponse": 2,
+          "explication": "2 + 4 = 6 €, 50 + 20 = 70 c : 6,70 €."
+        },
+        {
+          "t": "01:22",
+          "question": "Des sardines à 1,80 € et un citron à 0,50 €. Combien en tout ?",
+          "choix": [
+            "1,130 €",
+            "2,30 €",
+            "1,30 €"
+          ],
+          "reponse": 1,
+          "explication": "80 c + 50 c = 130 c = 1 € et 30 c. 1 + 1 = 2 € : 2,30 €. Trois chiffres après la virgule, c’est interdit !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "idriss-ce2-additionner-short",
+      "pas_avant": "2027-08-29",
+      "notionId": "monnaie",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "microId": "ce2_monnaie_additionner",
+      "type": "short",
+      "renvoie_vers": "idriss-ce2-additionner",
+      "fichier": "ce2/maths/idriss/21-ce2-additionner/eleveai-maths-idriss-ce2-additionner-short.mp4",
+      "miniature": "ce2/maths/idriss/21-ce2-additionner/eleveai-maths-idriss-ce2-additionner-short-miniature.png",
+      "titre": "La glace et les appâts : combien en tout ? — ce2 #Shorts",
+      "accroche": "Idriss achète un sac de glace à 2,60 €, et des appâts à 3,50 €.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : 4,75 € plus 2,25 €, combien ça fait ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_additionner&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #ce2",
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "virgule",
+        "additionner",
+        "addition de prix",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE2",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:09",
+          "question": "Un sac de glace à 2,60 € et des appâts à 3,50 €. Combien en tout ?",
+          "choix": [
+            "6,10 €",
+            "5,110 €",
+            "5,10 €"
+          ],
+          "reponse": 0,
+          "explication": "60 c + 50 c = 110 c = 1 € et 10 c. 2 + 3 + 1 = 6 € : 6,10 €. C, on a oublié l’euro de plus."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "idriss-ce2-rendre",
+      "pas_avant": "2027-08-30",
+      "notionId": "monnaie",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "microId": "ce2_monnaie_rendre",
+      "type": "longue",
+      "fichier": "ce2/maths/idriss/22-ce2-rendre/eleveai-maths-idriss-ce2-rendre-paysage.mp4",
+      "miniature": "ce2/maths/idriss/22-ce2-rendre/eleveai-maths-idriss-ce2-rendre-paysage-miniature.png",
+      "titre": "La monnaie au centime près : rendre la monnaie — Idriss le pêcheur — épisode 22 · Maths CE2",
+      "accroche": "Un monsieur achète un poisson à 7,60 €. Il paie avec un billet de dix euros. Combien Idriss lui rend-il ?\n\nDans cette vidéo :\n• j’avance jusqu’à l’euro suivant : de 7,60 € à 8 €, 40 c\n• puis jusqu’au billet : de 8 € à 10 €, 2 €\n• Idriss rend 2,40 €, et je vérifie : 10 − 7,60 = 2,40\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_rendre&display=simple\n\n🦎 Épisode 22 de la série Idriss le pêcheur d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "La monnaie au centime près"
+        ],
+        [
+          "00:12",
+          "Jusqu’à l’euro, puis jusqu’au billet"
+        ],
+        [
+          "00:38",
+          "Question 1"
+        ],
+        [
+          "01:15",
+          "Question 2"
+        ],
+        [
+          "02:00",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "rendre la monnaie",
+        "euros",
+        "centimes",
+        "virgule",
+        "compléter",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE2",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:38",
+          "question": "Une dorade à 4,20 €, payée avec 5 €. Combien rend-on ?",
+          "choix": [
+            "1,20 €",
+            "9,20 €",
+            "0,80 €"
+          ],
+          "reponse": 2,
+          "explication": "De 4,20 € à 5 € : 80 c. On rend 0,80 €."
+        },
+        {
+          "t": "01:15",
+          "question": "La dame achète pour 12,35 € et paie avec un billet de 20 €. Combien lui rend-on ?",
+          "choix": [
+            "8,35 €",
+            "7,75 €",
+            "7,65 €"
+          ],
+          "reponse": 2,
+          "explication": "De 12,35 € à 13 € : 65 c. De 13 € à 20 € : 7 €. On rend 7,65 €."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce2-rendre-short",
+      "pas_avant": "2027-08-30",
+      "notionId": "monnaie",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "microId": "ce2_monnaie_rendre",
+      "type": "short",
+      "renvoie_vers": "idriss-ce2-rendre",
+      "fichier": "ce2/maths/idriss/22-ce2-rendre/eleveai-maths-idriss-ce2-rendre-short.mp4",
+      "miniature": "ce2/maths/idriss/22-ce2-rendre/eleveai-maths-idriss-ce2-rendre-short-miniature.png",
+      "titre": "Idriss a-t-il bien rendu la monnaie ? — ce2 #Shorts",
+      "accroche": "Je paie un crabe à 3,90 €, avec un billet de cinq euros. Idriss me rend 1,10 €.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un poisson à 6,50 €, payé avec dix euros. Combien te rend-on ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_rendre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #ce2",
+      "tags": [
+        "monnaie",
+        "rendre la monnaie",
+        "euros",
+        "centimes",
+        "virgule",
+        "compléter",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE2",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:11",
+          "question": "Un crabe à 3,90 €, payé avec 5 €. Idriss rend 1,10 €. A-t-il bien rendu ?",
+          "choix": [
+            "oui, c’est juste",
+            "non, il me doit plus",
+            "non, il m’a trop rendu"
+          ],
+          "reponse": 0,
+          "explication": "De 3,90 € à 4 € : 10 c. De 4 € à 5 € : 1 €. 1,10 € : c’est juste !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce2-defi",
+      "pas_avant": "2027-08-31",
+      "notionId": "monnaie",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "microId": "ce2_monnaie_defi",
+      "type": "longue",
+      "fichier": "ce2/maths/idriss/23-ce2-defi/eleveai-maths-idriss-ce2-defi-paysage.mp4",
+      "miniature": "ce2/maths/idriss/23-ce2-defi/eleveai-maths-idriss-ce2-defi-paysage-miniature.png",
+      "titre": "Le grand défi du marché : trois défis de monnaie — Idriss le pêcheur — épisode 23 · Maths CE2",
+      "accroche": "C’est le grand défi de la monnaie. Idriss a cinq euros. Un flotteur pour sa ligne coûte 1,50 €. Combien peut-il en acheter, au plus ?\n\nDans cette vidéo :\n• j’ajoute le prix sans dépasser : 1,50 € ; 3 € ; 4,50 €\n• un même prix s’écrit de deux façons : 6,05 € = 605 c\n• pour un prix qui manque, j’avance étape par étape\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_defi&display=simple\n\n🦎 Épisode 23 de la série Idriss le pêcheur d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le grand défi du marché"
+        ],
+        [
+          "00:14",
+          "Sans dépasser : combien de flotteurs ?"
+        ],
+        [
+          "00:32",
+          "6,05 € = 605 c"
+        ],
+        [
+          "00:43",
+          "Question 1"
+        ],
+        [
+          "01:23",
+          "Question 2"
+        ],
+        [
+          "02:08",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "défi",
+        "sans dépasser",
+        "comparer",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE2",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:43",
+          "question": "Le premier porte-monnaie contient 3,40 €, le second 304 c. Lequel a le plus ?",
+          "choix": [
+            "le premier",
+            "le second",
+            "les deux pareil"
+          ],
+          "reponse": 0,
+          "explication": "304 c = 3,04 €. 3,40 €, c’est plus : le premier gagne !"
+        },
+        {
+          "t": "01:23",
+          "question": "Une dorade et un calamar coûtent 9 € en tout. La dorade coûte 5,50 €. Combien coûte le calamar ?",
+          "choix": [
+            "4,50 €",
+            "3,50 €",
+            "14,50 €"
+          ],
+          "reponse": 1,
+          "explication": "De 5,50 € à 6 € : 50 c. De 6 € à 9 € : 3 €. Le calamar coûte 3,50 €."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce2-defi-short",
+      "pas_avant": "2027-08-31",
+      "notionId": "monnaie",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "microId": "ce2_monnaie_defi",
+      "type": "short",
+      "renvoie_vers": "idriss-ce2-defi",
+      "fichier": "ce2/maths/idriss/23-ce2-defi/eleveai-maths-idriss-ce2-defi-short.mp4",
+      "miniature": "ce2/maths/idriss/23-ce2-defi/eleveai-maths-idriss-ce2-defi-short-miniature.png",
+      "titre": "La lampe d’Idriss : a-t-il assez d’argent ? — ce2 #Shorts",
+      "accroche": "La nuit tombe. Idriss a dix euros. Il veut une lampe à 6,20 €, un flotteur à 1,50 € et des hameçons à 2,40 €.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : avec dix euros, combien de glaces à 2,50 € peux-tu acheter ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #ce2",
+      "tags": [
+        "monnaie",
+        "euros",
+        "centimes",
+        "défi",
+        "sans dépasser",
+        "comparer",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE2",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:13",
+          "question": "Idriss a 10 €. Une lampe à 6,20 €, un flotteur à 1,50 €, des hameçons à 2,40 €. A-t-il assez d’argent ?",
+          "choix": [
+            "non, il manque 10 c",
+            "oui, pile",
+            "oui, il reste 1 €"
+          ],
+          "reponse": 0,
+          "explication": "6,20 + 1,50 = 7,70 €. 7,70 + 2,40 = 10,10 €. Il manque 10 c !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
     }
   ]
 }
