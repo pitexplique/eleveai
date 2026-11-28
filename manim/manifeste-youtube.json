@@ -117320,6 +117320,832 @@
         "jeux-defis"
       ],
       "pas_avant": "2026-11-27"
+    },
+    {
+      "id": "idriss-cp-additif",
+      "pas_avant": "2027-08-09",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_additif",
+      "type": "longue",
+      "fichier": "cp/maths/idriss/01-cp-additif/eleveai-maths-idriss-cp-additif-paysage.mp4",
+      "miniature": "cp/maths/idriss/01-cp-additif/eleveai-maths-idriss-cp-additif-paysage-miniature.png",
+      "titre": "Le retour de la barque : combien en tout ? — Idriss le pêcheur — épisode 1 · Maths CP",
+      "accroche": "Chaque matin, la petite barque bleue d’Idriss rentre au port, pleine de poissons. Dans un seau, quatre poissons ; dans l’autre, trois. Combien en tout ?\n\nDans cette vidéo :\n• quand on réunit deux tas, on cherche combien il y en a en tout\n• on ajoute : c’est une addition\n• 4 + 3 = 7\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_additif&display=simple\n\n🦎 Épisode 1 de la série Idriss le pêcheur d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le retour de la barque"
+        ],
+        [
+          "00:12",
+          "Deux seaux de poissons"
+        ],
+        [
+          "00:22",
+          "Je réunis : 4 + 3 = 7"
+        ],
+        [
+          "00:41",
+          "Question 1"
+        ],
+        [
+          "01:14",
+          "Question 2"
+        ],
+        [
+          "01:50",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "addition",
+        "problème",
+        "combien en tout",
+        "réunir",
+        "poissons",
+        "mouettes",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:41",
+          "question": "Cinq crabes dans le panier, deux crabes qui courent sur le quai. Combien de crabes en tout ?",
+          "choix": [
+            "3",
+            "7",
+            "52"
+          ],
+          "reponse": 1,
+          "explication": "Cinq… six, sept. 5 + 2 = 7 crabes."
+        },
+        {
+          "t": "01:14",
+          "question": "Six gros poissons et quatre petits. Combien de poissons en tout ?",
+          "choix": [
+            "2",
+            "9",
+            "10"
+          ],
+          "reponse": 2,
+          "explication": "Six… sept, huit, neuf, dix. 6 + 4 = 10 : une dizaine !"
+        }
+      ],
+      "centres": [
+        "animaux-marins",
+        "bateaux"
+      ]
+    },
+    {
+      "id": "idriss-cp-additif-short",
+      "pas_avant": "2027-08-09",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_additif",
+      "type": "short",
+      "renvoie_vers": "idriss-cp-additif",
+      "fichier": "cp/maths/idriss/01-cp-additif/eleveai-maths-idriss-cp-additif-short.mp4",
+      "miniature": "cp/maths/idriss/01-cp-additif/eleveai-maths-idriss-cp-additif-short-miniature.png",
+      "titre": "Les mouettes sur le mât : combien maintenant ? — cp #Shorts",
+      "accroche": "Sur le mât de la barque d’Idriss, trois mouettes se reposent. Et quatre autres arrivent en planant !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : deux bateaux rouges et cinq bateaux blancs dans le port. Combien de bateaux en tout ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_additif&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #addition #cp",
+      "tags": [
+        "addition",
+        "problème",
+        "combien en tout",
+        "réunir",
+        "poissons",
+        "mouettes",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:09",
+          "question": "Trois mouettes sur le mât, quatre autres arrivent. Combien de mouettes maintenant ?",
+          "choix": [
+            "7",
+            "1",
+            "34"
+          ],
+          "reponse": 0,
+          "explication": "Trois… quatre, cinq, six, sept. 3 + 4 = 7."
+        }
+      ],
+      "centres": [
+        "animaux-marins",
+        "bateaux"
+      ]
+    },
+    {
+      "id": "idriss-cp-soustractif",
+      "pas_avant": "2027-08-10",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_soustractif",
+      "type": "longue",
+      "fichier": "cp/maths/idriss/02-cp-soustractif/eleveai-maths-idriss-cp-soustractif-paysage.mp4",
+      "miniature": "cp/maths/idriss/02-cp-soustractif/eleveai-maths-idriss-cp-soustractif-paysage-miniature.png",
+      "titre": "Le chat du port : combien en reste-t-il ? — Idriss le pêcheur — épisode 2 · Maths CP",
+      "accroche": "Sur son étal, Idriss a posé neuf poissons, bien alignés. Mais derrière la caisse, quelqu’un regarde… Miaou !\n\nDans cette vidéo :\n• quand on enlève, on cherche combien il en reste\n• on retire : c’est une soustraction\n• 9 − 2 = 7\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_soustractif&display=simple\n\n🦎 Épisode 2 de la série Idriss le pêcheur d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "Le chat du port"
+        ],
+        [
+          "00:12",
+          "Le chat file avec deux poissons"
+        ],
+        [
+          "00:38",
+          "Question 1"
+        ],
+        [
+          "01:13",
+          "Question 2"
+        ],
+        [
+          "01:48",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "soustraction",
+        "problème",
+        "combien en reste",
+        "retirer",
+        "chat",
+        "mouette",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:38",
+          "question": "Huit coquillages sur le quai. Une vague en emporte trois. Combien en reste-t-il ?",
+          "choix": [
+            "5",
+            "11",
+            "3"
+          ],
+          "reponse": 0,
+          "explication": "Huit, et j’en enlève trois : sept, six, cinq. 8 − 3 = 5."
+        },
+        {
+          "t": "01:13",
+          "question": "Idriss avait dix hameçons. Il en fait tomber quatre dans l’eau. Combien lui en reste-t-il ?",
+          "choix": [
+            "6",
+            "14",
+            "4"
+          ],
+          "reponse": 0,
+          "explication": "10 − 4 = 6 hameçons."
+        }
+      ],
+      "centres": [
+        "chiens-chats",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-cp-soustractif-short",
+      "pas_avant": "2027-08-10",
+      "notionId": "probleme",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_probleme_soustractif",
+      "type": "short",
+      "renvoie_vers": "idriss-cp-soustractif",
+      "fichier": "cp/maths/idriss/02-cp-soustractif/eleveai-maths-idriss-cp-soustractif-short.mp4",
+      "miniature": "cp/maths/idriss/02-cp-soustractif/eleveai-maths-idriss-cp-soustractif-short-miniature.png",
+      "titre": "Le goûter de la mouette : combien en reste-t-il ? — cp #Shorts",
+      "accroche": "Dans le seau d’Idriss, six crevettes frétillent. Attention, une mouette plonge !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : dix bouées sur le quai, le vent en emporte trois. Combien en reste-t-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_soustractif&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #soustraction #cp",
+      "tags": [
+        "soustraction",
+        "problème",
+        "combien en reste",
+        "retirer",
+        "chat",
+        "mouette",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:09",
+          "question": "Six crevettes dans le seau. La mouette en emporte une. Combien en reste-t-il ?",
+          "choix": [
+            "7",
+            "1",
+            "5"
+          ],
+          "reponse": 2,
+          "explication": "6 − 1 = 5."
+        }
+      ],
+      "centres": [
+        "chiens-chats",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-cp-monnaie",
+      "pas_avant": "2027-08-11",
+      "notionId": "monnaie",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_monnaie_constituer",
+      "type": "longue",
+      "fichier": "cp/maths/idriss/03-cp-monnaie/eleveai-maths-idriss-cp-monnaie-paysage.mp4",
+      "miniature": "cp/maths/idriss/03-cp-monnaie/eleveai-maths-idriss-cp-monnaie-paysage-miniature.png",
+      "titre": "J’achète mon poisson : payer le bon prix — Idriss le pêcheur — épisode 3 · Maths CP",
+      "accroche": "Au marché du port, Idriss vend son poisson. Celui-ci coûte sept euros. Ti Margo a un porte-monnaie plein de pièces : que donner ?\n\nDans cette vidéo :\n• une pièce de 1 €, une pièce de 2 €, un billet de 5 €\n• pour payer 7 € : 5 € + 2 €\n• il y a souvent plusieurs façons de payer\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_constituer&display=simple\n\n🦎 Épisode 3 de la série Idriss le pêcheur d'EleveAI, en CP.",
+      "chapitres": [
+        [
+          "00:00",
+          "J’achète mon poisson"
+        ],
+        [
+          "00:12",
+          "Pièces et billets"
+        ],
+        [
+          "00:29",
+          "Une autre façon de payer"
+        ],
+        [
+          "00:39",
+          "Question 1"
+        ],
+        [
+          "01:15",
+          "Question 2"
+        ],
+        [
+          "01:50",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "euros",
+        "pièces",
+        "billets",
+        "payer",
+        "marché",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:39",
+          "question": "Un crabe coûte 4 €. Quelles pièces donner ?",
+          "choix": [
+            "2 € et 1 €",
+            "5 € et 1 €",
+            "2 € et 2 €"
+          ],
+          "reponse": 2,
+          "explication": "2 + 2 = 4 €. A fait seulement 3 €, B fait 6 € : trop !"
+        },
+        {
+          "t": "01:15",
+          "question": "Un gros poisson coûte 8 €. Que donner ?",
+          "choix": [
+            "5 € et 2 €",
+            "5 €, 2 € et 1 €",
+            "2 €, 1 € et 1 €"
+          ],
+          "reponse": 1,
+          "explication": "5 + 2 + 1 = 8 €."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "idriss-cp-monnaie-short",
+      "pas_avant": "2027-08-11",
+      "notionId": "monnaie",
+      "classe": "cp",
+      "ceinture": "blanche",
+      "serie": "Maths CP",
+      "microId": "cp_monnaie_constituer",
+      "type": "short",
+      "renvoie_vers": "idriss-cp-monnaie",
+      "fichier": "cp/maths/idriss/03-cp-monnaie/eleveai-maths-idriss-cp-monnaie-short.mp4",
+      "miniature": "cp/maths/idriss/03-cp-monnaie/eleveai-maths-idriss-cp-monnaie-short-miniature.png",
+      "titre": "Pas une pièce de trop : quelles pièces donner ? — cp #Shorts",
+      "accroche": "Ce petit poisson coûte trois euros. Ti Margo a une pièce de deux euros et deux pièces de un euro.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : comment payer six euros avec des pièces de deux euros ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_constituer&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #cp",
+      "tags": [
+        "monnaie",
+        "euros",
+        "pièces",
+        "billets",
+        "payer",
+        "marché",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CP",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:09",
+          "question": "Un poisson à 3 €. Quelles pièces donner, sans une pièce de trop ?",
+          "choix": [
+            "1 € et 1 €",
+            "2 € et 1 €",
+            "2 €, 1 € et 1 €"
+          ],
+          "reponse": 1,
+          "explication": "2 + 1 = 3 € pile. Avec C, on donnerait 4 € : une pièce de trop."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "idriss-ce1-partage",
+      "pas_avant": "2027-08-12",
+      "notionId": "division_partage",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_division_partage",
+      "type": "longue",
+      "fichier": "ce1/maths/idriss/04-ce1-partage/eleveai-maths-idriss-ce1-partage-paysage.mp4",
+      "miniature": "ce1/maths/idriss/04-ce1-partage/eleveai-maths-idriss-ce1-partage-paysage-miniature.png",
+      "titre": "Les trois paniers : partager en parts égales — Idriss le pêcheur — épisode 4 · Maths CE1",
+      "accroche": "Ce soir, Idriss a douze poissons. Il veut en donner autant à chacun de ses trois voisins. Combien dans chaque panier ?\n\nDans cette vidéo :\n• pour partager en parts égales, je distribue un par un\n• 12 partagé en 3 parts égales : 4\n• je vérifie : 4 + 4 + 4 = 12, 3 × 4 = 12\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=division_partage&microId=ce1_division_partage&display=simple\n\n🦎 Épisode 4 de la série Idriss le pêcheur d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les trois paniers"
+        ],
+        [
+          "00:12",
+          "Distribuer un par un"
+        ],
+        [
+          "00:29",
+          "Je vérifie : 3 × 4 = 12"
+        ],
+        [
+          "00:39",
+          "Question 1"
+        ],
+        [
+          "01:12",
+          "Question 2"
+        ],
+        [
+          "01:44",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "partage",
+        "division",
+        "parts égales",
+        "distribuer",
+        "chats",
+        "paniers",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:39",
+          "question": "Dix crabes à partager dans deux seaux, autant dans chacun. Combien par seau ?",
+          "choix": [
+            "8",
+            "5",
+            "12"
+          ],
+          "reponse": 1,
+          "explication": "Cinq et cinq : 5 + 5 = 10."
+        },
+        {
+          "t": "01:12",
+          "question": "Quinze coquillages pour trois enfants, autant chacun. Combien chacun ?",
+          "choix": [
+            "5",
+            "3",
+            "12"
+          ],
+          "reponse": 0,
+          "explication": "Cinq, cinq et cinq : 15."
+        }
+      ],
+      "centres": [
+        "chiens-chats",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce1-partage-short",
+      "pas_avant": "2027-08-12",
+      "notionId": "division_partage",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_division_partage",
+      "type": "short",
+      "renvoie_vers": "idriss-ce1-partage",
+      "fichier": "ce1/maths/idriss/04-ce1-partage/eleveai-maths-idriss-ce1-partage-short.mp4",
+      "miniature": "ce1/maths/idriss/04-ce1-partage/eleveai-maths-idriss-ce1-partage-short-miniature.png",
+      "titre": "Les quatre chats : combien chacun ? — ce1 #Shorts",
+      "accroche": "Idriss rapporte huit sardines. Quatre chats attendent, la queue en l’air !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : vingt billes pour quatre enfants, autant chacun. Combien chacun ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=division_partage&microId=ce1_division_partage&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #partage #ce1",
+      "tags": [
+        "partage",
+        "division",
+        "parts égales",
+        "distribuer",
+        "chats",
+        "paniers",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:08",
+          "question": "Huit sardines pour quatre chats, autant chacun. Combien de sardines chacun ?",
+          "choix": [
+            "4",
+            "6",
+            "2"
+          ],
+          "reponse": 2,
+          "explication": "2 + 2 + 2 + 2 = 8 : deux sardines chacun."
+        }
+      ],
+      "centres": [
+        "chiens-chats",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce1-rendre",
+      "pas_avant": "2027-08-13",
+      "notionId": "monnaie",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_monnaie_rendre",
+      "type": "longue",
+      "fichier": "ce1/maths/idriss/05-ce1-rendre/eleveai-maths-idriss-ce1-rendre-paysage.mp4",
+      "miniature": "ce1/maths/idriss/05-ce1-rendre/eleveai-maths-idriss-ce1-rendre-paysage-miniature.png",
+      "titre": "Idriss rend la monnaie : de combien ? — Idriss le pêcheur — épisode 5 · Maths CE1",
+      "accroche": "Ti Margo achète une dorade à Idriss. Elle coûte six euros. Mais Ti Margo n’a qu’un billet de dix euros ! Combien Idriss doit-il rendre ?\n\nDans cette vidéo :\n• payer plus que le prix : on me rend la monnaie\n• je pars du prix et j’avance jusqu’à la somme donnée\n• 6 + 4 = 10, donc 10 − 6 = 4\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_rendre&display=simple\n\n🦎 Épisode 5 de la série Idriss le pêcheur d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Idriss rend la monnaie"
+        ],
+        [
+          "00:10",
+          "Dix, c’est plus que six"
+        ],
+        [
+          "00:34",
+          "Question 1"
+        ],
+        [
+          "01:10",
+          "Question 2"
+        ],
+        [
+          "01:45",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "rendre la monnaie",
+        "euros",
+        "compléter",
+        "marché",
+        "poissons",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:34",
+          "question": "Un crabe à 7 €. Je paie avec 10 €. Combien Idriss me rend-il ?",
+          "choix": [
+            "17 €",
+            "7 €",
+            "3 €"
+          ],
+          "reponse": 2,
+          "explication": "Sept… huit, neuf, dix : 3 €. 10 − 7 = 3."
+        },
+        {
+          "t": "01:10",
+          "question": "Des crevettes à 15 €. Je donne un billet de 20 €. Combien me rend-on ?",
+          "choix": [
+            "5 €",
+            "15 €",
+            "35 €"
+          ],
+          "reponse": 0,
+          "explication": "De 15 à 20, il manque 5 : un billet de 5 €."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce1-rendre-short",
+      "pas_avant": "2027-08-13",
+      "notionId": "monnaie",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_monnaie_rendre",
+      "type": "short",
+      "renvoie_vers": "idriss-ce1-rendre",
+      "fichier": "ce1/maths/idriss/05-ce1-rendre/eleveai-maths-idriss-ce1-rendre-short.mp4",
+      "miniature": "ce1/maths/idriss/05-ce1-rendre/eleveai-maths-idriss-ce1-rendre-short-miniature.png",
+      "titre": "Idriss dans la lune : s’est-il trompé ? — ce1 #Shorts",
+      "accroche": "Un poisson à huit euros, payé avec dix euros. Idriss, la tête dans les vagues, rend trois euros…\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : un poisson à cinq euros, payé avec vingt euros. Combien te rend-on ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_rendre&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #ce1",
+      "tags": [
+        "monnaie",
+        "rendre la monnaie",
+        "euros",
+        "compléter",
+        "marché",
+        "poissons",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:10",
+          "question": "Un poisson à 8 €, payé avec 10 €. Idriss rend 3 €. S’est-il trompé ?",
+          "choix": [
+            "Non, c’est juste",
+            "Oui, 1 € de trop",
+            "Oui, pas assez"
+          ],
+          "reponse": 1,
+          "explication": "De 8 à 10, il manque seulement 2 € : il a rendu 1 € de trop."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "animaux-marins"
+      ]
+    },
+    {
+      "id": "idriss-ce2-kilo",
+      "pas_avant": "2027-08-14",
+      "notionId": "monnaie",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "microId": "ce2_monnaie_probleme",
+      "type": "longue",
+      "fichier": "ce2/maths/idriss/06-ce2-kilo/eleveai-maths-idriss-ce2-kilo-paysage.mp4",
+      "miniature": "ce2/maths/idriss/06-ce2-kilo/eleveai-maths-idriss-ce2-kilo-paysage-miniature.png",
+      "titre": "La balance d’Idriss : le prix au kilo — Idriss le pêcheur — épisode 6 · Maths CE2",
+      "accroche": "Au marché, Idriss a écrit sur son ardoise : thon, neuf euros le kilo. Une dame en demande deux kilos et paie avec vingt euros.\n\nDans cette vidéo :\n• le prix au kilo, je le compte autant de fois qu’il y a de kilos\n• deux étapes : d’abord le prix, puis la monnaie\n• 2 × 9 € = 18 €, puis 20 − 18 = 2 €\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_probleme&display=simple\n\n🦎 Épisode 6 de la série Idriss le pêcheur d'EleveAI, en CE2.",
+      "chapitres": [
+        [
+          "00:00",
+          "La balance d’Idriss"
+        ],
+        [
+          "00:10",
+          "Deux kilos : 2 × 9 €"
+        ],
+        [
+          "00:20",
+          "La monnaie : de 18 à 20"
+        ],
+        [
+          "00:37",
+          "Question 1"
+        ],
+        [
+          "01:13",
+          "Question 2"
+        ],
+        [
+          "01:56",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "monnaie",
+        "prix au kilo",
+        "multiplication",
+        "rendre la monnaie",
+        "balance",
+        "marché",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE2",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:37",
+          "question": "La dorade coûte 6 € le kilo. Un monsieur en prend trois kilos. Combien paie-t-il ?",
+          "choix": [
+            "18 €",
+            "9 €",
+            "63 €"
+          ],
+          "reponse": 0,
+          "explication": "Six, douze, dix-huit : 3 × 6 = 18 €."
+        },
+        {
+          "t": "01:13",
+          "question": "Les crevettes coûtent 12 € le kilo. J’en prends deux kilos et je paie avec 50 €. Combien me rend-on ?",
+          "choix": [
+            "38 €",
+            "24 €",
+            "26 €"
+          ],
+          "reponse": 2,
+          "explication": "Le prix : 12 + 12 = 24 €. La monnaie : 50 − 24 = 26 €. 24 €, c’est le prix, pas la monnaie !"
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "idriss-ce2-kilo-short",
+      "pas_avant": "2027-08-14",
+      "notionId": "monnaie",
+      "classe": "ce2",
+      "ceinture": "blanche",
+      "serie": "Maths CE2",
+      "microId": "ce2_monnaie_probleme",
+      "type": "short",
+      "renvoie_vers": "idriss-ce2-kilo",
+      "fichier": "ce2/maths/idriss/06-ce2-kilo/eleveai-maths-idriss-ce2-kilo-short.mp4",
+      "miniature": "ce2/maths/idriss/06-ce2-kilo/eleveai-maths-idriss-ce2-kilo-short-miniature.png",
+      "titre": "Le compte est pile : combien rendre ? — ce2 #Shorts",
+      "accroche": "Les calamars d’Idriss coûtent cinq euros le kilo. Un pêcheur voisin en prend quatre kilos et tend un billet de vingt euros.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : trois kilos de poisson, à sept euros le kilo. Combien ça coûte ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_probleme&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #monnaie #ce2",
+      "tags": [
+        "monnaie",
+        "prix au kilo",
+        "multiplication",
+        "rendre la monnaie",
+        "balance",
+        "marché",
+        "Idriss",
+        "pêcheur",
+        "Ti Margo",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE2",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:11",
+          "question": "Quatre kilos de calamars à 5 € le kilo, payés avec 20 €. Combien Idriss doit-il rendre ?",
+          "choix": [
+            "1 €",
+            "Rien du tout",
+            "15 €"
+          ],
+          "reponse": 1,
+          "explication": "4 × 5 = 20 € : le compte est pile, Idriss ne rend rien."
+        }
+      ],
+      "centres": [
+        "argent-budget",
+        "cuisine"
+      ]
     }
   ]
 }

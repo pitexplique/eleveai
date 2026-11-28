@@ -19572,5 +19572,113 @@
   "short": false,
   "youtube": null,
   "coach": "/coach/serie?classe=terminale-spe&matiere=maths&notion=continuite_tvi&microId=tvi_defi&display=simple"
+ },
+ "idriss-cp-additif": {
+  "fichier": "cp/maths/idriss/01-cp-additif/eleveai-maths-idriss-cp-additif-paysage.mp4",
+  "poster": "cp/maths/idriss/01-cp-additif/eleveai-maths-idriss-cp-additif-paysage-miniature.png",
+  "vignette": "cp/maths/idriss/01-cp-additif/eleveai-maths-idriss-cp-additif-paysage-miniature.vignette.webp",
+  "titre": "Le retour de la barque : combien en tout ? — Idriss le pêcheur — épisode 1 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_additif&display=simple"
+ },
+ "idriss-cp-additif-short": {
+  "fichier": "cp/maths/idriss/01-cp-additif/eleveai-maths-idriss-cp-additif-short.mp4",
+  "poster": "cp/maths/idriss/01-cp-additif/eleveai-maths-idriss-cp-additif-short-miniature.png",
+  "vignette": "cp/maths/idriss/01-cp-additif/eleveai-maths-idriss-cp-additif-short-miniature.vignette.webp",
+  "titre": "Les mouettes sur le mât : combien maintenant ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_additif&display=simple"
+ },
+ "idriss-cp-soustractif": {
+  "fichier": "cp/maths/idriss/02-cp-soustractif/eleveai-maths-idriss-cp-soustractif-paysage.mp4",
+  "poster": "cp/maths/idriss/02-cp-soustractif/eleveai-maths-idriss-cp-soustractif-paysage-miniature.png",
+  "vignette": "cp/maths/idriss/02-cp-soustractif/eleveai-maths-idriss-cp-soustractif-paysage-miniature.vignette.webp",
+  "titre": "Le chat du port : combien en reste-t-il ? — Idriss le pêcheur — épisode 2 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_soustractif&display=simple"
+ },
+ "idriss-cp-soustractif-short": {
+  "fichier": "cp/maths/idriss/02-cp-soustractif/eleveai-maths-idriss-cp-soustractif-short.mp4",
+  "poster": "cp/maths/idriss/02-cp-soustractif/eleveai-maths-idriss-cp-soustractif-short-miniature.png",
+  "vignette": "cp/maths/idriss/02-cp-soustractif/eleveai-maths-idriss-cp-soustractif-short-miniature.vignette.webp",
+  "titre": "Le goûter de la mouette : combien en reste-t-il ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_soustractif&display=simple"
+ },
+ "idriss-cp-monnaie": {
+  "fichier": "cp/maths/idriss/03-cp-monnaie/eleveai-maths-idriss-cp-monnaie-paysage.mp4",
+  "poster": "cp/maths/idriss/03-cp-monnaie/eleveai-maths-idriss-cp-monnaie-paysage-miniature.png",
+  "vignette": "cp/maths/idriss/03-cp-monnaie/eleveai-maths-idriss-cp-monnaie-paysage-miniature.vignette.webp",
+  "titre": "J’achète mon poisson : payer le bon prix — Idriss le pêcheur — épisode 3 · Maths CP",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_constituer&display=simple"
+ },
+ "idriss-cp-monnaie-short": {
+  "fichier": "cp/maths/idriss/03-cp-monnaie/eleveai-maths-idriss-cp-monnaie-short.mp4",
+  "poster": "cp/maths/idriss/03-cp-monnaie/eleveai-maths-idriss-cp-monnaie-short-miniature.png",
+  "vignette": "cp/maths/idriss/03-cp-monnaie/eleveai-maths-idriss-cp-monnaie-short-miniature.vignette.webp",
+  "titre": "Pas une pièce de trop : quelles pièces donner ? #maths #cp",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=cp&matiere=maths&notion=monnaie&microId=cp_monnaie_constituer&display=simple"
+ },
+ "idriss-ce1-partage": {
+  "fichier": "ce1/maths/idriss/04-ce1-partage/eleveai-maths-idriss-ce1-partage-paysage.mp4",
+  "poster": "ce1/maths/idriss/04-ce1-partage/eleveai-maths-idriss-ce1-partage-paysage-miniature.png",
+  "vignette": "ce1/maths/idriss/04-ce1-partage/eleveai-maths-idriss-ce1-partage-paysage-miniature.vignette.webp",
+  "titre": "Les trois paniers : partager en parts égales — Idriss le pêcheur — épisode 4 · Maths CE1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=division_partage&microId=ce1_division_partage&display=simple"
+ },
+ "idriss-ce1-partage-short": {
+  "fichier": "ce1/maths/idriss/04-ce1-partage/eleveai-maths-idriss-ce1-partage-short.mp4",
+  "poster": "ce1/maths/idriss/04-ce1-partage/eleveai-maths-idriss-ce1-partage-short-miniature.png",
+  "vignette": "ce1/maths/idriss/04-ce1-partage/eleveai-maths-idriss-ce1-partage-short-miniature.vignette.webp",
+  "titre": "Les quatre chats : combien chacun ? #maths #ce1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=division_partage&microId=ce1_division_partage&display=simple"
+ },
+ "idriss-ce1-rendre": {
+  "fichier": "ce1/maths/idriss/05-ce1-rendre/eleveai-maths-idriss-ce1-rendre-paysage.mp4",
+  "poster": "ce1/maths/idriss/05-ce1-rendre/eleveai-maths-idriss-ce1-rendre-paysage-miniature.png",
+  "vignette": "ce1/maths/idriss/05-ce1-rendre/eleveai-maths-idriss-ce1-rendre-paysage-miniature.vignette.webp",
+  "titre": "Idriss rend la monnaie : de combien ? — Idriss le pêcheur — épisode 5 · Maths CE1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_rendre&display=simple"
+ },
+ "idriss-ce1-rendre-short": {
+  "fichier": "ce1/maths/idriss/05-ce1-rendre/eleveai-maths-idriss-ce1-rendre-short.mp4",
+  "poster": "ce1/maths/idriss/05-ce1-rendre/eleveai-maths-idriss-ce1-rendre-short-miniature.png",
+  "vignette": "ce1/maths/idriss/05-ce1-rendre/eleveai-maths-idriss-ce1-rendre-short-miniature.vignette.webp",
+  "titre": "Idriss dans la lune : s’est-il trompé ? #maths #ce1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=monnaie&microId=ce1_monnaie_rendre&display=simple"
+ },
+ "idriss-ce2-kilo": {
+  "fichier": "ce2/maths/idriss/06-ce2-kilo/eleveai-maths-idriss-ce2-kilo-paysage.mp4",
+  "poster": "ce2/maths/idriss/06-ce2-kilo/eleveai-maths-idriss-ce2-kilo-paysage-miniature.png",
+  "vignette": "ce2/maths/idriss/06-ce2-kilo/eleveai-maths-idriss-ce2-kilo-paysage-miniature.vignette.webp",
+  "titre": "La balance d’Idriss : le prix au kilo — Idriss le pêcheur — épisode 6 · Maths CE2",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_probleme&display=simple"
+ },
+ "idriss-ce2-kilo-short": {
+  "fichier": "ce2/maths/idriss/06-ce2-kilo/eleveai-maths-idriss-ce2-kilo-short.mp4",
+  "poster": "ce2/maths/idriss/06-ce2-kilo/eleveai-maths-idriss-ce2-kilo-short-miniature.png",
+  "vignette": "ce2/maths/idriss/06-ce2-kilo/eleveai-maths-idriss-ce2-kilo-short-miniature.vignette.webp",
+  "titre": "Le compte est pile : combien rendre ? #maths #ce2",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce2&matiere=maths&notion=monnaie&microId=ce2_monnaie_probleme&display=simple"
  }
 }

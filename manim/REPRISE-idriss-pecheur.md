@@ -53,6 +53,11 @@ hypothèse : barque bleue, ligne + filet, marché du port, aucun lieu nommé.
   HD 132,8 s, −19,0 dB (étiquettes `etiqueteE` lisibles au lieu des petites pastilles, dessins des questions agrandis) ; 2 miniatures.
 - 28/11 : `droiteE` renvoie toujours X(n) (avant, rien quand z = 0 : la paysage 05 plantait « X is not a function »).
 - Leçon : `etiquette()` (pastille ronde) = 1 ou 2 chiffres seulement ; « 9 € », « 2 kg » → `prixE` / `etiqueteE` / `ecrire`.
-- ⏭ Reste : accord de Frédéric pour brancher (R2, coach, manifeste YouTube) ; refaire ou non la paysage 02 avec le nouvel Idriss.
+- [x] 28/11 ~04 h, sur son « Oui, branche-les » : vignettes webp (24), R2 48 fichiers sous `<classe>/maths/idriss/0N-<ep>/`
+  (cp 01-03, ce1 04-05, ce2 06 ; tailles R2 = locales) ; manifeste : 12 entrées `idriss-<ep>[-short]` à la fin, YouTube daté
+  09/08 → 14/08/2027 (une paire par jour), chapitres calculés depuis les durées des voix (≥ 10 s chacun) ; videos-r2.json +
+  bilans-videos.json (mes 12 clés seulement) ; coach : `brancher-videos-coach.mjs --ecrire --id …` → 12 lignes notion_ressources
+  (6 micros, paysage + short ; aucune vidéo remplacée). ⚠️ Pas poussé : les boutons du coach mènent à /video/idriss-… qui n'existe en ligne qu'après le push.
+- ⏭ Reste : push (avec son accord) ; refaire ou non la paysage 02 avec le nouvel Idriss ; Saint-Gilles dans une description YouTube si Frédéric le veut.
 - Contrôle : `CONTROLE=<dossier> node scripts/ti-margo-short.mjs idriss[-paysage] <ep> controle $(seq 3 4.5 135)` puis planche du dossier.
 - R2, coach, manifeste YouTube : seulement sur son accord. Commit par chemin, pas de push.
