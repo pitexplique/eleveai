@@ -63,7 +63,11 @@ Mettre à jour « État » ci-dessous, puis lancer une session fille qui reprend
 ## État
 - [x] Voix validées, WAV, instants, socle (session mère, 28/11).
 - [x] 28/11 : `films/margo-dessins-ce1.js` écrit (chaussettes, croissants, boîtes, œufs, élèves, voitures, cookies, cartes, fleurs, sandwichs, chaises, gourdes, filets…).
-- [x] 08 groupement : short + paysage écrits, planches -ql regardées et corrigées ; HD lancées sous le verrou (script `hd.sh` du dossier de notes de la session CE1).
-- [ ] 09 reste et 10 défi : confiés à deux filles (margo-ce1-reste, margo-ce1-defi ; brief dans le dossier de notes de la session CE1) jusqu'aux HD + miniatures, SANS branchement.
-- [ ] Branchement des 6 par la session CE1 : `brancher.py [--ecrire]` (dossier de notes de la session CE1) (manifeste + videos-r2 + bilans par clés ; titres « … — Ti Margo — épisode N · Maths CE1 »,
-  notion `division_partage`), puis vignettes, R2 `ce1/maths/ti-margo/`, coach `brancher-videos-coach.mjs --ecrire --id …`, miniatures shorts gabarit A (`dessine()` en direct).
+- [x] 08, 09, 10 : 6 films (short + paysage) contrôlés -ql, HD une à la fois sous le verrou, planches HD regardées (08 par moi, 09 et 10 par deux filles),
+  miniatures shorts gabarit A (`dessine()` en direct, ancienne image en `-avant-grille.png`) ; commit af142a7d1.
+- [x] 28/11 ~10 h 35, branchement (après e5c61a68d du CP) : vignettes webp ; R2 `ce1/maths/ti-margo/<num>-ce1-<ep>/` (36 fichiers, tailles = locales,
+  `_muet.mp4` et `-avant-grille` partis aussi, sans gêne) ; manifeste : 6 entrées `margo-pb-ce1-<ep>[-short]` à la fin, YouTube daté 08/09 → 10/09/2027,
+  titres « … — Ti Margo — épisode N · Maths CE1 » et « … — CE1 #Shorts », notion `division_partage` ; videos-r2 + bilans (index = HEAD + mes 6 clés ;
+  les modifs non commitées des autres restent dans la copie de travail) ; coach : 6 lignes notion_ressources (3 micros ce1_division_groupement/reste/defi).
+  Script : `brancher.py` du dossier de notes de la session CE1 (instants relus dans les films).
+- [ ] Reste : push (avec l'accord de Frédéric ; les boutons du coach mènent à /video/margo-pb-ce1-… qui n'existe en ligne qu'après le push) ; publication YouTube à son heure.

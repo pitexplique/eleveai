@@ -121432,6 +121432,423 @@
         "jeux-defis",
         "sport"
       ]
+    },
+    {
+      "id": "margo-pb-ce1-groupement",
+      "pas_avant": "2027-09-08",
+      "notionId": "division_partage",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_division_groupement",
+      "type": "longue",
+      "fichier": "ce1/maths/ti-margo/08-ce1-groupement/eleveai-maths-margo-pb-ce1-groupement-paysage.mp4",
+      "miniature": "ce1/maths/ti-margo/08-ce1-groupement/eleveai-maths-margo-pb-ce1-groupement-paysage-miniature.png",
+      "titre": "Les croissants du boulanger : combien de paquets ? — Ti Margo — épisode 8 · Maths CE1",
+      "accroche": "Le boulanger sort vingt-quatre croissants du four. Il les range par boîtes de six. Combien de boîtes lui faut-il ?\n\nDans cette vidéo :\n• je connais la taille d'un paquet : je fais des paquets, et je les compte\n• 6, 12, 18, 24 : 4 boîtes\n• je vérifie : 4 × 6 = 24\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=division_partage&microId=ce1_division_groupement&display=simple\n\n🦎 Épisode 8 des problèmes de Ti Margo d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les croissants du boulanger"
+        ],
+        [
+          "00:12",
+          "Des paquets de 6"
+        ],
+        [
+          "00:23",
+          "Je vérifie : 4 × 6 = 24"
+        ],
+        [
+          "00:35",
+          "Question 1"
+        ],
+        [
+          "01:09",
+          "Question 2"
+        ],
+        [
+          "01:41",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "croissants",
+        "chaussettes",
+        "paires",
+        "division",
+        "groupement",
+        "paquets",
+        "Ti Margo",
+        "margouillat",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:35",
+          "question": "Trente élèves font des équipes de cinq. Combien d'équipes ?",
+          "choix": [
+            "25",
+            "6",
+            "35"
+          ],
+          "reponse": 1,
+          "explication": "Cinq, dix, quinze, vingt, vingt-cinq, trente : 6 équipes. 6 × 5 = 30."
+        },
+        {
+          "t": "01:09",
+          "question": "Quarante œufs, rangés par boîtes de dix. Combien de boîtes ?",
+          "choix": [
+            "4",
+            "10",
+            "50"
+          ],
+          "reponse": 0,
+          "explication": "Dix, vingt, trente, quarante : 4 boîtes. 4 × 10 = 40."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "margo-pb-ce1-groupement-short",
+      "pas_avant": "2027-09-08",
+      "notionId": "division_partage",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_division_groupement",
+      "type": "short",
+      "renvoie_vers": "margo-pb-ce1-groupement",
+      "fichier": "ce1/maths/ti-margo/08-ce1-groupement/eleveai-maths-margo-pb-ce1-groupement-short.mp4",
+      "miniature": "ce1/maths/ti-margo/08-ce1-groupement/eleveai-maths-margo-pb-ce1-groupement-short-miniature.png",
+      "titre": "Les chaussettes par paires : combien de paires ? — CE1 #Shorts",
+      "accroche": "Dans le panier à linge, seize chaussettes. Ti Margo les range par paires : deux par deux.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : vingt roues, quatre roues par voiture. Combien de voitures ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=division_partage&microId=ce1_division_groupement&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #division #ce1",
+      "tags": [
+        "croissants",
+        "chaussettes",
+        "paires",
+        "division",
+        "groupement",
+        "paquets",
+        "Ti Margo",
+        "margouillat",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:09",
+          "question": "Seize chaussettes, rangées par paires. Combien de paires ?",
+          "choix": [
+            "14",
+            "8",
+            "18"
+          ],
+          "reponse": 1,
+          "explication": "2, 4, 6 … 16 : huit paires. 8 × 2 = 16."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "jeux-defis"
+      ]
+    },
+    {
+      "id": "margo-pb-ce1-reste",
+      "pas_avant": "2027-09-09",
+      "notionId": "division_partage",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_division_reste",
+      "type": "longue",
+      "fichier": "ce1/maths/ti-margo/09-ce1-reste/eleveai-maths-margo-pb-ce1-reste-paysage.mp4",
+      "miniature": "ce1/maths/ti-margo/09-ce1-reste/eleveai-maths-margo-pb-ce1-reste-paysage-miniature.png",
+      "titre": "Les bouquets de la classe : il en reste ! — Ti Margo — épisode 9 · Maths CE1",
+      "accroche": "Pour la fête de l'école, on fait des bouquets. Dix-sept fleurs, cinq par bouquet. Combien de bouquets ?\n\nDans cette vidéo :\n• 5, 10, 15 : 3 bouquets, et il reste 2 fleurs\n• le reste est toujours plus petit qu'un paquet\n• je vérifie : 3 × 5 + 2 = 17\n• je relis la question : des paquets pleins, ou tout le monde ?\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=division_partage&microId=ce1_division_reste&display=simple\n\n🦎 Épisode 9 des problèmes de Ti Margo d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Les bouquets de la classe"
+        ],
+        [
+          "00:11",
+          "Des bouquets de 5"
+        ],
+        [
+          "00:18",
+          "Il reste 2 fleurs"
+        ],
+        [
+          "00:26",
+          "Je vérifie : 3 × 5 + 2 = 17"
+        ],
+        [
+          "00:36",
+          "Question 1"
+        ],
+        [
+          "01:14",
+          "Question 2"
+        ],
+        [
+          "01:51",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "reste",
+        "bouquets",
+        "cookies",
+        "division",
+        "groupement",
+        "paquets",
+        "Ti Margo",
+        "margouillat",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:36",
+          "question": "Le fermier a vingt-trois œufs. Il remplit des boîtes de six. Combien de boîtes pleines ?",
+          "choix": [
+            "4",
+            "3",
+            "29"
+          ],
+          "reponse": 1,
+          "explication": "Six, douze, dix-huit : 3 boîtes pleines. Il reste 5 œufs."
+        },
+        {
+          "t": "01:14",
+          "question": "Vingt-deux enfants partent en sortie, cinq par voiture. Combien de voitures pour que tous partent ?",
+          "choix": [
+            "5",
+            "4",
+            "27"
+          ],
+          "reponse": 0,
+          "explication": "4 voitures pour 20 enfants, il en reste 2 : une voiture de plus, 5 voitures."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "margo-pb-ce1-reste-short",
+      "pas_avant": "2027-09-09",
+      "notionId": "division_partage",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_division_reste",
+      "type": "short",
+      "renvoie_vers": "margo-pb-ce1-reste",
+      "fichier": "ce1/maths/ti-margo/09-ce1-reste/eleveai-maths-margo-pb-ce1-reste-short.mp4",
+      "miniature": "ce1/maths/ti-margo/09-ce1-reste/eleveai-maths-margo-pb-ce1-reste-short-miniature.png",
+      "titre": "Les cookies des quatre amis : combien en reste-t-il ? — CE1 #Shorts",
+      "accroche": "Quatorze cookies pour quatre amis, autant chacun.\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : dix-neuf cartes pour trois joueurs, autant chacun. Combien en reste-t-il ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=division_partage&microId=ce1_division_reste&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #division #ce1",
+      "tags": [
+        "reste",
+        "bouquets",
+        "cookies",
+        "division",
+        "groupement",
+        "paquets",
+        "Ti Margo",
+        "margouillat",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:06",
+          "question": "Quatorze cookies pour quatre amis, autant chacun. Combien de cookies restent sur la plaque ?",
+          "choix": [
+            "4",
+            "3",
+            "2"
+          ],
+          "reponse": 2,
+          "explication": "Trois cookies chacun : douze. Il en reste deux. 4 × 3 + 2 = 14."
+        }
+      ],
+      "centres": [
+        "cuisine",
+        "nature-ecologie"
+      ]
+    },
+    {
+      "id": "margo-pb-ce1-defi",
+      "pas_avant": "2027-09-10",
+      "notionId": "division_partage",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_division_defi",
+      "type": "longue",
+      "fichier": "ce1/maths/ti-margo/10-ce1-defi/eleveai-maths-margo-pb-ce1-defi-paysage.mp4",
+      "miniature": "ce1/maths/ti-margo/10-ce1-defi/eleveai-maths-margo-pb-ce1-defi-paysage-miniature.png",
+      "titre": "Les défis du tournoi : partage ou paquets ? — Ti Margo — épisode 10 · Maths CE1",
+      "accroche": "Au tournoi de foot, voici les défis. Trente-deux joueurs font des équipes de huit. Combien d'équipes ?\n\nDans cette vidéo :\n• 8, 16, 24, 32 : 4 équipes\n• un défi en deux étapes : 6 + 6 + 6 = 18, puis 18 partagé en deux : 9\n• je lis bien : le nombre de paquets, ou combien dans chaque paquet ?\n\n⏸ 2 questions-pauses : mets pause, et choisis !\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche.\n\nPour s'entraîner :\n• la série du coach sur cette compétence : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=division_partage&microId=ce1_division_defi&display=simple\n\n🦎 Épisode 10 des problèmes de Ti Margo d'EleveAI, en CE1.",
+      "chapitres": [
+        [
+          "00:00",
+          "Défi 1 : les équipes"
+        ],
+        [
+          "00:19",
+          "Défi 2 : les gourdes"
+        ],
+        [
+          "00:28",
+          "Deux étapes"
+        ],
+        [
+          "00:39",
+          "Question 1"
+        ],
+        [
+          "01:15",
+          "Question 2"
+        ],
+        [
+          "01:49",
+          "Ce que tu as appris"
+        ]
+      ],
+      "tags": [
+        "défi",
+        "partage",
+        "équipes",
+        "sandwichs",
+        "division",
+        "groupement",
+        "paquets",
+        "Ti Margo",
+        "margouillat",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI"
+      ],
+      "questions": [
+        {
+          "t": "00:39",
+          "question": "Vingt-cinq ballons, rangés dans des filets de six. Combien de filets pour ranger tous les ballons ?",
+          "choix": [
+            "4",
+            "5",
+            "6"
+          ],
+          "reponse": 1,
+          "explication": "4 filets pour 24 ballons, il en reste un : un filet de plus, 5 filets."
+        },
+        {
+          "t": "01:15",
+          "question": "Deux équipes de dix enfants. On fait des groupes de cinq. Combien de groupes ?",
+          "choix": [
+            "2",
+            "4",
+            "15"
+          ],
+          "reponse": 1,
+          "explication": "10 + 10 = 20 enfants ; 5, 10, 15, 20 : 4 groupes."
+        }
+      ],
+      "centres": [
+        "football",
+        "cuisine"
+      ]
+    },
+    {
+      "id": "margo-pb-ce1-defi-short",
+      "pas_avant": "2027-09-10",
+      "notionId": "division_partage",
+      "classe": "ce1",
+      "ceinture": "blanche",
+      "serie": "Maths CE1",
+      "microId": "ce1_division_defi",
+      "type": "short",
+      "renvoie_vers": "margo-pb-ce1-defi",
+      "fichier": "ce1/maths/ti-margo/10-ce1-defi/eleveai-maths-margo-pb-ce1-defi-short.mp4",
+      "miniature": "ce1/maths/ti-margo/10-ce1-defi/eleveai-maths-margo-pb-ce1-defi-short-miniature.png",
+      "titre": "Les sandwichs du goûter : combien chacun ? — CE1 #Shorts",
+      "accroche": "Trois paquets de quatre sandwichs. Six enfants. Autant chacun !\n\nDessin animé, voix de synthèse.\n🥋 Ceinture blanche : la version 100 % visuelle.\n👉 À toi : trente-six chaises, rangées par neuf. Combien de rangées ? Réponds en commentaire !\n\n▶️ L'épisode complet : {{LONGUE}}\n🎯 Le coach : https://www.eleveai.fr/coach/serie?classe=ce1&matiere=maths&notion=division_partage&microId=ce1_division_defi&display=simple\n\nFait à La Réunion 🌋 — Frédéric Lacoste\n\n#Shorts #maths #division #ce1",
+      "tags": [
+        "défi",
+        "partage",
+        "équipes",
+        "sandwichs",
+        "division",
+        "groupement",
+        "paquets",
+        "Ti Margo",
+        "margouillat",
+        "dessin animé",
+        "ceinture blanche",
+        "maths",
+        "CE1",
+        "école",
+        "cycle 2",
+        "CRPE",
+        "EleveAI",
+        "Shorts"
+      ],
+      "questions": [
+        {
+          "t": "00:09",
+          "question": "Trois paquets de quatre sandwichs, six enfants, autant chacun. Combien de sandwichs pour chacun ?",
+          "choix": [
+            "2",
+            "12",
+            "4"
+          ],
+          "reponse": 0,
+          "explication": "4 + 4 + 4 = 12 sandwichs ; 12 pour 6 enfants : 2 chacun."
+        }
+      ],
+      "centres": [
+        "football",
+        "cuisine"
+      ]
     }
   ]
 }

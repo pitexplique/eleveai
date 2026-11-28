@@ -20112,5 +20112,59 @@
   "short": true,
   "youtube": null,
   "coach": "/coach/serie?classe=cp&matiere=maths&notion=probleme&microId=cp_probleme_defi&display=simple"
+ },
+ "margo-pb-ce1-groupement": {
+  "fichier": "ce1/maths/ti-margo/08-ce1-groupement/eleveai-maths-margo-pb-ce1-groupement-paysage.mp4",
+  "poster": "ce1/maths/ti-margo/08-ce1-groupement/eleveai-maths-margo-pb-ce1-groupement-paysage-miniature.png",
+  "vignette": "ce1/maths/ti-margo/08-ce1-groupement/eleveai-maths-margo-pb-ce1-groupement-paysage-miniature.vignette.webp",
+  "titre": "Les croissants du boulanger : combien de paquets ? — Ti Margo — épisode 8 · Maths CE1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=division_partage&microId=ce1_division_groupement&display=simple"
+ },
+ "margo-pb-ce1-groupement-short": {
+  "fichier": "ce1/maths/ti-margo/08-ce1-groupement/eleveai-maths-margo-pb-ce1-groupement-short.mp4",
+  "poster": "ce1/maths/ti-margo/08-ce1-groupement/eleveai-maths-margo-pb-ce1-groupement-short-miniature.png",
+  "vignette": "ce1/maths/ti-margo/08-ce1-groupement/eleveai-maths-margo-pb-ce1-groupement-short-miniature.vignette.webp",
+  "titre": "Les chaussettes par paires : combien de paires ? #maths #ce1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=division_partage&microId=ce1_division_groupement&display=simple"
+ },
+ "margo-pb-ce1-reste": {
+  "fichier": "ce1/maths/ti-margo/09-ce1-reste/eleveai-maths-margo-pb-ce1-reste-paysage.mp4",
+  "poster": "ce1/maths/ti-margo/09-ce1-reste/eleveai-maths-margo-pb-ce1-reste-paysage-miniature.png",
+  "vignette": "ce1/maths/ti-margo/09-ce1-reste/eleveai-maths-margo-pb-ce1-reste-paysage-miniature.vignette.webp",
+  "titre": "Les bouquets de la classe : il en reste ! — Ti Margo — épisode 9 · Maths CE1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=division_partage&microId=ce1_division_reste&display=simple"
+ },
+ "margo-pb-ce1-reste-short": {
+  "fichier": "ce1/maths/ti-margo/09-ce1-reste/eleveai-maths-margo-pb-ce1-reste-short.mp4",
+  "poster": "ce1/maths/ti-margo/09-ce1-reste/eleveai-maths-margo-pb-ce1-reste-short-miniature.png",
+  "vignette": "ce1/maths/ti-margo/09-ce1-reste/eleveai-maths-margo-pb-ce1-reste-short-miniature.vignette.webp",
+  "titre": "Les cookies des quatre amis : combien en reste-t-il ? #maths #ce1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=division_partage&microId=ce1_division_reste&display=simple"
+ },
+ "margo-pb-ce1-defi": {
+  "fichier": "ce1/maths/ti-margo/10-ce1-defi/eleveai-maths-margo-pb-ce1-defi-paysage.mp4",
+  "poster": "ce1/maths/ti-margo/10-ce1-defi/eleveai-maths-margo-pb-ce1-defi-paysage-miniature.png",
+  "vignette": "ce1/maths/ti-margo/10-ce1-defi/eleveai-maths-margo-pb-ce1-defi-paysage-miniature.vignette.webp",
+  "titre": "Les défis du tournoi : partage ou paquets ? — Ti Margo — épisode 10 · Maths CE1",
+  "short": false,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=division_partage&microId=ce1_division_defi&display=simple"
+ },
+ "margo-pb-ce1-defi-short": {
+  "fichier": "ce1/maths/ti-margo/10-ce1-defi/eleveai-maths-margo-pb-ce1-defi-short.mp4",
+  "poster": "ce1/maths/ti-margo/10-ce1-defi/eleveai-maths-margo-pb-ce1-defi-short-miniature.png",
+  "vignette": "ce1/maths/ti-margo/10-ce1-defi/eleveai-maths-margo-pb-ce1-defi-short-miniature.vignette.webp",
+  "titre": "Les sandwichs du goûter : combien chacun ? #maths #ce1",
+  "short": true,
+  "youtube": null,
+  "coach": "/coach/serie?classe=ce1&matiere=maths&notion=division_partage&microId=ce1_division_defi&display=simple"
  }
 }
