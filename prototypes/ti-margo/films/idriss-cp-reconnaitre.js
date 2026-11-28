@@ -34,10 +34,10 @@ FILMS['cp-reconnaitre']=function(outils){
 
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=com){ /* 50 € : une pièce ou un billet ? */
-      ecrire(c,'50 €',528,300,230*zoom(T,tCinquante,.5),CRAIE.jaune);
-      if(T>=tPieceC) ecrire(c,'pièce',330,560,96*zoom(T,tPieceC,.4),CRAIE.blanc);
+      ecrire(c,'50 €',528,300,230*zoom(T,Math.min(com+.1,tCinquante),.5),CRAIE.jaune);
+      if(T>=tPieceC) ecrire(c,'pièce',290,560,96*zoom(T,tPieceC,.4),CRAIE.blanc);
       if(T>=tPieceC+.35) ecrire(c,'ou',528,560,70,CRAIE.gris);
-      if(T>=tBilletC) ecrire(c,'billet ?',760,560,96*zoom(T,tBilletC,.4),CRAIE.blanc);
+      if(T>=tBilletC) ecrire(c,'billet ?',790,560,96*zoom(T,tBilletC,.4),CRAIE.blanc);
       tab.maj(); return; }
 
     etal(c);
