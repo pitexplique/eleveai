@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Le soir, Idriss compte sa caisse. Un billet, des pièces en euros, des pièces en centimes. Combien a-t-il ?",
+  "01-euros": "Je compte d'abord les euros : cinq, plus deux, sept euros.",
+  "02-centimes": "Puis les centimes : cinquante, plus vingt, soixante-dix centimes.",
+  "03-ensemble": "En tout : sept euros et soixante-dix centimes. Les euros avec les euros, les centimes avec les centimes !",
+  "04-question": "Question ! Dans le seau : un billet de dix euros, une pièce de un euro et une pièce de cinquante centimes. Combien en tout ? A : soixante et un euros. B : onze euros et cinquante centimes. C : douze euros. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B ! Dix plus un, onze euros. Et cinquante centimes. A, on a mélangé les euros et les centimes !",
+  "05-question": "Question ! Trois pièces de vingt centimes et deux pièces de dix centimes. Combien en tout ? A : cinq centimes. B : quatre-vingts centimes. C : cinq euros. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B ! Vingt, quarante, soixante… soixante-dix, quatre-vingts. Quatre-vingts centimes. A, c'est le nombre de pièces !",
+  "06-appris": "Pour trouver combien vaut un tas, je compte les euros, puis les centimes. Je ne mélange pas les deux.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

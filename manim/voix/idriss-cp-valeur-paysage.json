@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Une dame achète une dorade. Elle pose son argent sur l'étal. Combien a-t-elle donné ?",
+  "01-compter": "Je commence par le billet : cinq. Puis la pièce de deux : six, sept. Puis la pièce de un : huit. Elle a donné huit euros !",
+  "02-gros": "Je commence toujours par le plus gros, puis j'ajoute les petits.",
+  "03-dizaines": "Deux billets de dix : dix, vingt. Plus deux pièces de un : vingt et un, vingt-deux. Vingt-deux euros !",
+  "04-question": "Question ! Un garçon pose trois pièces de deux euros. Combien a-t-il donné ? A : trois euros. B : cinq euros. C : six euros. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C ! Deux, quatre, six. Six euros. A, c'est le nombre de pièces, pas l'argent !",
+  "05-question": "Question ! Un pêcheur pose un billet de vingt euros, un billet de cinq euros et une pièce de deux euros. Combien en tout ? A : trois euros. B : vingt-sept euros. C : vingt-cinq euros. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B ! Vingt… vingt-cinq… vingt-six, vingt-sept. Vingt-sept euros. C, on a oublié la pièce !",
+  "06-appris": "Pour savoir combien vaut un tas d'argent, je commence par le plus gros billet, puis j'ajoute le reste.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

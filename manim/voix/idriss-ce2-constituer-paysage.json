@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Une dame achète un beau thon, à treize virgule soixante-quinze euros. Elle veut payer pile.",
+  "01-billets": "D'abord les euros : un billet de dix, une pièce de deux, une pièce de un. Treize euros.",
+  "02-centimes": "Puis les centimes : cinquante, plus vingt, plus cinq. Soixante-quinze centimes. Treize virgule soixante-quinze euros, pile !",
+  "03-gros": "Je commence toujours par le plus gros billet, ou la plus grosse pièce, sans dépasser.",
+  "04-question": "Question ! Combien de pièces de vingt centimes pour faire deux euros ? A : vingt. B : deux. C : dix. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C ! Deux euros, c'est deux cents centimes. Vingt, quarante… jusqu'à deux cents : dix pièces.",
+  "05-question": "Question ! Pour payer huit virgule quarante euros, quel tas faut-il donner ? A, B ou C ? Compte bien chaque tas. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A ! Cinq, sept, huit euros. Vingt, quarante centimes. Huit virgule quarante euros ! B ne fait que sept virgule quarante. C, huit virgule vingt-deux.",
+  "06-appris": "Pour faire une somme, je fais les euros avec les billets et les grosses pièces, puis les centimes. Toujours le plus gros d'abord.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

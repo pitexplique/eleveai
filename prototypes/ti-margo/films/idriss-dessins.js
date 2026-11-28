@@ -252,7 +252,7 @@ function vagueE(c,x,yBas,w,u=1,T=0){ if(u<=0) return; const h=w*.62*u;
 /* Une pièce ou un billet en euros : v = 1, 2 (pièces) ou 5, 10, 20, 50 (billets) ; (x, y) = le centre ; t = la taille
    (le rayon d'une pièce de 1 €, la pièce de 2 € est un peu plus grande ; un billet fait 4,6 t de large) */
 const BILLET_E={5:['#ced4da','#495057'],10:['#ffa8a8','#a61e1e'],20:['#a5d8ff','#1864ab'],50:['#ffc078','#a34700']};
-function euroE(c,v,x,y,t=40,{z=1,lueur=0,a=0,terne=0}={}){ if(z<=0) return; c.save(); c.translate(x,y); c.rotate(a); c.scale(Math.min(1.15,z),Math.min(1.15,z));
+function euroE(c,v,x,y,t=40,{z=1,lueur=0,a=0,terne=0,grand=0}={}){ if(z<=0) return; c.save(); c.translate(x,y); c.rotate(a); c.scale(Math.min(1.15,z),Math.min(1.15,z));
   if(terne) c.globalAlpha=1-.55*terne;
   if(v<=2){ const r=v===2?t*1.12:t;
     if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.45*lueur})`; c.beginPath(); c.arc(0,0,r*1.5,0,7); c.fill(); }
@@ -260,7 +260,7 @@ function euroE(c,v,x,y,t=40,{z=1,lueur=0,a=0,terne=0}={}){ if(z<=0) return; c.sa
     c.fillStyle=ext; c.strokeStyle=v===2?'#868e96':'#e67700'; c.lineWidth=4; c.beginPath(); c.arc(0,0,r,0,7); c.fill(); c.stroke();
     c.fillStyle=inter; c.beginPath(); c.arc(0,0,r*.7,0,7); c.fill(); c.strokeStyle=v===2?'#e67700':'#868e96'; c.lineWidth=2; c.stroke();
     ecrire(c,String(v),0,-r*.06,r*.82,'#343a40'); ecrire(c,'€',0,r*.5,r*.34,'#343a40'); }
-  else { const w=t*4.6, h=w*.52, [fond,encre]=BILLET_E[v]||BILLET_E[5];
+  else { const w=t*4.6*(grand?({5:1,10:1.06,20:1.11,50:1.17}[v]||1):1), h=w*.52, [fond,encre]=BILLET_E[v]||BILLET_E[5];
     if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.45*lueur})`; c.beginPath(); c.roundRect(-w*.62,-h*.72,w*1.24,h*1.44,18); c.fill(); }
     c.fillStyle=fond; c.strokeStyle=encre; c.lineWidth=4; c.beginPath(); c.roundRect(-w/2,-h/2,w,h,10); c.fill(); c.stroke();
     c.strokeStyle=encre; c.globalAlpha*=.4; c.lineWidth=3; c.beginPath(); c.arc(w*.3,0,h*.28,0,7); c.stroke();
@@ -373,3 +373,15 @@ function dameE(c,x,yBas,s=1,{tend=0,T=0,robe='#e64980'}={}){ c.save(); c.transla
   c.fillStyle=robe; c.strokeStyle='rgba(0,0,0,.35)'; c.lineWidth=3; c.beginPath(); c.moveTo(-30,-215); c.lineTo(30,-215); c.lineTo(62,-56); c.lineTo(-62,-56); c.closePath(); c.fill(); c.stroke();
   c.fillStyle='rgba(255,255,255,.35)'; for(const [u,v] of [[-20,-170],[14,-140],[-30,-100],[30,-90],[0,-110]]){ c.beginPath(); c.arc(u,v,7,0,7); c.fill(); }
   c.restore(); mamieE(c,x,yBas-s*252,s*1.25); }
+
+/* 28/11 série monnaie : `grand:1` dans euroE = billets à leur vraie taille relative (5 € < 10 € < 20 € < 50 €, comme les vrais).
+   centimeE : une pièce en centimes. v = 1, 2, 5 (cuivre) ou 10, 20, 50 (dorée) ; (x, y) = le centre ; t = le rayon de la pièce de 1 €
+   (les centimes sont plus petits, la 50 c presque aussi grande que la 1 €). Écrit « 50 c ». */
+function centimeE(c,v,x,y,t=40,{z=1,lueur=0,a=0,terne=0}={}){ if(z<=0) return; c.save(); c.translate(x,y); c.rotate(a); c.scale(Math.min(1.15,z),Math.min(1.15,z));
+  if(terne) c.globalAlpha=1-.55*terne;
+  const r=t*({1:.66,2:.74,5:.82,10:.8,20:.88,50:.97}[v]||.8), cuivre=v<=5, [fond,bord]=cuivre?['#d9824a','#9c4f1f']:['#f2c94c','#b7861a'];
+  if(lueur>0){ c.fillStyle=`rgba(255,212,59,${.45*lueur})`; c.beginPath(); c.arc(0,0,r*1.55,0,7); c.fill(); }
+  c.fillStyle=fond; c.strokeStyle=bord; c.lineWidth=4; c.beginPath(); c.arc(0,0,r,0,7); c.fill(); c.stroke();
+  c.strokeStyle=bord; c.globalAlpha*=.45; c.lineWidth=2; c.beginPath(); c.arc(0,0,r*.8,0,7); c.stroke(); c.globalAlpha/=.45;
+  ecrire(c,String(v),0,-r*.08,r*(v>=10?.78:.9),'#343a40'); ecrire(c,'c',0,r*.52,r*.38,'#343a40');
+  c.restore(); }

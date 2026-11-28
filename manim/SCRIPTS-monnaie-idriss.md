@@ -19,7 +19,7 @@ Règles suivies :
 - Les situations suivent le coach (banques `lib/tutor-v4/questionBank/{cp,ce1,ce2}/maths/monnaie.bank.ts`) : ce que l'élève voit
   dans la vidéo, il le retrouve ensuite dans les exercices.
 
-État : ✅ CP validé par Frédéric le 28/11 (« OK CP, envoie le CE1 ») ; ✅ CE1 validé le 28/11 (« OK CE1 ») ; ⏳ CE2 envoyé, à valider. Rien n'est enregistré.
+État : ✅ CP validé par Frédéric le 28/11 (« OK CP, envoie le CE1 ») ; ✅ CE1 validé le 28/11 (« OK CE1 ») ; ✅ CE2 validé le 28/11 (« OK CE2, lance »). Production lancée. Rien n'est enregistré.
 
 | Micro | Paysage | Short | Bonnes réponses (paysage Q1, Q2 · short) |
 |---|---|---|---|

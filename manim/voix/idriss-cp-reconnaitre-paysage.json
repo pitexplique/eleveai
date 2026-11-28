@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Le marché est fini. Idriss vide sa caisse sur l'étal. Que de pièces et de billets !",
+  "01-pieces": "Les pièces sont rondes, en métal. Voici une pièce de un euro, et une pièce de deux euros.",
+  "02-billets": "Les billets sont des rectangles de papier. Cinq euros, dix euros, vingt euros, cinquante euros. Plus il vaut, plus il est grand !",
+  "03-lire": "Pour savoir ce que vaut une pièce ou un billet, je lis le nombre écrit dessus.",
+  "04-question": "Question ! Idriss me montre ceci. Qu'est-ce que c'est ? A : un billet de vingt euros. B : une pièce de vingt euros. C : un billet de deux euros. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A ! C'est un rectangle de papier : un billet. Et il est écrit vingt dessus. Un billet de vingt euros !",
+  "05-question": "Question ! Idriss cherche la pièce de deux euros. Laquelle est-ce ? A, B ou C ? Mets pause, et choisis !",
+  "05b-reponse": "Réponse C ! Elle est ronde : c'est une pièce. Et il est écrit deux dessus. A, c'est un billet de cinq euros. B, une pièce de un euro.",
+  "06-appris": "Les pièces sont rondes : un euro, deux euros. Les billets sont en papier : cinq, dix, vingt, cinquante euros. Je lis le nombre écrit dessus.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

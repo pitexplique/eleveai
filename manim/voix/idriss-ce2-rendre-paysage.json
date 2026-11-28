@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Un monsieur achète un poisson à sept virgule soixante euros. Il paie avec un billet de dix euros. Combien Idriss lui rend-il ?",
+  "01-euro": "Idriss avance d'abord jusqu'à l'euro suivant : de sept virgule soixante à huit, quarante centimes.",
+  "02-billet": "Puis de huit à dix : deux euros. Il rend deux euros et quarante centimes. Deux virgule quarante euros.",
+  "03-verif": "Je vérifie : dix moins sept virgule soixante, deux virgule quarante. Le compte est bon !",
+  "04-question": "Question ! Une dorade à quatre virgule vingt euros, payée avec cinq euros. Combien rend-on ? A : un virgule vingt euro. B : neuf virgule vingt euros. C : zéro virgule quatre-vingts euro. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C ! De quatre virgule vingt à cinq : quatre-vingts centimes. Zéro virgule quatre-vingts euro.",
+  "05-question": "Question ! La dame achète pour douze virgule trente-cinq euros. Elle paie avec un billet de vingt euros. Combien lui rend-on ? A : huit virgule trente-cinq euros. B : sept virgule soixante-quinze euros. C : sept virgule soixante-cinq euros. Mets pause, et choisis !",
+  "05b-reponse": "Réponse C ! De douze virgule trente-cinq à treize : soixante-cinq centimes. De treize à vingt : sept euros. Sept virgule soixante-cinq euros !",
+  "06-appris": "Pour rendre la monnaie, je pars du prix. J'avance jusqu'à l'euro suivant, puis jusqu'au billet.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

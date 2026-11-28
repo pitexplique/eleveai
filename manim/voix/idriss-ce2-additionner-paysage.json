@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Une dame remplit son panier chez Idriss : une dorade à six virgule quarante euros, et des crevettes à trois virgule trente euros. Combien en tout ?",
+  "01-separes": "Les euros avec les euros : six plus trois, neuf euros. Les centimes avec les centimes : quarante plus trente, soixante-dix centimes.",
+  "02-total": "En tout : neuf virgule soixante-dix euros.",
+  "03-retenue": "Attention ! Si les centimes dépassent cent, je fais un euro de plus. Soixante plus cinquante, cent dix centimes : un euro et dix centimes.",
+  "04-question": "Question ! Un calamar à deux virgule cinquante euros, et un poisson à quatre virgule vingt euros. Combien en tout ? A : six virgule zéro sept euros. B : soixante-sept euros. C : six virgule soixante-dix euros. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C ! Deux plus quatre, six euros. Cinquante plus vingt, soixante-dix centimes. Six virgule soixante-dix euros.",
+  "05-question": "Question ! Des sardines à un virgule quatre-vingts euro, et un citron à zéro virgule cinquante euro. Combien en tout ? A : un virgule cent trente euro. B : deux virgule trente euros. C : un virgule trente euro. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B ! Les centimes : quatre-vingts plus cinquante, cent trente. C'est un euro et trente centimes. Les euros : un, plus cet euro, deux. Deux virgule trente euros ! A : trois chiffres après la virgule, c'est interdit.",
+  "06-appris": "Pour additionner des prix : les euros avec les euros, les centimes avec les centimes. Et cent centimes font un euro de plus.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

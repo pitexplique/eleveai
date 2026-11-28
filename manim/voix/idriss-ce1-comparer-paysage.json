@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Deux enfants vident leur tirelire au marché. Ils veulent offrir un poisson à leur maman. Qui a le plus d'argent ?",
+  "01-fille": "Elle a quatre pièces de cinquante centimes. Cinquante, cent, cent cinquante, deux cents. Deux cents centimes, c'est deux euros.",
+  "02-garcon": "Lui a une pièce de deux euros et une pièce de dix centimes. Deux euros et dix centimes.",
+  "03-compare": "Deux euros et dix centimes, c'est plus que deux euros. C'est lui qui a le plus, de dix centimes ! Je calcule chaque tas, puis je compare.",
+  "04-question": "Question ! Dans le porte-monnaie rouge : un billet de cinq euros et une pièce de vingt centimes. Dans le bleu : cinq pièces de un euro et une pièce de cinquante centimes. Lequel a le plus ? A : le rouge. B : les deux pareil. C : le bleu. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C ! Le rouge : cinq euros et vingt centimes. Le bleu : cinq euros et cinquante centimes. Les euros sont pareils, alors je compare les centimes : le bleu gagne !",
+  "05-question": "Question ! Idriss a deux pièces de un euro. La dame a une pièce de un euro et deux pièces de cinquante centimes. Qui a le plus ? A : Idriss. B : les deux pareil. C : la dame. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B ! Deux pièces de cinquante centimes, c'est un euro. La dame a deux euros, comme Idriss. C'est pareil !",
+  "06-appris": "Pour comparer, je calcule chaque tas. D'abord les euros. S'ils sont pareils, je regarde les centimes.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Sur l'ardoise d'Idriss : sardines, trois euros et vingt centimes. Je veux payer pile, sans qu'il ait à me rendre.",
+  "01-euros": "Je fais d'abord les euros : une pièce de deux euros, et une pièce de un euro. Trois euros.",
+  "02-centimes": "Puis les centimes : une pièce de vingt centimes. Trois euros et vingt centimes, pile !",
+  "03-autre": "Je peux aussi donner trois pièces de un euro, et deux pièces de dix centimes. Il y a plusieurs façons de payer.",
+  "04-question": "Question ! Un crabe coûte deux euros et cinquante centimes. Que donner ? A : un euro, un euro et vingt centimes. B : deux euros et cinq centimes. C : deux euros et cinquante centimes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C ! Deux euros, plus cinquante centimes. A ne fait que deux euros et vingt centimes. B, deux euros et cinq centimes.",
+  "05-question": "Question ! Pour payer quatre euros, j'ai déjà posé trois euros et cinquante centimes. Quelle pièce ajouter ? A : un euro. B : cinquante centimes. C : cinq centimes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B ! Cinquante centimes plus cinquante centimes, un euro. Trois euros plus un euro : quatre euros pile.",
+  "06-appris": "Pour faire une somme, je fais d'abord les euros, avec les billets et les grosses pièces. Puis les centimes, avec les petites pièces.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

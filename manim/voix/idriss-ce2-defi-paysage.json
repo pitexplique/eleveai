@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! C'est le grand défi de la monnaie. Idriss a cinq euros. Un flotteur pour sa ligne coûte un virgule cinquante euro. Combien peut-il en acheter, au plus ?",
+  "01-ajoute": "J'ajoute le prix sans dépasser : un virgule cinquante, trois, quatre virgule cinquante. Encore un ? Six euros : c'est trop !",
+  "02-reste": "Idriss achète trois flotteurs. Il lui reste cinquante centimes.",
+  "03-ecritures": "Deuxième défi : un même prix peut s'écrire de deux façons. Six virgule zéro cinq euros, c'est six cent cinq centimes !",
+  "04-question": "Question ! Le premier porte-monnaie contient trois virgule quarante euros. Le second, trois cent quatre centimes. Lequel a le plus ? A : le premier. B : le second. C : les deux pareil. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A ! Trois cent quatre centimes, c'est trois virgule zéro quatre euros. Trois virgule quarante, c'est plus. Le premier gagne !",
+  "05-question": "Question ! Une dorade et un calamar coûtent neuf euros en tout. La dorade coûte cinq virgule cinquante euros. Combien coûte le calamar ? A : quatre virgule cinquante euros. B : trois virgule cinquante euros. C : quatorze virgule cinquante euros. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B ! De cinq virgule cinquante à six : cinquante centimes. De six à neuf : trois euros. Le calamar coûte trois virgule cinquante euros.",
+  "06-appris": "Un défi d'argent ? J'ajoute le prix sans dépasser. Je change en centimes pour comparer. Et j'avance étape par étape.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

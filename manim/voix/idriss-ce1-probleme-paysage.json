@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Aujourd'hui, c'est Idriss qui fait les courses. Il a vingt euros. Il achète un filet à douze euros, et des hameçons à cinq euros.",
+  "01-depense": "D'abord : combien dépense-t-il en tout ? Douze plus cinq, dix-sept euros.",
+  "02-reste": "Ensuite : combien lui reste-t-il ? De dix-sept à vingt, trois. Vingt moins dix-sept, trois euros.",
+  "03-etapes": "Je lis bien la question. On me demande le total, ce qui reste, ou ce qui manque ?",
+  "04-question": "Question ! Idriss a quinze euros. Il veut une bouée à vingt et un euros. Combien lui manque-t-il ? A : six euros. B : trente-six euros. C : quinze euros. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A ! De quinze à vingt et un : six. Il lui manque six euros. Il attendra la pêche de demain !",
+  "05-question": "Question ! La dame achète une dorade à huit euros cinquante, et des crevettes à deux euros. Combien paie-t-elle ? A : huit euros cinquante-deux. B : dix euros cinquante. C : six euros cinquante. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B ! Huit euros plus deux euros, dix euros. Les cinquante centimes restent. Dix euros cinquante. A : on a ajouté deux centimes, pas deux euros !",
+  "06-appris": "Un problème d'argent ? Je lis bien la question : le total, ce qui reste, ou ce qui manque. Puis je calcule, étape par étape.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

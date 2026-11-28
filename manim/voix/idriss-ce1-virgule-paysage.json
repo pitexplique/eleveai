@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Sur l'ardoise d'Idriss, un prix avec une petite virgule. Mais que veut-elle dire ?",
+  "01-virgule": "Devant la virgule, les euros : quatre. Derrière la virgule, les centimes : cinquante. Quatre virgule cinquante, c'est quatre euros et cinquante centimes.",
+  "02-deux": "Derrière la virgule, il y a toujours deux chiffres. Trois euros et cinq centimes s'écrit : trois, virgule, zéro, cinq.",
+  "03-dire": "On dit souvent : quatre euros cinquante. Et on l'écrit avec la virgule.",
+  "04-question": "Question ! Comment écrire deux euros et trente centimes ? A : vingt-trois euros. B : deux virgule trente euros. C : deux virgule trois centimes. Mets pause, et choisis !",
+  "04b-reponse": "Réponse B ! Deux, pour les euros. Virgule. Trente, pour les centimes. Deux virgule trente euros.",
+  "05-question": "Question ! Sur l'ardoise : six virgule zéro huit euros. Combien de centimes après les euros ? A : huit centimes. B : quatre-vingts centimes. C : six centimes. Mets pause, et choisis !",
+  "05b-reponse": "Réponse A ! Derrière la virgule : zéro, huit. Huit centimes. Six euros et huit centimes. Le zéro compte !",
+  "06-appris": "Devant la virgule, les euros. Derrière, les centimes, toujours avec deux chiffres.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

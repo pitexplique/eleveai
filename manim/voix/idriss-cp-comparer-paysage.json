@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Deux enfants aident Idriss au marché. Elle reçoit cinq pièces. Lui reçoit un seul billet. Qui a le plus d'argent ?",
+  "01-piege": "Attention ! Beaucoup de pièces, ce n'est pas forcément beaucoup d'argent. Je compte ce que ça vaut.",
+  "02-compter": "Elle : un, deux, trois, quatre, cinq euros. Lui : dix euros. Dix euros, c'est plus que cinq euros. C'est le garçon qui a le plus !",
+  "03-pareil": "Parfois, c'est pareil ! Deux pièces de un euro valent une pièce de deux euros.",
+  "04-question": "Question ! Le tas rouge : deux billets de cinq euros. Le tas bleu : une pièce de deux euros et une pièce de un euro. Lequel vaut le plus ? A : le tas bleu. B : les deux pareil. C : le tas rouge. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C ! Le tas rouge : cinq, dix. Dix euros. Le tas bleu : deux, trois. Trois euros. Dix, c'est plus que trois.",
+  "05-question": "Question ! Dans le panier vert, un billet de dix euros. Dans le panier jaune, deux billets de cinq euros. Lequel vaut le plus ? A : le vert. B : les deux pareil. C : le jaune. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B ! Cinq plus cinq, dix. Les deux paniers valent dix euros : c'est pareil !",
+  "06-appris": "Pour comparer deux tas d'argent, je compte ce que vaut chaque tas. Pas le nombre de pièces !",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

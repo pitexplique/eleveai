@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Un petit garçon achète une sardine. Elle coûte trois euros. Il donne un billet de cinq euros.",
+  "01-trop": "Cinq euros, c'est plus que trois. Idriss doit lui rendre de l'argent : c'est la monnaie.",
+  "02-avance": "Idriss part du prix : trois. Il avance jusqu'à cinq : quatre, cinq. Deux pas : il rend deux euros.",
+  "03-verif": "Je vérifie : le prix, plus la monnaie, ça fait ce qu'il a donné. Trois plus deux, cinq. Le compte est bon !",
+  "04-question": "Question ! Un seau de crevettes coûte quatre euros. Je paie avec un billet de cinq euros. Combien Idriss me rend-il ? A : neuf euros. B : quatre euros. C : un euro. Mets pause, et choisis !",
+  "04b-reponse": "Réponse C ! Quatre… cinq. Un seul pas. Idriss me rend un euro.",
+  "05-question": "Question ! Une dorade coûte dix-sept euros. La dame donne un billet de vingt euros. Combien lui rend-on ? A : trente-sept euros. B : trois euros. C : dix-sept euros. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B ! Dix-sept… dix-huit, dix-neuf, vingt. Trois pas : Idriss rend trois euros.",
+  "06-appris": "Pour rendre la monnaie, je pars du prix, et j'avance jusqu'à ce qu'on m'a donné.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}

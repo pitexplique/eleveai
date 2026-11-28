@@ -4,7 +4,7 @@
    Sorties : manim/sorties/idriss/<num>-<épisode> ; voix manim/voix/idriss-<ép>-short.json ; scripts manim/SCRIPTS-idriss-pecheur.md.
    Pas de « TU PARIES ? » (test CP du 27/11) : l'accroche passe par le dessin et la voix.
    ============================================================ */
-(function(){ for(const f of ['films/cp-entier.js','films/cp-entier2-dessins.js','films/cp-entier3-dessins.js','films/idriss-dessins.js']){ const x=new XMLHttpRequest(); x.open('GET',f,false); x.send();
+(function(){ for(const f of ['films/cp-entier.js','films/cp-entier2-dessins.js','films/cp-entier3-dessins.js','films/idriss-dessins.js','films/idriss-dessins-cp.js','films/idriss-dessins-ce1.js','films/idriss-dessins-ce2.js']){ const x=new XMLHttpRequest(); x.open('GET',f,false); x.send();
   const s=document.createElement('script'); s.textContent=x.responseText; document.head.append(s); } })();
 /* La fin : « Entraîne-toi sur eleveai.fr » / « ou sur YouTube @eleveai974 », rien d'autre */
 function finShortE(){ const css=document.createElement('style'); css.textContent='#f3,#f6{display:none!important;} #fin #f5{font-size:64px;}';

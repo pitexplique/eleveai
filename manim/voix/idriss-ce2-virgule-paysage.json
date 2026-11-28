@@ -1,0 +1,12 @@
+{
+  "00-accroche": "Salut ! Ce matin, Idriss écrit ses prix sur l'ardoise. Mais il hésite : comment écrire trois euros et quarante-cinq centimes ?",
+  "01-ecrire": "Les euros devant la virgule : trois. Les centimes derrière : quarante-cinq. Trois virgule quarante-cinq euros.",
+  "02-centimes": "Trois cent quarante-cinq centimes, c'est pareil ! Cent centimes font un euro, alors trois cents centimes font trois euros.",
+  "03-zero": "Attention : derrière la virgule, toujours deux chiffres. Sept euros et six centimes : sept virgule zéro six.",
+  "04-question": "Question ! Comment écrire cinq cent vingt centimes en euros ? A : cinq virgule vingt euros. B : cinquante-deux euros. C : zéro virgule cinquante-deux euro. Mets pause, et choisis !",
+  "04b-reponse": "Réponse A ! Cinq cents centimes, cinq euros. Il reste vingt centimes. Cinq virgule vingt euros.",
+  "05-question": "Question ! Idriss voulait écrire deux euros et cinq centimes. Il a écrit deux virgule cinq. Comment corriger ? A : deux virgule cinquante euros. B : deux virgule zéro cinq euros. C : vingt-cinq euros. Mets pause, et choisis !",
+  "05b-reponse": "Réponse B ! Cinq centimes, ça s'écrit zéro, cinq, derrière la virgule. Deux virgule zéro cinq euros. A, c'est cinquante centimes !",
+  "06-appris": "Devant la virgule, les euros. Derrière, les centimes, toujours avec deux chiffres. Et cent centimes font un euro.",
+  "07-abonne": "Entraîne-toi sur éleveai point f r, ou sur YouTube : éleveai neuf sept quatre !"
+}
