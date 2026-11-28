@@ -16,7 +16,7 @@ Règles suivies :
 - Les situations suivent le coach (`lib/tutor-v4/questionBank/cp/maths/probleme.bank.ts`, `ce1/maths/division-partage.bank.ts`) :
   ce que l'élève voit dans la vidéo, il le retrouve ensuite dans les exercices.
 
-État : ⏳ CP à valider par Frédéric (envoyé le 28/11) ; CE1 écrit, envoyé après son OK du CP. Rien n'est enregistré.
+État : ✅ CP validé par Frédéric le 28/11 (« OK CP, envoie le CE1 ») ; ⏳ CE1 envoyé, à valider. Rien n'est enregistré.
 
 | Micro | Paysage | Short | Bonnes réponses (paysage Q1, Q2 · short) |
 |---|---|---|---|
