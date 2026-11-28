@@ -26,12 +26,12 @@ FILMS['ce2-defi']=function(outils){
   function soir(c,T,u=1){ quaiBoisE(c,T,150); c.fillStyle=`rgba(16,24,64,${.45*u})`; c.fillRect(0,0,1056,220);
     for(let k=0;k<10;k++){ const x=(k*137)%1000+30, y=20+(k*53)%120; c.fillStyle=`rgba(255,244,200,${u*(.5+.5*Math.sin(T*2+k))})`; c.beginPath(); c.arc(x,y,2.5,0,7); c.fill(); } }
   function comptoir(c){ c.fillStyle='#c08550'; c.fillRect(0,560,1056,160); c.strokeStyle='#6b3a10'; c.lineWidth=5; c.beginPath(); c.moveTo(0,560); c.lineTo(1056,560); c.stroke(); }
-  const LX=420, FX=640, HX=860;
+  const LX=470, FX=700, HX=930;
 
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=com){ /* à toi : combien de glaces à 2,50 € avec 10 € ? */
       soir(c,T,.4); comptoir(c);
-      if(T>=tDixC) euroE(c,10,250,250,46,{z:zoom(T,tDixC,.5),grand:1});
+      if(T>=tDixC) euroE(c,10,250,300,66,{z:zoom(T,tDixC,.5),grand:1});
       if(T>=tGlaces) for(let k=0;k<2;k++) cornetCe2E(c,560+k*150,520,210,{k,z:zoom(T,tGlaces+k*.15,.4)});
       if(T>=tDeuxC) ardoiseVCe2E(c,'2,50 €',635,150,70,{z:zoom(T,tDeuxC,.5)});
       if(T>=tAcheter) ecrire(c,'?',900,380,150*zoom(T,tAcheter,.5),CRAIE.jaune);
@@ -40,21 +40,21 @@ FILMS['ce2-defi']=function(outils){
     const nuit=Math.min(1,(T-acc)/6); soir(c,T,nuit); comptoir(c);
     const repond=T>=r;
     idrissE(c,140,712,1.2,{montre:T>=tLampe&&T<q?1:0,T});
-    if(T>=tDix) euroE(c,10,150,620,30,{z:zoom(T,tDix,.5),grand:1,lueur:repond&&T>=tManque&&T<tFlotR?.5:0});
+    if(T>=tDix) euroE(c,10,330,650,36,{z:zoom(T,tDix,.5),grand:1,lueur:repond&&T>=tManque&&T<tFlotR?.5:0});
     /* la lampe (allumée à la fin), le flotteur (reposé « pour demain »), les hameçons */
-    if(T>=tLampe) lampeCe2E(c,LX,560,190,{z:zoom(T,tLampe,.4),T,allume:repond&&T>=tFlotR?entreE(T,tFlotR,tFlotR+.8):0});
+    if(T>=tLampe) lampeCe2E(c,LX,560,260,{z:zoom(T,tLampe,.4),T,allume:repond&&T>=tFlotR?entreE(T,tFlotR,tFlotR+.8):0});
     const repose=repond&&T>=tFlotR?entreE(T,tFlotR,tDemain):0;
-    if(T>=tFlot) flotteurCe2E(c,FX,490,120,{z:zoom(T,tFlot,.4),T,terne:repose});
-    if(T>=tHam) for(let k=0;k<3;k++) hameconE(c,HX-50+k*50,466,80,{z:zoom(T,tHam+k*.1,.4),a:(k-1)*.2});
-    const ty=repond?110:250;
-    if(T>=tSix) ardoiseVCe2E(c,'6,20 €',LX,ty,repond?50:60,{z:zoom(T,tSix,.5)});
-    if(T>=tUn) ardoiseVCe2E(c,'1,50 €',FX,ty,repond?50:60,{z:zoom(T,tUn,.5)});
-    if(T>=tDeux) ardoiseVCe2E(c,'2,40 €',HX,ty,repond?50:60,{z:zoom(T,tDeux,.5)});
-    if(T<r){ if(T>=q) ecrire(c,'?',640,330,110,CRAIE.jaune); }
+    if(T>=tFlot) flotteurCe2E(c,FX,455,200,{z:zoom(T,tFlot,.4),T,terne:repose});
+    if(T>=tHam) for(let k=0;k<3;k++) hameconE(c,HX-60+k*60,430,120,{z:zoom(T,tHam+k*.1,.4),a:(k-1)*.2});
+    const ty=repond?95:220;
+    if(T>=tSix) ardoiseVCe2E(c,'6,20 €',LX,ty,repond?50:54,{z:zoom(T,tSix,.5)});
+    if(T>=tUn) ardoiseVCe2E(c,'1,50 €',FX,ty,repond?50:54,{z:zoom(T,tUn,.5)});
+    if(T>=tDeux) ardoiseVCe2E(c,'2,40 €',HX,ty,repond?50:54,{z:zoom(T,tDeux,.5)});
+    if(T<r){ if(T>=q) ecrire(c,'?',150,130,120,CRAIE.jaune); }
     else {
-      calculVCe2E(c,T,640,205,['6,20 €','+','1,50 €','=','7,70 €'],[tSixR,tPlus,tUnR,tSept,tSept],56,{vert:false});
-      calculVCe2E(c,T,640,290,['7,70 €','+','2,40 €','=','10,10 €'],[tPlus2,tPlus2,tDeuxR,tDixR,tDixR],56,{vert:false});
-      if(T>=tManque){ calculVCe2E(c,T,780,375,['10,10 €','>','10 €'],[tManque,tManque,tManque],52,{vert:false});
+      calculVCe2E(c,T,640,175,['6,20 €','+','1,50 €','=','7,70 €'],[tSixR,tPlus,tUnR,tSept,tSept],52,{vert:false});
+      calculVCe2E(c,T,640,245,['7,70 €','+','2,40 €','=','10,10 €'],[tPlus2,tPlus2,tDeuxR,tDixR,tDixR],52,{vert:false});
+      if(T>=tManque){ calculVCe2E(c,T,840,315,['10,10 €','>','10 €'],[tManque,tManque,tManque],50,{vert:false});
         prixVCe2E(c,'il manque 10 c',780,650,56,{z:zoom(T,tManque,.5),une:CRAIE.faux,fond:1}); } }
     tab.maj();
   }

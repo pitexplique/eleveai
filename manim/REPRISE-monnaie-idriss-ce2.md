@@ -45,11 +45,22 @@ Règles communes aux 3 sessions (CP, CE1, CE2) : note `monnaie-idriss-regles-com
       ⚠️ Un contrôle qui SAUTE directement dans la 2e question peut montrer les choix de la 1re : artefact du saut, pas du film.
 - [x] Miniatures shorts : `miniCe2E` (gabarit A DANS le film, zone sûre 215 → 1700, « Dessin animé ») dans `idriss-dessins-ce2.js`, les 5 shorts l'utilisent ;
       23 : titre « Assez pour la lampe ? » (le 20 garde « Assez d'argent ? »). ⚠️ `miniatures-shorts-grille.py` exige une entrée du MANIFESTE : pas utilisé (manifeste = accord de Frédéric).
-- [ ] 23 (short + paysage) : planches -ql à LIRE (déjà faites, à refaire après correction) puis corriger.
-- [ ] Planches -ql image par image (toute la durée, pas de 2 à 3 s) : compteur 8 s visible, bonne réponse du script, chaque nombre dit
-      est écrit, virgule et deux chiffres lisibles, rien de coupé ni serré ; corriger ce qui chevauche.
-      `CONTROLE=<dossier> node scripts/ti-margo-short.mjs idriss[-paysage] ce2-<ep> controle $(seq 3 3 135)` puis
-      `python scripts/ti-margo-planche.py <dossier> <planche.png>`.
-- [ ] HD une à la fois sous le verrou (`node scripts/ti-margo-short.mjs idriss[-paysage] ce2-<ep> film`), planche HD.
-- [ ] Miniatures (`... miniature`) + gabarit A « Dessin animé » (`scripts/miniatures-shorts-grille.py`, n'ajouter QUE nos lignes au JSON partagé).
+- [x] 28/11 (3e session CE2) : 23 contrôlé en -ql et CORRIGÉ :
+      short : objets agrandis (lampe 260, flotteur 200, hameçons 120), ardoises écartées (LX/FX/HX = 470/700/930), billet 10 € sur le comptoir
+         (plus sur les jambes d'Idriss), « ? » au-dessus de sa tête, calculs de la réponse remontés (ne touchent plus lampe ni flotteur), 10 € du « À toi » agrandi.
+      paysage : tout agrandi (Idriss, 5 €, flotteurs, porte-monnaie, dorade/calamar, droite des prix) ; plaques 1,50/3/4,50/6 € séparées ;
+         « 6,05 € = 605 c » ne se chevauche plus ; « 3,40 € > 3,04 € » ne touche plus le bord.
+- [x] Contrôle des planches HD (28/11, 3e session) : défauts encore trouvés et corrigés, puis HD refaite :
+      20 paysage : Q2 refaite (billet à gauche, pièces en carré 2 × 2, total qui suit la voix 5 € → 7 € → 8 € → 20 c → 40 c à droite) ;
+         Q1 pièces de 20 c agrandies ; formules « 10 + 2 + 1 = 13 » et « 50 + 20 + 5 = 75 » ne se touchent plus.
+      21 paysage : « 80 c + 50 c = 130 c » ne touche plus le bord gauche.
+      22 paysage : la coche ne cache plus le « € » de 2,40 € ; droite de la Q2 (12,35 → 13 → 20 €) agrandie.
+      ⚠️ Les planches (vignettes 427 px) font paraître tout minuscule : juger sur une image pleine taille (ffmpeg -ss t -frames:v 1).
+- [x] 28/11 05:38 : les 10 HD FINIES et contrôlées (`manim/sorties/idriss/<num>-ce2-<ep>/eleveai-maths-idriss-ce2-<ep>-{short,paysage}.mp4`,
+      66 → 149 s), planches HD `planche-hd-{short,paysage}.png` dans le même dossier (20, 21, 22 paysage = HD refaites après correction).
+- [x] Miniatures des 10 films faites (`... miniature`) et regardées : shorts = `miniCe2E` (gabarit A, « Dessin animé ») ; paysages = même modèle
+      que `ce2-kilo`. `miniatures-shorts-grille.py` exige le manifeste : PAS utilisé (accord de Frédéric).
+- [ ] SUITE (accord de Frédéric) : R2, manifeste, coach (notion_ressources), YouTube. Rien n'est poussé.
+- ⚠️ Verrou HD : à la fin, ne supprimer `hd-verrou.txt` QUE s'il porte encore sa propre ligne (une session l'a supprimé alors qu'un autre rendu
+      tournait : deux HD ont tourné en même temps vers 05:28-05:36, sans échec).
 - R2, manifeste, coach, YouTube : NON sans l'accord de Frédéric. Pas de push. Ne jamais lancer la lecture d'une vidéo.

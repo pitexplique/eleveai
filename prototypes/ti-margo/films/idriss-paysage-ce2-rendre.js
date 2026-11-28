@@ -48,9 +48,9 @@ FILMS['ce2-rendre']=function(outils){
       if(T>=tVingtQ) euroE(c,20,330,250,40,{z:zoom(T,tVingtQ,.5),grand:1});
       if(T<r2){ if(T>=tComb2) ecrire(c,'?',330,420,120*zoom(T,tComb2,.5),CRAIE.jaune); }
       else {
-        droitePrixCe2E(c,[[100,'12,35 €'],[255,'13 €'],[440,'20 €']],520,{taille:44,z:zoom(T,tDe2,.4)});
-        bondCe2E(c,T,100,255,520,tDe2,tSC2,'+ 65 c',50,CEN_CE2,46);
-        bondCe2E(c,T,255,440,520,tDe2b,tSept2,'+ 7 €',100,EUR_CE2,46);
+        droitePrixCe2E(c,[[105,'12,35 €'],[275,'13 €'],[465,'20 €']],520,{taille:50,z:zoom(T,tDe2,.4)});
+        bondCe2E(c,T,105,275,520,tDe2,tSC2,'+ 65 c',55,CEN_CE2,52);
+        bondCe2E(c,T,275,465,520,tDe2b,tSept2,'+ 7 €',95,EUR_CE2,52);
         if(T>=tSept2b) ardoiseVCe2E(c,'7,65 €',300,665,62,{z:zoom(T,tSept2b,.5),lueur:.5}); }
       tab.maj(); return; }
 
@@ -70,8 +70,8 @@ FILMS['ce2-rendre']=function(outils){
       quaiBoisE(c,T,40);
       droitePrixCe2E(c,[[DX[0],'7,60 €'],[DX[1],'8 €'],[DX[2],'10 €']],DY+150,{taille:60});
       bondCe2E(c,T,DX[0],DX[1],DY+150,-1,-1,'+ 40 c',60,CEN_CE2,58); bondCe2E(c,T,DX[1],DX[2],DY+150,-1,-1,'+ 2 €',100,EUR_CE2,58);
-      calculVCe2E(c,T,528,110,['10 €','−','7,60 €','=','2,40 €'],[tDixV,tMoinsV,tSeptV,tDeuxV,tDeuxV],84);
-      if(T>=tBonV) coche(c,940,100,.6);
+      calculVCe2E(c,T,470,110,['10 €','−','7,60 €','=','2,40 €'],[tDixV,tMoinsV,tSeptV,tDeuxV,tDeuxV],72);
+      if(T>=tBonV) coche(c,915,110,.55);
       tab.maj(); return; }
 
     if(T>=eu){ /* de 7,60 € à 8 € (+ 40 c), puis de 8 € à 10 € (+ 2 €) */

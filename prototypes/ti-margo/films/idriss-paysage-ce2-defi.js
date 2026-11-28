@@ -29,7 +29,7 @@ FILMS['ce2-defi']=function(outils){
   const ma=(w,n=1)=>mot('06-appris',w,n), tDepA=ma('dépasser'), tCentA=ma('centimes'), tEtapeA=ma('étape');
   const finTitre=tCest-.08;
 
-  const FLX=[250,450,650,850], CUM=['1,50 €','3 €','4,50 €','6 €'];
+  const FLX=[200,420,640,860], CUM=['1,50 €','3 €','4,50 €','6 €'];
 
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=ap){ /* ce que tu as appris */
@@ -42,64 +42,64 @@ FILMS['ce2-defi']=function(outils){
     if(T>=q2){ /* défi 3 : dorade + calamar = 9 € ; la dorade 5,50 € (x < 480) */
       quaiBoisE(c,T,40);
       plaqueCe2E(c,'Défi 3',245,60,44,T,q2,CRAIE.jaune);
-      if(T>=tDoradeQ) poissonE(c,130,290,200,'#ff8787',{T,ray:'#c92a2a',z:zoom(T,tDoradeQ,.4)});
-      if(T>=tCalQ) calamarE(c,360,290,190,{T,z:zoom(T,tCalQ,.4),lueur:T>=r2&&T>=tTrois2b?.5:0});
-      if(T>=tNeufQ) prixVCe2E(c,'9 € en tout',245,410,52,{z:zoom(T,tNeufQ,.5),fond:1});
-      if(T>=tCinqQ) ardoiseVCe2E(c,'5,50 €',130,170,48,{z:zoom(T,tCinqQ,.5)});
-      if(!(T>=r2&&T>=tTrois2b)){ if(T>=tComb2) ardoiseVCe2E(c,'? €',360,170,48,{z:zoom(T,tComb2,.5),une:CRAIE.jaune}); }
-      else ardoiseVCe2E(c,'3,50 €',360,170,48,{z:zoom(T,tTrois2b,.5),lueur:.5});
-      if(T>=r2){ droitePrixCe2E(c,[[70,'5,50 €'],[210,'6 €'],[430,'9 €']],580,{taille:34,z:zoom(T,tDe2,.4)});
-        bondCe2E(c,T,70,210,580,tDe2,tCinquante2,'+ 50 c',46,CEN_CE2,38);
-        bondCe2E(c,T,210,430,580,tDe2b,tTrois2,'+ 3 €',80,EUR_CE2,38); }
+      if(T>=tDoradeQ) poissonE(c,125,330,230,'#ff8787',{T,ray:'#c92a2a',z:zoom(T,tDoradeQ,.4)});
+      if(T>=tCalQ) calamarE(c,360,330,220,{T,z:zoom(T,tCalQ,.4),lueur:T>=r2&&T>=tTrois2b?.5:0});
+      if(T>=tNeufQ) prixVCe2E(c,'9 € en tout',255,445,64,{z:zoom(T,tNeufQ,.5),fond:1});
+      if(T>=tCinqQ) ardoiseVCe2E(c,'5,50 €',125,180,56,{z:zoom(T,tCinqQ,.5)});
+      if(!(T>=r2&&T>=tTrois2b)){ if(T>=tComb2) ardoiseVCe2E(c,'? €',365,180,56,{z:zoom(T,tComb2,.5),une:CRAIE.jaune}); }
+      else ardoiseVCe2E(c,'3,50 €',365,180,56,{z:zoom(T,tTrois2b,.5),lueur:.5});
+      if(T>=r2){ droitePrixCe2E(c,[[95,'5,50 €'],[235,'6 €'],[455,'9 €']],630,{taille:44,z:zoom(T,tDe2,.4)});
+        bondCe2E(c,T,95,235,630,tDe2,tCinquante2,'+ 50 c',60,CEN_CE2,46);
+        bondCe2E(c,T,235,455,630,tDe2b,tTrois2,'+ 3 €',80,EUR_CE2,46); }
       tab.maj(); return; }
 
     if(T>=q1){ /* deux porte-monnaie : 3,40 € ou 304 c (x < 480) */
       quaiBoisE(c,T,40);
       const gagne=T>=r1&&T>=tTrois1c;
-      if(gagne){ c.fillStyle='rgba(255,212,59,.25)'; c.beginPath(); c.roundRect(30,60,200,330,26); c.fill(); }
-      if(T>=tPremQ){ porteMonnaieE(c,130,330,170,.6); etiquette(c,'1',130,370,T,tPremQ,CRAIE.blanc,40); }
-      if(T>=tTroisQ) ardoiseVCe2E(c,'3,40 €',130,140,48,{z:zoom(T,tTroisQ,.5)});
-      if(T>=tSecQ){ porteMonnaieE(c,360,330,170,.6); etiquette(c,'2',360,370,T,tSecQ,CRAIE.blanc,40); }
-      if(T>=tTroisQ2) ardoiseVCe2E(c,'304 c',360,140,48,{z:zoom(T,tTroisQ2,.5)});
+      if(gagne){ c.fillStyle='rgba(255,212,59,.25)'; c.beginPath(); c.roundRect(15,70,230,400,26); c.fill(); }
+      if(T>=tPremQ){ porteMonnaieE(c,125,380,210,.6); etiquette(c,'1',125,430,T,tPremQ,CRAIE.blanc,50); }
+      if(T>=tTroisQ) ardoiseVCe2E(c,'3,40 €',125,150,54,{z:zoom(T,tTroisQ,.5)});
+      if(T>=tSecQ){ porteMonnaieE(c,365,380,210,.6); etiquette(c,'2',365,430,T,tSecQ,CRAIE.blanc,50); }
+      if(T>=tTroisQ2) ardoiseVCe2E(c,'304 c',365,150,54,{z:zoom(T,tTroisQ2,.5)});
       if(T>=r1){
-        if(T>=tTrois1) calculVCe2E(c,T,245,490,['304 c','=','3,04 €'],[tTrois1,mr1('trois'),tTrois1b],54,{vert:false});
-        if(T>=tTrois1c) calculVCe2E(c,T,245,600,['3,40 €','>','3,04 €'],[tTrois1c,tPlus1,tPlus1],54,{vert:false});
-        if(T>=tGagne) coche(c,70,240,.5); }
+        if(T>=tTrois1) calculVCe2E(c,T,255,540,['304 c','=','3,04 €'],[tTrois1,mr1('trois'),tTrois1b],58,{vert:false});
+        if(T>=tTrois1c) calculVCe2E(c,T,255,640,['3,40 €','>','3,04 €'],[tTrois1c,tPlus1,tPlus1],58,{vert:false});
+        if(T>=tGagne) coche(c,60,320,.6); }
       tab.maj(); return; }
 
     if(T>=ec){ /* défi 2 : 6,05 € = 605 c */
-      quaiBoisE(c,T,40); idrissE(c,110,705,1.1,{T});
+      quaiBoisE(c,T,40); idrissE(c,120,705,1.35,{T});
       plaqueCe2E(c,'Défi 2',528,90,64,T,tDeuxieme,CRAIE.jaune);
-      if(T>=tSixE) ardoiseVCe2E(c,'6,05 €',480,330,110,{z:zoom(T,tSixE,.5)});
-      if(T>=tSixE2){ ecrire(c,'=',700,330,110,CRAIE.blanc); ardoiseVCe2E(c,'605 c',880,330,100,{z:zoom(T,tSixE2,.5)}); }
+      if(T>=tSixE) ardoiseVCe2E(c,'6,05 €',450,360,90,{z:zoom(T,tSixE,.5)});
+      if(T>=tSixE2){ ecrire(c,'=',672,360,100,CRAIE.blanc); ardoiseVCe2E(c,'605 c',880,360,90,{z:zoom(T,tSixE2,.5)}); }
       tab.maj(); return; }
 
     if(T>=rs){ /* 3 flotteurs ; 5 € − 4,50 € = 0,50 € */
       quaiBoisE(c,T,40);
-      for(let k=0;k<3;k++) flotteurCe2E(c,FLX[k],330,150,{T,k,lueur:T>=tTroisS?.4:0});
-      if(T>=tTroisS) plaqueCe2E(c,'3 flotteurs',450,140,62,T,tTroisS,CRAIE.ok);
+      for(let k=0;k<3;k++) flotteurCe2E(c,[300,528,756][k],330,250,{T,k,lueur:T>=tTroisS?.4:0});
+      if(T>=tTroisS) plaqueCe2E(c,'3 flotteurs',528,110,70,T,tTroisS,CRAIE.ok);
       if(T>=tResteS) calculVCe2E(c,T,528,560,['5 €','−','4,50 €','=','0,50 €'],[tResteS,tResteS,tResteS,tCinqS,tCinqS],84);
       tab.maj(); return; }
 
     if(T>=aj){ /* j'ajoute le prix sans dépasser */
       quaiBoisE(c,T,40);
-      euroE(c,5,120,90,26,{grand:1}); ecrire(c,'5 € au plus',290,90,40,CRAIE.blanc);
+      euroE(c,5,130,110,38,{grand:1}); ecrire(c,'5 € au plus',420,110,56,CRAIE.blanc);
       const ts=[tUnJ,tTroisJ,tQuatreJ,tSixJ];
       FLX.forEach((x,k)=>{ const t=k<3?ts[k]-.3:tEncore; if(T<t) return;
         const part=k===3&&T>=tTrop?entreE(T,tTrop,tTrop+1.2):0;
-        flotteurCe2E(c,x+part*120,330-part*260,150,{T,k,z:zoom(T,t,.4),terne:k===3&&T>=tSixJ?.5:0});
-        if(T>=ts[k]) plaqueCe2E(c,CUM[k],x,520,52,T,ts[k],k===3?CRAIE.faux:CRAIE.jaune); });
-      if(T>=tTrop){ plaqueCe2E(c,'trop !',850,610,52,T,tTrop,CRAIE.faux); }
+        flotteurCe2E(c,x+part*120,360-part*260,240,{T,k,z:zoom(T,t,.4),terne:k===3&&T>=tSixJ?.5:0});
+        if(T>=ts[k]) plaqueCe2E(c,CUM[k],x,570,58,T,ts[k],k===3?CRAIE.faux:CRAIE.jaune); });
+      if(T>=tTrop){ plaqueCe2E(c,'trop !',850,660,56,T,tTrop,CRAIE.faux); }
       tab.maj(); return; }
 
     /* défi 1 : Idriss a 5 € ; un flotteur coûte 1,50 € */
     quaiBoisE(c,T,140);
-    idrissE(c,130,705,1.15,{salut:T>=tDefi&&T<tIdriss?1:0,T});
+    idrissE(c,140,705,1.45,{salut:T>=tDefi&&T<tIdriss?1:0,T});
     if(T>=tDefi) plaqueCe2E(c,'Défi 1',528,70,64,T,tDefi,CRAIE.jaune);
-    if(T>=tCinq) euroE(c,5,360,300,40,{z:zoom(T,tCinq,.5),grand:1});
-    if(T>=tFlot) flotteurCe2E(c,720,400,210,{T,z:zoom(T,tFlot,.4)});
-    if(T>=tUn) ardoiseVCe2E(c,'1,50 €',720,200,76,{z:zoom(T,tUn,.5)});
-    if(T>=tComb) ecrire(c,'?',930,330,130*zoom(T,tComb,.5),CRAIE.jaune);
+    if(T>=tCinq) euroE(c,5,440,330,62,{z:zoom(T,tCinq,.5),grand:1});
+    if(T>=tFlot) flotteurCe2E(c,720,440,300,{T,z:zoom(T,tFlot,.4)});
+    if(T>=tUn) ardoiseVCe2E(c,'1,50 €',720,180,80,{z:zoom(T,tUn,.5)});
+    if(T>=tComb) ecrire(c,'?',940,440,170*zoom(T,tComb,.5),CRAIE.jaune);
     tab.maj();
   }
 

@@ -43,29 +43,34 @@ FILMS['ce2-constituer']=function(outils){
 
     if(T>=q2){ /* payer 8,40 € : quel tas ? (x < 480) */
       quaiBoisE(c,T,40);
-      if(T>=tHuitQ) ardoiseVCe2E(c,'8,40 €',250,90,62,{z:zoom(T,tHuitQ,.5)});
+      if(T>=tHuitQ) ardoiseVCe2E(c,'8,40 €',270,64,54,{z:zoom(T,tHuitQ,.5)});
       const TAS=[['A',['5€','2€','1€','20c','20c'],tAQ,'8,40 €',tHuit2b,CRAIE.ok],['B',['5€','2€','20c','20c'],tBQ,'7,40 €',tB2,CRAIE.faux],['C',['5€','2€','1€','20c','2c'],tCQ,'8,22 €',tC2,CRAIE.faux]];
-      TAS.forEach(([L,noms,tL,somme,tS,coul],k)=>{ const y=235+k*165; if(T<tTasQ) return;
+      /* 28/11 (HD) : tas agrandis ; le billet à gauche, les pièces en carré 2 × 2, le total à droite */
+      const tsA=[tCinq2,tSept2,tHuit2,tVingt2,tQuar2], partA=['5 €','7 €','8 €','20 c','40 c'];
+      TAS.forEach(([L,noms,tL,somme,tS,coul],k)=>{ const y=205+k*190; if(T<tTasQ) return;
         const bon=T>=r2&&k===0, lu=bon&&T>=tA2?.5:0;
-        if(lu){ c.fillStyle='rgba(255,212,59,.22)'; c.beginPath(); c.roundRect(14,y-62,456,124,24); c.fill(); }
-        ecrire(c,L,40,y,56*Math.max(1,zoom(T,tL,.5)),T>=tL&&T<tL+.8?CRAIE.jaune:CRAIE.blanc);
-        const X=tasCe2E(c,noms,74,y,30,66,{zs:noms.map((_,j)=>zoom(T,tTasQ+k*.2+j*.06,.4))});
-        if(T>=r2&&k===0){ [tCinq2,tSept2,tHuit2,tVingt2,tQuar2].forEach((t,j)=>{ if(T>=t&&T<tHuit2b) etiquette(c,['5','7','8','20','40'][j],X[j],y-60,T,t,j<3?EUR_CE2:CEN_CE2,36); }); }
-        if(T>=r2&&T>=tS) prixVCe2E(c,somme,300,y+70,46,{z:zoom(T,tS,.5),une:coul,fond:1}); });
+        if(lu){ c.fillStyle='rgba(255,212,59,.22)'; c.beginPath(); c.roundRect(8,y-88,526,176,24); c.fill(); }
+        ecrire(c,L,36,y,62*Math.max(1,zoom(T,tL,.5)),T>=tL&&T<tL+.8?CRAIE.jaune:CRAIE.blanc);
+        const P=[[140,y],[262,y-40],[340,y-40],[262,y+40],[340,y+40]];
+        noms.forEach((n,j)=>{ const vu=bon&&T>=tsA[j]&&T<tHuit2b&&(j===4||T<tsA[j+1]);
+          argentCe2E(c,n,P[j][0],P[j][1],j===0?34:36,{z:zoom(T,tTasQ+k*.2+j*.06,.4),lueur:vu?.8:0,grand:1}); });
+        if(bon&&T<tHuit2b){ let cur=-1; tsA.forEach((t,j)=>{ if(T>=t) cur=j; });
+          if(cur>=0) prixVCe2E(c,partA[cur],458,y,48,{z:zoom(T,tsA[cur],.4),fond:1}); }
+        if(T>=r2&&T>=tS) prixVCe2E(c,somme,458,y,44,{z:zoom(T,tS,.5),une:coul,fond:1}); });
       tab.maj(); return; }
 
     if(T>=q1){ /* 2 € en pièces de 20 c (x < 480) */
       quaiBoisE(c,T,40);
       if(T<r1){ if(T>=tDeuxQ) prixVCe2E(c,'2 € = ?',240,110,96,{z:zoom(T,tDeuxQ,.5),fond:1});
-        if(T>=tVingtQ) for(let k=0;k<5;k++) centimeE(c,20,90+k*92,380,46,{z:zoom(T,tVingtQ+k*.08,.4)});
+        if(T>=tVingtQ) for(let k=0;k<5;k++) centimeE(c,20,70+k*100,380,50,{z:zoom(T,tVingtQ+k*.08,.4)});
         if(T>=tVingtQ) ecrire(c,'?',240,560,130*zoom(T,tComb1+2,.5),CRAIE.jaune); }
       else {
         prixVCe2E(c,'2 € = 200 c',240,110,84,{z:zoom(T,tDeux1,.5),fond:1});
         /* dix pièces de 20 c, une à une : 20, 40, … 200 */
         for(let k=0;k<10;k++){ const t=tVingt1+k*(tCents1b-tVingt1)/9; if(T<t) continue;
-          const x=80+(k%5)*80, y=290+Math.floor(k/5)*120; centimeE(c,20,x,y,42,{z:zoom(T,t,.4)});
-          if(k===0||k===1||k===9) ecrire(c,String((k+1)*20),x,y-58,34,CEN_CE2); }
-        if(T>=tVingt1+(tCents1b-tVingt1)*2/9&&T<tCents1b) ecrire(c,'…',240,232,40,CEN_CE2);
+          const x=60+(k%5)*98, y=300+Math.floor(k/5)*140; centimeE(c,20,x,y,46,{z:zoom(T,t,.4)});
+          if(k===0||k===1||k===9) ecrire(c,String((k+1)*20),x,y-70,44,CEN_CE2); }
+        if(T>=tVingt1+(tCents1b-tVingt1)*2/9&&T<tCents1b) ecrire(c,'…',256,230,56,CEN_CE2);
         if(T>=tDix1) calculVCe2E(c,T,240,560,['10 × 20 c','=','200 c'],[tDix1,tDix1+.2,tDix1+.4],56); }
       tab.maj(); return; }
 
@@ -84,11 +89,11 @@ FILMS['ce2-constituer']=function(outils){
       const tsE=[tDixB,tDeuxB,tUnB], tsC=[tCinqC,tVingtC,tCinqC2];
       if(T>=tEurB) ecrire(c,'les euros',400,190,48,EUR_CE2);
       EUROS.forEach(([n,x,t],k)=>{ if(T>=tsE[k]){ const p=sautE([x,-60],[x,300],entreE(T,tsE[k],tsE[k]+.5),40); argentCe2E(c,n,p[0],p[1],t,{grand:1}); } });
-      formuleE(c,T,380,430,['10','+','2','+','1','=','13'],[tDixB,tDeuxB-.1,tDeuxB,tUnB-.1,tUnB,tTreizeB,tTreizeB],50,[EUR_CE2,CRAIE.blanc,EUR_CE2,CRAIE.blanc,EUR_CE2,CRAIE.blanc,CRAIE.ok]);
+      formuleE(c,T,370,430,['10','+','2','+','1','=','13'],[tDixB,tDeuxB-.1,tDeuxB,tUnB-.1,tUnB,tTreizeB,tTreizeB],50,[EUR_CE2,CRAIE.blanc,EUR_CE2,CRAIE.blanc,EUR_CE2,CRAIE.blanc,CRAIE.ok]);
       if(T>=tTreizeB) prixVCe2E(c,'13 €',400,530,70,{z:zoom(T,tTreizeB,.5),fond:1});
       if(T>=tCentC) ecrire(c,'les centimes',810,190,48,CEN_CE2);
       CENTS.forEach(([n,x,t],k)=>{ if(T>=tsC[k]){ const p=sautE([x,-60],[x,300],entreE(T,tsC[k],tsC[k]+.5),40); argentCe2E(c,n,p[0],p[1],t); } });
-      formuleE(c,T,820,430,['50','+','20','+','5','=','75'],[tCinqC,tPlusC,tVingtC,tPlusC2,tCinqC2,tSQC,tSQC],50,[CEN_CE2,CRAIE.blanc,CEN_CE2,CRAIE.blanc,CEN_CE2,CRAIE.blanc,CRAIE.ok]);
+      formuleE(c,T,830,430,['50','+','20','+','5','=','75'],[tCinqC,tPlusC,tVingtC,tPlusC2,tCinqC2,tSQC,tSQC],50,[CEN_CE2,CRAIE.blanc,CEN_CE2,CRAIE.blanc,CEN_CE2,CRAIE.blanc,CRAIE.ok]);
       if(T>=tSQC) prixVCe2E(c,'75 c',810,530,70,{z:zoom(T,tSQC,.5),fond:1});
       if(T>=tTreizeC){ prixVCe2E(c,'13,75 €',600,650,84,{z:zoom(T,tTreizeC,.5)}); if(T>=tPileC) coche(c,800,650,.55); }
       tab.maj(); return; }

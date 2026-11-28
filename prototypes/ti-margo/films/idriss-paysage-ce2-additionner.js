@@ -49,7 +49,7 @@ FILMS['ce2-additionner']=function(outils){
       if(T>=tZeroQ) ardoiseVCe2E(c,'0,50 €',365,120,54,{z:zoom(T,tZeroQ,.5)});
       if(T<r2){ if(T>=tComb2) ecrire(c,'?',245,520,130*zoom(T,tComb2,.5),CRAIE.jaune); }
       else {
-        calculVCe2E(c,T,240,450,['80 c','+','50 c','=','130 c'],[tQV2,tPlus2,tCinq2,tCent2,tTrente2],48,{vert:false});
+        calculVCe2E(c,T,258,450,['80 c','+','50 c','=','130 c'],[tQV2,tPlus2,tCinq2,tCent2,tTrente2],46,{vert:false});
         if(T>=tUn2) prixVCe2E(c,'= 1 € et 30 c',270,515,52,{z:zoom(T,tUn2,.5),fond:1});
         if(T>=tUn2b) calculVCe2E(c,T,240,590,['1 €','+','1 €','=','2 €'],[tUn2b,tPlus2b,tCet2,tDeux2,tDeux2],56);
         if(T>=tDeux2b) ardoiseVCe2E(c,'2,30 €',240,675,62,{z:zoom(T,tDeux2b,.5),lueur:T<tA2?.5:0});
