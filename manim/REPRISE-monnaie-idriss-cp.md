@@ -33,8 +33,19 @@ Règles communes aux trois sessions (CP, CE1, CE2) : note `monnaie-idriss-regles
 - [x] 10 WAV + instants (28/11).
 - [x] 10 films écrits (commit 3b03bb352).
 - [x] Planches -ql 07 short + 07 paysage contrôlées et corrigées (commit e6d98ed09) : prêtes pour la HD.
-- [ ] Planches -ql 08 → 11 (shorts + paysages) : JAMAIS regardées. Leçon du 07 paysage : dessiner plus GRAND (pièces t ≥ 80, billets t ≥ 52),
-  textes de réponse aérés, rien sous Ti Margo (x < 120 en bas à gauche), rien à droite de x = 480 pendant les questions.
+- [x] Planches -ql 08 → 11 (shorts + paysages) contrôlées et corrigées le 28/11 vers 4 h 45 (commit 875cac71a) :
+  pièces/billets agrandis, ciel foncé (09 et 11 short) pour lire les textes, couvercle de la boîte fermé pendant la question (08),
+  paysages : tout à x < 480 pendant questions ET réponses (formules redondantes avec la carte retirées du tableau).
 - 28/11 : Frédéric a fait arrêter les 4 `next dev` (≈ 4 Go) → 5,3 Go libres. Il préfère : UNE chose à la fois, petit à petit.
-- [ ] HD une à la fois, planches HD, miniatures (gabarit A, « Dessin animé »).
+- [ ] HD : lancées à 4 h 50 par `hd-cp.sh` (scratchpad de la session CP, journal `hd.log`), une à la fois, verrou pris/rendu à chaque vidéo.
+  07 short + 07 paysage FAITES et planches HD regardées (bonnes) : `manim/sorties/idriss/07-cp-reconnaitre/planche-hd-*.png`.
+  Ordre : 08 short, 08 paysage, 09, 10, 11. MP4 : `manim/sorties/idriss/<num>-cp-<ep>/eleveai-maths-idriss-cp-<ep>-{short,paysage}.mp4`.
+  Planche HD : `python scripts/ti-margo-planche.py <mp4> <dossier>/planche-hd-{short,paysage}.png 24`.
+- [ ] Miniatures : `node scripts/ti-margo-short.mjs idriss[-paysage] cp-<ep> miniature` (source), puis gabarit A pour les shorts.
+  ⚠️ `miniatures-shorts-grille.py` lit le MANIFESTE (`V[cle]`) : les ids idriss-cp-<ep>-short n'y sont pas (manifeste interdit sans Frédéric)
+  → appeler `dessine(e, src)` du script en direct (import) et écrire le PNG dans le dossier de sortie, sans toucher au manifeste.
+  Entrées JSON prévues (clé idriss-cp-<ep>-short, ceinture blanche, mention par défaut « Dessin animé », accroche adaptée, pas forcément « TU PARIES ? ») :
+  07 « Trois trésors : lequel n'est PAS de l'argent ? » ; 08 « 10 € et 4 pièces de 1 € » → faux « = 5 € » ; 09 « 4 pièces de 1 € ou un billet de 5 € » ;
+  10 « filet à 9 €, payé 10 € » → faux « on rend 19 € » ; 11 « deux glaces à 3 €, billet de 5 € » → faux « assez ! ».
+  Ajouter ces lignes à la main juste avant la dernière `}` du JSON partagé (le relire juste avant) : une clé absente du manifeste ferait planter un lancement SANS filtre.
 - R2, manifeste, coach, YouTube : PAS sans l'accord de Frédéric. Pas de push.
