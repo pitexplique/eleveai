@@ -12,7 +12,7 @@
 // triangle de Pascal, cadeaux en cube et en pavé. Noël en été à La Réunion :
 // un flamboyant en fleur et une barquette de letchis, sur la colline de droite.
 //
-// ⏰ Affiché du 1er décembre au 6 janvier (lib/noel/saison.ts, décidé côté serveur :
+// ⏰ Affiché du 27 novembre (« affiche-le de suite ») au 6 janvier (lib/noel/saison.ts, décidé côté serveur :
 //    l'accueil est régénéré toutes les heures, donc aucun éclair au chargement).
 //    Avant : /accueil?noel=1 ; pour le cacher pendant la saison : ?noel=0.
 // 🎨 Le titre passe en blanc et le haut de page gagne une bande de ciel par CSS
