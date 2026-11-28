@@ -37,14 +37,22 @@ hypothèse : barque bleue, ligne + filet, marché du port, aucun lieu nommé.
 - Socle 27/11 soir : `idriss-dessins.js` a aussi quaiBoisE, ploufE, etalE, chatE (+ yeuxOmbreE), crevetteE, hameconE, boueeE, vagueE,
   euroE (pièces 1/2 €, billets 5/10/20/50 €), prixE (étiquette), porteMonnaieE, formuleE (formule centrée mot à mot).
   `ce1-commun.js` / `ce2-commun.js` = copies du même socle : on garde le socle CP pour les 6 paires.
+- ✅ 28/11 : LES 12 VIDÉOS SONT RENDUES EN HD, contrôlées, avec miniatures (`manim/sorties/idriss/01 → 06`).
 - [x] Paire 2 `cp-soustractif` (02) : short « Le goûter de la mouette » (C = 5) HD 62,0 s, −19,5 dB, miniature ;
   paysage « Le chat du port » (Q1 A = 5 coquillages, Q2 A = 6 hameçons) HD 125,4 s, −19,7 dB, planche ok, miniature.
 - Voix + WAV + instants des paires 3 → 6 FAITS (les 12 voix dans `manim/voix/idriss-*`, sons dans `public/sons/idriss-*`).
 - Films 03 → 06 (short + paysage) ÉCRITS le 27/11 soir (dessins ajoutés : enfantE, rubanE, droiteE, reveVaguesE, ardoisePrixE,
   balanceE, calamarE, sachetKiloE, dameE ; idrissE accepte cire/cireB/peau pour le pêcheur voisin).
-  - 03 short « Pas une pièce de trop » (B) : planche ok (pièces agrandies), HD à faire. 03 paysage « J'achète mon poisson » (C, B) : planche à faire.
-  - 04 « Les quatre chats » (C) / « Les trois paniers » (B, A) ; 05 « Idriss dans la lune » (B) / « Idriss rend la monnaie » (C, A) ;
-    06 « Le compte est pile » (B) / « La balance d'Idriss » (A, C) : planches à faire, puis HD, miniatures.
-- ⚠️ 27/11 soir : RAM libre 0,9 → 1,9 Go (trois `next dev` d'autres sessions ≈ 4,6 Go) : rendus en pause (règle : rien sous 2,5 Go).
+- [x] 03 `cp-monnaie` : short « Pas une pièce de trop » (B) HD 59,1 s, −18,9 dB ; paysage « J'achète mon poisson » (C, B)
+  HD 126,7 s, −19,1 dB (coche déplacée au-dessus de la formule, récapitulatif resserré) ; 2 miniatures.
+- [x] 04 `ce1-partage` : short « Les quatre chats » (C) HD 59,6 s, −20,0 dB (8 sardines en 2 rangées de 4, chats espacés) ;
+  paysage « Les trois paniers » (B, A) HD 121,2 s, −20,1 dB (« ? » sous les enfants) ; 2 miniatures.
+- [x] 05 `ce1-rendre` : short « Idriss dans la lune » (B) HD 65,3 s, −18,9 dB (« 1 € de trop ! » sur cartouche sombre) ;
+  paysage « Idriss rend la monnaie » (C, A) HD 119,1 s, −19,5 dB (crevettes espacées, « + 5 » dégagé) ; 2 miniatures.
+- [x] 06 `ce2-kilo` : short « Le compte est pile » (B) HD 62,9 s, −19,1 dB ; paysage « La balance d'Idriss » (A, C)
+  HD 132,8 s, −19,0 dB (étiquettes `etiqueteE` lisibles au lieu des petites pastilles, dessins des questions agrandis) ; 2 miniatures.
+- 28/11 : `droiteE` renvoie toujours X(n) (avant, rien quand z = 0 : la paysage 05 plantait « X is not a function »).
+- Leçon : `etiquette()` (pastille ronde) = 1 ou 2 chiffres seulement ; « 9 € », « 2 kg » → `prixE` / `etiqueteE` / `ecrire`.
+- ⏭ Reste : accord de Frédéric pour brancher (R2, coach, manifeste YouTube) ; refaire ou non la paysage 02 avec le nouvel Idriss.
 - Contrôle : `CONTROLE=<dossier> node scripts/ti-margo-short.mjs idriss[-paysage] <ep> controle $(seq 3 4.5 135)` puis planche du dossier.
 - R2, coach, manifeste YouTube : seulement sur son accord. Commit par chemin, pas de push.

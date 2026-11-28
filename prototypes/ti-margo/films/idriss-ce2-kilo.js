@@ -45,14 +45,14 @@ FILMS['ce2-kilo']=function(outils){
     if(T>=tKilos) SAX.forEach((x,k)=>{ const lu=T>=r&&T>=tQuatreR&&T<tVingtR?.6:0;
       sachetKiloE(c,x,SAY,150,{z:zoom(T,tKilos+k*.12,.4),lueur:lu,contenu:calamars(k,T)}); });
     if(T<r){ if(T>=tQuatre) etiquette(c,'4',SAX[0]-80,SAY-260,T,tQuatre,'#74c0fc',52); }
-    if(T>=tVingt){ const p=T>=r&&T>=tDonne?sautE([830,400],[690,330],entreE(T,tDonne,tDonne+.5),40):[830,400];
+    if(T>=tVingt){ const p=T>=r&&T>=tDonne?sautE([830,400],[930,630],entreE(T,tDonne,tDonne+.5),60):[830,400];
       euroE(c,20,p[0],p[1],34,{z:zoom(T,tVingt,.5),lueur:T>=r&&T>=tDonne&&T<tRien?.6:0}); }
     if(T<r){ if(T>=tRendreQ) ecrire(c,'?',700,250,150*zoom(T,tRendreQ,.5),CRAIE.jaune); }
     else {
       /* 4 fois 5 € : un « 5 € » sur chaque sachet, puis 20 € ; 20 − 20 = 0 */
-      SAX.forEach((x,k)=>{ const t=tFois+k*.25; if(T>=t) etiquette(c,'5 €',x,SAY-215,T,t,CRAIE.jaune,40); });
-      formuleE(c,T,420,280,['4','×','5 €','=','20 €'],[tQuatreR,tFois,tCinqR,tVingtR,tVingtR],76,['#74c0fc',CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
-      if(T>=tPile){ formuleE(c,T,420,390,['20','−','20','=','0'],[tPile,tPile,tPile,tPile,tPile],66,[CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.ok]);
+      SAX.forEach((x,k)=>{ const t=tFois+k*.25; if(T>=t) ecrire(c,'5 €',x,SAY-200,50*zoom(T,t,.4),CRAIE.jaune); });
+      formuleE(c,T,420,250,['4','×','5 €','=','20 €'],[tQuatreR,tFois,tCinqR,tVingtR,tVingtR],76,['#74c0fc',CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
+      if(T>=tPile){ formuleE(c,T,420,345,['20','−','20','=','0'],[tPile,tPile,tPile,tPile,tPile],66,[CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.blanc,CRAIE.ok]);
         for(const [x,y] of [[140,300],[700,300]]) etincelle(c,x,y,14+6*Math.sin(T*6+x)); } }
     tab.maj();
   }

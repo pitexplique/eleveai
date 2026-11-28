@@ -60,7 +60,7 @@ FILMS['ce1-partage']=function(outils){
         coquillageE(c,p[0],p[1],rr,['#ffc9c9','#ffe8cc','#e5dbff','#d3f9d8','#fff3bf'][k%5],zoom(T,tQuinzeQ+k*.04,.4)); }
       if(T<r2){ if(T>=tQuinzeQ) etiquette(c,'15',450,70,T,tQuinzeQ,CRAIE.jaune,50);
         if(T>=tTroisQ) etiquette(c,'3',455,420,T,tTroisQ,'#74c0fc',50);
-        if(T>=tComb2) ecrire(c,'?',240,395,110*zoom(T,tComb2,.5),CRAIE.jaune); }
+        if(T>=tComb2) ecrire(c,'?',240,650,110*zoom(T,tComb2,.5),CRAIE.jaune); }
       else { EX.forEach((x,j)=>{ if(T>=tC2[j]) etiquette(c,'5',x,330,T,tC2[j],CRAIE.ok,46); });
         formuleE(c,T,240,70,['5','+','5','+','5','=','15'],[tC2[0],tC2[1],tC2[1],tC2[2],tC2[2],tQuinze2,tQuinze2],68,[CRAIE.ok,CRAIE.blanc,CRAIE.ok,CRAIE.blanc,CRAIE.ok,CRAIE.blanc,CRAIE.jaune]); }
       tab.maj(); return; }

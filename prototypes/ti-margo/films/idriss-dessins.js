@@ -313,7 +313,7 @@ function rubanE(c,x,y,coul,s=1){ c.save(); c.translate(x,y); c.scale(s,s); c.fil
 /* ---- Paires 5, 6 (rendre la monnaie) ---- */
 /* Une petite droite graduée : de n0 à n1, la graduation n à x0 + (n − n0)·dx, sur la ligne y ;
    hi = { n: couleur } pour colorer un nombre ; z = l'apparition ; pas = l'écart entre deux nombres écrits */
-function droiteE(c,x0,dx,y,n0,n1,{hi={},z=1,pas=1,taille=46}={}){ if(z<=0) return; const X=n=>x0+(n-n0)*dx;
+function droiteE(c,x0,dx,y,n0,n1,{hi={},z=1,pas=1,taille=46}={}){ const X=n=>x0+(n-n0)*dx; if(z<=0) return X;
   c.globalAlpha=Math.min(1,z); c.strokeStyle=CRAIE.blanc; c.lineWidth=5; c.beginPath(); c.moveTo(X(n0)-30,y); c.lineTo(X(n1)+30,y); c.stroke();
   for(let n=n0;n<=n1;n++){ c.beginPath(); c.moveTo(X(n),y-14); c.lineTo(X(n),y+14); c.stroke();
     if((n-n0)%pas===0||n===n1||hi[n]) ecrire(c,String(n),X(n),y+44,taille,hi[n]||CRAIE.blanc); }

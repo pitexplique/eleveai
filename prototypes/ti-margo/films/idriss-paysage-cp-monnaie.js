@@ -57,7 +57,7 @@ FILMS['cp-monnaie']=function(outils){
     if(T>=ap){ /* ce que tu as appris : j'ajoute jusqu'au prix */
       marche(c,T,{idriss:false,lueurP:T>=tPrix?.5+.5*Math.sin(T*4):0}); zonePaie(c);
       euroE(c,5,Z5[0],Z5[1],34,{lueur:T>=tBillets&&T<tPrix?.6:0}); euroE(c,2,Z2[0],Z2[1],44,{lueur:T>=tAjoute&&T<tBillets?.6:0});
-      if(T>=tAjoute) formuleE(c,T,830,200,['5 €','+','2 €','=','7 €'],[tAjoute,tAjoute,tAjoute,tPrix,tPrix],74,[CRAIE.blanc,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
+      if(T>=tAjoute) formuleE(c,T,790,200,['5 €','+','2 €','=','7 €'],[tAjoute,tAjoute,tAjoute,tPrix,tPrix],64,[CRAIE.blanc,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
       if(T>=tFaconsA) for(const [x,y] of [[640,120],[1010,300]]) etincelle(c,x,y,14+6*Math.sin(T*6+x));
       tab.maj(); return; }
 
@@ -98,7 +98,7 @@ FILMS['cp-monnaie']=function(outils){
       euroE(c,5,p5[0],p5[1],34,{z:z5}); euroE(c,2,p2[0],p2[1],44,{z:z2}); euroE(c,1,p1[0],p1[1],40,{z:z1});
       if(p1b) euroE(c,1,p1b[0],p1b[1],40); }
     if(T>=f7&&T<au){ formuleE(c,T,800,200,['5','+','2','=','7 €'],[tCinq7b,tPlus7,tDeux7b,tSept7b,tSept7b],86,[CRAIE.blanc,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
-      if(T>=tBon){ coche(c,470,235,1.3); for(const [x,y] of [[640,120],[1010,300]]) etincelle(c,x,y,14+6*Math.sin(T*6+x)); } }
+      if(T>=tBon){ coche(c,930,95,.8); for(const [x,y] of [[640,120],[1010,300]]) etincelle(c,x,y,14+6*Math.sin(T*6+x)); } }
     if(T>=au){ formuleE(c,T,800,200,['5','+','1','+','1','=','7 €'],[tCinqA,tPlusA,tUnA,tPlusA2,tUnA2,tSeptA,tSeptA],72,[CRAIE.blanc,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
       if(T>=tFacons) for(const [x,y] of [[640,120],[1010,300]]) etincelle(c,x,y,14+6*Math.sin(T*6+x)); }
     tab.maj();

@@ -54,13 +54,13 @@ FILMS['ce1-rendre']=function(outils){
 
     if(T>=q2){ /* des crevettes à 15 €, payées avec 20 € (x < 480) */
       quaiBoisE(c,T,40);
-      if(T>=tCrev) for(let k=0;k<3;k++) crevetteE(c,80+k*100,180+(k%2)*30,120,{dir:k%2?1:-1,T,k,z:zoom(T,tCrev+k*.08,.4)});
-      if(T>=tQuinzeQ) prixE(c,'15 €',395,150,62,{z:zoom(T,tQuinzeQ,.5)});
+      if(T>=tCrev) for(let k=0;k<3;k++) crevetteE(c,75+k*128,205,92,{dir:k%2?1:-1,T,k,z:zoom(T,tCrev+k*.08,.4)});
+      if(T>=tQuinzeQ) prixE(c,'15 €',400,105,62,{z:zoom(T,tQuinzeQ,.5)});
       if(T>=tVingtQ) euroE(c,20,370,290,30,{z:zoom(T,tVingtQ,.5)});
       if(T<r2){ if(T>=tComb2) ecrire(c,'?',220,470,120*zoom(T,tComb2,.5),CRAIE.jaune); }
       else { const X=droiteE(c,60,72,470,15,20,{hi:{15:CRAIE.jaune,20:CRAIE.ok},z:zoom(T,tQuinze2,.5),pas:5,taille:48});
         if(T>=tQuinze2) arcSautE(c,[X(15),452],[X(20),452],entreE(T,tVingt2-.2,tManque2+.4),110,CRAIE.ok);
-        if(T>=tCinq2) ecrire(c,'+ 5',X(17.5),330,62*zoom(T,tCinq2,.4),CRAIE.ok);
+        if(T>=tCinq2) ecrire(c,'+ 5',X(17.5),295,62*zoom(T,tCinq2,.4),CRAIE.ok);
         if(T>=tBillet2) euroE(c,5,240,580,30,{z:zoom(T,tBillet2,.5),lueur:.6});
         if(T>=tCinq2) formuleE(c,T,240,665,['15','+','5','=','20'],[tCinq2,tCinq2,tCinq2,tCinq2,tCinq2],58,[CRAIE.jaune,CRAIE.blanc,CRAIE.ok,CRAIE.blanc,CRAIE.blanc]); }
       tab.maj(); return; }

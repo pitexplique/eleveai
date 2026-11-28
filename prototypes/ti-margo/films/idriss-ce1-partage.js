@@ -25,8 +25,8 @@ FILMS['ce1-partage']=function(outils){
   const finTitre=tIdriss-.08;
 
   /* les 8 sardines en haut ; les 4 chats assis sur le quai ; dans la réponse, 2 sardines filent devant chaque chat, tour après tour */
-  const SARD=k=>[125+k*115,190+(k%2)*28], CHX=[150,395,640,885], CHY=600;
-  const DEVANT=(j,m)=>[CHX[j]+90+(m?40:-40),CHY+80];
+  const SARD=k=>[190+(k%4)*225,175+Math.floor(k/4)*120], CHX=[200,440,680,920], CHY=600;
+  const DEVANT=(j,m)=>[CHX[j]-5+(m?52:-52),CHY+88];
   const chatDe=k=>k%4, rangDe=k=>Math.floor(k/4); /* sardine k → chat k%4, au tour k/4 */
   const quand=k=>tD[chatDe(k)]-.25+rangDe(k)*.18;
   const SILVER='#a5d8ff';
@@ -43,19 +43,19 @@ FILMS['ce1-partage']=function(outils){
 
     quaiBoisE(c,T,40);
     if(T>=tChats) for(let j=0;j<4;j++){ const lu=T>=r&&T>=tChaqueR&&T<tRonron+1?.5+.5*Math.sin(T*4+j):0;
-      chatE(c,CHX[j]-40,CHY+40,1.05,{dir:1,z:zoom(T,tChats+j*.1,.4),lueur:lu,T}); }
-    for(let k=0;k<8;k++){ if(T<tHuit) break; let p=SARD(k), L=130;
-      if(T>=r){ const u=entreE(T,quand(k),quand(k)+.4); p=sautE(SARD(k),DEVANT(chatDe(k),rangDe(k)),u,90); L=130-30*u; }
+      chatE(c,CHX[j]-40,CHY+40,.92,{dir:1,z:zoom(T,tChats+j*.1,.4),lueur:lu,T}); }
+    for(let k=0;k<8;k++){ if(T<tHuit) break; let p=SARD(k), L=150;
+      if(T>=r){ const u=entreE(T,quand(k),quand(k)+.4); p=sautE(SARD(k),DEVANT(chatDe(k),rangDe(k)),u,90); L=150-62*u; }
       poissonE(c,p[0],p[1],L,SILVER,{dir:k%2?-1:1,T,k,z:zoom(T,tHuit+k*.06,.4),ray:'#495057'}); }
     if(T<r){
       if(T>=tSard) etiquette(c,'8',60,110,T,tSard,CRAIE.jaune,60);
       if(T>=tQuatre) etiquette(c,'4',1000,420,T,tQuatre,'#74c0fc',60);
-      if(T>=tComb) ecrire(c,'?',530,350,150*zoom(T,tComb,.5),CRAIE.jaune); }
+      if(T>=tComb) ecrire(c,'?',530,440,130*zoom(T,tComb,.5),CRAIE.jaune); }
     else {
-      for(let j=0;j<4;j++) if(T>=tD[j]+.25) etiquette(c,'2',CHX[j]+90,CHY+150,T,tD[j]+.25,CRAIE.ok,44);
+      for(let j=0;j<4;j++) if(T>=tD[j]+.25) etiquette(c,'2',CHX[j]-20,CHY-150,T,tD[j]+.25,CRAIE.ok,44);
       formuleE(c,T,528,150,['2','+','2','+','2','+','2','=','8'],[tD[0],tD[1],tD[1],tD[2],tD[2],tD[3],tD[3],tHuitR,tHuitR],86,
         [CRAIE.ok,CRAIE.blanc,CRAIE.ok,CRAIE.blanc,CRAIE.ok,CRAIE.blanc,CRAIE.ok,CRAIE.blanc,CRAIE.jaune]);
-      if(T>=tRonron) for(let j=0;j<4;j++) coeurE(c,CHX[j]+60,CHY-160-14*Math.sin((T-tRonron)*3+j),22*zoom(T,tRonron+j*.12,.5)); }
+      if(T>=tRonron) for(let j=0;j<4;j++) coeurE(c,CHX[j]+60,CHY-200-14*Math.sin((T-tRonron)*3+j),22*zoom(T,tRonron+j*.12,.5)); }
     tab.maj();
   }
   function coeurE(c,x,y,r){ if(r<=0) return; c.fillStyle='#ff6b6b'; c.beginPath(); c.moveTo(x,y+r);

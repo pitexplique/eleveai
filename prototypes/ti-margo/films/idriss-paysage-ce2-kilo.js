@@ -43,46 +43,46 @@ FILMS['ce2-kilo']=function(outils){
   function dessiner(T){ const c=tab.c; tab.effacer();
     if(T>=ap){ /* ce que tu as appris : le prix (autant de fois que de kilos), puis la monnaie */
       quaiBoisE(c,T,40);
-      etiqueteE(c,'1. le prix',300,170,60,T,ap+.2,CRAIE.jaune); etiqueteE(c,'2. la monnaie',760,170,60,T,tMonnA,'#74c0fc');
-      if(T>=tAutantA) formuleE(c,T,300,330,['2','×','9 €','=','18 €'],[tAutantA,tAutantA,tAutantA,tKilosA,tKilosA],70,['#74c0fc',CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
-      if(T>=tMonnA) formuleE(c,T,760,330,['20','−','18','=','2 €'],[tMonnA,tMonnA,tMonnA,tMonnA,tMonnA],70,[CRAIE.blanc,CRAIE.blanc,CRAIE.ok,CRAIE.blanc,'#74c0fc']);
-      if(T>=tKilosA) balanceE(c,300,660,.9,{ecran:'2 kg',plateau:thon(1,T)});
-      if(T>=tMonnA){ euroE(c,20,700,560,36); euroE(c,2,880,560,44,{lueur:.5}); }
+      etiqueteE(c,'1. le prix',270,170,60,T,ap+.2,CRAIE.jaune); etiqueteE(c,'2. la monnaie',790,170,60,T,tMonnA,'#74c0fc');
+      if(T>=tAutantA) formuleE(c,T,270,330,['2','×','9 €','=','18 €'],[tAutantA,tAutantA,tAutantA,tKilosA,tKilosA],58,['#74c0fc',CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
+      if(T>=tMonnA) formuleE(c,T,790,330,['20','−','18','=','2 €'],[tMonnA,tMonnA,tMonnA,tMonnA,tMonnA],58,[CRAIE.blanc,CRAIE.blanc,CRAIE.ok,CRAIE.blanc,'#74c0fc']);
+      if(T>=tKilosA) balanceE(c,270,660,.9,{ecran:'2 kg',plateau:thon(1,T)});
+      if(T>=tMonnA){ euroE(c,20,720,560,36); euroE(c,2,890,560,44,{lueur:.5}); }
       tab.maj(); return; }
 
     if(T>=q2){ /* crevettes 12 € le kilo, 2 kilos, payé 50 € (x < 480) */
       quaiBoisE(c,T,40);
-      if(T>=tDouzeQ) ardoisePrixE(c,240,95,[['Crevettes : 12 € le kilo',CRAIE.jaune]],34,{z:zoom(T,tDouzeQ,.5)});
-      if(T>=tDeuxQ) for(let k=0;k<2;k++) sachetKiloE(c,90+k*150,370,130,{z:zoom(T,tDeuxQ+k*.12,.4),
+      if(T>=tDouzeQ) ardoisePrixE(c,240,95,[['Crevettes : 12 € le kilo',CRAIE.jaune]],40,{z:zoom(T,tDouzeQ,.5)});
+      if(T>=tDeuxQ) for(let k=0;k<2;k++) sachetKiloE(c,95+k*165,380,150,{z:zoom(T,tDeuxQ+k*.12,.4),
         contenu:(c,x,yH)=>{ crevetteE(c,x-18,yH-4,80,{T,k}); crevetteE(c,x+20,yH+6,74,{T,k:k+2,dir:-1}); }});
-      if(T>=tCinqQ) euroE(c,50,390,300,26,{z:zoom(T,tCinqQ,.5)});
-      if(T<r2){ if(T>=tComb2) ecrire(c,'?',240,520,110*zoom(T,tComb2,.5),CRAIE.jaune); }
+      if(T>=tCinqQ) euroE(c,50,395,250,32,{z:zoom(T,tCinqQ,.5)});
+      if(T<r2){ if(T>=tComb2) ecrire(c,'?',240,540,140*zoom(T,tComb2,.5),CRAIE.jaune); }
       else {
-        if(T>=tPrix2) etiqueteE(c,'1. le prix',240,452,34,T,tPrix2,CRAIE.jaune);
-        formuleE(c,T,240,522,['12','+','12','=','24 €'],[tD12,tPlus2,tD12b,tV24,tV24],46,[CRAIE.jaune,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
-        if(T>=tMonn2) etiqueteE(c,'2. la monnaie',240,592,34,T,tMonn2,'#74c0fc');
-        formuleE(c,T,240,662,['50','−','24','=','26 €'],[tC50,tC50,tV24b,tV26,tV26],46,[CRAIE.blanc,CRAIE.blanc,CRAIE.ok,CRAIE.blanc,'#74c0fc']);
-        if(T>=tAttention&&T>=tB2) cercle(c,351,522,62,CRAIE.faux,entreE(T,tB2,tB2+.5)); }
+        if(T>=tPrix2) etiqueteE(c,'1. le prix',240,448,36,T,tPrix2,CRAIE.jaune);
+        formuleE(c,T,240,522,['12','+','12','=','24 €'],[tD12,tPlus2,tD12b,tV24,tV24],56,[CRAIE.jaune,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
+        if(T>=tMonn2) etiqueteE(c,'2. la monnaie',240,596,36,T,tMonn2,'#74c0fc');
+        formuleE(c,T,240,662,['50','−','24','=','26 €'],[tC50,tC50,tV24b,tV26,tV26],56,[CRAIE.blanc,CRAIE.blanc,CRAIE.ok,CRAIE.blanc,'#74c0fc']);
+        if(T>=tAttention&&T>=tB2) cercle(c,370,522,58,CRAIE.faux,entreE(T,tB2,tB2+.5)); }
       tab.maj(); return; }
 
     if(T>=q1){ /* dorade 6 € le kilo, 3 kilos (x < 480) */
       quaiBoisE(c,T,40);
-      if(T>=tSixQ) ardoisePrixE(c,240,95,[['Dorade : 6 € le kilo',CRAIE.jaune]],36,{z:zoom(T,tSixQ,.5)});
+      if(T>=tSixQ) ardoisePrixE(c,240,95,[['Dorade : 6 € le kilo',CRAIE.jaune]],44,{z:zoom(T,tSixQ,.5)});
       const tK=[tSix1,tDouze1,tDH1], cumul=['6 €','12 €','18 €'];
       if(T>=tKilosQ) for(let k=0;k<3;k++){ const lu=T>=r1&&T>=tK[k]&&T<tTrois1?.6:0;
-        sachetKiloE(c,90+k*150,400,130,{z:zoom(T,tKilosQ+k*.12,.4),lueur:lu,contenu:(c,x,yH)=>poissonE(c,x,yH,120,'#ff8787',{T,k,ray:'#c92a2a'})});
-        if(T>=r1&&T>=tK[k]) etiquette(c,cumul[k],90+k*150,500,T,tK[k],k===2?CRAIE.ok:CRAIE.jaune,36); }
-      if(T<r1){ if(T>=tTroisQ) etiquette(c,'3',455,330,T,tTroisQ,'#74c0fc',46); if(T>=tComb1) ecrire(c,'?',240,600,110*zoom(T,tComb1,.5),CRAIE.jaune); }
-      else formuleE(c,T,240,620,['3','×','6 €','=','18 €'],[tTrois1,tFois1,tSix1b,tDH1b,tDH1b],62,['#74c0fc',CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
+        sachetKiloE(c,85+k*155,380,145,{z:zoom(T,tKilosQ+k*.12,.4),lueur:lu,contenu:(c,x,yH)=>poissonE(c,x,yH,132,'#ff8787',{T,k,ray:'#c92a2a'})});
+        if(T>=r1&&T>=tK[k]) etiqueteE(c,cumul[k],85+k*155,490,38,T,tK[k],k===2?CRAIE.ok:CRAIE.jaune); }
+      if(T<r1){ if(T>=tTroisQ) etiquette(c,'3',450,250,T,tTroisQ,'#74c0fc',46); if(T>=tComb1) ecrire(c,'?',240,600,140*zoom(T,tComb1,.5),CRAIE.jaune); }
+      else formuleE(c,T,240,610,['3','×','6 €','=','18 €'],[tTrois1,tFois1,tSix1b,tDH1b,tDH1b],72,['#74c0fc',CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
       tab.maj(); return; }
 
     if(T>=et){ /* deux étapes */
       quaiBoisE(c,T,40);
       if(T>=tEtapes) ecrire(c,'2 étapes',528,140,80*zoom(T,tEtapes,.4),CRAIE.blanc);
-      etiqueteE(c,'1. le prix',300,320,64,T,tPrixE,CRAIE.jaune); etiqueteE(c,'2. la monnaie',760,320,64,T,tMonnE,'#74c0fc');
-      if(T>=tPrixE) formuleE(c,T,300,470,['2','×','9 €','=','18 €'],[tPrixE,tPrixE,tPrixE,tPrixE,tPrixE],62,['#74c0fc',CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
-      if(T>=tMonnE) formuleE(c,T,760,470,['20','−','18','=','2 €'],[tMonnE,tMonnE,tMonnE,tMonnE,tMonnE],62,[CRAIE.blanc,CRAIE.blanc,CRAIE.ok,CRAIE.blanc,'#74c0fc']);
-      if(T>=tPrixE) lienE(c,[470,330],[590,330],entreE(T,tMonnE-.4,tMonnE),CRAIE.blanc);
+      etiqueteE(c,'1. le prix',270,320,64,T,tPrixE,CRAIE.jaune); etiqueteE(c,'2. la monnaie',790,320,64,T,tMonnE,'#74c0fc');
+      if(T>=tPrixE) formuleE(c,T,270,470,['2','×','9 €','=','18 €'],[tPrixE,tPrixE,tPrixE,tPrixE,tPrixE],58,['#74c0fc',CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
+      if(T>=tMonnE) formuleE(c,T,790,470,['20','−','18','=','2 €'],[tMonnE,tMonnE,tMonnE,tMonnE,tMonnE],58,[CRAIE.blanc,CRAIE.blanc,CRAIE.ok,CRAIE.blanc,'#74c0fc']);
+      if(T>=tPrixE) lienE(c,[460,320],[600,320],entreE(T,tMonnE-.4,tMonnE),CRAIE.blanc);
       tab.maj(); return; }
 
     /* le marché, la balance, la dame ; 2 kilos ; elle paie 20 €, Idriss rend 2 € */
@@ -94,19 +94,19 @@ FILMS['ce2-kilo']=function(outils){
     const ecran=kg?kg+' kg':'';
     balanceE(c,BX,BY,1,{ecran,lueur:T>=ki&&T<re&&((T>=tUnK&&T<tUnK+.8)||(T>=tDeuxK&&T<tDeuxK+.8))?.6:0,
       plateau:(c,x,y)=>{ if(T>=tThon) thon(zoom(T,tThon,.4),T)(c,x,y); if(kg>=2) poissonE(c,x+10,y-80,230,'#adb5bd',{T,k:3,dir:-1,ray:'#495057'}); }});
-    if(T<ki){ if(T>=tKilos) etiquette(c,'2 kg',700,320,T,tKilos,'#74c0fc',46); }
+    if(T<ki){ if(T>=tKilos) etiqueteE(c,'2 kg',680,330,44,T,tKilos,'#74c0fc'); }
     else if(T<re){
-      if(T>=tNeufK) etiquette(c,'9 €',620,470,T,tNeufK,CRAIE.jaune,44);
-      if(T>=tDeuxK) etiquette(c,'9 €',620,370,T,tDeuxK+.4,CRAIE.jaune,44);
-      formuleE(c,T,660,240,['2','×','9 €','=','18 €'],[tDeuxK2,tFoisK,tNeufK2,tDixHuit,tDixHuit],70,['#74c0fc',CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
-      formuleE(c,T,660,330,['9','+','9','=','18'],[tNeufK3,tPlusK,tNeufK4,tDixHuit,tDixHuit],58,[CRAIE.jaune,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]); }
+      if(T>=tNeufK) etiqueteE(c,'9 €',610,500,42,T,tNeufK,CRAIE.jaune);
+      if(T>=tDeuxK) etiqueteE(c,'9 €',610,410,42,T,tDeuxK+.4,CRAIE.jaune);
+      formuleE(c,T,660,215,['2','×','9 €','=','18 €'],[tDeuxK2,tFoisK,tNeufK2,tDixHuit,tDixHuit],70,['#74c0fc',CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]);
+      formuleE(c,T,720,300,['9','+','9','=','18'],[tNeufK3,tPlusK,tNeufK4,tDixHuit,tDixHuit],54,[CRAIE.jaune,CRAIE.blanc,CRAIE.jaune,CRAIE.blanc,CRAIE.ok]); }
     else {
-      etiquette(c,'18 €',620,420,T,re,CRAIE.ok,44);
-      if(T>=tVingtR){ const p=sautE([800,440],[640,300],entreE(T,tVingtR,tVingtR+.5),60); euroE(c,20,p[0],p[1],34,{z:zoom(T,tVingtR,.5)}); }
-      if(T>=tDe){ const X=droiteE(c,160,240,690,18,20,{hi:{18:CRAIE.ok,20:CRAIE.blanc},taille:48});
-        arcSautE(c,[X(18),672],[X(20),672],entreE(T,tDe,tManque+.3),70,'#74c0fc');
-        if(T>=tDeuxR) ecrire(c,'+ 2',X(19),610,52*zoom(T,tDeuxR,.4),'#74c0fc'); }
-      if(T>=tRendR){ const p=sautE([420,300],[760,470],entreE(T,tRendR,tRendR+.6),80); euroE(c,2,p[0],p[1],44,{lueur:.6}); } }
+      etiqueteE(c,'18 €',590,510,44,T,re,CRAIE.ok);
+      if(T>=tVingtR){ const p=sautE([800,440],[710,445],entreE(T,tVingtR,tVingtR+.5),60); euroE(c,20,p[0],p[1],34,{z:zoom(T,tVingtR,.5)}); }
+      if(T>=tDe){ const X=droiteE(c,590,95,330,18,20,{hi:{18:CRAIE.ok,20:CRAIE.blanc},taille:48});
+        arcSautE(c,[X(18),312],[X(20),312],entreE(T,tDe,tManque+.3),60,'#74c0fc');
+        if(T>=tDeuxR) ecrire(c,'+ 2',X(19),235,52*zoom(T,tDeuxR,.4),'#74c0fc'); }
+      if(T>=tRendR){ const p=sautE([420,300],[800,560],entreE(T,tRendR,tRendR+.6),80); euroE(c,2,p[0],p[1],44,{lueur:.6}); } }
     tab.maj();
   }
 

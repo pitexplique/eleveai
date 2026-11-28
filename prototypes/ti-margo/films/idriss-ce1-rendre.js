@@ -46,7 +46,7 @@ FILMS['ce1-rendre']=function(outils){
     if(T>=tPoisson) poissonE(c,250,380,330,'#ffa94d',{T,z:zoom(T,tPoisson,.4)});
     if(T>=tHuit) prixE(c,'8 €',250,160,110,{z:zoom(T,tHuit,.5)});
     /* le billet de 10 € : posé à « dix », glisse vers Idriss à « Idriss » */
-    if(T>=tDix){ const p=sautE(BIL0,BIL1,entreE(T,tIdriss-.2,tIdriss+.6),60); euroE(c,10,p[0],p[1],38,{z:zoom(T,tDix,.5)}); }
+    if(T>=tDix){ const p=sautE(BIL0,BIL1,entreE(T,tIdriss-.2,tIdriss+.6),60); euroE(c,10,p[0],p[1],46,{z:zoom(T,tDix,.5)}); }
     /* la monnaie rendue : 2 € et 1 € ; dans la réponse, la pièce de 1 € repart vers Idriss à « rends » */
     if(T>=tRend){ const u=entreE(T,tRend-.1,tRend+.6);
       const p2=sautE(RETOUR,R2,u,100); euroE(c,2,p2[0],p2[1],70,{lueur:T>=r&&T>=tDeuxR&&T<tRends?.6:0});
@@ -61,7 +61,7 @@ FILMS['ce1-rendre']=function(outils){
       if(T>=tHuitR) arcSautE(c,[X(8),352],[X(10),352],entreE(T,tHuitR,tDixR+.3),110,CRAIE.ok);
       if(T>=tDeuxR) ecrire(c,'+ 2',X(9),210,70*zoom(T,tDeuxR,.4),CRAIE.ok);
       formuleE(c,T,600,80,['8','+','2','=','10'],[tHuitR,tManque,tDeuxR,tDeuxR,tDeuxR],80,[CRAIE.jaune,CRAIE.blanc,CRAIE.ok,CRAIE.blanc,CRAIE.blanc]);
-      if(T>=tRends) ecrire(c,'1 € de trop !',300,700-48,48*zoom(T,tRends,.4),CRAIE.faux);
+      if(T>=tRends){ const z=zoom(T,tRends,.4); c.fillStyle='rgba(33,37,41,.88)'; c.beginPath(); c.roundRect(560-190*z,652-42*z,380*z,84*z,18*z); c.fill(); ecrire(c,'1 € de trop !',560,652,52*z,'#ff8787'); }
       if(T>=tSourire) for(const [x,y] of [[720,200],[1000,250]]) etincelle(c,x,y,14+6*Math.sin(T*6+x)); }
     tab.maj();
   }
